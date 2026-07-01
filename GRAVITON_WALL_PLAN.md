@@ -273,3 +273,17 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   supplied the closer. All [AF] std-3, pinned, budget 0. ⚠ KINEMATIC; NOT the quantized graviton. **This upgrades
   spin-2 from "mixes by 2θ" to the textbook helicity-±2 eigenvalue form — the cleanest possible finite statement of
   the graviton's spin. Dynamics/quantization remains the research wall.**
+- **2026-07-02 — G11b PROPAGATOR LEVEL ✅ (first step PAST kinematics): masslessness + the physical-state projector
+  = the graviton propagator numerator.** The honest *dynamical* content reachable in finite matrix algebra (still
+  linearized, tree-level tensor structure; NOT quantized). **`kUp_null`** — `k·k = 0`: the propagation vector is
+  null, so the graviton is **massless** (the propagator pole `1/k²` sits at `k²=0`). **`physProj`** `Π(h) =
+  ½(⟪e₊,h⟫e₊ + ⟪e×,h⟫e×)` = the transverse-traceless polarization sum `½ ∑_λ e^λ⊗e^λ` = the **numerator of the
+  harmonic-gauge graviton propagator**, proved a genuine projection onto the 2D physical subspace: `physProj_polPlus`/
+  `_polCross` (fixes `e₊,e×`), **`physProj_idempotent`** (`Π²=Π`), **`physProj_gauge`** (kills pure gauge `k⊙ξ`),
+  **`physProj_trace`** (kills the trace `η`), and the capstone **`physProj_extracts_physical`** — on any symmetric TT
+  perturbation `Π` returns exactly `h₁₁ e₊ + h₁₂ e×`, the physical helicity content, gauge projected out (via
+  `tt_decomposition` + gauge/trace annihilation + linearity). Built on a `frob` Frobenius pairing (bilinear); all
+  [AF] std-3, pinned, budget 0. ⚠ **Tree-level TENSOR STRUCTURE only** — the quantized graviton (Fock space,
+  operators, loops) is the research wall, untouched. **This is the first rung genuinely *past* kinematics: the
+  graviton's masslessness + the propagator's numerator/pole structure, machine-checked. The dynamical wave operator
+  on an actual field (calculus) and quantization remain the frontier.**

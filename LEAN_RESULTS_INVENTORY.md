@@ -239,6 +239,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   are **eigenvectors with eigenvalue `e^{∓2iθ}`** (`eR_helicity`/`eL_helicity` — helicity ±2 as explicit eigenvalues,
   diagonalizing the mixing); and the physical space is **exactly 2-dimensional** via the explicit gauge quotient
   (`tt_decomposition` ≤2 + `polarizations_not_gauge` ≥2 ⟹ `{e₊,e×}` a basis of TT-mod-gauge, the `D(D−3)/2=2` count).
+  **G11b — the PROPAGATOR LEVEL (first step past kinematics, tree-level TENSOR STRUCTURE only, NOT quantized):**
+  `kUp_null` (`k·k=0` — the graviton is **massless**, the propagator pole `1/k²` at `k²=0`) + the **physical-state
+  projector** `physProj Π(h)=½(⟪e₊,h⟫e₊+⟪e×,h⟫e×)` = the TT polarization sum `½∑_λ e^λ⊗e^λ` = **the numerator of the
+  harmonic-gauge graviton propagator**: `physProj_polPlus`/`_polCross` (fixes the physical pols), `physProj_idempotent`
+  (`Π²=Π`), `physProj_gauge` (kills pure gauge), `physProj_trace` (kills the trace), and the capstone
+  `physProj_extracts_physical` (on any symmetric TT `h`, `Π h = h₁₁·e₊ + h₁₂·e×` — extracts the physical helicity
+  content, gauge projected out).
   ⚠ **Linearized ≠ full**; the propagating/quantized
   graviton (G11/G12), continuum ball modular Hamiltonians (G8), RT/extremal-area emergence (G9), Iyer–Wald geometry
   (G10), `hTkk`, interacting matter, and the numerical `G` are the cited research **frontiers** — this is the honest

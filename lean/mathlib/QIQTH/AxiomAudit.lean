@@ -7816,6 +7816,18 @@ namespace QIQTH.AxiomAudit
 -- complex matrix algebra (off-diagonal entries use I²=−1). KINEMATIC; not the quantized graviton. Std 3.
 #print axioms QIQTH.GravDyn.eR_helicity
 #print axioms QIQTH.GravDyn.eL_helicity
+-- G11b PROPAGATOR LEVEL (masslessness + the physical-state projector = the graviton propagator numerator).
+-- kUp_null: k·k=0 -- the propagation vector is null => the linearized graviton is MASSLESS (the propagator pole
+-- 1/k² sits at k²=0). physProj Π(h)=½(⟪e+,h⟫e+ + ⟪ex,h⟫ex) = the TT polarization sum ½∑_λ e^λ⊗e^λ = the numerator
+-- of the harmonic-gauge graviton propagator: physProj_polPlus/_polCross (fixes e+,ex), physProj_idempotent (Π²=Π),
+-- physProj_gauge (kills pure gauge k⊙ξ), physProj_trace (kills the trace η), physProj_extracts_physical (on any
+-- symmetric TT h returns exactly h11·e+ + h12·ex = the physical helicity content). Finite matrix algebra. ⚠ Tree-level
+-- TENSOR STRUCTURE only; NOT the quantized graviton (no Fock space / operators / loops = the research wall). Std 3.
+#print axioms QIQTH.GravDyn.kUp_null
+#print axioms QIQTH.GravDyn.physProj_idempotent
+#print axioms QIQTH.GravDyn.physProj_gauge
+#print axioms QIQTH.GravDyn.physProj_trace
+#print axioms QIQTH.GravDyn.physProj_extracts_physical
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

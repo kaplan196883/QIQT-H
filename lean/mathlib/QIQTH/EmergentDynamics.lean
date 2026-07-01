@@ -589,4 +589,116 @@ theorem polarizations_not_gauge (a b : ℝ) (ξ : Fin 4 → ℝ)
       polPlus, polCross, gaugeShift, kDown, Matrix.cons_val_zero, Matrix.cons_val_one,
       Matrix.cons_val_two, Matrix.cons_val_three, smul_eq_mul] using h12
 
+/-! ## G11b — the propagator level: masslessness + the physical-state projector (the propagator numerator)
+
+  The honest DYNAMICAL content reachable in finite matrix algebra — still linearized, still tree-level tensor
+  structure; **NOT** the quantized graviton (no Fock space, no operators, no loops — that is the wall). Two pieces:
+  • **Masslessness** `k·k = 0`: the propagation vector is null, so the graviton propagates on the light cone at the
+    speed of light — the pole of the propagator `1/k²` sits at `k² = 0`.
+  • **The physical-state projector** `Π(h) = ½(⟪e₊,h⟫ e₊ + ⟪e×,h⟫ e×)` = the transverse-traceless polarization sum
+    `½ ∑_λ e^λ⊗e^λ`, precisely the **numerator of the (harmonic-gauge) graviton propagator**. It projects onto the
+    2D physical subspace: fixes `e₊,e×`, is idempotent, and **annihilates pure gauge and the trace** — so on any
+    symmetric TT perturbation it extracts exactly the physical helicity content `h₁₁ e₊ + h₁₂ e×`.
+  ⚠ Propagator *tensor structure* only; the quantized graviton needs Fock quantization = the research wall. -/
+
+/-- **Masslessness.** The propagation vector `k^μ = (−1,0,0,1)` is null (`k·k = 0`): the linearized graviton
+    propagates on the light cone — the massless pole `1/k²` sits at `k² = 0`. -/
+theorem kUp_null : minkQuad kUp = 0 := by
+  simp only [minkQuad, kUp, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+    Matrix.cons_val_three]; norm_num
+
+/-- The **Frobenius pairing** `⟪A,B⟫ = ∑_{ij} A_ij B_ij` on polarization tensors. -/
+def frob (A B : Matrix (Fin 4) (Fin 4) ℝ) : ℝ := ∑ i, ∑ j, A i j * B i j
+
+theorem frob_add_right (A h₁ h₂ : Matrix (Fin 4) (Fin 4) ℝ) :
+    frob A (h₁ + h₂) = frob A h₁ + frob A h₂ := by
+  simp only [frob, Matrix.add_apply, mul_add, Finset.sum_add_distrib]
+
+theorem frob_smul_right (c : ℝ) (A h : Matrix (Fin 4) (Fin 4) ℝ) :
+    frob A (c • h) = c * frob A h := by
+  simp only [frob, Matrix.smul_apply, smul_eq_mul, Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun i _ => Finset.sum_congr rfl (fun j _ => by ring))
+
+theorem frob_plus_plus : frob polPlus polPlus = 2 := by
+  simp [frob, polPlus, Fin.sum_univ_four] <;> ring
+theorem frob_cross_cross : frob polCross polCross = 2 := by
+  simp [frob, polCross, Fin.sum_univ_four] <;> ring
+theorem frob_plus_cross : frob polPlus polCross = 0 := by
+  simp [frob, polPlus, polCross, Fin.sum_univ_four] <;> ring
+theorem frob_cross_plus : frob polCross polPlus = 0 := by
+  simp [frob, polPlus, polCross, Fin.sum_univ_four] <;> ring
+
+/-- The **graviton physical-state projector** = the numerator of the harmonic-gauge graviton propagator:
+    `Π(h) = ½⟪e₊,h⟫ e₊ + ½⟪e×,h⟫ e×`, the transverse-traceless polarization sum `½ ∑_λ e^λ⊗e^λ`. -/
+noncomputable def physProj (h : Matrix (Fin 4) (Fin 4) ℝ) : Matrix (Fin 4) (Fin 4) ℝ :=
+  (frob polPlus h / 2) • polPlus + (frob polCross h / 2) • polCross
+
+theorem physProj_add (h₁ h₂ : Matrix (Fin 4) (Fin 4) ℝ) :
+    physProj (h₁ + h₂) = physProj h₁ + physProj h₂ := by
+  ext i j
+  simp only [physProj, frob_add_right, Matrix.add_apply, Matrix.smul_apply, smul_eq_mul]
+  ring
+
+theorem physProj_smul (c : ℝ) (h : Matrix (Fin 4) (Fin 4) ℝ) :
+    physProj (c • h) = c • physProj h := by
+  ext i j
+  simp only [physProj, frob_smul_right, Matrix.add_apply, Matrix.smul_apply, smul_eq_mul]
+  ring
+
+/-- **The projector fixes the `+` polarization.** -/
+theorem physProj_polPlus : physProj polPlus = polPlus := by
+  ext i j
+  simp only [physProj, frob_plus_plus, frob_cross_plus, Matrix.add_apply, Matrix.smul_apply, smul_eq_mul]
+  ring
+
+/-- **The projector fixes the `×` polarization.** -/
+theorem physProj_polCross : physProj polCross = polCross := by
+  ext i j
+  simp only [physProj, frob_cross_cross, frob_plus_cross, Matrix.add_apply, Matrix.smul_apply, smul_eq_mul]
+  ring
+
+/-- **The projector annihilates pure gauge.** A linearized diffeomorphism `δh = k⊙ξ` carries no physical
+    polarization: `Π(gaugeShift ξ) = 0` (the propagator numerator kills gauge modes). -/
+theorem physProj_gauge (ξ : Fin 4 → ℝ) : physProj (gaugeShift ξ) = 0 := by
+  have h1 : frob polPlus (gaugeShift ξ) = 0 := by
+    simp [frob, polPlus, gaugeShift, kDown, Fin.sum_univ_four, Matrix.of_apply]
+  have h2 : frob polCross (gaugeShift ξ) = 0 := by
+    simp [frob, polCross, gaugeShift, kDown, Fin.sum_univ_four, Matrix.of_apply]
+  simp only [physProj, h1, h2, zero_div, zero_smul, add_zero]
+
+/-- **The projector annihilates the trace mode.** `Π(minkMetric) = 0`: the pure-trace part `η` carries no physical
+    polarization (the graviton is traceless). -/
+theorem physProj_minkMetric : physProj minkMetric = 0 := by
+  have h1 : frob polPlus minkMetric = 0 := by
+    simp [frob, polPlus, minkMetric, Fin.sum_univ_four, Matrix.diagonal_apply]
+  have h2 : frob polCross minkMetric = 0 := by
+    simp [frob, polCross, minkMetric, Fin.sum_univ_four, Matrix.diagonal_apply]
+  simp only [physProj, h1, h2, zero_div, zero_smul, add_zero]
+
+/-- **The projector annihilates any trace mode** `Π(c·η) = 0`. -/
+theorem physProj_trace (c : ℝ) : physProj (c • minkMetric) = 0 := by
+  rw [physProj_smul, physProj_minkMetric, smul_zero]
+
+/-- **The projector is idempotent** `Π² = Π` — a genuine projection onto the 2D physical subspace. -/
+theorem physProj_idempotent (h : Matrix (Fin 4) (Fin 4) ℝ) : physProj (physProj h) = physProj h := by
+  have hph : physProj h = (frob polPlus h / 2) • polPlus + (frob polCross h / 2) • polCross := rfl
+  rw [hph, physProj_add, physProj_smul, physProj_smul, physProj_polPlus, physProj_polCross]
+
+/-- **The projector's image is spanned by the two physical polarizations.** -/
+theorem physProj_mem_span (h : Matrix (Fin 4) (Fin 4) ℝ) :
+    ∃ a b : ℝ, physProj h = a • polPlus + b • polCross :=
+  ⟨frob polPlus h / 2, frob polCross h / 2, rfl⟩
+
+/-- **G11b capstone — the propagator numerator extracts the physical helicity content.** On any symmetric
+    transverse-traceless perturbation `h`, the physical-state projector returns exactly `h₁₁ e₊ + h₁₂ e×` — the
+    two physical (helicity ±2) polarizations, with the pure-gauge part of `h` projected out. This is what the
+    graviton propagator's numerator does in a tree-level exchange: it keeps only the physical polarizations.
+    ⚠ Tree-level tensor structure; NOT the quantized graviton. -/
+theorem physProj_extracts_physical (h : Matrix (Fin 4) (Fin 4) ℝ) (hSym : h.IsSymm)
+    (hTrans : Transverse h) (hTrace : Traceless h) :
+    physProj h = h 1 1 • polPlus + h 1 2 • polCross := by
+  conv_lhs => rw [tt_decomposition h hSym hTrans hTrace]
+  rw [physProj_add, physProj_add, physProj_smul, physProj_smul, physProj_polPlus,
+    physProj_polCross, physProj_gauge, add_zero]
+
 end QIQTH.GravDyn
