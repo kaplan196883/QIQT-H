@@ -32,6 +32,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   completeness gap only). **Stale docstrings** that *under*-claim
   (say "axiomatized" for now-proved results): `ArakiInterface`, `RelEntPositivity`, `GoldsteinStruyve*` headers,
   and `AxiomAudit.lean:~4882–4897, ~216–220` (clock-energy self-adjointness, GS steps). Hygiene, not soundness.
+- **Comparison artifact — NOT a QIQT-H result:** `QIQTH/AdSCFTComparison.lean` (namespace `AdSCFT`, axiom-free
+  std-3, deliberately **NOT** wired into `QIQTH.lean`/`AxiomAudit`) machine-checks the *algebraic* AdS/CFT
+  dictionary — the radius–coupling relation `R⁴=4πg_sN α'²`, `G ∝ 1/N²`, and **Strominger's BTZ `Cardy = A/4G`**
+  identity (`btz_cardy_eq_bekensteinHawking`) — with the CFT/GR inputs (Cardy formula, Brown–Henneaux central
+  charge, BTZ↔CFT dictionary) carried as definitions. It does **NOT** prove the Maldacena conjecture (unproven,
+  string theory not rigorously defined — unformalizable). Kept purely as a labelled *comparison* of what AdS/CFT
+  *derives given its inputs* (`G` fixed by the degree-count `N`; BH entropy as a boundary state count) vs what
+  QIQT-H *carries* (`G` a free UV datum). Never cite it as a QIQT-H claim.
 
 ## 1. Born rule / typicality / single-world selection (Φ, λ)
 
