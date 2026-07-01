@@ -130,5 +130,38 @@ theorem finiteCorner_firstLaw {ρt : ℝ → Matrix n n ℂ} {D' : ℝ}
     exact relEntropy_nonneg (hρt t) (hρt 0) (hρtd t).trace_one (hρtd 0).trace_one
   exact hmin.hasDerivAt_eq_zero hderiv
 
+/-- **B4′ — the explicit boost-energy first law** (sharpening `finiteCorner_firstLaw` to the originally-targeted
+    form). Along a differentiable family `ρ_t` through the reference `ρ_0`, under the Bisognano–Wichmann
+    identification `K_σ = 2π·K_boost + c·1`, the entropy derivative equals `2π` times the boost-energy derivative:
+    `δS = 2π·δ⟨K_boost⟩`. The two **analytic inputs** — differentiability of the von Neumann entropy `S(ρ_t)`
+    and of the boost energy `⟨K_boost⟩_{ρ_t}` — are carried as EXPLICIT hypotheses; the *relation* between their
+    derivatives is what is derived, from B1's identity (`modular_relEnt_identity`) + B4's stationarity
+    (`finiteCorner_firstLaw`) + the BW rewrite (`modEnergy_of_BW`), entirely in scalar `ℝ→ℝ` calculus (no
+    matrix-normed-space differentiation). Formalized modular QFT — no `A/4G`, no gravity. -/
+theorem finiteCorner_firstLaw_boostEnergy {ρt : ℝ → Matrix n n ℂ} {S' B' c : ℝ} (Kboost : Matrix n n ℂ)
+    (hρt : ∀ t, (ρt t).PosDef) (hρtd : ∀ t, IsDensity (ρt t))
+    (hBW : modHam (hρt 0).1 = (2 * Real.pi) • Kboost + c • (1 : Matrix n n ℂ))
+    (hS : HasDerivAt (fun t => vonNeumannEntropy (hρtd t)) S' 0)
+    (hboost : HasDerivAt (fun t => boostEnergy (ρt t) Kboost) B' 0) :
+    S' = 2 * Real.pi * B' := by
+  -- the modular energy is `2π·⟨K_boost⟩ + c` (BW), so its derivative is `2π·B'`
+  have hME : HasDerivAt (fun t => modEnergy (ρt t) (hρt 0).1) (2 * Real.pi * B') 0 := by
+    have hfun : (fun t => modEnergy (ρt t) (hρt 0).1)
+        = (fun t => 2 * Real.pi * boostEnergy (ρt t) Kboost + c) :=
+      funext (fun t => modEnergy_of_BW (hρtd t) (hρt 0).1 Kboost c hBW)
+    rw [hfun]
+    exact (hboost.const_mul (2 * Real.pi)).add_const c
+  -- B1 pointwise: `D(ρ_t‖ρ_0) = (⟨K⟩_t − ⟨K⟩_0) − (S_t − S_0)`, so its derivative is `2π·B' − S'`
+  have hrel : HasDerivAt (fun t => relEntropy (hρt t).1 (hρt 0).1) (2 * Real.pi * B' - S') 0 := by
+    have hrel_fun : (fun t => relEntropy (hρt t).1 (hρt 0).1)
+        = (fun t => (modEnergy (ρt t) (hρt 0).1 - modEnergy (ρt 0) (hρt 0).1)
+            - (vonNeumannEntropy (hρtd t) - vonNeumannEntropy (hρtd 0))) :=
+      funext (fun t => modular_relEnt_identity (hρt t) (hρt 0) (hρtd t) (hρtd 0))
+    rw [hrel_fun]
+    exact (hME.sub_const _).sub (hS.sub_const _)
+  -- B4 stationarity forces that derivative to `0`, hence `S' = 2π·B'`
+  have hD := finiteCorner_firstLaw hρt hρtd hrel
+  linarith
+
 end ModularEnergyBound
 end QIQTH

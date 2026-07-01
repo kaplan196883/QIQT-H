@@ -152,3 +152,13 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   QFT, honestly NOT a derivation of the holographic `A/4G` bound**. Follow-ons stay labelled cited frontiers: the
   Fock lift of one-particle BW, the clock-dressed product-standard-subspace split, and the continuum Type III₁→II
   crossed-product dual-weight trace (multi-year, where `A/4G` lives).
+- **2026-07-01 — B4′ ✅ DONE (post-campaign sharpening to B4's originally-targeted form).** Built
+  **`finiteCorner_firstLaw_boostEnergy`**: the *explicit* boost-energy first law `δS = 2π·δ⟨K_boost⟩`. B4 proved the
+  stationarity form (`D' = 0`); this sharpens it to the `HasDerivAt` form GPT-5.5-pro originally targeted. Key
+  tractability insight — it needs **no matrix-normed-space calculus**: carry the two genuine analytic inputs
+  (differentiability of `S(ρ_t)` and of `⟨K_boost⟩_{ρ_t}`) as **explicit scalar-derivative hypotheses**, then derive
+  the *relation* between their derivatives entirely in `ℝ→ℝ` calculus — the modular energy is `2π·⟨K_boost⟩ + c`
+  (BW, `modEnergy_of_BW`) so its derivative is `2π·B'`; B1 (`modular_relEnt_identity`) gives `D = ⟨K⟩ − S` pointwise
+  so `D' = 2π·B' − S'`; B4 stationarity forces `D' = 0`; hence `S' = 2π·B'`. Axiom-free std-3, pinned, budget 0.
+  This closes B4 to its full targeted form. Formalized modular QFT; no `A/4G`, no gravity, no `G`. The campaign
+  deliverable now includes both the stationarity AND the explicit boost-energy first law.
