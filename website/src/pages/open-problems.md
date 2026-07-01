@@ -250,7 +250,11 @@ the JLMS *modular route*, not about the $1/4$'s derivability.** The Bekenstein�
 (`SakharovRatio.sakharov_ratio`: $S_{\rm ent}\,G_{\rm ind}/A = (4\pi)/(16\pi) = 1/4$, with the matter coefficient,
 regulator, area and $\pi$ **all cancelling** — matter- and regulator-independent, circularity-clean; this is the
 **P4-MICRO** story, where finiteness is postulated, the area *floor* and *form* are theorems, and the $1/4$ ratio
-is derived). What *neither* route derives is the **value of $G$** (carried). **What *is* now machine-checked**
+is derived). What *neither* route computes is the **numerical value of $G$** — though even that is now reframed:
+positing a fundamental **record-granularity scale** $\Lambda_s$ in place of $\ell_P$ makes the *relation*
+$G = 1/(N\Lambda_s^2)$ a machine-checked theorem (`InducedNewtonConstant`), so $G$ moves from *carried* to
+*derived-from-$\Lambda_s$* (P4-MICRO's inputs collapse to one scale); the *value* still needs the species
+accounting, and $\Lambda_s$ becomes the one carried scale. **What *is* now machine-checked**
 along the modular route is the honest, derivable content — the
 free-field **modular-energy bound**: the entropy variation is bounded by (and, at the reference, equals) the
 modular-energy variation, $\Delta S \le \Delta\langle K_\sigma\rangle$ and $\delta S = \delta\langle K_\sigma\rangle$,

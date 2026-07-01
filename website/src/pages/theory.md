@@ -53,7 +53,10 @@ this derived floor into the machine-checked Jacobson construction (`gr_from_p4mi
 yields the **free-field Einstein field equations** — but the capacity postulate *alone* does **not** give gravity:
 a microstate count cannot supply a temperature, so the Bisognano–Wichmann / Unruh thermal input remains a separate
 (free-field-discharged) ingredient. The $1/4$ coefficient is the separately-derived Sakharov induced-gravity ratio;
-the value of $G$ is a carried datum. Grounding the capacity *law* itself (replacing the postulate by a modular
+the value of $G$ is a carried datum — though it too can be **promoted from carried to derived** by positing a
+fundamental **record-granularity scale** $\Lambda_s$ in place of $\ell_P$, giving $G = 1/(N\Lambda_s^2)$
+(machine-checked axiom-free, `InducedNewtonConstant`) and consolidating P4-MICRO's inputs to a single scale; the
+*numerical value* still needs the species accounting. Grounding the capacity *law* itself (replacing the postulate by a modular
 identity) remains [open](/open-problems).
 
 <figure style="margin:1.8em 0">

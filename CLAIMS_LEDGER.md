@@ -65,7 +65,8 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 | D3 | "Every geometric/curvature/area-kinematic step (Christoffel→Ricci→Einstein, ∇·G=0, Raychaudhuri) is discharged; the carried inputs are the matter EoM, P4, and the localization map (Gap 2)." | §1.1a (89); `formalization` note | §3 (all diff-geo [AF]; area law + localization map [frontier]) | **[AF·cond]** | ✓ (A2 fixed the stale "BW package cited" note) |
 | D4 | "matter conservation ∇·T=0 is **derived** for the KG stress tensor (free field)." | `formalization`; §1.1a | §3 / §6d (free-field [AF]; carried for the general capstone) | **[AF]** (free field) | ✓ (A2 fixed "is a physical postulate") |
 | D5 | "P4-MICRO alone is **not** GR — a microstate count can't supply a temperature; the thermal/BW input is irreducible." | §1.1a (96); `theory`, `open-problems` | §3 (`GRFromMicro` header), §9 | scope | ✓ |
-| D6 | "The value of **G**/ℓ_P is a carried UV datum, never derived." | §1.1a (89, 96); everywhere gravity is discussed | §3, §8 (value of G = frontier) | **[frontier]** | ✓ |
+| D6 | "The **numerical value** of **G**/ℓ_P is never *computed* (species-coefficient accounting = frontier)." | §1.1a (89, 96); everywhere gravity is discussed | §3, §8 (value of G = frontier) | **[frontier]** | ✓ (refined by D7: the *relation* is now derivable, the *value* still not) |
+| D7 | "**`G` can be promoted from *carried* to *derived*** by positing a fundamental record-granularity scale `Λ_s` (`a₀=1/Λ_s`) in place of `ℓ_P`: `G = 1/(N Λ_s²)` (Sakharov/Dvali species bound) is machine-checked, consolidating P4-MICRO's inputs to a *single* scale (`Λ_s`) from which finiteness *and* `G` both follow. What is *derived* is the **relation** (and the dimensionless `G/a₀²=1/N`); the **value** still needs species accounting (D6), and `Λ_s` is the one carried scale (a length can't come from a count — as AdS/CFT carries `α'`)." | §1.1a; `idea`/`theory`/`formalization`/`open-problems` | §3 `InducedNewtonConstant` (`inducedG_delivers`, `inducedG_ratio_is_pure_number`, `capacity_exponent_in_primitives`) | **[AF]** (relation) + **[frontier]** (value) | ✓ |
 
 ## E. Modular / Tomita–Takesaki / one-particle BW / Lorentz (OP3b)
 
@@ -135,7 +136,11 @@ below are tracked, not silent.
   proves them inequivalent. Earlier surfaces glossed it as a single "finite entropy" or single "cardinality" claim.)*
 
 **Claims we deliberately DO NOT make** (the honesty boundary — never assert these):
-- ✗ "QIQT-H gives quantum gravity" / derives the value of **G** or ℓ_P. (Inventory §8 frontier; G is carried.)
+- ✗ "QIQT-H gives quantum gravity" / **computes the numerical value** of **G** or ℓ_P. (Inventory §8 frontier; the
+  species-coefficient accounting is not done.) ⚠ *Nuance (D7):* the **relation** `G = 1/(N Λ_s²)` **is** derived
+  (axiom-free) under the granularity reframing — `G` moves from carried to derived-*from*-`Λ_s` — but the *value*
+  still isn't computed, and `Λ_s` is now the one carried scale. Say "`G` derived as a relation, value still open,"
+  never "we computed `G`."
 - ✗ "An axiom-free **area law**." The area floor is **[AF·cond:HolographicCapacityBound]**; the area *form*
   (`S∝A`) is the conditional Sakharov bridge, not unconditional.
 - ✗ "Finite **matter** Hilbert space" / "finite capacity forbids two records." (Retired; D2/D3 no-gos.)

@@ -23,7 +23,13 @@ where the matter algebra is the *infinite* Type III$_1$ of relativistic QFT — 
 to be strictly *weaker* than a count. The finiteness is always on the **records/entropy**, never on the matter
 Hilbert space. That the capacity then takes the holographic **area form** $Q_R = A/4\ell_P^2$ — scaling with boundary
 *area*, not volume — is **not** part of the postulate: it is *derived* in a conditional Sakharov / induced-gravity
-bridge (with the value of $G/\ell_P$ carried as a datum, not derived). Finiteness *alone* gives only
+bridge (with the value of $G/\ell_P$ carried as a datum, not derived). **(2026 — $G$ promoted to derived.)** That
+last carried datum can itself be reduced: positing a fundamental **record-granularity scale** $\Lambda_s$ (the
+finite-information "pixel size", $a_0 = 1/\Lambda_s$) *in place of* $\ell_P$ delivers $G = 1/(N\Lambda_s^2)$ — the
+Sakharov/Dvali species bound, machine-checked axiom-free (`InducedNewtonConstant`) — collapsing P4-MICRO's carried
+inputs to a *single* scale $\Lambda_s$, from which the finite capacity *and* $G$ both follow. The *numerical value*
+of $G$ still needs the species accounting (a frontier), and $\Lambda_s$ stays the one carried scale (a length
+cannot come from a count). Finiteness *alone* gives only
 $S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ and the $1/4$ are then
 *theorems*, not postulates.
 

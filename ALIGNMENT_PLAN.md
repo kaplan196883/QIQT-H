@@ -208,6 +208,16 @@ inventory-backed.
   in §1.1a + the website `formalization` table but missing from the abstract's verified-content enumeration). Website
   builds green (66 pages). PASS = paper/site/ledger scale numbers match the refreshed inventory; the modular-energy
   bound is credited on every surface.
+- **2026-07-01 — propagate the granularity reframing (`G` promoted from carried to derived) across all P4-MICRO
+  surfaces.** After building `QIQTH/InducedNewtonConstant.lean` (`G = 1/(N Λ_s²)` from a posited record-granularity
+  scale `Λ_s`, [AF]), populated the reframing everywhere P4-MICRO is explained, with the **honest distinction held
+  fixed**: the *relation* `G=1/(N Λ_s²)` is *derived* (axiom-free), but the *numerical value* is still *not computed*
+  (species-coefficient accounting = frontier), and `Λ_s` becomes the one carried scale. Surfaces: inventory (§2
+  area-floor pointer + §9 scope), paper §1.1a (the "only carried datum is `G`" sentence), ledger (new row **D7** +
+  refined **D6** + the "DO NOT" boundary now reads "don't claim we *computed* `G`; the relation is derived"), the
+  axiom register `AXIOM_CONTRACTS.md` (new "`G` relation = DERIVED" row + "numerical value = OPEN" row), and website
+  `idea`/`theory`/`formalization`/`open-problems`/`ladder`/`index.astro`. Website green (66 pages). PASS = every
+  P4-MICRO surface states `G` is derived *as a relation* from `Λ_s`+`N`, never that the value is computed.
 - **2026-06-30 — maintenance (A2): fix the "what is postulated" conflation on the explainer pages.** Prompted by a
   live correction (the postulate is *finiteness*, NOT the holographic bound — P4-MICRO). The homepage
   (`index.astro`) was already correct (lines 53/132/165/219/311: "postulate is finiteness only; the area form

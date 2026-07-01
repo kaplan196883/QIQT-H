@@ -87,7 +87,9 @@ bits), and the <em>incoherent</em> mixture $\tfrac12\lvert000\rangle\langle000\r
 gives the <em>identical</em> table. So this is <strong>not</strong> a coherence/entanglement effect, and it is
 <strong>not evidence for holography</strong>: it illustrates the trivial $H(R)\le\log\dim$, not the holographic
 $H(R)\le S$ (which rests on the finite-capacity postulate — and note, per P4-MICRO, that what is *postulated*
-is *finiteness*; the area *form* $S=A/4\ell_P^2$ is itself derived via the Sakharov bridge — see below). This
+is *finiteness*; the area *form* $S=A/4\ell_P^2$ is itself derived via the Sakharov bridge, and even the value of
+$G$ is now *derivable* — as the relation $G=1/(N\Lambda_s^2)$ from a posited record-granularity scale $\Lambda_s$
+(`InducedNewtonConstant`), the numerical value still needing the species accounting — see below). This
 whole ladder is a sanity-check / pedagogy tool, not evidence: every number here is what any Everettian computes
 from the same Born distribution.
 

@@ -125,10 +125,13 @@ continuum-interface record. The items here are *not* axioms — they are the pos
 | The **`1/4` ratio** `S_ent·G_ind/A = (4π)/(16π) = 1/4` | **DERIVED THEOREM** (re-derivation of standard induced gravity; matter/regulator-independent, circularity-clean) | `SakharovRatio.sakharov_ratio`, `geometric_quarter` (pinned, AxiomAudit ~6266) |
 | The free-field **modular-energy bound** `ΔS ≤ 2π Δ⟨K_boost⟩` (+ first law, rigidity) | **DERIVED THEOREM** (JLMS *modular route*; formalized modular QFT) | `ModularEnergyBound.*` (B1–B7) |
 | `A/4G` **from the JLMS free-field modular identity** | **NOT DERIVABLE** here (no `G`, no area operator, cutoff-dependent coeff; `δA/4G=2π∫δT_kk` needs Einstein eqns) — stays a *gravitational input* along this route | — (`ROUTE1_MODULAR_PLAN.md`) |
-| The **value of `G`** (and `ℓ_P`) | **CARRIED / OPEN** (neither route derives it) | inventory §8 frontier |
+| The **`G` relation** `G = 1/(N Λ_s²)` (granularity reframing) | **DERIVED THEOREM** — posit a fundamental granularity scale `Λ_s` in place of `ℓ_P`; `G` is then an output of `{Λ_s, N}` (Sakharov/Dvali species bound). Consolidates P4-MICRO's inputs to one scale. | `InducedNewtonConstant.*` (`inducedG_delivers`, `inducedG_ratio_is_pure_number`) |
+| The **numerical value of `G`** (and `ℓ_P`) | **CARRIED / OPEN** — the *relation* is derived (above), but the *value* needs the species-coefficient accounting; and `Λ_s` is now the one carried scale (dimensional necessity) | inventory §8 frontier |
 | Continuum Type III₁→II crossed-product **dual-weight trace** (where `A/4G` would live) | **CITED MULTI-YEAR FRONTIER** | §8 |
 
 **The distinction to keep everywhere:** "the JLMS free-field *modular route* cannot derive `A/4G`" (true, narrow)
 is **not** "the `1/4` is not derived" (false — the `1/4` ratio *is* a derived theorem via the *separate* Sakharov
 bridge). Three separate objects, never conflated: **(a)** the `1/4` ratio — *derived* (`sakharov_ratio`); **(b)**
-the modular route — a *distinct* axiom-free result that does not touch `A/4G`; **(c)** the value of `G` — *open*.
+the modular route — a *distinct* axiom-free result that does not touch `A/4G`; **(c)** the value of `G` — the
+*relation* `G = 1/(N Λ_s²)` is now *derived* (granularity reframing, `InducedNewtonConstant`), but the *numerical
+value* is still *open* (species accounting), with `Λ_s` the one carried scale.

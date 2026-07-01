@@ -138,7 +138,9 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ENTROPY bound.** `HolographicCapacityBound`'s field is `log(card R) ≤ areaTerm`; its header states `R` is the
   **operational/regional capacity `Q_R = log N_R`, NOT a global Hilbert-space dimension**, and the matter algebra
   is **Type III₁** (the finite-dim `R` is itself the holographic regularization). `areaTerm = A/4ℓ_P²` is a
-  **carried UV datum, never assigned**.
+  **carried UV datum, never assigned** — but see §3 `InducedNewtonConstant`: under the granularity reframing
+  `areaTerm = (A/4)N Λ_s²` and `G = 1/(N Λ_s²)` are re-expressed in primitives `{area, species, granularity}`, so
+  `G` is promoted from *carried* to *derived-from-`Λ_s`* (the numerical value still needs species accounting).
 - `holographic_area_floor` **[AF·cond: Phase5Master]** — the dynamical (JLMS/dual-weight-trace) route to the same
   bound; `Phase5Master` is proved to carry *exactly* the master inequality (non-vacuous, `Phase5Master.of_le`).
 - `vonNeumannEntropy_le_log_card`, `RecordContract.shannon_le_log_card` **[AF]** — the genuine, unconditional
@@ -351,7 +353,11 @@ real theorem; only the Type II trace is frontier); **a covariant record-selectio
 free-field SM content (CAR/gauge/stress-tensor) transported into the capacity corner**; **a complete axiom-free
 formalization of the Lieb-concavity / DPI / strong-subadditivity tower** (a genuine contribution to formalized
 mathematics, Mathlib-grade); and **a machine-checked re-derivation of the Sakharov 1/4 ratio and a conditional,
-free-field Einstein equation** (standard induced-gravity/Jacobson physics, not unique to finiteness). "Finite
+free-field Einstein equation** (standard induced-gravity/Jacobson physics, not unique to finiteness) — with the
+value of `G`, formerly the one carried datum, now **promoted from carried to derived** as the *relation*
+`G = 1/(N Λ_s²)` under the granularity reframing (§3 `InducedNewtonConstant`, [AF]): P4-MICRO's carried inputs
+collapse to a single scale `Λ_s`, though the *numerical value* still needs the species-coefficient accounting
+(frontier). "Finite
 capacity" is a **finite record-*count*** statement in the finite-dim model and a **finite-*entropy*** statement in the
 continuum/Fork-A setting (provably distinct — `EntropyNotCardinality`), **never** a finite-matter theory; its
 load-bearing role is in the gravity/area thread, *not* the selection mechanism (`measure_needs_only_finiteness`).
