@@ -7892,6 +7892,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LinEinstein.graviton_solves_linearized_einstein
 #print axioms QIQTH.LinEinstein.einsteinSymbol_eq_zero_iff_massless
 #print axioms QIQTH.LinEinstein.einstein_iff_dispersion
+-- BRIDGE B1 (BRIDGE_PLAN.md): matter coupling ⟺ stress-energy conservation (the first half of Weinberg). couple e T
+-- = ∑ e_{μν}T^{μν} (the plane-wave symbol of ∫h·T); divT k T ν = k_μT^{μν} (the symbol of ∂_μT^{μν}). couple_gauge:
+-- the gauge variation of the coupling = 2∑ξ_ν(k_μT^{μν}). couple_gauge_invariant_iff_conserved — THE IFF: the
+-- coupling is gauge invariant (every e, every ξ) ⟺ the source is conserved. einstein_source_conserved: the raised
+-- linearized Einstein tensor is IDENTICALLY conserved (Bianchi, A1) ⟹ source_conserved_of_einstein_eq: any T with
+-- δG^{μν}=κT^{μν} is automatically conserved — geometry forces exactly the conservation the coupling demands.
+-- ⚠ Linearized; free ≠ interacting; universality (one G for all species) is B2; κ/G carried. Std 3.
+#print axioms QIQTH.MatterCoupling.couple_gauge
+#print axioms QIQTH.MatterCoupling.couple_gauge_invariant_iff_conserved
+#print axioms QIQTH.MatterCoupling.einstein_source_conserved
+#print axioms QIQTH.MatterCoupling.source_conserved_of_einstein_eq
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

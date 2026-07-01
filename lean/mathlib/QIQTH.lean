@@ -44,6 +44,7 @@ import QIQTH.HolographicScreenCode
 import QIQTH.EmergentDynamics
 import QIQTH.GravitonQuantization
 import QIQTH.LinearizedEinstein
+import QIQTH.MatterCoupling
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

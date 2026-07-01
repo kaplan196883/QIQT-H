@@ -297,6 +297,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   propagation at the speed of light. ⚠ Linearized ≠ full; vacuum; free; flat background — anchors the graviton to
   GR; does NOT derive gravity (bridge ingredient D = the cited open frontier).
 
+- **The bridge, increment B1 — `QIQTH/MatterCoupling.lean`** (namespace `QIQTH.MatterCoupling`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`). **Matter coupling ⟺ stress-energy conservation** (the first half of Weinberg), plane-wave
+  symbols: `couple e T = ∑ e_{μν}T^{μν}` (the symbol of `∫h_{μν}T^{μν}`), `divT k T ν = k_μT^{μν}` (the symbol of
+  `∂_μT^{μν}`). **`couple_gauge`** — the gauge variation of the coupling equals `2∑_ν ξ_ν (k_μT^{μν})` exactly
+  (symmetric `T`). **`couple_gauge_invariant_iff_conserved`** — **the iff**: the graviton–matter coupling is
+  invariant under every linearized diffeomorphism ⟺ the stress-energy is conserved — gauge consistency of the
+  coupling and conservation of the source are the SAME condition. **The Bianchi payoff:**
+  `einstein_source_conserved` (the index-raised linearized Einstein tensor is *identically* conserved, via A1's
+  Bianchi identity) ⟹ **`source_conserved_of_einstein_eq`** — any stress tensor sourced by the linearized Einstein
+  equation `δG^{μν} = κT^{μν}` is automatically conserved: the geometry side forces exactly the conservation law
+  the coupling side demands (the linearized consistency triangle: gauge invariance ⟺ conservation ⟸ Bianchi).
+  ⚠ Linearized; free ≠ interacting; universality of the coupling (one `G` for all species) is B2; `κ`/`G` carried.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

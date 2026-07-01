@@ -48,9 +48,16 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   graviton of GR.** **`einsteinSymbol_eq_zero_iff_massless`** + **`einstein_iff_dispersion`** — the converse: for
   nonzero TT, `δG = 0 ⟺ k² = 0 ⟺ ω² = κ²` (Einstein *forces* light-cone propagation). ⚠ Linearized, vacuum, free,
   flat. (An initial thinner duplicate `BridgeLinearizedGR.lean` was consolidated into this richer module.)
-- [ ] **B1 — coupling ⟺ conservation.** The linearized matter coupling `∫ h_{μν}T^{μν}` (symmetric `T`, no boundary
-  terms): gauge invariance under `h → h + ∂ξ + (∂ξ)ᵀ` **iff** `∂_μT^{μν} = 0` (prove the iff where boundary conditions
-  allow; at minimum ⟸ and the ⟹ under a separating class of `ξ`). The first half of Weinberg, algebraic.
+- [x] **B1 — coupling ⟺ conservation ✅** (`QIQTH/MatterCoupling.lean`, `QIQTH.MatterCoupling`, all [AF] std-3,
+  wired + pinned, budget 0). `couple e T = ∑ e_{μν}T^{μν}` (the symbol of `∫h·T`), `divT k T ν = k_μT^{μν}` (the
+  symbol of `∂_μT^{μν}`). **`couple_gauge`** — the gauge variation of the coupling is exactly `2∑ ξ_ν(k_μT^{μν})`
+  (symmetric `T`; proved by `linear_combination` over the 6 symmetry relations).
+  **`couple_gauge_invariant_iff_conserved`** — **THE IFF**: the coupling is gauge invariant for every `(e, ξ)` ⟺ the
+  stress-energy is conserved. **The Bianchi payoff:** `einstein_source_conserved` — the raised linearized Einstein
+  tensor is *identically* conserved (via A1's `bianchi_einsteinSymbol`), so `source_conserved_of_einstein_eq` — any
+  `T` sourced by `δG^{μν} = κT^{μν}` is AUTOMATICALLY conserved: the geometry side forces exactly the conservation
+  law the coupling side demands. The linearized consistency triangle closes. ⚠ Linearized; free ≠ interacting;
+  universality is B2; `κ`/`G` carried.
 - [ ] **C1 — the wedge modular Hamiltonian is the weighted boost.** Package the DONE free-field results as: `K_wedge`
   generates the geometric boost with the **Rindler weight** (`K = 2π∫_{x¹>0} x¹ T_{00}` schematically — the weighted
   boost energy, NOT an unweighted `2π∫T_kk`), using exactly the existing derived theorem
@@ -101,3 +108,10 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   dispersion) — **the quantized graviton (Q1–Q6) is provably the graviton of GR**. All [AF] std-3, budget 0.
   (Two parallel A1 builds raced; the thinner duplicate `BridgeLinearizedGR.lean` was removed and the richer module
   kept — a follow-up commit restored the module file the consolidation intended.) NEXT → B1 (coupling ⟺ conservation).
+- **2026-07-02 — B1 ✅ LANDED** (`MatterCoupling.lean`): the coupling⟺conservation **iff**
+  (`couple_gauge_invariant_iff_conserved` — gauge invariance of `∫h·T` for every `(e,ξ)` ⟺ `k_μT^{μν}=0`; the gauge
+  variation is exactly `2∑ξ_ν(k_μT^{μν})`, `couple_gauge`) + **the Bianchi payoff** (`einstein_source_conserved` —
+  the raised `δG` is identically conserved via A1's Bianchi; `source_conserved_of_einstein_eq` — any `T` sourced by
+  `δG^{μν}=κT^{μν}` is AUTOMATICALLY conserved: geometry forces exactly the conservation the coupling demands; the
+  linearized consistency triangle closes). All [AF] std-3, wired + pinned, budget 0. NEXT → C1 (wedge modular
+  Hamiltonian = the weighted boost, packaging the DONE free-field modular results).
