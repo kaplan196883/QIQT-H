@@ -67,10 +67,16 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   with `d/dt⟪ξ,V_tξ⟫|₀ = i·c` must equal `−S`. **`boost_correlator_im_hasDerivAt`** — the real (physical) form
   `d/dt Im⟪ξ,V_tξ⟫|₀ = −S`. ⚠ BW carried; the Rindler weight (`2π∫x¹T₀₀`) packaged at the level the existing
   theorems support (the correlator-derivative datum); free-field/RvD setting; not the area law (D).
-- [ ] **A2 — the emergence map (supplied geometric functional).** The linearized area variation
-  `δA_Σ(h) = ½∫_Σ √γ γ^{ab} e_a^μ e_b^ν h_{μν}` (finite/discretized form) as a SUPPLIED functional of `h` — wire
-  `δ(screenArea)` to it. Area is a functional of `h`, NOT the full metric data: any reconstruction claim requires a
-  **separating family** of surfaces (a carried hypothesis, exactly like G1's probes). Deriving the map is D.
+- [x] **A2 — the emergence map (supplied geometric functional) ✅** (`QIQTH/AreaEmergence.lean`, `QIQTH.AreaMap`,
+  all [AF] std-3, wired + pinned, budget 0). `ScreenSurface` (finite area elements: weight `w_a ≥ 0` + tangent frame)
+  and the **SUPPLIED** discretized area variation `areaVar Σ h = ½∑ w_a(h(e₁ᵃ,e₁ᵃ)+h(e₂ᵃ,e₂ᵃ))`. **`areaProbe`** —
+  `δA_Σ` is a *linear* functional of `h` (the exact `→ₗ[ℝ]` probe shape G1 consumes). **The wiring**
+  (`screenArea_eq_bg_add_areaVar`): a `ScreenCut` whose independent area charge is supplied as the geometrically
+  perturbed weight `w(1+½tr_Σh)` has `screenArea = (background) + δA_Σ(h)` — the code's charge and the geometric
+  area become ONE object under the carried identification (`hwt`). **The separating witness**
+  (`area_probes_separate`): a symmetric `h` with vanishing area variation at every ray surface is ZERO — area
+  probes genuinely reconstruct the perturbation, making G1's separating-family hypothesis **non-vacuous with
+  geometric probes**. ⚠ The map is supplied, never derived (deriving it = D); linearized only.
 - [ ] **B2a — the soft Ward identity.** Finite algebraic core: the soft factor `∑_i η_i g_i (p_i·ε·p_i)/(p_i·q)`
   (incoming/outgoing signs `η_i`); longitudinal decoupling `ε_{μν} → ε_{μν} + q_μξ_ν + q_νξ_μ` forces
   **`∑_i η_i g_i p_i^μ = 0`**. NOT the full analytic soft theorem — the algebraic identity only.
@@ -125,3 +131,9 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   Clausius datum FORCED by derivative uniqueness (`boost_flux_unique`: any flux candidate = −S), and the real form
   (`boost_correlator_im_hasDerivAt`). All [AF] std-3, wired + pinned, budget 0. NEXT → A2 (the emergence map:
   supplied area functional δA(h) + separating family).
+- **2026-07-02 — A2 ✅ LANDED** (`AreaEmergence.lean`): the supplied linearized area functional `δA_Σ(h)` (linear —
+  `areaProbe`, the G1 probe shape), the screen-code wiring (`screenArea_eq_bg_add_areaVar`: code area charge =
+  background + δA under the carried identification), and the SEPARATING WITNESS (`area_probes_separate`: area
+  probes at all ray surfaces reconstruct a symmetric perturbation — G1's separating-family hypothesis is
+  non-vacuous with geometric probes). All [AF] std-3, wired + pinned, budget 0. NEXT → B2a (the soft Ward
+  identity).

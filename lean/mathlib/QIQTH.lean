@@ -46,6 +46,7 @@ import QIQTH.GravitonQuantization
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius
+import QIQTH.AreaEmergence
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

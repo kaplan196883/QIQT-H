@@ -322,6 +322,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Rindler-weight formula (`2π∫x¹T₀₀`) packaged only at the correlator-derivative level the existing theorems
   support; free-field/RvD standard-subspace setting; NOT the area law (bridge ingredient D).
 
+- **The bridge, increment A2 — `QIQTH/AreaEmergence.lean`** (namespace `QIQTH.AreaMap`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`). **The emergence map: the SUPPLIED linearized area functional, wired to the screen code.**
+  `ScreenSurface` (finite area elements: weight `w_a ≥ 0` = the `√γ` element + tangent frame `(e₁ᵃ,e₂ᵃ)`) and the
+  discretized area variation `areaVar Σ h = ½∑_a w_a(h(e₁ᵃ,e₁ᵃ)+h(e₂ᵃ,e₂ᵃ))` (= `½∫√γ γ^{ab}h_{ab}`).
+  **`areaProbe`** — `δA_Σ` bundled as a *linear* functional `→ₗ[ℝ]` of `h` (the exact probe shape the FGHMVR
+  skeleton `G1` consumes). **`screenArea_eq_bg_add_areaVar`** — the wiring: a `ScreenCut` whose (independent) area
+  charge is SUPPLIED as the geometrically perturbed weight `w_a(1+½tr_Σh)` has `screenArea = (background area) +
+  δA_Σ(h)` — the code's area charge and the geometric area variation become ONE object under the carried
+  identification. **`area_probes_separate`** — **the separating witness**: a symmetric `h` whose area variation
+  vanishes at *every* ray surface is zero — area probes genuinely reconstruct the metric perturbation, making
+  G1's separating-family hypothesis **non-vacuous with geometric (area) probes**. ⚠ The map is SUPPLIED (a carried
+  hypothesis, never an axiom); deriving it from a substrate = bridge ingredient D; linearized only.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

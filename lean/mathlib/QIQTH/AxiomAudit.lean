@@ -7913,6 +7913,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeBoost.boost_correlator_hasDerivAt
 #print axioms QIQTH.WedgeBoost.boost_flux_unique
 #print axioms QIQTH.WedgeBoost.boost_correlator_im_hasDerivAt
+-- BRIDGE A2 (BRIDGE_PLAN.md): the emergence map — the SUPPLIED linearized area functional δA_Σ(h) = ½∑w_a(h(e₁,e₁)
+-- +h(e₂,e₂)) (discretized ½∫√γ γ^{ab}h_{ab}), wired to the screen code. areaProbe: δA_Σ is a LINEAR functional of
+-- h (the exact G1 probe shape). screenArea_eq_bg_add_areaVar: a ScreenCut whose area charge is SUPPLIED as the
+-- geometrically perturbed weight w(1+½tr_Σh) has screenArea = bg + δA_Σ(h) — code charge and geometric area become
+-- ONE object under the carried identification (hwt hypothesis; deriving the map = ingredient D).
+-- areaVar_ray + area_probes_separate: THE SEPARATING WITNESS — a symmetric h with vanishing area variation at
+-- every ray surface is 0: area probes genuinely reconstruct the perturbation, making G1's separating-family
+-- hypothesis NON-VACUOUS with geometric probes. ⚠ Map supplied, never derived; linearized. Std 3.
+#print axioms QIQTH.AreaMap.areaProbe
+#print axioms QIQTH.AreaMap.screenArea_eq_bg_add_areaVar
+#print axioms QIQTH.AreaMap.areaVar_ray
+#print axioms QIQTH.AreaMap.area_probes_separate
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
