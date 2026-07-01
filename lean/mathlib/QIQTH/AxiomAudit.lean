@@ -7876,6 +7876,18 @@ namespace QIQTH.AxiomAudit
 -- single mode; the CCR extends to any momentum⊗helicity index (the continuum = more modes). Std 3.
 #print axioms QIQTH.GravitonQuant.twoPoint
 #print axioms QIQTH.GravitonQuant.vacExp_vacuum
+-- BRIDGE A1 (BRIDGE_PLAN.md, GPT-5.5-pro-verified): the FULL linearized Einstein tensor G⁽¹⁾ (plane-wave symbol:
+-- linRicci = ½(k_μ(k·e)_ν + k_ν(k·e)_μ − k²e_{μν} − k_μk_ν tr_η e), linEinstein = R⁽¹⁾ − ½η R⁽¹⁾-scalar; defined for
+-- EVERY (k,e), the ASM residual). linEinstein_gauge: pure gauge e=k⊙ξ ⟹ G⁽¹⁾=0 IDENTICALLY (linearized diffeo
+-- invariance, any k). linEinstein_tt: transverse+traceless ⟹ G⁽¹⁾ = −½k²e (the TT reduction "G⁽¹⁾=−½□h").
+-- graviton_solves_linEinstein + einstein_polPlus/polCross: null k (k²=0) + TT ⟹ G⁽¹⁾=0 — THE QUANTIZED GRAVITON
+-- (Q1–Q6, polarization content = the TT sector) PROVABLY SOLVES LINEARIZED VACUUM EINSTEIN. ⚠ Linearized ≠ full;
+-- vacuum; free; flat background; anchors the graviton to GR, does NOT derive gravity. Std 3.
+#print axioms QIQTH.Bridge.linEinstein_gauge
+#print axioms QIQTH.Bridge.linEinstein_tt
+#print axioms QIQTH.Bridge.graviton_solves_linEinstein
+#print axioms QIQTH.Bridge.einstein_polPlus
+#print axioms QIQTH.Bridge.einstein_polCross
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
