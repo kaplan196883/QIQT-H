@@ -89,7 +89,10 @@ gives the <em>identical</em> table. So this is <strong>not</strong> a coherence/
 $H(R)\le S$ (which rests on the finite-capacity postulate — and note, per P4-MICRO, that what is *postulated*
 is *finiteness*; the area *form* $S=A/4\ell_P^2$ is itself derived via the Sakharov bridge, and even the value of
 $G$ is now *derivable* — as the relation $G=1/(N\Lambda_s^2)$ from a posited record-granularity scale $\Lambda_s$
-(`InducedNewtonConstant`), the numerical value still needing the species accounting — see below). This
+(`InducedNewtonConstant`), the numerical value still needing the species accounting; and with that induced $G$ the
+granularity capacity *maps onto the holographic dictionary* — the boundary Cardy microstate count $=$ QIQT-H's bulk
+capacity exponent $(A/4)N\Lambda_s^2$, a machine-checked *correspondence* (`HolographicBridge`), not a boundary CFT
+— see below). This
 whole ladder is a sanity-check / pedagogy tool, not evidence: every number here is what any Everettian computes
 from the same Born distribution.
 

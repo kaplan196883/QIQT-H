@@ -76,6 +76,14 @@ This upgrades the *modular* pieces of the carried `Phase5Master` hypothesis from
 results. It is **formalized modular QFT — not a derivation of the holographic $A/4G$ bound**; the continuum
 Type III$_1\!\to$II crossed-product dual-weight trace where $A/4G$ would live remains a multi-year cited frontier.
 
+Relatedly, `InducedNewtonConstant.lean` (the granularity reframing) delivers `G = 1/(N Λ_s²)` — `G` promoted from
+carried to derived (the *relation*; the numerical value still needs the species accounting) — and
+`HolographicBridge.lean` machine-checks the **correspondence** that, with this induced `G`, the AdS/CFT boundary
+Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent `(A/4)N Λ_s²`
+(`btz_cardy_eq_qiqth_capacity`; the AdS radius cancels). This is a *correspondence* (the two holographic
+bookkeepings agree under the shared `G`), **not** an import of a boundary CFT, the Cardy formula, or AdS/CFT's
+cross-check — QIQT-H's capacity stays postulated/granularity-reframed.
+
 ## Emergent gravity: the Einstein equations as a machine-checked equation of state
 
 A second, self-contained axiom-free development formalizes **Jacobson's "Einstein equation of state"** route

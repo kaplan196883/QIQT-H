@@ -194,6 +194,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   longer presupposing `G`). ⚠ **Exact algebra**: it moves `G` from *carried* to *derived-from-`{Λ_s, N}`* (a better
   primitive), but does **NOT** compute the numerical value of `G` — that needs the full species-coefficient accounting
   (induced-EH coefficients, good to `O(1)`) which is a **[frontier]**, and it is an effective, not UV-complete, relation.
+  **Bridge to the holographic dictionary (`HolographicBridge.lean`, [AF], see §0):** with this induced `G`, the AdS/CFT
+  boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent `(A/4)N Λ_s²`
+  (`btz_cardy_eq_qiqth_capacity`; AdS radius cancels) — a *correspondence* (the two holographic bookkeepings agree
+  under the shared `G`), NOT an import of a boundary CFT / Cardy formula / cross-check.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -56,7 +56,7 @@ a microstate count cannot supply a temperature, so the Bisognano–Wichmann / Un
 the value of $G$ is a carried datum — though it too can be **promoted from carried to derived** by positing a
 fundamental **record-granularity scale** $\Lambda_s$ in place of $\ell_P$, giving $G = 1/(N\Lambda_s^2)$
 (machine-checked axiom-free, `InducedNewtonConstant`) and consolidating P4-MICRO's inputs to a single scale; the
-*numerical value* still needs the species accounting. Grounding the capacity *law* itself (replacing the postulate by a modular
+*numerical value* still needs the species accounting. With this induced $G$ the granularity capacity also **maps onto the holographic dictionary** — the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent $(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge`): a *correspondence* under the shared $G$, not an import of a boundary CFT or AdS/CFT's cross-check. Grounding the capacity *law* itself (replacing the postulate by a modular
 identity) remains [open](/open-problems).
 
 <figure style="margin:1.8em 0">

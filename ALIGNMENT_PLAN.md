@@ -218,6 +218,16 @@ inventory-backed.
   axiom register `AXIOM_CONTRACTS.md` (new "`G` relation = DERIVED" row + "numerical value = OPEN" row), and website
   `idea`/`theory`/`formalization`/`open-problems`/`ladder`/`index.astro`. Website green (66 pages). PASS = every
   P4-MICRO surface states `G` is derived *as a relation* from `Λ_s`+`N`, never that the value is computed.
+- **2026-07-01 — propagate the holographic-dictionary bridge (`HolographicBridge.lean`) across paper + website.**
+  After building the bridge (`btz_cardy_eq_qiqth_capacity`: with the induced `G=1/(N Λ_s²)`, the AdS/CFT boundary
+  Cardy microstate count = QIQT-H's bulk capacity exponent `(A/4)N Λ_s²`, AdS radius cancels; `centralCharge_in_
+  primitives`), populated it wherever the granularity reframing / AdS-CFT relationship appears — **paper** §1.1a (after
+  the granularity note) + Track C ("borrows techniques not the dictionary" → + this correspondence), **website**
+  `idea`/`theory`/`open-problems`/`index.astro`/`ladder`/`formalization`, ledger row **D8**, and marked in the lean
+  results list (inventory §0 + §3 cross-ref). Held the honest line everywhere: it is a **correspondence** (the two
+  holographic bookkeepings agree under the shared `G`), NOT an import of a boundary CFT, the Cardy formula, bulk
+  reconstruction, or AdS/CFT's cross-check — QIQT-H's capacity stays postulated/granularity-reframed. Website green
+  (66 pages). PASS = the bridge appears as a *correspondence* (never "QIQT-H has AdS/CFT") on every surface.
 - **2026-06-30 — maintenance (A2): fix the "what is postulated" conflation on the explainer pages.** Prompted by a
   live correction (the postulate is *finiteness*, NOT the holographic bound — P4-MICRO). The homepage
   (`index.astro`) was already correct (lines 53/132/165/219/311: "postulate is finiteness only; the area form

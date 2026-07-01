@@ -254,7 +254,11 @@ is derived). What *neither* route computes is the **numerical value of $G$** —
 positing a fundamental **record-granularity scale** $\Lambda_s$ in place of $\ell_P$ makes the *relation*
 $G = 1/(N\Lambda_s^2)$ a machine-checked theorem (`InducedNewtonConstant`), so $G$ moves from *carried* to
 *derived-from-$\Lambda_s$* (P4-MICRO's inputs collapse to one scale); the *value* still needs the species
-accounting, and $\Lambda_s$ becomes the one carried scale. **What *is* now machine-checked**
+accounting, and $\Lambda_s$ becomes the one carried scale. With this induced $G$ the granularity capacity **maps
+onto the holographic dictionary**: the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk
+capacity exponent $(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge.btz_cardy_eq_qiqth_capacity`; the AdS
+radius cancels) — a *correspondence* showing the two holographic bookkeepings agree under the shared $G$, **not**
+an import of a boundary CFT, the Cardy formula, or AdS/CFT's cross-check. **What *is* now machine-checked**
 along the modular route is the honest, derivable content — the
 free-field **modular-energy bound**: the entropy variation is bounded by (and, at the reference, equals) the
 modular-energy variation, $\Delta S \le \Delta\langle K_\sigma\rangle$ and $\delta S = \delta\langle K_\sigma\rangle$,

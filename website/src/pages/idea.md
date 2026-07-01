@@ -29,7 +29,10 @@ finite-information "pixel size", $a_0 = 1/\Lambda_s$) *in place of* $\ell_P$ del
 Sakharov/Dvali species bound, machine-checked axiom-free (`InducedNewtonConstant`) — collapsing P4-MICRO's carried
 inputs to a *single* scale $\Lambda_s$, from which the finite capacity *and* $G$ both follow. The *numerical value*
 of $G$ still needs the species accounting (a frontier), and $\Lambda_s$ stays the one carried scale (a length
-cannot come from a count). Finiteness *alone* gives only
+cannot come from a count). With this induced $G$ the granularity capacity also **maps onto the holographic
+dictionary** — the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent
+$(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge`) — a *correspondence* under the shared $G$, not an
+import of a boundary CFT or AdS/CFT's cross-check. Finiteness *alone* gives only
 $S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ and the $1/4$ are then
 *theorems*, not postulates.
 
