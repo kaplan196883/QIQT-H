@@ -212,3 +212,12 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   `LambdaS_pos`, and `InducedG_pos` (`G = 1/(N Λ_s²) > 0`). ⚠ A **RELATION**, not the numerical value of `G` — it
   still needs a reference unit. **NEXT → G6 (`secondDiff_of_area_firstLaw`: the conditional null-focusing bet;
   ⚠⚠ `hAK : δA = κ·Kboost` is a CARRIED hypothesis carrying the Einstein content, NEVER derived).**
+- **2026-07-01 — G6 ✅ DONE** ([AF] std-3, pinned, budget 0). ⚠⚠ **CONDITIONAL BOOKKEEPING, NOT a derivation of
+  Einstein.** `RkkDisc δA c := secondDiff δA c` (the **discrete curvature proxy**, NOT geometric Ricci);
+  **`secondDiff_of_area_firstLaw`** — given the **carried** area–stress link `hAK : ∀ d, δA d = κ·K d` (`κ = 8πG`,
+  the hypothesis that **carries the Einstein content**, NEVER derived — the single most important guard) and a kernel
+  with `Δ²K = T` at `c`, then `Δ²(δA)_c = κ·T_c`; and **`nullFocusing_of_areaLink`** — instantiating with the G3 tail
+  kernel (`Δ²(tailK) = T_kk`), `RkkDisc_c = κ·T_c` for `c < N` — the finite null Einstein equation `R_kk = 8πG T_kk`,
+  **conditional on the carried area–stress link**. The guard was held: `hAK` is a hypothesis of both theorems, never
+  proved from packing/first-law/min-cut. **NEXT → G7a (`symForm_proportional_to_minkowski_of_null_quad_zero`: ∀ null
+  `k`, `quadForm S k = 0` ⟹ `∃ φ, S = φ•metric` — pure 4D linear algebra) → G7b (conditional φ-removal).**

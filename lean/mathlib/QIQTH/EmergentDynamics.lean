@@ -238,4 +238,35 @@ theorem LambdaS_pos (b g0 μ0 : ℝ) (hμ : 0 < μ0) : 0 < LambdaS b g0 μ0 := b
 theorem InducedG_pos (N Λ : ℝ) (hN : 0 < N) (hΛ : 0 < Λ) : 0 < InducedG N Λ := by
   unfold InducedG; positivity
 
+/-! ## G6 — the QIQT-H-native finite null-focusing theorem (CONDITIONAL BOOKKEEPING, NOT a derivation) -/
+
+/-- The **discrete curvature proxy** `R_kk := Δ²(δA)`. ⚠ A discrete proxy, **NOT** the geometric Ricci
+    contraction — it becomes a curvature only with extra geometry/sign/normalization (a carried input). -/
+noncomputable def RkkDisc (δA : ℤ → ℝ) (c : ℤ) : ℝ := secondDiff δA c
+
+/-- **G6 — the second difference of a first-law-linked area variation.** ⚠⚠ **CONDITIONAL BOOKKEEPING, NOT a
+    derivation of Einstein.** Given the **carried** area–modular/stress link `hAK : ∀ d, δA d = κ·K d` (with
+    `κ = 8πG`, the `Kboost` convention; this hypothesis is **exactly where the Einstein-equation content enters** —
+    inventory §2 — and is **NEVER derived from packing/first-law/min-cut**, the single most important guard) and a
+    kernel whose second difference is the stress (`Δ²K = T` at `c`), the second area variation obeys
+    `Δ²(δA)_c = κ·T_c`. Pure algebra over the carried hypotheses. -/
+theorem secondDiff_of_area_firstLaw (κ : ℝ) (δA K T : ℤ → ℝ) (c : ℤ)
+    (hAK : ∀ d, δA d = κ * K d) (hKT : secondDiff K c = T c) :
+    secondDiff δA c = κ * T c := by
+  have h : secondDiff δA c = κ * secondDiff K c := by
+    unfold secondDiff; rw [hAK (c - 1), hAK c, hAK (c + 1)]; ring
+  rw [h, hKT]
+
+/-- **G6 — finite null focusing from the modular tail (CONDITIONAL).** Instantiating with the G3 discrete null
+    modular tail (`Δ²(tailK) = T_kk`): **given the carried area–stress link** `δA = κ·tailK N T` (`κ = 8πG`), the
+    discrete curvature proxy equals `κ` times the local stress: `R_kk_c = κ·T_c` for `c < N`. The finite analogue of
+    the null Einstein equation `R_kk = 8πG T_kk`, using the load-bearing local packing constraint (via the area law)
+    — but **it does NOT derive Einstein**: the `δA = κ·tailK` link is the carried physics input, and `R_kk := Δ²(δA)`
+    is a discrete proxy, not geometric Ricci. -/
+theorem nullFocusing_of_areaLink (κ : ℝ) (N : ℤ) (T δA : ℤ → ℝ) (c : ℤ) (hcN : c < N)
+    (hAK : ∀ d, δA d = κ * tailK N T d) :
+    RkkDisc δA c = κ * T c := by
+  unfold RkkDisc
+  exact secondDiff_of_area_firstLaw κ δA (tailK N T) T c hAK (secondDiff_tailK_eq N T c hcN)
+
 end QIQTH.GravDyn

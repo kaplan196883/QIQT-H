@@ -7765,6 +7765,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravDyn.LambdaRG_invariant
 #print axioms QIQTH.GravDyn.LambdaS_pos
 #print axioms QIQTH.GravDyn.InducedG_pos
+-- G6 (⚠⚠ CONDITIONAL BOOKKEEPING, NOT a derivation of Einstein): secondDiff_of_area_firstLaw / nullFocusing_of_areaLink.
+-- GIVEN the CARRIED area–stress link hAK (δA = κ·K, κ=8πG -- the hypothesis that carries the Einstein content,
+-- NEVER derived from packing/first-law/min-cut, the single most important guard) + the G3 kernel (Δ²K=T_kk), the
+-- discrete curvature proxy RkkDisc:=Δ²(δA) obeys RkkDisc = κ·T_kk -- the finite null Einstein equation. RkkDisc is a
+-- discrete proxy NOT geometric Ricci; hAK is the physics input. Axiom-free (std 3).
+#print axioms QIQTH.GravDyn.secondDiff_of_area_firstLaw
+#print axioms QIQTH.GravDyn.nullFocusing_of_areaLink
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
