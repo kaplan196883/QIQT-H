@@ -111,3 +111,14 @@ weeks, and by construction does **not** close the mechanism gap — it delivers 
 - **2026-07-01** — plan created from the GPT-5.5-pro mechanism consult (corrected spec: screen code not static TN;
   area an independent charge; `≤` bound with horizon saturation; gravitons/background-independence/non-circular-`G`
   labelled frontiers). NEXT → S1a (structure + independence guard).
+- **2026-07-01 — S1a + S1b + S1c ✅ DONE** (`QIQTH/HolographicScreenCode.lean`, all [AF] std-3, wired into
+  `QIQTH.lean` + `AxiomAudit.lean`, budget 0). **S1a:** `ScreenCut` structure (each link carries *independent*
+  `logDim` + `areaWt`), `codeCap`/`screenArea` + nonneg lemmas, and the tautology-guard `area_dim_independent`
+  (a screen with positive area but zero code dimension — area ≠ log dim). **S1b (linchpin):** `area_law_of_packing`
+  — the local packing constraint `Packing S G := ∀ e∈links, logDim e ≤ areaWt e/(4G)` ⟹ the regional area law
+  `codeCap ≤ screenArea/(4G)` (via `Finset.sum_div` + `Finset.sum_le_sum`) — the capacity postulate reduced to a
+  *local* packing postulate, area an independent charge, `1/4G` carried locally. **S1c:** `area_law_saturation` —
+  tight local packing ⟹ equality (the horizon sector). Loudly labelled a toy kinematic interface, NOT gravity;
+  gravitons/background-independence/non-circular-`G` cited as untouched frontiers. Inventory entry added.
+  **NEXT → S1d** (min-cut over a family of cuts / area additivity — explicit-family or two-cut case if the general
+  min-cut is heavy) → **S1e** (finish audit polish).

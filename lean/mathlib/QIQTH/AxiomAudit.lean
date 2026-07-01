@@ -7713,6 +7713,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InducedG.planckLength_sq_eq_inducedG
 #print axioms QIQTH.InducedG.capacity_exponent_in_primitives
 #print axioms QIQTH.InducedG.inducedG_strictAntitone_in_N
+-- ── HolographicScreenCode (toy Stage 1; HOLOGRAPHIC_SCREEN_CODE_PLAN.md) ─────────────────────────────────────────
+-- ⚠ A TOY KINEMATIC INTERFACE, NOT gravity, NOT a QG claim, does NOT close the mechanism gap. Turns the capacity
+-- POSTULATE into a theorem GIVEN a LOCAL packing constraint: area_law_of_packing (local `logDim e ≤ areaWt e/4G`
+-- ⟹ regional `codeCap ≤ screenArea/4G`), with area an INDEPENDENT charge (area_dim_independent: large area, zero
+-- code dim — not the "area:=log dim" tautology) and horizon saturation (area_law_saturation, equality when packing
+-- is tight). The 1/4G is CARRIED locally; the screen is FIXED (not background-independent); gravitons/dynamical
+-- Einstein (Stage 3) + non-circular G are cited frontiers, NOT touched. Axiom-free (std 3).
+#print axioms QIQTH.ScreenCode.area_dim_independent
+#print axioms QIQTH.ScreenCode.area_law_of_packing
+#print axioms QIQTH.ScreenCode.area_law_saturation
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

@@ -198,6 +198,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent `(A/4)N Λ_s²`
   (`btz_cardy_eq_qiqth_capacity`; AdS radius cancels) — a *correspondence* (the two holographic bookkeepings agree
   under the shared `G`), NOT an import of a boundary CFT / Cardy formula / cross-check.
+- **Toy holographic-screen code — `QIQTH/HolographicScreenCode.lean`** (namespace `QIQTH.ScreenCode`, [AF] std-3;
+  `HOLOGRAPHIC_SCREEN_CODE_PLAN.md`). ⚠ **A TOY KINEMATIC INTERFACE, NOT gravity, NOT a QG claim — it does NOT close
+  the "mechanism gap"** (GPT-5.5-pro consult). It turns the regional-capacity **postulate into a theorem GIVEN a
+  local packing constraint**: `area_law_of_packing` (local `logDim e ≤ areaWt e/4G` on each screen link ⟹ regional
+  `codeCap ≤ screenArea/(4G)` — the area law reduced to a *local* packing law), with `area_dim_independent` (large
+  area, **zero** code dimension — area is an INDEPENDENT charge, NOT the `area:=log dim` tautology) and
+  `area_law_saturation` (equality in the horizon-like tight-packing sector). ⚠ The `1/4G` is **carried** locally
+  (not derived); the screen is **fixed** (NOT background-independent); and **gravitons / dynamical Einstein (Stage 3)
+  + non-circular `G`** are the genuine QG frontiers this does **not** touch (cited). It is the honest "interface into
+  which a real microscopic model could plug," never a gravity claim.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
