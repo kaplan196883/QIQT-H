@@ -172,3 +172,10 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   hypothesis, `RkkDisc` a discrete proxy not Ricci; (7) G7 split into G7a (pointwise algebra) + G7b (conditional
   φ-removal, no graviton claim); (8) frontier list extended (`hTkk` localization, continuum modular/vN, interacting
   matter, RT emergence, numerical `G`). **NEXT → G1 (`allBall_firstLaw_iff_residual_zero`).**
+- **2026-07-01 — G1 ✅ DONE** (`QIQTH/EmergentDynamics.lean`, namespace `QIQTH.GravDyn`, [AF] std-3, wired into
+  `QIQTH.lean` + `AxiomAudit`, budget 0). The **FGHMVR logical skeleton**: `Separating` probe families +
+  `residual_eq_zero_of_firstLaw` + **`allBall_firstLaw_iff_residual_zero`** — given a separating probe family and a
+  **carried** Iyer–Wald identity `iw : ∀ B, δK B − δS B = P B residual`, the first law `∀ B, δS B = δK B` **⟺**
+  `residual = 0`. Pure linear algebra; the `∀ B` all-probe family + `iw` are explicit carried hypotheses (continuum
+  balls = G8, Iyer–Wald = G10 — NOT supplied); NOT a physical derivation of Einstein. **NEXT → G2
+  (`eq_zero_of_decoder`: a finite decoder identity ⟹ `Separating`).**

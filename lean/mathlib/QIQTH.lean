@@ -41,6 +41,7 @@ import QIQTH.MaxEntropyCapacity
 import QIQTH.ModularEnergyBound
 import QIQTH.InducedNewtonConstant
 import QIQTH.HolographicScreenCode
+import QIQTH.EmergentDynamics
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

@@ -7734,6 +7734,13 @@ namespace QIQTH.AxiomAudit
 -- is unbounded at fixed area (∃ screen with area ≤ 1 but codeCap ≥ M for any M), so the area law genuinely requires
 -- the carried packing postulate (not free / not vacuous). Companion to area_dim_independent. Toy interface, NOT gravity.
 #print axioms QIQTH.ScreenCode.codeCap_unbounded_at_fixed_area
+-- ── EmergentDynamics (graviton-wall attack; GRAVITON_WALL_PLAN.md) ───────────────────────────────────────────────
+-- ⚠ A CONDITIONAL FINITE SKELETON, NOT solved QG. G1 = the FGHMVR logical skeleton: allBall_firstLaw_iff_residual_zero
+-- -- given a SEPARATING probe family + a CARRIED Iyer-Wald identity (δK−δS = ⟨P,residual⟩), the entanglement first law
+-- at every probe ⟺ the linearized field-equation residual vanishes. Pure linear algebra; the continuum ball/Iyer-Wald
+-- content is a carried hypothesis (plan G8/G10), NOT a physical derivation of Einstein. Axiom-free (std 3).
+#print axioms QIQTH.GravDyn.allBall_firstLaw_iff_residual_zero
+#print axioms QIQTH.GravDyn.residual_eq_zero_of_firstLaw
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
