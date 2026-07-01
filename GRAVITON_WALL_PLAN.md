@@ -262,3 +262,14 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   `linarith`). All [AF] std-3, pinned, budget 0. ⚠ KINEMATIC; NOT the quantized graviton. **This closes the finite
   linearized-graviton kinematics rigorously (2 polarizations · spin-2 transformation · exact count). The remaining
   frontier is genuinely the dynamics/quantization — research, not loop-grindable.**
+- **2026-07-01 — G11a HELICITY EIGENSTATES ✅: the circular polarizations `e_± = e₊ ± i·e×` are eigenvectors with
+  eigenvalue `e^{∓2iθ}`.** Over ℂ (`polPlusC`, `polCrossC`, `rotC`, `eR`, `eL`): **`eR_helicity`** —
+  `R(θ) e_R R(θ)ᵀ = e^{−2iθ} e_R`; **`eL_helicity`** — `R(θ) e_L R(θ)ᵀ = e^{+2iθ} e_L`. This **diagonalizes** the
+  real `2θ`-mixing of `polPlus_helicity`/`polCross_helicity`: the `±2` in the exponent **is** the helicity — the
+  graviton's spin-2 stated as an *explicit eigenvalue*, not a mixing angle (`e_R` = `v vᵀ` on the `x,y` block with
+  `v=(1,i)`, `R(θ)v = e^{−iθ}v`). Proof: two I-free complex helicity lemmas (`rotC_polPlusC`/`rotC_polCrossC`,
+  `ring`) + the Euler bridge `e^{∓2iθ}=(cos²−sin²)∓(2 sin cos)i` (`Complex.exp_mul_I`+`cos_add`/`sin_add`) + a
+  `calc` combining them, with the off-diagonal `I²=−1` discharged by `ring_nf`/`simp [Complex.I_mul_I]`. GPT-5.5
+  supplied the closer. All [AF] std-3, pinned, budget 0. ⚠ KINEMATIC; NOT the quantized graviton. **This upgrades
+  spin-2 from "mixes by 2θ" to the textbook helicity-±2 eigenvalue form — the cleanest possible finite statement of
+  the graviton's spin. Dynamics/quantization remains the research wall.**

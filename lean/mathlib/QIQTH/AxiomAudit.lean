@@ -7810,6 +7810,12 @@ namespace QIQTH.AxiomAudit
 -- gauge) => the graviton has EXACTLY 2 physical polarizations. KINEMATIC; not the quantized graviton. Std 3.
 #print axioms QIQTH.GravDyn.tt_decomposition
 #print axioms QIQTH.GravDyn.polarizations_not_gauge
+-- G11a HELICITY EIGENSTATES: the circular polarizations e_± = e+ ± i·ex (over ℂ) are EIGENVECTORS of the rotation
+-- conjugation R(θ)·e_±·R(θ)ᵀ with eigenvalue e^{∓2iθ} (eR_helicity: e^{−2iθ}, eL_helicity: e^{+2iθ}). The ±2 in the
+-- exponent IS the graviton's helicity ±2 — spin-2 as an EXPLICIT eigenvalue, diagonalizing the real 2θ-mixing. Finite
+-- complex matrix algebra (off-diagonal entries use I²=−1). KINEMATIC; not the quantized graviton. Std 3.
+#print axioms QIQTH.GravDyn.eR_helicity
+#print axioms QIQTH.GravDyn.eL_helicity
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

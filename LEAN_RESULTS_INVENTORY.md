@@ -231,7 +231,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **given** the carried area–stress link `hAK`, which **carries the Einstein content and is NEVER derived**;
   `RkkDisc` a discrete proxy, not Ricci); **G7a** `symForm_proportional_to_minkowski_of_null_quad_zero` (a symmetric
   form vanishing on the null cone is `φ·η` — the pointwise linearized Einstein residual) + **G7b**
-  `residual_vanishes_of_metric_form` (the boundary-condition plug). ⚠ **Linearized ≠ full**; the propagating/quantized
+  `residual_vanishes_of_metric_form` (the boundary-condition plug). **G11a — the linearized graviton's KINEMATICS
+  (complete, KINEMATIC only, NOT the quantized graviton):** the two transverse-traceless polarizations `e₊,e×`
+  (`polPlus/polCross_isSymm/_transverse/_traceless`) are linearly independent (`graviton_polarizations_indep`);
+  they carry **spin 2 / helicity ±2** — under a rotation by θ the doublet mixes by `R(2θ)`
+  (`polPlus_helicity`/`polCross_helicity`, the double-angle signature), and the circular polarizations `e_± = e₊ ± i·e×`
+  are **eigenvectors with eigenvalue `e^{∓2iθ}`** (`eR_helicity`/`eL_helicity` — helicity ±2 as explicit eigenvalues,
+  diagonalizing the mixing); and the physical space is **exactly 2-dimensional** via the explicit gauge quotient
+  (`tt_decomposition` ≤2 + `polarizations_not_gauge` ≥2 ⟹ `{e₊,e×}` a basis of TT-mod-gauge, the `D(D−3)/2=2` count).
+  ⚠ **Linearized ≠ full**; the propagating/quantized
   graviton (G11/G12), continuum ball modular Hamiltonians (G8), RT/extremal-area emergence (G9), Iyer–Wald geometry
   (G10), `hTkk`, interacting matter, and the numerical `G` are the cited research **frontiers** — this is the honest
   finite skeleton that advances *toward* the mechanism, never a claim of having crossed it.

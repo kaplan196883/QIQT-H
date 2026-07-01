@@ -415,6 +415,112 @@ theorem polCross_helicity (θ : ℝ) :
   fin_cases i <;> fin_cases j <;>
     simp [rot, polPlus, polCross, Matrix.mul_apply, Fin.sum_univ_four, Matrix.transpose_apply] <;> ring
 
+/-! ## G11a — helicity eigenstates: the circular polarizations `e_± = e₊ ± i·e×` (helicity ±2 as EXPLICIT eigenvalues)
+
+  The real doublet `(e₊, e×)` mixes by `R(2θ)` under a rotation (`polPlus_helicity`/`polCross_helicity`). Diagonalizing
+  that action gives the **circular-polarization basis** `e_± = e₊ ± i·e×`, the honest-to-goodness helicity eigenstates:
+  each is an *eigenvector* of the rotation conjugation with eigenvalue `e^{∓2iθ}`. The `±2` in the exponent **is** the
+  graviton's helicity ±2 — spin-2 stated as literal eigenvalues, not just a mixing angle. (`e_R` restricted to the `x,y`
+  block is `[[1,i],[i,−1]] = v vᵀ` with `v = (1,i)`; the rotation sends `v ↦ e^{−iθ}v`, so `e_R ↦ e^{−2iθ}e_R`.)
+  ⚠ KINEMATIC; not the quantized graviton. -/
+
+/-- Complex `+` polarization (the ℂ-copy of `e₊`). -/
+noncomputable def polPlusC : Matrix (Fin 4) (Fin 4) ℂ := !![0, 0, 0, 0; 0, 1, 0, 0; 0, 0, -1, 0; 0, 0, 0, 0]
+/-- Complex `×` polarization (the ℂ-copy of `e×`). -/
+noncomputable def polCrossC : Matrix (Fin 4) (Fin 4) ℂ := !![0, 0, 0, 0; 0, 0, 1, 0; 0, 1, 0, 0; 0, 0, 0, 0]
+/-- The **complexified rotation** by `θ` about the propagation axis. -/
+noncomputable def rotC (θ : ℝ) : Matrix (Fin 4) (Fin 4) ℂ :=
+  !![1, 0, 0, 0; 0, Complex.cos (θ:ℂ), -Complex.sin (θ:ℂ), 0;
+     0, Complex.sin (θ:ℂ), Complex.cos (θ:ℂ), 0; 0, 0, 0, 1]
+/-- **Right-circular (helicity −2) polarization** `e_R = e₊ + i·e×`. -/
+noncomputable def eR : Matrix (Fin 4) (Fin 4) ℂ := polPlusC + Complex.I • polCrossC
+/-- **Left-circular (helicity +2) polarization** `e_L = e₊ − i·e×`. -/
+noncomputable def eL : Matrix (Fin 4) (Fin 4) ℂ := polPlusC - Complex.I • polCrossC
+
+/-- The complexified `+` polarization mixes like its real counterpart (I-free helicity lemma). -/
+private theorem rotC_polPlusC (θ : ℝ) :
+    rotC θ * polPlusC * (rotC θ).transpose
+      = (Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2) • polPlusC
+        + (2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ)) • polCrossC := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [rotC, polPlusC, polCrossC, Matrix.mul_apply, Fin.sum_univ_four, Matrix.transpose_apply] <;> ring
+
+/-- The complexified `×` polarization mixes like its real counterpart (I-free helicity lemma). -/
+private theorem rotC_polCrossC (θ : ℝ) :
+    rotC θ * polCrossC * (rotC θ).transpose
+      = (-(2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ))) • polPlusC
+        + (Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2) • polCrossC := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [rotC, polPlusC, polCrossC, Matrix.mul_apply, Fin.sum_univ_four, Matrix.transpose_apply] <;> ring
+
+/-- The eigenvalue bridge `e^{−2iθ} = (cos²θ − sin²θ) − (2 sinθ cosθ)i`. -/
+private theorem exp_neg_two_mul_I (θ : ℝ) :
+    Complex.exp (-(2 * (θ:ℂ)) * Complex.I)
+      = (Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2)
+        - (2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ)) * Complex.I := by
+  have htwo : 2 * (θ : ℂ) = (θ : ℂ) + (θ : ℂ) := by ring
+  rw [Complex.exp_mul_I, Complex.cos_neg, Complex.sin_neg, htwo, Complex.cos_add, Complex.sin_add]
+  ring
+
+/-- The eigenvalue bridge `e^{+2iθ} = (cos²θ − sin²θ) + (2 sinθ cosθ)i`. -/
+private theorem exp_pos_two_mul_I (θ : ℝ) :
+    Complex.exp ((2 * (θ:ℂ)) * Complex.I)
+      = (Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2)
+        + (2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ)) * Complex.I := by
+  have htwo : 2 * (θ : ℂ) = (θ : ℂ) + (θ : ℂ) := by ring
+  rw [Complex.exp_mul_I, htwo, Complex.cos_add, Complex.sin_add]
+  ring
+
+/-- **G11a — the right-circular polarization has helicity −2.** `e_R = e₊ + i·e×` is an eigenvector of the rotation
+    conjugation with eigenvalue `e^{−2iθ}`: `R(θ) e_R R(θ)ᵀ = e^{−2iθ} e_R`. The `−2` is the helicity — the graviton's
+    spin-2, stated as an explicit eigenvalue. ⚠ KINEMATIC; not the quantized graviton. -/
+theorem eR_helicity (θ : ℝ) :
+    rotC θ * eR * (rotC θ).transpose = Complex.exp (-(2 * (θ:ℂ)) * Complex.I) • eR := by
+  calc
+    rotC θ * eR * (rotC θ).transpose
+        = rotC θ * (polPlusC + Complex.I • polCrossC) * (rotC θ).transpose := by rw [eR]
+    _ = rotC θ * polPlusC * (rotC θ).transpose
+          + Complex.I • (rotC θ * polCrossC * (rotC θ).transpose) := by
+            rw [Matrix.mul_add, Matrix.add_mul, Matrix.mul_smul, Matrix.smul_mul]
+    _ = ((Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2) • polPlusC
+          + (2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ)) • polCrossC)
+          + Complex.I • (((-(2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ))) • polPlusC)
+            + (Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2) • polCrossC) := by
+            rw [rotC_polPlusC, rotC_polCrossC]
+    _ = Complex.exp (-(2 * (θ:ℂ)) * Complex.I) • eR := by
+            rw [exp_neg_two_mul_I, eR]
+            ext i j
+            fin_cases i <;> fin_cases j <;>
+              simp [polPlusC, polCrossC, smul_add, smul_smul] <;>
+              ring_nf <;> simp [pow_two, Complex.I_mul_I] <;> ring_nf
+
+/-- **G11a — the left-circular polarization has helicity +2.** `e_L = e₊ − i·e×` is an eigenvector of the rotation
+    conjugation with eigenvalue `e^{+2iθ}`: `R(θ) e_L R(θ)ᵀ = e^{+2iθ} e_L`. Together with `eR_helicity`, the two
+    circular polarizations are the **helicity ±2 eigenstates** of the graviton — spin-2 in explicit eigenvalue form.
+    ⚠ KINEMATIC; not the quantized graviton. -/
+theorem eL_helicity (θ : ℝ) :
+    rotC θ * eL * (rotC θ).transpose = Complex.exp ((2 * (θ:ℂ)) * Complex.I) • eL := by
+  have heL' : eL = polPlusC + (-Complex.I) • polCrossC := by rw [eL]; simp [sub_eq_add_neg]
+  calc
+    rotC θ * eL * (rotC θ).transpose
+        = rotC θ * (polPlusC + (-Complex.I) • polCrossC) * (rotC θ).transpose := by rw [heL']
+    _ = rotC θ * polPlusC * (rotC θ).transpose
+          + (-Complex.I) • (rotC θ * polCrossC * (rotC θ).transpose) := by
+            rw [Matrix.mul_add, Matrix.add_mul, Matrix.mul_smul, Matrix.smul_mul]
+    _ = ((Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2) • polPlusC
+          + (2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ)) • polCrossC)
+          + (-Complex.I) • (((-(2 * Complex.sin (θ:ℂ) * Complex.cos (θ:ℂ))) • polPlusC)
+            + (Complex.cos (θ:ℂ) ^ 2 - Complex.sin (θ:ℂ) ^ 2) • polCrossC) := by
+            rw [rotC_polPlusC, rotC_polCrossC]
+    _ = Complex.exp ((2 * (θ:ℂ)) * Complex.I) • eL := by
+            rw [exp_pos_two_mul_I, heL']
+            ext i j
+            fin_cases i <;> fin_cases j <;>
+              simp [polPlusC, polCrossC, smul_add, smul_smul] <;>
+              ring_nf <;> simp [pow_two, Complex.I_mul_I] <;> ring_nf
+
 /-! ## G11a — the gauge quotient: the physical graviton polarization space is EXACTLY 2-dimensional -/
 
 /-- The down-index null wavevector `k_μ = (1,0,0,1)`. -/

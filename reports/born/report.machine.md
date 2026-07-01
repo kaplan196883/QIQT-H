@@ -1,7 +1,7 @@
 # Track state — Born rule
 *Target 1 — QIQT-H compatible with Born (spine + no-go audits)*
 
-_Generated 2026-06-29 01:56 UTC · git `69351b4` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
+_Generated 2026-07-01 11:49 UTC · git `6196e02` · 13 theorems · tool lean_track_ · provenance: [L]=Lean fact [P]=Lean-checked prober [D]=derived [C]=curation_
 
 ## Axiom status  [L]
 - Project-specific (non-standard) axioms: **0**
