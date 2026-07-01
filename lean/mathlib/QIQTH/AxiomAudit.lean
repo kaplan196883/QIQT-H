@@ -7730,6 +7730,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ScreenCode.mincut_area_law
 #print axioms QIQTH.ScreenCode.screenArea_union_of_disjoint
 #print axioms QIQTH.ScreenCode.screenArea_le_of_subset
+-- S1e: codeCap_unbounded_at_fixed_area -- the local packing constraint is LOAD-BEARING: without it, code capacity
+-- is unbounded at fixed area (∃ screen with area ≤ 1 but codeCap ≥ M for any M), so the area law genuinely requires
+-- the carried packing postulate (not free / not vacuous). Companion to area_dim_independent. Toy interface, NOT gravity.
+#print axioms QIQTH.ScreenCode.codeCap_unbounded_at_fixed_area
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

@@ -123,4 +123,16 @@ theorem screenArea_le_of_subset (S T : ScreenCut ι) (hwt : S.areaWt = T.areaWt)
   rw [hwt]
   exact Finset.sum_le_sum_of_subset_of_nonneg hsub (fun e _ _ => T.areaWt_nonneg e)
 
+/-- **S1e — the local packing constraint is load-bearing (the area law is NOT free).** Without the packing
+    constraint, a screen's code capacity is **unbounded at fixed area**: for any target `M`, there is a screen with
+    area `≤ 1` yet `codeCap ≥ M`. So `area_law_of_packing` genuinely *requires* the local packing postulate — the
+    area law is not automatic (a naive capacity is volume-like / unbounded), and the carried `1/4G` packing bound is
+    doing the work. The honest companion to `area_dim_independent` (the analogue of the project's non-vacuity
+    countermodels: the hypothesis is load-bearing, not free). -/
+theorem codeCap_unbounded_at_fixed_area (M : ℝ) :
+    ∃ S : ScreenCut Unit, screenArea S ≤ 1 ∧ M ≤ codeCap S := by
+  refine ⟨⟨{()}, fun _ => max M 0, fun _ => 1, fun _ => le_max_right _ _, fun _ => zero_le_one⟩, ?_, ?_⟩
+  · simp [screenArea]
+  · simp only [codeCap, Finset.sum_singleton]; exact le_max_left _ _
+
 end QIQTH.ScreenCode

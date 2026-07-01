@@ -131,3 +131,17 @@ weeks, and by construction does **not** close the mechanism gap — it delivers 
   Still a toy kinematic interface, NOT gravity. **NEXT → S1e** (audit polish — the wiring is already done: `QIQTH.lean`
   import + `AxiomAudit` pins present for S1a–S1d; S1e is any residual inventory/plan tidy, then the plan's tractable
   toy surface is exhausted and the frontiers stay cited).
+- **2026-07-01 — S1e ✅ DONE + TOY STAGE 1 COMPLETE.** Added the load-bearing guard
+  **`codeCap_unbounded_at_fixed_area`** ([AF] std-3, pinned): without the packing constraint, a screen's code
+  capacity is *unbounded at fixed area* (∃ screen, `screenArea ≤ 1 ∧ codeCap ≥ M` for any `M`) — so
+  `area_law_of_packing` genuinely *requires* the local packing postulate; the area law is **not free** (a naive
+  capacity is volume-like), and the carried `1/4G` is doing the work. The honest companion to
+  `area_dim_independent`. Wiring (import + `AxiomAudit` pins + inventory entry) complete for S1a–S1e; budget 0.
+  **THE TOY STAGE 1 IS COMPLETE** — 8 theorems: structure + independence guard (S1a), local-packing⟹area-law
+  linchpin (S1b), horizon saturation (S1c), min-cut/RT bound + area algebra (S1d), packing-is-load-bearing guard
+  (S1e). It turns the capacity **postulate into a theorem GIVEN a local packing constraint**, with area an
+  **independent** charge — the honest "interface into which a real microscopic model could plug." **It does NOT
+  close the mechanism gap.** The only remaining work is the genuine QG frontiers (cited, NOT this plan): dynamical
+  Einstein + propagating gravitons (Stage 3), background independence (dynamical connectivity), non-circular `G`,
+  and deriving the area charge from a substrate. **Next fires: no tractable in-scope item remains — CHECKPOINTED
+  COMPLETE.**

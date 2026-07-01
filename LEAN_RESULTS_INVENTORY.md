@@ -204,7 +204,9 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   local packing constraint**: `area_law_of_packing` (local `logDim e ≤ areaWt e/4G` on each screen link ⟹ regional
   `codeCap ≤ screenArea/(4G)` — the area law reduced to a *local* packing law), with `area_dim_independent` (large
   area, **zero** code dimension — area is an INDEPENDENT charge, NOT the `area:=log dim` tautology) and
-  `area_law_saturation` (equality in the horizon-like tight-packing sector). ⚠ The `1/4G` is **carried** locally
+  `area_law_saturation` (equality in the horizon-like tight-packing sector), `mincut_area_law` (the RT-flavored
+  min-cut bound over a supplied cut family), and `codeCap_unbounded_at_fixed_area` (the packing constraint is
+  **load-bearing** — without it, capacity is unbounded at fixed area, so the area law is *not* free). ⚠ The `1/4G` is **carried** locally
   (not derived); the screen is **fixed** (NOT background-independent); and **gravitons / dynamical Einstein (Stage 3)
   + non-circular `G`** are the genuine QG frontiers this does **not** touch (cited). It is the honest "interface into
   which a real microscopic model could plug," never a gravity claim.
