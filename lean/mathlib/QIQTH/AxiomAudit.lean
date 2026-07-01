@@ -7662,6 +7662,14 @@ namespace QIQTH.AxiomAudit
 -- from S_gen. The sharpest EntropyNotCardinality for the max-entropy capacity — this is what FORCES the bridge
 -- postulate (it cannot be a derivation). Axiom-free (std 3).
 #print axioms QIQTH.MaxEntropyCapacity.svn_underdetermines_smax
+-- ── ModularEnergyBound (Route 1 reframed; ROUTE1_MODULAR_PLAN.md) ───────────────────────────────────────────────
+-- B1+B2: the free-field MODULAR-ENERGY bound. modular_relEnt_identity: D(ρ‖σ) = (⟨K_σ⟩_ρ−⟨K_σ⟩_σ) − (S(ρ)−S(σ)),
+-- K_σ = −log σ (the Umegaki identity, from the Donald identities). modular_casini_bound (the real Route-1 content):
+-- S(ρ)−S(σ) ≤ ⟨K_σ⟩_ρ − ⟨K_σ⟩_σ, from Klein positivity — with one-particle BW K_σ=2π B_boost this is ΔS ≤ 2π Δ⟨B⟩
+-- (the Unruh modular bound). FORMALIZED MODULAR QFT, NOT a derivation of the holographic A/4G bound (A/4G is a
+-- gravitational input; the continuum Type II trace is a cited frontier). Axiom-free (std 3).
+#print axioms QIQTH.ModularEnergyBound.modular_relEnt_identity
+#print axioms QIQTH.ModularEnergyBound.modular_casini_bound
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

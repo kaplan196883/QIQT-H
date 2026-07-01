@@ -108,3 +108,13 @@ modular QFT — and honestly checkpoints `A/4G` as the gravitational input it is
   (formalized modular QFT, NOT a holographic-`A/4G` derivation); the continuum Type II trace stays a multi-year
   frontier." **NEXT → finish Track A (website `open-problems`/`formalization` + ledger), then Track B (B1 Umegaki
   identity → B2 Casini bound → B3 BW rewrite → B4 first law → B5 wire-in).**
+- **2026-07-01 — B1+B2 ✅ DONE** (`QIQTH/ModularEnergyBound.lean`, axiom-free std-3, wired into `QIQTH.lean` +
+  `AxiomAudit.lean`, budget 0). Turned out the repo already had every ingredient (the Donald identities +
+  Klein), so this is a clean assembly: `modHam K_σ = −log σ` + `modEnergy ⟨K_σ⟩_ρ = crossEntropy`; **B1
+  `modular_relEnt_identity`** `D(ρ‖σ) = (⟨K_σ⟩_ρ − ⟨K_σ⟩_σ) − (S(ρ)−S(σ))` (Umegaki, from
+  `relEntropy_eq_crossEntropy_sub_entropy` + `crossEntropy_self`); **B2 `modular_casini_bound`** (the real
+  Route-1 content) `S(ρ)−S(σ) ≤ ⟨K_σ⟩_ρ − ⟨K_σ⟩_σ` from `relEntropy_nonneg` (Klein) — with one-particle BW
+  `K_σ=2π B_boost` this is `ΔS ≤ 2π Δ⟨B_boost⟩`, the Unruh modular bound. Formalized modular QFT; the `A/4G`
+  identification is NOT claimed (gravitational input). **NEXT → B3 `finiteCorner_wedge_Casini_BW` (substitute
+  `K_σ = 2π K_boost + c·1`, carry the modular-invariant-corner caveat as an explicit hypothesis) → B4 first law →
+  finish Track A (website/ledger) → B5.**
