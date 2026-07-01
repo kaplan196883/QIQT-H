@@ -12,7 +12,7 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 
 ## 0. Overall status (meta-audit, verified)
 
-- **~2213 `#print axioms` directives** in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
+- **~2263 `#print axioms` directives** in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
   `sorry`/`sorryAx`** in code. Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` body in
   the whole tree is a harmless indiscrete-preorder witness (`LorentzWitness.lean:180`).
 - **What "axiom-free" means here:** the *conditional/structural mathematics* rests on no hidden axiom. It does
@@ -23,11 +23,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (Donald/DPI/Araki/EntropyBridge ledger) and the top-level clusters (RelEntPositivity, Goldstein–Struyve).
 - **What the budget check does NOT do:** detect logical inconsistency or a false premise (only counts axioms +
   catches `sorry`). Irrelevant at axiom count 0; honestly noted in-script.
-- **Coverage caveat (full-sweep audit, 296 files):** soundness is comprehensive (full-tree grep: zero axioms,
-  zero sorry). The `#print axioms` *audit pins* most theorems but **~55 modules' terminal theorems are not
-  individually listed** (e.g. `SakharovRatio`, `strong_subadditivity`, the GR/crossed-product capstones,
-  `ValueSelection`). Low soundness risk (`#print axioms` is transitive — any lemma feeding an audited downstream
-  theorem is certified), but a real completeness gap for terminal results. **Stale docstrings** that *under*-claim
+- **Coverage caveat (full-sweep audit, 299 files):** soundness is comprehensive (full-tree grep: zero axioms,
+  zero sorry). The `#print axioms` *audit pins* most theorems, and the **headline capstones are now individually
+  pinned** — `SakharovRatio.sakharov_ratio`, `strong_subadditivity`, the GR/crossed-product capstones,
+  `ValueSelection.*`, and this session's `ModularEnergyBound` (B1–B7), `OperationalCapacity`, `MaxEntropyCapacity`.
+  A residual of **non-headline terminal theorems is still not individually listed** (low soundness risk —
+  `#print axioms` is transitive, so any lemma feeding an audited downstream theorem is certified; a minor
+  completeness gap only). **Stale docstrings** that *under*-claim
   (say "axiomatized" for now-proved results): `ArakiInterface`, `RelEntPositivity`, `GoldsteinStruyve*` headers,
   and `AxiomAudit.lean:~4882–4897, ~216–220` (clock-energy self-adjointness, GS steps). Hygiene, not soundness.
 
@@ -179,6 +181,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 - Araki/Umegaki relative entropy **[AF]** finite-dim (Type I shadow); `ModularRelativeEntropy.cgpEntropy` is the
   **genuine continuum one-particle** CGP entropy with `cgpEntropy_nonneg` **[AF·cond: ξ∈𝒦, spectral bounds]**
   (all-vector positivity is FALSE — honestly noted).
+- **The free-field MODULAR-ENERGY bound `ModularEnergyBound.lean` (Route 1 reframed, B1–B7, all [AF] std-3)** — the
+  honest, derivable content of the JLMS route (`ROUTE1_MODULAR_PLAN.md`). K_σ = −log σ; ⟨K_σ⟩_ρ = crossEntropy(ρ,σ):
+  - **B1 `modular_relEnt_identity`** — Umegaki: `D(ρ‖σ) = (⟨K_σ⟩_ρ−⟨K_σ⟩_σ) − (S(ρ)−S(σ))`.
+  - **B2 `modular_casini_bound`** — `S(ρ)−S(σ) ≤ ⟨K_σ⟩_ρ−⟨K_σ⟩_σ` (from Klein positivity).
+  - **B3 `finiteCorner_wedge_Casini_BW`** — with `K_σ = 2π K_boost + c·1` (BW/KMS, carried as an **explicit
+    hypothesis** — the modular-invariant-corner caveat): `ΔS ≤ 2π Δ⟨K_boost⟩` (the Unruh modular bound).
+  - **B4 `finiteCorner_firstLaw`** — the first law `δS = δ⟨K_σ⟩` as relative-entropy stationarity (`D'=0` at ρ₀).
+  - **B4′ `finiteCorner_firstLaw_boostEnergy`** — the explicit first law `δS = 2π δ⟨K_boost⟩` (scalar-derivative hyps).
+  - **B6 `modular_casini_saturation`** / **B6′ `finiteCorner_wedge_saturation_BW`** — **rigidity**: the bound is
+    saturated iff `ρ = σ` (via faithfulness `relEntropy_eq_zero`).
+  - **B7a `finiteCorner_wedge_BW_deficit_eq_relEntropy`** — exact deficit `2π Δ⟨K_boost⟩ − ΔS = D(ρ‖σ)`;
+    **B7b `…_Casini_BW_strict`** (strict off the reference); **capstone `freeField_modularEnergyBound_finiteCorner_BW`**
+    (bundle: bound ∧ exact-deficit ∧ rigidity).
+  - ⚠ **Scope:** FORMALIZED MODULAR QFT, **NOT** a derivation of `A/4G` via the JLMS *modular route* (no `G`, no area
+    operator in a free scalar; `A/4G` stays a gravitational input here — the continuum Type II trace where it lives
+    is the [frontier] above). This is **distinct from the `1/4`**, which *is* derived (§3, Sakharov `sakharov_ratio`);
+    neither derives the value of `G`. Upgrades `Phase5Master`'s modular pieces from carried hypothesis to theorems.
 
 ## 5. Lorentz covariance / records / Open Problem 3b
 
@@ -320,7 +339,7 @@ load-bearing role is in the gravity/area thread, *not* the selection mechanism (
 **Net (the calibrated read, now full-coverage):** the *distinctive new physics* claim ("finite information as
 fundamental") is the weakest part and should be scoped down to finite *entropy*. But the *genuine, substantial,
 machine-checked* content is larger than a "repackaging" verdict implies: the **full formal verification at
-296-file / ~3300-theorem scale**, the **Lieb-concavity/DPI/SSA tower** (Mathlib lacks it), the **unconditional
+299-file / ~3300-theorem scale**, the **Lieb-concavity/DPI/SSA tower** (Mathlib lacks it), the **unconditional
 one-particle BW + the OP3b boost-invariant measure**, and the **Born reduction** are all real and unusual. The
 honest framing is: *a rigorously machine-verified single-world interpretation + a substantial formalized
 operator-algebra/entropy library + a re-derivation of induced-gravity results* — modest on novel physics, strong
