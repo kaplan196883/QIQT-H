@@ -205,3 +205,10 @@ modular Hamiltonians, emergent metric, Iyer–Wald), as the inventory §8 alread
   graph/cut data; the pulled-back cut is the required correspondence) — NOT continuum background independence.
   **NEXT → G5 (`LambdaRG_invariant` + `InducedG_pos`: discrete RG dimensional transmutation; `Λ_s` a relation, not
   the value of `G`).**
+- **2026-07-01 — G5 ✅ DONE** ([AF] std-3, pinned, budget 0). **Discrete RG dimensional transmutation**: the one-loop
+  flow `uFlow`/`muFlow` and **`LambdaRG_invariant`** — along `(u_n = u0 + 2bε·n, μ_n = μ0 e^{εn})` the combination
+  `Λ_RG = μ·e^{−u/2b}` is **constant** (via `Real.exp_add` + a `field_simp`/`ring` exponent identity, `b ≠ 0`). So a
+  *scale* `Λ_s = μ0·e^{−1/(2b g0²)}` (`LambdaS`) is generated from the **dimensionless** data `{b, g0}`, not from `G`;
+  `LambdaS_pos`, and `InducedG_pos` (`G = 1/(N Λ_s²) > 0`). ⚠ A **RELATION**, not the numerical value of `G` — it
+  still needs a reference unit. **NEXT → G6 (`secondDiff_of_area_firstLaw`: the conditional null-focusing bet;
+  ⚠⚠ `hAK : δA = κ·Kboost` is a CARRIED hypothesis carrying the Einstein content, NEVER derived).**

@@ -204,4 +204,38 @@ theorem property_preserved_along_moves {Config : Type*} {Move : Config → Confi
   | refl => exact id
   | tail _ hbc ih => exact fun hP => hmove _ _ hbc (ih hP)
 
+/-! ## G5 — discrete RG dimensional transmutation (`Λ_s` non-circular) -/
+
+/-- One-loop inverse-coupling flow `u_n = u0 + 2bε·n` (`u = 1/g²`). -/
+noncomputable def uFlow (b ε u0 : ℝ) (n : ℕ) : ℝ := u0 + (2 * b * ε) * n
+/-- The sliding scale `μ_n = μ0·e^{εn}`. -/
+noncomputable def muFlow (ε μ0 : ℝ) (n : ℕ) : ℝ := μ0 * Real.exp (ε * n)
+/-- The RG-invariant scale `Λ_RG = μ·e^{−u/2b}`. -/
+noncomputable def LambdaRG (b u μ : ℝ) : ℝ := μ * Real.exp (-u / (2 * b))
+
+/-- **G5 — dimensional transmutation: `Λ_RG` is RG-invariant.** Along the one-loop flow `(u_n, μ_n)` the combination
+    `Λ_RG` is **constant**: `Λ_RG(b, u_n, μ_n) = Λ_RG(b, u0, μ0)`. So a *scale* is generated from the *dimensionless*
+    data `{b, g0}` (via `u0 = 1/g0²`), not from `G`. ⚠ It still needs a reference unit; it does NOT compute the
+    numerical value of `G` — a RELATION, not a value. -/
+theorem LambdaRG_invariant (b ε u0 μ0 : ℝ) (n : ℕ) (hb : b ≠ 0) :
+    LambdaRG b (uFlow b ε u0 n) (muFlow ε μ0 n) = LambdaRG b u0 μ0 := by
+  have key : ε * (n : ℝ) + -(u0 + 2 * b * ε * (n : ℝ)) / (2 * b) = -u0 / (2 * b) := by
+    field_simp; ring
+  unfold LambdaRG uFlow muFlow
+  rw [mul_assoc, ← Real.exp_add, key]
+
+/-- The transmuted granularity scale `Λ_s = μ0·e^{−1/(2b g0²)}` — generated from dimensionless `{b, g0}`. -/
+noncomputable def LambdaS (b g0 μ0 : ℝ) : ℝ := μ0 * Real.exp (-(1 / (2 * b * g0 ^ 2)))
+/-- The induced Newton constant `G = 1/(N Λ²)` (cf. `InducedNewtonConstant`). -/
+noncomputable def InducedG (N Λ : ℝ) : ℝ := 1 / (N * Λ ^ 2)
+
+/-- `Λ_s > 0` for `μ0 > 0` (an exponential is positive). -/
+theorem LambdaS_pos (b g0 μ0 : ℝ) (hμ : 0 < μ0) : 0 < LambdaS b g0 μ0 := by
+  unfold LambdaS; positivity
+
+/-- **G5 — the induced `G` from the transmuted scale is positive** (`G = 1/(N Λ_s²) > 0`). A RELATION `G = 1/(N Λ²)`,
+    NOT the numerical value of `G`. -/
+theorem InducedG_pos (N Λ : ℝ) (hN : 0 < N) (hΛ : 0 < Λ) : 0 < InducedG N Λ := by
+  unfold InducedG; positivity
+
 end QIQTH.GravDyn

@@ -7759,6 +7759,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GravDyn.refinement_preserves_area_and_capacity
 #print axioms QIQTH.GravDyn.regional_bound_invariant_under_refinement
 #print axioms QIQTH.GravDyn.property_preserved_along_moves
+-- G5: discrete RG dimensional transmutation. LambdaRG_invariant: along the one-loop flow (u_n=u0+2bεn, μ_n=μ0 e^{εn})
+-- the combination Λ_RG = μ e^{−u/2b} is CONSTANT -- a scale generated from dimensionless {b,g0}, not from G.
+-- LambdaS_pos, InducedG_pos (G = 1/(N Λ²) > 0). ⚠ A RELATION, not the numerical value of G (needs a reference unit).
+#print axioms QIQTH.GravDyn.LambdaRG_invariant
+#print axioms QIQTH.GravDyn.LambdaS_pos
+#print axioms QIQTH.GravDyn.InducedG_pos
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
