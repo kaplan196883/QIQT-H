@@ -7663,6 +7663,11 @@ namespace QIQTH.AxiomAudit
 -- postulate (it cannot be a derivation). Axiom-free (std 3).
 #print axioms QIQTH.MaxEntropyCapacity.svn_underdetermines_smax
 -- ── ModularEnergyBound (Route 1 reframed; ROUTE1_MODULAR_PLAN.md) ───────────────────────────────────────────────
+-- ⚠ REGISTER NOTE: "NOT a derivation of A/4G" here is about the JLMS free-field MODULAR route ONLY. It does NOT
+-- mean "the 1/4 is not derived" — the 1/4 RATIO is a machine-checked theorem via the SEPARATE Sakharov bridge,
+-- SakharovRatio.sakharov_ratio (pinned above, ~6266): S_ent·G_ind/A = (4π)/(16π) = 1/4, matter/regulator-independent
+-- (the P4-MICRO story: finiteness postulated, area floor+form derived, 1/4 derived). Different mechanism. What
+-- NEITHER derives is the VALUE of G (carried). Keep the modular route (this block) and the Sakharov 1/4 distinct.
 -- B1+B2: the free-field MODULAR-ENERGY bound. modular_relEnt_identity: D(ρ‖σ) = (⟨K_σ⟩_ρ−⟨K_σ⟩_σ) − (S(ρ)−S(σ)),
 -- K_σ = −log σ (the Umegaki identity, from the Donald identities). modular_casini_bound (the real Route-1 content):
 -- S(ρ)−S(σ) ≤ ⟨K_σ⟩_ρ − ⟨K_σ⟩_σ, from Klein positivity — with one-particle BW K_σ=2π B_boost this is ΔS ≤ 2π Δ⟨B⟩

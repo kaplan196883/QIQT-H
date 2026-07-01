@@ -242,9 +242,16 @@ $K_{\partial R} = A/4\ell_P^2 + K_{\rm bulk}$. For a fixed-background **free sca
 and we do not claim it: the free theory has **no Newton constant $G$** and **no geometric area operator**; the
 cutoff wedge-entropy coefficient is matter/scheme-dependent, not universally $1/4G$; and the
 $\delta A/4G = 2\pi\!\int\!\delta T_{kk}$ step **uses the Einstein equations**, not pure Bisognano–Wichmann
-kinematics. So BW supplies the Unruh $2\pi$ but **not** the $1/4G$ — the $A/4G$ identification stays a
-*gravitational input*, and the continuum Type III$_1\!\to$II crossed-product dual-weight trace where it would
-live is a multi-year cited frontier. **What *is* now machine-checked** is the honest, derivable content — the
+kinematics. So BW supplies the Unruh $2\pi$ but **not** the $1/4G$ *via this route* — along the JLMS modular
+identity the $A/4G$ identification stays a *gravitational input*, and the continuum Type III$_1\!\to$II
+crossed-product dual-weight trace where it would live is a multi-year cited frontier. **This is a statement about
+the JLMS *modular route*, not about the $1/4$'s derivability.** The Bekenstein–Hawking $1/4$ *is* machine-checked
+— but through a *different* mechanism, the **Sakharov / induced-gravity bridge**
+(`SakharovRatio.sakharov_ratio`: $S_{\rm ent}\,G_{\rm ind}/A = (4\pi)/(16\pi) = 1/4$, with the matter coefficient,
+regulator, area and $\pi$ **all cancelling** — matter- and regulator-independent, circularity-clean; this is the
+**P4-MICRO** story, where finiteness is postulated, the area *floor* and *form* are theorems, and the $1/4$ ratio
+is derived). What *neither* route derives is the **value of $G$** (carried). **What *is* now machine-checked**
+along the modular route is the honest, derivable content — the
 free-field **modular-energy bound**: the entropy variation is bounded by (and, at the reference, equals) the
 modular-energy variation, $\Delta S \le \Delta\langle K_\sigma\rangle$ and $\delta S = \delta\langle K_\sigma\rangle$,
 which with the one-particle BW identification $K_\sigma = 2\pi B_{\rm boost}$ reads $\Delta S \le 2\pi\,\Delta\langle

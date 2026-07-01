@@ -21,6 +21,12 @@
   pieces of the carried `Phase5Master` hypothesis from an assumption to theorems (finite-dim Type-I
   corner; the Fock lift is a labelled follow-on). See `ROUTE1_MODULAR_PLAN.md`.
 
+  ⚠ This "no `A/4G` here" is about the **JLMS free-field modular route ONLY** — do NOT read it as "the `1/4`
+  is not derived." The Bekenstein–Hawking `1/4` ratio IS a machine-checked theorem, via the *separate*
+  Sakharov / induced-gravity bridge `SakharovRatio.sakharov_ratio` (`S_ent·G_ind/A = (4π)/(16π) = 1/4`,
+  matter/regulator-independent; the P4-MICRO story). Different mechanism. What *neither* derives is the
+  *value* of `G`.
+
   This file (B1+B2): the Umegaki modular-energy identity and the Casini modular-energy bound, assembled
   from the repo's Donald identities (`relEntropy_eq_crossEntropy_sub_entropy`, `crossEntropy_self`) and
   Klein positivity (`relEntropy_nonneg`).

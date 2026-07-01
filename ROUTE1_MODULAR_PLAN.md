@@ -10,9 +10,17 @@ GPT-5.5-pro (expert): for a fixed-background *free scalar* on a Rindler wedge, `
 genuine `A/4G` is **not a theorem** — the free scalar has **no Newton constant `G`** and **no geometric area
 operator**; wedge entropy is Type III/infinite and, cut off, has a **matter/cutoff-dependent coefficient**, not
 universally `1/4G`; and the `δA/4G = 2π∫δT_kk` step **uses the Einstein equations**, not pure Bisognano–Wichmann
-kinematics. So BW gives the Unruh `2π` but **not** the `1/4G`. The `A/4G` identification remains a *gravitational
-input / normalization*, and the continuum Type III₁→II crossed-product **dual-weight trace** stays a **multi-year
-cited frontier** (Mathlib's vN-algebra support is not close).
+kinematics. So BW gives the Unruh `2π` but **not** the `1/4G` **along this modular route**. The `A/4G`
+identification remains a *gravitational input / normalization* here, and the continuum Type III₁→II crossed-product
+**dual-weight trace** stays a **multi-year cited frontier** (Mathlib's vN-algebra support is not close).
+
+**⚠ DO NOT misread this as "the 1/4 is not derived."** This is a statement about the **JLMS free-field modular
+route only**. The Bekenstein–Hawking `1/4` ratio **IS** derived — as a machine-checked Lean theorem — but through
+the **separate Sakharov / induced-gravity bridge** (`SakharovRatio.sakharov_ratio`: `S_ent·G_ind/A = (4π)/(16π) =
+1/4`, matter- and regulator-independent, circularity-clean; the **P4-MICRO** story: finiteness postulated, area
+floor + form derived, `1/4` ratio derived). That is a *different mechanism* from the free-field modular identity.
+What *neither* derives is the **value of `G`** (carried). Keep "the `1/4` ratio (derived, Sakharov)" · "the modular
+route (this plan; does not touch `A/4G`)" · "the value of `G` (open)" strictly separated.
 
 **What IS genuinely derivable (this plan's real goal):** the **free-field modular-energy bound** — the Casini /
 first-law inequality `ΔS ≤ Δ⟨K_W⟩ = 2π Δ⟨B_boost⟩` from relative-entropy positivity + the (already machine-checked)

@@ -77,7 +77,7 @@ after A1 (code-comment hygiene), A2 (website), and A3 (paper) landed.
 | E4 | "A covariant measure exists, but a covariant **selector cannot** — the honest no-go." | §11.4.3b; `open-problems` | §5 `CovariantGluing.no_covariant_selector` | **[no-go]** | ✓ |
 | E5 | "Operational **no-signaling** holds (bipartite / general); but no-signaling ≠ Lorentz-covariance of the beable." | §7.7, §11.4.3b | §5 `Theorem7.no_signaling`, `NoSignalingGeneral.bipartite_no_signaling` | **[AF]** | ✓ |
 | E6 | "The **Type II dual-weight trace** / continuum Type III₁ classification / vN-algebra (vs one-particle) relative entropy is the cited **frontier**." | `formalization` (290–291); §11.4.3 | §4, §8 | **[frontier]** | ✓ |
-| E7 | "The free-field **modular-energy bound** $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$ + first law are theorems (Umegaki → Casini → BW → first law), upgrading `Phase5Master`'s modular pieces from carried to derived — **formalized modular QFT, NOT** a derivation of $A/4G$ (the $A/4G$ stays a gravitational input; free scalar has no $G$/area operator; the continuum Type II trace where $A/4G$ lives stays a cited frontier)." | `formalization`; `open-problems` | §2/§4 `ModularEnergyBound` (`modular_relEnt_identity`, `modular_casini_bound`, `finiteCorner_wedge_Casini_BW` [BW carried as explicit hyp], `finiteCorner_firstLaw`) | **[AF]** + **[frontier]** | ✓ |
+| E7 | "The free-field **modular-energy bound** $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$ + first law + rigidity are theorems (Umegaki → Casini → BW → first law → saturation), upgrading `Phase5Master`'s modular pieces from carried to derived — **formalized modular QFT, NOT** a derivation of $A/4G$ **via the JLMS modular route** (along that route the $A/4G$ stays a gravitational input; free scalar has no $G$/area operator; the continuum Type II trace where $A/4G$ lives stays a cited frontier). **Distinct from the $1/4$**: the $1/4$ ratio *is* derived, via the Sakharov bridge (row **D1** / `sakharov_ratio`), a different mechanism; this row is the modular route, which does not and is not claimed to derive $A/4G$; neither derives the value of $G$." | `formalization`; `open-problems` | §2/§4 `ModularEnergyBound` (`modular_relEnt_identity`, `modular_casini_bound`, `finiteCorner_wedge_Casini_BW` [BW carried as explicit hyp], `finiteCorner_firstLaw`, `finiteCorner_wedge_saturation_BW`, `freeField_modularEnergyBound_finiteCorner_BW`) | **[AF]** + **[frontier]** | ✓ |
 
 ## F. Corner / free SM fields / emergent spacetime (transport, not construction)
 
@@ -160,6 +160,11 @@ below are tracked, not silent.
   `MaxEntropyCapacity.lean`; the `√V_gen` coefficient + `G` = frontier (`QR_FRONTIER_PLAN.md`).
 - ✗ "Born **derived** from unitarity." (Reduced to P5.)
 - ✗ "The 1/4 is a **novel** result." (A machine-checked re-derivation of standard induced gravity.)
+- ✗ Reading "the **JLMS free-field modular route** cannot derive `A/4G`" (E7 / `ROUTE1_MODULAR_PLAN.md`) as "the
+  **1/4 is not derived**." The 1/4 ratio *is* derived — via the **separate** Sakharov induced-gravity bridge (D1,
+  `sakharov_ratio`); the modular route is a distinct axiom-free result that does not and is not claimed to derive
+  `A/4G`. What *neither* derives is the **value of G**. Keep the two mechanisms — and "the 1/4 ratio" vs "the value
+  of G vs the A/4G modular identification" — explicitly separated on every surface.
 - ✗ "QIQT-H **escapes** CPSUV / is established Lorentz-natural." (~10–20%; the "escapes" verdict was retracted.)
 - ✗ "Continuum Type III₁ / Type II trace / interacting SM / the 3+1 manifold are done." (Cited frontiers, §8.)
 

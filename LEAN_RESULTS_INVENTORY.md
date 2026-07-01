@@ -105,8 +105,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 >   Deriving the capacity bound via the JLMS modular identity `K_{∂R}=A/4ℓ_P²+K_bulk` — for a fixed-background
 >   **free scalar** the `A/4ℓ_P²` term is **NOT derivable** (no `G`, no area operator, cutoff/matter-dependent
 >   coefficient; the `δA/4G=2π∫δT_kk` step *uses the Einstein equations*, not pure BW). BW gives the Unruh `2π`, not
->   the `1/4G`. So `A/4ℓ_P²` stays a **gravitational input**; the continuum Type III₁→II crossed-product dual-weight
->   trace is a **multi-year cited frontier**. What **is** derivable (the honest Route-1 content, `ModularEnergyBound.lean`):
+>   the `1/4G` **along this modular route**. So `A/4ℓ_P²` stays a **gravitational input** here; the continuum Type III₁→II
+>   crossed-product dual-weight trace is a **multi-year cited frontier**. ⚠ **This is about the JLMS modular route ONLY —
+>   NOT "the 1/4 is not derived":** the `1/4` ratio IS a derived theorem via the *separate* Sakharov bridge
+>   (`SakharovRatio.sakharov_ratio`, the P4-MICRO story); this route is a distinct axiom-free result that does not touch
+>   `A/4G`; what *neither* derives is the value of `G` (carried). What **is** derivable (the honest Route-1 content, `ModularEnergyBound.lean`):
 >   the free-field **modular-energy bound** `ΔS ≤ 2π Δ⟨B_boost⟩` (Casini/first law, from relative-entropy positivity
 >   + the machine-checked one-particle BW `K_W=2π B_boost`) — upgrading `Phase5Master`'s modular pieces from carried
 >   hypothesis to theorems. **Formalized modular QFT, NOT a derivation of the holographic `A/4G` bound.**

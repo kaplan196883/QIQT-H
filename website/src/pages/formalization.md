@@ -51,10 +51,14 @@ $$
 ## The free-field modular-energy bound (the honest core of "deriving holography")
 
 A related, self-contained axiom-free development formalizes the **modular-energy bound** — the derivable content
-of the JLMS route to the area law. The $A/4G$ area term itself is **not** free-field-derivable (the free scalar
-has no Newton constant $G$, no geometric area operator, a scheme-dependent cutoff coefficient, and the
-$\delta A/4G = 2\pi\!\int\!\delta T_{kk}$ step needs the Einstein equations) — so the $A/4G$ identification stays a
-*gravitational input*, not a theorem. What **is** machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
+of the JLMS route to the area law. Along *this modular route* the $A/4G$ area term is **not** free-field-derivable
+(the free scalar has no Newton constant $G$, no geometric area operator, a scheme-dependent cutoff coefficient, and
+the $\delta A/4G = 2\pi\!\int\!\delta T_{kk}$ step needs the Einstein equations) — so *here* the $A/4G$
+identification stays a *gravitational input*, not a theorem. (This concerns the JLMS *modular route only*: the
+Bekenstein–Hawking $\mathbf{1/4}$ ratio **is** derived — as a machine-checked theorem — but through the separate
+**Sakharov / induced-gravity bridge**, `SakharovRatio.sakharov_ratio` (the **P4-MICRO** story); what *neither*
+derives is the **value of $G$**.) What **is**
+machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
 entropy variation is controlled by the modular-energy variation, which under one-particle Bisognano–Wichmann
 $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$:
 

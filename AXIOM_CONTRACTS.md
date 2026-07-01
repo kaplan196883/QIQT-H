@@ -107,3 +107,28 @@ uniqueness), and the **finite no-collapse Born representation** joining them to 
 `FINITE_BORN_REPRESENTATION.md` for the claim→theorem map and the GPT-5.5-pro-verified scope.
 `HasTraceDensityForm` (the *continuum* trace-density form) remains a content-free placeholder —
 the continuum punchline is still gated.
+
+---
+
+## Postulate / derivation contract — the gravity / `1/4` / modular thread (register update, 2026-07-01)
+
+**Trigger:** a live correction — the Route-1 (free-field modular) work must not be misread as saying "the `1/4`
+is not derived." This section pins the postulate-vs-derived-vs-carried contract for the gravity thread so the
+register is unambiguous. (The finite core is now **axiom-free, budget 0**; the 33 axioms above are the historical
+continuum-interface record. The items here are *not* axioms — they are the postulate/derivation ledger.)
+
+| Statement | Status | Where (Lean) |
+|---|---|---|
+| Regional capacity **finiteness** `N_R < ∞` | **POSTULATE** (the one irreducible input — P4-MICRO) | `FQBoundMicro` (`HolographicCapacityBound`), `FQBoundCGP` (`Phase5Master`) — two provably-distinct layers, `EntropyNotCardinality` |
+| Area **floor** `S_vN ≤ Q_R` | **DERIVED THEOREM** | `FQBoundMicro.area_floor_vonNeumann` |
+| Area **form** `Q_R ∝ A` (`S ∝ A`) | **DERIVED** (conditional Sakharov bridge) | `SakharovRatio` / `GRFromMicro` |
+| The **`1/4` ratio** `S_ent·G_ind/A = (4π)/(16π) = 1/4` | **DERIVED THEOREM** (re-derivation of standard induced gravity; matter/regulator-independent, circularity-clean) | `SakharovRatio.sakharov_ratio`, `geometric_quarter` (pinned, AxiomAudit ~6266) |
+| The free-field **modular-energy bound** `ΔS ≤ 2π Δ⟨K_boost⟩` (+ first law, rigidity) | **DERIVED THEOREM** (JLMS *modular route*; formalized modular QFT) | `ModularEnergyBound.*` (B1–B7) |
+| `A/4G` **from the JLMS free-field modular identity** | **NOT DERIVABLE** here (no `G`, no area operator, cutoff-dependent coeff; `δA/4G=2π∫δT_kk` needs Einstein eqns) — stays a *gravitational input* along this route | — (`ROUTE1_MODULAR_PLAN.md`) |
+| The **value of `G`** (and `ℓ_P`) | **CARRIED / OPEN** (neither route derives it) | inventory §8 frontier |
+| Continuum Type III₁→II crossed-product **dual-weight trace** (where `A/4G` would live) | **CITED MULTI-YEAR FRONTIER** | §8 |
+
+**The distinction to keep everywhere:** "the JLMS free-field *modular route* cannot derive `A/4G`" (true, narrow)
+is **not** "the `1/4` is not derived" (false — the `1/4` ratio *is* a derived theorem via the *separate* Sakharov
+bridge). Three separate objects, never conflated: **(a)** the `1/4` ratio — *derived* (`sakharov_ratio`); **(b)**
+the modular route — a *distinct* axiom-free result that does not touch `A/4G`; **(c)** the value of `G` — *open*.

@@ -19,7 +19,12 @@ misalignments, one commit.
      gravity/area thread, NOT for the selection mechanism (`measure_needs_only_finiteness`).
   2. **Born is REDUCED to one premise (P5/noncontextual canonical measure), not DERIVED from unitarity.**
   3. **The 1/4 ratio is a machine-checked *re-derivation* of standard Sakharov/induced-gravity** (heat-kernel
-     coefficients cited; G carried) — true & verified, but not unique to finiteness.
+     coefficients cited; G carried) — true & verified, but not unique to finiteness. **⚠ Do NOT let the Route-1
+     (free-field JLMS modular) work be misread as "the 1/4 is not derived":** "the JLMS *modular route* cannot
+     produce `A/4G`" is a *narrow, true* statement about that path; the `1/4` ratio **is** derived, via the
+     *separate* Sakharov bridge (`sakharov_ratio`). Three distinct objects, never conflated on any surface — **(a)**
+     the `1/4` ratio (derived, Sakharov); **(b)** the modular route (`ModularEnergyBound`, axiom-free, does not touch
+     `A/4G`); **(c)** the value of `G` (carried/open). Register: `AXIOM_CONTRACTS.md` §"Postulate/derivation contract".
   4. **Single outcomes = λ + decoherence, NOT capacity** (H2 retired). Do not say capacity forbids multi-record.
   5. **The Einstein equation is conditional & free-field only.** The CPSUV "escape" is NOT established (~10–20%).
   6. **Credit what is genuinely strong:** full formal verification (296 files / ~3300 thms, budget 0); the
@@ -242,3 +247,20 @@ inventory-backed.
   make" (✗ conflating the entropy bound with a record count — the conflation that made the AdS/CFT reasoning
   fail). **The capacity postulate now reads as the verified two-layer truth across inventory · plan · website ·
   paper · ledger — every surface, same qualifiers, with `EntropyNotCardinality` cited as the guardrail.**
+- **2026-07-01 — maintenance (A2/A3/A4 + register): the Route-1 / Sakharov `1/4` distinction, everywhere.**
+  Prompted by a live correction — the Route-1 (free-field JLMS modular) work I wired in this session ("BW supplies the
+  Unruh `2π` but not the `1/4G`") could be **misread** as denying the derived `1/4`, contradicting the established
+  `SakharovRatio.sakharov_ratio` (the `1/4` ratio IS a machine-checked theorem, via the Sakharov induced-gravity
+  bridge — the P4-MICRO story). **Root cause:** wording I introduced this session stated the narrow "this modular
+  route can't give `A/4G`" without the cross-reference to the separate Sakharov derivation. **Fix applied to every
+  surface that carried the Route-1 phrasing** — website `open-problems` + `formalization`, `CLAIMS_LEDGER.md` (row E7
+  + a new "DO NOT" boundary guardrail + D1 cross-ref), `ROUTE1_MODULAR_PLAN.md` header, `LEAN_RESULTS_INVENTORY.md` §2
+  bullet, the `ModularEnergyBound.lean` file header, and the **axiom register** in two places: `AxiomAudit.lean`
+  (register note atop the ModularEnergyBound pins) + a new `AXIOM_CONTRACTS.md` §"Postulate/derivation contract"
+  table (finiteness POSTULATE · area floor/form + `1/4` ratio DERIVED · `A/4G`-via-JLMS NOT-derivable-here · value
+  of `G` CARRIED · continuum trace FRONTIER). Each now keeps three objects strictly separate: **(a)** the `1/4` ratio
+  (derived, Sakharov) · **(b)** the modular route (axiom-free, does not touch `A/4G`) · **(c)** the value of `G`
+  (open). The paper §1.1a was **already correct** (it states "the `1/4` is the *separately-derived* Sakharov ratio"
+  immediately before the Route-1 parenthetical) — left as-is. Website builds green (66 pages); `AxiomAudit` green,
+  budget 0 (comment-only Lean edits). PASS = no surface can be read as "the `1/4` is not derived"; the register
+  records the postulate/derived/carried contract explicitly.
