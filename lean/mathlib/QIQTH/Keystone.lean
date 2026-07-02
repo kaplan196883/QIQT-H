@@ -18,6 +18,7 @@ import Mathlib
 import QIQTH.QuantumRelativeEntropy
 import QIQTH.RecordContract
 import QIQTH.MonomialTrace
+import QIQTH.Entropy.TraceConvexity
 
 namespace QIQTH.Keystone
 
@@ -307,5 +308,69 @@ theorem K2b_tau0_capstone (L : LinkDims E) (C : Finset E) {G : ℝ} (hG : G ≠ 
   · rw [tau0_top_eq_NC, vonNeumannEntropy_maxMixed, card_micro]
     norm_num
   · exact K2a_count_capstone L C hG
+
+/-! ## K5 — the covariance checks
+
+Per the binding correction: trace-PRESERVING (code/Lorentz) unitaries leave the count INVARIANT;
+the dual action SCALES it — `S(θ_s·) = S(·) − s` (covariance with transported area, never naive
+invariance). -/
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- Unitary conjugation preserves densities. -/
+theorem isDensity_conj {ρ : Matrix ι ι ℂ} (h : IsDensity ρ) {V : Matrix ι ι ℂ}
+    (hVr : V * star V = 1) : IsDensity (star V * ρ * V) where
+  posSemidef := by
+    have := h.posSemidef.conjTranspose_mul_mul_same (B := V)
+    simpa [Matrix.star_eq_conjTranspose] using this
+  trace_one := by
+    rw [Matrix.trace_mul_cycle, hVr, Matrix.one_mul, h.trace_one]
+
+/-- **Trace-preserving unitaries preserve the count's entropy** (Gate-3's finite instantiation —
+    riding the held general-`f` eigenvalue conjugation invariance). -/
+theorem vonNeumannEntropy_unitary_conj {ρ : Matrix ι ι ℂ} (h : IsDensity ρ)
+    {V : Matrix ι ι ℂ} (hVl : star V * V = 1) (hVr : V * star V = 1)
+    (h' : IsDensity (star V * ρ * V)) :
+    vonNeumannEntropy h' = vonNeumannEntropy h := by
+  rw [vonNeumannEntropy, vonNeumannEntropy]
+  exact QIQTH.Entropy.eigenvalues_sum_conj_invariant h.posSemidef.1 hVl hVr h'.posSemidef.1
+    Real.negMulLog
+
+/-- **Code unitaries preserve the counting trace.** -/
+theorem tauCount_conj {E : Type*} [DecidableEq E] (L : LinkDims E) (C : Finset E)
+    (x V : DiamondAlg L C) (hVr : V * star V = 1) :
+    tauCount L C (star V * x * V) = tauCount L C x := by
+  rw [tauCount, tauCount, Matrix.trace_mul_cycle, hVr, Matrix.one_mul]
+
+/-- **The dual action SCALES the τ₀-count exactly** (`t = 0` of the held W3a dual-scaling law):
+    `τ₀(θ_s-shifted corner) = e^{−s}·N_C`. -/
+theorem tau0_dual_scaled {E : Type*} [DecidableEq E] (L : LinkDims E) (C : Finset E) (s : ℝ) :
+    tauMonomial (uniformState L C) (1 : DiamondAlg L C) 0
+        ((flatClock (NC L C)).dualShift s)
+      = (Real.exp (-s) : ℂ) * (NC L C : ℂ) := by
+  have h := tauMonomial_dual (uniformState L C) (1 : DiamondAlg L C) s 0 (flatClock (NC L C))
+  rw [show ((0 : ℝ) * s) = (0 : ℝ) from by ring] at h
+  simp only [Complex.ofReal_zero, zero_mul, Complex.exp_zero, one_mul] at h
+  rw [h, tau0_top_eq_NC]
+
+/-- **K5 CAPSTONE — the count transforms covariantly under the dual action:**
+    `S(θ_s·) = S(·) − s` at the count level (`S = log dim_τ₀` for the maximal corner) — the honest
+    dual-covariance law with TRANSPORTED area, per the binding correction (never naive invariance). -/
+theorem K5_dual_covariant_count {E : Type*} [DecidableEq E] (L : LinkDims E) (C : Finset E)
+    (s : ℝ) :
+    Real.log ((tauMonomial (uniformState L C) (1 : DiamondAlg L C) 0
+        ((flatClock (NC L C)).dualShift s)).re)
+      = Real.log ((tauMonomial (uniformState L C) (1 : DiamondAlg L C) 0
+          (flatClock (NC L C))).re) - s := by
+  rw [tau0_dual_scaled, tau0_top_eq_NC]
+  have hre : ((Real.exp (-s) : ℂ) * (NC L C : ℂ)).re = Real.exp (-s) * (NC L C : ℝ) := by
+    rw [← Complex.ofReal_natCast, ← Complex.ofReal_mul, Complex.ofReal_re]
+  rw [hre]
+  have hN : (0 : ℝ) < (NC L C : ℝ) := by
+    exact_mod_cast NC_pos L C
+  rw [show ((NC L C : ℂ)).re = (NC L C : ℝ) from by
+      rw [← Complex.ofReal_natCast, Complex.ofReal_re],
+    Real.log_mul (Real.exp_ne_zero _) hN.ne', Real.log_exp]
+  ring
 
 end QIQTH.Keystone

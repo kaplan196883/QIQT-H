@@ -39,7 +39,7 @@ OF THE HELD CROSSED-PRODUCT CORE; the continuum walls are named, permanent parts
   **`K2b_tau0_capstone`**: `S_{τ₀}(record corner) = inducedScreenAreaτ/(4G)`; `link_tauDim_eq_D` +
   `wEntτ_eq_log_tauDim` — **the calibration is a theorem because the weight is trace-defined**; the
   honest `count_matches_external_weights_iff` for external weights.
-- [ ] **K5 — the covariance checks**: `TracePreservingUnitary` + `Sren_cov_tracePreserving` +
+- [x] **K5 — the covariance checks** ✅ DONE: `TracePreservingUnitary` + `Sren_cov_tracePreserving` +
   `tauCount_unitary_conj` (code unitaries preserve the count — Gate-3's finite instantiation); the
   DUAL-SCALING law `tau0_dual_scaled_dim` (`τ₀(θ_s P) = e^{−s}τ₀(P)`, from the held exact scaling) +
   **`K5_dual_covariant_count`** (`S(θ_s·) = S(·) − s` — covariance with transported area, NOT naive
@@ -94,10 +94,23 @@ the error shown. Check for sibling jobs before each increment. Consults: `mcp__O
 
   deleted). NEXT → K2b (the τ₀ realization).
 
-- **2026-07-03** — **K2b LANDED — THE COUNT IN THE HELD CORE** (axiom-free std-3, budget 0):
-  flatClock (the mass-N clock window as a genuine ExpTest — the Iic-indicator idealization has
-  noncompact support, honest substitution with identical Iexp mass); Iexp_flatClock = N;
-  tauMonomial_uniform_eq_tauCount — τ₀(π(x)·q_{N_C}(L)) = Tr x: THE COUNTING TRACE IS THE
-  RESTRICTION OF THE CONSTRUCTED τ₀; tau0_recordProj_eq_card; tau0_top_eq_NC;
-  wEntTau_eq_log_tau0Dim — THE CALIBRATION IS A THEOREM (trace-defined weight); CAPSTONE
-  K2b_tau0_capstone — S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ(C)/(4G). NEXT → K5.
+- **2026-07-03** — **K2b LANDED — THE COUNT IN THE HELD CORE** (axiom-free std-3, budget 0):
+
+  flatClock (the mass-N clock window as a genuine ExpTest — the Iic-indicator idealization has
+
+  noncompact support, honest substitution with identical Iexp mass); Iexp_flatClock = N;
+
+  tauMonomial_uniform_eq_tauCount — τ₀(π(x)·q_{N_C}(L)) = Tr x: THE COUNTING TRACE IS THE
+
+  RESTRICTION OF THE CONSTRUCTED τ₀; tau0_recordProj_eq_card; tau0_top_eq_NC;
+
+  wEntTau_eq_log_tau0Dim — THE CALIBRATION IS A THEOREM (trace-defined weight); CAPSTONE
+
+  K2b_tau0_capstone — S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ(C)/(4G). NEXT → K5.
+
+- **2026-07-03** — **K5 LANDED** (axiom-free std-3, budget 0): isDensity_conj +
+  vonNeumannEntropy_unitary_conj (trace-preserving unitaries preserve the count's entropy — the
+  general-f eigenvalue conjugation invariance; Gate-3's finite instantiation); tauCount_conj;
+  tau0_dual_scaled (the dual action scales the τ₀-count: e^{−s}·N_C, from the held W3a exact
+  scaling); CAPSTONE K5_dual_covariant_count — S(θ_s·) = S(·) − s, the honest transported-area
+  covariance. NEXT → K1 (operator packaging).

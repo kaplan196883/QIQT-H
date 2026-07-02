@@ -8358,6 +8358,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Keystone.tau0_recordProj_eq_card
 #print axioms QIQTH.Keystone.wEntTau_eq_log_tau0Dim
 #print axioms QIQTH.Keystone.K2b_tau0_capstone
+-- K5 (KEYSTONE_PLAN.md): the covariance checks. isDensity_conj + vonNeumannEntropy_unitary_conj —
+-- trace-PRESERVING unitaries preserve the count's entropy (the general-f eigenvalue conjugation
+-- invariance; Gate-3's finite instantiation); tauCount_conj (code unitaries preserve the counting
+-- trace); tau0_dual_scaled (the dual action SCALES the τ₀-count: e^{−s}·N_C, from the held W3a exact
+-- scaling at t = 0); CAPSTONE K5_dual_covariant_count — S(θ_s·) = S(·) − s: the honest dual-covariance
+-- law with TRANSPORTED area (never naive invariance — the binding correction). Std 3.
+#print axioms QIQTH.Keystone.vonNeumannEntropy_unitary_conj
+#print axioms QIQTH.Keystone.tauCount_conj
+#print axioms QIQTH.Keystone.tau0_dual_scaled
+#print axioms QIQTH.Keystone.K5_dual_covariant_count
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

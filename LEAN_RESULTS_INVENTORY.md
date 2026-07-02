@@ -629,7 +629,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   fiber's τ₀-dimension — trace-defined, nothing calibrated); CAPSTONE **`K2b_tau0_capstone`** —
   `S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ(C)/4G` in the finite record corner of the constructed core.
   ⚠ The finite branch exactly as scoped; Walls 1–5 stand (continuum algebras, external-area matching,
-  Type III₁/II∞, normal weights, value of G). Next: K5 (covariance + the dual-scaling law).
+  Type III₁/II∞, normal weights, value of G). **K5 LANDED**: `vonNeumannEntropy_unitary_conj` (trace-preserving
+  unitaries preserve the count — Gate-3's finite instantiation), `tauCount_conj`,
+  **`tau0_dual_scaled`** (the dual action SCALES the τ₀-count by `e^{−s}` — the held W3a exact
+  scaling at work), CAPSTONE **`K5_dual_covariant_count`** — `S(θ_s·) = S(·) − s`: the honest
+  dual-covariance law with transported area. Next: K1 (operator packaging) → K3 → K6 checkpoint.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
