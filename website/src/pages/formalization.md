@@ -536,6 +536,41 @@ The loop integrals are numerically validated (closed forms to ≤0.16%), not for
 
 </div>
 
+## The operator emergence map — "graviton = quantized area fluctuation," theorem-shaped (Q1–Q5)
+
+The classical area→metric decoder promoted to an **operator map** on the polynomial Bargmann–Fock carrier
+(`Module.End` of ℂ[X₀,X₁]; the completion is never used as an operator domain). Two honesty rules are
+machine-enforced by design: equal-time quantized areas **commute** (the naive noncommutativity claim was cut
+at consult time), and the finite code can never carry exact CCR (the trace obstruction) — the code join is
+expectation-level, permanently.
+
+- **Q1 — `reconstruct_hHat`**: the decoder inverts the QUANTIZED area map at operator level — the metric
+  operator ĥ is a function of its own area-fluctuation observables, entrywise in End(Fock).
+- **Q2 — `comm_area_mom`, `vacuum_area_pair`**: the honest quantum structure — the canonical pair
+  [Â(Σ), Π̂(Σ′)] = i·areaPair·1 and the vacuum fluctuation ⟨0|Â(Σ)Â(Σ′)|0⟩ = areaPair(Σ,Σ′);
+  equal-time areas commute (`comm_area_area = 0`).
+- **Q3 — `coherent_hHat`, `coherent_area`**: the **classical bridge is the coherent shadow** —
+  ⟨α|ĥ|α⟩ = h(α) = Σ<sub>λ</sub> 2Re(α<sub>λ</sub>)·pol<sup>λ</sup> and ⟨α|Â(Σ)|α⟩ = δA<sub>Σ</sub>(h(α)):
+  exactly the δA input the assembled first-law ⟺ Einstein skeleton consumes.
+- **Q4 — `heis_q`, `hHatT_wave`, `comm_areaT`**: the Heisenberg flow **derived** from the explicit monomial
+  scaling (no Stone theorem), the operator **wave equation** ḧ + ω²ĥ = 0 (coefficientwise), and the
+  time-separated area commutator 2i·sin(ω(s−t))·areaPair·1 — the causal structure of quantized areas.
+- **Q5 — `code_count_eq_fock_area_expect`** (THE JOIN): with the held calibration and ONE named carried
+  input `hJoin` (induced screen area = coherent total-area expectation, Â<sub>tot</sub> = A₀·1 + Â),
+  **log #microstates = ⟨α|Â<sub>tot</sub>(Σ)|α⟩ / 4G** — the screen code's counting and the graviton's
+  area operator agree as two computations of one number.
+
+<div class="note">
+
+<strong>Honest scope.</strong> The carried residue is three named inputs: <code>hJoin</code> (the
+emergence-map identification, stated once), the calibration log D<sub>e</sub> = w<sub>Ent</sub>(e), and the
+Bargmann-adjointness grounding of the coherent v-rule. The code Hilbert space is <strong>not</strong> Fock
+and never will be (the CCR-isometry obstruction is a theorem-level fact); fixed momentum, two polarizations,
+linearized, free. NOT quantum gravity — the genuine microstate count (deriving the calibration via the
+Type II trace) and the von Neumann closure remain the frontier.
+
+</div>
+
 ## Reproduce the verification
 
 ```bash
