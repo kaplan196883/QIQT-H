@@ -587,7 +587,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   completion-level identification stays cited. **G2 (`QIQTH/ModularTransport.lean`)**: the RvD operator
   transports under unitary conjugacy — `starProj_transport` (projection uniqueness under the ℝ-isometry),
   `carrierMap_mulI` (`i𝒦` automatic from ℂ-linearity), CAPSTONE `rvdRC_transport` (`R_{S′} = U R_S U⁻¹`);
-  G3 (Borel-FC covariance) will carry this to `modUnitary` itself.
+  **G3a**: `conjUStarAlgHom` (the continuous conjugation star-hom), `spectrum_conjU`,
+  `conjU_isSelfAdjoint`, and **`cfc_conjU`** — the CONTINUOUS functional-calculus covariance
+  `cfc f (UTU⁻¹) = U (cfc f T) U⁻¹` (Mathlib `map_cfc` riding the hom). G3b (the Borel lift via the
+  scalar-measure/RMK chain) will carry this to `modUnitary` itself.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

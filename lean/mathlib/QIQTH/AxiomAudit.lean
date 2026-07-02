@@ -8285,6 +8285,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ModularTransport.starProj_transport
 #print axioms QIQTH.ModularTransport.carrierMap_mulI
 #print axioms QIQTH.ModularTransport.rvdRC_transport
+-- G3a (GROUNDING_PLAN.md): the conjugation star-algebra hom + spectrum transport + CFC covariance.
+-- unitOfLIE/spectrum_conjU (conjugation preserves the ℝ-spectrum, via spectrum.units_conjugate);
+-- conjU_continuous (compL); conjUStarAlgHom (the continuous star-hom — map_star by the adjoint inner
+-- characterization); conjU_isSelfAdjoint; CAPSTONE cfc_conjU — cfc f (U T U⁻¹) = U (cfc f T) U⁻¹ for
+-- ambient real symbols (Mathlib StarAlgHomClass.map_cfc riding the hom; no dependent spectrum rewrites).
+-- G3b lifts to the bounded Borel calculus via the scalar-measure/RMK chain. Std 3.
+#print axioms QIQTH.ModularTransport.spectrum_conjU
+#print axioms QIQTH.ModularTransport.conjU_isSelfAdjoint
+#print axioms QIQTH.ModularTransport.cfc_conjU
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

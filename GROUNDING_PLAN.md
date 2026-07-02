@@ -37,7 +37,7 @@ instantiating Gate 3's trace-transport hinge, and replacing the ball-Clausius mo
 - [x] **G2 — projection/operator transport** ✅ DONE (`QIQTH/ModularTransport.lean`): `conjU` + simp lemmas;
   `projK_map` (real orthogonal projection under ℝ-isometry, uniqueness route); `rvdRC_map` +
   `rvdRC_transport_of_carrier_eq`.
-- [ ] **G3 — the Borel-FC covariance (the crux):** CFC conjugation covariance (Mathlib functoriality name or
+- [~] **G3 — the Borel-FC covariance (the crux): G3a DONE** (in `ModularTransport.lean`: `conjUStarAlgHom` continuous star-hom, `spectrum_conjU`, `conjU_isSelfAdjoint`, `cfc_conjU` — the CONTINUOUS FC covariance via Mathlib `map_cfc`). **G3b remaining:** CFC conjugation covariance (Mathlib functoriality name or
   local uniqueness proof); `scalarMeasure_conjU` (RMK uniqueness against continuous tests);
   **`borelFC_conjU`** (the calc chain through `inner_borelFC`); spectrum handling per the binding correction.
 - [ ] **G4 — the payoffs:** **`modUnitary_map`** (`modUnitary (S.map U) t = conjU U (modUnitary S t)` — one
@@ -74,3 +74,10 @@ a genuine failed attempt with the error shown. Check for sibling jobs before eac
   conjugacy, by the uniqueness characterization under the ℝ-isometry); `carrierMap_mulI` (i𝒦 transports
   automatically — ℂ-linearity commutes with the I-scaling); projK/projIK/rvdR transport; CAPSTONE
   `rvdRC_transport` — R_{S′} = U R_S U⁻¹. NEXT → G3 (the crux: borelFC_conjU).
+- **2026-07-03** — **G3a LANDED** (appended to `ModularTransport.lean`, axiom-free std-3, budget 0):
+  `unitOfLIE` + `spectrum_conjU` (conjugation preserves the ℝ-spectrum); `conjU_continuous` (compL);
+  `conjUStarAlgHom` (the continuous star-hom; map_star via the adjoint inner characterization);
+  `conjU_isSelfAdjoint`; CAPSTONE `cfc_conjU` — the CONTINUOUS functional-calculus covariance
+  cfc f (U T U⁻¹) = U (cfc f T) U⁻¹ (ambient real symbols, Mathlib map_cfc). NEXT → G3b (the
+  scalar-measure/RMK lift to the bounded Borel calculus: specMeasure_conjU via the spectrum
+  homeomorph + Tietze test functions, then borelFC_conjU by the inner_borelFC calc chain).

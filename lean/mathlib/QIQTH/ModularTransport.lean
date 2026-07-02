@@ -123,4 +123,98 @@ theorem rvdRC_transport {S S' : StandardSubspace H} {U : H ≃ₗᵢ[ℂ] H}
   refine ContinuousLinearMap.ext fun x => ?_
   rw [conjU_apply, rvdRC_apply, rvdRC_apply, rvdR_transport hK]
 
+/-! ### G3a — the conjugation star-algebra homomorphism, spectrum transport, CFC covariance
+
+The first half of the Borel-FC covariance crux: `conjU U` bundled as a CONTINUOUS star-algebra
+homomorphism on `H →L[ℂ] H`, self-adjointness and spectrum transport, and the CONTINUOUS functional
+calculus covariance `cfc f (U T U⁻¹) = U (cfc f T) U⁻¹` (via Mathlib's `StarAlgHomClass.map_cfc` —
+ambient real symbols, no dependent spectrum rewrites, per the binding correction). G3b lifts this to
+the bounded BOREL calculus through the scalar-measure/RMK chain. -/
+
+/-- The CLM of `U` as a unit of the operator algebra. -/
+noncomputable def unitOfLIE (U : H ≃ₗᵢ[ℂ] H) : (H →L[ℂ] H)ˣ where
+  val := U.toLinearIsometry.toContinuousLinearMap
+  inv := U.symm.toLinearIsometry.toContinuousLinearMap
+  val_inv := by
+    ext x
+    simp
+  inv_val := by
+    ext x
+    simp
+
+theorem conjU_eq_units_conj (U : H ≃ₗᵢ[ℂ] H) (A : H →L[ℂ] H) :
+    conjU U A = (unitOfLIE U : H →L[ℂ] H) * A * ((unitOfLIE U)⁻¹ : (H →L[ℂ] H)ˣ) := rfl
+
+/-- Conjugation preserves the ℝ-spectrum. -/
+theorem spectrum_conjU (U : H ≃ₗᵢ[ℂ] H) (T : H →L[ℂ] H) :
+    spectrum ℝ (conjU U T) = spectrum ℝ T := by
+  rw [conjU_eq_units_conj]
+  exact spectrum.units_conjugate
+
+/-- Conjugation is continuous on the operator algebra. -/
+theorem conjU_continuous (U : H ≃ₗᵢ[ℂ] H) : Continuous (conjU U) := by
+  have h1 : Continuous fun A : H →L[ℂ] H =>
+      U.toLinearIsometry.toContinuousLinearMap.comp A :=
+    (ContinuousLinearMap.compL ℂ H H H U.toLinearIsometry.toContinuousLinearMap).continuous
+  have h2 : Continuous fun B : H →L[ℂ] H =>
+      B.comp U.symm.toLinearIsometry.toContinuousLinearMap := by
+    exact ((ContinuousLinearMap.compL ℂ H H H).flip
+      U.symm.toLinearIsometry.toContinuousLinearMap).continuous
+  exact h2.comp h1
+
+/-- **The conjugation star-algebra homomorphism** `A ↦ U A U⁻¹`. -/
+noncomputable def conjUStarAlgHom (U : H ≃ₗᵢ[ℂ] H) : (H →L[ℂ] H) →⋆ₐ[ℂ] (H →L[ℂ] H) where
+  toFun := conjU U
+  map_one' := by
+    refine ContinuousLinearMap.ext fun x => ?_
+    simp [conjU_apply]
+  map_mul' A B := by
+    refine ContinuousLinearMap.ext fun x => ?_
+    simp [conjU_apply, U.symm_apply_apply]
+  map_zero' := by
+    refine ContinuousLinearMap.ext fun x => ?_
+    simp [conjU_apply]
+  map_add' A B := by
+    refine ContinuousLinearMap.ext fun x => ?_
+    simp [conjU_apply]
+  commutes' c := by
+    refine ContinuousLinearMap.ext fun x => ?_
+    simp [conjU_apply, Algebra.algebraMap_eq_smul_one, map_smul]
+  map_star' A := by
+    rw [ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.star_eq_adjoint,
+      ContinuousLinearMap.eq_adjoint_iff]
+    intro x y
+    rw [conjU_apply, conjU_apply]
+    calc inner ℂ (U (ContinuousLinearMap.adjoint A (U.symm x))) y
+        = inner ℂ (U (ContinuousLinearMap.adjoint A (U.symm x))) (U (U.symm y)) := by
+          rw [U.apply_symm_apply]
+      _ = inner ℂ (ContinuousLinearMap.adjoint A (U.symm x)) (U.symm y) :=
+          U.inner_map_map _ _
+      _ = inner ℂ (U.symm x) (A (U.symm y)) :=
+          ContinuousLinearMap.adjoint_inner_left _ _ _
+      _ = inner ℂ (U (U.symm x)) (U (A (U.symm y))) := (U.inner_map_map _ _).symm
+      _ = inner ℂ x (U (A (U.symm y))) := by rw [U.apply_symm_apply]
+
+@[simp] theorem conjUStarAlgHom_apply (U : H ≃ₗᵢ[ℂ] H) (A : H →L[ℂ] H) :
+    conjUStarAlgHom U A = conjU U A := rfl
+
+/-- Conjugation preserves self-adjointness. -/
+theorem conjU_isSelfAdjoint {T : H →L[ℂ] H} (hT : IsSelfAdjoint T) (U : H ≃ₗᵢ[ℂ] H) :
+    IsSelfAdjoint (conjU U T) := by
+  have h := map_star (conjUStarAlgHom U) T
+  rw [conjUStarAlgHom_apply, conjUStarAlgHom_apply, hT.star_eq] at h
+  exact h.symm
+
+/-- **G3a CAPSTONE — CONTINUOUS functional calculus covariance under conjugation:**
+    `cfc f (U T U⁻¹) = U (cfc f T) U⁻¹` for ambient real symbols (Mathlib functoriality riding the
+    conjugation star-hom). G3b lifts this to the bounded Borel calculus. -/
+theorem cfc_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T) (f : ℝ → ℝ)
+    (hf : ContinuousOn f (spectrum ℝ T)) :
+    cfc f (conjU U T) = conjU U (cfc f T) := by
+  have hφ : Continuous (conjUStarAlgHom U) := conjU_continuous U
+  have hφa : IsSelfAdjoint (conjUStarAlgHom U T) := conjU_isSelfAdjoint hT U
+  have h := StarAlgHomClass.map_cfc (R := ℝ) (conjUStarAlgHom U) f T hf hφ hT hφa
+  rw [conjUStarAlgHom_apply] at h
+  exact h.symm
+
 end QIQTH.ModularTransport
