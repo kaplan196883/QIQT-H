@@ -8262,6 +8262,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperatorEmergence.areaTotExpr_toOp
 #print axioms QIQTH.OperatorEmergence.coherent_areaTot_re
 #print axioms QIQTH.OperatorEmergence.code_count_eq_fock_area_expect
+-- G1 (GROUNDING_PLAN.md): the Bargmann pairing + adjointness on polynomials. bargmann (right-support
+-- pairing Σ n!·conj(p_n)·q_n) with superset/linearity/conj-symmetry; multiFact_add_single (the factorial
+-- shift (m+e_l)! = m!·(m_l+1)); CAPSTONE bargmann_adjoint — ⟨p, X_l·q⟩_B = ⟨∂_l p, q⟩_B: CREATION IS
+-- ADJOINT TO ANNIHILATION on the polynomial Bargmann–Fock space (proven by monomial-linearity, per the
+-- binding correction — no support reindex). Coherent layer at polynomial level (no completed-space
+-- claims): coeffFamilyPair_cohCoeff (the reproducing rule ⟨coh α, p⟩_B = p(conj α), coefficient level)
+-- + cohPair_X_mul (⟨coh α, X_l·p⟩ = conj(α_l)·⟨coh α, p⟩). HYPOTHESIS GROUNDED: the operator-emergence
+-- Q3 coherent v-rule (was cited Bargmann calculus, now a polynomial-level theorem; the completion-level
+-- identification stays cited). Std 3.
+#print axioms QIQTH.BargmannPairing.multiFact_add_single
+#print axioms QIQTH.BargmannPairing.bargmann_conj_symm
+#print axioms QIQTH.BargmannPairing.bargmann_adjoint
+#print axioms QIQTH.BargmannPairing.coeffFamilyPair_cohCoeff
+#print axioms QIQTH.BargmannPairing.cohPair_X_mul
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

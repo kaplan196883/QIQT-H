@@ -580,7 +580,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   area operator agree as two computations of one number.** ⚠ The join is expectation-level FOREVER (the
   finite-code CCR isometry is obstructed by the trace argument); the code Hilbert space is NOT Fock;
   fixed momentum, linearized, free; NOT QG. Carried: `hJoin`, the calibration, the Bargmann-adjointness
-  grounding of the coherent v-rule.
+  grounding of the coherent v-rule — **the v-rule grounding is now DELETED (G1,
+  `QIQTH/BargmannPairing.lean`)**: `bargmann_adjoint` (creation adjoint to annihilation on the polynomial
+  Bargmann–Fock space, `⟨p, X_l·q⟩_B = ⟨∂_l p, q⟩_B`) + the polynomial-level coherent reproducing rule
+  (`coeffFamilyPair_cohCoeff`: `⟨coh α, p⟩_B = p(conj α)`) and creation rule (`cohPair_X_mul`); the
+  completion-level identification stays cited.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

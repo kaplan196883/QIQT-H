@@ -27,7 +27,7 @@ instantiating Gate 3's trace-transport hinge, and replacing the ball-Clausius mo
   `S.map U` explicitly.
 
 ## Increments (verified order)
-- [ ] **G1 — the Bargmann adjointness** (`QIQTH/BargmannPairing.lean`): `multiFact`; `bargmann` (right-support)
+- [x] **G1 — the Bargmann adjointness** ✅ DONE (`QIQTH/BargmannPairing.lean`): `multiFact`; `bargmann` (right-support)
   + superset lemma + linearity/`bargmann_conj_symm`; `multiFact_add_single`; `coeff_pderiv_shift` (local
   wrapper); `bargmann_monomial_right`; **`bargmann_adjoint`** (`⟨p, X_l·q⟩_B = ⟨∂_l p, q⟩_B` — creation is
   adjoint to annihilation ON POLYNOMIALS, the v-rule ground); `cohCoeff`/`coeffFamilyPair`/`cohPair` +
@@ -63,3 +63,9 @@ a genuine failed attempt with the error shown. Check for sibling jobs before eac
   bargmann, polynomial-level coherent grounding; G2–G4 conjU wrapper → projK/rvdRC transport → borelFC_conjU
   via CFC covariance + RMK uniqueness → modUnitary_map + the three payoff corollaries; generator-uniqueness
   shortcut REJECTED). NEXT → G1.
+- **2026-07-03** — **G1 LANDED** (`BargmannPairing.lean`, axiom-free std-3, budget 0): the Bargmann pairing
+  (right-support, superset lemma, linearity, conj-symmetry); multiFact_add_single; CAPSTONE
+  `bargmann_adjoint` — creation IS adjoint to annihilation on polynomials (monomial-linearity route);
+  the coherent layer at polynomial level: `coeffFamilyPair_cohCoeff` (the reproducing rule) +
+  `cohPair_X_mul` (the coherent creation rule). HYPOTHESIS GROUNDED: the Q3 coherent v-rule (docstrings
+  updated cited → GROUNDED; the completion-level identification stays cited). NEXT → G2.

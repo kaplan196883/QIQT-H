@@ -44,6 +44,7 @@ import QIQTH.HolographicScreenCode
 import QIQTH.EmergentDynamics
 import QIQTH.GravitonQuantization
 import QIQTH.OperatorEmergence
+import QIQTH.BargmannPairing
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

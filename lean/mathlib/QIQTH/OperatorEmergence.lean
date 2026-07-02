@@ -317,8 +317,8 @@ BINDING (consult): the held coherent state lives in the single-mode Bargmann–F
 observables, interpreted both as polynomial operators (`toOp`) and as coherent expectations (`cohExpect`).
 Grounding of the two expectation rules (stated honestly): the `u`-rule `⟨a_λ⟩ = α_λ` is the held eigenvalue
 relation `annih_coherent` (`a|α⟩ = α|α⟩`); the `v`-rule `⟨a†_λ⟩ = conj α_λ` is Bargmann adjointness
-(`⟨f, X·g⟩ = ⟨∂f, g⟩`, whence `⟨α|a†|α⟩ = conj α·⟨α|α⟩`) — standard Bargmann calculus, cited; formalizing
-the polynomial Bargmann inner product with its adjointness is a named follow-on. -/
+(`⟨f, X·g⟩ = ⟨∂f, g⟩`) — GROUNDED at polynomial level by `QIQTH.BargmannPairing.bargmann_adjoint` +
+`cohPair_X_mul` (G1 of the grounding campaign); the completion-level identification stays cited. -/
 
 /-- A linear observable EXPRESSION `Σ_λ u_λ a_λ + v_λ a†_λ` (the two-interpretation layer). -/
 structure LinExpr where
@@ -331,7 +331,8 @@ structure LinExpr where
 noncomputable def LinExpr.toOp (E : LinExpr) : Op := linObs E.u E.v
 
 /-- Interpretation 2: the normalized coherent expectation `⟨α|·|α⟩` — `u`-rule from the held
-    `annih_coherent` eigenvalue relation, `v`-rule from Bargmann adjointness (cited). -/
+    `annih_coherent` eigenvalue relation, `v`-rule from Bargmann adjointness (GROUNDED:
+    `BargmannPairing.bargmann_adjoint`/`cohPair_X_mul`). -/
 noncomputable def LinExpr.cohExpect (E : LinExpr) (α : Fin 2 → ℂ) : ℂ :=
   ∑ l, (E.u l * α l + E.v l * (starRingEnd ℂ) (α l))
 
