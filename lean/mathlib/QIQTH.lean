@@ -43,6 +43,7 @@ import QIQTH.InducedNewtonConstant
 import QIQTH.HolographicScreenCode
 import QIQTH.EmergentDynamics
 import QIQTH.GravitonQuantization
+import QIQTH.OperatorEmergence
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

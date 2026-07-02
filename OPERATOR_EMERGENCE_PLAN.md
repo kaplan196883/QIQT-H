@@ -27,7 +27,7 @@ the operator wave equation, and the code join at expectation level — Tier-1 it
   `area = 4G·cut` is about total area, `areaVar ĥ` is the linearized fluctuation; never conflate.
 
 ## Increments (verified order, low-risk first)
-- [ ] **Q1 — the generalized decoder + the operator graviton.** `areaDataM`/`reconstructM` over any ℂ-module;
+- [x] **Q1 — the generalized decoder + the operator graviton.** ✅ DONE (`QIQTH/OperatorEmergence.lean`). `areaDataM`/`reconstructM` over any ℂ-module;
   `reconstruct_areaDataM` (the lift of `reconstruct_areaVar`); `qMode λ := annih λ + creat λ`;
   `hHat pol := fun μ ν => ∑ λ, pol λ μ ν • qMode λ` (plus/cross real `pol`, symmetric);
   **`reconstruct_hHat`** — the decoder inverts the quantized area map AT OPERATOR LEVEL.
@@ -66,3 +66,7 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose the key).
   commutation structure — equal-time areas commute, canonical pair + time-separated + vacuum fluctuations;
   Q4 explicit phase flow, coefficientwise ODE; Q5 expectation-level join, total-vs-deficit explicit,
   finite-CCR-isometry obstruction noted). NEXT → Q1.
+- **2026-07-02** — **Q1 LANDED** (`OperatorEmergence.lean`, axiom-free std-3, budget 0): `areaDataM`/
+  `reconstructM` over any ℂ-module + `reconstruct_areaDataM` (the module-level decoder identity);
+  `qMode = a + a†`; `hHat` (real plus/cross pol, symmetric); CAPSTONE `reconstruct_hHat` — the decoder
+  inverts the QUANTIZED area map at operator level (entrywise in End(Fock)). NEXT → Q2.

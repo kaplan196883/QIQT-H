@@ -8206,6 +8206,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QG.StateLevelLV.equivariant_enforcement_preserves_invariance
 #print axioms QIQTH.QG.StateLevelLV.safe_enforced_step
 #print axioms QIQTH.QG.StateLevelLV.permutationCapacity
+-- Q1 (OPERATOR_EMERGENCE_PLAN.md): the generalized decoder + the operator graviton. areaDataM/reconstructM
+-- over ANY ℂ-module (carrier Op = Module.End ℂ Fock — polynomials, never a CLM completion);
+-- reconstruct_areaDataM (the module-level decoder identity); qMode = a + a†; hHat (real plus/cross pol);
+-- reconstruct_hHat — the decoder inverts the QUANTIZED area map at operator level: the metric operator is
+-- a function of its own area-fluctuation observables, entrywise in End(Fock). Fixed momentum, linearized,
+-- free; the code join is Q5 (expectation-level only). NOT QG. Std 3.
+#print axioms QIQTH.OperatorEmergence.reconstruct_areaDataM
+#print axioms QIQTH.OperatorEmergence.hHat_symm
+#print axioms QIQTH.OperatorEmergence.reconstruct_hHat
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

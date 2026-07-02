@@ -545,6 +545,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ⚠ Consistency propagation only; order 2 remains the concrete Deser theorem (E5); the nonlinear Einstein
   coefficients are the cited frontier. NOT a nonlinear completion; NOT QG.
 
+- **The operator emergence map, Q1 — `QIQTH/OperatorEmergence.lean`** (`QIQTH.OperatorEmergence`, **[AF]**
+  std-3; `OPERATOR_EMERGENCE_PLAN.md` — the bridge's Tier-1 item 1: "graviton = quantized area fluctuation",
+  theorem-shaped). Carrier `Op = Module.End ℂ Fock` (polynomial Bargmann–Fock — never a CLM completion).
+  **`areaDataM`/`reconstructM`** — the ray-probe area data and decoder over ANY ℂ-module;
+  **`reconstruct_areaDataM`** — the module-level decoder identity; **`qMode = a + a†`**; **`hHat`** — the
+  operator-valued metric perturbation (real plus/cross polarizations, symmetric). CAPSTONE
+  **`reconstruct_hHat`** — the decoder inverts the QUANTIZED area map at operator level: the metric operator
+  is a function of its own area-fluctuation observables, entrywise in `End(Fock)`. ⚠ Fixed momentum,
+  linearized, free; the code join is Q5 (expectation-level ONLY — the finite-code CCR isometry is obstructed
+  by the trace argument); NOT QG. Q2–Q5 in progress.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
