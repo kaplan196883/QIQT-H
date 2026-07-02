@@ -8,8 +8,8 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **299 files and ~3,300
-theorems** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **302 files and ~3,600
+theorems and definitions** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
 
@@ -600,7 +600,59 @@ results, the following remain: <code>hJoin</code> + the calibration (the emergen
 deletable only by the genuine count via the vN closure), the massless wedge BW, the nonlinear Einstein
 coefficients, symbol-level Iyer–Wald (<code>hDeficit</code>), and the geometric carrier-conjugacy data.
 Everything else that was carried at the start of the joins/grounding arc is now a theorem. NOT quantum
-gravity; the von Neumann closure and the count remain the frontier.
+gravity; the von Neumann closure and the count remain the frontier. <em>(The keystone campaign below
+subsequently delivered the count in the finite branch — the calibration is a theorem there for
+trace-defined weights, and the count-built join holds by construction; external-geometric matching and
+the vN closure remain the named walls.)</em>
+
+</div>
+
+## The keystone — THE COUNT (K0–K6): the holographic count as a theorem in the finite branch
+
+The campaign derives, rather than posits, that a diamond/screen algebra's entropy against the
+**constructed** crossed-product trace τ₀ equals induced area/4G — deleting, in the finite branch, the
+Clausius input, the geometric input, the calibration log D<sub>e</sub> = w<sub>Ent</sub>(e), and the
+emergence join at once (`QIQTH/Keystone.lean`, `KeystoneOperator.lean`; axiom-free, std-3).
+
+- **K0 — the entropy substrate** (`vonNeumannEntropy_maxMixed`, `vonNeumannEntropy_le_log_card`):
+  S(maximally mixed) = log N against the UNNORMALIZED counting trace, with the Gibbs/Jensen guard
+  S(ρ) ≤ log N for *every* density — the count equality is claimed only where it holds.
+- **K2a — the standalone finite count** (`K2a_count_capstone`): link dimensions D<sub>e</sub>, microstates
+  N<sub>C</sub> = Π D<sub>e</sub>, the diamond matrix algebra with τ(**1**) = N<sub>C</sub>, record
+  projections with τ(P<sub>R</sub>) = |R| (the trace COUNTS records), and
+  S = Σ<sub>e</sub> log D<sub>e</sub> = A<sub>τ</sub>(C)/4G as a theorem — G entering only through the
+  normalization. The boundary is itself a theorem: `count_matches_external_weights_iff` — matching
+  EXTERNAL geometric weights *is* the old calibration, never counted as deleted.
+- **K2b — THE COUNT IN THE HELD CORE** (`tauMonomial_uniform_eq_tauCount`, `wEntTau_eq_log_tau0Dim`,
+  `K2b_tau0_capstone`): **the counting trace IS the restriction of the constructed crossed-product trace
+  τ₀** — the held monomial-trace formula at the uniform matter state and a mass-N<sub>C</sub> clock window
+  reproduces Tr x exactly, so the count is not a new postulate; and **the calibration is a theorem**
+  because the weight is trace-defined (the link weight IS the log of the link fiber's τ₀-dimension).
+  Capstone: S(record corner) = log dim<sub>τ₀</sub>(𝒟<sub>C</sub>) = A<sub>τ</sub>(C)/4G.
+- **K5 — the covariance checks** (`tauCount_conj`, `K5_dual_covariant_count`): trace-preserving code
+  unitaries preserve the count; the dual action SCALES it exactly — S(θ<sub>s</sub>·) = S(·) − s, the
+  honest transported-area covariance law (never naive invariance).
+- **K1 — the operator packaging** (`clockMul`, `clockTransl_clockMul`, `repMonomial`): bounded-symbol
+  clock multiplication operators on L²(ℝ; H), the product law, the **Weyl covariance**
+  λ<sub>t</sub>∘M<sub>g</sub> = M<sub>g(·+t)</sub>∘λ<sub>t</sub>, and the represented core monomial
+  π(a)·λ<sub>t</sub>·M<sub>F</sub> as a genuine continuous operator.
+- **K3 — finite closure hygiene + a soundness find** (`tauCount_norm_le_sum_diag`): the counting trace is
+  bounded on the finite corner; and the carried vN-extension interface (`DualWeightTraceExtension`) was
+  found VACUOUS — an abelian collapse witness (M = ℂ) satisfied it for any algebra — and strengthened
+  with a multiplicative-embedding requirement that provably kills the witness. No fake finite instance
+  was shipped; the genuine σ-weak/normal-weight extension stays a named wall, now carried non-vacuously.
+
+<div class="note">
+
+<strong>The K6 checkpoint — the two honest sentences.</strong> HAVE: "every finite code screen realized
+as a finite record corner of the constructed crossed-product core has
+S<sub>τ₀</sub> = log dim<sub>τ₀</sub>(𝒟<sub>C</sub>) = Σ<sub>e</sub> log dim<sub>τ₀</sub>(P<sub>e</sub>)
+= A<sub>τ</sub>(C)/4G; in the code instance dim<sub>τ₀</sub>(P<sub>e</sub>) = D<sub>e</sub>, so the
+calibration is a theorem (trace-defined weight) and the count-built area operator gives the join by
+construction — no hClausius/hGeom/hCalib/hJoin carried in this branch." HAVE NOT (Walls 1–5, named):
+continuum QFT diamond algebras ARE these corners; external geometric area = count-built area;
+Type III₁/II<sub>∞</sub> continuum structure in Lean; σ-weak/normal weights; the value of G.
+NOT quantum gravity solved; no wall crossed.
 
 </div>
 
