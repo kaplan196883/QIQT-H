@@ -29,7 +29,9 @@ formal-Bianchi form (J4).
   nondegeneracy needed); `ω(E_ij·B) = e^{κ_ij}·ω(B·E_ij)` from `ρE_ij = e^{κ_ij}E_ij ρ`.
 
 ## Increments (verified order)
-- [ ] **J1 — the finite corner discharges the eigen-core matter inputs.** `rhoDiag p`, `matState p = tr(ρ·)`,
+- [x] **J1 — the finite corner discharges the eigen-core matter inputs.** ✅ DONE (`QIQTH/FiniteCornerEigen.lean`;
+  the eigen law landed as `sigmaDiag_single` on `QIQTH.FiniteModularTheory.sigmaDiag`; capstones
+  `finiteCorner_tau_trace`/`finiteCorner_tau_pos` — hkms/hfreq/hpos DELETED for the concrete model). `rhoDiag p`, `matState p = tr(ρ·)`,
   matrix units `E i j` (`Matrix.stdBasisMatrix`), `kappa p i j = log p_i − log p_j`. Theorems: `modAut_E`
   (the eigen law), `matState_E_mul_E` (the matrix-unit trace formula `if j=k ∧ i=l then p_i else 0`),
   **`finiteCorner_kms_E`** (the KMS-eigen law — PROVEN), **`finiteCorner_freq_E`** (frequency conservation —
@@ -66,3 +68,9 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro.
 - **2026-07-02** — plan created from the GPT-5.5-pro joins consult (J1 RECOMMEND with verified conventions;
   J2 → the kernel-probe normalization + refactor; J3 → the abstract transport with named inputs; J4 → the
   formal-Bianchi propagation system). NEXT → J1.
+- **2026-07-02** — **J1 LANDED** (`FiniteCornerEigen.lean`, axiom-free std-3, budget 0): the finite corner
+  discharges ALL THREE eigen-core matter inputs — `finiteCorner_kms_E` (the KMS-eigen law), `finiteCorner_freq_E`
+  (frequency conservation, automatic from the matrix-unit index loop), `finiteCorner_pos` (positivity), plus the
+  eigen law `sigmaDiag_single`. Capstones `finiteCorner_tau_trace` + `finiteCorner_tau_pos`: the W3b trace laws
+  hold on the `finiteCornerTerm` family with NO matter hypotheses. HYPOTHESES DELETED (for the concrete model):
+  hkms, hfreq, hpos. Carried still: the vN closure; general PosDef rho = follow-on. NEXT → J2.

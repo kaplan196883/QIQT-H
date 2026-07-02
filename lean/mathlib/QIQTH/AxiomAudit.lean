@@ -8099,6 +8099,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.phase5_from_core_trace
 #print axioms QIQTH.TypeIITrace.traceCapacity_from_core
 #print axioms QIQTH.TypeIITrace.extension_preserves_density_mass
+-- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
+-- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
+-- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
+-- σ_t(E_ij) = e^{itκ}E_ij; frequency conservation AUTOMATIC from the matrix-unit index loop, no nondegeneracy):
+-- finiteCorner_tau_trace + finiteCorner_tau_pos hold with NO matter hypotheses — the constructed dual-weight
+-- trace's laws unconditional in a genuine (Type I corner) model. The vN closure stays carried. Std 3.
+#print axioms QIQTH.TypeIITrace.sigmaDiag_single
+#print axioms QIQTH.TypeIITrace.finiteCorner_kms_E
+#print axioms QIQTH.TypeIITrace.finiteCorner_freq_E
+#print axioms QIQTH.TypeIITrace.finiteCorner_pos
+#print axioms QIQTH.TypeIITrace.finiteCorner_tau_trace
+#print axioms QIQTH.TypeIITrace.finiteCorner_tau_pos
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

@@ -527,6 +527,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   dual-weight trace exists with exact scaling, traciality, and positivity ON THE ALGEBRAIC CORE; the von Neumann
   closure, the continuum count, and black-hole matching remain carried/cited.
 
+- **The joins, J1 — `QIQTH/FiniteCornerEigen.lean`** (`QIQTH.TypeIITrace`, **[AF]** std-3;
+  `HYPOTHESIS_DELETION_PLAN.md`). **The finite corner DISCHARGES the eigen-core matter inputs** — W3b's three
+  carried hypotheses become THEOREMS of the concrete corner `Matrix ι ι ℂ`, `ω = tr(diag p ·)`, matrix units
+  `E_ij` with modular frequency `κ_ij = log p_i − log p_j`: **`sigmaDiag_single`** (the eigen law
+  `σ_t(E_ij) = e^{itκ_ij}E_ij` under the finite modular flow `ρ^{it}·ρ^{−it}`), **`finiteCorner_kms_E`** (the
+  KMS-eigen law, unconditional), **`finiteCorner_freq_E`** (frequency conservation — AUTOMATIC from the
+  matrix-unit index loop, `κ_ij + κ_ji = 0`, no nondegeneracy), **`finiteCorner_pos`**
+  (`ω(A*A) = ∑ p_m‖A_km‖² ≥ 0`). Capstones: **`finiteCorner_tau_trace`** and **`finiteCorner_tau_pos`** — the
+  constructed dual-weight trace's traciality and positivity hold on the `finiteCornerTerm` family with **NO
+  matter hypotheses** (hkms/hfreq/hpos DELETED for this model). ⚠ The finite (Type I) corner is the concrete
+  witness, not the continuum matter algebra; diagonal `ρ` (general PosDef via eigenbasis transport = follow-on);
+  the vN closure stays carried.
+
 - **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ`** — now BUILT on the algebraic core (rungs W1–W4 above: exact scaling + traciality + positivity), with the vN-closure half still the [frontier] (the carried `DualWeightTraceExtension`); bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
