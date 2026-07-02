@@ -8225,6 +8225,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperatorEmergence.comm_area_area
 #print axioms QIQTH.OperatorEmergence.comm_area_mom
 #print axioms QIQTH.OperatorEmergence.vacuum_area_pair
+-- Q3 (OPERATOR_EMERGENCE_PLAN.md): the coherent shadow. The expression layer LinExpr (the consult's
+-- prescribed resolution of the PowerSeries/polynomial domain trap) with two interpretations: toOp (the
+-- operator, = hHat/areaOp via hHatExpr_toOp/areaExpr_toOp) and cohExpect (the coherent expectation;
+-- u-rule grounded by the held annih_coherent eigenvalue relation, v-rule = Bargmann adjointness, cited —
+-- formalizing the polynomial Bargmann inner product is a named follow-on). CAPSTONES: coherent_hHat
+-- (⟨α|ĥ_{μν}|α⟩ = classicalH(α)_{μν} — the classical perturbation of the amplitude) and coherent_area
+-- (⟨α|Â(Σ)|α⟩ = areaVar(Σ, classicalH α) — the exact δA input the assembled bridge consumes): the
+-- CLASSICAL emergence map is the coherent shadow of the operator map. Std 3.
+#print axioms QIQTH.OperatorEmergence.hHatExpr_toOp
+#print axioms QIQTH.OperatorEmergence.areaExpr_toOp
+#print axioms QIQTH.OperatorEmergence.coherent_hHat
+#print axioms QIQTH.OperatorEmergence.coherent_area
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

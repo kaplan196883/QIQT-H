@@ -559,7 +559,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`comm_area_area = 0`** — equal-time areas COMMUTE (the naive noncommutativity claim is CUT, per the
   binding correction); **`comm_area_mom`** — the canonical pair `[Â(Σ),Π̂Can(Σ′)] = i·areaPair·1` (where
   the quantum structure actually lives); **`vacuum_area_pair`** — `⟨0|Â(Σ)Â(Σ′)|0⟩ = areaPair(Σ,Σ′)`:
-  the vacuum's quantized area fluctuations, quantitative and honest. Q3–Q5 in progress.
+  the vacuum's quantized area fluctuations, quantitative and honest. **Q3 LANDED**: the `LinExpr`
+  expression layer (two interpretations: `toOp` = the operator, proven; `cohExpect` = the coherent
+  expectation — u-rule grounded by the held `annih_coherent` eigenvalue relation, v-rule = Bargmann
+  adjointness, cited; the polynomial Bargmann inner product = named follow-on); CAPSTONES
+  **`coherent_hHat`** (`⟨α|ĥ|α⟩ = classicalH(α) = Σ_λ 2Re(α_λ)·pol^λ`) and **`coherent_area`**
+  (`⟨α|Â(Σ)|α⟩ = areaVar(Σ, classicalH α)` — the exact `δA` input the assembled bridge consumes): **the
+  classical emergence map is the coherent shadow of the operator map.** Q4–Q5 in progress.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

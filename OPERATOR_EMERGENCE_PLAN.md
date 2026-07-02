@@ -36,7 +36,7 @@ the operator wave equation, and the code join at expectation level — Tier-1 it
   `areaOp Σ := areaVar-coefficients applied to qMode`; `areaMomCan`; `areaPair Σ Σ' := ∑ c_Σ λ · c_Σ' λ`;
   **`comm_area_area = 0`** (honest), **`comm_area_mom = i·areaPair•1`**, and the vacuum fluctuation
   **`vacuum_area_pair`** `⟨0|Â Â'|0⟩ = areaPair` — quantized area fluctuations WITHOUT fake noncommutativity.
-- [ ] **Q3 — the coherent shadow.** `coherent_linObs` (expectation `= ∑ u λ α λ + v λ conj(α λ)`);
+- [x] **Q3 — the coherent shadow.** ✅ DONE (in `QIQTH/OperatorEmergence.lean`; expression layer per the consult). `coherent_linObs` (expectation `= ∑ u λ α λ + v λ conj(α λ)`);
   **`coherent_hHat`** (`⟨α|ĥ|α⟩ = classical h(α)`, `= ∑ 2Re(α λ)·pol λ` for real pol);
   **`coherent_area`** (`⟨α|Â(Σ)|α⟩ = areaVar Σ (classicalH α)`) — the CLASSICAL emergence map is the
   coherent shadow of the operator map. (Watch the PowerSeries/polynomial domain trap — an expression layer
@@ -75,3 +75,10 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose the key).
   observables `areaOp`/`areaMomCan`/`areaPair`; `comm_area_area = 0` (equal-time areas COMMUTE — honest);
   CAPSTONES `comm_area_mom` ([Â,Π̂Can] = i·areaPair·1, the canonical pair) and `vacuum_area_pair`
   (⟨0|ÂÂ'|0⟩ = areaPair — quantized vacuum area fluctuations). NEXT → Q3.
+- **2026-07-02** — **Q3 LANDED** (appended to `OperatorEmergence.lean`, axiom-free std-3, budget 0): the
+  LinExpr expression layer (the prescribed resolution of the PowerSeries/polynomial domain trap) with two
+  interpretations — toOp (= hHat/areaOp, proven) and cohExpect (u-rule grounded by the held annih_coherent
+  eigenvalue relation; v-rule = Bargmann adjointness, cited; formalizing the polynomial Bargmann inner
+  product = named follow-on). CAPSTONES: `coherent_hHat` (⟨α|ĥ|α⟩ = classicalH(α) = Σ 2Re(α_λ)·pol^λ) and
+  `coherent_area` (⟨α|Â(Σ)|α⟩ = areaVar(Σ, classicalH α) — the exact δA the assembled bridge consumes):
+  the CLASSICAL emergence map is the coherent shadow of the operator map. NEXT → Q4.

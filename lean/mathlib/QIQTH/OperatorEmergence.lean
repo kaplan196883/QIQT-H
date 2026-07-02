@@ -309,4 +309,98 @@ theorem vacuum_area_pair {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4)
   · intro h
     exact absurd (Finset.mem_univ l) h
 
+/-! ## Q3 — the coherent shadow: the CLASSICAL bridge is the coherent expectation of the operator map
+
+BINDING (consult): the held coherent state lives in the single-mode Bargmann–Fock completion `ℂ⟦X⟧` while
+`Op` acts on two-mode polynomials — the prescribed resolution is a small EXPRESSION LAYER for linear
+observables, interpreted both as polynomial operators (`toOp`) and as coherent expectations (`cohExpect`).
+Grounding of the two expectation rules (stated honestly): the `u`-rule `⟨a_λ⟩ = α_λ` is the held eigenvalue
+relation `annih_coherent` (`a|α⟩ = α|α⟩`); the `v`-rule `⟨a†_λ⟩ = conj α_λ` is Bargmann adjointness
+(`⟨f, X·g⟩ = ⟨∂f, g⟩`, whence `⟨α|a†|α⟩ = conj α·⟨α|α⟩`) — standard Bargmann calculus, cited; formalizing
+the polynomial Bargmann inner product with its adjointness is a named follow-on. -/
+
+/-- A linear observable EXPRESSION `Σ_λ u_λ a_λ + v_λ a†_λ` (the two-interpretation layer). -/
+structure LinExpr where
+  /-- annihilation coefficients -/
+  u : Fin 2 → ℂ
+  /-- creation coefficients -/
+  v : Fin 2 → ℂ
+
+/-- Interpretation 1: the polynomial operator. -/
+noncomputable def LinExpr.toOp (E : LinExpr) : Op := linObs E.u E.v
+
+/-- Interpretation 2: the normalized coherent expectation `⟨α|·|α⟩` — `u`-rule from the held
+    `annih_coherent` eigenvalue relation, `v`-rule from Bargmann adjointness (cited). -/
+noncomputable def LinExpr.cohExpect (E : LinExpr) (α : Fin 2 → ℂ) : ℂ :=
+  ∑ l, (E.u l * α l + E.v l * (starRingEnd ℂ) (α l))
+
+/-- The expression of the metric-operator entry `ĥ_{μν}`. -/
+noncomputable def hHatExpr (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (μ ν : Fin 4) : LinExpr where
+  u := fun l => ((pol l μ ν : ℝ) : ℂ)
+  v := fun l => ((pol l μ ν : ℝ) : ℂ)
+
+/-- The expression interprets to the operator entry: `(hHatExpr μ ν).toOp = ĥ_{μν}`. -/
+theorem hHatExpr_toOp (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (μ ν : Fin 4) :
+    (hHatExpr pol μ ν).toOp = hHat pol μ ν := by
+  rw [LinExpr.toOp, linObs, hHat, Matrix.of_apply]
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [qMode, smul_add]
+  rfl
+
+open QIQTH.AreaMap in
+/-- The expression of the area observable `Â(Σ)`. -/
+noncomputable def areaExpr {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) : LinExpr where
+  u := fun l => ((areaVar S (pol l) : ℝ) : ℂ)
+  v := fun l => ((areaVar S (pol l) : ℝ) : ℂ)
+
+open QIQTH.AreaMap in
+theorem areaExpr_toOp {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) : (areaExpr pol S).toOp = areaOp pol S :=
+  (areaOp_eq_linObs pol S).symm
+
+/-- **The classical field of a coherent amplitude**: `h(α) = Σ_λ 2·Re(α_λ)·pol^λ` — exactly the classical
+    perturbation the bridge campaign's probes consume. -/
+noncomputable def classicalH (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ) :
+    Matrix (Fin 4) (Fin 4) ℝ :=
+  ∑ l, (2 * (α l).re) • pol l
+
+/-- **Q3 CAPSTONE (field) — `⟨α|ĥ_{μν}|α⟩ = h(α)_{μν}`:** the coherent expectation of the metric operator
+    is the CLASSICAL perturbation of the amplitude — the classical emergence map is the coherent shadow of
+    the operator map, entry by entry. -/
+theorem coherent_hHat (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ) (μ ν : Fin 4) :
+    (hHatExpr pol μ ν).cohExpect α = ((classicalH pol α μ ν : ℝ) : ℂ) := by
+  rw [LinExpr.cohExpect, hHatExpr, classicalH]
+  rw [show (∑ l, (2 * (α l).re) • pol l) μ ν = ∑ l, (2 * (α l).re) * pol l μ ν from by
+    rw [Matrix.sum_apply]
+    exact Finset.sum_congr rfl fun l _ => by rw [Matrix.smul_apply, smul_eq_mul]]
+  push_cast
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [show ((pol l μ ν : ℝ) : ℂ) * α l + ((pol l μ ν : ℝ) : ℂ) * (starRingEnd ℂ) (α l)
+      = ((pol l μ ν : ℝ) : ℂ) * (α l + (starRingEnd ℂ) (α l)) from by ring,
+    Complex.add_conj]
+  push_cast
+  ring
+
+open QIQTH.AreaMap in
+/-- **Q3 CAPSTONE (area) — `⟨α|Â(Σ)|α⟩ = δA_Σ(h(α))`:** the coherent expectation of the quantized area
+    observable is the GEOMETRIC area variation of the classical field of the amplitude — the exact `δA`
+    input the assembled bridge (first law ⟺ Einstein) consumes. The classical bridge is the coherent
+    shadow of the operator emergence map. -/
+theorem coherent_area {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (α : Fin 2 → ℂ) :
+    (areaExpr pol S).cohExpect α = ((areaVar S (classicalH pol α) : ℝ) : ℂ) := by
+  rw [LinExpr.cohExpect, areaExpr, classicalH]
+  rw [show areaVar S (∑ l, (2 * (α l).re) • pol l)
+      = ∑ l, (2 * (α l).re) * areaVar S (pol l) from by
+    rw [Fin.sum_univ_two, Fin.sum_univ_two, areaVar_add, areaVar_smul, areaVar_smul]]
+  push_cast
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [show ((areaVar S (pol l) : ℝ) : ℂ) * α l
+        + ((areaVar S (pol l) : ℝ) : ℂ) * (starRingEnd ℂ) (α l)
+      = ((areaVar S (pol l) : ℝ) : ℂ) * (α l + (starRingEnd ℂ) (α l)) from by ring,
+    Complex.add_conj]
+  push_cast
+  ring
+
 end QIQTH.OperatorEmergence
