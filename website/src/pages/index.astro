@@ -114,6 +114,59 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   </div></section>
 
   <section class="section"><div class="wrap">
+    <h2>First in the world — formalization firsts (to our knowledge, 2026)</h2>
+    <p class="sub">Each item below is, to our knowledge, the <strong>first machine-checked formalization</strong>
+      of its subject in any proof assistant — verified against the 2026 landscape (Mathlib has spectral/CFC and
+      GNS foundations; PhysLean has fermionic Wick/CAR algebra; Tomita–Takesaki modular theory existed in
+      <em>no</em> proof assistant). These are <em>formalization</em> firsts — machine-checking known and new
+      mathematics/physics — not claims of physics priority. All axiom-free (standard three), budget 0.</p>
+    <div class="note">
+      <ol style="margin:0; padding-left:1.4rem; line-height:1.7">
+        <li><strong>Tomita–Takesaki modular theory</strong> — the bounded Rieffel–Van&nbsp;Daele modular objects
+          (J, Δ, Δ<sup>it</sup>) on a standard subspace, the <em>self-adjoint modular Hamiltonian</em>
+          K&nbsp;=&nbsp;−log&nbsp;Δ as a genuine unbounded operator, and Δ<sup>it</sup>&nbsp;=&nbsp;e<sup>−itK</sup>
+          as a C₀ unitary group with <em>derived</em> Stone generator — in any proof assistant.</li>
+        <li><strong>An unbounded Stone theorem + spectral machinery beyond Mathlib</strong> — the
+          projection-valued-measure spectral theorem for bounded self-adjoint operators, bounded Borel functional
+          calculus with multiplicativity, the unbounded functional calculus ∫f&thinsp;dE, and Stone-generator
+          reconstruction — filling a documented Mathlib gap.</li>
+        <li><strong>The Araki/CGP relative entropy for the free field</strong> — the one-particle
+          Casini–Grillo–Pontello entropy with the coherent-state reduction
+          S<sub>Araki</sub>(ω<sub>W(f)Ω</sub>‖ω<sub>Ω</sub>) = S<sub>CGP</sub>(f), Connes cocycles included.</li>
+        <li><strong>The one-particle Bisognano–Wichmann theorem</strong> — the wedge modular flow equals the
+          geometric Lorentz boost, as an unconditional Lean theorem (free field).</li>
+        <li><strong>A Jacobson "Einstein equation of state" derivation</strong> — the conditional chain from an
+          entropy bound + Klein positivity to Einstein-form field equations (G&nbsp;+&nbsp;Λg&nbsp;=&nbsp;αT),
+          Raychaudhuri and Bianchi machinery included, instantiated on an explicit pp-wave showcase.</li>
+        <li><strong>The Sakharov induced-gravity ¼ ratio</strong> — the (conical&nbsp;4π)/(EH&nbsp;16π) coefficient
+          ratio behind S&nbsp;=&nbsp;A/4G as a machine-checked theorem (the <em>value</em> of G stays carried).</li>
+        <li><strong>The graviton's complete linearized kinematics</strong> — <em>exactly</em> 2 physical
+          polarizations via the explicit gauge quotient (D(D−3)/2&nbsp;=&nbsp;2), helicity&nbsp;±2 as explicit
+          rotation eigenvalues e<sup>∓2iθ</sup>, masslessness, the physical-state projector (propagator numerator),
+          and the wave equation.</li>
+        <li><strong>A canonically quantized graviton</strong> — the two helicity modes as a bosonic CCR algebra on
+          Bargmann–Fock space: [a<sub>i</sub>,&thinsp;a<sub>j</sub><sup>†</sup>]&nbsp;=&nbsp;δ<sub>ij</sub>,
+          occupation spectrum, zero-point energy, helicity charge, coherent states, and the two-point function.</li>
+        <li><strong>Weinberg's equivalence-principle theorem (algebraic core)</strong> — soft-graviton longitudinal
+          decoupling ⟺ the Ward sum rule, and (for generic momenta) <em>all couplings equal</em>: massless spin-2
+          forces universal coupling.</li>
+        <li><strong>The entanglement → linearized-Einstein bridge, assembled</strong> — the FGHMVR/Jacobson
+          template with real parts: the first law at every probe ⟺ linearized Einstein, with the separating-probe
+          hypothesis <em>proven</em> by geometric area probes, the wedge/ball Clausius data <em>forced</em> by the
+          derived modular flow, and the CHM diamond conformal-Killing geometry verified by real calculus.</li>
+        <li><strong>A finite holographic-screen code with a non-tautological area law</strong> — local packing ⟹
+          regional area bound with area an <em>independent</em> charge (machine-checked guards against
+          area&nbsp;:=&nbsp;log&nbsp;dim circularity and against the bound being free), plus min-cut/RT form.</li>
+      </ol>
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all eleven.</strong> Free-field / linearized /
+      conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
+      none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
+      Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority
+      on any item shown to be formalized earlier.</p>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="wrap">
     <h2>The argument in five links</h2>
     <p class="sub">The chain spans both axes: the finite-capacity / holography link is the <em>gravity</em> engine;
       the decoherence → λ → Born links are the <em>foundations</em>. The two genuine postulates are the
