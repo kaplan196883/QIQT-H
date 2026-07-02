@@ -8148,6 +8148,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FormalDeser.FormalDeserSystem.extend_of_solver
 #print axioms QIQTH.FormalDeser.einsteinDeserSystem
 #print axioms QIQTH.FormalDeser.einstein_next_source_conserved
+-- QG I3+I4-cert (QG_CAMPAIGN_PLAN.md phase B — the Lorentz-cutoff stress test, EXECUTED 2026-07-02).
+-- I3 LatticeDispersionBound: |E_a(p)² − (m²+p²)| ≤ a²p⁴/12 — the free-field PASS (defect (ap)²-suppressed,
+-- no floor; via the global cubic bound sin u ≥ u − u³/6 from cos ≥ 1 − x²/2). NOT decisive — free lattices
+-- always pass; the interacting gate is what kills. I4-cert CpsuvGate: dc2Sharp (the GPT-5.5-pro-verified
+-- closed form of the one-loop Yukawa speed splitting under a sharp spatial cutoff, numerics matched to
+-- 2e-18) TENDS TO the NONZERO constant 1/(12π²) — unsuppressed Lorentz violation (cpsuv_gate_sharp_fails:
+-- the preferred-frame branch of finite capacity is DEAD); covariantSplit_eq_zero — an O(4)-symmetric
+-- two-point function has Δc² = 0 identically (the surviving covariant branch passes BY SYMMETRY). The loop
+-- integral itself is not formalized (numerically validated); the diamond-tip u^μ_D danger stays open. Std 3.
+#print axioms QIQTH.QG.Lattice.sin_ge_sub_cube
+#print axioms QIQTH.QG.Lattice.lattice_dispersion_defect_bound
+#print axioms QIQTH.QG.Cpsuv.cpsuvConst_ne_zero
+#print axioms QIQTH.QG.Cpsuv.dc2Sharp_tendsto_cpsuvConst
+#print axioms QIQTH.QG.Cpsuv.cpsuv_gate_sharp_fails
+#print axioms QIQTH.QG.Cpsuv.covariantSplit_eq_zero
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

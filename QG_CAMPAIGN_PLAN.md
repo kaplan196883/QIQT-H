@@ -55,7 +55,7 @@ decisive pass/fail.
 
 ### Phase B — the Lorentz-cutoff stress test *(Lean dispersion bound + Python loop test, (b))*
 
-- **I3 — free dispersion Lorentz-defect bound.** For the lattice/QCA dispersion `E_a(p)² = m² + (4/a²)sin²(ap/2)`,
+- [x] **I3 — free dispersion Lorentz-defect bound. ✅ DONE 2026-07-02** (`QIQTH/QG/LatticeDispersionBound.lean`, axiom-free std-3): `lattice_dispersion_defect_bound` — `|E_a(p)² − (m²+p²)| ≤ a²p⁴/12` via the global cubic bound `sin u ≥ u − u³/6`. The free-field PASS (no floor) — and the certified reason the free test is NOT decisive. I4-cert companion: `QIQTH/QG/CpsuvGate.lean` — `cpsuv_gate_sharp_fails` (the closed-form splitting tends to the NONZERO `1/(12π²)`) + `covariantSplit_eq_zero` (the covariant branch passes by symmetry). For the lattice/QCA dispersion `E_a(p)² = m² + (4/a²)sin²(ap/2)`,
   prove `|E_a(p)² − (m²+p²)| ≤ a²p⁴/12` — the cheap, known pass: defect `~(ap)²`, `α=2`, **no rapidity-independent
   floor**. Lean theorem. (Cheap pass — not yet decisive.)
 - [x] **I4 — the decisive one-loop `Δc²` naturalness test. ✅ EXECUTED 2026-07-02** (GPT-5.5-pro-designed; `scripts/lorentz_stress_test.py`, results `docs/qg_roadmap/LORENTZ_STRESS_TEST_RESULTS.md`): sharp spatial cutoff FAILS (c₀ = g²/12π², unsuppressed, fit vs analytic to 2·10⁻⁸); ALL smooth spatial profiles FAIL (≥ CPSUV constant); fermion channel FAILS (−g²/48π²); covariant O(4) family PASSES (Δc² = 0 by symmetry). Preferred-frame finite capacity is DEAD; the covariant-diamond branch (OP3b) is the sole survivor; the named residual danger = the diamond tip vector u^μ_D. A free-fermion chain / QCA Dirac toy: extract `Γ⁽²⁾`,

@@ -166,6 +166,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   matter kernel). `CpsuvEscape.*` **[AF, near-tautology — self-flagged]** — posits `B=0`/independent frames by
   fiat; the substantive "QIQT-H escapes CPSUV" claim is **NOT established** (~10–20%, red-teamed). Read as a
   structural conditional only.
+- **THE LORENTZ-CUTOFF STRESS TEST — EXECUTED 2026-07-02** (`QG_CAMPAIGN_PLAN.md` I3+I4; the decisive one-loop
+  naturalness gate; GPT-5.5-pro-designed; `scripts/lorentz_stress_test.py` + results doc
+  `docs/qg_roadmap/LORENTZ_STRESS_TEST_RESULTS.md`). **NUMERICS:** Euclidean Yukawa `Δc² = Z_s/Z_t − 1`; sharp
+  spatial cutoff → the CPSUV constant `g²/12π² = 8.443·10⁻³` UNSUPPRESSED (fit `c₀` matches the analytic
+  constant to 2·10⁻⁸; quadrature matches closed forms to 2·10⁻¹⁸); ALL smooth spatial profiles →
+  `(g²/12π²)[1+2∫x f′²] ≥` the constant (FAIL); fermion channel `−g²/48π²` (FAIL, independent); covariant
+  O(4) family → `Δc² = 0` by symmetry (PASS). **LEAN [AF] std-3:** `QG/LatticeDispersionBound.lean` —
+  `lattice_dispersion_defect_bound` `|E_a(p)²−(m²+p²)| ≤ a²p⁴/12` (the free-field pass, via the global
+  `sin u ≥ u−u³/6`); `QG/CpsuvGate.lean` — **`cpsuv_gate_sharp_fails`** (the certified closed form TENDS TO
+  the nonzero `1/(12π²)` — no `E/Λ` decoupling) + **`covariantSplit_eq_zero`** (O(4)-symmetric `Π` has
+  `Δc² = 0` identically). **VERDICT:** the preferred-frame spatial realization of finite capacity is DEAD
+  (falsified at percent level); the OP3b covariant-diamond branch is the SOLE survivor; the named open danger
+  = the diamond tip vector `u^μ_D` entering the vacuum effective action ("area invariant" is not enough).
+  The loop integral itself is numerically validated, not formalized. NOT QG.
 
 ## 3. Gravity / Sakharov 1/4 / Einstein equation
 
