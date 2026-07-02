@@ -515,7 +515,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   are CARRIED hypotheses (the modular-matter inputs — provable for the finite corner, abstract here);
   single-term/pair level; the vN closure stays the carried frontier below.
 
-- **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ` is the ONE genuine [frontier]** — not built; bridged by the
+- **The wall, rung W4 — `QIQTH/TraceCapacityFromCore.lean`** (`QIQTH.TypeIITrace`, **[AF]** std-3;
+  `TYPE_II_TRACE_PLAN.md` — **CAMPAIGN COMPLETE, W1–W4, 6/6 rungs**). **The capacity interfaces fed by the
+  CONSTRUCTED trace.** `CoreDensity` (normalized star-square core densities, positive by W3b).
+  **`phase5_from_core_trace`** — a `Phase5Master` certificate whose nonnegative JLMS remainder is **realized** as
+  the constructed `τ₀(r*·r)` (W3b's positivity theorem powering the previously-posited field; the JLMS balance
+  stays the carried area/calibration input). **`traceCapacity_from_core`** — a `TraceCapacity` certificate whose
+  bound `S_ren ≤ Q` is a **theorem** (the slack is the constructed trace value). **`DualWeightTraceExtension`** —
+  the CARRIED vN-extension typeclass (normal weights/affiliated operators = the genuine remaining frontier;
+  a named hypothesis, never an axiom); `extension_preserves_density_mass`. ⚠ **The wall is NOT crossed**: the
+  dual-weight trace exists with exact scaling, traciality, and positivity ON THE ALGEBRAIC CORE; the von Neumann
+  closure, the continuum count, and black-hole matching remain carried/cited.
+
+- **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ`** — now BUILT on the algebraic core (rungs W1–W4 above: exact scaling + traciality + positivity), with the vN-closure half still the [frontier] (the carried `DualWeightTraceExtension`); bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
 - Araki/Umegaki relative entropy **[AF]** finite-dim (Type I shadow); `ModularRelativeEntropy.cgpEntropy` is the

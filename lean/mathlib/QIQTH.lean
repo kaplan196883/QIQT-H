@@ -61,6 +61,7 @@ import QIQTH.LogClockWeight
 import QIQTH.ZClockRegression
 import QIQTH.MonomialTrace
 import QIQTH.EigenCore
+import QIQTH.TraceCapacityFromCore
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

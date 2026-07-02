@@ -1,6 +1,6 @@
 # THE WALL — the Type II dual-weight trace (τ∘θ_s = e^{−s}τ), the tractable ladder
 
-**Status:** ACTIVE (2026-07-02). **GPT-5.5-pro-DESIGNED ladder (consult 2026-07-02) — its corrections are
+**Status:** ✅ COMPLETE (2026-07-02, W1–W4 all landed). **GPT-5.5-pro-DESIGNED ladder (consult 2026-07-02) — its corrections are
 BINDING.** **Goal:** construct the crossed-product dual-weight trace on an honest algebraic core — the object
 whose renormalized entropy discharges the carried calibration toward a continuum count. This is wall #1 of QG in
 QIQT-H.
@@ -35,7 +35,7 @@ QIQT-H.
   **`eigen_tau_dual`** (`e^{−s}` scaling), **`eigen_tau_trace`** (traciality — via the KMS eigen lemma
   `ω(ab) = e^{κ}ω(ba)` + the `∫e^x` shift identity: the factors cancel), **`eigen_tau_star_mul_nonneg`**
   (positivity — frequency blocks are ω-orthogonal, `omega_eigen_zero`).
-- [ ] **W4 — the payoff.** `CoreDensity` (positive, mass-one, log-closed); `SrenCore` (the τ₀-relative entropy on
+- [x] **W4 ✅ LANDED (`QIQTH/TraceCapacityFromCore.lean`, [AF] std-3, wired+pinned, budget 0) — the payoff.** `CoreDensity` (positive, mass-one, log-closed); `SrenCore` (the τ₀-relative entropy on
   the core); **instantiate `TraceCapacity`/`Phase5Master` for the eigen/coherent core with the CONSTRUCTED
   trace** — the FQ-bound interface fed by a built object, non-vacuous. The full vN extension stays the carried
   `DualWeightTraceExtension` + `EntropyCoreApproximation` typeclasses (explicit hypotheses, never axioms).
@@ -56,3 +56,4 @@ gpt-5.5-pro.
 - **2026-07-02 — W2 ✅ LANDED**: the ℤ regression on banded kernels — zWeight_shift_quasiInvariant (= e^{−1}·, the SHIFT/discrete log-clock translation) AND zWeight_dualCircle_invariant (the TRUE ℤ-dual action leaves the weight invariant) + positivity + window stability. The shift-vs-dual distinction is machine-checked. NEXT → W3a (the monomial trace formula).
 - **2026-07-02 — W3a ✅ LANDED**: tauMonomial (the dual-weight trace on normal-ordered monomials, the consult's log-clock normal form) + dualAction_monomial (the operator-level θ_s(π(a)λ_t)=e^{ist}·π(a)λ_t from W1) + Iexp_modMul_dualShift_comm (the Weyl interchange) + tauMonomial_dual — τ₀∘θ_s = e^{−s}·τ₀ EXACT on the monomial core. NEXT → W3b (the eigen-core: traciality + positivity).
 - **2026-07-02 — W3b ✅ LANDED**: the eigen-core — EigenTerm mul/star/theta/tau; eigen_tau_dual (scaling); eigen_tau_trace (TRACIALITY — the carried KMS-eigen factor e^κ cancels exactly against Iexp_shiftMul_swap at zero total frequency; both sides vanish off it); eigen_tau_star_mul_nonneg (POSITIVITY via the norm-square symbol star_mul_symbol). The dual weight is a TRACE on the eigen-core. NEXT → W4 (TraceCapacity from the constructed trace + the carried extension typeclasses).
+- **2026-07-02 — W4 ✅ LANDED + CAMPAIGN COMPLETE (W1·W1.5·W2·W3a·W3b·W4, 6/6)**: CoreDensity; phase5_from_core_trace (the Phase5Master remainder REALIZED as τ₀(r*r), nonneg by W3b's theorem); traceCapacity_from_core (Sren ≤ Q PROVEN — the slack is the constructed trace); DualWeightTraceExtension (the carried vN-extension typeclass — the genuine remaining frontier, never an axiom) + extension_preserves_density_mass. THE WALL IS NOT CROSSED — the dual-weight trace exists with exact scaling/traciality/positivity on the algebraic core; the vN closure, continuum count, and black-hole matching remain carried/cited. Loop deleted; campaign checkpointed COMPLETE.

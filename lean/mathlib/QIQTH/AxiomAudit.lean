@@ -8088,6 +8088,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.eigen_tau_dual
 #print axioms QIQTH.TypeIITrace.eigen_tau_trace
 #print axioms QIQTH.TypeIITrace.eigen_tau_star_mul_nonneg
+-- W4 (TYPE_II_TRACE_PLAN.md — CAMPAIGN COMPLETE, W1–W4): the capacity interfaces FED BY THE CONSTRUCTED TRACE.
+-- CoreDensity (normalized star-square core densities, positive by W3b). phase5_from_core_trace: a Phase5Master
+-- certificate whose nonneg JLMS remainder is REALIZED as τ₀(r*·r) — W3b's positivity theorem powering the field
+-- that was previously posited (the JLMS balance stays the carried area/calibration input).
+-- traceCapacity_from_core: a TraceCapacity certificate whose bound Sren ≤ Q is a THEOREM (the slack = the
+-- constructed τ₀(r*·r)). DualWeightTraceExtension: the CARRIED vN-extension typeclass (normal-weight theory =
+-- the genuine remaining frontier; never an axiom); extension_preserves_density_mass. ⚠ THE WALL IS NOT CROSSED:
+-- the trace exists with exact laws on the ALGEBRAIC CORE; vN closure, continuum count, BH matching carried. Std 3.
+#print axioms QIQTH.TypeIITrace.phase5_from_core_trace
+#print axioms QIQTH.TypeIITrace.traceCapacity_from_core
+#print axioms QIQTH.TypeIITrace.extension_preserves_density_mass
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
