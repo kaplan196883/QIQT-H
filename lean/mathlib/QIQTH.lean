@@ -57,6 +57,7 @@ import QIQTH.CalibratedAreaLaw
 import QIQTH.CodeEquilibrium
 import QIQTH.DeserRung
 import QIQTH.DualAction
+import QIQTH.LogClockWeight
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

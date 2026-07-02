@@ -8046,6 +8046,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.dualAction_clock
 #print axioms QIQTH.StandardSubspaceModular.dualAction_add
 #print axioms QIQTH.StandardSubspaceModular.dualAction_mul
+-- W1.5 (TYPE_II_TRACE_PLAN.md): the LOG-CLOCK WEIGHT integral — the exact e^{−s} scaling engine. ExpTest =
+-- bounded measurable compact-support log-clock symbols (binding: not Schwartz), closed under the dual shift and
+-- clock modulation (modMul = the symbol of λ_t·f(L)). expTest_integrable (∫e^x f converges). Iexp f = ∫e^x f(x)dx
+-- — the CPW density on the LOG-CLOCK spectral variable (binding correction: never the clock position).
+-- Iexp_dualShift — THE EXACT SCALING: Iexp(f(·+s)) = e^{−s}·Iexp f (pure change of variables, no regularization)
+-- — the τ∘θ_s = e^{−s}τ mechanism every later trace rung reduces to; Iexp_dualShift_modMul (the W3a form). Std 3.
+#print axioms QIQTH.TypeIITrace.expTest_integrable
+#print axioms QIQTH.TypeIITrace.Iexp_dualShift
+#print axioms QIQTH.TypeIITrace.Iexp_dualShift_modMul
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

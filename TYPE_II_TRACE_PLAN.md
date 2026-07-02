@@ -21,7 +21,7 @@ QIQT-H.
 - [x] **W1 ✅ LANDED (`QIQTH/DualAction.lean`, [AF] std-3, wired+pinned, budget 0) — the dual action.** `dualAction s := Ad(modulationUnitary s)⁻¹` on `B(H_tot)`:
   `dualAction_matter` (fixes `π(a)`), `dualAction_clock` (`λ_t ↦ e^{ist}λ_t` — LITERALLY the proven Weyl
   relation), `dualAction_add` (group law). Package as *-automorphisms.
-- [ ] **W1.5 — the log-clock + the scaling integral.** `logClock L` with `λ_t = e^{itL}` (Stone uniqueness + FC);
+- [x] **W1.5 ✅ LANDED (`QIQTH/LogClockWeight.lean`, [AF] std-3, wired+pinned, budget 0) — the log-clock + the scaling integral.** `logClock L` with `λ_t = e^{itL}` (Stone uniqueness + FC);
   `dualAction_logClock_fc`: `θ_s(f(L)) = (x ↦ f(x+s))(L)`. `ExpTest` structure; `Iexp f := ∫ e^x f x dx`;
   **`Iexp_dualShift`: `Iexp(f(·+s)) = e^{−s}·Iexp f`** — the exact scaling, clock-only.
 - [ ] **W2 (regression, honest labels) — the ℤ weighted shift.** `zWeight A := ∑ e^n⟨e_n, A e_n⟩` on the
@@ -52,3 +52,4 @@ gpt-5.5-pro.
   shift-vs-dual regression; W3 redirected to the log-clock normal form — the X-position formula FORBIDDEN;
   W4 core-instantiation + carried extension). NEXT → W1.
 - **2026-07-02 — W1 ✅ LANDED**: dualPhase V_s (fiberwise phase unitary on L²(ℝ;H), group law + inverse) + dualAction θ_s = Ad(V_s)⁻¹: dualAction_matter (fixes π(a)), dualAction_clock (θ_s(λ_t)=e^{ist}λ_t — the vector-valued Weyl relation), dualAction_add, dualAction_mul. NEXT → W1.5 (logClock + Iexp scaling).
+- **2026-07-02 — W1.5 ✅ LANDED**: ExpTest (compact-support log-clock symbols; dualShift + modMul closure), expTest_integrable, Iexp = ∫e^x f, and THE EXACT SCALING Iexp_dualShift (= e^{−s}·Iexp, pure change of variables) + the modulated W3a form. NEXT → W2 (ℤ shift-vs-dual regression).

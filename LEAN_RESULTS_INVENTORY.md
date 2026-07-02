@@ -471,6 +471,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ladder's later rungs). ⚠ On the represented operators `B(L²(ℝ;H))`; the vN closure and the full CPW trace stay
   the carried frontier below.
 
+- **The wall, rung W1.5 — `QIQTH/LogClockWeight.lean`** (`QIQTH.TypeIITrace`, **[AF]** std-3;
+  `TYPE_II_TRACE_PLAN.md`). **The log-clock weight integral — the exact `e^{−s}` scaling engine.** `ExpTest`
+  (bounded measurable compact-support log-clock symbols; closed under the dual shift `θ_s : f ↦ f(·+s)` and clock
+  modulation `modMul` = the symbol of `λ_t·f(L)`); `expTest_integrable`; `Iexp f = ∫e^x f(x)dx` — the CPW density
+  on the **log-clock** spectral variable (the binding consult correction: never the clock position).
+  **`Iexp_dualShift`** — the EXACT scaling `Iexp(f(·+s)) = e^{−s}·Iexp f` (pure change of variables, no
+  regularization) — the `τ∘θ_s = e^{−s}τ` mechanism to which every later trace rung reduces;
+  `Iexp_dualShift_modMul` (the W3a monomial form). ⚠ Symbol/integral level; the operator representation and the
+  trace functional are the later rungs; vN closure + full CPW trace stay the carried frontier below.
+
 - **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ` is the ONE genuine [frontier]** — not built; bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
