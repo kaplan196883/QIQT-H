@@ -615,9 +615,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   substrate:** `maxMixed = N⁻¹·1` w.r.t. the UNNORMALIZED counting trace (the binding correction);
   `maxMixed_eigenvalues` (constant spectrum); **`vonNeumannEntropy_maxMixed`** (`S(maxMixed) = log N` —
   the entropy half of the count) + **`vonNeumannEntropy_le_log_card`** (the Gibbs/Jensen GUARD: `S ≤ log N`
-  for every density, so the count equality is claimed only at maximal mixing). Next: K2a (standalone
-  finite count) → K2b (the τ₀ realization — the count as the restriction of the constructed trace, with
-  the calibration a THEOREM because the weight is trace-defined).
+  for every density, so the count equality is claimed only at maximal mixing). **K2a LANDED**: `LinkDims`/`Micro`/
+  `card_micro` (= Π D_e); `DiamondAlg` + the UNNORMALIZED `tauCount`; **`tau_recordProj`** (`τ(P_R) = |R|`
+  — the trace COUNTS records) + `tau_top`; the TRACE-DEFINED weight `wEntTau e = log D_e`;
+  **`K2a_count_capstone`** — `S(maxMixed) = log N_C = Σ_e log D_e = inducedScreenAreaTau/(4G)` as a
+  theorem (G only through the normalization); **`count_matches_external_weights_iff`** — pointwise
+  external-weight matching IS the old calibration (stated honestly, never deleted). Next: K2b (the τ₀
+  realization — the counting trace as the RESTRICTION of the constructed trace).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

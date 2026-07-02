@@ -8334,6 +8334,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Keystone.maxMixed_eigenvalues
 #print axioms QIQTH.Keystone.vonNeumannEntropy_maxMixed
 #print axioms QIQTH.Keystone.vonNeumannEntropy_le_log_card
+-- K2a (KEYSTONE_PLAN.md): the standalone finite count. LinkDims/Micro/card_micro (= Π D_e); DiamondAlg
+-- with the UNNORMALIZED tauCount (τ(1) = N_C — the binding correction); tau_recordProj (τ(P_R) = |R| —
+-- the trace COUNTS records); the TRACE-DEFINED weight wEntTau e = log D_e; log_NC_eq_cutTau; CAPSTONE
+-- K2a_count_capstone — S(maxMixed) = log N_C = Σ log D_e = inducedScreenAreaTau/(4G), G entering only
+-- through the normalization; count_matches_external_weights_iff — pointwise external matching IS the old
+-- calibration hypothesis (stated honestly, NOT deleted). Std 3.
+#print axioms QIQTH.Keystone.card_micro
+#print axioms QIQTH.Keystone.tau_recordProj
+#print axioms QIQTH.Keystone.log_NC_eq_cutTau
+#print axioms QIQTH.Keystone.K2a_count_capstone
+#print axioms QIQTH.Keystone.count_matches_external_weights_iff
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
