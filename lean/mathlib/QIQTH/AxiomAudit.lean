@@ -8036,6 +8036,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EarnGravity.gravStress_conserved
 #print axioms QIQTH.EarnGravity.deser_selfcoupling_consistent
 #print axioms QIQTH.EarnGravity.gravStress_traceless
+-- W1 (TYPE_II_TRACE_PLAN.md — the wall campaign): THE DUAL ACTION θ_s of the crossed product M⋊_σℝ, implemented
+-- by the fiberwise phase unitary V_s ((V_sξ)(x)=e^{isx}·ξ(x)) on L²(ℝ;H): dualAction s T := V_{−s}TV_s.
+-- dualAction_matter: θ_s(π(a)) = π(a) (the phase is scalar fiberwise). dualAction_clock: θ_s(λ_t) = e^{ist}·λ_t
+-- — the VECTOR-VALUED WEYL RELATION (the crossed-product form of the scalar weyl_relation). dualAction_add group
+-- law; dualAction_mul multiplicativity (conjugation). The action against which the dual-weight trace scales
+-- (τ∘θ_s = e^{−s}τ — the later rungs). ⚠ On the represented operators; vN closure + full CPW trace carried. Std 3.
+#print axioms QIQTH.StandardSubspaceModular.dualAction_matter
+#print axioms QIQTH.StandardSubspaceModular.dualAction_clock
+#print axioms QIQTH.StandardSubspaceModular.dualAction_add
+#print axioms QIQTH.StandardSubspaceModular.dualAction_mul
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

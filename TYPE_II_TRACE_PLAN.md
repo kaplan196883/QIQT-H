@@ -18,7 +18,7 @@ QIQT-H.
   core) is the CARRIED `DualWeightTraceExtension` hypothesis — never claimed, never an axiom.
 
 ## Increments (the reordered ladder)
-- [ ] **W1 — the dual action.** `dualAction s := Ad(modulationUnitary s)⁻¹` on `B(H_tot)`:
+- [x] **W1 ✅ LANDED (`QIQTH/DualAction.lean`, [AF] std-3, wired+pinned, budget 0) — the dual action.** `dualAction s := Ad(modulationUnitary s)⁻¹` on `B(H_tot)`:
   `dualAction_matter` (fixes `π(a)`), `dualAction_clock` (`λ_t ↦ e^{ist}λ_t` — LITERALLY the proven Weyl
   relation), `dualAction_add` (group law). Package as *-automorphisms.
 - [ ] **W1.5 — the log-clock + the scaling integral.** `logClock L` with `λ_t = e^{itL}` (Stone uniqueness + FC);
@@ -51,3 +51,4 @@ gpt-5.5-pro.
 - **2026-07-02** — plan created from the GPT-5.5-pro ladder consult (W1 RECOMMEND; W2 redirected to honest
   shift-vs-dual regression; W3 redirected to the log-clock normal form — the X-position formula FORBIDDEN;
   W4 core-instantiation + carried extension). NEXT → W1.
+- **2026-07-02 — W1 ✅ LANDED**: dualPhase V_s (fiberwise phase unitary on L²(ℝ;H), group law + inverse) + dualAction θ_s = Ad(V_s)⁻¹: dualAction_matter (fixes π(a)), dualAction_clock (θ_s(λ_t)=e^{ist}λ_t — the vector-valued Weyl relation), dualAction_add, dualAction_mul. NEXT → W1.5 (logClock + Iexp scaling).
