@@ -473,6 +473,69 @@ decoherent-history</em> selector, and the continuum walls (Haagerup natural-cone
 
 </div>
 
+## The joins — hypothesis deletion (J1–J4)
+
+A dedicated campaign shrinking the carried inputs of the landed results by connecting held theorems. The
+ledger, entry by entry (each says which named hypothesis became a theorem or shrank):
+
+- **J1 — the finite corner discharges the eigen-core matter inputs** (`finiteCorner_tau_trace`,
+  `finiteCorner_tau_pos`): the constructed Type II trace's traciality and positivity hold on the concrete
+  corner (ρ = diag p, matrix units, κ<sub>ij</sub> = log p<sub>i</sub> − log p<sub>j</sub>) with **no matter
+  hypotheses** — the KMS-eigen law, frequency conservation (automatic from the matrix-unit index loop) and
+  positivity are theorems. *Deleted (for this model): hkms, hfreq, hpos.*
+- **J2 — the CHM kernel probe + bridge refactor** (`chmRadialMass3_eq` = 4πR⁴/15,
+  `CHMSymbolProbe3_eq`, `bridge_conditional_probe`): the mass-normalized CHM kernel pairing **equals** the
+  ray area probe (one-variable calculus), and the bridge consumes the derivable probe. *The Iyer–Wald input
+  factors; the residual is one stated identification (`hDeficit`).*
+- **J3 — the abstract CHM transport theorem** (`hCHM_of_conformal_transport`, `toBallModularFamily`): the
+  per-ball CHM identification is a theorem of ONE carried massless wedge-BW datum + conformal conjugacy +
+  the modular transport in its weakest form (the m &gt; 0 BW theorem is never instantiated at m = 0).
+  *hCHM (per-ball physics) shrunk to a wedge datum + functoriality + geometry.*
+- **J4 — the formal Deser system** (`next_source_conserved`, `extend_of_solver`, `einsteinDeserSystem`):
+  all-order consistency **propagation** — the next source's conservation is *derived* from a solving tower
+  (harmonics at their correct momenta n·k; the Bianchi identity proven at every harmonic); no tower positing
+  conservation per order. *Order 2 stays the concrete Deser theorem; nonlinear coefficients = frontier.*
+
+## The Lorentz stress-test gates (CPSUV → diamond tip → state level)
+
+Three falsification gates on the finite-capacity postulate itself — numerics validated against closed
+forms, the decisive constants and limits machine-checked (`QIQTH/QG/CpsuvGate.lean`,
+`LatticeDispersionBound.lean`, `DiamondTipGate.lean`, `StateLevelLVGate.lean`;
+scripts `lorentz_stress_test.py`, `diamond_tip_test.py`; results docs under `docs/qg_roadmap/`).
+
+- **Gate 1 — CPSUV.** A preferred-frame spatial cutoff in interacting Yukawa theory generates the one-loop
+  speed splitting Δc² → g²/12π² — an **unsuppressed constant** (`cpsuv_gate_sharp_fails`: the closed form's
+  nonzero limit is a Lean theorem; quadrature matched to 2·10⁻¹⁸); any O(4)-invariant regulator gives
+  Δc² = 0 by symmetry (`covariantSplit_eq_zero`). *The naive mode-cutoff reading of finite capacity is
+  falsified; the free-field lattice pass (|E<sub>a</sub>² − (m²+p²)| ≤ a²p⁴/12, also a theorem) is
+  certified NOT decisive.*
+- **Gate 2 — the diamond tip.** A causal diamond's tip vector u<sup>μ</sup><sub>D</sub> **does** reach the
+  effective action: within the anisotropic family the splitting vanishes **iff** the regulator is isotropic
+  (`tipSplit_eq_zero_iff`), with first-order sensitivity −2C ≠ 0; and the rapidity-average escape fails
+  provably — the boost-averaged cutoff's null channel equals W/12 exactly (`boostAvg_log_channel`,
+  `boostAvg_diverges`): linear growth, not a regulator. *There is no local Lorentz-invariant
+  finite-capacity cutoff; frame-averaging cannot manufacture one.*
+- **Gate 3 — the state level.** The surviving reading — Q<sub>D</sub> bounds the **entropy of the diamond
+  algebra in the covariant vacuum** — makes **no low-energy LV prediction**: the admissible set is
+  frame-free (`admissible_smul_iff`, `constraintSet_invariant`), the constraint touches no propagator
+  (`stateLevel_noDeltaC2`: Δc² = 0 identically), and the only reopening channels are named theorems —
+  non-invariant prepared states (`operationalLV_iff_not_invariant`), background-selecting saturation
+  (`conditioned_invariant_iff_orbit_constant`), a **non-equivariant enforcement mechanism**
+  (`equivariant_enforcement_preserves_invariance`), or a biased selector (closed by the held
+  `upvm_covariant_probability`). Genuine finite instance: `permutationCapacity`.
+
+<div class="note">
+
+<strong>The arc's verdict, honestly.</strong> Every <em>regulator</em> reading of Q<sub>R</sub> = A/4ℓ<sub>P</sub>²
+is dead — pixels pick a frame, diamond clocks leak, and averaging over the noncompact boost family is not a
+regulator. The <em>entropy</em> reading is provably frame-free and is exactly what the Lean core already
+formalizes (capacity = entropy, not a count). The <strong>dynamical-realization gap</strong> — what physical
+mechanism enforces the bound — is now also the <em>sole remaining Lorentz door</em>: LV re-enters iff the
+enforcer is non-equivariant. Consistent with the covariant-entropy-bound literature (Bousso, Casini, QNEC).
+The loop integrals are numerically validated (closed forms to ≤0.16%), not formalized; NOT quantum gravity.
+
+</div>
+
 ## Reproduce the verification
 
 ```bash
