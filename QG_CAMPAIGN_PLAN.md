@@ -62,6 +62,8 @@ decisive pass/fail.
   compute `Δc² = Z_s/Z_t − 1` at one loop. **PASS** if `Δc² ~ (E/Λ)^α` (suppressed); **FAIL** if it tends to a
   nonzero `O(g²/16π²)` constant (CPSUV). Python/numerics + a short note. **This is the campaign's pass/fail gate.**
 
+- [x] **I4b — the DIAMOND-TIP test. ✅ EXECUTED 2026-07-02** (GPT-5.5-pro-designed, 2 rounds; `scripts/diamond_tip_test.py`, results `docs/qg_roadmap/DIAMOND_TIP_TEST_RESULTS.md`, Lean `QIQTH/QG/DiamondTipGate.lean`): the tip vector u^μ_D DOES reach the effective action — within the anisotropic family Δc² = 2C·H_both(√(a/b)) (closed form validated to ≤0.16%, exact rationals 11/16, 37/72, −17/18), **Δc² = 0 ⟺ isotropic** with FIRST-order sensitivity −2C (certified). The rapidity-average escape FAILS (boost-averaged null channel = W/12 exactly — not a regulator; ⟨(u⁰)²⟩_W diverges). FORCED: finite capacity is consistent only as a STATE/ALGEBRA-LEVEL covariant constraint (entropy of the diamond algebra in the covariant vacuum — the modular formulation the Lean core already uses), never a frame regulator. Next decisive item: a low-energy LV-signature bound for the state-level capacity.
+
 ### Phase C — Lean cores toward Tier 2/3 *(Lean, (b) in the toy / (c) for the real thing)*
 
 - **I5 — T1 crossed-product finite trace** (`CrossedProductFiniteTrace.lean`, see

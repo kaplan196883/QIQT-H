@@ -180,6 +180,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (falsified at percent level); the OP3b covariant-diamond branch is the SOLE survivor; the named open danger
   = the diamond tip vector `u^μ_D` entering the vacuum effective action ("area invariant" is not enough).
   The loop integral itself is numerically validated, not formalized. NOT QG.
+- **THE DIAMOND-TIP TEST — EXECUTED 2026-07-02** (follow-on gate; `scripts/diamond_tip_test.py` + results doc
+  `docs/qg_roadmap/DIAMOND_TIP_TEST_RESULTS.md`; Lean `QG/DiamondTipGate.lean` **[AF]** std-3). **The tip
+  vector `u^μ_D` DOES reach the effective action:** within the anisotropic family `Δc² = 2C·H_both(s)`,
+  `s = √(a/b)` (closed form GPT-5.5-pro-derived after correcting against our numerics; validated to ≤0.16%,
+  exact rationals `11/16`, `37/72`, `−17/18`; the O(4) point vanishes to 9·10⁻¹³), **`tipSplit_eq_zero_iff`**
+  — the splitting vanishes IFF the regulator is isotropic — and **`tipSplit_hasDerivAt_one`** — FIRST-order
+  sensitivity, slope `−2C ≠ 0` (a single diamond's CHM truncation is locally a rest-frame cutoff; boundary
+  corrections cannot remove the dim-4 LV operator). **The rapidity-average escape FAILS, certified:**
+  `boostAvg_log_channel` (the boost-averaged null channel `= W/12` EXACTLY) + `boostAvg_diverges` (no
+  regulator limit — the boost group's noncompactness is fatal) + `u0sq_avg_diverges` (via `sinh_ge_add_cube`;
+  the averaged LV operator has no invariant limit). **FORCED CONCLUSION:** finite capacity is consistent ONLY
+  as a state/algebra-level covariant constraint — the entropy of the diamond algebra in the covariant vacuum
+  (the modular, frame-free formulation the Lean core already uses; cf. entropy-not-cardinality) — never as a
+  frame regulator, single or averaged. Loop integrals numerically validated, not formalized. NOT QG; the next
+  decisive item = a low-energy LV-signature bound for the state-level capacity.
 
 ## 3. Gravity / Sakharov 1/4 / Einstein equation
 

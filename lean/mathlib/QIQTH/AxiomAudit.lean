@@ -8163,6 +8163,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QG.Cpsuv.dc2Sharp_tendsto_cpsuvConst
 #print axioms QIQTH.QG.Cpsuv.cpsuv_gate_sharp_fails
 #print axioms QIQTH.QG.Cpsuv.covariantSplit_eq_zero
+-- The DIAMOND-TIP gate (follow-on to I4, EXECUTED 2026-07-02): does a diamond truncation leave the tip
+-- vector u^μ_D in the effective action? YES — certified: tipSplit_eq_zero_iff (within the anisotropic
+-- family Δc² = 2C·anisoH(s), s = √(a/b), the splitting vanishes IFF isotropic — the closed form validated
+-- numerically to ≤0.16% incl. the exact rationals 11/16, 37/72, −17/18); anisoH/tipSplit_hasDerivAt_one
+-- (FIRST-order sensitivity, slope −2C ≠ 0); anisoH_zero (the CPSUV spatial endpoint). The rapidity-average
+-- escape FAILS: boostAvg_log_channel (= W/12 exactly) + boostAvg_diverges (no regulator limit — the boost
+-- group's noncompactness) + u0sq_avg_diverges (via sinh_ge_add_cube; no invariant operator average).
+-- FORCED: finite capacity is consistent only STATE/ALGEBRA-LEVEL (entropy of the diamond algebra in the
+-- covariant vacuum), never as a frame regulator. Loop integrals numerically validated, not formalized.
+-- NOT QG. Std 3.
+#print axioms QIQTH.QG.DiamondTip.anisoH_eq_zero_iff
+#print axioms QIQTH.QG.DiamondTip.anisoH_hasDerivAt_one
+#print axioms QIQTH.QG.DiamondTip.tipSplit_eq_zero_iff
+#print axioms QIQTH.QG.DiamondTip.tipSplit_hasDerivAt_one
+#print axioms QIQTH.QG.DiamondTip.boostAvg_log_channel
+#print axioms QIQTH.QG.DiamondTip.boostAvg_diverges
+#print axioms QIQTH.QG.DiamondTip.sinh_ge_add_cube
+#print axioms QIQTH.QG.DiamondTip.u0sq_avg_diverges
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
