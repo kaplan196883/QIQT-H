@@ -101,10 +101,14 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   `∂_μζ_ν+∂_νζ_μ = −(2t/R)η_{μν}` for `ζ₀=(t²+|x|²−R²)/2R`, `ζᵢ=−tx_i/R`, verified by genuine real calculus
   (`deriv`/`HasDerivAt`, all component classes). **`zeta0_restrict`** — `ζ₀|_{t=0} = −β`: the flow's local
   temperature IS the kernel. ⚠ Kernel geometry only; the CHM theorem itself is conformal-QFT input carried at C2b.
-- [ ] **C2b — conditional CHM transport.** Under a **`CHMCompatible`** hypothesis (conformal covariance — CHM is a
-  CFT-vacuum statement, NOT generic QFT and not automatic for the free graviton), transport the wedge modular
-  Hamiltonian to the ball: `δ⟨K_ball⟩` geometric — the input G1 consumes at every ball. Checkpoint what the
-  free-field/conformal-image case genuinely supports.
+- [x] **C2b — conditional CHM transport ✅** (`QIQTH/BallClausius.lean`, `QIQTH.BallModular`, all [AF] std-3,
+  wired + pinned, budget 0). **`BallModularFamily`** — per ball: standard subspace + probe state + geometric
+  conformal flow, with the CARRIED **`hCHM`** = `CHMCompatible` (each ball's geometric flow acts on the state as
+  its modular flow — the conformal transport of BW; CFT-vacuum input, structure field, never an axiom). Rides C1
+  per ball (`toWedgePackage`). **`ball_correlator_hasDerivAt`** — the Clausius datum at EVERY ball:
+  `d/dt⟪ξ_B,W^B_tξ_B⟫|₀ = i·(−S_B)`. **`ball_flux_unique`** — forced per ball. **`ballHeatFlux`** +
+  **`ballHeatFlux_spec`** — the ball-indexed first-law data `δ⟨K_B⟩ = −S_B`, EXACTLY the `δK : Ball → ℝ` input
+  ASM feeds into G1. ⚠ `hCHM` carried (CFT-vacuum, not generic QFT); the area law + `G` stay ASM's carried inputs.
 - [ ] **ASM — G1 with real parts (vacuum + sourced).** Instantiate `allBall_firstLaw_iff_residual_zero` with
   `residual = G⁽¹⁾(h)` (A1, full — vacuum form) and the sourced form `residual = G⁽¹⁾_{μν} − 8πG T_{μν}` (where B1/B2
   supply conservation/universality of the source), `δK = δ⟨K_ball⟩` (C2b, conditional), `δS = δA/4G` (A2 + the
@@ -167,3 +171,9 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   (nonneg, boundary-vanishing, factorized), the UNIT surface-gravity edge slope β′(R)=−1 (the C1↔C2 2π-consistency),
   the diamond conformal Killing equation verified by real calculus (all component classes), and ζ₀|_{t=0}=−β.
   All [AF] std-3, wired + pinned, budget 0. NEXT → C2b (conditional CHM transport under CHMCompatible) → ASM.
+- **2026-07-02 — C2b ✅ LANDED** (`BallClausius.lean`): the conditional CHM transport — `BallModularFamily` with
+  the carried `hCHM` (= `CHMCompatible`), riding C1 per ball; the Clausius datum forced at EVERY ball
+  (`ball_correlator_hasDerivAt`, `ball_flux_unique`); `ballHeatFlux`/`ballHeatFlux_spec` = the ball-indexed
+  `δK : Ball → ℝ` first-law data for G1. All [AF] std-3, wired + pinned, budget 0. **Ingredient C is COMPLETE.**
+  NEXT → ASM (the final assembly: instantiate G1 with residual = einsteinSymbol, δK = ballHeatFlux, δS = δA/4G
+  CARRIED).

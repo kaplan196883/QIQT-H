@@ -373,6 +373,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ⚠ Kernel GEOMETRY only — the CHM theorem (ball modular Hamiltonian `= 2π∫βT₀₀` for a CFT vacuum) is
   conformal-QFT input, carried at C2b as `CHMCompatible`; not generic QFT.
 
+- **The bridge, increment C2b — `QIQTH/BallClausius.lean`** (namespace `QIQTH.BallModular`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`). **The conditional CHM transport: the Clausius datum at EVERY ball.** `BallModularFamily`
+  bundles, per ball of a probe family, a standard subspace + probe state + geometric conformal (CHM) flow with
+  the **carried `hCHM` = `CHMCompatible`** identification (each ball's geometric flow acts on the state as its
+  modular flow — the conformal transport of BW; CFT-vacuum input, a structure field, never an axiom); rides C1
+  per ball via `toWedgePackage`. **`ball_correlator_hasDerivAt`** — every ball inherits the derived Clausius
+  datum `d/dt⟪ξ_B,W^B_tξ_B⟫|₀ = i·(−S_B)`. **`ball_flux_unique`** — the per-ball datum is FORCED (derivative
+  uniqueness). **`ballHeatFlux`/`ballHeatFlux_spec`** — the ball-indexed first-law data `δ⟨K_B⟩ = −S_B`, exactly
+  the `δK : Ball → ℝ` input the assembly feeds into the FGHMVR skeleton `G1`. ⚠ `hCHM` carried (CFT-vacuum, not
+  generic QFT); the Clausius/area law `δS = δA/4G` and the value of `G` remain the separate carried inputs of the
+  assembly. **Ingredient C (modular → geometric) is COMPLETE.**
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

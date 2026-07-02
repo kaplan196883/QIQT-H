@@ -49,6 +49,7 @@ import QIQTH.WedgeBoostClausius
 import QIQTH.AreaEmergence
 import QIQTH.SoftGraviton
 import QIQTH.CHMKernel
+import QIQTH.BallClausius
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

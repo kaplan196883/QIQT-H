@@ -7963,6 +7963,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CHM.cke_xx_diag
 #print axioms QIQTH.CHM.cke_xx_off
 #print axioms QIQTH.CHM.zeta0_restrict
+-- BRIDGE C2b (BRIDGE_PLAN.md): the CONDITIONAL CHM TRANSPORT — the Clausius datum at EVERY ball. BallModularFamily
+-- (per ball: standard subspace + probe state + geometric conformal flow) with the CARRIED hCHM = CHMCompatible
+-- (each ball's geometric flow acts on the state as its modular flow — the conformal transport of BW; CFT-vacuum
+-- input, a structure field, never an axiom). Rides C1 per ball (toWedgePackage). ball_correlator_hasDerivAt:
+-- d/dt⟪ξ_B,W^B_tξ_B⟫|₀ = i·(−S_B) at EVERY ball. ball_flux_unique: per-ball datum FORCED. ballHeatFlux +
+-- ballHeatFlux_spec: the ball-indexed first-law data δ⟨K_B⟩ = −S_B — EXACTLY the δK : Ball → ℝ input ASM feeds
+-- into G1. ⚠ hCHM carried (not generic QFT); the area law δS=δA/4G + value of G stay ASM's carried inputs. Std 3.
+#print axioms QIQTH.BallModular.ball_correlator_hasDerivAt
+#print axioms QIQTH.BallModular.ball_flux_unique
+#print axioms QIQTH.BallModular.ballHeatFlux_spec
+#print axioms QIQTH.BallModular.ball_correlator_im_hasDerivAt
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
