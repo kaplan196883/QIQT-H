@@ -42,7 +42,7 @@ std-3, budget 0, one commit each, honest labels.
   strict version: without calibration the count is unbounded at fixed cut (ride
   `codeCap_unbounded_at_fixed_area`). The Strominger-shape move: count and geometry as two computations, agreeing
   under the stated local calibration — the calibration now lives on entanglement data, not an area label.
-- [ ] **E4 — dynamics rung one: code equilibrium ⟹ first law ⟹ Einstein.**
+- [x] **E4 ✅ LANDED (`QIQTH/CodeEquilibrium.lean`, [AF] std-3, wired+pinned, budget 0) — dynamics rung one: code equilibrium ⟹ first law ⟹ Einstein.**
   HELD: `finiteCorner_firstLaw` (ModularEnergyBound:128 — first law `δS = δ⟨K⟩` AS relative-entropy stationarity
   `D′ = 0`), `relEntropy_eq_zero` rigidity, `bridge_firstLaw_iff_einstein` (ASM — waits for exactly this input).
   BUILD: a concrete update rule — `evolve : ℝ → Matrix n n ℂ` a state path with `D(ρ_t‖σ)` non-increasing and
@@ -81,3 +81,4 @@ pins; wire `QIQTH.lean` for new modules; ONE commit on main + `Co-Authored-By: C
 - **2026-07-02 — E1 ✅ LANDED**: freeFieldWedgePackage (hBW = theorem via oneParticleBW_niceWedge_unconditional) + freeField_clausius_unconditional (Clausius datum forced, NO BW premise). NEXT → E2.
 - **2026-07-02 — E2 ✅ LANDED**: the explicit decoder (reconstruct: h_ii=2A(e_i), h_ij=A(e_i+e_j)−A(e_i)−A(e_j)); reconstruct_areaVar (the metric IS a function of the code's area data, A2 inverted) + reconstruct_unique. Pointwise, basis-level, symmetry required (verifier labels). NEXT → E3.
 - **2026-07-02 — E3 ✅ LANDED**: calibrated_entanglement_cut_area_law (wEnt formulation per the verifier: screen_cut_eq cut-indexing lemma; inducedScreenArea := 4G·cut(wEnt,S); log #microstates = screenArea/4G under the carried calibration log D_e = wEnt e; uniform_realizes_area_law equilibrium witness; guard kept). NEXT → E4.
+- **2026-07-02 — E4 ✅ LANDED**: RayPathFamilyRealizes (per-ray equilibrium family, one path per ray) ⟹ rayFamily_firstLaw (B4′ stationarity at every probe) ⟹ code_equilibrium_einstein (bridge_firstLaw_iff_einstein.mp); clausius_sign_adapter explicit (K↦−K). NEXT → E5 (Deser rung).

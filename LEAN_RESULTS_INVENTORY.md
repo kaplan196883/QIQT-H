@@ -429,6 +429,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   trace + background independence); the no-calibration guard (`codeCap_unbounded_at_fixed_area`) stays in force;
   finite/model level; `G > 0`.
 
+- **Earns-gravity E4 — `QIQTH/CodeEquilibrium.lean`** (`QIQTH.EarnGravity`, **[AF]** std-3;
+  `MICROTHEORY_EARNS_GRAVITY_PLAN.md`). **Code equilibrium ⟹ first law ⟹ Einstein — the dynamics rung.**
+  `RayPathFamilyRealizes` — a state path PER RAY (one path is not enough), each through its own reference, with
+  per-ray BW identification + analytic derivative data (carried structure fields, never axioms), realizing the
+  ray's first-law datum. **`rayFamily_firstLaw`** — equilibrium (relative-entropy stationarity, B4′) forces
+  `δS = δK` at EVERY ray probe. **`clausius_sign_adapter`** — the explicit `K ↦ −K` orientation bridge between
+  the first-law (`δS = δ⟨K_σ⟩`) and Clausius (`δ⟨K⟩ = −δS`) conventions. **`code_equilibrium_einstein`** — the
+  capstone: a code at per-ray relative-entropy equilibrium, with the carried Iyer–Wald identity, has an emergent
+  perturbation satisfying **linearized vacuum Einstein** — Jacobson's equation-of-state with the state the code's
+  equilibrium. ⚠ Conditional (BW/analytic/Iyer–Wald carried); linearized, free, finite/model level; NOT QG.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

@@ -54,6 +54,7 @@ import QIQTH.BridgeAssembly
 import QIQTH.FreeFieldWedgePackage
 import QIQTH.AreaDecoder
 import QIQTH.CalibratedAreaLaw
+import QIQTH.CodeEquilibrium
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

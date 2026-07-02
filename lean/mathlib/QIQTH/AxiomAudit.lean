@@ -8013,6 +8013,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EarnGravity.screen_cut_eq
 #print axioms QIQTH.EarnGravity.calibrated_entanglement_cut_area_law
 #print axioms QIQTH.EarnGravity.uniform_realizes_area_law
+-- E4 (MICROTHEORY_EARNS_GRAVITY_PLAN.md): CODE EQUILIBRIUM ⟹ FIRST LAW ⟹ EINSTEIN — the dynamics rung.
+-- RayPathFamilyRealizes: a state path PER RAY (one path is NOT enough — verifier-binding), each through its own
+-- reference with per-ray BW identification + analytic derivative data (all carried structure fields, never
+-- axioms), realizing the ray's first-law datum. rayFamily_firstLaw: equilibrium (relative-entropy stationarity,
+-- B4′) forces δS v = δK v at EVERY ray. clausius_sign_adapter: the EXPLICIT K↦−K orientation bridge between
+-- δS = δ⟨K_σ⟩ and the Clausius δ⟨K⟩ = −δS (verifier-required, never implicit). code_equilibrium_einstein —
+-- THE CAPSTONE: a code at per-ray relative-entropy equilibrium + carried Iyer–Wald ⟹ the emergent perturbation
+-- satisfies linearized vacuum Einstein (Jacobson equation-of-state; the state = the code's equilibrium).
+-- ⚠ Conditional; linearized, free, finite/model; NOT QG. Std 3.
+#print axioms QIQTH.EarnGravity.rayFamily_firstLaw
+#print axioms QIQTH.EarnGravity.clausius_sign_adapter
+#print axioms QIQTH.EarnGravity.code_equilibrium_einstein
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
