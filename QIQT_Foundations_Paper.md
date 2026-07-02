@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `4720763a7b59`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `27caf87`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1606,6 +1606,22 @@ A companion Lean 4/Mathlib development (pinned commit `4720763a7b59`, toolchain 
   • `relModFlowH`: $\Delta^{it}_{W(f)\Omega\,|\,\Omega}=W(f)\,\Gamma(\Delta^{it})\,W(f)^*$.
   • `connesCocycleH`, `connesCocycleH_chain`: $[D\omega_{W(f)\Omega}:D\omega_\Omega]_t=W(f)W(-\Delta^{it}f)$, together with the cocycle chain rule.
   • `hasDerivAt_relModFlow_vacuum`: $S_{\rm Araki}(\omega_{W(f)\Omega}\,\|\,\omega_\Omega)=S_{\rm CGP}(f)$ (the Casini-Grillo-Pontello identity).
+
+*The free graviton (kinematics, classical field, canonical quantization).* All linearized, free-field, flat-background — standard free-field content, machine-checked; **not** a claim of quantum gravity.
+
+  • `tt_decomposition` + `polarizations_not_gauge`: the physical polarization space (transverse-traceless modulo gauge) is **exactly 2-dimensional** (the $D(D{-}3)/2=2$ count, via the explicit gauge quotient).
+  • `eR_helicity` / `eL_helicity`: the circular polarizations $e_\pm=e_+\!\pm i e_\times$ are eigenvectors of the rotation conjugation with eigenvalue $e^{\mp 2i\theta}$ — helicity $\pm 2$ as explicit eigenvalues.
+  • `kUp_null`, `physProj_*`, `graviton_null_wave`: masslessness ($k^2=0$), the physical-state projector (the harmonic-gauge propagator numerator; idempotent, kills gauge and trace), and the classical wave equation $\partial_t^2 h=\partial_z^2 h$ for null profiles (genuine calculus).
+  • `ccr`, `numberOp_pow`, `hamiltonian_vacuum`, `helicityOp_plus/minus`, `annih_coherent`, `twoPoint`: canonical quantization of the two helicity modes on the Bargmann-Fock space $\mathbb{C}[X_0,X_1]$ — the CCR $[a_i,a_j^\dagger]=\delta_{ij}$, bosonic occupation spectrum, the Hamiltonian $\omega(N_0{+}N_1{+}1)$ with zero-point energy, one-graviton helicity $\pm 2$, coherent states $a|\alpha\rangle=\alpha|\alpha\rangle$, and the vacuum two-point function $\langle 0|a_ia_j^\dagger|0\rangle=\delta_{ij}$.
+
+*The linearized bridge (conditional assembly; `BRIDGE_PLAN.md`, 9/9 increments).* The entanglement$\,\to\,$linearized-Einstein template (Van Raamsdonk; Faulkner et al. 2013; Jacobson 2015) assembled from the pieces above: every derived step a theorem, every physical input an **explicit hypothesis** (never an axiom) — the Clausius/area law $\delta S=\delta A/4G$, the Iyer-Wald identity, the Bisognano-Wichmann/CHM identifications, scattering genericity, and the value of $G$. **Conditional; not a derivation of gravity** (background independence, the nonlinear completion, and the area law from microstate counting remain open).
+
+  • `graviton_solves_linearized_einstein` + `einstein_iff_dispersion`: the quantized graviton's polarization content solves linearized vacuum Einstein, and conversely $\delta G=0\Leftrightarrow k^2=0$ (Einstein forces light-cone propagation); `bianchi_einsteinSymbol`: the linearized Bianchi identity $k^\mu(\delta G)_{\mu\nu}=0$, identically.
+  • `couple_gauge_invariant_iff_conserved`: gauge invariance of the matter coupling $\int h_{\mu\nu}T^{\mu\nu}$ $\Leftrightarrow$ $\partial_\mu T^{\mu\nu}=0$; `einstein_source_conserved`: an Einstein-sourced $T$ is automatically conserved (the Bianchi payoff).
+  • `soft_gauge_invariant_iff_ward` + `equivalence_principle`: longitudinal decoupling of the soft graviton $\Leftrightarrow$ the Weinberg sum rule $\sum_i\eta_ig_ip_i^\mu=0$, and (for generic momenta) **all couplings equal** — Weinberg's equivalence-principle theorem at the algebraic level.
+  • `boost_flux_unique` / `ball_flux_unique`: the wedge and per-ball Clausius data $\delta\langle K\rangle=-\delta S$ are **forced** (derivative uniqueness) given the carried BW/CHM identifications, riding the derived modular flow; `chmWeight_edge_slope`: the CHM ball kernel meets the entangling surface with unit slope (the wedge-ball $2\pi$ consistency); `cke_*`: the diamond conformal Killing equation by real calculus.
+  • `area_probes_separate`: geometric area probes **separate** symmetric perturbations (the FGHMVR separating-family hypothesis becomes a theorem); `screenArea_eq_bg_add_areaVar`: the holographic-screen-code area charge varies by exactly the geometric $\delta A_\Sigma(h)$ under the supplied identification.
+  • `bridge_firstLaw_iff_einstein` / `bridge_conditional`: the assembled capstone — given the carried inputs, the entanglement first law $\delta S=\delta K$ at every probe $\Leftrightarrow$ the emergent perturbation satisfies linearized vacuum Einstein.
 
 ### 11.5 Credit division
 

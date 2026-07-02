@@ -173,6 +173,63 @@ establish that our universe's gravity <em>is</em> emergent.
 
 </div>
 
+## The quantized graviton and the linearized bridge
+
+Two further axiom-free developments (2026-07) extend the substrate from the scalar field to **gravity's own
+quantum** and assemble the **entanglement → linearized-Einstein bridge** from machine-checked parts.
+
+### The free graviton, end to end
+
+The linearized graviton is now formalized from kinematics through canonical quantization — standard free-field
+physics, machine-checked (every theorem axiom-free, standard 3):
+
+| theorem | statement |
+| --- | --- |
+| `tt_decomposition` + `polarizations_not_gauge` | the physical polarization space (TT modulo gauge) is **exactly 2-dimensional** — the $D(D-3)/2=2$ count via the explicit gauge quotient |
+| `eR_helicity` / `eL_helicity` | the circular polarizations $e_\pm = e_+ \pm i e_\times$ are eigenvectors of rotation with eigenvalue $e^{\mp 2i\theta}$ — **helicity ±2 as explicit eigenvalues** |
+| `kUp_null`, `physProj_*` | masslessness $k^2=0$ and the **physical-state projector** (the harmonic-gauge propagator numerator: idempotent, kills gauge and trace, extracts the helicity content) |
+| `graviton_null_wave` | null profiles $f(t-z)$ solve the wave equation $\partial_t^2 h = \partial_z^2 h$ — the graviton propagates at $c$ (genuine calculus) |
+| `ccr` | canonical quantization: $[a_i, a_j^\dagger]=\delta_{ij}$ for the two helicity modes on the Bargmann–Fock space $\mathbb{C}[X_0,X_1]$ |
+| `numberOp_pow`, `hamiltonian_vacuum` | bosonic occupation spectrum $\mathbb{N}$; the Hamiltonian $\omega(N_0+N_1+1)$ with **zero-point energy** $H\lvert 0
+angle=\omega\lvert 0
+angle$ |
+| `helicityOp_plus/minus`, `annih_coherent`, `twoPoint` | one-graviton states carry helicity ±2; coherent states $a\lvertlpha
+angle=lpha\lvertlpha
+angle$ (the classical bridge); the two-point function $\langle 0ert a_i a_j^\daggerert 0
+angle=\delta_{ij}$ (the propagator residue) |
+
+### The bridge: entanglement first law ⟺ linearized Einstein, assembled from real parts
+
+The FGHMVR/Jacobson template (*entanglement first law at every ball ⟺ linearized Einstein*) is assembled in
+nine increments — every derived step a theorem, every physical input an **explicit hypothesis** (never a Lean
+axiom):
+
+| theorem | statement |
+| --- | --- |
+| `graviton_solves_linearized_einstein`, `einstein_iff_dispersion` | the quantized graviton's polarization content solves linearized vacuum Einstein — and conversely $\delta G = 0 \Leftrightarrow k^2 = 0$: **Einstein forces light-cone propagation** |
+| `bianchi_einsteinSymbol` | the linearized **Bianchi identity** $k^\mu(\delta G)_{\mu
+u}=0$, identically |
+| `couple_gauge_invariant_iff_conserved` | gauge invariance of the matter coupling $\int h_{\mu
+u}T^{\mu
+u}$ **⟺** stress-energy conservation |
+| `soft_gauge_invariant_iff_ward`, `equivalence_principle` | longitudinal decoupling of the soft graviton ⟺ the Weinberg sum rule; for generic momenta **all couplings equal** — the **equivalence principle** at the algebraic level |
+| `boost_flux_unique`, `ball_flux_unique` | the wedge and per-ball Clausius data $\delta\langle K
+angle = -\delta S$ are **forced** (given the carried BW/CHM identifications), riding the derived modular flow |
+| `chmWeight_edge_slope`, `cke_*` | the CHM ball kernel meets the entangling surface with **unit slope** (the wedge↔ball $2\pi$ consistency) and generates a conformal symmetry (Killing equation by real calculus) |
+| `area_probes_separate` | geometric **area probes separate** symmetric perturbations — the separating-family hypothesis of the skeleton becomes a *theorem* |
+| `bridge_firstLaw_iff_einstein`, `bridge_conditional` | **the capstone**: given the carried Clausius/area law $\delta S = \delta A/4G$, Iyer–Wald, and BW/CHM, the first law at every probe **⟺** the emergent perturbation satisfies linearized vacuum Einstein |
+
+<div class="note">
+
+<strong>Honest scope.</strong> The graviton development is standard <em>free-field</em> QFT (linearized, flat
+background, no interactions), machine-checked — not a claim of quantum gravity. The bridge is a
+<em>conditional linearized assembly</em>: the Clausius/area law $\delta S=\delta A/4G$, the Iyer–Wald identity,
+the Bisognano–Wichmann/CHM identifications, scattering genericity, and the value of $G$ are carried as explicit
+hypotheses. Background independence, the nonlinear completion, and the area law from microstate counting remain
+the cited open frontier — the quantum-gravity problem itself.
+
+</div>
+
 ## Index of machine-checked results
 
 For the **exact theorem statements**, machine-translated from the Lean source to readable math

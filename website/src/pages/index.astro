@@ -78,6 +78,18 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           δS = η·δA and the 1/4 are <em>derived</em>. <em>Residual: the reference-state identification + the value
           of&nbsp;G.</em></p>
         <span class="arrow">See the proofs →</span></a>
+      <a class="card" href="/formalization"><h3>The quantized free graviton</h3>
+        <p>Exactly 2 polarizations (gauge quotient), helicity ±2 as explicit eigenvalues, masslessness, the
+          propagator numerator, the wave equation — and canonical quantization: CCR, occupation spectrum,
+          zero-point energy, coherent states, the two-point function. <em>Free field on flat background —
+          standard QFT machine-checked, not quantum gravity.</em></p>
+        <span class="arrow">See the proofs →</span></a>
+      <a class="card" href="/formalization"><h3>The linearized bridge (9/9)</h3>
+        <p>Entanglement first law at every probe ⟺ linearized Einstein — assembled from real parts: the graviton
+          solves δG&nbsp;=&nbsp;0 (iff masslessness), coupling ⟺ conservation, Weinberg's equivalence principle,
+          forced wedge/ball Clausius data, and area probes that provably separate. <em>Conditional: the
+          Clausius/area law, Iyer–Wald, BW/CHM, and G are carried hypotheses.</em></p>
+        <span class="arrow">The assembly →</span></a>
       <a class="card" href="/realisations"><h3>The Standard-Model free fields, in the corner</h3>
         <p>The free SM field content — quarks/leptons (CAR), W/Z/gluon &amp; Higgs (truncated bosons) — faithfully
           encoded into the capacity-bounded microstate corner, Born-weighted and area-bounded.
@@ -296,6 +308,38 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       3+1 Lorentzian manifold and the continuum Borchers route are cited (open-physics) frontiers. The
       Jacobson/BW/Sakharov material below <em>assumes</em> a smooth spacetime, so it is emergent <em>gravity</em>
       (dynamics), not emergent <em>spacetime</em> (the manifold) — a distinction kept sharp throughout.</p>
+    </div>
+
+    <div class="note">
+      <p><strong>New — the quantized free graviton and the linearized bridge (2026-07).</strong> Two further
+      axiom-free developments push the substrate to gravity's own quantum and assemble the
+      entanglement&nbsp;→&nbsp;linearized-Einstein template from machine-checked parts.
+      <strong>(i) The graviton</strong> (<code>EmergentDynamics.lean</code>, <code>GravitonQuantization.lean</code>):
+      the physical polarization space is <em>exactly</em> 2-dimensional (the explicit gauge quotient,
+      D(D−3)/2 = 2); the circular polarizations e<sub>±</sub> = e₊ ± i·e<sub>×</sub> carry <strong>helicity ±2 as
+      explicit eigenvalues</strong> e<sup>∓2iθ</sup>; masslessness k² = 0; the physical-state projector (the
+      propagator numerator — idempotent, kills gauge and trace); the classical wave equation for null profiles;
+      and canonical quantization of the two helicity modes on the Bargmann–Fock space — the CCR
+      [a<sub>i</sub>, a<sub>j</sub><sup>†</sup>] = δ<sub>ij</sub>, bosonic occupation, the Hamiltonian
+      ω(N₀+N₁+1) with its zero-point energy, coherent states a|α⟩ = α|α⟩, and the two-point function
+      ⟨0|a<sub>i</sub>a<sub>j</sub><sup>†</sup>|0⟩ = δ<sub>ij</sub>.
+      <strong>(ii) The bridge</strong> (<code>BRIDGE_PLAN.md</code>, nine increments, all landed): the quantized
+      graviton provably solves linearized vacuum Einstein — with the <em>converse</em> δG = 0 ⟺ k² = 0 (Einstein
+      forces light-cone propagation) and the linearized Bianchi identity; gauge invariance of the matter coupling
+      ⟺ stress-energy conservation; <strong>Weinberg's equivalence principle</strong> (soft-graviton decoupling ⟹
+      the Ward sum rule ⟹ all couplings equal, for generic momenta); the wedge and per-ball Clausius data
+      δ⟨K⟩ = −δS <em>forced</em> by the derived modular flow (given the carried BW/CHM identifications, with the
+      CHM kernel's unit edge slope proving the wedge↔ball 2π-consistency); geometric area probes that
+      <em>provably separate</em> perturbations; and the assembled capstone
+      (<code>bridge_conditional</code>): <em>entanglement first law + area law ⟹ linearized Einstein</em>, end to
+      end from real parts.</p>
+      <p style="margin-top:.5rem"><strong>What this is — and is not.</strong> The graviton development is standard
+      <em>free-field</em> QFT (linearized, flat background, no interactions), machine-checked — not quantum
+      gravity. The bridge is a <em>conditional linearized assembly</em>: every derived step is a theorem, and
+      every physical input is an explicit hypothesis — the Clausius/area law δS = δA/4G (the one irreducible
+      input), the Iyer–Wald identity, the Bisognano–Wichmann/CHM identifications, scattering genericity, and the
+      value of G. Background independence, the nonlinear completion, and the area law from microstate counting
+      remain the cited open frontier — the quantum-gravity problem itself.</p>
     </div>
   </div></section>
 
