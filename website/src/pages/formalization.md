@@ -490,7 +490,7 @@ ledger, entry by entry (each says which named hypothesis became a theorem or shr
 - **J3 — the abstract CHM transport theorem** (`hCHM_of_conformal_transport`, `toBallModularFamily`): the
   per-ball CHM identification is a theorem of ONE carried massless wedge-BW datum + conformal conjugacy +
   the modular transport in its weakest form (the m &gt; 0 BW theorem is never instantiated at m = 0).
-  *hCHM (per-ball physics) shrunk to a wedge datum + functoriality + geometry.*
+  *hCHM (per-ball physics) shrunk to a wedge datum + functoriality + geometry — and the functoriality (`hmodVac`) has since been DELETED by the grounding campaign below.*
 - **J4 — the formal Deser system** (`next_source_conserved`, `extend_of_solver`, `einsteinDeserSystem`):
   all-order consistency **propagation** — the next source's conservation is *derived* from a solving tower
   (harmonics at their correct momenta n·k; the Bianchi identity proven at every harmonic); no tower positing
@@ -568,6 +568,39 @@ Bargmann-adjointness grounding of the coherent v-rule. The code Hilbert space is
 and never will be (the CCR-isometry obstruction is a theorem-level fact); fixed momentum, two polarizations,
 linearized, free. NOT quantum gravity — the genuine microstate count (deriving the calibration via the
 Type II trace) and the von Neumann closure remain the frontier.
+
+</div>
+
+## The grounding campaign — carried hinges deleted at once (G1–G5)
+
+Two files, four increments; every deletion names its residue.
+
+- **G1 — the Bargmann adjointness** (`bargmann_adjoint`, `coeffFamilyPair_cohCoeff`, `cohPair_X_mul`):
+  creation is adjoint to annihilation on the polynomial Bargmann–Fock space
+  (⟨p, X<sub>l</sub>·q⟩<sub>B</sub> = ⟨∂<sub>l</sub>p, q⟩<sub>B</sub>), with the coherent reproducing rule
+  ⟨coh α, p⟩<sub>B</sub> = p(ᾱ). *The operator-emergence coherent v-rule — previously cited — is now a
+  polynomial-level theorem; the completion-level identification stays cited.*
+- **G2 — the RvD operator transports** (`rvdRC_transport`): R<sub>S′</sub> = U R<sub>S</sub> U⁻¹ from
+  orthogonal-projection uniqueness under the ℝ-isometry; i𝒦 transports automatically by ℂ-linearity.
+- **G3 — the unitary covariance of the spectral theorem and Borel calculus** (`cfc_conjU`,
+  `specMeasure_conjU`, `specProj_conjU`, **`borelFC_conjU`**): the continuous calculus, the Riesz–Markov
+  scalar measures (as pushforwards, with Tietze-extended ambient tests), the spectral projections, and the
+  bounded Borel calculus — f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹ — all transport. *New spectral-tower infrastructure,
+  independent of this campaign's payoffs.*
+- **G4 — the modular flow transports; three payoffs** (`modUnitary_transport`): Δ<sup>it</sup> conjugates
+  under carrier conjugacy. **J3's `hmodVac` carried field is DELETED** (the ball-transport package builds
+  from geometric carrier conjugacy alone — residue: the geometry + the massless wedge BW); **Gate 3's
+  covariance hinge is fed by the derived `modUnitary_inner_cov`**; **the ball-Clausius per-ball modular
+  input is replaced by per-ball geometry**.
+
+<div class="note">
+
+<strong>The honest ledger after this campaign.</strong> Of the named carried inputs across the landed
+results, the following remain: <code>hJoin</code> + the calibration (the emergence-map identifications —
+deletable only by the genuine count via the vN closure), the massless wedge BW, the nonlinear Einstein
+coefficients, symbol-level Iyer–Wald (<code>hDeficit</code>), and the geometric carrier-conjugacy data.
+Everything else that was carried at the start of the joins/grounding arc is now a theorem. NOT quantum
+gravity; the von Neumann closure and the count remain the frontier.
 
 </div>
 
