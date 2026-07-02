@@ -462,6 +462,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 - **Crossed product M⋊_σℝ [AF]:** `modularAut` σ_t (one-param *-automorphism group); `matterRep` π(a); `clockTransl`
   λ_t; covariance `λ_{−t}π(a)λ_t = π(σ_t a)`; `clockEnergy_isSelfAdjoint` (A_edge); **`dressedModularGen_
   isSelfAdjoint` (K̃ = K_bulk + A_edge self-adjoint)**.
+- **The wall, rung W1 — `QIQTH/DualAction.lean`** (`QIQTH.StandardSubspaceModular`, **[AF]** std-3;
+  `TYPE_II_TRACE_PLAN.md`). **The Takesaki dual action θ_s of the crossed product**, implemented by the fiberwise
+  phase unitary `V_s` (`(V_sξ)(x) = e^{isx}·ξ(x)` on `L²(ℝ;H)`; group law, inverse): `dualAction s T := V_{−s}TV_s`.
+  **`dualAction_matter`** — θ_s fixes the matter `π(a)`; **`dualAction_clock`** — θ_s phases the clock,
+  `θ_s(λ_t) = e^{ist}·λ_t` — **the vector-valued Weyl relation**; `dualAction_add` (group law), `dualAction_mul`
+  (conjugation multiplicativity). The action against which the dual-weight trace scales (`τ∘θ_s = e^{−s}τ`, the
+  ladder's later rungs). ⚠ On the represented operators `B(L²(ℝ;H))`; the vN closure and the full CPW trace stay
+  the carried frontier below.
+
 - **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ` is the ONE genuine [frontier]** — not built; bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
