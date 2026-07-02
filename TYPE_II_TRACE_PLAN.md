@@ -30,7 +30,7 @@ QIQT-H.
 - [x] **W3a ✅ LANDED (`QIQTH/MonomialTrace.lean`, [AF] std-3, wired+pinned, budget 0) — the monomial trace formula.** On core elements `π(a)·λ_t·f(L)` (`f : ExpTest`):
   `tauMonomial a t f := ω(a)·∫ e^x e^{itx} f(x) dx`; **`tauMonomial_dual`: `τ₀(θ_s(·)) = e^{−s}·τ₀(·)`** —
   Weyl + change of variables, exact.
-- [ ] **W3b — the modular eigen-core.** `ModEigen κ` (σ_t-eigenoperators `σ_t(a) = e^{itκ}a`); `EigenTerm`
+- [x] **W3b ✅ LANDED (`QIQTH/EigenCore.lean`, [AF] std-3, wired+pinned, budget 0) — the modular eigen-core.** `ModEigen κ` (σ_t-eigenoperators `σ_t(a) = e^{itκ}a`); `EigenTerm`
   (`κ, a, F`) with `rep := π(a)·f(L)`, `mul`/`star`/`theta`/`tau`; theorems `eigen_rep_mul`, `eigen_rep_star`,
   **`eigen_tau_dual`** (`e^{−s}` scaling), **`eigen_tau_trace`** (traciality — via the KMS eigen lemma
   `ω(ab) = e^{κ}ω(ba)` + the `∫e^x` shift identity: the factors cancel), **`eigen_tau_star_mul_nonneg`**
@@ -55,3 +55,4 @@ gpt-5.5-pro.
 - **2026-07-02 — W1.5 ✅ LANDED**: ExpTest (compact-support log-clock symbols; dualShift + modMul closure), expTest_integrable, Iexp = ∫e^x f, and THE EXACT SCALING Iexp_dualShift (= e^{−s}·Iexp, pure change of variables) + the modulated W3a form. NEXT → W2 (ℤ shift-vs-dual regression).
 - **2026-07-02 — W2 ✅ LANDED**: the ℤ regression on banded kernels — zWeight_shift_quasiInvariant (= e^{−1}·, the SHIFT/discrete log-clock translation) AND zWeight_dualCircle_invariant (the TRUE ℤ-dual action leaves the weight invariant) + positivity + window stability. The shift-vs-dual distinction is machine-checked. NEXT → W3a (the monomial trace formula).
 - **2026-07-02 — W3a ✅ LANDED**: tauMonomial (the dual-weight trace on normal-ordered monomials, the consult's log-clock normal form) + dualAction_monomial (the operator-level θ_s(π(a)λ_t)=e^{ist}·π(a)λ_t from W1) + Iexp_modMul_dualShift_comm (the Weyl interchange) + tauMonomial_dual — τ₀∘θ_s = e^{−s}·τ₀ EXACT on the monomial core. NEXT → W3b (the eigen-core: traciality + positivity).
+- **2026-07-02 — W3b ✅ LANDED**: the eigen-core — EigenTerm mul/star/theta/tau; eigen_tau_dual (scaling); eigen_tau_trace (TRACIALITY — the carried KMS-eigen factor e^κ cancels exactly against Iexp_shiftMul_swap at zero total frequency; both sides vanish off it); eigen_tau_star_mul_nonneg (POSITIVITY via the norm-square symbol star_mul_symbol). The dual weight is a TRACE on the eigen-core. NEXT → W4 (TraceCapacity from the constructed trace + the carried extension typeclasses).

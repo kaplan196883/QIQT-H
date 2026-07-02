@@ -8075,6 +8075,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.dualAction_monomial
 #print axioms QIQTH.TypeIITrace.Iexp_modMul_dualShift_comm
 #print axioms QIQTH.TypeIITrace.tauMonomial_dual
+-- W3b (TYPE_II_TRACE_PLAN.md): THE EIGEN-CORE — the dual weight is a TRACE. EigenTerm (κ, a, F) = π(a)·F(L)
+-- with the *-operations at data level (mul via the covariance relation F(L)π(b)=π(b)F(L−κ_b); star; theta).
+-- eigen_tau_dual: the scaling τ₀(θ_s x)=e^{−s}τ₀(x). eigen_tau_trace — TRACIALITY τ₀(xy)=τ₀(yx): at zero total
+-- frequency the CARRIED matter KMS-eigen factor ω(ab)=e^κω(ba) cancels EXACTLY against the ∫e^r change of
+-- variables (Iexp_shiftMul_swap); off it both sides vanish (carried frequency conservation) — the Type II
+-- mechanism: a KMS matter state becomes a TRACE after the log-clock dressing. eigen_tau_star_mul_nonneg —
+-- POSITIVITY τ₀(x*x) ≥ 0: the x*x symbol is the pointwise norm-square (star_mul_symbol), the weight integral a
+-- nonneg real, times carried matter positivity. ⚠ KMS-eigen/freq-conservation/positivity of ω carried (the
+-- modular-matter inputs; provable for the finite corner); single-term/pair level; vN closure carried. Std 3.
+#print axioms QIQTH.TypeIITrace.Iexp_shiftMul_swap
+#print axioms QIQTH.TypeIITrace.eigen_tau_dual
+#print axioms QIQTH.TypeIITrace.eigen_tau_trace
+#print axioms QIQTH.TypeIITrace.eigen_tau_star_mul_nonneg
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

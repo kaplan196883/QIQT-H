@@ -502,6 +502,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   traciality and positivity are W3b (the eigen-core); the operator `f(L)` representation and the vN closure stay
   with the later rungs / the carried extension.
 
+- **The wall, rung W3b — `QIQTH/EigenCore.lean`** (`QIQTH.TypeIITrace`, **[AF]** std-3;
+  `TYPE_II_TRACE_PLAN.md`). **The eigen-core: the dual weight is a TRACE.** `EigenTerm (κ, a, F)` (= `π(a)·F(L)`,
+  `a` a modular eigenoperator) with data-level *-operations (`mul` via the covariance relation
+  `F(L)π(b) = π(b)F(L−κ_b)`, `star`, `theta`). **`eigen_tau_dual`** — the scaling `τ₀(θ_s x) = e^{−s}·τ₀(x)`.
+  **`eigen_tau_trace`** — **traciality** `τ₀(xy) = τ₀(yx)`: at zero total frequency the carried matter KMS-eigen
+  factor `ω(ab) = e^κ·ω(ba)` cancels EXACTLY against the `∫e^r` change of variables (`Iexp_shiftMul_swap`); off
+  it both sides vanish (carried frequency conservation) — **the Type II mechanism: a KMS matter state becomes a
+  trace after the log-clock dressing**, machine-checked. **`eigen_tau_star_mul_nonneg`** — **positivity**
+  `τ₀(x*x) ≥ 0`: the `x*x` symbol is the pointwise norm-square (`star_mul_symbol`), the weight integral a nonneg
+  real, times the carried matter positivity. ⚠ The KMS-eigen law, frequency conservation, and matter positivity
+  are CARRIED hypotheses (the modular-matter inputs — provable for the finite corner, abstract here);
+  single-term/pair level; the vN closure stays the carried frontier below.
+
 - **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ` is the ONE genuine [frontier]** — not built; bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
