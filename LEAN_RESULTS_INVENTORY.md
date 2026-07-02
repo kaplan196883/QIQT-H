@@ -651,6 +651,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   area = count-built area; Type III₁/II_∞ continuum structure in Lean; σ-weak/normal weights; the value
   of G. ⚠ NOT QG solved; no wall crossed.
 
+- **THE JOIN INSTANCE, JI1 — `QIQTH/JoinInstance.lean`** (**[AF]** std-3; `JOIN_INSTANCE_PLAN.md` — delete
+  `hJoin` by construction: the bridge at the finite level; JI1–JI7 in progress). **JI1 — the local area
+  decomposition:** `localAreaVar` (the per-element linearized share `δA_a = ½w_a(h(e₁,e₁)+h(e₂,e₂))`) with
+  `sum_localAreaVar` (the shares sum to the held `areaVar`); `A0Split` — the NAMED apportionment of the
+  global background area (honest DATA per the binding verdict: no canonical per-link split of a global
+  constant; the uniform split is an optional policy constructor, never pretended-derived); CAPSTONE
+  **`sum_localArea`** — `∑_a (β_a + δA_a) = A₀ + areaVar S h`: the carried `hJoin`'s RHS decomposed per
+  link (the algebraic core of the join). Next: JI2 (the generic τ join dictionary).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

@@ -8099,6 +8099,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.phase5_from_core_trace
 #print axioms QIQTH.TypeIITrace.traceCapacity_from_core
 #print axioms QIQTH.TypeIITrace.extension_preserves_density_mass
+-- JOIN INSTANCE JI1 (JOIN_INSTANCE_PLAN.md): the local area decomposition — localAreaVar (the per-element
+-- linearized share) with sum_localAreaVar (= the held areaVar); A0Split (the NAMED background apportionment —
+-- honest data, never canonical) with the uniform-policy constructor; CAPSTONE sum_localArea — the algebraic
+-- core of the join: sum_a (beta_a + deltaA_a) = A0 + areaVar S h (the carried hJoin's RHS, decomposed per link).
+-- Std 3.
+#print axioms QIQTH.JoinInstance.sum_localAreaVar
+#print axioms QIQTH.JoinInstance.sum_localArea
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
