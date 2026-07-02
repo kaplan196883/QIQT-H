@@ -1,0 +1,68 @@
+# HYPOTHESIS DELETION — the joins campaign (J1–J4)
+
+**Status:** ACTIVE (2026-07-02). **GPT-5.5-pro-VERIFIED** (J1 RECOMMEND; J2/J3/J4 REDIRECTED to the honest forms
+below — the redirected shapes are BINDING). **Goal:** delete/weaken carried hypotheses of the landed campaigns by
+connecting held theorems: make the eigen-core trace laws unconditional in the finite corner (J1), replace the
+Iyer–Wald hypothesis by a derivable kernel-probe theorem + bridge refactor (J2), reduce CHM to an abstract
+conformal-transport theorem with named analytic inputs (J3), and land the all-order Deser statement in its honest
+formal-Bianchi form (J4).
+
+## Binding corrections (from the verdict — never violate)
+- **J2:** the physical FGHMVR identity is NOT derivable from held pieces — land the **kernel-moment
+  normalization** (`CHMSymbolProbe_eq_areaVar`) and REFACTOR the bridge to consume the probe; keeping arbitrary
+  physical `δK, δS` equal to it by assumption is `hIW` in disguise (forbidden). Fix the `2π` convention
+  (chmWeight is unit-edge-slope); the plane-wave phase `e^{ik·x}` under the kernel gives a Fourier multiplier —
+  work at the pure algebraic symbol level or normalize by it.
+- **J3:** the positive-mass BW theorem (`m > 0`) must NOT be instantiated at `m = 0`. The honest increment is the
+  ABSTRACT `CHMTransportData` theorem (modular flow transports under vacuum-preserving unitary conjugacy); the
+  carried analytic inputs are: standardness/RS, massless wedge BW, vacuum-invariant conformal covariance, and the
+  wedge→ball geometric conjugacy — named structure fields, never axioms. The genuine massless discharge (1+1
+  chiral current — beware the scalar zero-mode — or 3+1 conformal scalar) is a follow-on campaign.
+- **J4:** NO "DeserTower" whose fields posit conservation at every order (relabeling — forbidden). The honest
+  all-order content is **formal-Bianchi consistency propagation**: `FormalDeserSystem` (L, div, order-n source S
+  with S_depends_lt + the formalBianchi_step field) and the theorem `next_source_conserved`; extension needs a
+  solver/right inverse (`extend_of_solver`). Nonlinear products shift momenta (`n•k` harmonics) — symbol-level
+  order-n equations must use the correct total momentum. Order 2 stays the honest concrete Deser theorem until
+  the nonlinear Einstein coefficients are formalized.
+- **J1 conventions (verified):** `σ_t(E_ij) = e^{it·κ_ij}E_ij` with `κ_ij = log p_i − log p_j` (modular flow
+  `ρ^{it}·ρ^{−it}`, `ρ = diag p`); frequency vanishing is AUTOMATIC from the matrix-unit index loop (no
+  nondegeneracy needed); `ω(E_ij·B) = e^{κ_ij}·ω(B·E_ij)` from `ρE_ij = e^{κ_ij}E_ij ρ`.
+
+## Increments (verified order)
+- [ ] **J1 — the finite corner discharges the eigen-core matter inputs.** `rhoDiag p`, `matState p = tr(ρ·)`,
+  matrix units `E i j` (`Matrix.stdBasisMatrix`), `kappa p i j = log p_i − log p_j`. Theorems: `modAut_E`
+  (the eigen law), `matState_E_mul_E` (the matrix-unit trace formula `if j=k ∧ i=l then p_i else 0`),
+  **`finiteCorner_kms_E`** (the KMS-eigen law — PROVEN), **`finiteCorner_freq_E`** (frequency conservation —
+  PROVEN via the index loop), **`finiteCorner_pos`** (`= ∑ p_i‖A_ki‖²` — PROVEN). Then the concrete
+  `finiteCornerEigenTerm` family: `eigen_tau_trace` and `eigen_tau_star_mul_nonneg` hold with **NO matter
+  hypotheses** — the constructed trace's laws unconditional in a concrete model. (General PosDef ρ via unitary
+  eigenbasis transport = follow-on.)
+- [ ] **J2 — the CHM symbol probe + bridge refactor.** `chmRadialMass3 R := ∫₀^R 4πr²·chmWeight R r` with
+  **`chmRadialMass3_eq`** (`= 4πR⁴/15`, one-variable calculus); the normalized probe `CHMSymbolProbe3` and
+  **`CHMSymbolProbe3_einstein_eq_areaVar`** — the kernel-weighted symbol pairing EQUALS the ray-probe pairing
+  `areaVar (raySurf v) (einsteinSymbol k h)`. Then the REFACTOR: a bridge-assembly variant
+  (`bridge_conditional_probe`) whose deficit input is the derivable probe (the carried content shrinks to the
+  identification of the PHYSICAL first-law deficit with the probe — stated once, honestly, as the residual).
+- [ ] **J3 — the abstract CHM transport theorem.** `CHMTransportData` (wedge, conformal element, vacuum-preserving
+  unitary, algebra conjugacy, wedge standardness, wedge BW, geometric conjugacy — named carried fields);
+  **`hCHM_of_conformal_transport`** — the ball modular flow is the conformal image of the wedge boost (Tomita
+  modular data under vacuum-preserving unitary equivalence, at the one-particle/standard-subspace level we hold);
+  corollary: `BallModularFamily.hCHM` is REDUCED from a bare identification to the named transport inputs.
+- [ ] **J4 — the formal Deser system.** `FormalDeserSystem` (additive `Field/Source/Constraint`, `L`, `div`,
+  order-n source `S` with `S_depends_lt`, the `formalBianchi_step` field — the coefficient-Bianchi content,
+  carried until nonlinear coefficients are formalized); `DeserTowerUpTo`; **`next_source_conserved`** (the
+  propagation theorem); **`extend_of_solver`** (tower extension given a solver). Instantiate `L`/`div` with the
+  HELD linearized symbols (`einsteinSymbol`, `divT`/`kContract`, `bianchi_einsteinSymbol` proving the N=1 step).
+  Label: the all-order statement is consistency PROPAGATION; order 2 remains the concrete Deser theorem.
+
+## Discipline (every increment)
+`cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print axioms` std-3; budget 0; AxiomAudit
+pins; wire `QIQTH.lean`; ONE commit + `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`; push schannel;
+update this checklist + `LEAN_RESULTS_INVENTORY.md`. Honest scope: hypothesis DELETION means the named carried
+input becomes a theorem or shrinks to a smaller named input — say which, every time; NEVER claim QG solved.
+Consults: `mcp__OpenAI__ask` gpt-5.5-pro.
+
+## Progress log
+- **2026-07-02** — plan created from the GPT-5.5-pro joins consult (J1 RECOMMEND with verified conventions;
+  J2 → the kernel-probe normalization + refactor; J3 → the abstract transport with named inputs; J4 → the
+  formal-Bianchi propagation system). NEXT → J1.
