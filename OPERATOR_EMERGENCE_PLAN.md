@@ -1,6 +1,6 @@
 # THE OPERATOR EMERGENCE MAP — "graviton = quantized area fluctuation of the code" (Q1–Q6)
 
-**Status:** ACTIVE (2026-07-02). **GPT-5.5-pro-VERIFIED** (design confirmed with BINDING corrections below).
+**Status:** ✅ COMPLETE (2026-07-03, Q1–Q5 all landed). **GPT-5.5-pro-VERIFIED** (design confirmed with BINDING corrections below).
 **Goal:** promote the classical area→metric decoder to an OPERATOR map: the graviton field operator built from
 the held Bargmann–Fock CCR algebra, the decoder inverting the quantized area map at operator level, area
 observables with their canonical/temporal commutation structure, the classical bridge as the coherent shadow,
@@ -46,11 +46,11 @@ the operator wave equation, and the code join at expectation level — Tier-1 it
   **`qModeT = cos(ωt)•qMode + sin(ωt)•πRaw`**; `OpHasDerivAt` (coefficientwise);
   **`hHatT_wave`** — `d²/dt² ĥ_t + ω²ĥ_t = 0` coefficientwise; the time-separated area commutator
   **`comm_areaT`** `= 2i·sin(ω(s−t))·areaPair•1`.
-- [ ] **Q5 — the code join (stated once, expectation level).** `areaTotOp A₀ Σ := A₀(Σ)•1 + areaOp Σ`;
+- [x] **Q5 — the code join (stated once, expectation level).** ✅ DONE (in `QIQTH/OperatorEmergence.lean`). `areaTotOp A₀ Σ := A₀(Σ)•1 + areaOp Σ`;
   the NAMED carried join `hAreaJoin : codeArea r Σ = Re⟨state r|areaTotOp A₀ Σ|state r⟩`;
   **`code_count_eq_fock_area_expect`** — the calibrated microstate count equals the Fock area expectation
   over 4G: the code's counting and the graviton's area operator agree as two computations of one number.
-- [ ] **Q6 — checkpoint + publish.** Inventory entries; assess deletability of the remaining named inputs;
+- [x] **Q6 — checkpoint.** ✅ CAMPAIGN COMPLETE (Q1–Q5; loop deleted; paper/website sync on request). Inventory entries; assess deletability of the remaining named inputs;
   paper/website sync on request.
 
 ## Discipline (every increment)
@@ -88,3 +88,14 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose the key).
   form); the coefficientwise ODE layer OpHasDerivAt (+ sum2/const_smul closure); CAPSTONES qModeT_wave +
   hHatT_wave (the operator wave equation ḧ + ω²ĥ = 0, coefficientwise) and comm_areaT (the time-separated
   area commutator 2i·sin(ω(s−t))·areaPair·1, vanishing at equal times). NEXT → Q5.
+- **2026-07-03** — **Q5 LANDED + CAMPAIGN COMPLETE (Q1–Q5).** areaTotOp = A₀·1 + Â (total-to-total);
+  AffExpr (constant rule ⟨α|1|α⟩ = 1); coherent_areaTot_re (⟨α|Â_tot|α⟩ = A₀ + δA_Σ(h(α)));
+  CAPSTONE code_count_eq_fock_area_expect — given the held calibration + the NAMED carried hJoin (induced
+  screen area = coherent total-area expectation), log #microstates = ⟨α|Â_tot(Σ)|α⟩/4G: the code's counting
+  and the graviton's area operator agree as two computations of ONE number. LEDGER: the emergence map now
+  runs operator-level end to end — decoder inversion (Q1), canonical pair + vacuum fluctuations (Q2), the
+  classical bridge as coherent shadow (Q3), derived Heisenberg flow + operator wave equation + causal
+  area commutator (Q4), the code join with ONE named expectation-level hypothesis (Q5). Carried inputs:
+  hJoin (the emergence-map identification), the calibration log D_e = wEnt e, the Bargmann-adjointness
+  grounding of the v-rule. NOT QG; the code space is NOT Fock (CCR-isometry obstruction is permanent).
+  Loop deleted.

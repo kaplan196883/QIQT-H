@@ -8251,6 +8251,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperatorEmergence.qModeT_wave
 #print axioms QIQTH.OperatorEmergence.hHatT_wave
 #print axioms QIQTH.OperatorEmergence.comm_areaT
+-- Q5 (OPERATOR_EMERGENCE_PLAN.md — CAMPAIGN COMPLETE, Q1–Q5): THE CODE JOIN, expectation-level, stated
+-- once. areaTotOp = A₀·1 + Â (total-to-total per the binding correction — the code's area = 4G·cut is a
+-- TOTAL area, areaOp is the fluctuation); coherent_areaTot_re (⟨α|Â_tot|α⟩ = A₀ + δA_Σ(h(α)));
+-- code_count_eq_fock_area_expect — GIVEN the held calibration + the NAMED carried hJoin (induced screen
+-- area = the coherent total-area expectation), log #microstates = ⟨α|Â_tot(Σ)|α⟩/4G: the code's counting
+-- and the graviton's area operator agree as two computations of ONE number. The finite-code CCR isometry
+-- is OBSTRUCTED (trace argument) — the join can never be an isometry claim; the code space is NOT Fock;
+-- fixed momentum, linearized, free; NOT QG. Std 3.
+#print axioms QIQTH.OperatorEmergence.areaTotExpr_toOp
+#print axioms QIQTH.OperatorEmergence.coherent_areaTot_re
+#print axioms QIQTH.OperatorEmergence.code_count_eq_fock_area_expect
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

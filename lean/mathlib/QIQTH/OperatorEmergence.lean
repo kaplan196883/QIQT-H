@@ -23,6 +23,7 @@
 import Mathlib
 import QIQTH.GravitonQuantization
 import QIQTH.AreaDecoder
+import QIQTH.CalibratedAreaLaw
 
 namespace QIQTH.OperatorEmergence
 
@@ -715,5 +716,70 @@ theorem comm_areaT {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
     hz1, hz2, exp_diff_sin]
   push_cast
   ring
+
+/-! ## Q5 — THE CODE JOIN (expectation level, stated once)
+
+BINDING (consult): the join is EXPECTATION-LEVEL ONLY — an exact finite-code→Fock CCR isometry is
+OBSTRUCTED (`trace[Q,P] = 0` vs `trace(iI) ≠ 0`: finite dimension cannot carry exact CCR); and the join is
+TOTAL-to-total (the code's `area = 4G·cut` is a total area; `areaOp` is the linearized fluctuation —
+`areaTotOp = A₀·1 + Â` carries the background explicitly; never conflate). -/
+
+open QIQTH.AreaMap in
+/-- **The TOTAL area operator** `Â_tot(Σ) = A₀·1 + Â(Σ)` — background plus quantized fluctuation. -/
+noncomputable def areaTotOp {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (A0 : ℝ)
+    (S : ScreenSurface ι) : Op :=
+  ((A0 : ℝ) : ℂ) • (1 : Op) + areaOp pol S
+
+/-- An affine observable expression: constant + linear (the constant rule `⟨α|1|α⟩ = 1`). -/
+structure AffExpr where
+  /-- the constant (background) part -/
+  c : ℂ
+  /-- the linear part -/
+  lin : LinExpr
+
+noncomputable def AffExpr.toOp (E : AffExpr) : Op := E.c • (1 : Op) + E.lin.toOp
+
+noncomputable def AffExpr.cohExpect (E : AffExpr) (α : Fin 2 → ℂ) : ℂ :=
+  E.c + E.lin.cohExpect α
+
+open QIQTH.AreaMap in
+/-- The total-area expression. -/
+noncomputable def areaTotExpr {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (A0 : ℝ)
+    (S : ScreenSurface ι) : AffExpr where
+  c := ((A0 : ℝ) : ℂ)
+  lin := areaExpr pol S
+
+open QIQTH.AreaMap in
+theorem areaTotExpr_toOp {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (A0 : ℝ)
+    (S : ScreenSurface ι) : (areaTotExpr pol A0 S).toOp = areaTotOp pol A0 S := by
+  rw [AffExpr.toOp, areaTotExpr, areaTotOp, areaExpr_toOp]
+
+open QIQTH.AreaMap in
+/-- The coherent expectation of the total area: background plus the geometric area variation of the
+    classical field — `⟨α|Â_tot(Σ)|α⟩ = A₀ + δA_Σ(h(α))`. -/
+theorem coherent_areaTot_re {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (A0 : ℝ)
+    (S : ScreenSurface ι) (α : Fin 2 → ℂ) :
+    ((areaTotExpr pol A0 S).cohExpect α).re = A0 + areaVar S (classicalH pol α) := by
+  rw [AffExpr.cohExpect, areaTotExpr, coherent_area]
+  rw [Complex.add_re, Complex.ofReal_re, Complex.ofReal_re]
+
+open QIQTH.EarnGravity in
+open QIQTH.AreaMap in
+/-- **Q5 CAPSTONE — the code's count and the graviton's area operator agree as two computations of ONE
+    number.** CARRIED (named, stated ONCE): `hJoin` — the code's induced screen area (the calibrated
+    entanglement cut, `4G·cut`) equals the coherent expectation of the TOTAL area operator. GIVEN the held
+    calibration (`log D_e = wEnt e`), the microstate count equals the Fock area-operator expectation over
+    `4G`:  `log #microstates = ⟨α|Â_tot(Σ)|α⟩ / 4G`.
+    ⚠ The join is expectation-level (the CCR-isometry obstruction is permanent); the code Hilbert space is
+    NOT Fock; `hJoin` is the emergence-map identification — the physical content, honest and singular. -/
+theorem code_count_eq_fock_area_expect {ι' : Type*} [Fintype ι'] [DecidableEq ι']
+    {ι : Type*} (G : ℝ) (hG : 0 < G) (links : Finset ι') (wEnt : ι' → ℝ) (D : ι' → ℕ)
+    (hD : ∀ e ∈ links, 0 < D e) (hcal : ∀ e ∈ links, Real.log (D e) = wEnt e)
+    (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (A0 : ℝ) (S : ScreenSurface ι) (α : Fin 2 → ℂ)
+    (hJoin : inducedScreenArea G links wEnt = A0 + areaVar S (classicalH pol α)) :
+    Real.log (Fintype.card (Microstates links D))
+      = ((areaTotExpr pol A0 S).cohExpect α).re / (4 * G) := by
+  rw [coherent_areaTot_re, ← hJoin]
+  exact calibrated_entanglement_cut_area_law G hG links wEnt D hD hcal
 
 end QIQTH.OperatorEmergence

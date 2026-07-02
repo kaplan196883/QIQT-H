@@ -572,7 +572,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   + **`hHatT_wave`** — the operator WAVE EQUATION `ḧ + ω²ĥ = 0`, coefficientwise (the graviton wave
   equation as an operator identity of the emergence map) — and **`comm_areaT`** — the time-separated area
   commutator `[Â_Σ(t), Â_Σ′(s)] = 2i·sin(ω(s−t))·areaPair·1` (vanishing at equal times, per the honest
-  Q2 structure). Q5 in progress.
+  Q2 structure). **Q5 LANDED — CAMPAIGN COMPLETE (Q1–Q5)**: `areaTotOp = A₀·1 + Â` (total-to-total, per
+  the binding correction); **`coherent_areaTot_re`** (`⟨α|Â_tot(Σ)|α⟩ = A₀ + δA_Σ(h(α))`); CAPSTONE
+  **`code_count_eq_fock_area_expect`** — given the held calibration and the NAMED carried `hJoin` (the
+  code's induced screen area = the coherent total-area expectation; the emergence-map identification,
+  stated once), `log #microstates = ⟨α|Â_tot(Σ)|α⟩/4G` — **the screen code's counting and the graviton's
+  area operator agree as two computations of one number.** ⚠ The join is expectation-level FOREVER (the
+  finite-code CCR isometry is obstructed by the trace argument); the code Hilbert space is NOT Fock;
+  fixed momentum, linearized, free; NOT QG. Carried: `hJoin`, the calibration, the Bargmann-adjointness
+  grounding of the coherent v-rule.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
