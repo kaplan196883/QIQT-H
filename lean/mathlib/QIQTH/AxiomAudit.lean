@@ -8215,6 +8215,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperatorEmergence.reconstruct_areaDataM
 #print axioms QIQTH.OperatorEmergence.hHat_symm
 #print axioms QIQTH.OperatorEmergence.reconstruct_hHat
+-- Q2 (OPERATOR_EMERGENCE_PLAN.md): the CORRECTED commutation structure. Per the binding correction:
+-- equal-time areas COMMUTE (comm_area_area = 0 — the naive noncommutativity is CUT); the honest quantum
+-- structure: ccr_op ([a,a†] = δ·1 at operator level), comm_linObs (the master c-number formula),
+-- comm_area_mom ([Â(Σ),Π̂Can(Σ')] = i·areaPair·1 — the canonical pair), and vacuum_area_pair
+-- (⟨0|ÂÂ'|0⟩ = areaPair — quantized vacuum area fluctuations, quantitative and honest). Std 3.
+#print axioms QIQTH.OperatorEmergence.ccr_op
+#print axioms QIQTH.OperatorEmergence.comm_linObs
+#print axioms QIQTH.OperatorEmergence.comm_area_area
+#print axioms QIQTH.OperatorEmergence.comm_area_mom
+#print axioms QIQTH.OperatorEmergence.vacuum_area_pair
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

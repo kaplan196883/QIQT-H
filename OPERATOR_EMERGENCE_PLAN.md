@@ -31,7 +31,7 @@ the operator wave equation, and the code join at expectation level — Tier-1 it
   `reconstruct_areaDataM` (the lift of `reconstruct_areaVar`); `qMode λ := annih λ + creat λ`;
   `hHat pol := fun μ ν => ∑ λ, pol λ μ ν • qMode λ` (plus/cross real `pol`, symmetric);
   **`reconstruct_hHat`** — the decoder inverts the quantized area map AT OPERATOR LEVEL.
-- [ ] **Q2 — linear observables + the corrected commutation structure.** `linObs u v := ∑ u λ•annih + v λ•creat`;
+- [x] **Q2 — linear observables + the corrected commutation structure.** ✅ DONE (in `QIQTH/OperatorEmergence.lean`). `linObs u v := ∑ u λ•annih + v λ•creat`;
   **`comm_linObs`** (the master c-number: `[linObs u v, linObs u' v'] = (∑ u λ v' λ − u' λ v λ)•1`);
   `areaOp Σ := areaVar-coefficients applied to qMode`; `areaMomCan`; `areaPair Σ Σ' := ∑ c_Σ λ · c_Σ' λ`;
   **`comm_area_area = 0`** (honest), **`comm_area_mom = i·areaPair•1`**, and the vacuum fluctuation
@@ -70,3 +70,8 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose the key).
   `reconstructM` over any ℂ-module + `reconstruct_areaDataM` (the module-level decoder identity);
   `qMode = a + a†`; `hHat` (real plus/cross pol, symmetric); CAPSTONE `reconstruct_hHat` — the decoder
   inverts the QUANTIZED area map at operator level (entrywise in End(Fock)). NEXT → Q2.
+- **2026-07-02** — **Q2 LANDED** (appended to `OperatorEmergence.lean`, axiom-free std-3, budget 0):
+  `ccr_op` ([a,a†] = δ·1 at operator level); `comm_linObs` (the master c-number formula); the area
+  observables `areaOp`/`areaMomCan`/`areaPair`; `comm_area_area = 0` (equal-time areas COMMUTE — honest);
+  CAPSTONES `comm_area_mom` ([Â,Π̂Can] = i·areaPair·1, the canonical pair) and `vacuum_area_pair`
+  (⟨0|ÂÂ'|0⟩ = areaPair — quantized vacuum area fluctuations). NEXT → Q3.

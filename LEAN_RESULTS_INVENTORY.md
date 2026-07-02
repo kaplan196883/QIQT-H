@@ -554,7 +554,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`reconstruct_hHat`** — the decoder inverts the QUANTIZED area map at operator level: the metric operator
   is a function of its own area-fluctuation observables, entrywise in `End(Fock)`. ⚠ Fixed momentum,
   linearized, free; the code join is Q5 (expectation-level ONLY — the finite-code CCR isometry is obstructed
-  by the trace argument); NOT QG. Q2–Q5 in progress.
+  by the trace argument); NOT QG. **Q2 LANDED**: `ccr_op` (the CCR at operator level), `comm_linObs` (the
+  master c-number commutator of linear observables), the area observables `areaOp`/`areaMomCan`/`areaPair`;
+  **`comm_area_area = 0`** — equal-time areas COMMUTE (the naive noncommutativity claim is CUT, per the
+  binding correction); **`comm_area_mom`** — the canonical pair `[Â(Σ),Π̂Can(Σ′)] = i·areaPair·1` (where
+  the quantum structure actually lives); **`vacuum_area_pair`** — `⟨0|Â(Σ)Â(Σ′)|0⟩ = areaPair(Σ,Σ′)`:
+  the vacuum's quantized area fluctuations, quantitative and honest. Q3–Q5 in progress.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

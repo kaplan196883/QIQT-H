@@ -96,4 +96,217 @@ theorem reconstruct_hHat (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
     reconstructM (areaDataM (hHat pol)) = hHat pol :=
   reconstruct_areaDataM (hHat pol) (hHat_symm pol hPol)
 
+/-! ## Q2 — linear observables and the CORRECTED commutation structure
+
+BINDING (consult): equal-time area observables COMMUTE — the naive "noncommuting areas" claim is CUT.
+The honest structure: the master c-number formula `comm_linObs`; areas + canonical momenta with
+`[Â(Σ), Π̂Can(Σ')] = i·areaPair·1`; and the vacuum fluctuation `⟨0|Â Â'|0⟩ = areaPair` — quantized area
+fluctuations WITHOUT fake noncommutativity. -/
+
+/-- The commutator on the operator carrier. -/
+noncomputable def comm (A B : Op) : Op := A * B - B * A
+
+theorem comm_add_add (A B C D : Op) :
+    comm (A + B) (C + D) = comm A C + comm A D + comm B C + comm B D := by
+  simp only [comm, add_mul, mul_add]
+  abel
+
+theorem comm_smul_smul (a b : ℂ) (A B : Op) :
+    comm (a • A) (b • B) = (a * b) • comm A B := by
+  simp only [comm, smul_mul_assoc, mul_smul_comm, smul_sub, smul_smul, mul_comm a b]
+
+theorem comm_antisymm (A B : Op) : comm B A = -comm A B := by
+  simp [comm]
+
+/-- `[a_i, a_j] = 0` at operator level. -/
+theorem annih_comm_op (i j : Fin 2) : comm (annih i) (annih j) = 0 := by
+  refine LinearMap.ext fun p => ?_
+  simp only [comm, LinearMap.sub_apply, Module.End.mul_apply, LinearMap.zero_apply]
+  rw [annih_comm i j p, sub_self]
+
+/-- `[a†_i, a†_j] = 0` at operator level. -/
+theorem creat_comm_op (i j : Fin 2) : comm (creat i) (creat j) = 0 := by
+  refine LinearMap.ext fun p => ?_
+  simp only [comm, LinearMap.sub_apply, Module.End.mul_apply, LinearMap.zero_apply]
+  rw [creat_comm i j p, sub_self]
+
+/-- **The CCR at operator level**: `[a_i, a†_j] = δ_ij·1`. -/
+theorem ccr_op (i j : Fin 2) : comm (annih i) (creat j) = if i = j then (1 : Op) else 0 := by
+  refine LinearMap.ext fun p => ?_
+  have h := ccr i j p
+  by_cases hij : i = j
+  · subst hij
+    rw [if_pos rfl, one_mul] at h
+    rw [if_pos rfl]
+    simpa [comm, LinearMap.sub_apply, Module.End.mul_apply] using h
+  · rw [if_neg hij, zero_mul] at h
+    rw [if_neg hij]
+    simpa [comm, LinearMap.sub_apply, Module.End.mul_apply] using h
+
+theorem ccr_op' (i j : Fin 2) : comm (creat i) (annih j) = -if j = i then (1 : Op) else 0 := by
+  rw [comm_antisymm, ccr_op]
+
+/-- **The general linear oscillator observable** `Σ_λ u_λ a_λ + v_λ a†_λ`. -/
+noncomputable def linObs (u v : Fin 2 → ℂ) : Op :=
+  ∑ l, (u l • annih l + v l • creat l)
+
+/-- The elementary commutator of single-mode linear observables. -/
+theorem comm_elementary (l m : Fin 2) (a b c d : ℂ) :
+    comm (a • annih l + b • creat l) (c • annih m + d • creat m)
+      = ((a * d - b * c) * if l = m then 1 else 0) • (1 : Op) := by
+  by_cases h : l = m
+  · subst h
+    rw [comm_add_add, comm_smul_smul, comm_smul_smul, comm_smul_smul, comm_smul_smul,
+      annih_comm_op, creat_comm_op, ccr_op, ccr_op', if_pos rfl, if_pos rfl]
+    module
+  · rw [comm_add_add, comm_smul_smul, comm_smul_smul, comm_smul_smul, comm_smul_smul,
+      annih_comm_op, creat_comm_op, ccr_op, ccr_op', if_neg h,
+      if_neg (fun hh : m = l => h hh.symm), if_neg h]
+    simp
+
+theorem comm_sum_sum (f g : Fin 2 → Op) :
+    comm (∑ l, f l) (∑ m, g m) = ∑ l, ∑ m, comm (f l) (g m) := by
+  rw [comm, Finset.sum_mul_sum, Finset.sum_mul_sum,
+    Finset.sum_comm (s := Finset.univ) (t := Finset.univ) (f := fun m l => g m * f l)]
+  simp only [comm, ← Finset.sum_sub_distrib]
+
+/-- **Q2 MASTER FORMULA — the c-number commutator of linear observables:**
+    `[linObs u v, linObs u′ v′] = (Σ_λ u_λ v′_λ − u′_λ v_λ)·1`. -/
+theorem comm_linObs (u v u' v' : Fin 2 → ℂ) :
+    comm (linObs u v) (linObs u' v')
+      = (∑ l, (u l * v' l - u' l * v l)) • (1 : Op) := by
+  rw [linObs, linObs, comm_sum_sum]
+  have hterm : ∀ l : Fin 2,
+      (∑ m, comm (u l • annih l + v l • creat l) (u' m • annih m + v' m • creat m))
+        = (u l * v' l - v l * u' l) • (1 : Op) := by
+    intro l
+    have h1 : ∀ m : Fin 2, ((u l * v' m - v l * u' m) * if l = m then 1 else 0) • (1 : Op)
+        = if l = m then (u l * v' m - v l * u' m) • (1 : Op) else 0 := by
+      intro m
+      by_cases h : l = m
+      · simp [h]
+      · simp [h]
+    rw [Finset.sum_congr rfl fun m _ => comm_elementary l m (u l) (v l) (u' m) (v' m),
+      Finset.sum_congr rfl fun m _ => h1 m,
+      Finset.sum_ite_eq Finset.univ l (fun m => (u l * v' m - v l * u' m) • (1 : Op)),
+      if_pos (Finset.mem_univ l)]
+  rw [Finset.sum_congr rfl fun l _ => hterm l, ← Finset.sum_smul]
+  congr 1
+  exact Finset.sum_congr rfl fun l _ => by ring
+
+/-! ### The area observables and their honest structure -/
+
+open QIQTH.AreaMap in
+/-- The quantized AREA observable of a probe surface: the area functional applied to `ĥ` —
+    `Â(Σ) = Σ_λ areaVar(Σ, pol_λ)·q_λ`. -/
+noncomputable def areaOp {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) : Op :=
+  ∑ l, ((areaVar S (pol l) : ℝ) : ℂ) • qMode l
+
+open QIQTH.AreaMap in
+/-- The CANONICAL conjugate area momentum `Π̂Can(Σ) = Σ_λ areaVar(Σ, pol_λ)·(i/2)(a†_λ − a_λ)`. -/
+noncomputable def areaMomCan {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) : Op :=
+  ∑ l, ((areaVar S (pol l) : ℝ) : ℂ) • ((Complex.I / 2) • (creat l - annih l))
+
+open QIQTH.AreaMap in
+/-- The polarization pairing of two probe surfaces. -/
+noncomputable def areaPair {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (S' : ScreenSurface κ) : ℝ :=
+  ∑ l, areaVar S (pol l) * areaVar S' (pol l)
+
+open QIQTH.AreaMap in
+theorem areaOp_eq_linObs {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) :
+    areaOp pol S = linObs (fun l => ((areaVar S (pol l) : ℝ) : ℂ))
+      (fun l => ((areaVar S (pol l) : ℝ) : ℂ)) := by
+  rw [areaOp, linObs]
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [qMode, smul_add]
+
+open QIQTH.AreaMap in
+theorem areaMomCan_eq_linObs {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) :
+    areaMomCan pol S
+      = linObs (fun l => -(Complex.I / 2) * ((areaVar S (pol l) : ℝ) : ℂ))
+        (fun l => (Complex.I / 2) * ((areaVar S (pol l) : ℝ) : ℂ)) := by
+  rw [areaMomCan, linObs]
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [smul_smul, smul_sub]
+  module
+
+open QIQTH.AreaMap in
+/-- **Equal-time area observables COMMUTE** — the honest statement (the naive noncommutativity is false). -/
+theorem comm_area_area {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (S' : ScreenSurface κ) :
+    comm (areaOp pol S) (areaOp pol S') = 0 := by
+  rw [areaOp_eq_linObs, areaOp_eq_linObs, comm_linObs]
+  rw [Finset.sum_eq_zero fun l _ => by ring]
+  exact zero_smul ℂ 1
+
+open QIQTH.AreaMap in
+/-- **Q2 CAPSTONE (canonical pair) — the area/momentum CCR:**
+    `[Â(Σ), Π̂Can(Σ′)] = i·areaPair(Σ,Σ′)·1`. The quantum structure of the area observables lives in
+    the conjugate pair, not in equal-time areas. -/
+theorem comm_area_mom {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (S' : ScreenSurface κ) :
+    comm (areaOp pol S) (areaMomCan pol S')
+      = (Complex.I * ((areaPair pol S S' : ℝ) : ℂ)) • (1 : Op) := by
+  rw [areaOp_eq_linObs, areaMomCan_eq_linObs, comm_linObs, areaPair]
+  congr 1
+  push_cast
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun l _ => ?_
+  ring
+
+/-! ### The vacuum fluctuation -/
+
+/-- `⟨0| q_l q_m |0⟩ = δ_lm` — the single-mode vacuum fluctuation. -/
+theorem vacExp_qq (l m : Fin 2) :
+    vacExp ((qMode l * qMode m) (1 : Fock)) = if l = m then 1 else 0 := by
+  have hcreat1 : creat m (1 : Fock) = (MvPolynomial.X m : Fock) := by
+    simp [creat, LinearMap.mulLeft_apply]
+  have hq1 : qMode m (1 : Fock) = (MvPolynomial.X m : Fock) := by
+    rw [qMode, LinearMap.add_apply, annih_vacuum, hcreat1, zero_add]
+  have hannihX : annih l (MvPolynomial.X m : Fock) = if l = m then (1 : Fock) else 0 := by
+    change MvPolynomial.pderiv l (MvPolynomial.X m : Fock) = _
+    fin_cases l <;> fin_cases m <;> simp [MvPolynomial.pderiv_X]
+  have hcreatX : creat l (MvPolynomial.X m : Fock)
+      = (MvPolynomial.X l * MvPolynomial.X m : Fock) := by
+    simp [creat, LinearMap.mulLeft_apply]
+  rw [Module.End.mul_apply, hq1, qMode, LinearMap.add_apply, hannihX, hcreatX, vacExp, map_add]
+  have hXX : MvPolynomial.constantCoeff (MvPolynomial.X l * MvPolynomial.X m : Fock) = 0 := by
+    rw [map_mul]
+    simp [MvPolynomial.constantCoeff_X]
+  rw [hXX, add_zero]
+  by_cases h : l = m
+  · subst h
+    simp
+  · simp [if_neg h]
+
+open QIQTH.AreaMap in
+/-- **Q2 CAPSTONE (vacuum fluctuation) — `⟨0| Â(Σ) Â(Σ′) |0⟩ = areaPair(Σ,Σ′)`:** the quantized
+    area fluctuations of the vacuum are exactly the polarization pairing — nonzero, quantitative, and
+    honest (no fake noncommutativity needed). -/
+theorem vacuum_area_pair {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (S' : ScreenSurface κ) :
+    vacExp ((areaOp pol S * areaOp pol S') (1 : Fock)) = ((areaPair pol S S' : ℝ) : ℂ) := by
+  rw [areaOp, areaOp, areaPair, Finset.sum_mul_sum]
+  rw [Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun m _ => by
+    rw [smul_mul_assoc, mul_smul_comm, smul_smul]]
+  simp only [LinearMap.sum_apply, LinearMap.smul_apply]
+  rw [vacExp]
+  simp only [map_sum, MvPolynomial.constantCoeff_smul, smul_eq_mul]
+  rw [Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun m _ => by
+    rw [show MvPolynomial.constantCoeff ((qMode l * qMode m) (1 : Fock))
+        = vacExp ((qMode l * qMode m) (1 : Fock)) from rfl, vacExp_qq l m]]
+  push_cast
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [Finset.sum_eq_single l]
+  · rw [if_pos rfl, mul_one]
+  · intro m _ hm
+    rw [if_neg (fun h : l = m => hm h.symm), mul_zero]
+  · intro h
+    exact absurd (Finset.mem_univ l) h
+
 end QIQTH.OperatorEmergence
