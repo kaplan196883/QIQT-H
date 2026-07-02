@@ -34,7 +34,7 @@ instantiating Gate 3's trace-transport hinge, and replacing the ball-Clausius mo
   **`coeffFamilyPair_cohCoeff`** (`= eval (conj∘α) p`, the reproducing rule) + **`cohPair_X_mul`**
   (`= conj(α_l)·cohPair` — the coherent creation rule, grounded). Update the Q3 docstrings: v-rule cited →
   v-rule GROUNDED (polynomial level).
-- [ ] **G2 — projection/operator transport** (`QIQTH/ModularTransport.lean`): `conjU` + simp lemmas;
+- [x] **G2 — projection/operator transport** ✅ DONE (`QIQTH/ModularTransport.lean`): `conjU` + simp lemmas;
   `projK_map` (real orthogonal projection under ℝ-isometry, uniqueness route); `rvdRC_map` +
   `rvdRC_transport_of_carrier_eq`.
 - [ ] **G3 — the Borel-FC covariance (the crux):** CFC conjugation covariance (Mathlib functoriality name or
@@ -69,3 +69,8 @@ a genuine failed attempt with the error shown. Check for sibling jobs before eac
   the coherent layer at polynomial level: `coeffFamilyPair_cohCoeff` (the reproducing rule) +
   `cohPair_X_mul` (the coherent creation rule). HYPOTHESIS GROUNDED: the Q3 coherent v-rule (docstrings
   updated cited → GROUNDED; the completion-level identification stays cited). NEXT → G2.
+- **2026-07-03** — **G2 LANDED** (`ModularTransport.lean`, axiom-free std-3, budget 0): conjU wrapper;
+  `starProj_transport` (the core — real orthogonal projections transport along membership-level carrier
+  conjugacy, by the uniqueness characterization under the ℝ-isometry); `carrierMap_mulI` (i𝒦 transports
+  automatically — ℂ-linearity commutes with the I-scaling); projK/projIK/rvdR transport; CAPSTONE
+  `rvdRC_transport` — R_{S′} = U R_S U⁻¹. NEXT → G3 (the crux: borelFC_conjU).

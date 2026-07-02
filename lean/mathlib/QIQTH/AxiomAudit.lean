@@ -8276,6 +8276,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BargmannPairing.bargmann_adjoint
 #print axioms QIQTH.BargmannPairing.coeffFamilyPair_cohCoeff
 #print axioms QIQTH.BargmannPairing.cohPair_X_mul
+-- G2 (GROUNDING_PLAN.md): the projection/operator transport under unitary conjugacy. conjU wrapper;
+-- starProj_transport (real orthogonal projections transport along membership-level carrier conjugacy —
+-- the uniqueness characterization under the ℝ-isometry); carrierMap_mulI (i𝒦 transports automatically:
+-- ℂ-linearity commutes with the I-scaling); projK/projIK/rvdR transport; CAPSTONE rvdRC_transport —
+-- the RvD operator R = P + Q transports, R_{S'} = U R_S U⁻¹. G3 (Borel-FC covariance) carries this to
+-- modUnitary. Std 3.
+#print axioms QIQTH.ModularTransport.starProj_transport
+#print axioms QIQTH.ModularTransport.carrierMap_mulI
+#print axioms QIQTH.ModularTransport.rvdRC_transport
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
