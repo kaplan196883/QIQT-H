@@ -31,7 +31,7 @@ OF THE HELD CROSSED-PRODUCT CORE; the continuum walls are named, permanent parts
   `tau_recordProj = R.card` and `tau_top = N_C`; `wEntτ e := log D_e` (trace-defined); `log_N_eq_cutτ`;
   **`K2a_count_capstone`**: `Sren tauCount (maxMixed) = inducedScreenAreaτ/(4G)` — the count as a THEOREM
   with `G` entering only through the normalization.
-- [ ] **K2b — the τ₀ realization (THE COUNT in the held core)**: the clock cutoff
+- [x] **K2b — the τ₀ realization (THE COUNT in the held core)** ✅ DONE: the clock cutoff
   `clockCutOfMass r := 1_{(−∞, log r]}` with **`Iexp_clockCutOfMass = r`** (`∫_{−∞}^{log r} e^x dx = r`);
   the core embedding `coreEmbed x := π(x)·q_{N_C}(L)` (t = 0 monomials, uniform matter state
   `ω = Tr/N_C`); **`tau0_coreEmbed_eq_tauCount`** (`τ₀(π(x)q_C(L)) = Tr x` — the counting trace IS the
@@ -82,9 +82,22 @@ the error shown. Check for sibling jobs before each increment. Consults: `mcp__O
 
   riding the held classical bound). NEXT → K2a (the standalone finite count).
 
-- **2026-07-03** — **K2a LANDED** (appended to `Keystone.lean`, axiom-free std-3, budget 0):
-  LinkDims/Micro/card_micro (= Π D_e); DiamondAlg + the UNNORMALIZED tauCount; tau_recordProj
-  (τ(P_R) = |R|) + tau_top (τ(1) = N_C); the TRACE-DEFINED wEntTau = log D_e; log_NC_eq_cutTau;
-  CAPSTONE K2a_count_capstone — S(maxMixed) = inducedScreenAreaTau/(4G) as a THEOREM; the honest
-  count_matches_external_weights_iff (external matching IS the old calibration — stated, not
-  deleted). NEXT → K2b (the τ₀ realization).
+- **2026-07-03** — **K2a LANDED** (appended to `Keystone.lean`, axiom-free std-3, budget 0):
+
+  LinkDims/Micro/card_micro (= Π D_e); DiamondAlg + the UNNORMALIZED tauCount; tau_recordProj
+
+  (τ(P_R) = |R|) + tau_top (τ(1) = N_C); the TRACE-DEFINED wEntTau = log D_e; log_NC_eq_cutTau;
+
+  CAPSTONE K2a_count_capstone — S(maxMixed) = inducedScreenAreaTau/(4G) as a THEOREM; the honest
+
+  count_matches_external_weights_iff (external matching IS the old calibration — stated, not
+
+  deleted). NEXT → K2b (the τ₀ realization).
+
+- **2026-07-03** — **K2b LANDED — THE COUNT IN THE HELD CORE** (axiom-free std-3, budget 0):
+  flatClock (the mass-N clock window as a genuine ExpTest — the Iic-indicator idealization has
+  noncompact support, honest substitution with identical Iexp mass); Iexp_flatClock = N;
+  tauMonomial_uniform_eq_tauCount — τ₀(π(x)·q_{N_C}(L)) = Tr x: THE COUNTING TRACE IS THE
+  RESTRICTION OF THE CONSTRUCTED τ₀; tau0_recordProj_eq_card; tau0_top_eq_NC;
+  wEntTau_eq_log_tau0Dim — THE CALIBRATION IS A THEOREM (trace-defined weight); CAPSTONE
+  K2b_tau0_capstone — S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ(C)/(4G). NEXT → K5.

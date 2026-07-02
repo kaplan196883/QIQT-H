@@ -8345,6 +8345,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Keystone.log_NC_eq_cutTau
 #print axioms QIQTH.Keystone.K2a_count_capstone
 #print axioms QIQTH.Keystone.count_matches_external_weights_iff
+-- K2b (KEYSTONE_PLAN.md — THE COUNT IN THE HELD CORE): flatClock (the mass-N clock window, a genuine
+-- ExpTest; the Iic-indicator idealization has noncompact support — honest substitution, same Iexp mass);
+-- Iexp_flatClock = N; tauMonomial_uniform_eq_tauCount — THE COUNTING TRACE IS THE VALUE OF THE
+-- CONSTRUCTED τ₀ (the held W3a monomial trace at the uniform matter state, t = 0, mass-N_C clock):
+-- τ₀(π(x)·q_{N_C}(L)) = Tr x — the count is a RESTRICTION of the crossed-product trace, not a postulate;
+-- tau0_recordProj_eq_card; tau0_top_eq_NC; wEntTau_eq_log_tau0Dim — THE CALIBRATION IS A THEOREM
+-- (trace-defined weight); CAPSTONE K2b_tau0_capstone — S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ/(4G)
+-- in the finite record corner of the constructed core. Finite branch exactly as scoped; walls stand. Std 3.
+#print axioms QIQTH.Keystone.Iexp_flatClock
+#print axioms QIQTH.Keystone.tauMonomial_uniform_eq_tauCount
+#print axioms QIQTH.Keystone.tau0_recordProj_eq_card
+#print axioms QIQTH.Keystone.wEntTau_eq_log_tau0Dim
+#print axioms QIQTH.Keystone.K2b_tau0_capstone
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

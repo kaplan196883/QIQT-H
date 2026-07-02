@@ -620,8 +620,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   — the trace COUNTS records) + `tau_top`; the TRACE-DEFINED weight `wEntTau e = log D_e`;
   **`K2a_count_capstone`** — `S(maxMixed) = log N_C = Σ_e log D_e = inducedScreenAreaTau/(4G)` as a
   theorem (G only through the normalization); **`count_matches_external_weights_iff`** — pointwise
-  external-weight matching IS the old calibration (stated honestly, never deleted). Next: K2b (the τ₀
-  realization — the counting trace as the RESTRICTION of the constructed trace).
+  external-weight matching IS the old calibration (stated honestly, never deleted). **K2b LANDED — THE COUNT IN
+  THE HELD CORE**: `flatClock` (the mass-`N_C` clock window, a genuine `ExpTest`); `Iexp_flatClock = N`;
+  **`tauMonomial_uniform_eq_tauCount`** — `τ₀(π(x)·q_{N_C}(L)) = Tr x`: **the counting trace IS the
+  restriction of the constructed crossed-product trace τ₀** (the held W3a monomial formula at the uniform
+  matter state, t = 0), not a new postulate; `tau0_recordProj_eq_card` (`τ₀ counts records`);
+  **`wEntTau_eq_log_tau0Dim`** — **THE CALIBRATION IS A THEOREM** (the link weight IS the log of the link
+  fiber's τ₀-dimension — trace-defined, nothing calibrated); CAPSTONE **`K2b_tau0_capstone`** —
+  `S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ(C)/4G` in the finite record corner of the constructed core.
+  ⚠ The finite branch exactly as scoped; Walls 1–5 stand (continuum algebras, external-area matching,
+  Type III₁/II∞, normal weights, value of G). Next: K5 (covariance + the dual-scaling law).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

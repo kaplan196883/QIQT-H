@@ -17,6 +17,7 @@
 import Mathlib
 import QIQTH.QuantumRelativeEntropy
 import QIQTH.RecordContract
+import QIQTH.MonomialTrace
 
 namespace QIQTH.Keystone
 
@@ -194,5 +195,117 @@ theorem K2a_count_capstone (L : LinkDims E) (C : Finset E) {G : ℝ} (hG : G ≠
 theorem count_matches_external_weights_iff (L : LinkDims E) (C : Finset E) (wExt : E → ℝ) :
     cutTau L C = ∑ e ∈ C, wExt e ↔ ∑ e ∈ C, Real.log (L.D e) = ∑ e ∈ C, wExt e :=
   Iff.rfl
+
+/-! ## K2b — THE COUNT IN THE HELD CORE: the counting trace is the VALUE of the constructed τ₀
+
+The held W3a monomial trace `τ₀(π(a)λ_t f(L)) = ω(a)·Iexp(f.modMul t)`, evaluated at `t = 0`, the
+uniform matter state `Tr/N_C`, and a clock test of `Iexp`-mass `N_C`, IS the unnormalized counting
+trace — the count is the restriction of the constructed crossed-product trace, not a new postulate.
+(The `1_{(−∞, log N]}` indicator idealization has noncompact support; the held `ExpTest` structure
+requires compact support, so the mass-`N_C` clock is realized as the flat window `N·e^{−x}·1_{[0,1]}` —
+identical `Iexp` mass, honest substitution.) -/
+
+open QIQTH.TypeIITrace QIQTH.Spectral.Multiplication
+
+/-- **The flat clock window of mass `N`**: `f(x) = N·e^{−x}` on `[0,1]` — a genuine `ExpTest` whose
+    log-clock weight is EXACTLY `N` (`e^x · N e^{−x} = N` on the window). -/
+noncomputable def flatClock (N : ℝ) : ExpTest where
+  f := fun x => if x ∈ Set.Icc (0 : ℝ) 1 then ((N * Real.exp (-x) : ℝ) : ℂ) else 0
+  meas := by
+    refine Measurable.ite measurableSet_Icc ?_ measurable_const
+    exact Complex.measurable_ofReal.comp
+      (measurable_const.mul (Real.measurable_exp.comp measurable_neg))
+  bound := |N|
+  hbound := fun x => by
+    by_cases hx : x ∈ Set.Icc (0 : ℝ) 1
+    · rw [if_pos hx, Complex.norm_real, Real.norm_eq_abs, abs_mul, Real.abs_exp]
+      have h1 : Real.exp (-x) ≤ 1 := Real.exp_le_one_iff.mpr (neg_nonpos.mpr hx.1)
+      have h2 : (0 : ℝ) < Real.exp (-x) := Real.exp_pos _
+      nlinarith [abs_nonneg N]
+    · rw [if_neg hx]
+      simp
+  rad := 1
+  hsupp := fun x hx => by
+    rw [if_neg]
+    intro hmem
+    exact hx ⟨by linarith [hmem.1], hmem.2⟩
+
+/-- The flat window's log-clock weight is exactly its mass. -/
+theorem Iexp_flatClock (N : ℝ) : Iexp (flatClock N) = (N : ℂ) := by
+  rw [Iexp]
+  rw [show (fun x => (Real.exp x : ℂ) * (flatClock N).f x)
+      = Set.indicator (Set.Icc (0 : ℝ) 1) (fun _ => (N : ℂ)) from ?_]
+  · rw [MeasureTheory.integral_indicator_const _ measurableSet_Icc]
+    simp [Real.volume_Icc]
+  · funext x
+    rw [Set.indicator_apply]
+    by_cases hx : x ∈ Set.Icc (0 : ℝ) 1
+    · rw [if_pos hx, show (flatClock N).f x = ((N * Real.exp (-x) : ℝ) : ℂ) from if_pos hx]
+      push_cast
+      rw [show Complex.exp (x : ℂ) * ((N : ℂ) * Complex.exp (-(x : ℂ)))
+          = (N : ℂ) * (Complex.exp (x : ℂ) * Complex.exp (-(x : ℂ))) from by ring,
+        ← Complex.exp_add, add_neg_cancel, Complex.exp_zero, mul_one]
+    · rw [if_neg hx, show (flatClock N).f x = 0 from if_neg hx, mul_zero]
+
+/-- The uniform matter state `Tr/N_C` on the diamond algebra. -/
+noncomputable def uniformState (L : LinkDims E) (C : Finset E) (x : DiamondAlg L C) : ℂ :=
+  Matrix.trace x / (NC L C : ℂ)
+
+/-- **K2b — THE COUNTING TRACE IS THE VALUE OF THE CONSTRUCTED τ₀:** the held monomial trace at the
+    uniform matter state, `t = 0`, and the mass-`N_C` clock window equals the unnormalized counting
+    trace — `τ₀(π(x)·q_{N_C}(L)) = Tr x`. The count is a RESTRICTION of the crossed-product trace,
+    not a new postulate. -/
+theorem tauMonomial_uniform_eq_tauCount (L : LinkDims E) (C : Finset E) (x : DiamondAlg L C) :
+    tauMonomial (uniformState L C) x 0 (flatClock (NC L C)) = tauCount L C x := by
+  rw [tauMonomial]
+  have hmod : Iexp ((flatClock (NC L C)).modMul 0) = Iexp (flatClock (NC L C)) := by
+    rw [Iexp, Iexp]
+    congr 1
+    funext y
+    rw [show ((flatClock (NC L C)).modMul 0).f y
+        = modSymbol 0 y * (flatClock (NC L C)).f y from rfl]
+    rw [show modSymbol 0 y = 1 from by simp [modSymbol]]
+    rw [one_mul]
+  rw [hmod, Iexp_flatClock, uniformState, tauCount]
+  have hN : (NC L C : ℂ) ≠ 0 := by
+    exact_mod_cast (NC_pos L C).ne'
+  field_simp
+  norm_cast
+
+/-- The record count through τ₀: `τ₀(π(P_R)·q_{N_C}(L)) = |R|`. -/
+theorem tau0_recordProj_eq_card (L : LinkDims E) (C : Finset E) (R : Finset (Micro L C)) :
+    tauMonomial (uniformState L C) (recordProj L C R) 0 (flatClock (NC L C)) = (R.card : ℂ) := by
+  rw [tauMonomial_uniform_eq_tauCount, tau_recordProj]
+
+/-- The τ₀-dimension of the full diamond is `N_C`. -/
+theorem tau0_top_eq_NC (L : LinkDims E) (C : Finset E) :
+    tauMonomial (uniformState L C) (1 : DiamondAlg L C) 0 (flatClock (NC L C))
+      = (NC L C : ℂ) := by
+  rw [tauMonomial_uniform_eq_tauCount, tau_top]
+
+/-- **THE CALIBRATION IS A THEOREM (trace-defined):** the link weight IS the log of the link fiber's
+    τ₀-dimension — `wEntTau e = log dim_{τ₀}(single-link diamond)`. Nothing is calibrated; the weight
+    comes from the trace. -/
+theorem wEntTau_eq_log_tau0Dim (L : LinkDims E) (e : E) :
+    wEntTau L e
+      = Real.log ((tauMonomial (uniformState L {e}) (1 : DiamondAlg L {e}) 0
+          (flatClock (NC L {e}))).re) := by
+  rw [tau0_top_eq_NC, wEntTau]
+  norm_num [NC, Finset.prod_singleton]
+
+/-- **K2b CAPSTONE — THE COUNT IN THE HELD CORE:** the maximal entropy of the diamond record corner
+    equals the log of its τ₀-dimension, equals the trace-induced screen area over `4G` —
+    `S = log dim_{τ₀}(𝒟_C) = A_τ(C)/4G`, in the finite record corner of the constructed crossed-product
+    core, with the calibration trace-defined and `G` entering only as the normalization. -/
+theorem K2b_tau0_capstone (L : LinkDims E) (C : Finset E) {G : ℝ} (hG : G ≠ 0) :
+    vonNeumannEntropy (maxMixed_isDensity (ι := Micro L C))
+      = Real.log ((tauMonomial (uniformState L C) (1 : DiamondAlg L C) 0
+          (flatClock (NC L C))).re)
+    ∧ vonNeumannEntropy (maxMixed_isDensity (ι := Micro L C))
+      = inducedScreenAreaTau L G C / (4 * G) := by
+  constructor
+  · rw [tau0_top_eq_NC, vonNeumannEntropy_maxMixed, card_micro]
+    norm_num
+  · exact K2a_count_capstone L C hG
 
 end QIQTH.Keystone
