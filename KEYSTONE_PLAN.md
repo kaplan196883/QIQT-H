@@ -23,7 +23,7 @@ OF THE HELD CROSSED-PRODUCT CORE; the continuum walls are named, permanent parts
 - **Ordering:** K0 → K2a → K2b → K5 → K1 → K3(finite only) → K4(walls doc). K1 must NOT block K2.
 
 ## Increments
-- [ ] **K0 — the finite trace-entropy lemmas** (`QIQTH/Keystone.lean`): the generic `Sren` over a trace
+- [x] **K0 — the finite trace-entropy lemmas** ✅ DONE (`QIQTH/Keystone.lean`): the generic `Sren` over a trace
   functional; **`Sren_maxMixedOn_projection`** (`S(maxMixed on P) = log τ(P)`); the maximality bound
   `Sren_le_log_tau_support` and the equality-iff (prevents claiming equality for non-maximal states).
 - [ ] **K2a — the standalone finite count**: `LinkDims`/`Micro`/`card_micro` (`= Π D_e`); `DiamondAlg` =
@@ -72,3 +72,8 @@ the error shown. Check for sibling jobs before each increment. Consults: `mcp__O
 - **2026-07-03** — plan created from the GPT-5.5-pro keystone consult (K2 recut: trace-defined weights or
   nothing; unnormalized trace; dual action SCALES the count; the cut list; ordering K0→K2a→K2b→K5→K1→K3;
   the two-sentence honest checkpoint fixed verbatim). NEXT → K0.
+- **2026-07-03** — **K0 LANDED** (`QIQTH/Keystone.lean`, axiom-free std-3, budget 0): `maxMixed = N⁻¹·1`
+  (unnormalized counting trace) with `maxMixed_isDensity`; `maxMixed_eigenvalues` (constant spectrum via
+  the eigenvector-basis relation); CAPSTONES `vonNeumannEntropy_maxMixed` (S = log N — the entropy half
+  of the count) + `vonNeumannEntropy_le_log_card` (the Gibbs guard: equality only at maximal mixing,
+  riding the held classical bound). NEXT → K2a (the standalone finite count).

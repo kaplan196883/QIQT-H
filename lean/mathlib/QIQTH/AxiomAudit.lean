@@ -8325,6 +8325,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ModularTransport.CHMTransportDataOfCarrierMap
 #print axioms QIQTH.ModularTransport.modUnitary_inner_cov
 #print axioms QIQTH.ModularTransport.ball_modUnitary_cov
+-- K0 (KEYSTONE_PLAN.md — THE COUNT campaign): the finite trace-entropy lemmas. maxMixed = N⁻¹·1 (w.r.t.
+-- the UNNORMALIZED counting trace, per the binding correction); maxMixed_eigenvalues (constant spectrum
+-- via the eigenvector-basis relation); vonNeumannEntropy_maxMixed — S(maxMixed) = log N (the entropy
+-- half of the count); vonNeumannEntropy_le_log_card — the Gibbs/Jensen GUARD S(ρ) ≤ log N for every
+-- density (riding the held classical shannon_le_log_card on the eigenvalue vector): the count equality
+-- is claimed only at maximal mixing. Std 3.
+#print axioms QIQTH.Keystone.maxMixed_eigenvalues
+#print axioms QIQTH.Keystone.vonNeumannEntropy_maxMixed
+#print axioms QIQTH.Keystone.vonNeumannEntropy_le_log_card
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

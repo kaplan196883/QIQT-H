@@ -610,6 +610,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     modular correlators are carrier-covariant); **the ball-Clausius per-ball modular input replaced by
     per-ball geometry** (`ball_modUnitary_cov`). ⚠ NOT QG; no wall crossed.
 
+- **THE KEYSTONE (THE COUNT), K0 — `QIQTH/Keystone.lean`** (**[AF]** std-3; `KEYSTONE_PLAN.md` — the
+  remaining QG-shaped problem, laddered honestly; K0–K6 in progress). **K0 — the finite trace-entropy
+  substrate:** `maxMixed = N⁻¹·1` w.r.t. the UNNORMALIZED counting trace (the binding correction);
+  `maxMixed_eigenvalues` (constant spectrum); **`vonNeumannEntropy_maxMixed`** (`S(maxMixed) = log N` —
+  the entropy half of the count) + **`vonNeumannEntropy_le_log_card`** (the Gibbs/Jensen GUARD: `S ≤ log N`
+  for every density, so the count equality is claimed only at maximal mixing). Next: K2a (standalone
+  finite count) → K2b (the τ₀ realization — the count as the restriction of the constructed trace, with
+  the calibration a THEOREM because the weight is trace-defined).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
