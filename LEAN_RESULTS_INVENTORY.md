@@ -486,8 +486,8 @@ contribution independent of the physics interpretation. All **[AF]** (hypotheses
 - **The axiom budget GENUINELY DROPPED to 0 via real discharge** (not relabeling): Donald 29→21, DPI 21→17,
   ArakiInterface 17→…→6, EntropyBridge 6→0 (ledger in `axiom_budget_check.sh`).
 - **[frontier]:** fully-general CPTP DPI (beyond mixed-unitary + partial-trace); Type II/III continuum relative
-  entropy. **Hygiene gap:** `strong_subadditivity` / `condMutualInfo_nonneg` are sorry-free but **not yet in
-  `AxiomAudit.lean`** (add `#print axioms`).
+  entropy. **Hygiene gap CLOSED (verified 2026-07-02):** `strong_subadditivity` / `condMutualInfo_nonneg` ARE
+  pinned in `AxiomAudit.lean` (lines ~7577–7578) and probe std-3; the earlier "not yet pinned" note was stale.
 
 ## 6c. Fock/ — second quantization (39 files) — more built-out than "one-particle shadows"
 
