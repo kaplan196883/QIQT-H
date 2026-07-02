@@ -19,6 +19,8 @@
 import Mathlib
 import QIQTH.StandardSubspaceModular
 import QIQTH.Spectral.SpectralTheorem
+import QIQTH.StandardSubspaceModularFlow
+import QIQTH.CHMTransport
 
 namespace QIQTH.ModularTransport
 
@@ -385,5 +387,93 @@ theorem borelFC_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfA
     show y = U (U.symm y) from (U.apply_symm_apply y).symm]
   rw [inner_borelFC, bilinDiag_conjU U hT hf', ← inner_borelFC, conjU_apply,
     ← U.inner_map_map (U.symm x), U.apply_symm_apply]
+
+/-! ### G4 — the modular unitaries transport; the payoffs
+
+`modUnitary S t = u_t(rvdRC S)` with an AMBIENT symbol (`modChar t`), so the transport is one
+operator-congruence (G2) + the crux (G3). Payoffs: J3's `hmodVac` carried field is DELETED (a
+`CHMTransportData` now needs NO modular input — carrier conjugacy suffices); Gate 3's covariance hinge
+is fed by the derived correlator covariance; the ball family rides the same theorem. The residue
+everywhere is the GEOMETRIC carrier-conjugacy data itself — geometry, not modular theory. -/
+
+/-- `borelFC` congruence along an operator equality, for AMBIENT symbols (dependent-type-safe:
+    `subst` + proof irrelevance). -/
+theorem borelFC_congr_op {T T' : H →L[ℂ] H} (h : T = T') (hT : IsSelfAdjoint T)
+    (hT' : IsSelfAdjoint T') (g : ℝ → ℂ)
+    (hg : Measurable fun ω : spectrum ℝ T => g ω.val)
+    (hg' : Measurable fun ω : spectrum ℝ T' => g ω.val)
+    {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω : spectrum ℝ T, ‖g ω.val‖ ≤ C)
+    (hC' : ∀ ω : spectrum ℝ T', ‖g ω.val‖ ≤ C) :
+    QIQTH.SpectralTheorem.borelFC T' hT' hg' hC0 hC'
+      = QIQTH.SpectralTheorem.borelFC T hT hg hC0 hC := by
+  subst h
+  rfl
+
+open QIQTH.SpectralTheorem in
+/-- **G4 CAPSTONE — the modular unitaries transport under carrier conjugacy:**
+    `Δ^{it}_{S′} = U Δ^{it}_S U⁻¹`. One congruence (G2's `rvdRC_transport`) + the crux (G3's
+    `borelFC_conjU`); the symbol is ambient. -/
+theorem modUnitary_transport {S S' : StandardSubspace H} {U : H ≃ₗᵢ[ℂ] H}
+    (hK : CarrierMap S S' U) (t : ℝ) :
+    modUnitary S' t = conjU U (modUnitary S t) := by
+  have hR : conjU U (rvdRC S) = rvdRC S' := (rvdRC_transport hK).symm
+  have hT : IsSelfAdjoint (conjU U (rvdRC S)) :=
+    conjU_isSelfAdjoint (rvdRC_isSelfAdjoint S) U
+  have hg : Measurable fun ω : spectrum ℝ (conjU U (rvdRC S)) => modChar t ω.val :=
+    (modChar_measurable t).comp measurable_subtype_coe
+  have hC : ∀ ω : spectrum ℝ (conjU U (rvdRC S)), ‖modChar t ω.val‖ ≤ 1 :=
+    fun ω => le_of_eq (modChar_norm t ω.val)
+  have e1 : QIQTH.SpectralTheorem.borelFC (rvdRC S') (rvdRC_isSelfAdjoint S')
+      (modSpecFun_measurable S' t) zero_le_one (modSpecFun_norm_le S' t)
+      = QIQTH.SpectralTheorem.borelFC (conjU U (rvdRC S)) hT hg zero_le_one hC :=
+    borelFC_congr_op hR hT (rvdRC_isSelfAdjoint S') (modChar t) hg
+      (modSpecFun_measurable S' t) zero_le_one hC (modSpecFun_norm_le S' t)
+  rw [modUnitary, modUnitary]
+  refine e1.trans ?_
+  refine (borelFC_conjU U (rvdRC_isSelfAdjoint S) hg zero_le_one hC).trans ?_
+  rfl
+
+/-- The pointwise (caller-friendly) form. -/
+theorem modUnitary_apply_transport {S S' : StandardSubspace H} {U : H ≃ₗᵢ[ℂ] H}
+    (hK : CarrierMap S S' U) (t : ℝ) (x : H) :
+    modUnitary S' t (U x) = U (modUnitary S t x) := by
+  rw [modUnitary_transport hK, conjU_apply_U]
+
+open QIQTH.BallModular in
+/-- **J3 PAYOFF — the `hmodVac` carried field is DELETED.** A `CHMTransportData` can now be built from
+    the GEOMETRIC data alone: carrier conjugacy per ball supplies the modular transport as a theorem
+    (`modUnitary_apply_transport`). The residue is the carrier-conjugacy data itself — geometry. -/
+noncomputable def CHMTransportDataOfCarrierMap {Ball : Type*}
+    (W : StandardSubspace H) (vac : H) (boost : ℝ → H → H)
+    (hBW : ∀ t, boost t vac = modUnitary W t vac)
+    (U : Ball → (H ≃ₗᵢ[ℂ] H)) (S : Ball → StandardSubspace H)
+    (flow : Ball → ℝ → H → H)
+    (hflow : ∀ B t x, flow B t x = U B (boost t ((U B).symm x)))
+    (hK : ∀ B, CarrierMap W (S B) (U B)) :
+    CHMTransportData Ball H where
+  W := W
+  vac := vac
+  boost := boost
+  hBW := hBW
+  U := U
+  S := S
+  flow := flow
+  hflow := hflow
+  hmodVac := fun B t => modUnitary_apply_transport (hK B) t vac
+
+/-- **Gate-3 PAYOFF — the modular correlators are carrier-covariant** — the derived covariance datum
+    the state-level gate's `Sren_cov`/`CovariantExpectation` hinge consumes. -/
+theorem modUnitary_inner_cov {S S' : StandardSubspace H} {U : H ≃ₗᵢ[ℂ] H}
+    (hK : CarrierMap S S' U) (t : ℝ) (x y : H) :
+    inner ℂ (U x) (modUnitary S' t (U y)) = inner ℂ x (modUnitary S t y) := by
+  rw [modUnitary_apply_transport hK, U.inner_map_map]
+
+/-- **Ball-family PAYOFF** — per-ball modular covariance from per-ball geometric carrier conjugacy
+    (the ball-Clausius modular input, replaced by geometry). -/
+theorem ball_modUnitary_cov {Ball : Type*} {W : StandardSubspace H}
+    {U : Ball → (H ≃ₗᵢ[ℂ] H)} {S : Ball → StandardSubspace H}
+    (hK : ∀ B, CarrierMap W (S B) (U B)) (B : Ball) (t : ℝ) (x : H) :
+    modUnitary (S B) t (U B x) = U B (modUnitary W t x) :=
+  modUnitary_apply_transport (hK B) t x
 
 end QIQTH.ModularTransport

@@ -8312,6 +8312,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ModularTransport.pvmScalarMeasure_conjU
 #print axioms QIQTH.ModularTransport.bilinDiag_conjU
 #print axioms QIQTH.ModularTransport.borelFC_conjU
+-- G4 (GROUNDING_PLAN.md — CAMPAIGN COMPLETE, G1–G4): the modular unitaries transport; the payoffs.
+-- modUnitary_transport — Δ^{it}_{S′} = U Δ^{it}_S U⁻¹ (one congruence + the crux; ambient symbol);
+-- modUnitary_apply_transport (pointwise). PAYOFFS: CHMTransportDataOfCarrierMap — J3's hmodVac carried
+-- field is DELETED (a CHMTransportData is built from GEOMETRIC data alone: carrier conjugacy per ball
+-- supplies the modular transport as a theorem; the residue = the carrier-conjugacy data itself —
+-- geometry, not modular theory); modUnitary_inner_cov — the modular correlators are carrier-covariant
+-- (the derived covariance datum for Gate 3's Sren_cov hinge); ball_modUnitary_cov — the ball-Clausius
+-- per-ball modular input replaced by geometric carrier conjugacy. Std 3.
+#print axioms QIQTH.ModularTransport.modUnitary_transport
+#print axioms QIQTH.ModularTransport.modUnitary_apply_transport
+#print axioms QIQTH.ModularTransport.CHMTransportDataOfCarrierMap
+#print axioms QIQTH.ModularTransport.modUnitary_inner_cov
+#print axioms QIQTH.ModularTransport.ball_modUnitary_cov
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

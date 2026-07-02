@@ -1,6 +1,6 @@
 # THE GROUNDING CAMPAIGN — Bargmann adjointness + hmodVac from the RvD tower (G1–G4)
 
-**Status:** ACTIVE (2026-07-03). **GPT-5.5-pro-VERIFIED.** **Goal:** delete carried hinges in MULTIPLE landed
+**Status:** ✅ COMPLETE (2026-07-03, G1–G5). **GPT-5.5-pro-VERIFIED.** **Goal:** delete carried hinges in MULTIPLE landed
 results at once: G1 grounds the operator-emergence coherent v-rule as a theorem (Bargmann adjointness on
 polynomials); G2–G4 derive the modular transport from the RvD tower — deleting J3's `hmodVac` carried field,
 instantiating Gate 3's trace-transport hinge, and replacing the ball-Clausius modular input.
@@ -40,14 +40,14 @@ instantiating Gate 3's trace-transport hinge, and replacing the ball-Clausius mo
 - [x] **G3 — the Borel-FC covariance (the crux). ✅ COMPLETE** (G3a cfc_conjU; G3b(i) specMeasure_conjU; G3b(ii) specProj/PVM/diagInt/bilinDiag transport + CAPSTONE `borelFC_conjU`) (in `ModularTransport.lean`: `conjUStarAlgHom` continuous star-hom, `spectrum_conjU`, `conjU_isSelfAdjoint`, `cfc_conjU` — the CONTINUOUS FC covariance via Mathlib `map_cfc`). **G3b remaining:** CFC conjugation covariance (Mathlib functoriality name or
   local uniqueness proof); `scalarMeasure_conjU` (RMK uniqueness against continuous tests);
   **`borelFC_conjU`** (the calc chain through `inner_borelFC`); spectrum handling per the binding correction.
-- [ ] **G4 — the payoffs:** **`modUnitary_map`** (`modUnitary (S.map U) t = conjU U (modUnitary S t)` — one
+- [x] **G4 — the payoffs. ✅ DONE** (in `ModularTransport.lean`): **`modUnitary_map`** (`modUnitary (S.map U) t = conjU U (modUnitary S t)` — one
   line from G2+G3); `modUnitary_intertwine_of_carrier_eq` + `modUnitary_apply_of_carrier_eq`; corollaries:
   **J3 hmodVac DELETED** (`J3_hmodVac_of_unitary_transport` discharging `CHMTransportData.hmodVac` given
   carrier conjugacy + state transport), **Gate-3 hinge instantiated** (`Sren_cov_of_traceCovariant` fed by
   the derived transport), **ball family** (`ball_modUnitary_cov`/`ball_hmodVac` given the geometric carrier
   covariance). Update J3/Gate-3/inventory honestly: which named input became a THEOREM, which residue
   remains (the geometric carrier covariance data itself).
-- [ ] **G5 — checkpoint.** Inventory; plan COMPLETE; delete the loop; paper/website sync on request.
+- [x] **G5 — checkpoint. ✅ CAMPAIGN COMPLETE** (loop deleted; sync on request). Inventory; plan COMPLETE; delete the loop; paper/website sync on request.
 
 ## Discipline (every increment)
 `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print axioms` std-3; budget 0; AxiomAudit
@@ -98,8 +98,23 @@ a genuine failed attempt with the error shown. Check for sibling jobs before eac
 
   specProj/PVM transport + borelFC_conjU via the inner_borelFC calc chain, then G4.
 
-- **2026-07-03** — **G3b(ii) LANDED — G3 (THE CRUX) COMPLETE** (axiom-free std-3, budget 0):
-  qForm/cForm transport (polarization, U ℂ-linear); `specProj_conjU` (E′(s′) = U E(e⁻¹s′) U⁻¹,
-  inner ext); `pvmScalarMeasure_conjU` (pushforward); `diagInt_conjU`; `bilinDiag_conjU`;
-  CAPSTONE **`borelFC_conjU`** — f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹ for bounded measurable symbols.
-  NEXT → G4 (modUnitary_map one line + the three payoffs).
+- **2026-07-03** — **G3b(ii) LANDED — G3 (THE CRUX) COMPLETE** (axiom-free std-3, budget 0):
+
+  qForm/cForm transport (polarization, U ℂ-linear); `specProj_conjU` (E′(s′) = U E(e⁻¹s′) U⁻¹,
+
+  inner ext); `pvmScalarMeasure_conjU` (pushforward); `diagInt_conjU`; `bilinDiag_conjU`;
+
+  CAPSTONE **`borelFC_conjU`** — f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹ for bounded measurable symbols.
+
+  NEXT → G4 (modUnitary_map one line + the three payoffs).
+
+- **2026-07-03** — **G4 LANDED — CAMPAIGN COMPLETE (G1–G5).** `modUnitary_transport`
+  (Δ^{it}_{S′} = U Δ^{it}_S U⁻¹ — one congruence + the crux; the dependent-type obstacle solved by
+  the subst-based borelFC_congr_op + defeq trans steps); `modUnitary_apply_transport`. PAYOFFS:
+  `CHMTransportDataOfCarrierMap` — **J3's hmodVac carried field DELETED** (geometric carrier
+  conjugacy alone builds the transport data; residue = the geometry itself);
+  `modUnitary_inner_cov` — **Gate 3's covariance hinge fed by a derived theorem**;
+  `ball_modUnitary_cov` — the ball-Clausius per-ball modular input replaced by geometry.
+  LEDGER (G1–G4): the Q3 coherent v-rule GROUNDED (Bargmann adjointness); the RvD operator,
+  spectral projections, PVM measures, and bounded Borel calculus all TRANSPORT under unitary
+  conjugacy (the named follow-on of J3 AND Gate 3, built); hmodVac DELETED. Loop deleted.

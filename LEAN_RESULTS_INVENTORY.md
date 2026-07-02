@@ -594,8 +594,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (C_c tests Tietze-extended to ambient symbols, riding `cfc_conjU`). **G3b(ii) — G3 COMPLETE**: `specProj_conjU`
   (the spectral projections transport), `pvmScalarMeasure_conjU`, `diagInt`/`bilinDiag` transport, and
   CAPSTONE **`borelFC_conjU`** — the bounded BOREL functional calculus transports under conjugation,
-  `f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹` (the honest scalar-measure route; generator shortcut rejected). G4 next:
-  `modUnitary` transport in one line + the payoffs (J3 `hmodVac` deletion, Gate-3 hinge, ball family).
+  `f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹` (the honest scalar-measure route; generator shortcut rejected). **G4 — CAMPAIGN COMPLETE (G1–G5)**:
+  **`modUnitary_transport`** — `Δ^{it}_{S′} = U Δ^{it}_S U⁻¹` under membership-level carrier
+  conjugacy. PAYOFFS, each a deletion or instantiation: **`CHMTransportDataOfCarrierMap`** — J3's
+  `hmodVac` carried field is **DELETED** (the transport data is built from GEOMETRIC carrier
+  conjugacy alone; the honest residue is the geometry itself, plus the massless wedge BW);
+  **`modUnitary_inner_cov`** — the modular correlators are carrier-covariant (the derived datum
+  feeding Gate 3's `Sren_cov` hinge); **`ball_modUnitary_cov`** — the ball-Clausius per-ball modular
+  input replaced by per-ball geometric conjugacy. The unitary covariance of the spectral theorem +
+  Borel calculus (G2–G3) stands as independent tower infrastructure.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
