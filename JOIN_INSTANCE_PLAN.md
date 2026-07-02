@@ -37,7 +37,7 @@ a THEOREM for the constructed instance, and the count normalization rewrites to 
 ## Increments
 - [x] **JI1 — the local area decomposition** ✅ DONE (`QIQTH/JoinInstance.lean`): `localAreaVar` (per-element `δA_a`), `A0Split` (share +
   `sum_share`), and the algebraic core `∑_a (β_a + δA_a) = A0 + areaVar S h`.
-- [ ] **JI2 — the generic τ join dictionary**: `wEnt a := (β_a + δA_a)/(4G)`, `Dτ_a := exp(wEnt a)`;
+- [x] **JI2 — the generic τ join dictionary** ✅ DONE: `wEnt a := (β_a + δA_a)/(4G)`, `Dτ_a := exp(wEnt a)`;
   `hcal_tau` (`log (Dτ a) = wEnt a` — `Real.log_exp`); **`hJoin_tau`** — the join equality as a THEOREM
   (`0 < G` required).
 - [ ] **JI3 — the τ₀ corner realization**: the clock-window mass realizes any positive real —
@@ -80,3 +80,10 @@ expose the key).
   background apportionment — honest data, never canonical) + the uniform-policy constructor; CAPSTONE
   sum_localArea — ∑_a (β_a + δA_a) = A0 + areaVar S h (the carried hJoin's RHS decomposed per link).
   NEXT → JI2 (the generic τ join dictionary).
+
+- **2026-07-03** — **JI2 LANDED** (axiom-free std-3, budget 0): tauWEnt (the geometry-defined code
+  weight A^loc_a/(4G)); tauDim = exp(wEnt) — the REAL positive trace-dimension (no integrality) with
+  tauDim_pos; hcal_tau — THE CALIBRATION IS A THEOREM at the τ level (Real.log_exp); CAPSTONE
+  hJoin_tau — the Q5 carried hJoin equality is a THEOREM for the constructed dictionary
+  (inducedScreenArea G S.elems wEnt = A0 + areaVar S (classicalH pol α); geometry → code, links =
+  screen elements, 0 < G). NEXT → JI3 (the τ₀ corner realization).

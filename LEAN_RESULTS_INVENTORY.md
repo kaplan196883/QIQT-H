@@ -658,7 +658,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   global background area (honest DATA per the binding verdict: no canonical per-link split of a global
   constant; the uniform split is an optional policy constructor, never pretended-derived); CAPSTONE
   **`sum_localArea`** — `∑_a (β_a + δA_a) = A₀ + areaVar S h`: the carried `hJoin`'s RHS decomposed per
-  link (the algebraic core of the join). Next: JI2 (the generic τ join dictionary).
+  link (the algebraic core of the join). **JI2 LANDED — `hJoin` IS A THEOREM FOR THE CONSTRUCTED
+  DICTIONARY**: `tauWEnt` (the geometry-defined weight `A^loc_a/(4G)`), `tauDim = exp(wEnt)` (REAL
+  positive trace-dimension — no integrality, the Type II lesson), **`hcal_tau`** (the calibration is a
+  theorem at the τ level, `Real.log_exp`), CAPSTONE **`hJoin_tau`** — the exact Q5 hypothesis shape
+  `inducedScreenArea G S.elems wEnt = A₀ + areaVar S (classicalH pol α)` supplied by construction
+  (geometry → code; no smuggling). Next: JI3 (the τ₀ corner realization via clock-window mass).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
