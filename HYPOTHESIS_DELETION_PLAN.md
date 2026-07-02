@@ -1,6 +1,6 @@
 # HYPOTHESIS DELETION — the joins campaign (J1–J4)
 
-**Status:** ACTIVE (2026-07-02). **GPT-5.5-pro-VERIFIED** (J1 RECOMMEND; J2/J3/J4 REDIRECTED to the honest forms
+**Status:** ✅ COMPLETE (2026-07-02, J1–J4 all landed). **GPT-5.5-pro-VERIFIED** (J1 RECOMMEND; J2/J3/J4 REDIRECTED to the honest forms
 below — the redirected shapes are BINDING). **Goal:** delete/weaken carried hypotheses of the landed campaigns by
 connecting held theorems: make the eigen-core trace laws unconditional in the finite corner (J1), replace the
 Iyer–Wald hypothesis by a derivable kernel-probe theorem + bridge refactor (J2), reduce CHM to an abstract
@@ -50,7 +50,7 @@ formal-Bianchi form (J4).
   **`hCHM_of_conformal_transport`** — the ball modular flow is the conformal image of the wedge boost (Tomita
   modular data under vacuum-preserving unitary equivalence, at the one-particle/standard-subspace level we hold);
   corollary: `BallModularFamily.hCHM` is REDUCED from a bare identification to the named transport inputs.
-- [ ] **J4 — the formal Deser system.** `FormalDeserSystem` (additive `Field/Source/Constraint`, `L`, `div`,
+- [x] **J4 — the formal Deser system.** ✅ DONE (`QIQTH/FormalDeser.lean`; per-order conservation tower SHRUNK to one coefficient identity; linear Bianchi DELETED). `FormalDeserSystem` (additive `Field/Source/Constraint`, `L`, `div`,
   order-n source `S` with `S_depends_lt`, the `formalBianchi_step` field — the coefficient-Bianchi content,
   carried until nonlinear coefficients are formalized); `DeserTowerUpTo`; **`next_source_conserved`** (the
   propagation theorem); **`extend_of_solver`** (tower extension given a solver). Instantiate `L`/`div` with the
@@ -90,3 +90,17 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro.
   physics identification) → hBW (one wedge datum) + hmodVac (Tomita functoriality) + geometry. Follow-ons:
   derive hmodVac from the RvD tower (projection transport + Borel-FC covariance); the genuine massless wedge
   BW (1+1 chiral / 3+1 conformal scalar). NEXT → J4.
+- **2026-07-02** — **J4 LANDED** (`FormalDeser.lean`, axiom-free std-3, budget 0): `FormalDeserSystem`
+  (order-indexed L n/div n — harmonics at n•k per the binding bookkeeping; PROVEN linear Bianchi; S_depends_lt;
+  ONE carried coefficient field formalBianchi_step, an identity in the history, NOT a conservation posit).
+  `next_source_conserved` (conservation DERIVED at each order), `extend_of_solver` (the bootstrap formally
+  unobstructed), `einsteinDeserSystem` (L n = einsteinSymbol(n•k), div n = kContract(n•k), bianchi DISCHARGED
+  by bianchi_einsteinSymbol at every harmonic), `einstein_next_source_conserved` (end-to-end). HYPOTHESIS
+  SHRUNK: the per-order conservation tower → the single coefficient identity; the linear Bianchi input DELETED.
+  Order 2 stays the concrete Deser theorem; the nonlinear Einstein coefficients = the cited frontier.
+- **2026-07-02** — **CAMPAIGN COMPLETE (J1–J4, 4/4).** Ledger: J1 hkms+hfreq+hpos DELETED (theorems of the
+  finite corner); J2 hIW SHRUNK to hDeficit (kernel probe = area probe now a theorem); J3 hCHM SHRUNK to
+  hBW (one wedge datum) + hmodVac (functoriality) + geometry; J4 the conservation tower SHRUNK to one
+  coefficient identity + linear Bianchi DELETED. Named follow-ons: general PosDef rho; hmodVac from the RvD
+  tower; the genuine massless wedge BW; the nonlinear Einstein coefficients; the vN closure. NOT QG; no wall
+  crossed. Loop deleted.

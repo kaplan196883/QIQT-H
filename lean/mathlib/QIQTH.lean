@@ -58,6 +58,7 @@ import QIQTH.AreaDecoder
 import QIQTH.CalibratedAreaLaw
 import QIQTH.CodeEquilibrium
 import QIQTH.DeserRung
+import QIQTH.FormalDeser
 import QIQTH.DualAction
 import QIQTH.LogClockWeight
 import QIQTH.ZClockRegression

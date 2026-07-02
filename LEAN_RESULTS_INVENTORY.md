@@ -479,6 +479,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `gravStress_traceless` (pure radiation on-shell). ⚠ First bootstrap order only — the full nonlinear iteration
   and its quantum completion are NOT built; plane-wave symbol level; free, flat; NOT QG.
 
+- **The joins, J4 — `QIQTH/FormalDeser.lean`** (`QIQTH.FormalDeser`, **[AF]** std-3;
+  `HYPOTHESIS_DELETION_PLAN.md` — **JOINS CAMPAIGN COMPLETE, J1–J4**). **The formal Deser system: consistency
+  PROPAGATION, honestly** (per the binding correction: NO tower positing conservation per order).
+  **`FormalDeserSystem`** — order-indexed `L n`/`div n` (nonlinear products shift momenta: order `n` lives at
+  `n•k`), the **proven** linear Bianchi `div n ∘ L n = 0`, the lower-order source (`S_depends_lt`), and ONE
+  carried coefficient field `formalBianchi_step` — an identity in the history (holds whether or not anything
+  solves), the coefficient-Bianchi content, carried until the nonlinear Einstein coefficients are formalized.
+  **`next_source_conserved`** — the PROPAGATION THEOREM: a tower solving through order `N` forces the
+  order-(N+1) source conserved — conservation DERIVED, never posited. **`extend_of_solver`** — with a solver
+  (right inverse on conserved sources) the bootstrap extends order by order: formally unobstructed.
+  **`einsteinDeserSystem`** — the instantiation with the HELD symbols: `L n = einsteinSymbol (n•k)`,
+  `div n = kContract (n•k)`, the `bianchi` field DISCHARGED by `bianchi_einsteinSymbol` at every harmonic;
+  `einstein_next_source_conserved` end-to-end. **HYPOTHESIS SHRUNK: the per-order conservation tower → the
+  single coefficient identity `formalBianchi_step`; the linear Bianchi input DELETED (a held theorem).**
+  ⚠ Consistency propagation only; order 2 remains the concrete Deser theorem (E5); the nonlinear Einstein
+  coefficients are the cited frontier. NOT a nonlinear completion; NOT QG.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

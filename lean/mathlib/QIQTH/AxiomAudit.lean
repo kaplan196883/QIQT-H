@@ -8135,6 +8135,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BallModular.hmodVac_of_operator_conj
 #print axioms QIQTH.BallModular.CHMTransportData.toBallModularFamily
 #print axioms QIQTH.BallModular.transport_ballHeatFlux_spec
+-- J4 (HYPOTHESIS_DELETION_PLAN.md): the formal Deser system — consistency PROPAGATION, honestly (NO tower
+-- positing conservation per order). FormalDeserSystem: order-indexed L n/div n (harmonics shift momenta —
+-- order n lives at n•k), PROVEN linear Bianchi, S_depends_lt, and ONE carried coefficient field
+-- formalBianchi_step (an identity in the history, not a conservation posit). next_source_conserved: if the
+-- tower solves through N, the order-(N+1) source is conserved — DERIVED. extend_of_solver: the bootstrap is
+-- formally unobstructed given a solver. einsteinDeserSystem: L n = einsteinSymbol(n•k), div n = kContract(n•k),
+-- bianchi DISCHARGED by bianchi_einsteinSymbol at every harmonic. HYPOTHESIS SHRUNK: per-order conservation
+-- tower → the single coefficient identity; the linear Bianchi input DELETED (held theorem). Order 2 stays the
+-- concrete Deser theorem; nonlinear coefficients = cited frontier. NOT a nonlinear completion; NOT QG. Std 3.
+#print axioms QIQTH.FormalDeser.FormalDeserSystem.next_source_conserved
+#print axioms QIQTH.FormalDeser.FormalDeserSystem.extend_of_solver
+#print axioms QIQTH.FormalDeser.einsteinDeserSystem
+#print axioms QIQTH.FormalDeser.einstein_next_source_conserved
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
