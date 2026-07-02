@@ -40,7 +40,7 @@ a THEOREM for the constructed instance, and the count normalization rewrites to 
 - [x] **JI2 — the generic τ join dictionary** ✅ DONE: `wEnt a := (β_a + δA_a)/(4G)`, `Dτ_a := exp(wEnt a)`;
   `hcal_tau` (`log (Dτ a) = wEnt a` — `Real.log_exp`); **`hJoin_tau`** — the join equality as a THEOREM
   (`0 < G` required).
-- [ ] **JI3 — the τ₀ corner realization**: the clock-window mass realizes any positive real —
+- [x] **JI3 — the τ₀ corner realization** ✅ DONE: the clock-window mass realizes any positive real —
   `exists_tau0_corner_of_posReal` (∀ r > 0, ∃ window/corner with τ₀ = r), riding the held `flatClock`
   (mass is a free positive real) + the keystone monomial trace; the finite-family/product version for
   the instance's `Dτ` family.
@@ -87,3 +87,11 @@ expose the key).
   hJoin_tau — the Q5 carried hJoin equality is a THEOREM for the constructed dictionary
   (inducedScreenArea G S.elems wEnt = A0 + areaVar S (classicalH pol α); geometry → code, links =
   screen elements, 0 < G). NEXT → JI3 (the τ₀ corner realization).
+
+- **2026-07-03** — **JI3 LANDED** (axiom-free std-3, budget 0): tauMonomial_flatClock_zero (the general
+  mass lemma — τ₀(π(x)·q_r(L)) = ω(x)·r at t = 0, riding the held keystone window); CAPSTONE
+  exists_tau0_corner_of_posReal — every positive real is a realized τ₀ corner value with the window
+  witness EXPLICIT (flatClock r; per the binding qualifier: the free window mass realizes arbitrary
+  positive reals, never subcorners of one fixed fiber+window); tau0_link_witness + tau0_total_witness
+  (each link's Dτ_a by ITS OWN window; the total ∏ Dτ_a by the product-mass window). NEXT → JI4 (the τ
+  count theorem).

@@ -19,6 +19,7 @@ import Mathlib
 import QIQTH.OperatorEmergence
 import QIQTH.CalibratedAreaLaw
 import QIQTH.InducedNewtonConstant
+import QIQTH.Keystone
 
 namespace QIQTH.JoinInstance
 
@@ -121,5 +122,58 @@ theorem hJoin_tau (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) {G : ℝ
   field_simp
 
 end TauDictionary
+
+/-! ## JI3 — the τ₀ corner realization via clock-window mass
+
+Per the binding qualifier: arbitrary positive τ-dimensions are legitimate because the CLOCK-WINDOW
+MASS is a free positive real (`τ₀(p ⊗ 1_W) = rank·μ(W)`) — NOT because subcorners of one
+already-fixed fiber + window take arbitrary values (they cannot: only rank-multiples of a fixed
+real scale). Each realization below therefore carries its OWN explicit window witness
+(`flatClock r` — the held keystone window of mass `r`). -/
+
+section CornerRealization
+
+open QIQTH.TypeIITrace QIQTH.Keystone QIQTH.Spectral.Multiplication
+
+/-- **The general mass lemma**: at `t = 0` the held monomial trace against the flat window of mass
+    `r` is the matter-state value times `r` — `τ₀(π(x)·q_r(L)) = ω(x)·r`. -/
+theorem tauMonomial_flatClock_zero {A : Type*} (ω : A → ℂ) (x : A) (r : ℝ) :
+    tauMonomial ω x 0 (flatClock r) = ω x * (r : ℂ) := by
+  rw [tauMonomial]
+  have hmod : Iexp ((flatClock r).modMul 0) = Iexp (flatClock r) := by
+    rw [Iexp, Iexp]
+    congr 1
+    funext y
+    rw [show ((flatClock r).modMul 0).f y = modSymbol 0 y * (flatClock r).f y from rfl,
+      show modSymbol 0 y = 1 from by simp [modSymbol], one_mul]
+  rw [hmod, Iexp_flatClock]
+
+/-- **JI3 CAPSTONE — every positive real is a realized τ₀ corner value**, with the clock-window
+    witness EXPLICIT (the rank-one matter corner dressed by its own mass-`r` window): for any
+    normalized matter state, `∃ window F, τ₀(π(1)·F(L)) = r`. -/
+theorem exists_tau0_corner_of_posReal {A : Type*} [One A] (ω : A → ℂ) (hω : ω 1 = 1)
+    (r : ℝ) (_hr : 0 < r) :
+    ∃ F : ExpTest, tauMonomial ω (1 : A) 0 F = (r : ℂ) :=
+  ⟨flatClock r, by rw [tauMonomial_flatClock_zero, hω, one_mul]⟩
+
+variable [Fintype ι] [DecidableEq ι]
+
+/-- **The per-link witness for the instance's `Dτ` family**: each link's real trace-dimension is
+    realized by ITS OWN window of mass `Dτ_a` (never as a subcorner of one fixed fiber+window). -/
+theorem tau0_link_witness (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) (a : ι) {A : Type*} [One A] (ω : A → ℂ) (hω : ω 1 = 1) :
+    tauMonomial ω (1 : A) 0 (flatClock (tauDim S β G h a))
+      = ((tauDim S β G h a : ℝ) : ℂ) := by
+  rw [tauMonomial_flatClock_zero, hω, one_mul]
+
+/-- **The total witness**: the instance's TOTAL dimension `∏_a Dτ_a` realized by the window of the
+    product mass — the whole dictionary's τ₀-dimension lives in the held core. -/
+theorem tau0_total_witness (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) {A : Type*} [One A] (ω : A → ℂ) (hω : ω 1 = 1) :
+    tauMonomial ω (1 : A) 0 (flatClock (∏ a ∈ S.elems, tauDim S β G h a))
+      = ((∏ a ∈ S.elems, tauDim S β G h a : ℝ) : ℂ) := by
+  rw [tauMonomial_flatClock_zero, hω, one_mul]
+
+end CornerRealization
 
 end QIQTH.JoinInstance

@@ -8112,6 +8112,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JoinInstance.hcal_tau
 #print axioms QIQTH.JoinInstance.hJoin_tau
 #print axioms QIQTH.JoinInstance.sum_localAreaVar
+-- JOIN INSTANCE JI3: the tau0 corner realization via clock-window mass — tauMonomial_flatClock_zero (the
+-- general mass lemma tau0(pi(x)·q_r(L)) = omega(x)·r at t = 0); CAPSTONE exists_tau0_corner_of_posReal
+-- (every positive real is a realized tau0 corner value, window witness EXPLICIT = flatClock r, per the
+-- binding qualifier: free window mass, never subcorners of one fixed fiber+window); tau0_link_witness +
+-- tau0_total_witness (the instance's Dtau family and its total product realized in the held core). Std 3.
+#print axioms QIQTH.JoinInstance.tauMonomial_flatClock_zero
+#print axioms QIQTH.JoinInstance.exists_tau0_corner_of_posReal
+#print axioms QIQTH.JoinInstance.tau0_total_witness
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

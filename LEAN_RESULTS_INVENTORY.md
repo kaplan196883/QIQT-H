@@ -663,7 +663,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   positive trace-dimension — no integrality, the Type II lesson), **`hcal_tau`** (the calibration is a
   theorem at the τ level, `Real.log_exp`), CAPSTONE **`hJoin_tau`** — the exact Q5 hypothesis shape
   `inducedScreenArea G S.elems wEnt = A₀ + areaVar S (classicalH pol α)` supplied by construction
-  (geometry → code; no smuggling). Next: JI3 (the τ₀ corner realization via clock-window mass).
+  (geometry → code; no smuggling). **JI3 LANDED — THE DICTIONARY LIVES IN THE HELD CORE**:
+  `tauMonomial_flatClock_zero` (the general mass lemma `τ₀(π(x)·q_r(L)) = ω(x)·r`), CAPSTONE
+  **`exists_tau0_corner_of_posReal`** (every positive real is a REALIZED τ₀ corner value, window
+  witness explicit — per the binding qualifier, the free window mass, never subcorners of one fixed
+  fiber+window), `tau0_link_witness`/`tau0_total_witness` (each `Dτ_a` by its own window; the total
+  `∏Dτ_a` by the product-mass window). Next: JI4 (the τ count theorem).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
