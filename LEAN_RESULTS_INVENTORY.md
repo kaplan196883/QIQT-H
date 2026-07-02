@@ -385,6 +385,22 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   generic QFT); the Clausius/area law `δS = δA/4G` and the value of `G` remain the separate carried inputs of the
   assembly. **Ingredient C (modular → geometric) is COMPLETE.**
 
+- **The bridge, increment ASM — `QIQTH/BridgeAssembly.lean`** (namespace `QIQTH.BridgeASM`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md` — **THE CAMPAIGN CAPSTONE, 9/9 increments complete**). **The FGHMVR skeleton assembled with the
+  bridge's real parts.** `symmMat` (the symmetric sector); **`einsteinSymbol_isSymm`** (the Einstein residual of a
+  symmetric perturbation is symmetric). **`rayProbe` + `rayProbe_separating`** — A2's geometric area functionals
+  as G1's probe family, with the separating hypothesis now a **proven** geometric fact (not carried).
+  **`bridge_firstLaw_iff_einstein`** — the assembled skeleton: given the carried Iyer–Wald identity, the
+  entanglement first law `δS = δK` at every probe **⟺** `einsteinSymbol k h = 0` (linearized vacuum Einstein).
+  **`bridge_conditional`** — the Jacobson-shape capstone: carried **Clausius/area law** `δS = δA/4G` + carried
+  **modular-geometric matching** `δK = δA/4G` (the C1/C2b forced Clausius data) + carried **Iyer–Wald** ⟹ **the
+  emergent graviton satisfies linearized vacuum Einstein** — "entanglement + area law ⟹ Einstein" machine-checked
+  end-to-end from real parts. ⚠ **CONDITIONAL**: every derived piece is a theorem (A1 anchor+Bianchi; A2
+  probes+separation; B1/B2 coupling+equivalence principle; C1/C2 forced Clausius); every physical input an
+  explicit hypothesis (Clausius/area law, Iyer–Wald, BW/CHM, genericity, `G`). NOT a derivation of gravity —
+  ingredient D (background independence, nonlinear completion, area law from counting, value of `G`) is the cited
+  open frontier. Linearized, free, flat.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

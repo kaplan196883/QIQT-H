@@ -7974,6 +7974,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BallModular.ball_flux_unique
 #print axioms QIQTH.BallModular.ballHeatFlux_spec
 #print axioms QIQTH.BallModular.ball_correlator_im_hasDerivAt
+-- BRIDGE ASM (BRIDGE_PLAN.md — the FINAL increment): the FGHMVR skeleton assembled with real parts.
+-- einsteinSymbol_isSymm: the Einstein residual of a symmetric perturbation is symmetric (lives in symmMat).
+-- rayProbe (A2's area functionals on the symmetric sector) + rayProbe_separating: G1's separating hypothesis is
+-- now a PROVEN geometric fact (A2's witness), not carried. bridge_firstLaw_iff_einstein — THE ASSEMBLED SKELETON:
+-- given the carried Iyer–Wald identity at the ray probes, the entanglement first law δS=δK at EVERY probe ⟺
+-- einsteinSymbol k h = 0 (linearized vacuum Einstein). bridge_conditional — THE JACOBSON-SHAPE CAPSTONE: carried
+-- Clausius/area law (δS=δA/4G) + carried modular-geometric matching (δK=δA/4G, the C1/C2b forced datum) + carried
+-- Iyer–Wald ⟹ the emergent graviton satisfies linearized Einstein. ⚠ CONDITIONAL: the carried inputs are the
+-- physics (removing them = ingredient D, the open QG problem); linearized, free, flat; NOT a derivation of
+-- gravity; NEVER claim QG solved or the mechanism gap closed. Std 3.
+#print axioms QIQTH.BridgeASM.einsteinSymbol_isSymm
+#print axioms QIQTH.BridgeASM.rayProbe_separating
+#print axioms QIQTH.BridgeASM.bridge_firstLaw_iff_einstein
+#print axioms QIQTH.BridgeASM.bridge_conditional
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

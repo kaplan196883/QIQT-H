@@ -50,6 +50,7 @@ import QIQTH.AreaEmergence
 import QIQTH.SoftGraviton
 import QIQTH.CHMKernel
 import QIQTH.BallClausius
+import QIQTH.BridgeAssembly
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

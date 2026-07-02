@@ -109,12 +109,16 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   `d/dt⟪ξ_B,W^B_tξ_B⟫|₀ = i·(−S_B)`. **`ball_flux_unique`** — forced per ball. **`ballHeatFlux`** +
   **`ballHeatFlux_spec`** — the ball-indexed first-law data `δ⟨K_B⟩ = −S_B`, EXACTLY the `δK : Ball → ℝ` input
   ASM feeds into G1. ⚠ `hCHM` carried (CFT-vacuum, not generic QFT); the area law + `G` stay ASM's carried inputs.
-- [ ] **ASM — G1 with real parts (vacuum + sourced).** Instantiate `allBall_firstLaw_iff_residual_zero` with
-  `residual = G⁽¹⁾(h)` (A1, full — vacuum form) and the sourced form `residual = G⁽¹⁾_{μν} − 8πG T_{μν}` (where B1/B2
-  supply conservation/universality of the source), `δK = δ⟨K_ball⟩` (C2b, conditional), `δS = δA/4G` (A2 + the
-  CARRIED Clausius/area law): the first law at every ball ⟺ the emergent graviton satisfies linearized Einstein.
-  ⚠ CONDITIONAL on the carried inputs; the linearized skeleton assembled from real objects — NOT a derivation of
-  gravity (that needs D).
+- [x] **ASM — G1 with real parts ✅ CAMPAIGN COMPLETE** (`QIQTH/BridgeAssembly.lean`, `QIQTH.BridgeASM`, all [AF]
+  std-3, wired + pinned, budget 0). `symmMat` (the symmetric sector); **`einsteinSymbol_isSymm`** (the residual of
+  a symmetric perturbation is symmetric); **`rayProbe` + `rayProbe_separating`** — G1's separating hypothesis is
+  now a PROVEN geometric fact (A2's witness), no longer carried. **`bridge_firstLaw_iff_einstein`** — the
+  assembled skeleton: carried Iyer–Wald at the ray probes ⟹ (first law `δS = δK` at EVERY probe ⟺
+  `einsteinSymbol k h = 0`). **`bridge_conditional`** — the Jacobson-shape capstone: carried Clausius/area law
+  (`δS = δA/4G`) + carried modular-geometric matching (`δK = δA/4G`, the C1/C2b forced datum) + carried Iyer–Wald
+  ⟹ the emergent graviton satisfies linearized vacuum Einstein. ⚠ CONDITIONAL; linearized, free, flat; NOT a
+  derivation of gravity (that needs D). (The sourced form `residual = G⁽¹⁾ − 8πGT` is available via B1's
+  `source_conserved_of_einstein_eq` machinery as a follow-on.)
 
 ## Per-increment discipline
 `cd lean/mathlib && ~/.elan/bin/lake build QIQTH.<module>` green; `#print axioms` std-3 (physical bridges =
@@ -177,3 +181,12 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   `δK : Ball → ℝ` first-law data for G1. All [AF] std-3, wired + pinned, budget 0. **Ingredient C is COMPLETE.**
   NEXT → ASM (the final assembly: instantiate G1 with residual = einsteinSymbol, δK = ballHeatFlux, δS = δA/4G
   CARRIED).
+- **2026-07-02 — ASM ✅ LANDED — THE BRIDGE CAMPAIGN IS COMPLETE (A1·B1·C1·A2·B2a·B2b·C2a·C2b·ASM, 9/9).**
+  `BridgeAssembly.lean`: G1 instantiated with the bridge's real parts — residual = the full linearized Einstein
+  tensor (A1), probes = the geometric area functionals with separation PROVEN (A2), first-law data = the forced
+  modular Clausius data (C1/C2b), assembly conditional on the explicitly-carried physics (Clausius/area law,
+  Iyer–Wald, BW/CHM, genericity, `G`). `bridge_firstLaw_iff_einstein` + `bridge_conditional` land the linearized
+  conditional bridge: **entanglement first law + area law ⟹ linearized Einstein, machine-checked end-to-end from
+  real parts.** Every derived piece a theorem; every physical input an explicit hypothesis; budget 0 throughout.
+  NOT quantum gravity: ingredient D (background independence, nonlinear completion, area-law-from-counting, value
+  of `G`) remains the cited open frontier. Loop deleted; campaign checkpointed COMPLETE.
