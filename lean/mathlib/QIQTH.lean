@@ -59,6 +59,7 @@ import QIQTH.DeserRung
 import QIQTH.DualAction
 import QIQTH.LogClockWeight
 import QIQTH.ZClockRegression
+import QIQTH.MonomialTrace
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson

@@ -27,7 +27,7 @@ QIQT-H.
 - [x] **W2 ✅ LANDED (`QIQTH/ZClockRegression.lean`, [AF] std-3, wired+pinned, budget 0) — the ℤ weighted shift.** `zWeight A := ∑ e^n⟨e_n, A e_n⟩` on the
   finite-support core: `zWeight_shift_quasiInvariant` (`= e^{−1}·`, the SHIFT = discrete log-clock translation)
   AND `zWeight_dualCircle_invariant` (the TRUE ℤ-dual action leaves it invariant) — the distinction machine-checked.
-- [ ] **W3a — the monomial trace formula.** On core elements `π(a)·λ_t·f(L)` (`f : ExpTest`):
+- [x] **W3a ✅ LANDED (`QIQTH/MonomialTrace.lean`, [AF] std-3, wired+pinned, budget 0) — the monomial trace formula.** On core elements `π(a)·λ_t·f(L)` (`f : ExpTest`):
   `tauMonomial a t f := ω(a)·∫ e^x e^{itx} f(x) dx`; **`tauMonomial_dual`: `τ₀(θ_s(·)) = e^{−s}·τ₀(·)`** —
   Weyl + change of variables, exact.
 - [ ] **W3b — the modular eigen-core.** `ModEigen κ` (σ_t-eigenoperators `σ_t(a) = e^{itκ}a`); `EigenTerm`
@@ -54,3 +54,4 @@ gpt-5.5-pro.
 - **2026-07-02 — W1 ✅ LANDED**: dualPhase V_s (fiberwise phase unitary on L²(ℝ;H), group law + inverse) + dualAction θ_s = Ad(V_s)⁻¹: dualAction_matter (fixes π(a)), dualAction_clock (θ_s(λ_t)=e^{ist}λ_t — the vector-valued Weyl relation), dualAction_add, dualAction_mul. NEXT → W1.5 (logClock + Iexp scaling).
 - **2026-07-02 — W1.5 ✅ LANDED**: ExpTest (compact-support log-clock symbols; dualShift + modMul closure), expTest_integrable, Iexp = ∫e^x f, and THE EXACT SCALING Iexp_dualShift (= e^{−s}·Iexp, pure change of variables) + the modulated W3a form. NEXT → W2 (ℤ shift-vs-dual regression).
 - **2026-07-02 — W2 ✅ LANDED**: the ℤ regression on banded kernels — zWeight_shift_quasiInvariant (= e^{−1}·, the SHIFT/discrete log-clock translation) AND zWeight_dualCircle_invariant (the TRUE ℤ-dual action leaves the weight invariant) + positivity + window stability. The shift-vs-dual distinction is machine-checked. NEXT → W3a (the monomial trace formula).
+- **2026-07-02 — W3a ✅ LANDED**: tauMonomial (the dual-weight trace on normal-ordered monomials, the consult's log-clock normal form) + dualAction_monomial (the operator-level θ_s(π(a)λ_t)=e^{ist}·π(a)λ_t from W1) + Iexp_modMul_dualShift_comm (the Weyl interchange) + tauMonomial_dual — τ₀∘θ_s = e^{−s}·τ₀ EXACT on the monomial core. NEXT → W3b (the eigen-core: traciality + positivity).

@@ -8065,6 +8065,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.zWeight_shift_quasiInvariant
 #print axioms QIQTH.TypeIITrace.zWeight_dualCircle_invariant
 #print axioms QIQTH.TypeIITrace.zWeight_nonneg_of_diag_nonneg
+-- W3a (TYPE_II_TRACE_PLAN.md): THE MONOMIAL TRACE FORMULA — τ₀∘θ_s = e^{−s}·τ₀, EXACT. tauMonomial: the
+-- dual-weight trace on normal-ordered core monomials π(a)λ_t f(L) := ω(a)·∫e^x e^{itx}f(x)dx (the consult's
+-- normal form; density on the LOG-CLOCK variable). dualAction_monomial: the operator-level phase justification
+-- θ_s(π(a)λ_t) = e^{ist}·π(a)λ_t (W1's dualAction_mul + _matter + _clock composed). Iexp_modMul_dualShift_comm:
+-- the modulation/shift interchange (the Weyl phase). tauMonomial_dual — THE CAPSTONE: e^{its}·τ₀(a,t,f(·+s)) =
+-- e^{−s}·τ₀(a,t,f): the CPW relative invariance on the monomial core, exact, no regularization (the Weyl phase
+-- cancels against the density shift). ⚠ Trace FUNCTIONAL level; traciality/positivity = W3b; vN carried. Std 3.
+#print axioms QIQTH.TypeIITrace.dualAction_monomial
+#print axioms QIQTH.TypeIITrace.Iexp_modMul_dualShift_comm
+#print axioms QIQTH.TypeIITrace.tauMonomial_dual
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

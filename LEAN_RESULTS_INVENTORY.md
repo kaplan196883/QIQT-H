@@ -491,6 +491,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (`zWeight_nonneg_of_diag_nonneg`) and window stability (`diagSum_superset`). ⚠ Banded-kernel core (the honest
   domain); the operator/vN packaging stays with the ℝ-clock ladder.
 
+- **The wall, rung W3a — `QIQTH/MonomialTrace.lean`** (`QIQTH.TypeIITrace`, **[AF]** std-3;
+  `TYPE_II_TRACE_PLAN.md`). **The monomial trace formula — `τ₀∘θ_s = e^{−s}·τ₀`, exact.** `tauMonomial` — the
+  dual-weight trace on normal-ordered core monomials `π(a)·λ_t·f(L)`, `:= ω(a)·∫e^x e^{itx}f(x)dx` (the consult's
+  log-clock normal form; the forbidden position-diagonal form never appears). **`dualAction_monomial`** — the
+  operator-level phase justification `θ_s(π(a)λ_t) = e^{ist}·π(a)λ_t` (W1's identities composed).
+  **`Iexp_modMul_dualShift_comm`** — the modulation/shift Weyl interchange. **`tauMonomial_dual`** — the
+  capstone: `e^{its}·τ₀(a,t,f(·+s)) = e^{−s}·τ₀(a,t,f)` — the CPW relative invariance on the monomial core,
+  EXACT, no regularization (the Weyl phase cancels against the density shift). ⚠ Trace-functional level;
+  traciality and positivity are W3b (the eigen-core); the operator `f(L)` representation and the vN closure stay
+  with the later rungs / the carried extension.
+
 - **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ` is the ONE genuine [frontier]** — not built; bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
