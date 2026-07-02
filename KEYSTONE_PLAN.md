@@ -1,6 +1,6 @@
 # THE KEYSTONE — THE COUNT (K0–K6): the remaining QG-shaped problem, laddered honestly
 
-**Status:** ACTIVE (2026-07-03). **GPT-5.5-pro-VERIFIED** (recut binding below). **Goal:** derive, rather
+**Status:** COMPLETE (2026-07-03 — K0–K6 all landed; loop deleted). **GPT-5.5-pro-VERIFIED** (recut binding below). **Goal:** derive, rather
 than posit, that a diamond/screen algebra's renormalized entropy against the CONSTRUCTED Type II trace τ₀
 equals induced area/4G — deleting, in the finite branch, `hClausius`/`hGeom`, the calibration
 `log D_e = wEnt e`, and the emergence join `hJoin` at once. The reachable core is the FINITE RECORD CORNER
@@ -55,7 +55,7 @@ OF THE HELD CROSSED-PRODUCT CORE; the continuum walls are named, permanent parts
   STRENGTHENED with `embed_mul` (multiplicative embedding), which kills the witness (the core trace is not
   multiplicative). A finite-corner "instance" of the OLD shape would have been the vacuous trick — honestly
   NOT shipped; the genuine σ-weak/normal-weight vN extension stays Wall 3, carried non-vacuously.
-- [ ] **K6 — checkpoint (the two honest sentences, verbatim in the module docstring + inventory):**
+- [x] **K6 — checkpoint ✅ DONE (the two honest sentences, verbatim in the module docstring + inventory):**
   HAVE: "every finite code screen realized as a finite record corner of the constructed crossed-product
   core has S_{τ₀} = log dim_{τ₀}(𝒟_C) = Σ_e log dim_{τ₀}(P_e) = A_τ(C)/4G; in the code instance
   dim_{τ₀}(P_e) = D_e, so the calibration is a theorem (trace-defined weight) and the count-built area
@@ -136,3 +136,10 @@ the error shown. Check for sibling jobs before each increment. Consults: `mcp__O
   was VACUOUS (abelian collapse witness M = ℂ satisfied it for any algebra); strengthened with embed_mul,
   killing the witness; no fake finite-corner instance shipped (that would have BEEN the vacuous trick);
   Wall 3 stands, now carried non-vacuously. NEXT → K6 (checkpoint).
+
+- **2026-07-03** — **K6 CHECKPOINT — CAMPAIGN COMPLETE.** The two honest sentences placed VERBATIM in
+  the `Keystone.lean` module docstring and `LEAN_RESULTS_INVENTORY.md`. HAVE: the finite-branch count
+  with the calibration a theorem (trace-defined weight) and the count-built join by construction — no
+  hClausius/hGeom/hCalib/hJoin carried in this branch. HAVE NOT: Walls 1–5 (continuum algebras;
+  external-area matching; Type III₁/II_∞ in Lean; σ-weak/normal weights; the value of G). NOT QG
+  solved; no wall crossed. Loop 3d69ede1 deleted.

@@ -642,7 +642,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `τ = re`, `embed = tau ω` satisfied it for ANY algebra); STRENGTHENED with `embed_mul` (multiplicative
   embedding), killing the witness (the core trace is not multiplicative); no fake finite-corner instance
   shipped — Wall 3 (the σ-weak/normal-weight vN extension) stands, now carried non-vacuously.
-  Next: K6 checkpoint.
+  **K6 CHECKPOINT — CAMPAIGN COMPLETE (the two honest sentences, verbatim):**
+  HAVE: "every finite code screen realized as a finite record corner of the constructed crossed-product
+  core has S_{τ₀} = log dim_{τ₀}(𝒟_C) = Σ_e log dim_{τ₀}(P_e) = A_τ(C)/4G; in the code instance
+  dim_{τ₀}(P_e) = D_e, so the calibration is a theorem (trace-defined weight) and the count-built area
+  operator gives the join by construction — no hClausius/hGeom/hCalib/hJoin carried in this branch."
+  HAVE NOT (Walls 1–5, named): continuum QFT diamond algebras ARE these corners; external geometric
+  area = count-built area; Type III₁/II_∞ continuum structure in Lean; σ-weak/normal weights; the value
+  of G. ⚠ NOT QG solved; no wall crossed.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

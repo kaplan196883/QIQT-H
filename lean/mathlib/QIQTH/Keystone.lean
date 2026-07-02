@@ -1,5 +1,23 @@
 /-
-  K0 (KEYSTONE_PLAN.md) — the finite trace-entropy lemmas for THE COUNT.
+  THE KEYSTONE — THE COUNT (KEYSTONE_PLAN.md, K0–K6 COMPLETE).
+
+  K6 CHECKPOINT — the two honest sentences (verbatim from the plan):
+
+  HAVE: "every finite code screen realized as a finite record corner of the constructed crossed-product
+  core has S_{τ₀} = log dim_{τ₀}(𝒟_C) = Σ_e log dim_{τ₀}(P_e) = A_τ(C)/4G; in the code instance
+  dim_{τ₀}(P_e) = D_e, so the calibration is a theorem (trace-defined weight) and the count-built area
+  operator gives the join by construction — no hClausius/hGeom/hCalib/hJoin carried in this branch."
+
+  HAVE NOT (Walls 1–5, named): continuum QFT diamond algebras ARE these corners; external geometric
+  area = count-built area; Type III₁/II_∞ continuum structure in Lean; σ-weak/normal weights; the value
+  of G.
+
+  ⚠ NOT quantum gravity solved; no wall crossed. The deletions hold in the FINITE BRANCH exactly as
+  scoped; the walls stay named.
+
+  ---
+
+  K0 — the finite trace-entropy lemmas for THE COUNT.
 
   The entropy substrate the count capstones stand on (unnormalized counting trace — the binding
   correction: τ(1) = N, never normalized):
