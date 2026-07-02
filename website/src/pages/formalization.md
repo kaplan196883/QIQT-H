@@ -253,6 +253,32 @@ gravity, <em>not</em> quantum gravity.
 
 </div>
 
+### The wall: the Type II dual-weight trace on the crossed-product core (W1–W4)
+
+The Chandrasekaran–Penington–Witten dual-weight trace — the object whose renormalized entropy underlies the
+Type II capacity story — constructed on an honest algebraic core with its three defining laws **exact** (all
+axiom-free, standard 3):
+
+| theorem | statement |
+| --- | --- |
+| `dualAction_matter`, `dualAction_clock` | the **Takesaki dual action** θ<sub>s</sub> on the crossed product: fixes the matter π(a), phases the clock θ<sub>s</sub>(λ<sub>t</sub>) = e<sup>ist</sup>λ<sub>t</sub> — the vector-valued Weyl relation |
+| `Iexp_dualShift` | the **log-clock density scales exactly**: I<sub>exp</sub>(f(·+s)) = e<sup>−s</sup>·I<sub>exp</sub>(f) — the τ∘θ<sub>s</sub> = e<sup>−s</sup>τ mechanism (density on the log-clock variable, the verifier's binding correction) |
+| `zWeight_shift_quasiInvariant`, `zWeight_dualCircle_invariant` | the ℤ-clock regression: the e<sup>−1</sup> scaling belongs to the **shift**; the true dual (circle) action leaves the weight **invariant** — the distinction machine-checked |
+| `tauMonomial_dual` | the trace on normal-ordered monomials π(a)λ<sub>t</sub>f(L): **τ₀∘θ<sub>s</sub> = e<sup>−s</sup>·τ₀ exactly**, no regularization |
+| `eigen_tau_trace` | **traciality** τ₀(xy) = τ₀(yx): the matter KMS factor e<sup>κ</sup> cancels exactly against the ∫e<sup>x</sup> change of variables — **a KMS state becomes a trace under the log-clock dressing**, the Type II mechanism as a theorem |
+| `eigen_tau_star_mul_nonneg` | **positivity** τ₀(x*x) ≥ 0 — the x*x symbol collapses to a pointwise norm-square |
+| `phase5_from_core_trace`, `traceCapacity_from_core` | the capacity interfaces **instantiated by the constructed trace**: the JLMS remainder realized as τ₀(r*r), the bound S<sub>ren</sub> ≤ Q proven rather than assumed |
+
+<div class="note">
+
+<strong>Honest scope — the wall is not crossed.</strong> The trace exists with exact laws on the
+<em>algebraic core</em>; the matter-side KMS-eigen and positivity inputs are carried (provable for the finite
+corner); the von Neumann closure is the carried <code>DualWeightTraceExtension</code> typeclass (normal
+weights/affiliated operators — the genuine remaining frontier, a named hypothesis, never an axiom); the
+continuum count and black-hole matching remain cited. Not quantum gravity.
+
+</div>
+
 ## Index of machine-checked results
 
 For the **exact theorem statements**, machine-translated from the Lean source to readable math

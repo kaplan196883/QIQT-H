@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `e9ca70c`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `4f06009`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1625,13 +1625,30 @@ A companion Lean 4/Mathlib development (pinned commit `e9ca70c`, toolchain `lean
 
 *The microtheory earns its gravity (the E1--E5 campaign).* Joins between held theorems, upgrading the bridge from "assembled" to "earned in-model" — every derived step a theorem, every physical input a named hypothesis; **not** quantum gravity (the calibration, the continuum trace, and background independence remain the open walls).
 
-  • `freeFieldWedgePackage` / `freeField_clausius_unconditional`: the Bisognano-Wichmann identification is **discharged** for the free field (wired from the unconditional one-particle BW theorem) — the wedge Clausius datum $\delta\langle K_{m boost}angle=-\delta S$ is forced with *no external BW premise*.
+  • `freeFieldWedgePackage` / `freeField_clausius_unconditional`: the Bisognano-Wichmann identification is **discharged** for the free field (wired from the unconditional one-particle BW theorem) — the wedge Clausius datum $\delta\langle K_{
+m boost}
+angle=-\delta S$ is forced with *no external BW premise*.
   • `reconstruct` / `reconstruct_areaVar`: the explicit decoder $h_{ii}=2A(e_i)$, $h_{ij}=A(e_i{+}e_j)-A(e_i)-A(e_j)$ — **the metric perturbation is a function of the code's own area data** (the emergence map inverted; pointwise, basis-level, symmetric sector).
-  • `calibrated_entanglement_cut_area_law` / `uniform_realizes_area_law`: with the area *induced* from the calibrated entanglement cut (`inducedScreenArea` $:=4G\cdot\mathrm{cut}(w_{m Ent},S)$; no separate area label), the microstate count obeys $\log\#{m microstates}={m screenArea}/(4G)$ under the single named calibration $\log D_e=w_{m Ent}(e)$, realized exactly by the maximum-entropy record. The calibration carries the physical content — an explicit hypothesis, not a derivation of area from entanglement.
+  • `calibrated_entanglement_cut_area_law` / `uniform_realizes_area_law`: with the area *induced* from the calibrated entanglement cut (`inducedScreenArea` $:=4G\cdot\mathrm{cut}(w_{
+m Ent},S)$; no separate area label), the microstate count obeys $\log\#{
+m microstates}={
+m screenArea}/(4G)$ under the single named calibration $\log D_e=w_{
+m Ent}(e)$, realized exactly by the maximum-entropy record. The calibration carries the physical content — an explicit hypothesis, not a derivation of area from entanglement.
   • `rayFamily_firstLaw` / `code_equilibrium_einstein`: a code whose per-ray state paths sit at relative-entropy equilibrium satisfies the entanglement first law at **every** probe (stationarity, per ray), hence — through the assembled skeleton — **linearized vacuum Einstein**: Jacobson's equation of state with the state the code's equilibrium (per-ray BW/analytic data and Iyer-Wald carried; explicit $K\mapsto-K$ sign adapter).
   • `gravStress_conserved` / `deser_selfcoupling_consistent`: the graviton's own radiation-form stress $T^{\mu
-u}_{m GW}=k^\mu k^
-u\langle e,eangle_\eta$ is conserved **on-shell** (masslessness $\Rightarrow$ conservation), so its coupling to *its own* stress is gauge-invariant — the first order of the Deser bootstrap toward nonlinear GR (the full iteration and its quantum completion are not built).
+u}_{
+m GW}=k^\mu k^
+u\langle e,e
+angle_\eta$ is conserved **on-shell** (masslessness $\Rightarrow$ conservation), so its coupling to *its own* stress is gauge-invariant — the first order of the Deser bootstrap toward nonlinear GR (the full iteration and its quantum completion are not built).
+
+*The Type II dual-weight trace on the crossed-product core (the W1--W4 wall ladder).* The Chandrasekaran-Penington-Witten trace, constructed on an honest algebraic core with its three defining laws EXACT — the deepest cut into the Type II frontier; the von Neumann closure stays a named carried hypothesis. **The wall is not crossed**; the trace exists on the core.
+
+  • `dualAction_matter` / `dualAction_clock`: the Takesaki dual action $	heta_s = \mathrm{Ad}(V_s)^{-1}$ on the crossed product — fixes the matter $\pi(a)$, phases the clock $	heta_s(\lambda_t)=e^{ist}\lambda_t$ (the vector-valued Weyl relation), with group law and multiplicativity.
+  • `Iexp_dualShift`: the log-clock weight density $I_{\exp}f=\int e^x f(x)\,dx$ scales EXACTLY, $I_{\exp}(f(\cdot{+}s))=e^{-s}I_{\exp}f$ — the $	au\circ	heta_s=e^{-s}	au$ mechanism (the density on the log-clock spectral variable, per the verifier's binding correction).
+  • `zWeight_shift_quasiInvariant` / `zWeight_dualCircle_invariant`: the $\mathbb{Z}$-clock regression — the $e^{-1}$ scaling belongs to the SHIFT while the true dual (circle) action leaves the weight invariant; the distinction is machine-checked.
+  • `tauMonomial_dual`: the trace on normal-ordered core monomials $\pi(a)\lambda_t f(L)$ obeys $	au_0\circ	heta_s=e^{-s}	au_0$ exactly (the Weyl phase cancels against the density shift).
+  • `eigen_tau_trace` / `eigen_tau_star_mul_nonneg`: on the modular eigen-core, **traciality** — the matter KMS factor $\omega(ab)=e^{\kappa}\omega(ba)$ cancels exactly against the $\int e^x$ change of variables (the Type II mechanism: a KMS state becomes a trace under the log-clock dressing) — and **positivity** $	au_0(x^*x)\ge 0$ (the $x^*x$ symbol is a pointwise norm-square). The matter-side KMS-eigen/positivity inputs are carried (provable for the finite corner).
+  • `phase5_from_core_trace` / `traceCapacity_from_core`: the capacity interfaces (`Phase5Master`, `TraceCapacity`) instantiated **by the constructed trace** — the nonnegative JLMS remainder realized as $	au_0(r^*r)$ and the bound $S_{m ren}\le Q$ proven rather than assumed; the von Neumann extension is the carried `DualWeightTraceExtension` typeclass (normal weights/affiliated operators — the genuine remaining frontier), never an axiom.
 
 ### 11.5 Credit division
 
