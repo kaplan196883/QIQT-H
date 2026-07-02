@@ -230,6 +230,29 @@ the cited open frontier — the quantum-gravity problem itself.
 
 </div>
 
+### The microtheory earns its gravity (E1–E5)
+
+A follow-on campaign of **joins between held theorems** upgrades the bridge from *assembled* to *earned in-model*
+(all axiom-free, standard 3):
+
+| theorem | statement |
+| --- | --- |
+| `freeFieldWedgePackage`, `freeField_clausius_unconditional` | **BW discharged**: the wedge Clausius datum δ⟨K⟩ = −δS forced with *no external Bisognano–Wichmann premise* (wired from the unconditional one-particle BW theorem; free field) |
+| `reconstruct`, `reconstruct_areaVar` | **the metric is a function of the code's own area data** — the explicit decoder h<sub>ii</sub> = 2A(e<sub>i</sub>), h<sub>ij</sub> = A(e<sub>i</sub>+e<sub>j</sub>)−A(e<sub>i</sub>)−A(e<sub>j</sub>) inverts the emergence map (pointwise, basis-level, symmetric sector) |
+| `calibrated_entanglement_cut_area_law`, `uniform_realizes_area_law` | **count = induced area / 4G**: with the area *induced* from the calibrated entanglement cut (no separate area label), log #microstates = screenArea/(4G) under the single named calibration log D<sub>e</sub> = w<sub>Ent</sub>(e), realized exactly by the maximum-entropy record |
+| `rayFamily_firstLaw`, `code_equilibrium_einstein` | **code equilibrium ⟹ Einstein**: per-ray relative-entropy stationarity forces the first law at every probe, hence linearized vacuum Einstein — Jacobson's equation of state with the state the code's equilibrium (explicit K ↦ −K sign adapter) |
+| `gravStress_conserved`, `deser_selfcoupling_consistent` | **the Deser rung**: the graviton's own radiation stress is conserved on-shell (masslessness ⟹ conservation), so its self-coupling is gauge-consistent — bootstrap order one toward nonlinear GR |
+
+<div class="note">
+
+<strong>Honest scope.</strong> Every derived step is a theorem; every physical input is a named carried
+hypothesis — the calibration log D<sub>e</sub> = w<sub>Ent</sub>(e) (the physics of the area law), the per-ray
+BW/analytic data, Iyer–Wald, and G. The full Deser iteration, the continuum Type II trace, background
+independence, and the value of G remain the open walls — this is the strongest in-model statement of emergent
+gravity, <em>not</em> quantum gravity.
+
+</div>
+
 ## Index of machine-checked results
 
 For the **exact theorem statements**, machine-translated from the Lean source to readable math

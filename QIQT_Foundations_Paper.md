@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `27caf87`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `e9ca70c`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1622,6 +1622,16 @@ A companion Lean 4/Mathlib development (pinned commit `27caf87`, toolchain `lean
   • `boost_flux_unique` / `ball_flux_unique`: the wedge and per-ball Clausius data $\delta\langle K\rangle=-\delta S$ are **forced** (derivative uniqueness) given the carried BW/CHM identifications, riding the derived modular flow; `chmWeight_edge_slope`: the CHM ball kernel meets the entangling surface with unit slope (the wedge-ball $2\pi$ consistency); `cke_*`: the diamond conformal Killing equation by real calculus.
   • `area_probes_separate`: geometric area probes **separate** symmetric perturbations (the FGHMVR separating-family hypothesis becomes a theorem); `screenArea_eq_bg_add_areaVar`: the holographic-screen-code area charge varies by exactly the geometric $\delta A_\Sigma(h)$ under the supplied identification.
   • `bridge_firstLaw_iff_einstein` / `bridge_conditional`: the assembled capstone — given the carried inputs, the entanglement first law $\delta S=\delta K$ at every probe $\Leftrightarrow$ the emergent perturbation satisfies linearized vacuum Einstein.
+
+*The microtheory earns its gravity (the E1--E5 campaign).* Joins between held theorems, upgrading the bridge from "assembled" to "earned in-model" — every derived step a theorem, every physical input a named hypothesis; **not** quantum gravity (the calibration, the continuum trace, and background independence remain the open walls).
+
+  • `freeFieldWedgePackage` / `freeField_clausius_unconditional`: the Bisognano-Wichmann identification is **discharged** for the free field (wired from the unconditional one-particle BW theorem) — the wedge Clausius datum $\delta\langle K_{m boost}angle=-\delta S$ is forced with *no external BW premise*.
+  • `reconstruct` / `reconstruct_areaVar`: the explicit decoder $h_{ii}=2A(e_i)$, $h_{ij}=A(e_i{+}e_j)-A(e_i)-A(e_j)$ — **the metric perturbation is a function of the code's own area data** (the emergence map inverted; pointwise, basis-level, symmetric sector).
+  • `calibrated_entanglement_cut_area_law` / `uniform_realizes_area_law`: with the area *induced* from the calibrated entanglement cut (`inducedScreenArea` $:=4G\cdot\mathrm{cut}(w_{m Ent},S)$; no separate area label), the microstate count obeys $\log\#{m microstates}={m screenArea}/(4G)$ under the single named calibration $\log D_e=w_{m Ent}(e)$, realized exactly by the maximum-entropy record. The calibration carries the physical content — an explicit hypothesis, not a derivation of area from entanglement.
+  • `rayFamily_firstLaw` / `code_equilibrium_einstein`: a code whose per-ray state paths sit at relative-entropy equilibrium satisfies the entanglement first law at **every** probe (stationarity, per ray), hence — through the assembled skeleton — **linearized vacuum Einstein**: Jacobson's equation of state with the state the code's equilibrium (per-ray BW/analytic data and Iyer-Wald carried; explicit $K\mapsto-K$ sign adapter).
+  • `gravStress_conserved` / `deser_selfcoupling_consistent`: the graviton's own radiation-form stress $T^{\mu
+u}_{m GW}=k^\mu k^
+u\langle e,eangle_\eta$ is conserved **on-shell** (masslessness $\Rightarrow$ conservation), so its coupling to *its own* stress is gauge-invariant — the first order of the Deser bootstrap toward nonlinear GR (the full iteration and its quantum completion are not built).
 
 ### 11.5 Credit division
 
