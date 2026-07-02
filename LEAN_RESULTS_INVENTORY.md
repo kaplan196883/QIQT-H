@@ -268,7 +268,8 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`number_one_particle`** `N_i|1_j⟩=δ_ij|1_i⟩` (the number operator `N_i=a†_i a_i` counts occupation). ⚠ **Free
   graviton, single momentum mode** — the exact operator content of the quantized graviton's polarization d.o.f. as a
   genuine Fock rep of the CCR; the full momentum-space field `h_{μν}(x)=∑_λ∫(a_λ(k)e^λe^{ikx}+h.c.)` and interactions
-  are additive extensions of this same CCR core (Q5–Q6 in the plan). **Q2** — the number operator `N_i=a†_i a_i`
+  are additive extensions of this same CCR core (Q1–Q6 all landed; the momentum continuum = more modes of the same
+  algebra, a follow-on; interactions = frontier). **Q2** — the number operator `N_i=a†_i a_i`
   (`numberOp`) with occupation eigenstates `X_i^n=|n_i⟩`, `numberOp_pow` (`N_i|n_i⟩=n|n_i⟩`, spectrum ℕ),
   `numberOp_vacuum`/`numberOp_one_particle`. **Q3** — the Hamiltonian `H=ω(N₀+N₁+1)` (`hamiltonian`), the graviton
   **zero-point energy** `hamiltonian_vacuum` (`H|0⟩=ω|0⟩`) and one-graviton energy `hamiltonian_one_particle`
@@ -572,7 +573,13 @@ free-field Einstein equation** (standard induced-gravity/Jacobson physics, not u
 value of `G`, formerly the one carried datum, now **promoted from carried to derived** as the *relation*
 `G = 1/(N Λ_s²)` under the granularity reframing (§3 `InducedNewtonConstant`, [AF]): P4-MICRO's carried inputs
 collapse to a single scale `Λ_s`, though the *numerical value* still needs the species-coefficient accounting
-(frontier). "Finite
+(frontier); **the complete free graviton** — linearized kinematics (exactly-2 via the gauge quotient, helicity ±2
+as explicit eigenvalues), the propagator numerator + masslessness + the classical wave equation, and canonical
+quantization (CCR/occupation/zero-point/coherent/two-point) — standard free-field QFT machine-checked, NOT quantum
+gravity; and **the assembled linearized bridge** (`BRIDGE_PLAN.md`, 9/9): entanglement first law at every probe ⟺
+linearized Einstein, from real parts (the graviton anchored to `δG=0 ⟺ k²=0`, coupling ⟺ conservation, Weinberg's
+equivalence principle, forced wedge/ball Clausius data, proven-separating area probes) — CONDITIONAL on the
+explicitly carried Clausius/area law, Iyer–Wald, BW/CHM, genericity, and `G` (ingredient D = the open frontier). "Finite
 capacity" is a **finite record-*count*** statement in the finite-dim model and a **finite-*entropy*** statement in the
 continuum/Fork-A setting (provably distinct — `EntropyNotCardinality`), **never** a finite-matter theory; its
 load-bearing role is in the gravity/area thread, *not* the selection mechanism (`measure_needs_only_finiteness`).
