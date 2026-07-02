@@ -22,7 +22,7 @@ std-3, budget 0, one commit each, honest labels.
   `boost := V`, `hBW := fun t => by rw [oneParticleBW_niceWedge_unconditional …]`; corollary
   `freeField_clausius_unconditional` — the wedge Clausius datum `δ⟨K_boost⟩ = −δS` FORCED with **no BW
   hypothesis** (only the domain/spectral conditions). One carried input of the bridge deleted for the free field.
-- [ ] **E2 — the graviton reconstructed from the code's area data (invert A2).**
+- [x] **E2 ✅ LANDED (`QIQTH/AreaDecoder.lean`, [AF] std-3, wired+pinned, budget 0) — the graviton reconstructed from the code's area data (invert A2).**
   HELD: `area_probes_separate` (injectivity), `areaVar_ray` (`δA_ray(v) = ½ h(v,v)`), the G2 decoder frame
   `eq_zero_of_decoder`/`separating_of_decoder` (EmergentDynamics:67 — built to receive exactly this instance).
   BUILD: the explicit decoder — `reconstruct (A : (Fin 4 → ℝ) → ℝ) : Matrix (Fin 4) (Fin 4) ℝ` with
@@ -79,3 +79,4 @@ pins; wire `QIQTH.lean` for new modules; ONE commit on main + `Co-Authored-By: C
   (`finiteCorner_firstLaw`) and the Clausius form `δ⟨K⟩ = −δS` (K_boost = −K_σ orientation) — never implicit.
   E3/E4 capstone claims BLOCKED until the scaling + universal-ray/sign edits are in the code.
 - **2026-07-02 — E1 ✅ LANDED**: freeFieldWedgePackage (hBW = theorem via oneParticleBW_niceWedge_unconditional) + freeField_clausius_unconditional (Clausius datum forced, NO BW premise). NEXT → E2.
+- **2026-07-02 — E2 ✅ LANDED**: the explicit decoder (reconstruct: h_ii=2A(e_i), h_ij=A(e_i+e_j)−A(e_i)−A(e_j)); reconstruct_areaVar (the metric IS a function of the code's area data, A2 inverted) + reconstruct_unique. Pointwise, basis-level, symmetry required (verifier labels). NEXT → E3.

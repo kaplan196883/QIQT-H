@@ -409,6 +409,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Clausius datum `δ⟨K_boost⟩ = −δS` forced with **no external BW premise** (domain/spectral conditions remain).
   ⚠ Free field, positive mass, nice wedge; the Clausius/area law and `G` stay the separate carried inputs.
 
+- **Earns-gravity E2 — `QIQTH/AreaDecoder.lean`** (`QIQTH.AreaMap`, **[AF]** std-3;
+  `MICROTHEORY_EARNS_GRAVITY_PLAN.md`). **The metric reconstructed FROM the code's area data** — the explicit
+  decoder inverting A2's emergence map: `reconstruct` (`h_ii = 2A(e_i)`, `h_ij = A(e_i+e_j)−A(e_i)−A(e_j)`,
+  polarization); **`reconstruct_areaVar`** — `reconstruct(v ↦ δA_ray(v)(h)) = h` for symmetric `h` (the emergent
+  perturbation is a FUNCTION of ray-probe area measurements; `einsteinSymbol` applies to it verbatim);
+  **`reconstruct_unique`** — the area data determines the metric. ⚠ Pointwise tensor reconstruction in a chosen
+  basis, NOT a smooth global metric field; symmetry required; linearized, finite/model level.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

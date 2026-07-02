@@ -7995,6 +7995,13 @@ namespace QIQTH.AxiomAudit
 -- bridge deleted for the free field. ⚠ Free field, positive mass, nice wedge; area law + G stay carried. Std 3.
 #print axioms QIQTH.EarnGravity.freeFieldWedgePackage
 #print axioms QIQTH.EarnGravity.freeField_clausius_unconditional
+-- E2 (MICROTHEORY_EARNS_GRAVITY_PLAN.md): THE METRIC RECONSTRUCTED FROM THE CODE'S AREA DATA — the explicit
+-- decoder inverting A2. reconstruct: h_ii = 2A(e_i), h_ij = A(e_i+e_j) − A(e_i) − A(e_j) (polarization).
+-- reconstruct_areaVar: reconstruct(v ↦ δA_ray(v)(h)) = h for SYMMETRIC h — the emergent metric IS a function of
+-- area measurements; A1's einsteinSymbol applies to it verbatim. reconstruct_unique: area data determines the
+-- metric. ⚠ Pointwise tensor reconstruction in a basis, NOT a smooth global metric; symmetry required. Std 3.
+#print axioms QIQTH.AreaMap.reconstruct_areaVar
+#print axioms QIQTH.AreaMap.reconstruct_unique
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

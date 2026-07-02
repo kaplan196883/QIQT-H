@@ -52,6 +52,7 @@ import QIQTH.CHMKernel
 import QIQTH.BallClausius
 import QIQTH.BridgeAssembly
 import QIQTH.FreeFieldWedgePackage
+import QIQTH.AreaDecoder
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson
