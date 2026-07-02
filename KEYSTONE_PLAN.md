@@ -48,8 +48,13 @@ OF THE HELD CROSSED-PRODUCT CORE; the continuum walls are named, permanent parts
   boundedFC on the clock representation (`fL`), `fL_indicator`, the covariance via held `borelFC_conjU`;
   the operator-level monomial trace `tau0_monomial_operator`; the dense-core functional
   (linear + tracial + positive) — restrict to the normal-form corner if quotienting fights back.
-- [ ] **K3 — finite closure hygiene ONLY**: bounded tracial functionals extend to norm closures of finite
-  corners; the finite-corner `DualWeightTraceExtension` instance. NOT the vN/normal-weight tower.
+- [x] **K3 — finite closure hygiene ONLY** ✅ DONE: `tauCount_norm_le_sum_diag` (the counting trace is bounded
+  on the finite corner — the norm-closure extension is trivial in finite dimension). PLUS the K3 AUDIT FIX:
+  the carried `DualWeightTraceExtension` interface was found satisfiable by an abelian collapse witness
+  (`M = ℂ`, `τ = re`, `embed = tau ω`) for ANY algebra — a VACUOUS interface (the axiom-budget blind spot);
+  STRENGTHENED with `embed_mul` (multiplicative embedding), which kills the witness (the core trace is not
+  multiplicative). A finite-corner "instance" of the OLD shape would have been the vacuous trick — honestly
+  NOT shipped; the genuine σ-weak/normal-weight vN extension stays Wall 3, carried non-vacuously.
 - [ ] **K6 — checkpoint (the two honest sentences, verbatim in the module docstring + inventory):**
   HAVE: "every finite code screen realized as a finite record corner of the constructed crossed-product
   core has S_{τ₀} = log dim_{τ₀}(𝒟_C) = Σ_e log dim_{τ₀}(P_e) = A_τ(C)/4G; in the code instance
@@ -120,8 +125,14 @@ the error shown. Check for sibling jobs before each increment. Consults: `mcp__O
 
   covariance. NEXT → K1 (operator packaging).
 
-- **2026-07-03** — **K1 LANDED** (`KeystoneOperator.lean`, axiom-free std-3, budget 0): clockMul
-  (bounded-measurable-symbol multiplication on L²(ℝ;H), the dualPhase construction generalized);
-  clockMul_comp (product law); CAPSTONE clockTransl_clockMul (the Weyl covariance
-  λ_t∘M_g = M_{g(·+t)}∘λ_t); repMonomial (π(a)·λ_t·M_F as a genuine operator). Packaging only —
-  the count was proven at K2b. NEXT → K3 (finite closure hygiene).
+- **2026-07-03** — **K1 LANDED** (`KeystoneOperator.lean`, axiom-free std-3, budget 0): clockMul
+  (bounded-measurable-symbol multiplication on L²(ℝ;H), the dualPhase construction generalized);
+  clockMul_comp (product law); CAPSTONE clockTransl_clockMul (the Weyl covariance
+  λ_t∘M_g = M_{g(·+t)}∘λ_t); repMonomial (π(a)·λ_t·M_F as a genuine operator). Packaging only —
+  the count was proven at K2b. NEXT → K3 (finite closure hygiene).
+
+- **2026-07-03** — **K3 LANDED** (axiom-free std-3, budget 0): tauCount_norm_le_sum_diag (finite-corner
+  boundedness — norm-closure extension trivial in finite dimension); K3 AUDIT FIX — DualWeightTraceExtension
+  was VACUOUS (abelian collapse witness M = ℂ satisfied it for any algebra); strengthened with embed_mul,
+  killing the witness; no fake finite-corner instance shipped (that would have BEEN the vacuous trick);
+  Wall 3 stands, now carried non-vacuously. NEXT → K6 (checkpoint).

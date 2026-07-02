@@ -73,12 +73,17 @@ noncomputable def traceCapacity_from_core (ClockFrame : Type) (ω : A → ℂ) (
 
 /-- **CARRIED — the full CPW von Neumann extension** (the genuine remaining frontier: normal weights, affiliated
     operators, semifiniteness — theory Mathlib does not yet have). A named typeclass hypothesis, NEVER an axiom:
-    an ambient *-algebra carrier with a real trace functional extending the constructed core trace, with the same
-    `e^{−s}` dual scaling and full traciality. Instantiating it = crossing the wall's remaining half. -/
+    an ambient carrier with a MULTIPLICATIVE embedding of the eigen-core and a real trace functional extending
+    the constructed core trace, with the same `e^{−s}` dual scaling and full traciality.
+    ⚠ K3 HYGIENE (the keystone campaign): the previous shape (no `embed_mul`) was satisfiable by an abelian
+    collapse witness (`M = ℂ`, `τ = re`, `embed = tau ω`) for ANY algebra — a vacuous interface. The
+    multiplicativity requirement kills that witness (the core trace is not multiplicative), restoring the
+    intended strength. Instantiating it = crossing the wall's remaining half. -/
 class DualWeightTraceExtension (A : Type*) [Mul A] [Star A] (ω : A → ℂ) : Prop where
   exists_extension : ∃ (M : Type) (_ : Mul M) (embed : EigenTerm A → M)
     (τ : M → ℝ) (θ : ℝ → M → M),
     (∀ x : EigenTerm A, τ (embed x) = (x.tau ω).re) ∧
+    (∀ x y : EigenTerm A, embed (x.mul y) = embed x * embed y) ∧
     (∀ (s : ℝ) (m : M), τ (θ s m) = Real.exp (-s) * τ m) ∧
     (∀ m₁ m₂ : M, τ (m₁ * m₂) = τ (m₂ * m₁))
 
@@ -88,7 +93,7 @@ theorem extension_preserves_density_mass (ω : A → ℂ) [h : DualWeightTraceEx
     (ρ : CoreDensity A ω) :
     ∃ (M : Type) (_ : Mul M) (embed : EigenTerm A → M) (τ : M → ℝ),
       τ (embed (ρ.x.star.mul ρ.x)) = 1 := by
-  obtain ⟨M, hM, embed, τ, θ, hext, _, _⟩ := h.exists_extension
+  obtain ⟨M, hM, embed, τ, θ, hext, _, _, _⟩ := h.exists_extension
   exact ⟨M, hM, embed, τ, by rw [hext]; exact ρ.mass_one⟩
 
 end QIQTH.TypeIITrace

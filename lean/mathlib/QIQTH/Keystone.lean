@@ -373,4 +373,17 @@ theorem K5_dual_covariant_count {E : Type*} [DecidableEq E] (L : LinkDims E) (C 
     Real.log_mul (Real.exp_ne_zero _) hN.ne', Real.log_exp]
   ring
 
+/-! ## K3 — finite closure hygiene
+
+The counting trace is bounded on the finite corner (norm-closure extension trivial in finite dimension);
+and the K3 audit STRENGTHENED the carried `DualWeightTraceExtension` interface: its previous shape (no
+embedding multiplicativity) was satisfiable by an abelian collapse witness for ANY algebra — a vacuous
+interface, now fixed in `TraceCapacityFromCore` (the vN extension itself remains Wall 3, carried). -/
+
+/-- The counting trace is bounded on the finite corner (by the diagonal norm sum — finite). -/
+theorem tauCount_norm_le_sum_diag {E : Type*} [DecidableEq E] (L : LinkDims E) (C : Finset E)
+    (x : DiamondAlg L C) : ‖tauCount L C x‖ ≤ ∑ m, ‖x m m‖ := by
+  rw [tauCount, Matrix.trace]
+  exact norm_sum_le _ _
+
 end QIQTH.Keystone

@@ -8377,6 +8377,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KeystoneOperator.clockMul_comp
 #print axioms QIQTH.KeystoneOperator.clockTransl_clockMul
 #print axioms QIQTH.KeystoneOperator.repMonomial
+-- KEYSTONE K3 (finite closure hygiene): tauCount_norm_le_sum_diag (the counting trace is bounded on the finite
+-- corner — the norm-closure extension is trivial in finite dimension). AND the K3 AUDIT FIX: the carried
+-- DualWeightTraceExtension interface was STRENGTHENED with embed_mul (∀ x y, embed (x.mul y) = embed x * embed y):
+-- its previous shape was satisfiable by an abelian collapse witness (M = ℂ, τ = re, embed = tau ω) for ANY
+-- algebra — a vacuous interface (the axiom-budget blind spot). Multiplicativity kills that witness (the core
+-- trace is not multiplicative); the genuine σ-weak/normal-weight vN extension remains Wall 3, CARRIED as the
+-- (now non-vacuous) typeclass, never a Lean axiom. Std 3.
+#print axioms QIQTH.Keystone.tauCount_norm_le_sum_diag
+#print axioms QIQTH.TypeIITrace.extension_preserves_density_mass
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

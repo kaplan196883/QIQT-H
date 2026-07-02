@@ -636,7 +636,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   dual-covariance law with transported area. **K1 LANDED** (`KeystoneOperator.lean`): `clockMul`
   (bounded-symbol multiplication operators on the crossed-product space), the product law, the WEYL
   COVARIANCE `λ_t∘M_g = M_{g(·+t)}∘λ_t`, and `repMonomial` (the represented core monomial as a
-  genuine operator). Next: K3 (finite closure hygiene) → K6 checkpoint.
+  genuine operator). **K3 LANDED**: `tauCount_norm_le_sum_diag` (finite-corner boundedness of the
+  counting trace — the norm-closure extension trivial in finite dimension) + the K3 AUDIT FIX — the
+  carried `DualWeightTraceExtension` interface was VACUOUS (an abelian collapse witness `M = ℂ`,
+  `τ = re`, `embed = tau ω` satisfied it for ANY algebra); STRENGTHENED with `embed_mul` (multiplicative
+  embedding), killing the witness (the core trace is not multiplicative); no fake finite-corner instance
+  shipped — Wall 3 (the σ-weak/normal-weight vN extension) stands, now carried non-vacuously.
+  Next: K6 checkpoint.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
