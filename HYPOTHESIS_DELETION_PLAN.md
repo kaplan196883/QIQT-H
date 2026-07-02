@@ -45,7 +45,7 @@ formal-Bianchi form (J4).
   `areaVar (raySurf v) (einsteinSymbol k h)`. Then the REFACTOR: a bridge-assembly variant
   (`bridge_conditional_probe`) whose deficit input is the derivable probe (the carried content shrinks to the
   identification of the PHYSICAL first-law deficit with the probe — stated once, honestly, as the residual).
-- [ ] **J3 — the abstract CHM transport theorem.** `CHMTransportData` (wedge, conformal element, vacuum-preserving
+- [x] **J3 — the abstract CHM transport theorem.** ✅ DONE (`QIQTH/CHMTransport.lean`; hCHM SHRUNK to hBW + hmodVac + geometry). `CHMTransportData` (wedge, conformal element, vacuum-preserving
   unitary, algebra conjugacy, wedge standardness, wedge BW, geometric conjugacy — named carried fields);
   **`hCHM_of_conformal_transport`** — the ball modular flow is the conformal image of the wedge boost (Tomita
   modular data under vacuum-preserving unitary equivalence, at the one-particle/standard-subspace level we hold);
@@ -81,3 +81,12 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro.
   Iyer–Wald input FACTORS as (deficit = kernel probe) . (kernel probe = areaVar); the second factor is now a
   THEOREM; the residual carried input is hDeficit (the FGHMVR physics, stated once). HYPOTHESIS SHRUNK:
   hIW → hDeficit. NEXT → J3.
+- **2026-07-02** — **J3 LANDED** (`CHMTransport.lean`, axiom-free std-3, budget 0): `CHMTransportData` (the
+  named carried analytic inputs — ONE massless wedge-BW datum hBW, never the m>0 theorem at m=0; per-ball
+  conformal unitaries with geometric conjugacy hflow; the carried modular transport hmodVac in its SMALLEST
+  pointwise-on-vacuum form). `hCHM_of_conformal_transport`: the CHM identification at EVERY ball is a THEOREM
+  of these inputs; `toBallModularFamily`: C2b's carried per-ball hCHM field is DERIVED;
+  `transport_ballHeatFlux_spec`: the forced Clausius datum end-to-end. HYPOTHESIS SHRUNK: hCHM (per-ball
+  physics identification) → hBW (one wedge datum) + hmodVac (Tomita functoriality) + geometry. Follow-ons:
+  derive hmodVac from the RvD tower (projection transport + Borel-FC covariance); the genuine massless wedge
+  BW (1+1 chiral / 3+1 conformal scalar). NEXT → J4.

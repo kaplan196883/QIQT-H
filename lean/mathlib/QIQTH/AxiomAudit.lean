@@ -8123,6 +8123,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CHM.CHMSymbolProbe3_eq
 #print axioms QIQTH.CHM.CHMSymbolProbe3_einstein_eq_areaVar
 #print axioms QIQTH.CHM.bridge_conditional_probe
+-- J3 (HYPOTHESIS_DELETION_PLAN.md): the abstract CHM transport theorem. CHMTransportData = the named carried
+-- analytic inputs (wedge + vac + boost with ONE carried massless wedge-BW datum hBW — the m>0 BW theorem is
+-- NEVER instantiated at m=0; per-ball conformal unitaries U with the geometric conjugacy hflow; the carried
+-- modular transport hmodVac = Tomita functoriality in its SMALLEST pointwise-on-vacuum form).
+-- hCHM_of_conformal_transport: the CHM identification at EVERY ball is a THEOREM of these inputs;
+-- toBallModularFamily: C2b's carried per-ball hCHM field is DERIVED; transport_ballHeatFlux_spec: the forced
+-- Clausius datum end-to-end. HYPOTHESIS SHRUNK: hCHM (per-ball physics identification) → hBW (one wedge datum)
+-- + hmodVac (functoriality) + geometry. Std 3.
+#print axioms QIQTH.BallModular.hCHM_of_conformal_transport
+#print axioms QIQTH.BallModular.hmodVac_of_operator_conj
+#print axioms QIQTH.BallModular.CHMTransportData.toBallModularFamily
+#print axioms QIQTH.BallModular.transport_ballHeatFlux_spec
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

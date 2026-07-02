@@ -386,6 +386,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   generic QFT); the Clausius/area law `δS = δA/4G` and the value of `G` remain the separate carried inputs of the
   assembly. **Ingredient C (modular → geometric) is COMPLETE.**
 
+- **The joins, J3 — `QIQTH/CHMTransport.lean`** (`QIQTH.BallModular`, **[AF]** std-3;
+  `HYPOTHESIS_DELETION_PLAN.md`). **The abstract CHM transport theorem — C2b's `hCHM` SHRUNK.**
+  **`CHMTransportData`** — the named carried analytic inputs: the wedge (`W`, `vac`, `boost`) with **ONE**
+  carried massless wedge-BW datum `hBW` (the `m>0` BW theorem is NEVER instantiated at `m=0` — the binding
+  correction); per-ball conformal unitaries `U : Ball → (H ≃ₗᵢ[ℂ] H)` with the wedge→ball geometric conjugacy
+  `hflow` (the ball state is DEFINED as `U B vac` — vacuum-preserving covariance is definitional, not carried);
+  and the carried modular transport `hmodVac` (Tomita functoriality) in its SMALLEST pointwise-on-vacuum form
+  (`hmodVac_of_operator_conj` shows it is the weakest of the conjugacy forms).
+  **`hCHM_of_conformal_transport`** — the CHM identification at EVERY ball is a **theorem** of these inputs;
+  **`toBallModularFamily`** — C2b's carried per-ball `hCHM` field is DERIVED; **`transport_ballHeatFlux_spec`**
+  — the forced Clausius datum end-to-end. **HYPOTHESIS SHRUNK: hCHM (a per-ball physics identification) → hBW
+  (one wedge datum) + hmodVac (functoriality) + geometry.** ⚠ Follow-ons: derive `hmodVac` from the RvD tower
+  (projection transport + Borel-FC unitary covariance); the genuine massless wedge BW (1+1 chiral current /
+  3+1 conformal scalar). Free-field one-particle setting; NOT a derivation of gravity.
+
 - **The bridge, increment ASM — `QIQTH/BridgeAssembly.lean`** (namespace `QIQTH.BridgeASM`, all **[AF]** std-3;
   `BRIDGE_PLAN.md` — **THE CAMPAIGN CAPSTONE, 9/9 increments complete**). **The FGHMVR skeleton assembled with the
   bridge's real parts.** `symmMat` (the symmetric sector); **`einsteinSymbol_isSymm`** (the Einstein residual of a
