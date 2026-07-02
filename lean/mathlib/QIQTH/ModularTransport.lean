@@ -285,4 +285,105 @@ theorem specMeasure_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsS
         (integral_map (specHomeo U T).continuous.aemeasurable
           f.continuous.aestronglyMeasurable).symm
 
+/-! ### G3b(ii) — the Borel functional calculus transports (THE CRUX CAPSTONE)
+
+Everything above the scalar measures is defined from them, so the transport lifts by unfolding:
+`qForm` → `cForm` (polarization; U is ℂ-linear) → `specProj` (inner ext) → the PVM's scalar measure
+(pushforward) → `diagInt` (integral_map) → `bilinDiag` (polarization again) → **`borelFC_conjU`**
+(the `inner_borelFC` calc chain). -/
+
+open QIQTH.SpectralTheorem MeasureTheory in
+theorem qForm_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T)
+    {s' : Set (spectrum ℝ (conjU U T))} (hs' : MeasurableSet s') (z : H) :
+    qForm (conjU U T) (conjU_isSelfAdjoint hT U) s' (U z)
+      = qForm T hT (specHomeo U T ⁻¹' s') z := by
+  rw [qForm, qForm, specMeasure_conjU U hT z, measureReal_def, measureReal_def,
+    Measure.map_apply (specHomeo U T).continuous.measurable hs']
+
+open QIQTH.SpectralTheorem in
+theorem cForm_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T)
+    {s' : Set (spectrum ℝ (conjU U T))} (hs' : MeasurableSet s') (x y : H) :
+    cForm (conjU U T) (conjU_isSelfAdjoint hT U) s' (U x) (U y)
+      = cForm T hT (specHomeo U T ⁻¹' s') x y := by
+  rw [cForm, cForm, bForm, bForm, bForm, bForm]
+  rw [show U x + U y = U (x + y) from (map_add U x y).symm,
+    show U x - U y = U (x - y) from (map_sub U x y).symm,
+    show Complex.I • U y = U (Complex.I • y) from (map_smul U Complex.I y).symm,
+    show U x + U (Complex.I • y) = U (x + Complex.I • y) from (map_add U x _).symm,
+    show U x - U (Complex.I • y) = U (x - Complex.I • y) from (map_sub U x _).symm,
+    qForm_conjU U hT hs', qForm_conjU U hT hs', qForm_conjU U hT hs', qForm_conjU U hT hs']
+
+open QIQTH.SpectralTheorem in
+/-- The spectral projections transport: `E'(s') = U E(e⁻¹ s') U⁻¹`. -/
+theorem specProj_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T)
+    {s' : Set (spectrum ℝ (conjU U T))} (hs' : MeasurableSet s') :
+    specProj (conjU U T) (conjU_isSelfAdjoint hT U) s'
+      = conjU U (specProj T hT (specHomeo U T ⁻¹' s')) := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  refine ext_inner_right ℂ fun y => ?_
+  rw [inner_specProj]
+  conv_lhs => rw [show z = U (U.symm z) from (U.apply_symm_apply z).symm,
+    show y = U (U.symm y) from (U.apply_symm_apply y).symm]
+  rw [cForm_conjU U hT hs', ← inner_specProj, conjU_apply, ← U.inner_map_map
+    (specProj T hT (specHomeo U T ⁻¹' s') (U.symm z)) (U.symm y), U.apply_symm_apply]
+
+open QIQTH.Spectral QIQTH.SpectralTheorem MeasureTheory in
+/-- The PVM's scalar measure transports as a pushforward. -/
+theorem pvmScalarMeasure_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T) (x : H) :
+    (PVM_of_selfAdjoint (conjU U T) (conjU_isSelfAdjoint hT U)).scalarMeasure (U x)
+      = Measure.map (specHomeo U T) ((PVM_of_selfAdjoint T hT).scalarMeasure x) := by
+  refine Measure.ext fun s' hs' => ?_
+  rw [(PVM_of_selfAdjoint (conjU U T) (conjU_isSelfAdjoint hT U)).scalarMeasure_apply (U x) hs',
+    Measure.map_apply (specHomeo U T).continuous.measurable hs',
+    (PVM_of_selfAdjoint T hT).scalarMeasure_apply x
+      (hs'.preimage (specHomeo U T).continuous.measurable)]
+  congr 2
+  rw [show (PVM_of_selfAdjoint (conjU U T) (conjU_isSelfAdjoint hT U)).E s'
+      = specProj (conjU U T) (conjU_isSelfAdjoint hT U) s' from rfl,
+    specProj_conjU U hT hs', conjU_apply_U, U.norm_map]
+  rfl
+
+open QIQTH.Spectral QIQTH.SpectralTheorem MeasureTheory in
+theorem diagInt_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T)
+    {f' : spectrum ℝ (conjU U T) → ℂ} (hf' : Measurable f') (x : H) :
+    (PVM_of_selfAdjoint (conjU U T) (conjU_isSelfAdjoint hT U)).diagInt f' (U x)
+      = (PVM_of_selfAdjoint T hT).diagInt (f' ∘ (specHomeo U T)) x := by
+  rw [QIQTH.Spectral.ProjectionValuedMeasure.diagInt,
+    QIQTH.Spectral.ProjectionValuedMeasure.diagInt, pvmScalarMeasure_conjU U hT,
+    integral_map (specHomeo U T).continuous.aemeasurable hf'.aestronglyMeasurable]
+  rfl
+
+open QIQTH.Spectral QIQTH.SpectralTheorem in
+theorem bilinDiag_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T)
+    {f' : spectrum ℝ (conjU U T) → ℂ} (hf' : Measurable f') (x y : H) :
+    (PVM_of_selfAdjoint (conjU U T) (conjU_isSelfAdjoint hT U)).bilinDiag f' (U x) (U y)
+      = (PVM_of_selfAdjoint T hT).bilinDiag (f' ∘ (specHomeo U T)) x y := by
+  rw [QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag,
+    QIQTH.Spectral.ProjectionValuedMeasure.bilinDiag]
+  rw [show U x + U y = U (x + y) from (map_add U x y).symm,
+    show U x - U y = U (x - y) from (map_sub U x y).symm,
+    show Complex.I • U x + U y = U (Complex.I • x + y) from by
+      rw [map_add, map_smul],
+    show Complex.I • U x - U y = U (Complex.I • x - y) from by
+      rw [map_sub, map_smul],
+    diagInt_conjU U hT hf', diagInt_conjU U hT hf', diagInt_conjU U hT hf',
+    diagInt_conjU U hT hf']
+
+open QIQTH.SpectralTheorem in
+/-- **G3 CAPSTONE — the bounded BOREL functional calculus transports under conjugation:**
+    `f(UTU⁻¹) = U · (f∘e)(T) · U⁻¹` for bounded measurable symbols. The generator-uniqueness shortcut
+    was rejected (binding); this is the honest scalar-measure route, completed. -/
+theorem borelFC_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T)
+    {f' : spectrum ℝ (conjU U T) → ℂ} (hf' : Measurable f')
+    {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f' ω‖ ≤ C) :
+    borelFC (conjU U T) (conjU_isSelfAdjoint hT U) hf' hC0 hC
+      = conjU U (borelFC T hT (hf'.comp (specHomeo U T).continuous.measurable) hC0
+          (fun ω => hC _)) := by
+  refine ContinuousLinearMap.ext fun y => ?_
+  refine ext_inner_left ℂ fun x => ?_
+  conv_lhs => rw [show x = U (U.symm x) from (U.apply_symm_apply x).symm,
+    show y = U (U.symm y) from (U.apply_symm_apply y).symm]
+  rw [inner_borelFC, bilinDiag_conjU U hT hf', ← inner_borelFC, conjU_apply,
+    ← U.inner_map_map (U.symm x), U.apply_symm_apply]
+
 end QIQTH.ModularTransport

@@ -8301,6 +8301,17 @@ namespace QIQTH.AxiomAudit
 -- Tietze-extended to an ambient symbol so G3a's cfc_conjU applies; the calc chain through
 -- integral_specMeasure + conjU_apply_U + inner_map_map + integral_map. Std 3.
 #print axioms QIQTH.ModularTransport.specMeasure_conjU
+-- G3b(ii) (GROUNDING_PLAN.md — G3 THE CRUX, COMPLETE): the bounded BOREL functional calculus transports
+-- under conjugation. The chain lifted from the scalar measures by unfolding: qForm_conjU → cForm_conjU
+-- (polarization; U ℂ-linear) → specProj_conjU (the spectral projections: E'(s') = U E(e⁻¹s') U⁻¹, inner
+-- ext) → pvmScalarMeasure_conjU (pushforward) → diagInt_conjU (integral_map) → bilinDiag_conjU →
+-- CAPSTONE borelFC_conjU: f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹ for bounded measurable symbols (the inner_borelFC
+-- calc chain; the generator-uniqueness shortcut was REJECTED per the binding correction — this is the
+-- honest scalar-measure route, completed). Std 3.
+#print axioms QIQTH.ModularTransport.specProj_conjU
+#print axioms QIQTH.ModularTransport.pvmScalarMeasure_conjU
+#print axioms QIQTH.ModularTransport.bilinDiag_conjU
+#print axioms QIQTH.ModularTransport.borelFC_conjU
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

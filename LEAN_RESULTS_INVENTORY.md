@@ -591,8 +591,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `conjU_isSelfAdjoint`, and **`cfc_conjU`** — the CONTINUOUS functional-calculus covariance
   `cfc f (UTU⁻¹) = U (cfc f T) U⁻¹` (Mathlib `map_cfc` riding the hom). **G3b(i)**: `specMeasure_conjU` — the RMK scalar
   spectral measure transports as a pushforward along the value-preserving spectrum homeomorphism
-  (C_c tests Tietze-extended to ambient symbols, riding `cfc_conjU`). G3b(ii) (the specProj/PVM/
-  `borelFC` chain) will carry this to `modUnitary` itself.
+  (C_c tests Tietze-extended to ambient symbols, riding `cfc_conjU`). **G3b(ii) — G3 COMPLETE**: `specProj_conjU`
+  (the spectral projections transport), `pvmScalarMeasure_conjU`, `diagInt`/`bilinDiag` transport, and
+  CAPSTONE **`borelFC_conjU`** — the bounded BOREL functional calculus transports under conjugation,
+  `f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹` (the honest scalar-measure route; generator shortcut rejected). G4 next:
+  `modUnitary` transport in one line + the payoffs (J3 `hmodVac` deletion, Gate-3 hinge, ball family).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
