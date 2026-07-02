@@ -440,6 +440,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   perturbation satisfying **linearized vacuum Einstein** — Jacobson's equation-of-state with the state the code's
   equilibrium. ⚠ Conditional (BW/analytic/Iyer–Wald carried); linearized, free, finite/model level; NOT QG.
 
+- **Earns-gravity E5 — `QIQTH/DeserRung.lean`** (`QIQTH.EarnGravity`, **[AF]** std-3;
+  `MICROTHEORY_EARNS_GRAVITY_PLAN.md` — **CAMPAIGN COMPLETE, E1–E5**). **The Deser rung: the graviton sources
+  itself consistently (second order).** `gravStress` — the graviton's own Isaacson/radiation-form stress symbol
+  `T^{μν}_GW = k^μk^ν·⟨e,e⟩_η`; `gravStress_symm`; **`gravStress_conserved`** — on-shell (null `k`, the
+  graviton's own masslessness) the self-stress is conserved `k_μT^{μν}=0`;
+  **`deser_selfcoupling_consistent`** — hence, by B1's iff, the coupling of the graviton TO ITS OWN stress is
+  invariant under every linearized diffeomorphism: second-order self-sourcing is gauge-consistent — the first
+  order of Deser's bootstrap toward nonlinear GR (which B2's equivalence principle forces the field to attempt);
+  `gravStress_traceless` (pure radiation on-shell). ⚠ First bootstrap order only — the full nonlinear iteration
+  and its quantum completion are NOT built; plane-wave symbol level; free, flat; NOT QG.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

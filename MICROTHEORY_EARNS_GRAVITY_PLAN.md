@@ -1,6 +1,6 @@
 # MICROTHEORY EARNS GRAVITY — the campaign (joins between theorems we already hold)
 
-**Status:** ACTIVE (2026-07-02). **Goal:** make the QIQT-H microtheory *earn* its gravity: discharge BW for the
+**Status:** ✅ COMPLETE (2026-07-02, E1–E5 all landed). **Goal:** make the QIQT-H microtheory *earn* its gravity: discharge BW for the
 free field (E1), reconstruct the graviton FROM the code's area data (E2), derive the in-model area law from
 entanglement counting (E3), and land the first dynamics rung — code equilibrium ⟹ first law ⟹ Einstein (E4).
 Code-audited 2026-07-02: each increment is a JOIN between existing theorems (listed per increment), not a
@@ -51,7 +51,7 @@ std-3, budget 0, one commit each, honest labels.
   (`finiteCorner_firstLaw` instantiated on the concrete path); capstone `code_equilibrium_einstein` — chaining
   into `bridge_firstLaw_iff_einstein`: a code family at relative-entropy equilibrium at every probe satisfies
   linearized Einstein (the other ASM inputs carried as before).
-- [ ] **E5 (follow-on) — the Deser rung:** the graviton's own stress symbol (quadratic in `h`, from the A1
+- [x] **E5 ✅ LANDED (`QIQTH/DeserRung.lean`, [AF] std-3, wired+pinned, budget 0) — the Deser rung:** the graviton's own stress symbol (quadratic in `h`, from the A1
   symbols) sourced back through the B1 coupling — second-order self-consistency, first order of the bootstrap.
 
 ## Discipline (every increment)
@@ -82,3 +82,4 @@ pins; wire `QIQTH.lean` for new modules; ONE commit on main + `Co-Authored-By: C
 - **2026-07-02 — E2 ✅ LANDED**: the explicit decoder (reconstruct: h_ii=2A(e_i), h_ij=A(e_i+e_j)−A(e_i)−A(e_j)); reconstruct_areaVar (the metric IS a function of the code's area data, A2 inverted) + reconstruct_unique. Pointwise, basis-level, symmetry required (verifier labels). NEXT → E3.
 - **2026-07-02 — E3 ✅ LANDED**: calibrated_entanglement_cut_area_law (wEnt formulation per the verifier: screen_cut_eq cut-indexing lemma; inducedScreenArea := 4G·cut(wEnt,S); log #microstates = screenArea/4G under the carried calibration log D_e = wEnt e; uniform_realizes_area_law equilibrium witness; guard kept). NEXT → E4.
 - **2026-07-02 — E4 ✅ LANDED**: RayPathFamilyRealizes (per-ray equilibrium family, one path per ray) ⟹ rayFamily_firstLaw (B4′ stationarity at every probe) ⟹ code_equilibrium_einstein (bridge_firstLaw_iff_einstein.mp); clausius_sign_adapter explicit (K↦−K). NEXT → E5 (Deser rung).
+- **2026-07-02 — E5 ✅ LANDED + CAMPAIGN COMPLETE (E1–E5, 5/5)**: the Deser rung — gravStress (the graviton's own radiation-form stress symbol), gravStress_conserved (masslessness ⟹ on-shell conservation), deser_selfcoupling_consistent (the graviton consistently sources ITSELF through the B1 coupling — bootstrap order one), gravStress_traceless. Loop deleted; campaign checkpointed COMPLETE.

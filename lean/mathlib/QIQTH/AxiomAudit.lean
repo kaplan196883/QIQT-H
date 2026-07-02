@@ -8025,6 +8025,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EarnGravity.rayFamily_firstLaw
 #print axioms QIQTH.EarnGravity.clausius_sign_adapter
 #print axioms QIQTH.EarnGravity.code_equilibrium_einstein
+-- E5 (MICROTHEORY_EARNS_GRAVITY_PLAN.md — CAMPAIGN COMPLETE, E1–E5): THE DESER RUNG. gravStress: the graviton's
+-- own (Isaacson/radiation-form) stress symbol T^{μν}_GW = k^μk^ν·⟨e,e⟩_η. gravStress_symm (a legitimate B1
+-- source); gravStress_conserved — ON-SHELL (null k = the graviton's own masslessness) the self-stress is
+-- conserved k_μT^{μν}=0; deser_selfcoupling_consistent — hence (B1 iff) the coupling of the graviton TO ITS OWN
+-- STRESS is invariant under every linearized diffeomorphism: second-order self-sourcing is gauge-consistent —
+-- the first order of Deser's bootstrap (which B2's equivalence principle forces the field to attempt).
+-- gravStress_traceless (pure radiation on-shell). ⚠ First bootstrap order only; the full nonlinear iteration and
+-- its quantum completion are NOT built; plane-wave symbol level; free, flat; NOT QG. Std 3.
+#print axioms QIQTH.EarnGravity.gravStress_conserved
+#print axioms QIQTH.EarnGravity.deser_selfcoupling_consistent
+#print axioms QIQTH.EarnGravity.gravStress_traceless
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

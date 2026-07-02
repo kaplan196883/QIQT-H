@@ -55,6 +55,7 @@ import QIQTH.FreeFieldWedgePackage
 import QIQTH.AreaDecoder
 import QIQTH.CalibratedAreaLaw
 import QIQTH.CodeEquilibrium
+import QIQTH.DeserRung
 import QIQTH.BellMarginal
 import QIQTH.Bell
 import QIQTH.Tsirelson
