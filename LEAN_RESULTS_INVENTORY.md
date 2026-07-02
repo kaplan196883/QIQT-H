@@ -195,6 +195,26 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (the modular, frame-free formulation the Lean core already uses; cf. entropy-not-cardinality) — never as a
   frame regulator, single or averaged. Loop integrals numerically validated, not formalized. NOT QG; the next
   decisive item = a low-energy LV-signature bound for the state-level capacity.
+- **GATE 3 — THE STATE-LEVEL LV BOUND — EXECUTED 2026-07-02** (`QG/StateLevelLVGate.lean`, **[AF]** std-3
+  or axiom-free; theorem-shaped, GPT-5.5-pro-verified; literature anchor: Bousso/Casini/QNEC entropy bounds
+  are state-region inequalities, not regulators). **The surviving (entropy/state-level) reading of `Q_D`
+  makes NO low-energy Lorentz-violation prediction:** (A) **`admissible_smul_iff`** +
+  **`constraintSet_invariant`** — the admissible set `{ρ : ∀D, S_ren(ρ,D) ≤ Q_D}` is group-invariant (no
+  frame in the kinematics; honest limit: SET covariance ≠ every admissible state invariant — thermal/
+  conditioned states may carry rest frames, which is state breaking, not a law-level prediction);
+  `vacuum_admissible`; the hinge `Sren_cov_of_traceCovariant` (trace transport + equivariant density ⟹
+  entropy covariance — the carried trace-transport input, same follow-on as J3's `hmodVac`).
+  (B) **`stateLevel_noDeltaC2`** — the constraint restricts the state space, not the dynamics, so
+  `Δc² = 0` identically (riding the certified O(4) split). (C) the residual channels, each certified:
+  `operationalLV_iff_not_invariant` (LV ⟺ non-invariant PREPARED state, given separating observables);
+  `conditioned_state_orbit`/`conditioned_invariant_iff_orbit_constant` (saturation/conditioning is safe
+  IFF no non-invariant background is selected); **`equivariant_enforcement_preserves_invariance`**/
+  `safe_enforced_step` — **the dynamical-realization gap is the SOLE remaining LV door** (only a
+  non-equivariant enforcement mechanism reopens it); the selector channel is closed by the held
+  `upvm_covariant_probability` (biased/postselected λ would reopen it). **`permutationCapacity`** — a
+  genuine finite non-vacuous instance (relabeling-covariant regional Shannon entropy, `Q = log|D|`).
+  ⚠ Gate-level algebra, not a QFT construction; trace-transport and equivariant-enforcer inputs are NAMED
+  carried hypotheses. NOT QG.
 
 ## 3. Gravity / Sakharov 1/4 / Einstein equation
 

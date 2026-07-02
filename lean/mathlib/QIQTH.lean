@@ -601,6 +601,7 @@ import QIQTH.QG.FinitePoincareNoGo
 import QIQTH.QG.LatticeDispersionBound
 import QIQTH.QG.CpsuvGate
 import QIQTH.QG.DiamondTipGate
+import QIQTH.QG.StateLevelLVGate
 import QIQTH.QG.FiniteModularRecurrence
 import QIQTH.QG.LatticeDispersion
 import QIQTH.QG.FiniteTracePhase5

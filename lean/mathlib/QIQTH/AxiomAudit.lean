@@ -8181,6 +8181,31 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QG.DiamondTip.boostAvg_diverges
 #print axioms QIQTH.QG.DiamondTip.sinh_ge_add_cube
 #print axioms QIQTH.QG.DiamondTip.u0sq_avg_diverges
+-- GATE 3 — the STATE-LEVEL LV bound (EXECUTED 2026-07-02, theorem-shaped; GPT-5.5-pro-verified design;
+-- literature anchor: covariant entropy bounds are state-region inequalities, not regulators). (A) the
+-- constraint is FRAME-FREE: admissible_smul_iff + constraintSet_invariant (the admissible set is
+-- G-invariant; honest limit: set covariance ≠ every state invariant — thermal/conditioned states may have
+-- rest frames = state breaking, not law-level LV); vacuum_admissible; Sren_cov_of_traceCovariant (the
+-- hinge: trace transport + equivariant density ⟹ entropy covariance — the carried trace-transport input,
+-- deletable via the RvD tower). (B) stateLevel_noDeltaC2: no dynamical modification ⟹ Δc² = 0 identically
+-- (riding covariantSplit_eq_zero) — the state-level capacity adds NO new LV channel. (C) the residual
+-- channels made precise: no_operationalLV_of_invariant + operationalLV_iff_not_invariant (LV ⟺
+-- non-invariant PREPARED state); conditioned_state_orbit + conditioned_invariant_iff_orbit_constant
+-- (saturation safe iff no background selected); equivariant_enforcement_preserves_invariance +
+-- safe_enforced_step (the DYNAMICAL-REALIZATION GAP is the only reopening channel). permutationCapacity:
+-- a genuine finite non-vacuous instance (relabeling-covariant regional Shannon entropy). NOT QG. Std 3.
+#print axioms QIQTH.QG.StateLevelLV.admissible_smul_iff
+#print axioms QIQTH.QG.StateLevelLV.constraintSet_invariant
+#print axioms QIQTH.QG.StateLevelLV.vacuum_admissible
+#print axioms QIQTH.QG.StateLevelLV.Sren_cov_of_traceCovariant
+#print axioms QIQTH.QG.StateLevelLV.stateLevel_noDeltaC2
+#print axioms QIQTH.QG.StateLevelLV.no_operationalLV_of_invariant
+#print axioms QIQTH.QG.StateLevelLV.operationalLV_iff_not_invariant
+#print axioms QIQTH.QG.StateLevelLV.conditioned_state_orbit
+#print axioms QIQTH.QG.StateLevelLV.conditioned_invariant_iff_orbit_constant
+#print axioms QIQTH.QG.StateLevelLV.equivariant_enforcement_preserves_invariance
+#print axioms QIQTH.QG.StateLevelLV.safe_enforced_step
+#print axioms QIQTH.QG.StateLevelLV.permutationCapacity
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
