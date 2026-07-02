@@ -203,7 +203,8 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   frame in the kinematics; honest limit: SET covariance ≠ every admissible state invariant — thermal/
   conditioned states may carry rest frames, which is state breaking, not a law-level prediction);
   `vacuum_admissible`; the hinge `Sren_cov_of_traceCovariant` (trace transport + equivariant density ⟹
-  entropy covariance — the carried trace-transport input, same follow-on as J3's `hmodVac`).
+  entropy covariance — the trace-transport input's modular half is now DERIVED by the grounding campaign:
+  `modUnitary_inner_cov`, G4).
   (B) **`stateLevel_noDeltaC2`** — the constraint restricts the state space, not the dynamics, so
   `Δc² = 0` identically (riding the certified O(4) split). (C) the residual channels, each certified:
   `operationalLV_iff_not_invariant` (LV ⟺ non-invariant PREPARED state, given separating observables);
@@ -446,9 +447,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`hCHM_of_conformal_transport`** — the CHM identification at EVERY ball is a **theorem** of these inputs;
   **`toBallModularFamily`** — C2b's carried per-ball `hCHM` field is DERIVED; **`transport_ballHeatFlux_spec`**
   — the forced Clausius datum end-to-end. **HYPOTHESIS SHRUNK: hCHM (a per-ball physics identification) → hBW
-  (one wedge datum) + hmodVac (functoriality) + geometry.** ⚠ Follow-ons: derive `hmodVac` from the RvD tower
-  (projection transport + Borel-FC unitary covariance); the genuine massless wedge BW (1+1 chiral current /
-  3+1 conformal scalar). Free-field one-particle setting; NOT a derivation of gravity.
+  (one wedge datum) + hmodVac (functoriality) + geometry.** ⚠ Follow-ons: derive `hmodVac` from the RvD tower — **DONE
+  (the grounding campaign, G2–G4: `hmodVac` is DELETED via `CHMTransportDataOfCarrierMap`; residue = the
+  geometric carrier-conjugacy data)**; the genuine massless wedge BW (1+1 chiral current /
+  3+1 conformal scalar) remains. Free-field one-particle setting; NOT a derivation of gravity.
 
 - **The bridge, increment ASM — `QIQTH/BridgeAssembly.lean`** (namespace `QIQTH.BridgeASM`, all **[AF]** std-3;
   `BRIDGE_PLAN.md` — **THE CAMPAIGN CAPSTONE, 9/9 increments complete**). **The FGHMVR skeleton assembled with the
@@ -579,30 +581,34 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   stated once), `log #microstates = ⟨α|Â_tot(Σ)|α⟩/4G` — **the screen code's counting and the graviton's
   area operator agree as two computations of one number.** ⚠ The join is expectation-level FOREVER (the
   finite-code CCR isometry is obstructed by the trace argument); the code Hilbert space is NOT Fock;
-  fixed momentum, linearized, free; NOT QG. Carried: `hJoin`, the calibration, the Bargmann-adjointness
-  grounding of the coherent v-rule — **the v-rule grounding is now DELETED (G1,
-  `QIQTH/BargmannPairing.lean`)**: `bargmann_adjoint` (creation adjoint to annihilation on the polynomial
-  Bargmann–Fock space, `⟨p, X_l·q⟩_B = ⟨∂_l p, q⟩_B`) + the polynomial-level coherent reproducing rule
-  (`coeffFamilyPair_cohCoeff`: `⟨coh α, p⟩_B = p(conj α)`) and creation rule (`cohPair_X_mul`); the
-  completion-level identification stays cited. **G2 (`QIQTH/ModularTransport.lean`)**: the RvD operator
-  transports under unitary conjugacy — `starProj_transport` (projection uniqueness under the ℝ-isometry),
-  `carrierMap_mulI` (`i𝒦` automatic from ℂ-linearity), CAPSTONE `rvdRC_transport` (`R_{S′} = U R_S U⁻¹`);
-  **G3a**: `conjUStarAlgHom` (the continuous conjugation star-hom), `spectrum_conjU`,
-  `conjU_isSelfAdjoint`, and **`cfc_conjU`** — the CONTINUOUS functional-calculus covariance
-  `cfc f (UTU⁻¹) = U (cfc f T) U⁻¹` (Mathlib `map_cfc` riding the hom). **G3b(i)**: `specMeasure_conjU` — the RMK scalar
-  spectral measure transports as a pushforward along the value-preserving spectrum homeomorphism
-  (C_c tests Tietze-extended to ambient symbols, riding `cfc_conjU`). **G3b(ii) — G3 COMPLETE**: `specProj_conjU`
-  (the spectral projections transport), `pvmScalarMeasure_conjU`, `diagInt`/`bilinDiag` transport, and
-  CAPSTONE **`borelFC_conjU`** — the bounded BOREL functional calculus transports under conjugation,
-  `f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹` (the honest scalar-measure route; generator shortcut rejected). **G4 — CAMPAIGN COMPLETE (G1–G5)**:
-  **`modUnitary_transport`** — `Δ^{it}_{S′} = U Δ^{it}_S U⁻¹` under membership-level carrier
-  conjugacy. PAYOFFS, each a deletion or instantiation: **`CHMTransportDataOfCarrierMap`** — J3's
-  `hmodVac` carried field is **DELETED** (the transport data is built from GEOMETRIC carrier
-  conjugacy alone; the honest residue is the geometry itself, plus the massless wedge BW);
-  **`modUnitary_inner_cov`** — the modular correlators are carrier-covariant (the derived datum
-  feeding Gate 3's `Sren_cov` hinge); **`ball_modUnitary_cov`** — the ball-Clausius per-ball modular
-  input replaced by per-ball geometric conjugacy. The unitary covariance of the spectral theorem +
-  Borel calculus (G2–G3) stands as independent tower infrastructure.
+  fixed momentum, linearized, free; NOT QG. Carried: `hJoin`, the calibration; the Bargmann-adjointness
+  grounding of the coherent v-rule was DELETED by the grounding campaign (G1 below).
+
+- **The grounding campaign, G1–G5 — `QIQTH/BargmannPairing.lean` + `QIQTH/ModularTransport.lean`**
+  (**[AF]** std-3; `GROUNDING_PLAN.md` — **CAMPAIGN COMPLETE**). **Carried hinges in multiple landed
+  results deleted at once.**
+  - **G1 (`BargmannPairing.lean`)** — the operator-emergence coherent v-rule GROUNDED:
+    **`bargmann_adjoint`** (creation adjoint to annihilation on the polynomial Bargmann–Fock space,
+    `⟨p, X_l·q⟩_B = ⟨∂_l p, q⟩_B`, by monomial-linearity), the polynomial-level coherent reproducing rule
+    (`coeffFamilyPair_cohCoeff`: `⟨coh α, p⟩_B = p(conj α)`) and creation rule (`cohPair_X_mul`); the
+    completion-level identification stays cited (honest boundary for a polynomial carrier).
+  - **G2** — the RvD operator transports under unitary conjugacy: `starProj_transport` (real orthogonal
+    projections, by the uniqueness characterization under the ℝ-isometry), `carrierMap_mulI` (`i𝒦`
+    automatic from ℂ-linearity), `rvdRC_transport` (`R_{S′} = U R_S U⁻¹`); membership-form carrier
+    hypotheses (`CarrierMap`) so payoff sites never touch `Submodule.map`.
+  - **G3 (the crux)** — **the unitary covariance of the spectral theorem and Borel calculus**, new tower
+    infrastructure: `conjUStarAlgHom` + **`cfc_conjU`** (continuous FC covariance, Mathlib `map_cfc`);
+    **`specMeasure_conjU`** (the RMK scalar measures transport as pushforwards — C_c tests
+    Tietze-extended to ambient symbols); `specProj_conjU` (the spectral projections transport),
+    `pvmScalarMeasure_conjU`, `diagInt`/`bilinDiag` transport; CAPSTONE **`borelFC_conjU`** —
+    `f(UTU⁻¹) = U·(f∘e)(T)·U⁻¹` for bounded measurable symbols (the honest scalar-measure route; the
+    generator-uniqueness shortcut rejected at design time).
+  - **G4 (the payoffs)** — **`modUnitary_transport`**: `Δ^{it}_{S′} = U Δ^{it}_S U⁻¹` under carrier
+    conjugacy. **J3's `hmodVac` carried field DELETED** (`CHMTransportDataOfCarrierMap` — the transport
+    data is built from GEOMETRIC carrier conjugacy alone; residue = the geometry itself + the massless
+    wedge BW); **Gate 3's `Sren_cov` hinge fed by a derived theorem** (`modUnitary_inner_cov` — the
+    modular correlators are carrier-covariant); **the ball-Clausius per-ball modular input replaced by
+    per-ball geometry** (`ball_modUnitary_cov`). ⚠ NOT QG; no wall crossed.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
