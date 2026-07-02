@@ -81,3 +81,8 @@ a genuine failed attempt with the error shown. Check for sibling jobs before eac
   cfc f (U T U⁻¹) = U (cfc f T) U⁻¹ (ambient real symbols, Mathlib map_cfc). NEXT → G3b (the
   scalar-measure/RMK lift to the bounded Borel calculus: specMeasure_conjU via the spectrum
   homeomorph + Tietze test functions, then borelFC_conjU by the inner_borelFC calc chain).
+- **2026-07-03** — **G3b(i) LANDED** (appended to `ModularTransport.lean`, axiom-free std-3,
+  budget 0): `specHomeo` (value-preserving spectrum homeomorphism) + CAPSTONE `specMeasure_conjU` —
+  the RMK scalar measure transports as a pushforward, μ^{UTU⁻¹}_{Ux} = (specHomeo)_* μ^T_x (ext
+  against C_c tests, Tietze-extended to ambient symbols, riding cfc_conjU). NEXT → G3b(ii): the
+  specProj/PVM transport + borelFC_conjU via the inner_borelFC calc chain, then G4.

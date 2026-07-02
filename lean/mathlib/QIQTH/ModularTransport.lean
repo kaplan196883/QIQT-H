@@ -18,10 +18,12 @@
 -/
 import Mathlib
 import QIQTH.StandardSubspaceModular
+import QIQTH.Spectral.SpectralTheorem
 
 namespace QIQTH.ModularTransport
 
 open QIQTH.StandardSubspaceModular ClosedSubmodule Complex
+open scoped CompactlySupported
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 
@@ -216,5 +218,71 @@ theorem cfc_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoi
   have h := StarAlgHomClass.map_cfc (R := ℝ) (conjUStarAlgHom U) f T hf hφ hT hφa
   rw [conjUStarAlgHom_apply] at h
   exact h.symm
+
+/-! ### G3b(i) — the scalar spectral measure transports
+
+The Riesz–Markov scalar measure of the conjugated operator at the transported vector is the pushforward
+of the original along the (value-preserving) spectrum homeomorphism — proved by testing against C_c
+functions, Tietze-extended to ambient symbols so G3a's `cfc_conjU` applies (the binding correction:
+ambient symbols, no dependent spectrum rewrites). -/
+
+/-- The value-preserving spectrum homeomorphism induced by conjugation. -/
+noncomputable def specHomeo (U : H ≃ₗᵢ[ℂ] H) (T : H →L[ℂ] H) :
+    spectrum ℝ T ≃ₜ spectrum ℝ (conjU U T) :=
+  Homeomorph.setCongr (spectrum_conjU U T).symm
+
+@[simp] theorem specHomeo_val (U : H ≃ₗᵢ[ℂ] H) (T : H →L[ℂ] H) (ω : spectrum ℝ T) :
+    ((specHomeo U T ω : spectrum ℝ (conjU U T)) : ℝ) = (ω : ℝ) := rfl
+
+open QIQTH.SpectralTheorem MeasureTheory RCLike CompactlySupportedContinuousMap in
+/-- **G3b(i) — the scalar spectral measure transports:** `μ^{UTU⁻¹}_{Ux} = (specHomeo)_* μ^T_x`. -/
+theorem specMeasure_conjU (U : H ≃ₗᵢ[ℂ] H) {T : H →L[ℂ] H} (hT : IsSelfAdjoint T) (x : H) :
+    specMeasure (conjU U T) (conjU_isSelfAdjoint hT U) (U x)
+      = Measure.map (specHomeo U T) (specMeasure T hT x) := by
+  have hT' := conjU_isSelfAdjoint hT U
+  haveI : CompactSpace (spectrum ℝ T) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact T)
+  haveI : CompactSpace (spectrum ℝ (conjU U T)) :=
+    isCompact_iff_compactSpace.mp (spectrum.isCompact (conjU U T))
+  haveI : IsFiniteMeasure (Measure.map (specHomeo U T) (specMeasure T hT x)) :=
+    Measure.isFiniteMeasure_map _ _
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  obtain ⟨g, hg⟩ := ContinuousMap.exists_restrict_eq
+    (spectrum.isClosed (𝕜 := ℝ) (conjU U T)) f.toContinuousMap
+  have hgOn : ContinuousOn (⇑g) (spectrum ℝ T) := g.continuous.continuousOn
+  have hgOn' : ContinuousOn (⇑g) (spectrum ℝ (conjU U T)) := g.continuous.continuousOn
+  set fT : C_c(spectrum ℝ T, ℝ) :=
+    continuousMapEquiv (f.toContinuousMap.comp
+      ⟨⇑(specHomeo U T), (specHomeo U T).continuous⟩) with hfT
+  have hf_cfc : cfcHom (R := ℝ) hT' f.toContinuousMap = cfc (⇑g) (conjU U T) := by
+    rw [cfc_apply (⇑g) (conjU U T) hT' hgOn']
+    congr 1
+    ext ω
+    rw [← hg]
+    rfl
+  have hfT_cfc : cfcHom (R := ℝ) hT fT.toContinuousMap = cfc (⇑g) T := by
+    rw [cfc_apply (⇑g) T hT hgOn]
+    congr 1
+    ext ω
+    show f.toContinuousMap (specHomeo U T ω) = ((spectrum ℝ T).restrict ⇑g) ω
+    rw [← hg]
+    rfl
+  calc ∫ ω, f ω ∂(specMeasure (conjU U T) hT' (U x))
+      = RCLike.re (inner ℂ (U x) (cfcHom hT' f.toContinuousMap (U x))) :=
+        integral_specMeasure (conjU U T) hT' (U x) f
+    _ = RCLike.re (inner ℂ (U x) (cfc (⇑g) (conjU U T) (U x))) := by rw [hf_cfc]
+    _ = RCLike.re (inner ℂ (U x) (conjU U (cfc (⇑g) T) (U x))) := by
+        rw [cfc_conjU U hT (⇑g) hgOn]
+    _ = RCLike.re (inner ℂ (U x) (U (cfc (⇑g) T x))) := by rw [conjU_apply_U]
+    _ = RCLike.re (inner ℂ x (cfc (⇑g) T x)) := by rw [U.inner_map_map]
+    _ = RCLike.re (inner ℂ x (cfcHom hT fT.toContinuousMap x)) := by rw [hfT_cfc]
+    _ = ∫ ω, fT ω ∂(specMeasure T hT x) := (integral_specMeasure T hT x fT).symm
+    _ = ∫ ω, f (specHomeo U T ω) ∂(specMeasure T hT x) := by
+        refine integral_congr_ae (Filter.Eventually.of_forall fun ω => ?_)
+        rfl
+    _ = ∫ ω, f ω ∂(Measure.map (specHomeo U T) (specMeasure T hT x)) :=
+        (integral_map (specHomeo U T).continuous.aemeasurable
+          f.continuous.aestronglyMeasurable).symm
 
 end QIQTH.ModularTransport

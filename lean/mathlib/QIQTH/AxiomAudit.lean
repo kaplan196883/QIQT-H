@@ -8294,6 +8294,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ModularTransport.spectrum_conjU
 #print axioms QIQTH.ModularTransport.conjU_isSelfAdjoint
 #print axioms QIQTH.ModularTransport.cfc_conjU
+-- G3b(i) (GROUNDING_PLAN.md): the scalar spectral measure transports. specHomeo (the value-preserving
+-- spectrum homeomorphism from spectrum_conjU); CAPSTONE specMeasure_conjU — the Riesz–Markov scalar
+-- measure of the conjugated operator at the transported vector is the PUSHFORWARD of the original:
+-- μ^{UTU⁻¹}_{Ux} = (specHomeo)_* μ^T_x. Proof: ext against C_c tests (finite measures), each test
+-- Tietze-extended to an ambient symbol so G3a's cfc_conjU applies; the calc chain through
+-- integral_specMeasure + conjU_apply_U + inner_map_map + integral_map. Std 3.
+#print axioms QIQTH.ModularTransport.specMeasure_conjU
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

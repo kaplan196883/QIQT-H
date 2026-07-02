@@ -589,8 +589,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `carrierMap_mulI` (`i𝒦` automatic from ℂ-linearity), CAPSTONE `rvdRC_transport` (`R_{S′} = U R_S U⁻¹`);
   **G3a**: `conjUStarAlgHom` (the continuous conjugation star-hom), `spectrum_conjU`,
   `conjU_isSelfAdjoint`, and **`cfc_conjU`** — the CONTINUOUS functional-calculus covariance
-  `cfc f (UTU⁻¹) = U (cfc f T) U⁻¹` (Mathlib `map_cfc` riding the hom). G3b (the Borel lift via the
-  scalar-measure/RMK chain) will carry this to `modUnitary` itself.
+  `cfc f (UTU⁻¹) = U (cfc f T) U⁻¹` (Mathlib `map_cfc` riding the hom). **G3b(i)**: `specMeasure_conjU` — the RMK scalar
+  spectral measure transports as a pushforward along the value-preserving spectrum homeomorphism
+  (C_c tests Tietze-extended to ambient symbols, riding `cfc_conjU`). G3b(ii) (the specProj/PVM/
+  `borelFC` chain) will carry this to `modUnitary` itself.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
