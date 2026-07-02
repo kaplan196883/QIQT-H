@@ -93,8 +93,14 @@ derived, or background independence.** Every theorem: NO `sorry`; `#print axioms
   **`witness_rich`/`witness_conserved`** — a concrete 5-momentum configuration satisfying `RichFamily` +
   conservation (non-vacuity; a kinematic witness, not an on-shell physical process). ⚠ Soft factor + genericity
   carried; NOT the analytic soft theorem.
-- [ ] **C2a — the ball conformal Killing vector algebra.** The CHM kernel weight `(R² − |x|²)/2R` and its conformal
-  Killing structure on the ball — the finite geometry (`K_B = 2π∫_{|x|<R} ((R²−|x|²)/2R) T_{00}` schematically).
+- [x] **C2a — the ball conformal Killing vector algebra ✅** (`QIQTH/CHMKernel.lean`, `QIQTH.CHM`, all [AF] std-3,
+  wired + pinned, budget 0). **`chmWeight`** `β(r)=(R²−r²)/2R` — nonneg on the ball, **vanishes at the entangling
+  sphere**, center `R/2`, factorization `(R−r)(R+r)/2R`. **`chmWeight_edge_slope`** — `β′(R) = −1`: **the unit
+  surface-gravity normalization** (= the Rindler weight's slope; why the SAME `2π` appears in wedge and ball, so
+  the Clausius datum transports C1↔C2). **`cke_tt/tx/xx_diag/xx_off`** — the diamond **conformal Killing equation**
+  `∂_μζ_ν+∂_νζ_μ = −(2t/R)η_{μν}` for `ζ₀=(t²+|x|²−R²)/2R`, `ζᵢ=−tx_i/R`, verified by genuine real calculus
+  (`deriv`/`HasDerivAt`, all component classes). **`zeta0_restrict`** — `ζ₀|_{t=0} = −β`: the flow's local
+  temperature IS the kernel. ⚠ Kernel geometry only; the CHM theorem itself is conformal-QFT input carried at C2b.
 - [ ] **C2b — conditional CHM transport.** Under a **`CHMCompatible`** hypothesis (conformal covariance — CHM is a
   CFT-vacuum statement, NOT generic QFT and not automatic for the free graviton), transport the wedge modular
   Hamiltonian to the ball: `δ⟨K_ball⟩` geometric — the input G1 consumes at every ball. Checkpoint what the
@@ -157,3 +163,7 @@ push via schannel; update this Progress log + `LEAN_RESULTS_INVENTORY.md`. Consu
   decoupling ⟹ Ward ⟹ universal — Weinberg end-to-end at the algebraic level), `ward_of_universal` (converse),
   `witness_rich`/`witness_conserved` (concrete non-vacuity). All [AF] std-3, pinned, budget 0. **Ingredient B is
   COMPLETE.** NEXT → C2a (the ball conformal Killing weight / CHM kernel geometry).
+- **2026-07-02 — C2a ✅ LANDED** (`CHMKernel.lean`): the CHM ball kernel geometry — the weight β(r)=(R²−r²)/2R
+  (nonneg, boundary-vanishing, factorized), the UNIT surface-gravity edge slope β′(R)=−1 (the C1↔C2 2π-consistency),
+  the diamond conformal Killing equation verified by real calculus (all component classes), and ζ₀|_{t=0}=−β.
+  All [AF] std-3, wired + pinned, budget 0. NEXT → C2b (conditional CHM transport under CHMCompatible) → ASM.

@@ -360,6 +360,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   genericity are carried QFT/kinematics inputs; the analytic soft theorem is not claimed. **Ingredient B (universal
   coupling) is COMPLETE.**
 
+- **The bridge, increment C2a — `QIQTH/CHMKernel.lean`** (namespace `QIQTH.CHM`, all **[AF]** std-3;
+  `BRIDGE_PLAN.md`). **The CHM ball kernel geometry.** `chmWeight` `β(r) = (R²−r²)/2R` (the ball modular flow's
+  local inverse temperature): nonneg on the ball (`chmWeight_nonneg`), **vanishes at the entangling sphere**
+  (`chmWeight_boundary` — the flow fixes the edge), center value `R/2`, factorization `(R−r)(R+r)/2R`.
+  **`chmWeight_edge_slope`** — `β′(R) = −1`: **the unit surface-gravity normalization**, exactly the Rindler
+  weight's slope at the wedge edge — why the SAME `2π` appears in the wedge (C1) and ball modular Hamiltonians,
+  so the Clausius datum transports consistently. **`cke_tt`/`cke_tx`/`cke_xx_diag`/`cke_xx_off`** — the diamond
+  **conformal Killing equation** `∂_μζ_ν + ∂_νζ_μ = −(2t/R)·η_{μν}` for `ζ₀=(t²+|x|²−R²)/2R`, `ζᵢ=−t·x_i/R`,
+  verified by genuine real calculus (`deriv`/`HasDerivAt`, all component classes) — the CHM flow is a conformal
+  symmetry of flat space. **`zeta0_restrict`** — `ζ₀|_{t=0} = −β`: the flow's local temperature IS the kernel.
+  ⚠ Kernel GEOMETRY only — the CHM theorem (ball modular Hamiltonian `= 2π∫βT₀₀` for a CFT vacuum) is
+  conformal-QFT input, carried at C2b as `CHMCompatible`; not generic QFT.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

@@ -7948,6 +7948,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SoftGraviton.equivalence_principle
 #print axioms QIQTH.SoftGraviton.witness_rich
 #print axioms QIQTH.SoftGraviton.witness_conserved
+-- BRIDGE C2a (BRIDGE_PLAN.md): the CHM BALL KERNEL geometry. chmWeight β(r)=(R²−r²)/2R (the ball modular flow's
+-- local inverse temperature): nonneg on the ball, VANISHES at the entangling sphere (chmWeight_boundary), center
+-- R/2, factorization (R−r)(R+r)/2R. chmWeight_edge_slope: β′(R) = −1 — THE UNIT SURFACE-GRAVITY NORMALIZATION
+-- (= the Rindler weight's slope; why the SAME 2π appears in wedge and ball ⟹ the Clausius datum transports).
+-- cke_tt/tx/xx_diag/xx_off: the diamond conformal Killing equation ∂_μζ_ν+∂_νζ_μ = −(2t/R)η_{μν} for
+-- ζ₀=(t²+|x|²−R²)/2R, ζᵢ=−tx_i/R — verified by GENUINE real calculus (deriv/HasDerivAt), all component classes.
+-- zeta0_restrict: ζ₀|_{t=0} = −β (the flow's temperature IS the kernel). ⚠ Kernel GEOMETRY only; the CHM theorem
+-- (ball modular Hamiltonian = 2π∫βT₀₀ for a CFT vacuum) is conformal-QFT input carried at C2b. Std 3.
+#print axioms QIQTH.CHM.chmWeight_edge_slope
+#print axioms QIQTH.CHM.chmWeight_nonneg
+#print axioms QIQTH.CHM.cke_tt
+#print axioms QIQTH.CHM.cke_tx
+#print axioms QIQTH.CHM.cke_xx_diag
+#print axioms QIQTH.CHM.cke_xx_off
+#print axioms QIQTH.CHM.zeta0_restrict
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
