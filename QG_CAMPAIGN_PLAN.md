@@ -58,7 +58,7 @@ decisive pass/fail.
 - **I3 — free dispersion Lorentz-defect bound.** For the lattice/QCA dispersion `E_a(p)² = m² + (4/a²)sin²(ap/2)`,
   prove `|E_a(p)² − (m²+p²)| ≤ a²p⁴/12` — the cheap, known pass: defect `~(ap)²`, `α=2`, **no rapidity-independent
   floor**. Lean theorem. (Cheap pass — not yet decisive.)
-- **I4 — the decisive one-loop `Δc²` naturalness test.** A free-fermion chain / QCA Dirac toy: extract `Γ⁽²⁾`,
+- [x] **I4 — the decisive one-loop `Δc²` naturalness test. ✅ EXECUTED 2026-07-02** (GPT-5.5-pro-designed; `scripts/lorentz_stress_test.py`, results `docs/qg_roadmap/LORENTZ_STRESS_TEST_RESULTS.md`): sharp spatial cutoff FAILS (c₀ = g²/12π², unsuppressed, fit vs analytic to 2·10⁻⁸); ALL smooth spatial profiles FAIL (≥ CPSUV constant); fermion channel FAILS (−g²/48π²); covariant O(4) family PASSES (Δc² = 0 by symmetry). Preferred-frame finite capacity is DEAD; the covariant-diamond branch (OP3b) is the sole survivor; the named residual danger = the diamond tip vector u^μ_D. A free-fermion chain / QCA Dirac toy: extract `Γ⁽²⁾`,
   compute `Δc² = Z_s/Z_t − 1` at one loop. **PASS** if `Δc² ~ (E/Λ)^α` (suppressed); **FAIL** if it tends to a
   nonzero `O(g²/16π²)` constant (CPSUV). Python/numerics + a short note. **This is the campaign's pass/fail gate.**
 
