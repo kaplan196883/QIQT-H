@@ -403,4 +403,317 @@ theorem coherent_area {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
   push_cast
   ring
 
+/-! ## Q4 — the Heisenberg flow and the operator wave equation
+
+BINDING (consult): the explicit phase flow `z(t) = exp(+iωt)` (the Heisenberg sign; the Schrödinger flow
+is opposite) implemented as the monomial scaling `X^n ↦ z^{|n|}X^n` (the `aeval (z•X)` algebra map) —
+NO Stone/CLM; ODE statements COEFFICIENTWISE (`OpHasDerivAt` via `MvPolynomial.coeff`) since `Op` carries
+no norm. -/
+
+/-- The raw conjugate quadrature `π_λ = i(a†_λ − a_λ)`. -/
+noncomputable def momRaw (l : Fin 2) : Op := Complex.I • (creat l - annih l)
+
+/-- The Heisenberg phase `z(t) = e^{iωt}`. -/
+noncomputable def zPhase (ω t : ℝ) : ℂ := Complex.exp ((↑(ω * t)) * Complex.I)
+
+theorem zPhase_ne_zero (ω t : ℝ) : zPhase ω t ≠ 0 := Complex.exp_ne_zero _
+
+/-- The monomial scaling `U_z : X_i ↦ z·X_i` (`X^n ↦ z^{|n|}X^n`) — the explicit flow unitary's
+    polynomial avatar. -/
+noncomputable def scaleU (z : ℂ) : Op :=
+  (MvPolynomial.aeval fun i : Fin 2 => z • (MvPolynomial.X i : Fock)).toLinearMap
+
+theorem scaleU_mul (z : ℂ) (p q : Fock) : scaleU z (p * q) = scaleU z p * scaleU z q := by
+  simp only [scaleU, AlgHom.toLinearMap_apply, map_mul]
+
+theorem scaleU_X (z : ℂ) (i : Fin 2) :
+    scaleU z (MvPolynomial.X i : Fock) = z • (MvPolynomial.X i : Fock) := by
+  simp only [scaleU, AlgHom.toLinearMap_apply, MvPolynomial.aeval_X]
+
+theorem scaleU_C (z a : ℂ) : scaleU z (MvPolynomial.C a : Fock) = MvPolynomial.C a := by
+  simp only [scaleU, AlgHom.toLinearMap_apply, MvPolynomial.aeval_C]
+  rfl
+
+theorem scaleU_creat (z : ℂ) (l : Fin 2) (p : Fock) :
+    scaleU z (creat l p) = z • creat l (scaleU z p) := by
+  change scaleU z ((MvPolynomial.X l : Fock) * p) = z • ((MvPolynomial.X l : Fock) * scaleU z p)
+  rw [scaleU_mul, scaleU_X, smul_mul_assoc]
+
+/-- The chain rule for the scaling: `∂_l (U_z p) = z·U_z(∂_l p)`. -/
+theorem annih_scaleU (z : ℂ) (l : Fin 2) (p : Fock) :
+    annih l (scaleU z p) = z • scaleU z (annih l p) := by
+  change MvPolynomial.pderiv l (scaleU z p) = z • scaleU z (MvPolynomial.pderiv l p)
+  induction p using MvPolynomial.induction_on with
+  | C a =>
+    simp [scaleU_C, MvPolynomial.pderiv_C]
+  | add p q hp hq =>
+    simp only [map_add, hp, hq, smul_add]
+  | mul_X p i hp =>
+    by_cases hil : l = i
+    · subst hil
+      simp only [scaleU_mul, scaleU_X, MvPolynomial.pderiv_mul, MvPolynomial.pderiv_X_self,
+        map_smul, map_add, hp, mul_one, MvPolynomial.smul_eq_C_mul, MvPolynomial.pderiv_C,
+        mul_zero, add_zero]
+      ring
+    · simp only [scaleU_mul, scaleU_X, MvPolynomial.pderiv_mul, map_smul, map_add, hp,
+        MvPolynomial.smul_eq_C_mul, MvPolynomial.pderiv_C, mul_zero, add_zero]
+      rw [MvPolynomial.pderiv_X_of_ne (fun h : i = l => hil h.symm)]
+      simp only [mul_zero, map_zero, add_zero, MvPolynomial.smul_eq_C_mul]
+      ring
+
+theorem scaleU_comp (z w : ℂ) (p : Fock) : scaleU z (scaleU w p) = scaleU (z * w) p := by
+  induction p using MvPolynomial.induction_on with
+  | C a => rw [scaleU_C, scaleU_C, scaleU_C]
+  | add p q hp hq => simp only [map_add, hp, hq]
+  | mul_X p i hp =>
+    simp only [scaleU_mul, scaleU_X, map_smul, hp, smul_smul]
+    rw [mul_comm w z]
+
+theorem scaleU_one_eq (p : Fock) : scaleU 1 p = p := by
+  induction p using MvPolynomial.induction_on with
+  | C a => rw [scaleU_C]
+  | add p q hp hq => simp only [map_add, hp, hq]
+  | mul_X p i hp => simp only [scaleU_mul, scaleU_X, hp, one_smul]
+
+/-- The Heisenberg conjugation `A ↦ U_z A U_z⁻¹`. -/
+noncomputable def heisScale (z : ℂ) (A : Op) : Op := scaleU z * A * scaleU z⁻¹
+
+/-- **The Heisenberg phase of creation**: `U_z a† U_z⁻¹ = z·a†`. -/
+theorem heis_creat (z : ℂ) (hz : z ≠ 0) (l : Fin 2) :
+    heisScale z (creat l) = z • creat l := by
+  refine LinearMap.ext fun p => ?_
+  simp only [heisScale, Module.End.mul_apply, LinearMap.smul_apply]
+  rw [scaleU_creat, scaleU_comp, mul_inv_cancel₀ hz, scaleU_one_eq]
+
+/-- **The Heisenberg phase of annihilation**: `U_z a U_z⁻¹ = z⁻¹·a`. -/
+theorem heis_annih (z : ℂ) (hz : z ≠ 0) (l : Fin 2) :
+    heisScale z (annih l) = z⁻¹ • annih l := by
+  refine LinearMap.ext fun p => ?_
+  simp only [heisScale, Module.End.mul_apply, LinearMap.smul_apply]
+  rw [annih_scaleU z⁻¹ l p, map_smul, scaleU_comp, mul_inv_cancel₀ hz, scaleU_one_eq]
+
+/-- The time-evolved quadrature `q_λ(t) = z(t)⁻¹·a_λ + z(t)·a†_λ`. -/
+noncomputable def qModeT (ω t : ℝ) (l : Fin 2) : Op :=
+  (zPhase ω t)⁻¹ • annih l + (zPhase ω t) • creat l
+
+/-- **The Heisenberg flow of the quadrature**: `U_{z(t)} q_λ U_{z(t)}⁻¹ = q_λ(t)` — the time evolution
+    is the DERIVED conjugation by the explicit monomial-scaling flow, not a posited phase. -/
+theorem heis_q (ω t : ℝ) (l : Fin 2) : heisScale (zPhase ω t) (qMode l) = qModeT ω t l := by
+  have hz := zPhase_ne_zero ω t
+  rw [qMode, qModeT]
+  have hadd : heisScale (zPhase ω t) (annih l + creat l)
+      = heisScale (zPhase ω t) (annih l) + heisScale (zPhase ω t) (creat l) := by
+    simp only [heisScale, mul_add, add_mul]
+  rw [hadd, heis_annih _ hz, heis_creat _ hz]
+
+/-- **The harmonic identity**: `q_λ(t) = cos(ωt)·q_λ + sin(ωt)·π_λ`. -/
+theorem qModeT_harmonic (ω t : ℝ) (l : Fin 2) :
+    qModeT ω t l = ((Real.cos (ω * t) : ℝ) : ℂ) • qMode l
+      + ((Real.sin (ω * t) : ℝ) : ℂ) • momRaw l := by
+  rw [qModeT, qMode, momRaw, zPhase]
+  rw [show (Complex.exp ((↑(ω * t)) * Complex.I))⁻¹
+      = Complex.exp ((↑(-(ω * t))) * Complex.I) from by
+    rw [← Complex.exp_neg]
+    congr 1
+    push_cast
+    ring]
+  rw [Complex.exp_mul_I, Complex.exp_mul_I]
+  rw [show Complex.cos (↑(-(ω * t))) = ((Real.cos (ω * t) : ℝ) : ℂ) from by
+      rw [Complex.ofReal_neg, Complex.cos_neg, ← Complex.ofReal_cos],
+    show Complex.sin (↑(-(ω * t))) = -((Real.sin (ω * t) : ℝ) : ℂ) from by
+      rw [Complex.ofReal_neg, Complex.sin_neg, ← Complex.ofReal_sin],
+    show Complex.cos (↑(ω * t)) = ((Real.cos (ω * t) : ℝ) : ℂ) from (Complex.ofReal_cos _).symm,
+    show Complex.sin (↑(ω * t)) = ((Real.sin (ω * t) : ℝ) : ℂ) from (Complex.ofReal_sin _).symm]
+  module
+
+/-! ### The coefficientwise ODE layer and the operator wave equation -/
+
+/-- Coefficientwise operator differentiability (`Op` carries no norm — the binding correction). -/
+def OpHasDerivAt (F : ℝ → Op) (F' : Op) (t : ℝ) : Prop :=
+  ∀ (p : Fock) (n : Fin 2 →₀ ℕ),
+    HasDerivAt (fun s => MvPolynomial.coeff n (F s p)) (MvPolynomial.coeff n (F' p)) t
+
+private theorem hasDerivAt_cos_sin_combo (a b : ℂ) (ω t : ℝ) :
+    HasDerivAt (fun s : ℝ => ((Real.cos (ω * s) : ℝ) : ℂ) * a + ((Real.sin (ω * s) : ℝ) : ℂ) * b)
+      (((ω * -Real.sin (ω * t) : ℝ) : ℂ) * a + ((ω * Real.cos (ω * t) : ℝ) : ℂ) * b) t := by
+  have hlin : HasDerivAt (fun s : ℝ => ω * s) ω t := by
+    simpa using (hasDerivAt_id t).const_mul ω
+  have hc : HasDerivAt (fun s : ℝ => Real.cos (ω * s)) (ω * -Real.sin (ω * t)) t := by
+    have := (Real.hasDerivAt_cos (ω * t)).comp t hlin
+    simpa [mul_comm] using this
+  have hs : HasDerivAt (fun s : ℝ => Real.sin (ω * s)) (ω * Real.cos (ω * t)) t := by
+    have := (Real.hasDerivAt_sin (ω * t)).comp t hlin
+    simpa [mul_comm] using this
+  exact (hc.ofReal_comp.mul_const a).add (hs.ofReal_comp.mul_const b)
+
+theorem opHasDerivAt_cos_sin (A B : Op) (ω t : ℝ) :
+    OpHasDerivAt (fun s => ((Real.cos (ω * s) : ℝ) : ℂ) • A + ((Real.sin (ω * s) : ℝ) : ℂ) • B)
+      (((ω * -Real.sin (ω * t) : ℝ) : ℂ) • A + ((ω * Real.cos (ω * t) : ℝ) : ℂ) • B) t := by
+  intro p n
+  simp only [LinearMap.add_apply, LinearMap.smul_apply, MvPolynomial.coeff_add,
+    MvPolynomial.coeff_smul, smul_eq_mul]
+  exact hasDerivAt_cos_sin_combo _ _ ω t
+
+/-- The velocity field `q̇_λ(t) = −ω sin(ωt)·q_λ + ω cos(ωt)·π_λ`. -/
+noncomputable def qModeTD (ω t : ℝ) (l : Fin 2) : Op :=
+  ((ω * -Real.sin (ω * t) : ℝ) : ℂ) • qMode l + ((ω * Real.cos (ω * t) : ℝ) : ℂ) • momRaw l
+
+/-- The quadrature flow is differentiable with velocity `qModeTD` (coefficientwise). -/
+theorem qModeT_hasDerivAt (ω t : ℝ) (l : Fin 2) :
+    OpHasDerivAt (fun s => qModeT ω s l) (qModeTD ω t l) t := by
+  intro p n
+  have hfun : (fun s => MvPolynomial.coeff n ((qModeT ω s l) p))
+      = fun s => MvPolynomial.coeff n
+        (((((Real.cos (ω * s) : ℝ) : ℂ) • qMode l
+          + ((Real.sin (ω * s) : ℝ) : ℂ) • momRaw l)) p) := by
+    funext s
+    rw [qModeT_harmonic]
+  rw [hfun]
+  exact opHasDerivAt_cos_sin (qMode l) (momRaw l) ω t p n
+
+private theorem qModeTD_eq_combo (ω s : ℝ) (l : Fin 2) :
+    qModeTD ω s l = ((Real.cos (ω * s) : ℝ) : ℂ) • (((ω : ℝ) : ℂ) • momRaw l)
+      + ((Real.sin (ω * s) : ℝ) : ℂ) • ((-(ω : ℝ) : ℂ) • qMode l) := by
+  rw [qModeTD]
+  push_cast
+  module
+
+/-- **Q4 CAPSTONE (per mode) — the operator WAVE EQUATION**: `q̈_λ(t) = −ω²·q_λ(t)`, coefficientwise. -/
+theorem qModeT_wave (ω t : ℝ) (l : Fin 2) :
+    OpHasDerivAt (fun s => qModeTD ω s l) (((-(ω ^ 2) : ℝ) : ℂ) • qModeT ω t l) t := by
+  have hval : (((ω * -Real.sin (ω * t) : ℝ) : ℂ) • (((ω : ℝ) : ℂ) • momRaw l)
+      + ((ω * Real.cos (ω * t) : ℝ) : ℂ) • ((-(ω : ℝ) : ℂ) • qMode l))
+      = ((-(ω ^ 2) : ℝ) : ℂ) • qModeT ω t l := by
+    rw [qModeT_harmonic]
+    push_cast
+    module
+  intro p n
+  have hfun : (fun s => MvPolynomial.coeff n ((qModeTD ω s l) p))
+      = fun s => MvPolynomial.coeff n
+        (((((Real.cos (ω * s) : ℝ) : ℂ) • (((ω : ℝ) : ℂ) • momRaw l)
+          + ((Real.sin (ω * s) : ℝ) : ℂ) • ((-(ω : ℝ) : ℂ) • qMode l))) p) := by
+    funext s
+    rw [qModeTD_eq_combo]
+  rw [hfun, ← hval]
+  exact opHasDerivAt_cos_sin _ _ ω t p n
+
+/-- Sums of differentiable operator families are differentiable. -/
+theorem OpHasDerivAt.sum2 {F : Fin 2 → ℝ → Op} {F' : Fin 2 → Op} {t : ℝ}
+    (h : ∀ l, OpHasDerivAt (F l) (F' l) t) :
+    OpHasDerivAt (fun s => ∑ l, F l s) (∑ l, F' l) t := by
+  intro p n
+  have hfun : (fun s => MvPolynomial.coeff n ((∑ l, F l s) p))
+      = fun s => ∑ l, MvPolynomial.coeff n ((F l s) p) := by
+    funext s
+    rw [LinearMap.sum_apply, MvPolynomial.coeff_sum]
+  rw [hfun, LinearMap.sum_apply, MvPolynomial.coeff_sum]
+  have hsum := HasDerivAt.sum fun l (_ : l ∈ Finset.univ) => h l p n
+  have hfn : (∑ l, fun s => MvPolynomial.coeff n ((F l s) p))
+      = fun s => ∑ l, MvPolynomial.coeff n ((F l s) p) := by
+    funext s
+    simp [Finset.sum_apply]
+  rwa [hfn] at hsum
+
+theorem OpHasDerivAt.const_smul {F : ℝ → Op} {F' : Op} {t : ℝ} (c : ℂ)
+    (h : OpHasDerivAt F F' t) : OpHasDerivAt (fun s => c • F s) (c • F') t := by
+  intro p n
+  have hfun : (fun s => MvPolynomial.coeff n ((c • F s) p))
+      = fun s => c * MvPolynomial.coeff n (F s p) := by
+    funext s
+    rw [LinearMap.smul_apply, MvPolynomial.coeff_smul, smul_eq_mul]
+  rw [hfun, LinearMap.smul_apply, MvPolynomial.coeff_smul, smul_eq_mul]
+  exact (h p n).const_mul c
+
+/-- The time-evolved metric operator `ĥ_{μν}(t)`. -/
+noncomputable def hHatT (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (ω t : ℝ) (μ ν : Fin 4) : Op :=
+  ∑ l, ((pol l μ ν : ℝ) : ℂ) • qModeT ω t l
+
+/-- Its velocity field. -/
+noncomputable def hHatTD (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (ω t : ℝ) (μ ν : Fin 4) : Op :=
+  ∑ l, ((pol l μ ν : ℝ) : ℂ) • qModeTD ω t l
+
+theorem hHatT_hasDerivAt (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (ω t : ℝ) (μ ν : Fin 4) :
+    OpHasDerivAt (fun s => hHatT pol ω s μ ν) (hHatTD pol ω t μ ν) t :=
+  OpHasDerivAt.sum2 fun l => OpHasDerivAt.const_smul _ (qModeT_hasDerivAt ω t l)
+
+/-- **Q4 CAPSTONE — the operator wave equation for the metric**: `ḧ_{μν}(t) + ω²·ĥ_{μν}(t) = 0`,
+    coefficientwise — the graviton wave equation as an operator identity of the emergence map. -/
+theorem hHatT_wave (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (ω t : ℝ) (μ ν : Fin 4) :
+    OpHasDerivAt (fun s => hHatTD pol ω s μ ν) (((-(ω ^ 2) : ℝ) : ℂ) • hHatT pol ω t μ ν) t := by
+  have h := OpHasDerivAt.sum2 (t := t)
+    (F := fun l s => ((pol l μ ν : ℝ) : ℂ) • qModeTD ω s l)
+    (F' := fun l => ((pol l μ ν : ℝ) : ℂ) • (((-(ω ^ 2) : ℝ) : ℂ) • qModeT ω t l))
+    (fun l => OpHasDerivAt.const_smul _ (qModeT_wave ω t l))
+  have heq : (∑ l, ((pol l μ ν : ℝ) : ℂ) • (((-(ω ^ 2) : ℝ) : ℂ) • qModeT ω t l))
+      = ((-(ω ^ 2) : ℝ) : ℂ) • hHatT pol ω t μ ν := by
+    rw [hHatT, Finset.smul_sum]
+    exact Finset.sum_congr rfl fun l _ => smul_comm _ _ _
+  rw [← heq]
+  exact h
+
+/-! ### The time-separated area commutator -/
+
+open QIQTH.AreaMap in
+/-- The time-evolved area observable `Â_Σ(t)`. -/
+noncomputable def areaOpT {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (ω t : ℝ) : Op :=
+  ∑ l, ((areaVar S (pol l) : ℝ) : ℂ) • qModeT ω t l
+
+open QIQTH.AreaMap in
+theorem areaOpT_eq_linObs {ι : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (ω t : ℝ) :
+    areaOpT pol S ω t
+      = linObs (fun l => (zPhase ω t)⁻¹ * ((areaVar S (pol l) : ℝ) : ℂ))
+        (fun l => (zPhase ω t) * ((areaVar S (pol l) : ℝ) : ℂ)) := by
+  rw [areaOpT, linObs]
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [qModeT, smul_add, smul_smul, smul_smul, mul_comm ((areaVar S (pol l) : ℝ) : ℂ),
+    mul_comm ((areaVar S (pol l) : ℝ) : ℂ)]
+
+private theorem exp_diff_sin (θ : ℝ) :
+    Complex.exp ((↑θ) * Complex.I) - Complex.exp ((↑(-θ)) * Complex.I)
+      = 2 * Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
+  rw [Complex.exp_mul_I, Complex.exp_mul_I,
+    show Complex.cos (↑(-θ)) = Complex.cos (↑θ) from by rw [Complex.ofReal_neg, Complex.cos_neg],
+    show Complex.sin (↑(-θ)) = -Complex.sin (↑θ) from by rw [Complex.ofReal_neg, Complex.sin_neg],
+    ← Complex.ofReal_sin]
+  ring
+
+open QIQTH.AreaMap in
+/-- **Q4 CAPSTONE (temporal) — the TIME-SEPARATED area commutator:**
+    `[Â_Σ(t), Â_Σ′(s)] = 2i·sin(ω(s−t))·areaPair(Σ,Σ′)·1` — vanishing at equal times (the honest Q2
+    statement) and oscillating with the light-crossing phase in between: the causal structure of the
+    quantized area observables. -/
+theorem comm_areaT {ι κ : Type*} (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (S : ScreenSurface ι) (S' : ScreenSurface κ) (ω t s : ℝ) :
+    comm (areaOpT pol S ω t) (areaOpT pol S' ω s)
+      = (2 * Complex.I * ((Real.sin (ω * (s - t)) : ℝ) : ℂ)
+          * ((areaPair pol S S' : ℝ) : ℂ)) • (1 : Op) := by
+  have hz1 : zPhase ω s * (zPhase ω t)⁻¹
+      = Complex.exp ((↑(ω * (s - t))) * Complex.I) := by
+    rw [zPhase, zPhase, ← Complex.exp_neg, ← Complex.exp_add]
+    congr 1
+    push_cast
+    ring
+  have hz2 : zPhase ω t * (zPhase ω s)⁻¹
+      = Complex.exp ((↑(-(ω * (s - t)))) * Complex.I) := by
+    rw [zPhase, zPhase, ← Complex.exp_neg, ← Complex.exp_add]
+    congr 1
+    push_cast
+    ring
+  rw [areaOpT_eq_linObs, areaOpT_eq_linObs, comm_linObs, areaPair]
+  congr 1
+  push_cast
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [show (zPhase ω t)⁻¹ * ((areaVar S (pol l) : ℝ) : ℂ)
+        * (zPhase ω s * ((areaVar S' (pol l) : ℝ) : ℂ))
+        - (zPhase ω s)⁻¹ * ((areaVar S' (pol l) : ℝ) : ℂ)
+          * (zPhase ω t * ((areaVar S (pol l) : ℝ) : ℂ))
+      = (zPhase ω s * (zPhase ω t)⁻¹ - zPhase ω t * (zPhase ω s)⁻¹)
+        * (((areaVar S (pol l) : ℝ) : ℂ) * ((areaVar S' (pol l) : ℝ) : ℂ)) from by ring,
+    hz1, hz2, exp_diff_sin]
+  push_cast
+  ring
+
 end QIQTH.OperatorEmergence

@@ -8237,6 +8237,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperatorEmergence.areaExpr_toOp
 #print axioms QIQTH.OperatorEmergence.coherent_hHat
 #print axioms QIQTH.OperatorEmergence.coherent_area
+-- Q4 (OPERATOR_EMERGENCE_PLAN.md): the Heisenberg flow + the operator wave equation. Per the binding
+-- corrections: the flow is the EXPLICIT monomial scaling U_z = aeval(z•X) (no Stone/CLM); heis_annih/
+-- heis_creat/heis_q — the time evolution is the DERIVED conjugation U_z q U_z⁻¹ = qModeT (z = e^{+iωt},
+-- the Heisenberg sign), with the chain rule annih_scaleU proven by induction; qModeT_harmonic (the
+-- cos/sin quadrature form); OpHasDerivAt (coefficientwise — Op has no norm); qModeT_wave + hHatT_wave —
+-- THE OPERATOR WAVE EQUATION ḧ + ω²ĥ = 0 coefficientwise; comm_areaT — the TIME-SEPARATED area
+-- commutator [Â_Σ(t), Â_Σ'(s)] = 2i·sin(ω(s−t))·areaPair·1 (vanishing at equal times, per the honest Q2
+-- structure). Std 3.
+#print axioms QIQTH.OperatorEmergence.heis_q
+#print axioms QIQTH.OperatorEmergence.qModeT_harmonic
+#print axioms QIQTH.OperatorEmergence.qModeT_hasDerivAt
+#print axioms QIQTH.OperatorEmergence.qModeT_wave
+#print axioms QIQTH.OperatorEmergence.hHatT_wave
+#print axioms QIQTH.OperatorEmergence.comm_areaT
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

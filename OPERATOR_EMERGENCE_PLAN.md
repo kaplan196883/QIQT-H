@@ -41,7 +41,7 @@ the operator wave equation, and the code join at expectation level — Tier-1 it
   **`coherent_area`** (`⟨α|Â(Σ)|α⟩ = areaVar Σ (classicalH α)`) — the CLASSICAL emergence map is the
   coherent shadow of the operator map. (Watch the PowerSeries/polynomial domain trap — an expression layer
   for linObs if needed.)
-- [ ] **Q4 — the Heisenberg flow + the operator wave equation.** `heisScale z` (monomial scaling `X^n ↦ z^{|n|}X^n`);
+- [x] **Q4 — the Heisenberg flow + the operator wave equation.** ✅ DONE (in `QIQTH/OperatorEmergence.lean`). `heisScale z` (monomial scaling `X^n ↦ z^{|n|}X^n`);
   `heis_annih`/`heis_creat`/`heis_q` (phases `z⁻¹`, `z`); `qModeT ω t`; the harmonic identity
   **`qModeT = cos(ωt)•qMode + sin(ωt)•πRaw`**; `OpHasDerivAt` (coefficientwise);
   **`hHatT_wave`** — `d²/dt² ĥ_t + ω²ĥ_t = 0` coefficientwise; the time-separated area commutator
@@ -82,3 +82,9 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose the key).
   product = named follow-on). CAPSTONES: `coherent_hHat` (⟨α|ĥ|α⟩ = classicalH(α) = Σ 2Re(α_λ)·pol^λ) and
   `coherent_area` (⟨α|Â(Σ)|α⟩ = areaVar(Σ, classicalH α) — the exact δA the assembled bridge consumes):
   the CLASSICAL emergence map is the coherent shadow of the operator map. NEXT → Q4.
+- **2026-07-03** — **Q4 LANDED** (appended to `OperatorEmergence.lean`, axiom-free std-3, budget 0): the
+  explicit monomial-scaling flow scaleU = aeval(z•X) with the DERIVED Heisenberg phases (heis_annih via the
+  chain-rule induction annih_scaleU; heis_creat; heis_q: U_z q U_z⁻¹ = qModeT); qModeT_harmonic (cos/sin
+  form); the coefficientwise ODE layer OpHasDerivAt (+ sum2/const_smul closure); CAPSTONES qModeT_wave +
+  hHatT_wave (the operator wave equation ḧ + ω²ĥ = 0, coefficientwise) and comm_areaT (the time-separated
+  area commutator 2i·sin(ω(s−t))·areaPair·1, vanishing at equal times). NEXT → Q5.

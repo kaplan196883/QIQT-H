@@ -565,7 +565,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   adjointness, cited; the polynomial Bargmann inner product = named follow-on); CAPSTONES
   **`coherent_hHat`** (`⟨α|ĥ|α⟩ = classicalH(α) = Σ_λ 2Re(α_λ)·pol^λ`) and **`coherent_area`**
   (`⟨α|Â(Σ)|α⟩ = areaVar(Σ, classicalH α)` — the exact `δA` input the assembled bridge consumes): **the
-  classical emergence map is the coherent shadow of the operator map.** Q4–Q5 in progress.
+  classical emergence map is the coherent shadow of the operator map.** **Q4 LANDED**: the explicit
+  monomial-scaling flow (`scaleU = aeval(z•X)`, no Stone) with the DERIVED Heisenberg phases
+  (`heis_annih`/`heis_creat`/`heis_q` — `U_z q U_z⁻¹ = qModeT`, the chain rule `annih_scaleU` by
+  induction); `qModeT_harmonic`; the coefficientwise ODE layer `OpHasDerivAt`; CAPSTONES **`qModeT_wave`**
+  + **`hHatT_wave`** — the operator WAVE EQUATION `ḧ + ω²ĥ = 0`, coefficientwise (the graviton wave
+  equation as an operator identity of the emergence map) — and **`comm_areaT`** — the time-separated area
+  commutator `[Â_Σ(t), Â_Σ′(s)] = 2i·sin(ω(s−t))·areaPair·1` (vanishing at equal times, per the honest
+  Q2 structure). Q5 in progress.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
