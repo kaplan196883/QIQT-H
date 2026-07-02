@@ -402,6 +402,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ingredient D (background independence, nonlinear completion, area law from counting, value of `G`) is the cited
   open frontier. Linearized, free, flat.
 
+- **Earns-gravity E1 — `QIQTH/FreeFieldWedgePackage.lean`** (`QIQTH.EarnGravity`, **[AF]** std-3;
+  `MICROTHEORY_EARNS_GRAVITY_PLAN.md`). **BW discharged into the bridge for the free field:**
+  `freeFieldWedgePackage` — the C1 `WedgeBoostPackage.hBW` identification is a THEOREM here (wired from the
+  unconditional one-particle Bisognano–Wichmann), for every state; `freeField_clausius_unconditional` — the wedge
+  Clausius datum `δ⟨K_boost⟩ = −δS` forced with **no external BW premise** (domain/spectral conditions remain).
+  ⚠ Free field, positive mass, nice wedge; the Clausius/area law and `G` stay the separate carried inputs.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

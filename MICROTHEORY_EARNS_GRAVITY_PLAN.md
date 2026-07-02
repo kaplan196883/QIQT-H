@@ -14,7 +14,7 @@ std-3, budget 0, one commit each, honest labels.
 
 ## Increments
 
-- [ ] **E1 — BW discharged into the bridge (the free-field wedge package).**
+- [x] **E1 ✅ LANDED (`QIQTH/FreeFieldWedgePackage.lean`, [AF] std-3, wired+pinned, budget 0) — BW discharged into the bridge (the free-field wedge package).**
   HELD: `oneParticleBW_niceWedge_unconditional` (Fock/CyclicWitness:701) — `∀ t, modUnitary S t = V t` at the
   OPERATOR level for the free-field nice wedge (`V t = boostUnitary (2πt)`); `WedgeBoostPackage` (WedgeBoostClausius)
   needs only the statewise `hBW`.
@@ -78,3 +78,4 @@ pins; wire `QIQTH.lean` for new modules; ONE commit on main + `Co-Authored-By: C
   `bridge_firstLaw_iff_einstein.mp`. Add the EXPLICIT sign adapter between `δS = δ⟨K_σ⟩`
   (`finiteCorner_firstLaw`) and the Clausius form `δ⟨K⟩ = −δS` (K_boost = −K_σ orientation) — never implicit.
   E3/E4 capstone claims BLOCKED until the scaling + universal-ray/sign edits are in the code.
+- **2026-07-02 — E1 ✅ LANDED**: freeFieldWedgePackage (hBW = theorem via oneParticleBW_niceWedge_unconditional) + freeField_clausius_unconditional (Clausius datum forced, NO BW premise). NEXT → E2.

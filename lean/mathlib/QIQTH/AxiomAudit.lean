@@ -7988,6 +7988,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BridgeASM.rayProbe_separating
 #print axioms QIQTH.BridgeASM.bridge_firstLaw_iff_einstein
 #print axioms QIQTH.BridgeASM.bridge_conditional
+-- E1 (MICROTHEORY_EARNS_GRAVITY_PLAN.md): BW DISCHARGED into the bridge for the free field. freeFieldWedgePackage:
+-- the geometric boost V_t = boostUnitary(2πt) satisfies WedgeBoostPackage.hBW as a THEOREM (via the unconditional
+-- one-particle Bisognano–Wichmann), for every state. freeField_clausius_unconditional: the wedge Clausius datum
+-- δ⟨K_boost⟩ = −δS FORCED with NO external BW premise (only domain/spectral regularity). One carried input of the
+-- bridge deleted for the free field. ⚠ Free field, positive mass, nice wedge; area law + G stay carried. Std 3.
+#print axioms QIQTH.EarnGravity.freeFieldWedgePackage
+#print axioms QIQTH.EarnGravity.freeField_clausius_unconditional
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).
