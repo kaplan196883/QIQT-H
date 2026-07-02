@@ -8002,6 +8002,17 @@ namespace QIQTH.AxiomAudit
 -- metric. ⚠ Pointwise tensor reconstruction in a basis, NOT a smooth global metric; symmetry required. Std 3.
 #print axioms QIQTH.AreaMap.reconstruct_areaVar
 #print axioms QIQTH.AreaMap.reconstruct_unique
+-- E3 (MICROTHEORY_EARNS_GRAVITY_PLAN.md): calibrated_entanglement_cut_area_law — the Strominger-shape join,
+-- in-model, wEnt formulation. screen_cut_eq: the cut-indexing lemma (Track C's directed cut of the canonical
+-- two-layer screen graph = the link sum; no double counting). inducedScreenArea := 4G·cut(wEnt,S) — the area
+-- INDUCED from the calibrated entanglement cut, NO separate areaWt label. calibrated_entanglement_cut_area_law:
+-- under the carried local calibration log D_e = wEnt e, log #microstates = screenArea/(4G).
+-- uniform_realizes_area_law: the maximum-entropy (uniform) record REALIZES the count (Jacobson equilibrium).
+-- ⚠ NOT a derivation of area from entanglement — the calibration carries the physics; the no-calibration guard
+-- (codeCap_unbounded_at_fixed_area) stays in force; finite/model level, G > 0. Std 3.
+#print axioms QIQTH.EarnGravity.screen_cut_eq
+#print axioms QIQTH.EarnGravity.calibrated_entanglement_cut_area_law
+#print axioms QIQTH.EarnGravity.uniform_realizes_area_law
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

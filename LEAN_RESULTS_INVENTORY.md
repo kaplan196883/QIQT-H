@@ -417,6 +417,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`reconstruct_unique`** — the area data determines the metric. ⚠ Pointwise tensor reconstruction in a chosen
   basis, NOT a smooth global metric field; symmetry required; linearized, finite/model level.
 
+- **Earns-gravity E3 — `QIQTH/CalibratedAreaLaw.lean`** (`QIQTH.EarnGravity`, **[AF]** std-3;
+  `MICROTHEORY_EARNS_GRAVITY_PLAN.md`). **`calibrated_entanglement_cut_area_law` — the Strominger-shape join,
+  in-model.** `screen_cut_eq` (the verifier-required cut-indexing lemma: Track C's directed `cut` of the canonical
+  two-layer screen graph = the link sum, no double counting); `inducedScreenArea := 4G·cut(wEnt,S)` — the area
+  **INDUCED** from the calibrated entanglement cut (the separate `areaWt` label deleted); the capstone — under the
+  carried local calibration `log D_e = wEnt e`: **`log #microstates = screenArea/(4G)`** (count and geometry as
+  two computations of one calibrated weight family); `uniform_realizes_area_law` — the maximum-entropy (uniform)
+  record realizes the count (Jacobson's equilibrium regime, via `shannon_uniform_eq_log_card`). ⚠ **NOT a
+  derivation of area from entanglement** — the calibration carries the physical content (deleting it = continuum
+  trace + background independence); the no-calibration guard (`codeCap_unbounded_at_fixed_area`) stays in force;
+  finite/model level; `G > 0`.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

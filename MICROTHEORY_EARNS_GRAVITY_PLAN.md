@@ -30,7 +30,7 @@ std-3, budget 0, one commit each, honest labels.
   `reconstruct (fun v => areaVar (raySurf v) h) = h` for symmetric `h` (THE METRIC IS A FUNCTION OF THE CODE'S
   AREA DATA — the A2 map inverted), and `reconstruct_unique` (via `area_probes_separate`). The emergent `h` is
   then *defined* from area measurements; A1 (`einsteinSymbol`) applies to it verbatim.
-- [ ] **E3 — the in-model area law from entanglement counting (the join).**
+- [x] **E3 ✅ LANDED (`QIQTH/CalibratedAreaLaw.lean`, [AF] std-3, wired+pinned, budget 0) — the in-model area law from entanglement counting (the join).**
   HELD: count side `shannon_le_log_card`/`vonNeumannEntropy_le_log_card` (+ max-entropy equality at uniform);
   geometry side Track C `cut` + `entropy_le_cut` (EmergentSpacetime:214, the finite RT `S_vN ≤ cut`);
   code side `area_law_of_packing`/`area_law_saturation` (equality in the tight sector); coefficient
@@ -80,3 +80,4 @@ pins; wire `QIQTH.lean` for new modules; ONE commit on main + `Co-Authored-By: C
   E3/E4 capstone claims BLOCKED until the scaling + universal-ray/sign edits are in the code.
 - **2026-07-02 — E1 ✅ LANDED**: freeFieldWedgePackage (hBW = theorem via oneParticleBW_niceWedge_unconditional) + freeField_clausius_unconditional (Clausius datum forced, NO BW premise). NEXT → E2.
 - **2026-07-02 — E2 ✅ LANDED**: the explicit decoder (reconstruct: h_ii=2A(e_i), h_ij=A(e_i+e_j)−A(e_i)−A(e_j)); reconstruct_areaVar (the metric IS a function of the code's area data, A2 inverted) + reconstruct_unique. Pointwise, basis-level, symmetry required (verifier labels). NEXT → E3.
+- **2026-07-02 — E3 ✅ LANDED**: calibrated_entanglement_cut_area_law (wEnt formulation per the verifier: screen_cut_eq cut-indexing lemma; inducedScreenArea := 4G·cut(wEnt,S); log #microstates = screenArea/4G under the carried calibration log D_e = wEnt e; uniform_realizes_area_law equilibrium witness; guard kept). NEXT → E4.
