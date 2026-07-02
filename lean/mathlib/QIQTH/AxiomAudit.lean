@@ -8111,6 +8111,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.finiteCorner_pos
 #print axioms QIQTH.TypeIITrace.finiteCorner_tau_trace
 #print axioms QIQTH.TypeIITrace.finiteCorner_tau_pos
+-- J2 (HYPOTHESIS_DELETION_PLAN.md): the CHM symbol probe + bridge refactor. chmRadialMass3_eq: the CHM ball
+-- kernel's radial mass ∫₀^R 4πr²β_R(r)dr = 4πR⁴/15 (one-variable calculus). CHMSymbolProbe3_eq /
+-- _einstein_eq_areaVar: the mass-normalized kernel pairing (pure algebraic symbol level, no plane-wave phase)
+-- EQUALS the ray area probe. bridge_conditional_probe: the assembly consuming the DERIVABLE probe — the carried
+-- Iyer–Wald input hIW FACTORS as (deficit = kernel probe)∘(kernel probe = areaVar); the second factor is now a
+-- THEOREM; the residual carried input is hDeficit (the FGHMVR physics, stated once). HYPOTHESIS SHRUNK:
+-- hIW → hDeficit. NOT a derivation of gravity; linearized, free, flat. Std 3.
+#print axioms QIQTH.CHM.chmRadialMass3_eq
+#print axioms QIQTH.CHM.chmRadialMass3_pos
+#print axioms QIQTH.CHM.CHMSymbolProbe3_eq
+#print axioms QIQTH.CHM.CHMSymbolProbe3_einstein_eq_areaVar
+#print axioms QIQTH.CHM.bridge_conditional_probe
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

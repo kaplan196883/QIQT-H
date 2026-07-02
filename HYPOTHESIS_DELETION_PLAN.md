@@ -39,7 +39,7 @@ formal-Bianchi form (J4).
   `finiteCornerEigenTerm` family: `eigen_tau_trace` and `eigen_tau_star_mul_nonneg` hold with **NO matter
   hypotheses** — the constructed trace's laws unconditional in a concrete model. (General PosDef ρ via unitary
   eigenbasis transport = follow-on.)
-- [ ] **J2 — the CHM symbol probe + bridge refactor.** `chmRadialMass3 R := ∫₀^R 4πr²·chmWeight R r` with
+- [x] **J2 — the CHM symbol probe + bridge refactor.** ✅ DONE (`QIQTH/CHMSymbolProbe.lean`; hIW SHRUNK to hDeficit). `chmRadialMass3 R := ∫₀^R 4πr²·chmWeight R r` with
   **`chmRadialMass3_eq`** (`= 4πR⁴/15`, one-variable calculus); the normalized probe `CHMSymbolProbe3` and
   **`CHMSymbolProbe3_einstein_eq_areaVar`** — the kernel-weighted symbol pairing EQUALS the ray-probe pairing
   `areaVar (raySurf v) (einsteinSymbol k h)`. Then the REFACTOR: a bridge-assembly variant
@@ -74,3 +74,10 @@ Consults: `mcp__OpenAI__ask` gpt-5.5-pro.
   eigen law `sigmaDiag_single`. Capstones `finiteCorner_tau_trace` + `finiteCorner_tau_pos`: the W3b trace laws
   hold on the `finiteCornerTerm` family with NO matter hypotheses. HYPOTHESES DELETED (for the concrete model):
   hkms, hfreq, hpos. Carried still: the vN closure; general PosDef rho = follow-on. NEXT → J2.
+- **2026-07-02** — **J2 LANDED** (`CHMSymbolProbe.lean`, axiom-free std-3, budget 0): `chmRadialMass3_eq`
+  (the CHM kernel's radial mass = 4 pi R^4/15, one-variable calculus), `CHMSymbolProbe3_eq` +
+  `CHMSymbolProbe3_einstein_eq_areaVar` (the mass-normalized kernel pairing = the ray area probe, at the pure
+  algebraic symbol level per the binding correction), and the REFACTOR `bridge_conditional_probe`: the carried
+  Iyer–Wald input FACTORS as (deficit = kernel probe) . (kernel probe = areaVar); the second factor is now a
+  THEOREM; the residual carried input is hDeficit (the FGHMVR physics, stated once). HYPOTHESIS SHRUNK:
+  hIW → hDeficit. NEXT → J3.

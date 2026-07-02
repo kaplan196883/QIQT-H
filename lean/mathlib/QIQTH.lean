@@ -51,6 +51,7 @@ import QIQTH.SoftGraviton
 import QIQTH.CHMKernel
 import QIQTH.BallClausius
 import QIQTH.BridgeAssembly
+import QIQTH.CHMSymbolProbe
 import QIQTH.FreeFieldWedgePackage
 import QIQTH.AreaDecoder
 import QIQTH.CalibratedAreaLaw

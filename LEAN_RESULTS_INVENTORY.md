@@ -402,6 +402,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ingredient D (background independence, nonlinear completion, area law from counting, value of `G`) is the cited
   open frontier. Linearized, free, flat.
 
+- **The joins, J2 — `QIQTH/CHMSymbolProbe.lean`** (`QIQTH.CHM`, **[AF]** std-3; `HYPOTHESIS_DELETION_PLAN.md`).
+  **The CHM kernel-moment normalization + the bridge refactor — the Iyer–Wald input SHRUNK.**
+  **`chmRadialMass3_eq`** — the radial mass of the C2a ball kernel, `∫₀^R 4πr²·β_R(r) dr = 4πR⁴/15`
+  (one-variable calculus, `β_R(r) = (R²−r²)/2R`); `chmRadialMass3_pos`. **`CHMSymbolProbe3`** — the
+  kernel-weighted symbol pairing at the pure algebraic symbol level (constant radial density, no plane-wave
+  phase), normalized by the kernel mass; **`CHMSymbolProbe3_eq`** / **`CHMSymbolProbe3_einstein_eq_areaVar`** —
+  it EQUALS the ray area probe `areaVar (raySurf v)`. **`bridge_conditional_probe`** — the assembly consuming
+  the DERIVABLE probe: the carried `hIW` FACTORS as (physical deficit = kernel probe) ∘ (kernel probe =
+  areaVar); the second factor is now a **theorem**; the residual carried input is `hDeficit` — the
+  identification of the physical first-law deficit with the CHM kernel probe, stated once (the FGHMVR content,
+  not derivable from the held pieces). **HYPOTHESIS SHRUNK: hIW → hDeficit.** ⚠ Conditional; linearized, free,
+  flat; NOT a derivation of gravity.
+
 - **Earns-gravity E1 — `QIQTH/FreeFieldWedgePackage.lean`** (`QIQTH.EarnGravity`, **[AF]** std-3;
   `MICROTHEORY_EARNS_GRAVITY_PLAN.md`). **BW discharged into the bridge for the free field:**
   `freeFieldWedgePackage` — the C1 `WedgeBoostPackage.hBW` identification is a THEOREM here (wired from the
