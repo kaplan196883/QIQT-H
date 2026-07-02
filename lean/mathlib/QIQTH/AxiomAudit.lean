@@ -8368,6 +8368,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Keystone.tauCount_conj
 #print axioms QIQTH.Keystone.tau0_dual_scaled
 #print axioms QIQTH.Keystone.K5_dual_covariant_count
+-- K1 (KEYSTONE_PLAN.md): the operator packaging. clockMul (multiplication by a bounded measurable
+-- symbol on L²(ℝ;H) — the dualPhase construction generalized); clockMul_comp (the product law
+-- M_g∘M_g' = M_{gg'}); CAPSTONE clockTransl_clockMul — the WEYL COVARIANCE λ_t∘M_g = M_{g(·+t)}∘λ_t
+-- (the operator half of the shift/modulation structure); repMonomial — the represented core monomial
+-- π(a)·λ_t·M_F as a genuine continuous operator (its data-level trace = the held W3a tauMonomial;
+-- K2b's count evaluates these at t = 0). Packaging only — the count was already proven at K2b. Std 3.
+#print axioms QIQTH.KeystoneOperator.clockMul_comp
+#print axioms QIQTH.KeystoneOperator.clockTransl_clockMul
+#print axioms QIQTH.KeystoneOperator.repMonomial
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

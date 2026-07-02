@@ -44,7 +44,7 @@ OF THE HELD CROSSED-PRODUCT CORE; the continuum walls are named, permanent parts
   DUAL-SCALING law `tau0_dual_scaled_dim` (`τ₀(θ_s P) = e^{−s}τ₀(P)`, from the held exact scaling) +
   **`K5_dual_covariant_count`** (`S(θ_s·) = S(·) − s` — covariance with transported area, NOT naive
   invariance).
-- [ ] **K1 — the operator packaging** (do not block K2): clock cutoffs as OPERATORS via the held
+- [x] **K1 — the operator packaging** ✅ DONE (`QIQTH/KeystoneOperator.lean`) (do not block K2): clock cutoffs as OPERATORS via the held
   boundedFC on the clock representation (`fL`), `fL_indicator`, the covariance via held `borelFC_conjU`;
   the operator-level monomial trace `tau0_monomial_operator`; the dense-core functional
   (linear + tracial + positive) — restrict to the normal-form corner if quotienting fights back.
@@ -108,9 +108,20 @@ the error shown. Check for sibling jobs before each increment. Consults: `mcp__O
 
   K2b_tau0_capstone — S(record corner) = log dim_{τ₀}(𝒟_C) = A_τ(C)/(4G). NEXT → K5.
 
-- **2026-07-03** — **K5 LANDED** (axiom-free std-3, budget 0): isDensity_conj +
-  vonNeumannEntropy_unitary_conj (trace-preserving unitaries preserve the count's entropy — the
-  general-f eigenvalue conjugation invariance; Gate-3's finite instantiation); tauCount_conj;
-  tau0_dual_scaled (the dual action scales the τ₀-count: e^{−s}·N_C, from the held W3a exact
-  scaling); CAPSTONE K5_dual_covariant_count — S(θ_s·) = S(·) − s, the honest transported-area
-  covariance. NEXT → K1 (operator packaging).
+- **2026-07-03** — **K5 LANDED** (axiom-free std-3, budget 0): isDensity_conj +
+
+  vonNeumannEntropy_unitary_conj (trace-preserving unitaries preserve the count's entropy — the
+
+  general-f eigenvalue conjugation invariance; Gate-3's finite instantiation); tauCount_conj;
+
+  tau0_dual_scaled (the dual action scales the τ₀-count: e^{−s}·N_C, from the held W3a exact
+
+  scaling); CAPSTONE K5_dual_covariant_count — S(θ_s·) = S(·) − s, the honest transported-area
+
+  covariance. NEXT → K1 (operator packaging).
+
+- **2026-07-03** — **K1 LANDED** (`KeystoneOperator.lean`, axiom-free std-3, budget 0): clockMul
+  (bounded-measurable-symbol multiplication on L²(ℝ;H), the dualPhase construction generalized);
+  clockMul_comp (product law); CAPSTONE clockTransl_clockMul (the Weyl covariance
+  λ_t∘M_g = M_{g(·+t)}∘λ_t); repMonomial (π(a)·λ_t·M_F as a genuine operator). Packaging only —
+  the count was proven at K2b. NEXT → K3 (finite closure hygiene).

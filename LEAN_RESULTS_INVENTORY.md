@@ -633,7 +633,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   unitaries preserve the count — Gate-3's finite instantiation), `tauCount_conj`,
   **`tau0_dual_scaled`** (the dual action SCALES the τ₀-count by `e^{−s}` — the held W3a exact
   scaling at work), CAPSTONE **`K5_dual_covariant_count`** — `S(θ_s·) = S(·) − s`: the honest
-  dual-covariance law with transported area. Next: K1 (operator packaging) → K3 → K6 checkpoint.
+  dual-covariance law with transported area. **K1 LANDED** (`KeystoneOperator.lean`): `clockMul`
+  (bounded-symbol multiplication operators on the crossed-product space), the product law, the WEYL
+  COVARIANCE `λ_t∘M_g = M_{g(·+t)}∘λ_t`, and `repMonomial` (the represented core monomial as a
+  genuine operator). Next: K3 (finite closure hygiene) → K6 checkpoint.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
