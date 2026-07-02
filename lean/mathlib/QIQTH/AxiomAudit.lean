@@ -8055,6 +8055,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TypeIITrace.expTest_integrable
 #print axioms QIQTH.TypeIITrace.Iexp_dualShift
 #print axioms QIQTH.TypeIITrace.Iexp_dualShift_modMul
+-- W2 (TYPE_II_TRACE_PLAN.md): the ℤ-CLOCK REGRESSION — shift quasi-invariance ≠ dual-circle invariance,
+-- machine-checked (the binding consult distinction). On banded ℤ×ℤ core kernels with the exponential diagonal
+-- weight zWeight = ∑e^n·A(n,n): zWeight_shift_quasiInvariant — SHIFT conjugation (the discrete log-clock
+-- translation) scales by EXACTLY e^{−1} (the ℤ mirror of τ∘θ_s=e^{−s}τ); zWeight_dualCircle_invariant — the
+-- TRUE dual action of M⋊ℤ (circle phases) leaves the weight INVARIANT. Mislabeling the two is now impossible.
+-- zWeight_nonneg_of_diag_nonneg (positivity); diagSum_superset (window stability). ⚠ Banded-kernel core (the
+-- honest domain — bare monomials have infinite weight); operator/vN packaging with the ℝ-clock ladder. Std 3.
+#print axioms QIQTH.TypeIITrace.zWeight_shift_quasiInvariant
+#print axioms QIQTH.TypeIITrace.zWeight_dualCircle_invariant
+#print axioms QIQTH.TypeIITrace.zWeight_nonneg_of_diag_nonneg
 -- B3: the capacity of entanglement capEnt = ∑p(log p)² − (∑p log p)² = Var(−log p) (the finite V_gen governing
 -- the continuum √V_gen prediction), with capEnt_eq_variance (= ∑p(log p−μ)²) and capEnt_nonneg (variance ≥ 0).
 -- Axiom-free (std 3).

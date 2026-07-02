@@ -481,6 +481,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `Iexp_dualShift_modMul` (the W3a monomial form). ⚠ Symbol/integral level; the operator representation and the
   trace functional are the later rungs; vN closure + full CPW trace stay the carried frontier below.
 
+- **The wall, rung W2 — `QIQTH/ZClockRegression.lean`** (`QIQTH.TypeIITrace`, **[AF]** std-3;
+  `TYPE_II_TRACE_PLAN.md`). **The ℤ-clock regression: shift quasi-invariance ≠ dual-circle invariance,
+  machine-checked.** On banded ℤ×ℤ core kernels with the exponential diagonal weight `zWeight = ∑e^n·A(n,n)`:
+  **`zWeight_shift_quasiInvariant`** — conjugation by the SHIFT (the discrete log-clock translation) scales the
+  weight by exactly `e^{−1}` (the ℤ mirror of `τ∘θ_s = e^{−s}τ`); **`zWeight_dualCircle_invariant`** — the TRUE
+  dual action of `M⋊ℤ` (the circle phases) leaves the weight INVARIANT. The binding consult distinction — the
+  scaling belongs to the shift, never the dual action — is now a pair of theorems. Plus positivity
+  (`zWeight_nonneg_of_diag_nonneg`) and window stability (`diagSum_superset`). ⚠ Banded-kernel core (the honest
+  domain); the operator/vN packaging stays with the ℝ-clock ladder.
+
 - **The Type II dual-weight TRACE `τ∘θ_s = e^{−s}τ` is the ONE genuine [frontier]** — not built; bridged by the
   non-vacuous `Phase5Master` interface (never an axiom). Also frontier: vN double-commutant closure of the crossed
   product; full vN-algebra (vs one-particle) relative entropy via `Γ(Δ^{it})`; continuum Type III₁ classification.
