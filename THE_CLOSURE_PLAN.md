@@ -80,7 +80,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
 - [x] **C8 — `QIQTH/VonNeumann/CrossedProductClosure.lean`** ✅ DONE (payoff ii): `crossedProductVN :=
   generatedBy (range matterRep ∪ translations)` on the project's L²(ℝ;H); membership lemmas; scope
   banner: PACKAGING ONLY — the dual-weight trace is NOT claimed to extend to this closure. Risk LOW.
-- [ ] **C9 — `QIQTH/VonNeumann/DirectedUnionVN.lean`** (payoff i, honest form): `limitVN :=
+- [x] **C9 — `QIQTH/VonNeumann/DirectedUnionVN.lean`** ✅ DONE (payoff i, honest form): `limitVN :=
   generatedBy (⋃ i, Aᵢ)` for a directed family; `T ∈ limitVN ↔ SOTApprox (⋃ i, Aᵢ) T`
   (directed union is a ⋆-subalgebra; `sotApprox_adjoin_eq_sotApprox_self`). SCOPE BANNER (binding):
   the DiamondAlg tower has no common Hilbert-space representation yet — this packages the limit for
@@ -230,3 +230,12 @@ gpt-5.5-pro (never expose keys).
   of the generated ⋆-algebra (C7 instantiated). SCOPE BANNER: packaging only — the dual-weight
   trace is NOT claimed to extend (DualWeightTraceExtension stays carried); no type classified.
   NEXT → C9 (DirectedUnionVN).
+
+- **2026-07-04** — **C9 LANDED, GREEN FIRST TRY** (`QIQTH/VonNeumann/DirectedUnionVN.lean`,
+  axiom-free std-3, budget 0): **`unionStarSubalgebra`** (a directed family's union is a unital
+  ⋆-subalgebra — directedness closes the binary ops) + **`limitVN := generatedBy (⋃ Aᵢ)`** with
+  stage inclusions and CAPSTONE **`mem_limitVN_iff`** — T ∈ limit ↔ SOT-approximable from the
+  union of the stages (C7 for the union subalgebra; ⋆-closure collapses the star-union). SCOPE
+  BANNER (binding): for ANY hypothesized common representation on one B(H); the DiamondAlg
+  tower has NO common representation yet — instantiation awaits the deferred tower-GNS campaign;
+  no ITPFI factor constructed, no type classified. NEXT → C10 (WOT stretch; pre-authorized cut).

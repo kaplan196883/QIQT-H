@@ -8473,6 +8473,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.crossedProductVN
 #print axioms QIQTH.VonNeumann.matterRep_mul_clockTransl_mem_crossedProductVN
 #print axioms QIQTH.VonNeumann.crossedProductVN_carrier_eq
+-- THE CLOSURE C9 (VonNeumann/DirectedUnionVN.lean): the directed-union LIMIT vN algebra —
+-- unionStarSubalgebra (directedness closes the ops) + limitVN := generatedBy (⋃ Aᵢ) with stage
+-- inclusions and CAPSTONE mem_limitVN_iff (T ∈ limit ↔ SOT-approximable from the union of
+-- stages). SCOPE: for ANY hypothesized common representation on ONE B(H) — the DiamondAlg tower
+-- has no common representation yet; instantiation awaits the DEFERRED tower-GNS campaign. No
+-- ITPFI factor constructed; no type classified. Std 3.
+#print axioms QIQTH.VonNeumann.limitVN
+#print axioms QIQTH.VonNeumann.stage_subset_limitVN
+#print axioms QIQTH.VonNeumann.mem_limitVN_iff
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
