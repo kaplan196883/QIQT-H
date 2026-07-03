@@ -51,7 +51,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   local `HasOrthogonalProjection` instance ATTACHED AT THE DEFINITION via `IsClosed.completeSpace_coe`);
   `orbitClosure_invariant`; `starProjection_mem_centralizer` (invariance of U and Uᗮ via ⋆-closure +
   `IsIdempotentElem.commute_iff`). The ⋆-closure counterexample comment. Risk LOW.
-- [ ] **C2 — `QIQTH/VonNeumann/GeneratedBy.lean`**: purely algebraic `VonNeumannAlgebra.generatedBy`
+- [x] **C2 — `QIQTH/VonNeumann/GeneratedBy.lean`** ✅ DONE: purely algebraic `VonNeumannAlgebra.generatedBy`
   (double `StarSubalgebra.centralizer`; bicommutant field from `centralizer_centralizer_centralizer` +
   star-collapse); `subset_generatedBy`, `generatedBy_le` (minimality), `generatedBy_carrier`,
   `centralizer_adjoin` (Galois, via `adjoin_induction`); the C2 bridging lemma `Set.centralizer A =
@@ -156,3 +156,15 @@ gpt-5.5-pro (never expose keys).
   `invtSubmodule` membership lemmas take `f` EXPLICITLY — write
   `(Module.End.mem_invtSubmodule_iff_forall_mem_of_mem _).mpr`, never dot-`.mpr` the ∀. NEXT → C2
   (GeneratedBy).
+
+- **2026-07-04** — **C2 LANDED** (`QIQTH/VonNeumann/GeneratedBy.lean`, axiom-free std-3, budget 0):
+  **`VonNeumannAlgebra.generatedBy S := (S ∪ S*)″`** packaged as a Mathlib `VonNeumannAlgebra`
+  (bicommutant field = `Set.centralizer_centralizer_centralizer`; `star_mem'` from
+  centralizer-of-star-closed); `subset_generatedBy`/`star_subset_generatedBy`; MINIMALITY
+  `generatedBy_le` (centralizer antitone twice + the target's bicommutant property); the
+  bridging lemmas (`union_star_self_of_starClosed`, `generatedBy_starSubalgebra_coe`); the
+  GALOIS lemma **`centralizer_adjoin`** — `(adjoin ℂ S)′ = (S ∪ S*)′` by the PAIR-TRICK adjoin
+  induction (motive = commutation with b AND star b; the star case swaps conjuncts). The naming
+  layer for the limit algebras — purely algebraic, no density claim. Lean notes: star adjoin is
+  `StarAlgebra.adjoin` (not StarSubalgebra.*); `Algebra.commutes` is already `map r * x = x * map r`;
+  Set-vs-SetLike membership needs an explicit `have hmem : star x ∈ M`. NEXT → C3 (DensityOne).
