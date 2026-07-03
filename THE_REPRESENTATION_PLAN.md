@@ -66,7 +66,7 @@ namespace `QIQTH.TowerGNS`.
 
 ## Increments (deps: R1→R2→R3→R4; R5 independent after R1/R2; R6 needs R3+R5; R7 needs R4+R6; R8 needs R7; R9 needs R7+R8)
 
-- [ ] **R1 — `QIQTH/TowerGNS/EmbedTrans.lean`**: tower transitivity (the ONE missing T7 lemma) —
+- [x] **R1 — `QIQTH/TowerGNS/EmbedTrans.lean`** ✅ DONE: tower transitivity (the ONE missing T7 lemma) —
   `restrictMicro_trans`; `sameOffSub_split` (C ⊆ C' ⊆ C'': sameOffSub factorization);
   **`cornerEmbed_trans`**; `cornerEmbedₗ` (linear bundling from held add/smul); `cornerEmbed_sub`.
   Proof style = landed cornerEmbed_one/_mul. Risk LOW.
@@ -160,3 +160,11 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   the C*-norm contractivity CUT — no bundled CStarAlgebra (Matrix n n ℂ) in the pin, Frobenius
   bound instead; the cofinal-ℕ cut REVOKED — all of Finset M is free). Binding verdict recorded;
   loop armed.
+
+- **2026-07-05** — **R1 LANDED** (`QIQTH/TowerGNS/EmbedTrans.lean`, axiom-free std-3/std-2,
+  budget 0, one iteration — `simp only [cornerEmbed_apply]` unfolds ALL occurrences incl. the
+  RHS; plain `rw` leaves the RHS untouched in the neg branch): `restrictMicro_trans` (funext
+  rfl); **`sameOffSub_split`** (off-C agreement at C″ ⟺ off-C′ agreement + off-C agreement of
+  the restrictions — the Subtype.ext cast bridged explicitly); CAPSTONE **`cornerEmbed_trans`**
+  (the tower is a FUNCTOR on the directed corner order); `cornerEmbedₗ` (linear bundling) +
+  `cornerEmbed_sub`/`_zero` (via map_sub/map_zero). NEXT → R2 (StageInner).

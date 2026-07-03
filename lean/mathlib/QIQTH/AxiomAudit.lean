@@ -8491,6 +8491,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.ofCLM_mem_wotClosure_of_sotApprox
 #print axioms QIQTH.VonNeumann.toCLM_mem_bicommutant_of_mem_wotClosure
 #print axioms QIQTH.VonNeumann.wotClosure_image_eq_image_bicommutant
+-- THE REPRESENTATION R1 (TowerGNS/EmbedTrans.lean): tower FUNCTORIALITY — the one missing T7
+-- lemma: cornerEmbed_trans (embeddings compose along C ⊆ C' ⊆ C''), via sameOffSub_split
+-- (off-corner agreement factors) + restrictMicro_trans; plus the linear bundling cornerEmbedₗ
+-- and sub/zero laws (consumed by the R3 direct-sum pre-space). Pure finite combinatorics. Std 3.
+#print axioms QIQTH.TowerGNS.cornerEmbed_trans
+#print axioms QIQTH.TowerGNS.sameOffSub_split
+#print axioms QIQTH.TowerGNS.cornerEmbed_sub
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

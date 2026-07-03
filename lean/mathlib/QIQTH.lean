@@ -79,6 +79,7 @@ import QIQTH.VonNeumann.CrossedProductClosure
 import QIQTH.VonNeumann.DirectedUnionVN
 import QIQTH.VonNeumann.WOTClosure
 import QIQTH.VonNeumann.Checkpoint
+import QIQTH.TowerGNS.EmbedTrans
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

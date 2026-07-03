@@ -970,6 +970,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   only relative to a hypothesized common representation, and the crossed-product dual-weight
   trace is not claimed to extend from the algebraic core to the weak closure.
 
+- **THE REPRESENTATION, R1 — `QIQTH/TowerGNS/EmbedTrans.lean`** (**[AF]** std-3;
+  `THE_REPRESENTATION_PLAN.md` — the tower-GNS campaign: the T5/T7 corner tower on ONE Hilbert
+  space, towards `towerLimitVN`). Tower FUNCTORIALITY: **`cornerEmbed_trans`** (embeddings
+  compose along C ⊆ C′ ⊆ C″) via **`sameOffSub_split`** + `restrictMicro_trans`; the linear
+  bundling `cornerEmbedₗ` + sub/zero. The one missing T7 lemma; pure finite combinatorics.
+  Next: R2 (the per-stage GNS form).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
