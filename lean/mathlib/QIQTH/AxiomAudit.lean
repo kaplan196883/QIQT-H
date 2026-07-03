@@ -8465,6 +8465,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.vonNeumann_double_commutant
 #print axioms QIQTH.VonNeumann.sotApprox_bicommutant_iff
 #print axioms QIQTH.VonNeumann.generatedBy_carrier_eq
+-- THE CLOSURE C8 (VonNeumann/CrossedProductClosure.lean): the crossed-product vN CLOSURE named
+-- and packaged — crossedProductVN := generatedBy (range matterRep ∪ range clockTransl) on
+-- L²(ℝ;H), with matter/clock/monomial membership and the C7 SOT-approximability carrier
+-- characterization. PACKAGING ONLY — the dual-weight trace is NOT claimed to extend to this
+-- closure (DualWeightTraceExtension stays the carried frontier); no type classified. Std 3.
+#print axioms QIQTH.VonNeumann.crossedProductVN
+#print axioms QIQTH.VonNeumann.matterRep_mul_clockTransl_mem_crossedProductVN
+#print axioms QIQTH.VonNeumann.crossedProductVN_carrier_eq
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

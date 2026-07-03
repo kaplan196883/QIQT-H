@@ -77,7 +77,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   `‖(TS − ST) x‖ ≤ ‖(T−a)(S x)‖ + ‖S‖·‖(a−T) x‖`. Corollaries: `sotApprox_bicommutant_iff`
   (idempotence), `generatedBy_carrier_eq`. KEEP MATHLIB-STYLEABLE (imports only Mathlib + C1–C6,
   which themselves import only Mathlib). Risk LOW.
-- [ ] **C8 — `QIQTH/VonNeumann/CrossedProductClosure.lean`** (payoff ii): `crossedProductVN :=
+- [x] **C8 — `QIQTH/VonNeumann/CrossedProductClosure.lean`** ✅ DONE (payoff ii): `crossedProductVN :=
   generatedBy (range matterRep ∪ translations)` on the project's L²(ℝ;H); membership lemmas; scope
   banner: PACKAGING ONLY — the dual-weight trace is NOT claimed to extend to this closure. Risk LOW.
 - [ ] **C9 — `QIQTH/VonNeumann/DirectedUnionVN.lean`** (payoff i, honest form): `limitVN :=
@@ -221,3 +221,12 @@ gpt-5.5-pro (never expose keys).
   ⋆-algebra — C2's naming layer meets the density theorem). Mathlib-styleable (imports only
   Mathlib + C1–C6). A genuine Mathlib gap closed: Mathlib's `VonNeumannAlgebra` had NO
   bicommutant theorem. NO WOT claim anywhere (C10 separate). NEXT → C8 (CrossedProductClosure).
+
+- **2026-07-04** — **C8 LANDED, GREEN FIRST TRY** (`QIQTH/VonNeumann/CrossedProductClosure.lean`,
+  axiom-free std-3, budget 0): **`crossedProductVN := generatedBy (range matterRep ∪ range
+  clockTransl)`** on L²(ℝ;H) — the project's crossed product M⋊_σℝ now has its GENUINE von
+  Neumann algebra (the frontier named four times in the inventory, now an object); matter/clock/
+  monomial membership lemmas; **`crossedProductVN_carrier_eq`** — the carrier IS the SOT closure
+  of the generated ⋆-algebra (C7 instantiated). SCOPE BANNER: packaging only — the dual-weight
+  trace is NOT claimed to extend (DualWeightTraceExtension stays carried); no type classified.
+  NEXT → C9 (DirectedUnionVN).
