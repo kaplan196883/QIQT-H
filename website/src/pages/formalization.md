@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **302 files and ~3,600
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **303 files and ~3,700
 theorems and definitions** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -600,10 +600,11 @@ results, the following remain: <code>hJoin</code> + the calibration (the emergen
 deletable only by the genuine count via the vN closure), the massless wedge BW, the nonlinear Einstein
 coefficients, symbol-level Iyer–Wald (<code>hDeficit</code>), and the geometric carrier-conjugacy data.
 Everything else that was carried at the start of the joins/grounding arc is now a theorem. NOT quantum
-gravity; the von Neumann closure and the count remain the frontier. <em>(The keystone campaign below
-subsequently delivered the count in the finite branch — the calibration is a theorem there for
-trace-defined weights, and the count-built join holds by construction; external-geometric matching and
-the vN closure remain the named walls.)</em>
+gravity; the von Neumann closure and the count remain the frontier. <em>(Two later campaigns moved this
+ledger: the keystone delivered the count in the finite branch — the calibration is a theorem there for
+trace-defined weights — and the join instance below then deleted <code>hJoin</code> itself by
+construction, merging the code and graviton towers at the finite level; the vN closure and the continuum
+limit remain the named walls.)</em>
 
 </div>
 
@@ -653,6 +654,50 @@ construction — no hClausius/hGeom/hCalib/hJoin carried in this branch." HAVE N
 continuum QFT diamond algebras ARE these corners; external geometric area = count-built area;
 Type III₁/II<sub>∞</sub> continuum structure in Lean; σ-weak/normal weights; the value of G.
 NOT quantum gravity solved; no wall crossed.
+
+</div>
+
+## The join instance — `hJoin` deleted by construction (JI1–JI7): the two towers merged
+
+The screen-code tower (the keystone count) and the graviton tower (Q1–Q5) joined into ONE object at the
+finite level: the dictionary instance — links = screen elements, code weights defined FROM the geometry —
+makes the Q5 carried hypothesis `hJoin` a **theorem** (`QIQTH/JoinInstance.lean`; axiom-free, std-3).
+Two-level construction per the consult verdict: generic-exact with REAL trace-dimensions; integer codes
+only under a named realizability datum.
+
+- **JI1 — the local area decomposition** (`sum_localArea`, `A0Split`): the per-element shares
+  β<sub>a</sub> + δA<sub>a</sub> reassemble A₀ + δA<sub>Σ</sub>(h), with the background apportionment
+  carried as NAMED data (no canonical per-link split of a global constant exists; the uniform split is
+  an optional policy, never pretended-derived).
+- **JI2 — the carried `hJoin` is a THEOREM** (`hJoin_tau`, `hcal_tau`): with
+  w<sub>Ent</sub>(a) := A<sup>loc</sup><sub>a</sub>/4G and D<sup>τ</sup><sub>a</sub> := e<sup>w</sup> (a
+  positive REAL — trace-dimensions need not be integers), the exact Q5 hypothesis shape is supplied by
+  construction, and the calibration is `Real.log_exp`. Geometry → code: no smuggling.
+- **JI3 — the dictionary lives in the held core** (`exists_tau0_corner_of_posReal`): every positive real
+  is a *realized* τ₀ corner value with the clock-window witness explicit (the free window mass — never
+  subcorners of one fixed fiber+window, which are provably rank-quantized).
+- **JI4 — the generic exact replacement** (`Stau_eq_area_over_4G`): the instance's count
+  S<sub>τ</sub>(J) = Σ<sub>a</sub> w<sub>Ent</sub>(a) = A<sub>J</sub>/4G for ARBITRARY graviton data —
+  count and geometry as two computations of one number, nothing carried.
+- **JI5 — the old Q5 capstone with NO `hJoin` hypothesis**
+  (`code_count_eq_fock_area_expect_noJoin`): for a nat-realizable geometry (`NatRealizable` — the named
+  integer-dimension datum, where D<sup>τ</sup><sub>a</sub> = D<sub>a</sub>),
+  log #microstates = ⟨α|Â<sub>tot</sub>(Σ)|α⟩/4G with the join supplied by `hJoin_tau`.
+- **JI6 — the two normalizations are one formula** (`Stau_eq_capacity_primitives`): with the DERIVED
+  G = 1/(N·Λ<sub>s</sub>²), the count is S<sub>τ</sub>(J) = (A<sub>J</sub>/4)·N·Λ<sub>s</sub>² — the
+  count-built and induced-Newton normalizations meet in {area, species, granularity}; per-link capacity,
+  the patch bound, and the area costs: **one nat of link entropy costs 4/(N·Λ<sub>s</sub>²) of area; one
+  qubit costs 4·log 2/(N·Λ<sub>s</sub>²)**.
+
+<div class="note">
+
+<strong>The JI7 checkpoint — the two honest sentences.</strong> HAVE: "after JI1–JI6, <code>hJoin</code>
+is no longer a hypothesis for the constructed τ join or for nat-realizable finite-code joins, and the
+count normalization rewrites to (A<sub>J</sub>/4)·N·Λ<sub>s</sub>² with local capacity corollaries."
+HAVE NOT: "no theorem says arbitrary external real geometry has exact natural link dimensions, no
+asymptotic approximation is included, and no canonical A₀ split is asserted beyond the named
+apportionment data/policy." The CCR-isometry obstruction is permanent (the join is expectation-level
+forever); NOT quantum gravity solved; no wall crossed.
 
 </div>
 
