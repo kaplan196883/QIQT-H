@@ -17,11 +17,17 @@
   real-number identities; the CFT / GR / string content is carried, never derived here.
 
   ⚠ WHY IT IS INTERESTING (the QIQT-H comparison). It makes concrete exactly what AdS/CFT DERIVES,
-  *given its inputs*, that QIQT-H does not: (a) the bulk Newton constant G is fixed by the gauge
-  degree-count N (G ∝ 1/N²), and (b) the black-hole entropy is reproduced as a boundary-CFT state
-  count, S = A/4G, with the SAME G on both sides. In QIQT-H, G is a carried UV datum with no such
-  microscopic system fixing it. This file is deliberately NOT wired into `QIQTH.lean` or the
-  inventory — it is a labelled comparison, not a QIQT-H claim.
+  *given its inputs*: (a) the bulk Newton constant G is fixed by the gauge degree-count N
+  (G ∝ 1/N²), and (b) the black-hole entropy is reproduced as a boundary-CFT state count,
+  S = A/4G, with the SAME G on both sides. Since the granularity reframing
+  (`InducedNewtonConstant.lean`: G = 1/(N Λ_s²)), QIQT-H fixes G by a degree-count too — both
+  sides derive G from a count against ONE carried scale (AdS/CFT: N² against α'; QIQT-H: N·Λ_s²
+  against the granularity), and `HolographicBridge.lean` proves the two bookkeepings agree
+  (Cardy = QIQT-H capacity exponent, ℓ cancelling). What AdS/CFT still has and QIQT-H lacks is
+  the INDEPENDENT CROSS-CHECK: one microscopic system (the boundary CFT) computing both G and the
+  microstate count, so S = A/4G is a consistency theorem of a single theory rather than two
+  bookkeepings calibrated to the same primitives. This file is deliberately NOT wired into
+  `QIQTH.lean` or the inventory — it is a labelled comparison, not a QIQT-H claim.
 -/
 import Mathlib
 
