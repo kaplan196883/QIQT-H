@@ -834,7 +834,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   corners A = κ·Σ log D_k — the keystone/join/embedding weight is RIGID under refinement
   naturality, no longer a constructed choice; κ is where 4G lives and stays input),
   **`nu2_counterexample`** (ν₂ is additive + divisibility-monotone but NOT ∝ log — the strong
-  hypotheses are NECESSARY). Next: DS7 (the shadow package + checkpoint).
+  hypotheses are NECESSARY). **DS7 LANDED — CAMPAIGN COMPLETE** (`Decoupling/DecouplingShadow.lean`):
+  `RefinementNaturalValuation` + **`.forced`** (package thm 2: THE FORCED WEIGHT κ·Σ log D_k),
+  `FreeSectorEvidence` + **`decouplingShadow_holds`** (package thm 1: the free sector survives the
+  cutoff limit — CCR stabilization, Planck occupation/entropy, defect death, THE GUARD — every
+  field a landed theorem), **`saturated_entropy_eq_forced_area`** (package thm 3: the code's β = 0
+  entropy = the forced area over κ; κ = the 4G slot, input).
+  **DS7 CHECKPOINT (the two honest sentences, verbatim):** HAVE: "The capacity-limit theorem
+  forces the oscillator/free-field sector only in the bounded-occupation or positive-temperature
+  sense; it does not force the screen geometry or Newton constant." HAVE NOT: "The tower-rigidity
+  theorem forces the logarithmic capacity weight only under monoidal, monotone refinement
+  naturality; without those hypotheses there are explicit finite counterexamples." ⚠ NOT a full
+  decoupling derivation (the join geometry, species match, and G remain parent data); NOT QG
+  solved; no wall crossed.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -8330,6 +8330,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Rigidity.finiteCorner_valuation_rigidity
 #print axioms QIQTH.Rigidity.forced_weight_product
 #print axioms QIQTH.Rigidity.nu2_counterexample
+-- THE DECOUPLING SHADOW DS7 (Decoupling/DecouplingShadow.lean, CAMPAIGN COMPLETE): the shadow package —
+-- RefinementNaturalValuation (the tower's area assignment, STRONG hypotheses) with .forced (package thm 2:
+-- THE FORCED WEIGHT κ·Σ log D_k); FreeSectorEvidence + decouplingShadow_holds (package thm 1: the free
+-- sector survives the cutoff limit — CCR stabilization, Planck occupation/entropy, defect death, THE GUARD
+-- — every field a landed theorem); saturated_entropy_eq_forced_area (package thm 3: the code's β = 0
+-- entropy = the forced area over κ — the κ slot is where 4G lives, input). NOT a full decoupling
+-- derivation; the join geometry/species match/G remain parent data. Std 3.
+#print axioms QIQTH.Decoupling.RefinementNaturalValuation.forced
+#print axioms QIQTH.Decoupling.decouplingShadow_holds
+#print axioms QIQTH.Decoupling.saturated_entropy_eq_forced_area
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

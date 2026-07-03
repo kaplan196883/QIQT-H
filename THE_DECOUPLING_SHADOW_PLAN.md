@@ -1,6 +1,6 @@
 # THE DECOUPLING SHADOW (DS1–DS7): the finite forced core of the dictionary
 
-**Status:** ACTIVE (2026-07-03). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** the
+**Status:** COMPLETE (2026-07-03 — DS1–DS7 all landed; loop deleted). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** the
 finite shadow of Maldacena's decoupling-limit structure (one parent, one limit, two surviving
 descriptions) — replacing "constructed weight dictionary" by "RIGID under the finite
 decoupling-shadow hypotheses": (a) THE CAPACITY LIMIT — genuine `Filter.Tendsto` theorems forcing
@@ -59,7 +59,7 @@ weaker hypotheses fail). Files under `lean/mathlib/QIQTH/Decoupling/` + `QIQTH/R
   squeeze); hence on product records A = κ·Σ log D_k — THE FORCED WEIGHT DICTIONARY; PLUS the ν₂
   counterexample (additive + divisibility-monotone but NOT ∝ log — the strong hypotheses are
   necessary).
-- [ ] **DS7 — the shadow package + checkpoint** (`QIQTH/Decoupling/DecouplingShadow.lean`): the
+- [x] **DS7 — the shadow package + checkpoint** ✅ DONE (`QIQTH/Decoupling/DecouplingShadow.lean`): the
   parent tower packaged (truncated corner + oscillators + records + refinement-natural valuation)
   with the three theorems (free sector survives the cutoff limit; the valuation is κ·Σ log D_k;
   given the normalization the saturated area law survives). Then the checkpoint (the two honest
@@ -134,3 +134,11 @@ attempt with the error shown. Check for sibling jobs before each increment. Cons
   A = κ·Σ log D_k — the keystone/join/embedding weight is RIGID, not constructed; κ = where 4G
   lives, stays input); nu2_counterexample (ν₂ is additive + divisibility-monotone but NOT ∝ log —
   the strong hypotheses are NECESSARY). NEXT → DS7 (the shadow package + checkpoint).
+
+- **2026-07-03** — **DS7 LANDED — CAMPAIGN COMPLETE** (`QIQTH/Decoupling/DecouplingShadow.lean`):
+  RefinementNaturalValuation (STRONG hypotheses) with .forced (package thm 2: THE FORCED WEIGHT);
+  FreeSectorEvidence + decouplingShadow_holds (package thm 1: the free sector survives — every
+  field a landed theorem, THE GUARD included); saturated_entropy_eq_forced_area (package thm 3:
+  the code's β = 0 entropy = the forced area over κ; the κ slot = where 4G lives, input). The two
+  honest sentences placed VERBATIM in the module docstring + inventory. NOT a full decoupling
+  derivation; NOT QG solved; no wall crossed. Loop 1667ccd7 deleted.
