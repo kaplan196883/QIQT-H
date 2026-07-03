@@ -71,6 +71,7 @@ import QIQTH.Tower.Checkpoint
 import QIQTH.VonNeumann.InvariantProjection
 import QIQTH.VonNeumann.GeneratedBy
 import QIQTH.VonNeumann.DensityOne
+import QIQTH.VonNeumann.Amplification
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

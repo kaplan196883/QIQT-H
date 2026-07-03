@@ -59,7 +59,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   `Set.centralizer`; StarSubalgebra.centralizer only inside proofs). Risk LOW.
 - [x] **C3 — `QIQTH/VonNeumann/DensityOne.lean`** ✅ DONE: `bicommutant_apply_mem_orbitClosure` (P ∈ A′ → TP=PT
   → ξ = Pξ by UNITALITY → Tξ ∈ U) + ε-corollary. The unitality counterexample comment. Risk LOW.
-- [ ] **C4 — `QIQTH/VonNeumann/Amplification.lean`** (THE risk lump, scheduled after C1–C3 are banked):
+- [x] **C4 — `QIQTH/VonNeumann/Amplification.lean`** ✅ DONE (THE risk lump, scheduled after C1–C3 are banked):
   the frozen six-lemma PiLp interface — `π_comp_ι_same`, `π_comp_ι_ne`, `sum_ι_π`, `adjoint_ι`,
   `π_comp_diag`, `diag_comp_ι` — plus `diag_one`, `diag_mul`, `adjoint_diag`, `clm_ext_of_entries`,
   `norm_coord_le`. NEVER unfold the synonym; route through `PiLp.continuousLinearEquiv`/`PiLp.single`/
@@ -176,3 +176,17 @@ gpt-5.5-pro (never expose keys).
   plus the ε-form **`bicommutant_apply_approx`** (`Metric.mem_closure_iff` unfold — the form C6
   consumes). C1→C3 chain complete; the campaign now enters THE RISK LUMP (C4, PiLp). NEXT → C4
   (Amplification).
+
+- **2026-07-04** — **C4 LANDED — THE RISK LUMP CLEARED** (`QIQTH/VonNeumann/Amplification.lean`,
+  axiom-free std-3, budget 0, three iterations): the FROZEN PiLp interface — `coordIncl` (via
+  `ContinuousLinearMap.pi` + the equiv, no `single` CLM needed), `coordProj` (= Mathlib's
+  `PiLp.proj`), `diagCLM`; the six interface lemmas (π∘ι same/ne, **Σ ι∘π = 1** in applied +
+  comp forms, **adjoint ι = π**, π∘diag = a∘π, diag∘ι = ι∘a); diag one/mul/add/smul;
+  **`star_diagCLM`** (via `eq_adjoint_iff` + `PiLp.inner_apply`); **`clm_ext_of_entries`**
+  (entrywise extensionality via the coordinate decomposition); `norm_coord_le` (re-export of
+  Mathlib's `PiLp.norm_apply_le` — already upstream!). Lean notes: `WithLp` is now a STRUCTURE
+  with CoeFun `ofLp` and `PiLp.ext` is @[ext] (so `ext` on PiLp-valued CLMs auto-descends to
+  coordinates — write proofs coordinate-first via `ContinuousLinearMap.ext` + `PiLp.ext`);
+  `funext` does NOT apply to PiLp elements; sum-of-vectors coordinates via `map_sum` of the
+  `coordProj` CLM (`piLp_sum_apply`); `adjoint_inner_left a x y : ⟪a† y, x⟫ = ⟪y, a x⟫` (args
+  swapped vs naive). NEXT → C5 (MatrixCommutant).

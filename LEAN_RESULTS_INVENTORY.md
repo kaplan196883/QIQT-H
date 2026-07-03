@@ -921,8 +921,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   purely algebraic — density is C7. **C3 LANDED — `QIQTH/VonNeumann/DensityOne.lean`**
   (**[AF]** std-3): SINGLE-VECTOR DENSITY **`bicommutant_apply_mem_orbitClosure`** — an element
   of the double centralizer maps every vector into that vector's closed orbit (unitality
-  load-bearing, A = {0} counterexample documented), with the ε-approximation form. Next: C4
-  (the PiLp amplification — the campaign's risk lump).
+  load-bearing, A = {0} counterexample documented), with the ε-approximation form. **C4 LANDED — THE RISK
+  LUMP CLEARED** (`QIQTH/VonNeumann/Amplification.lean`, **[AF]** std-3): the frozen PiLp
+  amplification interface — coordinate inclusions/projections with **adjoint ι = π**, the
+  coordinate decomposition Σ ι∘π = 1, the diagonal embedding with its algebra + ⋆-law
+  (`star_diagCLM`), entrywise extensionality (`clm_ext_of_entries`), coordinate norm bound.
+  Pure finite Hilbert-sum operator API. Next: C5 (the two matrix-commutant lemmas).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

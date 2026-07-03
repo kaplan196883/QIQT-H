@@ -8431,6 +8431,15 @@ namespace QIQTH.AxiomAudit
 -- bicommutant_apply_approx. One vector only; the n-vector version is C6 (needs C4–C5). Std 3.
 #print axioms QIQTH.VonNeumann.bicommutant_apply_mem_orbitClosure
 #print axioms QIQTH.VonNeumann.bicommutant_apply_approx
+-- THE CLOSURE C4 (VonNeumann/Amplification.lean): the amplification toolkit Hⁿ = PiLp 2 — THE
+-- FROZEN INTERFACE (coordIncl/coordProj/diagCLM; π∘ι same/ne, Σι∘π = 1, adjoint ι = π, π∘diag,
+-- diag∘ι; diag one/mul/add/smul; star (diag a) = diag (star a) via eq_adjoint_iff +
+-- PiLp.inner_apply; entrywise extensionality clm_ext_of_entries; coordinate norm bound). The
+-- campaign's risk lump — cleared; later files are interface-only (never unfold the synonym). Std 3.
+#print axioms QIQTH.VonNeumann.adjoint_coordIncl
+#print axioms QIQTH.VonNeumann.sum_coordIncl_comp_coordProj
+#print axioms QIQTH.VonNeumann.star_diagCLM
+#print axioms QIQTH.VonNeumann.clm_ext_of_entries
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
