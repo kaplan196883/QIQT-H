@@ -722,7 +722,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   occupation projectors — the theorem, not a slogan); `field_record_tau0` (the field record trace through
   the constructed τ₀); **`encoded_mode_ladder_commutator`** — the corner transport with the HONEST
   identity `[ι_V(a_k), ι_V(a_k)†] = P − D_k·ι_V(P_top,k)`, `P = VVᴴ` never the ambient 1.
-  Next: EM6 (capacity and local areas).
+  **EM6 LANDED — CAPACITY AS CONSTRAINT**: `capacityBound` (Σ log D_k ≤ Area/4G — selecting admissible
+  assignments, NEVER a generator), CAPSTONE **`field_entropy_le_area_of_capacity`** (admissible ⟹
+  S ≤ Area/4G), `field_entropy_eq_area_of_saturation` (equality for the CHOSEN assignment),
+  `localModeArea = 4G·log D_k` + `sum_localModeArea` (the per-mode reading of A_τ),
+  `mode_count_le_area_of_qubit_capacity` (|C|·log 2 ≤ Area/4G). Next: EM7 (localization witness +
+  graviton capstone; checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

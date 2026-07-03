@@ -588,4 +588,72 @@ theorem encoded_mode_ladder_commutator {d𝓗 : Type*} [Fintype d𝓗] [Decidabl
 
 end Records
 
+/-! ## EM6 — capacity and local areas
+
+CAPACITY IS A CONSTRAINT, NOT A GENERATOR (binding phrasing): the FQ bound selects the
+admissible/saturating subtype of cutoff assignments — the bound is a HYPOTHESIS implying the
+entropy bound; saturation gives equality for a CHOSEN assignment; existence of exact integer
+saturation for arbitrary external real area is never claimed (cut). Each mode occupies the local
+area `4G·log D_k`; the local areas reassemble the trace-induced screen area. -/
+
+section Capacity
+
+variable (A : ModeAssignment M) (C : Finset M)
+
+/-- **The capacity bound** — the FQ constraint on a mode assignment: the total log-cutoff fits in
+    the area, `Σ_k log D_k ≤ Area/4G`. A constraint selecting admissible assignments. -/
+def capacityBound (Area G : ℝ) : Prop :=
+  ∑ k ∈ C, Real.log (A.cutoff k) ≤ Area / (4 * G)
+
+/-- The field diamond's maximal entropy IS the total log-cutoff. -/
+theorem field_entropy_eq_sum_log :
+    QIQTH.QuantumEntropy.vonNeumannEntropy (maxMixed_isDensity (ι := FieldMicro A C))
+      = ∑ k ∈ C, Real.log (A.cutoff k) := by
+  rw [vonNeumannEntropy_maxMixed, card_micro, log_NC_eq_cutTau, cutTau]
+  exact Finset.sum_congr rfl fun k _ => rfl
+
+/-- **EM6 CAPSTONE — capacity CONSTRAINS the field entropy:** an admissible mode assignment's
+    diamond entropy is area-bounded, `S(maxMixed) ≤ Area/4G` — the FQ postulate as a hypothesis,
+    the entropy bound as its consequence. -/
+theorem field_entropy_le_area_of_capacity {Area G : ℝ} (h : capacityBound A C Area G) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy (maxMixed_isDensity (ι := FieldMicro A C))
+      ≤ Area / (4 * G) := by
+  rw [field_entropy_eq_sum_log]
+  exact h
+
+/-- **Saturation gives equality for the CHOSEN assignment** — never existence of integer
+    saturation for arbitrary external real area (cut, per the verdict). -/
+theorem field_entropy_eq_area_of_saturation {Area G : ℝ}
+    (h : ∑ k ∈ C, Real.log (A.cutoff k) = Area / (4 * G)) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy (maxMixed_isDensity (ι := FieldMicro A C))
+      = Area / (4 * G) := by
+  rw [field_entropy_eq_sum_log]
+  exact h
+
+/-- **The local mode area**: each mode occupies `4G·log D_k` of screen area. -/
+noncomputable def localModeArea (G : ℝ) (k : M) : ℝ :=
+  4 * G * Real.log (A.cutoff k)
+
+/-- **The local mode areas reassemble the trace-induced screen area** — the per-mode reading of
+    the keystone's `A_τ(C)`. -/
+theorem sum_localModeArea (G : ℝ) :
+    ∑ k ∈ C, localModeArea A G k = inducedScreenAreaTau A.toLinkDims G C := by
+  rw [inducedScreenAreaTau, cutTau, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun k _ => rfl
+
+/-- **The mode-count area bound** (the qubit-cutoff restatement): a diamond of two-level modes
+    admissible under the capacity carries at most `Area/(4G·log 2)` modes —
+    `|C|·log 2 ≤ Area/4G`. -/
+theorem mode_count_le_area_of_qubit_capacity {Area G : ℝ}
+    (hcut : ∀ k ∈ C, A.cutoff k = 2) (h : capacityBound A C Area G) :
+    (C.card : ℝ) * Real.log 2 ≤ Area / (4 * G) := by
+  have hsum : ∑ k ∈ C, Real.log (A.cutoff k) = (C.card : ℝ) * Real.log 2 := by
+    rw [Finset.sum_congr rfl (fun k hk => by rw [hcut k hk] : ∀ k ∈ C,
+      Real.log (A.cutoff k) = Real.log ((2 : ℕ) : ℝ)), Finset.sum_const, nsmul_eq_mul]
+    norm_num
+  rw [← hsum]
+  exact h
+
+end Capacity
+
 end QIQTH.Embedding

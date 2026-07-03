@@ -59,7 +59,7 @@ new Hilbert space; add operators and semantics to the counted object. New file
   `recordProj_eq_sum_occupationProj` + trace/card (records ARE occupation pointer subsets); the encoded
   record trace through τ₀ (keystone flatClock); corner transport `[encode V a_k, encode V a_k†] =
   P − D_k·encode V (P_top,k)`.
-- [ ] **EM6 — capacity and local areas**: `capacityBound` (Σ log D_k ≤ A/4G) ⟹ `S(maxMixed) ≤ A/4G`;
+- [x] **EM6 — capacity and local areas** ✅ DONE: `capacityBound` (Σ log D_k ≤ A/4G) ⟹ `S(maxMixed) ≤ A/4G`;
   saturation ⟹ equality (chosen assignment); `localModeArea k := 4G·log D_k` + `sum_localModeArea`;
   the mode-count area-bound restatements.
 - [ ] **EM7 — the localization witness + the graviton capstone (checkpoint)**: optional supplied
@@ -130,3 +130,12 @@ failed attempt with the error shown. Check for sibling jobs before each incremen
   modes); encoded_mode_ladder_commutator — the corner transport with the HONEST identity
   [ι_V(a_k), ι_V(a_k)†] = P − D_k·ι_V(P_top,k), P = VVᴴ never the ambient 1. NEXT → EM6 (capacity and
   local areas).
+
+- **2026-07-03** — **EM6 LANDED** (axiom-free std-3, budget 0): capacityBound (the FQ constraint —
+  Σ log D_k ≤ Area/4G, selecting admissible assignments, NEVER a generator); field_entropy_eq_sum_log;
+  CAPSTONE field_entropy_le_area_of_capacity (admissible ⟹ S(maxMixed) ≤ Area/4G — the postulate as
+  hypothesis, the bound as consequence); field_entropy_eq_area_of_saturation (equality for the CHOSEN
+  assignment; integer-saturation existence never claimed); localModeArea = 4G·log D_k +
+  sum_localModeArea (= inducedScreenAreaTau — the per-mode reading of A_τ);
+  mode_count_le_area_of_qubit_capacity (|C|·log 2 ≤ Area/4G). NEXT → EM7 (the localization witness +
+  the graviton capstone; checkpoint).

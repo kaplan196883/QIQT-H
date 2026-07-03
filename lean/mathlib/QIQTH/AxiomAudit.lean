@@ -8192,6 +8192,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Embedding.recordProj_eq_sum_occupationProj
 #print axioms QIQTH.Embedding.field_record_tau0
 #print axioms QIQTH.Embedding.encoded_mode_ladder_commutator
+-- THE EMBEDDING EM6: capacity and local areas — capacityBound (the FQ constraint: Sigma log D_k <= Area/4G,
+-- a CONSTRAINT selecting admissible assignments, never a generator); field_entropy_eq_sum_log; CAPSTONE
+-- field_entropy_le_area_of_capacity (admissible => S(maxMixed) <= Area/4G — the FQ postulate as hypothesis,
+-- the entropy bound as consequence); field_entropy_eq_area_of_saturation (equality for the CHOSEN assignment;
+-- integer-saturation existence never claimed); localModeArea = 4G·log D_k + sum_localModeArea (the per-mode
+-- reading of A_tau); mode_count_le_area_of_qubit_capacity (|C|·log 2 <= Area/4G). Std 3.
+#print axioms QIQTH.Embedding.field_entropy_le_area_of_capacity
+#print axioms QIQTH.Embedding.field_entropy_eq_area_of_saturation
+#print axioms QIQTH.Embedding.sum_localModeArea
+#print axioms QIQTH.Embedding.mode_count_le_area_of_qubit_capacity
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
