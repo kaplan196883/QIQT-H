@@ -8440,6 +8440,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.sum_coordIncl_comp_coordProj
 #print axioms QIQTH.VonNeumann.star_diagCLM
 #print axioms QIQTH.VonNeumann.clm_ext_of_entries
+-- THE CLOSURE C5 (VonNeumann/MatrixCommutant.lean): the TWO minimal matrix-commutant lemmas
+-- (never Mₙ(A′)): ENTRIES — S ∈ (diag A)′ ⟹ every π i ∘ S ∘ ι j ∈ A′; ASSEMBLY — T ∈ A″ + all
+-- entries in A′ ⟹ diag T commutes with S (entrywise extensionality); diagHom/diagAlg (the
+-- diagonal ⋆-hom + image algebra); CAPSTONE diag_mem_bicommutant: T ∈ A″ ⟹ diag T ∈ (diag A)″ —
+-- the amplification step feeding C6. Interface-only (C4); no density statement. Std 3.
+#print axioms QIQTH.VonNeumann.entry_mem_centralizer
+#print axioms QIQTH.VonNeumann.commute_diag_of_entries
+#print axioms QIQTH.VonNeumann.diag_mem_bicommutant
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

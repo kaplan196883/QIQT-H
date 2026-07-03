@@ -65,7 +65,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   `norm_coord_le`. NEVER unfold the synonym; route through `PiLp.continuousLinearEquiv`/`PiLp.single`/
   `PiLp.inner_apply`; later files are INTERFACE-ONLY. Fallback: define `ι i` as a hand-rolled
   `LinearIsometry`. Risk MEDIUM.
-- [ ] **C5 — `QIQTH/VonNeumann/MatrixCommutant.lean`**: the two minimal matrix-commutant lemmas
+- [x] **C5 — `QIQTH/VonNeumann/MatrixCommutant.lean`** ✅ DONE: the two minimal matrix-commutant lemmas
   (entries + assembly); `diagAlg` (via `StarSubalgebra.copy` on the image so membership is
   definitionally `∃ a ∈ A, diagCLM a = _`); `diag_mem_bicommutant`. Risk LOW-MEDIUM.
 - [ ] **C6 — `QIQTH/VonNeumann/DensityN.lean`**: `bicommutant_sotApprox` (C3 in Hⁿ on `diagAlg` +
@@ -190,3 +190,14 @@ gpt-5.5-pro (never expose keys).
   `funext` does NOT apply to PiLp elements; sum-of-vectors coordinates via `map_sum` of the
   `coordProj` CLM (`piLp_sum_apply`); `adjoint_inner_left a x y : ⟪a† y, x⟫ = ⟪y, a x⟫` (args
   swapped vs naive). NEXT → C5 (MatrixCommutant).
+
+- **2026-07-04** — **C5 LANDED** (`QIQTH/VonNeumann/MatrixCommutant.lean`, axiom-free std-3,
+  budget 0, two iterations): the TWO minimal matrix-commutant lemmas (never Mₙ(A′)) —
+  **`entry_mem_centralizer`** (S ∈ (diag A)′ ⟹ every π i ∘ S ∘ ι j ∈ A′) and
+  **`commute_diag_of_entries`** (T ∈ A″ + all entries in A′ ⟹ diag T commutes with S, via
+  `clm_ext_of_entries`); `diagHom` (the diagonal ⋆-algebra hom) + `diagAlg` (its image, via
+  `StarSubalgebra.map` — `diagAlg_coe` is rfl); CAPSTONE **`diag_mem_bicommutant`** —
+  T ∈ A″ ⟹ diag T ∈ (diag A)″. All proofs pointwise through the frozen C4 interface (`simp only
+  [mul_apply, comp_apply]` normalization; congrArg-applied interface lemmas). Lean notes:
+  `map_star'` wants `f (star x) = star (f x)` (symm of ours); a failed field in a `where`
+  structure poisons ALL downstream rfl-lemmas (fix the first error first). NEXT → C6 (DensityN).

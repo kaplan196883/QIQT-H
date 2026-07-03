@@ -926,7 +926,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   amplification interface — coordinate inclusions/projections with **adjoint ι = π**, the
   coordinate decomposition Σ ι∘π = 1, the diagonal embedding with its algebra + ⋆-law
   (`star_diagCLM`), entrywise extensionality (`clm_ext_of_entries`), coordinate norm bound.
-  Pure finite Hilbert-sum operator API. Next: C5 (the two matrix-commutant lemmas).
+  Pure finite Hilbert-sum operator API. **C5 LANDED** (`QIQTH/VonNeumann/MatrixCommutant.lean`,
+  **[AF]** std-3): the two minimal matrix-commutant lemmas — ENTRIES (S ∈ (diag A)′ ⟹ entries
+  π i ∘ S ∘ ι j ∈ A′) and ASSEMBLY (T ∈ A″ + entries in A′ ⟹ diag T commutes) — plus
+  diagHom/diagAlg and CAPSTONE **`diag_mem_bicommutant`** (T ∈ A″ ⟹ diag T ∈ (diag A)″), the
+  amplification of the bicommutant. Next: C6 (n-vector density).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
