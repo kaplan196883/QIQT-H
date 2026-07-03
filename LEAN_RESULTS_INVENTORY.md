@@ -693,6 +693,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   beyond the named apportionment data/policy." ⚠ NOT QG solved; no wall crossed; the CCR-isometry
   obstruction is permanent (the join is expectation-level forever).
 
+- **THE EMBEDDING, EM1 — `QIQTH/Embedding.lean`** (**[AF]** std-3; `THE_EMBEDDING_PLAN.md` — the
+  matter-side dictionary: the N-mode truncated free-field diamond algebra IS a counted record corner;
+  EM1–EM7 in progress). **EM1 — the mode dictionary aliases:** `ModeAssignment` (mode labels + per-mode
+  truncation cutoffs — NAMED finite data, never constructed from the continuum), `toLinkDims` (a LINK IS
+  A FIELD MODE), `FieldMicro`/`TruncatedFockBasis`/`FieldDiamondAlg` with rfl dictionary theorems (the
+  identification is DEFINITIONAL — `Micro L C = (e : C) → Fin (D e)` IS a multi-mode truncated Fock
+  basis); `card_truncatedFockBasis` (= Π cutoffs); CAPSTONE **`truncated_field_diamond_entropy`** —
+  the keystone count READ as the truncated field diamond's entropy, `S = Σ_k log D_k = A_τ(C)/4G` with
+  links = modes. Next: EM2 (the coordinate operator embedding).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

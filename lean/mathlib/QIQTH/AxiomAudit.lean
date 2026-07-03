@@ -8145,6 +8145,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JoinInstance.tauWEnt_le_patch_capacity
 #print axioms QIQTH.JoinInstance.localArea_eq_log_cost
 #print axioms QIQTH.JoinInstance.qubit_area_cost
+-- THE EMBEDDING EM1 (THE_EMBEDDING_PLAN.md): the mode dictionary aliases — ModeAssignment (mode labels +
+-- per-mode truncation cutoffs, NAMED finite data), toLinkDims (a LINK IS A FIELD MODE), FieldMicro/
+-- TruncatedFockBasis/FieldDiamondAlg (the field-side readings, DEFINITIONALLY the keystone objects — rfl
+-- dictionary theorems); card_truncatedFockBasis (#occupation basis = prod cutoffs); CAPSTONE
+-- truncated_field_diamond_entropy — the keystone count READ as the truncated field diamond's entropy
+-- S(maxMixed) = Sigma log D_k = A_tau(C)/4G (K2a applied verbatim through the dictionary). Std 3.
+#print axioms QIQTH.Embedding.card_truncatedFockBasis
+#print axioms QIQTH.Embedding.truncated_field_diamond_entropy
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
