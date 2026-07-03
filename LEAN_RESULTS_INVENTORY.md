@@ -797,6 +797,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   thermal entropy at arbitrary β and an induced geometric area; that remains the named continuum
   frontier/conjecture." ⚠ NOT QG solved; no wall crossed.
 
+- **THE DECOUPLING SHADOW, DS1 — `QIQTH/Decoupling/TruncatedCCR.lean`** (**[AF]** std-3;
+  `THE_DECOUPLING_SHADOW_PLAN.md` — the finite forced core of the dictionary, from the Maldacena
+  primary-source lesson: two sides as surviving descriptions of ONE parent under ONE limit;
+  DS1–DS7 in progress). **DS1 — bounded-sector CCR recovery** (the weak half of the decoupling
+  argument, honest finite form): `lowering_matrixElement_stable` (ladder entries at fixed
+  occupations are D-INDEPENDENT), `commutator_matrixElement_stabilizes` (`⟨m|[a_D,a_D†]|n⟩ = δ_mn`
+  below the top — the defect invisible at bounded occupations), CAPSTONE
+  **`commutator_eventually_exact`** (the `∀ᶠ D in atTop` form — the free-oscillator sector FORCED
+  by the cutoff limit). ⚠ Forces neither the screen geometry nor G; NOT a full decoupling
+  derivation. Next: DS2 (the single-mode Gibbs limit).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

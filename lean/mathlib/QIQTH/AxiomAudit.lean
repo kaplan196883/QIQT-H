@@ -8276,6 +8276,15 @@ namespace QIQTH.AxiomAudit
 -- (the conjecture is STATED, never assumed; docs mirror docs/qg_roadmap/FLAT_RECORD_GRAVITY_CONJECTURE.md).
 -- NOT QG solved; no wall crossed. Std 3.
 #print axioms QIQTH.Conjectures.finiteEvidence_holds
+-- THE DECOUPLING SHADOW DS1 (THE_DECOUPLING_SHADOW_PLAN.md): bounded-sector CCR recovery — the finite
+-- analogue of "the parent contains the free sector" (the weak half of the Maldacena decoupling argument,
+-- honest finite form): lowering_matrixElement_stable (ladder entries at fixed occupations are
+-- D-INDEPENDENT); commutator_matrixElement_stabilizes (⟨m|[a_D,a_D†]|n⟩ = δ_mn below the top — the defect
+-- invisible at bounded occupations); CAPSTONE commutator_eventually_exact (the ∀ᶠ D in atTop form — the
+-- free-oscillator sector FORCED by the cutoff limit). Matrix elements only; forces neither the screen
+-- geometry nor G; NOT a full decoupling derivation. Std 3.
+#print axioms QIQTH.Decoupling.commutator_matrixElement_stabilizes
+#print axioms QIQTH.Decoupling.commutator_eventually_exact
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
