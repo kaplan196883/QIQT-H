@@ -896,7 +896,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   MODULAR-FLOW EQUIVARIANT (CAPSTONE **`cornerEmbed_sigmaDiag`**: σ_s^{C′}∘ι = ι∘σ_s^C via the
   kappaOf eigen-law `kappaOf_gibbsWeight_of_sameOffSub`) — the state-compatible
   modular-equivariant refinement tower = the ITPFI tower DATA, as a family of finite-dimensional
-  maps only (no limit algebra, no type claim). Next: T8 (checkpoint).
+  maps only (no limit algebra, no type claim). **T8 — CAMPAIGN COMPLETE (8/8)**
+  (`Tower/Checkpoint.lean`). CHECKPOINT (verbatim): HAVE "the machine-checked arithmetic content
+  of the Araki–Woods III₁ criterion for the code's Gibbs tower, including a hypothesis-free
+  concrete instance, the Powers-guard separation, the σ-additive infinite-mode Gibbs measure
+  with its non-atomicity, and the state-compatible modular-equivariant finite refinement tower;
+  the inference to an actual III₁ factor is cited (Araki–Woods 1968; Connes 1973), never
+  proved." HAVE NOT "the ITPFI von Neumann algebra, its ratio set, its type, any inductive limit
+  or weak closure, any quantum state on the infinite system, or any continuum-limit completion —
+  none are constructed or classified here.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

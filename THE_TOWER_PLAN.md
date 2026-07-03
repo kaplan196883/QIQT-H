@@ -1,6 +1,6 @@
 # THE TOWER (T1–T7): the first machine-checked contact with the Type III₁ wall
 
-**Status:** ACTIVE (2026-07-03). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning)** (binding
+**Status:** COMPLETE (2026-07-03) — T1–T8 ALL LANDED, axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning)** (binding
 verdict below). **Goal:** phase A of the continuum-definition attack via the ITPFI/Araki–Woods
 route — the code tower with its Gibbs product states IS Araki–Woods input data. Centerpiece: **the
 Araki–Woods III₁ criterion for the code's Gibbs tower as a machine-checked ARITHMETIC theorem about
@@ -76,7 +76,7 @@ finite operator refinement tower. Files under `lean/mathlib/QIQTH/Tower/`.
   mode-operator compatibility, state compatibility φ_{C′}∘ι = φ_C, and MODULAR-FLOW EQUIVARIANCE
   σ_t^{C′}∘ι = ι∘σ_t^C via the kappaOf eigen-law. The honest finite shadow of the ITPFI tower;
   family of finite-dimensional maps only.
-- [ ] **T8 — checkpoint**: the campaign checkpoint sentences (from the consult, per-increment
+- [x] **T8 — checkpoint** ✅ DONE: the campaign checkpoint sentences (from the consult, per-increment
   versions logged as each lands): HAVE: "the machine-checked arithmetic content of the Araki–Woods
   III₁ criterion for the code's Gibbs tower, including a hypothesis-free concrete instance, the
   Powers-guard separation, the σ-additive infinite-mode Gibbs measure with its non-atomicity, and
@@ -185,3 +185,14 @@ attempt with the error shown. Check sibling jobs before each increment. Consults
   weak closure, vN algebra or type claim (binding verdict); the ITPFI tower DATA exhibited,
   its classification cited at T3 (Araki–Woods 1968), never performed. NEXT → T8 (checkpoint:
   the campaign HAVE/HAVE-NOT sentences verbatim; delete the loop; stop).
+
+- **2026-07-03** — **T8 LANDED — CAMPAIGN COMPLETE (8/8)** (`QIQTH/Tower/Checkpoint.lean`,
+  checkpoint marker module, budget 0). The HAVE/HAVE-NOT sentences VERBATIM in the module
+  docstring and the inventory. HAVE: "the machine-checked arithmetic content of the Araki–Woods
+  III₁ criterion for the code's Gibbs tower, including a hypothesis-free concrete instance, the
+  Powers-guard separation, the σ-additive infinite-mode Gibbs measure with its non-atomicity,
+  and the state-compatible modular-equivariant finite refinement tower; the inference to an
+  actual III₁ factor is cited (Araki–Woods 1968; Connes 1973), never proved." HAVE NOT: "the
+  ITPFI von Neumann algebra, its ratio set, its type, any inductive limit or weak closure, any
+  quantum state on the infinite system, or any continuum-limit completion — none are constructed
+  or classified here." Loop 25f89281 deleted. Paper/website sync on request.

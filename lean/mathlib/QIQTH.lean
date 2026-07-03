@@ -67,6 +67,7 @@ import QIQTH.Tower.PowersGuard
 import QIQTH.Tower.GibbsLimit
 import QIQTH.Tower.NonAtomic
 import QIQTH.Tower.CornerEmbed
+import QIQTH.Tower.Checkpoint
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius
