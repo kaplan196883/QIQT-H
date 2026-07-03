@@ -51,7 +51,7 @@ Files: `lean/mathlib/QIQTH/Dynamics.lean` (DY1–DY5), `QIQTH/CrossCheck.lean` (
   `alpha_zero`/`alpha_add`/`alpha_mul`/`alpha_star`; the actions — `alpha_diagonal` (records/number
   operators/occupation projectors STATIONARY) and `alpha_modeLowering`/`alpha_modeRaising`
   (`α_t(a_k) = e^{−iω_k t}·a_k`, `α_t(a_k†) = e^{iω_k t}·a_k†` — the nontrivial dynamics).
-- [ ] **DY2 — the explicit Gibbs product density**: `ZMode` (positivity), `pMode` (normalization),
+- [x] **DY2 — the explicit Gibbs product density** ✅ DONE: `ZMode` (positivity), `pMode` (normalization),
   `gibbsDensity` (entrywise product diagonal); `gibbs_isDensity`; `gibbs_stationary`
   (α_t-invariance).
 - [ ] **DY3 — the finite KMS bridge**: `sigmaDiag_gibbs_eq_alpha_rescale` (σ_s^{ρ_β} = α_{−βs}, up
@@ -99,3 +99,10 @@ before each increment. Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose t
   STATIONARY (H a function of the N_k, the honesty point stated); CAPSTONE
   alpha_modeLowering/Raising — the nontrivial dynamics: α_t(a_k) = e^{−iω_k t}·a_k,
   α_t(a_k†) = e^{iω_k t}·a_k†. NEXT → DY2 (the Gibbs product density).
+
+- **2026-07-03** — **DY2 LANDED** (axiom-free std-3, budget 0): ZMode (positive per-mode partition
+  function); pMode (normalized Boltzmann weights); gibbsWeight (the product weight — positive,
+  normalized via the product-sum interchange Fintype.piFinset_univ + Finset.prod_univ_sum);
+  gibbsDensity (explicit product diagonal — NO matrix exponential); CAPSTONE gibbs_isDensity (PSD +
+  unit trace); gibbs_stationary (tr(ρ_β·α_t(A)) = tr(ρ_β·A) — the flow preserves the diagonal and
+  ρ_β is diagonal). NEXT → DY3 (the finite KMS bridge).

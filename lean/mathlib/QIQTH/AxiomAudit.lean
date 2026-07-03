@@ -8223,6 +8223,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Dynamics.alpha_recordProj
 #print axioms QIQTH.Dynamics.alpha_modeLowering
 #print axioms QIQTH.Dynamics.alpha_modeRaising
+-- THE DYNAMICS DY2: the explicit Gibbs product density — ZMode (positive partition function), pMode
+-- (normalized per-mode Boltzmann weights), gibbsWeight (the product weight, positive, normalized via the
+-- product-sum interchange over the occupation basis); CAPSTONE gibbs_isDensity (the thermal state is a
+-- genuine density: PSD diagonal + unit trace — NO matrix exponential, explicit weights per the verdict);
+-- gibbs_stationary (tr(rho_beta·alpha_t(A)) = tr(rho_beta·A) — the flow preserves the diagonal). Std 3.
+#print axioms QIQTH.Dynamics.sum_gibbsWeight_one
+#print axioms QIQTH.Dynamics.gibbs_isDensity
+#print axioms QIQTH.Dynamics.gibbs_stationary
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

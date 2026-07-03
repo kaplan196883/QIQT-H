@@ -755,7 +755,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`alpha_diagonal`/`alpha_recordProj` — RECORDS ARE STATIONARY** (H is a function of the N_k — the
   honesty point, stated not hidden); CAPSTONE **`alpha_modeLowering`/`alpha_modeRaising`** — the
   nontrivial dynamics: the ladders rotate at their mode frequencies, `α_t(a_k) = e^{−iω_k t}·a_k`.
-  Next: DY2 (the Gibbs product density).
+  **DY2 LANDED — THE EXPLICIT THERMAL STATE**: `ZMode`/`pMode` (positive, normalized per-mode
+  Boltzmann weights), `gibbsWeight` (the product weight, normalized via the occupation-basis
+  product-sum interchange), `gibbsDensity` (explicit product diagonal — no matrix exponential),
+  CAPSTONE **`gibbs_isDensity`** (PSD + unit trace) + **`gibbs_stationary`** (the flow preserves the
+  diagonal, so tr(ρ_β·α_t(A)) = tr(ρ_β·A)). Next: DY3 (the finite KMS bridge).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

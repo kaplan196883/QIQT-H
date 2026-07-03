@@ -209,4 +209,84 @@ theorem alpha_modeRaising (t : ℝ) (k : C) :
   simp only [map_mul, map_neg, Complex.conj_I, Complex.conj_ofReal]
   ring
 
+/-! ## DY2 — the explicit Gibbs product density
+
+The thermal state of the code at inverse temperature `β`: an EXPLICIT product diagonal density
+(per-mode Boltzmann weights — no matrix exponential, per the binding verdict), normalized,
+positive, and stationary under the flow. -/
+
+section Gibbs
+
+open scoped ComplexOrder
+
+/-- **The per-mode partition function** `Z_k(β) = Σ_{i<D_k} e^{−βω_k i}`. -/
+noncomputable def ZMode (β : ℝ) (k : M) : ℝ :=
+  ∑ i : Fin (L.D k), Real.exp (-(β * ω k * ((i : ℕ) : ℝ)))
+
+theorem ZMode_pos (β : ℝ) (k : M) : 0 < ZMode L ω β k :=
+  Finset.sum_pos (fun i _ => Real.exp_pos _)
+    ⟨⟨0, L.hD k⟩, Finset.mem_univ _⟩
+
+/-- **The per-mode Boltzmann weight** `p_k(i) = e^{−βω_k i}/Z_k`. -/
+noncomputable def pMode (β : ℝ) (k : M) (i : Fin (L.D k)) : ℝ :=
+  Real.exp (-(β * ω k * ((i : ℕ) : ℝ))) / ZMode L ω β k
+
+theorem pMode_pos (β : ℝ) (k : M) (i : Fin (L.D k)) : 0 < pMode L ω β k i :=
+  div_pos (Real.exp_pos _) (ZMode_pos L ω β k)
+
+/-- Each mode's Boltzmann weights are normalized. -/
+theorem pMode_sum_one (β : ℝ) (k : M) : ∑ i, pMode L ω β k i = 1 := by
+  simp only [pMode]
+  rw [← Finset.sum_div,
+    show (∑ i : Fin (L.D k), Real.exp (-(β * ω k * ((i : ℕ) : ℝ)))) = ZMode L ω β k from rfl,
+    div_self (ZMode_pos L ω β k).ne']
+
+/-- **The Gibbs product weight** of an occupation state: `w_β(n) = Π_k p_k(n_k)`. -/
+noncomputable def gibbsWeight (β : ℝ) (n : Micro L C) : ℝ :=
+  ∏ k : C, pMode L ω β k.val (n k)
+
+theorem gibbsWeight_pos (β : ℝ) (n : Micro L C) : 0 < gibbsWeight L C ω β n :=
+  Finset.prod_pos fun k _ => pMode_pos L ω β k.val (n k)
+
+/-- The Gibbs weights are normalized (the product-sum interchange over the occupation basis). -/
+theorem sum_gibbsWeight_one (β : ℝ) :
+    ∑ n : Micro L C, gibbsWeight L C ω β n = 1 := by
+  simp only [gibbsWeight]
+  rw [← Fintype.piFinset_univ, ← Finset.prod_univ_sum]
+  exact Finset.prod_eq_one fun k _ => pMode_sum_one L ω β k.val
+
+/-- **The Gibbs density** `ρ_β = diag w_β` — the code's thermal state, explicit and diagonal. -/
+noncomputable def gibbsDensity (β : ℝ) : DiamondAlg L C :=
+  Matrix.diagonal fun n => ((gibbsWeight L C ω β n : ℝ) : ℂ)
+
+/-- **DY2 CAPSTONE — the Gibbs state is a genuine density**: positive semidefinite with unit
+    trace. -/
+theorem gibbs_isDensity (β : ℝ) :
+    QIQTH.QuantumEntropy.IsDensity (gibbsDensity L C ω β) where
+  posSemidef := by
+    rw [gibbsDensity]
+    refine Matrix.posSemidef_diagonal_iff.mpr fun n => ?_
+    exact Complex.zero_le_real.mpr (gibbsWeight_pos L C ω β n).le
+  trace_one := by
+    rw [gibbsDensity, Matrix.trace_diagonal, ← Complex.ofReal_sum, sum_gibbsWeight_one]
+    norm_num
+
+/-- **The Gibbs state is stationary** under the flow: `tr(ρ_β·α_t(A)) = tr(ρ_β·A)` — the flow
+    preserves the diagonal, and ρ_β is diagonal. -/
+theorem gibbs_stationary (β t : ℝ) (A : DiamondAlg L C) :
+    Matrix.trace (gibbsDensity L C ω β * alpha L C ω t A)
+      = Matrix.trace (gibbsDensity L C ω β * A) := by
+  rw [Matrix.trace, Matrix.trace]
+  refine Finset.sum_congr rfl fun n _ => ?_
+  rw [Matrix.diag_apply, Matrix.diag_apply, Matrix.mul_apply, Matrix.mul_apply]
+  refine Finset.sum_congr rfl fun p _ => ?_
+  rw [gibbsDensity, Matrix.diagonal_apply]
+  by_cases h : n = p
+  · subst h
+    rw [if_pos rfl, alpha_entry, sub_self]
+    simp
+  · rw [if_neg h, zero_mul, zero_mul]
+
+end Gibbs
+
 end QIQTH.Dynamics
