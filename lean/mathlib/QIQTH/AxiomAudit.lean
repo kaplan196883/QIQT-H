@@ -8231,6 +8231,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Dynamics.sum_gibbsWeight_one
 #print axioms QIQTH.Dynamics.gibbs_isDensity
 #print axioms QIQTH.Dynamics.gibbs_stationary
+-- THE DYNAMICS DY3: the finite KMS bridge — sigmaDiag_entry (the diagonal modular flow's entry formula at a
+-- positive weight); log_gibbsWeight (log w = −βE − Σ log Z); CAPSTONE sigmaDiag_gibbs_eq_alpha_rescale —
+-- THE GIBBS STATE'S MODULAR FLOW IS THE RESCALED PHYSICAL FLOW sigma_s^{rho_beta} = alpha_{−βs} (the
+-- partition function cancels; the flow is never DEFINED by modAut, per the verdict — the bridge runs the
+-- other way); gibbs_kms_condition (the held finite Tomita–Takesaki KMS applied to the explicit density, via
+-- the gibbsInvertible instance); gibbsDensity_zero_eq_maxMixed (the tracial β = 0 case: the thermal tower and
+-- the keystone counting tower share their ground floor). Std 3.
+#print axioms QIQTH.Dynamics.sigmaDiag_gibbs_eq_alpha_rescale
+#print axioms QIQTH.Dynamics.gibbs_kms_condition
+#print axioms QIQTH.Dynamics.gibbsDensity_zero_eq_maxMixed
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

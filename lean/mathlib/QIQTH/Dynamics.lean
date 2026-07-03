@@ -21,6 +21,7 @@
 -/
 import Mathlib
 import QIQTH.Embedding
+import QIQTH.FiniteModularTheory
 
 namespace QIQTH.Dynamics
 
@@ -288,5 +289,112 @@ theorem gibbs_stationary (β t : ℝ) (A : DiamondAlg L C) :
   · rw [if_neg h, zero_mul, zero_mul]
 
 end Gibbs
+
+/-! ## DY3 — the finite KMS bridge
+
+The Gibbs state's MODULAR flow is the RESCALED physical flow — `σ_s^{ρ_β} = α_{−βs}` — so the held
+finite Tomita–Takesaki KMS condition certifies ρ_β as the KMS state of the code dynamics at inverse
+temperature β (the flow is never DEFINED by modAut, per the binding verdict: the bridge runs the
+other way). At β = 0 the Gibbs state IS the keystone's maximally mixed counting state (the tracial
+case). -/
+
+section KMSBridge
+
+open QIQTH.FiniteModularTheory
+
+/-- The entry formula for the diagonal modular flow at a positive weight. -/
+theorem sigmaDiag_entry (p : Micro L C → ℝ) (hp : ∀ n, 0 < p n) (s : ℝ)
+    (x : DiamondAlg L C) (n m : Micro L C) :
+    sigmaDiag p s x n m
+      = Complex.exp (Complex.I * s * ((Real.log (p n) - Real.log (p m) : ℝ) : ℂ)) * x n m := by
+  rw [sigmaDiag, diagPow, diagPow, Matrix.mul_diagonal, Matrix.diagonal_mul,
+    Complex.cpow_def_of_ne_zero (by exact_mod_cast (hp n).ne'),
+    Complex.cpow_def_of_ne_zero (by exact_mod_cast (hp m).ne'),
+    ← Complex.ofReal_log (hp n).le, ← Complex.ofReal_log (hp m).le]
+  rw [show Complex.I * s * ((Real.log (p n) - Real.log (p m) : ℝ) : ℂ)
+      = ((Real.log (p n) : ℝ) : ℂ) * (Complex.I * s)
+        + ((Real.log (p m) : ℝ) : ℂ) * (Complex.I * (-s : ℝ)) from by push_cast; ring,
+    Complex.exp_add]
+  ring
+
+/-- The log of the Gibbs weight: `log w_β(n) = −βE(n) − Σ_k log Z_k`. -/
+theorem log_gibbsWeight (β : ℝ) (n : Micro L C) :
+    Real.log (gibbsWeight L C ω β n)
+      = -(β * energy L C ω n) - ∑ k : C, Real.log (ZMode L ω β k.val) := by
+  rw [gibbsWeight, Real.log_prod]
+  · have hterm : ∀ k : C, Real.log (pMode L ω β k.val (n k))
+        = -(β * (ω k.val * ((n k : ℕ) : ℝ))) - Real.log (ZMode L ω β k.val) := fun k => by
+      rw [pMode, Real.log_div (Real.exp_ne_zero _) (ZMode_pos L ω β k.val).ne', Real.log_exp]
+      ring
+    rw [Finset.sum_congr rfl fun k _ => hterm k, Finset.sum_sub_distrib]
+    congr 1
+    rw [energy, Finset.mul_sum, ← Finset.sum_neg_distrib]
+  · exact fun k _ => (pMode_pos L ω β k.val (n k)).ne'
+
+/-- **DY3 CAPSTONE — the KMS bridge:** the Gibbs state's modular flow IS the rescaled physical
+    flow, `σ_s^{ρ_β} = α_{−βs}` (the partition-function part of the weight cancels between the two
+    diagonal conjugations; only the energy differences survive). -/
+theorem sigmaDiag_gibbs_eq_alpha_rescale (β s : ℝ) (x : DiamondAlg L C) :
+    sigmaDiag (fun n => gibbsWeight L C ω β n) s x = alpha L C ω (-(β * s)) x := by
+  ext n m
+  rw [sigmaDiag_entry L C (fun n => gibbsWeight L C ω β n)
+      (fun n => gibbsWeight_pos L C ω β n) s x n m, alpha_entry]
+  congr 2
+  rw [log_gibbsWeight, log_gibbsWeight]
+  push_cast
+  ring
+
+/-- The Gibbs inverse (explicit diagonal). -/
+noncomputable def gibbsInv (β : ℝ) : DiamondAlg L C :=
+  Matrix.diagonal fun n => (((gibbsWeight L C ω β n)⁻¹ : ℝ) : ℂ)
+
+noncomputable instance gibbsInvertible (β : ℝ) : Invertible (gibbsDensity L C ω β) := by
+  refine ⟨gibbsInv L C ω β, ?_, ?_⟩
+  · rw [gibbsInv, gibbsDensity, Matrix.diagonal_mul_diagonal,
+      show (fun i => (((gibbsWeight L C ω β i)⁻¹ : ℝ) : ℂ) * ((gibbsWeight L C ω β i : ℝ) : ℂ))
+          = fun _ => (1 : ℂ) from funext fun i => by
+        rw [← Complex.ofReal_mul, inv_mul_cancel₀ (gibbsWeight_pos L C ω β i).ne',
+          Complex.ofReal_one]]
+    exact Matrix.diagonal_one
+  · rw [gibbsInv, gibbsDensity, Matrix.diagonal_mul_diagonal,
+      show (fun i => ((gibbsWeight L C ω β i : ℝ) : ℂ) * (((gibbsWeight L C ω β i)⁻¹ : ℝ) : ℂ))
+          = fun _ => (1 : ℂ) from funext fun i => by
+        rw [← Complex.ofReal_mul, mul_inv_cancel₀ (gibbsWeight_pos L C ω β i).ne',
+          Complex.ofReal_one]]
+    exact Matrix.diagonal_one
+
+/-- **The Gibbs state satisfies the finite KMS condition** (the held Tomita–Takesaki applied to the
+    explicit density): `ω_β(x·y) = ω_β(y·σ(x))` — with `σ` the modular conjugation whose real flow
+    is `α_{−βs}` by the bridge above. -/
+theorem gibbs_kms_condition (β : ℝ) (x y : DiamondAlg L C) :
+    stateOf (gibbsDensity L C ω β) (x * y)
+      = stateOf (gibbsDensity L C ω β) (y * modAut (gibbsDensity L C ω β) x) :=
+  kms_condition (gibbsDensity L C ω β) x y
+
+/-- **The tracial β = 0 case: the Gibbs state IS the keystone's maximally mixed counting state**
+    (KMS at β = 0 is trace cyclicity; the thermal tower and the counting tower share their
+    ground floor). -/
+theorem gibbsDensity_zero_eq_maxMixed :
+    gibbsDensity L C ω 0 = maxMixed (Micro L C) := by
+  rw [gibbsDensity, maxMixed, card_micro]
+  ext n m
+  rw [Matrix.diagonal_apply, Matrix.smul_apply, Matrix.one_apply]
+  by_cases h : n = m
+  · rw [if_pos h, if_pos h, smul_eq_mul, mul_one, gibbsWeight]
+    have hp : ∀ k : C, pMode L ω 0 k.val (n k) = ((L.D k.val : ℝ))⁻¹ := fun k => by
+      rw [pMode, ZMode,
+        show (∑ i : Fin (L.D k.val), Real.exp (-((0 : ℝ) * ω k.val * ((i : ℕ) : ℝ))))
+          = ∑ _i : Fin (L.D k.val), (1 : ℝ) from Finset.sum_congr rfl fun i _ => by norm_num,
+        Finset.sum_const, nsmul_eq_mul, mul_one, Finset.card_univ, Fintype.card_fin]
+      norm_num
+    rw [Finset.prod_congr rfl fun k _ => hp k, Finset.prod_inv_distrib]
+    push_cast
+    congr 1
+    rw [NC]
+    push_cast
+    exact Finset.prod_coe_sort C fun e => ((L.D e : ℕ) : ℂ)
+  · rw [if_neg h, if_neg h, smul_zero]
+
+end KMSBridge
 
 end QIQTH.Dynamics

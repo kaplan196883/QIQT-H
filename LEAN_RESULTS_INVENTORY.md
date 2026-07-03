@@ -759,7 +759,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Boltzmann weights), `gibbsWeight` (the product weight, normalized via the occupation-basis
   product-sum interchange), `gibbsDensity` (explicit product diagonal — no matrix exponential),
   CAPSTONE **`gibbs_isDensity`** (PSD + unit trace) + **`gibbs_stationary`** (the flow preserves the
-  diagonal, so tr(ρ_β·α_t(A)) = tr(ρ_β·A)). Next: DY3 (the finite KMS bridge).
+  diagonal, so tr(ρ_β·α_t(A)) = tr(ρ_β·A)). **DY3 LANDED — THE KMS BRIDGE**: `sigmaDiag_entry` +
+  `log_gibbsWeight`, CAPSTONE **`sigmaDiag_gibbs_eq_alpha_rescale`** — the Gibbs state's MODULAR flow
+  IS the rescaled PHYSICAL flow, `σ_s^{ρ_β} = α_{−βs}` (the partition function cancels; the flow is
+  never defined by modAut — the bridge runs the other way, per the verdict); `gibbs_kms_condition`
+  (the held finite Tomita–Takesaki applied to the explicit density, via the `gibbsInvertible`
+  instance); **`gibbsDensity_zero_eq_maxMixed`** (β = 0: the thermal tower and the keystone counting
+  tower share their ground floor). Next: DY4 (the mode-region reduction).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

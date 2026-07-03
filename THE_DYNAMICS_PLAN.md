@@ -54,7 +54,7 @@ Files: `lean/mathlib/QIQTH/Dynamics.lean` (DY1–DY5), `QIQTH/CrossCheck.lean` (
 - [x] **DY2 — the explicit Gibbs product density** ✅ DONE: `ZMode` (positivity), `pMode` (normalization),
   `gibbsDensity` (entrywise product diagonal); `gibbs_isDensity`; `gibbs_stationary`
   (α_t-invariance).
-- [ ] **DY3 — the finite KMS bridge**: `sigmaDiag_gibbs_eq_alpha_rescale` (σ_s^{ρ_β} = α_{−βs}, up
+- [x] **DY3 — the finite KMS bridge** ✅ DONE: `sigmaDiag_gibbs_eq_alpha_rescale` (σ_s^{ρ_β} = α_{−βs}, up
   to the held sign convention) ⟹ `gibbs_kms_condition` from FiniteModularTheory; the tracial β = 0
   lemma separately.
 - [ ] **DY4 — the mode-region reduction**: reduction to `R : Finset Mode` (finite
@@ -106,3 +106,12 @@ before each increment. Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose t
   gibbsDensity (explicit product diagonal — NO matrix exponential); CAPSTONE gibbs_isDensity (PSD +
   unit trace); gibbs_stationary (tr(ρ_β·α_t(A)) = tr(ρ_β·A) — the flow preserves the diagonal and
   ρ_β is diagonal). NEXT → DY3 (the finite KMS bridge).
+
+- **2026-07-03** — **DY3 LANDED** (axiom-free std-3, budget 0): sigmaDiag_entry (the diagonal modular
+  flow's entry formula at a positive weight, via cpow → exp/log); log_gibbsWeight
+  (log w = −βE − Σ log Z); CAPSTONE sigmaDiag_gibbs_eq_alpha_rescale — σ_s^{ρ_β} = α_{−βs} (the
+  partition function CANCELS between the two diagonal conjugations; only the energy differences
+  survive — the flow is never defined by modAut, per the verdict); gibbsInvertible (explicit diagonal
+  inverse) + gibbs_kms_condition (the held finite Tomita–Takesaki KMS applied to the explicit
+  density); gibbsDensity_zero_eq_maxMixed (the tracial β = 0 case: the thermal tower and the keystone
+  counting tower share their ground floor). NEXT → DY4 (the mode-region reduction).
