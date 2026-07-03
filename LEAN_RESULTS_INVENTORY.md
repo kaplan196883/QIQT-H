@@ -48,7 +48,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `btz_cardy_eq_qiqth_capacity` — Strominger's BTZ `Cardy = A/4G`, evaluated with QIQT-H's induced `G=1/(N Λ_s²)`,
   equals QIQT-H's bulk **capacity exponent** `(A/4)N Λ_s²` (the boundary microstate count and the QIQT-H regional
   capacity are the *same quantity* at the shared granularity; the AdS radius `ℓ` cancels); `centralCharge_in_primitives`
-  — the Brown–Henneaux `c=(3/2)ℓ N Λ_s²` *if* one posits a boundary length `ℓ` (AdS-specific, flagged). ⚠ A
+  — the Brown–Henneaux `c=(3/2)ℓ N Λ_s²` *if* one posits a boundary length `ℓ` (AdS-specific, flagged);
+  **`btz_cardy_eq_join_count`** (post-JOIN-INSTANCE, 2026-07-03) — for a CONSTRUCTED join instance whose
+  internal area `A_J` equals the BTZ horizon length `2π r₊`, the boundary Cardy count EQUALS the screen
+  code's τ-count `S_τ(J)`: Strominger's state count literally realized as a QIQT-H code count at the
+  shared granularity (the two bookkeepings agree because both are calibrated to the same primitives). ⚠ A
   variable-**correspondence** showing the two languages are consistent under the shared `G` — it does **NOT** import a
   boundary CFT, the Cardy formula (needs a 2d Virasoro QIQT-H lacks), bulk reconstruction, or AdS/CFT's cross-check;
   QIQT-H's capacity stays postulated/granularity-reframed. A bridge, not a QIQT-H physics claim.

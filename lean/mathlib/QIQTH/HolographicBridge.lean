@@ -15,6 +15,11 @@
   - `centralCharge_in_primitives`: *if* one posits a boundary length `ℓ` (an AdS-specific notion QIQT-H
     does not canonically have — flagged), the Brown–Henneaux central charge is `c = (3/2) ℓ N Λ_s²`,
     QIQT-H's "degrees of freedom" as species × granularity × length.
+  - `btz_cardy_eq_join_count` (the loop closed to the finite bridge): for a CONSTRUCTED join instance
+    whose internal area `A_J` equals the BTZ horizon length `2π r₊`, the boundary-CFT Cardy microstate
+    count EQUALS the screen code's τ-count `S_τ(J)` — Strominger's state count literally realized as a
+    QIQT-H code count under the shared granularity (still a correspondence: no boundary CFT imported,
+    no cross-check power).
 
   ⚠ WHAT IT IS NOT. It does NOT give QIQT-H a boundary CFT, the Cardy formula (which needs a 2d Virasoro
   QIQT-H lacks), bulk reconstruction, or AdS/CFT's independent cross-check (the same CFT computing both
@@ -24,6 +29,7 @@
 -/
 import QIQTH.AdSCFTComparison
 import QIQTH.InducedNewtonConstant
+import QIQTH.JoinInstance
 
 namespace QIQTH.HolographicBridge
 
@@ -56,5 +62,29 @@ theorem btz_cardy_eq_qiqth_capacity (rp rm N Λs ℓ : ℝ)
 theorem centralCharge_in_primitives (N Λs ℓ : ℝ) (hN : N ≠ 0) (hΛ : Λs ≠ 0) :
     AdSCFT.bhCentralCharge ℓ (InducedG.inducedG N Λs) = 3 * ℓ * N * Λs ^ 2 / 2 := by
   unfold AdSCFT.bhCentralCharge InducedG.inducedG; field_simp
+
+/-- **The loop closed to the finite bridge**: for a constructed join instance whose internal area
+    `A_J = A₀ + δA_Σ(h(α))` equals the BTZ horizon length `2π r₊`, the boundary-CFT Cardy microstate
+    count of the BTZ horizon EQUALS the screen code's τ-count `S_τ(J)` — Strominger's state count
+    literally realized as a QIQT-H code count at the shared granularity `G = 1/(N Λ_s²)` (the AdS
+    radius `ℓ` cancels). ⚠ Still a variable-correspondence: no boundary CFT is imported and no
+    cross-check power is gained; the two bookkeepings agree because both are calibrated to the same
+    primitives. -/
+theorem btz_cardy_eq_join_count {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (S : QIQTH.AreaMap.ScreenSurface ι) {A0 : ℝ} (β : QIQTH.JoinInstance.A0Split S A0)
+    (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ)
+    (rp rm N Λs ℓ : ℝ) (hN : 0 < N) (hΛ : 0 < Λs) (hℓ : 0 < ℓ)
+    (hrp : 0 ≤ rp) (hlo : -rp ≤ rm) (hhi : rm ≤ rp)
+    (hA : QIQTH.JoinInstance.AJoin S A0 pol α = 2 * π * rp) :
+    AdSCFT.cardyEntropy
+        (AdSCFT.bhCentralCharge ℓ (InducedG.inducedG N Λs))
+        (AdSCFT.bhCentralCharge ℓ (InducedG.inducedG N Λs))
+        (AdSCFT.btzL0 rp rm (InducedG.inducedG N Λs) ℓ)
+        (AdSCFT.btzL0bar rp rm (InducedG.inducedG N Λs) ℓ)
+      = QIQTH.JoinInstance.Stau S β (InducedG.inducedG N Λs)
+          (QIQTH.OperatorEmergence.classicalH pol α) := by
+  rw [btz_cardy_eq_qiqth_capacity rp rm N Λs ℓ hN hΛ hℓ hrp hlo hhi,
+    QIQTH.JoinInstance.Stau_eq_capacity_primitives S β hN hΛ pol α, hA]
+  ring
 
 end QIQTH.HolographicBridge
