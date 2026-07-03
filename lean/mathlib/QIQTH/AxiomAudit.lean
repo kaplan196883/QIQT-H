@@ -8128,6 +8128,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JoinInstance.Stau_eq_sum_wEnt
 #print axioms QIQTH.JoinInstance.Stau_eq_area_over_4G
 #print axioms QIQTH.JoinInstance.Stau_eq_inducedScreenArea_over_4G
+-- JOIN INSTANCE JI5: the integer finite-code specialization — NatRealizable (the NAMED realizability datum:
+-- integer link dimensions whose logs are the geometry-defined weights; honest data, a design condition, never
+-- derived); NatRealizable.tauDim_eq (where realizable, the REAL trace-dimension IS the integer dimension);
+-- CAPSTONE code_count_eq_fock_area_expect_noJoin — the old Q5 capstone with NO hJoin hypothesis (the join
+-- SUPPLIED by hJoin_tau): log #microstates = <alpha|A_tot|alpha>/(4G). Std 3.
+#print axioms QIQTH.JoinInstance.NatRealizable.tauDim_eq
+#print axioms QIQTH.JoinInstance.code_count_eq_fock_area_expect_noJoin
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

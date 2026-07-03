@@ -46,7 +46,7 @@ a THEOREM for the constructed instance, and the count normalization rewrites to 
   the instance's `Dτ` family.
 - [x] **JI4 — the τ count theorem** ✅ DONE: `dimTau J := ∏_a Dτ_a`, `S_tau J := log dimTau J`;
   `S_tau J = ∑_a wEnt a = A_J/(4G)` — **the generic exact replacement for the carried `hJoin`**.
-- [ ] **JI5 — the integer finite-code specialization**: `NatRealizable` (D : Link → ℕ+, `log D_a = wEnt a`);
+- [x] **JI5 — the integer finite-code specialization** ✅ DONE: `NatRealizable` (D : Link → ℕ+, `log D_a = wEnt a`);
   the old Q5 finite-code capstone re-proved **with no `hJoin` hypothesis** (the join supplied by the
   instance).
 - [ ] **JI6 — the induced-G normalization + capacity corollaries**: with `G = 1/(NΛs²)`:
@@ -102,3 +102,11 @@ expose the key).
   ARBITRARY graviton data: THE GENERIC EXACT REPLACEMENT FOR THE CARRIED hJoin (count and geometry =
   two computations of one number; the join IS the construction); Stau_eq_inducedScreenArea_over_4G
   (the exact Q5 interface shape, via hJoin_tau). NEXT → JI5 (the integer finite-code specialization).
+
+- **2026-07-03** — **JI5 LANDED** (axiom-free std-3, budget 0): NatRealizable (the NAMED realizability
+  datum — integer link dimensions whose logs are the geometry-defined weights; honest design-condition
+  data, never derived); NatRealizable.tauDim_eq (where realizable, the REAL trace-dimension IS the
+  integer dimension — the two construction levels agree); CAPSTONE
+  code_count_eq_fock_area_expect_noJoin — the old Q5 capstone re-proved with NO hJoin hypothesis (the
+  join SUPPLIED by hJoin_tau): log #microstates = ⟨α|Â_tot(Σ)|α⟩/(4G). NEXT → JI6 (the induced-G
+  normalization + capacity corollaries).

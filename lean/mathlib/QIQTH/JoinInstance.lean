@@ -234,4 +234,53 @@ theorem Stau_eq_inducedScreenArea_over_4G [Fintype ι] [DecidableEq ι] (S : Scr
 
 end TauCount
 
+/-! ## JI5 — the integer finite-code specialization
+
+Per the binding verdict: the integer code exists ONLY under the NAMED realizability datum
+(`NatRealizable` — the geometry-defined weights are logs of naturals). This is the exact old
+finite-code case, NOT generic (generic exact integer realization for arbitrary real weights is
+FALSE and stays cut). Where the datum holds, the old Q5 capstone is re-proved with NO `hJoin`
+hypothesis — the join is supplied by `hJoin_tau`. -/
+
+section NatCode
+
+open QIQTH.EarnGravity QIQTH.OperatorEmergence
+
+variable [Fintype ι] [DecidableEq ι]
+
+/-- **The NAMED realizability datum**: an integer link-dimension family whose logs are exactly the
+    geometry-defined weights. Honest DATA (a design condition on the geometry), never derived —
+    arbitrary real weights are NOT logs of naturals. -/
+structure NatRealizable (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) where
+  /-- the integer link dimensions -/
+  D : ι → ℕ
+  /-- positivity on the screen -/
+  hD : ∀ a ∈ S.elems, 0 < D a
+  /-- the realizability condition: the geometric weights are logs of the integer dimensions -/
+  hlog : ∀ a ∈ S.elems, Real.log (D a) = tauWEnt S β G h a
+
+/-- Where realizable, the REAL trace-dimension IS the integer dimension — the two levels of the
+    construction agree: `Dτ_a = D_a`. -/
+theorem NatRealizable.tauDim_eq (S : ScreenSurface ι) {A0 : ℝ} {β : A0Split S A0} {G : ℝ}
+    {h : Matrix (Fin 4) (Fin 4) ℝ} (R : NatRealizable S β G h) {a : ι} (ha : a ∈ S.elems) :
+    tauDim S β G h a = (R.D a : ℝ) := by
+  rw [tauDim, ← R.hlog a ha, Real.exp_log]
+  exact_mod_cast R.hD a ha
+
+/-- **JI5 CAPSTONE — the old Q5 capstone with NO `hJoin` hypothesis:** for a nat-realizable
+    geometry, the finite code's microstate count equals the coherent expectation of the TOTAL area
+    operator over `4G` — `log #microstates = ⟨α|Â_tot(Σ)|α⟩/(4G)` — with the join SUPPLIED by
+    `hJoin_tau` (the construction), not carried. -/
+theorem code_count_eq_fock_area_expect_noJoin (S : ScreenSurface ι) {A0 : ℝ}
+    (β : A0Split S A0) {G : ℝ} (hG : 0 < G) (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ)
+    (α : Fin 2 → ℂ) (R : NatRealizable S β G (classicalH pol α)) :
+    Real.log (Fintype.card (Microstates S.elems R.D))
+      = ((areaTotExpr pol A0 S).cohExpect α).re / (4 * G) :=
+  code_count_eq_fock_area_expect G hG S.elems
+    (tauWEnt S β G (classicalH pol α)) R.D R.hD R.hlog pol A0 S α
+    (hJoin_tau S β hG pol α)
+
+end NatCode
+
 end QIQTH.JoinInstance

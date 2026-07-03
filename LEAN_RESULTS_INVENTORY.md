@@ -672,8 +672,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `dimTau = ∏ Dτ_a` + `Stau = log dimTau`; `Stau_eq_sum_wEnt`; CAPSTONE **`Stau_eq_area_over_4G`** —
   `S_τ(J) = (A₀ + areaVar S (classicalH pol α))/(4G)` for ARBITRARY graviton data (count and geometry
   as two computations of one number, NOTHING carried — the join is the construction);
-  `Stau_eq_inducedScreenArea_over_4G` (the exact Q5 interface shape via `hJoin_tau`). Next: JI5 (the
-  integer finite-code specialization).
+  `Stau_eq_inducedScreenArea_over_4G` (the exact Q5 interface shape via `hJoin_tau`). **JI5 LANDED —
+  THE OLD Q5 CAPSTONE WITH NO `hJoin` HYPOTHESIS**: `NatRealizable` (the NAMED realizability datum —
+  integer dims whose logs are the geometry-defined weights; honest design-condition data),
+  `NatRealizable.tauDim_eq` (where realizable, `Dτ_a = D_a` — the two levels agree), CAPSTONE
+  **`code_count_eq_fock_area_expect_noJoin`** — `log #microstates = ⟨α|Â_tot(Σ)|α⟩/(4G)` with the
+  join SUPPLIED by `hJoin_tau`, not carried. Next: JI6 (the induced-G normalization).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
