@@ -47,7 +47,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
 
 ## Increments (dependency: C1→C3→(C4→C5)→C6→C7; C2 independent; C8, C9 need C2+C7; C10 needs C7)
 
-- [ ] **C1 — `QIQTH/VonNeumann/InvariantProjection.lean`**: `orbitSubmodule`/`orbitClosure` (with the
+- [x] **C1 — `QIQTH/VonNeumann/InvariantProjection.lean`** ✅ DONE: `orbitSubmodule`/`orbitClosure` (with the
   local `HasOrthogonalProjection` instance ATTACHED AT THE DEFINITION via `IsClosed.completeSpace_coe`);
   `orbitClosure_invariant`; `starProjection_mem_centralizer` (invariance of U and Uᗮ via ⋆-closure +
   `IsIdempotentElem.commute_iff`). The ⋆-closure counterexample comment. Risk LOW.
@@ -144,3 +144,15 @@ gpt-5.5-pro (never expose keys).
   `orthogonal_mem_invtSubmodule`, `StarSubalgebra.centralizer` glue, `PiLp` CLM API,
   `ContinuousLinearMapWOT` + Hilbert specialization all PRESENT; SOT + bicommutant ABSENT = the gap).
   Binding verdict recorded; loop armed.
+
+- **2026-07-04** — **C1 LANDED** (`QIQTH/VonNeumann/InvariantProjection.lean`, axiom-free std-3,
+  budget 0): `orbitSubmodule`/`orbitClosure` (the cyclic subspace, `HasOrthogonalProjection`
+  ATTACHED AT THE DEFINITION per the verdict — `isClosed_topologicalClosure.completeSpace_coe`);
+  `self_mem_orbitSubmodule` (unitality); `orbitClosure_invariant` (`map_mem_closure`); CAPSTONE
+  **`starProjection_mem_centralizer`** — the star projection onto a closed A-invariant subspace
+  lies in A′ (U-invariance under `star a` ⟹ Uᗮ-invariance under `a` via
+  `orthogonal_mem_invtSubmodule`; `IsIdempotentElem.commute_iff` + `range/ker_starProjection`);
+  the ⋆-closure counterexample (upper-triangular 2×2) in the docstring. Lean note: the
+  `invtSubmodule` membership lemmas take `f` EXPLICITLY — write
+  `(Module.End.mem_invtSubmodule_iff_forall_mem_of_mem _).mpr`, never dot-`.mpr` the ∀. NEXT → C2
+  (GeneratedBy).

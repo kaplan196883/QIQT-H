@@ -8409,6 +8409,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Tower.cornerEmbed_stateOf
 #print axioms QIQTH.Tower.kappaOf_gibbsWeight_of_sameOffSub
 #print axioms QIQTH.Tower.cornerEmbed_sigmaDiag
+-- THE CLOSURE C1 (VonNeumann/InvariantProjection.lean): the star projection onto a closed
+-- A-invariant subspace lies in the commutant A' (range/kernel invariance + IsIdempotentElem
+-- .commute_iff; the perp invariance uses star-closure — counterexample in the docstring: the
+-- bicommutant theorem is FALSE for non-star algebras). orbitSubmodule/orbitClosure (the cyclic
+-- subspace, HasOrthogonalProjection attached at the definition). Std 3.
+#print axioms QIQTH.VonNeumann.starProjection_mem_centralizer
+#print axioms QIQTH.VonNeumann.starProjection_orbitClosure_mem_centralizer
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
