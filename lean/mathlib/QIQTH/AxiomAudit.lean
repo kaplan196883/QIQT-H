@@ -8241,6 +8241,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Dynamics.sigmaDiag_gibbs_eq_alpha_rescale
 #print axioms QIQTH.Dynamics.gibbs_kms_condition
 #print axioms QIQTH.Dynamics.gibbsDensity_zero_eq_maxMixed
+-- THE DYNAMICS DY4: the mode-region reduction — restrictMicro + marginalWeight (region = a subset of MODE
+-- labels, per the verdict; everything diagonal, so reduction = CLASSICAL marginalization, no operator partial
+-- trace); CAPSTONE marginal_gibbsWeight — THE GIBBS MARGINAL IS AGAIN GIBBS (the complement modes sum to 1
+-- mode-by-mode; via the named-f product-sum interchange); reduced_gibbsDensity_eq (the reduced density IS the
+-- region's own Gibbs density — diagonal and product over k in R). Std 3.
+#print axioms QIQTH.Dynamics.marginal_gibbsWeight
+#print axioms QIQTH.Dynamics.reduced_gibbsDensity_eq
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -765,7 +765,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   never defined by modAut — the bridge runs the other way, per the verdict); `gibbs_kms_condition`
   (the held finite Tomita–Takesaki applied to the explicit density, via the `gibbsInvertible`
   instance); **`gibbsDensity_zero_eq_maxMixed`** (β = 0: the thermal tower and the keystone counting
-  tower share their ground floor). Next: DY4 (the mode-region reduction).
+  tower share their ground floor). **DY4 LANDED — THE GIBBS MARGINAL IS AGAIN GIBBS**:
+  `restrictMicro`/`marginalWeight` (region = subset of MODE labels; diagonal ⟹ classical
+  marginalization, no operator partial trace), CAPSTONE **`marginal_gibbsWeight`** (the complement
+  modes sum to 1 mode-by-mode) + **`reduced_gibbsDensity_eq`** (the reduced density IS the region's
+  own Gibbs density — diagonal, product over k ∈ R). Next: DY5 (the region entropy formula).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

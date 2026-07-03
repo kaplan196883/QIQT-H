@@ -57,7 +57,7 @@ Files: `lean/mathlib/QIQTH/Dynamics.lean` (DY1–DY5), `QIQTH/CrossCheck.lean` (
 - [x] **DY3 — the finite KMS bridge** ✅ DONE: `sigmaDiag_gibbs_eq_alpha_rescale` (σ_s^{ρ_β} = α_{−βs}, up
   to the held sign convention) ⟹ `gibbs_kms_condition` from FiniteModularTheory; the tracial β = 0
   lemma separately.
-- [ ] **DY4 — the mode-region reduction**: reduction to `R : Finset Mode` (finite
+- [x] **DY4 — the mode-region reduction** ✅ DONE: reduction to `R : Finset Mode` (finite
   marginalization); the reduced Gibbs density is diagonal and product over `k ∈ R`.
 - [ ] **DY5 — the region entropy formula**: diagonal-vN = Shannon for these densities; product
   additivity; `thermalModeEntropy` + `S_micro_eq_sum_mode`; `S_micro_zero` (= Σ log D_k) +
@@ -115,3 +115,10 @@ before each increment. Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose t
   inverse) + gibbs_kms_condition (the held finite Tomita–Takesaki KMS applied to the explicit
   density); gibbsDensity_zero_eq_maxMixed (the tracial β = 0 case: the thermal tower and the keystone
   counting tower share their ground floor). NEXT → DY4 (the mode-region reduction).
+
+- **2026-07-03** — **DY4 LANDED** (axiom-free std-3, budget 0): restrictMicro + marginalWeight
+  (region = subset of MODE labels; everything diagonal ⟹ reduction = CLASSICAL marginalization, no
+  operator partial trace); CAPSTONE marginal_gibbsWeight — THE GIBBS MARGINAL IS AGAIN GIBBS (the
+  complement modes sum to 1 mode-by-mode; proof via a named-f product-sum interchange over the
+  occupation basis); reduced_gibbsDensity_eq (the reduced density IS the region's own Gibbs
+  density — diagonal and product over k ∈ R). NEXT → DY5 (the region entropy formula).

@@ -397,4 +397,90 @@ theorem gibbsDensity_zero_eq_maxMixed :
 
 end KMSBridge
 
+/-! ## DY4 — the mode-region reduction
+
+A REGION is a subset of MODE labels (not a spatial subregion — per the binding verdict; the Gibbs
+product state carries no mode-mode entanglement and no spatial-entanglement claim is made). All
+states here are diagonal, so the reduction is the CLASSICAL marginalization of the weight — no
+operator partial trace is needed. CAPSTONE: the Gibbs marginal is again Gibbs (the thermal product
+of the region's own modes). -/
+
+section Region
+
+variable (R : Finset M)
+
+/-- The restriction of an occupation state to a subregion of modes. -/
+def restrictMicro (hRC : R ⊆ C) (n : Micro L C) : Micro L R :=
+  fun j => n ⟨j.val, hRC j.2⟩
+
+/-- **The region marginal** of a diagonal weight: sum over all occupations agreeing with `r` on
+    the region. -/
+noncomputable def marginalWeight (hRC : R ⊆ C) (w : Micro L C → ℝ) (r : Micro L R) : ℝ :=
+  ∑ n ∈ Finset.univ.filter (fun n : Micro L C => restrictMicro L C R hRC n = r), w n
+
+/-- **DY4 CAPSTONE — the Gibbs marginal is again Gibbs**: the reduced weight of the thermal
+    product on a mode region is the region's own thermal product (the complement modes sum to 1,
+    mode by mode). -/
+theorem marginal_gibbsWeight (hRC : R ⊆ C) (β : ℝ) (r : Micro L R) :
+    marginalWeight L C R hRC (gibbsWeight L C ω β) r = gibbsWeight L R ω β r := by
+  set f : (k : C) → Fin (L.D k.val) → ℝ := fun k i =>
+    if h : (k : M) ∈ R then (if i = r ⟨k.val, h⟩ then pMode L ω β k.val i else 0)
+    else pMode L ω β k.val i with hf
+  rw [marginalWeight, Finset.sum_filter]
+  have hsplit : ∀ n : Micro L C,
+      (if restrictMicro L C R hRC n = r then gibbsWeight L C ω β n else 0)
+      = ∏ k : C, f k (n k) := by
+    intro n
+    by_cases hres : restrictMicro L C R hRC n = r
+    · rw [if_pos hres, gibbsWeight]
+      refine Finset.prod_congr rfl fun k _ => ?_
+      simp only [hf]
+      by_cases h : (k : M) ∈ R
+      · rw [dif_pos h, if_pos (show n k = r ⟨k.val, h⟩ from congrFun hres ⟨k.val, h⟩)]
+      · rw [dif_neg h]
+    · rw [if_neg hres]
+      symm
+      have hex : ∃ j : R, n ⟨j.val, hRC j.2⟩ ≠ r j := by
+        by_contra hall
+        push_neg at hall
+        exact hres (funext fun j => hall j)
+      obtain ⟨j, hj⟩ := hex
+      refine Finset.prod_eq_zero (Finset.mem_univ (⟨j.val, hRC j.2⟩ : C)) ?_
+      simp only [hf]
+      rw [dif_pos j.2]
+      exact if_neg hj
+  rw [Finset.sum_congr rfl fun n _ => hsplit n, ← Fintype.piFinset_univ,
+    ← Finset.prod_univ_sum]
+  have hval : ∀ k : C, (∑ i : Fin (L.D k.val), f k i)
+      = if h : (k : M) ∈ R then pMode L ω β k.val (r ⟨k.val, h⟩) else 1 := by
+    intro k
+    simp only [hf]
+    by_cases h : (k : M) ∈ R
+    · simp only [dif_pos h]
+      rw [Finset.sum_ite_eq' Finset.univ (r ⟨k.val, h⟩) (pMode L ω β k.val)]
+      simp
+    · simp only [dif_neg h]
+      exact pMode_sum_one L ω β k.val
+  rw [Finset.prod_congr rfl fun k _ => hval k, gibbsWeight,
+    show (∏ k : C, if h : (k : M) ∈ R then pMode L ω β k.val (r ⟨k.val, h⟩) else 1)
+      = ∏ m ∈ C, (if h : m ∈ R then pMode L ω β m (r ⟨m, h⟩) else 1) from
+      Finset.prod_coe_sort C
+        (fun m => if h : m ∈ R then pMode L ω β m (r ⟨m, h⟩) else 1),
+    ← Finset.prod_subset hRC (fun m _ hm => dif_neg hm),
+    ← Finset.prod_coe_sort R (fun m => if h : m ∈ R then pMode L ω β m (r ⟨m, h⟩) else 1)]
+  exact Finset.prod_congr rfl fun j _ => by rw [dif_pos j.2]
+
+/-- **The reduced Gibbs DENSITY is the region's own Gibbs density** — diagonal and product over
+    `k ∈ R`, as required. -/
+theorem reduced_gibbsDensity_eq (hRC : R ⊆ C) (β : ℝ) :
+    Matrix.diagonal
+        (fun r => ((marginalWeight L C R hRC (gibbsWeight L C ω β) r : ℝ) : ℂ))
+      = gibbsDensity L R ω β := by
+  rw [gibbsDensity]
+  congr 1
+  funext r
+  rw [marginal_gibbsWeight]
+
+end Region
+
 end QIQTH.Dynamics
