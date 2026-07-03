@@ -52,6 +52,7 @@ import QIQTH.JoinInstance
 import QIQTH.Embedding
 import QIQTH.Dynamics
 import QIQTH.CrossCheck
+import QIQTH.Conjectures
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

@@ -783,7 +783,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`S_micro_zero_eq_inducedQuarterG`** — `S_micro(R,0) = A_ind/4G_ind`: the micro side computed
   from the code Hamiltonian, the macro side supplied independently, NO keystone calibration in the
   proofs; equality at SATURATION ONLY (arbitrary-β equality false, never claimed); the one-loop
-  continuum version = the named frontier. Next: DY7 (the conjecture package + checkpoint).
+  continuum version = the named frontier. **DY7 LANDED — CAMPAIGN COMPLETE**
+  (`QIQTH/Conjectures.lean` + docs mirror): **`FlatSpaceRecordGravityCorrespondence`** — THE
+  FLAT-SPACE RECORD-CODE/GRAVITY CORRESPONDENCE as a named Prop (for every region: micro record
+  entropy = one-loop conical entropy = area/4G_ind with G_ind the Sakharov constant of the SAME
+  field content — one microscopic system computing both states and G); `finiteEvidence_holds`
+  (DY1–DY6 bundled, every field a landed theorem); `continuumClaim` — NO proof field, NO axiom, NO
+  instance (stated, never assumed).
+  **DY7 CHECKPOINT (the two honest sentences, verbatim):** HAVE: "a finite, axiom-free diagonal
+  code dynamics, explicit Gibbs/KMS states, product-mode reductions, and a saturated conditional
+  induced-gravity cross-check whose proof does not use the trace/wEnt area calibration." HAVE NOT:
+  "a finite proof of a continuum one-loop heat-kernel area law or an equality between finite
+  thermal entropy at arbitrary β and an induced geometric area; that remains the named continuum
+  frontier/conjecture." ⚠ NOT QG solved; no wall crossed.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

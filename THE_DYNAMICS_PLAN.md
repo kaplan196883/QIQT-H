@@ -1,6 +1,6 @@
 # THE DYNAMICS (DY1–DY7): the code's time evolution + the independent cross-check + the conjecture
 
-**Status:** ACTIVE (2026-07-03). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** give the
+**Status:** COMPLETE (2026-07-03 — DY1–DY7 all landed; loop deleted). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** give the
 microscopic side (the capacity-bounded record code = the truncated field diamond, THE EMBEDDING's
 object) a TIME EVOLUTION — the diagonal code Hamiltonian `H = Σ_k ω_k N_k`, its Heisenberg flow,
 explicit Gibbs/KMS states, mode-region entropies — with the declared destination the INDEPENDENT
@@ -66,7 +66,7 @@ Files: `lean/mathlib/QIQTH/Dynamics.lean` (DY1–DY5), `QIQTH/CrossCheck.lean` (
   `InducedCrossCheckData` (the macro side as independent Sakharov/species/cell data);
   **`S_micro_le_inducedQuarterG`** (all β) + **`S_micro_zero_eq_inducedQuarterG`** (saturation) —
   the proofs referencing NO keystone calibration identifier (grep-checked).
-- [ ] **DY7 — the conjecture package + checkpoint** (`QIQTH/Conjectures.lean`):
+- [x] **DY7 — the conjecture package + checkpoint** ✅ DONE (`QIQTH/Conjectures.lean`):
   `FlatRecordGravityFiniteEvidence`, `FlatSpaceRecordGravityCorrespondence`,
   `FlatRecordGravityPackage.continuumClaim` (no proof field, no axiom); the docs mirror. Then the
   checkpoint (the two honest sentences, VERBATIM in the module docstring + inventory): HAVE: "a
@@ -142,3 +142,11 @@ before each increment. Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose t
   SATURATED CONDITIONAL SAKHAROV CROSS-CHECK: S_micro(R,0) = A_ind/4G_ind, micro side from the
   Hamiltonian (DY1–DY5), macro side independent; equality at SATURATION ONLY. NEXT → DY7 (the
   conjecture package + checkpoint).
+
+- **2026-07-03** — **DY7 LANDED — CAMPAIGN COMPLETE** (`QIQTH/Conjectures.lean` +
+  `docs/qg_roadmap/FLAT_RECORD_GRAVITY_CONJECTURE.md`): FlatRecordGravityFiniteEvidence (DY1–DY6
+  bundled) with finiteEvidence_holds (every field a landed theorem — PROVEN);
+  FlatSpaceRecordGravityCorrespondence (the conjecture as a named Prop-valued def) +
+  FlatRecordGravityPackage.continuumClaim — NO proof field, NO axiom, NO instance; the docs mirror.
+  The two honest sentences placed VERBATIM in the module docstring + inventory. NOT QG solved; no
+  wall crossed. Loop 3afb3bb6 deleted.

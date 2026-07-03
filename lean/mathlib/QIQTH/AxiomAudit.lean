@@ -8268,6 +8268,14 @@ namespace QIQTH.AxiomAudit
 -- (arbitrary-beta equality is FALSE, never claimed); the one-loop continuum version = the named frontier. Std 3.
 #print axioms QIQTH.CrossCheck.S_micro_le_inducedQuarterG
 #print axioms QIQTH.CrossCheck.S_micro_zero_eq_inducedQuarterG
+-- THE DYNAMICS DY7 (Conjectures.lean, CAMPAIGN COMPLETE): the flat-space record-code/gravity correspondence
+-- as a NAMED Prop package — FlatRecordGravityFiniteEvidence (the DY1-DY6 results bundled) with
+-- finiteEvidence_holds (every field a landed theorem — PROVEN); ContinuumLimitData +
+-- FlatSpaceRecordGravityCorrespondence (the conjecture as a Prop-valued def) +
+-- FlatRecordGravityPackage.continuumClaim — NO proof field for the continuum claim, NO axiom, NO instance
+-- (the conjecture is STATED, never assumed; docs mirror docs/qg_roadmap/FLAT_RECORD_GRAVITY_CONJECTURE.md).
+-- NOT QG solved; no wall crossed. Std 3.
+#print axioms QIQTH.Conjectures.finiteEvidence_holds
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
