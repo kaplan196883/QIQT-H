@@ -8306,6 +8306,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Decoupling.tendsto_thermalEntropy_saturation
 #print axioms QIQTH.Decoupling.guard_entropy_saturates
 #print axioms QIQTH.Decoupling.guard_defect_survives
+-- THE DECOUPLING SHADOW DS4: the finite-product lifts — planckEntropy + productEntropy; CAPSTONE
+-- tendsto_productEntropy (Σ_k S_{D_j(k)}(βω_k) → Σ_k s_Planck(βω_k) along ANY schedule growing at every
+-- mode); tendsto_totalDefect (the total defect expectation dies); tendsto_gibbsWeight_fixedOccupation
+-- (every fixed occupation's Gibbs weight → the free-field Boltzmann weight Π q^n(1−q) — the state-level
+-- product decoupling). Finite mode sets only; fixed positive temperatures. Std 3.
+#print axioms QIQTH.Decoupling.tendsto_productEntropy
+#print axioms QIQTH.Decoupling.tendsto_totalDefect
+#print axioms QIQTH.Decoupling.tendsto_gibbsWeight_fixedOccupation
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

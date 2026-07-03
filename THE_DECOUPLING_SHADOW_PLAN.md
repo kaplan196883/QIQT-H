@@ -49,7 +49,7 @@ weaker hypotheses fail). Files under `lean/mathlib/QIQTH/Decoupling/` + `QIQTH/R
   `S_D(x) → −log(1−e^{−x}) + x/(e^x−1)` (fixed x > 0); the high-T saturation `S_D(x) → log D` as
   x → 0⁺; THE REGIME-SEPARATION GUARD — along x_D·D → 0: S_D(x_D) − log D → 0 BUT the defect
   expectation → 1 (saturation ≠ the free-oscillator limit, as a theorem).
-- [ ] **DS4 — finite products** (`QIQTH/Decoupling/ProductModes.lean`): the single-mode limits
+- [x] **DS4 — finite products** ✅ DONE (`QIQTH/Decoupling/ProductModes.lean`): the single-mode limits
   lifted to finite mode sets by `Finset.sum`/`Tendsto` algebra (S_prod = Σ S_{D_k}(βω_k)
   converging modewise; bounded-word convergence for H = Σ ω_k N_k). Finite mode sets ONLY.
 - [ ] **DS5 — real log-valuation rigidity** (`QIQTH/Rigidity/LogValuationReal.lean`): a monotone
@@ -110,3 +110,11 @@ attempt with the error shown. Check for sibling jobs before each increment. Cons
   saturates (squeeze |S − log D| ≤ x_D·D) BUT the defect expectation tends to 1 (squeeze
   e^{−x_D·D} ≤ defect ≤ 1) — saturated capacity is provably NOT the free-oscillator limit.
   NEXT → DS4 (finite products).
+
+- **2026-07-03** — **DS4 LANDED** (`QIQTH/Decoupling/ProductModes.lean`, axiom-free std-3,
+  budget 0): planckEntropy + productEntropy; CAPSTONE tendsto_productEntropy
+  (Σ_k S_{D_j(k)}(βω_k) → Σ_k s_Planck(βω_k) along any schedule growing at every mode — by
+  tendsto_finset_sum over the DS3 single-mode limit); tendsto_totalDefect (the total defect
+  expectation dies); tendsto_gibbsWeight_fixedOccupation (every fixed occupation's Gibbs weight →
+  the free-field Boltzmann weight Π q^n(1−q) — the state-level product decoupling). Finite mode
+  sets only. NEXT → DS5 (real log-valuation rigidity).

@@ -818,7 +818,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   GUARD: along ANY schedule x_D·D → 0 capacity saturates BUT the truncation-defect expectation
   tends to 1, NOT 0 — exact saturated capacity is provably NOT the positive-temperature
   free-oscillator limit (the two decoupling halves live in different regimes, as a THEOREM).
-  Next: DS4 (finite products).
+  **DS4 LANDED — THE FINITE-PRODUCT LIFTS**: `planckEntropy`/`productEntropy`, CAPSTONE
+  **`tendsto_productEntropy`** (the product thermal entropy → the finite-mode free-field value
+  along any all-modes-growing cutoff schedule), `tendsto_totalDefect` (the total defect dies),
+  `tendsto_gibbsWeight_fixedOccupation` (every fixed occupation's Gibbs weight → the free-field
+  Boltzmann weight — the state-level product decoupling). Finite mode sets only.
+  Next: DS5 (real log-valuation rigidity).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
