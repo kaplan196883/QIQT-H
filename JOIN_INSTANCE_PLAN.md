@@ -44,7 +44,7 @@ a THEOREM for the constructed instance, and the count normalization rewrites to 
   `exists_tau0_corner_of_posReal` (∀ r > 0, ∃ window/corner with τ₀ = r), riding the held `flatClock`
   (mass is a free positive real) + the keystone monomial trace; the finite-family/product version for
   the instance's `Dτ` family.
-- [ ] **JI4 — the τ count theorem**: `dimTau J := ∏_a Dτ_a`, `S_tau J := log dimTau J`;
+- [x] **JI4 — the τ count theorem** ✅ DONE: `dimTau J := ∏_a Dτ_a`, `S_tau J := log dimTau J`;
   `S_tau J = ∑_a wEnt a = A_J/(4G)` — **the generic exact replacement for the carried `hJoin`**.
 - [ ] **JI5 — the integer finite-code specialization**: `NatRealizable` (D : Link → ℕ+, `log D_a = wEnt a`);
   the old Q5 finite-code capstone re-proved **with no `hJoin` hypothesis** (the join supplied by the
@@ -95,3 +95,10 @@ expose the key).
   positive reals, never subcorners of one fixed fiber+window); tau0_link_witness + tau0_total_witness
   (each link's Dτ_a by ITS OWN window; the total ∏ Dτ_a by the product-mass window). NEXT → JI4 (the τ
   count theorem).
+
+- **2026-07-03** — **JI4 LANDED** (axiom-free std-3, budget 0): dimTau = ∏ Dτ_a (total real
+  trace-dimension, positive) + Stau = log dimTau; Stau_eq_sum_wEnt (the count is the weight sum —
+  log-of-product-of-exponentials); CAPSTONE Stau_eq_area_over_4G — S_τ(J) = (A0 + areaVar)/(4G) for
+  ARBITRARY graviton data: THE GENERIC EXACT REPLACEMENT FOR THE CARRIED hJoin (count and geometry =
+  two computations of one number; the join IS the construction); Stau_eq_inducedScreenArea_over_4G
+  (the exact Q5 interface shape, via hJoin_tau). NEXT → JI5 (the integer finite-code specialization).

@@ -668,7 +668,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`exists_tau0_corner_of_posReal`** (every positive real is a REALIZED τ₀ corner value, window
   witness explicit — per the binding qualifier, the free window mass, never subcorners of one fixed
   fiber+window), `tau0_link_witness`/`tau0_total_witness` (each `Dτ_a` by its own window; the total
-  `∏Dτ_a` by the product-mass window). Next: JI4 (the τ count theorem).
+  `∏Dτ_a` by the product-mass window). **JI4 LANDED — THE GENERIC EXACT REPLACEMENT FOR `hJoin`**:
+  `dimTau = ∏ Dτ_a` + `Stau = log dimTau`; `Stau_eq_sum_wEnt`; CAPSTONE **`Stau_eq_area_over_4G`** —
+  `S_τ(J) = (A₀ + areaVar S (classicalH pol α))/(4G)` for ARBITRARY graviton data (count and geometry
+  as two computations of one number, NOTHING carried — the join is the construction);
+  `Stau_eq_inducedScreenArea_over_4G` (the exact Q5 interface shape via `hJoin_tau`). Next: JI5 (the
+  integer finite-code specialization).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

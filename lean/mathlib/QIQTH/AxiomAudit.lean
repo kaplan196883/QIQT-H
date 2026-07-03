@@ -8120,6 +8120,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JoinInstance.tauMonomial_flatClock_zero
 #print axioms QIQTH.JoinInstance.exists_tau0_corner_of_posReal
 #print axioms QIQTH.JoinInstance.tau0_total_witness
+-- JOIN INSTANCE JI4: the tau count theorem — dimTau = prod Dtau_a (total real trace-dimension, positive),
+-- Stau = log dimTau, Stau_eq_sum_wEnt (the count is the weight sum); CAPSTONE Stau_eq_area_over_4G —
+-- S_tau(J) = (A0 + areaVar)/(4G) for ARBITRARY graviton data: the GENERIC EXACT REPLACEMENT for the carried
+-- hJoin (count and geometry = two computations of one number, the join IS the construction);
+-- Stau_eq_inducedScreenArea_over_4G (the exact Q5 interface shape via hJoin_tau). Std 3.
+#print axioms QIQTH.JoinInstance.Stau_eq_sum_wEnt
+#print axioms QIQTH.JoinInstance.Stau_eq_area_over_4G
+#print axioms QIQTH.JoinInstance.Stau_eq_inducedScreenArea_over_4G
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

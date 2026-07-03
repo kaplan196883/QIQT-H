@@ -176,4 +176,62 @@ theorem tau0_total_witness (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0)
 
 end CornerRealization
 
+/-! ## JI4 — the τ count theorem: the generic exact replacement for `hJoin`
+
+The instance's count `S_τ = log ∏_a Dτ_a` equals the weight sum equals `A_J/(4G)` — the code's
+counting and the geometry's area agree as two computations of one number, for ARBITRARY geometric
+data, with no carried join hypothesis (the join is the construction). -/
+
+section TauCount
+
+variable [Fintype ι] [DecidableEq ι]
+
+/-- The instance's TOTAL τ-dimension: the product of the link trace-dimensions. -/
+noncomputable def dimTau (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) : ℝ :=
+  ∏ a ∈ S.elems, tauDim S β G h a
+
+theorem dimTau_pos (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) : 0 < dimTau S β G h :=
+  Finset.prod_pos fun a _ => tauDim_pos S β G h a
+
+/-- The instance's count: the log of its total τ-dimension. -/
+noncomputable def Stau (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) : ℝ :=
+  Real.log (dimTau S β G h)
+
+/-- The count is the weight sum: `S_τ = Σ_a wEnt a` (log of a product of exponentials). -/
+theorem Stau_eq_sum_wEnt (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) (G : ℝ)
+    (h : Matrix (Fin 4) (Fin 4) ℝ) :
+    Stau S β G h = ∑ a ∈ S.elems, tauWEnt S β G h a := by
+  rw [Stau, dimTau, Real.log_prod]
+  · exact Finset.sum_congr rfl fun a _ => hcal_tau S β G h a
+  · exact fun a _ => (tauDim_pos S β G h a).ne'
+
+/-- **JI4 CAPSTONE — the generic exact replacement for the carried `hJoin`:** the constructed
+    instance's count equals the geometric area over `4G` for ARBITRARY graviton data —
+    `S_τ(J) = (A₀ + areaVar S (classicalH pol α))/(4G) = A_J/(4G)`. The count and the geometry are
+    two computations of one number; nothing is carried (the join IS the construction). -/
+theorem Stau_eq_area_over_4G (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0) {G : ℝ}
+    (_hG : 0 < G) (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ) :
+    Stau S β G (QIQTH.OperatorEmergence.classicalH pol α)
+      = (A0 + QIQTH.AreaMap.areaVar S (QIQTH.OperatorEmergence.classicalH pol α)) / (4 * G) := by
+  rw [Stau_eq_sum_wEnt,
+    show ∑ a ∈ S.elems, tauWEnt S β G (QIQTH.OperatorEmergence.classicalH pol α) a
+        = (∑ a ∈ S.elems, localArea S β (QIQTH.OperatorEmergence.classicalH pol α) a) / (4 * G)
+      from by rw [Finset.sum_div]; rfl,
+    sum_localArea]
+
+/-- The count through the Q5 interface: `S_τ(J) = inducedScreenArea/(4G)` — the exact shape of the
+    old capstone's right-hand side, now with the join supplied by `hJoin_tau`. -/
+theorem Stau_eq_inducedScreenArea_over_4G [Fintype ι] [DecidableEq ι] (S : ScreenSurface ι)
+    {A0 : ℝ} (β : A0Split S A0) {G : ℝ} (hG : 0 < G)
+    (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ) :
+    Stau S β G (QIQTH.OperatorEmergence.classicalH pol α)
+      = QIQTH.EarnGravity.inducedScreenArea G S.elems
+          (tauWEnt S β G (QIQTH.OperatorEmergence.classicalH pol α)) / (4 * G) := by
+  rw [hJoin_tau S β hG pol α, Stau_eq_area_over_4G S β hG pol α]
+
+end TauCount
+
 end QIQTH.JoinInstance
