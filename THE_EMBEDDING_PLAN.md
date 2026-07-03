@@ -47,7 +47,7 @@ new Hilbert space; add operators and semantics to the counted object. New file
 - [x] **EM1 — the mode dictionary aliases** ✅ DONE (`QIQTH/Embedding.lean`): `ModeAssignment` (mode type + cutoffs + positivity),
   `toLinkDims`, `FieldMicro`/`TruncatedFockBasis`/`FieldDiamondAlg` aliases with the rfl/dictionary
   theorems (the keystone object IS the truncated field object).
-- [ ] **EM2 — the coordinate operator embedding**: `sameOff`, `modeOp`, update/default lemmas,
+- [x] **EM2 — the coordinate operator embedding** ✅ DONE: `sameOff`, `modeOp`, update/default lemmas,
   `modeOp_map_one/mul/add/smul/star`, `modeOp_injective` — each single-mode truncated oscillator algebra
   EMBEDS into the diamond algebra.
 - [ ] **EM3 — the per-mode oscillator structure**: `a_k`/`a_k†`/`N_k`/`P_top,k` via `modeOp`; the same-mode
@@ -99,3 +99,11 @@ failed attempt with the error shown. Check for sibling jobs before each incremen
   keystone object IS the truncated field object); card_truncatedFockBasis (= Π cutoffs); CAPSTONE
   truncated_field_diamond_entropy — S(maxMixed) = Σ_k log D_k = A_τ(C)/4G with links = modes
   (K2a verbatim through the dictionary). NEXT → EM2 (the coordinate operator embedding).
+
+- **2026-07-03** — **EM2 LANDED** (axiom-free std-3, budget 0): sameOff (agreement off mode k, decidable)
+  + refl/symm/trans; zeroMicro; updMode (the dependent-update helper — casts hidden per the trap list) +
+  self/of_ne/injective + eq_updMode_of_sameOff; sum_mode_fiber (the reusable fiber-sum engine: a function
+  vanishing off the sameOff-fiber sums as a sum over the k-th occupation); modeOp (direct-entry, per the
+  verdict — never Kronecker); the transport package modeOp_one/add/smul/star/mul (mul via the fiber-sum
+  lemma — the crux); CAPSTONE modeOp_injective — each single-mode truncated-oscillator algebra genuinely
+  EMBEDS. NEXT → EM3 (the per-mode oscillator structure).

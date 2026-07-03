@@ -701,7 +701,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   identification is DEFINITIONAL — `Micro L C = (e : C) → Fin (D e)` IS a multi-mode truncated Fock
   basis); `card_truncatedFockBasis` (= Π cutoffs); CAPSTONE **`truncated_field_diamond_entropy`** —
   the keystone count READ as the truncated field diamond's entropy, `S = Σ_k log D_k = A_τ(C)/4G` with
-  links = modes. Next: EM2 (the coordinate operator embedding).
+  links = modes. **EM2 LANDED — THE SINGLE-MODE ALGEBRAS EMBED**: `sameOff`/`updMode`/`zeroMicro` (the
+  dependent-update toolkit, casts hidden), **`sum_mode_fiber`** (the reusable fiber-sum engine),
+  `modeOp` (the direct-entry coordinate embedding — A on fiber k, delta elsewhere; never Kronecker),
+  the transport package `modeOp_one/add/smul/star/mul` (mul via the fiber-sum lemma), CAPSTONE
+  **`modeOp_injective`** — each single-mode truncated-oscillator algebra genuinely embeds into the
+  diamond algebra. Next: EM3 (the per-mode oscillator structure).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

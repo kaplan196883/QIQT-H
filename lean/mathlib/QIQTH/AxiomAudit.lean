@@ -8153,6 +8153,15 @@ namespace QIQTH.AxiomAudit
 -- S(maxMixed) = Sigma log D_k = A_tau(C)/4G (K2a applied verbatim through the dictionary). Std 3.
 #print axioms QIQTH.Embedding.card_truncatedFockBasis
 #print axioms QIQTH.Embedding.truncated_field_diamond_entropy
+-- THE EMBEDDING EM2: the coordinate operator embedding — sameOff (agreement off mode k) + updMode (the
+-- dependent-update helper, casts hidden) + sum_mode_fiber (the reusable fiber-sum engine); modeOp (direct-entry:
+-- A on fiber k, delta elsewhere — NEVER Kronecker induction per the verdict); the transport package
+-- modeOp_one/add/smul/star/mul (mul via the fiber-sum lemma — the crux) + CAPSTONE modeOp_injective: each
+-- single-mode truncated-oscillator algebra genuinely EMBEDS into the diamond algebra. Std 3.
+#print axioms QIQTH.Embedding.sum_mode_fiber
+#print axioms QIQTH.Embedding.modeOp_mul
+#print axioms QIQTH.Embedding.modeOp_star
+#print axioms QIQTH.Embedding.modeOp_injective
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
