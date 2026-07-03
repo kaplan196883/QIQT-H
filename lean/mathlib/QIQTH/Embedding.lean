@@ -254,4 +254,137 @@ theorem modeOp_injective (k : C) :
 
 end ModeOp
 
+/-! ## EM3 — the per-mode oscillator structure
+
+`a_k := modeOp k (lowering D_k)` — the held single-mode truncated-oscillator theorems TRANSPORTED
+through the EM2 package (never unfolding `lowering`, per the binding verdict): the honest defect
+`[a_k, a_k†] = 1 − D_k·P_top,k`, the number operator with its finite spectrum reading, and the
+ladder relations `[N_k, a_k] = −a_k`, `[N_k, a_k†] = a_k†`. -/
+
+section PerMode
+
+variable (L : LinkDims M) (C : Finset M)
+
+theorem modeOp_sub (k : C) (A B : Matrix (Fin (L.D k.val)) (Fin (L.D k.val)) ℂ) :
+    modeOp L C k (A - B) = modeOp L C k A - modeOp L C k B := by
+  ext m n
+  simp only [modeOp_apply, Matrix.sub_apply]
+  by_cases h : sameOff L C k m n <;> simp [h]
+
+theorem modeOp_neg (k : C) (A : Matrix (Fin (L.D k.val)) (Fin (L.D k.val)) ℂ) :
+    modeOp L C k (-A) = -(modeOp L C k A) := by
+  ext m n
+  simp only [modeOp_apply, Matrix.neg_apply]
+  by_cases h : sameOff L C k m n <;> simp [h]
+
+/-- **The `k`-th mode annihilation operator** on the field diamond algebra. -/
+noncomputable def modeLowering (k : C) : DiamondAlg L C :=
+  modeOp L C k (QIQTH.CornerConstruction.lowering (L.D k.val))
+
+/-- **The `k`-th mode number operator** (occupation of mode `k`). -/
+noncomputable def numberOp (k : C) : DiamondAlg L C :=
+  modeOp L C k (Matrix.diagonal fun i => ((i : ℕ) : ℂ))
+
+/-- **The `k`-th mode truncation-site projector** — the single level where the defect lives. -/
+noncomputable def topProjMode (k : C) : DiamondAlg L C :=
+  modeOp L C k (QIQTH.CornerConstruction.topProjector (L.D k.val))
+
+/-- `N_k = a_k† a_k` — the number operator is the transported single-mode identity. -/
+theorem raising_mul_lowering (k : C) :
+    (modeLowering L C k)ᴴ * modeLowering L C k = numberOp L C k := by
+  rw [modeLowering, ← modeOp_star, ← modeOp_mul,
+    QIQTH.CornerConstruction.conjTranspose_lowering_mul, numberOp]
+
+/-- **EM3 CAPSTONE — the honest truncation defect, per mode:** `[a_k, a_k†] = 1 − D_k·P_top,k` —
+    the held single-mode theorem transported through the embedding (never re-proved). Exact CCR is
+    permanently impossible in finite dimension; the defect is stated, not hidden. -/
+theorem mode_ladder_commutator (k : C) :
+    modeLowering L C k * (modeLowering L C k)ᴴ - (modeLowering L C k)ᴴ * modeLowering L C k
+      = 1 - (L.D k.val : ℂ) • topProjMode L C k := by
+  rw [modeLowering, ← modeOp_star, ← modeOp_mul, ← modeOp_mul, ← modeOp_sub,
+    QIQTH.CornerConstruction.truncated_ladder_commutator', modeOp_sub, modeOp_one, modeOp_smul,
+    topProjMode]
+
+/-- The number operator is diagonal in the occupation basis, with entry `n_k` — the finite
+    spectrum reading (no analytic spectrum API, per the binding verdict). -/
+theorem numberOp_apply_diag (k : C) (m n : Micro L C) :
+    numberOp L C k m n = if m = n then ((m k : ℕ) : ℂ) else 0 := by
+  rw [numberOp, modeOp_apply]
+  by_cases h : sameOff L C k m n
+  · rw [if_pos h, Matrix.diagonal_apply]
+    by_cases hk : m k = n k
+    · rw [if_pos hk, if_pos (show m = n by
+        funext j
+        by_cases hj : j = k
+        · subst hj; exact hk
+        · exact h j hj)]
+    · rw [if_neg hk, if_neg fun hmn => hk (by rw [hmn])]
+  · rw [if_neg h, if_neg fun hmn => h fun j _ => by rw [hmn]]
+
+/-- **The occupation (pointer-basis) projector** `|m⟩⟨m|`. -/
+noncomputable def occupationProj (m : Micro L C) : DiamondAlg L C :=
+  Matrix.diagonal (fun p => if p = m then 1 else 0)
+
+/-- **The joint-eigenbasis fact**: every occupation projector is an `N_k`-eigenprojector with
+    eigenvalue `n_k = m k` — "the spectrum of `N_k` is `{0, …, D_k − 1}`" in its honest finite
+    form. -/
+theorem occupationProj_joint_eigen (k : C) (m : Micro L C) :
+    numberOp L C k * occupationProj L C m = ((m k : ℕ) : ℂ) • occupationProj L C m := by
+  ext p q
+  rw [occupationProj, Matrix.mul_diagonal, Matrix.smul_apply, Matrix.diagonal_apply]
+  by_cases hq : q = m
+  · rw [if_pos hq, mul_one, numberOp_apply_diag]
+    by_cases hp : p = q
+    · rw [if_pos hp, if_pos hp, if_pos (hp.trans hq), smul_eq_mul, mul_one, hp, hq]
+    · rw [if_neg hp, if_neg hp, smul_zero]
+  · rw [if_neg hq, mul_zero]
+    by_cases hp : p = q
+    · rw [if_pos hp, if_neg (hp ▸ hq), smul_zero]
+    · rw [if_neg hp, smul_zero]
+
+/-- The number operator is self-adjoint (real occupation numbers). -/
+theorem numberOp_selfAdjoint (k : C) : (numberOp L C k)ᴴ = numberOp L C k := by
+  rw [numberOp, ← modeOp_star]
+  congr 1
+  rw [Matrix.diagonal_conjTranspose]
+  congr 1
+  funext i
+  simp
+
+/-- The single-mode ladder relation `[N, a] = −a` (proved once at the single-mode level). -/
+theorem number_comm_lowering (N : ℕ) :
+    Matrix.diagonal (fun i : Fin N => ((i : ℕ) : ℂ)) * QIQTH.CornerConstruction.lowering N
+        - QIQTH.CornerConstruction.lowering N * Matrix.diagonal (fun i : Fin N => ((i : ℕ) : ℂ))
+      = -(QIQTH.CornerConstruction.lowering N) := by
+  ext i j
+  rw [Matrix.sub_apply, Matrix.diagonal_mul, Matrix.mul_diagonal, Matrix.neg_apply,
+    QIQTH.CornerConstruction.lowering]
+  simp only [Matrix.of_apply]
+  by_cases hij : (i : ℕ) + 1 = (j : ℕ)
+  · rw [if_pos hij]
+    have hj : ((j : ℕ) : ℂ) = ((i : ℕ) : ℂ) + 1 := by exact_mod_cast hij.symm
+    rw [hj]
+    ring
+  · rw [if_neg hij]
+    ring
+
+/-- **The ladder relation transported**: `[N_k, a_k] = −a_k` — the annihilator lowers the
+    occupation of its own mode. -/
+theorem numberOp_comm_modeLowering (k : C) :
+    numberOp L C k * modeLowering L C k - modeLowering L C k * numberOp L C k
+      = -(modeLowering L C k) := by
+  rw [numberOp, modeLowering, ← modeOp_mul, ← modeOp_mul, ← modeOp_sub, number_comm_lowering,
+    modeOp_neg]
+
+/-- `[N_k, a_k†] = a_k†` — the creator raises the occupation (by adjoints, no re-proof). -/
+theorem numberOp_comm_modeRaising (k : C) :
+    numberOp L C k * (modeLowering L C k)ᴴ - (modeLowering L C k)ᴴ * numberOp L C k
+      = (modeLowering L C k)ᴴ := by
+  have h := congrArg Matrix.conjTranspose (numberOp_comm_modeLowering L C k)
+  rw [Matrix.conjTranspose_sub, Matrix.conjTranspose_mul, Matrix.conjTranspose_mul,
+    Matrix.conjTranspose_neg, numberOp_selfAdjoint] at h
+  rw [← neg_sub, h, neg_neg]
+
+end PerMode
+
 end QIQTH.Embedding

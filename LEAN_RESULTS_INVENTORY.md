@@ -706,7 +706,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `modeOp` (the direct-entry coordinate embedding — A on fiber k, delta elsewhere; never Kronecker),
   the transport package `modeOp_one/add/smul/star/mul` (mul via the fiber-sum lemma), CAPSTONE
   **`modeOp_injective`** — each single-mode truncated-oscillator algebra genuinely embeds into the
-  diamond algebra. Next: EM3 (the per-mode oscillator structure).
+  diamond algebra. **EM3 LANDED — THE PER-MODE OSCILLATORS**: `modeLowering`/`numberOp`/`topProjMode`
+  (a_k, N_k, P_top,k), `raising_mul_lowering` (N_k = a_k†a_k), CAPSTONE **`mode_ladder_commutator`** —
+  the honest per-mode truncation defect `[a_k, a_k†] = 1 − D_k·P_top,k` (the held single-mode theorem
+  TRANSPORTED through the embedding; exact CCR permanently impossible); `occupationProj` +
+  **`occupationProj_joint_eigen`** (the finite spectrum reading: N_k eigenvalue n_k on every occupation
+  projector); the ladder relations `[N_k, a_k] = −a_k`, `[N_k, a_k†] = a_k†` (by adjoints).
+  Next: EM4 (the cross-mode algebra).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

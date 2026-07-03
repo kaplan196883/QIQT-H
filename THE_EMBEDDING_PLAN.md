@@ -50,7 +50,7 @@ new Hilbert space; add operators and semantics to the counted object. New file
 - [x] **EM2 — the coordinate operator embedding** ✅ DONE: `sameOff`, `modeOp`, update/default lemmas,
   `modeOp_map_one/mul/add/smul/star`, `modeOp_injective` — each single-mode truncated oscillator algebra
   EMBEDS into the diamond algebra.
-- [ ] **EM3 — the per-mode oscillator structure**: `a_k`/`a_k†`/`N_k`/`P_top,k` via `modeOp`; the same-mode
+- [x] **EM3 — the per-mode oscillator structure** ✅ DONE: `a_k`/`a_k†`/`N_k`/`P_top,k` via `modeOp`; the same-mode
   truncation defect `[a_k, a_k†] = 1 − D_k·P_top,k` (transported, never re-proved); `numberOp_apply_diag`
   + `occupationProj_joint_eigen` (the finite spectrum reading); `[N_k, a_k] = −a_k`, `[N_k, a_k†] = a_k†`.
 - [ ] **EM4 — the cross-mode algebra**: generic `modeOp_commute_of_ne`; derived `[a_k, a_j] = [a_k, a_j†]
@@ -107,3 +107,11 @@ failed attempt with the error shown. Check for sibling jobs before each incremen
   verdict — never Kronecker); the transport package modeOp_one/add/smul/star/mul (mul via the fiber-sum
   lemma — the crux); CAPSTONE modeOp_injective — each single-mode truncated-oscillator algebra genuinely
   EMBEDS. NEXT → EM3 (the per-mode oscillator structure).
+
+- **2026-07-03** — **EM3 LANDED** (axiom-free std-3, budget 0): modeOp_sub/neg (package completion);
+  modeLowering/numberOp/topProjMode (a_k, N_k, P_top,k via modeOp); raising_mul_lowering (N_k = a_k†a_k
+  transported); CAPSTONE mode_ladder_commutator — [a_k, a_k†] = 1 − D_k·P_top,k (the held single-mode
+  defect transported, never re-proved); numberOp_apply_diag + occupationProj (pointer-basis projector) +
+  occupationProj_joint_eigen (N_k eigenvalue n_k — the finite spectrum reading); number_comm_lowering
+  (single-mode, proved once) → numberOp_comm_modeLowering ([N_k,a_k] = −a_k) +
+  numberOp_comm_modeRaising ([N_k,a_k†] = a_k†, by adjoints). NEXT → EM4 (the cross-mode algebra).

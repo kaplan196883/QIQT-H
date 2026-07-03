@@ -8162,6 +8162,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Embedding.modeOp_mul
 #print axioms QIQTH.Embedding.modeOp_star
 #print axioms QIQTH.Embedding.modeOp_injective
+-- THE EMBEDDING EM3: the per-mode oscillator structure — modeLowering/numberOp/topProjMode (a_k, N_k, P_top,k
+-- via modeOp); raising_mul_lowering (N_k = a_k† a_k, transported); CAPSTONE mode_ladder_commutator — the honest
+-- per-mode truncation defect [a_k, a_k†] = 1 − D_k·P_top,k (the held single-mode theorem transported through
+-- the embedding, never re-proved; exact CCR permanently impossible); numberOp_apply_diag +
+-- occupationProj_joint_eigen (the finite spectrum reading — N_k eigenvalue n_k on every occupation projector);
+-- numberOp_comm_modeLowering/Raising ([N_k, a_k] = −a_k, [N_k, a_k†] = a_k† — by adjoints). Std 3.
+#print axioms QIQTH.Embedding.mode_ladder_commutator
+#print axioms QIQTH.Embedding.occupationProj_joint_eigen
+#print axioms QIQTH.Embedding.numberOp_comm_modeLowering
+#print axioms QIQTH.Embedding.numberOp_comm_modeRaising
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
