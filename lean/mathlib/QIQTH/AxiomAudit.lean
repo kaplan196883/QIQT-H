@@ -8357,6 +8357,17 @@ namespace QIQTH.AxiomAudit
 -- the cyclic case forces integer multiples of one generator, hence a rational ratio — contradiction).
 -- Classical Kronecker arithmetic, no operator content. Std 3.
 #print axioms QIQTH.Tower.dense_closure_pair
+-- THE TOWER T3 (Tower/Centerpiece.lean): THE CENTERPIECE — isTailModularExponent_of_frequently (a frequency
+-- occurring i.o. contributes its EXACT negated value as a tail exponent — the (1,0) pair, accuracy 0);
+-- gibbsTower_awFingerprint_III₁ — THE ARAKI–WOODS III₁ FINGERPRINT OF THE CODE'S GIBBS TOWER (two
+-- frequencies i.o. with irrational ratio + uniform bounds + D_k ≥ 2 ⟹ AWFingerprintIII1): an ARITHMETIC
+-- theorem about eigenvalue lists whose operator reading rests on the three CITED facts (α)(β)(γ) —
+-- Araki–Woods 1968; Connes 1973 — never proved, no vN algebra constructed;
+-- gibbsTower_awFingerprint_III₁_sqrtTwo (the HYPOTHESIS-FREE alternating {√2, 1} qubit instance via
+-- irrational_sqrt_two — the vacuity guard). Std 3.
+#print axioms QIQTH.Tower.isTailModularExponent_of_frequently
+#print axioms QIQTH.Tower.gibbsTower_awFingerprint_III₁
+#print axioms QIQTH.Tower.gibbsTower_awFingerprint_III₁_sqrtTwo
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

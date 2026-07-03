@@ -59,7 +59,7 @@ finite operator refinement tower. Files under `lean/mathlib/QIQTH/Tower/`.
 - [x] **T2 — Kronecker density** ✅ DONE (`QIQTH/Tower/KroneckerDensity.lean`): `Irrational (s/t) →
   Dense (AddSubgroup.closure {s, t})` via `AddSubgroup.dense_or_cyclic` (cyclic ⟹ s = ma, t = na
   ⟹ s/t ∈ ℚ). Classical arithmetic, no operator content.
-- [ ] **T3 — THE CENTERPIECE: `gibbsTower_awFingerprint_III₁`**: two frequencies i.o. with
+- [x] **T3 — THE CENTERPIECE: `gibbsTower_awFingerprint_III₁`** ✅ DONE: two frequencies i.o. with
   irrational ratio + uniform bounds + D_k ≥ 2 ⟹ AWFingerprintIII1; PLUS the hypothesis-free
   concrete corollary with βω ∈ {1, √2} via `irrational_sqrt_two` (the vacuity guard). The (α)(β)(γ)
   citation block VERBATIM in the docstring.
@@ -122,3 +122,18 @@ attempt with the error shown. Check sibling jobs before each increment. Consults
   two frequencies with irrational ratio, fully in Mathlib-native subgroup language; HAVE NOT any
   connection to operator algebras — classical Kronecker arithmetic and nothing else.
   NEXT → T3 (the centerpiece).
+
+- **2026-07-03** — **T3 LANDED — THE CENTERPIECE** (`QIQTH/Tower/Centerpiece.lean`, axiom-free
+  std-3, budget 0, GREEN FIRST TRY): isTailModularExponent_of_frequently (a frequency occurring
+  i.o. contributes its EXACT negated value — the (1,0) pair, the Z cancels, accuracy 0);
+  **gibbsTower_awFingerprint_III₁** — THE ARAKI–WOODS III₁ FINGERPRINT OF THE CODE'S GIBBS TOWER
+  (two frequencies i.o., irrational ratio, uniform bounds, D_k ≥ 2 ⟹ AWFingerprintIII1 — T1's
+  exact exponents feeding T2's Kronecker density through closure monotonicity + Dense.mono);
+  the (α)(β)(γ) citation block VERBATIM in the docstring (the operator reading cited, never
+  proved); **gibbsTower_awFingerprint_III₁_sqrtTwo** — the HYPOTHESIS-FREE alternating {√2, 1}
+  qubit instance via irrational_sqrt_two (the vacuity guard). Checkpoint (T3): HAVE the
+  machine-checked arithmetic content of the Araki–Woods III₁ criterion for the code's Gibbs
+  tower, including a hypothesis-free concrete instance; the inference to an actual III₁ factor is
+  cited (Araki–Woods 1968; Connes 1973), never proved. HAVE NOT the ITPFI von Neumann algebra,
+  its ratio set, or its type — none are constructed or classified here. NEXT → T4 (the Powers
+  guard).
