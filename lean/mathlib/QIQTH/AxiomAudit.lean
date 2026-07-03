@@ -8378,6 +8378,16 @@ namespace QIQTH.AxiomAudit
 -- type is made. Std 3.
 #print axioms QIQTH.Tower.tail_exponent_constant_mem
 #print axioms QIQTH.Tower.gibbsTower_constant_not_fingerprint
+-- THE TOWER T5 (Tower/GibbsLimit.lean): the state limit — boltzMeasure (the single-mode Boltzmann
+-- probability measure, singleton = ofReal gibbsEigen); gibbsLimitMeasure := Measure.infinitePi (THE
+-- σ-additive INFINITE-MODE GIBBS MEASURE on occupation configurations, via the held product/Kolmogorov
+-- machinery) with IsProjectiveLimit + uniqueness + probability instance; pMode_eq_gibbsEigen (the DY
+-- bridge via DS2's partition-function identity); CAPSTONE gibbsLimit_marginal_singleton — the finite
+-- marginals ARE the code's own DY Gibbs weights (singleton marginal = ofReal gibbsWeight). CLASSICAL
+-- (diagonal) limit object only — no quantum state on the infinite system (T6: non-atomic). Std 3.
+#print axioms QIQTH.Tower.gibbsLimitMeasure_isProjectiveLimit
+#print axioms QIQTH.Tower.gibbsLimitMeasure_unique
+#print axioms QIQTH.Tower.gibbsLimit_marginal_singleton
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

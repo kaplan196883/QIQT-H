@@ -877,7 +877,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (the constant tower FAILS the fingerprint — sℤ not dense). THE SEPARATION: with T3 the predicate
   holds for two-frequency irrational towers and provably fails for single-frequency towers —
   neither vacuous nor universal (the Powers III_{e^{−s}} reading cited, Powers 1967; no algebra
-  type claimed). Next: T5 (the state limit).
+  type claimed). **T5 LANDED — THE INFINITE-MODE GIBBS MEASURE** (`Tower/GibbsLimit.lean`):
+  `boltzMeasure` (single-mode Boltzmann, singleton = ofReal gibbsEigen),
+  **`gibbsLimitMeasure := Measure.infinitePi`** — the σ-ADDITIVE probability measure on the
+  infinite occupation-configuration space via the held product/Kolmogorov machinery
+  (IsProjectiveLimit + uniqueness), CAPSTONE **`gibbsLimit_marginal_singleton`** — the finite
+  marginals ARE the code's own DY Gibbs weights (`pMode_eq_gibbsEigen` closing the
+  parametrizations via DS2). Classical (diagonal) limit object ONLY — no quantum state on the
+  infinite system. Next: T6 (non-atomicity).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

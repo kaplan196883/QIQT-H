@@ -66,7 +66,7 @@ finite operator refinement tower. Files under `lean/mathlib/QIQTH/Tower/`.
 - [x] **T4 — the Powers guard** ✅ DONE: constant frequency s ⟹ every tail exponent ∈ sℤ ⟹ the closure is
   cyclic/closed ⟹ ¬AWFingerprintIII1 (the fingerprint of Powers III_{e^{−s}} — cited). The
   separation theorem: the predicate is neither vacuous nor universal.
-- [ ] **T5 — the state limit** (`QIQTH/Tower/GibbsLimit.lean`): the adapter (DY4 weight sums →
+- [x] **T5 — the state limit** ✅ DONE (`QIQTH/Tower/GibbsLimit.lean`): the adapter (DY4 weight sums →
   Measure.map equalities); `gibbsLimitMeasure := kolmogorovMeasure` with `IsProjectiveLimit` +
   uniqueness; identification with `Measure.infinitePi` of the single-mode Boltzmann measures.
 - [ ] **T6 — non-atomicity**: under βω_k ≤ b every singleton has measure zero (cylinder squeeze,
@@ -147,3 +147,15 @@ attempt with the error shown. Check sibling jobs before each increment. Consults
   single-frequency towers, so the predicate is not vacuous and not universal; HAVE NOT any claim
   that the single-frequency algebra is III_λ or is not III₁ — only the arithmetic fingerprint
   failure is proved (Powers 1967 cited). NEXT → T5 (the state limit).
+
+- **2026-07-03** — **T5 LANDED** (`QIQTH/Tower/GibbsLimit.lean`, axiom-free std-3, budget 0, GREEN
+  FIRST TRY): boltzMeasure (the single-mode Boltzmann probability measure; singleton = ofReal
+  gibbsEigen); **gibbsLimitMeasure := Measure.infinitePi** — THE σ-ADDITIVE INFINITE-MODE GIBBS
+  MEASURE on occupation configurations, via the held product/Kolmogorov machinery, with
+  IsProjectiveLimit + uniqueness + the probability instance; pMode_eq_gibbsEigen (the DY bridge —
+  DS2's partition identity closes the parametrizations); CAPSTONE gibbsLimit_marginal_singleton —
+  the finite marginals ARE the code's own DY Gibbs weights. Checkpoint (T5): HAVE the σ-additive
+  infinite-mode Gibbs measure on occupation configurations, as the unique projective limit of the
+  DY marginals through the held Kolmogorov extension, identified with the Mathlib infinite
+  product; HAVE NOT any quantum state on an infinite system — the classical (diagonal) limit
+  object only. NEXT → T6 (non-atomicity).
