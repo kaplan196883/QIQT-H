@@ -1,6 +1,6 @@
 # THE CLOSURE (C1–C10): the von Neumann bicommutant/density theorem
 
-**Status:** ACTIVE (2026-07-04). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all API facts
+**Status:** COMPLETE (2026-07-04) — C1–C11 ALL LANDED (C10 stretch INCLUDED), axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all API facts
 verified against the pinned Mathlib)** — binding verdict below. **Goal:** the single highest-leverage
 missing lemma of the continuum program — the double-commutant theorem `A″ = SOT-closure(A)` for unital
 ⋆-subalgebras of B(H) — the convergent blocker named FOUR times in the inventory (vN closure of the
@@ -91,7 +91,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   `isClosed_eq` (T3 from `SeparatingDual`), SOTApprox beats every WOT seminorm. Every statement lives
   wholly in the WOT copy about `ofCLM '' ·`; separate continuity only. CUT LINE: one session without
   green → drop; nothing depends on it. Risk MEDIUM.
-- [ ] **C11 — checkpoint**: the campaign HAVE/HAVE-NOT sentences VERBATIM (below) in a checkpoint
+- [x] **C11 — checkpoint** ✅ DONE: the campaign HAVE/HAVE-NOT sentences VERBATIM (below) in a checkpoint
   module docstring + LEAN_RESULTS_INVENTORY.md; plan → COMPLETE; delete the loop; stop.
 
 ## Checkpoint sentences (verbatim at C11)
@@ -252,3 +252,20 @@ gpt-5.5-pro (never expose keys).
   basis `id` wrapper blocks rw (clear with `show`); `set_option maxHeartbeats 1000000` needed
   (seminormFamily defeq checks); F⋆ = `StrongDual`. The HAVE sentence keeps its WOT clause.
   NEXT → C11 (checkpoint: verbatim sentences, delete loop, stop).
+
+- **2026-07-04** — **C11 LANDED — CAMPAIGN COMPLETE (11/11, C10 stretch INCLUDED)**
+  (`QIQTH/VonNeumann/Checkpoint.lean`, marker module, budget 0). The HAVE/HAVE-NOT sentences
+  VERBATIM (WOT clause KEPT — C10 shipped) in the module docstring and the inventory. HAVE: "We
+  have the von Neumann double-commutant theorem as an axiom-free Lean theorem over current
+  Mathlib — for every unital ⋆-subalgebra A of the bounded operators on a complex Hilbert
+  space, the double centralizer A″ equals the set of operators approximable from A in norm on
+  every finite tuple of vectors (and, in the shipped WOT increment, the weak-operator closure)
+  — packaged as `VonNeumannAlgebra.generatedBy` with membership lemmas, and instantiated to
+  present the project's crossed-product representation and any commonly-represented refinement
+  tower as genuine `VonNeumannAlgebra`s." HAVE-NOT: "We do not have Kaplansky density, normal
+  states, preduals or the σ-weak topology, type classification, or the inductive-limit
+  (tower-GNS) Hilbert space — the ITPFI tower's limit algebra is packaged only relative to a
+  hypothesized common representation, and the crossed-product dual-weight trace is not claimed
+  to extend from the algebraic core to the weak closure." Loop 9a24e8b3 deleted. Paper/website
+  sync on request. Natural sequels: tower-GNS (the ITPFI instantiation), the normal extension
+  (DualWeightTraceExtension discharge), Kaplansky density.

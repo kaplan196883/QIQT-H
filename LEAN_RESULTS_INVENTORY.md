@@ -956,7 +956,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (`QIQTH/VonNeumann/WOTClosure.lean`, **[AF]** std-3):
   **`wotClosure_image_eq_image_bicommutant`** — the WOT closure IS the bicommutant (in Mathlib's
   `H →WOT[ℂ] H` copy, about ofCLM images): with C7, **WOT closure = SOT closure = A″** — the
-  full classical double-commutant statement, machine-checked. Next: C11 (checkpoint).
+  full classical double-commutant statement, machine-checked. **C11 — CAMPAIGN COMPLETE
+  (11/11, the C10 stretch INCLUDED)** (`VonNeumann/Checkpoint.lean`). CHECKPOINT (verbatim):
+  HAVE "We have the von Neumann double-commutant theorem as an axiom-free Lean theorem over
+  current Mathlib — for every unital ⋆-subalgebra A of the bounded operators on a complex
+  Hilbert space, the double centralizer A″ equals the set of operators approximable from A in
+  norm on every finite tuple of vectors (and, in the shipped WOT increment, the weak-operator
+  closure) — packaged as `VonNeumannAlgebra.generatedBy` with membership lemmas, and
+  instantiated to present the project's crossed-product representation and any
+  commonly-represented refinement tower as genuine `VonNeumannAlgebra`s." HAVE-NOT "We do not
+  have Kaplansky density, normal states, preduals or the σ-weak topology, type classification,
+  or the inductive-limit (tower-GNS) Hilbert space — the ITPFI tower's limit algebra is packaged
+  only relative to a hypothesized common representation, and the crossed-product dual-weight
+  trace is not claimed to extend from the algebraic core to the weak closure.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
