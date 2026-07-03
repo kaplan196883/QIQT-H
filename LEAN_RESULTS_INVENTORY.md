@@ -918,7 +918,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `VonNeumannAlgebra` (bicommutant field from X‴ = X′), with generators-subset, MINIMALITY
   (`generatedBy_le`), the star-closed collapse, and the Galois lemma **`centralizer_adjoin`**
   ((adjoin ℂ S)′ = (S ∪ S*)′, pair-trick induction). The project can now NAME its limit algebras;
-  purely algebraic — density is C7. Next: C3 (single-vector density).
+  purely algebraic — density is C7. **C3 LANDED — `QIQTH/VonNeumann/DensityOne.lean`**
+  (**[AF]** std-3): SINGLE-VECTOR DENSITY **`bicommutant_apply_mem_orbitClosure`** — an element
+  of the double centralizer maps every vector into that vector's closed orbit (unitality
+  load-bearing, A = {0} counterexample documented), with the ε-approximation form. Next: C4
+  (the PiLp amplification — the campaign's risk lump).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

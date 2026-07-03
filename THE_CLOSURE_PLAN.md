@@ -57,7 +57,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   `centralizer_adjoin` (Galois, via `adjoin_induction`); the C2 bridging lemma `Set.centralizer A =
   ↑(StarSubalgebra.centralizer ℂ A)` for star-closed carriers (HOUSE RULE: theorem statements use
   `Set.centralizer`; StarSubalgebra.centralizer only inside proofs). Risk LOW.
-- [ ] **C3 — `QIQTH/VonNeumann/DensityOne.lean`**: `bicommutant_apply_mem_orbitClosure` (P ∈ A′ → TP=PT
+- [x] **C3 — `QIQTH/VonNeumann/DensityOne.lean`** ✅ DONE: `bicommutant_apply_mem_orbitClosure` (P ∈ A′ → TP=PT
   → ξ = Pξ by UNITALITY → Tξ ∈ U) + ε-corollary. The unitality counterexample comment. Risk LOW.
 - [ ] **C4 — `QIQTH/VonNeumann/Amplification.lean`** (THE risk lump, scheduled after C1–C3 are banked):
   the frozen six-lemma PiLp interface — `π_comp_ι_same`, `π_comp_ι_ne`, `sum_ι_π`, `adjoint_ι`,
@@ -168,3 +168,11 @@ gpt-5.5-pro (never expose keys).
   layer for the limit algebras — purely algebraic, no density claim. Lean notes: star adjoin is
   `StarAlgebra.adjoin` (not StarSubalgebra.*); `Algebra.commutes` is already `map r * x = x * map r`;
   Set-vs-SetLike membership needs an explicit `have hmem : star x ∈ M`. NEXT → C3 (DensityOne).
+
+- **2026-07-04** — **C3 LANDED** (`QIQTH/VonNeumann/DensityOne.lean`, axiom-free std-3, budget 0,
+  one trivial fix): CAPSTONE **`bicommutant_apply_mem_orbitClosure`** — `T ∈ A″ ⟹ Tξ ∈ cl(Aξ)`
+  (the C1 cyclic projection P ∈ A′; T commutes with P; **Pξ = ξ by UNITALITY** — the A = {0}
+  counterexample in the docstring: A″ = B(H) but cl(Aξ) = {0}, the theorem is FALSE non-unitally);
+  plus the ε-form **`bicommutant_apply_approx`** (`Metric.mem_closure_iff` unfold — the form C6
+  consumes). C1→C3 chain complete; the campaign now enters THE RISK LUMP (C4, PiLp). NEXT → C4
+  (Amplification).

@@ -8425,6 +8425,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.generatedBy
 #print axioms QIQTH.VonNeumann.generatedBy_le
 #print axioms QIQTH.VonNeumann.centralizer_adjoin
+-- THE CLOSURE C3 (VonNeumann/DensityOne.lean): SINGLE-VECTOR DENSITY — T ∈ A″ ⟹ Tξ ∈ cl(Aξ)
+-- (the cyclic projection P ∈ A′ from C1; T commutes with P; Pξ = ξ by UNITALITY — the A = {0}
+-- counterexample in the docstring shows the theorem is FALSE non-unitally), plus the ε-form
+-- bicommutant_apply_approx. One vector only; the n-vector version is C6 (needs C4–C5). Std 3.
+#print axioms QIQTH.VonNeumann.bicommutant_apply_mem_orbitClosure
+#print axioms QIQTH.VonNeumann.bicommutant_apply_approx
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
