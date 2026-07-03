@@ -775,7 +775,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Shannon); `shannon_gibbsWeight` (product additivity); CAPSTONE **`entropy_gibbs_region`** —
   `S(ρ_{β,R}) = S_micro(R,β) = Σ_{k∈R} s_k(βω_k)`; **`Smicro_zero`** (saturation: `= Σ log D_k`) +
   **`Smicro_le_count`** (all-β bound; no arbitrary-β area equality claimed).
-  Next: DY6 (the saturated induced cross-check, calibration-free).
+  **DY6 LANDED — THE SATURATED CONDITIONAL SAKHAROV CROSS-CHECK** (`QIQTH/CrossCheck.lean`,
+  CALIBRATION-FREE, grep-verified): `InducedCrossCheckData` (the macro side as INDEPENDENT
+  Sakharov/species/cell data — structure fields, never axioms), `ofSpecies` (with the derived
+  `G_ind = 1/(N_eff·Λs²)` the quarter-G identity is the held theorem; only species/cell matching
+  remains input), `S_micro_le_inducedQuarterG` (all β), CAPSTONE
+  **`S_micro_zero_eq_inducedQuarterG`** — `S_micro(R,0) = A_ind/4G_ind`: the micro side computed
+  from the code Hamiltonian, the macro side supplied independently, NO keystone calibration in the
+  proofs; equality at SATURATION ONLY (arbitrary-β equality false, never claimed); the one-loop
+  continuum version = the named frontier. Next: DY7 (the conjecture package + checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

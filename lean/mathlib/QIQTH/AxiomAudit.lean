@@ -8258,6 +8258,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Dynamics.entropy_gibbs_region
 #print axioms QIQTH.Dynamics.Smicro_zero
 #print axioms QIQTH.Dynamics.Smicro_le_count
+-- THE DYNAMICS DY6 (CrossCheck.lean, CALIBRATION-FREE — the proofs reference NO wEntTau/cutTau/
+-- inducedScreenAreaTau/tauMonomial/hJoin, grep-verified): InducedCrossCheckData (the macro side as
+-- independent Sakharov/species/cell data — structure fields, never axioms) + ofSpecies (with the DERIVED
+-- G_ind = 1/(N_eff Λs²) the quarter-G identity is the held capacity_exponent THEOREM; only species/cell
+-- matching remains input); S_micro_le_inducedQuarterG (the all-beta bound); CAPSTONE
+-- S_micro_zero_eq_inducedQuarterG — THE SATURATED CONDITIONAL SAKHAROV CROSS-CHECK: S_micro(R,0) =
+-- A_ind/4G_ind, micro side from the Hamiltonian, macro side independent; equality at SATURATION ONLY
+-- (arbitrary-beta equality is FALSE, never claimed); the one-loop continuum version = the named frontier. Std 3.
+#print axioms QIQTH.CrossCheck.S_micro_le_inducedQuarterG
+#print axioms QIQTH.CrossCheck.S_micro_zero_eq_inducedQuarterG
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

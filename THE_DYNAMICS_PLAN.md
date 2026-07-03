@@ -62,7 +62,7 @@ Files: `lean/mathlib/QIQTH/Dynamics.lean` (DY1–DY5), `QIQTH/CrossCheck.lean` (
 - [x] **DY5 — the region entropy formula** ✅ DONE: diagonal-vN = Shannon for these densities; product
   additivity; `thermalModeEntropy` + `S_micro_eq_sum_mode`; `S_micro_zero` (= Σ log D_k) +
   `S_micro_le_count` (≤, all β).
-- [ ] **DY6 — the saturated induced cross-check** (`QIQTH/CrossCheck.lean`, CALIBRATION-FREE):
+- [x] **DY6 — the saturated induced cross-check** ✅ DONE (`QIQTH/CrossCheck.lean`, CALIBRATION-FREE):
   `InducedCrossCheckData` (the macro side as independent Sakharov/species/cell data);
   **`S_micro_le_inducedQuarterG`** (all β) + **`S_micro_zero_eq_inducedQuarterG`** (saturation) —
   the proofs referencing NO keystone calibration identifier (grep-checked).
@@ -132,3 +132,13 @@ before each increment. Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose t
   β = 0: = Σ log D_k) + Smicro_le_count (the all-β bound via the held Shannon/Gibbs bound; NO
   arbitrary-β area equality claimed). NEXT → DY6 (the saturated induced cross-check —
   calibration-free).
+
+- **2026-07-03** — **DY6 LANDED** (`QIQTH/CrossCheck.lean`, axiom-free std-3, budget 0,
+  CALIBRATION-FREE grep-verified — the only wEntTau/cutTau/tauMonomial/hJoin mentions are the header
+  documenting the ban): InducedCrossCheckData (the macro side as independent Sakharov/species/cell
+  data, structure fields never axioms); ofSpecies (with the DERIVED G_ind = 1/(N_eff·Λs²) the
+  quarter-G identity is the held capacity_exponent THEOREM — only species/cell matching remains
+  input); S_micro_le_inducedQuarterG (all β); CAPSTONE S_micro_zero_eq_inducedQuarterG — THE
+  SATURATED CONDITIONAL SAKHAROV CROSS-CHECK: S_micro(R,0) = A_ind/4G_ind, micro side from the
+  Hamiltonian (DY1–DY5), macro side independent; equality at SATURATION ONLY. NEXT → DY7 (the
+  conjecture package + checkpoint).
