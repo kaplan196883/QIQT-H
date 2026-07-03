@@ -8211,6 +8211,18 @@ namespace QIQTH.AxiomAudit
 -- compose on ONE object). NOT QG solved; no wall crossed. Std 3.
 #print axioms QIQTH.Embedding.ModeAssignment.ofRealizable_cutoff
 #print axioms QIQTH.Embedding.truncated_field_count_eq_fock_area_expect_noJoin
+-- THE DYNAMICS DY1 (THE_DYNAMICS_PLAN.md): the diagonal dynamics core — energy/Hcode (Hcode_apply_diag: H
+-- diagonal with entry E(n) = Sigma omega_k n_k); phaseUnitary (group law) + alpha = U_t A U_{-t} with THE
+-- ENTRY FORMULA alpha_entry (e^{it(E(n)-E(m))}·A(n,m) — no Stone, no Matrix.exp); alpha_zero/add/mul/star
+-- (a one-parameter group of *-automorphisms); alpha_diagonal — RECORDS ARE STATIONARY (H is a function of
+-- the N_k; the honesty point); CAPSTONE alpha_modeLowering/Raising — the nontrivial dynamics: the ladders
+-- rotate at their mode frequencies (alpha_t(a_k) = e^{-i omega_k t}·a_k). Std 3.
+#print axioms QIQTH.Dynamics.alpha_entry
+#print axioms QIQTH.Dynamics.alpha_add
+#print axioms QIQTH.Dynamics.alpha_mul
+#print axioms QIQTH.Dynamics.alpha_recordProj
+#print axioms QIQTH.Dynamics.alpha_modeLowering
+#print axioms QIQTH.Dynamics.alpha_modeRaising
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

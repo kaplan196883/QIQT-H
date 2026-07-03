@@ -746,6 +746,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   membership is named finite data, at most CERTIFIED by a supplied localization witness); capacity is a
   constraint, not a generator." ⚠ NOT QG solved; no wall crossed.
 
+- **THE DYNAMICS, DY1 — `QIQTH/Dynamics.lean`** (**[AF]** std-3; `THE_DYNAMICS_PLAN.md` — the code's
+  time evolution + the independent cross-check + the conjecture; DY1–DY7 in progress). **DY1 — the
+  diagonal dynamics core:** `energy`/`Hcode` (`Hcode_apply_diag`: H diagonal with entry
+  E(n) = Σ ω_k n_k); `phaseUnitary` (group law) + `alpha = U_t A U_{−t}` with THE ENTRY FORMULA
+  **`alpha_entry`** (`α_t(A)(n,m) = e^{it(E(n)−E(m))}·A(n,m)` — no Stone, no Matrix.exp, per the
+  binding verdict); `alpha_zero/add/mul/star` (a one-parameter group of ⋆-automorphisms);
+  **`alpha_diagonal`/`alpha_recordProj` — RECORDS ARE STATIONARY** (H is a function of the N_k — the
+  honesty point, stated not hidden); CAPSTONE **`alpha_modeLowering`/`alpha_modeRaising`** — the
+  nontrivial dynamics: the ladders rotate at their mode frequencies, `α_t(a_k) = e^{−iω_k t}·a_k`.
+  Next: DY2 (the Gibbs product density).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

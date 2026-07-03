@@ -50,6 +50,7 @@ import QIQTH.Keystone
 import QIQTH.KeystoneOperator
 import QIQTH.JoinInstance
 import QIQTH.Embedding
+import QIQTH.Dynamics
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius
