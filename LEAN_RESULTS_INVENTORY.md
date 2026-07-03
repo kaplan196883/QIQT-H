@@ -933,8 +933,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   amplification of the bicommutant. **C6 LANDED** (`QIQTH/VonNeumann/DensityN.lean`, **[AF]**
   std-3): N-VECTOR DENSITY **`bicommutant_sotApprox`** — a bicommutant element is
   norm-approximable by ONE algebra element uniformly over any finite vector tuple (the full
-  quantifier content of the density half of the double-commutant theorem). Next: C7 (THE
-  CENTERPIECE — the bicommutant theorem itself).
+  quantifier content of the density half of the double-commutant theorem). **C7 LANDED — THE
+  CENTERPIECE (green first try)** (`QIQTH/VonNeumann/Bicommutant.lean`, **[AF]** std-3): ★ **THE
+  VON NEUMANN DOUBLE-COMMUTANT THEOREM** ★ — **`vonNeumann_double_commutant`** /
+  **`mem_centralizer_centralizer_iff_sotApprox`**: for a unital ⋆-subalgebra A ⊆ B(H), the
+  double centralizer A″ EQUALS the set of operators SOT-approximable from A (the concrete
+  `SOTApprox` predicate; converse via the ![x, Sx] tuple), plus idempotence and
+  **`generatedBy_carrier_eq`** (generated vN algebra = SOT closure of the generated ⋆-algebra).
+  A genuine Mathlib gap closed (Mathlib's `VonNeumannAlgebra` has no bicommutant theorem);
+  the file is Mathlib-styleable. Next: C8–C9 (the two downstream packagings), C10 stretch.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

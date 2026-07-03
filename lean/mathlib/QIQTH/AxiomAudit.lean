@@ -8453,6 +8453,18 @@ namespace QIQTH.AxiomAudit
 -- amplify via C5, run C3's single-vector density on diagAlg, pull back coordinatewise). The
 -- SOTApprox quantifier shape (one a per tuple — load-bearing); C7 names the predicate. Std 3.
 #print axioms QIQTH.VonNeumann.bicommutant_sotApprox
+-- THE CLOSURE C7 (VonNeumann/Bicommutant.lean): ★★★ THE VON NEUMANN DOUBLE-COMMUTANT THEOREM ★★★
+-- mem_centralizer_centralizer_iff_sotApprox / vonNeumann_double_commutant: for a unital
+-- ⋆-subalgebra A ⊆ B(H), the double centralizer A″ EQUALS the set of operators approximable
+-- from A in norm on every finite vector tuple (= the SOT closure, stated concretely — no
+-- topology type copy). Forward = the amplified density (C1–C6); converse = the ![x, Sx] n=2
+-- estimate. Plus idempotence (sotApprox_bicommutant_iff) and generatedBy_carrier_eq (the
+-- generated vN algebra IS the SOT closure of the generated ⋆-algebra). A Mathlib gap closed —
+-- Mathlib's VonNeumannAlgebra has no bicommutant theorem. NO WOT claim (C10 separate). Std 3.
+#print axioms QIQTH.VonNeumann.mem_centralizer_centralizer_iff_sotApprox
+#print axioms QIQTH.VonNeumann.vonNeumann_double_commutant
+#print axioms QIQTH.VonNeumann.sotApprox_bicommutant_iff
+#print axioms QIQTH.VonNeumann.generatedBy_carrier_eq
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

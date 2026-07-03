@@ -71,7 +71,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
 - [x] **C6 — `QIQTH/VonNeumann/DensityN.lean`** ✅ DONE: `bicommutant_sotApprox` (C3 in Hⁿ on `diagAlg` +
   `diag_mem_bicommutant`; orbit element `diagCLM a v` has coordinates `a (ξ i)`; finish with
   `norm_coord_le`). Risk LOW.
-- [ ] **C7 — `QIQTH/VonNeumann/Bicommutant.lean` — THE CENTERPIECE**: `SOTApprox` def +
+- [x] **C7 — `QIQTH/VonNeumann/Bicommutant.lean` — THE CENTERPIECE** ✅ DONE: `SOTApprox` def +
   `mem_centralizer_centralizer_iff_sotApprox` / `centralizer_centralizer_eq_setOf_sotApprox` /
   `vonNeumann_double_commutant`. Converse via the n = 2 tuple `![x, S x]`:
   `‖(TS − ST) x‖ ≤ ‖(T−a)(S x)‖ + ‖S‖·‖(a−T) x‖`. Corollaries: `sotApprox_bicommutant_iff`
@@ -209,3 +209,15 @@ gpt-5.5-pro (never expose keys).
   vector — the orbit element `diagCLM a v` has coordinates `a (ξ i)` — pull back with
   `norm_coord_le` + `PiLp.sub_apply`). The SOTApprox quantifier shape realized. NEXT → C7 (THE
   CENTERPIECE).
+
+- **2026-07-04** — **C7 LANDED — THE CENTERPIECE, GREEN FIRST TRY** (`QIQTH/VonNeumann/
+  Bicommutant.lean`, axiom-free std-3, budget 0): **THE VON NEUMANN DOUBLE-COMMUTANT THEOREM** —
+  `SOTApprox` (the concrete SOT-closure predicate; one approximant per tuple, load-bearing,
+  documented); **`mem_centralizer_centralizer_iff_sotApprox`** (T ∈ A″ ↔ SOT-approximable from
+  A; forward = C6's amplified density, converse = the ![x, Sx] n = 2 estimate
+  ‖(TS−ST)x‖ ≤ ‖(T−a)(Sx)‖ + ‖S‖·‖(a−T)x‖ — the n = 1 insufficiency documented); the set form
+  + headline alias **`vonNeumann_double_commutant`**; idempotence `sotApprox_bicommutant_iff`;
+  **`generatedBy_carrier_eq`** (the generated vN algebra IS the SOT closure of the generated
+  ⋆-algebra — C2's naming layer meets the density theorem). Mathlib-styleable (imports only
+  Mathlib + C1–C6). A genuine Mathlib gap closed: Mathlib's `VonNeumannAlgebra` had NO
+  bicommutant theorem. NO WOT claim anywhere (C10 separate). NEXT → C8 (CrossedProductClosure).
