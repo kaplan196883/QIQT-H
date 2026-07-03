@@ -8507,6 +8507,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.gnsInner_self_nonneg
 #print axioms QIQTH.TowerGNS.gnsInner_conj_symm
 #print axioms QIQTH.TowerGNS.pairInner_embed
+-- THE REPRESENTATION R3 (TowerGNS/PreSpace.lean): THE PRE-HILBERT SPACE — TowerPre := ⨁ (C :
+-- Finset M), DiamondAlg L C with the SEMIDEFINITE stabilized pairing (rawInner via double
+-- toAddMonoid; the degeneracy IS the direct-limit gluing); stage collapse collapseRaw K +
+-- rawInner_eq_collapse (support under K ⟹ the tower inner product IS the per-stage GNS form);
+-- positivity from R2's stage positivity; towerCore (PreInnerProductSpace.Core, GNS-file
+-- instance order) → SeminormedAddCommGroup → InnerProductSpace → abbrev TowerGNS :=
+-- UniformSpace.Completion (the Hilbert space — no quotient ever taken). Std 3.
+#print axioms QIQTH.TowerGNS.rawInner_eq_collapse
+#print axioms QIQTH.TowerGNS.rawInner_self_re_nonneg
+#print axioms QIQTH.TowerGNS.towerCore
+#print axioms QIQTH.TowerGNS.towerInner_of_of
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

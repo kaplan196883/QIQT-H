@@ -979,7 +979,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`gnsInner K x y = φ_K(xᴴy)`** — conjugate symmetry, POSITIVITY (0 ≤ ⟪x,x⟫ via the trace
   cycle + PSD conjugation), slot linearity; **`pairInner`** (the stabilized pairing at C ⊔ C′)
   with CAPSTONE **`pairInner_embed`** — the pairing is STAGE-STABLE (any common upper stage
-  agrees: R1 functoriality + ⋆/mul + T7 state compatibility). Next: R3 (the pre-Hilbert space).
+  agrees: R1 functoriality + ⋆/mul + T7 state compatibility). **R3 LANDED — THE PRE-HILBERT
+  SPACE** (`TowerGNS/PreSpace.lean`, **[AF]** std-3): **`TowerPre := ⨁ (C : Finset M),
+  DiamondAlg L C`** with the semidefinite stabilized pairing (the degeneracy IS the direct-limit
+  gluing — no quotient), stage collapse + **`rawInner_eq_collapse`**, positivity, the
+  `PreInnerProductSpace.Core` → seminormed → `InnerProductSpace` chain in the GNS-file order,
+  and **`TowerGNS := UniformSpace.Completion (TowerPre …)`** — the Hilbert space of the tower.
+  Next: R4 (the germ identity + the cyclic vector).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

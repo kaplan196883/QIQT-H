@@ -74,7 +74,7 @@ namespace `QIQTH.TowerGNS`.
   stateOf (gibbsDensity K) (xᴴ * y)`; `gnsInner_conj_symm` (trace_conjTranspose + diagonal-real
   density), `gnsInner_re_nonneg` (A4), add/smul, `stateOf_posSemidef_nonneg`; `pairInner` +
   **`pairInner_embed`** (stability under a common K — uses R1). Risk LOW-MEDIUM.
-- [ ] **R3 — `QIQTH/TowerGNS/PreSpace.lean`**: THE PRE-HILBERT SPACE — `TowerPre` synonym +
+- [x] **R3 — `QIQTH/TowerGNS/PreSpace.lean`** ✅ DONE: THE PRE-HILBERT SPACE — `TowerPre` synonym +
   AddCommGroup/Module via `inferInstanceAs`; `towerInnerHom` (A3); `towerCore :
   PreInnerProductSpace.Core ℂ`; instances IN THE EXACT GNS-FILE ORDER
   (`toSeminormedAddCommGroup (c := towerCore …)` BEFORE `ofCore`); `abbrev TowerGNS :=
@@ -179,3 +179,18 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   `ᴴ` needs `open scoped Matrix` (again!); Finset lattice names are `Finset.subset_union_left/
   union_subset` (le_sup_* don't exist on Finset); `rw [stateOf]` fails ("equation theorems") —
   use `simp only [gnsInner, stateOf, …]`. NEXT → R3 (PreSpace — the DirectSum bookkeeping).
+
+- **2026-07-05** — **R3 LANDED — THE PRE-HILBERT SPACE** (`QIQTH/TowerGNS/PreSpace.lean`,
+  axiom-free std-3, budget 0, three iterations): **`TowerPre := ⨁ (C : Finset M), DiamondAlg
+  L C`** with the SEMIDEFINITE stabilized pairing (`rawInner` via double `toAddMonoid`; outer
+  additivity by the `show`-then-rewrite trick — `(F+G) x = F x + G x` is DEFEQ, state it and
+  rewrite the three `toAddMonoid_of`s); stage collapse **`collapseRaw`** (+ @[simp] of_le/not_le
+  via `erw [toModule_lof]` — eta/instance mismatch blocks plain rw) + **`rawInner_eq_collapse`**
+  (explicit-argument `map_sum`s + `AddMonoidHom.finsetSum_apply`); positivity
+  `rawInner_self_re_nonneg` (K := support.sup id); `towerCore` (a noncomputable **abbrev** —
+  class-typed defs must be reducible) → the GNS-file instance order → **`abbrev TowerGNS :=
+  UniformSpace.Completion (TowerPre …)`** — THE HILBERT SPACE, no quotient ever taken;
+  `towerInner_of_of`. ARCHITECTURE LESSON (recorded in the docstring): all working lemmas live
+  at the RAW ⨁ type; the synonym's `inferInstanceAs` instances vs the direct sum's own cause
+  instance-path mismatches inside rw-proofs — Core fields DELEGATE by application-position
+  defeq, never rw. NEXT → R4 (Germ).
