@@ -8,8 +8,8 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **314 files and ~3,900
-theorems and definitions** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **357 files and ~3,950
+theorems** (over 5,000 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
 
@@ -846,6 +846,59 @@ theorem forces the logarithmic capacity weight only under monoidal, monotone ref
 naturality; without those hypotheses there are explicit finite counterexamples." NOT a full
 decoupling derivation — the join incidence geometry, the species/cell match, and the value of G
 remain parent data; NOT quantum gravity solved; no wall crossed.
+
+</div>
+
+
+## The tower (T1–T8): the first machine-checked contact with the Type III₁ wall
+
+Phase A of the continuum-definition attack, via the ITPFI/Araki–Woods route: the capacity code
+tower with its Gibbs product states IS Araki–Woods input data, and its arithmetic invariant is
+machine-verified to be the III₁ one — at the level of the wall's *fingerprint*, never the wall
+itself (`QIQTH/Tower/`; axiom-free, std-3).
+
+- **T1 — the fingerprint predicates** (`IsTailModularExponent`, `AWFingerprintIII1`): the named
+  witness form of the Araki–Woods asymptotic-ratio invariant, additive in the modular exponent κ,
+  with a load-bearing tail quantifier and uniform weight floor (drifting-frequency and
+  vanishing-weight counterexamples documented), the EXACT per-mode ratio λ₁/λ₀ = e^{−x} (the
+  partition function cancels), and the bridges to the held `kappaOf` eigenvalue law.
+- **T2 — Kronecker density**: two reals at irrational ratio generate a dense additive subgroup
+  (`AddSubgroup.dense_or_cyclic`; the cyclic case forces a rational ratio).
+- **T3 — THE CENTERPIECE** (`gibbsTower_awFingerprint_III₁`): two frequencies occurring
+  infinitely often at irrational ratio, uniform bounds 0 &lt; a ≤ βω<sub>k</sub> ≤ b, cutoffs
+  D<sub>k</sub> ≥ 2 ⟹ the tower's eigenvalue family satisfies the III₁ fingerprint — PLUS the
+  hypothesis-free alternating {1, √2} qubit instance via `irrational_sqrt_two`. The operator
+  reading rests on three facts cited verbatim and never proved (Araki–Woods 1968; Connes 1973);
+  no von Neumann algebra is constructed anywhere in the development.
+- **T4 — the Powers guard** (`gibbsTower_constant_not_fingerprint`): a constant-frequency tower
+  provably FAILS the fingerprint (every tail exponent lies in sℤ — the arithmetic fingerprint of
+  the Powers factor III<sub>e^{−s}</sub>, cited). The separation theorem: the predicate is
+  neither vacuous nor universal.
+- **T5 — the state limit** (`gibbsLimitMeasure`): the σ-additive infinite-mode Gibbs measure on
+  occupation configurations — the unique projective limit of the dynamics campaign's own thermal
+  marginals through the held Kolmogorov/product machinery, whose finite marginals ARE the code's
+  DY Gibbs weights.
+- **T6 — non-atomicity** (`gibbsLimitMeasure_noAtoms`): under the uniform frequency bound every
+  singleton configuration is null (the cylinder squeeze) — so no diagonal-density quantum reading
+  of the limit exists: FALSE, not deferred; the Type-I shortcut is provably closed. The
+  vacuum-atom dichotomy is cited, never proved.
+- **T7 — the finite operator tower** (`cornerEmbed`): for nested corners C ⊆ C′ the inclusion is
+  a unital ⋆-homomorphism, mode-compatible, state-compatible (φ<sub>C′</sub>∘ι = φ<sub>C</sub>),
+  and modular-flow equivariant (σ<sub>s</sub><sup>C′</sup>∘ι = ι∘σ<sub>s</sub><sup>C</sup>, via
+  the `kappaOf` eigen-law) — a family of finite-dimensional maps only: exactly the ITPFI tower
+  DATA, its classification never performed.
+
+<div class="note">
+
+<strong>The T8 checkpoint — the two honest sentences.</strong> HAVE: "the machine-checked
+arithmetic content of the Araki–Woods III₁ criterion for the code's Gibbs tower, including a
+hypothesis-free concrete instance, the Powers-guard separation, the σ-additive infinite-mode
+Gibbs measure with its non-atomicity, and the state-compatible modular-equivariant finite
+refinement tower; the inference to an actual III₁ factor is cited (Araki–Woods 1968; Connes
+1973), never proved." HAVE NOT: "the ITPFI von Neumann algebra, its ratio set, its type, any
+inductive limit or weak closure, any quantum state on the infinite system, or any
+continuum-limit completion — none are constructed or classified here." NOT the continuum done;
+no wall crossed — this is the wall's fingerprint.
 
 </div>
 
