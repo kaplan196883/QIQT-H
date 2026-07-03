@@ -38,8 +38,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   identity (`btz_cardy_eq_bekensteinHawking`) — with the CFT/GR inputs (Cardy formula, Brown–Henneaux central
   charge, BTZ↔CFT dictionary) carried as definitions. It does **NOT** prove the Maldacena conjecture (unproven,
   string theory not rigorously defined — unformalizable). Kept purely as a labelled *comparison* of what AdS/CFT
-  *derives given its inputs* (`G` fixed by the degree-count `N`; BH entropy as a boundary state count) vs what
-  QIQT-H *carries* (`G` a free UV datum). Never cite it as a QIQT-H claim.
+  *derives given its inputs* (`G` fixed by the degree-count `N`; BH entropy as a boundary state count).
+  ⚠ The contrast was UPDATED post-`InducedNewtonConstant` (docstring fixed 2026-07-03): QIQT-H now fixes `G` by
+  a degree-count too (`G = 1/(N Λ_s²)`), and `HolographicBridge` proves the two bookkeepings agree; what AdS/CFT
+  still has and QIQT-H lacks is the INDEPENDENT CROSS-CHECK (one boundary CFT computing both `G` and the
+  microstates). Never cite it as a QIQT-H claim.
 - **Holographic dictionary bridge — `QIQTH/HolographicBridge.lean`** (namespace `QIQTH.HolographicBridge`, [AF]
   std-3, NOT wired into `QIQTH.lean`/`AxiomAudit`). Connects the AdS/CFT comparison to the granularity reframing:
   `btz_cardy_eq_qiqth_capacity` — Strominger's BTZ `Cardy = A/4G`, evaluated with QIQT-H's induced `G=1/(N Λ_s²)`,
