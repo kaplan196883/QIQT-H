@@ -55,7 +55,7 @@ new Hilbert space; add operators and semantics to the counted object. New file
   + `occupationProj_joint_eigen` (the finite spectrum reading); `[N_k, a_k] = −a_k`, `[N_k, a_k†] = a_k†`.
 - [x] **EM4 — the cross-mode algebra** ✅ DONE: generic `modeOp_commute_of_ne`; derived `[a_k, a_j] = [a_k, a_j†]
   = [N_k, a_j] = 0` (j ≠ k).
-- [ ] **EM5 — records and the counted corner**: `occupationProj` + `sum_occupationProj_eq_one` +
+- [x] **EM5 — records and the counted corner** ✅ DONE: `occupationProj` + `sum_occupationProj_eq_one` +
   `recordProj_eq_sum_occupationProj` + trace/card (records ARE occupation pointer subsets); the encoded
   record trace through τ₀ (keystone flatClock); corner transport `[encode V a_k, encode V a_k†] =
   P − D_k·encode V (P_top,k)`.
@@ -122,3 +122,11 @@ failed attempt with the error shown. Check for sibling jobs before each incremen
   commutativity theorem; corollaries (never re-proved): cross_lowering_commutator ([a_k,a_j] = 0),
   cross_ladder_commutator ([a_k,a_j†] = 0 — the BOSONIC sector, honest scope stated), 
   cross_number_commutator ([N_k,a_j] = 0). NEXT → EM5 (records and the counted corner).
+
+- **2026-07-03** — **EM5 LANDED** (axiom-free std-3, budget 0): occupationProj star/idempotent/orthogonal
+  + sum_occupationProj_eq_one (the pointer basis is complete); CAPSTONE recordProj_eq_sum_occupationProj
+  — RECORDS ARE OCCUPATION POINTER-BASIS SUBSETS (a theorem, not a slogan); tauCount_occupationProj = 1;
+  field_record_tau0 (the field record trace through the constructed τ₀ — keystone clock window, links =
+  modes); encoded_mode_ladder_commutator — the corner transport with the HONEST identity
+  [ι_V(a_k), ι_V(a_k)†] = P − D_k·ι_V(P_top,k), P = VVᴴ never the ambient 1. NEXT → EM6 (capacity and
+  local areas).

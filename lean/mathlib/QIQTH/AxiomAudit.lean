@@ -8181,6 +8181,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Embedding.cross_lowering_commutator
 #print axioms QIQTH.Embedding.cross_ladder_commutator
 #print axioms QIQTH.Embedding.cross_number_commutator
+-- THE EMBEDDING EM5: records and the counted corner — occupationProj star/idempotent/orthogonal +
+-- sum_occupationProj_eq_one (the pointer basis is complete); CAPSTONE recordProj_eq_sum_occupationProj —
+-- RECORDS ARE OCCUPATION POINTER-BASIS SUBSETS (every keystone record projector = the sum of its microstates'
+-- occupation projectors); tauCount_occupationProj (= 1); field_record_tau0 (the field record trace through the
+-- constructed tau0, keystone clock window, links = modes); encoded_mode_ladder_commutator — the corner
+-- transport with the HONEST identity [encode a_k, encode a_k†] = P − D_k·encode(P_top,k), P = VVᴴ never
+-- the ambient 1 (per the verdict). Std 3.
+#print axioms QIQTH.Embedding.sum_occupationProj_eq_one
+#print axioms QIQTH.Embedding.recordProj_eq_sum_occupationProj
+#print axioms QIQTH.Embedding.field_record_tau0
+#print axioms QIQTH.Embedding.encoded_mode_ladder_commutator
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

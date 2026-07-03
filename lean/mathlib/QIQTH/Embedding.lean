@@ -481,4 +481,111 @@ theorem cross_number_commutator (k j : C) (hkj : k ≠ j) :
 
 end CrossMode
 
+/-! ## EM5 — records and the counted corner
+
+Records ARE occupation pointer-basis subsets (the theorem, not a slogan): the occupation projectors
+are orthogonal, self-adjoint, resolve the identity, and every keystone record projector is their
+sum; the record trace runs through the constructed τ₀ (the keystone clock window); and the field
+dictionary transports into a capacity-bounded ambient corner with the HONEST identity `P = VVᴴ`
+(never global 1, per the binding verdict). -/
+
+section Records
+
+variable (L : LinkDims M) (C : Finset M)
+
+theorem occupationProj_star (m : Micro L C) :
+    (occupationProj L C m)ᴴ = occupationProj L C m := by
+  rw [occupationProj, Matrix.diagonal_conjTranspose]
+  congr 1
+  funext p
+  by_cases h : p = m <;> simp [h]
+
+theorem occupationProj_mul_self (m : Micro L C) :
+    occupationProj L C m * occupationProj L C m = occupationProj L C m := by
+  rw [occupationProj, Matrix.diagonal_mul_diagonal]
+  congr 1
+  funext p
+  by_cases h : p = m <;> simp [h]
+
+theorem occupationProj_orthogonal {m m' : Micro L C} (h : m ≠ m') :
+    occupationProj L C m * occupationProj L C m' = 0 := by
+  rw [occupationProj, occupationProj, Matrix.diagonal_mul_diagonal]
+  ext p q
+  rw [Matrix.diagonal_apply, Matrix.zero_apply]
+  by_cases hpq : p = q
+  · rw [if_pos hpq]
+    by_cases h1 : p = m
+    · rw [if_pos h1, if_neg fun h2 => h (h1.symm.trans h2), mul_zero]
+    · rw [if_neg h1, zero_mul]
+  · rw [if_neg hpq]
+
+/-- **The occupation projectors resolve the identity** — the pointer basis is complete. -/
+theorem sum_occupationProj_eq_one :
+    (∑ m : Micro L C, occupationProj L C m) = 1 := by
+  ext p q
+  rw [Matrix.sum_apply, Matrix.one_apply]
+  by_cases hpq : p = q
+  · subst hpq
+    rw [if_pos rfl]
+    simp only [occupationProj, Matrix.diagonal_apply_eq]
+    rw [Finset.sum_ite_eq]
+    simp
+  · rw [if_neg hpq]
+    exact Finset.sum_eq_zero fun m _ => by
+      rw [occupationProj, Matrix.diagonal_apply_ne _ hpq]
+
+/-- **EM5 CAPSTONE — records ARE occupation pointer-basis subsets:** every keystone record
+    projector is the sum of the occupation projectors of its microstates. -/
+theorem recordProj_eq_sum_occupationProj (R : Finset (Micro L C)) :
+    recordProj L C R = ∑ m ∈ R, occupationProj L C m := by
+  ext p q
+  rw [recordProj, Matrix.sum_apply]
+  by_cases hpq : p = q
+  · subst hpq
+    rw [Matrix.diagonal_apply_eq]
+    simp only [occupationProj, Matrix.diagonal_apply_eq]
+    rw [Finset.sum_ite_eq]
+  · rw [Matrix.diagonal_apply_ne _ hpq]
+    exact (Finset.sum_eq_zero fun m _ => by
+      rw [occupationProj, Matrix.diagonal_apply_ne _ hpq]).symm
+
+/-- Each occupation record counts exactly one microstate: `τ(|m⟩⟨m|) = 1`. -/
+theorem tauCount_occupationProj (m : Micro L C) :
+    tauCount L C (occupationProj L C m) = 1 := by
+  rw [show tauCount L C (occupationProj L C m) = Matrix.trace (occupationProj L C m) from rfl,
+    occupationProj, Matrix.trace_diagonal, Finset.sum_ite_eq']
+  simp
+
+/-- **The field record trace through the constructed τ₀** (the keystone clock window, links =
+    modes): `τ₀(π(P_R)·q_{N_C}(L)) = |R|` — the truncated field diamond's records are counted by
+    the crossed-product trace. -/
+theorem field_record_tau0 (A : ModeAssignment M) (C : Finset M)
+    (R : Finset (FieldMicro A C)) :
+    QIQTH.TypeIITrace.tauMonomial (uniformState A.toLinkDims C)
+        (recordProj A.toLinkDims C R) 0 (flatClock (NC A.toLinkDims C))
+      = (R.card : ℂ) :=
+  tau0_recordProj_eq_card A.toLinkDims C R
+
+/-- **The corner transport with the honest `P`** — encoding the field dictionary into a
+    capacity-bounded ambient corner (isometry `V`, `P = VVᴴ`), the per-mode defect commutator
+    becomes `[ι_V(a_k), ι_V(a_k)†] = P − D_k·ι_V(P_top,k)`: the corner UNIT is `P`, never the
+    ambient 1 (per the binding verdict). -/
+theorem encoded_mode_ladder_commutator {d𝓗 : Type*} [Fintype d𝓗] [DecidableEq d𝓗]
+    (V : Matrix d𝓗 (Micro L C) ℂ) (hV : Vᴴ * V = 1) (k : C) :
+    QIQTH.CornerConstruction.encode V (modeLowering L C k)
+        * (QIQTH.CornerConstruction.encode V (modeLowering L C k))ᴴ
+      - (QIQTH.CornerConstruction.encode V (modeLowering L C k))ᴴ
+        * QIQTH.CornerConstruction.encode V (modeLowering L C k)
+      = QIQTH.CornerConstruction.codeProjector V
+        - (L.D k.val : ℂ) • QIQTH.CornerConstruction.encode V (topProjMode L C k) := by
+  rw [← QIQTH.CornerConstruction.encode_conjTranspose, ← QIQTH.CornerConstruction.encode_mul V hV,
+    ← QIQTH.CornerConstruction.encode_mul V hV, ← QIQTH.CornerConstruction.encode_sub,
+    mode_ladder_commutator, QIQTH.CornerConstruction.encode_sub,
+    QIQTH.CornerConstruction.encode_smul]
+  congr 1
+  rw [QIQTH.CornerConstruction.encode, Matrix.mul_one]
+  rfl
+
+end Records
+
 end QIQTH.Embedding

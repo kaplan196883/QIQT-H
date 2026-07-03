@@ -716,7 +716,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   product entry), CAPSTONE **`modeOp_commute_of_ne`** — THE one generic theorem (coordinate operators at
   different modes commute); corollaries `[a_k,a_j] = [a_k,a_j†] = [N_k,a_j] = 0` (k ≠ j) — the BOSONIC
   sector (pi-fiber ladders commute; fermionic CAR needs the held graded layer, cut per the verdict).
-  Next: EM5 (records and the counted corner).
+  **EM5 LANDED — RECORDS ARE OCCUPATION POINTER-BASIS SUBSETS**: `occupationProj`
+  star/idempotent/orthogonal + `sum_occupationProj_eq_one` (complete pointer basis), CAPSTONE
+  **`recordProj_eq_sum_occupationProj`** (every keystone record projector = the sum of its microstates'
+  occupation projectors — the theorem, not a slogan); `field_record_tau0` (the field record trace through
+  the constructed τ₀); **`encoded_mode_ladder_commutator`** — the corner transport with the HONEST
+  identity `[ι_V(a_k), ι_V(a_k)†] = P − D_k·ι_V(P_top,k)`, `P = VVᴴ` never the ambient 1.
+  Next: EM6 (capacity and local areas).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
