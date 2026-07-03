@@ -8248,6 +8248,16 @@ namespace QIQTH.AxiomAudit
 -- region's own Gibbs density — diagonal and product over k in R). Std 3.
 #print axioms QIQTH.Dynamics.marginal_gibbsWeight
 #print axioms QIQTH.Dynamics.reduced_gibbsDensity_eq
+-- THE DYNAMICS DY5: the region entropy formula — eigenvalues_sum_diagonal (NEW reusable: eigenvalue sums of a
+-- real diagonal matrix are entry sums, via the diagonal charpoly) + vonNeumannEntropy_diagonal (diagonal vN =
+-- Shannon of the weights); modeEntropy/Smicro; shannon_gibbsWeight (product-state additivity via the
+-- named-kernel interchange); CAPSTONE entropy_gibbs_region — S(rho_{beta,R}) = S_micro(R,beta) = Sigma_k
+-- s_k(beta omega_k); Smicro_zero (SATURATION: = Sigma log D_k at beta = 0) + Smicro_le_count (the all-beta
+-- bound, riding the held Shannon/Gibbs bound; NO arbitrary-beta area equality claimed). Std 3.
+#print axioms QIQTH.Dynamics.eigenvalues_sum_diagonal
+#print axioms QIQTH.Dynamics.entropy_gibbs_region
+#print axioms QIQTH.Dynamics.Smicro_zero
+#print axioms QIQTH.Dynamics.Smicro_le_count
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

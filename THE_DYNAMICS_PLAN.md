@@ -59,7 +59,7 @@ Files: `lean/mathlib/QIQTH/Dynamics.lean` (DY1–DY5), `QIQTH/CrossCheck.lean` (
   lemma separately.
 - [x] **DY4 — the mode-region reduction** ✅ DONE: reduction to `R : Finset Mode` (finite
   marginalization); the reduced Gibbs density is diagonal and product over `k ∈ R`.
-- [ ] **DY5 — the region entropy formula**: diagonal-vN = Shannon for these densities; product
+- [x] **DY5 — the region entropy formula** ✅ DONE: diagonal-vN = Shannon for these densities; product
   additivity; `thermalModeEntropy` + `S_micro_eq_sum_mode`; `S_micro_zero` (= Σ log D_k) +
   `S_micro_le_count` (≤, all β).
 - [ ] **DY6 — the saturated induced cross-check** (`QIQTH/CrossCheck.lean`, CALIBRATION-FREE):
@@ -122,3 +122,13 @@ before each increment. Consults: `mcp__OpenAI__ask` gpt-5.5-pro (do NOT expose t
   complement modes sum to 1 mode-by-mode; proof via a named-f product-sum interchange over the
   occupation basis); reduced_gibbsDensity_eq (the reduced density IS the region's own Gibbs
   density — diagonal and product over k ∈ R). NEXT → DY5 (the region entropy formula).
+
+- **2026-07-03** — **DY5 LANDED** (axiom-free std-3, budget 0, no sorry): eigenvalues_sum_diagonal
+  (NEW reusable — eigenvalue sums of a real diagonal matrix are entry sums, via
+  Matrix.charpoly_diagonal + roots_multiset_prod_X_sub_C) + vonNeumannEntropy_diagonal (diagonal vN
+  = Shannon of the weights); modeEntropy/Smicro; shannon_gibbsWeight (product-state additivity via
+  the named-kernel interchange — one log factor per mode, complement modes sum to 1); CAPSTONE
+  entropy_gibbs_region — S(ρ_{β,R}) = S_micro(R,β) = Σ_k s_k(βω_k); Smicro_zero (SATURATION at
+  β = 0: = Σ log D_k) + Smicro_le_count (the all-β bound via the held Shannon/Gibbs bound; NO
+  arbitrary-β area equality claimed). NEXT → DY6 (the saturated induced cross-check —
+  calibration-free).

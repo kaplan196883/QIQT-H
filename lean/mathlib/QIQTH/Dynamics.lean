@@ -483,4 +483,150 @@ theorem reduced_gibbsDensity_eq (hRC : R ⊆ C) (β : ℝ) :
 
 end Region
 
+/-! ## DY5 — the region entropy formula
+
+The microscopic region entropy: the reduced Gibbs state's von Neumann entropy IS the sum of the
+per-mode thermal entropies — `S_micro(R,β) = Σ_{k∈R} s_{D_k}(βω_k)` — with the β = 0 saturation
+`S_micro(R,0) = Σ log D_k` and the all-β bound `S_micro ≤ Σ log D_k`. (Diagonal densities: the vN
+entropy is the Shannon entropy of the weights — a new reusable `eigenvalues_sum_diagonal` via the
+diagonal characteristic polynomial.) -/
+
+section RegionEntropy
+
+/-- **Eigenvalue sums of a real diagonal matrix are entry sums** (the diagonal charpoly has the
+    entries as its roots — the diagonal companion of the held conjugation-invariance). -/
+theorem eigenvalues_sum_diagonal {ι : Type*} [Fintype ι] [DecidableEq ι] (d : ι → ℝ)
+    (h : (Matrix.diagonal fun i => ((d i : ℝ) : ℂ)).IsHermitian) (f : ℝ → ℝ) :
+    ∑ i, f (h.eigenvalues i) = ∑ i, f (d i) := by
+  classical
+  have hroots : Multiset.map ((RCLike.ofReal : ℝ → ℂ) ∘ h.eigenvalues) Finset.univ.val
+      = Multiset.map (fun i => ((d i : ℝ) : ℂ)) Finset.univ.val := by
+    rw [← h.roots_charpoly_eq_eigenvalues, Matrix.charpoly_diagonal,
+      show (∏ i, (Polynomial.X - Polynomial.C ((d i : ℝ) : ℂ)))
+          = (Multiset.map (fun a => Polynomial.X - Polynomial.C a)
+              (Multiset.map (fun i => ((d i : ℝ) : ℂ)) Finset.univ.val)).prod from by
+        rw [Multiset.map_map]
+        rfl,
+      Polynomial.roots_multiset_prod_X_sub_C]
+  have heig : Multiset.map h.eigenvalues Finset.univ.val = Multiset.map d Finset.univ.val := by
+    refine Multiset.map_injective (RCLike.ofReal_injective (K := ℂ)) ?_
+    simpa only [Multiset.map_map] using hroots
+  calc ∑ i, f (h.eigenvalues i)
+      = (Multiset.map (f ∘ h.eigenvalues) Finset.univ.val).sum := rfl
+    _ = (Multiset.map (f ∘ d) Finset.univ.val).sum := by
+        rw [← Multiset.map_map, ← Multiset.map_map, heig]
+    _ = ∑ i, f (d i) := rfl
+
+/-- **The vN entropy of a diagonal density is the Shannon entropy of its weights.** -/
+theorem vonNeumannEntropy_diagonal {ι : Type*} [Fintype ι] [DecidableEq ι] (w : ι → ℝ)
+    (h : QIQTH.QuantumEntropy.IsDensity (Matrix.diagonal fun i => ((w i : ℝ) : ℂ))) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy h = ∑ i, Real.negMulLog (w i) :=
+  eigenvalues_sum_diagonal w h.posSemidef.1 Real.negMulLog
+
+/-- **The per-mode thermal entropy** `s_k(β) = Σ_i negMulLog p_k(i)`. -/
+noncomputable def modeEntropy (β : ℝ) (k : M) : ℝ :=
+  ∑ i : Fin (L.D k), Real.negMulLog (pMode L ω β k i)
+
+/-- **THE MICROSCOPIC REGION ENTROPY** `S_micro(R,β) = Σ_{k∈R} s_k(β)`. -/
+noncomputable def Smicro (Rg : Finset M) (β : ℝ) : ℝ :=
+  ∑ k ∈ Rg, modeEntropy L ω β k
+
+theorem Smicro_eq_sum_mode (Rg : Finset M) (β : ℝ) :
+    Smicro L ω Rg β = ∑ k ∈ Rg, modeEntropy L ω β k := rfl
+
+/-- The Shannon entropy of the Gibbs product weight is the mode-entropy sum (the product-state
+    additivity, via the named-kernel interchange). -/
+theorem shannon_gibbsWeight (Rg : Finset M) (β : ℝ) :
+    ∑ n : Micro L Rg, Real.negMulLog (gibbsWeight L Rg ω β n)
+      = ∑ k ∈ Rg, modeEntropy L ω β k := by
+  have hlog : ∀ n : Micro L Rg, Real.negMulLog (gibbsWeight L Rg ω β n)
+      = ∑ j : Rg, -(gibbsWeight L Rg ω β n * Real.log (pMode L ω β j.val (n j))) := by
+    intro n
+    simp only [Real.negMulLog_def]
+    rw [show Real.log (gibbsWeight L Rg ω β n)
+          = ∑ j : Rg, Real.log (pMode L ω β j.val (n j)) from by
+        rw [gibbsWeight, Real.log_prod]
+        exact fun j _ => (pMode_pos L ω β j.val (n j)).ne',
+      neg_mul, Finset.mul_sum, ← Finset.sum_neg_distrib]
+  rw [Finset.sum_congr rfl fun n _ => hlog n, Finset.sum_comm,
+    ← Finset.sum_coe_sort Rg (fun k => modeEntropy L ω β k)]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.sum_neg_distrib]
+  set f : (k : Rg) → Fin (L.D k.val) → ℝ := fun k i =>
+    pMode L ω β k.val i * (if k = j then Real.log (pMode L ω β k.val i) else 1) with hf
+  have hprod : ∀ n : Micro L Rg,
+      gibbsWeight L Rg ω β n * Real.log (pMode L ω β j.val (n j))
+      = ∏ k : Rg, f k (n k) := by
+    intro n
+    simp only [hf]
+    rw [Finset.prod_mul_distrib]
+    congr 1
+    rw [Finset.prod_ite_eq' Finset.univ j
+      (fun k => Real.log (pMode L ω β k.val (n k)))]
+    simp
+  rw [Finset.sum_congr rfl fun n _ => hprod n, ← Fintype.piFinset_univ,
+    ← Finset.prod_univ_sum]
+  have hfk : ∀ k : Rg, (∑ i, f k i)
+      = if k = j then (∑ i, pMode L ω β k.val i * Real.log (pMode L ω β k.val i))
+        else 1 := by
+    intro k
+    simp only [hf]
+    by_cases h : k = j
+    · rw [if_pos h]
+      exact Finset.sum_congr rfl fun i _ => by rw [if_pos h]
+    · rw [if_neg h,
+        show (∑ i, pMode L ω β k.val i * (if k = j then Real.log (pMode L ω β k.val i) else 1))
+            = ∑ i, pMode L ω β k.val i from
+          Finset.sum_congr rfl fun i _ => by rw [if_neg h, mul_one]]
+      exact pMode_sum_one L ω β k.val
+  rw [Finset.prod_congr rfl fun k _ => hfk k,
+    Finset.prod_ite_eq' Finset.univ j
+      (fun k => ∑ i, pMode L ω β k.val i * Real.log (pMode L ω β k.val i))]
+  simp only [Finset.mem_univ, if_true]
+  rw [modeEntropy, ← Finset.sum_neg_distrib]
+  exact Finset.sum_congr rfl fun i _ => by simp only [Real.negMulLog_def]; ring
+
+/-- **DY5 CAPSTONE — the region Gibbs state's von Neumann entropy IS `S_micro`:**
+    `S(ρ_{β,R}) = Σ_{k∈R} s_k(βω_k)`. -/
+theorem entropy_gibbs_region (Rg : Finset M) (β : ℝ) :
+    QIQTH.QuantumEntropy.vonNeumannEntropy (gibbs_isDensity L Rg ω β) = Smicro L ω Rg β := by
+  rw [Smicro_eq_sum_mode, ← shannon_gibbsWeight L ω Rg β]
+  exact vonNeumannEntropy_diagonal (gibbsWeight L Rg ω β) (gibbs_isDensity L Rg ω β)
+
+theorem pMode_zero (k : M) (i : Fin (L.D k)) : pMode L ω 0 k i = ((L.D k : ℝ))⁻¹ := by
+  rw [pMode, ZMode,
+    show (∑ i : Fin (L.D k), Real.exp (-((0 : ℝ) * ω k * ((i : ℕ) : ℝ))))
+        = ∑ _i : Fin (L.D k), (1 : ℝ) from Finset.sum_congr rfl fun i _ => by norm_num,
+    Finset.sum_const, nsmul_eq_mul, mul_one, Finset.card_univ, Fintype.card_fin]
+  norm_num
+
+/-- At `β = 0` each mode saturates: `s_k(0) = log D_k`. -/
+theorem modeEntropy_zero (k : M) : modeEntropy L ω 0 k = Real.log (L.D k) := by
+  rw [modeEntropy, Finset.sum_congr rfl fun i _ => by rw [pMode_zero L ω k i],
+    Finset.sum_const, nsmul_eq_mul, Finset.card_univ, Fintype.card_fin]
+  simp only [Real.negMulLog_def]
+  rw [Real.log_inv]
+  have hD : (0 : ℝ) < (L.D k : ℝ) := by exact_mod_cast L.hD k
+  field_simp
+
+/-- **SATURATION**: `S_micro(R, 0) = Σ_{k∈R} log D_k` — the β → 0 recovery of the count. -/
+theorem Smicro_zero (Rg : Finset M) : Smicro L ω Rg 0 = ∑ k ∈ Rg, Real.log (L.D k) :=
+  Finset.sum_congr rfl fun k _ => modeEntropy_zero L ω k
+
+/-- Each mode's thermal entropy is at most `log D_k` (the held Shannon/Gibbs bound). -/
+theorem modeEntropy_le (β : ℝ) (k : M) : modeEntropy L ω β k ≤ Real.log (L.D k) := by
+  have h := QIQTH.RecordContract.shannon_le_log_card (pMode L ω β k)
+    (fun i => (pMode_pos L ω β k i).le) (pMode_sum_one L ω β k)
+  rw [QIQTH.RecordContract.shannon_eq_sum_negMulLog] at h
+  rw [modeEntropy]
+  simpa [Fintype.card_fin] using h
+
+/-- **The all-β bound**: `S_micro(R, β) ≤ Σ log D_k` (equality only at saturation — the honest
+    scope: NO arbitrary-β equality with any area is claimed). -/
+theorem Smicro_le_count (Rg : Finset M) (β : ℝ) :
+    Smicro L ω Rg β ≤ ∑ k ∈ Rg, Real.log (L.D k) :=
+  Finset.sum_le_sum fun k _ => modeEntropy_le L ω β k
+
+end RegionEntropy
+
 end QIQTH.Dynamics

@@ -769,7 +769,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `restrictMicro`/`marginalWeight` (region = subset of MODE labels; diagonal ⟹ classical
   marginalization, no operator partial trace), CAPSTONE **`marginal_gibbsWeight`** (the complement
   modes sum to 1 mode-by-mode) + **`reduced_gibbsDensity_eq`** (the reduced density IS the region's
-  own Gibbs density — diagonal, product over k ∈ R). Next: DY5 (the region entropy formula).
+  own Gibbs density — diagonal, product over k ∈ R). **DY5 LANDED — THE REGION ENTROPY FORMULA**:
+  **`eigenvalues_sum_diagonal`** (NEW reusable spectral fact: eigenvalue sums of a real diagonal
+  matrix are entry sums, via the diagonal charpoly) + `vonNeumannEntropy_diagonal` (diagonal vN =
+  Shannon); `shannon_gibbsWeight` (product additivity); CAPSTONE **`entropy_gibbs_region`** —
+  `S(ρ_{β,R}) = S_micro(R,β) = Σ_{k∈R} s_k(βω_k)`; **`Smicro_zero`** (saturation: `= Σ log D_k`) +
+  **`Smicro_le_count`** (all-β bound; no arbitrary-β area equality claimed).
+  Next: DY6 (the saturated induced cross-check, calibration-free).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
