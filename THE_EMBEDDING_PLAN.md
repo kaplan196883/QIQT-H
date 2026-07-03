@@ -1,6 +1,6 @@
 # THE EMBEDDING (EM1–EM7): the matter-side dictionary — the truncated field diamond IS a counted record corner
 
-**Status:** ACTIVE (2026-07-03). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** complete the
+**Status:** COMPLETE (2026-07-03 — EM1–EM7 all landed; loop deleted). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** complete the
 finite-level bridge on the matter side — give the keystone's already-counted `DiamondAlg L C` its FIELD
 structure (per-mode truncated oscillators, number operators, records = occupation pointer basis) and the
 mode↔link dictionary semantics, so the count READS as "the N-mode truncated free-field diamond's entropy
@@ -62,7 +62,7 @@ new Hilbert space; add operators and semantics to the counted object. New file
 - [x] **EM6 — capacity and local areas** ✅ DONE: `capacityBound` (Σ log D_k ≤ A/4G) ⟹ `S(maxMixed) ≤ A/4G`;
   saturation ⟹ equality (chosen assignment); `localModeArea k := 4G·log D_k` + `sum_localModeArea`;
   the mode-count area-bound restatements.
-- [ ] **EM7 — the localization witness + the graviton capstone (checkpoint)**: optional supplied
+- [x] **EM7 — the localization witness + the graviton capstone (checkpoint)** ✅ DONE: optional supplied
   `LocalizedModeFrame` (certifies, never constructs); CAPSTONE
   `truncated_field_count_eq_fock_area_expect_noJoin` — field → corner → count → area → graviton
   composed end-to-end. Then the checkpoint (the two honest sentences, VERBATIM in the module docstring +
@@ -139,3 +139,11 @@ failed attempt with the error shown. Check for sibling jobs before each incremen
   sum_localModeArea (= inducedScreenAreaTau — the per-mode reading of A_τ);
   mode_count_le_area_of_qubit_capacity (|C|·log 2 ≤ Area/4G). NEXT → EM7 (the localization witness +
   the graviton capstone; checkpoint).
+
+- **2026-07-03** — **EM7 LANDED — CAMPAIGN COMPLETE.** LocalizedModeFrame (the supplied witness —
+  one-particle vectors in the diamond's standard subspace, CERTIFYING a named finite mode list, never
+  constructing); ModeAssignment.ofRealizable (+ ofRealizable_cutoff); CAPSTONE
+  truncated_field_count_eq_fock_area_expect_noJoin — THE FINITE-LEVEL BRIDGE END TO END:
+  log #(truncated Fock basis) = ⟨α|Â_tot(Σ)|α⟩/(4G), field → corner → count → area → graviton with NO
+  join hypothesis. The two honest sentences placed VERBATIM in the module docstring + inventory.
+  NOT QG solved; no wall crossed. Loop 5130f214 deleted.

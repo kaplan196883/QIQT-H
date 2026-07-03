@@ -1,6 +1,22 @@
 /-
-  THE EMBEDDING (THE_EMBEDDING_PLAN.md) — the matter-side dictionary: the N-mode truncated
-  free-field diamond algebra IS a counted record corner.
+  THE EMBEDDING (THE_EMBEDDING_PLAN.md, EM1–EM7 COMPLETE) — the matter-side dictionary: the
+  N-mode truncated free-field diamond algebra IS a counted record corner.
+
+  EM7 CHECKPOINT — the two honest sentences (verbatim from the plan):
+
+  HAVE: "the N-mode truncated free-field diamond algebra IS a counted record corner — the
+  occupation basis is Micro, the per-mode truncated oscillators embed with their honest defect
+  ([a,a†] = 1 − D·P_top), records are occupation projectors, the count S = Σ log D_k = A/4G reads
+  as the truncated field diamond's entropy, capacity bounds/saturates the cutoffs as a constraint,
+  and the mode dictionary composes with the join instance end-to-end (field → corner → count →
+  area → graviton expectation)."
+
+  HAVE NOT: "no exact finite CCR (the truncation defect is permanent); no Type III₁ finite corner
+  (the cutoff→continuum limit is THE wall, never claimed); no construction of continuum-localized
+  modes from the standard subspace (mode membership is named finite data, at most CERTIFIED by a
+  supplied localization witness); capacity is a constraint, not a generator."
+
+  ⚠ NOT quantum gravity solved; no wall crossed.
 
   KEY OBSERVATION (binding): the keystone's microstate space `Micro L C = (e : C) → Fin (D e)` IS a
   multi-mode truncated Fock basis (joint occupation numbers `n_k < D_k`). No new Hilbert space is
@@ -20,6 +36,7 @@
 import Mathlib
 import QIQTH.Keystone
 import QIQTH.CornerConstruction
+import QIQTH.JoinInstance
 
 namespace QIQTH.Embedding
 
@@ -655,5 +672,65 @@ theorem mode_count_le_area_of_qubit_capacity {Area G : ℝ}
   exact h
 
 end Capacity
+
+/-! ## EM7 — the localization witness + the graviton capstone
+
+`LocalizedModeFrame` CERTIFIES (never constructs, per the binding verdict) that a supplied finite
+mode list is compatible with the continuum localization predicate — one-particle vectors in the
+diamond's standard subspace. The capstone composes the whole finite-level bridge:
+field (truncated Fock basis) → corner (counted diamond algebra) → count (log #occupations) →
+area (the join instance) → graviton (the coherent total-area expectation), with NO join
+hypothesis. -/
+
+section Capstone
+
+/-- **The supplied localization witness** — one-particle vectors for the diamond's modes, each
+    lying in the diamond's standard subspace `K`. This CERTIFIES compatibility of a named finite
+    mode list with the continuum localization predicate; it never constructs the modes (the
+    continuum localization map stays the wall). -/
+structure LocalizedModeFrame {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    [CompleteSpace H] (K : StandardSubspace H) (C : Finset M) where
+  /-- the one-particle vector of each mode -/
+  ψ : C → H
+  /-- every mode vector is localized in the diamond's standard subspace -/
+  localized : ∀ k, ψ k ∈ K.toClosedSubmodule
+
+/-- Build the mode assignment from a realizable join instance: modes = screen elements, cutoffs =
+    the realizability datum's integer dimensions (off-screen modes padded to 1 — irrelevant to the
+    diamond, whose basis only sees `C`). -/
+def ModeAssignment.ofRealizable {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {S : QIQTH.AreaMap.ScreenSurface ι} {A0 : ℝ} {β : QIQTH.JoinInstance.A0Split S A0} {G : ℝ}
+    {h : Matrix (Fin 4) (Fin 4) ℝ} (R : QIQTH.JoinInstance.NatRealizable S β G h) :
+    ModeAssignment ι :=
+  ⟨fun k => max (R.D k) 1, fun _ => Nat.lt_of_lt_of_le Nat.zero_lt_one (le_max_right _ _)⟩
+
+/-- On the screen, the padded cutoff IS the realizability dimension. -/
+theorem ModeAssignment.ofRealizable_cutoff {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {S : QIQTH.AreaMap.ScreenSurface ι} {A0 : ℝ} {β : QIQTH.JoinInstance.A0Split S A0} {G : ℝ}
+    {h : Matrix (Fin 4) (Fin 4) ℝ} (R : QIQTH.JoinInstance.NatRealizable S β G h)
+    {k : ι} (hk : k ∈ S.elems) :
+    (ModeAssignment.ofRealizable R).cutoff k = R.D k :=
+  Nat.max_eq_left (R.hD k hk)
+
+/-- **EM7 CAPSTONE — the finite-level bridge, end to end:** for a nat-realizable geometry, the
+    TRUNCATED FIELD diamond's state count equals the coherent expectation of the graviton's TOTAL
+    area operator over `4G` — `log #(occupation basis) = ⟨α|Â_tot(Σ)|α⟩/(4G)` — composing
+    field → corner → count → area → graviton with NO join hypothesis (the join supplied by the
+    JoinInstance construction). A dictionary theorem, not new dynamics (per the verdict): its
+    content is that all the imports compose on ONE object. -/
+theorem truncated_field_count_eq_fock_area_expect_noJoin
+    {ι : Type*} [Fintype ι] [DecidableEq ι] (S : QIQTH.AreaMap.ScreenSurface ι) {A0 : ℝ}
+    (β : QIQTH.JoinInstance.A0Split S A0) {G : ℝ} (hG : 0 < G)
+    (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ)
+    (R : QIQTH.JoinInstance.NatRealizable S β G (QIQTH.OperatorEmergence.classicalH pol α)) :
+    Real.log (Fintype.card (TruncatedFockBasis (ModeAssignment.ofRealizable R) S.elems))
+      = ((QIQTH.OperatorEmergence.areaTotExpr pol A0 S).cohExpect α).re / (4 * G) := by
+  rw [show Fintype.card (TruncatedFockBasis (ModeAssignment.ofRealizable R) S.elems)
+      = Fintype.card (QIQTH.EarnGravity.Microstates S.elems R.D) from by
+    rw [card_truncatedFockBasis, QIQTH.EarnGravity.card_microstates]
+    exact Finset.prod_congr rfl fun k hk => ModeAssignment.ofRealizable_cutoff R hk]
+  exact QIQTH.JoinInstance.code_count_eq_fock_area_expect_noJoin S β hG pol α R
+
+end Capstone
 
 end QIQTH.Embedding

@@ -8202,6 +8202,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Embedding.field_entropy_eq_area_of_saturation
 #print axioms QIQTH.Embedding.sum_localModeArea
 #print axioms QIQTH.Embedding.mode_count_le_area_of_qubit_capacity
+-- THE EMBEDDING EM7 (CAMPAIGN COMPLETE): LocalizedModeFrame (the supplied witness — one-particle vectors in
+-- the diamond's standard subspace, CERTIFYING a named finite mode list, never constructing modes);
+-- ModeAssignment.ofRealizable (modes = screen elements, cutoffs = the realizability dimensions);
+-- CAPSTONE truncated_field_count_eq_fock_area_expect_noJoin — THE FINITE-LEVEL BRIDGE END TO END:
+-- log #(truncated Fock basis) = <alpha|A_tot(Sigma)|alpha>/(4G), composing field -> corner -> count ->
+-- area -> graviton with NO join hypothesis (a dictionary theorem — its content is that all the imports
+-- compose on ONE object). NOT QG solved; no wall crossed. Std 3.
+#print axioms QIQTH.Embedding.ModeAssignment.ofRealizable_cutoff
+#print axioms QIQTH.Embedding.truncated_field_count_eq_fock_area_expect_noJoin
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
