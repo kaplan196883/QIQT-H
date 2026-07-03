@@ -68,7 +68,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
 - [x] **C5 — `QIQTH/VonNeumann/MatrixCommutant.lean`** ✅ DONE: the two minimal matrix-commutant lemmas
   (entries + assembly); `diagAlg` (via `StarSubalgebra.copy` on the image so membership is
   definitionally `∃ a ∈ A, diagCLM a = _`); `diag_mem_bicommutant`. Risk LOW-MEDIUM.
-- [ ] **C6 — `QIQTH/VonNeumann/DensityN.lean`**: `bicommutant_sotApprox` (C3 in Hⁿ on `diagAlg` +
+- [x] **C6 — `QIQTH/VonNeumann/DensityN.lean`** ✅ DONE: `bicommutant_sotApprox` (C3 in Hⁿ on `diagAlg` +
   `diag_mem_bicommutant`; orbit element `diagCLM a v` has coordinates `a (ξ i)`; finish with
   `norm_coord_le`). Risk LOW.
 - [ ] **C7 — `QIQTH/VonNeumann/Bicommutant.lean` — THE CENTERPIECE**: `SOTApprox` def +
@@ -201,3 +201,11 @@ gpt-5.5-pro (never expose keys).
   [mul_apply, comp_apply]` normalization; congrArg-applied interface lemmas). Lean notes:
   `map_star'` wants `f (star x) = star (f x)` (symm of ours); a failed field in a `where`
   structure poisons ALL downstream rfl-lemmas (fix the first error first). NEXT → C6 (DensityN).
+
+- **2026-07-04** — **C6 LANDED** (`QIQTH/VonNeumann/DensityN.lean`, axiom-free std-3, budget 0,
+  one trivial fix): CAPSTONE **`bicommutant_sotApprox`** — T ∈ A″ is norm-approximable by ONE
+  element of A uniformly over any finite tuple (stack via `WithLp.toLp`, amplify by C5's
+  `diag_mem_bicommutant`, run C3's `bicommutant_apply_approx` for `diagAlg A n` on the stacked
+  vector — the orbit element `diagCLM a v` has coordinates `a (ξ i)` — pull back with
+  `norm_coord_le` + `PiLp.sub_apply`). The SOTApprox quantifier shape realized. NEXT → C7 (THE
+  CENTERPIECE).

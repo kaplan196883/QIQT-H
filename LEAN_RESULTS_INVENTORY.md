@@ -930,7 +930,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **[AF]** std-3): the two minimal matrix-commutant lemmas — ENTRIES (S ∈ (diag A)′ ⟹ entries
   π i ∘ S ∘ ι j ∈ A′) and ASSEMBLY (T ∈ A″ + entries in A′ ⟹ diag T commutes) — plus
   diagHom/diagAlg and CAPSTONE **`diag_mem_bicommutant`** (T ∈ A″ ⟹ diag T ∈ (diag A)″), the
-  amplification of the bicommutant. Next: C6 (n-vector density).
+  amplification of the bicommutant. **C6 LANDED** (`QIQTH/VonNeumann/DensityN.lean`, **[AF]**
+  std-3): N-VECTOR DENSITY **`bicommutant_sotApprox`** — a bicommutant element is
+  norm-approximable by ONE algebra element uniformly over any finite vector tuple (the full
+  quantifier content of the density half of the double-commutant theorem). Next: C7 (THE
+  CENTERPIECE — the bicommutant theorem itself).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

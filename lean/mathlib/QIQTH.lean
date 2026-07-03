@@ -73,6 +73,7 @@ import QIQTH.VonNeumann.GeneratedBy
 import QIQTH.VonNeumann.DensityOne
 import QIQTH.VonNeumann.Amplification
 import QIQTH.VonNeumann.MatrixCommutant
+import QIQTH.VonNeumann.DensityN
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

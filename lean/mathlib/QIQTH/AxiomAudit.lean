@@ -8448,6 +8448,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.entry_mem_centralizer
 #print axioms QIQTH.VonNeumann.commute_diag_of_entries
 #print axioms QIQTH.VonNeumann.diag_mem_bicommutant
+-- THE CLOSURE C6 (VonNeumann/DensityN.lean): N-VECTOR DENSITY — bicommutant_sotApprox: T ∈ A″ is
+-- norm-approximable by ONE element of A uniformly over any finite vector tuple (stack into PiLp,
+-- amplify via C5, run C3's single-vector density on diagAlg, pull back coordinatewise). The
+-- SOTApprox quantifier shape (one a per tuple — load-bearing); C7 names the predicate. Std 3.
+#print axioms QIQTH.VonNeumann.bicommutant_sotApprox
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
