@@ -811,7 +811,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the PLANCK value), CAPSTONE **`tendsto_defectExpect`** (the truncation-defect expectation
   D·q^{D−1}/Z_D → 0 at fixed βω > 0 — the state-level decoupling half), `ZMode_eq_Zgeom` (the
   bridge: the code's own thermal partition function IS the truncated geometric sum at q = e^{−βω}).
-  Fixed positive temperature only. Next: DS3 (entropy regimes + the regime-separation guard).
+  Fixed positive temperature only. **DS3 LANDED — ENTROPY REGIMES + THE GUARD**:
+  `tendsto_thermalEntropy_planck` (fixed x > 0: S_D → the free Planck oscillator entropy,
+  `planck_form` = x/(e^x−1)), `tendsto_thermalEntropy_saturation` (fixed D: S_D → log D as x → 0⁺),
+  CAPSTONES **`guard_entropy_saturates`** + **`guard_defect_survives`** — THE REGIME-SEPARATION
+  GUARD: along ANY schedule x_D·D → 0 capacity saturates BUT the truncation-defect expectation
+  tends to 1, NOT 0 — exact saturated capacity is provably NOT the positive-temperature
+  free-oscillator limit (the two decoupling halves live in different regimes, as a THEOREM).
+  Next: DS4 (finite products).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

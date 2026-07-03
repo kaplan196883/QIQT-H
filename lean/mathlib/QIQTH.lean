@@ -55,6 +55,7 @@ import QIQTH.CrossCheck
 import QIQTH.Conjectures
 import QIQTH.Decoupling.TruncatedCCR
 import QIQTH.Decoupling.GibbsSingleMode
+import QIQTH.Decoupling.EntropyRegimes
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

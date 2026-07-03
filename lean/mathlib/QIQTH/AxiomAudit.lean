@@ -8295,6 +8295,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Decoupling.tendsto_meanN
 #print axioms QIQTH.Decoupling.tendsto_defectExpect
 #print axioms QIQTH.Decoupling.ZMode_eq_Zgeom
+-- THE DECOUPLING SHADOW DS3: entropy regimes + THE GUARD — thermalEntropy (S_D = log Z + x·⟨N⟩);
+-- tendsto_thermalEntropy_planck (fixed x > 0: S_D → −log(1−e^{−x}) + x·e^{−x}/(1−e^{−x}) — the free
+-- Planck oscillator entropy, planck_form giving the x/(e^x−1) shape); tendsto_thermalEntropy_saturation
+-- (fixed D: S_D → log D as x → 0⁺); CAPSTONES guard_entropy_saturates + guard_defect_survives — THE
+-- REGIME-SEPARATION GUARD: along ANY schedule x_D·D → 0, capacity saturates (S − log D → 0) BUT the
+-- truncation-defect expectation tends to 1, NOT 0 — exact saturated capacity is provably NOT the
+-- positive-temperature free-oscillator limit (the two decoupling halves live in different regimes). Std 3.
+#print axioms QIQTH.Decoupling.tendsto_thermalEntropy_planck
+#print axioms QIQTH.Decoupling.tendsto_thermalEntropy_saturation
+#print axioms QIQTH.Decoupling.guard_entropy_saturates
+#print axioms QIQTH.Decoupling.guard_defect_survives
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

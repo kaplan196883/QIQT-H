@@ -45,7 +45,7 @@ weaker hypotheses fail). Files under `lean/mathlib/QIQTH/Decoupling/` + `QIQTH/R
 - [x] **DS2 — the single-mode Gibbs limit** ✅ DONE (`QIQTH/Decoupling/GibbsSingleMode.lean`): for
   0 ≤ q < 1: `Z_D q → 1/(1−q)`, `⟨N⟩_D → q/(1−q)` (genuine Filter.Tendsto — QIQT-H's first limit
   theorems), and the DEFECT EXPECTATION `D·q^{D−1}/Z_D → 0` (fixed βω > 0 only).
-- [ ] **DS3 — entropy regimes + the guard** (`QIQTH/Decoupling/EntropyRegimes.lean`):
+- [x] **DS3 — entropy regimes + the guard** ✅ DONE (`QIQTH/Decoupling/EntropyRegimes.lean`):
   `S_D(x) → −log(1−e^{−x}) + x/(e^x−1)` (fixed x > 0); the high-T saturation `S_D(x) → log D` as
   x → 0⁺; THE REGIME-SEPARATION GUARD — along x_D·D → 0: S_D(x_D) − log D → 0 BUT the defect
   expectation → 1 (saturation ≠ the free-oscillator limit, as a theorem).
@@ -100,3 +100,13 @@ attempt with the error shown. Check for sibling jobs before each increment. Cons
   fixed βω > 0 — the state-level decoupling half; the n·qⁿ → 0 shift trick via
   tendsto_add_atTop_iff_nat); ZMode_eq_Zgeom (the bridge: the DY2 code partition function IS the
   truncated geometric sum at q = e^{−βω}). NEXT → DS3 (entropy regimes + the guard).
+
+- **2026-07-03** — **DS3 LANDED** (`QIQTH/Decoupling/EntropyRegimes.lean`, axiom-free std-3,
+  budget 0, no sorry): thermalEntropy (S_D = log Z + x·⟨N⟩) with the elementary bound toolkit
+  (1 ≤ Z ≤ D, D·q^{D−1} ≤ Z, 0 ≤ ⟨N⟩ ≤ D); tendsto_thermalEntropy_planck (fixed x > 0: S_D → the
+  free Planck oscillator entropy; planck_form gives x/(e^x−1)); tendsto_thermalEntropy_saturation
+  (fixed D: S_D → log D as x → 0⁺, by continuity at 0); CAPSTONES guard_entropy_saturates +
+  guard_defect_survives — THE REGIME-SEPARATION GUARD: along ANY schedule x_D·D → 0, capacity
+  saturates (squeeze |S − log D| ≤ x_D·D) BUT the defect expectation tends to 1 (squeeze
+  e^{−x_D·D} ≤ defect ≤ 1) — saturated capacity is provably NOT the free-oscillator limit.
+  NEXT → DS4 (finite products).
