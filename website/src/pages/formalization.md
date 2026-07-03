@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **303 files and ~3,700
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **304 files and ~3,700
 theorems and definitions** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -698,6 +698,57 @@ HAVE NOT: "no theorem says arbitrary external real geometry has exact natural li
 asymptotic approximation is included, and no canonical A₀ split is asserted beyond the named
 apportionment data/policy." The CCR-isometry obstruction is permanent (the join is expectation-level
 forever); NOT quantum gravity solved; no wall crossed.
+
+</div>
+
+## The embedding — the truncated field diamond IS a counted record corner (EM1–EM7): the finite-level bridge closed
+
+The matter-side dictionary. The key observation is definitional: the keystone's microstate space
+`Micro = Π_k Fin(D_k)` IS a multi-mode truncated Fock basis (joint occupation numbers
+n<sub>k</sub> &lt; D<sub>k</sub>) — no new Hilbert space is built; the campaign gives the
+already-counted diamond algebra its FIELD structure and the mode↔link semantics
+(`QIQTH/Embedding.lean`; axiom-free, std-3). With THE COUNT, THE JOIN INSTANCE, and THE EMBEDDING
+complete, the finite-level bridge is closed end to end: a truncated free field in a diamond IS a
+counted record corner, its records ARE occupation pointer states, its count IS the area over 4G, and
+that same number IS the graviton's coherent area expectation — one object, one theorem chain.
+
+- **EM1 — the dictionary** (`ModeAssignment`, `truncated_field_diamond_entropy`): a LINK IS A FIELD
+  MODE (dimension = truncation cutoff, named finite data); the keystone count reads verbatim as the
+  truncated field diamond's entropy S = Σ<sub>k</sub> log D<sub>k</sub> = A<sub>τ</sub>(C)/4G.
+- **EM2 — the coordinate embedding** (`modeOp` + transport package): direct-entry (A on fiber k,
+  delta elsewhere — never Kronecker), unital/additive/multiplicative/⋆/injective via a reusable
+  fiber-sum lemma — each single-mode oscillator algebra genuinely embeds.
+- **EM3 — the per-mode oscillators** (`mode_ladder_commutator`): the HONEST transported defect
+  [a<sub>k</sub>, a<sub>k</sub>†] = 1 − D<sub>k</sub>·P<sub>top,k</sub> (exact CCR permanently
+  impossible — stated, not hidden); the finite spectrum reading; [N<sub>k</sub>, a<sub>k</sub>] =
+  −a<sub>k</sub>.
+- **EM4 — the cross-mode algebra** (`modeOp_commute_of_ne`): ONE generic theorem, all cross
+  commutators as corollaries — the bosonic sector (fermionic CAR needs the held graded layer).
+- **EM5 — records** (`recordProj_eq_sum_occupationProj`, `encoded_mode_ladder_commutator`):
+  RECORDS ARE OCCUPATION POINTER-BASIS SUBSETS as a theorem (welding the record ontology to the
+  field ontology); the record trace through the constructed τ₀; corner transport with the honest
+  unit P = VVᴴ, never the ambient 1.
+- **EM6 — capacity** (`field_entropy_le_area_of_capacity`): CAPACITY IS A CONSTRAINT, NOT A
+  GENERATOR — Σ log D<sub>k</sub> ≤ A/4G selects admissible assignments and implies S ≤ A/4G;
+  each mode occupies 4G·log D<sub>k</sub> of area; ≤ A/(4G·log 2) two-level modes per diamond.
+- **EM7 — the capstone** (`truncated_field_count_eq_fock_area_expect_noJoin`): **the finite-level
+  bridge end to end** — log #(truncated Fock basis) = ⟨α|Â<sub>tot</sub>(Σ)|α⟩/(4G), composing
+  field → corner → count → area → graviton on ONE object with no join hypothesis;
+  `LocalizedModeFrame` certifies (never constructs) localization.
+
+<div class="note">
+
+<strong>The EM7 checkpoint — the two honest sentences.</strong> HAVE: "the N-mode truncated
+free-field diamond algebra IS a counted record corner — the occupation basis is Micro, the per-mode
+truncated oscillators embed with their honest defect ([a,a†] = 1 − D·P<sub>top</sub>), records are
+occupation projectors, the count S = Σ log D<sub>k</sub> = A/4G reads as the truncated field
+diamond's entropy, capacity bounds/saturates the cutoffs as a constraint, and the mode dictionary
+composes with the join instance end-to-end (field → corner → count → area → graviton expectation)."
+HAVE NOT: "no exact finite CCR (the truncation defect is permanent); no Type III₁ finite corner (the
+cutoff→continuum limit is THE wall, never claimed); no construction of continuum-localized modes from
+the standard subspace (mode membership is named finite data, at most CERTIFIED by a supplied
+localization witness); capacity is a constraint, not a generator." NOT quantum gravity solved; no
+wall crossed.
 
 </div>
 
