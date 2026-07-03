@@ -387,4 +387,98 @@ theorem numberOp_comm_modeRaising (k : C) :
 
 end PerMode
 
+/-! ## EM4 — the cross-mode algebra
+
+ONE generic theorem (per the binding verdict): coordinate operators at DIFFERENT modes commute
+(`modeOp_commute_of_ne`, via the two-coordinate "same outside {k,j}" helper) — every cross-mode
+commutator (ladders, adjoints, number operators) is a corollary, never re-proved. NOTE the honest
+scope: different-mode pi-ladders COMMUTE — this is the bosonic sector; fermionic CAR needs the held
+graded/FreeFieldCorner layer (cut, per the verdict). -/
+
+section CrossMode
+
+variable (L : LinkDims M) (C : Finset M)
+
+/-- Agreement off the pair `{k, j}`. -/
+def sameOff2 (k j : C) (m n : Micro L C) : Prop :=
+  ∀ l : C, l ≠ k → l ≠ j → m l = n l
+
+instance (k j : C) (m n : Micro L C) : Decidable (sameOff2 L C k j m n) :=
+  inferInstanceAs (Decidable (∀ l : C, l ≠ k → l ≠ j → m l = n l))
+
+/-- **The two-coordinate product entry**: for `k ≠ j`, the product of coordinate operators acts on
+    the two fibers independently, delta elsewhere. -/
+theorem modeOp_mul_apply_of_ne {k j : C} (hkj : k ≠ j)
+    (A : Matrix (Fin (L.D k.val)) (Fin (L.D k.val)) ℂ)
+    (B : Matrix (Fin (L.D j.val)) (Fin (L.D j.val)) ℂ) (m n : Micro L C) :
+    (modeOp L C k A * modeOp L C j B) m n
+      = if sameOff2 L C k j m n then A (m k) (n k) * B (m j) (n j) else 0 := by
+  rw [Matrix.mul_apply,
+    sum_mode_fiber L C k m (fun p => modeOp L C k A m p * modeOp L C j B p n)
+      (fun p hp => by
+        show modeOp L C k A m p * modeOp L C j B p n = 0
+        rw [modeOp_apply, if_neg hp, zero_mul])]
+  by_cases h2 : sameOff2 L C k j m n
+  · rw [if_pos h2, Finset.sum_eq_single_of_mem (n k) (Finset.mem_univ _) ?h0]
+    · show modeOp L C k A m (updMode L C k m (n k)) * modeOp L C j B (updMode L C k m (n k)) n
+        = A (m k) (n k) * B (m j) (n j)
+      rw [modeOp_apply, if_pos (sameOff_updMode L C k m (n k)), updMode_self,
+        modeOp_apply L C j B,
+        if_pos (show sameOff L C j (updMode L C k m (n k)) n from fun l hl => by
+          by_cases hlk : l = k
+          · subst hlk; rw [updMode_self]
+          · rw [updMode_of_ne L C hlk]; exact h2 l hlk hl),
+        updMode_of_ne L C hkj.symm]
+    case h0 =>
+      intro i _ hi
+      show modeOp L C k A m (updMode L C k m i) * modeOp L C j B (updMode L C k m i) n = 0
+      rw [modeOp_apply L C j B,
+        if_neg (show ¬ sameOff L C j (updMode L C k m i) n from fun hs => by
+          have hk := hs k hkj
+          rw [updMode_self] at hk
+          exact hi hk),
+        mul_zero]
+  · rw [if_neg h2]
+    refine Finset.sum_eq_zero fun i _ => ?_
+    show modeOp L C k A m (updMode L C k m i) * modeOp L C j B (updMode L C k m i) n = 0
+    rw [modeOp_apply L C j B,
+      if_neg (show ¬ sameOff L C j (updMode L C k m i) n from fun hs =>
+        h2 fun l hlk hlj => by
+          have hl := hs l hlj
+          rwa [updMode_of_ne L C hlk] at hl),
+      mul_zero]
+
+/-- **EM4 CAPSTONE — the ONE generic cross-mode commutativity theorem:** coordinate operators at
+    different modes commute. Every cross-mode commutator below is a corollary. -/
+theorem modeOp_commute_of_ne {k j : C} (hkj : k ≠ j)
+    (A : Matrix (Fin (L.D k.val)) (Fin (L.D k.val)) ℂ)
+    (B : Matrix (Fin (L.D j.val)) (Fin (L.D j.val)) ℂ) :
+    modeOp L C k A * modeOp L C j B = modeOp L C j B * modeOp L C k A := by
+  ext m n
+  rw [modeOp_mul_apply_of_ne L C hkj A B m n, modeOp_mul_apply_of_ne L C hkj.symm B A m n]
+  have hiff : sameOff2 L C k j m n ↔ sameOff2 L C j k m n :=
+    ⟨fun h l h1 h2 => h l h2 h1, fun h l h1 h2 => h l h2 h1⟩
+  by_cases h2 : sameOff2 L C k j m n
+  · rw [if_pos h2, if_pos (hiff.mp h2), mul_comm]
+  · rw [if_neg h2, if_neg fun h => h2 (hiff.mpr h)]
+
+/-- `[a_k, a_j] = 0` for `k ≠ j`. -/
+theorem cross_lowering_commutator (k j : C) (hkj : k ≠ j) :
+    modeLowering L C k * modeLowering L C j - modeLowering L C j * modeLowering L C k = 0 := by
+  rw [modeLowering, modeLowering, modeOp_commute_of_ne L C hkj, sub_self]
+
+/-- `[a_k, a_j†] = 0` for `k ≠ j` — the bosonic cross-mode independence (the honest scope:
+    pi-fiber ladders commute; fermionic CAR needs the held graded layer, cut per the verdict). -/
+theorem cross_ladder_commutator (k j : C) (hkj : k ≠ j) :
+    modeLowering L C k * (modeLowering L C j)ᴴ
+      - (modeLowering L C j)ᴴ * modeLowering L C k = 0 := by
+  rw [modeLowering, modeLowering, ← modeOp_star, modeOp_commute_of_ne L C hkj, sub_self]
+
+/-- `[N_k, a_j] = 0` for `k ≠ j` — occupations of other modes are untouched. -/
+theorem cross_number_commutator (k j : C) (hkj : k ≠ j) :
+    numberOp L C k * modeLowering L C j - modeLowering L C j * numberOp L C k = 0 := by
+  rw [numberOp, modeLowering, modeOp_commute_of_ne L C hkj, sub_self]
+
+end CrossMode
+
 end QIQTH.Embedding

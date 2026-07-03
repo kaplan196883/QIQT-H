@@ -53,7 +53,7 @@ new Hilbert space; add operators and semantics to the counted object. New file
 - [x] **EM3 — the per-mode oscillator structure** ✅ DONE: `a_k`/`a_k†`/`N_k`/`P_top,k` via `modeOp`; the same-mode
   truncation defect `[a_k, a_k†] = 1 − D_k·P_top,k` (transported, never re-proved); `numberOp_apply_diag`
   + `occupationProj_joint_eigen` (the finite spectrum reading); `[N_k, a_k] = −a_k`, `[N_k, a_k†] = a_k†`.
-- [ ] **EM4 — the cross-mode algebra**: generic `modeOp_commute_of_ne`; derived `[a_k, a_j] = [a_k, a_j†]
+- [x] **EM4 — the cross-mode algebra** ✅ DONE: generic `modeOp_commute_of_ne`; derived `[a_k, a_j] = [a_k, a_j†]
   = [N_k, a_j] = 0` (j ≠ k).
 - [ ] **EM5 — records and the counted corner**: `occupationProj` + `sum_occupationProj_eq_one` +
   `recordProj_eq_sum_occupationProj` + trace/card (records ARE occupation pointer subsets); the encoded
@@ -115,3 +115,10 @@ failed attempt with the error shown. Check for sibling jobs before each incremen
   occupationProj_joint_eigen (N_k eigenvalue n_k — the finite spectrum reading); number_comm_lowering
   (single-mode, proved once) → numberOp_comm_modeLowering ([N_k,a_k] = −a_k) +
   numberOp_comm_modeRaising ([N_k,a_k†] = a_k†, by adjoints). NEXT → EM4 (the cross-mode algebra).
+
+- **2026-07-03** — **EM4 LANDED** (axiom-free std-3, budget 0): sameOff2 (agreement off the pair,
+  decidable); modeOp_mul_apply_of_ne (the two-coordinate product entry — independent fibers, delta
+  elsewhere, via the EM2 fiber-sum engine); CAPSTONE modeOp_commute_of_ne — THE one generic cross-mode
+  commutativity theorem; corollaries (never re-proved): cross_lowering_commutator ([a_k,a_j] = 0),
+  cross_ladder_commutator ([a_k,a_j†] = 0 — the BOSONIC sector, honest scope stated), 
+  cross_number_commutator ([N_k,a_j] = 0). NEXT → EM5 (records and the counted corner).

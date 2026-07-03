@@ -8172,6 +8172,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Embedding.occupationProj_joint_eigen
 #print axioms QIQTH.Embedding.numberOp_comm_modeLowering
 #print axioms QIQTH.Embedding.numberOp_comm_modeRaising
+-- THE EMBEDDING EM4: the cross-mode algebra — sameOff2 (agreement off the pair) + modeOp_mul_apply_of_ne
+-- (the two-coordinate product entry: independent fibers, delta elsewhere); CAPSTONE modeOp_commute_of_ne —
+-- THE one generic theorem (coordinate operators at different modes commute); corollaries (never re-proved):
+-- cross_lowering_commutator ([a_k,a_j] = 0), cross_ladder_commutator ([a_k,a_j†] = 0 — the BOSONIC sector;
+-- fermionic CAR needs the held graded layer, cut per the verdict), cross_number_commutator ([N_k,a_j] = 0). Std 3.
+#print axioms QIQTH.Embedding.modeOp_commute_of_ne
+#print axioms QIQTH.Embedding.cross_lowering_commutator
+#print axioms QIQTH.Embedding.cross_ladder_commutator
+#print axioms QIQTH.Embedding.cross_number_commutator
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

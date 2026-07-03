@@ -712,7 +712,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   TRANSPORTED through the embedding; exact CCR permanently impossible); `occupationProj` +
   **`occupationProj_joint_eigen`** (the finite spectrum reading: N_k eigenvalue n_k on every occupation
   projector); the ladder relations `[N_k, a_k] = −a_k`, `[N_k, a_k†] = a_k†` (by adjoints).
-  Next: EM4 (the cross-mode algebra).
+  **EM4 LANDED — THE CROSS-MODE ALGEBRA**: `sameOff2` + `modeOp_mul_apply_of_ne` (the two-coordinate
+  product entry), CAPSTONE **`modeOp_commute_of_ne`** — THE one generic theorem (coordinate operators at
+  different modes commute); corollaries `[a_k,a_j] = [a_k,a_j†] = [N_k,a_j] = 0` (k ≠ j) — the BOSONIC
+  sector (pi-fiber ladders commute; fermionic CAR needs the held graded layer, cut per the verdict).
+  Next: EM5 (records and the counted corner).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
