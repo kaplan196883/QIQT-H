@@ -726,8 +726,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   assignments, NEVER a generator), CAPSTONE **`field_entropy_le_area_of_capacity`** (admissible ⟹
   S ≤ Area/4G), `field_entropy_eq_area_of_saturation` (equality for the CHOSEN assignment),
   `localModeArea = 4G·log D_k` + `sum_localModeArea` (the per-mode reading of A_τ),
-  `mode_count_le_area_of_qubit_capacity` (|C|·log 2 ≤ Area/4G). Next: EM7 (localization witness +
-  graviton capstone; checkpoint).
+  `mode_count_le_area_of_qubit_capacity` (|C|·log 2 ≤ Area/4G). **EM7 LANDED — CAMPAIGN COMPLETE**: `LocalizedModeFrame` (the supplied witness — CERTIFIES a named
+  finite mode list against the diamond's standard subspace, never constructs), CAPSTONE
+  **`truncated_field_count_eq_fock_area_expect_noJoin`** — THE FINITE-LEVEL BRIDGE END TO END:
+  `log #(truncated Fock basis) = ⟨α|Â_tot(Σ)|α⟩/(4G)`, composing field → corner → count → area →
+  graviton with NO join hypothesis.
+  **EM7 CHECKPOINT (the two honest sentences, verbatim):** HAVE: "the N-mode truncated free-field
+  diamond algebra IS a counted record corner — the occupation basis is Micro, the per-mode truncated
+  oscillators embed with their honest defect ([a,a†] = 1 − D·P_top), records are occupation projectors,
+  the count S = Σ log D_k = A/4G reads as the truncated field diamond's entropy, capacity
+  bounds/saturates the cutoffs as a constraint, and the mode dictionary composes with the join instance
+  end-to-end (field → corner → count → area → graviton expectation)." HAVE NOT: "no exact finite CCR
+  (the truncation defect is permanent); no Type III₁ finite corner (the cutoff→continuum limit is THE
+  wall, never claimed); no construction of continuum-localized modes from the standard subspace (mode
+  membership is named finite data, at most CERTIFIED by a supplied localization witness); capacity is a
+  constraint, not a generator." ⚠ NOT QG solved; no wall crossed.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
