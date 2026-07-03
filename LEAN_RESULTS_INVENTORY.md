@@ -975,7 +975,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   space, towards `towerLimitVN`). Tower FUNCTORIALITY: **`cornerEmbed_trans`** (embeddings
   compose along C ⊆ C′ ⊆ C″) via **`sameOffSub_split`** + `restrictMicro_trans`; the linear
   bundling `cornerEmbedₗ` + sub/zero. The one missing T7 lemma; pure finite combinatorics.
-  Next: R2 (the per-stage GNS form).
+  **R2 LANDED** (`TowerGNS/StageInner.lean`, **[AF]** std-3): the per-stage GNS form
+  **`gnsInner K x y = φ_K(xᴴy)`** — conjugate symmetry, POSITIVITY (0 ≤ ⟪x,x⟫ via the trace
+  cycle + PSD conjugation), slot linearity; **`pairInner`** (the stabilized pairing at C ⊔ C′)
+  with CAPSTONE **`pairInner_embed`** — the pairing is STAGE-STABLE (any common upper stage
+  agrees: R1 functoriality + ⋆/mul + T7 state compatibility). Next: R3 (the pre-Hilbert space).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

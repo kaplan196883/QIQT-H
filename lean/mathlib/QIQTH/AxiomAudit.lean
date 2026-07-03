@@ -8498,6 +8498,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.cornerEmbed_trans
 #print axioms QIQTH.TowerGNS.sameOffSub_split
 #print axioms QIQTH.TowerGNS.cornerEmbed_sub
+-- THE REPRESENTATION R2 (TowerGNS/StageInner.lean): the per-stage GNS form — gnsInner K x y :=
+-- φ_K(xᴴy) with conjugate symmetry (trace_conjTranspose + diagonal-real density + trace cycle),
+-- POSITIVITY 0 ≤ ⟪x,x⟫ (trace_mul_cycle + PosSemidef.mul_mul_conjTranspose_same + trace_nonneg),
+-- add/smul in both slots, stateOf_posSemidef_nonneg; THE STABILIZED PAIRING pairInner with
+-- CAPSTONE pairInner_embed (stage stability: any common upper stage agrees — R1 functoriality +
+-- ⋆/mul laws + T7 state compatibility). Std 3.
+#print axioms QIQTH.TowerGNS.gnsInner_self_nonneg
+#print axioms QIQTH.TowerGNS.gnsInner_conj_symm
+#print axioms QIQTH.TowerGNS.pairInner_embed
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

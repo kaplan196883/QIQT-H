@@ -70,7 +70,7 @@ namespace `QIQTH.TowerGNS`.
   `restrictMicro_trans`; `sameOffSub_split` (C ⊆ C' ⊆ C'': sameOffSub factorization);
   **`cornerEmbed_trans`**; `cornerEmbedₗ` (linear bundling from held add/smul); `cornerEmbed_sub`.
   Proof style = landed cornerEmbed_one/_mul. Risk LOW.
-- [ ] **R2 — `QIQTH/TowerGNS/StageInner.lean`**: the per-stage GNS form — `gnsInner K x y :=
+- [x] **R2 — `QIQTH/TowerGNS/StageInner.lean`** ✅ DONE: the per-stage GNS form — `gnsInner K x y :=
   stateOf (gibbsDensity K) (xᴴ * y)`; `gnsInner_conj_symm` (trace_conjTranspose + diagonal-real
   density), `gnsInner_re_nonneg` (A4), add/smul, `stateOf_posSemidef_nonneg`; `pairInner` +
   **`pairInner_embed`** (stability under a common K — uses R1). Risk LOW-MEDIUM.
@@ -168,3 +168,14 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   the restrictions — the Subtype.ext cast bridged explicitly); CAPSTONE **`cornerEmbed_trans`**
   (the tower is a FUNCTOR on the directed corner order); `cornerEmbedₗ` (linear bundling) +
   `cornerEmbed_sub`/`_zero` (via map_sub/map_zero). NEXT → R2 (StageInner).
+
+- **2026-07-05** — **R2 LANDED** (`QIQTH/TowerGNS/StageInner.lean`, axiom-free std-3, budget 0,
+  three iterations): **`gnsInner K x y := φ_K(xᴴy)`** — conj symmetry (trace_conjTranspose +
+  diagonal-real ρ + trace cycle), **POSITIVITY** `gnsInner_self_nonneg` (the A4 recipe:
+  trace_mul_cycle → tr(x ρ xᴴ) → PosSemidef.mul_mul_conjTranspose_same → trace_nonneg, in
+  scoped ComplexOrder), add/smul both slots, `stateOf_posSemidef_nonneg` (diagonal weights +
+  diag_nonneg); **`pairInner`** + CAPSTONE **`pairInner_embed`** (stage stability via a
+  self-contained `key` ∀-lemma — rw on the big goal hits the WRONG star-occurrence). Lean notes:
+  `ᴴ` needs `open scoped Matrix` (again!); Finset lattice names are `Finset.subset_union_left/
+  union_subset` (le_sup_* don't exist on Finset); `rw [stateOf]` fails ("equation theorems") —
+  use `simp only [gnsInner, stateOf, …]`. NEXT → R3 (PreSpace — the DirectSum bookkeeping).
