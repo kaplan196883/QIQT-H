@@ -889,8 +889,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   CAPSTONE **`gibbsLimitMeasure_singleton_eq_zero`** — the cylinder squeeze: under 0 ≤ βω_k ≤ b,
   D_k ≥ 2 EVERY singleton is null (depth-N cylinder mass ≤ c^N → 0), bundled as Mathlib
   **`NoAtoms`**. Hence no diagonal-density ("diagState") reading of the T5 limit exists — FALSE,
-  not deferred; the vacuum-atom dichotomy (Σe^{−βω_k} < ∞ ⟹ atom) cited only. Next: T7
-  (cornerEmbed, optional) then T8 (checkpoint).
+  not deferred; the vacuum-atom dichotomy (Σe^{−βω_k} < ∞ ⟹ atom) cited only. **T7 LANDED —
+  THE FINITE OPERATOR TOWER** (`Tower/CornerEmbed.lean`): **`cornerEmbed`** (C ⊆ C′) is a unital
+  ⋆-homomorphism (one/mul/star/add/smul), mode-compatible (`cornerEmbed_modeOp`),
+  state-compatible (`cornerEmbed_stateOf` = DY4's Gibbs marginal in operator form) and
+  MODULAR-FLOW EQUIVARIANT (CAPSTONE **`cornerEmbed_sigmaDiag`**: σ_s^{C′}∘ι = ι∘σ_s^C via the
+  kappaOf eigen-law `kappaOf_gibbsWeight_of_sameOffSub`) — the state-compatible
+  modular-equivariant refinement tower = the ITPFI tower DATA, as a family of finite-dimensional
+  maps only (no limit algebra, no type claim). Next: T8 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

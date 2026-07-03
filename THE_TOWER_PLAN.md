@@ -72,7 +72,7 @@ finite operator refinement tower. Files under `lean/mathlib/QIQTH/Tower/`.
 - [x] **T6 — non-atomicity** ✅ DONE: under βω_k ≤ b every singleton has measure zero (cylinder squeeze,
   `tendsto_measure_iInter`) — certifying the classical measure as the correct limit object and
   that no diagonal quantum density exists (the vacuum-atom dichotomy cited).
-- [ ] **T7 (optional) — the finite operator tower**: `cornerEmbed` for C ⊆ C′ — unital ⋆-hom,
+- [x] **T7 (optional) — the finite operator tower** ✅ DONE: `cornerEmbed` for C ⊆ C′ — unital ⋆-hom,
   mode-operator compatibility, state compatibility φ_{C′}∘ι = φ_C, and MODULAR-FLOW EQUIVARIANCE
   σ_t^{C′}∘ι = ι∘σ_t^C via the kappaOf eigen-law. The honest finite shadow of the ITPFI tower;
   family of finite-dimensional maps only.
@@ -170,3 +170,18 @@ attempt with the error shown. Check sibling jobs before each increment. Consults
   verdict), not deferred. The vacuum-atom dichotomy (Σe^{−x_k} < ∞ ⟹ vacuum atom; Kakutani-type)
   is CITED in the docstring, never proved — the uniform bound is load-bearing. NEXT → T7
   (cornerEmbed, optional — drop first if budget tightens) then T8 (checkpoint).
+
+- **2026-07-03** — **T7 LANDED** (`QIQTH/Tower/CornerEmbed.lean`, axiom-free std-3, budget 0):
+  **cornerEmbed** (C ⊆ C′: act on the C-modes, identity on the complement; via
+  sameOffSub/updOn/restrictMicro combinatorics) is a UNITAL ⋆-HOMOMORPHISM
+  (cornerEmbed_one/_mul/_star/_add/_smul — the multiplicativity by the updOn fiber collapse of
+  the intermediate index sum), MODE-COMPATIBLE (cornerEmbed_modeOp — C-mode operators go to the
+  SAME upstairs mode operators), STATE-COMPATIBLE (cornerEmbed_stateOf — φ_{C′}∘ι = φ_C, the
+  operator form of DY4's marginal via Finset.sum_fiberwise + marginal_gibbsWeight), and
+  MODULAR-FLOW EQUIVARIANT (CAPSTONE **cornerEmbed_sigmaDiag** — σ_s^{C′}∘ι = ι∘σ_s^C, through
+  the kappaOf eigen-law **kappaOf_gibbsWeight_of_sameOffSub**: the Gibbs log-weight difference
+  of configurations agreeing off C is computed inside C — energy_sub_of_sameOffSub, the
+  partition functions cancel). A FAMILY OF FINITE-DIMENSIONAL MAPS only — no inductive limit,
+  weak closure, vN algebra or type claim (binding verdict); the ITPFI tower DATA exhibited,
+  its classification cited at T3 (Araki–Woods 1968), never performed. NEXT → T8 (checkpoint:
+  the campaign HAVE/HAVE-NOT sentences verbatim; delete the loop; stop).

@@ -8397,6 +8397,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Tower.gibbsEigen_le_ceiling
 #print axioms QIQTH.Tower.gibbsLimitMeasure_singleton_eq_zero
 #print axioms QIQTH.Tower.gibbsLimitMeasure_noAtoms
+-- THE TOWER T7 (Tower/CornerEmbed.lean): the finite operator tower — cornerEmbed (C ⊆ C', act on
+-- the C-modes, identity on the complement) is a unital ⋆-homomorphism (one/mul/star/add/smul),
+-- MODE-compatible (cornerEmbed_modeOp), STATE-compatible (cornerEmbed_stateOf = DY4's Gibbs
+-- marginal in operator form), and MODULAR-FLOW EQUIVARIANT (CAPSTONE cornerEmbed_sigmaDiag,
+-- σ_s^{C'}∘ι = ι∘σ_s^C via the kappaOf eigen-law kappaOf_gibbsWeight_of_sameOffSub). A FAMILY of
+-- finite-dimensional maps ONLY — no inductive limit, no weak closure, no vN algebra, no type
+-- claimed (the ITPFI tower DATA; Araki–Woods 1968 classification cited at T3, never proved). Std 3.
+#print axioms QIQTH.Tower.cornerEmbed_mul
+#print axioms QIQTH.Tower.cornerEmbed_modeOp
+#print axioms QIQTH.Tower.cornerEmbed_stateOf
+#print axioms QIQTH.Tower.kappaOf_gibbsWeight_of_sameOffSub
+#print axioms QIQTH.Tower.cornerEmbed_sigmaDiag
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
