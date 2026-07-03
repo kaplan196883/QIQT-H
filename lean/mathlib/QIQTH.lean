@@ -65,6 +65,7 @@ import QIQTH.Tower.KroneckerDensity
 import QIQTH.Tower.Centerpiece
 import QIQTH.Tower.PowersGuard
 import QIQTH.Tower.GibbsLimit
+import QIQTH.Tower.NonAtomic
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

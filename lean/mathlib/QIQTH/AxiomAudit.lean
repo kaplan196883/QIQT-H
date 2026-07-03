@@ -8388,6 +8388,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Tower.gibbsLimitMeasure_isProjectiveLimit
 #print axioms QIQTH.Tower.gibbsLimitMeasure_unique
 #print axioms QIQTH.Tower.gibbsLimit_marginal_singleton
+-- THE TOWER T6 (Tower/NonAtomic.lean): NON-ATOMICITY — the cylinder squeeze. Under the uniform
+-- frequency bound 0 ≤ x_k ≤ b and cutoffs D_k ≥ 2, EVERY singleton of the infinite-mode Gibbs
+-- measure is null (each configuration sits in depth-N cylinders of mass ≤ (1/(1+e^{−b}))^N → 0),
+-- hence NoAtoms: NO diagonal-density ("diagState") reading of the T5 limit exists — the quantum
+-- reading of the limit is FALSE (binding verdict), not deferred. The vacuum-atom dichotomy
+-- (Σe^{−x_k} < ∞ ⟹ an atom) is CITED in the docstring, never proved. Std 3.
+#print axioms QIQTH.Tower.gibbsEigen_le_ceiling
+#print axioms QIQTH.Tower.gibbsLimitMeasure_singleton_eq_zero
+#print axioms QIQTH.Tower.gibbsLimitMeasure_noAtoms
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

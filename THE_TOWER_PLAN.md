@@ -69,7 +69,7 @@ finite operator refinement tower. Files under `lean/mathlib/QIQTH/Tower/`.
 - [x] **T5 — the state limit** ✅ DONE (`QIQTH/Tower/GibbsLimit.lean`): the adapter (DY4 weight sums →
   Measure.map equalities); `gibbsLimitMeasure := kolmogorovMeasure` with `IsProjectiveLimit` +
   uniqueness; identification with `Measure.infinitePi` of the single-mode Boltzmann measures.
-- [ ] **T6 — non-atomicity**: under βω_k ≤ b every singleton has measure zero (cylinder squeeze,
+- [x] **T6 — non-atomicity** ✅ DONE: under βω_k ≤ b every singleton has measure zero (cylinder squeeze,
   `tendsto_measure_iInter`) — certifying the classical measure as the correct limit object and
   that no diagonal quantum density exists (the vacuum-atom dichotomy cited).
 - [ ] **T7 (optional) — the finite operator tower**: `cornerEmbed` for C ⊆ C′ — unital ⋆-hom,
@@ -159,3 +159,14 @@ attempt with the error shown. Check sibling jobs before each increment. Consults
   DY marginals through the held Kolmogorov extension, identified with the Mathlib infinite
   product; HAVE NOT any quantum state on an infinite system — the classical (diagonal) limit
   object only. NEXT → T6 (non-atomicity).
+
+- **2026-07-03** — **T6 LANDED** (`QIQTH/Tower/NonAtomic.lean`, axiom-free std-3, budget 0):
+  one_add_le_Zgeom (1+q ≤ Z for D ≥ 2); **gibbsEigen_le_ceiling** — the uniform eigenvalue
+  ceiling 1/(1+e^{−b}) < 1 under 0 ≤ x ≤ b; CAPSTONE **gibbsLimitMeasure_singleton_eq_zero** —
+  THE CYLINDER SQUEEZE: every singleton configuration is null (depth-N cylinder mass ≤ c^N → 0,
+  via the T5 projective-limit identity + Measure.pi_pi + ENNReal.tendsto_pow_atTop_nhds_zero);
+  bundled **gibbsLimitMeasure_noAtoms** (Mathlib NoAtoms). So NO diagonal-density ("diagState")
+  reading of the T5 limit exists — the quantum reading of the limit measure is FALSE (binding
+  verdict), not deferred. The vacuum-atom dichotomy (Σe^{−x_k} < ∞ ⟹ vacuum atom; Kakutani-type)
+  is CITED in the docstring, never proved — the uniform bound is load-bearing. NEXT → T7
+  (cornerEmbed, optional — drop first if budget tightens) then T8 (checkpoint).

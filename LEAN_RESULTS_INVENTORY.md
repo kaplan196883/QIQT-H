@@ -884,7 +884,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (IsProjectiveLimit + uniqueness), CAPSTONE **`gibbsLimit_marginal_singleton`** — the finite
   marginals ARE the code's own DY Gibbs weights (`pMode_eq_gibbsEigen` closing the
   parametrizations via DS2). Classical (diagonal) limit object ONLY — no quantum state on the
-  infinite system. Next: T6 (non-atomicity).
+  infinite system. **T6 LANDED — NON-ATOMICITY (the quantum reading is FALSE)**
+  (`Tower/NonAtomic.lean`): `gibbsEigen_le_ceiling` (uniform ceiling 1/(1+e^{−b}) < 1),
+  CAPSTONE **`gibbsLimitMeasure_singleton_eq_zero`** — the cylinder squeeze: under 0 ≤ βω_k ≤ b,
+  D_k ≥ 2 EVERY singleton is null (depth-N cylinder mass ≤ c^N → 0), bundled as Mathlib
+  **`NoAtoms`**. Hence no diagonal-density ("diagState") reading of the T5 limit exists — FALSE,
+  not deferred; the vacuum-atom dichotomy (Σe^{−βω_k} < ∞ ⟹ atom) cited only. Next: T7
+  (cornerEmbed, optional) then T8 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
