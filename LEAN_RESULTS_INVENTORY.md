@@ -906,6 +906,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   or weak closure, any quantum state on the infinite system, or any continuum-limit completion —
   none are constructed or classified here.
 
+- **THE CLOSURE, C1 — `QIQTH/VonNeumann/InvariantProjection.lean`** (**[AF]** std-3;
+  `THE_CLOSURE_PLAN.md` — the von Neumann bicommutant/density campaign, the convergent blocker of
+  the continuum program). `orbitSubmodule`/`orbitClosure` (cyclic subspaces with the orthogonal
+  projection instance attached); **`starProjection_mem_centralizer`** — the star projection onto a
+  closed A-invariant subspace lies in the commutant A′ for a unital ⋆-subalgebra A ⊆ B(H)
+  (⋆-closure is load-bearing — upper-triangular counterexample documented). The elementary engine
+  of the double-commutant theorem; no density or bicommutant statement yet. Next: C2
+  (`VonNeumannAlgebra.generatedBy`).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
