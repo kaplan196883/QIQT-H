@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **304 files and ~3,700
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **307 files and ~3,800
 theorems and definitions** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -749,6 +749,55 @@ cutoff→continuum limit is THE wall, never claimed); no construction of continu
 the standard subspace (mode membership is named finite data, at most CERTIFIED by a supplied
 localization witness); capacity is a constraint, not a generator." NOT quantum gravity solved; no
 wall crossed.
+
+</div>
+
+## The dynamics — the code's time evolution, the independent cross-check, and the conjecture (DY1–DY7)
+
+The microscopic side gets what a definition of a theory requires — a time evolution — and the
+campaign closes with the QIQT-H analogue of the Brown–Henneaux = Cardy check in its honest finite
+form, plus the sharp continuum conjecture stated (never assumed) in Lean (`QIQTH/Dynamics.lean`,
+`CrossCheck.lean`, `Conjectures.lean`; axiom-free, std-3).
+
+- **DY1 — the diagonal dynamics** (`alpha`, the entry formula): H = Σ<sub>k</sub> ω<sub>k</sub>N<sub>k</sub>
+  with its Heisenberg flow via explicit phase unitaries (no Stone theorem, no matrix exponential) —
+  a one-parameter group of ⋆-automorphisms under which **records are stationary** (the honesty
+  point: H is a function of the N<sub>k</sub>, so what λ selects among does not move) while the
+  ladders rotate, α<sub>t</sub>(a<sub>k</sub>) = e<sup>−iω_k t</sup>a<sub>k</sub>.
+- **DY2 — the explicit thermal state** (`gibbsDensity`): a product diagonal density (per-mode
+  Boltzmann weights), a genuine density for every β, stationary under the flow.
+- **DY3 — the KMS bridge** (`sigmaDiag_gibbs_eq_alpha_rescale`): **the Gibbs state's modular flow
+  IS the rescaled physical flow**, σ<sub>s</sub><sup>ρ_β</sup> = α<sub>−βs</sub> (the partition
+  function cancels; the flow is never *defined* by modular theory — the bridge runs from the
+  independent dynamics to the KMS certificate); at β = 0 the Gibbs state IS the keystone's
+  maximally mixed counting state.
+- **DY4–DY5 — regions and their entropy** (`marginal_gibbsWeight`, `entropy_gibbs_region`):
+  regions = subsets of mode labels (no spatial-entanglement claims); the Gibbs marginal is again
+  Gibbs; S(ρ<sub>β,R</sub>) = Σ<sub>k∈R</sub> s<sub>k</sub>(βω<sub>k</sub>), saturating at
+  Σ log D<sub>k</sub> with the all-β Gibbs bound.
+- **DY6 — the saturated conditional Sakharov cross-check, CALIBRATION-FREE**
+  (`S_micro_zero_eq_inducedQuarterG`): the code dynamics' region entropy at saturation equals the
+  induced area over 4G<sub>ind</sub> — the microscopic side computed from the Hamiltonian, the
+  macroscopic side supplied by independent Sakharov/species/cell data (with the derived
+  G<sub>ind</sub> = 1/(N<sub>eff</sub>·Λ<sub>s</sub>²) only the species/cell matching remains
+  input), and the proofs referencing NONE of the keystone calibration (grep-verified). Equality at
+  saturation ONLY; the arbitrary-β equality is false and never claimed.
+- **DY7 — the conjecture** (`FlatSpaceRecordGravityCorrespondence`): **the flat-space
+  record-code/gravity correspondence, stated sharp** — in the continuum limit the capacity-bounded
+  record code with diagonal dynamics equals free QFT + linearized gravity: for every region, micro
+  record entropy = one-loop conical entropy = area/4G<sub>ind</sub>, with G<sub>ind</sub> the
+  Sakharov constant of the SAME field content (one microscopic system computing both the states
+  and G). The DY1–DY6 evidence is bundled and PROVEN (`finiteEvidence_holds`); the continuum claim
+  carries NO proof field, NO axiom, NO instance — stated, never assumed.
+
+<div class="note">
+
+<strong>The DY7 checkpoint — the two honest sentences.</strong> HAVE: "a finite, axiom-free
+diagonal code dynamics, explicit Gibbs/KMS states, product-mode reductions, and a saturated
+conditional induced-gravity cross-check whose proof does not use the trace/wEnt area calibration."
+HAVE NOT: "a finite proof of a continuum one-loop heat-kernel area law or an equality between
+finite thermal entropy at arbitrary β and an induced geometric area; that remains the named
+continuum frontier/conjecture." NOT quantum gravity solved; no wall crossed.
 
 </div>
 
