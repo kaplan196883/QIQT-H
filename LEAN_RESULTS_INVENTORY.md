@@ -677,7 +677,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   integer dims whose logs are the geometry-defined weights; honest design-condition data),
   `NatRealizable.tauDim_eq` (where realizable, `Dτ_a = D_a` — the two levels agree), CAPSTONE
   **`code_count_eq_fock_area_expect_noJoin`** — `log #microstates = ⟨α|Â_tot(Σ)|α⟩/(4G)` with the
-  join SUPPLIED by `hJoin_tau`, not carried. Next: JI6 (the induced-G normalization).
+  join SUPPLIED by `hJoin_tau`, not carried. **JI6 LANDED — THE TWO NORMALIZATIONS ARE ONE FORMULA**:
+  `AJoin` (the instance's own total area, INTERNAL), CAPSTONE **`Stau_eq_capacity_primitives`** — with
+  the DERIVED `G = 1/(N·Λs²)`, `S_τ(J) = (A_J/4)·N·Λs²` (the count-built and induced-G normalizations
+  meet in `{area, species, granularity}`); `tauWEnt_le_patch_capacity` (the patch bound);
+  `localArea_eq_log_cost`/`qubit_area_cost` (one nat costs `4/(N·Λs²)` of area; one qubit
+  `4·log 2/(N·Λs²)`). Next: JI7 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

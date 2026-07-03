@@ -49,7 +49,7 @@ a THEOREM for the constructed instance, and the count normalization rewrites to 
 - [x] **JI5 — the integer finite-code specialization** ✅ DONE: `NatRealizable` (D : Link → ℕ+, `log D_a = wEnt a`);
   the old Q5 finite-code capstone re-proved **with no `hJoin` hypothesis** (the join supplied by the
   instance).
-- [ ] **JI6 — the induced-G normalization + capacity corollaries**: with `G = 1/(NΛs²)`:
+- [x] **JI6 — the induced-G normalization + capacity corollaries** ✅ DONE: with `G = 1/(NΛs²)`:
   `S(J) = (A_J/4)·N·Λs²`; per-link `wEnt a = (A^loc_a/4)·N·Λs²`; the patch-capacity bound
   (`A^loc_a ≤ P_a ⟹ wEnt a ≤ (P_a/4)·N·Λs²`); the area-cost quantization (nat = `4/(NΛs²)`,
   qubit = `4 log 2/(NΛs²)`).
@@ -110,3 +110,10 @@ expose the key).
   code_count_eq_fock_area_expect_noJoin — the old Q5 capstone re-proved with NO hJoin hypothesis (the
   join SUPPLIED by hJoin_tau): log #microstates = ⟨α|Â_tot(Σ)|α⟩/(4G). NEXT → JI6 (the induced-G
   normalization + capacity corollaries).
+
+- **2026-07-03** — **JI6 LANDED** (axiom-free std-3, budget 0): AJoin (the instance's own total area —
+  INTERNAL, never a hypothesis); CAPSTONE Stau_eq_capacity_primitives — with the DERIVED G = 1/(N·Λs²),
+  S_τ(J) = (A_J/4)·N·Λs²: the count-built and induced-G normalizations are ONE formula in
+  {area, species, granularity}; tauWEnt_eq_capacity_primitives (per-link capacity in primitives);
+  tauWEnt_le_patch_capacity (the patch bound); localArea_eq_log_cost (one nat of link entropy costs
+  area 4/(N·Λs²)); qubit_area_cost (one qubit costs 4·log 2/(N·Λs²)). NEXT → JI7 (checkpoint).

@@ -283,4 +283,83 @@ theorem code_count_eq_fock_area_expect_noJoin (S : ScreenSurface ι) {A0 : ℝ}
 
 end NatCode
 
+/-! ## JI6 — the induced-G normalization + capacity corollaries
+
+The consistency capstone: the join instance's count, expressed with the DERIVED Newton constant
+`G = 1/(N·Λs²)` (the granularity/species primitives), is `(A_J/4)·N·Λs²` — the count-built
+normalization and the induced-G normalization are the SAME formula in `{area, species, granularity}`.
+Per the binding verdict: `A_J` is defined INTERNALLY (`A₀ + areaVar` — the instance's own total),
+never a new emergence hypothesis; the content is that both constructions share `A_J`, `N`, `Λs`.
+Corollaries: the per-link capacity in primitives, the patch-capacity bound, and the area cost of a
+nat / a qubit of link entropy. -/
+
+section InducedGNormalization
+
+open QIQTH.InducedG QIQTH.OperatorEmergence QIQTH.AreaMap
+
+variable [Fintype ι] [DecidableEq ι]
+
+/-- **The instance's own total area** (INTERNAL — background plus the linearized response of the
+    instance's classical field; never a hypothesis). -/
+noncomputable def AJoin (S : ScreenSurface ι) (A0 : ℝ)
+    (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ) : ℝ :=
+  A0 + areaVar S (classicalH pol α)
+
+theorem inducedG_pos {N Λs : ℝ} (hN : 0 < N) (hΛ : 0 < Λs) : 0 < inducedG N Λs := by
+  rw [inducedG]
+  positivity
+
+/-- **JI6 CAPSTONE — the count in the primitives:** with the DERIVED `G = 1/(N·Λs²)`, the join
+    instance's count is `S_τ(J) = (A_J/4)·N·Λs²` — the two independent normalizations (the
+    count-built one and the induced-G one) are one formula in `{area, species, granularity}`. -/
+theorem Stau_eq_capacity_primitives (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0)
+    {N Λs : ℝ} (hN : 0 < N) (hΛ : 0 < Λs)
+    (pol : Fin 2 → Matrix (Fin 4) (Fin 4) ℝ) (α : Fin 2 → ℂ) :
+    Stau S β (inducedG N Λs) (classicalH pol α) = (AJoin S A0 pol α / 4) * (N * Λs ^ 2) := by
+  rw [Stau_eq_area_over_4G S β (inducedG_pos hN hΛ) pol α, AJoin, inducedG]
+  field_simp
+
+/-- **The per-link capacity in primitives**: `wEnt a = (A^loc_a/4)·N·Λs²`. -/
+theorem tauWEnt_eq_capacity_primitives (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0)
+    {N Λs : ℝ} (hN : 0 < N) (hΛ : 0 < Λs) (h : Matrix (Fin 4) (Fin 4) ℝ) (a : ι) :
+    tauWEnt S β (inducedG N Λs) h a = (localArea S β h a / 4) * (N * Λs ^ 2) := by
+  rw [tauWEnt, inducedG]
+  have hNΛ : N * Λs ^ 2 ≠ 0 := by positivity
+  field_simp
+
+/-- **The patch-capacity bound**: a link whose local area fits in the patch area `P_a` carries at
+    most `(P_a/4)·N·Λs²` nats. -/
+theorem tauWEnt_le_patch_capacity (S : ScreenSurface ι) {A0 : ℝ} (β : A0Split S A0)
+    {N Λs : ℝ} (hN : 0 < N) (hΛ : 0 < Λs) (h : Matrix (Fin 4) (Fin 4) ℝ) (a : ι)
+    {P : ℝ} (hP : localArea S β h a ≤ P) :
+    tauWEnt S β (inducedG N Λs) h a ≤ (P / 4) * (N * Λs ^ 2) := by
+  rw [tauWEnt_eq_capacity_primitives S β hN hΛ h a]
+  have hNΛ : 0 < N * Λs ^ 2 := by positivity
+  apply mul_le_mul_of_nonneg_right _ hNΛ.le
+  linarith
+
+/-- **The area cost of link entropy**: for a realizable link, `A^loc_a = 4·log D_a/(N·Λs²)` —
+    each nat of link entropy costs area `4/(N·Λs²)`. -/
+theorem localArea_eq_log_cost (S : ScreenSurface ι) {A0 : ℝ} {β : A0Split S A0}
+    {N Λs : ℝ} (hN : 0 < N) (hΛ : 0 < Λs) {h : Matrix (Fin 4) (Fin 4) ℝ}
+    (R : NatRealizable S β (inducedG N Λs) h) {a : ι} (ha : a ∈ S.elems) :
+    localArea S β h a = 4 * Real.log (R.D a) / (N * Λs ^ 2) := by
+  have hw := R.hlog a ha
+  rw [tauWEnt_eq_capacity_primitives S β hN hΛ h a] at hw
+  have hNΛ : N * Λs ^ 2 ≠ 0 := by positivity
+  field_simp at hw ⊢
+  linarith
+
+/-- **The qubit costs `4·log 2/(N·Λs²)` of area**: a two-dimensional realizable link occupies
+    exactly that local area. -/
+theorem qubit_area_cost (S : ScreenSurface ι) {A0 : ℝ} {β : A0Split S A0}
+    {N Λs : ℝ} (hN : 0 < N) (hΛ : 0 < Λs) {h : Matrix (Fin 4) (Fin 4) ℝ}
+    (R : NatRealizable S β (inducedG N Λs) h) {a : ι} (ha : a ∈ S.elems)
+    (h2 : R.D a = 2) :
+    localArea S β h a = 4 * Real.log 2 / (N * Λs ^ 2) := by
+  rw [localArea_eq_log_cost S hN hΛ R ha, h2]
+  norm_num
+
+end InducedGNormalization
+
 end QIQTH.JoinInstance

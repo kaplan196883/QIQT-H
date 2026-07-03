@@ -8135,6 +8135,16 @@ namespace QIQTH.AxiomAudit
 -- SUPPLIED by hJoin_tau): log #microstates = <alpha|A_tot|alpha>/(4G). Std 3.
 #print axioms QIQTH.JoinInstance.NatRealizable.tauDim_eq
 #print axioms QIQTH.JoinInstance.code_count_eq_fock_area_expect_noJoin
+-- JOIN INSTANCE JI6: the induced-G normalization + capacity corollaries — AJoin (the instance's own total
+-- area, INTERNAL, never a hypothesis); CAPSTONE Stau_eq_capacity_primitives — with the DERIVED G = 1/(N·Λs²),
+-- S_tau(J) = (A_J/4)·N·Λs²: the count-built and induced-G normalizations are ONE formula in
+-- {area, species, granularity}; tauWEnt_eq_capacity_primitives (per-link capacity in primitives);
+-- tauWEnt_le_patch_capacity (the patch bound); localArea_eq_log_cost (a nat of link entropy costs area
+-- 4/(N·Λs²)); qubit_area_cost (a qubit costs 4·log 2/(N·Λs²)). Std 3.
+#print axioms QIQTH.JoinInstance.Stau_eq_capacity_primitives
+#print axioms QIQTH.JoinInstance.tauWEnt_le_patch_capacity
+#print axioms QIQTH.JoinInstance.localArea_eq_log_cost
+#print axioms QIQTH.JoinInstance.qubit_area_cost
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
