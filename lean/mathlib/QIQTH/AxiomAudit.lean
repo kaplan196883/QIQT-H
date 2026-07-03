@@ -8285,6 +8285,16 @@ namespace QIQTH.AxiomAudit
 -- geometry nor G; NOT a full decoupling derivation. Std 3.
 #print axioms QIQTH.Decoupling.commutator_matrixElement_stabilizes
 #print axioms QIQTH.Decoupling.commutator_eventually_exact
+-- THE DECOUPLING SHADOW DS2: the single-mode Gibbs limit — QIQT-H's first GENUINE LIMIT THEOREMS
+-- (Filter.Tendsto): tendsto_Zgeom (Z_D → 1/(1−q)); tendsto_meanN (⟨N⟩_D → q/(1−q), the PLANCK value);
+-- CAPSTONE tendsto_defectExpect (the truncation-defect expectation D·q^{D−1}/Z_D → 0 at fixed βω > 0 —
+-- the state-level decoupling half); ZMode_eq_Zgeom (the bridge: the DY2 code partition function IS the
+-- truncated geometric sum at q = e^{−βω}). Fixed positive temperature ONLY (the saturation regime is
+-- the DS3 guard); forces neither geometry nor G. Std 3.
+#print axioms QIQTH.Decoupling.tendsto_Zgeom
+#print axioms QIQTH.Decoupling.tendsto_meanN
+#print axioms QIQTH.Decoupling.tendsto_defectExpect
+#print axioms QIQTH.Decoupling.ZMode_eq_Zgeom
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

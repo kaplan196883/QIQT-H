@@ -54,6 +54,7 @@ import QIQTH.Dynamics
 import QIQTH.CrossCheck
 import QIQTH.Conjectures
 import QIQTH.Decoupling.TruncatedCCR
+import QIQTH.Decoupling.GibbsSingleMode
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

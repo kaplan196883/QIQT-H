@@ -42,7 +42,7 @@ weaker hypotheses fail). Files under `lean/mathlib/QIQTH/Decoupling/` + `QIQTH/R
   `[a_D, a_D†](m,n) = δ_{mn}` for m+1, n+1 < D (via the held defect theorem: the top projector
   vanishes at bounded occupations) + the `∀ᶠ D in atTop` eventually-form. The finite analogue of
   "the parent contains the free sector".
-- [ ] **DS2 — the single-mode Gibbs limit** (`QIQTH/Decoupling/GibbsSingleMode.lean`): for
+- [x] **DS2 — the single-mode Gibbs limit** ✅ DONE (`QIQTH/Decoupling/GibbsSingleMode.lean`): for
   0 ≤ q < 1: `Z_D q → 1/(1−q)`, `⟨N⟩_D → q/(1−q)` (genuine Filter.Tendsto — QIQT-H's first limit
   theorems), and the DEFECT EXPECTATION `D·q^{D−1}/Z_D → 0` (fixed βω > 0 only).
 - [ ] **DS3 — entropy regimes + the guard** (`QIQTH/Decoupling/EntropyRegimes.lean`):
@@ -92,3 +92,11 @@ attempt with the error shown. Check for sibling jobs before each increment. Cons
   the truncation defect invisible at bounded occupations); CAPSTONE commutator_eventually_exact
   (the ∀ᶠ D in atTop form — the free-oscillator sector FORCED by the cutoff limit; the weak half
   of the decoupling argument in its honest finite form). NEXT → DS2 (the single-mode Gibbs limit).
+
+- **2026-07-03** — **DS2 LANDED** (`QIQTH/Decoupling/GibbsSingleMode.lean`, axiom-free std-3,
+  budget 0): QIQT-H's first GENUINE LIMIT THEOREMS (Filter.Tendsto) — tendsto_Zgeom (Z_D →
+  1/(1−q)); tendsto_meanN (⟨N⟩_D → q/(1−q), the PLANCK value; riding
+  hasSum_coe_mul_geometric_of_norm_lt_one); CAPSTONE tendsto_defectExpect (D·q^{D−1}/Z_D → 0 at
+  fixed βω > 0 — the state-level decoupling half; the n·qⁿ → 0 shift trick via
+  tendsto_add_atTop_iff_nat); ZMode_eq_Zgeom (the bridge: the DY2 code partition function IS the
+  truncated geometric sum at q = e^{−βω}). NEXT → DS3 (entropy regimes + the guard).

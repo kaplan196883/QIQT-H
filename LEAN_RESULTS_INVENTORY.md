@@ -806,7 +806,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   below the top — the defect invisible at bounded occupations), CAPSTONE
   **`commutator_eventually_exact`** (the `∀ᶠ D in atTop` form — the free-oscillator sector FORCED
   by the cutoff limit). ⚠ Forces neither the screen geometry nor G; NOT a full decoupling
-  derivation. Next: DS2 (the single-mode Gibbs limit).
+  derivation. **DS2 LANDED — THE SINGLE-MODE GIBBS LIMITS** (QIQT-H's first genuine
+  `Filter.Tendsto` theorems): `tendsto_Zgeom` (Z_D → 1/(1−q)), `tendsto_meanN` (⟨N⟩_D → q/(1−q) —
+  the PLANCK value), CAPSTONE **`tendsto_defectExpect`** (the truncation-defect expectation
+  D·q^{D−1}/Z_D → 0 at fixed βω > 0 — the state-level decoupling half), `ZMode_eq_Zgeom` (the
+  bridge: the code's own thermal partition function IS the truncated geometric sum at q = e^{−βω}).
+  Fixed positive temperature only. Next: DS3 (entropy regimes + the regime-separation guard).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
