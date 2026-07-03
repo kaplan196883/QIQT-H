@@ -682,7 +682,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the DERIVED `G = 1/(N·Λs²)`, `S_τ(J) = (A_J/4)·N·Λs²` (the count-built and induced-G normalizations
   meet in `{area, species, granularity}`); `tauWEnt_le_patch_capacity` (the patch bound);
   `localArea_eq_log_cost`/`qubit_area_cost` (one nat costs `4/(N·Λs²)` of area; one qubit
-  `4·log 2/(N·Λs²)`). Next: JI7 (checkpoint).
+  `4·log 2/(N·Λs²)`). **JI7 CHECKPOINT — CAMPAIGN COMPLETE (the two honest sentences, verbatim):**
+  HAVE: "after JI1–JI6, `hJoin` is no longer a hypothesis for the constructed τ join or for
+  nat-realizable finite-code joins, and the count normalization rewrites to `(A_J/4)·N·Λs²` with local
+  capacity corollaries." HAVE NOT: "no theorem says arbitrary external real geometry has exact natural
+  link dimensions, no asymptotic approximation is included, and no canonical `A0` split is asserted
+  beyond the named apportionment data/policy." ⚠ NOT QG solved; no wall crossed; the CCR-isometry
+  obstruction is permanent (the join is expectation-level forever).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

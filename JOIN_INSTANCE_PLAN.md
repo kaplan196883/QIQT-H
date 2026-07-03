@@ -1,6 +1,6 @@
 # THE JOIN INSTANCE (JI1–JI7): delete `hJoin` by construction — the bridge at the finite level
 
-**Status:** ACTIVE (2026-07-03). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** merge the code
+**Status:** COMPLETE (2026-07-03 — JI1–JI7 all landed; loop deleted). **GPT-5.5-pro-VERIFIED** (binding verdict below). **Goal:** merge the code
 tower (keystone THE COUNT) and the graviton tower (Q1–Q5) into ONE object at the finite level by
 constructing the dictionary instance — links ↔ screen elements, weights FROM the geometry — so that the
 Q5 carried hypothesis `hJoin : inducedScreenArea G links wEnt = A0 + areaVar S (classicalH pol α)` becomes
@@ -53,7 +53,7 @@ a THEOREM for the constructed instance, and the count normalization rewrites to 
   `S(J) = (A_J/4)·N·Λs²`; per-link `wEnt a = (A^loc_a/4)·N·Λs²`; the patch-capacity bound
   (`A^loc_a ≤ P_a ⟹ wEnt a ≤ (P_a/4)·N·Λs²`); the area-cost quantization (nat = `4/(NΛs²)`,
   qubit = `4 log 2/(NΛs²)`).
-- [ ] **JI7 — checkpoint (the two honest sentences, verbatim in the module docstring + inventory):**
+- [x] **JI7 — checkpoint ✅ DONE (the two honest sentences, verbatim in the module docstring + inventory):**
   HAVE: "after JI1–JI6, `hJoin` is no longer a hypothesis for the constructed τ join or for
   nat-realizable finite-code joins, and the count normalization rewrites to `(A_J/4)·N·Λs²` with local
   capacity corollaries." HAVE NOT: "no theorem says arbitrary external real geometry has exact natural
@@ -117,3 +117,11 @@ expose the key).
   {area, species, granularity}; tauWEnt_eq_capacity_primitives (per-link capacity in primitives);
   tauWEnt_le_patch_capacity (the patch bound); localArea_eq_log_cost (one nat of link entropy costs
   area 4/(N·Λs²)); qubit_area_cost (one qubit costs 4·log 2/(N·Λs²)). NEXT → JI7 (checkpoint).
+
+- **2026-07-03** — **JI7 CHECKPOINT — CAMPAIGN COMPLETE.** The two honest sentences placed VERBATIM in
+  the `JoinInstance.lean` module docstring and `LEAN_RESULTS_INVENTORY.md`. HAVE: hJoin is no longer a
+  hypothesis for the constructed τ join or for nat-realizable finite-code joins; the count
+  normalization rewrites to (A_J/4)·N·Λs² with local capacity corollaries. HAVE NOT: no theorem says
+  arbitrary external real geometry has exact natural link dimensions; no asymptotic approximation; no
+  canonical A0 split beyond the named data/policy. NOT QG solved; no wall crossed. Loop 60d9cdc9
+  deleted.

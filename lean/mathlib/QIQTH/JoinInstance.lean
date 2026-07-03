@@ -1,10 +1,24 @@
 /-
-  THE JOIN INSTANCE (JOIN_INSTANCE_PLAN.md) — delete `hJoin` by construction: the bridge at the
-  finite level.
+  THE JOIN INSTANCE (JOIN_INSTANCE_PLAN.md, JI1–JI7 COMPLETE) — delete `hJoin` by construction:
+  the bridge at the finite level.
 
   The code tower (keystone THE COUNT) and the graviton tower (Q1–Q5) merged into ONE object: the
   dictionary instance links ↔ screen elements, with the code weights defined FROM the geometry, so
   the Q5 carried hypothesis `hJoin` becomes a THEOREM for the constructed instance.
+
+  JI7 CHECKPOINT — the two honest sentences (verbatim from the plan):
+
+  HAVE: "after JI1–JI6, `hJoin` is no longer a hypothesis for the constructed τ join or for
+  nat-realizable finite-code joins, and the count normalization rewrites to `(A_J/4)·N·Λs²` with
+  local capacity corollaries."
+
+  HAVE NOT: "no theorem says arbitrary external real geometry has exact natural link dimensions,
+  no asymptotic approximation is included, and no canonical `A0` split is asserted beyond the
+  named apportionment data/policy."
+
+  ⚠ NOT quantum gravity solved; no wall crossed. The join is deleted for the CONSTRUCTED instance
+  (generic-exact at the τ level; realizable at the ℕ level under the named datum); the CCR-isometry
+  obstruction is permanent (expectation-level forever); the continuum walls stay named.
 
   JI1 — the local area decomposition:
   • `localAreaVar` — the per-element linearized area share `δA_a = ½ w_a (h(e₁ᵃ,e₁ᵃ)+h(e₂ᵃ,e₂ᵃ))`,
