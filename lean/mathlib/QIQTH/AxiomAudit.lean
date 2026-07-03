@@ -8314,6 +8314,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Decoupling.tendsto_productEntropy
 #print axioms QIQTH.Decoupling.tendsto_totalDefect
 #print axioms QIQTH.Decoupling.tendsto_gibbsWeight_fixedOccupation
+-- THE DECOUPLING SHADOW DS5 (Rigidity/LogValuationReal.lean): real log-valuation rigidity — the classical
+-- monotone-additive Cauchy rigidity DONE BY HAND (Q-linearity by induction/negation/denominator-clearing,
+-- then the rational squeeze): monotone_additive_eq_smul (monotone additive g on ℝ is linear);
+-- CAPSTONE monotone_logValuation — a monotone product-to-sum valuation on ℝ>0 is κ·log with κ ≥ 0 (the
+-- positive-real half of the FORCED WEIGHT dictionary; DS6 transports to finite corners). Std 3.
+#print axioms QIQTH.Rigidity.monotone_additive_eq_smul
+#print axioms QIQTH.Rigidity.monotone_logValuation
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

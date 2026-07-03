@@ -52,7 +52,7 @@ weaker hypotheses fail). Files under `lean/mathlib/QIQTH/Decoupling/` + `QIQTH/R
 - [x] **DS4 — finite products** ✅ DONE (`QIQTH/Decoupling/ProductModes.lean`): the single-mode limits
   lifted to finite mode sets by `Finset.sum`/`Tendsto` algebra (S_prod = Σ S_{D_k}(βω_k)
   converging modewise; bounded-word convergence for H = Σ ω_k N_k). Finite mode sets ONLY.
-- [ ] **DS5 — real log-valuation rigidity** (`QIQTH/Rigidity/LogValuationReal.lean`): a monotone
+- [x] **DS5 — real log-valuation rigidity** ✅ DONE (`QIQTH/Rigidity/LogValuationReal.lean`): a monotone
   additive A on positive reals is `κ·log` (g(t) := A(e^t) monotone additive Cauchy rigidity).
 - [ ] **DS6 — the finite-corner valuation rigidity** (`QIQTH/Rigidity/FiniteCornerValuation.lean`):
   A : ℕ+ → ℝ with A(mn) = A(m)+A(n) and m ≤ n ⟹ A(m) ≤ A(n) is `κ·log n` (the ⌈r log m/log n⌉
@@ -118,3 +118,11 @@ attempt with the error shown. Check for sibling jobs before each increment. Cons
   expectation dies); tendsto_gibbsWeight_fixedOccupation (every fixed occupation's Gibbs weight →
   the free-field Boltzmann weight Π q^n(1−q) — the state-level product decoupling). Finite mode
   sets only. NEXT → DS5 (real log-valuation rigidity).
+
+- **2026-07-03** — **DS5 LANDED** (`QIQTH/Rigidity/LogValuationReal.lean`, axiom-free std-3,
+  budget 0, no sorry): the classical monotone-additive Cauchy rigidity DONE BY HAND —
+  monotone_additive_eq_smul (ℚ-linearity by ℕ-induction/negation/denominator-clearing, then the
+  rational squeeze via exists_rat_btwn + le_of_forall_pos_le_add); CAPSTONE monotone_logValuation
+  — a monotone product-to-sum valuation on ℝ>0 is κ·log with κ ≥ 0 (via g(t) = A(e^t)). The
+  positive-real half of the forced weight dictionary. NEXT → DS6 (the finite-corner valuation
+  rigidity + the ν₂ counterexample).

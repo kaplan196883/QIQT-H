@@ -823,7 +823,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   along any all-modes-growing cutoff schedule), `tendsto_totalDefect` (the total defect dies),
   `tendsto_gibbsWeight_fixedOccupation` (every fixed occupation's Gibbs weight → the free-field
   Boltzmann weight — the state-level product decoupling). Finite mode sets only.
-  Next: DS5 (real log-valuation rigidity).
+  **DS5 LANDED — REAL LOG-VALUATION RIGIDITY** (`QIQTH/Rigidity/LogValuationReal.lean`): the
+  classical monotone-additive Cauchy rigidity done by hand — **`monotone_additive_eq_smul`**
+  (monotone additive on ℝ is linear; ℚ-linearity + the rational squeeze), CAPSTONE
+  **`monotone_logValuation`** (a monotone product-to-sum valuation on ℝ>0 is κ·log, κ ≥ 0 — the
+  positive-real half of the forced weight dictionary). Next: DS6 (the finite-corner rigidity + the
+  ν₂ counterexample).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
