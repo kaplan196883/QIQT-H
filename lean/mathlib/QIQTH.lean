@@ -63,6 +63,7 @@ import QIQTH.Decoupling.DecouplingShadow
 import QIQTH.Tower.AWFingerprint
 import QIQTH.Tower.KroneckerDensity
 import QIQTH.Tower.Centerpiece
+import QIQTH.Tower.PowersGuard
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

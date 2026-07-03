@@ -63,7 +63,7 @@ finite operator refinement tower. Files under `lean/mathlib/QIQTH/Tower/`.
   irrational ratio + uniform bounds + D_k ≥ 2 ⟹ AWFingerprintIII1; PLUS the hypothesis-free
   concrete corollary with βω ∈ {1, √2} via `irrational_sqrt_two` (the vacuity guard). The (α)(β)(γ)
   citation block VERBATIM in the docstring.
-- [ ] **T4 — the Powers guard**: constant frequency s ⟹ every tail exponent ∈ sℤ ⟹ the closure is
+- [x] **T4 — the Powers guard** ✅ DONE: constant frequency s ⟹ every tail exponent ∈ sℤ ⟹ the closure is
   cyclic/closed ⟹ ¬AWFingerprintIII1 (the fingerprint of Powers III_{e^{−s}} — cited). The
   separation theorem: the predicate is neither vacuous nor universal.
 - [ ] **T5 — the state limit** (`QIQTH/Tower/GibbsLimit.lean`): the adapter (DY4 weight sums →
@@ -137,3 +137,13 @@ attempt with the error shown. Check sibling jobs before each increment. Consults
   cited (Araki–Woods 1968; Connes 1973), never proved. HAVE NOT the ITPFI von Neumann algebra,
   its ratio set, or its type — none are constructed or classified here. NEXT → T4 (the Powers
   guard).
+
+- **2026-07-03** — **T4 LANDED** (`QIQTH/Tower/PowersGuard.lean`, axiom-free std-3, budget 0):
+  tail_exponent_constant_mem (every tail exponent of a constant-frequency tower ∈ sℤ — the
+  fractional-part gap min(f, 1−f) gives the positive minimum distance defeating every accuracy);
+  CAPSTONE gibbsTower_constant_not_fingerprint — the constant tower FAILS the fingerprint (sℤ is
+  not dense: s/2 keeps distance s/2 from every multiple). Checkpoint (T4): HAVE the separation
+  theorem — the fingerprint holds for two-frequency irrational towers and provably fails for
+  single-frequency towers, so the predicate is not vacuous and not universal; HAVE NOT any claim
+  that the single-frequency algebra is III_λ or is not III₁ — only the arithmetic fingerprint
+  failure is proved (Powers 1967 cited). NEXT → T5 (the state limit).

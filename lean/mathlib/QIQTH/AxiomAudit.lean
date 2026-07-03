@@ -8368,6 +8368,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Tower.isTailModularExponent_of_frequently
 #print axioms QIQTH.Tower.gibbsTower_awFingerprint_III₁
 #print axioms QIQTH.Tower.gibbsTower_awFingerprint_III₁_sqrtTwo
+-- THE TOWER T4 (Tower/PowersGuard.lean): THE POWERS GUARD (the separation theorem) —
+-- tail_exponent_constant_mem (in a constant-frequency tower every tail exponent ∈ sℤ — the
+-- fractional-part gap gives the positive minimum distance); CAPSTONE
+-- gibbsTower_constant_not_fingerprint — the constant tower FAILS the III₁ fingerprint (sℤ is not
+-- dense: s/2 keeps distance s/2). With T3 the predicate SEPARATES: holds for two-frequency
+-- irrational towers, provably fails for single-frequency towers — neither vacuous nor universal.
+-- The Powers III_{e^{−s}} reading is CITED (Powers 1967); no claim about any actual algebra's
+-- type is made. Std 3.
+#print axioms QIQTH.Tower.tail_exponent_constant_mem
+#print axioms QIQTH.Tower.gibbsTower_constant_not_fingerprint
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

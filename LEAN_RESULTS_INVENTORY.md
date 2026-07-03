@@ -871,7 +871,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   CITED facts (α)(β)(γ) — Araki–Woods 1968, Connes 1973 — never proved, no vN algebra
   constructed; **`gibbsTower_awFingerprint_III₁_sqrtTwo`** — the HYPOTHESIS-FREE alternating
   {√2, 1} qubit instance (`irrational_sqrt_two` — the vacuity guard). THE FIRST MACHINE-CHECKED
-  CONTACT WITH THE TYPE III₁ WALL, at fingerprint level. Next: T4 (the Powers guard).
+  CONTACT WITH THE TYPE III₁ WALL, at fingerprint level. **T4 LANDED — THE POWERS GUARD**
+  (`Tower/PowersGuard.lean`): `tail_exponent_constant_mem` (constant frequency ⟹ every tail
+  exponent ∈ sℤ — the fractional-part gap), CAPSTONE **`gibbsTower_constant_not_fingerprint`**
+  (the constant tower FAILS the fingerprint — sℤ not dense). THE SEPARATION: with T3 the predicate
+  holds for two-frequency irrational towers and provably fails for single-frequency towers —
+  neither vacuous nor universal (the Powers III_{e^{−s}} reading cited, Powers 1967; no algebra
+  type claimed). Next: T5 (the state limit).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
