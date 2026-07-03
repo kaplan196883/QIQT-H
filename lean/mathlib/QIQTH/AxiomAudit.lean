@@ -8482,6 +8482,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.limitVN
 #print axioms QIQTH.VonNeumann.stage_subset_limitVN
 #print axioms QIQTH.VonNeumann.mem_limitVN_iff
+-- THE CLOSURE C10 (VonNeumann/WOTClosure.lean, STRETCH — SHIPPED, cut not needed): the WOT
+-- closure IS the bicommutant, wholly in Mathlib's type copy H →WOT[ℂ] H about ofCLM images —
+-- wotClosure_image_eq_image_bicommutant: closure (ofCLM '' A) = ofCLM '' A″. ⊆ via closed
+-- commutation equalizers (separate continuity + isClosed_eq, T3 from SeparatingDual); ⊇ via
+-- SOTApprox defeating every seminorm-basis neighborhood. With C7: WOT closure = SOT closure =
+-- A″ — the full classical double-commutant statement. Std 3.
+#print axioms QIQTH.VonNeumann.ofCLM_mem_wotClosure_of_sotApprox
+#print axioms QIQTH.VonNeumann.toCLM_mem_bicommutant_of_mem_wotClosure
+#print axioms QIQTH.VonNeumann.wotClosure_image_eq_image_bicommutant
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

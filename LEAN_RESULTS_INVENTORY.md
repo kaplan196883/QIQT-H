@@ -952,7 +952,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the SOT-approximability membership characterization (`mem_limitVN_iff`). The refinement-tower
   limit in its HONEST form: for any hypothesized common representation on one B(H) — the
   DiamondAlg tower's own instantiation awaits the deferred tower-GNS campaign; no ITPFI factor
-  constructed. Next: C10 stretch (WOT), C11 checkpoint.
+  constructed. **C10 LANDED — STRETCH SHIPPED (cut not needed)**
+  (`QIQTH/VonNeumann/WOTClosure.lean`, **[AF]** std-3):
+  **`wotClosure_image_eq_image_bicommutant`** — the WOT closure IS the bicommutant (in Mathlib's
+  `H →WOT[ℂ] H` copy, about ofCLM images): with C7, **WOT closure = SOT closure = A″** — the
+  full classical double-commutant statement, machine-checked. Next: C11 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

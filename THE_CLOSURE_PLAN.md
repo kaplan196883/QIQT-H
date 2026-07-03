@@ -86,7 +86,7 @@ Files under `lean/mathlib/QIQTH/VonNeumann/`.
   the DiamondAlg tower has no common Hilbert-space representation yet — this packages the limit for
   ANY hypothesized common representation; instantiation awaits the deferred tower-GNS campaign.
   Risk LOW.
-- [ ] **C10 — `QIQTH/VonNeumann/WOTClosure.lean`** (STRETCH; PRE-AUTHORIZED CUT):
+- [x] **C10 — `QIQTH/VonNeumann/WOTClosure.lean`** ✅ DONE (STRETCH SHIPPED — cut not needed):
   `wotClosure_image_eq_image_bicommutant` in `H →WOT[ℂ] H` via `precompCLM`/`postcompCLM` +
   `isClosed_eq` (T3 from `SeparatingDual`), SOTApprox beats every WOT seminorm. Every statement lives
   wholly in the WOT copy about `ofCLM '' ·`; separate continuity only. CUT LINE: one session without
@@ -239,3 +239,16 @@ gpt-5.5-pro (never expose keys).
   BANNER (binding): for ANY hypothesized common representation on one B(H); the DiamondAlg
   tower has NO common representation yet — instantiation awaits the deferred tower-GNS campaign;
   no ITPFI factor constructed, no type classified. NEXT → C10 (WOT stretch; pre-authorized cut).
+
+- **2026-07-04** — **C10 LANDED — THE STRETCH SHIPPED** (`QIQTH/VonNeumann/WOTClosure.lean`,
+  axiom-free std-3, budget 0, four iterations; cut NOT needed): CAPSTONE
+  **`wotClosure_image_eq_image_bicommutant`** — closure (ofCLM '' A) = ofCLM '' A″, wholly in
+  Mathlib's `H →WOT[ℂ] H` type copy. ⊆: closed commutation equalizers (`continuous_dual_apply` +
+  `isClosed_eq`, T3 from `SeparatingDual`; separate continuity only). ⊇:
+  **`ofCLM_mem_wotClosure_of_sotApprox`** — SOTApprox defeats every seminorm-basis neighborhood
+  (`hasBasis_seminorms` translated to the point via `Homeomorph.addLeft.map_nhds_eq`;
+  `Seminorm.finset_sup_apply_lt` — an implication, not iff; margin r/(Σ‖y‖+1)). WITH C7: WOT
+  closure = SOT closure = A″ — the FULL classical double-commutant statement. Lean notes: the
+  basis `id` wrapper blocks rw (clear with `show`); `set_option maxHeartbeats 1000000` needed
+  (seminormFamily defeq checks); F⋆ = `StrongDual`. The HAVE sentence keeps its WOT clause.
+  NEXT → C11 (checkpoint: verbatim sentences, delete loop, stop).
