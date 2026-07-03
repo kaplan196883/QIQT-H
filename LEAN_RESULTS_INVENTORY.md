@@ -800,7 +800,7 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 - **THE DECOUPLING SHADOW, DS1 — `QIQTH/Decoupling/TruncatedCCR.lean`** (**[AF]** std-3;
   `THE_DECOUPLING_SHADOW_PLAN.md` — the finite forced core of the dictionary, from the Maldacena
   primary-source lesson: two sides as surviving descriptions of ONE parent under ONE limit;
-  DS1–DS7 in progress). **DS1 — bounded-sector CCR recovery** (the weak half of the decoupling
+  **DS1–DS7 COMPLETE**). **DS1 — bounded-sector CCR recovery** (the weak half of the decoupling
   argument, honest finite form): `lowering_matrixElement_stable` (ladder entries at fixed
   occupations are D-INDEPENDENT), `commutator_matrixElement_stabilizes` (`⟨m|[a_D,a_D†]|n⟩ = δ_mn`
   below the top — the defect invisible at bounded occupations), CAPSTONE

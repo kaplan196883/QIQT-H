@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **307 files and ~3,800
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **314 files and ~3,900
 theorems and definitions** with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -798,6 +798,54 @@ conditional induced-gravity cross-check whose proof does not use the trace/wEnt 
 HAVE NOT: "a finite proof of a continuum one-loop heat-kernel area law or an equality between
 finite thermal entropy at arbitrary β and an induced geometric area; that remains the named
 continuum frontier/conjecture." NOT quantum gravity solved; no wall crossed.
+
+</div>
+
+## The decoupling shadow — the finite forced core of the dictionary (DS1–DS7)
+
+Prompted by a primary-source re-reading of Maldacena (hep-th/9711200), whose deepest structural
+feature is that the dual sides are two SURVIVING DESCRIPTIONS of one parent construction under one
+limit: this campaign delivers the honest finite shadow of that structure — the word "constructed"
+is deleted from every part of QIQT-H's dictionary where deleting it is mathematically true, and
+what remains is named parent data (`QIQTH/Decoupling/`, `QIQTH/Rigidity/`; axiom-free, std-3).
+
+- **DS1 — the free sector forced, operator level** (`commutator_eventually_exact`): at fixed
+  occupations the truncated ladder matrix elements are D-independent and the commutator entries
+  stabilize to the exact-CCR values — the truncation defect lives only at the top level, which
+  bounded occupations eventually never see.
+- **DS2 — the first genuine limit theorems** (`tendsto_meanN`, `tendsto_defectExpect`): at fixed
+  βω &gt; 0 the truncated occupation converges to the PLANCK value q/(1−q) and the defect
+  expectation dies — the state-level decoupling half, bridged to the code's own thermal states.
+- **DS3 — THE REGIME-SEPARATION GUARD** (`guard_entropy_saturates`, `guard_defect_survives`):
+  along ANY schedule x<sub>D</sub>·D → 0, capacity saturates BUT the defect expectation tends to
+  **1**, not 0 — exact saturated capacity is provably NOT the positive-temperature free-oscillator
+  limit. The two halves of the shadow live in different regimes, as a theorem: the formalization
+  itself forbids merging the count and the field limit into a fake continuum claim.
+- **DS4 — the finite-product lifts** (`tendsto_productEntropy`): entropies, defects, and fixed
+  occupations' Gibbs weights of finite mode sets all converge to the free-field values.
+- **DS5 — the Cauchy rigidity** (`monotone_logValuation`): monotone additive on ℝ is linear
+  (proved by hand); a monotone product-to-sum valuation on ℝ&gt;0 is κ·log.
+- **DS6 — THE FORCED WEIGHT** (`finiteCorner_valuation_rigidity`, `forced_weight_product`,
+  `nu2_counterexample`): a monoidal valuation monotone under ALL isometric embeddings is forced to
+  be κ·log n — hence on product record corners A = κ·Σ log D<sub>k</sub>: the local weight of the
+  keystone/join/embedding dictionaries is the UNIQUE refinement-natural valuation, no longer a
+  constructed choice (κ is the one free normalization — where 4G lives, input). Necessity is
+  machine-checked: ν₂ is additive and divisibility-monotone yet not ∝ log — the strong hypotheses
+  cannot be weakened.
+- **DS7 — the shadow package** (`decouplingShadow_holds`, `saturated_entropy_eq_forced_area`):
+  the parent tower with its three theorems — the free sector survives the cutoff limit; every
+  refinement-natural valuation is κ·Σ log D<sub>k</sub>; given the normalization, the saturated
+  area law survives (the code's β = 0 entropy = the forced area over κ).
+
+<div class="note">
+
+<strong>The DS7 checkpoint — the two honest sentences.</strong> HAVE: "The capacity-limit theorem
+forces the oscillator/free-field sector only in the bounded-occupation or positive-temperature
+sense; it does not force the screen geometry or Newton constant." HAVE NOT: "The tower-rigidity
+theorem forces the logarithmic capacity weight only under monoidal, monotone refinement
+naturality; without those hypotheses there are explicit finite counterexamples." NOT a full
+decoupling derivation — the join incidence geometry, the species/cell match, and the value of G
+remain parent data; NOT quantum gravity solved; no wall crossed.
 
 </div>
 
