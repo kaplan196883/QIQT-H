@@ -8321,6 +8321,15 @@ namespace QIQTH.AxiomAudit
 -- positive-real half of the FORCED WEIGHT dictionary; DS6 transports to finite corners). Std 3.
 #print axioms QIQTH.Rigidity.monotone_additive_eq_smul
 #print axioms QIQTH.Rigidity.monotone_logValuation
+-- THE DECOUPLING SHADOW DS6 (Rigidity/FiniteCornerValuation.lean): THE FORCED WEIGHT DICTIONARY —
+-- finiteCorner_valuation_rigidity (a monoidal valuation monotone under ALL isometric embeddings is
+-- κ·log, via the double-log squeeze s = ⌈r·log m/log n⌉₊, r → ∞); forced_weight_product (on product
+-- record corners A = κ·Σ log D_k — the keystone/join/embedding weight is RIGID, not constructed; κ is
+-- where 4G lives and stays input); nu2_counterexample (the 2-adic valuation is additive +
+-- divisibility-monotone but NOT ∝ log — the STRONG embedding-monotonicity hypothesis is NECESSARY). Std 3.
+#print axioms QIQTH.Rigidity.finiteCorner_valuation_rigidity
+#print axioms QIQTH.Rigidity.forced_weight_product
+#print axioms QIQTH.Rigidity.nu2_counterexample
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -828,7 +828,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (monotone additive on ℝ is linear; ℚ-linearity + the rational squeeze), CAPSTONE
   **`monotone_logValuation`** (a monotone product-to-sum valuation on ℝ>0 is κ·log, κ ≥ 0 — the
   positive-real half of the forced weight dictionary). Next: DS6 (the finite-corner rigidity + the
-  ν₂ counterexample).
+  ν₂ counterexample). **DS6 LANDED — THE FORCED WEIGHT DICTIONARY**:
+  **`finiteCorner_valuation_rigidity`** (a monoidal valuation monotone under ALL isometric
+  embeddings is κ·log — the double-log squeeze), **`forced_weight_product`** (on product record
+  corners A = κ·Σ log D_k — the keystone/join/embedding weight is RIGID under refinement
+  naturality, no longer a constructed choice; κ is where 4G lives and stays input),
+  **`nu2_counterexample`** (ν₂ is additive + divisibility-monotone but NOT ∝ log — the strong
+  hypotheses are NECESSARY). Next: DS7 (the shadow package + checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

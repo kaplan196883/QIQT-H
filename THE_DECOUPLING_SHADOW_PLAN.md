@@ -54,7 +54,7 @@ weaker hypotheses fail). Files under `lean/mathlib/QIQTH/Decoupling/` + `QIQTH/R
   converging modewise; bounded-word convergence for H = Σ ω_k N_k). Finite mode sets ONLY.
 - [x] **DS5 — real log-valuation rigidity** ✅ DONE (`QIQTH/Rigidity/LogValuationReal.lean`): a monotone
   additive A on positive reals is `κ·log` (g(t) := A(e^t) monotone additive Cauchy rigidity).
-- [ ] **DS6 — the finite-corner valuation rigidity** (`QIQTH/Rigidity/FiniteCornerValuation.lean`):
+- [x] **DS6 — the finite-corner valuation rigidity** ✅ DONE (`QIQTH/Rigidity/FiniteCornerValuation.lean`):
   A : ℕ+ → ℝ with A(mn) = A(m)+A(n) and m ≤ n ⟹ A(m) ≤ A(n) is `κ·log n` (the ⌈r log m/log n⌉
   squeeze); hence on product records A = κ·Σ log D_k — THE FORCED WEIGHT DICTIONARY; PLUS the ν₂
   counterexample (additive + divisibility-monotone but NOT ∝ log — the strong hypotheses are
@@ -126,3 +126,11 @@ attempt with the error shown. Check for sibling jobs before each increment. Cons
   — a monotone product-to-sum valuation on ℝ>0 is κ·log with κ ≥ 0 (via g(t) = A(e^t)). The
   positive-real half of the forced weight dictionary. NEXT → DS6 (the finite-corner valuation
   rigidity + the ν₂ counterexample).
+
+- **2026-07-03** — **DS6 LANDED** (`QIQTH/Rigidity/FiniteCornerValuation.lean`, axiom-free std-3,
+  budget 0, no sorry): finiteCorner_valuation_rigidity — THE FORCED WEIGHT: a monoidal valuation
+  monotone under ALL isometric embeddings is κ·log (the double-log squeeze: s = ⌈r·log m/log n⌉₊,
+  r → ∞ via le_of_forall_pos_le_add); forced_weight_product (on product record corners
+  A = κ·Σ log D_k — the keystone/join/embedding weight is RIGID, not constructed; κ = where 4G
+  lives, stays input); nu2_counterexample (ν₂ is additive + divisibility-monotone but NOT ∝ log —
+  the strong hypotheses are NECESSARY). NEXT → DS7 (the shadow package + checkpoint).
