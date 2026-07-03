@@ -60,6 +60,7 @@ import QIQTH.Decoupling.ProductModes
 import QIQTH.Rigidity.LogValuationReal
 import QIQTH.Rigidity.FiniteCornerValuation
 import QIQTH.Decoupling.DecouplingShadow
+import QIQTH.Tower.AWFingerprint
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

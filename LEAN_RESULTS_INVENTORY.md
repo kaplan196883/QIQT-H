@@ -848,6 +848,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   decoupling derivation (the join geometry, species match, and G remain parent data); NOT QG
   solved; no wall crossed.
 
+- **THE TOWER, T1 — `QIQTH/Tower/AWFingerprint.lean`** (**[AF]** std-3; `THE_TOWER_PLAN.md` — the
+  first machine-checked contact with the Type III₁ wall via the ITPFI/Araki–Woods route; the code
+  tower's Gibbs product states ARE Araki–Woods input data; Fable-5 self-consult verified; T1–T8 in
+  progress). **T1 — the AW data + fingerprint predicates + κ-bridge:** `gibbsEigen` (positive,
+  normalized eigenvalue lists) with the UNIFORM weight bounds (`λ₀ > 1−e^{−a}` via
+  `Z(1−q) = 1−q^D < 1`, `λ₁ > e^{−b}(1−e^{−a})`) and the EXACT ratio `λ₁/λ₀ = e^{−x}` (the Z
+  cancels — never approximated); **`IsTailModularExponent`** + **`AWFingerprintIII1`** (the NAMED
+  WITNESS PREDICATES, additive in κ — never the verbatim AW r∞; the tail quantifier and uniform δ
+  are load-bearing, with the drifting-frequency and vanishing-weight counterexamples documented);
+  the κ-bridge **`kappaOf_gibbsEigen`** (the fingerprint exponents ARE the held corner modular
+  eigen-exponents, `= x(j−i)`) + `exp_kappaOf`. ⚠ Arithmetic about eigenvalue lists ONLY — no vN
+  algebra, no ratio set of an algebra, no type classification constructed or claimed.
+  Next: T2 (Kronecker density) → T3 (the centerpiece `gibbsTower_awFingerprint_III₁`).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

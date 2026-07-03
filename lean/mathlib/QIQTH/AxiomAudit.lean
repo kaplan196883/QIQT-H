@@ -8340,6 +8340,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Decoupling.RefinementNaturalValuation.forced
 #print axioms QIQTH.Decoupling.decouplingShadow_holds
 #print axioms QIQTH.Decoupling.saturated_entropy_eq_forced_area
+-- THE TOWER T1 (THE_TOWER_PLAN.md, Tower/AWFingerprint.lean): the Araki–Woods data + fingerprint predicates
+-- + the kappa-bridge — gibbsEigen (positive, normalized eigenvalue lists) with the uniform weight bounds
+-- (λ₀ > 1−e^{−a} via Z(1−q) = 1−q^D < 1; λ₁ > e^{−b}(1−e^{−a})) and the EXACT ratio λ₁/λ₀ = e^{−x} (the Z
+-- cancels); IsTailModularExponent + AWFingerprintIII1 (the NAMED WITNESS PREDICATES, additive in κ — never
+-- the verbatim AW r∞; the tail quantifier and uniform δ are load-bearing, counterexamples in comments);
+-- kappaOf_gibbsEigen (the fingerprint exponents ARE the held corner modular eigen-exponents: = x(j−i)) +
+-- exp_kappaOf (= the eigenvalue ratio). Arithmetic about eigenvalue lists ONLY — no vN algebra, no ratio set
+-- of an algebra, no type classification constructed or claimed. Std 3.
+#print axioms QIQTH.Tower.gibbsEigen_zero_bound
+#print axioms QIQTH.Tower.gibbsEigen_one_bound
+#print axioms QIQTH.Tower.gibbsEigen_ratio
+#print axioms QIQTH.Tower.kappaOf_gibbsEigen
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
