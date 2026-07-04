@@ -72,6 +72,25 @@ import QIQTH.TowerGNS.CyclicVector
   claimed, and no exponential-recovery identity towerFlow t = exp(it·towerGen) is claimed — the
   recovery wall is open by design and the campaign does not cross it."
 -/
+/-
+  THE SEPARATION (S1–S8) — THE CAMPAIGN CHECKPOINT (all increments landed; axiom-free std-3,
+  budget 0).
+
+  HAVE: "Ω is CYCLIC AND SEPARATING for the tower limit von Neumann algebra:
+  `dense_span_towerRep_cyclicVec` + `towerCyclicVec_separating` — the standard-form HYPOTHESIS
+  PAIR of Tomita–Takesaki theory, exhibited axiom-free on the tower Hilbert space." "Right
+  multiplication by a corner element is BOUNDED with the weighted Frobenius constant
+  `frobNormSq((rightConj a)ᴴ) = Σ_{n,m} ‖a n m‖²·(wₘ/wₙ)` and lies in the commutant of every
+  stage algebra — hence commutes with the whole limit algebra by the bicommutant, purely
+  algebraically."
+
+  HAVE NOT: "No Tomita operator S₀, no modular operator Δ, no conjugation J, no KMS condition
+  at the limit, and no type classification is constructed or claimed here — separation is the
+  HYPOTHESIS for that theory, not the theory." "The right action is bounded with a weighted
+  Frobenius (Hilbert–Schmidt) constant, NOT the C*-norm — never claimed contractive; and no
+  right ⋆-anti-representation laws are stated: exactly the operators the separation argument
+  needs, nothing more."
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS

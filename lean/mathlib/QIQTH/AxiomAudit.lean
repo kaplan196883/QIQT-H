@@ -8668,6 +8668,19 @@ namespace QIQTH.AxiomAudit
 -- towerRightMul_cyclicVec — R_aΩ = ↑(of C a): the right orbit of Ω IS R8's orbit. Std 3.
 #print axioms QIQTH.TowerGNS.towerRightMulCLM
 #print axioms QIQTH.TowerGNS.towerRightMul_cyclicVec
+-- THE SEPARATION S5–S8 (TowerGNS/Separation.lean): ★★★ Ω IS CYCLIC AND SEPARATING for
+-- towerLimitVN ★★★ — the STANDARD-FORM HYPOTHESIS PAIR of Tomita–Takesaki theory, axiom-free.
+-- The left-right exchange (deep-stage double germ, no HEq); towerRightMul_comm_towerRep;
+-- commute_of_mem_limitVN (pure bicommutant — Set.centralizer membership definitional);
+-- CAPSTONE towerCyclicVec_separating (T ∈ towerLimitVN, TΩ = 0 ⟹ T = 0 — ext_on over R8's
+-- density; the right orbit IS the left orbit); Ω cyclic for the LIMIT;
+-- towerLimitVN_eq_of_apply_cyclicVec (the well-definedness germ of a future Tomita S₀).
+-- Separation is the HYPOTHESIS for Tomita theory, not the theory: no S₀/Δ/J, no KMS-at-limit,
+-- no type. Std 3.
+#print axioms QIQTH.TowerGNS.towerCyclicVec_separating
+#print axioms QIQTH.TowerGNS.commute_of_mem_limitVN
+#print axioms QIQTH.TowerGNS.towerLimitVN_eq_of_apply_cyclicVec
+#print axioms QIQTH.TowerGNS.dense_span_limitVN_orbit_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

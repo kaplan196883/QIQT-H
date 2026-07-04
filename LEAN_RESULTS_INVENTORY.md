@@ -1090,7 +1090,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   weighted Frobenius constant Σ‖a n m‖²(w_m/w_n) (never claimed contractive). **S3+S4 LANDED**: `rightMulRaw`/`towerRightMul`/
   **`towerRightMulCLM`** (the bounded right action on TowerGNS, norm ≤ √(weighted Frobenius));
   CAPSTONE **`towerRightMul_cyclicVec`** — R_aΩ = ↑(of C a) = π_C(a)Ω: the right orbit of Ω IS
-  the left orbit. Next: S5–S7 (commutation + the separation capstone).
+  the left orbit. **S5–S8 — CAMPAIGN COMPLETE (8/8)**
+  (`TowerGNS/Separation.lean`): ★ **Ω IS CYCLIC AND SEPARATING FOR towerLimitVN** ★ — CAPSTONE
+  **`towerCyclicVec_separating`** (T ∈ towerLimitVN, TΩ = 0 ⟹ T = 0; via the deep-stage
+  left-right exchange, the pure-bicommutant `commute_of_mem_limitVN`, and ext_on over R8's
+  density) + Ω cyclic for the limit + `towerLimitVN_eq_of_apply_cyclicVec` — THE STANDARD-FORM
+  HYPOTHESIS PAIR of Tomita–Takesaki theory, axiom-free. CHECKPOINT (verbatim in
+  Checkpoint.lean): HAVE the pair + the bounded right action in the commutant; HAVE NOT — no
+  Tomita S₀/Δ/J, no KMS-at-limit, no type: separation is the HYPOTHESIS for that theory, not
+  the theory; the right action never claimed contractive, no ⋆-anti-representation laws.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

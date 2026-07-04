@@ -1,6 +1,6 @@
 # THE SEPARATION (S1–S8): Ω is cyclic AND separating for towerLimitVN
 
-**Status:** ACTIVE (2026-07-07). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
+**Status:** COMPLETE (2026-07-07) — S1–S8 ALL LANDED, axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
 held APIs + Mathlib names verified).** **Goal:** `towerCyclicVec_separating` — T ∈ towerLimitVN,
 TΩ = 0 ⟹ T = 0 — via the bounded RIGHT multiplications (in the commutant of every stage,
 commuting with the limit by pure bicommutant algebra). With R8's cyclicity: THE STANDARD-FORM
@@ -61,13 +61,13 @@ extensions. Route SOUND per consult, with three cost-reducing amendments (bindin
   **`towerRightMul` via mkContinuous √c** — the R6 mirror. Risk LOW.
 - [x] **S4 — same file** ✅ DONE: `towerRightMulCLM := .completion` + `_coe`;
   **`towerRightMul_cyclicVec`** (R_aΩ = ↑(of C a) — the R8-head mirror). Risk LOW.
-- [ ] **S5 — `QIQTH/TowerGNS/Separation.lean`**: the raw left-right exchange (DEEP-STAGE double
+- [x] **S5 — `QIQTH/TowerGNS/Separation.lean`** ✅ DONE: the raw left-right exchange (DEEP-STAGE double
   germ + mul_assoc — A2); CLM commutation **`towerRightMul_comm_towerRep`**. Risk MEDIUM-LOW.
-- [ ] **S6 — same file**: **`commute_of_mem_limitVN`** (the general bicommutant application) +
+- [x] **S6 — same file** ✅ DONE: **`commute_of_mem_limitVN`** (the general bicommutant application) +
   `towerRightMul_comm_limitVN`. Risk LOW.
-- [ ] **S7 — same file — CAPSTONE**: **`towerCyclicVec_separating`** (T ∈ towerLimitVN, TΩ = 0 ⟹
+- [x] **S7 — same file — CAPSTONE** ✅ DONE: **`towerCyclicVec_separating`** (T ∈ towerLimitVN, TΩ = 0 ⟹
   T = 0 — ext_on + R8 density). Risk LOW.
-- [ ] **S8 — same file + checkpoint**: Ω cyclic for the limit; `towerLimitVN_eq_of_apply_
+- [x] **S8 — same file + checkpoint** ✅ DONE: Ω cyclic for the limit; `towerLimitVN_eq_of_apply_
   cyclicVec`; THE STANDARD-FORM BANNER; the HAVE/HAVE-NOT sentences VERBATIM (below) into
   TowerGNS/Checkpoint.lean + inventory; AxiomAudit pins; plan → COMPLETE; delete loop; stop.
 
@@ -135,3 +135,14 @@ gpt-5.5-pro (never expose keys).
   + **`towerRightMulCLM`** (.completion); CAPSTONE **`towerRightMul_cyclicVec`** — R_aΩ =
   ↑(of C a): THE RIGHT ORBIT OF Ω IS R8'S ORBIT (no new density lemma needed, per A4).
   NEXT → S5 (Separation.lean: the deep-stage exchange).
+
+- **2026-07-07** — **S5–S8 LANDED — CAMPAIGN COMPLETE (8/8), GREEN FIRST BUILD.**
+  (`QIQTH/TowerGNS/Separation.lean`): the deep-stage double-germ exchange (no HEq, per A2);
+  `towerRightMul_comm_towerRep`; `commute_of_mem_limitVN` (pure bicommutant, per A3);
+  CAPSTONE **`towerCyclicVec_separating`** — T ∈ towerLimitVN, TΩ = 0 ⟹ T = 0 (ext_on over
+  R8's density; the right orbit IS the left orbit, per A4); Ω cyclic for the LIMIT;
+  `towerLimitVN_eq_of_apply_cyclicVec` (the Tomita-S₀ well-definedness germ). **Ω IS CYCLIC AND
+  SEPARATING FOR towerLimitVN — THE STANDARD-FORM HYPOTHESIS PAIR OF TOMITA–TAKESAKI THEORY,
+  AXIOM-FREE.** Checkpoint stanza verbatim in TowerGNS/Checkpoint.lean. Loop 0272b65c deleted.
+  Paper/website sync on request. The next campaign on the board: the Tomita operator S₀ itself
+  (TΩ ↦ T*Ω — now well-defined by towerLimitVN_eq_of_apply_cyclicVec), then Δ/J, then the type.
