@@ -1,0 +1,128 @@
+# THE RESOLVENT CAMPAIGN — (1+Δ)⁻¹ and the modular unitary group Δ^{it}
+
+**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3 (the continuous QG program).
+**Consult:** fable high-reasoning agent a64d01ffc6387c75c (2026-07-05) — decision: go THROUGH
+Δ^{it}, not resolvent-only; full source-verified inventory in the consult record.
+
+## Why and how far
+
+THE VON NEUMANN campaign left Δ genuinely self-adjoint with ran(1+Δ) = ⊤ and the bound
+‖x‖ ≤ ‖x+Δx‖. This campaign builds towerResolvent := (1+Δ)⁻¹ (an everywhere-defined
+self-adjoint CLM contraction, 0 ≤ R ≤ 1) and pushes it through the project's EXISTING
+spectral tower (PVM_of_selfAdjoint → borelFC/boundedFC_mul) to deliver **Δ^{it}** — a
+strongly continuous one-parameter unitary group — because every analytic engine already
+exists and compiles, with a line-by-line template in StandardSubspaceModularFlow.lean
+(modChar/modUnitary: junk-value-1 piecewise symbol makes group laws pointwise-global;
+dominated-convergence normality engines tendsto_inner_boundedFC_of_dominated present).
+
+Key verified facts:
+- PVM_of_selfAdjoint takes ANY IsSelfAdjoint CLM on a complete ℂ-inner-product space;
+  carrier = subtype `spectrum ℝ T`; borelFC takes Measurable symbol + explicit bound.
+- No CLM-inverse machinery needed: choice-def + ONE spec lemma + uniqueness-linearity +
+  LinearMap.mkContinuous 1 (the inverse is bounded a priori by VN5's bound).
+- rvdRC_spectrum_mem_Icc compiles at the pin (StarOrderedRing route) — the template for
+  spec(R) ⊆ [0,1].
+- MISSING (= the new-math increment R3): PVM eigenvector/atom calculus — E({0}) = 0 for
+  injective T (kernel triviality does NOT kill the atom automatically; the multiplicative
+  coord·1_{coord=0} = 0 argument does), eigenvector localization via the inverse-symbol
+  trick + annulus decomposition, boundedFC_apply_eigenvector.
+- E_compl is absent on ProjectionValuedMeasure (only PVContent) — derive from hasSum_iUnion.
+
+## The increments
+
+- [ ] **R1 — `TowerGNS/Resolvent.lean`: the resolvent CLM.** towerResolventAux h :=
+  Classical.choose (towerModularOp_one_add_surjective …); ONE spec lemma (choice hygiene —
+  never unfold after). Uniqueness one_add_injOn via norm_le_norm_add + map_sub; linearity
+  from uniqueness; towerResolvent := LinearMap.mkContinuous _ 1. Consumer lemmas:
+  towerResolvent_mem, _add_modularOp (Rh + Δ(Rh) = h), _one_add (R(x+Δx) = x),
+  _injective, range = towerModularDom (dense), Δ∘R = 1−R (modularOp_towerResolvent) and
+  R(Δx) = x − Rx. Risk LOW.
+- [ ] **R2 — `TowerGNS/ResolventOrder.lean`: self-adjointness, order, spectrum, Ω.**
+  isSymmetric (⟪Rh,k⟫ = ⟪h,Rk⟫ via towerModularOp_isFormalAdjoint) → isSelfAdjoint
+  (isSelfAdjoint_iff_isSymmetric); nonneg (re⟪Rh,h⟫ = ‖Rh‖² + ‖S̄Rh‖²); R ≤ 1
+  (re⟪h−Rh,h⟫ = ‖S̄Rh‖² + ‖ΔRh‖²); ‖R‖ ≤ 1; spectrum ⊆ Icc 0 1 (verbatim port of
+  rvdRC_spectrum_mem_Icc with 1−R); towerResolvent_cyclicVec: RΩ = ½Ω. Risk LOW.
+- [ ] **R3 — `Spectral/PVMEigen.lean` (abstract, reusable — THE NEW MATH).**
+  (a) PVM finite additivity + E_compl from hasSum_iUnion. (b) generic eq_borelFC
+  (T = ∫λ dE, de-specialize rvdRC_eq_borelFC/diagInt_specCoord). (c) KERNEL ATOM:
+  Injective T ⟹ E(coe⁻¹'{0}) = 0 (coord·1_{coord=0} = 0 pointwise ⟹ T∘E({0}) =
+  borelFC 0 = 0 via borelFC_mul + (b), injectivity kills it). (d) EIGENVECTOR
+  LOCALIZATION: Tx = r•x ⟹ E(s)x = 0 for s ε-far from r (inverse-symbol trick:
+  indicator((ω−r)⁻¹) bounded by ε⁻¹, h·(coord−r) = 1_s); annulus decomposition +
+  hasSum_iUnion ⟹ x = E({r})x; capstone boundedFC_apply_eigenvector: boundedFC f x =
+  f(r)•x (membership r ∈ spectrum from x ≠ 0). Risk MODERATE — the only real proof-search;
+  if long, ship (a)–(c) green and split (d).
+- [ ] **R4 — `TowerGNS/ModularUnitary.lean` part 1: symbol + group.** towerModChar t :=
+  (Ioo 0 1).piecewise (r ↦ exp(I·t·log((1−r)/r))) (1) — expSymbol shape for R8; four
+  pointwise laws + measurability + t-continuity (verbatim modChar ports). towerModUnitary t
+  := borelFC (towerResolvent) …; _zero/add/adjoint/unitary/norm +
+  inner_towerModUnitary_towerModUnitary (modUnitary ports). Risk LOW (transcription).
+- [ ] **R5 — part 2: strong continuity + the honesty pair.**
+  towerModUnitary_stronglyContinuous (port: sequential criterion +
+  tendsto_inner_boundedFC_of_dominated + the 2‖ξ‖² − 2Re⟪ξ,U_{a−t}ξ⟫ identity).
+  towerModUnitary_cyclicVec: U_tΩ = Ω (R3(d) at r = ½; ½ ∈ spectrum from Ω ≠ 0
+  (norm_cyclicVec); towerModChar t ½ = exp(I·t·log 1) = 1).
+  towerResolvent_pvm_atom_zero: E({0}) = 0 (R3(c) at towerResolvent_injective). Risk
+  LOW-MODERATE (depends on R3).
+- [ ] **R6 — commutation: U_t vs R and Δ.** towerResolvent_eq_borelFC (R3(b));
+  towerModUnitary_commute_towerResolvent (borelFC_comm port); 1−R as FC of 1−coord; then
+  algebraic: U_t maps dom Δ to dom Δ (U_t(Rh) = R(U_t h)) and Δ(U_t x) = U_t(Δx) on dom Δ
+  (both = (1−R)U_t h, via Δ∘R = 1−R). Risk LOW.
+- [ ] **R7 — checkpoint + audit.** Checkpoint.lean stanza (verbatim below); AxiomAudit
+  pins; inventory; plan → COMPLETE.
+- [ ] **R8 (OPTIONAL stretch)** — towerModLog := fcOp of the piecewise log (log Δ as
+  unbounded FC operator, conditional statements only) + Stone derivative
+  hasDerivAt_boundedFC_expSymbol instantiation. Do NOT attempt fcOp((1−r)/r) = Δ (missing
+  scalarMeasure-density lemma; redundant given Δ∘R = 1−R). Skip freely if R1–R7 fill the
+  session.
+
+Out of scope (defer, never claim): Δ^{1/2}, J, polar; KMS-at-limit; Tomita's theorem;
+towerFlow = towerModUnitary (towerGen = log Δ — the recovery wall, the NAMED next
+campaign); type classification.
+
+## The checkpoint language (R7, verbatim)
+
+HAVE: "The resolvent of the tower modular operator is constructed as an everywhere-defined
+operator: towerResolvent = (1+Δ)⁻¹, a self-adjoint contraction with 0 ≤ R ≤ 1, trivial
+kernel, range equal to the (dense) domain of Δ, spectrum in [0,1], RΩ = ½Ω, and the exact
+identities Δ∘R = 1−R and R∘(1+Δ) = 1 on dom Δ — so Δ is a function of a single bounded
+self-adjoint operator. Through the bounded Borel functional calculus of R, the modular
+unitary group of the tower limit state exists: Δ^{it} := towerModUnitary t, a strongly
+continuous one-parameter unitary group (U_0 = 1, U_{s+t} = U_sU_t, U_t⋆ = U_{−t}) that
+fixes the cyclic vector (U_tΩ = Ω), commutes with R and with Δ (preserving dom Δ), and
+carries no spectral weight at the junk point (E({0}) = 0, forced by kernel triviality — the
+group genuinely represents ((1−r)/r)^{it} = δ^{it} on the spectrum); plus a reusable
+abstract supplement to the spectral tower: T = ∫λ dE at operator level, the kernel-atom
+lemma E({0}) = 0 for injective self-adjoint T, and the eigenvector calculus
+boundedFC f x = f(r)x — all axiom-free."
+
+HAVE NOT: "No claim that towerModUnitary equals the transported towerFlow (equivalently
+towerGen = log Δ): two strongly continuous unitary groups now coexist on the tower space
+and their identification — the exponential-recovery wall — is the named next campaign, not
+crossed here. No KMS condition of the limit state is proved; Tomita's theorem
+(Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN, JMJ = M′) is not proved — U_t is not shown to
+implement automorphisms of the limit algebra; Δ^{1/2}, J, and the polar decomposition
+S̄ = JΔ^{1/2} are still not constructed; no von Neumann type statement; and everything
+remains for the finite-stage Gibbs inductive-limit state — the free-field/Type-III
+continuum objects are untouched."
+
+## Per-increment discipline (verbatim-critical)
+
+`cd lean/mathlib && ~/.elan/bin/lake build <target>` green; `#print axioms` = standard 3
+(propext, Classical.choice, Quot.sound); `bash scripts/axiom_budget_check.sh` budget 0;
+AxiomAudit.lean pins; wire QIQTH.lean; ONE commit on main with trailer
+`Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`; push via
+`git -c http.sslBackend=schannel push origin main`; update this checklist + Progress log
+AND LEAN_RESULTS_INVENTORY.md; NO sorry; carried inputs as hypotheses/structure fields
+NEVER Lean axioms; NEVER claim QG solved, a type classified, KMS-at-limit, towerGen = log Δ,
+or any wall crossed beyond what is literally proved; NEVER claim an increment too hard
+(attempt, iterate, checkpoint only after a genuine failed attempt with the error shown);
+check sibling jobs (git log/status) before each increment; explicit git paths only.
+
+## Progress log
+
+- **2026-07-05** — Campaign scoped and planned (consult verified the entire spectral-tower
+  API against sources: PVM_of_selfAdjoint/borelFC signatures, the compiled
+  StandardSubspaceModularFlow modChar/modUnitary template, dominated-convergence engines,
+  the stale StarOrderedRing remark, the missing eigen/atom calculus). THE VON NEUMANN
+  campaign closed immediately prior (Δ† = Δ, 34th first synced at e808695).
