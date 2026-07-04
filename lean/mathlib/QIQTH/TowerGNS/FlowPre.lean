@@ -14,11 +14,12 @@
 -/
 import Mathlib
 import QIQTH.TowerGNS.StageInner
+import QIQTH.TowerGNS.PreSpace
 
 namespace QIQTH.TowerGNS
 
 open QIQTH.Keystone QIQTH.Tower QIQTH.Dynamics QIQTH.FiniteModularTheory
-open scoped ComplexOrder Matrix
+open scoped ComplexOrder Matrix DirectSum InnerProductSpace
 
 variable {M : Type*} [DecidableEq M] (L : LinkDims M) (ω : M → ℝ) (β : ℝ)
 
@@ -100,5 +101,118 @@ theorem cornerFlow_cornerEmbed (C C' : Finset M) (h : C ⊆ C') (t : ℝ)
     cornerEmbed L C C' h (cornerFlow L ω β C t x)
       = cornerFlow L ω β C' t (cornerEmbed L C C' h x) :=
   (cornerEmbed_sigmaDiag L C C' h ω β t x).symm
+
+/-! ### B2 — the flow on the tower pre-space: `flowRaw` + isometry + `flowPre`
+
+The per-corner flow acts DIAGONALLY on the raw direct sum (same stage, no stage shift —
+unlike `leftMulRaw`); the B1 laws (`gnsInner_cornerFlow` + `cornerFlow_cornerEmbed`) make it
+a raw ISOMETRY of the tower form, and `LinearMap.mkContinuous` with constant `1` packages
+the continuous pre-unitary `flowPre : TowerPre →L[ℂ] TowerPre`. LEAN ARCHITECTURE (the R3
+lesson, binding): the working lemmas (`flowRaw`, `flowRaw_of`, `rawInner_flowRaw`) live at
+the RAW `⨁` type; the `TowerPre`-typed items (`flowPreₗ`, the norm bound, `flowPre`) are
+final wrappers accepted by application-position definitional equality. -/
+
+/-- The per-corner flow at a fixed stage, bundled as a ℂ-linear map (B1's
+    `cornerFlow_add`/`cornerFlow_smul`). -/
+noncomputable def cornerFlowₗ (C : Finset M) (t : ℝ) :
+    DiamondAlg L C →ₗ[ℂ] DiamondAlg L C where
+  toFun := cornerFlow L ω β C t
+  map_add' x y := cornerFlow_add L ω β C t x y
+  map_smul' c x := cornerFlow_smul L ω β C t c x
+
+/-- **The raw flow pre-operator**: the component at stage `C` flows IN PLACE by the
+    per-corner Gibbs modular flow — same stage, no stage shift. -/
+noncomputable def flowRaw (t : ℝ) :
+    (⨁ C : Finset M, DiamondAlg L C) →ₗ[ℂ] (⨁ C : Finset M, DiamondAlg L C) :=
+  DirectSum.toModule ℂ (Finset M) (⨁ C : Finset M, DiamondAlg L C) fun C =>
+    (DirectSum.lof ℂ (Finset M) (fun C : Finset M => DiamondAlg L C) C) ∘ₗ
+      (cornerFlowₗ L ω β C t)
+
+@[simp] theorem flowRaw_of (t : ℝ) (C : Finset M) (x : DiamondAlg L C) :
+    flowRaw L ω β t (DirectSum.of _ C x)
+      = DirectSum.of (fun C : Finset M => DiamondAlg L C) C (cornerFlow L ω β C t x) := by
+  rw [← DirectSum.lof_eq_of ℂ, flowRaw]
+  erw [DirectSum.toModule_lof]
+  rfl
+
+/-- **B2 KEY (raw) — the flow is an isometry of the tower form**: double induction reduces
+    to pure components, where B1's tower equivariance pushes the flow through the embeddings
+    into the common stage `C ⊔ C'` and B1's capstone `gnsInner_cornerFlow` collapses it. -/
+theorem rawInner_flowRaw (t : ℝ) (x y : ⨁ C : Finset M, DiamondAlg L C) :
+    rawInner L ω β (flowRaw L ω β t x) (flowRaw L ω β t y) = rawInner L ω β x y := by
+  induction x using DirectSum.induction_on with
+  | zero =>
+    rw [map_zero (flowRaw L ω β t), map_zero (rawInner L ω β),
+      AddMonoidHom.zero_apply, AddMonoidHom.zero_apply]
+  | of C a =>
+    induction y using DirectSum.induction_on with
+    | zero =>
+      rw [map_zero (flowRaw L ω β t),
+        map_zero (rawInner L ω β (flowRaw L ω β t (DirectSum.of _ C a))),
+        map_zero (rawInner L ω β (DirectSum.of _ C a))]
+    | of C' b =>
+      rw [flowRaw_of, flowRaw_of, rawInner_of_of, rawInner_of_of]
+      show gnsInner L ω β (C ⊔ C')
+          (cornerEmbed L C (C ⊔ C') Finset.subset_union_left (cornerFlow L ω β C t a))
+          (cornerEmbed L C' (C ⊔ C') Finset.subset_union_right (cornerFlow L ω β C' t b))
+        = gnsInner L ω β (C ⊔ C')
+            (cornerEmbed L C (C ⊔ C') Finset.subset_union_left a)
+            (cornerEmbed L C' (C ⊔ C') Finset.subset_union_right b)
+      rw [cornerFlow_cornerEmbed, cornerFlow_cornerEmbed, gnsInner_cornerFlow]
+    | add y₁ y₂ h₁ h₂ =>
+      rw [map_add (flowRaw L ω β t),
+        map_add (rawInner L ω β (flowRaw L ω β t (DirectSum.of _ C a))), h₁, h₂,
+        map_add (rawInner L ω β (DirectSum.of _ C a))]
+  | add x₁ x₂ h₁ h₂ =>
+    rw [map_add (flowRaw L ω β t),
+      map_add (rawInner L ω β) (flowRaw L ω β t x₁) (flowRaw L ω β t x₂),
+      AddMonoidHom.add_apply, h₁, h₂,
+      map_add (rawInner L ω β) x₁ x₂, AddMonoidHom.add_apply]
+
+/-! ### The synonym wrappers (application-position defeq only — the R3 lesson) -/
+
+/-- The flow at the synonym, as a plain linear map (fields delegate to the raw map by
+    definitional equality). -/
+noncomputable def flowPreₗ (t : ℝ) : TowerPre L ω β →ₗ[ℂ] TowerPre L ω β where
+  toFun x := flowRaw L ω β t x
+  map_add' x y := (flowRaw L ω β t).map_add x y
+  map_smul' r x := (flowRaw L ω β t).map_smul r x
+
+@[simp] theorem flowPreₗ_apply (t : ℝ) (x : TowerPre L ω β) :
+    flowPreₗ L ω β t x = flowRaw L ω β t x := rfl
+
+/-- The flow preserves the tower seminorm (raw isometry + `√(‖·‖²)`). -/
+theorem flowPreₗ_norm_eq (t : ℝ) (x : TowerPre L ω β) :
+    ‖flowPreₗ L ω β t x‖ = ‖x‖ := by
+  have hinner : ⟪flowPreₗ L ω β t x, flowPreₗ L ω β t x⟫_ℂ = ⟪x, x⟫_ℂ :=
+    rawInner_flowRaw L ω β t x x
+  have h2 : ‖flowPreₗ L ω β t x‖ ^ 2 = ‖x‖ ^ 2 := by
+    rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (flowPreₗ L ω β t x),
+      ← inner_self_eq_norm_sq (𝕜 := ℂ) x, hinner]
+  calc ‖flowPreₗ L ω β t x‖
+      = Real.sqrt (‖flowPreₗ L ω β t x‖ ^ 2) := (Real.sqrt_sq (norm_nonneg _)).symm
+    _ = Real.sqrt (‖x‖ ^ 2) := by rw [h2]
+    _ = ‖x‖ := Real.sqrt_sq (norm_nonneg _)
+
+/-- The `mkContinuous`-shaped bound with constant `1` (the flow is norm-preserving, hence
+    trivially bounded). -/
+theorem flowRaw_norm_le (t : ℝ) (x : TowerPre L ω β) :
+    ‖flowPreₗ L ω β t x‖ ≤ 1 * ‖x‖ := by
+  rw [one_mul]
+  exact le_of_eq (flowPreₗ_norm_eq L ω β t x)
+
+/-- **B2 CAPSTONE — the continuous flow pre-operator**: the per-corner Gibbs modular flow
+    as a CONTINUOUS linear isometry candidate on the tower pre-space (constant `1`), ready
+    for extension to the completion. -/
+noncomputable def flowPre (t : ℝ) : TowerPre L ω β →L[ℂ] TowerPre L ω β :=
+  LinearMap.mkContinuous (flowPreₗ L ω β t) 1 fun x => flowRaw_norm_le L ω β t x
+
+@[simp] theorem flowPre_apply (t : ℝ) (x : TowerPre L ω β) :
+    flowPre L ω β t x = flowRaw L ω β t x := rfl
+
+/-- The continuous flow pre-operator preserves the tower seminorm. -/
+theorem flowPre_norm_eq (t : ℝ) (x : TowerPre L ω β) :
+    ‖flowPre L ω β t x‖ = ‖x‖ :=
+  flowPreₗ_norm_eq L ω β t x
 
 end QIQTH.TowerGNS

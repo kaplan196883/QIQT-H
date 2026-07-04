@@ -52,7 +52,7 @@ stretch + checkpoints.
 - [x] **B1 — `QIQTH/TowerGNS/FlowPre.lean`** ✅ DONE: `sigmaDiag_gibbs_mul`/`_star`/`_one`,
   `stateOf_sigmaDiag_gibbs`, capstone `gnsInner_sigmaDiag` (⟪σx,σy⟫_K = ⟪x,y⟫_K) — all through
   the rescale bridge. Risk LOW.
-- [ ] **B2 — same file**: `flowRaw t` (toModule; component = per-stage σ_t), `flowRaw_of`,
+- [x] **B2 — same file** ✅ DONE: `flowRaw t` (toModule; component = per-stage σ_t), `flowRaw_of`,
   `rawInner_flowRaw` (isometry — double DirectSum.induction_on, pure case = pairInner_embed +
   cornerEmbed_sigmaDiag both slots + gnsInner_sigmaDiag), `flowPre := mkContinuous _ 1`. Risk MED.
 - [ ] **B3 — `QIQTH/TowerGNS/Flow.lean`**: `towerFlow t := (flowPre t).completion`, `_coe`,
@@ -153,3 +153,11 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   compliance verified: no cpow/diagPow entry facts anywhere — everything through the rescale
   bridge + held alpha_*; add/smul by distributivity over the opaque conjugators. NEXT → B2
   (flowRaw + isometry + flowPre, same file).
+
+- **2026-07-06** — **B2 LANDED, GREEN FIRST TRY** (FlowPre.lean extended, axiom-free std-3,
+  budget 0; fable subagent): `cornerFlowₗ` (linear bundling), `flowRaw` (same-stage componentwise
+  flow via toModule — NO stage shift, simpler than leftMulRaw) + `flowRaw_of`; CAPSTONE
+  **`rawInner_flowRaw`** — the flow is an ISOMETRY of the pre-space (double induction; pure case
+  = cornerFlow_cornerEmbed in both pairInner slots + gnsInner_cornerFlow); `flowPreₗ` +
+  **`flowPre := mkContinuous _ 1`** with `flowPre_norm_eq` (‖U_t x‖ = ‖x‖ via Real.sqrt_sq).
+  NEXT → B3 (Flow.lean: towerFlow on the completion).

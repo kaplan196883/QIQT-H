@@ -1025,7 +1025,9 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `THE_TRANSPORT_AND_ACCOUNTING_PLAN.md`): the per-corner Gibbs modular flow `cornerFlow` with
   its full ⋆-automorphism + state-invariance law kit, all through the rescale bridge (no
   cpow/diagPow anywhere); CAPSTONE **`gnsInner_cornerFlow`** (the GNS form is flow-invariant) +
-  **`cornerFlow_cornerEmbed`**. Next: B2 (flowRaw isometry + flowPre).
+  **`cornerFlow_cornerEmbed`**. **B2 LANDED**: `flowRaw` (componentwise,
+  same-stage) with CAPSTONE **`rawInner_flowRaw`** — the flow is an ISOMETRY of the pre-space —
+  and `flowPre` (mkContinuous, ‖U_t x‖ = ‖x‖). Next: B3 (towerFlow on the completion).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

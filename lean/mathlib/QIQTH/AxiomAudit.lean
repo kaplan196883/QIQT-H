@@ -8580,6 +8580,13 @@ namespace QIQTH.AxiomAudit
 -- flow-invariant) + cornerFlow_cornerEmbed (T7 equivariance rephrased). Std 3.
 #print axioms QIQTH.TowerGNS.gnsInner_cornerFlow
 #print axioms QIQTH.TowerGNS.cornerFlow_cornerEmbed
+-- THE TRANSPORT B2 (FlowPre.lean cont.): flowRaw (the same-stage componentwise flow on ⨁, via
+-- toModule) + flowRaw_of; CAPSTONE rawInner_flowRaw — the flow is an ISOMETRY of the pre-space
+-- (double induction; pure case = cornerFlow_cornerEmbed both slots + gnsInner_cornerFlow);
+-- flowPreₗ/flowPre := mkContinuous _ 1 with ‖U_t x‖ = ‖x‖ (flowPre_norm_eq). Std 3.
+#print axioms QIQTH.TowerGNS.rawInner_flowRaw
+#print axioms QIQTH.TowerGNS.flowPre
+#print axioms QIQTH.TowerGNS.flowPre_norm_eq
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
