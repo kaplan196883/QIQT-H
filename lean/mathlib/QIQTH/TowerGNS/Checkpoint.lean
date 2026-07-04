@@ -221,6 +221,35 @@ import QIQTH.TowerGNS.CyclicVector
   remains for the finite-stage Gibbs inductive-limit state — the free-field/Type-III
   continuum objects are untouched."
 -/
+/-
+  THE MODULAR CONJUGATION CAMPAIGN (J1–J9) — THE CAMPAIGN CHECKPOINT (all increments landed;
+  axiom-free std-3, budget 0; every increment first-try green).
+
+  HAVE: "The modular conjugation J of the tower limit state is constructed as a global
+  anti-unitary on the tower GNS space — towerJ, the completion of the explicit
+  conjugate-linear stage map jStage a = √ρ·aᴴ·√ρ⁻¹, semilinearly extended with no
+  ℝ-reduction — with the full anti-unitary pack (⟪Jξ,Jη⟫ = ⟪η,ξ⟫, J² = 1, JΩ = Ω,
+  J(c•ξ) = conj c•Jξ) and the eigenbasis action J↑(of C E_{nm}c) = √(w_m/w_n)•↑(of C E_{mn}
+  conj c), all axiom-free. The polar decomposition holds exactly on the dense pure-component
+  core: S̄ = J∘Δ^{1/2} and F = Δ^{1/2}∘J, where the core Δ^{1/2}-action √ρ·a·√ρ⁻¹ squares to
+  the modular automorphism (Δ's core action); J commutes with the full modular group,
+  JΔ^{it} = Δ^{it}J. And the computable half of Tomita's second half: J conjugates every
+  represented left multiplication into the commutant-side right multiplication
+  (Jπ_C(a)J = R_{jStage a}), hence J·towerLimitVN·J ⊆ towerLimitVN′ — with Ω now cyclic and
+  separating for the commutant as well."
+
+  HAVE NOT: "The REVERSE inclusion towerLimitVN′ ⊆ J·towerLimitVN·J — the hard half of
+  Tomita's theorem — is not proved, so J M J = M′ as an equality stays open (the commutant of
+  the limit algebra is not characterized; the named route is the Rieffel–van Daele
+  real-subspace argument, not analytic continuation). No unbounded operator Δ^{1/2} is
+  constructed — the polar decomposition is a core-level identity, not an operator
+  factorization S̄ = J·Δ^{1/2} on the full domain of S̄; no strip-KMS of the limit state; no
+  von Neumann type classification; and everything remains the finite-stage Gibbs
+  inductive-limit state — free-field/Type-III continuum objects untouched."
+
+  (Ω cyclic for the commutant M′ is deferred — it needs the antilinear span-image identity
+  J(span_ℂ base) = span_ℂ(J base); Ω separating for M′ IS proved.)
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS

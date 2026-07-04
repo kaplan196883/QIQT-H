@@ -1283,7 +1283,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   towerLimitVN into its commutant (jconj_limitVN_mem_commutant), via the SOT transport of
   J π(a) J = R_{jStage a}; Ω separating for the commutant (green first try). The REVERSE
   inclusion (full equality J M J = M′) is NOT proved — Tomita's hard half, named RvD route.
-  Next: J9 (checkpoint → campaign COMPLETE).
+  **J9 — CAMPAIGN COMPLETE (9/9, ALL first-try
+  green)**. CHECKPOINT (verbatim in Checkpoint.lean): HAVE — J is a global anti-unitary
+  (towerJ = completion of jStage a = √ρ·aᴴ·√ρ⁻¹, no ℝ-reduction; J² = 1, JΩ = Ω,
+  ⟪Jξ,Jη⟫ = ⟪η,ξ⟫, conj-smul twist, eigenbasis √(w_m/w_n)); the polar decomposition
+  S̄ = J∘Δ^{1/2} and F = Δ^{1/2}∘J on the core; JΔ^{it} = Δ^{it}J; and Tomita's second half
+  (inclusion): J·towerLimitVN·J ⊆ towerLimitVN′, Ω separating for M′. HAVE NOT — the reverse
+  inclusion / full equality J M J = M′ (Tomita's hard half, named RvD route); no unbounded
+  Δ^{1/2}; no strip-KMS; no type; finite-stage Gibbs inductive-limit only. THE FULL MODULAR
+  DATA (S̄, Δ, Δ†=Δ, Δ^{it}=physical flow, Tomita I, J, polar-on-core, Tomita II inclusion)
+  now stands machine-checked for the tower limit state — the first Tomita–Takesaki modular
+  theory in any proof assistant.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

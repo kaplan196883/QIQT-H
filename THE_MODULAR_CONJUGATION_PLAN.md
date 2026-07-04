@@ -1,6 +1,6 @@
 # THE MODULAR CONJUGATION CAMPAIGN — J, the polar decomposition on the core, and Tomita II (inclusion)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3 (the continuous QG program).
+**Status:** COMPLETE (2026-07-05) — J1–J9 ALL LANDED, every increment first-try green, axiom-free std-3, budget 0. **Loop:** fe280fa3 (the continuous QG program).
 **Consult:** fable high-reasoning agent abf699ea3e200897d (2026-07-05) — every claim verified
 against sources; the full arithmetic + design record is in the consult.
 
@@ -71,7 +71,7 @@ against sources; the full arithmetic + design record is in the consult.
 - [x] **J8 — `TowerGNS/TomitaSecondHalf.lean`**: ✅ DONE SOTApprox.mem_centralizer (extract);
   towerRightMulCLM_mem_commutant; ★★ jconj_limitVN_mem_commutant (J M J ⊆ M′);
   M ⊆ J M′ J; Ω cyclic + separating for the commutant. Risk MEDIUM (assembly).
-- [ ] **J9 — checkpoint + audit** (verbatim below); plan → COMPLETE. Risk NIL.
+- [x] **J9 — checkpoint + audit** ✅ DONE (verbatim below); plan → COMPLETE. Risk NIL.
 
 ## The checkpoint language (J9, verbatim)
 
@@ -175,3 +175,13 @@ paths only.
   towerLimitVN′ — the SOT transport of J π(a) J = R_{jStage a}); the mirror M ⊆ J M′ J;
   Ω separating for the commutant (LANDED). Ω cyclic for M′ deferred (needs the antilinear
   span-image identity — plan note in the file). Std-3, budget 0. Next: J9 (checkpoint).
+
+- **2026-07-05** — **J9 LANDED — CAMPAIGN COMPLETE (9/9, ALL first-try green).** The
+  HAVE/HAVE-NOT stanza VERBATIM in TowerGNS/Checkpoint.lean. THE CAMPAIGN STANDS: the
+  modular conjugation J is a global anti-unitary (J² = 1, JΩ = Ω, ⟪Jξ,Jη⟫ = ⟪η,ξ⟫); the
+  polar decomposition S̄ = J∘Δ^{1/2} holds on the core; JΔ^{it} = Δ^{it}J; and Tomita's
+  second half in inclusion form: J·towerLimitVN·J ⊆ towerLimitVN′. Per the standing
+  continuous-QG directive the loop CONTINUES — the natural next campaign (re-consult):
+  the TYPE-NEGATIVE ladder (no tracial state on towerLimitVN; the Connes S-invariant from
+  the weight ratios w_n/w_m — the first formalized non-type-I / type-III factor) OR the
+  Rieffel–van Daele route to full J M J = M′.
