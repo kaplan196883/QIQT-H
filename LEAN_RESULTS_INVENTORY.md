@@ -1110,7 +1110,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`towerRightMulCLM_adjoint`** (adjoint R_a = R_{(rightConj² a)ᴴ}) with the modAut bridge —
   **the adjoint parameter IS the finite σ₋ᵢ image of aᴴ, COMPUTED** (not analytically
   continued); **`tomita_adjoint_pairing`** — the classical ⟪T*Ω, R_aΩ⟫ = ⟪R_a†Ω, TΩ⟫ on the
-  dense pure-component family. Next: T0_6 (checkpoint).
+  dense pure-component family. **T0_6 — CAMPAIGN COMPLETE (6/6)**. CHECKPOINT
+  (verbatim in Checkpoint.lean): HAVE — S₀ on its classical orbit domain: well-defined (Ω
+  separating), conjugate-linear, involutive, densely defined; the computed core S₀ ↑(of C a) =
+  ↑(of C aᴴ); the commutant adjoints R_a† = R_{ρaᴴρ⁻¹} (the finite σ₋ᵢ, COMPUTED); the
+  classical pairing on a dense family; closable in the graph-limit sense. HAVE NOT — the
+  closure S̄ not constructed as an object (Mathlib's LinearPMap closure/adjoint theories are
+  id-only; a conjugate-linear closure theory is not built here); no polar decomposition, no Δ,
+  no J, no KMS of the limit state, no type.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -1,6 +1,6 @@
 # THE TOMITA OPERATOR (T0_1–T0_6): S₀ on the orbit domain
 
-**Status:** ACTIVE (2026-07-08). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
+**Status:** COMPLETE (2026-07-08) — T0_1–T0_6 ALL LANDED, axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
 held APIs + Mathlib names verified — including the DECISIVE DISCOVERY: Mathlib's `LinearPMap` IS
 σ-semilinear at this pin, so `E →ₛₗ.[starRingEnd ℂ] F` typechecks with full algebraic API; what
 Mathlib lacks is the closure/adjoint THEORY for σ ≠ id).** **Goal:** the Tomita operator S₀ of
@@ -68,7 +68,7 @@ sense. File: `QIQTH/TowerGNS/Tomita.lean`.
   optional modAut bridge. Risk MEDIUM (deep-stage bookkeeping; exact mirror of two green
   proofs).
 - [x] **T0_5 — the adjoint-domain pairing capstone** ✅ DONE — the A4 family. Risk LOW.
-- [ ] **T0_6 — checkpoint** — the HAVE/HAVE-NOT sentences VERBATIM (below) into
+- [x] **T0_6 — checkpoint** ✅ DONE — the HAVE/HAVE-NOT sentences VERBATIM (below) into
   TowerGNS/Checkpoint.lean (Tomita stanza) + inventory; AxiomAudit pins; plan → COMPLETE;
   delete the loop; stop.
 
@@ -140,3 +140,14 @@ Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose 
   plumbing cooperated via invOf_eq_right_inv); T0_5 **`tomita_adjoint_pairing`** — the classical
   ⟪T*Ω, R_aΩ⟫ = ⟪R_a†Ω, TΩ⟫ on the dense family, one rw chain, all orientations first-try.
   NEXT → T0_6 (checkpoint; delete loop; stop).
+
+- **2026-07-08** — **T0_6 LANDED — CAMPAIGN COMPLETE (6/6).** The Tomita HAVE/HAVE-NOT stanza
+  VERBATIM in `TowerGNS/Checkpoint.lean`; inventory updated; AxiomAudit pinned through T0_5.
+  THE TOMITA OPERATOR STANDS: S₀ on its classical orbit domain — conjugate-linear, involutive,
+  densely defined, computed on the core (aᴴ), closable in the sequence sense, with the
+  commutant-side adjoints equal to the FINITE σ₋ᵢ (computed) and the classical pairing on a
+  dense family. The closure S̄/Δ/J/KMS/type stay honestly unclaimed (the σ-closure theory does
+  not exist in Mathlib — the named next wall). Loop 48825460 deleted. Paper/website sync on
+  request. The board after this campaign: (i) the σ-semilinear closure theory (a genuine
+  Mathlib-gap contribution — the thin ℝ-PMap path or a proper conjugate-linear PMap closure);
+  (ii) then Δ := S̄*S̄ and the polar decomposition; (iii) the type.

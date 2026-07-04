@@ -91,6 +91,24 @@ import QIQTH.TowerGNS.CyclicVector
   right ⋆-anti-representation laws are stated: exactly the operators the separation argument
   needs, nothing more."
 -/
+/-
+  THE TOMITA OPERATOR (T0_1–T0_6) — THE CAMPAIGN CHECKPOINT (all increments landed; axiom-free
+  std-3, budget 0).
+
+  HAVE: "The Tomita operator S₀ of the tower limit state is constructed on its classical orbit
+  domain {TΩ : T ∈ towerLimitVN}: it is well-defined (Ω is separating), conjugate-linear,
+  involutive, and densely defined; its action on the dense core of pure components is computed
+  exactly (S₀ ↑(of C a) = ↑(of C aᴴ)); the commutant-side right multiplications R_a admit the
+  exact adjoint R_a† = R_{ρ aᴴ ρ⁻¹} (the finite-stage σ₋ᵢ, computed — not analytically
+  continued), witnessing the pairing ⟪T*Ω, R_aΩ⟫ = ⟪R_a†Ω, TΩ⟫ on a dense family; consequently
+  S₀ is closable in the graph-limit sense (TₙΩ → 0 and Tₙ*Ω → v force v = 0)."
+
+  HAVE NOT: "The closure S̄ is not constructed as an object, and no polar decomposition, no
+  modular operator Δ, no modular conjugation J, no KMS condition of the limit state, and no von
+  Neumann type classification is constructed or claimed; Mathlib's LinearPMap closure and
+  adjoint theories cover only ℂ-linear (identity ring-hom) partial maps, and a conjugate-linear
+  closure theory is not built here."
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS
