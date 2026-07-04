@@ -8635,6 +8635,14 @@ namespace QIQTH.AxiomAudit
 -- group on TowerGNS — the door to the held Stone tower is open (generator NOT claimed). Std 3.
 #print axioms QIQTH.TowerGNS.continuous_towerFlow_apply
 #print axioms QIQTH.TowerGNS.norm_flowRaw_sub_of_sq
+-- THE GENERATOR G1+G2 (TowerGNS/Generator.lean): towerGen := stoneGen (towerFlow) — the
+-- SELF-ADJOINT UNBOUNDED GENERATOR of the transported modular dynamics (the five-argument
+-- instantiation of the held Stone theorem; two adapters — the named towerFlow_compL and
+-- le_of_eq ∘ norm_eq). THE ZERO-MODE: Ω ∈ dom(towerGen) with towerGen Ω = 0 (constant orbit).
+-- NOT log Δ / NOT a Tomita modular Hamiltonian (verbatim docstring); no PVM, no exp-recovery.
+-- Std 3.
+#print axioms QIQTH.TowerGNS.towerGen_isSelfAdjoint
+#print axioms QIQTH.TowerGNS.towerGen_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -1063,6 +1063,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   boundary identity — no Stone generator, no type classified; U_t defined by TRANSPORT). Track A
   sentences verbatim in `SpeciesCrossCheck.lean`. Both tracks complete.
 
+- **THE GENERATOR, G1+G2 — `QIQTH/TowerGNS/Generator.lean`** (**[AF]** std-3;
+  `THE_GENERATOR_PLAN.md`): **`towerGen := stoneGen (towerFlow)`** — the SELF-ADJOINT UNBOUNDED
+  GENERATOR of the tower's transported modular dynamics (`towerGen_isSelfAdjoint`, the
+  five-argument instantiation of the held Stone theorem — two adapters only); THE ZERO-MODE
+  **`towerGen_cyclicVec`** (Ω ∈ dom(K), KΩ = 0). NOT log Δ / NOT a Tomita modular Hamiltonian
+  (verbatim docstring); no PVM of the unbounded K; no exp-recovery (the wall open by design).
+  Next: G3 (the explicit commutator core).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

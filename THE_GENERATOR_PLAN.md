@@ -38,10 +38,10 @@ File: `QIQTH/TowerGNS/Generator.lean` (pattern = `Spectral/ModularGenerator.lean
 
 ## Increments
 
-- [ ] **G1 — `QIQTH/TowerGNS/Generator.lean`**: `towerFlow_compL` (the named adapter); `towerGen`
+- [x] **G1 — `QIQTH/TowerGNS/Generator.lean`** ✅ DONE: `towerFlow_compL` (the named adapter); `towerGen`
   def + the verbatim docstring; **`towerGen_isSelfAdjoint`** (the five-argument instantiation).
   Risk LOW (precedent replay).
-- [ ] **G2 — same file**: `towerCyclicVec_mem_stoneDomain` (constant orbit via funext on
+- [x] **G2 — same file** ✅ DONE: `towerCyclicVec_mem_stoneDomain` (constant orbit via funext on
   towerFlow_cyclicVec + differentiableAt_const); **`towerGen_cyclicVec`** — towerGen Ω = 0
   (stoneGen_eq_of_hasDerivAt with v := 0, hasDerivAt_const). THE ZERO-MODE. Risk LOW.
 - [ ] **G3 — same file — THE EXPLICIT CORE**: `hasDerivAt_expPhase` (isolated ℝ→ℂ phase
@@ -105,3 +105,11 @@ Consults: Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (nev
   adapters; stoneGen_eq_of_hasDerivAt is the domain workhorse; PVM/exp-recovery/Tomita cut —
   the recovery wall open by design; G3 = the one new-analysis increment, the commutator core).
   Loop armed.
+
+- **2026-07-07** — **G1+G2 LANDED, GREEN FIRST BUILD** (`QIQTH/TowerGNS/Generator.lean`,
+  axiom-free std-3, budget 0; fable subagent, zero iterations): `towerFlow_compL` (the named
+  orientation adapter); **`towerGen := stoneGen (towerFlow)`** with the verbatim not-Tomita
+  docstring; **`towerGen_isSelfAdjoint`** — THE SELF-ADJOINT UNBOUNDED GENERATOR of the
+  transported modular dynamics (the five-argument instantiation, ModularGenerator pattern);
+  **`towerGen_cyclicVec`** — THE ZERO-MODE: Ω ∈ dom(K), KΩ = 0 (constant orbit +
+  stoneGen_eq_of_hasDerivAt with v = 0). NEXT → G3 (the explicit commutator core).
