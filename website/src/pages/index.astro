@@ -38,14 +38,14 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
       <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
-        <span style="font-size:2rem;font-weight:800">31<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
-        <span style="font-size:2rem;font-weight:800">~4,200<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
+        <span style="font-size:2rem;font-weight:800">32<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">~4,230<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
       <p style="margin:.2rem 0 0;font-size:1.05rem"><strong>Headlines:</strong>
         the <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed) ·
         the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall) ·
-        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics its self-adjoint generator, and a cyclic–separating vector, and the Tomita operator itself, computed and closable</strong> ·
+        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics its self-adjoint generator, and a cyclic–separating vector, and the closed Tomita operator S̄, fully involutive on its domain</strong> ·
         the <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch) ·
         <strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).
         <a href="/formalization">Every claim, with its honest scope →</a></p>
@@ -339,8 +339,14 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           closability in the graph-limit sense (honestly scoped: the closure, Δ, J, KMS-at-limit,
           and type are not constructed — the σ-semilinear closure theory is the named next
           Mathlib gap).</li>
+        <li><strong>The closed Tomita operator S̄ of an inductive-limit state, with a conjugate-linear
+          closure theory</strong> — four abstract theorems new to Mathlib (including the
+          sequence-closability bridge, absent even for ordinary linear maps) deliver S̄ as an
+          object: closed, orbit-core, fixing Ω, conjugate-transpose on the dense core, and fully
+          involutive with trivial kernel — no adjoint and no real inner product used anywhere
+          (honestly scoped: Δ, J, polar decomposition, KMS-at-limit, and type not constructed).</li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-one.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-two.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority

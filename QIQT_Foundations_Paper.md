@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `137b334`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `6d45fb9`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1790,6 +1790,13 @@ m ren}\le Q$ proven rather than assumed; the von Neumann extension is the carrie
   • **The classical pairing**: $\langle T^*\Omega, R_a\Omega\rangle = \langle R_a^\dagger\Omega, T\Omega\rangle$ on the dense pure-component family ($F_0 \subseteq S_0^\sharp$ in family form).
   • **Closability**: $T_n\Omega \to 0$ and $T_n^*\Omega \to v$ force $v = 0$ — the graph-limit form, proved from the commutant orbit's density.
   • HAVE NOT, verbatim: the closure $\bar S$ is not constructed as an object, and no polar decomposition, no modular operator $\Delta$, no conjugation $J$, no KMS condition of the limit state, and no type classification is constructed or claimed; Mathlib's `LinearPMap` closure and adjoint theories cover only $\mathbb{C}$-linear (identity ring-hom) partial maps, and a conjugate-linear closure theory is not built here — the named next wall.
+
+
+*The conjugate closure (CC1--CC7): $\bar S$ as an object — and a new slice of Mathlib.* The closure of the Tomita operator now exists (`QIQTH/TowerGNS/ConjClosure.lean` abstract + `TomitaBar.lean`; axiom-free std-3, budget 0), built by the $\mathbb{R}$-reduction: a conjugate-linear map IS $\mathbb{R}$-linear, and Mathlib's entire partial-operator closure theory applies verbatim at $\mathbb{R}$ through the global `complexToReal` instances — no local instances anywhere.
+
+  • **Four new abstract theorems** (Mathlib-only imports — upstream-gap contributions): the $\mathbb{R}$-restriction view of a conjugate-linear partial map (no Mathlib helper existed); the SEQUENCE-CLOSABILITY BRIDGE (`isClosable_of_seq` — absent from Mathlib even for ordinary linear maps); and the two transfer theorems — conjugate-homogeneity and the involution SURVIVE closure (the twisted-map and swap-homeomorphism engines; no adjoint anywhere).
+  • **$\bar S$** (`towerTomitaBar`): closed, extending $S_0$ with the orbit domain as a CORE, $\bar S\Omega = \Omega$, conjugate-transpose on pure components, conjugate-homogeneous (twist-guarded: $\bar S(c\Omega) = \bar c\,\Omega$), and FULLY INVOLUTIVE on its domain with trivial kernel and range equal to domain.
+  • HAVE NOT, verbatim: $\Delta$, $J$, and the polar decomposition are not constructed (the documented $\Delta$ contract is the named next campaign); no $\sigma$-semilinear graph theory is contributed (the $\mathbb{R}$-reduction sidesteps it — the $\sigma$-graph remains Mathlib's own open TODO); no KMS condition of the limit state and no von Neumann type is claimed.
 
 ### 11.5 Credit division
 

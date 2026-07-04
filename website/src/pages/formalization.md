@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **389 files and ~4,200
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **391 files and ~4,230
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1095,6 +1095,31 @@ object, and no polar decomposition, no modular operator Δ, no modular conjugati
 condition of the limit state, and no von Neumann type classification is constructed or claimed;
 Mathlib's LinearPMap closure and adjoint theories cover only ℂ-linear (identity ring-hom)
 partial maps, and a conjugate-linear closure theory is not built here."
+
+</div>
+
+
+## The conjugate closure: S̄ as an object — and a new slice of Mathlib
+
+The closure of the Tomita operator exists, built by the **ℝ-reduction** (a conjugate-linear map
+IS ℝ-linear; Mathlib's closure theory applies verbatim through the global complexToReal
+instances — no local instances anywhere):
+
+- **Four new abstract theorems** (Mathlib-only imports — upstream-gap contributions): the
+  ℝ-restriction view of a conjugate-linear partial map; the **sequence-closability bridge**
+  (`isClosable_of_seq` — absent from Mathlib even for ordinary linear maps); and the transfer
+  theorems — conjugate-homogeneity and the involution *survive closure* (no adjoint anywhere).
+- **`towerTomitaBar`** — S̄: closed, extending S₀ with the orbit domain as a core, S̄Ω = Ω,
+  conjugate-transpose on pure components, twist-guarded conjugate-homogeneous, and **fully
+  involutive** with trivial kernel and range = domain.
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "The modular operator Δ, the conjugation
+J, and the polar decomposition are not constructed (the documented Δ contract … is the named
+next campaign); no σ-semilinear graph or closure theory is contributed to Mathlib here (the
+ℝ-reduction sidesteps it; the σ-graph remains Mathlib's own open TODO); no KMS condition of the
+limit state and no von Neumann type is claimed."
 
 </div>
 
