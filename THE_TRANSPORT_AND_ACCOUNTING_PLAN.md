@@ -65,7 +65,7 @@ stretch + checkpoints.
   Risk LOW-MED.
 - [x] **B6 — same file** ✅ DONE: `SOTApprox_conj_isometric`, `towerStageAlg_flow_invariant`, capstone
   **`towerLimitVN_flow_invariant`**. Risk LOW-MED.
-- [ ] **A1 — `QIQTH/Rigidity/RegulatorRigidity.lean`**: `regulator_forced_power`,
+- [x] **A1 — `QIQTH/Rigidity/RegulatorRigidity.lean`** ✅ DONE: `regulator_forced_power`,
   `regulator_dimension_calibration` (κ = 2), **`speciesRegulator_forced`** (the FORM forced),
   `dyadic_covariance_insufficient` witness, non-vacuity instance. Risk LOW-MED (drop the
   counterexample's monotonicity conjunct if it fights).
@@ -181,3 +181,15 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   `towerStageAlg_flow_conj` (stages ONTO stages); CAPSTONE **`towerLimitVN_flow_invariant`** (+
   iff form) — THE LIMIT ALGEBRA IS INVARIANT UNDER ITS TRANSPORTED DYNAMICS. towerLimitVN now has
   its dynamics. NEXT → A1 (RegulatorRigidity — Track A begins).
+
+- **2026-07-06** — **A1 LANDED — THE REGULATOR RIGIDITY THEOREM** (`QIQTH/Rigidity/
+  RegulatorRigidity.lean`, axiom-free std-3, budget 0; fable subagent, green first build):
+  `RegulatorFamily` (pos + covariance over an UNKNOWN g + mono — κ an OUTPUT, the vacuity
+  guard); **`regulator_forced_power`** (F Λ = F 1·Λ^κ, via A := log F − log F 1 discharged by
+  DS5's `monotone_logValuation`); `regulator_dimension_calibration` (ONE point pins κ = 2, no
+  rpow-injectivity needed — log route); CAPSTONE **`speciesRegulator_forced`** — the
+  Sakharov/Dvali FORM Σᵢ Fᵢ Λ = N_eff·Λ² FORCED for a shared-g family calibrated at a single
+  species; **`dyadic_covariance_insufficient`** (Λ²·(2+sin(2π log₂ Λ)): dyadic covariance +
+  positivity do NOT force the power form — Λ₀ = 2^{1/4} witness; monotonicity conjunct dropped
+  per plan); `toyRegulator` + `toyRegulator_realizes_inducedInvG` (non-vacuity BY RFL against
+  the held inducedInvG). The numbers stay cited. NEXT → A2 (HeatKernelOneD).

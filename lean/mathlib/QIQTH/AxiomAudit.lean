@@ -8603,6 +8603,16 @@ namespace QIQTH.AxiomAudit
 -- — THE LIMIT ALGEBRA IS INVARIANT UNDER ITS TRANSPORTED DYNAMICS. Std 3.
 #print axioms QIQTH.TowerGNS.towerFlow_conj_towerRep
 #print axioms QIQTH.TowerGNS.towerLimitVN_flow_invariant
+-- THE ACCOUNTING A1 (Rigidity/RegulatorRigidity.lean): THE REGULATOR RIGIDITY THEOREM —
+-- RegulatorFamily (pos + covariant over an UNKNOWN g + mono; κ an OUTPUT, the vacuity guard);
+-- regulator_forced_power (F Λ = F 1·Λ^κ via DS5 monotone_logValuation); dimension calibration
+-- (ONE point pins κ = 2); CAPSTONE speciesRegulator_forced — the Sakharov/Dvali FORM
+-- Σᵢ Fᵢ Λ = N_eff·Λ² FORCED (N_eff = Σ Fᵢ 1); dyadic_covariance_insufficient (the witness that
+-- weakened covariance breaks it); toyRegulator non-vacuity instance = inducedInvG by rfl. The
+-- NUMBERS stay cited Seeley–DeWitt data. Std 3.
+#print axioms QIQTH.Rigidity.regulator_forced_power
+#print axioms QIQTH.Rigidity.speciesRegulator_forced
+#print axioms QIQTH.Rigidity.dyadic_covariance_insufficient
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

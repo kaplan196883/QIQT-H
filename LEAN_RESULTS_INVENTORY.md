@@ -1036,7 +1036,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (U_t π_C(a) U_{−t} = π_C(σ_t a); covariance EXACT at pre-level, no germ) and CAPSTONE
   **`towerLimitVN_flow_invariant`** — the limit von Neumann algebra is INVARIANT under its
   transported dynamics (SOTApprox.conj + stages-onto-stages). towerLimitVN has its dynamics.
-  Next: A1 (regulator rigidity — Track A).
+  **A1 LANDED**
+  (`Rigidity/RegulatorRigidity.lean`): THE REGULATOR RIGIDITY THEOREM —
+  **`speciesRegulator_forced`**: the Sakharov/Dvali FORM 1/G = N_eff·Λ² is FORCED for any
+  positive, monotone, shared-covariance species family (κ an OUTPUT via DS5's log-valuation
+  rigidity; ONE dimensional calibration pins κ = 2), with the dyadic counterexample showing
+  weakened covariance breaks it and the non-vacuity instance = the held `inducedInvG` by rfl.
+  The c_i numbers stay CITED Seeley–DeWitt data. Next: A2 (the derived 1D heat coefficient).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
