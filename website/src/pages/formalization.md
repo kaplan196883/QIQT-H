@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **393 files and ~4,280
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **398 files and ~4,300
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1148,6 +1148,35 @@ proved — it is von Neumann's S̄*S̄ theorem, absent from Mathlib and named as
 polar decomposition, no J, no Δ^{1/2} or Δ^{it} (no unbounded positive square-root or spectral
 theory for partial operators exists in the pin), no KMS condition of the limit state, and no von
 Neumann type is constructed or claimed."
+
+</div>
+
+
+## The von Neumann campaign: Δ† = Δ — and von Neumann's theorem itself
+
+One campaign later, the modular operator is genuinely **self-adjoint** (six increments in a
+single session, four consecutive first-try greens):
+
+- **Three abstract Mathlib-gap files** (RCLike-generic, Mathlib-only imports): the
+  self-adjointness kernel (symmetric + ran(1+A) = ⊤ ⟹ A† = A); the von Neumann graph
+  orthogonal decomposition of a closed partial operator in ℓ²(E×E) (no adjoint anywhere); and
+  **von Neumann's theorem itself** — T†T densely defined and self-adjoint for closed densely
+  defined T, over any RCLike field. None exists in Mathlib at the pin.
+- **The i-twist** — conjugate-homogeneity upgrades the real graph-orthogonality pairing to the
+  full complex pairing, which lands *verbatim* in the ∃-Riesz F-domain membership:
+  **ran(1+Δ) = ⊤**.
+- **The headline** — **Δ† = Δ** (`towerModularOp_isSelfAdjoint`): the tower modular operator
+  is a genuinely self-adjoint, positive, closed, densely defined operator fixing Ω and
+  computed as the finite modular automorphism on the dense core; with kernel triviality and
+  the resolvent bound ‖x‖ ≤ ‖x + Δx‖.
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "Δ^{1/2} and the polar decomposition
+S̄ = JΔ^{1/2} are not constructed (so J is still not an object); the spectral resolution of the
+unbounded Δ is not built; Δ^{it} and the KMS property of the limit state are not proved — in
+particular NO claim that the transported dynamics equals the modular flow of Δ; no Tomita
+theorem at the algebra level; no von Neumann type statement."
 
 </div>
 
