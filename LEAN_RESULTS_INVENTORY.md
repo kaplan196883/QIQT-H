@@ -1301,7 +1301,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   statement. **N1 LANDED**: `NonTracial/FiniteNonTrace.lean` — ω(E_nm·E_mn) = w_n ≠ w_m =
   ω(E_mn·E_nm): the Gibbs state is not a trace. **N2 LANDED**: `TowerNonTrace.lean` — the tower vacuum
   vector state is non-tracial: ⟪Ω, π(E_nm)π(E_mn)Ω⟫ = w_n ≠ w_m = ⟪Ω, π(E_mn)π(E_nm)Ω⟫
-  (green first try). Next: N3 (Δ ≠ 1, Δ^{it} ≠ id), N4 (checkpoint).
+  (green first try). **N3 LANDED**: `ModularNonTrivial.lean` — pure matrix-unit components
+  are nonzero, **Δ ≠ 1** (towerModularOp_ne_id) and **Δ^{it} = towerFlow ≠ id**
+  (towerModUnitary_ne_id, phase exp(iπ) = −1) on a nonzero eigenvector when the weights
+  differ (green first try). Next: N4 (checkpoint → campaign COMPLETE).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

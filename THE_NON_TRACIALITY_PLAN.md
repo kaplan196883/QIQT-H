@@ -47,7 +47,7 @@ b*a = single m m 1 ⟹ tr = w_m. Unequal iff w_n ≠ w_m. Cross-checks: modAut �
   (risk LOW) `towerVacuum_not_tracial (h : w_n ≠ w_m) : ⟪Ω, π_C(single n m 1)(π_C(single m n
   1)Ω)⟫ ≠ ⟪Ω, π_C(single m n 1)(π_C(single n m 1)Ω)⟫`. Route: ContinuousLinearMap.mul_apply
   + map_mul (towerRep) to collapse π(a)(π(b)Ω) = π(a*b)Ω; towerRep_inner_cyclicVec; N1.
-- [ ] **N3 — `ModularNonTrivial.lean`: Δ ≠ 1 and Δ^{it} ≠ id.** (risk LOW-MEDIUM — the
+- [x] **N3 — `NonTracial/ModularNonTrivial.lean`: Δ ≠ 1 and Δ^{it} ≠ id.** ✅ DONE (risk LOW-MEDIUM — the
   ne_zero norm computation is the only fiddly step)
   `towerOf_single_ne_zero (hc : c ≠ 0) : ↑(of C (single n m c)) ≠ 0` (inner_coe_of_of +
   pairInner_embed at K=C + trace_diagonal_mul ⟹ |c|²·w_m > 0);
@@ -126,3 +126,9 @@ website files).
   towerRep is a unital ⋆-algebra hom into CLMs, so the word collapses via
   ContinuousLinearMap.mul_apply + map_mul, then towerRep_inner_cyclicVec (Ω on the left,
   orientation matched) + N1. Std-3, budget 0. Next: N3 (Δ ≠ 1, Δ^{it} ≠ id).
+
+- **2026-07-05** — **N3 LANDED (green first try).** ModularNonTrivial.lean:
+  ★ towerOf_single_ne_zero (pure component nonzero — gnsInner = tr(ρ·aᴴ·a), ᴴ on the FIRST
+  slot ⟹ weight w_m·|c|² > 0); ★ towerModularOp_ne_id (Δ ≠ 1 via the (w_n/w_m − 1)•v = 0
+  contradiction); ★ towerModUnitary_ne_id (Δ^{it} ≠ id at t = π/κ, phase exp(iπ) = −1 via
+  Complex.exp_pi_mul_I). Std-3, budget 0. Next: N4 (checkpoint → campaign COMPLETE).

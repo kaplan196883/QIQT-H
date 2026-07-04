@@ -8928,6 +8928,13 @@ namespace QIQTH.AxiomAudit
 -- non-tracial -- <<Omega, pi(E_nm) pi(E_mn) Omega>> = w_n != w_m = <<Omega, pi(E_mn)
 -- pi(E_nm) Omega>> (map_mul collapse + towerRep_inner_cyclicVec + N1). Std 3.
 #print axioms QIQTH.NonTracial.towerVacuum_not_tracial
+-- THE NON-TRACIALITY N3 (NonTracial/ModularNonTrivial.lean): modular non-triviality --
+-- pure matrix-unit components are nonzero (towerOf_single_ne_zero); Delta != 1
+-- (towerModularOp_ne_id) and Delta^{it} = towerFlow != id (towerModUnitary_ne_id, phase
+-- exp(i pi) = -1) on a nonzero eigenvector when the weights differ. Std 3.
+#print axioms QIQTH.NonTracial.towerOf_single_ne_zero
+#print axioms QIQTH.NonTracial.towerModularOp_ne_id
+#print axioms QIQTH.NonTracial.towerModUnitary_ne_id
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

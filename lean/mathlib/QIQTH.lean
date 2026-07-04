@@ -701,3 +701,4 @@ import QIQTH.QG.EntropyNotCardinality
 -- a state-level inequality, NOT a type classification (see the file header). Standard three:
 import QIQTH.NonTracial.FiniteNonTrace
 import QIQTH.NonTracial.TowerNonTrace
+import QIQTH.NonTracial.ModularNonTrivial
