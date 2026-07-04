@@ -1021,6 +1021,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   1973 stay cited, never invoked); Ω is not shown separating, the modular theory of the limit
   state on the completion is not constructed, and the representations are not shown isometric.
 
+- **THE TRANSPORT+ACCOUNTING, B1 — `QIQTH/TowerGNS/FlowPre.lean`** (**[AF]** std-3;
+  `THE_TRANSPORT_AND_ACCOUNTING_PLAN.md`): the per-corner Gibbs modular flow `cornerFlow` with
+  its full ⋆-automorphism + state-invariance law kit, all through the rescale bridge (no
+  cpow/diagPow anywhere); CAPSTONE **`gnsInner_cornerFlow`** (the GNS form is flow-invariant) +
+  **`cornerFlow_cornerEmbed`**. Next: B2 (flowRaw isometry + flowPre).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

@@ -8573,6 +8573,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.mem_towerLimitVN_iff
 #print axioms QIQTH.TowerGNS.towerRep_mem_towerLimitVN
 #print axioms QIQTH.TowerGNS.freqTowerLimitVN
+-- THE TRANSPORT B1 (TowerGNS/FlowPre.lean): the per-corner Gibbs modular flow's laws, ALL
+-- through the rescale bridge (sigmaDiag_gibbs_eq_alpha_rescale + held alpha_* — no cpow/diagPow
+-- entry facts anywhere): cornerFlow ⋆-automorphism (zero/mul/star/one/add/smul/comp),
+-- state-invariance (gibbs_stationary), CAPSTONE gnsInner_cornerFlow (the GNS form is
+-- flow-invariant) + cornerFlow_cornerEmbed (T7 equivariance rephrased). Std 3.
+#print axioms QIQTH.TowerGNS.gnsInner_cornerFlow
+#print axioms QIQTH.TowerGNS.cornerFlow_cornerEmbed
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

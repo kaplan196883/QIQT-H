@@ -49,7 +49,7 @@ stretch + checkpoints.
 
 ## Increments (in order; per-increment discipline below)
 
-- [ ] **B1 — `QIQTH/TowerGNS/FlowPre.lean`**: `sigmaDiag_gibbs_mul`/`_star`/`_one`,
+- [x] **B1 — `QIQTH/TowerGNS/FlowPre.lean`** ✅ DONE: `sigmaDiag_gibbs_mul`/`_star`/`_one`,
   `stateOf_sigmaDiag_gibbs`, capstone `gnsInner_sigmaDiag` (⟪σx,σy⟫_K = ⟪x,y⟫_K) — all through
   the rescale bridge. Risk LOW.
 - [ ] **B2 — same file**: `flowRaw t` (toModule; component = per-stage σ_t), `flowRaw_of`,
@@ -144,3 +144,12 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   free via the rescale bridge; covariance EXACT at pre-level, no germ; no LinearIsometry.extend in
   pin → mkContinuous-1 + CLM.completion; Track A candidate (d) cut as manufactured; (a) cut to its
   provable Gaussian fragment). Loop armed.
+
+- **2026-07-06** — **B1 LANDED, GREEN FIRST TRY** (`QIQTH/TowerGNS/FlowPre.lean`, axiom-free
+  std-3, budget 0; fable subagent): `cornerFlow` (the per-corner Gibbs modular flow) with the
+  FULL law kit — zero/mul/star/one/add/smul/comp, `stateOf_cornerFlow` (state invariance via
+  gibbs_stationary), CAPSTONE **`gnsInner_cornerFlow`** (the GNS form is flow-invariant — the
+  isometry seed for B2) and **`cornerFlow_cornerEmbed`** (T7's equivariance reoriented). Route
+  compliance verified: no cpow/diagPow entry facts anywhere — everything through the rescale
+  bridge + held alpha_*; add/smul by distributivity over the opaque conjugators. NEXT → B2
+  (flowRaw + isometry + flowPre, same file).
