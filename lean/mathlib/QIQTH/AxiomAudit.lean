@@ -8856,6 +8856,14 @@ namespace QIQTH.AxiomAudit
 -- IS the spectral modular flow of Delta. Std 3.
 #print axioms QIQTH.TowerGNS.towerModUnitary_eq_towerFlow
 #print axioms QIQTH.TowerGNS.towerGen_eq_stoneGen_towerModUnitary
+-- THE IDENTIFICATION ID5 (TowerGNS/TomitaFirstHalf.lean): TOMITA'S THEOREM, FIRST HALF, for
+-- the tower limit state -- Delta^{it} implements the modular automorphisms
+-- (Delta^{it} pi(a) Delta^{-it} = pi(sigma_t a)) and preserves towerLimitVN
+-- (Delta^{it} M Delta^{-it} = M, membership-iff form). JMJ = M' (second half) NOT claimed
+-- -- J is not constructed. Std 3.
+#print axioms QIQTH.TowerGNS.towerModUnitary_conj_towerRep
+#print axioms QIQTH.TowerGNS.towerLimitVN_modUnitary_invariant
+#print axioms QIQTH.TowerGNS.towerLimitVN_modUnitary_conj_mem_iff
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

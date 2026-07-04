@@ -1,4 +1,23 @@
 /-
+  THE IDENTIFICATION CAMPAIGN (ID1–ID5) — THE CAMPAIGN CHECKPOINT (all increments landed;
+  axiom-free std-3, budget 0; every increment first-try green).
+
+  HAVE: "The transported physical flow IS the spectral modular flow of Δ — towerFlow t = Δ^{it}
+  as operators, axiom-free; hence the strongly continuous unitary group of Δ implements
+  automorphisms of towerLimitVN at every stage and preserves the limit algebra: the first half
+  of Tomita's theorem (Δ^{it} M Δ^{−it} = M) for the tower limit state, plus the finite-stage
+  KMS boundary identity now attached to the genuine modular group of Δ, plus towerGen
+  identified as the generator of Δ^{it} — the modular theory of the physics equals the modular
+  theory of the state."
+
+  HAVE NOT: "J and the polar decomposition S̄ = JΔ^{1/2} are still not constructed (so
+  JMJ = M′, the second half of Tomita's theorem, stays open — the natural next campaign: J on
+  matrix units is also explicit, so the same eigenbasis method applies); no analytic strip-KMS
+  of the limit state (only the boundary identity); no von Neumann type classification; and
+  everything remains the finite-stage Gibbs inductive-limit state — the free-field/Type-III
+  continuum objects are untouched."
+-/
+/-
   THE REPRESENTATION — CHECKPOINT (THE_REPRESENTATION_PLAN.md, R1–R9 complete).
 
   This is a MARKER MODULE: it imports the capstone and declares nothing. Its docstring is the

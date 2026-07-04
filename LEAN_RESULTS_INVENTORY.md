@@ -1230,8 +1230,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the scalar matches cornerFlow_single character-for-character; green first try). **ID4 LANDED — ★★ THE EXPONENTIAL-RECOVERY
   WALL IS CROSSED ★★**: `Identification.lean` — towerModUnitary_eq_towerFlow (the
   transported physical flow IS the spectral modular flow of Δ, as operators) +
-  towerGen = stoneGen(Δ^{it}) (green first try). Next: ID5 (Tomita first half:
-  Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN + checkpoint).
+  towerGen = stoneGen(Δ^{it}) (green first try). **ID5 — CAMPAIGN COMPLETE (5/5, ALL
+  first-try green)**: `TomitaFirstHalf.lean` — Δ^{it} implements the modular automorphisms
+  (Δ^{it} π(a) Δ^{−it} = π(σ_t a)) and preserves the limit algebra:
+  **Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN — TOMITA'S THEOREM, FIRST HALF**, for the
+  tower limit state. CHECKPOINT (verbatim in Checkpoint.lean): HAVE — towerFlow = Δ^{it}
+  as operators; towerGen = generator of Δ^{it}; the modular theory of the physics equals
+  the modular theory of the state. HAVE NOT — J/polar (JMJ = M′ = the natural next
+  campaign, same eigenbasis method); no strip-KMS; no type; finite-stage Gibbs
+  inductive-limit only.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -1,6 +1,6 @@
 # THE IDENTIFICATION CAMPAIGN — towerFlow = Δ^{it} (crossing the exponential-recovery wall) + Tomita I
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3 (the continuous QG program).
+**Status:** COMPLETE (2026-07-05) — ID1–ID5 ALL LANDED, every increment first-try green, axiom-free std-3, budget 0. **Loop:** fe280fa3 (the continuous QG program).
 **Consult:** fable high-reasoning agent aa742bbcebadd4f05 (2026-07-05) — the eigenvector route
 VERIFIED against sources; decision (A)+(B)-lite in one campaign.
 
@@ -63,7 +63,7 @@ agreeing on a dense span are equal. Verified by the consult:
   Σ_{n,m} exp(…) • ↑(of C (single n m (a n m))) — flow side via cornerFlow_eq_sum_single +
   towerOf_sum_single_smul_coe, U side via matrix_eq_sum_single + map_sum + ID3. THIS
   CROSSES THE EXPONENTIAL-RECOVERY WALL. Risk MEDIUM (plumbing only).
-- [ ] **ID5 — Tomita's theorem, first half, + checkpoint**: towerModUnitary_towerRep,
+- [x] **ID5 — Tomita's theorem, first half, + checkpoint**: ✅ DONE towerModUnitary_towerRep,
   towerModUnitary_conj_towerRep (Δ^{it} π_C(a) Δ^{−it} = π_C(σ_t a));
   **towerLimitVN_modUnitary_invariant + iff: Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN**
   (rewrites of the FlowCovariance lemmas); bonus: towerGen = the Stone generator of Δ^{it}
@@ -135,3 +135,12 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   character); plus the bonus towerGen_eq_stoneGen_towerModUnitary (towerGen = the Stone
   generator of Δ^{it} — the group-level content of towerGen = log Δ). Std-3, budget 0.
   Next: ID5 (Tomita first half + checkpoint).
+
+- **2026-07-05** — **ID5 LANDED — CAMPAIGN COMPLETE (5/5, ALL first-try green).**
+  TomitaFirstHalf.lean: towerModUnitary_towerRep + conj form (Δ^{it} π(a) Δ^{−it} =
+  π(σ_t a)); ★ towerLimitVN_modUnitary_invariant + iff (Δ^{it} M Δ^{−it} = M — TOMITA'S
+  THEOREM, FIRST HALF, for the tower limit state). Checkpoint stanza verbatim in
+  Checkpoint.lean. THE CAMPAIGN STANDS: the modular theory of the physics equals the
+  modular theory of the state. Per the standing continuous-QG directive the loop
+  CONTINUES — the natural next campaign: J and the polar decomposition (JMJ = M′, Tomita
+  second half) via the same eigenbasis method.
