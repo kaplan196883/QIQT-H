@@ -57,7 +57,7 @@ agreeing on a dense span are equal. Verified by the consult:
   Case v = 0 trivial; else mem_spectrum_of_eigenvector at r = (1+δ)⁻¹,
   borelFC_apply_eigenvector, symbol evaluation ((1−(1+δ)⁻¹)/(1+δ)⁻¹ = δ; Real.log_div;
   template towerModUnitary_cyclicVec). Risk MEDIUM (the real-arithmetic step).
-- [ ] **ID4 — ★ THE IDENTIFICATION ★**: `towerModUnitary_eq_towerFlow : ∀ t,
+- [x] **ID4 — ★ THE IDENTIFICATION ★**: ✅ DONE `towerModUnitary_eq_towerFlow : ∀ t,
   towerModUnitary L ω β t = towerFlow L ω β t`. ContinuousLinearMap.ext_on
   (dense_span_towerRep_cyclicVec); rintro ⟨C,a,rfl⟩; towerRep_cyclicVec_of; both sides =
   Σ_{n,m} exp(…) • ↑(of C (single n m (a n m))) — flow side via cornerFlow_eq_sum_single +
@@ -127,3 +127,11 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   ★ towerModUnitary_of_single — the scalar is CHARACTER-FOR-CHARACTER the
   cornerFlow_single / towerFlow_of_eq_sum_single scalar (single-cast form, n−m sign).
   ID4's rewrite will be syntactic. Std-3, budget 0. Next: ID4 ★ THE IDENTIFICATION ★.
+
+- **2026-07-05** — **ID4 LANDED — ★★ THE EXPONENTIAL-RECOVERY WALL IS CROSSED ★★ (green
+  first try).** Identification.lean: towerModUnitary_eq_towerFlow — the transported
+  physical flow IS the spectral modular flow of Δ, as operators (ext_on the dense cyclic
+  span; both sides reduce to the same eigenbasis sum, scalars matching character-for-
+  character); plus the bonus towerGen_eq_stoneGen_towerModUnitary (towerGen = the Stone
+  generator of Δ^{it} — the group-level content of towerGen = log Δ). Std-3, budget 0.
+  Next: ID5 (Tomita first half + checkpoint).

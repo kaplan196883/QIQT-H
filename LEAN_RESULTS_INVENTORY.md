@@ -1227,8 +1227,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (1+w_n/w_m)⁻¹), with the general transport Δx = δ•x ⟹ Rx = (1+δ)⁻¹•x (green first try).
   **ID3 LANDED**: `ModularUnitaryEigen.lean` — U_t acts
   diagonally on the eigenbasis (exp(I·t·log δ) on Δ-eigenvectors; on matrix-unit components
-  the scalar matches cornerFlow_single character-for-character; green first try). Next:
-  ID4 (★ towerModUnitary = towerFlow ★ — crossing the exponential-recovery wall), ID5.
+  the scalar matches cornerFlow_single character-for-character; green first try). **ID4 LANDED — ★★ THE EXPONENTIAL-RECOVERY
+  WALL IS CROSSED ★★**: `Identification.lean` — towerModUnitary_eq_towerFlow (the
+  transported physical flow IS the spectral modular flow of Δ, as operators) +
+  towerGen = stoneGen(Δ^{it}) (green first try). Next: ID5 (Tomita first half:
+  Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN + checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

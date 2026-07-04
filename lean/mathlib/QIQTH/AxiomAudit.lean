@@ -8850,6 +8850,12 @@ namespace QIQTH.AxiomAudit
 -- character-for-character the cornerFlow_single scalar. Std 3.
 #print axioms QIQTH.TowerGNS.towerModUnitary_of_eigen
 #print axioms QIQTH.TowerGNS.towerModUnitary_of_single
+-- THE IDENTIFICATION ID4 (TowerGNS/Identification.lean): ** THE EXPONENTIAL-RECOVERY WALL,
+-- CROSSED ** -- towerModUnitary t = towerFlow t as operators (dense-span extension of the
+-- eigenbasis match), and towerGen = stoneGen(Delta^{it}) -- the transported physical flow
+-- IS the spectral modular flow of Delta. Std 3.
+#print axioms QIQTH.TowerGNS.towerModUnitary_eq_towerFlow
+#print axioms QIQTH.TowerGNS.towerGen_eq_stoneGen_towerModUnitary
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
