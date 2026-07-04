@@ -12,7 +12,7 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 
 ## 0. Overall status (meta-audit, verified)
 
-- **~2263 `#print axioms` directives** in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
+- **~2708 `#print axioms` directives** (2026-07-07 recount) in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
   `sorry`/`sorryAx`** in code. Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` body in
   the whole tree is a harmless indiscrete-preorder witness (`LorentzWitness.lean:180`).
 - **What "axiom-free" means here:** the *conditional/structural mathematics* rests on no hidden axiom. It does
@@ -23,7 +23,7 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (Donald/DPI/Araki/EntropyBridge ledger) and the top-level clusters (RelEntPositivity, Goldstein–Struyve).
 - **What the budget check does NOT do:** detect logical inconsistency or a false premise (only counts axioms +
   catches `sorry`). Irrelevant at axiom count 0; honestly noted in-script.
-- **Coverage caveat (full-sweep audit, 299 files):** soundness is comprehensive (full-tree grep: zero axioms,
+- **Coverage caveat (full-sweep audit; 388 tracked files as of 2026-07-07):** soundness is comprehensive (full-tree grep: zero axioms,
   zero sorry). The `#print axioms` *audit pins* most theorems, and the **headline capstones are now individually
   pinned** — `SakharovRatio.sakharov_ratio`, `strong_subadditivity`, the GR/crossed-product capstones,
   `ValueSelection.*`, and this session's `ModularEnergyBound` (B1–B7), `OperationalCapacity`, `MaxEntropyCapacity`.
