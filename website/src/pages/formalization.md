@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **388 files and ~4,170
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **389 files and ~4,200
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1067,6 +1067,34 @@ axiom-free (`RightMul.lean`, `Separation.lean`):
 <strong>Honest scope (checkpoint, verbatim).</strong> "No Tomita operator S₀, no modular
 operator Δ, no conjugation J, no KMS condition at the limit, and no type classification is
 constructed or claimed here — separation is the HYPOTHESIS for that theory, not the theory."
+
+</div>
+
+
+## The Tomita operator: S₀, computed and closable
+
+Modular theory proper begins: **`towerTomita₀`** — the Tomita operator of the tower limit state
+on its classical orbit domain, as a genuine conjugate-linear (σ-semilinear) partial operator:
+
+- **Well-defined because Ω is separating** (the previous campaign's capstone doing its job);
+  involutive; densely defined; **S₀Ω = Ω**; and the **computed core action
+  S₀ ↑(of<sub>C</sub> a) = ↑(of<sub>C</sub> aᴴ)** — the Tomita involution is conjugate-transpose
+  on pure components.
+- **The finite σ₋ᵢ, computed** — the commutant-side right multiplications carry the exact
+  adjoint **R<sub>a</sub>† = R<sub>ρaᴴρ⁻¹</sub>** (the engine squared + the modAut bridge): the
+  honest finite-tower substitute for KMS analyticity, a theorem rather than an analytic
+  continuation.
+- **The classical pairing** ⟪T*Ω, R<sub>a</sub>Ω⟫ = ⟪R<sub>a</sub>†Ω, TΩ⟫ on a dense family,
+  and **closability** in the graph-limit sense (T<sub>n</sub>Ω → 0 ∧ T<sub>n</sub>*Ω → v ⟹
+  v = 0).
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "The closure S̄ is not constructed as an
+object, and no polar decomposition, no modular operator Δ, no modular conjugation J, no KMS
+condition of the limit state, and no von Neumann type classification is constructed or claimed;
+Mathlib's LinearPMap closure and adjoint theories cover only ℂ-linear (identity ring-hom)
+partial maps, and a conjugate-linear closure theory is not built here."
 
 </div>
 
