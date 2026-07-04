@@ -1243,8 +1243,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 **THE MODULAR CONJUGATION CAMPAIGN (ACTIVE, THE_MODULAR_CONJUGATION_PLAN.md)** — J, the
   polar decomposition on the core, Tomita II (inclusion). **J1 LANDED**: `JStage.lean` —
   the finite J layer: jStage = √ρ·aᴴ·√ρ⁻¹ with the verified eigenbasis scalar √(w_m/w_n),
-  the polar-core trio, and the single-stage anti-isometry (green first try). Next: J2
-  (cornerEmbed_jStage — the cross-stage law via THE ENGINE E1).
+  the polar-core trio, and the single-stage anti-isometry (green first try). **J2 LANDED**: `JEmbed.lean` — the cross-stage
+  law (jStage commutes with the stage embedding, via THE ENGINE E1) + J commutes with the
+  finite modular flow (green first try). Next: J3 (jRaw → jPre → towerJ, the σ-semilinear
+  completion).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -8873,6 +8873,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.gnsInner_jStage
 #print axioms QIQTH.TowerGNS.jStage_deltaHalfStage
 #print axioms QIQTH.TowerGNS.deltaHalfStage_sq
+-- THE MODULAR CONJUGATION J2 (TowerGNS/JEmbed.lean): the cross-stage law -- jStage commutes
+-- with the stage embedding (THE ENGINE E1 at b := jStage a; new-link weights cancel) and
+-- with the finite modular flow (diagPow conjTranspose = -t, diagonal commutation). Std 3.
+#print axioms QIQTH.TowerGNS.cornerEmbed_jStage
+#print axioms QIQTH.TowerGNS.cornerFlow_jStage
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

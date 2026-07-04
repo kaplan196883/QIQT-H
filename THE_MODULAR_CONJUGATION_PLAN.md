@@ -48,7 +48,7 @@ against sources; the full arithmetic + design record is in the consult.
   modAut∘ᴴ; deltaHalfStage_sq = modAut (invOf trick, Tomita.lean:490);
   gnsInner_jStage anti-isometry; rightConj_jStage = ᴴ; involutive/one/anti_mul/conj-smul).
   Risk LOW.
-- [ ] **J2 — cross-stage law**: `cornerEmbed_jStage` via E1 + rightConj_jStage +
+- [x] **J2 — cross-stage law**: ✅ DONE `cornerEmbed_jStage` via E1 + rightConj_jStage +
   sqrtGibbs_mul_sqrtInvGibbs + cornerEmbed_star (entrywise sqrt_gibbsWeight_exchange
   fallback); `cornerFlow_jStage` (diagonal conjugators commute). Risk LOW-MEDIUM.
 - [ ] **J3 — `TowerGNS/ConjPre.lean`**: jRaw (σ-semilinear on ⨁, jRaw_of simp),
@@ -127,3 +127,11 @@ paths only.
   Δ½² = modAut); ★ gnsInner_jStage (single-stage anti-isometry, trace-cycled);
   rightConj_jStage = ᴴ (the J2 engine feed); + 5 toolkit extensions. Std-3, budget 0.
   Next: J2 (the cross-stage law).
+
+- **2026-07-05** — **J2 LANDED (green first try).** JEmbed.lean: ★ cornerEmbed_jStage
+  (THE CROSS-STAGE LAW — E1 at b := jStage a + rightConj_jStage + cornerEmbed_star, exactly
+  the primary route, no fallback needed); cornerFlow_jStage (J commutes with the finite
+  flow; new helpers diagPow_gibbs_conjTranspose (= −t) + S/S⁻¹–diagPow commutation — the
+  ᴴ flips entries AND the sandwich, restoring +t). Std-3, budget 0. Next: J3 (jRaw/jPre/
+  towerJ — the semilinear completion). NOTE: commits LOCAL ONLY per user instruction —
+  do not push until told.
