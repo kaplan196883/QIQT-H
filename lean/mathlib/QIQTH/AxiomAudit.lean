@@ -8723,6 +8723,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerTomitaBar_involutive
 #print axioms QIQTH.TowerGNS.towerTomitaBar_conjHomogeneous
 #print axioms QIQTH.TowerGNS.dense_towerTomitaBar_domain
+-- THE MODULAR OPERATOR M1+M2 (TowerGNS/ConjAdjoint.lean — ABSTRACT): the ∃-Riesz conjugate
+-- adjoint — conjAdjointDom (the witness domain; smul twist starRingEnd c • w DERIVED);
+-- conjAdjoint g hd : E →ₛₗ.[starRingEnd ℂ] E (uniqueness by Dense.eq_of_inner_left; the ONE
+-- spec lemma; no toDual/CLM-extension/boundedness/completeness); conjAdjoint_closed (sequence
+-- form); M2 pairing_extends_of_closure (the equalizer core-extension — ~12 lines). Std 3.
+#print axioms QIQTH.ConjAdjoint.conjAdjoint_apply_spec
+#print axioms QIQTH.ConjAdjoint.conjAdjoint_closed
+#print axioms QIQTH.ConjAdjoint.pairing_extends_of_closure
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

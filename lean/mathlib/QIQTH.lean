@@ -102,6 +102,7 @@ import QIQTH.TowerGNS.Separation
 import QIQTH.TowerGNS.Tomita
 import QIQTH.TowerGNS.ConjClosure
 import QIQTH.TowerGNS.TomitaBar
+import QIQTH.TowerGNS.ConjAdjoint
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

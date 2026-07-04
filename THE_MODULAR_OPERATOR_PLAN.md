@@ -47,11 +47,11 @@ abstract `QIQTH/TowerGNS/ConjAdjoint.lean` + concrete `QIQTH/TowerGNS/ModularOp.
 
 ## Increments
 
-- [ ] **M1 — `QIQTH/TowerGNS/ConjAdjoint.lean` (ABSTRACT, Mathlib-only):** `conjAdjointDom g`
+- [x] **M1 — `QIQTH/TowerGNS/ConjAdjoint.lean` (ABSTRACT, Mathlib-only):** ✅ DONE `conjAdjointDom g`
   (∃-Riesz Submodule ℂ over g : E →ₗ.[ℝ] E); witness def + THE ONE SPEC LEMMA; uniqueness
   (density hypothesis); `conjAdjoint g hd : E →ₛₗ.[starRingEnd ℂ] E`; graph closedness;
   conj-homogeneity. Risk LOW (the tomitaFun pattern).
-- [ ] **M2 — same file:** the equalizer core-extension lemma (closed set ⊇ graph ⟹ ⊇ graph of
+- [x] **M2 — same file:** ✅ DONE the equalizer core-extension lemma (closed set ⊇ graph ⟹ ⊇ graph of
   closure). Risk LOW.
 - [ ] **M3 — `QIQTH/TowerGNS/ModularOp.lean` (concrete):** `towerTomitaF := conjAdjoint
   towerTomitaBar dense_…`; memberships + **F↑(of C b) = ↑(of C ((rightConj² b)ᴴ))** (M2 +
@@ -119,3 +119,13 @@ expose keys).
   adjoint theory; the headline Δ↑(of C a) = ↑(of C (modAut ρ a)) verified to close via
   tomita_adjoint_pairing + the modAut bridge; von Neumann Δ† = Δ cut and named). The
   continuous-QG loop carries this campaign.
+
+- **2026-07-08** — **M1+M2 LANDED, GREEN FIRST BUILD** (`QIQTH/TowerGNS/ConjAdjoint.lean`,
+  abstract, axiom-free std-3, budget 0; fable subagent): `conjAdjointDom` (the ∃-Riesz witness
+  domain; the smul twist starRingEnd c • w DERIVED, not guessed); `conjAdjoint g hd` — the
+  conjugate-linear adjoint as a semilinear PMap (uniqueness by Dense.eq_of_inner_left —
+  orientation verified: dense in the SECOND slot, no conj-flip needed; the ONE spec lemma +
+  choice-discharge + congr adapter — the tomitaFun pattern); `conjAdjoint_closed` (sequence
+  form); M2 `pairing_extends_of_closure` (~12 lines, the equalizer). BONUS FINDING: the
+  ConjHomogeneous hypothesis is UNNEEDED for M1 — the ∃-form closes without ℂ-linearity of the
+  pairing. NEXT → M3 (towerTomitaF at TowerGNS).

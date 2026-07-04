@@ -1138,6 +1138,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   constructed (the Δ contract is the named next campaign); no σ-semilinear graph theory (the
   ℝ-reduction sidesteps it — the σ-graph stays Mathlib's open TODO); no KMS-at-limit, no type.
 
+- **THE MODULAR OPERATOR, M1+M2 — `QIQTH/TowerGNS/ConjAdjoint.lean`** (**[AF]** std-3,
+  ABSTRACT; `THE_MODULAR_OPERATOR_PLAN.md`): the ∃-Riesz CONJUGATE-LINEAR ADJOINT —
+  `conjAdjointDom` (witness domain, twist derived) + **`conjAdjoint g hd : E →ₛₗ.[starRingEnd ℂ]
+  E`** (uniqueness by density; one spec lemma; NO toDual, NO CLM extension, NO boundedness
+  predicate, NO completeness) + sequence-form closedness + the equalizer core-extension lemma.
+  Next: M3–M5 (towerTomitaF, Δ, the modAut headline).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
