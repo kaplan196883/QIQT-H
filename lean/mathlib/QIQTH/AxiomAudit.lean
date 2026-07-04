@@ -8643,6 +8643,14 @@ namespace QIQTH.AxiomAudit
 -- Std 3.
 #print axioms QIQTH.TowerGNS.towerGen_isSelfAdjoint
 #print axioms QIQTH.TowerGNS.towerGen_cyclicVec
+-- THE GENERATOR G3 (Generator.lean cont.): THE EXPLICIT CORE — hasDerivAt_expPhase (the
+-- isolated phase derivative); cornerGenMatrix + cornerGenMatrix_eq_commutator ([diag(log w), a]);
+-- CAPSTONE towerGen_of — towerGen ↑(of C a) = ↑(of C ([H_C, a])): THE GENERATOR IS COMPUTED,
+-- not just certified; coe_pre_mem_stoneDomain (every coerced pre-vector in the domain);
+-- dense_stoneDomain CONSTRUCTIVELY (denseRange_coe — no Gårding mollification). Std 3.
+#print axioms QIQTH.TowerGNS.towerGen_of
+#print axioms QIQTH.TowerGNS.cornerGenMatrix_eq_commutator
+#print axioms QIQTH.TowerGNS.dense_stoneDomain
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

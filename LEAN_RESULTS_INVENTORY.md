@@ -1069,7 +1069,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   five-argument instantiation of the held Stone theorem — two adapters only); THE ZERO-MODE
   **`towerGen_cyclicVec`** (Ω ∈ dom(K), KΩ = 0). NOT log Δ / NOT a Tomita modular Hamiltonian
   (verbatim docstring); no PVM of the unbounded K; no exp-recovery (the wall open by design).
-  Next: G3 (the explicit commutator core).
+  **G3 LANDED — THE EXPLICIT CORE**: CAPSTONE
+  **`towerGen_of`** — towerGen ↑(of C a) = ↑(of C ([H_C, a])) with H_C = diagonal(log
+  gibbsWeight) (`cornerGenMatrix_eq_commutator`): THE GENERATOR IS COMPUTED on every pure
+  component, every coerced pre-vector is in the domain, and **`dense_stoneDomain`** holds
+  CONSTRUCTIVELY (no Gårding mollification). Next: G4 (flow covariance of the generator).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

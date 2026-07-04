@@ -44,7 +44,7 @@ File: `QIQTH/TowerGNS/Generator.lean` (pattern = `Spectral/ModularGenerator.lean
 - [x] **G2 — same file** ✅ DONE: `towerCyclicVec_mem_stoneDomain` (constant orbit via funext on
   towerFlow_cyclicVec + differentiableAt_const); **`towerGen_cyclicVec`** — towerGen Ω = 0
   (stoneGen_eq_of_hasDerivAt with v := 0, hasDerivAt_const). THE ZERO-MODE. Risk LOW.
-- [ ] **G3 — same file — THE EXPLICIT CORE**: `hasDerivAt_expPhase` (isolated ℝ→ℂ phase
+- [x] **G3 — same file — THE EXPLICIT CORE** ✅ DONE: `hasDerivAt_expPhase` (isolated ℝ→ℂ phase
   derivative); `cornerGenMatrix` + the commutator corollary ([diagonal(log∘w), a] entrywise);
   the orbit decomposition; `towerOf_mem_stoneDomain`; **`towerGen_of`** — towerGen ↑(of C a) =
   ↑(of C (cornerGenMatrix C a)) — THE GENERATOR IS COMPUTED, NOT JUST CERTIFIED; every coerced
@@ -113,3 +113,14 @@ Consults: Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (nev
   transported modular dynamics (the five-argument instantiation, ModularGenerator pattern);
   **`towerGen_cyclicVec`** — THE ZERO-MODE: Ω ∈ dom(K), KΩ = 0 (constant orbit +
   stoneGen_eq_of_hasDerivAt with v = 0). NEXT → G3 (the explicit commutator core).
+
+- **2026-07-07** — **G3 LANDED — THE EXPLICIT CORE** (Generator.lean extended, axiom-free std-3,
+  budget 0; fable subagent): `hasDerivAt_expPhase` (the isolated phase derivative — id.ofReal_comp
+  → const_mul I → mul_const κ → cexp → smul_const); `cornerGenMatrix` +
+  **`cornerGenMatrix_eq_commutator`** ([diag(log w), a]); CAPSTONE **`towerGen_of`** —
+  towerGen ↑(of C a) = ↑(of C ([H_C, a])): THE GENERATOR IS COMPUTED, NOT JUST CERTIFIED (orbit
+  = finite sum of phase orbits, pinned by stoneGen_eq_of_hasDerivAt); `coe_pre_mem_stoneDomain`
+  (via the towerCoe house wrapper — the raw double-ascription doesn't elaborate);
+  **`dense_stoneDomain`** CONSTRUCTIVELY (denseRange_coe — Gårding-free). Lean notes: this pin
+  has Matrix.single/matrix_eq_sum_single (not stdBasisMatrix); HasDerivAt.fun_sum (not .sum);
+  sums in towerCoe args must be ascribed to raw ⨁ (the R3 lesson, sum edition). NEXT → G4.
