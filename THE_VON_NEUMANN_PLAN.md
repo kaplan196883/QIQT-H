@@ -44,7 +44,7 @@ the entire modular tower — waiting on one theorem.
 
 ## The increments
 
-- [ ] **VN1 — `QIQTH/VonNeumann/SelfAdjointCriterion.lean`** (abstract kernel, RCLike,
+- [x] **VN1 — `QIQTH/VonNeumann/SelfAdjointCriterion.lean`** ✅ DONE (abstract kernel, RCLike,
   reusable): `isSelfAdjoint_of_isFormalAdjoint_of_one_add_surjective`: densely defined +
   IsFormalAdjoint A A + (∀ h, ∃ x : A.domain, ↑x + A x = h) ⟹ IsSelfAdjoint A. Route:
   le_adjoint; for z in dom A†, surject z + A†z, u := z − x has u + A†u = 0; ⟪u, y + Ay⟫ = 0
@@ -119,3 +119,10 @@ log/status) before each increment; explicit git paths only.
   Mathlib inventory verified file-by-file in the pin — no T*T theorem anywhere, the kernel
   criterion, graph decomposition, and adjointComp are all new). THE MODULAR OPERATOR campaign
   (M1–M7) closed immediately prior; paper/website/inventory synced (33rd first, a47d23e).
+
+- **2026-07-05** — **VN1 LANDED (green FIRST TRY, zero error iterations).**
+  VonNeumann/SelfAdjointCriterion.lean: `isSelfAdjoint_of_isFormalAdjoint_of_one_add_surjective`
+  — the abstract kernel over any RCLike field, Mathlib-only imports, genuine Star-based
+  IsSelfAdjoint (instStar + isSelfAdjoint_def confirmed at the pin), structured on the
+  stoneGen_isSelfAdjoint template with an abel-normalized subtraction (no ±i, field-generic);
+  + corollary `adjoint_eq_...`. Std-3, budget 0. Next: VN2 (graph decomposition in WithLp 2).

@@ -1158,6 +1158,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   NOT — Δ† = Δ (von Neumann's S̄*S̄ theorem, absent from Mathlib — the named next target); no
   J/polar/Δ^{1/2}/Δ^{it}; no KMS-at-limit; no type.
 
+**THE VON NEUMANN CAMPAIGN (ACTIVE, THE_VON_NEUMANN_PLAN.md)** — Δ† = Δ (von Neumann's S̄*S̄
+  theorem, absent from Mathlib). **VN1 LANDED**: `QIQTH/VonNeumann/SelfAdjointCriterion.lean` —
+  `isSelfAdjoint_of_isFormalAdjoint_of_one_add_surjective`: densely defined + symmetric +
+  ran(1+A) = ⊤ ⟹ IsSelfAdjoint A, over any RCLike field, Mathlib-only imports (a reusable
+  Mathlib-gap kernel; green first try). Next: VN2 (the von Neumann graph decomposition of a
+  closed LinearPMap in WithLp 2 (E×E)).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

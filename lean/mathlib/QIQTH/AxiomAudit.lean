@@ -8754,6 +8754,11 @@ namespace QIQTH.AxiomAudit
 -- defined ⟹ closable, zero new theory). Δ† = Δ (von Neumann) NOT claimed. Std 3.
 #print axioms QIQTH.TowerGNS.towerModularOp_le_adjoint
 #print axioms QIQTH.TowerGNS.towerModularOp_isClosable
+-- THE VON NEUMANN VN1 (VonNeumann/SelfAdjointCriterion.lean): the abstract kernel criterion --
+-- densely defined + IsFormalAdjoint A A + ran(1+A) = top implies IsSelfAdjoint A, over any
+-- RCLike field, Mathlib-only imports (absent from Mathlib at this pin). Std 3.
+#print axioms QIQTH.VonNeumann.isSelfAdjoint_of_isFormalAdjoint_of_one_add_surjective
+#print axioms QIQTH.VonNeumann.adjoint_eq_of_isFormalAdjoint_of_one_add_surjective
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
