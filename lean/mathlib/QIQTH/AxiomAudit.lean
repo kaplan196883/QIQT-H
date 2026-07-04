@@ -8878,6 +8878,12 @@ namespace QIQTH.AxiomAudit
 -- with the finite modular flow (diagPow conjTranspose = -t, diagonal commutation). Std 3.
 #print axioms QIQTH.TowerGNS.cornerEmbed_jStage
 #print axioms QIQTH.TowerGNS.cornerFlow_jStage
+-- THE MODULAR CONJUGATION J3 (TowerGNS/ConjPre.lean): jRaw -> jPre -> towerJ -- the
+-- sigma-semilinear completion (starRingEnd C), NO R-reduction (Mathlib's
+-- ContinuousLinearMap.completion is sigma-generic); the raw anti-isometry
+-- rawInner (jRaw x) (jRaw y) = rawInner y x. Std 3.
+#print axioms QIQTH.TowerGNS.rawInner_jRaw
+#print axioms QIQTH.TowerGNS.towerJ_coe
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

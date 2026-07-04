@@ -51,7 +51,7 @@ against sources; the full arithmetic + design record is in the consult.
 - [x] **J2 — cross-stage law**: ✅ DONE `cornerEmbed_jStage` via E1 + rightConj_jStage +
   sqrtGibbs_mul_sqrtInvGibbs + cornerEmbed_star (entrywise sqrt_gibbsWeight_exchange
   fallback); `cornerFlow_jStage` (diagonal conjugators commute). Risk LOW-MEDIUM.
-- [ ] **J3 — `TowerGNS/ConjPre.lean`**: jRaw (σ-semilinear on ⨁, jRaw_of simp),
+- [x] **J3 — `TowerGNS/ConjPre.lean`**: ✅ DONE jRaw (σ-semilinear on ⨁, jRaw_of simp),
   rawInner_jRaw ★ (double induction + pairInner_embed + J2 + gnsInner_jStage), jPre
   (mkContinuous 1), towerJ := jPre.completion, towerJ_coe. Risk MEDIUM (semilinear
   plumbing — the completion API is verified σ-generic).
@@ -135,3 +135,10 @@ paths only.
   ᴴ flips entries AND the sandwich, restoring +t). Std-3, budget 0. Next: J3 (jRaw/jPre/
   towerJ — the semilinear completion). NOTE: commits LOCAL ONLY per user instruction —
   do not push until told.
+
+- **2026-07-05** — **J3 LANDED (green first try — the primary route end to end, no
+  fallback).** ConjPre.lean: jRaw (genuinely σ-semilinear on the raw ⨁, R3 discipline);
+  ★ rawInner_jRaw (the raw anti-isometry, double induction + J2 + J1 + pairInner_embed);
+  jPre (mkContinuous 1, norm-preserving); **towerJ := jPre.completion** — Mathlib's
+  ContinuousLinearMap.completion confirmed σ-generic at the pin, same instances as
+  towerFlow, zero friction. Std-3, budget 0. Next: J4 (the anti-unitary pack).
