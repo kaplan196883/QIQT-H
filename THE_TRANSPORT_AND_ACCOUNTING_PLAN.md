@@ -71,7 +71,7 @@ stretch + checkpoints.
   counterexample's monotonicity conjunct if it fights).
 - [x] **A2 — `QIQTH/HeatKernelOneD.lean`** ✅ DONE: `heatDensity_oneD` (= 1/√(4πt)), `cutoff_moment`
   (= Λ²), `inducedInvG_as_integral`. Risk LOW.
-- [ ] **A3 — `QIQTH/SpeciesCrossCheck.lean`**: `speciesEntropy`, `species_sakharov_ratio`
+- [x] **A3 — `QIQTH/SpeciesCrossCheck.lean`** ✅ DONE: `speciesEntropy`, `species_sakharov_ratio`
   (mixed-content 1/4), capstone **`speciesEntropy_eq_capacity`**; optional BTZ chain. Risk LOW.
 - [ ] **B7 (STRETCH, CUT-ELIGIBLE) — `QIQTH/TowerGNS/FlowContinuity.lean`**: the explicit
   weighted-sum formula for ‖(U_t−U_s)(of C a)‖², `continuous_towerFlow_of`, capstone
@@ -201,3 +201,10 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   (the held Λ² realized as a momentum integral — defeq + cutoff_moment). Honest scope in the
   docstring: 1D/free/Gaussian; the 4D c_i stay CITED; no numerical-G claim. NEXT → A3
   (SpeciesCrossCheck).
+
+- **2026-07-06** — **A3 LANDED — TRACK A COMPLETE** (`QIQTH/SpeciesCrossCheck.lean`, axiom-free
+  std-3, budget 0; fable subagent, green first try): `speciesEntropy` (raw 1/48π physics form);
+  **`species_sakharov_ratio`** — the MIXED-CONTENT 1/4 (the entire species sum cancels);
+  CAPSTONE **`speciesEntropy_eq_capacity`** — S_ent = A/(4G) with ONE shared species datum
+  feeding both sides; BONUS `btz_cardy_eq_species_entropy` (the BTZ chain cooperated). Track A
+  checkpoint sentences VERBATIM in the file. NEXT → B7 (FlowContinuity stretch; cut-eligible).

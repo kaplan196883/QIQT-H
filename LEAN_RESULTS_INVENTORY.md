@@ -1046,7 +1046,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`heatDensity_oneD`** — the FIRST DERIVED (not cited) heat-kernel-type coefficient in the
   repository ((1/2π)∫e^{−tk²} = 1/√(4πt), from Mathlib's Gaussian integral), plus
   `cutoff_moment`/`inducedInvG_as_integral` (the held Λ² as a derived momentum integral).
-  1D/free/Gaussian; the 4D c_i stay cited. Next: A3 (the mixed-species consistency chain).
+  1D/free/Gaussian; the 4D c_i stay cited. **A3 LANDED — TRACK A COMPLETE**
+  (`SpeciesCrossCheck.lean`): **`species_sakharov_ratio`** (the mixed-field-content 1/4 — the
+  ENTIRE species sum cancels) + CAPSTONE **`speciesEntropy_eq_capacity`** (S_ent = A/(4G), ONE
+  shared species datum feeding both bookkeepings) + the BTZ chain. A CONSISTENCY chain over one
+  shared cited datum — NOT an independent cross-check; the c_i stay cited Seeley–DeWitt data.
+  Track A checkpoint sentences verbatim in the file. Next: B7 stretch, then B8/A4 checkpoint.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

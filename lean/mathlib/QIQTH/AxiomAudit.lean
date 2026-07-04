@@ -8620,6 +8620,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatKernelOneD.heatDensity_oneD
 #print axioms QIQTH.HeatKernelOneD.cutoff_moment
 #print axioms QIQTH.HeatKernelOneD.inducedInvG_as_integral
+-- THE ACCOUNTING A3 (SpeciesCrossCheck.lean): the mixed-species CONSISTENCY CHAIN over ONE
+-- shared cited datum — speciesEntropy (raw 1/48π physics form); species_sakharov_ratio (the
+-- mixed-content 1/4: the ENTIRE species sum cancels); CAPSTONE speciesEntropy_eq_capacity
+-- (S_ent = A/(4G) with ONE datum feeding both sides); btz_cardy_eq_species_entropy (the BTZ
+-- chain). NOT an independent cross-check — the c_i stay cited Seeley–DeWitt data; no
+-- numerical-G claim. Track A checkpoint sentences in the file. Std 3.
+#print axioms QIQTH.InducedG.species_sakharov_ratio
+#print axioms QIQTH.InducedG.speciesEntropy_eq_capacity
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
