@@ -8655,6 +8655,13 @@ namespace QIQTH.AxiomAudit
 -- preserves the domain) + CAPSTONE towerGen_comm_towerFlow (K U_s = U_s K) — both pure
 -- instantiations of the held Stone lemmas. Std 3.
 #print axioms QIQTH.TowerGNS.towerGen_comm_towerFlow
+-- THE SEPARATION S1+S2 (TowerGNS/RightMul.lean): the weight exchange (from T7's kappaOf lemma)
+-- + sqrtGibbs/rightConj infrastructure; THE ENGINE cornerEmbed_mul_sqrtGibbs (ι(a)·S_K =
+-- S_K·ι(rightConj a) — the √ρ half-power intertwining); rightMul_gap_posSemidef; CAPSTONE
+-- gnsInner_rightMul_le — RIGHT multiplication is bounded with the WEIGHTED Frobenius constant
+-- (never claimed contractive). Std 3.
+#print axioms QIQTH.TowerGNS.cornerEmbed_mul_sqrtGibbs
+#print axioms QIQTH.TowerGNS.gnsInner_rightMul_le
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

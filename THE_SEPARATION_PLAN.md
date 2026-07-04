@@ -50,10 +50,10 @@ extensions. Route SOUND per consult, with three cost-reducing amendments (bindin
 
 ## Increments
 
-- [ ] **S1 — `QIQTH/TowerGNS/RightMul.lean`**: the weight exchange identity (ℝ-level, standalone,
+- [x] **S1 — `QIQTH/TowerGNS/RightMul.lean`** ✅ DONE: the weight exchange identity (ℝ-level, standalone,
   from kappaOf_gibbsWeight_of_sameOffSub) + the √-version; `sqrtGibbs`/`sqrtInvGibbs` (product =
   ρ, ᴴ-fixed simp lemmas); `rightConj`; c(a) := frobNormSq ((rightConj a)ᴴ) + nonneg. Risk LOW.
-- [ ] **S2 — same file**: E1 `cornerEmbed_mul_sqrtGibbs` (ι(a)·S_K = S_K·ι(rightConj a),
+- [x] **S2 — same file** ✅ DONE: E1 `cornerEmbed_mul_sqrtGibbs` (ι(a)·S_K = S_K·ι(rightConj a),
   entrywise); the PSD gap c•ρ_K − (ιa)ρ_K(ιa)ᴴ = S·ι(c•1 − ââᴴ)·S PSD; scalar CAPSTONE
   **`gnsInner_rightMul_le`**. Risk MEDIUM (the residual lump — one entrywise lemma).
 - [ ] **S3 — same file**: `rightMulRaw` (LinearMap.mulRight; component of C x ↦
@@ -118,3 +118,13 @@ gpt-5.5-pro (never expose keys).
   (the √ρ factorization replaces dotProduct combinatorics; the deep-stage germ kills the HEq
   trap; pure bicommutant algebra replaces the SOTApprox ε-argument — Set.centralizer membership
   is definitional). Loop armed.
+
+- **2026-07-07** — **S1+S2 LANDED — THE RISK LUMP CLEARED** (`QIQTH/TowerGNS/RightMul.lean`,
+  axiom-free std-3, budget 0; fable subagent, three fixes): the WEIGHT EXCHANGE
+  `gibbsWeight_exchange` (from T7's kappaOf lemma via log_mul + log_injOn_pos) + √-version;
+  `sqrtGibbs` (ρ = S·S, Sᴴ = S), `sqrtInvGibbs`, `rightConj`, `rightFrobBound`; THE ENGINE
+  **`cornerEmbed_mul_sqrtGibbs`** (ι(a)·S_K = S_K·ι(rightConj a) — ℝ-scalar identity first via
+  field_simp + linear_combination); `rightMul_gap_posSemidef` (frobBound at (rightConj a)ᴴ +
+  the S·ι(·)·S sandwich); CAPSTONE **`gnsInner_rightMul_le`** — right multiplication bounded
+  with the weighted Frobenius constant. Lean notes: congr 1 on big matrix subtractions blows
+  whnf heartbeats — use a separate hprod equality + rw chain. NEXT → S3 (rightMulRaw, R6 mirror).

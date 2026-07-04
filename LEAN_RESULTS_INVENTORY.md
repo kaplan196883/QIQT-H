@@ -1082,6 +1082,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   KMS-at-the-limit, no type; no PVM of the unbounded towerGen; no exp-recovery (the recovery
   wall open by design).
 
+- **THE SEPARATION, S1+S2 — `QIQTH/TowerGNS/RightMul.lean`** (**[AF]** std-3;
+  `THE_SEPARATION_PLAN.md` — towards Ω cyclic AND separating): the weight-exchange identity
+  (T7's kappaOf lemma exponentiated), the √ρ infrastructure, THE ENGINE
+  **`cornerEmbed_mul_sqrtGibbs`** (the half-power intertwining), and CAPSTONE
+  **`gnsInner_rightMul_le`** — right multiplication by a corner element is BOUNDED with the
+  weighted Frobenius constant Σ‖a n m‖²(w_m/w_n) (never claimed contractive). Next: S3–S4 (the
+  bounded right operator on TowerGNS).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
