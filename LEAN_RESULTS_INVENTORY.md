@@ -1051,7 +1051,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ENTIRE species sum cancels) + CAPSTONE **`speciesEntropy_eq_capacity`** (S_ent = A/(4G), ONE
   shared species datum feeding both bookkeepings) + the BTZ chain. A CONSISTENCY chain over one
   shared cited datum — NOT an independent cross-check; the c_i stay cited Seeley–DeWitt data.
-  Track A checkpoint sentences verbatim in the file. Next: B7 stretch, then B8/A4 checkpoint.
+  Track A checkpoint sentences verbatim in the file. **B7 LANDED — STRETCH SHIPPED**
+  (`TowerGNS/FlowContinuity.lean`): CAPSTONE **`continuous_towerFlow_apply`** — the transported
+  flow is a STRONGLY CONTINUOUS one-parameter unitary group on TowerGNS (ε/3 + density + the
+  uniform isometry; the difference-norm in collapsed closed form; no cpow). The door to the held
+  Spectral/Stone tower is open; the generator is NOT claimed. Next: B8/A4 (checkpoints).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

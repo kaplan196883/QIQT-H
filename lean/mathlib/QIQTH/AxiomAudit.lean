@@ -8628,6 +8628,13 @@ namespace QIQTH.AxiomAudit
 -- numerical-G claim. Track A checkpoint sentences in the file. Std 3.
 #print axioms QIQTH.InducedG.species_sakharov_ratio
 #print axioms QIQTH.InducedG.speciesEntropy_eq_capacity
+-- THE TRANSPORT B7 (TowerGNS/FlowContinuity.lean, STRETCH — SHIPPED, cut not needed): STRONG
+-- CONTINUITY — norm_flowRaw_sub_of_sq (the collapsed closed form of the difference norm),
+-- tendsto on pure components + pre-vectors, CAPSTONE continuous_towerFlow_apply (ε/3 + density
+-- + the uniform isometry): the transported flow is a STRONGLY CONTINUOUS one-parameter unitary
+-- group on TowerGNS — the door to the held Stone tower is open (generator NOT claimed). Std 3.
+#print axioms QIQTH.TowerGNS.continuous_towerFlow_apply
+#print axioms QIQTH.TowerGNS.norm_flowRaw_sub_of_sq
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

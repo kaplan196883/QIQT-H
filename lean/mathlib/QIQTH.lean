@@ -95,6 +95,7 @@ import QIQTH.TowerGNS.FlowCovariance
 import QIQTH.Rigidity.RegulatorRigidity
 import QIQTH.HeatKernelOneD
 import QIQTH.SpeciesCrossCheck
+import QIQTH.TowerGNS.FlowContinuity
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

@@ -73,7 +73,7 @@ stretch + checkpoints.
   (= Λ²), `inducedInvG_as_integral`. Risk LOW.
 - [x] **A3 — `QIQTH/SpeciesCrossCheck.lean`** ✅ DONE: `speciesEntropy`, `species_sakharov_ratio`
   (mixed-content 1/4), capstone **`speciesEntropy_eq_capacity`**; optional BTZ chain. Risk LOW.
-- [ ] **B7 (STRETCH, CUT-ELIGIBLE) — `QIQTH/TowerGNS/FlowContinuity.lean`**: the explicit
+- [x] **B7 (STRETCH, CUT-ELIGIBLE) — `QIQTH/TowerGNS/FlowContinuity.lean`** ✅ DONE (SHIPPED — cut not needed): the explicit
   weighted-sum formula for ‖(U_t−U_s)(of C a)‖², `continuous_towerFlow_of`, capstone
   `continuous_towerFlow_apply` (ε/3 + density + ‖U‖ ≤ 1). Stay norm-free on matrices. Risk HIGH;
   cut after one genuinely failed session without shame.
@@ -208,3 +208,14 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   CAPSTONE **`speciesEntropy_eq_capacity`** — S_ent = A/(4G) with ONE shared species datum
   feeding both sides; BONUS `btz_cardy_eq_species_entropy` (the BTZ chain cooperated). Track A
   checkpoint sentences VERBATIM in the file. NEXT → B7 (FlowContinuity stretch; cut-eligible).
+
+- **2026-07-06** — **B7 LANDED — THE STRETCH SHIPPED** (`QIQTH/TowerGNS/FlowContinuity.lean`,
+  axiom-free std-3, budget 0; fable subagent, two cycles): `cornerFlow_entry` (via the HELD
+  sigmaDiag_entry — entry access only, no cpow); `norm_flowRaw_sub_of_sq` (the COLLAPSED closed
+  form — re(2⟪a,a⟫ − ⟪a,σ_{−t+s}a⟫ − ⟪a,σ_{−s+t}a⟫) — instead of the raw weighted sum, per
+  "pick what closes"); tendsto on pure components + pre-vectors (tendsto_finsetSum); CAPSTONE
+  **`continuous_towerFlow_apply`** — ε/3 + Completion.denseRange_coe + the uniform isometry:
+  **THE TRANSPORTED FLOW IS A STRONGLY CONTINUOUS ONE-PARAMETER UNITARY GROUP** on TowerGNS.
+  The door to the held Spectral/Stone tower is open (the generator NOT claimed — post-campaign).
+  The HAVE-B sentence keeps its stretch hedge as SHIPPED. NEXT → B8/A4 (checkpoints; delete
+  loop; stop).
