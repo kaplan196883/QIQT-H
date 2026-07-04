@@ -1169,8 +1169,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the ConjHomogeneous i-twist (`conj_pairing_of_re_pairing`: re-pairing ⟹ full ℂ-pairing) and
   ★ `towerModularOp_one_add_surjective`: **ran(1+Δ) = ⊤** — VN2 at ℝ on the closed S̄, the
   real orthogonality upgraded by the i-twist to the ∃-Riesz F-domain membership verbatim
-  (green first try; the rclikeToReal letI trap never bit). Next: VN5 (Δ† = Δ, THE HEADLINE),
-  then VN3, VN6.
+  (green first try; the rclikeToReal letI trap never bit). **VN5 LANDED — ★ Δ† = Δ ★**:
+  `ModularSelfAdjoint.lean` — `towerModularOp_isSelfAdjoint`: the tower modular operator is
+  GENUINELY SELF-ADJOINT (Mathlib LinearPMap.adjoint sense; VN1 kernel at ℂ + the VN4 range
+  condition), with adjoint_eq, closed, closure = self, trivial kernel, and the resolvent
+  bound ‖x‖ ≤ ‖x + Δx‖ (green first try). Next: VN3 (standalone T†T), VN6 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

@@ -70,7 +70,7 @@ the entire modular tower — waiting on one theorem.
   real_inner_comm orientation; feed (a) with towerTomitaBar_conjHomogeneous; conclude
   S̄x ∈ dom F (witness h−x) → mem_towerModularDom → Δx = h−x. Fallback if letI fights:
   restate VN2 as a ℂ-space re-pairing lemma with the letI inside its own proof. Risk MEDIUM.
-- [ ] **VN5 — `QIQTH/TowerGNS/ModularSelfAdjoint.lean`** ★ THE HEADLINE ★:
+- [x] **VN5 — `QIQTH/TowerGNS/ModularSelfAdjoint.lean`** ★ THE HEADLINE ★ ✅ DONE:
   `towerModularOp_isSelfAdjoint : IsSelfAdjoint (towerModularOp L ω β)` = VN1 at ℂ +
   dense_towerModularOp_domain + towerModularOp_isFormalAdjoint + VN4. Corollaries:
   isClosed, closure_eq, kernel triviality (via towerModularOp_inner_self +
@@ -144,3 +144,11 @@ log/status) before each increment; explicit git paths only.
   restatement was NOT needed), and ★ `towerModularOp_one_add_surjective`: ran(1+Δ) = ⊤ —
   the full pairing lands verbatim in mem_towerTomitaF_dom with witness h−x, Δx = h−x, abel.
   Std-3, budget 0. VN5 (Δ† = Δ) is UNBLOCKED. Next: VN5, then VN3, then VN6.
+
+- **2026-07-05** — **VN5 LANDED — ★ Δ† = Δ IS A THEOREM ★ (green first try).**
+  ModularSelfAdjoint.lean: `towerModularOp_isSelfAdjoint` (VN1 at ℂ + density + symmetry +
+  the VN4 range condition — a 3-line term proof), `towerModularOp_adjoint_eq`, isClosed
+  (Mathlib IsSelfAdjoint.isClosed), closure_eq (graph route — LinearPMap.IsClosed.closure_eq
+  absent at pin), kernel triviality via inner_self + towerTomitaBar_eq_zero, and the
+  resolvent bound ‖x‖ ≤ ‖x + Δx‖. Std-3, budget 0. Remaining: VN3 (standalone citable
+  T†T), VN6 (checkpoint).

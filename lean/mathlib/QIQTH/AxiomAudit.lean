@@ -8769,6 +8769,14 @@ namespace QIQTH.AxiomAudit
 -- The von Neumann surjectivity input for Delta-dagger = Delta. Std 3.
 #print axioms QIQTH.TowerGNS.conj_pairing_of_re_pairing
 #print axioms QIQTH.TowerGNS.towerModularOp_one_add_surjective
+-- THE VON NEUMANN VN5 (TowerGNS/ModularSelfAdjoint.lean): ** THE HEADLINE ** --
+-- Delta-dagger = Delta. The tower modular operator is genuinely SELF-ADJOINT (Mathlib
+-- LinearPMap.adjoint sense): VN1 kernel at C + density + symmetry + the VN4 range condition.
+-- Corollaries: closed, closure = self, trivial kernel, the resolvent bound. Std 3.
+#print axioms QIQTH.TowerGNS.towerModularOp_isSelfAdjoint
+#print axioms QIQTH.TowerGNS.towerModularOp_adjoint_eq
+#print axioms QIQTH.TowerGNS.towerModularOp_eq_zero
+#print axioms QIQTH.TowerGNS.norm_le_norm_add_towerModularOp
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
