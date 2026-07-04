@@ -1225,7 +1225,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   try). **ID2 LANDED**: `ModularEigenvectors.lean` —
   pure matrix-unit components are eigenvectors of Δ (eigenvalue w_n/w_m) and R (eigenvalue
   (1+w_n/w_m)⁻¹), with the general transport Δx = δ•x ⟹ Rx = (1+δ)⁻¹•x (green first try).
-  Next: ID3 (U_t on the eigenbasis), ID4 (★ towerModUnitary = towerFlow ★), ID5 (Tomita I).
+  **ID3 LANDED**: `ModularUnitaryEigen.lean` — U_t acts
+  diagonally on the eigenbasis (exp(I·t·log δ) on Δ-eigenvectors; on matrix-unit components
+  the scalar matches cornerFlow_single character-for-character; green first try). Next:
+  ID4 (★ towerModUnitary = towerFlow ★ — crossing the exponential-recovery wall), ID5.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

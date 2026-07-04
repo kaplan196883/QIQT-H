@@ -116,6 +116,7 @@ import QIQTH.TowerGNS.ModularUnitaryCont
 import QIQTH.TowerGNS.ModularUnitaryComm
 import QIQTH.TowerGNS.ModularEigenbasis
 import QIQTH.TowerGNS.ModularEigenvectors
+import QIQTH.TowerGNS.ModularUnitaryEigen
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

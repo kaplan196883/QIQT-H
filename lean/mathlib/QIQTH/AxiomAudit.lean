@@ -8844,6 +8844,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerModularOp_of_single
 #print axioms QIQTH.TowerGNS.towerResolvent_of_eigen
 #print axioms QIQTH.TowerGNS.towerResolvent_of_single
+-- THE IDENTIFICATION ID3 (TowerGNS/ModularUnitaryEigen.lean): the modular unitary acts
+-- diagonally on the eigenbasis -- U_t x = exp(I t log delta) . x for a Delta-eigenvector,
+-- and on matrix-unit components the scalar is exp(I t (log w_n - log w_m)) --
+-- character-for-character the cornerFlow_single scalar. Std 3.
+#print axioms QIQTH.TowerGNS.towerModUnitary_of_eigen
+#print axioms QIQTH.TowerGNS.towerModUnitary_of_single
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

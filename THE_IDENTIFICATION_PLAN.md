@@ -52,7 +52,7 @@ agreeing on a dense span are equal. Verified by the consult:
   towerModularOp_of + ID1 + lof-smul + towerCoe_smul_raw); general
   `towerResolvent_of_eigen (0 < δ) (Δ⟨x,hx⟩ = δ•x) : R x = ((1+δ)⁻¹:ℝ) • x`; specialize
   towerResolvent_of_single. Risk LOW-MEDIUM.
-- [ ] **ID3 — the modular unitary on the eigenbasis**: `towerModUnitary_of_single :
+- [x] **ID3 — the modular unitary on the eigenbasis**: ✅ DONE `towerModUnitary_of_single :
   U_t ↑(of C (single n m c)) = exp(I·t·(log w_n − log w_m)) • ↑(of C (single n m c))`.
   Case v = 0 trivial; else mem_spectrum_of_eigenvector at r = (1+δ)⁻¹,
   borelFC_apply_eigenvector, symbol evaluation ((1−(1+δ)⁻¹)/(1+δ)⁻¹ = δ; Real.log_div;
@@ -121,3 +121,9 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   general transport Δx = δ•x ⟹ Rx = (1+δ)⁻¹•x, subtype-smul pattern);
   towerResolvent_of_single. Std-3, budget 0. Next: ID3 (U_t on the eigenbasis — the
   real-arithmetic step).
+
+- **2026-07-05** — **ID3 LANDED (green first try).** ModularUnitaryEigen.lean:
+  towerModUnitary_of_eigen (U_t x = exp(I·t·log δ)•x for any Δ-eigenvector, reusable) and
+  ★ towerModUnitary_of_single — the scalar is CHARACTER-FOR-CHARACTER the
+  cornerFlow_single / towerFlow_of_eq_sum_single scalar (single-cast form, n−m sign).
+  ID4's rewrite will be syntactic. Std-3, budget 0. Next: ID4 ★ THE IDENTIFICATION ★.
