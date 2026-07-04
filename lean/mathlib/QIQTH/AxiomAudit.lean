@@ -8587,6 +8587,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.rawInner_flowRaw
 #print axioms QIQTH.TowerGNS.flowPre
 #print axioms QIQTH.TowerGNS.flowPre_norm_eq
+-- THE TRANSPORT B3+B4 (TowerGNS/Flow.lean): THE UNITARY GROUP — towerFlow t := (flowPre t)
+-- .completion with U_0 = 1, the group law, isometry, adjoint U_t† = U_{−t} (eq_adjoint_iff) and
+-- CAPSTONE towerFlow_mem_unitary. Defined by TRANSPORT (no Δ/J/S/separating/type claimed). B4:
+-- towerFlow_cyclicVec (U_tΩ = Ω), towerFlow_vectorState (the Ω vector state is conjugation-
+-- invariant), towerState_kms_boundary (the FINITE-STAGE boundary KMS identity displayed via
+-- towerRep_inner_cyclicVec — NOT strip analyticity, NOT a KMS state of the limit). Std 3.
+#print axioms QIQTH.TowerGNS.towerFlow_mem_unitary
+#print axioms QIQTH.TowerGNS.towerFlow_cyclicVec
+#print axioms QIQTH.TowerGNS.towerState_kms_boundary
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

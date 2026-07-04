@@ -1027,7 +1027,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   cpow/diagPow anywhere); CAPSTONE **`gnsInner_cornerFlow`** (the GNS form is flow-invariant) +
   **`cornerFlow_cornerEmbed`**. **B2 LANDED**: `flowRaw` (componentwise,
   same-stage) with CAPSTONE **`rawInner_flowRaw`** — the flow is an ISOMETRY of the pre-space —
-  and `flowPre` (mkContinuous, ‖U_t x‖ = ‖x‖). Next: B3 (towerFlow on the completion).
+  and `flowPre` (mkContinuous, ‖U_t x‖ = ‖x‖). **B3+B4 LANDED** (`TowerGNS/Flow.lean`):
+  **`towerFlow`** — THE ONE-PARAMETER UNITARY GROUP on TowerGNS (U_0 = 1, group law, U_t† =
+  U_{−t}, `towerFlow_mem_unitary`), **U_tΩ = Ω**, the Ω vector state conjugation-invariant, and
+  **`towerState_kms_boundary`** (the finite-stage boundary KMS identity displayed on the limit
+  space — NOT strip analyticity, NOT a KMS state of the limit algebra). Next: B5 (the
+  implementation theorem).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

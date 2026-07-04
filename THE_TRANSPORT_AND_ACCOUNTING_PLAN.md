@@ -55,10 +55,10 @@ stretch + checkpoints.
 - [x] **B2 — same file** ✅ DONE: `flowRaw t` (toModule; component = per-stage σ_t), `flowRaw_of`,
   `rawInner_flowRaw` (isometry — double DirectSum.induction_on, pure case = pairInner_embed +
   cornerEmbed_sigmaDiag both slots + gnsInner_sigmaDiag), `flowPre := mkContinuous _ 1`. Risk MED.
-- [ ] **B3 — `QIQTH/TowerGNS/Flow.lean`**: `towerFlow t := (flowPre t).completion`, `_coe`,
+- [x] **B3 — `QIQTH/TowerGNS/Flow.lean`** ✅ DONE: `towerFlow t := (flowPre t).completion`, `_coe`,
   `towerFlow_zero`, `towerFlow_comp` (group law via sigmaDiag_comp + gibbsWeight_pos),
   `towerFlow_inner`, `towerFlow_adjoint` (= U_{−t}), `towerFlow_mem_unitary`. Risk LOW-MED.
-- [ ] **B4 — same file**: `towerFlow_cyclicVec` (U_tΩ = Ω), `towerFlow_vectorState`,
+- [x] **B4 — same file** ✅ DONE: `towerFlow_cyclicVec` (U_tΩ = Ω), `towerFlow_vectorState`,
   `towerState_kms_boundary` (finite-stage boundary identity, honest docstring). Risk LOW.
 - [ ] **B5 — `QIQTH/TowerGNS/FlowCovariance.lean`**: pre `flowRaw_leftMulRaw` (EXACT),
   **`towerFlow_conj_towerRep`** (U_t π_C(a) U_{−t} = π_C(σ_t a)) — THE IMPLEMENTATION THEOREM.
@@ -161,3 +161,14 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   = cornerFlow_cornerEmbed in both pairInner slots + gnsInner_cornerFlow); `flowPreₗ` +
   **`flowPre := mkContinuous _ 1`** with `flowPre_norm_eq` (‖U_t x‖ = ‖x‖ via Real.sqrt_sq).
   NEXT → B3 (Flow.lean: towerFlow on the completion).
+
+- **2026-07-06** — **B3+B4 LANDED** (`QIQTH/TowerGNS/Flow.lean`, axiom-free std-3, budget 0;
+  fable subagent, one fix — `Unitary.mem_iff` capitalized in the pin): **`towerFlow t :=
+  (flowPre t).completion`** — THE ONE-PARAMETER UNITARY GROUP on TowerGNS: U_0 = 1, group law,
+  isometry, **U_t† = U_{−t}** (eq_adjoint_iff + the raw neg-relation), CAPSTONE
+  **`towerFlow_mem_unitary`**. Transport disclaimer in every docstring. B4:
+  **`towerFlow_cyclicVec`** (U_tΩ = Ω via cornerFlow_one), `towerFlow_vectorState` (the Ω vector
+  state is conjugation-invariant via adjoint_inner_left), **`towerState_kms_boundary`** — the
+  finite-stage boundary KMS identity displayed through towerRep_inner_cyclicVec (honest banner:
+  NOT strip analyticity, NOT a KMS state of the limit). NEXT → B5 (FlowCovariance — THE
+  IMPLEMENTATION THEOREM).
