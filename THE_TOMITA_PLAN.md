@@ -51,15 +51,15 @@ sense. File: `QIQTH/TowerGNS/Tomita.lean`.
 
 ## Increments
 
-- [ ] **T0_1 — `QIQTH/TowerGNS/Tomita.lean`: the domain** — `towerTomitaDom` (submodule
+- [x] **T0_1 — `QIQTH/TowerGNS/Tomita.lean`: the domain** ✅ DONE — `towerTomitaDom` (submodule
   outright); Ω ∈ D, ↑(of C a) ∈ D, T Ω ∈ D; **Dense D** (Submodule.span_le from S8's
   dense_span_limitVN_orbit_cyclicVec). Risk NEGLIGIBLE.
-- [ ] **T0_2 — the operator** — `towerTomita₀` (semilinear PMap; toFun by choose); THE ONE SPEC
+- [x] **T0_2 — the operator** ✅ DONE — `towerTomita₀` (semilinear PMap; toFun by choose); THE ONE SPEC
   LEMMA `towerTomita₀_apply`; map_add'/map_smul' (injectivity + star_smul); **S₀ Ω = Ω**;
   **`towerTomita₀_of`** (S₀ ↑(of C a) = ↑(of C aᴴ) — map_star of towerRep +
   towerRep_cyclicVec_of); S₀ v ∈ D; INVOLUTION S₀(S₀ v) = v. Risk LOW-MEDIUM (choice hygiene,
   subtype coercions; no completion induction anywhere).
-- [ ] **T0_3 — CLOSABILITY (bank early)** — the A3 sequence theorem + the S₀-phrased corollary.
+- [x] **T0_3 — CLOSABILITY (bank early)** ✅ DONE — the A3 sequence theorem + the S₀-phrased corollary.
   Risk LOW.
 - [ ] **T0_4 — the right-multiplication adjoint** — `cornerEmbed_mul_gibbsDensity` (the engine
   squared, own lemma BEFORE the induction); stage `gnsInner_rightMul_adjoint`; raw
@@ -119,3 +119,14 @@ Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose 
   the closure/adjoint THEORY is id-only, hence the sequence-form closability + the object-cut).
   The adjoint-of-R_a theorem confirmed provable via the engine squared — the finite σ₋ᵢ computed,
   not analytically continued. Loop armed.
+
+- **2026-07-08** — **T0_1+T0_2+T0_3 LANDED** (`QIQTH/TowerGNS/Tomita.lean`, axiom-free std-3,
+  budget 0; fable subagent, one iteration issue): `towerTomitaDom` (submodule outright, DENSE
+  via S8); **`towerTomita₀ : TowerGNS →ₛₗ.[starRingEnd ℂ] TowerGNS`** — THE SEMILINEAR PMAP
+  TYPECHECKED AS PREDICTED; the ONE spec lemma `towerTomita₀_apply` (choice contained in
+  tomitaWitness); **S₀Ω = Ω**; **`towerTomita₀_of`** (S₀ ↑(of C a) = ↑(of C aᴴ) — the computed
+  core); INVOLUTION (both forms); **`towerTomita₀_closable`** — the A3 sequence theorem BANKED
+  EARLY (+ the S₀ corollary). Lean note: subtype-mk type annotations differ syntactically
+  between ↥(S₀.domain) and ↥(towerTomitaDom) — defeq but rw-opaque; route through
+  towerTomita₀_congr / exact, never rw the spec lemma directly (recorded for T0_4/T0_5).
+  NEXT → T0_4 (the σ₋ᵢ adjoint).

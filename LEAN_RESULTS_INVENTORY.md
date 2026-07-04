@@ -1100,6 +1100,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Tomita S₀/Δ/J, no KMS-at-limit, no type: separation is the HYPOTHESIS for that theory, not
   the theory; the right action never claimed contractive, no ⋆-anti-representation laws.
 
+- **THE TOMITA OPERATOR, T0_1–T0_3 — `QIQTH/TowerGNS/Tomita.lean`** (**[AF]** std-3;
+  `THE_TOMITA_PLAN.md`): **`towerTomita₀ : TowerGNS →ₛₗ.[starRingEnd ℂ] TowerGNS`** — the
+  Tomita operator S₀ on its classical orbit domain (a DENSE submodule), as a genuine
+  conjugate-linear (semilinear) LinearPMap: well-defined BY SEPARATION, S₀Ω = Ω, the computed
+  core **S₀ ↑(of C a) = ↑(of C aᴴ)**, involutive, and **CLOSABLE in the sequence sense**
+  (TₙΩ → 0 ∧ Tₙ*Ω → v ⟹ v = 0 — via the commutant-side right multiplications). The
+  closure/Δ/J/KMS/type NOT constructed or claimed. Next: T0_4 (the finite-σ₋ᵢ adjoint of the
+  right multiplications).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

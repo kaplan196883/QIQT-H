@@ -8681,6 +8681,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.commute_of_mem_limitVN
 #print axioms QIQTH.TowerGNS.towerLimitVN_eq_of_apply_cyclicVec
 #print axioms QIQTH.TowerGNS.dense_span_limitVN_orbit_cyclicVec
+-- THE TOMITA OPERATOR T0_1–T0_3 (TowerGNS/Tomita.lean): S₀ ON THE ORBIT DOMAIN —
+-- towerTomitaDom (submodule outright, DENSE); towerTomita₀ : TowerGNS →ₛₗ.[starRingEnd ℂ]
+-- TowerGNS (the SEMILINEAR LinearPMap — conjugate-linear, well-defined by SEPARATION, one
+-- choice-hygienic spec lemma); S₀Ω = Ω; the computed core S₀ ↑(of C a) = ↑(of C aᴴ);
+-- INVOLUTION; CLOSABILITY in the sequence sense (TₙΩ → 0 ∧ Tₙ*Ω → v ⟹ v = 0 — the
+-- commutant-side right multiplications + Dense.eq_zero_of_inner_right). The closure/Δ/J/KMS/
+-- type NOT constructed or claimed. Std 3.
+#print axioms QIQTH.TowerGNS.towerTomita₀_apply
+#print axioms QIQTH.TowerGNS.towerTomita₀_of
+#print axioms QIQTH.TowerGNS.towerTomita₀_involutive
+#print axioms QIQTH.TowerGNS.towerTomita₀_closable
+#print axioms QIQTH.TowerGNS.dense_tomitaDom
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
