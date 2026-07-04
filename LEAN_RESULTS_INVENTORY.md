@@ -1146,7 +1146,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **M3 LANDED** (`ModularOp.lean`): **`towerTomitaF`**
   — Tomita's F at the tower: the pairing pushed from the orbit core to all of dom S̄ by the
   equalizer; F COMPUTED on pure components (F↑(of C b) = ↑(of C ((rightConj² b)ᴴ))); FΩ = Ω;
-  dense domain; twist-guarded. Next: M4–M5 (Δ + the modAut headline).
+  dense domain; twist-guarded. **M4+M5 LANDED — THE HEADLINE**: **`towerModularOp`
+  — Δ := F∘S̄, ℂ-linear**, SYMMETRIC (IsFormalAdjoint Δ Δ), POSITIVE (⟪Δx,x⟫ = ‖S̄x‖² ≥ 0),
+  ΔΩ = Ω, dense domain — and ★ **Δ↑(of C a) = ↑(of C (modAut ρ_C a))** ★: the modular operator
+  of the tower limit state ACTS AS THE FINITE MODULAR AUTOMORPHISM on the pure-component core —
+  the modular operator of the physics, computed. Next: M6 (Δ ≤ Δ†, closability) + M7.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

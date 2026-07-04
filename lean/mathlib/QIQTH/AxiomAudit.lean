@@ -8739,6 +8739,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerTomitaF_of
 #print axioms QIQTH.TowerGNS.towerTomitaF_cyclicVec
 #print axioms QIQTH.TowerGNS.dense_towerTomitaF_dom
+-- THE MODULAR OPERATOR M4+M5 (ModularOp.lean cont.): ★★★ Δ := F∘S̄ ★★★ — towerModularOp
+-- (ℂ-linear on the two-layer ∃-domain; twist cancellation in map_smul'); POSITIVITY
+-- ⟪Δx, x⟫ = ‖S̄x‖² ≥ 0; SYMMETRY (IsFormalAdjoint Δ Δ); ΔΩ = Ω; THE HEADLINE towerModularOp_of
+-- — Δ↑(of C a) = ↑(of C (modAut ρ_C a)): THE MODULAR OPERATOR ACTS AS THE FINITE MODULAR
+-- AUTOMORPHISM on the dense pure-component core; dense domain; the ℂ-linear twist guard.
+-- Δ† = Δ (von Neumann) NOT claimed. Std 3.
+#print axioms QIQTH.TowerGNS.towerModularOp_of
+#print axioms QIQTH.TowerGNS.towerModularOp_isFormalAdjoint
+#print axioms QIQTH.TowerGNS.towerModularOp_inner_self
+#print axioms QIQTH.TowerGNS.dense_towerModularDom
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

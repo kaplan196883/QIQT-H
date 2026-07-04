@@ -57,9 +57,9 @@ abstract `QIQTH/TowerGNS/ConjAdjoint.lean` + concrete `QIQTH/TowerGNS/ModularOp.
   towerTomitaBar dense_…`; memberships + **F↑(of C b) = ↑(of C ((rightConj² b)ᴴ))** (M2 +
   tomita_adjoint_pairing) + FΩ = Ω; dom F dense; F twist guard. Risk MODERATE
   (orbit-presentation unpacking; route through towerTomitaBar_agrees).
-- [ ] **M4 — same file:** `towerModularOp` (Δ) as →ₗ.[ℂ] with the two-layer ∃-domain; spec
+- [x] **M4 — same file:** ✅ DONE `towerModularOp` (Δ) as →ₗ.[ℂ] with the two-layer ∃-domain; spec
   lemma + congr adapter (never rw under a subtype). Risk MODERATE (nested membership transport).
-- [ ] **M5 — same file — THE HEADLINE PACK:** POSITIVITY ⟪Δx,x⟫ = ‖S̄x‖²; symmetry
+- [x] **M5 — same file — THE HEADLINE PACK:** ✅ DONE POSITIVITY ⟪Δx,x⟫ = ‖S̄x‖²; symmetry
   (IsFormalAdjoint Δ Δ); ΔΩ = Ω; **`towerModularOp_of` — Δ↑(of C a) = ↑(of C (modAut ρ_C a))**;
   dense domain; Δ twist guard. Risk LOW once M3/M4 land.
 - [ ] **M6 — same file — the Mathlib hookup:** Δ ≤ Δ† (IsFormalAdjoint.le_adjoint), Δ† closed,
@@ -137,3 +137,12 @@ expose keys).
   closure landed DEFINITIONALLY — no bridging); **`towerTomitaF_of`** — F↑(of C b) =
   ↑(of C ((rightConj² b)ᴴ)) by pure conjAdjoint_eq term proof; **FΩ = Ω** (the modAut route,
   cheaper as predicted); dense domain; the twist guard. NEXT → M4 (Δ itself).
+
+- **2026-07-08** — **M4+M5 LANDED — THE HEADLINE** (ModularOp.lean extended, axiom-free std-3,
+  budget 0; fable subagent, one fix — explicit ⟨vector, membership⟩ mks to stop whnf
+  delta-unfolding through completion defs): `towerModularDom` (the two-layer ∃-domain);
+  **`towerModularOp` — Δ := F∘S̄, ℂ-LINEAR** (the twist cancellation in map_smul');
+  **POSITIVITY** ⟪Δx, x⟫ = ‖S̄x‖² ≥ 0; **SYMMETRY** (IsFormalAdjoint Δ Δ); **ΔΩ = Ω**;
+  ★ **`towerModularOp_of`** — Δ↑(of C a) = ↑(of C (modAut ρ_C a)): THE MODULAR OPERATOR ACTS AS
+  THE FINITE MODULAR AUTOMORPHISM on the dense pure-component core ★; dense domain; the
+  ℂ-linear twist guard Δ(c•Ω) = c•Ω. NEXT → M6 (the Mathlib adjoint hookup) → M7 (checkpoint).
