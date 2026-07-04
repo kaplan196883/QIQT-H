@@ -1222,7 +1222,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   eigenvectors of modAut/cornerFlow/Δ/R/U_t; dense-span extension). **ID1 LANDED**:
   `ModularEigenbasis.lean` — modAut ρ (single n m c) = (w_n/w_m)•single n m c (the finite
   modular eigenbasis) + the towerFlow pure-component sum identity extracted (green first
-  try). Next: ID2 (Δ⟨of C (single n m c)⟩ = (w_n/w_m)•…, R transport).
+  try). **ID2 LANDED**: `ModularEigenvectors.lean` —
+  pure matrix-unit components are eigenvectors of Δ (eigenvalue w_n/w_m) and R (eigenvalue
+  (1+w_n/w_m)⁻¹), with the general transport Δx = δ•x ⟹ Rx = (1+δ)⁻¹•x (green first try).
+  Next: ID3 (U_t on the eigenbasis), ID4 (★ towerModUnitary = towerFlow ★), ID5 (Tomita I).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

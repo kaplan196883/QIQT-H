@@ -47,7 +47,7 @@ agreeing on a dense span are equal. Verified by the consult:
   ((gibbsWeight n / gibbsWeight m : ℝ):ℂ) • Matrix.single n m c` (ext +
   diagonal_mul/mul_diagonal + single_apply). Optionally extract towerFlow_of_eq_sum_single
   from the horbit block for ID4 reuse. Risk LOW.
-- [ ] **ID2 — GNS eigenvectors of Δ and R**: `towerModularOp_of_single :
+- [x] **ID2 — GNS eigenvectors of Δ and R**: ✅ DONE `towerModularOp_of_single :
   Δ⟨↑(of C (single n m c)), …⟩ = ((w_n/w_m:ℝ):ℂ) • ↑(of C (single n m c))` (from
   towerModularOp_of + ID1 + lof-smul + towerCoe_smul_raw); general
   `towerResolvent_of_eigen (0 < δ) (Δ⟨x,hx⟩ = δ•x) : R x = ((1+δ)⁻¹:ℝ) • x`; specialize
@@ -114,3 +114,10 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   gibbsWeight_div_pos; and towerFlow_of_eq_sum_single extracted standalone from the horbit
   block (no shape fight). Sign convention n−m matches cornerFlow_single exactly. Std-3,
   budget 0. Next: ID2 (GNS eigenvectors of Δ and R).
+
+- **2026-07-05** — **ID2 LANDED (green first try).** ModularEigenvectors.lean:
+  towerOf_smul_coe (single-scalar coercion push, new helper); ★ towerModularOp_of_single
+  (Δ on a pure matrix-unit component = (w_n/w_m)•itself); ★ towerResolvent_of_eigen (the
+  general transport Δx = δ•x ⟹ Rx = (1+δ)⁻¹•x, subtype-smul pattern);
+  towerResolvent_of_single. Std-3, budget 0. Next: ID3 (U_t on the eigenbasis — the
+  real-arithmetic step).
