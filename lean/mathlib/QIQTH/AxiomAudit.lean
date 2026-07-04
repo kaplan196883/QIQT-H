@@ -8911,6 +8911,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.jconj_towerRep
 #print axioms QIQTH.TowerGNS.jconj_involutive
 #print axioms QIQTH.TowerGNS.jconj_sotApprox
+-- THE MODULAR CONJUGATION J8 (TowerGNS/TomitaSecondHalf.lean): TOMITA'S THEOREM, SECOND HALF
+-- (INCLUSION) -- J . towerLimitVN . J subset towerLimitVN' (jconj_limitVN_mem_commutant):
+-- J conjugates M into its commutant, via the SOTApprox transport of J pi(a) J = R_{jStage a}.
+-- Omega separating for the commutant. The REVERSE inclusion (full equality J M J = M') is
+-- NOT proved -- Tomita's hard half, named RvD route. Std 3.
+#print axioms QIQTH.TowerGNS.towerRightMulCLM_mem_commutant
+#print axioms QIQTH.TowerGNS.jconj_limitVN_mem_commutant
+#print axioms QIQTH.TowerGNS.towerCyclicVec_separating_commutant
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

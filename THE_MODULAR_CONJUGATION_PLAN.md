@@ -68,7 +68,7 @@ against sources; the full arithmetic + design record is in the consult.
   jconj_involutive, jconj_sot; ★ jconj_towerRep : jconj (towerRep C a) =
   towerRightMulCLM C (jStage C a) (stage bookkeeping mirrors towerRightMulCLM_adjoint).
   Risk MEDIUM.
-- [ ] **J8 — `TowerGNS/TomitaSecondHalf.lean`**: SOTApprox.mem_centralizer (extract);
+- [x] **J8 — `TowerGNS/TomitaSecondHalf.lean`**: ✅ DONE SOTApprox.mem_centralizer (extract);
   towerRightMulCLM_mem_commutant; ★★ jconj_limitVN_mem_commutant (J M J ⊆ M′);
   M ⊆ J M′ J; Ω cyclic + separating for the commutant. Risk MEDIUM (assembly).
 - [ ] **J9 — checkpoint + audit** (verbatim below); plan → COMPLETE. Risk NIL.
@@ -168,3 +168,10 @@ paths only.
   J8, matching Bicommutant's SOTApprox); ★ jconj_towerRep — J π_C(a) J = R_{jStage a}, the
   core Tomita-II identity (raw jRaw_leftMulRaw_jRaw via anti_mul + cornerEmbed_jStage +
   involutive). Std-3, budget 0. Next: J8 (the inclusion J M J ⊆ M′).
+
+- **2026-07-05** — **J8 LANDED (green first try) — ★★ J M J ⊆ M′, TOMITA'S SECOND HALF
+  (INCLUSION) ★★.** TomitaSecondHalf.lean: SOTApprox.mem_centralizer (extracted);
+  towerRightMulCLM_mem_commutant; ★★ jconj_limitVN_mem_commutant (J·towerLimitVN·J ⊆
+  towerLimitVN′ — the SOT transport of J π(a) J = R_{jStage a}); the mirror M ⊆ J M′ J;
+  Ω separating for the commutant (LANDED). Ω cyclic for M′ deferred (needs the antilinear
+  span-image identity — plan note in the file). Std-3, budget 0. Next: J9 (checkpoint).

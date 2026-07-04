@@ -1278,8 +1278,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   JΔJ = Δ⁻¹ flips back; green first try). **J7 LANDED**: `ConjImplements.lean` — J conjugates
   left multiplication into right multiplication: **J π_C(a) J = R_{jStage a}**
   (jconj_towerRep), with jconj := J∘T∘J the ℂ-linear double-conjugation and the SOTApprox
-  transport for J8 (green first try). Next: J8 (J M J ⊆ M′ — the inclusion), J9
-  (checkpoint).
+  transport for J8 (green first try). **J8 LANDED — ★★ J M J ⊆ M′ ★★**:
+  `TomitaSecondHalf.lean` — TOMITA'S THEOREM, SECOND HALF (INCLUSION): J conjugates
+  towerLimitVN into its commutant (jconj_limitVN_mem_commutant), via the SOT transport of
+  J π(a) J = R_{jStage a}; Ω separating for the commutant (green first try). The REVERSE
+  inclusion (full equality J M J = M′) is NOT proved — Tomita's hard half, named RvD route.
+  Next: J9 (checkpoint → campaign COMPLETE).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
