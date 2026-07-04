@@ -1217,6 +1217,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   KMS-at-limit; no Tomita theorem (U_t not shown to implement automorphisms of
   towerLimitVN); no Δ^{1/2}/J/polar; no type.
 
+**THE IDENTIFICATION CAMPAIGN (ACTIVE, THE_IDENTIFICATION_PLAN.md)** — towerFlow = Δ^{it}
+  via the eigenvector route (ρ diagonal by construction ⟹ matrix units are simultaneous
+  eigenvectors of modAut/cornerFlow/Δ/R/U_t; dense-span extension). **ID1 LANDED**:
+  `ModularEigenbasis.lean` — modAut ρ (single n m c) = (w_n/w_m)•single n m c (the finite
+  modular eigenbasis) + the towerFlow pure-component sum identity extracted (green first
+  try). Next: ID2 (Δ⟨of C (single n m c)⟩ = (w_n/w_m)•…, R transport).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

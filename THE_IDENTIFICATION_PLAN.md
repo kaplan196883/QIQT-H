@@ -40,7 +40,7 @@ agreeing on a dense span are equal. Verified by the consult:
 
 ## The increments
 
-- [ ] **ID1 — the finite modular eigenbasis** (Dynamics/FiniteModular layer or a new small
+- [x] **ID1 — the finite modular eigenbasis** ✅ DONE (Dynamics/FiniteModular layer or a new small
   file): `invOf_gibbsDensity : ⅟(gibbsDensity L C ω β) = gibbsInv L C ω β`
   (invOf_eq_right_inv + the mul identity inside gibbsInvertible);
   `modAut_gibbs_single : modAut (gibbsDensity …) (Matrix.single n m c) =
@@ -107,3 +107,10 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   plumbing already in Generator.lean, the borelFC eigenvector template compiled at
   towerModUnitary_cyclicVec). THE RESOLVENT campaign closed immediately prior (Δ^{it},
   35th first synced at 3f00de0).
+
+- **2026-07-05** — **ID1 LANDED (green first try, optional item included).**
+  ModularEigenbasis.lean: invOf_gibbsDensity (⅟ρ = gibbsInv); ★ modAut_gibbsDensity_single
+  (modAut ρ (single n m c) = (w_n/w_m)•single n m c — the finite modular eigenbasis);
+  gibbsWeight_div_pos; and towerFlow_of_eq_sum_single extracted standalone from the horbit
+  block (no shape fight). Sign convention n−m matches cornerFlow_single exactly. Std-3,
+  budget 0. Next: ID2 (GNS eigenvectors of Δ and R).

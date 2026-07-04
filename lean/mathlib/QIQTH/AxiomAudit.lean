@@ -8832,6 +8832,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerModUnitary_commute_towerResolvent
 #print axioms QIQTH.TowerGNS.towerModUnitary_mapsTo_modularDom
 #print axioms QIQTH.TowerGNS.towerModUnitary_commute_modularOp
+-- THE IDENTIFICATION ID1 (TowerGNS/ModularEigenbasis.lean): the finite modular eigenbasis --
+-- rho is DIAGONAL by construction, so matrix units are modAut eigenvectors with eigenvalue
+-- w_n/w_m (> 0); plus the extracted towerFlow pure-component sum identity. Std 3.
+#print axioms QIQTH.TowerGNS.invOf_gibbsDensity
+#print axioms QIQTH.TowerGNS.modAut_gibbsDensity_single
+#print axioms QIQTH.TowerGNS.towerFlow_of_eq_sum_single
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
