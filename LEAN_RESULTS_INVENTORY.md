@@ -1119,6 +1119,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   id-only; a conjugate-linear closure theory is not built here); no polar decomposition, no Δ,
   no J, no KMS of the limit state, no type.
 
+- **THE CONJUGATE CLOSURE, CC1–CC4 — `QIQTH/TowerGNS/ConjClosure.lean`** (**[AF]** std-3,
+  ABSTRACT — Mathlib-only imports; `THE_CONJUGATE_CLOSURE_PLAN.md`): the four new theorems of
+  the σ-semilinear closure theory via the ℝ-reduction — **`realRestrict`** (the ℝ-view of a
+  conjugate-linear partial map; no Mathlib helper existed), **`isClosable_of_seq`** (the
+  sequence-closability bridge — absent from Mathlib even for id), **`ConjHomogeneous.closure`**
+  and **`GraphSymm.closure`** (conjugate-homogeneity and the involution survive closure — the
+  twisted-map and swap-homeomorphism engines; NO adjoint anywhere). Next: CC5 (towerTomitaBar
+  at TowerGNS).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

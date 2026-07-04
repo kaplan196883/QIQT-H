@@ -49,16 +49,16 @@ with the orbit domain a CORE. Sets up (WITHOUT constructing) the Δ contract. Fi
 
 ## Increments
 
-- [ ] **CC1 — `QIQTH/TowerGNS/ConjClosure.lean` (abstract; NO TowerGNS import): the view + the
-  predicate** — `LinearPMap.realRestrict` (+ _apply/_domain/density transport);
+- [x] **CC1 — `QIQTH/TowerGNS/ConjClosure.lean` (abstract; NO TowerGNS import): the view + the
+  predicate** ✅ DONE — `LinearPMap.realRestrict` (+ _apply/_domain/density transport);
   `ConjHomogeneous` def + pointwise iff + realRestrict-is-ConjHomogeneous (from map_smulₛₗ).
   Risk LOW.
-- [ ] **CC2 — same file: THE BRIDGE** — `isClosable_of_seq` (A3 shape; topologicalClosure +
+- [x] **CC2 — same file: THE BRIDGE** ✅ DONE — `isClosable_of_seq` (A3 shape; topologicalClosure +
   mem_closure_iff_seq_limit + toLinearPMap_graph_eq). Risk LOW-MEDIUM (sequence/Subtype
   packaging — done once abstractly).
-- [ ] **CC3 — same file: the conj-homogeneity transfer** — UNCONDITIONAL
+- [x] **CC3 — same file: the conj-homogeneity transfer** ✅ DONE — UNCONDITIONAL
   `ConjHomogeneous f.closure`; the twisted-map engine; pointwise corollaries. Risk LOW.
-- [ ] **CC4 — same file: the involution transfer** — `GraphSymm` + survives closure +
+- [x] **CC4 — same file: the involution transfer** ✅ DONE — `GraphSymm` + survives closure +
   involution/ker/range corollaries (cross-check vs Mathlib's inverse_closure). Risk LOW.
 - [ ] **CC5 — instantiate at TowerGNS** — instance smoke test FIRST; `towerTomitaR :=
   realRestrict towerTomita₀`; `towerTomitaR_isClosable` (CC2 + towerTomita₀_closable');
@@ -119,3 +119,14 @@ Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose 
   ever; the four new abstract theorems identified; the sequence-closability bridge absent from
   Mathlib even for id; FULL involution provable adjoint-free via the swap-graph; the Δ contract
   documented for the next campaign). Loop armed.
+
+- **2026-07-08** — **CC1–CC4 LANDED — THE ABSTRACT THEORY COMPLETE** (`QIQTH/TowerGNS/
+  ConjClosure.lean`, Mathlib-only imports, axiom-free std-3, budget 0; fable subagent, two
+  fixes): `realRestrict` (+ rfl specs + density transport); `ConjHomogeneous` (∃-form) +
+  `realRestrict_conjHomogeneous` (from map_smulₛₗ — the twist-guard source);
+  **`isClosable_of_seq`** — THE BRIDGE (no choice needed: memberships from
+  mem_domain_of_mem_graph, values by image_iff); **`ConjHomogeneous.closure`** (UNCONDITIONAL;
+  plain Continuous twisted map — no CLM needed); **`GraphSymm.closure`** + involutive/eq_zero/
+  range_eq_domain corollaries. The complexToReal path worked with NO letI, as predicted. Lean
+  notes: theorems named `closure` shadow _root_.closure (qualify); ▸ on Prod-literal casts →
+  rw at. NEXT → CC5 (instantiate at TowerGNS).

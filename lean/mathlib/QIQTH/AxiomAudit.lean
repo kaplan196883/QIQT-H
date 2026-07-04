@@ -8701,6 +8701,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerRightMulCLM_adjoint
 #print axioms QIQTH.TowerGNS.rightConj_sq_conjTranspose_eq_modAut
 #print axioms QIQTH.TowerGNS.tomita_adjoint_pairing
+-- THE CONJUGATE CLOSURE CC1–CC4 (TowerGNS/ConjClosure.lean — ABSTRACT, Mathlib-only imports):
+-- the four new theorems of the σ-semilinear closure theory via the ℝ-REDUCTION —
+-- realRestrict (the ℝ-view of a conjugate-linear PMap; no Mathlib helper existed);
+-- isClosable_of_seq (the sequence-closability bridge — ABSENT from Mathlib even for id);
+-- ConjHomogeneous.closure (conjugate-homogeneity survives closure — the twisted-map engine);
+-- GraphSymm.closure (the involution survives closure — swap homeomorphism; involutive/
+-- eq_zero/range_eq_domain corollaries, NO adjoint anywhere). complexToReal instances, no letI.
+-- Std 3.
+#print axioms QIQTH.ConjClosure.isClosable_of_seq
+#print axioms QIQTH.ConjClosure.ConjHomogeneous.closure
+#print axioms QIQTH.ConjClosure.GraphSymm.closure
+#print axioms QIQTH.ConjClosure.realRestrict_conjHomogeneous
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
