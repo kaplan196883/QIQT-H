@@ -53,7 +53,7 @@ abstract `QIQTH/TowerGNS/ConjAdjoint.lean` + concrete `QIQTH/TowerGNS/ModularOp.
   conj-homogeneity. Risk LOW (the tomitaFun pattern).
 - [x] **M2 — same file:** ✅ DONE the equalizer core-extension lemma (closed set ⊇ graph ⟹ ⊇ graph of
   closure). Risk LOW.
-- [ ] **M3 — `QIQTH/TowerGNS/ModularOp.lean` (concrete):** `towerTomitaF := conjAdjoint
+- [x] **M3 — `QIQTH/TowerGNS/ModularOp.lean` (concrete):** ✅ DONE `towerTomitaF := conjAdjoint
   towerTomitaBar dense_…`; memberships + **F↑(of C b) = ↑(of C ((rightConj² b)ᴴ))** (M2 +
   tomita_adjoint_pairing) + FΩ = Ω; dom F dense; F twist guard. Risk MODERATE
   (orbit-presentation unpacking; route through towerTomitaBar_agrees).
@@ -129,3 +129,11 @@ expose keys).
   form); M2 `pairing_extends_of_closure` (~12 lines, the equalizer). BONUS FINDING: the
   ConjHomogeneous hypothesis is UNNEEDED for M1 — the ∃-form closes without ℂ-linearity of the
   pairing. NEXT → M3 (towerTomitaF at TowerGNS).
+
+- **2026-07-08** — **M3 LANDED, GREEN FIRST BUILD, ZERO ITERATIONS** (`QIQTH/TowerGNS/
+  ModularOp.lean`; fable subagent): **`towerTomitaF := conjAdjoint S̄`** — the pairing
+  established on the orbit core (tomita_adjoint_pairing VERBATIM through the towerTomitaR
+  unpack) and EXTENDED to all of dom S̄ by the M2 equalizer (towerTomitaBar = towerTomitaR.
+  closure landed DEFINITIONALLY — no bridging); **`towerTomitaF_of`** — F↑(of C b) =
+  ↑(of C ((rightConj² b)ᴴ)) by pure conjAdjoint_eq term proof; **FΩ = Ω** (the modAut route,
+  cheaper as predicted); dense domain; the twist guard. NEXT → M4 (Δ itself).

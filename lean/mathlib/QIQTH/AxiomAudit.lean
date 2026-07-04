@@ -8731,6 +8731,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConjAdjoint.conjAdjoint_apply_spec
 #print axioms QIQTH.ConjAdjoint.conjAdjoint_closed
 #print axioms QIQTH.ConjAdjoint.pairing_extends_of_closure
+-- THE MODULAR OPERATOR M3 (TowerGNS/ModularOp.lean): TOMITA'S F AT THE TOWER — towerTomitaF :=
+-- conjAdjoint S̄; the pairing established on the orbit core (tomita_adjoint_pairing VERBATIM)
+-- and EXTENDED to all of dom S̄ by the M2 equalizer; F COMPUTED on pure components
+-- (towerTomitaF_of: F↑(of C b) = ↑(of C ((rightConj² b)ᴴ))); FΩ = Ω (the modAut route); dense
+-- domain; the twist guard F(c•Ω) = conj c•Ω. Std 3.
+#print axioms QIQTH.TowerGNS.towerTomitaF_of
+#print axioms QIQTH.TowerGNS.towerTomitaF_cyclicVec
+#print axioms QIQTH.TowerGNS.dense_towerTomitaF_dom
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

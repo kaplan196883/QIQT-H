@@ -1143,7 +1143,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `conjAdjointDom` (witness domain, twist derived) + **`conjAdjoint g hd : E →ₛₗ.[starRingEnd ℂ]
   E`** (uniqueness by density; one spec lemma; NO toDual, NO CLM extension, NO boundedness
   predicate, NO completeness) + sequence-form closedness + the equalizer core-extension lemma.
-  Next: M3–M5 (towerTomitaF, Δ, the modAut headline).
+  **M3 LANDED** (`ModularOp.lean`): **`towerTomitaF`**
+  — Tomita's F at the tower: the pairing pushed from the orbit core to all of dom S̄ by the
+  equalizer; F COMPUTED on pure components (F↑(of C b) = ↑(of C ((rightConj² b)ᴴ))); FΩ = Ω;
+  dense domain; twist-guarded. Next: M4–M5 (Δ + the modAut headline).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
