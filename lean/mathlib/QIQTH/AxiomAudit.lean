@@ -8899,6 +8899,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerTomitaBar_eq_towerJ_deltaHalf
 #print axioms QIQTH.TowerGNS.towerTomitaF_eq_deltaHalf_jStage
 #print axioms QIQTH.TowerGNS.deltaHalf_sq_eq_modularOp_core
+-- THE MODULAR CONJUGATION J6 (TowerGNS/ConjFlow.lean): J commutes with the modular group --
+-- J Delta^{it} = Delta^{it} J (the CORRECT sign: antilinearity flips i, JDJ = D^{-1} flips
+-- back), via the raw flow exchange and the ID4 identification. Std 3.
+#print axioms QIQTH.TowerGNS.towerJ_towerFlow
+#print axioms QIQTH.TowerGNS.towerJ_towerModUnitary
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

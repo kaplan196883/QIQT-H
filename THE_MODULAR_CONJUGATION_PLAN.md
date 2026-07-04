@@ -61,7 +61,7 @@ against sources; the full arithmetic + design record is in the consult.
 - [x] **J5 — `TowerGNS/PolarCore.lean`**: ✅ DONE ★ S̄↑(of C a) = towerJ↑(of C (deltaHalfStage a))
   (the polar decomposition on the core); mirror Δ^{1/2} = J∘S̄-core; F-core = Δ^{1/2}∘J;
   deltaHalf² = Δ-core; the order-guard documented. Risk LOW (harvest).
-- [ ] **J6 — `TowerGNS/ConjFlow.lean`**: jRaw_flowRaw → towerJ_towerFlow →
+- [x] **J6 — `TowerGNS/ConjFlow.lean`**: ✅ DONE jRaw_flowRaw → towerJ_towerFlow →
   ★ towerJ_modUnitary (JΔ^{it} = Δ^{it}J pointwise, via towerFlow_eq_towerModUnitary).
   Risk LOW.
 - [ ] **J7 — `TowerGNS/ConjImplements.lean`**: jconj (hand-bundled double-conj CLM),
@@ -155,3 +155,9 @@ paths only.
   (S̄⟨↑(of C a)⟩ = J↑(of C (Δ½ a))); the mirror J∘S̄ = Δ½-core; F-core = Δ½∘J (the ORDER
   GUARD made positive — the two compositions provably differ: aᴴ vs modAut ρ aᴴ);
   Δ½² = Δ-core; the GNS Δ½-eigenbasis action. Std-3, budget 0. Next: J6 (JΔ^{it} = Δ^{it}J).
+
+- **2026-07-05** — **J6 LANDED (green first try).** ConjFlow.lean: jRaw_flowRaw →
+  towerJ_towerFlow → ★ towerJ_towerModUnitary (JΔ^{it} = Δ^{it}J pointwise — the CORRECT
+  sign per the order guard; capstone named towerJ_towerModUnitary vs the plan's
+  towerJ_modUnitary). Std-3, budget 0. Next: J7 (jconj — J conjugates left into right
+  multiplication).

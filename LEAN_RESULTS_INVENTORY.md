@@ -1273,8 +1273,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   try). **J5 LANDED**: `PolarCore.lean` — **THE POLAR
   DECOMPOSITION ON THE CORE**: S̄ = J∘Δ^{1/2} and F = Δ^{1/2}∘J on pure components (order
   guard positive: the compositions provably differ), Δ^{1/2}² = Δ-core (green first try;
-  honest: core-level identity, no unbounded Δ^{1/2}). Next: J6 (JΔ^{it} = Δ^{it}J),
-  J7–J8 (Tomita II inclusion), J9 (checkpoint).
+  honest: core-level identity, no unbounded Δ^{1/2}). **J6 LANDED**: `ConjFlow.lean` — J commutes with
+  the full modular group: JΔ^{it} = Δ^{it}J (the correct sign — antilinearity flips i,
+  JΔJ = Δ⁻¹ flips back; green first try). Next: J7 (jconj_towerRep), J8 (Tomita II
+  inclusion), J9 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
