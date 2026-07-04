@@ -989,7 +989,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   in the completion, ↑(of C′ (ι a)) = ↑(of C a) (the difference is a null vector; the metric
   completion identifies it — the direct-limit gluing with no quotient); the cyclic vector
   **Ω := ↑(of ∅ 1)** with ⟪Ω,Ω⟫ = 1 (DY2 normalization) and ‖Ω‖ = 1. The compatibility engine
-  for the representation (R7). Next: R5 (the GNS boundedness inequality).
+  for the representation (R7). **R5 LANDED — THE GNS BOUND** (`TowerGNS/StageBound.lean`,
+  **[AF]** std-3): `frobNormSq` (Frobenius constant), **`frobBound`** (c(a)•1 − aᴴa PSD via
+  rowwise Cauchy–Schwarz), **`cornerEmbed_posSemidef`** (PSD transport through the ⋆-hom),
+  CAPSTONE **`gnsInner_leftMul_le`** — the GNS boundedness inequality re ⟪ιa·x, ιa·x⟫ ≤
+  c(a)·re ⟪x,x⟫ (Frobenius bound, NOT the C*-norm — π bounded, never claimed contractive).
+  Next: R6 (the bounded pre-operator).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

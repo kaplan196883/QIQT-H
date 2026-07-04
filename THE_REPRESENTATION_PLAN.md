@@ -84,7 +84,7 @@ namespace `QIQTH.TowerGNS`.
 - [x] **R4 — `QIQTH/TowerGNS/Germ.lean`** ✅ DONE: **`towerGerm`** (A7); `towerCyclicVec` +
   `inner_cyclicVec_self` + `norm_cyclicVec`; `inner_coe_of_of` (from Completion.inner_coe).
   Risk LOW.
-- [ ] **R5 — `QIQTH/TowerGNS/StageBound.lean`**: the GNS boundedness inequality — `frobBound`
+- [x] **R5 — `QIQTH/TowerGNS/StageBound.lean`** ✅ DONE: the GNS boundedness inequality — `frobBound`
   ((c a • 1 − aᴴa).PosSemidef, A5.1); `cornerEmbed_posSemidef` (A5.2, own section, scoped
   MatrixOrder/ComplexOrder; CFC fallback documented); **`gnsInner_leftMul_le`** (A5.3). Pure
   finite matrix analysis. Risk MEDIUM (the mathematical heart; fully elementary).
@@ -207,3 +207,15 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   occurrences of one instantiation (duplicate `cornerEmbed_refl` in a chain fails); `if_pos`
   needs a named `have` for the Prop (inline lambda won't elaborate); `sq_eq_zero_iff` gets stuck
   on Monoid metavariables — use `pow_eq_zero_iff two_ne_zero`. NEXT → R5 (StageBound).
+
+- **2026-07-05** — **R5 LANDED — THE GNS BOUND** (`QIQTH/TowerGNS/StageBound.lean`, axiom-free
+  std-3, budget 0; authored via a fable subagent, two build iterations): `frobNormSq` (the
+  Frobenius constant, = Σ‖a_ij‖² — `frobNormSq_eq_sum`, `_nonneg`); **`frobBound`** — c(a)•1 −
+  aᴴa is PSD (`of_dotProduct_mulVec_nonneg` + the Mathlib `posSemidef_conjTranspose_mul_self`
+  rewrite chain + rowwise `norm_sum_le`/`Finset.sum_mul_sq_le_sq_mul_sq` Cauchy–Schwarz);
+  **`cornerEmbed_posSemidef`** (PSD transport — the PREFERRED CFC route worked: `open scoped
+  MatrixOrder`, `CStarAlgebra.nonneg_iff_eq_star_mul_self` gives q = BᴴB, pushed through the
+  ⋆-hom; the StarOrderedRing fallback not needed); CAPSTONE **`gnsInner_leftMul_le`** —
+  re ⟪ιa·x, ιa·x⟫_K ≤ c(a)·re ⟪x,x⟫_K (the sandwich `conjTranspose_mul_mul_same` + R2's state
+  positivity + linear trace expansion + `Complex.le_def`). The honest scope in the docstring:
+  Frobenius bound, NOT the C*-norm — π bounded, never claimed contractive. NEXT → R6 (LeftMul).

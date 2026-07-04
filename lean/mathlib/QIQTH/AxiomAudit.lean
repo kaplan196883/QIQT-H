@@ -8527,6 +8527,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerGerm
 #print axioms QIQTH.TowerGNS.inner_cyclicVec_self
 #print axioms QIQTH.TowerGNS.norm_cyclicVec
+-- THE REPRESENTATION R5 (TowerGNS/StageBound.lean): the GNS boundedness inequality — the
+-- FROBENIUS constant frobNormSq (= Σ‖a_ij‖², NOT the C*-norm: no bundled CStarAlgebra for
+-- matrices in the pin; π bounded, never claimed contractive); frobBound (c·1 − aᴴa PSD via
+-- of_dotProduct_mulVec_nonneg + rowwise Cauchy–Schwarz); cornerEmbed_posSemidef (PSD transport:
+-- q = Bᴴ B pushed through the ⋆-hom); CAPSTONE gnsInner_leftMul_le — re ⟪ιa·x, ιa·x⟫_K ≤
+-- c(a)·re ⟪x,x⟫_K (the sandwich + state positivity). Pure finite matrix analysis. Std 3.
+#print axioms QIQTH.TowerGNS.frobBound
+#print axioms QIQTH.TowerGNS.cornerEmbed_posSemidef
+#print axioms QIQTH.TowerGNS.gnsInner_leftMul_le
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
