@@ -35,6 +35,23 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     </div>
   </div></header>
 
+  <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
+    <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
+      <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
+        <span style="font-size:2rem;font-weight:800">26<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">~4,050<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
+        <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
+      </div>
+      <p style="margin:.2rem 0 0;font-size:1.05rem"><strong>Headlines:</strong>
+        the <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed) ·
+        the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall) ·
+        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS on one Hilbert space ·
+        the <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch) ·
+        <strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).
+        <a href="/formalization">Every claim, with its honest scope →</a></p>
+    </div>
+  </div></section>
+
   <section class="section"><div class="wrap">
     <h2>The thesis: two results on two independent axes — one world, and emergent gravity</h2>
     <p class="sub">QIQT-H makes two distinct claims, and the honest part is keeping them <em>separate</em> — they
@@ -283,8 +300,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           packaging, and the two downstream payoffs — the crossed product M⋊<sub>σ</sub>ℝ and the
           directed-union refinement-tower limit packaged as genuine von Neumann algebras (honestly
           scoped: no trace extension, no type classification, tower-GNS deferred).</li>
+        <li><strong>A GNS inductive-limit von Neumann algebra in a proof assistant</strong> — the
+          capacity code tower represented on ONE Hilbert space (the completion of a deliberately
+          semidefinite Gibbs-GNS pre-space — the direct-limit gluing done by the completion, no
+          quotient), with a unit cyclic vector implementing every corner Gibbs state as a vector
+          state, and the directed-union limit von Neumann algebra <code>towerLimitVN</code>
+          characterized by SOT-approximation from the finite stages — the first genuinely
+          infinite-dimensional quantum object of the program (honestly scoped: its type is NOT
+          classified; the III₁ fingerprint stays arithmetic; Ω not shown separating).</li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all twenty-five.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all twenty-six.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority

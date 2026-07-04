@@ -8,8 +8,8 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **368 files and ~4,000
-theorems** (over 5,100 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **378 files and ~4,050
+theorems** (over 5,200 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
 
@@ -948,6 +948,48 @@ preduals or the σ-weak topology, type classification, or the inductive-limit (t
 Hilbert space — the ITPFI tower's limit algebra is packaged only relative to a hypothesized
 common representation, and the crossed-product dual-weight trace is not claimed to extend from
 the algebraic core to the weak closure." The gate to the continuum, not the wall crossed.
+
+</div>
+
+
+## The representation (R1–R9): the tower's limit von Neumann algebra exists
+
+The GNS construction of the compatible Gibbs family: the corner tower — previously a family of
+finite matrix algebras related by embeddings — now acts on ONE Hilbert space, and its
+directed-union limit von Neumann algebra is an actual, named, axiom-free object
+(`QIQTH/TowerGNS/`; the first genuinely infinite-dimensional quantum object of the development).
+
+- **The Hilbert space `TowerGNS`** — the completion of the direct sum of ALL finite corners
+  under the stabilized Gibbs pairing, which is *deliberately semidefinite*: the null directions
+  are exactly the direct-limit gluing, and the metric completion performs the identification
+  (**`towerGerm`**) — no quotient is ever taken. Instance architecture = Mathlib's own
+  `GelfandNaimarkSegal.lean`, verbatim.
+- **The representation `towerRep`** — every corner algebra acts as a unital ⋆-algebra
+  homomorphism (bounded via an elementary Frobenius estimate — honest scope: bounded, NOT
+  claimed contractive), with the algebra laws holding ONLY in the completion (provably false at
+  the pre-level — the stages differ; the germ reconciles). CAPSTONE **`towerRep_cornerEmbed`**:
+  π<sub>C′</sub> ∘ ι = π<sub>C</sub> — the tower acts coherently through every stage.
+- **The cyclic vector Ω** — implements EVERY corner Gibbs state as a vector state
+  (⟪Ω, π<sub>C</sub>(a)Ω⟫ = φ<sub>C</sub>(a)) and its orbit is dense. Ω is NOT shown separating.
+- ★ **`towerLimitVN`** ★ — the directed-union limit von Neumann algebra of the representation
+  images (the double-commutant campaign's `limitVN`, instantiated), with membership characterized
+  by SOT-approximation from the finite stages, and the ℕ-instantiation `freqTowerLimitVN` for
+  the code's frequency tower. The object THE TOWER and THE CLOSURE campaigns were built for.
+
+<div class="note">
+
+<strong>The R9 checkpoint — the two honest sentences.</strong> HAVE: "One Hilbert space — the
+completion of the semidefinite Gibbs-GNS pre-space on the direct sum of all finite corners —
+carrying compatible unital ⋆-representations of every corner algebra (π_{C′} ∘ cornerEmbed =
+π_C for all C ⊆ C′), a unit cyclic vector Ω implementing every corner Gibbs state as a vector
+state (⟪Ω, π_C(a)Ω⟫ = φ_C(a)), and the directed-union limit von Neumann algebra towerLimitVN =
+limitVN of the representation images, with membership characterized by SOT-approximation from
+the finite stages — all axiom-free." HAVE NOT: "The type of towerLimitVN is not classified — no
+factor, no ITPFI identification, no III₁ claim is made or proved (the T3 fingerprint stays
+arithmetic; Araki–Woods 1968 and Connes 1973 stay cited, never invoked); Ω is not shown
+separating, the modular theory of the limit state on the completion is not constructed, and the
+representations are not shown isometric." The continuum is not done — but for the first time it
+has an inhabitant.
 
 </div>
 
