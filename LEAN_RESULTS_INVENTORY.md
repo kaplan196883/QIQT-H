@@ -1129,7 +1129,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (`TowerGNS/TomitaBar.lean`): **`towerTomitaBar`** — the closure of the Tomita operator:
   CLOSED, extends S₀ with the orbit domain a CORE, S̄Ω = Ω, S̄↑(of C a) = ↑(of C aᴴ), dense
   domain, conjugate-homogeneous (twist-guarded), FULLY INVOLUTIVE with ker = ⊥ and range =
-  domain. Next: CC6/CC7 (checkpoint), then THE MODULAR OPERATOR (Δ := F∘S̄).
+  domain. **CC7 — CAMPAIGN COMPLETE** (CC6 semilinear
+  re-bundle CUT, pre-authorized non-necessity). CHECKPOINT (verbatim in Checkpoint.lean): HAVE —
+  S̄ as an object with the four new abstract theorems (the ℝ-restriction view, the
+  sequence-closability bridge — new to Mathlib even for id — and the two transfer theorems);
+  closed, orbit-core, Ω-fixing, conjugate-transpose on the core, twist-guarded, fully involutive,
+  ker = ⊥, range = domain; no real inner product, no adjoint anywhere. HAVE NOT — Δ/J/polar not
+  constructed (the Δ contract is the named next campaign); no σ-semilinear graph theory (the
+  ℝ-reduction sidesteps it — the σ-graph stays Mathlib's open TODO); no KMS-at-limit, no type.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

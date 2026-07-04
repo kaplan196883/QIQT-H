@@ -1,6 +1,6 @@
 # THE CONJUGATE CLOSURE (CC1–CC7): S̄ — the closure of the Tomita operator, as an object
 
-**Status:** ACTIVE (2026-07-08). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
+**Status:** COMPLETE (2026-07-08) — CC1–CC5 + CC7 LANDED; CC6 CUT (pre-authorized, non-necessity); axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
 Mathlib names verified in the pin).** **Goal:** the minimal σ-semilinear closure theory (a
 genuine Mathlib gap — the σ-graph is Mathlib's own explicit TODO at LinearPMap.lean:27-29)
 sufficient to construct **`towerTomitaBar` := the closure S̄ of towerTomita₀** as an object:
@@ -66,9 +66,9 @@ with the orbit domain a CORE. Sets up (WITHOUT constructing) the Δ contract. Fi
   (le_closure), S̄Ω = Ω, S̄↑(of C a) = ↑(of C aᴴ), dense domain, ConjHomogeneous + THE TWIST
   GUARD (S̄(c•Ω) = conj c•Ω), FULL INVOLUTION, closureHasCore (free). Risk MEDIUM (Completion
   elaboration — the whnf hazard; spec-lemma discipline). 
-- [ ] **CC6 (STRETCH, CUTTABLE) — re-bundle S̄ semilinear** — `towerTomitaBarₛₗ` + round-trip.
+- [x] **CC6 (STRETCH, CUTTABLE) — re-bundle S̄ semilinear** ✂ CUT (pre-authorized: not needed by the Δ contract) — `towerTomitaBarₛₗ` + round-trip.
   Not needed by the Δ contract; cut without shame.
-- [ ] **CC7 — checkpoint** — the HAVE/HAVE-NOT sentences VERBATIM (below) into
+- [x] **CC7 — checkpoint** ✅ DONE — the HAVE/HAVE-NOT sentences VERBATIM (below) into
   TowerGNS/Checkpoint.lean (ConjClosure stanza) + inventory; the Δ-contract docstring;
   AxiomAudit pins; plan → COMPLETE; delete the loop; stop.
 
@@ -140,3 +140,11 @@ Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose 
   GUARD, FULL INVOLUTION (GraphSymm) + ker = ⊥ + range = domain. le_closure is unconditional in
   the pin. NEXT → CC6 (stretch; assess) → CC7 (checkpoint) → then per the standing directive:
   scope THE MODULAR OPERATOR.
+
+- **2026-07-08** — **CC7 LANDED — CAMPAIGN COMPLETE (CC6 cut per pre-authorization).** The
+  ConjClosure HAVE/HAVE-NOT stanza VERBATIM in TowerGNS/Checkpoint.lean (with the CC6-cut note);
+  inventory updated. S̄ STANDS: closed, orbit-core, Ω-fixing, conjugate-transpose on pure
+  components, twist-guarded conjugate-homogeneous, fully involutive, ker = ⊥, range = domain —
+  and the σ-semilinear closure theory's four abstract theorems are Mathlib-gap contributions
+  (isClosable_of_seq is new even for id). Per the standing continuous-QG directive: the loop
+  CONTINUES — next campaign THE MODULAR OPERATOR (Δ := F∘S̄ per the documented contract).

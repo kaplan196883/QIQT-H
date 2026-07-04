@@ -109,6 +109,27 @@ import QIQTH.TowerGNS.CyclicVector
   adjoint theories cover only ℂ-linear (identity ring-hom) partial maps, and a conjugate-linear
   closure theory is not built here."
 -/
+/-
+  THE CONJUGATE CLOSURE (CC1–CC7) — THE CAMPAIGN CHECKPOINT (CC1–CC5 + CC7 landed; CC6 — the
+  semilinear re-bundle — CUT per the plan's unconditional pre-authorization: not needed by the
+  Δ contract; axiom-free std-3, budget 0).
+
+  HAVE: "The closure S̄ of the Tomita operator is constructed as an object — towerTomitaBar, the
+  Mathlib closure of the ℝ-linear restriction of towerTomita₀, with the four new abstract
+  theorems this required (the ℝ-restriction view of a conjugate-linear partial map, the
+  sequence-criterion closability bridge, and the transfer theorems showing
+  conjugate-homogeneity and the involution survive closure): S̄ is closed, extends S₀ with the
+  orbit domain as a core, fixes Ω, acts as conjugate-transpose on pure components, is
+  conjugate-homogeneous, and is FULLY involutive on its domain with trivial kernel and range
+  equal to domain — all axiom-free, with no real inner product and no adjoint used anywhere."
+
+  HAVE NOT: "The modular operator Δ, the conjugation J, and the polar decomposition are not
+  constructed (the documented Δ contract — Tomita's F as the conjugate-linear adjoint through
+  the sesquilinear pairing, then Δ := F∘S̄ ℂ-linear — is the named next campaign); no
+  σ-semilinear graph or closure theory is contributed to Mathlib here (the ℝ-reduction
+  sidesteps it; the σ-graph remains Mathlib's own open TODO); no KMS condition of the limit
+  state and no von Neumann type is claimed."
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS
