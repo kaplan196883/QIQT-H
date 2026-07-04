@@ -8518,6 +8518,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.rawInner_self_re_nonneg
 #print axioms QIQTH.TowerGNS.towerCore
 #print axioms QIQTH.TowerGNS.towerInner_of_of
+-- THE REPRESENTATION R4 (TowerGNS/Germ.lean): THE GERM IDENTITY — towerGerm: in the completion,
+-- ↑(of C' (ι a)) = ↑(of C a) (all four cross-pairings equal gnsInner C' (ιa) (ιa) at the common
+-- stage via R2 stage stability + T7 state compatibility ⟹ the difference is a NULL vector; the
+-- metric completion identifies it — the direct-limit gluing, no quotient). Plus cornerEmbed_refl
+-- (Subtype eta), towerCyclicVec Ω := ↑(of ∅ 1) with ⟪Ω,Ω⟫ = 1 (DY2 normalization) and ‖Ω‖ = 1,
+-- inner_coe_of_of. Std 3.
+#print axioms QIQTH.TowerGNS.towerGerm
+#print axioms QIQTH.TowerGNS.inner_cyclicVec_self
+#print axioms QIQTH.TowerGNS.norm_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

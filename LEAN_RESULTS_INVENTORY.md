@@ -985,7 +985,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   gluing — no quotient), stage collapse + **`rawInner_eq_collapse`**, positivity, the
   `PreInnerProductSpace.Core` → seminormed → `InnerProductSpace` chain in the GNS-file order,
   and **`TowerGNS := UniformSpace.Completion (TowerPre …)`** — the Hilbert space of the tower.
-  Next: R4 (the germ identity + the cyclic vector).
+  **R4 LANDED — THE GERM IDENTITY** (`TowerGNS/Germ.lean`, **[AF]** std-3): **`towerGerm`** —
+  in the completion, ↑(of C′ (ι a)) = ↑(of C a) (the difference is a null vector; the metric
+  completion identifies it — the direct-limit gluing with no quotient); the cyclic vector
+  **Ω := ↑(of ∅ 1)** with ⟪Ω,Ω⟫ = 1 (DY2 normalization) and ‖Ω‖ = 1. The compatibility engine
+  for the representation (R7). Next: R5 (the GNS boundedness inequality).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

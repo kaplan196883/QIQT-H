@@ -81,7 +81,7 @@ namespace `QIQTH.TowerGNS`.
   UniformSpace.Completion (TowerPre …)`; `towerInner_of_of`; `collapseₗ` + @[simp]
   `collapse_of_le/not_le` + **`inner_eq_collapse`**; `re_inner_nonneg`. Risk MEDIUM (the
   DirectSum bookkeeping increment).
-- [ ] **R4 — `QIQTH/TowerGNS/Germ.lean`**: **`towerGerm`** (A7); `towerCyclicVec` +
+- [x] **R4 — `QIQTH/TowerGNS/Germ.lean`** ✅ DONE: **`towerGerm`** (A7); `towerCyclicVec` +
   `inner_cyclicVec_self` + `norm_cyclicVec`; `inner_coe_of_of` (from Completion.inner_coe).
   Risk LOW.
 - [ ] **R5 — `QIQTH/TowerGNS/StageBound.lean`**: the GNS boundedness inequality — `frobBound`
@@ -194,3 +194,16 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   at the RAW ⨁ type; the synonym's `inferInstanceAs` instances vs the direct sum's own cause
   instance-path mismatches inside rw-proofs — Core fields DELEGATE by application-position
   defeq, never rw. NEXT → R4 (Germ).
+
+- **2026-07-05** — **R4 LANDED — THE GERM IDENTITY** (`QIQTH/TowerGNS/Germ.lean`, axiom-free
+  std-3, budget 0, two iterations): CAPSTONE **`towerGerm`** — in the completion,
+  ↑(of C′ (ι a)) = ↑(of C a): all four cross-pairings equal gnsInner C′ (ιa)(ιa) at the common
+  stage (R2 stage stability + `cornerEmbed_refl`), so ⟪u−v, u−v⟫ = 0 (`inner_sub_sub_self` +
+  ring), the norm vanishes (`inner_self_eq_norm_sq` + `pow_eq_zero_iff`), and the METRIC
+  completion identifies (`Completion.dist_eq` + `eq_of_dist_eq_zero`) — THE direct-limit gluing,
+  no quotient. Plus **`cornerEmbed_refl`** (identity embedding is the identity — Subtype eta;
+  STATED WITH AN ARBITRARY PROOF ARG for robust rw matching), Ω := ↑(of ∅ 1) with **⟪Ω,Ω⟫ = 1**
+  (DY2's `sum_gibbsWeight_one`) and ‖Ω‖ = 1, `inner_coe_of_of`. Lean notes: rw rewrites ALL
+  occurrences of one instantiation (duplicate `cornerEmbed_refl` in a chain fails); `if_pos`
+  needs a named `have` for the Prop (inline lambda won't elaborate); `sq_eq_zero_iff` gets stuck
+  on Monoid metavariables — use `pow_eq_zero_iff two_ne_zero`. NEXT → R5 (StageBound).
