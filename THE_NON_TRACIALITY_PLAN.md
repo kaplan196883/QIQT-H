@@ -43,7 +43,7 @@ b*a = single m m 1 ⟹ tr = w_m. Unequal iff w_n ≠ w_m. Cross-checks: modAut �
   (h : gibbsWeight n ≠ gibbsWeight m) : stateOf ρ (single n m 1 * single m n 1) ≠
   stateOf ρ (single m n 1 * single n m 1)`. Lemmas: Matrix.single_mul_single_same,
   QIQTH.Tower.trace_diagonal_mul (CornerEmbed.lean:237), Complex.ofReal_injective.
-- [ ] **N2 — same or `TowerNonTrace.lean`: tower vacuum vector state non-tracial.**
+- [x] **N2 — `NonTracial/TowerNonTrace.lean`: tower vacuum vector state non-tracial.** ✅ DONE
   (risk LOW) `towerVacuum_not_tracial (h : w_n ≠ w_m) : ⟪Ω, π_C(single n m 1)(π_C(single m n
   1)Ω)⟫ ≠ ⟪Ω, π_C(single m n 1)(π_C(single n m 1)Ω)⟫`. Route: ContinuousLinearMap.mul_apply
   + map_mul (towerRep) to collapse π(a)(π(b)Ω) = π(a*b)Ω; towerRep_inner_cyclicVec; N1.
@@ -120,3 +120,9 @@ website files).
   swapped instance = w_m — ONE lemma covers both); ★ gibbs_state_not_tracial (w_n ≠ w_m ⟹
   ω(E_nm E_mn) ≠ ω(E_mn E_nm), via Complex.ofReal_injective). Std-3, budget 0. Next: N2
   (tower vacuum vector state non-tracial).
+
+- **2026-07-05** — **N2 LANDED (green first try, 5-line proof).** TowerNonTrace.lean:
+  ★ towerVacuum_not_tracial — ⟪Ω, π(E_nm)π(E_mn)Ω⟫ = w_n ≠ w_m = ⟪Ω, π(E_mn)π(E_nm)Ω⟫;
+  towerRep is a unital ⋆-algebra hom into CLMs, so the word collapses via
+  ContinuousLinearMap.mul_apply + map_mul, then towerRep_inner_cyclicVec (Ω on the left,
+  orientation matched) + N1. Std-3, budget 0. Next: N3 (Δ ≠ 1, Δ^{it} ≠ id).
