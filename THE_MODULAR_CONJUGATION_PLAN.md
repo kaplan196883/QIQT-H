@@ -43,7 +43,7 @@ against sources; the full arithmetic + design record is in the consult.
 
 ## The increments
 
-- [ ] **J1 — `TowerGNS/JStage.lean`**: jStage, deltaHalfStage + the lemma pack
+- [x] **J1 — `TowerGNS/JStage.lean`**: ✅ DONE jStage, deltaHalfStage + the lemma pack
   (jStage_single ★ the verified scalar; jStage_deltaHalfStage = ᴴ; deltaHalfStage_jStage =
   modAut∘ᴴ; deltaHalfStage_sq = modAut (invOf trick, Tomita.lean:490);
   gnsInner_jStage anti-isometry; rightConj_jStage = ᴴ; involutive/one/anti_mul/conj-smul).
@@ -119,3 +119,11 @@ paths only.
   cross-stage invariance pre-derisked via E1; Tomita II scoped honestly to the inclusion).
   THE IDENTIFICATION campaign closed immediately prior (towerFlow = Δ^{it} + Tomita I,
   36th first synced at 2f30e10).
+
+- **2026-07-05** — **J1 LANDED (green first try).** JStage.lean: jStage = √ρ·aᴴ·√ρ⁻¹ and
+  deltaHalfStage = √ρ·a·√ρ⁻¹; ★ jStage_single (the verified scalar √(w_m/w_n), flipped
+  indices, conjugated entry; ratio-under-one-sqrt shape); the algebraic pack (involutive,
+  anti_mul, conj-smul twist, one); the polar-core trio (J∘Δ½ = ᴴ, Δ½∘J = modAut∘ᴴ,
+  Δ½² = modAut); ★ gnsInner_jStage (single-stage anti-isometry, trace-cycled);
+  rightConj_jStage = ᴴ (the J2 engine feed); + 5 toolkit extensions. Std-3, budget 0.
+  Next: J2 (the cross-stage law).

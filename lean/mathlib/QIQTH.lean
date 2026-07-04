@@ -119,6 +119,7 @@ import QIQTH.TowerGNS.ModularEigenvectors
 import QIQTH.TowerGNS.ModularUnitaryEigen
 import QIQTH.TowerGNS.Identification
 import QIQTH.TowerGNS.TomitaFirstHalf
+import QIQTH.TowerGNS.JStage
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

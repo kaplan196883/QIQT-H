@@ -1240,6 +1240,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   campaign, same eigenbasis method); no strip-KMS; no type; finite-stage Gibbs
   inductive-limit only.
 
+**THE MODULAR CONJUGATION CAMPAIGN (ACTIVE, THE_MODULAR_CONJUGATION_PLAN.md)** — J, the
+  polar decomposition on the core, Tomita II (inclusion). **J1 LANDED**: `JStage.lean` —
+  the finite J layer: jStage = √ρ·aᴴ·√ρ⁻¹ with the verified eigenbasis scalar √(w_m/w_n),
+  the polar-core trio, and the single-stage anti-isometry (green first try). Next: J2
+  (cornerEmbed_jStage — the cross-stage law via THE ENGINE E1).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

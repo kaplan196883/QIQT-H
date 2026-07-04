@@ -8864,6 +8864,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerModUnitary_conj_towerRep
 #print axioms QIQTH.TowerGNS.towerLimitVN_modUnitary_invariant
 #print axioms QIQTH.TowerGNS.towerLimitVN_modUnitary_conj_mem_iff
+-- THE MODULAR CONJUGATION J1 (TowerGNS/JStage.lean): the finite J layer -- jStage a =
+-- sqrt(rho) a-dagger sqrt(rho)^{-1}: the verified scalar sqrt(w_m/w_n) with flipped indices
+-- and conjugated entry; involutive, anti-multiplicative, conj-smul twist; the polar-core
+-- trio (J o Delta-half = dagger, Delta-half o J = modAut o dagger, Delta-half squared =
+-- modAut); the single-stage anti-isometry gnsInner (Jx)(Jy) = gnsInner y x. Std 3.
+#print axioms QIQTH.TowerGNS.jStage_single
+#print axioms QIQTH.TowerGNS.gnsInner_jStage
+#print axioms QIQTH.TowerGNS.jStage_deltaHalfStage
+#print axioms QIQTH.TowerGNS.deltaHalfStage_sq
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
