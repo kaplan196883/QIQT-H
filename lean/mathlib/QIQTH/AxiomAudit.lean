@@ -8904,6 +8904,13 @@ namespace QIQTH.AxiomAudit
 -- back), via the raw flow exchange and the ID4 identification. Std 3.
 #print axioms QIQTH.TowerGNS.towerJ_towerFlow
 #print axioms QIQTH.TowerGNS.towerJ_towerModUnitary
+-- THE MODULAR CONJUGATION J7 (TowerGNS/ConjImplements.lean): J conjugates left into right
+-- multiplication -- jconj T := J o T o J (C-linear, two conjugations cancel), and the core
+-- identity J pi_C(a) J = R_{jStage a} (jconj_towerRep); plus the SOTApprox transport for J8.
+-- Std 3.
+#print axioms QIQTH.TowerGNS.jconj_towerRep
+#print axioms QIQTH.TowerGNS.jconj_involutive
+#print axioms QIQTH.TowerGNS.jconj_sotApprox
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

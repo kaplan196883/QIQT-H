@@ -1275,8 +1275,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   guard positive: the compositions provably differ), Δ^{1/2}² = Δ-core (green first try;
   honest: core-level identity, no unbounded Δ^{1/2}). **J6 LANDED**: `ConjFlow.lean` — J commutes with
   the full modular group: JΔ^{it} = Δ^{it}J (the correct sign — antilinearity flips i,
-  JΔJ = Δ⁻¹ flips back; green first try). Next: J7 (jconj_towerRep), J8 (Tomita II
-  inclusion), J9 (checkpoint).
+  JΔJ = Δ⁻¹ flips back; green first try). **J7 LANDED**: `ConjImplements.lean` — J conjugates
+  left multiplication into right multiplication: **J π_C(a) J = R_{jStage a}**
+  (jconj_towerRep), with jconj := J∘T∘J the ℂ-linear double-conjugation and the SOTApprox
+  transport for J8 (green first try). Next: J8 (J M J ⊆ M′ — the inclusion), J9
+  (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

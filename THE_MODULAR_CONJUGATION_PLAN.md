@@ -64,7 +64,7 @@ against sources; the full arithmetic + design record is in the consult.
 - [x] **J6 — `TowerGNS/ConjFlow.lean`**: ✅ DONE jRaw_flowRaw → towerJ_towerFlow →
   ★ towerJ_modUnitary (JΔ^{it} = Δ^{it}J pointwise, via towerFlow_eq_towerModUnitary).
   Risk LOW.
-- [ ] **J7 — `TowerGNS/ConjImplements.lean`**: jconj (hand-bundled double-conj CLM),
+- [x] **J7 — `TowerGNS/ConjImplements.lean`**: ✅ DONE jconj (hand-bundled double-conj CLM),
   jconj_involutive, jconj_sot; ★ jconj_towerRep : jconj (towerRep C a) =
   towerRightMulCLM C (jStage C a) (stage bookkeeping mirrors towerRightMulCLM_adjoint).
   Risk MEDIUM.
@@ -161,3 +161,10 @@ paths only.
   sign per the order guard; capstone named towerJ_towerModUnitary vs the plan's
   towerJ_modUnitary). Std-3, budget 0. Next: J7 (jconj — J conjugates left into right
   multiplication).
+
+- **2026-07-05** — **J7 LANDED (green first try — the whnf timeout on congr 1 avoided by
+  rewriting inside `of`).** ConjImplements.lean: jconj T := J∘T∘J (ℂ-linear CLM, two
+  conjugations cancel); jconj_involutive; jconj_sotApprox (the Set-image SOT transport for
+  J8, matching Bicommutant's SOTApprox); ★ jconj_towerRep — J π_C(a) J = R_{jStage a}, the
+  core Tomita-II identity (raw jRaw_leftMulRaw_jRaw via anti_mul + cornerEmbed_jStage +
+  involutive). Std-3, budget 0. Next: J8 (the inclusion J M J ⊆ M′).
