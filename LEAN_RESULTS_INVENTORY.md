@@ -997,7 +997,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **R6 LANDED** (`TowerGNS/LeftMul.lean`, **[AF]** std-3): the bounded pre-operator —
   `leftMulRaw` (left multiplication after embedding, per component), **`collapse_leftMul`**
   (the stage collapse intertwines), the norm bound **‖T_a x‖ ≤ √c(a)·‖x‖**, and
-  **`towerLeftMul`** via `LinearMap.mkContinuous`. Next: R7 (the ⋆-representation on TowerGNS).
+  **`towerLeftMul`** via `LinearMap.mkContinuous`. **R7 LANDED — THE ⋆-REPRESENTATION**
+  (`TowerGNS/Representation.lean`, **[AF]** std-3): **`towerRep C₀ : DiamondAlg L C₀ →⋆ₐ[ℂ]
+  (TowerGNS →L TowerGNS)`** — every corner algebra acts on the ONE Hilbert space as a unital
+  ⋆-algebra homomorphism (laws in the completion via the germ; star via the adjoint relation),
+  with CAPSTONE **`towerRep_cornerEmbed`** (π_{C′} ∘ cornerEmbed = π_C — the tower acts
+  coherently through every stage). Next: R8 (cyclicity + the vector state identity).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

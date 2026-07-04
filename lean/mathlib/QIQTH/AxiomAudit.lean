@@ -8544,6 +8544,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.collapse_leftMul
 #print axioms QIQTH.TowerGNS.leftMulRaw_norm_le
 #print axioms QIQTH.TowerGNS.towerLeftMul
+-- THE REPRESENTATION R7 (TowerGNS/Representation.lean): THE ⋆-REPRESENTATION — towerRep C₀ :
+-- DiamondAlg L C₀ →⋆ₐ[ℂ] (TowerGNS →L TowerGNS) via (towerLeftMul …).completion; one/mul/star
+-- laws ONLY in the completion (pre-level one/mul are FALSE — stages differ; towerGerm
+-- reconciles, GNS-file induction incantations); star via eq_adjoint_iff + the raw adjoint
+-- relation (conjTranspose_mul + mul_assoc under the Gibbs state). CAPSTONE towerRep_cornerEmbed:
+-- π_{C'} ∘ cornerEmbed = π_C — the tower acts COHERENTLY. Std 3.
+#print axioms QIQTH.TowerGNS.towerRep
+#print axioms QIQTH.TowerGNS.towerRepCLM_star
+#print axioms QIQTH.TowerGNS.towerRep_cornerEmbed
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

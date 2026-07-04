@@ -85,6 +85,7 @@ import QIQTH.TowerGNS.PreSpace
 import QIQTH.TowerGNS.Germ
 import QIQTH.TowerGNS.StageBound
 import QIQTH.TowerGNS.LeftMul
+import QIQTH.TowerGNS.Representation
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

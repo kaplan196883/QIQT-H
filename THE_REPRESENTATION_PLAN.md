@@ -91,7 +91,7 @@ namespace `QIQTH.TowerGNS`.
 - [x] **R6 — `QIQTH/TowerGNS/LeftMul.lean`** ✅ DONE: the bounded pre-operator — `towerLeftMulₗ a` (A6);
   `collapse_leftMul`; the norm bound (R5 + inner_eq_collapse + √-conversion per GNS file
   114-116); **`towerLeftMul a := (towerLeftMulₗ a).mkContinuous …`**. Risk MEDIUM.
-- [ ] **R7 — `QIQTH/TowerGNS/Representation.lean`**: **`towerRep C : DiamondAlg L C →⋆ₐ[ℂ]
+- [x] **R7 — `QIQTH/TowerGNS/Representation.lean`** ✅ DONE: **`towerRep C : DiamondAlg L C →⋆ₐ[ℂ]
   (TowerGNS →L[ℂ] TowerGNS)`** via `(towerLeftMul a).completion`; laws by the GNS-file induction
   pattern (map_one needs towerGerm); map_star via eq_adjoint_iff + the pre-level trace identity;
   **`towerRep_cornerEmbed`** (π_{C'} ∘ ι = π_C — germ + density). Risk MEDIUM.
@@ -231,3 +231,14 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   does NOT retype for instance search (Norm (⨁…) fails) — wrap in towerLeftMulₗ first; ⊔ vs ∪
   on Finset needs an explicitly ⊔-typed have; DFinsupp.finset_sum_apply deprecated →
   finsetSum_apply. NEXT → R7 (Representation — the ⋆-hom).
+
+- **2026-07-05** — **R7 LANDED — THE ⋆-REPRESENTATION** (`QIQTH/TowerGNS/Representation.lean`,
+  axiom-free std-3, budget 0; fable subagent, two iterations): **`towerRep C₀ : DiamondAlg L C₀
+  →⋆ₐ[ℂ] (TowerGNS →L TowerGNS)`** via `(towerLeftMul …).completion`; pre-level add/smul/zero
+  laws raw; one/mul ONLY in the completion (FALSE at pre-level — stages differ; `towerGerm`
+  reconciles after `cornerEmbed_mul/trans + mul_assoc` stage-alignment; the GNS-file induction
+  incantations verbatim); **`towerRepCLM_star`** via `eq_adjoint_iff` + the raw adjoint relation
+  (conjTranspose_mul + mul_assoc under the Gibbs state at the common stage); CAPSTONE
+  **`towerRep_cornerEmbed`** — π_{C′} ∘ cornerEmbed = π_C: THE TOWER ACTS COHERENTLY. Key move:
+  a `towerCoe` wrapper so all germ-reconciliation lemmas quantify over RAW ⨁ vectors (no synonym
+  mismatch); `coe_add/coe_smul` need explicit (α := TowerPre …). NEXT → R8 (CyclicVector).
