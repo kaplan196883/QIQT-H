@@ -1192,8 +1192,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   everywhere-defined CLM contraction with the full API (Rh + Δ(Rh) = h, R(x+Δx) = x,
   Δ∘R = 1−R, injective, dense range = dom Δ, ‖Rh‖ ≤ ‖h‖); green first try. **R2 LANDED**: `ResolventOrder.lean` — R is
   self-adjoint, positive with 0 ≤ R ≤ 1 (Loewner), ‖R‖ ≤ 1, spectrum ⊆ [0,1], RΩ = ½Ω
-  (green first try). Next: R3 (`Spectral/PVMEigen.lean` — the abstract PVM eigenvector/atom
-  calculus: E({0}) = 0 for injective T, boundedFC_apply_eigenvector).
+  (green first try). **R3 LANDED IN FULL**: `Spectral/PVMEigen.lean` —
+  the abstract PVM eigenvector/atom calculus: E finite additivity/complement; the generic
+  T = borelFC T (coord) (operator-level spectral theorem); THE KERNEL ATOM (Injective T ⟹
+  E(val⁻¹{0}) = 0); eigenvector localization + E({r})x = x + capstone
+  borelFC_apply_eigenvector (f(T)x = f(r)•x). Next: R4 (towerModChar symbol + the unitary
+  group — transcription from the StandardSubspaceModularFlow template).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

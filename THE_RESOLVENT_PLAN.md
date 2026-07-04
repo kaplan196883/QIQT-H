@@ -42,7 +42,7 @@ Key verified facts:
   (isSelfAdjoint_iff_isSymmetric); nonneg (re⟪Rh,h⟫ = ‖Rh‖² + ‖S̄Rh‖²); R ≤ 1
   (re⟪h−Rh,h⟫ = ‖S̄Rh‖² + ‖ΔRh‖²); ‖R‖ ≤ 1; spectrum ⊆ Icc 0 1 (verbatim port of
   rvdRC_spectrum_mem_Icc with 1−R); towerResolvent_cyclicVec: RΩ = ½Ω. Risk LOW.
-- [ ] **R3 — `Spectral/PVMEigen.lean` (abstract, reusable — THE NEW MATH).**
+- [x] **R3 — `Spectral/PVMEigen.lean` (abstract, reusable — THE NEW MATH).** ✅ DONE (FULL, (d) included)
   (a) PVM finite additivity + E_compl from hasSum_iUnion. (b) generic eq_borelFC
   (T = ∫λ dE, de-specialize rvdRC_eq_borelFC/diagInt_specCoord). (c) KERNEL ATOM:
   Injective T ⟹ E(coe⁻¹'{0}) = 0 (coord·1_{coord=0} = 0 pointwise ⟹ T∘E({0}) =
@@ -140,3 +140,12 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   re-inner identities: ⟪Rh,h⟫ = ‖Rh‖² + ‖S̄Rh‖², ⟪h−Rh,h⟫ = ‖S̄Rh‖² + ‖ΔRh‖²), ‖R‖ ≤ 1,
   spectrum ⊆ [0,1] (verbatim rvdRC port), and RΩ = ½Ω. Std-3, budget 0. Next: R3 (the
   PVM eigenvector/atom calculus — the new math).
+
+- **2026-07-05** — **R3 LANDED IN FULL — the risky increment, (d) included (3 build
+  iterations).** Spectral/PVMEigen.lean: (a) E finite additivity + complement; (b) the
+  generic operator-level spectral theorem T = borelFC T (coord) (rvd bridge de-specialized;
+  bound ‖T‖·‖1‖ via spectrum.norm_le_norm_mul_of_mem — no caller hypothesis needed);
+  (c) THE KERNEL ATOM E_zero_atom_of_injective; (d) eigenvector localization
+  (inverse-symbol trick), E_eigenvector_atom via Mathlib `disjointed` annuli (needs neither
+  x ≠ 0 nor r ∈ σ(T)), capstone borelFC_apply_eigenvector. Std-3, budget 0.
+  Next: R4 (symbol + group — transcription).

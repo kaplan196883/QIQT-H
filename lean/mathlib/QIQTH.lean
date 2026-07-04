@@ -449,6 +449,7 @@ import QIQTH.Spectral.ModularGenerator
 import QIQTH.Spectral.Garding
 import QIQTH.Spectral.StoneProduct
 import QIQTH.Spectral.StoneExp
+import QIQTH.Spectral.PVMEigen
 -- Prize Stage 3.1 (finite case): the matrix spectral theorem packaged as a PVM — eigenprojections
 -- Pᵢ = U·diag(δᵢ)·U⋆ with ∑Pᵢ=1 (resolution of identity), Pᵢ²=Pᵢ, PᵢPⱼ=0, Pᵢ⋆=Pᵢ. The finite,
 -- axiom-free case of the bounded-spectral-theorem target (continuum stays open). Standard axioms:

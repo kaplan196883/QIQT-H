@@ -8799,6 +8799,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerResolvent_nonneg
 #print axioms QIQTH.TowerGNS.towerResolvent_spectrum_mem_Icc
 #print axioms QIQTH.TowerGNS.towerResolvent_cyclicVec
+-- THE RESOLVENT R3 (Spectral/PVMEigen.lean): the PVM eigenvector/atom calculus, abstract --
+-- E finite additivity + complement; T = borelFC T (coord) (the operator-level spectral
+-- theorem, de-specialized); THE KERNEL ATOM: Injective T => E(val^-1 {0}) = 0 (NOT automatic
+-- from kernel triviality -- the multiplicative argument); eigenvector localization +
+-- E({r})x = x + the capstone borelFC f x = f(r) . x. Std 3.
+#print axioms QIQTH.SpectralTheorem.eq_borelFC
+#print axioms QIQTH.SpectralTheorem.E_zero_atom_of_injective
+#print axioms QIQTH.SpectralTheorem.E_eigenvector_atom
+#print axioms QIQTH.SpectralTheorem.borelFC_apply_eigenvector
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
