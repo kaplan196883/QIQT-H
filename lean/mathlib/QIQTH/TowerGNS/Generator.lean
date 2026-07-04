@@ -333,4 +333,30 @@ theorem dense_stoneDomain :
   rintro ξ ⟨x, rfl⟩
   exact coe_pre_mem_stoneDomain L ω β x
 
+/-! ### G4 — flow covariance of the generator
+
+Both facts are free by instantiation of the general Stone theorems
+(`stoneDomain_apply_mem`, `stoneGen_comm_flow`) with the transported flow and the named
+group-law adapter `towerFlow_compL`. (Transport, not Tomita: no Δ, J, S, or separating
+property is claimed.) -/
+
+/-- **The flow preserves the smooth domain**: `U_s ξ ∈ stoneDomain` whenever
+    `ξ ∈ stoneDomain` — `stoneDomain_apply_mem` instantiated with `towerFlow` and the group
+    law `towerFlow_compL`. -/
+theorem towerGen_domain_flow_mem (s : ℝ) {ξ : TowerGNS L ω β}
+    (hξ : ξ ∈ QIQTH.Spectral.stoneDomain (towerFlow L ω β)) :
+    towerFlow L ω β s ξ ∈ QIQTH.Spectral.stoneDomain (towerFlow L ω β) :=
+  QIQTH.Spectral.stoneDomain_apply_mem (towerFlow L ω β) (towerFlow_compL L ω β) s ξ hξ
+
+/-- **★★ G4 CAPSTONE — THE GENERATOR COMMUTES WITH THE FLOW**:
+    `towerGen (U_s ξ) = U_s (towerGen ξ)` on the smooth domain, i.e. `[towerGen, U_s] = 0` —
+    `stoneGen_comm_flow` instantiated with `towerFlow` and `towerFlow_compL`. The
+    `U`-invariance of the generator: the transported flow's clock energy is compatible with
+    the flow it is read off from. -/
+theorem towerGen_comm_towerFlow (s : ℝ) {ξ : TowerGNS L ω β}
+    (hξ : ξ ∈ QIQTH.Spectral.stoneDomain (towerFlow L ω β)) :
+    towerGen L ω β ⟨towerFlow L ω β s ξ, towerGen_domain_flow_mem L ω β s hξ⟩
+      = towerFlow L ω β s (towerGen L ω β ⟨ξ, hξ⟩) :=
+  QIQTH.Spectral.stoneGen_comm_flow (towerFlow L ω β) (towerFlow_compL L ω β) s ⟨ξ, hξ⟩
+
 end QIQTH.TowerGNS

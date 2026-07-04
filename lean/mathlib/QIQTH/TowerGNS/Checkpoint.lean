@@ -51,6 +51,27 @@ import QIQTH.TowerGNS.CyclicVector
   the limit state." (With B7 shipped, strong continuity IS claimed; the Stone generator is NOT —
   the named post-campaign hook into the held Spectral/Stone tower.)
 -/
+/-
+  THE GENERATOR (G1–G6) — THE CAMPAIGN CHECKPOINT (all increments landed; axiom-free std-3,
+  budget 0).
+
+  HAVE: "The transported tower flow has a genuine self-adjoint unbounded generator: towerGen :=
+  stoneGen (towerFlow) is a LinearPMap with IsSelfAdjoint towerGen (K = K† in Mathlib's adjoint
+  sense), axiom-free, obtained by instantiating the general Stone-generator theorem with the
+  five held Track-B group facts." "The cyclic vector is a zero-mode: Ω ∈ dom(towerGen) and
+  towerGen Ω = 0, because the flow fixes Ω exactly." "The generator is explicitly computed on a
+  dense core: every coerced pure component ↑(of C a) lies in dom(towerGen) with
+  towerGen ↑(of C a) = ↑(of C ([H_C, a])), where H_C = diagonal(log gibbsWeight) — the
+  finite-stage phases κ_nm = log w_n − log w_m of the held entry formula; the domain is
+  therefore dense constructively, not only via Gårding mollification." "The generator commutes
+  with its own flow: U_s maps dom(towerGen) into itself and towerGen (U_s ξ) = U_s (towerGen ξ)."
+
+  HAVE NOT: "towerGen is NOT constructed from, and NOT claimed equal to, a Tomita modular
+  Hamiltonian log Δ of the limit state — no Δ, J, S, separating property, KMS-at-the-limit, or
+  von Neumann type is claimed. No spectral resolution (PVM) of the unbounded towerGen is
+  claimed, and no exponential-recovery identity towerFlow t = exp(it·towerGen) is claimed — the
+  recovery wall is open by design and the campaign does not cross it."
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS

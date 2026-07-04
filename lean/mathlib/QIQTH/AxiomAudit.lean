@@ -8651,6 +8651,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerGen_of
 #print axioms QIQTH.TowerGNS.cornerGenMatrix_eq_commutator
 #print axioms QIQTH.TowerGNS.dense_stoneDomain
+-- THE GENERATOR G4 (Generator.lean cont.): flow covariance — towerGen_domain_flow_mem (U_s
+-- preserves the domain) + CAPSTONE towerGen_comm_towerFlow (K U_s = U_s K) — both pure
+-- instantiations of the held Stone lemmas. Std 3.
+#print axioms QIQTH.TowerGNS.towerGen_comm_towerFlow
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

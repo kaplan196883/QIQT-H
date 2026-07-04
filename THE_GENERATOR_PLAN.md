@@ -1,6 +1,6 @@
 # THE GENERATOR (G1–G6): the self-adjoint Stone generator of the transported flow
 
-**Status:** ACTIVE (2026-07-07). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
+**Status:** COMPLETE (2026-07-07) — G1–G6 ALL LANDED, axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all
 held APIs read).** **Goal:** `towerGen := stoneGen (towerFlow)` — the genuine self-adjoint
 unbounded generator of the tower's strongly continuous modular dynamics, by instantiating the
 held Stone theorem (`stoneGen_isSelfAdjoint`, Garding.lean:740) with the five Track-B facts,
@@ -51,10 +51,10 @@ File: `QIQTH/TowerGNS/Generator.lean` (pattern = `Spectral/ModularGenerator.lean
   pre-vector ∈ domain (finite raw support, stoneDomain submodule); **`dense_stoneDomain`**
   CONSTRUCTIVELY (denseRange_coe — independent of Gårding mollification). Risk MEDIUM (the only
   new analysis; mitigations above binding).
-- [ ] **G4 — same file**: `towerGen_domain_flow_mem` (U_s maps dom to dom — stoneDomain_apply_mem
+- [x] **G4 — same file** ✅ DONE: `towerGen_domain_flow_mem` (U_s maps dom to dom — stoneDomain_apply_mem
   via towerFlow_compL) + **`towerGen_comm_towerFlow`** (K U_s = U_s K — stoneGen_comm_flow
   instantiated). Risk LOW.
-- [ ] **G6 — checkpoint**: the HAVE/HAVE-NOT sentences VERBATIM (below) into
+- [x] **G6 — checkpoint** ✅ DONE: the HAVE/HAVE-NOT sentences VERBATIM (below) into
   `TowerGNS/Checkpoint.lean` (Generator stanza) + inventory; AxiomAudit pins; plan → COMPLETE;
   delete the loop; stop.
 
@@ -124,3 +124,11 @@ Consults: Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (nev
   **`dense_stoneDomain`** CONSTRUCTIVELY (denseRange_coe — Gårding-free). Lean notes: this pin
   has Matrix.single/matrix_eq_sum_single (not stdBasisMatrix); HasDerivAt.fun_sum (not .sum);
   sums in towerCoe args must be ascribed to raw ⨁ (the R3 lesson, sum edition). NEXT → G4.
+
+- **2026-07-07** — **G4+G6 LANDED — CAMPAIGN COMPLETE.** G4 (green first pass): `towerGen_domain_
+  flow_mem` + CAPSTONE **`towerGen_comm_towerFlow`** (K U_s = U_s K — pure instantiations of the
+  held Stone lemmas, subtype matched by proof irrelevance). G6: the Generator HAVE/HAVE-NOT
+  stanza VERBATIM in `TowerGNS/Checkpoint.lean`; AxiomAudit pinned; inventory updated. towerGen:
+  self-adjoint, zero-mode Ω, computed commutator core, dense domain (constructive), flow-
+  covariant — the complete package short of Tomita, which stays honestly unclaimed. Loop
+  95752122 deleted. Paper/website sync on request.

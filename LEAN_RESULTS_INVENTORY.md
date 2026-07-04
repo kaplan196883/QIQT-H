@@ -1073,7 +1073,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`towerGen_of`** — towerGen ↑(of C a) = ↑(of C ([H_C, a])) with H_C = diagonal(log
   gibbsWeight) (`cornerGenMatrix_eq_commutator`): THE GENERATOR IS COMPUTED on every pure
   component, every coerced pre-vector is in the domain, and **`dense_stoneDomain`** holds
-  CONSTRUCTIVELY (no Gårding mollification). Next: G4 (flow covariance of the generator).
+  CONSTRUCTIVELY (no Gårding mollification). **G4+G6 — CAMPAIGN COMPLETE**: `towerGen_comm_towerFlow` (K U_s = U_s K; the domain
+  flow-invariant). CHECKPOINT (verbatim, in `TowerGNS/Checkpoint.lean`): HAVE — the self-adjoint
+  unbounded generator (five held Track-B facts instantiating the held Stone theorem); the
+  zero-mode (Ω ∈ dom, KΩ = 0); the explicit dense core (towerGen ↑(of C a) = ↑(of C ([H_C, a])),
+  H_C = diagonal(log gibbsWeight), density constructive); flow covariance. HAVE NOT — towerGen
+  is NOT log Δ / NOT a Tomita modular Hamiltonian; no Δ/J/S, no separating property, no
+  KMS-at-the-limit, no type; no PVM of the unbounded towerGen; no exp-recovery (the recovery
+  wall open by design).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
