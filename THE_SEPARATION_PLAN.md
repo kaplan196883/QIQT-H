@@ -56,10 +56,10 @@ extensions. Route SOUND per consult, with three cost-reducing amendments (bindin
 - [x] **S2 — same file** ✅ DONE: E1 `cornerEmbed_mul_sqrtGibbs` (ι(a)·S_K = S_K·ι(rightConj a),
   entrywise); the PSD gap c•ρ_K − (ιa)ρ_K(ιa)ᴴ = S·ι(c•1 − ââᴴ)·S PSD; scalar CAPSTONE
   **`gnsInner_rightMul_le`**. Risk MEDIUM (the residual lump — one entrywise lemma).
-- [ ] **S3 — same file**: `rightMulRaw` (LinearMap.mulRight; component of C x ↦
+- [x] **S3 — same file** ✅ DONE: `rightMulRaw` (LinearMap.mulRight; component of C x ↦
   of (C₀⊔C) (ι(x)·ι(a))) + `rightMulRaw_of` + `collapse_rightMul` + the norm bound +
   **`towerRightMul` via mkContinuous √c** — the R6 mirror. Risk LOW.
-- [ ] **S4 — same file**: `towerRightMulCLM := .completion` + `_coe`;
+- [x] **S4 — same file** ✅ DONE: `towerRightMulCLM := .completion` + `_coe`;
   **`towerRightMul_cyclicVec`** (R_aΩ = ↑(of C a) — the R8-head mirror). Risk LOW.
 - [ ] **S5 — `QIQTH/TowerGNS/Separation.lean`**: the raw left-right exchange (DEEP-STAGE double
   germ + mul_assoc — A2); CLM commutation **`towerRightMul_comm_towerRep`**. Risk MEDIUM-LOW.
@@ -128,3 +128,10 @@ gpt-5.5-pro (never expose keys).
   the S·ι(·)·S sandwich); CAPSTONE **`gnsInner_rightMul_le`** — right multiplication bounded
   with the weighted Frobenius constant. Lean notes: congr 1 on big matrix subtractions blows
   whnf heartbeats — use a separate hprod equality + rw chain. NEXT → S3 (rightMulRaw, R6 mirror).
+
+- **2026-07-07** — **S3+S4 LANDED, GREEN FIRST BUILD** (RightMul.lean extended, axiom-free
+  std-3, budget 0; fable subagent): `rightMulRaw` (the R6 mirror, product reversed) +
+  `collapse_rightMul` + the norm bound ≤ √(rightFrobBound) + **`towerRightMul`** (mkContinuous)
+  + **`towerRightMulCLM`** (.completion); CAPSTONE **`towerRightMul_cyclicVec`** — R_aΩ =
+  ↑(of C a): THE RIGHT ORBIT OF Ω IS R8'S ORBIT (no new density lemma needed, per A4).
+  NEXT → S5 (Separation.lean: the deep-stage exchange).

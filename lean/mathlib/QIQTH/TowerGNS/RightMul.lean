@@ -21,11 +21,12 @@
 -/
 import Mathlib
 import QIQTH.TowerGNS.StageBound
+import QIQTH.TowerGNS.Germ
 
 namespace QIQTH.TowerGNS
 
 open QIQTH.Keystone QIQTH.Tower QIQTH.Dynamics QIQTH.FiniteModularTheory
-open scoped ComplexOrder Matrix
+open scoped ComplexOrder Matrix DirectSum InnerProductSpace
 
 variable {M : Type*} [DecidableEq M] (L : LinkDims M) (ω : M → ℝ) (β : ℝ)
 
@@ -271,5 +272,174 @@ theorem gnsInner_rightMul_le (C₀ K : Finset M) (h : C₀ ⊆ K) (a : DiamondAl
   rw [Complex.zero_re, Complex.sub_re, Complex.re_ofReal_mul] at hre
   rw [hcycle1, hcycle2, RCLike.re_to_complex, RCLike.re_to_complex]
   linarith
+
+/-! ### S3 — the raw right pre-operator (the R6 mirror, product reversed) -/
+
+/-- **The raw right-multiplication pre-operator**: the component at stage `C` is embedded into
+    `C₀ ⊔ C` and multiplied on the RIGHT by the embedded `a` — the commutant-side action of the
+    corner element `a`, at the raw direct sum. -/
+noncomputable def rightMulRaw (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    (⨁ C : Finset M, DiamondAlg L C) →ₗ[ℂ] (⨁ C : Finset M, DiamondAlg L C) :=
+  DirectSum.toModule ℂ (Finset M) (⨁ C : Finset M, DiamondAlg L C) fun C =>
+    (DirectSum.lof ℂ (Finset M) (fun C : Finset M => DiamondAlg L C) (C₀ ⊔ C)) ∘ₗ
+      (LinearMap.mulRight ℂ (cornerEmbed L C₀ (C₀ ⊔ C) Finset.subset_union_left a)) ∘ₗ
+        (cornerEmbedₗ L C (C₀ ⊔ C) Finset.subset_union_right)
+
+@[simp] theorem rightMulRaw_of (C₀ : Finset M) (a : DiamondAlg L C₀) (C : Finset M)
+    (x : DiamondAlg L C) :
+    rightMulRaw L C₀ a (DirectSum.of _ C x)
+      = DirectSum.of (fun C : Finset M => DiamondAlg L C) (C₀ ⊔ C)
+          (cornerEmbed L C (C₀ ⊔ C) Finset.subset_union_right x
+            * cornerEmbed L C₀ (C₀ ⊔ C) Finset.subset_union_left a) := by
+  rw [← DirectSum.lof_eq_of ℂ, rightMulRaw]
+  erw [DirectSum.toModule_lof]
+  rfl
+
+/-! ### S3 — collapse compatibility -/
+
+/-- **The collapse of the image**: collapsing `rightMulRaw a x` at the stage `C₀ ⊔ K` is RIGHT
+    multiplication by the embedded `a` after collapsing `x` there — the pre-operator is the
+    honest right multiplication in every sufficiently large corner. -/
+theorem collapse_rightMul (C₀ : Finset M) (a : DiamondAlg L C₀) (K : Finset M)
+    (x : ⨁ C : Finset M, DiamondAlg L C) (hx : ∀ C, x C ≠ 0 → C ⊆ K) :
+    collapseRaw L (C₀ ⊔ K) (rightMulRaw L C₀ a x)
+      = collapseRaw L (C₀ ⊔ K) x
+          * cornerEmbed L C₀ (C₀ ⊔ K) Finset.subset_union_left a := by
+  classical
+  have hxsum : x = ∑ C ∈ DFinsupp.support x, DirectSum.of _ C (x C) :=
+    (DirectSum.sum_support_of x).symm
+  rw [hxsum]
+  rw [map_sum (rightMulRaw L C₀ a) (fun C => DirectSum.of _ C (x C)) (DFinsupp.support x)]
+  rw [map_sum (collapseRaw L (C₀ ⊔ K))
+    (fun C => rightMulRaw L C₀ a (DirectSum.of _ C (x C))) (DFinsupp.support x)]
+  rw [map_sum (collapseRaw L (C₀ ⊔ K)) (fun C => DirectSum.of _ C (x C))
+    (DFinsupp.support x)]
+  rw [Finset.sum_mul]
+  refine Finset.sum_congr rfl fun C hC => ?_
+  have hCK : C ⊆ K := hx C (DFinsupp.mem_support_iff.mp hC)
+  have hsub : C₀ ⊔ C ⊆ C₀ ⊔ K := Finset.union_subset_union_right hCK
+  have hCsub : C ⊆ C₀ ⊔ K := hCK.trans Finset.subset_union_right
+  rw [rightMulRaw_of, collapseRaw_of_le L hsub, collapseRaw_of_le L hCsub,
+    cornerEmbed_mul, cornerEmbed_trans L C (C₀ ⊔ C) (C₀ ⊔ K),
+    cornerEmbed_trans L C₀ (C₀ ⊔ C) (C₀ ⊔ K)]
+
+/-! ### S3 — the re-inner inequality (S2 fed through the collapse — all raw) -/
+
+/-- **S3 KEY (raw)**: the tower form of the right pre-operator image is dominated by the
+    WEIGHTED Frobenius constant times the form of the argument — stage collapse at `C₀ ⊔ K`
+    plus S2's GNS boundedness inequality. -/
+theorem rightMulRaw_re_inner_le (C₀ : Finset M) (a : DiamondAlg L C₀)
+    (x : ⨁ C : Finset M, DiamondAlg L C) :
+    RCLike.re (rawInner L ω β (rightMulRaw L C₀ a x) (rightMulRaw L C₀ a x))
+      ≤ rightFrobBound L ω β C₀ a * RCLike.re (rawInner L ω β x x) := by
+  classical
+  set K : Finset M := (DFinsupp.support x).sup id with hK
+  have hx : ∀ C, x C ≠ 0 → C ⊆ K := fun C hC =>
+    Finset.le_sup (f := id) (DFinsupp.mem_support_iff.mpr hC)
+  have hxK : ∀ C, x C ≠ 0 → C ⊆ C₀ ⊔ K := fun C hC =>
+    (hx C hC).trans Finset.subset_union_right
+  -- the image is supported under `C₀ ⊔ K`
+  have hTx : rightMulRaw L C₀ a x
+      = ∑ C ∈ DFinsupp.support x,
+          DirectSum.of (fun C : Finset M => DiamondAlg L C) (C₀ ⊔ C)
+            (cornerEmbed L C (C₀ ⊔ C) Finset.subset_union_right (x C)
+              * cornerEmbed L C₀ (C₀ ⊔ C) Finset.subset_union_left a) := by
+    conv_lhs => rw [← DirectSum.sum_support_of x]
+    rw [map_sum (rightMulRaw L C₀ a) (fun C => DirectSum.of _ C (x C)) (DFinsupp.support x)]
+    exact Finset.sum_congr rfl fun C _ => rightMulRaw_of L C₀ a C (x C)
+  have hx' : ∀ C', (rightMulRaw L C₀ a x) C' ≠ 0 → C' ⊆ C₀ ⊔ K := by
+    intro C' hC'
+    by_contra hnot
+    apply hC'
+    rw [hTx]
+    erw [DFinsupp.finsetSum_apply]
+    refine Finset.sum_eq_zero fun C hC => ?_
+    refine DirectSum.of_eq_of_ne _ _ _ fun he => hnot ?_
+    rw [he]
+    exact Finset.union_subset_union_right (hx C (DFinsupp.mem_support_iff.mp hC))
+  rw [rawInner_eq_collapse L ω β (C₀ ⊔ K) _ _ hx' hx',
+    rawInner_eq_collapse L ω β (C₀ ⊔ K) x x hxK hxK,
+    collapse_rightMul L C₀ a K x hx]
+  exact gnsInner_rightMul_le L ω β C₀ (C₀ ⊔ K) Finset.subset_union_left a
+    (collapseRaw L (C₀ ⊔ K) x)
+
+/-! ### S3 — the synonym wrappers (application-position defeq only — the R3 lesson) -/
+
+/-- The right pre-operator at the synonym, as a plain linear map (fields delegate to the raw
+    map by definitional equality). -/
+noncomputable def towerRightMulₗ (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    TowerPre L ω β →ₗ[ℂ] TowerPre L ω β where
+  toFun x := rightMulRaw L C₀ a x
+  map_add' x y := (rightMulRaw L C₀ a).map_add x y
+  map_smul' r x := (rightMulRaw L C₀ a).map_smul r x
+
+@[simp] theorem towerRightMulₗ_apply (C₀ : Finset M) (a : DiamondAlg L C₀)
+    (x : TowerPre L ω β) :
+    towerRightMulₗ L ω β C₀ a x = rightMulRaw L C₀ a x := rfl
+
+/-- **S3 — the norm bound**: the right pre-operator is bounded on the tower seminorm with the
+    WEIGHTED Frobenius constant of S2 — `‖x · ι(a)‖ ≤ √(rightFrobBound a) · ‖x‖`. (Weighted
+    Hilbert–Schmidt bound, NOT the C*-norm — bounded, never claimed contractive.) -/
+theorem rightMulRaw_norm_le (C₀ : Finset M) (a : DiamondAlg L C₀) (x : TowerPre L ω β) :
+    ‖towerRightMulₗ L ω β C₀ a x‖ ≤ Real.sqrt (rightFrobBound L ω β C₀ a) * ‖x‖ := by
+  have key := rightMulRaw_re_inner_le L ω β C₀ a x
+  have hsq : ‖towerRightMulₗ L ω β C₀ a x‖ ^ 2 ≤ rightFrobBound L ω β C₀ a * ‖x‖ ^ 2 := by
+    rw [← inner_self_eq_norm_sq (𝕜 := ℂ) (towerRightMulₗ L ω β C₀ a x),
+      ← inner_self_eq_norm_sq (𝕜 := ℂ) x]
+    exact key
+  calc ‖towerRightMulₗ L ω β C₀ a x‖
+      = Real.sqrt (‖towerRightMulₗ L ω β C₀ a x‖ ^ 2) :=
+        (Real.sqrt_sq (norm_nonneg _)).symm
+    _ ≤ Real.sqrt (rightFrobBound L ω β C₀ a * ‖x‖ ^ 2) := Real.sqrt_le_sqrt hsq
+    _ = Real.sqrt (rightFrobBound L ω β C₀ a) * Real.sqrt (‖x‖ ^ 2) :=
+        Real.sqrt_mul (rightFrobBound_nonneg L ω β C₀ a) _
+    _ = Real.sqrt (rightFrobBound L ω β C₀ a) * ‖x‖ := by rw [Real.sqrt_sq (norm_nonneg _)]
+
+/-- **S3 CAPSTONE — the bounded right pre-operator**: right multiplication by the corner
+    element `a` as a CONTINUOUS linear map on the tower pre-space, with the weighted Frobenius
+    constant `√(rightFrobBound a)` (bounded, never claimed contractive). S4 extends it to the
+    completion. -/
+noncomputable def towerRightMul (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    TowerPre L ω β →L[ℂ] TowerPre L ω β :=
+  LinearMap.mkContinuous (towerRightMulₗ L ω β C₀ a)
+    (Real.sqrt (rightFrobBound L ω β C₀ a))
+    fun x => rightMulRaw_norm_le L ω β C₀ a x
+
+@[simp] theorem towerRightMul_apply (C₀ : Finset M) (a : DiamondAlg L C₀)
+    (x : TowerPre L ω β) :
+    towerRightMul L ω β C₀ a x = rightMulRaw L C₀ a x := rfl
+
+/-! ### S4 — the completion operator and its action on the cyclic vector -/
+
+/-- **S4 — the right-multiplication operator on the tower Hilbert space**: the bounded right
+    pre-operator of S3, lifted to the completion by `ContinuousLinearMap.completion` — the
+    R7 recipe, mirrored. -/
+noncomputable def towerRightMulCLM (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    TowerGNS L ω β →L[ℂ] TowerGNS L ω β :=
+  (towerRightMul L ω β C₀ a).completion
+
+@[simp] theorem towerRightMulCLM_coe (C₀ : Finset M) (a : DiamondAlg L C₀)
+    (x : TowerPre L ω β) :
+    towerRightMulCLM L ω β C₀ a (x : TowerGNS L ω β)
+      = ((towerRightMul L ω β C₀ a x : TowerPre L ω β) : TowerGNS L ω β) :=
+  (towerRightMul L ω β C₀ a).completion_apply_coe x
+
+/-- **S4 CAPSTONE — R_a Ω = ↑(of C a)**: the right action on the cyclic vector reproduces the
+    pure tower component — the R8-head mirror. The pre-level image lands at stage `C ⊔ ∅`
+    (propositionally `C`, NOT definitionally); `cornerEmbed_one` + `one_mul` reduce the matrix
+    and the germ identity glues the stage — no type-cast across `Finset.union_empty` is ever
+    taken. -/
+theorem towerRightMul_cyclicVec (C : Finset M) (a : DiamondAlg L C) :
+    towerRightMulCLM L ω β C a (towerCyclicVec L ω β)
+      = ((towerOf L ω β C a : TowerPre L ω β) : TowerGNS L ω β) := by
+  rw [towerCyclicVec, towerRightMulCLM_coe]
+  have h1 : towerRightMul L ω β C a (towerOf L ω β ∅ 1)
+      = towerOf L ω β (C ⊔ ∅) (cornerEmbed L C (C ⊔ ∅) Finset.subset_union_left a) := by
+    show rightMulRaw L C a (DirectSum.of (fun C : Finset M => DiamondAlg L C) ∅ 1)
+        = DirectSum.of (fun C : Finset M => DiamondAlg L C) (C ⊔ ∅)
+            (cornerEmbed L C (C ⊔ ∅) Finset.subset_union_left a)
+    rw [rightMulRaw_of, cornerEmbed_one, one_mul]
+  rw [h1]
+  exact towerGerm L ω β Finset.subset_union_left a
 
 end QIQTH.TowerGNS

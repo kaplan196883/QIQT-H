@@ -8662,6 +8662,12 @@ namespace QIQTH.AxiomAudit
 -- (never claimed contractive). Std 3.
 #print axioms QIQTH.TowerGNS.cornerEmbed_mul_sqrtGibbs
 #print axioms QIQTH.TowerGNS.gnsInner_rightMul_le
+-- THE SEPARATION S3+S4 (RightMul.lean cont.): rightMulRaw (of C x ↦ of (C₀⊔C) (ι(x)·ι(a)), the
+-- R6 mirror with the product reversed), collapse_rightMul, the norm bound ≤ √(rightFrobBound),
+-- towerRightMul (mkContinuous) and towerRightMulCLM (.completion); CAPSTONE
+-- towerRightMul_cyclicVec — R_aΩ = ↑(of C a): the right orbit of Ω IS R8's orbit. Std 3.
+#print axioms QIQTH.TowerGNS.towerRightMulCLM
+#print axioms QIQTH.TowerGNS.towerRightMul_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

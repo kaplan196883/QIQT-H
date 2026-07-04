@@ -1087,8 +1087,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (T7's kappaOf lemma exponentiated), the √ρ infrastructure, THE ENGINE
   **`cornerEmbed_mul_sqrtGibbs`** (the half-power intertwining), and CAPSTONE
   **`gnsInner_rightMul_le`** — right multiplication by a corner element is BOUNDED with the
-  weighted Frobenius constant Σ‖a n m‖²(w_m/w_n) (never claimed contractive). Next: S3–S4 (the
-  bounded right operator on TowerGNS).
+  weighted Frobenius constant Σ‖a n m‖²(w_m/w_n) (never claimed contractive). **S3+S4 LANDED**: `rightMulRaw`/`towerRightMul`/
+  **`towerRightMulCLM`** (the bounded right action on TowerGNS, norm ≤ √(weighted Frobenius));
+  CAPSTONE **`towerRightMul_cyclicVec`** — R_aΩ = ↑(of C a) = π_C(a)Ω: the right orbit of Ω IS
+  the left orbit. Next: S5–S7 (commutation + the separation capstone).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
