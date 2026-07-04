@@ -81,6 +81,7 @@ import QIQTH.VonNeumann.WOTClosure
 import QIQTH.VonNeumann.Checkpoint
 import QIQTH.VonNeumann.SelfAdjointCriterion
 import QIQTH.VonNeumann.GraphDecomposition
+import QIQTH.VonNeumann.AdjointComp
 import QIQTH.TowerGNS.EmbedTrans
 import QIQTH.TowerGNS.StageInner
 import QIQTH.TowerGNS.PreSpace

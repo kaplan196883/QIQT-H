@@ -8777,6 +8777,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerModularOp_adjoint_eq
 #print axioms QIQTH.TowerGNS.towerModularOp_eq_zero
 #print axioms QIQTH.TowerGNS.norm_le_norm_add_towerModularOp
+-- THE VON NEUMANN VN3 (VonNeumann/AdjointComp.lean): VON NEUMANN'S THEOREM, standalone --
+-- for closed densely defined T over any RCLike field, T-dagger-T (on the two-layer domain)
+-- is DENSELY DEFINED and SELF-ADJOINT. Mathlib-only + VN1/VN2 imports; absent from Mathlib
+-- at this pin. Std 3.
+#print axioms QIQTH.VonNeumann.vonNeumann_isSelfAdjoint
+#print axioms QIQTH.VonNeumann.vonNeumann_dense_domain
+#print axioms QIQTH.VonNeumann.adjointComp_one_add_surjective
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

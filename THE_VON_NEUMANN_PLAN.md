@@ -56,7 +56,7 @@ the entire modular tower — waiting on one theorem.
   HasOrthogonalProjection.ofCompleteSpace; exists_add_mem_mem_orthogonal on toLp 2 (h,0);
   unpack, prod_inner_apply, rearrange. NO adjoint mentioned — deliberately. Risk MEDIUM
   (WithLp toLp/ofLp bookkeeping; Submodule.adjoint's source is the style guide).
-- [ ] **VN3 — `QIQTH/VonNeumann/AdjointComp.lean`** (standalone von Neumann theorem,
+- [x] **VN3 — `QIQTH/VonNeumann/AdjointComp.lean`** ✅ DONE (standalone von Neumann theorem,
   citable): `adjointComp T` on the two-layer domain {x ∈ dom T | Tx ∈ dom T†} (hand-rolled);
   formal self-adjointness; surjectivity corollary of VN2 via mem_adjoint_domain_of_exists;
   DENSITY of dom(T†T) (u ⊥ dom(T†T), u = x + T†Tx ⟹ ⟪u,x⟫ = ‖x‖² + ‖Tx‖² = 0 ⟹ u = 0);
@@ -152,3 +152,10 @@ log/status) before each increment; explicit git paths only.
   absent at pin), kernel triviality via inner_self + towerTomitaBar_eq_zero, and the
   resolvent bound ‖x‖ ≤ ‖x + Δx‖. Std-3, budget 0. Remaining: VN3 (standalone citable
   T†T), VN6 (checkpoint).
+
+- **2026-07-05** — **VN3 LANDED (green first try — the FOURTH consecutive one-shot).**
+  AdjointComp.lean: the standalone VON NEUMANN THEOREM — `vonNeumann_isSelfAdjoint`: for
+  closed densely defined T over any RCLike field, T†T on the two-layer ∃-domain is densely
+  defined (`vonNeumann_dense_domain`, the classical ⟪x,u⟫ = ‖x‖² + ‖Tx‖² trick) and
+  self-adjoint (VN1 kernel + VN2-derived surjectivity `adjointComp_one_add_surjective`).
+  Mathlib-gap file, abstract, reusable. Std-3, budget 0. Remaining: VN6 (checkpoint).

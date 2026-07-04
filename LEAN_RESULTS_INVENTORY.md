@@ -1173,7 +1173,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `ModularSelfAdjoint.lean` — `towerModularOp_isSelfAdjoint`: the tower modular operator is
   GENUINELY SELF-ADJOINT (Mathlib LinearPMap.adjoint sense; VN1 kernel at ℂ + the VN4 range
   condition), with adjoint_eq, closed, closure = self, trivial kernel, and the resolvent
-  bound ‖x‖ ≤ ‖x + Δx‖ (green first try). Next: VN3 (standalone T†T), VN6 (checkpoint).
+  bound ‖x‖ ≤ ‖x + Δx‖ (green first try). **VN3 LANDED**: `AdjointComp.lean` — the standalone
+  VON NEUMANN THEOREM: `vonNeumann_isSelfAdjoint` — for closed densely defined T over any
+  RCLike field, T†T (two-layer domain) is densely defined AND self-adjoint; with
+  `vonNeumann_dense_domain` and `adjointComp_one_add_surjective` (green first try; the whole
+  campaign is four consecutive one-shots). Next: VN6 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
