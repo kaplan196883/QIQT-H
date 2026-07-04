@@ -60,10 +60,10 @@ stretch + checkpoints.
   `towerFlow_inner`, `towerFlow_adjoint` (= U_{−t}), `towerFlow_mem_unitary`. Risk LOW-MED.
 - [x] **B4 — same file** ✅ DONE: `towerFlow_cyclicVec` (U_tΩ = Ω), `towerFlow_vectorState`,
   `towerState_kms_boundary` (finite-stage boundary identity, honest docstring). Risk LOW.
-- [ ] **B5 — `QIQTH/TowerGNS/FlowCovariance.lean`**: pre `flowRaw_leftMulRaw` (EXACT),
+- [x] **B5 — `QIQTH/TowerGNS/FlowCovariance.lean`** ✅ DONE: pre `flowRaw_leftMulRaw` (EXACT),
   **`towerFlow_conj_towerRep`** (U_t π_C(a) U_{−t} = π_C(σ_t a)) — THE IMPLEMENTATION THEOREM.
   Risk LOW-MED.
-- [ ] **B6 — same file**: `SOTApprox_conj_isometric`, `towerStageAlg_flow_invariant`, capstone
+- [x] **B6 — same file** ✅ DONE: `SOTApprox_conj_isometric`, `towerStageAlg_flow_invariant`, capstone
   **`towerLimitVN_flow_invariant`**. Risk LOW-MED.
 - [ ] **A1 — `QIQTH/Rigidity/RegulatorRigidity.lean`**: `regulator_forced_power`,
   `regulator_dimension_calibration` (κ = 2), **`speciesRegulator_forced`** (the FORM forced),
@@ -172,3 +172,12 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   finite-stage boundary KMS identity displayed through towerRep_inner_cyclicVec (honest banner:
   NOT strip analyticity, NOT a KMS state of the limit). NEXT → B5 (FlowCovariance — THE
   IMPLEMENTATION THEOREM).
+
+- **2026-07-06** — **B5+B6 LANDED — TRACK B CORE COMPLETE** (`QIQTH/TowerGNS/FlowCovariance.lean`,
+  axiom-free std-3, budget 0; fable subagent, green first build): `flowRaw_leftMulRaw` (covariance
+  EXACT at pre-level — no germ, as the verdict predicted); CAPSTONE **`towerFlow_conj_towerRep`**
+  — THE IMPLEMENTATION THEOREM U_t π_C(a) U_{−t} = π_C(σ_t a); `SOTApprox.conj` (general
+  conjugation transport in the VonNeumann namespace); `towerFlow_norm_eq`;
+  `towerStageAlg_flow_conj` (stages ONTO stages); CAPSTONE **`towerLimitVN_flow_invariant`** (+
+  iff form) — THE LIMIT ALGEBRA IS INVARIANT UNDER ITS TRANSPORTED DYNAMICS. towerLimitVN now has
+  its dynamics. NEXT → A1 (RegulatorRigidity — Track A begins).

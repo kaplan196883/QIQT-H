@@ -8596,6 +8596,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerFlow_mem_unitary
 #print axioms QIQTH.TowerGNS.towerFlow_cyclicVec
 #print axioms QIQTH.TowerGNS.towerState_kms_boundary
+-- THE TRANSPORT B5+B6 (TowerGNS/FlowCovariance.lean): THE IMPLEMENTATION THEOREM —
+-- flowRaw_leftMulRaw (covariance EXACT at pre-level, no germ) + CAPSTONE towerFlow_conj_towerRep
+-- (U_t π_C(a) U_{−t} = π_C(σ_t a)); B6: SOTApprox.conj (general conjugation transport),
+-- towerStageAlg_flow_conj (stages map ONTO stages), CAPSTONE towerLimitVN_flow_invariant (+iff)
+-- — THE LIMIT ALGEBRA IS INVARIANT UNDER ITS TRANSPORTED DYNAMICS. Std 3.
+#print axioms QIQTH.TowerGNS.towerFlow_conj_towerRep
+#print axioms QIQTH.TowerGNS.towerLimitVN_flow_invariant
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

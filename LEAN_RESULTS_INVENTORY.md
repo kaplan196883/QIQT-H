@@ -1031,8 +1031,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **`towerFlow`** — THE ONE-PARAMETER UNITARY GROUP on TowerGNS (U_0 = 1, group law, U_t† =
   U_{−t}, `towerFlow_mem_unitary`), **U_tΩ = Ω**, the Ω vector state conjugation-invariant, and
   **`towerState_kms_boundary`** (the finite-stage boundary KMS identity displayed on the limit
-  space — NOT strip analyticity, NOT a KMS state of the limit algebra). Next: B5 (the
-  implementation theorem).
+  space — NOT strip analyticity, NOT a KMS state of the limit algebra). **B5+B6 LANDED**
+  (`TowerGNS/FlowCovariance.lean`): THE IMPLEMENTATION THEOREM **`towerFlow_conj_towerRep`**
+  (U_t π_C(a) U_{−t} = π_C(σ_t a); covariance EXACT at pre-level, no germ) and CAPSTONE
+  **`towerLimitVN_flow_invariant`** — the limit von Neumann algebra is INVARIANT under its
+  transported dynamics (SOTApprox.conj + stages-onto-stages). towerLimitVN has its dynamics.
+  Next: A1 (regulator rigidity — Track A).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
