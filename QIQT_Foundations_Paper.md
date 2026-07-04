@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `a569244`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `73b47a7`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1773,6 +1773,14 @@ m ren}\le Q$ proven rather than assumed; the von Neumann extension is the carrie
   • **The explicit core** (`towerGen_of` + `cornerGenMatrix_eq_commutator`): on every coerced pure component, $K\,\uparrow\!(\mathrm{of}_C\,a) = \uparrow\!(\mathrm{of}_C\,[H_C, a])$ with $H_C = \mathrm{diagonal}(\log \mathrm{gibbsWeight})$ — the finite-stage modular Hamiltonian acts by COMMUTATOR, with the phases $\kappa_{nm} = \log w_n - \log w_m$ of the held entry formula; the generator is COMPUTED, not just certified, and its domain is dense CONSTRUCTIVELY (the coerced pre-vectors — no Gårding mollification needed).
   • **Flow covariance**: $U_s$ preserves $\mathrm{dom}(K)$ and $K U_s = U_s K$.
   • HAVE NOT, verbatim: `towerGen` is NOT constructed from, and NOT claimed equal to, a Tomita modular Hamiltonian $\log \Delta$ of the limit state — no $\Delta$, $J$, $S$, separating property, KMS-at-the-limit, or von Neumann type is claimed; no spectral resolution (PVM) of the unbounded `towerGen`; no exponential-recovery identity $U_t = e^{itK}$ — the recovery wall is open by design.
+
+
+*The separation (S1--S8): $\Omega$ is cyclic AND separating — the standard form.* The limit algebra reaches the standard-form hypothesis pair of Tomita--Takesaki theory (`QIQTH/TowerGNS/RightMul.lean`, `Separation.lean`; axiom-free std-3, budget 0).
+
+  • **The weight exchange and the half-power intertwining**: T7's modular-frequency lemma, exponentiated, gives $w_K(m)\,w_0(\hat n) = w_K(n)\,w_0(\hat m)$ for off-corner-agreeing occupations; hence the ENGINE $\iota(a)\cdot\sqrt{\rho_K} = \sqrt{\rho_K}\cdot\iota(\mathrm{rightConj}\,a)$, from which RIGHT multiplication by any corner element is BOUNDED on the tower GNS space with the weighted Frobenius constant $\sum_{n,m}\|a_{nm}\|^2\,(w_m/w_n)$ (the classical right-boundedness-via-the-modular-element argument in finite guise; never claimed contractive).
+  • **The commutant facts**: the left and right actions commute (the stage mismatch resolved by a double germ at a fresh deep stage — no Finset equality is ever stated), and every element of `towerLimitVN` commutes with every right multiplication by PURE BICOMMUTANT ALGEBRA (membership in the double centralizer is definitional — the double-commutant campaign consumed with zero analysis).
+  • **THE CAPSTONE** (`towerCyclicVec_separating`): $T \in$ `towerLimitVN`, $T\Omega = 0 \Rightarrow T = 0$ — $T$ kills the right orbit of $\Omega$, which IS the left orbit ($R_a\Omega = \pi_C(a)\Omega$), and that orbit spans densely. With the held cyclicity: **$\Omega$ is CYCLIC AND SEPARATING for the tower limit von Neumann algebra — the standard-form hypothesis pair of Tomita--Takesaki theory, exhibited axiom-free.** Plus `towerLimitVN_eq_of_apply_cyclicVec` ($T\Omega = S\Omega \Rightarrow T = S$) — the well-definedness germ of a future Tomita operator $S_0$.
+  • HAVE NOT, verbatim: no Tomita operator $S_0$, no modular operator $\Delta$, no conjugation $J$, no KMS condition at the limit, and no type classification is constructed or claimed here — separation is the HYPOTHESIS for that theory, not the theory.
 
 ### 11.5 Credit division
 

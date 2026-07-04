@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **386 files and ~4,150
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **388 files and ~4,170
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1041,6 +1041,32 @@ separating property, KMS-at-the-limit, or von Neumann type is claimed. No spectr
 (PVM) of the unbounded towerGen is claimed, and no exponential-recovery identity
 towerFlow t = exp(it·towerGen) is claimed — the recovery wall is open by design and the campaign
 does not cross it."
+
+</div>
+
+
+## The separation: Ω is cyclic AND separating — the standard form
+
+The limit algebra reaches the **standard-form hypothesis pair of Tomita–Takesaki theory**,
+axiom-free (`RightMul.lean`, `Separation.lean`):
+
+- **The weight exchange + half-power intertwining** — T7's modular-frequency lemma
+  exponentiated gives ι(a)·√ρ<sub>K</sub> = √ρ<sub>K</sub>·ι(rightConj a), so RIGHT
+  multiplication is *bounded* with the weighted Frobenius constant
+  Σ‖a<sub>nm</sub>‖²(w<sub>m</sub>/w<sub>n</sub>) (never claimed contractive).
+- **The commutant facts** — left and right actions commute (deep-stage double germ; no Finset
+  equality ever stated), and every element of `towerLimitVN` commutes with every right
+  multiplication by *pure bicommutant algebra* (double-centralizer membership is definitional).
+- ★ **`towerCyclicVec_separating`** ★ — T ∈ towerLimitVN, TΩ = 0 ⟹ T = 0: T kills the right
+  orbit of Ω, which IS the left orbit, and that orbit spans densely. With the held cyclicity:
+  **Ω is CYCLIC AND SEPARATING for the tower limit von Neumann algebra.** Plus
+  `towerLimitVN_eq_of_apply_cyclicVec` — the well-definedness germ of a future Tomita S₀.
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "No Tomita operator S₀, no modular
+operator Δ, no conjugation J, no KMS condition at the limit, and no type classification is
+constructed or claimed here — separation is the HYPOTHESIS for that theory, not the theory."
 
 </div>
 
