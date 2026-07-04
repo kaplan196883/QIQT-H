@@ -55,7 +55,7 @@ against sources; the full arithmetic + design record is in the consult.
   rawInner_jRaw ★ (double induction + pairInner_embed + J2 + gnsInner_jStage), jPre
   (mkContinuous 1), towerJ := jPre.completion, towerJ_coe. Risk MEDIUM (semilinear
   plumbing — the completion API is verified σ-generic).
-- [ ] **J4 — `TowerGNS/ModularConj.lean`**: the anti-unitary pack — towerJ_of,
+- [x] **J4 — `TowerGNS/ModularConj.lean`**: ✅ DONE the anti-unitary pack — towerJ_of,
   towerJ_of_single ★, towerJ_inner (⟪Jξ,Jη⟫ = ⟪η,ξ⟫), towerJ_norm, towerJ_involutive,
   towerJ_cyclicVec (JΩ = Ω), towerJ_smul twist guard, surjectivity. Risk LOW.
 - [ ] **J5 — `TowerGNS/PolarCore.lean`**: ★ S̄↑(of C a) = towerJ↑(of C (deltaHalfStage a))
@@ -142,3 +142,10 @@ paths only.
   jPre (mkContinuous 1, norm-preserving); **towerJ := jPre.completion** — Mathlib's
   ContinuousLinearMap.completion confirmed σ-generic at the pin, same instances as
   towerFlow, zero friction. Std-3, budget 0. Next: J4 (the anti-unitary pack).
+
+- **2026-07-05** — **J4 LANDED (green first try).** ModularConj.lean: the full anti-unitary
+  pack — ★ towerJ_inner (⟪Jξ,Jη⟫ = ⟪η,ξ⟫, Completion induction; fun_prop handled the SL
+  map), towerJ_norm, towerJ_involutive (via raw jRaw_involutive), towerJ_cyclicVec
+  (JΩ = Ω), the conj-smul twist guard, injective + surjective, and ★ towerJ_of_single
+  (the eigenbasis action √(w_m/w_n), flipped, conjugated). Std-3, budget 0.
+  Next: J5 (the polar decomposition on the core — harvest).

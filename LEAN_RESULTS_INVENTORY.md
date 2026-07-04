@@ -1248,7 +1248,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   finite modular flow (green first try). **J3 LANDED**: `ConjPre.lean` — **towerJ exists**:
   the σ-semilinear (starRingEnd ℂ) completion of the norm-preserving jPre, no ℝ-reduction
   (Mathlib's CLM.completion is σ-generic); with the raw anti-isometry (green first try).
-  Next: J4 (the anti-unitary pack on TowerGNS).
+  **J4 LANDED**: `ModularConj.lean` — towerJ is a
+  genuine involutive ANTI-UNITARY fixing Ω (⟪Jξ,Jη⟫ = ⟪η,ξ⟫, J² = 1, JΩ = Ω, conj-smul
+  twist, bijective isometry; eigenbasis action √(w_m/w_n) flipped+conjugated; green first
+  try). Next: J5 (polar decomposition on the core), J6 (JΔ^{it} = Δ^{it}J), J7–J8 (Tomita
+  II inclusion).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

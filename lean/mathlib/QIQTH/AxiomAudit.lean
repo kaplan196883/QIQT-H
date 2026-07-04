@@ -8884,6 +8884,14 @@ namespace QIQTH.AxiomAudit
 -- rawInner (jRaw x) (jRaw y) = rawInner y x. Std 3.
 #print axioms QIQTH.TowerGNS.rawInner_jRaw
 #print axioms QIQTH.TowerGNS.towerJ_coe
+-- THE MODULAR CONJUGATION J4 (TowerGNS/ModularConj.lean): the anti-unitary pack -- towerJ
+-- is an involutive anti-unitary fixing the cyclic vector: <<J xi, J eta>> = <<eta, xi>>,
+-- J^2 = 1, J Omega = Omega, the conj-smul twist guard, isometric + bijective; eigenbasis
+-- action sqrt(w_m/w_n) with flipped indices and conjugated entry. Std 3.
+#print axioms QIQTH.TowerGNS.towerJ_of_single
+#print axioms QIQTH.TowerGNS.towerJ_inner
+#print axioms QIQTH.TowerGNS.towerJ_involutive
+#print axioms QIQTH.TowerGNS.towerJ_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
