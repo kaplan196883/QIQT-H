@@ -95,7 +95,7 @@ namespace `QIQTH.TowerGNS`.
   (TowerGNS →L[ℂ] TowerGNS)`** via `(towerLeftMul a).completion`; laws by the GNS-file induction
   pattern (map_one needs towerGerm); map_star via eq_adjoint_iff + the pre-level trace identity;
   **`towerRep_cornerEmbed`** (π_{C'} ∘ ι = π_C — germ + density). Risk MEDIUM.
-- [ ] **R8 — `QIQTH/TowerGNS/CyclicVector.lean`**: **`towerRep_inner_cyclicVec`** (⟪Ω, π_C(a)Ω⟫ =
+- [x] **R8 — `QIQTH/TowerGNS/CyclicVector.lean`** ✅ DONE: **`towerRep_inner_cyclicVec`** (⟪Ω, π_C(a)Ω⟫ =
   φ_C(a)); `towerRep_cyclicVec_of` (π_C(a)Ω = ↑(of C a), via C ⊔ ∅ = C + cornerEmbed_one);
   **`dense_span_towerRep_cyclicVec`** (span ⊇ image of every of C x ⟹ all of TowerPre via
   sum_support_of; close with Completion.denseRange_coe). Risk LOW.
@@ -242,3 +242,11 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   **`towerRep_cornerEmbed`** — π_{C′} ∘ cornerEmbed = π_C: THE TOWER ACTS COHERENTLY. Key move:
   a `towerCoe` wrapper so all germ-reconciliation lemmas quantify over RAW ⨁ vectors (no synonym
   mismatch); `coe_add/coe_smul` need explicit (α := TowerPre …). NEXT → R8 (CyclicVector).
+
+- **2026-07-05** — **R8 LANDED** (`QIQTH/TowerGNS/CyclicVector.lean`, axiom-free std-3, budget
+  0; fable subagent, two iterations): `towerRep_cyclicVec_of` (π_C(a)Ω = ↑(of C a) — via
+  cornerEmbed_one + mul_one at stage C ⊔ ∅ then towerGerm, NO type-cast across union_empty);
+  CAPSTONE **`towerRep_inner_cyclicVec`** — ⟪Ω, π_C(a)Ω⟫ = φ_C(a): EVERY corner Gibbs state is
+  the vector state of Ω; CAPSTONE **`dense_span_towerRep_cyclicVec`** — Ω is CYCLIC (span of the
+  orbit dense: pre-vectors are finite sums of orbit vectors + denseRange_coe + Dense.mono). Ω
+  NOT claimed separating (cut). NEXT → R9 (LimitVN + Checkpoint — THE CAPSTONE).

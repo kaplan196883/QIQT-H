@@ -1002,7 +1002,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (TowerGNS →L TowerGNS)`** — every corner algebra acts on the ONE Hilbert space as a unital
   ⋆-algebra homomorphism (laws in the completion via the germ; star via the adjoint relation),
   with CAPSTONE **`towerRep_cornerEmbed`** (π_{C′} ∘ cornerEmbed = π_C — the tower acts
-  coherently through every stage). Next: R8 (cyclicity + the vector state identity).
+  coherently through every stage). **R8 LANDED** (`TowerGNS/CyclicVector.lean`, **[AF]** std-3):
+  **`towerRep_inner_cyclicVec`** — ⟪Ω, π_C(a)Ω⟫ = φ_C(a): every corner Gibbs state IS the
+  vector state of the unit cyclic vector Ω; **`dense_span_towerRep_cyclicVec`** — Ω is CYCLIC
+  (the orbit span is dense). Ω not claimed separating. Next: R9 (towerLimitVN — THE CAPSTONE).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

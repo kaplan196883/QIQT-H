@@ -8553,6 +8553,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerRep
 #print axioms QIQTH.TowerGNS.towerRepCLM_star
 #print axioms QIQTH.TowerGNS.towerRep_cornerEmbed
+-- THE REPRESENTATION R8 (TowerGNS/CyclicVector.lean): Ω IMPLEMENTS EVERY GIBBS STATE and is
+-- CYCLIC — towerRep_cyclicVec_of (π_C(a)Ω = ↑(of C a), via the germ); CAPSTONE
+-- towerRep_inner_cyclicVec (⟪Ω, π_C(a)Ω⟫ = φ_C(a) — the vector state IS the corner Gibbs
+-- state); CAPSTONE dense_span_towerRep_cyclicVec (the span of the orbit of Ω is dense —
+-- every coerced pre-vector is a finite sum of orbit vectors + denseRange_coe). Ω NOT claimed
+-- separating (cut). Std 3.
+#print axioms QIQTH.TowerGNS.towerRep_inner_cyclicVec
+#print axioms QIQTH.TowerGNS.dense_span_towerRep_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
