@@ -1042,7 +1042,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   positive, monotone, shared-covariance species family (κ an OUTPUT via DS5's log-valuation
   rigidity; ONE dimensional calibration pins κ = 2), with the dyadic counterexample showing
   weakened covariance breaks it and the non-vacuity instance = the held `inducedInvG` by rfl.
-  The c_i numbers stay CITED Seeley–DeWitt data. Next: A2 (the derived 1D heat coefficient).
+  The c_i numbers stay CITED Seeley–DeWitt data. **A2 LANDED** (`HeatKernelOneD.lean`):
+  **`heatDensity_oneD`** — the FIRST DERIVED (not cited) heat-kernel-type coefficient in the
+  repository ((1/2π)∫e^{−tk²} = 1/√(4πt), from Mathlib's Gaussian integral), plus
+  `cutoff_moment`/`inducedInvG_as_integral` (the held Λ² as a derived momentum integral).
+  1D/free/Gaussian; the 4D c_i stay cited. Next: A3 (the mixed-species consistency chain).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

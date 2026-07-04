@@ -8613,6 +8613,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Rigidity.regulator_forced_power
 #print axioms QIQTH.Rigidity.speciesRegulator_forced
 #print axioms QIQTH.Rigidity.dyadic_covariance_insufficient
+-- THE ACCOUNTING A2 (HeatKernelOneD.lean): the FIRST DERIVED heat-kernel coefficient —
+-- heatDensity_oneD ((1/2π)∫e^{−tk²} = 1/√(4πt), from Mathlib's integral_gaussian — a genuine
+-- derivation, not a citation); cutoff_moment (∫₀^Λ 2k = Λ²); inducedInvG_as_integral (the held
+-- Λ² realized as a momentum integral). 1D/free/Gaussian; the 4D c_i stay CITED. Std 3.
+#print axioms QIQTH.HeatKernelOneD.heatDensity_oneD
+#print axioms QIQTH.HeatKernelOneD.cutoff_moment
+#print axioms QIQTH.HeatKernelOneD.inducedInvG_as_integral
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -69,7 +69,7 @@ stretch + checkpoints.
   `regulator_dimension_calibration` (κ = 2), **`speciesRegulator_forced`** (the FORM forced),
   `dyadic_covariance_insufficient` witness, non-vacuity instance. Risk LOW-MED (drop the
   counterexample's monotonicity conjunct if it fights).
-- [ ] **A2 — `QIQTH/HeatKernelOneD.lean`**: `heatDensity_oneD` (= 1/√(4πt)), `cutoff_moment`
+- [x] **A2 — `QIQTH/HeatKernelOneD.lean`** ✅ DONE: `heatDensity_oneD` (= 1/√(4πt)), `cutoff_moment`
   (= Λ²), `inducedInvG_as_integral`. Risk LOW.
 - [ ] **A3 — `QIQTH/SpeciesCrossCheck.lean`**: `speciesEntropy`, `species_sakharov_ratio`
   (mixed-content 1/4), capstone **`speciesEntropy_eq_capacity`**; optional BTZ chain. Risk LOW.
@@ -193,3 +193,11 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   positivity do NOT force the power form — Λ₀ = 2^{1/4} witness; monotonicity conjunct dropped
   per plan); `toyRegulator` + `toyRegulator_realizes_inducedInvG` (non-vacuity BY RFL against
   the held inducedInvG). The numbers stay cited. NEXT → A2 (HeatKernelOneD).
+
+- **2026-07-06** — **A2 LANDED** (`QIQTH/HeatKernelOneD.lean`, axiom-free std-3, budget 0; fable
+  subagent, green first build): **`heatDensity_oneD`** — (1/2π)∫e^{−tk²}dk = 1/√(4πt), DERIVED
+  from Mathlib's `integral_gaussian` — THE FIRST DERIVED (not cited) HEAT-KERNEL-TYPE COEFFICIENT
+  in the repository; `cutoff_moment` (∫₀^Λ 2k = Λ² via integral_id); `inducedInvG_as_integral`
+  (the held Λ² realized as a momentum integral — defeq + cutoff_moment). Honest scope in the
+  docstring: 1D/free/Gaussian; the 4D c_i stay CITED; no numerical-G claim. NEXT → A3
+  (SpeciesCrossCheck).
