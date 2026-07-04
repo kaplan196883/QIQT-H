@@ -8935,6 +8935,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NonTracial.towerOf_single_ne_zero
 #print axioms QIQTH.NonTracial.towerModularOp_ne_id
 #print axioms QIQTH.NonTracial.towerModUnitary_ne_id
+-- THE KMS-BOUNDARY C1 (NonTracial/ModularDataComplete.lean): the MODULAR DATA COMPLETE
+-- capstone -- modular_data_complete_witness bundles KMS-boundary + non-traciality + Delta!=1
+-- from the one datum w_n != w_m. K1 (towerState_kms_boundary) + K2 (towerFlow_vectorState)
+-- already existed (flow campaign B4/B6). The full tower Tomita-Takesaki data, one index.
+-- HONEST: algebraic/boundary KMS, NOT strip-analyticity; no J M J = M' equality; no type.
+#print axioms QIQTH.NonTracial.modular_data_complete_witness
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

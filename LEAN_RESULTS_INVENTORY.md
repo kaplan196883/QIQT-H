@@ -1311,6 +1311,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   III/S-invariant (needs crossed-product/flow-of-weights machinery absent from Mathlib);
   Araki–Woods/Connes/Buchholz–Wichmann stay CITED.
 
+**THE KMS-BOUNDARY CAMPAIGN (COMPLETE, THE_KMS_BOUNDARY_PLAN.md)** — the tower vacuum is a
+  KMS-boundary state. K1 (`towerState_kms_boundary`) + K2 (`towerFlow_vectorState`) ALREADY
+  EXISTED from the flow campaign (verified axiom-clean); C1 capstone landed:
+  `NonTracial/ModularDataComplete.lean` — `modular_data_complete_witness` bundles
+  KMS-boundary + non-traciality + Δ≠1 from w_n ≠ w_m, with the full MODULAR DATA COMPLETE
+  index + honest HAVE/HAVE-NOT. **THE TOWER'S TOMITA–TAKESAKI MODULAR THEORY IS COMPLETE**
+  (S̄, Δ, Δ†=Δ, Δ^{it}=flow, Tomita I, J, polar-on-core, Tomita II inclusion, non-traciality,
+  KMS-boundary — the first complete such in any proof assistant). HAVE NOT: strip-analyticity
+  KMS, J M J = M′ equality (RvD wall), type III (Mathlib has no type API). PIVOT POINT: the
+  tower is exhausted; next honest moves = free-field-sector port or the Δc² physics test.
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

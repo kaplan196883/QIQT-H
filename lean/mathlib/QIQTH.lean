@@ -703,3 +703,4 @@ import QIQTH.NonTracial.FiniteNonTrace
 import QIQTH.NonTracial.TowerNonTrace
 import QIQTH.NonTracial.ModularNonTrivial
 import QIQTH.NonTracial.Checkpoint
+import QIQTH.NonTracial.ModularDataComplete
