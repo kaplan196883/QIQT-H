@@ -1,11 +1,11 @@
 ---
-title: "One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint"
-author: "Paweł Kapłański"
+title: "One Wave Function, One World: $\\Phi$-Monism, a Holographic Entropy Bound, and a Machine-Verified Path Toward Emergent Gravity"
+author: "Pawel Kaplanski"
 date: 2026-05-25
-keywords: [foundations of quantum mechanics, holographic principle, Bekenstein-Bousso bound, Type II von Neumann algebras, crossed product, generalized entropy, finite-precision wave function, measurement problem, typicality]
+keywords: [foundations of quantum mechanics, holographic entropy bound, Bekenstein-Bousso bound, Type II von Neumann algebras, crossed product, generalized entropy, Phi-monism, single-world interpretation, induced gravity, typicality]
 ---
 
-# One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint
+# One Wave Function, One World: $\Phi$-Monism, a Holographic Entropy Bound, and a Machine-Verified Path Toward Emergent Gravity
 
 ## Abstract
 
@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `426a8fc`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `adf50bf`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1829,6 +1829,14 @@ m ren}\le Q$ proven rather than assumed; the von Neumann extension is the carrie
   • **THE IDENTIFICATION**: `towerModUnitary_eq_towerFlow` — $\Delta^{it} = $ `towerFlow`$_t$ AS OPERATORS (two bounded operators agreeing on the dense cyclic span are equal): the transported physical dynamics of the tower limit state IS the spectral modular flow of its modular operator. Corollary: `towerGen` IS the Stone generator of $\Delta^{it}$ — the group-level content of $\mathrm{towerGen} = \log\Delta$.
   • **TOMITA'S THEOREM, FIRST HALF**: $\Delta^{it}$ implements the modular automorphisms ($\Delta^{it}\pi_C(a)\Delta^{-it} = \pi_C(\sigma_t a)$) and preserves the limit algebra: $\Delta^{it}\,\mathrm{towerLimitVN}\,\Delta^{-it} = \mathrm{towerLimitVN}$ — the modular theory of the physics equals the modular theory of the state.
   • HAVE NOT, verbatim: $J$ and the polar decomposition $\bar S = J\Delta^{1/2}$ are still not constructed (so $JMJ = M'$, the second half of Tomita's theorem, stays open — the natural next campaign: $J$ on matrix units is also explicit, so the same eigenbasis method applies); no analytic strip-KMS of the limit state (only the boundary identity); no von Neumann type classification; and everything remains the finite-stage Gibbs inductive-limit state — the free-field/Type-III continuum objects are untouched.
+
+*The modular conjugation, non-traciality, KMS-boundary, and field-level BW (J1--J9, N1--N4, K/C1, F1): the tower's Tomita--Takesaki theory COMPLETE, and the free-field wedge BW made unconditional.* Four short campaigns after the identification close the modular tower and cap the free-field wedge (`QIQTH/TowerGNS/JStage.lean`--`TomitaSecondHalf.lean`, `QIQTH/NonTracial/*`, `QIQTH/Fock/FieldBWUnconditional.lean`; axiom-free std-3, budget 0; nearly every increment first-try green).
+
+  • **The modular conjugation $J$** (`towerJ`): the completion of the explicit conjugate-linear stage map $\mathrm{jStage}\,a = \sqrt{\rho}\,a^\dagger\sqrt{\rho}^{-1}$, semilinearly extended with no $\mathbb{R}$-reduction (Mathlib's `ContinuousLinearMap.completion` is $\sigma$-generic). Full anti-unitary pack: $\langle J\xi,J\eta\rangle = \langle\eta,\xi\rangle$, $J^2 = 1$, $J\Omega = \Omega$, the eigenbasis action $J\!\uparrow\!(\mathrm{of}_C\,e_{nm}) = \sqrt{w_m/w_n}\,\uparrow\!(\mathrm{of}_C\,e_{mn}\bar c)$. The POLAR DECOMPOSITION on the dense core: $\bar S = J\circ\Delta^{1/2}$ and $F = \Delta^{1/2}\circ J$ (the core $\Delta^{1/2}$-action squares to the modular automorphism), and $J\Delta^{it} = \Delta^{it}J$.
+  • **TOMITA'S THEOREM, SECOND HALF (inclusion)**: $J$ conjugates every represented left multiplication into the commutant-side right multiplication ($J\pi_C(a)J = R_{\mathrm{jStage}\,a}$), hence $J\cdot\mathrm{towerLimitVN}\cdot J \subseteq \mathrm{towerLimitVN}'$, with $\Omega$ cyclic and separating for the commutant.
+  • **NON-TRACIALITY**: the tower vacuum state $\omega(\cdot) = \langle\Omega,\pi(\cdot)\Omega\rangle = \mathrm{tr}(\rho_C\,\cdot)$ is NOT a trace — $\omega(\pi(e_{nm})\pi(e_{mn})) = w_n \ne w_m = \omega(\pi(e_{mn})\pi(e_{nm}))$ when the Gibbs weights differ — and the modular data is nontrivial ($\Delta \ne 1$, $\Delta^{it} \ne \mathrm{id}$): the Powers "not-the-tracial-case" separation. **KMS-boundary**: $\omega(\pi(x)\pi(y)) = \omega(\pi(y)\pi(\sigma(x)))$ against the finite modular automorphism, bundled with the whole tower into the capstone `modular\_data\_complete\_witness` — the first COMPLETE Tomita--Takesaki modular theory in any proof assistant.
+  • **FIELD-LEVEL BISOGNANO--WICHMANN, UNCONDITIONAL** (`freeField_secondQuant_BW_unconditional`): the second-quantized wedge modular automorphism acts on Weyl operators as the geometric Lorentz boost, $\sigma_t(W(u)) = W(\mathrm{boost}(2\pi t)u)$ conjugated, with NO carried BW hypothesis — discharged from the already-unconditional one-particle result `oneParticleBW_niceWedge_unconditional`. The free-field wedge modular structure (one-particle BW, strip-KMS, Reeh--Schlieder cyclic $+$ separating, field-level BW) is now machine-checked end-to-end: modular flow $=$ boost, a Lean-first result.
+  • HAVE NOT, verbatim: the REVERSE inclusion $\mathrm{towerLimitVN}' \subseteq J\cdot\mathrm{towerLimitVN}\cdot J$ (full equality $JMJ = M'$, Tomita's hard half) is NOT proved — the Rieffel--van Daele commutant wall; no unbounded $\Delta^{1/2}$ (the polar decomposition is a core-level identity); no strip-analyticity KMS; no von Neumann type classification (Mathlib has no trace/factor/type API); the field-level BW is free-field / single-mass, NOT interacting, and makes no low-energy Lorentz-violation prediction (unconditional BW $=$ standard induced gravity); everything remains the finite-stage Gibbs inductive-limit / free-field sector — the interacting and Type-III continuum frontiers are untouched.
 
 ### 11.5 Credit division
 
