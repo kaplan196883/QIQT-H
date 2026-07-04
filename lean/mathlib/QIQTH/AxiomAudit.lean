@@ -8763,6 +8763,12 @@ namespace QIQTH.AxiomAudit
 -- of a closed partial operator in WithLp 2 (ExE) -- for every h there is x in dom T with
 -- <<a, h-x>> = <<Ta, Tx>> for all a in dom T; RCLike-generic, no adjoint anywhere. Std 3.
 #print axioms QIQTH.VonNeumann.exists_pairing_of_isClosed
+-- THE VON NEUMANN VN4 (TowerGNS/ModularSurjective.lean): the ConjHomogeneous i-twist
+-- (re-pairing upgrades to the full C-pairing) + THE RANGE CONDITION ran(1+Delta) = top --
+-- every h is x + Delta x, via VN2 at R on the closed S-bar and the exists-Riesz F-domain.
+-- The von Neumann surjectivity input for Delta-dagger = Delta. Std 3.
+#print axioms QIQTH.TowerGNS.conj_pairing_of_re_pairing
+#print axioms QIQTH.TowerGNS.towerModularOp_one_add_surjective
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -62,7 +62,7 @@ the entire modular tower — waiting on one theorem.
   DENSITY of dom(T†T) (u ⊥ dom(T†T), u = x + T†Tx ⟹ ⟪u,x⟫ = ‖x‖² + ‖Tx‖² = 0 ⟹ u = 0);
   headline `vonNeumann_isSelfAdjoint`. Not on the tower's critical path (may slip after VN5)
   but IS the citable Mathlib-gap deliverable. Risk LOW-MEDIUM.
-- [ ] **VN4 — ConjAdjoint addendum + `QIQTH/TowerGNS/ModularSurjective.lean`** (load-bearing):
+- [x] **VN4 — `QIQTH/TowerGNS/ModularSurjective.lean`** ✅ DONE (load-bearing):
   (a) abstract i-twist `conj_pairing_of_re_pairing`: ConjHomogeneous g + re-pairing ∀a ⟹
   full ℂ-pairing ∀a (evaluate at a and i•a; inner_smul, I_mul re/im arithmetic, Complex.ext).
   (b) `towerModularOp_one_add_surjective`: letI rclikeToReal inside the proof; VN2 at ℝ on
@@ -136,3 +136,11 @@ log/status) before each increment; explicit git paths only.
   fires from one haveI; mem_orthogonal's orientation is already the goal's (graph element in
   slot 1) so no conjugation fix; prod_inner_apply is rfl. Std-3, budget 0.
   Next: VN4 (load-bearing i-twist + tower surjectivity); VN3 after.
+
+- **2026-07-05** — **VN4 LANDED (green FIRST TRY — the load-bearing increment, and the letI
+  trap never bit).** ModularSurjective.lean: `conj_pairing_of_re_pairing` (the abstract
+  ConjHomogeneous i-twist), private `exists_re_pairing` (the ONLY letI := rclikeToReal site;
+  VN2 at ℝ typechecked directly, ℝ-inner → re ⟪·,·⟫_ℂ was pure defeq — the fallback
+  restatement was NOT needed), and ★ `towerModularOp_one_add_surjective`: ran(1+Δ) = ⊤ —
+  the full pairing lands verbatim in mem_towerTomitaF_dom with witness h−x, Δx = h−x, abel.
+  Std-3, budget 0. VN5 (Δ† = Δ) is UNBLOCKED. Next: VN5, then VN3, then VN6.

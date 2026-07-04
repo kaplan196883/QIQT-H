@@ -1165,8 +1165,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Mathlib-gap kernel; green first try). **VN2 LANDED**: `GraphDecomposition.lean` —
   `exists_pairing_of_isClosed`: for closed T and any h, ∃ x ∈ dom T with ⟪a, h−x⟫ = ⟪Ta, Tx⟫
   ∀ a ∈ dom T — the von Neumann graph orthogonal decomposition in WithLp 2 (E×E),
-  RCLike-generic, no adjoint anywhere (green first try). Next: VN4 (the ConjHomogeneous
-  i-twist + towerModularOp_one_add_surjective), then VN3/VN5.
+  RCLike-generic, no adjoint anywhere (green first try). **VN4 LANDED**: `ModularSurjective.lean` —
+  the ConjHomogeneous i-twist (`conj_pairing_of_re_pairing`: re-pairing ⟹ full ℂ-pairing) and
+  ★ `towerModularOp_one_add_surjective`: **ran(1+Δ) = ⊤** — VN2 at ℝ on the closed S̄, the
+  real orthogonality upgraded by the i-twist to the ∃-Riesz F-domain membership verbatim
+  (green first try; the rclikeToReal letI trap never bit). Next: VN5 (Δ† = Δ, THE HEADLINE),
+  then VN3, VN6.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
