@@ -8941,6 +8941,12 @@ namespace QIQTH.AxiomAudit
 -- already existed (flow campaign B4/B6). The full tower Tomita-Takesaki data, one index.
 -- HONEST: algebraic/boundary KMS, NOT strip-analyticity; no J M J = M' equality; no type.
 #print axioms QIQTH.NonTracial.modular_data_complete_witness
+-- F1 (Fock/FieldBWUnconditional.lean): FIELD-LEVEL BISOGNANO-WICHMANN, UNCONDITIONAL --
+-- freeField_secondQuant_BW_unconditional: the wedge modular automorphism acts on Weyl
+-- operators as the geometric Lorentz boost, NO carried BW hypothesis (discharged from the
+-- axiom-free one-particle oneParticleBW_niceWedge_unconditional, +2pi convention). HONEST:
+-- free-field single-mass, NOT interacting, no LV prediction. Std 3.
+#print axioms QIQTH.Fock.freeField_secondQuant_BW_unconditional
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

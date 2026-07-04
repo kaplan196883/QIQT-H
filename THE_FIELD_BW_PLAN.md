@@ -1,6 +1,6 @@
 # THE FIELD-BW INCREMENT — field-level Bisognano–Wichmann, unconditional (F1, then STOP)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
+**Status:** COMPLETE (2026-07-05) — F1 landed, then STOP per the consult. Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent af34f8fd7781ed740 (2026-07-05).
 
 ## Binding verdict (READ — this is a ONE-increment plan, not a campaign)
@@ -24,7 +24,7 @@ strategic pivot — both USER decisions.
 
 ## The increment
 
-- [ ] **F1 — `freeField_secondQuant_BW_unconditional` (field-level BW, no hypotheses).**
+- [x] **F1 — `freeField_secondQuant_BW_unconditional` (field-level BW, no hypotheses).**
   In `QIQTH/Fock/OneParticleBW.lean` (or a small new `Fock/FieldBWUnconditional.lean`
   importing it + CyclicWitness). Statement: for `S = niceWedgeStandardSubspace m …`,
   `∀ t u x, secondQuantModFlowH S t (weylH u x) = weylH (boostUnitary (2π t) u)
@@ -72,3 +72,11 @@ sibling jobs first.
   frontier is a research problem, ladder exhausted (option c); F1 = the single honest
   consolidation increment, discharge hbw for the field-level BW, then STOP). THE
   KMS-BOUNDARY campaign closed immediately prior (the tower modular theory complete).
+
+- **2026-07-05** — **F1 LANDED (green first try) — and STOP.** Fock/FieldBWUnconditional.lean:
+  freeField_secondQuant_BW_unconditional — the field-level (second-quantized) Bisognano–
+  Wichmann identity, NO carried BW hypothesis: the wedge modular automorphism acts on Weyl
+  operators as the geometric Lorentz boost (σ_t(W(u)) = W(boost(2πt)u) conjugated), the hbw
+  discharged from oneParticleBW_niceWedge_unconditional (+2π convention, the FreeFieldHFlux
+  sign pattern, 3-line proof). Std-3, budget 0. Per the consult's explicit instruction the
+  BW ladder STOPS here — the QG frontier is a research problem, not a Lean increment.

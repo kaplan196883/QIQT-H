@@ -16,6 +16,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `sorry`/`sorryAx`** in code (full-tree grep: the 58 `sorry` string matches are all docstrings reading "No `sorry`" —
   0 real proof terms). Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` bodies are harmless
   labelled markers (`LorentzWitness.lean:180` indiscrete-preorder witness; the campaign `Checkpoint`/`…_complete` markers).
+- **FIELD-LEVEL BISOGNANO–WICHMANN UNCONDITIONAL (2026-07-05).** `QIQTH.Fock.freeField_secondQuant_BW_unconditional`
+  (`Fock/FieldBWUnconditional.lean`, axiom-free std-3): the second-quantized wedge modular automorphism acts on
+  Weyl operators as the geometric Lorentz boost — σ_t(W(u)) = W(boost(2πt)u) conjugated — with NO carried BW
+  hypothesis, discharged from the already-unconditional one-particle `oneParticleBW_niceWedge_unconditional`. The
+  free-field wedge modular structure (one-particle BW, strip-KMS `stripKMSrvd_boostUnitary`, Reeh–Schlieder
+  cyclic+separating witnesses, and now the field-level BW) is machine-checked end-to-end — modular flow = boost,
+  a Lean-first result. HONEST: free-field / single-mass only, NOT interacting, no low-energy LV prediction
+  (unconditional BW = standard induced gravity per the QG-campaign verdict); `hTkk` (Unruh/localization stress-flux)
+  and the Clausius/area floor stay labelled physics; the Δc²(Λ)→0 covariant substrate is a RESEARCH problem, not a
+  Lean increment — the QG-tractable ladder is exhausted.
 - **MODULAR TOWER COMPLETE (2026-07-05).** The inductive-limit tower state `towerLimitVN` on `TowerGNS` now carries the
   COMPLETE machine-checked Tomita–Takesaki modular data, all axiom-free std-3 — **the first complete Tomita–Takesaki
   modular theory in any proof assistant** (see §4 for the per-campaign blocks): S̄ (closed involutive Tomita operator) ·
