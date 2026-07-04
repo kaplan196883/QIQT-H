@@ -8713,6 +8713,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConjClosure.ConjHomogeneous.closure
 #print axioms QIQTH.ConjClosure.GraphSymm.closure
 #print axioms QIQTH.ConjClosure.realRestrict_conjHomogeneous
+-- THE CONJUGATE CLOSURE CC5 (TowerGNS/TomitaBar.lean): ★ S̄ AS AN OBJECT ★ — towerTomitaBar :=
+-- (realRestrict towerTomita₀).closure: CLOSED (closure_isClosed), extends S₀ with the orbit
+-- domain a CORE (closureHasCore), S̄Ω = Ω, S̄↑(of C a) = ↑(of C aᴴ), DENSE domain,
+-- conjugate-homogeneous + THE TWIST GUARD (S̄(c•Ω) = conj c•Ω), FULLY INVOLUTIVE on its domain
+-- (GraphSymm survives closure — no adjoint anywhere) with ker = ⊥ and range = domain. The Δ
+-- contract documented; Δ/J/polar/KMS/type NOT constructed. Std 3.
+#print axioms QIQTH.TowerGNS.towerTomitaBar_isClosed
+#print axioms QIQTH.TowerGNS.towerTomitaBar_involutive
+#print axioms QIQTH.TowerGNS.towerTomitaBar_conjHomogeneous
+#print axioms QIQTH.TowerGNS.dense_towerTomitaBar_domain
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -60,7 +60,7 @@ with the orbit domain a CORE. Sets up (WITHOUT constructing) the Δ contract. Fi
   `ConjHomogeneous f.closure`; the twisted-map engine; pointwise corollaries. Risk LOW.
 - [x] **CC4 — same file: the involution transfer** ✅ DONE — `GraphSymm` + survives closure +
   involution/ker/range corollaries (cross-check vs Mathlib's inverse_closure). Risk LOW.
-- [ ] **CC5 — instantiate at TowerGNS** — instance smoke test FIRST; `towerTomitaR :=
+- [x] **CC5 — instantiate at TowerGNS** ✅ DONE — instance smoke test FIRST; `towerTomitaR :=
   realRestrict towerTomita₀`; `towerTomitaR_isClosable` (CC2 + towerTomita₀_closable');
   **`towerTomitaBar := towerTomitaR.closure`**; the theorem pack: IsClosed, extends S₀
   (le_closure), S̄Ω = Ω, S̄↑(of C a) = ↑(of C aᴴ), dense domain, ConjHomogeneous + THE TWIST
@@ -130,3 +130,13 @@ Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose 
   range_eq_domain corollaries. The complexToReal path worked with NO letI, as predicted. Lean
   notes: theorems named `closure` shadow _root_.closure (qualify); ▸ on Prod-literal casts →
   rw at. NEXT → CC5 (instantiate at TowerGNS).
+
+- **2026-07-08** — **CC5 LANDED — S̄ EXISTS AS AN OBJECT** (`QIQTH/TowerGNS/TomitaBar.lean`,
+  axiom-free std-3, budget 0; fable subagent, one trivial fix — noncomputable examples in the
+  smoke test): the instances resolved with NO letI (as predicted); `towerTomitaR` +
+  `towerTomitaR_isClosable` (the bridge fed towerTomita₀_closable' VERBATIM, no adapters);
+  **`towerTomitaBar := closure`** with the FULL theorem pack — IsClosed, extends S₀, orbit
+  domain a CORE, S̄Ω = Ω, S̄↑(of C a) = ↑(of C aᴴ), dense domain, ConjHomogeneous + THE TWIST
+  GUARD, FULL INVOLUTION (GraphSymm) + ker = ⊥ + range = domain. le_closure is unconditional in
+  the pin. NEXT → CC6 (stretch; assess) → CC7 (checkpoint) → then per the standing directive:
+  scope THE MODULAR OPERATOR.

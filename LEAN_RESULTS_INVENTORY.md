@@ -1125,8 +1125,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   conjugate-linear partial map; no Mathlib helper existed), **`isClosable_of_seq`** (the
   sequence-closability bridge — absent from Mathlib even for id), **`ConjHomogeneous.closure`**
   and **`GraphSymm.closure`** (conjugate-homogeneity and the involution survive closure — the
-  twisted-map and swap-homeomorphism engines; NO adjoint anywhere). Next: CC5 (towerTomitaBar
-  at TowerGNS).
+  twisted-map and swap-homeomorphism engines; NO adjoint anywhere). **CC5 LANDED — S̄ AS AN OBJECT**
+  (`TowerGNS/TomitaBar.lean`): **`towerTomitaBar`** — the closure of the Tomita operator:
+  CLOSED, extends S₀ with the orbit domain a CORE, S̄Ω = Ω, S̄↑(of C a) = ↑(of C aᴴ), dense
+  domain, conjugate-homogeneous (twist-guarded), FULLY INVOLUTIVE with ker = ⊥ and range =
+  domain. Next: CC6/CC7 (checkpoint), then THE MODULAR OPERATOR (Δ := F∘S̄).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
