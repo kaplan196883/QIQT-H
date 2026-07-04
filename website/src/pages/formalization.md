@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **391 files and ~4,230
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **393 files and ~4,280
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1120,6 +1120,34 @@ J, and the polar decomposition are not constructed (the documented Δ contract �
 next campaign); no σ-semilinear graph or closure theory is contributed to Mathlib here (the
 ℝ-reduction sidesteps it; the σ-graph remains Mathlib's own open TODO); no KMS condition of the
 limit state and no von Neumann type is claimed."
+
+</div>
+
+
+## The modular operator: Δ, computed as the modular automorphism
+
+The campaign after the conjugate closure delivers Tomita–Takesaki's central object for the tower
+limit state:
+
+- **Tomita's F with no Riesz machinery** — the conjugate-linear adjoint of S̄, built on the
+  ∃-Riesz domain {y : ∃ w, ∀ x, ⟪S̄x, y⟫ = ⟪w, x⟫}: no real inner product, no dual-space
+  machinery, no completeness argument anywhere. The abstract `conjAdjoint` (closed in the
+  sequence sense, with the core-extension equalizer lemma) is itself a Mathlib-gap contribution.
+- **Δ := F∘S̄** — a ℂ-linear densely defined partial operator (the two conjugations cancel):
+  **symmetric** (IsFormalAdjoint Δ Δ), **positive** (⟪Δx, x⟫ = ‖S̄x‖² ≥ 0), **closable**
+  (Δ ≤ Δ† with Δ† closed), fixing Ω.
+- **The computation** — on the dense pure-component core,
+  **Δ ↑(of<sub>C</sub> a) = ↑(of<sub>C</sub> (modAut<sub>ρ<sub>C</sub></sub> a))**: the continuum
+  modular operator *acts as* the finite modular automorphism ρaρ⁻¹, stage by stage — the modular
+  operator of the physics, computed rather than postulated.
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "Full self-adjointness Δ† = Δ is not
+proved — it is von Neumann's S̄*S̄ theorem, absent from Mathlib and named as the next target; no
+polar decomposition, no J, no Δ^{1/2} or Δ^{it} (no unbounded positive square-root or spectral
+theory for partial operators exists in the pin), no KMS condition of the limit state, and no von
+Neumann type is constructed or claimed."
 
 </div>
 

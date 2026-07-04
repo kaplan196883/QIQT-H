@@ -1578,7 +1578,7 @@ bound alone. Full claim→theorem map and honest scope caveats: `FINITE_BORN_REP
 
 ### 11.4b Machine-checked modular substrate (companion formalization)
 
-A companion Lean 4/Mathlib development (pinned commit `6d45fb9`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
+A companion Lean 4/Mathlib development (pinned commit `9a6b076`, toolchain `leanprover/lean4:v4.30.0`) machine-checks the standard modular / relative-entropy *calculus* underlying the regional cost functional $\chi_R$, for the free-field coherent-state sector. Every result below has status **U** (no project-specific axioms; depends only on `propext`, `Classical.choice`, `Quot.sound`, verified in `QIQTH/AxiomAudit.lean`); none formalizes the holographic axiom (FQ), the Macroscopic Definiteness Conjecture, or Born-from-typicality. A full statement-level index with `file:line` references and the companion paper appears in `paper_strategy/45_Theorem_Paper_Index.md`.
 
 *Finite Araki relative entropy.*
 
@@ -1797,6 +1797,14 @@ m ren}\le Q$ proven rather than assumed; the von Neumann extension is the carrie
   • **Four new abstract theorems** (Mathlib-only imports — upstream-gap contributions): the $\mathbb{R}$-restriction view of a conjugate-linear partial map (no Mathlib helper existed); the SEQUENCE-CLOSABILITY BRIDGE (`isClosable_of_seq` — absent from Mathlib even for ordinary linear maps); and the two transfer theorems — conjugate-homogeneity and the involution SURVIVE closure (the twisted-map and swap-homeomorphism engines; no adjoint anywhere).
   • **$\bar S$** (`towerTomitaBar`): closed, extending $S_0$ with the orbit domain as a CORE, $\bar S\Omega = \Omega$, conjugate-transpose on pure components, conjugate-homogeneous (twist-guarded: $\bar S(c\Omega) = \bar c\,\Omega$), and FULLY INVOLUTIVE on its domain with trivial kernel and range equal to domain.
   • HAVE NOT, verbatim: $\Delta$, $J$, and the polar decomposition are not constructed (the documented $\Delta$ contract is the named next campaign); no $\sigma$-semilinear graph theory is contributed (the $\mathbb{R}$-reduction sidesteps it — the $\sigma$-graph remains Mathlib's own open TODO); no KMS condition of the limit state and no von Neumann type is claimed.
+
+
+*The modular operator (M1--M7): $\Delta$, computed as the modular automorphism.* The campaign after the conjugate closure delivers Tomita--Takesaki's central object for the tower limit state (`QIQTH/TowerGNS/ConjAdjoint.lean` + `ModularOp.lean`; axiom-free std-3, budget 0).
+
+  • **Tomita's $F$ with no Riesz machinery**: the conjugate-linear adjoint of $\bar S$ is built on the $\exists$-Riesz domain $\{y : \exists w, \forall x, \langle \bar S x, y\rangle = \langle w, x\rangle\}$ — no real inner product, no dual-space machinery, no completeness argument anywhere; uniqueness of the witness is density alone. The abstract construction (`conjAdjoint`, closed in the sequence sense, with the core-extension equalizer lemma) is itself a Mathlib-gap contribution: Mathlib's adjoint theory covers only $\mathbb{C}$-linear partial maps.
+  • **$\Delta := F \circ \bar S$**: a $\mathbb{C}$-linear densely defined partial operator — the two conjugations cancel — which is SYMMETRIC (`IsFormalAdjoint` $\Delta$ $\Delta$), POSITIVE ($\langle \Delta x, x\rangle = \lVert\bar S x\rVert^2 \ge 0$), CLOSABLE ($\Delta \le \Delta^\dagger$ with $\Delta^\dagger$ closed), and fixes $\Omega$.
+  • **The computation**: on the dense pure-component core, $\Delta\,\uparrow\!(\mathrm{of}_C\,a) = \uparrow\!(\mathrm{of}_C\,(\mathrm{modAut}_{\rho_C}\,a))$ — the continuum modular operator ACTS AS the finite modular automorphism $\rho\,a\,\rho^{-1}$, stage by stage: the modular operator of the physics, computed rather than postulated.
+  • HAVE NOT, verbatim: full self-adjointness $\Delta^\dagger = \Delta$ is not proved — it is von Neumann's $\bar S^*\bar S$ theorem, absent from Mathlib and named as the next target; no polar decomposition, no $J$, no $\Delta^{1/2}$ or $\Delta^{it}$ (no unbounded positive square root or spectral theory for partial operators exists in the pin), no KMS condition of the limit state, and no von Neumann type is constructed or claimed.
 
 ### 11.5 Credit division
 

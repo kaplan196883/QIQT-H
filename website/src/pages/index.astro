@@ -38,14 +38,14 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
       <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
-        <span style="font-size:2rem;font-weight:800">32<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
-        <span style="font-size:2rem;font-weight:800">~4,230<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
+        <span style="font-size:2rem;font-weight:800">33<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">~4,280<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
       <p style="margin:.2rem 0 0;font-size:1.05rem"><strong>Headlines:</strong>
         the <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed) ·
         the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall) ·
-        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics its self-adjoint generator, and a cyclic–separating vector, and the closed Tomita operator S̄, fully involutive on its domain</strong> ·
+        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics its self-adjoint generator, and a cyclic–separating vector, the closed Tomita operator S̄, and the modular operator Δ — symmetric, positive, computed as the modular automorphism</strong> ·
         the <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch) ·
         <strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).
         <a href="/formalization">Every claim, with its honest scope →</a></p>
@@ -345,8 +345,15 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           object: closed, orbit-core, fixing Ω, conjugate-transpose on the dense core, and fully
           involutive with trivial kernel — no adjoint and no real inner product used anywhere
           (honestly scoped: Δ, J, polar decomposition, KMS-at-limit, and type not constructed).</li>
+        <li><strong>The modular operator Δ of an inductive-limit state, computed as the modular
+          automorphism</strong> — Tomita's F built as a conjugate-linear adjoint on the ∃-Riesz
+          domain (no real inner product, no dual machinery, no completeness argument), and
+          Δ := F∘S̄: ℂ-linear, symmetric, positive, closable, fixing Ω, and acting on the dense
+          core as the finite modular automorphism ρaρ⁻¹ stage by stage — the modular operator of
+          the physics as a theorem (honestly scoped: Δ† = Δ is von Neumann's theorem, absent from
+          Mathlib and the named next target; no J, polar, Δ^it, KMS-at-limit, or type).</li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-two.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-three.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority
