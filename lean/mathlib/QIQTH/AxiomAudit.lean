@@ -8693,6 +8693,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerTomita₀_involutive
 #print axioms QIQTH.TowerGNS.towerTomita₀_closable
 #print axioms QIQTH.TowerGNS.dense_tomitaDom
+-- THE TOMITA OPERATOR T0_4+T0_5 (Tomita.lean cont.): THE FINITE σ₋ᵢ ADJOINT — the engine
+-- squared (ι(a)·ρ_K = ρ_K·ι(rightConj² a)); CAPSTONE towerRightMulCLM_adjoint (adjoint R_a =
+-- R_{(rightConj² a)ᴴ}); the modAut BRIDGE ((rightConj² a)ᴴ = modAut ρ aᴴ — THE FINITE σ₋ᵢ,
+-- computed, not analytically continued); T0_5 tomita_adjoint_pairing — the classical
+-- ⟪T*Ω, R_aΩ⟫ = ⟪R_a†Ω, TΩ⟫ on the dense pure-component family. Std 3.
+#print axioms QIQTH.TowerGNS.towerRightMulCLM_adjoint
+#print axioms QIQTH.TowerGNS.rightConj_sq_conjTranspose_eq_modAut
+#print axioms QIQTH.TowerGNS.tomita_adjoint_pairing
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

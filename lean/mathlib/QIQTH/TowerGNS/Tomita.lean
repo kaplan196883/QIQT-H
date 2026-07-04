@@ -359,4 +359,193 @@ theorem towerTomita₀_closable' (x : ℕ → towerTomitaDom L ω β)
       (nhds v) := hv.congr fun n => hS n
   exact towerTomita₀_closable L ω β T hT h0 hv'
 
+/-! ### T0_4 — the right-multiplication adjoint (binding verdict A2)
+
+    THE FINITE σ₋ᵢ, COMPUTED — not analytically continued: the commutant-side right
+    multiplication `R_a` has the EXACT Hilbert-space adjoint `R_{(rightConj² a)ᴴ}`
+    (= `R_{ρ aᴴ ρ⁻¹}` by the modAut bridge below). The engine squared slides the embedded
+    corner element past the WHOLE Gibbs density (two E1 applications — no `S_K⁻¹` at stage
+    `K`); the stage pairing is `trace_mul_cycle` bookkeeping; the raw layer mirrors
+    `rawInner_leftMulRaw_conjTranspose`; the capstone mirrors `towerRepCLM_star`.
+
+    constructed on the orbit domain; conjugate-linear partial operator; closable in the
+    sequence sense; the closure, Δ, J, KMS-at-the-limit, and type are NOT constructed or
+    claimed. -/
+
+/-- **THE ENGINE SQUARED**: `ι(a)·ρ_K = ρ_K·ι(rightConj² a)` — the embedded corner element
+    slides past the FULL Gibbs density at the price of TWO √ρ-conjugations: factor
+    `ρ_K = S_K·S_K` and apply E1 (`cornerEmbed_mul_sqrtGibbs`) once per square root. -/
+theorem cornerEmbed_mul_gibbsDensity {C₀ K : Finset M} (h : C₀ ⊆ K) (a : DiamondAlg L C₀) :
+    cornerEmbed L C₀ K h a * gibbsDensity L K ω β
+      = gibbsDensity L K ω β
+          * cornerEmbed L C₀ K h (rightConj L ω β C₀ (rightConj L ω β C₀ a)) := by
+  calc cornerEmbed L C₀ K h a * gibbsDensity L K ω β
+      = cornerEmbed L C₀ K h a * (sqrtGibbs L ω β K * sqrtGibbs L ω β K) := by
+        rw [sqrtGibbs_mul_self]
+    _ = (cornerEmbed L C₀ K h a * sqrtGibbs L ω β K) * sqrtGibbs L ω β K :=
+        (Matrix.mul_assoc _ _ _).symm
+    _ = (sqrtGibbs L ω β K * cornerEmbed L C₀ K h (rightConj L ω β C₀ a))
+          * sqrtGibbs L ω β K := by rw [cornerEmbed_mul_sqrtGibbs]
+    _ = sqrtGibbs L ω β K
+          * (cornerEmbed L C₀ K h (rightConj L ω β C₀ a) * sqrtGibbs L ω β K) :=
+        Matrix.mul_assoc _ _ _
+    _ = sqrtGibbs L ω β K * (sqrtGibbs L ω β K
+          * cornerEmbed L C₀ K h (rightConj L ω β C₀ (rightConj L ω β C₀ a))) := by
+        rw [cornerEmbed_mul_sqrtGibbs]
+    _ = (sqrtGibbs L ω β K * sqrtGibbs L ω β K)
+          * cornerEmbed L C₀ K h (rightConj L ω β C₀ (rightConj L ω β C₀ a)) :=
+        (Matrix.mul_assoc _ _ _).symm
+    _ = gibbsDensity L K ω β
+          * cornerEmbed L C₀ K h (rightConj L ω β C₀ (rightConj L ω β C₀ a)) := by
+        rw [sqrtGibbs_mul_self]
+
+/-- **The stage adjoint pairing**: `⟪x·ι((rightConj² a)ᴴ), y⟫_K = ⟪x, y·ι(a)⟫_K` — unfold the
+    GNS form, push ⋆ through the embedding (`cornerEmbed_star`), slide the density by the
+    engine squared, and cycle the trace. -/
+theorem gnsInner_rightMul_adjoint {C₀ K : Finset M} (h : C₀ ⊆ K) (a : DiamondAlg L C₀)
+    (x y : DiamondAlg L K) :
+    gnsInner L ω β K
+        (x * cornerEmbed L C₀ K h ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ)) y
+      = gnsInner L ω β K x (y * cornerEmbed L C₀ K h a) := by
+  rw [gnsInner_def, gnsInner_def, Matrix.conjTranspose_mul, cornerEmbed_star,
+    Matrix.conjTranspose_conjTranspose]
+  calc Matrix.trace (gibbsDensity L K ω β
+        * (cornerEmbed L C₀ K h (rightConj L ω β C₀ (rightConj L ω β C₀ a)) * xᴴ * y))
+      = Matrix.trace (cornerEmbed L C₀ K h a * (gibbsDensity L K ω β * (xᴴ * y))) := by
+        simp only [← Matrix.mul_assoc]
+        rw [← cornerEmbed_mul_gibbsDensity L ω β h a]
+    _ = Matrix.trace (gibbsDensity L K ω β * (xᴴ * (y * cornerEmbed L C₀ K h a))) := by
+        rw [Matrix.trace_mul_comm]
+        simp only [Matrix.mul_assoc]
+
+/-- **The raw adjoint relation for the right action**: `⟪R₀_{(rightConj² a)ᴴ} x, y⟫ =
+    ⟪x, R₀_a y⟫` at the raw direct sum — the exact mirror of
+    `rawInner_leftMulRaw_conjTranspose`: double DirectSum induction, both sides embedded at
+    the common deep stage `C₀ ⊔ (C ⊔ C')`, where the identity is the stage adjoint pairing. -/
+theorem rawInner_rightMulRaw_adjoint (C₀ : Finset M) (a : DiamondAlg L C₀)
+    (x y : ⨁ C : Finset M, DiamondAlg L C) :
+    rawInner L ω β
+        (rightMulRaw L C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ) x) y
+      = rawInner L ω β x (rightMulRaw L C₀ a y) := by
+  induction x using DirectSum.induction_on with
+  | zero =>
+    rw [map_zero (rightMulRaw L C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ)),
+      map_zero (rawInner L ω β), AddMonoidHom.zero_apply, AddMonoidHom.zero_apply]
+  | of C v =>
+    induction y using DirectSum.induction_on with
+    | zero =>
+      rw [map_zero (rightMulRaw L C₀ a),
+        map_zero (rawInner L ω β
+          (rightMulRaw L C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ)
+            (DirectSum.of _ C v))),
+        map_zero (rawInner L ω β (DirectSum.of _ C v))]
+    | of C' w =>
+      rw [rightMulRaw_of, rightMulRaw_of, rawInner_of_of, rawInner_of_of]
+      have hC₀K : C₀ ⊆ C₀ ⊔ (C ⊔ C') := Finset.subset_union_left
+      have hCK : C ⊆ C₀ ⊔ (C ⊔ C') :=
+        Finset.subset_union_left.trans Finset.subset_union_right
+      have hC'K : C' ⊆ C₀ ⊔ (C ⊔ C') :=
+        Finset.subset_union_right.trans Finset.subset_union_right
+      rw [pairInner_embed L ω β (C₀ ⊔ C) C' (C₀ ⊔ (C ⊔ C'))
+          (Finset.union_subset hC₀K hCK) hC'K,
+        pairInner_embed L ω β C (C₀ ⊔ C') (C₀ ⊔ (C ⊔ C'))
+          hCK (Finset.union_subset hC₀K hC'K)]
+      simp only [cornerEmbed_mul, cornerEmbed_trans]
+      exact gnsInner_rightMul_adjoint L ω β hC₀K a _ _
+    | add y₁ y₂ h₁ h₂ =>
+      rw [map_add (rightMulRaw L C₀ a),
+        map_add (rawInner L ω β
+          (rightMulRaw L C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ)
+            (DirectSum.of _ C v))),
+        map_add (rawInner L ω β (DirectSum.of _ C v)), h₁, h₂]
+  | add x₁ x₂ h₁ h₂ =>
+    rw [map_add (rightMulRaw L C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ)),
+      map_add (rawInner L ω β), AddMonoidHom.add_apply,
+      map_add (rawInner L ω β), AddMonoidHom.add_apply, h₁, h₂]
+
+/-- **T0_4 CAPSTONE — THE RIGHT-MULTIPLICATION ADJOINT** (binding verdict A2):
+    `(R_a)† = R_{(rightConj² a)ᴴ}` — the commutant-side right multiplication has an EXACT
+    adjoint, again a right multiplication, by the finite-stage `σ₋ᵢ`-image of `aᴴ`
+    (COMPUTED, not analytically continued). Proved with the explicit candidate through
+    `eq_adjoint_iff` + double completion induction — the `towerRepCLM_star` shape.
+
+    constructed on the orbit domain; conjugate-linear partial operator; closable in the
+    sequence sense; the closure, Δ, J, KMS-at-the-limit, and type are NOT constructed or
+    claimed. -/
+theorem towerRightMulCLM_adjoint (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    ContinuousLinearMap.adjoint (towerRightMulCLM L ω β C₀ a)
+      = towerRightMulCLM L ω β C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ) := by
+  refine Eq.symm ((ContinuousLinearMap.eq_adjoint_iff _ _).mpr fun ξ η => ?_)
+  induction ξ, η using UniformSpace.Completion.induction_on₂ with
+  | hp => apply isClosed_eq <;> fun_prop
+  | ih x y =>
+    rw [towerRightMulCLM_coe, towerRightMulCLM_coe, UniformSpace.Completion.inner_coe,
+      UniformSpace.Completion.inner_coe, towerInner_def, towerInner_def]
+    exact rawInner_rightMulRaw_adjoint L ω β C₀ a x y
+
+/-- **The modAut bridge**: `(rightConj² a)ᴴ = modAut ρ_{C₀} aᴴ = ρ·aᴴ·ρ⁻¹` — the adjoint
+    parameter of T0_4 IS the finite modular automorphism (the held finite `σ₋ᵢ` of
+    `towerState_kms_boundary`'s calculus) applied to `aᴴ`. Entrywise: two half-power
+    conjugations compose into the full weight ratio, and the ⋆ flips it. -/
+theorem rightConj_sq_conjTranspose_eq_modAut (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    (rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ
+      = modAut (gibbsDensity L C₀ ω β) aᴴ := by
+  have hmul : gibbsDensity L C₀ ω β * gibbsInv L C₀ ω β = 1 := by
+    rw [gibbsInv, gibbsDensity, Matrix.diagonal_mul_diagonal, ← Matrix.diagonal_one]
+    congr 1
+    funext i
+    rw [← Complex.ofReal_mul, mul_inv_cancel₀ (gibbsWeight_pos L C₀ ω β i).ne',
+      Complex.ofReal_one]
+  have hrhs : modAut (gibbsDensity L C₀ ω β) aᴴ
+      = gibbsDensity L C₀ ω β * aᴴ * gibbsInv L C₀ ω β := by
+    rw [modAut, invOf_eq_right_inv hmul]
+  rw [hrhs, gibbsDensity, gibbsInv]
+  ext m n
+  rw [Matrix.conjTranspose_apply, rightConj_apply, rightConj_apply,
+    Matrix.mul_diagonal, Matrix.diagonal_mul, Matrix.conjTranspose_apply]
+  have h1 : ((Real.sqrt (gibbsWeight L C₀ ω β m) : ℝ) : ℂ)
+        * ((Real.sqrt (gibbsWeight L C₀ ω β m) : ℝ) : ℂ)
+      = ((gibbsWeight L C₀ ω β m : ℝ) : ℂ) := by
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (gibbsWeight_pos L C₀ ω β m).le]
+  have h2 : ((Real.sqrt (gibbsWeight L C₀ ω β n) : ℝ) : ℂ)
+        * ((Real.sqrt (gibbsWeight L C₀ ω β n) : ℝ) : ℂ)
+      = ((gibbsWeight L C₀ ω β n : ℝ) : ℂ) := by
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (gibbsWeight_pos L C₀ ω β n).le]
+  simp only [star_mul', Complex.star_def, Complex.conj_ofReal]
+  push_cast
+  rw [← h1, ← h2]
+  ring
+
+/-! ### T0_5 — the adjoint-domain pairing capstone (binding verdict A4)
+
+    The classical `⟪T*Ω, T′Ω⟫ = ⟪T′*Ω, TΩ⟫` with `T′ = R_a` on the dense pure-component
+    family — the pairing family carries the full adjoint-domain content (no second
+    choice-based operator is packaged).
+
+    constructed on the orbit domain; conjugate-linear partial operator; closable in the
+    sequence sense; the closure, Δ, J, KMS-at-the-limit, and type are NOT constructed or
+    claimed. -/
+
+/-- **T0_5 CAPSTONE — THE ADJOINT-DOMAIN PAIRING**: for every `T ∈ towerLimitVN` and every
+    pure component, `⟪T*Ω, ↑(of C₀ a)⟫ = ⟪↑(of C₀ (rightConj² a)ᴴ), TΩ⟫` — the Tomita
+    assignment `S₀ : TΩ ↦ T*Ω` is paired against the computed right-multiplication adjoint
+    of T0_4 on the dense orbit family. Chain: `⟪T*Ω, R_aΩ⟫ = ⟪Ω, T(R_aΩ)⟫ = ⟪Ω, R_a(TΩ)⟫
+    = ⟪R_a†Ω, TΩ⟫ = ⟪R_{(rightConj² a)ᴴ}Ω, TΩ⟫`.
+
+    constructed on the orbit domain; conjugate-linear partial operator; closable in the
+    sequence sense; the closure, Δ, J, KMS-at-the-limit, and type are NOT constructed or
+    claimed. -/
+theorem tomita_adjoint_pairing {T : TowerGNS L ω β →L[ℂ] TowerGNS L ω β}
+    (hT : T ∈ towerLimitVN L ω β) (C₀ : Finset M) (a : DiamondAlg L C₀) :
+    ⟪(star T) (towerCyclicVec L ω β),
+        ((towerOf L ω β C₀ a : TowerPre L ω β) : TowerGNS L ω β)⟫_ℂ
+      = ⟪((towerOf L ω β C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ)
+            : TowerPre L ω β) : TowerGNS L ω β), T (towerCyclicVec L ω β)⟫_ℂ := by
+  rw [← towerRightMul_cyclicVec L ω β C₀ a,
+    ← towerRightMul_cyclicVec L ω β C₀ ((rightConj L ω β C₀ (rightConj L ω β C₀ a))ᴴ),
+    ContinuousLinearMap.star_eq_adjoint, ContinuousLinearMap.adjoint_inner_left,
+    ← ContinuousLinearMap.mul_apply, ← towerRightMul_comm_limitVN L ω β C₀ a hT,
+    ContinuousLinearMap.mul_apply, ← towerRightMulCLM_adjoint L ω β C₀ a,
+    ContinuousLinearMap.adjoint_inner_left]
+
 end QIQTH.TowerGNS

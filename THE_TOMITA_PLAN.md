@@ -61,13 +61,13 @@ sense. File: `QIQTH/TowerGNS/Tomita.lean`.
   subtype coercions; no completion induction anywhere).
 - [x] **T0_3 — CLOSABILITY (bank early)** ✅ DONE — the A3 sequence theorem + the S₀-phrased corollary.
   Risk LOW.
-- [ ] **T0_4 — the right-multiplication adjoint** — `cornerEmbed_mul_gibbsDensity` (the engine
+- [x] **T0_4 — the right-multiplication adjoint** ✅ DONE — `cornerEmbed_mul_gibbsDensity` (the engine
   squared, own lemma BEFORE the induction); stage `gnsInner_rightMul_adjoint`; raw
   `rawInner_rightMulRaw_adjoint`; CAPSTONE **`towerRightMulCLM_adjoint`** (state with the
   EXPLICIT candidate via (eq_adjoint_iff R_b R_a).mpr — the towerRepCLM_star shape); the
   optional modAut bridge. Risk MEDIUM (deep-stage bookkeeping; exact mirror of two green
   proofs).
-- [ ] **T0_5 — the adjoint-domain pairing capstone** — the A4 family. Risk LOW.
+- [x] **T0_5 — the adjoint-domain pairing capstone** ✅ DONE — the A4 family. Risk LOW.
 - [ ] **T0_6 — checkpoint** — the HAVE/HAVE-NOT sentences VERBATIM (below) into
   TowerGNS/Checkpoint.lean (Tomita stanza) + inventory; AxiomAudit pins; plan → COMPLETE;
   delete the loop; stop.
@@ -130,3 +130,13 @@ Agent tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose 
   between ↥(S₀.domain) and ↥(towerTomitaDom) — defeq but rw-opaque; route through
   towerTomita₀_congr / exact, never rw the spec lemma directly (recorded for T0_4/T0_5).
   NEXT → T0_4 (the σ₋ᵢ adjoint).
+
+- **2026-07-08** — **T0_4+T0_5 LANDED, GREEN FIRST BUILD** (Tomita.lean extended, axiom-free
+  std-3, budget 0; fable subagent, zero proof failures): the engine squared
+  `cornerEmbed_mul_gibbsDensity`; the stage/raw adjoint pairings (verbatim mirror of the
+  Representation.lean skeleton); CAPSTONE **`towerRightMulCLM_adjoint`** — adjoint R_a =
+  R_{(rightConj² a)ᴴ}; the modAut BRIDGE INCLUDED **`rightConj_sq_conjTranspose_eq_modAut`** —
+  (rightConj² a)ᴴ = modAut ρ aᴴ: THE ADJOINT PARAMETER IS THE FINITE σ₋ᵢ IMAGE, COMPUTED (the ⅟
+  plumbing cooperated via invOf_eq_right_inv); T0_5 **`tomita_adjoint_pairing`** — the classical
+  ⟪T*Ω, R_aΩ⟫ = ⟪R_a†Ω, TΩ⟫ on the dense family, one rw chain, all orientations first-try.
+  NEXT → T0_6 (checkpoint; delete loop; stop).
