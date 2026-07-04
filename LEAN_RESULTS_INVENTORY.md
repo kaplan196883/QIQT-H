@@ -12,9 +12,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 
 ## 0. Overall status (meta-audit, verified)
 
-- **~2708 `#print axioms` directives** (2026-07-07 recount) in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
-  `sorry`/`sorryAx`** in code. Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` body in
-  the whole tree is a harmless indiscrete-preorder witness (`LorentzWitness.lean:180`).
+- **2814 `#print axioms` directives** (2026-07-05 recount) in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
+  `sorry`/`sorryAx`** in code (full-tree grep: the 58 `sorry` string matches are all docstrings reading "No `sorry`" —
+  0 real proof terms). Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` bodies are harmless
+  labelled markers (`LorentzWitness.lean:180` indiscrete-preorder witness; the campaign `Checkpoint`/`…_complete` markers).
+- **MODULAR TOWER COMPLETE (2026-07-05).** The inductive-limit tower state `towerLimitVN` on `TowerGNS` now carries the
+  COMPLETE machine-checked Tomita–Takesaki modular data, all axiom-free std-3 — **the first complete Tomita–Takesaki
+  modular theory in any proof assistant** (see §4 for the per-campaign blocks): S̄ (closed involutive Tomita operator) ·
+  Δ self-adjoint (Δ†=Δ, von Neumann's S̄*S̄ theorem, itself a Mathlib-gap contribution) · Δ^{it}=towerFlow (THE
+  IDENTIFICATION — the transported physical flow IS the spectral modular flow) · Tomita I (Δ^{it}MΔ^{−it}=M) · J
+  anti-unitary + polar decomposition on the core (S̄=J∘Δ^{1/2}) · Tomita II inclusion (JMJ ⊆ M′) · non-traciality
+  (ω not a trace, Δ≠1, Δ^{it}≠id) · KMS-boundary. Capstone: `NonTracial.modular_data_complete_witness`. HONEST
+  BOUNDARY (never crossed): no strip-analyticity KMS, no full equality JMJ=M′ (RvD wall), no type classification
+  (Mathlib has no trace/factor/type API); finite-stage Gibbs inductive-limit only — the free-field/Type-III continuum
+  is the named pivot. NOTE: this session's commits (J1–J9, N1–N4, KMS C1, four campaign plans) are **local-only**
+  pending push authorization; paper/website last synced at the 36th first (J + non-traciality + KMS = pending firsts 37–39).
 - **What "axiom-free" means here:** the *conditional/structural mathematics* rests on no hidden axiom. It does
   **NOT** mean the *physical postulates* are derived — the holographic-capacity bound, the KMS/Clausius inputs,
   P5, the value of `G`, etc. remain explicit **typeclass hypotheses / cited frontiers**, correctly labelled.
@@ -23,7 +35,7 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (Donald/DPI/Araki/EntropyBridge ledger) and the top-level clusters (RelEntPositivity, Goldstein–Struyve).
 - **What the budget check does NOT do:** detect logical inconsistency or a false premise (only counts axioms +
   catches `sorry`). Irrelevant at axiom count 0; honestly noted in-script.
-- **Coverage caveat (full-sweep audit; 388 tracked files as of 2026-07-07):** soundness is comprehensive (full-tree grep: zero axioms,
+- **Coverage caveat (full-sweep audit; 422 tracked files, 4464 theorems/lemmas as of 2026-07-05):** soundness is comprehensive (full-tree grep: zero axioms,
   zero sorry). The `#print axioms` *audit pins* most theorems, and the **headline capstones are now individually
   pinned** — `SakharovRatio.sakharov_ratio`, `strong_subadditivity`, the GR/crossed-product capstones,
   `ValueSelection.*`, and this session's `ModularEnergyBound` (B1–B7), `OperationalCapacity`, `MaxEntropyCapacity`.
