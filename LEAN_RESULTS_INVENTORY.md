@@ -1196,8 +1196,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the abstract PVM eigenvector/atom calculus: E finite additivity/complement; the generic
   T = borelFC T (coord) (operator-level spectral theorem); THE KERNEL ATOM (Injective T ⟹
   E(val⁻¹{0}) = 0); eigenvector localization + E({r})x = x + capstone
-  borelFC_apply_eigenvector (f(T)x = f(r)•x). Next: R4 (towerModChar symbol + the unitary
-  group — transcription from the StandardSubspaceModularFlow template).
+  borelFC_apply_eigenvector (f(T)x = f(r)•x). **R4 LANDED**: `TowerGNS/ModularUnitary.lean` —
+  towerModUnitary t := borelFC of the junk-value-1 piecewise ((1−r)/r)^{it} on the
+  resolvent: U0 = 1, U(s+t) = UsUt, adjoint = U(−t), unitary, isometric, cocycle inner
+  identity (green first try; NO claim U = towerFlow). Next: R5 (strong continuity +
+  U_tΩ = Ω + E({0}) = 0).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

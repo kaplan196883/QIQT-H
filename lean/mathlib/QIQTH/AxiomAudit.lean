@@ -8808,6 +8808,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SpectralTheorem.E_zero_atom_of_injective
 #print axioms QIQTH.SpectralTheorem.E_eigenvector_atom
 #print axioms QIQTH.SpectralTheorem.borelFC_apply_eigenvector
+-- THE RESOLVENT R4 (TowerGNS/ModularUnitary.lean): the modular symbol and the unitary group
+-- Delta^{it} := borelFC of the junk-value-1 piecewise ((1-r)/r)^{it} on the resolvent --
+-- U 0 = 1, U(s+t) = U s * U t, adjoint = U(-t), unitary, isometric, the cocycle inner
+-- identity. NO claim this equals towerFlow (the recovery wall stays open). Std 3.
+#print axioms QIQTH.TowerGNS.towerModUnitary_mul
+#print axioms QIQTH.TowerGNS.towerModUnitary_adjoint
+#print axioms QIQTH.TowerGNS.towerModUnitary_unitary
+#print axioms QIQTH.TowerGNS.norm_towerModUnitary_apply
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

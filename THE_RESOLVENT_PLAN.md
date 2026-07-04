@@ -52,7 +52,7 @@ Key verified facts:
   hasSum_iUnion ⟹ x = E({r})x; capstone boundedFC_apply_eigenvector: boundedFC f x =
   f(r)•x (membership r ∈ spectrum from x ≠ 0). Risk MODERATE — the only real proof-search;
   if long, ship (a)–(c) green and split (d).
-- [ ] **R4 — `TowerGNS/ModularUnitary.lean` part 1: symbol + group.** towerModChar t :=
+- [x] **R4 — `TowerGNS/ModularUnitary.lean` part 1: symbol + group.** ✅ DONE towerModChar t :=
   (Ioo 0 1).piecewise (r ↦ exp(I·t·log((1−r)/r))) (1) — expSymbol shape for R8; four
   pointwise laws + measurability + t-continuity (verbatim modChar ports). towerModUnitary t
   := borelFC (towerResolvent) …; _zero/add/adjoint/unitary/norm +
@@ -149,3 +149,11 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   (inverse-symbol trick), E_eigenvector_atom via Mathlib `disjointed` annuli (needs neither
   x ≠ 0 nor r ∈ σ(T)), capstone borelFC_apply_eigenvector. Std-3, budget 0.
   Next: R4 (symbol + group — transcription).
+
+- **2026-07-05** — **R4 LANDED (green first try).** ModularUnitary.lean: towerModChar (the
+  (Ioo 0 1).piecewise junk-value-1 symbol, expSymbol shape preserved for R8) with the four
+  pointwise laws; towerModUnitary := borelFC of it on towerResolvent; U0 = 1,
+  U(s+t) = UsUt (mul + ∘L forms), adjoint = U(−t) (local towerBorelFC_adjoint port — no
+  StandardSubspace coupling), unitary membership, isometry, and the two-vector cocycle
+  ⟪Ua x, Ub y⟫ = ⟪x, U(b−a) y⟫ that R5 consumes. Std-3, budget 0. Next: R5 (strong
+  continuity + U_tΩ = Ω + E({0}) = 0).
