@@ -702,3 +702,4 @@ import QIQTH.QG.EntropyNotCardinality
 import QIQTH.NonTracial.FiniteNonTrace
 import QIQTH.NonTracial.TowerNonTrace
 import QIQTH.NonTracial.ModularNonTrivial
+import QIQTH.NonTracial.Checkpoint

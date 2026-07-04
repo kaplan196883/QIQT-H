@@ -1,6 +1,6 @@
 # THE NON-TRACIALITY CAMPAIGN — the tower state is a genuine non-tracial KMS state (Δ ≠ 1)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3 (the continuous QG program).
+**Status:** COMPLETE (2026-07-05) — N1–N4 landed (N3.5 optional not taken), every increment first-try green, axiom-free std-3, budget 0. **Loop:** fe280fa3 (the continuous QG program).
 **Consult:** fable high-reasoning agent a67191df5dba5ebfc (2026-07-05) — arithmetic + API
 verified against sources; the honest scope is the binding verdict.
 
@@ -60,7 +60,7 @@ b*a = single m m 1 ⟹ tr = w_m. Unequal iff w_n ≠ w_m. Cross-checks: modAut �
   with ω k ≠ 0, L.D k ≥ 2), unfolding gibbsWeight = ∏ pMode — makes the conditionals
   demonstrably non-vacuous. Skip without shame; the (n,m,h)-quantified forms are already
   honest.
-- [ ] **N4 — `NonTracial/Checkpoint.lean`: checkpoint** (verbatim HAVE/HAVE-NOT below);
+- [x] **N4 — `NonTracial/Checkpoint.lean`: checkpoint** ✅ DONE (verbatim HAVE/HAVE-NOT below);
   AxiomAudit pins; plan → COMPLETE. Risk NIL.
 
 ## The checkpoint language (N4, verbatim)
@@ -132,3 +132,14 @@ website files).
   slot ⟹ weight w_m·|c|² > 0); ★ towerModularOp_ne_id (Δ ≠ 1 via the (w_n/w_m − 1)•v = 0
   contradiction); ★ towerModUnitary_ne_id (Δ^{it} ≠ id at t = π/κ, phase exp(iπ) = −1 via
   Complex.exp_pi_mul_I). Std-3, budget 0. Next: N4 (checkpoint → campaign COMPLETE).
+
+- **2026-07-05** — **N4 LANDED — CAMPAIGN COMPLETE (N1–N4; N3.5 optional not taken).**
+  NonTracial/Checkpoint.lean carries the verbatim HAVE/HAVE-NOT. THE CAMPAIGN STANDS: the
+  tower limit state is a genuine non-tracial KMS state (ω(E_nm E_mn) = w_n ≠ w_m), Δ ≠ 1,
+  Δ^{it} = towerFlow ≠ id — the honest Powers "not-the-tracial-case" separation, explicitly
+  NOT a type classification. Per the standing continuous-QG directive the loop CONTINUES —
+  candidate next rungs (re-consult): the KMS-boundary limit statement (transport the finite
+  kms_condition to the tower — modest), OR the Rieffel–van Daele route to full J M J = M′
+  (the repo's named next campaign; commutant characterization, MEDIUM-HIGH). NOTE: all of
+  THE MODULAR CONJUGATION + THE NON-TRACIALITY + the paper/website sync are committed LOCAL
+  ONLY per the user's no-push instruction — awaiting push authorization.

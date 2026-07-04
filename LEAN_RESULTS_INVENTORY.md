@@ -1304,7 +1304,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (green first try). **N3 LANDED**: `ModularNonTrivial.lean` — pure matrix-unit components
   are nonzero, **Δ ≠ 1** (towerModularOp_ne_id) and **Δ^{it} = towerFlow ≠ id**
   (towerModUnitary_ne_id, phase exp(iπ) = −1) on a nonzero eigenvector when the weights
-  differ (green first try). Next: N4 (checkpoint → campaign COMPLETE).
+  differ (green first try). **N4 — CAMPAIGN COMPLETE (N1–N4)**: `NonTracial/Checkpoint.lean` — the
+  verbatim HAVE/HAVE-NOT. THE TOWER STATE IS A GENUINE NON-TRACIAL KMS STATE: ω is not a
+  trace, Δ ≠ 1, Δ^{it} = towerFlow ≠ id — the Powers "not-the-tracial-case" separation.
+  HONEST: NOT a type classification, NOT "not type II" as an algebra statement, no type
+  III/S-invariant (needs crossed-product/flow-of-weights machinery absent from Mathlib);
+  Araki–Woods/Connes/Buchholz–Wichmann stay CITED.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
