@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **398 files and ~4,300
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **404 files and ~4,380
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1177,6 +1177,36 @@ S̄ = JΔ^{1/2} are not constructed (so J is still not an object); the spectral 
 unbounded Δ is not built; Δ^{it} and the KMS property of the limit state are not proved — in
 particular NO claim that the transported dynamics equals the modular flow of Δ; no Tomita
 theorem at the algebra level; no von Neumann type statement."
+
+</div>
+
+
+## The resolvent campaign: Δ^{it} exists
+
+The modular unitary group of the tower limit state is constructed (seven increments, every one
+first-try green):
+
+- **The resolvent** — R := (1+Δ)⁻¹, an everywhere-defined self-adjoint contraction with
+  0 ≤ R ≤ 1, trivial kernel, dense range = dom Δ, spectrum in [0,1], RΩ = ½Ω, and the exact
+  identity **Δ∘R = 1−R** — Δ is a function of a single bounded self-adjoint operator.
+- **The abstract PVM supplement** (reusable) — the operator-level spectral theorem T = ∫λ dE;
+  the **kernel-atom lemma** (injective self-adjoint T forces E({0}) = 0 — not automatic from
+  kernel triviality); the eigenvector calculus f(T)x = f(r)x.
+- **The headline** — **Δ^{it} := towerModUnitary**, the bounded Borel calculus of R under the
+  symbol ((1−r)/r)^{it}: a **strongly continuous one-parameter unitary group** (U₀ = 1,
+  U_{s+t} = U_sU_t, U_t⋆ = U_{−t}) fixing the cyclic vector (U_tΩ = Ω), commuting with Δ on
+  its whole domain, with E({0}) = 0 certifying the group genuinely represents δ^{it} on the
+  spectrum.
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "No claim that towerModUnitary equals
+the transported towerFlow (equivalently towerGen = log Δ): two strongly continuous unitary
+groups now coexist on the tower space and their identification — the exponential-recovery
+wall — is the named next campaign, not crossed here. No KMS condition of the limit state is
+proved; Tomita's theorem is not proved — U_t is not shown to implement automorphisms of the
+limit algebra; Δ^{1/2}, J, and the polar decomposition are still not constructed; no von
+Neumann type statement."
 
 </div>
 
