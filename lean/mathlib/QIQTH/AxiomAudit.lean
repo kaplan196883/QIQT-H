@@ -8536,6 +8536,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.frobBound
 #print axioms QIQTH.TowerGNS.cornerEmbed_posSemidef
 #print axioms QIQTH.TowerGNS.gnsInner_leftMul_le
+-- THE REPRESENTATION R6 (TowerGNS/LeftMul.lean): the bounded pre-operator — leftMulRaw (each
+-- component x at stage C ↦ of (C₀ ⊔ C) (ιa·ιx), via toModule); collapse_leftMul (the collapse
+-- intertwines: collapse (T_a x) = ι(a)·collapse x under support bounds); the raw inequality +
+-- leftMulRaw_norm_le (‖T_a x‖ ≤ √c(a)·‖x‖ — R5's bound through the stage collapse); towerLeftMul
+-- := LinearMap.mkContinuous (BOUNDED, never claimed contractive). Std 3.
+#print axioms QIQTH.TowerGNS.collapse_leftMul
+#print axioms QIQTH.TowerGNS.leftMulRaw_norm_le
+#print axioms QIQTH.TowerGNS.towerLeftMul
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

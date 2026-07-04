@@ -88,7 +88,7 @@ namespace `QIQTH.TowerGNS`.
   ((c a • 1 − aᴴa).PosSemidef, A5.1); `cornerEmbed_posSemidef` (A5.2, own section, scoped
   MatrixOrder/ComplexOrder; CFC fallback documented); **`gnsInner_leftMul_le`** (A5.3). Pure
   finite matrix analysis. Risk MEDIUM (the mathematical heart; fully elementary).
-- [ ] **R6 — `QIQTH/TowerGNS/LeftMul.lean`**: the bounded pre-operator — `towerLeftMulₗ a` (A6);
+- [x] **R6 — `QIQTH/TowerGNS/LeftMul.lean`** ✅ DONE: the bounded pre-operator — `towerLeftMulₗ a` (A6);
   `collapse_leftMul`; the norm bound (R5 + inner_eq_collapse + √-conversion per GNS file
   114-116); **`towerLeftMul a := (towerLeftMulₗ a).mkContinuous …`**. Risk MEDIUM.
 - [ ] **R7 — `QIQTH/TowerGNS/Representation.lean`**: **`towerRep C : DiamondAlg L C →⋆ₐ[ℂ]
@@ -219,3 +219,15 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   re ⟪ιa·x, ιa·x⟫_K ≤ c(a)·re ⟪x,x⟫_K (the sandwich `conjTranspose_mul_mul_same` + R2's state
   positivity + linear trace expansion + `Complex.le_def`). The honest scope in the docstring:
   Frobenius bound, NOT the C*-norm — π bounded, never claimed contractive. NEXT → R6 (LeftMul).
+
+- **2026-07-05** — **R6 LANDED — THE BOUNDED PRE-OPERATOR** (`QIQTH/TowerGNS/LeftMul.lean`,
+  axiom-free std-3, budget 0; fable subagent, two iterations): `leftMulRaw` (component at C ↦
+  of (C₀ ⊔ C) (ιa·ιx), toModule); **`collapse_leftMul`** (the collapse INTERTWINES:
+  collapse (T_a x) = ι(a)·collapse x under support bounds — Finset.mul_sum + cornerEmbed_trans/
+  mul per component); the raw inequality `leftMulRaw_re_inner_le` (image support proved via
+  DFinsupp.finsetSum_apply (erw) + DirectSum.of_eq_of_ne — no support-of-image computation);
+  **`leftMulRaw_norm_le`** ‖T_a x‖ ≤ √c(a)·‖x‖ (R5 through the collapse; √-conversion);
+  **`towerLeftMul := LinearMap.mkContinuous …`**. Lean notes: type-ascription to a defeq synonym
+  does NOT retype for instance search (Norm (⨁…) fails) — wrap in towerLeftMulₗ first; ⊔ vs ∪
+  on Finset needs an explicitly ⊔-typed have; DFinsupp.finset_sum_apply deprecated →
+  finsetSum_apply. NEXT → R7 (Representation — the ⋆-hom).
