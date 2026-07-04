@@ -8919,6 +8919,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerRightMulCLM_mem_commutant
 #print axioms QIQTH.TowerGNS.jconj_limitVN_mem_commutant
 #print axioms QIQTH.TowerGNS.towerCyclicVec_separating_commutant
+-- THE NON-TRACIALITY N1 (NonTracial/FiniteNonTrace.lean): the Gibbs state is NOT a trace --
+-- omega(E_nm E_mn) = w_n != w_m = omega(E_mn E_nm) on matrix units when weights differ.
+-- HONEST: state non-traciality, NOT a type statement (see the binding verdict). Std 3.
+#print axioms QIQTH.NonTracial.gibbs_stateOf_single_cycle
+#print axioms QIQTH.NonTracial.gibbs_state_not_tracial
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -1295,6 +1295,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   now stands machine-checked for the tower limit state — the first Tomita–Takesaki modular
   theory in any proof assistant.
 
+**THE NON-TRACIALITY CAMPAIGN (ACTIVE, THE_NON_TRACIALITY_PLAN.md)** — the tower state is a
+  genuine non-tracial KMS state (Δ ≠ 1). BINDING VERDICT: state non-traciality + modular
+  non-triviality ONLY — NOT a type classification, NOT "not type II" as an algebra
+  statement. **N1 LANDED**: `NonTracial/FiniteNonTrace.lean` — ω(E_nm·E_mn) = w_n ≠ w_m =
+  ω(E_mn·E_nm): the Gibbs state is not a trace (green first try). Next: N2 (tower vacuum
+  vector state non-tracial), N3 (Δ ≠ 1, Δ^{it} ≠ id).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

@@ -37,7 +37,7 @@ b*a = single m m 1 ⟹ tr = w_m. Unequal iff w_n ≠ w_m. Cross-checks: modAut �
 
 ## The increments
 
-- [ ] **N1 — `QIQTH/NonTracial/FiniteNonTrace.lean`: finite non-traciality.** (risk LOW)
+- [x] **N1 — `QIQTH/NonTracial/FiniteNonTrace.lean`: finite non-traciality.** ✅ DONE (risk LOW)
   `gibbs_stateOf_single_cycle : stateOf (gibbsDensity L C ω β) (single n m 1 * single m n 1)
   = ((gibbsWeight L C ω β n : ℝ):ℂ)` (+ swapped = w_m); `gibbs_state_not_tracial
   (h : gibbsWeight n ≠ gibbsWeight m) : stateOf ρ (single n m 1 * single m n 1) ≠
@@ -114,3 +114,9 @@ website files).
   prior (J M J ⊆ M′; the full Tomita–Takesaki data now machine-checked for the tower).
   NOTE: J1–J9 + this plan are committed LOCAL ONLY per the user's no-push instruction; the
   paper/website sync is also on hold until push is authorized.
+
+- **2026-07-05** — **N1 LANDED (green first try).** FiniteNonTrace.lean: stateOf ρ x =
+  trace(ρ*x) (density on the left); gibbs_stateOf_single_cycle (ω(E_nm·E_mn) = w_n, the
+  swapped instance = w_m — ONE lemma covers both); ★ gibbs_state_not_tracial (w_n ≠ w_m ⟹
+  ω(E_nm E_mn) ≠ ω(E_mn E_nm), via Complex.ofReal_injective). Std-3, budget 0. Next: N2
+  (tower vacuum vector state non-tracial).

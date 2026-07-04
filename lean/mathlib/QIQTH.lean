@@ -696,3 +696,7 @@ import QIQTH.QG.WardSpeedSplitting
 import QIQTH.QG.CpsuvEscape
 import QIQTH.QG.FiniteMatterNoLorentz
 import QIQTH.QG.EntropyNotCardinality
+-- THE NON-TRACIALITY campaign, N1: the finite Gibbs state is genuinely non-tracial —
+-- ω(E_{nm}·E_{mn}) = w_n ≠ w_m = ω(E_{mn}·E_{nm}) when the weights differ. HONEST SCOPE:
+-- a state-level inequality, NOT a type classification (see the file header). Standard three:
+import QIQTH.NonTracial.FiniteNonTrace
