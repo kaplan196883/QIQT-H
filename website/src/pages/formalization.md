@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **385 files and ~4,130
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **386 files and ~4,150
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1017,6 +1017,32 @@ Two tracks, one campaign (all axiom-free, std-3, budget 0).
   species sum cancelling), chained through the BTZ Cardy count. HAVE NOT: the numerical value of
   G is not derived; the c<sub>i</sub> stay cited Seeley–DeWitt data — a consistency chain over
   one shared cited datum, NOT an independent cross-check.
+
+
+## The generator: the self-adjoint Hamiltonian of the limit dynamics, computed
+
+`towerGen := stoneGen (towerFlow)` — the transported flow's genuine **self-adjoint unbounded
+generator** (K = K†), instantiating the held Stone theorem with the five flow facts (two adapter
+lemmas; every increment green on first or second build). With it:
+
+- **The zero-mode** — Ω ∈ dom(K) and **KΩ = 0**: the cyclic vector is annihilated because the
+  flow fixes it exactly.
+- **The explicit core** — on every pure component, **K ↑(of<sub>C</sub> a) =
+  ↑(of<sub>C</sub> [H<sub>C</sub>, a])** with H<sub>C</sub> = diagonal(log gibbsWeight): the
+  finite-stage modular Hamiltonian acts by *commutator*; the generator is COMPUTED, not just
+  certified, on a **constructively dense** domain (no Gårding mollification).
+- **Flow covariance** — U<sub>s</sub> preserves dom(K) and K U<sub>s</sub> = U<sub>s</sub> K.
+
+<div class="note">
+
+<strong>Honest scope (the checkpoint, verbatim).</strong> "towerGen is NOT constructed from, and
+NOT claimed equal to, a Tomita modular Hamiltonian log Δ of the limit state — no Δ, J, S,
+separating property, KMS-at-the-limit, or von Neumann type is claimed. No spectral resolution
+(PVM) of the unbounded towerGen is claimed, and no exponential-recovery identity
+towerFlow t = exp(it·towerGen) is claimed — the recovery wall is open by design and the campaign
+does not cross it."
+
+</div>
 
 ## Reproduce the verification
 
