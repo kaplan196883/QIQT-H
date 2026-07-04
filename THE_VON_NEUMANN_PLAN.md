@@ -1,6 +1,6 @@
 # THE VON NEUMANN CAMPAIGN — Δ† = Δ (the S̄*S̄ theorem)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3 (the continuous QG program).
+**Status:** COMPLETE (2026-07-05) — VN1–VN6 ALL LANDED, axiom-free std-3, budget 0. **Loop:** fe280fa3 (the continuous QG program).
 **Consult:** fable high-reasoning agent a3bf39d93364e7012 (2026-07-05) — decision (A) over the
 type-negative ladder; full Mathlib-inventory verification in the consult record.
 
@@ -75,7 +75,7 @@ the entire modular tower — waiting on one theorem.
   dense_towerModularOp_domain + towerModularOp_isFormalAdjoint + VN4. Corollaries:
   isClosed, closure_eq, kernel triviality (via towerModularOp_inner_self +
   towerTomitaBar_eq_zero), the resolvent bound ‖x‖ ≤ ‖x + Δx‖. Risk LOW.
-- [ ] **VN6 — checkpoint + wiring**: Checkpoint.lean stanza (verbatim HAVE/HAVE-NOT below),
+- [x] **VN6 — checkpoint + wiring**: ✅ DONE Checkpoint.lean stanza (verbatim HAVE/HAVE-NOT below),
   AxiomAudit sweep, inventory; state the consumer contract: towerResolvent := (1+Δ)⁻¹ as an
   everywhere-defined self-adjoint CLM contraction → PVM_of_selfAdjoint → boundedFC symbol
   ((1−r)/r)^{it} → Δ^{it} (the NEXT campaign; resolvent CLM here = stretch goal). Risk LOW.
@@ -159,3 +159,11 @@ log/status) before each increment; explicit git paths only.
   defined (`vonNeumann_dense_domain`, the classical ⟪x,u⟫ = ‖x‖² + ‖Tx‖² trick) and
   self-adjoint (VN1 kernel + VN2-derived surjectivity `adjointComp_one_add_surjective`).
   Mathlib-gap file, abstract, reusable. Std-3, budget 0. Remaining: VN6 (checkpoint).
+
+- **2026-07-05** — **VN6 LANDED — CAMPAIGN COMPLETE (6/6, in ONE session).** The HAVE/HAVE-NOT
+  stanza VERBATIM in TowerGNS/Checkpoint.lean, plus the consumer contract: towerResolvent :=
+  (1+Δ)⁻¹ (bijective from VN4 + VN5's bound, self-adjoint CLM contraction) →
+  PVM_of_selfAdjoint → boundedFC symbol ((1−r)/r)^{it} → Δ^{it} — the next campaign.
+  THE VON NEUMANN CAMPAIGN STANDS: Δ† = Δ as a theorem, and von Neumann's T†T theorem as an
+  abstract reusable Mathlib-gap contribution. Per the standing continuous-QG directive the
+  loop CONTINUES — next: sync, then THE RESOLVENT / Δ^{it} campaign scoping.

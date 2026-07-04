@@ -1177,7 +1177,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   VON NEUMANN THEOREM: `vonNeumann_isSelfAdjoint` — for closed densely defined T over any
   RCLike field, T†T (two-layer domain) is densely defined AND self-adjoint; with
   `vonNeumann_dense_domain` and `adjointComp_one_add_surjective` (green first try; the whole
-  campaign is four consecutive one-shots). Next: VN6 (checkpoint).
+  campaign is four consecutive one-shots). **VN6 — CAMPAIGN COMPLETE (6/6, one session,
+  four first-try-green increments)**. CHECKPOINT (verbatim in Checkpoint.lean): HAVE — Δ of
+  the tower limit state is genuinely SELF-ADJOINT (Mathlib adjoint sense), positive, closed,
+  densely defined, ΔΩ = Ω, acting as the finite modular automorphism on the core, with
+  ran(1+Δ) = ⊤; plus the abstract Mathlib-absent von Neumann theorem (T†T self-adjoint, any
+  RCLike field). HAVE NOT — no Δ^{1/2}/J/polar; no spectral resolution of unbounded Δ; no
+  Δ^{it}/KMS-at-limit (and NO claim towerGen = log Δ); no Tomita theorem at the algebra
+  level; no type. CONSUMER CONTRACT: (1+Δ)⁻¹ CLM contraction → PVM_of_selfAdjoint →
+  boundedFC ((1−r)/r)^{it} → Δ^{it} = the next campaign.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

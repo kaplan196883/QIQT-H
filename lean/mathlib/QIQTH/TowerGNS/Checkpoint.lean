@@ -149,6 +149,31 @@ import QIQTH.TowerGNS.CyclicVector
   claimed; the classical equivalence of the ∃-Riesz adjoint domain with the boundedness domain
   is not formalized (it is not needed)."
 -/
+/-
+  THE VON NEUMANN CAMPAIGN (VN1–VN6) — THE CAMPAIGN CHECKPOINT (all increments landed;
+  axiom-free std-3, budget 0; four consecutive first-try-green increments).
+
+  HAVE: "The modular operator Δ of the tower limit state is a genuinely self-adjoint (Mathlib
+  LinearPMap.adjoint-sense), positive, closed, densely defined operator with ΔΩ = Ω, acting as
+  the finite modular automorphism on the pure-component core, with ran(1+Δ) = ⊤; plus an
+  abstract, reusable, Mathlib-absent von Neumann theorem — T†T self-adjoint for closed densely
+  defined T over any RCLike field."
+
+  HAVE NOT: "Δ^{1/2} and the polar decomposition S̄ = JΔ^{1/2} are not constructed (so J is
+  still not an object); the spectral resolution of the unbounded Δ is not built
+  (PVM_of_selfAdjoint is for bounded operators; the resolvent bridge is stated, not built);
+  Δ^{it} and the KMS property of the limit state are not proved — in particular NO claim that
+  towerFlow/towerGen equals the modular flow of Δ (towerGen = log Δ is not established; they
+  are a priori different objects); Tomita's theorem (Δ^{it} M Δ^{−it} = M, JMJ = M′) is not
+  proved at the algebra level; no von Neumann type statement; and everything remains for the
+  specific finite-stage Gibbs inductive-limit state — the free-field/Type-III continuum objects
+  are untouched by this campaign."
+
+  THE CONSUMER CONTRACT (the certified next step): towerResolvent := (1+Δ)⁻¹ — bijective from
+  ran(1+Δ) = ⊤ (VN4) + the injectivity bound ‖x‖ ≤ ‖x + Δx‖ (VN5), bounded by that same bound,
+  self-adjoint, 0 ≤ R ≤ 1 — an everywhere-defined CLM contraction, the input to
+  PVM_of_selfAdjoint → boundedFC with symbol r ↦ ((1−r)/r)^{it} → Δ^{it}: the next campaign.
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS
