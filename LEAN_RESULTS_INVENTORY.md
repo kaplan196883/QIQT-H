@@ -1187,6 +1187,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   level; no type. CONSUMER CONTRACT: (1+Δ)⁻¹ CLM contraction → PVM_of_selfAdjoint →
   boundedFC ((1−r)/r)^{it} → Δ^{it} = the next campaign.
 
+**THE RESOLVENT CAMPAIGN (ACTIVE, THE_RESOLVENT_PLAN.md)** — (1+Δ)⁻¹ and Δ^{it}.
+  **R1 LANDED**: `TowerGNS/Resolvent.lean` — towerResolvent = (1+Δ)⁻¹ as an
+  everywhere-defined CLM contraction with the full API (Rh + Δ(Rh) = h, R(x+Δx) = x,
+  Δ∘R = 1−R, injective, dense range = dom Δ, ‖Rh‖ ≤ ‖h‖); green first try. Next: R2
+  (self-adjoint, 0 ≤ R ≤ 1, spectrum ⊆ [0,1], RΩ = ½Ω).
+
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via

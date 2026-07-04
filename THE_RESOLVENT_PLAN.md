@@ -30,7 +30,7 @@ Key verified facts:
 
 ## The increments
 
-- [ ] **R1 — `TowerGNS/Resolvent.lean`: the resolvent CLM.** towerResolventAux h :=
+- [x] **R1 — `TowerGNS/Resolvent.lean`: the resolvent CLM.** ✅ DONE towerResolventAux h :=
   Classical.choose (towerModularOp_one_add_surjective …); ONE spec lemma (choice hygiene —
   never unfold after). Uniqueness one_add_injOn via norm_le_norm_add + map_sub; linearity
   from uniqueness; towerResolvent := LinearMap.mkContinuous _ 1. Consumer lemmas:
@@ -126,3 +126,10 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   StandardSubspaceModularFlow modChar/modUnitary template, dominated-convergence engines,
   the stale StarOrderedRing remark, the missing eigen/atom calculus). THE VON NEUMANN
   campaign closed immediately prior (Δ† = Δ, 34th first synced at e808695).
+
+- **2026-07-05** — **R1 LANDED (green first try).** Resolvent.lean: towerResolvent =
+  (1+Δ)⁻¹ as an everywhere-defined CLM contraction (choice-hygiene aux + ONE spec;
+  uniqueness `one_add_modularOp_injOn` from the VN5 bound; linearity from uniqueness;
+  mkContinuous 1). Full consumer API: Rh + Δ(Rh) = h, R(x+Δx) = x, Δ∘R = 1−R,
+  R(Δx) = x − Rx, injective, range = towerModularDom (dense), ‖Rh‖ ≤ ‖h‖. Std-3,
+  budget 0. Next: R2 (order/spectrum/Ω).

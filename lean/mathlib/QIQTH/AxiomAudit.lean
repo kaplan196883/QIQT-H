@@ -8784,6 +8784,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VonNeumann.vonNeumann_isSelfAdjoint
 #print axioms QIQTH.VonNeumann.vonNeumann_dense_domain
 #print axioms QIQTH.VonNeumann.adjointComp_one_add_surjective
+-- THE RESOLVENT R1 (TowerGNS/Resolvent.lean): towerResolvent = (1+Delta)^{-1} as an
+-- everywhere-defined CLM contraction -- choice-hygiene witness, uniqueness-linearity,
+-- mkContinuous 1; R h + Delta(R h) = h, R(x + Delta x) = x, Delta o R = 1 - R, injective,
+-- range = towerModularDom (dense). Std 3.
+#print axioms QIQTH.TowerGNS.towerResolvent_add_modularOp
+#print axioms QIQTH.TowerGNS.towerResolvent_one_add
+#print axioms QIQTH.TowerGNS.modularOp_towerResolvent
+#print axioms QIQTH.TowerGNS.dense_range_towerResolvent
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

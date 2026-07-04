@@ -109,6 +109,7 @@ import QIQTH.TowerGNS.ConjAdjoint
 import QIQTH.TowerGNS.ModularOp
 import QIQTH.TowerGNS.ModularSurjective
 import QIQTH.TowerGNS.ModularSelfAdjoint
+import QIQTH.TowerGNS.Resolvent
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius
