@@ -8816,6 +8816,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerModUnitary_adjoint
 #print axioms QIQTH.TowerGNS.towerModUnitary_unitary
 #print axioms QIQTH.TowerGNS.norm_towerModUnitary_apply
+-- THE RESOLVENT R5 (TowerGNS/ModularUnitaryCont.lean): Delta^{it} is STRONGLY CONTINUOUS
+-- (sequential criterion + dominated convergence), fixes the cyclic vector (U_t Omega =
+-- Omega, via the R3 eigenvector calculus at R Omega = half Omega), and carries no spectral
+-- weight at the junk point (E({0}) = 0 from injectivity -- the kernel atom). Still NO claim
+-- U = towerFlow. Std 3.
+#print axioms QIQTH.TowerGNS.towerModUnitary_stronglyContinuous
+#print axioms QIQTH.TowerGNS.towerModUnitary_cyclicVec
+#print axioms QIQTH.TowerGNS.towerResolvent_pvm_atom_zero
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

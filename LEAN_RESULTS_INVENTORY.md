@@ -1199,8 +1199,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   borelFC_apply_eigenvector (f(T)x = f(r)•x). **R4 LANDED**: `TowerGNS/ModularUnitary.lean` —
   towerModUnitary t := borelFC of the junk-value-1 piecewise ((1−r)/r)^{it} on the
   resolvent: U0 = 1, U(s+t) = UsUt, adjoint = U(−t), unitary, isometric, cocycle inner
-  identity (green first try; NO claim U = towerFlow). Next: R5 (strong continuity +
-  U_tΩ = Ω + E({0}) = 0).
+  identity (green first try; NO claim U = towerFlow). **R5 LANDED**: `ModularUnitaryCont.lean` —
+  Δ^{it} is STRONGLY CONTINUOUS, fixes Ω (U_tΩ = Ω via the eigenvector calculus at
+  RΩ = ½Ω), and E({0}) = 0 (the kernel atom) — a genuine strongly continuous one-parameter
+  unitary group with the honesty pair (green first try; still NO claim U = towerFlow).
+  Next: R6 (U_t commutes with R and Δ), R7 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

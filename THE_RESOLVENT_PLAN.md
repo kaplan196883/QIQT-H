@@ -57,7 +57,7 @@ Key verified facts:
   pointwise laws + measurability + t-continuity (verbatim modChar ports). towerModUnitary t
   := borelFC (towerResolvent) …; _zero/add/adjoint/unitary/norm +
   inner_towerModUnitary_towerModUnitary (modUnitary ports). Risk LOW (transcription).
-- [ ] **R5 — part 2: strong continuity + the honesty pair.**
+- [x] **R5 — part 2: strong continuity + the honesty pair.** ✅ DONE
   towerModUnitary_stronglyContinuous (port: sequential criterion +
   tendsto_inner_boundedFC_of_dominated + the 2‖ξ‖² − 2Re⟪ξ,U_{a−t}ξ⟫ identity).
   towerModUnitary_cyclicVec: U_tΩ = Ω (R3(d) at r = ½; ½ ∈ spectrum from Ω ≠ 0
@@ -157,3 +157,12 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   StandardSubspace coupling), unitary membership, isometry, and the two-vector cocycle
   ⟪Ua x, Ub y⟫ = ⟪x, U(b−a) y⟫ that R5 consumes. Std-3, budget 0. Next: R5 (strong
   continuity + U_tΩ = Ω + E({0}) = 0).
+
+- **2026-07-05** — **R5 LANDED (green first try).** ModularUnitaryCont.lean:
+  ★ towerModUnitary_stronglyContinuous (sequential criterion + dominated convergence +
+  the cocycle norm-square identity; one proof-local rclikeToReal letI per project
+  precedent); towerModUnitary_cyclicVec (U_tΩ = Ω via the R3 eigenvector calculus at
+  RΩ = ½Ω, symbol value exp(it·log 1) = 1); towerResolvent_pvm_atom_zero (E({0}) = 0 —
+  the kernel atom). Δ^{it} IS a strongly continuous one-parameter unitary group fixing Ω
+  with no junk-point spectral weight. Still NO claim U = towerFlow. Std-3, budget 0.
+  Next: R6 (commutation).
