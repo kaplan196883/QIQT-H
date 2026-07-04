@@ -58,7 +58,7 @@ against sources; the full arithmetic + design record is in the consult.
 - [x] **J4 — `TowerGNS/ModularConj.lean`**: ✅ DONE the anti-unitary pack — towerJ_of,
   towerJ_of_single ★, towerJ_inner (⟪Jξ,Jη⟫ = ⟪η,ξ⟫), towerJ_norm, towerJ_involutive,
   towerJ_cyclicVec (JΩ = Ω), towerJ_smul twist guard, surjectivity. Risk LOW.
-- [ ] **J5 — `TowerGNS/PolarCore.lean`**: ★ S̄↑(of C a) = towerJ↑(of C (deltaHalfStage a))
+- [x] **J5 — `TowerGNS/PolarCore.lean`**: ✅ DONE ★ S̄↑(of C a) = towerJ↑(of C (deltaHalfStage a))
   (the polar decomposition on the core); mirror Δ^{1/2} = J∘S̄-core; F-core = Δ^{1/2}∘J;
   deltaHalf² = Δ-core; the order-guard documented. Risk LOW (harvest).
 - [ ] **J6 — `TowerGNS/ConjFlow.lean`**: jRaw_flowRaw → towerJ_towerFlow →
@@ -149,3 +149,9 @@ paths only.
   (JΩ = Ω), the conj-smul twist guard, injective + surjective, and ★ towerJ_of_single
   (the eigenbasis action √(w_m/w_n), flipped, conjugated). Std-3, budget 0.
   Next: J5 (the polar decomposition on the core — harvest).
+
+- **2026-07-05** — **J5 LANDED (green first try — pure harvest).** PolarCore.lean:
+  ★ towerTomitaBar_eq_towerJ_deltaHalf — THE POLAR DECOMPOSITION ON THE CORE
+  (S̄⟨↑(of C a)⟩ = J↑(of C (Δ½ a))); the mirror J∘S̄ = Δ½-core; F-core = Δ½∘J (the ORDER
+  GUARD made positive — the two compositions provably differ: aᴴ vs modAut ρ aᴴ);
+  Δ½² = Δ-core; the GNS Δ½-eigenbasis action. Std-3, budget 0. Next: J6 (JΔ^{it} = Δ^{it}J).

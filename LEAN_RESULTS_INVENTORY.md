@@ -1251,8 +1251,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **J4 LANDED**: `ModularConj.lean` — towerJ is a
   genuine involutive ANTI-UNITARY fixing Ω (⟪Jξ,Jη⟫ = ⟪η,ξ⟫, J² = 1, JΩ = Ω, conj-smul
   twist, bijective isometry; eigenbasis action √(w_m/w_n) flipped+conjugated; green first
-  try). Next: J5 (polar decomposition on the core), J6 (JΔ^{it} = Δ^{it}J), J7–J8 (Tomita
-  II inclusion).
+  try). **J5 LANDED**: `PolarCore.lean` — **THE POLAR
+  DECOMPOSITION ON THE CORE**: S̄ = J∘Δ^{1/2} and F = Δ^{1/2}∘J on pure components (order
+  guard positive: the compositions provably differ), Δ^{1/2}² = Δ-core (green first try;
+  honest: core-level identity, no unbounded Δ^{1/2}). Next: J6 (JΔ^{it} = Δ^{it}J),
+  J7–J8 (Tomita II inclusion), J9 (checkpoint).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

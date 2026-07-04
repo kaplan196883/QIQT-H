@@ -123,6 +123,7 @@ import QIQTH.TowerGNS.JStage
 import QIQTH.TowerGNS.JEmbed
 import QIQTH.TowerGNS.ConjPre
 import QIQTH.TowerGNS.ModularConj
+import QIQTH.TowerGNS.PolarCore
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

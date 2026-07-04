@@ -8892,6 +8892,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerJ_inner
 #print axioms QIQTH.TowerGNS.towerJ_involutive
 #print axioms QIQTH.TowerGNS.towerJ_cyclicVec
+-- THE MODULAR CONJUGATION J5 (TowerGNS/PolarCore.lean): THE POLAR DECOMPOSITION ON THE CORE
+-- -- S-bar = J o Delta^{1/2} and F = Delta^{1/2} o J on pure components (the ORDER GUARD:
+-- the two compositions provably differ), Delta^{1/2} squared = Delta-core. HONEST: a
+-- core-level identity, NOT an operator factorization; no unbounded Delta^{1/2}. Std 3.
+#print axioms QIQTH.TowerGNS.towerTomitaBar_eq_towerJ_deltaHalf
+#print axioms QIQTH.TowerGNS.towerTomitaF_eq_deltaHalf_jStage
+#print axioms QIQTH.TowerGNS.deltaHalf_sq_eq_modularOp_core
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
