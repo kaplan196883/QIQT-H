@@ -49,7 +49,7 @@ the entire modular tower — waiting on one theorem.
   IsFormalAdjoint A A + (∀ h, ∃ x : A.domain, ↑x + A x = h) ⟹ IsSelfAdjoint A. Route:
   le_adjoint; for z in dom A†, surject z + A†z, u := z − x has u + A†u = 0; ⟪u, y + Ay⟫ = 0
   ∀y; surjectivity ⟹ u = 0; eq_of_le_of_domain_eq. Risk LOW.
-- [ ] **VN2 — `QIQTH/VonNeumann/GraphDecomposition.lean`** (the genuinely new content,
+- [x] **VN2 — `QIQTH/VonNeumann/GraphDecomposition.lean`** ✅ DONE (the genuinely new content,
   RCLike-generic, consumed at 𝕜 = ℝ): `exists_pairing_of_isClosed`:
   T.IsClosed ⟹ ∀ h, ∃ x : T.domain, ∀ a : T.domain, ⟪↑a, h − ↑x⟫ = ⟪T a, T x⟫.
   Route: K := graph mapped into WithLp 2 (E×E) (closed via prodContinuousLinearEquiv);
@@ -126,3 +126,13 @@ log/status) before each increment; explicit git paths only.
   IsSelfAdjoint (instStar + isSelfAdjoint_def confirmed at the pin), structured on the
   stoneGen_isSelfAdjoint template with an abel-normalized subtraction (no ±i, field-generic);
   + corollary `adjoint_eq_...`. Std-3, budget 0. Next: VN2 (graph decomposition in WithLp 2).
+
+- **2026-07-05** — **VN2 LANDED (green FIRST TRY again).** GraphDecomposition.lean:
+  `exists_pairing_of_isClosed` — the von Neumann graph orthogonal decomposition in
+  WithLp 2 (E×E), RCLike-generic, no adjoint anywhere. Route refinements that made it
+  one-shot: K via `comap (WithLp.linearEquiv)` (membership Iff.rfl, closedness =
+  IsClosed.preimage (prod_continuous_ofLp) — literal rfl set-equality, no map/symm
+  rewriting); IsClosed.completeSpace_coe is an INSTANCE at the pin so HasOrthogonalProjection
+  fires from one haveI; mem_orthogonal's orientation is already the goal's (graph element in
+  slot 1) so no conjugation fix; prod_inner_apply is rfl. Std-3, budget 0.
+  Next: VN4 (load-bearing i-twist + tower surjectivity); VN3 after.

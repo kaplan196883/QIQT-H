@@ -1162,8 +1162,11 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   theorem, absent from Mathlib). **VN1 LANDED**: `QIQTH/VonNeumann/SelfAdjointCriterion.lean` —
   `isSelfAdjoint_of_isFormalAdjoint_of_one_add_surjective`: densely defined + symmetric +
   ran(1+A) = ⊤ ⟹ IsSelfAdjoint A, over any RCLike field, Mathlib-only imports (a reusable
-  Mathlib-gap kernel; green first try). Next: VN2 (the von Neumann graph decomposition of a
-  closed LinearPMap in WithLp 2 (E×E)).
+  Mathlib-gap kernel; green first try). **VN2 LANDED**: `GraphDecomposition.lean` —
+  `exists_pairing_of_isClosed`: for closed T and any h, ∃ x ∈ dom T with ⟪a, h−x⟫ = ⟪Ta, Tx⟫
+  ∀ a ∈ dom T — the von Neumann graph orthogonal decomposition in WithLp 2 (E×E),
+  RCLike-generic, no adjoint anywhere (green first try). Next: VN4 (the ConjHomogeneous
+  i-twist + towerModularOp_one_add_surjective), then VN3/VN5.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
