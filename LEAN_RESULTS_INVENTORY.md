@@ -62,6 +62,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 - **Born is REDUCED, not derived from unitarity.** The probability content is carried by ONE irreducible premise:
   the noncontextual/positive effect-valuation (`EffectGleason.EffectMeasure`) — equivalently the canonicity of
   the typicality measure (P5). The code *proves this is irreducible*.
+- **The P5-reduction chain — both earlier Born premises collapse to refinement-equivariance**
+  (`BornMuSelection.lean` / `BornActualityConsistency.lean`; all six theorems probed std-3, 2026-07-05; pinned in
+  `AxiomAudit.lean:~3173–3233`). `BornMuSelection.equivariant_no_signaling` **[AF]** — an equivariant
+  (quantum-equilibrium) typicality measure gives selector no-signaling: every local-readout marginal is invariant
+  under a measure-preserving refinement, with NO Born input. `equivariant_context_independent` **[AF]** —
+  equivariance ⟹ **non-contextual** outcome marginals (no preferred refinement) — exactly the Born-strength
+  noncontextuality premise consumed by `BornJoinGleason.finite_noCollapseBorn_fromNoncontextuality`.
+  `BornActualityConsistency.apc_iff_positiveAdditive` **[AF]** — Actuality Projective Consistency (the selector
+  does not signal under outcome-refinement) **⟺** additivity of the rule on positive weights; composed with
+  `RefinementBorn.continuous_additive_fMeasure_eq_born`: **APC ⟺ additive ⟹ Born** (in-file honesty: APC is an
+  amplitude-free *reframing* of the additivity premise, NOT strictly weaker). `mu_selection_martingale`
+  **[AF·cond: squared-weight conservation in μ-expectation + absorbing record]** — the second, dynamical
+  (optional-stopping) grounding: the μ-probability of an outcome equals its Born weight. Guards **[no-go]**:
+  `SelectorRefinement.Countermodel.alphaSq_selector_signals` — observable microcausality does NOT entail selector
+  no-signaling (the α=2 rule signals under refinement), so **P5 is not reducible to P3** (they live at different
+  layers: observable algebra vs actuality measure); `BornRoutes.sqRule_refinement_signals` (non-vacuity of the
+  refinement-signaling notion). **Net: the additivity/noncontextuality bridge AND the μ-selection premise both
+  reduce to P5 (refinement-equivariance) — the paper's "irreducible physics = (P4)+(P5), on the (P1) ontology"
+  sentence is theorem-backed.**
 - `EffectGleason.finite_effect_gleason` **[AF·cond: EffectMeasure]** — a normalized, nonneg, coexistent-additive
   μ on effects equals `tr(ρE)` (finite Busch/CFMR effect-Gleason). The probability engine.
 - `GleasonSelector.positive_ray_certain_forces_born` **[AF·cond: positivity+ray-certain+additive+homog]** — a
