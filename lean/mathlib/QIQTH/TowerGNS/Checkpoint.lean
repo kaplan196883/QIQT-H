@@ -31,6 +31,26 @@
 -/
 import Mathlib
 import QIQTH.TowerGNS.CyclicVector
+/-
+  THE TRANSPORT (B1–B8) — THE CAMPAIGN CHECKPOINT (Track B of
+  THE_TRANSPORT_AND_ACCOUNTING_PLAN.md; all increments landed INCLUDING the B7 strong-continuity
+  stretch; axiom-free std-3, budget 0).
+
+  HAVE: "We have the transported Gibbs modular flow as a one-parameter unitary group on the
+  tower GNS space — U_t obtained by isometric extension of the per-corner flows through the
+  completion, with U_0 = 1, the group law U_t U_s = U_{t+s}, adjoint U_t* = U_{−t}, invariance
+  of the cyclic vector U_t Ω = Ω, the implementation theorem U_t π_C(a) U_{−t} = π_C(σ_t a) at
+  every finite stage, and invariance of the limit von Neumann algebra towerLimitVN under
+  conjugation by the flow — all axiom-free." (The B7 stretch SHIPPED: the group is moreover
+  STRONGLY CONTINUOUS — continuous_towerFlow_apply.)
+
+  HAVE NOT: "We do not have the modular theory of the limit: no Tomita operator, Δ, or J on the
+  completion is constructed, Ω is not shown separating, no analytic (strip) KMS condition for
+  the limit state is proved — only the finite-stage boundary identity is displayed — and no
+  type is classified; U_t is defined by transport of the finite corner flows, not derived from
+  the limit state." (With B7 shipped, strong continuity IS claimed; the Stone generator is NOT —
+  the named post-campaign hook into the held Spectral/Stone tower.)
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS

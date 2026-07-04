@@ -1,6 +1,6 @@
 # THE TRANSPORT + THE ACCOUNTING (B1–B8 · A1–A4): two tracks, one campaign
 
-**Status:** ACTIVE (2026-07-06). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all held
+**Status:** COMPLETE (2026-07-06) — B1–B8 + A1–A4 ALL LANDED (B7 stretch INCLUDED), axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; all held
 APIs read, all Mathlib names verified against the pin).** **Track B (THE MODULAR TRANSPORT):** the
 per-corner Gibbs modular flows transported to one one-parameter unitary group U_t on TowerGNS —
 towerLimitVN gets its dynamics. **Track A (THE ACCOUNTING):** the honest maximal species upgrade —
@@ -77,7 +77,7 @@ stretch + checkpoints.
   weighted-sum formula for ‖(U_t−U_s)(of C a)‖², `continuous_towerFlow_of`, capstone
   `continuous_towerFlow_apply` (ε/3 + density + ‖U‖ ≤ 1). Stay norm-free on matrices. Risk HIGH;
   cut after one genuinely failed session without shame.
-- [ ] **B8/A4 — checkpoints**: both HAVE/HAVE-NOT pairs VERBATIM (below) into
+- [x] **B8/A4 — checkpoints** ✅ DONE: both HAVE/HAVE-NOT pairs VERBATIM (below) into
   `TowerGNS/Checkpoint.lean` (Track B stanza) + a Track A checkpoint comment in
   SpeciesCrossCheck.lean + LEAN_RESULTS_INVENTORY.md; plan → COMPLETE; delete the loop; stop.
   (If B7 cut: delete nothing from HAVE-B — it already hedges "unless the stretch increment
@@ -219,3 +219,12 @@ tool (fable) high reasoning or mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   The door to the held Spectral/Stone tower is open (the generator NOT claimed — post-campaign).
   The HAVE-B sentence keeps its stretch hedge as SHIPPED. NEXT → B8/A4 (checkpoints; delete
   loop; stop).
+
+- **2026-07-06** — **B8/A4 LANDED — CAMPAIGN COMPLETE (11/11, B7 stretch INCLUDED).** The Track B
+  HAVE/HAVE-NOT stanza added VERBATIM to `TowerGNS/Checkpoint.lean` (strong continuity noted as
+  SHIPPED; the Stone generator the named post-campaign hook); the Track A sentences already
+  verbatim in `SpeciesCrossCheck.lean` (A3); inventory carries both. towerLimitVN now has: a
+  strongly continuous one-parameter unitary group implementing the Gibbs modular flow at every
+  stage, fixing Ω, and preserving the algebra — AND the accounting side has the forced
+  Sakharov/Dvali form, the first derived heat-kernel coefficient, and the one-datum consistency
+  chain. Loop a900dce0 deleted. Paper/website sync on request.

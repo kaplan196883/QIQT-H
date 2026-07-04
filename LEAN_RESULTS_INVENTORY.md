@@ -1055,7 +1055,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (`TowerGNS/FlowContinuity.lean`): CAPSTONE **`continuous_towerFlow_apply`** — the transported
   flow is a STRONGLY CONTINUOUS one-parameter unitary group on TowerGNS (ε/3 + density + the
   uniform isometry; the difference-norm in collapsed closed form; no cpow). The door to the held
-  Spectral/Stone tower is open; the generator is NOT claimed. Next: B8/A4 (checkpoints).
+  Spectral/Stone tower is open; the generator is NOT claimed. **B8/A4 — CAMPAIGN COMPLETE (11/11)**: the Track B
+  HAVE/HAVE-NOT stanza verbatim in `TowerGNS/Checkpoint.lean` (HAVE: the transported flow as a
+  one-parameter unitary group — U_0 = 1, group law, U_t* = U_{−t}, U_tΩ = Ω, the implementation
+  theorem, towerLimitVN invariance, all axiom-free; PLUS strong continuity, the B7 stretch
+  shipped. HAVE NOT: no Tomita Δ/J, Ω not shown separating, no strip KMS — only the finite-stage
+  boundary identity — no Stone generator, no type classified; U_t defined by TRANSPORT). Track A
+  sentences verbatim in `SpeciesCrossCheck.lean`. Both tracks complete.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
