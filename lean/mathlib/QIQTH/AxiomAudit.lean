@@ -8561,6 +8561,18 @@ namespace QIQTH.AxiomAudit
 -- separating (cut). Std 3.
 #print axioms QIQTH.TowerGNS.towerRep_inner_cyclicVec
 #print axioms QIQTH.TowerGNS.dense_span_towerRep_cyclicVec
+-- THE REPRESENTATION R9 (TowerGNS/LimitVN.lean): ★★★ THE CAPSTONE ★★★ towerLimitVN :=
+-- limitVN (towerStageAlg = ranges of towerRep) — THE GENUINE DIRECTED-UNION LIMIT VON NEUMANN
+-- ALGEBRA OF THE CODE TOWER on TowerGNS, with monotone stages (via towerRep_cornerEmbed),
+-- stage membership, the SOT-approximation characterization (mem_towerLimitVN_iff — C7/C9
+-- instantiated), the vector-state identity per stage, and the ℕ-instantiation
+-- freqTowerLimitVN (the QIQT frequency tower). The TYPE IS NOT CLASSIFIED (no factor/ITPFI/
+-- III₁ claim — T3's fingerprint stays arithmetic; AW 1968/Connes 1973 cited only); Ω not
+-- shown separating; π not shown isometric. Std 3.
+#print axioms QIQTH.TowerGNS.towerLimitVN
+#print axioms QIQTH.TowerGNS.mem_towerLimitVN_iff
+#print axioms QIQTH.TowerGNS.towerRep_mem_towerLimitVN
+#print axioms QIQTH.TowerGNS.freqTowerLimitVN
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

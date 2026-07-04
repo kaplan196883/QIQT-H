@@ -1,6 +1,6 @@
 # THE REPRESENTATION (R1–R9): tower-GNS — the corner tower on ONE Hilbert space
 
-**Status:** ACTIVE (2026-07-05). **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; every
+**Status:** COMPLETE (2026-07-05) — R1–R9 ALL LANDED, axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (self-consult, high reasoning; every
 load-bearing Mathlib name READ in the pinned sources)** — binding verdict below. **Goal:** put the
 T5/T7 corner tower on one Hilbert space via the GNS of the compatible Gibbs states and instantiate
 C9's `limitVN` — the genuine directed-union limit von Neumann algebra of the code tower
@@ -99,7 +99,7 @@ namespace `QIQTH.TowerGNS`.
   φ_C(a)); `towerRep_cyclicVec_of` (π_C(a)Ω = ↑(of C a), via C ⊔ ∅ = C + cornerEmbed_one);
   **`dense_span_towerRep_cyclicVec`** (span ⊇ image of every of C x ⟹ all of TowerPre via
   sum_support_of; close with Completion.denseRange_coe). Risk LOW.
-- [ ] **R9 — `QIQTH/TowerGNS/LimitVN.lean` + `Checkpoint.lean`: CAPSTONE + checkpoint** —
+- [x] **R9 — `QIQTH/TowerGNS/LimitVN.lean` + `Checkpoint.lean`: CAPSTONE + checkpoint** ✅ DONE —
   `towerStageAlg C := (towerRep C).range`; `towerStageAlg_mono`; **`towerLimitVN :
   VonNeumannAlgebra (TowerGNS L ω β) := limitVN towerStageAlg (….directed_le)`**;
   `mem_towerLimitVN_iff`; the towerVectorState restriction lemma; the ℕ-instantiation (the QIQT
@@ -250,3 +250,14 @@ mcp__OpenAI__ask gpt-5.5-pro (never expose keys).
   the vector state of Ω; CAPSTONE **`dense_span_towerRep_cyclicVec`** — Ω is CYCLIC (span of the
   orbit dense: pre-vectors are finite sums of orbit vectors + denseRange_coe + Dense.mono). Ω
   NOT claimed separating (cut). NEXT → R9 (LimitVN + Checkpoint — THE CAPSTONE).
+
+- **2026-07-05** — **R9 LANDED — CAMPAIGN COMPLETE (9/9), GREEN FIRST TRY**
+  (`QIQTH/TowerGNS/LimitVN.lean` + `Checkpoint.lean`, axiom-free std-3, budget 0):
+  **`towerLimitVN := limitVN (towerStageAlg …) (….directed_le)`** — THE GENUINE DIRECTED-UNION
+  LIMIT VON NEUMANN ALGEBRA OF THE CODE TOWER on TowerGNS (`towerStageAlg C := (towerRep C).range`,
+  monotone via towerRep_cornerEmbed); stage membership; **`mem_towerLimitVN_iff`** (SOT-approx
+  from the stages — C7/C9 instantiated); `towerVectorState_stage`; ℕ-instantiation
+  **`freqTowerLimitVN`**. Checkpoint module carries the HAVE/HAVE-NOT sentences VERBATIM. The
+  object THE TOWER + THE CLOSURE campaigns were built for EXISTS. Type NOT classified; Ω not
+  shown separating; π not shown isometric. Loop dc309933 deleted. Follow-up hooks: modular-flow
+  transport to TowerGNS; type analysis (the cited wall). Paper/website sync on request.

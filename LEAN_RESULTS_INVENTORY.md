@@ -1005,7 +1005,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   coherently through every stage). **R8 LANDED** (`TowerGNS/CyclicVector.lean`, **[AF]** std-3):
   **`towerRep_inner_cyclicVec`** — ⟪Ω, π_C(a)Ω⟫ = φ_C(a): every corner Gibbs state IS the
   vector state of the unit cyclic vector Ω; **`dense_span_towerRep_cyclicVec`** — Ω is CYCLIC
-  (the orbit span is dense). Ω not claimed separating. Next: R9 (towerLimitVN — THE CAPSTONE).
+  (the orbit span is dense). Ω not claimed separating. **R9 — CAMPAIGN COMPLETE (9/9)** (`TowerGNS/LimitVN.lean` +
+  `Checkpoint.lean`, **[AF]** std-3): ★ **`towerLimitVN`** ★ — the GENUINE directed-union limit
+  von Neumann algebra of the code tower on TowerGNS (`limitVN` of the towerRep ranges, monotone
+  via towerRep_cornerEmbed), with **`mem_towerLimitVN_iff`** (SOT-approximation from the finite
+  stages) and the ℕ-instantiation **`freqTowerLimitVN`** (the QIQT frequency tower). CHECKPOINT
+  (verbatim): HAVE "One Hilbert space — the completion of the semidefinite Gibbs-GNS pre-space
+  on the direct sum of all finite corners — carrying compatible unital ⋆-representations of
+  every corner algebra (π_{C′} ∘ cornerEmbed = π_C for all C ⊆ C′), a unit cyclic vector Ω
+  implementing every corner Gibbs state as a vector state (⟪Ω, π_C(a)Ω⟫ = φ_C(a)), and the
+  directed-union limit von Neumann algebra towerLimitVN = limitVN of the representation images,
+  with membership characterized by SOT-approximation from the finite stages — all axiom-free."
+  HAVE NOT "The type of towerLimitVN is not classified — no factor, no ITPFI identification, no
+  III₁ claim is made or proved (the T3 fingerprint stays arithmetic; Araki–Woods 1968 and Connes
+  1973 stay cited, never invoked); Ω is not shown separating, the modular theory of the limit
+  state on the completion is not constructed, and the representations are not shown isometric.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
