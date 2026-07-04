@@ -1190,8 +1190,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 **THE RESOLVENT CAMPAIGN (ACTIVE, THE_RESOLVENT_PLAN.md)** — (1+Δ)⁻¹ and Δ^{it}.
   **R1 LANDED**: `TowerGNS/Resolvent.lean` — towerResolvent = (1+Δ)⁻¹ as an
   everywhere-defined CLM contraction with the full API (Rh + Δ(Rh) = h, R(x+Δx) = x,
-  Δ∘R = 1−R, injective, dense range = dom Δ, ‖Rh‖ ≤ ‖h‖); green first try. Next: R2
-  (self-adjoint, 0 ≤ R ≤ 1, spectrum ⊆ [0,1], RΩ = ½Ω).
+  Δ∘R = 1−R, injective, dense range = dom Δ, ‖Rh‖ ≤ ‖h‖); green first try. **R2 LANDED**: `ResolventOrder.lean` — R is
+  self-adjoint, positive with 0 ≤ R ≤ 1 (Loewner), ‖R‖ ≤ 1, spectrum ⊆ [0,1], RΩ = ½Ω
+  (green first try). Next: R3 (`Spectral/PVMEigen.lean` — the abstract PVM eigenvector/atom
+  calculus: E({0}) = 0 for injective T, boundedFC_apply_eigenvector).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

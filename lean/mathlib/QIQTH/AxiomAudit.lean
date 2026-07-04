@@ -8792,6 +8792,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerResolvent_one_add
 #print axioms QIQTH.TowerGNS.modularOp_towerResolvent
 #print axioms QIQTH.TowerGNS.dense_range_towerResolvent
+-- THE RESOLVENT R2 (TowerGNS/ResolventOrder.lean): the resolvent's order data --
+-- self-adjoint (symmetric everywhere-defined), POSITIVE (0 <= R and 0 <= 1-R in the
+-- Loewner order), norm <= 1, spectrum in [0,1], and R Omega = (1/2) Omega. Std 3.
+#print axioms QIQTH.TowerGNS.towerResolvent_isSelfAdjoint
+#print axioms QIQTH.TowerGNS.towerResolvent_nonneg
+#print axioms QIQTH.TowerGNS.towerResolvent_spectrum_mem_Icc
+#print axioms QIQTH.TowerGNS.towerResolvent_cyclicVec
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -37,7 +37,7 @@ Key verified facts:
   towerResolvent_mem, _add_modularOp (Rh + Δ(Rh) = h), _one_add (R(x+Δx) = x),
   _injective, range = towerModularDom (dense), Δ∘R = 1−R (modularOp_towerResolvent) and
   R(Δx) = x − Rx. Risk LOW.
-- [ ] **R2 — `TowerGNS/ResolventOrder.lean`: self-adjointness, order, spectrum, Ω.**
+- [x] **R2 — `TowerGNS/ResolventOrder.lean`: self-adjointness, order, spectrum, Ω.** ✅ DONE
   isSymmetric (⟪Rh,k⟫ = ⟪h,Rk⟫ via towerModularOp_isFormalAdjoint) → isSelfAdjoint
   (isSelfAdjoint_iff_isSymmetric); nonneg (re⟪Rh,h⟫ = ‖Rh‖² + ‖S̄Rh‖²); R ≤ 1
   (re⟪h−Rh,h⟫ = ‖S̄Rh‖² + ‖ΔRh‖²); ‖R‖ ≤ 1; spectrum ⊆ Icc 0 1 (verbatim port of
@@ -133,3 +133,10 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   mkContinuous 1). Full consumer API: Rh + Δ(Rh) = h, R(x+Δx) = x, Δ∘R = 1−R,
   R(Δx) = x − Rx, injective, range = towerModularDom (dense), ‖Rh‖ ≤ ‖h‖. Std-3,
   budget 0. Next: R2 (order/spectrum/Ω).
+
+- **2026-07-05** — **R2 LANDED (green first try — sixth consecutive one-shot across two
+  campaigns).** ResolventOrder.lean: towerResolvent is SELF-ADJOINT (symmetric via one
+  IsFormalAdjoint swap), POSITIVE with 0 ≤ R and 0 ≤ 1−R in the Loewner order (both
+  re-inner identities: ⟪Rh,h⟫ = ‖Rh‖² + ‖S̄Rh‖², ⟪h−Rh,h⟫ = ‖S̄Rh‖² + ‖ΔRh‖²), ‖R‖ ≤ 1,
+  spectrum ⊆ [0,1] (verbatim rvdRC port), and RΩ = ½Ω. Std-3, budget 0. Next: R3 (the
+  PVM eigenvector/atom calculus — the new math).
