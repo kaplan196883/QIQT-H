@@ -174,6 +174,34 @@ import QIQTH.TowerGNS.CyclicVector
   self-adjoint, 0 ≤ R ≤ 1 — an everywhere-defined CLM contraction, the input to
   PVM_of_selfAdjoint → boundedFC with symbol r ↦ ((1−r)/r)^{it} → Δ^{it}: the next campaign.
 -/
+/-
+  THE RESOLVENT CAMPAIGN (R1–R7) — THE CAMPAIGN CHECKPOINT (all core increments landed;
+  axiom-free std-3, budget 0; R8 log-Δ stretch not taken).
+
+  HAVE: "The resolvent of the tower modular operator is constructed as an everywhere-defined
+  operator: towerResolvent = (1+Δ)⁻¹, a self-adjoint contraction with 0 ≤ R ≤ 1, trivial
+  kernel, range equal to the (dense) domain of Δ, spectrum in [0,1], RΩ = ½Ω, and the exact
+  identities Δ∘R = 1−R and R∘(1+Δ) = 1 on dom Δ — so Δ is a function of a single bounded
+  self-adjoint operator. Through the bounded Borel functional calculus of R, the modular
+  unitary group of the tower limit state exists: Δ^{it} := towerModUnitary t, a strongly
+  continuous one-parameter unitary group (U_0 = 1, U_{s+t} = U_sU_t, U_t⋆ = U_{−t}) that
+  fixes the cyclic vector (U_tΩ = Ω), commutes with R and with Δ (preserving dom Δ), and
+  carries no spectral weight at the junk point (E({0}) = 0, forced by kernel triviality — the
+  group genuinely represents ((1−r)/r)^{it} = δ^{it} on the spectrum); plus a reusable
+  abstract supplement to the spectral tower: T = ∫λ dE at operator level, the kernel-atom
+  lemma E({0}) = 0 for injective self-adjoint T, and the eigenvector calculus
+  boundedFC f x = f(r)x — all axiom-free."
+
+  HAVE NOT: "No claim that towerModUnitary equals the transported towerFlow (equivalently
+  towerGen = log Δ): two strongly continuous unitary groups now coexist on the tower space
+  and their identification — the exponential-recovery wall — is the named next campaign, not
+  crossed here. No KMS condition of the limit state is proved; Tomita's theorem
+  (Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN, JMJ = M′) is not proved — U_t is not shown to
+  implement automorphisms of the limit algebra; Δ^{1/2}, J, and the polar decomposition
+  S̄ = JΔ^{1/2} are still not constructed; no von Neumann type statement; and everything
+  remains for the finite-stage Gibbs inductive-limit state — the free-field/Type-III
+  continuum objects are untouched."
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS

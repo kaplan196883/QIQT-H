@@ -1,6 +1,6 @@
 # THE RESOLVENT CAMPAIGN — (1+Δ)⁻¹ and the modular unitary group Δ^{it}
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3 (the continuous QG program).
+**Status:** COMPLETE (2026-07-05) — R1–R7 ALL LANDED (R8 stretch not taken), axiom-free std-3, budget 0. **Loop:** fe280fa3 (the continuous QG program).
 **Consult:** fable high-reasoning agent a64d01ffc6387c75c (2026-07-05) — decision: go THROUGH
 Δ^{it}, not resolvent-only; full source-verified inventory in the consult record.
 
@@ -68,7 +68,7 @@ Key verified facts:
   towerModUnitary_commute_towerResolvent (borelFC_comm port); 1−R as FC of 1−coord; then
   algebraic: U_t maps dom Δ to dom Δ (U_t(Rh) = R(U_t h)) and Δ(U_t x) = U_t(Δx) on dom Δ
   (both = (1−R)U_t h, via Δ∘R = 1−R). Risk LOW.
-- [ ] **R7 — checkpoint + audit.** Checkpoint.lean stanza (verbatim below); AxiomAudit
+- [x] **R7 — checkpoint + audit.** ✅ DONE Checkpoint.lean stanza (verbatim below); AxiomAudit
   pins; inventory; plan → COMPLETE.
 - [ ] **R8 (OPTIONAL stretch)** — towerModLog := fcOp of the piecewise log (log Δ as
   unbounded FC operator, conditional statements only) + Stone derivative
@@ -173,3 +173,12 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   preserves towerModularDom (range-of-R route); ★ Δ(U_t x) = U_t(Δx) on the whole domain
   (both sides = U_t h − R(U_t h) via Δ∘R = 1−R). Std-3, budget 0. Next: R7 (checkpoint);
   R8 stretch optional.
+
+- **2026-07-05** — **R7 LANDED — CAMPAIGN COMPLETE (7/7 core; R8 stretch deliberately not
+  taken — the expSymbol shape is preserved in towerModChar for whenever log Δ is wanted).**
+  The HAVE/HAVE-NOT stanza VERBATIM in TowerGNS/Checkpoint.lean. THE RESOLVENT CAMPAIGN
+  STANDS: Δ^{it} EXISTS — a strongly continuous one-parameter unitary group, fixing Ω,
+  commuting with Δ, honest at the junk point. The named next campaign: the
+  exponential-recovery wall (towerGen = log Δ / towerFlow = towerModUnitary) OR
+  Tomita's theorem (U_t implements automorphisms of towerLimitVN) — consult. Per the
+  standing continuous-QG directive the loop CONTINUES.

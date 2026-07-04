@@ -1206,7 +1206,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **R6 LANDED**: `ModularUnitaryComm.lean` — R =
   borelFC(coord); U_t commutes with R; U_t preserves dom Δ; Δ(U_t x) = U_t(Δx) on the whole
   domain — the spectral flow is consistent with the modular operator (green first try).
-  Next: R7 (checkpoint), R8 (optional log Δ stretch).
+  **R7 — CAMPAIGN COMPLETE (7/7 core, ALL
+  first-try-green)**. CHECKPOINT (verbatim in Checkpoint.lean): HAVE — towerResolvent =
+  (1+Δ)⁻¹ self-adjoint contraction, 0 ≤ R ≤ 1, trivial kernel, dense range = dom Δ,
+  spectrum ⊆ [0,1], RΩ = ½Ω, Δ∘R = 1−R; and **Δ^{it} := towerModUnitary — a strongly
+  continuous one-parameter unitary group** (U0 = 1, U(s+t) = UsUt, U⋆ = U(−t)) fixing Ω,
+  commuting with R and Δ (preserving dom Δ), E({0}) = 0; plus the abstract PVM supplement
+  (T = ∫λ dE, kernel atom, eigenvector calculus). HAVE NOT — NO claim towerModUnitary =
+  towerFlow (towerGen = log Δ — the exponential-recovery wall, the named next campaign); no
+  KMS-at-limit; no Tomita theorem (U_t not shown to implement automorphisms of
+  towerLimitVN); no Δ^{1/2}/J/polar; no type.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 
