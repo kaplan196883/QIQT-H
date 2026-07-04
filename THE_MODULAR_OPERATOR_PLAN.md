@@ -1,6 +1,6 @@
 # THE MODULAR OPERATOR (M1–M7): Δ := F∘S̄ — symmetric, positive, computed on the core
 
-**Status:** ACTIVE (2026-07-08). **FABLE-5-CONSULT-VERIFIED (green-light; all names verified in
+**Status:** COMPLETE (2026-07-08) — M1–M7 ALL LANDED, axiom-free std-3, budget 0. **FABLE-5-CONSULT-VERIFIED (green-light; all names verified in
 the pin).** **Goal:** Tomita's F (the conjugate-linear adjoint of S̄ through the sesquilinear
 pairing ⟪Fy, x⟫ = ⟪S̄x, y⟫) and **Δ := F∘S̄** — ℂ-linear, symmetric, POSITIVE, densely defined,
 closable, Δ ≤ Δ†, ΔΩ = Ω, and THE HEADLINE: **Δ↑(of C a) = ↑(of C (modAut ρ_C a))** — the
@@ -62,10 +62,10 @@ abstract `QIQTH/TowerGNS/ConjAdjoint.lean` + concrete `QIQTH/TowerGNS/ModularOp.
 - [x] **M5 — same file — THE HEADLINE PACK:** ✅ DONE POSITIVITY ⟪Δx,x⟫ = ‖S̄x‖²; symmetry
   (IsFormalAdjoint Δ Δ); ΔΩ = Ω; **`towerModularOp_of` — Δ↑(of C a) = ↑(of C (modAut ρ_C a))**;
   dense domain; Δ twist guard. Risk LOW once M3/M4 land.
-- [ ] **M6 — same file — the Mathlib hookup:** Δ ≤ Δ† (IsFormalAdjoint.le_adjoint), Δ† closed,
+- [x] **M6 — same file — the Mathlib hookup:** ✅ DONE Δ ≤ Δ† (IsFormalAdjoint.le_adjoint), Δ† closed,
   **Δ IsClosable**; optional closure-symmetry/positivity via the equalizer trick. Risk LOW
   (Garding precedent).
-- [ ] **M7 — checkpoint:** the HAVE/HAVE-NOT sentences VERBATIM (below) into
+- [x] **M7 — checkpoint:** ✅ DONE the HAVE/HAVE-NOT sentences VERBATIM (below) into
   TowerGNS/Checkpoint.lean + inventory; AxiomAudit pins; plan → COMPLETE; per the standing
   continuous-QG directive the loop CONTINUES (next consult: the von Neumann Δ† = Δ via the
   Submodule.adjoint graph route, OR the type-negative ladder — re-consult).
@@ -146,3 +146,11 @@ expose keys).
   ★ **`towerModularOp_of`** — Δ↑(of C a) = ↑(of C (modAut ρ_C a)): THE MODULAR OPERATOR ACTS AS
   THE FINITE MODULAR AUTOMORPHISM on the dense pure-component core ★; dense domain; the
   ℂ-linear twist guard Δ(c•Ω) = c•Ω. NEXT → M6 (the Mathlib adjoint hookup) → M7 (checkpoint).
+
+- **2026-07-08** — **M6+M7 LANDED — CAMPAIGN COMPLETE (7/7).** M6 (green first try): Δ ≤ Δ†,
+  Δ† closed, Δ IsClosable — the Mathlib id-ℂ hookup, zero new theory. M7: the HAVE/HAVE-NOT
+  stanza VERBATIM in TowerGNS/Checkpoint.lean; inventory updated. THE MODULAR OPERATOR STANDS:
+  Δ = F∘S̄ — ℂ-linear, symmetric, positive, densely defined, closable, ΔΩ = Ω, and COMPUTED as
+  the finite modular automorphism on the pure-component core. Per the standing continuous-QG
+  directive the loop CONTINUES — next consult: von Neumann Δ† = Δ (the Submodule.adjoint graph
+  route) vs the type-negative ladder.

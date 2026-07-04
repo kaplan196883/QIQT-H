@@ -1150,7 +1150,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   — Δ := F∘S̄, ℂ-linear**, SYMMETRIC (IsFormalAdjoint Δ Δ), POSITIVE (⟪Δx,x⟫ = ‖S̄x‖² ≥ 0),
   ΔΩ = Ω, dense domain — and ★ **Δ↑(of C a) = ↑(of C (modAut ρ_C a))** ★: the modular operator
   of the tower limit state ACTS AS THE FINITE MODULAR AUTOMORPHISM on the pure-component core —
-  the modular operator of the physics, computed. Next: M6 (Δ ≤ Δ†, closability) + M7.
+  the modular operator of the physics, computed. **M6+M7 — CAMPAIGN COMPLETE (7/7)**: Δ ≤ Δ†, Δ†
+  closed, Δ IsClosable (the Mathlib hookup). CHECKPOINT (verbatim in Checkpoint.lean): HAVE —
+  Tomita's F on the ∃-Riesz domain (no real inner product, no dual machinery, no completeness)
+  and Δ := F∘S̄: ℂ-linear, SYMMETRIC, POSITIVE (⟪Δx,x⟫ = ‖S̄x‖²), CLOSABLE, ΔΩ = Ω, and
+  COMPUTED — Δ↑(of C a) = ↑(of C (modAut ρ_C a)), the modular operator of the physics. HAVE
+  NOT — Δ† = Δ (von Neumann's S̄*S̄ theorem, absent from Mathlib — the named next target); no
+  J/polar/Δ^{1/2}/Δ^{it}; no KMS-at-limit; no type.
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

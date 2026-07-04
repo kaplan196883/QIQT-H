@@ -8749,6 +8749,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.towerModularOp_isFormalAdjoint
 #print axioms QIQTH.TowerGNS.towerModularOp_inner_self
 #print axioms QIQTH.TowerGNS.dense_towerModularDom
+-- THE MODULAR OPERATOR M6 (ModularOp.lean cont.): the Mathlib hookup — Δ ≤ Δ†
+-- (IsFormalAdjoint.le_adjoint), Δ† CLOSED (adjoint_isClosed), Δ IsClosable (symmetric densely
+-- defined ⟹ closable, zero new theory). Δ† = Δ (von Neumann) NOT claimed. Std 3.
+#print axioms QIQTH.TowerGNS.towerModularOp_le_adjoint
+#print axioms QIQTH.TowerGNS.towerModularOp_isClosable
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

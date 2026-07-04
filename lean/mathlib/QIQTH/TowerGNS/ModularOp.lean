@@ -576,4 +576,50 @@ theorem towerModularOp_smul_cyclicVec (c : ℂ) :
     Subtype.ext rfl
   rw [hz, LinearPMap.map_smul, towerModularOp_cyclicVec L ω β]
 
+/-! ### M6 — the Mathlib hookup: Δ ≤ Δ†, Δ† closed, Δ CLOSABLE
+
+    Near-instantiations of Mathlib's id-ℂ `LinearPMap.adjoint` theory (the Garding
+    precedent): symmetry (M5.2) + dense domain (M5.5) feed `IsFormalAdjoint.le_adjoint`;
+    `adjoint_isClosed` needs `[CompleteSpace]` (automatic — `TowerGNS` is a
+    `UniformSpace.Completion`); closability = closed extension exists.
+    Δ†=Δ (self-adjointness of the closure)/J/Δ^{it}/KMS/type NOT constructed or claimed. -/
+
+/-- The density of dom Δ, repackaged on `(towerModularOp L ω β).domain` — the exact form
+Mathlib's adjoint theory consumes (`hT` of `le_adjoint`/`adjoint_isClosed`); definitionally
+`dense_towerModularDom`. -/
+theorem dense_towerModularOp_domain :
+    Dense (((towerModularOp L ω β).domain : Set (TowerGNS L ω β))) :=
+  dense_towerModularDom L ω β
+
+/-- **Δ ≤ Δ†** — the modular operator is contained in its Mathlib adjoint: symmetry
+(`towerModularOp_isFormalAdjoint`, M5.2) + the dense domain (M5.5) through
+`LinearPMap.IsFormalAdjoint.le_adjoint`. The adjoint here is Mathlib's genuine unbounded
+id-ℂ adjoint on the completion (well-defined because dom Δ is dense). -/
+theorem towerModularOp_le_adjoint :
+    towerModularOp L ω β ≤ (towerModularOp L ω β).adjoint :=
+  (towerModularOp_isFormalAdjoint L ω β).le_adjoint
+    (hT := dense_towerModularOp_domain L ω β)
+
+/-- **Δ† is CLOSED** — `LinearPMap.adjoint_isClosed` at the dense domain (the adjoint of any
+densely-defined operator is closed; `CompleteSpace (TowerGNS L ω β)` is automatic from the
+completion). -/
+theorem towerModularOp_adjoint_isClosed :
+    (towerModularOp L ω β).adjoint.IsClosed :=
+  LinearPMap.adjoint_isClosed (T := towerModularOp L ω β)
+    (dense_towerModularOp_domain L ω β)
+
+/-- **★ Δ IS CLOSABLE** — the closure `Δ̄` exists: Δ has a closed extension, namely its own
+adjoint (`towerModularOp_le_adjoint` + `towerModularOp_adjoint_isClosed`), so
+`IsClosed.isClosable` + `IsClosable.leIsClosable` give closability. This is the prerequisite
+for forming `Δ̄ = (towerModularOp L ω β).closure` and asking `Δ̄† = Δ̄` (von Neumann —
+NOT claimed here). -/
+theorem towerModularOp_isClosable :
+    (towerModularOp L ω β).IsClosable :=
+  (towerModularOp_adjoint_isClosed L ω β).isClosable.leIsClosable
+    (towerModularOp_le_adjoint L ω β)
+
+/- M6 optional item (closure symmetry/positivity via the equalizer trick) SKIPPED per plan:
+   the three required theorems above are the M6 content; closure-level statements belong to
+   the von Neumann Δ†=Δ increment (M7+ consult). -/
+
 end QIQTH.TowerGNS

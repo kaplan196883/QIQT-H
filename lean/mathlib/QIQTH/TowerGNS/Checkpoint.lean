@@ -130,6 +130,25 @@ import QIQTH.TowerGNS.CyclicVector
   sidesteps it; the σ-graph remains Mathlib's own open TODO); no KMS condition of the limit
   state and no von Neumann type is claimed."
 -/
+/-
+  THE MODULAR OPERATOR (M1–M7) — THE CAMPAIGN CHECKPOINT (all increments landed; axiom-free
+  std-3, budget 0).
+
+  HAVE: "The modular operator of the tower limit state is constructed and computed: Tomita's F —
+  the conjugate-linear adjoint of S̄ through the sesquilinear pairing ⟪Fy, x⟫ = ⟪S̄x, y⟫, built
+  on the ∃-Riesz domain with no real inner product, no dual-space machinery, and no completeness
+  argument — and Δ := F∘S̄, a ℂ-linear densely defined partial operator that is SYMMETRIC
+  (IsFormalAdjoint Δ Δ), POSITIVE (⟪Δx, x⟫ = ‖S̄x‖² ≥ 0), CLOSABLE (Δ ≤ Δ† with Δ† closed),
+  fixes Ω, and ACTS AS THE FINITE MODULAR AUTOMORPHISM ON THE DENSE PURE-COMPONENT CORE:
+  Δ↑(of C a) = ↑(of C (modAut ρ_C a)) — the modular operator of the physics, computed."
+
+  HAVE NOT: "Full self-adjointness Δ† = Δ is not proved — it is von Neumann's S̄*S̄ theorem,
+  absent from Mathlib and named as the next target; no polar decomposition, no J, no Δ^{1/2} or
+  Δ^{it} (no unbounded positive square-root or spectral theory for partial operators exists in
+  the pin), no KMS condition of the limit state, and no von Neumann type is constructed or
+  claimed; the classical equivalence of the ∃-Riesz adjoint domain with the boundedness domain
+  is not formalized (it is not needed)."
+-/
 import QIQTH.TowerGNS.LimitVN
 
 namespace QIQTH.TowerGNS
