@@ -1203,7 +1203,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Δ^{it} is STRONGLY CONTINUOUS, fixes Ω (U_tΩ = Ω via the eigenvector calculus at
   RΩ = ½Ω), and E({0}) = 0 (the kernel atom) — a genuine strongly continuous one-parameter
   unitary group with the honesty pair (green first try; still NO claim U = towerFlow).
-  Next: R6 (U_t commutes with R and Δ), R7 (checkpoint).
+  **R6 LANDED**: `ModularUnitaryComm.lean` — R =
+  borelFC(coord); U_t commutes with R; U_t preserves dom Δ; Δ(U_t x) = U_t(Δx) on the whole
+  domain — the spectral flow is consistent with the modular operator (green first try).
+  Next: R7 (checkpoint), R8 (optional log Δ stretch).
 
 ## 4. Modular / crossed-product / Type II (more built-out than "finite shadows")
 

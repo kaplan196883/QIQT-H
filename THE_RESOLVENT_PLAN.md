@@ -64,7 +64,7 @@ Key verified facts:
   (norm_cyclicVec); towerModChar t ½ = exp(I·t·log 1) = 1).
   towerResolvent_pvm_atom_zero: E({0}) = 0 (R3(c) at towerResolvent_injective). Risk
   LOW-MODERATE (depends on R3).
-- [ ] **R6 — commutation: U_t vs R and Δ.** towerResolvent_eq_borelFC (R3(b));
+- [x] **R6 — commutation: U_t vs R and Δ.** ✅ DONE towerResolvent_eq_borelFC (R3(b));
   towerModUnitary_commute_towerResolvent (borelFC_comm port); 1−R as FC of 1−coord; then
   algebraic: U_t maps dom Δ to dom Δ (U_t(Rh) = R(U_t h)) and Δ(U_t x) = U_t(Δx) on dom Δ
   (both = (1−R)U_t h, via Δ∘R = 1−R). Risk LOW.
@@ -166,3 +166,10 @@ check sibling jobs (git log/status) before each increment; explicit git paths on
   the kernel atom). Δ^{it} IS a strongly continuous one-parameter unitary group fixing Ω
   with no junk-point spectral weight. Still NO claim U = towerFlow. Std-3, budget 0.
   Next: R6 (commutation).
+
+- **2026-07-05** — **R6 LANDED (green first try, optional extra included).**
+  ModularUnitaryComm.lean: R = borelFC(coord) (eq_borelFC instantiated); 1−R as borelFC too;
+  U_t commutes with R (local towerBorelFC_comm port, * and ∘L and pointwise forms); U_t
+  preserves towerModularDom (range-of-R route); ★ Δ(U_t x) = U_t(Δx) on the whole domain
+  (both sides = U_t h − R(U_t h) via Δ∘R = 1−R). Std-3, budget 0. Next: R7 (checkpoint);
+  R8 stretch optional.
