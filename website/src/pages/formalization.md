@@ -8,8 +8,8 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **378 files and ~4,050
-theorems** (over 5,200 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **385 files and ~4,130
+theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
 
@@ -992,6 +992,31 @@ representations are not shown isometric." The continuum is not done — but for 
 has an inhabitant.
 
 </div>
+
+
+## The transport + the accounting: dynamics for the limit algebra; the species form forced
+
+Two tracks, one campaign (all axiom-free, std-3, budget 0).
+
+- **THE MODULAR TRANSPORT** — the per-corner Gibbs modular flows transported to **`towerFlow`**,
+  a *strongly continuous one-parameter unitary group* U<sub>t</sub> on the tower GNS space:
+  U₀ = 1, the group law, U<sub>t</sub>* = U<sub>−t</sub>, **U<sub>t</sub>Ω = Ω**, THE
+  IMPLEMENTATION THEOREM U<sub>t</sub> π<sub>C</sub>(a) U<sub>−t</sub> = π<sub>C</sub>(σ<sub>t</sub>a)
+  at every finite stage (the covariance is exact already at the pre-level), and
+  **`towerLimitVN` invariant under conjugation by the flow**. The finite-stage boundary KMS
+  identity is displayed on the limit space (honestly bannered: not strip analyticity, not a KMS
+  state of the limit algebra). HAVE NOT: no Tomita Δ/J, Ω not shown separating, no Stone
+  generator (the named next hook), no type classified — U<sub>t</sub> is defined by *transport*.
+- **THE ACCOUNTING** — the honest maximal species upgrade: **the regulator rigidity theorem**
+  (any positive, species-additive, monotone, rescaling-covariant family is *forced* to the
+  Sakharov/Dvali form 1/G = N<sub>eff</sub>·Λ², the exponent an output, with a counterexample
+  showing weakened covariance breaks it); **the first derived — not cited — heat-kernel
+  coefficient** in the repository (1/√(4πt) from Mathlib's Gaussian integral); and **the
+  mixed-species consistency chain** — one shared species datum feeds both the entanglement
+  entropy and the induced 1/G, with the mixed-content 1/4 and S = A/4G as theorems (the entire
+  species sum cancelling), chained through the BTZ Cardy count. HAVE NOT: the numerical value of
+  G is not derived; the c<sub>i</sub> stay cited Seeley–DeWitt data — a consistency chain over
+  one shared cited datum, NOT an independent cross-check.
 
 ## Reproduce the verification
 
