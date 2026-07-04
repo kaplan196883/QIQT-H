@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **404 files and ~4,380
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **409 files and ~4,400
 theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
@@ -1207,6 +1207,37 @@ wall — is the named next campaign, not crossed here. No KMS condition of the l
 proved; Tomita's theorem is not proved — U_t is not shown to implement automorphisms of the
 limit algebra; Δ^{1/2}, J, and the polar decomposition are still not constructed; no von
 Neumann type statement."
+
+</div>
+
+
+## The identification: the exponential-recovery wall, crossed — and Tomita I
+
+The campaign after the resolvent identifies the two unitary groups (five increments, every
+one first-try green):
+
+- **The eigenvector route** — the Gibbs density is *diagonal by construction*, so matrix
+  units are simultaneous eigenvectors of the finite modular automorphism
+  (modAut ρ (e<sub>nm</sub>) = (w<sub>n</sub>/w<sub>m</sub>)e<sub>nm</sub>), of Δ, of the
+  resolvent, and — through the eigenvector calculus — of Δ^{it}, with the *same* explicit
+  scalar e^{it(log w<sub>n</sub> − log w<sub>m</sub>)} the transported physical flow
+  carries. No spectral theorem, no Stone uniqueness, no log Δ needed anywhere.
+- **The identification** — **towerFlow = Δ^{it} as operators** (`towerModUnitary_eq_towerFlow`):
+  the transported physical dynamics of the tower limit state IS the spectral modular flow of
+  its modular operator; corollary, towerGen IS the Stone generator of Δ^{it}.
+- **Tomita's theorem, first half** — Δ^{it} implements the modular automorphisms
+  (Δ^{it} π(a) Δ^{−it} = π(σ_t a)) and preserves the limit algebra:
+  **Δ^{it} towerLimitVN Δ^{−it} = towerLimitVN** — the modular theory of the physics equals
+  the modular theory of the state.
+
+<div class="note">
+
+<strong>Honest scope (checkpoint, verbatim).</strong> "J and the polar decomposition
+S̄ = JΔ^{1/2} are still not constructed (so JMJ = M′, the second half of Tomita's theorem,
+stays open — the natural next campaign: J on matrix units is also explicit, so the same
+eigenbasis method applies); no analytic strip-KMS of the limit state (only the boundary
+identity); no von Neumann type classification; and everything remains the finite-stage Gibbs
+inductive-limit state — the free-field/Type-III continuum objects are untouched."
 
 </div>
 
