@@ -167,3 +167,28 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   Mathlib gap (the real normal form for antisymmetric matrices), pinned as the frontier, NOT
   faked. Std-3, budget 0. So Williamson is conditional on the Youla REAL-BLOCK ASSEMBLY only;
   its spectral entry point is derived. THIS IS WHERE WILLIAMSON PLATEAUS honestly.
+
+- **2026-07-05** — **YOULA W9 — the real-root pairing: complex-structure + EVEN-DIMENSIONALITY
+  DERIVED, O-assembly still PINNED.** Two OPERATOR-LEVEL stepping stones (Module.End eigenspaces of
+  T := A*A via mulVecLin), a level neither W7 (flat complex) nor W8 (per-block dotProduct) worked at.
+  §RealRootPairing, 4 new axiom-free (std-3) declarations in WilliamsonNormalForm.lean:
+  (a) antisymm_eigenspace_invariant — A maps W := eigenspace(mulVecLin(A*A), −ν²) into itself (A
+  commutes with A*A, via mul_assoc + mulVec_mulVec); the MapsTo that lets A restrict to W.
+  (b) antisymm_sq_eq_smul_on_eigenspace — on W, A∘A = −ν²•id (the eigenvalue eqn through mulVec_mulVec):
+  for ν>0, J:=A/ν restricted to W has J²=−id, so W carries a COMPLEX STRUCTURE. ★ (c)
+  antisymm_eigenspace_even — Even (finrank ℝ W) for ν>0, the crux. DERIVED via LinearMap.det of the
+  restricted A_W := (mulVecLin A).restrict: from (b) A_W∘A_W = −ν²•id, so (det A_W)² =
+  det(A_W∘A_W) = (−ν²)^{finrank W} (LinearMap.det_comp + det_smul + det_id); LHS a real square ≥0,
+  ν>0 ⟹ (−ν²)^{finrank W} = (−1)^{finrank W}·(ν²)^{finrank W} with (ν²)^{finrank W}>0, forcing
+  (−1)^{finrank W} ≥ 0 ⟹ finrank W EVEN (Odd.neg_pow + Nat.even_or_odd + linarith). This is the
+  {e, Ae/ν} pairing that makes an l⊕l split POSSIBLE (antisymmetry not even needed for (c): the
+  complex structure is intrinsic to the −ν² eigenspace of any real A). PIECE 2:
+  antisymm_negSqEigenvalues(+_nonneg) — the eigenvalues of the PosSemidef −(A*A) (from
+  antisymm_neg_sq_posSemidef) are ≥0 = the νₖ², so T-spectrum = −νₖ² ≤ 0 (the real spectral data the
+  assembly consumes, via Matrix.IsHermitian.eigenvalues + PosSemidef.eigenvalues_nonneg). HONEST
+  CHECKPOINT (unchanged from W7/W8): the flat-basis → l⊕l split-index O-SURGERY — threading the
+  per-eigenvalue frames {eₖ, Aeₖ/ν} + kernel into ONE concrete orthogonal O with
+  Oᵀ A O = fromBlocks 0 (diag ν) (−(diag ν)) 0 entrywise — still has NO Mathlib support (no
+  finrank-indexed real-normal-form induction). youlaDecomp_of_antisymm STILL carried; W9 discharges
+  the even-multiplicity/complex-structure INGREDIENT the assembly needs, NOT the concrete O.
+  Std-3, budget 0. NOT faked, NOT a Lean axiom.

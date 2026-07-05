@@ -9110,6 +9110,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Williamson.antisymm_sq_dotProduct_nonpos
 #print axioms QIQTH.Williamson.antisymm_invariant_block
 #print axioms QIQTH.Williamson.antisymm_kernel_of_sq_kernel
+-- THE WILLIAMSON YOULA W9 (WilliamsonNormalForm.lean §RealRootPairing): the real-root pairing --
+-- OPERATOR-LEVEL stepping stones toward the l⊕l assembly (Module.End eigenspaces of T := A*A via
+-- mulVecLin). (a) antisymm_eigenspace_invariant: A maps W := eigenspace(mulVecLin(A*A),-ν²) into
+-- itself (A commutes with A*A). (b) antisymm_sq_eq_smul_on_eigenspace: on W, A∘A = -ν²•id (the
+-- complex structure J:=A/ν, J²=-id for ν>0). ★ (c) antisymm_eigenspace_even: Even (finrank ℝ W) for
+-- ν>0 — DERIVED via LinearMap.det of the restricted A_W: (det A_W)² = det(A_W∘A_W) = (-ν²)^{finrank W}
+-- (det_comp+det_smul+det_id); LHS a real square ≥0, ν>0 ⟹ (-1)^{finrank W}≥0 ⟹ finrank even (the
+-- {e,Ae/ν} pairing enabling l⊕l split-indexing). PIECE 2: antisymm_negSqEigenvalues(_nonneg) — the
+-- eigenvalues of the PosSemidef -(A*A) (= νₖ², so T-spectrum = -νₖ²≤0), the spectral data the
+-- assembly consumes. HONEST CHECKPOINT (unchanged): the flat-basis→l⊕l split-index O-surgery still
+-- has NO Mathlib support; youlaDecomp_of_antisymm STILL carried. W9 discharges the even-multiplicity/
+-- complex-structure ingredient the assembly needs, not the concrete O. Std 3.
+#print axioms QIQTH.Williamson.antisymm_eigenspace_invariant
+#print axioms QIQTH.Williamson.antisymm_sq_eq_smul_on_eigenspace
+#print axioms QIQTH.Williamson.antisymm_eigenspace_even
+#print axioms QIQTH.Williamson.antisymm_negSqEigenvalues_nonneg
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -92,6 +92,8 @@ area/volume-blind).  Axiom-free.
 import Mathlib.LinearAlgebra.SymplecticGroup
 import Mathlib.LinearAlgebra.UnitaryGroup
 import Mathlib.Analysis.Matrix.Order
+import Mathlib.LinearAlgebra.Eigenspace.Basic
+import Mathlib.LinearAlgebra.Determinant
 import QIQTH.GaussianStateEntropy
 
 namespace QIQTH.Williamson
@@ -603,5 +605,121 @@ theorem antisymm_kernel_of_sq_kernel (A : Matrix n n ℝ) (hA : Aᵀ = -A) (e : 
   exact dotProduct_self_eq_zero.mp h
 
 end RealRoute
+
+/-! ### W9 — the real-root pairing: `A`-invariance of `T`-eigenspaces, the complex structure, and
+even-dimensionality
+
+Two structural stepping stones toward the Youla `l ⊕ l` assembly, working at the **operator** level
+(`Module.End` eigenspaces of `T := A*A`, viewed via `Matrix.mulVecLin`) — neither prior attempt
+tried these.  For a real antisymmetric `A` (`Aᵀ = -A`), on the eigenspace
+`W := ker(T + ν²·1) = Module.End.eigenspace (mulVecLin (A*A)) (-ν²)`:
+
+* **(a) `A`-invariance** (`antisymm_eigenspace_invariant`): `A` maps `W` into itself, because `A`
+  commutes with `T = A*A` (from `antisymm_comm_sq`/`mul_assoc`): if `T x = -ν² x` then
+  `T (A x) = A (T x) = -ν² (A x)`.  This is the `MapsTo` that lets `A` restrict to `W`.
+* **(b) the restricted square** (`antisymm_sq_eq_smul_on_eigenspace`): on `W`, `A ∘ A = -ν²·id`
+  (the eigenvalue equation `(A*A) x = -ν² x` read through `mulVec_mulVec`).  So for `ν > 0`,
+  `J := A/ν` restricted to `W` satisfies `J² = -id`: `W` carries a **complex structure**.
+* **(c) even-dimensionality** (`antisymm_eigenspace_even`): the crux — `Even (finrank ℝ W)` for the
+  `ν > 0` eigenspaces.  DERIVED here via the determinant of the restricted operator
+  `A_W := (mulVecLin A).restrict`: from (b), `A_W ∘ A_W = -ν²·id`, so
+  `(det A_W)² = det(A_W ∘ A_W) = (-ν²)^{finrank W}` (`LinearMap.det_comp` + `det_smul` + `det_id`).
+  The left side is a real square, hence `≥ 0`; with `ν > 0` the right side has sign `(-1)^{finrank W}`,
+  forcing `finrank W` even.  This is the `{e, Je}` pairing that enables the `l ⊕ l` split-indexing.
+
+Piece 2 (`antisymm_negSqEigenvalues` + `_nonneg`) exposes the real spectral data the assembly
+consumes: the eigenvalues of the PosSemidef `-(A*A)` (from `antisymm_neg_sq_posSemidef`) are `≥ 0`
+— these are the `νₖ²`, so `T = A*A` has spectrum `-νₖ² ≤ 0`, the Youla skew eigenvalues squared.
+
+**The remaining wall (pinned, NOT discharged — unchanged from W7/W8).**  Even-dimensionality of each
+`ν > 0` eigenspace is exactly the multiplicity fact that makes an `l ⊕ l` split *possible*, but the
+**flat-basis → `l ⊕ l` split-index assembly** — choosing, per positive eigenvalue, a real orthonormal
+`{eₖ}` with its `A`-partner `{A eₖ / ν}`, and threading all blocks (plus the kernel) into ONE concrete
+orthogonal `O : Matrix (l ⊕ l) (l ⊕ l) ℝ` with `Oᵀ A O = fromBlocks 0 (diag ν) (-(diag ν)) 0`
+entrywise — still has no Mathlib support (no `finrank`-indexed real-normal-form induction).
+`youlaDecomp_of_antisymm` therefore remains **carried**; W9 discharges the complex-structure /
+even-multiplicity ingredient the assembly *needs* but not the concrete `O`-surgery itself.  All lemmas
+below are axiom-free (std-3). -/
+
+section RealRootPairing
+
+variable {n : Type*} [Fintype n] [DecidableEq n]
+
+/-- **(a) `A`-invariance of each `T := A*A` eigenspace.**  For antisymmetric `A`, `A` maps the
+    eigenspace `W = ker(T + ν²·1) = Module.End.eigenspace (mulVecLin (A*A)) (-ν²)` into itself.  From
+    `A T = T A` (associativity): if `T x = -ν² x` then `T (A x) = A (T x) = A (-ν² x) = -ν² (A x)`,
+    so `A x ∈ W`.  This is the `MapsTo` that lets `A` restrict to `W` (the seed of the complex
+    structure). -/
+theorem antisymm_eigenspace_invariant (A : Matrix n n ℝ) (ν : ℝ) :
+    ∀ x ∈ Module.End.eigenspace (Matrix.mulVecLin (A * A)) (-(ν ^ 2)),
+      Matrix.mulVecLin A x ∈ Module.End.eigenspace (Matrix.mulVecLin (A * A)) (-(ν ^ 2)) := by
+  intro x hx
+  rw [Module.End.mem_eigenspace_iff, Matrix.mulVecLin_apply] at hx
+  rw [Module.End.mem_eigenspace_iff, Matrix.mulVecLin_apply, Matrix.mulVecLin_apply,
+      Matrix.mulVec_mulVec, mul_assoc, ← Matrix.mulVec_mulVec, hx, Matrix.mulVec_smul]
+
+/-- **(b) On the `T`-eigenspace, `A ∘ A` acts as `-ν²·id`.**  The eigenvalue equation
+    `(A*A) *ᵥ x = -ν² • x` read through `mulVec_mulVec`.  For `ν > 0`, this says `J := A/ν` restricted
+    to the eigenspace satisfies `J² = -id` — the eigenspace carries a complex structure. -/
+theorem antisymm_sq_eq_smul_on_eigenspace (A : Matrix n n ℝ) (ν : ℝ) (x : n → ℝ)
+    (hx : x ∈ Module.End.eigenspace (Matrix.mulVecLin (A * A)) (-(ν ^ 2))) :
+    Matrix.mulVecLin A (Matrix.mulVecLin A x) = -(ν ^ 2) • x := by
+  rw [Module.End.mem_eigenspace_iff, Matrix.mulVecLin_apply] at hx
+  rw [Matrix.mulVecLin_apply, Matrix.mulVecLin_apply, Matrix.mulVec_mulVec, hx]
+
+/-- **(c) Even-dimensionality of the `ν > 0` eigenspaces — the complex-structure crux.**  For
+    antisymmetric `A` and `ν > 0`, the `T := A*A` eigenspace `W = ker(T + ν²·1)` has **even** real
+    dimension.  DERIVED from the restricted operator `A_W := (mulVecLin A).restrict` (well-defined by
+    the `A`-invariance (a)): by (b), `A_W ∘ A_W = -ν²·id`, so
+    `(det A_W)² = det(A_W ∘ A_W) = (-ν²)^{finrank W}` (`LinearMap.det_comp`, `det_smul`, `det_id`).
+    The left side is a real square (`≥ 0`); for `ν > 0` the right side equals
+    `(-1)^{finrank W} · (ν²)^{finrank W}` with `(ν²)^{finrank W} > 0`, so `(-1)^{finrank W} ≥ 0`,
+    forcing `finrank W` even.  This is the `{e, Ae/ν}` pairing (a complex structure `J² = -id`) that
+    underlies the `l ⊕ l` split-indexing of the Youla normal form.  (The antisymmetry of `A` is not
+    needed for *this* step: on the `-ν²` eigenspace `A_W² = -ν²·id` is a genuine complex structure for
+    any real `A`; antisymmetry is what makes the eigenvalues of `A*A` be exactly the `-ν²` in the first
+    place — `antisymm_neg_sq_posSemidef`.) -/
+theorem antisymm_eigenspace_even (A : Matrix n n ℝ) {ν : ℝ} (hν : 0 < ν) :
+    Even (Module.finrank ℝ (Module.End.eigenspace (Matrix.mulVecLin (A * A)) (-(ν ^ 2)))) := by
+  set W := Module.End.eigenspace (Matrix.mulVecLin (A * A)) (-(ν ^ 2)) with hW
+  -- `A` restricts to an endomorphism `A_W` of `W` (by the invariance (a))
+  have hinv : ∀ x ∈ W, Matrix.mulVecLin A x ∈ W := antisymm_eigenspace_invariant A ν
+  set AW := (Matrix.mulVecLin A).restrict hinv with hAW
+  -- `A_W ∘ A_W = -ν²·id` on `W` (the complex structure, from (b))
+  have hcomp : AW.comp AW = (-(ν ^ 2)) • (LinearMap.id : W →ₗ[ℝ] W) := by
+    refine LinearMap.ext fun x => ?_
+    apply Subtype.ext
+    have hx : Matrix.mulVecLin A (Matrix.mulVecLin A (x : n → ℝ)) = -(ν ^ 2) • (x : n → ℝ) :=
+      antisymm_sq_eq_smul_on_eigenspace A ν x x.2
+    simpa only [LinearMap.comp_apply, LinearMap.coe_restrict_apply, LinearMap.smul_apply,
+      LinearMap.id_coe, id_eq, SetLike.val_smul] using hx
+  -- take determinants: `(det A_W)² = (-ν²)^{finrank W}`
+  have hdet : LinearMap.det AW * LinearMap.det AW = (-(ν ^ 2)) ^ Module.finrank ℝ W := by
+    rw [← LinearMap.det_comp, hcomp, LinearMap.det_smul, LinearMap.det_id, mul_one]
+  -- the left side is a real square, so the right side is `≥ 0`
+  have hnn : (0 : ℝ) ≤ (-(ν ^ 2)) ^ Module.finrank ℝ W := hdet ▸ mul_self_nonneg _
+  rcases Nat.even_or_odd (Module.finrank ℝ W) with he | ho
+  · exact he
+  · exfalso
+    rw [ho.neg_pow] at hnn
+    have hpos : (0 : ℝ) < (ν ^ 2) ^ Module.finrank ℝ W := pow_pos (pow_pos hν 2) _
+    linarith
+
+/-- **Piece 2 — the real spectral data (the eigenvalues of the PosSemidef `-(A*A)`).**  The
+    eigenvalues of `-(A*A)` (Hermitian and PosSemidef by `antisymm_neg_sq_posSemidef`), read off by
+    the real spectral theorem (`Matrix.IsHermitian.eigenvalues`).  These are the `νₖ²`; so
+    `T = A*A` has spectrum `-νₖ² ≤ 0`, the Youla skew eigenvalues squared — the data the still-carried
+    `l ⊕ l` assembly consumes. -/
+noncomputable def antisymm_negSqEigenvalues (A : Matrix n n ℝ) (hA : Aᵀ = -A) : n → ℝ :=
+  (antisymm_neg_sq_posSemidef A hA).1.eigenvalues
+
+/-- **The `-(A*A)` eigenvalues are nonnegative** (`Matrix.PosSemidef.eigenvalues_nonneg` applied to
+    `antisymm_neg_sq_posSemidef`).  Equivalently the eigenvalues of `T = A*A` are `≤ 0` — the
+    negative-semidefiniteness of `T` at the spectral level, the `-νₖ²` list. -/
+theorem antisymm_negSqEigenvalues_nonneg (A : Matrix n n ℝ) (hA : Aᵀ = -A) (i : n) :
+    0 ≤ antisymm_negSqEigenvalues A hA i :=
+  (antisymm_neg_sq_posSemidef A hA).eigenvalues_nonneg i
+
+end RealRootPairing
 
 end QIQTH.Williamson
