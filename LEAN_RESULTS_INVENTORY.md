@@ -368,6 +368,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   CAPTION (binding)**: `κ=1/6` is now **gauge-derived in the a₁ accounting** (no longer a free citation) — still does
   **NOT** give numerical-G (species count `N`, granularity scale `Λ_s`, and the `E/m²/ξ` potential term remain), and
   does **NOT** build a curved heat kernel. RNC campaign RNC1–RNC4 COMPLETE.
+- **GEO1 — the geodesic ODE has local existence + uniqueness** (`Geodesic.lean`
+  `contDiff_geodesicField`/`geodesic_local_existence`/`geodesic_local_unique`, all **[AF]** std-3, 2026-07-06). On the
+  component `christoffel` of `Curvature.lean`: the second-order geodesic equation `γ'' + Γ(γ)(γ',γ') = 0` is rewritten
+  as the first-order autonomous field **`geodesicField g gi (x,v) = (v, −∑_{j,k} Γ^i_{jk}(x) v^j v^k)`** on the phase
+  space `Point n × Point n`. **`contDiff_geodesicField`**: the field is `C^∞` from the carried Christoffel smoothness
+  `hC` (assembled via `ContDiff.prodMk`/`contDiff_pi`/`ContDiff.sum`/`.mul`/`.neg` + the `contDiff_fst`/`_snd`/
+  `contDiff_apply` projections). **`geodesic_local_existence`**: through any initial phase point `z₀=(x₀,v₀)` and base
+  time `t₀`, a curve `γ` with `γ t₀ = z₀` and `HasDerivAt γ (geodesicField g gi (γ t)) t` on an open interval
+  `Ioo (t₀−ε) (t₀+ε)` — Mathlib's `C¹` Picard–Lindelöf
+  (`ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀`; phase space finite-dim ⟹
+  `CompleteSpace` automatic). **`geodesic_local_unique`**: two integral curves staying in a set where the field is
+  Lipschitz and agreeing at one `t₀ ∈ Ioo a b` agree on all of `Ioo a b` (`ODE_solution_unique_of_mem_Ioo`). ⚠ **HONEST
+  CAPTION (binding)**: this is **geodesic EXISTENCE only** (component geodesics exist + unique). It does **NOT** build
+  the exponential map or normal coordinates, does **NOT** discharge the carried RNC normal-coordinate gauge (that is
+  gated on **smooth dependence of ODE solutions on the initial condition** — a theorem Mathlib genuinely LACKS, only
+  Lipschitz dependence is present), and does **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain). The carried
+  normal-coordinate gauge stays the honest curved-`G` input.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

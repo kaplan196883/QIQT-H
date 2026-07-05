@@ -19,7 +19,16 @@ The WALL (`ContDiff`/variational dependence on initial conditions) is absent fro
 normal-coordinate gauge (`hgauge`, `RNCExpansion.lean`) is the honest geometric input to stop at.
 
 ## Increments
-- [ ] **GEO1 — the geodesic field + local existence/uniqueness (std-3).** Define `geodesicField g gi : (Point n ×
+- [x] **GEO1 — DONE (2026-07-06, `QIQTH/Geodesic.lean`, axiom-free std-3).** `geodesicField g gi : (Point n ×
+  Point n) → (Point n × Point n) := fun p => (p.2, fun i => −∑_{j,k} christoffel g gi i j k p.1 * p.2 j * p.2 k)`;
+  `contDiff_geodesicField` (C^∞ from the carried `hC`, via `ContDiff.prodMk`/`contDiff_pi`/`ContDiff.sum`/`.mul`/
+  `contDiff_fst`/`_snd`/`contDiff_apply`); `geodesic_local_existence` (local integral curve through any initial
+  phase point, `HasDerivAt γ (geodesicField g gi (γ t)) t` on `Ioo (t₀−ε) (t₀+ε)`, via
+  `ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀`); `geodesic_local_unique`
+  (`Set.EqOn` on `Ioo a b` for two curves staying in a Lipschitz set with the same value at `t₀`, via
+  `ODE_solution_unique_of_mem_Ioo`). Both existence AND uniqueness landed green. HONEST: geodesic EXISTENCE only —
+  NOT the exp-map / normal coordinates, does NOT discharge the RNC gauge, does NOT move numerical-G.
+- [~] **GEO1 (original scoping text).** Define `geodesicField g gi : (Point n ×
   Point n) → (Point n × Point n) := fun (x,v) => (v, fun i => −∑_{j,k} christoffel g gi i j k x * v j * v k)`; prove
   `ContDiff ℝ 1 (geodesicField …)` from the carried `christoffel` smoothness (`contDiff_pi`/`_fst`/`_snd` + products);
   obtain a local solution `γ` with `γ t₀ = (x₀,v₀)`, `HasDerivAt γ (geodesicField (γ t)) t` on an interval

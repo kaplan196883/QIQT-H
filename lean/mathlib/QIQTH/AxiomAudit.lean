@@ -9573,4 +9573,19 @@ namespace QIQTH.AxiomAudit
 -- ONLY — still NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel. Axiom-free (std 3).
 #print axioms QIQTH.RNCExpansion.heat_a1_of_gauge
 
+-- Geodesic.lean — GEO1: the geodesic ODE of a component connection (2026-07-06).
+-- The second-order geodesic equation γ''+Γ(γ)(γ',γ')=0 rewritten as the first-order autonomous field
+-- F(x,v)=(v,−Γ(x)(v,v)) on the phase space Point n × Point n; C^∞ ⟹ Picard–Lindelöf existence +
+-- Grönwall uniqueness. Geodesic EXISTENCE only: NOT the exp-map / normal coordinates, does NOT discharge
+-- the carried RNC gauge (gated on smooth dependence of ODE solutions on the initial condition — a theorem
+-- Mathlib LACKS, only Lipschitz dependence is present), and does NOT move numerical-G. Axiom-free (std 3).
+#print axioms QIQTH.Geodesic.contDiff_geodesicField
+-- expected: standard only — the geodesic field F(x,v)=(v,−Γ(x)(v,v)) is C^∞ (prodMk/pi/sum/mul assembly
+-- of the smooth christoffel + coordinate/velocity projections).
+#print axioms QIQTH.Geodesic.geodesic_local_existence
+-- expected: standard only — local existence of the component geodesic through any initial phase point,
+-- via the C¹ Picard–Lindelöf lemma exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀.
+#print axioms QIQTH.Geodesic.geodesic_local_unique
+-- expected: standard only — local uniqueness on any set where the field is Lipschitz (ODE_solution_unique_of_mem_Ioo).
+
 end QIQTH.AxiomAudit
