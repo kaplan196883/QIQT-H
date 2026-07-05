@@ -116,3 +116,16 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   frontier = extract a SIMPLE path (no-dup) from the walk + min-ε augment + max-flow existence.
   Std-3, budget 0. Max-flow is now: combinatorial core (M1-M3) + haug derived for 1- and 2-edge
   forward paths (M4/M6, incl. the conservation crux) + general-walk augmentation & existence carried.
+
+- **2026-07-05** — **M7 LANDED (green first attempt) — the GENERAL forward simple-path
+  augmentation.** ForwardAugPath structure (a degree-structured edge set P: interior
+  out-deg = in-deg, s +1 out, t +1 in, forward slack on every edge) + forwardAugPath_augments:
+  such a path + a uniform positive slack margin ε yields a strictly larger flow. Derived via
+  the crux identity ∑ v (if P u v then ε else 0) = ε·card{v | P u v} (one line:
+  ← Finset.sum_filter, sum_const, nsmul_eq_mul) + interior conservation (out-deg = in-deg ⟹
+  vertexExcess preserved) + value up by ε·1 at s. This LIFTS M6's hand-built 1/2-edge cases
+  to ALL forward path lengths — the augmentation mechanism is now fully derived, the M6
+  vertex-revisit obstruction removed for forward paths. Carried now: (a) the extraction
+  (ReflTransGen walk ⟹ a ForwardAugPath degree structure), (b) mixed forward/backward paths,
+  (c) max-flow existence. Std-3, budget 0. Max-flow: combinatorial core (M1-M3) + the FULL
+  forward-path augmentation mechanism (M4-M7) + only the extraction/mixed-direction/existence carried.

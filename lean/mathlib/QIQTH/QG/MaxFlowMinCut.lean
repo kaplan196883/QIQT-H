@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# M1–M6 — the combinatorial core of max-flow = min-cut
+# M1–M7 — the combinatorial core of max-flow = min-cut
 
 Built on Track C's flow/cut framework (`EmergentSpacetime.lean`, `section Flow`). This file delivers the
 combinatorial content of the hard half of max-flow = min-cut, discharging the combinatorial part of
@@ -28,20 +28,27 @@ combinatorial content of the hard half of max-flow = min-cut, discharging the co
   (`s→w→t`) forward residual path. `twoEdge_augment_forward` is the first case exhibiting the crux of
   the general construction — **conservation preserved at an interior vertex** (`w` gets `+ε` in and
   `+ε` out) — so it derives, machine-checked, a genuine sub-case of `haug` beyond the single edge.
+* **M7** `ForwardAugPath` / `forwardAugPath_augments` — **the general forward simple-path augmentation.**
+  A `ForwardAugPath` packages a forward augmenting path as a degree-structured directed edge set `P`
+  (interior out-degree = in-degree; source +1 out; sink +1 in; forward slack on every edge) — no
+  `List`/`ReflTransGen` walk. Given a uniform positive slack margin `ε`, `g = f + ε·𝟙[P]` is re-proved a
+  valid `s`-`t` flow of strictly larger value, the conservation crux discharged by the clean Finset
+  identity `∑ v, (if P u v then ε else 0) = ε·(filter (P u ·) univ).card` plus the degree conditions.
+  This lifts M6's hand-built 1- and 2-edge cases to the augmentation MECHANISM for **any** forward
+  simple path of arbitrary length.
 
 **Honest scope:** M1–M3 reduce ExactRT's gap to the single sharp condition `t ∉ residualCut cap f s`
 (no augmenting path from a maximum flow); M4–M5 derive that condition and the capstone
 max-flow = min-cut from maximality, CARRYING the Ford–Fulkerson analytic content (`haug`: an
-augmenting path augments the flow value) as a named hypothesis — NOT proved here. **M6 discharges the
-one- and two-edge forward instances of `haug` concretely** (real augmenting-flow constructions with
-full `IsSTFlow` re-proof, including interior-vertex conservation). What remains CARRIED is `haug` for a
-**general `ReflTransGen` residual walk of arbitrary length with mixed forward/backward steps**: the
-genuine obstruction is that such a walk may revisit vertices, so neither a single global `ε` nor a
-naive induction (augment the tail, then the head edge) closes — the head edge's residual slack can be
-consumed by the tail augmentation on a revisited edge. Extracting a *simple* path (no-dup vertex list)
-from the walk, then augmenting by `ε = min` residual capacity along it, is the remaining analytic
-frontier, together with max-flow EXISTENCE (compactness / Ford–Fulkerson termination). This is the
-finite (`V→V→ℝ`) network model, not a continuum RT.
+augmenting path augments the flow value) as a named hypothesis — NOT proved here. **M6–M7 discharge the
+forward augmentation concretely**: M6 the one- and two-edge instances, M7 the *general* forward simple
+path presented as a degree-structured edge set with a uniform slack margin (full `IsSTFlow` re-proof,
+interior-vertex conservation via the degree structure, value up by `ε`). What remains CARRIED is: (a)
+that a residual `ReflTransGen` walk PRODUCES such a `ForwardAugPath` (the walk→simple-forward-path
+*extraction* with this degree structure), (b) mixed forward/backward (residual reverse-edge) paths, and
+(c) max-flow EXISTENCE (compactness / Ford–Fulkerson termination). M7 removes the length obstruction for
+forward paths — the conservation-via-degree argument is now fully general — leaving the extraction and
+mixed-direction/existence pieces. This is the finite (`V→V→ℝ`) network model, not a continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`; `open Classical` for the reachable-set
 filter's decidability is a local convenience, not a project axiom).
@@ -366,6 +373,89 @@ theorem twoEdge_augment_forward {cap : V → V → ℝ} {s w t : V} {f : V → V
         apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨_, h⟩; exact hst h
       rw [e3, e4, add_zero, add_zero]
     rw [hout, hin]
+    linarith
+
+/-- **M7 — a forward simple augmenting `s`-`t` path, as a degree-structured directed edge set.**
+`P` is the directed-edge relation of a simple forward augmenting path; its *degree structure* is that of a
+simple `s`-`t` path: every interior vertex has out-degree equal to in-degree (`hDeg`), the source has one
+more out-edge than in-edge (`hs`), the sink one more in-edge than out-edge (`ht`), and every path edge
+carries forward residual slack (`hslack`). This packages exactly the combinatorial data an augmenting
+forward path contributes, WITHOUT committing to a `List`/`ReflTransGen` walk representation — the
+degree conditions are all the conservation argument needs. -/
+structure ForwardAugPath (cap : V → V → ℝ) (s t : V) (f : V → V → ℝ) where
+  /-- The directed edges of the path. -/
+  P : V → V → Prop
+  /-- Interior vertices: out-degree = in-degree. -/
+  hDeg : ∀ u, u ≠ s → u ≠ t →
+    (Finset.univ.filter (fun v => P u v)).card = (Finset.univ.filter (fun v => P v u)).card
+  /-- The source has exactly one more out-edge than in-edge. -/
+  hs : (Finset.univ.filter (fun v => P s v)).card = (Finset.univ.filter (fun v => P v s)).card + 1
+  /-- The sink has exactly one more in-edge than out-edge. -/
+  ht : (Finset.univ.filter (fun v => P t v)).card + 1 = (Finset.univ.filter (fun v => P v t)).card
+  /-- Every path edge has forward residual slack. -/
+  hslack : ∀ u v, P u v → f u v < cap u v
+
+/-- **★★ M7 — the general forward simple-path augmentation.** Given a forward simple augmenting path
+`Q : ForwardAugPath cap s t f` (a degree-structured directed edge set) and a uniform positive slack
+margin `ε` (`f u v + ε ≤ cap u v` on every path edge), the flow
+`g u v := f u v + (if Q.P u v then ε else 0)` is a valid `s`-`t` flow of strictly larger value.
+
+This DERIVES the augmentation MECHANISM for an arbitrary forward simple path — the full
+conservation-via-degree-structure argument — not just the one- and two-edge special cases of M6. The
+crux is the clean Finset computation
+`∑ v, (if Q.P u v then ε else 0) = ε · (filter (Q.P u ·) univ).card`, turning `vertexExcess g u =
+vertexExcess f u + ε·(outDeg u − inDeg u)`; interior vertices then conserve by `hDeg` (out = in), and
+the value rises by `ε·1` at the source by `hs`.
+
+**Carried (frontier, NOT here):** that residual reachability (`ReflTransGen`) actually PRODUCES such a
+`ForwardAugPath` (the walk→simple-forward-path extraction with this degree structure), mixed
+forward/backward (residual reverse-edge) paths, and max-flow EXISTENCE. **Derived here:** the entire
+augmentation given a forward simple path presented as a degree-structured edge set with a uniform slack
+margin — the general-length generalization of M6's hand-built 1- and 2-edge cases. -/
+theorem forwardAugPath_augments {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (Q : ForwardAugPath cap s t f) (hst : s ≠ t)
+    (ε : ℝ) (hε : 0 < ε) (hεcap : ∀ u v, Q.P u v → f u v + ε ≤ cap u v) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  classical
+  -- the load-bearing helper: `∑ v, (if R v then ε else 0) = ε · card{v | R v}`.
+  have hsum : ∀ (R : V → Prop),
+      (∑ v, (if R v then ε else 0)) = ε * ((Finset.univ.filter R).card : ℝ) := by
+    intro R
+    rw [← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_comm]
+  have he0 : (0:ℝ) ≤ ε := le_of_lt hε
+  refine ⟨fun u v => f u v + (if Q.P u v then ε else 0), ⟨?_, ?_, ?_⟩, ?_⟩
+  · -- nonneg
+    intro u v
+    have := hf.nonneg u v
+    split <;> linarith
+  · -- capacity
+    intro u v
+    by_cases h : Q.P u v
+    · rw [if_pos h]; exact hεcap u v h
+    · rw [if_neg h, add_zero]; exact hf.capacity u v
+  · -- conserve at an interior vertex: degree structure cancels the ε-terms
+    intro u hus hut
+    unfold vertexExcess
+    have hout : (∑ v, (f u v + if Q.P u v then ε else 0))
+        = (∑ v, f u v) + ε * ((Finset.univ.filter (fun v => Q.P u v)).card : ℝ) := by
+      rw [Finset.sum_add_distrib, hsum (fun v => Q.P u v)]
+    have hin : (∑ v, (f v u + if Q.P v u then ε else 0))
+        = (∑ v, f v u) + ε * ((Finset.univ.filter (fun v => Q.P v u)).card : ℝ) := by
+      rw [Finset.sum_add_distrib, hsum (fun v => Q.P v u)]
+    rw [hout, hin, Q.hDeg u hus hut]
+    have hconv := hf.conserve u hus hut
+    unfold vertexExcess at hconv
+    linarith
+  · -- value strictly increases by ε at the source (hs: outDeg s = inDeg s + 1)
+    unfold flowValue vertexExcess
+    have hout : (∑ v, (f s v + if Q.P s v then ε else 0))
+        = (∑ v, f s v) + ε * ((Finset.univ.filter (fun v => Q.P s v)).card : ℝ) := by
+      rw [Finset.sum_add_distrib, hsum (fun v => Q.P s v)]
+    have hin : (∑ v, (f v s + if Q.P v s then ε else 0))
+        = (∑ v, f v s) + ε * ((Finset.univ.filter (fun v => Q.P v s)).card : ℝ) := by
+      rw [Finset.sum_add_distrib, hsum (fun v => Q.P v s)]
+    rw [hout, hin, Q.hs]
+    push_cast
     linarith
 
 end QIQTH.QG

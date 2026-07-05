@@ -9003,6 +9003,13 @@ namespace QIQTH.AxiomAudit
 -- ReflTransGen-walk augmentation still carried; obstruction pinned (walk revisits => naive
 -- induction slack consumption => need simple-path extraction). Std 3.
 #print axioms QIQTH.QG.twoEdge_augment_forward
+-- THE MAX-FLOW-MIN-CUT M7 (QG/MaxFlowMinCut.lean cont.): the GENERAL forward simple-path
+-- augmentation -- ForwardAugPath (a degree-structured edge set: interior in-deg = out-deg,
+-- s +1 out, t +1 in, forward slack) yields a strictly larger flow, via the crux identity
+-- sum (if P then eps) = eps.card and interior-vertex conservation. Derives the augmentation
+-- MECHANISM for ALL forward path lengths (removes the M6 vertex-revisit obstruction for
+-- forward paths). Carried: the extraction (walk -> ForwardAugPath), mixed direction, existence.
+#print axioms QIQTH.QG.forwardAugPath_augments
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form

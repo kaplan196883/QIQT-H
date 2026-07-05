@@ -1640,8 +1640,11 @@ frontier, single-edge case discharged). First green crossing of a wall confirmed
 Lean (Isabelle prior art only) — a genuine wall, mostly crossed. **M6 (deepening)**: `twoEdge_augment_forward` — a two-edge forward residual path
 yields a strictly larger flow, machine-checking the interior-vertex conservation crux (the mechanism the general
 haug needs); the general n-edge mixed-direction ReflTransGen-walk augmentation stays carried with the exact
-obstruction pinned (walk revisits ⟹ naive-induction slack consumption ⟹ need simple-path extraction). So max-flow
-= combinatorial core + haug DERIVED for 1- and 2-edge forward paths + general-walk augmentation & existence carried.
+obstruction pinned (walk revisits ⟹ naive-induction slack consumption ⟹ need simple-path extraction). + **M7**: `forwardAugPath_augments` derives the augmentation for ARBITRARY-length forward simple paths
+(a degree-structured edge set: interior in-deg = out-deg ⟹ conservation preserved; value up by ε at s) — the
+full forward-path augmentation MECHANISM, lifting the M6 hand-built cases to all lengths and removing the
+vertex-revisit obstruction for forward paths. So max-flow = combinatorial core (M1-M3) + the FULL forward-path
+augmentation (M4-M7) + only the extraction (walk ⟹ path degree-structure), mixed-direction, and existence carried.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
