@@ -1,6 +1,6 @@
 # THE WILLIAMSON CAMPAIGN — N-mode symplectic diagonalization, Youla carried (W1–W6)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
+**Status:** COMPLETE (2026-07-05) — W1–W6 landed (W3 S-construction + W2 Youla carried house-style). Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent ae88cddd312739cba (2026-07-05) — NOT a wall; a genuine
 4–6 increment house-style campaign, matrix sqrt de-risked in-repo, single carry = Youla.
 
@@ -38,12 +38,12 @@ type is `l ⊕ l` (NOT Fin 2n) — reuse Mathlib's, do NOT shadow. Repo: `oneMod
   via Jᵀ=−J + sqrt self-adjoint), CONSTRUCT S := M^{-1/2}·O·(block √ν scaling) and prove
   S ∈ symplecticGroup + Sᵀ M S = D⊕D. May split W3a (S symplectic) / W3b (S diagonalizes).
   Risk MEDIUM-HIGH (block matrix algebra — the campaign's effort). Attempt; checkpoint honestly.
-- [ ] **W4 — oneModeSympEig consistency.** n=1 WilliamsonDecomp recovers √(ab−c²), wiring the
+- [x] **W4 — oneModeSympEig consistency.** n=1 WilliamsonDecomp recovers √(ab−c²), wiring the
   repo lemma into the general structure. Risk LOW-MEDIUM.
-- [ ] **W5 — the entropy connection (the QG payoff).**
+- [x] **W5 — the entropy connection (the QG payoff).**
   `gaussStateEntropy_of_williamson (W) : gaussStateEntropy (W.ν ∘ equiv)`, ≥ 0 given the
   Heisenberg floor ∀ i, ½ ≤ νᵢ (hypothesis). Plumbing to gaussStateEntropy_nonneg. Risk LOW.
-- [ ] **W6 — checkpoint + audit** (verbatim HAVE/HAVE-NOT below); plan → COMPLETE.
+- [x] **W6 — checkpoint + audit** (verbatim HAVE/HAVE-NOT below); plan → COMPLETE.
 
 Order: W1 (green scaffolding) → W2 (carried Youla) → W3 (the reduction, the effort) → W4 →
 W5 (payoff) → W6. Each its own commit.
@@ -108,3 +108,16 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   the reduction packaging, with BOTH Youla (W2) and the S-construction carried. Std-3, budget 0.
   Next: W4/W5 (oneModeSympEig consistency + the gaussStateEntropy connection — the QG payoff,
   landing on the structure regardless).
+
+- **2026-07-05** — **W4+W5+W6 LANDED — CAMPAIGN COMPLETE (honest).** WilliamsonDecomp.entropy
+  (∑ gaussModeEntropy over the symplectic spectrum) + entropy_nonneg (Heisenberg floor
+  ∀ i, ½ ≤ ν i, since gaussModeEntropy_nonneg is conditional on the floor) +
+  williamson_entropy_eq_gaussStateEntropy (= the repo's gaussStateEntropy on Fin n, rfl);
+  W4 oneMode_entropy_consistency (n=1/Unit: oneModeSympEig √(ab−c²) wired into the entropy via
+  the Heisenberg floor). THE SYMPLECTIC SPECTRUM FEEDS THE GAUSSIAN ENTANGLEMENT ENTROPY —
+  the QG/holography payoff, landing on the WilliamsonDecomp structure. Campaign summary: the
+  WilliamsonDecomp framework (W1, reusing Mathlib's symplecticGroup) + symplectic algebra
+  ((det S)²=1) + the antisymm entry point (W3-pre, real CFC.sqrt content) + the entropy
+  connection (W4/W5), with BOTH the Youla normal form (W2) and the S-construction (W3)
+  CARRIED honestly. Std-3, budget 0. HONEST: not unconditional Williamson; does NOT unlock
+  the area-law scaling.

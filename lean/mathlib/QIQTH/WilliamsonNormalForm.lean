@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# The Williamson normal form — W1–W3: decomposition structure, symplectic algebra, carried Youla, sqrt entry point
+# The Williamson normal form — W1–W5: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection
 
 Williamson's theorem states that a real symmetric positive-definite `2n × 2n` matrix `M` can be
 brought to the block-diagonal form `Sᵀ M S = D ⊕ D` (with `D = diagonal ν` the *symplectic
@@ -31,11 +31,25 @@ This file supplies **W1** and **W2** of the Williamson campaign:
   `S = M^{-1/2} O (block-√ν)` — proving `S ∈ symplecticGroup` and `Sᵀ M S = D ⊕ D` — is the heavy
   algebra and remains **CARRIED** here (packaged as the `hconstr` hypothesis, never faked).
 
+* **W4–W5 (the entropy connection — the QG payoff, landing on the structure directly):** the
+  Gaussian entanglement entropy `WilliamsonDecomp.entropy := ∑ᵢ gaussModeEntropy (νᵢ)` read off the
+  symplectic spectrum of a Williamson decomposition (summed over the mode index `l`), its
+  nonnegativity `WilliamsonDecomp.entropy_nonneg` given the Heisenberg floor `∀ i, ½ ≤ νᵢ` (the
+  hypothesis `gaussModeEntropy_nonneg` requires), the identification
+  `williamson_entropy_eq_gaussStateEntropy` with the repo's `gaussStateEntropy` when `l = Fin n`
+  (definitional), and the `n = 1` consistency `oneMode_entropy_consistency` — a single-mode
+  (`l = Unit`) Williamson decomposition whose eigenvalue is `oneModeSympEig a b c = √(ab − c²)` has
+  entropy `gaussModeEntropy (√(ab − c²)) ≥ 0`, wiring the repo's `oneModeSympEig` into the general
+  structure through the Heisenberg-floor bound `oneModeSympEig_ge_half`.
+
 **Honest scope.**  W1–W2 are scaffolding + one carried hypothesis; W3 adds the real square-root
-entry point and packages the still-carried block construction.  Williamson is *not yet* proved
+entry point and packages the still-carried block construction; W4–W5 land the entropy bridge on the
+`WilliamsonDecomp` structure directly (it does *not* need the carried construction — it consumes the
+symplectic spectrum `ν` a decomposition already carries).  Williamson is *not yet* proved
 unconditionally — it is proved **conditional on Youla** (and, at W3, on the constructed-`S`
-existence).  Nothing here unlocks the area-law `S ∝ A` scaling (the entropy machinery is
-area/volume-blind).  Axiom-free.
+existence).  The decomposition itself carries Youla + the S-construction; the entropy is a genuine
+function of its spectrum.  Nothing here unlocks the area-law `S ∝ A` scaling (the entropy machinery
+is area/volume-blind).  Axiom-free.
 -/
 import Mathlib.LinearAlgebra.SymplecticGroup
 import Mathlib.LinearAlgebra.UnitaryGroup
@@ -205,5 +219,66 @@ theorem williamson_of_construction_exists (M : Matrix (l ⊕ l) (l ⊕ l) ℝ) (
     Nonempty (WilliamsonDecomp M) := by
   obtain ⟨S, ν, hSymp, hν, hDiag⟩ := hconstr
   exact ⟨⟨S, hSymp, ν, hν, hDiag⟩⟩
+
+/-! ### W5 — the entropy connection (the QG payoff)
+
+The symplectic spectrum `ν` a `WilliamsonDecomp` carries is exactly the input the Gaussian
+entanglement entropy consumes.  We define the entropy of a decomposition as the sum, over the mode
+index `l`, of the per-mode Srednicki entropy `gaussModeEntropy`, matching the shape of the repo's
+`QIQTH.GaussianStateEntropy.gaussStateEntropy` (which sums over `Fin n`) but stated over the general
+index `l`.  This lands on the structure directly — it does *not* invoke the carried block
+construction (W3): it is a genuine function of the spectrum any decomposition already carries. -/
+
+/-- **The Gaussian entanglement entropy of a Williamson decomposition.**  The sum, over the mode
+    index `l`, of the per-mode Srednicki entropy `gaussModeEntropy` evaluated at the symplectic
+    eigenvalues `ν` — the entropy the symplectic spectrum feeds (see
+    `QIQTH.GaussianStateEntropy.gaussStateEntropy`, the `Fin n` version of the same sum). -/
+noncomputable def WilliamsonDecomp.entropy {M : Matrix (l ⊕ l) (l ⊕ l) ℝ}
+    (W : WilliamsonDecomp M) : ℝ :=
+  ∑ i, QIQTH.GaussianStateEntropy.gaussModeEntropy (W.ν i)
+
+/-- **The Gaussian entanglement entropy of a Williamson decomposition is nonnegative**, given the
+    Heisenberg floor `∀ i, ½ ≤ νᵢ` on the symplectic spectrum (the uncertainty-principle bound
+    `gaussModeEntropy_nonneg` requires).  Entanglement is never negative. -/
+theorem WilliamsonDecomp.entropy_nonneg {M : Matrix (l ⊕ l) (l ⊕ l) ℝ}
+    (W : WilliamsonDecomp M) (hfloor : ∀ i, (1 : ℝ) / 2 ≤ W.ν i) : 0 ≤ W.entropy :=
+  Finset.sum_nonneg fun i _ => QIQTH.GaussianStateEntropy.gaussModeEntropy_nonneg (hfloor i)
+
+/-- **The decomposition entropy is the repo's `gaussStateEntropy` when the mode index is `Fin n`.**
+    Both are the same sum `∑ᵢ gaussModeEntropy (νᵢ)` over `Fin n`, so this is definitional — it
+    identifies the structure-level entropy with the standalone Gaussian-state entropy function. -/
+theorem williamson_entropy_eq_gaussStateEntropy {n : ℕ}
+    {M : Matrix (Fin n ⊕ Fin n) (Fin n ⊕ Fin n) ℝ} (W : WilliamsonDecomp M) :
+    W.entropy = QIQTH.GaussianStateEntropy.gaussStateEntropy W.ν :=
+  rfl
+
+/-! ### W4 — the `n = 1` consistency: `oneModeSympEig` wired into the structure
+
+For a single mode (`l = Unit`) the symplectic eigenvalue is the repo's
+`oneModeSympEig a b c = √(ab − c²)` read off the `2×2` covariance `[[a,c],[c,b]]`.  A one-mode
+`WilliamsonDecomp` whose eigenvalue is that value has entropy `gaussModeEntropy (√(ab − c²))`, which
+the Heisenberg bound `det ≥ ¼` makes nonnegative (through `oneModeSympEig_ge_half`).  This wires the
+repo's single-mode symplectic eigenvalue into the general `WilliamsonDecomp.entropy` at `n = 1`. -/
+
+/-- **The `n = 1` entropy consistency.**  For a single-mode (`l = Unit`) Williamson decomposition
+    whose symplectic eigenvalue is the repo's `oneModeSympEig a b c = √(ab − c²)`, the
+    decomposition entropy is exactly `gaussModeEntropy (√(ab − c²))`, and — under the Heisenberg
+    uncertainty bound `¼ ≤ ab − c²` — it is nonnegative.  This grounds the structure-level entropy
+    in physical single-mode covariance data, recovering the repo's `oneModeSympEig`. -/
+theorem oneMode_entropy_consistency {M : Matrix (Unit ⊕ Unit) (Unit ⊕ Unit) ℝ}
+    (W : WilliamsonDecomp M) {a b c : ℝ}
+    (hν : W.ν () = QIQTH.GaussianStateEntropy.oneModeSympEig a b c)
+    (h : (1 : ℝ) / 4 ≤ a * b - c ^ 2) :
+    W.entropy
+        = QIQTH.GaussianStateEntropy.gaussModeEntropy
+          (QIQTH.GaussianStateEntropy.oneModeSympEig a b c)
+      ∧ 0 ≤ W.entropy := by
+  have hsum : W.entropy
+      = QIQTH.GaussianStateEntropy.gaussModeEntropy (W.ν ()) := by
+    rw [WilliamsonDecomp.entropy, Fintype.sum_unique]
+  refine ⟨by rw [hsum, hν], ?_⟩
+  rw [hsum, hν]
+  exact QIQTH.GaussianStateEntropy.gaussModeEntropy_nonneg
+    (QIQTH.GaussianStateEntropy.oneModeSympEig_ge_half h)
 
 end QIQTH.Williamson

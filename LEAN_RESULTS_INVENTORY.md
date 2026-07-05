@@ -1611,10 +1611,15 @@ frontier) applied to the next attemptable wall. W1: the `WilliamsonDecomp` struc
 Sᵀ M S = D⊕D, symplectic eigenvalues ν), symplectic-form algebra ((det S)² = 1 from Sᵀ J S = J; block-diagonal
 det = (∏ν)²), reusing Mathlib's `symplecticGroup`/`orthogonalGroup`. W2: the CARRIED `YoulaDecomp` (the real
 antisymmetric skew normal form Oᵀ A O = [[0,D],[−D,0]] — absent from Mathlib, the analytic frontier / `haug`
-analogue, a structure never an axiom). Next: W3 `williamson_of_youla` (given Youla of M^{1/2} J M^{1/2}, construct
-S via matrix sqrt, proven-working in ArakiEntropy) → W4/W5 (oneModeSympEig consistency, the `gaussStateEntropy`
-connection). HONEST: conditional on carried Youla, not unconditional; does NOT unlock the area-law S∝A scaling
-(area/volume-blind, a separate wall).
+analogue, a structure never an axiom). **CAMPAIGN COMPLETE (W1–W6, honest)**: W3 delivered `williamsonAux_antisymm` (√M·J·√M
+  antisymmetric — the real CFC.sqrt entry point) and honestly CARRIES the S-construction
+  (block-diagonalization) as `hconstr`, the haug analogue; W4/W5 the entropy connection —
+  `WilliamsonDecomp.entropy = ∑ gaussModeEntropy` over the symplectic spectrum, nonneg under
+  the Heisenberg floor, = the repo's `gaussStateEntropy` — THE SYMPLECTIC SPECTRUM FEEDS THE
+  GAUSSIAN ENTANGLEMENT ENTROPY (the QG/holography payoff). HONEST: the WilliamsonDecomp
+  framework + symplectic algebra + antisymm entry point + entropy bridge, with BOTH Youla and
+  the S-construction carried; NOT unconditional Williamson; does NOT unlock the area-law S∝A
+  scaling (area/volume-blind, a separate wall).
 
 **MAX-FLOW=MIN-CUT combinatorial core — LANDED, ExactRT gap SHARPENED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`
 (axiom-free std-3): a genuine ATTEMPT at the Ford–Fulkerson wall on the repo's own flow/cut framework
