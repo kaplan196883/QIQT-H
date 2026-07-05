@@ -8996,6 +8996,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QG.exact_rt_of_maxFlow
 #print axioms QIQTH.QG.exact_rt_maxFlow_mincut
 #print axioms QIQTH.QG.singleEdge_augment_forward
+-- THE MAX-FLOW-MIN-CUT M6 (QG/MaxFlowMinCut.lean cont.): deriving the carried haug --
+-- twoEdge_augment_forward: a two-edge forward residual path s->w->t yields a strictly larger
+-- flow, machine-checking the INTERIOR-VERTEX CONSERVATION crux (w gets +eps in and +eps out)
+-- that the general haug needs (single-edge never exercised it). General n-edge mixed-direction
+-- ReflTransGen-walk augmentation still carried; obstruction pinned (walk revisits => naive
+-- induction slack consumption => need simple-path extraction). Std 3.
+#print axioms QIQTH.QG.twoEdge_augment_forward
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form

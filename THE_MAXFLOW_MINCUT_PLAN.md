@@ -104,3 +104,15 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   flow/cut framework — the previously-cited Ford–Fulkerson gap is reduced to the single
   carried haug (general augmenting-path ⟹ bigger flow; the analytic frontier, single-edge
   case discharged). Std-3, budget 0. A genuine wall, mostly crossed.
+
+- **2026-07-05** — **M6 LANDED (deepening — deriving the carried haug).** twoEdge_augment_forward:
+  a two-edge forward residual path s→w→t yields a strictly larger flow — a genuine derived
+  extension of the single-edge M4 template that machine-checks the INTERIOR-VERTEX CONSERVATION
+  crux (w receives +ε in and emits +ε out, so vertexExcess preserved) — the exact mechanism the
+  general haug needs, which single-edge never exercised. HONEST checkpoint: the general
+  n-edge mixed-direction ReflTransGen-walk augmentation is still carried, with the precise
+  obstruction PINNED — a ReflTransGen walk may REVISIT vertices/edges, so the naive tail-then-head
+  induction fails (the tail augmentation can consume the head edge's slack); the sharpened
+  frontier = extract a SIMPLE path (no-dup) from the walk + min-ε augment + max-flow existence.
+  Std-3, budget 0. Max-flow is now: combinatorial core (M1-M3) + haug derived for 1- and 2-edge
+  forward paths (M4/M6, incl. the conservation crux) + general-walk augmentation & existence carried.

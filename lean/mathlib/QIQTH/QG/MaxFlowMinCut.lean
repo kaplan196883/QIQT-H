@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# M1–M5 — the combinatorial core of max-flow = min-cut
+# M1–M6 — the combinatorial core of max-flow = min-cut
 
 Built on Track C's flow/cut framework (`EmergentSpacetime.lean`, `section Flow`). This file delivers the
 combinatorial content of the hard half of max-flow = min-cut, discharging the combinatorial part of
@@ -23,14 +23,25 @@ combinatorial content of the hard half of max-flow = min-cut, discharging the co
 * **M5** `exact_rt_maxFlow_mincut` — the **capstone**: max-flow = min-cut on the tower's flow/cut
   framework — `flowValue f s = cutCapacity cap (residualCut cap f s)` for a maximum flow, CONDITIONAL
   ONLY on the carried augmentation-existence `haug`.
+* **M6** `singleEdge_augment_forward` / `twoEdge_augment_forward` — **derived instances of the carried
+  `haug`**: the augmenting-flow construction proved concretely for a one-edge (`s→t`) and a two-edge
+  (`s→w→t`) forward residual path. `twoEdge_augment_forward` is the first case exhibiting the crux of
+  the general construction — **conservation preserved at an interior vertex** (`w` gets `+ε` in and
+  `+ε` out) — so it derives, machine-checked, a genuine sub-case of `haug` beyond the single edge.
 
 **Honest scope:** M1–M3 reduce ExactRT's gap to the single sharp condition `t ∉ residualCut cap f s`
 (no augmenting path from a maximum flow); M4–M5 derive that condition and the capstone
 max-flow = min-cut from maximality, CARRYING the Ford–Fulkerson analytic content (`haug`: an
-augmenting path augments the flow value) as a named hypothesis — NOT proved here. The augmenting-flow
-construction (define `g` by modifying `f` by `ε` along a residual walk, re-prove `IsSTFlow`) and
-max-flow EXISTENCE are the genuine analytic frontier. This is the finite (`V→V→ℝ`) network model,
-not a continuum RT.
+augmenting path augments the flow value) as a named hypothesis — NOT proved here. **M6 discharges the
+one- and two-edge forward instances of `haug` concretely** (real augmenting-flow constructions with
+full `IsSTFlow` re-proof, including interior-vertex conservation). What remains CARRIED is `haug` for a
+**general `ReflTransGen` residual walk of arbitrary length with mixed forward/backward steps**: the
+genuine obstruction is that such a walk may revisit vertices, so neither a single global `ε` nor a
+naive induction (augment the tail, then the head edge) closes — the head edge's residual slack can be
+consumed by the tail augmentation on a revisited edge. Extracting a *simple* path (no-dup vertex list)
+from the walk, then augmenting by `ε = min` residual capacity along it, is the remaining analytic
+frontier, together with max-flow EXISTENCE (compactness / Ford–Fulkerson termination). This is the
+finite (`V→V→ℝ`) network model, not a continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`; `open Classical` for the reachable-set
 filter's decidability is a local convenience, not a project axiom).
@@ -242,6 +253,119 @@ theorem singleEdge_augment_forward {cap : V → V → ℝ} {s t : V} {f : V → 
         rintro ⟨_, rfl⟩; exact hst rfl
       rw [hz, add_zero]
     rw [h1, h2]
+    linarith
+
+/-- **★ M6 (Attempt B) — a concrete two-edge (forward · forward) augmentation.** If an interior vertex
+`w` (distinct from `s` and `t`) has forward residual slack on both `s→w` (`f s w < cap s w`) and `w→t`
+(`f w t < cap w t`), then pushing `ε = min (cap s w − f s w) (cap w t − f w t) > 0` along the two-edge
+residual path `s → w → t` yields a valid `s`-`t` flow of strictly larger value.
+
+This is the genuine two-edge composition of the augmenting-flow construction underlying the carried
+`haug`, extending `singleEdge_augment_forward` from one edge to two. The crux beyond the single-edge
+case is **conservation at the intermediate vertex `w`**: `w` receives `+ε` in (from `s→w`) and emits
+`+ε` out (to `w→t`), so its vertex excess is unchanged — the mechanism by which an augmenting *path*
+(not just a single edge) preserves conservation at every interior vertex it traverses. Capacity holds
+because `ε ≤ cap s w − f s w` and `ε ≤ cap w t − f w t`; nonnegativity because `ε ≥ 0`; and the value
+rises by `ε` (the `s→w` edge adds `ε` to the source's out-flow, its in-flow is untouched). -/
+theorem twoEdge_augment_forward {cap : V → V → ℝ} {s w t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (hsw' : s ≠ w) (hwt' : w ≠ t) (hst : s ≠ t)
+    (hsw : f s w < cap s w) (hwt : f w t < cap w t) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  classical
+  set ε := min (cap s w - f s w) (cap w t - f w t) with hε
+  have hεpos : 0 < ε := by rw [hε]; exact lt_min (by linarith) (by linarith)
+  have hεsw : ε ≤ cap s w - f s w := min_le_left _ _
+  have hεwt : ε ≤ cap w t - f w t := min_le_right _ _
+  have he0 : (0:ℝ) ≤ ε := le_of_lt hεpos
+  refine ⟨fun u v => f u v + (if u = s ∧ v = w then ε else 0) + (if u = w ∧ v = t then ε else 0),
+    ⟨?_, ?_, ?_⟩, ?_⟩
+  · -- nonneg
+    intro u v
+    have h0 := hf.nonneg u v
+    split <;> split <;> linarith
+  · -- capacity
+    intro u v
+    by_cases h1 : u = s ∧ v = w
+    · obtain ⟨rfl, rfl⟩ := h1
+      rw [if_pos ⟨rfl, rfl⟩, if_neg (fun h => hsw' h.1)]
+      linarith
+    · by_cases h2 : u = w ∧ v = t
+      · obtain ⟨rfl, rfl⟩ := h2
+        rw [if_neg h1, if_pos ⟨rfl, rfl⟩]
+        linarith
+      · rw [if_neg h1, if_neg h2, add_zero, add_zero]
+        exact hf.capacity u v
+  · -- conserve
+    intro v hvs hvt
+    unfold vertexExcess
+    by_cases hvw : v = w
+    · -- the intermediate vertex: +ε in and +ε out cancel
+      have hout : (∑ x, (f v x + (if v = s ∧ x = w then ε else 0) + (if v = w ∧ x = t then ε else 0)))
+          = (∑ x, f v x) + ε := by
+        rw [Finset.sum_add_distrib, Finset.sum_add_distrib]
+        have e1 : (∑ x, (if v = s ∧ x = w then ε else 0)) = 0 := by
+          apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨h, _⟩; exact hvs h
+        have e2 : (∑ x, (if v = w ∧ x = t then ε else 0)) = ε := by
+          have hcong : ∀ x, (if v = w ∧ x = t then ε else 0) = (if x = t then ε else 0) :=
+            fun x => by simp [hvw]
+          rw [Finset.sum_congr rfl (fun x _ => hcong x), Finset.sum_ite_eq']; simp
+        rw [e1, e2, add_zero]
+      have hin : (∑ x, (f x v + (if x = s ∧ v = w then ε else 0) + (if x = w ∧ v = t then ε else 0)))
+          = (∑ x, f x v) + ε := by
+        rw [Finset.sum_add_distrib, Finset.sum_add_distrib]
+        have e3 : (∑ x, (if x = s ∧ v = w then ε else 0)) = ε := by
+          have hcong : ∀ x, (if x = s ∧ v = w then ε else 0) = (if x = s then ε else 0) :=
+            fun x => by simp [hvw]
+          rw [Finset.sum_congr rfl (fun x _ => hcong x), Finset.sum_ite_eq']; simp
+        have e4 : (∑ x, (if x = w ∧ v = t then ε else 0)) = 0 := by
+          apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨_, h⟩; exact hvt h
+        rw [e3, e4, add_zero]
+      rw [hout, hin]
+      have := hf.conserve v hvs hvt
+      unfold vertexExcess at this
+      linarith
+    · -- any other interior vertex: all four modifications vanish
+      have hout : (∑ x, (f v x + (if v = s ∧ x = w then ε else 0) + (if v = w ∧ x = t then ε else 0)))
+          = (∑ x, f v x) := by
+        rw [Finset.sum_add_distrib, Finset.sum_add_distrib]
+        have e1 : (∑ x, (if v = s ∧ x = w then ε else 0)) = 0 := by
+          apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨h, _⟩; exact hvs h
+        have e2 : (∑ x, (if v = w ∧ x = t then ε else 0)) = 0 := by
+          apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨h, _⟩; exact hvw h
+        rw [e1, e2, add_zero, add_zero]
+      have hin : (∑ x, (f x v + (if x = s ∧ v = w then ε else 0) + (if x = w ∧ v = t then ε else 0)))
+          = (∑ x, f x v) := by
+        rw [Finset.sum_add_distrib, Finset.sum_add_distrib]
+        have e3 : (∑ x, (if x = s ∧ v = w then ε else 0)) = 0 := by
+          apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨_, h⟩; exact hvw h
+        have e4 : (∑ x, (if x = w ∧ v = t then ε else 0)) = 0 := by
+          apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨_, h⟩; exact hvt h
+        rw [e3, e4, add_zero, add_zero]
+      rw [hout, hin]
+      have := hf.conserve v hvs hvt
+      unfold vertexExcess at this
+      linarith
+  · -- value strictly increases by ε
+    unfold flowValue vertexExcess
+    have hout : (∑ x, (f s x + (if s = s ∧ x = w then ε else 0) + (if s = w ∧ x = t then ε else 0)))
+        = (∑ x, f s x) + ε := by
+      rw [Finset.sum_add_distrib, Finset.sum_add_distrib]
+      have e1 : (∑ x, (if s = s ∧ x = w then ε else 0)) = ε := by
+        have hcong : ∀ x, (if s = s ∧ x = w then ε else 0) = (if x = w then ε else 0) :=
+          fun x => by simp
+        rw [Finset.sum_congr rfl (fun x _ => hcong x), Finset.sum_ite_eq']; simp
+      have e2 : (∑ x, (if s = w ∧ x = t then ε else 0)) = 0 := by
+        apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨h, _⟩; exact hsw' h
+      rw [e1, e2, add_zero]
+    have hin : (∑ x, (f x s + (if x = s ∧ s = w then ε else 0) + (if x = w ∧ s = t then ε else 0)))
+        = (∑ x, f x s) := by
+      rw [Finset.sum_add_distrib, Finset.sum_add_distrib]
+      have e3 : (∑ x, (if x = s ∧ s = w then ε else 0)) = 0 := by
+        apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨_, h⟩; exact hsw' h
+      have e4 : (∑ x, (if x = w ∧ s = t then ε else 0)) = 0 := by
+        apply Finset.sum_eq_zero; intro x _; rw [if_neg]; rintro ⟨_, h⟩; exact hst h
+      rw [e3, e4, add_zero, add_zero]
+    rw [hout, hin]
     linarith
 
 end QIQTH.QG

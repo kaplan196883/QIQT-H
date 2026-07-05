@@ -1637,7 +1637,11 @@ one-edge augmentation CONSTRUCTED, mechanism real). The combinatorial content of
 max-flow=min-cut is machine-checked on the tower's flow/cut framework; the Ford–Fulkerson gap
 is reduced to the single carried haug (general augmenting-path ⟹ bigger flow, the analytic
 frontier, single-edge case discharged). First green crossing of a wall confirmed unbuilt in
-Lean (Isabelle prior art only) — a genuine wall, mostly crossed.
+Lean (Isabelle prior art only) — a genuine wall, mostly crossed. **M6 (deepening)**: `twoEdge_augment_forward` — a two-edge forward residual path
+yields a strictly larger flow, machine-checking the interior-vertex conservation crux (the mechanism the general
+haug needs); the general n-edge mixed-direction ReflTransGen-walk augmentation stays carried with the exact
+obstruction pinned (walk revisits ⟹ naive-induction slack consumption ⟹ need simple-path extraction). So max-flow
+= combinatorial core + haug DERIVED for 1- and 2-edge forward paths + general-walk augmentation & existence carried.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
