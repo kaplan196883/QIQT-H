@@ -132,3 +132,16 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   hconstr is now DERIVED — the entire block-matrix S-construction (symplectic + diagonalizing).
   The ONE remaining carry is YoulaDecomp itself (the real-antisymmetric normal form, absent
   from Mathlib). Std-3, budget 0.
+
+- **2026-07-05** — **YOULA W7 — honest checkpoint: spectral entry point DERIVED, real-block
+  assembly PINNED.** iA_isHermitian (for real antisymmetric A, i·A_ℂ is Hermitian — via
+  conjTranspose_map + conj_I — so Mathlib's complex spectral theorem APPLIES); iA_conj_antifixed
+  (conj(iA_ℂ) = −iA_ℂ, the algebraic seed of the ±ν eigenvalue pairing). Scratch-verified the
+  spectral route is live (eigenvectorUnitary/eigenvalues/spectral_theorem all typecheck on
+  iA_ℂ). HONEST CHECKPOINT (Attempt C): the full youlaDecomp_of_antisymm did NOT close — the
+  real-block assembly (real-Schur extraction O = [Re colₖ, Im colₖ] from conjugate eigenvector
+  pairs + the multiplicity pairing across the Sum split, mapping the flat l⊕l spectral data to
+  the split-index ν : l → ℝ + real orthogonal O with Oᵀ A O = the νₖ-block form) is a genuine
+  Mathlib gap (the real normal form for antisymmetric matrices), pinned as the frontier, NOT
+  faked. Std-3, budget 0. So Williamson is conditional on the Youla REAL-BLOCK ASSEMBLY only;
+  its spectral entry point is derived. THIS IS WHERE WILLIAMSON PLATEAUS honestly.

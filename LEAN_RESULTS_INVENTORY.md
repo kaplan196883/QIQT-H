@@ -1621,6 +1621,12 @@ analogue, a structure never an axiom). **CAMPAIGN COMPLETE (W1–W6, honest)**: 
   symplectic congruence S = √M⁻¹·O·E is CONSTRUCTED and both Sᵀ M S = D⊕D and S·J·Sᵀ = J proven (the sign fix:
   a block-swapped root reconciles Mathlib's J with Youla's orientation). W3's carried S-construction is retired —
   Williamson is now conditional on YoulaDecomp ALONE (the real-antisymmetric normal form, absent from Mathlib).
+  **Youla spectral entry point DERIVED** (W7): `iA_isHermitian` (i·A_ℂ Hermitian for real antisymmetric A ⟹ the
+  complex spectral theorem applies) + `iA_conj_antifixed` (the ±ν pairing seed). HONEST CHECKPOINT: the real-block
+  assembly (real-Schur O = [Re col, Im col] from conjugate eigenvector pairs + the multiplicity pairing across the
+  Sum split) is a genuine Mathlib gap — the real normal form for antisymmetric matrices — pinned as the frontier,
+  not faked. Williamson plateaus here: the S-construction and the spectral entry point are derived; the real-block
+  assembly is the precisely-characterized remaining wall.
   NOT unconditional Williamson; NOT unconditional Williamson; does NOT unlock the area-law S∝A
   scaling (area/volume-blind, a separate wall).
 

@@ -9076,6 +9076,14 @@ namespace QIQTH.AxiomAudit
 -- block-swapped E J E = O^T A O sign fix + Ri A Ri = J). Replaces W3's carried hconstr;
 -- Williamson now conditional on Youla ALONE (the real-skew normal form, absent from Mathlib). Std 3.
 #print axioms QIQTH.Williamson.williamson_of_youla
+-- THE WILLIAMSON YOULA W7 (WilliamsonNormalForm.lean): the Youla SPECTRAL ENTRY POINT --
+-- iA_isHermitian (for real antisymmetric A, i*A_C is Hermitian, so the complex spectral
+-- theorem applies) + iA_conj_antifixed (conj(iA_C) = -iA_C, the algebraic seed of the +/-nu
+-- eigenvalue pairing). HONEST CHECKPOINT: the real-block assembly (real-Schur extraction
+-- O = [Re col, Im col] from conjugate eigenvector pairs + the multiplicity pairing across the
+-- Sum split) is a genuine Mathlib gap -- pinned as the frontier, NOT faked. Std 3.
+#print axioms QIQTH.Williamson.iA_isHermitian
+#print axioms QIQTH.Williamson.iA_conj_antifixed
 -- THE WILLIAMSON W4+W5 (WilliamsonNormalForm.lean cont.): the entropy connection (QG payoff) --
 -- WilliamsonDecomp.entropy = sum of per-mode Srednicki gaussModeEntropy over the symplectic
 -- spectrum; entropy_nonneg (Heisenberg floor); = gaussStateEntropy on Fin n (rfl); the n=1

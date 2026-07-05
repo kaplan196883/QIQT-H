@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# The Williamson normal form — W1–W6: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection, and the DERIVED S-construction
+# The Williamson normal form — W1–W7: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection, the DERIVED S-construction, and the Youla spectral entry point
 
 Williamson's theorem states that a real symmetric positive-definite `2n × 2n` matrix `M` can be
 brought to the block-diagonal form `Sᵀ M S = D ⊕ D` (with `D = diagonal ν` the *symplectic
@@ -53,6 +53,23 @@ This file supplies **W1** and **W2** of the Williamson campaign:
   entropy `gaussModeEntropy (√(ab − c²)) ≥ 0`, wiring the repo's `oneModeSympEig` into the general
   structure through the Heisenberg-floor bound `oneModeSympEig_ge_half`.
 
+* **W7 (the Youla spectral entry point — real derived content toward discharging the carry):** the
+  route to the still-carried `YoulaDecomp` (the real antisymmetric normal form absent from Mathlib)
+  goes through the complexification.  `iA_isHermitian` proves that for a real antisymmetric `A`
+  (`Aᵀ = -A`) the matrix `iA_ℂ := Complex.I • (A.map Complex.ofReal)` is **Hermitian** over `ℂ`, so
+  the complex spectral theorem (`Matrix.IsHermitian.spectral_theorem`) applies and diagonalizes it
+  with real eigenvalues.  `iA_conj_antifixed` proves `conj(iA_ℂ) = -iA_ℂ` — the algebraic **seed of
+  the `± ν` eigenvalue pairing** (conjugating an eigenvector sends `λ ↦ -λ`, so the spectrum is
+  symmetric about `0`).  Both are axiom-free derived lemmas.  **The remaining wall (pinned, NOT
+  discharged):** the complex spectral theorem delivers a *complex* eigenvector unitary and real
+  eigenvalues over the **flat** index `l ⊕ l`; producing the split-index nonnegative spectrum
+  `ν : l → ℝ` (the positive members of the `± ν` pairs) and the **real** orthogonal `O` with
+  `Oᵀ A O = fromBlocks 0 (diag ν) (-(diag ν)) 0` requires (a) a multiplicity argument pairing the
+  symmetric eigenvalue multiset across the `Sum` split and (b) the real-Schur extraction
+  `O = [Re(colₖ), Im(colₖ)]` from conjugate eigenvector pairs.  Neither has any Mathlib support; this
+  is the genuine research-grade real-antisymmetric-normal-form gap.  A scratch probe confirmed the
+  spectral entry point compiles and the stall is exactly this flat-complex → real-block assembly.
+
 **Honest scope.**  W1–W2 are scaffolding + one carried hypothesis; W3 adds the real square-root
 entry point and the legacy `hconstr` packaging; W4–W5 land the entropy bridge on the
 `WilliamsonDecomp` structure directly (it does *not* need the construction — it consumes the
@@ -60,8 +77,10 @@ symplectic spectrum `ν` a decomposition already carries); **W6 DERIVES the bloc
 S-construction** (`williamson_of_youla`), retiring W3's carry.  Williamson is *not yet* proved
 unconditionally — it is proved **conditional on Youla alone** (`YoulaDecomp`, the real-antisymmetric
 normal form absent from Mathlib).  The single remaining carry is Youla; the S-construction and the
-entropy are genuine derivations.  Nothing here unlocks the area-law `S ∝ A` scaling (the entropy
-machinery is area/volume-blind).  Axiom-free.
+entropy are genuine derivations.  W7 lands the *spectral entry point* toward discharging the Youla
+carry (`iA_isHermitian`, `iA_conj_antifixed`) and pins the exact remaining obstruction (the
+flat-complex → real-block assembly) honestly — Youla itself is **still carried**.  Nothing here
+unlocks the area-law `S ∝ A` scaling (the entropy machinery is area/volume-blind).  Axiom-free.
 -/
 import Mathlib.LinearAlgebra.SymplecticGroup
 import Mathlib.LinearAlgebra.UnitaryGroup
@@ -404,5 +423,49 @@ noncomputable def williamson_of_youla (M : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hM :
       rw [e, hRiR, hRRi, Matrix.one_mul, Matrix.mul_one]
     exact hRiARi
   exact ⟨S, SymplecticGroup.mem_iff.mpr hSympForm, Y.ν, Y.hν, hDiagEq⟩
+
+/-! ### W7 — toward `youlaDecomp_of_antisymm`: the complex-Hermitian entry point
+
+The Youla real antisymmetric normal form (the single remaining carry, `YoulaDecomp`) is the real
+Schur / real-skew normal form absent from Mathlib.  The spectral route to it goes through the
+*complexification*: for a real antisymmetric `A` (`Aᵀ = -A`), the matrix `iA_ℂ := I • (A.map ℝ→ℂ)`
+is **Hermitian** over `ℂ`, so the complex spectral theorem applies and diagonalizes it with real
+eigenvalues.  The `± ν` pairing of those eigenvalues (from `A` real, hence `A_ℂ = conj A_ℂ`) and the
+assembly of conjugate eigenvectors into real `2×2` rotation blocks is the genuine research-grade
+wall.  This increment lands the **entry point** — the Hermitian fact that makes the complex spectral
+theorem available — as real derived content, and pins the remaining obstruction honestly. -/
+
+/-- **The complexified antisymmetric matrix `iA_ℂ = I • (A.map ℝ→ℂ)` is Hermitian.**  For a real
+    antisymmetric `A` (`Aᵀ = -A`), `A_ℂ := A.map Complex.ofReal` satisfies `(A_ℂ)ᴴ = (A_ℂ)ᵀ = -A_ℂ`
+    (the conjugate transpose is the transpose because the entries are real, and the transpose is `-A`
+    by antisymmetry).  Then `(I • A_ℂ)ᴴ = star I • (A_ℂ)ᴴ = (-I) • (-A_ℂ) = I • A_ℂ`, so `iA_ℂ` is
+    Hermitian.  This is the entry point that makes the complex spectral theorem applicable to the
+    Youla construction — real derived content, not carried. -/
+theorem iA_isHermitian (A : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hA : Aᵀ = -A) :
+    (Complex.I • A.map (Complex.ofReal)).IsHermitian := by
+  -- the complexified matrix has conjugate transpose equal to `-A_ℂ`
+  have hAc : (A.map (Complex.ofReal))ᴴ = -(A.map (Complex.ofReal)) := by
+    rw [← Matrix.conjTranspose_map Complex.ofReal (fun a => by simp),
+        Matrix.conjTranspose_eq_transpose_of_trivial, hA]
+    ext i j
+    simp
+  -- assemble the Hermitian condition
+  unfold Matrix.IsHermitian
+  rw [Matrix.conjTranspose_smul, hAc, Complex.star_def, Complex.conj_I, neg_smul, smul_neg,
+      neg_neg]
+
+/-- **The complexified matrix `iA_ℂ` is anti-fixed by entrywise conjugation: `conj(iA_ℂ) = -iA_ℂ`.**
+    Because `A` is real, `A_ℂ = A.map ofReal` is fixed by conjugation, while `conj I = -I`; hence
+    `map conj (I • A_ℂ) = -I • A_ℂ = -(I • A_ℂ)`.  This is the **algebraic seed of the `± ν`
+    eigenvalue pairing**: if `v` is an eigenvector of the Hermitian `iA_ℂ` with (real) eigenvalue `λ`,
+    then `conj v` is an eigenvector of `conj(iA_ℂ) = -iA_ℂ` with eigenvalue `λ`, i.e. an eigenvector
+    of `iA_ℂ` with eigenvalue `-λ`, so the spectrum is symmetric about `0`.  Real derived content. -/
+theorem iA_conj_antifixed (A : Matrix (l ⊕ l) (l ⊕ l) ℝ) :
+    (Complex.I • A.map (Complex.ofReal)).map (starRingEnd ℂ)
+      = -(Complex.I • A.map (Complex.ofReal)) := by
+  ext i j
+  simp only [Matrix.map_apply, Matrix.smul_apply, Matrix.neg_apply, smul_eq_mul, map_mul,
+    Complex.conj_I, Complex.conj_ofReal]
+  ring
 
 end QIQTH.Williamson
