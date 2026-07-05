@@ -12,7 +12,7 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 
 ## 0. Overall status (meta-audit, verified)
 
-- **2814 `#print axioms` directives** (2026-07-05 recount) in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
+- **2888 `#print axioms` directives** (current-HEAD recount; ~429 `.lean` files, ~4,550 theorem/lemma declarations) in `QIQTH/AxiomAudit.lean`; **zero raw `axiom` declarations**, **zero
   `sorry`/`sorryAx`** in code (full-tree grep: the 58 `sorry` string matches are all docstrings reading "No `sorry`" —
   0 real proof terms). Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` bodies are harmless
   labelled markers (`LorentzWitness.lean:180` indiscrete-preorder witness; the campaign `Checkpoint`/`…_complete` markers).
@@ -1800,7 +1800,7 @@ load-bearing role is in the gravity/area thread, *not* the selection mechanism (
 **Net (the calibrated read, now full-coverage):** the *distinctive new physics* claim ("finite information as
 fundamental") is the weakest part and should be scoped down to finite *entropy*. But the *genuine, substantial,
 machine-checked* content is larger than a "repackaging" verdict implies: the **full formal verification at
-299-file / ~3300-theorem scale**, the **Lieb-concavity/DPI/SSA tower** (Mathlib lacks it), the **unconditional
+~429-file / ~4,550-theorem scale**, the **Lieb-concavity/DPI/SSA tower** (Mathlib lacks it), the **unconditional
 one-particle BW + the OP3b boost-invariant measure**, and the **Born reduction** are all real and unusual. The
 honest framing is: *a rigorously machine-verified single-world interpretation + a substantial formalized
 operator-algebra/entropy library + a re-derivation of induced-gravity results* — modest on novel physics, strong
