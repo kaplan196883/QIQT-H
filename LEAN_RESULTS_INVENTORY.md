@@ -1605,6 +1605,22 @@ lattice area-law SCALING `S∝A`; the localization map `hTkk` smearing construct
 YM mass gap / SSB; the 4D background-independent manifold; λ's dynamical Lorentz-covariant law; the radiative
 Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
+**Area-law `S ∝ A` frontier — CHARACTERIZED as a genuine wall (2026-07-05, consult-verified).** The entropy
+machinery is complete to its honest ceiling: `GaussianStateEntropy` (the per-mode Srednicki entropy
+`(ν+½)log(ν+½)−(ν−½)log(ν−½)` with full calculus, the total-as-sum, `gaussStateEntropy_eq_sum_active` = "entropy
+counts entangled modes", one-mode Williamson ν=√det with the Heisenberg floor) + the DY region-entropy chain
+(`entropy_gibbs_region` S = ∑_{k∈R} modeEntropy, `Smicro_le_count` S ≤ ∑ log D_k). But the SCALING S ∝ A is NOT
+buildable and — the sharp point — NOT honestly carriable: **the Lean entropy machinery is IDENTICAL for an area
+law and a volume law** (both give "S ≤ (mode count)·(per-mode max)"), so the entire S∝A-vs-S∝V distinction lives
+in the boundary-mode count `#{ν>½} ∝ A`. Carrying that count as a hypothesis carries the WHOLE theorem — a
+decorative tautology, NOT the heat-kernel-a₁ house style (there the derived analytic number 1/48π multiplied an
+INDEPENDENT carried geometric integral; here the derived side is area/volume-blind and contributes nothing the
+carried count doesn't). The un-carriable content — the correlation-decay eigenvalue localization giving
+#active ∝ Area — is Srednicki's asymptotic analysis, needing N-mode Williamson (a Mathlib-grade gap) + the
+continuum limit. **General criterion (reusable): an increment is load-bearing only if the DERIVED side carries
+non-vacuous content the carried geometry does not** — the heat-kernel a₁/prefactor pass; the area-law fails.
+STOP for this vein.
+
 **Numerical-`G` frontier — PRECISELY CHARACTERIZED (2026-07-05, consult-verified).** `G` is DERIVED as the
 relation `G = 1/(N Λ_s²)` with the dimensionless content `G/a₀² = 1/N` a theorem (`InducedG`, §3) — `G` is an
 output, not a carried input. What blocks the *numerical value* is exactly ONE piece, now named: the induced `1/G`
