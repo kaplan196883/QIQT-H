@@ -9138,6 +9138,21 @@ namespace QIQTH.AxiomAudit
 -- verification (formalization-labor wall, NOT missing-lemma). youlaDecomp_of_antisymm STILL carried. Std 3.
 #print axioms QIQTH.Williamson.antisymm_card_even
 #print axioms QIQTH.Williamson.skewAdjoint_orthogonal_invariant
+-- THE WILLIAMSON YOULA W11 (WilliamsonNormalForm.lean §AbstractYoulaPairing): the ABSTRACT operator
+-- Youla pairing, PROVED UNCONDITIONALLY (no carry) by the classical dimension-halving strong induction
+-- on finrank ℝ E. For skew-adjoint a (⟪ax,y⟫=-⟪x,ay⟫) on fin-dim real E with Even (finrank E),
+-- youla_pairing gives an ON basis indexed by κ⊕κ with a(b(inl k))=-νk•b(inr k), a(b(inr k))=νk•b(inl k),
+-- ν≥0. Each step peels a 2×2 block P=span{p,q}: if a≠0, T:=a∘ₗa is symmetric neg-semidef and its MINIMAL
+-- eigenvalue μ₀=⨅Rayleigh<0 (BddBelow/ciInf_le + operator-norm bound) yields a unit T-eigenvector u with
+-- au≠0, w:=au/ν (ν=‖au‖=√(-μ₀)>0) closing au=ν•w, aw=-ν•u, u⊥w; if a=0, any ON pair is a ν=0 block. The
+-- complement Pᗮ is a-invariant (skewAdjoint_orthogonal_invariant), even-dim (finrank E - 2), carries the
+-- restricted skew aC:=a.restrict, and the IH furnishes its Youla basis, GLUED via an explicit Sum.elim
+-- family (orthonormality from P⊥Pᗮ, card = finrank E) upgraded through OrthonormalBasis.mk; the a-action
+-- verified index-by-index via ↑(aC x)=a ↑x. youla_pairing_aux is the finrank-indexed induction form.
+-- This DISCHARGES the Youla carry at the ABSTRACT operator level (the concrete Matrix→YoulaDecomp bridge
+-- remains the next increment). Std 3.
+#print axioms QIQTH.Williamson.youla_pairing
+#print axioms QIQTH.Williamson.youla_pairing_aux
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

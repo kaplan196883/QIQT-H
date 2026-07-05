@@ -227,3 +227,29 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   missing-lemma wall** (the honest correction to the W7–W9 framing). `youlaDecomp_of_antisymm`
   STILL carried; W10 lands the two recursion primitives + the exact residual goal. NO sorry in the
   committed file (the induction skeleton lived only in scratch, now deleted). Std-3, budget 0.
+
+- **2026-07-05** — **YOULA W11 — the abstract operator `youla_pairing` CLOSED, FULLY, no sorry (the
+  Youla carry DISCHARGED at the operator level).** `§AbstractYoulaPairing`: `youla_pairing` — for a
+  finite-dimensional real inner product space `E` and a skew-adjoint `a` (`⟪a x,y⟫ = -⟪x,a y⟫`) with
+  `Even (finrank ℝ E)`, there is an `OrthonormalBasis (κ⊕κ) ℝ E` block-pairing `a` into `ν`-rotation
+  `2×2` blocks (`a (b (inl k)) = -ν k • b (inr k)`, `a (b (inr k)) = ν k • b (inl k)`, `ν ≥ 0`).
+  Proved UNCONDITIONALLY by the classical dimension-halving strong induction on `finrank ℝ E`
+  (`youla_pairing_aux`, the finrank-indexed form via `Nat.strong_induction_on`). Each step peels ONE
+  `2×2` block `P = span{p,q}`: **(a≠0)** `T := a ∘ₗ a` is symmetric + negative-semidefinite, and its
+  MINIMAL eigenvalue `μ₀ = ⨅ Rayleigh < 0` — the strict negativity extracted via `BddBelow`
+  (operator-norm bound `‖a x‖ ≤ ‖a.toContinuousLinearMap‖·‖x‖`) + `ciInf_le` against a witness `a v₀ ≠ 0`
+  — gives a unit `T`-eigenvector `u` with `a u ≠ 0`; `w := ‖a u‖⁻¹ • a u` (`ν := ‖a u‖ = √(-μ₀) > 0`)
+  closes the rotation block `a u = ν•w`, `a w = -ν•u`, `u ⊥ w`. **(a=0)** any orthonormal pair (built
+  via `(ℝ ∙ u)ᗮ` nonzero) is a `ν = 0` block. The complement `Pᗮ` is `a`-invariant
+  (`skewAdjoint_orthogonal_invariant`, W10), even-dim `finrank E - 2`, and carries the restricted
+  skew-adjoint `aC := a.restrict`; the **induction hypothesis** furnishes its Youla basis `bC`, GLUED
+  to `{p,q}` by an explicit `Sum.elim` family whose orthonormality (from `P ⊥ Pᗮ`, via
+  `inner_right_of_mem_orthogonal`) and cardinality (`= finrank E`) upgrade it to an `OrthonormalBasis`
+  through `OrthonormalBasis.mk` + `span_eq_top_of_card_eq_finrank'`; the `a`-action is verified
+  index-by-index through `↑(aC x) = a ↑x`. This is the CORRECTION landing of W10's honest stall: the
+  "formalization-labor wall" is now CROSSED — the abstract operator core is **no longer carried**.
+  `#print axioms youla_pairing` = `youla_pairing_aux` = `{propext, Classical.choice, Quot.sound}`
+  (Std-3), budget 0, NO sorry. **Remaining:** the concrete `Matrix (l⊕l)(l⊕l) → YoulaDecomp` bridge
+  (`E := EuclideanSpace ℝ (l⊕l)`, `a := toEuclideanLin A`, ON basis → orthogonal `O` via
+  `OrthonormalBasis.toMatrix`, match `fromBlocks`) is the NEXT increment; `youlaDecomp_of_antisymm`
+  as a `YoulaDecomp`-structure inhabitant is one `toMatrix` hop away.

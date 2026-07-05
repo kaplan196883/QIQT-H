@@ -820,4 +820,285 @@ theorem skewAdjoint_orthogonal_invariant {E : Type*} [NormedAddCommGroup E]
 
 end RealYoulaRecursion
 
+/-! ### W11 — the ABSTRACT operator Youla pairing: `youla_pairing`, FULLY PROVED (no carry)
+
+The operator-level heart of the Youla real antisymmetric normal form, proved **unconditionally** by
+the classical dimension-halving strong induction on `finrank ℝ E`.  For a finite-dimensional real
+inner product space `E` and a skew-adjoint operator `a` (`⟪a x, y⟫ = -⟪x, a y⟫`) with `Even
+(finrank ℝ E)`, there is an orthonormal basis indexed by `κ ⊕ κ` that block-pairs `a` into
+`ν`-rotation `2×2` blocks: `a (b (inl k)) = -ν k • b (inr k)`, `a (b (inr k)) = ν k • b (inl k)`,
+with `ν ≥ 0`.
+
+**The engine.**  Each recursion step peels a single `2×2` block `P = span{p, q}`:
+
+* If `a ≠ 0`: `T := a ∘ₗ a` is symmetric and negative semidefinite; its **minimal** eigenvalue
+  `μ₀ = ⨅ Rayleigh < 0` (the infimum is `< 0` because `a ≠ 0`, via a `BddBelow`/`ciInf_le`
+  operator-norm bound), giving a unit `T`-eigenvector `u` with `a u ≠ 0`; then `w := a u / ν`
+  (`ν := ‖a u‖ = √(-μ₀) > 0`) closes the rotation block `a u = ν • w`, `a w = -ν • u`, `u ⊥ w`.
+* If `a = 0`: any two orthonormal vectors form a `ν = 0` block.
+
+The complement `Pᗮ` is `a`-invariant (`skewAdjoint_orthogonal_invariant`), has even dimension
+`finrank E - 2`, and carries the restricted skew-adjoint `aC := a.restrict`; the **induction
+hypothesis** furnishes its Youla basis, which is glued to the block frame `{p, q}` by an explicit
+`Sum.elim` family whose orthonormality (`P ⊥ Pᗮ`) and cardinality (`= finrank E`) upgrade it to an
+`OrthonormalBasis` via `OrthonormalBasis.mk`.  The `a`-action is verified index-by-index through the
+inclusion `↑(aC x) = a ↑x`.  **Fully axiom-free (std-3); this is the abstract core discharging the
+Youla carry at the operator level.**  (The concrete `Matrix (l⊕l)(l⊕l) → YoulaDecomp` bridge —
+`E := EuclideanSpace ℝ (l⊕l)`, `a := toEuclideanLin A`, ON basis → orthogonal `O` via
+`OrthonormalBasis.toMatrix` → `fromBlocks` — is the NEXT increment, not done here.) -/
+
+section AbstractYoulaPairing
+
+open Module
+open scoped InnerProductSpace
+
+/-- **The abstract Youla pairing (finrank-indexed strong-induction form).**  For each `n`, every
+    `n`-dimensional real inner product space with a skew-adjoint operator and `Even n` admits the
+    block-pairing orthonormal basis.  Proved by strong induction on `n` (peel a `2×2` block, recurse
+    on the even-dimensional invariant complement). -/
+theorem youla_pairing_aux : ∀ (n : ℕ) {E : Type u} [NormedAddCommGroup E]
+    [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] (a : E →ₗ[ℝ] E),
+    (∀ x y, ⟪a x, y⟫_ℝ = -⟪x, a y⟫_ℝ) → finrank ℝ E = n → Even n →
+    ∃ (κ : Type) (_ : Fintype κ) (b : OrthonormalBasis (κ ⊕ κ) ℝ E) (ν : κ → ℝ),
+      (∀ k, 0 ≤ ν k) ∧
+      (∀ k, a (b (Sum.inl k)) = -ν k • b (Sum.inr k)) ∧
+      (∀ k, a (b (Sum.inr k)) = ν k • b (Sum.inl k)) := by
+  intro n
+  induction n using Nat.strong_induction_on with
+  | _ n IH =>
+    intro E _ _ _ a ha hn hEven
+    rcases Nat.eq_zero_or_pos n with hn0 | hnpos
+    · -- base case: `finrank E = 0`, empty basis, everything vacuous
+      refine ⟨Empty, inferInstance,
+        OrthonormalBasis.mk (v := fun k => isEmptyElim k) (Orthonormal.of_isEmpty (𝕜 := ℝ) _) ?_,
+        fun k => k.elim, fun k => k.elim, fun k => k.elim, fun k => k.elim⟩
+      have hcard : Fintype.card (Empty ⊕ Empty) = finrank ℝ E := by rw [hn, hn0]; simp
+      exact (linearIndependent_empty_type.span_eq_top_of_card_eq_finrank' hcard).ge
+    · -- inductive step: `n = 2·t ≥ 2`
+      obtain ⟨t, ht⟩ := hEven
+      have hn2 : 2 ≤ n := by omega
+      -- STEP 1: extract a single `2×2` block `(p, q, ν)` with `a p = -ν•q`, `a q = ν•p`
+      obtain ⟨p, q, ν, hp1, hq1, hpq, hν0, hap, haq⟩ :
+          ∃ (p q : E) (ν : ℝ), ‖p‖ = 1 ∧ ‖q‖ = 1 ∧ ⟪p, q⟫_ℝ = 0 ∧ 0 ≤ ν ∧
+            a p = -ν • q ∧ a q = ν • p := by
+        by_cases hazero : a = 0
+        · -- `a = 0`: any orthonormal pair is a `ν = 0` block
+          haveI : Nontrivial E := Module.nontrivial_of_finrank_pos (show 0 < finrank ℝ E by rw [hn]; exact hnpos)
+          obtain ⟨x, hx⟩ := exists_ne (0 : E)
+          have hxne : ‖x‖ ≠ 0 := norm_ne_zero_iff.mpr hx
+          set u := (‖x‖⁻¹ : ℝ) • x with hudef
+          have hu1 : ‖u‖ = 1 := by
+            rw [hudef, norm_smul, norm_inv, Real.norm_eq_abs, abs_of_pos (norm_pos_iff.mpr hx),
+              inv_mul_cancel₀ hxne]
+          have huneq : u ≠ 0 := by rw [hudef]; exact smul_ne_zero (inv_ne_zero hxne) hx
+          have hdimperp : 0 < finrank ℝ (ℝ ∙ u)ᗮ := by
+            have h1 := Submodule.finrank_add_finrank_orthogonal (ℝ ∙ u)
+            rw [finrank_span_singleton huneq] at h1
+            omega
+          haveI : Nontrivial ↥((ℝ ∙ u)ᗮ) := Module.nontrivial_of_finrank_pos hdimperp
+          obtain ⟨y', hy'⟩ := exists_ne (0 : ↥((ℝ ∙ u)ᗮ))
+          have hyne : (y' : E) ≠ 0 := by simpa only [ne_eq, Submodule.coe_eq_zero] using hy'
+          have hynorm : ‖(y' : E)‖ ≠ 0 := norm_ne_zero_iff.mpr hyne
+          set w := (‖(y' : E)‖⁻¹ : ℝ) • (y' : E) with hwdef
+          have hw1 : ‖w‖ = 1 := by
+            rw [hwdef, norm_smul, norm_inv, Real.norm_eq_abs, abs_of_pos (norm_pos_iff.mpr hyne),
+              inv_mul_cancel₀ hynorm]
+          have huw : ⟪u, w⟫_ℝ = 0 := by
+            rw [hwdef, real_inner_smul_right,
+              Submodule.mem_orthogonal_singleton_iff_inner_right.mp y'.2, mul_zero]
+          exact ⟨u, w, 0, hu1, hw1, huw, le_refl 0, by simp [hazero], by simp [hazero]⟩
+        · -- `a ≠ 0`: minimal eigenvector of `T := a ∘ₗ a` gives a genuine `ν > 0` block
+          haveI : Nontrivial E := Module.nontrivial_of_finrank_pos (show 0 < finrank ℝ E by rw [hn]; exact hnpos)
+          obtain ⟨v₀, hv₀ne⟩ := DFunLike.ne_iff.mp hazero
+          rw [LinearMap.zero_apply] at hv₀ne
+          have hv₀0 : v₀ ≠ 0 := fun h => hv₀ne (by rw [h, map_zero])
+          have hTsymm : (a ∘ₗ a).IsSymmetric := by
+            intro x y
+            simp only [LinearMap.comp_apply]
+            rw [ha (a x) y, ha x (a y), neg_neg]
+          set μ₀ : ℝ :=
+            ⨅ z : {z : E // z ≠ 0}, RCLike.re ⟪(a ∘ₗ a) (z : E), (z : E)⟫_ℝ / ‖(z : E)‖ ^ 2 with hμ₀
+          have hev : Module.End.HasEigenvalue (a ∘ₗ a) μ₀ :=
+            hTsymm.hasEigenvalue_iInf_of_finiteDimensional
+          have hbdd : BddBelow (Set.range fun z : {z : E // z ≠ 0} =>
+              RCLike.re ⟪(a ∘ₗ a) (z : E), (z : E)⟫_ℝ / ‖(z : E)‖ ^ 2) := by
+            refine ⟨-‖(a.toContinuousLinearMap : E →L[ℝ] E)‖ ^ 2, ?_⟩
+            rintro _ ⟨⟨z, hz⟩, rfl⟩
+            show -‖(a.toContinuousLinearMap : E →L[ℝ] E)‖ ^ 2
+              ≤ RCLike.re ⟪(a ∘ₗ a) z, z⟫_ℝ / ‖z‖ ^ 2
+            have hz2 : 0 < ‖z‖ ^ 2 := pow_pos (norm_pos_iff.mpr hz) 2
+            have hnum : RCLike.re ⟪(a ∘ₗ a) (z : E), (z : E)⟫_ℝ = -‖a z‖ ^ 2 := by
+              rw [RCLike.re_to_real]; simp only [LinearMap.comp_apply]
+              rw [ha (a z) z, real_inner_self_eq_norm_sq]
+            rw [hnum, neg_div, neg_le_neg_iff, div_le_iff₀ hz2]
+            have hle : ‖a z‖ ≤ ‖(a.toContinuousLinearMap : E →L[ℝ] E)‖ * ‖z‖ := by
+              have h := (a.toContinuousLinearMap).le_opNorm z
+              rwa [LinearMap.coe_toContinuousLinearMap'] at h
+            calc ‖a z‖ ^ 2 = ‖a z‖ * ‖a z‖ := pow_two _
+              _ ≤ (‖(a.toContinuousLinearMap : E →L[ℝ] E)‖ * ‖z‖)
+                    * (‖(a.toContinuousLinearMap : E →L[ℝ] E)‖ * ‖z‖) :=
+                  mul_self_le_mul_self (norm_nonneg _) hle
+              _ = ‖(a.toContinuousLinearMap : E →L[ℝ] E)‖ ^ 2 * ‖z‖ ^ 2 := by ring
+          have hfv₀ : RCLike.re ⟪(a ∘ₗ a) v₀, v₀⟫_ℝ / ‖v₀‖ ^ 2 < 0 := by
+            have hnum : RCLike.re ⟪(a ∘ₗ a) v₀, v₀⟫_ℝ = -‖a v₀‖ ^ 2 := by
+              rw [RCLike.re_to_real]; simp only [LinearMap.comp_apply]
+              rw [ha (a v₀) v₀, real_inner_self_eq_norm_sq]
+            rw [hnum]
+            exact div_neg_of_neg_of_pos (neg_lt_zero.mpr (pow_pos (norm_pos_iff.mpr hv₀ne) 2))
+              (pow_pos (norm_pos_iff.mpr hv₀0) 2)
+          have hμ₀neg : μ₀ < 0 := by
+            rw [hμ₀]; exact lt_of_le_of_lt (ciInf_le hbdd ⟨v₀, hv₀0⟩) hfv₀
+          obtain ⟨u₀, hu₀ev⟩ := hev.exists_hasEigenvector
+          have hu₀0 : u₀ ≠ 0 := hu₀ev.2
+          have hTu₀ : (a ∘ₗ a) u₀ = μ₀ • u₀ := hu₀ev.apply_eq_smul
+          have hu₀norm : ‖u₀‖ ≠ 0 := norm_ne_zero_iff.mpr hu₀0
+          set u := (‖u₀‖⁻¹ : ℝ) • u₀ with hudef
+          have hu1 : ‖u‖ = 1 := by
+            rw [hudef, norm_smul, norm_inv, Real.norm_eq_abs, abs_of_pos (norm_pos_iff.mpr hu₀0),
+              inv_mul_cancel₀ hu₀norm]
+          have hTu : (a ∘ₗ a) u = μ₀ • u := by rw [hudef, map_smul, hTu₀, smul_comm]
+          have hau_ne : a u ≠ 0 := by
+            intro h
+            have h1 : ⟪(a ∘ₗ a) u, u⟫_ℝ = μ₀ := by
+              rw [hTu, real_inner_smul_left, real_inner_self_eq_norm_sq, hu1]; norm_num
+            have h2 : ⟪(a ∘ₗ a) u, u⟫_ℝ = 0 := by
+              simp only [LinearMap.comp_apply, h, map_zero, inner_zero_left]
+            rw [h2] at h1; linarith
+          set ν := ‖a u‖ with hνdef
+          have hνpos : 0 < ν := by rw [hνdef]; exact norm_pos_iff.mpr hau_ne
+          have hνne : ν ≠ 0 := hνpos.ne'
+          have hνsq : ν ^ 2 = -μ₀ := by
+            have h3 : ⟪(a ∘ₗ a) u, u⟫_ℝ = -‖a u‖ ^ 2 := by
+              simp only [LinearMap.comp_apply]; rw [ha (a u) u, real_inner_self_eq_norm_sq]
+            have h4 : ⟪(a ∘ₗ a) u, u⟫_ℝ = μ₀ := by
+              rw [hTu, real_inner_smul_left, real_inner_self_eq_norm_sq, hu1]; norm_num
+            rw [hνdef]; linarith
+          set w := (ν⁻¹ : ℝ) • a u with hwdef
+          have hw1 : ‖w‖ = 1 := by
+            rw [hwdef, norm_smul, norm_inv, Real.norm_eq_abs, abs_of_pos hνpos, ← hνdef,
+              inv_mul_cancel₀ hνne]
+          have hawu : ν • w = a u := by
+            rw [hwdef, smul_smul, mul_inv_cancel₀ hνne, one_smul]
+          have hscalar : ν⁻¹ * μ₀ = -ν := by
+            have hμ : μ₀ = -ν ^ 2 := by rw [hνsq]; ring
+            rw [hμ, mul_neg, pow_two, ← mul_assoc, inv_mul_cancel₀ hνne, one_mul]
+          have haw : a w = -ν • u := by
+            rw [hwdef, map_smul, ← LinearMap.comp_apply, hTu, smul_smul, hscalar]
+          have huw : ⟪u, w⟫_ℝ = 0 := by
+            rw [hwdef, real_inner_smul_right]
+            have h5 := ha u u
+            have h5' := real_inner_comm u (a u)
+            have h6 : ⟪u, a u⟫_ℝ = 0 := by linarith [h5, h5']
+            rw [h6, mul_zero]
+          exact ⟨w, u, ν, hw1, hu1, by rw [real_inner_comm]; exact huw, hνpos.le, haw, hawu.symm⟩
+      -- STEP 2: the `2×2` block subspace `P = span {p, q}` and its `a`-invariant complement `Pᗮ`
+      set P : Submodule ℝ E := Submodule.span ℝ (Set.range ![p, q]) with hPdef
+      have hon_pq : Orthonormal ℝ ![p, q] := by
+        rw [orthonormal_vecCons_iff]
+        refine ⟨hp1, ?_, ?_⟩
+        · intro i
+          fin_cases i
+          show ⟪p, q⟫_ℝ = 0
+          exact hpq
+        · rw [orthonormal_vecCons_iff]
+          exact ⟨hq1, fun i => i.elim0, Orthonormal.of_isEmpty (𝕜 := ℝ) _⟩
+      have hpP : p ∈ P := Submodule.subset_span ⟨0, by simp⟩
+      have hqP : q ∈ P := Submodule.subset_span ⟨1, by simp⟩
+      have hfinP : finrank ℝ P = 2 := by
+        rw [hPdef, finrank_span_eq_card hon_pq.linearIndependent]; simp
+      have hinv : ∀ x ∈ P, a x ∈ P := by
+        intro x hx
+        induction hx using Submodule.span_induction with
+        | mem z hz =>
+            obtain ⟨i, rfl⟩ := hz
+            fin_cases i
+            · show a p ∈ P
+              rw [hap]; exact P.smul_mem _ hqP
+            · show a q ∈ P
+              rw [haq]; exact P.smul_mem _ hpP
+        | zero => simpa using P.zero_mem
+        | add x y _ _ ihx ihy => rw [map_add]; exact P.add_mem ihx ihy
+        | smul c x _ ihx => rw [map_smul]; exact P.smul_mem c ihx
+      have hinvC : ∀ x ∈ Pᗮ, a x ∈ Pᗮ := skewAdjoint_orthogonal_invariant a ha P hinv
+      set aC : ↥(Pᗮ) →ₗ[ℝ] ↥(Pᗮ) := a.restrict hinvC with haCdef
+      have haC_coe : ∀ x : ↥(Pᗮ), ((aC x : ↥(Pᗮ)) : E) = a (x : E) := by
+        intro x; rw [haCdef]; rfl
+      have haC : ∀ x y : ↥(Pᗮ), ⟪aC x, y⟫_ℝ = -⟪x, aC y⟫_ℝ := by
+        intro x y
+        rw [Submodule.coe_inner, Submodule.coe_inner, haC_coe, haC_coe]
+        exact ha x y
+      have hsum := Submodule.finrank_add_finrank_orthogonal P
+      rw [hfinP, hn] at hsum
+      have hlt : finrank ℝ Pᗮ < n := by omega
+      have hEvenPerp : Even (finrank ℝ Pᗮ) := ⟨t - 1, by omega⟩
+      -- STEP 3: recurse on the even-dimensional complement
+      obtain ⟨κ', instκ', bC, νC, hνC, hCinl, hCinr⟩ :=
+        IH (finrank ℝ Pᗮ) hlt aC haC rfl hEvenPerp
+      letI : Fintype κ' := instκ'
+      letI : DecidableEq κ' := Classical.decEq κ'
+      -- STEP 4: glue the block frame `{p, q}` to the recursive basis `bC`
+      set vv : (Unit ⊕ κ') ⊕ (Unit ⊕ κ') → E :=
+        Sum.elim (Sum.elim (fun _ => p) (fun k => (bC (Sum.inl k) : E)))
+                 (Sum.elim (fun _ => q) (fun k => (bC (Sum.inr k) : E))) with hvvdef
+      set νfull : Unit ⊕ κ' → ℝ := Sum.elim (fun _ => ν) νC with hνfulldef
+      have hbb : ∀ z z' : κ' ⊕ κ',
+          ⟪(bC z : E), (bC z' : E)⟫_ℝ = if z = z' then (1 : ℝ) else 0 := by
+        intro z z'; rw [← Submodule.coe_inner]; exact orthonormal_iff_ite.mp bC.orthonormal z z'
+      have hPbot : ∀ z : κ' ⊕ κ', ∀ x ∈ P, ⟪x, (bC z : E)⟫_ℝ = 0 :=
+        fun z x hx => Submodule.inner_right_of_mem_orthogonal hx (bC z).2
+      have hon : Orthonormal ℝ vv := by
+        rw [orthonormal_iff_ite]
+        have hpp : ⟪p, p⟫_ℝ = 1 := by rw [real_inner_self_eq_norm_sq, hp1]; norm_num
+        have hqq : ⟪q, q⟫_ℝ = 1 := by rw [real_inner_self_eq_norm_sq, hq1]; norm_num
+        have hqp : ⟪q, p⟫_ℝ = 0 := by rw [real_inner_comm]; exact hpq
+        have hpbC : ∀ z, ⟪p, (bC z : E)⟫_ℝ = 0 := fun z => hPbot z p hpP
+        have hqbC : ∀ z, ⟪q, (bC z : E)⟫_ℝ = 0 := fun z => hPbot z q hqP
+        have hbCp : ∀ z, ⟪(bC z : E), p⟫_ℝ = 0 := fun z => by rw [real_inner_comm]; exact hpbC z
+        have hbCq : ∀ z, ⟪(bC z : E), q⟫_ℝ = 0 := fun z => by rw [real_inner_comm]; exact hqbC z
+        rintro ((⟨⟩ | k) | (⟨⟩ | k)) ((⟨⟩ | l) | (⟨⟩ | l)) <;>
+          simp [hvvdef, hp1, hq1, hpp, hqq, hpq, hqp, hpbC, hqbC, hbCp, hbCq, hbb]
+      have hcardC : finrank ℝ Pᗮ = Fintype.card (κ' ⊕ κ') := finrank_eq_card_basis bC.toBasis
+      have hcard : Fintype.card ((Unit ⊕ κ') ⊕ (Unit ⊕ κ')) = finrank ℝ E := by
+        simp only [Fintype.card_sum, Fintype.card_unit] at hcardC ⊢
+        omega
+      have hspan : ⊤ ≤ Submodule.span ℝ (Set.range vv) :=
+        (hon.linearIndependent.span_eq_top_of_card_eq_finrank' hcard).ge
+      set b : OrthonormalBasis ((Unit ⊕ κ') ⊕ (Unit ⊕ κ')) ℝ E :=
+        OrthonormalBasis.mk hon hspan with hbdef
+      have hbcoe : ⇑b = vv := OrthonormalBasis.coe_mk hon hspan
+      refine ⟨Unit ⊕ κ', inferInstance, b, νfull, ?_, ?_, ?_⟩
+      · intro k
+        rcases k with ⟨⟩ | k'
+        · simpa only [hνfulldef, Sum.elim_inl] using hν0
+        · simpa only [hνfulldef, Sum.elim_inr] using hνC k'
+      · intro k
+        rw [hbcoe]
+        rcases k with ⟨⟩ | k'
+        · simp only [hvvdef, hνfulldef, Sum.elim_inl, Sum.elim_inr]; exact hap
+        · simp only [hvvdef, hνfulldef, Sum.elim_inl, Sum.elim_inr]
+          rw [← haC_coe, hCinl k', Submodule.coe_smul]
+      · intro k
+        rw [hbcoe]
+        rcases k with ⟨⟩ | k'
+        · simp only [hvvdef, hνfulldef, Sum.elim_inl, Sum.elim_inr]; exact haq
+        · simp only [hvvdef, hνfulldef, Sum.elim_inl, Sum.elim_inr]
+          rw [← haC_coe, hCinr k', Submodule.coe_smul]
+
+/-- **The abstract operator Youla pairing.**  For a finite-dimensional real inner product space `E`
+    and a skew-adjoint operator `a` (`⟪a x, y⟫ = -⟪x, a y⟫`) with `Even (finrank ℝ E)`, there is an
+    orthonormal basis indexed by `κ ⊕ κ` block-pairing `a` into `ν`-rotation `2×2` blocks
+    (`a (b (inl k)) = -ν k • b (inr k)`, `a (b (inr k)) = ν k • b (inl k)`), with `ν ≥ 0`.  This is
+    the coordinate-free heart of the Youla real antisymmetric normal form, **proved unconditionally**
+    (no carry). -/
+theorem youla_pairing {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+    [FiniteDimensional ℝ E] (a : E →ₗ[ℝ] E)
+    (ha : ∀ x y, ⟪a x, y⟫_ℝ = -⟪x, a y⟫_ℝ) (hdim : Even (finrank ℝ E)) :
+    ∃ (κ : Type) (_ : Fintype κ) (b : OrthonormalBasis (κ ⊕ κ) ℝ E) (ν : κ → ℝ),
+      (∀ k, 0 ≤ ν k) ∧
+      (∀ k, a (b (Sum.inl k)) = -ν k • b (Sum.inr k)) ∧
+      (∀ k, a (b (Sum.inr k)) = ν k • b (Sum.inl k)) :=
+  youla_pairing_aux (finrank ℝ E) a ha rfl hdim
+
+end AbstractYoulaPairing
+
 end QIQTH.Williamson
