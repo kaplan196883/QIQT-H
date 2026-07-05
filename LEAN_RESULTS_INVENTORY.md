@@ -1653,7 +1653,12 @@ SimpleForwardPath, via the minimal-walk splice-shortens argument `dedup_aux` + n
 directed analogue of `Walk.bypass`, absent from Mathlib) and the capstone `forwardReachable_augments` (forward
 residual reachability ⟹ a strictly larger flow — the forward Ford–Fulkerson haug, FULLY DERIVED). **Max-flow's
 ENTIRE FORWARD side is now machine-checked** (combinatorial core + augmentation mechanism + directed dedup);
-only mixed forward/backward residual paths and max-flow existence remain carried.
+**M10** derives the mixed-direction augmentation: `residualAugPath_augments` — a typed
+degree-structured residual path (Pf forward + Pb backward edges) yields a strictly larger flow (g = f ± ε, all
+four IsSTFlow fields derived, the ±ε conservation via linear_combination — outgoing step +ε, incoming −ε
+regardless of type). ForwardAugPath is the Pb = ∅ case. So max-flow's ENTIRE augmentation mechanism (forward +
+mixed) is now derived; carried: only the mixed EXTRACTION (adapt the M8/M9 directed dedup to typed residual
+walks) + max-flow existence (the analytic frontier).
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks

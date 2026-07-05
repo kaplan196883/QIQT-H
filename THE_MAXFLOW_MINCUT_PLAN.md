@@ -156,3 +156,14 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   DERIVED, no carried augmentation). Std-3, budget 0. **Max-flow: the ENTIRE FORWARD side is
   now derived** (core M1-M3 + augmentation M4-M8 + directed dedup M9); only mixed
   forward/backward residual paths and max-flow EXISTENCE remain carried.
+
+- **2026-07-05** — **M10 LANDED (green first attempt) — the MIXED-DIRECTION augmentation.**
+  ResidualAugPath (typed edge sets Pf forward-residual + Pb backward-residual, the combined
+  residual degree structure hDeg/hs/ht counting both) + ★ residualAugPath_augments:
+  g = f + ε·(Pf indicator) − ε·(Pb-reverse indicator) yields a strictly larger flow, ALL FOUR
+  IsSTFlow fields DERIVED. The ±ε conservation crux (the Pb sign bookkeeping the plan flagged
+  as the likely stall) resolved cleanly via linear_combination — an outgoing residual step
+  contributes +ε to excess and an incoming −ε, regardless of forward/backward type, so hDeg ⟹
+  interior conservation. ForwardAugPath is now the Pb = ∅ special case. Std-3, budget 0.
+  **Max-flow's entire AUGMENTATION MECHANISM (forward + mixed) is now derived**; carried:
+  the mixed EXTRACTION (adapt the M8/M9 dedup to typed residual walks) + max-flow existence.

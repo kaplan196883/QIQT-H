@@ -63,6 +63,20 @@ combinatorial content of the hard half of max-flow = min-cut, discharging the co
   shelf (Mathlib's `bypass`/`fromRel` are undirected). **This DISCHARGES M8's lone carried piece (a′)**:
   composed with `augment_of_simpleForwardPath`, forward residual reachability `s ⇝ t` alone yields a
   strictly larger flow.
+* **M10** `ResidualAugPath` / `residualAugPath_augments` — **the mixed-direction augmentation.** A
+  `ResidualAugPath` packages a general residual augmenting path as TWO typed directed-edge relations —
+  forward residual edges `Pf` (slack `cap − f`) and backward residual edges `Pb` (cancel real flow) —
+  with the COMBINED residual degree structure (`#Pf-out + #Pb-out = #Pf-in + #Pb-in` at interior
+  vertices; source `+1`, sink `−1`). The augmented flow
+  `g u v := f u v + (if Pf u v then ε) − (if Pb v u then ε)` adds `ε` on forward edges and cancels `ε`
+  on the real edge that a backward residual edge reverses. `residualAugPath_augments` re-proves the full
+  `IsSTFlow` (nonneg uses `ε ≤ f` on cancelled edges, capacity uses `f + ε ≤ cap` on forward edges,
+  conservation via the combined degree structure — the key sign bookkeeping that an OUTGOING residual
+  step contributes `+ε` and an INCOMING one `−ε` REGARDLESS of forward/backward type) and raises the
+  value by `ε` at the source. This generalizes M7's forward-only `forwardAugPath_augments` to the mixed
+  forward/backward residual paths of general Ford–Fulkerson — discharging carry (b) at the
+  degree-structured level (the mixed walk→degree-structure extraction, the M8/M9 analogue for the
+  full `ResidualStep`, remains carried).
 
 **Honest scope:** M1–M3 reduce ExactRT's gap to the single sharp condition `t ∉ residualCut cap f s`
 (no augmenting path from a maximum flow); M4–M5 derive that condition and the capstone
@@ -893,5 +907,141 @@ theorem forwardReachable_augments {cap : V → V → ℝ} {s t : V} {f : V → V
   exact augment_of_simpleForwardPath hf SP
 
 end DirectedDedup
+
+/-! ### M10 — the mixed-direction augmentation (general Ford–Fulkerson residual path)
+
+M7 handled a FORWARD-only degree-structured path. M10 handles the general residual augmenting path,
+which carries a per-step DIRECTION: a step out of a vertex is either a *forward* residual edge (unused
+capacity, `cap − f`) or a *backward* residual edge (cancelling real flow, `f` on the reverse edge). We
+package the path as two typed directed-edge relations `Pf` (forward) and `Pb` (backward), with the
+COMBINED residual degree structure. The augmented flow is
+`g u v := f u v + (if Pf u v then ε) − (if Pb v u then ε)`: a forward edge `u→v` adds `ε` to `f u v`;
+a backward residual edge `Pb v u` (which reverses the real edge `u→v`) subtracts `ε` from `f u v`.
+
+The conservation crux is the sign bookkeeping: at any vertex `w`,
+`vertexExcess g w = vertexExcess f w + ε·[(Pf-out + Pb-out) − (Pf-in + Pb-in)]`, using the
+`∑ (if R then ε) = ε·card` helper FOUR times. The Pb terms land on the *opposite* out/in slot of the
+excess (a `Pb w v` edge, cancelling real `v→w`, reduces `f v w` — an INCOMING quantity to `w` — hence
+appears in `w`'s in-sum with a minus, i.e. contributes `+ε` to out-minus-in), so an OUTGOING residual
+step contributes `+ε` and an INCOMING one `−ε` REGARDLESS of type. The combined degree structure
+(`hDeg`) makes the bracket vanish at interior vertices; `hs` makes it `+1` at the source. -/
+
+/-- **M10 — a mixed residual augmenting `s`-`t` path**, as two typed directed-edge relations. `Pf` are
+forward residual edges `u→v` (forward slack `cap u v − f u v`); `Pb` are backward residual edges `u→v`
+(they cancel the real edge `v→u`, whose flow `f v u > 0`). The *combined residual degree* — counting
+`Pf`- and `Pb`-edges together — is that of a simple `s`-`t` path: interior out = in (`hDeg`), source
+`+1` out (`hs`), sink `+1` in (`ht`). `hfslack`/`hbpos` record residual admissibility. This is the
+mixed-direction generalization of `ForwardAugPath` (which is the `Pb = ∅` special case). -/
+structure ResidualAugPath (cap : V → V → ℝ) (s t : V) (f : V → V → ℝ) where
+  /-- Forward residual edges (unused capacity). -/
+  Pf : V → V → Prop
+  /-- Backward residual edges (cancel real flow on the reverse edge). -/
+  Pb : V → V → Prop
+  /-- Interior vertices: combined (forward + backward) out-degree = in-degree. -/
+  hDeg : ∀ w, w ≠ s → w ≠ t →
+    (Finset.univ.filter (fun v => Pf w v)).card + (Finset.univ.filter (fun v => Pb w v)).card
+      = (Finset.univ.filter (fun u => Pf u w)).card + (Finset.univ.filter (fun u => Pb u w)).card
+  /-- The source has one more combined out-edge than in-edge. -/
+  hs : (Finset.univ.filter (fun v => Pf s v)).card + (Finset.univ.filter (fun v => Pb s v)).card
+      = (Finset.univ.filter (fun u => Pf u s)).card + (Finset.univ.filter (fun u => Pb u s)).card + 1
+  /-- The sink has one more combined in-edge than out-edge. -/
+  ht : (Finset.univ.filter (fun v => Pf t v)).card + (Finset.univ.filter (fun v => Pb t v)).card + 1
+      = (Finset.univ.filter (fun u => Pf u t)).card + (Finset.univ.filter (fun u => Pb u t)).card
+  /-- Every forward edge has forward residual slack. -/
+  hfslack : ∀ u v, Pf u v → f u v < cap u v
+  /-- Every backward edge cancels a positively-loaded real edge. -/
+  hbpos : ∀ u v, Pb u v → 0 < f v u
+
+/-- **★★ M10 — the general mixed-direction augmentation.** Given a mixed residual augmenting path
+`Q : ResidualAugPath cap s t f` and a uniform positive margin `ε` with `f u v + ε ≤ cap u v` on every
+forward edge (`hfcap`) and `ε ≤ f v u` on every backward edge (`hbε`, so cancellation stays
+nonnegative), the flow `g u v := f u v + (if Q.Pf u v then ε) − (if Q.Pb v u then ε)` is a valid `s`-`t`
+flow of strictly larger value.
+
+This is the augmentation MECHANISM for an ARBITRARY residual path with forward AND backward edges — the
+augmentation half of general Ford–Fulkerson, generalizing M7's forward-only `forwardAugPath_augments`
+(the `Q.Pb = ∅` case). Nonnegativity uses `hbε` (a cancelled edge keeps `f u v ≥ ε`); capacity uses
+`hfcap` (forward edges) and the fact that backward cancellation only decreases `f`; conservation uses
+the combined degree structure `hDeg` with the four-fold `∑ (if R then ε) = ε·card` identity, the Pb
+terms flipping which out/in slot they hit so an outgoing step is always `+ε` and an incoming step `−ε`;
+the value rises by `ε` at the source by `hs`. -/
+theorem residualAugPath_augments {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (Q : ResidualAugPath cap s t f) (hst : s ≠ t)
+    (ε : ℝ) (hε : 0 < ε) (hfcap : ∀ u v, Q.Pf u v → f u v + ε ≤ cap u v)
+    (hbε : ∀ u v, Q.Pb u v → ε ≤ f v u) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  classical
+  -- the load-bearing helper: `∑ v, (if R v then ε else 0) = ε · card{v | R v}`.
+  have hsum : ∀ (R : V → Prop),
+      (∑ v, (if R v then ε else 0)) = ε * ((Finset.univ.filter R).card : ℝ) := by
+    intro R
+    rw [← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_comm]
+  refine ⟨fun u v => f u v + (if Q.Pf u v then ε else 0) - (if Q.Pb v u then ε else 0),
+    ⟨?_, ?_, ?_⟩, ?_⟩
+  · -- nonneg
+    intro u v
+    show 0 ≤ f u v + (if Q.Pf u v then ε else 0) - (if Q.Pb v u then ε else 0)
+    have h0 := hf.nonneg u v
+    by_cases hpb : Q.Pb v u
+    · have hb := hbε v u hpb          -- ε ≤ f u v
+      split_ifs <;> linarith
+    · split_ifs <;> linarith
+  · -- capacity
+    intro u v
+    show f u v + (if Q.Pf u v then ε else 0) - (if Q.Pb v u then ε else 0) ≤ cap u v
+    have hc := hf.capacity u v
+    have hεle : (0:ℝ) ≤ ε := le_of_lt hε
+    by_cases hpf : Q.Pf u v
+    · have hcap := hfcap u v hpf       -- f u v + ε ≤ cap u v
+      split_ifs <;> linarith
+    · split_ifs <;> linarith
+  · -- conserve at an interior vertex: the combined degree structure cancels the ε-terms
+    intro w hws hwt
+    unfold vertexExcess
+    have hout : (∑ v, (f w v + (if Q.Pf w v then ε else 0) - (if Q.Pb v w then ε else 0)))
+        = (∑ v, f w v) + ε * ((Finset.univ.filter (fun v => Q.Pf w v)).card : ℝ)
+          - ε * ((Finset.univ.filter (fun v => Q.Pb v w)).card : ℝ) := by
+      rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, hsum (fun v => Q.Pf w v),
+        hsum (fun v => Q.Pb v w)]
+    have hin : (∑ v, (f v w + (if Q.Pf v w then ε else 0) - (if Q.Pb w v then ε else 0)))
+        = (∑ v, f v w) + ε * ((Finset.univ.filter (fun v => Q.Pf v w)).card : ℝ)
+          - ε * ((Finset.univ.filter (fun v => Q.Pb w v)).card : ℝ) := by
+      rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, hsum (fun v => Q.Pf v w),
+        hsum (fun v => Q.Pb w v)]
+    rw [hout, hin]
+    have hconv := hf.conserve w hws hwt
+    unfold vertexExcess at hconv
+    have hdeg : ((Finset.univ.filter (fun v => Q.Pf w v)).card : ℝ)
+          + ((Finset.univ.filter (fun v => Q.Pb w v)).card : ℝ)
+        = ((Finset.univ.filter (fun u => Q.Pf u w)).card : ℝ)
+          + ((Finset.univ.filter (fun u => Q.Pb u w)).card : ℝ) := by
+      exact_mod_cast Q.hDeg w hws hwt
+    linear_combination hconv + ε * hdeg
+  · -- value strictly increases by ε at the source (hs: combined out = in + 1)
+    unfold flowValue vertexExcess
+    have hout : (∑ v, (f s v + (if Q.Pf s v then ε else 0) - (if Q.Pb v s then ε else 0)))
+        = (∑ v, f s v) + ε * ((Finset.univ.filter (fun v => Q.Pf s v)).card : ℝ)
+          - ε * ((Finset.univ.filter (fun v => Q.Pb v s)).card : ℝ) := by
+      rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, hsum (fun v => Q.Pf s v),
+        hsum (fun v => Q.Pb v s)]
+    have hin : (∑ v, (f v s + (if Q.Pf v s then ε else 0) - (if Q.Pb s v then ε else 0)))
+        = (∑ v, f v s) + ε * ((Finset.univ.filter (fun v => Q.Pf v s)).card : ℝ)
+          - ε * ((Finset.univ.filter (fun v => Q.Pb s v)).card : ℝ) := by
+      rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, hsum (fun v => Q.Pf v s),
+        hsum (fun v => Q.Pb s v)]
+    rw [hout, hin]
+    have hscard : ((Finset.univ.filter (fun v => Q.Pf s v)).card : ℝ)
+          + ((Finset.univ.filter (fun v => Q.Pb s v)).card : ℝ)
+        = ((Finset.univ.filter (fun u => Q.Pf u s)).card : ℝ)
+          + ((Finset.univ.filter (fun u => Q.Pb u s)).card : ℝ) + 1 := by
+      exact_mod_cast Q.hs
+    have hval : ((∑ v, f s v) + ε * ((Finset.univ.filter (fun v => Q.Pf s v)).card : ℝ)
+          - ε * ((Finset.univ.filter (fun v => Q.Pb v s)).card : ℝ))
+        - ((∑ v, f v s) + ε * ((Finset.univ.filter (fun v => Q.Pf v s)).card : ℝ)
+          - ε * ((Finset.univ.filter (fun v => Q.Pb s v)).card : ℝ))
+        = ((∑ v, f s v) - (∑ v, f v s)) + ε := by
+      linear_combination ε * hscard
+    rw [hval]
+    linarith
 
 end QIQTH.QG

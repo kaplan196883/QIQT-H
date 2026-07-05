@@ -9026,6 +9026,13 @@ namespace QIQTH.AxiomAudit
 -- forward Ford-Fulkerson haug FULLY DERIVED, no carried augmentation). Std 3.
 #print axioms QIQTH.QG.simpleForwardPath_of_reachable
 #print axioms QIQTH.QG.forwardReachable_augments
+-- THE MAX-FLOW-MIN-CUT M10 (QG/MaxFlowMinCut.lean cont.): the MIXED-DIRECTION augmentation --
+-- ResidualAugPath (typed edge sets Pf forward + Pb backward, combined residual degree
+-- structure) + residualAugPath_augments: g = f + eps.(Pf) - eps.(Pb-reverse) yields a bigger
+-- flow, all four IsSTFlow fields DERIVED (the +/-eps conservation via linear_combination, the
+-- Pb sign bookkeeping resolved: outgoing +eps, incoming -eps regardless of type). ForwardAugPath
+-- is the Pb = empty special case. Only the mixed EXTRACTION + existence remain carried. Std 3.
+#print axioms QIQTH.QG.residualAugPath_augments
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form
