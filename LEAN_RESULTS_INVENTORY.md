@@ -1394,9 +1394,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `fourier_modSymbol_smul : 𝓕(e^{itv}f)(x)=𝓕f(x−t/2π)` (pointwise exp-kernel integrands), and the L² state
   identity `fourier_modulationLp_apply : ℱ(e^{itX}g)=τ_{−t/2π}(ℱg)` by density off `SchwartzMap.toLp`
   (`SchwartzMap.toLp_fourier_eq` + `DenseRange.induction_on`). The `2π` is the honest normalization of Mathlib's
-  Fourier kernel `e^{−2πi x·ξ}` — `e^{itP}` is translation by `−t/(2π)`, not `t`. ⚠ COSMETIC for QG (the GR-chain
+  Fourier kernel `e^{−2πi x·ξ}` — `e^{itP}` is translation by `−t/(2π)`, not `t`. **DUAL + CCR PAIR COMPLETE
+  (2026-07-06):** `modulationLp_eq_boundedFC_positionPVM : e^{isX} = boundedFC positionPVM(e^{isx})` (the
+  position-side twin, immediate from `boundedFC_positionPVM_eq_mulOp` + `modulationLp := mulOp(modSymbol)`) and
+  `positionOp_isSelfAdjoint : IsSelfAdjoint (stoneGen modulationLp)` (`PositionGenerator.lean`, the Fourier-dual
+  twin of the existing `momentumOp_isSelfAdjoint`). So the canonical CCR pair `(X, P)` is complete at the
+  self-adjoint-generator level, each named on its own PVM (`X=∫x dE` generates modulation, `P=∫k dÊ` generates
+  translation), with the group-level Weyl relation `weyl_relation` already proven. ⚠ COSMETIC for QG (the GR-chain
   momentum datum is already wired via the self-adjoint `momentumOp`, `MomentumGenerator.lean`); this only names
-  the generator spectrally.
+  the generators spectrally.
 - **One-particle RvD Tomita–Takesaki [AF]** on a genuine `StandardSubspace` (IsCyclic+IsSeparating): `J²=1`,
   `JRJ=2−R` (the `JΔJ=Δ⁻¹` shadow), `modUnitary = Δ^{it}` with group law + strong continuity, `Δ^{it}𝒦=𝒦`,
   `JΔ^{it}=Δ^{it}J`; `modularGen_isSelfAdjoint` (self-adjoint modular Hamiltonian K) with `Δ^{it}=e^{−itK}`.
@@ -1622,9 +1628,26 @@ lattice area-law SCALING `S∝A`; the localization map `hTkk` smearing construct
 YM mass gap / SSB; the 4D background-independent manifold; λ's dynamical Lorentz-covariant law; the radiative
 Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
-**WILLIAMSON N-mode symplectic diagonalization — IN PROGRESS (2026-07-05).** `QIQTH.Williamson`
-(`WilliamsonNormalForm.lean`, axiom-free std-3): the max-flow lesson (attempt the core, carry the analytic
-frontier) applied to the next attemptable wall. W1: the `WilliamsonDecomp` structure (symplectic S with
+**WILLIAMSON N-mode symplectic diagonalization — ✅ UNCONDITIONAL & COMPLETE (2026-07-06).** `QIQTH.Williamson`
+(`WilliamsonNormalForm.lean`, axiom-free std-3). Williamson is now UNCONDITIONAL: `williamson_exists` /
+`williamsonDecomp_of_posDef (M) (hM : M.PosDef) : WilliamsonDecomp M` carry NO hypothesis beyond `M.PosDef`. The
+last carry `YoulaDecomp` FELL (W8–W12) — the genuine-attempt-before-declaring discipline cracking a wall that
+four assessments had called research-grade: `youla_pairing` is the REAL antisymmetric block normal form
+(skew-adjoint `a` on an even-dim real inner-product space ⟹ an orthonormal basis pairing `a` into ν-rotation
+blocks), proved via the REAL route after the complex-Schur route (W7 `iA_isHermitian`) stalled — `T := A*A`
+symmetric ≤ 0 (real spectral thm), each positive eigenspace carries a complex structure hence is even-dim
+(`antisymm_eigenspace_even`, a `det`-sign argument), and a `finrank` dimension-halving induction
+(`youla_pairing_aux`: minimal-Rayleigh eigenvector block extraction + `skewAdjoint_orthogonal_invariant` recursion
++ `OrthonormalBasis.mk` gluing); `youlaDecomp_of_antisymm` bridges it to `Matrix (l⊕l)(l⊕l) ℝ`. **Both
+`youla_pairing` (the real antisymmetric normal form) and `williamson_exists` (the symplectic normal form) are
+Mathlib-FIRSTS.** W13 `williamson_entropy_symplectic_invariant`: the Gaussian entanglement entropy
+`∑ gaussModeEntropy νᵢ = gaussStateEntropy` depends on `M` ALONE (equal charpoly of `−(J·M)²` ⟹ equal `{νᵢ²}`
+multiset ⟹ equal entropy) — a genuine, well-defined physical entropy, not an artifact of the chosen
+diagonalization. **HONEST:** this is the diagonalization TOOL + entropy WELL-DEFINEDNESS, **NOT** the area-law
+SCALING `S∝A` (Srednicki boundary-mode-domination for the free-field lattice covariance — still a cited analytic
+frontier, area/volume-blind and untouched by Williamson). ⟨The W1–W7 "in progress / carried YoulaDecomp /
+plateaus here / NOT unconditional" narrative below is SUPERSEDED by the above; retained for provenance.⟩ The
+original scoping (max-flow lesson: attempt the core, carry the analytic frontier): W1: the `WilliamsonDecomp` structure (symplectic S with
 Sᵀ M S = D⊕D, symplectic eigenvalues ν), symplectic-form algebra ((det S)² = 1 from Sᵀ J S = J; block-diagonal
 det = (∏ν)²), reusing Mathlib's `symplecticGroup`/`orthogonalGroup`. W2: the CARRIED `YoulaDecomp` (the real
 antisymmetric skew normal form Oᵀ A O = [[0,D],[−D,0]] — absent from Mathlib, the analytic frontier / `haug`
@@ -1644,8 +1667,8 @@ analogue, a structure never an axiom). **CAMPAIGN COMPLETE (W1–W6, honest)**: 
   Sum split) is a genuine Mathlib gap — the real normal form for antisymmetric matrices — pinned as the frontier,
   not faked. Williamson plateaus here: the S-construction and the spectral entry point are derived; the real-block
   assembly is the precisely-characterized remaining wall.
-  NOT unconditional Williamson; NOT unconditional Williamson; does NOT unlock the area-law S∝A
-  scaling (area/volume-blind, a separate wall).
+  ⟨SUPERSEDED — Williamson IS now unconditional (see the ✅ header above); only the area-law S∝A
+  scaling remains the separate cited frontier.⟩
 
 **MAX-FLOW=MIN-CUT combinatorial core — LANDED, ExactRT gap SHARPENED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`
 (axiom-free std-3): a genuine ATTEMPT at the Ford–Fulkerson wall on the repo's own flow/cut framework
