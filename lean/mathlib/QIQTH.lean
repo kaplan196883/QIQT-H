@@ -98,6 +98,7 @@ import QIQTH.TowerGNS.FlowCovariance
 import QIQTH.Rigidity.RegulatorRigidity
 import QIQTH.HeatKernelOneD
 import QIQTH.HeatKernelA1
+import QIQTH.HeatKernelDDim
 import QIQTH.SpeciesCrossCheck
 import QIQTH.TowerGNS.FlowContinuity
 import QIQTH.TowerGNS.Generator

@@ -8969,6 +8969,16 @@ namespace QIQTH.AxiomAudit
 -- kappa=1/6 + the Ricci datum stay carried/cited geometry. Std 3.
 #print axioms QIQTH.HeatKernelA1.gaussianMoment_diag
 #print axioms QIQTH.HeatKernelA1.heat_a1_of_RNC_derived
+-- THE HEAT-KERNEL PREFACTOR P1-P3 (HeatKernelDDim.lean): the general-d flat-space heat-kernel
+-- prefactor (4pi t)^{-d/2} DERIVED (product of d 1-D Gaussians), its d=4 value 1/(16 pi^2 t^2),
+-- and the assembly (16pi).(1/2).(1/16pi^2).(1/6-xi) = (1/6-xi)/2pi = 1/12pi at xi=0 -- the
+-- pi-content of the cited 12pi induced-Newton normalization, DERIVED. HONEST: pi-transcendental
+-- ONLY; kappa=1/6 + 1/2 + 16pi + species charge b CARRIED; no numerical G, no curved-space
+-- kernel, no divergent proper-time integral. Std 3.
+#print axioms QIQTH.HeatKernelDDim.heatDensity_dDim
+#print axioms QIQTH.HeatKernelDDim.heat_prefactor_fourD
+#print axioms QIQTH.HeatKernelDDim.inducedInvG_normalization_assembly
+#print axioms QIQTH.HeatKernelDDim.inducedInvG_normalization_assembly_zero
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

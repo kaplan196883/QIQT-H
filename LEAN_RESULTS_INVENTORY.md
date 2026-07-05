@@ -16,6 +16,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `sorry`/`sorryAx`** in code (full-tree grep: the 58 `sorry` string matches are all docstrings reading "No `sorry`" —
   0 real proof terms). Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` bodies are harmless
   labelled markers (`LorentzWitness.lean:180` indiscrete-preorder witness; the campaign `Checkpoint`/`…_complete` markers).
+- **HEAT-KERNEL PREFACTOR — the π-content of the induced-G 12π, DERIVED (2026-07-05).** `QIQTH.HeatKernelDDim`
+  (axiom-free std-3): the general-d flat-space heat-kernel prefactor (4πt)^{−d/2} (`heatDensity_dDim`, product of
+  d 1-D Gaussians via `integral_fintype_prod_volume_eq_pow`), its d=4 value 1/(16π²t²) (`heat_prefactor_fourD`),
+  and the assembly (16π)·½·(1/16π²)·(1/6−ξ) = (1/6−ξ)/2π = **1/(12π)** at ξ=0
+  (`inducedInvG_normalization_assembly[_zero]`) — matching the 12π cited in `SakharovRatio`/`effSpeciesN`. This
+  moves the π-transcendental of the cited 12π induced-Newton normalization from CITED to DERIVED. Together with
+  the a₁ campaign (the 2t contraction), the full flat-space analysis of the induced-G R-coefficient (prefactor +
+  a₁) is machine-checked. HONEST: π-transcendental ONLY; κ=1/6, ½, 16π, the species charge b, the curved-space
+  Seeley–DeWitt geometry, and the Λ² regularization scheme (the physical d=4 proper-time integral is divergent)
+  stay carried/cited; no numerical G. **The flat-space analysis vein is now EXHAUSTED** — the numerical-G
+  frontier's remaining content is all carried geometry or divergent regularization.
 - **HEAT-KERNEL a₁ ANALYSIS-HALF — IN PROGRESS (2026-07-05).** `QIQTH.HeatKernelA1` (axiom-free std-3): the
   flat-space Gaussian moments of the position-space heat kernel G_t = (√(4πt))⁻¹e^{−x²/4t} — **∫ G_t x² = 2t**
   (`gaussianSecondMoment_oneD`, the load-bearing analysis, from Mathlib's `variance_fun_id_gaussianReal` via the

@@ -1,6 +1,6 @@
 # THE HEAT-KERNEL PREFACTOR — the π²-content of the induced-G 12π, derived (P1–P3, then vein exhausts)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
+**Status:** COMPLETE (2026-07-05) — P1–P3 landed; flat-space vein now EXHAUSTED per the consult. Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent a6648d51a04b97602 (2026-07-05) — LOAD-BEARING (case i),
 not the decorative a₀ trap; the LAST flat-space increment, vein exhausts after.
 
@@ -32,16 +32,16 @@ verbatim as "NOT formalized / cited frontier") + `InducedNewtonConstant.effSpeci
 
 ## The increments (new file `QIQTH/HeatKernelDDim.lean`)
 
-- [ ] **P1 — the general-d Gaussian prefactor (the derived nugget).**
+- [x] **P1 — the general-d Gaussian prefactor (the derived nugget).**
   `heatDensity_dDim (d)(t)(ht:0<t) : (1/(2π))^d * ∫ k:(Fin d→ℝ), exp(-(t·∑ᵢ (k i)²)) =
   (1/√(4πt))^d`. Route: exp(-(t·∑ k_i²)) = ∏ᵢ exp(-(t·(k i)²)) (Real.exp_sum / exp-of-sum),
   rewrite integrand as product, `integral_fintype_prod_volume_eq_pow` (f y = exp(-(t·y²))) →
   (∫ e⁻ᵗʸ²)^d, then (1/2π)^d·(∫)^d = ((1/2π)·∫)^d = (1/√(4πt))^d via heatDensity_oneD +
   mul_pow. Risk LOW (same machinery as gaussianMoment_diag; only fiddle = exp-sum→prod-exp).
-- [ ] **P2 — the d=4 specialization.** `heat_prefactor_fourD (t)(ht) :
+- [x] **P2 — the d=4 specialization.** `heat_prefactor_fourD (t)(ht) :
   (1/(2π))^4 * ∫ k:(Fin 4→ℝ), exp(-(t·∑ᵢ (k i)²)) = 1/(16π²·t²)`. Route: P1 at d=4,
   (√(4πt))⁻¹^4 = (4πt)⁻² = 1/(16π²t²), sqrt algebra. Risk LOW.
-- [ ] **P3 — the normalization assembly (the a₁-style wire into 12π).**
+- [x] **P3 — the normalization assembly (the a₁-style wire into 12π).**
   `inducedInvG_normalization_assembly (ξ P κ)(hP : P = 1/(16π²))(hκ : κ = 1/6) :
   (16π)*(1/2)*P*(κ-ξ) = (κ-ξ)/(2π)`, corollary at ξ=0 = 1/(12π) (matches SakharovRatio +
   effSpeciesN cited 12π). Fills the 1/16π² slot with the DERIVED prefactor (P2's t-independent
@@ -88,3 +88,13 @@ only (Lean + plan + inventory + audit).
   from decorative to load-bearing; derives the π² in 16π²/12π; the LAST flat-space increment,
   vein exhausts after; proper-time Γ-integral explicitly NOT built — divergent/decorative).
   Continues the productive heat-kernel vein opened by THE HEAT-KERNEL a₁ campaign (complete).
+
+- **2026-07-05** — **P1–P3 LANDED — CAMPAIGN COMPLETE (green first try).** HeatKernelDDim.lean:
+  heatDensity_dDim ((1/2π)^d ∫ exp(-(t∑k²)) = (1/√(4πt))^d — the general-d prefactor from the
+  product of d 1-D Gaussians via integral_fintype_prod_volume_eq_pow); heat_prefactor_fourD
+  (= 1/(16π²t²)); inducedInvG_normalization_assembly ((16π)·½·(1/16π²)·(κ−ξ) = (κ−ξ)/2π) +
+  the ξ=0 corollary = 1/(12π) — matching the cited SakharovRatio/effSpeciesN 12π. THE
+  π-TRANSCENDENTAL OF THE INDUCED-G 12π NORMALIZATION IS DERIVED. κ=1/6, ½, 16π, species
+  charge b stay carried. **The flat-space analysis vein is now EXHAUSTED** (proper-time
+  Γ-integral divergent/decorative; everything else carried geometry or regularization).
+  Std-3, budget 0. Per the standing directive the loop continues, but this branch is done.
