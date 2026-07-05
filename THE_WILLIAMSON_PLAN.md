@@ -133,6 +133,28 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   The ONE remaining carry is YoulaDecomp itself (the real-antisymmetric normal form, absent
   from Mathlib). Std-3, budget 0.
 
+- **2026-07-05** — **YOULA W8 — the REAL (A²) route, complexification-FREE: per-block geometry
+  DERIVED, O-assembly PINNED.** A different angle from W7's stalled complex route. For antisymmetric
+  A (Aᵀ=−A), 8 new axiom-free (std-3) lemmas in WilliamsonNormalForm.lean §W8: T := A*A is symmetric
+  (antisymm_sq_isHermitian, so Mathlib's REAL spectral theorem applies) and negative semidefinite
+  (antisymm_neg_sq_posSemidef: −(A*A)=Aᴴ*A PosSemidef via posSemidef_conjTranspose_mul_self;
+  antisymm_sq_dotProduct_nonpos: ⟨Tx,x⟩≤0), A-commutes with T (antisymm_comm_sq); the inner-product
+  antisymmetry ⟨Ax,x⟩=0 (antisymm_dotProduct_self) and the Rayleigh identity ⟨Ax,Ax⟩=−⟨A²x,x⟩
+  (antisymm_normSq_mulVec). ★ CORE: antisymm_invariant_block — on the T-eigenspace (A*A)e=−ν²e, with
+  f:=Ae one has e⊥f, ‖f‖²=ν²‖e‖², and Af=−ν²e (the CLOSED 2×2 rotation block Ae=f, Af=−ν²e = the
+  Youla block ν·[[0,−1],[1,0]] in the frame {e,f/ν}); antisymm_kernel_of_sq_kernel — (A*A)e=0 ⟹ Ae=0
+  (the ν=0 block). This lands the ENTIRE per-eigenspace geometry of the real route via clean
+  matrix/dotProduct algebra (mulVec_transpose, dotProduct_mulVec, neg_mulVec, smul_dotProduct) — NO
+  Complex.I, NO complexification. HONEST CHECKPOINT: youlaDecomp_of_antisymm did NOT close — the ONE
+  remaining obstruction is the abstract→concrete ASSEMBLY: taking the real spectral decomposition of
+  the symmetric T (IsHermitian.spectral_theorem applies), grouping eigenvalues into ν=0 / −νₖ² blocks,
+  extracting per-block frames {e,Ae/ν} via antisymm_invariant_block, and assembling them into ONE
+  concrete orthogonal O : Matrix (l⊕l)(l⊕l) ℝ with the exact l⊕l sum-indexing so that
+  Oᵀ A O = fromBlocks 0 (diag ν) (−(diag ν)) 0 entrywise (the finrank-induction / flat-basis→split-
+  index map). NO Mathlib support — the same wall W7 hit, now reached from the real side with the full
+  per-block geometry in hand. Williamson STILL conditional on the Youla O-assembly; the real route
+  discharges everything up to it. Std-3, budget 0. NOT faked, NOT a Lean axiom.
+
 - **2026-07-05** — **YOULA W7 — honest checkpoint: spectral entry point DERIVED, real-block
   assembly PINNED.** iA_isHermitian (for real antisymmetric A, i·A_ℂ is Hermitian — via
   conjTranspose_map + conj_I — so Mathlib's complex spectral theorem APPLIES); iA_conj_antifixed

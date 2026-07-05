@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# The Williamson normal form — W1–W7: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection, the DERIVED S-construction, and the Youla spectral entry point
+# The Williamson normal form — W1–W8: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection, the DERIVED S-construction, the Youla complex spectral entry point (W7), and the REAL (A²) route per-block geometry (W8)
 
 Williamson's theorem states that a real symmetric positive-definite `2n × 2n` matrix `M` can be
 brought to the block-diagonal form `Sᵀ M S = D ⊕ D` (with `D = diagonal ν` the *symplectic
@@ -79,8 +79,15 @@ unconditionally — it is proved **conditional on Youla alone** (`YoulaDecomp`, 
 normal form absent from Mathlib).  The single remaining carry is Youla; the S-construction and the
 entropy are genuine derivations.  W7 lands the *spectral entry point* toward discharging the Youla
 carry (`iA_isHermitian`, `iA_conj_antifixed`) and pins the exact remaining obstruction (the
-flat-complex → real-block assembly) honestly — Youla itself is **still carried**.  Nothing here
-unlocks the area-law `S ∝ A` scaling (the entropy machinery is area/volume-blind).  Axiom-free.
+flat-complex → real-block assembly) honestly — Youla itself is **still carried**.  **W8 attacks the
+same carry from the REAL side** (`T := A*A`, no complexification): it derives the *entire*
+per-eigenspace geometry — `T` symmetric + negative semidefinite, `A`-commuting, the `⟨Ax,x⟩ = 0`
+antisymmetry, and — the core — `antisymm_invariant_block` (the closed `2×2` rotation block
+`Ae = f, Af = -ν² e` on each `T`-eigenspace) plus the `ν = 0` kernel block — and pins the *one*
+remaining obstruction (the abstract→concrete assembly of per-block frames into a single `l ⊕ l`
+orthogonal `O`) honestly.  Youla is **still carried**; the real route discharges everything up to the
+`O`-assembly.  Nothing here unlocks the area-law `S ∝ A` scaling (the entropy machinery is
+area/volume-blind).  Axiom-free.
 -/
 import Mathlib.LinearAlgebra.SymplecticGroup
 import Mathlib.LinearAlgebra.UnitaryGroup
@@ -467,5 +474,134 @@ theorem iA_conj_antifixed (A : Matrix (l ⊕ l) (l ⊕ l) ℝ) :
   simp only [Matrix.map_apply, Matrix.smul_apply, Matrix.neg_apply, smul_eq_mul, map_mul,
     Complex.conj_I, Complex.conj_ofReal]
   ring
+
+/-! ### W8 — the REAL (`A²`) route toward Youla: `T := A*A` structure + the invariant-block core
+
+A **complexification-free** route to the Youla real antisymmetric normal form.  For a real
+antisymmetric `A` (`Aᵀ = -A`), the real symmetric matrix `T := A * A` is **negative semidefinite**
+(`⟨Tx,x⟩ = -‖Ax‖² ≤ 0`); it `A`-commutes, so each of its (real) spectral eigenspaces `T e = -ν² e`
+is `A`-invariant, and on the `ν > 0` eigenspace `A` acts as the `2×2` rotation block
+`ν·[[0,-1],[1,0]]` in the orthonormal frame `{e, Ae/ν}` (the Youla block); the `ν = 0` (kernel)
+eigenspace is exactly the `A`-kernel (`Ae = 0`).  This section lands that route's **derived
+structural core** as clean matrix / dot-product content — **no `Complex.I`, no spectral
+complexification**:
+
+* `antisymm_sq_isHermitian` — `T := A*A` is symmetric (Hermitian over `ℝ`);
+* `antisymm_neg_sq_posSemidef` — `-(A*A)` is positive semidefinite (`T` negative semidefinite);
+* `antisymm_comm_sq` — `A` commutes with `T` (the eigenspace-invariance seed);
+* `antisymm_dotProduct_self` — `⟨Ax, x⟩ = 0` (antisymmetry in inner-product form);
+* `antisymm_normSq_mulVec` — `⟨Ax, Ax⟩ = -⟨A²x, x⟩` (the `-‖Ax‖²` Rayleigh identity);
+* `antisymm_sq_dotProduct_nonpos` — `⟨Tx, x⟩ ≤ 0` (negative semidefiniteness, vector form);
+* `antisymm_invariant_block` — **the core**: on the `T`-eigenspace `(A*A) e = -ν² e`, with
+  `f := A e`, one has `e ⊥ f`, `‖f‖² = ν²‖e‖²`, and `A f = -ν² e` — i.e. `A e = f`, `A f = -ν² e`,
+  the closed `2×2` rotation block;
+* `antisymm_kernel_of_sq_kernel` — the `ν = 0` block: `(A*A) e = 0 ⟹ A e = 0`.
+
+**The remaining wall (pinned, NOT discharged).**  What is *derived* here is the entire per-eigenspace
+geometry — the real algebraic content of the theorem.  What is *not* discharged is the
+**abstract→concrete assembly**: taking the real spectral decomposition of the symmetric `T`
+(Mathlib's `Matrix.IsHermitian.spectral_theorem` applies since `T` is `IsHermitian`), grouping its
+eigenvalues into `ν = 0` and `-νₖ²` (`νₖ > 0`) blocks, extracting per-block orthonormal frames
+`{e, Ae/ν}` via `antisymm_invariant_block`, and **assembling them into ONE concrete orthogonal
+`O : Matrix (l ⊕ l) (l ⊕ l) ℝ`** with the exact `l ⊕ l` sum-indexing so that
+`Oᵀ A O = fromBlocks 0 (diagonal ν) (-(diagonal ν)) 0` holds entrywise.  This block-assembly /
+`finrank`-induction step (mapping the flat spectral basis to the split `l ⊕ l` index) has no Mathlib
+support and is the genuine research-grade gap — the same wall the complex W7 route hit, reached now
+from the real side with the full per-block geometry in hand.  `youlaDecomp_of_antisymm` therefore
+remains **carried**; the real route discharges everything *up to* the concrete `O`-assembly.  All
+lemmas below are axiom-free (std-3). -/
+
+section RealRoute
+
+variable {n : Type*} [Fintype n] [DecidableEq n]
+
+/-- **`T := A*A` is Hermitian (symmetric over `ℝ`) for antisymmetric `A`.**  `(A*A)ᵀ = Aᵀ Aᵀ =
+    (-A)(-A) = A*A`, and over `ℝ` the conjugate transpose is the transpose.  This makes Mathlib's
+    real spectral theorem (`Matrix.IsHermitian.spectral_theorem`) applicable to `T` — the entry point
+    of the real route. -/
+theorem antisymm_sq_isHermitian (A : Matrix n n ℝ) (hA : Aᵀ = -A) : (A * A).IsHermitian := by
+  unfold Matrix.IsHermitian
+  rw [Matrix.conjTranspose_eq_transpose_of_trivial, Matrix.transpose_mul, hA, Matrix.neg_mul,
+      Matrix.mul_neg, neg_neg]
+
+/-- **`-(A*A)` is positive semidefinite** (equivalently `T := A*A` is negative semidefinite) for
+    antisymmetric `A`.  `-(A*A) = (-A)*A = Aᵀ*A = Aᴴ*A`, positive semidefinite by
+    `Matrix.posSemidef_conjTranspose_mul_self`.  Hence the eigenvalues of `T` are `≤ 0`, i.e. of the
+    form `μₖ = -νₖ²` with `νₖ ≥ 0` — the Youla skew eigenvalues. -/
+theorem antisymm_neg_sq_posSemidef (A : Matrix n n ℝ) (hA : Aᵀ = -A) : (-(A * A)).PosSemidef := by
+  have hAc : Aᴴ = -A := by rw [Matrix.conjTranspose_eq_transpose_of_trivial, hA]
+  have h := Matrix.posSemidef_conjTranspose_mul_self A
+  rwa [hAc, Matrix.neg_mul] at h
+
+/-- **`A` commutes with `T := A*A`.**  Immediate from associativity, but it is the structural seed of
+    the eigenspace-invariance step: since `A T = T A`, `A` preserves every eigenspace of `T`. -/
+theorem antisymm_comm_sq (A : Matrix n n ℝ) : A * (A * A) = (A * A) * A := by
+  rw [Matrix.mul_assoc]
+
+/-- **Antisymmetric ⟹ `⟨Ax, x⟩ = 0`.**  `⟨Ax,x⟩ = ⟨x, Aᵀx⟩ = ⟨x, -Ax⟩ = -⟨Ax,x⟩`, so it vanishes
+    (`⟨·,·⟩` is the real dot product, symmetric over `ℝ`).  This is the orthogonality `Ae ⊥ e` that
+    makes `{e, Ae}` an orthogonal pair inside each block. -/
+theorem antisymm_dotProduct_self (A : Matrix n n ℝ) (hA : Aᵀ = -A) (x : n → ℝ) :
+    (A *ᵥ x) ⬝ᵥ x = 0 := by
+  have h : (A *ᵥ x) ⬝ᵥ x = -((A *ᵥ x) ⬝ᵥ x) :=
+    calc (A *ᵥ x) ⬝ᵥ x = x ⬝ᵥ (A *ᵥ x) := dotProduct_comm _ _
+      _ = (x ᵥ* A) ⬝ᵥ x := Matrix.dotProduct_mulVec _ _ _
+      _ = (Aᵀ *ᵥ x) ⬝ᵥ x := by rw [Matrix.mulVec_transpose]
+      _ = ((-A) *ᵥ x) ⬝ᵥ x := by rw [hA]
+      _ = -((A *ᵥ x) ⬝ᵥ x) := by rw [Matrix.neg_mulVec, neg_dotProduct]
+  linarith
+
+/-- **Antisymmetric ⟹ `⟨Ax, Ax⟩ = -⟨A²x, x⟩`** (the `-‖Ax‖²` Rayleigh identity).  Via `Aᵀ = -A`:
+    `⟨A²x,x⟩ = ⟨Ax, Aᵀ... ⟩ = -⟨Ax, Ax⟩`.  This drives both negative semidefiniteness of `T = A*A`
+    and, on a `T`-eigenspace, the `‖Ae‖² = ν²‖e‖²` normalization. -/
+theorem antisymm_normSq_mulVec (A : Matrix n n ℝ) (hA : Aᵀ = -A) (x : n → ℝ) :
+    (A *ᵥ x) ⬝ᵥ (A *ᵥ x) = -(((A * A) *ᵥ x) ⬝ᵥ x) := by
+  have hkey : ((A * A) *ᵥ x) ⬝ᵥ x = -((A *ᵥ x) ⬝ᵥ (A *ᵥ x)) :=
+    calc ((A * A) *ᵥ x) ⬝ᵥ x
+        = (A *ᵥ (A *ᵥ x)) ⬝ᵥ x := by rw [← Matrix.mulVec_mulVec]
+      _ = x ⬝ᵥ (A *ᵥ (A *ᵥ x)) := dotProduct_comm _ _
+      _ = (x ᵥ* A) ⬝ᵥ (A *ᵥ x) := Matrix.dotProduct_mulVec _ _ _
+      _ = (Aᵀ *ᵥ x) ⬝ᵥ (A *ᵥ x) := by rw [Matrix.mulVec_transpose]
+      _ = ((-A) *ᵥ x) ⬝ᵥ (A *ᵥ x) := by rw [hA]
+      _ = -((A *ᵥ x) ⬝ᵥ (A *ᵥ x)) := by rw [Matrix.neg_mulVec, neg_dotProduct]
+  rw [hkey, neg_neg]
+
+/-- **`T := A*A` is negative semidefinite in vector form: `⟨Tx, x⟩ ≤ 0`.**  Directly from
+    `antisymm_normSq_mulVec` (`⟨Tx,x⟩ = -‖Ax‖²`) and `‖Ax‖² ≥ 0`. -/
+theorem antisymm_sq_dotProduct_nonpos (A : Matrix n n ℝ) (hA : Aᵀ = -A) (x : n → ℝ) :
+    ((A * A) *ᵥ x) ⬝ᵥ x ≤ 0 := by
+  have h := antisymm_normSq_mulVec A hA x
+  have hnn : 0 ≤ (A *ᵥ x) ⬝ᵥ (A *ᵥ x) := by
+    simpa using dotProduct_self_star_nonneg (A *ᵥ x)
+  linarith
+
+/-- **The `2×2` `A`-invariant block on a `T`-eigenspace — the real-route core.**  If `e` lies in the
+    `T = A*A` eigenspace with eigenvalue `-ν²` (`(A*A) *ᵥ e = -(ν^2) • e`), then with `f := A *ᵥ e`:
+    (i) `e ⬝ᵥ f = 0` (`f ⊥ e`); (ii) `f ⬝ᵥ f = ν² • (e ⬝ᵥ e)` (so `‖Ae‖ = |ν|·‖e‖`); (iii)
+    `A *ᵥ f = -(ν^2) • e`.  Together `A e = f` and `A f = -ν² e`: in the orthonormal frame
+    `{e, f/ν}` (for `ν > 0`) `A` acts as the rotation block `ν·[[0,-1],[1,0]]` — the Youla `2×2`
+    block.  This closes the per-block geometry the assembly consumes. -/
+theorem antisymm_invariant_block (A : Matrix n n ℝ) (hA : Aᵀ = -A) (ν : ℝ) (e : n → ℝ)
+    (he : (A * A) *ᵥ e = -(ν ^ 2) • e) :
+    e ⬝ᵥ (A *ᵥ e) = 0 ∧
+      (A *ᵥ e) ⬝ᵥ (A *ᵥ e) = (ν ^ 2) • (e ⬝ᵥ e) ∧
+      A *ᵥ (A *ᵥ e) = -(ν ^ 2) • e := by
+  refine ⟨?_, ?_, ?_⟩
+  · rw [dotProduct_comm]; exact antisymm_dotProduct_self A hA e
+  · rw [antisymm_normSq_mulVec A hA e, he]
+    simp only [smul_dotProduct, smul_eq_mul]
+    ring
+  · rw [Matrix.mulVec_mulVec, he]
+
+/-- **The `T := A*A` kernel is the `A`-kernel** (the `ν = 0` Youla block, `Ae = 0`).  If
+    `(A*A) *ᵥ e = 0` then `A *ᵥ e = 0`: `⟨Ae,Ae⟩ = -⟨A²e,e⟩ = 0` forces `Ae = 0` over `ℝ`.  This is
+    the degenerate `ν = 0` block, where `A` restricts to zero. -/
+theorem antisymm_kernel_of_sq_kernel (A : Matrix n n ℝ) (hA : Aᵀ = -A) (e : n → ℝ)
+    (he : (A * A) *ᵥ e = 0) : A *ᵥ e = 0 := by
+  have h : (A *ᵥ e) ⬝ᵥ (A *ᵥ e) = 0 := by
+    rw [antisymm_normSq_mulVec A hA e, he, zero_dotProduct, neg_zero]
+  exact dotProduct_self_eq_zero.mp h
+
+end RealRoute
 
 end QIQTH.Williamson

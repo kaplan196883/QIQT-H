@@ -9091,6 +9091,25 @@ namespace QIQTH.AxiomAudit
 -- HONEST: the WilliamsonDecomp still carries Youla + the S-construction. Std 3.
 #print axioms QIQTH.Williamson.WilliamsonDecomp.entropy_nonneg
 #print axioms QIQTH.Williamson.oneMode_entropy_consistency
+-- THE WILLIAMSON YOULA W8 (WilliamsonNormalForm.lean): the REAL (A^2) route -- complexification-FREE.
+-- For antisymmetric A (Aᵀ = -A), T := A*A is symmetric (antisymm_sq_isHermitian) and negative
+-- semidefinite (antisymm_neg_sq_posSemidef: -(A*A) = Aᴴ*A PosSemidef; antisymm_sq_dotProduct_nonpos:
+-- ⟨Tx,x⟩ ≤ 0), A-commutes (antisymm_comm_sq), with ⟨Ax,x⟩ = 0 (antisymm_dotProduct_self) and
+-- ⟨Ax,Ax⟩ = -⟨A²x,x⟩ (antisymm_normSq_mulVec). CORE: antisymm_invariant_block -- on the T-eigenspace
+-- (A*A)e = -ν²e, with f := Ae one has e⊥f, ‖f‖² = ν²‖e‖², Af = -ν²e (the closed 2×2 rotation block);
+-- antisymm_kernel_of_sq_kernel -- (A*A)e = 0 ⟹ Ae = 0 (the ν=0 block). HONEST CHECKPOINT: the
+-- abstract→concrete assembly of per-eigenspace frames into ONE l⊕l-indexed orthogonal O (the real
+-- normal form Oᵀ A O = fromBlocks 0 (diag ν) (-(diag ν)) 0) has NO Mathlib support -- the same wall
+-- reached from the real side, per-block geometry now fully in hand. youlaDecomp_of_antisymm STILL
+-- carried. Std 3.
+#print axioms QIQTH.Williamson.antisymm_sq_isHermitian
+#print axioms QIQTH.Williamson.antisymm_neg_sq_posSemidef
+#print axioms QIQTH.Williamson.antisymm_comm_sq
+#print axioms QIQTH.Williamson.antisymm_dotProduct_self
+#print axioms QIQTH.Williamson.antisymm_normSq_mulVec
+#print axioms QIQTH.Williamson.antisymm_sq_dotProduct_nonpos
+#print axioms QIQTH.Williamson.antisymm_invariant_block
+#print axioms QIQTH.Williamson.antisymm_kernel_of_sq_kernel
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
