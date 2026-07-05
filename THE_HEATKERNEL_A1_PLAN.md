@@ -49,7 +49,7 @@ this upgrades).
   (A1+A2); i≠j ⟹ factor ∫G_t x = 0. Needs Fubini integrability side-goals (integrable_
   gaussianPDFReal). Risk MEDIUM (Fubini plumbing). CUTTABLE: if it stalls, carry the moment
   matrix hM as a hypothesis in A4 (still honest — A1 is the derived nugget).
-- [ ] **A4 — the conditional a₁ assembly (the theorem).**
+- [x] **A4 — the conditional a₁ assembly (the theorem).** ✅ DONE
   `heat_a1_of_RNC (d)(t)(ht)(ξ m : ℝ) (Rμν : Fin d → Fin d → ℝ) (κ)(hκ : κ = 1/6)
   (Mmatrix)(hM : ∀ i j, Mmatrix i j = 2t*(if i=j then 1 else 0)) (Rscl)(hR : Rscl = ∑ i, Rμν i i)
   : (1/(2t)) * (κ * ∑ i, ∑ j, Rμν i j * Mmatrix i j) - ξ*Rscl - m^2 = (1/6 - ξ)*Rscl - m^2`.
@@ -111,3 +111,11 @@ paths only (Lean + plan + inventory + audit ONLY).
   variance_fun_id_gaussianReal + integral_gaussianReal_eq_integral_smul + variance_eq_integral
   + integral_id_gaussianReal); gaussianZerothMoment_oneD (= 1); gaussianFirstMoment_oneD (= 0).
   Std-3, budget 0. Next: A4 (the conditional a₁ assembly — carrying hM + κ=1/6); A3 optional.
+
+- **2026-07-05** — **A4 LANDED (green, one field_simp fix).** heat_a1_of_RNC — given the
+  carried RNC Ricci + the moment matrix M = 2t·δ + κ=1/6 (CITED), the Gaussian-averaged t¹
+  coefficient = (1/6−ξ)R − m²; the sum collapses via Finset.sum_eq_single, (1/2t)·(1/6)·(2t·R)
+  = (1/6)R by field_simp. Plus heat_a1_moment_from_secondMoment — for d=1 the moment matrix IS
+  gaussianSecondMoment_oneD (the derived nugget genuinely feeds the assembly). Honesty label
+  crisp: the moment gives 2t·R, κ=1/6 is carried. Std-3, budget 0. Next: A3 (d-dim moment,
+  optional/time-boxed) then checkpoint.

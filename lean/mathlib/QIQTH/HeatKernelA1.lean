@@ -87,4 +87,48 @@ theorem gaussianFirstMoment_oneD (t : ℝ) (ht : 0 < t) :
   rw [integral_congr_ae (ae_of_all _ hint), ← integral_gaussianReal_eq_integral_smul hv,
     integral_id_gaussianReal]
 
+/-- **★ A4 — THE CONDITIONAL a₁ ASSEMBLY.** Given the Riemann-normal-coordinate curvature data
+    as CARRIED hypotheses — the Ricci components `Rμν`, the scalar `Rscl = ∑ᵢ Rμν i i`, the
+    Gaussian second-moment matrix `Mmatrix i j = 2t·δ_{ij}` (the `2t` is the DERIVED nugget
+    `gaussianSecondMoment_oneD`; for `d = 1` it is exactly that lemma, see
+    `heat_a1_moment_from_secondMoment`), and the assembled conformal-coupling coefficient value
+    `κ = 1/6` (CARRIED, CITED textbook data) — the Gaussian-averaged `t¹` coefficient assembles
+    to the scalar `a₁ = (1/6 − ξ)R − m²`.
+
+    ⚠ HONESTY (binding): the `(1/2t)·κ·(2t·R) = κ·R` step shows the Gaussian moment supplies the
+    `2t·R` contraction and the **carried** `κ = 1/6` supplies the value. The moment does NOT and
+    CANNOT produce the `1/6`; that is cited curved-space geometry. This is the analysis-half
+    assembly of one coefficient, not a derivation of `κ` or of the numerical value of `G`. -/
+theorem heat_a1_of_RNC {d : ℕ} (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
+    (Rμν : Fin d → Fin d → ℝ)
+    (κ : ℝ) (hκ : κ = 1 / 6)
+    (Mmatrix : Fin d → Fin d → ℝ)
+    (hM : ∀ i j, Mmatrix i j = 2 * t * (if i = j then 1 else 0))
+    (Rscl : ℝ) (hR : Rscl = ∑ i, Rμν i i) :
+    (1 / (2 * t)) * (κ * ∑ i, ∑ j, Rμν i j * Mmatrix i j) - ξ * Rscl - m ^ 2
+      = (1 / 6 - ξ) * Rscl - m ^ 2 := by
+  have ht0 : (2 * t) ≠ 0 := by positivity
+  have key : (∑ i, ∑ j, Rμν i j * Mmatrix i j) = 2 * t * Rscl := by
+    rw [hR, Finset.mul_sum]
+    refine Finset.sum_congr rfl (fun i _ => ?_)
+    rw [Finset.sum_eq_single i]
+    · rw [hM, if_pos rfl]; ring
+    · intro j _ hji
+      rw [hM, if_neg (fun h => hji h.symm)]; ring
+    · intro h; exact absurd (Finset.mem_univ i) h
+  rw [key, hκ]
+  field_simp
+
+/-- **The `d = 1` connection to the derived analysis.** In one dimension the carried moment-matrix
+    hypothesis `hM` of `heat_a1_of_RNC` is exactly the load-bearing lemma
+    `gaussianSecondMoment_oneD` (`∫ G_t x² = 2t`): the single moment entry `∫ G_t x² = 2t` fills
+    the `Mmatrix 0 0 = 2t·δ_{00} = 2t` slot. So for `d = 1` the a₁ assembly rests on the DERIVED
+    Gaussian second moment, with only the curved-space `κ = 1/6` and the Ricci datum carried. -/
+theorem heat_a1_moment_from_secondMoment (t : ℝ) (ht : 0 < t) :
+    (fun _ _ : Fin 1 => ∫ x : ℝ, heatKernel1D t x * x ^ 2)
+      = (fun i j : Fin 1 => 2 * t * (if i = j then 1 else 0)) := by
+  funext i j
+  have hij : i = j := Subsingleton.elim i j
+  rw [gaussianSecondMoment_oneD t ht, if_pos hij, mul_one]
+
 end QIQTH.HeatKernelA1

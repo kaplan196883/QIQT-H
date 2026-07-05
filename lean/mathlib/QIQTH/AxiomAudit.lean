@@ -8955,6 +8955,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatKernelA1.gaussianSecondMoment_oneD
 #print axioms QIQTH.HeatKernelA1.gaussianZerothMoment_oneD
 #print axioms QIQTH.HeatKernelA1.gaussianFirstMoment_oneD
+-- THE HEAT-KERNEL a1 A4 (HeatKernelA1.lean cont.): the CONDITIONAL a1 assembly --
+-- heat_a1_of_RNC: given the carried RNC Ricci + the moment matrix M = 2t.delta + kappa=1/6
+-- (CITED), the Gaussian-averaged t^1 coefficient = (1/6 - xi)R - m^2; the moment supplies the
+-- 2t.R contraction, kappa=1/6 is CARRIED. heat_a1_moment_from_secondMoment: for d=1 the moment
+-- matrix IS gaussianSecondMoment_oneD (the derived nugget). Std 3.
+#print axioms QIQTH.HeatKernelA1.heat_a1_of_RNC
+#print axioms QIQTH.HeatKernelA1.heat_a1_moment_from_secondMoment
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
