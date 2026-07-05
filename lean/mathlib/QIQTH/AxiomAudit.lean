@@ -9514,5 +9514,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.Multiplication.fourier_modSymbol_smul
 #print axioms QIQTH.Spectral.Multiplication.fourier_modulationLp_apply
 #print axioms QIQTH.Spectral.Multiplication.translationLp_eq_boundedFC_momentumPVM
+-- ★ DUAL WEYL-PAIR CAPSTONE (e^{isX}=∫e^{isx}dE, position generates modulation): modulationLp_eq_boundedFC_positionPVM
+-- — modulationLp s = mulOp(modSymbol s) by def, and boundedFC_positionPVM_eq_mulOp ⟹ e^{isX}=boundedFC positionPVM(e^{isx}).
+-- The symmetric partner of e^{itP}=τ_{−t/2π}: both Weyl generators now named spectrally on their own PVM
+-- (X=∫x dE generates modulation, P=∫k dÊ generates translation). Axiom-free (std 3). COSMETIC for QG.
+#print axioms QIQTH.Spectral.Multiplication.modulationLp_eq_boundedFC_positionPVM
 
 end QIQTH.AxiomAudit

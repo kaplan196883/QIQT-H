@@ -255,4 +255,19 @@ theorem translationLp_eq_boundedFC_momentumPVM (t : ℝ) :
       = modulationLp t ((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm f) from rfl,
     fourier_modulationLp_apply, LinearIsometryEquiv.apply_symm_apply]
 
+/-- **The dual Weyl-pair capstone: `e^{isX} = ∫ e^{isx} dE(x)` (position generates modulation).** Since
+    `modulationLp s = mulOp (modSymbol s)` by definition and the position PVM's bounded functional calculus
+    is multiplication (`boundedFC_positionPVM_eq_mulOp`), the modulation group `e^{isX}` is exactly
+    `boundedFC positionPVM (modSymbol s)` — the symmetric partner of `τ_{-t/(2π)} = e^{itP}`
+    (`translationLp_eq_boundedFC_momentumPVM`). Both generators of the canonical Weyl pair are now named
+    spectrally on their own PVM: the position operator `X = ∫ x dE` generates the modulation group, the
+    momentum operator `P = ∫ k dÊ` generates the translation group. Axiom-free. A spectral-theory capstone
+    completing the Weyl pair symmetrically — NOT a QG result. -/
+theorem modulationLp_eq_boundedFC_positionPVM (s : ℝ) :
+    (positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).boundedFC
+        (modSymbol_measurable s) zero_le_one (modSymbol_le_one s)
+      = modulationLp s := by
+  unfold modulationLp
+  exact boundedFC_positionPVM_eq_mulOp (modSymbol_measurable s) zero_le_one (modSymbol_le_one s)
+
 end QIQTH.Spectral.Multiplication
