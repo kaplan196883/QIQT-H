@@ -1574,6 +1574,19 @@ lattice area-law SCALING `S∝A`; the localization map `hTkk` smearing construct
 YM mass gap / SSB; the 4D background-independent manifold; λ's dynamical Lorentz-covariant law; the radiative
 Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
+**Numerical-`G` frontier — PRECISELY CHARACTERIZED (2026-07-05, consult-verified).** `G` is DERIVED as the
+relation `G = 1/(N Λ_s²)` with the dimensionless content `G/a₀² = 1/N` a theorem (`InducedG`, §3) — `G` is an
+output, not a carried input. What blocks the *numerical value* is exactly ONE piece, now named: the induced `1/G`
+factorizes as `[(4π)^{-d/2}·Γ-factor·Λ²]_flat × [(1/6−ξ)·spin]_curved`; the flat bracket is already derived
+(`heatDensity_oneD` = the `(4πt)^{-d/2}` prefactor, `cutoff_moment` = the `Λ²`) but feeds the a₀ vacuum-energy /
+normalization, NOT the R-coefficient; the load-bearing number in every species `c_i` is the **`(1/6−ξ)` conformal-
+coupling factor** — the R-term of the a₁ Seeley–DeWitt coefficient, which exists only because R≠0 and is a
+coincidence-limit of the covariant heat-kernel expansion in Riemann normal coordinates. Mathlib at this pin has
+**no Riemannian heat kernel, no Seeley–DeWitt recursion, and not even a stock Riemann tensor** (`ManifoldCurvature.lean`
+notes this), so the `c_i` stay cited data. The gate is a specific multi-year library (a Riemannian heat kernel),
+NOT a tractable increment; any flat-space `d`-general prefactor lemma would be buildable-but-DECORATIVE (wrong
+coefficient / a refactor of the cited datum) — do NOT build it and bill it as sharpening `G`.
+
 ## 9. The honest one-paragraph scope (what the code supports)
 
 QIQT-H's machine-checked content is: **a single-world (Φ,λ) interpretation with the Born rule REDUCED to one
