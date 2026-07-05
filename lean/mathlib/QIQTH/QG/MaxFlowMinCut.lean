@@ -1524,4 +1524,29 @@ theorem maxFlow_min_cut (cap : V → V → ℝ) (s t : V) (hst : s ≠ t) (hcap 
   obtain ⟨f, hmax⟩ := exists_maxSTFlow cap s t hcap
   exact ⟨f, hmax.1, exact_rt_maxFlow_mincut_unconditional hmax hst⟩
 
+/-- **★★ EXACT RT — the full optimality statement, UNCONDITIONAL: `ExactRT`'s Ford–Fulkerson gap
+DISCHARGED.** `ExactRT.exact_rt_of_saturating` reduced the exact Ryu–Takayanagi equality to the
+*existence of a saturating witness* (a flow `f` and a separating cut `C` with
+`flowValue f s = cutCapacity cap C`), citing that existence — the Ford–Fulkerson / Menger content —
+as the Mathlib-gap frontier. That witness now EXISTS as a machine-checked theorem: the maximum flow
+(`exists_maxSTFlow`) together with its residual-reachable cut is saturating (`maxFlow_min_cut`), so
+exact RT holds with NO carried witness. The result: for `s ≠ t` and nonnegative capacities there is a
+flow `f` and a separating cut `C` such that `f` maximizes the flow value over all `s`-`t` flows AND `C`
+minimizes the capacity over all separating cuts, with the two equal — the exact RT equality, now
+UNCONDITIONAL (carrying only `cap`-nonnegativity). This is the finite `V → V → ℝ` network model. -/
+theorem exact_rt_unconditional (cap : V → V → ℝ) (s t : V) (hst : s ≠ t)
+    (hcap : ∀ u v, 0 ≤ cap u v) :
+    ∃ (f : V → V → ℝ) (C : Finset V), IsSTFlow cap s t f ∧ s ∈ C ∧ t ∉ C ∧
+      flowValue f s = cutCapacity cap C ∧
+      (∀ f', IsSTFlow cap s t f' → flowValue f' s ≤ flowValue f s) ∧
+      (∀ C', s ∈ C' → t ∉ C' → cutCapacity cap C ≤ cutCapacity cap C') := by
+  obtain ⟨f, hmax⟩ := exists_maxSTFlow cap s t hcap
+  have hnr : t ∉ residualCut cap f s :=
+    exact_rt_of_maxFlow hmax hst
+      (fun ht => residualReachable_augments hmax.1 hst (mem_residualCut.mp ht))
+  have hsat : flowValue f s = cutCapacity cap (residualCut cap f s) :=
+    exact_rt_maxFlow_mincut_unconditional hmax hst
+  have hrt := exact_rt_of_saturating hmax.1 source_mem_residualCut hnr hsat
+  exact ⟨f, residualCut cap f s, hmax.1, source_mem_residualCut, hnr, hsat, hrt.1, hrt.2⟩
+
 end QIQTH.QG

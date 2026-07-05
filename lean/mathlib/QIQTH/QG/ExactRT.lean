@@ -14,8 +14,16 @@ cut `C` with `flowValue f s = cutCapacity cap C` — **certifies** the equality.
 `f` maximizes the flow (no flow exceeds it), `C` minimizes the cut (no separating cut is cheaper), and their
 common value is simultaneously the max flow and the min cut — i.e. **exact RT holds**. So exact RT is *reduced*
 to producing a saturating witness; the witness existence (the Ford–Fulkerson augmenting-path construction /
-Menger's theorem) is the cited Mathlib-gap frontier — a genuine multi-week formalization, honestly checkpointed
-here, not faked. We also prove the **min-cut is attained** (finitely many cuts), so "min-cut" is well-defined.
+Menger's theorem) was the cited Mathlib-gap frontier. We also prove the **min-cut is attained** (finitely many
+cuts), so "min-cut" is well-defined.
+
+**UPDATE 2026-07-05 — the Ford–Fulkerson gap is now DISCHARGED.** `QIQTH/QG/MaxFlowMinCut.lean` (M1–M12,
+axiom-free std-3) proves the saturating witness EXISTS: `maxFlow_min_cut` (a maximum flow — obtained by
+Heine–Borel compactness of the flow polytope — together with its residual-reachable cut is saturating), and
+`exact_rt_unconditional` feeds that witness into `exact_rt_of_saturating` below, so the full exact-RT optimality
+statement (`∀ f' ≤`, `∀ C' ≥`, both equal) holds UNCONDITIONALLY — carrying only `cap`-nonnegativity, the
+standard definitional hypothesis. The augmenting-path construction and existence are machine-checked, not cited.
+This is the finite `V → V → ℝ` network model, not continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`).
 -/

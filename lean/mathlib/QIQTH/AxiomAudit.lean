@@ -9050,6 +9050,12 @@ namespace QIQTH.AxiomAudit
 -- fully crossed; NOT in Mathlib. Finite network model, NOT continuum RT, NOT QG. Std 3.
 #print axioms QIQTH.QG.exists_maxSTFlow
 #print axioms QIQTH.QG.maxFlow_min_cut
+-- ★★ EXACT RT UNCONDITIONAL (QG/MaxFlowMinCut.lean): ExactRT's cited Ford-Fulkerson gap
+-- DISCHARGED -- exact_rt_unconditional feeds the now-proved saturating witness (maxFlow_min_cut)
+-- into ExactRT.exact_rt_of_saturating, so the full exact-RT optimality statement (forall f' <=,
+-- forall C' >=, both equal) holds UNCONDITIONALLY (only cap-nonneg). Finite network, NOT
+-- continuum RT, NOT QG. Std 3.
+#print axioms QIQTH.QG.exact_rt_unconditional
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form

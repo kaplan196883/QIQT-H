@@ -195,3 +195,13 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   budget 0. HONEST: the finite (V→V→ℝ) network model; NOT continuum RT, NOT QG. This also
   makes the repo's ExactRT Ford–Fulkerson gap genuinely closable (holographic entanglement =
   min-cut no longer needs to cite it). CAMPAIGN COMPLETE.
+
+- **2026-07-05** — **DISCHARGE — ExactRT's Ford–Fulkerson gap CLOSED.** exact_rt_unconditional
+  (MaxFlowMinCut.lean): feeds the now-proved saturating witness (maxFlow_min_cut) into
+  ExactRT.exact_rt_of_saturating, so the FULL exact-RT optimality statement (∃ f, C: f maximal
+  over all flows ∧ C minimal over all separating cuts ∧ equal) holds UNCONDITIONALLY (only
+  cap-nonneg). ExactRT.lean's header docstring updated: the previously-cited Ford–Fulkerson
+  Mathlib-gap frontier is now DISCHARGED (the witness existence is a machine-checked theorem,
+  not cited). A genuine QG-adjacent frontier item (holographic entanglement = min-cut, Tier-3
+  RT) is closed for the finite network model. Std-3, budget 0. HONEST: finite V→V→ℝ network,
+  NOT continuum RT, NOT QG.

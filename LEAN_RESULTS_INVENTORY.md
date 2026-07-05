@@ -1667,8 +1667,12 @@ increment at a time — including directed path-dedup theory Mathlib lacks. **M1
 flowValue continuous, IsCompact.exists_isMaxOn) and ★★ **`maxFlow_min_cut` — the finite max-flow = min-cut
 theorem, UNCONDITIONAL** (carrying ONLY cap-nonneg, the standard definitional hypothesis; the entire M1–M12
 pipeline machine-checked with NO carried mathematical hypotheses). A genuine wall FULLY CROSSED — not in Mathlib.
-HONEST: the finite (V→V→ℝ) network model, NOT continuum RT, NOT QG; but it makes the repo's ExactRT Ford–Fulkerson
-gap genuinely closable (holographic entanglement = min-cut no longer needs to cite it).
+HONEST: the finite (V→V→ℝ) network model, NOT continuum RT, NOT QG; and the repo's ExactRT Ford–Fulkerson
+gap is now DISCHARGED: `exact_rt_unconditional` feeds the proved saturating witness into
+`ExactRT.exact_rt_of_saturating`, so the full exact-RT optimality statement holds UNCONDITIONALLY (only
+cap-nonneg), and ExactRT.lean's docstring is updated — the previously-cited Ford–Fulkerson frontier is a
+machine-checked theorem, not a citation. A Tier-3 RT frontier item (holographic entanglement = min-cut) closed
+for the finite network model.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
