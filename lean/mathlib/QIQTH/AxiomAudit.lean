@@ -9538,4 +9538,15 @@ namespace QIQTH.AxiomAudit
 -- (X=∫x dE generates modulation, P=∫k dÊ generates translation). Axiom-free (std 3). COSMETIC for QG.
 #print axioms QIQTH.Spectral.Multiplication.modulationLp_eq_boundedFC_positionPVM
 
+-- ★ RNC1 — the √det g atom of the Riemann-normal-coordinate 2nd-order expansion. GIVEN the CARRIED
+-- metric-Hessian-trace datum htr : ∑_a ∂_c∂_d g_{aa}(0) = −⅔Ric_{cd} (a genuine load-bearing equation
+-- on pd(pd g), NOT a stub; RNC3 later discharges it from the radial/normal gauge), the second
+-- derivative of √det g at the origin is −⅓Ric_{cd}; the Taylor COEFFICIENT (half of it) is −⅙Ric_{cd},
+-- i.e. √det g = 1 − ⅙R_{cd}x^cx^d — the source of the κ=1/6 conformal factor. Crux: finite-product
+-- Leibniz for pd (pd_prod) + the origin permutation-sum collapse (only σ=1 survives at g(0)=δ, ∂g(0)=0)
+-- + the √ Taylor factor ½ via Real.hasDerivAt_sqrt. HONEST: ⅙ normalization ONLY — NOT numerical-G
+-- (N, Λ_s, E/ξ remain), NOT a curved heat kernel. Axiom-free (std 3).
+#print axioms QIQTH.RNCExpansion.sqrtdet_pd_pd
+#print axioms QIQTH.RNCExpansion.sqrtdet_taylor_coeff
+
 end QIQTH.AxiomAudit

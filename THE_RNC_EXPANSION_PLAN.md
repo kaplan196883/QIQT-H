@@ -23,12 +23,19 @@ The gauge MUST be a falsifiable constraint on `christoffel` (e.g. `∑_{jk} chri
 or `∂_{(l}Γ^i_{jk)}(0)=0`), NEVER a `:= True` stub or a pre-contracted `∂∂g`-equals-answer (vacuity hole).
 
 ## Increments
-- [ ] **RNC1 — the `√det g` atom (CLEAN GREEN FIRST, std-4).** GIVEN `tr∂∂g(0) = −⅔Ric` (carried honestly at this
-  stage), derive `√det g` 2nd-order coefficient `= −⅙R_{cd}`. Route (dodges the det-derivative gap by evaluating at
-  origin where `g(0)=δ`, `∂g(0)=0`): Leibniz permutation sum `det g=∑_σ sgnσ ∏_i g_{i,σi}` + finite-product Leibniz
-  for `pd` (Mathlib `deriv_finsetProd`, mirror of the file's `pd_sum`) ⟹ `∂_c∂_d(det g)(0)=tr(∂∂g)(0)`, `det g(0)=1`,
-  `∂detg(0)=0`; then `Real.hasDerivAt_sqrt` Taylor ⟹ coeff `= ¼·(−⅔R_{cd}) = −⅙R_{cd}`. Load-bearing GIVEN the input.
-  Risk: LOW (only the finite-product Leibniz plumbing).
+- [x] **RNC1 — the `√det g` atom (CLOSED, AXIOM-FREE std-3, 2026-07-06).** `QIQTH/RNCExpansion.lean`,
+  `sqrtdet_pd_pd` + `sqrtdet_taylor_coeff`. GIVEN the CARRIED, load-bearing `htr : ∑_a ∂_c∂_d g_{aa}(0) = −⅔Ric_{cd}`
+  (a genuine `pd(pd g)` equation, NOT `:= True`), with `g(0)=δ`, `∂g(0)=0`: the second derivative is
+  `∂_c∂_d √det g (0) = −⅓Ric_{cd}` (`sqrtdet_pd_pd`), and the quadratic Taylor COEFFICIENT (half of it) is
+  `−⅙Ric_{cd}`, i.e. `√det g = 1 − ⅙R_{cd}x^cx^d` (`sqrtdet_taylor_coeff`) — the `⅙` = source of `κ=1/6`. Route
+  DONE as planned: finite-product Leibniz for `pd` (`pd_prod`, mirror of `pd_sum`) on `det g=∑_σ sgnσ ∏_i g_{σi,i}`;
+  `∂g(0)=0` drops the cross terms; `g(0)=δ` collapses the perm-sum to ONLY `σ=1` (`perm_moves_in_erase` +
+  `Matrix.one_apply`) ⟹ `∂_c∂_d(det g)(0)=tr∂∂g(0)`; then `Real.hasDerivAt_sqrt` Taylor at `det g(0)=1,∂(det g)(0)=0`
+  gives the `½` (`sqrt_pd_pd`): `½·(−⅔)=−⅓` second deriv, coeff `¼·(−⅔)=−⅙`. NB the literal `pd(pd √det g)` second
+  derivative is `−⅓Ric`; the `−⅙Ric` is the TAYLOR COEFFICIENT (= ½·second derivative) — both green. `htr` is
+  genuinely CARRIED + load-bearing (used via `rw [htr]`; removing it makes `−⅓Ric` false, passing the sharp test).
+  `#print axioms` = `[propext, Classical.choice, Quot.sound]`; budget 0; pinned in `AxiomAudit.lean`; wired into
+  `QIQTH.lean`. HONEST: the `⅙` normalization ONLY — NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel.
 - [ ] **RNC2 — R1 forward `R↔∂∂g` (std-3, green).** From `g(0)=δ`, `∂g(0)=0`: `R_{ρσμν}(0)=½(∂_μ∂_σg_{ρν}−∂_μ∂_ρg_{νσ}
   −∂_ν∂_σg_{ρμ}+∂_ν∂_ρg_{μσ})(0)` via `riemann` def + `pd_mul` + `pd_comm` Schwarz (all present). Connects the tower.
 - [ ] **RNC3 — R2 inversion / the `−⅓` (std-4).** Carry the gauge `∂_{(l}Γ^i_{jk)}(0)=0` (the load-bearing normal-
@@ -63,3 +70,10 @@ RNC3 lands the gauge-derived (not carried) `−⅓`.
 - **2026-07 (scoped):** consult (fable, high) verified the RNC expansion is load-bearing + buildable on `Curvature.lean`
   (radial gauge as a christoffel constraint, no geodesics); atoms RNC1 (√det g, std-4 green-first) / RNC2 (forward,
   std-3) / RNC3 (inversion, std-4) identified with the sharp load-bearing test.
+- **2026-07-06 (RNC1 CLOSED):** `QIQTH/RNCExpansion.lean` built AXIOM-FREE (std-3), `lake build` green, budget 0.
+  `sqrtdet_pd_pd : ∂_c∂_d √det g (0) = −⅓Ric_{cd}` and `sqrtdet_taylor_coeff : ½·∂_c∂_d √det g (0) = −⅙Ric_{cd}`
+  (the `√det g = 1 − ⅙R_{cd}x^cx^d` coefficient — source of `κ=1/6`), CONDITIONAL on the carried, load-bearing
+  `htr : ∑_a ∂_c∂_d g_{aa}(0) = −⅔Ric_{cd}`. Infra proven en route: `pd_prod` (finite-product Leibniz for `pd`,
+  by hand — Mathlib lacks `ContDiff.finset_prod`), `pd_congr` (germ/eventually-eq congruence), `sqrt_pd_pd` (the `½`
+  √-Taylor factor), the origin permutation-sum collapse `perm_moves_in_erase`. NOT numerical-G, NOT a curved heat
+  kernel. NEXT: RNC2 (forward `R↔∂∂g`), then RNC3 (gauge-derived `−⅓`, discharging `htr`).

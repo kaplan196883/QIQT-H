@@ -322,6 +322,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `riemann`/`ricci` canonically **the** curvature/Ricci *of the metric*, closing the "arbitrary connection → THE
   metric connection" gap. **FOUNDATION brick: NOT the Seeley–DeWitt `(1/6−ξ)R` coefficient, and it does NOT move
   the numerical value of `G`** — the numerical-`G` gate is still the Riemannian heat kernel (§8, unchanged).
+- **RNC1 — the `√det g` atom of the Riemann-normal-coordinate 2nd-order expansion** (`RNCExpansion.lean`
+  `sqrtdet_pd_pd`/`sqrtdet_taylor_coeff`, both **[AF]** std-3, 2026-07-06). On the component `pd` calculus of
+  `Curvature.lean`: GIVEN the **CARRIED, load-bearing** metric-Hessian-trace datum
+  `htr : ∑_a ∂_c∂_d g_{aa}(0) = −⅔ Ric_{cd}` (a genuine equation on `pd (pd g)`, NOT a `:= True` stub — remove it
+  and the conclusion is false), with `g_{ab}(0)=δ_{ab}` and `∂g(0)=0`, the second derivative of `√det g` at the
+  origin is **`∂_c∂_d √det g (0) = −⅓ Ric_{cd}`** (`sqrtdet_pd_pd`), equivalently the quadratic Taylor
+  **COEFFICIENT** (half of it) is **`−⅙ Ric_{cd}`**, i.e. **`√det g = 1 − ⅙ R_{cd} x^c x^d`** (`sqrtdet_taylor_coeff`).
+  The **`⅙` is the source of the `κ = 1/6` conformal factor**. Route (dodges the general det-derivative gap by
+  evaluating at the origin): finite-product Leibniz for `pd` (`pd_prod`, mirror of `pd_sum`) applied to
+  `det g = ∑_σ sgn σ ∏_i g_{σi,i}`, so `∂g(0)=0` kills the cross terms and `g(0)=δ` collapses the permutation sum to
+  **only `σ=1`** (`perm_moves_in_erase` + `Matrix.one_apply`), giving `∂_c∂_d(det g)(0)=tr∂∂g(0)`; then the `√` Taylor
+  factor `½` from `Real.hasDerivAt_sqrt` at `det g(0)=1`, `∂(det g)(0)=0` (`sqrt_pd_pd`). ⚠ **HONEST CAPTION
+  (binding)**: the `⅙` normalization is **CONDITIONAL on the carried `htr`** (RNC3 later discharges it from the
+  radial/normal gauge — NOT yet done); it is the **`⅙` normalization ONLY** and does **NOT** give the numerical value
+  of `G` (species count `N`, granularity scale `Λ_s`, the `E/ξ` heat-kernel term remain), and does **NOT** build a
+  curved heat kernel. **[frontier]**: RNC2 (forward `R↔∂∂g`), RNC3 (gauge-derived `−⅓`, discharging `htr`), RNC4 (wire
+  to `heat_a1_of_RNC`).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
