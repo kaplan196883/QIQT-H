@@ -131,4 +131,72 @@ theorem heat_a1_moment_from_secondMoment (t : ℝ) (ht : 0 < t) :
   have hij : i = j := Subsingleton.elim i j
   rw [gaussianSecondMoment_oneD t ht, if_pos hij, mul_one]
 
+/-- **★ A3 — the d-dimensional diagonal Gaussian moment matrix.** For the product heat kernel
+    `∏ₖ G_t(xₖ)` on `Fin d → ℝ`, the second-moment matrix is `2t · δ_{ij}`:
+
+        ∫ (∏ₖ G_t(xₖ)) · xᵢ xⱼ  dx = 2t · (if i = j then 1 else 0).
+
+    This DERIVES the moment matrix carried as the hypothesis `hM` in `heat_a1_of_RNC`. Proof:
+    `MeasureTheory.integral_fintype_prod_volume_eq_prod` (unconditional Fubini for a finite product
+    of `volume`-integrals) factors the integral into a product of 1-D integrals; each factor is one
+    of the derived 1-D moments — the diagonal coordinate contributes `∫ G_t x² = 2t`
+    (`gaussianSecondMoment_oneD`), the rest contribute `∫ G_t = 1` (`gaussianZerothMoment_oneD`); off
+    the diagonal a coordinate contributes `∫ G_t x = 0` (`gaussianFirstMoment_oneD`), killing the
+    product. Still FLAT-SPACE ANALYSIS: this is the `2t·δ` contraction data, not the curved-space
+    κ = 1/6. -/
+theorem gaussianMoment_diag (d : ℕ) (t : ℝ) (ht : 0 < t) (i j : Fin d) :
+    ∫ x : (Fin d → ℝ), (∏ k, heatKernel1D t (x k)) * (x i * x j)
+      = 2 * t * (if i = j then 1 else 0) := by
+  by_cases hij : i = j
+  · -- diagonal: one coordinate gives `2t`, the rest give `1`.
+    rw [if_pos hij, mul_one]
+    have hpt : ∀ x : Fin d → ℝ, (∏ k, heatKernel1D t (x k)) * (x i * x j)
+        = ∏ k, (heatKernel1D t (x k) * (if k = i then (x k) ^ 2 else 1)) := by
+      intro x
+      rw [Finset.prod_mul_distrib, Fintype.prod_ite_eq', ← hij]; ring
+    rw [integral_congr_ae (ae_of_all _ hpt),
+        integral_fintype_prod_volume_eq_prod
+          (fun k (y : ℝ) => heatKernel1D t y * (if k = i then y ^ 2 else 1))]
+    have hcoord : ∀ k : Fin d,
+        (∫ y : ℝ, heatKernel1D t y * (if k = i then y ^ 2 else 1))
+          = (if k = i then 2 * t else 1) := by
+      intro k
+      by_cases hk : k = i
+      · simp only [if_pos hk]; exact gaussianSecondMoment_oneD t ht
+      · simp only [if_neg hk, mul_one]; exact gaussianZerothMoment_oneD t ht
+    rw [Finset.prod_congr rfl (fun k _ => hcoord k), Fintype.prod_ite_eq']
+  · -- off-diagonal: coordinate `i` contributes `∫ G_t x = 0`, killing the product.
+    rw [if_neg hij, mul_zero]
+    have hpt : ∀ x : Fin d → ℝ, (∏ k, heatKernel1D t (x k)) * (x i * x j)
+        = ∏ k, (heatKernel1D t (x k) * (if k = i then x k else 1)
+                  * (if k = j then x k else 1)) := by
+      intro x
+      rw [Finset.prod_mul_distrib, Finset.prod_mul_distrib,
+          Fintype.prod_ite_eq', Fintype.prod_ite_eq']; ring
+    rw [integral_congr_ae (ae_of_all _ hpt),
+        integral_fintype_prod_volume_eq_prod
+          (fun k (y : ℝ) => heatKernel1D t y * (if k = i then y else 1)
+                              * (if k = j then y else 1))]
+    refine Finset.prod_eq_zero (Finset.mem_univ i) ?_
+    show (∫ y : ℝ, heatKernel1D t y * (if i = i then y else 1) * (if i = j then y else 1)) = 0
+    have heq : (fun y : ℝ => heatKernel1D t y * (if i = i then y else 1) * (if i = j then y else 1))
+        = (fun y : ℝ => heatKernel1D t y * y) := by
+      funext y; rw [if_pos rfl, if_neg hij, mul_one]
+    rw [heq]; exact gaussianFirstMoment_oneD t ht
+
+/-- **★ A3 → A4 — the a₁ assembly with the moment matrix DERIVED, not carried.** Instantiating
+    `heat_a1_of_RNC` with the actual product-heat-kernel second-moment matrix
+    `Mmatrix i j = ∫ (∏ₖ G_t)·xᵢxⱼ` discharges the carried hypothesis `hM` by `gaussianMoment_diag`.
+    So for the product heat kernel in every dimension `d` the `2t·δ` contraction data is a THEOREM;
+    only the conformal-coupling value `κ = 1/6` and the Ricci datum remain carried, cited geometry. -/
+theorem heat_a1_of_RNC_derived {d : ℕ} (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
+    (Rμν : Fin d → Fin d → ℝ) (κ : ℝ) (hκ : κ = 1 / 6)
+    (Rscl : ℝ) (hR : Rscl = ∑ i, Rμν i i) :
+    (1 / (2 * t)) * (κ * ∑ i, ∑ j, Rμν i j *
+        (∫ x : (Fin d → ℝ), (∏ k, heatKernel1D t (x k)) * (x i * x j))) - ξ * Rscl - m ^ 2
+      = (1 / 6 - ξ) * Rscl - m ^ 2 :=
+  heat_a1_of_RNC t ht ξ m Rμν κ hκ
+    (fun i j => ∫ x : (Fin d → ℝ), (∏ k, heatKernel1D t (x k)) * (x i * x j))
+    (fun i j => gaussianMoment_diag d t ht i j) Rscl hR
+
 end QIQTH.HeatKernelA1

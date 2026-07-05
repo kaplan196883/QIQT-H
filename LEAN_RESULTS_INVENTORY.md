@@ -23,12 +23,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the a₁ Seeley–DeWitt coefficient program (the `2t·R` contraction machinery). HONEST: flat-space only; the
   curved-space RNC geometry AND the value κ = 1/6 are carried/cited, NEVER produced by the Gaussian moment — the
   numerical-G frontier stays exactly as characterized above (the 1/6 needs the covariant heat-kernel expansion
-  Mathlib lacks). **A4 LANDED**: `heat_a1_of_RNC` — the conditional a₁
+  Mathlib lacks). **A3+A4 LANDED — CAMPAIGN COMPLETE**: `heat_a1_of_RNC` — the conditional a₁
   assembly: given carried RNC Ricci + the moment matrix 2t·δ + the CITED κ=1/6, the
   Gaussian-averaged t¹ coefficient = (1/6−ξ)R − m²; with `heat_a1_moment_from_secondMoment`
   connecting the d=1 moment matrix to the derived `gaussianSecondMoment_oneD`. The a₁
   analysis-half is now machine-checked (the 2t·R contraction); κ=1/6 stays carried/cited.
-  Next: A3 (d-dim moment, optional) then checkpoint.
+  **A3 DERIVED THE d-DIM MOMENT** (Fubini
+  hazard absent — the Pi integral lemma is unconditional): `gaussianMoment_diag`
+  (∫ (∏_k G_t(x_k)) x_i x_j = 2t·δ_ij), and `heat_a1_of_RNC_derived` discharges the carried
+  moment-matrix hypothesis — so the 2t·δ contraction is DERIVED for all d. THE a₁
+  ANALYSIS-HALF IS COMPLETE: the (1/6−ξ)R coefficient underlying the species accounting of G
+  is now (κ=1/6 cited-geometry) + (contraction machinery derived-analysis). κ=1/6 stays cited
+  (needs the covariant heat-kernel expansion Mathlib lacks); no numerical G. Honest house-style
+  hypothesis-shrinking of the numerical-G frontier.
 - **FIELD-LEVEL BISOGNANO–WICHMANN UNCONDITIONAL (2026-07-05).** `QIQTH.Fock.freeField_secondQuant_BW_unconditional`
   (`Fock/FieldBWUnconditional.lean`, axiom-free std-3): the second-quantized wedge modular automorphism acts on
   Weyl operators as the geometric Lorentz boost — σ_t(W(u)) = W(boost(2πt)u) conjugated — with NO carried BW

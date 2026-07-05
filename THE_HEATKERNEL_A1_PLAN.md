@@ -1,6 +1,6 @@
 # THE HEAT-KERNEL a₁ CAMPAIGN — the derived-analysis half of the (1/6−ξ)R coefficient
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
+**Status:** COMPLETE (2026-07-05) — A1–A4 ALL LANDED (A3 succeeded, moment matrix DERIVED for all d). Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent ab1397370779af8d8 (2026-07-05) — verified BUILDABLE, not
 a wall; the load-bearing Gaussian second moment is reachable at the pin.
 
@@ -43,7 +43,7 @@ this upgrades).
 - [x] **A2 — normalization + first moment.** ✅ DONE `gaussianZerothMoment_oneD : ∫ x, G_t x = 1`
   (gaussianReal a probability measure via the bridge) and `gaussianFirstMoment_oneD :
   ∫ x, G_t x * x = 0` (integral_id_gaussianReal, μ=0). Risk LOW.
-- [ ] **A3 (OPTIONAL, time-boxed) — the d-dim moment matrix.** `gaussianMoment_diag (d)(t)(ht)
+- [x] **A3 (OPTIONAL, time-boxed) — the d-dim moment matrix.** ✅ DONE (Fubini hazard did NOT materialize) `gaussianMoment_diag (d)(t)(ht)
   (i j : Fin d) : ∫ x:(Fin d→ℝ), (∏ k, G_t (x k)) * (x i * x j) = 2t * (if i=j then 1 else 0)`.
   Route: integral_fintype_prod_volume_eq_prod split; i=j ⟹ (∫G_t)^{d−1}·(∫G_t x²) = 2t
   (A1+A2); i≠j ⟹ factor ∫G_t x = 0. Needs Fubini integrability side-goals (integrable_
@@ -119,3 +119,13 @@ paths only (Lean + plan + inventory + audit ONLY).
   gaussianSecondMoment_oneD (the derived nugget genuinely feeds the assembly). Honesty label
   crisp: the moment gives 2t·R, κ=1/6 is carried. Std-3, budget 0. Next: A3 (d-dim moment,
   optional/time-boxed) then checkpoint.
+
+- **2026-07-05** — **A3 LANDED — CAMPAIGN COMPLETE (green first try).** gaussianMoment_diag:
+  ∫ (∏_k G_t(x_k)) x_i x_j = 2t·δ_ij for the product heat kernel — the Fubini hazard did NOT
+  materialize (integral_fintype_prod_volume_eq_prod is UNCONDITIONAL, no per-factor
+  integrability); by_cases i=j, Finset.prod_mul_distrib + Fintype.prod_ite_eq' + the three
+  1-D moments. ★ heat_a1_of_RNC_derived DISCHARGES the carried hM via gaussianMoment_diag —
+  so the 2t·δ contraction is DERIVED for ALL d, not just carried; only κ=1/6 + the Ricci
+  datum stay carried/cited geometry. Std-3, budget 0. THE CAMPAIGN STANDS: the analysis-half
+  of the a₁ coefficient is machine-checked; the numerical-G frontier's honest boundary is
+  now (1/6=cited) + (contraction=derived). Per the standing directive the loop continues.

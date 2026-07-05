@@ -8962,6 +8962,13 @@ namespace QIQTH.AxiomAudit
 -- matrix IS gaussianSecondMoment_oneD (the derived nugget). Std 3.
 #print axioms QIQTH.HeatKernelA1.heat_a1_of_RNC
 #print axioms QIQTH.HeatKernelA1.heat_a1_moment_from_secondMoment
+-- THE HEAT-KERNEL a1 A3 (HeatKernelA1.lean cont.): the d-dim moment matrix DERIVED --
+-- gaussianMoment_diag: int (prod_k G_t(x_k)) x_i x_j = 2t.delta_ij (product heat kernel,
+-- via the unconditional Pi/Fubini split + the three 1-D moments); heat_a1_of_RNC_derived
+-- discharges the carried hM, so the 2t.delta contraction is DERIVED for all d -- only
+-- kappa=1/6 + the Ricci datum stay carried/cited geometry. Std 3.
+#print axioms QIQTH.HeatKernelA1.gaussianMoment_diag
+#print axioms QIQTH.HeatKernelA1.heat_a1_of_RNC_derived
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
