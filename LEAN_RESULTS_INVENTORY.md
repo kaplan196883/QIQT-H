@@ -1657,8 +1657,13 @@ ENTIRE FORWARD side is now machine-checked** (combinatorial core + augmentation 
 degree-structured residual path (Pf forward + Pb backward edges) yields a strictly larger flow (g = f ± ε, all
 four IsSTFlow fields derived, the ±ε conservation via linear_combination — outgoing step +ε, incoming −ε
 regardless of type). ForwardAugPath is the Pb = ∅ case. So max-flow's ENTIRE augmentation mechanism (forward +
-mixed) is now derived; carried: only the mixed EXTRACTION (adapt the M8/M9 directed dedup to typed residual
-walks) + max-flow existence (the analytic frontier).
+mixed) is now derived; **M11** discharges the mixed extraction: `residualReachable_augments` (general residual reachability ⟹
+a bigger flow — the FULL Ford–Fulkerson haug DERIVED, via the Pf/Pb tagging of a SimpleResidualPath + M10's mixed
+augmentation) and ★★ `exact_rt_maxFlow_mincut_unconditional` — **max-flow = min-cut conditional on ONLY the
+existence of a maximum flow**. The entire combinatorial + augmentation content (both directions) is now derived;
+the ONLY remaining carry is max-flow EXISTENCE (compactness / Ford–Fulkerson termination — the genuine analytic
+frontier). A wall I'd called a multi-year library, now down to a single carried existence input, built one honest
+increment at a time — including directed path-dedup theory Mathlib lacks.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks

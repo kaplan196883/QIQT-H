@@ -167,3 +167,17 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   interior conservation. ForwardAugPath is now the Pb = ∅ special case. Std-3, budget 0.
   **Max-flow's entire AUGMENTATION MECHANISM (forward + mixed) is now derived**; carried:
   the mixed EXTRACTION (adapt the M8/M9 dedup to typed residual walks) + max-flow existence.
+
+- **2026-07-05** — **M11 LANDED (COMPLETE, all 5 steps) — the general haug DERIVED and
+  DISCHARGED.** SimpleResidualPath (the ResidualStep analogue of SimpleForwardPath, from
+  reachability via M9's GENERIC exists_nodup_isChain_list); toResidualAugPath — the TAGGING:
+  each residual step tagged Pf (forward slack) / Pb (¬slack ⟹ backflow), the disjoint-union
+  card split (#Pf + #Pb = #edge, Finset.card_union_of_disjoint) reduced onto M8's fibre
+  counts gives the typed degree structure; ★ residualReachable_augments — general residual
+  reachability ⟹ a strictly larger flow (the FULL Ford–Fulkerson haug, DERIVED, composing the
+  tagging + mixed ε + M10's residualAugPath_augments); ★★ exact_rt_maxFlow_mincut_unconditional
+  — max-flow = min-cut conditional on ONLY max-flow EXISTENCE (via mem_residualCut, the haug is
+  no longer carried). Std-3, budget 0. **MAX-FLOW = MIN-CUT is now machine-checked, conditional
+  on ONLY the existence of a maximum flow** — the entire combinatorial + augmentation content
+  (both directions) is derived. Only carry left: max-flow EXISTENCE (compactness/termination,
+  the genuine analytic frontier). Next: M12 (existence via compactness of the flow polytope).

@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# M1–M9 — the combinatorial core of max-flow = min-cut
+# M1–M11 — the combinatorial core of max-flow = min-cut
 
 Built on Track C's flow/cut framework (`EmergentSpacetime.lean`, `section Flow`). This file delivers the
 combinatorial content of the hard half of max-flow = min-cut, discharging the combinatorial part of
@@ -97,8 +97,14 @@ carry (a) to the single directed-dedup step — **which M9 now discharges**
 (`simpleForwardPath_of_reachable`: a forward residual `ReflTransGen` walk is materialised as an `IsChain`
 list, de-duplicated by the splice-shortens induction, and converted to a `SimpleForwardPath`). So for the
 FORWARD case the entire pipeline reachability ⟹ strictly larger flow is now derived; the residual carry is
-only (b) mixed forward/backward paths and (c) max-flow EXISTENCE. This is the finite (`V→V→ℝ`) network
-model, not a continuum RT.
+only (b) mixed forward/backward paths and (c) max-flow EXISTENCE. **M11 discharges (b)**: the mixed
+`SimpleResidualPath` (Step 1, M9's dedup reused verbatim on `ResidualStep`), the deterministic
+forward/backward tagging into a `ResidualAugPath` (Step 2, `toResidualAugPath` — disjoint-union card split
+onto M8's fibre counts), and the mixed-margin `ε` feeding M10 (`residualReachable_augments`), so GENERAL
+residual reachability `s ⇝ t` alone yields a strictly larger flow — the full Ford–Fulkerson `haug`. That
+`haug`, carried through M4/M5, is then DISCHARGED in `exact_rt_maxFlow_mincut_unconditional` (via
+`mem_residualCut`), leaving max-flow = min-cut conditional ONLY on (c) max-flow EXISTENCE (`IsMaxSTFlow`).
+This is the finite (`V→V→ℝ`) network model, not a continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`; `open Classical` for the reachable-set
 filter's decidability is a local convenience, not a project axiom).
@@ -1043,5 +1049,356 @@ theorem residualAugPath_augments {cap : V → V → ℝ} {s t : V} {f : V → V 
       linear_combination ε * hscard
     rw [hval]
     linarith
+
+/-! ### M11 — the mixed extraction and the general Ford–Fulkerson `haug`, DERIVED
+
+M10 built the augmentation MECHANISM given a degree-structured `ResidualAugPath` (typed forward `Pf` /
+backward `Pb` edge relations with the combined residual degree structure). M11 discharges the *extraction*
+of that structure from a general residual reachability walk, mirroring M8/M9's forward pipeline for the
+full mixed `ResidualStep`:
+
+* **Step 1** `SimpleResidualPath` / `simpleResidualPath_of_reachable` — a *simple* (de-duplicated) residual
+  path, an injective `Fin (n+1)`-indexed vertex sequence with a `ResidualStep` on every consecutive pair,
+  materialised from `Relation.ReflTransGen (ResidualStep cap f) s t` by REUSING M9's generic directed dedup
+  (`exists_nodup_isChain_list` is generic in the step relation `r`, so it applies verbatim to
+  `r := ResidualStep cap f`). This is M9's `simpleForwardPath_of_reachable` with `ForwardResidualStep`
+  replaced by `ResidualStep`.
+* **Step 2** `SimpleResidualPath.toResidualAugPath` — **the tagging.** Each path edge `u→v` is TAGGED
+  deterministically: `Pf u v` if it has forward slack (`0 < cap u v − f u v`), else `Pb u v` (the residual
+  step then forces `0 < f v u`). `Pf` and `Pb` are disjoint and their union is the path-edge set, so the
+  combined out and in degree splits as `#Pf + #Pb = #edge` (`card_union_of_disjoint`), and the edge degree is
+  exactly M8's fibre count (`card_edge_out`/`card_edge_in`, the same injective-fibre computation). The
+  `ResidualAugPath` degree conditions (`hDeg`/`hs`/`ht`) thus reduce to M8's simple-path edge degrees;
+  `hfslack`/`hbpos` come from the tag.
+* **Step 3 + 4** `residualReachable_augments` — **the general haug, DERIVED.** ε is the min over the finite
+  nonempty combined edge set of the per-edge margin (forward slack on `Pf` edges, backflow `f v u` on `Pb`
+  edges), positive by `hfslack`/`hbpos`; it feeds `residualAugPath_augments` (M10). So residual
+  reachability `s ⇝ t` ALONE yields a strictly larger flow — the FULL Ford–Fulkerson augmenting-path
+  input, no longer carried, no forward/backward restriction.
+* **Step 5** `exact_rt_maxFlow_mincut_unconditional` — **the haug discharged in the capstone.** Since
+  `t ∈ residualCut ↔ ReflTransGen (ResidualStep cap f) s t` (`mem_residualCut`),
+  `residualReachable_augments` PROVES the `haug` that M4/M5 carried. So max-flow = min-cut now holds for
+  any maximum flow with `s ≠ t` with NO carried augmentation hypothesis — conditional ONLY on max-flow
+  EXISTENCE (`IsMaxSTFlow`), the single remaining carry.
+-/
+
+/-- **M11 (Step 1) — a simple mixed residual augmenting path**, the `ResidualStep` analogue of
+`SimpleForwardPath`: an *injective* `Fin (n+1)`-indexed vertex sequence from `s` to `t`, `n ≥ 1`, with a
+(mixed forward/backward) `ResidualStep` on every consecutive pair. -/
+structure SimpleResidualPath (cap : V → V → ℝ) (s t : V) (f : V → V → ℝ) where
+  /-- Number of edges (so `n+1` vertices); at least one edge. -/
+  n : ℕ
+  /-- The path has at least one edge. -/
+  hn : 1 ≤ n
+  /-- The vertex sequence. -/
+  p : Fin (n + 1) → V
+  /-- Simplicity: the vertex sequence has no repeats. -/
+  hp_inj : Function.Injective p
+  /-- The first vertex is the source. -/
+  hp0 : p 0 = s
+  /-- The last vertex is the sink. -/
+  hplast : p (Fin.last n) = t
+  /-- Every consecutive pair is a residual step. -/
+  hstep : ∀ i : Fin n, ResidualStep cap f (p i.castSucc) (p i.succ)
+
+/-- The directed edge relation of a `SimpleResidualPath`: `u→v` is an edge iff some consecutive pair of the
+vertex sequence is `(u, v)`. -/
+def SimpleResidualPath.edge {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleResidualPath cap s t f) (u v : V) : Prop :=
+  ∃ i : Fin SP.n, SP.p i.castSucc = u ∧ SP.p i.succ = v
+
+/-- **M11 — the forward tag.** A path edge `u→v` with forward residual slack. -/
+def SimpleResidualPath.Pf {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleResidualPath cap s t f) (u v : V) : Prop :=
+  SP.edge u v ∧ 0 < cap u v - f u v
+
+/-- **M11 — the backward tag.** A path edge `u→v` WITHOUT forward slack (so, being a residual step, its
+reverse real edge `v→u` carries flow to cancel). -/
+def SimpleResidualPath.Pb {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleResidualPath cap s t f) (u v : V) : Prop :=
+  SP.edge u v ∧ ¬ (0 < cap u v - f u v)
+
+/-- **M11 — edge out-degree = injective fibre count** (the M8 computation for the residual edge). -/
+theorem SimpleResidualPath.card_edge_out {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleResidualPath cap s t f) (u : V) :
+    (Finset.univ.filter (fun v => SP.edge u v)).card
+      = if (∃ i : Fin SP.n, SP.p i.castSucc = u) then 1 else 0 := by
+  classical
+  have hcs_inj : Function.Injective (fun i : Fin SP.n => SP.p i.castSucc) :=
+    SP.hp_inj.comp (Fin.castSucc_injective SP.n)
+  have hsucc_inj : Function.Injective (fun i : Fin SP.n => SP.p i.succ) :=
+    SP.hp_inj.comp (Fin.succ_injective SP.n)
+  have himg : Finset.univ.filter (fun v => SP.edge u v)
+      = (Finset.univ.filter (fun i : Fin SP.n => SP.p i.castSucc = u)).image
+          (fun i : Fin SP.n => SP.p i.succ) := by
+    ext v
+    simp only [SimpleResidualPath.edge, Finset.mem_filter, Finset.mem_univ, true_and,
+      Finset.mem_image]
+  rw [himg, Finset.card_image_of_injective _ hsucc_inj,
+    card_filter_fiber_of_injective _ hcs_inj u]
+
+/-- **M11 — edge in-degree = injective fibre count** (the M8 computation for the residual edge). -/
+theorem SimpleResidualPath.card_edge_in {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleResidualPath cap s t f) (u : V) :
+    (Finset.univ.filter (fun v => SP.edge v u)).card
+      = if (∃ i : Fin SP.n, SP.p i.succ = u) then 1 else 0 := by
+  classical
+  have hcs_inj : Function.Injective (fun i : Fin SP.n => SP.p i.castSucc) :=
+    SP.hp_inj.comp (Fin.castSucc_injective SP.n)
+  have hsucc_inj : Function.Injective (fun i : Fin SP.n => SP.p i.succ) :=
+    SP.hp_inj.comp (Fin.succ_injective SP.n)
+  have himg : Finset.univ.filter (fun v => SP.edge v u)
+      = (Finset.univ.filter (fun i : Fin SP.n => SP.p i.succ = u)).image
+          (fun i : Fin SP.n => SP.p i.castSucc) := by
+    ext v
+    simp only [SimpleResidualPath.edge, Finset.mem_filter, Finset.mem_univ, true_and,
+      Finset.mem_image]
+    constructor
+    · rintro ⟨i, h1, h2⟩; exact ⟨i, h2, h1⟩
+    · rintro ⟨i, h1, h2⟩; exact ⟨i, h2, h1⟩
+  rw [himg, Finset.card_image_of_injective _ hcs_inj,
+    card_filter_fiber_of_injective _ hsucc_inj u]
+
+section
+open List
+set_option linter.unusedSectionVars false
+
+/-- **★★ M11 (Step 1) — the mixed directed dedup capstone.** Residual reachability `s ⇝ t`
+(`Relation.ReflTransGen (ResidualStep cap f) s t`) with `s ≠ t` yields a `SimpleResidualPath`. This is
+M9's `simpleForwardPath_of_reachable` with `ForwardResidualStep` replaced by the mixed `ResidualStep`,
+REUSING M9's generic dedup `exists_nodup_isChain_list` (generic in the step relation). -/
+theorem simpleResidualPath_of_reachable {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (hst : s ≠ t)
+    (hreach : Relation.ReflTransGen (ResidualStep cap f) s t) :
+    Nonempty (SimpleResidualPath cap s t f) := by
+  obtain ⟨w, hc, hh, hl, hnd⟩ := exists_nodup_isChain_list hreach
+  have hwne : w ≠ [] := by rintro rfl; simp at hh
+  have hlen1 : 1 ≤ w.length := List.length_pos_iff_ne_nil.mpr hwne
+  have h0 : w[0]'(by omega) = s := by
+    have e : w[0]? = some s := by rw [← head?_eq_getElem?]; exact hh
+    rw [getElem?_eq_getElem (by omega)] at e; simpa using e
+  have hL : w[w.length - 1]'(by omega) = t := by
+    have e : w[w.length - 1]? = some t := by rw [← getLast?_eq_getElem?]; exact hl
+    rw [getElem?_eq_getElem (by omega)] at e; simpa using e
+  have hlen2 : 2 ≤ w.length := by
+    rcases Nat.lt_or_ge w.length 2 with h | h
+    · exfalso; apply hst
+      have hone : w.length = 1 := by omega
+      have e0 : w[0]? = some s := by rw [← head?_eq_getElem?]; exact hh
+      have eL : w[0]? = some t := by
+        have := hl; rw [getLast?_eq_getElem?, hone] at this; simpa using this
+      rw [e0] at eL; exact Option.some.injEq _ _ |>.mp eL
+    · exact h
+  have hN' : w.length - 1 + 1 = w.length := by omega
+  refine ⟨{
+    n := w.length - 1
+    hn := by omega
+    p := fun i => w.get (Fin.cast hN' i)
+    hp_inj := by
+      intro x y hxy
+      simp only [List.get_eq_getElem] at hxy
+      exact Fin.cast_injective hN'
+        ((List.nodup_iff_injective_get.mp hnd) (by simpa [List.get_eq_getElem] using hxy))
+    hp0 := by
+      simp only [List.get_eq_getElem, Fin.val_cast, Fin.val_zero]; exact h0
+    hplast := by
+      simp only [List.get_eq_getElem, Fin.val_cast, Fin.val_last]; exact hL
+    hstep := by
+      intro i
+      have hi1 : (i : ℕ) + 1 < w.length := by have := i.2; omega
+      have hstep := isChain_iff_getElem.mp hc i.val hi1
+      show ResidualStep cap f (w.get (Fin.cast hN' i.castSucc)) (w.get (Fin.cast hN' i.succ))
+      simp only [List.get_eq_getElem, Fin.val_cast, Fin.val_castSucc, Fin.val_succ]
+      exact hstep
+  }⟩
+
+end
+
+/-- **★★ M11 (Step 2) — the tagging: a simple residual path yields a `ResidualAugPath`.** Each path edge
+is tagged forward (`Pf`, has slack) or backward (`Pb`, no slack ⟹ backflow). `Pf`/`Pb` disjoint with
+union the path edges, so the combined degree splits as `#Pf + #Pb = #edge`, and edge degree is M8's
+injective fibre count — giving the `ResidualAugPath` degree structure. This is the mixed-direction
+analogue of `SimpleForwardPath.toForwardAugPath`. -/
+def SimpleResidualPath.toResidualAugPath {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleResidualPath cap s t f) : ResidualAugPath cap s t f := by
+  classical
+  haveI : NeZero SP.n := ⟨by have := SP.hn; omega⟩
+  -- the disjoint-union card split, both directions: `#Pf + #Pb = #edge`.
+  have hsplit_out : ∀ w, (Finset.univ.filter (fun v => SP.Pf w v)).card
+        + (Finset.univ.filter (fun v => SP.Pb w v)).card
+      = (Finset.univ.filter (fun v => SP.edge w v)).card := by
+    intro w
+    have hdisj : Disjoint (Finset.univ.filter (fun v => SP.Pf w v))
+        (Finset.univ.filter (fun v => SP.Pb w v)) := by
+      rw [Finset.disjoint_left]
+      intro v hpf hpb
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and, SimpleResidualPath.Pf,
+        SimpleResidualPath.Pb] at hpf hpb
+      exact hpb.2 hpf.2
+    rw [← Finset.card_union_of_disjoint hdisj]
+    congr 1
+    ext v
+    simp only [Finset.mem_union, Finset.mem_filter, Finset.mem_univ, true_and,
+      SimpleResidualPath.Pf, SimpleResidualPath.Pb]
+    constructor
+    · rintro (⟨he, _⟩ | ⟨he, _⟩) <;> exact he
+    · intro he
+      by_cases hsl : 0 < cap w v - f w v
+      · exact Or.inl ⟨he, hsl⟩
+      · exact Or.inr ⟨he, hsl⟩
+  have hsplit_in : ∀ w, (Finset.univ.filter (fun u => SP.Pf u w)).card
+        + (Finset.univ.filter (fun u => SP.Pb u w)).card
+      = (Finset.univ.filter (fun u => SP.edge u w)).card := by
+    intro w
+    have hdisj : Disjoint (Finset.univ.filter (fun u => SP.Pf u w))
+        (Finset.univ.filter (fun u => SP.Pb u w)) := by
+      rw [Finset.disjoint_left]
+      intro v hpf hpb
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and, SimpleResidualPath.Pf,
+        SimpleResidualPath.Pb] at hpf hpb
+      exact hpb.2 hpf.2
+    rw [← Finset.card_union_of_disjoint hdisj]
+    congr 1
+    ext v
+    simp only [Finset.mem_union, Finset.mem_filter, Finset.mem_univ, true_and,
+      SimpleResidualPath.Pf, SimpleResidualPath.Pb]
+    constructor
+    · rintro (⟨he, _⟩ | ⟨he, _⟩) <;> exact he
+    · intro he
+      by_cases hsl : 0 < cap v w - f v w
+      · exact Or.inl ⟨he, hsl⟩
+      · exact Or.inr ⟨he, hsl⟩
+  exact {
+    Pf := SP.Pf
+    Pb := SP.Pb
+    hDeg := by
+      intro w hws hwt
+      rw [hsplit_out w, hsplit_in w, SP.card_edge_out w, SP.card_edge_in w]
+      have hiff : (∃ i : Fin SP.n, SP.p i.castSucc = w) ↔ (∃ i : Fin SP.n, SP.p i.succ = w) := by
+        have cs : (∃ i : Fin SP.n, SP.p i.castSucc = w)
+            ↔ (∃ j : Fin (SP.n + 1), j ≠ Fin.last SP.n ∧ SP.p j = w) := by
+          constructor
+          · rintro ⟨i, rfl⟩; exact ⟨i.castSucc, Fin.castSucc_ne_last i, rfl⟩
+          · rintro ⟨j, hj, rfl⟩; exact ⟨j.castPred hj, by rw [Fin.castSucc_castPred]⟩
+        have sc : (∃ i : Fin SP.n, SP.p i.succ = w)
+            ↔ (∃ j : Fin (SP.n + 1), j ≠ 0 ∧ SP.p j = w) := by
+          constructor
+          · rintro ⟨i, rfl⟩; exact ⟨i.succ, Fin.succ_ne_zero i, rfl⟩
+          · rintro ⟨j, hj, rfl⟩; exact ⟨j.pred hj, by rw [Fin.succ_pred]⟩
+        rw [cs, sc]
+        constructor
+        · rintro ⟨j, _, rfl⟩
+          exact ⟨j, fun hj0 => hws (by rw [hj0, SP.hp0]), rfl⟩
+        · rintro ⟨j, _, rfl⟩
+          exact ⟨j, fun hjl => hwt (by rw [hjl, SP.hplast]), rfl⟩
+      simp only [hiff]
+    hs := by
+      rw [hsplit_out s, hsplit_in s, SP.card_edge_out s, SP.card_edge_in s]
+      have hex : ∃ i : Fin SP.n, SP.p i.castSucc = s := ⟨0, by rw [Fin.castSucc_zero', SP.hp0]⟩
+      have hnex : ¬ ∃ i : Fin SP.n, SP.p i.succ = s := by
+        rintro ⟨i, hi⟩; exact Fin.succ_ne_zero i (SP.hp_inj (hi.trans SP.hp0.symm))
+      rw [if_pos hex, if_neg hnex]
+    ht := by
+      rw [hsplit_out t, hsplit_in t, SP.card_edge_out t, SP.card_edge_in t]
+      have hnex : ¬ ∃ i : Fin SP.n, SP.p i.castSucc = t := by
+        rintro ⟨i, hi⟩; exact Fin.castSucc_ne_last i (SP.hp_inj (hi.trans SP.hplast.symm))
+      have hex : ∃ i : Fin SP.n, SP.p i.succ = t := by
+        have hidx : (⟨SP.n - 1, by have := SP.hn; omega⟩ : Fin SP.n).succ = Fin.last SP.n := by
+          apply Fin.ext
+          simp only [Fin.val_succ, Fin.val_last]
+          have := SP.hn; omega
+        exact ⟨⟨SP.n - 1, by have := SP.hn; omega⟩, by rw [hidx]; exact SP.hplast⟩
+      rw [if_neg hnex, if_pos hex]
+    hfslack := by
+      rintro u v ⟨_, hsl⟩
+      linarith
+    hbpos := by
+      rintro u v ⟨⟨i, hi1, hi2⟩, hnf⟩
+      have hstep := SP.hstep i
+      rw [hi1, hi2] at hstep
+      rcases hstep with h | h
+      · exact absurd h hnf
+      · exact h
+  }
+
+/-- **★★ M11 (Steps 3+4) — the general Ford–Fulkerson `haug`, DERIVED.** Residual reachability `s ⇝ t`
+(`Relation.ReflTransGen (ResidualStep cap f) s t`) with `s ≠ t` yields a strictly larger `s`-`t` flow — no
+forward/backward restriction, no carried augmentation. The mixed directed dedup
+(`simpleResidualPath_of_reachable`) produces a simple residual path, the tagging
+(`toResidualAugPath`) its `ResidualAugPath` degree structure, `ε` is the min per-edge margin (forward slack
+on `Pf`, backflow on `Pb`) over the finite nonempty edge set, and `residualAugPath_augments` (M10) closes
+it. This is the FULL Ford–Fulkerson augmenting-path input, now machine-checked. -/
+theorem residualReachable_augments {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (hst : s ≠ t)
+    (hreach : Relation.ReflTransGen (ResidualStep cap f) s t) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  classical
+  obtain ⟨SP⟩ := simpleResidualPath_of_reachable hf hst hreach
+  -- backflow on backward-tagged edges (the residual step with forward slack failing forces `0 < f v u`)
+  have hbpos : ∀ u v, SP.Pb u v → 0 < f v u := by
+    rintro u v ⟨⟨i, hi1, hi2⟩, hnf⟩
+    have hstep := SP.hstep i
+    rw [hi1, hi2] at hstep
+    rcases hstep with h | h
+    · exact absurd h hnf
+    · exact h
+  -- `Pf`/`Pb` are disjoint tags of each path edge
+  have hdisj : ∀ u v, SP.Pb u v → ¬ SP.Pf u v := fun u v hpb hpf => hpb.2 hpf.2
+  -- the source has a residual out-edge (the first path step), so the combined edge set is nonempty
+  set i0 : Fin SP.n := ⟨0, SP.hn⟩ with hi0
+  have hcs0 : SP.p i0.castSucc = s := by
+    have hzero : i0.castSucc = (0 : Fin (SP.n + 1)) := by apply Fin.ext; simp [hi0]
+    rw [hzero, SP.hp0]
+  obtain ⟨v0, hv0⟩ : ∃ v, SP.Pf s v ∨ SP.Pb s v := by
+    refine ⟨SP.p i0.succ, ?_⟩
+    have he : SP.edge s (SP.p i0.succ) := ⟨i0, hcs0, rfl⟩
+    by_cases hsl : 0 < cap s (SP.p i0.succ) - f s (SP.p i0.succ)
+    · exact Or.inl ⟨he, hsl⟩
+    · exact Or.inr ⟨he, hsl⟩
+  set E : Finset (V × V) :=
+    Finset.univ.filter (fun p : V × V => SP.Pf p.1 p.2 ∨ SP.Pb p.1 p.2) with hE
+  have hEne : E.Nonempty :=
+    ⟨(s, v0), by rw [hE, Finset.mem_filter]; exact ⟨Finset.mem_univ _, hv0⟩⟩
+  set margin : V × V → ℝ :=
+    fun p => if SP.Pf p.1 p.2 then cap p.1 p.2 - f p.1 p.2 else f p.2 p.1 with hmargin
+  set ε : ℝ := E.inf' hEne margin with hεdef
+  have hεpos : 0 < ε := by
+    rw [hεdef, Finset.lt_inf'_iff]
+    intro p hp
+    rw [hE, Finset.mem_filter] at hp
+    rcases hp.2 with hpf | hpb
+    · rw [hmargin]; simp only [if_pos hpf]
+      have := hpf.2; linarith
+    · rw [hmargin]; simp only
+      by_cases hpf : SP.Pf p.1 p.2
+      · rw [if_pos hpf]; have := hpf.2; linarith
+      · rw [if_neg hpf]; exact hbpos p.1 p.2 hpb
+  have hfcap : ∀ u v, SP.Pf u v → f u v + ε ≤ cap u v := by
+    intro u v huv
+    have hmem : (u, v) ∈ E := by rw [hE, Finset.mem_filter]; exact ⟨Finset.mem_univ _, Or.inl huv⟩
+    have hle : ε ≤ margin (u, v) := Finset.inf'_le margin hmem
+    rw [hmargin] at hle; simp only [if_pos huv] at hle
+    have := huv.2; linarith
+  have hbε : ∀ u v, SP.Pb u v → ε ≤ f v u := by
+    intro u v huv
+    have hmem : (u, v) ∈ E := by rw [hE, Finset.mem_filter]; exact ⟨Finset.mem_univ _, Or.inr huv⟩
+    have hle : ε ≤ margin (u, v) := Finset.inf'_le margin hmem
+    rw [hmargin] at hle; simp only [if_neg (hdisj u v huv)] at hle
+    exact hle
+  exact residualAugPath_augments hf SP.toResidualAugPath hst ε hεpos hfcap hbε
+
+/-- **★★★ M11 (Step 5) — max-flow = min-cut, the augmentation `haug` DISCHARGED.** For a maximum `s`-`t`
+flow `f` (`s ≠ t`), the flow value equals the capacity of the residual-reachable cut, with NO carried
+augmentation hypothesis. The `haug` that M4/M5 carried is now PROVED: since
+`t ∈ residualCut ↔ ReflTransGen (ResidualStep cap f) s t` (`mem_residualCut`),
+`residualReachable_augments` supplies it. So the hard half of max-flow = min-cut is conditional ONLY on
+max-flow EXISTENCE (`IsMaxSTFlow`) — the single remaining Ford–Fulkerson carry (compactness / termination),
+everything else (the augmenting path augments, no augmenting path ⟹ saturating cut, capstone) derived. -/
+theorem exact_rt_maxFlow_mincut_unconditional {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hmax : IsMaxSTFlow cap s t f) (hst : s ≠ t) :
+    flowValue f s = cutCapacity cap (residualCut cap f s) := by
+  apply exact_rt_maxFlow_mincut hmax hst
+  intro ht
+  exact residualReachable_augments hmax.1 hst (mem_residualCut.mp ht)
 
 end QIQTH.QG

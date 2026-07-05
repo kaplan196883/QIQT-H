@@ -9033,6 +9033,15 @@ namespace QIQTH.AxiomAudit
 -- Pb sign bookkeeping resolved: outgoing +eps, incoming -eps regardless of type). ForwardAugPath
 -- is the Pb = empty special case. Only the mixed EXTRACTION + existence remain carried. Std 3.
 #print axioms QIQTH.QG.residualAugPath_augments
+-- THE MAX-FLOW-MIN-CUT M11 (QG/MaxFlowMinCut.lean cont.): the general haug DERIVED, DISCHARGED
+-- SimpleResidualPath + toResidualAugPath (the tagging: each residual step tagged Pf forward /
+-- Pb backward, the disjoint-union card split gives the typed degree structure); ★
+-- residualReachable_augments (general residual reachability => a strictly larger flow -- the
+-- FULL Ford-Fulkerson haug, DERIVED, reusing M9's generic dedup + M10's mixed augmentation);
+-- ★★ exact_rt_maxFlow_mincut_unconditional (max-flow = min-cut conditional on ONLY max-flow
+-- EXISTENCE -- the haug is no longer carried). Std 3.
+#print axioms QIQTH.QG.residualReachable_augments
+#print axioms QIQTH.QG.exact_rt_maxFlow_mincut_unconditional
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form
