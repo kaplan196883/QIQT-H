@@ -9549,4 +9549,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCExpansion.sqrtdet_pd_pd
 #print axioms QIQTH.RNCExpansion.sqrtdet_taylor_coeff
 
+-- ★ RNC2 — the forward local-inertial Riemann formula. At a normal-coordinate origin (g(0)=δ,
+-- ∂g(0)=0, so Γ(0)=0), R^ρ_{σμν}(0) = ½(∂_μ∂_σ g_{ρν} − ∂_μ∂_ρ g_{νσ} − ∂_ν∂_σ g_{ρμ} + ∂_ν∂_ρ g_{μσ})(0)
+-- (the symmetric ∂_μ∂_ν g_{ρσ} piece cancels via Schwarz). Connects the curvature tower to the
+-- metric-Hessian bridge. Axiom-free (std 3).
+#print axioms QIQTH.RNCExpansion.rnc_riemann_hessian
+-- ★ RNC3 — the normal-coordinate gauge DISCHARGES RNC1's carried htr. Carrying the falsifiable gauge
+-- ∂_{(a}Γ^i_{bc)}(0)=0 (the totally-symmetrized Christoffel derivative vanishes) forces the
+-- metric-Hessian trace tr∂∂g(0) = −⅔Ric — EXACTLY RNC1's htr, now DERIVED not carried. LOAD-BEARING:
+-- ∑_ν ∂_cΓ^ν_{νd} equals ½tr∂∂g (calculus) AND −⅓Ric (gauge, via pd_christoffel_solve + antisymmetry);
+-- removing the gauge breaks the −⅔Ric conclusion. HONEST: the ⅙/κ=1/6 normalization ONLY — NOT
+-- numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel. Axiom-free (std 3).
+#print axioms QIQTH.RNCExpansion.rnc_htr_of_gauge
+-- ★ RNC3 payoff — √det g = 1 − ⅙R_{cd}x^cx^d GIVEN THE GAUGE (htr discharged). The Taylor coefficient
+-- ½∂_c∂_d √det g(0) = −⅙Ric_{cd} with htr fed from rnc_htr_of_gauge (gauge-derived, not carried).
+#print axioms QIQTH.RNCExpansion.sqrtdet_taylor_coeff_of_gauge
+
 end QIQTH.AxiomAudit

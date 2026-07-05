@@ -299,4 +299,244 @@ theorem sqrtdet_taylor_coeff (g : Point n → Fin n → Fin n → ℝ) (Ric : Fi
     (1 / 2) * pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0 = -(1 / 6) * Ric c d := by
   rw [sqrtdet_pd_pd g Ric hg hg0 hdg0 htr c d]; ring
 
+/-! ### RNC2 / RNC3 — the curvature ↔ metric-Hessian bridge and the normal-coordinate gauge
+
+    RNC2 (`rnc_riemann_hessian`): the forward local-inertial formula
+    `R_{ρσμν}(0) = ½(∂_μ∂_σ g_{ρν} − ∂_μ∂_ρ g_{νσ} − ∂_ν∂_σ g_{ρμ} + ∂_ν∂_ρ g_{μσ})(0)`,
+    from `g(0)=δ`, `∂g(0)=0` (so `Γ(0)=0`).  RNC3 (`rnc_htr_of_gauge`): carrying the
+    **normal-coordinate gauge** `∂_{(a}Γ^i_{bc)}(0)=0` (a falsifiable christoffel-symmetrization
+    condition), the metric-Hessian trace is forced, `tr ∂∂g(0) = −⅔ Ric` — EXACTLY RNC1's carried
+    `htr`, now DERIVED from the gauge.  Removing the gauge makes the `−⅔Ric` conclusion false (the
+    symmetric part of `∂∂g` re-enters the trace); the gauge is genuinely load-bearing. -/
+
+/-- **The Christoffel symbols vanish at the origin** where `∂g(0)=0`.  Immediate from the definition:
+    every `∂g` entering `Γ` is zero at `0`. -/
+theorem christoffel_zero_at_origin (g gi : Point n → Fin n → Fin n → ℝ)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0) (ρ μ σ : Fin n) :
+    christoffel g gi ρ μ σ 0 = 0 := by
+  simp only [christoffel]
+  rw [Finset.sum_eq_zero (fun α _ => by rw [hdg0 α σ μ, hdg0 α μ σ, hdg0 μ σ α]; ring)]
+  ring
+
+/-- **The Riemann tensor at the origin drops its `ΓΓ` part** (`Γ(0)=0`), leaving the derivative part
+    `R^ρ_{σμν}(0) = ∂_μ Γ^ρ_{νσ}(0) − ∂_ν Γ^ρ_{μσ}(0)`. -/
+theorem riemann_at_origin (g gi : Point n → Fin n → Fin n → ℝ)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0) (ρ σ μ ν : Fin n) :
+    riemann g gi ρ σ μ ν 0
+      = pd (fun y => christoffel g gi ρ ν σ y) μ 0
+        - pd (fun y => christoffel g gi ρ μ σ y) ν 0 := by
+  simp only [riemann]
+  rw [Finset.sum_eq_zero (fun l _ => by
+        rw [christoffel_zero_at_origin g gi hdg0 l ν σ,
+            christoffel_zero_at_origin g gi hdg0 l μ σ]; ring), add_zero]
+
+/-- **The Christoffel derivative at the origin in terms of the metric Hessian.**  With `g(0)=δ`
+    (via `gi(0)=δ`) and `∂g(0)=0`, the `(∂gi)·(∂g)` term drops (the `∂g` bracket vanishes at `0`) and
+    the inverse metric collapses to `δ`, giving
+    `∂_a Γ^ν_{λμ}(0) = ½(∂_a∂_λ g_{νμ} + ∂_a∂_μ g_{νλ} − ∂_a∂_ν g_{λμ})(0)`. -/
+theorem pd_christoffel_origin (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (ν lam mu a : Fin n) :
+    pd (fun y => christoffel g gi ν lam mu y) a 0
+      = (1 / 2) * (pd (fun y => pd (fun w => g w ν mu) lam y) a 0
+                   + pd (fun y => pd (fun w => g w ν lam) mu y) a 0
+                   - pd (fun y => pd (fun w => g w lam mu) ν y) a 0) := by
+  have hBP : ∀ α, PdiffAt (fun y => pd (fun w => g w α mu) lam y
+      + pd (fun w => g w α lam) mu y - pd (fun w => g w lam mu) α y) a 0 := fun α =>
+    ((PdiffAt_pd (fun w => g w α mu) (hg α mu) lam a 0).add
+      (PdiffAt_pd (fun w => g w α lam) (hg α lam) mu a 0)).sub
+      (PdiffAt_pd (fun w => g w lam mu) (hg lam mu) α a 0)
+  have hgiP : ∀ α, PdiffAt (fun y => gi y ν α) a 0 := fun α => PdiffAt_of_contDiff _ (hgi ν α) a 0
+  have hsummand : ∀ α, pd (fun y => gi y ν α * (pd (fun w => g w α mu) lam y
+        + pd (fun w => g w α lam) mu y - pd (fun w => g w lam mu) α y)) a 0
+      = gi 0 ν α * (pd (fun y => pd (fun w => g w α mu) lam y) a 0
+          + pd (fun y => pd (fun w => g w α lam) mu y) a 0
+          - pd (fun y => pd (fun w => g w lam mu) α y) a 0) := by
+    intro α
+    rw [pd_mul (fun y => gi y ν α) _ a 0 (hgiP α) (hBP α),
+        pd_sub _ _ a 0 ((PdiffAt_pd (fun w => g w α mu) (hg α mu) lam a 0).add
+          (PdiffAt_pd (fun w => g w α lam) (hg α lam) mu a 0))
+          (PdiffAt_pd (fun w => g w lam mu) (hg lam mu) α a 0),
+        pd_add _ _ a 0 (PdiffAt_pd (fun w => g w α mu) (hg α mu) lam a 0)
+          (PdiffAt_pd (fun w => g w α lam) (hg α lam) mu a 0)]
+    simp only [hdg0 α mu lam, hdg0 α lam mu, hdg0 lam mu α]
+    ring
+  simp only [christoffel]
+  rw [pd_const_mul _ _ a 0 (PdiffAt_sum univ _ a 0 (fun α _ => (hgiP α).mul (hBP α))),
+      pd_sum univ _ a 0 (fun α _ => (hgiP α).mul (hBP α)),
+      Finset.sum_congr rfl (fun α _ => hsummand α)]
+  simp only [hgi0, Matrix.one_apply, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq,
+    Finset.mem_univ, if_true]
+
+/-- **RNC2 — the forward local-inertial Riemann formula.**  At a normal-coordinate origin
+    (`g(0)=δ`, `∂g(0)=0`), the Riemann tensor is the antisymmetrized metric Hessian:
+    `R^ρ_{σμν}(0) = ½(∂_μ∂_σ g_{ρν} − ∂_μ∂_ρ g_{νσ} − ∂_ν∂_σ g_{ρμ} + ∂_ν∂_ρ g_{μσ})(0)`.
+    (The symmetric `∂_μ∂_ν g_{ρσ}` piece cancels via Schwarz.)  Connects the curvature tower to the
+    metric-Hessian bridge feeding RNC3. -/
+theorem rnc_riemann_hessian (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (ρ σ μ ν : Fin n) :
+    riemann g gi ρ σ μ ν 0
+      = (1 / 2) * (pd (fun y => pd (fun w => g w ρ ν) σ y) μ 0
+                 - pd (fun y => pd (fun w => g w ν σ) ρ y) μ 0
+                 - pd (fun y => pd (fun w => g w ρ μ) σ y) ν 0
+                 + pd (fun y => pd (fun w => g w μ σ) ρ y) ν 0) := by
+  rw [riemann_at_origin g gi hdg0 ρ σ μ ν,
+      pd_christoffel_origin g gi hg hgi hgi0 hdg0 ρ ν σ μ,
+      pd_christoffel_origin g gi hg hgi hgi0 hdg0 ρ μ σ ν,
+      pd_comm (fun w => g w ρ σ) μ ν 0 (hg ρ σ)]
+  ring
+
+/-- **The trace of the Christoffel derivative equals half the metric-Hessian trace** (a pure-calculus
+    identity, no gauge): `∑_ν ∂_c Γ^ν_{νd}(0) = ½ ∑_a ∂_c∂_d g_{aa}(0)`.  In `∂_c Γ^ν_{νd}` the two
+    `∂∂g` terms carrying the contracted index cancel identically, leaving `½ ∂_c∂_d g_{νν}`. -/
+theorem sum_pd_christoffel_trace (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (c d : Fin n) :
+    (∑ ν, pd (fun y => christoffel g gi ν ν d y) c 0)
+      = (1 / 2) * ∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0 := by
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro ν _
+  rw [pd_christoffel_origin g gi hg hgi hgi0 hdg0 ν ν d c]
+  ring
+
+/-- **The normal-coordinate inversion (the `−⅓`).**  Combining the origin Riemann formula
+    `R^i_{jkl}(0) = ∂_kΓ^i_{lj} − ∂_lΓ^i_{kj}` with the carried normal-coordinate gauge
+    `∂_{(a}Γ^i_{bc)}(0)=0`, the finite antisymmetrize-vs-symmetrize system solves to
+    `∂_a Γ^i_{bc}(0) = ⅓(R^i_{bac}(0) + R^i_{cab}(0))`.  This is where the gauge becomes load-bearing —
+    it fixes the totally-symmetric part of `∂Γ`. -/
+theorem pd_christoffel_solve (g gi : Point n → Fin n → Fin n → ℝ)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (i a b c : Fin n) :
+    pd (fun y => christoffel g gi i b c y) a 0
+      = (1 / 3) * (riemann g gi i b a c 0 + riemann g gi i c a b 0) := by
+  have ro1 := riemann_at_origin g gi hdg0 i b a c
+  have ro2 := riemann_at_origin g gi hdg0 i c a b
+  have gauge := hgauge i a b c
+  have symcb : pd (fun y => christoffel g gi i c b y) a 0
+      = pd (fun y => christoffel g gi i b c y) a 0 := by
+    rw [show (fun y => christoffel g gi i c b y) = (fun y => christoffel g gi i b c y) from
+      funext (fun y => christoffel_symm g gi hsymm i c b y)]
+  have symac : pd (fun y => christoffel g gi i a c y) b 0
+      = pd (fun y => christoffel g gi i c a y) b 0 := by
+    rw [show (fun y => christoffel g gi i a c y) = (fun y => christoffel g gi i c a y) from
+      funext (fun y => christoffel_symm g gi hsymm i a c y)]
+  linarith [ro1, ro2, gauge, symcb, symac]
+
+/-- **The first-pair contraction of the origin Riemann tensor vanishes** (antisymmetry, gauge-free):
+    `∑_ν R^ν_{νcd}(0) = 0`.  Both `∂_cΓ^ν_{dν}` and `∂_dΓ^ν_{cν}` contract to `½ tr ∂∂g`, and the
+    difference cancels (Schwarz). -/
+theorem sum_riemann_ii_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (c d : Fin n) :
+    (∑ ν, riemann g gi ν ν c d 0) = 0 := by
+  have hL : (∑ ν, pd (fun y => christoffel g gi ν d ν y) c 0)
+      = (1 / 2) * ∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0 := by
+    rw [show (∑ ν, pd (fun y => christoffel g gi ν d ν y) c 0)
+          = ∑ ν, pd (fun y => christoffel g gi ν ν d y) c 0 from
+        Finset.sum_congr rfl (fun ν _ => by
+          rw [show (fun y => christoffel g gi ν d ν y) = (fun y => christoffel g gi ν ν d y) from
+            funext (fun y => christoffel_symm g gi hsymm ν d ν y)])]
+    exact sum_pd_christoffel_trace g gi hg hgi hgi0 hdg0 c d
+  have hR : (∑ ν, pd (fun y => christoffel g gi ν c ν y) d 0)
+      = (1 / 2) * ∑ a, pd (fun y => pd (fun w => g w a a) c y) d 0 := by
+    rw [show (∑ ν, pd (fun y => christoffel g gi ν c ν y) d 0)
+          = ∑ ν, pd (fun y => christoffel g gi ν ν c y) d 0 from
+        Finset.sum_congr rfl (fun ν _ => by
+          rw [show (fun y => christoffel g gi ν c ν y) = (fun y => christoffel g gi ν ν c y) from
+            funext (fun y => christoffel_symm g gi hsymm ν c ν y)])]
+    exact sum_pd_christoffel_trace g gi hg hgi hgi0 hdg0 d c
+  have hswap : (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0)
+      = (∑ a, pd (fun y => pd (fun w => g w a a) c y) d 0) :=
+    Finset.sum_congr rfl (fun a _ => pd_comm (fun w => g w a a) c d 0 (hg a a))
+  rw [Finset.sum_congr rfl (fun ν _ => riemann_at_origin g gi hdg0 ν ν c d),
+      Finset.sum_sub_distrib, hL, hR, hswap]
+  ring
+
+/-- **RNC3 — the normal-coordinate gauge discharges the metric-Hessian trace `htr`.**  Carrying the
+    falsifiable NORMAL-COORDINATE GAUGE `hgauge : ∂_{(a}Γ^i_{bc)}(0)=0` (the totally-symmetrized
+    Christoffel derivative vanishes at the origin), together with `g(0)=δ`/`gi(0)=δ`, `∂g(0)=0`, the
+    metric-Hessian trace is FORCED to `tr ∂∂g(0) = −⅔ Ric` — EXACTLY the datum RNC1 carried as `htr`.
+
+    LOAD-BEARING (sharp test): the gauge is a genuine christoffel-symmetrization equation, NOT a
+    pre-contracted `∂∂g=−⅓(R+R)`.  Remove `hgauge` and `∑_ν ∂_cΓ^ν_{νd}` is no longer `−⅓Ric` (the
+    symmetric/trace part of `∂∂g` is unconstrained), so the `−⅔Ric` conclusion becomes false.  Route:
+    `∑_ν ∂_cΓ^ν_{νd}` equals BOTH `½ tr∂∂g` (calculus, `sum_pd_christoffel_trace`) AND `−⅓Ric` (gauge,
+    `pd_christoffel_solve` + antisymmetry) — combining gives `tr∂∂g = −⅔Ric`.  Discharges RNC1's `htr`;
+    still the `⅙` normalization ONLY — NOT numerical-G, NOT a curved heat kernel. -/
+theorem rnc_htr_of_gauge (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (c d : Fin n) :
+    (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0) = -(2 / 3) * ricci g gi c d 0 := by
+  have key : ∀ p q : Fin n,
+      (∑ a, pd (fun y => pd (fun w => g w a a) q y) p 0) = -(2 / 3) * ricci g gi q p 0 := by
+    intro p q
+    have hc1 := sum_pd_christoffel_trace g gi hg hgi hgi0 hdg0 p q
+    have hsolve : (∑ ν, pd (fun y => christoffel g gi ν ν q y) p 0)
+        = (1 / 3) * ((∑ ν, riemann g gi ν ν p q 0) + (∑ ν, riemann g gi ν q p ν 0)) := by
+      rw [mul_add, Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl (fun ν _ => by
+        rw [pd_christoffel_solve g gi hdg0 hsymm hgauge ν p ν q]; ring)
+    have h2a := sum_riemann_ii_zero g gi hg hgi hgi0 hdg0 hsymm p q
+    have h2b : (∑ ν, riemann g gi ν q p ν 0) = - ricci g gi q p 0 := by
+      rw [show (∑ ν, riemann g gi ν q p ν 0) = ∑ ν, (-1 : ℝ) * riemann g gi ν q ν p 0 from
+            Finset.sum_congr rfl (fun ν _ => by rw [riemann_antisymm g gi ν q p ν 0]; ring),
+          ← Finset.mul_sum]
+      simp only [ricci]; ring
+    rw [hc1] at hsolve
+    rw [h2a, h2b] at hsolve
+    linarith [hsolve]
+  have hsw : (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0)
+      = (∑ a, pd (fun y => pd (fun w => g w a a) c y) d 0) :=
+    Finset.sum_congr rfl (fun a _ => pd_comm (fun w => g w a a) c d 0 (hg a a))
+  rw [hsw]
+  exact key d c
+
+/-- **RNC3 payoff — `√det g = 1 − ⅙ R_{cd} x^c x^d` holds GIVEN THE NORMAL-COORDINATE GAUGE.**  The
+    Taylor coefficient `½ ∂_c∂_d √det g (0) = −⅙ Ric_{cd}` now follows with the metric-Hessian trace
+    `htr` no longer a free hypothesis: it is DERIVED from `hgauge` (`rnc_htr_of_gauge`) and fed into
+    `sqrtdet_taylor_coeff`.  The `⅙` (source of `κ = 1/6`) is thus gauge-derived, not carried.
+    HONEST: still the `⅙` normalization ONLY — NOT the numerical value of G (N, Λ_s, E/ξ remain),
+    NOT a curved heat kernel. -/
+theorem sqrtdet_taylor_coeff_of_gauge (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (c d : Fin n) :
+    (1 / 2) * pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0
+      = -(1 / 6) * ricci g gi c d 0 :=
+  sqrtdet_taylor_coeff g (fun a b => ricci g gi a b 0) hg hg0 hdg0
+    (fun a b => rnc_htr_of_gauge g gi hg hgi hgi0 hdg0 hsymm hgauge a b) c d
+
 end QIQTH.RNCExpansion

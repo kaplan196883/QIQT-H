@@ -36,12 +36,23 @@ or `∂_{(l}Γ^i_{jk)}(0)=0`), NEVER a `:= True` stub or a pre-contracted `∂�
   genuinely CARRIED + load-bearing (used via `rw [htr]`; removing it makes `−⅓Ric` false, passing the sharp test).
   `#print axioms` = `[propext, Classical.choice, Quot.sound]`; budget 0; pinned in `AxiomAudit.lean`; wired into
   `QIQTH.lean`. HONEST: the `⅙` normalization ONLY — NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel.
-- [ ] **RNC2 — R1 forward `R↔∂∂g` (std-3, green).** From `g(0)=δ`, `∂g(0)=0`: `R_{ρσμν}(0)=½(∂_μ∂_σg_{ρν}−∂_μ∂_ρg_{νσ}
-  −∂_ν∂_σg_{ρμ}+∂_ν∂_ρg_{μσ})(0)` via `riemann` def + `pd_mul` + `pd_comm` Schwarz (all present). Connects the tower.
-- [ ] **RNC3 — R2 inversion / the `−⅓` (std-4).** Carry the gauge `∂_{(l}Γ^i_{jk)}(0)=0` (the load-bearing normal-
-  coordinate condition), combine with `R^i_{jkl}(0)=∂_kΓ^i_{lj}−∂_lΓ^i_{kj}`, solve the finite antisymmetrize/
-  symmetrize system for `∂Γ(0)=−⅓(R+R)`, push through `christoffel` to `tr∂∂g(0)=−⅔Ric` — discharging RNC1's carried
-  input. (GOLD variant: the primitive `∑Γyy=0` gauge — needs THIRD-order `pd`/Schwarz, std-5, gated; defer.)
+- [x] **RNC2 — R1 forward `R↔∂∂g` (CLOSED, AXIOM-FREE std-3, 2026-07-06).** `QIQTH/RNCExpansion.lean`,
+  `rnc_riemann_hessian` : from `g(0)=δ` (via `gi(0)=δ`), `∂g(0)=0`, `R^ρ_{σμν}(0)=½(∂_μ∂_σg_{ρν}−∂_μ∂_ρg_{νσ}
+  −∂_ν∂_σg_{ρμ}+∂_ν∂_ρg_{μσ})(0)`. Route DONE: `riemann_at_origin` (`Γ(0)=0` drops `ΓΓ`) + `pd_christoffel_origin`
+  (the `∂Γ = ½(∂∂g+∂∂g−∂∂g)` atom: `(∂gi)·(∂g)` term vanishes since the `∂g` bracket is `0` at origin, `gi(0)=δ`
+  collapses the inverse) + `pd_comm` Schwarz cancels the symmetric `∂_μ∂_ν g_{ρσ}` piece. Connects the tower.
+- [x] **RNC3 — R2 inversion / the `−⅓`, DISCHARGES `htr` (CLOSED, AXIOM-FREE std-3→4, 2026-07-06).**
+  `QIQTH/RNCExpansion.lean`, `rnc_htr_of_gauge` : carrying the FALSIFIABLE normal-coordinate gauge
+  `hgauge : ∀ i a b c, ∂_aΓ^i_{bc}(0)+∂_bΓ^i_{ca}(0)+∂_cΓ^i_{ab}(0)=0` (the totally-symmetrized `∂Γ`, a genuine
+  christoffel-symmetrization equation — NOT a `:=True` stub, NOT a pre-contracted `∂∂g=−⅓(R+R)`), the metric-Hessian
+  trace is FORCED: `∑_a ∂_c∂_d g_{aa}(0) = −⅔ Ric_{cd}` — EXACTLY RNC1's carried `htr`, now DERIVED. **Sharp test
+  PASSES:** `∑_ν ∂_cΓ^ν_{νd}` equals BOTH `½ tr∂∂g` (calculus, `sum_pd_christoffel_trace`) AND `−⅓Ric` (gauge, via
+  `pd_christoffel_solve` = the finite `linarith` inversion `∂_aΓ^i_{bc}=⅓(R^i_{bac}+R^i_{cab})` + `sum_riemann_ii_zero`
+  first-pair antisymmetry + `riemann_antisymm`); combining forces `tr∂∂g=−⅔Ric`. Remove `hgauge` and the `pd_christoffel_solve`
+  step fails → the trace part of `∂∂g` is unconstrained → `−⅔Ric` is false. Payoff `sqrtdet_taylor_coeff_of_gauge` :
+  `½∂_c∂_d √det g(0) = −⅙Ric_{cd}` GIVEN THE GAUGE (feeds `rnc_htr_of_gauge` into `sqrtdet_taylor_coeff`) — the `⅙`
+  is now gauge-derived, not carried. `#print axioms` std-3; budget 0; pinned in `AxiomAudit.lean`.
+  (GOLD variant: the primitive `∑Γyy=0` gauge — needs THIRD-order `pd`/Schwarz, std-5, gated; defer.)
 - [ ] **RNC4 — wire to `heat_a1_of_RNC`.** Feed the derived RNC Ricci data into the existing conditional a₁ assembly,
   discharging its carried RNC input + the cited κ=1/6. Honest: still not numerical-G (N, Λ_s, E/ξ remain).
 
@@ -76,4 +87,15 @@ RNC3 lands the gauge-derived (not carried) `−⅓`.
   `htr : ∑_a ∂_c∂_d g_{aa}(0) = −⅔Ric_{cd}`. Infra proven en route: `pd_prod` (finite-product Leibniz for `pd`,
   by hand — Mathlib lacks `ContDiff.finset_prod`), `pd_congr` (germ/eventually-eq congruence), `sqrt_pd_pd` (the `½`
   √-Taylor factor), the origin permutation-sum collapse `perm_moves_in_erase`. NOT numerical-G, NOT a curved heat
-  kernel. NEXT: RNC2 (forward `R↔∂∂g`), then RNC3 (gauge-derived `−⅓`, discharging `htr`).
+  kernel.
+- **2026-07-06 (RNC2 + RNC3 CLOSED — `htr` DISCHARGED FROM THE GAUGE):** `QIQTH/RNCExpansion.lean` extended
+  AXIOM-FREE (std-3), `lake build QIQTH.RNCExpansion` green, `#print axioms` = `[propext, Classical.choice, Quot.sound]`
+  for all four new theorems, budget 0. **RNC2** `rnc_riemann_hessian` : `R^ρ_{σμν}(0)=½(∂_μ∂_σg_{ρν}−∂_μ∂_ρg_{νσ}
+  −∂_ν∂_σg_{ρμ}+∂_ν∂_ρg_{μσ})(0)`. **RNC3** `rnc_htr_of_gauge` : the normal-coordinate gauge `hgauge` (totally-
+  symmetrized `∂Γ(0)=0`, a falsifiable christoffel equation) FORCES `∑_a ∂_c∂_d g_{aa}(0)=−⅔Ric_{cd}` = RNC1's `htr`,
+  now DERIVED not carried. Sharp load-bearing test PASSES (gauge is not decorative; removing it breaks `−⅔Ric`).
+  Payoff `sqrtdet_taylor_coeff_of_gauge` : `½∂_c∂_d √det g(0)=−⅙Ric_{cd}` GIVEN THE GAUGE — the `⅙`/`κ=1/6` is now
+  gauge-derived. Infra: `christoffel_zero_at_origin`, `riemann_at_origin`, `pd_christoffel_origin` (the `∂Γ↔∂∂g`
+  atom), `sum_pd_christoffel_trace`, `pd_christoffel_solve` (the finite `linarith` inversion), `sum_riemann_ii_zero`.
+  HONEST: the `⅙` normalization ONLY — NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel. NEXT: RNC4
+  (wire the gauge-derived Ricci data into `heat_a1_of_RNC`, discharging its cited `κ=1/6`).

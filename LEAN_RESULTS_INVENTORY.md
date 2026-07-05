@@ -334,11 +334,27 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `det g = ∑_σ sgn σ ∏_i g_{σi,i}`, so `∂g(0)=0` kills the cross terms and `g(0)=δ` collapses the permutation sum to
   **only `σ=1`** (`perm_moves_in_erase` + `Matrix.one_apply`), giving `∂_c∂_d(det g)(0)=tr∂∂g(0)`; then the `√` Taylor
   factor `½` from `Real.hasDerivAt_sqrt` at `det g(0)=1`, `∂(det g)(0)=0` (`sqrt_pd_pd`). ⚠ **HONEST CAPTION
-  (binding)**: the `⅙` normalization is **CONDITIONAL on the carried `htr`** (RNC3 later discharges it from the
-  radial/normal gauge — NOT yet done); it is the **`⅙` normalization ONLY** and does **NOT** give the numerical value
+  (binding)**: the `⅙` normalization was **CONDITIONAL on the carried `htr`** — now **DISCHARGED by RNC3** (below).
+  It is the **`⅙` normalization ONLY** and does **NOT** give the numerical value
   of `G` (species count `N`, granularity scale `Λ_s`, the `E/ξ` heat-kernel term remain), and does **NOT** build a
-  curved heat kernel. **[frontier]**: RNC2 (forward `R↔∂∂g`), RNC3 (gauge-derived `−⅓`, discharging `htr`), RNC4 (wire
-  to `heat_a1_of_RNC`).
+  curved heat kernel.
+- **RNC2 + RNC3 — the gauge-derived `⅙` (`htr` DISCHARGED FROM THE NORMAL-COORDINATE GAUGE)** (`RNCExpansion.lean`,
+  all **[AF]** std-3, 2026-07-06). **RNC2** `rnc_riemann_hessian`: at a normal-coordinate origin (`g(0)=δ`, `∂g(0)=0`,
+  so `Γ(0)=0`) the Riemann tensor is the antisymmetrized metric Hessian
+  **`R^ρ_{σμν}(0)=½(∂_μ∂_σg_{ρν}−∂_μ∂_ρg_{νσ}−∂_ν∂_σg_{ρμ}+∂_ν∂_ρg_{μσ})(0)`** (the symmetric `∂_μ∂_ν g_{ρσ}` piece
+  cancels via Schwarz). **RNC3** `rnc_htr_of_gauge`: carrying the **FALSIFIABLE normal-coordinate gauge**
+  `hgauge : ∂_aΓ^i_{bc}(0)+∂_bΓ^i_{ca}(0)+∂_cΓ^i_{ab}(0)=0` (the totally-symmetrized Christoffel derivative — a
+  genuine christoffel-symmetrization equation, **NOT** a `:= True` stub, **NOT** a pre-contracted `∂∂g=−⅓(R+R)`),
+  the metric-Hessian trace is **FORCED**: **`∑_a ∂_c∂_d g_{aa}(0) = −⅔ Ric_{cd}`** — EXACTLY RNC1's carried `htr`,
+  now **DERIVED FROM THE GAUGE**. Payoff `sqrtdet_taylor_coeff_of_gauge`: **`½∂_c∂_d √det g(0)=−⅙Ric_{cd}` GIVEN THE
+  GAUGE**, so the `⅙`/`κ=1/6` is gauge-derived, not carried. **Sharp load-bearing test PASSES**: `∑_ν ∂_cΓ^ν_{νd}`
+  equals BOTH `½ tr∂∂g` (pure calculus) AND `−⅓Ric` (gauge, via the finite `linarith` inversion
+  `∂_aΓ^i_{bc}=⅓(R^i_{bac}+R^i_{cab})` + first-pair/last-pair Riemann antisymmetry); combining forces `tr∂∂g=−⅔Ric`,
+  and removing `hgauge` makes it false. ⚠ **HONEST CAPTION (binding)**: this DISCHARGES `htr` with the honest
+  geometric input = the normal-coordinate gauge (not a wall crossed); it is the **`⅙` normalization ONLY** — still
+  does **NOT** give the numerical value of `G` (`N`, `Λ_s`, `E/ξ` remain), and does **NOT** build a curved heat
+  kernel. **[frontier]**: RNC4 (wire the gauge-derived Ricci data into `heat_a1_of_RNC`, discharging its cited
+  `κ=1/6`).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
