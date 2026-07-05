@@ -56,8 +56,9 @@ of the JLMS route to the area law. Along *this modular route* the $A/4G$ area te
 the $\delta A/4G = 2\pi\!\int\!\delta T_{kk}$ step needs the Einstein equations) — so *here* the $A/4G$
 identification stays a *gravitational input*, not a theorem. (This concerns the JLMS *modular route only*: the
 Bekenstein–Hawking $\mathbf{1/4}$ ratio **is** derived — as a machine-checked theorem — but through the separate
-**Sakharov / induced-gravity bridge**, `SakharovRatio.sakharov_ratio` (the **P4-MICRO** story); what *neither*
-derives is the **value of $G$**.) What **is**
+**Sakharov / induced-gravity bridge**, `SakharovRatio.sakharov_ratio` (the **P4-MICRO** story) — a re-derivation
+of the standard induced-gravity ratio, not unique to finiteness (any local relativistic QFT with the same UV
+coefficient yields it); what *neither* derives is the **value of $G$**.) What **is**
 machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
 entropy variation is controlled by the modular-energy variation, which under one-particle Bisognano–Wichmann
 $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$:

@@ -10,18 +10,12 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <header class="hero"><div class="wrap">
     <div class="kicker">Quantized Information Quantum Theory — Holographic</div>
     <h1>One wave function, one world.</h1>
-    <p class="lede">The global wave function Φ evolves exactly unitarily — no collapse term, ever.
-      Decoherence makes the macroscopic records non-interfering; a non-dynamical selector <em>λ</em> makes
-      exactly one of them <em>actual</em>. One wave function, one world. The <strong>finite-capacity
-      postulate</strong> bounds how many distinguishable records a region can hold — it does <em>not</em> force the
-      single outcome: the single record is λ's doing (an Everett-like selection), a postulate, not yet derived.
-      What that finite capacity <em>does</em> drive, under stated bridge assumptions, is a Lean-checked
-      <em>conditional</em> chain: finite capacity ⇒ S<sub>vN</sub> ≤ log&nbsp;N<sub>R</sub>; with the Sakharov
-      bridge, an <strong>area-law entropy bound</strong> S<sub>vN</sub>(ρ<sub>R</sub>) ≤ A/4ℓ<sub>P</sub>²; and, for
-      the free Klein–Gordon field, a conditional Jacobson-style derivation of an <strong>Einstein-form
-      equation</strong> (P4-MICRO). Finite capacity is the kinematic <em>input</em> to the gravity chain; λ is the
-      source of definiteness — two different jobs. (<strong>Not</strong> “P4 ⇒ GR”: the thermodynamic step also
-      needs the Bisognano–Wichmann/Unruh and reference-state inputs, and the value of G is not derived.)</p>
+    <p class="lede">Quantum mechanics carries a collapse postulate it cannot justify, and general
+      relativity resists quantization. <strong>QIQT-H</strong> is a single-world, holographic formulation
+      whose ontology is <strong>Φ-monism</strong>: one substance — the universal wave function Φ, evolving
+      exactly unitarily — of which observers are macroscopic patterns, with a non-dynamical selector
+      <em>λ</em> marking exactly one decoherent record actual per run. No collapse, no branching, no
+      fundamental probability. <a href="#abstract" style="white-space:nowrap">Read the abstract ↓</a></p>
     <div class="cta">
       <a class="btn btn-primary" href="/idea">Read the idea</a>
       <a class="btn btn-ghost" href="/theory">The mathematics</a>
@@ -35,17 +29,62 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     </div>
   </div></header>
 
+  <section class="section" id="abstract" style="padding-top:30px;padding-bottom:8px"><div class="wrap">
+    <div class="note" style="border-left:4px solid var(--st-verified);padding:24px 28px;max-width:72ch">
+      <h2 style="margin-top:0">Abstract</h2>
+      <p class="sub" style="max-width:none">We develop <strong>QIQT-H</strong>, a single-world, holographic
+        formulation of quantum theory whose ontology is <strong>Φ-monism</strong>: there is one substance —
+        the universal wave function Φ, evolving exactly unitarily — of which observers are macroscopic
+        patterns; a non-dynamical selector λ marks exactly one decoherent record actual per run. No collapse
+        term, no branching, no fundamental probability. The theory rests on <strong>five postulates</strong> —
+        <strong>(P1)</strong> the (Φ,λ) ontology, <strong>(P2)</strong> quantum kinematics,
+        <strong>(P3)</strong> microcausality, <strong>(P4)</strong> finite holographic capacity: the
+        information content of any bounded spacetime region is finite, and <strong>(P5)</strong> quantum
+        equilibrium of the typicality measure — of which P2–P3 are the standard quantum-relativistic arena,
+        so the irreducible new physics is <strong>P4 + P5, on the P1 ontology</strong>. We machine-verify the
+        entire development in Lean&nbsp;4 / Mathlib: over <strong>4,400 theorems across ~420 files</strong>,
+        zero axioms beyond Lean's standard three, every physical input an explicitly named hypothesis.</p>
+      <p class="sub" style="max-width:none">The measurement problem dissolves without collapse: decoherence
+        supplies the record structure, λ (P1) makes exactly one history actual, and the Born rule is
+        <strong>reduced</strong> — provably underivable from unitarity alone, by a battery of machine-checked
+        no-go theorems — to P5 alone. The selection layer is Poincaré-covariant, with a proved obstruction
+        (a covariant <em>measure</em> exists; a covariant <em>selector</em> cannot) and an axiom-free
+        boost-invariant typicality measure on the continuum 1+1D free field.</p>
+      <p class="sub" style="max-width:none">Gravity emerges holographically, in the pattern of AdS/CFT but
+        with no string theory — and it is Φ, never the actualized branch, that carries the holographic
+        entropy that geometry responds to. Given P4, the area <strong>floor</strong>
+        S<sub>vN</sub> ≤ Q<sub>R</sub> is a <strong>derived theorem, not an added postulate</strong> (the
+        holographic <em>area form</em> of Q<sub>R</sub> enters via the conditional induced-gravity bridge, a
+        re-derivation of standard induced gravity, not from finiteness alone); capacity-bounded record
+        corners of an explicitly constructed crossed-product core satisfy <strong>S = A/4G as a
+        theorem</strong> for the core's own trace-defined area; the linearized graviton (two helicity-±2
+        polarizations, propagating at c) carries a quantized area operator whose expectation the record count
+        computes; the entanglement first law at every probe is <strong>equivalent</strong> to the linearized
+        Einstein equations; Newton's constant is delivered as <strong>G = 1/(N Λ<sub>s</sub>²)</strong>, the
+        Sakharov ¼ is a theorem, and Strominger's BTZ boundary count equals the bulk capacity exponent at the
+        shared granularity — the two holographic bookkeepings agree.</p>
+      <p class="sub" style="max-width:none">Every derivation is conditional on named, shrinking inputs (the
+        Clausius/area law and the Iyer–Wald/first-law identification where not yet discharged, the matching of
+        the trace-defined area to external geometry, the numerical value of G, the continuum Type III₁ limit,
+        interacting matter). We claim a fully machine-verified derivation chain from finite information
+        <em>toward</em> quantum gravity and single-outcome quantum mechanics — every remaining gap named,
+        checkable, and independently auditable — <strong>not a completed theory</strong>. Any skeptic can
+        re-run the whole chain on their own laptop: <code>bash&nbsp;verify/verify.sh</code> emits a claim
+        card. No competing foundations program ships this.</p>
+    </div>
+  </div></section>
+
   <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
       <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
-        <span style="font-size:2rem;font-weight:800">36<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">38<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
         <span style="font-size:2rem;font-weight:800">~4,400<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
       <p style="margin:.2rem 0 0;font-size:1.05rem"><strong>Headlines:</strong>
         the <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed) ·
         the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall) ·
-        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics its self-adjoint generator, and a cyclic–separating vector, the closed Tomita operator S̄, the self-adjoint modular operator Δ, the modular unitary group Δ^it = the physical dynamics (the exponential-recovery wall, crossed), and Tomita's theorem (first half): Δ^it M Δ^−it = M</strong> ·
+        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics and its self-adjoint generator, a cyclic–separating vector, the closed Tomita operator S̄, the self-adjoint modular operator Δ, the modular unitary group Δ^it = the physical dynamics (the exponential-recovery wall, crossed), the modular conjugation J with the polar decomposition S̄ = J∘Δ^½ and Tomita's theorem both halves — first Δ^it M Δ^−it = M, second (inclusion) J M J ⊆ M′ — and a genuine non-tracial KMS state (Δ ≠ 1): the tower's Tomita–Takesaki modular theory now complete, the first in any proof assistant</strong> ·
         the <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch) ·
         <strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).
         <a href="/formalization">Every claim, with its honest scope →</a></p>
@@ -376,10 +415,30 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           transported physical dynamics IS the spectral modular flow of the modular operator, as
           operators; the generator of the physics IS the generator of Δ^it; and Δ^it implements
           the modular automorphisms and preserves the limit von Neumann algebra (honestly
-          scoped: J and the polar decomposition are not constructed — the second half JMJ = M′
-          is the named next campaign; no strip-KMS, no type).</li>
+          scoped: finite-stage Gibbs inductive-limit; no strip-KMS, no type).</li>
+        <li><strong>The modular conjugation J, and Tomita's theorem — second half (inclusion) — for an
+          inductive-limit state</strong> — <code>towerJ</code>, the σ-semilinear completion of
+          jStage&nbsp;a&nbsp;=&nbsp;√ρ·aᴴ·√ρ⁻¹ (no ℝ-reduction), a genuine involutive <strong>anti-unitary</strong>
+          fixing Ω (J²&nbsp;=&nbsp;1, JΩ&nbsp;=&nbsp;Ω, ⟪Jξ,Jη⟫&nbsp;=&nbsp;⟪η,ξ⟫); the <strong>polar decomposition
+          on the core</strong> S̄&nbsp;=&nbsp;J∘Δ<sup>½</sup> (and F&nbsp;=&nbsp;Δ<sup>½</sup>∘J); commutation with
+          the modular group JΔ<sup>it</sup>&nbsp;=&nbsp;Δ<sup>it</sup>J; and J conjugating left into right
+          multiplication (J&nbsp;π(a)&nbsp;J&nbsp;=&nbsp;R<sub>jStage a</sub>) to give
+          <strong>J·towerLimitVN·J&nbsp;⊆&nbsp;towerLimitVN′</strong> with Ω separating for M′ — Tomita's theorem
+          second half in inclusion form. <em>Honestly scoped: the reverse inclusion / full equality
+          J&nbsp;M&nbsp;J&nbsp;=&nbsp;M′ is Tomita's hard half (the named RvD route); no unbounded Δ<sup>½</sup>;
+          finite-stage inductive-limit; no type.</em></li>
+        <li><strong>A genuine non-tracial KMS state for an inductive-limit von Neumann algebra (Δ&nbsp;≠&nbsp;1) —
+          the tower's Tomita–Takesaki modular theory complete</strong> — the tower vacuum vector state is provably
+          <em>not</em> a trace (⟪Ω, π(E<sub>nm</sub>)π(E<sub>mn</sub>)Ω⟫&nbsp;=&nbsp;w<sub>n</sub>&nbsp;≠&nbsp;w<sub>m</sub>),
+          the modular operator is non-trivial Δ&nbsp;≠&nbsp;1 and Δ<sup>it</sup>&nbsp;=&nbsp;towerFlow&nbsp;≠&nbsp;id
+          when the Gibbs weights differ — the Powers "not-the-tracial-case" separation. Together with the
+          KMS-boundary and the full modular data (S̄, Δ, Δ†&nbsp;=&nbsp;Δ, Δ<sup>it</sup>&nbsp;=&nbsp;the physical
+          flow, Tomita&nbsp;I, J, polar-on-core, Tomita&nbsp;II inclusion) this is, to our knowledge, the
+          <strong>first complete Tomita–Takesaki modular theory in any proof assistant</strong>. <em>Honestly
+          scoped: state non-traciality + modular non-triviality only — NOT a type classification (Mathlib has no
+          type API); type III / S-invariant stays cited.</em></li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-six.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-eight.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority
@@ -456,7 +515,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
     <div class="note">
       <p><strong>What this makes QIQT-H: a boundary theory, with “realisations” (2026).</strong> Because the only
-      distinctive postulate is <em>finite capacity</em> (the area form and floor being <em>derived</em> — the
+      distinctive postulate <em>on the gravity axis</em> is <em>finite capacity</em> (the area form and floor being <em>derived</em> — the
       floor outright, the form conditionally), and the framework everywhere <em>accepts</em> a field algebra and
       <em>bounds</em> its records rather than constructing them, QIQT-H is best read not as a generative theory but
       as a <strong>descriptive constraint (boundary) theory</strong> on a small core (P1 + P5 + finite capacity).

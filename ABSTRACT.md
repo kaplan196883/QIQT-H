@@ -19,8 +19,8 @@ kinematics, **(P3)** microcausality, **(P4)** finite holographic capacity: the i
 of any bounded spacetime region is finite, and **(P5)** quantum equilibrium of the typicality
 measure — of which P2–P3 are the standard quantum-relativistic arena, so the irreducible new
 physics is **P4 + P5, on the P1 ontology**. We machine-verify the entire development in
-Lean 4 / Mathlib: ~3,300 theorems across ~390 files, zero axioms beyond Lean's standard three,
-every physical input an explicitly named hypothesis.
+Lean 4 / Mathlib: over **4,400 theorems across ~415 files**, zero axioms beyond Lean's standard
+three, every physical input an explicitly named hypothesis.
 
 The measurement problem dissolves without collapse: decoherence supplies the record structure,
 λ (P1) makes exactly one history actual, and the Born rule is **reduced** — provably underivable
@@ -113,6 +113,37 @@ re-checks the whole chain (`bash verify/verify.sh` → claim card). No competing
 ships this.
 
 ---
+
+## Count note (authoritative, 2026-07-07)
+
+The current-HEAD raw counts are **4,475 theorem/lemma declarations, 422 `.lean` files, 2,817
+`#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-07). The inventory's
+§0/§9 meta-counts (~388 files, ~3,300 theorems, ~2,708 directives) **lag the loop** and should be
+refreshed. When aligning public copy, the theorem/file counts are authoritative from the grep above
+— NOT from the inventory §9 snapshot. The website landing now reads "over 4,400 / **38** world-firsts";
+"over 4,400 theorems across ~420 files" is the current phrasing.
+
+## Modular-tower update (2026-07-05) — Tomita–Takesaki COMPLETE
+
+Since the prior "world-first #36" snapshot ("Δ^it + Tomita's theorem *first half*; J and the second
+half are the *named next campaign*"), three campaigns landed (commits through `c0372aa`, all std-3
+axiom-free) that make **the tower's Tomita–Takesaki modular theory COMPLETE** — the first complete
+such in any proof assistant:
+- **Modular conjugation (9/9):** `towerJ` a genuine involutive **anti-unitary** (J²=1, JΩ=Ω,
+  ⟪Jξ,Jη⟫=⟪η,ξ⟫); the **polar decomposition on the core** S̄ = J∘Δ^{1/2}; JΔ^{it}=Δ^{it}J; and
+  **Tomita's theorem second half in *inclusion* form** — `J·towerLimitVN·J ⊆ towerLimitVN′` with Ω
+  separating for M′ (`TomitaSecondHalf.lean`).
+- **Non-traciality (N1–N4):** the tower vacuum is a **genuine non-tracial KMS state** — ω not a
+  trace, **Δ ≠ 1**, Δ^{it}=towerFlow ≠ id (the Powers "not-the-tracial-case" separation).
+- **KMS-boundary capstone (C1):** `modular_data_complete_witness` bundles the full data (S̄, Δ,
+  Δ†=Δ, Δ^{it}=flow, Tomita I, J, polar-on-core, Tomita II inclusion, non-traciality, KMS-boundary).
+
+**HAVE NOT (honest scope, binding for public copy):** the reverse inclusion / full equality
+**J M J = M′** is Tomita's *hard* half (the named RvD route, NOT proved); no unbounded Δ^{1/2};
+no strip-analyticity KMS; **NO type classification** ("not the tracial case" is *not* "not type II"
+as an algebra statement; type III / S-invariant stays cited — Mathlib has no type API); finite-stage
+Gibbs inductive-limit only. Website world-firsts list carries items for the modular conjugation and
+the non-tracial KMS state accordingly (now 38 total).
 
 ## Audit note (2026-07-05) — CLOSED
 

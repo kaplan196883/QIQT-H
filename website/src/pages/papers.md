@@ -7,8 +7,8 @@ description: The QIQT-H foundations paper, the formalization companion in prepar
 
 ## Foundations paper
 
-**One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from
-Holographic Constraint.** Paweł Kapłański.
+**One Wave Function, One World: Φ-Monism, a Holographic Entropy Bound, and a Machine-Verified Path
+Toward Emergent Gravity.** Pawel Kaplanski.
 
 The primary statement of the program: the $(\Phi,\lambda)$ single-world no-collapse ontology, the
 finite-information premise as a record *stage*, the regional cost functional $\chi_R$, and an honest account
@@ -24,7 +24,7 @@ submission to a peer-reviewed venue (quantum foundations; math-ph, gr-qc).
 ## Methods paper — the way in
 
 **An Audited Human-AI Loop for Trustworthy Lean Formalization: Axiom-Budget Auditing, a Goal-Directed
-State Report, and a Conditional General-Relativity Case Study.** Paweł Kapłański.
+State Report, and a Conditional General-Relativity Case Study.** Pawel Kaplanski.
 
 The shortest way into the program. This is a methods paper, not a physics paper: it describes the
 human-directed, two-model loop (a coding agent that formalizes against the Lean compiler, an independent
@@ -57,7 +57,7 @@ coherent-state entropy-reduction identity — with the full theorem index and th
 ## Born-rule formalization
 
 **Machine-Checked Reductions of the Born Rule: Conditional Theorems, a No-Go, and a Finite H-Theorem.**
-Paweł Kapłański.
+Pawel Kaplanski.
 
 The rigorous companion to the [Φ&nbsp;and&nbsp;λ](/selection) account of Born-from-typicality. It isolates,
 as Lean&nbsp;4 theorems, exactly what the Born rule needs beyond a no-collapse, single-record dynamics: the
@@ -83,6 +83,6 @@ The machine-checked substrate lives in the project repository. Every theorem is 
 
 ## How to cite
 
-Cite as: P. Kapłański, *One Wave Function, One World: Finite-Information Regional Algebras and the
-Macroscopic World from Holographic Constraint*, Zenodo, 2026,
+Cite as: P. Kaplanski, *One Wave Function, One World: Φ-Monism, a Holographic Entropy Bound, and a
+Machine-Verified Path Toward Emergent Gravity*, Zenodo, 2026,
 [doi:10.5281/zenodo.20837966](https://doi.org/10.5281/zenodo.20837966).

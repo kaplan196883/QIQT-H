@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: The idea
 eyebrow: In plain language
-description: The measurement problem, finite information, and why a single world follows from a bounded region holding only finitely many bits.
+description: The measurement problem, finite information as a bounded record stage, and why the single actual world is λ's doing — not the wave function's, and not the capacity bound's.
 ---
 
 Quantum mechanics, taken literally, predicts that a measuring device ends up in a superposition of
@@ -13,10 +13,12 @@ multiverse. Both are answers to the same question: why one world?
 
 ## The hypothesis
 
-QIQT-H starts from a single physical premise drawn from black-hole thermodynamics and holography:
+QIQT-H's entry hook is a physical premise drawn from black-hole thermodynamics and holography:
 **a bounded region of space has only a finite amount of operational information capacity** — a finite number
 $N_R$ of distinguishable records ($N_R<\infty$). *Finiteness is the postulate* (the "Quantized Information"
-core). This finiteness has **two machine-checked layers** (and they are *provably different*): in the
+core). This is one of **five postulates**, not the whole program: it is **(P4)**, and it sits alongside the
+$(\Phi,\lambda)$ ontology **(P1)** and the quantum-equilibrium typicality premise **(P5)** — the irreducible
+new physics being **P4 + P5, on the P1 ontology** (P2–P3 are the standard quantum-relativistic arena). This finiteness has **two machine-checked layers** (and they are *provably different*): in the
 finite-dimensional model it is a literal record **count** ($\mathrm{card}\,R \le e^{Q_R}$); in the continuum —
 where the matter algebra is the *infinite* Type III$_1$ of relativistic QFT — it is the corresponding finite
 **entropy** bound $S_{\mathrm{vN}}+S_{\mathrm{rel}}\le Q_R$, which is machine-checked (`EntropyNotCardinality`)
@@ -66,8 +68,11 @@ Lorentz-covariant λ.
 
 ## What this buys, and what it doesn't
 
-If the hypothesis holds, definiteness of the macroscopic world becomes a *consequence* of finite
-information rather than a separate postulate. No collapse term, no branching ontology.
+If the hypothesis holds, finite information supplies a bounded, decoherence-selected *record stage* — but
+definiteness itself is the work of **decoherence + the non-dynamical selector λ**, not of the capacity bound.
+(Capacity bounds *how many* distinguishable records a region can hold; it does **not** forbid a multi-record
+superposition or *select* the actual one — that "capacity forbids records" reading is retired as a category
+error. λ makes exactly one record actual.) No collapse term, no branching ontology.
 
 It does not, by itself, hand you the **probabilities**. That a given run yields outcome $k$ with frequency
 $|c_k|^2$, the Born rule, is argued separately from the typicality of microscopic initial conditions

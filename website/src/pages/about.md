@@ -13,7 +13,7 @@ the holographic premise — that bounded regions hold only finite information �
 record *stage* on which this happens. (An earlier framing, that finite capacity itself *forces* a single
 outcome, has been [retired](/open-problems) as a category error; the single outcome is λ's.)
 
-The program is the work of **Paweł Kapłański**. The mathematical substrate is developed and machine-checked
+The program is the work of **Pawel Kaplanski**. The mathematical substrate is developed and machine-checked
 in Lean&nbsp;4 / Mathlib.
 
 ## The discipline
@@ -35,5 +35,5 @@ This site is written to a standard of honest scope. Three commitments govern it:
 
 ## Contact
 
-Paweł Kapłański — [pawel@kaplanski.ai](mailto:pawel@kaplanski.ai).
+Pawel Kaplanski — [pawel@kaplanski.ai](mailto:pawel@kaplanski.ai).
 Source and issues: [github.com/kaplan196883/QIQT-H](https://github.com/kaplan196883/QIQT-H).

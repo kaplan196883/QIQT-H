@@ -190,13 +190,13 @@ Collins–Perez–Sudarsky–Urrutia–Vucetich (CPSUV) one-loop speed splitting
 established**, and a deliberate red-team puts the strong claim — *literal finite per-region capacity together with
 exact Lorentz invariance* — at only **≈10–20%**. The crossed-product (Type II) construction that would reconcile
 them faces a fork: either **(A)** matter stays ordinary covariant (Type III₁) field theory and "finite capacity"
-is only a finite *renormalized entropy* in a trace — consistent, but then the finiteness does no matter-physics
-work and the "finite information" framing means finite *entropy*, not a finite matter Hilbert space; or **(B)**
-the finiteness is made literal for matter — which collides with structural facts (Type III₁ has no atoms or
-finite trace; non-compact Lorentz has no non-trivial finite-dimensional unitary representations). The active work
-is deciding which fork QIQT-H is on. **This does not threaten the (Φ, λ) record-selection ontology or the
-holographic *entropy* bound** — both are entropy-level and Lorentz-safe — but it does mean the literal
-finite-*matter* reading is the part under genuine pressure.
+is a finite *renormalized entropy* in a trace — consistent, and the "finite information" framing means finite
+*entropy*, not a finite matter Hilbert space; or **(B)** the finiteness is made literal for matter — which
+collides with structural facts (Type III₁ has no atoms or finite trace; non-compact Lorentz has no non-trivial
+finite-dimensional unitary representations). **This is now settled: QIQT-H is on fork (A).** The literal
+finite-*matter* reading (fork B) is **retired as untenable** — "finite information" means finite *entropy*, never
+a finite matter Hilbert space. The (Φ, λ) record-selection ontology and the holographic *entropy* bound are
+untouched: both are entropy-level and Lorentz-safe.
 
 A sharper consequence (adversarial review, 2026): the finite-record-*count* layer is **not derivable** from the
 entropy/area bound — the machine-checked `EntropyNotCardinality` no-go forbids it. The only sound *operational*

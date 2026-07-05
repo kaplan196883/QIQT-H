@@ -152,7 +152,7 @@ PREAMBLE_TEMPLATE = r"""\documentclass[11pt,a4paper]{article}
 \newunicodechar{∫}{$\int$}
 \newunicodechar{√}{$\sqrt{}$}
 \newunicodechar{α}{$\alpha$}
-\newunicodechar{β}{$\beta$}
+\newunicodechar{β}{\ensuremath{\beta}}
 \newunicodechar{γ}{$\gamma$}
 \newunicodechar{δ}{$\delta$}
 \newunicodechar{ε}{$\varepsilon$}
@@ -170,7 +170,7 @@ PREAMBLE_TEMPLATE = r"""\documentclass[11pt,a4paper]{article}
 \newunicodechar{φ}{$\varphi$}
 \newunicodechar{χ}{$\chi$}
 \newunicodechar{ψ}{$\psi$}
-\newunicodechar{ω}{$\omega$}
+\newunicodechar{ω}{\ensuremath{\omega}}
 \newunicodechar{Γ}{$\Gamma$}
 \newunicodechar{Δ}{$\Delta$}
 \newunicodechar{Θ}{$\Theta$}
@@ -197,7 +197,7 @@ PREAMBLE_TEMPLATE = r"""\documentclass[11pt,a4paper]{article}
 \newunicodechar{’}{'}
 \newunicodechar{“}{``}
 \newunicodechar{”}{''}
-\newunicodechar{·}{$\cdot$}
+\newunicodechar{·}{\ensuremath{\cdot}}
 \newunicodechar{∼}{$\sim$}
 \newunicodechar{‐}{-}
 \newunicodechar{‑}{-}
@@ -279,6 +279,12 @@ PREAMBLE_TEMPLATE = r"""\documentclass[11pt,a4paper]{article}
 \newunicodechar{₂}{\textsubscript{2}}
 \newunicodechar{₃}{\textsubscript{3}}
 \newunicodechar{ₙ}{\textsubscript{n}}
+\newunicodechar{⋆}{$\star$}
+\newunicodechar{⟪}{$\langle\!\langle$}
+\newunicodechar{⟫}{$\rangle\!\rangle$}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{ᶜ}{\textsuperscript{c}}
+\newunicodechar{ᶠ}{\textsuperscript{f}}
 
 \title{__TITLE__}
 \author{__AUTHOR__}
