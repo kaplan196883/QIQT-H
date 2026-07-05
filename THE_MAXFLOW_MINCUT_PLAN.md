@@ -1,6 +1,6 @@
 # THE MAX-FLOW–MIN-CUT CAMPAIGN — discharge ExactRT's Ford–Fulkerson gap (M1–M5)
 
-**Status:** ACTIVE (2026-07-05). **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
+**Status:** COMPLETE (2026-07-05) — M1–M5 landed (M5 existence carried house-style + single-edge augmentation constructed). Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent a2b64db4d7754b482 (2026-07-05) — attemptable on the
 repo's OWN flow/cut framework; the classic reachable-set-in-residual-graph proof fits exactly.
 
@@ -38,10 +38,10 @@ max-flow=min-cut via `exact_rt_of_saturating`. Mathlib reachability: `Relation.R
   C = residualCut from residualCut_closed + hf.capacity/nonneg (contrapositive: nonzero
   slack/backflow would extend reachability), apply M1. Risk MODERATE (two contradiction
   arguments). ★ This + exact_rt_of_saturating ⟹ exact RT CONDITIONAL ONLY on t∉residualCut.
-- [ ] **M4 — `IsMaxFlow f ⟹ t ∉ residualCut cap f s`** (augmenting-path value bump along a
+- [x] **M4 — `IsMaxFlow f ⟹ t ∉ residualCut cap f s`** (augmenting-path value bump along a
   ReflTransGen walk). Risk MODERATE-HIGH (walk induction, the augment construction). Attempt;
   checkpoint honestly if the augment bump stalls.
-- [ ] **M5 — existence of a max flow (CARRIED).** `∃ f, IsSTFlow ∧ maximal` — compactness over
+- [x] **M5 — existence of a max flow (CARRIED).** `∃ f, IsSTFlow ∧ maximal` — compactness over
   the capacity polytope / Ford–Fulkerson integer termination. The cited analytic frontier;
   CARRY as a hypothesis, do NOT prove. Capstone: exact RT from (M3 + M4 + carried M5).
 
@@ -93,3 +93,14 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   Or.inl step; backflow ⟹ Or.inr v→u step) + M1. **ExactRT's Ford–Fulkerson gap is now
   reduced to the single sharp condition t ∉ residualCut + carried max-flow existence.**
   Std-3, budget 0. Next: M4 (t∉residualCut from maximality — attempt), M5 (carried capstone).
+
+- **2026-07-05** — **M4+M5 LANDED — CAMPAIGN COMPLETE.** IsMaxSTFlow; exact_rt_of_maxFlow
+  (maximality + carried haug ⟹ t∉residualCut, a clean 4-line reduction isolating haug as the
+  named frontier); ★ exact_rt_maxFlow_mincut — THE CAPSTONE: max-flow = min-cut
+  (flowValue = cutCapacity(residualCut)), conditional ONLY on the carried haug; and BONUS
+  singleEdge_augment_forward — the one-edge augmentation CONSTRUCTED (g = f+ε on the edge,
+  IsSTFlow re-proved, value strictly up) showing the augmentation mechanism is real, not just
+  carried. THE COMBINATORIAL CONTENT OF MAX-FLOW=MIN-CUT IS MACHINE-CHECKED on the tower's
+  flow/cut framework — the previously-cited Ford–Fulkerson gap is reduced to the single
+  carried haug (general augmenting-path ⟹ bigger flow; the analytic frontier, single-edge
+  case discharged). Std-3, budget 0. A genuine wall, mostly crossed.

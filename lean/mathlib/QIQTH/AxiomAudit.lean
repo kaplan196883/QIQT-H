@@ -8988,6 +8988,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QG.flowValue_eq_cutCapacity_of_saturated
 #print axioms QIQTH.QG.residualCut_closed
 #print axioms QIQTH.QG.residualCut_saturates
+-- THE MAX-FLOW-MIN-CUT M4+M5 (QG/MaxFlowMinCut.lean cont.): the reduction + capstone --
+-- IsMaxSTFlow; exact_rt_of_maxFlow (maximality + carried haug => t not in residualCut);
+-- exact_rt_maxFlow_mincut (THE CAPSTONE: max-flow = min-cut, flowValue = cutCapacity,
+-- conditional ONLY on the carried haug = the Ford-Fulkerson augmentation-existence frontier);
+-- singleEdge_augment_forward (the one-edge augmentation CONSTRUCTED, mechanism real). Std 3.
+#print axioms QIQTH.QG.exact_rt_of_maxFlow
+#print axioms QIQTH.QG.exact_rt_maxFlow_mincut
+#print axioms QIQTH.QG.singleEdge_augment_forward
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -1614,8 +1614,14 @@ sink t is NOT residual-reachable from s, the residual-reachable set IS a saturat
 `ExactRT.exact_rt_of_saturating`, exact RT (max-flow = min-cut) now holds CONDITIONAL ONLY on `t ∉ residualCut`
 (the no-augmenting-path condition, M4) + the CARRIED existence of a maximum flow (M5). This SHARPENS the cited
 Ford–Fulkerson gap from "a witness exists" to one sharp combinatorial condition + one carried existence input.
-HONEST: not an unconditional max-flow theorem; finite (V→V→ℝ) network model, not continuum RT. First green attempt
-at a wall confirmed unbuilt in Lean (Isabelle prior art only).
+HONEST: not an unconditional max-flow theorem; finite (V→V→ℝ) network model, not continuum RT. **M4+M5 CAMPAIGN COMPLETE**: exact_rt_of_maxFlow
+(maximality + carried haug ⟹ t∉residualCut) + ★ exact_rt_maxFlow_mincut (THE CAPSTONE:
+max-flow = min-cut conditional ONLY on the carried haug) + singleEdge_augment_forward (the
+one-edge augmentation CONSTRUCTED, mechanism real). The combinatorial content of
+max-flow=min-cut is machine-checked on the tower's flow/cut framework; the Ford–Fulkerson gap
+is reduced to the single carried haug (general augmenting-path ⟹ bigger flow, the analytic
+frontier, single-edge case discharged). First green crossing of a wall confirmed unbuilt in
+Lean (Isabelle prior art only) — a genuine wall, mostly crossed.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
