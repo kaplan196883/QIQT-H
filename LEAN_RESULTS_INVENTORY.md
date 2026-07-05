@@ -1617,8 +1617,11 @@ analogue, a structure never an axiom). **CAMPAIGN COMPLETE (W1–W6, honest)**: 
   `WilliamsonDecomp.entropy = ∑ gaussModeEntropy` over the symplectic spectrum, nonneg under
   the Heisenberg floor, = the repo's `gaussStateEntropy` — THE SYMPLECTIC SPECTRUM FEEDS THE
   GAUSSIAN ENTANGLEMENT ENTROPY (the QG/holography payoff). HONEST: the WilliamsonDecomp
-  framework + symplectic algebra + antisymm entry point + entropy bridge, with BOTH Youla and
-  the S-construction carried; NOT unconditional Williamson; does NOT unlock the area-law S∝A
+  framework + symplectic algebra + antisymm entry point + entropy bridge, **S-CONSTRUCTION now DERIVED** (`williamson_of_youla`): given M.PosDef + a YoulaDecomp of √M·J·√M, the
+  symplectic congruence S = √M⁻¹·O·E is CONSTRUCTED and both Sᵀ M S = D⊕D and S·J·Sᵀ = J proven (the sign fix:
+  a block-swapped root reconciles Mathlib's J with Youla's orientation). W3's carried S-construction is retired —
+  Williamson is now conditional on YoulaDecomp ALONE (the real-antisymmetric normal form, absent from Mathlib).
+  NOT unconditional Williamson; NOT unconditional Williamson; does NOT unlock the area-law S∝A
   scaling (area/volume-blind, a separate wall).
 
 **MAX-FLOW=MIN-CUT combinatorial core — LANDED, ExactRT gap SHARPENED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`

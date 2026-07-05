@@ -121,3 +121,14 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   connection (W4/W5), with BOTH the Youla normal form (W2) and the S-construction (W3)
   CARRIED honestly. Std-3, budget 0. HONEST: not unconditional Williamson; does NOT unlock
   the area-law scaling.
+
+- **2026-07-05** — **S-CONSTRUCTION DERIVED — W3's carry retired; Williamson conditional on
+  Youla ALONE.** williamson_of_youla: given M.PosDef + a YoulaDecomp of √M·J·√M, the symplectic
+  congruence S = √M⁻¹·O·E is CONSTRUCTED and BOTH conditions proven — Sᵀ M S = D⊕D (via
+  Ri M Ri = 1, OᵀO = 1, E*E = D⊕D) and S·J·Sᵀ = J symplectic. THE SIGN FIX: Mathlib's
+  J = [[0,−1],[1,0]] vs Youla's [[0,D],[−D,0]] mismatch ⟹ S J Sᵀ = −J for the diagonal root;
+  resolved with the BLOCK-SWAPPED root E := fromBlocks 0 (diag √ν) (diag √ν) 0 (still symmetric,
+  still E*E = D⊕D, but flips E J E to match OᵀAO), giving S J Sᵀ = +J. So W3's fully-carried
+  hconstr is now DERIVED — the entire block-matrix S-construction (symplectic + diagonalizing).
+  The ONE remaining carry is YoulaDecomp itself (the real-antisymmetric normal form, absent
+  from Mathlib). Std-3, budget 0.

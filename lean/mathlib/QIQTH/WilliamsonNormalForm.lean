@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# The Williamson normal form — W1–W5: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection
+# The Williamson normal form — W1–W6: decomposition structure, symplectic algebra, carried Youla, sqrt entry point, entropy connection, and the DERIVED S-construction
 
 Williamson's theorem states that a real symmetric positive-definite `2n × 2n` matrix `M` can be
 brought to the block-diagonal form `Sᵀ M S = D ⊕ D` (with `D = diagonal ν` the *symplectic
@@ -29,7 +29,18 @@ This file supplies **W1** and **W2** of the Williamson campaign:
   interface) and `williamson_of_construction_exists` (Williamson inhabited *given the existence of
   the constructed symplectic congruence*).  The block-matrix construction of that congruence
   `S = M^{-1/2} O (block-√ν)` — proving `S ∈ symplecticGroup` and `Sᵀ M S = D ⊕ D` — is the heavy
-  algebra and remains **CARRIED** here (packaged as the `hconstr` hypothesis, never faked).
+  algebra; **W6 (`williamson_of_youla`) DERIVES it** (see below), so the `hconstr` packaging is now
+  a legacy interface, not the live carry.
+
+* **W6 (the block-matrix S-construction — DERIVED, no longer carried):** `williamson_of_youla` —
+  given `M.PosDef` and a `YoulaDecomp` of the antisymmetric auxiliary `A = M^{1/2} J M^{1/2}`, it
+  **constructs** the symplectic congruence `S = M^{-1/2} O E` (with `E = [[0,√D],[√D,0]]` the
+  *block-swapped* root of the Youla spectrum) and proves *both* Williamson conditions —
+  `S ∈ symplecticGroup` (`S J Sᵀ = J`, via `E J E = Oᵀ A O`, `O Oᵀ = 1`, and `Ri A Ri = J`) and
+  `Sᵀ M S = D ⊕ D` (via `Ri M Ri = 1` and `Oᵀ O = 1`).  The block swap is the sign reconciliation
+  between Mathlib's `J = [[0,-1],[1,0]]` and Youla's orientation `[[0,D],[-D,0]]`.  This replaces
+  W3's fully-carried construction: Williamson is now conditional **only** on Youla, not additionally
+  on the constructed-`S` existence.
 
 * **W4–W5 (the entropy connection — the QG payoff, landing on the structure directly):** the
   Gaussian entanglement entropy `WilliamsonDecomp.entropy := ∑ᵢ gaussModeEntropy (νᵢ)` read off the
@@ -43,13 +54,14 @@ This file supplies **W1** and **W2** of the Williamson campaign:
   structure through the Heisenberg-floor bound `oneModeSympEig_ge_half`.
 
 **Honest scope.**  W1–W2 are scaffolding + one carried hypothesis; W3 adds the real square-root
-entry point and packages the still-carried block construction; W4–W5 land the entropy bridge on the
-`WilliamsonDecomp` structure directly (it does *not* need the carried construction — it consumes the
-symplectic spectrum `ν` a decomposition already carries).  Williamson is *not yet* proved
-unconditionally — it is proved **conditional on Youla** (and, at W3, on the constructed-`S`
-existence).  The decomposition itself carries Youla + the S-construction; the entropy is a genuine
-function of its spectrum.  Nothing here unlocks the area-law `S ∝ A` scaling (the entropy machinery
-is area/volume-blind).  Axiom-free.
+entry point and the legacy `hconstr` packaging; W4–W5 land the entropy bridge on the
+`WilliamsonDecomp` structure directly (it does *not* need the construction — it consumes the
+symplectic spectrum `ν` a decomposition already carries); **W6 DERIVES the block-matrix
+S-construction** (`williamson_of_youla`), retiring W3's carry.  Williamson is *not yet* proved
+unconditionally — it is proved **conditional on Youla alone** (`YoulaDecomp`, the real-antisymmetric
+normal form absent from Mathlib).  The single remaining carry is Youla; the S-construction and the
+entropy are genuine derivations.  Nothing here unlocks the area-law `S ∝ A` scaling (the entropy
+machinery is area/volume-blind).  Axiom-free.
 -/
 import Mathlib.LinearAlgebra.SymplecticGroup
 import Mathlib.LinearAlgebra.UnitaryGroup
@@ -280,5 +292,117 @@ theorem oneMode_entropy_consistency {M : Matrix (Unit ⊕ Unit) (Unit ⊕ Unit) 
   rw [hsum, hν]
   exact QIQTH.GaussianStateEntropy.gaussModeEntropy_nonneg
     (QIQTH.GaussianStateEntropy.oneModeSympEig_ge_half h)
+
+/-! ### W6 — `williamson_of_youla`: the block-matrix S-construction, DERIVED
+
+This lands the block-matrix construction that W3 packaged as the carried `hconstr` hypothesis.
+Given `M.PosDef` and a Youla decomposition `Y` of the antisymmetric auxiliary
+`A := M^{1/2} J M^{1/2}` (`williamsonAux_antisymm`), we **construct** the symplectic congruence
+`S := M^{-1/2} O E` and prove *both* Williamson conditions — no longer carried.
+
+Here `R := M^{1/2} = CFC.sqrt M` (symmetric PD), `Ri := R⁻¹` (symmetric, `Ri R = R Ri = 1`,
+`Ri M Ri = 1`), and `E := [[0, √D], [√D, 0]]` is the **block-swapped** square root of the Youla
+spectrum `D = diagonal ν` (with `√D = diagonal (√νᵢ)`).  The block swap is the sign reconciliation
+between Mathlib's `J = [[0,-1],[1,0]]` and Youla's orientation `Oᵀ A O = [[0,D],[-D,0]]`: it is
+symmetric, still squares to `E * E = D ⊕ D` (so the diagonalization is unaffected), but flips
+`E J E = [[0,D],[-D,0]] = Oᵀ A O` (the *diagonal* `√D ⊕ √D` would give the opposite sign and fail
+the symplectic condition).
+
+* **Diagonalize** `Sᵀ M S = D ⊕ D`: `Sᵀ M S = E Oᵀ (Ri M Ri) O E = E (Oᵀ O) E = E E = D ⊕ D`,
+  using `Ri M Ri = 1` and `Oᵀ O = 1`.
+* **Symplectic** `S J Sᵀ = J`: `S J Sᵀ = Ri O (E J E) Oᵀ Ri = Ri O (Oᵀ A O) Oᵀ Ri = Ri A Ri = J`,
+  using `E J E = Oᵀ A O` (Youla), `O Oᵀ = 1`, and `Ri A Ri = Ri R J R Ri = J`.
+
+This is **DERIVED**, replacing W3's fully-carried construction — Williamson is now conditional only
+on Youla (`YoulaDecomp`), not additionally on the constructed-`S` existence.  Axiom-free. -/
+
+/-- **The block-swapped root conjugates `J` to the Youla orientation.**  For `E = [[0,D],[D,0]]`
+    (block-swapped diagonal), `E J E = [[0, D²], [-D², 0]]`, matching the sign of Youla's
+    `Oᵀ A O = [[0, ν], [-ν, 0]]` (the *unswapped* `[[D,0],[0,D]]` would give the opposite sign).
+    Extracted as a standalone lemma so the `J`-unfolding rewrite does not trip over the `J` hidden
+    in the Youla datum's type. -/
+private theorem blockSwapRoot_conj_J (d : l → ℝ) :
+    (Matrix.fromBlocks 0 (Matrix.diagonal d) (Matrix.diagonal d) 0) * Matrix.J l ℝ
+        * (Matrix.fromBlocks 0 (Matrix.diagonal d) (Matrix.diagonal d) 0)
+      = Matrix.fromBlocks 0 (Matrix.diagonal (fun i => d i * d i))
+          (-(Matrix.diagonal (fun i => d i * d i))) 0 := by
+  rw [show Matrix.J l ℝ = Matrix.fromBlocks 0 (-1) 1 0 from rfl,
+    Matrix.fromBlocks_multiply, Matrix.fromBlocks_multiply]
+  simp only [mul_zero, zero_mul, add_zero, zero_add, Matrix.mul_neg,
+    Matrix.neg_mul, mul_one, Matrix.diagonal_mul_diagonal]
+
+/-- **The Williamson S-construction, derived from Youla.**  Given `M.PosDef` and a Youla
+    decomposition `Y` of the antisymmetric auxiliary `A = M^{1/2} J M^{1/2}`, the block matrix
+    `S = M^{-1/2} O E` (with `E = [[0,√D],[√D,0]]` the block-swapped root of the Youla spectrum) is
+    symplectic and congruence-diagonalizes `M` to the Williamson normal form.  This constructs the
+    `WilliamsonDecomp M` that W3 carried as a hypothesis. -/
+noncomputable def williamson_of_youla (M : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hM : M.PosDef)
+    (Y : YoulaDecomp (CFC.sqrt M * Matrix.J l ℝ * CFC.sqrt M)) : WilliamsonDecomp M := by
+  -- the symmetric positive-definite square root `R = M^{1/2}` and its inverse `Ri`
+  set R : Matrix (l ⊕ l) (l ⊕ l) ℝ := CFC.sqrt M with hR
+  have hM0 : (0 : Matrix (l ⊕ l) (l ⊕ l) ℝ) ≤ M := Matrix.nonneg_iff_posSemidef.mpr hM.posSemidef
+  have hRR : R * R = M := CFC.sqrt_mul_sqrt_self M hM0
+  have hRsymm : Rᵀ = R := by
+    rw [hR, ← Matrix.conjTranspose_eq_transpose_of_trivial]
+    exact ((Matrix.nonneg_iff_posSemidef.mp (CFC.sqrt_nonneg M)).isHermitian).eq
+  have hMdet : IsUnit M.det := (Matrix.isUnit_iff_isUnit_det M).mp hM.isUnit
+  have hRdet : IsUnit R.det := by
+    apply isUnit_of_mul_isUnit_left (y := R.det)
+    rw [← Matrix.det_mul, hRR]; exact hMdet
+  set Ri : Matrix (l ⊕ l) (l ⊕ l) ℝ := R⁻¹ with hRi
+  have hRiR : Ri * R = 1 := Matrix.nonsing_inv_mul R hRdet
+  have hRRi : R * Ri = 1 := Matrix.mul_nonsing_inv R hRdet
+  have hRisymm : Riᵀ = Ri := by rw [hRi, Matrix.transpose_nonsing_inv, hRsymm]
+  have hRiMRi : Ri * M * Ri = 1 := by
+    have e : Ri * M * Ri = (Ri * R) * (R * Ri) := by rw [← hRR]; simp only [Matrix.mul_assoc]
+    rw [e, hRiR, hRRi, Matrix.one_mul]
+  -- the block-swapped root `E` of the Youla spectrum
+  have hdd : Matrix.diagonal (fun i => Real.sqrt (Y.ν i))
+        * Matrix.diagonal (fun i => Real.sqrt (Y.ν i)) = Matrix.diagonal Y.ν := by
+    rw [Matrix.diagonal_mul_diagonal]
+    congr 1
+    funext i
+    exact Real.mul_self_sqrt (Y.hν i)
+  set E : Matrix (l ⊕ l) (l ⊕ l) ℝ :=
+    Matrix.fromBlocks 0 (Matrix.diagonal (fun i => Real.sqrt (Y.ν i)))
+      (Matrix.diagonal (fun i => Real.sqrt (Y.ν i))) 0 with hE
+  have hEsymm : Eᵀ = E := by
+    rw [hE, Matrix.fromBlocks_transpose]
+    simp only [Matrix.transpose_zero, Matrix.diagonal_transpose]
+  have hEE : E * E = Matrix.fromBlocks (Matrix.diagonal Y.ν) 0 0 (Matrix.diagonal Y.ν) := by
+    rw [hE, Matrix.fromBlocks_multiply]
+    simp only [mul_zero, zero_mul, add_zero, zero_add, hdd]
+  have hsq : (fun i => Real.sqrt (Y.ν i) * Real.sqrt (Y.ν i)) = Y.ν := by
+    funext i; exact Real.mul_self_sqrt (Y.hν i)
+  have hEJE : E * Matrix.J l ℝ * E
+      = Matrix.fromBlocks 0 (Matrix.diagonal Y.ν) (-(Matrix.diagonal Y.ν)) 0 := by
+    rw [hE, blockSwapRoot_conj_J, hsq]
+  -- the symplectic congruence `S = Ri O E`
+  set S : Matrix (l ⊕ l) (l ⊕ l) ℝ := Ri * Y.O * E with hS
+  have hOO : Y.Oᵀ * Y.O = 1 := (Matrix.mem_orthogonalGroup_iff' (l ⊕ l) ℝ).mp Y.hOrth
+  have hOOt : Y.O * Y.Oᵀ = 1 := (Matrix.mem_orthogonalGroup_iff (l ⊕ l) ℝ).mp Y.hOrth
+  have hSt : Sᵀ = E * (Y.Oᵀ * Ri) := by
+    rw [hS, Matrix.transpose_mul, Matrix.transpose_mul, hRisymm, hEsymm]
+  -- diagonalization
+  have hDiagEq : Sᵀ * M * S = Matrix.fromBlocks (Matrix.diagonal Y.ν) 0 0 (Matrix.diagonal Y.ν) := by
+    have hk : Sᵀ * M * S = E * (Y.Oᵀ * (Ri * M * Ri) * Y.O) * E := by
+      rw [hSt, hS]; simp only [Matrix.mul_assoc]
+    rw [hk, hRiMRi, mul_one, hOO, mul_one, hEE]
+  -- symplectic
+  have hSympForm : S * Matrix.J l ℝ * Sᵀ = Matrix.J l ℝ := by
+    have hk : S * Matrix.J l ℝ * Sᵀ = Ri * Y.O * (E * Matrix.J l ℝ * E) * Y.Oᵀ * Ri := by
+      rw [hSt, hS]; simp only [Matrix.mul_assoc]
+    rw [hk, hEJE, ← Y.hNormal]
+    have hfin : Ri * Y.O * (Y.Oᵀ * (R * Matrix.J l ℝ * R) * Y.O) * Y.Oᵀ * Ri
+        = Ri * ((Y.O * Y.Oᵀ) * (R * Matrix.J l ℝ * R) * (Y.O * Y.Oᵀ)) * Ri := by
+      simp only [Matrix.mul_assoc]
+    rw [hfin]
+    simp only [hOOt, Matrix.one_mul, Matrix.mul_one]
+    have hRiARi : Ri * (R * Matrix.J l ℝ * R) * Ri = Matrix.J l ℝ := by
+      have e : Ri * (R * Matrix.J l ℝ * R) * Ri = (Ri * R) * Matrix.J l ℝ * (R * Ri) := by
+        simp only [Matrix.mul_assoc]
+      rw [e, hRiR, hRRi, Matrix.one_mul, Matrix.mul_one]
+    exact hRiARi
+  exact ⟨S, SymplecticGroup.mem_iff.mpr hSympForm, Y.ν, Y.hν, hDiagEq⟩
 
 end QIQTH.Williamson

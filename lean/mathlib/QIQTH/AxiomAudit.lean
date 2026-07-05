@@ -9069,6 +9069,13 @@ namespace QIQTH.AxiomAudit
 -- block-diagonalization, the haug analogue, carried honestly not faked). Std 3.
 #print axioms QIQTH.Williamson.williamsonAux_antisymm
 #print axioms QIQTH.Williamson.williamson_of_construction_exists
+-- THE WILLIAMSON S-CONSTRUCTION (WilliamsonNormalForm.lean): williamson_of_youla DERIVED --
+-- given M.PosDef + a YoulaDecomp of sqrt(M) J sqrt(M), the symplectic congruence S =
+-- sqrt(M)^{-1} O E (E the block-swapped root of D) is CONSTRUCTED and BOTH conditions proven:
+-- S^T M S = D+D (via Ri M Ri = 1, O^T O = 1, E*E = D+D) and S J S^T = J symplectic (via the
+-- block-swapped E J E = O^T A O sign fix + Ri A Ri = J). Replaces W3's carried hconstr;
+-- Williamson now conditional on Youla ALONE (the real-skew normal form, absent from Mathlib). Std 3.
+#print axioms QIQTH.Williamson.williamson_of_youla
 -- THE WILLIAMSON W4+W5 (WilliamsonNormalForm.lean cont.): the entropy connection (QG payoff) --
 -- WilliamsonDecomp.entropy = sum of per-mode Srednicki gaussModeEntropy over the symplectic
 -- spectrum; entropy_nonneg (Heisenberg floor); = gaussStateEntropy on Fin n (rfl); the n=1
