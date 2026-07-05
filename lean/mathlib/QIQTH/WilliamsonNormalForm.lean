@@ -1239,4 +1239,187 @@ theorem williamson_exists (M : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hM : M.PosDef) :
 
 end ConcreteYoulaBridge
 
+/-! ### W13 — the symplectic spectrum is UNIQUE: entropy well-definedness
+
+Williamson is now unconditional (`williamsonDecomp_of_posDef`), but `WilliamsonDecomp.entropy` reads
+the symplectic eigenvalues `ν` off a *chosen* decomposition.  This section proves that the entropy —
+and, underneath it, the whole *multiset* of symplectic eigenvalues — depends on `M` alone, so
+`WilliamsonDecomp.entropy` / `gaussStateEntropy` is a genuine function of `M`: a physical entropy.
+
+**This is symplectic-spectrum UNIQUENESS / entropy well-definedness — NOT the area law.**  Nothing here
+concerns the boundary scaling `Σ ∝ A`; that remains the separate, cited analytic frontier.  What is
+proved is only that two Williamson decompositions of the same `M` have the same symplectic spectrum
+(as a multiset) and hence the same Gaussian entanglement entropy.
+
+The route (real, N-mode):
+
+* **`williamson_JM_similar_blockJ`** — `S⁻¹ (J M) S = J (D ⊕ D)`: the Hamiltonian matrix `J M` is
+  *similar* to `J · (diagonal ν ⊕ diagonal ν)`, via the symplectic identity `S⁻¹ J (Sᵀ)⁻¹ = J` and
+  `M = (Sᵀ)⁻¹ (D⊕D) S⁻¹`.  Pure real matrix algebra.
+* **`williamson_negJMsq_similar`** — squaring and negating: `S⁻¹ (-(J M)²) S = diagonal ν² ⊕ diagonal ν²`
+  (with `ν² i := ν i · ν i`), a *symmetric* matrix with real eigenvalues `νᵢ²`.  (The un-squared `J M`
+  has purely imaginary eigenvalues `± i νᵢ`, so its real charpoly `∏(X² + νᵢ²)` has no real roots — the
+  square is what exposes the `νᵢ²` as genuine real roots.)
+* **`williamson_negJMsq_charpoly_roots`** — the fixed matrix `-(J M)²` has
+  `charpoly.roots = {νᵢ²} + {νᵢ²}` (each `νᵢ²` doubled, one per block), by conjugation-invariance of
+  the characteristic polynomial (`Matrix.charpoly_units_conj'`) + `charpoly_diagonal` +
+  `roots_multiset_prod_X_sub_C`.  Because the left side depends only on `M`, so does the right.
+* **`williamson_entropy_symplectic_invariant`** — two decompositions give the *same* doubled multiset,
+  hence (count cancellation) the same `{νᵢ²}`, hence (square root, `νᵢ ≥ 0`) the same spectrum multiset
+  `{νᵢ}`, hence the same `∑ᵢ gaussModeEntropy νᵢ = WilliamsonDecomp.entropy`.  So the Gaussian
+  entanglement entropy is well-defined as a function of `M`.
+
+Axiom-free (std-3). -/
+
+section SpectrumUniqueness
+
+open Polynomial
+
+/-- `J · (diagonal d ⊕ diagonal d) = [[0, -diagonal d], [diagonal d, 0]]`. -/
+private theorem J_mul_blockDiag (d : l → ℝ) :
+    Matrix.J l ℝ * Matrix.fromBlocks (Matrix.diagonal d) 0 0 (Matrix.diagonal d)
+      = Matrix.fromBlocks 0 (-Matrix.diagonal d) (Matrix.diagonal d) 0 := by
+  rw [show Matrix.J l ℝ = Matrix.fromBlocks 0 (-1) 1 0 from rfl, Matrix.fromBlocks_multiply]
+  simp only [Matrix.zero_mul, Matrix.mul_zero, Matrix.neg_mul, Matrix.one_mul, add_zero,
+    zero_add]
+
+/-- `[[0, -diagonal d], [diagonal d, 0]]² = -(diagonal (d·d) ⊕ diagonal (d·d))`. -/
+private theorem blockDiagJ_sq (d : l → ℝ) :
+    Matrix.fromBlocks 0 (-Matrix.diagonal d) (Matrix.diagonal d) 0
+        * Matrix.fromBlocks 0 (-Matrix.diagonal d) (Matrix.diagonal d) 0
+      = -Matrix.fromBlocks (Matrix.diagonal (fun i => d i * d i)) 0 0
+          (Matrix.diagonal (fun i => d i * d i)) := by
+  rw [Matrix.fromBlocks_multiply]
+  simp only [Matrix.zero_mul, Matrix.mul_zero, Matrix.mul_neg, Matrix.neg_mul,
+    Matrix.diagonal_mul_diagonal, add_zero, zero_add, Matrix.fromBlocks_neg, neg_zero]
+
+/-- `(J · (D⊕D))² = -(diagonal (ν²) ⊕ diagonal (ν²))` — the two block computations composed. -/
+private theorem JblockDiag_sq (d : l → ℝ) :
+    (Matrix.J l ℝ * Matrix.fromBlocks (Matrix.diagonal d) 0 0 (Matrix.diagonal d))
+        * (Matrix.J l ℝ * Matrix.fromBlocks (Matrix.diagonal d) 0 0 (Matrix.diagonal d))
+      = -Matrix.fromBlocks (Matrix.diagonal (fun i => d i * d i)) 0 0
+          (Matrix.diagonal (fun i => d i * d i)) := by
+  rw [J_mul_blockDiag, blockDiagJ_sq]
+
+/-- **The Hamiltonian matrix `J M` is similar to `J · (diagonal ν ⊕ diagonal ν)`.**  For any Williamson
+    decomposition, `S⁻¹ (J M) S = J (D ⊕ D)`.  Derived from `M = (Sᵀ)⁻¹ (D⊕D) S⁻¹` and the symplectic
+    identity `S⁻¹ J (Sᵀ)⁻¹ = J` (obtained by inverting `S J Sᵀ = J`).  Pure real matrix algebra;
+    a genuine structural theorem underlying spectral uniqueness. -/
+theorem williamson_JM_similar_blockJ {M : Matrix (l ⊕ l) (l ⊕ l) ℝ} (W : WilliamsonDecomp M) :
+    W.S⁻¹ * (Matrix.J l ℝ * M) * W.S
+      = Matrix.J l ℝ * Matrix.fromBlocks (Matrix.diagonal W.ν) 0 0 (Matrix.diagonal W.ν) := by
+  have hSdet : IsUnit W.S.det := SymplecticGroup.symplectic_det W.hSymp
+  have hSinvS : W.S⁻¹ * W.S = 1 := Matrix.nonsing_inv_mul W.S hSdet
+  have hsymp : W.S * Matrix.J l ℝ * (W.S)ᵀ = Matrix.J l ℝ := SymplecticGroup.mem_iff.mp W.hSymp
+  -- the symplectic identity in commuted form: `S⁻¹ J = J Sᵀ`
+  have hkey : W.S⁻¹ * Matrix.J l ℝ = Matrix.J l ℝ * (W.S)ᵀ := by
+    calc W.S⁻¹ * Matrix.J l ℝ
+        = W.S⁻¹ * (W.S * Matrix.J l ℝ * (W.S)ᵀ) := by rw [hsymp]
+      _ = (W.S⁻¹ * W.S) * Matrix.J l ℝ * (W.S)ᵀ := by simp only [Matrix.mul_assoc]
+      _ = Matrix.J l ℝ * (W.S)ᵀ := by rw [hSinvS, Matrix.one_mul]
+  calc W.S⁻¹ * (Matrix.J l ℝ * M) * W.S
+      = (W.S⁻¹ * Matrix.J l ℝ) * M * W.S := by simp only [Matrix.mul_assoc]
+    _ = (Matrix.J l ℝ * (W.S)ᵀ) * M * W.S := by rw [hkey]
+    _ = Matrix.J l ℝ * ((W.S)ᵀ * M * W.S) := by simp only [Matrix.mul_assoc]
+    _ = Matrix.J l ℝ * Matrix.fromBlocks (Matrix.diagonal W.ν) 0 0 (Matrix.diagonal W.ν) := by
+        rw [W.hDiag]
+
+/-- **`-(J M)²` is similar to the symmetric block matrix `diagonal ν² ⊕ diagonal ν²`.**  Squaring the
+    similarity `S⁻¹ (J M) S = J (D⊕D)` and negating: `S⁻¹ (-(J M)²) S = diagonal (ν²) ⊕ diagonal (ν²)`
+    (`ν² i = ν i · ν i`).  This exposes the symplectic eigenvalues *squared* as the real spectrum of a
+    fixed symmetric matrix. -/
+theorem williamson_negJMsq_similar {M : Matrix (l ⊕ l) (l ⊕ l) ℝ} (W : WilliamsonDecomp M) :
+    W.S⁻¹ * (-(Matrix.J l ℝ * M) ^ 2) * W.S
+      = Matrix.fromBlocks (Matrix.diagonal (fun i => W.ν i * W.ν i)) 0 0
+          (Matrix.diagonal (fun i => W.ν i * W.ν i)) := by
+  have hsim := williamson_JM_similar_blockJ W
+  have hSdet : IsUnit W.S.det := SymplecticGroup.symplectic_det W.hSymp
+  have hSS : W.S * W.S⁻¹ = 1 := Matrix.mul_nonsing_inv W.S hSdet
+  have key : (W.S⁻¹ * (Matrix.J l ℝ * M) * W.S) * (W.S⁻¹ * (Matrix.J l ℝ * M) * W.S)
+      = W.S⁻¹ * ((Matrix.J l ℝ * M) * (Matrix.J l ℝ * M)) * W.S := by
+    calc (W.S⁻¹ * (Matrix.J l ℝ * M) * W.S) * (W.S⁻¹ * (Matrix.J l ℝ * M) * W.S)
+        = W.S⁻¹ * (Matrix.J l ℝ * M) * (W.S * W.S⁻¹) * (Matrix.J l ℝ * M) * W.S := by
+          simp only [Matrix.mul_assoc]
+      _ = W.S⁻¹ * ((Matrix.J l ℝ * M) * (Matrix.J l ℝ * M)) * W.S := by
+          rw [hSS]; simp only [Matrix.mul_one, Matrix.mul_assoc]
+  rw [pow_two, Matrix.mul_neg, Matrix.neg_mul, ← key, hsim, JblockDiag_sq, neg_neg]
+
+/-- **The characteristic polynomial roots of the fixed matrix `-(J M)²` are `{νᵢ²}` doubled.**  For any
+    Williamson decomposition, `(-(J M)²).charpoly.roots = {νᵢ · νᵢ} + {νᵢ · νᵢ}` (each squared symplectic
+    eigenvalue with the doubled block multiplicity).  Via conjugation-invariance of the charpoly
+    (`Matrix.charpoly_units_conj'`, `S` a unit), the block charpoly (`charpoly_fromBlocks_zero₁₂`), the
+    diagonal charpoly, and `roots_multiset_prod_X_sub_C` + `roots_pow`.  The left side depends on `M`
+    alone, so the multiset `{νᵢ²}` is a symplectic invariant. -/
+theorem williamson_negJMsq_charpoly_roots {M : Matrix (l ⊕ l) (l ⊕ l) ℝ} (W : WilliamsonDecomp M) :
+    (-(Matrix.J l ℝ * M) ^ 2).charpoly.roots
+      = Finset.univ.val.map (fun i => W.ν i * W.ν i)
+        + Finset.univ.val.map (fun i => W.ν i * W.ν i) := by
+  have hSdet : IsUnit W.S.det := SymplecticGroup.symplectic_det W.hSymp
+  have hSunit : IsUnit W.S := (Matrix.isUnit_iff_isUnit_det W.S).mpr hSdet
+  have hU : (hSunit.unit : Matrix (l ⊕ l) (l ⊕ l) ℝ) = W.S := hSunit.unit_spec
+  have hconj : (Matrix.fromBlocks (Matrix.diagonal (fun i => W.ν i * W.ν i)) 0 0
+          (Matrix.diagonal (fun i => W.ν i * W.ν i))).charpoly
+      = (-(Matrix.J l ℝ * M) ^ 2).charpoly := by
+    rw [← williamson_negJMsq_similar W, ← hU, Matrix.charpoly_units_conj']
+  have hprod : (∏ i, (X - C (W.ν i * W.ν i))).roots
+      = Finset.univ.val.map (fun i => W.ν i * W.ν i) := by
+    have hmap : (∏ i, (X - C (W.ν i * W.ν i)))
+        = ((Finset.univ.val.map (fun i => W.ν i * W.ν i)).map (fun a => X - C a)).prod := by
+      rw [Multiset.map_map]; rfl
+    rw [hmap, roots_multiset_prod_X_sub_C]
+  rw [← hconj, Matrix.charpoly_fromBlocks_zero₁₂]
+  simp only [Matrix.charpoly_diagonal]
+  rw [← pow_two, roots_pow, hprod, two_nsmul]
+
+/-- **The symplectic spectrum multiset is unique, so the Gaussian entanglement entropy is well-defined.**
+    Any two Williamson decompositions of the *same* `M` have equal `WilliamsonDecomp.entropy`.  Both give
+    `-(J M)²` the same doubled squared-spectrum multiset (it is a symplectic invariant,
+    `williamson_negJMsq_charpoly_roots`); count-cancelling the doubling gives equal `{νᵢ²}`, and the square
+    root (`νᵢ ≥ 0`) gives equal spectrum multisets `{νᵢ}`, so the entropies `∑ᵢ gaussModeEntropy νᵢ` agree.
+    Hence `WilliamsonDecomp.entropy` (and `gaussStateEntropy`) is a genuine function of `M` — a physical
+    entropy.  **This is spectral uniqueness / well-definedness, NOT the area-law scaling.** -/
+theorem williamson_entropy_symplectic_invariant {M : Matrix (l ⊕ l) (l ⊕ l) ℝ}
+    (W₁ W₂ : WilliamsonDecomp M) : W₁.entropy = W₂.entropy := by
+  -- the doubled squared-spectrum multisets agree (both are the roots of the fixed charpoly of `-(JM)²`)
+  have hroots : Finset.univ.val.map (fun i => W₁.ν i * W₁.ν i)
+        + Finset.univ.val.map (fun i => W₁.ν i * W₁.ν i)
+      = Finset.univ.val.map (fun i => W₂.ν i * W₂.ν i)
+        + Finset.univ.val.map (fun i => W₂.ν i * W₂.ν i) := by
+    rw [← williamson_negJMsq_charpoly_roots W₁, ← williamson_negJMsq_charpoly_roots W₂]
+  -- cancel the doubling via counts
+  have hsq : Finset.univ.val.map (fun i => W₁.ν i * W₁.ν i)
+      = Finset.univ.val.map (fun i => W₂.ν i * W₂.ν i) := by
+    refine Multiset.ext.mpr (fun a => ?_)
+    have h := congrArg (Multiset.count a) hroots
+    simp only [Multiset.count_add] at h
+    omega
+  -- transfer through the square root (injective on `ℝ≥0`, as `νᵢ ≥ 0`)
+  have hν : Finset.univ.val.map W₁.ν = Finset.univ.val.map W₂.ν := by
+    have e1 : Finset.univ.val.map W₁.ν
+        = (Finset.univ.val.map (fun i => W₁.ν i * W₁.ν i)).map Real.sqrt := by
+      rw [Multiset.map_map]
+      exact Multiset.map_congr rfl (fun i _ => (Real.sqrt_mul_self (W₁.hν i)).symm)
+    have e2 : Finset.univ.val.map W₂.ν
+        = (Finset.univ.val.map (fun i => W₂.ν i * W₂.ν i)).map Real.sqrt := by
+      rw [Multiset.map_map]
+      exact Multiset.map_congr rfl (fun i _ => (Real.sqrt_mul_self (W₂.hν i)).symm)
+    rw [e1, e2, hsq]
+  -- the entropy depends only on the spectrum multiset
+  calc W₁.entropy
+      = (Multiset.map QIQTH.GaussianStateEntropy.gaussModeEntropy
+          (Finset.univ.val.map W₁.ν)).sum := by
+        show (∑ i, QIQTH.GaussianStateEntropy.gaussModeEntropy (W₁.ν i))
+          = (Multiset.map QIQTH.GaussianStateEntropy.gaussModeEntropy
+              (Finset.univ.val.map W₁.ν)).sum
+        rw [Multiset.map_map]; rfl
+    _ = (Multiset.map QIQTH.GaussianStateEntropy.gaussModeEntropy
+          (Finset.univ.val.map W₂.ν)).sum := by rw [hν]
+    _ = W₂.entropy := by
+        show (Multiset.map QIQTH.GaussianStateEntropy.gaussModeEntropy
+              (Finset.univ.val.map W₂.ν)).sum
+          = (∑ i, QIQTH.GaussianStateEntropy.gaussModeEntropy (W₂.ν i))
+        rw [Multiset.map_map]; rfl
+
+end SpectrumUniqueness
+
 end QIQTH.Williamson

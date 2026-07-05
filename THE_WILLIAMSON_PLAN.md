@@ -277,3 +277,40 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   Nonempty (WilliamsonDecomp M)`. **NO carried hypothesis remains — Williamson's symplectic
   diagonalization is UNCONDITIONAL for every real symmetric PD matrix.** `#print axioms` of all three
   = `{propext, Classical.choice, Quot.sound}` (Std-3), budget 0, NO sorry.
+
+### Entropy invariance (W13) — symplectic-spectrum UNIQUENESS / entropy well-definedness (NOT the area law)
+
+- **2026-07-05** — **W13 — the symplectic spectrum is UNIQUE ⟹ the Gaussian entanglement entropy is
+  WELL-DEFINED as a function of `M`. ALL FOUR increments CLOSED green (nothing checkpointed).**
+  `§SpectrumUniqueness` in `WilliamsonNormalForm.lean`, 4 new axiom-free (Std-3) theorems + 3 private
+  block-algebra helpers. Motivation: Williamson is unconditional, but `WilliamsonDecomp.entropy` reads `ν`
+  off a *chosen* decomposition; this proves two decompositions of the same `M` give the same entropy.
+  - **Increment 1 (CLOSED) — `williamson_JM_similar_blockJ`:** the Hamiltonian matrix `J·M` is SIMILAR to
+    `J·(diagonal ν ⊕ diagonal ν)` — `S⁻¹ (J M) S = J (D⊕D)`. Proved via the commuted symplectic identity
+    `S⁻¹ J = J Sᵀ` (from `S J Sᵀ = J`, `SymplecticGroup.mem_iff`) + `Sᵀ M S = D⊕D` (`W.hDiag`), pure real
+    matrix algebra. (Note: the natural `M = (Sᵀ)⁻¹(D⊕D)S⁻¹` route hits a motive wall — `M` is an implicit
+    arg inside `W.S`, so `rw [← hM]` on `M` fails; the `S⁻¹J = JSᵀ` route rewrites the *block*, never `M`.)
+  - **Increment 1.5 (CLOSED) — `williamson_negJMsq_similar`:** squaring + negating, `S⁻¹ (-(J M)²) S =
+    diagonal ν² ⊕ diagonal ν²` (`ν² i := ν i · ν i`), a SYMMETRIC matrix. This exposes the symplectic
+    eigenvalues *squared* as the real spectrum of a fixed symmetric matrix. (The un-squared `J M` has
+    purely imaginary eigenvalues `±iνᵢ` ⟹ its real charpoly `∏(X²+νᵢ²)` has NO real roots — so the naive
+    "roots of charpoly(J·(D⊕D))" route in the plan sketch is empty over ℝ; the square is the fix that makes
+    `νᵢ²` genuine real roots.) Block helpers `J_mul_blockDiag`, `blockDiagJ_sq`, `JblockDiag_sq`.
+  - **Increment 2 (CLOSED) — `williamson_negJMsq_charpoly_roots`:** the FIXED matrix `-(J M)²` has
+    `charpoly.roots = {νᵢ²} + {νᵢ²}` (each squared eigenvalue doubled, one per block). Via
+    conjugation-invariance of the charpoly (`Matrix.charpoly_units_conj'`, `S` packaged as a unit via
+    `isUnit_iff_isUnit_det` + `symplectic_det`) + `charpoly_fromBlocks_zero₁₂` + `charpoly_diagonal` +
+    `Polynomial.roots_multiset_prod_X_sub_C` + `roots_pow`/`two_nsmul`. LHS depends on `M` ALONE ⟹ the
+    squared-spectrum multiset `{νᵢ²}` is a symplectic INVARIANT.
+  - **Increment 3 / CAPSTONE (CLOSED) — `williamson_entropy_symplectic_invariant`:** any two
+    `WilliamsonDecomp M` have EQUAL `entropy`. Both give `-(J M)²` the same doubled multiset; count-cancel
+    the doubling (`Multiset.ext` + `count_add` + `omega`) ⟹ equal `{νᵢ²}`; the square root
+    (`Real.sqrt_mul_self`, `νᵢ ≥ 0`) transfers to equal spectrum multisets `{νᵢ}`; `Multiset.map_map` +
+    the `Finset.sum = (map).sum` definitional bridge give equal `∑ᵢ gaussModeEntropy νᵢ`. **So
+    `WilliamsonDecomp.entropy` / `gaussStateEntropy` is a genuine function of `M` — a physical entropy.**
+  - **HONEST CAPTION:** this is symplectic-spectrum UNIQUENESS / entropy WELL-DEFINEDNESS. It is **NOT**
+    the area law and is **not** `Σ ∝ boundary` / area scaling — that remains the separate cited analytic
+    frontier. What is proved is only that the entropy is a basis-independent function of the covariance
+    matrix `M` (the N-mode analogue of the `n=1` `oneModeSympEig_symplectic_invariant`). `#print axioms` of
+    all four = `{propext, Classical.choice, Quot.sound}` (Std-3), budget 0, NO sorry. `lake build
+    QIQTH.WilliamsonNormalForm` + `QIQTH.GaussianStateEntropy` + `QIQTH.AxiomAudit` green.

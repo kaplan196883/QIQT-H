@@ -9168,6 +9168,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Williamson.youlaDecomp_of_antisymm
 #print axioms QIQTH.Williamson.williamsonDecomp_of_posDef
 #print axioms QIQTH.Williamson.williamson_exists
+-- THE WILLIAMSON W13 (WilliamsonNormalForm.lean §SpectrumUniqueness): the symplectic spectrum is UNIQUE ⟹
+-- the Gaussian entanglement entropy is WELL-DEFINED as a function of M (a physical entropy). NOT the area law.
+-- williamson_JM_similar_blockJ: the Hamiltonian matrix J·M is SIMILAR to J·(diag ν ⊕ diag ν) --
+-- S⁻¹(J M)S = J(D⊕D) -- via the commuted symplectic identity S⁻¹J = JSᵀ (from S J Sᵀ = J) + Sᵀ M S = D⊕D.
+-- williamson_negJMsq_similar: squaring+negating, S⁻¹(-(J M)²)S = diag ν² ⊕ diag ν² (ν² i = ν i·ν i), a
+-- SYMMETRIC matrix exposing the symplectic eigenvalues SQUARED as real spectrum (the un-squared J M has
+-- purely imaginary ±iνᵢ ⟹ real charpoly ∏(X²+νᵢ²) has NO real roots; the square is what makes νᵢ² real roots).
+-- williamson_negJMsq_charpoly_roots: the FIXED matrix -(J M)² has charpoly.roots = {νᵢ²}+{νᵢ²} (doubled, one
+-- per block), via conjugation-invariance of charpoly (Matrix.charpoly_units_conj', S a unit) + block charpoly
+-- (charpoly_fromBlocks_zero₁₂) + charpoly_diagonal + roots_multiset_prod_X_sub_C + roots_pow. LHS depends on M
+-- ALONE ⟹ the squared-spectrum multiset {νᵢ²} is a symplectic INVARIANT. ★ CAPSTONE
+-- williamson_entropy_symplectic_invariant: any two WilliamsonDecomp of the SAME M have EQUAL entropy -- both
+-- give -(J M)² the same doubled multiset, count-cancel the doubling ⟹ equal {νᵢ²}, square root (νᵢ≥0) ⟹ equal
+-- spectrum multiset {νᵢ}, ⟹ equal ∑ gaussModeEntropy νᵢ = WilliamsonDecomp.entropy. So gaussStateEntropy /
+-- WilliamsonDecomp.entropy is a genuine function of M (a physical entropy). HONEST: this is spectral
+-- UNIQUENESS / entropy well-definedness, NOT the area-law scaling S∝A (the separate cited frontier). Std 3.
+#print axioms QIQTH.Williamson.williamson_JM_similar_blockJ
+#print axioms QIQTH.Williamson.williamson_negJMsq_similar
+#print axioms QIQTH.Williamson.williamson_negJMsq_charpoly_roots
+#print axioms QIQTH.Williamson.williamson_entropy_symplectic_invariant
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
