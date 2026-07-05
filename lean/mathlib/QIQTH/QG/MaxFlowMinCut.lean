@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# M1–M8 — the combinatorial core of max-flow = min-cut
+# M1–M9 — the combinatorial core of max-flow = min-cut
 
 Built on Track C's flow/cut framework (`EmergentSpacetime.lean`, `section Flow`). This file delivers the
 combinatorial content of the hard half of max-flow = min-cut, discharging the combinatorial part of
@@ -51,6 +51,18 @@ combinatorial content of the hard half of max-flow = min-cut, discharging the co
   `bypass`/`toPath` are undirected — `fromRel` symmetrises, giving `r u v ∨ r v u`, not the forward
   direction). This splits M7's carried extraction (a) into a DERIVED degree-structure part and the lone
   carried directed-dedup part.
+* **M9** `exists_isChain_list` / `dedup_aux` / `exists_nodup_isChain_list` /
+  `simpleForwardPath_of_reachable` — **the directed dedup** (the genuine hard graph-theory core, no
+  Mathlib support). A forward residual `Relation.ReflTransGen (ForwardResidualStep cap f)` walk `s ⇝ t`
+  is materialised as an `IsChain` `List` (`exists_isChain_list`), de-duplicated into a `Nodup` chain list
+  by the **splice-shortens** induction (`dedup_aux`: strong induction on a length bound; a repeat at
+  indices `a < b` is removed via `take (a+1) ++ drop (b+1)`, strictly shorter, the rejoin edge holding
+  because `w[a] = w[b]` and `r w[b] w[b+1]` is an original step), and finally converted to a
+  `SimpleForwardPath` (`simpleForwardPath_of_reachable`: `List` → injective `Fin (n+1) → V` via
+  `w.get ∘ Fin.cast`). This is the directed analogue of `SimpleGraph.Walk.bypass`, unavailable off the
+  shelf (Mathlib's `bypass`/`fromRel` are undirected). **This DISCHARGES M8's lone carried piece (a′)**:
+  composed with `augment_of_simpleForwardPath`, forward residual reachability `s ⇝ t` alone yields a
+  strictly larger flow.
 
 **Honest scope:** M1–M3 reduce ExactRT's gap to the single sharp condition `t ∉ residualCut cap f s`
 (no augmenting path from a maximum flow); M4–M5 derive that condition and the capstone
@@ -67,8 +79,12 @@ per-step forward slack; the directed analogue of `SimpleGraph.Walk.bypass`, unav
 since Mathlib's undirected `bypass`/`fromRel` only yield `r u v ∨ r v u`); (b) mixed forward/backward
 (residual reverse-edge) paths; and (c) max-flow EXISTENCE (compactness / Ford–Fulkerson termination). M7
 removed the length obstruction and M8 the degree-extraction obstruction for forward paths, narrowing
-carry (a) to the single directed-dedup step. This is the finite (`V→V→ℝ`) network model, not a
-continuum RT.
+carry (a) to the single directed-dedup step — **which M9 now discharges**
+(`simpleForwardPath_of_reachable`: a forward residual `ReflTransGen` walk is materialised as an `IsChain`
+list, de-duplicated by the splice-shortens induction, and converted to a `SimpleForwardPath`). So for the
+FORWARD case the entire pipeline reachability ⟹ strictly larger flow is now derived; the residual carry is
+only (b) mixed forward/backward paths and (c) max-flow EXISTENCE. This is the finite (`V→V→ℝ`) network
+model, not a continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`; `open Classical` for the reachable-set
 filter's decidability is a local convenience, not a project axiom).
@@ -678,5 +694,204 @@ theorem augment_of_simpleForwardPath {cap : V → V → ℝ} {s t : V} {f : V �
     rw [Fin.ext_iff, Fin.val_zero, Fin.val_last] at h0
     omega
   exact forwardAugPath_augments' hf SP.toForwardAugPath hst
+
+/-! ### M9 — the directed dedup: residual reachability yields a `SimpleForwardPath`
+
+M8 left CARRIED exactly one piece: the *directed dedup* — that a residual
+`Relation.ReflTransGen (ForwardResidualStep cap f)` walk `s ⇝ t` produces a **simple** forward path
+(`SimpleForwardPath`), i.e. an injective vertex sequence. M9 DISCHARGES it, the genuine hard graph-theory
+core (no Mathlib support: `SimpleGraph.Walk.bypass`/`toPath` are *undirected*, `fromRel` symmetrises).
+
+The construction is the "shortest forward walk is simple" argument, done constructively:
+
+* **`exists_isChain_list`** — `ReflTransGen r s t` yields a `List V` `w` with `w.IsChain r`,
+  `w.head? = some s`, `w.getLast? = some t` (built by `head_induction_on`, prepending each residual edge).
+* **`dedup_aux` / `exists_nodup_isChain_list`** — the **splice-shortens** crux: by strong induction on a
+  length bound, any such chain list is replaced by a `Nodup` one. If `w` is not `Nodup`, injectivity of
+  `w.get` fails, giving indices `a < b` with `w[a] = w[b]`; the splice `w.take (a+1) ++ w.drop (b+1)`
+  is a strictly shorter chain list with the same endpoints (the rejoin edge `w[a] = w[b] → w[b+1]` is a
+  step of the original chain), and the induction hypothesis simplifies it.
+* **`simpleForwardPath_of_reachable`** — the **capstone**: convert the `Nodup` chain list to a
+  `SimpleForwardPath` (`List` → injective `Fin (n+1) → V` via `w.get ∘ Fin.cast`; `Nodup ⟹ injective`,
+  `IsChain ⟹ hstep`, `head?`/`getLast? ⟹ hp0`/`hplast`; `s ≠ t` forces length `≥ 2` so `n ≥ 1`).
+
+Composed with M8's `augment_of_simpleForwardPath`, forward residual reachability `s ⇝ t` alone now yields
+a strictly larger flow — the forward augmenting path `haug` is fully derived from reachability. What stays
+CARRIED for the full Ford–Fulkerson `haug` is only (b) mixed forward/backward (residual reverse-edge)
+paths and (c) max-flow EXISTENCE; the forward directed-dedup carry (a′) is discharged. -/
+
+section DirectedDedup
+open List
+set_option linter.unusedSectionVars false
+
+/-- **M9 (Step 1).** A `Relation.ReflTransGen r` chain `s ⇝ t` is witnessed by a `List V` that
+`IsChain r`, starts at `s` (`head?`) and ends at `t` (`getLast?`). Built by induction on the chain,
+prepending the source of each residual step. -/
+theorem exists_isChain_list {W : Type*} {r : W → W → Prop} {s t : W}
+    (h : Relation.ReflTransGen r s t) :
+    ∃ w : List W, w.IsChain r ∧ w.head? = some s ∧ w.getLast? = some t := by
+  induction h using Relation.ReflTransGen.head_induction_on with
+  | refl => exact ⟨[t], isChain_singleton t, rfl, rfl⟩
+  | @head a c h' hct ih =>
+    obtain ⟨w, hchain, hhead, hlast⟩ := ih
+    have hwne : w ≠ [] := by intro hw; rw [hw] at hhead; simp at hhead
+    refine ⟨a :: w, ?_, rfl, ?_⟩
+    · rw [isChain_cons]; refine ⟨?_, hchain⟩
+      intro y hy; rw [hhead] at hy
+      simp only [Option.mem_def, Option.some.injEq] at hy; subst hy; exact h'
+    · rw [getLast?_cons_of_ne_nil hwne]; exact hlast
+
+/-- **M9 (Step 2) — the splice-shortens crux.** By strong induction on a length bound `N`, every
+`IsChain r` list from `s` to `t` is replaced by a `Nodup` one with the same endpoints. If the list is
+not `Nodup`, `w.get` is not injective, giving indices `a < b` with `w[a] = w[b]`; the splice
+`w.take (a+1) ++ w.drop (b+1)` is a strictly shorter `IsChain r` list from `s` to `t` — the rejoin edge
+holds because `w[a] = w[b]` and `r w[b] w[b+1]` is a step of the original chain — so the induction
+hypothesis applies. -/
+theorem dedup_aux {W : Type*} {r : W → W → Prop} {s t : W} :
+    ∀ (N : ℕ) (w : List W), w.length ≤ N → w.IsChain r → w.head? = some s →
+      w.getLast? = some t →
+      ∃ w' : List W, w'.IsChain r ∧ w'.head? = some s ∧ w'.getLast? = some t ∧ w'.Nodup := by
+  intro N
+  induction N with
+  | zero =>
+    intro w hlen _ hh _
+    rcases w with _ | ⟨x, xs⟩
+    · simp at hh
+    · simp at hlen
+  | succ N ih =>
+    intro w hlen hc hh hl
+    by_cases hnd : w.Nodup
+    · exact ⟨w, hc, hh, hl, hnd⟩
+    · rw [List.nodup_iff_injective_get, Function.not_injective_iff] at hnd
+      obtain ⟨i, j, hEq, hne⟩ := hnd
+      have hvne : (i : ℕ) ≠ (j : ℕ) := fun h => hne (Fin.ext h)
+      obtain ⟨a, b, hab, ha, hb, hwEq?⟩ :
+          ∃ a b : ℕ, a < b ∧ a < w.length ∧ b < w.length ∧ w[a]? = w[b]? := by
+        rcases lt_or_gt_of_ne hvne with h | h
+        · exact ⟨i, j, h, i.2, j.2, by
+            rw [getElem?_eq_getElem i.2, getElem?_eq_getElem j.2]
+            simpa [List.get_eq_getElem] using hEq⟩
+        · exact ⟨j, i, h, j.2, i.2, by
+            rw [getElem?_eq_getElem j.2, getElem?_eq_getElem i.2]
+            simpa [List.get_eq_getElem] using hEq.symm⟩
+      have hwEq : w[a] = w[b] := by
+        rw [getElem?_eq_getElem ha, getElem?_eq_getElem hb] at hwEq?
+        simpa using hwEq?
+      set w' := w.take (a+1) ++ w.drop (b+1) with hw'
+      have hlen' : w'.length ≤ N := by
+        have h1 : (w.take (a+1)).length = a + 1 := by rw [length_take]; omega
+        have h2 : (w.drop (b+1)).length = w.length - (b+1) := length_drop
+        rw [hw', length_append, h1, h2]; omega
+      have htne : w.take (a+1) ≠ [] := by
+        rw [Ne, take_eq_nil_iff]
+        rintro (h | h)
+        · omega
+        · rw [h] at ha; simp at ha
+      have hlastTake : (w.take (a+1)).getLast? = some w[a] := by
+        rw [getLast?_take, if_neg (Nat.add_one_ne_zero a)]
+        simp only [Nat.add_sub_cancel]; rw [getElem?_eq_getElem ha]; simp
+      have hcTake : (w.take (a+1)).IsChain r := by
+        have : (w.take (a+1) ++ w.drop (a+1)).IsChain r := by rw [take_append_drop]; exact hc
+        exact (isChain_append.mp this).1
+      have hcDrop : (w.drop (b+1)).IsChain r := by
+        have : (w.take (b+1) ++ w.drop (b+1)).IsChain r := by rw [take_append_drop]; exact hc
+        exact (isChain_append.mp this).2.1
+      have hjun : ∀ x ∈ (w.take (a+1)).getLast?, ∀ y ∈ (w.drop (b+1)).head?, r x y := by
+        intro x hx y hy
+        rw [hlastTake] at hx
+        simp only [Option.mem_def, Option.some.injEq] at hx; subst hx
+        rw [head?_drop, Option.mem_def, List.getElem?_eq_some_iff] at hy
+        obtain ⟨hb1, hyEq⟩ := hy; subst hyEq
+        have hstep : r w[b] w[b+1] := isChain_iff_getElem.mp hc b hb1
+        rw [hwEq]; exact hstep
+      have hc' : w'.IsChain r := by rw [hw']; exact IsChain.append hcTake hcDrop hjun
+      have hh' : w'.head? = some s := by
+        rw [hw', head?_append, head?_take, if_neg (Nat.add_one_ne_zero a), hh]; simp
+      have hl' : w'.getLast? = some t := by
+        rw [hw', getLast?_append, getLast?_drop, hlastTake]
+        by_cases hcase : w.length ≤ b + 1
+        · rw [if_pos hcase, Option.none_or]
+          have hbeq : b = w.length - 1 := by omega
+          have hval : w[b] = t := by
+            have e1 : w[b]? = some t := by rw [hbeq, ← getLast?_eq_getElem?]; exact hl
+            rw [getElem?_eq_getElem hb] at e1; simpa using e1
+          rw [hwEq, hval]
+        · rw [if_neg hcase, hl]; simp
+      exact ih w' hlen' hc' hh' hl'
+
+/-- **M9 (Step 2, packaged).** Residual reachability `s ⇝ t` is witnessed by a `Nodup` `IsChain r` list
+from `s` to `t`. -/
+theorem exists_nodup_isChain_list {W : Type*} {r : W → W → Prop} {s t : W}
+    (h : Relation.ReflTransGen r s t) :
+    ∃ w : List W, w.IsChain r ∧ w.head? = some s ∧ w.getLast? = some t ∧ w.Nodup := by
+  obtain ⟨w, hc, hh, hl⟩ := exists_isChain_list h
+  exact dedup_aux w.length w le_rfl hc hh hl
+
+/-- **★★ M9 — the directed dedup capstone.** Forward residual reachability `s ⇝ t`
+(`Relation.ReflTransGen (ForwardResidualStep cap f) s t`) with `s ≠ t` yields a `SimpleForwardPath`: a
+`Nodup` forward-chain `List` witnessing reachability is converted to the injective `Fin (n+1)`-indexed
+vertex sequence (`w.get ∘ Fin.cast`; `Nodup ⟹ injective`, `IsChain ⟹ hstep`, endpoints ⟹ `hp0`/`hplast`;
+`s ≠ t` forces length `≥ 2`, hence `n ≥ 1`). This DISCHARGES M8's lone carried piece — the directed
+analogue of `SimpleGraph.Walk.bypass`, unavailable off the shelf. Composed with
+`augment_of_simpleForwardPath`, forward reachability alone augments the flow. -/
+theorem simpleForwardPath_of_reachable {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (hst : s ≠ t)
+    (hreach : Relation.ReflTransGen (ForwardResidualStep cap f) s t) :
+    Nonempty (SimpleForwardPath cap s t f) := by
+  obtain ⟨w, hc, hh, hl, hnd⟩ := exists_nodup_isChain_list hreach
+  have hwne : w ≠ [] := by rintro rfl; simp at hh
+  have hlen1 : 1 ≤ w.length := List.length_pos_iff_ne_nil.mpr hwne
+  have h0 : w[0]'(by omega) = s := by
+    have e : w[0]? = some s := by rw [← head?_eq_getElem?]; exact hh
+    rw [getElem?_eq_getElem (by omega)] at e; simpa using e
+  have hL : w[w.length - 1]'(by omega) = t := by
+    have e : w[w.length - 1]? = some t := by rw [← getLast?_eq_getElem?]; exact hl
+    rw [getElem?_eq_getElem (by omega)] at e; simpa using e
+  have hlen2 : 2 ≤ w.length := by
+    rcases Nat.lt_or_ge w.length 2 with h | h
+    · exfalso; apply hst
+      have hone : w.length = 1 := by omega
+      have e0 : w[0]? = some s := by rw [← head?_eq_getElem?]; exact hh
+      have eL : w[0]? = some t := by
+        have := hl; rw [getLast?_eq_getElem?, hone] at this; simpa using this
+      rw [e0] at eL; exact Option.some.injEq _ _ |>.mp eL
+    · exact h
+  have hN' : w.length - 1 + 1 = w.length := by omega
+  refine ⟨{
+    n := w.length - 1
+    hn := by omega
+    p := fun i => w.get (Fin.cast hN' i)
+    hp_inj := by
+      intro x y hxy
+      simp only [List.get_eq_getElem] at hxy
+      exact Fin.cast_injective hN'
+        ((List.nodup_iff_injective_get.mp hnd) (by simpa [List.get_eq_getElem] using hxy))
+    hp0 := by
+      simp only [List.get_eq_getElem, Fin.val_cast, Fin.val_zero]; exact h0
+    hplast := by
+      simp only [List.get_eq_getElem, Fin.val_cast, Fin.val_last]; exact hL
+    hstep := by
+      intro i
+      have hi1 : (i : ℕ) + 1 < w.length := by have := i.2; omega
+      have hstep := isChain_iff_getElem.mp hc i.val hi1
+      show ForwardResidualStep cap f (w.get (Fin.cast hN' i.castSucc)) (w.get (Fin.cast hN' i.succ))
+      simp only [List.get_eq_getElem, Fin.val_cast, Fin.val_castSucc, Fin.val_succ]
+      exact hstep
+  }⟩
+
+/-- **★ M9 CAPSTONE — the forward augmenting-path lemma, DERIVED.** Forward residual
+reachability from `s` to `t` (with `s ≠ t`) yields a strictly larger flow — the forward case
+of Ford–Fulkerson's `haug`, now fully machine-checked (no carried augmentation): the directed
+dedup (`simpleForwardPath_of_reachable`) produces a simple forward path, and its augmentation
+(`augment_of_simpleForwardPath`) strictly increases the flow value. Only mixed
+forward/backward residual paths and max-flow existence remain carried. -/
+theorem forwardReachable_augments {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (hst : s ≠ t)
+    (hreach : Relation.ReflTransGen (ForwardResidualStep cap f) s t) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  obtain ⟨SP⟩ := simpleForwardPath_of_reachable hf hst hreach
+  exact augment_of_simpleForwardPath hf SP
+
+end DirectedDedup
 
 end QIQTH.QG

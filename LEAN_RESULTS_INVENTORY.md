@@ -1648,9 +1648,12 @@ augmentation (M4-M7) + only the extraction (walk ⟹ path degree-structure), mix
 `SimpleForwardPath.toForwardAugPath` builds the degree-structured edge set from an injective simple path
 (injectivity ⟹ interior in-deg = out-deg = 1 via fibre counting), ε is derived internally, and a simple forward
 path ⟹ a bigger flow (`augment_of_simpleForwardPath`); only the DIRECTED DEDUP (ReflTransGen walk ⟹
-SimpleForwardPath) stays carried — Mathlib's `Walk.bypass`/`toPath` are undirected, so unusable here. Max-flow now:
-core + full forward augmentation + extraction degree-structure derived; carrying only the directed dedup +
-mixed-direction + existence.
+SimpleForwardPath) stays carried — Mathlib's `Walk.bypass`/`toPath` are undirected, so unusable here. **M9**: the directed dedup DERIVED — `simpleForwardPath_of_reachable` (a forward residual walk ⟹ a
+SimpleForwardPath, via the minimal-walk splice-shortens argument `dedup_aux` + nodup→injective conversion — the
+directed analogue of `Walk.bypass`, absent from Mathlib) and the capstone `forwardReachable_augments` (forward
+residual reachability ⟹ a strictly larger flow — the forward Ford–Fulkerson haug, FULLY DERIVED). **Max-flow's
+ENTIRE FORWARD side is now machine-checked** (combinatorial core + augmentation mechanism + directed dedup);
+only mixed forward/backward residual paths and max-flow existence remain carried.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks

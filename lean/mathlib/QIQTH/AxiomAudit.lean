@@ -9018,6 +9018,14 @@ namespace QIQTH.AxiomAudit
 -- -> SimpleForwardPath) stays carried -- Mathlib's Walk.bypass/toPath are UNDIRECTED. Std 3.
 #print axioms QIQTH.QG.SimpleForwardPath.toForwardAugPath
 #print axioms QIQTH.QG.augment_of_simpleForwardPath
+-- THE MAX-FLOW-MIN-CUT M9 (QG/MaxFlowMinCut.lean cont.): the DIRECTED DEDUP, DERIVED --
+-- simpleForwardPath_of_reachable (a forward residual walk yields a SimpleForwardPath, via
+-- exists_isChain_list + dedup_aux the minimal-walk splice-shortens argument + nodup->injective
+-- conversion -- the directed analogue of Walk.bypass, absent from Mathlib) and the capstone
+-- forwardReachable_augments (forward residual reachability => a strictly larger flow -- the
+-- forward Ford-Fulkerson haug FULLY DERIVED, no carried augmentation). Std 3.
+#print axioms QIQTH.QG.simpleForwardPath_of_reachable
+#print axioms QIQTH.QG.forwardReachable_augments
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form

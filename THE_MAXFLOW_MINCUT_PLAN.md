@@ -143,3 +143,16 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   of it is the DIRECTED DEDUP (ReflTransGen walk ⟹ SimpleForwardPath). Std-3, budget 0.
   Max-flow: core (M1-M3) + full forward augmentation mechanism (M4-M7) + the extraction
   degree-structure (M8), carrying only the directed dedup + mixed-direction + existence.
+
+- **2026-07-05** — **M9 LANDED (FULLY) — the directed dedup DERIVED; forward haug complete.**
+  exists_isChain_list (ReflTransGen ⟹ a chain List, via head_induction_on); dedup_aux (★ the
+  splice-shortens crux — a minimal-length chain list is Nodup: a repeat p a = p b lets you
+  splice out the middle for a strictly shorter chain, contradicting minimality; strong
+  induction on a length bound); exists_nodup_isChain_list; ★ simpleForwardPath_of_reachable
+  (a forward residual walk ⟹ a SimpleForwardPath, converting the nodup chain to an injective
+  Fin path) — the DIRECTED analogue of SimpleGraph.Walk.bypass, which is absent from Mathlib
+  (its bypass is undirected); ★ CAPSTONE forwardReachable_augments (forward residual
+  reachability + s≠t ⟹ a strictly larger flow — the forward Ford–Fulkerson haug, FULLY
+  DERIVED, no carried augmentation). Std-3, budget 0. **Max-flow: the ENTIRE FORWARD side is
+  now derived** (core M1-M3 + augmentation M4-M8 + directed dedup M9); only mixed
+  forward/backward residual paths and max-flow EXISTENCE remain carried.
