@@ -1605,6 +1605,18 @@ lattice area-law SCALING `S∝A`; the localization map `hTkk` smearing construct
 YM mass gap / SSB; the 4D background-independent manifold; λ's dynamical Lorentz-covariant law; the radiative
 Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
+**The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
+gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
+κ=1/6, hence numerical G) — NO formalization in any proof assistant, AND doubly-blocked: its prerequisite
+(geodesics / exponential map / Riemann curvature tensor) is an *acknowledged* "big gap remaining in mathlib4",
+an ACTIVELY-MAINTAINED area (maintainer Michael Rothgang). Realistic route: WATCH/contribute to Mathlib's
+diff-geo effort, then the RNC expansion + heat kernel become a normal (large) project on top — cheaper than
+self-building the whole stack. (2) **Max-flow–min-cut / Ford–Fulkerson / Menger** (blocks exact RT) — NOT in
+Mathlib, but PRIOR ART exists in Isabelle/HOL (Lochbihler countable-network; Lammich–Sefidgar refinement) +
+Mizar — portable but a substantial Lean port. (3) **Williamson symplectic normal form** (blocks the N-mode area
+law) — NOT in Mathlib4. Net: none reusable today; all three walls confirmed by the wider ecosystem, not just the
+local grep; the heat-kernel route is gated on Mathlib's own open diff-geo frontier.
+
 **Area-law `S ∝ A` frontier — CHARACTERIZED as a genuine wall (2026-07-05, consult-verified).** The entropy
 machinery is complete to its honest ceiling: `GaussianStateEntropy` (the per-mode Srednicki entropy
 `(ν+½)log(ν+½)−(ν−½)log(ν−½)` with full calculus, the total-as-sum, `gaussStateEntropy_eq_sum_active` = "entropy
