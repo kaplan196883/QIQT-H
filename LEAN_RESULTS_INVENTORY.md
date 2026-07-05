@@ -1387,10 +1387,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   calculus is covariant under unitary conjugation, `Φ_{UPU⁻¹}(φ) = U∘Φ_P(φ)∘U⁻¹`. Combined:
   `boundedFC_momentumPVM_eq_fourier_conj_mulOp : f(P) = ℱ∘M_f∘ℱ⁻¹` (since `momentumPVM = positionPVM.conj ℱ`).
   This NAMES the momentum generator spectrally, completing the canonical Weyl pair `X = ∫x dE`, `P = ∫k dÊ` at
-  the bounded-calculus level. ⚠ COSMETIC for QG (the GR-chain momentum datum is already wired via the
-  self-adjoint `momentumOp`, `MomentumGenerator.lean`); the final `τ_t = e^{itP}` identification (the
-  `ℱ M_{e^{itk}} ℱ⁻¹ = τ_t` Fourier transfer) is the CARRIED labor-only frontier — a Schwartz-density argument,
-  NOT a Mathlib gap (`MomentumPVM.lean` CHECKPOINT).
+  the bounded-calculus level. **CAPSTONE NOW COMPLETE:** `translationLp_eq_boundedFC_momentumPVM :
+  momentumPVM.boundedFC(e^{itk}) = τ_{−t/(2π)}`, i.e. `e^{itP} = τ_{−t/(2π)}` — the `ℱ M_{e^{itk}} ℱ⁻¹` Fourier
+  transfer is discharged. Built from `modSymbol_hasTemperateGrowth` (`e^{isx}` is an admissible Schwartz
+  multiplier — `dⁿ/dxⁿ e^{isx}=(is)ⁿe^{isx}` has constant norm `|s|ⁿ`), the function-level duality
+  `fourier_modSymbol_smul : 𝓕(e^{itv}f)(x)=𝓕f(x−t/2π)` (pointwise exp-kernel integrands), and the L² state
+  identity `fourier_modulationLp_apply : ℱ(e^{itX}g)=τ_{−t/2π}(ℱg)` by density off `SchwartzMap.toLp`
+  (`SchwartzMap.toLp_fourier_eq` + `DenseRange.induction_on`). The `2π` is the honest normalization of Mathlib's
+  Fourier kernel `e^{−2πi x·ξ}` — `e^{itP}` is translation by `−t/(2π)`, not `t`. ⚠ COSMETIC for QG (the GR-chain
+  momentum datum is already wired via the self-adjoint `momentumOp`, `MomentumGenerator.lean`); this only names
+  the generator spectrally.
 - **One-particle RvD Tomita–Takesaki [AF]** on a genuine `StandardSubspace` (IsCyclic+IsSeparating): `J²=1`,
   `JRJ=2−R` (the `JΔJ=Δ⁻¹` shadow), `modUnitary = Δ^{it}` with group law + strong continuity, `Δ^{it}𝒦=𝒦`,
   `JΔ^{it}=Δ^{it}J`; `modularGen_isSelfAdjoint` (self-adjoint modular Hamiltonian K) with `Δ^{it}=e^{−itK}`.

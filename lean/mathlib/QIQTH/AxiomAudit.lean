@@ -9494,11 +9494,25 @@ namespace QIQTH.AxiomAudit
 -- Fourier-conjugated multiplication, f(P)=ℱ∘M_f∘ℱ⁻¹ (momentumPVM=positionPVM.conj ℱ). Axiom-free (std 3). This
 -- NAMES the momentum generator spectrally, completing the Weyl pair X=∫x dE, P=∫k dÊ at the bounded-calculus
 -- level. COSMETIC for QG (the GR-chain momentum datum is already wired via the self-adjoint momentumOp); the final
--- τ_t=e^{itP} identification (the ℱ M_{e^{itk}} ℱ⁻¹=τ_t Fourier transfer) is the carried labor-only frontier
--- (Schwartz-density argument, no Mathlib gap — see MomentumPVM.lean CHECKPOINT).
+-- τ_t=e^{itP} identification (the ℱ M_{e^{itk}} ℱ⁻¹=τ_t Fourier transfer) is now DISCHARGED below.
 #print axioms QIQTH.Spectral.Multiplication.boundedFC_positionPVM_eq_mulOp
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_bilinDiag
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_boundedFC
 #print axioms QIQTH.Spectral.Multiplication.boundedFC_momentumPVM_eq_fourier_conj_mulOp
+-- ★ WEYL-PAIR CAPSTONE (τ_{-t/2π}=e^{itP}, the L²-Fourier modulation↔translation transfer, COMPLETE):
+-- modSymbol_hasDerivAt/modSymbol_iteratedDeriv (dⁿ/dxⁿ e^{isx}=(is)ⁿe^{isx}) ⟹ modSymbol_hasTemperateGrowth
+-- (e^{isx} is an admissible Schwartz multiplier: all iterated derivatives have constant norm |s|ⁿ).
+-- fourier_modSymbol_smul — the FUNCTION-level duality 𝓕(e^{itv}f)(x)=𝓕f(x−t/2π) (pointwise exp-kernel integrands).
+-- fourier_modulationLp_apply — the L² state identity ℱ(e^{itX}g)=τ_{−t/2π}(ℱg), by density off SchwartzMap.toLp
+-- (SchwartzMap.toLp_fourier_eq + DenseRange.induction_on). translationLp_eq_boundedFC_momentumPVM — the CAPSTONE
+-- momentumPVM.boundedFC(e^{itk})=τ_{−t/2π}, i.e. e^{itP}=τ_{−t/2π}. The 2π is the honest normalization of Mathlib's
+-- Fourier kernel e^{−2πi x·ξ}. Axiom-free (std 3). COMPLETES the canonical Weyl pair X=∫x dE, P=∫k dÊ at the
+-- spectral level. COSMETIC for QG (GR-chain momentum datum already wired via the self-adjoint momentumOp).
+#print axioms QIQTH.Spectral.Multiplication.modSymbol_hasDerivAt
+#print axioms QIQTH.Spectral.Multiplication.modSymbol_iteratedDeriv
+#print axioms QIQTH.Spectral.Multiplication.modSymbol_hasTemperateGrowth
+#print axioms QIQTH.Spectral.Multiplication.fourier_modSymbol_smul
+#print axioms QIQTH.Spectral.Multiplication.fourier_modulationLp_apply
+#print axioms QIQTH.Spectral.Multiplication.translationLp_eq_boundedFC_momentumPVM
 
 end QIQTH.AxiomAudit
