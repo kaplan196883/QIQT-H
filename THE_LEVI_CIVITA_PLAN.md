@@ -30,17 +30,41 @@ kernel, spherical harmonics/eigenvalues. Repo ALREADY has (axiom-free): `QIQTH/M
 `QIQTH/PseudoRiemannian.lean` (`PseudoRiemannianMetric` symmetric nondegenerate + musical `lower/raise/lowerEquiv`).
 
 ## Increments
-- [ ] **LC1 — the Koszul map (algebraic solve).** From a `PseudoRiemannianMetric gm`, define `covLC` by
+> **2026-07-06 status.** Discovery: the *existence* half of BOTH routes was already committed —
+> component (`Curvature.lean`: `christoffel`, `christoffel_symm`, `metric_compat`, `riemann`/`ricci`) and
+> abstract (`LeviCivita.lean`: `koszul`, `koszul_torsion_free`, `koszul_metric_compat`, `leviCivita`,
+> `leviCivita_koszul`). The genuinely-missing, load-bearing content was the **UNIQUENESS** half (the Koszul
+> *solve* = the fundamental theorem). This increment adds it: `koszul_lowered` + `christoffel_unique`
+> (component) and `leviCivita_unique` (abstract). All axiom-free std-3, pure algebra (no metric smoothness).
+> LC1/LC2 stand CLOSED (existence + the new uniqueness); LC3 (Leibniz packaging of `leviCivita` as a global
+> `IsCovariantDerivativeOn`) stays the honest gate; LC4 is realised at the COMPONENT level (uniqueness makes
+> `ricci g gi` canonically the metric Ricci).
+
+- [x] **LC1 — the Koszul map (algebraic solve).** From a `PseudoRiemannianMetric gm`, define `covLC` by
   `2·gm(∇_X Y, Z) = X·gm(Y,Z) + Y·gm(Z,X) − Z·gm(X,Y) + gm([X,Y],Z) − gm([Y,Z],X) + gm([Z,X],Y)`, solving for
   `∇_X Y` via `gm.raise` / `lowerEquiv` injectivity. If metric-field smoothness (the derivative terms `X·gm(Y,Z)`)
   is NOT yet available (`PseudoRiemannian.lean` flags this as a later increment), land the ALGEBRAIC/pointwise
   Koszul solve FIRST — the expression as the unique solution — deferring the differential Leibniz to LC3.
-- [ ] **LC2 — torsion-freeness.** `torsion covLC = 0` (repo's `torsion` def): `∇_X Y − ∇_Y X = [X,Y]` from Koszul
-  antisymmetry. Pure algebra.
-- [ ] **LC3 — (GATED on metric smoothness) Leibniz + metric-compatibility.** `IsCovariantDerivativeOn F covLC univ`
-  + `X·gm(Y,Z) = gm(∇_XY,Z)+gm(Y,∇_XZ)`. std-4/5; land ONLY if the smoothness API cooperates, else honest checkpoint.
-- [ ] **LC4 — wire to curvature.** Feed `covLC` into `ManifoldCurvature.curvature`/`ricci` → the METRIC Ricci
-  `ricci_g` — the first curved geometric object built from a metric. Still NOT the R-coefficient.
+- [x] **LC2 — torsion-freeness.** Encoded: `koszul_torsion_free` (`koszul X Y Z − koszul Y X Z = 2g([X,Y],Z)`)
+  and the component `christoffel_symm` (`Γ^i_{jk}=Γ^i_{kj}`) — both pre-existing; and torsion-freeness is now a
+  HYPOTHESIS the uniqueness theorem consumes to pin the connection.
+- [~] **LC3 — (GATED on metric smoothness) Leibniz + metric-compatibility.** Component `metric_compat` (`∇g=0`)
+  is DONE (algebraic, no smoothness). The abstract-manifold `IsCovariantDerivativeOn` packaging of `leviCivita`
+  (which needs the differential Leibniz `X·gm(Y,Z)=gm(∇_XY,Z)+gm(Y,∇_XZ)` from a smooth metric field) STAYS the
+  honest gate: `PseudoRiemannianMetric` still flags metric-field smoothness as a later increment, and Mathlib's
+  `IsCovariantDerivativeOn.leibniz` requires it. Not forced.
+- [x] **LC4 — wire to curvature (COMPONENT level).** `christoffel_unique` makes `christoffel`/`riemann`/`ricci`
+  (already built, feeding on `christoffel`) canonically the curvature of THE unique metric connection ⟹ a genuine
+  **metric Ricci** `QIQTH.Curvature.ricci g gi`. The ABSTRACT `ManifoldCurvature.ricci ∘ leviCivita` wiring
+  remains gated on LC3 (leviCivita as a global connection). Still NOT the R-coefficient.
+
+## New results (2026-07-06)
+- `QIQTH.Curvature.koszul_lowered` **[AF std-3]** — the lowered Koszul solve `∑σ g_{σa}Γ^σ_{bc} =
+  ½(∂_b g_{ac}+∂_c g_{ab}−∂_a g_{bc})` forced for any torsion-free metric-compatible `Γ` (pure algebra).
+- `QIQTH.Curvature.christoffel_unique` **[AF std-3]** — the fundamental theorem: any torsion-free,
+  metric-compatible connection `= christoffel g gi`. Uniqueness of the Levi-Civita connection.
+- `QIQTH.ManifoldGR.leviCivita_unique` **[AF std-3]** — abstract counterpart: a vector whose lowered covector is
+  `½·koszulForm` IS `leviCivita` (musical `♯` single-valued by nondegeneracy).
 
 ## Verbatim HAVE / HAVE-NOT checkpoint sentences
 - **HAVE:** "The Levi-Civita connection of a (pseudo-)Riemannian metric is constructed from the Koszul formula
@@ -69,3 +93,8 @@ numerical-G moved, the R-coefficient derived, κ=1/6, or a curved heat kernel.
 - **2026-07 (scoped):** consult (fable, high) verified the gated chain + Mathlib absence + the repo's existing
   abstract-curvature/musical-iso towers; LC1 (Koszul) identified as the smallest load-bearing buildable brick,
   honestly a foundation stone (does NOT move G).
+- **2026-07-06 (built):** found the *existence* half of both routes already committed; built the missing
+  **UNIQUENESS** half — `koszul_lowered` + `christoffel_unique` (component fundamental theorem, pure algebra) and
+  `leviCivita_unique` (abstract musical solve). All axiom-free std-3; `lake build QIQTH.Curvature
+  QIQTH.LeviCivita` green; budget check clean. LC1/LC2/LC4(component) closed; LC3 (abstract Leibniz packaging)
+  stays the honest smoothness gate. FOUNDATION brick — NOT the `(1/6−ξ)R` coefficient, does NOT move numerical G.

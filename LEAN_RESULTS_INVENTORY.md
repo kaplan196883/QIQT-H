@@ -310,6 +310,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Raychaudhuri) is **[AF]**; the BW/modular flux is **[AF] for the free field**; the **area law and the
   localization map are cited inputs [frontier]**. `GRFromMicro` header: "P4-MICRO ⟹ GR is FALSE as a standalone
   implication" — the thermal (Unruh/BW) input "a microstate count can never supply."
+- **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
+  `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
+  The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +
+  `metric_compat` (`∇g=0`) feeding `riemann`/`ricci`, and the abstract-manifold `koszul`/`leviCivita`/
+  `leviCivita_koszul`. This adds the missing *uniqueness*: **`christoffel_unique`** proves ANY torsion-free,
+  metric-compatible connection **equals** the Christoffel symbols — the **fundamental theorem of
+  (pseudo-)Riemannian geometry**, pure algebra (three cyclic `∇g=0` permutations + lower-index symmetry solve
+  the lowered `koszul_lowered` half-sum `½(∂g+∂g−∂g)`, then the musical raise through `gi`); **`leviCivita_unique`**
+  is the abstract counterpart (the metric-dual `♯` is single-valued by nondegeneracy). Uniqueness makes the metric
+  `riemann`/`ricci` canonically **the** curvature/Ricci *of the metric*, closing the "arbitrary connection → THE
+  metric connection" gap. **FOUNDATION brick: NOT the Seeley–DeWitt `(1/6−ξ)R` coefficient, and it does NOT move
+  the numerical value of `G`** — the numerical-`G` gate is still the Riemannian heat kernel (§8, unchanged).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

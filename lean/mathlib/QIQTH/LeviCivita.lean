@@ -256,6 +256,23 @@ theorem leviCivita_koszul
   rw [leviCivita, ← PseudoRiemannianMetric.lower_apply, gm.lower_raise]
   rw [ContinuousLinearMap.smul_apply, koszulForm_apply gm X Y x hX hY hsmooth Z hZ, smul_eq_mul]
 
+/-- **Uniqueness of the Levi-Civita vector (the musical solve).** Any tangent vector `V` whose lowered
+covector is half the Koszul 1-form *is* `leviCivita` — the metric-dual `♯` is single-valued by
+nondegeneracy (`lower_injective`). This realises "solve `g(∇_X Y, ·) = ½·koszul` for `∇_X Y`": the
+Koszul 1-form determines `∇_X Y` uniquely, the abstract counterpart of the component fundamental
+theorem `QIQTH.Curvature.christoffel_unique`. -/
+theorem leviCivita_unique
+    (gm : PseudoRiemannianMetric I M) (X Y : Π x : M, TangentSpace I x) (x : M)
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x)
+    (hsmooth : ∀ A B : Π z : M, TangentSpace I z, MDiffAt (T% A) x → MDiffAt (T% B) x →
+      MDifferentiableAt I 𝓘(𝕜) (fun x' => gm.g x' (A x') (B x')) x)
+    (V : TangentSpace I x)
+    (hV : gm.lower x V = (1 / 2 : 𝕜) • koszulForm gm X Y x hX hY hsmooth) :
+    V = leviCivita gm X Y x hX hY hsmooth := by
+  apply gm.lower_injective x
+  rw [hV]
+  simp only [leviCivita, PseudoRiemannianMetric.lower_raise]
+
 end LeviCivitaConnection
 
 section Einstein

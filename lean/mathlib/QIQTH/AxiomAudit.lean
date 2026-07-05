@@ -3503,6 +3503,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Curvature.metric_compat
 -- expected: standard only — ∇_λ g_{μν}=0: the Levi-Civita defining property, a THEOREM from the
 -- Christoffel definition + metric symmetry. (Closes a Layer-1 target feeding Jacobson's Bianchi step.)
+#print axioms QIQTH.Curvature.koszul_lowered
+#print axioms QIQTH.Curvature.christoffel_unique
+-- expected: standard only — THE KOSZUL SOLVE / FUNDAMENTAL THEOREM (uniqueness of Levi-Civita).
+-- koszul_lowered: ∑σ g_{σa}Γ^σ_{bc}=½(∂_b g_{ac}+∂_c g_{ab}−∂_a g_{bc}) forced for ANY torsion-free +
+-- metric-compatible connection (three cyclic ∇g=0 permutations + lower-symmetry solve it; pure algebra).
+-- christoffel_unique: Γ^μ_{νρ}=christoffel g gi μ ν ρ — the connection is UNIQUE (raise the lowered
+-- solve through gi). Makes `christoffel`/`riemann`/`ricci` THE metric connection's curvature. FOUNDATION
+-- brick: NOT the Seeley–DeWitt (1/6−ξ)R coefficient, does NOT move numerical G. Axiom-free.
 #print axioms QIQTH.Curvature.riemann_first_bianchi
 -- expected: standard only — first Bianchi R^ρ_{σμν}+R^ρ_{μνσ}+R^ρ_{νσμ}=0 (algebraic, christoffel_symm only).
 -- The Schwarz keystone for the second Bianchi (mixed partials commute), via the pd↔fderiv bridge.
@@ -3750,6 +3758,10 @@ namespace QIQTH.AxiomAudit
 -- g(∇_X Y, Z) = ½·koszul X Y Z (the DEFINING equation realized) — via lower_raise (♭♯=id) + koszulForm_apply
 -- (mkHom_apply). With koszul_metric_compat/koszul_torsion_free this certifies ∇ metric-compatible +
 -- torsion-free. Needs [FiniteDimensional 𝕜 E][CompleteSpace 𝕜/E][IsManifold I 2 M]; hsmooth labeled. Axiom-free.
+#print axioms QIQTH.ManifoldGR.leviCivita_unique
+-- expected: standard only — UNIQUENESS of the Levi-Civita vector (the musical solve): a vector whose
+-- lowered covector is ½·koszulForm IS leviCivita (♯ single-valued by nondegeneracy, lower_injective).
+-- Abstract counterpart of the component christoffel_unique. Axiom-free.
 #print axioms QIQTH.ManifoldGR.scalarCurvature
 #print axioms QIQTH.ManifoldGR.einsteinForm
 -- expected: standard only — SCALAR CURVATURE + EINSTEIN TENSOR (bilinear-form level). scalarCurvature

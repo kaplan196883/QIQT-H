@@ -349,6 +349,105 @@ theorem metric_compat (g gi : Point n → Fin n → Fin n → ℝ)
       show (fun y => g y lam mu) = (fun y => g y mu lam) from funext (fun y => hsymm y lam mu)]
   ring
 
+/-! ### The Koszul solve — uniqueness of the Levi-Civita connection (fundamental theorem) -/
+
+/-- **The Koszul solve (lowered form).** Any connection symbols `Gam` that are torsion-free
+    (`Gam μ ν ρ = Gam μ ρ ν`) and metric-compatible (`∇g = 0`, written out as the `∂g` identity `hmc`)
+    have their **lowered** symbols `∑σ g_{σa} Γ^σ_{bc}` forced to the Koszul half-sum
+    `½(∂_b g_{ac} + ∂_c g_{ab} − ∂_a g_{bc})`. This is the algebra behind uniqueness: the three cyclic
+    permutations of metric compatibility, combined with lower-index symmetry, solve for the connection.
+    Pure algebra on the `∂g` already present — no metric smoothness, no inverse metric. -/
+theorem koszul_lowered (g : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (x : Point n)
+    (Gam : Fin n → Fin n → Fin n → ℝ)
+    (htf : ∀ μ ν ρ, Gam μ ν ρ = Gam μ ρ ν)
+    (hmc : ∀ lam μ ν, pd (fun y => g y μ ν) lam x
+        = (∑ σ, Gam σ lam μ * g x σ ν) + (∑ σ, Gam σ lam ν * g x μ σ))
+    (a b c : Fin n) :
+    (∑ σ, g x σ a * Gam σ b c)
+      = (1 / 2) * (pd (fun y => g y a c) b x + pd (fun y => g y a b) c x
+                   - pd (fun y => g y b c) a x) := by
+  -- lowered metric compatibility: ∂_p g_{qr} = ⟨r;p,q⟩ + ⟨q;p,r⟩ with ⟨s;p,q⟩ := ∑σ g_{σs} Γ^σ_{pq}.
+  have lc : ∀ p q r, pd (fun y => g y q r) p x
+      = (∑ σ, g x σ r * Gam σ p q) + (∑ σ, g x σ q * Gam σ p r) := by
+    intro p q r
+    rw [hmc p q r]
+    congr 1
+    · exact Finset.sum_congr rfl (fun σ _ => mul_comm _ _)
+    · exact Finset.sum_congr rfl (fun σ _ => by rw [hsymm x q σ]; exact mul_comm _ _)
+  -- lower-index symmetry of the lowered symbols (from torsion-freeness).
+  have Ls : ∀ p q r, (∑ σ, g x σ p * Gam σ q r) = (∑ σ, g x σ p * Gam σ r q) :=
+    fun p q r => Finset.sum_congr rfl (fun σ _ => by rw [htf σ q r])
+  have hA := lc b a c
+  have hB := lc c a b
+  have hC := lc a b c
+  have s1 := Ls c b a
+  have s2 := Ls b c a
+  have s3 := Ls a c b
+  linarith [hA, hB, hC, s1, s2, s3]
+
+/-- **Uniqueness of the Levi-Civita connection (the fundamental theorem of (pseudo-)Riemannian
+    geometry).** With `gi` the (symmetric) inverse of the symmetric metric `g` at `x`, ANY connection
+    `Gam` that is torsion-free and metric-compatible equals the Christoffel symbols,
+    `Γ^μ_{νρ} = christoffel g gi μ ν ρ`. This is the **Koszul solve**: it makes `christoffel` *the*
+    Levi-Civita connection (existence = `christoffel_symm` + `metric_compat`; this is uniqueness), so
+    the metric Riemann/`ricci` built from `christoffel` are canonically the curvature/Ricci of the
+    metric. Pure algebra (`koszul_lowered` + `christoffel_lower`, then the musical raise via the inverse
+    metric); no metric smoothness beyond the `∂g`. -/
+theorem christoffel_unique (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (hsymm_gi : ∀ y a b, gi y a b = gi y b a)
+    (x : Point n)
+    (hinv : ∀ a b, (∑ σ, g x a σ * gi x σ b) = if a = b then 1 else 0)
+    (Gam : Fin n → Fin n → Fin n → ℝ)
+    (htf : ∀ μ ν ρ, Gam μ ν ρ = Gam μ ρ ν)
+    (hmc : ∀ lam μ ν, pd (fun y => g y μ ν) lam x
+        = (∑ σ, Gam σ lam μ * g x σ ν) + (∑ σ, Gam σ lam ν * g x μ σ))
+    (μ ν ρ : Fin n) :
+    Gam μ ν ρ = christoffel g gi μ ν ρ x := by
+  -- lowered symbols agree with christoffel's (both = the Koszul half-sum).
+  have hlow : ∀ a, (∑ σ, g x σ a * Gam σ ν ρ) = (∑ σ, g x σ a * christoffel g gi σ ν ρ x) := by
+    intro a
+    rw [koszul_lowered g hsymm x Gam htf hmc a ν ρ, christoffel_lower g gi hsymm x hinv a ν ρ]
+  -- g has a left inverse (from the right inverse + symmetry of g and gi).
+  have hleft : ∀ b m : Fin n, (∑ σ, gi x b σ * g x σ m) = if b = m then (1:ℝ) else 0 := by
+    intro b m
+    rw [show (∑ σ, gi x b σ * g x σ m) = ∑ σ, g x m σ * gi x σ b from
+          Finset.sum_congr rfl (fun σ _ => by rw [hsymm_gi x b σ, hsymm x σ m]; ring),
+        hinv m b]
+    by_cases h : b = m
+    · rw [if_pos h, if_pos h.symm]
+    · rw [if_neg h, if_neg (fun he => h he.symm)]
+  -- raise: a vector killed by every lowering (∑σ g_{σa} w σ = 0 ∀a) is zero at index μ.
+  have raise : ∀ (w : Fin n → ℝ), (∀ a, (∑ σ, g x σ a * w σ) = 0) → w μ = 0 := by
+    intro w hw0
+    have hswap : (∑ a, gi x μ a * (∑ σ, g x σ a * w σ))
+        = ∑ σ, (∑ a, gi x μ a * g x σ a) * w σ := by
+      calc (∑ a, gi x μ a * (∑ σ, g x σ a * w σ))
+          = ∑ a, ∑ σ, gi x μ a * (g x σ a * w σ) :=
+            Finset.sum_congr rfl (fun a _ => by rw [Finset.mul_sum])
+        _ = ∑ σ, ∑ a, gi x μ a * (g x σ a * w σ) := Finset.sum_comm
+        _ = ∑ σ, (∑ a, gi x μ a * g x σ a) * w σ :=
+            Finset.sum_congr rfl (fun σ _ => by
+              rw [Finset.sum_mul]; exact Finset.sum_congr rfl (fun a _ => by ring))
+    have hδ : ∀ σ, (∑ a, gi x μ a * g x σ a) = if μ = σ then (1:ℝ) else 0 := by
+      intro σ
+      rw [show (∑ a, gi x μ a * g x σ a) = ∑ a, gi x μ a * g x a σ from
+            Finset.sum_congr rfl (fun a _ => by rw [hsymm x σ a])]
+      exact hleft μ σ
+    have hwμ : w μ = ∑ a, gi x μ a * (∑ σ, g x σ a * w σ) := by
+      rw [hswap, Finset.sum_congr rfl (fun σ _ => by rw [hδ σ])]
+      simp [ite_mul, Finset.sum_ite_eq]
+    rw [hwμ, Finset.sum_congr rfl (fun a _ => by rw [hw0 a, mul_zero])]
+    simp
+  have hzero : Gam μ ν ρ - christoffel g gi μ ν ρ x = 0 :=
+    raise (fun σ => Gam σ ν ρ - christoffel g gi σ ν ρ x) (fun a => by
+      show (∑ σ, g x σ a * (Gam σ ν ρ - christoffel g gi σ ν ρ x)) = 0
+      have hsplit : (∑ σ, g x σ a * (Gam σ ν ρ - christoffel g gi σ ν ρ x))
+          = (∑ σ, g x σ a * Gam σ ν ρ) - (∑ σ, g x σ a * christoffel g gi σ ν ρ x) := by
+        rw [← Finset.sum_sub_distrib]; exact Finset.sum_congr rfl (fun σ _ => by ring)
+      rw [hsplit, hlow a, sub_self])
+  linarith [hzero]
+
 /-! ### Layer 2 — the Bianchi identities -/
 
 /-- **First Bianchi identity** (the algebraic/cyclic one): `R^ρ_{σμν} + R^ρ_{μνσ} + R^ρ_{νσμ} = 0`,
