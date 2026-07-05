@@ -128,6 +128,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.18;letter-spa
 .tag.ok{background:rgba(47,122,79,.12);color:var(--st-verified)}
 .tag.open{background:rgba(194,65,12,.12);color:var(--st-open)}
 .tag.post{background:rgba(183,121,31,.14);color:var(--st-postulate)}
+.tag.cond{background:rgba(37,99,150,.12);color:var(--st-conditional)}
 
 /* ---- entry cards ---- */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
