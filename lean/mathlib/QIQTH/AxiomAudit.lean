@@ -8996,6 +8996,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QG.exact_rt_of_maxFlow
 #print axioms QIQTH.QG.exact_rt_maxFlow_mincut
 #print axioms QIQTH.QG.singleEdge_augment_forward
+-- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
+-- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
+-- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form
+-- (the analytic frontier, the haug analogue -- a structure, never an axiom). Std 3.
+#print axioms QIQTH.Williamson.symplectic_det_sq
+#print axioms QIQTH.Williamson.det_williamson_block
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

@@ -1605,6 +1605,17 @@ lattice area-law SCALING `S∝A`; the localization map `hTkk` smearing construct
 YM mass gap / SSB; the 4D background-independent manifold; λ's dynamical Lorentz-covariant law; the radiative
 Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
+**WILLIAMSON N-mode symplectic diagonalization — IN PROGRESS (2026-07-05).** `QIQTH.Williamson`
+(`WilliamsonNormalForm.lean`, axiom-free std-3): the max-flow lesson (attempt the core, carry the analytic
+frontier) applied to the next attemptable wall. W1: the `WilliamsonDecomp` structure (symplectic S with
+Sᵀ M S = D⊕D, symplectic eigenvalues ν), symplectic-form algebra ((det S)² = 1 from Sᵀ J S = J; block-diagonal
+det = (∏ν)²), reusing Mathlib's `symplecticGroup`/`orthogonalGroup`. W2: the CARRIED `YoulaDecomp` (the real
+antisymmetric skew normal form Oᵀ A O = [[0,D],[−D,0]] — absent from Mathlib, the analytic frontier / `haug`
+analogue, a structure never an axiom). Next: W3 `williamson_of_youla` (given Youla of M^{1/2} J M^{1/2}, construct
+S via matrix sqrt, proven-working in ArakiEntropy) → W4/W5 (oneModeSympEig consistency, the `gaussStateEntropy`
+connection). HONEST: conditional on carried Youla, not unconditional; does NOT unlock the area-law S∝A scaling
+(area/volume-blind, a separate wall).
+
 **MAX-FLOW=MIN-CUT combinatorial core — LANDED, ExactRT gap SHARPENED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`
 (axiom-free std-3): a genuine ATTEMPT at the Ford–Fulkerson wall on the repo's own flow/cut framework
 (EmergentSpacetime `IsSTFlow`/`flowValue`/`cutCapacity`, weak duality already done). M1 the algebraic saturation

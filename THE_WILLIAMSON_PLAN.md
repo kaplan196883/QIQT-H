@@ -24,13 +24,13 @@ type is `l ⊕ l` (NOT Fin 2n) — reuse Mathlib's, do NOT shadow. Repo: `oneMod
 
 ## The increments (new file `QIQTH/WilliamsonNormalForm.lean`)
 
-- [ ] **W1 — the WilliamsonDecomp structure + symplectic algebra (guaranteed green).**
+- [x] **W1 — the WilliamsonDecomp structure + symplectic algebra (guaranteed green).**
   `structure WilliamsonDecomp (M : Matrix (l⊕l) (l⊕l) ℝ)` with fields S (∈ symplecticGroup),
   ν (l→ℝ, nonneg), hDiag : Sᵀ * M * S = fromBlocks (diagonal ν) 0 0 (diagonal ν). Plus
   `sympSpec := ν`; symplectic closure lemmas (one_mem/mul_mem/J_mem, cite Mathlib); det
   lemmas ((det S)²=1 from Sᵀ J S = J ⟹ (det S)²·det J = det J; product_of_diag via
   det_fromBlocks_zero₁₂ + det_diagonal). Risk VERY LOW.
-- [ ] **W2 — the carried Youla hypothesis.** `structure YoulaDecomp (A) (hA : Aᵀ = -A)`:
+- [x] **W2 — the carried Youla hypothesis.** `structure YoulaDecomp (A) (hA : Aᵀ = -A)`:
   O ∈ orthogonalGroup, ν : l→ℝ, Oᵀ A O = ⊕ₖ νₖ·(J₂ block) — CARRIED (the analytic frontier);
   prove trivial consequences (νₖ nonneg). Risk LOW (it's a def + trivialities).
 - [ ] **W3 — ★ williamson_of_youla (the honest reduction, the payoff).** GIVEN M.PosDef + a
@@ -86,3 +86,13 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   sqrt all in Mathlib/repo; single carry = Youla; W1 guaranteed green, W3 the effort). Applies
   the max-flow lesson (attempt the core, carry the analytic frontier) to the next attemptable
   wall. THE MAX-FLOW-MIN-CUT campaign closed immediately prior.
+
+- **2026-07-05** — **W1+W2 LANDED (green first attempt).** WilliamsonNormalForm.lean:
+  WilliamsonDecomp structure (S∈symplecticGroup, ν nonneg, Sᵀ M S = diag ν ⊕ diag ν) +
+  sympSpec; symplectic algebra (one/mul/J_mem; ★ symplectic_det_sq (det S)²=1 via mem_iff'
+  Sᵀ J S = J + J_det_mul_J_det; det_williamson_block = (∏ν)² via det_fromBlocks_zero₁₂);
+  ★ the CARRIED YoulaDecomp (O∈orthogonalGroup, Oᵀ A O = fromBlocks 0 (diag ν) (−diag ν) 0
+  — the real-skew normal form, the analytic frontier / haug analogue, a structure never an
+  axiom). Mathlib confirmed: symplecticGroup, orthogonalGroup, J_det_mul_J_det,
+  det_fromBlocks_zero₁₂ all present. Std-3, budget 0. Next: W3 (williamson_of_youla — the
+  construction of S from Youla via matrix sqrt, the effort).
