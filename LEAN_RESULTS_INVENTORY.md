@@ -1605,6 +1605,18 @@ lattice area-law SCALING `S∝A`; the localization map `hTkk` smearing construct
 YM mass gap / SSB; the 4D background-independent manifold; λ's dynamical Lorentz-covariant law; the radiative
 Lorentz-naturalness of interacting matter (CPSUV escape — open, ~10–20%).
 
+**MAX-FLOW=MIN-CUT combinatorial core — LANDED, ExactRT gap SHARPENED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`
+(axiom-free std-3): a genuine ATTEMPT at the Ford–Fulkerson wall on the repo's own flow/cut framework
+(EmergentSpacetime `IsSTFlow`/`flowValue`/`cutCapacity`, weak duality already done). M1 the algebraic saturation
+lemma (a flow saturating a cut's forward boundary with zero backflow has flowValue = cutCapacity); M2 the residual
+graph `ResidualStep` + reachable set `residualCut` (ReflTransGen) + closure; ★ M3 `residualCut_saturates` — if the
+sink t is NOT residual-reachable from s, the residual-reachable set IS a saturating cut. With
+`ExactRT.exact_rt_of_saturating`, exact RT (max-flow = min-cut) now holds CONDITIONAL ONLY on `t ∉ residualCut`
+(the no-augmenting-path condition, M4) + the CARRIED existence of a maximum flow (M5). This SHARPENS the cited
+Ford–Fulkerson gap from "a witness exists" to one sharp combinatorial condition + one carried existence input.
+HONEST: not an unconditional max-flow theorem; finite (V→V→ℝ) network model, not continuum RT. First green attempt
+at a wall confirmed unbuilt in Lean (Isabelle prior art only).
+
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
 κ=1/6, hence numerical G) — NO formalization in any proof assistant, AND doubly-blocked: its prerequisite

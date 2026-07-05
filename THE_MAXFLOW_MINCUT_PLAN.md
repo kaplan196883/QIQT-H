@@ -21,18 +21,18 @@ max-flow=min-cut via `exact_rt_of_saturating`. Mathlib reachability: `Relation.R
 
 ## The increments (new file `QIQTH/QG/MaxFlowMinCut.lean`)
 
-- [ ] **M1 — the algebraic saturation lemma (guaranteed-green, locks the API).**
+- [x] **M1 — the algebraic saturation lemma (guaranteed-green, locks the API).**
   `flowValue_eq_cutCapacity_of_saturated (hf : IsSTFlow cap s t f) (hs : s∈C) (ht : t∉C)
   (hsat : ∀ u∈C, ∀ v∈Cᶜ, f u v = cap u v) (hzero : ∀ u∈Cᶜ, ∀ v∈C, f u v = 0) :
   flowValue f s = cutCapacity cap C`. Route: flowValue_eq_netAcross_of_isSTFlow; unfold
   netAcross/outAcross/inAcross/cutCapacity/cut; outAcross = cutCapacity via Finset.sum_congr
   ×2 with hsat; inAcross = 0 via Finset.sum_eq_zero with hzero; ring. Risk VERY LOW (finite-sum).
-- [ ] **M2 — residual definitions + closure.** `ResidualStep cap f u v := 0 < cap u v − f u v ∨
+- [x] **M2 — residual definitions + closure.** `ResidualStep cap f u v := 0 < cap u v − f u v ∨
   0 < f v u`; `residualCut cap f s := univ.filter (ReflTransGen (ResidualStep cap f) s ·)`
   (classical); `mem_residualCut`, `s ∈ residualCut` (.refl), `residualCut_closed`
   (u∈residualCut → ResidualStep u v → v∈residualCut, via ReflTransGen.tail). Risk LOW
   (Finset.filter decidability → classical).
-- [ ] **M3 — the load-bearing lemma "no augmenting path ⟹ saturating cut".**
+- [x] **M3 — the load-bearing lemma "no augmenting path ⟹ saturating cut".**
   `residualCut_saturates (hf : IsSTFlow cap s t f) (ht : t ∉ residualCut cap f s) :
   flowValue f s = cutCapacity cap (residualCut cap f s)`. Prove hsat + hzero for
   C = residualCut from residualCut_closed + hf.capacity/nonneg (contrapositive: nonzero
@@ -84,3 +84,12 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   residual-reachable-set proof fits; M1 guaranteed-green, M1–M3 reduce the gap to t∉residualCut,
   M4 moderate-high attempt, M5 carried existence). A genuine "try again" ATTEMPT to cross the
   Ford–Fulkerson wall after it was confirmed unbuilt in Lean (Isabelle prior art only).
+
+- **2026-07-05** — **M1–M3 LANDED (green first real attempt) — the combinatorial core.**
+  MaxFlowMinCut.lean: M1 flowValue_eq_cutCapacity_of_saturated (algebraic saturation, finite
+  sums); M2 ResidualStep + residualCut (univ.filter of ReflTransGen) + mem/source/closed;
+  ★ M3 residualCut_saturates — t ∉ residualCut ⟹ the residual-reachable set IS a saturating
+  cut (flowValue = cutCapacity), via two by_contra boundary arguments (forward slack ⟹
+  Or.inl step; backflow ⟹ Or.inr v→u step) + M1. **ExactRT's Ford–Fulkerson gap is now
+  reduced to the single sharp condition t ∉ residualCut + carried max-flow existence.**
+  Std-3, budget 0. Next: M4 (t∉residualCut from maximality — attempt), M5 (carried capstone).

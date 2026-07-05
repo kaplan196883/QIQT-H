@@ -8979,6 +8979,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatKernelDDim.heat_prefactor_fourD
 #print axioms QIQTH.HeatKernelDDim.inducedInvG_normalization_assembly
 #print axioms QIQTH.HeatKernelDDim.inducedInvG_normalization_assembly_zero
+-- THE MAX-FLOW-MIN-CUT M1-M3 (QG/MaxFlowMinCut.lean): the combinatorial core of
+-- max-flow = min-cut on the tower's flow/cut framework -- the algebraic saturation lemma,
+-- the residual reachable set (residualCut) + its closure, and the LOAD-BEARING
+-- residualCut_saturates (t not residual-reachable => the reachable set IS a saturating cut,
+-- flowValue = cutCapacity). Reduces ExactRT's Ford-Fulkerson gap to t not in residualCut +
+-- carried max-flow existence. Std 3.
+#print axioms QIQTH.QG.flowValue_eq_cutCapacity_of_saturated
+#print axioms QIQTH.QG.residualCut_closed
+#print axioms QIQTH.QG.residualCut_saturates
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
