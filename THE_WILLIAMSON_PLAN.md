@@ -33,7 +33,7 @@ type is `l ⊕ l` (NOT Fin 2n) — reuse Mathlib's, do NOT shadow. Repo: `oneMod
 - [x] **W2 — the carried Youla hypothesis.** `structure YoulaDecomp (A) (hA : Aᵀ = -A)`:
   O ∈ orthogonalGroup, ν : l→ℝ, Oᵀ A O = ⊕ₖ νₖ·(J₂ block) — CARRIED (the analytic frontier);
   prove trivial consequences (νₖ nonneg). Risk LOW (it's a def + trivialities).
-- [ ] **W3 — ★ williamson_of_youla (the honest reduction, the payoff).** GIVEN M.PosDef + a
+- [~] **W3 (CHECKPOINTED — antisymm derived, S-construction carried) — ★ williamson_of_youla (the honest reduction, the payoff).** GIVEN M.PosDef + a
   YoulaDecomp of A := M^{1/2} J M^{1/2} (CFC.sqrt, the ArakiEntropy precedent; A antisymmetric
   via Jᵀ=−J + sqrt self-adjoint), CONSTRUCT S := M^{-1/2}·O·(block √ν scaling) and prove
   S ∈ symplecticGroup + Sᵀ M S = D⊕D. May split W3a (S symplectic) / W3b (S diagonalizes).
@@ -96,3 +96,15 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   axiom). Mathlib confirmed: symplecticGroup, orthogonalGroup, J_det_mul_J_det,
   det_fromBlocks_zero₁₂ all present. Std-3, budget 0. Next: W3 (williamson_of_youla — the
   construction of S from Youla via matrix sqrt, the effort).
+
+- **2026-07-05** — **W3 CHECKPOINTED (honest).** williamsonAux_antisymm — A := √M·J·√M is
+  antisymmetric (the CFC.sqrt-usability entry point, REAL content: (√M)ᵀ = √M via
+  PosSemidef.isHermitian + conjTranspose_eq_transpose_of_trivial over ℝ, Jᵀ = −J; the
+  ArakiEntropy sqrt pattern ported cleanly). williamson_of_construction_exists — WilliamsonDecomp
+  inhabited GIVEN the carried S-construction hconstr (∃ S ν symplectic with Sᵀ M S = D⊕D). The
+  actual block-diagonalization construction (S = M^{−1/2}·O·block-√ν, proving symplectic +
+  diagonalizing) did NOT close — genuinely the hardest part; CARRIED honestly (the haug
+  analogue), NOT faked. So Williamson is now: framework (W1) + antisymm entry point (W3-pre) +
+  the reduction packaging, with BOTH Youla (W2) and the S-construction carried. Std-3, budget 0.
+  Next: W4/W5 (oneModeSympEig consistency + the gaussStateEntropy connection — the QG payoff,
+  landing on the structure regardless).

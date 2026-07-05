@@ -9002,6 +9002,13 @@ namespace QIQTH.AxiomAudit
 -- (the analytic frontier, the haug analogue -- a structure, never an axiom). Std 3.
 #print axioms QIQTH.Williamson.symplectic_det_sq
 #print axioms QIQTH.Williamson.det_williamson_block
+-- THE WILLIAMSON W3 (WilliamsonNormalForm.lean cont.): the honest checkpoint --
+-- williamsonAux_antisymm (A := sqrt(M) J sqrt(M) is antisymmetric, the CFC.sqrt-usability
+-- entry point, real content via the ArakiEntropy sqrt pattern) + williamson_of_construction_
+-- exists (WilliamsonDecomp inhabited given the CARRIED S-construction hconstr -- the heavy
+-- block-diagonalization, the haug analogue, carried honestly not faked). Std 3.
+#print axioms QIQTH.Williamson.williamsonAux_antisymm
+#print axioms QIQTH.Williamson.williamson_of_construction_exists
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
