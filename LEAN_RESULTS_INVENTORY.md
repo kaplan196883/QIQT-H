@@ -1670,7 +1670,7 @@ analogue, a structure never an axiom). **CAMPAIGN COMPLETE (W1–W6, honest)**: 
   ⟨SUPERSEDED — Williamson IS now unconditional (see the ✅ header above); only the area-law S∝A
   scaling remains the separate cited frontier.⟩
 
-**MAX-FLOW=MIN-CUT combinatorial core — LANDED, ExactRT gap SHARPENED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`
+**MAX-FLOW=MIN-CUT — ✅ COMPLETE & UNCONDITIONAL (M1–M12), Ford–Fulkerson gap DISCHARGED (2026-07-05).** `QIQTH.QG.MaxFlowMinCut`
 (axiom-free std-3): a genuine ATTEMPT at the Ford–Fulkerson wall on the repo's own flow/cut framework
 (EmergentSpacetime `IsSTFlow`/`flowValue`/`cutCapacity`, weak duality already done). M1 the algebraic saturation
 lemma (a flow saturating a cut's forward boundary with zero backflow has flowValue = cutCapacity); M2 the residual
@@ -1731,9 +1731,12 @@ an ACTIVELY-MAINTAINED area (maintainer Michael Rothgang). Realistic route: WATC
 diff-geo effort, then the RNC expansion + heat kernel become a normal (large) project on top — cheaper than
 self-building the whole stack. (2) **Max-flow–min-cut / Ford–Fulkerson / Menger** (blocks exact RT) — NOT in
 Mathlib, but PRIOR ART exists in Isabelle/HOL (Lochbihler countable-network; Lammich–Sefidgar refinement) +
-Mizar — portable but a substantial Lean port. (3) **Williamson symplectic normal form** (blocks the N-mode area
-law) — NOT in Mathlib4. Net: none reusable today; all three walls confirmed by the wider ecosystem, not just the
-local grep; the heat-kernel route is gated on Mathlib's own open diff-geo frontier.
+Mizar — portable but a substantial Lean port; **now BUILT in-repo (`maxFlow_min_cut`, unconditional) rather than
+ported.** (3) **Williamson symplectic normal form** — NOT in Mathlib4, but **now BUILT from scratch in QIQTH (a
+Mathlib-first: `williamson_exists` / `youla_pairing`, UNCONDITIONAL as of 2026-07-06)** — so it no longer *blocks*;
+only the Srednicki area-law SCALING `#{ν>½} ∝ A` remains the frontier. Net: of the three ecosystem gaps, max-flow
+and Williamson are now proved in-repo (neither reused from elsewhere); only the heat-kernel / Seeley–DeWitt route
+(1) stays gated on Mathlib's own open diff-geo frontier.
 
 **Area-law `S ∝ A` frontier — CHARACTERIZED as a genuine wall (2026-07-05, consult-verified).** The entropy
 machinery is complete to its honest ceiling: `GaussianStateEntropy` (the per-mode Srednicki entropy
