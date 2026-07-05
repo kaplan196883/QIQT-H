@@ -230,3 +230,37 @@ beyond the standard classical foundations (`propext`, `Classical.choice`, `Quot.
       Ohya–Petz, Witten 2018, Tanimoto 2026, de Moura–Ullrich, Mathlib, Buchholz–Wichmann, CPW 2022.
 - [ ] **Composer Decision Point 1:** confirm this outline + the arXiv-quant-ph/math-OA standards loaded →
       begin Phase-4 systematic writing (Introduction first, Abstract last).
+
+---
+
+## ⚠ AUTHOR DECISION — additional general-mathematics Mathlib-firsts (2026-07-05/06 session; scope question)
+
+The continuous-QG session landed several **general-mathematics** Lean-firsts that fall OUTSIDE this paper's tight
+modular/Araki-entropy scope but are arguably the most broadly upstream-able (pure Mathlib) results of the whole
+development. They are self-contained, carry **no** QIQT-H physics, and are not yet placed in any paper.
+**Decision needed (author's editorial call):** do they belong (a) as an added section here, (b) in a *separate*
+short formalization note, or (c) as **direct Mathlib PRs** (no paper)? All are `[AF]` std-3 (`propext`,
+`Classical.choice`, `Quot.sound`), independently axiom-certified this session.
+
+- **`youla_pairing` + `youlaDecomp_of_antisymm`** (`WilliamsonNormalForm.lean`) — the **real antisymmetric block
+  normal form**: a skew-adjoint operator on an even-dim real inner-product space admits an orthonormal basis
+  pairing it into 2×2 `ν`-rotation blocks (matrix form `Oᵀ A O = [[0,D],[−D,0]]`, `O` orthogonal). Absent from
+  Mathlib. Proof: `T:=A*A` symmetric ≤ 0 spectral decomposition + even-dimensionality of the positive eigenspaces
+  (`antisymm_eigenspace_even`, a `det`-sign argument) + a `finrank` dimension-halving induction.
+- **`williamson_exists` / `williamsonDecomp_of_posDef`** (`WilliamsonNormalForm.lean`) — **Williamson's symplectic
+  normal form**: every positive-definite `M` has `SᵀMS = D⊕D` for a symplectic `S` (unconditional, only
+  `M.PosDef`). Absent from Mathlib. Corollary `williamson_entropy_symplectic_invariant`: the symplectic spectrum
+  — hence the Gaussian entanglement entropy `∑ gaussModeEntropy νᵢ` — is a well-defined function of `M` alone.
+- **`maxFlow_min_cut` / `exact_rt_unconditional`** (`QG/MaxFlowMinCut.lean`) — the finite **max-flow = min-cut**
+  theorem (unconditional, `V→V→ℝ` networks), built with the full augmenting-path construction + a *directed*
+  path-dedup theory Mathlib lacks (the directed analogue of `SimpleGraph.Walk.bypass`). Absent from Mathlib
+  (Isabelle/Mizar prior art only).
+- **The canonical Weyl pair at the spectral level** (`Spectral/`) — position/momentum PVMs, `τ_t=e^{itP}`,
+  `e^{isX}`, and both self-adjoint generators (`positionOp_isSelfAdjoint`, `momentumOp_isSelfAdjoint`); more a
+  clean consolidation of standard spectral theory than a headline first, but self-contained.
+
+**Recommendation:** the max-flow, Williamson, and Youla results are strong candidates for **direct Mathlib
+contribution** — they are exactly the kind of general, physics-free result Mathlib wants, and upstreaming both
+benefits the community and creates the most durable citation. This paper's modular/entropy story is orthogonal to
+them; folding them in would dilute its focus. (The `45_Theorem_Paper_Index.md` map should be extended to include
+whichever of these the author elects to write up.)
