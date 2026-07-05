@@ -464,6 +464,9 @@ import QIQTH.Spectral.ModulationFlow
 -- family, as an unbounded operator (LinearPMap) on the smooth domain. Self-adjointness (Cayley) is the frontier.
 import QIQTH.Spectral.Stone
 import QIQTH.Spectral.MomentumGenerator
+-- CCR DUAL: the position operator X = stoneGen modulationLp = x· on L²(ℝ), the self-adjoint generator of the
+-- modulation group e^{isX} — the Fourier-dual twin of momentumOp, completing the canonical CCR pair (P, X).
+import QIQTH.Spectral.PositionGenerator
 import QIQTH.Spectral.ModularGenerator
 import QIQTH.Spectral.Garding
 import QIQTH.Spectral.StoneProduct

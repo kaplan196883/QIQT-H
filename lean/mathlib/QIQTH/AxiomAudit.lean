@@ -5070,6 +5070,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StandardSubspaceModular.clockEnergy_isSelfAdjoint
 #print axioms QIQTH.Spectral.Multiplication.momentumOp_isSelfAdjoint
 #print axioms QIQTH.StandardSubspaceModular.modularGen_isSelfAdjoint
+#print axioms QIQTH.Spectral.Multiplication.positionOp_isSelfAdjoint
+-- ★ CCR DUAL (cosmetic-for-QG spectral capstone): positionOp_isSelfAdjoint — X = stoneGen modulationLp = x· on
+-- L²(ℝ), the self-adjoint generator of the modulation group M_s=e^{isX} (modulationLp_group/_zero/_inner/_norm_le
+-- + continuous_modulationLp). The Fourier-dual TWIN of momentumOp = P = −i d/dx, completing the canonical CCR
+-- operator pair (P, X) at the self-adjoint-generator level (Weyl CCR = weyl_relation). Mechanical mirror of the
+-- momentum file; same irreducible-stoneGen Lp pattern. Axiom-free. NOTE: cosmetic for QG, not a QG advance.
 -- ★★★ P4 WALL — THE THREE NAMED GENERATORS ARE SELF-ADJOINT (concrete payoff of stoneGen_isSelfAdjoint):
 -- clockEnergy_isSelfAdjoint — X = A_edge = stoneGen clockTransl (the clock energy, Lp ℂ²(ℝ;H), irreducible-stoneGen
 -- pattern); momentumOp_isSelfAdjoint — P = stoneGen translationCLM = −i d/dx (L²(ℝ)); modularGen_isSelfAdjoint —
