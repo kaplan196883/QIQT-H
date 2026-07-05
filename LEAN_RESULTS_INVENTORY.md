@@ -1661,9 +1661,14 @@ mixed) is now derived; **M11** discharges the mixed extraction: `residualReachab
 a bigger flow — the FULL Ford–Fulkerson haug DERIVED, via the Pf/Pb tagging of a SimpleResidualPath + M10's mixed
 augmentation) and ★★ `exact_rt_maxFlow_mincut_unconditional` — **max-flow = min-cut conditional on ONLY the
 existence of a maximum flow**. The entire combinatorial + augmentation content (both directions) is now derived;
-the ONLY remaining carry is max-flow EXISTENCE (compactness / Ford–Fulkerson termination — the genuine analytic
-frontier). A wall I'd called a multi-year library, now down to a single carried existence input, built one honest
-increment at a time — including directed path-dedup theory Mathlib lacks.
+built one honest
+increment at a time — including directed path-dedup theory Mathlib lacks. **M12 — CAMPAIGN COMPLETE**:
+`exists_maxSTFlow` (a max flow EXISTS — the flow set is a nonempty compact polytope in V→V→ℝ via Heine–Borel,
+flowValue continuous, IsCompact.exists_isMaxOn) and ★★ **`maxFlow_min_cut` — the finite max-flow = min-cut
+theorem, UNCONDITIONAL** (carrying ONLY cap-nonneg, the standard definitional hypothesis; the entire M1–M12
+pipeline machine-checked with NO carried mathematical hypotheses). A genuine wall FULLY CROSSED — not in Mathlib.
+HONEST: the finite (V→V→ℝ) network model, NOT continuum RT, NOT QG; but it makes the repo's ExactRT Ford–Fulkerson
+gap genuinely closable (holographic entanglement = min-cut no longer needs to cite it).
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks

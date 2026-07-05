@@ -9042,6 +9042,14 @@ namespace QIQTH.AxiomAudit
 -- EXISTENCE -- the haug is no longer carried). Std 3.
 #print axioms QIQTH.QG.residualReachable_augments
 #print axioms QIQTH.QG.exact_rt_maxFlow_mincut_unconditional
+-- THE MAX-FLOW-MIN-CUT M12 (QG/MaxFlowMinCut.lean cont.): EXISTENCE -- the LAST carry --
+-- exists_maxSTFlow (the flow set is nonempty (zero flow) + closed (iInter of isClosed_le/eq)
+-- + bounded (pi_norm) => compact (Heine-Borel, ProperSpace auto), flowValue continuous, so
+-- IsCompact.exists_isMaxOn gives a max flow); ★★ maxFlow_min_cut -- the finite max-flow =
+-- min-cut theorem, UNCONDITIONAL (only cap-nonneg, the standard hypothesis). A genuine wall
+-- fully crossed; NOT in Mathlib. Finite network model, NOT continuum RT, NOT QG. Std 3.
+#print axioms QIQTH.QG.exists_maxSTFlow
+#print axioms QIQTH.QG.maxFlow_min_cut
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form

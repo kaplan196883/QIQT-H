@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# M1–M11 — the combinatorial core of max-flow = min-cut
+# M1–M12 — the finite max-flow = min-cut theorem (unconditional)
 
 Built on Track C's flow/cut framework (`EmergentSpacetime.lean`, `section Flow`). This file delivers the
 combinatorial content of the hard half of max-flow = min-cut, discharging the combinatorial part of
@@ -104,7 +104,14 @@ onto M8's fibre counts), and the mixed-margin `ε` feeding M10 (`residualReachab
 residual reachability `s ⇝ t` alone yields a strictly larger flow — the full Ford–Fulkerson `haug`. That
 `haug`, carried through M4/M5, is then DISCHARGED in `exact_rt_maxFlow_mincut_unconditional` (via
 `mem_residualCut`), leaving max-flow = min-cut conditional ONLY on (c) max-flow EXISTENCE (`IsMaxSTFlow`).
-This is the finite (`V→V→ℝ`) network model, not a continuum RT.
+**M12 discharges (c)** — the last carry: the `s`-`t` flow set is nonempty (zero flow), closed (finite
+intersection of the closed nonneg/capacity/conservation conditions) and bounded (`0 ≤ f ≤ cap`) in the
+finite-dimensional `V→V→ℝ`, hence compact (Heine–Borel, `Metric.isCompact_of_isClosed_isBounded`), and
+`flowValue · s` is continuous, so it attains a maximum (`IsCompact.exists_isMaxOn`) — an `IsMaxSTFlow`
+(`exists_maxSTFlow`). Feeding it into `exact_rt_maxFlow_mincut_unconditional` gives the UNCONDITIONAL
+capstone `maxFlow_min_cut`: for any nonnegative `cap` with `s ≠ t` there is an `s`-`t` flow with
+`flowValue f s = cutCapacity cap (residualCut cap f s)`, carrying ONLY `cap`-nonnegativity. Every M1–M12
+ingredient is machine-checked. This is the finite (`V→V→ℝ`) network model, not a continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`; `open Classical` for the reachable-set
 filter's decidability is a local convenience, not a project axiom).
@@ -1400,5 +1407,121 @@ theorem exact_rt_maxFlow_mincut_unconditional {cap : V → V → ℝ} {s t : V} 
   apply exact_rt_maxFlow_mincut hmax hst
   intro ht
   exact residualReachable_augments hmax.1 hst (mem_residualCut.mp ht)
+
+/-! ### M12 — max-flow EXISTENCE via compactness, and the UNCONDITIONAL capstone
+
+M11 left max-flow = min-cut conditional ONLY on (c) **max-flow EXISTENCE** (`IsMaxSTFlow`). M12
+discharges it by the standard compactness (extreme-value) argument. The set of `s`-`t` flows
+`{f | IsSTFlow cap s t f} ⊆ V → V → ℝ` is:
+
+* **nonempty** — the zero flow is an `s`-`t` flow (nonneg `0 ≤ 0`, capacity `0 ≤ cap` by `hcap`,
+  conservation `vertexExcess 0 = 0`);
+* **closed** — a finite intersection of the closed conditions `{f | 0 ≤ f u v}` and
+  `{f | f u v ≤ cap u v}` (`isClosed_le` of continuous evaluations) and `{f | vertexExcess f v = 0}`
+  (`isClosed_eq`), each intersected over the finite vertex index (`isClosed_iInter`);
+* **bounded** — `0 ≤ f u v ≤ cap u v` forces `‖f‖ ≤ ‖cap‖` in the sup norm, so the flow set sits
+  inside `Metric.closedBall 0 ‖cap‖`.
+
+`V → V → ℝ` is a finite-dimensional real normed space, hence a `ProperSpace`, so closed + bounded ⟹
+**compact** (`Metric.isCompact_of_isClosed_isBounded`, Heine–Borel). `flowValue · s = vertexExcess · s`
+is continuous (evaluation + finite sums + subtraction), so it **attains a maximum** on the nonempty
+compact flow set (`IsCompact.exists_isMaxOn`) — that maximiser is an `IsMaxSTFlow`.
+
+Feeding it into `exact_rt_maxFlow_mincut_unconditional` yields the UNCONDITIONAL finite max-flow =
+min-cut theorem `maxFlow_min_cut`, carrying ONLY `cap`-nonnegativity — the standard finite
+Ford–Fulkerson statement, fully machine-checked. -/
+
+/-- **★★★ M12 — max-flow EXISTENCE.** For any nonnegative capacity `cap`, a maximum `s`-`t` flow
+exists. The `s`-`t` flow set is nonempty (the zero flow), closed and bounded in the
+finite-dimensional space `V → V → ℝ`, hence compact (Heine–Borel); `flowValue · s` is continuous and
+attains its maximum there. -/
+theorem exists_maxSTFlow (cap : V → V → ℝ) (s t : V) (hcap : ∀ u v, 0 ≤ cap u v) :
+    ∃ f, IsMaxSTFlow cap s t f := by
+  classical
+  -- evaluation `f ↦ f u v` is continuous
+  have hev : ∀ u v, Continuous (fun f : V → V → ℝ => f u v) :=
+    fun u v => (continuous_apply v).comp (continuous_apply u)
+  -- `f ↦ vertexExcess f w` is continuous
+  have hVE : ∀ w, Continuous (fun f : V → V → ℝ => vertexExcess f w) := by
+    intro w
+    show Continuous (fun f : V → V → ℝ => (∑ v, f w v) - (∑ v, f v w))
+    exact (continuous_finsetSum _ (fun v _ => hev w v)).sub
+      (continuous_finsetSum _ (fun v _ => hev v w))
+  -- the flow set
+  set S : Set (V → V → ℝ) := {f | IsSTFlow cap s t f} with hS
+  -- nonempty: the zero flow
+  have hne : S.Nonempty := by
+    refine ⟨0, ?_⟩
+    refine ⟨fun u v => ?_, fun u v => ?_, fun v _ _ => ?_⟩
+    · simp
+    · simpa using hcap u v
+    · simp [vertexExcess]
+  -- closed: intersection of closed conditions
+  have hc1 : IsClosed {f : V → V → ℝ | ∀ u v, 0 ≤ f u v} := by
+    have he : {f : V → V → ℝ | ∀ u v, 0 ≤ f u v} = ⋂ u, ⋂ v, {f : V → V → ℝ | 0 ≤ f u v} := by
+      ext f; simp only [Set.mem_setOf_eq, Set.mem_iInter]
+    rw [he]
+    exact isClosed_iInter fun u => isClosed_iInter fun v =>
+      isClosed_le continuous_const (hev u v)
+  have hc2 : IsClosed {f : V → V → ℝ | ∀ u v, f u v ≤ cap u v} := by
+    have he : {f : V → V → ℝ | ∀ u v, f u v ≤ cap u v}
+        = ⋂ u, ⋂ v, {f : V → V → ℝ | f u v ≤ cap u v} := by
+      ext f; simp only [Set.mem_setOf_eq, Set.mem_iInter]
+    rw [he]
+    exact isClosed_iInter fun u => isClosed_iInter fun v =>
+      isClosed_le (hev u v) continuous_const
+  have hc3 : IsClosed {f : V → V → ℝ | ∀ v, v ≠ s → v ≠ t → vertexExcess f v = 0} := by
+    have he : {f : V → V → ℝ | ∀ v, v ≠ s → v ≠ t → vertexExcess f v = 0}
+        = ⋂ v, ⋂ _ : v ≠ s, ⋂ _ : v ≠ t, {f : V → V → ℝ | vertexExcess f v = 0} := by
+      ext f; simp only [Set.mem_setOf_eq, Set.mem_iInter]
+    rw [he]
+    exact isClosed_iInter fun v => isClosed_iInter fun _ => isClosed_iInter fun _ =>
+      isClosed_eq (hVE v) continuous_const
+  have hclosed : IsClosed S := by
+    have he : S = {f : V → V → ℝ | ∀ u v, 0 ≤ f u v} ∩ {f : V → V → ℝ | ∀ u v, f u v ≤ cap u v}
+        ∩ {f : V → V → ℝ | ∀ v, v ≠ s → v ≠ t → vertexExcess f v = 0} := by
+      ext f
+      constructor
+      · rintro ⟨h1, h2, h3⟩; exact ⟨⟨h1, h2⟩, h3⟩
+      · rintro ⟨⟨h1, h2⟩, h3⟩; exact ⟨h1, h2, h3⟩
+    rw [he]
+    exact (hc1.inter hc2).inter hc3
+  -- bounded: `S ⊆ closedBall 0 ‖cap‖`
+  have hbdd : Bornology.IsBounded S := by
+    apply (Metric.isBounded_closedBall (x := (0 : V → V → ℝ)) (r := ‖cap‖)).subset
+    intro f hf
+    have hf' : IsSTFlow cap s t f := hf
+    simp only [Metric.mem_closedBall, dist_zero_right]
+    rw [pi_norm_le_iff_of_nonneg (norm_nonneg cap)]
+    intro u
+    rw [pi_norm_le_iff_of_nonneg (norm_nonneg cap)]
+    intro v
+    have h1 : (0 : ℝ) ≤ f u v := hf'.nonneg u v
+    have h2 : f u v ≤ cap u v := hf'.capacity u v
+    have hcapuv : ‖cap u v‖ ≤ ‖cap‖ :=
+      (norm_le_pi_norm (cap u) v).trans (norm_le_pi_norm cap u)
+    rw [Real.norm_eq_abs, abs_of_nonneg h1]
+    calc f u v ≤ cap u v := h2
+      _ ≤ |cap u v| := le_abs_self _
+      _ = ‖cap u v‖ := (Real.norm_eq_abs _).symm
+      _ ≤ ‖cap‖ := hcapuv
+  -- compact (Heine–Borel: `V → V → ℝ` is a finite-dim `ProperSpace`)
+  have hcompact : IsCompact S := Metric.isCompact_of_isClosed_isBounded hclosed hbdd
+  -- `flowValue · s` is continuous and attains its max on the nonempty compact flow set
+  have hcont : Continuous (fun f : V → V → ℝ => flowValue f s) := hVE s
+  obtain ⟨f, hfS, hfmax⟩ := hcompact.exists_isMaxOn hne hcont.continuousOn
+  exact ⟨f, hfS, fun g hg => hfmax hg⟩
+
+/-- **★★★★ THE FINITE MAX-FLOW = MIN-CUT THEOREM (unconditional).** For any nonnegative capacity
+`cap` on a finite vertex set with `s ≠ t`, there is an `s`-`t` flow whose value equals the capacity of
+the residual-reachable cut `residualCut cap f s`. Combining M12's max-flow existence
+(`exists_maxSTFlow`) with M11's `exact_rt_maxFlow_mincut_unconditional` (max-flow = min-cut for a
+maximum flow, augmentation `haug` fully discharged), this is the finite Ford–Fulkerson statement
+carrying ONLY the standard `cap`-nonnegativity hypothesis — every combinatorial and analytic
+ingredient machine-checked here (M1–M12). -/
+theorem maxFlow_min_cut (cap : V → V → ℝ) (s t : V) (hst : s ≠ t) (hcap : ∀ u v, 0 ≤ cap u v) :
+    ∃ f, IsSTFlow cap s t f ∧ flowValue f s = cutCapacity cap (residualCut cap f s) := by
+  obtain ⟨f, hmax⟩ := exists_maxSTFlow cap s t hcap
+  exact ⟨f, hmax.1, exact_rt_maxFlow_mincut_unconditional hmax hst⟩
 
 end QIQTH.QG

@@ -1,4 +1,4 @@
-# THE MAX-FLOW–MIN-CUT CAMPAIGN — discharge ExactRT's Ford–Fulkerson gap (M1–M5)
+# THE MAX-FLOW–MIN-CUT CAMPAIGN — COMPLETE (M1–M12): finite max-flow=min-cut, UNCONDITIONAL
 
 **Status:** COMPLETE (2026-07-05) — M1–M5 landed (M5 existence carried house-style + single-edge augmentation constructed). Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent a2b64db4d7754b482 (2026-07-05) — attemptable on the
@@ -181,3 +181,17 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   on ONLY the existence of a maximum flow** — the entire combinatorial + augmentation content
   (both directions) is derived. Only carry left: max-flow EXISTENCE (compactness/termination,
   the genuine analytic frontier). Next: M12 (existence via compactness of the flow polytope).
+
+- **2026-07-05** — **M12 LANDED — ★★ CAMPAIGN COMPLETE: max-flow=min-cut is UNCONDITIONAL ★★.**
+  exists_maxSTFlow — a maximum flow EXISTS: the flow set {f | IsSTFlow} ⊆ V→V→ℝ is nonempty
+  (zero flow), closed (finite iInter of isClosed_le/isClosed_eq, vertexExcess continuous),
+  bounded (‖f‖ ≤ ‖cap‖ via pi_norm), hence COMPACT (Metric.isCompact_of_isClosed_isBounded,
+  ProperSpace (V→V→ℝ) auto-resolved from FiniteDimensional.proper_real), flowValue continuous,
+  so IsCompact.exists_isMaxOn gives a maximiser. ★★ maxFlow_min_cut — the finite max-flow =
+  min-cut theorem, UNCONDITIONAL (carrying ONLY cap-nonneg, the standard definitional
+  hypothesis). The ENTIRE M1-M12 pipeline is machine-checked with NO carried mathematical
+  hypotheses. A genuine wall — one I'd called a multi-year Mathlib library — FULLY CROSSED,
+  one honest increment at a time, including a directed path-dedup theory Mathlib lacks. Std-3,
+  budget 0. HONEST: the finite (V→V→ℝ) network model; NOT continuum RT, NOT QG. This also
+  makes the repo's ExactRT Ford–Fulkerson gap genuinely closable (holographic entanglement =
+  min-cut no longer needs to cite it). CAMPAIGN COMPLETE.
