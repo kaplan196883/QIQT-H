@@ -353,8 +353,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   and removing `hgauge` makes it false. ⚠ **HONEST CAPTION (binding)**: this DISCHARGES `htr` with the honest
   geometric input = the normal-coordinate gauge (not a wall crossed); it is the **`⅙` normalization ONLY** — still
   does **NOT** give the numerical value of `G` (`N`, `Λ_s`, `E/ξ` remain), and does **NOT** build a curved heat
-  kernel. **[frontier]**: RNC4 (wire the gauge-derived Ricci data into `heat_a1_of_RNC`, discharging its cited
-  `κ=1/6`).
+  kernel.
+- **RNC4 — the a₁ assembly with `κ=1/6` GAUGE-DERIVED, not cited** (`RNCExpansion.lean` `+ import HeatKernelA1`,
+  `heat_a1_of_gauge`, **[AF]** std-3, 2026-07-06). Wires RNC3's `sqrtdet_taylor_coeff_of_gauge` into
+  `HeatKernelA1.heat_a1_of_RNC_derived`, **DISCHARGING the `κ=1/6` citation** that `heat_a1_of_RNC` carried. Shape (A):
+  `heat_a1_of_RNC` takes `κ` via the discharge-able hypothesis `hκ : κ=1/6` (not a baked literal). `κ` is DEFINED
+  (`hκgeo : ½∂_c∂_d√det g(0)=−κ·Ric_{cd}`) as the measure-expansion coefficient `√det g = 1 − κ·R_{cd}x^cx^d` — the
+  physical definition, NOT a value claim; its VALUE is **FORCED to `1/6`** by the falsifiable normal-coordinate gauge
+  `hgauge` (`sqrtdet_taylor_coeff_of_gauge` gives `−(1/6)Ric`; comparing at a genuinely curved point
+  `hRic : ∃ c d, Ric_{cd}(0)≠0` cancels the Ricci factor ⟹ `κ=1/6`). That derived value discharges `hκ` and (via the
+  already-DERIVED moment matrix `M=2t·δ` = `gaussianMoment_diag`) assembles the `t¹` coefficient **`(1/6−ξ)R − m²`
+  carrying the GAUGE as the source of its `1/6`**. **Sharp test PASSES**: remove `hgauge` → `κ` unpinned → the
+  `(1/6−ξ)R` conclusion fails; the `1/6` genuinely flows from the falsifiable gauge, not a fresh citation. ⚠ **HONEST
+  CAPTION (binding)**: `κ=1/6` is now **gauge-derived in the a₁ accounting** (no longer a free citation) — still does
+  **NOT** give numerical-G (species count `N`, granularity scale `Λ_s`, and the `E/m²/ξ` potential term remain), and
+  does **NOT** build a curved heat kernel. RNC campaign RNC1–RNC4 COMPLETE.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

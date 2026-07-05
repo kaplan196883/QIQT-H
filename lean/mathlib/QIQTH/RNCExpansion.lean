@@ -18,6 +18,7 @@
 -/
 import Mathlib
 import QIQTH.Curvature
+import QIQTH.HeatKernelA1
 
 namespace QIQTH.RNCExpansion
 
@@ -538,5 +539,66 @@ theorem sqrtdet_taylor_coeff_of_gauge (g gi : Point n → Fin n → Fin n → �
       = -(1 / 6) * ricci g gi c d 0 :=
   sqrtdet_taylor_coeff g (fun a b => ricci g gi a b 0) hg hg0 hdg0
     (fun a b => rnc_htr_of_gauge g gi hg hgi hgi0 hdg0 hsymm hgauge a b) c d
+
+/-! ### RNC4 — wiring the gauge-derived ⅙ into the heat-kernel `a₁` assembly -/
+
+open QIQTH.HeatKernelA1 in
+/-- **RNC4 — the `a₁` assembly with `κ = 1/6` GAUGE-DERIVED, not cited.**  This wires RNC3's
+    gauge-derived `√det g` coefficient (`sqrtdet_taylor_coeff_of_gauge`) into `HeatKernelA1`'s
+    conditional `a₁` assembly (`heat_a1_of_RNC_derived`), DISCHARGING the `κ = 1/6` citation that
+    `heat_a1_of_RNC` carried.
+
+    The conformal factor `κ` is DEFINED (via `hκgeo`) as the coefficient of the measure expansion
+    `√det g = 1 − κ · R_{cd} x^c x^d` — i.e. `½ ∂_c∂_d √det g(0) = −κ · Ric_{cd}`.  This is the
+    physical *definition* of `κ`, NOT a claim about its value.  Its VALUE is then FORCED to `1/6` by
+    the falsifiable normal-coordinate gauge `hgauge`: `sqrtdet_taylor_coeff_of_gauge` gives
+    `½ ∂_c∂_d √det g(0) = −(1/6) Ric_{cd}`, and comparing with `hκgeo` at a genuinely curved point
+    (`hRic : ∃ c d, Ric_{cd}(0) ≠ 0`) cancels the Ricci factor to yield `κ = 1/6`.  That derived
+    value discharges the `hκ : κ = 1/6` hypothesis of `heat_a1_of_RNC`, so the assembled `t¹`
+    coefficient `(1/6 − ξ)R − m²` now carries the GAUGE as the source of its `1/6`, not a citation.
+
+    SHARP TEST (passes): remove `hgauge` and `sqrtdet_taylor_coeff_of_gauge` is unavailable, so `κ`
+    is no longer pinned to `1/6` (the trace/symmetric part of `∂∂g` is unconstrained) and the
+    `(1/6 − ξ)R` conclusion fails.  The `1/6` genuinely flows from the falsifiable gauge.
+
+    HONEST CAPTION (binding): this replaces the CITED `κ = 1/6` in the `a₁` accounting with the
+    RNC3 gauge-DERIVED value — the conformal factor is no longer a free citation but follows from
+    the normal-coordinate gauge.  It STILL does NOT give the numerical value of G (species count N,
+    granularity scale Λ_s, and the E/`m²`/ξ potential term remain), and does NOT build a curved heat
+    kernel.  The `⅙` normalization only. -/
+theorem heat_a1_of_gauge (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
+    (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hgi : ∀ a b, ContDiff ℝ ⊤ (fun y => gi y a b))
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (κ : ℝ)
+    (hκgeo : ∀ c d, (1 / 2) * pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0
+        = -κ * ricci g gi c d 0)
+    (hRic : ∃ c d, ricci g gi c d 0 ≠ 0)
+    (Rscl : ℝ) (hR : Rscl = ∑ i, ricci g gi i i 0) :
+    (1 / (2 * t)) * (κ * ∑ i, ∑ j, ricci g gi i j 0 *
+        (∫ x : (Fin n → ℝ), (∏ k, heatKernel1D t (x k)) * (x i * x j))) - ξ * Rscl - m ^ 2
+      = (1 / 6 - ξ) * Rscl - m ^ 2 := by
+  -- The gauge forces κ = 1/6 (discharging the citation), via RNC3's derived √det g coefficient.
+  obtain ⟨c, d, hcd⟩ := hRic
+  have hgc := sqrtdet_taylor_coeff_of_gauge g gi hg hgi hg0 hgi0 hdg0 hsymm hgauge c d
+  have heq : -κ * ricci g gi c d 0 = -(1 / 6) * ricci g gi c d 0 := by
+    rw [← hκgeo c d]; exact hgc
+  have h0 : (1 / 6 - κ) * ricci g gi c d 0 = 0 := by
+    have hrw : (1 / 6 - κ) * ricci g gi c d 0
+        = -κ * ricci g gi c d 0 - (-(1 / 6) * ricci g gi c d 0) := by ring
+    rw [hrw, heq, sub_self]
+  have hκ : κ = 1 / 6 := by
+    rcases mul_eq_zero.mp h0 with h | h
+    · exact (sub_eq_zero.mp h).symm
+    · exact absurd h hcd
+  -- Feed the DERIVED κ = 1/6 into the (moment-matrix-derived) a₁ assembly.
+  exact heat_a1_of_RNC_derived t ht ξ m (fun i j => ricci g gi i j 0) κ hκ Rscl hR
 
 end QIQTH.RNCExpansion

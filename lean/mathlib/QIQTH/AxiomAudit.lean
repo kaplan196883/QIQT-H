@@ -9564,5 +9564,13 @@ namespace QIQTH.AxiomAudit
 -- ★ RNC3 payoff — √det g = 1 − ⅙R_{cd}x^cx^d GIVEN THE GAUGE (htr discharged). The Taylor coefficient
 -- ½∂_c∂_d √det g(0) = −⅙Ric_{cd} with htr fed from rnc_htr_of_gauge (gauge-derived, not carried).
 #print axioms QIQTH.RNCExpansion.sqrtdet_taylor_coeff_of_gauge
+-- ★ RNC4 — wire the gauge-derived ⅙ into the heat-kernel a₁ assembly. Feeds RNC3's
+-- sqrtdet_taylor_coeff_of_gauge into HeatKernelA1.heat_a1_of_RNC_derived, DISCHARGING the κ=1/6
+-- citation: κ is DEFINED as the √det g measure coefficient (hκgeo), its VALUE is FORCED to 1/6 by the
+-- falsifiable normal-coordinate gauge hgauge at a curved point (hRic), so the assembled t¹ coefficient
+-- (1/6−ξ)R − m² now carries the GAUGE as the source of its 1/6, not a citation. Sharp test passes
+-- (remove hgauge → κ unpinned → conclusion fails). HONEST: κ=1/6 gauge-derived in the a₁ accounting
+-- ONLY — still NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel. Axiom-free (std 3).
+#print axioms QIQTH.RNCExpansion.heat_a1_of_gauge
 
 end QIQTH.AxiomAudit

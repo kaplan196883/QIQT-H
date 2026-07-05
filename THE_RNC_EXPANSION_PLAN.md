@@ -53,8 +53,19 @@ or `∂_{(l}Γ^i_{jk)}(0)=0`), NEVER a `:= True` stub or a pre-contracted `∂�
   `½∂_c∂_d √det g(0) = −⅙Ric_{cd}` GIVEN THE GAUGE (feeds `rnc_htr_of_gauge` into `sqrtdet_taylor_coeff`) — the `⅙`
   is now gauge-derived, not carried. `#print axioms` std-3; budget 0; pinned in `AxiomAudit.lean`.
   (GOLD variant: the primitive `∑Γyy=0` gauge — needs THIRD-order `pd`/Schwarz, std-5, gated; defer.)
-- [ ] **RNC4 — wire to `heat_a1_of_RNC`.** Feed the derived RNC Ricci data into the existing conditional a₁ assembly,
-  discharging its carried RNC input + the cited κ=1/6. Honest: still not numerical-G (N, Λ_s, E/ξ remain).
+- [x] **RNC4 — wire to `heat_a1_of_RNC` (CLOSED, AXIOM-FREE std-3, 2026-07-06).** `QIQTH/RNCExpansion.lean`
+  (`+ import QIQTH.HeatKernelA1`), `heat_a1_of_gauge`. Shape (A): `heat_a1_of_RNC` takes `κ` via the
+  discharge-able hypothesis `hκ : κ = 1/6` (NOT a baked literal), so the citation is discharged. `κ` is DEFINED
+  (via `hκgeo`) as the measure-expansion coefficient `√det g = 1 − κ·R_{cd}x^cx^d`, i.e. `½∂_c∂_d√det g(0)=−κ·Ric_{cd}`
+  — the physical definition, NOT a value claim. Its VALUE is FORCED to `1/6` by the falsifiable normal-coordinate
+  gauge `hgauge`: `sqrtdet_taylor_coeff_of_gauge` gives `½∂∂√det g(0)=−(1/6)Ric`, and comparing with `hκgeo` at a
+  genuinely curved point (`hRic : ∃ c d, Ric_{cd}(0)≠0`) cancels the Ricci factor ⟹ `κ=1/6`. That derived value
+  discharges `heat_a1_of_RNC`'s `hκ`, and (via `heat_a1_of_RNC_derived`, whose moment matrix `M=2t·δ` is already the
+  DERIVED `gaussianMoment_diag`) assembles the `t¹` coefficient `(1/6−ξ)R − m²` carrying the GAUGE as the source of
+  its `1/6`. **Sharp test PASSES:** remove `hgauge` and `sqrtdet_taylor_coeff_of_gauge` is unavailable → `κ` unpinned
+  → the `(1/6−ξ)R` conclusion fails; the `1/6` genuinely flows from the falsifiable gauge, not a fresh citation.
+  `#print axioms` = `[propext, Classical.choice, Quot.sound]`; budget 0; pinned in `AxiomAudit.lean`. HONEST: κ=1/6
+  now gauge-derived in the a₁ accounting — still NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel.
 
 ## Verbatim HAVE / HAVE-NOT
 - **HAVE:** "The Riemann-normal-coordinate `√det g = 1 − ⅙R_{cd}x^cx^d` expansion is machine-checked on the component
@@ -99,3 +110,12 @@ RNC3 lands the gauge-derived (not carried) `−⅓`.
   atom), `sum_pd_christoffel_trace`, `pd_christoffel_solve` (the finite `linarith` inversion), `sum_riemann_ii_zero`.
   HONEST: the `⅙` normalization ONLY — NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel. NEXT: RNC4
   (wire the gauge-derived Ricci data into `heat_a1_of_RNC`, discharging its cited `κ=1/6`).
+- **2026-07-06 (RNC4 CLOSED — κ=1/6 GAUGE-DERIVED IN THE a₁ ACCOUNTING):** `QIQTH/RNCExpansion.lean` extended
+  AXIOM-FREE (std-3, `+ import QIQTH.HeatKernelA1`), `lake build QIQTH.RNCExpansion` green, `#print axioms
+  heat_a1_of_gauge = [propext, Classical.choice, Quot.sound]`, budget 0. `heat_a1_of_gauge` wires RNC3's
+  `sqrtdet_taylor_coeff_of_gauge` into `HeatKernelA1.heat_a1_of_RNC_derived`: shape (A) — `heat_a1_of_RNC`'s κ is the
+  discharge-able hypothesis `hκ : κ=1/6`, so the citation is DISCHARGED. κ is defined (`hκgeo`) as the √det g measure
+  coefficient; the gauge forces its value to `1/6` at a curved point (`hRic`), which feeds the assembly. The theorem
+  carries `hgauge` (falsifiable) as the source of the `1/6`, NOT a fresh κ citation (sharp test passes: remove
+  `hgauge` → κ unpinned → conclusion fails). RNC campaign RNC1–RNC4 COMPLETE. HONEST: κ=1/6 gauge-derived in the a₁
+  accounting ONLY — still NOT numerical-G (N, Λ_s, E/ξ potential term remain), NOT a curved heat kernel.
