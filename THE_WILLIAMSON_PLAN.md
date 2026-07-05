@@ -192,3 +192,38 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   finrank-indexed real-normal-form induction). youlaDecomp_of_antisymm STILL carried; W9 discharges
   the even-multiplicity/complex-structure INGREDIENT the assembly needs, NOT the concrete O.
   Std-3, budget 0. NOT faked, NOT a Lean axiom.
+
+- **2026-07-05** — **YOULA W10 — the abstract dimension-halving RECURSION attempted end-to-end;
+  two new recursion primitives DERIVED; O-assembly reduced to a pinned LABOR wall (Mathlib "no
+  support" claim CORRECTED).** A genuine, determined attempt to CLOSE `youlaDecomp_of_antisymm`
+  via the classical `finrank`-induction, worked at the abstract inner-product-space level.
+  §RealYoulaRecursion, 2 new axiom-free (std-3) lemmas in WilliamsonNormalForm.lean:
+  (1) `antisymm_card_even` — a NONSINGULAR real antisymmetric matrix has EVEN index card
+  (`Bᵀ=−B ⟹ det B = det Bᵀ = det(−B) = (−1)^{card}·det B`; card odd ⟹ det=0 ⊥ `IsUnit`). The
+  even-multiplicity BACKBONE: applied to `a` on `(ker a)ᗮ` (nonsingular skew there) ⟹
+  `Even(finrank(ker a))`, so the `ν=0` kernel block is pairable (nonzero kernel ⟹ ≥2 dims).
+  (2) `skewAdjoint_orthogonal_invariant` — for skew-adjoint `a` (`⟪ax,y⟫=−⟪x,ay⟫`), `Pᗮ` is
+  `a`-invariant when `P` is (`⟪ay,x⟫=0 ∧ ⟪ay,x⟫=−⟪y,ax⟫ ⟹ ⟪y,ax⟫=0`). The RECURSION ENGINE:
+  after splitting a 2×2 block `P=span{u,a u}`, `a` restricts skew-adjoint to `Pᗮ`.
+  **Mathlib CORRECTION (vs W7–W9):** the `l⊕l` gluing does NOT lack Mathlib support — the
+  primitives are present: `OrthonormalBasis.prod` (ON basis of `WithLp 2 (E×F)` indexed by `ι₁⊕ι₂`),
+  `Submodule.orthogonalDecomposition` (`E ≃ₗᵢ WithLp 2 (K×Kᗮ)`),
+  `LinearMap.IsSymmetric.hasEigenvalue_iSup_of_finiteDimensional` (eigenvector of `T:=a∘a`), and
+  `DirectSum.IsInternal.subordinateOrthonormalBasis`. The abstract induction (in scratch)
+  TYPE-CHECKS end-to-end through: eigenvector extraction → `μ≤0`, `ν=√(−μ)` → `a u=0`/`ν>0` split →
+  2×2 plane `P=span{u,a u}` → complement invariance (via lemma (2)) → restricted op
+  `aC:=(a.domRestrict Pᗮ).codRestrict Pᗮ` → RECURSIVE IH call on `Pᗮ` (drops `finrank` by 2).
+  **HONEST CONCRETE STALL** (verbatim `extract_goal` at the recursion point, with `u,w` unit ⊥,
+  `a u=ν•w`, `a w=−ν•u`, and IH giving `bC : OrthonormalBasis (κ'⊕κ') ℝ Pᗮ` + `νC`):
+  ```
+  ⊢ ∃ (κ : Type) (_ : Fintype κ) (b : OrthonormalBasis (κ ⊕ κ) ℝ E) (ν : κ → ℝ),
+      (∀ k, a (b (Sum.inl k)) = -ν k • b (Sum.inr k)) ∧
+      (∀ k, a (b (Sum.inr k)) =  ν k • b (Sum.inl k))
+  ```
+  The closing move — `κ := Unit ⊕ κ'`, `b := (OrthonormalBasis.prod (stdON of P) bC).map
+  (orthogonalDecomposition P).symm` reindexed `Fin 2 ⊕ (κ'⊕κ') → (Unit⊕κ')⊕(Unit⊕κ')`, then verify
+  the three `a`-action eqns through the isometry — has ALL primitives in Mathlib but is a large,
+  purely mechanical index/coercion assembly. It is a **formalization-LABOR wall, NOT a
+  missing-lemma wall** (the honest correction to the W7–W9 framing). `youlaDecomp_of_antisymm`
+  STILL carried; W10 lands the two recursion primitives + the exact residual goal. NO sorry in the
+  committed file (the induction skeleton lived only in scratch, now deleted). Std-3, budget 0.

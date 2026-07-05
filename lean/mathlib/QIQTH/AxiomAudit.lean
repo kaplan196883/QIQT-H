@@ -9126,6 +9126,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Williamson.antisymm_sq_eq_smul_on_eigenspace
 #print axioms QIQTH.Williamson.antisymm_eigenspace_even
 #print axioms QIQTH.Williamson.antisymm_negSqEigenvalues_nonneg
+-- THE WILLIAMSON YOULA W10 (WilliamsonNormalForm.lean §RealYoulaRecursion): the abstract dimension-halving
+-- recursion primitives + the HONEST CONCRETE STALL. antisymm_card_even: a nonsingular real antisymmetric
+-- matrix has EVEN index card (det B = det Bᵀ = det(-B) = (-1)^{card}det B ⟹ card odd forces det=0, ⊥ IsUnit) --
+-- the even-multiplicity backbone (applied to a on (ker a)ᗮ ⟹ Even(finrank ker a), so the ν=0 kernel block is
+-- pairable). skewAdjoint_orthogonal_invariant: for skew-adjoint a (⟪ax,y⟫=-⟪x,ay⟫), Pᗮ is a-invariant when P
+-- is (the recursion engine: a restricts to Pᗮ after splitting a 2×2 block). CORRECTION to W7-W9: the l⊕l
+-- gluing DOES have Mathlib support (OrthonormalBasis.prod + Submodule.orthogonalDecomposition +
+-- hasEigenvalue_iSup_of_finiteDimensional); the abstract induction type-checks through eigenvector→plane→
+-- complement→restricted-op→IH-recursion; the residual is the mechanical basis-glue/reindex/a-action
+-- verification (formalization-labor wall, NOT missing-lemma). youlaDecomp_of_antisymm STILL carried. Std 3.
+#print axioms QIQTH.Williamson.antisymm_card_even
+#print axioms QIQTH.Williamson.skewAdjoint_orthogonal_invariant
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law
