@@ -1,6 +1,6 @@
-# THE WILLIAMSON CAMPAIGN — N-mode symplectic diagonalization, Youla carried (W1–W6)
+# THE WILLIAMSON CAMPAIGN — N-mode symplectic diagonalization, UNCONDITIONAL (W1–W12)
 
-**Status:** COMPLETE (2026-07-05) — W1–W6 landed (W3 S-construction + W2 Youla carried house-style). Axiom-free std-3, budget 0. **Loop:** fe280fa3. **Commits LOCAL ONLY** (session no-push).
+**Status:** COMPLETE + **UNCONDITIONAL** (2026-07-05) — W1–W12 landed. W11 discharged Youla at the abstract operator level (`youla_pairing`); **W12 closed the concrete `Matrix → YoulaDecomp` bridge (`youlaDecomp_of_antisymm`), discharging the LAST carry** ⟹ Williamson's symplectic diagonalization is now UNCONDITIONAL for every real symmetric PD matrix (`williamsonDecomp_of_posDef` / `williamson_exists`, taking only `M.PosDef`). Axiom-free std-3, budget 0. **Commits LOCAL ONLY** (session no-push).
 **Consult:** fable high-reasoning agent ae88cddd312739cba (2026-07-05) — NOT a wall; a genuine
 4–6 increment house-style campaign, matrix sqrt de-risked in-repo, single carry = Youla.
 
@@ -253,3 +253,27 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   (`E := EuclideanSpace ℝ (l⊕l)`, `a := toEuclideanLin A`, ON basis → orthogonal `O` via
   `OrthonormalBasis.toMatrix`, match `fromBlocks`) is the NEXT increment; `youlaDecomp_of_antisymm`
   as a `YoulaDecomp`-structure inhabitant is one `toMatrix` hop away.
+
+- **2026-07-05** — **YOULA W12 — the concrete `Matrix → YoulaDecomp` bridge CLOSED ⟹ WILLIAMSON IS NOW
+  UNCONDITIONAL (the last carry DISCHARGED, no sorry).** `§ConcreteYoulaBridge` in
+  `WilliamsonNormalForm.lean`: `youlaDecomp_of_antisymm (A) (hA : Aᵀ = -A) : YoulaDecomp A` — for ANY
+  real antisymmetric matrix `A`, a genuine `YoulaDecomp A` is BUILT (no longer carried). It instantiates
+  the abstract `youla_pairing` (W11) at `E := EuclideanSpace ℝ (l⊕l)`, `a := Matrix.toEuclideanLin A`:
+  skew-adjointness `⟪a x,y⟫ = -⟪x,a y⟫` from `Matrix.toEuclideanLin_conjTranspose_eq_adjoint`
+  (`a.adjoint = toEuclideanLin Aᴴ = toEuclideanLin (-A) = -a`, over ℝ where `ᴴ = ᵀ`), and
+  `Even (finrank ℝ E) = Even (2·card l)`. From the pairing's ON basis `b : OrthonormalBasis (κ⊕κ) ℝ E`
+  and `ν₀ ≥ 0`, reindex `κ ≃ l` (`Fintype.equivOfCardEq`, `card (κ⊕κ) = finrank E = card (l⊕l)`) to
+  `b' : OrthonormalBasis (l⊕l) ℝ E`, `ν := ν₀ ∘ e.symm`. The orthogonal `O :=
+  (EuclideanSpace.basisFun (l⊕l) ℝ).toBasis.toMatrix b'` is in `orthogonalGroup`
+  (`OrthonormalBasis.toMatrix_orthonormalBasis_mem_orthogonal`), entries `O i j = (b' j) i`
+  (`Basis.toMatrix_apply` + `coe_toBasis_repr_apply` + `basisFun_repr`); the crux
+  `(Oᵀ A O) i j = ⟪b' i, a (b' j)⟫` (via `(A O) p j = (a (b' j)) p` from `ofLp ∘ toEuclideanLin` and
+  `Oᵀ i p = (b' i) p`, `PiLp.inner_apply` + `RCLike.inner_apply'` + `conj_trivial`) is matched entrywise
+  to `fromBlocks 0 (diag ν) (-(diag ν)) 0` by the block pairing `hBlk1/2` + orthonormality
+  (`orthonormal_iff_ite`). Since `YoulaDecomp A` is DATA, the `Prop` `∃` of `youla_pairing` is threaded
+  through `Nonempty (YoulaDecomp A)` + `Classical.choice`. **This discharges the LAST carry.** Composed
+  capstones: `williamsonDecomp_of_posDef (M) (hM : M.PosDef) : WilliamsonDecomp M` (= `williamson_of_youla`
+  W6 ∘ `youlaDecomp_of_antisymm (williamsonAux_antisymm M hM)` W3) and `williamson_exists (M) (hM) :
+  Nonempty (WilliamsonDecomp M)`. **NO carried hypothesis remains — Williamson's symplectic
+  diagonalization is UNCONDITIONAL for every real symmetric PD matrix.** `#print axioms` of all three
+  = `{propext, Classical.choice, Quot.sound}` (Std-3), budget 0, NO sorry.

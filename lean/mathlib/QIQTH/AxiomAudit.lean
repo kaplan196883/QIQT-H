@@ -9153,6 +9153,21 @@ namespace QIQTH.AxiomAudit
 -- remains the next increment). Std 3.
 #print axioms QIQTH.Williamson.youla_pairing
 #print axioms QIQTH.Williamson.youla_pairing_aux
+-- THE WILLIAMSON YOULA W12 (WilliamsonNormalForm.lean §ConcreteYoulaBridge): the concrete
+-- Matrix → YoulaDecomp bridge, CLOSING the last carry. youlaDecomp_of_antisymm: for a real antisymmetric
+-- A (Aᵀ=-A) builds a genuine YoulaDecomp A by instantiating the abstract youla_pairing (W11) at
+-- E:=EuclideanSpace ℝ (l⊕l), a:=toEuclideanLin A (skew-adjoint via toEuclideanLin_conjTranspose_eq_adjoint:
+-- a.adjoint = toEuclideanLin Aᴴ = toEuclideanLin(-A) = -a; Even(finrank E)=Even(2·card l)), reindexing the
+-- ON block basis κ⊕κ ≃ l⊕l (equal card) and reading off the orthogonal O :=
+-- (basisFun).toBasis.toMatrix b' (∈ orthogonalGroup via toMatrix_orthonormalBasis_mem_orthogonal), with
+-- (OᵀAO) i j = ⟪b' i, a(b' j)⟫ matched entrywise to fromBlocks 0 (diag ν) (-(diag ν)) 0 by the block pairing
+-- + orthonormality. Nonempty+Classical.choice thread the Prop ∃ into the YoulaDecomp DATA. This DISCHARGES
+-- the Youla carry ⟹ Williamson UNCONDITIONAL: williamsonDecomp_of_posDef (M.PosDef ⟹ WilliamsonDecomp M,
+-- composing williamson_of_youla W6 + williamsonAux_antisymm W3 + youlaDecomp_of_antisymm) and its existence
+-- capstone williamson_exists. NO carried hypothesis remains. Std 3.
+#print axioms QIQTH.Williamson.youlaDecomp_of_antisymm
+#print axioms QIQTH.Williamson.williamsonDecomp_of_posDef
+#print axioms QIQTH.Williamson.williamson_exists
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

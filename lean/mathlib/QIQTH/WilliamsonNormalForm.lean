@@ -95,6 +95,7 @@ import Mathlib.Analysis.Matrix.Order
 import Mathlib.LinearAlgebra.Eigenspace.Basic
 import Mathlib.LinearAlgebra.Determinant
 import Mathlib.Analysis.InnerProductSpace.Orthogonal
+import Mathlib.Analysis.InnerProductSpace.Adjoint
 import QIQTH.GaussianStateEntropy
 
 namespace QIQTH.Williamson
@@ -1100,5 +1101,142 @@ theorem youla_pairing {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ 
   youla_pairing_aux (finrank ℝ E) a ha rfl hdim
 
 end AbstractYoulaPairing
+
+/-! ### W12 — the concrete `Matrix → YoulaDecomp` bridge: `youlaDecomp_of_antisymm`, CLOSING the carry
+
+This lands the concrete bridge that instantiates the abstract operator pairing `youla_pairing` (W11) at
+the Euclidean matrix model, **discharging the last carried hypothesis** `YoulaDecomp`.  For a real
+antisymmetric matrix `A` (`Aᵀ = -A`), we build a genuine `YoulaDecomp A`:
+
+* `E := EuclideanSpace ℝ (l ⊕ l)`, `a := Matrix.toEuclideanLin A`; skew-adjointness `⟪a x, y⟫ =
+  -⟪x, a y⟫` from `Matrix.toEuclideanLin_conjTranspose_eq_adjoint` (`a.adjoint = toEuclideanLin Aᴴ =
+  toEuclideanLin (-A) = -a`), and `Even (finrank ℝ E) = Even (2 · card l)`.
+* `youla_pairing a ha hdim` furnishes an ON basis `b : OrthonormalBasis (κ ⊕ κ) ℝ E` and `ν₀ ≥ 0`
+  with the rotation pairing.  Since `card (κ ⊕ κ) = finrank E = card (l ⊕ l)`, reindex `κ ≃ l`
+  (`Fintype.equivOfCardEq`) to `b' : OrthonormalBasis (l ⊕ l) ℝ E` and `ν := ν₀ ∘ e.symm`.
+* The orthogonal `O := (EuclideanSpace.basisFun (l ⊕ l) ℝ).toBasis.toMatrix b'` is in
+  `orthogonalGroup` (`OrthonormalBasis.toMatrix_orthonormalBasis_mem_orthogonal`), with entries
+  `O i j = (b' j) i` (`Basis.toMatrix_apply` + `basisFun_repr`); the key
+  `(Oᵀ A O) i j = ⟪b' i, a (b' j)⟫` reduces via the columns `(A O) p j = (a (b' j)) p` and
+  `Oᵀ i p = (b' i) p`, and the block pairing + orthonormality (`orthonormal_iff_ite`) match it
+  entrywise to `fromBlocks 0 (diagonal ν) (-(diagonal ν)) 0`.
+
+Because `YoulaDecomp A` is DATA (a structure), the existence delivered by `youla_pairing` (a `Prop`
+`∃`) is threaded through `Nonempty (YoulaDecomp A)` and `Classical.choice`.  **This closes the Youla
+carry**: composing with `williamson_of_youla` (W6) and `williamsonAux_antisymm` (W3) makes Williamson
+**UNCONDITIONAL** — see `williamsonDecomp_of_posDef` / `williamson_exists` below.  Axiom-free (std-3). -/
+
+section ConcreteYoulaBridge
+
+open Module
+open scoped InnerProductSpace RealInnerProductSpace
+
+/-- **The concrete Youla decomposition of a real antisymmetric matrix — the carry, CLOSED.**  For any
+    real antisymmetric `A` (`Aᵀ = -A`) there is an orthogonal `O` bringing `A` to the block
+    antisymmetric normal form `Oᵀ A O = [[0, diagonal ν], [-(diagonal ν), 0]]` with `ν ≥ 0`.  Built by
+    instantiating the abstract operator pairing `youla_pairing` at `E := EuclideanSpace ℝ (l ⊕ l)`,
+    `a := Matrix.toEuclideanLin A`, and transporting the ON block basis into the concrete orthogonal
+    `O`.  This **discharges** the previously-carried `YoulaDecomp` existence. -/
+noncomputable def youlaDecomp_of_antisymm {l : Type*} [Fintype l] [DecidableEq l]
+    (A : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hA : Aᵀ = -A) : YoulaDecomp A := by
+  have hex : Nonempty (YoulaDecomp A) := by
+    classical
+    set a : EuclideanSpace ℝ (l ⊕ l) →ₗ[ℝ] EuclideanSpace ℝ (l ⊕ l) :=
+      Matrix.toEuclideanLin A with ha_def
+    -- skew-adjointness of `a` over ℝ
+    have hadj : a.adjoint = -a := by
+      rw [ha_def, ← Matrix.toEuclideanLin_conjTranspose_eq_adjoint,
+          Matrix.conjTranspose_eq_transpose_of_trivial, hA, map_neg]
+    have ha : ∀ x y, ⟪a x, y⟫_ℝ = -⟪x, a y⟫_ℝ := by
+      intro x y
+      rw [← LinearMap.adjoint_inner_right, hadj, LinearMap.neg_apply, inner_neg_right]
+    -- even dimension
+    have hdim : Even (finrank ℝ (EuclideanSpace ℝ (l ⊕ l))) := by
+      rw [finrank_euclideanSpace, Fintype.card_sum]
+      exact ⟨Fintype.card l, rfl⟩
+    -- the abstract Youla pairing (W11)
+    obtain ⟨κ, instκ, b, ν₀, hν₀pos, hblk1, hblk2⟩ := youla_pairing a ha hdim
+    letI : Fintype κ := instκ
+    letI : DecidableEq κ := Classical.decEq κ
+    -- reindex `κ ≃ l` (equal cardinalities)
+    have hcard : Fintype.card κ = Fintype.card l := by
+      have h1 : finrank ℝ (EuclideanSpace ℝ (l ⊕ l)) = Fintype.card (κ ⊕ κ) :=
+        finrank_eq_card_basis b.toBasis
+      rw [finrank_euclideanSpace] at h1
+      simp only [Fintype.card_sum] at h1
+      omega
+    set e : κ ≃ l := Fintype.equivOfCardEq hcard with he_def
+    set b' : OrthonormalBasis (l ⊕ l) ℝ (EuclideanSpace ℝ (l ⊕ l)) :=
+      b.reindex (e.sumCongr e) with hb'_def
+    set ν : l → ℝ := fun i => ν₀ (e.symm i) with hν_def
+    have hν : ∀ i, 0 ≤ ν i := fun i => hν₀pos (e.symm i)
+    have hb'inl : ∀ i, b' (Sum.inl i) = b (Sum.inl (e.symm i)) := by
+      intro i
+      rw [hb'_def, b.reindex_apply, Equiv.sumCongr_symm, Equiv.sumCongr_apply, Sum.map_inl]
+    have hb'inr : ∀ i, b' (Sum.inr i) = b (Sum.inr (e.symm i)) := by
+      intro i
+      rw [hb'_def, b.reindex_apply, Equiv.sumCongr_symm, Equiv.sumCongr_apply, Sum.map_inr]
+    have hBlk1 : ∀ i, a (b' (Sum.inl i)) = -ν i • b' (Sum.inr i) := by
+      intro i; rw [hb'inl i, hblk1 (e.symm i), hb'inr i]
+    have hBlk2 : ∀ i, a (b' (Sum.inr i)) = ν i • b' (Sum.inl i) := by
+      intro i; rw [hb'inr i, hblk2 (e.symm i), hb'inl i]
+    -- the orthogonal `O` = change of basis from the standard basis to `b'`
+    set stdB := EuclideanSpace.basisFun (l ⊕ l) ℝ with hstdB
+    set O : Matrix (l ⊕ l) (l ⊕ l) ℝ := stdB.toBasis.toMatrix b' with hO_def
+    have hOrth : O ∈ Matrix.orthogonalGroup (l ⊕ l) ℝ :=
+      stdB.toMatrix_orthonormalBasis_mem_orthogonal b'
+    have hOentry : ∀ i j, O i j = (b' j) i := by
+      intro i j
+      rw [hO_def, Basis.toMatrix_apply, OrthonormalBasis.coe_toBasis_repr_apply,
+          EuclideanSpace.basisFun_repr]
+    -- the `j`-th column of `A * O` is the coordinate vector of `a (b' j)`
+    have hAO : ∀ i j, (A * O) i j = (a (b' j)) i := by
+      intro i j
+      have h1 : (a (b' j)) i = ∑ p, A i p * (b' j) p := by
+        rw [ha_def]; rfl
+      rw [h1, Matrix.mul_apply]
+      exact Finset.sum_congr rfl (fun p _ => by rw [hOentry p j])
+    -- `(Oᵀ A O) i j = ⟪b' i, a (b' j)⟫`
+    have hMatEntry : ∀ i j, (Oᵀ * A * O) i j = ⟪b' i, a (b' j)⟫_ℝ := by
+      intro i j
+      rw [Matrix.mul_assoc, Matrix.mul_apply, PiLp.inner_apply]
+      refine Finset.sum_congr rfl (fun p _ => ?_)
+      rw [Matrix.transpose_apply, hAO p j, hOentry p i, RCLike.inner_apply', conj_trivial]
+    -- the block antisymmetric normal form, entrywise
+    have hNormal : Oᵀ * A * O
+        = Matrix.fromBlocks 0 (Matrix.diagonal ν) (-(Matrix.diagonal ν)) 0 := by
+      ext i j
+      rw [hMatEntry i j]
+      rcases j with k | k
+      · rw [hBlk1 k, real_inner_smul_right, orthonormal_iff_ite.mp b'.orthonormal i (Sum.inr k)]
+        rcases i with p | p
+        · rw [Matrix.fromBlocks_apply₁₁]; simp
+        · rw [Matrix.fromBlocks_apply₂₁, Matrix.neg_apply, Matrix.diagonal_apply]
+          by_cases hpk : p = k <;> simp [hpk]
+      · rw [hBlk2 k, real_inner_smul_right, orthonormal_iff_ite.mp b'.orthonormal i (Sum.inl k)]
+        rcases i with p | p
+        · rw [Matrix.fromBlocks_apply₁₂, Matrix.diagonal_apply]
+          by_cases hpk : p = k <;> simp [hpk]
+        · rw [Matrix.fromBlocks_apply₂₂]; simp
+    exact ⟨⟨O, hOrth, ν, hν, hNormal⟩⟩
+  exact hex.some
+
+/-- **Williamson's theorem — UNCONDITIONAL.**  Every real symmetric positive-definite `2n × 2n` matrix
+    `M` admits a `WilliamsonDecomp M`: a symplectic congruence `S` bringing `M` to the block-diagonal
+    normal form `Sᵀ M S = diagonal ν ⊕ diagonal ν` with nonnegative symplectic eigenvalues `ν`.  This
+    composes the derived S-construction `williamson_of_youla` (W6) with the now-discharged Youla datum
+    `youlaDecomp_of_antisymm (williamsonAux_antisymm M hM)` — **no carried hypothesis remains**. -/
+noncomputable def williamsonDecomp_of_posDef (M : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hM : M.PosDef) :
+    WilliamsonDecomp M :=
+  williamson_of_youla M hM (youlaDecomp_of_antisymm _ (williamsonAux_antisymm M hM))
+
+/-- **Williamson's theorem, existence form (UNCONDITIONAL).**  A real symmetric positive-definite `M`
+    has an inhabited `WilliamsonDecomp M`, with no carried hypothesis.  This is the propositional
+    capstone: `williamsonDecomp_of_posDef` produces the actual symplectic diagonalizing data. -/
+theorem williamson_exists (M : Matrix (l ⊕ l) (l ⊕ l) ℝ) (hM : M.PosDef) :
+    Nonempty (WilliamsonDecomp M) :=
+  ⟨williamsonDecomp_of_posDef M hM⟩
+
+end ConcreteYoulaBridge
 
 end QIQTH.Williamson
