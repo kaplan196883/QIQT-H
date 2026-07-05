@@ -1380,6 +1380,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 - **Genuine, axiom-free, UNBOUNDED machinery [AF]:** `Spectral.stoneGen_isSelfAdjoint` (unbounded Stone, via
   Gårding-mollifier density + deficiency indices — Mathlib lacks this); `PVM_of_selfAdjoint` (bounded);
   `boundedFC_mul` (bounded Borel FC multiplicativity); `fcOp` (unbounded `∫f dE`).
+- **Weyl pair at the spectral level [AF] std-3** (`PositionPVM`/`PVMConj`/`MomentumPVM`): the abstract
+  bounded-Borel functional calculus of the position PVM IS the concrete multiplication operator —
+  `boundedFC_positionPVM_eq_mulOp : Φ_position(φ) = M_φ` (matched via sesquilinear forms: `⟪z,M_φ z⟫ = ∫φ‖z‖²
+  = diagInt φ z`, whose polarization is `boundedFC`). `conj_boundedFC` (+ `conj_bilinDiag`) — the whole Borel
+  calculus is covariant under unitary conjugation, `Φ_{UPU⁻¹}(φ) = U∘Φ_P(φ)∘U⁻¹`. Combined:
+  `boundedFC_momentumPVM_eq_fourier_conj_mulOp : f(P) = ℱ∘M_f∘ℱ⁻¹` (since `momentumPVM = positionPVM.conj ℱ`).
+  This NAMES the momentum generator spectrally, completing the canonical Weyl pair `X = ∫x dE`, `P = ∫k dÊ` at
+  the bounded-calculus level. ⚠ COSMETIC for QG (the GR-chain momentum datum is already wired via the
+  self-adjoint `momentumOp`, `MomentumGenerator.lean`); the final `τ_t = e^{itP}` identification (the
+  `ℱ M_{e^{itk}} ℱ⁻¹ = τ_t` Fourier transfer) is the CARRIED labor-only frontier — a Schwartz-density argument,
+  NOT a Mathlib gap (`MomentumPVM.lean` CHECKPOINT).
 - **One-particle RvD Tomita–Takesaki [AF]** on a genuine `StandardSubspace` (IsCyclic+IsSeparating): `J²=1`,
   `JRJ=2−R` (the `JΔJ=Δ⁻¹` shadow), `modUnitary = Δ^{it}` with group law + strong continuity, `Δ^{it}𝒦=𝒦`,
   `JΔ^{it}=Δ^{it}J`; `modularGen_isSelfAdjoint` (self-adjoint modular Hamiltonian K) with `Δ^{it}=e^{−itK}`.

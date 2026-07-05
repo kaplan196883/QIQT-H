@@ -9486,5 +9486,19 @@ namespace QIQTH.AxiomAudit
 -- (the finite shadow of the √V_gen prediction; vanishes iff flat). It is NOT a derivation — QIQT-H posits the
 -- capacity and derives this consequence; svn_underdetermines_smax forces it to be a postulate. Axiom-free (std 3).
 #print axioms QIQTH.MaxEntropyCapacity.distinctive_gap
+-- ★ WEYL PAIR AT THE SPECTRAL LEVEL (PVM Borel-calculus tower): boundedFC_positionPVM_eq_mulOp — the abstract
+-- bounded-Borel functional calculus of the position PVM IS the concrete multiplication operator, Φ_position(φ)=M_φ
+-- (proved by matching sesquilinear forms: ⟪z,M_φ z⟫=∫φ‖z‖²=diagInt φ z, whose polarization is boundedFC). Then
+-- conj_boundedFC (+ conj_bilinDiag) — covariance of the whole Borel calculus under unitary conjugation,
+-- Φ_{UPU⁻¹}(φ)=U∘Φ_P(φ)∘U⁻¹. Combined: boundedFC_momentumPVM_eq_fourier_conj_mulOp — the momentum bounded-FC is
+-- Fourier-conjugated multiplication, f(P)=ℱ∘M_f∘ℱ⁻¹ (momentumPVM=positionPVM.conj ℱ). Axiom-free (std 3). This
+-- NAMES the momentum generator spectrally, completing the Weyl pair X=∫x dE, P=∫k dÊ at the bounded-calculus
+-- level. COSMETIC for QG (the GR-chain momentum datum is already wired via the self-adjoint momentumOp); the final
+-- τ_t=e^{itP} identification (the ℱ M_{e^{itk}} ℱ⁻¹=τ_t Fourier transfer) is the carried labor-only frontier
+-- (Schwartz-density argument, no Mathlib gap — see MomentumPVM.lean CHECKPOINT).
+#print axioms QIQTH.Spectral.Multiplication.boundedFC_positionPVM_eq_mulOp
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_bilinDiag
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.conj_boundedFC
+#print axioms QIQTH.Spectral.Multiplication.boundedFC_momentumPVM_eq_fourier_conj_mulOp
 
 end QIQTH.AxiomAudit

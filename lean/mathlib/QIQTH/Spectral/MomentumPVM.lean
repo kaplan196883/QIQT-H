@@ -102,4 +102,47 @@ theorem fourier_integral_norm_sq (x : Lp (α := ℝ) ℂ 2) :
     ∫ a, ‖((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm x) a‖ ^ 2 ∂(volume : Measure ℝ) = ‖x‖ ^ 2 := by
   rw [← norm_sq_eq_integral, LinearIsometryEquiv.norm_map]
 
+/-- **The momentum bounded-Borel functional calculus is the Fourier-conjugated multiplication operator:**
+    `f(P) = ℱ ∘ M_f ∘ ℱ⁻¹` for every bounded measurable symbol `f : ℝ → ℂ`. Concretely, the abstract Borel
+    functional calculus of the momentum observable `P` (built spectrally from the momentum PVM `Ê = ∫ dÊ`) is
+    the honest Fourier transform of multiplication by `f` in momentum space. This is the exact algebraic
+    combination of the two covariance results: `momentumPVM = positionPVM.conj ℱ`, so
+    `Φ_momentum(f) = ℱ ∘ Φ_position(f) ∘ ℱ⁻¹` (`conj_boundedFC`) and `Φ_position(f) = M_f`
+    (`boundedFC_positionPVM_eq_mulOp`). It realizes `f(P) = ℱ M_f ℱ⁻¹` at the level of bounded operators on
+    `L²(ℝ)`, axiom-free. -/
+theorem boundedFC_momentumPVM_eq_fourier_conj_mulOp {φ : ℝ → ℂ} (hφ : Measurable φ) {C : ℝ}
+    (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C) :
+    momentumPVM.boundedFC hφ hC0 hC
+      = (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ : Lp (α := ℝ) ℂ 2 →L[ℂ] Lp (α := ℝ) ℂ 2)
+        ∘L mulOp hφ hC0 hC
+        ∘L ((MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ).symm : Lp (α := ℝ) ℂ 2 →L[ℂ] Lp (α := ℝ) ℂ 2) := by
+  rw [show momentumPVM = (positionPVM (α := ℝ) (μ := (volume : Measure ℝ))).conj
+        (MeasureTheory.Lp.fourierTransformₗᵢ ℝ ℂ) from rfl,
+    ProjectionValuedMeasure.conj_boundedFC, boundedFC_positionPVM_eq_mulOp]
+
+/- **CHECKPOINT — the final Weyl-pair capstone `τ_t = e^{itP} = Φ_momentum(fun k => exp (t*k*I))`.**
+
+   By `boundedFC_momentumPVM_eq_fourier_conj_mulOp` (above) the remaining goal
+     `momentumPVM.boundedFC (fun k => Complex.exp (t * k * Complex.I)) = translationLp t`
+   is EXACTLY the operator identity
+     `ℱ ∘ M_{e^{i t k}} ∘ ℱ⁻¹ = τ_t`   (`(τ_t f)(x) = f (x + t)`),
+   i.e. "the Fourier transform conjugates modulation by the character `e^{i t k}` into translation by `t`".
+
+   This is a genuine `L²` OPERATOR identity, NOT a Mathlib gap — the function-level content is
+   `Fourier.fourierIntegral_comp_add_right` (Fourier turns a right-translation into multiplication by a phase,
+   `Mathlib/Analysis/Fourier/FourierTransform.lean`). The residual is pure LABOR (consult-confirmed, no missing
+   Mathlib theorem): `MeasureTheory.Lp.fourierTransformₗᵢ` is defined by extension-by-continuity from the
+   Schwartz maps (`fourierEquiv … |>.extendOfIsometry`, `LpSpace.lean`), so transferring the pointwise
+   modulation↔translation duality to the `L²` isometry needs a density argument:
+     (1) prove `ℱ (M_{e^{itk}} f) = τ_t (ℱ f)` on a dense set (`SchwartzMap.toLp`, via
+         `SchwartzMap.toLp_fourier_eq` + the pointwise `fourierIntegral_comp_add_right`, matching the exact
+         `e^{-2πi x·ξ}` normalization/sign of Mathlib's `fourierIntegral` — the delicate step), then
+     (2) extend to all of `L²` by continuity (both sides bounded operators, `DenseRange.induction_on`).
+   There is currently NO Mathlib lemma relating `fourierTransformₗᵢ` to translation/modulation, so both
+   halves must be built here. Increments 1–2 and the algebraic capstone above are the reusable
+   infrastructure this step consumes; landed green and axiom-free. The `τ_t = e^{itP}` identification is the
+   carried (labor-only) frontier. NB: this capstone is COSMETIC for the QG program — the GR-chain momentum
+   datum is already derived/wired via the self-adjoint `momentumOp` (`MomentumGenerator.lean`); this only
+   names the generator spectrally, completing the Weyl pair `X = ∫ x dE`, `P = ∫ k dÊ`. -/
+
 end QIQTH.Spectral.Multiplication

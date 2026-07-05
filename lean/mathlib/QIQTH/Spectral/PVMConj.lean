@@ -95,5 +95,32 @@ theorem conj_diagInt (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H)
     (P.conj U).diagInt f x = P.diagInt f (U.symm x) := by
   rw [diagInt, diagInt, conj_scalarMeasure_eq]
 
+/-- **The polarized sesquilinear form transforms covariantly under conjugation:**
+    `(P.conj U).bilinDiag f x y = P.bilinDiag f (U⁻¹ x) (U⁻¹ y)`. The bilinear datum `B_f` of the conjugated
+    PVM at `(x, y)` is that of the original PVM at the rotated pair `(U⁻¹ x, U⁻¹ y)` — immediate from the
+    covariance of the diagonal functional (`conj_diagInt`) and the ℂ-linearity of `U⁻¹`. -/
+theorem conj_bilinDiag (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H) (f : Ω → ℂ) (x y : H) :
+    (P.conj U).bilinDiag f x y = P.bilinDiag f (U.symm x) (U.symm y) := by
+  simp only [bilinDiag, conj_diagInt, map_add, map_sub, map_smul]
+
+/-- **The bounded-Borel functional calculus transforms covariantly under unitary conjugation:**
+    `Φ_{U P U⁻¹}(f) = U ∘ Φ_P(f) ∘ U⁻¹` for every bounded measurable `f`. The abstract Borel calculus of the
+    conjugated PVM `P.conj U` is the unitary conjugate of the calculus of `P`. This is the covariance that
+    transports the position-PVM calculus (`boundedFC = mulOp`) to the momentum PVM via the Fourier transform:
+    `Φ_momentum(f) = ℱ ∘ M_f ∘ ℱ⁻¹`. Proof: both sides have the same sesquilinear form,
+    `⟪x, (P.conj U).Φ(f) y⟫ = B_f^{P.conj U}(x,y) = B_f^P(U⁻¹x, U⁻¹y) = ⟪x, U Φ_P(f) U⁻¹ y⟫`
+    (`conj_bilinDiag` + unitarity of `U`). -/
+theorem conj_boundedFC (P : ProjectionValuedMeasure Ω H) (U : H ≃ₗᵢ[ℂ] H)
+    {f : Ω → ℂ} (hf : Measurable f) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖f ω‖ ≤ C) :
+    (P.conj U).boundedFC hf hC0 hC
+      = (U : H →L[ℂ] H) ∘L P.boundedFC hf hC0 hC ∘L (U.symm : H →L[ℂ] H) := by
+  refine ContinuousLinearMap.ext (fun y => ext_inner_left ℂ (fun x => ?_))
+  rw [(P.conj U).inner_boundedFC, conj_bilinDiag, ← P.inner_boundedFC hf hC0 hC]
+  simp only [ContinuousLinearMap.comp_apply, LinearIsometryEquiv.toContinuousLinearEquiv_symm,
+    ContinuousLinearEquiv.coe_coe, LinearIsometryEquiv.coe_toContinuousLinearEquiv,
+    LinearIsometryEquiv.coe_symm_toContinuousLinearEquiv]
+  rw [← LinearIsometryEquiv.inner_map_map U (U.symm x) (P.boundedFC hf hC0 hC (U.symm y)),
+    LinearIsometryEquiv.apply_symm_apply]
+
 end ProjectionValuedMeasure
 end QIQTH.Spectral

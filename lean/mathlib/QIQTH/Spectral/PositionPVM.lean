@@ -91,4 +91,34 @@ theorem positionPVM_diagInt (f : α → ℂ) (x : Lp ℂ 2 μ) :
   push_cast
   ring
 
+/-- **The bounded-Borel functional calculus of the position PVM is the multiplication operator:**
+    `Φ(φ) = M_φ` for every bounded measurable symbol `φ`. That is, the abstract Borel functional calculus
+    built from the position PVM (`boundedFC`) coincides with the concrete multiplication operator `mulOp φ`
+    on `L²(μ)`. Proof: both are determined by their sesquilinear forms; the diagonal of `M_φ` is the position
+    diagonal functional (`⟪z, M_φ z⟫ = ∫ φ ‖z‖² = diagInt φ z`), and the PVM's `boundedFC` is the polarization
+    of exactly this diagonal (`inner_boundedFC` + `bilinDiag`), so the two sesquilinear forms agree and hence
+    the operators agree. This anchors the position PVM's Borel calculus to the honest multiplication operator
+    (the `f ↦ f(X)` functional calculus of the position observable `X`). -/
+theorem boundedFC_positionPVM_eq_mulOp {φ : α → ℂ} (hφ : Measurable φ) {C : ℝ}
+    (hC0 : 0 ≤ C) (hC : ∀ s, ‖φ s‖ ≤ C) :
+    (positionPVM (α := α) (μ := μ)).boundedFC hφ hC0 hC = mulOp hφ hC0 hC := by
+  -- The quadratic form of `M_φ` is the position diagonal functional `diagInt φ`.
+  have hQ : ∀ z : Lp ℂ 2 μ,
+      (positionPVM (α := α) (μ := μ)).diagInt φ z = inner ℂ z (mulOp hφ hC0 hC z) := by
+    intro z
+    rw [positionPVM_diagInt, MeasureTheory.L2.inner_def]
+    refine MeasureTheory.integral_congr_ae ?_
+    filter_upwards [mulOp_coeFn hφ hC0 hC z] with a e1
+    have hcm : (starRingEnd ℂ) (z a) * z a = (‖z a‖ ^ 2 : ℂ) := by
+      simpa using RCLike.conj_mul (z a)
+    rw [e1, RCLike.inner_apply', mul_left_comm, hcm]
+  -- Two operators agree iff their sesquilinear forms agree.
+  refine ContinuousLinearMap.ext (fun y => ext_inner_left ℂ (fun x => ?_))
+  rw [(positionPVM (α := α) (μ := μ)).inner_boundedFC, ProjectionValuedMeasure.bilinDiag]
+  simp only [hQ, map_add, map_sub, map_smul, inner_add_left, inner_add_right,
+    inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right,
+    Complex.conj_I, ← pow_two, Complex.I_sq, mul_add, mul_sub, ← mul_assoc,
+    mul_neg, neg_neg, one_mul, neg_one_mul, sub_sub]
+  ring
+
 end QIQTH.Spectral.Multiplication
