@@ -9010,6 +9010,14 @@ namespace QIQTH.AxiomAudit
 -- MECHANISM for ALL forward path lengths (removes the M6 vertex-revisit obstruction for
 -- forward paths). Carried: the extraction (walk -> ForwardAugPath), mixed direction, existence.
 #print axioms QIQTH.QG.forwardAugPath_augments
+-- THE MAX-FLOW-MIN-CUT M8 (QG/MaxFlowMinCut.lean cont.): the EXTRACTION degree-structure --
+-- SimpleForwardPath (injective Fin-indexed simple path) -> ForwardAugPath: the walk->degree-
+-- structure extraction DERIVED via injective-fibre counting (card{edge} = 0/1 from injectivity);
+-- eps eliminated internally (min forward slack > 0); augment_of_simpleForwardPath (a simple
+-- forward path yields a bigger flow, fully derived). Only the DIRECTED DEDUP (ReflTransGen walk
+-- -> SimpleForwardPath) stays carried -- Mathlib's Walk.bypass/toPath are UNDIRECTED. Std 3.
+#print axioms QIQTH.QG.SimpleForwardPath.toForwardAugPath
+#print axioms QIQTH.QG.augment_of_simpleForwardPath
 -- THE WILLIAMSON W1-W2 (WilliamsonNormalForm.lean): the WilliamsonDecomp structure (symplectic
 -- S with S^T M S = D+D, symplectic eigenvalues nu) + symplectic algebra ((det S)^2 = 1 via
 -- Sᵀ J S = J, det of the block-diagonal) + the CARRIED YoulaDecomp real-skew normal form

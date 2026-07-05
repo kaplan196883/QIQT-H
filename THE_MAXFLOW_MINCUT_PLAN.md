@@ -129,3 +129,17 @@ check sibling jobs (stray website/.tex edits — LEAVE THEM) first; explicit git
   (ReflTransGen walk ⟹ a ForwardAugPath degree structure), (b) mixed forward/backward paths,
   (c) max-flow existence. Std-3, budget 0. Max-flow: combinatorial core (M1-M3) + the FULL
   forward-path augmentation mechanism (M4-M7) + only the extraction/mixed-direction/existence carried.
+
+- **2026-07-05** — **M8 LANDED (green) — the EXTRACTION degree-structure DERIVED.**
+  ForwardResidualStep (forward slack only); SimpleForwardPath (an injective Fin-indexed simple
+  path s→t with per-step forward slack — injectivity IS the dedup); ★ toForwardAugPath — the
+  walk→degree-structure extraction DERIVED (hDeg/hs/ht from injectivity via
+  card_filter_fiber_of_injective: card{v | edge u v} = 0/1 from the injective fibre); ε
+  ELIMINATED internally (forwardAugPath_augments' — min forward slack over the finite path is
+  a positive ε); augment_of_simpleForwardPath — a SimpleForwardPath alone ⟹ a strictly larger
+  flow (s≠t derived from injectivity). Real finding: Mathlib's Walk.bypass/toPath are
+  UNDIRECTED (fromRel symmetrizes), so they cannot give a forward directed path — justifying
+  the carry. So the extraction's degree-structure half is now DERIVED; the ONE remaining carry
+  of it is the DIRECTED DEDUP (ReflTransGen walk ⟹ SimpleForwardPath). Std-3, budget 0.
+  Max-flow: core (M1-M3) + full forward augmentation mechanism (M4-M7) + the extraction
+  degree-structure (M8), carrying only the directed dedup + mixed-direction + existence.

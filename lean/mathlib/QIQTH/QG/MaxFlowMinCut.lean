@@ -2,7 +2,7 @@
 Copyright (c) 2026 PK. All rights reserved.
 Released under Apache 2.0 license.
 
-# M1–M7 — the combinatorial core of max-flow = min-cut
+# M1–M8 — the combinatorial core of max-flow = min-cut
 
 Built on Track C's flow/cut framework (`EmergentSpacetime.lean`, `section Flow`). This file delivers the
 combinatorial content of the hard half of max-flow = min-cut, discharging the combinatorial part of
@@ -36,6 +36,21 @@ combinatorial content of the hard half of max-flow = min-cut, discharging the co
   identity `∑ v, (if P u v then ε else 0) = ε·(filter (P u ·) univ).card` plus the degree conditions.
   This lifts M6's hand-built 1- and 2-edge cases to the augmentation MECHANISM for **any** forward
   simple path of arbitrary length.
+* **M8** `ForwardResidualStep` / `SimpleForwardPath` / `SimpleForwardPath.toForwardAugPath` /
+  `forwardAugPath_augments'` / `augment_of_simpleForwardPath` — **the degree-structure extraction.** M7
+  presupposed the degree-structured `ForwardAugPath`; M8 DERIVES that degree structure from a *simple*
+  (de-duplicated) forward path, carried as an injective `Fin (n+1)`-indexed vertex sequence with forward
+  slack on every step (`SimpleForwardPath`). By exact fibre counting — `card {v | edge u v} = card {i |
+  source i = u}` and "the card of an injective fibre is `0`/`1`" (`card_filter_fiber_of_injective`) — the
+  interior in/out balance (`hDeg`), source `+1`-out (`hs`) and sink `+1`-in (`ht`) fall out of
+  injectivity of `p`. `forwardAugPath_augments'` then **eliminates the uniform slack margin `ε`** (its
+  min over the finite nonempty path-edge set is positive), and `augment_of_simpleForwardPath` composes:
+  a simple forward residual path `s ⇝ t` alone yields a strictly larger flow (`s ≠ t` itself derived
+  from injectivity). What stays CARRIED is only the **directed dedup** — that a residual `ReflTransGen`
+  walk produces a `SimpleForwardPath` (the directed analogue of `SimpleGraph.Walk.bypass`; Mathlib's
+  `bypass`/`toPath` are undirected — `fromRel` symmetrises, giving `r u v ∨ r v u`, not the forward
+  direction). This splits M7's carried extraction (a) into a DERIVED degree-structure part and the lone
+  carried directed-dedup part.
 
 **Honest scope:** M1–M3 reduce ExactRT's gap to the single sharp condition `t ∉ residualCut cap f s`
 (no augmenting path from a maximum flow); M4–M5 derive that condition and the capstone
@@ -43,12 +58,17 @@ max-flow = min-cut from maximality, CARRYING the Ford–Fulkerson analytic conte
 augmenting path augments the flow value) as a named hypothesis — NOT proved here. **M6–M7 discharge the
 forward augmentation concretely**: M6 the one- and two-edge instances, M7 the *general* forward simple
 path presented as a degree-structured edge set with a uniform slack margin (full `IsSTFlow` re-proof,
-interior-vertex conservation via the degree structure, value up by `ε`). What remains CARRIED is: (a)
-that a residual `ReflTransGen` walk PRODUCES such a `ForwardAugPath` (the walk→simple-forward-path
-*extraction* with this degree structure), (b) mixed forward/backward (residual reverse-edge) paths, and
-(c) max-flow EXISTENCE (compactness / Ford–Fulkerson termination). M7 removes the length obstruction for
-forward paths — the conservation-via-degree argument is now fully general — leaving the extraction and
-mixed-direction/existence pieces. This is the finite (`V→V→ℝ`) network model, not a continuum RT.
+interior-vertex conservation via the degree structure, value up by `ε`). **M8 extracts the degree
+structure**: from a *simple* forward path (injective vertex sequence) it DERIVES the `ForwardAugPath`
+degree conditions by fibre counting and eliminates `ε`, so a simple forward path augments the flow
+outright. What remains CARRIED is: (a′) the **directed dedup** — that a residual `ReflTransGen` walk
+produces a *simple* forward path / `SimpleForwardPath` (repeated-vertex removal preserving endpoints and
+per-step forward slack; the directed analogue of `SimpleGraph.Walk.bypass`, unavailable off the shelf
+since Mathlib's undirected `bypass`/`fromRel` only yield `r u v ∨ r v u`); (b) mixed forward/backward
+(residual reverse-edge) paths; and (c) max-flow EXISTENCE (compactness / Ford–Fulkerson termination). M7
+removed the length obstruction and M8 the degree-extraction obstruction for forward paths, narrowing
+carry (a) to the single directed-dedup step. This is the finite (`V→V→ℝ`) network model, not a
+continuum RT.
 
 Axiom-free (standard `propext`/`Classical.choice`/`Quot.sound`; `open Classical` for the reachable-set
 filter's decidability is a local convenience, not a project axiom).
@@ -457,5 +477,206 @@ theorem forwardAugPath_augments {cap : V → V → ℝ} {s t : V} {f : V → V �
     rw [hout, hin, Q.hs]
     push_cast
     linarith
+
+/-! ### M8 — the extraction: a simple forward path yields a `ForwardAugPath`
+
+M7 proved the augmentation MECHANISM given a `ForwardAugPath` (a degree-structured directed edge set).
+M8 discharges the *extraction* of that degree structure: from a **simple** (de-duplicated) forward
+residual path — carried here as an injective `Fin`-indexed vertex sequence with forward slack on every
+step (`SimpleForwardPath`) — we DERIVE the full `ForwardAugPath` degree structure (interior in/out
+balance, source `+1` out, sink `+1` in) by exact fibre counting. We then eliminate the uniform slack
+margin `ε` (`forwardAugPath_augments'`) and compose (`augment_of_simpleForwardPath`), so a simple
+forward path alone augments the flow.
+
+**Derived here (machine-checked):** the entire degree-structure extraction (nodup/injective vertex
+sequence ⟹ the `hDeg`/`hs`/`ht` degree conditions), via `card {v | edge u v} = card {i | source i = u}`
+and "card of an injective fibre is `0`/`1`". Plus the internal derivation of `ε` (min forward slack over
+the finite path-edge set is positive).
+
+**Still carried (the one remaining piece of M7's carry (a)):** the *directed dedup* — that a residual
+`Relation.ReflTransGen (ForwardResidualStep cap f)` walk produces a `SimpleForwardPath` (removing
+repeated vertices from a directed walk while preserving endpoints and per-step forward slack). This is
+the directed analogue of `SimpleGraph.Walk.bypass`; Mathlib's `bypass`/`toPath` live on *undirected*
+`SimpleGraph` (`fromRel` symmetrises, so a walk edge only gives `r u v ∨ r v u`, not the forward
+direction we need), so the directed dedup is not available off the shelf. -/
+
+/-- **M8 — a forward residual step:** the forward edge `u→v` has unused capacity. Unlike the mixed
+`ResidualStep` (M2), this is forward-only — the natural edge relation for a forward augmenting path. -/
+def ForwardResidualStep (cap f : V → V → ℝ) (u v : V) : Prop :=
+  f u v < cap u v
+
+/-- **M8 — a simple forward augmenting path**, carried as an *injective* `Fin (n+1)`-indexed vertex
+sequence `p` from `s` (`p 0`) to `t` (`p (last n)`), `n ≥ 1`, with a forward residual step on every
+consecutive pair. Injectivity encodes that the path is simple (no repeated vertex) — this is the
+de-duplicated data from which the degree structure of a `ForwardAugPath` is extracted. -/
+structure SimpleForwardPath (cap : V → V → ℝ) (s t : V) (f : V → V → ℝ) where
+  /-- Number of edges (so `n+1` vertices); at least one edge. -/
+  n : ℕ
+  /-- The path has at least one edge. -/
+  hn : 1 ≤ n
+  /-- The vertex sequence. -/
+  p : Fin (n + 1) → V
+  /-- Simplicity: the vertex sequence has no repeats. -/
+  hp_inj : Function.Injective p
+  /-- The first vertex is the source. -/
+  hp0 : p 0 = s
+  /-- The last vertex is the sink. -/
+  hplast : p (Fin.last n) = t
+  /-- Every consecutive pair is a forward residual step (forward slack). -/
+  hstep : ∀ i : Fin n, ForwardResidualStep cap f (p i.castSucc) (p i.succ)
+
+/-- The directed edge relation of a `SimpleForwardPath`: `u→v` is an edge iff some consecutive pair of
+the vertex sequence is `(u, v)`. -/
+def SimpleForwardPath.edge {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleForwardPath cap s t f) (u v : V) : Prop :=
+  ∃ i : Fin SP.n, SP.p i.castSucc = u ∧ SP.p i.succ = v
+
+/-- **M8 helper — the card of an injective fibre is `0` or `1`.** For an injective `q : Fin n → W`, the
+number of indices mapping to `u` is `1` if `u` is hit and `0` otherwise. This is the arithmetic heart of
+the degree extraction: a simple path visits each vertex once, so each vertex has at most one out-edge and
+one in-edge. -/
+theorem card_filter_fiber_of_injective {n : ℕ} {W : Type*} [DecidableEq W]
+    (q : Fin n → W) (hq : Function.Injective q) (u : W) :
+    (Finset.univ.filter (fun i => q i = u)).card = if (∃ i, q i = u) then 1 else 0 := by
+  classical
+  by_cases h : ∃ i, q i = u
+  · obtain ⟨i0, hi0⟩ := h
+    rw [if_pos ⟨i0, hi0⟩, Finset.card_eq_one]
+    refine ⟨i0, ?_⟩
+    ext i
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_singleton]
+    exact ⟨fun hi => hq (hi.trans hi0.symm), fun hi => hi ▸ hi0⟩
+  · rw [if_neg h, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+    exact fun i _ hi => h ⟨i, hi⟩
+
+/-- **★★ M8 — the degree-structure extraction.** A `SimpleForwardPath` yields a `ForwardAugPath`: the
+degree conditions (`hDeg`/`hs`/`ht`) are DERIVED from injectivity of the vertex sequence by exact fibre
+counting, and forward slack (`hslack`) is exactly the per-step hypothesis. This discharges the
+walk→degree-structure part of M7's carried extraction; only the directed dedup (residual walk →
+`SimpleForwardPath`) remains carried. -/
+def SimpleForwardPath.toForwardAugPath {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (SP : SimpleForwardPath cap s t f) : ForwardAugPath cap s t f := by
+  classical
+  haveI : NeZero SP.n := ⟨by have := SP.hn; omega⟩
+  have hcs_inj : Function.Injective (fun i : Fin SP.n => SP.p i.castSucc) :=
+    SP.hp_inj.comp (Fin.castSucc_injective SP.n)
+  have hsucc_inj : Function.Injective (fun i : Fin SP.n => SP.p i.succ) :=
+    SP.hp_inj.comp (Fin.succ_injective SP.n)
+  -- out-degree of `u` = number of edge-sources equal to `u`
+  have outdeg_eq : ∀ u, (Finset.univ.filter (fun v => SP.edge u v)).card
+      = if (∃ i : Fin SP.n, SP.p i.castSucc = u) then 1 else 0 := by
+    intro u
+    have himg : Finset.univ.filter (fun v => SP.edge u v)
+        = (Finset.univ.filter (fun i : Fin SP.n => SP.p i.castSucc = u)).image
+            (fun i : Fin SP.n => SP.p i.succ) := by
+      ext v
+      simp only [SimpleForwardPath.edge, Finset.mem_filter, Finset.mem_univ, true_and,
+        Finset.mem_image]
+    rw [himg, Finset.card_image_of_injective _ hsucc_inj,
+      card_filter_fiber_of_injective _ hcs_inj u]
+  -- in-degree of `u` = number of edge-targets equal to `u`
+  have indeg_eq : ∀ u, (Finset.univ.filter (fun v => SP.edge v u)).card
+      = if (∃ i : Fin SP.n, SP.p i.succ = u) then 1 else 0 := by
+    intro u
+    have himg : Finset.univ.filter (fun v => SP.edge v u)
+        = (Finset.univ.filter (fun i : Fin SP.n => SP.p i.succ = u)).image
+            (fun i : Fin SP.n => SP.p i.castSucc) := by
+      ext v
+      simp only [SimpleForwardPath.edge, Finset.mem_filter, Finset.mem_univ, true_and,
+        Finset.mem_image]
+      constructor
+      · rintro ⟨i, h1, h2⟩; exact ⟨i, h2, h1⟩
+      · rintro ⟨i, h1, h2⟩; exact ⟨i, h2, h1⟩
+    rw [himg, Finset.card_image_of_injective _ hcs_inj,
+      card_filter_fiber_of_injective _ hsucc_inj u]
+  exact {
+    P := SP.edge
+    hDeg := by
+      intro u hus hut
+      rw [outdeg_eq u, indeg_eq u]
+      have hiff : (∃ i : Fin SP.n, SP.p i.castSucc = u) ↔ (∃ i : Fin SP.n, SP.p i.succ = u) := by
+        have cs : (∃ i : Fin SP.n, SP.p i.castSucc = u)
+            ↔ (∃ j : Fin (SP.n + 1), j ≠ Fin.last SP.n ∧ SP.p j = u) := by
+          constructor
+          · rintro ⟨i, rfl⟩; exact ⟨i.castSucc, Fin.castSucc_ne_last i, rfl⟩
+          · rintro ⟨j, hj, rfl⟩; exact ⟨j.castPred hj, by rw [Fin.castSucc_castPred]⟩
+        have sc : (∃ i : Fin SP.n, SP.p i.succ = u)
+            ↔ (∃ j : Fin (SP.n + 1), j ≠ 0 ∧ SP.p j = u) := by
+          constructor
+          · rintro ⟨i, rfl⟩; exact ⟨i.succ, Fin.succ_ne_zero i, rfl⟩
+          · rintro ⟨j, hj, rfl⟩; exact ⟨j.pred hj, by rw [Fin.succ_pred]⟩
+        rw [cs, sc]
+        constructor
+        · rintro ⟨j, _, rfl⟩
+          exact ⟨j, fun hj0 => hus (by rw [hj0, SP.hp0]), rfl⟩
+        · rintro ⟨j, _, rfl⟩
+          exact ⟨j, fun hjl => hut (by rw [hjl, SP.hplast]), rfl⟩
+      simp only [hiff]
+    hs := by
+      have hex : ∃ i : Fin SP.n, SP.p i.castSucc = s := ⟨0, by rw [Fin.castSucc_zero', SP.hp0]⟩
+      have hnex : ¬ ∃ i : Fin SP.n, SP.p i.succ = s := by
+        rintro ⟨i, hi⟩; exact Fin.succ_ne_zero i (SP.hp_inj (hi.trans SP.hp0.symm))
+      rw [outdeg_eq s, indeg_eq s, if_pos hex, if_neg hnex]
+    ht := by
+      have hnex : ¬ ∃ i : Fin SP.n, SP.p i.castSucc = t := by
+        rintro ⟨i, hi⟩; exact Fin.castSucc_ne_last i (SP.hp_inj (hi.trans SP.hplast.symm))
+      have hex : ∃ i : Fin SP.n, SP.p i.succ = t := by
+        have hidx : (⟨SP.n - 1, by have := SP.hn; omega⟩ : Fin SP.n).succ = Fin.last SP.n := by
+          apply Fin.ext
+          simp only [Fin.val_succ, Fin.val_last]
+          have := SP.hn; omega
+        exact ⟨⟨SP.n - 1, by have := SP.hn; omega⟩, by rw [hidx]; exact SP.hplast⟩
+      rw [outdeg_eq t, indeg_eq t, if_neg hnex, if_pos hex]
+    hslack := by
+      rintro u v ⟨i, rfl, rfl⟩
+      exact SP.hstep i
+  }
+
+/-- **★ M8 — the general forward augmentation with `ε` eliminated.** Given only a `ForwardAugPath`
+(no externally supplied slack margin), the flow augments: the min forward slack over the finite,
+nonempty path-edge set is a positive `ε` satisfying `f + ε ≤ cap` on every edge, feeding
+`forwardAugPath_augments`. This removes the uniform-margin hypothesis of M7. -/
+theorem forwardAugPath_augments' {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (Q : ForwardAugPath cap s t f) (hst : s ≠ t) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  classical
+  -- the source has an out-edge (by `Q.hs`), so the path-edge set is nonempty
+  have hsrc : (Finset.univ.filter (fun v => Q.P s v)).Nonempty := by
+    rw [← Finset.card_pos]; have := Q.hs; omega
+  obtain ⟨v0, hv0⟩ := hsrc
+  rw [Finset.mem_filter] at hv0
+  set E : Finset (V × V) := Finset.univ.filter (fun p : V × V => Q.P p.1 p.2) with hE
+  have hEne : E.Nonempty :=
+    ⟨(s, v0), by rw [hE, Finset.mem_filter]; exact ⟨Finset.mem_univ _, hv0.2⟩⟩
+  set ε : ℝ := E.inf' hEne (fun p => cap p.1 p.2 - f p.1 p.2) with hεdef
+  have hεpos : 0 < ε := by
+    rw [hεdef, Finset.lt_inf'_iff]
+    intro p hp
+    rw [hE, Finset.mem_filter] at hp
+    have := Q.hslack p.1 p.2 hp.2
+    linarith
+  have hεcap : ∀ u w, Q.P u w → f u w + ε ≤ cap u w := by
+    intro u w huw
+    have hmem : (u, w) ∈ E := by rw [hE, Finset.mem_filter]; exact ⟨Finset.mem_univ _, huw⟩
+    have hle : ε ≤ cap u w - f u w := Finset.inf'_le (fun p => cap p.1 p.2 - f p.1 p.2) hmem
+    linarith
+  exact forwardAugPath_augments hf Q hst ε hεpos hεcap
+
+/-- **★★ M8 — the extraction capstone: a simple forward path augments the flow.** Composing the degree
+extraction (`SimpleForwardPath.toForwardAugPath`) with the `ε`-eliminated augmentation
+(`forwardAugPath_augments'`): from a simple forward residual path `s ⇝ t` alone, one builds a strictly
+larger `s`-`t` flow. `s ≠ t` is itself derived from injectivity (`p 0 = s ≠ t = p (last n)`). This is the
+walk→augmentation pipeline modulo only the directed dedup (residual walk → `SimpleForwardPath`). -/
+theorem augment_of_simpleForwardPath {cap : V → V → ℝ} {s t : V} {f : V → V → ℝ}
+    (hf : IsSTFlow cap s t f) (SP : SimpleForwardPath cap s t f) :
+    ∃ g, IsSTFlow cap s t g ∧ flowValue f s < flowValue g s := by
+  have hst : s ≠ t := by
+    intro h
+    have h0 : (0 : Fin (SP.n + 1)) = Fin.last SP.n :=
+      SP.hp_inj (SP.hp0.trans (h.trans SP.hplast.symm))
+    have := SP.hn
+    rw [Fin.ext_iff, Fin.val_zero, Fin.val_last] at h0
+    omega
+  exact forwardAugPath_augments' hf SP.toForwardAugPath hst
 
 end QIQTH.QG

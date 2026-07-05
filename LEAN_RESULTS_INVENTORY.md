@@ -1644,7 +1644,13 @@ obstruction pinned (walk revisits ⟹ naive-induction slack consumption ⟹ need
 (a degree-structured edge set: interior in-deg = out-deg ⟹ conservation preserved; value up by ε at s) — the
 full forward-path augmentation MECHANISM, lifting the M6 hand-built cases to all lengths and removing the
 vertex-revisit obstruction for forward paths. So max-flow = combinatorial core (M1-M3) + the FULL forward-path
-augmentation (M4-M7) + only the extraction (walk ⟹ path degree-structure), mixed-direction, and existence carried.
+augmentation (M4-M7) + only the extraction (walk ⟹ path degree-structure), mixed-direction, and existence carried. **M8**: the extraction's degree-structure is now DERIVED —
+`SimpleForwardPath.toForwardAugPath` builds the degree-structured edge set from an injective simple path
+(injectivity ⟹ interior in-deg = out-deg = 1 via fibre counting), ε is derived internally, and a simple forward
+path ⟹ a bigger flow (`augment_of_simpleForwardPath`); only the DIRECTED DEDUP (ReflTransGen walk ⟹
+SimpleForwardPath) stays carried — Mathlib's `Walk.bypass`/`toPath` are undirected, so unusable here. Max-flow now:
+core + full forward augmentation + extraction degree-structure derived; carrying only the directed dedup +
+mixed-direction + existence.
 
 **The three frontier libraries — ECOSYSTEM STATUS (2026-07-05, web-verified).** Checked whether the Mathlib-grade
 gaps blocking the remaining frontier already exist anywhere: (1) **Riemannian heat kernel / Seeley–DeWitt** (blocks
