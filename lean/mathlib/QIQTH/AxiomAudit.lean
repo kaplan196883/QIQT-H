@@ -8947,6 +8947,14 @@ namespace QIQTH.AxiomAudit
 -- axiom-free one-particle oneParticleBW_niceWedge_unconditional, +2pi convention). HONEST:
 -- free-field single-mass, NOT interacting, no LV prediction. Std 3.
 #print axioms QIQTH.Fock.freeField_secondQuant_BW_unconditional
+-- THE HEAT-KERNEL a1 A1/A2 (HeatKernelA1.lean): the flat-space Gaussian moments of the
+-- position-space heat kernel -- int G_t x^2 = 2t (the DERIVED-analysis half, via Mathlib's
+-- variance_id_gaussianReal + the pdf bridge), int G_t = 1, int G_t x = 0. HONEST: flat-space
+-- analysis = the 2t.R contraction machinery ONLY; kappa = 1/6 is carried/cited, NOT produced
+-- here; no curved-space heat kernel, no numerical G. Std 3.
+#print axioms QIQTH.HeatKernelA1.gaussianSecondMoment_oneD
+#print axioms QIQTH.HeatKernelA1.gaussianZerothMoment_oneD
+#print axioms QIQTH.HeatKernelA1.gaussianFirstMoment_oneD
 -- J1 (HYPOTHESIS_DELETION_PLAN.md): the finite corner DISCHARGES the eigen-core matter inputs. The three
 -- carried hypotheses of the W3b trace laws (hkms, hfreq, hpos) are THEOREMS of the concrete corner
 -- (ρ = diag p, matrix units E_ij, κ_ij = log p_i − log p_j; sigmaDiag_single = the modular eigen law

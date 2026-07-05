@@ -32,7 +32,7 @@ this upgrades).
 
 ## The increments (new file `QIQTH/HeatKernelA1.lean`)
 
-- [ ] **A1 — the 1-D second moment (the whole load-bearing analysis).**
+- [x] **A1 — the 1-D second moment (the whole load-bearing analysis).** ✅ DONE
   `gaussianSecondMoment_oneD (t) (ht : 0<t) : ∫ x:ℝ, ((√(4πt))⁻¹ * Real.exp (-x^2/(4t))) * x^2
   = 2*t`. Route: v := (2t).toNNReal, hcoe : (v:ℝ)=2t; rewrite integrand as
   gaussianPDFReal 0 v x * x² (gaussianPDFReal_def + hcoe); ← integral_gaussianReal_eq_integral_smul
@@ -40,7 +40,7 @@ this upgrades).
   variance_eq_integral measurable_id'.aemeasurable + integral_id_gaussianReal (mean 0);
   close with variance_id_gaussianReal + hcoe. Risk LOW-MEDIUM (ℝ≥0 casts, smul/(x-0)² rewrites;
   no missing analysis).
-- [ ] **A2 — normalization + first moment.** `gaussianZerothMoment_oneD : ∫ x, G_t x = 1`
+- [x] **A2 — normalization + first moment.** ✅ DONE `gaussianZerothMoment_oneD : ∫ x, G_t x = 1`
   (gaussianReal a probability measure via the bridge) and `gaussianFirstMoment_oneD :
   ∫ x, G_t x * x = 0` (integral_id_gaussianReal, μ=0). Risk LOW.
 - [ ] **A3 (OPTIONAL, time-boxed) — the d-dim moment matrix.** `gaussianMoment_diag (d)(t)(ht)
@@ -104,3 +104,10 @@ paths only (Lean + plan + inventory + audit ONLY).
   the 1/6, so κ=1/6 stays carried/cited). Surfaced with the user as "option 2" after the
   numerical-G wall characterization; the user offered Vassilevich/Parker–Toms for refs/ (not
   needed for the conditional theorem, which carries the geometry).
+
+- **2026-07-05** — **A1+A2 LANDED (green first try).** HeatKernelA1.lean: heatKernel1D +
+  heatKernel1D_eq_pdf (the EXACT bridge gaussianPDFReal 0 (2t) = G_t); ★
+  gaussianSecondMoment_oneD (∫ G_t x² = 2t — the load-bearing analysis, via
+  variance_fun_id_gaussianReal + integral_gaussianReal_eq_integral_smul + variance_eq_integral
+  + integral_id_gaussianReal); gaussianZerothMoment_oneD (= 1); gaussianFirstMoment_oneD (= 0).
+  Std-3, budget 0. Next: A4 (the conditional a₁ assembly — carrying hM + κ=1/6); A3 optional.

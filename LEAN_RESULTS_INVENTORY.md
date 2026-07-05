@@ -16,6 +16,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `sorry`/`sorryAx`** in code (full-tree grep: the 58 `sorry` string matches are all docstrings reading "No `sorry`" —
   0 real proof terms). Budget-check (`scripts/axiom_budget_check.sh`) = **0**. The only `:= True` bodies are harmless
   labelled markers (`LorentzWitness.lean:180` indiscrete-preorder witness; the campaign `Checkpoint`/`…_complete` markers).
+- **HEAT-KERNEL a₁ ANALYSIS-HALF — IN PROGRESS (2026-07-05).** `QIQTH.HeatKernelA1` (axiom-free std-3): the
+  flat-space Gaussian moments of the position-space heat kernel G_t = (√(4πt))⁻¹e^{−x²/4t} — **∫ G_t x² = 2t**
+  (`gaussianSecondMoment_oneD`, the load-bearing analysis, from Mathlib's `variance_fun_id_gaussianReal` via the
+  exact pdf bridge `gaussianPDFReal 0 (2t) = G_t`), ∫ G_t = 1, ∫ G_t x = 0. This is the DERIVED-analysis half of
+  the a₁ Seeley–DeWitt coefficient program (the `2t·R` contraction machinery). HONEST: flat-space only; the
+  curved-space RNC geometry AND the value κ = 1/6 are carried/cited, NEVER produced by the Gaussian moment — the
+  numerical-G frontier stays exactly as characterized above (the 1/6 needs the covariant heat-kernel expansion
+  Mathlib lacks). Next: A4 (conditional a₁ assembly carrying κ=1/6 + the RNC coefficients).
 - **FIELD-LEVEL BISOGNANO–WICHMANN UNCONDITIONAL (2026-07-05).** `QIQTH.Fock.freeField_secondQuant_BW_unconditional`
   (`Fock/FieldBWUnconditional.lean`, axiom-free std-3): the second-quantized wedge modular automorphism acts on
   Weyl operators as the geometric Lorentz boost — σ_t(W(u)) = W(boost(2πt)u) conjugated — with NO carried BW
