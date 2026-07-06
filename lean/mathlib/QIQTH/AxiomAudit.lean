@@ -9786,4 +9786,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetFund_shifted
 #print axioms QIQTH.ExpMap.expJetFund_shifted_integral
 
+-- ExpMap.lean — EXP-JET3b STEP A (2026-07-07): the [0,1] operator-valued fundamental solution Φ_v.
+-- expJetPsi_comp_continuousOn: the operator integrand s ↦ Ψ_v s (Φ s) is continuous on any A ⊆ [0,1]
+-- where Φ is continuous (DF(Y_v ·) continuous + ContinuousOn.clm_comp).
+-- expJetFund: the [0,1] fundamental solution Φ_v with Φ_v 0 = 1, continuous on [0,1], the GLOBAL
+-- integral equation Φ_v t = 1 + ∫₀ᵗ Ψ_v s (Φ_v s) ds, AND the derivative law
+-- HasDerivWithinAt Φ_v (Ψ_v t (Φ_v t)) (Icc 0 1) t (by FTC-1).  Built by concatenating N ≥ 2(KdF+1)
+-- shifted normalized propagators (finite partition induction, right-composition gluing).
+-- HONEST: the [0,1] fundamental solution — a step toward the localized first variation
+-- HasFDerivAt exp_p (L v) v (EXP-JET3).  Does NOT yet give the first variation, NOT the Jacobian
+-- 2-jet expansion, NOT the pullback metric, NOT numerical-G (N, Λ_s, E/ξ remain).
+#print axioms QIQTH.ExpMap.expJetPsi_comp_continuousOn
+#print axioms QIQTH.ExpMap.expJetFund
+
 end QIQTH.AxiomAudit

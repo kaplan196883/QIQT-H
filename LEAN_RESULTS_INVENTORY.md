@@ -574,6 +574,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   CAPTION (binding):** the concatenation building block (one subinterval, both differential + local integral form) — a
   step toward the Jacobian-field expansion → `hgauge`; does **NOT** reach `Φ_v(1)`, **NOT** the localized first
   variation, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3b STEP A — the `[0,1]` operator-valued fundamental solution `Φ_v`** (`ExpMap.lean`, all **[AF]** std-3,
+  budget 0, DONE 2026-07-07): **`expJetFund`** — for `‖v‖ ≤ expRho` an operator-valued curve
+  `Φ_v : ℝ → (State →L State)` with `Φ_v 0 = 1`, `ContinuousOn Φ_v [0,1]`, the GLOBAL integral equation
+  `Φ_v t = 1 + ∫₀ᵗ Ψ_v s (Φ_v s) ds` on `[0,1]`, AND the derivative law
+  `HasDerivWithinAt Φ_v (Ψ_v t (Φ_v t)) (Icc 0 1) t` for every `t ∈ [0,1]`.  Built by concatenating `N ≥ 2(KdF+1)`
+  shifted normalized propagators (private `expJetFund_glue`, finite induction on the partition `τ j = j/N`): the glued
+  curve on `[0,τ_{j+1}]` is `Φ_{j+1}(t)=if t≤τ_j then Φ_j t else U_j(t)∘Φ_j(τ_j)` (`U_j` from
+  `expJetFund_shifted_integral`), the GLOBAL integral equation pasted from the sub-interval one by
+  `intervalIntegral.integral_add_adjacent_intervals` + `integral_congr` + right-composition/integral commutation
+  (`ContinuousLinearMap.intervalIntegral_comp_comm`, `RM=(compL).flip (Φ_j τ_j)`), continuity glued by
+  `ContinuousOn.union_of_isClosed`; the derivative law from the integral equation by FTC-1
+  (`intervalIntegral.integral_hasDerivWithinAt_right`, `𝓝[Icc 0 1]` FTCFilter via `Fact (t∈Icc 0 1)`).  Reusable helper
+  `expJetPsi_comp_continuousOn` (integrand continuity on any `A ⊆ [0,1]`).  ⚠ This discharges the earlier "no Mathlib
+  continuation theorem" checkpoint into a COMPLETED assembly. ⚠ **STILL CHECKPOINTED:** the first-variation residual
+  Grönwall `HasFDerivAt (expMap g gi hC p) (L v) v`, `L v:=expJetPi∘(Φ_v 1)∘expJetIota` (Step B). ⚠ **HONEST CAPTION
+  (binding):** the `[0,1]` fundamental solution — a step toward the localized first variation → the Jacobian-field
+  expansion → `hgauge`; does **NOT** yet give the first variation, **NOT** the Jacobian 2-jet expansion, **NOT** the
+  pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

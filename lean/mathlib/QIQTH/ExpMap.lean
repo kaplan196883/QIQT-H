@@ -3027,4 +3027,248 @@ theorem expJetFund_shifted_integral (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hΦ0] at hftc
   rw [hftc]; abel
 
+/-! ### EXP-JET3b (STEP A) — the `[0,1]` operator-valued fundamental solution `Φ_v`
+
+  Concatenating `N` shifted normalized propagators (`expJetFund_shifted_integral`) into a single
+  `[0,1]` operator-valued curve `Φ_v` obeying the GLOBAL integral equation
+  `Φ_v t = 1 + ∫₀ᵗ Ψ_v s (Φ_v s) ds`, from which FTC-1 gives the derivative law
+  `HasDerivWithinAt Φ_v (Ψ_v t (Φ_v t)) (Icc 0 1) t` on all of `[0,1]` (junctions automatic).
+
+  The construction is a finite induction on the partition `τ j = j/N` (step `h = 1/N`,
+  `N ≥ 2(KdF+1)` so each subinterval has `2·KdF·h ≤ 1`): the glued curve on `[0,τ_{j+1}]` is
+  `Φ_{j+1}(t) = if t ≤ τ_j then Φ_j t else U_j(t) ∘ Φ_j(τ_j)`, and the global integral equation is
+  pasted from the sub-interval one via `integral_add_adjacent_intervals` + `integral_congr` +
+  right-composition/integral commutation (`ContinuousLinearMap.intervalIntegral_comp_comm`).
+
+  HONEST CAPTION (binding): the `[0,1]` fundamental solution `Φ_v` — a step toward the localized
+  first variation `HasFDerivAt exp_p (L v) v` (EXP-JET3), itself a step toward discharging `hgauge`.
+  It does NOT yet give the first variation, NOT the Jacobian 2-jet expansion, NOT the pullback metric,
+  and does NOT move numerical-G (species count `N`, granularity scale `Λ_s`, the `E/ξ` term remain). -/
+
+/-- **Continuity of the operator integrand** `s ↦ Ψ_v s (Φ s)` on any `A ⊆ [0,1]` where `Φ` is
+    continuous: `DF(Y_v ·)` is continuous on `[0,1]` and right-composition is continuous
+    (`ContinuousOn.clm_comp`). -/
+theorem expJetPsi_comp_continuousOn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) {A : Set ℝ} (hA : A ⊆ Set.Icc (0 : ℝ) 1)
+    {Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n))} (hΦ : ContinuousOn Φ A) :
+    ContinuousOn (fun s => expJetPsi g gi hC p v s (Φ s)) A := by
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hDFtube : ContinuousOn
+      (fun s => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) A :=
+    (hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)).mono hA
+  have hcc := hDFtube.clm_comp hΦ
+  simpa only [expJetPsi_apply] using hcc
+
+set_option maxHeartbeats 2000000 in
+/-- **The partition induction (concatenation gluing).**  For a `[0,1]`-uniform Jacobi bound `KdF`
+    and a step count `N` with `2·KdF·(1/N) ≤ 1`, there is, for every `j ≤ N`, an operator-valued
+    curve `Φ` on `[0, j/N]` with `Φ 0 = 1`, continuous, obeying the GLOBAL integral equation
+    `Φ t = 1 + ∫₀ᵗ Ψ_v s (Φ s) ds`.  Proved by induction on `j`: the `[0, (j+1)/N]` curve glues
+    `Φ_j` and the shifted propagator `U_j` on `[j/N, (j+1)/N]` by right-composition with `Φ_j(j/N)`. -/
+private theorem expJetFund_glue (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p)
+    (KdF : ℝ) (hKdF0 : 0 ≤ KdF)
+    (hKdF : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF)
+    (N : ℕ) (hN0 : 0 < N) (hstep : 2 * KdF * (1 / (N : ℝ)) ≤ 1) :
+    ∀ j : ℕ, j ≤ N →
+      ∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+        Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+        ContinuousOn Φ (Set.Icc (0 : ℝ) ((j : ℝ) / (N : ℝ))) ∧
+        (∀ t ∈ Set.Icc (0 : ℝ) ((j : ℝ) / (N : ℝ)),
+          Φ t = ContinuousLinearMap.id ℝ (Point n × Point n)
+            + ∫ s in (0 : ℝ)..t, expJetPsi g gi hC p v s (Φ s)) := by
+  have hNpos : (0 : ℝ) < (N : ℝ) := by exact_mod_cast hN0
+  intro j
+  induction j with
+  | zero =>
+    intro _
+    refine ⟨fun _ => ContinuousLinearMap.id ℝ (Point n × Point n), rfl, continuousOn_const, ?_⟩
+    intro t ht
+    have h0 : ((0 : ℕ) : ℝ) / (N : ℝ) = 0 := by rw [Nat.cast_zero, zero_div]
+    rw [h0] at ht
+    have htz : t = 0 := le_antisymm ht.2 ht.1
+    subst htz
+    simp only [intervalIntegral.integral_same, add_zero]
+  | succ k ih =>
+    intro hk
+    obtain ⟨Φj, hΦj0, hΦjcont, hΦjint⟩ := ih (Nat.le_of_succ_le hk)
+    have hτnn : 0 ≤ (k : ℝ) / (N : ℝ) := div_nonneg (Nat.cast_nonneg k) hNpos.le
+    have hInpos : (0 : ℝ) < 1 / (N : ℝ) := by positivity
+    have hsucc : ((k + 1 : ℕ) : ℝ) / (N : ℝ) = (k : ℝ) / (N : ℝ) + 1 / (N : ℝ) := by
+      push_cast; ring
+    have hτk1le1 : (k : ℝ) / (N : ℝ) + 1 / (N : ℝ) ≤ 1 :=
+      hsucc ▸ (by rw [div_le_one hNpos]; exact_mod_cast hk)
+    obtain ⟨U, hU0, hUcont, hUderiv, hUint⟩ :=
+      expJetFund_shifted_integral g gi hC p v hv KdF hKdF0 hKdF
+        ((k : ℝ) / (N : ℝ)) (1 / (N : ℝ)) hτnn hInpos hτk1le1 hstep
+    set Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)) :=
+      fun t => if t ≤ (k : ℝ) / (N : ℝ) then Φj t
+        else (U t).comp (Φj ((k : ℝ) / (N : ℝ))) with hΦ'def
+    have hΦ'_lo : ∀ s, s ≤ (k : ℝ) / (N : ℝ) → Φ' s = Φj s := by
+      intro s hs; rw [hΦ'def]; exact if_pos hs
+    have hΦ'_hi : ∀ s, ¬ (s ≤ (k : ℝ) / (N : ℝ)) →
+        Φ' s = (U s).comp (Φj ((k : ℝ) / (N : ℝ))) := by
+      intro s hs; rw [hΦ'def]; exact if_neg hs
+    -- EqOn on the two closed pieces
+    have hEqLo : Set.EqOn Φ' Φj (Set.Icc (0 : ℝ) ((k : ℝ) / (N : ℝ))) :=
+      fun s hs => hΦ'_lo s hs.2
+    have hEqHi : Set.EqOn Φ' (fun t => (U t).comp (Φj ((k : ℝ) / (N : ℝ))))
+        (Set.Icc ((k : ℝ) / (N : ℝ)) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ))) := by
+      intro s hs
+      by_cases hsle : s ≤ (k : ℝ) / (N : ℝ)
+      · have hseq : s = (k : ℝ) / (N : ℝ) := le_antisymm hsle hs.1
+        rw [hΦ'_lo s hsle, hseq]
+        show Φj ((k : ℝ) / (N : ℝ))
+          = (U ((k : ℝ) / (N : ℝ))).comp (Φj ((k : ℝ) / (N : ℝ)))
+        rw [hU0, ContinuousLinearMap.id_comp]
+      · rw [hΦ'_hi s hsle]
+    -- continuity of the glued curve on [0, (k+1)/N]
+    have hUcomp : ContinuousOn (fun t => (U t).comp (Φj ((k : ℝ) / (N : ℝ))))
+        (Set.Icc ((k : ℝ) / (N : ℝ)) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ))) :=
+      hUcont.clm_comp continuousOn_const
+    have hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ))) := by
+      have hunion : Set.Icc (0 : ℝ) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ))
+          = Set.Icc (0 : ℝ) ((k : ℝ) / (N : ℝ))
+            ∪ Set.Icc ((k : ℝ) / (N : ℝ)) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ)) :=
+        (Set.Icc_union_Icc_eq_Icc hτnn (by linarith)).symm
+      rw [hunion]
+      exact (hΦjcont.congr hEqLo).union_of_isClosed (hUcomp.congr hEqHi)
+        isClosed_Icc isClosed_Icc
+    -- integrand continuity for interval integrability
+    have hcontψ' : ContinuousOn (fun s => expJetPsi g gi hC p v s (Φ' s))
+        (Set.Icc (0 : ℝ) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ))) :=
+      expJetPsi_comp_continuousOn g gi hC p v hv
+        (Set.Icc_subset_Icc_right hτk1le1) hΦ'cont
+    rw [hsucc]
+    refine ⟨Φ', ?_, hΦ'cont, ?_⟩
+    · rw [hΦ'_lo 0 hτnn]; exact hΦj0
+    · intro t ht
+      by_cases htle : t ≤ (k : ℝ) / (N : ℝ)
+      · -- t in [0, τk]: the curve is Φj there
+        rw [hΦ'_lo t htle]
+        have hcong : (∫ s in (0 : ℝ)..t, expJetPsi g gi hC p v s (Φ' s))
+            = ∫ s in (0 : ℝ)..t, expJetPsi g gi hC p v s (Φj s) := by
+          apply intervalIntegral.integral_congr
+          intro s hs
+          rw [Set.uIcc_of_le ht.1] at hs
+          show expJetPsi g gi hC p v s (Φ' s) = expJetPsi g gi hC p v s (Φj s)
+          rw [hΦ'_lo s (le_trans hs.2 htle)]
+        rw [hcong]
+        exact hΦjint t ⟨ht.1, htle⟩
+      · -- t in (τk, τk + 1/N]: the curve is U(t) ∘ Φj(τk)
+        have htlt : (k : ℝ) / (N : ℝ) < t := not_le.mp htle
+        have htmem : t ∈ Set.Icc ((k : ℝ) / (N : ℝ)) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ)) :=
+          ⟨htlt.le, ht.2⟩
+        rw [hΦ'_hi t htle]
+        -- integrability on the two adjacent pieces
+        have hII1 : IntervalIntegrable (fun s => expJetPsi g gi hC p v s (Φ' s))
+            MeasureTheory.volume 0 ((k : ℝ) / (N : ℝ)) :=
+          (hcontψ'.mono (Set.Icc_subset_Icc le_rfl (by linarith))).intervalIntegrable_of_Icc hτnn
+        have hII2 : IntervalIntegrable (fun s => expJetPsi g gi hC p v s (Φ' s))
+            MeasureTheory.volume ((k : ℝ) / (N : ℝ)) t :=
+          (hcontψ'.mono (Set.Icc_subset_Icc hτnn ht.2)).intervalIntegrable_of_Icc htlt.le
+        have hsplit : (∫ s in (0 : ℝ)..t, expJetPsi g gi hC p v s (Φ' s))
+            = (∫ s in (0 : ℝ)..((k : ℝ) / (N : ℝ)), expJetPsi g gi hC p v s (Φ' s))
+              + ∫ s in ((k : ℝ) / (N : ℝ))..t, expJetPsi g gi hC p v s (Φ' s) :=
+          (intervalIntegral.integral_add_adjacent_intervals hII1 hII2).symm
+        -- first piece = Φj(τk) - 1
+        have hI1 : (∫ s in (0 : ℝ)..((k : ℝ) / (N : ℝ)), expJetPsi g gi hC p v s (Φ' s))
+            = Φj ((k : ℝ) / (N : ℝ)) - ContinuousLinearMap.id ℝ (Point n × Point n) := by
+          have hc : (∫ s in (0 : ℝ)..((k : ℝ) / (N : ℝ)), expJetPsi g gi hC p v s (Φ' s))
+              = ∫ s in (0 : ℝ)..((k : ℝ) / (N : ℝ)), expJetPsi g gi hC p v s (Φj s) := by
+            apply intervalIntegral.integral_congr
+            intro s hs
+            rw [Set.uIcc_of_le hτnn] at hs
+            show expJetPsi g gi hC p v s (Φ' s) = expJetPsi g gi hC p v s (Φj s)
+            rw [hΦ'_lo s hs.2]
+          rw [hc, hΦjint ((k : ℝ) / (N : ℝ)) ⟨hτnn, le_refl _⟩]; abel
+        -- second piece = U(t) ∘ Φj(τk) - Φj(τk)
+        set RM : ((Point n × Point n) →L[ℝ] (Point n × Point n))
+            →L[ℝ] ((Point n × Point n) →L[ℝ] (Point n × Point n)) :=
+          (ContinuousLinearMap.compL ℝ (Point n × Point n) (Point n × Point n)
+            (Point n × Point n)).flip (Φj ((k : ℝ) / (N : ℝ))) with hRM
+        have hcontU : ContinuousOn (fun s => expJetPsi g gi hC p v s (U s))
+            (Set.Icc ((k : ℝ) / (N : ℝ)) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ))) :=
+          expJetPsi_comp_continuousOn g gi hC p v hv
+            (Set.Icc_subset_Icc hτnn hτk1le1) hUcont
+        have hII_U : IntervalIntegrable (fun s => expJetPsi g gi hC p v s (U s))
+            MeasureTheory.volume ((k : ℝ) / (N : ℝ)) t :=
+          (hcontU.mono (Set.Icc_subset_Icc le_rfl ht.2)).intervalIntegrable_of_Icc htlt.le
+        have hI2 : (∫ s in ((k : ℝ) / (N : ℝ))..t, expJetPsi g gi hC p v s (Φ' s))
+            = (U t).comp (Φj ((k : ℝ) / (N : ℝ))) - Φj ((k : ℝ) / (N : ℝ)) := by
+          have hc : (∫ s in ((k : ℝ) / (N : ℝ))..t, expJetPsi g gi hC p v s (Φ' s))
+              = ∫ s in ((k : ℝ) / (N : ℝ))..t, RM (expJetPsi g gi hC p v s (U s)) := by
+            apply intervalIntegral.integral_congr
+            intro s hs
+            rw [Set.uIcc_of_le htlt.le] at hs
+            have hsmem : s ∈ Set.Icc ((k : ℝ) / (N : ℝ)) ((k : ℝ) / (N : ℝ) + 1 / (N : ℝ)) :=
+              ⟨hs.1, le_trans hs.2 ht.2⟩
+            show expJetPsi g gi hC p v s (Φ' s)
+              = RM (expJetPsi g gi hC p v s (U s))
+            rw [hEqHi hsmem]
+            show (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)).comp
+                ((U s).comp (Φj ((k : ℝ) / (N : ℝ))))
+              = RM ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)).comp (U s))
+            rw [hRM, ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply]
+            exact (ContinuousLinearMap.comp_assoc _ _ _).symm
+          rw [hc, RM.intervalIntegral_comp_comm hII_U,
+            show (∫ s in ((k : ℝ) / (N : ℝ))..t, expJetPsi g gi hC p v s (U s))
+                = U t - ContinuousLinearMap.id ℝ (Point n × Point n) from by
+              rw [hUint t htmem]; abel, hRM,
+            ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply,
+            ContinuousLinearMap.sub_comp, ContinuousLinearMap.id_comp]
+        rw [hsplit, hI1, hI2]; abel
+
+set_option maxHeartbeats 2000000 in
+/-- **EXP-JET3b (STEP A) — the `[0,1]` operator-valued fundamental solution `Φ_v`.**  For
+    `‖v‖ ≤ expRho` there is an operator-valued curve `Φ_v : ℝ → (State →L State)` with `Φ_v 0 = 1`,
+    continuous on `[0,1]`, obeying the GLOBAL integral equation
+    `Φ_v t = 1 + ∫₀ᵗ Ψ_v s (Φ_v s) ds` on `[0,1]`, and — by FTC-1 — the derivative law
+    `HasDerivWithinAt Φ_v (Ψ_v t (Φ_v t)) (Icc 0 1) t` for every `t ∈ [0,1]`.  Built by
+    concatenating `N ≥ 2(KdF+1)` shifted normalized propagators (`expJetFund_glue`).
+
+    HONEST: the `[0,1]` fundamental solution — a step toward the localized first variation
+    `HasFDerivAt exp_p (L v) v` (EXP-JET3).  It does NOT yet give the first variation, NOT the
+    Jacobian 2-jet expansion, NOT the pullback metric, NOT numerical-G. -/
+theorem expJetFund (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) :
+    ∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+      Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+      ContinuousOn Φ (Set.Icc (0 : ℝ) 1) ∧
+      (∀ t ∈ Set.Icc (0 : ℝ) 1,
+        Φ t = ContinuousLinearMap.id ℝ (Point n × Point n)
+          + ∫ s in (0 : ℝ)..t, expJetPsi g gi hC p v s (Φ s)) ∧
+      (∀ t ∈ Set.Icc (0 : ℝ) 1,
+        HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t) := by
+  obtain ⟨KdF, hKdF0, hKdF⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  obtain ⟨N, hN⟩ := exists_nat_ge (2 * (KdF + 1))
+  have hpos : (0 : ℝ) < 2 * (KdF + 1) := by linarith
+  have hNRpos : (0 : ℝ) < (N : ℝ) := hpos.trans_le hN
+  have hN0 : 0 < N := by exact_mod_cast hNRpos
+  have hstep : 2 * KdF * (1 / (N : ℝ)) ≤ 1 := by
+    have h2 : 2 * KdF * (1 / (N : ℝ)) = (2 * KdF) / (N : ℝ) := by ring
+    rw [h2, div_le_one hNRpos]; linarith [hN]
+  obtain ⟨Φ, hΦ0, hΦcont, hΦint⟩ := expJetFund_glue g gi hC p v hv KdF hKdF0 hKdF N hN0 hstep N le_rfl
+  have hNN : (N : ℝ) / (N : ℝ) = 1 := div_self hNRpos.ne'
+  rw [hNN] at hΦcont hΦint
+  refine ⟨Φ, hΦ0, hΦcont, hΦint, ?_⟩
+  have hψcont : ContinuousOn (fun s => expJetPsi g gi hC p v s (Φ s)) (Set.Icc (0 : ℝ) 1) :=
+    expJetPsi_comp_continuousOn g gi hC p v hv (subset_refl _) hΦcont
+  intro t ht
+  haveI : Fact (t ∈ Set.Icc (0 : ℝ) 1) := ⟨ht⟩
+  have hII : IntervalIntegrable (fun s => expJetPsi g gi hC p v s (Φ s))
+      MeasureTheory.volume 0 t :=
+    (hψcont.mono (Set.Icc_subset_Icc_right ht.2)).intervalIntegrable_of_Icc ht.1
+  have hmeas := hψcont.stronglyMeasurableAtFilter_nhdsWithin (μ := MeasureTheory.volume)
+    measurableSet_Icc t
+  have hFTC := intervalIntegral.integral_hasDerivWithinAt_right (s := Set.Icc (0 : ℝ) 1)
+    hII hmeas (hψcont t ht)
+  have hconst := hFTC.const_add (ContinuousLinearMap.id ℝ (Point n × Point n))
+  exact hconst.congr (fun s hs => hΦint s hs) (hΦint t ht)
+
 end QIQTH.ExpMap

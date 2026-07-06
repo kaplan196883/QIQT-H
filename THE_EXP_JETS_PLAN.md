@@ -114,6 +114,25 @@ remain). Never claim numerical-G or a curved heat kernel.
     `‖N_k‖≤εCtw‖k‖` via `geodesicField_uniform_C1_remainder`+`geodesic_twopoint_gronwall`, project with `π`).
     HONEST: the concatenation building block (one subinterval, differential + local integral form) — does NOT reach
     `Φ_v(1)`, NOT the localized first variation, NOT the pullback metric, NOT numerical-G.
+  - [x] **EXP-JET3b STEP A — the `[0,1]` fundamental solution `Φ_v`. DONE 2026-07-07.**  Landed green in
+    `ExpMap.lean` ([AF] std-3, budget 0): **`expJetFund`** — the `[0,1]` operator-valued fundamental solution `Φ_v`
+    with `Φ_v 0 = 1`, `ContinuousOn Φ_v [0,1]`, the GLOBAL integral equation `Φ_v t = 1 + ∫₀ᵗ Ψ_v s (Φ_v s) ds` on
+    `[0,1]`, AND the derivative law `HasDerivWithinAt Φ_v (Ψ_v t (Φ_v t)) (Icc 0 1) t` for every `t ∈ [0,1]`.
+    Route (as scoped): the concatenation is a finite induction (`expJetFund_glue`, private) on the partition
+    `τ j = j/N` (step `h = 1/N`, `N ≥ 2(KdF+1)` from `exists_nat_ge` so each subinterval has `2·KdF·h ≤ 1`); the glued
+    curve on `[0,τ_{j+1}]` is `Φ_{j+1}(t) = if t ≤ τ_j then Φ_j t else U_j(t) ∘ Φ_j(τ_j)` (`U_j` from
+    `expJetFund_shifted_integral`), and the GLOBAL integral equation is pasted from the sub-interval one by
+    `intervalIntegral.integral_add_adjacent_intervals` + `integral_congr` + right-composition/integral commutation
+    (`ContinuousLinearMap.intervalIntegral_comp_comm` with `RM = (compL).flip (Φ_j τ_j)`); continuity glues by
+    `ContinuousOn.union_of_isClosed` over `Icc 0 τ_j ∪ Icc τ_j τ_{j+1}`.  The partition arithmetic (`τ(j+1)=τj+1/N`,
+    `τN = N/N = 1`, `Nat.cast` bookkeeping) is discharged by `push_cast; ring` + `div_self`/`div_le_one`.  The
+    derivative law comes from the integral equation by FTC-1 (`intervalIntegral.integral_hasDerivWithinAt_right`,
+    using the `FTCFilter t (𝓝[Icc 0 1] t)` instance from `Fact (t ∈ Icc 0 1)`) + `.const_add` + `.congr`.  New
+    reusable lemma `expJetPsi_comp_continuousOn` (integrand continuity on any `A ⊆ [0,1]`).  **KEY:** this discharges
+    the "Mathlib has NO continuation theorem" checkpoint into a completed ASSEMBLY.  HONEST: the `[0,1]` fundamental
+    solution — a step toward the localized first variation `HasFDerivAt exp_p (L v) v` (EXP-JET3, still CHECKPOINTED).
+    It does NOT yet give the first variation, NOT the Jacobian 2-jet expansion, NOT the pullback metric, NOT
+    numerical-G (`N`, `Λ_s`, `E/ξ` remain).
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -140,6 +159,17 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3b STEP A):** the `[0,1]` operator-valued fundamental solution `Φ_v` landed green
+  ([AF] std-3, budget 0).  New lemmas in `ExpMap.lean`: `expJetPsi_comp_continuousOn` (integrand continuity on any
+  `A ⊆ [0,1]`), `expJetFund_glue` (private — the partition-induction concatenation of the `N ≥ 2(KdF+1)` shifted
+  normalized propagators, glued by right-composition `Φ_{j+1}(t)=if t≤τ_j then Φ_j t else U_j(t)∘Φ_j(τ_j)`, GLOBAL
+  integral equation pasted by `integral_add_adjacent_intervals`/`integral_congr`/`intervalIntegral_comp_comm`,
+  continuity by `union_of_isClosed`), and **`expJetFund`** — the `[0,1]` fundamental solution `Φ_v` with `Φ_v 0 = 1`,
+  `ContinuousOn Φ_v [0,1]`, the GLOBAL integral equation, AND the derivative law
+  `HasDerivWithinAt Φ_v (Ψ_v t (Φ_v t)) (Icc 0 1) t` on all `[0,1]` (FTC-1 via the `𝓝[Icc 0 1]` FTCFilter).  The
+  partition arithmetic (`τN=1`), flagged as the stall risk, was discharged (`push_cast; ring` + `div_self`).  KEY:
+  turns the prior "no Mathlib continuation theorem" checkpoint into a completed assembly.  The first-variation
+  `HasFDerivAt exp_p (L v) v` (Step B) remains CHECKPOINTED.
 - **2026-07-07 (EXP-JET3b global scaffolding):** the SHIFTED normalized local propagator landed green
   ([AF] std-3, budget 0). New lemmas in `ExpMap.lean`: `expJetFund_shifted` (the normalized propagator `U_j`
   on ANY `[t₀,t₀+T] ⊆ [0,1]` with `2·KdF·T ≤ 1`, `U_j(t₀)=1`, `U_j'=Ψ_v·U_j`, via the shifted operator-normed
