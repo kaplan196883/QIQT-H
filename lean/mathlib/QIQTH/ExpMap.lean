@@ -206,4 +206,174 @@ noncomputable def expMap (g gi : Point n → Fin n → Fin n → ℝ)
     (p v : Point n) : Point n :=
   (geodesicSol g gi hC (p, v) 1).1
 
+/-- **Existence of the geodesic on `[0,1]` for a rescaled (small) velocity.**  The chosen solution
+    `geodesicSol (p,v)` is guaranteed to solve the ODE only on some `(-ε, ε)` with `ε` depending on
+    `v`.  Rescaling the parameter by `s = ε/2` (velocity by `s`, via `geodesic_rescale`) produces a
+    genuine integral curve `γ` with `γ 0 = (p, (ε/2)•v)` that solves the geodesic ODE on the OPEN
+    interval `(-1, 2) ⊇ [0,1]`.  Hence for every direction `v` there is a positive scale `s` such
+    that the geodesic with initial velocity `s•v` reaches parameter `1`.
+
+    This discharges the *existence-on-`[0,1]`* half of the flagged common-tube management, flow-free,
+    by composing the scaffolding spec (`geodesicSol_hasDerivAt`) with the S1 rescaling symmetry
+    (`geodesic_rescale`).  HONEST: this is existence on `[0,1]` for velocities of the form `s•v`
+    (short geodesics) — it is NOT the uniform-over-a-ball tube, NOT the two-point estimate, NOT the
+    diffeo.  The Lipschitz-flow half (S3) and the strict-remainder nbhd (S2) still have to be
+    reconciled on the SAME sub-ball for the unconditional two-point Grönwall. -/
+theorem geodesicSol_rescale_unit_existence (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) :
+    ∃ s > (0 : ℝ), ∃ γ : ℝ → Point n × Point n,
+      γ 0 = (p, s • v) ∧
+      ∀ t ∈ Set.Ioo (-1 : ℝ) 2, HasDerivAt γ (geodesicField g gi (γ t)) t := by
+  obtain ⟨ε, hε, hd⟩ := geodesicSol_hasDerivAt g gi hC (p, v)
+  refine ⟨ε / 2, by positivity,
+    fun τ => rescaleCLM (ε / 2) (geodesicSol g gi hC (p, v) ((ε / 2) * τ)), ?_, ?_⟩
+  · -- value at `0`: `L_{ε/2} (geodesicSol (p,v) 0) = L_{ε/2} (p,v) = (p, (ε/2)•v)`.
+    simp [geodesicSol_zero g gi hC (p, v), rescaleCLM_apply]
+  · intro t ht
+    -- the rescaled curve is an integral curve wherever `(ε/2)·t ∈ (-ε, ε)`.
+    have hmem : (ε / 2) * t ∈ Set.Ioo (-ε) ε := by
+      constructor
+      · nlinarith [ht.1, hε]
+      · nlinarith [ht.2, hε]
+    exact geodesic_rescale g gi (a := -ε) (b := ε) hd (ε / 2) t hmem
+
+/-! ### S3 — Lipschitz dependence of the geodesic flow on the initial condition
+
+  The geodesic field `F = geodesicField g gi` is `C^∞`, hence `C^1`, so it satisfies the
+  Picard–Lindelöf hypotheses near the equilibrium `e = (p,0)` (`IsPicardLindelof.of_contDiffAt_one`).
+  Mathlib's flow theorem
+  `IsPicardLindelof.exists_forall_mem_closedBall_eq_hasDerivWithinAt_lipschitzOnWith` then produces a
+  local flow `α : phase → ℝ → phase` on a closed ball `closedBall e r`, with integral-curve property
+  `α x 0 = x`, `α x' = F(α x)`, that is **Lipschitz in the initial point** `x` (uniformly in time on
+  the flow interval `[-ε, ε]`).  This is exactly the "Lipschitz flow dependence `‖Y_v(t) − Y_w(t)‖ ≤
+  L‖v − w‖`" ingredient of the two-point Grönwall estimate.
+
+  HONEST: this is the flow's Lipschitz-in-IC on the Picard–Lindelöf interval `[-ε, ε]` around the
+  equilibrium.  Reaching the *unit* interval `[0,1]` for all small `v, w` (needed to evaluate `exp_p`
+  at `t = 1`) is the flagged "common-tube management" bookkeeping that combines this with the geodesic
+  rescaling `geodesic_rescale`; it is NOT discharged here. -/
+theorem geodesicField_flow_lipschitz (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ (ε : ℝ), 0 < ε ∧ ∃ (r : NNReal), 0 < r ∧
+      ∃ α : (Point n × Point n) → ℝ → (Point n × Point n),
+        (∀ x ∈ Metric.closedBall ((p, 0) : Point n × Point n) (r : ℝ),
+          α x 0 = x ∧ ∀ t ∈ Set.Icc (-ε) ε,
+            HasDerivWithinAt (α x) (geodesicField g gi (α x t)) (Set.Icc (-ε) ε) t) ∧
+        ∃ L' : NNReal, ∀ t ∈ Set.Icc (-ε) ε,
+          LipschitzOnWith L' (fun x => α x t)
+            (Metric.closedBall ((p, 0) : Point n × Point n) (r : ℝ)) := by
+  have hCA : ContDiffAt ℝ 1 (geodesicField g gi) ((p, 0) : Point n × Point n) :=
+    ((contDiff_geodesicField g gi hC).of_le le_top).contDiffAt
+  obtain ⟨ε, hε, a, r, L, K, hr, hpl⟩ := IsPicardLindelof.of_contDiffAt_one hCA
+  obtain ⟨α, hflow, L', hlip⟩ :=
+    (hpl 0).exists_forall_mem_closedBall_eq_hasDerivWithinAt_lipschitzOnWith
+  have hset : Set.Icc (0 - ε) (0 + ε) = Set.Icc (-ε) ε := by rw [zero_sub, zero_add]
+  refine ⟨ε, hε, r, hr, α, ?_, L', ?_⟩
+  · intro x hx
+    obtain ⟨hx0, hxd⟩ := hflow x hx
+    rw [hset] at hxd
+    exact ⟨hx0, hxd⟩
+  · intro t ht
+    rw [hset] at hlip
+    exact hlip t ht
+
+/-! ### S4 — the two-point residual ODE and the Grönwall estimate
+
+  Fix the equilibrium linearization `A = linF` (`A(ξ,η) = (η,0)`, `A² = 0`).  For two integral curves
+  `Y₁, Y₂` of `F = geodesicField` and a fixed direction `d`, the explicit linear comparison is
+  `ℓ_d(τ) = (1 + τA)·i(d) = (τ•d, d)` (`i(d) = (0,d)`), and the residual is
+  `r(τ) := Y₁ τ − Y₂ τ − ℓ_d(τ)`.  The key ODE algebra (`residual_hasDerivAt`) is
+  `r' = A·r + R` with `R := F(Y₁) − F(Y₂) − A·(Y₁ − Y₂)`, obtained from `Y₁' = F(Y₁)`, `Y₂' = F(Y₂)`,
+  `ℓ_d' = A·i(d) = (d,0)`, and `A·ℓ_d = (d,0)`.  Feeding this into the inhomogeneous Grönwall
+  inequality `norm_le_gronwallBound_of_norm_deriv_right_le` (with `‖R‖ ≤ C` on `[0,1]`) yields the
+  two-point estimate `‖r(1)‖ ≤ gronwallBound 0 ‖A‖ C 1` (`residual_gronwall`). -/
+
+/-- **S4 (ODE algebra) — the residual solves `r' = A·r + R`.**  With `A = linF`,
+    `r(τ) = Y₁ τ − Y₂ τ − (τ•d, d)`, and `R(t) = F(Y₁ t) − F(Y₂ t) − A(Y₁ t − Y₂ t)`, any two
+    integral curves `Y₁, Y₂` of the geodesic field give `HasDerivAt r (A·r(t) + R(t)) t`.
+
+    Derivation: `Y₁' = F(Y₁)`, `Y₂' = F(Y₂)`, and `d/dτ (τ•d, d) = (d, 0)`, so
+    `r'(t) = F(Y₁ t) − F(Y₂ t) − (d, 0)`; the identity `F(Y₁) − F(Y₂) − (d,0) = A·r + R` follows from
+    linearity of `A` and `A·(τ•d, d) = (d, 0)`.  Flow-independent: a pointwise property of any two
+    solutions.  This is the exact ODE the two-point Grönwall estimate integrates. -/
+theorem residual_hasDerivAt (g gi : Point n → Fin n → Fin n → ℝ)
+    (d : Point n) {Y₁ Y₂ : ℝ → Point n × Point n} {t : ℝ}
+    (h1 : HasDerivAt Y₁ (geodesicField g gi (Y₁ t)) t)
+    (h2 : HasDerivAt Y₂ (geodesicField g gi (Y₂ t)) t) :
+    HasDerivAt (fun τ => Y₁ τ - Y₂ τ - ((τ • d, d) : Point n × Point n))
+      (linF (Y₁ t - Y₂ t - ((t • d, d) : Point n × Point n))
+        + (geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - linF (Y₁ t - Y₂ t))) t := by
+  have hℓ : HasDerivAt (fun τ : ℝ => ((τ • d, d) : Point n × Point n))
+      ((d, 0) : Point n × Point n) t := by
+    have h1' : HasDerivAt (fun τ : ℝ => τ • d) d t := by
+      simpa using (hasDerivAt_id t).smul_const d
+    exact h1'.prodMk (hasDerivAt_const t d)
+  have hbase : HasDerivAt (fun τ => Y₁ τ - Y₂ τ - ((τ • d, d) : Point n × Point n))
+      (geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - ((d, 0) : Point n × Point n)) t :=
+    (h1.sub h2).sub hℓ
+  have hval : (geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - ((d, 0) : Point n × Point n))
+      = linF (Y₁ t - Y₂ t - ((t • d, d) : Point n × Point n))
+        + (geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - linF (Y₁ t - Y₂ t)) := by
+    have hl : linF (Y₁ t - Y₂ t - ((t • d, d) : Point n × Point n))
+        = linF (Y₁ t - Y₂ t) - ((d, 0) : Point n × Point n) := by
+      rw [map_sub]
+      congr 1
+    rw [hl]; abel
+  rw [hval] at hbase
+  exact hbase
+
+/-- **S4 (the crux) — the two-point Grönwall estimate.**  If `Y₁, Y₂` are integral curves of the
+    geodesic field on `[0,1]` with `Y₁ 0 − Y₂ 0 = (0, d)` (so the residual `r` vanishes at `0`) and
+    the strict remainder is uniformly bounded, `‖F(Y₁ t) − F(Y₂ t) − A(Y₁ t − Y₂ t)‖ ≤ C` on `[0,1]`,
+    then the residual at time `1` obeys the inhomogeneous Grönwall bound
+    `‖Y₁ 1 − Y₂ 1 − (1•d, d)‖ ≤ gronwallBound 0 ‖A‖ C 1`, with `A = linF`.
+
+    This is the two-point `o(‖v−w‖)` seed for the strict derivative of `exp_p`: taking `Y₁ = Y_v`,
+    `Y₂ = Y_w`, `d = v − w`, and `C = εL‖v−w‖` (strict remainder × Lipschitz flow dependence, S3),
+    the bound is `‖r(1)‖ ≤ (εL/‖A‖)(e^{‖A‖} − 1)‖v−w‖ = O(ε)‖v−w‖`.
+
+    HONEST: this is the Grönwall estimate CONDITIONAL on its tube hypotheses — the integral-curve
+    property on `[0,1]` and the uniform remainder bound `C`.  Supplying those for all small `v, w`
+    from `geodesicField_flow_lipschitz` + `hasStrictFDerivAt_geodesicField` + `geodesic_rescale` is
+    the flagged common-tube management, NOT discharged here. -/
+theorem residual_gronwall (g gi : Point n → Fin n → Fin n → ℝ)
+    {Y₁ Y₂ : ℝ → Point n × Point n} (d : Point n) (C : ℝ)
+    (h1 : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivAt Y₁ (geodesicField g gi (Y₁ t)) t)
+    (h2 : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivAt Y₂ (geodesicField g gi (Y₂ t)) t)
+    (h0 : Y₁ 0 - Y₂ 0 = ((0, d) : Point n × Point n))
+    (hR : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - linF (Y₁ t - Y₂ t)‖ ≤ C) :
+    ‖Y₁ 1 - Y₂ 1 - ((1 • d, d) : Point n × Point n)‖
+      ≤ gronwallBound 0 ‖(linF (n := n))‖ C 1 := by
+  have key : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivAt (fun τ => Y₁ τ - Y₂ τ - ((τ • d, d) : Point n × Point n))
+        (linF (Y₁ t - Y₂ t - ((t • d, d) : Point n × Point n))
+          + (geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - linF (Y₁ t - Y₂ t))) t :=
+    fun t ht => residual_hasDerivAt g gi d (h1 t ht) (h2 t ht)
+  have hcont : ContinuousOn
+      (fun τ => Y₁ τ - Y₂ τ - ((τ • d, d) : Point n × Point n)) (Set.Icc 0 1) :=
+    fun t ht => ((key t ht).continuousAt).continuousWithinAt
+  have hmain := norm_le_gronwallBound_of_norm_deriv_right_le
+    (f := fun τ => Y₁ τ - Y₂ τ - ((τ • d, d) : Point n × Point n))
+    (f' := fun t => linF (Y₁ t - Y₂ t - ((t • d, d) : Point n × Point n))
+      + (geodesicField g gi (Y₁ t) - geodesicField g gi (Y₂ t) - linF (Y₁ t - Y₂ t)))
+    (δ := 0) (K := ‖(linF (n := n))‖) (ε := C) (a := 0) (b := 1)
+    hcont
+    (fun x hx => (key x (Set.Ico_subset_Icc_self hx)).hasDerivWithinAt)
+    (by
+      show ‖Y₁ 0 - Y₂ 0 - ((0 • d, d) : Point n × Point n)‖ ≤ 0
+      rw [h0]; simp)
+    (by
+      intro x hx
+      show ‖linF (Y₁ x - Y₂ x - ((x • d, d) : Point n × Point n))
+          + (geodesicField g gi (Y₁ x) - geodesicField g gi (Y₂ x) - linF (Y₁ x - Y₂ x))‖
+        ≤ ‖(linF (n := n))‖ * ‖Y₁ x - Y₂ x - ((x • d, d) : Point n × Point n)‖ + C
+      refine (norm_add_le _ _).trans ?_
+      exact add_le_add (linF.le_opNorm (Y₁ x - Y₂ x - ((x • d, d) : Point n × Point n)))
+        (hR x (Set.Ico_subset_Icc_self hx)))
+  have := hmain 1 (by norm_num [Set.mem_Icc])
+  simpa using this
+
 end QIQTH.ExpMap

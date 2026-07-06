@@ -405,6 +405,27 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `exp_p`'s own strict derivative, NOT the local diffeo, NOT the RNC gauge (`g(0)=δ`, `∂g(0)=0`, `∂_{(l}Γ_{jk)}(0)=0`
   still need the metric-in-normal-coordinates change of variables), and does **NOT** move numerical-`G` (`N`, `Λ_s`,
   `E/ξ` remain). `expMap` is DEFINED but its geodesic meaning at `t=1` is established only for small `v`.
+- **EXP2 — the exp-map campaign's S3 + S4 (two-point Grönwall crux, CONDITIONAL)** (`ExpMap.lean`
+  `geodesicField_flow_lipschitz`/`residual_hasDerivAt`/`residual_gronwall`/`geodesicSol_rescale_unit_existence`, all
+  **[AF]** std-3, 2026-07-06). **S3 — `geodesicField_flow_lipschitz`**: the geodesic flow near `e=(p,0)` is Lipschitz
+  in the initial condition on a closed ball `closedBall e r`, uniformly over the Picard–Lindelöf interval `[-ε,ε]` —
+  via `IsPicardLindelof.of_contDiffAt_one` (from the `C^∞` field) +
+  `exists_forall_mem_closedBall_eq_hasDerivWithinAt_lipschitzOnWith`. **S4 ODE algebra — `residual_hasDerivAt`**: for
+  any two integral curves `Y₁,Y₂` of `F`, the residual `r(τ)=Y₁τ−Y₂τ−(τ•d,d)` solves `r'=A·r+R` with `A=linF`,
+  `R=F(Y₁)−F(Y₂)−A(Y₁−Y₂)` (from `Y'=F(Y)`, `(τ•d,d)'=(d,0)`, `A·(τ•d,d)=(d,0)`); flow-independent. **S4 crux
+  (CONDITIONAL) — `residual_gronwall`**: given the `[0,1]` integral-curve property of `Y₁,Y₂`, `Y₁0−Y₂0=(0,d)`, and a
+  uniform remainder bound `‖R(t)‖≤C` on `[0,1]`, `norm_le_gronwallBound_of_norm_deriv_right_le` (δ=0, K=‖A‖, inhomog
+  `C`) gives `‖Y₁1−Y₂1−(1•d,d)‖ ≤ gronwallBound 0 ‖A‖ C 1` — with `C=εL‖v−w‖` (S2 strict remainder × S3 Lipschitz)
+  this is `O(ε)‖v−w‖`, the two-point `o(‖v−w‖)` seed. **Existence-on-`[0,1]` half —
+  `geodesicSol_rescale_unit_existence`**: for every direction `v` there is a scale `s=ε/2>0` and a genuine integral
+  curve `γ` with `γ 0=(p,s•v)` solving the geodesic ODE on `(-1,2)⊇[0,1]` (`geodesicSol_hasDerivAt` rescaled by
+  `geodesic_rescale`); discharges the existence-on-`[0,1]` half FLOW-FREE for short geodesics. ⚠ **HONEST CAPTION
+  (binding)**: `residual_gronwall` is the Grönwall estimate **CONDITIONAL** on its tube hypotheses; S3 is on the PL
+  interval `[-ε,ε]` (NOT `[0,1]`); existence is for velocities `s•v` only. The **UNCONDITIONAL** two-point estimate →
+  `HasStrictFDerivAt exp_p id 0` needs the flagged **common-tube reconciliation over `[0,1]` for a whole ball** (one
+  radius `ρ` giving integral-curve-on-`[0,1]` + S2-nbhd containment + S3 Lipschitz simultaneously for all `v,w∈ball 0
+  ρ`); that is CHECKPOINTED, NOT discharged. This is NOT `exp_p`'s strict derivative, NOT the local diffeo, NOT the RNC
+  gauge, NOT numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

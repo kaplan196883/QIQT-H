@@ -9602,4 +9602,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicSol_zero
 #print axioms QIQTH.ExpMap.geodesicSol_hasDerivAt
 
+-- ExpMap.lean — S3 + S4 (the two-point Grönwall crux), 2026-07-06.
+-- S3 (geodesicField_flow_lipschitz): the geodesic flow near the equilibrium e=(p,0) is Lipschitz in the
+-- initial condition on a closed ball, over the Picard–Lindelöf interval [-ε,ε] — instantiating Mathlib's
+-- IsPicardLindelof.of_contDiffAt_one + exists_forall_mem_closedBall_eq_hasDerivWithinAt_lipschitzOnWith on
+-- the C^∞ field. S4 ODE algebra (residual_hasDerivAt): the residual r=Y₁−Y₂−(τ•d,d) of two integral curves
+-- solves r'=A·r+R with A=linF, R=F(Y₁)−F(Y₂)−A(Y₁−Y₂) (Y'=F(Y), (τ•d,d)'=(d,0), A·(τ•d,d)=(d,0)). S4 crux
+-- (residual_gronwall): CONDITIONAL two-point Grönwall estimate ‖r(1)‖≤gronwallBound 0 ‖A‖ C 1 via
+-- norm_le_gronwallBound_of_norm_deriv_right_le, given the integral-curve property on [0,1] and ‖R‖≤C.
+-- HONEST: S3 is on the PL interval [-ε,ε] (NOT [0,1]); residual_gronwall is CONDITIONAL on its tube
+-- hypotheses. Assembling the common tube over [0,1] for all small v,w (existence-on-[0,1] via rescaling +
+-- strict-nbhd + S3-ball) is the flagged bookkeeping, NOT discharged. NOT exp_p's strict deriv, NOT the
+-- diffeo, NOT the RNC gauge, NOT numerical-G. Axiom-free (standard three).
+#print axioms QIQTH.ExpMap.geodesicField_flow_lipschitz
+#print axioms QIQTH.ExpMap.residual_hasDerivAt
+#print axioms QIQTH.ExpMap.residual_gronwall
+-- geodesicSol_rescale_unit_existence: existence-on-[0,1] half of the tube management, flow-free — for
+-- every direction v there is a scale s>0 and a genuine integral curve γ with γ 0 = (p, s•v) solving the
+-- geodesic ODE on (-1,2) ⊇ [0,1] (geodesicSol_hasDerivAt rescaled by geodesic_rescale, s = ε/2). HONEST:
+-- existence for short geodesics s•v only, NOT the uniform-over-a-ball tube, NOT the two-point estimate.
+#print axioms QIQTH.ExpMap.geodesicSol_rescale_unit_existence
+
 end QIQTH.AxiomAudit

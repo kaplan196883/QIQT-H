@@ -47,12 +47,33 @@ ABSENT: variational/Jacobi flow-in-IC differentiability, global linear-ODE exist
   integral curve as a total function (`Classical.choose` of `geodesic_local_existence`) + spec lemmas
   `geodesicSol_zero`/`geodesicSol_hasDerivAt`; `expMap p v := (geodesicSol (p,v) 1).1`. HONEST: the chosen curve solves
   the ODE only on `(−ε,ε)`; `expMap`'s geodesic meaning at `t=1` holds only for small `v` (needs S1 + existence-on-[0,1]).
-- [ ] **S3 — Lipschitz flow dependence `‖Y_v(t)−Y_w(t)‖≤L‖v−w‖` on `[0,1]` (std-3/4). CHECKPOINT — not yet started.**
-  Instantiate Mathlib's
-  `IsPicardLindelof…lipschitzOnWith` on the common tube (joint continuity gives the tube for small `v,w`).
-- [ ] **S4 — the two-point Grönwall estimate (std-5, THE CRUX).** `r=Y_v−Y_w−ℓ_d`, `r(0)=0`, `r'=A·r+R`,
-  `‖R‖≤εL‖v−w‖` (S2×S3); `norm_le_gronwallBound_of_norm_deriv_right_le` (δ=0, K=‖A‖, inhomog `εL‖v−w‖`) ⟹
-  `‖r(1)‖≤Cε‖v−w‖`. Crux risk: **common-tube management over `[0,1]`** (both consults flag this as the stall risk).
+- [x] **S3 — Lipschitz flow dependence — DONE on the PL interval (`ExpMap.geodesicField_flow_lipschitz`, 2026-07-06,
+  [AF] std-3).** Instantiates `IsPicardLindelof.of_contDiffAt_one` on the `C^∞` field at `e=(p,0)` +
+  `exists_forall_mem_closedBall_eq_hasDerivWithinAt_lipschitzOnWith`: a local flow `α` on `closedBall e r` with
+  `α x 0 = x`, `α x' = F(α x)`, that is `L'`-Lipschitz in the IC `x`, uniformly for `t∈[-ε,ε]`. HONEST: this is the
+  Lipschitz-in-IC on the Picard–Lindelöf interval `[-ε,ε]` — reaching the *unit* interval `[0,1]` for all small `v,w`
+  is the tube-management bookkeeping, NOT discharged here.
+- [x] **S4 (ODE algebra) — the residual solves `r'=A·r+R` — DONE (`ExpMap.residual_hasDerivAt`, 2026-07-06, [AF]
+  std-3).** For any two integral curves `Y₁,Y₂` of `F`, `r(τ)=Y₁τ−Y₂τ−(τ•d,d)` has `HasDerivAt r (A·r(t)+R(t)) t`
+  with `A=linF`, `R=F(Y₁)−F(Y₂)−A(Y₁−Y₂)` (from `Y'=F(Y)`, `(τ•d,d)'=(d,0)`, `A·(τ•d,d)=(d,0)`). Flow-independent.
+- [x] **S4 (crux, CONDITIONAL) — the two-point Grönwall estimate — DONE (`ExpMap.residual_gronwall`, 2026-07-06, [AF]
+  std-3).** Given the integral-curve property of `Y₁,Y₂` on `[0,1]`, `Y₁0−Y₂0=(0,d)`, and a uniform remainder bound
+  `‖R(t)‖≤C` on `[0,1]`, `norm_le_gronwallBound_of_norm_deriv_right_le` (δ=0, K=‖A‖, inhomog `C`) gives
+  `‖Y₁1−Y₂1−(1•d,d)‖ ≤ gronwallBound 0 ‖A‖ C 1`. With `C=εL‖v−w‖` this is `O(ε)‖v−w‖`. CONDITIONAL on its tube
+  hypotheses (the `[0,1]` integral-curve property + the uniform `C`).
+- [x] **S4 (existence-on-`[0,1]` half of the tube) — DONE (`ExpMap.geodesicSol_rescale_unit_existence`, 2026-07-06,
+  [AF] std-3).** For every direction `v` there is a scale `s=ε/2>0` and a genuine integral curve `γ` with
+  `γ 0=(p, s•v)` solving the geodesic ODE on `(-1,2)⊇[0,1]` — `geodesicSol_hasDerivAt` rescaled by `geodesic_rescale`.
+  Discharges the existence-on-`[0,1]` half FLOW-FREE (short geodesics `s•v`). HONEST: NOT the uniform-over-a-ball tube.
+- [ ] **S4 (unconditional) — CHECKPOINT: common-tube reconciliation over `[0,1]` for a whole ball.** The three pieces
+  above are each green but on DIFFERENT sets: S3's Lipschitz-in-IC lives on the PL interval `[-ε,ε]`; the rescaling
+  existence gives `[0,1]` but only for velocities `s•v` with `s` depending on `v`; the strict remainder `‖R‖≤ε‖Y_v−Y_w‖`
+  (from `hasStrictFDerivAt_geodesicField`) holds only in an S2-nbhd of `e`. **Exact remaining goal:** produce ONE
+  radius `ρ>0` such that for all `v,w∈ball 0 ρ`, (i) `Y_v,Y_w` are integral curves on `[0,1]` staying in the S2-nbhd,
+  (ii) `‖Y_v(t)−Y_w(t)‖≤L‖v−w‖` on `[0,1]`, feeding `residual_gronwall` with `C=εL‖v−w‖` to get the UNCONDITIONAL
+  `‖r(1)‖≤Cε‖v−w‖`. **What blocks:** the PL flow's fixed interval is `[-ε,ε]`, not `[0,1]`; bridging needs a uniform
+  (over the ball) rescaling/re-timing that keeps the S3 Lipschitz constant AND the S2-nbhd containment simultaneously —
+  the flagged common-tube management. Both consults flagged this as THE stall risk; per the plan it is validly checkpointed.
 - [ ] **S5 — `HasStrictFDerivAt exp_p (id) 0` (std-4).** Project `exp_p(v)−exp_p(w)−(v−w)=π₁ r(1)` ⟹ two-point
   `o(‖v−w‖)` ⟹ strict derivative (`hasStrictFDerivAt` via the `isLittleO` two-point characterization).
 - [ ] **S6 — `exp_p` local C¹ diffeo at 0 (std-4).** `HasStrictFDerivAt.to_localInverse` (id invertible) ⟹ a
@@ -94,3 +115,14 @@ numerical-G, the full gauge, or a curved heat kernel.
   — all CHECKPOINTED, not started.** S2's `linF` IS the linear comparison `A` that S4/S5 consume. HONEST: this is the
   strict derivative of the ODE FIELD + rescaling + scaffolding — NOT yet `exp_p`'s strict derivative, NOT the diffeo,
   NOT the RNC gauge, NOT numerical-G.
+- **2026-07-06 (S3 + S4 LANDED, crux CHECKPOINTED):** `QIQTH/ExpMap.lean`, all [AF] std-3, budget 0. **S3 CLOSED on the
+  PL interval** (`geodesicField_flow_lipschitz`: PL flow Lipschitz-in-IC on `closedBall e r` over `[-ε,ε]`, via
+  `IsPicardLindelof.of_contDiffAt_one` + `…lipschitzOnWith`). **S4 ODE algebra CLOSED** (`residual_hasDerivAt`:
+  `r'=A·r+R`). **S4 crux CLOSED CONDITIONALLY** (`residual_gronwall`: `‖r(1)‖≤gronwallBound 0 ‖A‖ C 1` given the `[0,1]`
+  integral-curve property + uniform `‖R‖≤C`; with `C=εL‖v−w‖` this is `O(ε)‖v−w‖`). **Existence-on-`[0,1]` half CLOSED
+  flow-free** (`geodesicSol_rescale_unit_existence`: for each `v` a genuine integral curve through `(p,s•v)` on
+  `(-1,2)⊇[0,1]`, `s=ε/2`). **CHECKPOINTED — S5 unconditional two-point estimate:** needs the common-tube reconciliation
+  over `[0,1]` for a whole ball (one radius `ρ` giving integral-curve-on-`[0,1]` + S2-nbhd containment + S3 Lipschitz
+  simultaneously for all `v,w∈ball 0 ρ`; the PL interval is `[-ε,ε]` not `[0,1]`, bridging needs a uniform re-timing).
+  Flagged #1 stall risk; validly checkpointed. HONEST: NOT `exp_p`'s strict derivative, NOT the diffeo, NOT the RNC
+  gauge, NOT numerical-G.
