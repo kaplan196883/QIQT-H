@@ -612,6 +612,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   identifying the order-0/1/2 coefficients (`A₀=DF(e)=linF`, `A₁`, `A₂`) of the uniform `DF(Y_y t)` expansion. ⚠ **HONEST
   CAPTION (binding):** the pointwise closed-form Jacobi coefficient; does **NOT** give the uniform order-2 `DF` expansion,
   **NOT** the Jacobian 2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3c (STEP 1 ingredient) — the uniform-in-`t` tube value 2-jet** (`ExpMap.lean` `expTube_value_two_jet` +
+  helper `gronwallBound_zero_le_exp`, **[AF]** std-3, budget 0, 2026-07-07): for `‖v‖ ≤ ρ`, `∀ t∈[0,1]`,
+  `‖expTube p v t − (p+t·v−½t²Γ_p(v,v), v−t·Γ_p(v,v))‖ ≤ C·‖v‖³` — the WHOLE confined geodesic tube's value 2-jet,
+  uniform in `t` and exposing BOTH phase components (`expMap_value_two_jet` only projected the position endpoint at
+  `t=1`). This is the tube 2-jet `Y_v(t)−e = S₁(t,v)+S₂(t,v)+O(‖v‖³)`, `S₁=(t·v,v)`, `S₂=(−½t²Γ_p(v,v),−t·Γ_p(v,v))` —
+  the value-jet input the operator-valued Jacobian 2-jet's uniform `DF(Y_v t)` expansion consumes (compose
+  `geodesicField_fderiv_apply` at `(x,u)=Y_v(t)` with it). Same equilibrium-anchored residual-ODE + inhomogeneous
+  Grönwall as `expMap_value_two_jet`, but Grönwall applied at every `t∈[0,1]` (new reusable helper
+  `gronwallBound_zero_le_exp`: `gronwallBound 0 K ε t ≤ ε·e^K` uniform in `t∈[0,1]`) and no position projection.
+  ⚠ **HONEST CAPTION (binding):** the uniform-in-`t` full-phase-vector value 2-jet of the tube; does **NOT** give the
+  operator `DF` expansion, **NOT** the Jacobian 2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`,
+  `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

@@ -165,6 +165,24 @@ remain). Never claim numerical-G or a curved heat kernel.
     `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.
     HONEST: the pointwise closed-form Jacobi coefficient — does NOT give the uniform order-2 expansion, NOT the Jacobian
     2-jet, NOT the pullback metric, NOT numerical-G (`N`, `Λ_s`, `E/ξ` remain).
+  - [x] **EXP-JET3c (STEP 1 ingredient) — the uniform-in-`t` tube value 2-jet. DONE 2026-07-07.**  Landed green in
+    `ExpMap.lean` ([AF] std-3, budget 0): **`expTube_value_two_jet`** — for `‖v‖ ≤ ρ` the WHOLE confined tube
+    `Y_v(t)=expTube p v t` (not just its position endpoint at `t=1`, as `expMap_value_two_jet` exposed) is
+    `O(‖v‖³)`-close, UNIFORMLY in `t∈[0,1]`, to the model curve `M(t)=(p+t·v−½t²Γ_p(v,v), v−t·Γ_p(v,v))`:
+    `‖Y_v(t) − M(t)‖ ≤ C·‖v‖³` on `[0,1]`.  This is the tube 2-jet `Y_v(t)−e = S₁(t,v)+S₂(t,v)+O(‖v‖³)`,
+    `S₁=(t·v,v)`, `S₂=(−½t²Γ_p(v,v),−t·Γ_p(v,v))` — the value-jet input the uniform `DF(Y_v t)` expansion consumes
+    (compose `geodesicField_fderiv_apply` at `(x,u)=Y_v(t)` with this).  Route (as scoped): the SAME
+    equilibrium-anchored residual-ODE + inhomogeneous Grönwall as `expMap_value_two_jet` (`q=Y−M`, `q 0 = 0`,
+    `‖q'‖ ≤ (1+Bcoef‖v‖)‖q‖ + Acoef‖v‖³` via confinement + `christoffel_quad_diff_bound`), but the Grönwall is applied
+    at EVERY `t∈[0,1]` (not just `t=1`) and BOTH phase components are exposed (no position projection).  New reusable
+    helper **`gronwallBound_zero_le_exp`** (`gronwallBound 0 K ε t ≤ ε·e^K` uniformly in `t∈[0,1]`, generalizing
+    `gronwallBound_zero_one_le_exp` to arbitrary `ε` and interior times).  ⚠ **STILL CHECKPOINTED (the EXP-JET3c bulk):**
+    the operator-norm `DF(Y_y t) = A₀+A₁(t,y)+A₂(t,y)+o(‖y‖²)` expansion (plug this tube 2-jet into
+    `geodesicField_fderiv_apply` and bound the operator-norm remainder via `christoffel_taylor_bound` — this is the
+    remaining analytic bulk); the model Jacobian `K_y=K₀+K₁+K₂`; the residual operator Grönwall; and the projected
+    `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the uniform-in-`t` full-phase-vector value 2-jet of the tube —
+    does NOT give the operator `DF` expansion, NOT the Jacobian 2-jet, NOT the pullback metric, NOT numerical-G
+    (`N`, `Λ_s`, `E/ξ` remain).
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -191,6 +209,17 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 1 ingredient):** the uniform-in-`t` tube value 2-jet landed green ([AF] std-3,
+  budget 0).  New theorem `expTube_value_two_jet` in `ExpMap.lean`: for `‖v‖ ≤ ρ`, `∀ t∈[0,1]`,
+  `‖expTube p v t − (p+t·v−½t²Γ_p(v,v), v−t·Γ_p(v,v))‖ ≤ C·‖v‖³` — the WHOLE confined tube's value 2-jet, uniform in
+  `t` and exposing BOTH phase components (`expMap_value_two_jet` only projected the position endpoint at `t=1`).  This
+  is exactly the tube 2-jet `Y_v(t)−e = S₁+S₂+O(‖v‖³)` the operator-valued Jacobian 2-jet's uniform `DF(Y_v t)`
+  expansion consumes (compose `geodesicField_fderiv_apply` at `(x,u)=Y_v(t)` with it).  Route: the SAME
+  equilibrium-anchored residual-ODE + inhomogeneous Grönwall as `expMap_value_two_jet`, but Grönwall applied at every
+  `t∈[0,1]` (via the new reusable helper `gronwallBound_zero_le_exp`: `gronwallBound 0 K ε t ≤ ε·e^K` uniform in
+  `t∈[0,1]`) and no position projection.  ⚠ CHECKPOINTED: the operator-norm `DF(Y_y t)` order-2 expansion (plug this
+  into `geodesicField_fderiv_apply`, bound the remainder via `christoffel_taylor_bound`), the model Jacobian `K_y`,
+  the residual operator Grönwall, and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 0):** the closed-form Fréchet derivative of the geodesic field landed green
   ([AF] std-3, budget 0).  New theorem `geodesicField_fderiv_apply` in `ExpMap.lean`:
   `DF(x,u)(ξ,η) = (η, i ↦ −∑_{jk}[(∑_l ∂_l Γ^i_{jk}(x)·ξ_l)·u_j·u_k + Γ^i_{jk}(x)·η_j·u_k + Γ^i_{jk}(x)·u_j·η_k])`.

@@ -9818,4 +9818,20 @@ namespace QIQTH.AxiomAudit
 -- uniform order-2 expansion, NOT the Jacobian 2-jet, NOT the pullback metric, NOT numerical-G.
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_apply
 
+-- ExpMap.lean — EXP-JET3c STEP 1 ingredient (2026-07-07): the uniform-in-t tube value 2-jet.
+-- gronwallBound_zero_le_exp: gronwallBound 0 K ε t ≤ ε·e^K uniformly in t ∈ [0,1] (K,ε ≥ 0) —
+-- generalizes gronwallBound_zero_one_le_exp to arbitrary ε and interior times.
+-- expTube_value_two_jet: for ‖v‖ ≤ ρ the WHOLE confined tube Y_v(t)=expTube p v t (not just its
+-- position endpoint at t=1) is O(‖v‖³)-close, UNIFORMLY in t ∈ [0,1], to the model curve
+-- M(t) = (p + t·v − ½t²·Γ_p(v,v), v − t·Γ_p(v,v)): ‖Y_v(t) − M(t)‖ ≤ C·‖v‖³ on [0,1].  This is the
+-- tube value 2-jet Y_v(t) − e = S₁(t,v)+S₂(t,v)+O(‖v‖³), S₁=(t·v,v), S₂=(−½t²Γ_p(v,v),−t·Γ_p(v,v)) —
+-- the input the operator-valued Jacobian 2-jet's uniform DF(Y_v t) expansion consumes (compose
+-- geodesicField_fderiv_apply at (x,u)=Y_v(t) with this).  Same equilibrium-anchored residual-ODE +
+-- inhomogeneous Grönwall as expMap_value_two_jet, but Grönwall applied at every t ∈ [0,1] and BOTH
+-- components exposed (no position projection).  HONEST: the uniform-in-t full-phase-vector value 2-jet
+-- of the tube — does NOT give the operator DF expansion, NOT the Jacobian 2-jet, NOT the pullback
+-- metric, NOT numerical-G (N, Λ_s, E/ξ remain).  All [AF] std-3.
+#print axioms QIQTH.ExpMap.gronwallBound_zero_le_exp
+#print axioms QIQTH.ExpMap.expTube_value_two_jet
+
 end QIQTH.AxiomAudit
