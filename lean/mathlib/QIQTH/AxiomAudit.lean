@@ -9834,4 +9834,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.gronwallBound_zero_le_exp
 #print axioms QIQTH.ExpMap.expTube_value_two_jet
 
+-- ExpMap.lean — EXP-JET3c STEP 1 core (2026-07-07): the operator-norm "A₀ is leading" bound.
+-- geodesicField_fderiv_sub_linF_opNorm_le: given |Γ^i_{jk}(x)| ≤ Mc and |∂_lΓ^i_{jk}(x)| ≤ Nc,
+--   ‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·(Mc·n²)·‖u‖   (A₀ = linF = DF(e)).
+-- The Jacobi coefficient DF(x,u) differs from A₀ only in its acceleration block; on (ξ,η) the velocity
+-- slots cancel (A₀(ξ,η)=(η,0)), leaving (0, Acc) with Acc = −∑_{jk}[(∑_l ∂_lΓ·ξ_l)u_j u_k + Γ η_j u_k
+-- + Γ u_j η_k], split into the ∂Γ-trilinear (christoffel_pd_trilin_bound, ≤ Nc n³ ‖u‖²‖ξ‖) and two
+-- Γ-bilinear forms (christoffel_bilin_bound, ≤ Mc n² ‖u‖‖η‖ each), ‖ξ‖,‖η‖ ≤ ‖(ξ,η)‖; then
+-- ContinuousLinearMap.opNorm_le_bound.  Composed with expTube_value_two_jet (‖u‖=‖(Y_v t).2‖=O(‖v‖))
+-- this is the order-0 remainder ‖DF(Y_v t) − A₀‖ ≤ C·‖v‖ of the uniform DF(Y_v t) expansion.  HONEST:
+-- the operator-norm "A₀ leading" bound — does NOT identify the order-1/2 coefficients A₁, A₂, NOT the
+-- full Jacobian 2-jet, NOT the pullback metric, NOT numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_sub_linF_opNorm_le
+
 end QIQTH.AxiomAudit

@@ -624,6 +624,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ⚠ **HONEST CAPTION (binding):** the uniform-in-`t` full-phase-vector value 2-jet of the tube; does **NOT** give the
   operator `DF` expansion, **NOT** the Jacobian 2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`,
   `E/ξ` remain).
+- **EXP-JET3c (STEP 1 core) — the operator-norm `‖DF(x,u) − A₀‖` bound** (`ExpMap.lean`
+  `geodesicField_fderiv_sub_linF_opNorm_le`, **[AF]** std-3, budget 0, 2026-07-07): given `|Γ^i_{jk}(x)| ≤ Mc` and
+  `|∂_l Γ^i_{jk}(x)| ≤ Nc`, `‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·(Mc·n²)·‖u‖` (`A₀ = linF = DF(e)`). The Jacobi
+  coefficient `DF(x,u)` differs from `A₀` only in its acceleration block: `(DF(x,u)−A₀)(ξ,η) = (0, Acc)` (velocity
+  slots cancel), `Acc = −∑_{jk}[(∑_l ∂_lΓ·ξ_l)u_j u_k + Γ·η_j u_k + Γ·u_j η_k]`, split into the ∂Γ-trilinear form
+  (`christoffel_pd_trilin_bound`) + two Γ-bilinear forms (`christoffel_bilin_bound`), `‖ξ‖,‖η‖ ≤ ‖(ξ,η)‖`, closed by
+  `ContinuousLinearMap.opNorm_le_bound`. Composed with `expTube_value_two_jet` (`‖u‖=‖(Y_v t).2‖=O(‖v‖)`) this is the
+  ORDER-0 remainder `‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` of the uniform `DF(Y_v t)` expansion. ⚠ **HONEST CAPTION (binding):**
+  the operator-norm "`A₀` is leading" bound; does **NOT** identify the order-1/2 coefficients `A₁, A₂`, **NOT** the
+  full Jacobian 2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

@@ -183,6 +183,20 @@ remain). Never claim numerical-G or a curved heat kernel.
     `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the uniform-in-`t` full-phase-vector value 2-jet of the tube —
     does NOT give the operator `DF` expansion, NOT the Jacobian 2-jet, NOT the pullback metric, NOT numerical-G
     (`N`, `Λ_s`, `E/ξ` remain).
+  - [x] **EXP-JET3c (STEP 1 core) — the operator-norm `‖DF(x,u) − A₀‖` bound (`A₀` is leading). DONE 2026-07-07.**
+    Landed green in `ExpMap.lean` ([AF] std-3, budget 0): **`geodesicField_fderiv_sub_linF_opNorm_le`** — given
+    `|Γ^i_{jk}(x)| ≤ Mc` and `|∂_l Γ^i_{jk}(x)| ≤ Nc`, the OPERATOR-NORM bound
+    `‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·(Mc·n²)·‖u‖` (`A₀ = linF = DF(e)`).  Route: `(DF(x,u)−A₀)(ξ,η) = (0, Acc)` (the
+    velocity slots cancel), `Acc = −∑_{jk}[(∑_l ∂_lΓ·ξ_l)u_j u_k + Γ·η_j u_k + Γ·u_j η_k]` split into the
+    ∂Γ-trilinear form (`christoffel_pd_trilin_bound`, `≤ Nc·n³·‖u‖²·‖ξ‖`) and two Γ-bilinear forms
+    (`christoffel_bilin_bound`, `≤ Mc·n²·‖u‖·‖η‖` each), `‖ξ‖,‖η‖ ≤ ‖(ξ,η)‖`, then `ContinuousLinearMap.opNorm_le_bound`.
+    Composed with `expTube_value_two_jet` (`‖u‖ = ‖(Y_v t).2‖ = O(‖v‖)`) this is the ORDER-0 remainder
+    `‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` of the uniform `DF(Y_v t)` expansion.  ⚠ **STILL CHECKPOINTED (the EXP-JET3c bulk):**
+    identifying the order-1/2 coefficients `A₁(t,y)`, `A₂(t,y)` (the linear/quadratic-in-`y` operator terms) and the
+    operator-norm `o(‖y‖²)` remainder — i.e. the FULL uniform order-2 `DF(Y_y t)` expansion; the model Jacobian
+    `K_y=K₀+K₁+K₂` from the triangular ODEs (`A₀²=0`); the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`;
+    and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the operator-norm "`A₀` is leading" bound —
+    does NOT identify `A₁, A₂`, NOT the full Jacobian 2-jet, NOT the pullback metric, NOT numerical-G.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -209,6 +223,15 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 1 core):** the operator-norm "`A₀` is leading" bound landed green ([AF] std-3,
+  budget 0).  New theorem `geodesicField_fderiv_sub_linF_opNorm_le` in `ExpMap.lean`: given `|Γ(x)| ≤ Mc`,
+  `|∂Γ(x)| ≤ Nc`, `‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·(Mc·n²)·‖u‖` (`A₀=linF=DF(e)`).  The velocity slots of
+  `(DF(x,u)−A₀)(ξ,η)` cancel, leaving `(0, Acc)`; `Acc` splits into a ∂Γ-trilinear form
+  (`christoffel_pd_trilin_bound`) + two Γ-bilinear forms (`christoffel_bilin_bound`), bounded by `‖(ξ,η)‖` and closed
+  by `ContinuousLinearMap.opNorm_le_bound`.  Composed with `expTube_value_two_jet` (`‖u‖=‖(Y_v t).2‖=O(‖v‖)`) this is
+  the ORDER-0 remainder `‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` of the uniform `DF(Y_v t)` expansion.  ⚠ CHECKPOINTED: the FULL
+  order-2 expansion (identify `A₁(t,y)`, `A₂(t,y)` + the operator `o(‖y‖²)` remainder), the model Jacobian `K_y`, the
+  residual operator Grönwall, and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 1 ingredient):** the uniform-in-`t` tube value 2-jet landed green ([AF] std-3,
   budget 0).  New theorem `expTube_value_two_jet` in `ExpMap.lean`: for `‖v‖ ≤ ρ`, `∀ t∈[0,1]`,
   `‖expTube p v t − (p+t·v−½t²Γ_p(v,v), v−t·Γ_p(v,v))‖ ≤ C·‖v‖³` — the WHOLE confined tube's value 2-jet, uniform in

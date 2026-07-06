@@ -2924,6 +2924,107 @@ theorem geodesicField_fderiv_apply (g gi : Point n → Fin n → Fin n → ℝ)
     rw [fderiv_apply_eq_sum_pd (fun z => christoffel g gi i j k z) x ξ (hΓdiff i j k)]
     ring
 
+/-- **EXP-JET3c (STEP 1 core) — the operator-norm bound `‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·Mc·n²·‖u‖`.**
+    With `A₀ = linF` (`DF(e)`), the Jacobi coefficient `DF(x,u)` differs from `A₀` only in its
+    acceleration block, which is bounded (in operator norm) by a polynomial in `‖u‖` vanishing at
+    `u = 0`: given `|Γ^i_{jk}(x)| ≤ Mc` and `|∂_l Γ^i_{jk}(x)| ≤ Nc`,
+    `‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·(Mc·n²)·‖u‖`.
+
+    Proof: `(DF(x,u) − A₀)(ξ,η) = (0, Acc)` (the velocity slots `η` cancel; `A₀(ξ,η) = (η,0)`), with the
+    acceleration block `Acc = −∑_{jk}[(∑_l ∂_lΓ·ξ_l)u_j u_k + Γ·η_j u_k + Γ·u_j η_k]`, so
+    `‖(DF(x,u) − A₀)(ξ,η)‖ = ‖Acc‖`, split into the ∂Γ-trilinear form (`christoffel_pd_trilin_bound`,
+    `≤ Nc·n³·‖u‖²·‖ξ‖`) and two Γ-bilinear forms (`christoffel_bilin_bound`, `≤ Mc·n²·‖u‖·‖η‖` each),
+    with `‖ξ‖, ‖η‖ ≤ ‖(ξ,η)‖`; `ContinuousLinearMap.opNorm_le_bound` reads off the operator bound.
+
+    Composed with the tube value 2-jet (`‖(Y_v t).2‖ = ‖u‖ = O(‖v‖)`, `expTube_value_two_jet`), this is
+    the order-0 remainder `‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` of the uniform `DF(Y_v t)` expansion.  HONEST: the
+    operator-norm "A₀ is leading" bound; it does NOT by itself identify the order-1/2 coefficients
+    `A₁, A₂`, NOT the full Jacobian 2-jet, NOT the pullback metric, NOT numerical-G (`N`, `Λ_s`, `E/ξ`). -/
+theorem geodesicField_fderiv_sub_linF_opNorm_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x u : Point n) {Mc Nc : ℝ} (hMc0 : 0 ≤ Mc) (hNc0 : 0 ≤ Nc)
+    (hMc : ∀ i j k, |christoffel g gi i j k x| ≤ Mc)
+    (hNc : ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l x| ≤ Nc) :
+    ‖fderiv ℝ (geodesicField g gi) ((x, u) : Point n × Point n) - linF‖
+      ≤ Nc * (n : ℝ) ^ 3 * ‖u‖ ^ 2 + 2 * (Mc * (n : ℝ) ^ 2) * ‖u‖ := by
+  have hu0 : 0 ≤ ‖u‖ := norm_nonneg u
+  have hNcn : 0 ≤ Nc * (n : ℝ) ^ 3 := mul_nonneg hNc0 (by positivity)
+  have hMcn : 0 ≤ Mc * (n : ℝ) ^ 2 := mul_nonneg hMc0 (by positivity)
+  refine ContinuousLinearMap.opNorm_le_bound _ ?_ ?_
+  · exact add_nonneg (mul_nonneg hNcn (by positivity))
+      (mul_nonneg (mul_nonneg (by norm_num) hMcn) hu0)
+  intro z
+  obtain ⟨ξ, η⟩ := z
+  have hξ : ‖ξ‖ ≤ ‖((ξ, η) : Point n × Point n)‖ := by rw [Prod.norm_def]; exact le_max_left _ _
+  have hη : ‖η‖ ≤ ‖((ξ, η) : Point n × Point n)‖ := by rw [Prod.norm_def]; exact le_max_right _ _
+  -- `(DF(x,u) − A₀)(ξ,η) = (0, Acc)`, so its norm is `‖Acc‖`.
+  rw [ContinuousLinearMap.sub_apply, geodesicField_fderiv_apply g gi hC x u ξ η, linF_apply,
+    Prod.mk_sub_mk, sub_self, sub_zero, Prod.norm_def, norm_zero, max_eq_right (norm_nonneg _)]
+  -- split `Acc = −(TA + TB + TC)`.
+  have hfun : (fun i => -∑ j, ∑ k,
+        ((∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k
+          + christoffel g gi i j k x * η j * u k
+          + christoffel g gi i j k x * u j * η k) : Point n)
+      = -((fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l : Point n)
+          + (fun i => ∑ j, ∑ k, christoffel g gi i j k x * η j * u k : Point n)
+          + (fun i => ∑ j, ∑ k, christoffel g gi i j k x * u j * η k : Point n)) := by
+    funext i
+    simp only [Pi.neg_apply, Pi.add_apply]
+    rw [neg_inj]
+    have hdist : ∑ j, ∑ k,
+          ((∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k
+            + christoffel g gi i j k x * η j * u k + christoffel g gi i j k x * u j * η k)
+        = (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k)
+          + (∑ j, ∑ k, christoffel g gi i j k x * η j * u k)
+          + (∑ j, ∑ k, christoffel g gi i j k x * u j * η k) := by
+      simp only [Finset.sum_add_distrib]
+    rw [hdist]
+    have hTA : (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k)
+        = ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l := by
+      refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+      rw [Finset.sum_mul, Finset.sum_mul]
+      exact Finset.sum_congr rfl fun l _ => by ring
+    rw [hTA]
+  rw [hfun, norm_neg]
+  have hTAbound := christoffel_pd_trilin_bound g gi x u u ξ hNc0 hNc
+  have hTBbound := christoffel_bilin_bound g gi x η u hMc0 hMc
+  have hTCbound := christoffel_bilin_bound g gi x u η hMc0 hMc
+  have h1 : Nc * (n : ℝ) ^ 3 * (‖u‖ * ‖u‖ * ‖ξ‖)
+      ≤ Nc * (n : ℝ) ^ 3 * ‖u‖ ^ 2 * ‖((ξ, η) : Point n × Point n)‖ := by
+    have hstep : ‖u‖ * ‖u‖ * ‖ξ‖ ≤ ‖u‖ * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ :=
+      mul_le_mul_of_nonneg_left hξ (by positivity)
+    calc Nc * (n : ℝ) ^ 3 * (‖u‖ * ‖u‖ * ‖ξ‖)
+        ≤ Nc * (n : ℝ) ^ 3 * (‖u‖ * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖) :=
+          mul_le_mul_of_nonneg_left hstep hNcn
+      _ = Nc * (n : ℝ) ^ 3 * ‖u‖ ^ 2 * ‖((ξ, η) : Point n × Point n)‖ := by rw [sq]; ring
+  have h2 : Mc * (n : ℝ) ^ 2 * (‖η‖ * ‖u‖)
+      ≤ Mc * (n : ℝ) ^ 2 * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ := by
+    have hstep : ‖η‖ * ‖u‖ ≤ ‖((ξ, η) : Point n × Point n)‖ * ‖u‖ :=
+      mul_le_mul_of_nonneg_right hη hu0
+    calc Mc * (n : ℝ) ^ 2 * (‖η‖ * ‖u‖)
+        ≤ Mc * (n : ℝ) ^ 2 * (‖((ξ, η) : Point n × Point n)‖ * ‖u‖) :=
+          mul_le_mul_of_nonneg_left hstep hMcn
+      _ = Mc * (n : ℝ) ^ 2 * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ := by ring
+  have h3 : Mc * (n : ℝ) ^ 2 * (‖u‖ * ‖η‖)
+      ≤ Mc * (n : ℝ) ^ 2 * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ := by
+    have hstep : ‖u‖ * ‖η‖ ≤ ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ :=
+      mul_le_mul_of_nonneg_left hη hu0
+    calc Mc * (n : ℝ) ^ 2 * (‖u‖ * ‖η‖)
+        ≤ Mc * (n : ℝ) ^ 2 * (‖u‖ * ‖((ξ, η) : Point n × Point n)‖) :=
+          mul_le_mul_of_nonneg_left hstep hMcn
+      _ = Mc * (n : ℝ) ^ 2 * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ := by ring
+  refine le_trans norm_add₃_le ?_
+  refine le_trans (add_le_add (add_le_add hTAbound hTBbound) hTCbound) ?_
+  calc Nc * (n : ℝ) ^ 3 * (‖u‖ * ‖u‖ * ‖ξ‖) + Mc * (n : ℝ) ^ 2 * (‖η‖ * ‖u‖)
+        + Mc * (n : ℝ) ^ 2 * (‖u‖ * ‖η‖)
+      ≤ Nc * (n : ℝ) ^ 3 * ‖u‖ ^ 2 * ‖((ξ, η) : Point n × Point n)‖
+        + Mc * (n : ℝ) ^ 2 * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖
+        + Mc * (n : ℝ) ^ 2 * ‖u‖ * ‖((ξ, η) : Point n × Point n)‖ :=
+        add_le_add (add_le_add h1 h2) h3
+    _ = (Nc * (n : ℝ) ^ 3 * ‖u‖ ^ 2 + 2 * (Mc * (n : ℝ) ^ 2) * ‖u‖)
+          * ‖((ξ, η) : Point n × Point n)‖ := by ring
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order
