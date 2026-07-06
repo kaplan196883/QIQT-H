@@ -1818,4 +1818,711 @@ theorem expJet2_residual_deriv_eq (g gi : Point n → Fin n → Fin n → ℝ)
       Pi.neg_apply, smul_eq_mul]
     ring
 
+/-- **Bilinear expansion of `Γ(v − x·w, v − x·w)`.**  For any coefficient array `F`, the quadratic
+    form at the shifted argument `v − x·w` expands to `Γ(v,v) − x·Γ(v,w) − x·Γ(w,v) + x²·Γ(w,w)`.
+    A pure `Finset` distribution identity (per-component `ring` after splitting the double sum). -/
+theorem bilin_sub_smul_expand (F : Fin n → Fin n → Fin n → ℝ) (v w : Point n) (x : ℝ) :
+    (fun i => ∑ j, ∑ k, F i j k * (v - x • w) j * (v - x • w) k : Point n)
+      = (fun i => ∑ j, ∑ k, F i j k * v j * v k)
+        - x • (fun i => ∑ j, ∑ k, F i j k * v j * w k)
+        - x • (fun i => ∑ j, ∑ k, F i j k * w j * v k)
+        + x ^ 2 • (fun i => ∑ j, ∑ k, F i j k * w j * w k) := by
+  funext i
+  show (∑ j, ∑ k, F i j k * (v - x • w) j * (v - x • w) k)
+     = (∑ j, ∑ k, F i j k * v j * v k)
+        - x * (∑ j, ∑ k, F i j k * v j * w k)
+        - x * (∑ j, ∑ k, F i j k * w j * v k)
+        + x ^ 2 * (∑ j, ∑ k, F i j k * w j * w k)
+  rw [Finset.mul_sum, Finset.mul_sum, Finset.mul_sum,
+    ← Finset.sum_sub_distrib, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl (fun j _ => ?_)
+  rw [Finset.mul_sum, Finset.mul_sum, Finset.mul_sum,
+    ← Finset.sum_sub_distrib, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  simp only [Pi.sub_apply, Pi.smul_apply, smul_eq_mul]
+  ring
+
+/-- **Trilinear telescoping with a shared coefficient array `P`.**  The difference
+    `x·P(v,v,v) − P(u,u,d)` splits as `P(v,v,x·v − d) + P(v − u, v, d) + P(u, v − u, d)`.  A pure
+    `Finset` identity (per-component `ring` after merging the triple sums). -/
+theorem tri_shared_telescope (P : Fin n → Fin n → Fin n → Fin n → ℝ) (v u d : Point n) (x : ℝ) :
+    (fun i => x * (∑ j, ∑ k, ∑ l, P i j k l * v j * v k * v l)
+            - (∑ j, ∑ k, ∑ l, P i j k l * u j * u k * d l) : Point n)
+      = (fun i => ∑ j, ∑ k, ∑ l, P i j k l * v j * v k * ((x • v - d) l))
+        + (fun i => ∑ j, ∑ k, ∑ l, P i j k l * (v - u) j * v k * d l)
+        + (fun i => ∑ j, ∑ k, ∑ l, P i j k l * u j * (v - u) k * d l) := by
+  funext i
+  show x * (∑ j, ∑ k, ∑ l, P i j k l * v j * v k * v l)
+        - (∑ j, ∑ k, ∑ l, P i j k l * u j * u k * d l)
+      = (∑ j, ∑ k, ∑ l, P i j k l * v j * v k * ((x • v - d) l))
+        + (∑ j, ∑ k, ∑ l, P i j k l * (v - u) j * v k * d l)
+        + (∑ j, ∑ k, ∑ l, P i j k l * u j * (v - u) k * d l)
+  rw [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib,
+    ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl (fun j _ => ?_)
+  rw [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib,
+    ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  rw [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib,
+    ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl (fun l _ => ?_)
+  simp only [Pi.sub_apply, Pi.smul_apply, smul_eq_mul]
+  ring
+
+/-- **Repackaging the second-order Taylor remainder of a quadratic form.**  With `Q`, `F` two
+    coefficient arrays and `P` a first-derivative array, the vector
+    `Q(u,u) − F(u,u) − ∑_l P(u,u,·)·d_l` equals the quadratic form of the per-entry remainder
+    `Q i j k − F i j k − ∑_l P i j k l · d_l`.  This puts the Christoffel Taylor remainder in the
+    `bilin_sup_bound`-ready shape.  Pure `Finset` distribution. -/
+theorem bilin_taylor_repack (Q F : Fin n → Fin n → Fin n → ℝ)
+    (P : Fin n → Fin n → Fin n → Fin n → ℝ) (u d : Point n) :
+    (fun i => (∑ j, ∑ k, Q i j k * u j * u k)
+            - (∑ j, ∑ k, F i j k * u j * u k)
+            - (∑ j, ∑ k, ∑ l, P i j k l * u j * u k * d l) : Point n)
+      = (fun i => ∑ j, ∑ k, (Q i j k - F i j k - ∑ l, P i j k l * d l) * u j * u k) := by
+  funext i
+  show (∑ j, ∑ k, Q i j k * u j * u k)
+        - (∑ j, ∑ k, F i j k * u j * u k)
+        - (∑ j, ∑ k, ∑ l, P i j k l * u j * u k * d l)
+      = ∑ j, ∑ k, (Q i j k - F i j k - ∑ l, P i j k l * d l) * u j * u k
+  rw [← Finset.sum_sub_distrib, ← Finset.sum_sub_distrib]
+  refine Finset.sum_congr rfl (fun j _ => ?_)
+  rw [← Finset.sum_sub_distrib, ← Finset.sum_sub_distrib]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  have hkey : (∑ l, P i j k l * d l) * u j * u k = ∑ l, P i j k l * u j * u k * d l := by
+    rw [Finset.sum_mul, Finset.sum_mul]
+    exact Finset.sum_congr rfl (fun l _ => by ring)
+  rw [← hkey]; ring
+
+set_option maxHeartbeats 6400000 in
+/-- **EXP-JET2 — the value 3-jet of the exponential map at `0`.**
+    `exp_p(v) = p + v − ½Γ_p(v,v) + ⅙a₃(v) + o(‖v‖³)`, with the symmetry-free cubic coefficient
+    `a₃(v)_i = −∑_{jkl} ∂_l Γ^i_{jk}(p) v_j v_k v_l + ∑_{jk} Γ^i_{jk}(p)(Γ_p(v,v)_j v_k + v_j Γ_p(v,v)_k)`.
+
+    Same equilibrium-anchored residual-ODE + inhomogeneous-Grönwall technique as EXP-JET1, one order
+    up: the geodesic tube `Y = expTube p v` is compared to the cubic model curve
+    `M(t) = (p + t·v − ½t²·Γ_p(v,v) + ⅙t³·a₃, v − t·Γ_p(v,v) + ½t²·a₃)`.  The residual `r₃ = Y − M`
+    solves `r₃' = A·r₃ + Err` with `Err = Γ_p(v,v) − t·a₃ − Γ_{(Y t).1}((Y t).2,(Y t).2)`, and the
+    telescope `Err = [−t²·Γ_p(Γv,Γv)] + [t·D(v,v,v) − D(u*,u*,X−p)] − Rem + [Γ_X(u*,u*) − Γ_X(U,U)]`
+    (with `u* = v − t·Γv`, `X = (Y t).1`, `U = (Y t).2`, `D = ∂Γ_p`, `Rem` the second-order Christoffel
+    Taylor remainder) makes the leading cubic terms cancel EXACTLY against `a₃`, leaving
+    `‖Err(t)‖ ≤ Acoef·‖v‖⁴ + Bcoef·‖v‖·‖r₃ t‖`.  The inhomogeneous Grönwall then gives
+    `‖r₃ 1‖ ≤ Cfinal·‖v‖⁴`, and projecting the position component closes the `o(‖v‖³)`.
+
+    HONEST CAPTION (binding): this is the Fréchet value 3-jet of `exp_p` at `0`.  It does NOT discharge
+    `hgauge`, NOT build the pullback metric, NOT move numerical-G (`N`, `Λ_s`, `E/ξ` remain). -/
+theorem expMap_value_three_jet (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    (fun v => expMap g gi hC p v - p - v
+        + (1 / 2 : ℝ) • (fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k : Point n)
+        - (1 / 6 : ℝ) • (fun i =>
+            -(∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * v l)
+            + (∑ j, ∑ k, christoffel g gi i j k p
+                  * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+            + (∑ j, ∑ k, christoffel g gi i j k p
+                  * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b)) : Point n))
+      =o[𝓝 (0 : Point n)] (fun v => ‖v‖ ^ 3) := by
+  have hρpos := expRho_pos g gi hC p
+  have hC₀ := expConst_nonneg g gi hC p
+  set ρ : ℝ := expRho g gi hC p with hρ
+  set C₀ : ℝ := expConst g gi hC p with hC₀def
+  set R : ℝ := C₀ * ρ with hRdef
+  have hR0 : 0 ≤ R := mul_nonneg hC₀ hρpos.le
+  have hpmem : p ∈ Metric.closedBall p R := Metric.mem_closedBall_self hR0
+  -- Christoffel value bound `Mc` on `closedBall p R`.
+  set T : Point n → (Fin n → Fin n → Fin n → ℝ) :=
+    fun y => (fun i j k => christoffel g gi i j k y) with hTdef
+  have hTcd : ContDiff ℝ (⊤ : WithTop ℕ∞) T :=
+    contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => contDiff_pi.mpr fun k => hC i j k
+  obtain ⟨Mc, hMcsub⟩ :=
+    (((isCompact_closedBall p R).image_of_continuousOn
+      hTcd.continuous.continuousOn).isBounded).subset_closedBall (0 : Fin n → Fin n → Fin n → ℝ)
+  have hMc : ∀ y ∈ Metric.closedBall p R, ∀ i j k, |christoffel g gi i j k y| ≤ Mc := by
+    intro y hy i j k
+    have hTy : ‖T y‖ ≤ Mc := by
+      have := hMcsub (Set.mem_image_of_mem T hy)
+      rwa [Metric.mem_closedBall, dist_zero_right] at this
+    have e : christoffel g gi i j k y = T y i j k := by simp only [hTdef]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm (T y i j) k).trans
+      ((norm_le_pi_norm (T y i) j).trans (norm_le_pi_norm (T y) i))).trans hTy
+  have Mc0 : 0 ≤ Mc := le_trans (norm_nonneg _) (by
+    have := hMcsub (Set.mem_image_of_mem T hpmem)
+    rwa [Metric.mem_closedBall, dist_zero_right] at this)
+  -- First-derivative Christoffel value bound `Nc` at `p`.
+  set PDp : (Fin n → Fin n → Fin n → Fin n → ℝ) :=
+    fun i j k l => pd (fun z => christoffel g gi i j k z) l p with hPDpdef
+  set Nc : ℝ := ‖PDp‖ with hNcdef
+  have Nc0 : 0 ≤ Nc := norm_nonneg _
+  have hNc : ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l p| ≤ Nc := by
+    intro i j k l
+    have e : pd (fun z => christoffel g gi i j k z) l p = PDp i j k l := by simp only [hPDpdef]
+    rw [e, hNcdef, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm (PDp i j k) l).trans
+      ((norm_le_pi_norm (PDp i j) k).trans
+        ((norm_le_pi_norm (PDp i) j).trans (norm_le_pi_norm PDp i))))
+  -- First-derivative Christoffel Lipschitz bound `M2` on `closedBall p R`.
+  set PD : Point n → (Fin n → Fin n → Fin n → Fin n → ℝ) :=
+    fun y => (fun i j k l => pd (fun z => christoffel g gi i j k z) l y) with hPDdef
+  have hPDcd : ContDiff ℝ (⊤ : WithTop ℕ∞) PD :=
+    contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => contDiff_pi.mpr fun k =>
+      contDiff_pi.mpr fun l => christoffel_pd_contDiff g gi hC i j k l
+  obtain ⟨M2, hM2lip⟩ :=
+    (hPDcd.contDiffOn (s := Metric.closedBall p R)).exists_lipschitzOnWith (by simp)
+      (convex_closedBall p R) (isCompact_closedBall p R)
+  have M20 : 0 ≤ (M2 : ℝ) := M2.coe_nonneg
+  have hM2 : ∀ a ∈ Metric.closedBall p R, ∀ b ∈ Metric.closedBall p R, ∀ i j k l,
+      |pd (fun z => christoffel g gi i j k z) l a - pd (fun z => christoffel g gi i j k z) l b|
+        ≤ (M2 : ℝ) * ‖a - b‖ := by
+    intro a ha b hb i j k l
+    have hd := hM2lip.dist_le_mul a ha b hb
+    rw [dist_eq_norm, dist_eq_norm] at hd
+    have e : pd (fun z => christoffel g gi i j k z) l a - pd (fun z => christoffel g gi i j k z) l b
+        = (PD a - PD b) i j k l := by simp only [hPDdef, Pi.sub_apply]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm ((PD a - PD b) i j k) l).trans
+      ((norm_le_pi_norm ((PD a - PD b) i j) k).trans
+        ((norm_le_pi_norm ((PD a - PD b) i) j).trans
+          (norm_le_pi_norm (PD a - PD b) i)))).trans hd
+  -- Derived constants.
+  set Cu : ℝ := 1 + Mc * (n : ℝ) ^ 2 * ρ with hCudef
+  set Pc : ℝ := Mc * (n : ℝ) ^ 2 * C₀ ^ 2 with hPcdef
+  set A3c : ℝ := Nc * (n : ℝ) ^ 3 + 2 * Mc ^ 2 * (n : ℝ) ^ 4 with hA3cdef
+  set Bcoef : ℝ := Mc * (n : ℝ) ^ 2 * (Cu + C₀) with hBcoefdef
+  set Acoef : ℝ := Nc * (n : ℝ) ^ 3 * Pc + Nc * Mc * C₀ * (n : ℝ) ^ 5
+      + Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5 + Mc ^ 3 * (n : ℝ) ^ 6
+      + M2 * (n : ℝ) ^ 3 * C₀ ^ 2 * Cu ^ 2
+      + (1 / 2 : ℝ) * Mc * (n : ℝ) ^ 2 * (Cu + C₀) * A3c with hAcoefdef
+  have hn : ∀ k : ℕ, (0 : ℝ) ≤ (n : ℝ) ^ k := fun k => by positivity
+  have hCu0 : 0 ≤ Cu := by
+    rw [hCudef]; exact add_nonneg (by norm_num) (mul_nonneg (mul_nonneg Mc0 (hn 2)) hρpos.le)
+  have hPc0 : 0 ≤ Pc := by
+    rw [hPcdef]; exact mul_nonneg (mul_nonneg Mc0 (hn 2)) (sq_nonneg _)
+  have hA3c0 : 0 ≤ A3c := by
+    rw [hA3cdef]
+    exact add_nonneg (mul_nonneg Nc0 (hn 3))
+      (mul_nonneg (mul_nonneg (by norm_num) (pow_nonneg Mc0 2)) (hn 4))
+  have hBcoef0 : 0 ≤ Bcoef := by
+    rw [hBcoefdef]; exact mul_nonneg (mul_nonneg Mc0 (hn 2)) (add_nonneg hCu0 hC₀)
+  have hAcoef0 : 0 ≤ Acoef := by
+    rw [hAcoefdef]
+    refine add_nonneg (add_nonneg (add_nonneg (add_nonneg (add_nonneg ?_ ?_) ?_) ?_) ?_) ?_
+    · exact mul_nonneg (mul_nonneg Nc0 (hn 3)) hPc0
+    · exact mul_nonneg (mul_nonneg (mul_nonneg Nc0 Mc0) hC₀) (hn 5)
+    · exact mul_nonneg (mul_nonneg (mul_nonneg (mul_nonneg Nc0 hCu0) Mc0) hC₀) (hn 5)
+    · exact mul_nonneg (pow_nonneg Mc0 3) (hn 6)
+    · exact mul_nonneg (mul_nonneg (mul_nonneg M20 (hn 3)) (sq_nonneg _)) (sq_nonneg _)
+    · exact mul_nonneg (mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) Mc0) (hn 2))
+        (add_nonneg hCu0 hC₀)) hA3c0
+  set Kmax : ℝ := 1 + Bcoef * ρ with hKmaxdef
+  set Cfinal : ℝ := Acoef * Real.exp Kmax with hCfinaldef
+  have hCfinal0 : 0 ≤ Cfinal := by rw [hCfinaldef]; exact mul_nonneg hAcoef0 (Real.exp_pos _).le
+  -- The core `O(‖v‖⁴)` bound for `‖v‖ ≤ ρ`.
+  have hbound : ∀ v : Point n, ‖v‖ ≤ ρ →
+      ‖expMap g gi hC p v - p - v
+          + (1 / 2 : ℝ) • (fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k : Point n)
+          - (1 / 6 : ℝ) • (fun i =>
+              -(∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * v l)
+              + (∑ j, ∑ k, christoffel g gi i j k p
+                    * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+              + (∑ j, ∑ k, christoffel g gi i j k p
+                    * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b)) : Point n)‖
+        ≤ Cfinal * ‖v‖ ^ 4 := by
+    intro v hvρ
+    obtain ⟨hY0, hYd, hYconf⟩ := expTube_spec g gi hC p v hvρ
+    set Y : ℝ → Point n × Point n := expTube g gi hC p v with hYdef
+    set Γv : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k with hΓvdef
+    set a3 : Point n := fun i =>
+        -(∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * v l)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+              * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+              * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b)) with ha3def
+    have hIcc_Ioo : ∀ t ∈ Set.Icc (0 : ℝ) 1, t ∈ Set.Ioo (-2 : ℝ) 2 :=
+      fun t ht => ⟨by linarith [ht.1], by linarith [ht.2]⟩
+    have hGvj : ∀ j : Fin n, (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) = Γv j := by
+      intro j; rw [hΓvdef]
+    -- Christoffel quadratic-form value bound (base `p`).
+    have hΓv_bound : ‖Γv‖ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by
+      have h := christoffel_bilin_bound g gi p v v Mc0 (fun i j k => hMc p hpmem i j k)
+      calc ‖Γv‖ ≤ Mc * (n : ℝ) ^ 2 * (‖v‖ * ‖v‖) := h
+        _ = Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by ring
+    -- The cubic model curve and its derivative.
+    set M : ℝ → Point n × Point n :=
+      fun τ => (p + τ • v - (τ ^ 2 / 2) • Γv + (τ ^ 3 / 6) • a3,
+                v - τ • Γv + (τ ^ 2 / 2) • a3) with hMdef
+    have hM : ∀ t : ℝ,
+        HasDerivAt M ((v - t • Γv + (t ^ 2 / 2) • a3, -Γv + t • a3) : Point n × Point n) t := by
+      intro t; rw [hMdef]; exact expJet2_model_hasDerivAt p v Γv a3 t
+    -- a-priori confinement + tube first-order (velocity / position) bounds.
+    have hvel_tube : ∀ s ∈ Set.Icc (0 : ℝ) 1,
+        ‖(Y s).2 - v‖ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 := by
+      have hfd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          HasDerivAt (fun τ => (Y τ).2) ((geodesicField g gi (Y t)).2) t := fun t ht =>
+        (ContinuousLinearMap.snd ℝ (Point n) (Point n)).hasFDerivAt.comp_hasDerivAt t
+          (hYd t (hIcc_Ioo t ht))
+      have hf'bd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          ‖(geodesicField g gi (Y t)).2‖ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 := by
+        intro t ht
+        have hconf := hYconf t ht
+        have hw : ‖(Y t).2‖ ≤ C₀ * ‖v‖ := by
+          have e : (Y t).2 = (Y t - ((p, 0) : Point n × Point n)).2 := by simp [Prod.snd_sub]
+          rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_right _ _) hconf
+        have hymem : (Y t).1 ∈ Metric.closedBall p R := by
+          rw [Metric.mem_closedBall, dist_eq_norm]
+          have e : (Y t).1 - p = (Y t - ((p, 0) : Point n × Point n)).1 := by simp [Prod.fst_sub]
+          calc ‖(Y t).1 - p‖ ≤ C₀ * ‖v‖ := by
+                rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_left _ _) hconf
+            _ ≤ C₀ * ρ := mul_le_mul_of_nonneg_left hvρ hC₀
+            _ = R := by rw [hRdef]
+        have he : (geodesicField g gi (Y t)).2
+            = -(fun i => ∑ j, ∑ k, christoffel g gi i j k (Y t).1 * (Y t).2 j * (Y t).2 k
+                : Point n) := by
+          funext i; simp [geodesicField]
+        rw [he, norm_neg]
+        calc ‖(fun i => ∑ j, ∑ k, christoffel g gi i j k (Y t).1 * (Y t).2 j * (Y t).2 k : Point n)‖
+            ≤ Mc * (n : ℝ) ^ 2 * (‖(Y t).2‖ * ‖(Y t).2‖) :=
+              bilin_sup_bound (fun i j k => christoffel g gi i j k (Y t).1) (Y t).2 (Y t).2 Mc0
+                (fun i j k => hMc (Y t).1 hymem i j k)
+          _ ≤ Mc * (n : ℝ) ^ 2 * (C₀ * ‖v‖ * (C₀ * ‖v‖)) := by
+              gcongr
+          _ = Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 := by ring
+      intro s hs
+      have hres : ‖(Y s).2 - (Y (0 : ℝ)).2‖ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 * ‖s - 0‖ :=
+        Convex.norm_image_sub_le_of_norm_hasDerivWithin_le
+          (f := fun τ => (Y τ).2) (f' := fun t => (geodesicField g gi (Y t)).2)
+          (s := Set.Icc (0 : ℝ) 1) (C := Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2) (x := 0) (y := s)
+          (fun t ht => (hfd t ht).hasDerivWithinAt) hf'bd (convex_Icc 0 1) (by simp) hs
+      have hY02 : (Y (0 : ℝ)).2 = v := by rw [hY0]
+      rw [hY02] at hres
+      calc ‖(Y s).2 - v‖ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 * ‖s - 0‖ := hres
+        _ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 * 1 := by
+            gcongr
+            rw [Real.norm_eq_abs, sub_zero, abs_of_nonneg hs.1]; exact hs.2
+        _ = Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 := by ring
+    have hpos_tube : ∀ s ∈ Set.Icc (0 : ℝ) 1,
+        ‖(Y s).1 - p - s • v‖ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 := by
+      have hfd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          HasDerivAt (fun τ => (Y τ).1 - τ • v) ((Y t).2 - v) t := by
+        intro t ht
+        have h1 : HasDerivAt (fun τ => (Y τ).1) ((geodesicField g gi (Y t)).1) t :=
+          (ContinuousLinearMap.fst ℝ (Point n) (Point n)).hasFDerivAt.comp_hasDerivAt t
+            (hYd t (hIcc_Ioo t ht))
+        have h2 : HasDerivAt (fun τ : ℝ => τ • v) v t := by
+          simpa using (hasDerivAt_id t).smul_const v
+        have h3 := h1.sub h2
+        have he : (geodesicField g gi (Y t)).1 = (Y t).2 := rfl
+        rwa [he] at h3
+      intro s hs
+      have hres : ‖((Y s).1 - s • v) - ((Y (0 : ℝ)).1 - (0 : ℝ) • v)‖
+          ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 * ‖s - 0‖ :=
+        Convex.norm_image_sub_le_of_norm_hasDerivWithin_le
+          (f := fun τ => (Y τ).1 - τ • v) (f' := fun t => (Y t).2 - v)
+          (s := Set.Icc (0 : ℝ) 1) (C := Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2) (x := 0) (y := s)
+          (fun t ht => (hfd t ht).hasDerivWithinAt) hvel_tube (convex_Icc 0 1) (by simp) hs
+      have hf0 : (Y (0 : ℝ)).1 - (0 : ℝ) • v = p := by rw [hY0]; simp
+      rw [hf0] at hres
+      have heq : (Y s).1 - s • v - p = (Y s).1 - p - s • v := by abel
+      rw [← heq]
+      calc ‖(Y s).1 - s • v - p‖ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 * ‖s - 0‖ := hres
+        _ ≤ Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 * 1 := by
+            gcongr
+            rw [Real.norm_eq_abs, sub_zero, abs_of_nonneg hs.1]; exact hs.2
+        _ = Mc * (n : ℝ) ^ 2 * C₀ ^ 2 * ‖v‖ ^ 2 := by ring
+    -- The residual `q = Y − M` derivative data.
+    have hfderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+        HasDerivAt (fun τ => Y τ - M τ)
+          (geodesicField g gi (Y t)
+            - ((v - t • Γv + (t ^ 2 / 2) • a3, -Γv + t • a3) : Point n × Point n)) t :=
+      fun t ht => (hYd t (hIcc_Ioo t ht)).sub (hM t)
+    have hf : ContinuousOn (fun τ => Y τ - M τ) (Set.Icc (0 : ℝ) 1) :=
+      fun t ht => (hfderiv t ht).continuousAt.continuousWithinAt
+    have hf' : ∀ x ∈ Set.Ico (0 : ℝ) 1, HasDerivWithinAt (fun τ => Y τ - M τ)
+        (geodesicField g gi (Y x)
+          - ((v - x • Γv + (x ^ 2 / 2) • a3, -Γv + x • a3) : Point n × Point n)) (Set.Ici x) x :=
+      fun x hx => (hfderiv x (Set.Ico_subset_Icc_self hx)).hasDerivWithinAt
+    have ha : ‖(fun τ => Y τ - M τ) 0‖ ≤ 0 := by
+      show ‖Y 0 - M 0‖ ≤ 0
+      have hM0 : M 0 = (p, v) := by
+        show (p + (0 : ℝ) • v - ((0 : ℝ) ^ 2 / 2) • Γv + ((0 : ℝ) ^ 3 / 6) • a3,
+              v - (0 : ℝ) • Γv + ((0 : ℝ) ^ 2 / 2) • a3) = (p, v)
+        simp
+      rw [hY0, hM0, sub_self, norm_zero]
+    -- The crux: the inhomogeneous bound on the residual derivative.
+    have bound : ∀ x ∈ Set.Ico (0 : ℝ) 1,
+        ‖geodesicField g gi (Y x)
+            - ((v - x • Γv + (x ^ 2 / 2) • a3, -Γv + x • a3) : Point n × Point n)‖
+          ≤ (1 + Bcoef * ‖v‖) * ‖Y x - M x‖ + Acoef * ‖v‖ ^ 4 := by
+      intro x hx
+      have hxIcc : x ∈ Set.Icc (0 : ℝ) 1 := Set.Ico_subset_Icc_self hx
+      have hx0 : (0 : ℝ) ≤ x := hx.1
+      have hx1 : x < 1 := hx.2
+      have hxle1 : x ≤ 1 := hx1.le
+      have hconf := hYconf x hxIcc
+      set X : Point n := (Y x).1 with hXdef
+      set U : Point n := (Y x).2 with hUdef
+      set ustar : Point n := v - x • Γv with hustardef
+      have hUC0 : ‖U‖ ≤ C₀ * ‖v‖ := by
+        have e : U = (Y x - ((p, 0) : Point n × Point n)).2 := by rw [hUdef]; simp [Prod.snd_sub]
+        rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_right _ _) hconf
+      have hXpC0 : ‖X - p‖ ≤ C₀ * ‖v‖ := by
+        have e : X - p = (Y x - ((p, 0) : Point n × Point n)).1 := by rw [hXdef]; simp [Prod.fst_sub]
+        rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_left _ _) hconf
+      have hXmem : X ∈ Metric.closedBall p R := by
+        rw [Metric.mem_closedBall, dist_eq_norm]
+        calc ‖X - p‖ ≤ C₀ * ‖v‖ := hXpC0
+          _ ≤ C₀ * ρ := mul_le_mul_of_nonneg_left hvρ hC₀
+          _ = R := by rw [hRdef]
+      have hustar_bd : ‖ustar‖ ≤ Cu * ‖v‖ := by
+        rw [hustardef]
+        have hxΓ : ‖x • Γv‖ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by
+          rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg hx0]
+          calc x * ‖Γv‖ ≤ 1 * ‖Γv‖ := mul_le_mul_of_nonneg_right hxle1 (norm_nonneg _)
+            _ = ‖Γv‖ := one_mul _
+            _ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := hΓv_bound
+        calc ‖v - x • Γv‖ ≤ ‖v‖ + ‖x • Γv‖ := norm_sub_le _ _
+          _ ≤ ‖v‖ + Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by linarith [hxΓ]
+          _ ≤ Cu * ‖v‖ := by
+              rw [hCudef, add_mul, one_mul]
+              have hvv : ‖v‖ ^ 2 ≤ ρ * ‖v‖ := by
+                rw [sq]; exact mul_le_mul_of_nonneg_right hvρ (norm_nonneg _)
+              have hco : (0 : ℝ) ≤ Mc * (n : ℝ) ^ 2 := mul_nonneg Mc0 (hn 2)
+              nlinarith [mul_le_mul_of_nonneg_left hvv hco]
+      have hMx2 : (M x).2 = v - x • Γv + (x ^ 2 / 2) • a3 := by rw [hMdef]
+      -- the analysis vectors.
+      set GXUU : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k X * U j * U k with hGXUUdef
+      set GXuu : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k X * ustar j * ustar k
+        with hGXuudef
+      set GPuu : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k p * ustar j * ustar k
+        with hGPuudef
+      set Dvvv : Point n :=
+        fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * v l
+        with hDvvvdef
+      set BGv : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k p * Γv j * v k with hBGvdef
+      set BvG : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * Γv k with hBvGdef
+      set BGG : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k p * Γv j * Γv k with hBGGdef
+      set Dstar : Point n :=
+        fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * ustar j * ustar k
+          * (X - p) l with hDstardef
+      set Rrem : Point n :=
+        fun i => ∑ j, ∑ k, (christoffel g gi i j k X - christoffel g gi i j k p
+          - ∑ l, pd (fun z => christoffel g gi i j k z) l p * (X - p) l) * ustar j * ustar k
+        with hRremdef
+      -- the three sum-algebra identities.
+      have ha3eq : a3 = -Dvvv + BGv + BvG := by
+        funext i
+        simp only [ha3def, hDvvvdef, hBGvdef, hBvGdef, Pi.add_apply, Pi.neg_apply, hGvj]
+      have hI1 : GPuu = Γv - x • BvG - x • BGv + x ^ 2 • BGG :=
+        bilin_sub_smul_expand (fun i j k => christoffel g gi i j k p) v Γv x
+      have hI2raw : GXuu - GPuu - Dstar = Rrem :=
+        bilin_taylor_repack (fun i j k => christoffel g gi i j k X)
+          (fun i j k => christoffel g gi i j k p)
+          (fun i j k l => pd (fun z => christoffel g gi i j k z) l p) ustar (X - p)
+      have hI2eq : GXuu = GPuu + Dstar + Rrem := by rw [← hI2raw]; abel
+      have hStepB : Γv - x • a3 - GXuu = (x • Dvvv - Dstar) - x ^ 2 • BGG - Rrem := by
+        rw [ha3eq, hI2eq, hI1]; simp only [smul_add, smul_neg]; abel
+      -- the tube-derived first-order bounds at this `x`.
+      have hvu : ‖v - ustar‖ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by
+        have e : v - ustar = x • Γv := by rw [hustardef]; abel
+        rw [e, norm_smul, Real.norm_eq_abs, abs_of_nonneg hx0]
+        calc x * ‖Γv‖ ≤ 1 * ‖Γv‖ := mul_le_mul_of_nonneg_right hxle1 (norm_nonneg _)
+          _ = ‖Γv‖ := one_mul _
+          _ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := hΓv_bound
+      have hxvd : ‖x • v - (X - p)‖ ≤ Pc * ‖v‖ ^ 2 := by
+        have e : x • v - (X - p) = -((Y x).1 - p - x • v) := by rw [hXdef]; abel
+        rw [e, norm_neg, hPcdef]; exact hpos_tube x hxIcc
+      have ha3_bd : ‖a3‖ ≤ A3c * ‖v‖ ^ 3 := by
+        rw [ha3eq]
+        have hDvvv_bd : ‖Dvvv‖ ≤ Nc * (n : ℝ) ^ 3 * ‖v‖ ^ 3 := by
+          have h := christoffel_pd_trilin_bound g gi p v v v Nc0 hNc
+          calc ‖Dvvv‖ ≤ Nc * (n : ℝ) ^ 3 * (‖v‖ * ‖v‖ * ‖v‖) := h
+            _ = Nc * (n : ℝ) ^ 3 * ‖v‖ ^ 3 := by ring
+        have hBGv_bd : ‖BGv‖ ≤ Mc ^ 2 * (n : ℝ) ^ 4 * ‖v‖ ^ 3 := by
+          have h := christoffel_bilin_bound g gi p Γv v Mc0 (fun i j k => hMc p hpmem i j k)
+          calc ‖BGv‖ ≤ Mc * (n : ℝ) ^ 2 * (‖Γv‖ * ‖v‖) := h
+            _ ≤ Mc * (n : ℝ) ^ 2 * (Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 * ‖v‖) :=
+                mul_le_mul_of_nonneg_left
+                  (mul_le_mul_of_nonneg_right hΓv_bound (norm_nonneg _)) (mul_nonneg Mc0 (hn 2))
+            _ = Mc ^ 2 * (n : ℝ) ^ 4 * ‖v‖ ^ 3 := by ring
+        have hBvG_bd : ‖BvG‖ ≤ Mc ^ 2 * (n : ℝ) ^ 4 * ‖v‖ ^ 3 := by
+          have h := christoffel_bilin_bound g gi p v Γv Mc0 (fun i j k => hMc p hpmem i j k)
+          calc ‖BvG‖ ≤ Mc * (n : ℝ) ^ 2 * (‖v‖ * ‖Γv‖) := h
+            _ ≤ Mc * (n : ℝ) ^ 2 * (‖v‖ * (Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2)) :=
+                mul_le_mul_of_nonneg_left
+                  (mul_le_mul_of_nonneg_left hΓv_bound (norm_nonneg _)) (mul_nonneg Mc0 (hn 2))
+            _ = Mc ^ 2 * (n : ℝ) ^ 4 * ‖v‖ ^ 3 := by ring
+        calc ‖-Dvvv + BGv + BvG‖ ≤ ‖-Dvvv + BGv‖ + ‖BvG‖ := norm_add_le _ _
+          _ ≤ (‖-Dvvv‖ + ‖BGv‖) + ‖BvG‖ := add_le_add (norm_add_le _ _) le_rfl
+          _ = (‖Dvvv‖ + ‖BGv‖) + ‖BvG‖ := by rw [norm_neg]
+          _ ≤ (Nc * (n : ℝ) ^ 3 * ‖v‖ ^ 3 + Mc ^ 2 * (n : ℝ) ^ 4 * ‖v‖ ^ 3)
+                + Mc ^ 2 * (n : ℝ) ^ 4 * ‖v‖ ^ 3 :=
+              add_le_add (add_le_add hDvvv_bd hBGv_bd) hBvG_bd
+          _ = A3c * ‖v‖ ^ 3 := by rw [hA3cdef]; ring
+      -- bracket 1: the `∂Γ` trilinear discrepancy `x·Dvvv − Dstar`.
+      have hΔeq' : x • Dvvv - Dstar
+          = (fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p
+                * v j * v k * ((x • v - (X - p)) l) : Point n)
+            + (fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p
+                * (v - ustar) j * v k * ((X - p) l) : Point n)
+            + (fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p
+                * ustar j * (v - ustar) k * ((X - p) l) : Point n) :=
+        tri_shared_telescope (fun i j k l => pd (fun z => christoffel g gi i j k z) l p)
+          v ustar (X - p) x
+      have hΔD_bd : ‖x • Dvvv - Dstar‖
+          ≤ (Nc * (n : ℝ) ^ 3 * Pc + Nc * Mc * C₀ * (n : ℝ) ^ 5
+              + Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5) * ‖v‖ ^ 4 := by
+        have hNcn3 : (0 : ℝ) ≤ Nc * (n : ℝ) ^ 3 := mul_nonneg Nc0 (hn 3)
+        have hA := christoffel_pd_trilin_bound g gi p v v (x • v - (X - p)) Nc0 hNc
+        have hB := christoffel_pd_trilin_bound g gi p (v - ustar) v (X - p) Nc0 hNc
+        have hCc := christoffel_pd_trilin_bound g gi p ustar (v - ustar) (X - p) Nc0 hNc
+        have hAb : ‖(fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p
+              * v j * v k * ((x • v - (X - p)) l) : Point n)‖ ≤ Nc * (n : ℝ) ^ 3 * Pc * ‖v‖ ^ 4 := by
+          refine hA.trans ?_
+          calc Nc * (n : ℝ) ^ 3 * (‖v‖ * ‖v‖ * ‖x • v - (X - p)‖)
+              ≤ Nc * (n : ℝ) ^ 3 * (‖v‖ * ‖v‖ * (Pc * ‖v‖ ^ 2)) :=
+                mul_le_mul_of_nonneg_left
+                  (mul_le_mul_of_nonneg_left hxvd (mul_nonneg (norm_nonneg _) (norm_nonneg _)))
+                  hNcn3
+            _ = Nc * (n : ℝ) ^ 3 * Pc * ‖v‖ ^ 4 := by ring
+        have hBb : ‖(fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p
+              * (v - ustar) j * v k * ((X - p) l) : Point n)‖
+            ≤ Nc * Mc * C₀ * (n : ℝ) ^ 5 * ‖v‖ ^ 4 := by
+          refine hB.trans ?_
+          calc Nc * (n : ℝ) ^ 3 * (‖v - ustar‖ * ‖v‖ * ‖X - p‖)
+              ≤ Nc * (n : ℝ) ^ 3 * (Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 * ‖v‖ * (C₀ * ‖v‖)) :=
+                mul_le_mul_of_nonneg_left
+                  (mul_le_mul (mul_le_mul_of_nonneg_right hvu (norm_nonneg _)) hXpC0
+                    (norm_nonneg _)
+                    (mul_nonneg (mul_nonneg (mul_nonneg Mc0 (hn 2)) (sq_nonneg _)) (norm_nonneg _)))
+                  hNcn3
+            _ = Nc * Mc * C₀ * (n : ℝ) ^ 5 * ‖v‖ ^ 4 := by ring
+        have hCb : ‖(fun i => ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p
+              * ustar j * (v - ustar) k * ((X - p) l) : Point n)‖
+            ≤ Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5 * ‖v‖ ^ 4 := by
+          refine hCc.trans ?_
+          calc Nc * (n : ℝ) ^ 3 * (‖ustar‖ * ‖v - ustar‖ * ‖X - p‖)
+              ≤ Nc * (n : ℝ) ^ 3 * (Cu * ‖v‖ * (Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2) * (C₀ * ‖v‖)) :=
+                mul_le_mul_of_nonneg_left
+                  (mul_le_mul (mul_le_mul hustar_bd hvu (norm_nonneg _)
+                    (mul_nonneg hCu0 (norm_nonneg _))) hXpC0 (norm_nonneg _)
+                    (mul_nonneg (mul_nonneg hCu0 (norm_nonneg _))
+                      (mul_nonneg (mul_nonneg Mc0 (hn 2)) (sq_nonneg _))))
+                  hNcn3
+            _ = Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5 * ‖v‖ ^ 4 := by ring
+        rw [hΔeq']
+        calc ‖_ + _ + _‖ ≤ (‖_‖ + ‖_‖) + ‖_‖ :=
+              (norm_add_le _ _).trans (add_le_add (norm_add_le _ _) le_rfl)
+          _ ≤ (Nc * (n : ℝ) ^ 3 * Pc * ‖v‖ ^ 4 + Nc * Mc * C₀ * (n : ℝ) ^ 5 * ‖v‖ ^ 4)
+                + Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5 * ‖v‖ ^ 4 :=
+              add_le_add (add_le_add hAb hBb) hCb
+          _ = (Nc * (n : ℝ) ^ 3 * Pc + Nc * Mc * C₀ * (n : ℝ) ^ 5
+                + Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5) * ‖v‖ ^ 4 := by ring
+      -- bracket 2: `x²·Γ_p(Γv,Γv)`.
+      have hBGG_bd : ‖x ^ 2 • BGG‖ ≤ Mc ^ 3 * (n : ℝ) ^ 6 * ‖v‖ ^ 4 := by
+        have hBGG_norm : ‖BGG‖ ≤ Mc ^ 3 * (n : ℝ) ^ 6 * ‖v‖ ^ 4 := by
+          have h := christoffel_bilin_bound g gi p Γv Γv Mc0 (fun i j k => hMc p hpmem i j k)
+          calc ‖BGG‖ ≤ Mc * (n : ℝ) ^ 2 * (‖Γv‖ * ‖Γv‖) := h
+            _ ≤ Mc * (n : ℝ) ^ 2
+                * ((Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2) * (Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2)) :=
+                mul_le_mul_of_nonneg_left
+                  (mul_le_mul hΓv_bound hΓv_bound (norm_nonneg _)
+                    (mul_nonneg (mul_nonneg Mc0 (hn 2)) (sq_nonneg _))) (mul_nonneg Mc0 (hn 2))
+            _ = Mc ^ 3 * (n : ℝ) ^ 6 * ‖v‖ ^ 4 := by ring
+        rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+        calc x ^ 2 * ‖BGG‖ ≤ 1 * ‖BGG‖ :=
+              mul_le_mul_of_nonneg_right (by nlinarith [hx0, hxle1]) (norm_nonneg _)
+          _ = ‖BGG‖ := one_mul _
+          _ ≤ Mc ^ 3 * (n : ℝ) ^ 6 * ‖v‖ ^ 4 := hBGG_norm
+      -- bracket 3: the second-order Taylor remainder `Rrem`.
+      have hRcoef : ∀ i j k, |christoffel g gi i j k X - christoffel g gi i j k p
+          - ∑ l, pd (fun z => christoffel g gi i j k z) l p * (X - p) l|
+            ≤ (M2 : ℝ) * (n : ℝ) * ‖X - p‖ ^ 2 := by
+        intro i j k
+        refine christoffel_taylor_bound g gi p X i j k M20
+          (fun y => (hC i j k).differentiable (by simp) y) ?_
+        intro l θ hθ
+        have hmem1 : p + θ • (X - p) ∈ Metric.closedBall p R := by
+          rw [Metric.mem_closedBall, dist_eq_norm, add_sub_cancel_left, norm_smul,
+            Real.norm_eq_abs, abs_of_nonneg hθ.1]
+          calc θ * ‖X - p‖ ≤ 1 * ‖X - p‖ := mul_le_mul_of_nonneg_right hθ.2 (norm_nonneg _)
+            _ = ‖X - p‖ := one_mul _
+            _ ≤ C₀ * ‖v‖ := hXpC0
+            _ ≤ C₀ * ρ := mul_le_mul_of_nonneg_left hvρ hC₀
+            _ = R := by rw [hRdef]
+        have := hM2 (p + θ • (X - p)) hmem1 p hpmem i j k l
+        rwa [add_sub_cancel_left] at this
+      have hRrem_bd : ‖Rrem‖ ≤ M2 * (n : ℝ) ^ 3 * C₀ ^ 2 * Cu ^ 2 * ‖v‖ ^ 4 := by
+        have hMc0' : (0 : ℝ) ≤ (M2 : ℝ) * (n : ℝ) * ‖X - p‖ ^ 2 :=
+          mul_nonneg (mul_nonneg M20 (Nat.cast_nonneg n)) (sq_nonneg _)
+        have h := bilin_sup_bound
+          (fun i j k => christoffel g gi i j k X - christoffel g gi i j k p
+            - ∑ l, pd (fun z => christoffel g gi i j k z) l p * (X - p) l) ustar ustar hMc0' hRcoef
+        refine h.trans ?_
+        have hXp2 : ‖X - p‖ ^ 2 ≤ C₀ ^ 2 * ‖v‖ ^ 2 := by
+          calc ‖X - p‖ ^ 2 = ‖X - p‖ * ‖X - p‖ := by ring
+            _ ≤ (C₀ * ‖v‖) * (C₀ * ‖v‖) :=
+                mul_le_mul hXpC0 hXpC0 (norm_nonneg _) (mul_nonneg hC₀ (norm_nonneg _))
+            _ = C₀ ^ 2 * ‖v‖ ^ 2 := by ring
+        have hus2 : ‖ustar‖ * ‖ustar‖ ≤ Cu ^ 2 * ‖v‖ ^ 2 := by
+          calc ‖ustar‖ * ‖ustar‖ ≤ (Cu * ‖v‖) * (Cu * ‖v‖) :=
+                mul_le_mul hustar_bd hustar_bd (norm_nonneg _) (mul_nonneg hCu0 (norm_nonneg _))
+            _ = Cu ^ 2 * ‖v‖ ^ 2 := by ring
+        have e1 : (M2 : ℝ) * (n : ℝ) * ‖X - p‖ ^ 2 * (n : ℝ) ^ 2 * (‖ustar‖ * ‖ustar‖)
+            = ((M2 : ℝ) * (n : ℝ) * (n : ℝ) ^ 2) * (‖X - p‖ ^ 2 * (‖ustar‖ * ‖ustar‖)) := by ring
+        have e2 : M2 * (n : ℝ) ^ 3 * C₀ ^ 2 * Cu ^ 2 * ‖v‖ ^ 4
+            = ((M2 : ℝ) * (n : ℝ) * (n : ℝ) ^ 2) * ((C₀ ^ 2 * ‖v‖ ^ 2) * (Cu ^ 2 * ‖v‖ ^ 2)) := by
+          ring
+        rw [e1, e2]
+        exact mul_le_mul_of_nonneg_left
+          (mul_le_mul hXp2 hus2 (mul_nonneg (norm_nonneg _) (norm_nonneg _)) (by positivity))
+          (by positivity)
+      -- bracket 4: `Γ_X(u*,u*) − Γ_X(U,U)`.
+      have hbr3raw : ‖GXuu - GXUU‖
+          ≤ Mc * (n : ℝ) ^ 2 * (‖ustar - U‖ * (‖ustar‖ + ‖U‖))
+            + (0 : ℝ) * (n : ℝ) ^ 2 * (‖X - X‖ * ‖U‖ ^ 2) :=
+        christoffel_quad_diff_bound g gi X X ustar U Mc0 (le_refl (0 : ℝ))
+          (fun i j k => hMc X hXmem i j k) (fun i j k => by simp)
+      have hbr3 : ‖GXuu - GXUU‖ ≤ Mc * (n : ℝ) ^ 2 * (‖ustar - U‖ * (‖ustar‖ + ‖U‖)) := by
+        simpa using hbr3raw
+      have hustarU : ‖ustar - U‖ ≤ (1 / 2 : ℝ) * A3c * ‖v‖ ^ 3 + ‖Y x - M x‖ := by
+        have e2 : (Y x - M x).2 = U - (v - x • Γv + (x ^ 2 / 2) • a3) := by
+          rw [Prod.snd_sub, hMx2, ← hUdef]
+        have e : ustar - U = -((x ^ 2 / 2) • a3) - (Y x - M x).2 := by
+          rw [e2, hustardef]; abel
+        rw [e]
+        refine (norm_sub_le _ _).trans ?_
+        rw [norm_neg]
+        have ha3half : ‖(x ^ 2 / 2) • a3‖ ≤ (1 / 2 : ℝ) * A3c * ‖v‖ ^ 3 := by
+          rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+          calc x ^ 2 / 2 * ‖a3‖ ≤ (1 / 2 : ℝ) * ‖a3‖ :=
+                mul_le_mul_of_nonneg_right (by nlinarith [hx0, hxle1]) (norm_nonneg _)
+            _ ≤ (1 / 2 : ℝ) * (A3c * ‖v‖ ^ 3) :=
+                mul_le_mul_of_nonneg_left ha3_bd (by norm_num)
+            _ = (1 / 2 : ℝ) * A3c * ‖v‖ ^ 3 := by ring
+        have hsnd : ‖(Y x - M x).2‖ ≤ ‖Y x - M x‖ := by
+          rw [Prod.norm_def]; exact le_max_right _ _
+        linarith [ha3half, hsnd]
+      have hbr3_bd : ‖GXuu - GXUU‖
+          ≤ (1 / 2 : ℝ) * Mc * (n : ℝ) ^ 2 * (Cu + C₀) * A3c * ‖v‖ ^ 4
+            + Bcoef * ‖v‖ * ‖Y x - M x‖ := by
+        refine hbr3.trans ?_
+        have hsum : ‖ustar‖ + ‖U‖ ≤ (Cu + C₀) * ‖v‖ := by
+          calc ‖ustar‖ + ‖U‖ ≤ Cu * ‖v‖ + C₀ * ‖v‖ := add_le_add hustar_bd hUC0
+            _ = (Cu + C₀) * ‖v‖ := by ring
+        have hstep : ‖ustar - U‖ * (‖ustar‖ + ‖U‖)
+            ≤ ((1 / 2 : ℝ) * A3c * ‖v‖ ^ 3 + ‖Y x - M x‖) * ((Cu + C₀) * ‖v‖) :=
+          mul_le_mul hustarU hsum (add_nonneg (norm_nonneg _) (norm_nonneg _))
+            (add_nonneg (mul_nonneg (mul_nonneg (by norm_num) hA3c0) (by positivity))
+              (norm_nonneg _))
+        calc Mc * (n : ℝ) ^ 2 * (‖ustar - U‖ * (‖ustar‖ + ‖U‖))
+            ≤ Mc * (n : ℝ) ^ 2
+                * (((1 / 2 : ℝ) * A3c * ‖v‖ ^ 3 + ‖Y x - M x‖) * ((Cu + C₀) * ‖v‖)) :=
+              mul_le_mul_of_nonneg_left hstep (mul_nonneg Mc0 (hn 2))
+          _ = (1 / 2 : ℝ) * Mc * (n : ℝ) ^ 2 * (Cu + C₀) * A3c * ‖v‖ ^ 4
+                + (Mc * (n : ℝ) ^ 2 * (Cu + C₀)) * ‖v‖ * ‖Y x - M x‖ := by ring
+          _ = (1 / 2 : ℝ) * Mc * (n : ℝ) ^ 2 * (Cu + C₀) * A3c * ‖v‖ ^ 4
+                + Bcoef * ‖v‖ * ‖Y x - M x‖ := by rw [hBcoefdef]
+      -- assemble the `Err` bound.
+      have hErr : ‖Γv - x • a3 - GXUU‖ ≤ Acoef * ‖v‖ ^ 4 + Bcoef * ‖v‖ * ‖Y x - M x‖ := by
+        have hsplit : Γv - x • a3 - GXUU
+            = (x • Dvvv - Dstar) - x ^ 2 • BGG - Rrem + (GXuu - GXUU) := by
+          have e : Γv - x • a3 - GXUU = (Γv - x • a3 - GXuu) + (GXuu - GXUU) := by abel
+          rw [e, hStepB]
+        have htri : ‖Γv - x • a3 - GXUU‖
+            ≤ ‖x • Dvvv - Dstar‖ + ‖x ^ 2 • BGG‖ + ‖Rrem‖ + ‖GXuu - GXUU‖ := by
+          rw [hsplit]
+          refine (norm_add_le _ _).trans (add_le_add ?_ le_rfl)
+          refine (norm_sub_le _ _).trans (add_le_add ?_ le_rfl)
+          exact norm_sub_le _ _
+        refine htri.trans ?_
+        calc ‖x • Dvvv - Dstar‖ + ‖x ^ 2 • BGG‖ + ‖Rrem‖ + ‖GXuu - GXUU‖
+            ≤ (Nc * (n : ℝ) ^ 3 * Pc + Nc * Mc * C₀ * (n : ℝ) ^ 5
+                  + Nc * Cu * Mc * C₀ * (n : ℝ) ^ 5) * ‖v‖ ^ 4
+                + Mc ^ 3 * (n : ℝ) ^ 6 * ‖v‖ ^ 4
+                + M2 * (n : ℝ) ^ 3 * C₀ ^ 2 * Cu ^ 2 * ‖v‖ ^ 4
+                + ((1 / 2 : ℝ) * Mc * (n : ℝ) ^ 2 * (Cu + C₀) * A3c * ‖v‖ ^ 4
+                  + Bcoef * ‖v‖ * ‖Y x - M x‖) :=
+              add_le_add (add_le_add (add_le_add hΔD_bd hBGG_bd) hRrem_bd) hbr3_bd
+          _ = Acoef * ‖v‖ ^ 4 + Bcoef * ‖v‖ * ‖Y x - M x‖ := by rw [hAcoefdef]; ring
+      -- close the two components of the residual derivative norm.
+      have hid : geodesicField g gi (Y x)
+          - ((v - x • Γv + (x ^ 2 / 2) • a3, -Γv + x • a3) : Point n × Point n)
+        = ((Y x).2 - (v - x • Γv + (x ^ 2 / 2) • a3),
+            Γv - x • a3
+              - (fun i => ∑ j, ∑ k, christoffel g gi i j k (Y x).1 * (Y x).2 j * (Y x).2 k)) :=
+        expJet2_residual_deriv_eq g gi Y Γv a3 v x
+      rw [hid]
+      simp only [← hXdef, ← hUdef]
+      rw [Prod.norm_def]
+      apply max_le
+      · have e : U - (v - x • Γv + (x ^ 2 / 2) • a3) = (Y x - M x).2 := by
+          rw [Prod.snd_sub, hMx2, ← hUdef]
+        rw [e]
+        have h1 : ‖(Y x - M x).2‖ ≤ ‖Y x - M x‖ := by rw [Prod.norm_def]; exact le_max_right _ _
+        have h2 : (0 : ℝ) ≤ Bcoef * ‖v‖ * ‖Y x - M x‖ :=
+          mul_nonneg (mul_nonneg hBcoef0 (norm_nonneg _)) (norm_nonneg _)
+        have h3 : (0 : ℝ) ≤ Acoef * ‖v‖ ^ 4 := mul_nonneg hAcoef0 (by positivity)
+        have hexp : (1 + Bcoef * ‖v‖) * ‖Y x - M x‖
+            = ‖Y x - M x‖ + Bcoef * ‖v‖ * ‖Y x - M x‖ := by ring
+        rw [hexp]; linarith [h1]
+      · rw [← hGXUUdef]
+        have hexp : (1 + Bcoef * ‖v‖) * ‖Y x - M x‖
+            = ‖Y x - M x‖ + Bcoef * ‖v‖ * ‖Y x - M x‖ := by ring
+        rw [hexp]; linarith [hErr, norm_nonneg (Y x - M x)]
+    -- inhomogeneous Grönwall.
+    have hg1 := (norm_le_gronwallBound_of_norm_deriv_right_le hf hf' ha bound) 1
+      (by norm_num [Set.mem_Icc])
+    rw [sub_zero] at hg1
+    -- project the position component of `r₃ 1`.
+    have htarget : expMap g gi hC p v - p - v + (1 / 2 : ℝ) • Γv - (1 / 6 : ℝ) • a3
+        = (Y 1 - M 1).1 := by
+      rw [Prod.fst_sub]
+      have hM1 : (M 1).1 = p + v - (1 / 2 : ℝ) • Γv + (1 / 6 : ℝ) • a3 := by
+        show p + (1 : ℝ) • v - ((1 : ℝ) ^ 2 / 2) • Γv + ((1 : ℝ) ^ 3 / 6) • a3
+            = p + v - (1 / 2 : ℝ) • Γv + (1 / 6 : ℝ) • a3
+        simp only [one_smul, one_pow]
+      have hexpeq : expMap g gi hC p v = (Y 1).1 := by simp only [expMap, hYdef]
+      rw [hM1, hexpeq]; abel
+    have h2 : gronwallBound 0 (1 + Bcoef * ‖v‖) (Acoef * ‖v‖ ^ 4) 1 ≤ Cfinal * ‖v‖ ^ 4 := by
+      rw [gronwallBound_zero_linear]
+      have hKpos : 0 ≤ 1 + Bcoef * ‖v‖ := by
+        have := mul_nonneg hBcoef0 (norm_nonneg v); linarith
+      have hAv0 : 0 ≤ Acoef * ‖v‖ ^ 4 := mul_nonneg hAcoef0 (by positivity)
+      have hKle : 1 + Bcoef * ‖v‖ ≤ Kmax := by
+        rw [hKmaxdef]
+        have : Bcoef * ‖v‖ ≤ Bcoef * ρ := mul_le_mul_of_nonneg_left hvρ hBcoef0
+        linarith
+      calc Acoef * ‖v‖ ^ 4 * gronwallBound 0 (1 + Bcoef * ‖v‖) 1 1
+          ≤ Acoef * ‖v‖ ^ 4 * Real.exp (1 + Bcoef * ‖v‖) :=
+            mul_le_mul_of_nonneg_left (gronwallBound_zero_one_le_exp _ hKpos) hAv0
+        _ ≤ Acoef * ‖v‖ ^ 4 * Real.exp Kmax :=
+            mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr hKle) hAv0
+        _ = Cfinal * ‖v‖ ^ 4 := by rw [hCfinaldef]; ring
+    rw [htarget]
+    calc ‖(Y 1 - M 1).1‖
+        ≤ ‖Y 1 - M 1‖ := by rw [Prod.norm_def]; exact le_max_left _ _
+      _ ≤ gronwallBound 0 (1 + Bcoef * ‖v‖) (Acoef * ‖v‖ ^ 4) 1 := hg1
+      _ ≤ Cfinal * ‖v‖ ^ 4 := h2
+  -- Package `O(‖v‖⁴)` into `o(‖v‖³)`.
+  rw [Asymptotics.isLittleO_iff]
+  intro c hc
+  have hev1 : ∀ᶠ v in 𝓝 (0 : Point n), ‖v‖ ≤ ρ :=
+    Metric.eventually_nhds_iff.mpr ⟨ρ, hρpos, fun v hv => by
+      rw [dist_zero_right] at hv; exact hv.le⟩
+  have hev2 : ∀ᶠ v in 𝓝 (0 : Point n), ‖v‖ ≤ c / (Cfinal + 1) :=
+    Metric.eventually_nhds_iff.mpr ⟨c / (Cfinal + 1), div_pos hc (by linarith [hCfinal0]),
+      fun v hv => by rw [dist_zero_right] at hv; exact hv.le⟩
+  filter_upwards [hev1, hev2] with v hv1 hv2
+  rw [Real.norm_eq_abs, abs_of_nonneg (by positivity)]
+  have hCv : Cfinal * ‖v‖ ≤ c := by
+    calc Cfinal * ‖v‖ ≤ Cfinal * (c / (Cfinal + 1)) := mul_le_mul_of_nonneg_left hv2 hCfinal0
+      _ = Cfinal / (Cfinal + 1) * c := by ring
+      _ ≤ 1 * c := mul_le_mul_of_nonneg_right
+          (by rw [div_le_one (by linarith [hCfinal0])]; linarith [hCfinal0]) hc.le
+      _ = c := one_mul c
+  refine le_trans (hbound v hv1) ?_
+  calc Cfinal * ‖v‖ ^ 4 = Cfinal * ‖v‖ * ‖v‖ ^ 3 := by ring
+    _ ≤ c * ‖v‖ ^ 3 := mul_le_mul_of_nonneg_right hCv (by positivity)
+
 end QIQTH.ExpMap

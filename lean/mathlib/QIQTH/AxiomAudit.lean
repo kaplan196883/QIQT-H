@@ -9701,22 +9701,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.gronwallBound_zero_one_le_exp
 #print axioms QIQTH.ExpMap.expMap_value_two_jet
 
--- ExpMap.lean — EXP-JET2 (CHECKPOINTED): the value 3-jet infrastructure (THE_EXP_JETS_PLAN.md), 2026-07-06.
--- Target: exp_p(v) − p − v + ½Γ_p(v,v) − ⅙·a₃(v) = o(‖v‖³), a₃(v) = the true γ'''(0) =
+-- ExpMap.lean — EXP-JET2 (DONE 2026-07-06): the exp map's Fréchet value 3-jet at 0 (THE_EXP_JETS_PLAN.md).
+-- expMap_value_three_jet: exp_p(v) − p − v + ½Γ_p(v,v) − ⅙·a₃(v) = o(‖v‖³), a₃(v) = the true γ'''(0) =
 --   −∑_{jkl} ∂_lΓ^i_{jk}(p) v_j v_k v_l + ∑_{jk} Γ^i_{jk}(p)(Γ_p(v,v)_j v_k + v_j Γ_p(v,v)_k)
--- (honest symmetry-free form; = 2∑ Γ Γ_p(v,v) v when the metric is symmetric). All infrastructure lemmas GREEN:
---  fderiv_apply_eq_sum_pd  : Df(x)[w] = ∑_l ∂_l f(x)·w_l (the pd↔fderiv coordinate bridge, via pd_eq_fderiv + linearity).
---  christoffel_pd_contDiff : pd(christoffel …) l is C^∞ (fderiv_right + CLM.apply composition).
---  christoffel_taylor_bound: the SECOND-order Christoffel Taylor remainder (the genuinely new analytic ingredient)
---                            |Γ(X) − Γ(p) − ∑_l ∂_lΓ(p)(X−p)_l| ≤ M2·n·‖X−p‖² from a base-point ∂Γ-Lipschitz bound,
---                            via segment mean-value (Convex.norm_image_sub_le_of_norm_hasDerivWithin_le).
---  christoffel_pd_trilin_bound / bilin_sup_bound : sup-norm bounds for the pd-trilinear and generic bilinear forms.
---  expJet2_model_hasDerivAt: the cubic model curve M(τ)=(p+τv−½τ²Γv+⅙τ³a₃, v−τΓv+½τ²a₃) and its velocity M'(τ).
---  expJet2_residual_deriv_eq: the EXACT residual ODE identity r₃'=A·r₃+Err (Err = Γv−t·a₃−Γ_{(Y t).1}((Y t).2,(Y t).2)).
--- REMAINING (blocked, no sorry): the little-o's ~370-line constant-bookkeeping assembly (the O(‖v‖³)-cancellation of
--- Err against t·a₃ via the E1/E2/E3 telescoping + inhomogeneous Grönwall). HONEST: these are the value-3-jet building
--- blocks + the hard remainder bound; they do NOT yet deliver the little-o, do NOT discharge hgauge, NOT build the
--- pullback metric, NOT move numerical-G. All [AF] std-3.
+-- (honest symmetry-free form; = 2∑ Γ Γ_p(v,v) v when the metric is symmetric). Route: cubic model curve
+-- M(τ)=(p+τv−½τ²Γv+⅙τ³a₃, v−τΓv+½τ²a₃), residual r₃=Y−M with r₃'=A·r₃+Err, the telescope
+-- Err = [−t²·Γ_p(Γv,Γv)] + [t·∂Γ(v,v,v) − ∂Γ(u*,u*,X−p)] − Taylor-remainder + [Γ_X(u*,u*) − Γ_X(U,U)]
+-- makes the leading cubic terms cancel EXACTLY against a₃ (the sum-algebra helpers bilin_sub_smul_expand /
+-- tri_shared_telescope / bilin_taylor_repack), leaving ‖Err‖ ≤ Acoef·‖v‖⁴ + Bcoef·‖v‖·‖r₃‖; the cheap
+-- confinement-derived tube first-order bounds ‖(Y t).2−v‖, ‖(Y t).1−p−t·v‖ = O(‖v‖²) feed the ∂Γ cancellation,
+-- the second-order Christoffel Taylor remainder (christoffel_taylor_bound) is the new analytic ingredient, then
+-- the inhomogeneous Grönwall gives ‖r₃ 1‖ ≤ Cfinal·‖v‖⁴ and the position projection closes the o(‖v‖³).
+-- HONEST: this is the Fréchet value 3-jet of exp_p at 0; it does NOT discharge hgauge, NOT build the pullback
+-- metric, NOT move numerical-G (N, Λ_s, E/ξ remain). All [AF] std-3.
 #print axioms QIQTH.ExpMap.fderiv_apply_eq_sum_pd
 #print axioms QIQTH.ExpMap.christoffel_pd_contDiff
 #print axioms QIQTH.ExpMap.christoffel_taylor_bound
@@ -9724,5 +9721,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.bilin_sup_bound
 #print axioms QIQTH.ExpMap.expJet2_model_hasDerivAt
 #print axioms QIQTH.ExpMap.expJet2_residual_deriv_eq
+#print axioms QIQTH.ExpMap.bilin_sub_smul_expand
+#print axioms QIQTH.ExpMap.tri_shared_telescope
+#print axioms QIQTH.ExpMap.bilin_taylor_repack
+#print axioms QIQTH.ExpMap.expMap_value_three_jet
 
 end QIQTH.AxiomAudit
