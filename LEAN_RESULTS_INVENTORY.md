@@ -592,6 +592,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (binding):** the `[0,1]` fundamental solution — a step toward the localized first variation → the Jacobian-field
   expansion → `hgauge`; does **NOT** yet give the first variation, **NOT** the Jacobian 2-jet expansion, **NOT** the
   pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3b STEP B — the localized first variation `HasFDerivAt exp_p (L v) v`** (`ExpMap.lean`, **[AF]** std-3,
+  budget 0, DONE 2026-07-07): **`hasFDerivAt_expMap`** — for `‖v‖ < expRho`,
+  `HasFDerivAt (expMap g gi hC p) (expJetPi.comp ((Φ_v 1).comp expJetIota)) v` with `Φ_v` THE `[0,1]` fundamental
+  solution (`expJetFund`, stated existentially in `Φ_v`).  The Jacobi field `J_k(t)=Φ_v(t)(0,k)`
+  (`HasDerivWithinAt.clm_apply` on the `Φ_v` derivative law, `J_k 0=(0,k)`) transports the first variation; the
+  residual `R_k=(Y_{v+k}−Y_v)−J_k` (`R_k 0=0`, `R_k'=DF(Y_v)R_k+N_k`) has `‖N_k(t)‖≤ε·‖Y_{v+k}−Y_v‖≤ε·Ctw·‖k‖`
+  (`geodesicField_uniform_C1_remainder` on a fixed convex-compact ball + the two-point `geodesic_twopoint_gronwall`,
+  `Ctw=e^{Ktube}`); the inhomogeneous Grönwall `norm_le_gronwallBound_of_norm_deriv_right_le` (Icc→Ici via
+  `mono_of_mem_nhdsWithin`) gives `‖R_k 1‖≤ε·Ctw·β'·‖k‖≤c·‖k‖`, and `exp_p(v+k)−exp_p(v)−L v·k=expJetPi(R_k 1)` closes
+  the `isLittleO`. ⚠ This CLOSES the checkpointed first-variation residual Grönwall. ⚠ **HONEST CAPTION (binding):**
+  the localized first variation (the genuine subtlety of EXP-JET3); does **NOT** yet give the full Jacobian 2-jet
+  expansion `fderiv exp_p y = 1 + B(y,·) + …`, **NOT** the pullback metric, **NOT** numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

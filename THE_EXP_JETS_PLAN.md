@@ -133,6 +133,22 @@ remain). Never claim numerical-G or a curved heat kernel.
     solution — a step toward the localized first variation `HasFDerivAt exp_p (L v) v` (EXP-JET3, still CHECKPOINTED).
     It does NOT yet give the first variation, NOT the Jacobian 2-jet expansion, NOT the pullback metric, NOT
     numerical-G (`N`, `Λ_s`, `E/ξ` remain).
+  - [x] **EXP-JET3b STEP B — the localized first variation `HasFDerivAt exp_p (L v) v`. DONE 2026-07-07.**  Landed
+    green in `ExpMap.lean` ([AF] std-3, budget 0): **`hasFDerivAt_expMap`** — for `‖v‖ < expRho`,
+    `HasFDerivAt (expMap g gi hC p) (expJetPi.comp ((Φ_v 1).comp expJetIota)) v` with `Φ_v` THE `[0,1]`
+    fundamental solution (`expJetFund`), stated existentially in `Φ_v` (it is not canonically named).  Route (as
+    scoped): the Jacobi field `J_k(t) = Φ_v(t)(0,k)` (`HasDerivWithinAt.clm_apply` on the `Φ_v` derivative law +
+    `expJetPsi_apply`, `J_k 0 = (0,k)`) transports the first variation; the residual `R_k = (Y_{v+k} − Y_v) − J_k`
+    has `R_k 0 = 0` and `R_k' = DF(Y_v)·R_k + N_k` (built inline from `Y_{v+k}' − Y_v' − J_k'` + `map_sub`/`abel`),
+    with the two-point separation `‖Y_{v+k} − Y_v‖ ≤ ‖k‖·Ctw` (`geodesic_twopoint_gronwall`, `Ctw = e^{Ktube}` on a
+    fixed convex-compact ball `S = closedBall((p,0), expConst(‖v‖+1)+1)`) and the C¹ remainder
+    `‖N_k(t)‖ ≤ ε·‖Y_{v+k}−Y_v‖ ≤ ε·Ctw·‖k‖` (`geodesicField_uniform_C1_remainder` on `S`); the inhomogeneous
+    Grönwall (`norm_le_gronwallBound_of_norm_deriv_right_le`, `Icc→Ici` right-derivatives via
+    `mono_of_mem_nhdsWithin`) gives `‖R_k 1‖ ≤ ε·Ctw·β'·‖k‖ ≤ c·‖k‖` (`gronwallBound_zero_linear`, ε tolerance).
+    Finally `exp_p(v+k) − exp_p(v) − L v·k = expJetPi(R_k 1)` (since `expJetPi(J_k 1) = L v·k`) + `‖expJetPi z‖ ≤ ‖z‖`
+    closes the `isLittleO`.  HONEST: the localized first variation (the genuine subtlety of EXP-JET3).  Does NOT yet
+    give the full Jacobian 2-jet expansion `fderiv exp_p y = 1 + B(y,·) + …`, NOT the pullback metric, NOT
+    numerical-G (`N`, `Λ_s`, `E/ξ` remain).
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -159,6 +175,14 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3b STEP B):** the localized first variation `HasFDerivAt exp_p (L v) v` landed green
+  ([AF] std-3, budget 0).  New theorem `hasFDerivAt_expMap` in `ExpMap.lean`: for `‖v‖ < expRho`,
+  `HasFDerivAt (expMap g gi hC p) (expJetPi.comp ((Φ_v 1).comp expJetIota)) v`, `Φ_v` the `[0,1]` fundamental
+  solution (existential).  Jacobi field `J_k=Φ_v(·)(0,k)` (`clm_apply` on the Φ_v derivative law), residual
+  `R_k=(Y_{v+k}−Y_v)−J_k` with `R_k'=DF(Y_v)R_k+N_k`, `‖N_k‖≤ε·Ctw·‖k‖` (C¹ remainder + two-point Grönwall on a
+  fixed convex-compact ball), inhomogeneous Grönwall ⟹ `‖R_k 1‖=o(‖k‖)`, `expJetPi` projection closes the little-o.
+  This CLOSES the checkpointed first variation; EXP-JET3 (full Jacobian 2-jet) and EXP-JET4/5 (pullback metric →
+  `hgauge`) remain.
 - **2026-07-07 (EXP-JET3b STEP A):** the `[0,1]` operator-valued fundamental solution `Φ_v` landed green
   ([AF] std-3, budget 0).  New lemmas in `ExpMap.lean`: `expJetPsi_comp_continuousOn` (integrand continuity on any
   `A ⊆ [0,1]`), `expJetFund_glue` (private — the partition-induction concatenation of the `N ≥ 2(KdF+1)` shifted

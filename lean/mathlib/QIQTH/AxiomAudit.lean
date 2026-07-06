@@ -9799,4 +9799,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetPsi_comp_continuousOn
 #print axioms QIQTH.ExpMap.expJetFund
 
+-- ExpMap.lean — EXP-JET3b STEP B (2026-07-07): the localized first variation.
+-- hasFDerivAt_expMap: for ‖v‖ < expRho, HasFDerivAt exp_p (π ∘ Φ_v(1) ∘ ι) v with Φ_v THE [0,1]
+-- fundamental solution (stated existentially in Φ_v).  The Jacobi field J_k(t)=Φ_v(t)(0,k) transports
+-- the first variation; the residual R_k=(Y_{v+k}−Y_v)−J_k (R_k 0 = 0, R_k'=DF(Y_v)R_k+N_k,
+-- ‖N_k‖≤ε·Ctw·‖k‖ via geodesicField_uniform_C1_remainder + geodesic_twopoint_gronwall); inhomogeneous
+-- Grönwall gives ‖R_k 1‖=o(‖k‖); exp_p(v+k)−exp_p(v)−L·k = π(R_k 1) closes the little-o.
+-- HONEST: the localized first variation (the genuine subtlety of EXP-JET3).  Does NOT yet give the
+-- full Jacobian 2-jet expansion, NOT the pullback metric, NOT numerical-G (N, Λ_s, E/ξ remain).
+#print axioms QIQTH.ExpMap.hasFDerivAt_expMap
+
 end QIQTH.AxiomAudit

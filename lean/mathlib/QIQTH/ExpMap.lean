@@ -3271,4 +3271,238 @@ theorem expJetFund (g gi : Point n → Fin n → Fin n → ℝ)
   have hconst := hFTC.const_add (ContinuousLinearMap.id ℝ (Point n × Point n))
   exact hconst.congr (fun s hs => hΦint s hs) (hΦint t ht)
 
+set_option maxHeartbeats 4000000 in
+/-- **EXP-JET3b (STEP B) — the localized first variation `HasFDerivAt exp_p (L v) v`.**  For
+    `‖v‖ < expRho`, the geodesic exponential map has Fréchet derivative `L v = π ∘ Φ_v(1) ∘ ι` at `v`,
+    where `Φ_v` is the `[0,1]` operator-valued fundamental solution (`expJetFund`) of the Jacobi ODE
+    along the tube `Y_v`.  The Jacobi field `J_k(t) = Φ_v(t)(0,k)` (`J_k 0 = (0,k)`) transports the
+    first variation; the residual `R_k = (Y_{v+k} − Y_v) − J_k` obeys `R_k 0 = 0`,
+    `R_k' = DF(Y_v)·R_k + N_k` with `‖N_k(t)‖ ≤ ε·‖Y_{v+k} − Y_v‖ ≤ ε·Ctw·‖k‖`
+    (`geodesicField_uniform_C1_remainder` + the two-point Grönwall `geodesic_twopoint_gronwall`);
+    the inhomogeneous Grönwall (`norm_le_gronwallBound_of_norm_deriv_right_le`) gives `‖R_k 1‖ = o(‖k‖)`,
+    and `exp_p(v+k) − exp_p(v) − L v·k = π(R_k 1)` closes the little-o.
+
+    Stated existentially in `Φ_v` (the fundamental solution is not canonically named): the derivative
+    is `π ∘ Φ_v(1) ∘ ι` for THE fundamental solution `Φ_v` returned alongside.
+
+    HONEST: the localized first variation — the genuine subtlety of EXP-JET3.  It does NOT yet give the
+    full Jacobian 2-jet expansion `fderiv exp_p y = 1 + B(y,·) + …`, NOT the pullback metric, NOT
+    numerical-G (`N`, `Λ_s`, `E/ξ` remain). -/
+theorem hasFDerivAt_expMap (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ < expRho g gi hC p) :
+    ∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+      Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+      (∀ t ∈ Set.Icc (0 : ℝ) 1,
+        HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t) ∧
+      HasFDerivAt (expMap g gi hC p)
+        (expJetPi.comp ((Φ 1).comp (expJetIota (n := n)))) v := by
+  have hv_le : ‖v‖ ≤ expRho g gi hC p := hv.le
+  obtain ⟨Φ, hΦ0, _hΦcont, _hΦint, hΦderiv⟩ := expJetFund g gi hC p v hv_le
+  refine ⟨Φ, hΦ0, hΦderiv, ?_⟩
+  rw [hasFDerivAt_iff_isLittleO_nhds_zero, Asymptotics.isLittleO_iff]
+  intro c hc
+  -- constants: confinement, Lipschitz on a fixed convex compact ball S, the Jacobi bound KdF.
+  have hC₀ := expConst_nonneg g gi hC p
+  set Rb : ℝ := expConst g gi hC p * (‖v‖ + 1) + 1 with hRbdef
+  have hRb0 : 0 ≤ Rb := by rw [hRbdef]; positivity
+  obtain ⟨Ktube, hLip⟩ :=
+    ((contDiff_geodesicField g gi hC).contDiffOn
+        (s := Metric.closedBall ((p, 0) : Point n × Point n) Rb)).exists_lipschitzOnWith
+      (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+  obtain ⟨KdF, hKdF0, hKdFb⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv_le
+  set Ctw : ℝ := Real.exp (Ktube : ℝ) with hCtwdef
+  have hCtw0 : 0 < Ctw := Real.exp_pos _
+  -- the Grönwall proportionality constant β' = gronwallBound 0 KdF 1 1 ≥ 0.
+  set β' : ℝ := gronwallBound 0 KdF 1 1 with hβ'def
+  have hβ'0 : 0 ≤ β' := by
+    rw [hβ'def]
+    rcases eq_or_ne KdF 0 with hK | hK
+    · rw [hK, gronwallBound_K0]; norm_num
+    · rw [gronwallBound_of_K_ne_0 hK]
+      have hKpos : 0 < KdF := (hKdF0).lt_of_ne (Ne.symm hK)
+      have hexp : (1 : ℝ) ≤ Real.exp (KdF * 1) := by
+        rw [mul_one]; exact Real.one_le_exp hKpos.le
+      have hprod : 0 ≤ 1 / KdF * (Real.exp (KdF * 1) - 1) :=
+        mul_nonneg (by positivity) (by linarith)
+      simpa using hprod
+  set Mc : ℝ := Ctw * β' with hMcdef
+  have hMc0 : 0 ≤ Mc := by rw [hMcdef]; exact mul_nonneg hCtw0.le hβ'0
+  set ε : ℝ := c / (Mc + 1) with hεdef
+  have hεpos : 0 < ε := by rw [hεdef]; exact div_pos hc (by linarith)
+  have hεMc : ε * Mc ≤ c := by
+    rw [hεdef, div_mul_eq_mul_div, div_le_iff₀ (by linarith : (0:ℝ) < Mc + 1)]
+    nlinarith [hc, hMc0]
+  -- the uniform C¹ remainder of the field on S.
+  obtain ⟨δε, hδε0, hδεb⟩ := geodesicField_uniform_C1_remainder g gi hC
+    (convex_closedBall ((p, 0) : Point n × Point n) Rb)
+    (isCompact_closedBall ((p, 0) : Point n × Point n) Rb) hεpos
+  -- the eventual neighbourhood radius for k.
+  set ρ : ℝ := min (expRho g gi hC p - ‖v‖) (min 1 (δε / Ctw)) with hρdef
+  have hρpos : 0 < ρ := by
+    rw [hρdef]; exact lt_min (by linarith) (lt_min one_pos (by positivity))
+  rw [Metric.eventually_nhds_iff]
+  refine ⟨ρ, hρpos, ?_⟩
+  intro k hk
+  rw [dist_eq_norm, sub_zero] at hk
+  have hk1 : ‖k‖ < expRho g gi hC p - ‖v‖ := lt_of_lt_of_le hk (by rw [hρdef]; exact min_le_left _ _)
+  have hk2 : ‖k‖ ≤ 1 :=
+    (lt_of_lt_of_le hk (by rw [hρdef]; exact le_trans (min_le_right _ _) (min_le_left _ _))).le
+  have hk3 : ‖k‖ < δε / Ctw :=
+    lt_of_lt_of_le hk (by rw [hρdef]; exact le_trans (min_le_right _ _) (min_le_right _ _))
+  have hkCtw : ‖k‖ * Ctw < δε := (lt_div_iff₀ hCtw0).mp hk3
+  have hvk_le : ‖v + k‖ ≤ expRho g gi hC p :=
+    le_of_lt (lt_of_le_of_lt (norm_add_le v k) (by linarith))
+  -- the two confined tubes.
+  obtain ⟨hY0v, hderivv, hconfv⟩ := expTube_spec g gi hC p v hv_le
+  obtain ⟨hY0vk, hderivvk, hconfvk⟩ := expTube_spec g gi hC p (v + k) hvk_le
+  have hIcc_Ioo : ∀ t ∈ Set.Icc (0 : ℝ) 1, t ∈ Set.Ioo (-2 : ℝ) 2 :=
+    fun t ht => ⟨by linarith [ht.1], by linarith [ht.2]⟩
+  -- both tubes lie in S on [0,1].
+  have hSv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      expTube g gi hC p v t ∈ Metric.closedBall ((p, 0) : Point n × Point n) Rb := by
+    intro t ht
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    calc ‖expTube g gi hC p v t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v‖ := hconfv t ht
+      _ ≤ Rb := by rw [hRbdef]; nlinarith [hC₀, norm_nonneg v]
+  have hSvk : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      expTube g gi hC p (v + k) t ∈ Metric.closedBall ((p, 0) : Point n × Point n) Rb := by
+    intro t ht
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    calc ‖expTube g gi hC p (v + k) t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v + k‖ := hconfvk t ht
+      _ ≤ expConst g gi hC p * (‖v‖ + 1) := by
+          apply mul_le_mul_of_nonneg_left _ hC₀
+          calc ‖v + k‖ ≤ ‖v‖ + ‖k‖ := norm_add_le v k
+            _ ≤ ‖v‖ + 1 := by linarith
+      _ ≤ Rb := by rw [hRbdef]; linarith
+  -- two-point Grönwall separation bound ‖Y_{v+k} − Y_v‖ ≤ ‖k‖·Ctw on [0,1].
+  have hdist0 : dist (expTube g gi hC p (v + k) 0) (expTube g gi hC p v 0) = ‖k‖ := by
+    rw [hY0vk, hY0v, dist_eq_norm, Prod.mk_sub_mk, sub_self, add_sub_cancel_left,
+      Prod.norm_def, norm_zero, max_eq_right (norm_nonneg _)]
+  have htwopoint := geodesic_twopoint_gronwall g gi
+      (S := Metric.closedBall ((p, 0) : Point n × Point n) Rb) (K := Ktube) hLip
+      (fun t ht => hderivvk t (hIcc_Ioo t ht)) (fun t ht => hderivv t (hIcc_Ioo t ht)) hSvk hSv
+  have htwo : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p (v + k) t - expTube g gi hC p v t‖ ≤ ‖k‖ * Ctw := by
+    intro t ht
+    have h := htwopoint t ht
+    rw [hdist0, dist_eq_norm] at h
+    have hexple : Real.exp ((Ktube : ℝ) * t) ≤ Ctw := by
+      rw [hCtwdef]; apply Real.exp_le_exp.mpr
+      calc (Ktube : ℝ) * t ≤ (Ktube : ℝ) * 1 := mul_le_mul_of_nonneg_left ht.2 (by positivity)
+        _ = (Ktube : ℝ) := mul_one _
+    calc ‖expTube g gi hC p (v + k) t - expTube g gi hC p v t‖
+        ≤ ‖k‖ * Real.exp ((Ktube : ℝ) * t) := h
+      _ ≤ ‖k‖ * Ctw := mul_le_mul_of_nonneg_left hexple (norm_nonneg _)
+  -- the Jacobi field J_k(t) = Φ_v(t)(0,k), solving J' = DF(Y_v)·J.
+  have hJderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt (fun τ => Φ τ ((0, k) : Point n × Point n))
+        (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ t ((0, k) : Point n × Point n)))
+        (Set.Icc 0 1) t := by
+    intro t ht
+    have h := (hΦderiv t ht).clm_apply
+      (hasDerivAt_const t ((0, k) : Point n × Point n)).hasDerivWithinAt
+    simpa only [expJetPsi_apply, ContinuousLinearMap.comp_apply, map_zero, add_zero] using h
+  -- the residual R_k = (Y_{v+k} − Y_v) − J_k.
+  set R : ℝ → Point n × Point n :=
+    fun τ => expTube g gi hC p (v + k) τ - expTube g gi hC p v τ - Φ τ ((0, k) : Point n × Point n)
+    with hRdef
+  have hR0 : R 0 = 0 := by
+    simp only [hRdef]
+    rw [hY0vk, hY0v, hΦ0, ContinuousLinearMap.id_apply]
+    simp [Prod.mk_sub_mk]
+  have hRderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt R
+        (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (R t)
+          + (geodesicField g gi (expTube g gi hC p (v + k) t)
+              - geodesicField g gi (expTube g gi hC p v t)
+              - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+                  (expTube g gi hC p (v + k) t - expTube g gi hC p v t)))
+        (Set.Icc 0 1) t := by
+    intro t ht
+    have hd_vk : HasDerivWithinAt (expTube g gi hC p (v + k))
+        (geodesicField g gi (expTube g gi hC p (v + k) t)) (Set.Icc 0 1) t :=
+      (hderivvk t (hIcc_Ioo t ht)).hasDerivWithinAt
+    have hd_v : HasDerivWithinAt (expTube g gi hC p v)
+        (geodesicField g gi (expTube g gi hC p v t)) (Set.Icc 0 1) t :=
+      (hderivv t (hIcc_Ioo t ht)).hasDerivWithinAt
+    have hbase := (hd_vk.sub hd_v).sub (hJderiv t ht)
+    have hval : geodesicField g gi (expTube g gi hC p (v + k) t)
+          - geodesicField g gi (expTube g gi hC p v t)
+          - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ t ((0, k) : Point n × Point n))
+        = fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (R t)
+          + (geodesicField g gi (expTube g gi hC p (v + k) t)
+              - geodesicField g gi (expTube g gi hC p v t)
+              - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+                  (expTube g gi hC p (v + k) t - expTube g gi hC p v t)) := by
+      rw [hRdef]
+      simp only [map_sub]
+      abel
+    rw [hval] at hbase
+    exact hbase
+  -- the inhomogeneous residual Grönwall.
+  have hRcont : ContinuousOn R (Set.Icc 0 1) :=
+    fun t ht => (hRderiv t ht).continuousWithinAt
+  have hbound : ∀ x ∈ Set.Ico (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x) (R x)
+        + (geodesicField g gi (expTube g gi hC p (v + k) x)
+            - geodesicField g gi (expTube g gi hC p v x)
+            - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x)
+                (expTube g gi hC p (v + k) x - expTube g gi hC p v x))‖
+      ≤ KdF * ‖R x‖ + ε * Ctw * ‖k‖ := by
+    intro x hx
+    have hxIcc : x ∈ Set.Icc (0 : ℝ) 1 := Set.Ico_subset_Icc_self hx
+    have hlt : ‖expTube g gi hC p (v + k) x - expTube g gi hC p v x‖ < δε :=
+      lt_of_le_of_lt (htwo x hxIcc) hkCtw
+    have hNk := hδεb (expTube g gi hC p (v + k) x) (hSvk x hxIcc)
+      (expTube g gi hC p v x) (hSv x hxIcc) hlt
+    have hDFbound : ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x) (R x)‖
+        ≤ KdF * ‖R x‖ :=
+      le_trans ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x)).le_opNorm (R x))
+        (mul_le_mul_of_nonneg_right (hKdFb x hxIcc) (norm_nonneg _))
+    calc ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x) (R x)
+            + (geodesicField g gi (expTube g gi hC p (v + k) x)
+                - geodesicField g gi (expTube g gi hC p v x)
+                - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x)
+                    (expTube g gi hC p (v + k) x - expTube g gi hC p v x))‖
+        ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x) (R x)‖
+          + ‖geodesicField g gi (expTube g gi hC p (v + k) x)
+              - geodesicField g gi (expTube g gi hC p v x)
+              - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x)
+                  (expTube g gi hC p (v + k) x - expTube g gi hC p v x)‖ := norm_add_le _ _
+      _ ≤ KdF * ‖R x‖ + ε * (‖k‖ * Ctw) :=
+          add_le_add hDFbound (le_trans hNk (mul_le_mul_of_nonneg_left (htwo x hxIcc) hεpos.le))
+      _ = KdF * ‖R x‖ + ε * Ctw * ‖k‖ := by ring
+  have hgron := norm_le_gronwallBound_of_norm_deriv_right_le
+    (f := R)
+    (f' := fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (R t)
+        + (geodesicField g gi (expTube g gi hC p (v + k) t)
+            - geodesicField g gi (expTube g gi hC p v t)
+            - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+                (expTube g gi hC p (v + k) t - expTube g gi hC p v t)))
+    (δ := 0) (K := KdF) (ε := ε * Ctw * ‖k‖) (a := 0) (b := 1)
+    hRcont
+    (fun x hx => (hRderiv x (Set.Ico_subset_Icc_self hx)).mono_of_mem_nhdsWithin
+      (mem_nhdsWithin.mpr ⟨Set.Iio 1, isOpen_Iio, hx.2,
+        fun y hy => ⟨le_trans hx.1 hy.2, le_of_lt hy.1⟩⟩))
+    (by rw [hR0]; simp)
+    hbound
+  have hR1 := hgron 1 (by norm_num [Set.mem_Icc])
+  rw [sub_zero, gronwallBound_zero_linear, ← hβ'def] at hR1
+  have hR1' : ‖R 1‖ ≤ c * ‖k‖ := by
+    calc ‖R 1‖ ≤ ε * Ctw * ‖k‖ * β' := hR1
+      _ = ε * Mc * ‖k‖ := by rw [hMcdef]; ring
+      _ ≤ c * ‖k‖ := mul_le_mul_of_nonneg_right hεMc (norm_nonneg _)
+  -- project onto the position component.
+  have hproj : expMap g gi hC p (v + k) - expMap g gi hC p v
+      - (expJetPi.comp ((Φ 1).comp (expJetIota (n := n)))) k = expJetPi (R 1) := by
+    simp only [expMap, ContinuousLinearMap.comp_apply, expJetIota_apply, expJetPi_apply, hRdef,
+      Prod.fst_sub]
+  rw [hproj]
+  calc ‖expJetPi (R 1)‖ = ‖(R 1).1‖ := by rw [expJetPi_apply]
+    _ ≤ ‖R 1‖ := by rw [Prod.norm_def]; exact le_max_left _ _
+    _ ≤ c * ‖k‖ := hR1'
+
 end QIQTH.ExpMap
