@@ -2683,4 +2683,199 @@ theorem geodesicField_uniform_C1_remainder
     _ ≤ ε * ‖a - b‖ := Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le
           hHderiv hbound (convex_segment b a) (left_mem_segment ℝ b a) (right_mem_segment ℝ b a)
 
+/-! ### EXP-JET3b — the operator-valued Jacobi field `Ψ_v`, its Picard–Lindelöf data, and the LOCAL
+    fundamental solution `Φ_v`
+
+  Toward EXP-JET3 (the localized first variation `HasFDerivAt exp_p (L v) v` near 0, `L v = π ∘ Φ_v(1)
+  ∘ ι`), this increment builds the operator-valued Jacobi field `Ψ_v t M = DF(Y_v t) ∘ M` on the
+  operator space `State →L State` (`State = Point n × Point n`, `Y_v = expTube p v`, `DF = fderiv F`),
+  assembles its Picard–Lindelöf data (linearity ⇒ globally Lipschitz in `M`; uniform boundedness on a
+  ball; continuity in `t`; the finite sup `KdF = sup_{[0,1]} ‖DF(Y_v t)‖`), and produces the LOCAL
+  operator-valued fundamental solution `Φ_v` on a short interval `[0, T]` via the FULL operator-normed
+  `IsPicardLindelof` instantiation — the "main cost" of the whole construction.
+
+  **THE INTERVAL OBSTRUCTION (the exact checkpointed step).**  Mathlib's Picard–Lindelöf structure
+  carries `mul_max_le : L·max(tmax−t₀, t₀−tmin) ≤ a − r`, and for a LINEAR operator ODE `Φ' = Ψ_v t Φ`
+  the field's norm bound on `closedBall(1, a)` is `L = KdF·(1 + a)` (linear growth), so reaching `t = 1`
+  in ONE application would need `KdF·(1 + a) ≤ a`, i.e. `KdF < 1` — FALSE for the general geodesic tube.
+  A single application therefore only reaches a short interval `T ≲ 1/KdF`; extending to `[0, 1]`
+  requires CONCATENATING `≈ ⌈KdF⌉` local solutions (Grönwall-glued continuation), for which Mathlib has
+  NO ready theorem (there is no global/continuation existence lemma for globally-Lipschitz fields).
+  Time-rescaling does not help (it scales `KdF` by the same factor).  This concatenation, and the
+  subsequent first-variation residual Grönwall `HasFDerivAt exp_p (L v) v`, are the remaining EXP-JET3b
+  work — a substantial assembly, not a missing theorem.
+
+  HONEST CAPTION (binding): the operator field `Ψ_v` + its PL data + the LOCAL (short-interval)
+  fundamental solution — a step toward the Jacobian-field expansion, itself a step toward discharging
+  `hgauge`.  It does NOT reach the `[0,1]` fundamental solution `Φ_v(1)`, does NOT give the localized
+  first variation `HasFDerivAt exp_p (L v) v`, does NOT build the pullback metric, and does NOT move
+  numerical-G (species count `N`, granularity scale `Λ_s`, the `E/ξ` term remain). -/
+
+/-- **The operator-valued nonautonomous Jacobi field** `Ψ_v t M = DF(Y_v t) ∘ M` on the operator
+    space `State →L State`, `State = Point n × Point n`, `Y_v = expTube p v`, `DF = fderiv F`.  This
+    is the field of the linear (matrix) ODE `Φ' = Ψ_v t Φ` whose fundamental solution `Φ_v` (with
+    `Φ_v 0 = 1`) transports the first-variation (Jacobi) fields along the confined tube. -/
+noncomputable def expJetPsi (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) :
+    ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)) →
+        ((Point n × Point n) →L[ℝ] (Point n × Point n)) :=
+  fun t M => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).comp M
+
+@[simp] theorem expJetPsi_apply (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (t : ℝ) (M : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    expJetPsi g gi hC p v t M
+      = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).comp M := rfl
+
+/-- **`Ψ_v t` is Lipschitz in `M` with constant `‖DF(Y_v t)‖`** (linearity of the operator field):
+    `‖Ψ_v t M − Ψ_v t N‖ ≤ ‖DF(Y_v t)‖·‖M − N‖`, from `DF∘M − DF∘N = DF∘(M − N)` and the operator-norm
+    submultiplicativity `‖DF∘(M − N)‖ ≤ ‖DF‖·‖M − N‖`. -/
+theorem expJetPsi_norm_sub_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (t : ℝ)
+    (M N : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    ‖expJetPsi g gi hC p v t M - expJetPsi g gi hC p v t N‖
+      ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M - N‖ := by
+  have hsub : expJetPsi g gi hC p v t M - expJetPsi g gi hC p v t N
+      = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).comp (M - N) := by
+    simp only [expJetPsi_apply, ← ContinuousLinearMap.compL_apply, ← map_sub]
+  rw [hsub]
+  exact (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).opNorm_comp_le (M - N)
+
+/-- **`Ψ_v t` bound** `‖Ψ_v t M‖ ≤ ‖DF(Y_v t)‖·‖M‖` — operator-norm submultiplicativity. -/
+theorem expJetPsi_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (t : ℝ) (M : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    ‖expJetPsi g gi hC p v t M‖
+      ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M‖ := by
+  simp only [expJetPsi_apply]
+  exact (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).opNorm_comp_le M
+
+/-- **The confined geodesic tube is continuous on `[0,1]`** (it solves the ODE on `(-2,2) ⊇ [0,1]`). -/
+theorem expTube_continuousOn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) :
+    ContinuousOn (expTube g gi hC p v) (Set.Icc (0 : ℝ) 1) := by
+  obtain ⟨_, hYd, _⟩ := expTube_spec g gi hC p v hv
+  intro t ht
+  have hmem : t ∈ Set.Ioo (-2 : ℝ) 2 := ⟨by linarith [ht.1], by linarith [ht.2]⟩
+  exact (hYd t hmem).continuousAt.continuousWithinAt
+
+/-- **The Jacobi coefficient `‖DF(Y_v t)‖` is uniformly bounded on `[0,1]`** by a finite `KdF ≥ 0`.
+    `t ↦ DF(Y_v t) = fderiv F ∘ Y_v` is continuous on the compact `[0,1]` (`F` is `C^∞`, `Y_v`
+    continuous), hence its norm attains a finite bound (`IsCompact.exists_bound_of_continuousOn`). -/
+theorem expJet_fderiv_tube_bddAbove (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) :
+    ∃ KdF : ℝ, 0 ≤ KdF ∧ ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF := by
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hcomp : ContinuousOn
+      (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Set.Icc (0 : ℝ) 1) :=
+    hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)
+  obtain ⟨C, hC'⟩ := isCompact_Icc.exists_bound_of_continuousOn hcomp
+  exact ⟨max C 0, le_max_right _ _, fun t ht => le_trans (hC' t ht) (le_max_left _ _)⟩
+
+/-- **`t ↦ Ψ_v t M` is continuous on `[0,1]`** for fixed `M`: `t ↦ DF(Y_v t)` is continuous on `[0,1]`
+    and right-composition `A ↦ A ∘ M` is a continuous linear map. -/
+theorem expJetPsi_continuousOn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p)
+    (M : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    ContinuousOn (fun t => expJetPsi g gi hC p v t M) (Set.Icc (0 : ℝ) 1) := by
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hcomp : ContinuousOn
+      (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Set.Icc (0 : ℝ) 1) :=
+    hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)
+  have key : (fun t => expJetPsi g gi hC p v t M)
+      = (fun t => ((ContinuousLinearMap.compL ℝ (Point n × Point n) (Point n × Point n)
+          (Point n × Point n)).flip M)
+            (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))) := by
+    funext t
+    rw [expJetPsi_apply, ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply]
+  rw [key]
+  exact (((ContinuousLinearMap.compL ℝ (Point n × Point n) (Point n × Point n)
+    (Point n × Point n)).flip M).continuous).comp_continuousOn hcomp
+
+set_option maxHeartbeats 1000000 in
+/-- **EXP-JET3b — the LOCAL operator-valued fundamental solution `Φ_v`.**  For `‖v‖ ≤ expRho` there is
+    a short time `T > 0` and an operator-valued curve `Φ_v : ℝ → (State →L State)` with `Φ_v 0 = 1`
+    (identity) solving the linearized Jacobi ODE `Φ_v' t = Ψ_v t (Φ_v t) = DF(Y_v t) ∘ Φ_v t` on
+    `[0, T]`.  Built by the FULL operator-normed `IsPicardLindelof` instantiation: on `closedBall(1, 1)`
+    the field `Ψ_v` is `KdF`-Lipschitz (`expJetPsi_norm_sub_le`), bounded by `2·KdF`
+    (`expJetPsi_norm_le` + `‖M‖ ≤ 2`), continuous in `t` (`expJetPsi_continuousOn`), with the interval
+    constraint `2·KdF·T ≤ 1` met by `T = min 1 (1/(2(KdF+1)))`.
+
+    HONEST: this is the LOCAL (short-interval) fundamental solution — the operator-normed PL
+    instantiation that is the main cost.  It does NOT reach `Φ_v(1)` (that needs the concatenation
+    continuation past the `mul_max_le` interval bound — see the section doc), NOT the localized first
+    variation `HasFDerivAt exp_p (L v) v`, NOT the pullback metric, NOT numerical-G. -/
+theorem expJetFund_local (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) :
+    ∃ T > (0 : ℝ), ∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+      Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+      ∀ t ∈ Set.Icc (0 : ℝ) T,
+        HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) T) t := by
+  obtain ⟨KdF, hKdF0, hKdF⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  set T : ℝ := min 1 (1 / (2 * (KdF + 1))) with hTdef
+  have hT0 : 0 < T := lt_min one_pos (by positivity)
+  have hTle1 : T ≤ 1 := min_le_left _ _
+  have hTle2 : T ≤ 1 / (2 * (KdF + 1)) := min_le_right _ _
+  -- the ℝ≥0 parameters of the Picard–Lindelöf structure.
+  set Lnn : NNReal := ⟨2 * KdF, by linarith⟩ with hLnn
+  set Knn : NNReal := ⟨KdF, hKdF0⟩ with hKnn
+  have hIccsub : Set.Icc (0 : ℝ) T ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc_right hTle1
+  -- assemble `IsPicardLindelof` for the operator field on `[0, T]`, centred at the identity.
+  have hpl : IsPicardLindelof (expJetPsi g gi hC p v)
+      (tmin := (0 : ℝ)) (tmax := T) ⟨0, ⟨le_refl 0, hT0.le⟩⟩
+      (ContinuousLinearMap.id ℝ (Point n × Point n)) 1 0 Lnn Knn := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · -- Lipschitz in `M` on `closedBall(1,1)` with constant `KdF`.
+      intro t ht
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      rw [lipschitzOnWith_iff_dist_le_mul]
+      intro M _ N _
+      simp only [dist_eq_norm, hKnn]
+      calc ‖expJetPsi g gi hC p v t M - expJetPsi g gi hC p v t N‖
+          ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M - N‖ :=
+            expJetPsi_norm_sub_le g gi hC p v t M N
+        _ ≤ KdF * ‖M - N‖ := mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)
+    · -- continuity in `t` for fixed `M`.
+      intro M _
+      exact (expJetPsi_continuousOn g gi hC p v hv M).mono hIccsub
+    · -- uniform bound `‖Ψ_v t M‖ ≤ 2·KdF` on `closedBall(1,1)`.
+      intro t ht M hM
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      have hMid : ‖M - ContinuousLinearMap.id ℝ (Point n × Point n)‖ ≤ 1 := by
+        rw [← dist_eq_norm]; exact Metric.mem_closedBall.mp hM
+      have hMnorm : ‖M‖ ≤ 2 := by
+        have hsplit : M = (M - ContinuousLinearMap.id ℝ (Point n × Point n))
+            + ContinuousLinearMap.id ℝ (Point n × Point n) := by abel
+        calc ‖M‖ = ‖(M - ContinuousLinearMap.id ℝ (Point n × Point n))
+              + ContinuousLinearMap.id ℝ (Point n × Point n)‖ := by rw [← hsplit]
+          _ ≤ ‖M - ContinuousLinearMap.id ℝ (Point n × Point n)‖
+              + ‖ContinuousLinearMap.id ℝ (Point n × Point n)‖ := norm_add_le _ _
+          _ ≤ 1 + 1 := add_le_add hMid ContinuousLinearMap.norm_id_le
+          _ = 2 := by norm_num
+      have hbnd : ‖expJetPsi g gi hC p v t M‖ ≤ KdF * 2 :=
+        (expJetPsi_norm_le g gi hC p v t M).trans
+          (mul_le_mul (hKdF t htIcc) hMnorm (norm_nonneg _) hKdF0)
+      show ‖expJetPsi g gi hC p v t M‖ ≤ 2 * KdF
+      linarith [hbnd]
+    · -- the interval constraint `2·KdF·T ≤ 1`.
+      show (Lnn : ℝ) * max (T - ((⟨0, ⟨le_refl 0, hT0.le⟩⟩ : Set.Icc (0 : ℝ) T) : ℝ))
+          (((⟨0, ⟨le_refl 0, hT0.le⟩⟩ : Set.Icc (0 : ℝ) T) : ℝ) - 0) ≤ (1 : NNReal) - (0 : NNReal)
+      simp only [hLnn, NNReal.coe_one, NNReal.coe_zero, sub_zero, sub_self,
+        max_eq_left hT0.le]
+      have h2 : (0 : ℝ) < 2 * (KdF + 1) := by positivity
+      calc 2 * KdF * T ≤ 2 * KdF * (1 / (2 * (KdF + 1))) :=
+            mul_le_mul_of_nonneg_left hTle2 (by positivity)
+        _ ≤ 1 := by rw [mul_one_div, div_le_one h2]; nlinarith [hKdF0]
+  obtain ⟨Φ, hΦ0, hΦd⟩ := hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
+  exact ⟨T, hT0, Φ, hΦ0, hΦd⟩
+
 end QIQTH.ExpMap

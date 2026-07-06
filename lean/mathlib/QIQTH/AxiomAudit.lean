@@ -9750,4 +9750,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet_linVariation_residual_deriv
 #print axioms QIQTH.ExpMap.geodesicField_uniform_C1_remainder
 
+-- ExpMap.lean — EXP-JET3b (2026-07-07): the operator-valued Jacobi field Ψ_v + its Picard–Lindelöf
+-- data + the LOCAL fundamental solution Φ_v (THE_EXP_JETS_PLAN.md).
+-- expJetPsi (Ψ_v t M = DF(Y_v t) ∘ M) — the field of the linear operator ODE Φ'=Ψ_v t Φ, Φ 0 = 1.
+-- expJetPsi_norm_sub_le / expJetPsi_norm_le: Ψ_v t is ‖DF(Y_v t)‖-Lipschitz in M and bounded
+-- (operator-norm submultiplicativity) — the linearity data of the field.
+-- expTube_continuousOn: the confined tube Y_v is continuous on [0,1].
+-- expJet_fderiv_tube_bddAbove: ‖DF(Y_v t)‖ ≤ KdF uniformly on [0,1] (compactness + continuity of
+-- fderiv F ∘ Y_v). expJetPsi_continuousOn: t ↦ Ψ_v t M continuous on [0,1] (right-composition CLM).
+-- expJetFund_local: the LOCAL operator-valued fundamental solution Φ_v on a short [0,T], Φ_v 0 = 1,
+-- Φ_v' t = Ψ_v t (Φ_v t), via the FULL operator-normed IsPicardLindelof instantiation (a=1, r=0,
+-- L=2·KdF, K=KdF, T=min 1 (1/(2(KdF+1)))). THE INTERVAL OBSTRUCTION (checkpoint): reaching t=1 in ONE
+-- application needs KdF<1 (linear field: L=KdF(1+a)); the general tube extension to [0,1] requires
+-- concatenating ≈⌈KdF⌉ local solutions — no Mathlib continuation theorem — CHECKPOINTED, along with the
+-- first-variation residual Grönwall HasFDerivAt exp_p (L v) v.
+-- HONEST: operator field + PL data + LOCAL (short-interval) Φ_v — a step toward the Jacobian expansion
+-- → hgauge. Does NOT reach Φ_v(1), NOT the localized first variation, NOT the pullback metric, NOT
+-- numerical-G (N, Λ_s, E/ξ remain). All [AF] std-3.
+#print axioms QIQTH.ExpMap.expJetPsi_apply
+#print axioms QIQTH.ExpMap.expJetPsi_norm_sub_le
+#print axioms QIQTH.ExpMap.expJetPsi_norm_le
+#print axioms QIQTH.ExpMap.expTube_continuousOn
+#print axioms QIQTH.ExpMap.expJet_fderiv_tube_bddAbove
+#print axioms QIQTH.ExpMap.expJetPsi_continuousOn
+#print axioms QIQTH.ExpMap.expJetFund_local
+
 end QIQTH.AxiomAudit

@@ -74,14 +74,27 @@ remain). Never claim numerical-G or a curved heat kernel.
     remainder of `F` on any convex compact `S`: `∀ε>0 ∃δ>0`, `‖F a − F b − DF(b)(a−b)‖ ≤ ε‖a−b‖` for `a,b∈S`,
     `‖a−b‖<δ`; Heine–Cantor uniform continuity of `fderiv F` + `Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le`
     on the segment).
-  - [ ] **EXP-JET3b — CHECKPOINT (remaining work):** build `Φ_v` as a function with `Φ_v 0 = 1` and
-    `Φ_v' = DF(Y_v)·Φ_v` uniformly over `‖v‖ ≤ ρ₀` (instantiate the nonautonomous `IsPicardLindelof` for `Ψ_v`
-    on `[0,1]` — bounds/Lipschitz from the compact tube — extend to the unit interval uniformly in `v`), set
-    `J_k := Φ_v(·)(ι k)`, run the inhomogeneous Grönwall on `R_k` with `‖Z_k‖ ≤ Ctw‖k‖`
-    (`geodesic_twopoint_gronwall`) and `‖N_k‖ ≤ εCtw‖k‖` (`geodesicField_uniform_C1_remainder`) to get
-    `‖R_k(1)‖ = o(‖k‖)`, then project with `π` ⟹ `HasFDerivAt (expMap g gi hC p) (L v) v` near 0,
-    `L v := π ∘ (Φ_v 1) ∘ ι`. Missing Mathlib piece: NONE at the theorem level (PL is nonautonomous); the work
-    is the operator-valued fundamental-solution instantiation + the residual-Grönwall assembly.
+  - [~] **EXP-JET3b — operator field `Ψ_v` + PL data + LOCAL fundamental solution. PARTIAL 2026-07-07.**
+    Landed green in `ExpMap.lean` ([AF] std-3, budget 0): the operator-valued Jacobi field
+    `expJetPsi` (`Ψ_v t M = DF(Y_v t) ∘ M` on `State →L State`), its linearity data
+    `expJetPsi_norm_sub_le` (`‖Ψ_v t M − Ψ_v t N‖ ≤ ‖DF(Y_v t)‖·‖M − N‖`) / `expJetPsi_norm_le`
+    (operator-norm submultiplicativity), `expTube_continuousOn` (the tube is continuous on `[0,1]`),
+    the uniform Jacobi bound `expJet_fderiv_tube_bddAbove` (`‖DF(Y_v t)‖ ≤ KdF` on `[0,1]`, compactness
+    of `fderiv F ∘ Y_v`), the time-continuity `expJetPsi_continuousOn` (right-composition CLM), and
+    **`expJetFund_local`** — the LOCAL operator-valued fundamental solution `Φ_v` on a short `[0,T]`,
+    `Φ_v 0 = 1`, `Φ_v' t = Ψ_v t (Φ_v t)`, via the FULL operator-normed `IsPicardLindelof` instantiation
+    (`a=1, r=0, L=2·KdF, K=KdF, T=min 1 (1/(2(KdF+1)))`). **THE INTERVAL OBSTRUCTION (the exact
+    checkpoint):** Mathlib's PL carries `mul_max_le : L·max(tmax−t₀, t₀−tmin) ≤ a − r`; for the LINEAR
+    operator ODE the field bound is `L = KdF·(1+a)` (linear growth), so reaching `t=1` in ONE
+    application needs `KdF < 1` — FALSE for the general tube. A single application only reaches
+    `T ≲ 1/KdF`; extending to `[0,1]` requires CONCATENATING `≈⌈KdF⌉` local solutions (Grönwall-glued
+    continuation), for which Mathlib has NO ready theorem (no global/continuation existence for
+    globally-Lipschitz fields; time-rescaling scales `KdF` by the same factor). **Still CHECKPOINTED:**
+    the `[0,1]` fundamental solution `Φ_v(1)` (the concatenation) and the first-variation residual
+    Grönwall `HasFDerivAt (expMap g gi hC p) (L v) v`, `L v := π ∘ (Φ_v 1) ∘ ι` (set `J_k := Φ_v(·)(ι k)`,
+    run inhomog Grönwall on `R_k` with `‖Z_k‖ ≤ Ctw‖k‖`, `‖N_k‖ ≤ εCtw‖k‖`, project with `π`).
+    HONEST: operator field + PL data + LOCAL Φ_v — does NOT reach `Φ_v(1)`, NOT the localized first
+    variation, NOT the pullback metric, NOT numerical-G.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -108,6 +121,16 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3b):** the operator-valued Jacobi field `Ψ_v` + its Picard–Lindelöf data + the
+  LOCAL fundamental solution `Φ_v` landed green ([AF] std-3, budget 0). New lemmas in `ExpMap.lean`:
+  `expJetPsi` (`Ψ_v t M = DF(Y_v t) ∘ M`), `expJetPsi_norm_sub_le`, `expJetPsi_norm_le`,
+  `expTube_continuousOn`, `expJet_fderiv_tube_bddAbove`, `expJetPsi_continuousOn`, `expJetFund_local`
+  (the LOCAL short-interval fundamental solution via the full operator-normed `IsPicardLindelof`
+  instantiation — the "main cost"). KEY FINDING / CHECKPOINT: the `[0,1]` fundamental solution is
+  blocked at the PL `mul_max_le` interval bound — a single application reaches only `T ≲ 1/KdF` (linear
+  field: `L=KdF(1+a)`, so `t=1` would need `KdF<1`); the `[0,1]` extension needs concatenating
+  `≈⌈KdF⌉` local solutions, for which Mathlib has NO continuation theorem. `Φ_v(1)` + the
+  first-variation residual Grönwall `HasFDerivAt exp_p (L v) v` remain CHECKPOINTED.
 - **2026-07-07 (EXP-JET3a):** localized first-variation / operator-valued fundamental-solution SETUP landed green
   ([AF] std-3, budget 0). KEY FINDING: Mathlib's Picard–Lindelöf is ALREADY nonautonomous
   (`IsPicardLindelof f t₀ x₀ a r L K`, `f : ℝ → E → E`) — the "must augment time" worry is void. New lemmas in

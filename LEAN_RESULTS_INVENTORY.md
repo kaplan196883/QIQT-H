@@ -539,6 +539,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (binding):** flow-independent SETUP toward EXP-JET3 → discharging `hgauge`; it does **NOT** build `Φ_v`, **NOT** give
   the localized first variation, **NOT** the Jacobian expansion, **NOT** the pullback metric, **NOT** numerical-`G`
   (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3b — the operator field `Ψ_v` + Picard–Lindelöf data + the LOCAL fundamental solution `Φ_v`** (`ExpMap.lean`,
+  all **[AF]** std-3, budget 0, PARTIAL 2026-07-07): the operator-valued Jacobi field `expJetPsi` (`Ψ_v t M=DF(Y_v t)∘M`
+  on `State →L State`), its linearity data `expJetPsi_norm_sub_le` (`‖Ψ_v t M−Ψ_v t N‖ ≤ ‖DF(Y_v t)‖·‖M−N‖`) /
+  `expJetPsi_norm_le` (operator-norm submultiplicativity), `expTube_continuousOn` (the confined tube is continuous on
+  `[0,1]`), the uniform Jacobi bound `expJet_fderiv_tube_bddAbove` (`‖DF(Y_v t)‖ ≤ KdF` on `[0,1]`, compactness of
+  `fderiv F ∘ Y_v`), the time-continuity `expJetPsi_continuousOn`, and **`expJetFund_local`** — the LOCAL operator-valued
+  fundamental solution `Φ_v` on a short `[0,T]` (`Φ_v 0=1`, `Φ_v' t=Ψ_v t (Φ_v t)`) via the FULL operator-normed
+  `IsPicardLindelof` instantiation (`a=1, r=0, L=2·KdF, K=KdF, T=min 1 (1/(2(KdF+1)))`). ⚠ **THE INTERVAL OBSTRUCTION
+  (the exact checkpoint):** Mathlib's PL carries `mul_max_le : L·max(tmax−t₀, t₀−tmin) ≤ a−r`; for the LINEAR operator ODE
+  the field bound is `L=KdF·(1+a)` (linear growth), so reaching `t=1` in ONE application needs `KdF<1` — FALSE for the
+  general tube. A single application reaches only `T ≲ 1/KdF`; the `[0,1]` extension needs concatenating `≈⌈KdF⌉` local
+  solutions (Grönwall-glued continuation) — **Mathlib has NO continuation theorem** (no global existence for
+  globally-Lipschitz fields; time-rescaling scales `KdF` identically). ⚠ **STILL CHECKPOINTED:** `Φ_v(1)` (the
+  concatenation) and the first-variation residual Grönwall `HasFDerivAt (expMap g gi hC p) (L v) v`, `L v := π∘(Φ_v 1)∘ι`.
+  ⚠ **HONEST CAPTION (binding):** operator field + PL data + LOCAL Φ_v — a step toward the Jacobian expansion → `hgauge`;
+  does **NOT** reach `Φ_v(1)`, **NOT** the localized first variation, **NOT** the pullback metric, **NOT** numerical-`G`
+  (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
