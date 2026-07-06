@@ -376,4 +376,303 @@ theorem residual_gronwall (g gi : Point n → Fin n → Fin n → ℝ)
   have := hmain 1 (by norm_num [Set.mem_Icc])
   simpa using this
 
+/-! ### S4′ — the a-priori Grönwall confinement and the direct two-point Lipschitz bound
+
+  The equilibrium `e = (p,0)` is a zero of the geodesic field (`geodesicField_equilibrium`).  Near
+  `e`, on any set `S` where `F = geodesicField` is `K`-Lipschitz, two exact integral curves obey the
+  standard two-point Grönwall bound `dist (Y₁ t) (Y₂ t) ≤ dist (Y₁ 0) (Y₂ 0) · e^{K t}`
+  (`geodesic_twopoint_gronwall`, via Mathlib's `dist_le_of_trajectories_ODE_of_mem`).  Specialising
+  `Y₂` to the constant equilibrium curve gives the a-priori confinement
+  `dist (Y t) e ≤ dist (Y 0) e · e^{K t}` (`geodesic_apriori_bound`): a solution starting `δ`-close to
+  `e` stays `δ e^{K}`-close on `[0,1]` while it remains in `S`.  These are the two Grönwall estimates
+  the two-point residual bound consumes, now in their clean unconditional-given-`S` form. -/
+
+/-- **The equilibrium.** `e = (p,0)` is a zero of the geodesic field: the velocity component of `e`
+    is `0`, so both the velocity output and every quadratic acceleration term vanish. -/
+theorem geodesicField_equilibrium (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) :
+    geodesicField g gi ((p, 0) : Point n × Point n) = 0 := by
+  refine Prod.ext ?_ ?_
+  · rfl
+  · funext i
+    simp [geodesicField]
+
+/-- **The direct two-point Grönwall bound on `[0,1]`.**  If `Y₁, Y₂` are integral curves of the
+    geodesic field on `[0,1]` that both stay in a set `S` on which `F = geodesicField` is
+    `K`-Lipschitz, then `dist (Y₁ t) (Y₂ t) ≤ dist (Y₁ 0) (Y₂ 0) · e^{K t}` on `[0,1]`.  This is
+    Mathlib's `dist_le_of_trajectories_ODE_of_mem` for the autonomous geodesic field.
+
+    HONEST: this is the Lipschitz-in-initial-condition bound on the *unit* interval, valid on the
+    set `S` where the field is Lipschitz — the tube hypothesis `Y₁, Y₂ ∈ S` on `[0,1]` is supplied,
+    not derived here.  It is the two-point flow-Lipschitz ingredient the residual estimate needs,
+    reached directly by Grönwall rather than by re-timing the Picard–Lindelöf flow. -/
+theorem geodesic_twopoint_gronwall (g gi : Point n → Fin n → Fin n → ℝ)
+    {Y₁ Y₂ : ℝ → Point n × Point n} {S : Set (Point n × Point n)} {K : NNReal}
+    (hLip : LipschitzOnWith K (geodesicField g gi) S)
+    (h1 : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivAt Y₁ (geodesicField g gi (Y₁ t)) t)
+    (h2 : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivAt Y₂ (geodesicField g gi (Y₂ t)) t)
+    (hS1 : ∀ t ∈ Set.Icc (0 : ℝ) 1, Y₁ t ∈ S)
+    (hS2 : ∀ t ∈ Set.Icc (0 : ℝ) 1, Y₂ t ∈ S) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      dist (Y₁ t) (Y₂ t) ≤ dist (Y₁ 0) (Y₂ 0) * Real.exp (K * t) := by
+  intro t ht
+  have hmain := dist_le_of_trajectories_ODE_of_mem
+    (v := fun _ => geodesicField g gi) (s := fun _ => S) (K := K)
+    (f := Y₁) (g := Y₂) (a := 0) (b := 1) (δ := dist (Y₁ 0) (Y₂ 0))
+    (fun t _ => hLip)
+    (fun t ht => (h1 t ht).continuousAt.continuousWithinAt)
+    (fun t ht => (h1 t (Set.Ico_subset_Icc_self ht)).hasDerivWithinAt)
+    (fun t ht => hS1 t (Set.Ico_subset_Icc_self ht))
+    (fun t ht => (h2 t ht).continuousAt.continuousWithinAt)
+    (fun t ht => (h2 t (Set.Ico_subset_Icc_self ht)).hasDerivWithinAt)
+    (fun t ht => hS2 t (Set.Ico_subset_Icc_self ht))
+    le_rfl t ht
+  simpa using hmain
+
+/-- **The a-priori Grönwall confinement.**  A geodesic integral curve `Y` on `[0,1]` that stays in a
+    set `S` containing the equilibrium `e = (p,0)` and on which `F` is `K`-Lipschitz stays
+    `dist (Y 0) e · e^{K t}`-close to `e`: `dist (Y t) e ≤ dist (Y 0) e · e^{K t}`.  Proved by feeding
+    the constant equilibrium curve (an integral curve, since `F(e)=0`) into
+    `geodesic_twopoint_gronwall`.
+
+    This is the a-priori boundedness: a solution launched `δ`-close to `e` cannot leave the ball of
+    radius `δ e^{K}` around `e` on `[0,1]` while it remains in `S` — the ingredient that (given
+    containment) confines the tube uniformly as `v → 0`.
+
+    HONEST: conditional on the curve remaining in the Lipschitz set `S` on `[0,1]`.  Making this
+    containment unconditional for a whole ball of initial velocities is the remaining common-tube
+    step (see `geodesic_unit_tube_existence` for the existence half). -/
+theorem geodesic_apriori_bound (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n)
+    {Y : ℝ → Point n × Point n} {S : Set (Point n × Point n)} {K : NNReal}
+    (hLip : LipschitzOnWith K (geodesicField g gi) S)
+    (he : ((p, 0) : Point n × Point n) ∈ S)
+    (hY : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivAt Y (geodesicField g gi (Y t)) t)
+    (hYS : ∀ t ∈ Set.Icc (0 : ℝ) 1, Y t ∈ S) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      dist (Y t) ((p, 0) : Point n × Point n)
+        ≤ dist (Y 0) ((p, 0) : Point n × Point n) * Real.exp (K * t) := by
+  have hconst : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivAt (fun _ : ℝ => ((p, 0) : Point n × Point n))
+        (geodesicField g gi ((fun _ : ℝ => ((p, 0) : Point n × Point n)) t)) t := by
+    intro t _
+    rw [show geodesicField g gi ((fun _ : ℝ => ((p, 0) : Point n × Point n)) t) = 0 from
+      geodesicField_equilibrium g gi p]
+    exact hasDerivAt_const t _
+  exact geodesic_twopoint_gronwall g gi hLip hY hconst hYS (fun _ _ => he)
+
+/-! ### S4′ — uniform existence of the geodesic tube on `[0,1]` for a whole ball of velocities
+
+  This closes the flagged existence half of the common-tube management, **uniformly over a ball**,
+  flow-free (no Picard–Lindelöf re-timing bookkeeping).  The key is that the `C¹` local-existence
+  lemma `ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt` produces ONE
+  radius `r` and ONE time `ε` valid for *every* initial phase point in `closedBall e r` — the
+  existence interval `(-ε, ε)` does not shrink as the point varies.  Combined with the geodesic
+  rescaling `geodesic_rescale` (`s = ε/2`), a velocity `v` with `‖v‖ ≤ (ε/2)·r` is realised as the
+  rescaling of the (uniformly-existing) short geodesic through `(p, (ε/2)⁻¹•v)`, giving a genuine
+  integral curve through `(p, v)` on the OPEN interval `(-2, 2) ⊇ [0,1]`.  The radius
+  `ρ = (ε/2)·r > 0` is uniform over the ball. -/
+
+/-- **Uniform geodesic existence on `[0,1]` over a ball of velocities.**  There is a radius `ρ > 0`
+    such that for every velocity `v` with `‖v‖ ≤ ρ` there is a genuine integral curve `Y` of the
+    geodesic field with `Y 0 = (p, v)` solving the geodesic ODE on `(-2, 2) ⊇ [0,1]`.
+
+    Proof: the geodesic field is `C¹`, so
+    `ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt` gives a UNIFORM
+    radius `r` and UNIFORM existence time `ε` at the equilibrium `e = (p,0)`.  For `‖v‖ ≤ (ε/2)·r`
+    the point `(p, (ε/2)⁻¹•v)` lies in `closedBall e r`, so has a geodesic on `(-ε, ε)`; rescaling
+    the parameter by `s = ε/2` (`geodesic_rescale`) stretches its interval to `(-2, 2)` and its
+    initial velocity to `(ε/2)•((ε/2)⁻¹•v) = v`.
+
+    This discharges the existence half of the common-tube management **uniformly over a whole ball**,
+    resolving the interval mismatch that the Picard–Lindelöf interval `[-ε, ε]` created.  HONEST:
+    this is uniform existence of the `[0,1]` integral curve; it does NOT by itself confine the tube
+    inside a fixed Lipschitz/strict-remainder neighbourhood (that is the a-priori confinement, whose
+    unconditional-over-a-ball form is the remaining step), and it is NOT yet `exp_p`'s strict
+    derivative or the local diffeo. -/
+theorem geodesic_unit_tube_existence (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ ρ > (0 : ℝ), ∀ v : Point n, ‖v‖ ≤ ρ →
+      ∃ Y : ℝ → Point n × Point n, Y 0 = (p, v) ∧
+        ∀ t ∈ Set.Ioo (-2 : ℝ) 2, HasDerivAt Y (geodesicField g gi (Y t)) t := by
+  have hCA : ContDiffAt ℝ 1 (geodesicField g gi) ((p, 0) : Point n × Point n) :=
+    ((contDiff_geodesicField g gi hC).of_le le_top).contDiffAt
+  obtain ⟨r, hr, ε, hε, hex⟩ :=
+    hCA.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt 0
+  set s : ℝ := ε / 2 with hs
+  have hs0 : 0 < s := by positivity
+  refine ⟨s * r, mul_pos hs0 hr, fun v hv => ?_⟩
+  -- The rescaled initial point `(p, s⁻¹•v)` lies in the uniform existence ball.
+  have hmemball : (p, s⁻¹ • v) ∈ Metric.closedBall ((p, 0) : Point n × Point n) r := by
+    rw [Metric.mem_closedBall, dist_eq_norm,
+      show (p, s⁻¹ • v) - ((p, 0) : Point n × Point n) = ((0, s⁻¹ • v) : Point n × Point n) by
+        simp]
+    have hnorm : ‖((0, s⁻¹ • v) : Point n × Point n)‖ = s⁻¹ * ‖v‖ := by
+      rw [Prod.norm_def, norm_zero, norm_smul, Real.norm_eq_abs, abs_inv, abs_of_pos hs0,
+        max_eq_right (by positivity)]
+    rw [hnorm]
+    calc s⁻¹ * ‖v‖ ≤ s⁻¹ * (s * r) :=
+          mul_le_mul_of_nonneg_left hv (le_of_lt (inv_pos.mpr hs0))
+      _ = r := by rw [← mul_assoc, inv_mul_cancel₀ (ne_of_gt hs0), one_mul]
+  obtain ⟨α, hα0, hαd⟩ := hex (p, s⁻¹ • v) hmemball
+  refine ⟨fun τ => rescaleCLM s (α (s * τ)), ?_, ?_⟩
+  · -- Y 0 = L_s (α 0) = L_s (p, s⁻¹•v) = (p, s • s⁻¹ • v) = (p, v).
+    show rescaleCLM s (α (s * 0)) = (p, v)
+    rw [mul_zero, hα0, rescaleCLM_apply, smul_smul, mul_inv_cancel₀ (ne_of_gt hs0), one_smul]
+  · intro t ht
+    have hmem : s * t ∈ Set.Ioo (0 - ε) (0 + ε) := by
+      rw [zero_sub, zero_add]
+      refine ⟨?_, ?_⟩
+      · calc -ε = s * (-2) := by rw [hs]; ring
+          _ < s * t := mul_lt_mul_of_pos_left ht.1 hs0
+      · calc s * t < s * 2 := mul_lt_mul_of_pos_left ht.2 hs0
+          _ = ε := by rw [hs]; ring
+    exact geodesic_rescale g gi (a := 0 - ε) (b := 0 + ε) hαd s t hmem
+
+/-! ### S4′ — the a-priori confinement: the tube stays `O(‖v‖)`-close to `e`, uniformly over a ball
+
+  This makes the a-priori bound UNCONDITIONAL over a whole ball of velocities — the containment half
+  of the common-tube management.  Two ingredients from the Picard–Lindelöf flow
+  `geodesicField_flow_lipschitz` (which is `L'`-Lipschitz in the initial condition):
+  * the equilibrium trajectory `α e` is CONSTANT (`α e t = e`): both `α e` and the constant curve
+    `e` solve the geodesic ODE with the same initial value `e`, stay in a closed ball on which `F` is
+    Lipschitz (the flow's compact range, `ContDiffOn.exists_lipschitzOnWith`), so agree by ODE
+    uniqueness (`ODE_solution_unique_of_mem_Icc`);
+  * hence `‖α (p,w) t − e‖ = ‖α (p,w) t − α e t‖ ≤ L'‖w‖` by Lipschitz-in-IC.
+  Rescaling (`geodesic_rescale`, `s = ε/2`, `w = s⁻¹•v`) then confines the unit-interval geodesic
+  through `(p,v)`: `‖Y_v t − e‖ ≤ (‖L_s‖·L'·s⁻¹)·‖v‖` on `[0,1]`, with the constant uniform over the
+  ball `‖v‖ ≤ (ε/2)·r`.  This is the a-priori boundedness needed to pin the tube inside any fixed
+  neighbourhood of `e` as `v → 0`. -/
+
+/-- **The a-priori confinement of the geodesic tube.**  There is a radius `ρ > 0` and a constant
+    `C₀ ≥ 0` such that for every velocity `v` with `‖v‖ ≤ ρ` the geodesic tube `Y` through `(p, v)`
+    exists on `(-2, 2) ⊇ [0,1]` and stays `C₀‖v‖`-close to the equilibrium `e = (p,0)` on `[0,1]`:
+    `‖Y t − (p,0)‖ ≤ C₀‖v‖`.  In particular `Y t → e` uniformly in `t ∈ [0,1]` as `v → 0`.
+
+    Proof: the Picard–Lindelöf flow `α` (Lipschitz-in-IC with constant `L'` on `closedBall e r`,
+    from `geodesicField_flow_lipschitz`) has a constant equilibrium trajectory `α e = e` (ODE
+    uniqueness against the constant curve, on a closed ball containing `α e`'s compact range where
+    `F` is Lipschitz).  Hence `‖α (p,w) t − e‖ ≤ L'‖w‖`; rescaling by `s = ε/2` with `w = s⁻¹•v`
+    gives the `[0,1]` tube through `(p,v)` and `‖Y t − e‖ ≤ ‖rescaleCLM s‖·L'·s⁻¹·‖v‖`.
+
+    This discharges the containment half of the common-tube management **unconditionally over a
+    ball**.  HONEST: combined with `geodesic_unit_tube_existence` (existence) it gives the full tube;
+    what remains for `HasStrictFDerivAt exp_p id 0` is to feed this + the S2 strict remainder + the
+    two-point Grönwall into the `isLittleO` characterisation, and to pin `expMap`'s value to the tube
+    endpoint (the definitional bridge). It is NOT yet `exp_p`'s strict derivative or the diffeo. -/
+theorem geodesic_apriori_confinement (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ ρ > (0 : ℝ), ∃ C₀ : ℝ, 0 ≤ C₀ ∧ ∀ v : Point n, ‖v‖ ≤ ρ →
+      ∃ Y : ℝ → Point n × Point n, Y 0 = (p, v) ∧
+        (∀ t ∈ Set.Ioo (-2 : ℝ) 2, HasDerivAt Y (geodesicField g gi (Y t)) t) ∧
+        ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          ‖Y t - ((p, 0) : Point n × Point n)‖ ≤ C₀ * ‖v‖ := by
+  obtain ⟨ε, hε, r, hr, α, hflow, L', hlip⟩ := geodesicField_flow_lipschitz g gi hC p
+  set e : Point n × Point n := (p, 0) with he_def
+  have hmem_e : e ∈ Metric.closedBall e (r : ℝ) := Metric.mem_closedBall_self (le_of_lt hr)
+  have hα0e : α e 0 = e := (hflow e hmem_e).1
+  have hαe_deriv : ∀ t ∈ Set.Icc (-ε) ε,
+      HasDerivWithinAt (α e) (geodesicField g gi (α e t)) (Set.Icc (-ε) ε) t :=
+    (hflow e hmem_e).2
+  have hcont : ContinuousOn (α e) (Set.Icc (-ε) ε) := HasDerivWithinAt.continuousOn hαe_deriv
+  -- The flow's equilibrium trajectory has compact range, hence lies in a closed ball.
+  obtain ⟨R, hR⟩ :=
+    (((isCompact_Icc).image_of_continuousOn hcont).isBounded).subset_closedBall e
+  have h0mem : (0 : ℝ) ∈ Set.Icc (-ε) ε := ⟨by linarith, le_of_lt hε⟩
+  have h0memoo : (0 : ℝ) ∈ Set.Ioo (-ε) ε := ⟨by linarith, hε⟩
+  have hR0 : (0 : ℝ) ≤ R := by
+    have : e ∈ Metric.closedBall e R := hR ⟨0, h0mem, hα0e⟩
+    simpa using this
+  -- `F` is Lipschitz on `closedBall e R` (convex, compact).
+  obtain ⟨K₀, hK₀⟩ :=
+    ((contDiff_geodesicField g gi hC).contDiffOn (s := Metric.closedBall e R)).exists_lipschitzOnWith
+      (by simp) (convex_closedBall e R) (isCompact_closedBall e R)
+  -- Uniqueness: `α e` coincides with the constant equilibrium curve on `[-ε, ε]`.
+  have hEq : Set.EqOn (α e) (fun _ => e) (Set.Icc (-ε) ε) := by
+    refine ODE_solution_unique_of_mem_Icc (v := fun _ => geodesicField g gi)
+      (s := fun _ => Metric.closedBall e R) (K := K₀) (t₀ := 0)
+      (fun t _ => hK₀) h0memoo hcont
+      (fun t ht => (hαe_deriv t (Set.Ioo_subset_Icc_self ht)).hasDerivAt (Icc_mem_nhds ht.1 ht.2))
+      (fun t ht => hR ⟨t, Set.Ioo_subset_Icc_self ht, rfl⟩)
+      continuousOn_const
+      (fun t _ => ?_) (fun _ _ => Metric.mem_closedBall_self hR0) hα0e
+    show HasDerivAt (fun _ : ℝ => e) (geodesicField g gi e) t
+    have hz : geodesicField g gi e = 0 := by rw [he_def]; exact geodesicField_equilibrium g gi p
+    rw [hz]
+    exact hasDerivAt_const t e
+  -- Assemble the confined tube.
+  set s : ℝ := ε / 2 with hs
+  have hs0 : 0 < s := by positivity
+  refine ⟨s * r, mul_pos hs0 hr, (1 + s) * L' * s⁻¹, by positivity, fun v hv => ?_⟩
+  have hmemball : (p, s⁻¹ • v) ∈ Metric.closedBall e (r : ℝ) := by
+    rw [he_def, Metric.mem_closedBall, dist_eq_norm,
+      show (p, s⁻¹ • v) - ((p, 0) : Point n × Point n) = ((0, s⁻¹ • v) : Point n × Point n) by simp]
+    have hnorm : ‖((0, s⁻¹ • v) : Point n × Point n)‖ = s⁻¹ * ‖v‖ := by
+      rw [Prod.norm_def, norm_zero, norm_smul, Real.norm_eq_abs, abs_inv, abs_of_pos hs0,
+        max_eq_right (by positivity)]
+    rw [hnorm]
+    calc s⁻¹ * ‖v‖ ≤ s⁻¹ * (s * r) :=
+          mul_le_mul_of_nonneg_left hv (le_of_lt (inv_pos.mpr hs0))
+      _ = r := by rw [← mul_assoc, inv_mul_cancel₀ (ne_of_gt hs0), one_mul]
+  have hw_deriv : ∀ t ∈ Set.Icc (-ε) ε,
+      HasDerivWithinAt (α (p, s⁻¹ • v)) (geodesicField g gi (α (p, s⁻¹ • v) t)) (Set.Icc (-ε) ε) t :=
+    (hflow (p, s⁻¹ • v) hmemball).2
+  have hw0 : α (p, s⁻¹ • v) 0 = (p, s⁻¹ • v) := (hflow (p, s⁻¹ • v) hmemball).1
+  refine ⟨fun τ => rescaleCLM s (α (p, s⁻¹ • v) (s * τ)), ?_, ?_, ?_⟩
+  · show rescaleCLM s (α (p, s⁻¹ • v) (s * 0)) = (p, v)
+    rw [mul_zero, hw0, rescaleCLM_apply, smul_smul, mul_inv_cancel₀ (ne_of_gt hs0), one_smul]
+  · intro t ht
+    have hmem : s * t ∈ Set.Ioo (0 - ε) (0 + ε) := by
+      rw [zero_sub, zero_add]
+      refine ⟨?_, ?_⟩
+      · calc -ε = s * (-2) := by rw [hs]; ring
+          _ < s * t := mul_lt_mul_of_pos_left ht.1 hs0
+      · calc s * t < s * 2 := mul_lt_mul_of_pos_left ht.2 hs0
+          _ = ε := by rw [hs]; ring
+    refine geodesic_rescale g gi (a := 0 - ε) (b := 0 + ε) ?_ s t hmem
+    intro u hu
+    rw [zero_sub, zero_add] at hu
+    exact (hw_deriv u (Set.Ioo_subset_Icc_self hu)).hasDerivAt (Icc_mem_nhds hu.1 hu.2)
+  · intro t ht
+    -- s*t ∈ [0, ε/2] ⊆ [-ε, ε]
+    have hst : s * t ∈ Set.Icc (-ε) ε := by
+      constructor
+      · have : (0 : ℝ) ≤ s * t := mul_nonneg (le_of_lt hs0) ht.1
+        linarith
+      · calc s * t ≤ s * 1 := mul_le_mul_of_nonneg_left ht.2 (le_of_lt hs0)
+          _ = s := mul_one s
+          _ ≤ ε := by rw [hs]; linarith
+    show ‖rescaleCLM s (α (p, s⁻¹ • v) (s * t)) - e‖ ≤ (1 + s) * L' * s⁻¹ * ‖v‖
+    -- Y t - e = L_s (α(p,w)(st) - α e (st)), using α e = e and linearity of L_s.
+    set D : Point n × Point n := α (p, s⁻¹ • v) (s * t) - α e (s * t) with hD
+    have hYt : rescaleCLM s (α (p, s⁻¹ • v) (s * t)) - e = rescaleCLM s D := by
+      rw [hD, map_sub, hEq hst]
+      congr 1
+      rw [he_def]
+      simp [rescaleCLM_apply]
+    -- ‖α(p,w)(st) - α e (st)‖ ≤ L'·‖w‖  (flow Lipschitz-in-IC)
+    have hdist : ‖D‖ ≤ L' * ‖s⁻¹ • v‖ := by
+      have hl := (hlip (s * t) hst).dist_le_mul (p, s⁻¹ • v) hmemball e hmem_e
+      rw [dist_eq_norm, dist_eq_norm] at hl
+      rw [hD]
+      refine hl.trans (le_of_eq ?_)
+      rw [he_def,
+        show (p, s⁻¹ • v) - ((p, 0) : Point n × Point n) = ((0, s⁻¹ • v) : Point n × Point n) by simp,
+        Prod.norm_def, norm_zero, max_eq_right (norm_nonneg _)]
+    -- ‖L_s D‖ = max ‖D.1‖ (s‖D.2‖) ≤ (1+s)‖D‖  (direct, avoids the product-codomain opNorm diamond)
+    have hcomp1 : ‖D.1‖ ≤ ‖D‖ := by rw [Prod.norm_def]; exact le_max_left _ _
+    have hcomp2 : ‖D.2‖ ≤ ‖D‖ := by rw [Prod.norm_def]; exact le_max_right _ _
+    have hrs : ‖rescaleCLM s D‖ ≤ (1 + s) * ‖D‖ := by
+      rw [rescaleCLM_apply, Prod.norm_def, norm_smul, Real.norm_eq_abs, abs_of_pos hs0]
+      refine max_le ?_ ?_
+      · exact hcomp1.trans (le_mul_of_one_le_left (norm_nonneg _) (by linarith))
+      · calc s * ‖D.2‖ ≤ s * ‖D‖ := mul_le_mul_of_nonneg_left hcomp2 (le_of_lt hs0)
+          _ ≤ (1 + s) * ‖D‖ := mul_le_mul_of_nonneg_right (by linarith) (norm_nonneg _)
+    rw [hYt]
+    calc ‖rescaleCLM s D‖
+        ≤ (1 + s) * ‖D‖ := hrs
+      _ ≤ (1 + s) * (L' * ‖s⁻¹ • v‖) := mul_le_mul_of_nonneg_left hdist (by positivity)
+      _ = (1 + s) * L' * s⁻¹ * ‖v‖ := by
+          rw [norm_smul, Real.norm_eq_abs, abs_inv, abs_of_pos hs0]; ring
+
 end QIQTH.ExpMap

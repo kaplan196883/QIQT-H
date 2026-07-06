@@ -9623,4 +9623,26 @@ namespace QIQTH.AxiomAudit
 -- existence for short geodesics s•v only, NOT the uniform-over-a-ball tube, NOT the two-point estimate.
 #print axioms QIQTH.ExpMap.geodesicSol_rescale_unit_existence
 
+-- ExpMap.lean — S4′: the common-tube crux CLOSED (both halves, unconditional over a ball), 2026-07-06.
+-- geodesicField_equilibrium: e=(p,0) is a zero of the geodesic field (velocity 0 kills every quadratic term).
+-- geodesic_twopoint_gronwall: the direct two-point Grönwall bound on [0,1] — two integral curves staying in a
+-- set S where F is K-Lipschitz obey dist(Y₁ t)(Y₂ t) ≤ dist(Y₁ 0)(Y₂ 0)·e^{Kt} (Mathlib
+-- dist_le_of_trajectories_ODE_of_mem). geodesic_apriori_bound: the a-priori confinement dist(Y t) e ≤
+-- dist(Y 0) e·e^{Kt} (the two-point bound against the constant equilibrium curve). geodesic_unit_tube_existence:
+-- UNIFORM existence over a ball — ∃ρ>0, ∀‖v‖≤ρ, a genuine integral curve through (p,v) on (-2,2)⊇[0,1]
+-- (ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt gives a uniform existence time ε
+-- at e; rescaling s=ε/2 stretches (-ε,ε) to (-2,2)). geodesic_apriori_confinement: UNIFORM confinement over a
+-- ball — ∃ρ,C₀, the tube through (p,v) stays ‖Y t − e‖ ≤ C₀‖v‖ on [0,1] (the flow's equilibrium trajectory is
+-- constant by ODE uniqueness, so Lipschitz-in-IC bounds the rescaled tube). Together these CLOSE both halves of
+-- the flagged common-tube management (existence + confinement) UNCONDITIONALLY over a ball. HONEST: what remains
+-- for HasStrictFDerivAt exp_p id 0 is pure assembly — pin expMap to the confined tube endpoint (definitional
+-- bridge via uniqueness) + feed confinement + S2 strict remainder + two-point Grönwall + residual_gronwall into
+-- the isLittleO characterisation. NOT yet exp_p's strict derivative, NOT the diffeo, NOT the RNC gauge, NOT
+-- numerical-G. Axiom-free (standard three).
+#print axioms QIQTH.ExpMap.geodesicField_equilibrium
+#print axioms QIQTH.ExpMap.geodesic_twopoint_gronwall
+#print axioms QIQTH.ExpMap.geodesic_apriori_bound
+#print axioms QIQTH.ExpMap.geodesic_unit_tube_existence
+#print axioms QIQTH.ExpMap.geodesic_apriori_confinement
+
 end QIQTH.AxiomAudit

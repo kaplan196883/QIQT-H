@@ -65,17 +65,37 @@ ABSENT: variational/Jacobi flow-in-IC differentiability, global linear-ODE exist
   [AF] std-3).** For every direction `v` there is a scale `s=ε/2>0` and a genuine integral curve `γ` with
   `γ 0=(p, s•v)` solving the geodesic ODE on `(-1,2)⊇[0,1]` — `geodesicSol_hasDerivAt` rescaled by `geodesic_rescale`.
   Discharges the existence-on-`[0,1]` half FLOW-FREE (short geodesics `s•v`). HONEST: NOT the uniform-over-a-ball tube.
-- [ ] **S4 (unconditional) — CHECKPOINT: common-tube reconciliation over `[0,1]` for a whole ball.** The three pieces
-  above are each green but on DIFFERENT sets: S3's Lipschitz-in-IC lives on the PL interval `[-ε,ε]`; the rescaling
-  existence gives `[0,1]` but only for velocities `s•v` with `s` depending on `v`; the strict remainder `‖R‖≤ε‖Y_v−Y_w‖`
-  (from `hasStrictFDerivAt_geodesicField`) holds only in an S2-nbhd of `e`. **Exact remaining goal:** produce ONE
-  radius `ρ>0` such that for all `v,w∈ball 0 ρ`, (i) `Y_v,Y_w` are integral curves on `[0,1]` staying in the S2-nbhd,
-  (ii) `‖Y_v(t)−Y_w(t)‖≤L‖v−w‖` on `[0,1]`, feeding `residual_gronwall` with `C=εL‖v−w‖` to get the UNCONDITIONAL
-  `‖r(1)‖≤Cε‖v−w‖`. **What blocks:** the PL flow's fixed interval is `[-ε,ε]`, not `[0,1]`; bridging needs a uniform
-  (over the ball) rescaling/re-timing that keeps the S3 Lipschitz constant AND the S2-nbhd containment simultaneously —
-  the flagged common-tube management. Both consults flagged this as THE stall risk; per the plan it is validly checkpointed.
-- [ ] **S5 — `HasStrictFDerivAt exp_p (id) 0` (std-4).** Project `exp_p(v)−exp_p(w)−(v−w)=π₁ r(1)` ⟹ two-point
-  `o(‖v−w‖)` ⟹ strict derivative (`hasStrictFDerivAt` via the `isLittleO` two-point characterization).
+- [x] **S4′ (unconditional) — the common-tube crux CLOSED: BOTH halves, uniform over a ball — DONE (2026-07-06,
+  [AF] std-3).** The flagged reconciliation is now discharged unconditionally over a whole ball via a cleaner route
+  than PL re-timing (direct Grönwall + geodesic rescaling on the *uniform* existence ball). Five new theorems in
+  `QIQTH/ExpMap.lean`:
+  - `geodesicField_equilibrium` — `e=(p,0)` is a zero of `F`.
+  - `geodesic_twopoint_gronwall` — the direct two-point bound `dist(Y₁ t)(Y₂ t) ≤ dist(Y₁ 0)(Y₂ 0)·e^{Kt}` on `[0,1]`
+    for two curves in a `K`-Lipschitz set `S` (Mathlib `dist_le_of_trajectories_ODE_of_mem`). *This replaces the
+    interval-mismatched S3 flow-Lipschitz — Grönwall directly on `[0,1]`, no PL re-timing.*
+  - `geodesic_apriori_bound` — the a-priori confinement `dist(Y t) e ≤ dist(Y 0) e·e^{Kt}` (two-point bound against
+    the constant equilibrium curve).
+  - **`geodesic_unit_tube_existence`** — the EXISTENCE half, UNIFORM over a ball: `∃ρ>0, ∀‖v‖≤ρ`, a genuine integral
+    curve through `(p,v)` on `(-2,2)⊇[0,1]`. Uses `ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt`
+    (UNIFORM existence time `ε` at `e`, no shrinkage over the ball) + rescaling `s=ε/2` stretching `(-ε,ε)` to `(-2,2)`.
+    *This is the key: the uniform-`ε` PL ball dissolves the `[-ε,ε]`-vs-`[0,1]` mismatch.*
+  - **`geodesic_apriori_confinement`** — the CONFINEMENT half, UNIFORM over a ball: `∃ρ,C₀`, the tube through `(p,v)`
+    stays `‖Y t − e‖ ≤ C₀‖v‖` on `[0,1]` (so `Y_v(t)→e` uniformly as `v→0`). The flow's equilibrium trajectory is
+    CONSTANT (`α e = e`, by ODE uniqueness against the constant curve on the flow's compact range where `F` is
+    Lipschitz), so its Lipschitz-in-IC bounds the rescaled tube. *This dodges the a-priori-bound clopen circularity.*
+  **Both halves of the flagged crux (existence + confinement) are now UNCONDITIONAL over a ball.**
+- [ ] **S5 — `HasStrictFDerivAt exp_p (id) 0` (std-4) — CHECKPOINT: pure assembly (all analytic ingredients in
+  hand).** With existence + confinement closed, the ONLY remaining work is bookkeeping, no missing Mathlib theorem:
+  (1) **definitional bridge** — pin `expMap`'s value to the confined tube endpoint (`expMap p v = (Y_v 1).1` for
+  small `v`), redefining `expMap` via the confined tube (the current `Classical.choose`-of-local-existence `geodesicSol`
+  is only guaranteed on `(-δ_v,δ_v)`, so its value at `t=1` is not the geodesic endpoint — uniqueness pins the two
+  once both are `[0,1]` curves in a common Lipschitz set); (2) **`isLittleO` assembly** — for `c>0`, pick `η` so the
+  gronwall constant `≤ c`; `geodesic_apriori_confinement` puts `Y_v(t),Y_w(t)` in the S2 `η`-nbhd for `(v,w)` near
+  `(0,0)`; the S2 strict remainder gives `‖R‖≤η‖Y_v−Y_w‖`, `geodesic_twopoint_gronwall` gives
+  `‖Y_v−Y_w‖≤e^{K}‖v−w‖`, and `residual_gronwall` gives `‖r(1)‖≤(const)·η·‖v−w‖ ≤ c‖v−w‖`; project
+  `exp_p(v)−exp_p(w)−(v−w)=π₁ r(1)` ⟹ two-point `o(‖v−w‖)` ⟹ `HasStrictFDerivAt.of_isLittleO`. **What blocks:**
+  nothing analytic — this is a ~100-line filter/`η`-juggling assembly + the definitional-bridge uniqueness argument;
+  validly checkpointed for a follow-on increment.
 - [ ] **S6 — `exp_p` local C¹ diffeo at 0 (std-4).** `HasStrictFDerivAt.to_localInverse` (id invertible) ⟹ a
   `PartialHomeomorph` inverse `exp_p⁻¹` = the normal-coordinate chart. **← the RNC local-diffeo gate.**
 
@@ -126,3 +146,15 @@ numerical-G, the full gauge, or a curved heat kernel.
   simultaneously for all `v,w∈ball 0 ρ`; the PL interval is `[-ε,ε]` not `[0,1]`, bridging needs a uniform re-timing).
   Flagged #1 stall risk; validly checkpointed. HONEST: NOT `exp_p`'s strict derivative, NOT the diffeo, NOT the RNC
   gauge, NOT numerical-G.
+- **2026-07-06 (S4′ — the common-tube crux CLOSED, both halves):** `QIQTH/ExpMap.lean`, five new theorems, all [AF]
+  std-3, budget 0. The flagged #1 stall (common-tube reconciliation over `[0,1]` for a whole ball) is DISCHARGED
+  UNCONDITIONALLY via a cleaner route than PL re-timing. **Existence half** (`geodesic_unit_tube_existence`): the
+  `C¹` local-existence lemma gives a UNIFORM existence time `ε` over a ball at the equilibrium; rescaling `s=ε/2`
+  stretches `(-ε,ε)` to `(-2,2)⊇[0,1]` — dissolving the `[-ε,ε]`-vs-`[0,1]` interval mismatch. **Confinement half**
+  (`geodesic_apriori_confinement`): the flow's equilibrium trajectory is constant (`α e = e` by ODE uniqueness
+  against the constant curve on its compact range), so Lipschitz-in-IC gives `‖Y_v(t) − e‖ ≤ C₀‖v‖` on `[0,1]` —
+  the a-priori boundedness, dodging the clopen circularity. Plus the two Grönwall estimates (`geodesic_twopoint_gronwall`,
+  `geodesic_apriori_bound`) via Mathlib `dist_le_of_trajectories_ODE_of_mem`, and `geodesicField_equilibrium`.
+  **CHECKPOINTED — S5:** now PURE ASSEMBLY (no missing Mathlib theorem): definitional bridge (pin `expMap` to the
+  confined tube endpoint) + the `isLittleO` `η`-juggling feeding confinement + S2 remainder + two-point Grönwall +
+  `residual_gronwall`. HONEST: NOT yet `exp_p`'s strict derivative, NOT the diffeo, NOT the RNC gauge, NOT numerical-G.

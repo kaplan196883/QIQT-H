@@ -426,6 +426,28 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   radius `ρ` giving integral-curve-on-`[0,1]` + S2-nbhd containment + S3 Lipschitz simultaneously for all `v,w∈ball 0
   ρ`); that is CHECKPOINTED, NOT discharged. This is NOT `exp_p`'s strict derivative, NOT the local diffeo, NOT the RNC
   gauge, NOT numerical-`G`.
+- **EXP3 — the common-tube crux CLOSED: BOTH halves (existence + confinement), UNCONDITIONAL over a ball** (`ExpMap.lean`
+  `geodesicField_equilibrium`/`geodesic_twopoint_gronwall`/`geodesic_apriori_bound`/`geodesic_unit_tube_existence`/
+  `geodesic_apriori_confinement`, all **[AF]** std-3, 2026-07-06). The flagged EXP2 common-tube reconciliation is now
+  DISCHARGED unconditionally over a whole ball, via a cleaner route than the Picard–Lindelöf re-timing. **Two-point
+  Grönwall — `geodesic_twopoint_gronwall`**: for two integral curves `Y₁,Y₂` staying in a set `S` where `F` is
+  `K`-Lipschitz, `dist(Y₁ t)(Y₂ t) ≤ dist(Y₁ 0)(Y₂ 0)·e^{Kt}` on `[0,1]` (Mathlib `dist_le_of_trajectories_ODE_of_mem`)
+  — the two-point Lipschitz bound directly on `[0,1]`, no PL re-timing. **A-priori bound — `geodesic_apriori_bound`**:
+  `dist(Y t) e ≤ dist(Y 0) e·e^{Kt}` (the two-point bound against the constant equilibrium curve; `F(e)=0` via
+  `geodesicField_equilibrium`). **Existence half — `geodesic_unit_tube_existence`**: `∃ρ>0`, for every `‖v‖≤ρ` a genuine
+  integral curve through `(p,v)` on `(-2,2)⊇[0,1]` — the `C¹` lemma
+  `ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt` gives a UNIFORM existence time `ε` over
+  a ball at `e`, and rescaling `s=ε/2` (`geodesic_rescale`) stretches `(-ε,ε)` to `(-2,2)`, dissolving the
+  `[-ε,ε]`-vs-`[0,1]` interval mismatch. **Confinement half — `geodesic_apriori_confinement`**: `∃ρ,C₀`, the tube
+  through `(p,v)` stays `‖Y t − e‖ ≤ C₀‖v‖` on `[0,1]` (so `Y_v(t)→e` uniformly as `v→0`) — the Picard–Lindelöf flow's
+  equilibrium trajectory is CONSTANT (`α e = e`, by ODE uniqueness against the constant curve on the flow's compact
+  range where `F` is Lipschitz), so its Lipschitz-in-IC bounds the rescaled tube; dodges the a-priori clopen
+  circularity. ⚠ **HONEST CAPTION (binding)**: this CLOSES both halves of the flagged common-tube crux (existence +
+  confinement) unconditionally over a ball. What remains for **`HasStrictFDerivAt exp_p id 0`** is PURE ASSEMBLY (no
+  missing Mathlib theorem): a definitional bridge pinning `expMap` to the confined tube endpoint (the current
+  `Classical.choose`-of-local-existence value at `t=1` is not the geodesic endpoint) + the `isLittleO` `η`-juggling
+  feeding confinement + the S2 strict remainder + `geodesic_twopoint_gronwall` + `residual_gronwall`. This is NOT yet
+  `exp_p`'s strict derivative, NOT the local diffeo, NOT the RNC gauge, NOT numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
