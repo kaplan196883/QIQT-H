@@ -485,6 +485,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   radial DIAGONAL, **NOT** the RNC gauge (which needs the off-radial Jacobian field / higher jets = the Mathlib-absent
   smooth-dependence-on-IC theorem). It does **NOT** discharge `hgauge`, **NOT** build normal-coordinate metric jets,
   **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET1 — the exp map's FRÉCHET value 2-jet at `0` (`exp_p(v) = p + v − ½Γ_p(v,v) + o(‖v‖²)`)** (`ExpMap.lean`
+  `expMap_value_two_jet`, with `christoffel_bilin_bound`/`christoffel_quad_diff_bound`/`gronwallBound_zero_one_le_exp`,
+  all **[AF]** std-3, 2026-07-06). The full VECTOR (uniform-over-directions) 2-jet, not just the radial diagonal:
+  `(fun v => expMap g gi hC p v − p − v + ½·(fun i => ∑ⱼ∑ₖ christoffel g gi i j k p * v j * v k)) =o[𝓝 0] (fun v => ‖v‖²)`.
+  Route (equilibrium-anchored, flow-free — GPT-5.5-pro diagonal form): the confined geodesic tube `Y = expTube p v`
+  (`expTube_spec`) is compared to the explicit model curve `M(t) = (p + t·v − ½t²·Γ_p(v,v), v − t·Γ_p(v,v))`; the residual
+  `q = Y − M` has `q 0 = 0` and `q'(t) = geodesicField(Y t) − M'(t) = ((q t).2, Γ_p(v,v) − Γ_{(Y t).1}((Y t).2,(Y t).2))`.
+  The a-priori confinement (`‖Y t − (p,0)‖ ≤ C₀‖v‖`) plus the **LOCAL Christoffel bounds** — value bound `Mc` and
+  **Lipschitz-in-base-point** `Lc` on `closedBall p (C₀·expRho)`, both from `ContDiff → bounded/exists_lipschitzOnWith` on
+  the compact ball — give `‖q'(t)‖ ≤ (1 + Bcoef‖v‖)‖q t‖ + Acoef‖v‖³` on `[0,1]` (the crux
+  `christoffel_quad_diff_bound`, the base-point Lipschitz is what turns the naïve `O(‖v‖²)` into `O(‖v‖³)`); the
+  inhomogeneous Grönwall bound (`norm_le_gronwallBound_of_norm_deriv_right_le` + `gronwallBound_zero_linear` +
+  `gronwallBound_zero_one_le_exp` = `gronwallBound 0 K 1 1 ≤ e^K`) yields `‖q 1‖ ≤ Cfinal·‖v‖³`, and projecting the
+  position component `π₁ q 1 = exp_p v − p − v + ½Γ_p(v,v)` gives `‖·‖ ≤ Cfinal‖v‖³`, packaged into `o(‖v‖²)` via
+  `isLittleO_iff` + `‖v‖ → 0`. ⚠ **HONEST CAPTION (binding)**: this is the **Fréchet value 2-jet of `exp_p` at `0`** — a
+  step toward discharging the RNC gauge. It does **NOT** yet discharge `hgauge`, **NOT** build the pullback metric,
+  **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

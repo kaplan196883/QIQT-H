@@ -26,11 +26,17 @@ remain). Never claim numerical-G or a curved heat kernel.
   differentiability set — establish local differentiability FIRST.
 
 ## Increments
-- [ ] **EXP-JET1 — the value 2-jet (GPT-5.5-pro: "very tractable"). START HERE.** `exp_p(v)−p−v+½Γ_p(v,v)=o(‖v‖²)`
-  (equivalently `HasFDerivAt`-style two-point/second-difference `o`). The second-difference residual `q` + inhomog
-  Grönwall, anchored by confinement + the proven `hasStrictFDerivAt_expMap` (1-jet) + `expMap_radial_accel` (radial
-  2-jet fixes the coefficient `−Γ_p`). Mathlib: `taylor_mean_remainder_bound`, `norm_image_sub_le_of_norm_fderiv_le'`,
-  `residual_gronwall`/`geodesic_apriori_confinement` (present), `isLittleO`.
+- [x] **EXP-JET1 — the value 2-jet (GPT-5.5-pro: "very tractable"). DONE 2026-07-06.**
+  `exp_p(v)−p−v+½Γ_p(v,v)=o(‖v‖²)` — proved as `ExpMap.lean`'s `expMap_value_two_jet` ([AF] std-3, budget 0), the FULL
+  vector (uniform-over-directions) 2-jet: `(fun v => expMap g gi hC p v − p − v + ½·Γ_p(v,v)) =o[𝓝 0] (fun v => ‖v‖²)`.
+  Route (diagonal form, as scoped): explicit model curve `M(t)=(p+t·v−½t²·Γ_p(v,v), v−t·Γ_p(v,v))`, residual `q=Y−M`
+  with `q'(t)=((q t).2, Γ_p(v,v)−Γ_{(Y t).1}((Y t).2,(Y t).2))` (identity computed directly — no abstract `H=D²F(e)`
+  needed), the crux bound `‖q'(t)‖≤(1+Bcoef‖v‖)‖q t‖+Acoef‖v‖³` via the a-priori confinement + the LOCAL Christoffel
+  value/Lipschitz bounds on `closedBall p (C₀·expRho)` (the base-point Lipschitz `christoffel_quad_diff_bound` is what
+  yields `O(‖v‖³)`, hence `o(‖v‖²)`), then the inhomogeneous Grönwall (`norm_le_gronwallBound_of_norm_deriv_right_le` +
+  new helper `gronwallBound_zero_one_le_exp`) + position projection. New reusable lemmas: `christoffel_bilin_bound`,
+  `christoffel_quad_diff_bound`, `gronwallBound_zero_one_le_exp`. HONEST: the Fréchet value 2-jet of `exp_p` at 0 — does
+  NOT discharge `hgauge`, NOT build the pullback metric, NOT move numerical-G.
 - [ ] **EXP-JET2 — the value 3-jet** (`r_3(1)=o(‖v‖³)`, the `C_t` state jet). Heavier algebra.
 - [ ] **EXP-JET3 — the Jacobian field expansion to order 2** (`fderiv exp_p y = 1 + B(y,·) + ½T(y,y,·) + o(‖y‖²)`),
   via the localized first-variation. Moderate/high; the `fderiv`-differentiability caveat is the crux.

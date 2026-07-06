@@ -9682,4 +9682,23 @@ namespace QIQTH.AxiomAudit
 -- numerical-G (N, Λ_s, E/ξ remain). Axiom-free (standard three).
 #print axioms QIQTH.ExpMap.expMap_radial_accel
 
+-- ExpMap.lean — EXP-JET1: the exp map's Fréchet value 2-jet at 0 (THE_EXP_JETS_PLAN.md), 2026-07-06.
+-- expMap_value_two_jet: exp_p(v) = p + v − ½Γ_p(v,v) + o(‖v‖²), i.e.
+-- (fun v => expMap g gi hC p v − p − v + ½·(fun i => ∑ j ∑ k christoffel g gi i j k p * v j * v k)) =o[𝓝 0] (fun v => ‖v‖²).
+-- Route (equilibrium-anchored, flow-free): the confined geodesic tube Y = expTube p v (expTube_spec) is compared to the
+-- explicit model curve M(t) = (p + t·v − ½t²·Γ_p(v,v), v − t·Γ_p(v,v)); the residual q = Y − M has q 0 = 0 and
+-- q'(t) = geodesicField(Y t) − M'(t) = ((q t).2, Γ_p(v,v) − Γ_{(Y t).1}((Y t).2,(Y t).2)). The a-priori confinement plus the
+-- LOCAL Christoffel bounds (value bound Mc + Lipschitz-in-base-point Lc on closedBall p R, from ContDiff → bounded/Lipschitz)
+-- give ‖q'(t)‖ ≤ (1 + Bcoef‖v‖)‖q t‖ + Acoef‖v‖³ on [0,1] (christoffel_quad_diff_bound); the inhomogeneous Grönwall bound
+-- (norm_le_gronwallBound_of_norm_deriv_right_le + gronwallBound_zero_one_le_exp) yields ‖q 1‖ ≤ Cfinal·‖v‖³, and projecting the
+-- position component gives ‖exp_p v − p − v + ½Γ_p(v,v)‖ ≤ Cfinal‖v‖³ = o(‖v‖²). christoffel_bilin_bound / christoffel_quad_diff_bound
+-- are the sup-norm bounds for the Christoffel quadratic form and its two-base-point difference; gronwallBound_zero_one_le_exp is the
+-- unit-time Grönwall proportionality bound gronwallBound 0 K 1 1 ≤ e^K. HONEST: this is the Fréchet value 2-jet of exp_p at 0 — a step
+-- toward discharging the RNC gauge; it does NOT yet discharge hgauge, NOT build the pullback metric, NOT move numerical-G
+-- (N, Λ_s, E/ξ remain). Axiom-free (standard three).
+#print axioms QIQTH.ExpMap.christoffel_bilin_bound
+#print axioms QIQTH.ExpMap.christoffel_quad_diff_bound
+#print axioms QIQTH.ExpMap.gronwallBound_zero_one_le_exp
+#print axioms QIQTH.ExpMap.expMap_value_two_jet
+
 end QIQTH.AxiomAudit
