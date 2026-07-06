@@ -9924,4 +9924,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetK1_hasDerivAt_ode
 #print axioms QIQTH.ExpMap.expJetK2_hasDerivAt_ode
 
+-- ExpMap.lean — EXP-JET3c STEP 2 (operator-norm + residual-identity toolkit for the Jacobian Grönwall) (2026-07-07).
+-- matVecCLM_opNorm_le: ‖matVecCLM c‖ ≤ n·b when |c_ij| ≤ b (generic sup-norm CLM bound).
+-- expJetA1_opNorm_le / expJetA2_opNorm_le: ‖A₁‖ ≤ 2n²Mc‖v‖ (order-1, linear-in-v), ‖A₂‖ ≤ n³Nc‖v‖² (order-2).
+-- expJetK0_opNorm_le / expJetK1_opNorm_le: ‖K₀ t‖ ≤ ‖1‖+‖A₀‖, ‖K₁ t‖ ≤ 2n²Mc(1+‖A₀‖)‖v‖ on [0,1].
+-- expJetPi_opNorm_le / expJetIota_opNorm_le: ‖π‖ ≤ 1, ‖ι‖ ≤ 1 (phase-space projection/inclusion).
+-- expJet_residual_identity: the CLM ring identity D·Φ−(A₀K₀+(A₀K₁+A₁K₀)) = D·(Φ−(K₀+K₁))+((D−(A₀+A₁))·(K₀+K₁)+A₁·K₁).
+-- HONEST: the reusable toolkit for the operator residual Grönwall; does NOT itself give the Jacobian jet, the
+-- pullback metric, or numerical-G.  The residual Grönwall + projected jet remain CHECKPOINTED.  [AF] std-3.
+#print axioms QIQTH.ExpMap.matVecCLM_opNorm_le
+#print axioms QIQTH.ExpMap.expJetA1_opNorm_le
+#print axioms QIQTH.ExpMap.expJetA2_opNorm_le
+#print axioms QIQTH.ExpMap.expJetK0_opNorm_le
+#print axioms QIQTH.ExpMap.expJetK1_opNorm_le
+#print axioms QIQTH.ExpMap.expJetPi_opNorm_le
+#print axioms QIQTH.ExpMap.expJetIota_opNorm_le
+#print axioms QIQTH.ExpMap.expJet_residual_identity
+
 end QIQTH.AxiomAudit

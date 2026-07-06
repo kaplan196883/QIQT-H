@@ -3906,6 +3906,122 @@ theorem expJetK2_hasDerivAt_ode (g gi : Point n → Fin n → Fin n → ℝ) (p 
   rw [halg]
   exact expJetK2_hasDerivAt g gi p v t
 
+/-! ### EXP-JET3c (STEP 2) — operator-norm bounds on the coefficient/propagator CLMs
+
+    The residual operator Grönwall needs `‖A₁‖ = O(‖v‖)`, `‖A₂‖ = O(‖v‖²)`, hence `‖K₁‖ = O(‖v‖)`,
+    `‖K₂‖ = O(‖v‖²)`.  All flow from a generic `matVecCLM` operator-norm bound plus the Christoffel /
+    `∂Γ` value bounds at `p`. -/
+
+/-- **Operator-norm bound for `matVecCLM`.**  If every coefficient obeys `|c_{ij}| ≤ b` then the CLM
+    `η ↦ (i ↦ ∑_j c_{ij} η_j)` on the sup-normed `Point n` has `‖matVecCLM c‖ ≤ n·b`. -/
+theorem matVecCLM_opNorm_le (c : Fin n → Fin n → ℝ) {b : ℝ} (hb0 : 0 ≤ b)
+    (hb : ∀ i j, |c i j| ≤ b) : ‖matVecCLM c‖ ≤ (n : ℝ) * b := by
+  refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun η => ?_
+  rw [pi_norm_le_iff_of_nonneg (by positivity)]
+  intro i
+  rw [Real.norm_eq_abs, matVecCLM_apply]
+  calc |∑ j, c i j * η j|
+      ≤ ∑ j, |c i j * η j| := abs_sum_le_sum_abs _ _
+    _ ≤ ∑ _j : Fin n, b * ‖η‖ := Finset.sum_le_sum fun j _ => by
+          rw [abs_mul]
+          exact mul_le_mul (hb i j) (by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm η j)
+            (abs_nonneg _) hb0
+    _ = (n : ℝ) * b * ‖η‖ := by
+          simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+
+/-- **`‖A₁‖ ≤ 2·n²·Mc·‖v‖`** (`A₁ = expJetA1`, `Mc` a Christoffel value bound at `p`).  The order-1
+    coefficient is linear in `v`. -/
+theorem expJetA1_opNorm_le (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n)
+    {Mc : ℝ} (hMc0 : 0 ≤ Mc) (hMc : ∀ i j k, |christoffel g gi i j k p| ≤ Mc) :
+    ‖expJetA1 g gi p v‖ ≤ 2 * (n : ℝ) ^ 2 * Mc * ‖v‖ := by
+  -- coefficient bound `|c₁ i j| ≤ 2·n·Mc·‖v‖`.
+  have hcoef : ∀ i j : Fin n,
+      |(-(∑ k, christoffel g gi i j k p * v k) - (∑ k, christoffel g gi i k j p * v k))|
+        ≤ 2 * (n : ℝ) * Mc * ‖v‖ := by
+    intro i j
+    have hA : |∑ k, christoffel g gi i j k p * v k| ≤ (n : ℝ) * Mc * ‖v‖ := by
+      calc |∑ k, christoffel g gi i j k p * v k|
+          ≤ ∑ k, |christoffel g gi i j k p * v k| := abs_sum_le_sum_abs _ _
+        _ ≤ ∑ _k : Fin n, Mc * ‖v‖ := Finset.sum_le_sum fun k _ => by
+              rw [abs_mul]
+              exact mul_le_mul (hMc i j k) (by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm v k)
+                (abs_nonneg _) hMc0
+        _ = (n : ℝ) * Mc * ‖v‖ := by
+              simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+    have hB : |∑ k, christoffel g gi i k j p * v k| ≤ (n : ℝ) * Mc * ‖v‖ := by
+      calc |∑ k, christoffel g gi i k j p * v k|
+          ≤ ∑ k, |christoffel g gi i k j p * v k| := abs_sum_le_sum_abs _ _
+        _ ≤ ∑ _k : Fin n, Mc * ‖v‖ := Finset.sum_le_sum fun k _ => by
+              rw [abs_mul]
+              exact mul_le_mul (hMc i k j) (by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm v k)
+                (abs_nonneg _) hMc0
+        _ = (n : ℝ) * Mc * ‖v‖ := by
+              simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+    calc |(-(∑ k, christoffel g gi i j k p * v k) - (∑ k, christoffel g gi i k j p * v k))|
+        ≤ |∑ k, christoffel g gi i j k p * v k| + |∑ k, christoffel g gi i k j p * v k| := by
+          have hneg : -(∑ k, christoffel g gi i j k p * v k) - (∑ k, christoffel g gi i k j p * v k)
+              = -((∑ k, christoffel g gi i j k p * v k) + (∑ k, christoffel g gi i k j p * v k)) := by
+            ring
+          rw [hneg, abs_neg]
+          exact abs_add_le _ _
+      _ ≤ 2 * (n : ℝ) * Mc * ‖v‖ := by nlinarith [hA, hB]
+  have hmv := matVecCLM_opNorm_le
+    (fun i j => -(∑ k, christoffel g gi i j k p * v k) - (∑ k, christoffel g gi i k j p * v k))
+    (by positivity) hcoef
+  refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun z => ?_
+  rw [expJetA1_apply, Prod.norm_def, norm_zero, max_eq_right (norm_nonneg _)]
+  calc ‖matVecCLM (fun i j => -(∑ k, christoffel g gi i j k p * v k)
+          - (∑ k, christoffel g gi i k j p * v k)) z.2‖
+      ≤ ‖matVecCLM (fun i j => -(∑ k, christoffel g gi i j k p * v k)
+          - (∑ k, christoffel g gi i k j p * v k))‖ * ‖z.2‖ :=
+        (matVecCLM _).le_opNorm z.2
+    _ ≤ ((n : ℝ) * (2 * (n : ℝ) * Mc * ‖v‖)) * ‖z.2‖ :=
+        mul_le_mul_of_nonneg_right hmv (norm_nonneg _)
+    _ ≤ ((n : ℝ) * (2 * (n : ℝ) * Mc * ‖v‖)) * ‖z‖ :=
+        mul_le_mul_of_nonneg_left (by rw [Prod.norm_def]; exact le_max_right _ _)
+          (by positivity)
+    _ = 2 * (n : ℝ) ^ 2 * Mc * ‖v‖ * ‖z‖ := by ring
+
+/-- **`‖A₂‖ ≤ n³·Nc·‖v‖²`** (`A₂ = expJetA2`, `Nc` a `∂Γ` value bound at `p`).  The order-2 coefficient
+    is quadratic in `v`. -/
+theorem expJetA2_opNorm_le (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n)
+    {Nc : ℝ} (hNc0 : 0 ≤ Nc)
+    (hNc : ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l p| ≤ Nc) :
+    ‖expJetA2 g gi p v‖ ≤ (n : ℝ) ^ 3 * Nc * ‖v‖ ^ 2 := by
+  have hcoef : ∀ i l : Fin n,
+      |(-∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k)|
+        ≤ (n : ℝ) ^ 2 * Nc * ‖v‖ ^ 2 := by
+    intro i l
+    rw [abs_neg]
+    calc |∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k|
+        ≤ ∑ j, |∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k| := abs_sum_le_sum_abs _ _
+      _ ≤ ∑ _j : Fin n, ∑ _k : Fin n, Nc * ‖v‖ * ‖v‖ :=
+          Finset.sum_le_sum fun j _ => (abs_sum_le_sum_abs _ _).trans
+            (Finset.sum_le_sum fun k _ => by
+              rw [abs_mul, abs_mul]
+              exact mul_le_mul (mul_le_mul (hNc i j k l)
+                (by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm v j) (abs_nonneg _) hNc0)
+                (by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm v k) (abs_nonneg _)
+                (by positivity))
+      _ = (n : ℝ) ^ 2 * Nc * ‖v‖ ^ 2 := by
+            simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+  have hmv := matVecCLM_opNorm_le
+    (fun i l => -∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k)
+    (by positivity) hcoef
+  refine ContinuousLinearMap.opNorm_le_bound _ (by positivity) fun z => ?_
+  rw [expJetA2_apply, Prod.norm_def, norm_zero, max_eq_right (norm_nonneg _)]
+  calc ‖matVecCLM (fun i l => -∑ j, ∑ k,
+          pd (fun z => christoffel g gi i j k z) l p * v j * v k) z.1‖
+      ≤ ‖matVecCLM (fun i l => -∑ j, ∑ k,
+          pd (fun z => christoffel g gi i j k z) l p * v j * v k)‖ * ‖z.1‖ :=
+        (matVecCLM _).le_opNorm z.1
+    _ ≤ ((n : ℝ) * ((n : ℝ) ^ 2 * Nc * ‖v‖ ^ 2)) * ‖z.1‖ :=
+        mul_le_mul_of_nonneg_right hmv (norm_nonneg _)
+    _ ≤ ((n : ℝ) * ((n : ℝ) ^ 2 * Nc * ‖v‖ ^ 2)) * ‖z‖ :=
+        mul_le_mul_of_nonneg_left (by rw [Prod.norm_def]; exact le_max_left _ _)
+          (by positivity)
+    _ = (n : ℝ) ^ 3 * Nc * ‖v‖ ^ 2 * ‖z‖ := by ring
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order
@@ -4813,5 +4929,77 @@ theorem hasFDerivAt_expMap (g gi : Point n → Fin n → Fin n → ℝ)
   calc ‖expJetPi (R 1)‖ = ‖(R 1).1‖ := by rw [expJetPi_apply]
     _ ≤ ‖R 1‖ := by rw [Prod.norm_def]; exact le_max_left _ _
     _ ≤ c * ‖k‖ := hR1'
+
+/-- **`‖π‖ ≤ 1`, `‖ι‖ ≤ 1`** for the phase-space projection/inclusion. -/
+theorem expJetPi_opNorm_le : ‖expJetPi (n := n)‖ ≤ 1 :=
+  ContinuousLinearMap.opNorm_le_bound _ (by norm_num) fun z => by
+    rw [expJetPi_apply, one_mul, Prod.norm_def]; exact le_max_left _ _
+
+theorem expJetIota_opNorm_le : ‖expJetIota (n := n)‖ ≤ 1 :=
+  ContinuousLinearMap.opNorm_le_bound _ (by norm_num) fun z => by
+    rw [expJetIota_apply, one_mul, Prod.norm_def]
+    refine max_le ?_ le_rfl
+    show ‖(0 : Point n)‖ ≤ ‖z‖
+    rw [norm_zero]; exact norm_nonneg z
+
+/-- **`‖K₀ t‖ ≤ ‖1‖ + ‖A₀‖`** on `[0,1]` (`K₀(t) = 1 + t·A₀`, `|t| ≤ 1`). -/
+theorem expJetK0_opNorm_le (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    ‖expJetK0 (n := n) t‖
+      ≤ ‖(1 : (Point n × Point n) →L[ℝ] (Point n × Point n))‖ + ‖linF (n := n)‖ := by
+  have htabs : |t| ≤ 1 := abs_le.mpr ⟨by linarith, ht1⟩
+  have hK0eq : expJetK0 (n := n) t
+      = (1 : (Point n × Point n) →L[ℝ] (Point n × Point n)) + t • linF (n := n) := rfl
+  have h1 : ‖expJetK0 (n := n) t‖
+      ≤ ‖(1 : (Point n × Point n) →L[ℝ] (Point n × Point n))‖ + ‖t • linF (n := n)‖ := by
+    rw [hK0eq]; exact norm_add_le _ _
+  have h2 : ‖t • linF (n := n)‖ ≤ ‖linF (n := n)‖ := by
+    rw [norm_smul, Real.norm_eq_abs]
+    nlinarith [norm_nonneg (linF (n := n)), htabs, abs_nonneg t]
+  linarith
+
+/-- **`‖K₁ t‖ ≤ (2·n²·Mc·(1+‖A₀‖))·‖v‖`** on `[0,1]** (`K₁(t) = t·A₁ + (t²/2)·A₀A₁`). -/
+theorem expJetK1_opNorm_le (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n)
+    {Mc : ℝ} (hMc0 : 0 ≤ Mc) (hMc : ∀ i j k, |christoffel g gi i j k p| ≤ Mc)
+    (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    ‖expJetK1 g gi p v t‖ ≤ 2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖) * ‖v‖ := by
+  have htabs : |t| ≤ 1 := abs_le.mpr ⟨by linarith, ht1⟩
+  have ht2 : |t ^ 2 / 2| ≤ 1 := by
+    rw [abs_div, abs_pow, abs_of_pos (by norm_num : (0:ℝ) < 2)]
+    nlinarith [htabs, abs_nonneg t]
+  have hA1 : ‖expJetA1 g gi p v‖ ≤ 2 * (n : ℝ) ^ 2 * Mc * ‖v‖ :=
+    expJetA1_opNorm_le g gi p v hMc0 hMc
+  have hK1eq : expJetK1 g gi p v t
+      = t • expJetA1 g gi p v + (t ^ 2 / 2) • ((linF (n := n)).comp (expJetA1 g gi p v)) := rfl
+  have hcomp : ‖(linF (n := n)).comp (expJetA1 g gi p v)‖
+      ≤ ‖linF (n := n)‖ * ‖expJetA1 g gi p v‖ := (linF (n := n)).opNorm_comp_le _
+  calc ‖expJetK1 g gi p v t‖
+      ≤ ‖t • expJetA1 g gi p v‖ + ‖(t ^ 2 / 2) • ((linF (n := n)).comp (expJetA1 g gi p v))‖ := by
+        rw [hK1eq]; exact norm_add_le _ _
+    _ ≤ ‖expJetA1 g gi p v‖ + ‖linF (n := n)‖ * ‖expJetA1 g gi p v‖ := by
+        rw [norm_smul, norm_smul, Real.norm_eq_abs, Real.norm_eq_abs]
+        have hb1 : |t| * ‖expJetA1 g gi p v‖ ≤ ‖expJetA1 g gi p v‖ := by
+          nlinarith [norm_nonneg (expJetA1 g gi p v), htabs, abs_nonneg t]
+        have hb2 : |t ^ 2 / 2| * ‖(linF (n := n)).comp (expJetA1 g gi p v)‖
+            ≤ ‖linF (n := n)‖ * ‖expJetA1 g gi p v‖ :=
+          le_trans (le_trans (mul_le_mul_of_nonneg_right ht2 (norm_nonneg _))
+            (by rw [one_mul])) hcomp
+        linarith
+    _ = (1 + ‖linF (n := n)‖) * ‖expJetA1 g gi p v‖ := by ring
+    _ ≤ (1 + ‖linF (n := n)‖) * (2 * (n : ℝ) ^ 2 * Mc * ‖v‖) :=
+        mul_le_mul_of_nonneg_left hA1 (by positivity)
+    _ = 2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖) * ‖v‖ := by ring
+
+/-- **The operator residual identity** `D·Φ − (A₀K₀ + (A₀K₁ + A₁K₀)) = D·(Φ − (K₀+K₁))
+    + ((D − (A₀+A₁))·(K₀+K₁) + A₁·K₁)` (`A₀ = linF`).  Pure CLM ring algebra (distribute composition
+    over the `Φ = E + (K₀+K₁)` and `K₀+K₁` splits).  Isolated so its `abel` gets its own budget. -/
+theorem expJet_residual_identity
+    (D Phi K0 K1 A1 : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    D.comp Phi - ((linF (n := n)).comp K0 + ((linF (n := n)).comp K1 + A1.comp K0))
+      = D.comp (Phi - (K0 + K1))
+        + ((D - (linF (n := n) + A1)).comp (K0 + K1) + A1.comp K1) := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.add_apply,
+    ContinuousLinearMap.comp_apply, map_add, map_sub]
+  abel
 
 end QIQTH.ExpMap

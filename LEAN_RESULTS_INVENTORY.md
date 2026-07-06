@@ -688,6 +688,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Jacobian `K_v = K₀+K₁+K₂` bricks.  ⚠ **HONEST CAPTION:** does **NOT** give the residual operator Grönwall
   `‖(Φ_v 1) − K_v(1)‖ ≤ C‖v‖²`, the projected 2-jet `L v = 1 − Γ_p(v,·) + ½T(v,v,·) + o(‖v‖²)`, the pullback metric,
   or numerical-`G`.
+- **EXP-JET3c (STEP 2, operator-norm + residual-identity toolkit)** (`ExpMap.lean` `matVecCLM_opNorm_le`,
+  `expJetA1_opNorm_le`, `expJetA2_opNorm_le`, `expJetK0_opNorm_le`, `expJetK1_opNorm_le`, `expJetPi_opNorm_le`,
+  `expJetIota_opNorm_le`, `expJet_residual_identity`, all **[AF]** std-3, budget 0, 2026-07-07): the reusable bricks the
+  operator residual Grönwall consumes — sup-norm CLM bound `‖matVecCLM c‖ ≤ n·b`, the coefficient bounds `‖A₁‖ ≤ 2n²Mc‖v‖`
+  (order-1) / `‖A₂‖ ≤ n³Nc‖v‖²` (order-2), the propagator bounds `‖K₀‖,‖K₁‖` on `[0,1]`, `‖π‖,‖ι‖ ≤ 1`, and the CLM ring
+  identity `D·Φ−(A₀K₀+(A₀K₁+A₁K₀)) = D·(Φ−(K₀+K₁))+((D−(A₀+A₁))·(K₀+K₁)+A₁·K₁)`.  ⚠ **HONEST CAPTION + TWO CHECKPOINTS:**
+  the residual Grönwall + projected jet are **NOT** landed.  **(1) Math gap:** the committed STEP-1 anchoring is only
+  `Θ(‖v‖²)`-accurate (the true order-2 Jacobi coefficient `Ã₂(t,v)` is `t`-DEPENDENT — the tube-drift Γ-cross-terms the
+  fixed `A₂` misses), so the anchored model gives the Jacobian's LINEAR term `−Γ_p^{sym}(v,·)` exactly but only an
+  `O(‖v‖²)` (1-jet) remainder — **NOT** the `o(‖v‖²)` order-2 `½T(v,v,·)` 2-jet.  **(2) Compile intractability:** the
+  monolithic operator-valued Grönwall exceeds 32M heartbeats (CLM-Banach instance-search/`whnf` blowup in the large local
+  context); FIX = a small-context helper `expJet_residual_gronwall`.  Does **NOT** give the jet, the pullback metric, or
+  numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

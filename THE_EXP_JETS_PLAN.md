@@ -285,6 +285,31 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
+  ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
+  (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
+  (`‖A₂‖ ≤ n³Nc‖v‖²`, order-2), **`expJetK0_opNorm_le`** / **`expJetK1_opNorm_le`** (`‖K₀‖,‖K₁‖` bounds on `[0,1]`),
+  **`expJetPi_opNorm_le`** / **`expJetIota_opNorm_le`** (`‖π‖,‖ι‖ ≤ 1`), and **`expJet_residual_identity`** (the CLM
+  ring identity `D·Φ−(A₀K₀+(A₀K₁+A₁K₀)) = D·(Φ−(K₀+K₁))+((D−(A₀+A₁))·(K₀+K₁)+A₁·K₁)`).
+  ⚠ **TWO CHECKPOINTS discovered during the attempt (both blocking the projected 2-jet):**
+  **(1) MATH GAP — the anchored model is only `O(‖v‖²)`-accurate, NOT `o(‖v‖²)`.**  The committed STEP-1 lemmas
+  (`geodesicField_fderiv_anchored_eq`, `expJet_fderiv_tube_order2`) anchor the order-2 Jacobi coefficient to the FIXED
+  `A₂ = expJetA2` (the ∂Γ-trilinear part only), giving `‖DF(Y_v t)−(A₀+A₁+A₂)‖ ≤ C‖v‖²` — a genuine Θ(‖v‖²), NOT
+  little-o, because the true coefficient `Ã₂(t,v)` is `t`-DEPENDENT (the `t·∂Γ_p·v` Γ-cross-terms from the tube's
+  position drift `p+tv` and velocity drift `−tΓv`, which the fixed anchor misses; the plan flagged this at STEP 1).
+  Consequently the anchored model `K_v=K₀+K₁+K₂` reproduces the Jacobian's LINEAR term `−Γ_p^{sym}(v,·)` EXACTLY but its
+  order-2 term is wrong — the projection `π∘K_v(1)∘ι` does NOT equal `id−Γ_p(v,·)+½T(v,v,·)` and the residual Grönwall
+  yields only `O(‖v‖²)` (the strict Jacobian 1-jet), NOT the `o(‖v‖²)` 2-jet.  The honest 2-jet needs the `t`-dependent
+  `Ã₂(t,v)` integrated against a `t`-dependent `K̃₂`, plus a little-o (not `≤C‖v‖²`) C²-operator Taylor remainder.
+  **(2) COMPILE INTRACTABILITY — the monolithic operator Grönwall blows up.**  A fully-written `O(‖v‖²)` 1-jet theorem
+  (`fderiv exp_p v = id−Γ_p^{sym}(v,·)+O(‖v‖²)`, TRUE and useful — it gives the RNC gauge `∂g̃(0)=0`) type-checks in
+  pieces but the monolithic proof exceeds 32M heartbeats: the large local context (many `set`s + the `Φ` existential +
+  `fderiv(geodesicField)` terms) makes instance-search/`whnf` in the CLM Banach space explode (the point-valued
+  `hasFDerivAt_expMap` Grönwall compiles at 4M; the operator-valued one does not).  FIX = extract the operator Grönwall
+  into a SMALL-context helper `expJet_residual_gronwall (Φ, scalar bounds) → ‖Φ 1 − (K₀ 1+K₁ 1)‖ ≤ Cε·exp KdF'` so
+  instance-search sees a small context; the residual identity + opNorm toolkit above are the exact bricks it consumes.
+  HONEST: the toolkit + the two precisely-scoped checkpoints — does NOT give the residual Grönwall, the 1-jet, the
+  projected 2-jet, the pullback metric, or numerical-G.
 - **2026-07-07 (EXP-JET3c STEP 2, order-1/2 model propagators K₁, K₂):** the closed-form order-1/2 model
   propagators `K₁`, `K₂` + their equilibrium ODEs — landed green ([AF] std-3, budget 0).  New in `ExpMap.lean`:
   the composition/nilpotency helpers **`expJetA1_comp_linF`** (`A₁A₀=0`), **`linF_comp_linF_comp`** (`A₀A₀X=0`),
