@@ -634,6 +634,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ORDER-0 remainder `‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` of the uniform `DF(Y_v t)` expansion. ⚠ **HONEST CAPTION (binding):**
   the operator-norm "`A₀` is leading" bound; does **NOT** identify the order-1/2 coefficients `A₁, A₂`, **NOT** the
   full Jacobian 2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3c (STEP 1, order-0 composed) — the uniform-in-`t` order-0 `DF` expansion along the tube** (`ExpMap.lean`
+  `expJet_fderiv_tube_order0`, **[AF]** std-3, budget 0, 2026-07-07): `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1],
+  ‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` (`A₀=linF=DF(e)`, `Y_v=expTube p v`). Composes the pointwise
+  `geodesicField_fderiv_sub_linF_opNorm_le` with the a-priori confinement (`‖(Y_v t).2‖ ≤ C₀‖v‖`,
+  `(Y_v t).1 ∈ closedBall p (C₀ρ)`, from `expTube_spec`): the Christoffel value bound `Mc` and `∂Γ` value bound `Nc`
+  are uniform over the compact confinement ball (`christoffel_pd_contDiff` → continuity → bounded), and
+  `Nc·n³‖u‖²+2Mc·n²‖u‖ ≤ C·‖v‖` via `‖u‖≤C₀‖v‖≤C₀ρ` (`C=Nc·n³·C₀²·ρ+2·Mc·n²·C₀`). The ORDER-0 (leading `A₀`) term of
+  the uniform `DF(Y_y t)=A₀+A₁(t,y)+A₂(t,y)+o(‖y‖²)` expansion, now stated as a theorem. ⚠ **HONEST CAPTION
+  (binding):** the order-0 remainder; does **NOT** identify the order-1/2 coefficients `A₁, A₂`, **NOT** the Jacobian
+  2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

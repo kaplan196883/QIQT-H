@@ -3025,6 +3025,138 @@ theorem geodesicField_fderiv_sub_linF_opNorm_le (g gi : Point n → Fin n → Fi
     _ = (Nc * (n : ℝ) ^ 3 * ‖u‖ ^ 2 + 2 * (Mc * (n : ℝ) ^ 2) * ‖u‖)
           * ‖((ξ, η) : Point n × Point n)‖ := by ring
 
+set_option maxHeartbeats 1600000 in
+/-- **EXP-JET3c (STEP 1, the order-0 composed expansion) — `‖DF(Y_v t) − A₀‖ ≤ C·‖v‖`, uniform in
+    `t ∈ [0,1]`.**  Composing the pointwise operator-norm bound
+    `geodesicField_fderiv_sub_linF_opNorm_le` with the a-priori confinement of the tube
+    (`‖(Y_v t).2‖ ≤ C₀·‖v‖` and `(Y_v t).1 ∈ closedBall p (C₀·ρ)`, from `expTube_spec`) turns the
+    leading term of the uniform Jacobi-coefficient expansion into an actual theorem: there is a radius
+    `ρ > 0` and a constant `C ≥ 0` with
+    `‖fderiv F (Y_v t) − linF‖ ≤ C·‖v‖`  for all `‖v‖ ≤ ρ`, `t ∈ [0,1]`  (`A₀ = linF = DF(e)`).
+
+    The Christoffel value bound `Mc` and first-derivative bound `Nc`, uniform over the confinement
+    ball, come from continuity on the compact ball (`christoffel_pd_contDiff` for the `∂Γ` array); the
+    pointwise bound `Nc·n³·‖u‖² + 2·Mc·n²·‖u‖` is then dominated by `C·‖v‖` using `‖u‖ ≤ C₀·‖v‖ ≤ C₀·ρ`
+    (`C = Nc·n³·C₀²·ρ + 2·Mc·n²·C₀`).
+
+    This is the order-0 term `A₀` of the uniform `DF(Y_y t) = A₀ + A₁(t,y) + A₂(t,y) + o(‖y‖²)`
+    expansion, now stated (it was previously only described).  HONEST: the order-0 remainder; it does
+    NOT identify the order-1/2 coefficients `A₁, A₂`, NOT the Jacobian 2-jet, NOT the pullback metric,
+    NOT numerical-G (`N`, `Λ_s`, `E/ξ` remain). -/
+theorem expJet_fderiv_tube_order0 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ ρ > (0 : ℝ), ∃ C ≥ (0 : ℝ), ∀ v : Point n, ‖v‖ ≤ ρ → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) - linF‖ ≤ C * ‖v‖ := by
+  have hρpos := expRho_pos g gi hC p
+  have hC₀ := expConst_nonneg g gi hC p
+  set ρ : ℝ := expRho g gi hC p with hρ
+  set C₀ : ℝ := expConst g gi hC p with hC₀def
+  set R : ℝ := C₀ * ρ with hRdef
+  have hR0 : 0 ≤ R := mul_nonneg hC₀ hρpos.le
+  have hpmem : p ∈ Metric.closedBall p R := Metric.mem_closedBall_self hR0
+  -- Christoffel value bound `Mc` on the confinement ball.
+  set T : Point n → (Fin n → Fin n → Fin n → ℝ) :=
+    fun y => (fun i j k => christoffel g gi i j k y) with hTdef
+  have hTcd : ContDiff ℝ (⊤ : WithTop ℕ∞) T :=
+    contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => contDiff_pi.mpr fun k => hC i j k
+  obtain ⟨Mc, hMcsub⟩ :=
+    (((isCompact_closedBall p R).image_of_continuousOn
+      hTcd.continuous.continuousOn).isBounded).subset_closedBall (0 : Fin n → Fin n → Fin n → ℝ)
+  have hMc0 : 0 ≤ Mc :=
+    le_trans (norm_nonneg _)
+      (by have := hMcsub (Set.mem_image_of_mem T hpmem)
+          rwa [Metric.mem_closedBall, dist_zero_right] at this :
+        ‖T p‖ ≤ Mc)
+  have hMc : ∀ y ∈ Metric.closedBall p R, ∀ i j k, |christoffel g gi i j k y| ≤ Mc := by
+    intro y hy i j k
+    have hTy : ‖T y‖ ≤ Mc := by
+      have := hMcsub (Set.mem_image_of_mem T hy)
+      rwa [Metric.mem_closedBall, dist_zero_right] at this
+    have e : christoffel g gi i j k y = T y i j k := by simp only [hTdef]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm (T y i j) k).trans
+      ((norm_le_pi_norm (T y i) j).trans (norm_le_pi_norm (T y) i))).trans hTy
+  -- `∂Γ` value bound `Nc` on the confinement ball.
+  set T2 : Point n → (Fin n → Fin n → Fin n → Fin n → ℝ) :=
+    fun y => (fun i j k l => pd (fun z => christoffel g gi i j k z) l y) with hT2def
+  have hT2cd : ContDiff ℝ (⊤ : WithTop ℕ∞) T2 :=
+    contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => contDiff_pi.mpr fun k =>
+      contDiff_pi.mpr fun l => christoffel_pd_contDiff g gi hC i j k l
+  obtain ⟨Nc, hNcsub⟩ :=
+    (((isCompact_closedBall p R).image_of_continuousOn
+      hT2cd.continuous.continuousOn).isBounded).subset_closedBall
+      (0 : Fin n → Fin n → Fin n → Fin n → ℝ)
+  have hNc0 : 0 ≤ Nc :=
+    le_trans (norm_nonneg _)
+      (by have := hNcsub (Set.mem_image_of_mem T2 hpmem)
+          rwa [Metric.mem_closedBall, dist_zero_right] at this :
+        ‖T2 p‖ ≤ Nc)
+  have hNc : ∀ y ∈ Metric.closedBall p R, ∀ i j k l,
+      |pd (fun z => christoffel g gi i j k z) l y| ≤ Nc := by
+    intro y hy i j k l
+    have hT2y : ‖T2 y‖ ≤ Nc := by
+      have := hNcsub (Set.mem_image_of_mem T2 hy)
+      rwa [Metric.mem_closedBall, dist_zero_right] at this
+    have e : pd (fun z => christoffel g gi i j k z) l y = T2 y i j k l := by simp only [hT2def]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm (T2 y i j k) l).trans
+      ((norm_le_pi_norm (T2 y i j) k).trans
+        ((norm_le_pi_norm (T2 y i) j).trans (norm_le_pi_norm (T2 y) i)))).trans hT2y
+  -- the composed order-0 constant.
+  set C : ℝ := Nc * (n : ℝ) ^ 3 * C₀ ^ 2 * ρ + 2 * (Mc * (n : ℝ) ^ 2) * C₀ with hCdef
+  have hC0 : 0 ≤ C := by
+    rw [hCdef]
+    have t1 : 0 ≤ Nc * (n : ℝ) ^ 3 * C₀ ^ 2 * ρ :=
+      mul_nonneg (mul_nonneg (mul_nonneg hNc0 (by positivity)) (sq_nonneg _)) hρpos.le
+    have t2 : 0 ≤ 2 * (Mc * (n : ℝ) ^ 2) * C₀ :=
+      mul_nonneg (mul_nonneg (by norm_num) (mul_nonneg hMc0 (by positivity))) hC₀
+    linarith
+  refine ⟨ρ, hρpos, C, hC0, ?_⟩
+  intro v hvρ t ht
+  obtain ⟨hY0, hYd, hYconf⟩ := expTube_spec g gi hC p v hvρ
+  set Y : ℝ → Point n × Point n := expTube g gi hC p v with hYdef
+  have hconf := hYconf t ht
+  have hu_le : ‖(Y t).2‖ ≤ C₀ * ‖v‖ := by
+    have e : (Y t).2 = (Y t - ((p, 0) : Point n × Point n)).2 := by simp [Prod.snd_sub]
+    rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_right _ _) hconf
+  have hy1 : ‖(Y t).1 - p‖ ≤ C₀ * ‖v‖ := by
+    have e : (Y t).1 - p = (Y t - ((p, 0) : Point n × Point n)).1 := by simp [Prod.fst_sub]
+    rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_left _ _) hconf
+  have hyxmem : (Y t).1 ∈ Metric.closedBall p R := by
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    calc ‖(Y t).1 - p‖ ≤ C₀ * ‖v‖ := hy1
+      _ ≤ C₀ * ρ := mul_le_mul_of_nonneg_left hvρ hC₀
+      _ = R := by rw [hRdef]
+  -- the pointwise operator-norm bound at the tube point `(Y t)`.
+  have hbnd := geodesicField_fderiv_sub_linF_opNorm_le g gi hC ((Y t).1) ((Y t).2)
+    hMc0 hNc0 (fun i j k => hMc ((Y t).1) hyxmem i j k)
+    (fun i j k l => hNc ((Y t).1) hyxmem i j k l)
+  rw [Prod.mk.eta] at hbnd
+  -- dominate the `‖u‖`-polynomial by `C·‖v‖`.
+  have hu0 : 0 ≤ ‖(Y t).2‖ := norm_nonneg _
+  have hV0 : 0 ≤ ‖v‖ := norm_nonneg _
+  have hMcn0 : 0 ≤ Mc * (n : ℝ) ^ 2 := mul_nonneg hMc0 (by positivity)
+  have hNcn0 : 0 ≤ Nc * (n : ℝ) ^ 3 := mul_nonneg hNc0 (by positivity)
+  have hsq : ‖(Y t).2‖ * ‖(Y t).2‖ ≤ (C₀ * ‖v‖) * (C₀ * ‖v‖) :=
+    mul_le_mul hu_le hu_le hu0 (mul_nonneg hC₀ hV0)
+  have hv2 : ‖v‖ * ‖v‖ ≤ ρ * ‖v‖ := mul_le_mul_of_nonneg_right hvρ hV0
+  have hterm1 : Nc * (n : ℝ) ^ 3 * ‖(Y t).2‖ ^ 2
+      ≤ Nc * (n : ℝ) ^ 3 * (C₀ ^ 2 * (ρ * ‖v‖)) := by
+    apply mul_le_mul_of_nonneg_left _ hNcn0
+    calc ‖(Y t).2‖ ^ 2 = ‖(Y t).2‖ * ‖(Y t).2‖ := pow_two _
+      _ ≤ (C₀ * ‖v‖) * (C₀ * ‖v‖) := hsq
+      _ = C₀ ^ 2 * (‖v‖ * ‖v‖) := by ring
+      _ ≤ C₀ ^ 2 * (ρ * ‖v‖) := mul_le_mul_of_nonneg_left hv2 (sq_nonneg _)
+  have hterm2 : 2 * (Mc * (n : ℝ) ^ 2) * ‖(Y t).2‖
+      ≤ 2 * (Mc * (n : ℝ) ^ 2) * (C₀ * ‖v‖) :=
+    mul_le_mul_of_nonneg_left hu_le (mul_nonneg (by norm_num) hMcn0)
+  calc ‖fderiv ℝ (geodesicField g gi) (Y t) - linF‖
+      ≤ Nc * (n : ℝ) ^ 3 * ‖(Y t).2‖ ^ 2 + 2 * (Mc * (n : ℝ) ^ 2) * ‖(Y t).2‖ := hbnd
+    _ ≤ Nc * (n : ℝ) ^ 3 * (C₀ ^ 2 * (ρ * ‖v‖)) + 2 * (Mc * (n : ℝ) ^ 2) * (C₀ * ‖v‖) :=
+        add_le_add hterm1 hterm2
+    _ = C * ‖v‖ := by rw [hCdef]; ring
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order

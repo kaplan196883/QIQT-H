@@ -9847,4 +9847,16 @@ namespace QIQTH.AxiomAudit
 -- full Jacobian 2-jet, NOT the pullback metric, NOT numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_sub_linF_opNorm_le
 
+-- ExpMap.lean — EXP-JET3c STEP 1 (order-0 composed expansion) (2026-07-07): the uniform-in-t order-0
+-- DF expansion along the tube.  expJet_fderiv_tube_order0: ∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1],
+--   ‖DF(Y_v t) − A₀‖ ≤ C·‖v‖   (A₀ = linF = DF(e), Y_v = expTube p v).
+-- Composes the pointwise geodesicField_fderiv_sub_linF_opNorm_le with the a-priori confinement
+-- (‖(Y_v t).2‖ ≤ C₀‖v‖, (Y_v t).1 ∈ closedBall p (C₀ρ), from expTube_spec): the Christoffel value
+-- bound Mc and ∂Γ value bound Nc are uniform over the compact confinement ball (christoffel_pd_contDiff
+-- → continuity → bounded), and Nc·n³‖u‖²+2Mc·n²‖u‖ ≤ C·‖v‖ via ‖u‖≤C₀‖v‖≤C₀ρ.  The order-0 (leading
+-- A₀) term of the uniform DF(Y_y t)=A₀+A₁(t,y)+A₂(t,y)+o(‖y‖²) expansion, now stated as a theorem.
+-- HONEST: order-0 remainder — does NOT identify A₁, A₂, NOT the Jacobian 2-jet, NOT the pullback
+-- metric, NOT numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet_fderiv_tube_order0
+
 end QIQTH.AxiomAudit

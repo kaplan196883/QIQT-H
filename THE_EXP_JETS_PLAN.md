@@ -197,6 +197,23 @@ remain). Never claim numerical-G or a curved heat kernel.
     `K_y=K₀+K₁+K₂` from the triangular ODEs (`A₀²=0`); the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`;
     and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the operator-norm "`A₀` is leading" bound —
     does NOT identify `A₁, A₂`, NOT the full Jacobian 2-jet, NOT the pullback metric, NOT numerical-G.
+  - [x] **EXP-JET3c (STEP 1, order-0 composed) — the uniform-in-`t` order-0 `DF` expansion along the tube. DONE
+    2026-07-07.**  Landed green in `ExpMap.lean` ([AF] std-3, budget 0): **`expJet_fderiv_tube_order0`** — the ORDER-0
+    (leading `A₀`) term of the uniform `DF(Y_v t)` expansion, now a theorem: `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1],
+    ‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` (`A₀=linF=DF(e)`, `Y_v=expTube p v`).  Route (as scoped): compose the pointwise
+    `geodesicField_fderiv_sub_linF_opNorm_le` with the a-priori confinement `expTube_spec` (`‖(Y_v t).2‖ ≤ C₀‖v‖`,
+    `(Y_v t).1 ∈ closedBall p (C₀ρ)`); the Christoffel value bound `Mc` and `∂Γ` value bound `Nc` are uniform over the
+    compact confinement ball (`christoffel_pd_contDiff` → continuity → `subset_closedBall` bound), and
+    `Nc·n³‖u‖²+2Mc·n²‖u‖ ≤ C·‖v‖` via `‖u‖≤C₀‖v‖≤C₀ρ` (`C=Nc·n³·C₀²·ρ+2·Mc·n²·C₀`).  ⚠ **STILL CHECKPOINTED (the
+    EXP-JET3c bulk):** the ORDER-1 coefficient `A₁(t,y)` (linear-in-`y`; anchored — `A₁` is `t`-independent, the
+    order-1 part of `DF(p,y)−A₀`, `= (0, i↦−∑_{jk}Γ^i_{jk,p}(η_j y_k + y_j η_k))`) with the operator remainder
+    `‖DF(Y_y t)−A₀−A₁‖ ≤ C‖y‖²` (needs the tube 2-jet `‖(Y_y t).2 − y‖=O(‖y‖²)` from `expTube_value_two_jet` +
+    Christoffel/∂Γ Lipschitz `christoffel_quad_diff_bound`); the ORDER-2 coefficient `A₂(t,y)` (quadratic-in-`y`;
+    `t`-dependent — the ∂Γ-trilinear `(∂Γ_p ξ)y_j y_k` + the `t·∂Γ_p·y` Γ-cross-terms); the model Jacobian
+    `K_y=K₀+K₁+K₂` from the triangular ODEs (`A₀²=0` ⟹ `K₀(t)=1+tA₀`, `K₁(t)=∫₀ᵗ(1+(t−s)A₀)A₁(s)K₀(s)ds`, `K₂`
+    analogously); the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected
+    `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the order-0 remainder — does NOT identify `A₁, A₂`, NOT the
+    Jacobian 2-jet, NOT the pullback metric, NOT numerical-G.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -223,6 +240,18 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 1, order-0 composed):** the uniform-in-`t` order-0 `DF` expansion along the tube
+  landed green ([AF] std-3, budget 0).  New theorem `expJet_fderiv_tube_order0` in `ExpMap.lean`:
+  `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` (`A₀=linF=DF(e)`, `Y_v=expTube p v`).  Composes the
+  pointwise `geodesicField_fderiv_sub_linF_opNorm_le` with the a-priori confinement (`‖(Y_v t).2‖≤C₀‖v‖`,
+  `(Y_v t).1∈closedBall p (C₀ρ)`, `expTube_spec`); `Mc` (Christoffel) and `Nc` (`∂Γ`) value bounds uniform over the
+  compact confinement ball via `christoffel_pd_contDiff`→continuity→`subset_closedBall`, and
+  `Nc·n³‖u‖²+2Mc·n²‖u‖ ≤ C·‖v‖` via `‖u‖≤C₀‖v‖≤C₀ρ`.  This turns the previously only-described order-0 (leading `A₀`)
+  term of the uniform `DF(Y_y t)=A₀+A₁(t,y)+A₂(t,y)+o(‖y‖²)` expansion into an actual theorem.  ⚠ CHECKPOINTED: the
+  order-1 coefficient `A₁` (t-independent, `= (0,i↦−∑_{jk}Γ^i_{jk,p}(η_j y_k+y_j η_k))`, with `o(‖y‖²)` operator
+  remainder needing the tube 2-jet `‖(Y_y t).2−y‖=O(‖y‖²)` + Christoffel/∂Γ Lipschitz), the order-2 coefficient `A₂`
+  (t-dependent), the model Jacobian `K_y`, the residual operator Grönwall, and the projected
+  `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 1 core):** the operator-norm "`A₀` is leading" bound landed green ([AF] std-3,
   budget 0).  New theorem `geodesicField_fderiv_sub_linF_opNorm_le` in `ExpMap.lean`: given `|Γ(x)| ≤ Mc`,
   `|∂Γ(x)| ≤ Nc`, `‖DF(x,u) − A₀‖ ≤ Nc·n³·‖u‖² + 2·(Mc·n²)·‖u‖` (`A₀=linF=DF(e)`).  The velocity slots of
