@@ -470,6 +470,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   EXIST as a chart** around `p`. This does **NOT** derive the RNC gauge IN those coordinates (`g(0)=δ`, `∂g(0)=0`,
   `∂_{(l}Γ_{jk)}(0)=0` still need the metric-in-normal-coordinates change of variables), does **NOT** build a curved
   heat kernel, and does **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP5 — the exp map's RADIAL 2-jet is `−Γ(p)` (honest normal-coordinate brick)** (`ExpMap.lean`
+  `expMap_radial_accel`, **[AF]** std-3, 2026-07-06). For a fixed direction `v`, the radial curve `t ↦ exp_p(t•v)` has
+  **first `t`-derivative `v`** at `0` and **second `t`-derivative `−Γ(p)(v,v)`** at `0`:
+  `HasDerivAt (fun t:ℝ => expMap g gi hC p (t•v)) v 0` ∧
+  `HasDerivAt (deriv (fun t:ℝ => expMap g gi hC p (t•v))) (−fun i => ∑ j ∑ k christoffel g gi i j k p * v j * v k) 0`.
+  Route (flow-free): a scale `s>0` with `‖s•v‖≤expRho` gives the confined tube `Y := expTube p (s•v)`; geodesic
+  homogeneity (`geodesic_rescale`) + local uniqueness (`geodesic_local_unique`, on a compact-image Lipschitz ball
+  bounding both `Y` and its rescaling on `(-1,3/2)`) identify `exp_p(t•v) = (Y (t/s)).1` on a `𝓝 0`-neighbourhood
+  (EventuallyEq); projecting the ODE `Y' = (Y.2, −∑Γ(Y.1)(Y.2,Y.2))` onto position (deriv = velocity `(Y τ).2`) then
+  velocity (deriv = acceleration), evaluated at `τ=0` where `Y 0 = (p, s•v)`, the two `1/s` chain-rule factors cancel
+  the two `s` in `s•v`, leaving exactly `−Γ(p)(v,v)`; the `deriv`-of-`deriv` transfer is `Filter.EventuallyEq.deriv` +
+  `HasDerivAt.congr_of_eventuallyEq`. ⚠ **HONEST CAPTION (binding)**: this is the exp map's **RADIAL 2-jet only** — the
+  radial DIAGONAL, **NOT** the RNC gauge (which needs the off-radial Jacobian field / higher jets = the Mathlib-absent
+  smooth-dependence-on-IC theorem). It does **NOT** discharge `hgauge`, **NOT** build normal-coordinate metric jets,
+  **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

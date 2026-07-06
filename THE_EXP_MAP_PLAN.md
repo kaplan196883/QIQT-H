@@ -179,3 +179,18 @@ numerical-G, the full gauge, or a curved heat kernel.
   never trip `geodesicField`/`christoffel`'s `whnf`. **HONEST:** local C¹ diffeo ⟹ normal-coordinate CHART exists; NOT the
   RNC gauge in those coordinates (still needs the metric-in-normal-coordinates change of variables), NOT a curved heat
   kernel, NOT numerical-G (N, Λ_s, E/ξ remain).
+- **2026-07-06 (radial 2-jet = −Γ(p) LANDED):** `QIQTH/ExpMap.lean`, one new theorem `expMap_radial_accel`, [AF]
+  std-3, budget 0, pinned in `AxiomAudit.lean`. For a fixed direction `v`, the curve `t ↦ exp_p(t•v)` has **first
+  `t`-derivative `v`** at `0` and **second `t`-derivative `−Γ(p)(v,v)`** at `0`
+  (`HasDerivAt (fun t : ℝ => expMap g gi hC p (t•v)) v 0` ∧
+  `HasDerivAt (deriv (fun t : ℝ => expMap g gi hC p (t•v))) (−fun i => ∑ j ∑ k christoffel g gi i j k p * v j * v k) 0`).
+  Route (flow-free): a scale `s>0` with `‖s•v‖≤expRho` gives the confined tube `Y := expTube p (s•v)`; geodesic
+  homogeneity (`geodesic_rescale`) + local uniqueness (`geodesic_local_unique`, on a compact-image Lipschitz ball
+  containing both the tube and its rescaling on `(-1,3/2)`) identify `exp_p(t•v) = (Y (t/s)).1` on a `𝓝 0`-neighbourhood
+  (EventuallyEq); projecting the ODE `Y' = (Y.2, −∑Γ(Y.1)(Y.2,Y.2))` onto position (deriv = velocity) then velocity
+  (deriv = acceleration), evaluated at `τ=0` where `Y 0 = (p, s•v)`, the two `1/s` chain-rule factors cancel the two
+  `s` in `s•v`, leaving exactly `−Γ(p)(v,v)`; `deriv`-of-`deriv` bookkeeping via `EventuallyEq.deriv` +
+  `HasDerivAt.congr_of_eventuallyEq`. **HONEST CAPTION (binding):** this is the exp map's RADIAL 2-jet only — the radial
+  DIAGONAL, NOT the RNC gauge (which needs the off-radial Jacobian field / higher jets = the Mathlib-absent
+  smooth-dependence-on-IC theorem). It does NOT discharge `hgauge`, NOT build normal-coordinate metric jets, NOT move
+  numerical-G (N, Λ_s, E/ξ remain).

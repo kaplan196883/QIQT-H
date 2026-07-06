@@ -9668,4 +9668,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.hasStrictFDerivAt_expMap
 #print axioms QIQTH.ExpMap.expMap_localInverse
 
+-- ExpMap.lean — the exp map's radial 2-jet is −Γ(p) (honest normal-coordinate brick), 2026-07-06.
+-- expMap_radial_accel: for a fixed direction v, the curve t ↦ exp_p(t•v) has first t-derivative v at 0
+-- (HasDerivAt (fun t : ℝ => expMap g gi hC p (t•v)) v 0) and second t-derivative −Γ(p)(v,v) at 0
+-- (HasDerivAt (deriv (fun t : ℝ => expMap g gi hC p (t•v))) (−fun i => ∑ j ∑ k christoffel g gi i j k p * v j * v k) 0).
+-- Route (flow-free): a scale s>0 with ‖s•v‖ ≤ expRho gives the confined tube Y := expTube p (s•v); geodesic
+-- homogeneity (geodesic_rescale) + local uniqueness (geodesic_local_unique) identify exp_p(t•v) = (Y (t/s)).1 on a
+-- neighbourhood of 0 (EventuallyEq); the position component's t-derivative is the velocity (Y τ).2 and the velocity
+-- component's t-derivative is the acceleration −∑Γ(Y.1)(Y.2,Y.2), at τ=0 where Y 0 = (p, s•v); the two 1/s chain-rule
+-- factors cancel the two s in s•v, leaving exactly −Γ(p)(v,v). HONEST: this is the exp map's RADIAL 2-jet only — the
+-- radial DIAGONAL, NOT the RNC gauge (which needs the off-radial Jacobian field / higher jets = the Mathlib-absent
+-- smooth-dependence-on-IC theorem). It does NOT discharge hgauge, NOT build normal-coordinate metric jets, NOT move
+-- numerical-G (N, Λ_s, E/ξ remain). Axiom-free (standard three).
+#print axioms QIQTH.ExpMap.expMap_radial_accel
+
 end QIQTH.AxiomAudit

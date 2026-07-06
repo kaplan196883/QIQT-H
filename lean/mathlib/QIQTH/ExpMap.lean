@@ -31,7 +31,7 @@ import QIQTH.Geodesic
 namespace QIQTH.ExpMap
 
 open QIQTH.Curvature QIQTH.Geodesic
-open Finset
+open Finset Topology
 
 variable {n : ℕ}
 
@@ -979,5 +979,194 @@ theorem expMap_localInverse (g gi : Point n → Fin n → Fin n → ℝ)
   rw [ContinuousLinearEquiv.refl_symm, ContinuousLinearEquiv.coe_refl,
     hderiv.localInverse_def] at hli
   exact hli
+
+/-! ### The exponential map's radial 2-jet is `−Γ(p)`
+
+  This is the second-order radial behaviour of `exp_p` along a fixed direction `v`: the curve
+  `t ↦ exp_p(t•v)` has first `t`-derivative `v` at `0` and second `t`-derivative `−Γ(p)(v,v)` at `0`.
+  Concretely, `exp_p(t•v)` traces (a reparametrisation of) the geodesic through `p` with velocity `v`,
+  so its 2-jet reads off the geodesic field at the equilibrium: velocity then acceleration.
+
+  Route (flow-free): fix a scale `s>0` with `‖s•v‖ ≤ expRho` and let `Y := expTube p (s•v)` be the
+  confined `[0,1]` integral curve through `(p, s•v)` (`expTube_spec`).  Geodesic homogeneity
+  (`geodesic_rescale`) plus local uniqueness (`geodesic_local_unique`) identify
+  `exp_p(t•v) = (Y (t/s)).1` on a neighbourhood of `t=0`; then the first component `(Y τ).1` has
+  `t`-derivative `(Y τ).2` (velocity) and the second component `(Y τ).2` has `t`-derivative the
+  acceleration `−∑Γ(Y.1)(Y.2,Y.2)`, evaluated at `τ=0` where `Y 0 = (p, s•v)`.  The two factors of
+  `1/s` from the chain rule cancel the two factors of `s` in `s•v`, leaving exactly `−Γ(p)(v,v)`.
+
+  HONEST CAPTION (binding): this is the exp map's RADIAL 2-jet only — the second-order radial
+  behaviour of `exp_p(tv)` encodes `−Γ(p)(v,v)`.  It is the radial DIAGONAL, NOT the RNC gauge (which
+  needs the off-radial Jacobian field / higher jets — the Mathlib-absent smooth-dependence-on-IC
+  theorem).  It does NOT discharge `hgauge`, does NOT build normal-coordinate metric jets, and does
+  NOT move numerical-G (species count `N`, granularity scale `Λ_s`, the `E/ξ` term remain). -/
+set_option maxHeartbeats 1600000 in
+theorem expMap_radial_accel (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) :
+    HasDerivAt (fun t : ℝ => expMap g gi hC p (t • v)) v 0
+      ∧ HasDerivAt (deriv (fun t : ℝ => expMap g gi hC p (t • v)))
+          (-(fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k) : Point n) 0 := by
+  -- A scale `s>0` making `s•v` a legal (confined) tube direction.
+  set s : ℝ := min 1 (expRho g gi hC p / (‖v‖ + 1)) with hs_def
+  have hs0 : 0 < s :=
+    lt_min one_pos (div_pos (expRho_pos g gi hC p) (by positivity))
+  have hsne : s ≠ 0 := hs0.ne'
+  have hsv : ‖s • v‖ ≤ expRho g gi hC p := by
+    rw [norm_smul, Real.norm_eq_abs, abs_of_pos hs0]
+    have hs2 : s ≤ expRho g gi hC p / (‖v‖ + 1) := min_le_right _ _
+    calc s * ‖v‖ ≤ (expRho g gi hC p / (‖v‖ + 1)) * ‖v‖ :=
+          mul_le_mul_of_nonneg_right hs2 (norm_nonneg _)
+      _ ≤ expRho g gi hC p := by
+          rw [div_mul_eq_mul_div, div_le_iff₀ (by positivity)]
+          nlinarith [norm_nonneg v, (expRho_pos g gi hC p).le]
+  -- The confined tube `Y` through `(p, s•v)`.
+  obtain ⟨hY0, hYd, -⟩ := expTube_spec g gi hC p (s • v) hsv
+  set Y : ℝ → Point n × Point n := expTube g gi hC p (s • v) with hYdef
+  -- Projections of the ODE onto position/velocity components.
+  have hpos : ∀ τ ∈ Set.Ioo (-2 : ℝ) 2, HasDerivAt (fun u => (Y u).1) ((Y τ).2) τ := by
+    intro τ hτ
+    have := (ContinuousLinearMap.fst ℝ (Point n) (Point n)).hasFDerivAt.comp_hasDerivAt τ
+      (hYd τ hτ)
+    simpa [geodesicField] using this
+  have hvel : ∀ τ ∈ Set.Ioo (-2 : ℝ) 2,
+      HasDerivAt (fun u => (Y u).2) ((geodesicField g gi (Y τ)).2) τ := by
+    intro τ hτ
+    have := (ContinuousLinearMap.snd ℝ (Point n) (Point n)).hasFDerivAt.comp_hasDerivAt τ
+      (hYd τ hτ)
+    simpa using this
+  -- The radial position curve and its first derivative (chain rule with `τ = t/s`).
+  have hpos_comp : ∀ t : ℝ, t / s ∈ Set.Ioo (-2 : ℝ) 2 →
+      HasDerivAt (fun u => (Y (u / s)).1) ((1 / s) • (Y (t / s)).2) t := by
+    intro t hmem
+    have hlin : HasDerivAt (fun u : ℝ => u / s) (1 / s) t := by
+      simpa using (hasDerivAt_id t).div_const s
+    simpa [Function.comp] using (hpos (t / s) hmem).scomp t hlin
+  -- The acceleration at the base point, and its rescaled value `= −Γ(p)(v,v)`.
+  have haccel0 : (geodesicField g gi (Y 0)).2
+      = (fun i => -∑ j, ∑ k, christoffel g gi i j k p * (s * v j) * (s * v k)) := by
+    rw [hY0]; rfl
+  have hval : ((1 / s) • ((1 / s) • (geodesicField g gi (Y (0 / s))).2) : Point n)
+      = (-(fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k) : Point n) := by
+    rw [zero_div, haccel0]
+    funext i
+    simp only [Pi.smul_apply, smul_eq_mul, Pi.neg_apply]
+    rw [show (∑ j, ∑ k, christoffel g gi i j k p * (s * v j) * (s * v k))
+          = (s * s) * ∑ j, ∑ k, christoffel g gi i j k p * v j * v k from by
+        rw [Finset.mul_sum]
+        refine Finset.sum_congr rfl fun j _ => ?_
+        rw [Finset.mul_sum]
+        refine Finset.sum_congr rfl fun k _ => ?_
+        ring]
+    field_simp
+  -- Second radial derivative of the velocity component at `0`.
+  have hH_deriv0 : HasDerivAt (fun u => (1 / s) • (Y (u / s)).2)
+      (-(fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k) : Point n) 0 := by
+    have hlin0 : HasDerivAt (fun u : ℝ => u / s) (1 / s) 0 := by
+      simpa using (hasDerivAt_id (0 : ℝ)).div_const s
+    have h0mem : (0 : ℝ) / s ∈ Set.Ioo (-2 : ℝ) 2 := by
+      rw [zero_div]; exact ⟨by norm_num, by norm_num⟩
+    have hg0 : HasDerivAt (fun u => (Y (u / s)).2)
+        ((1 / s) • (geodesicField g gi (Y (0 / s))).2) 0 := by
+      simpa only [Function.comp] using (hvel (0 / s) h0mem).scomp (0 : ℝ) hlin0
+    have hg1 := hg0.const_smul (1 / s)
+    rw [hval] at hg1
+    exact hg1
+  -- The identification `exp_p(t•v) = (Y (t/s)).1` on a neighbourhood of `0` (geodesic uniqueness).
+  have hEqA : (fun t : ℝ => expMap g gi hC p (t • v)) =ᶠ[𝓝 (0 : ℝ)] (fun t => (Y (t / s)).1) := by
+    apply Metric.eventually_nhds_iff.mpr
+    refine ⟨s, hs0, fun t ht => ?_⟩
+    rw [Real.dist_eq, sub_zero] at ht
+    have ha1 : |t / s| < 1 := by rw [abs_div, abs_of_pos hs0, div_lt_one hs0]; exact ht
+    have heqarg : t • v = (t / s) • (s • v) := by
+      rw [smul_smul, div_mul_cancel₀ t hsne]
+    have haw : ‖(t / s) • (s • v)‖ ≤ expRho g gi hC p := by
+      rw [norm_smul, Real.norm_eq_abs]
+      calc |t / s| * ‖s • v‖ ≤ 1 * ‖s • v‖ := mul_le_mul_of_nonneg_right ha1.le (norm_nonneg _)
+        _ = ‖s • v‖ := one_mul _
+        _ ≤ expRho g gi hC p := hsv
+    obtain ⟨hZ0, hZd, -⟩ := expTube_spec g gi hC p ((t / s) • (s • v)) haw
+    have hRd : ∀ τ : ℝ, (t / s) * τ ∈ Set.Ioo (-2 : ℝ) 2 →
+        HasDerivAt (fun τ' => rescaleCLM (t / s) (Y ((t / s) * τ')))
+          (geodesicField g gi (rescaleCLM (t / s) (Y ((t / s) * τ)))) τ :=
+      fun τ hτ => geodesic_rescale g gi hYd (t / s) τ hτ
+    have hIoosub : Set.Ioo (-1 : ℝ) (3 / 2) ⊆ Set.Ioo (-2 : ℝ) 2 :=
+      fun x hx => ⟨by linarith [hx.1], by linarith [hx.2]⟩
+    have hIccsub : Set.Icc (-1 : ℝ) (3 / 2) ⊆ Set.Ioo (-2 : ℝ) 2 :=
+      fun x hx => ⟨by linarith [hx.1], by linarith [hx.2]⟩
+    have hRmem_arg : ∀ τ ∈ Set.Icc (-1 : ℝ) (3 / 2), (t / s) * τ ∈ Set.Ioo (-2 : ℝ) 2 := by
+      intro τ hτ
+      have hτabs : |τ| ≤ 3 / 2 := by rw [abs_le]; exact ⟨by linarith [hτ.1], by linarith [hτ.2]⟩
+      have hlt : |(t / s) * τ| < 2 := by
+        rw [abs_mul]
+        calc |t / s| * |τ| ≤ 1 * (3 / 2) :=
+              mul_le_mul ha1.le hτabs (abs_nonneg _) (by norm_num)
+          _ = 3 / 2 := by norm_num
+          _ < 2 := by norm_num
+      exact Set.mem_Ioo.mpr (abs_lt.mp hlt)
+    -- bound the two curves' images on the compact interval `[-1, 3/2]`
+    have hZcont : ContinuousOn (expTube g gi hC p ((t / s) • (s • v)))
+        (Set.Icc (-1 : ℝ) (3 / 2)) :=
+      fun τ hτ => ((hZd τ (hIccsub hτ)).continuousAt).continuousWithinAt
+    obtain ⟨Mz, hMz⟩ :=
+      (((isCompact_Icc).image_of_continuousOn hZcont).isBounded).subset_closedBall
+        ((p, 0) : Point n × Point n)
+    have hRcont : ContinuousOn (fun τ' => rescaleCLM (t / s) (Y ((t / s) * τ')))
+        (Set.Icc (-1 : ℝ) (3 / 2)) :=
+      fun τ hτ => ((hRd τ (hRmem_arg τ hτ)).continuousAt).continuousWithinAt
+    obtain ⟨Mr, hMr⟩ :=
+      (((isCompact_Icc).image_of_continuousOn hRcont).isBounded).subset_closedBall
+        ((p, 0) : Point n × Point n)
+    obtain ⟨Klip, hLip⟩ := ((contDiff_geodesicField g gi hC).contDiffOn
+        (s := Metric.closedBall ((p, 0) : Point n × Point n) (max Mz Mr))).exists_lipschitzOnWith
+        (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+    have hZmem : ∀ τ ∈ Set.Ioo (-1 : ℝ) (3 / 2),
+        expTube g gi hC p ((t / s) • (s • v)) τ
+          ∈ Metric.closedBall ((p, 0) : Point n × Point n) (max Mz Mr) := fun τ hτ =>
+      Metric.closedBall_subset_closedBall (le_max_left _ _)
+        (hMz ⟨τ, Set.Ioo_subset_Icc_self hτ, rfl⟩)
+    have hRmem : ∀ τ ∈ Set.Ioo (-1 : ℝ) (3 / 2),
+        (fun τ' => rescaleCLM (t / s) (Y ((t / s) * τ'))) τ
+          ∈ Metric.closedBall ((p, 0) : Point n × Point n) (max Mz Mr) := fun τ hτ =>
+      Metric.closedBall_subset_closedBall (le_max_right _ _)
+        (hMr ⟨τ, Set.Ioo_subset_Icc_self hτ, rfl⟩)
+    have hEqon := geodesic_local_unique g gi (a := -1) (b := 3 / 2) (t₀ := 0)
+      ⟨by norm_num, by norm_num⟩ hLip
+      (fun τ hτ => ⟨hZd τ (hIoosub hτ), hZmem τ hτ⟩)
+      (fun τ hτ => ⟨hRd τ (hRmem_arg τ (Set.Ioo_subset_Icc_self hτ)), hRmem τ hτ⟩)
+      (by rw [hZ0]; simp [mul_zero, hY0, rescaleCLM_apply])
+    have hZR := hEqon (show (1 : ℝ) ∈ Set.Ioo (-1 : ℝ) (3 / 2) from ⟨by norm_num, by norm_num⟩)
+    show expMap g gi hC p (t • v) = (Y (t / s)).1
+    rw [heqarg]
+    simp only [expMap]
+    rw [hZR]
+    simp [rescaleCLM_apply, mul_one]
+  -- Part 1: the first radial derivative is `v`.
+  have hpart1 : HasDerivAt (fun t : ℝ => expMap g gi hC p (t • v)) v 0 := by
+    have h0mem : (0 : ℝ) / s ∈ Set.Ioo (-2 : ℝ) 2 := by
+      rw [zero_div]; exact ⟨by norm_num, by norm_num⟩
+    have hd := hpos_comp 0 h0mem
+    rw [show ((1 / s) • (Y (0 / s)).2 : Point n) = v by
+      rw [zero_div, hY0]
+      show (1 / s) • (s • v) = v
+      rw [smul_smul, one_div, inv_mul_cancel₀ hsne, one_smul]] at hd
+    exact hd.congr_of_eventuallyEq hEqA
+  -- Part 2: the second radial derivative is `−Γ(p)(v,v)`.
+  refine ⟨hpart1, ?_⟩
+  have hderivh_eq : deriv (fun u => (Y (u / s)).1)
+      =ᶠ[𝓝 (0 : ℝ)] (fun u => (1 / s) • (Y (u / s)).2) := by
+    have hloc : ∀ᶠ t in 𝓝 (0 : ℝ),
+        HasDerivAt (fun u => (Y (u / s)).1) ((1 / s) • (Y (t / s)).2) t := by
+      apply Metric.eventually_nhds_iff.mpr
+      refine ⟨2 * s, by positivity, fun t ht => ?_⟩
+      apply hpos_comp t
+      rw [Real.dist_eq, sub_zero] at ht
+      have hlt : |t / s| < 2 := by rw [abs_div, abs_of_pos hs0, div_lt_iff₀ hs0]; exact ht
+      exact Set.mem_Ioo.mpr (abs_lt.mp hlt)
+    exact hloc.mono (fun t ht => ht.deriv)
+  have hderiv_eq : deriv (fun t : ℝ => expMap g gi hC p (t • v))
+      =ᶠ[𝓝 (0 : ℝ)] (fun u => (1 / s) • (Y (u / s)).2) :=
+    (hEqA.deriv).trans hderivh_eq
+  exact hH_deriv0.congr_of_eventuallyEq hderiv_eq
 
 end QIQTH.ExpMap
