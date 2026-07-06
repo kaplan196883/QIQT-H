@@ -56,8 +56,32 @@ remain). Never claim numerical-G or a curved heat kernel.
   `expJet2_residual_deriv_eq`, `bilin_sub_smul_expand`, `tri_shared_telescope`, `bilin_taylor_repack`. **HONEST**: the
   Fréchet value 3-jet of `exp_p` at 0 — does NOT discharge `hgauge`, NOT build the pullback metric, NOT move
   numerical-G (`N`, `Λ_s`, `E/ξ` remain).
-- [ ] **EXP-JET3 — the Jacobian field expansion to order 2** (`fderiv exp_p y = 1 + B(y,·) + ½T(y,y,·) + o(‖y‖²)`),
+- [~] **EXP-JET3 — the Jacobian field expansion to order 2** (`fderiv exp_p y = 1 + B(y,·) + ½T(y,y,·) + o(‖y‖²)`),
   via the localized first-variation. Moderate/high; the `fderiv`-differentiability caveat is the crux.
+  - [x] **EXP-JET3a — SETUP for the localized first-variation / operator-valued fundamental solution. DONE 2026-07-07.**
+    **KEY FINDING:** Mathlib's Picard–Lindelöf `IsPicardLindelof f t₀ x₀ a r L K` is ALREADY nonautonomous
+    (`f : ℝ → E → E`; `Mathlib/Analysis/ODE/PicardLindelof.lean`); the autonomous corollaries wrap `(fun _ ↦ f)`
+    via `IsPicardLindelof.of_contDiffAt_one`. So GPT-5.5-pro's flagged crux ("Mathlib PL is autonomous-only, must
+    augment time") is FALSE — the nonautonomous fundamental solution `Φ_v` (field `Ψ_v t M = (DF(Y_v t)).comp M`,
+    linear ⇒ globally Lipschitz in `M`, continuous in `t`) is NOT blocked by a missing theorem; building it is a
+    large instantiation + assembly effort, not an infra gap. Green setup landed in `ExpMap.lean` ([AF] std-3,
+    budget 0): `expJetIota` (`ι h = (0,h)`, `inr`), `expJetPi` (`π (x,u) = x`, `fst`),
+    `geodesicField_differentiable` / `hasFDerivAt_geodesicField_fderiv` (`DF = fderiv F` exists everywhere ⇒ the
+    Jacobi coefficient `A_v(t)=DF(Y_v(t))` is honest, never junk `fderiv`),
+    `expJet_linVariation_residual_deriv` (the residual identity `R' = DF(Y₁)·R + N`,
+    `N = F(Y₂)−F(Y₁)−DF(Y₁)(Y₂−Y₁)`, for `R = (Y₂−Y₁) − J` and ANY Jacobi solution `J`, pure calculus + `DF`
+    linearity), and the analytic ingredient `geodesicField_uniform_C1_remainder` (UNIFORM first-order Taylor/C¹
+    remainder of `F` on any convex compact `S`: `∀ε>0 ∃δ>0`, `‖F a − F b − DF(b)(a−b)‖ ≤ ε‖a−b‖` for `a,b∈S`,
+    `‖a−b‖<δ`; Heine–Cantor uniform continuity of `fderiv F` + `Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le`
+    on the segment).
+  - [ ] **EXP-JET3b — CHECKPOINT (remaining work):** build `Φ_v` as a function with `Φ_v 0 = 1` and
+    `Φ_v' = DF(Y_v)·Φ_v` uniformly over `‖v‖ ≤ ρ₀` (instantiate the nonautonomous `IsPicardLindelof` for `Ψ_v`
+    on `[0,1]` — bounds/Lipschitz from the compact tube — extend to the unit interval uniformly in `v`), set
+    `J_k := Φ_v(·)(ι k)`, run the inhomogeneous Grönwall on `R_k` with `‖Z_k‖ ≤ Ctw‖k‖`
+    (`geodesic_twopoint_gronwall`) and `‖N_k‖ ≤ εCtw‖k‖` (`geodesicField_uniform_C1_remainder`) to get
+    `‖R_k(1)‖ = o(‖k‖)`, then project with `π` ⟹ `HasFDerivAt (expMap g gi hC p) (L v) v` near 0,
+    `L v := π ∘ (Φ_v 1) ∘ ι`. Missing Mathlib piece: NONE at the theorem level (PL is nonautonomous); the work
+    is the operator-valued fundamental-solution instantiation + the residual-Grönwall assembly.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -84,6 +108,13 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3a):** localized first-variation / operator-valued fundamental-solution SETUP landed green
+  ([AF] std-3, budget 0). KEY FINDING: Mathlib's Picard–Lindelöf is ALREADY nonautonomous
+  (`IsPicardLindelof f t₀ x₀ a r L K`, `f : ℝ → E → E`) — the "must augment time" worry is void. New lemmas in
+  `ExpMap.lean`: `expJetIota`, `expJetPi`, `geodesicField_differentiable`, `hasFDerivAt_geodesicField_fderiv`,
+  `expJet_linVariation_residual_deriv` (residual identity `R'=DF(Y₁)R+N`), `geodesicField_uniform_C1_remainder`
+  (uniform C¹ Taylor remainder on a convex compact set). The `Φ_v` construction + the `HasFDerivAt exp_p (L v) v`
+  little-o are CHECKPOINTED (EXP-JET3b) — no missing Mathlib theorem, a large assembly effort.
 - **2026-07 (scoped):** GPT-5.5-pro (high) overturned the prior "gated on general smooth-dependence" verdict: the
   pullback metric's finite Taylor coefficients at 0 need only finite jets of `exp_p` at 0, reachable by the
   equilibrium two-point-Grönwall technique (value 2-/3-jet + localized Jacobian expansion) — NOT the general theorem.

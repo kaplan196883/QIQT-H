@@ -9726,4 +9726,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.bilin_taylor_repack
 #print axioms QIQTH.ExpMap.expMap_value_three_jet
 
+-- ExpMap.lean — EXP-JET3a (setup, 2026-07-07): the localized first-variation / operator-valued
+-- fundamental-solution SETUP toward the Jacobian-field expansion (EXP-JET3, THE_EXP_JETS_PLAN.md).
+-- KEY FINDING: Mathlib's Picard–Lindelöf `IsPicardLindelof f t₀ x₀ a r L K` is already NONAUTONOMOUS
+-- (f : ℝ → E → E); the autonomous corollaries wrap (fun _ ↦ f). So the nonautonomous fundamental
+-- solution Φ_v (Φ'=DF(Y_v(t))·Φ, Φ 0 = 1) is NOT blocked by a missing Mathlib theorem — it is a
+-- (large) instantiation + assembly effort, checkpointed. Green setup landed here:
+-- expJetIota (ι h = (0,h), inr) / expJetPi (π (x,u) = x, fst) — inclusion/projection CLMs.
+-- geodesicField_differentiable / hasFDerivAt_geodesicField_fderiv: DF = fderiv F exists everywhere
+-- (F is C^∞), so the Jacobi coefficient A_v(t)=DF(Y_v(t)) is honest (never junk fderiv).
+-- expJet_linVariation_residual_deriv: the residual ODE identity R' = DF(Y₁)·R + N, N = F(Y₂) − F(Y₁)
+-- − DF(Y₁)(Y₂−Y₁), for R = (Y₂−Y₁) − J and ANY J solving the Jacobi eqn J' = DF(Y₁)·J (pure calculus +
+-- DF linearity). geodesicField_uniform_C1_remainder: the analytic ingredient — UNIFORM first-order
+-- (C¹) Taylor remainder of F on any convex compact S, ∀ε>0 ∃δ>0 ‖F a − F b − DF(b)(a−b)‖ ≤ ε‖a−b‖ for
+-- a,b∈S, ‖a−b‖<δ (Heine–Cantor uniform continuity of fderiv F + mean-value inequality on the segment).
+-- HONEST: flow-independent SETUP toward EXP-JET3 → discharging hgauge. Does NOT build Φ_v, NOT the
+-- localized first variation, NOT the Jacobian expansion, NOT the pullback metric, NOT numerical-G
+-- (N, Λ_s, E/ξ remain). All [AF] std-3.
+#print axioms QIQTH.ExpMap.expJetIota_apply
+#print axioms QIQTH.ExpMap.expJetPi_apply
+#print axioms QIQTH.ExpMap.geodesicField_differentiable
+#print axioms QIQTH.ExpMap.hasFDerivAt_geodesicField_fderiv
+#print axioms QIQTH.ExpMap.expJet_linVariation_residual_deriv
+#print axioms QIQTH.ExpMap.geodesicField_uniform_C1_remainder
+
 end QIQTH.AxiomAudit

@@ -521,6 +521,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the position projection at `t=1` closes the `o(‖v‖³)`. ⚠ **HONEST CAPTION (binding)**: this is the **Fréchet value
   3-jet of `exp_p` at `0`**; it does **NOT** discharge `hgauge`, **NOT** build the pullback metric, **NOT** move
   numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3a — SETUP for the localized first-variation / operator-valued fundamental solution** (`ExpMap.lean`, all
+  **[AF]** std-3, budget 0, DONE 2026-07-07): flow-independent groundwork toward the Jacobian-field expansion (EXP-JET3,
+  `fderiv exp_p y = 1 + B(y,·) + ½T(y,y,·) + o(‖y‖²)`). **KEY FINDING:** Mathlib's Picard–Lindelöf
+  `IsPicardLindelof f t₀ x₀ a r L K` is ALREADY nonautonomous (`f : ℝ → E → E`); the autonomous corollaries wrap
+  `(fun _ ↦ f)`. So the nonautonomous fundamental solution `Φ_v` (`Φ'=DF(Y_v(t))·Φ`, `Φ 0=1`) is **not blocked by a
+  missing theorem** — building it is a large instantiation + assembly effort. Landed: `expJetIota` (`ι h=(0,h)`, `inr`),
+  `expJetPi` (`π (x,u)=x`, `fst`); `geodesicField_differentiable` / `hasFDerivAt_geodesicField_fderiv` (`DF=fderiv F`
+  exists everywhere ⇒ the Jacobi coefficient `A_v(t)=DF(Y_v(t))` is honest, never junk `fderiv`);
+  `expJet_linVariation_residual_deriv` (the residual identity `R'=DF(Y₁)·R+N`, `N=F(Y₂)−F(Y₁)−DF(Y₁)(Y₂−Y₁)`, for
+  `R=(Y₂−Y₁)−J` and ANY Jacobi solution `J`, pure calculus + `DF` linearity); and the analytic ingredient
+  `geodesicField_uniform_C1_remainder` (UNIFORM first-order/C¹ Taylor remainder of `F` on any convex compact `S`:
+  `∀ε>0 ∃δ>0`, `‖F a−F b−DF(b)(a−b)‖ ≤ ε‖a−b‖` for `a,b∈S`, `‖a−b‖<δ`; Heine–Cantor uniform continuity of `fderiv F` +
+  `Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le` on the segment). ⚠ **CHECKPOINTED (EXP-JET3b):** the `Φ_v`
+  construction (nonautonomous `IsPicardLindelof` instantiation for `Ψ_v t M=(DF(Y_v t)).comp M`, uniform over the ball)
+  and the target `HasFDerivAt (expMap g gi hC p) (π∘(Φ_v 1)∘ι) v` little-o are NOT yet built. ⚠ **HONEST CAPTION
+  (binding):** flow-independent SETUP toward EXP-JET3 → discharging `hgauge`; it does **NOT** build `Φ_v`, **NOT** give
+  the localized first variation, **NOT** the Jacobian expansion, **NOT** the pullback metric, **NOT** numerical-`G`
+  (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

@@ -2525,4 +2525,162 @@ theorem expMap_value_three_jet (g gi : Point n → Fin n → Fin n → ℝ)
   calc Cfinal * ‖v‖ ^ 4 = Cfinal * ‖v‖ * ‖v‖ ^ 3 := by ring
     _ ≤ c * ‖v‖ ^ 3 := mul_le_mul_of_nonneg_right hCv (by positivity)
 
+/-! ### EXP-JET3a — setup for the localized first-variation / operator-valued fundamental solution
+
+  Toward EXP-JET3 (the Jacobian field expansion `fderiv exp_p y = 1 + B(y,·) + ½T(y,y,·) + o(‖y‖²)`),
+  the crux is the localized first variation `HasFDerivAt (w ↦ Y_w t) (Φ_v t ∘ ι) v` for `v` near 0,
+  where `Φ_v` is the operator-valued fundamental solution of the linearized (Jacobi) equation
+  `Φ' = DF(Y_v(t))·Φ`, `Φ_v 0 = 1`, along the FIXED confined tube `Y_v = expTube p v`, and
+  `ι k = (0,k)`, `π (x,u) = x`, `L v := π ∘ (Φ_v 1) ∘ ι`.  GPT-5.5-pro flagged `Φ_v` as a
+  NONAUTONOMOUS linear ODE and worried Mathlib's Picard–Lindelöf is autonomous-only.
+
+  **KEY FINDING (this increment):** Mathlib's Picard–Lindelöf `IsPicardLindelof f t₀ x₀ a r L K` is
+  ALREADY stated for a TIME-DEPENDENT field `f : ℝ → E → E` (`Mathlib/Analysis/ODE/PicardLindelof.lean`;
+  the autonomous corollaries wrap `(fun _ ↦ f)` via `IsPicardLindelof.of_contDiffAt_one`).  So the
+  nonautonomous fundamental solution `Φ_v` (field `Ψ_v t M = (DF(Y_v t)).comp M`, linear ⇒ globally
+  Lipschitz in `M`, continuous in `t` since `Y_v` and `fderiv F` are continuous) is NOT blocked by a
+  missing Mathlib theorem — it is a (large) instantiation-plus-assembly effort, not an infrastructure gap.
+
+  This increment lands the flow-independent SETUP pieces that build green:
+  * `expJetIota` / `expJetPi` — the inclusion `ι` and projection `π` (`inr` / `fst` as CLMs);
+  * `geodesicField_differentiable` / `hasFDerivAt_geodesicField_fderiv` — `DF = fderiv F` exists
+    everywhere (`F` is `C^∞`);
+  * `expJet_linVariation_residual_deriv` — the residual ODE identity `R' = DF(Y₁)·R + N` with
+    `N = F(Y₂) − F(Y₁) − DF(Y₁)(Y₂ − Y₁)`, for `R = (Y₂ − Y₁) − J` and ANY `J` solving the Jacobi
+    equation `J' = DF(Y₁)·J` along `Y₁` (pure calculus + `DF` linearity);
+  * `geodesicField_uniform_C1_remainder` — the genuine analytic ingredient: the UNIFORM first-order
+    Taylor (C¹) remainder of `F` on any convex compact set `S`, `∀ε>0 ∃δ>0`, `‖F a − F b − DF(b)(a−b)‖
+    ≤ ε‖a−b‖` whenever `a,b∈S`, `‖a−b‖<δ` (Heine–Cantor uniform continuity of `fderiv F` on `S` +
+    the mean-value inequality `Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le` on the segment).
+
+  CHECKPOINT (NOT yet built): the fundamental solution `Φ_v` as a function with `Φ_v 0 = 1` and
+  `Φ_v' = DF(Y_v)·Φ_v` uniformly over `‖v‖ ≤ ρ₀`, and the target
+  `HasFDerivAt (expMap g gi hC p) (π ∘ (Φ_v 1) ∘ ι) v` near 0.  The remaining work is: instantiate the
+  nonautonomous `IsPicardLindelof` for `Ψ_v` on `[0,1]` (bounds/Lipschitz from the compact tube),
+  extend to the unit interval uniformly in `v`, take `J_k := Φ_v(·)(ι k)`, and run the inhomogeneous
+  Grönwall on `R_k` with `‖Z_k‖ ≤ Ctw‖k‖` (`geodesic_twopoint_gronwall`) and `‖N_k‖ ≤ εCtw‖k‖`
+  (`geodesicField_uniform_C1_remainder`) to get `‖R_k(1)‖ = o(‖k‖)`, then project with `π`.
+
+  HONEST CAPTION (binding): flow-independent setup toward the Jacobian-field expansion (EXP-JET3),
+  itself a step toward discharging `hgauge`.  It does NOT yet build `Φ_v`, does NOT give the localized
+  first variation, does NOT give the Jacobian expansion, does NOT build the pullback metric, and does
+  NOT move numerical-G (species count `N`, granularity scale `Λ_s`, the `E/ξ` term remain). -/
+
+/-- **The inclusion `ι : Point n →L[ℝ] State`**, `ι h = (0, h)`.  Injects a velocity perturbation as
+    the initial condition `J_k(0) = (0,k)` of the first-variation (Jacobi) field along the tube. -/
+noncomputable def expJetIota : Point n →L[ℝ] (Point n × Point n) :=
+  ContinuousLinearMap.inr ℝ (Point n) (Point n)
+
+@[simp] theorem expJetIota_apply (h : Point n) :
+    expJetIota (n := n) h = ((0, h) : Point n × Point n) := rfl
+
+/-- **The projection `π : State →L[ℝ] Point n`**, `π (x,u) = x`.  Reads off the position component of
+    the fundamental solution at `t = 1` (`L v := π ∘ (Φ_v 1) ∘ ι`). -/
+noncomputable def expJetPi : (Point n × Point n) →L[ℝ] Point n :=
+  ContinuousLinearMap.fst ℝ (Point n) (Point n)
+
+@[simp] theorem expJetPi_apply (z : Point n × Point n) : expJetPi (n := n) z = z.1 := rfl
+
+/-- **The geodesic field is differentiable everywhere.**  `F = geodesicField g gi` is `C^∞`
+    (`contDiff_geodesicField`), hence differentiable; `DF := fderiv ℝ F` is well-defined (not junk). -/
+theorem geodesicField_differentiable (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) :
+    Differentiable ℝ (geodesicField g gi) :=
+  (contDiff_geodesicField g gi hC).differentiable (by simp)
+
+/-- **`DF = fderiv F` is a genuine Fréchet derivative of `F` at every phase point.**  The linear
+    coefficient `A_v(t) = DF(Y_v(t))` of the nonautonomous Jacobi ODE `Φ' = A_v(t)·Φ` is therefore
+    well-defined and honest (never junk off a differentiability set). -/
+theorem hasFDerivAt_geodesicField_fderiv (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (z : Point n × Point n) :
+    HasFDerivAt (geodesicField g gi) (fderiv ℝ (geodesicField g gi) z) z :=
+  (geodesicField_differentiable g gi hC z).hasFDerivAt
+
+/-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
+    curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
+    `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order
+    Taylor remainder `N(t) = F(Y₂ t) − F(Y₁ t) − DF(Y₁ t)(Y₂ t − Y₁ t)`.  Pure calculus:
+    `R' = (F(Y₂) − F(Y₁)) − DF(Y₁)(J)` and `DF(Y₁)(R) + N = DF(Y₁)(Y₂−Y₁−J) + N = F(Y₂) − F(Y₁) −
+    DF(Y₁)(J)` by linearity of `DF = fderiv F`.  This is the exact ODE the EXP-JET3 inhomogeneous
+    Grönwall integrates once `J := Φ_v(·)(ι k)` is supplied by the fundamental solution.
+
+    HONEST: this is the residual identity for an ABSTRACT Jacobi solution `J`; it does NOT construct
+    `J`/`Φ_v` (the nonautonomous fundamental solution) — that is the checkpointed remaining work. -/
+theorem expJet_linVariation_residual_deriv (g gi : Point n → Fin n → Fin n → ℝ)
+    {Y₁ Y₂ J : ℝ → Point n × Point n} {t : ℝ}
+    (h1 : HasDerivAt Y₁ (geodesicField g gi (Y₁ t)) t)
+    (h2 : HasDerivAt Y₂ (geodesicField g gi (Y₂ t)) t)
+    (hJ : HasDerivAt J (fderiv ℝ (geodesicField g gi) (Y₁ t) (J t)) t) :
+    HasDerivAt (fun τ => Y₂ τ - Y₁ τ - J τ)
+      (fderiv ℝ (geodesicField g gi) (Y₁ t) (Y₂ t - Y₁ t - J t)
+        + (geodesicField g gi (Y₂ t) - geodesicField g gi (Y₁ t)
+            - fderiv ℝ (geodesicField g gi) (Y₁ t) (Y₂ t - Y₁ t))) t := by
+  have hbase : HasDerivAt (fun τ => Y₂ τ - Y₁ τ - J τ)
+      (geodesicField g gi (Y₂ t) - geodesicField g gi (Y₁ t)
+        - fderiv ℝ (geodesicField g gi) (Y₁ t) (J t)) t := (h2.sub h1).sub hJ
+  have key : fderiv ℝ (geodesicField g gi) (Y₁ t) (Y₂ t - Y₁ t - J t)
+        + (geodesicField g gi (Y₂ t) - geodesicField g gi (Y₁ t)
+            - fderiv ℝ (geodesicField g gi) (Y₁ t) (Y₂ t - Y₁ t))
+      = geodesicField g gi (Y₂ t) - geodesicField g gi (Y₁ t)
+          - fderiv ℝ (geodesicField g gi) (Y₁ t) (J t) := by
+    rw [map_sub]; abel
+  rw [key]; exact hbase
+
+/-- **Uniform first-order (C¹) Taylor remainder of the geodesic field on a convex compact set.**  For
+    `S` convex and compact and `ε > 0`, there is `δ > 0` such that for all `a, b ∈ S` with `‖a−b‖ < δ`,
+    `‖F a − F b − DF(b)(a−b)‖ ≤ ε‖a−b‖`, `F = geodesicField g gi`, `DF = fderiv ℝ F`.
+
+    Proof: `F` is `C^∞`, so `fderiv F` is continuous, hence UNIFORMLY continuous on the compact `S`
+    (Heine–Cantor, `IsCompact.uniformContinuousOn_of_continuous`), giving `δ` with `‖DF x − DF b‖ ≤ ε`
+    for `x, b ∈ S`, `‖x−b‖ ≤ δ`.  On the segment `[b,a] ⊆ S` (convexity) every point is within `δ` of
+    `b`, so the mean-value inequality `Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le` applied to
+    `z ↦ F z − DF(b) z` (derivative `DF z − DF b`, norm `≤ ε`) yields the bound.
+
+    This is the uniform-remainder ingredient that will bound the inhomogeneous term
+    `‖N_k(t)‖ ≤ εCtw‖k‖` in the EXP-JET3 first-variation residual Grönwall.
+
+    HONEST: this is the analytic C¹-remainder of `F` on the tube; it does NOT by itself build the
+    fundamental solution `Φ_v` or the localized first variation. -/
+theorem geodesicField_uniform_C1_remainder
+    (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    {S : Set (Point n × Point n)} (hconv : Convex ℝ S) (hcomp : IsCompact S)
+    {ε : ℝ} (hε : 0 < ε) :
+    ∃ δ > (0 : ℝ), ∀ a ∈ S, ∀ b ∈ S, ‖a - b‖ < δ →
+      ‖geodesicField g gi a - geodesicField g gi b
+          - fderiv ℝ (geodesicField g gi) b (a - b)‖ ≤ ε * ‖a - b‖ := by
+  set F := geodesicField g gi with hFdef
+  have hFdiff : Differentiable ℝ F := (contDiff_geodesicField g gi hC).differentiable (by simp)
+  have hdFcont : Continuous (fderiv ℝ F) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have huc : UniformContinuousOn (fderiv ℝ F) S :=
+    hcomp.uniformContinuousOn_of_continuous hdFcont.continuousOn
+  obtain ⟨δ, hδ0, hδ⟩ := Metric.uniformContinuousOn_iff_le.mp huc ε hε
+  refine ⟨δ, hδ0, fun a ha b hb hab => ?_⟩
+  have hs'sub : segment ℝ b a ⊆ S := hconv.segment_subset hb ha
+  have hHderiv : ∀ x ∈ segment ℝ b a,
+      HasFDerivWithinAt (fun z => F z - fderiv ℝ F b z)
+        (fderiv ℝ F x - fderiv ℝ F b) (segment ℝ b a) x := fun x hx =>
+    (((hFdiff x).hasFDerivAt).sub ((fderiv ℝ F b).hasFDerivAt)).hasFDerivWithinAt
+  have hbound : ∀ x ∈ segment ℝ b a, ‖fderiv ℝ F x - fderiv ℝ F b‖ ≤ ε := by
+    intro x hx
+    rw [segment_eq_image'] at hx
+    obtain ⟨θ, hθ, rfl⟩ := hx
+    have hsub : (b + θ • (a - b)) - b = θ • (a - b) := by abel
+    have hxb : ‖(b + θ • (a - b)) - b‖ ≤ ‖a - b‖ := by
+      rw [hsub, norm_smul, Real.norm_eq_abs, abs_of_nonneg hθ.1]
+      calc θ * ‖a - b‖ ≤ 1 * ‖a - b‖ := mul_le_mul_of_nonneg_right hθ.2 (norm_nonneg _)
+        _ = ‖a - b‖ := one_mul _
+    have hxmemS : b + θ • (a - b) ∈ S :=
+      hs'sub (by rw [segment_eq_image']; exact ⟨θ, hθ, rfl⟩)
+    have hd := hδ (b + θ • (a - b)) hxmemS b hb
+      (by rw [dist_eq_norm]; exact le_trans hxb hab.le)
+    rwa [dist_eq_norm] at hd
+  calc ‖F a - F b - fderiv ℝ F b (a - b)‖
+      = ‖(fun z => F z - fderiv ℝ F b z) a - (fun z => F z - fderiv ℝ F b z) b‖ := by
+          congr 1; simp only [map_sub]; abel
+    _ ≤ ε * ‖a - b‖ := Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le
+          hHderiv hbound (convex_segment b a) (left_mem_segment ℝ b a) (right_mem_segment ℝ b a)
+
 end QIQTH.ExpMap
