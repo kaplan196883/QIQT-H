@@ -1,6 +1,6 @@
 # THE EXPONENTIAL MAP — `HasStrictFDerivAt exp_p id 0` via the equilibrium two-point Grönwall (dodges the C¹-flow gap)
 
-**Status:** SCOPED (fable + **GPT-5.5-pro** consults, verified against pin v4.30.0). **Track:** QG / curved-G.
+**Status:** CLOSED (S1–S6 all DONE, [AF] std-3, budget 0). **Track:** QG / curved-G.
 **Commits LOCAL ONLY** (session no-push). **User explicitly authorized this multi-increment effort.**
 
 ## Binding verdict (GPT-5.5-pro's route — the key improvement)
@@ -84,20 +84,26 @@ ABSENT: variational/Jacobi flow-in-IC differentiability, global linear-ODE exist
     CONSTANT (`α e = e`, by ODE uniqueness against the constant curve on the flow's compact range where `F` is
     Lipschitz), so its Lipschitz-in-IC bounds the rescaled tube. *This dodges the a-priori-bound clopen circularity.*
   **Both halves of the flagged crux (existence + confinement) are now UNCONDITIONAL over a ball.**
-- [ ] **S5 — `HasStrictFDerivAt exp_p (id) 0` (std-4) — CHECKPOINT: pure assembly (all analytic ingredients in
-  hand).** With existence + confinement closed, the ONLY remaining work is bookkeeping, no missing Mathlib theorem:
-  (1) **definitional bridge** — pin `expMap`'s value to the confined tube endpoint (`expMap p v = (Y_v 1).1` for
-  small `v`), redefining `expMap` via the confined tube (the current `Classical.choose`-of-local-existence `geodesicSol`
-  is only guaranteed on `(-δ_v,δ_v)`, so its value at `t=1` is not the geodesic endpoint — uniqueness pins the two
-  once both are `[0,1]` curves in a common Lipschitz set); (2) **`isLittleO` assembly** — for `c>0`, pick `η` so the
-  gronwall constant `≤ c`; `geodesic_apriori_confinement` puts `Y_v(t),Y_w(t)` in the S2 `η`-nbhd for `(v,w)` near
-  `(0,0)`; the S2 strict remainder gives `‖R‖≤η‖Y_v−Y_w‖`, `geodesic_twopoint_gronwall` gives
-  `‖Y_v−Y_w‖≤e^{K}‖v−w‖`, and `residual_gronwall` gives `‖r(1)‖≤(const)·η·‖v−w‖ ≤ c‖v−w‖`; project
-  `exp_p(v)−exp_p(w)−(v−w)=π₁ r(1)` ⟹ two-point `o(‖v−w‖)` ⟹ `HasStrictFDerivAt.of_isLittleO`. **What blocks:**
-  nothing analytic — this is a ~100-line filter/`η`-juggling assembly + the definitional-bridge uniqueness argument;
-  validly checkpointed for a follow-on increment.
-- [ ] **S6 — `exp_p` local C¹ diffeo at 0 (std-4).** `HasStrictFDerivAt.to_localInverse` (id invertible) ⟹ a
-  `PartialHomeomorph` inverse `exp_p⁻¹` = the normal-coordinate chart. **← the RNC local-diffeo gate.**
+- [x] **S5 — `HasStrictFDerivAt exp_p id 0` — DONE (`ExpMap.hasStrictFDerivAt_expMap`, 2026-07-06, [AF] std-3).**
+  `HasStrictFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) 0`. **Definitional bridge fixed via route
+  (a):** `expMap` is now DEFINED from the confined `[0,1]` tube — `exists_confined_tube_family` skolemizes
+  `geodesic_apriori_confinement`'s per-velocity tube into ONE tube-valued function `expTube` (choice over the guarded
+  existential, junk outside the ball), `expMap p v := (expTube p v 1).1`, with `expTube_spec` giving the genuine
+  geodesic endpoint for `‖v‖ ≤ expRho`. **`isLittleO` assembly:** for `c>0`, `η := c/(M+1)` with `M = e^{K}·β`,
+  `β = gronwallBound 0 ‖A‖ 1 1` (via `gronwallBound_zero_linear`, the `ε`-linearity of the bound); the confinement puts
+  `Y_v(t),Y_w(t)` in the S2 `η`-nbhd, the S2 strict remainder (`hasStrictFDerivAt_geodesicField`) gives `‖R‖≤η‖Y_v−Y_w‖`,
+  `geodesic_twopoint_gronwall` gives `‖Y_v−Y_w‖≤e^{K}‖v−w‖`, `residual_gronwall` gives `‖r(1)‖≤c‖v−w‖`, and the position
+  projection `π₁ r(1) = exp_p v − exp_p w − (v−w)` closes the two-point `o(‖v−w‖)`.  Two mechanical hazards handled:
+  the `Classical.choose`-heavy `expTube` is made `irreducible` + fixed as opaque locals (`set … ; clear_value`) so
+  `whnf`/`isDefEq` never expand it, and the S2 estimate is unpacked to a bare-point two-argument form so pair
+  projections never meet `geodesicField`/`christoffel`'s `whnf`.
+- [x] **S6 — `exp_p` local C¹ diffeo at 0 — DONE (`ExpMap.expMap_localInverse`, 2026-07-06, [AF] std-3).**
+  `HasStrictFDerivAt.toOpenPartialHomeomorph` (with `id = ↑(ContinuousLinearEquiv.refl …)` invertible) ⟹ an
+  `OpenPartialHomeomorph φ` with `⇑φ = expMap`, `0 ∈ φ.source`, and a continuous local inverse `φ.symm` whose strict
+  derivative at `expMap 0` is again `id` (via `to_localInverse` + `localInverse_def` + `refl_symm`/`coe_refl`).  `φ.symm`
+  IS the normal-coordinate chart. **← the RNC local-diffeo gate, CLOSED.**  HONEST: this reaches a local C¹ diffeo
+  ⟹ normal coordinates EXIST as a chart; it does NOT derive the RNC gauge in those coordinates, NOT a curved heat
+  kernel, NOT numerical-G.
 
 ## Verbatim HAVE / HAVE-NOT
 - **HAVE:** "The geodesic exponential map `exp_p` has `HasStrictFDerivAt exp_p id 0` and is a local C¹ diffeomorphism
@@ -158,3 +164,18 @@ numerical-G, the full gauge, or a curved heat kernel.
   **CHECKPOINTED — S5:** now PURE ASSEMBLY (no missing Mathlib theorem): definitional bridge (pin `expMap` to the
   confined tube endpoint) + the `isLittleO` `η`-juggling feeding confinement + S2 remainder + two-point Grönwall +
   `residual_gronwall`. HONEST: NOT yet `exp_p`'s strict derivative, NOT the diffeo, NOT the RNC gauge, NOT numerical-G.
+- **2026-07-06 (S5 + S6 — the exp-map campaign CLOSED):** `QIQTH/ExpMap.lean`, seven new declarations, all [AF] std-3,
+  budget 0, pinned in `AxiomAudit.lean`. **Definitional bridge (route a):** `expMap` REDEFINED from the confined `[0,1]`
+  tube — `exists_confined_tube_family` skolemizes `geodesic_apriori_confinement` into the tube function `expTube`
+  (`expRho`/`expConst`/`expTube` selectors + `expTube_spec`), `expMap p v := (expTube p v 1).1` (the old
+  `geodesicSol`-based scaffolding `expMap` was deleted; `geodesicSol` + its lemmas remain). **S5**
+  (`hasStrictFDerivAt_expMap`): `HasStrictFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) 0`, assembled
+  through `hasStrictFDerivAt_iff_isLittleO`/`isLittleO_iff` from the S2 strict field remainder + `geodesic_twopoint_gronwall`
+  + `residual_gronwall` + `gronwallBound_zero_linear` (new: `ε`-linearity of the Grönwall bound). **S6**
+  (`expMap_localInverse`): `HasStrictFDerivAt.toOpenPartialHomeomorph` gives an `OpenPartialHomeomorph φ`, `⇑φ = expMap`,
+  `0 ∈ φ.source`, and `HasStrictFDerivAt φ.symm id (expMap 0)` — normal coordinates EXIST as a chart. Two mechanical
+  hazards solved: `expTube` (a `Classical.choose` chain) made `irreducible` + fixed as opaque locals via `set`+`clear_value`
+  so `whnf`/`isDefEq` never expand it; and the S2 little-o unpacked to a bare-point two-argument form so pair projections
+  never trip `geodesicField`/`christoffel`'s `whnf`. **HONEST:** local C¹ diffeo ⟹ normal-coordinate CHART exists; NOT the
+  RNC gauge in those coordinates (still needs the metric-in-normal-coordinates change of variables), NOT a curved heat
+  kernel, NOT numerical-G (N, Λ_s, E/ξ remain).

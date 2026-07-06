@@ -9645,4 +9645,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesic_unit_tube_existence
 #print axioms QIQTH.ExpMap.geodesic_apriori_confinement
 
+-- ExpMap.lean — S5 + S6: exp_p's strict derivative at 0 and the local diffeo (RNC local-diffeo gate), 2026-07-06.
+-- gronwallBound_zero_linear: linearity of the inhomogeneous Grönwall bound in ε (gronwallBound 0 K ε 1 = ε·gronwallBound 0 K 1 1).
+-- exists_confined_tube_family: skolemizes geodesic_apriori_confinement's per-velocity tube into ONE tube-valued function
+-- Y : Point n → ℝ → Point n × Point n, specified uniformly for ‖v‖ ≤ ρ (junk outside). expTube_spec: the genuine [0,1]
+-- confined geodesic tube through (p,v) (start (p,v); solves the ODE on (-2,2)⊇[0,1]; stays expConst·‖v‖-close to (p,0) on
+-- [0,1]) — the definitional bridge pinning expMap p v := (expTube p v 1).1 to the geodesic endpoint for small v.
+-- hasStrictFDerivAt_expMap (S5): HasStrictFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) 0 — the two-point
+-- little-o ‖exp_p v − exp_p w − (v−w)‖ = o(‖v−w‖), assembled from the S2 strict field remainder (hasStrictFDerivAt_geodesicField)
+-- + the two-point flow-Lipschitz bound (geodesic_twopoint_gronwall) + the inhomogeneous residual Grönwall (residual_gronwall),
+-- through the isLittleO characterisation. expMap_localInverse (S6): the inverse function theorem
+-- (HasStrictFDerivAt.toOpenPartialHomeomorph, id invertible) exhibits expMap as an OpenPartialHomeomorph at 0 (⇑φ = expMap,
+-- 0 ∈ φ.source) with a continuous local inverse φ.symm whose strict derivative at expMap 0 is id — the normal-coordinate chart.
+-- HONEST: this reaches exp_p a local C¹ diffeo ⟹ normal coordinates EXIST as a chart. It does NOT derive the RNC gauge in those
+-- coordinates (g(0)=δ, ∂g(0)=0, ∂_(l Γ_jk)(0)=0 need the metric-in-normal-coordinates change of variables), NOT a curved heat
+-- kernel, NOT numerical-G (N, Λ_s, E/ξ remain). Axiom-free (standard three).
+#print axioms QIQTH.ExpMap.gronwallBound_zero_linear
+#print axioms QIQTH.ExpMap.exists_confined_tube_family
+#print axioms QIQTH.ExpMap.expRho_pos
+#print axioms QIQTH.ExpMap.expConst_nonneg
+#print axioms QIQTH.ExpMap.expTube_spec
+#print axioms QIQTH.ExpMap.hasStrictFDerivAt_expMap
+#print axioms QIQTH.ExpMap.expMap_localInverse
+
 end QIQTH.AxiomAudit

@@ -198,14 +198,6 @@ theorem geodesicSol_hasDerivAt (g gi : Point n → Fin n → Fin n → ℝ)
   obtain ⟨ε, hε, hd⟩ := (Classical.choose_spec (geodesic_local_existence g gi hC z₀ 0)).2
   exact ⟨ε, hε, fun t ht => hd t (by simpa using ht)⟩
 
-/-- **The geodesic exponential map** `exp_p(v)` = the position at parameter `1` of the geodesic with
-    initial phase point `(p, v)`.  DEFINED here as a total function; its geodesic meaning at `t=1` is
-    established only for small `v` (see the scaffolding caveat above). -/
-noncomputable def expMap (g gi : Point n → Fin n → Fin n → ℝ)
-    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
-    (p v : Point n) : Point n :=
-  (geodesicSol g gi hC (p, v) 1).1
-
 /-- **Existence of the geodesic on `[0,1]` for a rescaled (small) velocity.**  The chosen solution
     `geodesicSol (p,v)` is guaranteed to solve the ODE only on some `(-ε, ε)` with `ε` depending on
     `v`.  Rescaling the parameter by `s = ε/2` (velocity by `s`, via `geodesic_rescale`) produces a
@@ -674,5 +666,318 @@ theorem geodesic_apriori_confinement (g gi : Point n → Fin n → Fin n → ℝ
       _ ≤ (1 + s) * (L' * ‖s⁻¹ • v‖) := mul_le_mul_of_nonneg_left hdist (by positivity)
       _ = (1 + s) * L' * s⁻¹ * ‖v‖ := by
           rw [norm_smul, Real.norm_eq_abs, abs_inv, abs_of_pos hs0]; ring
+
+/-! ### The genuine geodesic exponential map, its strict derivative (S5), and local diffeo (S6)
+
+  The scaffolding `geodesicSol` pins the geodesic only on some `(-δ_v, δ_v)`, so its value at `t = 1`
+  need not be the geodesic endpoint.  Here the analyzed exponential map is DEFINED from the confined
+  `[0,1]` tube of `geodesic_apriori_confinement`, whose endpoint IS the genuine geodesic position at
+  parameter `1` for small `v`.  `exists_confined_tube_family` skolemizes the per-velocity tube into a
+  single tube-valued function `expTube`; `expMap p v := (expTube p v 1).1`.
+
+  With existence + confinement (both unconditional over a ball) in hand, **S5**
+  (`hasStrictFDerivAt_expMap`) assembles `HasStrictFDerivAt expMap id 0` from: the S2 strict remainder
+  of the field at the equilibrium (`hasStrictFDerivAt_geodesicField`), the two-point flow-Lipschitz
+  bound (`geodesic_twopoint_gronwall`), and the inhomogeneous residual Grönwall (`residual_gronwall`),
+  through the two-point `isLittleO` characterisation.  **S6** (`expMap_localInverse`) feeds this strict
+  derivative (with `id` invertible) into Mathlib's inverse function theorem
+  `HasStrictFDerivAt.toOpenPartialHomeomorph`, exhibiting `expMap` as a local homeomorphism at `0`
+  with a continuous local inverse whose strict derivative is `id` — the normal-coordinate chart.
+
+  HONEST CAPTION (binding): reaching `expMap` a local C¹ diffeo means normal coordinates EXIST as a
+  chart.  It does NOT derive the RNC gauge in those coordinates (`g(0)=δ`, `∂g(0)=0`,
+  `∂_{(l}Γ_{jk)}(0)=0` still need the metric-in-normal-coordinates change of variables), does NOT build
+  a curved heat kernel, and does NOT move numerical-G (species count `N`, granularity scale `Λ_s`, the
+  `E/ξ` term remain). -/
+
+/-- Linearity of the inhomogeneous Grönwall bound in its `ε` argument (at `δ = 0`, `x = 1`):
+    `gronwallBound 0 K ε 1 = ε · gronwallBound 0 K 1 1`.  A direct case split on `K = 0`. -/
+theorem gronwallBound_zero_linear (K ε : ℝ) :
+    gronwallBound 0 K ε 1 = ε * gronwallBound 0 K 1 1 := by
+  simp only [gronwallBound]
+  split_ifs with hK <;> ring
+
+/-- **Skolemized confined tube family.**  Repackages the per-velocity existential of
+    `geodesic_apriori_confinement` as a single tube-valued function `Y : Point n → ℝ → Point n ×
+    Point n`, specified uniformly for `‖v‖ ≤ ρ` (a junk tube outside the ball). -/
+theorem exists_confined_tube_family (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ ρ : ℝ, 0 < ρ ∧ ∃ C₀ : ℝ, 0 ≤ C₀ ∧ ∃ Y : Point n → ℝ → Point n × Point n,
+      ∀ v : Point n, ‖v‖ ≤ ρ →
+        Y v 0 = (p, v) ∧
+        (∀ t ∈ Set.Ioo (-2 : ℝ) 2, HasDerivAt (Y v) (geodesicField g gi (Y v t)) t) ∧
+        (∀ t ∈ Set.Icc (0 : ℝ) 1,
+          ‖Y v t - ((p, 0) : Point n × Point n)‖ ≤ C₀ * ‖v‖) := by
+  obtain ⟨ρ, hρ, C₀, hC₀, hfam⟩ := geodesic_apriori_confinement g gi hC p
+  have hchoose : ∀ v : Point n, ∃ Y : ℝ → Point n × Point n,
+      ‖v‖ ≤ ρ →
+        Y 0 = (p, v) ∧
+        (∀ t ∈ Set.Ioo (-2 : ℝ) 2, HasDerivAt Y (geodesicField g gi (Y t)) t) ∧
+        (∀ t ∈ Set.Icc (0 : ℝ) 1,
+          ‖Y t - ((p, 0) : Point n × Point n)‖ ≤ C₀ * ‖v‖) := by
+    intro v
+    by_cases hv : ‖v‖ ≤ ρ
+    · obtain ⟨Y, hY⟩ := hfam v hv
+      exact ⟨Y, fun _ => hY⟩
+    · exact ⟨fun _ => 0, fun h => absurd h hv⟩
+  choose Y hY using hchoose
+  exact ⟨ρ, hρ, C₀, hC₀, Y, fun v hv => hY v hv⟩
+
+/-- The confinement radius chosen for the exponential map at `p`. -/
+noncomputable def expRho (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) : ℝ :=
+  (exists_confined_tube_family g gi hC p).choose
+
+/-- The confinement constant chosen for the exponential map at `p`. -/
+noncomputable def expConst (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) : ℝ :=
+  (exists_confined_tube_family g gi hC p).choose_spec.2.choose
+
+/-- The chosen confined geodesic tube through `(p, v)` (a genuine `[0,1]` integral curve of the
+    geodesic field for `‖v‖ ≤ expRho`). -/
+noncomputable def expTube (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) : Point n → ℝ → Point n × Point n :=
+  (exists_confined_tube_family g gi hC p).choose_spec.2.choose_spec.2.choose
+
+/-- **The geodesic exponential map** `exp_p(v)` = position at parameter `1` of the confined geodesic
+    tube through `(p, v)`.  For `‖v‖ ≤ expRho` this is the genuine geodesic endpoint. -/
+noncomputable def expMap (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) : Point n :=
+  (expTube g gi hC p v 1).1
+
+theorem expRho_pos (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) : 0 < expRho g gi hC p :=
+  (exists_confined_tube_family g gi hC p).choose_spec.1
+
+theorem expConst_nonneg (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) : 0 ≤ expConst g gi hC p :=
+  (exists_confined_tube_family g gi hC p).choose_spec.2.choose_spec.1
+
+/-- **Specification of the confined tube.**  For `‖v‖ ≤ expRho`, `expTube p v` starts at `(p, v)`,
+    solves the geodesic ODE on `(-2, 2) ⊇ [0,1]`, and stays `expConst · ‖v‖`-close to `(p,0)` on
+    `[0,1]`.  Repackages `exists_confined_tube_family`'s chosen witness. -/
+theorem expTube_spec (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) :
+    expTube g gi hC p v 0 = (p, v) ∧
+    (∀ t ∈ Set.Ioo (-2 : ℝ) 2,
+      HasDerivAt (expTube g gi hC p v) (geodesicField g gi (expTube g gi hC p v t)) t) ∧
+    (∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p v t - ((p, 0) : Point n × Point n)‖ ≤ expConst g gi hC p * ‖v‖) :=
+  (exists_confined_tube_family g gi hC p).choose_spec.2.choose_spec.2.choose_spec v hv
+
+-- The three `Classical.choose`-based selectors are opaque from here on: their definitional bodies
+-- unfold to the (enormous) Picard–Lindelöf/confinement witness, which would blow up `whnf` during
+-- unification.  All downstream reasoning goes through the spec lemmas above, never the bodies.
+attribute [irreducible] expRho expConst expTube
+
+set_option maxHeartbeats 1000000 in
+/-- **S5 — the strict derivative of the exponential map at the origin.**
+    `HasStrictFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) 0`: the two-point
+    little-o `‖exp_p v − exp_p w − (v − w)‖ = o(‖v − w‖)` as `(v, w) → (0, 0)`.
+
+    Assembly: for `c > 0`, choose `η` so the residual Grönwall constant is `≤ c`; the a-priori
+    confinement (`expTube_spec`) puts the tubes `Y_v(t), Y_w(t)` in the S2 `η`-neighbourhood of the
+    equilibrium `e = (p,0)` for `(v,w)` near `0`, whence the S2 strict remainder
+    (`hasStrictFDerivAt_geodesicField`) bounds `‖F(Y_v) − F(Y_w) − A(Y_v − Y_w)‖ ≤ η‖Y_v − Y_w‖`, the
+    two-point flow-Lipschitz bound (`geodesic_twopoint_gronwall`) gives `‖Y_v − Y_w‖ ≤ e^{K}‖v − w‖`,
+    and `residual_gronwall` propagates this to `‖r(1)‖ ≤ c‖v − w‖`; projecting onto the position
+    component (`π₁ r(1) = exp_p v − exp_p w − (v − w)`) closes the little-o.
+
+    HONEST: this is `exp_p`'s strict derivative at `0` (the input to the inverse function theorem). It
+    is NOT the RNC gauge, NOT a curved heat kernel, NOT numerical-G. -/
+theorem hasStrictFDerivAt_expMap (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    HasStrictFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) (0 : Point n) := by
+  rw [hasStrictFDerivAt_iff_isLittleO, Asymptotics.isLittleO_iff]
+  intro c hc
+  -- Lipschitz constant of the field on the unit closed ball around the equilibrium.
+  obtain ⟨Ktube, hLip⟩ :=
+    ((contDiff_geodesicField g gi hC).contDiffOn
+        (s := Metric.closedBall ((p, 0) : Point n × Point n) 1)).exists_lipschitzOnWith
+      (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+  have hC₀ := expConst_nonneg g gi hC p
+  have hρpos := expRho_pos g gi hC p
+  -- the Grönwall proportionality constant `β = gronwallBound 0 ‖A‖ 1 1 ≥ 0`.
+  set β : ℝ := gronwallBound 0 ‖(linF (n := n))‖ 1 1 with hβdef
+  have hβ0 : 0 ≤ β := by
+    rw [hβdef]
+    rcases eq_or_ne (‖(linF (n := n))‖) 0 with hK | hK
+    · rw [hK, gronwallBound_K0]; norm_num
+    · rw [gronwallBound_of_K_ne_0 hK]
+      have hKpos : 0 < ‖(linF (n := n))‖ := (norm_nonneg _).lt_of_ne (Ne.symm hK)
+      have hexp : (1 : ℝ) ≤ Real.exp (‖(linF (n := n))‖ * 1) := by
+        rw [mul_one]; exact Real.one_le_exp hKpos.le
+      have hprod : 0 ≤ 1 / ‖(linF (n := n))‖ * (Real.exp (‖(linF (n := n))‖ * 1) - 1) :=
+        mul_nonneg (by positivity) (by linarith)
+      simpa using hprod
+  -- `M = e^{K}·β ≥ 0` and the tolerance `η = c/(M+1) > 0` with `η·M ≤ c`.
+  set M : ℝ := Real.exp (Ktube : ℝ) * β with hMdef
+  have hM0 : 0 ≤ M := by rw [hMdef]; exact mul_nonneg (Real.exp_pos _).le hβ0
+  have hM1 : 0 < M + 1 := by linarith
+  set η : ℝ := c / (M + 1) with hηdef
+  have hηpos : 0 < η := by rw [hηdef]; exact div_pos hc hM1
+  have hηM : η * M ≤ c := by
+    rw [hηdef, div_mul_eq_mul_div, div_le_iff₀ hM1]; nlinarith [hc, hM0]
+  -- S2 strict remainder of the field, unpacked as a two-point estimate on an `η`-neighbourhood of the
+  -- equilibrium.  Reducing the little-o's pair projections HERE (via `simp`) keeps the downstream
+  -- application on the bare tube points `Yv t`, `Yw t` free of pair projections (whose `isDefEq`
+  -- against `geodesicField`/`christoffel` would otherwise blow up `whnf`).
+  have hstrict := (hasStrictFDerivAt_geodesicField g gi hC p).isLittleO
+  rw [Asymptotics.isLittleO_iff] at hstrict
+  have hev := hstrict hηpos
+  rw [Metric.eventually_nhds_iff] at hev
+  obtain ⟨rη, hrη, hball⟩ := hev
+  have hstrictbound : ∀ y z : Point n × Point n,
+      dist y ((p, 0) : Point n × Point n) < rη → dist z ((p, 0) : Point n × Point n) < rη →
+        ‖geodesicField g gi y - geodesicField g gi z - linF (y - z)‖ ≤ η * ‖y - z‖ := by
+    intro y z hy hz
+    have hpair : dist ((y, z) : (Point n × Point n) × (Point n × Point n))
+        (((p, 0), (p, 0)) : (Point n × Point n) × (Point n × Point n)) < rη := by
+      rw [Prod.dist_eq]; exact max_lt hy hz
+    have hb := hball hpair
+    simpa using hb
+  -- the neighbourhood radius `δ`.
+  have hC1 : 0 < expConst g gi hC p + 1 := by linarith
+  have hden : 0 < 2 * (expConst g gi hC p + 1) := by positivity
+  set δ : ℝ := min (expRho g gi hC p)
+      (min (rη / (2 * (expConst g gi hC p + 1))) (1 / (expConst g gi hC p + 1))) with hδdef
+  have hδpos : 0 < δ := by
+    rw [hδdef]; exact lt_min hρpos (lt_min (by positivity) (by positivity))
+  have hδρ : δ ≤ expRho g gi hC p := by rw [hδdef]; exact min_le_left _ _
+  have hδ2 : δ ≤ rη / (2 * (expConst g gi hC p + 1)) := by
+    rw [hδdef]; exact le_trans (min_le_right _ _) (min_le_left _ _)
+  have hδ3 : δ ≤ 1 / (expConst g gi hC p + 1) := by
+    rw [hδdef]; exact le_trans (min_le_right _ _) (min_le_right _ _)
+  have hkey2 : δ * (2 * (expConst g gi hC p + 1)) ≤ rη := (le_div_iff₀ hden).mp hδ2
+  have hkey3 : δ * (expConst g gi hC p + 1) ≤ 1 := (le_div_iff₀ hC1).mp hδ3
+  have hCδ : expConst g gi hC p * δ < rη := by
+    nlinarith [hkey2, hδpos, mul_nonneg hC₀ hδpos.le]
+  have hCδ1 : expConst g gi hC p * δ ≤ 1 := by nlinarith [hkey3, hδpos]
+  -- the eventual neighbourhood of `(0,0)`.
+  rw [Metric.eventually_nhds_iff]
+  refine ⟨δ, hδpos, ?_⟩
+  intro q hq
+  rw [Prod.dist_eq, dist_eq_norm, dist_eq_norm, sub_zero, sub_zero] at hq
+  obtain ⟨hv, hw⟩ := max_lt_iff.mp hq
+  have hvρ : ‖q.1‖ ≤ expRho g gi hC p := (lt_of_lt_of_le hv hδρ).le
+  have hwρ : ‖q.2‖ ≤ expRho g gi hC p := (lt_of_lt_of_le hw hδρ).le
+  obtain ⟨hY0v, hYderivv, hYconfv⟩ := expTube_spec g gi hC p q.1 hvρ
+  obtain ⟨hY0w, hYderivw, hYconfw⟩ := expTube_spec g gi hC p q.2 hwρ
+  -- Fix the two tubes as opaque local functions (their `Classical.choose` bodies never unfold).
+  set Yv : ℝ → Point n × Point n := expTube g gi hC p q.1 with hYvdef
+  set Yw : ℝ → Point n × Point n := expTube g gi hC p q.2 with hYwdef
+  clear_value Yv Yw
+  have hIcc_Ioo : ∀ t ∈ Set.Icc (0 : ℝ) 1, t ∈ Set.Ioo (-2 : ℝ) 2 :=
+    fun t ht => ⟨by linarith [ht.1], by linarith [ht.2]⟩
+  -- membership of the tubes in the unit ball on `[0,1]`.
+  have hS1 : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Yv t ∈ Metric.closedBall ((p, 0) : Point n × Point n) 1 := by
+    intro t ht
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    calc ‖Yv t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖q.1‖ := hYconfv t ht
+      _ ≤ expConst g gi hC p * δ := mul_le_mul_of_nonneg_left hv.le hC₀
+      _ ≤ 1 := hCδ1
+  have hS2 : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Yw t ∈ Metric.closedBall ((p, 0) : Point n × Point n) 1 := by
+    intro t ht
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    calc ‖Yw t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖q.2‖ := hYconfw t ht
+      _ ≤ expConst g gi hC p * δ := mul_le_mul_of_nonneg_left hw.le hC₀
+      _ ≤ 1 := hCδ1
+  -- two-point Lipschitz bound on the tube separation.
+  have hdist0 : dist (Yv 0) (Yw 0) = ‖q.1 - q.2‖ := by
+    rw [hY0v, hY0w, dist_eq_norm, Prod.mk_sub_mk, sub_self, Prod.norm_def, norm_zero,
+      max_eq_right (norm_nonneg _)]
+  have htwopoint := geodesic_twopoint_gronwall g gi
+      (S := Metric.closedBall ((p, 0) : Point n × Point n) 1) (K := Ktube) hLip
+      (fun t ht => hYderivv t (hIcc_Ioo t ht)) (fun t ht => hYderivw t (hIcc_Ioo t ht)) hS1 hS2
+  have hYvw : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖Yv t - Yw t‖ ≤ ‖q.1 - q.2‖ * Real.exp (Ktube : ℝ) := by
+    intro t ht
+    have h := htwopoint t ht
+    rw [hdist0, dist_eq_norm] at h
+    have hexple : Real.exp ((Ktube : ℝ) * t) ≤ Real.exp ((Ktube : ℝ)) := by
+      apply Real.exp_le_exp.mpr
+      calc (Ktube : ℝ) * t ≤ (Ktube : ℝ) * 1 := mul_le_mul_of_nonneg_left ht.2 (by positivity)
+        _ = (Ktube : ℝ) := mul_one _
+    calc ‖Yv t - Yw t‖
+        ≤ ‖q.1 - q.2‖ * Real.exp ((Ktube : ℝ) * t) := h
+      _ ≤ ‖q.1 - q.2‖ * Real.exp ((Ktube : ℝ)) :=
+          mul_le_mul_of_nonneg_left hexple (norm_nonneg _)
+  -- the strict remainder bound, uniform over `[0,1]`.
+  have hR : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖geodesicField g gi (Yv t) - geodesicField g gi (Yw t) - linF (Yv t - Yw t)‖
+        ≤ η * (‖q.1 - q.2‖ * Real.exp (Ktube : ℝ)) := by
+    intro t ht
+    have hdv : ‖Yv t - ((p, 0) : Point n × Point n)‖ ≤ expConst g gi hC p * δ :=
+      le_trans (hYconfv t ht) (mul_le_mul_of_nonneg_left hv.le hC₀)
+    have hdw : ‖Yw t - ((p, 0) : Point n × Point n)‖ ≤ expConst g gi hC p * δ :=
+      le_trans (hYconfw t ht) (mul_le_mul_of_nonneg_left hw.le hC₀)
+    have hyd : dist (Yv t) ((p, 0) : Point n × Point n) < rη := by
+      rw [dist_eq_norm]; exact lt_of_le_of_lt hdv hCδ
+    have hzd : dist (Yw t) ((p, 0) : Point n × Point n) < rη := by
+      rw [dist_eq_norm]; exact lt_of_le_of_lt hdw hCδ
+    exact (hstrictbound (Yv t) (Yw t) hyd hzd).trans
+      (mul_le_mul_of_nonneg_left (hYvw t ht) hηpos.le)
+  -- the residual Grönwall bound.
+  have h0 : Yv 0 - Yw 0 = ((0, q.1 - q.2) : Point n × Point n) := by
+    rw [hY0v, hY0w, Prod.mk_sub_mk, sub_self]
+  have hgron := residual_gronwall g gi (q.1 - q.2) (η * (‖q.1 - q.2‖ * Real.exp (Ktube : ℝ)))
+    (fun t ht => hYderivv t (hIcc_Ioo t ht)) (fun t ht => hYderivw t (hIcc_Ioo t ht)) h0 hR
+  -- project onto the position component and finish.
+  have hev : expMap g gi hC p q.1 = (Yv 1).1 := by simp only [expMap, hYvdef]
+  have hew : expMap g gi hC p q.2 = (Yw 1).1 := by simp only [expMap, hYwdef]
+  have heq : expMap g gi hC p q.1 - expMap g gi hC p q.2
+      - (ContinuousLinearMap.id ℝ (Point n)) (q.1 - q.2)
+      = (Yv 1 - Yw 1 - ((1 • (q.1 - q.2), q.1 - q.2) : Point n × Point n)).1 := by
+    rw [hev, hew]; simp [Prod.fst_sub]
+  rw [heq]
+  calc ‖(Yv 1 - Yw 1 - ((1 • (q.1 - q.2), q.1 - q.2) : Point n × Point n)).1‖
+      ≤ ‖Yv 1 - Yw 1 - ((1 • (q.1 - q.2), q.1 - q.2) : Point n × Point n)‖ := by
+        rw [Prod.norm_def]; exact le_max_left _ _
+    _ ≤ gronwallBound 0 ‖(linF (n := n))‖ (η * (‖q.1 - q.2‖ * Real.exp (Ktube : ℝ))) 1 := hgron
+    _ ≤ c * ‖q.1 - q.2‖ := by
+        rw [gronwallBound_zero_linear, ← hβdef]
+        have key : η * (‖q.1 - q.2‖ * Real.exp (Ktube : ℝ)) * β = η * M * ‖q.1 - q.2‖ := by
+          rw [hMdef]; ring
+        rw [key]
+        exact mul_le_mul_of_nonneg_right hηM (norm_nonneg _)
+
+/-- **S6 — the exponential map is a local homeomorphism at `0` (the RNC local-diffeo gate).**
+    From `hasStrictFDerivAt_expMap` (`HasStrictFDerivAt expMap id 0`, and `id` is invertible) the
+    inverse function theorem `HasStrictFDerivAt.toOpenPartialHomeomorph` produces an
+    `OpenPartialHomeomorph φ` with `⇑φ = expMap`, `0 ∈ φ.source`, and a continuous local inverse
+    `φ.symm` whose strict derivative at `expMap 0` is again `id`.  `φ.symm` is the normal-coordinate
+    chart: normal coordinates EXIST as a chart around `p`.
+
+    HONEST: this is the local diffeo / normal-coordinate-chart existence.  It does NOT derive the RNC
+    gauge (`g(0)=δ`, `∂g(0)=0`, `∂_{(l}Γ_{jk)}(0)=0` — those need the metric-in-normal-coordinates
+    change of variables), NOT a curved heat kernel, NOT numerical-G. -/
+theorem expMap_localInverse (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ φ : OpenPartialHomeomorph (Point n) (Point n),
+      (⇑φ = expMap g gi hC p) ∧ (0 : Point n) ∈ φ.source ∧
+      HasStrictFDerivAt (φ.symm) (ContinuousLinearMap.id ℝ (Point n))
+        (expMap g gi hC p 0) := by
+  have hderiv := hasStrictFDerivAt_expMap g gi hC p
+  rw [← ContinuousLinearEquiv.coe_refl (R₁ := ℝ) (M₁ := Point n)] at hderiv
+  refine ⟨hderiv.toOpenPartialHomeomorph (expMap g gi hC p),
+    hderiv.toOpenPartialHomeomorph_coe, hderiv.mem_toOpenPartialHomeomorph_source, ?_⟩
+  have hli := hderiv.to_localInverse
+  rw [ContinuousLinearEquiv.refl_symm, ContinuousLinearEquiv.coe_refl,
+    hderiv.localInverse_def] at hli
+  exact hli
 
 end QIQTH.ExpMap

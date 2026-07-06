@@ -448,6 +448,28 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `Classical.choose`-of-local-existence value at `t=1` is not the geodesic endpoint) + the `isLittleO` `η`-juggling
   feeding confinement + the S2 strict remainder + `geodesic_twopoint_gronwall` + `residual_gronwall`. This is NOT yet
   `exp_p`'s strict derivative, NOT the local diffeo, NOT the RNC gauge, NOT numerical-`G`.
+- **EXP4 — the exp-map campaign CLOSED: `exp_p`'s STRICT derivative at `0` + local C¹ diffeo (normal coordinates exist
+  as a chart)** (`ExpMap.lean` `exists_confined_tube_family`/`expTube_spec`/`gronwallBound_zero_linear`/
+  `hasStrictFDerivAt_expMap`/`expMap_localInverse`, all **[AF]** std-3, 2026-07-06). **Definitional bridge (route a):**
+  `expMap` is REDEFINED from the confined `[0,1]` tube — `exists_confined_tube_family` skolemizes EXP3's
+  `geodesic_apriori_confinement` into ONE tube-valued function `expTube` (selectors `expRho`/`expConst`/`expTube` +
+  spec `expTube_spec`: the tube starts at `(p,v)`, solves the geodesic ODE on `(-2,2)⊇[0,1]`, and stays
+  `expConst·‖v‖`-close to `(p,0)` on `[0,1]` for `‖v‖≤expRho`), and `expMap g gi hC p v := (expTube p v 1).1` — the
+  genuine geodesic endpoint for small `v` (the old `geodesicSol`-based `expMap` was retired). **S5 —
+  `hasStrictFDerivAt_expMap`**: `HasStrictFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) 0`, the
+  two-point `‖exp_p v − exp_p w − (v−w)‖ = o(‖v−w‖)`. Assembly through `hasStrictFDerivAt_iff_isLittleO`/`isLittleO_iff`:
+  for `c>0`, `η=c/(M+1)` with `M=e^{K}·β`, `β=gronwallBound 0 ‖A‖ 1 1` (`gronwallBound_zero_linear` = the `ε`-linearity
+  of the Grönwall bound); confinement puts `Y_v(t),Y_w(t)` in the S2 `η`-nbhd, the S2 strict field remainder
+  (`hasStrictFDerivAt_geodesicField`) gives `‖R‖≤η‖Y_v−Y_w‖`, `geodesic_twopoint_gronwall` gives `‖Y_v−Y_w‖≤e^{K}‖v−w‖`,
+  `residual_gronwall` propagates to `‖r(1)‖≤c‖v−w‖`, and the position projection `π₁ r(1) = exp_p v − exp_p w − (v−w)`
+  closes the little-o. **S6 — `expMap_localInverse`**: the inverse function theorem
+  `HasStrictFDerivAt.toOpenPartialHomeomorph` (with `id=↑(ContinuousLinearEquiv.refl …)` invertible) yields an
+  `OpenPartialHomeomorph φ` with `⇑φ=expMap`, `0∈φ.source`, and a continuous local inverse `φ.symm` with
+  `HasStrictFDerivAt φ.symm id (expMap 0)` (via `to_localInverse`/`localInverse_def`/`refl_symm`/`coe_refl`). `φ.symm`
+  IS the normal-coordinate chart. ⚠ **HONEST CAPTION (binding)**: `exp_p` a local C¹ diffeo ⟹ **normal coordinates
+  EXIST as a chart** around `p`. This does **NOT** derive the RNC gauge IN those coordinates (`g(0)=δ`, `∂g(0)=0`,
+  `∂_{(l}Γ_{jk)}(0)=0` still need the metric-in-normal-coordinates change of variables), does **NOT** build a curved
+  heat kernel, and does **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
