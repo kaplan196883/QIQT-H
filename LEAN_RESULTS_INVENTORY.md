@@ -671,6 +671,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   coefficient identification + uniform order-2 expansion; does **NOT** give the model Jacobian `K_v` (from the
   triangular ODEs), the residual operator Grönwall, the projected Jacobian 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) +
   o(‖y‖²)`, the pullback metric, or numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3c (STEP 2, order-0 model propagator `K₀`)** (`ExpMap.lean` `linF_comp_linF`, `expJetK0`,
+  `expJetK0_hasDerivAt_ode`, all **[AF]** std-3, budget 0, 2026-07-07): the equilibrium linearization is **nilpotent**
+  (`A₀²=0`, `linF_comp_linF`), so the model propagator `K₀(t) = 1 + t·A₀` (`expJetK0`) is the EXACT (truncated Peano)
+  fundamental solution of the equilibrium operator ODE `K₀' = A₀·K₀`, `K₀(0)=1` (`expJetK0_hasDerivAt_ode` +
+  `expJetK0_zero`).  The order-0 brick of the model Jacobian `K_v = K₀ + K₁ + K₂`.  ⚠ **HONEST CAPTION:** does **NOT**
+  give `K₁,K₂` (the order-1/2 operator-integral corrections), the residual operator Grönwall, the projected 2-jet
+  `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`, the pullback metric, or numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

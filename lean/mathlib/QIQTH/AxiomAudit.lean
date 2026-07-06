@@ -9896,4 +9896,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_anchored_eq
 #print axioms QIQTH.ExpMap.expJet_fderiv_tube_order2
 
+-- ExpMap.lean — EXP-JET3c STEP 2 (order-0 model propagator K₀) (2026-07-07).
+-- linF_comp_linF: A₀² = 0 (linF.comp linF = 0) — nilpotency of the equilibrium linearization; makes the
+--   Peano series of exp(t·A₀) truncate to 1 + t·A₀.
+-- expJetK0 / expJetK0_hasDerivAt_ode: the order-0 model propagator K₀(t) = 1 + t·A₀ solves the equilibrium
+--   operator ODE K₀' = A₀·K₀ with K₀(0)=1 (expJetK0_zero; expJetK0_hasDerivAt gives K₀'=A₀,
+--   linF_comp_expJetK0 gives A₀·K₀(t)=A₀).  The exact order-0 brick of the model Jacobian K_v.
+-- HONEST: the order-0 model propagator + nilpotency — does NOT give the order-1/2 corrections K₁, K₂, the
+-- residual operator Grönwall, the projected 2-jet L y=1−Γ_p(y,·)+½T(y,y,·)+o(‖y‖²), the pullback metric, or
+-- numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
+#print axioms QIQTH.ExpMap.linF_comp_linF
+#print axioms QIQTH.ExpMap.expJetK0_zero
+#print axioms QIQTH.ExpMap.expJetK0_hasDerivAt_ode
+
 end QIQTH.AxiomAudit

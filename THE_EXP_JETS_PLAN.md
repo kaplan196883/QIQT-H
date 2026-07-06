@@ -249,6 +249,16 @@ remain). Never claim numerical-G or a curved heat kernel.
     the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected
     `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the `A₁,A₂` coefficient identification + uniform order-2
     expansion — does NOT give `K_v`, the residual Grönwall, the projected 2-jet, the pullback metric, or numerical-G.
+  - [~] **EXP-JET3c (STEP 2, order-0 model propagator `K₀`) — PARTIAL 2026-07-07.**  Landed green in `ExpMap.lean`
+    ([AF] std-3, budget 0): **`linF_comp_linF`** (`A₀²=0`, `linF.comp linF = 0` — the equilibrium linearization is
+    nilpotent, so `exp(t·A₀)` truncates to `1 + t·A₀`), the model propagator **`expJetK0`** (`K₀(t) = 1 + t·A₀`) with
+    `expJetK0_zero` (`K₀(0)=1`), `expJetK0_hasDerivAt` (`K₀'=A₀`), `linF_comp_expJetK0` (`A₀·K₀(t)=A₀`), and
+    **`expJetK0_hasDerivAt_ode`** — `K₀` solves the equilibrium operator ODE `K₀' = A₀·K₀`.  The exact order-0 brick
+    of the model Jacobian `K_v = K₀ + K₁ + K₂`.  ⚠ **STILL CHECKPOINTED (the EXP-JET3c bulk):** the order-1/2
+    corrections `K₁(t) = ∫₀ᵗ(1+(t−s)A₀)·A₁·K₀(s)ds`, `K₂(t) = ∫₀ᵗ(1+(t−s)A₀)(A₁·K₁(s)+A₂·K₀(s))ds` (operator-valued
+    Bochner integrals + FTC/Leibniz derivative laws); the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`;
+    and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the order-0 model propagator + nilpotency —
+    does NOT give `K₁,K₂`, the residual Grönwall, the projected 2-jet, the pullback metric, or numerical-G.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -275,6 +285,12 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 2, order-0 model propagator):** the order-0 model propagator `K₀(t)=1+t·A₀` +
+  nilpotency `A₀²=0` — landed green ([AF] std-3, budget 0).  New in `ExpMap.lean`: **`linF_comp_linF`** (`A₀²=0`),
+  **`expJetK0`** (`K₀(t)=1+t·A₀`), `expJetK0_zero`, `expJetK0_hasDerivAt` (`K₀'=A₀`), `linF_comp_expJetK0`
+  (`A₀·K₀(t)=A₀`), and **`expJetK0_hasDerivAt_ode`** (`K₀'=A₀·K₀`).  The exact order-0 brick of the model Jacobian
+  `K_v`.  ⚠ CHECKPOINTED: `K₁,K₂` (the order-1/2 operator-integral corrections), the residual operator Grönwall, and
+  the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 1, coefficient identification):** the anchored order-2 decomposition
   `DF(p,v) = A₀ + A₁(v) + A₂(v)` — landed green ([AF] std-3, budget 0).  New in `ExpMap.lean`:
   **`geodesicField_fderiv_anchored_eq`** (the EXACT `DF(p,v) = linF + expJetA1 + expJetA2`, degree-≤2 polynomial in `v`,

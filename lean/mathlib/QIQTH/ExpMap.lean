@@ -3727,6 +3727,46 @@ theorem expJet_fderiv_tube_order2 (g gi : Point n → Fin n → Fin n → ℝ)
   rw [← geodesicField_fderiv_anchored_eq g gi hC p v]
   exact hbound v hv t ht
 
+/-- **The equilibrium linearization is nilpotent: `A₀² = 0` (`A₀ = linF = DF(e)`).**  `linF(ξ,η)=(η,0)`
+    kills the position slot, so `linF(linF(ξ,η)) = linF(η,0) = (0,0)`.  This is what makes the order-0
+    model propagator `K₀(t) = 1 + t·A₀` an EXACT (polynomial, non-truncated) solution of the equilibrium
+    operator ODE `K₀' = A₀·K₀`. -/
+theorem linF_comp_linF : (linF (n := n)).comp linF = 0 := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  simp [linF_apply]
+
+/-- **The order-0 model propagator `K₀(t) = 1 + t·A₀`** (`A₀ = linF`) — the fundamental solution of the
+    equilibrium operator ODE `Φ' = A₀·Φ`, `Φ(0) = 1`.  Because `A₀² = 0` (`linF_comp_linF`), the Peano
+    series truncates: `exp(t·A₀) = 1 + t·A₀` exactly.  This is the leading term of the model Jacobian
+    `K_v = K₀ + K₁ + K₂` the residual operator Grönwall compares `(Φ_v 1)∘ι` against. -/
+noncomputable def expJetK0 (t : ℝ) : (Point n × Point n) →L[ℝ] (Point n × Point n) :=
+  1 + t • linF
+
+@[simp] theorem expJetK0_zero :
+    expJetK0 (n := n) 0 = (1 : (Point n × Point n) →L[ℝ] (Point n × Point n)) := by
+  simp [expJetK0]
+
+/-- The order-0 model propagator has constant derivative `A₀ = linF`. -/
+theorem expJetK0_hasDerivAt (t : ℝ) : HasDerivAt (expJetK0 (n := n)) linF t := by
+  have h := (hasDerivAt_const t (1 : (Point n × Point n) →L[ℝ] (Point n × Point n))).add
+    ((hasDerivAt_id t).smul_const (linF (n := n)))
+  simpa [expJetK0] using h
+
+/-- The equilibrium linearization annihilates the order-0 correction: `A₀·K₀(t) = A₀` (since `A₀²=0`). -/
+theorem linF_comp_expJetK0 (t : ℝ) :
+    (linF (n := n)).comp (expJetK0 t) = linF := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  simp [expJetK0, linF_apply]
+
+/-- **The order-0 model propagator solves the equilibrium operator ODE `K₀' = A₀·K₀`, `K₀(0) = 1`.**
+    Combines `expJetK0_hasDerivAt` (`K₀' = A₀`) with `linF_comp_expJetK0` (`A₀·K₀(t) = A₀`).  The exact
+    order-0 brick of the model Jacobian `K_v` (the order-1/2 corrections `K₁`, `K₂`, the residual operator
+    Grönwall, and the projected 2-jet remain the checkpointed EXP-JET3c bulk). -/
+theorem expJetK0_hasDerivAt_ode (t : ℝ) :
+    HasDerivAt (expJetK0 (n := n)) ((linF (n := n)).comp (expJetK0 t)) t := by
+  rw [linF_comp_expJetK0]
+  exact expJetK0_hasDerivAt t
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order
