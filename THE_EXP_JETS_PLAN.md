@@ -149,6 +149,22 @@ remain). Never claim numerical-G or a curved heat kernel.
     closes the `isLittleO`.  HONEST: the localized first variation (the genuine subtlety of EXP-JET3).  Does NOT yet
     give the full Jacobian 2-jet expansion `fderiv exp_p y = 1 + B(y,·) + …`, NOT the pullback metric, NOT
     numerical-G (`N`, `Λ_s`, `E/ξ` remain).
+  - [x] **EXP-JET3c (STEP 0) — the closed-form Fréchet derivative of the geodesic field. DONE 2026-07-07.**  Landed
+    green in `ExpMap.lean` ([AF] std-3, budget 0): **`geodesicField_fderiv_apply`** — the honest closed form of the
+    Jacobi coefficient `A_v(t)=DF(Y_v t)`:
+    `DF(x,u)(ξ,η) = (η, i ↦ −∑_{jk}[(∑_l ∂_l Γ^i_{jk}(x)·ξ_l)·u_j·u_k + Γ^i_{jk}(x)·η_j·u_k + Γ^i_{jk}(x)·u_j·η_k])`.
+    Route: per-term product rule `HasFDerivAt.mul` on `q ↦ Γ^i_{jk}(q.1)·q.2 j·q.2 k` (position factor via
+    `.comp hasFDerivAt_fst`, velocity factors via `(proj·).comp snd`), assembled over `j,k` (`HasFDerivAt.fun_sum`),
+    `i` (`hasFDerivAt_pi.2`) + the velocity slot (`hasFDerivAt_snd.prodMk`); `HasFDerivAt.fderiv` reads off the fderiv,
+    `fderiv_apply_eq_sum_pd` turns `fderiv Γ x ξ` into `∑_l ∂_l Γ·ξ_l`.  Specialising `(x,u)=(p,0)` recovers
+    `A₀=DF(e)=linF` (every acceleration term carries a factor `u=0`).  **KEY:** this is the STEP-0 analytic foundation
+    for the uniform `DF(Y_y t) = A₀ + A₁(t,y) + A₂(t,y) + o(‖y‖²)` expansion (identify `A₁`, `A₂` by composing this
+    closed form with the tube's value 2-jet `Y_y(t)−e = S₁+S₂+o(‖y‖²)`).  ⚠ **STILL CHECKPOINTED (the EXP-JET3c bulk):**
+    the uniform order-2 `DF` expansion (operator norm, uniform in `t∈[0,1]`); the model Jacobian `K_y=K₀+K₁+K₂` from the
+    triangular ODEs (explicit closed forms since `A₀²=0`); the residual operator Grönwall
+    `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.
+    HONEST: the pointwise closed-form Jacobi coefficient — does NOT give the uniform order-2 expansion, NOT the Jacobian
+    2-jet, NOT the pullback metric, NOT numerical-G (`N`, `Λ_s`, `E/ξ` remain).
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -175,6 +191,14 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 0):** the closed-form Fréchet derivative of the geodesic field landed green
+  ([AF] std-3, budget 0).  New theorem `geodesicField_fderiv_apply` in `ExpMap.lean`:
+  `DF(x,u)(ξ,η) = (η, i ↦ −∑_{jk}[(∑_l ∂_l Γ^i_{jk}(x)·ξ_l)·u_j·u_k + Γ^i_{jk}(x)·η_j·u_k + Γ^i_{jk}(x)·u_j·η_k])`.
+  Product rule (`HasFDerivAt.mul`) on the quadratic-in-`u` Christoffel-composed acceleration + `fderiv_apply_eq_sum_pd`
+  for the `∂Γ` factor; assembled via `hasFDerivAt_pi.2`/`hasFDerivAt_snd.prodMk`, fderiv read off by `HasFDerivAt.fderiv`.
+  This is the STEP-0 analytic foundation for identifying the order-0/1/2 coefficients (`A₀=DF(e)=linF`, `A₁`, `A₂`) of
+  the uniform `DF(Y_y t)` expansion.  ⚠ CHECKPOINTED: the uniform order-2 `DF` expansion, the model Jacobian `K_y`, the
+  residual operator Grönwall, and the projected 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3b STEP B):** the localized first variation `HasFDerivAt exp_p (L v) v` landed green
   ([AF] std-3, budget 0).  New theorem `hasFDerivAt_expMap` in `ExpMap.lean`: for `‖v‖ < expRho`,
   `HasFDerivAt (expMap g gi hC p) (expJetPi.comp ((Φ_v 1).comp expJetIota)) v`, `Φ_v` the `[0,1]` fundamental

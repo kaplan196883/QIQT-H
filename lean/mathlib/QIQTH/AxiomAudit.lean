@@ -9809,4 +9809,13 @@ namespace QIQTH.AxiomAudit
 -- full Jacobian 2-jet expansion, NOT the pullback metric, NOT numerical-G (N, Λ_s, E/ξ remain).
 #print axioms QIQTH.ExpMap.hasFDerivAt_expMap
 
+-- ExpMap.lean — EXP-JET3c (2026-07-07): the closed-form Fréchet derivative of the geodesic field.
+-- geodesicField_fderiv_apply: DF(x,u)(ξ,η) = (η, i ↦ −∑_{jk}[(∑_l ∂_l Γ^i_{jk}(x)·ξ_l)·u_j·u_k
+-- + Γ^i_{jk}(x)·η_j·u_k + Γ^i_{jk}(x)·u_j·η_k]).  Product-rule (HasFDerivAt.mul) on the quadratic-in-u
+-- Christoffel-composed acceleration term + fderiv_apply_eq_sum_pd for the ∂Γ factor.  The honest
+-- closed form of the Jacobi coefficient A_v(t)=DF(Y_v t), foundation for the uniform DF(Y_y t)
+-- order-2 expansion.  HONEST: the pointwise closed-form Jacobi coefficient — does NOT give the
+-- uniform order-2 expansion, NOT the Jacobian 2-jet, NOT the pullback metric, NOT numerical-G.
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_apply
+
 end QIQTH.AxiomAudit

@@ -2597,6 +2597,58 @@ theorem hasFDerivAt_geodesicField_fderiv (g gi : Point n → Fin n → Fin n →
     HasFDerivAt (geodesicField g gi) (fderiv ℝ (geodesicField g gi) z) z :=
   (geodesicField_differentiable g gi hC z).hasFDerivAt
 
+/-- **EXP-JET3c — the closed-form Fréchet derivative of the geodesic field at a general phase point.**
+    `DF(x,u)(ξ,η) = (η, i ↦ −∑_{jk} [(∑_l ∂_l Γ^i_{jk}(x)·ξ_l)·u_j·u_k + Γ^i_{jk}(x)·η_j·u_k
+    + Γ^i_{jk}(x)·u_j·η_k])`.  The first component is the linear velocity slot (`(ξ,η) ↦ η`); the
+    acceleration component differentiates the quadratic-in-`u`, Christoffel-composed form
+    `−∑_{jk} Γ^i_{jk}(x)·u_j·u_k` by the product rule (`HasFDerivAt.mul`), with
+    `fderiv Γ^i_{jk}(x)·ξ = ∑_l ∂_l Γ^i_{jk}(x)·ξ_l` (`fderiv_apply_eq_sum_pd`).
+
+    This is the honest closed form of `A_v(t) = DF(Y_v t)` — the coefficient of the Jacobi ODE — the
+    foundation for identifying the order-0/1/2 coefficients `A₀ = DF(e)`, `A₁`, `A₂` of the uniform
+    `DF(Y_y t)` expansion (EXP-JET3c).  Specialising to `(x,u) = (p,0)` recovers `DF(e) = A₀`
+    (`linF`, the `η`-in-first-slot nilpotent), since every acceleration term carries a factor `u = 0`.
+
+    HONEST: this is the pointwise closed-form Jacobi coefficient; it does NOT by itself give the
+    uniform order-2 expansion, NOT the Jacobian 2-jet, NOT the pullback metric, NOT numerical-G. -/
+theorem geodesicField_fderiv_apply (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x u ξ η : Point n) :
+    fderiv ℝ (geodesicField g gi) ((x, u) : Point n × Point n) ((ξ, η) : Point n × Point n)
+      = (η, (fun i => -∑ j, ∑ k,
+          ((∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k
+            + christoffel g gi i j k x * η j * u k
+            + christoffel g gi i j k x * u j * η k) : Point n)) := by
+  have hΓdiff : ∀ i j k, DifferentiableAt ℝ (fun z : Point n => christoffel g gi i j k z) x :=
+    fun i j k => ((hC i j k).differentiable (by simp)).differentiableAt
+  -- per-term product-rule derivative of `q ↦ Γ^i_{jk}(q.1)·q.2 j·q.2 k`.
+  have hterm := fun i j k =>
+    ((((hΓdiff i j k).hasFDerivAt).comp (x, u) hasFDerivAt_fst).mul
+        (((ContinuousLinearMap.proj (R := ℝ) j).comp
+          (ContinuousLinearMap.snd ℝ (Point n) (Point n))).hasFDerivAt)).mul
+        (((ContinuousLinearMap.proj (R := ℝ) k).comp
+          (ContinuousLinearMap.snd ℝ (Point n) (Point n))).hasFDerivAt)
+  -- the acceleration component's derivative (per `i`, negated double sum of term derivatives).
+  have hAcc := hasFDerivAt_pi.2 (fun i =>
+    (HasFDerivAt.fun_sum (u := (univ : Finset (Fin n)))
+      (fun j _ => HasFDerivAt.fun_sum (u := (univ : Finset (Fin n)))
+        (fun k _ => hterm i j k))).neg)
+  have hF : HasFDerivAt (geodesicField g gi) _ (x, u) := hasFDerivAt_snd.prodMk hAcc
+  rw [hF.fderiv]
+  refine Prod.ext ?_ ?_
+  · simp
+  · funext i
+    simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.pi_apply,
+      ContinuousLinearMap.neg_apply, ContinuousLinearMap.sum_apply, ContinuousLinearMap.add_apply,
+      ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
+      ContinuousLinearMap.proj_apply, smul_eq_mul, Function.comp_apply, Pi.mul_apply]
+    congr 1
+    refine Finset.sum_congr rfl fun j _ => ?_
+    refine Finset.sum_congr rfl fun k _ => ?_
+    rw [fderiv_apply_eq_sum_pd (fun z => christoffel g gi i j k z) x ξ (hΓdiff i j k)]
+    ring
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order

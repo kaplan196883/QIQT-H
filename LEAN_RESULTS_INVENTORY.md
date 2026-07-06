@@ -604,6 +604,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the `isLittleO`. ⚠ This CLOSES the checkpointed first-variation residual Grönwall. ⚠ **HONEST CAPTION (binding):**
   the localized first variation (the genuine subtlety of EXP-JET3); does **NOT** yet give the full Jacobian 2-jet
   expansion `fderiv exp_p y = 1 + B(y,·) + …`, **NOT** the pullback metric, **NOT** numerical-`G`.
+- **EXP-JET3c — the closed-form Fréchet derivative of the geodesic field** (`ExpMap.lean` `geodesicField_fderiv_apply`,
+  **[AF]** std-3, budget 0, 2026-07-07): `DF(x,u)(ξ,η) = (η, i ↦ −∑_{jk}[(∑_l ∂_l Γ^i_{jk}(x)·ξ_l)·u_j·u_k
+  + Γ^i_{jk}(x)·η_j·u_k + Γ^i_{jk}(x)·u_j·η_k])`. Product-rule (`HasFDerivAt.mul`) on the quadratic-in-`u`,
+  Christoffel-composed acceleration term `−∑_{jk} Γ^i_{jk}(x)·u_j·u_k`, with `fderiv Γ^i_{jk}(x)·ξ=∑_l ∂_l Γ^i_{jk}(x)·ξ_l`
+  (`fderiv_apply_eq_sum_pd`). The honest closed form of the Jacobi coefficient `A_v(t)=DF(Y_v t)` — the foundation for
+  identifying the order-0/1/2 coefficients (`A₀=DF(e)=linF`, `A₁`, `A₂`) of the uniform `DF(Y_y t)` expansion. ⚠ **HONEST
+  CAPTION (binding):** the pointwise closed-form Jacobi coefficient; does **NOT** give the uniform order-2 `DF` expansion,
+  **NOT** the Jacobian 2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
