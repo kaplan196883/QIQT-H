@@ -31,12 +31,24 @@ Repo: `QIQTH/Geodesic.lean` (`geodesicField`, `contDiff_geodesicField`, `geodesi
 ABSENT: variational/Jacobi flow-in-IC differentiability, global linear-ODE existence, exp-map/RNC — all DODGED by this route.
 
 ## Increments (the direct strict-derivative track)
-- [ ] **S1 — geodesic rescaling `γ_{p,sv}(t)=γ_{p,v}(st)` (std-3).** From `geodesic_local_unique` + chain rule
-  (`γ''(st)·s² = −Γ(γ)(sγ',sγ') = −s²Γ(γ)(γ',γ')`). (Handles negative `s` via a small interval around 0.) Green.
-- [ ] **S2 — `exp_p` def + the strict estimate for `F` at `e` (std-4).** `exp_p(v):=π₁(φ(1,(p,v)))`; prove
-  `∀ ε>0, ∃ nbhd of e, ∀ y z in it, ‖F(y)−F(z)−A(y−z)‖ ≤ ε‖y−z‖` from bilinearity of `(x,u)↦Γ(x)(u,u)` + local
-  boundedness/Lipschitz of `Γ` (via `contDiff_geodesicField`/`hC`). `A(ξ,η)=(η,0)` is `DF(e)`.
-- [ ] **S3 — Lipschitz flow dependence `‖Y_v(t)−Y_w(t)‖≤L‖v−w‖` on `[0,1]` (std-3/4).** Instantiate Mathlib's
+- [x] **S1 — geodesic rescaling `γ_{p,sv}(t)=γ_{p,v}(st)` — DONE (`ExpMap.geodesic_rescale`, 2026-07-06, [AF] std-3).**
+  Landed FLOW-FREE (cleaner than planned): stated as a property of ANY integral curve of `F`, not the `Classical.choose`
+  flow. `HasDerivAt γ (F(γ t)) t` on `(a,b)` ⟹ `HasDerivAt (τ↦(γ(sτ).1, s•γ(sτ).2)) (F(rescaleCLM s (γ(st)))) t`,
+  via the chain rule (`HasDerivAt.scomp` + `HasFDerivAt.comp_hasDerivAt` through `rescaleCLM = fst.prod (s•snd)`) and
+  `rescale_field_eq : L_s(s•F w)=F(L_s w)` (quadratic homogeneity of the acceleration, `smul_smul_accel`).
+- [x] **S2 — the STRICT derivative of `F` at `e=(p,0)` — DONE (`ExpMap.hasStrictFDerivAt_geodesicField`, 2026-07-06,
+  [AF] std-3).** `HasStrictFDerivAt (geodesicField g gi) linF (p,0)` with `linF (ξ,η)=(η,0)` (`= snd.prod 0`) `= DF(e)`.
+  Route (cleaner than the ε-δ estimate): `F` is `C^∞` ⟹ `ContDiffAt.hasStrictFDerivAt'` upgrades its Fréchet derivative
+  to STRICT; and the Fréchet derivative at `e` is `linF` because the nonlinear part `(x,u)↦Γ(x)(u,u)` is bilinear in
+  `u` with `u=0` at `e` (triple-product-vanishing lemma + `hasFDerivAt_pi''`/`.fun_sum`/`.neg`). This IS the strict
+  estimate for `F` the plan asked for, in the packaged `HasStrictFDerivAt F A e` form. `exp_p`/`expMap` also DEFINED
+  (scaffolding, see below) though not via the ε-δ nbhd.
+- [x] **Scaffolding — `geodesicSol` (function) + `expMap` — DONE (2026-07-06, [AF] std-3).** `geodesicSol` = a genuine
+  integral curve as a total function (`Classical.choose` of `geodesic_local_existence`) + spec lemmas
+  `geodesicSol_zero`/`geodesicSol_hasDerivAt`; `expMap p v := (geodesicSol (p,v) 1).1`. HONEST: the chosen curve solves
+  the ODE only on `(−ε,ε)`; `expMap`'s geodesic meaning at `t=1` holds only for small `v` (needs S1 + existence-on-[0,1]).
+- [ ] **S3 — Lipschitz flow dependence `‖Y_v(t)−Y_w(t)‖≤L‖v−w‖` on `[0,1]` (std-3/4). CHECKPOINT — not yet started.**
+  Instantiate Mathlib's
   `IsPicardLindelof…lipschitzOnWith` on the common tube (joint continuity gives the tube for small `v,w`).
 - [ ] **S4 — the two-point Grönwall estimate (std-5, THE CRUX).** `r=Y_v−Y_w−ℓ_d`, `r(0)=0`, `r'=A·r+R`,
   `‖R‖≤εL‖v−w‖` (S2×S3); `norm_le_gronwallBound_of_norm_deriv_right_le` (δ=0, K=‖A‖, inhomog `εL‖v−w‖`) ⟹
@@ -73,3 +85,12 @@ numerical-G, the full gauge, or a curved heat kernel.
   strict-derivative route (two-point Grönwall at the equilibrium, `A²=0` explicit comparison) reaches
   `HasStrictFDerivAt exp_p id 0` → `to_localInverse` WITHOUT the Mathlib-absent C¹-flow theorem. Crux = S4 (two-point
   Grönwall) + tube management. Increments S1–S6.
+- **2026-07-06 (first bricks LANDED):** `QIQTH/ExpMap.lean`, all [AF] std-3, budget 0, wired into `QIQTH.lean` +
+  `AxiomAudit.lean`. **S2 CLOSED** (`hasStrictFDerivAt_geodesicField`: `HasStrictFDerivAt (geodesicField g gi) linF
+  (p,0)`, `linF (ξ,η)=(η,0)` — via `ContDiffAt.hasStrictFDerivAt'` on the `C^∞` field + the bilinear-vanishing Fréchet
+  derivative). **S1 CLOSED** flow-free (`geodesic_rescale` + `rescale_field_eq` + `smul_smul_accel`). **Scaffolding
+  CLOSED** (`geodesicSol` function + spec lemmas + `expMap`). Remaining: **S3 (Lipschitz flow dep), S4 (the two-point
+  Grönwall crux + common-tube management over [0,1]), S5 (`HasStrictFDerivAt exp_p id 0`), S6 (`to_localInverse` diffeo)
+  — all CHECKPOINTED, not started.** S2's `linF` IS the linear comparison `A` that S4/S5 consume. HONEST: this is the
+  strict derivative of the ODE FIELD + rescaling + scaffolding — NOT yet `exp_p`'s strict derivative, NOT the diffeo,
+  NOT the RNC gauge, NOT numerical-G.

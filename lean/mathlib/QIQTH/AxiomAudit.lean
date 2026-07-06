@@ -9588,4 +9588,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Geodesic.geodesic_local_unique
 -- expected: standard only — local uniqueness on any set where the field is Lipschitz (ODE_solution_unique_of_mem_Ioo).
 
+-- ExpMap.lean — the exp-map campaign's first bricks (2026-07-06).
+-- S2: the STRICT derivative of the geodesic field F(x,u)=(u,−Γ(x)(u,u)) at the equilibrium e=(p,0) is
+-- the explicit linear map A(ξ,η)=(η,0) (linF) — F is C^∞ so ContDiffAt.hasStrictFDerivAt' upgrades its
+-- Fréchet derivative, and that derivative is A because the nonlinear part is bilinear in u with u=0 at e.
+-- S1: the geodesic rescaling γ_{p,sv}(t)=γ_{p,v}(st) as a property of ANY integral curve (chain rule +
+-- quadratic homogeneity of the acceleration). Scaffolding: geodesicSol (Classical.choose of existence) +
+-- expMap. HONEST: groundwork toward HasStrictFDerivAt exp_p id 0 → the RNC local diffeo — NOT yet exp_p's
+-- strict derivative, NOT the diffeo, NOT the RNC gauge, NOT numerical-G. Axiom-free (standard three).
+#print axioms QIQTH.ExpMap.hasStrictFDerivAt_geodesicField
+#print axioms QIQTH.ExpMap.geodesic_rescale
+#print axioms QIQTH.ExpMap.rescale_field_eq
+#print axioms QIQTH.ExpMap.geodesicSol_zero
+#print axioms QIQTH.ExpMap.geodesicSol_hasDerivAt
+
 end QIQTH.AxiomAudit

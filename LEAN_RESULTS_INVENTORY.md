@@ -385,6 +385,26 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   gated on **smooth dependence of ODE solutions on the initial condition** — a theorem Mathlib genuinely LACKS, only
   Lipschitz dependence is present), and does **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain). The carried
   normal-coordinate gauge stays the honest curved-`G` input.
+- **EXP1 — the exp-map campaign's first bricks: the geodesic field's STRICT derivative + rescaling + flow
+  scaffolding** (`ExpMap.lean` `hasStrictFDerivAt_geodesicField`/`geodesic_rescale`/`rescale_field_eq`/`geodesicSol`/
+  `expMap`, all **[AF]** std-3, 2026-07-06). Groundwork toward the RNC-existence gate `HasStrictFDerivAt exp_p id 0`
+  (which needs a STRICT derivative for the inverse function theorem). **S2 — `hasStrictFDerivAt_geodesicField`**: the
+  strict Fréchet derivative of `geodesicField g gi` at the equilibrium `e=(p,0)` is the explicit linear map
+  **`linF (ξ,η)=(η,0)`** (`= snd.prod 0`). Route: `F` is `C^∞` (`contDiff_geodesicField`), so
+  `ContDiffAt.hasStrictFDerivAt'` upgrades ANY Fréchet derivative to a STRICT one; the Fréchet derivative at `e` is
+  `linF` because the only nonlinear part `(x,u)↦Γ(x)(u,u)` is bilinear in `u` and `u=0` at `e`, so every term of
+  `d[Γ·u·u]` carries a factor `u` (proved via a triple-product-vanishing lemma + `hasFDerivAt_pi''`/`.fun_sum`/`.neg`).
+  **S1 — `geodesic_rescale`** (with `rescale_field_eq`): the rescaling `γ_{p,sv}(t)=γ_{p,v}(st)` stated as a property
+  of ANY integral curve — if `γ` solves the geodesic ODE, so does `τ↦(γ(sτ).1, s•γ(sτ).2)` — via the chain rule
+  (`HasDerivAt.scomp`/`comp_hasDerivAt`) + the quadratic homogeneity `L_s(s•F w)=F(L_s w)` of the acceleration term
+  (`smul_smul_accel`). **Scaffolding**: `geodesicSol` exposes a genuine integral curve as a total function (via
+  `Classical.choose` of `geodesic_local_existence`) with spec lemmas `geodesicSol_zero`/`geodesicSol_hasDerivAt`
+  (value at `0`; ODE on `(−ε,ε)`), and `expMap g gi hC p v := (geodesicSol (p,v) 1).1`. ⚠ **HONEST CAPTION (binding)**:
+  this is **groundwork toward** `HasStrictFDerivAt exp_p id 0` → the RNC local diffeo. It is the strict derivative of
+  the ODE FIELD at the fixed point (the linear-comparison input for the not-yet-run two-point Grönwall S4), NOT yet
+  `exp_p`'s own strict derivative, NOT the local diffeo, NOT the RNC gauge (`g(0)=δ`, `∂g(0)=0`, `∂_{(l}Γ_{jk)}(0)=0`
+  still need the metric-in-normal-coordinates change of variables), and does **NOT** move numerical-`G` (`N`, `Λ_s`,
+  `E/ξ` remain). `expMap` is DEFINED but its geodesic meaning at `t=1` is established only for small `v`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

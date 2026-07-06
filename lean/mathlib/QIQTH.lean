@@ -674,6 +674,13 @@ import QIQTH.Geodesic
 -- CONDITIONAL on a carried tr∂∂g(0)=−⅔Ric (RNC3 discharges it). The ⅙ = source of the κ=1/6 conformal factor.
 -- NOT numerical-G, NOT a curved heat kernel. Standard three axioms.
 import QIQTH.RNCExpansion
+-- exp-map campaign, first bricks: the STRICT derivative of the geodesic field at the equilibrium
+-- e=(p,0) is the explicit A(ξ,η)=(η,0) (S2, HasStrictFDerivAt_geodesicField); the geodesic rescaling
+-- γ_{p,sv}(t)=γ_{p,v}(st) as a property of any integral curve (S1, geodesic_rescale); and the flow
+-- scaffolding (geodesicSol as a function + expMap). Groundwork toward HasStrictFDerivAt exp_p id 0 →
+-- the RNC local diffeo; NOT yet exp_p's strict derivative, NOT the diffeo, NOT the RNC gauge, NOT
+-- numerical-G. Axiom-free (standard three).
+import QIQTH.ExpMap
 import QIQTH.EinsteinFieldEquation
 import QIQTH.KGStressConservation
 import QIQTH.QiqtGrExplicitKG
