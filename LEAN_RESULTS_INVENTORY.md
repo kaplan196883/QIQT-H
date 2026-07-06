@@ -657,6 +657,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ⚠ **HONEST CAPTION (binding):** the order-1 anchoring; does **NOT** give the model Jacobian `K_y`, the residual
   Grönwall, the projected Jacobian 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`, the pullback metric, or
   numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3c (STEP 1, coefficient identification) — the anchored order-2 decomposition `DF(p,v) = A₀ + A₁(v) + A₂(v)`**
+  (`ExpMap.lean` `geodesicField_fderiv_anchored_eq` + composed `expJet_fderiv_tube_order2`; CLM building blocks
+  `matVecCLM`, `expJetA1`, `expJetA2`; all **[AF]** std-3, budget 0, 2026-07-07): the fixed `t`-independent Jacobi
+  coefficient at the base point splits EXACTLY (a degree-≤2 polynomial in `v`, **no remainder**) as
+  `A₀ + A₁(v) + A₂(v)`, with `A₀ = linF = DF(e)`, `A₁(v)(ξ,η) = (0, i↦−∑_{jk}Γ^i_{jk}(p)(η_j v_k + v_j η_k))` (the
+  velocity-bilinear Γ part, `expJetA1`), `A₂(v)(ξ,η) = (0, i↦−∑_{jk}(∑_l ∂_lΓ^i_{jk}(p) ξ_l)v_j v_k)` (the ∂Γ-trilinear
+  part, `expJetA2`). Read off from `geodesicField_fderiv_apply` at `(p,v)` by regrouping the acceleration double-sum
+  into the three coefficient arrays (`ContinuousLinearMap.ext` + Finset algebra / `pd_trilin_reorder`). Composed with
+  `expJet_fderiv_tube_order1` this gives the **uniform-in-`t` order-2 expansion with IDENTIFIED coefficients**,
+  `expJet_fderiv_tube_order2`: `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − (linF + expJetA1 v + expJetA2 v)‖ ≤ C·‖v‖²`
+  — the uniform expansion the model Jacobian `K_v` will integrate against. ⚠ **HONEST CAPTION (binding):** the `A₁,A₂`
+  coefficient identification + uniform order-2 expansion; does **NOT** give the model Jacobian `K_v` (from the
+  triangular ODEs), the residual operator Grönwall, the projected Jacobian 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) +
+  o(‖y‖²)`, the pullback metric, or numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

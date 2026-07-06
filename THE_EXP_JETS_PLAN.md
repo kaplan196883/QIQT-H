@@ -232,6 +232,23 @@ remain). Never claim numerical-G or a curved heat kernel.
     `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the order-1
     anchoring — does NOT give `K_y`, the residual Grönwall, the projected Jacobian 2-jet, the pullback metric, or
     numerical-G (`N`, `Λ_s`, `E/ξ` remain).
+  - [x] **EXP-JET3c (STEP 1, coefficient identification) — the anchored order-2 decomposition
+    `DF(p,v) = A₀ + A₁(v) + A₂(v)`. DONE 2026-07-07.**  Landed green in `ExpMap.lean` ([AF] std-3, budget 0):
+    **`geodesicField_fderiv_anchored_eq`** — the fixed `t`-independent Jacobi coefficient at the base point splits
+    EXACTLY (a degree-≤2 polynomial in `v`, NO remainder) as `linF + expJetA1 g gi p v + expJetA2 g gi p v`, with
+    `A₀=linF=DF(e)`, `A₁(v)(ξ,η)=(0,i↦−∑_{jk}Γ^i_{jk}(p)(η_j v_k+v_j η_k))` (velocity-bilinear Γ part, **`expJetA1`**),
+    `A₂(v)(ξ,η)=(0,i↦−∑_{jk}(∑_l ∂_lΓ^i_{jk}(p) ξ_l)v_j v_k)` (∂Γ-trilinear part, **`expJetA2`**); and the composed
+    **`expJet_fderiv_tube_order2`** — `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − (linF+A₁+A₂)‖ ≤ C·‖v‖²`, the
+    uniform-in-`t` order-2 expansion with IDENTIFIED coefficients (order-1 anchoring + the exact decomposition).  New
+    reusable CLM building block **`matVecCLM`** (`η ↦ (i↦∑_j c_ij η_j)` on `Point n`, from `proj j`) + helper
+    `pd_trilin_reorder` (∂-index reorder).  Route: read off `geodesicField_fderiv_apply` at `(p,v)`, regroup the
+    acceleration double-sum into the three coefficient arrays (`ContinuousLinearMap.ext` → `Prod.ext` → per-`i` Finset
+    sum algebra; the ∂Γ block via `pd_trilin_reorder`, the two Γ blocks combined into `c₁` via `Finset.sum_comm` +
+    `Finset.sum_neg_distrib`, closed by `linarith`).  ⚠ **STILL CHECKPOINTED (the EXP-JET3c bulk):** the model Jacobian
+    `K_v=K₀+K₁+K₂` from the triangular ODEs (`A₀²=0` ⟹ `K₀(t)=1+tA₀`, `K₁(t)=∫₀ᵗ(1+(t−s)A₀)A₁K₀(s)ds`, `K₂` analogously);
+    the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected
+    `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the `A₁,A₂` coefficient identification + uniform order-2
+    expansion — does NOT give `K_v`, the residual Grönwall, the projected 2-jet, the pullback metric, or numerical-G.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -258,6 +275,19 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 1, coefficient identification):** the anchored order-2 decomposition
+  `DF(p,v) = A₀ + A₁(v) + A₂(v)` — landed green ([AF] std-3, budget 0).  New in `ExpMap.lean`:
+  **`geodesicField_fderiv_anchored_eq`** (the EXACT `DF(p,v) = linF + expJetA1 + expJetA2`, degree-≤2 polynomial in `v`,
+  no remainder), the composed **`expJet_fderiv_tube_order2`** (`‖DF(Y_v t) − (linF+A₁+A₂)‖ ≤ C·‖v‖²` uniform in
+  `t∈[0,1]`, from order-1 anchoring + the decomposition), the CLM coefficient operators **`expJetA1`** (order-1,
+  velocity-bilinear Γ) / **`expJetA2`** (order-2, ∂Γ-trilinear), the generic building block **`matVecCLM`**, and helper
+  `pd_trilin_reorder`.  This turns the previously only-anchored "fixed `DF(p,v)` carries the order-1 part" into the
+  ACTUAL identified coefficients `A₀,A₁,A₂` (as CLMs) with a machine-checked exact decomposition — the coefficient
+  input the model-Jacobian ODEs consume.  Route: `geodesicField_fderiv_apply` at `(p,v)`, `ContinuousLinearMap.ext` →
+  `Prod.ext` → per-`i` Finset algebra (∂Γ block by `pd_trilin_reorder`; the two Γ blocks combined into `c₁` via
+  `Finset.sum_comm`/`Finset.sum_neg_distrib`; `linarith`).  ⚠ CHECKPOINTED: the model Jacobian `K_v=K₀+K₁+K₂` from the
+  triangular ODEs (`A₀²=0` ⟹ `K₀(t)=1+tA₀`, `K₁=∫₀ᵗ(1+(t−s)A₀)A₁K₀ds`, `K₂` analogously); the residual operator
+  Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 1, order-1 anchoring):** the tube Jacobi coefficient is `O(‖v‖²)`-close to the fixed
   `DF(p,v)` — landed green ([AF] std-3, budget 0).  New theorems in `ExpMap.lean`: **`expJet_fderiv_tube_order1`**
   (`∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²`), the pointwise engine

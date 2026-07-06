@@ -9877,4 +9877,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_two_pt_opNorm_le
 #print axioms QIQTH.ExpMap.expJet_fderiv_tube_order1
 
+-- ExpMap.lean — EXP-JET3c STEP 1 (A₁,A₂ coefficient identification + anchored decomposition) (2026-07-07).
+-- matVecCLM: generic "matrix·vector" CLM η ↦ (i ↦ ∑_j c_ij η_j) on Point n (from proj j), the building
+--   block for the fixed order-1/2 coefficient operators.
+-- expJetA1 / expJetA2: the fixed t-independent order-1 coefficient A₁(v)(ξ,η)=(0,i↦−∑Γ_p(η_j v_k+v_j η_k))
+--   (velocity-bilinear Γ part) and order-2 coefficient A₂(v)(ξ,η)=(0,i↦−∑(∂Γ_p·ξ)v_j v_k) (∂Γ-trilinear).
+-- geodesicField_fderiv_anchored_eq: DF(p,v) = linF + expJetA1 + expJetA2 EXACTLY (degree-≤2 polynomial in
+--   v, no remainder) — reads off geodesicField_fderiv_apply at (p,v), regrouping the acceleration double
+--   sum into the three coefficient arrays (ContinuousLinearMap.ext + Finset algebra / pd_trilin_reorder).
+-- expJet_fderiv_tube_order2: ∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − (linF+A₁+A₂)‖ ≤ C·‖v‖² — the
+--   uniform-in-t order-2 expansion with IDENTIFIED coefficients (order-1 anchoring + anchored decomposition).
+-- HONEST: the A₁,A₂ coefficient identification + uniform order-2 expansion — does NOT give the model
+-- Jacobian K_v, the residual operator Grönwall, the projected 2-jet L y=1−Γ_p(y,·)+½T(y,y,·)+o(‖y‖²), the
+-- pullback metric, or numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
+#print axioms QIQTH.ExpMap.matVecCLM_apply
+#print axioms QIQTH.ExpMap.expJetA1_apply
+#print axioms QIQTH.ExpMap.expJetA2_apply
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_anchored_eq
+#print axioms QIQTH.ExpMap.expJet_fderiv_tube_order2
+
 end QIQTH.AxiomAudit

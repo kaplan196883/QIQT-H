@@ -3582,6 +3582,151 @@ theorem expJet_fderiv_tube_order1 (g gi : Point n → Fin n → Fin n → ℝ)
         exact add_le_add hb2 hb3
     _ = C * ‖v‖ ^ 2 := by rw [hCdef]; ring
 
+/-- **Generic "matrix·vector" continuous linear map.**  `matVecCLM c` is the CLM
+    `η ↦ (i ↦ ∑_j c_{ij}·η_j)` on the coordinate space `Point n = Fin n → ℝ`, built from the
+    projections `proj j`.  It is the building block for the fixed (`t`-independent) order-1 and order-2
+    coefficient operators `A₁(v)`, `A₂(v)` of the anchored Jacobi-coefficient expansion
+    `DF(p,v) = A₀ + A₁(v) + A₂(v)` (EXP-JET3c). -/
+noncomputable def matVecCLM (c : Fin n → Fin n → ℝ) : Point n →L[ℝ] Point n :=
+  ContinuousLinearMap.pi
+    (fun i => ∑ j, c i j • ContinuousLinearMap.proj (R := ℝ) (φ := fun _ : Fin n => ℝ) j)
+
+@[simp] theorem matVecCLM_apply (c : Fin n → Fin n → ℝ) (η : Point n) (i : Fin n) :
+    matVecCLM c η i = ∑ j, c i j * η j := by
+  simp only [matVecCLM, ContinuousLinearMap.pi_apply, ContinuousLinearMap.sum_apply,
+    ContinuousLinearMap.smul_apply, ContinuousLinearMap.proj_apply, smul_eq_mul]
+
+/-- **The fixed order-1 coefficient `A₁(v)` of the anchored expansion.**  Acting only on the velocity
+    slot, `A₁(v)(ξ,η) = (0, i ↦ −∑_{jk} Γ^i_{jk}(p)(η_j v_k + v_j η_k))`; the velocity-bilinear part of
+    `DF(p,v) − A₀`.  The coefficient array is `c₁_{ij} = −∑_k Γ^i_{jk}(p) v_k − ∑_k Γ^i_{kj}(p) v_k`. -/
+noncomputable def expJetA1 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    (Point n × Point n) →L[ℝ] (Point n × Point n) :=
+  (0 : (Point n × Point n) →L[ℝ] Point n).prod
+    ((matVecCLM (fun i j => -(∑ k, christoffel g gi i j k p * v k)
+        - (∑ k, christoffel g gi i k j p * v k))).comp
+      (ContinuousLinearMap.snd ℝ (Point n) (Point n)))
+
+@[simp] theorem expJetA1_apply (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n)
+    (z : Point n × Point n) :
+    expJetA1 g gi p v z = ((0 : Point n),
+      matVecCLM (fun i j => -(∑ k, christoffel g gi i j k p * v k)
+        - (∑ k, christoffel g gi i k j p * v k)) z.2) := rfl
+
+/-- **The fixed order-2 coefficient `A₂(v)` of the anchored expansion.**  Acting only on the position
+    slot, `A₂(v)(ξ,η) = (0, i ↦ −∑_{jk} (∑_l ∂_l Γ^i_{jk}(p) ξ_l) v_j v_k)`; the ∂Γ-trilinear part of
+    `DF(p,v) − A₀`.  The coefficient array is `c₂_{il} = −∑_{jk} ∂_l Γ^i_{jk}(p) v_j v_k`. -/
+noncomputable def expJetA2 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    (Point n × Point n) →L[ℝ] (Point n × Point n) :=
+  (0 : (Point n × Point n) →L[ℝ] Point n).prod
+    ((matVecCLM (fun i l => -∑ j, ∑ k,
+        pd (fun z => christoffel g gi i j k z) l p * v j * v k)).comp
+      (ContinuousLinearMap.fst ℝ (Point n) (Point n)))
+
+@[simp] theorem expJetA2_apply (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n)
+    (z : Point n × Point n) :
+    expJetA2 g gi p v z = ((0 : Point n),
+      matVecCLM (fun i l => -∑ j, ∑ k,
+        pd (fun z => christoffel g gi i j k z) l p * v j * v k) z.1) := rfl
+
+/-- A triple-sum reordering: pulling the ∂-index `l` from the innermost slot to the outermost.
+    `∑_j ∑_k (∑_l ∂Γ·ξ_l) v_j v_k = ∑_l (∑_j ∑_k ∂Γ·v_j v_k) ξ_l`.  Used to identify the ∂Γ-trilinear
+    block of `DF(p,v)` with the order-2 coefficient `A₂(v)`. -/
+private theorem pd_trilin_reorder (g gi : Point n → Fin n → Fin n → ℝ) (p v ξ : Point n) (i : Fin n) :
+    (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l p * ξ l) * v j * v k)
+      = ∑ l, (∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k) * ξ l := by
+  have h1 : (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l p * ξ l) * v j * v k)
+      = ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * ξ l := by
+    refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_mul, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun l _ => by ring
+  have h2 : (∑ l, (∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k) * ξ l)
+      = ∑ l, ∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k * ξ l := by
+    refine Finset.sum_congr rfl fun l _ => ?_
+    rw [Finset.sum_mul]
+    exact Finset.sum_congr rfl fun j _ => by rw [Finset.sum_mul]
+  rw [h1, h2,
+    show (∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * ξ l)
+        = ∑ j, ∑ l, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k * ξ l
+      from Finset.sum_congr rfl fun j _ => Finset.sum_comm,
+    Finset.sum_comm]
+
+/-- **EXP-JET3c (STEP 1 — the anchored order-2 decomposition `DF(p,v) = A₀ + A₁(v) + A₂(v)`).**  The
+    fixed (`t`-independent) Jacobi coefficient at the base point splits EXACTLY (a degree-≤2 polynomial
+    in `v`, no remainder) as `A₀ + A₁(v) + A₂(v)`, with `A₀ = linF = DF(e)`, `A₁(v) = expJetA1` the
+    velocity-bilinear (Γ) part, `A₂(v) = expJetA2` the ∂Γ-trilinear part.  Read off from
+    `geodesicField_fderiv_apply` at `(x,u) = (p,v)` by regrouping the acceleration double-sum into the
+    three coefficient arrays (`ContinuousLinearMap.ext`, then Finset sum algebra / `pd_trilin_reorder`).
+
+    HONEST: the exact algebraic decomposition of the fixed anchor operator; it does NOT by itself give
+    the model Jacobian `K_v`, the residual Grönwall, the projected 2-jet, the pullback metric, or
+    numerical-G (`N`, `Λ_s`, `E/ξ` remain). -/
+theorem geodesicField_fderiv_anchored_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) :
+    fderiv ℝ (geodesicField g gi) ((p, v) : Point n × Point n)
+      = linF + expJetA1 g gi p v + expJetA2 g gi p v := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  obtain ⟨ξ, η⟩ := z
+  rw [ContinuousLinearMap.add_apply, ContinuousLinearMap.add_apply,
+    geodesicField_fderiv_apply g gi hC p v ξ η, linF_apply, expJetA1_apply, expJetA2_apply]
+  refine Prod.ext (by simp) ?_
+  funext i
+  simp only [Prod.snd_add, Pi.add_apply, Pi.zero_apply, matVecCLM_apply]
+  -- Split the acceleration double-sum into the three coefficient blocks.
+  have hsplit : (∑ j, ∑ k,
+        ((∑ l, pd (fun z => christoffel g gi i j k z) l p * ξ l) * v j * v k
+          + christoffel g gi i j k p * η j * v k + christoffel g gi i j k p * v j * η k))
+      = (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l p * ξ l) * v j * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p * η j * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p * v j * η k) := by
+    simp only [Finset.sum_add_distrib]
+  -- The ∂Γ block equals the order-2 coefficient sum (negated).
+  have hAneg : -(∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l p * ξ l) * v j * v k)
+      = ∑ l, (-∑ j, ∑ k, pd (fun z => christoffel g gi i j k z) l p * v j * v k) * ξ l := by
+    rw [pd_trilin_reorder, ← Finset.sum_neg_distrib]
+    exact Finset.sum_congr rfl fun l _ => by ring
+  -- The two Γ blocks combine into the order-1 coefficient sum (negated).
+  have hB : (∑ j, ∑ k, christoffel g gi i j k p * η j * v k)
+      = ∑ j, (∑ k, christoffel g gi i j k p * v k) * η j := by
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.sum_mul]
+    exact Finset.sum_congr rfl fun k _ => by ring
+  have hC' : (∑ j, ∑ k, christoffel g gi i j k p * v j * η k)
+      = ∑ j, (∑ k, christoffel g gi i k j p * v k) * η j := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.sum_mul]
+  have hBCneg : -(∑ j, ∑ k, christoffel g gi i j k p * η j * v k)
+        - (∑ j, ∑ k, christoffel g gi i j k p * v j * η k)
+      = ∑ j, (-(∑ k, christoffel g gi i j k p * v k)
+          - (∑ k, christoffel g gi i k j p * v k)) * η j := by
+    rw [hB, hC', ← Finset.sum_neg_distrib, ← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl fun j _ => by ring
+  rw [hsplit]
+  linarith [hAneg, hBCneg]
+
+/-- **EXP-JET3c (STEP 1, composed) — the uniform-in-`t` order-2 Jacobi-coefficient expansion.**  Along
+    the confined tube the Jacobi coefficient `DF(Y_v t)` is `O(‖v‖²)`-close, UNIFORMLY in `t ∈ [0,1]`, to
+    the fixed anchored operator `A₀ + A₁(v) + A₂(v)`:
+    `‖DF(Y_v t) − (linF + expJetA1 v + expJetA2 v)‖ ≤ C·‖v‖²`  for `‖v‖ ≤ ρ`.  Immediate from the order-1
+    anchoring `expJet_fderiv_tube_order1` (`‖DF(Y_v t) − DF(p,v)‖ ≤ C‖v‖²`) rewritten by the exact
+    decomposition `geodesicField_fderiv_anchored_eq` (`DF(p,v) = A₀ + A₁(v) + A₂(v)`).
+
+    This packages the identified coefficients `A₀, A₁, A₂` into the uniform expansion the model Jacobian
+    `K_v` will integrate against.  HONEST: the uniform order-2 expansion with IDENTIFIED coefficients; it
+    does NOT yet give the model Jacobian `K_v`, the residual operator Grönwall, the projected 2-jet
+    `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`, the pullback metric, or numerical-G. -/
+theorem expJet_fderiv_tube_order2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ ρ > (0 : ℝ), ∃ C ≥ (0 : ℝ), ∀ v : Point n, ‖v‖ ≤ ρ → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+          - (linF + expJetA1 g gi p v + expJetA2 g gi p v)‖ ≤ C * ‖v‖ ^ 2 := by
+  obtain ⟨ρ, hρ, C, hC0, hbound⟩ := expJet_fderiv_tube_order1 g gi hC p
+  refine ⟨ρ, hρ, C, hC0, fun v hv t ht => ?_⟩
+  rw [← geodesicField_fderiv_anchored_eq g gi hC p v]
+  exact hbound v hv t ht
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order
