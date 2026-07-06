@@ -285,6 +285,19 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 2, order-1/2 model propagators K₁, K₂):** the closed-form order-1/2 model
+  propagators `K₁`, `K₂` + their equilibrium ODEs — landed green ([AF] std-3, budget 0).  New in `ExpMap.lean`:
+  the composition/nilpotency helpers **`expJetA1_comp_linF`** (`A₁A₀=0`), **`linF_comp_linF_comp`** (`A₀A₀X=0`),
+  **`expJetA1_comp_linF_comp`** (`A₁A₀X=0`); the closed forms **`expJetK1`** (`K₁(t)=t·A₁+(t²/2)·A₀A₁`) with
+  `expJetK1_zero`, `expJetK1_hasDerivAt` (polynomial deriv) and **`expJetK1_hasDerivAt_ode`** (`K₁'=A₀K₁+A₁K₀`);
+  and **`expJetK2`** (`K₂(t)=t·A₂+(t²/2)·(A₁²+A₂A₀+A₀A₂)+(t³/6)·A₀(A₁²+A₂A₀)`) with `expJetK2_zero`,
+  `expJetK2_hasDerivAt` and **`expJetK2_hasDerivAt_ode`** (`K₂'=A₀K₂+A₁K₁+A₂K₀`).  Route (as scoped): variation of
+  constants collapses to POLYNOMIALS because `A₀²=0` (`linF_comp_linF`) and `A₁A₀=0` — so `K₁,K₂` are DEFINED as the
+  explicit CLM polynomials and the ODEs are VERIFIED by differentiation (`hasDerivAt_pow`/`smul_const` for the
+  polynomial deriv; the ODE-RHS `simp only [comp_add, comp_smul, comp_id, smul_add, <nilpotency collapses>]; abel`),
+  bypassing the operator Bochner integral entirely.  This completes the model Jacobian `K_v = K₀+K₁+K₂` bricks.
+  ⚠ CHECKPOINTED: the residual operator Grönwall `‖(Φ_v 1) − K_v(1)‖ ≤ C‖v‖²` (needs opNorm bounds on `A₁,A₂,K₁,K₂`)
+  and the projected `L v = 1 − Γ_p(v,·) + ½T(v,v,·) + o(‖v‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 2, order-0 model propagator):** the order-0 model propagator `K₀(t)=1+t·A₀` +
   nilpotency `A₀²=0` — landed green ([AF] std-3, budget 0).  New in `ExpMap.lean`: **`linF_comp_linF`** (`A₀²=0`),
   **`expJetK0`** (`K₀(t)=1+t·A₀`), `expJetK0_zero`, `expJetK0_hasDerivAt` (`K₀'=A₀`), `linF_comp_expJetK0`

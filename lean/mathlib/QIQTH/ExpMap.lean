@@ -3767,6 +3767,145 @@ theorem expJetK0_hasDerivAt_ode (t : ℝ) :
   rw [linF_comp_expJetK0]
   exact expJetK0_hasDerivAt t
 
+/-! ### EXP-JET3c (STEP 2) — the order-1/2 model propagators `K₁`, `K₂` (closed forms + ODEs)
+
+    Variation-of-constants for the triangular system `K₀' = A₀K₀`, `K₁' = A₀K₁ + A₁K₀`,
+    `K₂' = A₀K₂ + A₁K₁ + A₂K₀` collapses to POLYNOMIALS in `t` because the equilibrium linearization
+    is nilpotent (`A₀² = 0`, `linF_comp_linF`) and `A₁A₀ = 0` (`expJetA1_comp_linF`).  We DEFINE `K₁`,
+    `K₂` directly as those polynomials and VERIFY the ODEs by differentiation (bypassing the operator
+    Bochner integral). -/
+
+/-- `A₁·A₀ = 0`: `A₁ = expJetA1` reads only the velocity slot, which `A₀(ξ,η) = (η,0)` zeroes. -/
+theorem expJetA1_comp_linF (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    (expJetA1 g gi p v).comp (linF (n := n)) = 0 := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  simp [expJetA1_apply, linF_apply]
+
+/-- Nilpotency helper: `A₀·(A₀·X) = 0` for any `X` (from `A₀² = 0`). -/
+theorem linF_comp_linF_comp (X : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    (linF (n := n)).comp ((linF (n := n)).comp X) = 0 := by
+  rw [← ContinuousLinearMap.comp_assoc, linF_comp_linF, ContinuousLinearMap.zero_comp]
+
+/-- Nilpotency helper: `A₁·(A₀·X) = 0` for any `X` (from `A₁A₀ = 0`). -/
+theorem expJetA1_comp_linF_comp (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n)
+    (X : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    (expJetA1 g gi p v).comp ((linF (n := n)).comp X) = 0 := by
+  rw [← ContinuousLinearMap.comp_assoc, expJetA1_comp_linF, ContinuousLinearMap.zero_comp]
+
+/-- **The order-1 model propagator `K₁(t) = t·A₁ + (t²/2)·A₀A₁`.**  The variation-of-constants
+    integral `∫₀ᵗ (1+(t−s)A₀)·A₁·(1+sA₀) ds` collapses to this polynomial because `A₁A₀ = 0` and
+    `A₀² = 0`.  The order-1 brick of the model Jacobian `K_v = K₀ + K₁ + K₂`. -/
+noncomputable def expJetK1 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (t : ℝ) :
+    (Point n × Point n) →L[ℝ] (Point n × Point n) :=
+  t • expJetA1 g gi p v + (t ^ 2 / 2) • ((linF (n := n)).comp (expJetA1 g gi p v))
+
+@[simp] theorem expJetK1_zero (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    expJetK1 g gi p v 0 = 0 := by simp [expJetK1]
+
+/-- Polynomial derivative of `K₁`: `K₁'(t) = A₁ + t·A₀A₁`. -/
+theorem expJetK1_hasDerivAt (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (t : ℝ) :
+    HasDerivAt (expJetK1 g gi p v)
+      (expJetA1 g gi p v + t • ((linF (n := n)).comp (expJetA1 g gi p v))) t := by
+  have h1 : HasDerivAt (fun τ : ℝ => τ • expJetA1 g gi p v) (expJetA1 g gi p v) t := by
+    simpa using (hasDerivAt_id t).smul_const (expJetA1 g gi p v)
+  have hsq : HasDerivAt (fun τ : ℝ => τ ^ 2 / 2) t t := by
+    convert (hasDerivAt_pow 2 t).div_const 2 using 1; norm_num
+  have h2 : HasDerivAt (fun τ : ℝ => (τ ^ 2 / 2) • ((linF (n := n)).comp (expJetA1 g gi p v)))
+      (t • ((linF (n := n)).comp (expJetA1 g gi p v))) t :=
+    hsq.smul_const ((linF (n := n)).comp (expJetA1 g gi p v))
+  simpa only [expJetK1] using h1.add h2
+
+/-- **`K₁` solves the equilibrium ODE `K₁' = A₀·K₁ + A₁·K₀`.** -/
+theorem expJetK1_hasDerivAt_ode (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (t : ℝ) :
+    HasDerivAt (expJetK1 g gi p v)
+      ((linF (n := n)).comp (expJetK1 g gi p v t)
+        + (expJetA1 g gi p v).comp (expJetK0 t)) t := by
+  have halg : (linF (n := n)).comp (expJetK1 g gi p v t)
+        + (expJetA1 g gi p v).comp (expJetK0 t)
+      = expJetA1 g gi p v + t • ((linF (n := n)).comp (expJetA1 g gi p v)) := by
+    simp only [expJetK1, expJetK0, ContinuousLinearMap.comp_add, ContinuousLinearMap.comp_smul,
+      ContinuousLinearMap.one_def, ContinuousLinearMap.comp_id, linF_comp_linF_comp, expJetA1_comp_linF, smul_zero, add_zero]
+    abel
+  rw [halg]
+  exact expJetK1_hasDerivAt g gi p v t
+
+/-- **The order-2 model propagator `K₂(t)`.**  The variation-of-constants integral collapses (via
+    `A₀²=0`, `A₁A₀=0`) to the degree-3 polynomial
+    `K₂(t) = t·A₂ + (t²/2)·(A₁² + A₂A₀ + A₀A₂) + (t³/6)·A₀(A₁² + A₂A₀)`.  The order-2 brick of the
+    model Jacobian `K_v = K₀ + K₁ + K₂`. -/
+noncomputable def expJetK2 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (t : ℝ) :
+    (Point n × Point n) →L[ℝ] (Point n × Point n) :=
+  t • expJetA2 g gi p v
+    + (t ^ 2 / 2) • ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+        + (expJetA2 g gi p v).comp (linF (n := n))
+        + (linF (n := n)).comp (expJetA2 g gi p v))
+    + (t ^ 3 / 6) • ((linF (n := n)).comp
+        ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+          + (expJetA2 g gi p v).comp (linF (n := n))))
+
+@[simp] theorem expJetK2_zero (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    expJetK2 g gi p v 0 = 0 := by simp [expJetK2]
+
+/-- Polynomial derivative of `K₂`:
+    `K₂'(t) = A₂ + t·(A₁²+A₂A₀+A₀A₂) + (t²/2)·A₀(A₁²+A₂A₀)`. -/
+theorem expJetK2_hasDerivAt (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (t : ℝ) :
+    HasDerivAt (expJetK2 g gi p v)
+      (expJetA2 g gi p v
+        + t • ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+            + (expJetA2 g gi p v).comp (linF (n := n))
+            + (linF (n := n)).comp (expJetA2 g gi p v))
+        + (t ^ 2 / 2) • ((linF (n := n)).comp
+            ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+              + (expJetA2 g gi p v).comp (linF (n := n))))) t := by
+  have h1 : HasDerivAt (fun τ : ℝ => τ • expJetA2 g gi p v) (expJetA2 g gi p v) t := by
+    simpa using (hasDerivAt_id t).smul_const (expJetA2 g gi p v)
+  have hsq : HasDerivAt (fun τ : ℝ => τ ^ 2 / 2) t t := by
+    convert (hasDerivAt_pow 2 t).div_const 2 using 1; norm_num
+  have h2 : HasDerivAt (fun τ : ℝ => (τ ^ 2 / 2) • ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+        + (expJetA2 g gi p v).comp (linF (n := n))
+        + (linF (n := n)).comp (expJetA2 g gi p v)))
+      (t • ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+        + (expJetA2 g gi p v).comp (linF (n := n))
+        + (linF (n := n)).comp (expJetA2 g gi p v))) t :=
+    hsq.smul_const ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+        + (expJetA2 g gi p v).comp (linF (n := n))
+        + (linF (n := n)).comp (expJetA2 g gi p v))
+  have hcub : HasDerivAt (fun τ : ℝ => τ ^ 3 / 6) (t ^ 2 / 2) t := by
+    convert (hasDerivAt_pow 3 t).div_const 6 using 1; norm_num; ring
+  have h3 : HasDerivAt (fun τ : ℝ => (τ ^ 3 / 6) • ((linF (n := n)).comp
+        ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+          + (expJetA2 g gi p v).comp (linF (n := n)))))
+      ((t ^ 2 / 2) • ((linF (n := n)).comp
+        ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+          + (expJetA2 g gi p v).comp (linF (n := n))))) t :=
+    hcub.smul_const ((linF (n := n)).comp
+        ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+          + (expJetA2 g gi p v).comp (linF (n := n))))
+  simpa only [expJetK2] using (h1.add h2).add h3
+
+/-- **`K₂` solves the equilibrium ODE `K₂' = A₀·K₂ + A₁·K₁ + A₂·K₀`.** -/
+theorem expJetK2_hasDerivAt_ode (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (t : ℝ) :
+    HasDerivAt (expJetK2 g gi p v)
+      ((linF (n := n)).comp (expJetK2 g gi p v t)
+        + (expJetA1 g gi p v).comp (expJetK1 g gi p v t)
+        + (expJetA2 g gi p v).comp (expJetK0 t)) t := by
+  have halg : (linF (n := n)).comp (expJetK2 g gi p v t)
+        + (expJetA1 g gi p v).comp (expJetK1 g gi p v t)
+        + (expJetA2 g gi p v).comp (expJetK0 t)
+      = expJetA2 g gi p v
+        + t • ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+            + (expJetA2 g gi p v).comp (linF (n := n))
+            + (linF (n := n)).comp (expJetA2 g gi p v))
+        + (t ^ 2 / 2) • ((linF (n := n)).comp
+            ((expJetA1 g gi p v).comp (expJetA1 g gi p v)
+              + (expJetA2 g gi p v).comp (linF (n := n)))) := by
+    simp only [expJetK2, expJetK1, expJetK0, ContinuousLinearMap.comp_add,
+      ContinuousLinearMap.comp_smul, ContinuousLinearMap.one_def, ContinuousLinearMap.comp_id, smul_add,
+      linF_comp_linF_comp, expJetA1_comp_linF_comp, smul_zero, add_zero]
+    abel
+  rw [halg]
+  exact expJetK2_hasDerivAt g gi p v t
+
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along
     `Y₁`, the residual `R = (Y₂ − Y₁) − J` obeys `R'(t) = DF(Y₁ t)(R t) + N(t)` with the first-order

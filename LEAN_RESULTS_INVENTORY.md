@@ -678,6 +678,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `expJetK0_zero`).  The order-0 brick of the model Jacobian `K_v = K₀ + K₁ + K₂`.  ⚠ **HONEST CAPTION:** does **NOT**
   give `K₁,K₂` (the order-1/2 operator-integral corrections), the residual operator Grönwall, the projected 2-jet
   `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`, the pullback metric, or numerical-`G`.
+- **EXP-JET3c (STEP 2, order-1/2 model propagators `K₁`, `K₂`)** (`ExpMap.lean` `expJetK1`, `expJetK1_hasDerivAt_ode`,
+  `expJetK2`, `expJetK2_hasDerivAt_ode` + helpers `expJetA1_comp_linF`, `linF_comp_linF_comp`,
+  `expJetA1_comp_linF_comp`, all **[AF]** std-3, budget 0, 2026-07-07): because `A₀²=0` and `A₁A₀=0`, the
+  variation-of-constants integrals collapse to POLYNOMIALS — `K₁(t)=t·A₁+(t²/2)·A₀A₁` (`expJetK1`) and
+  `K₂(t)=t·A₂+(t²/2)·(A₁²+A₂A₀+A₀A₂)+(t³/6)·A₀(A₁²+A₂A₀)` (`expJetK2`) — DEFINED directly and VERIFIED to solve the
+  triangular equilibrium ODEs `K₁'=A₀K₁+A₁K₀` (`expJetK1_hasDerivAt_ode`), `K₂'=A₀K₂+A₁K₁+A₂K₀`
+  (`expJetK2_hasDerivAt_ode`) by differentiation (bypassing the operator Bochner integral).  Completes the model
+  Jacobian `K_v = K₀+K₁+K₂` bricks.  ⚠ **HONEST CAPTION:** does **NOT** give the residual operator Grönwall
+  `‖(Φ_v 1) − K_v(1)‖ ≤ C‖v‖²`, the projected 2-jet `L v = 1 − Γ_p(v,·) + ½T(v,v,·) + o(‖v‖²)`, the pullback metric,
+  or numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

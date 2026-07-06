@@ -9909,4 +9909,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetK0_zero
 #print axioms QIQTH.ExpMap.expJetK0_hasDerivAt_ode
 
+-- ExpMap.lean — EXP-JET3c STEP 2 (order-1/2 model propagators K₁, K₂; closed forms + ODEs) (2026-07-07).
+-- expJetA1_comp_linF: A₁·A₀ = 0 (A₁ reads only the velocity slot, A₀ zeroes it); with linF_comp_linF and the
+--   helper collapses linF_comp_linF_comp (A₀·A₀·X=0), expJetA1_comp_linF_comp (A₁·A₀·X=0) it makes the
+--   variation-of-constants integrals polynomial.
+-- expJetK1 / expJetK1_hasDerivAt_ode: K₁(t) = t·A₁ + (t²/2)·A₀A₁ solves K₁' = A₀·K₁ + A₁·K₀, K₁(0)=0.
+-- expJetK2 / expJetK2_hasDerivAt_ode: K₂(t) = t·A₂ + (t²/2)·(A₁²+A₂A₀+A₀A₂) + (t³/6)·A₀(A₁²+A₂A₀) solves
+--   K₂' = A₀·K₂ + A₁·K₁ + A₂·K₀, K₂(0)=0.  The order-1/2 bricks of the model Jacobian K_v = K₀+K₁+K₂.
+-- HONEST: the model propagators K₁, K₂ (closed forms + ODEs) — do NOT give the residual operator Grönwall,
+-- the projected 2-jet L y=1−Γ_p(y,·)+½T(y,y,·)+o(‖y‖²), the pullback metric, or numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJetA1_comp_linF
+#print axioms QIQTH.ExpMap.linF_comp_linF_comp
+#print axioms QIQTH.ExpMap.expJetA1_comp_linF_comp
+#print axioms QIQTH.ExpMap.expJetK1_hasDerivAt_ode
+#print axioms QIQTH.ExpMap.expJetK2_hasDerivAt_ode
+
 end QIQTH.AxiomAudit
