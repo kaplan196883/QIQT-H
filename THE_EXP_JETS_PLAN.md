@@ -95,6 +95,25 @@ remain). Never claim numerical-G or a curved heat kernel.
     run inhomog Grönwall on `R_k` with `‖Z_k‖ ≤ Ctw‖k‖`, `‖N_k‖ ≤ εCtw‖k‖`, project with `π`).
     HONEST: operator field + PL data + LOCAL Φ_v — does NOT reach `Φ_v(1)`, NOT the localized first
     variation, NOT the pullback metric, NOT numerical-G.
+  - [~] **EXP-JET3b (global scaffolding) — the SHIFTED normalized local propagator (concatenation brick). PARTIAL
+    2026-07-07.**  Landed green in `ExpMap.lean` ([AF] std-3, budget 0): `expJetFund_shifted` — for a `[0,1]`-uniform
+    Jacobi bound `KdF` threaded EXTERNALLY (so one `N` with `2(KdF+1)≤N` fixes the step) and ANY subinterval
+    `[t₀,t₀+T] ⊆ [0,1]` with `2·KdF·T ≤ 1`, the NORMALIZED propagator `U_j` (`U_j(t₀)=1`, `U_j'=Ψ_v·U_j` on `[t₀,t₀+T]`)
+    via the SHIFTED operator-normed `IsPicardLindelof` centred at the identity on `closedBall(1,1)` (`expJetFund_local`
+    is the `t₀=0` case); and `expJetFund_shifted_integral` — the same with interval-continuity AND the LOCAL INTEGRAL
+    EQUATION `U_j(t)=1+∫_{t₀}^t Ψ_v(s)(U_j s) ds` (from the derivative law by FTC-2, integrand continuous via
+    `ContinuousOn.clm_comp`), the exact brick the global integral-equation gluing consumes.  **KEY:** this discharges
+    the earlier "Mathlib has NO continuation theorem" checkpoint into a pure ASSEMBLY — every `[τ_j,τ_{j+1}]` is a
+    normalized `U_j`; glue by right-multiplication `M_{j+1}:=U_j(τ_{j+1})∘M_j`, `seg_j:=U_j∘M_j` (inherits the shifted
+    integral eq via `ContinuousLinearMap.integral_comp_comm`), prove the GLOBAL integral equation
+    `Φ_v(t)=1+∫_0^t Ψ_v(s)(Φ_v s) ds` on `[0,τ_j]` by induction on `j`
+    (`intervalIntegral.integral_add_adjacent_intervals` + `intervalIntegral.integral_congr`), then FTC on `[0,1]`.
+    ⚠ **CHECKPOINTED (the remaining EXP-JET3b work):** that partition induction (piecewise `glued`/`Φ_v`, ℕ/ℝ
+    partition arithmetic `τ(j+1)=τj+h`, `τN=1`), `Φ_v(1)`, `L v := expJetPi∘(Φ_v 1)∘expJetIota`, and the first-variation
+    residual Grönwall `HasFDerivAt (expMap g gi hC p) (L v) v` (set `J_k:=Φ_v(·)(ι k)`, run inhomog Grönwall on `R_k` with
+    `‖N_k‖≤εCtw‖k‖` via `geodesicField_uniform_C1_remainder`+`geodesic_twopoint_gronwall`, project with `π`).
+    HONEST: the concatenation building block (one subinterval, differential + local integral form) — does NOT reach
+    `Φ_v(1)`, NOT the localized first variation, NOT the pullback metric, NOT numerical-G.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -121,6 +140,15 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3b global scaffolding):** the SHIFTED normalized local propagator landed green
+  ([AF] std-3, budget 0). New lemmas in `ExpMap.lean`: `expJetFund_shifted` (the normalized propagator `U_j`
+  on ANY `[t₀,t₀+T] ⊆ [0,1]` with `2·KdF·T ≤ 1`, `U_j(t₀)=1`, `U_j'=Ψ_v·U_j`, via the shifted operator-normed
+  `IsPicardLindelof`; generalizes `expJetFund_local`) and `expJetFund_shifted_integral` (the same + interval
+  continuity + the LOCAL INTEGRAL EQUATION `U_j(t)=1+∫_{t₀}^t Ψ_v(s)(U_j s) ds` by FTC-2, the gluing brick).
+  KEY: this discharges the prior "no Mathlib continuation theorem" checkpoint into a pure ASSEMBLY (glue by
+  `M_{j+1}:=U_j(τ_{j+1})∘M_j`, `seg_j:=U_j∘M_j`, global integral eq by induction on `j` +
+  `integral_add_adjacent_intervals`/`integral_congr`, then FTC on `[0,1]`).  The partition induction, `Φ_v(1)`,
+  and the first-variation `HasFDerivAt exp_p (L v) v` remain CHECKPOINTED.
 - **2026-07-07 (EXP-JET3b):** the operator-valued Jacobi field `Ψ_v` + its Picard–Lindelöf data + the
   LOCAL fundamental solution `Φ_v` landed green ([AF] std-3, budget 0). New lemmas in `ExpMap.lean`:
   `expJetPsi` (`Ψ_v t M = DF(Y_v t) ∘ M`), `expJetPsi_norm_sub_le`, `expJetPsi_norm_le`,

@@ -556,6 +556,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   ⚠ **HONEST CAPTION (binding):** operator field + PL data + LOCAL Φ_v — a step toward the Jacobian expansion → `hgauge`;
   does **NOT** reach `Φ_v(1)`, **NOT** the localized first variation, **NOT** the pullback metric, **NOT** numerical-`G`
   (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3b global scaffolding — the SHIFTED normalized local propagator (the `[0,1]` concatenation brick)**
+  (`ExpMap.lean`, all **[AF]** std-3, budget 0, 2026-07-07): `expJetFund_shifted` — for a `[0,1]`-uniform Jacobi bound
+  `KdF` (threaded EXTERNALLY so a single `N` with `2(KdF+1)≤N` fixes the step) and ANY subinterval `[t₀,t₀+T] ⊆ [0,1]`
+  with `2·KdF·T ≤ 1`, the NORMALIZED propagator `U_j` (`U_j(t₀)=1`, `U_j' t = Ψ_v t (U_j t) = DF(Y_v t)∘U_j t` on
+  `[t₀,t₀+T]`) via the SHIFTED operator-normed `IsPicardLindelof` centred at the identity on `closedBall(1,1)`
+  (generalizes `expJetFund_local`'s `t₀=0` case); and `expJetFund_shifted_integral` — the same packaged with continuity
+  on the interval **and the LOCAL INTEGRAL EQUATION** `U_j(t) = 1 + ∫_{t₀}^t Ψ_v(s)(U_j s) ds` (derived from the
+  derivative law by FTC-2 `intervalIntegral.integral_eq_sub_of_hasDeriv_right_of_le`, integrand continuous by
+  `ContinuousOn.clm_comp`), which is the exact brick the global integral-equation gluing consumes. ⚠ This DISCHARGES the
+  "no Mathlib continuation theorem" worry into a pure ASSEMBLY: each `[τ_j,τ_{j+1}]` is a normalized `U_j`, glued by
+  right-multiplication `M_{j+1}:=U_j(τ_{j+1})∘M_j`, `seg_j:=U_j∘M_j` (inherits the shifted integral eq via
+  `ContinuousLinearMap.integral_comp_comm`), and the GLOBAL integral equation `Φ_v(t)=1+∫_0^t Ψ_v(s)(Φ_v s) ds` on
+  `[0,τ_j]` proved by induction on `j` (`intervalIntegral.integral_add_adjacent_intervals` +
+  `intervalIntegral.integral_congr`), then FTC on `[0,1]`. ⚠ **STILL CHECKPOINTED:** that partition induction, `Φ_v(1)`,
+  and the first-variation residual Grönwall `HasFDerivAt (expMap g gi hC p) (L v) v`, `L v:=π∘(Φ_v 1)∘ι`. ⚠ **HONEST
+  CAPTION (binding):** the concatenation building block (one subinterval, both differential + local integral form) — a
+  step toward the Jacobian-field expansion → `hgauge`; does **NOT** reach `Φ_v(1)`, **NOT** the localized first
+  variation, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

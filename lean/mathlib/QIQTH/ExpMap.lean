@@ -2878,4 +2878,153 @@ theorem expJetFund_local (g gi : Point n → Fin n → Fin n → ℝ)
   obtain ⟨Φ, hΦ0, hΦd⟩ := hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
   exact ⟨T, hT0, Φ, hΦ0, hΦd⟩
 
+set_option maxHeartbeats 1000000 in
+/-- **EXP-JET3b (concatenation building block) — the shifted normalized local propagator `U_j`.**
+    For a uniform Jacobi bound `KdF` on `[0,1]` (threaded externally so ONE `N` fixes the step) and any
+    subinterval `[t₀, t₀+T] ⊆ [0,1]` whose width satisfies `2·KdF·T ≤ 1`, there is an operator-valued
+    curve `Φ : ℝ → (State →L State)` with `Φ t₀ = 1` (identity) solving the linearized Jacobi ODE
+    `Φ' t = Ψ_v t (Φ t) = DF(Y_v t) ∘ Φ t` on `[t₀, t₀+T]`, built by the FULL operator-normed
+    `IsPicardLindelof` instantiation centred at the identity on `closedBall(1,1)`.
+
+    This is the NORMALIZED propagator `U_j` (`U_j(τ_j)=1`, stays in the FIXED ball `closedBall(1,1)`,
+    so the field bound is `‖A_v∘U‖ ≤ KdF·(1+1) = 2·KdF` and the interval room `2·KdF·T ≤ 1` holds with
+    a fixed step) of the `[0,1]` concatenation route: pick `N` with `2(KdF+1) ≤ N`, `h := 1/N`,
+    `τ j := j/N`, and every `[τ_j, τ_{j+1}]` is such a propagator.  `expJetFund_local` is the `t₀ = 0`
+    special case.
+
+    HONEST: the normalized local propagator on ONE subinterval — the reusable brick of the `[0,1]`
+    concatenation (the gluing `M_{j+1} := U_j(τ_{j+1})∘M_j`, `seg_j := U_j∘M_j`, global integral
+    equation by induction + FTC remains the checkpointed step); it does NOT yet reach `Φ_v(1)`, NOT the
+    localized first variation, NOT the pullback metric, NOT numerical-G. -/
+theorem expJetFund_shifted (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p)
+    (KdF : ℝ) (hKdF0 : 0 ≤ KdF)
+    (hKdF : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF)
+    (t₀ T : ℝ) (ht₀ : 0 ≤ t₀) (hT : 0 < T) (hsum : t₀ + T ≤ 1)
+    (hstep : 2 * KdF * T ≤ 1) :
+    ∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+      Φ t₀ = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+      ∀ t ∈ Set.Icc t₀ (t₀ + T),
+        HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc t₀ (t₀ + T)) t := by
+  set Lnn : NNReal := ⟨2 * KdF, by linarith⟩ with hLnn
+  set Knn : NNReal := ⟨KdF, hKdF0⟩ with hKnn
+  have hIccsub : Set.Icc t₀ (t₀ + T) ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc ht₀ hsum
+  have hpl : IsPicardLindelof (expJetPsi g gi hC p v)
+      (tmin := t₀) (tmax := t₀ + T) ⟨t₀, ⟨le_refl t₀, by linarith⟩⟩
+      (ContinuousLinearMap.id ℝ (Point n × Point n)) 1 0 Lnn Knn := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · -- Lipschitz in `M` on `closedBall(1,1)` with constant `KdF`.
+      intro t ht
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      rw [lipschitzOnWith_iff_dist_le_mul]
+      intro M _ N _
+      simp only [dist_eq_norm, hKnn]
+      calc ‖expJetPsi g gi hC p v t M - expJetPsi g gi hC p v t N‖
+          ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M - N‖ :=
+            expJetPsi_norm_sub_le g gi hC p v t M N
+        _ ≤ KdF * ‖M - N‖ := mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)
+    · -- continuity in `t` for fixed `M`.
+      intro M _
+      exact (expJetPsi_continuousOn g gi hC p v hv M).mono hIccsub
+    · -- uniform bound `‖Ψ_v t M‖ ≤ 2·KdF` on `closedBall(1,1)`.
+      intro t ht M hM
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      have hMid : ‖M - ContinuousLinearMap.id ℝ (Point n × Point n)‖ ≤ 1 := by
+        rw [← dist_eq_norm]; exact Metric.mem_closedBall.mp hM
+      have hMnorm : ‖M‖ ≤ 2 := by
+        have hsplit : M = (M - ContinuousLinearMap.id ℝ (Point n × Point n))
+            + ContinuousLinearMap.id ℝ (Point n × Point n) := by abel
+        calc ‖M‖ = ‖(M - ContinuousLinearMap.id ℝ (Point n × Point n))
+              + ContinuousLinearMap.id ℝ (Point n × Point n)‖ := by rw [← hsplit]
+          _ ≤ ‖M - ContinuousLinearMap.id ℝ (Point n × Point n)‖
+              + ‖ContinuousLinearMap.id ℝ (Point n × Point n)‖ := norm_add_le _ _
+          _ ≤ 1 + 1 := add_le_add hMid ContinuousLinearMap.norm_id_le
+          _ = 2 := by norm_num
+      have hbnd : ‖expJetPsi g gi hC p v t M‖ ≤ KdF * 2 :=
+        (expJetPsi_norm_le g gi hC p v t M).trans
+          (mul_le_mul (hKdF t htIcc) hMnorm (norm_nonneg _) hKdF0)
+      show ‖expJetPsi g gi hC p v t M‖ ≤ 2 * KdF
+      linarith [hbnd]
+    · -- the interval constraint `2·KdF·T ≤ 1`.
+      show (Lnn : ℝ) * max ((t₀ + T) - ((⟨t₀, ⟨le_refl t₀, by linarith⟩⟩ :
+              Set.Icc t₀ (t₀ + T)) : ℝ))
+          (((⟨t₀, ⟨le_refl t₀, by linarith⟩⟩ : Set.Icc t₀ (t₀ + T)) : ℝ) - t₀)
+            ≤ (1 : NNReal) - (0 : NNReal)
+      have hmax : max ((t₀ + T) - t₀) (t₀ - t₀) = T := by
+        rw [sub_self, show (t₀ + T) - t₀ = T by ring, max_eq_left hT.le]
+      simp only [hLnn, NNReal.coe_one, NNReal.coe_zero, sub_zero]
+      rw [hmax]
+      show 2 * KdF * T ≤ (1 : ℝ)
+      exact hstep
+  obtain ⟨Φ, hΦ0, hΦd⟩ := hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
+  exact ⟨Φ, hΦ0, hΦd⟩
+
+set_option maxHeartbeats 1000000 in
+/-- **EXP-JET3b — the shifted normalized local propagator in INTEGRAL form (the gluing brick).**
+    Same hypotheses as `expJetFund_shifted`, additionally packaging the normalized propagator `U_j` on
+    `[t₀, t₀+T]` with (i) `U_j(t₀) = 1`, (ii) continuity on the interval, (iii) the differential law
+    `U_j' = Ψ_v U_j`, and — the piece the `[0,1]` concatenation actually consumes — (iv) the LOCAL
+    INTEGRAL EQUATION `U_j(t) = 1 + ∫_{t₀}^t Ψ_v(s)(U_j s) ds`, obtained from (iii) by FTC-2
+    (`intervalIntegral.integral_eq_sub_of_hasDeriv_right_of_le`, integrand continuous by
+    `ContinuousOn.clm_comp`).
+
+    The `[0,1]` fundamental solution then glues these by right multiplication `M_{j+1} := U_j(τ_{j+1})∘M_j`,
+    `seg_j := U_j∘M_j` (which inherits (iv) shifted by `M_j` because right-composition commutes with the
+    integral, `ContinuousLinearMap.integral_comp_comm`), and proves the GLOBAL integral equation
+    `Φ_v(t) = 1 + ∫_0^t Ψ_v(s)(Φ_v s) ds` on `[0, τ_j]` by induction on `j`
+    (`intervalIntegral.integral_add_adjacent_intervals` + `intervalIntegral.integral_congr`), then FTC
+    on `[0,1]`.  That induction + the first-variation Grönwall is the remaining EXP-JET3b work.
+
+    HONEST: still ONE subinterval — the local integral equation that the global gluing consumes; it does
+    NOT yet reach `Φ_v(1)`, NOT the localized first variation, NOT the pullback metric, NOT numerical-G. -/
+theorem expJetFund_shifted_integral (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n) (hv : ‖v‖ ≤ expRho g gi hC p)
+    (KdF : ℝ) (hKdF0 : 0 ≤ KdF)
+    (hKdF : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF)
+    (t₀ T : ℝ) (ht₀ : 0 ≤ t₀) (hT : 0 < T) (hsum : t₀ + T ≤ 1)
+    (hstep : 2 * KdF * T ≤ 1) :
+    ∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+      Φ t₀ = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+      ContinuousOn Φ (Set.Icc t₀ (t₀ + T)) ∧
+      (∀ t ∈ Set.Icc t₀ (t₀ + T),
+        HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc t₀ (t₀ + T)) t) ∧
+      (∀ t ∈ Set.Icc t₀ (t₀ + T),
+        Φ t = ContinuousLinearMap.id ℝ (Point n × Point n)
+          + ∫ s in t₀..t, expJetPsi g gi hC p v s (Φ s)) := by
+  obtain ⟨Φ, hΦ0, hΦd⟩ :=
+    expJetFund_shifted g gi hC p v hv KdF hKdF0 hKdF t₀ T ht₀ hT hsum hstep
+  have hIccsub : Set.Icc t₀ (t₀ + T) ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc ht₀ hsum
+  have hΦcont : ContinuousOn Φ (Set.Icc t₀ (t₀ + T)) := fun s hs => (hΦd s hs).continuousWithinAt
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hDFtube : ContinuousOn
+      (fun s => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Set.Icc t₀ (t₀ + T)) :=
+    (hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)).mono hIccsub
+  have hintegrand : ContinuousOn (fun s => expJetPsi g gi hC p v s (Φ s))
+      (Set.Icc t₀ (t₀ + T)) := by
+    have hcc : ContinuousOn
+        (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)).comp (Φ s))
+        (Set.Icc t₀ (t₀ + T)) := hDFtube.clm_comp hΦcont
+    simpa only [expJetPsi_apply] using hcc
+  refine ⟨Φ, hΦ0, hΦcont, hΦd, fun t ht => ?_⟩
+  have hab : t₀ ≤ t := ht.1
+  have hsubt : Set.Icc t₀ t ⊆ Set.Icc t₀ (t₀ + T) := Set.Icc_subset_Icc_right ht.2
+  have hcont : ContinuousOn Φ (Set.Icc t₀ t) := hΦcont.mono hsubt
+  have hderiv : ∀ x ∈ Set.Ioo t₀ t,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v x (Φ x)) (Set.Ioi x) x := by
+    intro x hx
+    have hxIcc : x ∈ Set.Icc t₀ (t₀ + T) := hsubt ⟨hx.1.le, hx.2.le⟩
+    have hnhds : Set.Icc t₀ (t₀ + T) ∈ nhds x :=
+      Icc_mem_nhds hx.1 (lt_of_lt_of_le hx.2 ht.2)
+    exact ((hΦd x hxIcc).hasDerivAt hnhds).hasDerivWithinAt
+  have hint : IntervalIntegrable (fun s => expJetPsi g gi hC p v s (Φ s))
+      MeasureTheory.volume t₀ t := (hintegrand.mono hsubt).intervalIntegrable_of_Icc hab
+  have hftc := intervalIntegral.integral_eq_sub_of_hasDeriv_right_of_le hab hcont hderiv hint
+  rw [hΦ0] at hftc
+  rw [hftc]; abel
+
 end QIQTH.ExpMap

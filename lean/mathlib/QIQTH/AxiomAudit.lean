@@ -9775,4 +9775,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetPsi_continuousOn
 #print axioms QIQTH.ExpMap.expJetFund_local
 
+-- ExpMap.lean — EXP-JET3b global scaffolding (2026-07-07): the SHIFTED normalized local propagator
+-- (the [0,1] concatenation brick).  expJetFund_shifted: for a [0,1]-uniform Jacobi bound KdF and any
+-- subinterval [t₀,t₀+T] ⊆ [0,1] with 2·KdF·T ≤ 1, the normalized propagator U_j (U_j(t₀)=1,
+-- U_j'=Ψ_v·U_j on [t₀,t₀+T]) via the shifted operator-normed IsPicardLindelof (generalizes
+-- expJetFund_local's t₀=0 case, KdF threaded externally so one N fixes the step).
+-- expJetFund_shifted_integral: the same with continuity + the LOCAL INTEGRAL EQUATION
+-- U_j(t) = 1 + ∫_{t₀}^t Ψ_v(s)(U_j s) ds (from the derivative law by FTC-2), the brick the global
+-- integral-equation gluing consumes.  All standard Lean/Mathlib axioms only.
+#print axioms QIQTH.ExpMap.expJetFund_shifted
+#print axioms QIQTH.ExpMap.expJetFund_shifted_integral
+
 end QIQTH.AxiomAudit
