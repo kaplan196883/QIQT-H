@@ -502,6 +502,29 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `isLittleO_iff` + `‖v‖ → 0`. ⚠ **HONEST CAPTION (binding)**: this is the **Fréchet value 2-jet of `exp_p` at `0`** — a
   step toward discharging the RNC gauge. It does **NOT** yet discharge `hgauge`, **NOT** build the pullback metric,
   **NOT** move numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET2 (CHECKPOINTED) — the value 3-jet infrastructure** (`ExpMap.lean`, all **[AF]** std-3, 2026-07-06). The
+  target `exp_p(v) − p − v + ½Γ_p(v,v) − ⅙·a₃(v) = o(‖v‖³)` (Fréchet value 3-jet), with cubic coefficient the true
+  `γ'''(0)`: `a₃(v)_i = −∑_{j,k,l} ∂_l Γ^i_{jk}(p) v_j v_k v_l + ∑_{j,k} Γ^i_{jk}(p)(Γ_p(v,v)_j v_k + v_j Γ_p(v,v)_k)`
+  (the honest symmetry-free form; when the metric is symmetric, `Γ^i_{jk}=Γ^i_{kj}`, the second sum equals the prompt's
+  `2∑_{j,k} Γ^i_{jk} Γ_p(v,v)_j v_k`). **All infrastructure lemmas are proved GREEN**: (1) `fderiv_apply_eq_sum_pd`
+  (`Df(x)[w] = ∑_l ∂_l f(x)·w_l`, the coordinate/`pd` bridge via `pd_eq_fderiv`+linearity); (2) `christoffel_pd_contDiff`
+  (`pd(christoffel …) l` is `C^∞`); (3) **`christoffel_taylor_bound`** — the genuinely new analytic ingredient: the
+  SECOND-order Taylor remainder `|Γ^i_{jk}(X) − Γ^i_{jk}(p) − ∑_l ∂_l Γ^i_{jk}(p)(X−p)_l| ≤ M2·n·‖X−p‖²` from a
+  base-point `∂Γ`-Lipschitz bound (mean-value on the scalar segment curve via
+  `Convex.norm_image_sub_le_of_norm_hasDerivWithin_le`); (4) `christoffel_pd_trilin_bound` + (5) `bilin_sup_bound`
+  (sup-norm bounds for the `pd`-trilinear and generic bilinear forms); (6) `expJet2_model_hasDerivAt` (the cubic model
+  curve `M(τ)=(p+τv−½τ²Γv+⅙τ³a₃, v−τΓv+½τ²a₃)` with velocity `M'`); (7) **`expJet2_residual_deriv_eq`** — the exact
+  residual ODE identity `r₃'=A·r₃+Err`: `geodesicField(Y t) − M'(t) = ((Y t).2 − M₂(t), Γv − t·a₃ −
+  Γ_{(Y t).1}((Y t).2,(Y t).2))`. ⏳ **REMAINING (blocked step, no `sorry`)**: the little-o itself needs the
+  constant-bookkeeping assembly — the exact O(‖v‖³)-cancellation of the leading cubic terms of
+  `Err(t)=Γv−t·a₃−Γ_{(Y t).1}((Y t).2,(Y t).2)` against `t·a₃` via the telescoping
+  `Err = [Γv−Γ_p(u*,u*)] + [Γ_p(u*,u*)−Γ_X(u*,u*)] + [Γ_X(u*,u*)−Γ_X(U,U)] − t·a₃` (`u*=v−t·Γv`, `X=(Y t).1`,
+  `U=(Y t).2`), where the middle bracket uses `christoffel_taylor_bound` to extract the `∂Γ` cubic term and the outer two
+  use `bilin_sup_bound`/`christoffel_pd_trilin_bound` — leaving `‖Err‖ ≤ Acoef·‖v‖⁴ + Bcoef·‖v‖·‖r₃‖`, then the
+  inhomogeneous Grönwall (as in EXP-JET1) gives `‖r₃ 1‖ ≤ Cfinal·‖v‖⁴ = o(‖v‖³)`. The cancellation is verified on paper
+  and the per-index sum-algebra tactic is confirmed to work; only the ~370-line assembly is unshipped. ⚠ **HONEST
+  CAPTION**: these are the value-3-jet building blocks + the hard analytic remainder bound; they do **NOT** yet deliver
+  the little-o, do **NOT** discharge `hgauge`, **NOT** build the pullback metric, **NOT** move numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

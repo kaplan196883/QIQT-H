@@ -37,7 +37,28 @@ remain). Never claim numerical-G or a curved heat kernel.
   new helper `gronwallBound_zero_one_le_exp`) + position projection. New reusable lemmas: `christoffel_bilin_bound`,
   `christoffel_quad_diff_bound`, `gronwallBound_zero_one_le_exp`. HONEST: the Fréchet value 2-jet of `exp_p` at 0 — does
   NOT discharge `hgauge`, NOT build the pullback metric, NOT move numerical-G.
-- [ ] **EXP-JET2 — the value 3-jet** (`r_3(1)=o(‖v‖³)`, the `C_t` state jet). Heavier algebra.
+- [~] **EXP-JET2 — the value 3-jet** (`r_3(1)=o(‖v‖³)`). **CHECKPOINTED 2026-07-06** — all infrastructure GREEN
+  ([AF] std-3), the little-o assembly remaining (blocked step below, no `sorry`). The cubic coefficient is the honest
+  `γ'''(0)`: `a₃(v)_i = −∑_{jkl} ∂_l Γ^i_{jk}(p) v_j v_k v_l + ∑_{jk} Γ^i_{jk}(p)(Γ_p(v,v)_j v_k + v_j Γ_p(v,v)_k)`
+  (= the prompt's `2∑ Γ Γ_p(v,v) v` form exactly when the metric is symmetric, `christoffel_symm`).
+  **GREEN (ExpMap.lean):** `fderiv_apply_eq_sum_pd` (the `pd`↔`fderiv` coordinate bridge), `christoffel_pd_contDiff`
+  (`pd(Γ) l` is `C^∞`), **`christoffel_taylor_bound`** (the SECOND-order Christoffel Taylor remainder
+  `|Γ(X)−Γ(p)−∑_l ∂_lΓ(p)(X−p)_l| ≤ M2·n·‖X−p‖²` — the genuinely new analytic ingredient, via segment mean-value),
+  `christoffel_pd_trilin_bound` + `bilin_sup_bound` (sup-norm bounds), `expJet2_model_hasDerivAt` (the cubic model curve
+  `M(τ)=(p+τv−½τ²Γv+⅙τ³a₃, v−τΓv+½τ²a₃)` + its velocity), `expJet2_residual_deriv_eq` (the EXACT `r₃'=A·r₃+Err`
+  identity, `Err=(…, Γv−t·a₃−Γ_{(Y t).1}((Y t).2,(Y t).2))`).
+  **BLOCKED STEP (the remaining ~370 lines, mechanical):** the little-o needs the constant-bookkeeping assembly bounding
+  `‖Err(t)‖ ≤ Acoef·‖v‖⁴ + Bcoef·‖v‖·‖r₃‖` on `[0,1]` via the telescoping
+  `Err = [Γv−Γ_p(u*,u*)] + [Γ_p(u*,u*)−Γ_X(u*,u*)] + [Γ_X(u*,u*)−Γ_X(U,U)] − t·a₃` (`u*=v−t·Γv`, `X=(Y t).1`,
+  `U=(Y t).2`): the FIRST bracket cancels `t·a₃^{(2)}` down to `−t²·∑Γ Γv Γv = O(‖v‖⁴)`; the MIDDLE bracket, via
+  `christoffel_taylor_bound`, cancels `t·a₃^{(1)}` (the `∂Γ vvv` term) leaving an `O(‖v‖⁴)+O(‖v‖²‖r₃‖)` remainder; the
+  LAST bracket is `O(‖v‖⁴)+O(‖v‖‖r₃‖)` — all via the GREEN sup-norm/trilinear/Taylor bounds. Then the inhomogeneous
+  Grönwall (`norm_le_gronwallBound_of_norm_deriv_right_le` + `gronwallBound_zero_one_le_exp`, as EXP-JET1) gives
+  `‖r₃ 1‖ ≤ Cfinal·‖v‖⁴ = o(‖v‖³)`; project the position component. The exact-cancellation sum-algebra tactic
+  (`Finset.mul_sum` + `← Finset.sum_sub_distrib`/`sum_neg_distrib` + per-term `ring`) is CONFIRMED to work; the block is
+  simply unshipped for budget. **HONEST**: the Fréchet value 3-jet is NOT yet delivered; the GREEN pieces are the
+  building blocks + the hard remainder bound. Does NOT discharge `hgauge`, NOT build the pullback metric, NOT move
+  numerical-G.
 - [ ] **EXP-JET3 — the Jacobian field expansion to order 2** (`fderiv exp_p y = 1 + B(y,·) + ½T(y,y,·) + o(‖y‖²)`),
   via the localized first-variation. Moderate/high; the `fderiv`-differentiability caveat is the crux.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal

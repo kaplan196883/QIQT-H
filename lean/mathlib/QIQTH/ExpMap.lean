@@ -1577,4 +1577,245 @@ theorem expMap_value_two_jet (g gi : Point n → Fin n → Fin n → ℝ)
     _ = Cfinal * ‖v‖ * ‖v‖ ^ 2 := by ring
     _ ≤ c * ‖v‖ ^ 2 := mul_le_mul_of_nonneg_right hCv (sq_nonneg _)
 
+/-! ### EXP-JET2 — the value 3-jet `exp_p(v) = p + v − ½Γ_p(v,v) + ⅙a₃(v) + o(‖v‖³)`
+
+  One order up from EXP-JET1, by the SAME equilibrium-anchored residual-ODE + inhomogeneous-Grönwall
+  technique.  The cubic coefficient is the true third radial derivative `γ'''(0)` of `t ↦ exp_p(tv)`:
+  `a₃(v)_i = −∑_{j,k,l} ∂_l Γ^i_{jk}(p) v_j v_k v_l + ∑_{j,k} Γ^i_{jk}(p)(Γ_p(v,v)_j v_k + v_j Γ_p(v,v)_k)`
+  (with `∂_l Γ = pd (christoffel …) l`).  This is the honest symmetry-free form; when the metric is
+  symmetric (so `Γ^i_{jk} = Γ^i_{kj}`, `christoffel_symm`) the second sum equals `2∑_{j,k}
+  Γ^i_{jk}(p) Γ_p(v,v)_j v_k`.
+
+  The genuinely new analytic ingredient over EXP-JET1 is the SECOND-order Taylor remainder for the
+  Christoffel symbols (`christoffel_taylor_bound`): a base-point `∂Γ`-Lipschitz bound makes the leading
+  cubic terms cancel EXACTLY against `a₃`, leaving an `O(‖v‖⁴)` inhomogeneous term, hence `o(‖v‖³)`.
+
+  HONEST CAPTION (binding): this is the Fréchet value 3-jet of `exp_p` at `0`.  It does NOT discharge
+  `hgauge`, NOT build the pullback metric, NOT move numerical-G (`N`, `Λ_s`, `E/ξ` remain). -/
+
+/-- **`fderiv` in coordinate form:** for `f : Point n → ℝ` differentiable at `x`, the Fréchet
+    derivative applied to a vector `w` is the coordinate expansion `Df(x)[w] = ∑_l ∂_l f(x)·w_l`
+    (each `∂_l f = pd f l`, via `pd_eq_fderiv` + linearity of `fderiv` over the standard basis). -/
+theorem fderiv_apply_eq_sum_pd (f : Point n → ℝ) (x w : Point n)
+    (hf : DifferentiableAt ℝ f x) :
+    fderiv ℝ f x w = ∑ l, pd f l x * w l := by
+  have hw : (∑ l, w l • (Pi.single l (1 : ℝ) : Point n)) = w := by
+    funext m
+    simp [Finset.sum_apply, Pi.single_apply, mul_ite, mul_one, mul_zero,
+      Finset.sum_ite_eq]
+  calc fderiv ℝ f x w
+      = fderiv ℝ f x (∑ l, w l • (Pi.single l (1 : ℝ) : Point n)) := by rw [hw]
+    _ = ∑ l, w l • fderiv ℝ f x (Pi.single l 1) := by rw [map_sum]; simp_rw [map_smul]
+    _ = ∑ l, pd f l x * w l := by
+        refine Finset.sum_congr rfl fun l _ => ?_
+        rw [pd_eq_fderiv f l x hf, smul_eq_mul, mul_comm]
+
+/-- **`pd (christoffel …) l` is `C^∞`.**  `pd f l = fun y => Df(y)[eₗ]` (`pd_eq_fderiv`), and `y ↦
+    Df(y)` is `C^∞` for `C^∞` `f` (`ContDiff.fderiv_right`); evaluating at the fixed basis vector `eₗ`
+    is a continuous-linear application, preserving `C^∞`.  This provides the sup-norm value and
+    Lipschitz bounds for the first Christoffel derivatives on a compact ball. -/
+theorem christoffel_pd_contDiff (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (i j k l : Fin n) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => pd (fun z => christoffel g gi i j k z) l y) := by
+  have he : (fun y => pd (fun z => christoffel g gi i j k z) l y)
+      = (fun y => fderiv ℝ (fun z => christoffel g gi i j k z) y (Pi.single l 1)) :=
+    funext fun y => pd_eq_fderiv _ l y ((hC i j k).differentiable (by simp) y)
+  rw [he]
+  exact (ContinuousLinearMap.apply ℝ ℝ ((Pi.single l 1 : Point n))).contDiff.comp
+    ((hC i j k).fderiv_right (m := ⊤) le_top)
+
+/-- **Second-order Taylor remainder for a Christoffel symbol.**  Writing `w = X − p`, if the first
+    partials `∂_l Γ^i_{jk}` are `M2`-Lipschitz along the segment `[p, X]` (each `|∂_l Γ(p+θw) − ∂_l
+    Γ(p)| ≤ M2‖θw‖` for `θ ∈ [0,1]`), then the first-order Taylor error obeys
+    `|Γ^i_{jk}(X) − Γ^i_{jk}(p) − ∑_l ∂_l Γ^i_{jk}(p) w_l| ≤ M2·n·‖w‖²`.  Proof: mean-value on the
+    scalar curve `φ(θ) = Γ(p+θw)` (chain rule + `fderiv_apply_eq_sum_pd`), comparing `φ(1)−φ(0)` to
+    `φ'(0)` via `Convex.norm_image_sub_le_of_norm_hasDerivWithin_le`. -/
+theorem christoffel_taylor_bound (g gi : Point n → Fin n → Fin n → ℝ)
+    (p X : Point n) (i j k : Fin n) {M2 : ℝ} (hM2 : 0 ≤ M2)
+    (hdiff : ∀ y, DifferentiableAt ℝ (fun z => christoffel g gi i j k z) y)
+    (hLip : ∀ l : Fin n, ∀ θ : ℝ, θ ∈ Set.Icc (0 : ℝ) 1 →
+      |pd (fun z => christoffel g gi i j k z) l (p + θ • (X - p))
+        - pd (fun z => christoffel g gi i j k z) l p| ≤ M2 * ‖θ • (X - p)‖) :
+    |christoffel g gi i j k X - christoffel g gi i j k p
+        - ∑ l, pd (fun z => christoffel g gi i j k z) l p * (X - p) l|
+      ≤ M2 * (n : ℝ) * ‖X - p‖ ^ 2 := by
+  set Γf : Point n → ℝ := fun z => christoffel g gi i j k z with hΓf
+  set w : Point n := X - p with hw
+  set L0 : ℝ := ∑ l, pd Γf l p * w l with hL0
+  -- the scalar curve `φ(θ) = Γf(p + θ w)` and its derivative.
+  have hφ : ∀ θ : ℝ, HasDerivAt (fun θ' => Γf (p + θ' • w))
+      (∑ l, pd Γf l (p + θ • w) * w l) θ := by
+    intro θ
+    have hid : HasDerivAt (fun θ' : ℝ => θ' • w) w θ := by
+      simpa using (hasDerivAt_id θ).smul_const w
+    have hcurve : HasDerivAt (fun θ' : ℝ => p + θ' • w) w θ := hid.const_add p
+    have hcomp := (hdiff (p + θ • w)).hasFDerivAt.comp_hasDerivAt θ hcurve
+    rw [fderiv_apply_eq_sum_pd Γf (p + θ • w) w (hdiff (p + θ • w))] at hcomp
+    exact hcomp
+  -- `ψ(θ) = φ(θ) − φ(0) − θ·φ'(0)`, with `ψ(0) = 0` and derivative `φ'(θ) − φ'(0)`.
+  set ψ : ℝ → ℝ := fun θ => Γf (p + θ • w) - Γf p - θ * L0 with hψ
+  have hψ0 : ψ 0 = 0 := by simp [hψ]
+  have hψderiv : ∀ θ : ℝ, HasDerivAt ψ ((∑ l, pd Γf l (p + θ • w) * w l) - L0) θ := by
+    intro θ
+    have h1 : HasDerivAt (fun θ' => Γf (p + θ' • w) - Γf p)
+        (∑ l, pd Γf l (p + θ • w) * w l) θ := (hφ θ).sub_const _
+    have h2 : HasDerivAt (fun θ' : ℝ => θ' * L0) L0 θ := by
+      simpa using (hasDerivAt_id θ).mul_const L0
+    exact h1.sub h2
+  -- the derivative bound on `[0,1]`.
+  have hbd : ∀ θ ∈ Set.Icc (0 : ℝ) 1,
+      ‖(∑ l, pd Γf l (p + θ • w) * w l) - L0‖ ≤ M2 * (n : ℝ) * ‖w‖ ^ 2 := by
+    intro θ hθ
+    rw [hL0, ← Finset.sum_sub_distrib]
+    have hθw : ‖θ • w‖ ≤ ‖w‖ := by
+      rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg hθ.1]
+      calc θ * ‖w‖ ≤ 1 * ‖w‖ := mul_le_mul_of_nonneg_right hθ.2 (norm_nonneg _)
+        _ = ‖w‖ := one_mul _
+    have hterm : ∀ l : Fin n,
+        |pd Γf l (p + θ • w) * w l - pd Γf l p * w l| ≤ M2 * ‖w‖ * ‖w‖ := by
+      intro l
+      rw [← sub_mul, abs_mul]
+      have ha : |pd Γf l (p + θ • w) - pd Γf l p| ≤ M2 * ‖w‖ :=
+        (hLip l θ hθ).trans (mul_le_mul_of_nonneg_left hθw hM2)
+      have hb : |w l| ≤ ‖w‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm w l
+      exact mul_le_mul ha hb (abs_nonneg _) (by positivity)
+    rw [Real.norm_eq_abs]
+    calc |∑ l, (pd Γf l (p + θ • w) * w l - pd Γf l p * w l)|
+        ≤ ∑ l, |pd Γf l (p + θ • w) * w l - pd Γf l p * w l| := abs_sum_le_sum_abs _ _
+      _ ≤ ∑ _l : Fin n, M2 * ‖w‖ * ‖w‖ := Finset.sum_le_sum fun l _ => hterm l
+      _ = M2 * (n : ℝ) * ‖w‖ ^ 2 := by
+          simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+  -- mean-value: `‖ψ 1 − ψ 0‖ ≤ (M2 n ‖w‖²)·‖1 − 0‖`.
+  have hmvt := Convex.norm_image_sub_le_of_norm_hasDerivWithin_le
+    (f := ψ) (f' := fun θ => (∑ l, pd Γf l (p + θ • w) * w l) - L0)
+    (s := Set.Icc (0 : ℝ) 1) (C := M2 * (n : ℝ) * ‖w‖ ^ 2) (x := 0) (y := 1)
+    (fun θ hθ => (hψderiv θ).hasDerivWithinAt) hbd (convex_Icc 0 1)
+    (by simp) (by simp)
+  rw [hψ0, sub_zero] at hmvt
+  have hψ1 : ψ 1 = Γf X - Γf p - L0 := by
+    show Γf (p + (1 : ℝ) • w) - Γf p - (1 : ℝ) * L0 = Γf X - Γf p - L0
+    rw [show p + (1 : ℝ) • w = X by rw [hw, one_smul]; abel, one_mul]
+  rw [hψ1] at hmvt
+  calc |christoffel g gi i j k X - christoffel g gi i j k p - L0|
+      = ‖Γf X - Γf p - L0‖ := (Real.norm_eq_abs _).symm
+    _ ≤ M2 * (n : ℝ) * ‖w‖ ^ 2 * ‖(1 : ℝ) - 0‖ := hmvt
+    _ = M2 * (n : ℝ) * ‖X - p‖ ^ 2 := by rw [hw]; norm_num
+
+/-- **Sup-norm bound for a `pd`-Christoffel trilinear form.**  If `|∂_l Γ^i_{jk}(p)| ≤ Nc`, then
+    `‖(fun i => ∑_{j,k,l} ∂_l Γ^i_{jk}(p)·a_j·b_k·c_l)‖ ≤ Nc·n³·‖a‖·‖b‖·‖c‖`.  The trilinear analogue
+    of `christoffel_bilin_bound`, used to control the first-order Taylor terms of `Γ`. -/
+theorem christoffel_pd_trilin_bound (g gi : Point n → Fin n → Fin n → ℝ)
+    (p a b c : Point n) {Nc : ℝ} (hNc0 : 0 ≤ Nc)
+    (hNc : ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l p| ≤ Nc) :
+    ‖(fun i => ∑ j, ∑ k, ∑ l,
+        pd (fun z => christoffel g gi i j k z) l p * a j * b k * c l : Point n)‖
+      ≤ Nc * (n : ℝ) ^ 3 * (‖a‖ * ‖b‖ * ‖c‖) := by
+  rw [pi_norm_le_iff_of_nonneg (by positivity)]
+  intro i
+  simp only [Real.norm_eq_abs]
+  have hterm : ∀ j k l : Fin n,
+      |pd (fun z => christoffel g gi i j k z) l p * a j * b k * c l|
+        ≤ Nc * (‖a‖ * ‖b‖ * ‖c‖) := by
+    intro j k l
+    rw [abs_mul, abs_mul, abs_mul]
+    have h1 : |pd (fun z => christoffel g gi i j k z) l p| ≤ Nc := hNc i j k l
+    have h2 : |a j| ≤ ‖a‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm a j
+    have h3 : |b k| ≤ ‖b‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm b k
+    have h4 : |c l| ≤ ‖c‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm c l
+    calc |pd (fun z => christoffel g gi i j k z) l p| * |a j| * |b k| * |c l|
+        ≤ Nc * ‖a‖ * ‖b‖ * ‖c‖ :=
+          mul_le_mul (mul_le_mul (mul_le_mul h1 h2 (abs_nonneg _) hNc0) h3 (abs_nonneg _)
+            (by positivity)) h4 (abs_nonneg _) (by positivity)
+      _ = Nc * (‖a‖ * ‖b‖ * ‖c‖) := by ring
+  calc |∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * a j * b k * c l|
+      ≤ ∑ j, |∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * a j * b k * c l| :=
+        abs_sum_le_sum_abs _ _
+    _ ≤ ∑ _j : Fin n, ∑ _k : Fin n, ∑ _l : Fin n, Nc * (‖a‖ * ‖b‖ * ‖c‖) :=
+        Finset.sum_le_sum fun j _ =>
+          (abs_sum_le_sum_abs _ _).trans (Finset.sum_le_sum fun k _ =>
+            (abs_sum_le_sum_abs _ _).trans (Finset.sum_le_sum fun l _ => hterm j k l))
+    _ = Nc * (n : ℝ) ^ 3 * (‖a‖ * ‖b‖ * ‖c‖) := by
+        simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+
+/-- **Generic sup-norm bound for a bilinear form.**  For any coefficient array `F : Fin n → Fin n →
+    Fin n → ℝ` with `|F i j k| ≤ Mc`, the form `∑_{j,k} F i j k · a_j · b_k` obeys `‖·‖ ≤ Mc·n²·‖a‖·‖b‖`.
+    Generalises `christoffel_bilin_bound` to an arbitrary base-point Christoffel array or Taylor
+    remainder. -/
+theorem bilin_sup_bound (F : Fin n → Fin n → Fin n → ℝ) (a b : Point n) {Mc : ℝ} (hMc0 : 0 ≤ Mc)
+    (hMc : ∀ i j k, |F i j k| ≤ Mc) :
+    ‖(fun i => ∑ j, ∑ k, F i j k * a j * b k : Point n)‖ ≤ Mc * (n : ℝ) ^ 2 * (‖a‖ * ‖b‖) := by
+  rw [pi_norm_le_iff_of_nonneg (by positivity)]
+  intro i
+  simp only [Real.norm_eq_abs]
+  have hterm : ∀ j k : Fin n, |F i j k * a j * b k| ≤ Mc * (‖a‖ * ‖b‖) := by
+    intro j k
+    rw [abs_mul, abs_mul]
+    have h1 : |F i j k| ≤ Mc := hMc i j k
+    have h2 : |a j| ≤ ‖a‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm a j
+    have h3 : |b k| ≤ ‖b‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm b k
+    calc |F i j k| * |a j| * |b k|
+        ≤ Mc * ‖a‖ * ‖b‖ :=
+          mul_le_mul (mul_le_mul h1 h2 (abs_nonneg _) hMc0) h3 (abs_nonneg _) (by positivity)
+      _ = Mc * (‖a‖ * ‖b‖) := by ring
+  calc |∑ j, ∑ k, F i j k * a j * b k|
+      ≤ ∑ j, |∑ k, F i j k * a j * b k| := abs_sum_le_sum_abs _ _
+    _ ≤ ∑ _j : Fin n, ∑ _k : Fin n, Mc * (‖a‖ * ‖b‖) :=
+        Finset.sum_le_sum fun j _ =>
+          (abs_sum_le_sum_abs _ _).trans (Finset.sum_le_sum fun k _ => hterm j k)
+    _ = Mc * (n : ℝ) ^ 2 * (‖a‖ * ‖b‖) := by
+        simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+
+/-- **The EXP-JET2 model curve's derivative.**  The explicit cubic model
+    `M(τ) = (p + τ·v − ½τ²·Γv + ⅙τ³·a₃, v − τ·Γv + ½τ²·a₃)` has velocity
+    `M'(τ) = (v − τ·Γv + ½τ²·a₃, −Γv + τ·a₃)`.  Pure calculus (position component differentiates to
+    the velocity component); the seed for the residual ODE `r₃' = A·r₃ + Err`. -/
+theorem expJet2_model_hasDerivAt (p v Γv a3 : Point n) (t : ℝ) :
+    HasDerivAt (fun τ : ℝ =>
+        ((p + τ • v - (τ ^ 2 / 2) • Γv + (τ ^ 3 / 6) • a3,
+          v - τ • Γv + (τ ^ 2 / 2) • a3) : Point n × Point n))
+      ((v - t • Γv + (t ^ 2 / 2) • a3, -Γv + t • a3) : Point n × Point n) t := by
+  have hc1 : HasDerivAt (fun τ : ℝ => p + τ • v - (τ ^ 2 / 2) • Γv + (τ ^ 3 / 6) • a3)
+      (v - t • Γv + (t ^ 2 / 2) • a3) t := by
+    have hp : HasDerivAt (fun _ : ℝ => p) (0 : Point n) t := hasDerivAt_const t p
+    have hv1 : HasDerivAt (fun τ : ℝ => τ • v) v t := by simpa using (hasDerivAt_id t).smul_const v
+    have hsq : HasDerivAt (fun τ : ℝ => τ ^ 2 / 2) t t := by
+      convert (hasDerivAt_pow 2 t).div_const 2 using 1; norm_num
+    have hquad : HasDerivAt (fun τ : ℝ => (τ ^ 2 / 2) • Γv) (t • Γv) t := hsq.smul_const Γv
+    have hcub0 : HasDerivAt (fun τ : ℝ => τ ^ 3 / 6) (t ^ 2 / 2) t := by
+      convert (hasDerivAt_pow 3 t).div_const 6 using 1; norm_num; ring
+    have hcub : HasDerivAt (fun τ : ℝ => (τ ^ 3 / 6) • a3) ((t ^ 2 / 2) • a3) t :=
+      hcub0.smul_const a3
+    have := ((hp.add hv1).sub hquad).add hcub
+    simpa using this
+  have hc2 : HasDerivAt (fun τ : ℝ => v - τ • Γv + (τ ^ 2 / 2) • a3) (-Γv + t • a3) t := by
+    have hvc : HasDerivAt (fun _ : ℝ => v) (0 : Point n) t := hasDerivAt_const t v
+    have hτΓ : HasDerivAt (fun τ : ℝ => τ • Γv) Γv t := by
+      simpa using (hasDerivAt_id t).smul_const Γv
+    have hsq : HasDerivAt (fun τ : ℝ => τ ^ 2 / 2) t t := by
+      convert (hasDerivAt_pow 2 t).div_const 2 using 1; norm_num
+    have hquad : HasDerivAt (fun τ : ℝ => (τ ^ 2 / 2) • a3) (t • a3) t := hsq.smul_const a3
+    have := (hvc.sub hτΓ).add hquad
+    simpa using this
+  exact hc1.prodMk hc2
+
+/-- **The EXP-JET2 residual ODE identity.**  For any curve `Y`, the difference between the geodesic
+    field at `Y t` and the model velocity `M'(t) = (v − t·Γv + ½t²·a₃, −Γv + t·a₃)` is
+    `((Y t).2 − M₂(t), Γv − t·a₃ − Γ_{(Y t).1}((Y t).2,(Y t).2))`.  This is `r₃'(t) = A·r₃ + Err` in
+    explicit form: the first (velocity-transport `A`) component is the residual velocity `(r₃).2`, and
+    the second component is the inhomogeneous `Err(t)`.  Pure algebra of `geodesicField`. -/
+theorem expJet2_residual_deriv_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (Y : ℝ → Point n × Point n) (Γv a3 v : Point n) (t : ℝ) :
+    geodesicField g gi (Y t)
+        - ((v - t • Γv + (t ^ 2 / 2) • a3, -Γv + t • a3) : Point n × Point n)
+      = ((Y t).2 - (v - t • Γv + (t ^ 2 / 2) • a3),
+          Γv - t • a3
+            - (fun i => ∑ j, ∑ k, christoffel g gi i j k (Y t).1 * (Y t).2 j * (Y t).2 k)) := by
+  refine Prod.ext ?_ ?_
+  · simp [geodesicField]
+  · funext i
+    simp only [geodesicField, Prod.snd_sub, Pi.sub_apply, Pi.add_apply, Pi.smul_apply,
+      Pi.neg_apply, smul_eq_mul]
+    ring
+
 end QIQTH.ExpMap

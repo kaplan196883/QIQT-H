@@ -9701,4 +9701,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.gronwallBound_zero_one_le_exp
 #print axioms QIQTH.ExpMap.expMap_value_two_jet
 
+-- ExpMap.lean — EXP-JET2 (CHECKPOINTED): the value 3-jet infrastructure (THE_EXP_JETS_PLAN.md), 2026-07-06.
+-- Target: exp_p(v) − p − v + ½Γ_p(v,v) − ⅙·a₃(v) = o(‖v‖³), a₃(v) = the true γ'''(0) =
+--   −∑_{jkl} ∂_lΓ^i_{jk}(p) v_j v_k v_l + ∑_{jk} Γ^i_{jk}(p)(Γ_p(v,v)_j v_k + v_j Γ_p(v,v)_k)
+-- (honest symmetry-free form; = 2∑ Γ Γ_p(v,v) v when the metric is symmetric). All infrastructure lemmas GREEN:
+--  fderiv_apply_eq_sum_pd  : Df(x)[w] = ∑_l ∂_l f(x)·w_l (the pd↔fderiv coordinate bridge, via pd_eq_fderiv + linearity).
+--  christoffel_pd_contDiff : pd(christoffel …) l is C^∞ (fderiv_right + CLM.apply composition).
+--  christoffel_taylor_bound: the SECOND-order Christoffel Taylor remainder (the genuinely new analytic ingredient)
+--                            |Γ(X) − Γ(p) − ∑_l ∂_lΓ(p)(X−p)_l| ≤ M2·n·‖X−p‖² from a base-point ∂Γ-Lipschitz bound,
+--                            via segment mean-value (Convex.norm_image_sub_le_of_norm_hasDerivWithin_le).
+--  christoffel_pd_trilin_bound / bilin_sup_bound : sup-norm bounds for the pd-trilinear and generic bilinear forms.
+--  expJet2_model_hasDerivAt: the cubic model curve M(τ)=(p+τv−½τ²Γv+⅙τ³a₃, v−τΓv+½τ²a₃) and its velocity M'(τ).
+--  expJet2_residual_deriv_eq: the EXACT residual ODE identity r₃'=A·r₃+Err (Err = Γv−t·a₃−Γ_{(Y t).1}((Y t).2,(Y t).2)).
+-- REMAINING (blocked, no sorry): the little-o's ~370-line constant-bookkeeping assembly (the O(‖v‖³)-cancellation of
+-- Err against t·a₃ via the E1/E2/E3 telescoping + inhomogeneous Grönwall). HONEST: these are the value-3-jet building
+-- blocks + the hard remainder bound; they do NOT yet deliver the little-o, do NOT discharge hgauge, NOT build the
+-- pullback metric, NOT move numerical-G. All [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv_apply_eq_sum_pd
+#print axioms QIQTH.ExpMap.christoffel_pd_contDiff
+#print axioms QIQTH.ExpMap.christoffel_taylor_bound
+#print axioms QIQTH.ExpMap.christoffel_pd_trilin_bound
+#print axioms QIQTH.ExpMap.bilin_sup_bound
+#print axioms QIQTH.ExpMap.expJet2_model_hasDerivAt
+#print axioms QIQTH.ExpMap.expJet2_residual_deriv_eq
+
 end QIQTH.AxiomAudit
