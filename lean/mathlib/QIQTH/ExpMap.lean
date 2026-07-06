@@ -2041,6 +2041,69 @@ theorem bilin_sup_bound (F : Fin n → Fin n → Fin n → ℝ) (a b : Point n) 
     _ = Mc * (n : ℝ) ^ 2 * (‖a‖ * ‖b‖) := by
         simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
 
+/-- **Two-point bilinear-difference bound.**  For coefficient arrays `F, F'` with `|F i j k| ≤ Mc`
+    and `|F i j k − F' i j k| ≤ Dc`, and vectors `a,a',b,b'`, the difference of the two bilinear forms
+    `∑_{jk} F_{ijk} a_j b_k − ∑_{jk} F'_{ijk} a'_j b'_k` obeys
+    `‖·‖ ≤ Mc·n²·(‖a‖·‖b−b'‖ + ‖a−a'‖·‖b'‖) + Dc·n²·(‖a'‖·‖b'‖)`.  The split
+    `F a b − F' a' b' = F(a b − a' b') + (F − F')(a' b')` with `a b − a' b' = a(b−b') + (a−a')b'`.
+    The generic two-point analogue of `christoffel_quad_diff_bound` (which is the diagonal case
+    `a = b`, `a' = b'`, `F = Γ_p`, `F' = Γ_y`) — used to bound the order-1 difference of the two
+    Γ-bilinear acceleration terms of `DF(x,u) − DF(p,v)`. -/
+theorem bilin_two_pt_diff_bound (F F' : Fin n → Fin n → Fin n → ℝ) (a a' b b' : Point n)
+    {Mc Dc : ℝ} (hMc0 : 0 ≤ Mc) (hDc0 : 0 ≤ Dc)
+    (hMc : ∀ i j k, |F i j k| ≤ Mc) (hDc : ∀ i j k, |F i j k - F' i j k| ≤ Dc) :
+    ‖(fun i => (∑ j, ∑ k, F i j k * a j * b k)
+              - (∑ j, ∑ k, F' i j k * a' j * b' k) : Point n)‖
+      ≤ Mc * (n : ℝ) ^ 2 * (‖a‖ * ‖b - b'‖ + ‖a - a'‖ * ‖b'‖)
+        + Dc * (n : ℝ) ^ 2 * (‖a'‖ * ‖b'‖) := by
+  rw [pi_norm_le_iff_of_nonneg (by positivity)]
+  intro i
+  simp only [Real.norm_eq_abs]
+  have hterm : ∀ j k : Fin n,
+      |F i j k * a j * b k - F' i j k * a' j * b' k|
+        ≤ Mc * (‖a‖ * ‖b - b'‖ + ‖a - a'‖ * ‖b'‖) + Dc * (‖a'‖ * ‖b'‖) := by
+    intro j k
+    have e1 : F i j k * a j * b k - F' i j k * a' j * b' k
+        = F i j k * (a j * b k - a' j * b' k)
+          + (F i j k - F' i j k) * (a' j * b' k) := by ring
+    rw [e1]
+    refine (abs_add_le _ _).trans ?_
+    rw [abs_mul, abs_mul]
+    have hd : |a j * b k - a' j * b' k| ≤ ‖a‖ * ‖b - b'‖ + ‖a - a'‖ * ‖b'‖ := by
+      have e2 : a j * b k - a' j * b' k = a j * (b k - b' k) + (a j - a' j) * b' k := by ring
+      rw [e2]
+      refine (abs_add_le _ _).trans ?_
+      rw [abs_mul, abs_mul]
+      have haj : |a j| ≤ ‖a‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm a j
+      have hb'k : |b' k| ≤ ‖b'‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm b' k
+      have hbk : |b k - b' k| ≤ ‖b - b'‖ := by
+        rw [← Real.norm_eq_abs, show b k - b' k = (b - b') k from (Pi.sub_apply b b' k).symm]
+        exact norm_le_pi_norm (b - b') k
+      have haj2 : |a j - a' j| ≤ ‖a - a'‖ := by
+        rw [← Real.norm_eq_abs, show a j - a' j = (a - a') j from (Pi.sub_apply a a' j).symm]
+        exact norm_le_pi_norm (a - a') j
+      exact add_le_add (mul_le_mul haj hbk (abs_nonneg _) (norm_nonneg _))
+        (mul_le_mul haj2 hb'k (abs_nonneg _) (norm_nonneg _))
+    have hbb : |a' j * b' k| ≤ ‖a'‖ * ‖b'‖ := by
+      rw [abs_mul]
+      have ha'j : |a' j| ≤ ‖a'‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm a' j
+      have hb'k : |b' k| ≤ ‖b'‖ := by rw [← Real.norm_eq_abs]; exact norm_le_pi_norm b' k
+      exact mul_le_mul ha'j hb'k (abs_nonneg _) (norm_nonneg _)
+    have h1 : |F i j k| ≤ Mc := hMc i j k
+    have h2 : |F i j k - F' i j k| ≤ Dc := hDc i j k
+    exact add_le_add (mul_le_mul h1 hd (abs_nonneg _) hMc0)
+      (mul_le_mul h2 hbb (abs_nonneg _) hDc0)
+  have hstep : ∀ j : Fin n,
+      |(∑ k, F i j k * a j * b k) - (∑ k, F' i j k * a' j * b' k)|
+        ≤ ∑ _k : Fin n, (Mc * (‖a‖ * ‖b - b'‖ + ‖a - a'‖ * ‖b'‖) + Dc * (‖a'‖ * ‖b'‖)) := by
+    intro j
+    rw [← Finset.sum_sub_distrib]
+    exact (abs_sum_le_sum_abs _ _).trans (Finset.sum_le_sum fun k _ => hterm j k)
+  rw [← Finset.sum_sub_distrib]
+  refine (abs_sum_le_sum_abs _ _).trans ((Finset.sum_le_sum fun j _ => hstep j).trans (le_of_eq ?_))
+  simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  ring
+
 /-- **The EXP-JET2 model curve's derivative.**  The explicit cubic model
     `M(τ) = (p + τ·v − ½τ²·Γv + ⅙τ³·a₃, v − τ·Γv + ½τ²·a₃)` has velocity
     `M'(τ) = (v − τ·Γv + ½τ²·a₃, −Γv + τ·a₃)`.  Pure calculus (position component differentiates to
@@ -3156,6 +3219,368 @@ theorem expJet_fderiv_tube_order0 (g gi : Point n → Fin n → Fin n → ℝ)
     _ ≤ Nc * (n : ℝ) ^ 3 * (C₀ ^ 2 * (ρ * ‖v‖)) + 2 * (Mc * (n : ℝ) ^ 2) * (C₀ * ‖v‖) :=
         add_le_add hterm1 hterm2
     _ = C * ‖v‖ := by rw [hCdef]; ring
+
+set_option maxHeartbeats 1600000 in
+/-- **EXP-JET3c (STEP 1, the two-point operator-norm bound) — `‖DF(x,u) − DF(x',u')‖`.**  The Jacobi
+    coefficient at two phase points differs only in its acceleration block; splitting each of the three
+    acceleration term-types into a difference bounds the operator norm by: given `|Γ(x)| ≤ Mc`,
+    `|∂Γ(x)|, |∂Γ(x')| ≤ Nc` and `|Γ(x) − Γ(x')| ≤ Dc`,
+    `‖DF(x,u) − DF(x',u')‖ ≤ Nc·n³·(‖u‖² + ‖u'‖²) + 2·(Mc·n²·‖u−u'‖ + Dc·n²·‖u'‖)`.
+
+    Proof: `(DF(x,u) − DF(x',u'))(ξ,η) = (0, Acc(x,u) − Acc(x',u'))` (velocity slots cancel); the ∂Γ
+    trilinear difference is bounded crudely by `‖·‖ ≤ ‖T1(x)‖ + ‖T1(x')‖` (`christoffel_pd_trilin_bound`
+    at each point), and the two Γ-bilinear differences by `bilin_two_pt_diff_bound`; `‖ξ‖,‖η‖ ≤ ‖(ξ,η)‖`,
+    then `ContinuousLinearMap.opNorm_le_bound`.
+
+    Applied at `(x,u) = Y_v(t)`, `(x',u') = (p,v)` (with `‖u−u'‖ = O(‖v‖²)` from `expTube_value_two_jet`,
+    `Dc = Lc·‖x−p‖ = O(‖v‖)` from the Christoffel Lipschitz bound), this yields the ORDER-1 anchoring
+    `‖DF(Y_v t) − DF(p,v)‖ = O(‖v‖²)` — the fixed operator `DF(p,v)` captures the order-1 coefficient
+    `A₁`, `t`-independently.  HONEST: the pointwise two-point bound; it does NOT by itself give the
+    Jacobian 2-jet, NOT the pullback metric, NOT numerical-G. -/
+theorem geodesicField_fderiv_two_pt_opNorm_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x u x' u' : Point n) {Mc Nc Dc : ℝ} (hMc0 : 0 ≤ Mc) (hNc0 : 0 ≤ Nc) (hDc0 : 0 ≤ Dc)
+    (hMc : ∀ i j k, |christoffel g gi i j k x| ≤ Mc)
+    (hNcx : ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l x| ≤ Nc)
+    (hNcx' : ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l x'| ≤ Nc)
+    (hDc : ∀ i j k, |christoffel g gi i j k x - christoffel g gi i j k x'| ≤ Dc) :
+    ‖fderiv ℝ (geodesicField g gi) ((x, u) : Point n × Point n)
+        - fderiv ℝ (geodesicField g gi) ((x', u') : Point n × Point n)‖
+      ≤ Nc * (n : ℝ) ^ 3 * (‖u‖ ^ 2 + ‖u'‖ ^ 2)
+        + 2 * (Mc * (n : ℝ) ^ 2 * ‖u - u'‖ + Dc * (n : ℝ) ^ 2 * ‖u'‖) := by
+  have hu0 : 0 ≤ ‖u‖ := norm_nonneg u
+  have hu'0 : 0 ≤ ‖u'‖ := norm_nonneg u'
+  have hMcn0 : 0 ≤ Mc * (n : ℝ) ^ 2 := mul_nonneg hMc0 (by positivity)
+  have hNcn0 : 0 ≤ Nc * (n : ℝ) ^ 3 := mul_nonneg hNc0 (by positivity)
+  have hDcn0 : 0 ≤ Dc * (n : ℝ) ^ 2 := mul_nonneg hDc0 (by positivity)
+  refine ContinuousLinearMap.opNorm_le_bound _ ?_ ?_
+  · exact add_nonneg (mul_nonneg hNcn0 (by positivity))
+      (mul_nonneg (by norm_num) (add_nonneg (mul_nonneg hMcn0 (norm_nonneg _))
+        (mul_nonneg hDcn0 hu'0)))
+  intro z
+  obtain ⟨ξ, η⟩ := z
+  have hξ : ‖ξ‖ ≤ ‖((ξ, η) : Point n × Point n)‖ := by rw [Prod.norm_def]; exact le_max_left _ _
+  have hη : ‖η‖ ≤ ‖((ξ, η) : Point n × Point n)‖ := by rw [Prod.norm_def]; exact le_max_right _ _
+  have hη0 : ‖η - η‖ = 0 := by rw [sub_self, norm_zero]
+  rw [ContinuousLinearMap.sub_apply, geodesicField_fderiv_apply g gi hC x u ξ η,
+    geodesicField_fderiv_apply g gi hC x' u' ξ η, Prod.mk_sub_mk, sub_self,
+    Prod.norm_def, norm_zero, max_eq_right (norm_nonneg _)]
+  have hfun : (fun i => -∑ j, ∑ k,
+        ((∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k
+          + christoffel g gi i j k x * η j * u k
+          + christoffel g gi i j k x * u j * η k) : Point n)
+      - (fun i => -∑ j, ∑ k,
+        ((∑ l, pd (fun z => christoffel g gi i j k z) l x' * ξ l) * u' j * u' k
+          + christoffel g gi i j k x' * η j * u' k
+          + christoffel g gi i j k x' * u' j * η k) : Point n)
+      = -(((fun i => ∑ j, ∑ k, ∑ l,
+                pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l : Point n)
+            - (fun i => ∑ j, ∑ k, ∑ l,
+                pd (fun z => christoffel g gi i j k z) l x' * u' j * u' k * ξ l : Point n))
+          + (fun i => (∑ j, ∑ k, christoffel g gi i j k x * η j * u k)
+                - (∑ j, ∑ k, christoffel g gi i j k x' * η j * u' k) : Point n)
+          + (fun i => (∑ j, ∑ k, christoffel g gi i j k x * u j * η k)
+                - (∑ j, ∑ k, christoffel g gi i j k x' * u' j * η k) : Point n)) := by
+    funext i
+    simp only [Pi.sub_apply, Pi.neg_apply, Pi.add_apply]
+    have hdx : ∑ j, ∑ k,
+          ((∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k
+            + christoffel g gi i j k x * η j * u k + christoffel g gi i j k x * u j * η k)
+        = (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k)
+          + (∑ j, ∑ k, christoffel g gi i j k x * η j * u k)
+          + (∑ j, ∑ k, christoffel g gi i j k x * u j * η k) := by
+      simp only [Finset.sum_add_distrib]
+    have hdx' : ∑ j, ∑ k,
+          ((∑ l, pd (fun z => christoffel g gi i j k z) l x' * ξ l) * u' j * u' k
+            + christoffel g gi i j k x' * η j * u' k + christoffel g gi i j k x' * u' j * η k)
+        = (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l x' * ξ l) * u' j * u' k)
+          + (∑ j, ∑ k, christoffel g gi i j k x' * η j * u' k)
+          + (∑ j, ∑ k, christoffel g gi i j k x' * u' j * η k) := by
+      simp only [Finset.sum_add_distrib]
+    have hTAx : (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * u k)
+        = ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l := by
+      refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+      rw [Finset.sum_mul, Finset.sum_mul]
+      exact Finset.sum_congr rfl fun l _ => by ring
+    have hTAx' : (∑ j, ∑ k, (∑ l, pd (fun z => christoffel g gi i j k z) l x' * ξ l) * u' j * u' k)
+        = ∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l x' * u' j * u' k * ξ l := by
+      refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+      rw [Finset.sum_mul, Finset.sum_mul]
+      exact Finset.sum_congr rfl fun l _ => by ring
+    rw [hdx, hdx', hTAx, hTAx']
+    ring
+  rw [hfun, norm_neg]
+  set N : ℝ := ‖((ξ, η) : Point n × Point n)‖ with hNdef
+  have hN0 : 0 ≤ N := norm_nonneg _
+  -- the three difference blocks.
+  have hT1 : ‖((fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l : Point n)
+          - (fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x' * u' j * u' k * ξ l : Point n))‖
+      ≤ Nc * (n : ℝ) ^ 3 * (‖u‖ * ‖u‖ * ‖ξ‖) + Nc * (n : ℝ) ^ 3 * (‖u'‖ * ‖u'‖ * ‖ξ‖) :=
+    le_trans (norm_sub_le _ _)
+      (add_le_add (christoffel_pd_trilin_bound g gi x u u ξ hNc0 hNcx)
+        (christoffel_pd_trilin_bound g gi x' u' u' ξ hNc0 hNcx'))
+  have hT2 : ‖(fun i => (∑ j, ∑ k, christoffel g gi i j k x * η j * u k)
+              - (∑ j, ∑ k, christoffel g gi i j k x' * η j * u' k) : Point n)‖
+      ≤ Mc * (n : ℝ) ^ 2 * (‖η‖ * ‖u - u'‖ + ‖η - η‖ * ‖u'‖) + Dc * (n : ℝ) ^ 2 * (‖η‖ * ‖u'‖) :=
+    bilin_two_pt_diff_bound (fun i j k => christoffel g gi i j k x)
+      (fun i j k => christoffel g gi i j k x') η η u u' hMc0 hDc0 hMc hDc
+  have hT3 : ‖(fun i => (∑ j, ∑ k, christoffel g gi i j k x * u j * η k)
+              - (∑ j, ∑ k, christoffel g gi i j k x' * u' j * η k) : Point n)‖
+      ≤ Mc * (n : ℝ) ^ 2 * (‖u‖ * ‖η - η‖ + ‖u - u'‖ * ‖η‖) + Dc * (n : ℝ) ^ 2 * (‖u'‖ * ‖η‖) :=
+    bilin_two_pt_diff_bound (fun i j k => christoffel g gi i j k x)
+      (fun i j k => christoffel g gi i j k x') u u' η η hMc0 hDc0 hMc hDc
+  -- dominate each block by the target coefficient times `N`.
+  have hT1' : ‖((fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l : Point n)
+          - (fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x' * u' j * u' k * ξ l : Point n))‖
+      ≤ Nc * (n : ℝ) ^ 3 * (‖u‖ ^ 2 * N) + Nc * (n : ℝ) ^ 3 * (‖u'‖ ^ 2 * N) := by
+    refine le_trans hT1 (add_le_add ?_ ?_)
+    · rw [pow_two]
+      exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hξ (by positivity)) hNcn0
+    · rw [pow_two]
+      exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hξ (by positivity)) hNcn0
+  have hT2' : ‖(fun i => (∑ j, ∑ k, christoffel g gi i j k x * η j * u k)
+              - (∑ j, ∑ k, christoffel g gi i j k x' * η j * u' k) : Point n)‖
+      ≤ Mc * (n : ℝ) ^ 2 * (N * ‖u - u'‖) + Dc * (n : ℝ) ^ 2 * (N * ‖u'‖) := by
+    refine le_trans hT2 (add_le_add ?_ ?_)
+    · rw [hη0, zero_mul, add_zero]
+      exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right hη (norm_nonneg _)) hMcn0
+    · exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right hη (norm_nonneg _)) hDcn0
+  have hT3' : ‖(fun i => (∑ j, ∑ k, christoffel g gi i j k x * u j * η k)
+              - (∑ j, ∑ k, christoffel g gi i j k x' * u' j * η k) : Point n)‖
+      ≤ Mc * (n : ℝ) ^ 2 * (‖u - u'‖ * N) + Dc * (n : ℝ) ^ 2 * (‖u'‖ * N) := by
+    refine le_trans hT3 (add_le_add ?_ ?_)
+    · rw [hη0, mul_zero, zero_add]
+      exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hη (norm_nonneg _)) hMcn0
+    · exact mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hη (norm_nonneg _)) hDcn0
+  calc ‖((fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x * u j * u k * ξ l : Point n)
+          - (fun i => ∑ j, ∑ k, ∑ l,
+              pd (fun z => christoffel g gi i j k z) l x' * u' j * u' k * ξ l : Point n))
+        + (fun i => (∑ j, ∑ k, christoffel g gi i j k x * η j * u k)
+              - (∑ j, ∑ k, christoffel g gi i j k x' * η j * u' k) : Point n)
+        + (fun i => (∑ j, ∑ k, christoffel g gi i j k x * u j * η k)
+              - (∑ j, ∑ k, christoffel g gi i j k x' * u' j * η k) : Point n)‖
+      ≤ (Nc * (n : ℝ) ^ 3 * (‖u‖ ^ 2 * N) + Nc * (n : ℝ) ^ 3 * (‖u'‖ ^ 2 * N))
+          + (Mc * (n : ℝ) ^ 2 * (N * ‖u - u'‖) + Dc * (n : ℝ) ^ 2 * (N * ‖u'‖))
+          + (Mc * (n : ℝ) ^ 2 * (‖u - u'‖ * N) + Dc * (n : ℝ) ^ 2 * (‖u'‖ * N)) :=
+        le_trans (norm_add₃_le) (add_le_add (add_le_add hT1' hT2') hT3')
+    _ = (Nc * (n : ℝ) ^ 3 * (‖u‖ ^ 2 + ‖u'‖ ^ 2)
+          + 2 * (Mc * (n : ℝ) ^ 2 * ‖u - u'‖ + Dc * (n : ℝ) ^ 2 * ‖u'‖)) * N := by ring
+
+set_option maxHeartbeats 1600000 in
+/-- **EXP-JET3c (STEP 1, order-1 anchoring) — `‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²`, uniform in `t ∈ [0,1]`.**
+    The Jacobi coefficient `DF(Y_v t)` along the confined tube is `O(‖v‖²)`-close, UNIFORMLY in `t`, to the
+    FIXED (`t`-independent) operator `DF(p,v)`: there is `ρ > 0` and `C ≥ 0` with
+    `‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²`  for `‖v‖ ≤ ρ`, `t ∈ [0,1]`.
+
+    Route: the pointwise two-point bound `geodesicField_fderiv_two_pt_opNorm_le` at `(x,u) = Y_v(t)`,
+    `(x',u') = (p,v)`, fed the confinement (`‖(Y_v t).2‖ ≤ C₀‖v‖`, `(Y_v t).1 ∈ closedBall p (C₀ρ)`), the
+    Christoffel value/derivative bounds `Mc, Nc` on the ball, the Christoffel Lipschitz `Dc = Lc·‖x−p‖`
+    (`exists_lipschitzOnWith`), and the tube 2-jet `‖(Y_v t).2 − v‖ ≤ D₂·‖v‖²` (`expTube_value_two_jet` +
+    `christoffel_bilin_bound`).  Each block is then `O(‖v‖²)`: `Nc·n³(‖u‖²+‖v‖²) ≤ Nc·n³(C₀²+1)‖v‖²`,
+    `2Mc·n²‖u−v‖ ≤ 2Mc·n²D₂‖v‖²`, `2Dc·n²‖v‖ = 2Lc·‖x−p‖·n²‖v‖ ≤ 2Lc·C₀·n²‖v‖²`.
+
+    This ANCHORS the order-1 coefficient: `DF(Y_v t) = DF(p,v) + O(‖v‖²)`, so the fixed operator `DF(p,v)`
+    carries the order-1 part `A₁` (`t`-independently), reducing the remaining EXP-JET3c work to expanding the
+    single fixed `DF(p,v) = A₀ + A₁ + (order-2 ∂Γ)` — no more tube/`t` dependence.  HONEST: the order-1
+    anchoring; it does NOT yet give the model Jacobian `K_y`, the residual Grönwall, the projected Jacobian
+    2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`, the pullback metric, or numerical-G (`N`, `Λ_s`, `E/ξ`). -/
+theorem expJet_fderiv_tube_order1 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∃ ρ > (0 : ℝ), ∃ C ≥ (0 : ℝ), ∀ v : Point n, ‖v‖ ≤ ρ → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+          - fderiv ℝ (geodesicField g gi) ((p, v) : Point n × Point n)‖ ≤ C * ‖v‖ ^ 2 := by
+  have hρpos := expRho_pos g gi hC p
+  have hC₀ := expConst_nonneg g gi hC p
+  obtain ⟨ρ2, hρ2pos, C2, hC2nn, h2jet⟩ := expTube_value_two_jet g gi hC p
+  set ρ0 : ℝ := expRho g gi hC p with hρ0
+  set C₀ : ℝ := expConst g gi hC p with hC₀def
+  set ρ : ℝ := min ρ0 ρ2 with hρdef
+  have hρpos' : 0 < ρ := lt_min hρpos hρ2pos
+  set R : ℝ := C₀ * ρ0 with hRdef
+  have hR0 : 0 ≤ R := mul_nonneg hC₀ hρpos.le
+  have hpmem : p ∈ Metric.closedBall p R := Metric.mem_closedBall_self hR0
+  -- Christoffel value bound `Mc`, its Lipschitz constant `Lc`, and the `∂Γ` value bound `Nc`.
+  set T : Point n → (Fin n → Fin n → Fin n → ℝ) :=
+    fun y => (fun i j k => christoffel g gi i j k y) with hTdef
+  have hTcd : ContDiff ℝ (⊤ : WithTop ℕ∞) T :=
+    contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => contDiff_pi.mpr fun k => hC i j k
+  obtain ⟨Mc, hMcsub⟩ :=
+    (((isCompact_closedBall p R).image_of_continuousOn
+      hTcd.continuous.continuousOn).isBounded).subset_closedBall (0 : Fin n → Fin n → Fin n → ℝ)
+  have hMc0 : 0 ≤ Mc :=
+    le_trans (norm_nonneg _)
+      (by have := hMcsub (Set.mem_image_of_mem T hpmem)
+          rwa [Metric.mem_closedBall, dist_zero_right] at this : ‖T p‖ ≤ Mc)
+  have hMc : ∀ y ∈ Metric.closedBall p R, ∀ i j k, |christoffel g gi i j k y| ≤ Mc := by
+    intro y hy i j k
+    have hTy : ‖T y‖ ≤ Mc := by
+      have := hMcsub (Set.mem_image_of_mem T hy)
+      rwa [Metric.mem_closedBall, dist_zero_right] at this
+    have e : christoffel g gi i j k y = T y i j k := by simp only [hTdef]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm (T y i j) k).trans
+      ((norm_le_pi_norm (T y i) j).trans (norm_le_pi_norm (T y) i))).trans hTy
+  obtain ⟨Lc, hLip⟩ :=
+    (hTcd.contDiffOn (s := Metric.closedBall p R)).exists_lipschitzOnWith (by simp)
+      (convex_closedBall p R) (isCompact_closedBall p R)
+  have hLc0 : 0 ≤ (Lc : ℝ) := Lc.coe_nonneg
+  have hLc : ∀ y ∈ Metric.closedBall p R, ∀ i j k,
+      |christoffel g gi i j k y - christoffel g gi i j k p| ≤ (Lc : ℝ) * ‖y - p‖ := by
+    intro y hy i j k
+    have hd := hLip.dist_le_mul y hy p hpmem
+    rw [dist_eq_norm, dist_eq_norm] at hd
+    have e : christoffel g gi i j k y - christoffel g gi i j k p = (T y - T p) i j k := by
+      simp only [hTdef, Pi.sub_apply]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm ((T y - T p) i j) k).trans
+      ((norm_le_pi_norm ((T y - T p) i) j).trans (norm_le_pi_norm (T y - T p) i))).trans hd
+  set T2 : Point n → (Fin n → Fin n → Fin n → Fin n → ℝ) :=
+    fun y => (fun i j k l => pd (fun z => christoffel g gi i j k z) l y) with hT2def
+  have hT2cd : ContDiff ℝ (⊤ : WithTop ℕ∞) T2 :=
+    contDiff_pi.mpr fun i => contDiff_pi.mpr fun j => contDiff_pi.mpr fun k =>
+      contDiff_pi.mpr fun l => christoffel_pd_contDiff g gi hC i j k l
+  obtain ⟨Nc, hNcsub⟩ :=
+    (((isCompact_closedBall p R).image_of_continuousOn
+      hT2cd.continuous.continuousOn).isBounded).subset_closedBall
+      (0 : Fin n → Fin n → Fin n → Fin n → ℝ)
+  have hNc0 : 0 ≤ Nc :=
+    le_trans (norm_nonneg _)
+      (by have := hNcsub (Set.mem_image_of_mem T2 hpmem)
+          rwa [Metric.mem_closedBall, dist_zero_right] at this : ‖T2 p‖ ≤ Nc)
+  have hNc : ∀ y ∈ Metric.closedBall p R, ∀ i j k l,
+      |pd (fun z => christoffel g gi i j k z) l y| ≤ Nc := by
+    intro y hy i j k l
+    have hT2y : ‖T2 y‖ ≤ Nc := by
+      have := hNcsub (Set.mem_image_of_mem T2 hy)
+      rwa [Metric.mem_closedBall, dist_zero_right] at this
+    have e : pd (fun z => christoffel g gi i j k z) l y = T2 y i j k l := by simp only [hT2def]
+    rw [e, ← Real.norm_eq_abs]
+    exact ((norm_le_pi_norm (T2 y i j k) l).trans
+      ((norm_le_pi_norm (T2 y i j) k).trans
+        ((norm_le_pi_norm (T2 y i) j).trans (norm_le_pi_norm (T2 y) i)))).trans hT2y
+  -- the order-2 constant.
+  set D2 : ℝ := C2 * ρ0 + Mc * (n : ℝ) ^ 2 with hD2def
+  have hD20 : 0 ≤ D2 := by
+    rw [hD2def]
+    exact add_nonneg (mul_nonneg hC2nn hρpos.le) (mul_nonneg hMc0 (by positivity))
+  set C : ℝ := Nc * (n : ℝ) ^ 3 * (C₀ ^ 2 + 1)
+      + 2 * (Mc * (n : ℝ) ^ 2 * D2 + (Lc : ℝ) * (n : ℝ) ^ 2 * C₀) with hCdef
+  have hC0 : 0 ≤ C := by
+    rw [hCdef]
+    have t1 : 0 ≤ Nc * (n : ℝ) ^ 3 * (C₀ ^ 2 + 1) :=
+      mul_nonneg (mul_nonneg hNc0 (by positivity)) (by positivity)
+    have t2 : 0 ≤ Mc * (n : ℝ) ^ 2 * D2 :=
+      mul_nonneg (mul_nonneg hMc0 (by positivity)) hD20
+    have t3 : 0 ≤ (Lc : ℝ) * (n : ℝ) ^ 2 * C₀ :=
+      mul_nonneg (mul_nonneg hLc0 (by positivity)) hC₀
+    have t4 : 0 ≤ 2 * (Mc * (n : ℝ) ^ 2 * D2 + (Lc : ℝ) * (n : ℝ) ^ 2 * C₀) := by
+      apply mul_nonneg (by norm_num); linarith
+    linarith
+  refine ⟨ρ, hρpos', C, hC0, ?_⟩
+  intro v hvρ t ht
+  have hvρ0 : ‖v‖ ≤ ρ0 := le_trans hvρ (by rw [hρdef]; exact min_le_left _ _)
+  have hvρ2 : ‖v‖ ≤ ρ2 := le_trans hvρ (by rw [hρdef]; exact min_le_right _ _)
+  have hV0 : 0 ≤ ‖v‖ := norm_nonneg _
+  obtain ⟨hY0, hYd, hYconf⟩ := expTube_spec g gi hC p v hvρ0
+  set Y : ℝ → Point n × Point n := expTube g gi hC p v with hYdef
+  have hconf := hYconf t ht
+  have hu_le : ‖(Y t).2‖ ≤ C₀ * ‖v‖ := by
+    have e : (Y t).2 = (Y t - ((p, 0) : Point n × Point n)).2 := by simp [Prod.snd_sub]
+    rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_right _ _) hconf
+  have hx_le : ‖(Y t).1 - p‖ ≤ C₀ * ‖v‖ := by
+    have e : (Y t).1 - p = (Y t - ((p, 0) : Point n × Point n)).1 := by simp [Prod.fst_sub]
+    rw [e]; exact le_trans (by rw [Prod.norm_def]; exact le_max_left _ _) hconf
+  have hyxmem : (Y t).1 ∈ Metric.closedBall p R := by
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    calc ‖(Y t).1 - p‖ ≤ C₀ * ‖v‖ := hx_le
+      _ ≤ C₀ * ρ0 := mul_le_mul_of_nonneg_left hvρ0 hC₀
+      _ = R := by rw [hRdef]
+  -- the Christoffel difference bound `Dc = Lc·‖x−p‖`.
+  set Dc : ℝ := (Lc : ℝ) * ‖(Y t).1 - p‖ with hDcdef
+  have hDc0 : 0 ≤ Dc := mul_nonneg hLc0 (norm_nonneg _)
+  have hDc : ∀ i j k,
+      |christoffel g gi i j k ((Y t).1) - christoffel g gi i j k p| ≤ Dc :=
+    fun i j k => hLc ((Y t).1) hyxmem i j k
+  -- the tube 2-jet: `‖(Y t).2 − v‖ ≤ D2·‖v‖²`.
+  set Γv : Point n := fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k with hΓvdef
+  have hΓv_bound : ‖Γv‖ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by
+    rw [hΓvdef]
+    have h := christoffel_bilin_bound g gi p v v hMc0 (fun i j k => hMc p hpmem i j k)
+    calc ‖(fun i => ∑ j, ∑ k, christoffel g gi i j k p * v j * v k : Point n)‖
+        ≤ Mc * (n : ℝ) ^ 2 * (‖v‖ * ‖v‖) := h
+      _ = Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by ring
+  have huv_le : ‖(Y t).2 - v‖ ≤ D2 * ‖v‖ ^ 2 := by
+    have h2 := h2jet v hvρ2 t ht
+    have hsnd : ‖(Y t).2 - (v - t • Γv)‖ ≤ C2 * ‖v‖ ^ 3 := by
+      have e : (Y t).2 - (v - t • Γv)
+          = (Y t - (p + t • v - (t ^ 2 / 2) • Γv, v - t • Γv)).2 := by
+        simp only [Prod.snd_sub]
+      rw [e]
+      exact le_trans (by rw [Prod.norm_def]; exact le_max_right _ _) h2
+    have htΓv : ‖t • Γv‖ ≤ Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by
+      rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg ht.1]
+      calc t * ‖Γv‖ ≤ 1 * (Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2) :=
+            mul_le_mul ht.2 hΓv_bound (norm_nonneg _) (by norm_num)
+        _ = Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := one_mul _
+    have hsplit : (Y t).2 - v = ((Y t).2 - (v - t • Γv)) + (- (t • Γv)) := by abel
+    calc ‖(Y t).2 - v‖
+        = ‖((Y t).2 - (v - t • Γv)) + (- (t • Γv))‖ := by rw [hsplit]
+      _ ≤ ‖(Y t).2 - (v - t • Γv)‖ + ‖(- (t • Γv))‖ := norm_add_le _ _
+      _ = ‖(Y t).2 - (v - t • Γv)‖ + ‖t • Γv‖ := by rw [norm_neg]
+      _ ≤ C2 * ‖v‖ ^ 3 + Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := add_le_add hsnd htΓv
+      _ = C2 * ‖v‖ * ‖v‖ ^ 2 + Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by ring
+      _ ≤ C2 * ρ0 * ‖v‖ ^ 2 + Mc * (n : ℝ) ^ 2 * ‖v‖ ^ 2 := by
+          have hstep : C2 * ‖v‖ * ‖v‖ ^ 2 ≤ C2 * ρ0 * ‖v‖ ^ 2 :=
+            mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hvρ0 hC2nn) (sq_nonneg _)
+          linarith
+      _ = D2 * ‖v‖ ^ 2 := by rw [hD2def]; ring
+  -- the pointwise two-point bound at `(Y t)` vs `(p,v)`.
+  have hbnd := geodesicField_fderiv_two_pt_opNorm_le g gi hC ((Y t).1) ((Y t).2) p v
+    hMc0 hNc0 hDc0 (fun i j k => hMc ((Y t).1) hyxmem i j k)
+    (fun i j k l => hNc ((Y t).1) hyxmem i j k l)
+    (fun i j k l => hNc p hpmem i j k l) hDc
+  rw [Prod.mk.eta] at hbnd
+  -- dominate the two-point bound by `C·‖v‖²`.
+  have hu2 : ‖(Y t).2‖ ^ 2 ≤ C₀ ^ 2 * ‖v‖ ^ 2 := by
+    rw [pow_two, pow_two, pow_two]
+    calc ‖(Y t).2‖ * ‖(Y t).2‖ ≤ (C₀ * ‖v‖) * (C₀ * ‖v‖) :=
+          mul_le_mul hu_le hu_le (norm_nonneg _) (mul_nonneg hC₀ hV0)
+      _ = C₀ * C₀ * (‖v‖ * ‖v‖) := by ring
+  have hMcn0 : 0 ≤ Mc * (n : ℝ) ^ 2 := mul_nonneg hMc0 (by positivity)
+  have hNcn0 : 0 ≤ Nc * (n : ℝ) ^ 3 := mul_nonneg hNc0 (by positivity)
+  have hDcn0 : 0 ≤ (Lc : ℝ) * (n : ℝ) ^ 2 := mul_nonneg hLc0 (by positivity)
+  -- block bounds.
+  have hb1 : Nc * (n : ℝ) ^ 3 * (‖(Y t).2‖ ^ 2 + ‖v‖ ^ 2)
+      ≤ Nc * (n : ℝ) ^ 3 * ((C₀ ^ 2 + 1) * ‖v‖ ^ 2) := by
+    apply mul_le_mul_of_nonneg_left _ hNcn0
+    calc ‖(Y t).2‖ ^ 2 + ‖v‖ ^ 2 ≤ C₀ ^ 2 * ‖v‖ ^ 2 + ‖v‖ ^ 2 := by linarith [hu2]
+      _ = (C₀ ^ 2 + 1) * ‖v‖ ^ 2 := by ring
+  have hb2 : Mc * (n : ℝ) ^ 2 * ‖(Y t).2 - v‖ ≤ Mc * (n : ℝ) ^ 2 * (D2 * ‖v‖ ^ 2) :=
+    mul_le_mul_of_nonneg_left huv_le hMcn0
+  have hb3 : Dc * (n : ℝ) ^ 2 * ‖v‖ ≤ (Lc : ℝ) * (n : ℝ) ^ 2 * C₀ * ‖v‖ ^ 2 := by
+    rw [hDcdef]
+    have hxv : (Lc : ℝ) * ‖(Y t).1 - p‖ ≤ (Lc : ℝ) * (C₀ * ‖v‖) :=
+      mul_le_mul_of_nonneg_left hx_le hLc0
+    calc (Lc : ℝ) * ‖(Y t).1 - p‖ * (n : ℝ) ^ 2 * ‖v‖
+        ≤ (Lc : ℝ) * (C₀ * ‖v‖) * (n : ℝ) ^ 2 * ‖v‖ :=
+          mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hxv (by positivity)) hV0
+      _ = (Lc : ℝ) * (n : ℝ) ^ 2 * C₀ * ‖v‖ ^ 2 := by ring
+  calc ‖fderiv ℝ (geodesicField g gi) (Y t)
+          - fderiv ℝ (geodesicField g gi) ((p, v) : Point n × Point n)‖
+      ≤ Nc * (n : ℝ) ^ 3 * (‖(Y t).2‖ ^ 2 + ‖v‖ ^ 2)
+          + 2 * (Mc * (n : ℝ) ^ 2 * ‖(Y t).2 - v‖ + Dc * (n : ℝ) ^ 2 * ‖v‖) := hbnd
+    _ ≤ Nc * (n : ℝ) ^ 3 * ((C₀ ^ 2 + 1) * ‖v‖ ^ 2)
+          + 2 * (Mc * (n : ℝ) ^ 2 * (D2 * ‖v‖ ^ 2) + (Lc : ℝ) * (n : ℝ) ^ 2 * C₀ * ‖v‖ ^ 2) := by
+        apply add_le_add hb1
+        apply mul_le_mul_of_nonneg_left _ (by norm_num : (0 : ℝ) ≤ 2)
+        exact add_le_add hb2 hb3
+    _ = C * ‖v‖ ^ 2 := by rw [hCdef]; ring
 
 /-- **The first-variation residual ODE identity `R' = DF(Y₁)·R + N`.**  For two geodesic integral
     curves `Y₁, Y₂` and ANY curve `J` solving the linearized (Jacobi) equation `J' = DF(Y₁ t)·J` along

@@ -214,6 +214,24 @@ remain). Never claim numerical-G or a curved heat kernel.
     analogously); the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected
     `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the order-0 remainder — does NOT identify `A₁, A₂`, NOT the
     Jacobian 2-jet, NOT the pullback metric, NOT numerical-G.
+  - [x] **EXP-JET3c (STEP 1, order-1 anchoring) — the tube Jacobi coefficient is `O(‖v‖²)`-close to the fixed
+    `DF(p,v)`. DONE 2026-07-07.**  Landed green in `ExpMap.lean` ([AF] std-3, budget 0): **`expJet_fderiv_tube_order1`**
+    — `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²` (`Y_v=expTube p v`).  This ANCHORS the
+    order-1 coefficient: `DF(Y_v t) = DF(p,v) + O(‖v‖²)` UNIFORMLY in `t`, so the FIXED `t`-independent operator
+    `DF(p,v)` carries the order-1 part `A₁` (`= DF(p,v) − A₀` up to its own order-2 ∂Γ piece), reducing the remaining
+    work to expanding the single fixed `DF(p,v)` — no more tube/`t` dependence.  Route: a new pointwise two-point
+    operator-norm bound **`geodesicField_fderiv_two_pt_opNorm_le`** (`‖DF(x,u) − DF(x',u')‖ ≤ Nc·n³(‖u‖²+‖u'‖²) +
+    2(Mc·n²‖u−u'‖ + Dc·n²‖u'‖)`: velocity slots cancel, ∂Γ block by `christoffel_pd_trilin_bound` at each point, the
+    two Γ-bilinear blocks by the new generic **`bilin_two_pt_diff_bound`**) applied at `(Y_v t)` vs `(p,v)`, fed the
+    confinement (`‖(Y_v t).2‖≤C₀‖v‖`, `(Y_v t).1∈closedBall p (C₀ρ)`), the Christoffel value/Lipschitz/∂Γ bounds on
+    the ball, the Christoffel Lipschitz `Dc = Lc·‖x−p‖ = O(‖v‖)`, and the tube 2-jet `‖(Y_v t).2 − v‖ ≤ D₂‖v‖²`
+    (`expTube_value_two_jet` + `christoffel_bilin_bound`).  ⚠ **STILL CHECKPOINTED (the remaining EXP-JET3c bulk):**
+    expand the single fixed `DF(p,v) = A₀ + A₁ + (order-2 ∂Γ)` to read off `A₁`, `A₂` as CLM coefficients; the model
+    Jacobian `K_y=K₀+K₁+K₂` from the triangular ODEs (`A₀²=0` ⟹ `K₀(t)=1+tA₀`, `K₁(t)=∫₀ᵗ(1+(t−s)A₀)A₁K₀(s)ds`,
+    `K₂` analogously — now with `A₁` `t`-independent and `A₂` the residual order-2 term); the residual operator Grönwall
+    `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`; and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the order-1
+    anchoring — does NOT give `K_y`, the residual Grönwall, the projected Jacobian 2-jet, the pullback metric, or
+    numerical-G (`N`, `Λ_s`, `E/ξ` remain).
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
 - [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
@@ -240,6 +258,19 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-07 (EXP-JET3c STEP 1, order-1 anchoring):** the tube Jacobi coefficient is `O(‖v‖²)`-close to the fixed
+  `DF(p,v)` — landed green ([AF] std-3, budget 0).  New theorems in `ExpMap.lean`: **`expJet_fderiv_tube_order1`**
+  (`∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²`), the pointwise engine
+  **`geodesicField_fderiv_two_pt_opNorm_le`** (`‖DF(x,u) − DF(x',u')‖ ≤ Nc·n³(‖u‖²+‖u'‖²) + 2(Mc·n²‖u−u'‖ +
+  Dc·n²‖u'‖)`), and the generic **`bilin_two_pt_diff_bound`** (two-point bilinear-difference bound, generalizing
+  `christoffel_quad_diff_bound`).  This ANCHORS the order-1 coefficient: `DF(Y_v t) = DF(p,v) + O(‖v‖²)` UNIFORMLY in
+  `t`, so the FIXED `t`-independent `DF(p,v)` carries the order-1 part `A₁`, reducing the remaining EXP-JET3c work to
+  expanding the single fixed `DF(p,v) = A₀ + A₁ + (order-2 ∂Γ)`.  Route: the two-point opNorm bound at `(Y_v t)` vs
+  `(p,v)` (velocity slots cancel, ∂Γ block by `christoffel_pd_trilin_bound` at each point, Γ-bilinear blocks by
+  `bilin_two_pt_diff_bound`), fed the confinement, the Christoffel value/Lipschitz/∂Γ bounds on the ball, and the tube
+  2-jet `‖(Y_v t).2 − v‖ ≤ D₂‖v‖²` (`expTube_value_two_jet` + `christoffel_bilin_bound`).  ⚠ CHECKPOINTED: read off
+  `A₁, A₂` as CLM coefficients of the fixed `DF(p,v)`; the model Jacobian `K_y`; the residual operator Grönwall; and
+  the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)` remain.
 - **2026-07-07 (EXP-JET3c STEP 1, order-0 composed):** the uniform-in-`t` order-0 `DF` expansion along the tube
   landed green ([AF] std-3, budget 0).  New theorem `expJet_fderiv_tube_order0` in `ExpMap.lean`:
   `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − A₀‖ ≤ C·‖v‖` (`A₀=linF=DF(e)`, `Y_v=expTube p v`).  Composes the

@@ -644,6 +644,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the uniform `DF(Y_y t)=A₀+A₁(t,y)+A₂(t,y)+o(‖y‖²)` expansion, now stated as a theorem. ⚠ **HONEST CAPTION
   (binding):** the order-0 remainder; does **NOT** identify the order-1/2 coefficients `A₁, A₂`, **NOT** the Jacobian
   2-jet, **NOT** the pullback metric, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **EXP-JET3c (STEP 1, order-1 anchoring) — the tube Jacobi coefficient is `O(‖v‖²)`-close to the fixed `DF(p,v)`**
+  (`ExpMap.lean` `expJet_fderiv_tube_order1`, with engine `geodesicField_fderiv_two_pt_opNorm_le` + generic helper
+  `bilin_two_pt_diff_bound`; all **[AF]** std-3, budget 0, 2026-07-07): `∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1],
+  ‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²` (`Y_v=expTube p v`). ANCHORS the order-1 coefficient: `DF(Y_v t) = DF(p,v) + O(‖v‖²)`
+  UNIFORMLY in `t`, so the FIXED `t`-independent operator `DF(p,v)` carries the order-1 part `A₁`, reducing the
+  remaining EXP-JET3c work to expanding the single fixed `DF(p,v) = A₀ + A₁ + (order-2 ∂Γ)`. The engine
+  `geodesicField_fderiv_two_pt_opNorm_le`: `‖DF(x,u) − DF(x',u')‖ ≤ Nc·n³(‖u‖²+‖u'‖²) + 2(Mc·n²‖u−u'‖ + Dc·n²‖u'‖)`
+  (velocity slots cancel; ∂Γ block via `christoffel_pd_trilin_bound` at each point; the two Γ-bilinear blocks via
+  `bilin_two_pt_diff_bound`). Composed at `(Y_v t)` vs `(p,v)` with the confinement, Christoffel value/Lipschitz/∂Γ
+  bounds on the ball, and the tube 2-jet `‖(Y_v t).2 − v‖ ≤ D₂‖v‖²` (`expTube_value_two_jet` + `christoffel_bilin_bound`).
+  ⚠ **HONEST CAPTION (binding):** the order-1 anchoring; does **NOT** give the model Jacobian `K_y`, the residual
+  Grönwall, the projected Jacobian 2-jet `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`, the pullback metric, or
+  numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale

@@ -9859,4 +9859,22 @@ namespace QIQTH.AxiomAudit
 -- metric, NOT numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet_fderiv_tube_order0
 
+-- ExpMap.lean — EXP-JET3c STEP 1 (order-1 anchoring) (2026-07-07).
+-- bilin_two_pt_diff_bound: generic two-point bilinear-difference bound
+--   ‖∑jk F a b − ∑jk F' a' b'‖ ≤ Mc·n²·(‖a‖‖b−b'‖ + ‖a−a'‖‖b'‖) + Dc·n²·‖a'‖‖b'‖  (|F|≤Mc, |F−F'|≤Dc),
+--   the two-point analogue of christoffel_quad_diff_bound.
+-- geodesicField_fderiv_two_pt_opNorm_le: ‖DF(x,u) − DF(x',u')‖ ≤ Nc·n³(‖u‖²+‖u'‖²) + 2(Mc·n²‖u−u'‖ +
+--   Dc·n²‖u'‖) (|Γ(x)|≤Mc, |∂Γ(x)|,|∂Γ(x')|≤Nc, |Γ(x)−Γ(x')|≤Dc); velocity slots cancel, ∂Γ block by
+--   christoffel_pd_trilin_bound at each point, the two Γ-bilinear blocks by bilin_two_pt_diff_bound.
+-- expJet_fderiv_tube_order1: ∃ ρ>0, ∃ C≥0, ∀ ‖v‖≤ρ, ∀ t∈[0,1], ‖DF(Y_v t) − DF(p,v)‖ ≤ C·‖v‖²  — the
+--   Jacobi coefficient along the tube is O(‖v‖²)-close, uniformly in t, to the FIXED t-independent operator
+--   DF(p,v), ANCHORING the order-1 coefficient A₁ (= order-1 part of DF(p,v)−A₀).  Route: the two-point
+--   opNorm bound at (Y_v t) vs (p,v) fed the confinement, Christoffel value/Lipschitz/∂Γ bounds on the ball,
+--   and the tube 2-jet ‖(Y_v t).2 − v‖=O(‖v‖²) (expTube_value_two_jet + christoffel_bilin_bound).
+-- HONEST: order-1 anchoring — does NOT give the model Jacobian K_y, the residual Grönwall, the projected
+-- Jacobian 2-jet, the pullback metric, or numerical-G (N, Λ_s, E/ξ remain).  [AF] std-3.
+#print axioms QIQTH.ExpMap.bilin_two_pt_diff_bound
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_two_pt_opNorm_le
+#print axioms QIQTH.ExpMap.expJet_fderiv_tube_order1
+
 end QIQTH.AxiomAudit
