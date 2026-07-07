@@ -331,6 +331,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     diagonal-truncated integrand); **no divergence theorem, no PDE**. **HONEST: fixes the boost-charge ↔ null-energy
     STRUCTURE only — no physics discharged; the `2π/ℏ` coefficient (HT2) and the KG-stress instantiation (HT1b) /
     no-flux limit (HT1c) are separate, still-open bricks.**
+  - **HT1b — the massive 1+1 Klein–Gordon boost-charge decomposition `K₀(R)=H_+(R)+N_+(R)`** (`HTkkPhysical.lean`
+    `QIQTH.HTkkPhysical.kg_boost_charge_decomposition_1p1`, **[AF]** std-3, 2026-07-08): a **self-contained flat-space**
+    instantiation of `nullTriangle_ftc` for a massive real scalar in null coordinates `(U,V)` (the 1+1 objects are built
+    explicitly — NOT the general curved-metric `kgStress` machinery). The matter EOM + regularity are **carried
+    hypotheses**: jointly-continuous `φ,φU,φV,φUV`, the four `HasDerivAt` facts (including Clairaut symmetry
+    `∂_V φU = φUV = ∂_U φV`), and the KG equation `hKG : φUV U V = (μ/4)·φ U V` (`μ=m²`; massless `=` μ=0). With stress
+    `T_UU=(φU)², T_VV=(φV)², T_UV=−(μ/4)φ²` and boost densities `A=V·T_VV−U·T_UV`, `B=V·T_UV−U·T_UU`, the null divergence
+    `∂_U A+∂_V B = 2(V·φV−U·φU)(φUV−(μ/4)φ)` vanishes by `hKG`; feeding `nullTriangle_ftc` and evaluating the three edge
+    integrals gives `∫₀^R s·((φU s s)²+(φV s s)²+(μ/2)(φ s s)²) = (∫₀^R V·(φV 0 V)²) + (∫₀^R (U·(φU U R)²+(Rμ/4)(φ U R)²))`,
+    i.e. `K₀(R)=H_+(R)+N_+(R)` with the **outer null flux `N_+` fully EXPLICIT** (not hidden). **HONEST: the classical
+    boost-charge ↔ null-energy STRUCTURE for a massive 1+1 KG field; the `2π/ℏ` BW/KMS coefficient (HT2), the transverse
+    3+1 flux + no-flux limit (HT1c), and the physical mode construction (HT3) remain separate open bricks. The KG equation
+    and regularity are honest carried hypotheses, never axioms.**
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +

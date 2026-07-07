@@ -70,7 +70,19 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     `IsMaxOn` bound, then `MeasureTheory.integral_integral_swap`); conservation collapses the A-column to `−` the
     B-column. NO divergence theorem, NO PDE. Wired into `QIQTH.lean` + `AxiomAudit` pin. HONEST: STRUCTURE only —
     no physics discharged; `2π/ℏ` untouched.
-  - [ ] **HT1b — SCOPED (GPT-5.5-pro 2026-07-08, sign-corrected).** Instantiate `nullTriangle_ftc` with the KG boost current
+  - [x] **HT1b — DONE 2026-07-08** ([AF] std-3, budget 0, no sorry). `QIQTH.HTkkPhysical.kg_boost_charge_decomposition_1p1`:
+    a SELF-CONTAINED flat-space null-coordinate instantiation (NOT the general curved kgStress machinery; the 1+1 objects
+    are built explicitly in `(U,V)`). Field `φ:ℝ→ℝ→ℝ`; carried EOM+regularity hyps = jointly-continuous `φ,φU,φV,φUV`,
+    the four `HasDerivAt` facts (incl. Clairaut `∂_V φU = φUV = ∂_U φV`), and KG `hKG: φUV U V = (μ/4)·φ U V`. Defs
+    `T_UU=(φU)², T_VV=(φV)², T_UV=−(μ/4)φ²`; `A=V·T_VV−U·T_UV`, `B=V·T_UV−U·T_UU`; the partials `dA,dB` assembled via
+    `HasDerivAt.pow/.const_mul/.mul/.sub`; conservation `dA U V+dB U V = 2(Vφ_V−Uφ_U)(φ_UV−(μ/4)φ)=0` by `rw [hKG]; ring`;
+    fed to `nullTriangle_ftc`, three edge integrals rewritten via `intervalIntegral.integral_congr`. Result (general μ):
+    `∫₀^R s·((φU s s)²+(φV s s)²+(μ/2)(φ s s)²) = (∫₀^R V·(φV 0 V)²) + (∫₀^R (U·(φU U R)²+(Rμ/4)(φ U R)²))`, i.e.
+    `K₀(R)=H_+(R)+N_+(R)` with `N_+` EXPLICIT (massless = μ=0 special case). Wired into `AxiomAudit` pin. HONEST: classical
+    boost-charge↔null-energy STRUCTURE only; `2π/ℏ` (HT2), transverse 3+1 flux + no-flux limit (HT1c), mode construction
+    (HT3) are separate. [Route note: implemented directly in null coords rather than the (t,x) pull-back sketched below —
+    both are valid; the null-coord version compiled cleanly.]
+  - ~~[ ] **HT1b — SCOPED (GPT-5.5-pro 2026-07-08, sign-corrected).** Instantiate `nullTriangle_ftc` with the KG boost current
     ⟹ `K₀(R)=H_+(R)+N_+(R)`. ⚠ Corrections: `η_{UV}=+½` (not −½); the correct null conservation eqs are
     `∂_U T_VV+∂_V T_UV=0` and `∂_U T_UV+∂_V T_UU=0` (my first scoping interchanged the derivatives — WRONG). **First target =
     massive 1+1** (μ=m²; massless=μ=0), no transverse flux: `T_UU=φ_U²`, `T_VV=φ_V²`, `T_UV=−(μ/4)φ²`, `T₀₀=T_UU+T_VV−2T_UV`.
@@ -79,7 +91,7 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     **KEY LEAN ROUTE (avoid null-metric machinery):** work in `(t,x)`; boost current `q=x·T_tt+t·T_tx`, `j=x·T_tx+t·T_xx`;
     prove `∂_t q−∂_x j=0` from Cartesian `kg_conserv`; pull back scalars `A=½(q+j)`, `B=½(−q+j)` at `t=(V−U)/2,x=(U+V)/2` ⟹
     `∂_U A+∂_V B=½(∂_x j−∂_t q)=0` (affine chain rule + product rule). 5 lemmas: null-components, null-conservation-from-KG,
-    boost_AB_div, boost_AB_edges, HT1b capstone. Full 3+1 pointwise is a DIFFERENT theorem (transverse flux) — deferred to HT1c.
+    boost_AB_div, boost_AB_edges, HT1b capstone. Full 3+1 pointwise is a DIFFERENT theorem (transverse flux) — deferred to HT1c.~~ (superseded — DONE above)
   - [ ] **HT1c.** Transverse Fubini (add `y=(x²,x³)`, transverse boundary term carried) + the no-flux corollary
     (`Tendsto (outerFlux ·) atTop (𝓝 0)` + cutoff convergence ⟹ `K_boost = H_+`). Falloff carried as an explicit hypothesis.
   - Mathlib WALL to AVOID: the general noncompact 4D divergence theorem with null boundary (absent) — use explicit FTC/Fubini

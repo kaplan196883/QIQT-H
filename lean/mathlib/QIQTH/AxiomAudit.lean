@@ -10051,4 +10051,15 @@ namespace QIQTH.AxiomAudit
 -- instantiation HT1b, no-flux limit HT1c, and the `2π/ℏ` BW/KMS coefficient HT2 are separate).  [AF] std-3.
 #print axioms QIQTH.HTkkPhysical.nullTriangle_ftc
 
+-- HTkkPhysical.lean — HT1b, the massive 1+1 Klein–Gordon boost-charge decomposition (2026-07-08):
+-- a SELF-CONTAINED flat-space instantiation of `nullTriangle_ftc` for a massive real scalar in null
+-- coordinates `(U,V)`.  Stress `T_UU=(φU)², T_VV=(φV)², T_UV=−(μ/4)φ²`; boost densities `A=V·T_VV−U·T_UV`,
+-- `B=V·T_UV−U·T_UU`; the null divergence `∂_U A+∂_V B=2(V·φV−U·φU)(φUV−(μ/4)φ)` vanishes by the carried
+-- KG equation `φUV=(μ/4)φ`.  ⟹ `K₀(R)=H_+(R)+N_+(R)` with the outer flux `N_+` EXPLICIT:
+--   ∫₀ᴿ s(φU²+φV²+(μ/2)φ²) = ∫₀ᴿ V(φV 0 V)² + ∫₀ᴿ (U(φU U R)²+(Rμ/4)(φ U R)²).
+-- HONEST: the classical boost-charge ↔ null-energy STRUCTURE for a massive 1+1 KG field; the `2π/ℏ`
+-- BW/KMS coefficient (HT2), the transverse 3+1 flux + no-flux limit (HT1c), and the mode construction
+-- (HT3) are separate.  KG equation + regularity are carried hypotheses, never axioms.  [AF] std-3.
+#print axioms QIQTH.HTkkPhysical.kg_boost_charge_decomposition_1p1
+
 end QIQTH.AxiomAudit
