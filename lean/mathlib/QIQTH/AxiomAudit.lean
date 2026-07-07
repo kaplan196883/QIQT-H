@@ -9942,4 +9942,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet_residual_identity
 #print axioms QIQTH.ExpMap.expJet_residual_gronwall
 
+-- ExpMap.lean — EXP-JET3c STEP 3 (2026-07-07): the JACOBIAN one-jet of the geodesic exp-map.
+-- expJet_fderiv_tube_bddAbove_unif: ‖DF(Y_v t)‖ ≤ Kstar UNIFORMLY over ‖v‖≤expRho, t∈[0,1] (fixed compact ball).
+-- expJetOneJetModel / expJet_proj_model_one: the model operator −Γ_p^sym(v,·)=½·matVecCLM c₁ and the exact
+--   projected model identity π∘(K₀(1)+K₁(1))∘ι = id + expJetOneJetModel v.
+-- expJet_{recompose,DA1_norm_le,N_norm_le,Ederiv_norm_le,pi_comp_iota_norm_le}: small-context CLM-algebra helpers
+--   (offloaded so the capstone's whnf budget stays bounded).
+-- hasFDerivAt_expMap_jacobian_one_jet: fderiv exp_p v − (id + expJetOneJetModel v) =O[𝓝 0] ‖v‖² — the operator
+--   residual Grönwall closing the Jacobian 1-jet.  HONEST: the O(‖v‖²) remainder IS the content; id+model = id−Γ_p^sym.
+-- [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet_fderiv_tube_bddAbove_unif
+#print axioms QIQTH.ExpMap.expJetOneJetModel
+#print axioms QIQTH.ExpMap.expJet_proj_model_one
+#print axioms QIQTH.ExpMap.expJet_recompose
+#print axioms QIQTH.ExpMap.expJet_DA1_norm_le
+#print axioms QIQTH.ExpMap.expJet_N_norm_le
+#print axioms QIQTH.ExpMap.expJet_Ederiv_norm_le
+#print axioms QIQTH.ExpMap.expJet_pi_comp_iota_norm_le
+#print axioms QIQTH.ExpMap.hasFDerivAt_expMap_jacobian_one_jet
+
 end QIQTH.AxiomAudit

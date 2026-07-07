@@ -5049,4 +5049,238 @@ theorem expJet_fderiv_tube_bddAbove_unif (g gi : Point n → Fin n → Fin n →
       _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hv hC₀
   exact le_trans (hC' _ hmem) (le_max_left _ _)
 
+/-- **The one-jet model operator `−Γ_p^sym(v,·)` of the exp-map Jacobian.**  This is the linear-in-`v`
+    correction to `id` in `fderiv exp_p v = id − Γ_p^sym(v,·) + O(‖v‖²)`.  We package it as
+    `½·matVecCLM c₁` with `c₁_{ij} = −∑_k Γ^i_{jk}(p) v_k − ∑_k Γ^i_{kj}(p) v_k` — the SAME (already
+    negated) coefficient array as `A₁`'s velocity block.  The `½` symmetrizes: `½·c₁` acting on `w`
+    gives `i ↦ −½∑_{jk}(Γ^i_{jk}(p)+Γ^i_{kj}(p)) v_k w_j = −Γ_p^{sym}(v,w)^i`.  So the identity
+    `fderiv exp_p v − (id + expJetOneJetModel v) = O(‖v‖²)` is literally `−Γ_p^sym` up to `O(‖v‖²)`;
+    the honest content of the theorem is the quadratic remainder. -/
+noncomputable def expJetOneJetModel (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    Point n →L[ℝ] Point n :=
+  (1 / 2 : ℝ) • matVecCLM (fun i j => -(∑ k, christoffel g gi i j k p * v k)
+    - (∑ k, christoffel g gi i k j p * v k))
+
+/-- **STEP 2 — the projected model identity.**  `π ∘ (K₀(1) + K₁(1)) ∘ ι = id + expJetOneJetModel v`
+    EXACTLY (no remainder).  Reason: `ι w = (0,w)`; `K₀(1)(0,w) = (w,w)` (position slot = `id`); and
+    `K₁(1)(0,w) = (½·c₁·w, c₁·w)`, whose position slot is `½·c₁·w = expJetOneJetModel v · w`.  This is
+    the model side against which the residual operator Grönwall compares `π ∘ (Φ_v 1) ∘ ι`. -/
+theorem expJet_proj_model_one (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) :
+    (expJetPi (n := n)).comp
+        ((expJetK0 (n := n) 1 + expJetK1 g gi p v 1).comp (expJetIota (n := n)))
+      = ContinuousLinearMap.id ℝ (Point n) + expJetOneJetModel g gi p v := by
+  refine ContinuousLinearMap.ext fun w => ?_
+  simp only [ContinuousLinearMap.comp_apply, expJetIota_apply, ContinuousLinearMap.add_apply,
+    expJetPi_apply, ContinuousLinearMap.id_apply, expJetOneJetModel, expJetK0, expJetK1,
+    ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_def, linF_apply, expJetA1_apply,
+    ContinuousLinearMap.comp_apply, Prod.fst_add, Prod.smul_fst, one_pow]
+  funext i
+  simp only [Pi.add_apply, Pi.smul_apply, Pi.zero_apply, smul_eq_mul]
+  ring
+
+/-- Small-context regroup `a = (a − b) + b` (isolated so its `abel` avoids the capstone's heavy
+    local context / instance search). -/
+theorem expJet_recompose {G : Type*} [AddCommGroup G] (a b : G) : a = a - b + b := by
+  abel
+
+/-- Small-context CLM bound `‖D − lA‖ ≤ P + Q` from `‖D − (lA + A2)‖ ≤ P` and `‖A2‖ ≤ Q`.
+    Isolated (`abel` + `norm_add_le` in a bare normed context) so the capstone stays whnf-light. -/
+theorem expJet_DA1_norm_le {G : Type*} [NormedAddCommGroup G] [NormedSpace ℝ G]
+    (D lA A2 : G →L[ℝ] G) {P Q : ℝ} (h1 : ‖D - (lA + A2)‖ ≤ P) (h2 : ‖A2‖ ≤ Q) :
+    ‖D - lA‖ ≤ P + Q := by
+  have hrw : D - lA = (D - (lA + A2)) + A2 := by abel
+  rw [hrw]
+  exact le_trans (norm_add_le _ _) (add_le_add h1 h2)
+
+/-- Small-context CLM bound `‖(D − lA)∘K + A1∘K1‖ ≤ P·B + Q·R`.  Isolated so the operator-norm
+    submultiplicativity chain runs in a bare normed context. -/
+theorem expJet_N_norm_le {G : Type*} [NormedAddCommGroup G] [NormedSpace ℝ G]
+    (D lA K A1 K1 : G →L[ℝ] G) {P B Q R : ℝ}
+    (hD : ‖D - lA‖ ≤ P) (hK : ‖K‖ ≤ B) (hA1 : ‖A1‖ ≤ Q) (hK1 : ‖K1‖ ≤ R)
+    (hP0 : 0 ≤ P) (hQ0 : 0 ≤ Q) :
+    ‖(D - lA).comp K + A1.comp K1‖ ≤ P * B + Q * R :=
+  le_trans (norm_add_le _ _)
+    (add_le_add
+      (le_trans (ContinuousLinearMap.opNorm_comp_le _ _) (mul_le_mul hD hK (norm_nonneg _) hP0))
+      (le_trans (ContinuousLinearMap.opNorm_comp_le _ _) (mul_le_mul hA1 hK1 (norm_nonneg _) hQ0)))
+
+/-- Small-context CLM bound `‖D∘X + N‖ ≤ K·‖X‖ + C` from `‖D‖ ≤ K` and `‖N‖ ≤ C` (the Grönwall
+    right-derivative estimate).  Isolated so the operator-norm chain stays whnf-light. -/
+theorem expJet_Ederiv_norm_le {G : Type*} [NormedAddCommGroup G] [NormedSpace ℝ G]
+    (D X N : G →L[ℝ] G) {K C : ℝ} (hD : ‖D‖ ≤ K) (hN : ‖N‖ ≤ C) :
+    ‖D.comp X + N‖ ≤ K * ‖X‖ + C :=
+  le_trans (norm_add_le _ _)
+    (add_le_add
+      (le_trans (ContinuousLinearMap.opNorm_comp_le _ _)
+        (mul_le_mul_of_nonneg_right hD (norm_nonneg _))) hN)
+
+/-- Small-context: `‖π∘(X∘ι)‖ ≤ ‖X‖` (project/inject are norm-≤-1). -/
+theorem expJet_pi_comp_iota_norm_le (X : (Point n × Point n) →L[ℝ] (Point n × Point n)) :
+    ‖(expJetPi (n := n)).comp (X.comp (expJetIota (n := n)))‖ ≤ ‖X‖ := by
+  calc ‖(expJetPi (n := n)).comp (X.comp (expJetIota (n := n)))‖
+      ≤ ‖expJetPi (n := n)‖ * ‖X.comp (expJetIota (n := n))‖ :=
+        ContinuousLinearMap.opNorm_comp_le _ _
+    _ ≤ 1 * ‖X.comp (expJetIota (n := n))‖ :=
+        mul_le_mul_of_nonneg_right expJetPi_opNorm_le (norm_nonneg _)
+    _ = ‖X.comp (expJetIota (n := n))‖ := one_mul _
+    _ ≤ ‖X‖ * ‖expJetIota (n := n)‖ := ContinuousLinearMap.opNorm_comp_le _ _
+    _ ≤ ‖X‖ * 1 := mul_le_mul_of_nonneg_left expJetIota_opNorm_le (norm_nonneg _)
+    _ = ‖X‖ := mul_one _
+
+set_option maxHeartbeats 1600000 in
+/-- **STEP 3 — the Jacobian one-jet of the geodesic exp-map (`fderiv exp_p v = id − Γ_p^sym(v,·)
+    + O(‖v‖²)`).**  As an `IsBigO` near `v = 0`:
+    `fderiv exp_p v − (id + expJetOneJetModel v) =O[𝓝 0] ‖v‖²`.  Since `id + expJetOneJetModel v`
+    equals `id − Γ_p^sym(v,·)` (`expJetOneJetModel` is the negated-and-halved Christoffel block, see its
+    docstring), the honest content is the QUADRATIC remainder.
+
+    Assembly (the operator analogue of `hasFDerivAt_expMap`'s residual Grönwall, but CLM-valued):
+    `fderiv exp_p v = π∘Φ_v(1)∘ι` (`hasFDerivAt_expMap`).  The residual
+    `E_v(t) := Φ_v(t) − (K₀ t + K₁ t)` obeys `E 0 = 0`, `E' = D∘E + N` (`expJet_residual_identity`,
+    `D = DF(Y_v t)`), with `‖N t‖ ≤ Cconst·‖v‖²` uniformly (order-2 tube expansion
+    `expJet_fderiv_tube_order2` + the coefficient/propagator op-norm bounds) and
+    `‖D‖ ≤ Kstar` uniformly (`expJet_fderiv_tube_bddAbove_unif`).  The small-context Grönwall
+    (`expJet_residual_gronwall`) gives `‖E_v(1)‖ ≤ Cconst·‖v‖²·exp Kstar`; and
+    `fderiv exp_p v − (id + model) = π∘E_v(1)∘ι` (`expJet_proj_model_one`), so
+    `‖·‖ ≤ ‖E_v(1)‖ ≤ (Cconst·exp Kstar)·‖v‖²`.  The heavy CLM algebra is offloaded to the
+    `expJet_*_norm_le` / `expJet_recompose` small-context helpers to keep the elaborator's whnf
+    budget bounded. -/
+theorem hasFDerivAt_expMap_jacobian_one_jet (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    (fun v => fderiv ℝ (expMap g gi hC p) v
+        - (ContinuousLinearMap.id ℝ (Point n) + expJetOneJetModel g gi p v))
+      =O[nhds (0 : Point n)] (fun v => ‖v‖ ^ 2) := by
+  -- uniform (v-independent) constants at `p`.
+  obtain ⟨ρ₂, hρ₂, C₂, hC2nn, h2⟩ := expJet_fderiv_tube_order2 g gi hC p
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove_unif g gi hC p
+  set Tc : Fin n → Fin n → Fin n → ℝ := fun i j k => christoffel g gi i j k p with hTc
+  obtain ⟨Mc, hMc0, hMc⟩ : ∃ Mc : ℝ, 0 ≤ Mc ∧ ∀ i j k, |christoffel g gi i j k p| ≤ Mc :=
+    ⟨‖Tc‖, norm_nonneg _, fun i j k => by
+      rw [show christoffel g gi i j k p = Tc i j k from rfl, ← Real.norm_eq_abs]
+      exact (norm_le_pi_norm (Tc i j) k).trans
+        ((norm_le_pi_norm (Tc i) j).trans (norm_le_pi_norm Tc i))⟩
+  set Td : Fin n → Fin n → Fin n → Fin n → ℝ :=
+    fun i j k l => pd (fun z => christoffel g gi i j k z) l p with hTd
+  obtain ⟨Nc, hNc0, hNc⟩ :
+      ∃ Nc : ℝ, 0 ≤ Nc ∧ ∀ i j k l, |pd (fun z => christoffel g gi i j k z) l p| ≤ Nc :=
+    ⟨‖Td‖, norm_nonneg _, fun i j k l => by
+      rw [show pd (fun z => christoffel g gi i j k z) l p = Td i j k l from rfl, ← Real.norm_eq_abs]
+      exact (norm_le_pi_norm (Td i j k) l).trans ((norm_le_pi_norm (Td i j) k).trans
+        ((norm_le_pi_norm (Td i) j).trans (norm_le_pi_norm Td i)))⟩
+  set B : ℝ := ‖(1 : (Point n × Point n) →L[ℝ] (Point n × Point n))‖ + ‖linF (n := n)‖
+    + 2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖) with hBdef
+  have hcoefK1nn : 0 ≤ 2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖) :=
+    mul_nonneg (mul_nonneg (by positivity) hMc0) (by positivity)
+  have hB0 : 0 ≤ B :=
+    add_nonneg (add_nonneg (norm_nonneg _) (norm_nonneg _)) hcoefK1nn
+  set Cconst : ℝ := (C₂ + (n : ℝ) ^ 3 * Nc) * B
+    + 2 * (n : ℝ) ^ 2 * Mc * (2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖)) with hCconstdef
+  have hCconst0 : 0 ≤ Cconst :=
+    add_nonneg (mul_nonneg (add_nonneg hC2nn (mul_nonneg (by positivity) hNc0)) hB0)
+      (mul_nonneg (mul_nonneg (by positivity) hMc0) hcoefK1nn)
+  set FinalC : ℝ := Cconst * Real.exp Kstar with hFinalC
+  rw [Asymptotics.isBigO_iff]
+  refine ⟨FinalC, ?_⟩
+  rw [Metric.eventually_nhds_iff]
+  set ρ : ℝ := min (expRho g gi hC p) (min ρ₂ 1) with hρdef
+  have hρpos : 0 < ρ := lt_min (expRho_pos g gi hC p) (lt_min hρ₂ one_pos)
+  refine ⟨ρ, hρpos, fun v hv => ?_⟩
+  rw [dist_eq_norm, sub_zero] at hv
+  have hv_le : ‖v‖ ≤ expRho g gi hC p := (lt_of_lt_of_le hv (min_le_left _ _)).le
+  have hv2 : ‖v‖ ≤ ρ₂ := (lt_of_lt_of_le hv (le_trans (min_le_right _ _) (min_le_left _ _))).le
+  have hv1 : ‖v‖ ≤ 1 := (lt_of_lt_of_le hv (le_trans (min_le_right _ _) (min_le_right _ _))).le
+  have hvlt : ‖v‖ < expRho g gi hC p := lt_of_lt_of_le hv (min_le_left _ _)
+  -- the operator fundamental solution and the exp-map derivative.
+  obtain ⟨Φ, hΦ0, hΦderiv, hFD⟩ := hasFDerivAt_expMap g gi hC p v hvlt
+  have hfderiv : fderiv ℝ (expMap g gi hC p) v
+      = (expJetPi (n := n)).comp ((Φ 1).comp (expJetIota (n := n))) := hFD.fderiv
+  -- the CLM-valued residual, its inhomogeneity, and its derivative.
+  set E : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)) :=
+    fun t => Φ t - (expJetK0 t + expJetK1 g gi p v t) with hEdef
+  set Nf : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)) :=
+    fun t => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+          - (linF + expJetA1 g gi p v)).comp (expJetK0 t + expJetK1 g gi p v t)
+        + (expJetA1 g gi p v).comp (expJetK1 g gi p v t) with hNdef
+  set E' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)) :=
+    fun t => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).comp (E t) + Nf t with hE'def
+  have hEderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt E (E' t) (Set.Icc 0 1) t := by
+    intro t ht
+    have hΦ' : HasDerivWithinAt Φ
+        ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).comp (Φ t)) (Set.Icc 0 1) t := by
+      simpa only [expJetPsi_apply] using hΦderiv t ht
+    have hcomb := hΦ'.sub ((expJetK0_hasDerivAt_ode (n := n) t).hasDerivWithinAt.add
+      (expJetK1_hasDerivAt_ode g gi p v t).hasDerivWithinAt)
+    rw [expJet_residual_identity (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+        (Φ t) (expJetK0 t) (expJetK1 g gi p v t) (expJetA1 g gi p v)] at hcomb
+    exact hcomb
+  have hEcont : ContinuousOn E (Set.Icc 0 1) := fun t ht => (hEderiv t ht).continuousWithinAt
+  have hEderiv' : ∀ t ∈ Set.Ico (0 : ℝ) 1, HasDerivWithinAt E (E' t) (Set.Ici t) t := by
+    intro t ht
+    exact (hEderiv t (Set.Ico_subset_Icc_self ht)).mono_of_mem_nhdsWithin
+      (mem_nhdsWithin.mpr ⟨Set.Iio 1, isOpen_Iio, ht.2,
+        fun y hy => ⟨le_trans ht.1 hy.2, le_of_lt hy.1⟩⟩)
+  have hE0 : E 0 = 0 := by
+    simp only [hEdef, hΦ0, expJetK0_zero, expJetK1_zero, add_zero, ContinuousLinearMap.one_def,
+      sub_self]
+  -- the uniform inhomogeneity bound ‖N t‖ ≤ Cconst·‖v‖² (heavy CLM algebra in the helpers).
+  have hNt : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Nf t‖ ≤ Cconst * ‖v‖ ^ 2 := by
+    intro t ht
+    have ht0 : (0 : ℝ) ≤ t := ht.1
+    have ht1 : t ≤ 1 := ht.2
+    have hDA1 : ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) - (linF + expJetA1 g gi p v)‖
+        ≤ C₂ * ‖v‖ ^ 2 + (n : ℝ) ^ 3 * Nc * ‖v‖ ^ 2 :=
+      expJet_DA1_norm_le _ (linF + expJetA1 g gi p v) (expJetA2 g gi p v)
+        (h2 v hv2 t ht) (expJetA2_opNorm_le g gi p v hNc0 hNc)
+    have hK01 : ‖expJetK0 t + expJetK1 g gi p v t‖ ≤ B := by
+      calc ‖expJetK0 t + expJetK1 g gi p v t‖
+          ≤ ‖expJetK0 (n := n) t‖ + ‖expJetK1 g gi p v t‖ := norm_add_le _ _
+        _ ≤ (‖(1 : (Point n × Point n) →L[ℝ] (Point n × Point n))‖ + ‖linF (n := n)‖)
+              + 2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖) * ‖v‖ :=
+            add_le_add (expJetK0_opNorm_le t ht0 ht1)
+              (expJetK1_opNorm_le g gi p v hMc0 hMc t ht0 ht1)
+        _ ≤ (‖(1 : (Point n × Point n) →L[ℝ] (Point n × Point n))‖ + ‖linF (n := n)‖)
+              + 2 * (n : ℝ) ^ 2 * Mc * (1 + ‖linF (n := n)‖) * 1 := by
+            have h := mul_le_mul_of_nonneg_left hv1 hcoefK1nn
+            linarith
+        _ = B := by rw [hBdef]; ring
+    have hb0 : 0 ≤ C₂ * ‖v‖ ^ 2 + (n : ℝ) ^ 3 * Nc * ‖v‖ ^ 2 :=
+      add_nonneg (mul_nonneg hC2nn (sq_nonneg _))
+        (mul_nonneg (mul_nonneg (by positivity) hNc0) (sq_nonneg _))
+    have hb2 : 0 ≤ 2 * (n : ℝ) ^ 2 * Mc * ‖v‖ :=
+      mul_nonneg (mul_nonneg (by positivity) hMc0) (norm_nonneg _)
+    simp only [hNdef]
+    refine le_trans (expJet_N_norm_le _ (linF + expJetA1 g gi p v)
+      (expJetK0 t + expJetK1 g gi p v t) (expJetA1 g gi p v) (expJetK1 g gi p v t)
+      hDA1 hK01 (expJetA1_opNorm_le g gi p v hMc0 hMc)
+      (expJetK1_opNorm_le g gi p v hMc0 hMc t ht0 ht1) hb0 hb2) (le_of_eq ?_)
+    rw [hCconstdef]; ring
+  -- the residual Grönwall (right-derivative estimate offloaded to `expJet_Ederiv_norm_le`).
+  have hgron := expJet_residual_gronwall E E' (Cconst * ‖v‖ ^ 2) Kstar
+    (mul_nonneg hCconst0 (sq_nonneg _)) hKstar0 hEcont hEderiv' hE0
+    (fun t ht => by
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := Set.Ico_subset_Icc_self ht
+      simpa only [hE'def] using
+        expJet_Ederiv_norm_le (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (E t) (Nf t)
+          (hKstar v hv_le t htIcc) (hNt t htIcc))
+  -- project back: fderiv − (id + model) = π ∘ E(1) ∘ ι.
+  have hΦ1 : Φ 1 = E 1 + (expJetK0 (n := n) 1 + expJetK1 g gi p v 1) :=
+    expJet_recompose (Φ 1) (expJetK0 (n := n) 1 + expJetK1 g gi p v 1)
+  have hsplit : (expJetPi (n := n)).comp ((Φ 1).comp (expJetIota (n := n)))
+      = (expJetPi (n := n)).comp ((E 1).comp (expJetIota (n := n)))
+        + (ContinuousLinearMap.id ℝ (Point n) + expJetOneJetModel g gi p v) := by
+    rw [hΦ1, ContinuousLinearMap.add_comp, ContinuousLinearMap.comp_add,
+      expJet_proj_model_one g gi p v]
+  have hdiff : fderiv ℝ (expMap g gi hC p) v
+      - (ContinuousLinearMap.id ℝ (Point n) + expJetOneJetModel g gi p v)
+      = (expJetPi (n := n)).comp ((E 1).comp (expJetIota (n := n))) := by
+    rw [hfderiv, hsplit]; exact add_sub_cancel_right _ _
+  show ‖fderiv ℝ (expMap g gi hC p) v
+      - (ContinuousLinearMap.id ℝ (Point n) + expJetOneJetModel g gi p v)‖
+    ≤ FinalC * ‖‖v‖ ^ 2‖
+  rw [hdiff, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)]
+  calc ‖(expJetPi (n := n)).comp ((E 1).comp (expJetIota (n := n)))‖
+      ≤ ‖E 1‖ := expJet_pi_comp_iota_norm_le (E 1)
+    _ ≤ Cconst * ‖v‖ ^ 2 * Real.exp Kstar := hgron
+    _ = FinalC * ‖v‖ ^ 2 := by rw [hFinalC]; ring
+
 end QIQTH.ExpMap
