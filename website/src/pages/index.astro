@@ -29,7 +29,25 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     </div>
   </div></header>
 
-  <section class="section" id="abstract" style="padding-top:30px;padding-bottom:8px"><div class="wrap">
+  <section class="section" id="plain" style="padding-top:30px;padding-bottom:6px"><div class="wrap">
+    <div class="note" style="border-left:4px solid var(--accent);padding:22px 26px;max-width:72ch">
+      <div class="kicker" style="margin-bottom:8px">In plain words</div>
+      <p class="sub" style="max-width:none;margin-top:0">Quantum physics lets a system be in many possible
+        states at once, yet every measurement shows just one — textbooks patch this with a “collapse” rule
+        added <em>by hand</em>. QIQT-H drops the patch. The wave function (call it <strong>Φ</strong>) is the
+        whole of reality and never collapses; a single extra fact — <strong>λ</strong>, which just marks
+        <em>which</em> of the many settled records is the one we actually experience — does the job collapse
+        was invented for. No parallel universes, no built-in dice.</p>
+      <p class="sub" style="max-width:none">Because any region of space can hold only a <em>finite</em> amount
+        of information (a well-known idea from black-hole physics), the same picture also grows a version of
+        Einstein’s gravity. What’s unusual: <strong>every mathematical step is checked by computer</strong>
+        (in the proof assistant Lean&nbsp;4), so a skeptic can re-run the entire argument themselves. It is an
+        honest, in-progress research program — its open problems named — not a finished theory. The rigorous
+        version follows.</p>
+    </div>
+  </div></section>
+
+  <section class="section" id="abstract" style="padding-top:16px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:24px 28px;max-width:72ch">
       <h2 style="margin-top:0">Abstract</h2>
       <p class="sub" style="max-width:none">We develop <strong>QIQT-H</strong>, a single-world, holographic
@@ -81,48 +99,41 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         <span style="font-size:2rem;font-weight:800">~4,400<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
-      <p style="margin:.2rem 0 0;font-size:1.05rem"><strong>Headlines:</strong>
-        the <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed) ·
-        the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall) ·
-        <strong><code>towerLimitVN</code></strong> — the tower's inductive-limit von Neumann algebra, built by GNS, now with a <strong>strongly continuous unitary modular dynamics and its self-adjoint generator, a cyclic–separating vector, the closed Tomita operator S̄, the self-adjoint modular operator Δ, the modular unitary group Δ^it = the physical dynamics (the exponential-recovery wall, crossed), the modular conjugation J with the polar decomposition S̄ = J∘Δ^½ and Tomita's theorem both halves — first Δ^it M Δ^−it = M, second (inclusion) J M J ⊆ M′ — and a genuine non-tracial KMS state (Δ ≠ 1): the tower's Tomita–Takesaki modular theory now complete, the first in any proof assistant</strong> ·
-        the <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch) ·
-        <strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).
-        <a href="/formalization">Every claim, with its honest scope →</a></p>
+      <p style="margin:.2rem 0 .4rem;font-size:1.05rem"><strong>Headlines:</strong> five results that did not exist in any proof assistant.</p>
+      <ul style="margin:.2rem 0 0;padding-left:1.3rem;line-height:1.55;font-size:1.05rem">
+        <li>The <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed).</li>
+        <li>An <strong>unbounded Stone theorem and spectral machinery beyond Mathlib</strong> — the PVM spectral theorem, bounded Borel functional calculus, and Stone-generator reconstruction.</li>
+        <li><strong><code>towerLimitVN</code></strong> — the GNS inductive-limit von Neumann algebra whose <strong>Tomita–Takesaki modular theory is now complete, the first in any proof assistant</strong>: the modular operator Δ, the group Δ<sup>it</sup>, and the conjugation J with the polar decomposition S̄ = J∘Δ<sup>½</sup>, both halves of Tomita's theorem (Δ<sup>it</sup> M Δ<sup>−it</sup> = M and J M J ⊆ M′), and a genuine non-tracial KMS state (Δ ≠ 1).</li>
+        <li>The <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch), and the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall).</li>
+        <li><strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).</li>
+      </ul>
+      <p style="margin:.5rem 0 0;font-size:1.05rem"><a href="/formalization">Every claim, with its honest scope →</a></p>
     </div>
   </div></section>
 
   <section class="section"><div class="wrap">
     <h2>The thesis: two results on two independent axes — one world, and emergent gravity</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Two separate claims — one actual world, and emergent gravity — that share only the word “finite.”</p>
     <p class="sub">QIQT-H makes two distinct claims, and the honest part is keeping them <em>separate</em> — they
       are not one mechanism. <strong>(1) One world (foundations).</strong> The universal Φ evolves exactly
       unitarily; decoherence makes records non-interfering; a non-dynamical <strong>equilibrium selector λ</strong>
-      makes exactly one record actual, with Born as λ's equilibrium measure. This needs <em>no</em> holographic
-      input — the retired “capacity forbids records” (H2) was a category error: a capacity bound cannot select an
-      outcome in a unitary theory. Single outcomes are λ's doing. <strong>(2) Emergent gravity (the “Holographic”
-      half).</strong> A region's <em>finite</em> information capacity (the “Quantized Information” core) — via the
-      Sakharov conical-deficit bridge that <em>derives</em> the holographic area form (the ∝A scaling and the 1/4)
-      — feeds a conditional, Lean-checked Jacobson-style derivation of an <strong>Einstein-form equation</strong>
-      for the free field (the value of G is not derived). <strong>Finite capacity is the kinematic input to the
-      gravity chain; λ is the source of definiteness — two different jobs.</strong></p>
-    <div class="note">
-      <strong>Where each finiteness lives.</strong> On the gravity axis, the finite capacity is the
-      <em>postulate</em> (finiteness only); the area form ∝A and the 1/4 are <em>derived</em> (Sakharov bridge),
-      and even the entropy-area variation δS = η·δA is a derived theorem — the genuine residual is the
-      reference-state identification, plus the value of G. On the foundations axis, λ selects a finite record
-      <strong>label</strong>; its equilibrium measure μ is a <em>primitive</em> (P5) that yields the <em>exact</em>
-      Born weights (<em>Born-transparent</em>, so operationally = Everett — not a new prediction). Putting the
-      finiteness in the <em>probability law</em> instead (a “grid” rounding the weights) provably breaks
-      envariance/no-signalling and is retired. The two
-      axes share only the word “finite”; neither does the other's job. <a href="/selection">See the construction →</a>
-    </div>
+      makes exactly one record actual. This needs <em>no</em> holographic input — the retired “capacity forbids
+      records” (H2) was a category error: a capacity bound cannot select an outcome in a unitary theory. Single
+      outcomes are λ's doing. <strong>(2) Emergent gravity (the “Holographic” half).</strong> A region's
+      <em>finite</em> information capacity (the “Quantized Information” core) feeds a conditional, Lean-checked
+      Jacobson-style derivation of an <strong>Einstein-form equation</strong> for the free field (the value of G is
+      not derived). <strong>Finite capacity is the kinematic input to the gravity chain; λ is the source of
+      definiteness — two different jobs, sharing only the word “finite.”</strong>
+      <a href="/selection">See the construction →</a></p>
   </div></section>
 
   <section class="section"><div class="wrap">
     <h2>Top results — what is machine-checked (Lean&nbsp;4, axiom-free)</h2>
-    <p class="sub">Every result below is verified in Lean&nbsp;4 / Mathlib with <strong>no <code>sorry</code></strong>
-      and the standard three axioms only (<code>propext</code>, <code>Classical.choice</code>,
-      <code>Quot.sound</code>; axiom budget&nbsp;0) — a check of the <em>implications from the declared
-      assumptions</em>, not of the physical premises. Each carries its honest scope.</p>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Every card below is a Lean theorem — each with its honest scope.</p>
+    <p class="sub">Every result is verified in Lean&nbsp;4 / Mathlib with <strong>no <code>sorry</code></strong> and the
+      standard three axioms only (<code>propext</code>, <code>Classical.choice</code>, <code>Quot.sound</code>;
+      axiom budget&nbsp;0) — a check of the <em>implications from the declared assumptions</em>, not of the
+      physical premises.</p>
     <div class="cards" style="margin-top:18px">
       <a class="card" href="/born"><h3>Born from typicality</h3>
         <p>The equiprobable measure over an equal-amplitude orthonormal fine-graining gives the Born weights
@@ -202,11 +213,11 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>First in the world — formalization firsts (to our knowledge, 2026)</h2>
-    <p class="sub">Each item below is, to our knowledge, the <strong>first machine-checked formalization</strong>
-      of its subject in any proof assistant — verified against the 2026 landscape (Mathlib has spectral/CFC and
-      GNS foundations; PhysLean has fermionic Wick/CAR algebra; Tomita–Takesaki modular theory existed in
-      <em>no</em> proof assistant). These are <em>formalization</em> firsts — machine-checking known and new
-      mathematics/physics — not claims of physics priority. All axiom-free (standard three), budget 0.</p>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">First machine-checked in any proof assistant — formalization firsts, not claims of physics priority.</p>
+    <p class="sub">Each item below is, to our knowledge, the <strong>first machine-checked formalization</strong> of
+      its subject in any proof assistant (verified against the 2026 Mathlib / PhysLean landscape — Tomita–Takesaki
+      modular theory existed in <em>no</em> proof assistant). These are <em>formalization</em> firsts, not claims
+      of physics priority. All axiom-free (standard three), budget 0.</p>
     <div class="note">
       <ol style="margin:0; padding-left:1.4rem; line-height:1.7">
         <li><strong>Tomita–Takesaki modular theory</strong> — the bounded Rieffel–Van&nbsp;Daele modular objects
@@ -448,6 +459,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>The argument in five links</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Two postulates do the work — finite capacity for gravity, λ-equilibrium for definiteness and Born.</p>
     <p class="sub">The chain spans both axes: the finite-capacity / holography link is the <em>gravity</em> engine;
       the decoherence → λ → Born links are the <em>foundations</em>. The two genuine postulates are the
       <strong>finite capacity</strong> (gravity) and the <strong>λ-equilibrium selector</strong> (definiteness +
@@ -459,6 +471,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>The irreducible postulates</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">The framework reduces to two genuine postulates: finite capacity (P4) and quantum equilibrium (P5).</p>
     <p class="sub">After the discharge-and-grounding effort, the framework reduces to a handful of postulates —
       with the distinctive physics being <strong>P4</strong> (finite capacity — the gravity axis) and
       <strong>P5</strong> (quantum equilibrium — the Born/foundations axis). Born is no longer a primitive: its two
@@ -542,6 +555,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>More than Everett? Ontologically yes, empirically no.</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Same unitary Φ as Everett, plus a selector λ — a single world, empirically identical.</p>
     <p class="sub">QIQT-H shares Everett's exact-unitary Φ. What pure Everett <em>deliberately lacks</em> is an
       actuality selector — in Everett every branch is equally real, with no fact about which is <em>the</em>
       actual one. λ <em>is</em> that fact, which makes QIQT-H a genuine <strong>single-world</strong> reading,
@@ -563,6 +577,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>What is proven, what is open</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">An honest ledger: the Born reduction and modular calculus are verified; P5, G, and the continuum stay open.</p>
     <p class="sub">Honesty is the point. The axiom-free Lean development verifies the modular /
       relative-entropy calculus (<span set:html={chiR} />), the covariant consistent Born measure, the
       Born-from-typicality reduction — the Zurek amplitude→count bridge ‖ψ<sub>k</sub>‖²/‖ψ‖² = count/|I| is
@@ -678,6 +693,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>Emergent gravitational dynamics: a conditional, Lean-checked Einstein-form equation</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">A conditional Jacobson-style Einstein-form equation for the free field — dynamics on a pre-existing spacetime, not QG.</p>
     <p class="sub">A second, self-contained, Lean-checked thread (standard axioms only, no project axioms)
       formalizes a <em>conditional</em> Jacobson <em>“Einstein equation of state”</em> route to gravitational
       <em>dynamics</em> — the field equations on a <em>pre-existing</em> spacetime, <strong>not</strong> emergent
@@ -753,6 +769,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
 
   <section class="section"><div class="wrap">
     <h2>Explore</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Jump to any part of the program — the idea, the math, selection, proofs, and open problems.</p>
     <div class="cards" style="margin-top:18px">
       <a class="card" href="/idea"><h3>The Idea</h3>
         <p>The measurement problem, finite information, and single outcomes, in plain language.</p>
