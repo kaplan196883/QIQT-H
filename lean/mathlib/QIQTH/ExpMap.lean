@@ -5023,4 +5023,30 @@ theorem expJet_residual_gronwall {F : Type*} [NormedAddCommGroup F] [NormedSpace
   rw [sub_zero, gronwallBound_zero_linear] at h1
   exact le_trans h1 (mul_le_mul_of_nonneg_left (gronwallBound_zero_one_le_exp K hK0) hC0)
 
+/-- **STEP 1 — the uniform-in-`v` Jacobi-coefficient bound `‖DF(Y_v t)‖ ≤ Kstar`.**  Strengthens
+    `expJet_fderiv_tube_bddAbove` (fixed `v`) to a single `Kstar` valid for ALL `‖v‖ ≤ expRho` and all
+    `t ∈ [0,1]`.  All confined tubes `Y_v(t)` for `‖v‖ ≤ expRho` lie in the FIXED compact phase-space
+    ball `closedBall((p,0), expConst·expRho)` (`expTube_spec` confinement), on which the continuous
+    `DF = fderiv F` attains a finite bound (`IsCompact.exists_bound_of_continuousOn`). -/
+theorem expJet_fderiv_tube_bddAbove_unif (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    ∃ Kstar : ℝ, 0 ≤ Kstar ∧ ∀ v : Point n, ‖v‖ ≤ expRho g gi hC p → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ Kstar := by
+  have hC₀ := expConst_nonneg g gi hC p
+  have hρ0 : 0 ≤ expRho g gi hC p := (expRho_pos g gi hC p).le
+  set Rb : ℝ := expConst g gi hC p * expRho g gi hC p with hRbdef
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  obtain ⟨C, hC'⟩ :=
+    (isCompact_closedBall ((p, 0) : Point n × Point n) Rb).exists_bound_of_continuousOn
+      hdFcont.continuousOn
+  refine ⟨max C 0, le_max_right _ _, fun v hv t ht => ?_⟩
+  have hmem : expTube g gi hC p v t ∈ Metric.closedBall ((p, 0) : Point n × Point n) Rb := by
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    obtain ⟨_, _, hconf⟩ := expTube_spec g gi hC p v hv
+    calc ‖expTube g gi hC p v t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v‖ := hconf t ht
+      _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hv hC₀
+  exact le_trans (hC' _ hmem) (le_max_left _ _)
+
 end QIQTH.ExpMap
