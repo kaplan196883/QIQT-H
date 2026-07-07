@@ -350,11 +350,14 @@ remain). Never claim numerical-G or a curved heat kernel.
     (`dGammaDiag(rncDΓ)=0`, tautology), and **`rncGaugeJet : GaugeJet (rncDΓ Γ dΓ1)`** via `gaugeJet_of_diag`. Non-vacuous
     (symmetrized A3sym, not the pointwise-zero raw). HONEST: the abstract algebraic core — does NOT yet GROUND `rncDΓ` in
     the exp map's actual `a₃` (fact B below), NOT the pullback metric, NOT numerical-G.
-  - [ ] **fact B — GROUND `rncDΓ` in the exp 3-jet** (non-vacuous connection): `∑_{ljk} a3rawArr Γ dΓ1 i l j k v_l v_j v_k
-    = a₃(v)_i` for `Γ:=christoffel..p`, `dΓ1:=pd(christoffel..)..p`, where `a₃` is the EXACT inlined cubic of
-    `expMap_value_three_jet`. The three reindex matchings (∂: j,k,l→l,j,k; SA↔termA: l,j,k,a→a,k,l,j; SB↔termB:
-    l,j,k,a→j,a,l,k). Needs geometry imports (new file `QIQTH/RNCGaugeExp.lean` importing `QIQTH.ExpMap`). This makes
-    `rncDΓ` the genuine exp-3-jet-based formal Christoffel jet (so `rncGaugeJet` is about the ACTUAL exp normal coords).
+  - [x] **fact B — GROUND `rncDΓ` in the exp 3-jet — DONE 2026-07-07** (`QIQTH/RNCGaugeExp.lean`, commit 692d6b4, [AF]
+    std-3, budget 0): **`a3rawArr_contract_eq_a3`** — `∑_{ljk} a3rawArr Γ dΓ1 i l j k v_l v_j v_k = a₃(v)_i` for
+    `Γ:=christoffel..p`, `dΓ1:=pd(christoffel..)..p`, matching the EXACT inlined cubic of `expMap_value_three_jet`
+    verbatim (∂Γ + χ²-A + χ²-B), via the three `Finset` reindex matchings (private `reindex_A`/`reindex_B`, `sum_comm`/
+    `sum_congr`/`ring`, no Christoffel symmetry used); and **`exp_rncGaugeJet : GaugeJet (rncDΓ [true exp jet])`** —
+    `rncGaugeJet` specialized to the genuine exp-value-3-jet-derived formal Christoffel jet. **Route-c's algebraic side is
+    now COMPLETE and grounded in the actual exp map.** HONEST: does NOT reach κ=1/6 for the pullback metric (the bridge
+    `rncDΓ=pd(christoffel g̃)(0)` + `ContDiff exp_p` remain — see the HONEST FINDING below), NOT numerical-G.
   - **⚠ HONEST FINDING (2026-07-07) — route-c reduces but does NOT eliminate the smooth-dependence gap.** The algebraic
     side of route-c is DONE (`rncGaugeJet`: the RNC-Christoffel linearization satisfies the gauge) and the gauge⟹κ=1/6
     side is DONE (`heat_a1_of_gauge`). But CONNECTING them for the actual exp normal coordinates is still blocked on

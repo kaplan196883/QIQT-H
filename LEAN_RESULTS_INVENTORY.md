@@ -724,6 +724,22 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   gauge `∂_(l Γ̃^i_{jk)}(0)=0` — **bypassing the Jacobian 2-jet entirely**. ⚠ **HONEST**: standalone algebra; the gauge
   discharge still needs Lemmas 1–4 (radial straightness + the pullback-Christoffel transform); **NOT** the gauge, **NOT**
   numerical-`G`.
+- **Route-(c) the RNC-gauge ALGEBRAIC SIDE COMPLETE** (`RNCGauge.lean` `dGammaDiag`/`GaugeJet`/`gaugeTri`/`gaugeJet_of_diag`/
+  `sum3_sym_contract`/`rncDΓ`/`expMap_rncDΓ_diag_zero`/`rncGaugeJet`; `RNCGaugeExp.lean` `a3rawArr_contract_eq_a3`/
+  `exp_rncGaugeJet`; all **[AF]** std-3, budget 0, 2026-07-07; commits 1b09321, 2da77e5, 692d6b4): the symmetrized
+  normal-coordinate gauge is a PROVEN algebraic identity for the RNC-Christoffel linearization. `gaugeJet_of_diag`:
+  `(∀ v i, ∑_{ljk} dΓ l i j k v_l v_j v_k = 0) ⟹ GaugeJet dΓ` (packages the cubic form as a trilinear CLM `gaugeTri`, reads
+  Polarization Lemma 5 at basis vectors). `sum3_sym_contract`: the diagonal `v³`-contraction is invariant under permuting an
+  array's 3 lower indices (⟹ symmetrizing the cubic coefficient preserves the diagonal — the NON-vacuity engine; the raw
+  coefficient would be pointwise-zero). `rncGaugeJet : GaugeJet (rncDΓ Γ dΓ1)` for the formal linearization
+  `rncDΓ = A3sym + ∂Γ − χ²A − χ²B` (abstract Γ, ∂Γ). `a3rawArr_contract_eq_a3` GROUNDS it: `∑ a3rawArr v³ = a₃(v)_i`, the
+  EXACT value-3-jet cubic of `expMap_value_three_jet`, so `exp_rncGaugeJet` is the gauge for the genuine exp-derived formal
+  Christoffel jet. ⚠ **HONEST CEILING (binding)**: route-c reduces the RNC gauge to this proven ALGEBRAIC identity, but does
+  **NOT** reach `κ=1/6` for the actual pullback metric `g̃`: both instantiating `heat_a1_of_gauge` at `g:=g̃` (needs
+  `ContDiff ℝ ⊤ g̃`, hence **`ContDiff exp_p`**) and the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0` reduce to smooth
+  dependence of `exp_p` on the initial velocity — the Mathlib gap (only pointwise `HasFDerivAt exp_p` near 0 is proved). The
+  algebraic gauge is DISCHARGED; the metric-instantiation is the cited `ContDiff exp_p` frontier. **NOT** a curved heat
+  kernel, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
