@@ -52,12 +52,26 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
   predicate **`IsPhysicalWedgeMode m φ x v ff : Prop`** (the mode is the positive-frequency wedge smearing of `∂_v φ`, to be
   defined) so the frontier is an EXPLICIT Prop, not a hidden ansatz. Update `LEAN_RESULTS_INVENTORY.md` + the `nullEnergy`
   scope note: `hTkk` is REDUCED (scaling+scalar), the physical map is the cited frontier. [AF] std-3. Small, high-value.
-- [ ] **HT1 — the CLASSICAL boost-charge = horizon-`T_kk` identity (real physics, classical, no quantization).**
-  `boost_charge_eq_horizon_nullEnergy`: for the classical KG stress tensor, `∫_{x¹>0,t=0} x¹ T₀₀[φ] = ∫_{H⁺} λ T_kk[φ]`
-  (change to null coordinates `u=t−x¹, v=t+x¹` + integration by parts; `T_kk=(∂_v φ)²` already proven via `BL_kgStress_null`).
-  This is the Noether-charge content of step 3 at the classical level — genuinely derivable, fixes the boost-charge ↔
-  null-energy STRUCTURE (not yet the one-particle coefficient). Mathlib: `MeasureTheory` integration, change of variables,
-  `intervalIntegral` IBP. CONSULT GPT-5.5-pro on the exact null-coordinate change + boundary terms before attempting.
+- **HT1 — the CLASSICAL boost-charge ↔ horizon-`T_kk` identity — SCOPED (GPT-5.5-pro 2026-07-08; TARGET CORRECTED).**
+  ⚠ The naive future-only identity `∫_{x¹>0,t=0} x¹ T₀₀ = ∫_{H⁺} λ T_kk` is **FALSE** without a no-flux condition (1+1
+  massless counterexample: `φ=F(t−x)` ⟹ horizon integral 0 but boost charge `∫x(F')²>0`). The HONEST identity carries the
+  explicit outer null-infinity flux `N_+`: `K₀(R) = H_+(R) + N_+(R)`, with (signature −+++, `U=x−t,V=x+t`, `k=∂_t+∂_x`,
+  `T_kk=4T_VV`, `V=2λ`) `N_+(R) = ∫₀^R∫_{ℝ²}[U(∂_UΦ)² + (R/4)(|∇_yΦ|²+m²Φ²)]_{V=R}`. The future-only theorem holds only in
+  the limit `N_+(R)→0` (a STATED falloff hypothesis — NEVER hidden). Derivation = the boost current `J^a=T^a_b χ^b` (χ the
+  boost Killing field), `∂_a J^a=0` (the ONE EOM/conservation step), rewritten in null coords + a triangular FTC/Fubini on
+  `0≤U≤V≤R`. HT1 fixes the boost-charge↔null-energy STRUCTURE; it does NOT fix `2π/ℏ` (that is BW/modular normalization = HT2).
+  On the critical path, one brick. Sub-bricks (new file `QIQTH/HTkkPhysical.lean`):
+  - [ ] **HT1a (the honest core — pure calculus, tractable NOW).** The ABSTRACT 1+1 null-triangle FTC identity: for
+    `A B : ℝ→ℝ→ℝ` with `∂_U A + ∂_V B = 0` on `0≤U≤V≤R`, `∫₀^R (A(s,s)−B(s,s)) ds = ∫₀^R A(0,V) dV − ∫₀^R B(U,R) dU`. No
+    divergence theorem, no PDE — `intervalIntegral.integral_deriv_eq_sub` (FTC) + triangular Fubini
+    (`MeasureTheory.integral_prod` via indicators). HIGH value × HIGH tractability = the honest core of HT1.
+  - [ ] **HT1b.** Instantiate with the KG stress null components `A=V T_VV−U T_UV`, `B=V T_UV−U T_UU` ⟹ `K₀(R)=H_+(R)+N_+(R)`
+    with `N_+` explicit (uses the existing KG stress-conservation identities; `T_kk=(∂_vφ)²` via `BL_kgStress_null`).
+  - [ ] **HT1c.** Transverse Fubini (add `y=(x²,x³)`, transverse boundary term carried) + the no-flux corollary
+    (`Tendsto (outerFlux ·) atTop (𝓝 0)` + cutoff convergence ⟹ `K_boost = H_+`). Falloff carried as an explicit hypothesis.
+  - Mathlib WALL to AVOID: the general noncompact 4D divergence theorem with null boundary (absent) — use explicit FTC/Fubini
+    on the triangle instead. Full physical HT1 (with derived falloff) is NOT a days-to-week brick; the finite-cutoff identity
+    WITH the explicit `N_+` term IS.
 - [ ] **HT2 — the KMS coefficient `β=2π` (fix `2π/ℏ` from the temperature, not a phase choice).** Show the one-particle
   rapidity boost charge's coefficient is the KMS/Unruh `2π` — i.e. the unit-phase value in the Gaussian is FORCED by the
   wedge KMS temperature `β=2π`, tying it to `stripKMSrvd_boostUnitary`/`freeField_oneParticle_hFlux` rather than a free
