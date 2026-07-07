@@ -371,6 +371,21 @@ remain). Never claim numerical-G or a curved heat kernel.
     `ContDiff exp_p` (smooth dependence on the initial velocity). NEVER claim κ=1/6 is unconditional for the pullback
     metric until `ContDiff exp_p` lands. Candidate future attack: does the operator fundamental solution `Φ_v`
     (`expJetFund`) depend smoothly on `v` (a second-order equilibrium-Grönwall), giving `ContDiff exp_p`? — open.
+  - **⚠ ContDiff-`exp_p` VERDICT (GPT-5.5-pro consult 2026-07-07) — REACHABLE finite tower, but a 4–8 WEEK effort; CHECKPOINT.**
+    Mathlib v4.30.0 genuinely LACKS C^k-dependence-of-ODE-flow-on-IC (no shortcut API; implicit-function route is CIRCULAR —
+    IFT needs `exp_p` already C¹). `ContDiff k exp_p` IS reachable via the FINITE AUGMENTED JET-ODE TOWER (not a general
+    smooth-dependence theorem): solve enlarged Picard–Lindelöf systems on `Phase × (Phase→L Phase) × …`. **Jet₁**
+    `(Y,P)'=(F Y, DF(Y)∘P)`, IC `(p,v),1,0` — PL Lipschitz-dependence ⟹ `v↦(Y_v,P_v=Φ_v)` continuous ⟹ **ContDiff¹ exp_p**
+    (needs `ContinuousOn (v↦Φ_v 1)` + `fderiv exp_p v = π Φ_v(1) ι` continuous). **Jet₂** adds `Q'(a,b)=DF(Y)Q(a,b)+D²F(Y)(P a)(P b)`,
+    `Q(0)=0`, residual `S_h=P_{v+h}−P_v−Q_v(ιh,·)` Grönwall ⟹ o(‖h‖) ⟹ **ContDiff² exp_p** (`D²exp_p=π Q_v(1)(ιh,ιk)`).
+    **Jet₃** adds `R'(a,b,c)=DF(Y)R+D²F(Y)(Pa)(Q(b,c))+…+D³F(Y)(Pa)(Pb)(Pc)` ⟹ **ContDiff³ exp_p**. ⚠ **DERIVATIVE-LOSS
+    (new, binding):** the pullback loses one derivative (`D exp_p` appears in `g̃`), so `ContDiff² g̃` needs `ContDiff³ exp_p`
+    — NOT C². Effort: C¹ ≈ days–1wk; C² ≈ 2–4wk; **C³ ≈ 4–8wk**; general C^∞ = multi-month Mathlib PR. **VERDICT: the RNC
+    gauge is DISCHARGED as a proven algebraic identity (`exp_rncGaugeJet`, grounded in exp `a₃`); the κ=1/6 metric-
+    instantiation reduces to the `ContDiff³ exp_p` tower — a genuine 4–8-week finite effort, the honest CITED FRONTIER.**
+    Marginal value is modest (removes a carried gauge hyp; does NOT touch numerical-G or QG). Rung 1 (`ContDiff¹ exp_p` via
+    the Jet₁ augmented ODE) is the available next brick if the tower is pursued — bounded, days-scale, strengthens the 1-jet
+    from pointwise to continuous — but it does NOT by itself unlock κ=1/6 (needs all of C³). **ROUTE-C CHECKPOINTED HERE.**
   - [ ] **(deferred, honestly cited) `rnc_christoffel_linearJet`** — the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0`; needs
     the controlled C³/Hessian jet of `exp_p` (smooth-dependence-on-`v` residue). NOT attempted until the jet exists.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
