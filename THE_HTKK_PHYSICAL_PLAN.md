@@ -110,11 +110,24 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
   the consult when the API is back (esp. Q3: whether HT3's physical mode NORMALIZATION is FORCED by the KG symplectic form
   up to ℏ, or leaves a further free constant — the decisive question for whether hTkk is fully-derived-modulo-ℏ or
   irreducibly-calibrated). No Lean brick needed for HT2 itself (the existing theorems already carry the `2π`).
-- [ ] **HT3 — build `f_phys` from φ (the wedge one-particle mode; the HARD brick, likely Mathlib-blocked).** Define the
-  positive-frequency wedge smearing of `∂_v φ` at `(x,v)` from the KG field / two-point function, and prove
-  `IsPhysicalWedgeMode m φ x v f_phys`. This is the continuum mode-expansion content the corpus calls "beyond current Mathlib
-  reach." Reuse QIQTH `Fock/`, `StandardSubspace*`, `oneParticleBW` machinery. CONSULT GPT-5.5-pro + survey what one-particle
-  infrastructure exists before attempting; CHECKPOINT honestly with the exact gap if blocked.
+- [ ] **HT3 — the CANONICAL positive-frequency boost-charge theorem — SCOPED (GPT-5.5-pro 2026-07-08, DECISIVE).**
+  ⚠ **Physics verdict (settles the deepest question):** the coefficient is NOT irreducibly calibrated — physics DERIVES it
+  (up to the ℏ unit). The one-particle vector `f_phys = j_ℏ ψ` is CANONICALLY normalized by the KG symplectic form + positive-
+  frequency projection (`2ℏ·Im⟨j_ℏψ, j_ℏχ⟩ = σ(ψ,χ)`); rescaling breaks the CCR. So `q_B(f_phys) = (1/ℏ)·B_cl[ψ]` with the
+  coefficient FIXED — no residual free constant beyond ℏ. GPT: "the ceiling is not 'physics only gives proportionality' —
+  physics gives the coefficient." The gap is purely the LEAN formalization of the canonical KG→one-particle normalization.
+  ⚠ **The one genuine subtlety:** there is NO unique normalizable mode at a POINT generator (pointlike horizon data are
+  distributions; "localized near the generator" still leaves a smearing/profile choice) — so the Gaussian `f:=D·g₀` is
+  calibrated until the canonical bridge is formalized. **TARGET (the stripped, tractable HT3, NOT full null quantization):**
+  `HT3_posFreq_rapidityCharge_eq_classicalBoost (ψ : KG.Solution m) (hψ : GoodSchwartz/CompactCauchy) :
+   rapidityBoostCharge (KG.posFreqRapidity ℏ ψ) = (1/ℏ)·KG.classicalBoostCharge ψ` — the canonical map
+   `KG solution → one-particle rapidity wavefunction → (1/ℏ)·classical boost charge`. Then combine with HT1b's
+  `K₀=H_+ + N_+` for the smeared horizon corollary `modularCharge = (2π/ℏ)·horizonFlux`. Rapidity picture: `H₁≃L²(ℝ,dθ)`,
+  boosts = θ-translations, `b=−i∂_θ`, `−log Δ_W = 2π b` (BW). **Honest effort:** stripped Schwartz/L² version ~WEEKS; full
+  AQFT null-quantization (Mellin/Rindler transforms, unbounded quadratic forms, Kontorovich–Lebedev) = months–years wall.
+  SURVEY QIQTH `Fock/PauliJordan.lean` (KG two-point/symplectic), `StandardSubspace*`, `Fock/OneParticle.lean` for the
+  existing `j_ℏ`/symplectic infra; scope the FIRST sub-brick (the symplectic form + `j_ℏ` positive-frequency map) or
+  CHECKPOINT honestly if even the stripped version is blocked.
 - [ ] **HT4 — SMEARED physical hTkk + local limit (the capstone).** `physical_hTkk_smeared`:
   `Q[f_phys(χ_ε)] = (2π/ℏ)∫ χ_ε·T_kk`; then `physical_hTkk` by the approximate-identity limit `χ_ε → δ_{(x,v)}` ⟹ the
   pointwise `hTkk` for `f_phys`, coefficient DERIVED. Feed it into a `qiqt_gr_freefield_physical` capstone replacing the
