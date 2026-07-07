@@ -337,6 +337,10 @@ import QIQTH.QiqtGrShowcase
 -- Sakharov Stage C: the per-mode Gaussian entanglement entropy S(ν)=(ν+½)log(ν+½)−(ν−½)log(ν−½),
 -- the Srednicki building block summed by the entropy area law. S(½)=0 (pure), increasing, nonneg.
 import QIQTH.GaussianStateEntropy
+-- SG2/SG3/SG5: the entanglement-entropy AREA LAW S∝A for an EXPLICIT boundary-local Gaussian model
+-- (each of the 6L² boundary plaquettes carries the same Srednicki modes) — turns the previously-carried
+-- assumption S∝A into a theorem; the volume-law guard (bulk L³ vs boundary 6L²) isolates the locality input.
+import QIQTH.BoundaryGaussianAreaLaw
 import QIQTH.WilliamsonNormalForm
 -- The Sakharov/induced-gravity 1/4 RATIO (circularity-clean algebraic core): S_ent/(A/G_ind)=1/4 with the
 -- matter coefficient + regulator cancelling; the geometric 4π/16π. Lean mirror of scripts/sakharov_kg.py.

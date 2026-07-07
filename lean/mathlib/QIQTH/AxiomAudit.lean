@@ -6284,6 +6284,20 @@ namespace QIQTH.AxiomAudit
 -- ★ WILLIAMSON n=1 symplectic INVARIANCE: ν=√det(cov) is unchanged under symplectic congruence M↦SMSᵀ (det S=1,
 -- Sp(2,ℝ)=SL(2,ℝ)) — so ν is a basis-independent physical invariant (the defining feature of the Williamson
 -- spectrum; lets ν be read off any canonical frame). The N-mode normal-form reduction stays the labelled frontier.
+#print axioms QIQTH.BoundaryGaussianAreaLaw.card_cubeBoundary
+#print axioms QIQTH.BoundaryGaussianAreaLaw.sum_odd_eq_sq
+#print axioms QIQTH.BoundaryGaussianAreaLaw.boundary_entropy_factorizes
+#print axioms QIQTH.BoundaryGaussianAreaLaw.boundary_entropy_area_law
+#print axioms QIQTH.BoundaryGaussianAreaLaw.card_cubeBulk
+#print axioms QIQTH.BoundaryGaussianAreaLaw.bulk_entropy_volume_law
+-- ★ BOUNDARY-LOCAL AREA LAW (SG2/SG3/SG5, THE_STRONG_G_PLAN): S∝A turned from a CARRIED assumption into a
+-- THEOREM for an explicit boundary-local Gaussian model. boundary_entropy_area_law: on an L×L×L cube whose
+-- 6L² boundary plaquettes each carry the SAME Srednicki modes ν₀, S = (A/a₀²)·gaussStateEntropy ν₀ = area ×
+-- (per-site entropy / a₀²) — literally S∝A with constant gaussStateEntropy ν₀/a₀². card_cubeBoundary=6L²
+-- (surface count), card_cubeBulk=L³. VOLUME-LAW GUARD bulk_entropy_volume_law: the SAME finite Gaussian modes
+-- summed over the interior scale as L³ (volume) — so boundary-LOCALITY is genuinely load-bearing, not automatic.
+-- HONEST SCOPE: does NOT prove Srednicki's free-scalar vacuum area law, NOT that the QIQT-H vacuum realizes
+-- this boundary-local model (the remaining physical postulate, isolated by the guard), NOT Λ_s, NOT numerical G.
 #print axioms QIQTH.Sakharov.sakharov_ratio
 #print axioms QIQTH.Sakharov.geometric_quarter
 #print axioms QIQTH.Sakharov.heatkernel_ratio_eq_geometric
