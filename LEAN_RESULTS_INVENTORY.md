@@ -741,6 +741,22 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   algebraic gauge is DISCHARGED; the metric-instantiation is the cited `ContDiff exp_p` frontier. **NOT** a curved heat
   kernel, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
+- **The entropy AREA LAW `S∝A` — from CARRIED assumption to THEOREM (for an explicit boundary-local model)**
+  (`BoundaryGaussianAreaLaw.lean`, all **[AF]** std-3, budget 0, 2026-07-07; commits eec26a2, ca12397; THE_STRONG_G_PLAN
+  SG2/3/5/6): the single biggest strengthening of the induced-G derivation — `1/G = N·Λ_s²` is an AREA law ONLY because
+  `S∝A`, which was previously CARRIED. Now: model the boundary of an `L×L×L` cube as `6L²` plaquettes (`card_cubeBoundary`),
+  each carrying the SAME Srednicki modes `ν₀` (the boundary-locality hypothesis, carried as the index type — NOT an axiom);
+  **`boundary_entropy_area_law`** proves `boundaryEntropy = (A/a₀²)·gaussStateEntropy ν₀` = literally `S∝A` (constant
+  `gaussStateEntropy ν₀/a₀²`, reusing the per-mode Srednicki entropy). VOLUME-LAW GUARD **`bulk_entropy_volume_law`**
+  (`= L³·gaussStateEntropy`, contrast `6L²`) proves finite Gaussian modes give a VOLUME law unless boundary-localized ⟹ the
+  boundary-locality hypothesis is genuinely load-bearing (mirrors the regulator-rigidity guard). **`boundary_entropy_eq_area_over_4G`**
+  (SG6): the conditional Bekenstein–Hawking bridge `S = A/(4·G)` for `G = inducedG N_eff Λ_s = 1/(N_eff Λ_s²)`, GIVEN the
+  calibration `gaussStateEntropy ν₀ = N_eff/4` (per-site capacity = species/4, explicit hypothesis). ⚠ **HONEST CEILING
+  (binding)**: proves `S∝A` for THIS explicit boundary-local Gaussian model only; does **NOT** prove Srednicki's free-scalar
+  vacuum area law, **NOT** that the actual QIQT-H vacuum realizes/flows to this model (the remaining physical postulate,
+  sharply isolated by the volume-law guard), **NOT** the calibration `N_eff/4` (the boundary-channel↔species matching),
+  **NOT** `Λ_s`, **NOT** a curved heat kernel, **NOT** numerical `G` (`N`, `Λ_s`, `c_i`, κ remain). The strengthening is
+  precise: previously "ASSUME `S∝A`", now "PROVE `S∝A` for an explicit boundary model; ASSUME the vacuum flows to it".
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
   `Λ_s`** (`a₀=1/Λ_s`) as the primitive *in place of* `ℓ_P`, and DERIVES `G` from it + the species count `N` via the
