@@ -259,10 +259,44 @@ remain). Never claim numerical-G or a curved heat kernel.
     Bochner integrals + FTC/Leibniz derivative laws); the residual operator Grönwall `‖(Φ_y 1)∘ι − K_y(1)‖ ≤ C‖y‖²`;
     and the projected `L y = 1 − Γ_p(y,·) + ½T(y,y,·) + o(‖y‖²)`.  HONEST: the order-0 model propagator + nilpotency —
     does NOT give `K₁,K₂`, the residual Grönwall, the projected 2-jet, the pullback metric, or numerical-G.
+  - [x] **EXP-JET3c (STEP 2, order-1/2 model propagators + toolkit) — DONE 2026-07-07** (commits e14fb66, 7628bd7):
+    closed-form `expJetK1`/`expJetK2` + `expJetK*_hasDerivAt_ode`, `expJetA1`/`expJetA2` + `_opNorm_le`, the anchored
+    identity `geodesicField_fderiv_anchored_eq` (`DF(p,v)=A₀+A₁(v)+A₂(v)` EXACT), `expJet_fderiv_tube_order2`,
+    `expJet_residual_identity`, `linF_comp_linF` (A₀²=0), `expJetA1_comp_linF` (A₁A₀=0). All [AF] std-3, budget 0.
+  - [x] **EXP-JET3c (STEP 3a — small-context Grönwall helper) — DONE 2026-07-07** (commit 50e8972): `expJet_residual_gronwall`
+    (`E:ℝ→F` any normed `ℝ`-space, `E 0=0`, `‖E'‖≤K‖E‖+C` on `[0,1)` ⟹ `‖E 1‖≤C·e^K`).  Abstracted over `F` to dodge
+    the 32M-heartbeat CLM-Banach whnf/instance explosion the monolithic operator-Grönwall triggered.  [AF] std-3.
+  - [~] **EXP-JET3c (STEP 3b — the Jacobian 1-jet) — IN PROGRESS.**  `fderiv exp_p v = id − Γ_p^sym(v,·) + O(‖v‖²)`
+    via the operator residual `E_v = Φ_v − (K₀+K₁)` + `expJet_residual_gronwall` + projected model identity
+    `π∘(K₀(1)+K₁(1))∘ι = id + ½·matVecCLM c₁ = id − Γ_p^sym(v,·)`.  Needs a UNIFORM-in-`v` `‖DF(Y_v t)‖≤K*` bound
+    (`expJet_fderiv_tube_bddAbove_unif`, compactness of the confinement ball) so the Grönwall factor `e^{K*}` is
+    uniform ⟹ genuine `IsBigO` over `𝓝 0`.  This delivers **TWO of three gauge conditions**: `g̃(0)=δ`, `∂g̃(0)=0`.
+- [x] **EXP-JET3c (STEP 3 — HONEST MATH FINDING, GPT-5.5-pro-confirmed 2026-07-07).** The ANCHORED fixed `A₂(v)` reaches
+  the Jacobian 1-JET exactly but is WRONG at order 2: the true order-2 Jacobi coefficient `Ã₂(t,v)` is genuinely
+  `t`-DEPENDENT (tube drift `Y_v(t)≈(p+tv,v−tΓv)` feeds `∂Γ` a `t·v`), and the missing forcing SURVIVES the `π∘·∘ι`
+  projection (explicit 1-D check: `(Γ²−∂Γ)/3·v²k`).  So the full Jacobian 2-jet needs `Ã₂(t,v)` + a `t`-dependent
+  `K̃₂(t)` + a little-o (not `≤C‖v‖²`) C²-operator Taylor Grönwall.  Route (b) — differentiating the value 3-jet — is
+  NOT Lean-sound (a Peano value remainder `o(‖v‖³)` does NOT give a derivative remainder `o(‖v‖²)`; counterexample
+  `x⁴sin(1/x²)`); it would need a full `HasFTaylorSeriesUpTo`/`ContDiffAt 3` object, which we do not have.
+- **THE PIVOT — EXP-JET5 via the RADIAL GAUGE (GPT-5.5-pro, route (c)): BYPASSES the Jacobian 2-jet entirely.**
+  The symmetrized gauge condition `∂_{(l}Γ̃^i_{jk)}(0)=0` follows from radial-geodesic straightness WITHOUT any
+  Jacobian 2-jet.  Chain: (1) `exp_p(s·v) = (Y_v s).1` (radial lines ↦ geodesics, ODE-rescaling uniqueness);
+  (2) `Γ̃` = the pullback-metric Christoffel field via the transform `Dexp_p(y)(Γ̃ y a b) = D²exp_p(y)[a,b] +
+  Γ(exp_p y)(Dexp_p(y)a, Dexp_p(y)b)` (metric-compatibility / local-isometry — the HEAVY lemma; its ONLY use of
+  `∂g̃` is to identify `Γ̃` as `g̃`'s Christoffel, NOT to compute `∂Γ̃` from the metric expansion); (3) radial
+  geodesic ⟹ `Γ̃(s·v)(v,v)=0` near `s=0`; (4) `d/ds|₀` ⟹ `DΓ̃₀(v)(v,v)=0 ∀v` (chain rule); (5) polarize the cubic
+  diagonal `T(v,v,v)=0` ⟹ full symmetrization `∑_{σ}T=0`, i.e. `∂_{(l}Γ̃_{jk)}(0)=0`.  Concrete Lean lemmas:
+  `exp_scale_eq_tube` (Lemma 1, ODE-rescale), `pullback_christoffel_transform` (Lemma 2, heaviest),
+  `normal_ray_christoffel_zero` (Lemma 3), `DGamma_diag_zero_of_normal_rays` (Lemma 4, `HasFDerivAt` + homogeneity),
+  `trilinear_diag_zero_fullSymm` (Lemma 5, pure polarization `P(x)=T x x x` inclusion–exclusion).  Lemma 5 is
+  standalone algebra (start there); Lemma 2 is the real work.  This is the classical textbook RNC-gauge proof and is
+  MUCH lighter in Lean than the `t`-dependent 2-jet.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
-  frame at `p`, or state relative to `g(p)`), `∂g̃(0)=0`, `∂∂g̃(0)↔R`.
-- [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) ⟹ instantiate
-  `RNCExpansion.heat_a1_of_gauge` at `g:=g̃` ⟹ **`κ=1/6` UNCONDITIONAL given the metric** (the carried gauge retired).
+  frame at `p`, or state relative to `g(p)`) + `∂g̃(0)=0` (from the 1-jet, EXP-JET3c STEP 3b).  `∂∂g̃(0)↔R` is NOT
+  needed for the gauge if route (c) supplies `∂_{(l}Γ̃_{jk)}(0)=0` directly.
+- [ ] **EXP-JET5 — discharge `hgauge`** (`∂_{(l}Γ̃^i_{jk)}(0)=0` in the normal coords) **via route (c) radial gauge
+  (see the PIVOT above)** ⟹ instantiate `RNCExpansion.heat_a1_of_gauge` at `g:=g̃` ⟹ **`κ=1/6` UNCONDITIONAL given the
+  metric** (the carried gauge retired).
 
 ## Verbatim HAVE / HAVE-NOT
 - **HAVE (target):** "The exp-map normal coordinates satisfy the RNC gauge — `g̃(0)=δ`, `∂g̃(0)=0`,
