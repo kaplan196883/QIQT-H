@@ -10062,4 +10062,21 @@ namespace QIQTH.AxiomAudit
 -- (HT3) are separate.  KG equation + regularity are carried hypotheses, never axioms.  [AF] std-3.
 #print axioms QIQTH.HTkkPhysical.kg_boost_charge_decomposition_1p1
 
+-- KGSymplectic.lean — HT3 brick-1, the Klein–Gordon SYMPLECTIC FORM on Cauchy data (2026-07-08):
+-- the foundation of the canonical KG → one-particle map `j_ℏ` (`2ℏ·Im⟨j_ℏψ,j_ℏχ⟩ = σ(ψ,χ)`), the
+-- named frontier whose completion would make the `hTkk` localization coefficient a Lean theorem.
+-- `kgSympl ψ₀ π₀ χ₀ ρ₀ = ∫ (ψ₀·ρ₀ − χ₀·π₀)` (σ between Cauchy data). Landed: antisymmetry
+-- (`σ(a,b)=−σ(b,a)`, no integrability), left add/smul bilinearity (add carries `Integrable` hyps),
+-- the density-conservation physics core `∂_t(ψ·∂_tχ−χ·∂_tψ)=∂_x(ψ·∂_xχ−χ·∂_xψ)` for two KG
+-- solutions (μ = m² terms cancel via the carried wave equations), and the slice-independence
+-- capstone `HasDerivAt S 0 t` (KG conservation + carried differentiate-under-integral + carried
+-- spatial decay `∫ ∂_x flux = 0`). HONEST: does NOT build `j_ℏ` (positive-frequency projection),
+-- NOT the boost-charge identity, NOT the `2π/ℏ` coefficient, NOT numerical-G/QG. KG EOM + decay +
+-- diff-under-integral are carried HYPOTHESES, never axioms.  [AF] std-3.
+#print axioms QIQTH.KGSymplectic.kgSympl_antisymm
+#print axioms QIQTH.KGSymplectic.kgSympl_add_left
+#print axioms QIQTH.KGSymplectic.kgSympl_smul_left
+#print axioms QIQTH.KGSymplectic.kgSympl_density_conservation
+#print axioms QIQTH.KGSymplectic.kgSympl_slice_independent
+
 end QIQTH.AxiomAudit

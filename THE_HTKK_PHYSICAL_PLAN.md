@@ -128,6 +128,20 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
   SURVEY QIQTH `Fock/PauliJordan.lean` (KG two-point/symplectic), `StandardSubspace*`, `Fock/OneParticle.lean` for the
   existing `j_ℏ`/symplectic infra; scope the FIRST sub-brick (the symplectic form + `j_ℏ` positive-frequency map) or
   CHECKPOINT honestly if even the stripped version is blocked.
+  - [x] **HT3 brick-1 — the KG SYMPLECTIC FORM on Cauchy data — DONE 2026-07-08** ([AF] std-3, budget 0, no sorry).
+    NEW file `QIQTH/KGSymplectic.lean`. `kgSympl ψ₀ π₀ χ₀ ρ₀ = ∫ (ψ₀·ρ₀ − χ₀·π₀) ∂volume` (σ between Cauchy data).
+    Landed: `kgSympl_antisymm` (`σ(a,b)=−σ(b,a)`, no integrability — pure `integral_neg`); `kgSympl_add_left` /
+    `kgSympl_smul_left` (left bilinearity; add carries `Integrable` hyps, smul unconditional via `integral_const_mul`);
+    `kgSympl_density_conservation` (the physics core — for two `1+1` KG solutions the density `ψ·∂_tχ−χ·∂_tψ` has `∂_t`
+    equal to `∂_x` of the flux `ψ·∂_xχ−χ·∂_xψ`, both `= ψ·∂²_xχ−χ·∂²_xψ`; the `μ=m²` terms cancel via the carried wave
+    equations `∂²_t=∂²_x−μ` — proved by `HasDerivAt.mul/.sub` + KG rewrite + `ring`); and the slice-independence
+    capstone `kgSympl_slice_independent` (`HasDerivAt S 0 t`, the proof USING KG conservation to convert the
+    differentiated density into the flux-derivative, then the carried spatial-decay hyp `∫ ∂_x flux = 0` kills it —
+    same FTC/decay structure as `HTkkPhysical.nullTriangle_ftc`). SLICE-INDEPENDENCE INCLUDED (not deferred): the KG
+    conservation physics (μ-cancellation) is discharged in Lean; differentiate-under-integral + spatial decay are honest
+    carried HYPOTHESES (never axioms). Wired into `QIQTH.lean` + `AxiomAudit` pins. HONEST scope firewall: does NOT build
+    `j_ℏ` (the positive-frequency projection — the next, hard brick), NOT the boost-charge identity, NOT `2π/ℏ`, NOT
+    numerical-G/QG.
 - [ ] **HT4 — SMEARED physical hTkk + local limit (the capstone).** `physical_hTkk_smeared`:
   `Q[f_phys(χ_ε)] = (2π/ℏ)∫ χ_ε·T_kk`; then `physical_hTkk` by the approximate-identity limit `χ_ε → δ_{(x,v)}` ⟹ the
   pointwise `hTkk` for `f_phys`, coefficient DERIVED. Feed it into a `qiqt_gr_freefield_physical` capstone replacing the

@@ -344,6 +344,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     boost-charge ↔ null-energy STRUCTURE for a massive 1+1 KG field; the `2π/ℏ` BW/KMS coefficient (HT2), the transverse
     3+1 flux + no-flux limit (HT1c), and the physical mode construction (HT3) remain separate open bricks. The KG equation
     and regularity are honest carried hypotheses, never axioms.**
+  - **HT3 brick-1 — the Klein–Gordon SYMPLECTIC FORM on Cauchy data** (`KGSymplectic.lean`, **[AF]** std-3, 2026-07-08):
+    the foundation of the canonical KG → one-particle map `j_ℏ` (the named frontier whose completion would make the `hTkk`
+    localization coefficient a Lean theorem; `2ℏ·Im⟨j_ℏψ,j_ℏχ⟩ = σ(ψ,χ)`). `kgSympl ψ₀ π₀ χ₀ ρ₀ = ∫ (ψ₀·ρ₀ − χ₀·π₀)`
+    (σ between Cauchy data `(ψ₀,π₀)` and `(χ₀,ρ₀)`). Landed theorems: **`kgSympl_antisymm`** (`σ(a,b)=−σ(b,a)`, no
+    integrability — pure `integral_neg`); **`kgSympl_add_left`** / **`kgSympl_smul_left`** (left-argument bilinearity;
+    add carries `Integrable` hyps, smul unconditional; right-arg versions follow by antisymmetry);
+    **`kgSympl_density_conservation`** — the PHYSICS core: for two `1+1` KG solutions `ψ,χ` the symplectic density
+    `ψ·∂_tχ−χ·∂_tψ` has `∂_t` equal to `∂_x` of the flux `ψ·∂_xχ−χ·∂_xψ` (both `= ψ·∂²_xχ−χ·∂²_xψ`), the `μ=m²` terms
+    cancelling via the carried wave equations `∂²_t=∂²_x−μ`; **`kgSympl_slice_independent`** — the capstone: `HasDerivAt S 0 t`
+    (S = σ of the time-`t` data is `t`-independent), the proof USING the KG conservation to convert the differentiated
+    density into the flux-derivative, then the carried spatial-decay hypothesis `∫ ∂_x flux = 0` kills it. **HONEST: this is
+    the symplectic form + antisymmetry/bilinearity + slice-independence ONLY — brick-1 of `j_ℏ`. It does NOT build `j_ℏ` (the
+    positive-frequency projection, the next hard brick), NOT the boost-charge identity, NOT the `2π/ℏ` modular coefficient,
+    NOT numerical-G/QG. KG EOM + spatial decay + differentiate-under-integral are carried HYPOTHESES, never axioms.**
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +
