@@ -9968,4 +9968,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Polarization.sixSym_eq_incl_excl
 #print axioms QIQTH.Polarization.trilinear_diag_zero_fullSymm
 
+-- RNCGauge.lean — route-(c) diagonal→symmetrized-gauge wrapper (2026-07-07): packages the per-i cubic
+-- form dΓ^i_{ljk} as a trilinear CLM and reads Polarization Lemma 5 into a coordinate GaugeJet.
+-- gaugeTri_apply/_diag/_basis: the CLM evaluation / diagonal / basis-coefficient lemmas.
+-- gaugeJet_of_diag: (∀ v i, dGammaDiag dΓ v i = 0) ⟹ GaugeJet dΓ — the radial-identity ⟹ gauge step.
+-- HONEST: presumes the radial identity as INPUT (hdiag); does NOT produce it (needs the geodesic cubic).  [AF] std-3.
+#print axioms QIQTH.RNCGauge.gaugeTri_apply
+#print axioms QIQTH.RNCGauge.gaugeTri_diag
+#print axioms QIQTH.RNCGauge.gaugeTri_basis
+#print axioms QIQTH.RNCGauge.gaugeJet_of_diag
+
 end QIQTH.AxiomAudit

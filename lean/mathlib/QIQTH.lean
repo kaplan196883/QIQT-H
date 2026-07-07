@@ -682,6 +682,7 @@ import QIQTH.RNCExpansion
 -- numerical-G. Axiom-free (standard three).
 import QIQTH.ExpMap
 import QIQTH.Polarization
+import QIQTH.RNCGauge
 import QIQTH.EinsteinFieldEquation
 import QIQTH.KGStressConservation
 import QIQTH.QiqtGrExplicitKG
