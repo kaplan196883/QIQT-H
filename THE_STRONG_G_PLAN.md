@@ -31,7 +31,16 @@ build), and "nearest-neighbour coupling ⟹ only boundary modes entangle" is FAL
 
 ## The plan (6 sequenced axiom-free green checkpoints; new file `QIQTH/BoundaryGaussianAreaLaw.lean`)
 
-- [ ] **SG1 — bosonic normal-mode entropy** (~2–5 days). Define
+- [x] **SG1 — DONE 2026-07-07** (`QIQTH/GaussModeEntropyDerived.lean`, commit 65f0725; [AF] std-3, budget 0):
+  **`gaussModeEntropy_eq_thermal_shannon`** — `−∑' k, thermalProb q k·log(thermalProb q k) = gaussModeEntropy (thermalNu q)`
+  for the geometric thermal law `p_k=(1−q)q^k`, `ν=(1+q)/(2(1−q))` (ν≥1/2 floor convention) — proves the per-mode
+  Gaussian entropy IS the Shannon/von Neumann entropy of the thermal occupation distribution (grounds the formula in first
+  principles), via `tsum_geometric_of_lt_one` + `tsum_coe_mul_geometric_of_norm_lt_one` + log-split + reconciliation.
+  Corollary `gaussModeEntropy_thermal_nonneg`. **THE STRONG-G AREA-LAW CAMPAIGN IS COMPLETE AT ITS HONEST CEILING** — the
+  entropy chain is now rigorous end-to-end (von-Neumann entropy → S∝A for the boundary model → boundary-locality load-bearing
+  → S=A/(4G)). Remaining inputs (the vacuum realizing the boundary model, the N_eff/4 calibration, Λ_s, the species c_i,
+  κ=1/6) are genuine physical postulates / cited-frontier walls (κ=1/6 = the ContDiff³ exp_p tower).
+- [ ] **SG1 — (superseded by the DONE entry above) bosonic normal-mode entropy** — Define
   `bosonModeEntropy (ν) := ((ν+1)/2)·log((ν+1)/2) − ((ν−1)/2)·log((ν−1)/2)`. Prove: for `0<q<1`, the geometric thermal
   law `p n = (1−q)·q^n` has `−∑' n, p n·log(p n) = −log(1−q) − (q/(1−q))·log q`, and with `ν=(1+q)/(1−q)`,
   `geomEntropy q = bosonModeEntropy ν`. Mathlib: `Real.log`, geometric `tsum` (`tsum_geometric_of_lt_one`), `Summable`,
