@@ -683,6 +683,7 @@ import QIQTH.RNCExpansion
 import QIQTH.ExpMap
 import QIQTH.Polarization
 import QIQTH.RNCGauge
+import QIQTH.RNCGaugeExp
 import QIQTH.EinsteinFieldEquation
 import QIQTH.KGStressConservation
 import QIQTH.QiqtGrExplicitKG

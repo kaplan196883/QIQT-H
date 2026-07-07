@@ -9992,4 +9992,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCGauge.expMap_rncDΓ_diag_zero
 #print axioms QIQTH.RNCGauge.rncGaugeJet
 
+-- RNCGaugeExp.lean — grounding the abstract RNC-gauge core in the exp map's ACTUAL value-3-jet
+-- (2026-07-07): fact B.  Connects a3rawArr (specialized to the true Christoffel jet
+-- Γ i j k := christoffel g gi i j k p, dΓ1 l i j k := pd (christoffel g gi i j k) l p) to the exact
+-- inlined cubic a₃(v)_i of QIQTH.ExpMap.expMap_value_three_jet.  PURE Finset reindexing (no Christoffel
+-- symmetry).
+-- a3rawArr_contract_eq_a3: ∑ a3rawArr[true jet]·v³ = a₃ — the honest grounding of the raw cubic array.
+-- exp_rncGaugeJet: GaugeJet (rncDΓ [true jet]) — rncGaugeJet on the genuine exp-derived formal jet.
+-- HONEST: grounds rncDΓ in the exp map's a₃; does NOT reach κ=1/6 for the pullback metric (needs the
+--   rncDΓ = pd(christoffel g̃)(0) bridge + ContDiff exp_p; the cited smooth-dependence frontier), NOT
+--   numerical-G.  [AF] std-3.
+#print axioms QIQTH.RNCGaugeExp.a3rawArr_contract_eq_a3
+#print axioms QIQTH.RNCGaugeExp.exp_rncGaugeJet
+
 end QIQTH.AxiomAudit
