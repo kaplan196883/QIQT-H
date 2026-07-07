@@ -303,8 +303,33 @@ remain). Never claim numerical-G or a curved heat kernel.
   MUCH lighter in Lean than the `t`-dependent 2-jet.
   - [x] **Lemma 5 `trilinear_diag_zero_fullSymm` — DONE 2026-07-07** (`QIQTH/Polarization.lean`, [AF] std-3, budget 0):
     `(∀x, T x x x=0) ⟹ ∑_{σ∈S₃} T aσ bσ cσ = 0` via `sixSym_eq_incl_excl` (`P(a+b+c)−P(a+b)−P(a+c)−P(b+c)+P(a)+P(b)+P(c)`,
-    multilinearity + `abel`).  Standalone; wired into QIQTH.lean + AxiomAudit.  NEXT: Lemma 1 (radial ODE-rescale),
-    Lemma 4 (differentiate radial identity), Lemma 2 (pullback-Christoffel transform — the heavy one; consult GPT-5.5-pro).
+    multilinearity + `abel`).  Standalone; wired into QIQTH.lean + AxiomAudit.
+  - **⚠ ROUTE-C REVISION (GPT-5.5-pro consult 2026-07-07, component-framework specifics) — the honest cost of route (c).**
+    In the COMPONENT framework `Γ̃ := christoffel g̃ g̃i` where `g̃ y i j := ∑_{ab} g(exp_p y)_{ab}·(fderiv exp_p y e_i)^a·
+    (fderiv exp_p y e_j)^b` (the pullback metric). Feeding the EXISTING `RNCExpansion.heat_a1_of_gauge` — which reads the
+    LITERAL `pd (christoffel g̃ g̃i) l 0` — SECRETLY REQUIRES a controlled C³/HESSIAN jet of `exp_p` at 0 (`pd(pd exp)`),
+    i.e. the finite-jet residue of smooth-dependence-of-`exp_p`-on-`v` (the Mathlib gap). My value 2/3-jets + Jacobian
+    1-jet are INSUFFICIENT for the literal `christoffel g̃` (sanity: `r=x⁴sin(1/x)` has `r=o(x³)`, `r'=O(x²)`, but `r''`
+    oscillates — value-3-jet + Jacobian-1-jet do NOT determine `pd(christoffel g̃)`). **So route (c) is NOT automatically
+    cheaper via the literal pullback Christoffel.**  THE GENUINELY LIGHT ROUTE = **refactor the consumer to a finite
+    GaugeJet interface**: (i) define the FORMAL RNC-Christoffel linear coefficient `rncDΓ Γ0 Γ1 A3 l i j k := A3 i l j k
+    + Γ1 l i j k − ∑_a Γ0 i a k·Γ0 a l j − ∑_a Γ0 i j a·Γ0 a l k` from data I HAVE (`Γ0=christoffel..p`, `Γ1=pd christoffel..p`,
+    `A3`=the value-3-jet cubic `a₃`); (ii) prove the RADIAL DIAGONAL vanishes `dΓDiag(rncDΓ) v i := ∑_{ljk} rncDΓ l i j k v_l
+    v_j v_k = 0` by matching the `t¹` coefficient in the geodesic equation for `exp_p(t•v)=(Y_v t).1` (uses the value 3-jet
+    + geodesic ODE + `geodesic_rescale` — FINITE jets only, NO ContDiff exp_p); (iii) `gaugeJet_of_diag` via Polarization
+    Lemma 5 ⟹ `GaugeJet(rncDΓ)` (the symmetrized gauge on the formal coefficients); (iv) refactor
+    `heat_a1_of_gauge`→`heat_a1_of_gaugeJet dΓ (hgauge:GaugeJet dΓ)` reading `dΓ` directly. This DISCHARGES the gauge as a
+    FORMAL-JET THEOREM with no smooth-dependence. **HONEST remaining gap (clearly labelled):** the bridge
+    `rncDΓ = pd(christoffel g̃ g̃i) 0` (`rnc_christoffel_linearJet`) — proving the formal coefficients ARE the literal
+    pullback-Christoffel jet — is the finite-jet pullback-transform and STILL needs the controlled C³/Hessian jet of `exp_p`
+    (the smooth-dependence residue). Deferred, honestly cited.
+  - [ ] **Lemma 5→gauge: `gaugeJet_of_diag`** — `(∀ v i, dΓDiag dΓ v i = 0) ⟹ GaugeJet dΓ` via Polarization Lemma 5
+    (build the per-`i` trilinear CLM `T_i u v w := ∑ dΓ l i j k u_l v_j w_k`, apply `trilinear_diag_zero_fullSymm` at basis
+    vectors). Generic in `dΓ` — standalone, landable NOW. New file `QIQTH/RNCGauge.lean`.
+  - [ ] **`rncDΓ`, `dΓDiag`, `GaugeJet` defs + `expMap_rncDΓ_diag_zero`** (the geodesic-cubic radial diagonal identity —
+    the real work, finite jets) + **`heat_a1_of_gaugeJet`** (consumer refactor). Then assemble κ=1/6 given the FORMAL gauge.
+  - [ ] **(deferred, honestly cited) `rnc_christoffel_linearJet`** — the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0`; needs
+    the controlled C³/Hessian jet of `exp_p` (smooth-dependence-on-`v` residue). NOT attempted until the jet exists.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`) + `∂g̃(0)=0` (from the 1-jet, EXP-JET3c STEP 3b).  `∂∂g̃(0)↔R` is NOT
   needed for the gauge if route (c) supplies `∂_{(l}Γ̃_{jk)}(0)=0` directly.
