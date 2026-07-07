@@ -142,6 +142,28 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     carried HYPOTHESES (never axioms). Wired into `QIQTH.lean` + `AxiomAudit` pins. HONEST scope firewall: does NOT build
     `j_ℏ` (the positive-frequency projection — the next, hard brick), NOT the boost-charge identity, NOT `2π/ℏ`, NOT
     numerical-G/QG.
+  - **⚠ `j_ℏ` REACHABILITY VERDICT (GPT-5.5-pro 2026-07-08, blunt): the FULL `j_ℏ` is a genuine MULTI-MONTH Mathlib wall
+    — CHECKPOINT it.** The bounded `Lp` positive-frequency map matching the existing rapidity `L²(dθ)` (`niceWedgeGenSet`)
+    needs: a weighted KG Sobolev phase space (`ψ̃∈L²(ω dk)`, `π̃∈L²(ω⁻¹dk)` — the `√ω` multiplier is UNBOUNDED on naive
+    L²×L², Mathlib lacks this), the Fourier `L²→L²` unitary with inner-product rewrite lemmas, the `Lp` rapidity CoV
+    isometry `f(θ)=√(m cosh θ)·a(m sinh θ)`, boost covariance, and boost-charge equality on a dense domain — "not blocked by
+    deep missing mathematics, but absolutely a multi-month infrastructure build." Massless-1+1 is NOT easier (ω=|k| singular
+    at 0, IR zero-mode). But there ARE tractable HIGH-VALUE sub-bricks that nail the COEFFICIENT PHYSICS before the wall:
+  - [ ] **HT3 brick-2 — the FOURIER-SIDE positive-frequency coefficient theorem (tractable, high-value; nails the canonical
+    normalization).** On Fourier-side data `Ψ Π Χ Ρ : ℝ→ℂ` (conjugate-symmetric = real fields), with `ω k := √(k²+m²)` and
+    `aK m ℏ Ψ Π k := (ω_k·Ψ k + i·Π k)/√(2ℏ·ω_k)`, prove `2ℏ·(∫ conj(aK Ψ Π)·(aK Χ Ρ) dk).im = σ_K(Ψ,Π,Χ,Ρ)` where
+    `σ_K := ∫ (conj Ψ·Ρ − conj Χ·Π).re` (the Fourier symplectic pairing). Carry conj-symmetry + integrability + `m>0,ℏ>0`.
+    NO Lp, NO rapidity CoV, NO Mathlib Fourier API — pure pointwise `|a|²` algebra (exposes all ℏ/signs) + `integral_sub`/
+    `integral_const_mul` + evenness of ω. This PROVES the symplectic form = 2ℏ·Im of the one-particle inner product — the
+    DEFINING property that makes the normalization canonical (the coefficient physics, in Lean, on the Fourier side).
+  - [ ] **HT3 brick-3 — the Parseval bridge** `σ_K(𝓕ψ,𝓕π,𝓕χ,𝓕ρ) = kgSympl ψ₀ π₀ χ₀ ρ₀` (position-space σ from brick-1),
+    for real Schwartz data. Tractable but needs Mathlib Plancherel/Fourier wrapper lemmas. Then brick-2∘brick-3 gives
+    `2ℏ·Im⟨aK(𝓕·)⟩ = kgSympl` — the canonical-normalization identity grounded in the position-space symplectic form.
+  - [ ] **HT3 brick-4+ (the multi-month wall — CHECKPOINT here honestly):** the `Lp` rapidity unitary matching
+    `niceWedgeGenSet`, the bounded `j_ℏ` from the weighted phase space, boost covariance, and the boost-charge identity
+    `q_B(j_ℏψ)=(1/ℏ)·B_cl`. If blocked, the HONEST CEILING: hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
+    the coefficient's CANONICAL-NORMALIZATION physics (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are all DERIVED axiom-free; the `Lp`
+    packaging of `j_ℏ` into the existing rapidity convention is the single named multi-month Mathlib frontier; `1/ℏ` a unit.
 - [ ] **HT4 — SMEARED physical hTkk + local limit (the capstone).** `physical_hTkk_smeared`:
   `Q[f_phys(χ_ε)] = (2π/ℏ)∫ χ_ε·T_kk`; then `physical_hTkk` by the approximate-identity limit `χ_ε → δ_{(x,v)}` ⟹ the
   pointwise `hTkk` for `f_phys`, coefficient DERIVED. Feed it into a `qiqt_gr_freefield_physical` capstone replacing the
