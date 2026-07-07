@@ -337,6 +337,9 @@ import QIQTH.QiqtGrShowcase
 -- Sakharov Stage C: the per-mode Gaussian entanglement entropy S(ν)=(ν+½)log(ν+½)−(ν−½)log(ν−½),
 -- the Srednicki building block summed by the entropy area law. S(½)=0 (pure), increasing, nonneg.
 import QIQTH.GaussianStateEntropy
+-- SG1: grounds gaussModeEntropy in first principles — it IS the Shannon/von Neumann entropy −∑ₖ pₖ log pₖ
+-- of the thermal geometric occupation distribution pₖ=(1−q)qᵏ at ν=thermalNu q=(1+q)/(2(1−q)).
+import QIQTH.GaussModeEntropyDerived
 -- SG2/SG3/SG5: the entanglement-entropy AREA LAW S∝A for an EXPLICIT boundary-local Gaussian model
 -- (each of the 6L² boundary plaquettes carries the same Srednicki modes) — turns the previously-carried
 -- assumption S∝A into a theorem; the volume-law guard (bulk L³ vs boundary 6L²) isolates the locality input.

@@ -6284,6 +6284,15 @@ namespace QIQTH.AxiomAudit
 -- ★ WILLIAMSON n=1 symplectic INVARIANCE: ν=√det(cov) is unchanged under symplectic congruence M↦SMSᵀ (det S=1,
 -- Sp(2,ℝ)=SL(2,ℝ)) — so ν is a basis-independent physical invariant (the defining feature of the Williamson
 -- spectrum; lets ν be read off any canonical frame). The N-mode normal-form reduction stays the labelled frontier.
+#print axioms QIQTH.GaussModeEntropyDerived.thermalNu_eq_meanOcc_add_half
+#print axioms QIQTH.GaussModeEntropyDerived.gaussModeEntropy_eq_thermal_shannon
+#print axioms QIQTH.GaussModeEntropyDerived.gaussModeEntropy_thermal_nonneg
+-- ★ ENTROPY FROM FIRST PRINCIPLES (SG1, THE_STRONG_G_PLAN): gaussModeEntropy is not a posited formula — it IS
+-- the Shannon/von Neumann entropy −∑ₖ pₖ log pₖ of the thermal geometric occupation law pₖ=(1−q)qᵏ (the diagonal
+-- of a single-mode thermal density matrix in the number basis) at the symplectic eigenvalue ν=thermalNu q=
+-- (1+q)/(2(1−q))=n̄+½. gaussModeEntropy_eq_thermal_shannon discharges the tsum via geometric-series normalization
+-- (∑pₖ=1) + mean (∑k·pₖ=q/(1−q)) + log-split; grounds the entropy formula, does NOT change the area-law scope
+-- (S∝A stays the explicit boundary-local model, not the continuum vacuum).
 #print axioms QIQTH.BoundaryGaussianAreaLaw.card_cubeBoundary
 #print axioms QIQTH.BoundaryGaussianAreaLaw.sum_odd_eq_sq
 #print axioms QIQTH.BoundaryGaussianAreaLaw.boundary_entropy_factorizes
