@@ -343,6 +343,18 @@ remain). Never claim numerical-G or a curved heat kernel.
     = three `Finset.sum_comm`/reindex lemmas (∂: `j,k,l→l,j,k`; termA: `l,j,k,a→a,k,l,j`; termB: `l,j,k,a→j,a,l,k`),
     each a proved helper (NOT blind simp). Then `gaugeJet_of_diag` ⟹ `GaugeJet(rncDΓ)` — the NON-vacuous formal gauge.
     Then **`heat_a1_of_gaugeJet`** (consumer refactor) → assemble κ=1/6 given the FORMAL gauge.
+  - [x] **Abstract algebraic core — DONE 2026-07-07** (`QIQTH/RNCGauge.lean`, commit 2da77e5, [AF] std-3, budget 0):
+    `christSqA`/`christSqB`/`a3rawArr`/`a3symArr`/`rncDΓ` (abstract Γ, dΓ1), the crux `sum3_sym_contract` (the diagonal
+    contraction `∑ f_{ljk} v³` is invariant under permuting f's 3 lower args — via 2 transposition helpers +
+    `Finset.sum_comm`/`sum_congr`/`ring` composed over the 6 perms), `dGammaDiag_a3sym_eq_raw`, `expMap_rncDΓ_diag_zero`
+    (`dGammaDiag(rncDΓ)=0`, tautology), and **`rncGaugeJet : GaugeJet (rncDΓ Γ dΓ1)`** via `gaugeJet_of_diag`. Non-vacuous
+    (symmetrized A3sym, not the pointwise-zero raw). HONEST: the abstract algebraic core — does NOT yet GROUND `rncDΓ` in
+    the exp map's actual `a₃` (fact B below), NOT the pullback metric, NOT numerical-G.
+  - [ ] **fact B — GROUND `rncDΓ` in the exp 3-jet** (non-vacuous connection): `∑_{ljk} a3rawArr Γ dΓ1 i l j k v_l v_j v_k
+    = a₃(v)_i` for `Γ:=christoffel..p`, `dΓ1:=pd(christoffel..)..p`, where `a₃` is the EXACT inlined cubic of
+    `expMap_value_three_jet`. The three reindex matchings (∂: j,k,l→l,j,k; SA↔termA: l,j,k,a→a,k,l,j; SB↔termB:
+    l,j,k,a→j,a,l,k). Needs geometry imports (new file `QIQTH/RNCGaugeExp.lean` importing `QIQTH.ExpMap`). This makes
+    `rncDΓ` the genuine exp-3-jet-based formal Christoffel jet (so `rncGaugeJet` is about the ACTUAL exp normal coords).
   - [ ] **(deferred, honestly cited) `rnc_christoffel_linearJet`** — the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0`; needs
     the controlled C³/Hessian jet of `exp_p` (smooth-dependence-on-`v` residue). NOT attempted until the jet exists.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
