@@ -10079,4 +10079,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KGSymplectic.kgSympl_density_conservation
 #print axioms QIQTH.KGSymplectic.kgSympl_slice_independent
 
+-- KGSymplectic.lean — HT3 brick-2, the FOURIER-SIDE positive-frequency coefficient theorem
+-- (2026-07-08): the algebraic core `σ = 2ℏ·Im⟨a,a⟩` that makes the `hTkk` localization coefficient
+-- DERIVED (canonically normalized), not calibrated.  On conjugate-symmetric Fourier-side Cauchy data
+-- `Ψ π Χ Ρ : ℝ→ℂ`, with `ω k = √(k²+m²)` and `posFreqCoeff = (ω·Ψ + i·Π)/√(2ℏω)`,
+--   2ℏ·(∫ conj(posFreqCoeff Ψ Π)·posFreqCoeff Χ Ρ dk).im = sigmaK Ψ Π Χ Ρ := (∫ (conj Ψ·Ρ − conj Χ·Π)).re.
+-- Proof = pointwise |a|² algebra (`Complex.I_sq` supplies `−i²`; `√(2ℏω)` real denominator) + the
+-- diagonal `.im` integrates to 0 (odd under `k↦−k` by conj-symmetry + evenness of ω) + `(i·z).im=z.re`.
+-- HONEST: the Fourier-side coefficient physics ONLY — NOT the Lp/rapidity `j_ℏ` map (multi-month wall,
+-- brick-4), NOT the Parseval bridge to position-space `kgSympl` (brick-3), NOT the boost-charge
+-- identity, NOT `2π/ℏ`, NOT numerical-G/QG.  Conj-symmetry + integrability carried as hypotheses,
+-- never axioms.  [AF] std-3.
+#print axioms QIQTH.KGSymplectic.two_hbar_im_inner_posFreq_eq_sigmaK
+
 end QIQTH.AxiomAudit

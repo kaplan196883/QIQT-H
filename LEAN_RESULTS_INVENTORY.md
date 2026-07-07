@@ -358,6 +358,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     the symplectic form + antisymmetry/bilinearity + slice-independence ONLY — brick-1 of `j_ℏ`. It does NOT build `j_ℏ` (the
     positive-frequency projection, the next hard brick), NOT the boost-charge identity, NOT the `2π/ℏ` modular coefficient,
     NOT numerical-G/QG. KG EOM + spatial decay + differentiate-under-integral are carried HYPOTHESES, never axioms.**
+  - **HT3 brick-2 — the FOURIER-SIDE positive-frequency coefficient theorem** (`KGSymplectic.lean`
+    **`two_hbar_im_inner_posFreq_eq_sigmaK`**, **[AF]** std-3, 2026-07-08): the algebraic core `σ = 2ℏ·Im⟨a,a⟩` that makes
+    the `hTkk` localization coefficient DERIVED (canonically normalized), not calibrated. On conjugate-symmetric Fourier-side
+    Cauchy data `Ψ π Χ Ρ : ℝ→ℂ` (transforms of real fields, carried as hyps), with `kgOmega m k = √(k²+m²)` and
+    `posFreqCoeff m ℏ Ψ Π k = (ω·Ψ + i·Π)/√(2ℏω)`, PROVED `2ℏ·(∫ conj(posFreqCoeff Ψ Π)·posFreqCoeff Χ Ρ).im
+    = sigmaK Ψ Π Χ Ρ` with `sigmaK = (∫ (conj Ψ·Ρ − conj Χ·Π)).re`. Proof = pointwise `|a|²` algebra (`Complex.I_sq`
+    supplies `−i²`; real `√(2ℏω)` denominator ⟹ `√·√=2ℏω`) ⟹ `2ℏ·conj(a)·b = htDiag + i·(conjΨΡ−conjπΧ)`; then `.im`
+    + `integral_im`/`integral_re`/`integral_add`, the diagonal `htDiag.im` integrating to `0` because it is ODD in `k`
+    (`htDiag(−k)=conj(htDiag k)` by conj-symmetry + evenness of ω, using `neg`-invariance of `volume`), and `(i·z).im=z.re`.
+    **HONEST: Fourier-side coefficient physics ONLY — NOT the Lp/rapidity `j_ℏ` map (multi-month wall, brick-4), NOT the
+    Parseval bridge to position-space `kgSympl` (brick-3), NOT the boost-charge identity, NOT `2π/ℏ`, NOT numerical-G/QG.
+    Conj-symmetry + integrability of the three product terms carried as HYPOTHESES, never axioms.**
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +

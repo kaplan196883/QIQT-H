@@ -43,7 +43,13 @@ coefficient, **NOT** numerical-`G`/QG.  The KG equation of motion and the spatia
 differentiate-under-integral steps are carried as HYPOTHESES, never axioms.
 -/
 import Mathlib.MeasureTheory.Integral.Bochner.Set
+import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+import Mathlib.MeasureTheory.Group.Measure
+import Mathlib.MeasureTheory.Group.MeasurableEquiv
+import Mathlib.MeasureTheory.Measure.Haar.Unique
+import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
+import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Mul
 
@@ -182,5 +188,214 @@ theorem kgSympl_slice_independent
   have h := hSderiv t
   rw [hfun, hFlux t] at h
   exact h
+
+/-!
+## HT3 brick-2 — the FOURIER-SIDE positive-frequency coefficient theorem
+
+This section is **HT3 brick-2** of `THE_HTKK_PHYSICAL_PLAN.md`: the algebraic core proving that
+the Klein–Gordon symplectic form equals `2ℏ · Im` of the one-particle (positive-frequency) inner
+product — the *canonical-normalization* property that makes the localization coefficient of the
+`hTkk` map **derived**, not calibrated.
+
+On Fourier-side Cauchy data `Ψ π Χ Ρ : ℝ → ℂ` (the spatial Fourier transforms of *real* fields, hence
+**conjugate-symmetric**, `Ψ(−k) = conj(Ψ k)` etc. — carried as hypotheses), with the dispersion
+`ω k = √(k²+m²)` and the positive-frequency coefficient
+`a(Ψ,π) k = (ω·Ψ + i·π) / √(2ℏω)`, the theorem is
+
+    2ℏ · (∫ conj(a(Ψ,π))·a(Χ,Ρ) dk).im  =  σ_K(Ψ,π,Χ,Ρ)  :=  (∫ (conj Ψ·Ρ − conj Χ·π) dk).re .
+
+**Scope firewall (HONEST).**  This is the Fourier-side coefficient physics ONLY.  It does **NOT**
+build the `Lp`/rapidity `j_ℏ` map (the multi-month Mathlib wall — brick-4), **NOT** the Parseval
+bridge to the position-space `kgSympl` (brick-3), **NOT** the boost-charge identity, **NOT** the
+`2π/ℏ` modular coefficient, **NOT** numerical-`G`/QG.  Conjugate symmetry and integrability of the
+product terms are carried as HYPOTHESES, never axioms.  Pure pointwise `|a|²` algebra + evenness of
+`ω` under `k ↦ −k`.
+-/
+
+open scoped ComplexConjugate
+
+/-- **The KG one-particle dispersion** `ω_k = √(k² + m²)`. -/
+noncomputable def kgOmega (m k : ℝ) : ℝ := Real.sqrt (k ^ 2 + m ^ 2)
+
+/-- `ω_k > 0` for `m > 0`. -/
+lemma kgOmega_pos (m k : ℝ) (hm : 0 < m) : 0 < kgOmega m k := by
+  unfold kgOmega
+  exact Real.sqrt_pos.mpr (add_pos_of_nonneg_of_pos (sq_nonneg k) (pow_pos hm 2))
+
+/-- `ω` is **even** in `k`: `ω_{−k} = ω_k` (from `(−k)² = k²`). -/
+lemma kgOmega_even (m k : ℝ) : kgOmega m (-k) = kgOmega m k := by
+  unfold kgOmega; congr 1; ring
+
+/-- **The Fourier-side positive-frequency coefficient**
+`a(Ψ,π) k = (ω_k·Ψ k + i·π k) / √(2ℏ ω_k)`.  This is the one-particle annihilation amplitude of
+the mode with Cauchy data `(Ψ,π)` (in the Fourier picture); its canonical `√(2ℏω)` normalization is
+what the coefficient theorem below verifies against the symplectic form. -/
+noncomputable def posFreqCoeff (m ℏ : ℝ) (Ψ π : ℝ → ℂ) (k : ℝ) : ℂ :=
+  ((kgOmega m k : ℂ) * Ψ k + Complex.I * π k) / (Real.sqrt (2 * ℏ * kgOmega m k) : ℂ)
+
+/-- **The Fourier symplectic pairing** `σ_K = (∫ (conj Ψ·Ρ − conj Χ·π) dk).re`. -/
+noncomputable def sigmaK (Ψ π Χ Ρ : ℝ → ℂ) : ℝ :=
+  (∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k) ∂(volume : Measure ℝ)).re
+
+/-- **The Fourier "diagonal" density** `ω·(conj Ψ·Χ) + (conj π·Ρ)/ω`, whose imaginary part is the
+piece that VANISHES on integration by conjugate symmetry + evenness of `ω`. -/
+noncomputable def htDiag (m : ℝ) (Ψ π Χ Ρ : ℝ → ℂ) (k : ℝ) : ℂ :=
+  (kgOmega m k : ℂ) * (starRingEnd ℂ (Ψ k) * Χ k)
+    + starRingEnd ℂ (π k) * Ρ k / (kgOmega m k : ℂ)
+
+/-- An **odd real integrand integrates to zero** on `(ℝ, volume)`: if `g(−x) = −g x` then
+`∫ g = 0`.  Proof: `volume` is `neg`-invariant (`measurePreserving_neg`), so `∫ g(−·) = ∫ g`, while
+oddness gives `∫ g(−·) = −∫ g`; hence `∫ g = −∫ g`. -/
+private lemma integral_odd_eq_zero (g : ℝ → ℝ) (hodd : ∀ x, g (-x) = - g x) :
+    (∫ x, g x ∂(volume : Measure ℝ)) = 0 := by
+  have h1 : ∫ x, g (-x) ∂(volume : Measure ℝ) = ∫ x, g x ∂(volume : Measure ℝ) := by
+    have h := (Measure.measurePreserving_neg (volume : Measure ℝ)).integral_comp
+      (Homeomorph.neg ℝ).measurableEmbedding g
+    simpa using h
+  have h2 : ∫ x, g (-x) ∂(volume : Measure ℝ) = - ∫ x, g x ∂(volume : Measure ℝ) := by
+    rw [← integral_neg]
+    exact integral_congr_ae (Filter.Eventually.of_forall hodd)
+  rw [h1] at h2
+  linarith
+
+/-- **Conjugate symmetry of the diagonal density.**  Under `k ↦ −k`, using conjugate symmetry of the
+Cauchy data and evenness of `ω`, `htDiag(−k) = conj(htDiag k)`.  Hence `(htDiag(−k)).im = −(htDiag k).im`,
+so its imaginary part is an ODD function of `k`. -/
+private lemma htDiag_conj_symm (m : ℝ) (Ψ π Χ Ρ : ℝ → ℂ)
+    (hconjΨ : ∀ k, Ψ (-k) = starRingEnd ℂ (Ψ k))
+    (hconjπ : ∀ k, π (-k) = starRingEnd ℂ (π k))
+    (hconjΧ : ∀ k, Χ (-k) = starRingEnd ℂ (Χ k))
+    (hconjΡ : ∀ k, Ρ (-k) = starRingEnd ℂ (Ρ k)) (k : ℝ) :
+    htDiag m Ψ π Χ Ρ (-k) = starRingEnd ℂ (htDiag m Ψ π Χ Ρ k) := by
+  simp only [htDiag, kgOmega_even, hconjΨ, hconjπ, hconjΧ, hconjΡ, map_add, map_mul, map_div₀,
+    Complex.conj_ofReal, Complex.conj_conj]
+
+/-- Cancellation helper: `2ℏ · (P / (2ℏ ω)) = P / ω` for `ℏ, ω ≠ 0`. -/
+private lemma cancel_two_hbar (ℏ ω P : ℂ) (h : ℏ ≠ 0) (hω : ω ≠ 0) :
+    2 * ℏ * (P / (2 * ℏ * ω)) = P / ω := by
+  have h2 : (2 : ℂ) * ℏ ≠ 0 := mul_ne_zero two_ne_zero h
+  field_simp
+
+/-- **HT3 brick-2 — the Fourier-side positive-frequency coefficient theorem.**
+
+For conjugate-symmetric Fourier-side Cauchy data `Ψ π Χ Ρ : ℝ → ℂ` (the transforms of real fields),
+`m > 0`, `ℏ > 0`, with integrability of the inner-product integrand, of the diagonal density's
+imaginary part, and of the symplectic integrand,
+
+    2ℏ · (∫ conj(posFreqCoeff Ψ π)·posFreqCoeff Χ Ρ dk).im  =  σ_K(Ψ,π,Χ,Ρ) .
+
+This is the **canonical-normalization identity** `σ = 2ℏ·Im⟨a,a⟩` on the Fourier side: the KG
+symplectic pairing equals `2ℏ` times the imaginary part of the one-particle inner product of the
+`√(2ℏω)`-normalized positive-frequency coefficients.  It is what fixes the `hTkk` localization
+coefficient's normalization (up to the `ℏ` unit), turning it from a calibration into a derived
+quantity — the coefficient physics, in Lean.
+
+**Proof.**  Pointwise, `2ℏ·conj(a(Ψ,π))·a(Χ,Ρ) = htDiag + i·(conj Ψ·Ρ − conj π·Χ)` (the `√(2ℏω)`
+denominator is real, `Complex.I_sq` supplies the `−i²`).  Taking `.im` and integrating: the `htDiag`
+imaginary part integrates to `0` (odd in `k` by conjugate symmetry + evenness of `ω`), and
+`(i·z).im = z.re` turns the off-diagonal into `(conj Ψ·Ρ − conj π·Χ).re = (conj Ψ·Ρ − conj Χ·π).re`
+(the two agree because they differ by a purely imaginary term), i.e. `σ_K`. -/
+theorem two_hbar_im_inner_posFreq_eq_sigmaK
+    (m ℏ : ℝ) (hm : 0 < m) (hℏ : 0 < ℏ) (Ψ π Χ Ρ : ℝ → ℂ)
+    (hconjΨ : ∀ k, Ψ (-k) = starRingEnd ℂ (Ψ k))
+    (hconjπ : ∀ k, π (-k) = starRingEnd ℂ (π k))
+    (hconjΧ : ∀ k, Χ (-k) = starRingEnd ℂ (Χ k))
+    (hconjΡ : ∀ k, Ρ (-k) = starRingEnd ℂ (Ρ k))
+    (hf : Integrable
+      (fun k => starRingEnd ℂ (posFreqCoeff m ℏ Ψ π k) * posFreqCoeff m ℏ Χ Ρ k)
+      (volume : Measure ℝ))
+    (hdiag : Integrable (fun k => (htDiag m Ψ π Χ Ρ k).im) (volume : Measure ℝ))
+    (hsig : Integrable
+      (fun k => starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k) (volume : Measure ℝ)) :
+    2 * ℏ * (∫ k, starRingEnd ℂ (posFreqCoeff m ℏ Ψ π k) * posFreqCoeff m ℏ Χ Ρ k
+        ∂(volume : Measure ℝ)).im
+      = sigmaK Ψ π Χ Ρ := by
+  set f : ℝ → ℂ :=
+    fun k => starRingEnd ℂ (posFreqCoeff m ℏ Ψ π k) * posFreqCoeff m ℏ Χ Ρ k with hfdef
+  -- `(∫ f).im = ∫ (f k).im`
+  have step1 : (∫ k, f k ∂(volume : Measure ℝ)).im = ∫ k, (f k).im ∂(volume : Measure ℝ) := by
+    have h := integral_im hf
+    simpa only [RCLike.im_eq_complex_im] using h.symm
+  -- pointwise algebra: `2ℏ·(f k).im = (htDiag k).im + (conj Ψ·Ρ − conj Χ·π).re`
+  have hptim : ∀ k, 2 * ℏ * (f k).im
+      = (htDiag m Ψ π Χ Ρ k).im
+        + (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k).re := by
+    intro k
+    have hωpos : 0 < kgOmega m k := kgOmega_pos m k hm
+    have hωne : (kgOmega m k : ℂ) ≠ 0 := by exact_mod_cast ne_of_gt hωpos
+    have hℏne : (ℏ : ℂ) ≠ 0 := by exact_mod_cast ne_of_gt hℏ
+    have hDpos : 0 < 2 * ℏ * kgOmega m k := mul_pos (mul_pos two_pos hℏ) hωpos
+    have hsqpos : 0 < Real.sqrt (2 * ℏ * kgOmega m k) := Real.sqrt_pos.mpr hDpos
+    have hDDr : Real.sqrt (2 * ℏ * kgOmega m k) * Real.sqrt (2 * ℏ * kgOmega m k)
+        = 2 * ℏ * kgOmega m k := Real.mul_self_sqrt (le_of_lt hDpos)
+    have hDD : (Real.sqrt (2 * ℏ * kgOmega m k) : ℂ) * (Real.sqrt (2 * ℏ * kgOmega m k) : ℂ)
+        = 2 * (ℏ : ℂ) * (kgOmega m k : ℂ) := by
+      rw [← Complex.ofReal_mul, hDDr]; push_cast; ring
+    -- conjugate of the first coefficient
+    have hca : starRingEnd ℂ (posFreqCoeff m ℏ Ψ π k)
+        = ((kgOmega m k : ℂ) * starRingEnd ℂ (Ψ k) - Complex.I * starRingEnd ℂ (π k))
+            / (Real.sqrt (2 * ℏ * kgOmega m k) : ℂ) := by
+      simp only [posFreqCoeff, map_div₀, map_add, map_mul, Complex.conj_ofReal, Complex.conj_I]
+      ring
+    -- the numerator identity (this is where `I² = −1` enters)
+    have hnum : ((kgOmega m k : ℂ) * starRingEnd ℂ (Ψ k) - Complex.I * starRingEnd ℂ (π k))
+          * ((kgOmega m k : ℂ) * Χ k + Complex.I * Ρ k)
+        = (kgOmega m k : ℂ) * ((kgOmega m k : ℂ) * (starRingEnd ℂ (Ψ k) * Χ k))
+          + starRingEnd ℂ (π k) * Ρ k
+          + (kgOmega m k : ℂ) * Complex.I
+              * (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (π k) * Χ k) := by
+      linear_combination (-(starRingEnd ℂ (π k) * Ρ k)) * Complex.I_sq
+    -- the master pointwise complex identity
+    have hcplx : 2 * (ℏ : ℂ) * f k
+        = htDiag m Ψ π Χ Ρ k
+          + Complex.I * (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (π k) * Χ k) := by
+      simp only [hfdef]
+      rw [hca]
+      unfold posFreqCoeff htDiag
+      rw [div_mul_div_comm, hDD, cancel_two_hbar (ℏ : ℂ) (kgOmega m k : ℂ) _ hℏne hωne, hnum]
+      field_simp
+    -- take imaginary parts
+    have himeq : (2 * (ℏ : ℂ) * f k).im
+        = (htDiag m Ψ π Χ Ρ k).im
+          + (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (π k) * Χ k).re := by
+      rw [hcplx, Complex.add_im, Complex.mul_im, Complex.I_re, Complex.I_im]; ring
+    have hscale : (2 * (ℏ : ℂ) * f k).im = 2 * ℏ * (f k).im := by
+      rw [show (2 : ℂ) * (ℏ : ℂ) = ((2 * ℏ : ℝ) : ℂ) from by push_cast; ring,
+        Complex.im_ofReal_mul]
+    have hre : (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (π k) * Χ k).re
+        = (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k).re := by
+      have hprod : (starRingEnd ℂ (π k) * Χ k).re = (starRingEnd ℂ (Χ k) * π k).re := by
+        simp only [Complex.mul_re, Complex.conj_re, Complex.conj_im]; ring
+      rw [Complex.sub_re, Complex.sub_re, hprod]
+    rw [← hscale, himeq, hre]
+  -- the diagonal imaginary part integrates to zero (odd in `k`)
+  have hvanish : (∫ k, (htDiag m Ψ π Χ Ρ k).im ∂(volume : Measure ℝ)) = 0 :=
+    integral_odd_eq_zero (fun k => (htDiag m Ψ π Χ Ρ k).im) (fun k => by
+      show (htDiag m Ψ π Χ Ρ (-k)).im = -(htDiag m Ψ π Χ Ρ k).im
+      rw [htDiag_conj_symm m Ψ π Χ Ρ hconjΨ hconjπ hconjΧ hconjΡ k, Complex.conj_im])
+  -- the off-diagonal `.re`-integral is `σ_K`
+  have hbridge : (∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k).re
+        ∂(volume : Measure ℝ))
+      = (∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k)
+        ∂(volume : Measure ℝ)).re := by
+    have h := integral_re hsig
+    simpa only [RCLike.re_eq_complex_re] using h
+  calc 2 * ℏ * (∫ k, f k ∂(volume : Measure ℝ)).im
+      = 2 * ℏ * (∫ k, (f k).im ∂(volume : Measure ℝ)) := by rw [step1]
+    _ = ∫ k, 2 * ℏ * (f k).im ∂(volume : Measure ℝ) :=
+        (integral_const_mul (2 * ℏ) _).symm
+    _ = ∫ k, ((htDiag m Ψ π Χ Ρ k).im
+          + (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k).re)
+          ∂(volume : Measure ℝ) :=
+        integral_congr_ae (Filter.Eventually.of_forall hptim)
+    _ = (∫ k, (htDiag m Ψ π Χ Ρ k).im ∂(volume : Measure ℝ))
+          + ∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k).re
+            ∂(volume : Measure ℝ) :=
+        integral_add hdiag hsig.re
+    _ = (∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k).re
+          ∂(volume : Measure ℝ)) := by rw [hvanish, zero_add]
+    _ = (∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k)
+          ∂(volume : Measure ℝ)).re := hbridge
+    _ = sigmaK Ψ π Χ Ρ := by simp only [sigmaK]
 
 end QIQTH.KGSymplectic

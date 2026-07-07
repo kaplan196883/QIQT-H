@@ -149,13 +149,20 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     isometry `f(θ)=√(m cosh θ)·a(m sinh θ)`, boost covariance, and boost-charge equality on a dense domain — "not blocked by
     deep missing mathematics, but absolutely a multi-month infrastructure build." Massless-1+1 is NOT easier (ω=|k| singular
     at 0, IR zero-mode). But there ARE tractable HIGH-VALUE sub-bricks that nail the COEFFICIENT PHYSICS before the wall:
-  - [ ] **HT3 brick-2 — the FOURIER-SIDE positive-frequency coefficient theorem (tractable, high-value; nails the canonical
-    normalization).** On Fourier-side data `Ψ Π Χ Ρ : ℝ→ℂ` (conjugate-symmetric = real fields), with `ω k := √(k²+m²)` and
-    `aK m ℏ Ψ Π k := (ω_k·Ψ k + i·Π k)/√(2ℏ·ω_k)`, prove `2ℏ·(∫ conj(aK Ψ Π)·(aK Χ Ρ) dk).im = σ_K(Ψ,Π,Χ,Ρ)` where
-    `σ_K := ∫ (conj Ψ·Ρ − conj Χ·Π).re` (the Fourier symplectic pairing). Carry conj-symmetry + integrability + `m>0,ℏ>0`.
-    NO Lp, NO rapidity CoV, NO Mathlib Fourier API — pure pointwise `|a|²` algebra (exposes all ℏ/signs) + `integral_sub`/
-    `integral_const_mul` + evenness of ω. This PROVES the symplectic form = 2ℏ·Im of the one-particle inner product — the
-    DEFINING property that makes the normalization canonical (the coefficient physics, in Lean, on the Fourier side).
+  - [x] **HT3 brick-2 — the FOURIER-SIDE positive-frequency coefficient theorem — DONE 2026-07-08** ([AF] std-3, budget 0,
+    no sorry). `QIQTH.KGSymplectic.two_hbar_im_inner_posFreq_eq_sigmaK`: on Fourier-side data `Ψ π Χ Ρ : ℝ→ℂ`
+    (conjugate-symmetric = real fields, carried as hyps), with `kgOmega m k := √(k²+m²)` and `posFreqCoeff m ℏ Ψ Π k :=
+    (ω_k·Ψ k + i·Π k)/√(2ℏ·ω_k)`, PROVED `2ℏ·(∫ conj(posFreqCoeff Ψ Π)·posFreqCoeff Χ Ρ dk).im = sigmaK Ψ Π Χ Ρ` where
+    `sigmaK := (∫ (conj Ψ·Ρ − conj Χ·Π)).re`. Proof = pointwise `|a|²` algebra (`hnum` via `linear_combination … Complex.I_sq`
+    for the `−i²`; the `√(2ℏω)` denominator is real ⟹ `hDD : √·√ = 2ℏω`) giving `2ℏ·conj(a)·b = htDiag + i·(conjΨΡ−conjπΧ)`;
+    then `.im` + `integral_im`/`integral_re`/`integral_const_mul`/`integral_add`; the diagonal `htDiag.im` integrates to `0`
+    because it is ODD under `k↦−k` (`htDiag(−k)=conj(htDiag k)` from conj-symmetry + evenness of ω, via the `neg`-invariance
+    of `volume` `Measure.measurePreserving_neg`); `(i·z).im = z.re` and `(conjπΧ).re=(conjΧπ).re` give `sigmaK`. This PROVES
+    the symplectic form = `2ℏ·Im` of the one-particle inner product — the DEFINING property that makes the normalization
+    canonical (the coefficient physics, in Lean, on the Fourier side). Wired into `AxiomAudit` pin. HONEST scope firewall:
+    NO Lp/rapidity `j_ℏ` (brick-4 wall), NO Parseval bridge to position-space `kgSympl` (brick-3), NO boost-charge identity,
+    NO `2π/ℏ`, NO numerical-G/QG; conj-symmetry + integrability of the three product terms carried as HYPOTHESES, never axioms.
+    [Note: the conjugate-momentum data is named `π` in Lean because capital `Π` is a reserved pi-type token; math is identical.]
   - [ ] **HT3 brick-3 — the Parseval bridge** `σ_K(𝓕ψ,𝓕π,𝓕χ,𝓕ρ) = kgSympl ψ₀ π₀ χ₀ ρ₀` (position-space σ from brick-1),
     for real Schwartz data. Tractable but needs Mathlib Plancherel/Fourier wrapper lemmas. Then brick-2∘brick-3 gives
     `2ℏ·Im⟨aK(𝓕·)⟩ = kgSympl` — the canonical-normalization identity grounded in the position-space symplectic form.
