@@ -320,6 +320,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     smearing of `∂_v φ` built from φ with `2π/ℏ` forced by Bisognano–Wichmann + the KG stress-tensor Noether
     charge — is the **cited frontier**, named explicitly by the open predicate `IsPhysicalWedgeMode`
     (`LocalizedMode.lean`); see `THE_HTKK_PHYSICAL_PLAN.md`, HT1–HT4.
+  - **HT1a — the abstract null-triangle FTC / boundary-decomposition identity** (`HTkkPhysical.lean`
+    `QIQTH.HTkkPhysical.nullTriangle_ftc`, **[AF]** std-3, 2026-07-08): the pure-calculus honest core of the
+    classical Rindler boost-charge = horizon-null-energy identity `K₀(R)=H_+(R)+N_+(R)`. For `A B dA dB : ℝ→ℝ→ℝ`
+    jointly continuous, with `HasDerivAt`-parametrised partials (`dA=∂_U A`, `dB=∂_V B`) and the conservation law
+    `∂_U A + ∂_V B = 0` pointwise on the null triangle `0≤U≤V≤R`, proves
+    `∫₀^R (A s s − B s s) ds = ∫₀^R A 0 V dV − ∫₀^R B U R dU` (hypotenuse `t=0` flux = horizon `H⁺` edge − outer
+    `N⁺` cutoff edge). Proof = two `intervalIntegral.integral_eq_sub_of_hasDerivAt` (FTC, one per variable) + ONE
+    triangular Fubini swap (private `triangle_swap` via `integral_integral_swap` on the square with a
+    diagonal-truncated integrand); **no divergence theorem, no PDE**. **HONEST: fixes the boost-charge ↔ null-energy
+    STRUCTURE only — no physics discharged; the `2π/ℏ` coefficient (HT2) and the KG-stress instantiation (HT1b) /
+    no-flux limit (HT1c) are separate, still-open bricks.**
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +

@@ -10042,4 +10042,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCGaugeExp.a3rawArr_contract_eq_a3
 #print axioms QIQTH.RNCGaugeExp.exp_rncGaugeJet
 
+-- HTkkPhysical.lean — HT1a, the abstract null-triangle FTC / boundary-decomposition identity
+-- (2026-07-08): the pure-calculus honest core of the classical Rindler boost-charge = horizon-null-
+-- energy identity `K₀(R) = H_+(R) + N_+(R)`.  For `A B : ℝ→ℝ→ℝ` with `∂_U A + ∂_V B = 0` on the null
+-- triangle `0 ≤ U ≤ V ≤ R`, the flux balance `∫₀ᴿ(A s s − B s s) = ∫₀ᴿ A 0 V − ∫₀ᴿ B U R` holds.
+-- Proof = two FTC applications + one triangular Fubini swap (no divergence theorem, no PDE).
+-- HONEST: fixes the boost-charge ↔ null-energy STRUCTURE only; no physics discharged (KG-stress
+-- instantiation HT1b, no-flux limit HT1c, and the `2π/ℏ` BW/KMS coefficient HT2 are separate).  [AF] std-3.
+#print axioms QIQTH.HTkkPhysical.nullTriangle_ftc
+
 end QIQTH.AxiomAudit

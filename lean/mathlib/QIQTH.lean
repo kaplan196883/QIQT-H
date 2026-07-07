@@ -696,6 +696,7 @@ import QIQTH.EinsteinFieldEquation
 import QIQTH.KGStressConservation
 import QIQTH.QiqtGrExplicitKG
 import QIQTH.QiqtGrFreeField
+import QIQTH.HTkkPhysical
 import QIQTH.RicciSymm
 import QIQTH.ChristoffelSmooth
 import QIQTH.HregExplicitKG

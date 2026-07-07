@@ -61,10 +61,15 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
   boost Killing field), `∂_a J^a=0` (the ONE EOM/conservation step), rewritten in null coords + a triangular FTC/Fubini on
   `0≤U≤V≤R`. HT1 fixes the boost-charge↔null-energy STRUCTURE; it does NOT fix `2π/ℏ` (that is BW/modular normalization = HT2).
   On the critical path, one brick. Sub-bricks (new file `QIQTH/HTkkPhysical.lean`):
-  - [ ] **HT1a (the honest core — pure calculus, tractable NOW).** The ABSTRACT 1+1 null-triangle FTC identity: for
-    `A B : ℝ→ℝ→ℝ` with `∂_U A + ∂_V B = 0` on `0≤U≤V≤R`, `∫₀^R (A(s,s)−B(s,s)) ds = ∫₀^R A(0,V) dV − ∫₀^R B(U,R) dU`. No
-    divergence theorem, no PDE — `intervalIntegral.integral_deriv_eq_sub` (FTC) + triangular Fubini
-    (`MeasureTheory.integral_prod` via indicators). HIGH value × HIGH tractability = the honest core of HT1.
+  - [x] **HT1a (the honest core — pure calculus) — DONE 2026-07-08** ([AF] std-3, budget 0, no sorry).
+    `QIQTH/HTkkPhysical.lean` → `QIQTH.HTkkPhysical.nullTriangle_ftc`: for `A B dA dB : ℝ→ℝ→ℝ` jointly-continuous
+    (`Continuous (uncurry ·)`), `HasDerivAt`-parametrised partials (`dA=∂_U A`, `dB=∂_V B`), and `∂_U A + ∂_V B = 0`
+    pointwise, `∫₀^R (A s s − B s s) ds = ∫₀^R A 0 V dV − ∫₀^R B U R dU`. Proof = two FTC applications
+    (`intervalIntegral.integral_eq_sub_of_hasDerivAt`, once per variable) + ONE triangular Fubini swap (private
+    `triangle_swap`: diagonal-truncated integrand `if U<V then dA U V else 0` on the square, integrable via a compact
+    `IsMaxOn` bound, then `MeasureTheory.integral_integral_swap`); conservation collapses the A-column to `−` the
+    B-column. NO divergence theorem, NO PDE. Wired into `QIQTH.lean` + `AxiomAudit` pin. HONEST: STRUCTURE only —
+    no physics discharged; `2π/ℏ` untouched.
   - [ ] **HT1b.** Instantiate with the KG stress null components `A=V T_VV−U T_UV`, `B=V T_UV−U T_UU` ⟹ `K₀(R)=H_+(R)+N_+(R)`
     with `N_+` explicit (uses the existing KG stress-conservation identities; `T_kk=(∂_vφ)²` via `BL_kgStress_null`).
   - [ ] **HT1c.** Transverse Fubini (add `y=(x²,x³)`, transverse boundary term carried) + the no-flux corollary
