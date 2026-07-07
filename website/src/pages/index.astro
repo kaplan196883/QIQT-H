@@ -792,6 +792,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   </div></section>
 
   <section class="section"><div class="wrap">
+    <h2>Related work — an independent PRL derived the same result on paper</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">In 2026 a Physical Review Letters paper reached the semiclassical Einstein equations the same way — QIQT-H is the machine-verified version of that exact chain.</p>
+    <div class="note" style="border-left:3px solid var(--st-conditional);border-radius:0 12px 12px 0">
+      <p><strong>Dorau &amp; Much, <a href="https://arxiv.org/abs/2510.24491">Phys. Rev. Lett. (2026)</a> — “From Quantum Relative Entropy to the Semiclassical Einstein Equations.”</strong> Independently, from standard algebraic QFT plus the equivalence principle, they derive the semiclassical Einstein equations from the <strong>Araki–Uhlmann relative entropy</strong> of coherent states on a local Rindler horizon — a quantum-field-theoretic extension of Jacobson. Their chain is, step for step, the free-field gravity chain machine-checked here: modular flow = geometric boost (<code>Fock.OneParticleBW</code>), relative entropy = horizon energy flux (<code>ModularEnergyBound</code>, the first law), area variation via Raychaudhuri focusing (<code>DifferentialAreaLaw</code>), and Einstein's equations by stress-energy conservation (the <a href="/claim-card">claim card</a>).</p>
+      <p style="margin-top:.6rem"><strong>The honest relation — read this before you overread it.</strong> Both derivations take the <em>same</em> load-bearing input: the entropy–area relation <strong>S = δA/4</strong> (Bekenstein–Hawking). They <em>assume</em> it; QIQT-H's finite-capacity postulate <strong>(P4)</strong> is that same input under a different name — and QIQT-H additionally <em>re-derives</em> the 1/4 ratio (Sakharov). So their peer-reviewed Letter confirms the shared <strong>derivation chain</strong> — relative entropy → modular theory → Jacobson → Einstein — <strong>not</strong> the finiteness postulate itself. What QIQT-H adds is that the whole chain is <strong>kernel-checked</strong>, with every physical assumption in an explicit ledger, and that it re-derives the coefficient they take for granted. Both meet the same frontier: their closing caveat — higher-order corrections on a curved horizon, “<em>technically demanding, especially regarding the modular data</em>” — is precisely our cited curved-correction / Seeley–DeWitt gap.</p>
+      <p style="margin-top:.6rem;font-size:.95rem">The takeaway: a top-journal paper independently reached QIQT-H's gravity result as “arguments indicating.” QIQT-H is the version a computer checks — the same physics, reduced to a re-runnable proof.</p>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="wrap">
     <h2>Explore</h2>
     <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Jump to any part of the program — the idea, the math, selection, proofs, and open problems.</p>
     <div class="cards" style="margin-top:18px">
