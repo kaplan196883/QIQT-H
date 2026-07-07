@@ -266,11 +266,21 @@ remain). Never claim numerical-G or a curved heat kernel.
   - [x] **EXP-JET3c (STEP 3a — small-context Grönwall helper) — DONE 2026-07-07** (commit 50e8972): `expJet_residual_gronwall`
     (`E:ℝ→F` any normed `ℝ`-space, `E 0=0`, `‖E'‖≤K‖E‖+C` on `[0,1)` ⟹ `‖E 1‖≤C·e^K`).  Abstracted over `F` to dodge
     the 32M-heartbeat CLM-Banach whnf/instance explosion the monolithic operator-Grönwall triggered.  [AF] std-3.
-  - [~] **EXP-JET3c (STEP 3b — the Jacobian 1-jet) — IN PROGRESS.**  `fderiv exp_p v = id − Γ_p^sym(v,·) + O(‖v‖²)`
-    via the operator residual `E_v = Φ_v − (K₀+K₁)` + `expJet_residual_gronwall` + projected model identity
-    `π∘(K₀(1)+K₁(1))∘ι = id + ½·matVecCLM c₁ = id − Γ_p^sym(v,·)`.  Needs a UNIFORM-in-`v` `‖DF(Y_v t)‖≤K*` bound
-    (`expJet_fderiv_tube_bddAbove_unif`, compactness of the confinement ball) so the Grönwall factor `e^{K*}` is
-    uniform ⟹ genuine `IsBigO` over `𝓝 0`.  This delivers **TWO of three gauge conditions**: `g̃(0)=δ`, `∂g̃(0)=0`.
+  - [x] **EXP-JET3c (STEP 3b — the Jacobian 1-jet) — DONE 2026-07-07** (commits 2f39d90, 26c86c5; [AF] std-3, budget 0).
+    **`hasFDerivAt_expMap_jacobian_one_jet`**: `(fun v => fderiv exp_p v − (id + expJetOneJetModel v)) =O[𝓝 0] (‖v‖²)`,
+    with `expJetOneJetModel v = ½·matVecCLM c₁ = −Γ_p^sym(v,·)` — i.e. `fderiv exp_p v = id − Γ_p^sym(v,·) + O(‖v‖²)`.
+    Route (as scoped): uniform-in-`v` `‖DF(Y_v t)‖≤Kstar` (`expJet_fderiv_tube_bddAbove_unif`, confinement into a fixed
+    compact phase-space ball ⟹ `e^{Kstar}` Grönwall factor uniform ⟹ genuine `IsBigO` over `𝓝 0`); operator residual
+    `E_v=Φ_v−(K₀+K₁)` obeying `E'=DF∘E+N` (`expJet_residual_identity`), `‖N‖≤Cconst‖v‖²` (via `expJet_fderiv_tube_order2`
+    + `expJetA2_opNorm_le` + `expJetA1/K1_opNorm_le`), `expJet_residual_gronwall` ⟹ `‖E_v 1‖≤Cconst‖v‖²·e^{Kstar}`;
+    projected exact model identity `expJet_proj_model_one` (`π∘(K₀(1)+K₁(1))∘ι = id + expJetOneJetModel v`); residual
+    `fderiv exp_p v − (id+model) = π∘(E_v 1)∘ι`, `‖·‖≤‖E_v 1‖`. **KEY compile fix:** the capstone whnf-exploded even at
+    4M heartbeats (CLM-space instance/whnf blowup); offloading every heavy CLM-algebra step into 5 small-context
+    helpers (`expJet_recompose`, `expJet_DA1_norm_le`, `expJet_N_norm_le`, `expJet_Ederiv_norm_le`,
+    `expJet_pi_comp_iota_norm_le`) — same technique as `expJet_residual_gronwall` — brought it to 1.6M heartbeats.
+    This delivers **TWO of three gauge conditions**: `g̃(0)=δ`, `∂g̃(0)=0`.  HONEST: the Jacobian 1-jet — does NOT give
+    the Jacobian 2-jet (`½T` term; anchored A₂ is t-dependent-wrong there — see the FINDING below), NOT the pullback
+    metric, NOT the gauge discharge, NOT numerical-G.
 - [x] **EXP-JET3c (STEP 3 — HONEST MATH FINDING, GPT-5.5-pro-confirmed 2026-07-07).** The ANCHORED fixed `A₂(v)` reaches
   the Jacobian 1-JET exactly but is WRONG at order 2: the true order-2 Jacobi coefficient `Ã₂(t,v)` is genuinely
   `t`-DEPENDENT (tube drift `Y_v(t)≈(p+tv,v−tΓv)` feeds `∂Γ` a `t·v`), and the missing forcing SURVIVES the `π∘·∘ι`
