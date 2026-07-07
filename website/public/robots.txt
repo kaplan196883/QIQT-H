@@ -1,0 +1,6 @@
+# qiqt.org — QIQT-H
+# All crawlers welcome.
+User-agent: *
+Allow: /
+
+Sitemap: https://qiqt.org/sitemap.xml

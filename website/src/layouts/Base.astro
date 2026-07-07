@@ -10,6 +10,18 @@ const {
   legend = false,
 } = Astro.props;
 const path = Astro.url.pathname;
+const canonicalURL = new URL(path, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'QIQT-H — One Wave Function, One World',
+  alternateName: 'Quantized Information Quantum Theory — Holographic',
+  url: 'https://qiqt.org/',
+  description,
+  author: { '@type': 'Person', name: 'Pawel Kaplanski' },
+  about: 'A single-world, holographic, machine-verified (Lean 4 / Mathlib) formulation of quantum theory.',
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -19,10 +31,29 @@ const path = Astro.url.pathname;
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="canonical" href={Astro.url.href} />
+  <link rel="canonical" href={canonicalURL} />
+  <meta name="author" content="Pawel Kaplanski" />
+  <meta name="theme-color" content="#fbfaf7" />
+  <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="QIQT-H" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="QIQT-H — One Wave Function, One World" />
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <!-- Structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <!-- Search Console: paste your verification meta tag here when you set it up, e.g.
+       <meta name="google-site-verification" content="YOUR_TOKEN" /> -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
