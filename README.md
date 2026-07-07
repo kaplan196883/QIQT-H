@@ -1,100 +1,61 @@
-# QIQT-H Foundations of Quantum Mechanics
+# QIQT-H — One Wave Function, One World
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20837905.svg)](https://doi.org/10.5281/zenodo.20837905)
+**A single-world, holographic formulation of quantum mechanics — with the entire deductive substrate machine-verified in Lean 4, so you can re-run every proof yourself.**
 
-A three-paper foundational program in quantum mechanics by Paweł Kapłański (2026), combining the Chandrasekaran-Penington-Witten Type II crossed-product algebra construction with a literal physical-instantiation reading of the Bekenstein-Bousso holographic information bound.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20837905.svg)](https://doi.org/10.5281/zenodo.20837905) &nbsp;·&nbsp; **Site:** [qiqt.org](https://qiqt.org) &nbsp;·&nbsp; **Author:** Pawel Kaplanski
 
-The machine-checked Lean 4 / Mathlib development is archived on Zenodo with a citable DOI: [10.5281/zenodo.20837905](https://doi.org/10.5281/zenodo.20837905) (concept DOI; resolves to the latest release). The accompanying methods paper has DOI [10.5281/zenodo.20837809](https://doi.org/10.5281/zenodo.20837809).
+---
 
-## Two facts, one world
+## Verify it yourself
 
-**1. Only $\Phi$ is dynamical — and it carries no probability.** $\Phi$ is the whole *dynamical* content of physical reality, evolving by one exactly-unitary law: no collapse, no branches-as-substances, no observer standing outside it, and no probability built into it. What we call the Born rule is an *across-run frequency*, not a number the world assigns to a single run. A run also contains exactly one *non-dynamical* fact: the actuality selector $\lambda$ — *which* of $\Phi$'s macroscopic realizations is the actual one. $\lambda$ is not a substance, not an observer, and not a probability; it is actuality, nothing more. (So "there is only the wave function" is true at the level of *constitution and law*; the complete per-run ontology is the pair $(\Phi, \lambda)$.)
+Foundations claims are cheap. This one ships a **verification capsule**. On your own machine, with minimal trust in the author, it wipes the compiled proofs and rebuilds them from source (the Lean kernel re-checks every step), replays an independent kernel checker, and audits that the *complete* transitive dependency set is only Lean's three standard axioms — no `sorry`, no hidden axiom, no `native_decide`.
 
-**2. Information is limited by surface area.** Every bounded region $R$ can hold only $Q_R = A(\partial R)/4\ell_P^2$ worth of physical information (Bekenstein–Bousso, read literally). A region can instantiate only *finitely many distinguishable records.*
+```bash
+git clone https://github.com/kaplan196883/QIQT-H && cd QIQT-H
+bash verify/verify.sh   # → verify/out/claim_card.md
+```
 
-From these two facts, with decoherence, the measurement problem is *decomposed* — not by adding a mechanism, but by separating what each ingredient does: **the binary, definite outcomes we observe are a feature of macroscopic record-structures (which are area-limited and einselected), not of the wave function.** We measure in $0/1$ because *we* are macroscopic; the binary is the texture of our scale, not of the world. The honest division of labor: decoherence + einselection furnish *stable, robust, effectively Boolean* records (robustness, not uniqueness); the surface-area bound makes the set of distinguishable records *finite* (cardinality, not selection); and the non-dynamical fact $\lambda$ supplies *which* record is actual. The framework therefore **decomposes the measurement problem into a robustness part, a finiteness part, and two clearly-stated primitives ($\lambda$ actuality, and a typicality measure $\mu$ for Born statistics — itself an open problem); it does not claim to derive single outcomes from the area bound alone** (see the Central claim and the Macroscopic Definiteness Conjecture below).
+It prints a **claim card**: the exact formal statement, the complete trusted base, and a ledger of every *physical* assumption still assumed rather than proven. See a real one at **[qiqt.org/claim-card](https://qiqt.org/claim-card)**. All mechanical trust collapses to three things: the Lean kernel, your reading of the rendered statement, and the explicitly-listed physical inputs. *(Needs the Lean toolchain via [elan](https://github.com/leanprover/elan); the clean-room build takes a while — that is the point.)*
 
-## The trilogy
+## What this is
 
-1. **`QIQT_Position_Paper.md`** — accessible position statement: *One Wave Function, One World: How the Holographic Information Bound Selects the Macroscopic World*
+QIQT-H's ontology is **Φ-monism**: there is one substance — the universal wave function Φ, evolving exactly unitarily — of which observers are macroscopic patterns; a non-dynamical selector **λ** marks exactly one decohered record actual per run. No collapse, no branching, no fundamental probability. It rests on five postulates; the genuinely irreducible new physics is **(P4) finite holographic capacity + (P5) quantum equilibrium**, on the **(P1) (Φ,λ) ontology** — (P2)–(P3) being the standard quantum-relativistic arena.
 
-2. **`QIQT_Foundations_Paper.md`** — rigorous technical framework with Type II algebras, theorems, hidden-inconsistency framing, the Bell stance (keep free settings; violate Parameter Independence at the ontic level; operational no-signaling), the Macroscopic Definiteness Conjecture: *One Wave Function, One World: Finite-Information Regional Algebras and the Macroscopic World from Holographic Constraint*
+- **Measurement problem** — dissolved without collapse: decoherence supplies the records, λ makes exactly one actual. Single outcomes are λ's work, *never* the capacity bound (the earlier "capacity forbids records" reading is retired as a category error).
+- **Born rule** — not a primitive: *reduced*, by a battery of machine-checked no-go theorems, to the single quantum-equilibrium postulate P5.
+- **Gravity** — finite regional **entropy** (Q_R bounds the von Neumann entropy S(ρ_R) of Φ, *not* a finite matter Hilbert dimension) feeds a conditional, Lean-checked Jacobson-style derivation of an **Einstein-form equation** for the free field. The area *floor* is a derived theorem; the area *form* and the 1/4 are a conditional Sakharov re-derivation; the numerical value of G is a named frontier.
 
-3. **`QIQT_Math.md`** — end-to-end worked example on the double-slit experiment: *The QIQT-H Framework in Action: A Worked Mathematical Account of the Double-Slit Experiment*
+## What is machine-checked
 
-## Central claim
+Over **4,400 theorems across ~420 files**, axiom-free (Lean's standard three only; project axiom budget 0, CI-guarded). Formalization firsts — to our knowledge, in any proof assistant:
 
-The framework is **weak-ψ-monist** (the wave function $\Phi$ is the sole *dynamical* ontology; the complete per-run state is the pair $(\Phi, \lambda)$ with $\lambda$ a non-dynamical run-index selecting the realized record — ψ-ontic, weak-ψ-monist, formal-ψ-incomplete) with a finite-information axiom (FQ) constraining the instantiable regional content per bounded region of spacetime:
+- The **first complete Tomita–Takesaki modular theory** for an inductive-limit (GNS) state — the modular operator Δ, the flow Δ^it, the conjugation J with polar decomposition S̄ = J∘Δ^½, both halves of Tomita's theorem (Δ^it M Δ^−it = M and J M J ⊆ M′), and a genuine non-tracial KMS state.
+- An **unbounded Stone theorem** + PVM spectral theorem + bounded Borel functional calculus — beyond current Mathlib.
+- The **von Neumann double-commutant theorem** (A″ = SOT = WOT closure).
+- The **holographic count as a theorem** (S = Σ log D = A/4G) and the Araki–Woods III₁ fingerprint of the capacity tower.
+- **Einstein's equations** from the capacity bound — a conditional Jacobson chain for the free field, end to end.
 
-$$S_{\rm ren}(\omega_\Psi) \le Q_R := \frac{A(\partial R)}{4\ell_P^2}$$
+Full scope for every claim: **[qiqt.org/formalization](https://qiqt.org/formalization)**.
 
-The division of labor is explicit. **Continuous, conserved amplitude:** the weights $|c_k|^2$ are continuous and conserved under unitary evolution — decoherence never drives them to $0$ or $1$ (formally: `NoConcentration`). **Decoherence + einselection** make macroscopic *records* stable, redundant, and effectively Boolean — this is why a macroscopic system (apparatus, brain, AI) can only register a definite result; it explains the *stability and classicality* of outcomes, not their uniqueness. **The holographic bound** caps *how many* distinguishable records a region can hold (its genuine, non-redundant role). **$\lambda$** supplies *which* single record is actual. Schrödinger / Heisenberg evolution of the underlying field algebra is preserved exactly; no collapse, no hidden particles, no branching ontology, no modal value-rules are added.
+## What this is **not**
 
-## Central conjecture (open theorem)
+Stated plainly, because conflating these is what lets a skeptic dismiss the work:
 
-**Macroscopic Definiteness Conjecture** (foundations paper §7.6). *Revised statement.* A naive reading — "two macroscopic records cost twice the information, so a two-record content exceeds $Q_R$" — does **not** follow from the Bekenstein–Bousso bound, which limits *entropy* (the number of mutually **distinguishable** records, $\#\le e^{Q_R}$), not *superposition*: a redundant cat state $\alpha\,|0\rangle^{\otimes N} + \beta\,|1\rangle^{\otimes N}$ encodes two macroscopically distinct records, fits in $N$ qubits, and is a pure state of zero entropy, violating no bound. By linearity, if $|R_0\rangle$ and $|R_1\rangle$ are each instantiable in $R$, so is their superposition — unless a superselection-type principle is added, which would stand in tension with the exact unitary linearity the framework preserves. We therefore **do not claim** the holographic bound forbids multi-record content; its genuine role is to bound the *number and redundancy* of distinguishable records, and the **uniqueness of the actual record is supplied by $\lambda$**, not derived from $Q_R$. The conjecture is restated as the open question of whether finite capacity plus einselection can be strengthened into a genuine macroscopic superselection rule consistent with unitarity — flagged as the framework's central unresolved problem, on equal footing with the Born-typicality measure, and candidly noted as currently implausible in its strong "forbids superposition" form. The framework's single-outcome content rests on $\lambda$ regardless of its fate.
+- **Not** a proof that general relativity or this interpretation is true of our universe.
+- **Not** a claim that quantum gravity is solved — the gravity chain is *conditional* on named, shrinking inputs (the Clausius/area law where not yet discharged, the trace-to-geometry match, the value of G, the continuum Type III₁ limit, interacting matter).
+- **Not** a claim that the Lean definitions *faithfully model* the physics — that **adequacy** judgment is left to you, via the rendered claim card. The capsule certifies a *conditional mathematical entailment*, not a physical truth.
 
-## Mathematical status
-
-- **Rigorous scaffolding (borrowed)**: Type II crossed-product algebras (Witten 2022; Chandrasekaran-Penington-Witten 2022; Chandrasekaran-Longo-Penington-Witten 2022; Jensen-Sorce-Speranza 2023)
-- **Foundational axiom (our postulate)**: (FQ) literal physical-instantiation reading of Bekenstein-Bousso bound
-- **Qualitative consequences worked out**: finite physical resolution; decoherence + (FQ) → stable, finite, effectively Boolean record structure (the *stage*); single-record actuality supplied by $\lambda$
-- **Open problems explicitly identified**: explicit closed-form $\epsilon(R)$; whether finite capacity + einselection strengthen into a genuine macroscopic superselection rule consistent with unitarity (the revised Macroscopic Definiteness Conjecture — its strong "forbids superposition" form is currently implausible); Born-typicality measure over $\lambda$-histories analogous to Bohmian $|\psi|^2$-equivariance
-
-The framework is presented as a research program with rigorous scaffolding + clearly identified open theorems — not a completed mathematical theory.
-
-## Machine-checked finite core (Lean 4 / Mathlib)
-
-The whole development is formalized **axiom-free** — every audited theorem depends only on Lean's standard
-`propext, Classical.choice, Quot.sound`, with **project axiom budget 0** (the 33 continuum/operator-algebra
-interface axioms have all since been retired; CI-guarded by `scripts/axiom_budget_check.sh`, audit trail in
-`lean/mathlib/QIQTH/AxiomAudit.lean`). The headline machine-checked
-result is a **finite no-collapse Born representation theorem**:
-
-> A finite information-capacity bound forces a **unique actual pointer value** per run (no
-> collapse map); a **non-contextual** outcome assignment is **forced** by finite effect-Gleason
-> to be the Born weight $\mathrm{tr}(\rho P_a)$ of a density matrix; **product preparation**
-> gives independent trials; and the actual-value histories then carry the **Born product law**
-> and are **Chebyshev-typical**. Born statistics are *not assumed* — only non-contextuality and
-> product preparation are; the world-measure is shown to carry no observable freedom.
-
-This is a *conditional representation theorem*, not a derivation of Born from $Q_R$ alone (two
-GPT-5.5-pro verification passes; honest scope and the full claim→theorem map are in
-**`FINITE_BORN_REPRESENTATION.md`**). It is the realized finite portion of the program; the
-**continuum, Lorentz-covariant** construction (the breakthrough μ) remains open
-(`PRIZE_ROADMAP.md`, `PROGRAM_STATUS.md`).
-
-A further axiom-free **Born-reduction layer** (2026-06) sharpens *which* extra principle Born needs and
-brackets it from three directions. Among rules $p_k \propto f(w_k)$, refinement-additivity, no-signaling
-under remote refinement, and Born are equivalent; a finite **H-theorem** derives the residual
-measure-preservation from reversibility over a uniform bath plus mixing. The honest verdict is that Born
-reduces to **one** maximally-natural posit (noncontextuality / the Hilbert measure), made *unique* by
-**Gleason** and bracketed by three machine-checked results: nothing Born-free entails it (**meta no-go**, the
-$w^\alpha$ family obeys every Born-free premise); no amplitude-independent counting supplies it
-(**rank-count no-go** — decoherence can't encode the weights in record multiplicity); and only $\alpha=2$
-survives continuous unitary mixing (**rotation / Banach–Lamperti** core). Two further symmetry results
-(`SymmetrySquare`) place the same square in context: **Maxwell–Herschel** (rotation + independence ⇒ Gaussian
-with the $|z|^2$ exponent — the *bell curve's* square is Born's square), and a **boost no-go** (a Lorentz
-boost preserves the indefinite $t^2-x^2$ and so admits no positive probability norm — relativistic Born comes
-from the unitary Wigner representation, not from spacetime geometry). Written up in
-**`QIQT_Born_Reduction.md`** (built PDF) with a plain-English account at [qiqt.org/born](https://qiqt.org/born);
-modules `RefinementBorn`, `SelectorRefinement`, `SelectionDynamics`, `BornRoutes`, `Envariance`, `Relaxation`,
-`RankCountNoGo`, `BornChain`, `RotationBorn`, `SymmetrySquare`; route map in
-`paper_strategy/50_Born_Attack_Routes.md`.
+It is a research program with its open problems named (**[qiqt.org/open-problems](https://qiqt.org/open-problems)**), not a completed theory.
 
 ## Repository structure
 
-- `QIQT_Position_Paper.md`, `QIQT_Foundations_Paper.md`, `QIQT_Math.md` — the three papers
-- `PROGRAM_STATUS.md` — living honest status map (what's done, the prize, must-fix set)
-- `FINITE_RESULT.md` — **paper-ready master consolidation** of the whole finite, axiom-free formalization (claim→theorem map, honest ledger, suggested paper)
-- `FINITE_BORN_REPRESENTATION.md` — scope + claim→theorem map for the no-collapse Born representation
-- `PRIZE_EXECUTION_PLAN.md` — staged plan to the continuum prize (Stages 1–3; finite stages done)
-- `PRIZE_ROADMAP.md`, `AXIOM_CONTRACTS.md`, `CORE_THEOREM_REFS.md` — roadmap, axiom audit, references
-- `lean/mathlib/QIQTH/` — the Lean 4 / Mathlib formalization (axiom-free finite core; `AxiomAudit.lean`)
-- `QIQT-H.md`, `QIQT-H_zapis_rozmowy.md` — original notes (Polish and English)
-- `paper_strategy/` — strategy documents and GPT-5.5 review rounds
-- `*.pdf` — source materials (Palmer 2025 PNAS supplement; original ChatGPT conversation)
+- `verify/` — the verification capsule (`verify.sh`, `README.md`, the axiom audit, the claim card).
+- `lean/mathlib/QIQTH/` — the Lean 4 / Mathlib formalization; `AxiomAudit.lean` is the per-theorem `#print axioms` audit.
+- `QIQT_Foundations_Paper.md` — the foundations paper (canonical source; `build/` holds the generated `.tex` + PDF).
+- `ABSTRACT.md` — the canonical abstract and the alignment guardrails all public copy tracks.
+- `LEAN_RESULTS_INVENTORY.md` — the honest ground-truth inventory of what is proven and under exactly what conditions.
+- `website/` — the [qiqt.org](https://qiqt.org) source (Astro).
 
-## Author
+## Cite
 
-Paweł Kapłański, 2026
+Pawel Kaplanski, *One Wave Function, One World: Φ-Monism, a Holographic Entropy Bound, and a Machine-Verified Path Toward Emergent Gravity* (2026). Zenodo concept DOI **[10.5281/zenodo.20837905](https://doi.org/10.5281/zenodo.20837905)** (resolves to the latest release). Companion methods paper: [10.5281/zenodo.20837809](https://doi.org/10.5281/zenodo.20837809).
