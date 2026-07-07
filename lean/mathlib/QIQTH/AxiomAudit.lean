@@ -6298,6 +6298,10 @@ namespace QIQTH.AxiomAudit
 -- summed over the interior scale as L³ (volume) — so boundary-LOCALITY is genuinely load-bearing, not automatic.
 -- HONEST SCOPE: does NOT prove Srednicki's free-scalar vacuum area law, NOT that the QIQT-H vacuum realizes
 -- this boundary-local model (the remaining physical postulate, isolated by the guard), NOT Λ_s, NOT numerical G.
+-- SG6 boundary_entropy_eq_area_over_4G: the conditional Bekenstein–Hawking bridge S = A/(4G) for the induced
+-- G = 1/(N_eff Λ_s²), GIVEN the calibration gaussStateEntropy ν₀ = N_eff/4 (per-site capacity = species/4, an
+-- explicit HYPOTHESIS — the boundary-channel↔species matching, the remaining postulate; NOT derived, NOT numerical G).
+#print axioms QIQTH.BoundaryGaussianAreaLaw.boundary_entropy_eq_area_over_4G
 #print axioms QIQTH.Sakharov.sakharov_ratio
 #print axioms QIQTH.Sakharov.geometric_quarter
 #print axioms QIQTH.Sakharov.heatkernel_ratio_eq_geometric

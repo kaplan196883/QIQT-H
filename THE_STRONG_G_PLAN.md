@@ -37,7 +37,16 @@ build), and "nearest-neighbour coupling ⟹ only boundary modes entangle" is FAL
   `geomEntropy q = bosonModeEntropy ν`. Mathlib: `Real.log`, geometric `tsum` (`tsum_geometric_of_lt_one`), `Summable`,
   `ring_nf`/`field_simp`/`positivity`/`nlinarith`. Likely small gap: `∑' n, n·q^n = q/(1−q)²` (prove from finite geometric
   sums / `tsum` derivative if absent). Fallback: define `bosonModeEntropy` + postpone the `tsum` identity.
-- [ ] **SG2 — boundary plaquette combinatorics** (~0.5–2 days). `CubeBoundaryPlaquette L := Fin 6 × Fin L × Fin L`;
+- [x] **SG2/SG3/SG5 — DONE 2026-07-07** (`QIQTH/BoundaryGaussianAreaLaw.lean`, commit eec26a2; [AF] std-3, budget 0):
+  `card_cubeBoundary` (=6L²), `latticeArea`, `sum_odd_eq_sq`; **`boundary_entropy_area_law`** = the axiom-free `S∝A`
+  (`boundaryEntropy = (A/a₀²)·gaussStateEntropy ν₀`, reusing the Srednicki per-mode entropy); `boundary_entropy_factorizes`;
+  and the VOLUME-LAW GUARD **`bulk_entropy_volume_law`** (`= L³·gaussStateEntropy`, contrast 6L² ⟹ boundary-locality is
+  load-bearing). **The carried assumption `S∝A` is now a THEOREM for this explicit boundary-local model.**
+- [x] **SG6 — DONE 2026-07-07** (same file, commit pending; [AF] std-3): **`boundary_entropy_eq_area_over_4G`** — the
+  conditional Bekenstein–Hawking bridge `S = A/(4·G)` for the induced `G = 1/(N_eff Λ_s²)` (`QIQTH.InducedG.inducedG`),
+  GIVEN `a₀=1/Λ_s` and the calibration `gaussStateEntropy ν₀ = N_eff/4` (an explicit HYPOTHESIS `hcal` — the
+  boundary-channel↔species matching, the remaining postulate, NOT derived). Connects the area law to the actual G layer.
+- [ ] **SG2 — (superseded by the DONE entry above) boundary plaquette combinatorics** — `CubeBoundary L := Fin 6 × Fin L × Fin L`;
   `Fintype.card = 6·L²` (`Fintype.card_prod`, `Fintype.card_fin`); lattice area `A := (card boundary : ℝ)·a₀²`. Bonus
   angular-degeneracy identity `∑ l in range (L+1), (2l+1) = (L+1)²`. Mathlib: `Fintype.card_prod`, `Finset.sum_range`,
   `omega`/`ring_nf`.

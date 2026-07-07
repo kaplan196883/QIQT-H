@@ -24,10 +24,11 @@ which shows finite Gaussian modes give a VOLUME law `∝ L³` unless boundary-lo
 -/
 import Mathlib
 import QIQTH.GaussianStateEntropy
+import QIQTH.InducedNewtonConstant
 
 namespace QIQTH.BoundaryGaussianAreaLaw
 
-open QIQTH.GaussianStateEntropy
+open QIQTH.GaussianStateEntropy QIQTH.InducedG
 
 variable {n : ℕ}
 
@@ -108,5 +109,30 @@ theorem bulk_entropy_volume_law (L : ℕ) {m : ℕ} (ν₀ : Fin m → ℝ) :
   rw [bulkEntropy, Finset.sum_const, Finset.card_univ, nsmul_eq_mul, card_cubeBulk]
   push_cast
   ring
+
+/-! ## SG6 — the conditional bridge to the induced Newton constant `S = A/(4G)`
+
+The area law `S = (A/a₀²)·(per-site entropy)` (`boundary_entropy_area_law`) meets the induced-gravity layer
+`1/G = N_eff·Λ_s²` (`QIQTH.InducedG.inducedG`, `G = 1/(N_eff Λ_s²)`) at the Bekenstein–Hawking value `S = A/4G`,
+PROVIDED the per-site boundary-channel entropy equals `N_eff/4` (one shared coefficient controlling both the
+entanglement capacity and the induced species number).  This CALIBRATION is carried as an explicit hypothesis
+`hcal`, NOT derived — it is the boundary-channel ↔ induced-species matching, the sharply-isolated remaining
+physical postulate (`sakharov_ratio` already explains why, once one shared coefficient controls both sides,
+the `1/4` is forced). -/
+
+/-- **The conditional Bekenstein–Hawking bridge.**  With `a₀ = 1/Λ_s` (`granularityLength`) and the calibration
+    `gaussStateEntropy ν₀ = N_eff/4` (per-site boundary-channel capacity = induced species number / 4), the
+    boundary-local area law delivers `S = A/(4·G)` for the induced `G = 1/(N_eff Λ_s²)`.  Equivalently
+    `S/A = (1/4)·(1/G)`.  HONEST: does NOT derive the calibration `hcal` (the boundary-channel ↔ species
+    matching — the remaining postulate); does NOT give numerical `G` (`Λ_s`, the species `c_i` remain). -/
+theorem boundary_entropy_eq_area_over_4G (L : ℕ) {m : ℕ} (ν₀ : Fin m → ℝ) (N_eff Λs : ℝ)
+    (hΛ : Λs ≠ 0) (hN : N_eff ≠ 0) (hcal : gaussStateEntropy ν₀ = N_eff / 4) :
+    boundaryEntropy (CubeBoundary L) ν₀
+      = latticeArea L (granularityLength Λs) / (4 * inducedG N_eff Λs) := by
+  have ha₀ : granularityLength Λs ≠ 0 := by rw [granularityLength]; exact one_div_ne_zero hΛ
+  rw [boundary_entropy_area_law L ν₀ (granularityLength Λs) ha₀, hcal]
+  simp only [granularityLength, inducedG, latticeArea, card_cubeBoundary]
+  push_cast
+  field_simp
 
 end QIQTH.BoundaryGaussianAreaLaw
