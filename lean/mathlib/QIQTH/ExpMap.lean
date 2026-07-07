@@ -5002,4 +5002,25 @@ theorem expJet_residual_identity
     ContinuousLinearMap.comp_apply, map_add, map_sub]
   abel
 
+/-- **Small-context inhomogeneous Grönwall (`‖E 1‖ ≤ C·e^K`).**  For a curve `E : ℝ → F` into ANY
+    normed `ℝ`-space with `E 0 = 0`, right-derivative `E'` bounded by `‖E' t‖ ≤ K‖E t‖ + C` on
+    `[0,1)`, one has `‖E 1‖ ≤ C·exp K`.  Abstracted over `F` (bare `[NormedAddCommGroup F]
+    [NormedSpace ℝ F]`) with minimal hypotheses so the elaborator does NOT re-search the heavy
+    CLM-Banach instance stack inside the caller's large local context — the monolithic operator-valued
+    Grönwall otherwise blows the whnf/instance budget.  Applied with `F = (Point n × Point n) →L
+    (Point n × Point n)` and `E t = Φ_v t − (K₀ t + K₁ t)` to close the Jacobian residual. -/
+theorem expJet_residual_gronwall {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+    (E E' : ℝ → F) (C K : ℝ) (hC0 : 0 ≤ C) (hK0 : 0 ≤ K)
+    (hcont : ContinuousOn E (Set.Icc 0 1))
+    (hderiv : ∀ t ∈ Set.Ico (0 : ℝ) 1, HasDerivWithinAt E (E' t) (Set.Ici t) t)
+    (hE0 : E 0 = 0)
+    (hbound : ∀ t ∈ Set.Ico (0 : ℝ) 1, ‖E' t‖ ≤ K * ‖E t‖ + C) :
+    ‖E 1‖ ≤ C * Real.exp K := by
+  have hgron := norm_le_gronwallBound_of_norm_deriv_right_le
+    (f := E) (f' := E') (δ := 0) (K := K) (ε := C) (a := 0) (b := 1)
+    hcont hderiv (by rw [hE0]; simp) hbound
+  have h1 := hgron 1 (by norm_num [Set.mem_Icc])
+  rw [sub_zero, gronwallBound_zero_linear] at h1
+  exact le_trans h1 (mul_le_mul_of_nonneg_left (gronwallBound_zero_one_le_exp K hK0) hC0)
+
 end QIQTH.ExpMap
