@@ -40,6 +40,7 @@ import QIQTH.OperationalCapacity
 import QIQTH.MaxEntropyCapacity
 import QIQTH.ModularEnergyBound
 import QIQTH.InducedNewtonConstant
+import QIQTH.ScopeAudit
 import QIQTH.HolographicScreenCode
 import QIQTH.EmergentDynamics
 import QIQTH.GravitonQuantization

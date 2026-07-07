@@ -7755,6 +7755,12 @@ namespace QIQTH.AxiomAudit
 -- ⚠ Exact algebra [AF]; does NOT compute the numerical value of G (species-coefficient accounting = frontier).
 #print axioms QIQTH.InducedG.inducedG_delivers
 #print axioms QIQTH.InducedG.inducedG_ratio_is_pure_number
+-- SCOPE FIREWALL (ScopeAudit.lean): the induced-G package predicts NO numerical G without an external scale.
+-- inducedG_rescale_degeneracy: G depends only on N·Λ² (rescale N↦N/q², Λ↦qΛ leaves G invariant) — neither pinned.
+-- any_positive_G_realizable: ∀ N>0 G>0, ∃ Λ>0, inducedG N Λ = G — every positive G is realizable, so the mechanism
+-- predicts none; the value of G REQUIRES the external input Λ_s. A negative theorem guarding against overclaim. Std 3.
+#print axioms QIQTH.ScopeAudit.inducedG_rescale_degeneracy
+#print axioms QIQTH.ScopeAudit.any_positive_G_realizable
 #print axioms QIQTH.InducedG.planckLength_sq_eq_inducedG
 #print axioms QIQTH.InducedG.capacity_exponent_in_primitives
 #print axioms QIQTH.InducedG.inducedG_strictAntitone_in_N

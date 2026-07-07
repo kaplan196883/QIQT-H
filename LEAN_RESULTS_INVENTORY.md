@@ -757,6 +757,18 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   sharply isolated by the volume-law guard), **NOT** the calibration `N_eff/4` (the boundary-channel↔species matching),
   **NOT** `Λ_s`, **NOT** a curved heat kernel, **NOT** numerical `G` (`N`, `Λ_s`, `c_i`, κ remain). The strengthening is
   precise: previously "ASSUME `S∝A`", now "PROVE `S∝A` for an explicit boundary model; ASSUME the vacuum flows to it".
+  SG1 grounding (`GaussModeEntropyDerived.lean` `gaussModeEntropy_eq_thermal_shannon`, commit 65f0725): the per-mode entropy
+  IS the Shannon/von Neumann entropy of the thermal geometric occupation law (`−∑ p_k log p_k = gaussModeEntropy`), so the
+  area-law entropy is grounded in first principles, not an ad-hoc formula.
+- **SCOPE FIREWALL — the induced-G package predicts NO numerical `G` without an external scale** (`ScopeAudit.lean`,
+  **[AF]** std-3, budget 0, 2026-07-07): **`inducedG_rescale_degeneracy`** (`inducedG (N/q²)(qΛ) = inducedG N Λ` — `G`
+  depends only on the combination `N·Λ²`; neither `N` nor `Λ` separately pinned) + **`any_positive_G_realizable`**
+  (`∀ N>0 G>0, ∃ Λ>0, inducedG N Λ = G` — every positive `G` is realizable). A NEGATIVE theorem (mirrors the
+  `dyadic_covariance_insufficient` / `bulk_entropy_volume_law` guards) making the honesty a machine-checked fact: the value
+  of `G` REQUIRES the external input `Λ_s`; it is NOT an output of the mechanism alone. Guards the manuscript against "we
+  derive the value of Newton's constant" — proven is "given `N` and `Λ_s`, the model outputs `1/G = N·Λ_s²`". ⚠ The induced-G
+  Lean story is at its NATURAL CEILING (GPT-5.5-pro 2026-07-07): remaining frontiers F1 vacuum↔model, F2 `N_eff/4`
+  calibration, F3 `Λ_s`, F4 `κ=1/6` (=ContDiff³ exp_p tower), F5 Weyl/vector `c_i` (spin wall), F6 Tier-2 substrate⟹geometry+G.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
   `Λ_s`** (`a₀=1/Λ_s`) as the primitive *in place of* `ℓ_P`, and DERIVES `G` from it + the species count `N` via the

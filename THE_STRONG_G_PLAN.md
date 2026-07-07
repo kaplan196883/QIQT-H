@@ -1,6 +1,32 @@
 # THE STRONG-G PLAN — derive the entropy AREA LAW (the load-bearing assumption behind `1/G = N·Λ_s²`)
 
-**Status:** SCOPED (GPT-5.5-pro consult, high, 2026-07-07; survey-grounded). **Track:** QG / induced-G. **Commits LOCAL ONLY (no push).**
+**Status:** ✅ **AREA-LAW CAMPAIGN COMPLETE + LEAN CEILING REACHED** (GPT-5.5-pro verdict, high, 2026-07-07). SG1–SG6 all
+[AF] std-3 budget 0; scope firewall added. **Track:** QG / induced-G. **Commits LOCAL ONLY (no push).**
+
+## ⛳ CEILING VERDICT (GPT-5.5-pro, 2026-07-07 — blunt)
+"The positive/material Lean ceiling is reached for the induced-G story. No remaining bounded-and-new axiom-free Lean brick
+materially strengthens the derivation." Confirmed: (1) scalar `c_scalar=1` is a normalization choice (the `12π` is derived),
+NOT new content; (2) Weyl/vector relative coefficients need spin bundles / Dirac–Lichnerowicz / gauge-fixing / ghosts — a
+new curved-QFT/heat-kernel library project, NOT bounded; (3) Tier-2 "finite-capacity substrate ⟹ continuum geometry + G"
+is the central open QG problem, NOT bounded. The one worthwhile bounded brick was the **scope firewall** (DONE below). The
+remaining gaps are genuine physical postulates / research-grade walls — **the honest move is consolidation, not expansion.**
+
+### The cited frontiers (crystal-clear labels — do NOT let the manuscript blur these)
+- **F1** — the physical vacuum realizes the boundary-local Gaussian model (the area-law model↔reality gap).
+- **F2** — the `S = A/(4G)` / `N_eff/4` calibration (boundary-channel capacity ↔ induced species number).
+- **F3** — the value/origin of `Λ_s` (the one unavoidable dimensionful scale; `any_positive_G_realizable` proves the value of
+  G is not predicted without it).
+- **F4** — the scalar conformal/heat-kernel coefficient `κ=1/6` (carried; = the `ContDiff³ exp_p` smooth-dependence tower).
+- **F5** — the Weyl/vector relative species coefficients `c_i` (spin-geometry wall).
+- **F6** — the finite-capacity substrate producing continuum geometry and G (Tier-2 QG; the central open problem).
+- ⚠ **Symbol hygiene:** the regulator power `κ=2` (`regulator_forced_power`) and the conformal coefficient `κ=1/6` are
+  DIFFERENT `κ`'s — keep them distinct (`regulatorPower` vs `scalarA1Coeff`) in prose.
+
+## SG7 — the SCOPE FIREWALL — DONE 2026-07-07 (`QIQTH/ScopeAudit.lean`, [AF] std-3, budget 0)
+Makes the honesty a THEOREM (mirrors the vacuity/rigidity guards): **`inducedG_rescale_degeneracy`** (`G` depends only on
+`N·Λ²`; rescale `N↦N/q²`,`Λ↦qΛ` invariant — neither separately pinned) + **`any_positive_G_realizable`** (`∀ N>0 G>0,
+∃ Λ>0, inducedG N Λ = G` — every positive `G` is realizable, so the mechanism predicts NONE; the value of `G` REQUIRES the
+external `Λ_s`). Guards against the overclaim "we derive the value of Newton's constant."
 
 ## Binding verdict (GPT-5.5-pro)
 The QIQT-H G-derivation is already the exact axiom-free Sakharov/Dvali relation `1/G = N·Λ_s²` (G as OUTPUT;
