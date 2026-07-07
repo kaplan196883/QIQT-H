@@ -41,7 +41,12 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
 
 ## The plan (sequenced, axiom-free, ship-green; new file `QIQTH/HTkkPhysical.lean` unless noted)
 
-- [ ] **HT0 — HONESTY RELABEL + INTERFACE (tractable NOW; soundness fix).** In `LocalizedMode.lean`/`GaussianMode.lean`:
+- [x] **HT0 — HONESTY RELABEL + INTERFACE — DONE 2026-07-08** (commit ca896d7, [AF] std-3, budget 0): `calibrated_rank_one_hTkk`
+  alias + honest ⚠-scope docstring on `localized_mode_hTkk` (calibrated rank-one ansatz, coefficient `2π/ℏ` calibrated not
+  derived, mode shape free); the non-vacuous frontier predicate `IsPhysicalWedgeMode physWedge m φ x v ff := physWedge m φ x v ff`
+  (carries the smearing requirement as a passed-in predicate field, threading `m`; NOT `:= True`); inventory + `docs/G_SCOPE_AUDIT.md`
+  F7 note. Capstones (`QiqtGrGaussian`/`QiqtGrComplete`) still build — non-breaking. Verified std-3.
+- [ ] **HT0 (orig) — HONESTY RELABEL + INTERFACE (tractable NOW; soundness fix).** In `LocalizedMode.lean`/`GaussianMode.lean`:
   rename/alias the Gaussian result to **`calibrated_rank_one_hTkk`** with a docstring stating it is a calibrated rank-one
   ANSATZ realizing the `(∂φ)²` scaling + single-scalar calibration, NOT the physical KG localization map. Introduce a named
   predicate **`IsPhysicalWedgeMode m φ x v ff : Prop`** (the mode is the positive-frequency wedge smearing of `∂_v φ`, to be
