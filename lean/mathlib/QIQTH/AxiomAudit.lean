@@ -9978,4 +9978,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCGauge.gaugeTri_basis
 #print axioms QIQTH.RNCGauge.gaugeJet_of_diag
 
+-- RNCGauge.lean — abstract algebraic core of the RNC-Christoffel gauge (2026-07-07): assembles the
+-- formal exp-3-jet cubic coefficient (raw + symmetrized) of an ABSTRACT Christoffel array Γ and its
+-- first-derivative array dΓ1, and proves the symmetrized RNC gauge holds identically.  PURE algebra.
+-- sum3_sym_contract: ∑ f_{ljk} v^l v^j v^k is invariant under permuting the lower triple — the crux
+--   (this is what makes the symmetrized coefficient NON-vacuous, not pointwise-zero).
+-- expMap_rncDΓ_diag_zero: the radial diagonal of the RNC linear jet rncDΓ vanishes ∀ v i.
+-- rncGaugeJet: GaugeJet (rncDΓ Γ dΓ1) — the symmetrized gauge, identically, for ANY abstract Γ, dΓ1.
+-- HONEST: abstract algebraic core; does NOT yet ground rncDΓ in the exp map's actual a₃ jet, NOT the
+--   pullback metric, NOT numerical-G.  [AF] std-3.
+#print axioms QIQTH.RNCGauge.sum3_sym_contract
+#print axioms QIQTH.RNCGauge.dGammaDiag_a3sym_eq_raw
+#print axioms QIQTH.RNCGauge.expMap_rncDΓ_diag_zero
+#print axioms QIQTH.RNCGauge.rncGaugeJet
+
 end QIQTH.AxiomAudit
