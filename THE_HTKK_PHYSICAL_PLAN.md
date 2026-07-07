@@ -97,11 +97,19 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
   - Mathlib WALL to AVOID: the general noncompact 4D divergence theorem with null boundary (absent) — use explicit FTC/Fubini
     on the triangle instead. Full physical HT1 (with derived falloff) is NOT a days-to-week brick; the finite-cutoff identity
     WITH the explicit `N_+` term IS.
-- [ ] **HT2 — the KMS coefficient `β=2π` (fix `2π/ℏ` from the temperature, not a phase choice).** Show the one-particle
-  rapidity boost charge's coefficient is the KMS/Unruh `2π` — i.e. the unit-phase value in the Gaussian is FORCED by the
-  wedge KMS temperature `β=2π`, tying it to `stripKMSrvd_boostUnitary`/`freeField_oneParticle_hFlux` rather than a free
-  normalization. This converts Fable's "the unit phase carries 2π/ℏ, inserted" into "2π is the KMS temperature, derived."
-  CONSULT GPT-5.5-pro on whether this is reachable from the existing strip-KMS machinery.
+- [x] **HT2 — the `2π` IS ALREADY DERIVED (verification/attribution) — RESOLVED 2026-07-08.** Reading the actual Lean:
+  `boostUnitary` is DEFINED with argument `2π·t` (modular flow `Δ^{it}=boostUnitary(2πt)`, the `2π` explicit), and
+  `stripKMSrvd_boostUnitary` (axiom-free) PROVES it satisfies KMS at `β=2π` — the Bisognano–Wichmann/Unruh temperature is
+  machine-checked. In `hTkk : 2π/ℏ·T_kk = (−2π∫conj(f)f').im`, that `2π` appears on BOTH sides (from differentiating
+  `boostUnitary(2πt)` at 0 — the modular generator = `2π·`boost generator) and **CANCELS**, leaving the genuine content
+  `T_kk/ℏ = (−∫conj(f)f').im` (the mode's BARE boost charge). **So: the `2π` is DERIVED (KMS temperature, already proven);
+  the `1/ℏ` is a UNIT convention (ℏ free, like the value of G — a scale, not derivable); the ONLY genuinely-open content is
+  the mode NORMALIZATION/SHAPE (HT3).** HT2 is thus NOT a new-physics brick — it is an attribution correction (F7 refined):
+  `hTkk` is better than a flat "reduced not derived" — its `2π` coefficient IS the machine-checked BW temperature. ⚠ Consult
+  to GPT-5.5-pro on this attempted twice, API 520 down — my reading is grounded in the actual theorem statements; re-verify
+  the consult when the API is back (esp. Q3: whether HT3's physical mode NORMALIZATION is FORCED by the KG symplectic form
+  up to ℏ, or leaves a further free constant — the decisive question for whether hTkk is fully-derived-modulo-ℏ or
+  irreducibly-calibrated). No Lean brick needed for HT2 itself (the existing theorems already carry the `2π`).
 - [ ] **HT3 — build `f_phys` from φ (the wedge one-particle mode; the HARD brick, likely Mathlib-blocked).** Define the
   positive-frequency wedge smearing of `∂_v φ` at `(x,v)` from the KG field / two-point function, and prove
   `IsPhysicalWedgeMode m φ x v f_phys`. This is the continuum mode-expansion content the corpus calls "beyond current Mathlib

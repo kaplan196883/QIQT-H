@@ -77,11 +77,16 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
 - **F4** — the scalar conformal coefficient `κ=1/6` (= the `ContDiff³ exp_p` smooth-dependence tower, ~4–8 wk Mathlib gap).
 - **F5** — the Weyl/vector relative species coefficients `c_i` (spin bundles / Dirac–Lichnerowicz / gauge-fixing / ghosts).
 - **F6** — a finite-capacity substrate producing continuum geometry and `G` (Tier-2 QG; the central open problem).
-- **F7** — the physical localization map (`hTkk` is **reduced, not derived**). The free-field GR chain discharges
-  `hTkk` via a *calibrated rank-one ansatz* (`localized_mode_hTkk`/`gaussMode_calibration`): amplitude law
-  `ff∝∂_v φ` + `(∂φ)²` scaling genuine, but the coefficient `2π/ℏ` is calibrated (not derived from the KG
-  two-point/KMS `β=2π`) and the mode shape is free. The physical wedge-smearing one-particle mode (named by
-  `IsPhysicalWedgeMode`) is the cited frontier — see `THE_HTKK_PHYSICAL_PLAN.md`, HT1–HT4.
+- **F7** — the physical localization map (`hTkk`), REFINED status (2026-07-08 audit + HT campaign). Precise attribution:
+  (a) the `(∂φ)²` null-energy scaling is **derived** (`BL_kgStress_null`); (b) the classical boost-charge↔horizon-`T_kk`
+  decomposition `K₀=H_+ + N_+` (flux `N_+` explicit) is **derived** for massive 1+1 (`kg_boost_charge_decomposition_1p1`,
+  HT1a/b); (c) the **`2π` coefficient IS derived** — it is the machine-checked Bisognano–Wichmann/Unruh KMS temperature
+  (`boostUnitary(2π·t)` + `stripKMSrvd_boostUnitary`), and it cancels in `hTkk`; (d) the `1/ℏ` is a **unit convention** (ℏ a
+  free scale, like the value of G). The ONE genuinely-open piece is the mode NORMALIZATION/SHAPE: whether the *physical*
+  wedge one-particle mode built from φ (positive-frequency wedge smearing, `IsPhysicalWedgeMode`) has boost charge `= T_kk/ℏ`
+  — the KG symplectic-form / two-point content (HT3), the distributional/Mathlib-hard frontier. So `hTkk` is NOT flatly
+  "reduced not derived": its structure + `2π` are derived; only the mode-shape normalization remains a cited frontier — see
+  `THE_HTKK_PHYSICAL_PLAN.md`, HT3/HT4.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived
