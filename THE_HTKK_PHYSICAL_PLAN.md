@@ -70,8 +70,16 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     `IsMaxOn` bound, then `MeasureTheory.integral_integral_swap`); conservation collapses the A-column to `−` the
     B-column. NO divergence theorem, NO PDE. Wired into `QIQTH.lean` + `AxiomAudit` pin. HONEST: STRUCTURE only —
     no physics discharged; `2π/ℏ` untouched.
-  - [ ] **HT1b.** Instantiate with the KG stress null components `A=V T_VV−U T_UV`, `B=V T_UV−U T_UU` ⟹ `K₀(R)=H_+(R)+N_+(R)`
-    with `N_+` explicit (uses the existing KG stress-conservation identities; `T_kk=(∂_vφ)²` via `BL_kgStress_null`).
+  - [ ] **HT1b — SCOPED (GPT-5.5-pro 2026-07-08, sign-corrected).** Instantiate `nullTriangle_ftc` with the KG boost current
+    ⟹ `K₀(R)=H_+(R)+N_+(R)`. ⚠ Corrections: `η_{UV}=+½` (not −½); the correct null conservation eqs are
+    `∂_U T_VV+∂_V T_UV=0` and `∂_U T_UV+∂_V T_UU=0` (my first scoping interchanged the derivatives — WRONG). **First target =
+    massive 1+1** (μ=m²; massless=μ=0), no transverse flux: `T_UU=φ_U²`, `T_VV=φ_V²`, `T_UV=−(μ/4)φ²`, `T₀₀=T_UU+T_VV−2T_UV`.
+    Then `A=V·T_VV−U·T_UV`, `B=V·T_UV−U·T_UU`: `∂_U A+∂_V B = 2(Vφ_V−Uφ_U)(φ_UV−(μ/4)φ) = 0` by KG `φ_UV=(μ/4)φ`. Result
+    `K₀(R)=∫₀^R s(φ_U²+φ_V²+(μ/2)φ²) = H_+(R)+N_+(R)`, `H_+=∫₀^R V φ_V(0,V)²`, `N_+=∫₀^R (U φ_U(U,R)²+(Rμ/4)φ(U,R)²)`.
+    **KEY LEAN ROUTE (avoid null-metric machinery):** work in `(t,x)`; boost current `q=x·T_tt+t·T_tx`, `j=x·T_tx+t·T_xx`;
+    prove `∂_t q−∂_x j=0` from Cartesian `kg_conserv`; pull back scalars `A=½(q+j)`, `B=½(−q+j)` at `t=(V−U)/2,x=(U+V)/2` ⟹
+    `∂_U A+∂_V B=½(∂_x j−∂_t q)=0` (affine chain rule + product rule). 5 lemmas: null-components, null-conservation-from-KG,
+    boost_AB_div, boost_AB_edges, HT1b capstone. Full 3+1 pointwise is a DIFFERENT theorem (transverse flux) — deferred to HT1c.
   - [ ] **HT1c.** Transverse Fubini (add `y=(x²,x³)`, transverse boundary term carried) + the no-flux corollary
     (`Tendsto (outerFlux ·) atTop (𝓝 0)` + cutoff convergence ⟹ `K_boost = H_+`). Falloff carried as an explicit hypothesis.
   - Mathlib WALL to AVOID: the general noncompact 4D divergence theorem with null boundary (absent) — use explicit FTC/Fubini
