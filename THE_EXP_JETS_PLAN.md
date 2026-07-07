@@ -328,8 +328,21 @@ remain). Never claim numerical-G or a curved heat kernel.
     the trilinear CLM `gaugeTri` (`proj`/`smulRight`), with `gaugeTri_apply` (triple-contraction eval), `gaugeTri_diag`
     (`= dGammaDiag`), `gaugeTri_basis` (basis-coefficient readout); `gaugeJet_of_diag` reads Lemma 5 at the basis triple.
     Generic in `dΓ` — the radial-identity ⟹ symmetrized-gauge step, presuming the radial identity `dGammaDiag=0` as INPUT.
-  - [ ] **`rncDΓ`, `dΓDiag`, `GaugeJet` defs + `expMap_rncDΓ_diag_zero`** (the geodesic-cubic radial diagonal identity —
-    the real work, finite jets) + **`heat_a1_of_gaugeJet`** (consumer refactor). Then assemble κ=1/6 given the FORMAL gauge.
+  - [ ] **`rncDΓ` + `expMap_rncDΓ_diag_zero` — SCOPED (GPT-5.5-pro 2026-07-07, PURE ALGEBRA, no ODE).** The geodesic
+    content is ALREADY BANKED in the value-3-jet cubic `a₃` (`expMap_value_three_jet`), so the radial identity
+    `dGammaDiag(rncDΓ) v i = 0` is a pure `Finset` cancellation — NO geodesic-equation t¹-extraction. Exact spec:
+    with `Γ i j k := christoffel g gi i j k p`, `dΓ∂ l i j k := pd (christoffel g gi i j k) l p`,
+    `SA i l j k := ∑ a, Γ i a k * Γ a l j`, `SB i l j k := ∑ a, Γ i j a * Γ a l k`, the raw contraction-representative
+    `A3raw i l j k := −dΓ∂ l i j k + SA i l j k + SB i l j k` has `∑_{ljk} A3raw i l j k v_l v_j v_k = a₃(v)_i` EXACTLY.
+    ⚠ **VACUITY TRAP (must avoid):** `rncDΓraw := A3raw + dΓ∂ − SA − SB` is POINTWISE ZERO (A3raw was built to cancel),
+    so `GaugeJet(rncDΓraw)=GaugeJet(0)` is VACUOUS — NOT a real gauge discharge. **Use the SYMMETRIZED coefficient**
+    `A3sym i l j k := (1/6)(A3raw i l j k + A3raw i l k j + A3raw i j l k + A3raw i j k l + A3raw i k l j + A3raw i k j l)`
+    (the canonical Taylor coeff), `rncDΓ := A3sym + dΓ∂ − SA − SB` (NOT pointwise zero). Then `dGammaDiag(rncDΓ) v i = 0`
+    via: `dGammaDiag(A3sym)=a₃(v)_i` (symmetrization preserves the v³-contraction — a lemma), `dGammaDiag(dΓ∂)=∂Γ(v³)`,
+    `dGammaDiag(SA)=`term-A, `dGammaDiag(SB)=`term-B, and `a₃ = −∂Γ + termA + termB` (its def) ⟹ sum = 0. Delicate steps
+    = three `Finset.sum_comm`/reindex lemmas (∂: `j,k,l→l,j,k`; termA: `l,j,k,a→a,k,l,j`; termB: `l,j,k,a→j,a,l,k`),
+    each a proved helper (NOT blind simp). Then `gaugeJet_of_diag` ⟹ `GaugeJet(rncDΓ)` — the NON-vacuous formal gauge.
+    Then **`heat_a1_of_gaugeJet`** (consumer refactor) → assemble κ=1/6 given the FORMAL gauge.
   - [ ] **(deferred, honestly cited) `rnc_christoffel_linearJet`** — the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0`; needs
     the controlled C³/Hessian jet of `exp_p` (smooth-dependence-on-`v` residue). NOT attempted until the jet exists.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
