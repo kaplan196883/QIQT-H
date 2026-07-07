@@ -176,9 +176,9 @@ establish that our universe's gravity <em>is</em> emergent.
 
 <div class="note" style="border-left-color:var(--st-conditional)">
 
-<strong>Related independent work — QIQT-H as the machine-verified counterpart (2026).</strong> Dorau &amp; Much
+<strong>Prior published work — QIQT-H as its independent machine-verified formalization (2026).</strong> Dorau &amp; Much
 (<a href="https://arxiv.org/abs/2510.24491"><em>From Quantum Relative Entropy to the Semiclassical Einstein
-Equations</em>, Phys. Rev. Lett. 2026; arXiv:2510.24491</a>) independently derived the semiclassical Einstein
+Equations</em>, Phys. Rev. Lett. 136, 091602 (2026); arXiv:2510.24491, public October 2025</a>) derived the semiclassical Einstein
 equations from the <strong>Araki–Uhlmann relative entropy</strong> of coherent states on a local Rindler
 (bifurcate Killing) horizon — a QFT extension of Jacobson. Their derivation is, step for step, the free-field
 chain machine-checked here: modular flow $=$ boost (<code>Fock.OneParticleBW</code>); coherent-state relative
@@ -186,10 +186,10 @@ entropy $=$ horizon energy flux (<code>ModularEnergyBound</code>, the first law 
 B_{\rm boost}\rangle$); area variation via Raychaudhuri focusing (<code>DifferentialAreaLaw</code>); and the
 Einstein equations by stress-energy conservation (<code>qiqt_gr_from_wedge_kms</code> / the
 <a href="/claim-card">claim card</a>). Where they <em>assume</em> $S^{\rm rel}=\delta A/4$ to fix the $8\pi$,
-QIQT-H additionally <em>re-derives</em> the $1/4$ (<code>SakharovRatio</code>). Their peer-reviewed Letter is
-independent confirmation that this relative-entropy → modular-theory → Jacobson route is a live and correct
-direction; <strong>QIQT-H is its kernel-checked counterpart</strong>, with every physical input in an explicit
-ledger. Both meet the <em>same</em> honest frontier: their closing caveat — higher-order corrections on a curved
+QIQT-H additionally <em>re-derives</em> the $1/4$ (<code>SakharovRatio</code>). Their peer-reviewed Letter — public in October 2025,
+before QIQT-H's GR chain was formalized (mid-2026) — establishes this relative-entropy → modular-theory →
+Jacobson route in a peer-reviewed venue. QIQT-H claims <strong>no priority</strong>; it independently and
+subsequently machine-verifies the same chain, with every physical input in an explicit ledger. Both meet the <em>same</em> honest frontier: their closing caveat — higher-order corrections on a curved
 horizon, "<em>technically demanding, especially regarding the modular data</em>" — is precisely our cited
 curved-correction / Riemannian-heat-kernel (Seeley–DeWitt) frontier.
 
