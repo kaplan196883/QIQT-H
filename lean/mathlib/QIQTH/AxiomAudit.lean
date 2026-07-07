@@ -9961,4 +9961,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet_pi_comp_iota_norm_le
 #print axioms QIQTH.ExpMap.hasFDerivAt_expMap_jacobian_one_jet
 
+-- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
+-- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
+-- trilinear_diag_zero_fullSymm: (∀x, T x x x = 0) ⟹ six-fold symmetrization = 0 — the polarization turning the
+--   radial identity DΓ̃₀(v)(v,v)=0 into the symmetrized RNC gauge ∂_(l Γ̃_jk)(0)=0.  [AF] std-3.
+#print axioms QIQTH.Polarization.sixSym_eq_incl_excl
+#print axioms QIQTH.Polarization.trilinear_diag_zero_fullSymm
+
 end QIQTH.AxiomAudit

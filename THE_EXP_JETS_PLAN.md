@@ -301,6 +301,10 @@ remain). Never claim numerical-G or a curved heat kernel.
   `trilinear_diag_zero_fullSymm` (Lemma 5, pure polarization `P(x)=T x x x` inclusion–exclusion).  Lemma 5 is
   standalone algebra (start there); Lemma 2 is the real work.  This is the classical textbook RNC-gauge proof and is
   MUCH lighter in Lean than the `t`-dependent 2-jet.
+  - [x] **Lemma 5 `trilinear_diag_zero_fullSymm` — DONE 2026-07-07** (`QIQTH/Polarization.lean`, [AF] std-3, budget 0):
+    `(∀x, T x x x=0) ⟹ ∑_{σ∈S₃} T aσ bσ cσ = 0` via `sixSym_eq_incl_excl` (`P(a+b+c)−P(a+b)−P(a+c)−P(b+c)+P(a)+P(b)+P(c)`,
+    multilinearity + `abel`).  Standalone; wired into QIQTH.lean + AxiomAudit.  NEXT: Lemma 1 (radial ODE-rescale),
+    Lemma 4 (differentiate radial identity), Lemma 2 (pullback-Christoffel transform — the heavy one; consult GPT-5.5-pro).
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
   frame at `p`, or state relative to `g(p)`) + `∂g̃(0)=0` (from the 1-jet, EXP-JET3c STEP 3b).  `∂∂g̃(0)↔R` is NOT
   needed for the gauge if route (c) supplies `∂_{(l}Γ̃_{jk)}(0)=0` directly.

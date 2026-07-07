@@ -681,6 +681,7 @@ import QIQTH.RNCExpansion
 -- the RNC local diffeo; NOT yet exp_p's strict derivative, NOT the diffeo, NOT the RNC gauge, NOT
 -- numerical-G. Axiom-free (standard three).
 import QIQTH.ExpMap
+import QIQTH.Polarization
 import QIQTH.EinsteinFieldEquation
 import QIQTH.KGStressConservation
 import QIQTH.QiqtGrExplicitKG

@@ -701,6 +701,29 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   monolithic operator-valued Grönwall exceeds 32M heartbeats (CLM-Banach instance-search/`whnf` blowup in the large local
   context); FIX = a small-context helper `expJet_residual_gronwall`.  Does **NOT** give the jet, the pullback metric, or
   numerical-`G`.
+- **EXP-JET3c (STEP 3 — the JACOBIAN 1-JET of the geodesic exp-map)** (`ExpMap.lean` `expJet_residual_gronwall`,
+  `expJet_fderiv_tube_bddAbove_unif`, `expJetOneJetModel`, `expJet_proj_model_one`, `hasFDerivAt_expMap_jacobian_one_jet`
+  + 5 small-context CLM helpers, all **[AF]** std-3, budget 0, DONE 2026-07-07): **`hasFDerivAt_expMap_jacobian_one_jet`** —
+  `(fun v => fderiv exp_p v − (id + expJetOneJetModel v)) =O[𝓝 0] ‖v‖²`, i.e. `fderiv exp_p v = id − Γ_p^sym(v,·) + O(‖v‖²)`
+  (`expJetOneJetModel v = ½·matVecCLM c₁ = −Γ_p^sym(v,·)`). Route: the small-context, `F`-abstract inhomogeneous Grönwall
+  `expJet_residual_gronwall` (`‖E 1‖≤C·e^K`, dodges the 32M-heartbeat CLM whnf blowup); a UNIFORM-in-`v` `‖DF(Y_v t)‖≤Kstar`
+  (`expJet_fderiv_tube_bddAbove_unif`, confinement into a fixed compact ball ⟹ `e^{Kstar}` uniform ⟹ genuine `IsBigO` over
+  `𝓝 0`); the operator residual `E_v=Φ_v−(K₀+K₁)` with `E'=DF∘E+N`, `‖N‖≤Cconst‖v‖²` (order-2 tube bound + `A₁,A₂,K₁`
+  opNorms) ⟹ `‖E_v 1‖≤Cconst‖v‖²e^{Kstar}`; the exact projected model identity `expJet_proj_model_one`
+  (`π∘(K₀(1)+K₁(1))∘ι = id + expJetOneJetModel v`); residual `fderiv exp_p v − (id+model) = π∘(E_v 1)∘ι`. Delivers **TWO of
+  the three RNC gauge conditions** in the pullback metric: `g̃(0)=δ`, `∂g̃(0)=0`. ⚠ **HONEST CAPTION (binding)**: the
+  Jacobian 1-jet — does **NOT** give the Jacobian 2-jet (`½T` term: the anchored `A₂` is `t`-dependent-wrong at order 2,
+  GPT-5.5-pro-confirmed; and differentiating the value 3-jet is NOT Lean-sound), **NOT** the pullback metric's `∂∂g̃`,
+  **NOT** the gauge discharge, **NOT** a curved heat kernel, **NOT** numerical-`G` (`N`, `Λ_s`, `E/ξ` remain).
+- **Route-(c) Lemma 5 — cubic diagonal-vanishing ⟹ full symmetrization** (`Polarization.lean` `sixSym_eq_incl_excl`,
+  `trilinear_diag_zero_fullSymm`, **[AF]** std-3, budget 0, 2026-07-07): for a trilinear continuous `T : V →L V →L V →L W`,
+  `(∀x, T x x x = 0) ⟹` the six-fold argument symmetrization vanishes, via the inclusion–exclusion identity
+  `∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c)−P(a+b)−P(a+c)−P(b+c)+P(a)+P(b)+P(c)` (`P x:=T x x x`), pure `ℝ`-multilinearity + `abel`.
+  The polarization step of the GPT-5.5-pro **radial-gauge route** that turns the radial identity `DΓ̃₀(v)(v,v)=0` (from
+  differentiating `Γ̃(s·v)(v,v)=0` at `s=0` — radial geodesics are straight in normal coords) into the symmetrized RNC
+  gauge `∂_(l Γ̃^i_{jk)}(0)=0` — **bypassing the Jacobian 2-jet entirely**. ⚠ **HONEST**: standalone algebra; the gauge
+  discharge still needs Lemmas 1–4 (radial straightness + the pullback-Christoffel transform); **NOT** the gauge, **NOT**
+  numerical-`G`.
 - `GaussianStateEntropy` **[AF]** per-mode Srednicki entropy; the **lattice area-law SCALING `S∝A` is [frontier]**.
 - **The granularity-scale reframing — `G` delivered as an output** (`InducedNewtonConstant.lean`, namespace
   `QIQTH.InducedG`, all **[AF]** std-3; author-endorsed 2026-07-01). Posits a fundamental **record-granularity scale
