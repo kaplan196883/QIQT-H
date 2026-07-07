@@ -111,6 +111,26 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
     </div>
   </div></section>
 
+  <section class="section" id="verify"><div class="wrap">
+    <h2>Verify it yourself — don't trust me, run the proofs</h2>
+    <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">One command re-checks the whole chain on your machine and prints an honest claim card.</p>
+    <p class="sub">Foundations claims are cheap; this one ships a <strong>verification capsule</strong>. On your own
+      machine, with minimal trust in me, it wipes the compiled proofs and <strong>rebuilds them from source</strong>
+      so the Lean kernel re-checks every step, replays an <strong>independent kernel checker</strong>, and audits
+      that the <em>complete</em> transitive dependency set is only Lean's three standard axioms — <strong>no
+      <code>sorry</code>, no hidden axiom, no <code>native_decide</code></strong>. All mechanical trust collapses to
+      three things: the Lean kernel, your reading of the rendered statement, and the explicitly-listed physical
+      inputs.</p>
+    <pre style="background:#0d1117;color:#e6edf3;border-radius:10px;padding:18px 20px;margin:16px 0 0;overflow-x:auto;font-size:.98rem;line-height:1.65;border:1px solid var(--line)"><code style="background:none;color:inherit;padding:0;font-family:inherit"><span style="color:#7ee787">git clone</span> https://github.com/kaplan196883/QIQT-H
+<span style="color:#7ee787">cd</span> QIQT-H
+<span style="color:#7ee787">bash</span> verify/verify.sh   <span style="color:#8b949e"># → verify/out/claim_card.md</span></code></pre>
+    <p class="sub" style="margin-top:14px">It emits a <strong>claim card</strong>: the exact formal statement, the
+      complete trusted base, and the full hypothesis ledger — every physical assumption named, so what is
+      <em>proven</em> and what is still <em>assumed</em> cannot be conflated. <em>(Needs the Lean toolchain; the
+      clean-room build takes a while — that is the point.)</em>
+      <a href="https://github.com/kaplan196883/QIQT-H/blob/main/verify/README.md">How the capsule works →</a></p>
+  </div></section>
+
   <section class="section"><div class="wrap">
     <h2>The thesis: two results on two independent axes — one world, and emergent gravity</h2>
     <p class="sub" style="font-style:italic;color:var(--muted);margin-top:-2px">Two separate claims — one actual world, and emergent gravity — that share only the word “finite.”</p>
