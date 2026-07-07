@@ -323,9 +323,11 @@ remain). Never claim numerical-G or a curved heat kernel.
     `rncDΓ = pd(christoffel g̃ g̃i) 0` (`rnc_christoffel_linearJet`) — proving the formal coefficients ARE the literal
     pullback-Christoffel jet — is the finite-jet pullback-transform and STILL needs the controlled C³/Hessian jet of `exp_p`
     (the smooth-dependence residue). Deferred, honestly cited.
-  - [ ] **Lemma 5→gauge: `gaugeJet_of_diag`** — `(∀ v i, dΓDiag dΓ v i = 0) ⟹ GaugeJet dΓ` via Polarization Lemma 5
-    (build the per-`i` trilinear CLM `T_i u v w := ∑ dΓ l i j k u_l v_j w_k`, apply `trilinear_diag_zero_fullSymm` at basis
-    vectors). Generic in `dΓ` — standalone, landable NOW. New file `QIQTH/RNCGauge.lean`.
+  - [x] **Lemma 5→gauge: `gaugeJet_of_diag` — DONE 2026-07-07** (`QIQTH/RNCGauge.lean`, commit 1b09321, [AF] std-3,
+    budget 0): `(∀ v i, dGammaDiag dΓ v i = 0) ⟹ GaugeJet dΓ` via Polarization Lemma 5. Packages the per-`i` cubic form as
+    the trilinear CLM `gaugeTri` (`proj`/`smulRight`), with `gaugeTri_apply` (triple-contraction eval), `gaugeTri_diag`
+    (`= dGammaDiag`), `gaugeTri_basis` (basis-coefficient readout); `gaugeJet_of_diag` reads Lemma 5 at the basis triple.
+    Generic in `dΓ` — the radial-identity ⟹ symmetrized-gauge step, presuming the radial identity `dGammaDiag=0` as INPUT.
   - [ ] **`rncDΓ`, `dΓDiag`, `GaugeJet` defs + `expMap_rncDΓ_diag_zero`** (the geodesic-cubic radial diagonal identity —
     the real work, finite jets) + **`heat_a1_of_gaugeJet`** (consumer refactor). Then assemble κ=1/6 given the FORMAL gauge.
   - [ ] **(deferred, honestly cited) `rnc_christoffel_linearJet`** — the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0`; needs
