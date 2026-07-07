@@ -355,6 +355,19 @@ remain). Never claim numerical-G or a curved heat kernel.
     `expMap_value_three_jet`. The three reindex matchings (∂: j,k,l→l,j,k; SA↔termA: l,j,k,a→a,k,l,j; SB↔termB:
     l,j,k,a→j,a,l,k). Needs geometry imports (new file `QIQTH/RNCGaugeExp.lean` importing `QIQTH.ExpMap`). This makes
     `rncDΓ` the genuine exp-3-jet-based formal Christoffel jet (so `rncGaugeJet` is about the ACTUAL exp normal coords).
+  - **⚠ HONEST FINDING (2026-07-07) — route-c reduces but does NOT eliminate the smooth-dependence gap.** The algebraic
+    side of route-c is DONE (`rncGaugeJet`: the RNC-Christoffel linearization satisfies the gauge) and the gauge⟹κ=1/6
+    side is DONE (`heat_a1_of_gauge`). But CONNECTING them for the actual exp normal coordinates is still blocked on
+    `ContDiff exp_p`: (i) `heat_a1_of_gauge`'s `hgauge` is about the LITERAL `pd(christoffel g gi)(0)`, so discharging it
+    at `g:=g̃` needs `rncDΓ = pd(christoffel g̃ g̃i)(0)` (the bridge — the finite-jet pullback-Christoffel transform,
+    needing the Hessian-exp jet); AND (ii) merely INSTANTIATING `heat_a1_of_gauge` at `g̃` needs `hg : ContDiff ℝ ⊤ g̃`,
+    hence `ContDiff exp_p` (since `g̃ y = g(exp_p y)(D exp_p y ·)(D exp_p y ·)`), which is exactly the smooth-dependence-
+    of-`exp_p`-on-`v` theorem Mathlib LACKS (only pointwise `HasFDerivAt exp_p` near 0 is proved). So the HONEST endgame
+    of route-c: the gauge is discharged AS A PROVEN ALGEBRAIC IDENTITY grounded in the exp value-3-jet (`rncGaugeJet` +
+    fact B), but the metric-instantiation (κ=1/6 for the ACTUAL pullback metric) reduces to the single cited frontier
+    `ContDiff exp_p` (smooth dependence on the initial velocity). NEVER claim κ=1/6 is unconditional for the pullback
+    metric until `ContDiff exp_p` lands. Candidate future attack: does the operator fundamental solution `Φ_v`
+    (`expJetFund`) depend smoothly on `v` (a second-order equilibrium-Grönwall), giving `ContDiff exp_p`? — open.
   - [ ] **(deferred, honestly cited) `rnc_christoffel_linearJet`** — the bridge `rncDΓ = pd(christoffel g̃ g̃i) 0`; needs
     the controlled C³/Hessian jet of `exp_p` (smooth-dependence-on-`v` residue). NOT attempted until the jet exists.
 - [ ] **EXP-JET4 — the pullback metric `g̃` Taylor coefficients at 0** from EXP-JET1–3: `g̃(0)=δ` (needs an orthonormal
