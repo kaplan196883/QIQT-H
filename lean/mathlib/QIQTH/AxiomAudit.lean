@@ -6234,6 +6234,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WedgeKMSToGR.qiqt_gr_freefield_thermo
 -- T3-3 continuum: per-generator hTkk from one universal mode calibration (ff = field-gradient · g₀):
 #print axioms QIQTH.WedgeKMSToGR.localized_mode_hTkk
+-- HT0 honesty relabel: same statement re-exported under its truthful (calibrated rank-one ansatz) name:
+#print axioms QIQTH.WedgeKMSToGR.calibrated_rank_one_hTkk
+-- HT0 frontier interface: the open predicate the physical wedge-smearing localization map (HT3/HT4) must satisfy:
+#print axioms QIQTH.WedgeKMSToGR.IsPhysicalWedgeMode
 -- T3-3-C2: a concrete Gaussian wave packet satisfies the calibration (Im ∫ conj g₀ g₀' = −1/ℏ):
 #print axioms QIQTH.WedgeKMSToGR.gaussMode_calibration
 -- GR scaffolding C: the WHOLE width family hits the same 2π/ℏ calibration (not Gaussian-specific):

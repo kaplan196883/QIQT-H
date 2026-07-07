@@ -310,6 +310,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Raychaudhuri) is **[AF]**; the BW/modular flux is **[AF] for the free field**; the **area law and the
   localization map are cited inputs [frontier]**. `GRFromMicro` header: "P4-MICRO ⟹ GR is FALSE as a standalone
   implication" — the thermal (Unruh/BW) input "a microstate count can never supply."
+  - **`hTkk` is REDUCED, not DERIVED (HT0 honesty relabel, 2026-07-08).** The Gaussian discharge
+    (`LocalizedMode.localized_mode_hTkk` = `calibrated_rank_one_hTkk` fed by `GaussianMode.gaussMode_calibration`
+    ⟹ `qiqt_gr_freefield_gaussian`/`_complete`) is a **calibrated rank-one ansatz**: the mode is taken to be
+    `ff = D·g₀` (field-gradient amplitude `D=∂_v φ` × a universal profile `g₀`) and `g₀`'s normalization + unit
+    phase are *tuned* so the boost charge hits `2π/ℏ`. **Genuine: the amplitude law `ff∝∂_v φ` and the `(∂φ)²`
+    scaling; calibrated (not derived): the coefficient `2π/ℏ` and the mode shape/width (every width in
+    `GaussianModeFamily` calibrates).** The physical wedge-smearing localization map — positive-frequency wedge
+    smearing of `∂_v φ` built from φ with `2π/ℏ` forced by Bisognano–Wichmann + the KG stress-tensor Noether
+    charge — is the **cited frontier**, named explicitly by the open predicate `IsPhysicalWedgeMode`
+    (`LocalizedMode.lean`); see `THE_HTKK_PHYSICAL_PLAN.md`, HT1–HT4.
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +

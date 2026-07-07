@@ -34,7 +34,17 @@ open QIQTH.Curvature MeasureTheory
     the transparent `hTkk` identity holds for the generator `(x,v)` as soon as `g₀` satisfies the single
     calibration `(−2π ∫ conj(g₀)·g₀').im = 2π/ℏ`.  The boost charge scales as `D²` (quadratic in the mode), so
     the classical `(∂φ)²` null energy is reproduced.  No regularity of `g₀` is needed for the identity itself —
-    only the value of its boost-charge integral. -/
+    only the value of its boost-charge integral.
+
+    ⚠ **HONEST SCOPE (HT0).** This is a **CALIBRATED RANK-ONE ANSATZ, not the physical localization map.** It
+    proves the `(∂φ)²` amplitude scaling and collapses the per-generator localization family to ONE scalar
+    calibration (`hcal`); it does **NOT** establish that `ff = D·g₀` is the field's actual positive-frequency
+    wedge one-particle mode, and the coefficient `2π/ℏ` is **CALIBRATED** (via `g₀`'s normalization + the unit
+    phase `−iθ`), **NOT derived** from the KG two-point function / KMS temperature `β=2π`.  The mode shape/width
+    is free (`GaussianModeFamily` — every width calibrates).  So `hTkk` here is **REDUCED, not DERIVED**.  The
+    physical localization map — the positive-frequency wedge smearing of `∂_v φ` built from φ, with the `2π/ℏ`
+    coefficient forced by Bisognano–Wichmann + the KG stress-tensor Noether charge — is the cited frontier
+    (`IsPhysicalWedgeMode` below; see `THE_HTKK_PHYSICAL_PLAN.md`, HT1–HT4). -/
 theorem localized_mode_hTkk
     (φ : Point 4 → ℝ) (x : Point 4) (v : Fin 4 → ℝ) (hbar : ℝ)
     (g₀ g₀' : ℝ → ℂ)
@@ -63,5 +73,40 @@ theorem localized_mode_hTkk
     ring
   simp only [hint, him, hcal]
   ring
+
+/-- **Honest re-export of `localized_mode_hTkk` under its truthful name.**  The Gaussian `hTkk` discharge is a
+    *calibrated rank-one ansatz*: the mode is `ff = D·g₀` (field-gradient amplitude × a universal profile whose
+    normalization is *tuned* to hit `2π/ℏ`).  This alias makes the status explicit at the call site — it is the
+    same statement as `localized_mode_hTkk`, kept under both names so dependents (`QiqtGrGaussian`,
+    `QiqtGrComplete`) do not break.  See the `localized_mode_hTkk` docstring and `IsPhysicalWedgeMode` for what
+    this does NOT establish (the physical wedge-smearing localization map is the cited frontier). -/
+theorem calibrated_rank_one_hTkk
+    (φ : Point 4 → ℝ) (x : Point 4) (v : Fin 4 → ℝ) (hbar : ℝ)
+    (g₀ g₀' : ℝ → ℂ)
+    (hcal : (-(2 * Real.pi * ∫ θ, (starRingEnd ℂ) (g₀ θ) * g₀' θ ∂(volume : Measure ℝ))).im
+              = 2 * Real.pi / hbar) :
+    (2 * Real.pi / hbar * (∑ b, v b * pd φ b x) ^ 2 : ℝ)
+      = (-(2 * Real.pi * ∫ θ, (starRingEnd ℂ)
+            (((∑ b, v b * pd φ b x : ℝ) : ℂ) * g₀ θ)
+            * (((∑ b, v b * pd φ b x : ℝ) : ℂ) * g₀' θ) ∂(volume : Measure ℝ))).im :=
+  localized_mode_hTkk φ x v hbar g₀ g₀' hcal
+
+/-- **The FRONTIER INTERFACE — what the physical discharge of `hTkk` must establish (HT3/HT4).**
+
+    `IsPhysicalWedgeMode physWedge m φ x v ff` asserts that `ff : ℝ → ℂ` is the field `φ`'s **actual
+    positive-frequency wedge one-particle mode** localized at the null generator `(x,v)` for the KG field of mass
+    `m` — i.e. the positive-frequency wedge smearing of `∂_v φ` near `(x,v)`.
+
+    Because the smearing / one-particle-projection map is **not yet formalizable** in Mathlib (the continuum
+    mode-expansion the corpus flags as "beyond current Mathlib reach"), we do NOT fabricate its content here.
+    Instead the honest requirement is carried as an **open predicate field** `physWedge` passed in: the future
+    physical construction (HT3) will supply the genuine `physWedge` (built from φ, the KG two-point function and
+    the Bisognano–Wichmann boost charge) and prove this Prop for the mode it constructs.  This is deliberately
+    **NOT** a vacuous `True` placeholder — it names exactly the open obligation without pretending it is
+    discharged. -/
+def IsPhysicalWedgeMode
+    (physWedge : ℝ → (Point 4 → ℝ) → Point 4 → (Fin 4 → ℝ) → (ℝ → ℂ) → Prop)
+    (m : ℝ) (φ : Point 4 → ℝ) (x : Point 4) (v : Fin 4 → ℝ) (ff : ℝ → ℂ) : Prop :=
+  physWedge m φ x v ff
 
 end QIQTH.WedgeKMSToGR
