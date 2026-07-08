@@ -216,10 +216,18 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       (integral↔L² bridge): the classical KG symplectic form `σ_K` equals `2ℏ·Im` of the one-particle Hilbert inner product
       of the `√(2ℏω)`-normalized positive-frequency coefficients. L² memberships from brick-5 (`ω=kgOmega m`). This ties the
       whole `Lp` chain to the physics σ on the actual one-particle Hilbert space — the coefficient physics of `hTkk`.
-    - [ ] **Lp brick-8+ (what genuinely remains):** wire the Fourier `L²→L²` step (Mathlib `Lp.fourierTransformₗᵢ`, a genuine
-      `≃ₗᵢ`, already present), package the full `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock one-particle` as a bundled map, and boost
-      covariance. Assembly of existing pieces + covariance — no known hard obstruction (√ω wall dissolved, domain identified,
-      normalization now a Hilbert-space fact, coefficient physics tied to σ).
+    - **TRACK-A CHECKPOINT (2026-07-09, GPT-5.5-triaged).** The COEFFICIENT physics is COMPLETE at the one-particle
+      Hilbert-space level (bricks 1–7, capstone `σ_K = 2ℏ·Im⟪a_L2,b_L2⟫`). The remaining pieces toward a fully-packaged
+      Lorentz-covariant `j_ℏ` are NOT small bricks — they are a **new serious phase** (honest triage):
+      - a bundled `jHbar` def (`MemLp.toLp` wrapper) + capstone restatement = **cosmetic** (naming only, no new math) — skipped.
+      - coefficient-level "rapidity translation is unitary" = **thin wrapper** (Lebesgue translation-invariance + `Lp.compMeasurePreserving`) — skipped.
+      - the MEANINGFUL boost covariance `σ_K(boost u, boost v) = σ_K u v` needs the geometric-boost ↔ rapidity-translation
+        bridge (KG solution reconstruction from Cauchy data + dispersion + transformed slice) — **substantial**, not 1–2 files.
+      - the position-field → on-shell-coefficient Fourier tie has a genuine **measure-zero/distributional obstruction** (the
+        mass shell is Lebesgue-null; needs surface measure / distributional FT / coarea) — **new infrastructure**, research-grade.
+      HONEST CEILING: `hTkk`'s coefficient normalization is now a machine-checked Hilbert-space fact; the full covariant
+      `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock` + geometric Lorentz covariance is the named next phase (spatial Fourier/Sobolev
+      reconstruction + geometric boost), NOT a continuation brick. Do NOT grind wrappers. HOLD for user direction.
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.

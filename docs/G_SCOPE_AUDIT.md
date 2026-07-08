@@ -112,6 +112,16 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   objection missed) is pinned. Remaining toward the full `j_ℏ`: the Fourier `L²→L²` isometry (Mathlib `Lp.fourierTransformₗᵢ`,
   present), transporting `2ℏ·Im=σ` onto the `L²` inner product, the completed one-particle map, and boost covariance —
   assembly of existing pieces + covariance, no known hard obstruction. Still must not be faked.
+  **Coefficient physics COMPLETE at the Hilbert level (2026-07-09, bricks 5–7 + capstone).** `kg_posFreq_memLp` (domain),
+  `two_hbar_im_L2_inner_eq_sigmaK` (normalization at Hilbert level), and the capstone
+  `two_hbar_im_L2_inner_posFreq_eq_sigmaK` (`σ_K = 2ℏ·Im⟪a_L2,b_L2⟫` for the KG positive-freq coefficients) are all
+  axiom-free. **TRACK-A CHECKPOINT (GPT-5.5-triaged):** the remaining pieces toward a fully-packaged covariant
+  `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock` are a NEW serious phase, not continuation bricks — the bundled `jHbar` def is cosmetic;
+  coefficient-level rapidity-translation is a thin wrapper; the MEANINGFUL boost covariance needs the geometric-boost ↔
+  rapidity-translation bridge; and the position-field → on-shell-coefficient Fourier tie has a genuine measure-zero /
+  distributional obstruction (the mass shell is Lebesgue-null). So `hTkk`'s coefficient normalization is a machine-checked
+  Hilbert-space fact; the full covariant one-particle map is the named next phase (spatial Fourier/Sobolev reconstruction +
+  geometric Lorentz covariance), NOT to be faked or wrapper-ground.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived
