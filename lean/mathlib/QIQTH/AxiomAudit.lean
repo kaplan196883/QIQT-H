@@ -10202,4 +10202,13 @@ namespace QIQTH.AxiomAudit
 -- instance of `distinguishableRecords_le_min_of_factorization₂` (the 3-fold toLin' factorization). [AF] std-3.
 #print axioms QIQTH.RecordMincutMPS.mps3_records_le_min_via_waist
 
+-- RecordMincutEntropy.lean — the min-cut record bound in ENTROPY form (2026-07-09): the RANK bound
+-- (§2.2) and the von Neumann ENTROPY area law are the SAME min-cut bound.  `QIQTH.vonNeumannEntropy_le_log_card`
+-- (Gibbs/Jensen S≤log dim) specialized to the cut channel `CutAssignments D C`
+-- (`Fintype.card = cutBondCapacity`) gives `vonNeumannEntropy_cut_le_log_capacity : S_vN(ρ) ≤ log(∏_{e∈C} D e)`
+-- for any density on the cut channel — the entropy form of `distinguishableRecords_le_cut`, with the "area"
+-- the min-cut bond capacity.  Bridges two existing axiom-free results; no new physics; min-cut = geometric
+-- AREA stays Tier-3/OPEN.  [AF] std-3.
+#print axioms QIQTH.RecordMincutEntropy.vonNeumannEntropy_cut_le_log_capacity
+
 end QIQTH.AxiomAudit
