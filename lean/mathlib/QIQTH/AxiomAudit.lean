@@ -10176,6 +10176,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneParticleMeasure.rapidityPullL2_isometry
 #print axioms QIQTH.OneParticleMeasure.rapidityPullL2_norm
 
+-- WeightedL2.lean — Lp j_ℏ brick-4, the WEIGHTED-L² ISOMETRY past the √ω wall (2026-07-09, user
+-- authorized the Sobolev investment): the KG positive-frequency multiplier √ω is UNBOUNDED on plain
+-- L²(dk), but multiplication by a weight `w ≥ 0` is a norm-preserving map `L²(vol.withDensity w²) →
+-- L²(vol)` — so √ω is an ISOMETRY, not unbounded, on the correctly-weighted (KG-Sobolev) domain.
+-- `enorm_rpow_smul_weight` (pointwise `‖w·f‖ₑ² = ofReal(w²)·‖f‖ₑ²`), `lintegral_enorm_rpow_smul_weight`
+-- (∫⁻‖w·f‖ₑ² dvol = ∫⁻‖f‖ₑ² d(vol.withDensity w²)), `eLpNorm_smul_weight_eq_withDensity` (the L²-seminorm
+-- isometry).  Removes the "√ω unbounded" objection by moving to the weighted domain.  HONEST: the
+-- weight-isometry brick — NOT the full j_ℏ (Fourier L²→L² + real-Cauchy-data domain + boost covariance
+-- remain); measurability of w,f carried as HYPOTHESES; NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.WeightedL2.lintegral_enorm_rpow_smul_weight
+#print axioms QIQTH.WeightedL2.eLpNorm_smul_weight_eq_withDensity
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
