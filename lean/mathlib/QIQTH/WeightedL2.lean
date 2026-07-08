@@ -80,4 +80,24 @@ theorem eLpNorm_smul_weight_eq_withDensity
   rw [show ((2 : ℝ≥0∞).toReal) = (2 : ℝ) by simp]
   exact lintegral_enorm_rpow_smul_weight w hw hwm f hfm
 
+/-- **The `MemLp` transfer — the usable form of the weight isometry.**  A function `f` lies in the
+`w²`-weighted `L²` iff its `w`-scaling `w·f` lies in the flat `L²`:
+`MemLp f 2 (vol.withDensity w²) ↔ MemLp (w·f) 2 vol`.  This is what lets one actually move a
+one-particle wavefunction between the weighted KG-Sobolev space and the flat rapidity `L²` — the
+membership-level content of the `√ω` isometry (`eLpNorm_smul_weight_eq_withDensity`).  Both `eLpNorm`s
+are literally equal, so the finiteness transfers both ways; measurability supplies the
+`AEStronglyMeasurable` halves. -/
+theorem memLp_two_weight_smul_iff
+    (w : ℝ → ℝ) (hw : ∀ k, 0 ≤ w k) (hwm : Measurable w) (f : ℝ → ℂ) (hfm : Measurable f) :
+    MemLp f 2 (volume.withDensity (fun k => ENNReal.ofReal (w k ^ 2)))
+      ↔ MemLp (fun k => w k • f k) 2 volume := by
+  have hnorm := eLpNorm_smul_weight_eq_withDensity w hw hwm f hfm
+  constructor
+  · intro hf
+    refine ⟨(hwm.smul hfm).aestronglyMeasurable, ?_⟩
+    rw [hnorm]; exact hf.eLpNorm_lt_top
+  · intro hf
+    refine ⟨hfm.aestronglyMeasurable, ?_⟩
+    rw [← hnorm]; exact hf.eLpNorm_lt_top
+
 end QIQTH.WeightedL2

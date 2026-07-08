@@ -10187,6 +10187,10 @@ namespace QIQTH.AxiomAudit
 -- remain); measurability of w,f carried as HYPOTHESES; NOT numerical-G/QG.  [AF] std-3.
 #print axioms QIQTH.WeightedL2.lintegral_enorm_rpow_smul_weight
 #print axioms QIQTH.WeightedL2.eLpNorm_smul_weight_eq_withDensity
+-- brick-4b, the MemLp transfer (2026-07-09): the usable form of the weight isometry —
+-- `MemLp f 2 (vol.withDensity w²) ↔ MemLp (w·f) 2 vol`, letting a wavefunction move between the
+-- weighted KG-Sobolev space and the flat L² (finiteness transfers via the eLpNorm equality). [AF] std-3.
+#print axioms QIQTH.WeightedL2.memLp_two_weight_smul_iff
 
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
