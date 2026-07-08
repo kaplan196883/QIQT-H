@@ -10219,6 +10219,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneParticleInner.L2_inner_toLp_eq_integral
 #print axioms QIQTH.OneParticleInner.two_hbar_im_L2_inner_eq_sigmaK
 
+-- PosFreqInner.lean — Lp j_ℏ brick-7 CAPSTONE (2026-07-09): the KG symplectic form IS 2ℏ·Im of the
+-- one-particle HILBERT inner product, for the actual positive-frequency coefficients.  Composes brick-2
+-- (bare-integral 2ℏ·Im(∫ conj(a)·b)=σ_K for a=posFreqCoeff m ℏ Ψ π, b=posFreqCoeff m ℏ Χ Ρ) with brick-6
+-- (integral ↔ L² inner-product bridge): two_hbar_im_L2_inner_posFreq_eq_sigmaK :
+-- 2ℏ·Im⟪a_L2, b_L2⟫_ℂ = sigmaK Ψ π Χ Ρ.  The L² memberships ha,hb come from brick-5 (kg_posFreq_memLp,
+-- ω=kgOmega m) in the physical case.  Ties the whole Lp chain to the physics σ on the one-particle
+-- Hilbert space.  HONEST: NOT the full j_ℏ (Fourier L²→L² step = Mathlib Lp.fourierTransformₗᵢ; bundled
+-- map + boost covariance remain); conj-symmetry + integrability + L² memberships carried as HYPOTHESES;
+-- NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.PosFreqInner.two_hbar_im_L2_inner_posFreq_eq_sigmaK
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
