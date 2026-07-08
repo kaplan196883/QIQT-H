@@ -106,6 +106,12 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   correctly-weighted KG-Sobolev space. What REMAINS toward `j_ℏ`: assembling the positive-frequency map on the weighted
   domain, the Fourier `L²→L²` step (`fourierTransformCLE`, present), the real-Cauchy-data domain, and boost covariance —
   substantial assembly/bookkeeping, but no longer a hard "unbounded" obstruction. The `Lp` wall must still not be faked.
+  **Domain identified (2026-07-09, brick-5 `PosFreqDomain.lean`):** the positive-frequency map is now proved WELL-DEFINED
+  `H^{1/2}⊕H^{-1/2} → L²` axiom-free (`kg_posFreq_memLp`) — `a=(ω Ψ+iπ)/√(2ℏω)` lands in flat `L²` exactly when `(Ψ,π)` lie
+  in the ω- and ω^{-1}-weighted `L²`, via the weight isometry. The operator's correct DOMAIN (the piece the naive-`L²`
+  objection missed) is pinned. Remaining toward the full `j_ℏ`: the Fourier `L²→L²` isometry (Mathlib `Lp.fourierTransformₗᵢ`,
+  present), transporting `2ℏ·Im=σ` onto the `L²` inner product, the completed one-particle map, and boost covariance —
+  assembly of existing pieces + covariance, no known hard obstruction. Still must not be faked.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived

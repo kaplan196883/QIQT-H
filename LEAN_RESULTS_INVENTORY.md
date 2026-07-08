@@ -419,6 +419,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     — the structural resolution of the wall. **HONEST: the weight-isometry brick — NOT the full `j_ℏ` (the Fourier `L²→L²`
     step (`fourierTransformCLE`, present), the real-Cauchy-data domain, boost covariance remain — assembly + Fourier-Sobolev
     bookkeeping, no longer a hard "unbounded" obstruction). Measurability of `w,f` carried as hypotheses; NOT numerical-G/QG.**
+  - **Lp j_ℏ brick-4b — the MemLp transfer** (`WeightedL2.lean` **`memLp_two_weight_smul_iff`**, **[AF]** std-3, 2026-07-09):
+    the usable membership form — `MemLp f 2 (vol.withDensity w²) ↔ MemLp (w·f) 2 vol` — lets a wavefunction move between the
+    weighted KG-Sobolev space and flat `L²` (the full cross-measure `LinearIsometry` bundling is a quotient-level rabbit hole;
+    this is the sufficient form).
+  - **Lp j_ℏ brick-5 — the POSITIVE-FREQUENCY MAP well-defined on `H^{1/2}⊕H^{-1/2} → L²`** (`PosFreqDomain.lean`
+    **`kg_posFreq_memLp`** + `kg_posFreq_memLp_split`, `kg_coeff_eq_split`, **[AF]** std-3, 2026-07-09; the PAYOFF of the
+    weighted-`L²` detour): the KG positive-frequency coefficient `a(Ψ,π)=(ω·Ψ+i·π)/√(2ℏω)` has the unbounded `√ω` multiplier,
+    but `a = (2ℏ)^{-1/2}(√ω·Ψ)+i(2ℏ)^{-1/2}(ω^{-1/2}·π)`, so by the weight isometry (twice, `w₁=√ω`, `w₂=ω^{-1/2}`) it lands
+    in flat `L²` EXACTLY WHEN the Cauchy data lie in the ω- and ω^{-1}-weighted `L²` (= `H^{1/2}`, `H^{-1/2}`). Identifies the
+    correct operator DOMAIN the naive-`L²` "unbounded `√ω`" objection was missing. **HONEST: shows the map is well-defined
+    into `L²` — NOT the full `j_ℏ` (the Fourier `L²→L²` step exists in Mathlib as `Lp.fourierTransformₗᵢ`; boost covariance +
+    the completed one-particle map remain — assembly, no known hard obstruction). `ω>0` (m>0), measurability of `Ψ,π`, and the
+    weighted memberships carried as hypotheses; NOT numerical-G/QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the
