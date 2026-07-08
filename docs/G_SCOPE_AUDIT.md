@@ -99,8 +99,13 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   `rapidity_measurePreserving`); brick-3 the one-particle `L²` ISOMETRY into the flat rapidity `L²` (`rapidityPullL2_isometry`)
   — all axiom-free.  **The FIRST genuine WALL is now precisely located** (GPT-5.5 2026-07-09): the real-Cauchy-data →
   positive-frequency map `(φ,π)↦√ω·φ̂ + i·ω^{-1/2}·π̂` is UNBOUNDED on naive `L²×L²`; its correct domain is `H^{1/2}⊕H^{-1/2}`,
-  and formalizing that weighted-Sobolev / unbounded-Fourier-multiplier infrastructure is the multi-month gap. The `Lp` wall
-  must not be faked or auto-ground past this point.
+  and formalizing that weighted-Sobolev / unbounded-Fourier-multiplier infrastructure is the multi-month gap.
+  **Wall PARTIALLY breached (2026-07-09, user-authorized Sobolev investment — brick-4 `WeightedL2.lean`):** the "√ω is
+  unbounded" objection is now DISSOLVED axiom-free — multiplication by a weight `w ≥ 0` is a norm-preserving isometry
+  `L²(vol.withDensity w²) → L²(vol)` (`eLpNorm_smul_weight_eq_withDensity`), so `√ω` is bounded once the domain is the
+  correctly-weighted KG-Sobolev space. What REMAINS toward `j_ℏ`: assembling the positive-frequency map on the weighted
+  domain, the Fourier `L²→L²` step (`fourierTransformCLE`, present), the real-Cauchy-data domain, and boost covariance —
+  substantial assembly/bookkeeping, but no longer a hard "unbounded" obstruction. The `Lp` wall must still not be faked.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived

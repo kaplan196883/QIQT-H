@@ -410,6 +410,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     past here (GPT-5.5-located 2026-07-09) is the real-Cauchy-data → positive-frequency `√ω`-weighted map, UNBOUNDED on
     naive `L²×L²`, correct domain `H^{1/2}⊕H^{-1/2}` — the multi-month weighted-Sobolev / unbounded-Fourier-multiplier gap.
     NOT the full `j_ℏ`, NOT numerical-G/QG.**
+  - **Lp j_ℏ brick-4 — the WEIGHTED-`L²` ISOMETRY (√ω "unbounded" objection DISSOLVED)** (`WeightedL2.lean`
+    **`eLpNorm_smul_weight_eq_withDensity`**, `lintegral_enorm_rpow_smul_weight`, `enorm_rpow_smul_weight`, **[AF]** std-3,
+    2026-07-09; user authorized the Sobolev investment): the KG positive-frequency multiplier `√ω` is unbounded on plain
+    `L²(dk)`, but multiplication by a weight `w ≥ 0` is a NORM-PRESERVING map `L²(vol.withDensity w²) → L²(vol)`
+    (`eLpNorm (w·f) 2 vol = eLpNorm f 2 (vol.withDensity w²)`, via `lintegral_withDensity_eq_lintegral_mul` + pointwise
+    `enorm_smul`/`Real.enorm_of_nonneg`). So `√ω` is an ISOMETRY, not unbounded, on the correctly-weighted KG-Sobolev domain
+    — the structural resolution of the wall. **HONEST: the weight-isometry brick — NOT the full `j_ℏ` (the Fourier `L²→L²`
+    step (`fourierTransformCLE`, present), the real-Cauchy-data domain, boost covariance remain — assembly + Fourier-Sobolev
+    bookkeeping, no longer a hard "unbounded" obstruction). Measurability of `w,f` carried as hypotheses; NOT numerical-G/QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the
