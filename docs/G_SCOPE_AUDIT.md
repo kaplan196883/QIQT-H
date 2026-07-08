@@ -77,16 +77,23 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
 - **F4** — the scalar conformal coefficient `κ=1/6` (= the `ContDiff³ exp_p` smooth-dependence tower, ~4–8 wk Mathlib gap).
 - **F5** — the Weyl/vector relative species coefficients `c_i` (spin bundles / Dirac–Lichnerowicz / gauge-fixing / ghosts).
 - **F6** — a finite-capacity substrate producing continuum geometry and `G` (Tier-2 QG; the central open problem).
-- **F7** — the physical localization map (`hTkk`), REFINED status (2026-07-08 audit + HT campaign). Precise attribution:
-  (a) the `(∂φ)²` null-energy scaling is **derived** (`BL_kgStress_null`); (b) the classical boost-charge↔horizon-`T_kk`
-  decomposition `K₀=H_+ + N_+` (flux `N_+` explicit) is **derived** for massive 1+1 (`kg_boost_charge_decomposition_1p1`,
-  HT1a/b); (c) the **`2π` coefficient IS derived** — it is the machine-checked Bisognano–Wichmann/Unruh KMS temperature
-  (`boostUnitary(2π·t)` + `stripKMSrvd_boostUnitary`), and it cancels in `hTkk`; (d) the `1/ℏ` is a **unit convention** (ℏ a
-  free scale, like the value of G). The ONE genuinely-open piece is the mode NORMALIZATION/SHAPE: whether the *physical*
-  wedge one-particle mode built from φ (positive-frequency wedge smearing, `IsPhysicalWedgeMode`) has boost charge `= T_kk/ℏ`
-  — the KG symplectic-form / two-point content (HT3), the distributional/Mathlib-hard frontier. So `hTkk` is NOT flatly
-  "reduced not derived": its structure + `2π` are derived; only the mode-shape normalization remains a cited frontier — see
-  `THE_HTKK_PHYSICAL_PLAN.md`, HT3/HT4.
+- **F7** — the physical localization map (`hTkk`), REFINED status (2026-07-08 audit + HT campaign, bricks 1–3 landed).
+  Precise attribution: (a) the `(∂φ)²` null-energy scaling is **derived** (`BL_kgStress_null`); (b) the classical
+  boost-charge↔horizon-`T_kk` decomposition `K₀=H_+ + N_+` (flux `N_+` explicit) is **derived** for massive 1+1
+  (`kg_boost_charge_decomposition_1p1`, HT1a/b); (c) the **`2π` coefficient IS derived** — it is the machine-checked
+  Bisognano–Wichmann/Unruh KMS temperature (`boostUnitary(2π·t)` + `stripKMSrvd_boostUnitary`), and it cancels in `hTkk`;
+  (d) the coefficient's **canonical-NORMALIZATION physics is now derived axiom-free** — the KG symplectic form
+  (`kgSympl`, HT3 brick-1), the Fourier-side identity `σ = 2ℏ·Im⟨a,a⟩` (`two_hbar_im_inner_posFreq_eq_sigmaK`, brick-2), and
+  the **Parseval bridge** `sigmaK∘𝓕 = kgSympl` for real Schwartz data (`parseval_bridge_real`, brick-3, via Plancherel
+  `SchwartzMap.integral_inner_fourier_fourier` — honest ∫, no `Lp` classes, no `2π` in Mathlib's unitary convention); so the
+  one-particle normalization `2ℏ·Im⟨a,a⟩` equals the classical position-space symplectic form, **coefficient fixed, no free
+  constant**; (e) the `1/ℏ` is a **unit convention** (ℏ a free scale, like the value of G). **The single genuinely-open piece
+  is now precisely the `Lp` PACKAGING** of the positive-frequency map `j_ℏ` into the existing rapidity convention
+  (`niceWedgeGenSet`, `L²(dθ)`): the weighted KG Sobolev phase space with `√ω` unbounded on `L²`, the Fourier `L²→L²` unitary
+  matching, and boost covariance — a **named multi-month Mathlib-infrastructure frontier, NOT new physics**. So `hTkk` is NOT
+  flatly "reduced not derived": its structure + `2π` + coefficient-normalization are all DERIVED; only the `Lp`/rapidity
+  packaging of `j_ℏ` remains a cited frontier — see `THE_HTKK_PHYSICAL_PLAN.md`, HT3 brick-4 / HT4. **This is the honest HT3
+  campaign ceiling; the `Lp` wall must not be faked or auto-ground.**
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived
