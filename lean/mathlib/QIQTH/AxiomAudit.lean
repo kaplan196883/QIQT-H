@@ -10192,6 +10192,21 @@ namespace QIQTH.AxiomAudit
 -- weighted KG-Sobolev space and the flat L² (finiteness transfers via the eLpNorm equality). [AF] std-3.
 #print axioms QIQTH.WeightedL2.memLp_two_weight_smul_iff
 
+-- PosFreqDomain.lean — Lp j_ℏ brick-5, the POSITIVE-FREQUENCY MAP is well-defined on the KG-Sobolev
+-- domain H^{1/2}⊕H^{-1/2} → L² (2026-07-09): the PAYOFF of the weighted-L² detour.  The coefficient
+-- a(Ψ,π) = (ω·Ψ + i·π)/√(2ℏω) has the unbounded √ω multiplier; rewriting
+-- a = (2ℏ)^{-1/2}(√ω·Ψ) + i(2ℏ)^{-1/2}(ω^{-1/2}·π), each term is weight·field, so by the weight
+-- isometry (memLp_two_weight_smul_iff, w₁=√ω, w₂=ω^{-1/2}) it lands in flat L² EXACTLY WHEN the data
+-- lie in the ω- and ω^{-1}-weighted L² (= H^{1/2}, H^{-1/2}).  kg_posFreq_memLp_split (split form via
+-- MemLp.const_smul+MemLp.add), kg_coeff_eq_split (pointwise factorization), kg_posFreq_memLp (quotient
+-- form: a ∈ L² on H^{1/2}⊕H^{-1/2}).  The correct operator domain the naive-L² "unbounded √ω" missed.
+-- HONEST: NOT the full j_ℏ (Fourier L²→L² step = Mathlib Lp.fourierTransformₗᵢ; boost covariance +
+-- completed one-particle map remain); ω>0 (m>0), measurability of Ψ,π, weighted memberships carried as
+-- HYPOTHESES; NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.PosFreqDomain.kg_posFreq_memLp_split
+#print axioms QIQTH.PosFreqDomain.kg_coeff_eq_split
+#print axioms QIQTH.PosFreqDomain.kg_posFreq_memLp
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
