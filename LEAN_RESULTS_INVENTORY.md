@@ -370,6 +370,19 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     **HONEST: Fourier-side coefficient physics ONLY — NOT the Lp/rapidity `j_ℏ` map (multi-month wall, brick-4), NOT the
     Parseval bridge to position-space `kgSympl` (brick-3), NOT the boost-charge identity, NOT `2π/ℏ`, NOT numerical-G/QG.
     Conj-symmetry + integrability of the three product terms carried as HYPOTHESES, never axioms.**
+  - **HT3 brick-3 — the PARSEVAL BRIDGE** (`KGSymplectic.lean` **`sigmaK_fourier_eq_position`** +
+    **`parseval_bridge_real`**, **[AF]** std-3, 2026-07-08): the last BOUNDED HT3 increment, tying the Fourier-side pairing
+    `sigmaK` (brick-2) to the position-space KG symplectic form `kgSympl` (brick-1). For Schwartz data `ψ₀ π₀ χ₀ ρ₀ : 𝓢(ℝ,ℂ)`,
+    PROVED `sigmaK (𝓕ψ₀)(𝓕π₀)(𝓕χ₀)(𝓕ρ₀) = (∫ (conj ψ₀·ρ₀ − conj χ₀·π₀)).re`; and for REAL fields (`∀ x,(ψ₀ x).im=0`… carried),
+    `sigmaK (𝓕ψ₀)(𝓕π₀)(𝓕χ₀)(𝓕ρ₀) = kgSympl ψ₀.re π₀.re χ₀.re ρ₀.re`. The bridge is **Plancherel for Schwartz functions**
+    (`SchwartzMap.integral_inner_fourier_fourier`, an honest `∫`, NO `Lp` equivalence classes; Mathlib's unitary `e^{−2πixξ}`
+    convention ⟹ **NO `2π` factor**), specialized to the scalar inner product `⟪a,b⟫_ℂ = conj a·b` (`RCLike.inner_apply'`).
+    Integrability DISCHARGED (bounded × integrable via `Integrable.bdd_mul` + the Schwartz `(0,0)`-seminorm bound
+    `SchwartzMap.norm_le_seminorm`), never assumed. **brick-2 ∘ brick-3 now gives** `2ℏ·Im⟨aK(𝓕·)⟩ = kgSympl` — the
+    canonical-normalization identity grounded in the position-space symplectic form. **HONEST: this ties brick-1 ↔ brick-2
+    only. It is NOT the `Lp`/rapidity `j_ℏ` map (the single named multi-month Mathlib frontier: weighted KG Sobolev, `√ω`
+    unbounded on L²), NOT the boost-charge identity, NOT `2π/ℏ`, NOT numerical-G/QG. Schwartz regularity lives in the data
+    TYPE; reality is a carried HYPOTHESIS, never an axiom.** This is the HT3 campaign CEILING — see `docs/G_SCOPE_AUDIT.md` F7.
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +

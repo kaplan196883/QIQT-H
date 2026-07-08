@@ -163,10 +163,18 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     NO Lp/rapidity `j_ℏ` (brick-4 wall), NO Parseval bridge to position-space `kgSympl` (brick-3), NO boost-charge identity,
     NO `2π/ℏ`, NO numerical-G/QG; conj-symmetry + integrability of the three product terms carried as HYPOTHESES, never axioms.
     [Note: the conjugate-momentum data is named `π` in Lean because capital `Π` is a reserved pi-type token; math is identical.]
-  - [ ] **HT3 brick-3 — the Parseval bridge** `σ_K(𝓕ψ,𝓕π,𝓕χ,𝓕ρ) = kgSympl ψ₀ π₀ χ₀ ρ₀` (position-space σ from brick-1),
-    for real Schwartz data. Tractable but needs Mathlib Plancherel/Fourier wrapper lemmas. Then brick-2∘brick-3 gives
-    `2ℏ·Im⟨aK(𝓕·)⟩ = kgSympl` — the canonical-normalization identity grounded in the position-space symplectic form.
-  - [ ] **HT3 brick-4+ (the multi-month wall — CHECKPOINT here honestly):** the `Lp` rapidity unitary matching
+  - [x] **HT3 brick-3 — the Parseval bridge — DONE 2026-07-08** ([AF] std-3, budget 0, no sorry).
+    `KGSymplectic.lean`: `sigmaK_fourier_eq_position (ψ₀ π₀ χ₀ ρ₀ : 𝓢(ℝ,ℂ)) : sigmaK (𝓕ψ₀)(𝓕π₀)(𝓕χ₀)(𝓕ρ₀) =
+    (∫ (conj ψ₀·ρ₀ − conj χ₀·π₀)).re`, and the real-field capstone `parseval_bridge_real (…) (hψ … : ∀ x,(ψ₀ x).im=0)…
+    : sigmaK (𝓕ψ₀)(𝓕π₀)(𝓕χ₀)(𝓕ρ₀) = kgSympl ψ₀.re π₀.re χ₀.re ρ₀.re`. The bridge = **Plancherel for Schwartz
+    functions** `SchwartzMap.integral_inner_fourier_fourier` (honest ∫, NO `Lp` classes; Mathlib's unitary `e^{−2πixξ}`
+    convention ⟹ **NO 2π factor**), specialized to the scalar inner `⟪a,b⟫_ℂ = conj a·b` (`RCLike.inner_apply'`).
+    Integrability DISCHARGED (bounded × integrable: `Integrable.bdd_mul` + the Schwartz `(0,0)`-seminorm bound
+    `SchwartzMap.norm_le_seminorm`), never assumed. NOTE the ACTUAL Mathlib lemmas differ from the first consult's names
+    (`integral_fourierIntegral_mul_eq`/`Real.fourierIntegral_conj` do NOT exist in v4.30.0); `integral_inner_fourier_fourier`
+    is the right hook. **brick-2 ∘ brick-3 now gives** `2ℏ·Im⟨aK(𝓕·)⟩ = kgSympl` — the canonical-normalization identity
+    grounded in the position-space symplectic form. Schwartz regularity in the TYPE; reality carried as HYPOTHESIS, never axiom.
+  - [ ] **HT3 brick-4+ (the multi-month wall — CHECKPOINT REACHED here, honestly):** the `Lp` rapidity unitary matching
     `niceWedgeGenSet`, the bounded `j_ℏ` from the weighted phase space, boost covariance, and the boost-charge identity
     `q_B(j_ℏψ)=(1/ℏ)·B_cl`. If blocked, the HONEST CEILING: hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
     the coefficient's CANONICAL-NORMALIZATION physics (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are all DERIVED axiom-free; the `Lp`

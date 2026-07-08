@@ -52,6 +52,7 @@ import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Distribution.SchwartzSpace.Fourier
 
 namespace QIQTH.KGSymplectic
 
@@ -397,5 +398,118 @@ theorem two_hbar_im_inner_posFreq_eq_sigmaK
     _ = (∫ k, (starRingEnd ℂ (Ψ k) * Ρ k - starRingEnd ℂ (Χ k) * π k)
           ∂(volume : Measure ℝ)).re := hbridge
     _ = sigmaK Ψ π Χ Ρ := by simp only [sigmaK]
+
+/-!
+## HT3 brick-3 — the PARSEVAL BRIDGE (Fourier-side `σ_K` ↔ position-space `kgSympl`)
+
+This is **HT3 brick-3** of `THE_HTKK_PHYSICAL_PLAN.md`: the last *bounded* increment of the HT3
+program.  It connects the two symplectic pairings of the campaign — the Fourier-side `sigmaK`
+(brick-2) and the position-space `kgSympl` (brick-1) — via **Plancherel's theorem for Schwartz
+functions** (`SchwartzMap.integral_inner_fourier_fourier`, an honest `∫`, no `L^p` equivalence
+classes, and — with Mathlib's unitary `e^{-2πixξ}` convention — **no `2π` factor**).
+
+For Schwartz Cauchy data `ψ₀ π₀ χ₀ ρ₀ : 𝓢(ℝ, ℂ)`, writing `𝓕` for the Fourier transform, the
+cross-Parseval identity `∫ conj(𝓕F)·𝓕G = ∫ conj(F)·G` gives
+
+    sigmaK (𝓕ψ₀) (𝓕π₀) (𝓕χ₀) (𝓕ρ₀)  =  (∫ (conj ψ₀·ρ₀ − conj χ₀·π₀)).re     (`sigmaK_fourier_eq_position`)
+
+and, for **real** Cauchy data (the physical case, `Im = 0` carried as hypotheses),
+
+    sigmaK (𝓕ψ₀) (𝓕π₀) (𝓕χ₀) (𝓕ρ₀)  =  kgSympl ψ₀.re π₀.re χ₀.re ρ₀.re      (`parseval_bridge_real`).
+
+**Scope firewall (HONEST).**  This bridge ties the Fourier-side coefficient theorem (brick-2) to the
+position-space symplectic form (brick-1).  It does **NOT** build the `Lp`/rapidity `j_ℏ` map (the
+multi-month Mathlib wall — weighted KG Sobolev, `√ω` unbounded), **NOT** the boost-charge identity,
+**NOT** the `2π/ℏ` modular coefficient, **NOT** numerical-`G`/QG.  Schwartz regularity is carried in
+the *type* of the data; reality (`Im = 0`) is a carried HYPOTHESIS, never an axiom.  Integrability is
+discharged (bounded × integrable), not assumed.
+-/
+
+open scoped FourierTransform
+
+/-- Integrability of the sesquilinear integrand `conj(F)·G` for Schwartz `F, G : 𝓢(ℝ, ℂ)`.
+Route: `G` Schwartz ⟹ integrable; `conj ∘ F` is continuous and uniformly bounded by the Schwartz
+`(0,0)`-seminorm; `Integrable.bdd_mul`.  No Schwartz algebra/star instance is used. -/
+private lemma integrable_conj_fourier_mul (F G : SchwartzMap ℝ ℂ) :
+    Integrable (fun k : ℝ => starRingEnd ℂ (F k) * G k) (volume : Measure ℝ) := by
+  refine (G.integrable).bdd_mul (c := (SchwartzMap.seminorm ℂ 0 0) F) ?_ ?_
+  · exact (Complex.continuous_conj.comp F.continuous).aestronglyMeasurable
+  · refine Filter.Eventually.of_forall (fun k => ?_)
+    rw [starRingEnd_apply, norm_star]
+    exact SchwartzMap.norm_le_seminorm ℂ F k
+
+/-- **Cross-Parseval** for Schwartz data: `∫ conj(𝓕F)·𝓕G = ∫ conj(F)·G`.
+Direct specialization of `SchwartzMap.integral_inner_fourier_fourier` (Plancherel) to the scalar
+inner product `⟪a,b⟫_ℂ = conj a · b`.  Mathlib's unitary convention gives **no `2π` factor**. -/
+private lemma integral_conj_fourier_mul_eq (F G : SchwartzMap ℝ ℂ) :
+    (∫ k : ℝ, starRingEnd ℂ ((𝓕 F) k) * (𝓕 G) k ∂(volume : Measure ℝ))
+      = ∫ x : ℝ, starRingEnd ℂ (F x) * G x ∂(volume : Measure ℝ) := by
+  have h := SchwartzMap.integral_inner_fourier_fourier (V := ℝ) (H := ℂ) F G
+  simpa only [RCLike.inner_apply'] using h
+
+/-- **HT3 brick-3 (position form) — the Parseval bridge.**
+
+For Schwartz Cauchy data `ψ₀ π₀ χ₀ ρ₀ : 𝓢(ℝ, ℂ)`, the Fourier-side symplectic pairing `sigmaK` of
+the transforms equals the real part of the position-space sesquilinear pairing:
+
+    sigmaK (𝓕ψ₀) (𝓕π₀) (𝓕χ₀) (𝓕ρ₀) = (∫ (conj ψ₀·ρ₀ − conj χ₀·π₀)).re .
+
+Proof: split the Fourier-side integral (Schwartz integrability), apply cross-Parseval termwise, and
+recombine — all under the outer `.re`. -/
+theorem sigmaK_fourier_eq_position (ψ₀ π₀ χ₀ ρ₀ : SchwartzMap ℝ ℂ) :
+    sigmaK (fun k => (𝓕 ψ₀) k) (fun k => (𝓕 π₀) k) (fun k => (𝓕 χ₀) k) (fun k => (𝓕 ρ₀) k)
+      = (∫ x : ℝ, starRingEnd ℂ (ψ₀ x) * ρ₀ x - starRingEnd ℂ (χ₀ x) * π₀ x
+          ∂(volume : Measure ℝ)).re := by
+  have key :
+      (∫ k : ℝ, starRingEnd ℂ ((𝓕 ψ₀) k) * (𝓕 ρ₀) k - starRingEnd ℂ ((𝓕 χ₀) k) * (𝓕 π₀) k
+          ∂(volume : Measure ℝ))
+        = ∫ x : ℝ, starRingEnd ℂ (ψ₀ x) * ρ₀ x - starRingEnd ℂ (χ₀ x) * π₀ x
+          ∂(volume : Measure ℝ) := by
+    rw [integral_sub (integrable_conj_fourier_mul (𝓕 ψ₀) (𝓕 ρ₀))
+          (integrable_conj_fourier_mul (𝓕 χ₀) (𝓕 π₀)),
+        integral_conj_fourier_mul_eq ψ₀ ρ₀, integral_conj_fourier_mul_eq χ₀ π₀,
+        ← integral_sub (integrable_conj_fourier_mul ψ₀ ρ₀)
+          (integrable_conj_fourier_mul χ₀ π₀)]
+  show (∫ k : ℝ, starRingEnd ℂ ((𝓕 ψ₀) k) * (𝓕 ρ₀) k
+          - starRingEnd ℂ ((𝓕 χ₀) k) * (𝓕 π₀) k ∂(volume : Measure ℝ)).re = _
+  rw [key]
+
+/-- **HT3 brick-3 (real form) — the Parseval bridge onto `kgSympl`.**
+
+For **real** Schwartz Cauchy data (`Im = 0` carried as hypotheses), the Fourier-side symplectic
+pairing `sigmaK` of the transforms equals the position-space KG symplectic form `kgSympl` of the
+real fields:
+
+    sigmaK (𝓕ψ₀) (𝓕π₀) (𝓕χ₀) (𝓕ρ₀) = kgSympl ψ₀.re π₀.re χ₀.re ρ₀.re .
+
+This closes brick-3: the Fourier-side coefficient physics (brick-2) and the position-space
+symplectic form (brick-1) are the SAME pairing, bridged by Plancherel.  HONEST: this is the last
+bounded increment; the `Lp`/rapidity `j_ℏ` packaging remains the named multi-month frontier. -/
+theorem parseval_bridge_real (ψ₀ π₀ χ₀ ρ₀ : SchwartzMap ℝ ℂ)
+    (hψ : ∀ x, (ψ₀ x).im = 0) (hπ : ∀ x, (π₀ x).im = 0)
+    (hχ : ∀ x, (χ₀ x).im = 0) (hρ : ∀ x, (ρ₀ x).im = 0) :
+    sigmaK (fun k => (𝓕 ψ₀) k) (fun k => (𝓕 π₀) k) (fun k => (𝓕 χ₀) k) (fun k => (𝓕 ρ₀) k)
+      = kgSympl (fun x => (ψ₀ x).re) (fun x => (π₀ x).re) (fun x => (χ₀ x).re)
+          (fun x => (ρ₀ x).re) := by
+  rw [sigmaK_fourier_eq_position]
+  unfold kgSympl
+  -- pointwise, the complex sesquilinear integrand is the coercion of the real symplectic integrand
+  have hpt : ∀ x : ℝ,
+      starRingEnd ℂ (ψ₀ x) * ρ₀ x - starRingEnd ℂ (χ₀ x) * π₀ x
+        = (((ψ₀ x).re * (ρ₀ x).re - (χ₀ x).re * (π₀ x).re : ℝ) : ℂ) := by
+    intro x
+    apply Complex.ext
+    · simp only [Complex.sub_re, Complex.mul_re, Complex.conj_re, Complex.conj_im,
+        hψ x, hπ x, hχ x, hρ x, Complex.ofReal_re]
+      ring
+    · simp only [Complex.sub_im, Complex.mul_im, Complex.conj_re, Complex.conj_im,
+        hψ x, hπ x, hχ x, hρ x, Complex.ofReal_im]
+      ring
+  rw [integral_congr_ae (Filter.Eventually.of_forall hpt)]
+  rw [show (∫ a : ℝ, (((ψ₀ a).re * (ρ₀ a).re - (χ₀ a).re * (π₀ a).re : ℝ) : ℂ)
+          ∂(volume : Measure ℝ))
+        = ((∫ a : ℝ, (ψ₀ a).re * (ρ₀ a).re - (χ₀ a).re * (π₀ a).re ∂(volume : Measure ℝ) : ℝ) : ℂ)
+      from integral_ofReal]
+  rw [Complex.ofReal_re]
 
 end QIQTH.KGSymplectic

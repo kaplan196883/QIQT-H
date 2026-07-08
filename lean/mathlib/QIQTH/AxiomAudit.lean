@@ -10092,4 +10092,18 @@ namespace QIQTH.AxiomAudit
 -- never axioms.  [AF] std-3.
 #print axioms QIQTH.KGSymplectic.two_hbar_im_inner_posFreq_eq_sigmaK
 
+-- KGSymplectic.lean — HT3 brick-3, the PARSEVAL BRIDGE (2026-07-08): the last BOUNDED increment of
+-- HT3, connecting the Fourier-side pairing `sigmaK` (brick-2) to the position-space `kgSympl`
+-- (brick-1) via Plancherel for Schwartz functions (`SchwartzMap.integral_inner_fourier_fourier`,
+-- honest ∫, NO Lp classes, NO 2π factor in Mathlib's unitary `e^{-2πixξ}` convention).  For Schwartz
+-- data `ψ₀ π₀ χ₀ ρ₀ : 𝓢(ℝ,ℂ)`:  `sigmaK (𝓕ψ₀)(𝓕π₀)(𝓕χ₀)(𝓕ρ₀) = (∫ (conj ψ₀·ρ₀ − conj χ₀·π₀)).re`
+-- (`sigmaK_fourier_eq_position`); and for REAL data (`Im=0` carried), it equals `kgSympl ψ₀.re … ρ₀.re`
+-- (`parseval_bridge_real`).  Integrability discharged (bounded × integrable via `Integrable.bdd_mul`
+-- + the Schwartz (0,0)-seminorm bound), NOT assumed.  HONEST: this ties brick-1 ↔ brick-2 only — it is
+-- NOT the Lp/rapidity `j_ℏ` map (the multi-month Mathlib frontier: weighted KG Sobolev, √ω unbounded),
+-- NOT the boost-charge identity, NOT `2π/ℏ`, NOT numerical-G/QG.  Schwartz regularity lives in the
+-- data TYPE; reality is a carried HYPOTHESIS, never an axiom.  [AF] std-3.
+#print axioms QIQTH.KGSymplectic.sigmaK_fourier_eq_position
+#print axioms QIQTH.KGSymplectic.parseval_bridge_real
+
 end QIQTH.AxiomAudit
