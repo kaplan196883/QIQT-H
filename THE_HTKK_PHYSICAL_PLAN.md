@@ -188,10 +188,15 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       `rapidity_measurePreserving` ((1/2)•vol → massShellMeasure); `integral_massShellMeasure_eq_half_rapidity`
       (`∫ H ∂massShellMeasure = (1/2)•∫ H(m sinh θ) ∂vol`, via `integral_map_equiv`); conj-mul corollary
       `massShell_conj_mul_integral_eq_half_rapidity` (`starRingEnd ℂ`). The one-particle integral in rapidity form.
-    - [ ] **Lp brick-3+** — the weighted-`L²` COMPLETION `MeasureTheory.Lp ℂ 2 (massShellMeasure m)` + transport `2ℏ·Im=σ`
-      into it; the Fourier `L²→L²` isometry (`MeasureTheory.fourierTransformCLE` CONFIRMED present in
-      `Mathlib.Analysis.Fourier.Plancherel`); the positive-frequency projection; the real-Cauchy-data domain; boost
-      covariance. STILL the multi-month frontier — grind brick-by-brick.
+    - [x] **Lp brick-3 — the one-particle `L²` ISOMETRY — DONE 2026-07-09** ([AF] std-3). `OneParticleMeasure.lean`:
+      `rapidityPullL2` (`Lp.compMeasurePreserving` pullback along the rapidity equivalence), `rapidityPullL2_isometry`,
+      `rapidityPullL2_norm` — the one-particle space `L²(massShellMeasure m)` embeds ISOMETRICALLY into the flat rapidity
+      `L²((1/2)•volume)`. The `L²`-level packaging of the rapidity change of variables.
+    - [ ] **Lp brick-4+ (the FIRST genuine WALL, GPT-5.5-scoped 2026-07-09):** the real-Cauchy-data → positive-frequency
+      map `(φ,π) ↦ √ω·φ̂ + i·ω^{-1/2}·π̂`, which is **UNBOUNDED on naive `L²×L²`** (the `√ω` multiplier); the correct
+      domain is the energy/Sobolev space `H^{1/2} ⊕ H^{-1/2}`. Formalizing weighted KG-Sobolev + the unbounded Fourier
+      multiplier is the multi-month Mathlib gap. Also pending: the ℂ-linear bundling of `rapidityPullL2` (minor); transport
+      `2ℏ·Im=σ` onto `L2.inner_def`; the Fourier `L²→L²` step (`fourierTransformCLE`); boost covariance.
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.

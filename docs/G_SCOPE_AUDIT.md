@@ -92,8 +92,15 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   (`niceWedgeGenSet`, `L²(dθ)`): the weighted KG Sobolev phase space with `√ω` unbounded on `L²`, the Fourier `L²→L²` unitary
   matching, and boost covariance — a **named multi-month Mathlib-infrastructure frontier, NOT new physics**. So `hTkk` is NOT
   flatly "reduced not derived": its structure + `2π` + coefficient-normalization are all DERIVED; only the `Lp`/rapidity
-  packaging of `j_ℏ` remains a cited frontier — see `THE_HTKK_PHYSICAL_PLAN.md`, HT3 brick-4 / HT4. **This is the honest HT3
-  campaign ceiling; the `Lp` wall must not be faked or auto-ground.**
+  packaging of `j_ℏ` remains a cited frontier — see `THE_HTKK_PHYSICAL_PLAN.md`, HT3 brick-4 / HT4.
+  **`Lp` progress (2026-07-09, user-authorized investment — bricks buildable now, wall precisely located):** brick-1 the
+  Lorentz-invariant mass-shell measure = rapidity pushforward (`map_rapidityHalfMeasure_eq_massShellMeasure`); brick-2 the
+  rapidity change of variables on the one-particle integral (`integral_massShellMeasure_eq_half_rapidity` +
+  `rapidity_measurePreserving`); brick-3 the one-particle `L²` ISOMETRY into the flat rapidity `L²` (`rapidityPullL2_isometry`)
+  — all axiom-free.  **The FIRST genuine WALL is now precisely located** (GPT-5.5 2026-07-09): the real-Cauchy-data →
+  positive-frequency map `(φ,π)↦√ω·φ̂ + i·ω^{-1/2}·π̂` is UNBOUNDED on naive `L²×L²`; its correct domain is `H^{1/2}⊕H^{-1/2}`,
+  and formalizing that weighted-Sobolev / unbounded-Fourier-multiplier infrastructure is the multi-month gap. The `Lp` wall
+  must not be faked or auto-ground past this point.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived

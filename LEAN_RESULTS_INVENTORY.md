@@ -403,6 +403,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     convention. **HONEST: the change-of-variables layer of `j_ℏ` — NOT the full isometry (weighted-`L²` completion, Fourier
     `L²→L²` (`fourierTransformCLE` confirmed present), positive-frequency projection, boost covariance stay the frontier);
     NOT numerical-G/QG.** `m>0` the only hypothesis; no axioms.
+  - **Lp j_ℏ brick-3 — the one-particle `L²` ISOMETRY** (`OneParticleMeasure.lean` **`rapidityPullL2_isometry`**,
+    `rapidityPullL2`, `rapidityPullL2_norm`, **[AF]** std-3, 2026-07-09): the KG one-particle Hilbert space
+    `L²(massShellMeasure m)` embeds ISOMETRICALLY, via the measure-preserving rapidity chart (`Lp.compMeasurePreserving`),
+    into the flat rapidity space `L²((1/2)•volume)` — the `L²`-level packaging of brick-2. **HONEST: the FIRST genuine WALL
+    past here (GPT-5.5-located 2026-07-09) is the real-Cauchy-data → positive-frequency `√ω`-weighted map, UNBOUNDED on
+    naive `L²×L²`, correct domain `H^{1/2}⊕H^{-1/2}` — the multi-month weighted-Sobolev / unbounded-Fourier-multiplier gap.
+    NOT the full `j_ℏ`, NOT numerical-G/QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the
@@ -412,6 +419,9 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   — the canonical "entanglement across a cut ≤ bond dimension", the record bound over a genuine minimum of two distinct cuts.
   **HONEST: a finite INSTANCE exhibiting the record/area bound — the factorization is now a THEOREM not a hypothesis; still
   NOT a claim the world is holographic (min-cut = geometric AREA is Tier-3/OPEN), NOT QG, NOT numerical-G.**
+  **Rank sanity check (2026-07-09):** `distinguishableRecords_toLin'_eq_rank` + `mps3_records_eq_rank` confirm the abstract
+  `distinguishableRecords` IS the standard `Matrix.rank` (via `Matrix.toLin' = mulVecLin`), and `mps3_rank_le_min` reads the
+  min-cut bound directly on `Matrix.rank` — grounding the QIQT-H record/capacity notion as the genuine Schmidt/matrix rank.
 - **F6/Tier-2 §2.2 — the MIN-CUT bound on distinguishable RECORDS (capacity = area from the code)** (`RecordMincut.lean`
   **`mincut_bounds_distinguishable_records`** + `records_log_le_mincut_area`, **[AF]** std-3, 2026-07-08): the QG-facing finite
   core of `docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md` §2.2. In a finite tensor-network code, the distinguishable-record
