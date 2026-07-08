@@ -426,6 +426,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `f = r∘m∘l` bottlenecks records at `min (dim X) (dim Y)` (the abstract heart of an n-site MPS min-cut), and
   `mps3_records_le_min_via_waist` derives the MPS `records ≤ min d₀ d₁` as an instance of it (the 3-fold `toLin'`
   factorization), independent of the `cuts`/`IsMinCut` bookkeeping.
+  **Saturation / tightness (2026-07-09):** `distinguishableRecords_id` (records of the identity/full-rank flattening = full
+  dim) and `distinguishableRecords_id_cutSpace` (the identity through a cut's channel achieves records = `cutBondCapacity`)
+  show the cut record bound is TIGHT — the min-cut is the genuine capacity (achieved by the maximally-entangled state through
+  the cut), not just an upper bound.
 - **F6/Tier-2 §2.2 — the MIN-CUT bound on distinguishable RECORDS (capacity = area from the code)** (`RecordMincut.lean`
   **`mincut_bounds_distinguishable_records`** + `records_log_le_mincut_area`, **[AF]** std-3, 2026-07-08): the QG-facing finite
   core of `docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md` §2.2. In a finite tensor-network code, the distinguishable-record
