@@ -422,6 +422,10 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   **Rank sanity check (2026-07-09):** `distinguishableRecords_toLin'_eq_rank` + `mps3_records_eq_rank` confirm the abstract
   `distinguishableRecords` IS the standard `Matrix.rank` (via `Matrix.toLin' = mulVecLin`), and `mps3_rank_le_min` reads the
   min-cut bound directly on `Matrix.rank` — grounding the QIQT-H record/capacity notion as the genuine Schmidt/matrix rank.
+  **Narrowest-waist generalization (2026-07-09):** `distinguishableRecords_le_min_of_factorization₂` — a 3-fold factorization
+  `f = r∘m∘l` bottlenecks records at `min (dim X) (dim Y)` (the abstract heart of an n-site MPS min-cut), and
+  `mps3_records_le_min_via_waist` derives the MPS `records ≤ min d₀ d₁` as an instance of it (the 3-fold `toLin'`
+  factorization), independent of the `cuts`/`IsMinCut` bookkeeping.
 - **F6/Tier-2 §2.2 — the MIN-CUT bound on distinguishable RECORDS (capacity = area from the code)** (`RecordMincut.lean`
   **`mincut_bounds_distinguishable_records`** + `records_log_le_mincut_area`, **[AF]** std-3, 2026-07-08): the QG-facing finite
   core of `docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md` §2.2. In a finite tensor-network code, the distinguishable-record
