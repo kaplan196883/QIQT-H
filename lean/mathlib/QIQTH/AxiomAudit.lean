@@ -10106,4 +10106,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KGSymplectic.sigmaK_fourier_eq_position
 #print axioms QIQTH.KGSymplectic.parseval_bridge_real
 
+-- RecordMincut.lean — Tier-2 §2.2, the MIN-CUT bound on distinguishable RECORDS (2026-07-08):
+-- the QG-facing finite core (docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md §2.2) — in a finite
+-- tensor-network code, the distinguishable-record capacity across a bipartition cut is bounded by the
+-- MIN-CUT bond "area".  `distinguishableRecords f := finrank K (range f)` (Schmidt rank / reduced
+-- support = the QIQT-H capacity notion, a RANK not an entropy — strictly different from graph-RT).
+-- `distinguishableRecords_le_of_factorization`: f = r∘l ⟹ records ≤ dim of the intermediate space.
+-- `cutSpace_finrank`: the cut index space has dim = ∏_{e∈C} D e (the cut bond capacity = "area").
+-- `mincut_bounds_distinguishable_records`: with a chosen min-cut among a finite family of separating
+-- cuts (each carrying the FactorsThroughCut certificate as a HYPOTHESIS), records ≤ min-cut capacity.
+-- `records_log_le_mincut_area`: the log corollary log(records) ≤ (area)·log d.  HONEST: finite
+-- STRUCTURAL theorem ABOUT a code — the tensor-network factorization is a carried hypothesis; NOT a
+-- derivation that the world is holographic (min-cut = geometric AREA is Tier-3, OPEN), NOT max-flow/
+-- min-cut combinatorics, NOT emergent spacetime, NOT QG, NOT numerical-G.  [AF] std-3.
+#print axioms QIQTH.RecordMincut.distinguishableRecords_le_of_factorization
+#print axioms QIQTH.RecordMincut.cutSpace_finrank
+#print axioms QIQTH.RecordMincut.distinguishableRecords_le_cut
+#print axioms QIQTH.RecordMincut.mincut_bounds_distinguishable_records
+#print axioms QIQTH.RecordMincut.records_log_le_mincut_area
+
 end QIQTH.AxiomAudit
