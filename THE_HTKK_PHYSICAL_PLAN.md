@@ -174,11 +174,21 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
     (`integral_fourierIntegral_mul_eq`/`Real.fourierIntegral_conj` do NOT exist in v4.30.0); `integral_inner_fourier_fourier`
     is the right hook. **brick-2 ∘ brick-3 now gives** `2ℏ·Im⟨aK(𝓕·)⟩ = kgSympl` — the canonical-normalization identity
     grounded in the position-space symplectic form. Schwartz regularity in the TYPE; reality carried as HYPOTHESIS, never axiom.
-  - [ ] **HT3 brick-4+ (the multi-month wall — CHECKPOINT REACHED here, honestly):** the `Lp` rapidity unitary matching
-    `niceWedgeGenSet`, the bounded `j_ℏ` from the weighted phase space, boost covariance, and the boost-charge identity
-    `q_B(j_ℏψ)=(1/ℏ)·B_cl`. If blocked, the HONEST CEILING: hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
-    the coefficient's CANONICAL-NORMALIZATION physics (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are all DERIVED axiom-free; the `Lp`
-    packaging of `j_ℏ` into the existing rapidity convention is the single named multi-month Mathlib frontier; `1/ℏ` a unit.
+  - **HT3 brick-4+ (the multi-month wall — user authorized investing 2026-07-08; grinding sub-bricks):** the `Lp` rapidity
+    unitary matching `niceWedgeGenSet`, the bounded `j_ℏ` from the weighted phase space, boost covariance, and the
+    boost-charge identity `q_B(j_ℏψ)=(1/ℏ)·B_cl`.
+    - [x] **Lp brick-1 — the MASS-SHELL MEASURE = rapidity pushforward — DONE 2026-07-08** ([AF] std-3, budget 0, no sorry).
+      `OneParticleMeasure.lean` `map_rapidityHalfMeasure_eq_massShellMeasure (hm : 0<m)`:
+      `Measure.map (θ↦m·sinh θ) ((1/2)•volume) = volume.withDensity (fun k => (2·√(k²+m²))⁻¹)` — the exact Lorentz-invariant
+      measure whose weighted `L²` is the KG one-particle space (`dk/2ω = dθ/2`; energy cancels the Jacobian, factor exactly
+      `1/2` not `1/2m`). Supporting `omega_rapidity`, `jacobian_cancel`. Via `Measure.ext_of_lintegral` + `lintegral_map` +
+      the 1-D CoV `lintegral_image_eq_lintegral_deriv_mul_of_monotoneOn`. GPT-5.5-pro-scoped as the smallest honest first brick.
+    - [ ] **Lp brick-2+** — weighted-`L²` inner product (`MeasureTheory.Lp ℂ 2 (massShellMeasure m)`) + transport the
+      `2ℏ·Im=σ` identity; the `k↦θ` `MeasurableEquiv`; the Fourier `L²→L²` isometry (`MeasureTheory.fourierTransformCLE`, if
+      present); the real-Cauchy-data domain; boost covariance. STILL the multi-month frontier — grind brick-by-brick.
+    - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
+      coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
+      rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.
 - [ ] **HT4 — SMEARED physical hTkk + local limit (the capstone).** `physical_hTkk_smeared`:
   `Q[f_phys(χ_ε)] = (2π/ℏ)∫ χ_ε·T_kk`; then `physical_hTkk` by the approximate-identity limit `χ_ε → δ_{(x,v)}` ⟹ the
   pointwise `hTkk` for `f_phys`, coefficient DERIVED. Feed it into a `qiqt_gr_freefield_physical` capstone replacing the

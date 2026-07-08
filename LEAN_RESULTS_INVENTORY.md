@@ -383,6 +383,29 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     only. It is NOT the `Lp`/rapidity `j_ℏ` map (the single named multi-month Mathlib frontier: weighted KG Sobolev, `√ω`
     unbounded on L²), NOT the boost-charge identity, NOT `2π/ℏ`, NOT numerical-G/QG. Schwartz regularity lives in the data
     TYPE; reality is a carried HYPOTHESIS, never an axiom.** This is the HT3 campaign CEILING — see `docs/G_SCOPE_AUDIT.md` F7.
+  - **Lp j_ℏ brick-1 — the MASS-SHELL MEASURE as a rapidity pushforward** (`OneParticleMeasure.lean`
+    **`map_rapidityHalfMeasure_eq_massShellMeasure`**, **[AF]** std-3, 2026-07-08): the first bounded brick of the `Lp`/`j_ℏ`
+    wall (user authorized investing). For `m>0`, with `ω(k)=√(k²+m²)` and rapidity map `g(θ)=m·sinh θ`, PROVED
+    `Measure.map g ((1/2)•volume) = volume.withDensity (fun k => (2·√(k²+m²))⁻¹)` — the exact Lorentz-invariant mass-shell
+    measure whose weighted `L²` is the KG one-particle space (`dk/2ω = dθ/2`: the energy `ω=m cosh θ` cancels the Jacobian
+    `dk=m cosh θ dθ`, leaving exactly `1/2`, NOT `1/2m`). Supporting `omega_rapidity`, `jacobian_cancel`. Proof =
+    `Measure.ext_of_lintegral` + `lintegral_map`/`lintegral_smul_measure` + the 1-D change of variables
+    `lintegral_image_eq_lintegral_deriv_mul_of_monotoneOn` (monotone surjective `g`, deriv `m cosh θ`). **HONEST: the MEASURE
+    brick ONLY — NOT the full `j_ℏ` isometry (real Cauchy data → weighted-L²/rapidity, boost-covariant), which stays the named
+    multi-month frontier; NOT numerical-G/QG.** `m>0` the only hypothesis; no axioms.
+- **F6/Tier-2 §2.2 — the MIN-CUT bound on distinguishable RECORDS (capacity = area from the code)** (`RecordMincut.lean`
+  **`mincut_bounds_distinguishable_records`** + `records_log_le_mincut_area`, **[AF]** std-3, 2026-07-08): the QG-facing finite
+  core of `docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md` §2.2. In a finite tensor-network code, the distinguishable-record
+  capacity `distinguishableRecords f := finrank K (range f)` (Schmidt rank / reduced-support dimension = the QIQT-H *capacity*
+  notion, a RANK not an entropy) across a bipartition cut is bounded by the MIN-CUT bond "area" `∏_{e∈C} D e`. Chain:
+  `distinguishableRecords_le_of_factorization` (`f=r∘l ⟹ records ≤ dim intermediate`) → `cutSpace_finrank` (cut index space
+  dim = bond capacity) → `distinguishableRecords_le_cut` → the min-cut capstone over a finite family of separating cuts (each
+  carrying `FactorsThroughCut` as a HYPOTHESIS) → the log corollary `log(records) ≤ area·log d`. Pure linear algebra (range
+  inclusion + `Submodule.finrank_mono` + `Module.finrank_fintype_fun_eq_card`) + a chosen minimizer — **NO max-flow/min-cut**.
+  **Genuinely distinct from the existing graph-RT** (which bounds ENTROPY): a rank bound is strictly stronger/different
+  (`S ≤ log rank`, not conversely). **HONEST: finite STRUCTURAL theorem ABOUT a code; the tensor-network factorization is a
+  carried hypothesis. NOT a derivation that the world is holographic (min-cut = geometric AREA is Tier-3, OPEN), NOT emergent
+  spacetime, NOT QG, NOT numerical-G.**
 - **The Levi-Civita connection — the UNIQUENESS half / the Koszul solve** (`Curvature.lean`
   `koszul_lowered`/`christoffel_unique`; `LeviCivita.lean` `leviCivita_unique`, all **[AF]** std-3, 2026-07-06).
   The *existence* half was already built — component `christoffel` + `christoffel_symm` (torsion-free) +
