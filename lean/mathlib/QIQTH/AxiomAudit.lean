@@ -10156,6 +10156,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneParticleMeasure.integral_massShellMeasure_eq_half_rapidity
 #print axioms QIQTH.OneParticleMeasure.massShell_conj_mul_integral_eq_half_rapidity
 
+-- OneParticleMeasure.lean — Lp j_ℏ brick-3, the one-particle L² ISOMETRY (2026-07-08): the KG
+-- one-particle Hilbert space `L²(massShellMeasure m)` embeds isometrically, via the measure-preserving
+-- rapidity chart, into the flat rapidity `L²((1/2)•volume)` — `rapidityPullL2` (the `Lp.compMeasurePreserving`
+-- pullback), `rapidityPullL2_isometry` (Isometry), `rapidityPullL2_norm` (norm preservation).  HONEST:
+-- the L²-level packaging of the rapidity change of variables — the FIRST genuine WALL past here is the
+-- real-Cauchy-data → positive-frequency √ω-weighted map (unbounded on L²; needs H^{1/2}⊕H^{-1/2} Sobolev
+-- infrastructure — the multi-month gap), and the ℂ-linear bundling of the pullback is a minor follow-on.
+-- NOT the full j_ℏ, NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.OneParticleMeasure.rapidityPullL2_isometry
+#print axioms QIQTH.OneParticleMeasure.rapidityPullL2_norm
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
@@ -10168,5 +10179,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordMincutMPS.mps3_hfac
 #print axioms QIQTH.RecordMincutMPS.chosenCut_isMinCut
 #print axioms QIQTH.RecordMincutMPS.mps3_records_le_min
+
+-- RecordMincutMPS.lean — RANK sanity check (2026-07-08): the abstract `distinguishableRecords`
+-- (`finrank K (range f)`) IS the standard `Matrix.rank` for a matrix-defined flattening
+-- (`distinguishableRecords_toLin'_eq_rank`, via `Matrix.toLin' = Matrix.mulVecLin`); hence
+-- `mps3_records_eq_rank : distinguishableRecords (mps3Flatten L T R) = (mps3FlattenMat L T R).rank`
+-- and the cross-check `mps3_rank_le_min : (mps3FlattenMat L T R).rank ≤ min d₀ d₁`.  Grounds the
+-- record/capacity notion as the genuine Schmidt/matrix rank.  [AF] std-3.
+#print axioms QIQTH.RecordMincutMPS.distinguishableRecords_toLin'_eq_rank
+#print axioms QIQTH.RecordMincutMPS.mps3_records_eq_rank
+#print axioms QIQTH.RecordMincutMPS.mps3_rank_le_min
 
 end QIQTH.AxiomAudit

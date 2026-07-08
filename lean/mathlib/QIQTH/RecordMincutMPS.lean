@@ -36,6 +36,7 @@ NOT emergent spacetime, NOT QG, NOT numerical-`G`.  It exhibits the record/area 
 -/
 import QIQTH.RecordMincut
 import Mathlib.LinearAlgebra.Matrix.ToLin
+import Mathlib.LinearAlgebra.Matrix.Rank
 
 namespace QIQTH.RecordMincutMPS
 
@@ -145,5 +146,33 @@ theorem mps3_records_le_min
   have h := mincut_bounds_distinguishable_records (D2 d0 d1) cuts2 (chosenCut d0 d1)
     (chosenCut_isMinCut d0 d1) (mps3Flatten L T R) (mps3_hfac L T R)
   simpa using h
+
+/-! ### Sanity check — the abstract record count IS the concrete matrix rank
+
+`distinguishableRecords` was defined abstractly as `finrank K (range f)`.  Here we confirm it agrees
+with the standard `Matrix.rank` for a matrix-defined flattening, grounding the whole construction:
+the "distinguishable records across the cut" is exactly the Schmidt rank = matrix rank. -/
+
+/-- For a matrix-defined linear map, the abstract distinguishable-record count equals `Matrix.rank`
+(both are `finrank` of the range; `Matrix.toLin' = Matrix.mulVecLin`). -/
+theorem distinguishableRecords_toLin'_eq_rank {p q : Type*} [Fintype p] [Fintype q] [DecidableEq q]
+    (M : Matrix p q K) : distinguishableRecords (Matrix.toLin' M) = M.rank := by
+  rw [distinguishableRecords, Matrix.toLin'_apply', Matrix.rank]
+
+/-- The 3-layer MPS's distinguishable-record count is exactly the rank of its contraction matrix. -/
+theorem mps3_records_eq_rank
+    (L : Matrix (Bond0 d0 d1) I K) (T : Matrix (Bond1 d0 d1) (Bond0 d0 d1) K)
+    (R : Matrix O (Bond1 d0 d1) K) :
+    distinguishableRecords (mps3Flatten L T R) = (mps3FlattenMat L T R).rank :=
+  distinguishableRecords_toLin'_eq_rank (mps3FlattenMat L T R)
+
+/-- Cross-check: the CONTRACTION MATRIX'S rank is bounded by the min bond dimension — the same bound
+as the abstract record theorem, now read directly on `Matrix.rank`. -/
+theorem mps3_rank_le_min
+    (L : Matrix (Bond0 d0 d1) I K) (T : Matrix (Bond1 d0 d1) (Bond0 d0 d1) K)
+    (R : Matrix O (Bond1 d0 d1) K) :
+    (mps3FlattenMat L T R).rank ≤ min d0 d1 := by
+  rw [← mps3_records_eq_rank]
+  exact mps3_records_le_min L T R
 
 end QIQTH.RecordMincutMPS
