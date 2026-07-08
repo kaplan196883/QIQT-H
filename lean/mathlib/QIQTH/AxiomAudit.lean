@@ -10142,4 +10142,31 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneParticleMeasure.jacobian_cancel
 #print axioms QIQTH.OneParticleMeasure.map_rapidityHalfMeasure_eq_massShellMeasure
 
+-- OneParticleMeasure.lean — Lp j_ℏ brick-2, the rapidity CHANGE OF VARIABLES on the one-particle
+-- inner product (2026-07-08): `massShellMeasure m := volume.withDensity (2ω)⁻¹`; the rapidity chart
+-- as a measurable equivalence (`rapidityMeasurableEquiv`, θ↦m sinh θ, inverse arsinh(k/m)) that is
+-- MEASURE-PRESERVING `(1/2)•volume → massShellMeasure` (`rapidity_measurePreserving`); hence for any
+-- `H:ℝ→ℂ`, `∫ H ∂massShellMeasure = (1/2)•∫ H(m sinh θ) ∂volume`
+-- (`integral_massShellMeasure_eq_half_rapidity`, via `integral_map_equiv`), and the conj-mul corollary
+-- `massShell_conj_mul_integral_eq_half_rapidity` (`starRingEnd ℂ` convention) — the one-particle
+-- inner-product integrand in rapidity form.  HONEST: the change-of-variables layer of `j_ℏ` — NOT the
+-- full isometry (weighted-L² completion + Fourier L²→L² + positive-frequency projection + boost
+-- covariance stay the frontier); NOT numerical-G/QG.  `m>0` the only hypothesis; no axioms.  [AF] std-3.
+#print axioms QIQTH.OneParticleMeasure.rapidity_measurePreserving
+#print axioms QIQTH.OneParticleMeasure.integral_massShellMeasure_eq_half_rapidity
+#print axioms QIQTH.OneParticleMeasure.massShell_conj_mul_integral_eq_half_rapidity
+
+-- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
+-- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
+-- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
+-- `mps3_factors_cut1`, bundled `mps3_hfac`); with the smaller-bond min-cut (`chosenCut_isMinCut`,
+-- capacity `min d₀ d₁`), `mps3_records_le_min : distinguishableRecords (mps3Flatten L T R) ≤ min d₀ d₁`
+-- — the §2.2 record bound APPLIED to a real, non-circular model (the flattening is the model datum
+-- `R·T·L`, not defined as `r∘l`).  HONEST: a finite INSTANCE exhibiting the record/area bound; still
+-- NOT a claim the world is holographic (min-cut = geometric AREA is Tier-3/OPEN), NOT QG, NOT
+-- numerical-G.  [AF] std-3.
+#print axioms QIQTH.RecordMincutMPS.mps3_hfac
+#print axioms QIQTH.RecordMincutMPS.chosenCut_isMinCut
+#print axioms QIQTH.RecordMincutMPS.mps3_records_le_min
+
 end QIQTH.AxiomAudit
