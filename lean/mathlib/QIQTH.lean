@@ -722,6 +722,7 @@ import QIQTH.RecordMincutEntropy
 import QIQTH.OneParticleMeasure
 import QIQTH.WeightedL2
 import QIQTH.PosFreqDomain
+import QIQTH.OneParticleInner
 import QIQTH.FreeFieldCorner
 import QIQTH.QG.FinitePoincareNoGo
 import QIQTH.QG.LatticeDispersionBound
