@@ -10127,6 +10127,12 @@ namespace QIQTH.AxiomAudit
 -- narrowest-waist bound (2026-07-09): a 3-fold factorization (two intermediate spaces) bottlenecks
 -- the records at `min (dim X) (dim Y)` — the abstract heart of the n-site MPS min-cut bound. [AF] std-3.
 #print axioms QIQTH.RecordMincut.distinguishableRecords_le_min_of_factorization₂
+-- SATURATION / tightness (2026-07-09): the identity flattening has records = full dim
+-- (`distinguishableRecords_id`), and through a cut's channel achieves records = cutBondCapacity
+-- (`distinguishableRecords_id_cutSpace`) — so the cut record bound is TIGHT (not loose): the min-cut is
+-- the genuine capacity, achieved by the maximally-entangled state through the cut. [AF] std-3.
+#print axioms QIQTH.RecordMincut.distinguishableRecords_id
+#print axioms QIQTH.RecordMincut.distinguishableRecords_id_cutSpace
 
 -- OneParticleMeasure.lean — the Lorentz-invariant MASS-SHELL MEASURE as a rapidity pushforward
 -- (2026-07-08): the first bounded brick of the `Lp` `j_ℏ` track (HT3 brick-4 wall).  For `m>0`, with

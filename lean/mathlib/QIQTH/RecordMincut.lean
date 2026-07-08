@@ -102,6 +102,13 @@ theorem distinguishableRecords_le_min_of_factorization₂
   · -- cut through `Y`: `f = r ∘ (m ∘ l)`
     exact distinguishableRecords_le_of_factorization (K := K) f (m.comp l) r h
 
+/-- **The record count of a full-rank (identity) flattening is the full dimension.**  This makes the
+factorization bound `distinguishableRecords_le_of_factorization` TIGHT: it is achieved exactly when the
+flattening is a full-rank map onto the channel. -/
+theorem distinguishableRecords_id {X : Type*} [AddCommGroup X] [Module K X] [FiniteDimensional K X] :
+    distinguishableRecords (LinearMap.id : X →ₗ[K] X) = Module.finrank K X := by
+  rw [distinguishableRecords, LinearMap.range_id, finrank_top]
+
 variable {Edge : Type*} [DecidableEq Edge]
 
 /-- **Cut index assignments** — one bond index per edge crossing the cut.  Its cardinality is
@@ -132,6 +139,15 @@ def cutBondCapacity (D : Edge → ℕ) (C : Finset Edge) : ℕ :=
   classical
   rw [show Module.finrank K (CutSpace K D C) = Fintype.card (CutAssignments D C) from
       Module.finrank_fintype_fun_eq_card K, cutAssignments_card]
+
+/-- **Saturation — the cut record bound is TIGHT.**  The identity flattening through a cut's channel
+achieves `distinguishableRecords = cutBondCapacity`, so the distinguishable-record capacity across a
+cut ranges *exactly up to* the cut's bond "area" — `distinguishableRecords_le_cut` is not loose, and
+the min-cut is the genuine capacity (achieved by the maximally-entangled state through that cut). -/
+theorem distinguishableRecords_id_cutSpace (D : Edge → ℕ) (C : Finset Edge) :
+    distinguishableRecords (LinearMap.id : CutSpace K D C →ₗ[K] CutSpace K D C)
+      = cutBondCapacity D C := by
+  rw [distinguishableRecords_id, cutSpace_finrank]
 
 /-- **The tensor-network semantic certificate for a cut.**  The bipartite flattening `f` factors
 through the cut index space `CutSpace K D C`.  This is proved, per model, by splitting the finite
