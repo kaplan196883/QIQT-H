@@ -393,6 +393,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     `lintegral_image_eq_lintegral_deriv_mul_of_monotoneOn` (monotone surjective `g`, deriv `m cosh θ`). **HONEST: the MEASURE
     brick ONLY — NOT the full `j_ℏ` isometry (real Cauchy data → weighted-L²/rapidity, boost-covariant), which stays the named
     multi-month frontier; NOT numerical-G/QG.** `m>0` the only hypothesis; no axioms.
+  - **Lp j_ℏ brick-2 — the rapidity CHANGE OF VARIABLES on the one-particle inner product** (`OneParticleMeasure.lean`
+    **`integral_massShellMeasure_eq_half_rapidity`**, `rapidity_measurePreserving`, `massShell_conj_mul_integral_eq_half_rapidity`,
+    **[AF]** std-3, 2026-07-08): builds on brick-1. Defines `massShellMeasure m := volume.withDensity (2ω)⁻¹`; the rapidity
+    chart `rapidityMeasurableEquiv` (θ↦m·sinh θ, inverse arsinh(k/m)) as a `MeasurableEquiv ℝ ℝ` that is MEASURE-PRESERVING
+    `(1/2)•volume → massShellMeasure` (`rapidity_measurePreserving`, packaging brick-1). Hence for any `H:ℝ→ℂ`,
+    `∫ H ∂massShellMeasure = (1/2)•∫ H(m·sinh θ) ∂volume` (via `integral_map_equiv` — avoids the extra
+    `AEStronglyMeasurable` side-condition of `integral_map`), and the conj-mul corollary in the `starRingEnd ℂ`/`sigmaK`
+    convention. **HONEST: the change-of-variables layer of `j_ℏ` — NOT the full isometry (weighted-`L²` completion, Fourier
+    `L²→L²` (`fourierTransformCLE` confirmed present), positive-frequency projection, boost covariance stay the frontier);
+    NOT numerical-G/QG.** `m>0` the only hypothesis; no axioms.
+- **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
+  **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
+  non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the
+  model datum is the contraction `R·T·L` (NOT defined as `r∘l`), and both cut factorizations are DERIVED via
+  `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0/cut1` → bundled `mps3_hfac`). With the smaller-bond min-cut
+  (`chosenCut_isMinCut`, capacity `min d₀ d₁`), `mps3_records_le_min : distinguishableRecords (mps3Flatten L T R) ≤ min d₀ d₁`
+  — the canonical "entanglement across a cut ≤ bond dimension", the record bound over a genuine minimum of two distinct cuts.
+  **HONEST: a finite INSTANCE exhibiting the record/area bound — the factorization is now a THEOREM not a hypothesis; still
+  NOT a claim the world is holographic (min-cut = geometric AREA is Tier-3/OPEN), NOT QG, NOT numerical-G.**
 - **F6/Tier-2 §2.2 — the MIN-CUT bound on distinguishable RECORDS (capacity = area from the code)** (`RecordMincut.lean`
   **`mincut_bounds_distinguishable_records`** + `records_log_le_mincut_area`, **[AF]** std-3, 2026-07-08): the QG-facing finite
   core of `docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md` §2.2. In a finite tensor-network code, the distinguishable-record

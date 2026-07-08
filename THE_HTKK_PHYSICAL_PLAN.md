@@ -183,9 +183,15 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       measure whose weighted `L²` is the KG one-particle space (`dk/2ω = dθ/2`; energy cancels the Jacobian, factor exactly
       `1/2` not `1/2m`). Supporting `omega_rapidity`, `jacobian_cancel`. Via `Measure.ext_of_lintegral` + `lintegral_map` +
       the 1-D CoV `lintegral_image_eq_lintegral_deriv_mul_of_monotoneOn`. GPT-5.5-pro-scoped as the smallest honest first brick.
-    - [ ] **Lp brick-2+** — weighted-`L²` inner product (`MeasureTheory.Lp ℂ 2 (massShellMeasure m)`) + transport the
-      `2ℏ·Im=σ` identity; the `k↦θ` `MeasurableEquiv`; the Fourier `L²→L²` isometry (`MeasureTheory.fourierTransformCLE`, if
-      present); the real-Cauchy-data domain; boost covariance. STILL the multi-month frontier — grind brick-by-brick.
+    - [x] **Lp brick-2 — the rapidity CHANGE OF VARIABLES on the one-particle inner product — DONE 2026-07-08** ([AF] std-3).
+      `OneParticleMeasure.lean`: `massShellMeasure m`; the `k↦θ` `MeasurableEquiv` `rapidityMeasurableEquiv` +
+      `rapidity_measurePreserving` ((1/2)•vol → massShellMeasure); `integral_massShellMeasure_eq_half_rapidity`
+      (`∫ H ∂massShellMeasure = (1/2)•∫ H(m sinh θ) ∂vol`, via `integral_map_equiv`); conj-mul corollary
+      `massShell_conj_mul_integral_eq_half_rapidity` (`starRingEnd ℂ`). The one-particle integral in rapidity form.
+    - [ ] **Lp brick-3+** — the weighted-`L²` COMPLETION `MeasureTheory.Lp ℂ 2 (massShellMeasure m)` + transport `2ℏ·Im=σ`
+      into it; the Fourier `L²→L²` isometry (`MeasureTheory.fourierTransformCLE` CONFIRMED present in
+      `Mathlib.Analysis.Fourier.Plancherel`); the positive-frequency projection; the real-Cauchy-data domain; boost
+      covariance. STILL the multi-month frontier — grind brick-by-brick.
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.
