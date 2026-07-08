@@ -440,6 +440,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     product. Composes with brick-5 (`MemLp` of the positive-frequency coefficient). **HONEST: NOT the full `j_ℏ` (the Fourier
     `L²→L²` step exists in Mathlib as `Lp.fourierTransformₗᵢ`; boost covariance + the packaged map remain); `MemLp` membership
     carried as hypothesis; NOT numerical-G/QG.**
+  - **Lp j_ℏ brick-7 CAPSTONE — `σ_K = 2ℏ·Im⟪a_L2,b_L2⟫` for the KG positive-freq coefficients** (`PosFreqInner.lean`
+    **`two_hbar_im_L2_inner_posFreq_eq_sigmaK`**, **[AF]** std-3, 2026-07-09): composes brick-2 (bare-integral normalization)
+    with brick-6 (integral↔L² inner-product bridge) for the actual coefficients `a = posFreqCoeff m ℏ Ψ π`,
+    `b = posFreqCoeff m ℏ Χ Ρ`: `2ℏ·Im⟪ha.toLp a, hb.toLp b⟫_ℂ = sigmaK Ψ π Χ Ρ`. So the classical KG symplectic form is
+    `2ℏ·Im` of the one-particle Hilbert-space inner product of the `√(2ℏω)`-normalized positive-frequency modes — ties the
+    whole `Lp` chain to the physics σ. `L²` memberships from brick-5 (`ω = kgOmega m`). **HONEST: the inner-product form of the
+    coefficient normalization — NOT the full `j_ℏ` (Fourier `L²→L²` = Mathlib `Lp.fourierTransformₗᵢ`; bundled map + boost
+    covariance remain); conj-symmetry, integrability, `L²` memberships carried as hypotheses; NOT numerical-G/QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the

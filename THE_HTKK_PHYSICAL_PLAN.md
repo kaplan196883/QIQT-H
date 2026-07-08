@@ -211,10 +211,15 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       `OneParticleInner.lean`: `L2_inner_toLp_eq_integral : ⟪toLp a, toLp b⟫_ℂ = ∫ conj(a)·b` (via `L2.inner_def` +
       `MemLp.coeFn_toLp`), and `two_hbar_im_L2_inner_eq_sigmaK : 2ℏ·Im⟪toLp a, toLp b⟫_ℂ = σ_K` from brick-2 — the KG
       symplectic form is `2ℏ·Im` of the genuine one-particle inner product. Composes with brick-5 (`MemLp` of the coefficient).
-    - [ ] **Lp brick-7+ (what genuinely remains):** wire the Fourier `L²→L²` step (Mathlib `Lp.fourierTransformₗᵢ`, a genuine
+    - [x] **Lp brick-7 CAPSTONE — `σ_K = 2ℏ·Im⟪a_L2,b_L2⟫` for the KG positive-freq coefficients — DONE 2026-07-09**
+      ([AF] std-3). `PosFreqInner.lean` `two_hbar_im_L2_inner_posFreq_eq_sigmaK` composes brick-2 (bare-integral) + brick-6
+      (integral↔L² bridge): the classical KG symplectic form `σ_K` equals `2ℏ·Im` of the one-particle Hilbert inner product
+      of the `√(2ℏω)`-normalized positive-frequency coefficients. L² memberships from brick-5 (`ω=kgOmega m`). This ties the
+      whole `Lp` chain to the physics σ on the actual one-particle Hilbert space — the coefficient physics of `hTkk`.
+    - [ ] **Lp brick-8+ (what genuinely remains):** wire the Fourier `L²→L²` step (Mathlib `Lp.fourierTransformₗᵢ`, a genuine
       `≃ₗᵢ`, already present), package the full `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock one-particle` as a bundled map, and boost
       covariance. Assembly of existing pieces + covariance — no known hard obstruction (√ω wall dissolved, domain identified,
-      inner-product normalization now a Hilbert-space fact).
+      normalization now a Hilbert-space fact, coefficient physics tied to σ).
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.
