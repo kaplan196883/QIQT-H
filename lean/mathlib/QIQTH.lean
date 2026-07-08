@@ -717,6 +717,7 @@ import QIQTH.CodeCapacityBridge
 import QIQTH.CornerConstruction
 import QIQTH.EmergentSpacetime
 import QIQTH.RecordMincut
+import QIQTH.OneParticleMeasure
 import QIQTH.FreeFieldCorner
 import QIQTH.QG.FinitePoincareNoGo
 import QIQTH.QG.LatticeDispersionBound

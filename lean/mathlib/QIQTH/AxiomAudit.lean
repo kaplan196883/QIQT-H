@@ -10125,4 +10125,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordMincut.mincut_bounds_distinguishable_records
 #print axioms QIQTH.RecordMincut.records_log_le_mincut_area
 
+-- OneParticleMeasure.lean — the Lorentz-invariant MASS-SHELL MEASURE as a rapidity pushforward
+-- (2026-07-08): the first bounded brick of the `Lp` `j_ℏ` track (HT3 brick-4 wall).  For `m>0`, with
+-- `ω(k)=√(k²+m²)` and the rapidity map `g(θ)=m·sinh θ`:
+--   `Measure.map g ((1/2)•volume) = volume.withDensity (fun k => (2ω(k))⁻¹)`
+-- (`map_rapidityHalfMeasure_eq_massShellMeasure`) — the exact measure whose weighted L² is the KG
+-- one-particle space.  Physics: `dk/(2ω) = dθ/2` (the energy `ω=m cosh θ` cancels the Jacobian
+-- `dk=m cosh θ dθ`, leaving exactly `1/2`, NOT `1/(2m)`).  Supporting: `omega_rapidity`
+-- (`ω(m sinh θ)=m cosh θ`), `jacobian_cancel` (`(2ω)⁻¹·(m cosh θ)=1/2`).  Proof = `Measure.ext_of_lintegral`
+-- + `lintegral_map`/`lintegral_smul_measure` + the 1-D change of variables
+-- `lintegral_image_eq_lintegral_deriv_mul_of_monotoneOn` (monotone surjective `g`, deriv `m cosh θ`).
+-- HONEST: this is the MEASURE brick ONLY — NOT the full `j_ℏ` isometry (real-Cauchy-data → weighted-L²/
+-- rapidity, boost-covariant), which stays the named multi-month Mathlib frontier; NOT numerical-G/QG.
+-- `m>0` the only hypothesis; no axioms.  [AF] std-3.
+#print axioms QIQTH.OneParticleMeasure.omega_rapidity
+#print axioms QIQTH.OneParticleMeasure.jacobian_cancel
+#print axioms QIQTH.OneParticleMeasure.map_rapidityHalfMeasure_eq_massShellMeasure
+
 end QIQTH.AxiomAudit
