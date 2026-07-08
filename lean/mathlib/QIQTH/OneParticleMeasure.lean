@@ -116,4 +116,75 @@ theorem map_rapidityHalfMeasure_eq_massShellMeasure {m : ℝ} (hm : 0 < m) :
   -- assemble
   rw [hLHS, hRHS, hCoV, lintegral_congr hpt, lintegral_const_mul _ hφg]
 
+/-- The Lorentz-invariant mass-shell measure `dk / (2 ω(k))` as a `withDensity`. -/
+noncomputable def massShellMeasure (m : ℝ) : Measure ℝ :=
+  (volume : Measure ℝ).withDensity
+    (fun k : ℝ => ENNReal.ofReal ((2 * Real.sqrt (k ^ 2 + m ^ 2))⁻¹))
+
+/-- The rapidity chart `θ ↦ m · sinh θ` as a homeomorphism of `ℝ` (for `m ≠ 0`), with
+inverse `k ↦ arsinh (k / m)`. -/
+noncomputable def rapidityHomeomorph (m : ℝ) (hm : m ≠ 0) : ℝ ≃ₜ ℝ where
+  toFun := fun θ => m * Real.sinh θ
+  invFun := fun k => Real.arsinh (k / m)
+  left_inv := fun θ => by
+    show Real.arsinh (m * Real.sinh θ / m) = θ
+    rw [mul_div_cancel_left₀ _ hm, Real.arsinh_sinh]
+  right_inv := fun k => by
+    show m * Real.sinh (Real.arsinh (k / m)) = k
+    rw [Real.sinh_arsinh, mul_div_cancel₀ _ hm]
+  continuous_toFun := continuous_const.mul Real.continuous_sinh
+  continuous_invFun := Real.continuous_arsinh.comp (continuous_id.div_const m)
+
+/-- The rapidity chart as a measurable equivalence of `ℝ`. -/
+noncomputable def rapidityMeasurableEquiv (m : ℝ) (hm : m ≠ 0) : ℝ ≃ᵐ ℝ :=
+  (rapidityHomeomorph m hm).toMeasurableEquiv
+
+@[simp] lemma rapidityMeasurableEquiv_apply (m : ℝ) (hm : m ≠ 0) (θ : ℝ) :
+    rapidityMeasurableEquiv m hm θ = m * Real.sinh θ := by
+  rw [rapidityMeasurableEquiv, Homeomorph.toMeasurableEquiv_coe]; rfl
+
+/-- **Measure-preserving form.**  The rapidity chart carries the flat half-Lebesgue
+measure `(1/2)•volume` to the mass-shell measure. -/
+theorem rapidity_measurePreserving {m : ℝ} (hm : 0 < m) :
+    MeasurePreserving (rapidityMeasurableEquiv m hm.ne')
+      ((ENNReal.ofReal (1 / 2)) • (volume : Measure ℝ)) (massShellMeasure m) := by
+  refine ⟨(rapidityMeasurableEquiv m hm.ne').measurable, ?_⟩
+  have hcoe : (rapidityMeasurableEquiv m hm.ne' : ℝ → ℝ) = fun θ => m * Real.sinh θ := by
+    funext θ; exact rapidityMeasurableEquiv_apply m hm.ne' θ
+  rw [hcoe, massShellMeasure]
+  exact map_rapidityHalfMeasure_eq_massShellMeasure hm
+
+/-- **Rapidity change of variables for an arbitrary integrand.**  For `m > 0` and any
+`H : ℝ → ℂ`, integrating `H` against the mass-shell measure equals `1/2` times the
+flat rapidity integral of `H ∘ (m · sinh)`. -/
+theorem integral_massShellMeasure_eq_half_rapidity {m : ℝ} (hm : 0 < m) (H : ℝ → ℂ) :
+    ∫ k, H k ∂ massShellMeasure m
+      = (1 / 2 : ℝ) • ∫ θ, H (m * Real.sinh θ) ∂ (volume : Measure ℝ) := by
+  have hmap : Measure.map (rapidityMeasurableEquiv m hm.ne')
+      ((ENNReal.ofReal (1 / 2)) • (volume : Measure ℝ)) = massShellMeasure m :=
+    (rapidity_measurePreserving hm).map_eq
+  calc
+    ∫ k, H k ∂ massShellMeasure m
+        = ∫ k, H k ∂ (Measure.map (rapidityMeasurableEquiv m hm.ne')
+            ((ENNReal.ofReal (1 / 2)) • (volume : Measure ℝ))) := by rw [hmap]
+    _ = ∫ θ, H (rapidityMeasurableEquiv m hm.ne' θ)
+            ∂ ((ENNReal.ofReal (1 / 2)) • (volume : Measure ℝ)) :=
+          integral_map_equiv (rapidityMeasurableEquiv m hm.ne') H
+    _ = ∫ θ, H (m * Real.sinh θ)
+            ∂ ((ENNReal.ofReal (1 / 2)) • (volume : Measure ℝ)) := by
+          simp only [rapidityMeasurableEquiv_apply]
+    _ = (ENNReal.ofReal (1 / 2)).toReal • ∫ θ, H (m * Real.sinh θ) ∂ (volume : Measure ℝ) := by
+          rw [MeasureTheory.integral_smul_measure]
+    _ = (1 / 2 : ℝ) • ∫ θ, H (m * Real.sinh θ) ∂ (volume : Measure ℝ) := by
+          rw [ENNReal.toReal_ofReal (by norm_num : (0 : ℝ) ≤ 1 / 2)]
+
+/-- **Conjugate-multiplication corollary** (the inner-product integrand).  Matches the
+`sigmaK`/`starRingEnd ℂ` convention used elsewhere in the repo. -/
+theorem massShell_conj_mul_integral_eq_half_rapidity {m : ℝ} (hm : 0 < m) (F G : ℝ → ℂ) :
+    ∫ k, starRingEnd ℂ (F k) * G k ∂ massShellMeasure m
+      = (1 / 2 : ℝ) • ∫ θ, starRingEnd ℂ (F (m * Real.sinh θ)) * G (m * Real.sinh θ)
+            ∂ (volume : Measure ℝ) := by
+  simpa using
+    integral_massShellMeasure_eq_half_rapidity hm (fun k => starRingEnd ℂ (F k) * G k)
+
 end QIQTH.OneParticleMeasure
