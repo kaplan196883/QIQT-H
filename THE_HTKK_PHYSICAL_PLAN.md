@@ -207,10 +207,14 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       lands in flat `L²` EXACTLY WHEN the data lie in the ω- and ω^{-1}-weighted `L²` (=`H^{1/2}`, `H^{-1/2}`):
       `kg_posFreq_memLp_split` (split form), `kg_coeff_eq_split` (pointwise factorization), `kg_posFreq_memLp` (quotient form).
       The correct operator domain the naive-`L²` objection was missing.
-    - [ ] **Lp brick-6+ (what genuinely remains):** wire the Fourier `L²→L²` step (Mathlib `Lp.fourierTransformₗᵢ`, a genuine
-      `≃ₗᵢ`, already present), transport the `2ℏ·Im=σ` inner-product identity (brick-2) onto `L2.inner_def`, package the full
-      `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock one-particle`, and boost covariance. Assembly of existing pieces + covariance — no known
-      hard obstruction remaining (the "unbounded √ω" wall is dissolved and the domain is identified).
+    - [x] **Lp brick-6 — canonical normalization `σ = 2ℏ·Im⟪·,·⟫` at the HILBERT level — DONE 2026-07-09** ([AF] std-3).
+      `OneParticleInner.lean`: `L2_inner_toLp_eq_integral : ⟪toLp a, toLp b⟫_ℂ = ∫ conj(a)·b` (via `L2.inner_def` +
+      `MemLp.coeFn_toLp`), and `two_hbar_im_L2_inner_eq_sigmaK : 2ℏ·Im⟪toLp a, toLp b⟫_ℂ = σ_K` from brick-2 — the KG
+      symplectic form is `2ℏ·Im` of the genuine one-particle inner product. Composes with brick-5 (`MemLp` of the coefficient).
+    - [ ] **Lp brick-7+ (what genuinely remains):** wire the Fourier `L²→L²` step (Mathlib `Lp.fourierTransformₗᵢ`, a genuine
+      `≃ₗᵢ`, already present), package the full `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock one-particle` as a bundled map, and boost
+      covariance. Assembly of existing pieces + covariance — no known hard obstruction (√ω wall dissolved, domain identified,
+      inner-product normalization now a Hilbert-space fact).
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.

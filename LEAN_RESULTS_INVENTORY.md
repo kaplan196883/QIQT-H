@@ -432,6 +432,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     into `L²` — NOT the full `j_ℏ` (the Fourier `L²→L²` step exists in Mathlib as `Lp.fourierTransformₗᵢ`; boost covariance +
     the completed one-particle map remain — assembly, no known hard obstruction). `ω>0` (m>0), measurability of `Ψ,π`, and the
     weighted memberships carried as hypotheses; NOT numerical-G/QG.**
+  - **Lp j_ℏ brick-6 — canonical normalization `σ = 2ℏ·Im⟪·,·⟫` at the HILBERT level** (`OneParticleInner.lean`
+    **`two_hbar_im_L2_inner_eq_sigmaK`** + `L2_inner_toLp_eq_integral`, **[AF]** std-3, 2026-07-09): upgrades brick-2's
+    bare-integral normalization to the genuine one-particle `L²` inner product. `⟪ha.toLp a, hb.toLp b⟫_ℂ = ∫ conj(a)·b`
+    (via `L2.inner_def` + `MemLp.coeFn_toLp`; Mathlib's `⟪·,·⟫_ℂ` conj-linear in the first slot, matching `sigmaK`), whence
+    `2ℏ·Im⟪toLp a, toLp b⟫_ℂ = σ_K` — the KG symplectic form is `2ℏ·Im` of the actual one-particle Hilbert-space inner
+    product. Composes with brick-5 (`MemLp` of the positive-frequency coefficient). **HONEST: NOT the full `j_ℏ` (the Fourier
+    `L²→L²` step exists in Mathlib as `Lp.fourierTransformₗᵢ`; boost covariance + the packaged map remain); `MemLp` membership
+    carried as hypothesis; NOT numerical-G/QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the
