@@ -175,4 +175,22 @@ theorem mps3_rank_le_min
   rw [← mps3_records_eq_rank]
   exact mps3_records_le_min L T R
 
+/-- **Alternate proof via the abstract narrowest-waist bound.**  The MPS flattening is the 3-fold
+composition `toLin' R ∘ (toLin' T ∘ toLin' L)` through the two bond spaces (dims `d₀, d₁`), so
+`distinguishableRecords_le_min_of_factorization₂` reproduces `records ≤ min d₀ d₁` directly — showing
+the concrete MPS min-cut bound is an instance of the abstract "bottlenecked by the narrowest channel"
+principle, independent of the `cuts`/`IsMinCut` bookkeeping. -/
+theorem mps3_records_le_min_via_waist
+    (L : Matrix (Bond0 d0 d1) I K) (T : Matrix (Bond1 d0 d1) (Bond0 d0 d1) K)
+    (R : Matrix O (Bond1 d0 d1) K) :
+    distinguishableRecords (mps3Flatten L T R) ≤ min d0 d1 := by
+  have hfac : mps3Flatten L T R
+      = (Matrix.toLin' R).comp ((Matrix.toLin' T).comp (Matrix.toLin' L)) := by
+    simp only [mps3Flatten, mps3FlattenMat]
+    rw [Matrix.mul_assoc, Matrix.toLin'_mul R (T * L), Matrix.toLin'_mul T L]
+  have h := distinguishableRecords_le_min_of_factorization₂ (mps3Flatten L T R)
+    (Matrix.toLin' L) (Matrix.toLin' T) (Matrix.toLin' R) hfac
+  rw [cutSpace_finrank, cutSpace_finrank, cap_cut0, cap_cut1] at h
+  exact h
+
 end QIQTH.RecordMincutMPS

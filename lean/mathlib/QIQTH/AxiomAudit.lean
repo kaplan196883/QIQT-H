@@ -10124,6 +10124,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordMincut.distinguishableRecords_le_cut
 #print axioms QIQTH.RecordMincut.mincut_bounds_distinguishable_records
 #print axioms QIQTH.RecordMincut.records_log_le_mincut_area
+-- narrowest-waist bound (2026-07-09): a 3-fold factorization (two intermediate spaces) bottlenecks
+-- the records at `min (dim X) (dim Y)` — the abstract heart of the n-site MPS min-cut bound. [AF] std-3.
+#print axioms QIQTH.RecordMincut.distinguishableRecords_le_min_of_factorization₂
 
 -- OneParticleMeasure.lean — the Lorentz-invariant MASS-SHELL MEASURE as a rapidity pushforward
 -- (2026-07-08): the first bounded brick of the `Lp` `j_ℏ` track (HT3 brick-4 wall).  For `m>0`, with
@@ -10189,5 +10192,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordMincutMPS.distinguishableRecords_toLin'_eq_rank
 #print axioms QIQTH.RecordMincutMPS.mps3_records_eq_rank
 #print axioms QIQTH.RecordMincutMPS.mps3_rank_le_min
+-- alternate proof via the abstract narrowest-waist bound (2026-07-09): the MPS min-cut bound is an
+-- instance of `distinguishableRecords_le_min_of_factorization₂` (the 3-fold toLin' factorization). [AF] std-3.
+#print axioms QIQTH.RecordMincutMPS.mps3_records_le_min_via_waist
 
 end QIQTH.AxiomAudit

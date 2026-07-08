@@ -81,6 +81,27 @@ theorem distinguishableRecords_le_of_factorization
     exact ⟨l x, rfl⟩
   exact (Submodule.finrank_mono hle).trans (LinearMap.finrank_range_le r)
 
+/-- **The narrowest-waist bound (two cuts).**  If a flattening factors through a chain of TWO finite
+spaces, `f = r ∘ m ∘ l` with `l : U →ₗ X`, `m : X →ₗ Y`, `r : Y →ₗ V`, then its record count is at
+most the MINIMUM of the two waist dimensions `min (dim X) (dim Y)`.  This is the abstract heart of the
+min-cut record bound: a composition through several channels is bottlenecked by its narrowest one —
+the length-3 (two-bond) case of an `n`-site MPS/tensor-train min-cut.  (Records `≤ dim X` via the cut
+`(r∘m)∘l`; records `≤ dim Y` via `r∘(m∘l)`.) -/
+theorem distinguishableRecords_le_min_of_factorization₂
+    {U X Y V : Type*} [AddCommGroup U] [Module K U]
+    [AddCommGroup X] [Module K X] [FiniteDimensional K X]
+    [AddCommGroup Y] [Module K Y] [FiniteDimensional K Y]
+    [AddCommGroup V] [Module K V]
+    (f : U →ₗ[K] V) (l : U →ₗ[K] X) (m : X →ₗ[K] Y) (r : Y →ₗ[K] V)
+    (h : f = r.comp (m.comp l)) :
+    distinguishableRecords (K := K) f ≤ min (Module.finrank K X) (Module.finrank K Y) := by
+  refine le_min ?_ ?_
+  · -- cut through `X`: `f = (r ∘ m) ∘ l`
+    exact distinguishableRecords_le_of_factorization (K := K) f l (r.comp m)
+      (by rw [h, LinearMap.comp_assoc])
+  · -- cut through `Y`: `f = r ∘ (m ∘ l)`
+    exact distinguishableRecords_le_of_factorization (K := K) f (m.comp l) r h
+
 variable {Edge : Type*} [DecidableEq Edge]
 
 /-- **Cut index assignments** — one bond index per edge crossing the cut.  Its cardinality is
