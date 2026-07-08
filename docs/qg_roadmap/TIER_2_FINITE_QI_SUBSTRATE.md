@@ -79,6 +79,18 @@ the open core.
 distinguishable-record capacity across a cut ≤ min-cut "area." Then the *physics* claim "this min-cut
 is the geometric area" is a Tier-3 matching result, tagged `OPEN` until then.
 
+**FORMALIZED (2026-07-09, axiom-free, `QIQTH/RecordMincut*.lean`).** The §2.2 record-bound skeleton is
+built and machine-checked: `mincut_bounds_distinguishable_records` (records `= finrank(range)` across a
+cut `≤` min-cut bond capacity), a concrete non-circular 3-layer MPS instance discharging the
+factorization certificate (`mps3_records_le_min`), the abstract narrowest-waist generalization
+(`distinguishableRecords_le_min_of_factorization₂`), the `records = Matrix.rank` grounding, the
+tightness/saturation (`distinguishableRecords_id_cutSpace` — the bound is achieved), and the
+rank→entropy bridge `vonNeumannEntropy_cut_le_log_capacity` (`S_vN ≤ log(∏ D)` on the cut channel).
+The RANK/record side is genuinely new relative to the pre-existing entropy-only capacity bound. STILL
+`OPEN` (Tier-3): the physics claim that this combinatorial min-cut is a GEOMETRIC area. The §2.1 toy
+substrate (a concrete HaPPY/random-tensor-network with a continuum knob + quantified Lorentz error)
+remains the buildable-now simulation deliverable — a distinct, larger effort.
+
 ---
 
 ## 2.3 Constraint / gauge / diffeomorphism structure  *(category (c); currently MISSING from the program)*
