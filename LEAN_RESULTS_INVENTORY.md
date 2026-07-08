@@ -430,6 +430,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   dim) and `distinguishableRecords_id_cutSpace` (the identity through a cut's channel achieves records = `cutBondCapacity`)
   show the cut record bound is TIGHT — the min-cut is the genuine capacity (achieved by the maximally-entangled state through
   the cut), not just an upper bound.
+  **Entropy form / rank→entropy bridge (2026-07-09, `RecordMincutEntropy.lean` `vonNeumannEntropy_cut_le_log_capacity`):**
+  QIQT-H's existing Gibbs/Jensen bound `vonNeumannEntropy_le_log_card` (S≤log dim) specialized to the cut channel
+  `CutAssignments D C` (whose `Fintype.card` IS `cutBondCapacity`) gives `S_vN(ρ) ≤ log(∏_{e∈C} D e)` for any density on the
+  cut channel — the ENTROPY form of `distinguishableRecords_le_cut`. With the rank saturation, the record/rank bound and the
+  entropy bound are the SAME min-cut/area bound (`S ≤ log(rank) ≤ log(area)`). This is the §2.2 capstone; **the record/rank
+  side (RecordMincut) is genuinely NEW vs the pre-existing entropy-only capacity bound.**
 - **F6/Tier-2 §2.2 — the MIN-CUT bound on distinguishable RECORDS (capacity = area from the code)** (`RecordMincut.lean`
   **`mincut_bounds_distinguishable_records`** + `records_log_le_mincut_area`, **[AF]** std-3, 2026-07-08): the QG-facing finite
   core of `docs/qg_roadmap/TIER_2_FINITE_QI_SUBSTRATE.md` §2.2. In a finite tensor-network code, the distinguishable-record
