@@ -27,6 +27,7 @@ import Mathlib.MeasureTheory.Function.JacobianOneDim
 import Mathlib.MeasureTheory.Integral.Lebesgue.Map
 import Mathlib.MeasureTheory.Measure.WithDensity
 import Mathlib.Analysis.SpecialFunctions.Arsinh
+import Mathlib.MeasureTheory.Function.L2Space
 
 namespace QIQTH.OneParticleMeasure
 
@@ -186,5 +187,32 @@ theorem massShell_conj_mul_integral_eq_half_rapidity {m : ℝ} (hm : 0 < m) (F G
             ∂ (volume : Measure ℝ) := by
   simpa using
     integral_massShellMeasure_eq_half_rapidity hm (fun k => starRingEnd ℂ (F k) * G k)
+
+/-! ### The one-particle `L²` embeds isometrically into the flat rapidity `L²`
+
+The KG one-particle Hilbert space is `L²(massShellMeasure m)`.  Composition with the
+measure-preserving rapidity chart (`rapidity_measurePreserving`) gives an `L²` map into the *flat*
+rapidity space `L²((1/2)•volume)` that PRESERVES the norm — an isometric embedding.  This is the
+`L²`-level (brick-3) packaging of the rapidity change of variables. -/
+
+open scoped ENNReal in
+/-- The rapidity-chart pullback on `L²`: composition with the measure-preserving rapidity
+equivalence carries the one-particle space `L²(massShellMeasure m)` into the flat rapidity space
+`L²((1/2)•volume)` (as an additive map; norm preservation is `rapidityPullL2_norm`). -/
+noncomputable def rapidityPullL2 (m : ℝ) (hm : 0 < m) :
+    Lp ℂ 2 (massShellMeasure m) →+
+      Lp ℂ 2 ((ENNReal.ofReal (1 / 2)) • (volume : Measure ℝ)) :=
+  Lp.compMeasurePreserving _ (rapidity_measurePreserving hm)
+
+/-- **The one-particle `L²` isometry.**  `rapidityPullL2` is an isometry — the KG one-particle
+Hilbert space embeds isometrically, via the rapidity chart, into the flat rapidity `L²`. -/
+theorem rapidityPullL2_isometry (m : ℝ) (hm : 0 < m) :
+    Isometry (rapidityPullL2 m hm) :=
+  Lp.isometry_compMeasurePreserving (rapidity_measurePreserving hm)
+
+/-- Norm preservation of the one-particle `L²` embedding. -/
+theorem rapidityPullL2_norm (m : ℝ) (hm : 0 < m) (g : Lp ℂ 2 (massShellMeasure m)) :
+    ‖rapidityPullL2 m hm g‖ = ‖g‖ :=
+  Lp.norm_compMeasurePreserving g (rapidity_measurePreserving hm)
 
 end QIQTH.OneParticleMeasure
