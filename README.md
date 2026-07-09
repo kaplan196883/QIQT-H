@@ -17,6 +17,8 @@ bash verify/verify.sh   # → verify/out/claim_card.md
 
 It prints a **claim card**: the exact formal statement, the complete trusted base, and a ledger of every *physical* assumption still assumed rather than proven. See a real one at **[qiqt.org/claim-card](https://qiqt.org/claim-card)**. All mechanical trust collapses to three things: the Lean kernel, your reading of the rendered statement, and the explicitly-listed physical inputs. *(Needs the Lean toolchain via [elan](https://github.com/leanprover/elan); the clean-room build takes a while — that is the point.)*
 
+Prefer not to run a shell script? A pinned **Docker** recipe rebuilds the whole stack — Lean, Mathlib, the project — from source and runs the capsule: `docker build -t qiqt-verify -f verify/Dockerfile . && docker run --rm qiqt-verify`. **Reproduced the build?** Please add a line to [`REPRODUCED.md`](REPRODUCED.md) — the public reproduction log.
+
 ## What this is
 
 QIQT-H's ontology is **Φ-monism**: there is one substance — the universal wave function Φ, evolving exactly unitarily — of which observers are macroscopic patterns; a non-dynamical selector **λ** marks exactly one decohered record actual per run. No collapse, no branching, no fundamental probability. It rests on five postulates; the genuinely irreducible new physics is **(P4) finite holographic capacity + (P5) quantum equilibrium**, on the **(P1) (Φ,λ) ontology** — (P2)–(P3) being the standard quantum-relativistic arena.
