@@ -201,7 +201,8 @@ before QIQT-H's GR chain was formalized (mid-2026) — establishes this relative
 Jacobson route in a peer-reviewed venue. QIQT-H claims <strong>no priority</strong>; it independently and
 subsequently machine-verifies the same chain, with every physical input in an explicit ledger. Both meet the <em>same</em> honest frontier: their closing caveat — higher-order corrections on a curved
 horizon, "<em>technically demanding, especially regarding the modular data</em>" — is precisely our cited
-curved-correction / Riemannian-heat-kernel (Seeley–DeWitt) frontier.
+curved-correction / Riemannian-heat-kernel (Seeley–DeWitt) frontier. See the
+<a href="/prl-mapping">full equation-by-equation mapping</a> (PRL step → Lean theorem).
 
 </div>
 

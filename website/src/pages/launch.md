@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: "Anyone can claim they solved the measurement problem. Almost no one lets you check."
 eyebrow: The launch
-description: A Physical Review Letters paper derived Einstein's equations from quantum information — I machine-verified that exact chain in Lean, so you can re-run it. The verification capsule, the single-world idea, the honest ledger, and an invitation to break it.
+description: A Physical Review Letters paper derived the semiclassical Einstein equations from quantum relative entropy. I formalized that exact conditional chain in Lean, so you can re-run it — with every physical assumption printed in a claim card. The verification capsule, the single-world idea, the honest ledger, and an invitation to break it.
 ---
 
 Physics foundations has a credibility problem, and it's not hard to see why. The field is a
@@ -22,8 +22,14 @@ standard axioms — no `sorry`, no hidden axiom.
 
 ```bash
 git clone https://github.com/kaplan196883/QIQT-H && cd QIQT-H
-bash verify/verify.sh   # → verify/out/claim_card.md
+cat verify/verify.sh          # read it first — it's short
+bash verify/verify.sh         # → verify/out/claim_card.md
 ```
+
+(Don't want to run a stranger's shell script? A pinned **Docker** recipe rebuilds the whole
+stack — Lean, Mathlib, the project — from source in a container; see
+[`verify/README.md`](https://github.com/kaplan196883/QIQT-H/blob/main/verify/README.md). Toolchain
+`leanprover/lean4:v4.30.0`; the clean-room build takes a while — that's the point.)
 
 Out comes a **[claim card](/claim-card)**: the exact formal theorem, the complete trusted base,
 and a ledger of every *physical* assumption still assumed rather than proven. All the mechanical
@@ -53,8 +59,24 @@ guard proving that calibration is load-bearing (without it the count is unbounde
 that one calibration is still *carried*, not derived from nothing — so their Letter vindicates the
 shared **derivation chain** (relative entropy → modular theory → Jacobson → Einstein), not QIQT-H's
 finiteness reading. What I add is that a computer checks every line, and you can re-run it. In one
-sentence: **a top-journal result exists for this — I'm the one who made it machine-checkable, and I
-reduced its one assumption to a single, guarded calibration.**
+sentence: **a top-journal result exists for this — I formalized its free-field chain in Lean, and
+reduced its one entropy–area assumption to a single, guarded calibration.**
+
+**What's new here, and what isn't** — stated plainly, because conflating them is what lets a skeptic
+dismiss the work:
+
+- *Not new:* the Dorau–Much relative-entropy route, the physical insight, and the claim that
+  semiclassical gravity can be motivated from horizon relative entropy. That's their published result,
+  and it came first.
+- *New:* the **Lean 4 formalization** of the corresponding free-field theorem chain; an **explicit
+  assumption ledger** (the claim card) so every physical premise is visible; a **machine-checked
+  dependency** from those premises to the conclusion; the reusable operator-algebra / spectral /
+  modular-theory infrastructure it needed; and the finding that the A/4G relation is *derived* for the
+  induced-area construction, with a guard isolating exactly which calibration input is load-bearing.
+
+This is a formalization contribution on top of a published physics result — not a physics priority
+claim, and not a proof that gravity is emergent. See the full
+[**PRL equation → Lean theorem mapping**](/prl-mapping) for the step-by-step correspondence.
 
 ## The idea, in one breath
 
@@ -81,11 +103,12 @@ Not a theory of everything. A program you can audit.
 ## What actually got built
 
 Along the way the formalization produced results that, to my knowledge, existed in **no proof
-assistant** before: the **first complete Tomita–Takesaki modular theory** for an inductive-limit
-state, an **unbounded Stone theorem** and spectral machinery beyond current Mathlib, and the **von
-Neumann double-commutant theorem** — plus the headline physics chain, **Einstein's equations from
-a finite-entropy bound**, conditional and free-field, end to end. Over 4,700 theorems, zero axioms
-beyond Lean's standard three.
+assistant** before (pointers and corrections welcome): a complete **Tomita–Takesaki modular theory**
+for an inductive-limit state, an **unbounded Stone theorem** and spectral machinery beyond current
+Mathlib, and the **von Neumann double-commutant theorem** — plus the headline physics chain, the
+**semiclassical Einstein equations from a finite-entropy bound**, conditional and free-field, end to
+end. Over 4,700 theorems, with **no project-specific axioms and no `sorry`** — the final theorems
+depend only on Lean's three standard classical axioms.
 
 ## The ask
 
