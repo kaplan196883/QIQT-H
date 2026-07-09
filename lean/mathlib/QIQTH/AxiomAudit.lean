@@ -10461,5 +10461,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilGH.unitSquare_net
 #print axioms QIQTH.StencilGH.ghDist_stencil_le
 #print axioms QIQTH.StencilGH.stencil_toGHSpace_tendsto_unitSquare
+-- StencilDimGraph.lean — DIM-GENERIC STENCIL brick G1 (2026-07-09): the d-dimensional lattice
+-- Fin d → Fin (N+1) with the integer Euclidean-ball stencil (Adj = x ≠ y ∧ Σᵢ(xᵢ−yᵢ)² ≤ R², decidable),
+-- embD into EuclideanSpace ℝ (Fin d) (WithLp.toLp), the cast bridge euclD² = sqDistD, THE MARGIN
+-- margin d = ⌊√d⌋+1 (sqrt-free √d ≤ margin d — the d-dimensional rounding-error dominator for G2),
+-- the Euclidean LOWER bound euclD ≤ R·hopDist (walk induction; Reachable HYPOTHESIS until G2), and
+-- the diameter bound euclD ≤ margin d · N.  Generalizes 2D brick I1 to every d.  HONEST: d is an
+-- INPUT (the chosen lattice), NOT emergent; isotropy inserted through the stencil rule; the eventual
+-- G4 limit is the FLAT cube; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilDimGraph.sqDistD_eq_zero_iff
+#print axioms QIQTH.StencilDimGraph.sqrt_le_margin
+#print axioms QIQTH.StencilDimGraph.euclD_le_of_adj
+#print axioms QIQTH.StencilDimGraph.euclD_le_R_mul_dist
+#print axioms QIQTH.StencilDimGraph.euclD_le_margin_mul_N
 
 end QIQTH.AxiomAudit
