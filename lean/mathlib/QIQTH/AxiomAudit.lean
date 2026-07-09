@@ -10395,5 +10395,16 @@ namespace QIQTH.AxiomAudit
 -- emergence of dimension/topology); entanglement engineered (dynamical source open); NOT GR, NOT QG. [AF] std-3.
 #print axioms QIQTH.ContinuumLimit.hausdorffDist_chainGridSet_tendsto
 #print axioms QIQTH.ContinuumLimit.toGHSpace_chainGridNC_tendsto
+-- IsotropyNoGo.lean — the ISOTROPY NO-GO (2026-07-09, user-authorized): the 2D box-product L¹/taxicab
+-- continuum is provably NOT Riemannian. inner_metric_midpoint_unique (inner-product spaces have UNIQUE
+-- metric midpoints, via parallelogram_law_with_norm); no_l1_isometric_embedding_into_inner : NO
+-- distance-preserving map from (ℝ²,L¹) into ANY real inner-product space E (the L¹ diamond's two distinct
+-- midpoints (1,0),(0,1) of (0,0),(1,1) would collapse). So the square-lattice ≥2D emergent geometry
+-- CANNOT GH-converge to Euclidean/Riemannian — anisotropy is a THEOREM, not a gap. HONEST: forbids the
+-- false "square grid gives a flat Riemannian surface"; the 1D limit IS Riemannian (ContinuumLimit), the
+-- split is at dim ≥2; intrinsic Euclidean needs isotropic (random/increasing-stencil) graphs =
+-- research-grade (RGG/concentration infra Mathlib lacks). NOT GR, NOT numerical-G, NOT QG. [AF] std-3.
+#print axioms QIQTH.IsotropyNoGo.inner_metric_midpoint_unique
+#print axioms QIQTH.IsotropyNoGo.no_l1_isometric_embedding_into_inner
 
 end QIQTH.AxiomAudit
