@@ -10255,6 +10255,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneParticleMap.jHbar_two_hbar_im_inner_eq_sigmaK
 #print axioms QIQTH.OneParticleMap.jHbar_boost_two_hbar_im_inner_eq_sigmaK
 
+-- OneParticleFockBridge.lean — Lp j_ℏ brick-10, the BRIDGE to the pre-existing continuum Fock tower
+-- (2026-07-09): the track-A one-particle map jHbar lives on `Lp ℂ 2 volume` = the SAME one-particle
+-- space QIQTH's continuum Fock tower is built over (QIQTH.Fock.OneParticle.boostUnitary, the 1+1D
+-- mass-m boost unitary group; QIQTH.Fock.boostFock = Γ(boostUnitary), the second-quantized boost with
+-- vacuum invariance).  jHbar_boostUnitary_two_hbar_im_inner_eq_sigmaK : the KG symplectic form via jHbar
+-- is invariant under the EXISTING Fock boost boostUnitary (2ℏ·Im⟪boostUnitary t (j u), boostUnitary t
+-- (j v)⟫ = σ_K).  So hTkk's coefficient physics embeds in the pre-existing Fock/CCR tower, whose
+-- second-quantized boost Γ(boostUnitary) already carries the Fock-level covariance.  NOTE: brick-8's
+-- boostRapidity is the same Lp.compMeasurePreservingₗᵢ-translation as boostUnitary (a rediscovery); this
+-- bridge uses the canonical existing boostUnitary.  HONEST: momentum/rapidity representation — NOT the
+-- geometric position-space boost bridge (tilted-slice/KG-evolution infra); NOT a new Fock construction
+-- (the tower pre-exists); NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.OneParticleFockBridge.jHbar_boostUnitary_two_hbar_im_inner_eq_sigmaK
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,

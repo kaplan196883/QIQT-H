@@ -726,6 +726,7 @@ import QIQTH.OneParticleInner
 import QIQTH.PosFreqInner
 import QIQTH.OneParticleBoost
 import QIQTH.OneParticleMap
+import QIQTH.OneParticleFockBridge
 import QIQTH.FreeFieldCorner
 import QIQTH.QG.FinitePoincareNoGo
 import QIQTH.QG.LatticeDispersionBound
