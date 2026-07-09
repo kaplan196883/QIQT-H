@@ -10575,5 +10575,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TorusStencilWalk.torusD_dist_sub_le
 #print axioms QIQTH.TorusStencilWalk.torusDistortionError_tendsto_zero
 #print axioms QIQTH.TorusStencilWalk.torusD_scaled_metric_tendsto
+-- TorusStencilGH.lean — TORUS brick T3, the TORUS CAPSTONE (2026-07-10): intrinsic GH convergence
+-- to the FLAT d-TORUS in every dimension.  ScaledTorusD d N = Fin d → ZMod (N+1) as an ABSTRACT
+-- finite metric space with the intrinsic scaled hop metric (stencilRD/(N+1))·graphDist (NeZero (N+1)
+-- makes everything total — no singleton split); target = the WHOLE FlatTorus d = PiLp 2 (AddCircle 1)^d
+-- (compact+nonempty from T1, no subtype).  flatTorus_net: equivIco representative + wrap-aware round,
+-- the mod cast absorbs the wrap (no clamp), error √d/(2(N+1)) ≤ margin/(N+1).  ghDist_torusD_le:
+-- ghDist ≤ torusDistortionError d (N+1)/2 + margin/(N+1).  CAPSTONE torusD_toGHSpace_tendsto_flatTorus
+-- (∀ d): the finite cyclic graph-metric spaces converge in Gromov–Hausdorff space to the flat d-torus —
+-- SAME machine as the cube capstone, DIFFERENT global topology in the limit (no boundary, π₁ ≠ 0).
+-- Corollaries: torus1D (THE CIRCLE: cycle graphs → S¹), torus2D, torus3D (periodic 3-space HEADLINE).
+-- HONEST: the torus topology is INSERTED through the wrap rule (ZMod cyclic structure) — the machine
+-- TRANSPORTS a chosen discrete topology to the continuum, topology does NOT emerge; d is an INPUT;
+-- the limit is FLAT (topology changed, curvature did not); NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TorusStencilGH.instMetricSpaceScaledTorusD
+#print axioms QIQTH.TorusStencilGH.flatTorus_net
+#print axioms QIQTH.TorusStencilGH.ghDist_torusD_le
+#print axioms QIQTH.TorusStencilGH.torusD_toGHSpace_tendsto_flatTorus
+#print axioms QIQTH.TorusStencilGH.torus1D_toGHSpace_tendsto_circle
+#print axioms QIQTH.TorusStencilGH.torus3D_toGHSpace_tendsto_flatTorus
 
 end QIQTH.AxiomAudit
