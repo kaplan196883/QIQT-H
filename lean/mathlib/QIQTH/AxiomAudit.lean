@@ -10667,5 +10667,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TorusFromState.torusProfile_boundary_realized
 #print axioms QIQTH.TorusFromState.state_decoded_geometry_tendsto_flatTorus'
 #print axioms QIQTH.TorusFromState.state_decoded_geometry_tendsto_circle
+-- TripodFromState.lean — STATE-WIRE-2 brick W2 (2026-07-10): the end-to-end chain to the FIRST
+-- STATE-DECODED NON-EUCLIDEAN LIMIT.  New content: the star SimpleGraph (Adj x y := starHop x y = 1
+-- — provably exactly the subdivided-star adjacency; starHop_triangle = the reusable ℕ triangle) and
+-- THE GEODESIC IDENTITY starGraph_dist_eq ((starGraph n).dist = starHop; ≤ by one-step-descent cons
+-- walks, ≥ by walk induction) — the tripod chain is genuinely GRAPH-GEODESIC end to end.  Then the
+-- glue: starProfile (crossing-count, q = 2), starProfile_decodes (the BRANCH POINT is an OUTPUT of
+-- the cut-rank data), scaledStar_dist_eq_decoded, starProfile_boundary_realized (Bell Schmidt
+-- ranks), PACKAGED state_decoded_geometry_tendsto_tripod (∃ profile family whose decoded scaled
+-- metrics converge in GH space to the TRIPOD — which provably embeds in NO inner-product space).
+-- HONEST: the branching is INSERTED through the star adjacency the profile is built on — the state
+-- is CONSTRUCTED; the dynamical source stays the cited open wall; CAT(0) singular tree, NOT positive
+-- curvature; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TripodFromState.starHop_triangle
+#print axioms QIQTH.TripodFromState.starGraph_dist_eq
+#print axioms QIQTH.TripodFromState.starProfile_decodes
+#print axioms QIQTH.TripodFromState.scaledStar_dist_eq_decoded
+#print axioms QIQTH.TripodFromState.state_decoded_geometry_tendsto_tripod
 
 end QIQTH.AxiomAudit

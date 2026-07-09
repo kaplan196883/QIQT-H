@@ -737,6 +737,7 @@ import QIQTH.TripodGH
 import QIQTH.ConeMetric
 import QIQTH.ConeGH
 import QIQTH.TorusFromState
+import QIQTH.TripodFromState
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
