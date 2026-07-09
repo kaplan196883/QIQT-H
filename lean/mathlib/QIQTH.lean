@@ -734,6 +734,7 @@ import QIQTH.TorusStencilGraph
 import QIQTH.TorusStencilWalk
 import QIQTH.TorusStencilGH
 import QIQTH.TripodGH
+import QIQTH.ConeMetric
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

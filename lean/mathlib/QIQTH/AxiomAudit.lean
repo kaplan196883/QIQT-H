@@ -10615,5 +10615,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TripodGH.scaledStar_dist_eq
 #print axioms QIQTH.TripodGH.ghDist_star_le
 #print axioms QIQTH.TripodGH.star_toGHSpace_tendsto_tripod
+-- ConeMetric.lean — CURVATURE brick B2a (2026-07-10): THE CONE of total angle θ ≤ 2π — concentrated
+-- POSITIVE curvature (deficit 2π − θ at the apex) as a compact metric space, with the curvature a
+-- THEOREM.  Cone θ = apex + polar points (r ∈ (0,1], φ : AddCircle θ); metric = the law of cosines
+-- lawCos r₁ r₂ ‖φ₁−φ₂‖ with NO case split (the AddCircle norm is pinned ≤ θ/2 ≤ π so the chord
+-- always beats the apex route).  lawCos_triangle: two-case proof — angles summing ≤ π unfold
+-- isometrically into the plane (planar law-of-cosines identity + Euclidean dist_triangle); > π
+-- routes through the apex (lawCos ≥ a − b·cos δ twice + cos δ₁₂ + cos δ₂₃ ≤ 0).  Compact via the
+-- 2-Lipschitz polar map from [0,1] × AddCircle θ.  THE CURVATURE THEOREM
+-- cone_no_isometric_embedding_into_inner (θ < 2π): the two unit radii at angular separation θ/2
+-- have TWO distinct metric midpoints — the radius-cos(θ/4) bisectors at θ/4 and 3θ/4, exactly
+-- sin(θ/4) from each endpoint and sin(θ/2) > 0 apart (they merge only in the flat plane θ = 2π) —
+-- so the IsotropyNoGo unique-midpoint invariant kills EVERY inner-product embedding.  Genuine
+-- concentrated positive curvature, machine-checked.  HONEST: an Alexandrov cone point — NOT a
+-- smooth Riemann tensor, NOT a curved-surface atlas; flat away from the apex; θ and the geometry
+-- are INPUTS; GH approximation = B2b; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConeMetric.lawCos_triangle
+#print axioms QIQTH.ConeMetric.instMetricSpaceCone
+#print axioms QIQTH.ConeMetric.instCompactSpaceCone
+#print axioms QIQTH.ConeMetric.cone_no_isometric_embedding_into_inner
 
 end QIQTH.AxiomAudit
