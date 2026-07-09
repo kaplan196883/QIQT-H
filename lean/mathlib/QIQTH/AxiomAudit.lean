@@ -10721,5 +10721,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SphereGH.sphere_net
 #print axioms QIQTH.SphereGH.ghDist_sphereGrid_le
 #print axioms QIQTH.SphereGH.sphereGrid_toGHSpace_tendsto_sphere
+-- ConeIntrinsicGraph.lean — INTRINSIC-CONE brick K1 (2026-07-10): the geometric graph
+-- coneGraph θ n ρ on the polar grid (Adj = x ≠ y ∧ cone-dist ≤ ρ; CLASSICAL DecidableRel,
+-- documented — the graph is a mathematical object, not an algorithm; needed only for the K4
+-- decoder).  Lower bound dist_le_rho_mul_dist (each hop ≤ ρ ⟹ coneDist ≤ ρ·hopcount; Reachable
+-- HYP until K2); mesh θ n = 1/(n+1) + θ/(2(n+2)) + cone_net_mesh (B2b net restated); cone/grid
+-- diameter ≤ 2.  HONEST: the cone geometry is INSERTED through the adjacency rule exactly as
+-- isotropy through the stencil rule; θ an INPUT; Alexandrov-concentrated curvature not smooth;
+-- K2 = walk/connectivity, K3 = GH capstone; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConeIntrinsicGraph.coneGraph
+#print axioms QIQTH.ConeIntrinsicGraph.dist_le_rho_mul_dist
+#print axioms QIQTH.ConeIntrinsicGraph.cone_net_mesh
+#print axioms QIQTH.ConeIntrinsicGraph.polarGrid_diam
+#print axioms QIQTH.ConeIntrinsicGraph.mesh_le
 
 end QIQTH.AxiomAudit
