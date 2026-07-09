@@ -476,6 +476,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     the ONE genuine remaining piece is the GEOMETRIC position-space boost bridge (spacetime boost of position Cauchy data ↔
     rapidity translation; boosted data on a tilted slice → needs KG evolution/solution infra), a named multi-file phase; NOT
     numerical-G; NOT QG.**
+  - **Free-field one-particle `j_ℏ` COMPLETE (2026-07-09, brick-11 audit).** The geometric position-space boost bridge ALSO
+    already exists in QIQT-H: `Fock.Localization.Krep m f θ = (1/√2)·minkowskiFourier f (massShell m θ)` (spacetime test
+    function → rapidity amplitude via Minkowski FT on the mass shell — test-function FT is evaluable pointwise on the shell,
+    no measure-zero issue); `boosted_localized_modes_eq` (spacetime boost of `f` = rapidity translation of the amplitude) and
+    `localized_typicality_boost_invariant` (boost-invariance) are axiom-free. **So the free-field one-particle `j_ℏ` is
+    fully machine-checked axiom-free: domain (`H^{1/2}⊕H^{-1/2}`), `σ=2ℏ·Im⟪·,·⟫` normalization, boost covariance (rapidity
+    AND geometric position-space via `Krep`), and Fock embedding.** Track A's new contribution = the explicit `σ`-normalized
+    Fourier-Cauchy-data chain (bricks 1–10) + Fock bridge; the geometric `Krep` localization + covariance pre-existed. The
+    residual `jHbar`↔`Krep` parametrization reconciliation is cosmetic, not a wall. **The actual open frontier is NOT `j_ℏ`
+    (done) — it is interacting matter / continuum Type III₁ / QG proper; NOT numerical-G; NOT QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the

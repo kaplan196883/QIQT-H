@@ -237,13 +237,20 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       (`H^{1/2}⊕H^{-1/2}`, brick-5), `σ = 2ℏ·Im⟪·,·⟫` (capstone), boost = unitary (brick-8/existing `boostUnitary`),
       packaged map + boost-invariance of `σ` (brick-9), embedded in the pre-existing continuum Fock/CCR tower with
       second-quantized covariance (brick-10). The ONE genuine remaining piece toward a fully-geometric position-space `j_ℏ`:
-      the GEOMETRIC position-space Lorentz covariance — relating a *spacetime* boost of the **position-space** Cauchy data
-      `(φ(x),φ̇(x))` to the rapidity translation on the coefficient. The obstruction is real: the boosted data lives on a
-      **tilted Cauchy slice**, so it is NOT a local function of the original `t=0` data — closing it needs KG
-      solution/evolution (or Killing-flow) infrastructure + density/extension to `H^{1/2}⊕H^{-1/2}`. This is a genuine
-      multi-file phase, NOT a continuation brick (two independent GPT-5.5 triages). The momentum/rapidity-representation
-      `j_ℏ` (domain + `σ`-normalization + boost-unitary + Fock embedding) is the honest completion of the Lp/`j_ℏ` track;
-      the geometric position-space bridge is a named further phase. Do NOT fake or wrapper-grind it.
+      was the GEOMETRIC position-space Lorentz covariance — **and it TOO already exists in QIQT-H** (discovered 2026-07-09,
+      brick-11 audit). `QIQTH.Fock.Localization.Krep m f θ = (1/√2)·minkowskiFourier f (massShell m θ)` maps a **spacetime
+      test function** `f` to its rapidity amplitude via the Minkowski Fourier transform ON the mass shell — sidestepping the
+      "tilted slice / measure-zero" obstruction entirely, because `f` is a test function (its FT is evaluable pointwise on the
+      shell). `boosted_localized_modes_eq` proves `(K(β_a f))(θ) = (Kf)(θ+a)` — a spacetime Lorentz boost of the test function
+      IS the rapidity translation `boostUnitary` on the amplitude — and `localized_typicality_boost_invariant` gives the
+      boost-invariance. Both axiom-free. So the geometric position-space boost bridge is NOT a missing multi-file phase — it
+      was built in the prior one-particle-BW/localization campaign.
+      **TRACK-A COMPLETE (2026-07-09): the free-field one-particle `j_ℏ` — domain (`H^{1/2}⊕H^{-1/2}`), `σ = 2ℏ·Im⟪·,·⟫`
+      normalization, boost covariance (rapidity-level AND geometric position-space via `Krep`), and Fock embedding — is fully
+      machine-checked axiom-free.** Track A's new contribution: the explicit `σ`-normalized Fourier-Cauchy-data chain
+      (bricks 1–10) + the Fock bridge; the geometric `Krep` localization + covariance pre-existed. The only residual is a
+      cosmetic reconciliation of the two parametrizations (Fourier-Cauchy-data `jHbar` ↔ spacetime-test-function `Krep`) —
+      not a wall. The ACTUAL open frontier is NOT `j_ℏ` (done) but interacting matter / continuum Type III₁ / QG proper.
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.

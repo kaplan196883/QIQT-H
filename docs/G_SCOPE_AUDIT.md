@@ -139,6 +139,14 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   embedding `hTkk`'s coefficient physics in the pre-existing Fock/CCR tower (which already carries second-quantized Lorentz
   covariance). So the ONLY genuine remaining piece is the GEOMETRIC position-space boost bridge (tilted-slice / KG-evolution
   infra) — a named multi-file phase, not to be faked.
+  **RESOLVED (2026-07-09, brick-11 audit): the geometric position-space boost bridge ALSO already exists in QIQT-H.**
+  `QIQTH.Fock.Localization.Krep m f θ = (1/√2)·minkowskiFourier f (massShell m θ)` maps a SPACETIME test function `f` to its
+  rapidity amplitude via the Minkowski FT on the mass shell (no measure-zero problem — `f` is a test function);
+  `boosted_localized_modes_eq` proves a spacetime Lorentz boost of `f` = rapidity translation `boostUnitary` of the
+  amplitude, `localized_typicality_boost_invariant` the boost-invariance — both axiom-free. So the free-field one-particle
+  `j_ℏ` is COMPLETE axiom-free: domain, `σ=2ℏ·Im⟪·,·⟫`, boost covariance (rapidity AND geometric position-space), and Fock
+  embedding all machine-checked. `hTkk`'s localization coefficient physics is fully discharged at the free-field one-particle
+  level. The remaining open frontier is NOT `j_ℏ` — it is interacting matter / continuum Type III₁ / QG proper (unchanged).
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived
