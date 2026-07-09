@@ -2251,11 +2251,31 @@ continuum limits, then the isotropy question settled both ways:
   GH-converge to the flat EUCLIDEAN unit cube `[0,1]^d`**, quantitative
   (`ghDist ≤ distortionErrorD/2 + margin/N`); explicit **3D headline
   `stencil3D_toGHSpace_tendsto_unitCube`** and d = 2 (recovers I4).
+- **STATE-WIRE end-to-end** (`StencilFromState.lean`, 2026-07-10): the composition is ONE packaged theorem
+  (`state_decoded_geometry_tendsto_unitCube'`): ∃ a family of cut-rank profiles — boundary exponents realized
+  as genuine reduced-density Bell Schmidt ranks across every cut — whose decoded, scaled metrics are
+  pointwise-exactly the metrics of the finite spaces GH-converging to the Euclidean unit cube (every d, 3D
+  headline). The state is CONSTRUCTED to carry the pattern; the dynamical source stays the cited wall.
+- **The d-TORUS** (`TorusStencilGraph/Walk/GH.lean`, 2026-07-10): the same machine on the cyclic lattice
+  `Fin d → ZMod N` (wrapDist = minimal-absolute representative `ZMod.valMinAbs`; wrap-aware rounding walk
+  with NO box clamping; sharper pinch `m²/(2(R−m))+R/N`): **`torusD_toGHSpace_tendsto_flatTorus` — the
+  intrinsic cyclic graph metrics GH-converge to the FLAT d-torus `PiLp 2 (AddCircle 1)^d` for every d**,
+  with `torus1D` (cycle graphs → **the circle S¹**), `torus2D`, `torus3D` (periodic 3-space). The topology
+  is INSERTED through the wrap rule — the machine transports a chosen discrete topology, none emerges.
+- **THE TRIPOD — the first provably NON-EUCLIDEAN limit** (`TripodGH.lean`, 2026-07-10): the 3-armed metric
+  tree is a GH limit of subdivided star graphs (EXACT isometric embedding, `ghDist ≤ 1/(n+1)`; the finite
+  metric IS the scaled hop metric, `scaledStar_dist_eq`), and
+  **`tripod_no_isometric_embedding_into_inner`** proves it embeds in NO real inner-product space (the apex
+  is a metric midpoint of all three endpoint pairs — the IsotropyNoGo unique-midpoint invariant). HONEST
+  LABEL: a CAT(0) singular TREE — non-manifold/branching, NOT positive curvature, NOT a curved surface;
+  the cone with deficit angle (concentrated positive curvature) is the cited next candidate, not attempted.
 - **HONEST scope (binding):** the isotropy is *inserted through the stencil rule* (the Euclidean-disk edge
   test) — NOT isotropy emerging from a fixed local combinatorial rule (impossible per the no-go) and NOT from
-  dynamics (cited wall); **the dimension d is an INPUT — the chosen lattice — NOT emergent: the d-generic
-  theorem holds for every d and says NOTHING about why physical space is 3-dimensional**; the limit is FLAT,
-  not curved; NOT emergent dimension/topology, NOT GR, NOT numerical-G, NOT QG.
+  dynamics (cited wall); the torus topology and the tripod branching are likewise INSERTED through their
+  rules (transport, not emergence); **the dimension d is an INPUT — the chosen lattice — NOT emergent: the
+  d-generic theorem holds for every d and says NOTHING about why physical space is 3-dimensional**; the
+  cube/torus limits are FLAT and the tripod is branching-singular, not curved-Riemannian; NOT emergent
+  dimension/topology, NOT GR, NOT numerical-G, NOT QG.
 
 ## 6b. Entropy/ — the DPI / Lieb-concavity / operator-convexity tower (19 files) — GENUINELY COMPLETE
 

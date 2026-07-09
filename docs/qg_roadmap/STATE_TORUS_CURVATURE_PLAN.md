@@ -59,10 +59,15 @@ nonempty. The limit is still FLAT — what changes is the **global topology** (n
   `torusD_toGHSpace_tendsto_flatTorus` ∀d, with `torus1D` (THE CIRCLE), `torus2D`, `torus3D`
   (periodic 3-space). Sharper pinch than the cube (torus diameter m/2). Topology INSERTED via the
   wrap rule — transport, not emergence.
-- **Track B (B0 consult DONE, 2026-07-10)**: GPT-5.5 verdict — tripod FIRST (tractability × honesty),
-  cone with deficit angle second (triangle inequality for the cone formula is the pain point; unfold
-  near apex needs case splits), smooth surfaces much later. B1 = the TRIPOD brick (below); the cone
-  stays listed as the follow-up candidate, attempted only if B1 lands cleanly and budget allows.
+- **Track B COMPLETE at the B1 checkpoint** (B0 consult + B1 e77a2d52): `TripodGH.lean` — the TRIPOD
+  is a GH limit of subdivided star graphs (EXACT isometric embedding, ε₂ = 0, ghDist ≤ 1/(n+1)) AND
+  provably embeds in NO real inner-product space (`tripod_no_isometric_embedding_into_inner`, via the
+  IsotropyNoGo unique-midpoint invariant) — the first machine-checked NON-EUCLIDEAN limit in the
+  program, honestly labelled (CAT(0) singular tree: non-manifold/branching, NOT positive curvature).
+  **The cone with deficit angle (concentrated positive curvature) remains CITED, not attempted** —
+  the consult flagged its triangle inequality/apex-unfolding as the genuine pain point.
+- **CAMPAIGN COMPLETE (2026-07-10).** All three user-directed tracks (a=state-wire, b=curvature-first-
+  step, c=torus) shipped axiom-free at std-3, budget 0, local commits only.
 
 ### B1 — the TRIPOD (metric tree): the first NON-FLAT (non-locally-Euclidean) GH limit
 `Tripod := Option (Fin 3 × Ioc 0 1)` (none = apex, some (i,t) = arm point): dist none-some = t,
