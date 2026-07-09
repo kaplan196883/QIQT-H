@@ -10243,6 +10243,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneParticleBoost.boostRapidity_inner
 #print axioms QIQTH.OneParticleBoost.two_hbar_im_boostRapidity_inner
 
+-- OneParticleMap.lean — Lp j_ℏ brick-9, the PACKAGED one-particle map + boost-invariance of σ
+-- (2026-07-09): `jHbar m ℏ Ψ π h := h.toLp (posFreqCoeff m ℏ Ψ π)` (the one-particle vector; h from
+-- brick-5).  `jHbar_two_hbar_im_inner_eq_sigmaK`: 2ℏ·Im⟪j_ℏ u, j_ℏ v⟫ = σ_K (capstone in terms of
+-- jHbar).  `jHbar_boost_two_hbar_im_inner_eq_sigmaK`: applying the rapidity boost (brick-8 unitary) to
+-- both one-particle vectors leaves 2ℏ·Im⟪·,·⟫ = σ_K unchanged — BOOST-INVARIANCE of the KG symplectic
+-- form via the one-particle map (Lorentz-invariance at the rapidity level).  HONEST: the jHbar def is a
+-- naming layer; the content is the σ-normalization (bricks 2+5+6) + its boost-invariance (brick-8).
+-- Momentum/rapidity representation — NOT the geometric position-space construction (needs KG
+-- reconstruction + on-shell surface measure); NOT Fock second-quantization; NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.OneParticleMap.jHbar_two_hbar_im_inner_eq_sigmaK
+#print axioms QIQTH.OneParticleMap.jHbar_boost_two_hbar_im_inner_eq_sigmaK
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
