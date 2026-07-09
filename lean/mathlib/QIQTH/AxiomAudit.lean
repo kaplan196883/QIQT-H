@@ -10230,6 +10230,19 @@ namespace QIQTH.AxiomAudit
 -- NOT numerical-G/QG.  [AF] std-3.
 #print axioms QIQTH.PosFreqInner.two_hbar_im_L2_inner_posFreq_eq_sigmaK
 
+-- OneParticleBoost.lean — Lp j_ℏ brick-8, BOOST COVARIANCE on the momentum/rapidity representation
+-- (2026-07-09): the Lorentz boost of rapidity β acts on the mass shell by θ↦θ+β (rapidity translation);
+-- since Lebesgue volume is translation-invariant, pullback is a LinearIsometry (`boostRapidity β` via
+-- Lp.compMeasurePreservingₗᵢ + measurePreserving_add_right) — the boost is UNITARY on the one-particle
+-- L²(ℝ,ℂ), so it preserves the inner product (`boostRapidity_inner`) and 2ℏ·Im⟪·,·⟫ = σ
+-- (`two_hbar_im_boostRapidity_inner`): the one-particle construction is Lorentz-covariant at the
+-- rapidity level.  HONEST: boost covariance on the MOMENTUM/RAPIDITY representation (where the
+-- one-particle space is genuinely L², no mass-shell-restriction obstruction) — NOT the geometric
+-- position-space-boost ↔ rapidity-translation bridge (needs KG reconstruction + dispersion + on-shell
+-- surface measure, a distinct phase); NOT the full packaged j_ℏ; NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.OneParticleBoost.boostRapidity_inner
+#print axioms QIQTH.OneParticleBoost.two_hbar_im_boostRapidity_inner
+
 -- RecordMincutMPS.lean — a CONCRETE tensor-network instance discharging FactorsThroughCut (2026-07-08):
 -- a 3-layer MPS/tensor-train flattening `F = R·T·L` with two internal bonds.  The factorization through
 -- each bond cut is DERIVED (not assumed) via `Matrix.toLin'_mul` + associativity (`mps3_factors_cut0`,
