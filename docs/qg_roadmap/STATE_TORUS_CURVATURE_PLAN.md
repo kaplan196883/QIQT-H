@@ -69,6 +69,17 @@ nonempty. The limit is still FLAT — what changes is the **global topology** (n
 - **CAMPAIGN COMPLETE (2026-07-10).** All three user-directed tracks (a=state-wire, b=curvature-first-
   step, c=torus) shipped axiom-free at std-3, budget 0, local commits only.
 
+## Track B continuation — THE CONE: COMPLETE (2026-07-10)
+- **B2a COMMITTED 13644d3e**: `ConeMetric.lean` — Cone θ compact metric space (two-case
+  `lawCos_triangle`), **THE CURVATURE THEOREM `cone_no_isometric_embedding_into_inner` (θ < 2π)**
+  via the double bisector midpoints (radius cos(θ/4), distances sin(θ/4), separation sin(θ/2) > 0,
+  merging only at θ = 2π) — concentrated positive curvature 2π−θ machine-checked.
+- **B2b COMMITTED d6b08e72**: `ConeGH.lean` — `polarGrid_toGHSpace_tendsto_cone`: finite polar-grid
+  clouds (exact isometric pullback, ε₂ = 0; net error 1/(n+1) + θ/(2(n+2))) GH-converge to the cone.
+  **The program's first positive-curvature GH limit.**
+- Remaining cited (NOT attempted): the INTRINSIC graph-geodesic (rounding-walk) approximation near
+  the bending apex; smooth curved surfaces (sphere etc.).
+
 ## Track B continuation (user: "continue the curvature space", 2026-07-10): THE CONE
 
 **B2 — the cone with deficit angle: genuine CONCENTRATED POSITIVE CURVATURE.** `Cone θ` (0 < θ ≤ 2π):

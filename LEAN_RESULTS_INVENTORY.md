@@ -2262,6 +2262,17 @@ continuum limits, then the isotropy question settled both ways:
   intrinsic cyclic graph metrics GH-converge to the FLAT d-torus `PiLp 2 (AddCircle 1)^d` for every d**,
   with `torus1D` (cycle graphs → **the circle S¹**), `torus2D`, `torus3D` (periodic 3-space). The topology
   is INSERTED through the wrap rule — the machine transports a chosen discrete topology, none emerges.
+- **THE CONE — the first POSITIVE-curvature limit** (`ConeMetric.lean` + `ConeGH.lean`, 2026-07-10):
+  the Euclidean cone of total angle θ ≤ 2π (apex + polar points over `AddCircle θ`, law-of-cosines
+  metric with NO case split since δ ≤ θ/2 ≤ π; two-case triangle inequality — planar unfolding +
+  apex routing) is a compact metric space whose **concentrated positive curvature (deficit 2π−θ) is
+  a THEOREM**: `cone_no_isometric_embedding_into_inner` (θ < 2π) — the two bisector midpoints at
+  radius cos(θ/4) are sin(θ/2) > 0 apart (merging only in the flat plane θ = 2π), so the
+  unique-midpoint invariant kills every inner-product embedding. And it is a GH limit:
+  `polarGrid_toGHSpace_tendsto_cone` — finite polar-grid clouds (EXACT isometric pullback,
+  error 1/(n+1) + θ/(2(n+2))) converge to the cone. HONEST: curvature CONCENTRATED (Alexandrov
+  cone point) not a smooth Riemann tensor; the clouds carry the INDUCED metric — the intrinsic
+  graph-geodesic version near the bending apex is the cited frontier; θ is an INPUT.
 - **THE TRIPOD — the first provably NON-EUCLIDEAN limit** (`TripodGH.lean`, 2026-07-10): the 3-armed metric
   tree is a GH limit of subdivided star graphs (EXACT isometric embedding, `ghDist ≤ 1/(n+1)`; the finite
   metric IS the scaled hop metric, `scaledStar_dist_eq`), and
