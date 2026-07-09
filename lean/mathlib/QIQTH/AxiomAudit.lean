@@ -10344,5 +10344,16 @@ namespace QIQTH.AxiomAudit
 -- the area only — NOT area=graph-min-cut (needs RT-saturation), NOT the capacity bound records≤q^area
 -- (needs the quantum flattening map, M3b). [AF] std-3.
 #print axioms QIQTH.MetricFromState.crossingCard_symm
+-- BellCutRank.lean — M3b (2026-07-09): the QUANTUM realization — genuine entanglement realizes the
+-- combinatorial area. bellFlattening K q ι = the identity coefficient matrix of the Bell-pair product
+-- across a cut (crossing-edge type ι, alphabet Fin q). rank_bellFlattening : its matrix SCHMIDT RANK =
+-- q^(card ι) (Matrix.rank_one + Fintype.card_fun). rank_bellFlattening_eq_pow_crossingCard : with a
+-- crossing-edge type of card = crossingCard G A, Schmidt rank = q^crossingCard G A = cutRank of the
+-- explicit profile — so the metric-from-state AREA is the honest entanglement of an explicit Bell state.
+-- HONEST: bipartite-flattening (coefficient-matrix) Schmidt rank — NOT via reduced density matrix/partial
+-- trace (Mathlib v4.30.0 has NO finite-dim QIT layer: no partialTrace/SchmidtRank/rank(reducedDensity)=
+-- rank(flattening) — cited gap, not faked). NOT continuum geometry, NOT GR, NOT QG. [AF] std-3.
+#print axioms QIQTH.BellCutRank.rank_bellFlattening
+#print axioms QIQTH.BellCutRank.rank_bellFlattening_eq_pow_crossingCard
 
 end QIQTH.AxiomAudit
