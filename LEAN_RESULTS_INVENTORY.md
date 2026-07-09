@@ -465,6 +465,17 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     tilted-slice infrastructure) and the bosonic Fock second-quantization (a/a†/CCR — absent from Mathlib AND PhysLean per
     GPT-5.5) are separate MULTI-FILE infrastructure phases, not continuation bricks. NOT the full geometric j_ℏ; NOT Fock;
     NOT numerical-G; NOT QG.**
+  - **Lp j_ℏ brick-10 — BRIDGE to the pre-existing continuum Fock tower** (`OneParticleFockBridge.lean`
+    **`jHbar_boostUnitary_two_hbar_im_inner_eq_sigmaK`**, **[AF]** std-3, 2026-07-09): KEY DISCOVERY — QIQT-H ALREADY has a
+    continuum bosonic Fock/CCR tower on `Lp ℂ 2 volume` (the space `jHbar` lands in): `Fock.OneParticle.boostUnitary` (the
+    1+1D mass-`m` boost unitary group — brick-8's `boostRapidity` is a rediscovery of it), `Fock.FockSpace` (symmetric Fock),
+    `Fock.SecondQuant.boostFock = Γ(boostUnitary)` (second-quantized boost, vacuum-invariant). The bridge proves `σ_K` via
+    `jHbar` is invariant under the EXISTING Fock boost: `2ℏ·Im⟪boostUnitary t (j u), boostUnitary t (j v)⟫ = σ_K`. So `hTkk`'s
+    coefficient physics embeds in the pre-existing Fock/CCR tower, whose `Γ(boostUnitary)` already carries the Fock-level
+    Lorentz covariance — the "Fock phase" was largely already built in QIQT-H. **HONEST: momentum/rapidity representation —
+    the ONE genuine remaining piece is the GEOMETRIC position-space boost bridge (spacetime boost of position Cauchy data ↔
+    rapidity translation; boosted data on a tilted slice → needs KG evolution/solution infra), a named multi-file phase; NOT
+    numerical-G; NOT QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the

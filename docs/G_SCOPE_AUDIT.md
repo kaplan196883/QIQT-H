@@ -132,6 +132,13 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   infrastructure) and the bosonic FOCK second-quantization (symmetric Fock + a/a†/CCR/Segal field — absent from both Mathlib
   and PhysLean) are separate MULTI-FILE infrastructure phases, NOT continuation bricks. The coefficient/localization physics
   of `hTkk` is fully machine-checked on the one-particle Hilbert space; these phases are new programs, not to be faked.
+  **UPDATE (2026-07-09, brick-10 `OneParticleFockBridge`): the Fock phase was LARGELY ALREADY BUILT in QIQT-H.** `QIQTH.Fock`
+  has a continuum bosonic Fock tower on `Lp ℂ 2 volume` (`Fock.OneParticle.boostUnitary`, `Fock.FockSpace`,
+  `Fock.SecondQuant.boostFock = Γ(boostUnitary)` with vacuum invariance) — exactly the space `jHbar` lands in.
+  `jHbar_boostUnitary_two_hbar_im_inner_eq_sigmaK` proves `σ_K` via `jHbar` is invariant under the EXISTING Fock boost,
+  embedding `hTkk`'s coefficient physics in the pre-existing Fock/CCR tower (which already carries second-quantized Lorentz
+  covariance). So the ONLY genuine remaining piece is the GEOMETRIC position-space boost bridge (tilted-slice / KG-evolution
+  infra) — a named multi-file phase, not to be faked.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived

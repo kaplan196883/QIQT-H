@@ -225,19 +225,25 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       `OneParticleMap.lean`: `jHbar m ℏ Ψ π h := h.toLp (posFreqCoeff m ℏ Ψ π)`; `jHbar_two_hbar_im_inner_eq_sigmaK`
       (`2ℏ·Im⟪j_ℏ u, j_ℏ v⟫ = σ_K`) and `jHbar_boost_two_hbar_im_inner_eq_sigmaK` (the rapidity boost leaves `σ_K`
       unchanged — Lorentz-invariance of the symplectic form via `j_ℏ`, at the rapidity level).
-    - **TRACK-A STATUS (2026-07-09): the MOMENTUM/RAPIDITY-representation `j_ℏ` is COMPLETE axiom-free** — domain
-      (`H^{1/2}⊕H^{-1/2}`, brick-5), `σ = 2ℏ·Im⟪·,·⟫` (capstone), boost = unitary (brick-8), packaged map + boost-invariance
-      of `σ` (brick-9). The remaining pieces toward a fully-geometric position-space `j_ℏ` are a **new serious phase**
-      (two independent GPT-5.5 triages; the momentum-representation `j_ℏ` above is the honest completion of the Lp/j_ℏ track):
-      - a bundled `jHbar` def (`MemLp.toLp` wrapper) + capstone restatement = **cosmetic** (naming only, no new math) — skipped.
-      - coefficient-level "rapidity translation is unitary" = **thin wrapper** (Lebesgue translation-invariance + `Lp.compMeasurePreserving`) — skipped.
-      - the MEANINGFUL boost covariance `σ_K(boost u, boost v) = σ_K u v` needs the geometric-boost ↔ rapidity-translation
-        bridge (KG solution reconstruction from Cauchy data + dispersion + transformed slice) — **substantial**, not 1–2 files.
-      - the position-field → on-shell-coefficient Fourier tie has a genuine **measure-zero/distributional obstruction** (the
-        mass shell is Lebesgue-null; needs surface measure / distributional FT / coarea) — **new infrastructure**, research-grade.
-      HONEST CEILING: `hTkk`'s coefficient normalization is now a machine-checked Hilbert-space fact; the full covariant
-      `j_ℏ : H^{1/2}⊕H^{-1/2} → Fock` + geometric Lorentz covariance is the named next phase (spatial Fourier/Sobolev
-      reconstruction + geometric boost), NOT a continuation brick. Do NOT grind wrappers. HOLD for user direction.
+    - [x] **Lp brick-10 — BRIDGE to the pre-existing continuum Fock tower — DONE 2026-07-09** ([AF] std-3).
+      **KEY DISCOVERY:** QIQT-H ALREADY has a continuum bosonic Fock/CCR tower on `Lp ℂ 2 volume` — the same space `jHbar`
+      lands in — `QIQTH.Fock.OneParticle.boostUnitary` (1+1D mass-`m` boost unitary group; brick-8's `boostRapidity` is a
+      rediscovery of it), `QIQTH.Fock.FockSpace` (symmetric Fock), `QIQTH.Fock.SecondQuant.boostFock = Γ(boostUnitary)`
+      (second-quantized boost, vacuum-invariant). `OneParticleFockBridge.jHbar_boostUnitary_two_hbar_im_inner_eq_sigmaK`:
+      `σ_K` via `jHbar` is invariant under the EXISTING Fock boost — so `hTkk`'s coefficient physics embeds in the
+      pre-existing Fock tower, whose `Γ(boostUnitary)` already carries the Fock-level Lorentz covariance. So the "Fock
+      second-quantization phase" was LARGELY ALREADY BUILT in QIQT-H; the bridge connects the new `j_ℏ`/`σ` to it.
+    - **TRACK-A STATUS (2026-07-09): the MOMENTUM/RAPIDITY-representation `j_ℏ` is COMPLETE and BRIDGED TO FOCK** — domain
+      (`H^{1/2}⊕H^{-1/2}`, brick-5), `σ = 2ℏ·Im⟪·,·⟫` (capstone), boost = unitary (brick-8/existing `boostUnitary`),
+      packaged map + boost-invariance of `σ` (brick-9), embedded in the pre-existing continuum Fock/CCR tower with
+      second-quantized covariance (brick-10). The ONE genuine remaining piece toward a fully-geometric position-space `j_ℏ`:
+      the GEOMETRIC position-space Lorentz covariance — relating a *spacetime* boost of the **position-space** Cauchy data
+      `(φ(x),φ̇(x))` to the rapidity translation on the coefficient. The obstruction is real: the boosted data lives on a
+      **tilted Cauchy slice**, so it is NOT a local function of the original `t=0` data — closing it needs KG
+      solution/evolution (or Killing-flow) infrastructure + density/extension to `H^{1/2}⊕H^{-1/2}`. This is a genuine
+      multi-file phase, NOT a continuation brick (two independent GPT-5.5 triages). The momentum/rapidity-representation
+      `j_ℏ` (domain + `σ`-normalization + boost-unitary + Fock embedding) is the honest completion of the Lp/`j_ℏ` track;
+      the geometric position-space bridge is a named further phase. Do NOT fake or wrapper-grind it.
     - HONEST CEILING (still binding until the full `j_ℏ` lands): hTkk STRUCTURE (`K₀=H_+ + N_+`) + `2π` (BW/KMS temperature) +
       coefficient CANONICAL-NORMALIZATION (bricks 2+3: `σ=2ℏ·Im⟨a,a⟩`) are DERIVED; the `Lp` packaging of `j_ℏ` into the
       rapidity convention is the named frontier (Lp brick-1 = the measure, now landed); `1/ℏ` a unit.
