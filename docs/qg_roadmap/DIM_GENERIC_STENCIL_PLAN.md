@@ -39,6 +39,20 @@ Everything else is the 2D proof with `Fin 2`-sums replaced by `Finset.sum` over 
 - `EuclideanSpace ℝ (Fin d)` elements: WithLp is a structure — build points via `WithLp.toLp`/the
   `!₂[..]`-free route (`(WithLp.equiv 2 _).symm fun i => …` or `WithLp.toLp 2 fun i => …`).
 
+## STATUS (2026-07-10): CAMPAIGN COMPLETE — G1 + G2 + G3 + G4 all DONE, axiom-free std-3, budget 0, committed local
+
+- **G1** `StencilDimGraph.lean` (81e23a80): d-lattice graph, margin lemmas, lower bound, diameter.
+- **G2** `StencilDimWalk.lean` (560196bc): the d-dimensional rounding walk; closing estimate
+  `(R−m)² + 2m(R−m) + m² = R²` via Cauchy–Schwarz + `√d ≤ m` + `d < m²`; connectivity; pinch.
+- **G3** `StencilDimDistortion.lean` (075113f5): uniform pinch, `distortionErrorD = m²/(√N−m) + √N/N → 0`,
+  uniform-in-pair convergence for every fixed d.
+- **G4** `StencilDimGH.lean` (6b9a7e4d): **CAPSTONE `stencilD_toGHSpace_tendsto_unitCube` — for EVERY
+  dimension d, the intrinsic scaled stencil graph-metric spaces GH-converge to the flat EUCLIDEAN unit
+  cube `[0,1]^d`**; explicit `stencil3D_toGHSpace_tendsto_unitCube` (the headline) and `stencil2D`
+  (recovers I4). Quantitative: `ghDist ≤ distortionErrorD d N/2 + margin d/N`.
+- All four bricks landed FIRST-BUILD GREEN (the 2D campaign was a faithful template). Honesty firewall
+  in every header: **d is an INPUT, not emergent**; isotropy inserted via the stencil rule; FLAT.
+
 ## Brick sequence (each: green build, `#print axioms` std-3, budget 0, AxiomAudit pin, wire QIQTH.lean, LOCAL commit)
 
 - **G1 — `StencilDimGraph.lean`: graph + margin + LOWER bound.** `sqDistD d N x y : ℤ := Σᵢ (xᵢ−yᵢ)²`;

@@ -2242,10 +2242,20 @@ continuum limits, then the isotropy question settled both ways:
   *intrinsic* scaled graph-metric spaces (abstract, no ambient plane) converge in **Gromov–Hausdorff space to
   the EUCLIDEAN unit square** — a flat Riemannian-in-the-trivial-sense (flat Euclidean) 2D continuum limit
   from graph geodesics, quantitative (`ghDist ≤ distortionError/2 + 1/N`).
+- **The DIMENSION-GENERIC campaign G1–G4** (`StencilDimGraph.lean`, `StencilDimWalk.lean`,
+  `StencilDimDistortion.lean`, `StencilDimGH.lean`, 2026-07-10): the entire stencil chain generalized to
+  **every dimension d** on the lattice `Fin d → Fin (N+1)` — the one new ingredient is the **margin**
+  `⌊√d⌋+1` (sqrt-free `√d ≤ m`, `d < m²`) closing the rounding-walk estimate
+  `(R−m)² + 2m(R−m) + m² = R²` via Cauchy–Schwarz. **Capstone
+  `stencilD_toGHSpace_tendsto_unitCube`: for EVERY d, the intrinsic scaled graph-metric spaces
+  GH-converge to the flat EUCLIDEAN unit cube `[0,1]^d`**, quantitative
+  (`ghDist ≤ distortionErrorD/2 + margin/N`); explicit **3D headline
+  `stencil3D_toGHSpace_tendsto_unitCube`** and d = 2 (recovers I4).
 - **HONEST scope (binding):** the isotropy is *inserted through the stencil rule* (the Euclidean-disk edge
   test) — NOT isotropy emerging from a fixed local combinatorial rule (impossible per the no-go) and NOT from
-  dynamics (cited wall); the limit is FLAT, not curved; NOT emergent dimension/topology, NOT GR, NOT
-  numerical-G, NOT QG.
+  dynamics (cited wall); **the dimension d is an INPUT — the chosen lattice — NOT emergent: the d-generic
+  theorem holds for every d and says NOTHING about why physical space is 3-dimensional**; the limit is FLAT,
+  not curved; NOT emergent dimension/topology, NOT GR, NOT numerical-G, NOT QG.
 
 ## 6b. Entropy/ — the DPI / Lieb-concavity / operator-convexity tower (19 files) — GENUINELY COMPLETE
 
