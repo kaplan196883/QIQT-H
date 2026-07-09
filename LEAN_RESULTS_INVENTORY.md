@@ -2218,6 +2218,35 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   inequality, CMI/Markov, first law, causal skeleton, certificate. **Finite proto-geometry with error tags, NOT a
   4D manifold [frontier].**
 
+### 6a′. METRIC-FROM-STATE + continuum limits + the isotropy campaign (2026-07-09) — ALL [AF] std-3
+
+Geometry as **OUTPUT** (metric in the conclusion, not the hypothesis) for explicit finite states, then genuine
+continuum limits, then the isotropy question settled both ways:
+
+- **Metric-from-state pipeline** (`MetricFromState.lean`, `MetricRefinement.lean`, `BellCutRank.lean`,
+  `ReducedDensity.lean`): a state's cut-rank profile *decodes* its adjacency graph (`rankMIGraph_eq`, strict
+  rank-submultiplicativity — a proved theorem, not a definition), giving a genuine finite metric
+  (`decodedDist_isFiniteMetric`); the cut area IS the genuine reduced-density Schmidt rank
+  (`bell_schmidtRank_eq_pow_crossingCard`, ρ_A = M·Mᴴ). Non-circular: the index type never sees the edges.
+- **Continuum limits** (`ContinuumLimit.lean`, `MetricRefinement2D.lean`): chain-state geometries → `[0,1]` in
+  Hausdorff distance AND in Gromov–Hausdorff space (genuine convergence, not sampling); the square grid's
+  scaled metric = the **L¹ (taxicab)** metric on `[0,1]²`.
+- **The isotropy NO-GO** (`IsotropyNoGo.lean`): the taxicab plane embeds isometrically in **NO** real
+  inner-product space (unique-midpoint invariant) — so no fixed square-lattice family can have a
+  Euclidean/Riemannian ≥2D limit; the ≥2D fixed-lattice limit is genuinely Finsler.
+- **The positive complement — increasing-stencil campaign I1–I4** (`StencilGraph.lean`, `StencilWalk.lean`,
+  `StencilDistortion.lean`, `StencilGH.lean`): lattice `{0..N}²` with edges = integer Euclidean-disk test
+  `sqDist ≤ R²`; hop metric pinched between Euclidean multiples (walk induction + an explicit sqrt-free
+  rounding walk); schedule `R_N = ⌊√N⌋` (microscopic: `R_N→∞`, `R_N/N→0`) gives the uniform distortion bound
+  `|scaled hop − eucl| ≤ 4/(√N−2)+√N/N → 0`; **capstone `stencil_toGHSpace_tendsto_unitSquare`**: the
+  *intrinsic* scaled graph-metric spaces (abstract, no ambient plane) converge in **Gromov–Hausdorff space to
+  the EUCLIDEAN unit square** — a flat Riemannian-in-the-trivial-sense (flat Euclidean) 2D continuum limit
+  from graph geodesics, quantitative (`ghDist ≤ distortionError/2 + 1/N`).
+- **HONEST scope (binding):** the isotropy is *inserted through the stencil rule* (the Euclidean-disk edge
+  test) — NOT isotropy emerging from a fixed local combinatorial rule (impossible per the no-go) and NOT from
+  dynamics (cited wall); the limit is FLAT, not curved; NOT emergent dimension/topology, NOT GR, NOT
+  numerical-G, NOT QG.
+
 ## 6b. Entropy/ — the DPI / Lieb-concavity / operator-convexity tower (19 files) — GENUINELY COMPLETE
 
 **This was understated in earlier summaries.** `QIQTH/Entropy/` is a **complete, axiom-free, finite-dimensional

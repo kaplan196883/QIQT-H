@@ -32,7 +32,7 @@ converges to the **Euclidean** distance — the allowed directions fill the disk
 - NOT curved Riemannian (the limit is FLAT Euclidean), NOT dimension/topology emergence, NOT the
   dynamical source, NOT GR, NOT numerical-G, NOT QG.
 
-## STATUS (2026-07-09): I1 + I2 + I3 DONE — axiom-free std-3, budget 0, committed local
+## STATUS (2026-07-09): CAMPAIGN COMPLETE — I1 + I2 + I3 + I4 all DONE, axiom-free std-3, budget 0, committed local
 - **I1** `StencilGraph.lean` (793b122e): stencil graph (integer decidable Adj), `eucl_le_R_mul_dist`.
 - **I2** `StencilWalk.lean` (02eb65bd): rounding walk (sqrt-free (R−2)²+4(R−2)+2 = R²−2 < R² estimate),
   `stencil_reachable` (connectivity), `stencil_dist_le` (dist ≤ eucl/(R−2)+1). Hop metric PINCHED.
