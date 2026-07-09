@@ -719,6 +719,7 @@ import QIQTH.EmergentSpacetime
 import QIQTH.MetricFromState
 import QIQTH.MetricRefinement
 import QIQTH.MetricRefinement2D
+import QIQTH.ContinuumLimit
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

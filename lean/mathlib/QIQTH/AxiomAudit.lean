@@ -10381,5 +10381,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MetricRefinement2D.dist_boxProd_of_reachable
 #print axioms QIQTH.MetricRefinement2D.pathGraph_grid_dist
 #print axioms QIQTH.MetricRefinement2D.square_grid_scaledDist_eq_l1
+-- ContinuumLimit.lean — C1+C2 (2026-07-09, user-authorized): the genuine CONTINUUM LIMIT of the
+-- entanglement chain — SAMPLING upgraded to CONVERGENCE. chainGridSet N = {i/(N-1)} ⊂ [0,1];
+-- chainGridSet_net (every point of [0,1] within 1/(N-1) of a grid point — round to nearest);
+-- C1 hausdorffDist_chainGridSet_tendsto : hausdorffDist(chainGridSet N, [0,1]) → 0 (the finite
+-- entanglement geometries CONVERGE in Hausdorff distance to the continuum interval); C2
+-- toGHSpace_chainGridNC_tendsto : toGHSpace(chainGridNC n) → toGHSpace([0,1]) in Mathlib's GHSpace
+-- (the ABSTRACT finite metric spaces converge to the continuum interval — intrinsic Gromov-Hausdorff
+-- emergence, via GromovHausdorff.ghDist_le_nonemptyCompacts_dist + C1). HONEST: 1D (interval [0,1] is a
+-- genuine flat Riemannian 1-manifold, L¹=Euclidean, so NO taxicab-caveat in 1D); NOT ≥2D Riemannian
+-- (the 2D box-product limit is the L¹/taxicab square, Finsler NOT Riemannian — isotropy restoration is
+-- research-grade); the continuum target [0,1] is PRESUPPOSED (embedded convergence, not intrinsic
+-- emergence of dimension/topology); entanglement engineered (dynamical source open); NOT GR, NOT QG. [AF] std-3.
+#print axioms QIQTH.ContinuumLimit.hausdorffDist_chainGridSet_tendsto
+#print axioms QIQTH.ContinuumLimit.toGHSpace_chainGridNC_tendsto
 
 end QIQTH.AxiomAudit
