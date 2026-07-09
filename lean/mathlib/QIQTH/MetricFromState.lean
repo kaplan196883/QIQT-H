@@ -243,4 +243,32 @@ theorem explicitProfile_decodedDist_isFiniteMetric (G : SimpleGraph V) [Decidabl
     IsFiniteMetric (decodedDist (explicitProfile G hq)) :=
   decodedDist_isFiniteMetric (explicitProfile G hq) hconn
 
+/-! ## M5 — the AREA is a property of the CUT (region-complement symmetric)
+
+The entanglement "area" `crossingCard G A` of a region equals that of its complement:
+`crossingCard G A = crossingCard G Aᶜ`.  The cut `A | Aᶜ` — not the region — carries the area, exactly
+as a Ryu–Takayanagi surface is shared by both sides.  Proven by double-counting the crossing edges
+(`∑_{v∈A}∑_{w∈Aᶜ}[v∼w]`, symmetric under `Finset.sum_comm` + `G.adj_comm`).  HONEST: this is the
+cut-symmetry of the area — NOT the (false-in-general) claim `area = graph min-cut`, which needs
+RT-saturation; and the capacity BOUND `records ≤ q^area` genuinely needs the quantum flattening map
+(M3b), not present here. -/
+theorem crossingCard_symm (A : Finset V) : crossingCard G A = crossingCard G Aᶜ := by
+  have hstep : ∀ B : Finset V,
+      crossingCard G B = ∑ v ∈ B, ∑ w ∈ Bᶜ, (if G.Adj v w then 1 else 0) := by
+    intro B
+    unfold crossingCard
+    refine Finset.sum_congr rfl (fun v _ => ?_)
+    have hset : G.neighborFinset v \ B = Bᶜ.filter (fun w => G.Adj v w) := by
+      ext w
+      simp only [Finset.mem_sdiff, SimpleGraph.mem_neighborFinset, Finset.mem_filter,
+        Finset.mem_compl]
+      tauto
+    rw [hset, Finset.card_filter]
+  rw [hstep A, hstep Aᶜ, compl_compl, Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun x _ => Finset.sum_congr rfl (fun y _ => ?_))
+  by_cases h : G.Adj y x
+  · simp [h, (G.adj_comm y x).mp h]
+  · have h' : ¬ G.Adj x y := fun hc => h ((G.adj_comm x y).mp hc)
+    simp [h, h']
+
 end QIQTH.MetricFromState

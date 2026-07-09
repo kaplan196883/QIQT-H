@@ -10338,5 +10338,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MetricRefinement.pathGraph_dist
 #print axioms QIQTH.MetricRefinement.chain_decodedDist_eq
 #print axioms QIQTH.MetricRefinement.chain_scaledDist_eq_interval
+-- M5 (2026-07-09): the entanglement AREA is a property of the CUT — crossingCard_symm :
+-- crossingCard G A = crossingCard G Aᶜ (the cut A|Aᶜ carries the area, shared by both sides, like an
+-- RT surface). Double-count of crossing edges (Finset.sum_comm + G.adj_comm). HONEST: cut-symmetry of
+-- the area only — NOT area=graph-min-cut (needs RT-saturation), NOT the capacity bound records≤q^area
+-- (needs the quantum flattening map, M3b). [AF] std-3.
+#print axioms QIQTH.MetricFromState.crossingCard_symm
 
 end QIQTH.AxiomAudit
