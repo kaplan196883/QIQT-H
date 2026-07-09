@@ -122,6 +122,16 @@ This is an AUDIT NOTE, not manuscript prose — the author applies it. GPT-5.5-p
   distributional obstruction (the mass shell is Lebesgue-null). So `hTkk`'s coefficient normalization is a machine-checked
   Hilbert-space fact; the full covariant one-particle map is the named next phase (spatial Fourier/Sobolev reconstruction +
   geometric Lorentz covariance), NOT to be faked or wrapper-ground.
+  **MOMENTUM-REPRESENTATION `j_ℏ` COMPLETE (2026-07-09, bricks 8–9, user authorized driving track A to the end).** The
+  boost = rapidity translation is a UNITARY on the one-particle `L²` (`boostRapidity`, via translation-invariance +
+  `Lp.compMeasurePreservingₗᵢ`), preserving `σ` (`two_hbar_im_boostRapidity_inner`); the packaged map `jHbar` satisfies
+  `2ℏ·Im⟪j_ℏ u,j_ℏ v⟫=σ_K` and the boost leaves `σ_K` invariant (`jHbar_boost_two_hbar_im_inner_eq_sigmaK`). So on the
+  momentum/rapidity representation `j_ℏ` is a complete, boost-covariant one-particle map, axiom-free. **HONEST completion
+  boundary (two independent GPT-5.5 triages):** the fully-GEOMETRIC position-space `j_ℏ` (spacetime Lorentz boost of the
+  position Cauchy data ↔ rapidity translation — the boosted data lives on a tilted slice, needing KG evolution/solution
+  infrastructure) and the bosonic FOCK second-quantization (symmetric Fock + a/a†/CCR/Segal field — absent from both Mathlib
+  and PhysLean) are separate MULTI-FILE infrastructure phases, NOT continuation bricks. The coefficient/localization physics
+  of `hTkk` is fully machine-checked on the one-particle Hilbert space; these phases are new programs, not to be faked.
 
 ## Bottom line
 The induced-`G` package is an **exact axiom-free relation** (`1/G = N·Λ_s²`, G as output) with a genuinely-derived

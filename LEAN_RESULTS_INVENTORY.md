@@ -448,6 +448,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     whole `Lp` chain to the physics σ. `L²` memberships from brick-5 (`ω = kgOmega m`). **HONEST: the inner-product form of the
     coefficient normalization — NOT the full `j_ℏ` (Fourier `L²→L²` = Mathlib `Lp.fourierTransformₗᵢ`; bundled map + boost
     covariance remain); conj-symmetry, integrability, `L²` memberships carried as hypotheses; NOT numerical-G/QG.**
+  - **Lp j_ℏ brick-8 — BOOST COVARIANCE (unitary preserving σ)** (`OneParticleBoost.lean` **`boostRapidity`**,
+    `boostRapidity_inner`, `two_hbar_im_boostRapidity_inner`, **[AF]** std-3, 2026-07-09): the boost of rapidity `β` acts on
+    the mass shell by `θ↦θ+β`; since Lebesgue `volume` is translation-invariant, pullback is a `LinearIsometry`
+    (`Lp.compMeasurePreservingₗᵢ` + `measurePreserving_add_right`) — the boost is UNITARY on the one-particle `L²(ℝ,ℂ)`,
+    preserving `⟪·,·⟫` and `2ℏ·Im⟪·,·⟫ = σ`. Working in the momentum/rapidity representation sidesteps the measure-zero
+    mass-shell obstruction. **HONEST: boost covariance on the momentum/rapidity representation — NOT the geometric
+    position-space-boost bridge; NOT numerical-G/QG.**
+  - **Lp j_ℏ brick-9 — PACKAGED one-particle map + boost-invariance of σ** (`OneParticleMap.lean` **`jHbar`**,
+    `jHbar_two_hbar_im_inner_eq_sigmaK`, `jHbar_boost_two_hbar_im_inner_eq_sigmaK`, **[AF]** std-3, 2026-07-09):
+    `jHbar m ℏ Ψ π h := h.toLp (posFreqCoeff m ℏ Ψ π)` (h from brick-5); `2ℏ·Im⟪j_ℏ u, j_ℏ v⟫ = σ_K` (capstone via jHbar)
+    and the boost leaves `σ_K` unchanged — Lorentz-invariance of the KG symplectic form via `j_ℏ` at the rapidity level.
+    **TRACK-A COMPLETION (2026-07-09): the MOMENTUM/RAPIDITY-representation `j_ℏ` is COMPLETE axiom-free** — domain
+    (`H^{1/2}⊕H^{-1/2}`), `σ=2ℏ·Im⟪·,·⟫`, boost=unitary, boost-invariance of σ. **HONEST: the remaining fully-geometric
+    position-space `j_ℏ` (spacetime-boost of Cauchy data ↔ rapidity translation — needs KG evolution/solution +
+    tilted-slice infrastructure) and the bosonic Fock second-quantization (a/a†/CCR — absent from Mathlib AND PhysLean per
+    GPT-5.5) are separate MULTI-FILE infrastructure phases, not continuation bricks. NOT the full geometric j_ℏ; NOT Fock;
+    NOT numerical-G; NOT QG.**
 - **F6/Tier-2 §2.2 concrete INSTANCE — a 3-layer MPS discharges `FactorsThroughCut`** (`RecordMincutMPS.lean`
   **`mps3_records_le_min`** + `mps3_hfac`, **[AF]** std-3, 2026-07-08): makes the §2.2 record bound apply to a real,
   non-circular tensor-network model. A 3-layer MPS/tensor-train flattening `F = R·T·L` (two internal bonds, dims `d₀,d₁`); the

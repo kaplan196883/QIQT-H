@@ -216,9 +216,19 @@ stalls. NEVER claim the physical localization map is discharged until `f_phys` i
       (integral↔L² bridge): the classical KG symplectic form `σ_K` equals `2ℏ·Im` of the one-particle Hilbert inner product
       of the `√(2ℏω)`-normalized positive-frequency coefficients. L² memberships from brick-5 (`ω=kgOmega m`). This ties the
       whole `Lp` chain to the physics σ on the actual one-particle Hilbert space — the coefficient physics of `hTkk`.
-    - **TRACK-A CHECKPOINT (2026-07-09, GPT-5.5-triaged).** The COEFFICIENT physics is COMPLETE at the one-particle
-      Hilbert-space level (bricks 1–7, capstone `σ_K = 2ℏ·Im⟪a_L2,b_L2⟫`). The remaining pieces toward a fully-packaged
-      Lorentz-covariant `j_ℏ` are NOT small bricks — they are a **new serious phase** (honest triage):
+    - [x] **Lp brick-8 — BOOST COVARIANCE (unitary preserving `σ`) — DONE 2026-07-09** ([AF] std-3). `OneParticleBoost.lean`:
+      the boost of rapidity `β` is `boostRapidity β : Lp ℂ 2 volume →ₗᵢ[ℂ] Lp ℂ 2 volume` (pullback along `θ↦θ+β`, via
+      `Lp.compMeasurePreservingₗᵢ` + translation-invariance of `volume`), so the boost is UNITARY; `boostRapidity_inner`
+      preserves `⟪·,·⟫`, `two_hbar_im_boostRapidity_inner` preserves `2ℏ·Im⟪·,·⟫ = σ`. Working in the momentum/rapidity
+      representation sidesteps the measure-zero mass-shell obstruction (the one-particle space is genuinely `L²` there).
+    - [x] **Lp brick-9 — PACKAGED one-particle map `jHbar` + boost-invariance of `σ` — DONE 2026-07-09** ([AF] std-3).
+      `OneParticleMap.lean`: `jHbar m ℏ Ψ π h := h.toLp (posFreqCoeff m ℏ Ψ π)`; `jHbar_two_hbar_im_inner_eq_sigmaK`
+      (`2ℏ·Im⟪j_ℏ u, j_ℏ v⟫ = σ_K`) and `jHbar_boost_two_hbar_im_inner_eq_sigmaK` (the rapidity boost leaves `σ_K`
+      unchanged — Lorentz-invariance of the symplectic form via `j_ℏ`, at the rapidity level).
+    - **TRACK-A STATUS (2026-07-09): the MOMENTUM/RAPIDITY-representation `j_ℏ` is COMPLETE axiom-free** — domain
+      (`H^{1/2}⊕H^{-1/2}`, brick-5), `σ = 2ℏ·Im⟪·,·⟫` (capstone), boost = unitary (brick-8), packaged map + boost-invariance
+      of `σ` (brick-9). The remaining pieces toward a fully-geometric position-space `j_ℏ` are a **new serious phase**
+      (two independent GPT-5.5 triages; the momentum-representation `j_ℏ` above is the honest completion of the Lp/j_ℏ track):
       - a bundled `jHbar` def (`MemLp.toLp` wrapper) + capstone restatement = **cosmetic** (naming only, no new math) — skipped.
       - coefficient-level "rapidity translation is unitary" = **thin wrapper** (Lebesgue translation-invariance + `Lp.compMeasurePreserving`) — skipped.
       - the MEANINGFUL boost covariance `σ_K(boost u, boost v) = σ_K u v` needs the geometric-boost ↔ rapidity-translation
