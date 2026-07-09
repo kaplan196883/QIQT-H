@@ -25,6 +25,29 @@ not definitional.
 
 ## Brick sequence (each: green `lake build`, `#print axioms` std-3, budget 0, AxiomAudit pin, LOCAL commit)
 
+**STATUS (2026-07-09): M1–M5 + M3b + QIT layer + 2D + CONTINUUM LIMIT all DONE — axiom-free, budget 0,
+full library green.** Since the M1–M5 line below, the campaign extended substantially (all committed):
+- **M3b** (`BellCutRank.lean`): `rank_bellFlattening_eq_pow_crossingCard` — the area IS the Bell-state
+  Schmidt rank `q^crossingCard` (genuine entanglement, flattening level).
+- **QIT layer — the "cited gap" is now CLOSED** (`ReducedDensity.lean`): `schmidtRank_eq_flattening_rank`
+  (rank ρ_A = rank M, ρ_A = M·Mᴴ PSD, trace = ‖ψ‖²), `partialTraceRight_pureDensity` (Tr_B|ψ⟩⟨ψ| = ρ_A),
+  `bell_schmidtRank_eq_pow_crossingCard` — the area is the genuine REDUCED-DENSITY Schmidt rank. Remaining
+  gap narrowed to the general MIXED-state partial-trace API (not needed for pure states).
+- **2D** (`MetricRefinement2D.lean`): `square_grid_scaledDist_eq_l1` — the box-product grid metric refines
+  the unit SQUARE with the L¹ (taxicab) metric; `dist_boxProd_of_reachable` (from Mathlib `edist_boxProd`).
+- **CONTINUUM LIMIT — sampling upgraded to CONVERGENCE** (`ContinuumLimit.lean`): C1
+  `hausdorffDist_chainGridSet_tendsto` (finite geometries → [0,1] in Hausdorff distance), C2
+  `toGHSpace_chainGridNC_tendsto` (abstract finite metric spaces → [0,1] in Gromov–Hausdorff space).
+  **1D limit IS Riemannian** (flat, L¹=Euclidean); ≥2D is L¹/Finsler NOT Riemannian (isotropy = the wall).
+
+The remaining honest frontier: **isotropy** — a graph family (random-geometric / long-range) whose GH
+limit is the EUCLIDEAN/Riemannian metric in ≥2D (research-grade, needs probability infra); the torus
+(cycleGraph → circle, ~250–600 lines modular arithmetic); the general mixed-state partial trace; and the
+dynamical source (why a physical state carries this entanglement — the genuine open wall). See
+`CONTINUUM_LIMIT_UNDERSTANDING.md`.
+
+---
+
 **STATUS (2026-07-09): M1–M5 DONE — axiom-free, budget 0, full library green.**
 `MetricFromState.lean`: `rankMIGraph_eq` (state decodes its graph), `decodedDist_isFiniteMetric`
 (state-derived metric), `crossingCard_pair_defect` + `explicitProfile_rankMIGraph_eq` (crossing-count
