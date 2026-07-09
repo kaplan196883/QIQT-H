@@ -10634,5 +10634,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeMetric.instMetricSpaceCone
 #print axioms QIQTH.ConeMetric.instCompactSpaceCone
 #print axioms QIQTH.ConeMetric.cone_no_isometric_embedding_into_inner
+-- ConeGH.lean — CURVATURE brick B2b, the CONE CAPSTONE (2026-07-10): GH convergence of finite
+-- polar-grid clouds (apex + (n+1)(n+2) points, radii k/(n+1) × angles j·θ/(n+2)) to Cone θ.
+-- Pullback metric via gridToCone (EXACT isometry, ε₂ = 0; injectivity via the Ico-representative
+-- injectivity AddCircle.coe_eq_coe_iff_of_mem_Ico + the tripod radius pattern); cone_net (radial
+-- ceiling ⌈r(n+1)⌉ + wrap-aware angular round via equivIco representative, mod-cast absorbs the
+-- wrap; error 1/(n+1) + θ/(2(n+2)) through the PUBLIC coneDist_fromPolar_le); ghDist_polarGrid_le;
+-- CAPSTONE polarGrid_toGHSpace_tendsto_cone: the program's FIRST positive-curvature GH limit.
+-- HONEST: the clouds carry the INDUCED (pullback) metric — exact isometric SAMPLES like the tripod
+-- stars, NOT an intrinsic graph-geodesic hop metric (the rounding walk near the bending apex is
+-- the CITED frontier); curvature CONCENTRATED (Alexandrov cone point, deficit 2π−θ) not a smooth
+-- Riemann tensor; θ/geometry are INPUTS — transport, not emergence; NOT GR, NOT numerical-G,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConeGH.instMetricSpacePolarGrid
+#print axioms QIQTH.ConeGH.gridToCone_isometry
+#print axioms QIQTH.ConeGH.cone_net
+#print axioms QIQTH.ConeGH.ghDist_polarGrid_le
+#print axioms QIQTH.ConeGH.polarGrid_toGHSpace_tendsto_cone
 
 end QIQTH.AxiomAudit
