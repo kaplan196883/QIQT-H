@@ -25,6 +25,13 @@ not definitional.
 
 ## Brick sequence (each: green `lake build`, `#print axioms` std-3, budget 0, AxiomAudit pin, LOCAL commit)
 
+**STATUS (2026-07-09): M1, M2, M3 DONE — axiom-free, budget 0, full library green.** `MetricFromState.lean`:
+`rankMIGraph_eq` (state decodes its graph), `decodedDist_isFiniteMetric` (state-derived metric), and
+`crossingCard_pair_defect` + `explicitProfile_rankMIGraph_eq` (the crossing-count area functional of a
+REAL graph decodes back to it — defect PROVEN, not carried). Geometry-as-output is non-vacuous for
+actual graphs. NEXT: M4 (refinement → interval), M5 (area = min-cut), M3b (quantum Bell-state Schmidt-rank
+realization of `crossingCard`).
+
 - **M1 — decoder correctness (Step B core).** New file `QIQTH/MetricFromState.lean`. Given a graph
   `G : SimpleGraph V` (finite, decidable adjacency) and a `cutRank : Finset V → ℕ` with the crossing
   profile `cutRank A = q ^ crossingCard G A` (`crossingCard` = # edges with exactly one endpoint in A),
