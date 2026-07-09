@@ -10488,5 +10488,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilDimWalk.stencilD_walk_exists
 #print axioms QIQTH.StencilDimWalk.stencilD_reachable
 #print axioms QIQTH.StencilDimWalk.stencilD_dist_le
+-- StencilDimDistortion.lean — DIM-GENERIC STENCIL brick G3 (2026-07-10): uniform distortion +
+-- vanishing limit in EVERY fixed dimension d.  scaledD_dist_pinch (R ≥ margin d + 1, N ≥ 1):
+-- euclD/N ≤ (R/N)·dist ≤ euclD/N + (m²/(R−m) + R/N) — error UNIFORM in the pair via the diameter
+-- euclD ≤ m·N.  Schedule R_N = Nat.sqrt N (threshold (m+1)² ≤ N ⟹ √N ≥ m+1):
+-- distortionErrorD d N = m²/(√N−m) + √N/N; distortionErrorD_tendsto_zero (each fixed d); CAPSTONE
+-- stencilD_scaled_metric_tendsto_euclD: ∀ fixed d, ∀ ε > 0, ∃ N₀, ∀ N ≥ N₀, ∀ x y,
+-- |(√N/N)·dist − euclD/N| < ε — the scaled hop metric converges to the Euclidean metric uniformly
+-- in the lattice pair.  Generalizes 2D brick I3 to every d.  HONEST: d is an INPUT, not emergent;
+-- EXTRINSIC comparison against a presupposed Euclidean d-space (intrinsic GH = G4); isotropy
+-- inserted through the stencil rule; FLAT; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilDimDistortion.scaledD_dist_pinch
+#print axioms QIQTH.StencilDimDistortion.scaledD_dist_sub_euclD_le
+#print axioms QIQTH.StencilDimDistortion.distortionErrorD_tendsto_zero
+#print axioms QIQTH.StencilDimDistortion.stencilD_scaled_metric_tendsto_euclD
 
 end QIQTH.AxiomAudit
