@@ -723,6 +723,7 @@ import QIQTH.ContinuumLimit
 import QIQTH.IsotropyNoGo
 import QIQTH.StencilGraph
 import QIQTH.StencilWalk
+import QIQTH.StencilDistortion
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

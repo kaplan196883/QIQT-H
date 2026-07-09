@@ -10429,5 +10429,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilWalk.stencil_walk_exists
 #print axioms QIQTH.StencilWalk.stencil_reachable
 #print axioms QIQTH.StencilWalk.stencil_dist_le
+-- StencilDistortion.lean — ISOTROPY brick I3 (2026-07-09): the uniform distortion bound + vanishing limit.
+-- scaled_dist_pinch (R ≥ 3, N ≥ 1): eucl/N ≤ (R/N)·dist ≤ eucl/N + (4/(R−2) + R/N) — I1+I2 divided by N,
+-- error UNIFORM in x y via the lattice diameter bound eucl ≤ 2N (eucl_le_two_N).  Microscopic-stencil
+-- schedule R_N = Nat.sqrt N (R_N → ∞, R_N/N → 0): scaled_dist_sub_eucl_le (N ≥ 9) bounds
+-- |scaled hop − eucl/N| ≤ distortionError N = 4/(√N−2) + √N/N; distortionError_tendsto_zero;
+-- CAPSTONE stencil_scaled_metric_tendsto_eucl: ∀ ε > 0, ∃ N₀, ∀ N ≥ N₀, ∀ x y,
+-- |(√N/N)·dist x y − eucl x y/N| < ε — the scaled INTRINSIC hop metric converges to the Euclidean
+-- metric UNIFORMLY in the lattice pair.  HONEST: compares against a PRESUPPOSED Euclidean plane
+-- (extrinsic comparison; the intrinsic GH statement is I4); isotropy inserted through the stencil
+-- rule; FLAT not curved; NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilDistortion.scaled_dist_pinch
+#print axioms QIQTH.StencilDistortion.scaled_dist_sub_eucl_le
+#print axioms QIQTH.StencilDistortion.distortionError_tendsto_zero
+#print axioms QIQTH.StencilDistortion.stencil_scaled_metric_tendsto_eucl
 
 end QIQTH.AxiomAudit
