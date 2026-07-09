@@ -10702,5 +10702,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SphereMetric.angle_le_pi_div_two_mul_chord
 #print axioms QIQTH.SphereMetric.instCompactSpaceIntrinsicSphere
 #print axioms QIQTH.SphereMetric.sphere_no_isometric_embedding_into_inner
+-- SphereGH.lean — SPHERE brick S2, the SPHERE CAPSTONE (2026-07-10): GH convergence of finite
+-- lat-long clouds (2 poles + m(m+1) grid points, lat i·π/(m+1) × azimuth j·2π/(m+1)) to the
+-- INTRINSIC SPHERE.  Pullback metric via gridToSphere (EXACT isometry, ε₂ = 0; injectivity via
+-- cos injective on [0,π] + cos-diff = 1 azimuth route); sphere_net (spherical-coordinate
+-- reconstruction p.vec = sVec (arccos z) (Complex.arg w), latitude rounds to the nearest parallel
+-- with the extreme indices snapping to the POLES [dist to pole = lat exactly], azimuth rounds
+-- wrap-aware with 2π-periodicity absorbing whole turns; chord legs + S1's
+-- angle_le_pi_div_two_mul_chord give error 3π²/(4(m+1))); ghDist_sphereGrid_le; CAPSTONE
+-- sphereGrid_toGHSpace_tendsto_sphere — the program's FIRST SMOOTH curved-space GH limit (curved
+-- everywhere, vs the cone's single singular point).  HONEST: the clouds carry the INDUCED
+-- (pullback) metric — exact isometric SAMPLES, NOT an intrinsic hop metric (the intrinsic
+-- rounding walk on the curved sphere = CITED frontier, as for the cone); the formalized curvature
+-- statement is S1's midpoint obstruction, NOT a Riemann tensor; the sphere is an INPUT —
+-- transport, not emergence; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.SphereGH.instMetricSpaceSphereGrid
+#print axioms QIQTH.SphereGH.gridToSphere_isometry
+#print axioms QIQTH.SphereGH.sphere_net
+#print axioms QIQTH.SphereGH.ghDist_sphereGrid_le
+#print axioms QIQTH.SphereGH.sphereGrid_toGHSpace_tendsto_sphere
 
 end QIQTH.AxiomAudit
