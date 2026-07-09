@@ -11,7 +11,7 @@ const {
 } = Astro.props;
 const path = Astro.url.pathname;
 const canonicalURL = new URL(path, Astro.site).href;
-const ogImage = new URL('/og.png', Astro.site).href;
+const ogImage = new URL('/og-v2.png', Astro.site).href;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
