@@ -10474,5 +10474,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilDimGraph.euclD_le_of_adj
 #print axioms QIQTH.StencilDimGraph.euclD_le_R_mul_dist
 #print axioms QIQTH.StencilDimGraph.euclD_le_margin_mul_N
+-- StencilDimWalk.lean — DIM-GENERIC STENCIL brick G2 (2026-07-10), THE CRUX: the d-dimensional
+-- rounding walk.  Segment x→y chopped into ⌈euclD/(R−m)⌉₊ chunks (m = margin d), each real waypoint
+-- rounded per coordinate; the CLOSING ESTIMATE Σ(Δround)² ≤ Σ(Δreal)² + 2Σ|Δreal| + d ≤
+-- (R−m)² + 2m(R−m) + m² = R² via Cauchy–Schwarz (sq_sum_le_card_mul_sum_sq) + √d ≤ m + d < m² —
+-- a sqrt-free integer adjacency check.  stencilD_walk_exists (length ≤ ⌈euclD/(R−m)⌉₊);
+-- stencilD_reachable (CONNECTIVITY ∀ R ≥ m+1 — discharges G1's Reachable hypothesis);
+-- stencilD_dist_le (dist ≤ euclD/(R−m) + 1).  With G1 the d-dimensional hop metric is PINCHED:
+-- euclD ≤ R·dist AND dist ≤ euclD/(R−m)+1.  HONEST: d is an INPUT, not emergent; isotropy inserted
+-- through the stencil rule; NOT a continuum limit yet (G3/G4); NOT GR, NOT numerical-G, NOT QG.
+-- [AF] std-3.
+#print axioms QIQTH.StencilDimWalk.wayPtD_step
+#print axioms QIQTH.StencilDimWalk.stencilD_walk_exists
+#print axioms QIQTH.StencilDimWalk.stencilD_reachable
+#print axioms QIQTH.StencilDimWalk.stencilD_dist_le
 
 end QIQTH.AxiomAudit
