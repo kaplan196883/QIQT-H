@@ -10651,5 +10651,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeGH.cone_net
 #print axioms QIQTH.ConeGH.ghDist_polarGrid_le
 #print axioms QIQTH.ConeGH.polarGrid_toGHSpace_tendsto_cone
+-- TorusFromState.lean — STATE-WIRE-2 brick W1 (2026-07-10): the end-to-end chain at the CYCLIC graph
+-- — entangled-state profile → decoded graph (WITH its wrap topology) → decoded metric → GH limit =
+-- the FLAT d-TORUS.  torusProfile (crossing-count, q = 2, defect proven); torusProfile_decodes
+-- (rankMIGraph recovers torusGraphD — the wrap topology is an OUTPUT of the cut-rank data);
+-- scaledTorus_dist_eq_decoded (the ScaledTorusD metric = (R/(N+1))·decodedDist, rfl-tight);
+-- torusProfile_boundary_realized (Bell Schmidt rank 2^boundary per cut);
+-- state_decoded_geometry_tendsto_flatTorus' (PACKAGED ∃-version) + HEADLINES
+-- state_decoded_geometry_tendsto_circle (d = 1: the first state-decoded limit with NONTRIVIAL
+-- TOPOLOGY — the circle) + 3D.  HONEST: the topology is INSERTED through the wrap rule the profile
+-- is built on — the state is CONSTRUCTED; the dynamical source stays the cited open wall; d an
+-- INPUT; the limit FLAT; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TorusFromState.torusProfile_decodes
+#print axioms QIQTH.TorusFromState.scaledTorus_dist_eq_decoded
+#print axioms QIQTH.TorusFromState.torusProfile_boundary_realized
+#print axioms QIQTH.TorusFromState.state_decoded_geometry_tendsto_flatTorus'
+#print axioms QIQTH.TorusFromState.state_decoded_geometry_tendsto_circle
 
 end QIQTH.AxiomAudit
