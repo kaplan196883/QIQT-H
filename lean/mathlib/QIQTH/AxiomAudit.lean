@@ -10524,5 +10524,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilDimGH.stencilD_toGHSpace_tendsto_unitCube
 #print axioms QIQTH.StencilDimGH.stencil3D_toGHSpace_tendsto_unitCube
 #print axioms QIQTH.StencilDimGH.stencil2D_toGHSpace_tendsto_unitCube
+-- StencilFromState.lean — STATE-WIRE track A1 (2026-07-10): the END-TO-END composition
+-- entangled-state profile → decoded graph → decoded metric → GH limit = Euclidean cube, glued at
+-- G = stencilGraphD.  stencilProfile d N = explicitProfile (crossing-count boundary, defect PROVEN,
+-- q = 2); stencilProfile_decodes (rankMIGraph recovers the stencil graph — a THEOREM);
+-- scaledStencil_dist_eq_decoded (the GH-converging ScaledStencilD metric IS (R_N/N)·decodedDist —
+-- pointwise identity, rfl-tight); stencilProfile_boundary_realized (the boundary exponent is a
+-- genuine reduced-density Bell Schmidt rank across EVERY cut, 2^boundary);
+-- state_decoded_geometry_tendsto_unitCube' (PACKAGED: ∃ profile family with the metric identity AND
+-- toGHSpace → unit cube) + the d = 3 headline.  HONEST: the state/profile is CONSTRUCTED to carry
+-- the stencil pattern — the dynamical source of the entanglement remains the cited open wall;
+-- d is an INPUT; isotropy inserted via the stencil rule; FLAT cube; NOT GR, NOT numerical-G,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilFromState.stencilProfile_decodes
+#print axioms QIQTH.StencilFromState.scaledStencil_dist_eq_decoded
+#print axioms QIQTH.StencilFromState.stencilProfile_boundary_realized
+#print axioms QIQTH.StencilFromState.state_decoded_geometry_tendsto_unitCube'
+#print axioms QIQTH.StencilFromState.state_decoded_geometry_tendsto_unitCube_3D
 
 end QIQTH.AxiomAudit
