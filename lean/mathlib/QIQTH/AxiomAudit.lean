@@ -10684,5 +10684,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TripodFromState.starProfile_decodes
 #print axioms QIQTH.TripodFromState.scaledStar_dist_eq_decoded
 #print axioms QIQTH.TripodFromState.state_decoded_geometry_tendsto_tripod
+-- SphereMetric.lean — SPHERE brick S1 (2026-07-10): THE INTRINSIC SPHERE — the great-circle metric
+-- on the unit sphere of ℝ³ as a compact metric space, with the non-flatness a THEOREM.
+-- IntrinsicSphere (type synonym blocking the chord-metric instance) with dist = angle = arccos⟪p,q⟫;
+-- triangle = Mathlib's spherical triangle inequality angle_le_angle_add_angle; the CHORD↔ANGLE
+-- bridge (chord = 2 sin(dist/2), chord ≤ dist ≤ (π/2)·chord via Jordan's Real.mul_le_sin) makes the
+-- identity bi-Lipschitz with the chord sphere ⟹ compact.  THE NO-FLATNESS THEOREM
+-- sphere_no_isometric_embedding_into_inner — the FOURTH use of the unique-midpoint invariant: the
+-- poles ±e₂ at distance π have MANY midpoints (equator points e₀, e₁ both at π/2 from both poles,
+-- π/2 > 0 apart) ⟹ any inner-product embedding collapses them.  The program's first SMOOTH curved
+-- space.  HONEST: what is FORMALIZED is the metric space + the midpoint obstruction — NOT a
+-- Riemann/sectional-curvature tensor ("curvature = +1 everywhere" is the citation, not the theorem);
+-- the sphere is an INPUT (a chosen target) — transport, not emergence; GH approximation = S2;
+-- NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.SphereMetric.instMetricSpaceIntrinsicSphere
+#print axioms QIQTH.SphereMetric.chord_eq
+#print axioms QIQTH.SphereMetric.angle_le_pi_div_two_mul_chord
+#print axioms QIQTH.SphereMetric.instCompactSpaceIntrinsicSphere
+#print axioms QIQTH.SphereMetric.sphere_no_isometric_embedding_into_inner
 
 end QIQTH.AxiomAudit
