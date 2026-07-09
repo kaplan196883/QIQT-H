@@ -32,6 +32,19 @@ converges to the **Euclidean** distance — the allowed directions fill the disk
 - NOT curved Riemannian (the limit is FLAT Euclidean), NOT dimension/topology emergence, NOT the
   dynamical source, NOT GR, NOT numerical-G, NOT QG.
 
+## STATUS (2026-07-09): I1 + I2 + I3 DONE — axiom-free std-3, budget 0, committed local
+- **I1** `StencilGraph.lean` (793b122e): stencil graph (integer decidable Adj), `eucl_le_R_mul_dist`.
+- **I2** `StencilWalk.lean` (02eb65bd): rounding walk (sqrt-free (R−2)²+4(R−2)+2 = R²−2 < R² estimate),
+  `stencil_reachable` (connectivity), `stencil_dist_le` (dist ≤ eucl/(R−2)+1). Hop metric PINCHED.
+- **I3** `StencilDistortion.lean` (c8230d0e): `scaled_dist_pinch` (uniform via eucl ≤ 2N),
+  `R_N = Nat.sqrt N` schedule, `distortionError_tendsto_zero`, CAPSTONE
+  `stencil_scaled_metric_tendsto_eucl` (uniform-in-pair convergence of the scaled hop metric to the
+  Euclidean metric). Extrinsic comparison; the intrinsic GH statement is I4.
+- **NEXT: I4** (GH convergence to `([0,1]², ‖·‖₂)`) — the intrinsic space is abstract (grid with
+  `(R/N)·hopDist` as a MetricSpace), so this needs `ghDist_le_of_approx_subsets` / an ε-correspondence,
+  NOT the C1/C2 subset-of-ℝ pipeline. If too heavy after a real attempt: CHECKPOINT (I1–I3 already
+  constitute the honest quantitative isotropy result).
+
 ## Brick sequence (each: green build, `#print axioms` std-3, budget 0, AxiomAudit pin, LOCAL commit)
 
 - **I1 — the stencil graph + LOWER bound.** `stencilGraph N R : SimpleGraph (Fin (N+1) × Fin (N+1))`
