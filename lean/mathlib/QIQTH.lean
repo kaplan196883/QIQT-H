@@ -731,6 +731,7 @@ import QIQTH.StencilDimDistortion
 import QIQTH.StencilDimGH
 import QIQTH.StencilFromState
 import QIQTH.TorusStencilGraph
+import QIQTH.TorusStencilWalk
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

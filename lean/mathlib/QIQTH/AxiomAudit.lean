@@ -10556,5 +10556,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TorusStencilGraph.dist_embT
 #print axioms QIQTH.TorusStencilGraph.dist_embT_le_R_div_N_mul_dist
 #print axioms QIQTH.TorusStencilGraph.dist_embT_le_margin_div_two
+-- TorusStencilWalk.lean — TORUS brick T2 (2026-07-10): the wrap-aware rounding walk + pinch +
+-- vanishing distortion.  Minimizing lift liftZ = valMinAbs of the coordinate difference
+-- (represents the difference mod N, |liftZ| = wrapDist, Σ liftZ² = (N·dist_embT)² via the geodesic
+-- identity); the G2 straight-line rounding walk runs on the LIFTED segment and projects mod N with
+-- NO box clamping (the torus has no boundary) — T1's minimality lemma wrapDist_le_natAbs is the
+-- projection step, and the SAME margin closing estimate (R−m)²+2m(R−m)+m² = R² closes adjacency.
+-- torusD_walk_exists (length ≤ ⌈N·dist_embT/(R−m)⌉₊); torusD_reachable (discharges T1's hyp);
+-- torusD_dist_le; PINCH torusD_dist_pinch with the SHARPER error m²/(2(R−m)) + R/N (torus diameter
+-- m/2 beats the cube); torusDistortionError = m²/(2(√N−m)) + √N/N → 0 (each fixed d); CAPSTONE
+-- torusD_scaled_metric_tendsto (ε-N₀ uniform in the pair).  HONEST: torus topology INSERTED via the
+-- wrap rule; d an INPUT; EXTRINSIC comparison (intrinsic GH = T3); FLAT; NOT GR, NOT numerical-G,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.TorusStencilWalk.wayPtT_step
+#print axioms QIQTH.TorusStencilWalk.torusD_walk_exists
+#print axioms QIQTH.TorusStencilWalk.torusD_reachable
+#print axioms QIQTH.TorusStencilWalk.torusD_dist_pinch
+#print axioms QIQTH.TorusStencilWalk.torusD_dist_sub_le
+#print axioms QIQTH.TorusStencilWalk.torusDistortionError_tendsto_zero
+#print axioms QIQTH.TorusStencilWalk.torusD_scaled_metric_tendsto
 
 end QIQTH.AxiomAudit
