@@ -69,6 +69,28 @@ nonempty. The limit is still FLAT — what changes is the **global topology** (n
 - **CAMPAIGN COMPLETE (2026-07-10).** All three user-directed tracks (a=state-wire, b=curvature-first-
   step, c=torus) shipped axiom-free at std-3, budget 0, local commits only.
 
+## Track B continuation (user: "continue the curvature space", 2026-07-10): THE CONE
+
+**B2 — the cone with deficit angle: genuine CONCENTRATED POSITIVE CURVATURE.** `Cone θ` (0 < θ ≤ 2π):
+apex + points (r, φ), r ∈ (0,1], φ ∈ **AddCircle θ** (reuse the torus circle machinery). Since the
+angular distance δ = ‖φ₁−φ₂‖ ≤ θ/2 ≤ π, the metric is the SINGLE law-of-cosines formula
+`√(r₁²+r₂²−2r₁r₂cos δ)` (apex = r→0 limit; through-apex r₁+r₂ is never shorter for θ ≤ 2π).
+- **B2a — `ConeMetric.lean`**: the metric space (triangle inequality: case δ₁₂+δ₂₃ ≤ π via THREE
+  EXPLICIT PLANAR POINTS + Mathlib dist_triangle + cos-monotone; case > π via `d ≥ r₁ − r₂cos δ`
+  twice + `cos δ₁₂ + cos δ₂₃ ≤ 0`); compactness (continuous surjection from Icc × AddCircle θ, using
+  `2−2cos δ ≤ δ²` ⟹ dist ≤ |Δr| + δ); **THE CURVATURE THEOREM `cone_no_isometric_embedding_into_inner`
+  (θ < 2π)**: points at maximal angular separation θ/2 have TWO distinct metric midpoints (the two
+  bisectors at radius cos(θ/4), both at distance sin(θ/4)) ⟹ the IsotropyNoGo unique-midpoint
+  invariant kills every inner-product embedding. Concentrated curvature 2π−θ at the apex, as a theorem.
+- **B2b — `ConeGH.lean`**: polar-grid finite clouds (radii k/(n+1) × angles j·θ/(n+1) via
+  ZMod → AddCircle) with the PULLBACK metric (exact isometry, ε₂ = 0), net error ≲ (1+θ)/(n+1);
+  `ghDist_cone_le`; capstone `polarGrid_toGHSpace_tendsto_cone`.
+- **HONEST (binding)**: the curvature is CONCENTRATED (Alexandrov cone point, deficit 2π−θ) — NOT a
+  smooth Riemann tensor; B2b's finite spaces carry the INDUCED metric (exact isometric clouds, like
+  the tripod stars) — the INTRINSIC graph-geodesic (rounding-walk) version near a bending apex stays
+  the CITED frontier (geodesics are no longer straight lines in any single chart); θ and the geometry
+  are INPUTS; NOT GR, NOT numerical-G, NOT QG.
+
 ### B1 — the TRIPOD (metric tree): the first NON-FLAT (non-locally-Euclidean) GH limit
 `Tripod := Option (Fin 3 × Ioc 0 1)` (none = apex, some (i,t) = arm point): dist none-some = t,
 same-arm |s−t|, cross-arm s+t; MetricSpace by finite casework; compact via the 1-Lipschitz surjection
