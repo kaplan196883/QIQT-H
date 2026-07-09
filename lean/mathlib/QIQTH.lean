@@ -724,6 +724,7 @@ import QIQTH.IsotropyNoGo
 import QIQTH.StencilGraph
 import QIQTH.StencilWalk
 import QIQTH.StencilDistortion
+import QIQTH.StencilGH
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

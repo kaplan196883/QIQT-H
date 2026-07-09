@@ -10443,5 +10443,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilDistortion.scaled_dist_sub_eucl_le
 #print axioms QIQTH.StencilDistortion.distortionError_tendsto_zero
 #print axioms QIQTH.StencilDistortion.stencil_scaled_metric_tendsto_eucl
+-- StencilGH.lean — ISOTROPY brick I4, the CAMPAIGN CAPSTONE (2026-07-09): intrinsic GH convergence.
+-- ScaledStencil N = the lattice as an ABSTRACT finite metric space with the intrinsic scaled hop
+-- metric (stencilR N/N)·graphDist (stencilR N = max 3 ⌊√N⌋ so it is total in N; genuine MetricSpace,
+-- connectivity from stencil_reachable).  ghDist_stencil_le (N ≥ 9): the GH distance to the EUCLIDEAN
+-- unit square ↥unitSquare ⊂ EuclideanSpace ℝ (Fin 2) is ≤ distortionError N/2 + 1/N, via Mathlib's
+-- ghDist_le_of_approx_subsets (Φ = x ↦ x/N is a distortionError-approximate isometry [I3] whose image
+-- is a 1/N-net [unitSquare_net]; ghDist X Y := dist (toGHSpace X) (toGHSpace Y) by definition).
+-- CAPSTONE stencil_toGHSpace_tendsto_unitSquare: toGHSpace (ScaledStencil N) → toGHSpace ↥unitSquare
+-- in Gromov–Hausdorff space — a flat EUCLIDEAN 2D continuum limit from graph geodesics alone (no
+-- ambient plane in the source), the positive complement of IsotropyNoGo.  HONEST: isotropy inserted
+-- through the stencil rule (Euclidean-disk edge test) — NOT emergence from a fixed local rule
+-- (impossible per the no-go) nor from dynamics (cited wall); microscopic edges (R_N→∞, R_N/N→0);
+-- FLAT not curved; NOT emergent dimension/topology, NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilGH.instMetricSpaceScaledStencil
+#print axioms QIQTH.StencilGH.unitSquare_isCompact
+#print axioms QIQTH.StencilGH.unitSquare_net
+#print axioms QIQTH.StencilGH.ghDist_stencil_le
+#print axioms QIQTH.StencilGH.stencil_toGHSpace_tendsto_unitSquare
 
 end QIQTH.AxiomAudit
