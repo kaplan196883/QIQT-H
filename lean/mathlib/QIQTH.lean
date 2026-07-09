@@ -716,6 +716,7 @@ import QIQTH.GRFromMicro
 import QIQTH.CodeCapacityBridge
 import QIQTH.CornerConstruction
 import QIQTH.EmergentSpacetime
+import QIQTH.MetricFromState
 import QIQTH.RecordMincut
 import QIQTH.RecordMincutMPS
 import QIQTH.RecordMincutEntropy

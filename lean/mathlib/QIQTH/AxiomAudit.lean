@@ -10304,4 +10304,19 @@ namespace QIQTH.AxiomAudit
 -- AREA stays Tier-3/OPEN.  [AF] std-3.
 #print axioms QIQTH.RecordMincutEntropy.vonNeumannEntropy_cut_le_log_capacity
 
+-- MetricFromState.lean — METRIC-FROM-STATE M1+M2 (2026-07-09): geometry as the OUTPUT of an entangled
+-- state's cut-rank profile.  A `CutRankProfile G` carries `cutRank A = q^(boundary A)` (boundary =
+-- crossing-bond count, combinatorial area) + the crossing defect
+-- `boundary{u}+boundary{v} = boundary{u,v} + 2·[u∼v]`.  `submult_iff_adj`: strict submultiplicativity
+-- `cutRank{u}·cutRank{v} > cutRank{u,v} ↔ G.Adj u v` (positive Rényi-0 MI; q≥2 ⟹ q^(2[adj])>1 ⟺ adj).
+-- `rankMIGraph_eq : rankMIGraph S = G` — the state DECODES its graph (M1, proved not definitional).
+-- `decodedDist_isFiniteMetric` (M2) — the state-derived graph-geodesic distance is a genuine finite
+-- metric (reusing EmergentSpacetime.graphDist_isFiniteMetric): a metric as the OUTPUT of a cut-rank
+-- profile.  HONEST: finite spatial graph-metric from a profile (the explicit STATE realizing the
+-- profile is M3); NOT continuum Riemannian, NOT GR, does NOT derive why a state carries this
+-- entanglement; profile/connectivity carried as hypotheses, decoding proved; NOT numerical-G/QG.  [AF] std-3.
+#print axioms QIQTH.MetricFromState.submult_iff_adj
+#print axioms QIQTH.MetricFromState.rankMIGraph_eq
+#print axioms QIQTH.MetricFromState.decodedDist_isFiniteMetric
+
 end QIQTH.AxiomAudit
