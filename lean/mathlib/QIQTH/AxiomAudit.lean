@@ -10541,5 +10541,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilFromState.stencilProfile_boundary_realized
 #print axioms QIQTH.StencilFromState.state_decoded_geometry_tendsto_unitCube'
 #print axioms QIQTH.StencilFromState.state_decoded_geometry_tendsto_unitCube_3D
+-- TorusStencilGraph.lean — TORUS brick T1 (2026-07-10): the cyclic d-lattice Fin d → ZMod N with the
+-- wrap distance wrapDist = |(a−b).valMinAbs| (minimal-absolute representative: simultaneously the
+-- integer adjacency ingredient, the AddCircle norm value, and the T2 walk lift; MINIMALITY
+-- wrapDist_le_natAbs = the 1-Lipschitz projection lemma); torusGraphD (decidable integer wrap-ball
+-- test); FlatTorus d = PiLp 2 (AddCircle 1)^d (compact via PiLp.homeomorph, nonempty); embT with the
+-- GEODESIC IDENTITY dist_embT = √(Σ(wrapDist/N)²) (per coordinate via ZMod.toAddCircle +
+-- AddCircle.norm_coe_eq_abs_iff); lower bound dist_embT ≤ (R/N)·hopDist (Reachable HYP until T2);
+-- diameter ≤ margin d/2.  HONEST: the torus TOPOLOGY is INSERTED through the wrap rule (ZMod cyclic
+-- structure) — NOT emergent topology; the T3 limit is the FLAT torus; d is an INPUT; NOT GR, NOT
+-- numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TorusStencilGraph.wrapDist_le_natAbs
+#print axioms QIQTH.TorusStencilGraph.norm_toAddCircle
+#print axioms QIQTH.TorusStencilGraph.dist_embT
+#print axioms QIQTH.TorusStencilGraph.dist_embT_le_R_div_N_mul_dist
+#print axioms QIQTH.TorusStencilGraph.dist_embT_le_margin_div_two
 
 end QIQTH.AxiomAudit
