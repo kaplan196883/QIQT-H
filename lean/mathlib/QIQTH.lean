@@ -721,6 +721,7 @@ import QIQTH.MetricRefinement
 import QIQTH.MetricRefinement2D
 import QIQTH.ContinuumLimit
 import QIQTH.IsotropyNoGo
+import QIQTH.StencilGraph
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

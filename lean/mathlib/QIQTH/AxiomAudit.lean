@@ -10406,5 +10406,15 @@ namespace QIQTH.AxiomAudit
 -- research-grade (RGG/concentration infra Mathlib lacks). NOT GR, NOT numerical-G, NOT QG. [AF] std-3.
 #print axioms QIQTH.IsotropyNoGo.inner_metric_midpoint_unique
 #print axioms QIQTH.IsotropyNoGo.no_l1_isometric_embedding_into_inner
+-- StencilGraph.lean — ISOTROPY brick I1 (2026-07-09): the increasing-stencil lattice graph + the
+-- Euclidean LOWER bound. stencilGraph N R on Fin(N+1)² (Adj = x≠y ∧ integer sqDist ≤ R², decidable, no
+-- Real.sqrt in the graph); emb into EuclideanSpace ℝ (Fin 2) (!₂[·,·] literal — WithLp is a structure
+-- in this Mathlib); eucl = dist∘emb. eucl_le_of_adj (each hop ≤ R, cast ℤ→ℝ + sqrt monotone);
+-- eucl_le_R_mul_walk_length (triangle chained along any walk); eucl_le_R_mul_dist (THE I1 theorem:
+-- eucl x y ≤ R·hopDist, Reachable as HYPOTHESIS — connectivity = brick I2's walk construction).
+-- HONEST: a finite combinatorial lower bound; NOT isotropy, NOT a continuum limit, NOT QG. [AF] std-3.
+#print axioms QIQTH.StencilGraph.eucl_le_of_adj
+#print axioms QIQTH.StencilGraph.eucl_le_R_mul_walk_length
+#print axioms QIQTH.StencilGraph.eucl_le_R_mul_dist
 
 end QIQTH.AxiomAudit
