@@ -10594,5 +10594,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TorusStencilGH.torusD_toGHSpace_tendsto_flatTorus
 #print axioms QIQTH.TorusStencilGH.torus1D_toGHSpace_tendsto_circle
 #print axioms QIQTH.TorusStencilGH.torus3D_toGHSpace_tendsto_flatTorus
+-- TripodGH.lean — CURVATURE-track brick B1 (2026-07-10): the TRIPOD — the first genuinely
+-- NON-EUCLIDEAN (branching, non-manifold) GH limit in the program.  Tripod = 3 unit segments glued
+-- at a branch point (Option (Fin 3 × Ioc 0 1)), tree metric by finite casework; compact via three
+-- arm isometries [0,1] → Tripod.  THE NON-EUCLIDEANNESS THEOREM
+-- tripod_no_isometric_embedding_into_inner: NO distance-preserving map into ANY real inner-product
+-- space — the apex is a metric midpoint of all three endpoint pairs, and IsotropyNoGo's
+-- unique-midpoint lemma forces two endpoints at distance 2 to collapse.  Machine-checked, not prose.
+-- ScaledStar n = the subdivided star (apex + 3(n+1) vertices) with the pullback metric = EXACTLY
+-- (1/(n+1))·starHop (scaledStar_dist_eq — the graph-geodesic honesty lemma); starToTripod is an
+-- EXACT isometry (ε₂ = 0), vertices are a 1/(n+1)-net; ghDist_star_le ≤ 1/(n+1); CAPSTONE
+-- star_toGHSpace_tendsto_tripod.  HONEST LABEL: the tripod is a CAT(0) SINGULAR TREE — non-flat
+-- means NON-MANIFOLD/NON-LOCALLY-EUCLIDEAN/no inner-product embedding; NOT positive curvature, NOT
+-- a curved surface, NOT smooth Riemannian (the cone with deficit angle = the cited next candidate,
+-- not attempted); the branching is INSERTED through the star topology — transport, not emergence;
+-- NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TripodGH.instMetricSpaceTripod
+#print axioms QIQTH.TripodGH.instCompactSpaceTripod
+#print axioms QIQTH.TripodGH.tripod_no_isometric_embedding_into_inner
+#print axioms QIQTH.TripodGH.scaledStar_dist_eq
+#print axioms QIQTH.TripodGH.ghDist_star_le
+#print axioms QIQTH.TripodGH.star_toGHSpace_tendsto_tripod
 
 end QIQTH.AxiomAudit
