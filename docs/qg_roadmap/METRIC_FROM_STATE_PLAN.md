@@ -25,12 +25,19 @@ not definitional.
 
 ## Brick sequence (each: green `lake build`, `#print axioms` std-3, budget 0, AxiomAudit pin, LOCAL commit)
 
-**STATUS (2026-07-09): M1, M2, M3 DONE — axiom-free, budget 0, full library green.** `MetricFromState.lean`:
-`rankMIGraph_eq` (state decodes its graph), `decodedDist_isFiniteMetric` (state-derived metric), and
-`crossingCard_pair_defect` + `explicitProfile_rankMIGraph_eq` (the crossing-count area functional of a
-REAL graph decodes back to it — defect PROVEN, not carried). Geometry-as-output is non-vacuous for
-actual graphs. NEXT: M4 (refinement → interval), M5 (area = min-cut), M3b (quantum Bell-state Schmidt-rank
-realization of `crossingCard`).
+**STATUS (2026-07-09): M1–M5 DONE — axiom-free, budget 0, full library green.**
+`MetricFromState.lean`: `rankMIGraph_eq` (state decodes its graph), `decodedDist_isFiniteMetric`
+(state-derived metric), `crossingCard_pair_defect` + `explicitProfile_rankMIGraph_eq` (crossing-count
+area functional of a REAL graph decodes back to it — defect PROVEN), `crossingCard_symm` (M5: the AREA
+is a property of the CUT, RT-consistent). `MetricRefinement.lean` (M4): `pathGraph_dist` (Mathlib gap
+proved), `chain_scaledDist_eq_interval` (the chain's state-derived metric refines the unit interval).
+Geometry-as-output is non-vacuous for real graphs AND refines a 1D continuum.
+**NEXT: M3b** — the QUANTUM realization: a Bell-pair state on graph edges whose Schmidt rank across a
+cut IS `q^crossingCard`, replacing the combinatorial boundary with genuine entanglement. This is the
+deep step (and likely the tensor/Schmidt-rank infrastructure wall) — CONSULT GPT-5.5 on Mathlib
+finite-Schmidt-rank/`TensorProduct` tractability; if it needs heavy new infra, CHECKPOINT with the
+exact gap. The honest capacity-bound `records ≤ q^area` (replacing `HolographicCapacityBound`)
+presupposes this quantum flattening.
 
 - **M1 — decoder correctness (Step B core).** New file `QIQTH/MetricFromState.lean`. Given a graph
   `G : SimpleGraph V` (finite, decidable adjacency) and a `cutRank : Finset V → ℕ` with the crossing
