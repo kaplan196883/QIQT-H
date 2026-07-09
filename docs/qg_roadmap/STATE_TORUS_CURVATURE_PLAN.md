@@ -52,6 +52,31 @@ nonempty. The limit is still FLAT — what changes is the **global topology** (n
   CONSULT GPT-5.5 (plain) before T1 on the AddCircle/PiLp API details (norm_eq forms, compactness
   instances, quotient coercions).
 
+## STATUS (2026-07-10)
+- **Track A COMPLETE** (78d8b78f): `StencilFromState.lean` — end-to-end state→decoded-metric→GH-cube,
+  packaged ∃-version + 3D headline; Bell grounding at the reduced-density Schmidt-rank level.
+- **Track C COMPLETE** (T1 b2a3fe44, T2 f8d741e1, T3 b6b0c462): the flat d-torus GH limit —
+  `torusD_toGHSpace_tendsto_flatTorus` ∀d, with `torus1D` (THE CIRCLE), `torus2D`, `torus3D`
+  (periodic 3-space). Sharper pinch than the cube (torus diameter m/2). Topology INSERTED via the
+  wrap rule — transport, not emergence.
+- **Track B (B0 consult DONE, 2026-07-10)**: GPT-5.5 verdict — tripod FIRST (tractability × honesty),
+  cone with deficit angle second (triangle inequality for the cone formula is the pain point; unfold
+  near apex needs case splits), smooth surfaces much later. B1 = the TRIPOD brick (below); the cone
+  stays listed as the follow-up candidate, attempted only if B1 lands cleanly and budget allows.
+
+### B1 — the TRIPOD (metric tree): the first NON-FLAT (non-locally-Euclidean) GH limit
+`Tripod := Option (Fin 3 × Ioc 0 1)` (none = apex, some (i,t) = arm point): dist none-some = t,
+same-arm |s−t|, cross-arm s+t; MetricSpace by finite casework; compact via the 1-Lipschitz surjection
+from `Fin 3 × Icc 0 1`. **The honesty upgrade — non-Euclideanness as a THEOREM**: reuse
+`IsotropyNoGo.inner_metric_midpoint_eq_affine_midpoint` — the apex is the metric midpoint of ALL
+THREE endpoint pairs (d = 2, halves = 1), forcing f(B) = f(C) in any inner-product space while
+d(B,C) = 2: `tripod_no_isometric_embedding_into_inner`. GH: the subdivided star's intrinsic scaled
+graph metric embeds EXACTLY (ε₂ = 0 — same-arm |k−l|/n, cross-arm (k+l)/n on the nose), grid is a
+1/n-net ⟹ `ghDist ≤ 1/n → 0`; capstone `star_toGHSpace_tendsto_tripod`. HONEST LABEL (binding):
+the tripod is a CAT(0) singular TREE — "non-flat" means NON-MANIFOLD / NON-LOCALLY-EUCLIDEAN /
+embeds in no inner-product space; it is NOT positive curvature, NOT a curved surface, NOT smooth
+Riemannian; the branching is INSERTED through the star topology. NOT GR, NOT numerical-G, NOT QG.
+
 ## Track B — CURVATURE (research-grade; consult-first; checkpoint honestly)
 
 The stencil machine so far only produces FLAT limits. Genuine curvature needs a position-dependent
