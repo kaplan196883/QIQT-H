@@ -10734,5 +10734,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeIntrinsicGraph.cone_net_mesh
 #print axioms QIQTH.ConeIntrinsicGraph.polarGrid_diam
 #print axioms QIQTH.ConeIntrinsicGraph.mesh_le
+-- ConeIntrinsicWalk.lean — INTRINSIC-CONE brick K2, THE CRUX (2026-07-10): the unfolded-segment
+-- walk.  The cone geodesic between polar points at angular gap s = ‖Δφ‖ ≤ θ/2 < π is the straight
+-- planar segment after unfolding (the ℂ law of cosines norm_sub_polar); waypoints pull back through
+-- Complex.arg.  THE SECTOR LEMMA (seg_arg_nonneg + seg_arg_le — Im ≥ 0 below, rotate-by-e^{−is} +
+-- polar identity above): waypoint args stay pinned in [0, s], the arg branch cut is NEVER
+-- approached, and the pullback is distance-NONEXPANDING (round-minimality norm_coe_le_abs +
+-- lawCos monotonicity).  θ < 2π (genuine deficit) is REQUIRED — it pins s < π so the segment
+-- misses the apex.  Radial chains handle apex endpoints; waypoints snap to the grid via the B2b
+-- net (cost 2·mesh/hop); walk_of_lazy_chain assembles.  coneWalk_exists (length ≤ ⌈d/(ρ−2mesh)⌉₊);
+-- coneGraph_reachable (discharges K1's hypothesis); coneGraph_dist_le (hopdist ≤ d/(ρ−2mesh) + 1)
+-- — with K1 the hop metric is PINCHED between multiples of the cone metric.  HONEST: cone geometry
+-- INSERTED via the adjacency rule; θ an INPUT; Alexandrov-concentrated curvature; NOT GR, NOT
+-- numerical-G, NOT QG; the GH capstone is K3.  [AF] std-3.
+#print axioms QIQTH.ConeIntrinsicWalk.seg_arg_nonneg
+#print axioms QIQTH.ConeIntrinsicWalk.seg_arg_le
+#print axioms QIQTH.ConeIntrinsicWalk.norm_coe_le_abs
+#print axioms QIQTH.ConeIntrinsicWalk.coneWalk_exists
+#print axioms QIQTH.ConeIntrinsicWalk.coneGraph_reachable
+#print axioms QIQTH.ConeIntrinsicWalk.coneGraph_dist_le
 
 end QIQTH.AxiomAudit
