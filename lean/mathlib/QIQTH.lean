@@ -718,7 +718,9 @@ import QIQTH.CornerConstruction
 import QIQTH.EmergentSpacetime
 import QIQTH.MetricFromState
 import QIQTH.MetricRefinement
+import QIQTH.MetricRefinement2D
 import QIQTH.BellCutRank
+import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
 import QIQTH.RecordMincutMPS
 import QIQTH.RecordMincutEntropy

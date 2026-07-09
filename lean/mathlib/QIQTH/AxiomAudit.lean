@@ -10355,5 +10355,31 @@ namespace QIQTH.AxiomAudit
 -- rank(flattening) — cited gap, not faked). NOT continuum geometry, NOT GR, NOT QG. [AF] std-3.
 #print axioms QIQTH.BellCutRank.rank_bellFlattening
 #print axioms QIQTH.BellCutRank.rank_bellFlattening_eq_pow_crossingCard
+-- ReducedDensity.lean — QIT layer (2026-07-09, user-authorized): the pure-bipartite REDUCED DENSITY
+-- MATRIX + Schmidt rank, upgrading M3b from flattening-only. reducedDensityLeft M = M*Mᴴ (=ρ_A);
+-- schmidtRank M = rank ρ_A. reducedDensityLeft_posSemidef (ρ_A PSD — a genuine density operator);
+-- trace_reducedDensityLeft_eq_frobeniusNormSq (tr ρ_A = ‖ψ‖²); schmidtRank_eq_flattening_rank
+-- (rank ρ_A = rank M, via Matrix.rank_self_mul_conjTranspose — the reduced-density↔flattening bridge);
+-- partialTraceRight_pureDensity (Tr_B|ψ⟩⟨ψ| = M*Mᴴ, so ρ_A really IS the reduced density);
+-- bell_schmidtRank_eq_pow_crossingCard (M3b upgraded: Bell reduced-density Schmidt rank = q^crossingCard).
+-- HONEST: PURE-state reduced density (ρ_A=M*Mᴴ, standard correct finite-dim object); NOT a general
+-- MIXED-state partial-trace API (ρ_A=Tr_B ρ w/ linearity/CP/tensor bookkeeping — cited Mathlib gap, not
+-- faked). NOT continuum geometry, NOT GR, NOT QG. [AF] std-3.
+#print axioms QIQTH.ReducedDensity.reducedDensityLeft_posSemidef
+#print axioms QIQTH.ReducedDensity.trace_reducedDensityLeft_eq_frobeniusNormSq
+#print axioms QIQTH.ReducedDensity.schmidtRank_eq_flattening_rank
+#print axioms QIQTH.ReducedDensity.partialTraceRight_pureDensity
+#print axioms QIQTH.ReducedDensity.bell_schmidtRank_eq_pow_crossingCard
+-- MetricRefinement2D.lean — Track-2 higher-dim refinement (2026-07-09, user-authorized): the 2D
+-- box-product state-metric refines the unit SQUARE with the L¹ (taxicab) metric. dist_boxProd_of_reachable
+-- (box-product distance additivity (G□H).dist(a,b)(c,d)=G.dist a c + H.dist b d, transported from
+-- Mathlib's edist_boxProd via Reachable.coe_dist_eq_edist); pathGraph_grid_dist (the m×n grid distance =
+-- Nat.dist x₁ y₁ + Nat.dist x₂ y₂, the taxicab integer metric); square_grid_scaledDist_eq_l1 (the N×N
+-- square grid rescaled by N-1 = the continuum L¹ metric on [0,1]² at N² grid points). Extends the 1D
+-- chain (MetricRefinement) to 2D. HONEST: a finite 2D grid-point refinement, L¹ metric; NOT a continuum
+-- limit, NOT higher curvature, NOT GR, NOT QG. [AF] std-3.
+#print axioms QIQTH.MetricRefinement2D.dist_boxProd_of_reachable
+#print axioms QIQTH.MetricRefinement2D.pathGraph_grid_dist
+#print axioms QIQTH.MetricRefinement2D.square_grid_scaledDist_eq_l1
 
 end QIQTH.AxiomAudit
