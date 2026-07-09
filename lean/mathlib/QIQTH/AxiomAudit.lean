@@ -10753,5 +10753,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeIntrinsicWalk.coneWalk_exists
 #print axioms QIQTH.ConeIntrinsicWalk.coneGraph_reachable
 #print axioms QIQTH.ConeIntrinsicWalk.coneGraph_dist_le
+-- ConeIntrinsicGH.lean — INTRINSIC-CONE brick K3, the CAPSTONE (2026-07-10): POSITIVE CURVATURE
+-- FROM PURE HOP-COUNTING.  Schedule rhoN = (1+θ)/√(n+1) (threshold n ≥ 10: 3·mesh < rhoN); PINCH
+-- coneIntrinsic_pinch (K1 lower + K2 upper; coneError = 4·mesh/(rhoN−2·mesh) + rhoN via diameter
+-- ≤ 2); coneError_tendsto_zero (the (1+θ)-cancellation: bound 4/(n/√(n+1) − 2) + rhoN, squeeze);
+-- IntrinsicConeSpace θ n = the polar grid as an ABSTRACT finite metric space with the TOTAL scaled
+-- hop metric rhoEff·hopdist (rhoEff = max rhoN (3·mesh); [Fact (θ < 2π)] with the ≤-bridge
+-- instance; connectivity from K2); ghDist_coneIntrinsic_le ≤ coneError/2 + mesh; CAPSTONE
+-- coneIntrinsic_toGHSpace_tendsto_cone: the scaled HOP metrics — pure combinatorial path-counting —
+-- GH-converge to Cone θ, whose concentrated positive curvature is a THEOREM.  Completes the
+-- intrinsic graph-geodesic family {cube, torus, tripod, cone} = {flat, flat-periodic, branching,
+-- positively-curved}.  HONEST: the cone geometry is INSERTED through the adjacency rule — recovery,
+-- not emergence; θ an INPUT; curvature CONCENTRATED (Alexandrov) not smooth; the sphere's intrinsic
+-- hop version = cited frontier; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConeIntrinsicGH.coneIntrinsic_pinch
+#print axioms QIQTH.ConeIntrinsicGH.coneError_tendsto_zero
+#print axioms QIQTH.ConeIntrinsicGH.instMetricSpaceIntrinsicConeSpace
+#print axioms QIQTH.ConeIntrinsicGH.ghDist_coneIntrinsic_le
+#print axioms QIQTH.ConeIntrinsicGH.coneIntrinsic_toGHSpace_tendsto_cone
 
 end QIQTH.AxiomAudit
