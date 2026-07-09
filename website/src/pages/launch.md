@@ -45,10 +45,16 @@ entropy = horizon energy flux (`ModularEnergyBound`), area variation via Raychau
 [claim card](/claim-card)) — and it even re-derives the 1/4 they assume.
 
 Two honesties, stated up front. **Their paper came first** — public October 2025, PRL 2026, before my
-GR chain was formalized — so I claim **no priority**. And both derivations *assume* the entropy–area
-relation S = δA/4, so their Letter establishes the shared derivation *chain*, not the finiteness
-postulate. What I add is that a computer checks every line, and you can re-run it. In one sentence:
-**a top-journal result exists for this — I'm the one who made it machine-checkable.**
+GR chain was formalized — so I claim **no priority**. And on the load-bearing input: the PRL
+*bare-assumes* the entropy–area relation `S = δA/4`. QIQT-H does more — it **proves `S = A/4G` as a
+theorem** for its own induced area (one weight family carries both capacity and geometry; the separate
+area label is deleted), reducing the physical input to a **single calibration**, machine-checked, with a
+guard proving that calibration is load-bearing (without it the count is unbounded at fixed area). But
+that one calibration is still *carried*, not derived from nothing — so their Letter vindicates the
+shared **derivation chain** (relative entropy → modular theory → Jacobson → Einstein), not QIQT-H's
+finiteness reading. What I add is that a computer checks every line, and you can re-run it. In one
+sentence: **a top-journal result exists for this — I'm the one who made it machine-checkable, and I
+reduced its one assumption to a single, guarded calibration.**
 
 ## The idea, in one breath
 
