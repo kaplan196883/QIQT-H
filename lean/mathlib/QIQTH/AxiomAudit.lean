@@ -10328,5 +10328,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MetricFromState.crossingCard_pair_defect
 #print axioms QIQTH.MetricFromState.explicitProfile_rankMIGraph_eq
 #print axioms QIQTH.MetricFromState.explicitProfile_decodedDist_isFiniteMetric
+-- MetricRefinement.lean — M4 (2026-07-09): the state-derived chain metric REFINES a continuum interval.
+-- pathGraph_dist : (pathGraph n).dist i j = Nat.dist i.val j.val (a genuine Mathlib gap, proved from
+-- scratch via explicit walk + walk-length induction). chain_decodedDist_eq : the chain's state-decoded
+-- metric = Nat.dist (cast ℝ). chain_scaledDist_eq_interval : rescaled by (n-1), the state-decoded
+-- distance = the unit-interval distance |i/(n-1) − j/(n-1)| — geometry-from-entanglement samples a
+-- genuine continuum metric on [0,1]. HONEST: a 1D chain refinement, finite spatial graph-metric →
+-- interval; NOT higher-dim Riemannian, NOT GR, NOT QG. [AF] std-3.
+#print axioms QIQTH.MetricRefinement.pathGraph_dist
+#print axioms QIQTH.MetricRefinement.chain_decodedDist_eq
+#print axioms QIQTH.MetricRefinement.chain_scaledDist_eq_interval
 
 end QIQTH.AxiomAudit
