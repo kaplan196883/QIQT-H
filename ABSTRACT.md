@@ -114,14 +114,15 @@ ships this.
 
 ---
 
-## Count note (authoritative, 2026-07-07)
+## Count note (authoritative, 2026-07-09)
 
-The current-HEAD raw counts are **4,475 theorem/lemma declarations, 422 `.lean` files, 2,817
-`#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-07). The inventory's
-§0/§9 meta-counts (~388 files, ~3,300 theorems, ~2,708 directives) **lag the loop** and should be
+The current-HEAD raw counts are **4,764 theorem/lemma declarations, 451 `.lean` files, 3,072
+`#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-09). The inventory's
+§0 meta-counts (~429 files, ~4,550 theorems, 2,888 directives) **lag the loop** and should be
 refreshed. When aligning public copy, the theorem/file counts are authoritative from the grep above
-— NOT from the inventory §9 snapshot. The website landing now reads "over 4,400 / **38** world-firsts";
-"over 4,400 theorems across ~420 files" is the current phrasing.
+— NOT from the inventory snapshot. The website landing now reads "over 4,700 / **39** world-firsts"
+(the 39th first = field-level / second-quantized Bisognano–Wichmann, `freeField_secondQuant_BW_unconditional`);
+"over 4,700 theorems across ~450 files" is the current phrasing.
 
 ## Modular-tower update (2026-07-05) — Tomita–Takesaki COMPLETE
 

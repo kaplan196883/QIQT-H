@@ -58,7 +58,7 @@ identification stays a *gravitational input*, not a theorem. (This concerns the 
 Bekenstein–Hawking $\mathbf{1/4}$ ratio **is** derived — as a machine-checked theorem — but through the separate
 **Sakharov / induced-gravity bridge**, `SakharovRatio.sakharov_ratio` (the **P4-MICRO** story) — a re-derivation
 of the standard induced-gravity ratio, not unique to finiteness (any local relativistic QFT with the same UV
-coefficient yields it); what *neither* derives is the **value of $G$**.) What **is**
+coefficient yields it); what *neither* derives is the numerical **value of $G$** — though that frontier has since **narrowed**: the induced-Newton $1/(12\pi)$ normalization's π-content is now *derived* (`HeatKernelDDim`: the $(4\pi t)^{-d/2}$ prefactor and the $d{=}4$ assembly to $1/(12\pi)$), and the a₁ Seeley–DeWitt $2t\cdot R$ contraction machinery is machine-checked (`HeatKernelA1`). The flat-space analysis is now **exhausted**; only the *curved-space* $\kappa=1/6$ coefficient stays cited — it needs the covariant heat-kernel expansion Mathlib lacks — so there is still **no numerical $G$**.) What **is**
 machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
 entropy variation is controlled by the modular-energy variation, which under one-particle Bisognano–Wichmann
 $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$:
@@ -76,6 +76,16 @@ $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\la
 This upgrades the *modular* pieces of the carried `Phase5Master` hypothesis from an assumption to derived
 results. It is **formalized modular QFT — not a derivation of the holographic $A/4G$ bound**; the continuum
 Type III$_1\!\to$II crossed-product dual-weight trace where $A/4G$ would live remains a multi-year cited frontier.
+
+Two 2026-07 extensions push further into that frontier. **Field-level Bisognano–Wichmann is now unconditional**
+(`freeField_secondQuant_BW_unconditional`): the *second-quantized* wedge modular automorphism acts on the whole
+free-field Weyl algebra as the geometric boost, $\sigma_t(W(u)) = W(\mathrm{boost}(2\pi t)\,u)$ conjugated — with
+no carried BW hypothesis — lifting modular-flow $=$ boost from one particle to the full field algebra. And the
+**continuum one-particle map $j_\hbar$** is now built (`Lp`/`Fock` bricks 4–10, axiom-free): the
+positive-frequency map $H^{1/2}\!\oplus H^{-1/2}\!\to L^2$ with a weighted-$L^2$ isometry ($\sqrt\omega$ bounded on
+the right domain), the canonical symplectic normalization $\sigma = 2\hbar\,\mathrm{Im}\langle\cdot,\cdot\rangle$,
+and **boost-covariance of $\sigma$** — embedding into the pre-existing continuum Fock tower. That is genuine
+progress *into* the Type III$_1$ continuum (not its resolution: the $A/4G$ dual-weight trace stays the cited wall).
 
 Relatedly, `InducedNewtonConstant.lean` (the granularity reframing) delivers `G = 1/(N Λ_s²)` — `G` promoted from
 carried to derived (the *relation*; the numerical value still needs the species accounting) — and

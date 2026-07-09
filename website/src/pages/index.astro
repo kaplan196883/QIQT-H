@@ -64,7 +64,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         information content of any bounded spacetime region is finite, and <strong>(P5)</strong> quantum
         equilibrium of the typicality measure — of which P2–P3 are the standard quantum-relativistic arena,
         so the irreducible new physics is <strong>P4 + P5, on the P1 ontology</strong>. We machine-verify the
-        entire development in Lean&nbsp;4 / Mathlib: over <strong>4,400 theorems across ~420 files</strong>,
+        entire development in Lean&nbsp;4 / Mathlib: over <strong>4,700 theorems across ~450 files</strong>,
         zero axioms beyond Lean's standard three, every physical input an explicitly named hypothesis.</p>
       <p class="sub" style="max-width:none">The measurement problem dissolves without collapse: decoherence
         supplies the record structure, λ (P1) makes exactly one history actual, and the Born rule is
@@ -99,8 +99,8 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
       <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
-        <span style="font-size:2rem;font-weight:800">38<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
-        <span style="font-size:2rem;font-weight:800">~4,400<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
+        <span style="font-size:2rem;font-weight:800">39<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">~4,700<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
       <p style="margin:.2rem 0 .4rem;font-size:1.05rem"><strong>Headlines:</strong> five results that did not exist in any proof assistant.</p>
@@ -219,7 +219,8 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         <span class="arrow">The realisations →</span></a>
       <a class="card" href="/formalization"><h3>Finite emergent geometry (off-AdS)</h3>
         <p>Entanglement → distance (two provable metrics: L¹/Crofton and graph-geodesic), the finite
-          Ryu–Takayanagi inequality, Markov-screening locality, and a Lorentzian causal-order skeleton — borrowing
+          Ryu–Takayanagi inequality, Markov-screening locality, a Lorentzian causal-order skeleton, and the
+          min-cut record bound in <em>entropy</em> form (a tight rank→entropy bridge) — borrowing
           AdS/CFT's finite core, background-general. <em>Finite proto-geometry, not the 4D manifold.</em></p>
         <span class="arrow">See the proofs →</span></a>
       <a class="card" href="/realisations"><h3>Runnable toy realisations</h3>
@@ -257,6 +258,11 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           S<sub>Araki</sub>(ω<sub>W(f)Ω</sub>‖ω<sub>Ω</sub>) = S<sub>CGP</sub>(f), Connes cocycles included.</li>
         <li><strong>The one-particle Bisognano–Wichmann theorem</strong> — the wedge modular flow equals the
           geometric Lorentz boost, as an unconditional Lean theorem (free field).</li>
+        <li><strong>The field-level (second-quantized) Bisognano–Wichmann theorem, unconditional</strong> — the
+          second-quantized wedge modular automorphism acts on the <em>whole</em> free-field Weyl algebra as the
+          geometric Lorentz boost, σ<sub>t</sub>(W(u)) = W(boost(2πt)·u), with <strong>no carried BW
+          hypothesis</strong> (discharged from the one-particle result) — lifting modular-flow&nbsp;=&nbsp;boost
+          from one particle to the full field algebra, machine-checked end to end (free field / single mass).</li>
         <li><strong>A Jacobson "Einstein equation of state" derivation</strong> — the conditional chain from an
           entropy bound + Klein positivity to Einstein-form field equations (G&nbsp;+&nbsp;Λg&nbsp;=&nbsp;αT),
           Raychaudhuri and Bianchi machinery included, instantiated on an explicit pp-wave showcase.</li>
@@ -473,7 +479,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           scoped: state non-traciality + modular non-triviality only — NOT a type classification (Mathlib has no
           type API); type III / S-invariant stays cited.</em></li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-eight.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all thirty-nine.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority
