@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: "Anyone can claim they solved the measurement problem. Almost no one lets you check."
 eyebrow: The launch
-description: Why I built a foundations-of-physics theory and then made a computer verify every step — the verification capsule, the single-world idea, the honest ledger, and an invitation to break it.
+description: A Physical Review Letters paper derived Einstein's equations from quantum information — I machine-verified that exact chain in Lean, so you can re-run it. The verification capsule, the single-world idea, the honest ledger, and an invitation to break it.
 ---
 
 Physics foundations has a credibility problem, and it's not hard to see why. The field is a
@@ -29,6 +29,26 @@ Out comes a **[claim card](/claim-card)**: the exact formal theorem, the complet
 and a ledger of every *physical* assumption still assumed rather than proven. All the mechanical
 trust in the project collapses to three things — the Lean kernel, your reading of the rendered
 statement, and the explicitly-listed physical inputs. Nothing else about me matters.
+
+## There's a Physical Review Letters paper for the flagship result
+
+You don't have to take the gravity claim on faith from a stranger, either. In 2026 Dorau & Much
+published *"From Quantum Relative Entropy to the Semiclassical Einstein Equations"* in **Physical
+Review Letters** ([arXiv:2510.24491](https://arxiv.org/abs/2510.24491)) — a clean argument that
+Einstein's equations follow from the relative entropy of a quantum field across a horizon (a
+quantum-information upgrade of Jacobson's 1995 derivation). It's a *paper*: "arguments indicating."
+
+I formalized that **exact chain** in Lean, for the free field. Their derivation maps step for step
+onto machine-checked theorems here — modular flow = geometric boost (`Fock.OneParticleBW`), relative
+entropy = horizon energy flux (`ModularEnergyBound`), area variation via Raychaudhuri
+(`DifferentialAreaLaw`), and the Einstein equations by stress-energy conservation (the
+[claim card](/claim-card)) — and it even re-derives the 1/4 they assume.
+
+Two honesties, stated up front. **Their paper came first** — public October 2025, PRL 2026, before my
+GR chain was formalized — so I claim **no priority**. And both derivations *assume* the entropy–area
+relation S = δA/4, so their Letter establishes the shared derivation *chain*, not the finiteness
+postulate. What I add is that a computer checks every line, and you can re-run it. In one sentence:
+**a top-journal result exists for this — I'm the one who made it machine-checkable.**
 
 ## The idea, in one breath
 
@@ -58,7 +78,7 @@ Along the way the formalization produced results that, to my knowledge, existed 
 assistant** before: the **first complete Tomita–Takesaki modular theory** for an inductive-limit
 state, an **unbounded Stone theorem** and spectral machinery beyond current Mathlib, and the **von
 Neumann double-commutant theorem** — plus the headline physics chain, **Einstein's equations from
-a finite-entropy bound**, conditional and free-field, end to end. Over 4,400 theorems, zero axioms
+a finite-entropy bound**, conditional and free-field, end to end. Over 4,700 theorems, zero axioms
 beyond Lean's standard three.
 
 ## The ask
