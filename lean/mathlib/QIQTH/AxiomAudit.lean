@@ -10502,5 +10502,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilDimDistortion.scaledD_dist_sub_euclD_le
 #print axioms QIQTH.StencilDimDistortion.distortionErrorD_tendsto_zero
 #print axioms QIQTH.StencilDimDistortion.stencilD_scaled_metric_tendsto_euclD
+-- StencilDimGH.lean — DIM-GENERIC STENCIL brick G4, the CAMPAIGN CAPSTONE (2026-07-10): intrinsic
+-- GH convergence in EVERY dimension.  ScaledStencilD d N = the d-lattice Fin d → Fin (N+1) as an
+-- ABSTRACT finite metric space with the intrinsic scaled hop metric (stencilRD/N)·graphDist
+-- (stencilRD = max (margin d + 1) ⌊√N⌋, total in N; genuine MetricSpace; N = 0 singleton).
+-- ghDist_stencilD_le (N ≥ (margin d+1)²): GH distance to the EUCLIDEAN unit cube
+-- ↥(unitCube d) ⊂ EuclideanSpace ℝ (Fin d) is ≤ distortionErrorD d N/2 + margin d/N, via
+-- ghDist_le_of_approx_subsets (x ↦ x/N approximate isometry [G3] + margin/N-net [coordinate
+-- rounding, √d/(2N) ≤ margin/N]).  CAPSTONE stencilD_toGHSpace_tendsto_unitCube (∀ d):
+-- toGHSpace (ScaledStencilD d N) → toGHSpace ↥(unitCube d) — a flat EUCLIDEAN d-dimensional
+-- continuum limit from graph geodesics alone, for EVERY d.  HEADLINE
+-- stencil3D_toGHSpace_tendsto_unitCube (d = 3) + stencil2D (recovers I4).  HONEST: the dimension
+-- d is an INPUT — the chosen lattice — NOT emergent (says NOTHING about why space is 3D);
+-- isotropy inserted through the stencil rule (impossible from a fixed local rule per IsotropyNoGo;
+-- dynamics = cited wall); microscopic edges (R_N→∞, R_N/N→0); FLAT cube not curved; NOT emergent
+-- topology, NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilDimGH.instMetricSpaceScaledStencilD
+#print axioms QIQTH.StencilDimGH.unitCube_isCompact
+#print axioms QIQTH.StencilDimGH.unitCubeD_net
+#print axioms QIQTH.StencilDimGH.ghDist_stencilD_le
+#print axioms QIQTH.StencilDimGH.stencilD_toGHSpace_tendsto_unitCube
+#print axioms QIQTH.StencilDimGH.stencil3D_toGHSpace_tendsto_unitCube
+#print axioms QIQTH.StencilDimGH.stencil2D_toGHSpace_tendsto_unitCube
 
 end QIQTH.AxiomAudit

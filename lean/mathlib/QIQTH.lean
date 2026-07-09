@@ -728,6 +728,7 @@ import QIQTH.StencilGH
 import QIQTH.StencilDimGraph
 import QIQTH.StencilDimWalk
 import QIQTH.StencilDimDistortion
+import QIQTH.StencilDimGH
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
