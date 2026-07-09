@@ -37,6 +37,7 @@ profile, connectivity) are HYPOTHESES, never axioms; the decoding is proved, not
 numerical-`G`; NOT QG.
 -/
 import QIQTH.EmergentSpacetime
+import Mathlib.Combinatorics.SimpleGraph.Finite
 
 namespace QIQTH.MetricFromState
 
@@ -128,5 +129,118 @@ theorem decodedDist_isFiniteMetric (S : CutRankProfile G) (hconn : G.Connected) 
   have h : decodedDist S = graphDist G := by
     funext x y; exact decodedDist_eq S x y
   rw [h]; exact graphDist_isFiniteMetric G hconn
+
+/-! ## M3 — an EXPLICIT graph realizes the crossing-defect profile (defect PROVEN, not carried)
+
+The cut-rank profile's `defect` field is not a vacuous hypothesis: it is satisfied by the genuine
+edge-crossing count of any finite graph.  `crossingCard G A = ∑ v∈A, (neighborFinset v \ A).card` is
+the number of entanglement bonds (edges) crossing the cut `A | Aᶜ` (directed boundary; each crossing
+edge counted once at its `A`-endpoint).  We prove the defect
+`crossingCard {u} + crossingCard {v} = crossingCard {u,v} + 2·[u∼v]` by partitioning each neighbor
+set at `{u,v}` (no ℕ-subtraction), then package the explicit profile `explicitProfile G q` — for which
+`rankMIGraph = G` becomes a theorem about a REAL graph's crossing-count area functional, not a carried
+assumption. -/
+
+variable [DecidableRel (· = · : V → V → Prop)]
+
+/-- The crossing-edge count of `A` (combinatorial "area" of the cut `A | Aᶜ`). -/
+def crossingCard (G : SimpleGraph V) [DecidableRel G.Adj] (A : Finset V) : ℕ :=
+  ∑ x ∈ A, (G.neighborFinset x \ A).card
+
+variable {G : SimpleGraph V} [DecidableRel G.Adj]
+
+private lemma crossingCard_singleton (x : V) :
+    crossingCard G ({x} : Finset V) = (G.neighborFinset x).card := by
+  unfold crossingCard
+  rw [Finset.sum_singleton, Finset.sdiff_singleton_eq_erase,
+    Finset.erase_eq_of_notMem (by rw [SimpleGraph.mem_neighborFinset]; exact fun h => (G.ne_of_adj h) rfl)]
+
+private lemma nbr_inter_pair_left (u v : V) :
+    G.neighborFinset u ∩ ({u, v} : Finset V) = if G.Adj u v then ({v} : Finset V) else ∅ := by
+  by_cases h : G.Adj u v
+  · rw [if_pos h]; ext x
+    simp only [Finset.mem_inter, SimpleGraph.mem_neighborFinset, Finset.mem_insert,
+      Finset.mem_singleton]
+    constructor
+    · rintro ⟨hux, rfl | rfl⟩
+      · exact absurd rfl (G.ne_of_adj hux)
+      · rfl
+    · rintro rfl; exact ⟨h, Or.inr rfl⟩
+  · rw [if_neg h]; ext x
+    simp only [Finset.mem_inter, SimpleGraph.mem_neighborFinset, Finset.mem_insert,
+      Finset.mem_singleton, Finset.notMem_empty, iff_false, not_and]
+    rintro hux (rfl | rfl)
+    · exact absurd rfl (G.ne_of_adj hux)
+    · exact h hux
+
+private lemma nbr_inter_pair_right (u v : V) :
+    G.neighborFinset v ∩ ({u, v} : Finset V) = if G.Adj u v then ({u} : Finset V) else ∅ := by
+  by_cases h : G.Adj u v
+  · rw [if_pos h]; ext x
+    simp only [Finset.mem_inter, SimpleGraph.mem_neighborFinset, Finset.mem_insert,
+      Finset.mem_singleton]
+    constructor
+    · rintro ⟨hvx, rfl | rfl⟩
+      · rfl
+      · exact absurd rfl (G.ne_of_adj hvx)
+    · rintro rfl; exact ⟨G.symm h, Or.inl rfl⟩
+  · rw [if_neg h]; ext x
+    simp only [Finset.mem_inter, SimpleGraph.mem_neighborFinset, Finset.mem_insert,
+      Finset.mem_singleton, Finset.notMem_empty, iff_false, not_and]
+    rintro hvx (rfl | rfl)
+    · exact h (G.symm hvx)
+    · exact absurd rfl (G.ne_of_adj hvx)
+
+/-- **The crossing-count defect** — the state's `defect` field, PROVEN for the genuine edge-crossing
+count of any finite graph.  Partitions each neighbor set at `{u,v}` (no subtraction). -/
+theorem crossingCard_pair_defect (u v : V) (huv : u ≠ v) :
+    crossingCard G ({u} : Finset V) + crossingCard G ({v} : Finset V)
+      = crossingCard G ({u, v} : Finset V) + 2 * (if G.Adj u v then 1 else 0) := by
+  have hcp : crossingCard G ({u, v} : Finset V)
+      = (G.neighborFinset u \ ({u, v} : Finset V)).card
+        + (G.neighborFinset v \ ({u, v} : Finset V)).card := by
+    unfold crossingCard; rw [Finset.sum_pair huv]
+  have hIu : (G.neighborFinset u ∩ ({u, v} : Finset V)).card = (if G.Adj u v then 1 else 0) := by
+    rw [nbr_inter_pair_left u v]; by_cases h : G.Adj u v <;> simp [h]
+  have hIv : (G.neighborFinset v ∩ ({u, v} : Finset V)).card = (if G.Adj u v then 1 else 0) := by
+    rw [nbr_inter_pair_right u v]; by_cases h : G.Adj u v <;> simp [h]
+  calc crossingCard G ({u} : Finset V) + crossingCard G ({v} : Finset V)
+      = (G.neighborFinset u).card + (G.neighborFinset v).card := by
+        rw [crossingCard_singleton, crossingCard_singleton]
+    _ = ((G.neighborFinset u \ ({u, v} : Finset V)).card
+          + (G.neighborFinset u ∩ ({u, v} : Finset V)).card)
+        + ((G.neighborFinset v \ ({u, v} : Finset V)).card
+          + (G.neighborFinset v ∩ ({u, v} : Finset V)).card) := by
+        rw [← Finset.card_sdiff_add_card_inter (G.neighborFinset u) ({u, v} : Finset V),
+          ← Finset.card_sdiff_add_card_inter (G.neighborFinset v) ({u, v} : Finset V)]
+    _ = ((G.neighborFinset u \ ({u, v} : Finset V)).card + (if G.Adj u v then 1 else 0))
+        + ((G.neighborFinset v \ ({u, v} : Finset V)).card + (if G.Adj u v then 1 else 0)) := by
+        rw [hIu, hIv]
+    _ = crossingCard G ({u, v} : Finset V) + 2 * (if G.Adj u v then 1 else 0) := by
+        rw [hcp]; ring
+
+/-- **The explicit cut-rank profile of a graph** — bond dimension `q`, boundary = the genuine
+edge-crossing count, defect PROVEN (`crossingCard_pair_defect`).  No carried profile hypothesis. -/
+def explicitProfile (G : SimpleGraph V) [DecidableRel G.Adj] {q : ℕ} (hq : 2 ≤ q) :
+    CutRankProfile G where
+  q := q
+  hq := hq
+  boundary := crossingCard G
+  defect := crossingCard_pair_defect
+
+/-- **M3 — the crossing-count area functional of a REAL graph decodes back to the graph.**  For the
+explicit profile (edge-crossing boundary, defect proven), `rankMIGraph = G` — geometry-from-state is
+non-vacuous: the cut-rank of an actual graph recovers that graph. -/
+theorem explicitProfile_rankMIGraph_eq (G : SimpleGraph V) [DecidableRel G.Adj] {q : ℕ} (hq : 2 ≤ q) :
+    rankMIGraph (explicitProfile G hq) = G :=
+  rankMIGraph_eq (explicitProfile G hq)
+
+/-- **M3 capstone — a real graph's crossing-count cut-rank OUTPUTS its geodesic metric.**  For a
+connected graph, the metric decoded from the explicit (edge-crossing) cut-rank profile is a genuine
+finite metric equal to `G.dist`. -/
+theorem explicitProfile_decodedDist_isFiniteMetric (G : SimpleGraph V) [DecidableRel G.Adj]
+    {q : ℕ} (hq : 2 ≤ q) (hconn : G.Connected) :
+    IsFiniteMetric (decodedDist (explicitProfile G hq)) :=
+  decodedDist_isFiniteMetric (explicitProfile G hq) hconn
 
 end QIQTH.MetricFromState

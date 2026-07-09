@@ -10318,5 +10318,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MetricFromState.submult_iff_adj
 #print axioms QIQTH.MetricFromState.rankMIGraph_eq
 #print axioms QIQTH.MetricFromState.decodedDist_isFiniteMetric
+-- M3 (2026-07-09): the crossing-count DEFECT is PROVEN for any finite graph (not carried).
+-- crossingCard G A = ∑ v∈A (neighborFinset v \ A).card (edge-crossing count); crossingCard_pair_defect
+-- proves boundary{u}+boundary{v}=boundary{u,v}+2·[u∼v] by partitioning each neighbor set at {u,v}
+-- (no ℕ-subtraction). explicitProfile G q packages it; explicitProfile_rankMIGraph_eq : the
+-- crossing-count area functional of a REAL graph DECODES back to the graph (rankMIGraph = G, defect
+-- proven not assumed); explicitProfile_decodedDist_isFiniteMetric : a real connected graph's cut-rank
+-- OUTPUTS its geodesic metric. Geometry-from-state non-vacuous for actual graphs. [AF] std-3.
+#print axioms QIQTH.MetricFromState.crossingCard_pair_defect
+#print axioms QIQTH.MetricFromState.explicitProfile_rankMIGraph_eq
+#print axioms QIQTH.MetricFromState.explicitProfile_decodedDist_isFiniteMetric
 
 end QIQTH.AxiomAudit
