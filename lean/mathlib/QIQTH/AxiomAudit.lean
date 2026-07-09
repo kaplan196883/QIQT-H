@@ -10416,5 +10416,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.StencilGraph.eucl_le_of_adj
 #print axioms QIQTH.StencilGraph.eucl_le_R_mul_walk_length
 #print axioms QIQTH.StencilGraph.eucl_le_R_mul_dist
+-- StencilWalk.lean — ISOTROPY brick I2 (2026-07-09), THE CRUX: the explicit rounding-walk UPPER bound.
+-- For R ≥ 3, the segment x→y chopped into k = ⌈eucl/(R−2)⌉₊ pieces, each real waypoint rounded to the
+-- lattice (walk_of_lazy_chain: equal-or-adjacent chain → Walk via Walk.copy/Walk.concat).  Each rounded
+-- step passes the SQRT-FREE integer stencil test: (Δround)² ≤ (Δreal)² + 2c + 1 per coordinate
+-- (round_diff_sq_le), summing to (R−2)² + 4(R−2) + 2 = R² − 2 < R² (round_diff_sq_lt).
+-- stencil_walk_exists (length ≤ ⌈eucl/(R−2)⌉₊); stencil_reachable (CONNECTIVITY — discharges I1's
+-- Reachable hypothesis, so eucl_le_R_mul_dist fires unconditionally for R ≥ 3); stencil_dist_le
+-- (dist ≤ eucl/(R−2) + 1).  With I1: the hop metric is PINCHED between Euclidean multiples —
+-- eucl ≤ R·dist and dist ≤ eucl/(R−2)+1 — the two-sided comparability the isotropy limit builds on.
+-- HONEST: finite lattice combinatorics; NOT yet isotropy/continuum (I3/I4); NOT QG.  [AF] std-3.
+#print axioms QIQTH.StencilWalk.stencil_walk_exists
+#print axioms QIQTH.StencilWalk.stencil_reachable
+#print axioms QIQTH.StencilWalk.stencil_dist_le
 
 end QIQTH.AxiomAudit
