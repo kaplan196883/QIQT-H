@@ -172,5 +172,38 @@ expectation-level join of `code_count_eq_fock_area_expect` upgrades to an approx
 the finite trace obstruction tells you precisely what must diverge and how. That is a theorem-shaped
 question, in the repo's own language, whose answer in AdS/CFT is "N → ∞ at fixed g·N".
 
+## 6. POST-RC UPDATE (2026-07-10, same day — after the boundary-dynamics campaign)
+
+The RC campaign (`RC_CAMPAIGN_PLAN.md`: RC1 `73fd89c4` + RC2 `ef64ea39` + RC3 `a63c9b73`, all [AF]
+std-3) moved **gap 1's M1 prerequisite** — and only that. Revised status:
+
+- **Gap 1 [vs M1] — the boundary side is no longer a ledger; it is an OPEN QUANTUM SYSTEM.** Before
+  RC, the "independently defined microscopic theory" column had bookkeeping plus a free diagonal flow
+  that provably freezes records (`alpha_diagonal`). Now the boundary has: a dissipative semigroup
+  under which records FORM (exponential convergence to the readout), a second law WITH its equality
+  case (production zero ⟺ record, Klein faithfulness), equilibria that are dynamically characterized,
+  Lyapunov-STABLE, and (E4-conditionally) linearized-Einstein
+  (`boundary_dynamics_equilibria_are_geometry`), and a single-world stochastic layer: the channel is
+  EXACTLY the λ-average of a Born-jump process, with the Born weights FORCED given the channel
+  (`unraveling_exact`, `unraveling_weights_unique`). In Maldacena-comparison terms: the boundary
+  theory now has its thermalization/decoherence sector as theorems — the analogue of knowing the
+  boundary system relaxes to the thermal (black-hole-dual) states. **What gap 1 still needs, sharpened
+  by RC:** (i) the INTERACTING upgrade — a unitary coupling from which the record basis and the
+  dephasing EMERGE (einselection derived, not inserted; the pointer basis is RC1's named input);
+  (ii) the capacity → ∞ limit in which the code carries an approximate graviton CCR (the trace
+  obstruction stands untouched); (iii) with (i)+(ii), the graviton found INSIDE the spectrum. The
+  three are really one composite object: a genuine interacting microscopic theory with a controlled
+  large-capacity limit — i.e., the CFT slot.
+- **Gaps 2–6: unchanged today** (strong-half decoupling; interactions beyond Deser-2;
+  scale-as-dimension; protection; 1/N tower).
+
+**Distance, honestly quantified by mechanism:** M3 (scalar capacity ↔ N): relation held, tower
+missing. M1 (boundary theory): first rung BUILT (dynamics + thermodynamics + single-world layer),
+interacting core + limit missing. M2 (derivation engine): weak half theorems, strong half missing.
+M4 (scale-dimension): substrate unconditional (exact RT), theorem missing. M5 (protection): nothing.
+The remaining distance is concentrated in ONE composite object — the interacting boundary theory
+with its large-capacity limit — everything else is scaffolded, shadowed, or first-rung-built around
+it.
+
 ⚠ Scope firewall: this document compares architectures; it claims no new physics, no derivation of a
 duality, and does not modify any result's honest labels. NOT QG.
