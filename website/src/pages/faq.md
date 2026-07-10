@@ -77,6 +77,34 @@ picture sits in the modal / relationalist family alongside Everett. What is genu
 
 If someone shows a result was formalized earlier, priority is ceded gladly.
 
+## "Doesn't a finite information capacity break Lorentz invariance?"
+
+This is the sharpest objection to any "finite information" program, and it's a fair one: a
+frame-dependent cutoff generically produces an observable speed-of-light splitting at one loop (the
+CPSUV problem). QIQT-H faced it head-on with three machine-checked "Lorentz gates," and the result is a
+single, sharp conclusion.
+
+**Every frame-anchored reading of the capacity is *falsified*** (each a Lean theorem): sharp *and all
+smooth* spatial cutoffs hit the unsuppressed CPSUV constant `g²/12π²` (`cpsuv_gate_sharp_fails`);
+diamond-rest-frame ("tip-anchored") truncations fail at *first* order (`tipSplit_hasDerivAt_one`);
+boost-averaging is not a regulator because the boost group is noncompact (`boostAvg_diverges`); and no
+local Lorentz-invariant finite-capacity *cutoff* exists at all (`|k²| < Λ²` has infinite rapidity
+volume).
+
+**Exactly one reading survives:** the capacity as a **covariant, state/algebra-level *entropy*
+constraint** — `Q_D` bounds the renormalized entropy of the diamond algebra in the covariant vacuum
+(modular, frame-free, covariance built in *before* any loop), never a mode-count regulator in any frame.
+Crucially, this surviving reading makes **no low-energy Lorentz-violation prediction** at all
+(`stateLevel_noDeltaC2`) — it constrains *states*, not *dynamics*, so there's nothing to falsify. The
+only door left open is the dynamical-realization gap (a *non-equivariant* enforcement mechanism could in
+principle reopen it — `equivariant_enforcement_preserves_invariance`), which is listed among the
+[open problems](/open-problems).
+
+So the honest answer is the strong one: not only does finite capacity *not* break Lorentz invariance in
+the surviving reading — the one-loop stress test **forces** "finite capacity" to mean finite *entropy*
+(state-level, covariant), which is exactly [the reframe](/idea) the rest of the site states. The
+frame-anchored / finite-matter reading a critic would attack is the one QIQT-H itself proves dead.
+
 ## "Was this written by an AI?"
 
 The formalization was developed with heavy AI assistance, human-directed. This changes nothing
