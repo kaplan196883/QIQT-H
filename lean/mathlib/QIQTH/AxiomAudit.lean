@@ -10847,5 +10847,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MinkowskiDiamond.chain_length_le
 #print axioms QIQTH.MinkowskiDiamond.staircase_chain
 #print axioms QIQTH.MinkowskiDiamond.causal_no_go
+-- CausalStencil.lean — LORENTZIAN LADDER brick L3, THE CRUX (2026-07-10): the weighted causal
+-- stencil — FLAT SPACETIME CONTINUOUS.  Each chronological stencil step (both null coords advance
+-- 1..R) carries ITS OWN Minkowski proper time √(2ΔuΔv); the chain weight is maximized.  UPPER
+-- chainWeight_le_tau: EXACT (no error) — the iterated reverse triangle inequality
+-- (sqrt_mul_add_le): timelike geodesics MAXIMIZE, discrete zigzags only lose.  LOWER
+-- exists_chain_weight_ge: the even-distribution chain (floor gaps ∈ [⌊m/k⌋,⌈m/k⌉] ⊆ [1..R],
+-- div/mod + omega) achieves √(2(m−k)(n−k)) ≥ gridTau·N − √(2k(m+n)) (sqrt_shrink).  CAPSTONE
+-- causal_stencil_pinch (R_N = Nat.sqrt N, errorTerm = √(4/√N + 4/N) → 0): ∀ε>0 ∃N₀ ∀N≥N₀
+-- ∀ causal pairs: every chain ≤ gridTau (exact) AND (gridTau ≤ ε ∨ ∃ chain ≥ gridTau − ε) — the
+-- honest near-light-cone disjunction (very-null pairs are not stencil-connected: chronology vs
+-- causality).  gridTau_eq_tau ties the grid functional to the continuum MinkowskiDiamond.tau.
+-- The deterministic counterpart of Brightwell–Gregory (random sprinkling, CITED).  HONEST: causal
+-- order + per-step weights INSERTED (weights presuppose the local Minkowski interval; pure order
+-- is deterministically impossible by our own L2 no-go); EXTRINSIC-uniform pinch, NOT intrinsic
+-- Lorentzian-GH (no settled notion exists); 1+1; the diamond an INPUT; NOT GR, NOT numerical-G,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.CausalStencil.chainWeight_le_tau
+#print axioms QIQTH.CausalStencil.exists_chain_weight_ge
+#print axioms QIQTH.CausalStencil.errorTerm_tendsto_zero
+#print axioms QIQTH.CausalStencil.chain_approximates
+#print axioms QIQTH.CausalStencil.causal_stencil_pinch
 
 end QIQTH.AxiomAudit
