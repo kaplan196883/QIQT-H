@@ -15,6 +15,14 @@
   **BORN FORCED** (`unraveling_weights_unique`, no PSD hypothesis needed) — the finite answer to the
   SelectionDynamics circularity risk: at this channel the jump law is forced, not chosen (forced
   GIVEN the channel; the non-circularity question moves one level up, documented).
+- **IC1 DONE (rung c, 2026-07-11)** — `0f2f23b0` `InteractingChannel.lean` (42 decls): EINSELECTION
+  DERIVED — the exact pure-dephasing reduced dynamics (`reduced_entry`), the ledger conserved BY the
+  interaction (`reduced_diag`), and the CAPSTONE `timeAvg_reduced_tendsto_dephase`: under the
+  gaps-resolved hypothesis the Cesàro average of the interacting dynamics → RC1's `dephase` — the
+  record basis EMERGES from `H_int` (A's eigenbasis), deleting RC1's one named input at the
+  time-averaged level; einselection uniqueness (`invariant_iff_record`) + the necessity guard
+  (`no_resolution_no_einselection`). Honest: Cesàro only (finite recurrences — gate C — make
+  pointwise impossible); pure-dephasing limit; a/b/w model inputs.
 - Commits LOCAL, unpushed. The firewall below is binding and restated in every header + audit pin.
 
 **Date:** 2026-07-10. **Parent:** `BOUNDARY_DYNAMICS_CANDIDATES.md` (RC1 = `RecordChannel.lean`

@@ -1596,14 +1596,26 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     must use exactly the Born weights — the finite answer to `SelectionDynamics.lean`'s named
     circularity risk; equivariance of weights AND targets (`jump_law_equivariant`,
     `recordState_submatrix`).
-  ⚠ **HONEST (binding, in every header + audit pin):** the record/pointer basis is an INPUT
-  (einselection from an interaction Hamiltonian NOT derived — the record-creating-from-coupling
-  upgrade is the named next wall); Born forced GIVEN the channel, NOT derived ab initio (the
-  non-circularity question moves one level up: why this channel/basis); E4's per-ray BW/derivative/
-  Iyer–Wald data stay CARRIED; PosDef per held conventions; CP in prose (mixed-unitary), positivity +
-  trace preservation proved; finite two-time law, NOT a continuum stochastic process; finite single
-  corner; linearized, free, flat; NOT bulk reconstruction, NOT the strong holographic principle,
-  NOT QG.
+  - **IC1 — EINSELECTION DERIVED** (42 decls, `0f2f23b0`, 2026-07-11, `InteractingChannel.lean`):
+    the pure-dephasing (measurement-limit, Zurek) model — `H_int = A ⊗ B`, the diagonal phase
+    unitary with the genuine-calculus entrywise Schrödinger equation (`intPhase_entry_hasDerivAt`);
+    the EXACT reduced dynamics `reduced_entry` (each coherence × `γ_{nm}(t) = Σ_k w_k
+    e^{−it(a_n−a_m)b_k}`); **the ledger conserved BY the interaction** (`reduced_diag` — derived,
+    contrast RC1); trace/PSD preserved. CAPSTONE **`timeAvg_reduced_tendsto_dephase`**: under the
+    gaps-resolved hypothesis the Cesàro average of the interacting dynamics → RC1's `dephase` —
+    **the record basis EMERGES from the coupling** (A's eigenbasis), deleting RC1's one named input
+    at the time-averaged level; uniqueness (`invariant_iff_record` — invariant states = records) +
+    the necessity guard (`no_resolution_no_einselection` — a decoupled environment dephases
+    nothing).
+  ⚠ **HONEST (binding, in every header + audit pin):** the record/pointer basis was RC1's input —
+  IC1 DERIVES it at the Cesàro/time-averaged level ONLY (finite environments recur — gate C — so
+  pointwise t → ∞ dephasing is impossible); the pure-dephasing limit drops the self-Hamiltonian
+  (`[H_S, A] ≠ 0` pointer competition = named follow-on); the coupling data a/b/w are model INPUTS
+  (what is derived: the basis comes from the coupling, not fiat); Born forced GIVEN the channel, NOT
+  derived ab initio; E4's per-ray BW/derivative/Iyer–Wald data stay CARRIED; PosDef per held
+  conventions; CP in prose (mixed-unitary), positivity + trace preservation proved; finite two-time
+  law, NOT a continuum stochastic process; finite single corner; linearized, free, flat; NOT bulk
+  reconstruction, NOT the strong holographic principle, NOT QG.
 
 - **THE DECOUPLING SHADOW, DS1 — `QIQTH/Decoupling/TruncatedCCR.lean`** (**[AF]** std-3;
   `THE_DECOUPLING_SHADOW_PLAN.md` — the finite forced core of the dictionary, from the Maldacena

@@ -30,6 +30,17 @@ the candidate-3 unraveling (the jump chain + path measure via `CoarseGrainNatura
   ends: the interacting (record-creating-from-coupling) upgrade of the channel, the continuum path
   measure (T5 machinery), and the why-this-basis einselection question.
 
+## STATUS UPDATE 3: IC1 LANDED (2026-07-11) — THE EINSELECTION QUESTION ANSWERED (time-averaged)
+`0f2f23b0` `InteractingChannel.lean`: the pure-dephasing interacting model — the exact reduced
+dynamics, the ledger conserved BY the interaction, and the capstone: the Cesàro time average of the
+interacting reduced dynamics IS RC1's `dephase`, in the eigenbasis of the coupling. **The
+why-this-basis question is answered at the time-averaged level: the record basis emerges from
+H_int.** Uniqueness (invariant states = records) + the necessity guard (decoupled environment
+dephases nothing). RC1's one named input is deleted at that level; what replaces it: the coupling
+data (a, b, w — model inputs), the pure-dephasing limit ([H_S, A] ≠ 0 pointer competition = named
+follow-on), and the honest Cesàro qualifier (finite recurrences, gate C). Remaining open ends: the
+self-Hamiltonian competition, the continuum path measure, capacity → ∞.
+
 **Date:** 2026-07-10. **Question:** what dynamics could run on QIQT-H's boundary side (the record/code
 ledger), turning the machine-checked *dictionary* (`ADSCFT_GAP_ANALYSIS.md`) into a *duality*? Seven
 candidates, each checked against the actual Lean theorems (grep sweep of `lean/mathlib/QIQTH/`,

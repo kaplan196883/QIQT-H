@@ -194,6 +194,12 @@ std-3) moved **gap 1's M1 prerequisite** — and only that. Revised status:
   obstruction stands untouched); (iii) with (i)+(ii), the graviton found INSIDE the spectrum. The
   three are really one composite object: a genuine interacting microscopic theory with a controlled
   large-capacity limit — i.e., the CFT slot.
+  **IC1 update (2026-07-11, `0f2f23b0`): component (i) has its FIRST BRICK.** The pure-dephasing
+  interacting model derives the record basis from the coupling (`timeAvg_reduced_tendsto_dephase`:
+  the Cesàro average of the interacting reduced dynamics IS the record channel, in A's eigenbasis;
+  uniqueness + necessity guard). Einselection is no longer inserted — at the time-averaged level,
+  in the measurement limit. Still open within (i): the self-Hamiltonian competition
+  (`[H_S, A] ≠ 0`); and (ii)+(iii) — the capacity → ∞ limit and the graviton inside — are untouched.
 - **Gaps 2–6: unchanged today** (strong-half decoupling; interactions beyond Deser-2;
   scale-as-dimension; protection; 1/N tower).
 
