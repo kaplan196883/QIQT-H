@@ -1,5 +1,17 @@
 # LIMIT ALGEBRA campaign — the genuine frontier after the tower's Tomita theory
 
+## STATUS: LA1′ LANDED (2026-07-11, `15b9fb74`) — CHECKPOINT AT THE KAPLANSKY WALL, as planned
+`TowerGNS/CommutationTheorem.lean` (772 lines, 47 decls, all std-3, budget 0). Deliverables 1–3
+SHIPPED: the finite-stage commutation theorem; **`jconj_image_towerLimitVN` — J·M·J = rightLimitVN
+as sets** (a genuine vN algebra, Ω cyclic for it, separating for it and its commutant, ⊆ M′,
+M ⊆ (JMJ)′); the compression argument — every commutant element is right-multiplication-valued
+POINTWISE ON THE CYCLIC ORBIT with the exact error bound, convergent along the full directed stage
+filter. Deliverable 4 CHECKPOINTED with the wall now Lean-precise: the right-mult operator bound is
+the RATIO-weighted Frobenius form, the compression controls only the COLUMN-weighted GNS form
+(≤ ‖T‖², `commutantSymbol_gnsNorm_le`), and the two quadratic forms are inequivalent (w_m/w_n
+unbounded) — **J·M·J = M′ holds up to the norm-control (Kaplansky) gap**; the Δ-smoothing escape
+(bounded functions of Δ mollifying the approximants) is the named next campaign.
+
 **Date:** 2026-07-11 (REWRITTEN same day — the first draft specced Ω-separating, which a detailed
 re-read showed is ALREADY BUILT: S5–S8 `towerCyclicVec_separating`; indeed the tower's FULL modular
 data is complete — S̄, Δ, Δ† = Δ, Δ^{it} = towerFlow, Tomita I, J, polar-on-core, Tomita II

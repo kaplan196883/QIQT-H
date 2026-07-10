@@ -2112,6 +2112,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   III/S-invariant (needs crossed-product/flow-of-weights machinery absent from Mathlib);
   Araki–Woods/Connes/Buchholz–Wichmann stay CITED.
 
+**THE COMMUTATION CORRIDOR, LA1′ (CHECKPOINT AS PLANNED, LIMIT_ALGEBRA_PLAN.md, 2026-07-11,
+  `15b9fb74`)** — `TowerGNS/CommutationTheorem.lean` (47 decls, [AF] std-3): toward Tomita's hard
+  half JMJ = M′. SHIPPED: **the finite-stage commutation theorem** (`stage_commutant_iff_eq_mulRight`
+  — the stage commutant of the left action is EXACTLY right multiplication by T(1));
+  **`rightLimitVN`** as a genuine vN algebra with ★ `jconj_image_towerLimitVN` — **J·M·J =
+  rightLimitVN as sets** (forward J7 + SOT transport; backward a pair-trick adjoin induction over
+  the new jconj calculus), `rightLimitVN ⊆ M′`, Ω cyclic for it + separating for it and its
+  commutant, `M ⊆ (JMJ)′`; **the compression argument** (`commutant_orbit_approx`/`_tendsto`) —
+  every commutant element is right-multiplication-valued POINTWISE ON THE CYCLIC ORBIT
+  (‖T(germ a) − R_{b_C}(germ a)‖ ≤ ‖π_C(a)‖·‖(1−P_C)TΩ‖ → 0 along the full directed stage filter).
+  **THE WALL (Lean-precise):** the held right-mult operator bound is the RATIO-weighted Frobenius
+  form √(Σ‖b n m‖²(w_m/w_n)); the compression controls only the COLUMN-weighted GNS form ≤ ‖T‖²
+  (`commutantSymbol_gnsNorm_le`); the forms are inequivalent (w_m/w_n unbounded) — **J M J = M′
+  holds up to the norm-control (Kaplansky) gap**; the Δ-smoothing escape = the named next campaign.
+  HONEST: full equality NOT claimed; pointwise-on-orbit NOT SOT; no strip-KMS; no type (cited);
+  finite-stage Gibbs inductive limit; NOT QG.
+
 **THE KMS-BOUNDARY CAMPAIGN (COMPLETE, THE_KMS_BOUNDARY_PLAN.md)** — the tower vacuum is a
   KMS-boundary state. K1 (`towerState_kms_boundary`) + K2 (`towerFlow_vectorState`) ALREADY
   EXISTED from the flow campaign (verified axiom-clean); C1 capstone landed:
