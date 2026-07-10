@@ -60,6 +60,29 @@ AdS/CFT is the existence proof that this surviving branch can be a real theory).
 (`G·N = 1/Λ_s²`) is the analogue of `1/G ∝ N²`; `btz_cardy_eq_qiqth_capacity` is the correspondence-level
 check (two holographic bookkeepings agree under shared G).
 
+**The AREA LAW is DERIVED, not postulated (correction, 2026-07-10 — supersedes any "the holographic bound
+is branding/input" framing, which predates the SG/DS/JI theorem layer).** The bound's physical *value*
+(`Q_R = A/4ℓ_P²` as nature's number) and the area *law* (S∝A with the 1/4G structure) are different
+claims; the second is a theorem, in three independent machine-checked senses:
+1. **The form is FORCED** (`forced_weight_product` + `finiteCorner_valuation_rigidity`, DS6/DS7): any
+   monoidal, embedding-monotone, refinement-natural area valuation MUST be `κ·Σ log D_e` — the
+   logarithmic boundary-additive form of the area law is a rigidity theorem of information composition
+   (ν₂ counterexample proving the hypotheses necessary); only κ (the 4G slot) is a normalization.
+2. **The scaling is PROVED, with the guard proving the premise load-bearing**
+   (`boundary_entropy_area_law` + `bulk_entropy_volume_law`): the boundary-local Gaussian model provably
+   has S = (A/a₀²)·s₀, while the SAME modes provably give a VOLUME law unless boundary-localized — the
+   theorem pair isolates boundary locality as exactly the property producing area scaling (not circular).
+3. **The full S = A/4G is a theorem in the constructed core with nothing carried in that branch**
+   (`wEntTau_eq_log_tau0Dim` — the calibration IS a theorem; `Stau_eq_area_over_4G`,
+   `K2b_tau0_capstone`): count and geometry as two computations of one number, the join by construction
+   ("no hClausius/hGeom/hCalib/hJoin carried in this branch").
+The honest residue is NOT the area law but its physical instantiation: that nature's vacua realize the
+boundary-local structure (F1 — Srednicki's free-scalar vacuum area law not formalized), the external
+geometric area = the count-built area (Wall 2), and Λ_s (F3). Net: QIQT-H is a candidate *explanation*
+of the weak holographic principle — capacity composes logarithmically and records live on boundaries ⟹
+S∝A — rather than an importer of it; what it still lacks is the STRONG principle (boundary dynamics
+generating the bulk), which is gaps 1–2 below.
+
 **The M4 shadow:** state-decoded geometry (cut-rank → metric → GH limit), graph-RT/min-cut, flow/cut
 duality, and the Lorentzian target-side (τ, reverse triangle, dS₂).
 
