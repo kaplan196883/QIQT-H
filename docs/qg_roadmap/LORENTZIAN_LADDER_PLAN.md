@@ -1,5 +1,28 @@
 # LORENTZIAN LADDER campaign — causal structure as output: flat spacetime continuous, then curved
 
+## STATUS: CAMPAIGN COMPLETE (2026-07-10) — all four bricks landed FULL, axiom-free, std-3, budget 0
+
+- **L1+L2 DONE** — `700fbb1d` `MinkowskiDiamond.lean`: τ + the reverse triangle + flat midpoint
+  uniqueness + **THE CAUSAL NO-GO** (unweighted longest chain = Manhattan time 2 ≠ √2 — the
+  machine-checked reason causal sets need random sprinkling; BLMS/Brightwell–Gregory cited).
+- **L3 DONE (the crux)** — `2a48488e` `CausalStencil.lean` (697 lines): the weighted causal
+  stencil; exact upper (iterated reverse triangle), even-distribution lower, capstone
+  `causal_stencil_pinch` — **FLAT SPACETIME CONTINUOUS** (two-sided uniform pinch, honest
+  near-light-cone disjunction).
+- **L4 DONE (the finale, no checkpoint needed)** — `ac30d08d` `DeSitterTime.lean` (502 lines):
+  dS₂; `reversed_cauchy_schwarz` (STRONGER than planned: timelike w, ARBITRARY w');
+  **`tauDS_reverse_triangle`** with the explicit opposite-cone branch hypothesis — to our
+  knowledge the first machine-checked curved-spacetime reverse triangle inequality; geodesic
+  additivity (equality case); `dS_strict_defect` + `dS_causal_horizon` vs
+  `minkowski_common_future` (the non-Minkowski witnesses).
+- **Convention correction (L4, vs the plan below):** the plan's τ = arccos(B)/bounded-by-π was
+  the SPHERE convention — wrong for dS. Correct: timelike ⟺ B(p,q) > 1, τ = arcosh(B),
+  unbounded. And the planned antipodal double-midpoint witness was geometrically wrong
+  (B(p,−p) = −1 is NOT chronological; dS timelike geodesics do not refocus — antipodal
+  horizons); replaced by the strict-defect + causal-horizon witnesses.
+- Commits LOCAL, unpushed (standing constraint). The honest firewall below is binding and
+  restated in every file header + AxiomAudit pin.
+
 **Date:** 2026-07-10. **Parents:** the completed Riemannian/GH program + `HawkingWick.lean` (the
 reverse-triangle Cauchy–Schwarz seed `sqrt_mul_add_le` is already in). **User directive:** run the
 Lorentzian ladder (L1–L4).

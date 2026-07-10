@@ -2313,6 +2313,36 @@ continuum limits, then the isotropy question settled both ways:
   the formal Wick identities (t = iτ, null coordinates), the reverse-triangle Cauchy–Schwarz seed for
   the future Lorentzian ladder, and the thermal reread (the torus GH limits = finite-temperature
   Euclidean geometries, `thermalCircle β = AddCircle β`).
+- **THE LORENTZIAN LADDER** (2026-07-10, campaign COMPLETE — `MinkowskiDiamond.lean` `700fbb1d`,
+  `CausalStencil.lean` `2a48488e`, `DeSitterTime.lean` `ac30d08d`): real time — spacetime is NOT a
+  metric space; the fundamental object is the time-separation τ with the REVERSE triangle inequality
+  (timelike geodesics MAXIMIZE proper time).
+  - **L1 — the flat target**: null-coordinate τ = √(2ΔuΔv) on ℝ^{1,1}; `tau_reverse_triangle`
+    (one call to the `HawkingWick.sqrt_mul_add_le` seed); `tau_midpoint_unique` — flat timelike
+    midpoints are UNIQUE (the equality case; the midpoint invariant in reverse-triangle form).
+  - **L2 — THE CAUSAL NO-GO** (`causal_no_go`): on the deterministic causal lattice the unweighted
+    longest chain gives the MANHATTAN time (2 at the unit diamond) ≠ the Minkowski proper time (√2)
+    — the machine-checked reason the causal-set program needs RANDOM sprinkling (BLMS 1987,
+    Brightwell–Gregory 1991, CITED). The Lorentzian twin of the Euclidean isotropy no-go.
+  - **L3 — THE CRUX, `causal_stencil_pinch`: FLAT SPACETIME CONTINUOUS.** Weighted causal stencil
+    chains (each chronological step carries its own Minkowski weight √(2ΔuΔv)); UPPER: every chain
+    ≤ τ, EXACT — the iterated reverse triangle (discrete zigzags only lose proper time); LOWER: the
+    even-distribution chain achieves τ − ε; capstone: ∀ε>0 ∃N₀ ∀N≥N₀, uniformly over all causal
+    grid pairs, the two-sided pinch with the honest near-light-cone disjunction. The deterministic
+    counterpart of Brightwell–Gregory.
+  - **L4 — THE FINALE, dS₂**: 2D de Sitter = the one-sheeted hyperboloid B(x,x)=1 in ℝ^{1,2} (the
+    Lorentzian sphere). Causal classification PROVED (timelike ⟺ B(p,q) > 1); τ = arcosh(B).
+    **`reversed_cauchy_schwarz`** — B(w,w)·B(w',w') ≤ B(w,w')² for timelike w and ARBITRARY w'
+    (stronger than the classical both-timelike form; ortho complement of a timelike vector is
+    spacelike, Lagrange identity). **`tauDS_reverse_triangle`** — τ(p,q)+τ(q,r) ≤ τ(p,r) with the
+    explicit opposite-cone branch hypothesis (= the chain's time-ordering, stated honestly): to our
+    knowledge the FIRST machine-checked curved-spacetime reverse triangle inequality. Equality on
+    the explicit geodesic (`tauDS_geo_additive`); non-Minkowski witnesses: `dS_strict_defect`
+    (non-coplanar chain, strict defect) and `dS_causal_horizon` (antipodal events share NO
+    chronological partner — de Sitter horizons — vs `minkowski_common_future` in the L1 model).
+    NOTE the corrected conventions: dS τ is arcosh/unbounded (NOT the sphere's arccos/π), and dS
+    has NO timelike double-midpoints (geodesics don't refocus) — the non-flatness witness is the
+    defect + horizon, not midpoint multiplicity.
 - **HONEST scope (binding):** the isotropy is *inserted through the stencil rule* (the Euclidean-disk edge
   test) — NOT isotropy emerging from a fixed local combinatorial rule (impossible per the no-go) and NOT from
   dynamics (cited wall); the torus topology, the tripod branching, the cone's deficit angle and the sphere
@@ -2321,7 +2351,12 @@ continuum limits, then the isotropy question settled both ways:
   dimension d and the angle θ are INPUTS — NOT emergent: nothing says why space is 3-dimensional**; the
   sphere's formalized non-flatness is the midpoint obstruction, not a curvature tensor; ALL Hawking-layer
   physics identifications (temperature, horizon, κβ) are CITED interpretation, not formalized derivations;
-  Wick rotation is static/thermal-only and loses causal structure (the Lorentzian ladder = cited plan);
+  Wick rotation is static/thermal-only and loses causal structure (now complemented by the real-time
+  Lorentzian ladder above); **Lorentzian layer**: the causal order and the per-step weights are INSERTED
+  (the weights presuppose the local Minkowski interval — and the pure-order ideal is deterministically
+  IMPOSSIBLE by our own L2 no-go; randomness = the cited alternative); the L3 convergence is an
+  EXTRINSIC-uniform pinch, not an intrinsic Lorentzian-GH (no settled notion exists in any proof
+  assistant — cited frontier, incl. discrete→dS₂); everything 1+1; the diamond and dS₂ are INPUTS;
   sphere-intrinsic-hop, smooth-target intrinsic walks, replica/entropy at 2π = cited frontiers; NOT
   emergent dimension/topology, NOT GR, NOT numerical-G, NOT QG.
 
