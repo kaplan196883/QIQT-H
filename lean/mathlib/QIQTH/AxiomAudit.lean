@@ -10828,5 +10828,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HawkingWick.hawking_algebraic_face
 #print axioms QIQTH.HawkingWick.hawking_two_pi_coincidence
 #print axioms QIQTH.HawkingWick.thermalTorus_limit
+-- MinkowskiDiamond.lean — LORENTZIAN LADDER bricks L1+L2 (2026-07-10): the flat Lorentzian target
+-- + THE CAUSAL NO-GO.  L1: causalLE + tau = √(2ΔuΔv) in null coordinates; tau_pos_iff
+-- (chronological ⟺ strictly timelike); THE REVERSE TRIANGLE INEQUALITY tau_reverse_triangle
+-- (timelike geodesics MAXIMIZE — exactly one call to HawkingWick.sqrt_mul_add_le);
+-- tau_midpoint_unique (GENERAL flat timelike midpoint uniqueness via the equality case of reverse
+-- Cauchy–Schwarz in squared polynomial form — the flat half of the invariant whose curved
+-- VIOLATION is the L4 target).  L2 — the Lorentzian twin of IsotropyNoGo: on the deterministic
+-- causal lattice every hop raises the rank u+v by ≥ 1 (chain_length_le) and the staircase achieves
+-- it, so the scaled unweighted hop-time across the diamond is EXACTLY 2 — but τ = √2 ≠ 2
+-- (causal_no_go): deterministic order-counting CANNOT recover Minkowski proper time — why causal
+-- sets need RANDOM sprinkling (BLMS 1987; Brightwell–Gregory 1991, CITED); the weighted
+-- deterministic fix = L3.  HONEST: the causal order is INSERTED; spacetime is NOT a metric space —
+-- no GH, statements are extrinsic pinches; 1+1; the diamond an INPUT; NOT GR, NOT numerical-G,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.MinkowskiDiamond.tau_reverse_triangle
+#print axioms QIQTH.MinkowskiDiamond.tau_midpoint_unique
+#print axioms QIQTH.MinkowskiDiamond.chain_length_le
+#print axioms QIQTH.MinkowskiDiamond.staircase_chain
+#print axioms QIQTH.MinkowskiDiamond.causal_no_go
 
 end QIQTH.AxiomAudit

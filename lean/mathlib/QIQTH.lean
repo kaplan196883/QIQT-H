@@ -746,6 +746,7 @@ import QIQTH.ConeIntrinsicGH
 import QIQTH.ConeFromState
 import QIQTH.ConeFlat
 import QIQTH.HawkingWick
+import QIQTH.MinkowskiDiamond
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
