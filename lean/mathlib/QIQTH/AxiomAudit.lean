@@ -10890,5 +10890,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DeSitterTime.tauDS_geo_additive
 #print axioms QIQTH.DeSitterTime.dS_strict_defect
 #print axioms QIQTH.DeSitterTime.dS_causal_horizon
+-- RecordChannel.lean — BOUNDARY DYNAMICS brick RC1 (2026-07-10, candidate 6 of
+-- BOUNDARY_DYNAMICS_CANDIDATES.md): THE RECORD-DEPHASING SEMIGROUP — the first record-FORMING
+-- boundary dynamics on the held code.  The held free flow FREEZES records (alpha_diagonal); this is
+-- the dissipative half: Tsem s = e^{−s}·id + (1−e^{−s})·dephase, a genuine one-parameter semigroup
+-- (Tsem_add, ALL s,t — pure algebra), trace-preserving, unital, positivity-preserving
+-- (Tsem_isDensity), COMMUTING with the free flow (Tsem_alpha_comm — a consistent open extension of
+-- DY).  Fixed points = EXACTLY the record-diagonal states (Tsem_fixed_iff; Gibbs and maxMixed among
+-- them); every state converges exponentially (rate 1, exact contraction Tsem_sub_dephase) to its
+-- record readout (tendsto_Tsem_dephase) — decoherence/einselection as a semigroup theorem.  Entropy
+-- production along the flow (entropy_Tsem_ge, via Klein positivity + the sign-flip-unitary
+-- dephase_matLog); the LYAPUNOV theorem relEntropy_Tsem_le (relative entropy to every record
+-- equilibrium non-increasing — approach to equilibrium, the E4-shaped stationarity at fixed points,
+-- code_equilibrium_einstein CITED); capacity respected (Tsem_capacity) with maxMixed = the
+-- capacity-saturating fixed point (saturation_fixed — the area-law state, K2a CITED);
+-- record-relabeling equivariance (Tsem_perm — the finite Gate-3-safe enforcement shape, CITED).
+-- HONEST: the record/pointer basis is an INPUT (einselection from an interaction Hamiltonian NOT
+-- derived); entropy theorems carry PosDef per the held relEntropy conventions; complete positivity
+-- noted in prose (mixed-unitary), positivity + trace preservation are the proved facts; finite,
+-- single code corner; no unraveling (candidate 3 = named follow-on), no bulk reconstruction; the
+-- first rung of a boundary THEORY — NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.RecordChannel.Tsem_add
+#print axioms QIQTH.RecordChannel.Tsem_isDensity
+#print axioms QIQTH.RecordChannel.Tsem_fixed_iff
+#print axioms QIQTH.RecordChannel.tendsto_Tsem_dephase
+#print axioms QIQTH.RecordChannel.entropy_Tsem_ge
+#print axioms QIQTH.RecordChannel.relEntropy_Tsem_le
+#print axioms QIQTH.RecordChannel.Tsem_alpha_comm
+#print axioms QIQTH.RecordChannel.saturation_fixed
+#print axioms QIQTH.RecordChannel.relEntropy_Tsem_gibbs_le
 
 end QIQTH.AxiomAudit
