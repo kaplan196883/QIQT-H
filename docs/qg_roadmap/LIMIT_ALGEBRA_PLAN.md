@@ -1,46 +1,50 @@
-# LIMIT ALGEBRA campaign — structural facts about towerLimitVN, beyond packaging
+# LIMIT ALGEBRA campaign — the genuine frontier after the tower's Tomita theory
 
-**Date:** 2026-07-11. **Parent:** the tower-GNS campaign (R1–R9: `TowerGNS`, `towerRep`, cyclic Ω,
-`towerLimitVN`) + Transport/Accounting (B1–B6: `towerFlow`, implementation, flow-invariance).
-**Frontier per the R9 checkpoint (verbatim):** "Ω is not shown separating, the modular theory of the
-limit state on the completion is not constructed, and the representations are not shown isometric."
-**User directive:** run the limit-algebra brick in the loop.
+**Date:** 2026-07-11 (REWRITTEN same day — the first draft specced Ω-separating, which a detailed
+re-read showed is ALREADY BUILT: S5–S8 `towerCyclicVec_separating`; indeed the tower's FULL modular
+data is complete — S̄, Δ, Δ† = Δ, Δ^{it} = towerFlow, Tomita I, J, polar-on-core, Tomita II
+INCLUSION, non-traciality, KMS-boundary; per the KMS-boundary checkpoint, "the first complete
+Tomita–Takesaki modular theory in any proof assistant").
 
-## LA1 — `TowerGNS/Separating.lean`: Ω SEPARATING for towerLimitVN (the modular prerequisite)
+**The named HAVE-NOTs of the limit algebra (verbatim from the checkpoints):** the reverse inclusion
+/ full equality **J M J = M′ (Tomita's hard half, named RvD route)**; strip-analyticity KMS; type
+III (no Mathlib type API); no Kaplansky density.
 
-The classical right-multiplication argument, mirroring the held left-multiplication machinery
-(R5 `gnsInner_leftMul_le` / R6 `towerLeftMul`):
-- **Per-stage faithfulness** `gibbs_faithful`: the Gibbs density is PosDef, so
-  `tr(ρ·a†a) = 0 ⟹ a = 0` (via the PosDef square root / invertible factor).
-- **Injectivity** `towerRep_injective`: `π_C(a)Ω` has norm² `= φ_C(a†a)` (R8), so `π_C` is
-  injective — the "representations not shown isometric" gap moved to its honest half (injective
-  proved; C*-isometry NOT claimed).
-- **The right multiplication** `towerRightMul b` (b at a FIXED stage C₀): bounded on the tower
-  pre-space. THE CRUX = the stage-uniform bound `ι(b)·ρ_K·ι(b)† ≤ c(b)·ρ_K`: the crude
-  λ_max/λ_min constant is NOT stage-uniform (Gibbs eigenvalues shrink along the tower); the
-  product structure rescues it — `ρ_K` factorizes across modes (DY4 `reduced_gibbsDensity_eq`),
-  `ι(b) = b ⊗ 1`, so the conjugation acts only on the C₀ factor and the constant is computed at
-  the FIXED stage C₀ (PSD tensor monotonicity). Fiberwise `sameOff` machinery mirrors how R5
-  transported `frobBound`.
-- **Commutation** `left_right_commute`: right multiplications commute with every `towerRep C a`
-  (raw associativity + continuity); SOT-limits preserve commutation with a fixed bounded operator,
-  so right multiplications commute with all of `towerLimitVN`.
-- **Dense right orbit**: `Ω·b = germ b` — the SAME family R8 proved dense.
-- **CAPSTONE `omega_separating`**: `x ∈ towerLimitVN, xΩ = 0 ⟹ x = 0` (x kills the dense right
-  orbit). Corollary `towerState_faithful`: the limit vector state is faithful on towerLimitVN.
+## LA1′ — `TowerGNS/CommutationTheorem.lean`: the RvD corridor toward J M J = M′
+
+Held: J8 gives `J·M·J ⊆ M′` (jconj_limitVN_mem_commutant); J7 gives `J π_C(a) J = R_{jStage a}`
+with `jStage` a stage bijection; Ω cyclic AND separating for M (S8) and separating for M′ (J8);
+the bounded right action with computed adjoints (S1–S4, T0_4); `mem_limitVN_iff` (SOT
+approximation); the eigenbasis method. Deliverables, in rising difficulty:
+
+1. **The finite-stage commutation theorem** (new content, finite linear algebra): on the stage GNS
+   space, any operator commuting with the left action IS right multiplication by its value at the
+   unit — `T ∘ L_a = L_a ∘ T (∀a) ⟹ T = R_{T(1)}` (the `T(x) = x·T(1)` argument; the stage GNS
+   carrier is the full matrix algebra since the Gibbs state is faithful).
+2. **`rightLimitVN = J·M·J` as a genuine von Neumann algebra**: package the right-multiplication
+   limit algebra via `generatedBy`; prove `rightLimitVN = jconj '' towerLimitVN` (both inclusions:
+   J7 stagewise + SOT transport through the anti-unitary homeomorphism, both directions since
+   `jStage` is bijective and `J² = 1`); re-derive `rightLimitVN ⊆ M′` (J8 repackaged).
+3. **Orbit-level approximation of the commutant by right multiplications** (the compression
+   argument): for `T ∈ M′` and any stage `C`, the stage compression `b_C := symbol of P_{V_C}(TΩ)`
+   satisfies `‖T(germ a) − R_{b_C}(germ a)‖ ≤ ‖π_C(a)‖·‖(1−P_{V_C})TΩ‖ → 0` — every commutant
+   element is POINTWISE-ON-THE-ORBIT approximated by right multiplications (no operator-norm claim).
+4. **THE WALL (attempt; CHECKPOINT expected here):** upgrading (3) to SOT membership
+   `M′ ⊆ rightLimitVN` (equivalently `M′ ⊆ J·M·J`, i.e. the FULL Tomita equality) requires norm
+   control of the approximants `R_{b_C}` — a Kaplansky-density-type statement the C11 checkpoint
+   already names as absent. If a finite-tower trick closes it (everything is an inductive limit of
+   finite-dimensional stages; the eigenbasis is explicit), take it; otherwise CHECKPOINT with
+   (1)–(3) + the wall named precisely: "J M J = M′ up to the norm-control (Kaplansky) gap."
 
 ## HONEST scope firewall (binding)
 
-Ω separating is the PREREQUISITE for the limit's modular theory, not the theory: NO modular
-operator/J of the LIMIT constructed here (next campaign), NO type classification, NO factor, NO
-ITPFI/III₁ identification (T3's fingerprint stays arithmetic; Araki–Woods/Connes stay cited);
-representations proved INJECTIVE, not C*-isometric; the stage-uniform right bound rides the
-PRODUCT Gibbs structure (an honest model property, not generality). NOT QG.
+No strip-KMS, no type/S-invariant/ITPFI/III₁ (Araki–Woods/Connes stay cited), no claim of the full
+commutation theorem unless (4) genuinely closes; the orbit-level statement (3) is pointwise on the
+cyclic orbit, NOT SOT; finite-stage Gibbs inductive limit only. NOT QG.
 
 ## Discipline
 
 Unchanged: ONE bg fable subagent (own module, NO git); independent verification (rebuild +
 scratchpad `#print axioms` std-3 + no-sorry grep); wire `QIQTH.lean`; AxiomAudit pins; full budget
 check (LONG ~420000ms, budget 0); commits LOCAL ONLY — DO NOT PUSH; explicit git paths; NO sorry;
-hypotheses never axioms; CHECKPOINT permitted at the stage-uniform right bound if it genuinely
-walls (then ship faithfulness + injectivity + per-stage pieces + the exact gap).
+hypotheses never axioms; CHECKPOINT at the named Kaplansky wall.
