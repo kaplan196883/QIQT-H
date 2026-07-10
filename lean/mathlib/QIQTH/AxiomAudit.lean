@@ -10997,5 +10997,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InteractingChannel.timeAvg_reduced_tendsto_dephase
 #print axioms QIQTH.InteractingChannel.invariant_iff_record
 #print axioms QIQTH.InteractingChannel.no_resolution_no_einselection
+-- TowerGNS/CommutationTheorem.lean — LIMIT ALGEBRA brick LA1′ (2026-07-11,
+-- LIMIT_ALGEBRA_PLAN.md): THE COMMUTATION-THEOREM CORRIDOR toward Tomita's hard half JMJ = M′
+-- (CHECKPOINT as planned — deliverables 1–3 shipped, 4 walled at the named Kaplansky gap).
+-- (1) THE FINITE-STAGE COMMUTATION THEOREM stage_commutant_iff_eq_mulRight: the stage commutant of
+-- the left action is EXACTLY right multiplication by T(1).  (2) rightLimitVN := generatedBy of the
+-- right-multiplication ranges (⋆-closed via T0_4's computed adjoints) with ★ jconj_image_towerLimitVN
+-- — J·M·J = rightLimitVN AS SETS (forward J7 + SOT transport; backward a new pair-trick adjoin
+-- induction + the jconj calculus); rightLimitVN ⊆ M′; Ω CYCLIC for rightLimitVN and SEPARATING for
+-- it and its commutant; M ⊆ (JMJ)′.  (3) THE COMPRESSION ARGUMENT: stageSubspace V_C (fin-dim,
+-- complete, monotone, jointly dense), strong projection convergence, commutantSymbol b_C :=
+-- preimage of P_C(TΩ), commutant_orbit_approx (‖T(germ a) − R_{b_C}(germ a)‖ ≤ ‖π_C(a)‖·‖(1−P_C)TΩ‖)
+-- + commutant_orbit_tendsto (→ 0 along the full directed Finset-atTop stage filter): EVERY commutant
+-- element is right-multiplication-valued POINTWISE ON THE CYCLIC ORBIT.  (4) THE WALL (checkpoint,
+-- Lean-precise): the held operator bound is the RATIO-weighted Frobenius √(Σ‖b n m‖²(w_m/w_n));
+-- the compression controls only the COLUMN-weighted GNS norm Σ w_n‖b m n‖² ≤ ‖T‖²
+-- (commutantSymbol_gnsNorm_le); the two quadratic forms are inequivalent (w_m/w_n unbounded), so
+-- ‖R_{b_C}‖ is uncontrolled by ‖T‖ — J M J = M′ HOLDS UP TO the norm-control (Kaplansky) gap; the
+-- Δ-smoothing escape = a separate named campaign.  HONEST: full JMJ = M′ NOT claimed; the orbit
+-- statement is pointwise, NOT SOT; no strip-KMS; no type/S-invariant/ITPFI/III₁ (Araki–Woods/Connes
+-- cited); finite-stage Gibbs inductive limit only; NOT QG.  [AF] std-3.
+#print axioms QIQTH.TowerGNS.stage_commutant_iff_eq_mulRight
+#print axioms QIQTH.TowerGNS.jconj_image_towerLimitVN
+#print axioms QIQTH.TowerGNS.rightLimitVN_le_commutant
+#print axioms QIQTH.TowerGNS.towerCyclicVec_separating_rightLimitVN
+#print axioms QIQTH.TowerGNS.commutant_orbit_approx
+#print axioms QIQTH.TowerGNS.commutant_orbit_tendsto
+#print axioms QIQTH.TowerGNS.commutantSymbol_gnsNorm_le
 
 end QIQTH.AxiomAudit

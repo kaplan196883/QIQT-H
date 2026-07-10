@@ -130,6 +130,7 @@ import QIQTH.TowerGNS.PolarCore
 import QIQTH.TowerGNS.ConjFlow
 import QIQTH.TowerGNS.ConjImplements
 import QIQTH.TowerGNS.TomitaSecondHalf
+import QIQTH.TowerGNS.CommutationTheorem
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius
