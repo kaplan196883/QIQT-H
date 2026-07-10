@@ -112,6 +112,13 @@ of AdS/CFT; every carried hypothesis here is named in Lean.
    instance; the inference to an actual III₁ factor cited, never claimed). What remains missing is the
    limit ALGEBRA itself (ITPFI factor, type classification, normal weights) and the graviton sector
    inside it.
+   *Amendment (2026-07-11, per the EM campaign — see the §7 table row):* "constructed directly, not
+   discovered" needs qualifying — the code corner CONTAINS the truncated bosonic modes (EM1–EM7:
+   genuinely embedded oscillators with the honest defect, the DY dynamics exciting them, the
+   end-to-end no-join-hypothesis bridge to the graviton's area operator), and the capacity → ∞ CCR
+   recovery at bounded occupations is a theorem (DS1). The graviton's truncated AVATAR is inside the
+   boundary theory; what is not inside is the exact-Fock graviton (permanent finite obstruction) and
+   a spectral — rather than dictionary-level — identification in an interacting limit algebra.
 2. **[vs M2] The derivation engine — PARTIALLY BUILT, at the honest finite level.** An earlier draft said
    "no derivation engine"; that was too strong. **The Decoupling Shadow campaign (DS1–DS7 COMPLETE,
    `QIQTH/Decoupling/`)** formalizes the finite forced core of Maldacena's structure — *one parent, two
@@ -223,7 +230,7 @@ requirements, with verified status:
 | Its equilibria are the geometric states | ✅ BUILT, conditional: stationary ∧ Lyapunov-stable ∧ linearized-Einstein (`boundary_dynamics_equilibria_are_geometry`; E4's carried BW/Iyer–Wald inputs) |
 | The weak principle (S = A/4G as LAW) | ✅ DERIVED (§2: rigidity + boundary-Gaussian + constructed-core join) |
 | An INTERACTING boundary theory | 🟡 first brick only — IC1 is the measurement limit; `[H_S, A] ≠ 0` pointer competition open |
-| The graviton INSIDE the boundary Hilbert space | ❌ blocked at finite capacity by the trace-obstruction theorem; needs capacity → ∞ — the core of the CFT slot |
+| The graviton INSIDE the boundary Hilbert space | 🟡 **the TRUNCATED graviton lives inside the corner** (correction 2026-07-11, per the EM campaign): bosonic truncated oscillators genuinely EMBEDDED in the code corner (`modeOp_injective`, EM2–EM3: ladders, number operators, the honest defect `[a_k,a_k†] = 1 − D_k·P_top`), commuting across modes (EM4), records = occupation projectors (EM5), the DY dynamics exciting exactly these modes, and the finite bridge composed END-TO-END with NO join hypothesis (EM7 `truncated_field_count_eq_fock_area_expect_noJoin`: field → corner → count → area → graviton); the capacity → ∞ recovery of the EXACT CCR at bounded occupations is a theorem (DS1 `commutator_eventually_exact`). STILL MISSING: the exact CCR at finite capacity is permanently impossible (the trace obstruction — by theorem); the operator-level identification lives in matrix elements/expectations, not in a limit ALGEBRA (vN closure/Type III); and "contains gravitons" as a spectral statement of an interacting theory (vs the dictionary identification of two truncated modes with the helicity pair) |
 | Boundary evolution generating BULK TIME EVOLUTION | ❌ statics only ("equilibria are geometry"), not dynamics ("boundary relaxation = bulk motion") |
 | The radial/scale dimension | ❌ substrate only (exact RT unconditional); no scale-as-dimension theorem |
 
