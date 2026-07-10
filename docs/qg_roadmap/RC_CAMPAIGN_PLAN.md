@@ -52,6 +52,29 @@
 - **Equivariance transfer:** permutation relabeling pushes the jump law forward (Gate-3 at path
   level).
 
+## IC1 — `InteractingChannel.lean` (rung c, added 2026-07-10: EINSELECTION DERIVED — delete RC1's input)
+
+The pure-dephasing (measurement-limit) model, exactly solvable, finite: system ι × environment κ,
+monitored observable `A = diagonal a`, environment `B = diagonal b`, environment state `ω = diagonal w`
+(probability weights), interaction `H = A ⊗ B`; the dynamics is the diagonal phase unitary
+`U_t = diagonal (e^{−it·a n·b k})` (house pattern — no Stone, no Matrix.exp). Deliverables:
+- `reduced_dynamics_entry`: `ρ_S(t) n m = γ_{nm}(t)·ρ n m` with `γ_{nm}(t) = Σ_k w k·e^{−it(a n−a m)b k}`
+  (via the held `partialTraceRight`); `gamma_diag = 1` (the ledger conserved BY THE INTERACTION),
+  `gamma_abs_le_one`; trace/PSD preservation (held partial-trace theorems).
+- **THE EINSELECTION CAPSTONE `timeAvg_reduced_tendsto_dephase`**: under the gaps-resolved hypothesis
+  (`∀ n ≠ m, ∀ k, (a n − a m)·b k ≠ 0`), the Cesàro time average `(1/T)∫₀ᵀ ρ_S(t) dt → dephase ρ`
+  entrywise as `T → ∞` — **the time-averaged interacting reduced dynamics IS RC1's dephase channel, in
+  the eigenbasis of the coupling**: the record/pointer basis DERIVED from `H_int`, not inserted.
+- `invariant_iff_record`: the states invariant under the interacting reduced dynamics at all times are
+  exactly the records (einselection uniqueness, via the time-average limit).
+- The necessity guard `no_resolution_no_einselection`: with `b = 0` (decoupled environment) nothing
+  dephases — the gaps-resolved hypothesis is load-bearing, machine-checked.
+- HONEST: finite environment ⟹ recurrences (the repo's own gate C) — pointwise `t → ∞` dephasing is
+  IMPOSSIBLE; the derived statement is the Cesàro/time-averaged einselection (the honest
+  finite-dimensional Zurek statement, cited); pure-dephasing limit (system self-Hamiltonian competition
+  = named follow-on); environment spectrum/state are inputs; deletes RC1's pointer-basis input AT THE
+  TIME-AVERAGED LEVEL only.
+
 ## HONEST scope firewall (binding, both bricks)
 
 Record/pointer basis an INPUT; E4's ray-path/BW/Iyer–Wald data stay CARRIED (structure fields,
