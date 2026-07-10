@@ -77,6 +77,20 @@ single-world hidden-variable/modal *completion* of QM, genuine only once λ has 
   (`volume_selects`). It adds no actualization *mechanism*, and a single-shot measure is *not yet* an across-run
   frequency (that needs a product measure + a law of large numbers). The selector is order-dependent, not
   equivariant (as the no-covariant-selector result requires); the seed measure is order-blind.
+- **The boundary is now a dynamical open system (RC1–RC3 + IC1, 2026-07; axiom-free)** — upgrading several of
+  the above from *kinematics* to *dynamics*. **Records dynamically form:** a dissipative dephasing semigroup
+  drives every state to its record readout (`tendsto_Tsem_dephase` — decoherence as a semigroup theorem, with a
+  second law and a Lyapunov theorem). **Einselection is derived:** for the pure-dephasing coupling
+  $H_{\rm int}=A\otimes B$, the *time-average* of the interacting dynamics converges to that dephasing map
+  (`timeAvg_reduced_tendsto_dephase`), so the pointer basis **emerges from the coupling** — deleting the "one
+  residual input" above, at the time-averaged level (finite environments recur, so pointwise $t\to\infty$ is
+  impossible; the self-Hamiltonian pointer competition is a named follow-on). And the selection event gets a
+  **dynamical realization:** the channel is the λ-average of a jump process (exponential clock + Born-selected
+  record), whose Born weights are **forced** — *any* record-diagonal unraveling must use exactly the Born weights
+  (`unraveling_weights_unique`, no positivity hypothesis — a finite answer to the circularity risk). So λ = the
+  jump time + selected record; single-world actuality = one sample path. **Still carried:** this is a finite
+  two-time law, not a continuum stochastic process; Born is forced *given* the channel, not derived ab initio
+  (P5 not eliminated); and the covariant/continuum law of λ — Gap 1's core — remains the frontier.
 
 **What is open.** The residuals, honestly. (i) The selection is a *representation*, not a mechanism — its content
 reduces to *which seed is actual*, and the seed **is** λ, the one primitive a non-dynamical single-world theory
