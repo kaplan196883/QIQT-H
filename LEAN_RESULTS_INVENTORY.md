@@ -2302,15 +2302,28 @@ continuum limits, then the isotropy question settled both ways:
   non-Euclidean limit; needed the new star SimpleGraph + geodesic identity `starGraph_dist_eq`), and the
   cone (`state_decoded_geometry_tendsto_cone` — the first state-decoded POSITIVE-CURVATURE limit).
   **The state-decoded family {interval, cube ∀d, torus ∀d/circle, tripod, cone} is complete.**
+- **THE HAWKING–EUCLIDEAN LAYER** (`ConeFlat.lean` + `HawkingWick.lean`, 2026-07-10): imaginary time.
+  **`cone_flat_iff`** — the cone embeds isometrically in the plane ⟺ θ = 2π (the unrolling isometry
+  `Cone (2π) ≅ the closed unit disk`; the exact converse of the curvature theorem — the bisector
+  midpoints merge precisely at the full angle). Via the Gibbons–Hawking dictionary (θ = κβ, CITED):
+  *the Euclidean near-horizon section is smooth ⟺ β = 2π/κ = the Hawking–Unruh temperature*.
+  **`hawking_two_pi_coincidence`** pairs this GEOMETRIC face with the repo's ALGEBRAIC face
+  (`stripKMSrvd_boostUnitary`: the 2π-rescaled boost is KMS-thermal on the standard wedge) — both
+  machine-checked std-3, the identification of the two 2π's cited to GH/BW/Sewell, not derived. Plus
+  the formal Wick identities (t = iτ, null coordinates), the reverse-triangle Cauchy–Schwarz seed for
+  the future Lorentzian ladder, and the thermal reread (the torus GH limits = finite-temperature
+  Euclidean geometries, `thermalCircle β = AddCircle β`).
 - **HONEST scope (binding):** the isotropy is *inserted through the stencil rule* (the Euclidean-disk edge
   test) — NOT isotropy emerging from a fixed local combinatorial rule (impossible per the no-go) and NOT from
   dynamics (cited wall); the torus topology, the tripod branching, the cone's deficit angle and the sphere
   are likewise INSERTED through their rules/definitions (recovery/transport, not emergence); the states are
   CONSTRUCTED to carry the correlation patterns — the dynamical source remains THE open wall; **the
   dimension d and the angle θ are INPUTS — NOT emergent: nothing says why space is 3-dimensional**; the
-  sphere's formalized non-flatness is the midpoint obstruction, not a curvature tensor;
-  sphere-intrinsic-hop and smooth-target intrinsic walks = cited frontiers; NOT emergent
-  dimension/topology, NOT GR, NOT numerical-G, NOT QG.
+  sphere's formalized non-flatness is the midpoint obstruction, not a curvature tensor; ALL Hawking-layer
+  physics identifications (temperature, horizon, κβ) are CITED interpretation, not formalized derivations;
+  Wick rotation is static/thermal-only and loses causal structure (the Lorentzian ladder = cited plan);
+  sphere-intrinsic-hop, smooth-target intrinsic walks, replica/entropy at 2π = cited frontiers; NOT
+  emergent dimension/topology, NOT GR, NOT numerical-G, NOT QG.
 
 ## 6b. Entropy/ — the DPI / Lieb-concavity / operator-convexity tower (19 files) — GENUINELY COMPLETE
 

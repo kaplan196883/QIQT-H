@@ -1,5 +1,19 @@
 # HAWKING–EUCLIDEAN campaign — imaginary time: the cone as near-horizon geometry
 
+## STATUS (2026-07-10): CAMPAIGN COMPLETE — both bricks, [AF] std-3, budget 0
+- **E2 COMMITTED a5bd5886** (`ConeFlat.lean`): `cone_flat_iff` — flatness ⟺ θ = 2π; the unrolling
+  isometry `Cone (2π) ≅ closed unit disk`; the exact converse pairing of the curvature theorem
+  (the bisector midpoints merge precisely at 2π).
+- **E3 COMMITTED 95faa436** (`HawkingWick.lean`): the Wick identities (t = iτ, null coordinates,
+  the reverse-triangle Cauchy–Schwarz seed for the Lorentzian ladder); **`hawking_two_pi_coincidence`
+  — the thin conjunction of the GEOMETRIC face (cone_flat_iff) and the ALGEBRAIC face
+  (`stripKMSrvd_boostUnitary`, QIQTH/Fock/BoostKMS.lean — the 2π-rescaled boost is KMS-thermal on
+  the standard wedge)**, std-3 through the entire BoostKMS chain; the thermal reread
+  (thermalCircle, thermalTorus_limit).
+- The identification of the two 2π's (θ = κβ, KMS = Unruh) is the Gibbons–Hawking/BW dictionary —
+  CITED, not derived. Cited frontiers unchanged: replica/entropy derivative, the Lorentzian ladder,
+  the dynamical source.
+
 **Date:** 2026-07-10. **Parents:** the cone campaign (B2a/B2b, K1–K4) + the modular core (BoostKMS).
 **User directive:** "use Hawking's trick / imaginary time" — Wick rotation turns Lorentzian signature
 into Riemannian, i.e. into exactly the metric-space world where the completed GH machinery lives.
