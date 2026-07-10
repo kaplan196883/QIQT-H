@@ -10943,5 +10943,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordEquilibrium.record_reference_lyapunov
 #print axioms QIQTH.RecordEquilibrium.record_dynamics_einstein
 #print axioms QIQTH.RecordEquilibrium.boundary_dynamics_equilibria_are_geometry
+-- RecordUnraveling.lean — BOUNDARY DYNAMICS brick RC3 (2026-07-10, RC_CAMPAIGN_PLAN.md): THE EXACT
+-- JUMP-PROCESS UNRAVELING + BORN FORCED.  unraveling_exact — Tsem s A = e^{−s}•A +
+-- Σ_n w_n(s)•recordState n with w_n(s) = (1−e^{−s})·(A n n).re: the record channel IS the λ-average
+-- of the (exponential jump clock, Born-selected record) process — boundary-dynamics candidate 6 =
+-- E_λ[candidate 3], as a theorem; the jump time + selected record ARE QIQT-H's λ; single-world
+-- actuality = one sample path.  The (no-jump, jump-to-n) weights are a genuine probability law
+-- (noJump_add_jump); CHAPMAN–KOLMOGOROV jump_law_compose (w_n(s) + e^{−s}w_n(t) = w_n(s+t)) + the
+-- frozen ledger (Tsem_diag_invariant) = a consistent Markov unraveling, the finite shape of the
+-- held CoarseGrainNaturality Kolmogorov layer.  THE BORN READING jump_is_born: conditioned on
+-- jumping, record selection IS the Born law of the record POVM (bornW; record_povm_complete).
+-- BORN FORCED unraveling_weights_unique (NO PSD hypothesis needed): ANY record-diagonal unraveling
+-- of the channel must use exactly the Born weights — at this channel the jump law is FORCED, not
+-- chosen (the finite answer to SelectionDynamics.lean's named circularity risk).  Equivariance:
+-- jump_law_equivariant + recordState_submatrix (weights AND targets permutation-equivariant — the
+-- path-level Gate-3 shape, CITED).  HONEST: Born forced GIVEN the channel (built in the record
+-- basis from the state) — NOT derived ab initio; the non-circularity question moves one level up
+-- (why this channel/basis = RC1's einselection input); finite two-time law, NOT a continuum
+-- stochastic process (no filtration/SDE); finite corner; NOT bulk reconstruction, NOT the strong
+-- holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.RecordUnraveling.unraveling_exact
+#print axioms QIQTH.RecordUnraveling.noJump_add_jump
+#print axioms QIQTH.RecordUnraveling.jump_law_compose
+#print axioms QIQTH.RecordUnraveling.jump_is_born
+#print axioms QIQTH.RecordUnraveling.unraveling_weights_unique
+#print axioms QIQTH.RecordUnraveling.jump_law_equivariant
 
 end QIQTH.AxiomAudit
