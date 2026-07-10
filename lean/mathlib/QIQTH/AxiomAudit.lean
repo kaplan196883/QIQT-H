@@ -10771,5 +10771,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeIntrinsicGH.instMetricSpaceIntrinsicConeSpace
 #print axioms QIQTH.ConeIntrinsicGH.ghDist_coneIntrinsic_le
 #print axioms QIQTH.ConeIntrinsicGH.coneIntrinsic_toGHSpace_tendsto_cone
+-- ConeFromState.lean — brick K4, the CAMPAIGN FINALE (2026-07-10): the cone state-wire — the FIRST
+-- STATE-DECODED POSITIVE-CURVATURE LIMIT.  coneProfile (crossing-count, q = 2, of the geometric
+-- cone graph at rhoEff; noncomputable — the adjacency is a real-number proximity test decided
+-- CLASSICALLY, documented honestly: the profile is a mathematical object, the decoding exact);
+-- coneProfile_decodes (the GEOMETRIC graph — deficit angle and all — is an OUTPUT of the cut-rank
+-- data); intrinsicCone_dist_eq_decoded (IntrinsicConeSpace dist = rhoEff·decodedDist, rfl-tight);
+-- coneProfile_boundary_realized (Bell Schmidt ranks 2^boundary per cut); PACKAGED
+-- state_decoded_geometry_tendsto_cone (∃ Bell-realized profile family whose decoded scaled hop
+-- metrics GH-converge to Cone θ, θ < 2π).  Completes the state-decoded family {interval, cube ∀d,
+-- torus ∀d/circle, tripod, cone} = {flat-boundary, flat, flat-periodic, branching, positively-
+-- curved}.  HONEST: the deficit angle is INSERTED through the adjacency rule the profile is built
+-- on — recovery not emergence; the state is CONSTRUCTED; the dynamical source stays the cited open
+-- wall; curvature CONCENTRATED (Alexandrov) not smooth; θ an INPUT; NOT GR, NOT numerical-G,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConeFromState.coneProfile_decodes
+#print axioms QIQTH.ConeFromState.intrinsicCone_dist_eq_decoded
+#print axioms QIQTH.ConeFromState.coneProfile_boundary_realized
+#print axioms QIQTH.ConeFromState.state_decoded_geometry_tendsto_cone
 
 end QIQTH.AxiomAudit
