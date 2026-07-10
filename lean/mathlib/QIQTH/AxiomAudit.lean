@@ -10868,5 +10868,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CausalStencil.errorTerm_tendsto_zero
 #print axioms QIQTH.CausalStencil.chain_approximates
 #print axioms QIQTH.CausalStencil.causal_stencil_pinch
+-- DeSitterTime.lean — LORENTZIAN LADDER brick L4, THE FINALE (2026-07-10): the CURVED Lorentzian
+-- target — dS₂ = the one-sheeted hyperboloid B(x,x)=1 in ℝ^{1,2} (the Lorentzian sphere).  Causal
+-- classification: timelike ⟺ B(p,q) > 1 (chron_iff_timelike_sep); proper time τ = arcosh(B).
+-- ENGINE reversed_cauchy_schwarz: for TIMELIKE w and ARBITRARY w', B(w,w)·B(w',w') ≤ B(w,w')² —
+-- the sign-flipped Cauchy–Schwarz, via ortho_spacelike (the orthogonal complement of a timelike
+-- vector is spacelike; Lagrange identity) + the denominator-free orthogonal part.  HEADLINE
+-- tauDS_reverse_triangle: τ(p,q) + τ(q,r) ≤ τ(p,r) for timelike chains with the explicit
+-- OPPOSITE-CONE branch hypothesis 0 ≤ B(wpart p q, wpart r q) (= the time-ordering p ≺ q ≺ r,
+-- stated honestly, not swept under a causal-order formalization) — timelike geodesics MAXIMIZE
+-- proper time on a CURVED spacetime; equality case on the explicit geodesic (tauDS_geo_additive).
+-- NON-MINKOWSKI WITNESSES: dS_strict_defect (explicit non-coplanar chain, 2 < τ(p,r)) and
+-- dS_causal_horizon (antipodal events share NO chronological partner — de Sitter horizons — vs
+-- minkowski_common_future in the L1 model; timelike double-midpoints do NOT exist in dS: the
+-- planned antipodal-midpoint witness was geometrically wrong, B(p,−p) = −1 is not chronological).
+-- HONEST: dS₂ an INPUT (chosen constant-curvature target); τ-structure only; NO discrete
+-- approximation (no Lorentzian-GH exists — CITED frontier); 1+1 (+1 ambient); NOT GR (nothing
+-- derives Einstein equations), NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.DeSitterTime.reversed_cauchy_schwarz
+#print axioms QIQTH.DeSitterTime.tauDS_reverse_triangle
+#print axioms QIQTH.DeSitterTime.tauDS_geo_additive
+#print axioms QIQTH.DeSitterTime.dS_strict_defect
+#print axioms QIQTH.DeSitterTime.dS_causal_horizon
 
 end QIQTH.AxiomAudit

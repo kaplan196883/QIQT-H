@@ -748,6 +748,7 @@ import QIQTH.ConeFlat
 import QIQTH.HawkingWick
 import QIQTH.MinkowskiDiamond
 import QIQTH.CausalStencil
+import QIQTH.DeSitterTime
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
