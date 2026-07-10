@@ -1,5 +1,26 @@
 # STATE-WIRE-2 + SPHERE + INTRINSIC-CONE campaign — the three continuations
 
+## STATUS (2026-07-10): CAMPAIGN COMPLETE — all three tracks, all 8 bricks, [AF] std-3, budget 0
+- **Track W COMPLETE**: W1 `TorusFromState.lean` (9b64686e) — state-decoded flat d-torus ∀d, the
+  CIRCLE headline (first state-decoded nontrivial topology); W2 `TripodFromState.lean` (56917bf1) —
+  star SimpleGraph + geodesic identity `starGraph_dist_eq` + the first state-decoded NON-EUCLIDEAN
+  limit.
+- **Track S COMPLETE**: S1 `SphereMetric.lean` (864938ea) — the intrinsic great-circle sphere,
+  chord↔angle bridge, `sphere_no_isometric_embedding_into_inner` (4th midpoint-invariant use);
+  S2 `SphereGH.lean` (6219f8b6) — `sphereGrid_toGHSpace_tendsto_sphere`, the first SMOOTH
+  curved-space GH limit (rate 3π²/(4(m+1))).
+- **Track K COMPLETE (no checkpoint needed — the crux closed fully)**: K1 `ConeIntrinsicGraph.lean`
+  (f5e4c557); K2 `ConeIntrinsicWalk.lean` (33aefb48) — THE CRUX: the unfolded-segment walk; the
+  SECTOR LEMMA (waypoint args pinned in [0,s], s < π — the Complex.arg branch cut never approached;
+  θ < 2π load-bearing) makes the pullback distance-nonexpanding; hop metric PINCHED;
+  K3 `ConeIntrinsicGH.lean` (2003b4cb) — `coneIntrinsic_toGHSpace_tendsto_cone`: POSITIVE CURVATURE
+  FROM PURE HOP-COUNTING; K4 `ConeFromState.lean` (184eb374) — the first state-decoded
+  positive-curvature limit.
+- **The two completed families**: intrinsic graph-geodesic {cube, torus, tripod, cone} and
+  state-decoded {interval, cube ∀d, torus ∀d/circle, tripod, cone} — both spanning
+  {flat, flat-periodic, branching, positively-curved}. Cited frontiers: sphere-intrinsic-hop,
+  smooth-target intrinsic walks, the dynamical source.
+
 **Date:** 2026-07-10. **Parents:** `STATE_TORUS_CURVATURE_PLAN.md` (A/C/B1/B2 complete: state-wire cube,
 d-torus, tripod, cone). **User directive:** "1, 2 and 3" = (1) intrinsic hop-metric cone, (2) smooth
 target = the sphere, (3) state-wire for the new geometries. **Sequenced by tractability: W (state-wire,

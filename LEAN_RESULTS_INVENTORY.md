@@ -2280,12 +2280,36 @@ continuum limits, then the isotropy question settled both ways:
   is a metric midpoint of all three endpoint pairs — the IsotropyNoGo unique-midpoint invariant). HONEST
   LABEL: a CAT(0) singular TREE — non-manifold/branching, NOT positive curvature, NOT a curved surface;
   the cone with deficit angle (concentrated positive curvature) is the cited next candidate, not attempted.
+- **THE SPHERE — the first SMOOTH curved space** (`SphereMetric.lean` + `SphereGH.lean`, 2026-07-10):
+  the intrinsic (great-circle) sphere `dist = arccos⟪p,q⟫` as a compact metric space (triangle = Mathlib's
+  spherical `angle_le_angle_add_angle`; chord↔angle bridge `chord ≤ dist ≤ (π/2)·chord`), with
+  **`sphere_no_isometric_embedding_into_inner`** (the FOURTH use of the unique-midpoint invariant: the
+  poles at distance π have many midpoints) and **`sphereGrid_toGHSpace_tendsto_sphere`** — lat-long clouds
+  (exact isometric pullback, rate 3π²/(4(m+1))) GH-converge to it. HONEST: the formalized curvature
+  statement is the midpoint obstruction, NOT a Riemann tensor ("curvature +1 everywhere" = citation).
+- **THE INTRINSIC CONE — positive curvature from PURE HOP-COUNTING** (`ConeIntrinsic{Graph,Walk,GH}.lean`,
+  2026-07-10): the geometric graph on the polar grid (edges = cone-distance ≤ ρ, classical decidability)
+  has its hop metric PINCHED via the **unfolded-segment walk** — the cone geodesic unfolds to a straight
+  planar segment (ℂ law of cosines), waypoints pull back through `Complex.arg`, and **the SECTOR LEMMA**
+  (waypoint args pinned in [0,s], s ≤ θ/2 < π — the branch cut never approached; θ < 2π load-bearing)
+  makes the pullback distance-nonexpanding. Capstone **`coneIntrinsic_toGHSpace_tendsto_cone`**: the
+  scaled HOP metrics — pure combinatorial path-counting — GH-converge to the cone whose concentrated
+  positive curvature is a theorem. **The intrinsic graph-geodesic family {cube, torus, tripod, cone} =
+  {flat, flat-periodic, branching, positively-curved} is complete.**
+- **STATE-WIRE, COMPLETE FAMILY** (`{Torus,Tripod,Cone}FromState.lean`, 2026-07-10): the decoder chain
+  (Bell-realized cut-rank profile → decoded graph → decoded metric → GH limit) now closes for the torus
+  ∀d (the CIRCLE = the first state-decoded nontrivial topology), the tripod (first state-decoded
+  non-Euclidean limit; needed the new star SimpleGraph + geodesic identity `starGraph_dist_eq`), and the
+  cone (`state_decoded_geometry_tendsto_cone` — the first state-decoded POSITIVE-CURVATURE limit).
+  **The state-decoded family {interval, cube ∀d, torus ∀d/circle, tripod, cone} is complete.**
 - **HONEST scope (binding):** the isotropy is *inserted through the stencil rule* (the Euclidean-disk edge
   test) — NOT isotropy emerging from a fixed local combinatorial rule (impossible per the no-go) and NOT from
-  dynamics (cited wall); the torus topology and the tripod branching are likewise INSERTED through their
-  rules (transport, not emergence); **the dimension d is an INPUT — the chosen lattice — NOT emergent: the
-  d-generic theorem holds for every d and says NOTHING about why physical space is 3-dimensional**; the
-  cube/torus limits are FLAT and the tripod is branching-singular, not curved-Riemannian; NOT emergent
+  dynamics (cited wall); the torus topology, the tripod branching, the cone's deficit angle and the sphere
+  are likewise INSERTED through their rules/definitions (recovery/transport, not emergence); the states are
+  CONSTRUCTED to carry the correlation patterns — the dynamical source remains THE open wall; **the
+  dimension d and the angle θ are INPUTS — NOT emergent: nothing says why space is 3-dimensional**; the
+  sphere's formalized non-flatness is the midpoint obstruction, not a curvature tensor;
+  sphere-intrinsic-hop and smooth-target intrinsic walks = cited frontiers; NOT emergent
   dimension/topology, NOT GR, NOT numerical-G, NOT QG.
 
 ## 6b. Entropy/ — the DPI / Lieb-concavity / operator-convexity tower (19 files) — GENUINELY COMPLETE
