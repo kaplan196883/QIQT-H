@@ -10789,5 +10789,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeFromState.intrinsicCone_dist_eq_decoded
 #print axioms QIQTH.ConeFromState.coneProfile_boundary_realized
 #print axioms QIQTH.ConeFromState.state_decoded_geometry_tendsto_cone
+-- ConeFlat.lean — HAWKING-EUCLIDEAN brick E2 (2026-07-10): FLATNESS ⟺ θ = 2π — the
+-- smooth-at-the-Hawking-temperature theorem.  cos_norm_addCircle_two_pi (the AddCircle-2π norm is
+-- invisible to cos: evenness + periodicity); coneToDisk (the unrolling map, apex ↦ 0,
+-- (r,φ) ↦ r·e^{i·rep φ}); coneToDisk_isometry (the ℂ law of cosines norm_sub_polar + the cosine
+-- identity); range_coneToDisk = the closed unit disk (Complex.arg + exp 2πi-periodicity) — the
+-- 2π-cone IS the flat disk, isometrically; CAPSTONE cone_flat_iff (0 < θ ≤ 2π):
+-- (∃ isometric embedding Cone θ → ℂ) ↔ θ = 2π — forward = cone_no_isometric_embedding_into_inner
+-- (any inner-product space; the two bisector midpoints merge exactly at 2π, sin(θ/2) → 0),
+-- backward = the unrolling.  THE DICTIONARY (INTERPRETATION, cited to Gibbons–Hawking 1977, NOT a
+-- formalized field-theory derivation): the Euclidean near-horizon section is a cone of angle
+-- θ = κβ; smooth ⟺ θ = 2π ⟺ β = 2π/κ = the Hawking–Unruh inverse temperature.  The algebraic
+-- face — boost-KMS at 2π (BoostKMS.lean) — is the modular twin; the pairing is E3.  HONEST:
+-- geometry = the theorem, temperature = a cited dictionary; θ/β INPUTS; Wick rotation loses causal
+-- structure; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConeFlat.cos_norm_addCircle_two_pi
+#print axioms QIQTH.ConeFlat.coneToDisk_isometry
+#print axioms QIQTH.ConeFlat.range_coneToDisk
+#print axioms QIQTH.ConeFlat.cone_flat_iff
 
 end QIQTH.AxiomAudit
