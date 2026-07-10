@@ -10919,5 +10919,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordChannel.Tsem_alpha_comm
 #print axioms QIQTH.RecordChannel.saturation_fixed
 #print axioms QIQTH.RecordChannel.relEntropy_Tsem_gibbs_le
+-- RecordEquilibrium.lean — BOUNDARY DYNAMICS brick RC2 (2026-07-10, RC_CAMPAIGN_PLAN.md): THE
+-- SECOND LAW WITH RIGIDITY + THE E4 JOIN.  entropy_production_zero_iff — S(dephase A) = S(A) ⟺
+-- dephase A = A (RC1's cross-entropy identity + the held Klein FAITHFULNESS relEntropy_eq_zero):
+-- entropy production under record formation vanishes EXACTLY at the records; strict form
+-- entropy_strict_increase.  Tsem_record_iff (ALL real s): the flow never creates/destroys
+-- equilibrium at finite time (records reached only as s → ∞); strict gap entropy_Tsem_strict.
+-- THE JOIN: IsRecordEquilibrium (= dephase-fixed) ⟺ Tsem-fixed ∀ s > 0
+-- (isRecordEquilibrium_iff_Tsem_fixed); record_dynamics_einstein — E4's code_equilibrium_einstein
+-- with per-ray references REQUIRED record equilibria: states the boundary dynamics relaxes to
+-- satisfy linearized vacuum Einstein.  HONESTY: hEq is a LABELLING upgrade inside E4's proof (E4
+-- consumes only the RayPathFamilyRealizes data); the GENUINE dynamical links are
+-- record_reference_stationary (references fixed at every time) + record_reference_lyapunov
+-- (references are Lyapunov-STABLE attractors — perturbations relax back, load-bearing hEq).
+-- CAPSTONE boundary_dynamics_equilibria_are_geometry: stationary ∧ Lyapunov-stable ∧
+-- linearized-Einstein, one conjunction.  HONEST: E4's per-ray BW/derivative/Iyer–Wald data stay
+-- CARRIED (structure fields, never axioms); record basis an INPUT; PosDef per held conventions;
+-- finite corner; linearized, free, flat; NOT bulk reconstruction, NOT the strong holographic
+-- principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.RecordEquilibrium.entropy_production_zero_iff
+#print axioms QIQTH.RecordEquilibrium.entropy_strict_increase
+#print axioms QIQTH.RecordEquilibrium.Tsem_record_iff
+#print axioms QIQTH.RecordEquilibrium.record_reference_lyapunov
+#print axioms QIQTH.RecordEquilibrium.record_dynamics_einstein
+#print axioms QIQTH.RecordEquilibrium.boundary_dynamics_equilibria_are_geometry
 
 end QIQTH.AxiomAudit
