@@ -10807,5 +10807,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConeFlat.coneToDisk_isometry
 #print axioms QIQTH.ConeFlat.range_coneToDisk
 #print axioms QIQTH.ConeFlat.cone_flat_iff
+-- HawkingWick.lean — HAWKING-EUCLIDEAN brick E3, campaign close (2026-07-10): the Wick identities +
+-- THE TWO FACES OF 2π + the thermal reread.  wick_identity (t = iτ turns σ_L into σ_E — ring +
+-- I² = −1); null_coords_identity (2uv = t² − x²); sqrt_mul_add_le (reverse-triangle Cauchy–Schwarz
+-- — the SEED for the future Lorentzian ladder).  THE PAIRING hawking_two_pi_coincidence: the
+-- GEOMETRIC face (cone_flat_iff: the Euclidean near-horizon cone is flat ⟺ θ = 2π) AND the
+-- ALGEBRAIC face (stripKMSrvd_boostUnitary: the boost group at the 2π-rescaled parameter is
+-- KMS-thermal on the standard wedge, ∀ m > 0) — both machine-checked, stated side by side; the
+-- identification of the two 2π's (θ = κβ, KMS = Unruh temperature) is the Gibbons–Hawking/
+-- Bisognano–Wichmann DICTIONARY, cited (GH 1977, BW 1975/76, Sewell 1982) NOT derived.
+-- thermalCircle β = AddCircle β + thermalTorus_limit (the torus GH limits reread as
+-- finite-temperature Euclidean geometries).  HONEST: identities/re-exports = theorems; ALL physics
+-- identifications = cited interpretation; Wick rotation static/thermal-only + loses causal
+-- structure (Lorentzian ladder = separate cited plan); replica/entropy at 2π = cited frontier;
+-- θ/β INPUTS; NOT GR, NOT numerical-G, NOT QG.  [AF] std-3.
+#print axioms QIQTH.HawkingWick.wick_identity
+#print axioms QIQTH.HawkingWick.null_coords_identity
+#print axioms QIQTH.HawkingWick.sqrt_mul_add_le
+#print axioms QIQTH.HawkingWick.hawking_geometric_face
+#print axioms QIQTH.HawkingWick.hawking_algebraic_face
+#print axioms QIQTH.HawkingWick.hawking_two_pi_coincidence
+#print axioms QIQTH.HawkingWick.thermalTorus_limit
 
 end QIQTH.AxiomAudit
