@@ -1,5 +1,20 @@
 # Boundary-dynamics candidates — enumerated and VERIFIED against the Lean sources
 
+## STATUS UPDATE (2026-07-10, same day): RC1 LANDED — candidate 6's first brick is a theorem
+`QIQTH/RecordChannel.lean` (commit `73fd89c4`, 57 declarations, [AF] std-3, budget 0): the
+record-dephasing semigroup `Tsem s = e^{−s}·id + (1−e^{−s})·dephase` — a genuine one-parameter
+semigroup of trace-preserving, unital, density-preserving channels COMMUTING with the held free flow;
+fixed points = EXACTLY the record-diagonal states; exponential convergence of every state to its
+record readout (`tendsto_Tsem_dephase` — decoherence/einselection as a semigroup theorem, the
+dynamical upgrade of `alpha_diagonal`); entropy production (`entropy_Tsem_ge`, sign-flip-unitary
+`dephase_matLog` crux); the Lyapunov theorem (`relEntropy_Tsem_le`, Gibbs instance
+`relEntropy_Tsem_gibbs_le`); capacity respected with maxMixed the saturating fixed point
+(`saturation_fixed`); record-relabeling equivariance (`Tsem_perm`). The boundary side is now an OPEN
+QUANTUM SYSTEM with dynamics, not a ledger. HONEST: pointer basis an INPUT; PosDef carried per held
+conventions; CP in prose; finite corner; E4/K2a/Gate-3 cited; NOT the strong principle, NOT QG.
+Next bricks: the E4 join (semigroup equilibria feed `code_equilibrium_einstein`'s hypotheses) and
+the candidate-3 unraveling (the jump chain + path measure via `CoarseGrainNaturality`).
+
 **Date:** 2026-07-10. **Question:** what dynamics could run on QIQT-H's boundary side (the record/code
 ledger), turning the machine-checked *dictionary* (`ADSCFT_GAP_ANALYSIS.md`) into a *duality*? Seven
 candidates, each checked against the actual Lean theorems (grep sweep of `lean/mathlib/QIQTH/`,
