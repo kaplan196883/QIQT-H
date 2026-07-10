@@ -10968,5 +10968,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RecordUnraveling.jump_is_born
 #print axioms QIQTH.RecordUnraveling.unraveling_weights_unique
 #print axioms QIQTH.RecordUnraveling.jump_law_equivariant
+-- InteractingChannel.lean — BOUNDARY DYNAMICS brick IC1 (2026-07-10/11, RC_CAMPAIGN_PLAN.md IC1):
+-- EINSELECTION DERIVED — the pure-dephasing (measurement-limit, Zurek 1981/82) model whose
+-- time-averaged reduced dynamics IS RC1's dephase channel.  H_int = A⊗B (A = diag a the monitored
+-- observable, B = diag b, environment ω = diag w); intPhase = the diagonal phase unitary (house
+-- pattern, no Stone/Matrix.exp; the Hamiltonian tie is the genuine-calculus entrywise Schrödinger
+-- equation intPhase_entry_hasDerivAt).  EXACT solution reduced_entry: the partial trace of the
+-- evolved joint state multiplies each coherence by γ_{nm}(t) = Σ_k w_k e^{−it(a n−a m)b k}; the
+-- LEDGER IS CONSERVED BY THE INTERACTION (reduced_diag — derived, contrast RC1 where it was built
+-- in); trace + PSD preserved (Kronecker PSD + unitary conjugation + held partialTraceRight
+-- positivity).  CAPSTONE timeAvg_reduced_tendsto_dephase: under the gaps-resolved hypothesis
+-- ((a n − a m)·b k ≠ 0), the Cesàro average (1/T)∫₀ᵀ reduced dt → dephase ρ entrywise — THE RECORD
+-- BASIS EMERGES FROM THE COUPLING (A's eigenbasis), deleting RC1's one named input at the
+-- time-averaged level; oscillatory core cesaro_exp_tendsto (closed-form FTC + 2/(|θ|T) squeeze).
+-- EINSELECTION UNIQUENESS invariant_iff_record: the invariant states of the interacting dynamics
+-- are EXACTLY the records.  NECESSITY GUARD no_resolution_no_einselection: decoupled environment
+-- (b ≡ 0) ⟹ identity dynamics — the resolution hypothesis is load-bearing, machine-checked.
+-- HONEST: FINITE environment ⟹ recurrences (gate C, QG/FiniteModularRecurrence.lean CITED) —
+-- pointwise t → ∞ dephasing IMPOSSIBLE; the derived statement is Cesàro/time-averaged einselection
+-- (the honest finite Zurek statement); PURE-dephasing limit (self-Hamiltonian competition
+-- [H_S,A] ≠ 0 = named follow-on); a/b/w are model INPUTS — what is DERIVED is that the basis comes
+-- from the coupling, not from RC1's fiat; coordinates WLOG in A's eigenbasis (standard spectral
+-- theory, not re-proved); finite corner; NOT bulk reconstruction, NOT the strong holographic
+-- principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.InteractingChannel.reduced_entry
+#print axioms QIQTH.InteractingChannel.reduced_diag
+#print axioms QIQTH.InteractingChannel.intPhase_entry_hasDerivAt
+#print axioms QIQTH.InteractingChannel.timeAvg_reduced_tendsto_dephase
+#print axioms QIQTH.InteractingChannel.invariant_iff_record
+#print axioms QIQTH.InteractingChannel.no_resolution_no_einselection
 
 end QIQTH.AxiomAudit
