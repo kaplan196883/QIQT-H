@@ -211,5 +211,38 @@ The remaining distance is concentrated in ONE composite object — the interacti
 with its large-capacity limit — everything else is scaffolded, shadowed, or first-rung-built around
 it.
 
+## 7. THE STRONG-PRINCIPLE PROXIMITY LEDGER (2026-07-11, post-IC1 — the calibrated answer to
+## "are we close to the strong holographic principle?")
+
+The strong principle = a boundary theory whose dynamics GENERATES the bulk. Decomposed into its
+requirements, with verified status:
+
+| Requirement | Status |
+|---|---|
+| A boundary theory that EXISTS (states + dynamics) | ✅ BUILT (RC1–IC1): open quantum system — free flow + record channel, second law with rigidity, derived pointer basis (Cesàro), Born-jump unraveling with Born forced |
+| Its equilibria are the geometric states | ✅ BUILT, conditional: stationary ∧ Lyapunov-stable ∧ linearized-Einstein (`boundary_dynamics_equilibria_are_geometry`; E4's carried BW/Iyer–Wald inputs) |
+| The weak principle (S = A/4G as LAW) | ✅ DERIVED (§2: rigidity + boundary-Gaussian + constructed-core join) |
+| An INTERACTING boundary theory | 🟡 first brick only — IC1 is the measurement limit; `[H_S, A] ≠ 0` pointer competition open |
+| The graviton INSIDE the boundary Hilbert space | ❌ blocked at finite capacity by the trace-obstruction theorem; needs capacity → ∞ — the core of the CFT slot |
+| Boundary evolution generating BULK TIME EVOLUTION | ❌ statics only ("equilibria are geometry"), not dynamics ("boundary relaxation = bulk motion") |
+| The radial/scale dimension | ❌ substrate only (exact RT unconditional); no scale-as-dimension theorem |
+
+**The calibrated statement:** the boundary side has crossed from "no candidate theory" (a ledger) to
+"a boundary proto-theory with the right statics and thermodynamics" — roughly two rungs up a ladder
+whose remaining height contains the genuinely hard physics: the interacting completion, the
+large-capacity limit dissolving the trace obstruction (which Maldacena received from string theory
+for free — N=4 SYM predated the duality), the graviton found inside, and bulk dynamics from
+boundary dynamics. None of today's theorems should be read as PROXIMITY to the strong principle;
+they are the first machine-checked evidence that QIQT-H's version of it is CONSTRUCTIBLE rather
+than merely conjecturable — the remaining distance is, for the first time, theorem-shaped.
+
+**The nearest reachable rung (named, composable from held pieces):** the STATICS → DYNAMICS upgrade.
+The repo holds the area decoder (`reconstruct`/`reconstruct_areaVar`), the RC relaxation flow
+(`Tsem`), and the first-law bridge — so the theorem "the boundary relaxation trajectory `T_s ρ`
+induces, through the area probes, a TRAJECTORY of emergent metric perturbations `h(s)`, with its
+evolution law inherited from the flow" is composable without new machinery. That would be the first
+machine-checked instance of boundary dynamics driving bulk geometry IN TIME — small, honest, and
+exactly on the strong-principle axis. (Not yet built; the named candidate next brick.)
+
 ⚠ Scope firewall: this document compares architectures; it claims no new physics, no derivation of a
 duality, and does not modify any result's honest labels. NOT QG.
