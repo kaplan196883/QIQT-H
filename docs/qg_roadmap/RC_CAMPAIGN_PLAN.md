@@ -1,5 +1,22 @@
 # RC campaign — boundary dynamics rungs a + b: the E4 join and the unraveling
 
+## STATUS: CAMPAIGN COMPLETE (2026-07-10) — all three bricks landed FULL, axiom-free std-3, budget 0
+
+- **RC1 DONE** — `73fd89c4` `RecordChannel.lean` (57 decls): the record-dephasing semigroup — records
+  FORM, entropy monotone, Lyapunov, commutes with the free flow, equivariant.
+- **RC2 DONE** — `ef64ea39` `RecordEquilibrium.lean` (10 decls, green first build): the second law
+  WITH RIGIDITY (production zero ⟺ record, via Klein faithfulness; flow never reaches equilibrium at
+  finite time) + THE E4 JOIN (`boundary_dynamics_equilibria_are_geometry`: stationary ∧
+  Lyapunov-stable ∧ linearized-Einstein). Honesty finding: `hEq` is labelling inside E4's proof; the
+  genuine dynamical links are the stationarity + Lyapunov-stability theorems.
+- **RC3 DONE** — `a63c9b73` `RecordUnraveling.lean` (29 decls): THE EXACT UNRAVELING
+  (`unraveling_exact` — candidate 6 = E_λ[candidate 3] as a theorem; λ = the jump time + selected
+  record), a genuine probability law, Chapman–Kolmogorov, the Born reading via the held `bornW`, and
+  **BORN FORCED** (`unraveling_weights_unique`, no PSD hypothesis needed) — the finite answer to the
+  SelectionDynamics circularity risk: at this channel the jump law is forced, not chosen (forced
+  GIVEN the channel; the non-circularity question moves one level up, documented).
+- Commits LOCAL, unpushed. The firewall below is binding and restated in every header + audit pin.
+
 **Date:** 2026-07-10. **Parent:** `BOUNDARY_DYNAMICS_CANDIDATES.md` (RC1 = `RecordChannel.lean`
 `73fd89c4` DONE). **User directive:** "a and b in the loop."
 

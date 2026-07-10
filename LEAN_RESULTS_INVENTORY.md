@@ -1560,6 +1560,51 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   thermal entropy at arbitrary β and an induced geometric area; that remains the named continuum
   frontier/conjecture." ⚠ NOT QG solved; no wall crossed.
 
+- **THE RECORD CHANNEL / BOUNDARY DYNAMICS, RC1–RC3 — `QIQTH/RecordChannel.lean` +
+  `RecordEquilibrium.lean` + `RecordUnraveling.lean`** (**[AF]** std-3, budget 0, 2026-07-10; commits
+  `73fd89c4`/`ef64ea39`/`a63c9b73`; `RC_CAMPAIGN_PLAN.md` + `BOUNDARY_DYNAMICS_CANDIDATES.md` —
+  **CAMPAIGN COMPLETE**). **The boundary side upgraded from ledger to OPEN QUANTUM SYSTEM.** The held
+  free dynamics freezes records (`alpha_diagonal`); RC supplies the dissipative half:
+  - **RC1 — the record-dephasing semigroup** (57 decls): `Tsem s = e^{−s}·id + (1−e^{−s})·dephase` —
+    a genuine one-parameter semigroup (`Tsem_add`, ALL s,t) of trace-preserving unital
+    density-preserving channels COMMUTING with the free flow (`Tsem_alpha_comm`); fixed points =
+    EXACTLY the record-diagonal states; every state converges exponentially (exact rate-1
+    contraction) to its record readout (`tendsto_Tsem_dephase` — decoherence/einselection as a
+    semigroup theorem); entropy production (`entropy_Tsem_ge`, crux `dephase_matLog` via the
+    sign-flip-unitary trick + held CFC naturality); the LYAPUNOV theorem (`relEntropy_Tsem_le`, Gibbs
+    instance); capacity respected, maxMixed the saturating fixed point (`saturation_fixed` — the
+    area-law state, K2a cited); record-relabeling equivariance (`Tsem_perm` — the finite Gate-3-safe
+    shape).
+  - **RC2 — the second law with rigidity + THE E4 JOIN** (10 decls, green first build):
+    `entropy_production_zero_iff` — production vanishes ⟺ the state IS a record (held Klein
+    faithfulness `relEntropy_eq_zero`); strict off-equilibrium increase; `Tsem_record_iff` (ALL s —
+    equilibrium reached only as s → ∞, never at finite time). THE JOIN: `IsRecordEquilibrium`
+    (⟺ `Tsem`-fixed ∀ s > 0); `record_dynamics_einstein` + CAPSTONE
+    **`boundary_dynamics_equilibria_are_geometry`** — per equilibrium code: references stationary ∧
+    Lyapunov-STABLE (perturbations relax back, `record_reference_lyapunov`) ∧ the emergent
+    perturbation satisfies linearized vacuum Einstein. HONESTY: `hEq` is labelling inside E4's proof
+    (E4 consumes only the `RayPathFamilyRealizes` data); the genuine dynamical links are the
+    stationarity + stability theorems.
+  - **RC3 — the exact unraveling + BORN FORCED** (29 decls): **`unraveling_exact`** — `Tsem s A =
+    e^{−s}•A + Σ_n (1−e^{−s})(A n n).re • recordState n`: the channel IS the λ-average of the
+    (exponential jump clock, Born-selected record) process — **candidate 6 = E_λ[candidate 3] as a
+    theorem**; λ = the jump time + selected record; single-world actuality = one sample path. Genuine
+    probability law (`noJump_add_jump`); CHAPMAN–KOLMOGOROV (`jump_law_compose` + the frozen ledger)
+    — a consistent Markov unraveling, the finite shape of the held `CoarseGrainNaturality` layer; the
+    BORN READING (`jump_is_born` via the held `bornW`; `record_povm_complete`); **BORN FORCED**
+    (`unraveling_weights_unique`, no PSD hypothesis): ANY record-diagonal unraveling of this channel
+    must use exactly the Born weights — the finite answer to `SelectionDynamics.lean`'s named
+    circularity risk; equivariance of weights AND targets (`jump_law_equivariant`,
+    `recordState_submatrix`).
+  ⚠ **HONEST (binding, in every header + audit pin):** the record/pointer basis is an INPUT
+  (einselection from an interaction Hamiltonian NOT derived — the record-creating-from-coupling
+  upgrade is the named next wall); Born forced GIVEN the channel, NOT derived ab initio (the
+  non-circularity question moves one level up: why this channel/basis); E4's per-ray BW/derivative/
+  Iyer–Wald data stay CARRIED; PosDef per held conventions; CP in prose (mixed-unitary), positivity +
+  trace preservation proved; finite two-time law, NOT a continuum stochastic process; finite single
+  corner; linearized, free, flat; NOT bulk reconstruction, NOT the strong holographic principle,
+  NOT QG.
+
 - **THE DECOUPLING SHADOW, DS1 — `QIQTH/Decoupling/TruncatedCCR.lean`** (**[AF]** std-3;
   `THE_DECOUPLING_SHADOW_PLAN.md` — the finite forced core of the dictionary, from the Maldacena
   primary-source lesson: two sides as surviving descriptions of ONE parent under ONE limit;

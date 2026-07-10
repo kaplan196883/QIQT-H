@@ -15,6 +15,21 @@ conventions; CP in prose; finite corner; E4/K2a/Gate-3 cited; NOT the strong pri
 Next bricks: the E4 join (semigroup equilibria feed `code_equilibrium_einstein`'s hypotheses) and
 the candidate-3 unraveling (the jump chain + path measure via `CoarseGrainNaturality`).
 
+## STATUS UPDATE 2: RC2 + RC3 LANDED (same day) — RC CAMPAIGN COMPLETE (`RC_CAMPAIGN_PLAN.md`)
+- **RC2** `ef64ea39` `RecordEquilibrium.lean`: the second law WITH RIGIDITY (production zero ⟺
+  record) + the E4 join `boundary_dynamics_equilibria_are_geometry` (stationary ∧ Lyapunov-stable ∧
+  linearized-Einstein). Candidate 6's equilibria are now dynamically characterized, stable, and
+  geometric.
+- **RC3** `a63c9b73` `RecordUnraveling.lean`: `unraveling_exact` — candidate 6 = E_λ[candidate 3] AS
+  A THEOREM (λ = jump time + Born-selected record; single-world actuality = one sample path);
+  Chapman–Kolmogorov; the Born reading via the held `bornW`; **BORN FORCED**
+  (`unraveling_weights_unique`) — the finite answer to candidate 3's named circularity risk (forced
+  GIVEN the channel; why-this-channel = the remaining einselection input).
+- Candidates 6 and 3 have thus moved from "toolkit complete / scaffold" to FIRST BRICKS LANDED; the
+  6⟷3 unraveling subsection below is now theorem-backed end-to-end at the finite level. The open
+  ends: the interacting (record-creating-from-coupling) upgrade of the channel, the continuum path
+  measure (T5 machinery), and the why-this-basis einselection question.
+
 **Date:** 2026-07-10. **Question:** what dynamics could run on QIQT-H's boundary side (the record/code
 ledger), turning the machine-checked *dictionary* (`ADSCFT_GAP_ANALYSIS.md`) into a *duality*? Seven
 candidates, each checked against the actual Lean theorems (grep sweep of `lean/mathlib/QIQTH/`,
