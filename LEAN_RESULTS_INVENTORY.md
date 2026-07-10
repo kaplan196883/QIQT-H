@@ -159,6 +159,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
 
 ## 2. Finite capacity / holographic area floor
 
+> **★ THE SINGLE SURVIVING CONCLUSION (the three executed Lorentz gates — CPSUV, diamond-tip, state-level —
+> 2026-07-02, reproduced 2026-07-10; canonical statement).** Finite holographic capacity `Q_D = A/4ℓ_P²`
+> survives one-loop Lorentz naturalness in **exactly one reading: as a state/algebra-level covariant ENTROPY
+> constraint** — `Q_D` bounds the renormalized entropy of the diamond algebra in the covariant vacuum
+> (modular, frame-free, covariance built in BEFORE any loop) — and **never as a mode-count regulator in any
+> frame**. Every frame-anchored realization is falsified: sharp and all smooth spatial cutoffs hit the
+> unsuppressed CPSUV constant `g²/12π²` (`cpsuv_gate_sharp_fails`); tip-anchored (diamond-rest-frame)
+> truncations fail at FIRST order (`tipSplit_hasDerivAt_one`, slope `−2C ≠ 0`); boost-averaging is not a
+> regulator (`boostAvg_diverges` — the noncompactness of the boost group is fatal); and **no local
+> Lorentz-invariant finite-capacity cutoff exists at all** (`|k²| < Λ²` has infinite rapidity volume). The
+> surviving reading is the one the Lean core already formalizes (`entropy_bound_not_cardinality_bound`,
+> the OP3b covariant-diamond architecture) and it makes **no low-energy LV prediction**
+> (`stateLevel_noDeltaC2`: the constraint restricts states, not dynamics). The **sole remaining LV door is
+> the dynamical-realization gap** — only a non-equivariant enforcement mechanism could reopen it
+> (`equivariant_enforcement_preserves_invariance`). NOT QG: the gates falsify and constrain; they do not
+> construct. Details: the three gate bullets below + `docs/qg_roadmap/LORENTZ_STRESS_TEST_RESULTS.md`,
+> `DIAMOND_TIP_TEST_RESULTS.md`.
+
 > **⚠ The capacity postulate has TWO machine-checked LAYERS, and they are PROVABLY DIFFERENT (verified 2026-06-30
 > by direct read of the hypothesis classes).** Do not state either alone as "the" postulate.
 > - **Finite-dim model (P4-MICRO) → CARDINALITY.** `HolographicCapacityBound` (`FQBoundMicro.lean:59`) is

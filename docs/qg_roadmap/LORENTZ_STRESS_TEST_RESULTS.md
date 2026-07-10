@@ -1,5 +1,16 @@
 # I4 — the Lorentz-cutoff stress test: RESULTS (2026-07-02)
 
+> **★ THE SINGLE SURVIVING CONCLUSION (this gate + the diamond-tip and state-level follow-ons, synthesized;
+> reproduced 2026-07-10).** Finite holographic capacity `Q_D = A/4ℓ_P²` survives one-loop Lorentz
+> naturalness in **exactly one reading: as a state/algebra-level covariant ENTROPY constraint** on the
+> diamond algebra in the covariant vacuum — **never as a mode-count regulator in any frame**. Every
+> frame-anchored realization is falsified (spatial cutoffs → the unsuppressed CPSUV constant; tip-anchored
+> truncations fail at first order; boost-averaging is not a regulator; no local Lorentz-invariant
+> finite-capacity cutoff exists). The surviving reading is the one the Lean core already formalizes
+> (entropy-not-cardinality, OP3b) and makes no low-energy LV prediction; the sole remaining LV door is the
+> dynamical-realization gap. NOT QG — the gates falsify and constrain; they do not construct.
+> Canonical copy: `LEAN_RESULTS_INVENTORY.md` §2 (top).
+
 **The decisive one-loop naturalness gate of `QG_CAMPAIGN_PLAN.md` has been EXECUTED.**
 Design GPT-5.5-pro-verified (2026-07-02); script `scripts/lorentz_stress_test.py`; all quadratures validated
 against closed forms to ≤ 2·10⁻¹⁸.
