@@ -114,15 +114,23 @@ ships this.
 
 ---
 
-## Count note (authoritative, 2026-07-09)
+## Count note (authoritative, 2026-07-10)
 
-The current-HEAD raw counts are **4,764 theorem/lemma declarations, 451 `.lean` files, 3,072
-`#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-09). The inventory's
-§0 meta-counts (~429 files, ~4,550 theorems, 2,888 directives) **lag the loop** and should be
-refreshed. When aligning public copy, the theorem/file counts are authoritative from the grep above
-— NOT from the inventory snapshot. The website landing now reads "over 4,700 / **39** world-firsts"
-(the 39th first = field-level / second-quantized Bisognano–Wichmann, `freeField_secondQuant_BW_unconditional`);
-"over 4,700 theorems across ~450 files" is the current phrasing.
+The current-HEAD raw counts are **5,071 theorem/lemma declarations, 484 `.lean` files, 3,225
+`#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-10). The inventory's
+§0 meta-counts **lag the loop** and should be refreshed. When aligning public copy, the theorem/file
+counts are authoritative from the grep above — NOT from the inventory snapshot. The website landing
+now reads "over 5,000 / **40** world-firsts" (the 40th first = the machine-checked
+Gromov–Hausdorff limits of graph geodesics to *curved* metric spaces — the cone with
+curvature-as-a-theorem and the smooth sphere — and the same family decoded from the abstract state;
+`sphereGrid_toGHSpace_tendsto_sphere`, `polarGrid_toGHSpace_tendsto_cone`, `cone_no_isometric_embedding_into_inner`);
+"over 5,000 theorems across ~485 files" is the current phrasing. New this recount (2026-07-10): the
+"space from the state" emergent-geometry program (§6 of the inventory) — GH limits to interval / cube
+∀d / flat torus / circle / tripod / cone / sphere, decoded from Bell cut-rank profiles, plus the
+Hawking–Euclidean layer `cone_flat_iff` (flat ⟺ θ=2π) and `hawking_two_pi_coincidence`. **Binding
+scope:** dimension d, angle θ, topology and isotropy are all INSERTED (not emergent); states are
+CONSTRUCTED; curvature = the midpoint/embedding obstruction, not a Riemann tensor; Hawking κβ/temperature
+identifications are CITED. NOT emergent dimension/spacetime, NOT GR, NOT QG.
 
 ## Modular-tower update (2026-07-05) — Tomita–Takesaki COMPLETE
 
