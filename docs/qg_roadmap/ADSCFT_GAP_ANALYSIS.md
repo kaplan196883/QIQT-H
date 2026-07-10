@@ -66,7 +66,7 @@ duality, and the Lorentzian target-side (τ, reverse triangle, dS₂).
 **Plus one thing AdS/CFT does not have:** a machine-checked assumption ledger. Nobody has formalized any
 of AdS/CFT; every carried hypothesis here is named in Lean.
 
-## 3. The genuine gaps, ranked (each stated against the mechanism it blocks)
+## 3. The genuine gaps, ranked — each VERIFIED against the Lean sources (searched 2026-07-10)
 
 1. **[vs M1] The graviton is quantized by hand, not found in the spectrum — and the repo PROVED the finite
    obstruction.** Our graviton is the canonical quantization of the linearized field on a flat background
@@ -79,33 +79,66 @@ of AdS/CFT; every carried hypothesis here is named in Lean.
    Fock sector. **The missing object = the large-capacity limit in which the record/code theory develops
    the graviton sector inside itself** — the same wall as Walls 1–5 (continuum, Type III₁) and the
    dynamical source, seen from the AdS/CFT side.
-2. **[vs M2] No derivation engine.** There is no "brane" — no single object with two descriptions whose
-   common limit forces a duality. Everything held is correspondence-checking (Cardy = capacity) or
-   conditional assembly, never a two-descriptions-of-one-system derivation. This is the difference between
-   a *dictionary* (held, partially as theorems) and a *duality* (not held).
-3. **[vs M5→M1] Interactions and the nonlinear/quantum completion.** Deser order 2 is a theorem; beyond
-   is formal propagation with one carried coefficient identity; the interacting quantized graviton and
-   matter loops do not exist in the repo. (In AdS/CFT the full interacting theory is the definition.)
-4. **[vs M4] No emergent scale-dimension.** The decoded geometries are spatial and single-scale; the
-   holographic radial direction — entanglement-at-all-scales becoming a dimension, U = RG scale — has no
-   theorem (graph-RT is the closest toy).
-5. **[vs M5] No protection.** No supersymmetry/non-renormalization analogue pins coefficients — the reason
-   `N_eff/4`, `Λ_s`, and the heat-kernel `c_i` stay unpinned and the induced-G story sits at its natural
-   ceiling, while Maldacena's dictionary is quantitatively rigid (probe actions fixed by symmetry).
-6. **[vs M3] One relation, not a 1/N tower.** `G = 1/(NΛ_s²)` and `S_τ = (A/4)NΛ_s²` are held; the
-   systematic 1/N expansion (quantum-gravity corrections organized order by order — Hawking radiation as
-   a 1/N effect), backreaction, and topology change are absent.
+   *Lean-verified status: the wall STANDS but is actively LADDERED, far beyond what an earlier draft
+   credited* — the von Neumann **double-commutant theorem** is an axiom-free Lean theorem (C1–C11, a
+   genuine Mathlib gap closed, WOT = SOT = A″), the crossed product `M⋊_σℝ` and directed-union limit are
+   packaged as genuine `VonNeumannAlgebra`s, the tower-GNS representation is complete (R9), the Type II
+   dual-weight trace holds on the algebraic core (W1–W4: exact scaling `τ∘θ_s = e^{−s}τ`, traciality,
+   positivity; vN extension carried non-vacuously), and the code's Gibbs tower carries a machine-checked
+   **Araki–Woods III₁ fingerprint** (T1–T8, with the Powers-guard separation and a hypothesis-free √2
+   instance; the inference to an actual III₁ factor cited, never claimed). What remains missing is the
+   limit ALGEBRA itself (ITPFI factor, type classification, normal weights) and the graviton sector
+   inside it.
+2. **[vs M2] The derivation engine — PARTIALLY BUILT, at the honest finite level.** An earlier draft said
+   "no derivation engine"; that was too strong. **The Decoupling Shadow campaign (DS1–DS7 COMPLETE,
+   `QIQTH/Decoupling/`)** formalizes the finite forced core of Maldacena's structure — *one parent, two
+   surviving descriptions of one limit*: (i) the free-oscillator sector is FORCED by the cutoff limit
+   (CCR matrix elements stabilize, `commutator_eventually_exact`; thermal data → the Planck values; the
+   truncation defect dies); (ii) the dictionary's local weight is RIGID (`forced_weight_product`: any
+   monoidal, embedding-monotone, refinement-natural area valuation is `κ·Σ log D_k` — with the `ν₂`
+   counterexample proving the hypotheses necessary); (iii) the saturated area law survives given the κ
+   (= 4G) normalization; plus the REGIME-SEPARATION GUARD (`guard_defect_survives`: saturated capacity is
+   provably NOT the positive-temperature free limit — the two decoupling halves live in different regimes,
+   as a theorem). The DS7 checkpoint states the honest boundary verbatim: the capacity limit forces the
+   free sector only; **it does not force the screen geometry or Newton constant** — the strong half of
+   Maldacena's argument (the geometry side surviving the SAME limit, i.e. the actual duality) is the
+   remaining gap. `AdSCFTComparison.lean` (a labelled comparison artifact, deliberately unwired) pins what
+   AdS/CFT still uniquely has: ONE microscopic system computing both `G` and the microstate count, so
+   `S = A/4G` is a consistency theorem of a single theory rather than two bookkeepings calibrated to
+   shared primitives.
+3. **[vs M5→M1] Interactions and the nonlinear/quantum completion — VERIFIED ABSENT beyond Deser order 2.**
+   Deser order 2 is a theorem (E5); beyond is formal conservation-propagation with one carried coefficient
+   identity (J4); the interacting quantized graviton and matter loops do not exist in the repo. (In
+   AdS/CFT the full interacting theory is the definition.)
+4. **[vs M4] No emergent scale-dimension — stands, with the RT substrate now UNCONDITIONAL.** The decoded
+   geometries are spatial and single-scale; the holographic radial direction — entanglement-at-all-scales
+   becoming a dimension, U = RG scale — has no theorem. The closest built pieces: **`maxFlow_min_cut`
+   (M1–M12 COMPLETE, unconditional finite max-flow = min-cut — a genuine wall fully crossed, not in
+   Mathlib) feeding `exact_rt_unconditional`** (exact RT optimality on the finite network model), and
+   `LambdaRG_invariant` (discrete RG dimensional transmutation — a relation, not the value of G). These
+   give the bulk-reconstruction SUBSTRATE (entanglement = min-cut geometry, exactly) but not the
+   scale-as-dimension theorem.
+5. **[vs M5] No protection — VERIFIED ABSENT.** Searched: no non-renormalization/protected-quantity
+   content exists (the held Ward identities — soft-graviton, speed-splitting — are consistency
+   conditions, not protection). This is why `N_eff/4`, `Λ_s`, and the heat-kernel `c_i` stay unpinned and
+   the induced-G story sits at its natural ceiling, while Maldacena's dictionary is quantitatively rigid
+   (probe actions fixed by symmetry).
+6. **[vs M3] One relation, not a 1/N tower — VERIFIED ABSENT.** `G = 1/(NΛ_s²)` and
+   `S_τ = (A/4)NΛ_s²` are held; no systematic 1/N expansion (quantum-gravity corrections organized order
+   by order — Hawking radiation as a 1/N effect), no backreaction, no topology change.
 
-## 4. The verdict (one sentence)
+## 4. The verdict (one sentence, corrected after the Lean sweep)
 
 QIQT-H holds the *kinematic and algebraic* layers of a holographic correspondence — the gate-surviving
 N-like scalar capacity, G ∝ 1/N, the linearized quantized graviton provably of GR with the equivalence
 principle and quantized area fluctuations, the count ⟷ geometry join as theorems in the constructed core,
-and geometry-recovery limits up to dS₂ — but misses everything that makes AdS/CFT a *duality*: an
-independently defined microscopic theory whose spectrum contains the graviton (blocked at finite capacity
-by the repo's own trace-argument obstruction — the large-capacity limit IS the missing step), a
-decoupling-style derivation, the interacting/nonlinear completion, the emergent radial dimension, and the
-protection that pins coefficients.
+the WEAK half of the decoupling argument as theorems (free sector forced + the rigid weight dictionary),
+unconditional exact RT on the finite flow model, and the machine-checked ladder up to the Type III₁
+fingerprint — but misses what makes AdS/CFT a *duality*: the STRONG half of decoupling (the geometry/G
+side surviving the same limit from one parent), the limit algebra in which the graviton sector lives
+inside the theory (blocked at finite capacity by the repo's own trace-argument obstruction — the
+large-capacity limit IS the missing step), the interacting/nonlinear completion, the scale-as-dimension
+theorem, the protection that pins coefficients, and any 1/N tower.
 
 ## 5. Constructive closing note
 
