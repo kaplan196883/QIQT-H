@@ -127,10 +127,15 @@ curvature-as-a-theorem and the smooth sphere — and the same family decoded fro
 "over 5,000 theorems across ~485 files" is the current phrasing. New this recount (2026-07-10): the
 "space from the state" emergent-geometry program (§6 of the inventory) — GH limits to interval / cube
 ∀d / flat torus / circle / tripod / cone / sphere, decoded from Bell cut-rank profiles, plus the
-Hawking–Euclidean layer `cone_flat_iff` (flat ⟺ θ=2π) and `hawking_two_pi_coincidence`. **Binding
-scope:** dimension d, angle θ, topology and isotropy are all INSERTED (not emergent); states are
-CONSTRUCTED; curvature = the midpoint/embedding obstruction, not a Riemann tensor; Hawking κβ/temperature
-identifications are CITED. NOT emergent dimension/spacetime, NOT GR, NOT QG.
+Hawking–Euclidean layer `cone_flat_iff` (flat ⟺ θ=2π) and `hawking_two_pi_coincidence`; and the
+**Lorentzian ladder** (real time) — proper time via the *reverse* triangle inequality for flat Minkowski
+(`tau_reverse_triangle`), the causal no-go (`causal_no_go`, why causal-set theory needs random sprinkling),
+the continuous proper-time pinch (`causal_stencil_pinch`), and curved 2D de Sitter (`tauDS_reverse_triangle`
+— to our knowledge the first machine-checked curved-spacetime reverse triangle inequality — with de Sitter
+horizons `dS_causal_horizon`). **Binding scope:** dimension d, angle θ, topology, isotropy and the causal
+order are all INSERTED (not emergent); states are CONSTRUCTED; curvature = the midpoint/embedding
+obstruction, not a Riemann tensor; Hawking κβ/temperature identifications are CITED. NOT emergent
+dimension/spacetime, NOT GR, NOT QG.
 
 ## Modular-tower update (2026-07-05) — Tomita–Takesaki COMPLETE
 

@@ -217,13 +217,14 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           encoded into the capacity-bounded microstate corner, Born-weighted and area-bounded.
           <em>Transport, not construction; interactions are a cited frontier.</em></p>
         <span class="arrow">The realisations →</span></a>
-      <a class="card" href="/formalization"><h3>Space as a limit — geometry from graph geodesics</h3>
+      <a class="card" href="/formalization"><h3>Space &amp; spacetime as a limit — geometry from graph geodesics</h3>
         <p>Finite graph geodesics — and the abstract state's own correlations (Bell cut-rank → graph → metric)
-          — provably <strong>Gromov–Hausdorff converge</strong> to continuum geometries: the line, the flat
+          — provably <strong>Gromov–Hausdorff converge</strong> to continuum geometries: the line, flat
           torus/circle, the cube in every dimension, a branching tree, a positively-curved <strong>cone</strong>
-          (curvature a <em>theorem</em>), and a smooth <strong>sphere</strong>. Plus the finite RT inequality and
-          a Lorentzian causal skeleton. <em>Scope: dimension, curvature and topology are inputs, not emergent;
-          states are constructed; not emergent spacetime, not GR.</em></p>
+          (curvature a <em>theorem</em>), and a smooth <strong>sphere</strong>. A Lorentzian layer reaches
+          <strong>spacetime</strong> — proper time via the reverse triangle inequality for flat Minkowski and
+          curved <strong>de Sitter</strong>. <em>Scope: dimension, curvature, topology and causal order are
+          inputs, not emergent; states are constructed; not emergent spacetime, not GR.</em></p>
         <span class="arrow">See the proofs →</span></a>
       <a class="card" href="/realisations"><h3>Runnable toy realisations</h3>
         <p>Two SymPy-verified models: a finite realisation (one CAR mode in a microstate memory) checking every
@@ -490,10 +491,17 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           (<code>sphereGrid_toGHSpace_tendsto_sphere</code>). A companion layer proves the cone is flat
           <strong>⟺ θ = 2π</strong> (<code>cone_flat_iff</code>) — the Euclidean shadow of the Hawking–Unruh
           temperature — pairing it with the repo's algebraic 2π (the KMS-thermal boost) in
-          <code>hawking_two_pi_coincidence</code>. <em>Honestly scoped: dimension d, angle θ, topology and
-          isotropy are all INSERTED through the graph/state rules (not emergent), the states are CONSTRUCTED to
-          carry the pattern, curvature = the midpoint/embedding obstruction (not a Riemann tensor), and the
-          Hawking κβ/temperature identifications are CITED — NOT emergent dimension/spacetime, NOT GR, NOT QG.</em></li>
+          <code>hawking_two_pi_coincidence</code>. And it extends to <strong>Lorentzian spacetime</strong>: the
+          <em>reverse</em> triangle inequality (timelike geodesics maximize proper time) for flat Minkowski
+          (<code>tau_reverse_triangle</code>), a machine-checked <em>causal no-go</em> (why deterministic causal
+          lattices miss the proper time — the reason causal-set theory needs random sprinkling), a continuous
+          proper-time limit (<code>causal_stencil_pinch</code>), and — to our knowledge the <strong>first
+          machine-checked curved-spacetime reverse triangle inequality</strong> — 2D de Sitter, with de Sitter
+          horizons (<code>tauDS_reverse_triangle</code>, <code>dS_causal_horizon</code>). <em>Honestly scoped:
+          dimension d, angle θ, the causal order and the per-step weights are all INSERTED through the
+          graph/state rules (not emergent), the states are CONSTRUCTED to carry the pattern, curvature = the
+          midpoint/embedding obstruction (not a Riemann tensor), and the Hawking κβ/temperature identifications
+          are CITED — NOT emergent dimension/spacetime, NOT GR, NOT QG.</em></li>
       </ol>
       <p style="margin-top:.7rem"><strong>Scope, stated once for all forty.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
