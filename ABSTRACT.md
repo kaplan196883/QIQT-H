@@ -19,7 +19,7 @@ kinematics, **(P3)** microcausality, **(P4)** finite holographic capacity: the i
 of any bounded spacetime region is finite, and **(P5)** quantum equilibrium of the typicality
 measure — of which P2–P3 are the standard quantum-relativistic arena, so the irreducible new
 physics is **P4 + P5, on the P1 ontology**. We machine-verify the entire development in
-Lean 4 / Mathlib: over **4,400 theorems across ~415 files**, zero axioms beyond Lean's standard
+Lean 4 / Mathlib: over **5,000 theorems across ~485 files**, zero axioms beyond Lean's standard
 three, every physical input an explicitly named hypothesis.
 
 The measurement problem dissolves without collapse: decoherence supplies the record structure,
@@ -157,7 +157,8 @@ such in any proof assistant:
 no strip-analyticity KMS; **NO type classification** ("not the tracial case" is *not* "not type II"
 as an algebra statement; type III / S-invariant stays cited — Mathlib has no type API); finite-stage
 Gibbs inductive-limit only. Website world-firsts list carries items for the modular conjugation and
-the non-tracial KMS state accordingly (now 38 total).
+the non-tracial KMS state accordingly (later additions — field-level BW and the emergent-geometry
+GH-limit family — bring the current total to 40; see the count note below for the authoritative figure).
 
 ## Audit note (2026-07-05) — CLOSED
 

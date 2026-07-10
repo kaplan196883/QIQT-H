@@ -57,8 +57,8 @@ the honest residue** (they are *assumed*, not derived):
 - **`hK`** — the realization derivative of the heat/modular functional $K = S + D_{\mathrm{KL}}$,
   equal to $\ (2\pi/\hbar)\,T(x)(v,v)$
 - **`hA`** — the geometric area-variation hypothesis (the derivative of the area $A$)
-- **`hbound`** — the dynamical FQ capacity bound (the finite-information ceiling that replaces
-  collapse): $\ S(p\,x\,v\,t) \le \eta \cdot A(x,v,t)$ for $t$ near $0$
+- **`hbound`** — the dynamical FQ capacity bound (the P4 finite-information ceiling on the region's
+  entropy): $\ S(p\,x\,v\,t) \le \eta \cdot A(x,v,t)$ for $t$ near $0$
 
 Plus, tallied but not load-bearing: **15 data objects**, **1 typeclass instance**, and **21
 routine regularity/setup binders** — all listed in full in your own generated card.

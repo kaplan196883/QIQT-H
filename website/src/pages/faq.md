@@ -115,8 +115,9 @@ gets rejected by the kernel. The methodology is itself documented in a companion
 ## "What would change your mind? What's still open?"
 
 The [open problems](/open-problems) are listed without hedging: the canonicity of the P5
-typicality measure, the dynamical/Lorentz-covariant law of λ, the numerical value of *G* (pinned
-to a Seeley–DeWitt coefficient behind a Riemannian-heat-kernel gap), the continuum Type III₁
+typicality measure, the dynamical/Lorentz-covariant law of λ, the numerical value of *G* (the
+*relation* G = 1/(N Λ_s²) is a derived theorem; only the *number* is carried — pinned to a
+Seeley–DeWitt coefficient behind a Riemannian-heat-kernel gap), the continuum Type III₁
 limit, and interacting matter. Any of these could break, and the framework says so up front. The
 honest verdict — including two adversarial red-team reviews — is that this is a **single-world
 interpretation plus a holographic entropy bound and a conditional induced-gravity chain**, all

@@ -18,7 +18,7 @@ the full dependency network behind these results, see the [**theorem browser**](
 
 ### [GR field equations](/statements/gr)
 
-*Target 3 — QIQT-H gives the Einstein field equations* &nbsp;<small>(15 statements)</small>
+*Target 3 — QIQT-H's conditional, free-field Einstein-form equation* &nbsp;<small>(15 statements)</small>
 
 ### [Born rule](/statements/born)
 

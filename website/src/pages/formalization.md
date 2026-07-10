@@ -8,8 +8,8 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **409 files and ~4,400
-theorems** (over 5,300 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **~485 files and over 5,000
+theorems** (over 5,700 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
 
@@ -153,7 +153,7 @@ premise** and exhibits exactly what GR rests on:
 | what it carries — *exactly the floor* | meaning |
 | --- | --- |
 | `hKG` | the matter **equation of motion** (Klein–Gordon on the pp-wave background) |
-| `hcap` ($\eta\,c=\log\lvert R\rvert$) | the **finite-capacity** input (P4-MICRO: *finiteness* is the postulate; the area form $Q_R=A/4\ell_P^2$ is itself *derived* via the Sakharov bridge, and $G$ is carried — or itself *derived* as $G=1/(N\Lambda_s^2)$ under the granularity reframing, `InducedNewtonConstant`) |
+| `hcap` ($\eta\,c=\log\lvert R\rvert$) | the **finite-capacity** input (P4-MICRO: *finiteness* is the postulate, from which the area *floor* $S_{\rm vN}\le Q_R$ is a derived theorem; the area *form* $Q_R=A/4\ell_P^2$ is *conditionally derived* via the Sakharov bridge, and $G$ is carried — its *relation* $G=1/(N\Lambda_s^2)$ *derived* under the granularity reframing, `InducedNewtonConstant`, only the numerical value carried) |
 | `hS`, `hK` | the **localization map** — the field-coupled record law whose entropy rate equals the stress flux $2\pi/\hbar\cdot T_{kk}$ |
 
 The localization map is **provably not** dischargeable by analysis: at the uniform reference the Shannon

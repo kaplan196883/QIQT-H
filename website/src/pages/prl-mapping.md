@@ -30,7 +30,7 @@ entropy–area relation `S = δA/4` as an input; see the last two rows.
 | Eq. (2) | Free Klein–Gordon field, `(□+m²)Φ = 0`, as the substrate | the free-field one-particle / Fock sector (`Fock/*`) | machine-checked |
 | Eq. (3) | Kay–Wald universal scaling-limit two-point function on the horizon | one-particle Fock wedge structure (`Fock/OneParticle*`) | machine-checked |
 | Eq. (4) | Modular flow = geometric boost, `Δ_R^{it} = 𝔇_{2πt}` (Summers–Verch / Bisognano–Wichmann) | `oneParticleBW_niceWedge_unconditional` — and, lifted to the whole field algebra, `freeField_secondQuant_BW_unconditional` | machine-checked, **unconditional** |
-| Eq. (10) | Araki–Uhlmann formula for coherent states, `S_rel = i·d/dt⟨Ω_φ\|Δ^{it}Ω_φ⟩` | `arakiEntropy_eq_relEntropy` (the coherent-state Araki reduction) | machine-checked |
+| Eq. (10) | Araki–Uhlmann formula for coherent states, `S_rel = i·d/dt⟨Ω_φ\|Δ^{it}Ω_φ⟩` | `hasDerivAt_relModFlow_vacuum` (the coherent-state modular-flow derivative); `arakiEntropy_eq_relEntropy` (the Umegaki identity) | machine-checked |
 | Eq. (12) | `S_rel = −2π∫U(∂_Uφ)²` — the Casini–Grillo–Pontello coherent-state entropy | `cgpEntropy_eq_integral_kFn`, `cgpEntropy_nonneg` | machine-checked |
 | Eq. (13) | `S_rel = −2π∫U⟨:T_ab:⟩ξ^aξ^b` — relative entropy **=** horizon energy flux `δQ` (the first law) | `modular_casini_bound`, `finiteCorner_firstLaw_boostEnergy` (`ModularEnergyBound`) | machine-checked |
 | Eq. (22) | Raychaudhuri equation for the null congruence (`θ = σ = ω = 0` on the horizon) | `raychaudhuri_geodesic`, `raychaudhuri_focusing` | machine-checked |

@@ -25,7 +25,7 @@ where the matter algebra is the *infinite* Type III$_1$ of relativistic QFT — 
 to be strictly *weaker* than a count. The finiteness is always on the **records/entropy**, never on the matter
 Hilbert space. That the capacity then takes the holographic **area form** $Q_R = A/4\ell_P^2$ — scaling with boundary
 *area*, not volume — is **not** part of the postulate: it is *derived* in a conditional Sakharov / induced-gravity
-bridge (with the value of $G/\ell_P$ carried as a datum, not derived). **(2026 — $G$ promoted to derived.)** That
+bridge (with the value of $G/\ell_P$ carried as a datum, not derived). **(2026 — the *relation* $G = 1/(N\Lambda_s^2)$ promoted to derived; the numerical value stays carried.)** That
 last carried datum can itself be reduced: positing a fundamental **record-granularity scale** $\Lambda_s$ (the
 finite-information "pixel size", $a_0 = 1/\Lambda_s$) *in place of* $\ell_P$ delivers $G = 1/(N\Lambda_s^2)$ — the
 Sakharov/Dvali species bound, machine-checked axiom-free (`InducedNewtonConstant`) — collapsing P4-MICRO's carried
@@ -35,8 +35,9 @@ cannot come from a count). With this induced $G$ the granularity capacity also *
 dictionary** — the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent
 $(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge`) — a *correspondence* under the shared $G$, not an
 import of a boundary CFT or AdS/CFT's cross-check. Finiteness *alone* gives only
-$S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ and the $1/4$ are then
-*theorems*, not postulates.
+$S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ is then a *theorem*
+(given the capacity postulate), and the $1/4$ a separate machine-checked *theorem* — but a *conditional* one,
+resting on the Sakharov bridge, not on finiteness alone.
 
 Here is the sharp point — and getting it right took the program a while. Finite capacity *by itself* does
 **not** forbid a superposition in the wave function $\Phi$: a superposition of two records is one vector in
@@ -75,8 +76,9 @@ superposition or *select* the actual one — that "capacity forbids records" rea
 error. λ makes exactly one record actual.) No collapse term, no branching ontology.
 
 It does not, by itself, hand you the **probabilities**. That a given run yields outcome $k$ with frequency
-$|c_k|^2$, the Born rule, is argued separately from the typicality of microscopic initial conditions
-across runs, and that argument is [still open](/open-problems). Until it is settled, QIQT-H is an account
+$|c_k|^2$, the Born rule, is *reduced* to a single typicality premise (P5) about microscopic initial conditions
+across runs — provably underivable from unitarity alone; what stays [open](/open-problems) is justifying that
+premise as forced (Born itself is reduced, not open). Until that is settled, QIQT-H is an account
 of *definiteness* — why there is one outcome — not yet a complete interpretation that also says with what
 frequency.
 

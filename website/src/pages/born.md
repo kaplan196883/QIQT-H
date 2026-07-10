@@ -11,7 +11,7 @@ description: Probabilities |c_k|² as typicality, not a dice-roll — the one in
 Machine-checked and axiom-free: <em>given</em> one premise — <strong>P5</strong>, the canonical, non-contextual
 typicality measure — the Born weights $|c_k|^2$ are the <strong>unique, forced</strong> answer
 (<code>positive_ray_certain_forces_born</code>), and an honest <strong>no-go</strong> proves that <em>some</em>
-such premise is <strong>unavoidable</strong> (<code>NoBornFromNothing</code> — you cannot squeeze Born out of
+such premise is <strong>unavoidable</strong> (the <code>NoBornFromNothing</code> audit, e.g. <code>any_anti_born_realizable</code> — you cannot squeeze Born out of
 structure, decoherence, and no-signalling alone). What stays genuinely <strong>open</strong> is that single
 ingredient itself — P5, the canonical IC measure (why $\lambda$ is $\mu$-typical) — which is
 <a href="/open-problems">Open Problem 1</a>. So Born here is neither "derived from nothing" nor "unsolved": it

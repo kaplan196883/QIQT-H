@@ -131,10 +131,12 @@ and $H(\lambda)=I(\lambda;R)$ holds because λ *is* the record (a deterministic 
 
 <div class="note">
 
-<strong>Honest status of the boundary.</strong> The horizon bound is a <em>postulate</em> — a one-sided
+<strong>Honest status of the boundary.</strong> The horizon bound here is a <em>postulate</em> — a one-sided
 capacity boundary condition supplied by the bounding area of a causal diamond, not derived. Two strengths are
 kept distinct: the entropy form $H(R)\le S$ (Bousso, on the decohered record) and the strictly stronger
-cardinality form $\log\lvert R\rvert\le S$. The contract that threads it is machine-checked and category-error-proof
+cardinality form $\log\lvert R\rvert\le S$. (This is the Bousso <em>capacity</em> boundary condition — distinct
+from the von&nbsp;Neumann area <em>floor</em> $S_{\rm vN}(\rho_R)\le Q_R$, which <em>is</em> a derived P4-MICRO
+theorem given finiteness; see <a href="/theory">the theory</a>.) The contract that threads it is machine-checked and category-error-proof
 (`RecordContract`, Born-from-projectors `‖P_r Φ‖²`); the area value itself is physics input.
 
 </div>
