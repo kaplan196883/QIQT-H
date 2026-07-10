@@ -97,6 +97,48 @@ terms, constrained by the no-gos below.
    realizes the count — the saturation regime is where the area law lives). Every other candidate
    must satisfy this one.
 
+## 6 ⟷ 3: the unraveling relationship (why the channel brick is also candidate 3's first brick)
+
+Candidates 6 and 3 are ONE physical process at two levels of description — the standard quantum-
+trajectories (GKSL ⟷ jump-process) relationship: **candidate 6 is candidate 3 with λ integrated out;
+candidate 3 is candidate 6 with λ put back in.**
+
+The dictionary:
+- each Lindblad/Kraus **jump operator** of the channel = one **record-formation event** of the
+  accretion process (a capacity-respecting channel = one whose Kraus operators write into the record
+  factor without exceeding Q_D — einselection);
+- the channel's **jump rates** = the accretion chain's **transition probabilities**;
+- the channel state = the **λ-average over accretion paths**: (6) = E_λ[(3)];
+- the compatibility condition — the path process's one-point marginals evolve by the channel — **is
+  already a theorem**: `born_coarse_grain`/`CoarseGrainNaturality` (Kolmogorov consistency of the Born
+  measures under context refinement) is exactly what makes the σ-additive PATH measure constructible,
+  and T5's `Measure.infinitePi` machinery is the constructor.
+
+How the held theorems distribute across the two levels:
+
+| Channel level (candidate 6)                              | Path level (candidate 3)                    |
+|----------------------------------------------------------|---------------------------------------------|
+| DPI (`dpi_mixed_unitary`, `partial_trace_dpi`) — entropy monotone | the arrow of accretion: record formation only loses distinguishability |
+| Gate 3 equivariance (`safe_enforced_step`)                | the DGZ condition `(R)_*μ = μ` in `SelectionModel` |
+| Gibbs fixed points (DY2) / E4 equilibria (`code_equilibrium_einstein`) | detailed balance of the jump chain; SATURATION = where accretion stalls against capacity (the horizon as the stationary regime) |
+| Born weights of outcomes (`bornW`)                        | path frequencies — `BornConcentration`'s Chebyshev bound |
+
+Two QIQT-H-specific payoffs of building the semigroup (6) first:
+1. **Gate 3 transfers downward** — channel-level equivariance constrains the path measure's
+   equivariance, so the covariance requirement on the accretion process (L2: random-or-equivariant)
+   is inherited, not re-proven.
+2. **The circularity risk named in `SelectionDynamics.lean` becomes DECIDABLE**: with a concrete jump
+   chain, "is the stationary/consistent path measure forced to be the Born weights?" is a finite
+   fixed-point question. Forced-by-necessity = the non-circular Born derivation (the Valentini-style
+   relaxation hope, as a theorem); forced-by-assumption-only = the circularity exposed. Either
+   outcome is progress, and it is exactly the kind of finite statement the repo proves well.
+
+So the sequencing is: build (6) — the generator, the entropy monotone from held DPI, fixed points =
+the E4 equilibria; then unravel to (3) — the finite Markov jump chain on the record ledger, the path
+measure via `CoarseGrainNaturality` + `Measure.infinitePi`, and the equivariance/Born fixed-point
+question posed as a theorem. The ensemble half is lawlike and gate-safe; the path half carries
+QIQT-H's distinctive single-world content.
+
 ## Synthesis
 
 The natural composite — and structurally what "a CFT" is from the holographic side — is: modular/clock
