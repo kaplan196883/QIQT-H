@@ -83,3 +83,50 @@ Unchanged: ONE bg fable subagent per brick (own module, NO git); independent ver
 scratchpad `#print axioms` std-3 probe + no-sorry grep); AxiomAudit pins; wire `QIQTH.lean`; full
 budget check (LONG ~420000ms, budget 0); commits LOCAL ONLY — DO NOT PUSH; explicit git paths;
 NO sorry; hypotheses never axioms; checkpoint precisely at genuine walls.
+
+## SYNTHESIS (2026-07-10, post-campaign): how the Lorentz-gate verdict bears on this reconstruction
+
+The three executed Lorentz gates (CPSUV stress test + diamond-tip + state-level, 2026-07-02; canonical
+"single surviving conclusion" at `LEAN_RESULTS_INVENTORY.md` §2 top) and this ladder turn out to be two
+views of the same structure:
+
+1. **Lattices are codings, not ontology — the firewall is now FORCED, not optional.** Every discrete
+   structure in the reconstruction program (stencil grids, the causal lattice, the state-wire) is a
+   frame-anchored deterministic lattice. The gates prove that promoting any such structure to physical
+   microstructure (a literal finite-capacity cutoff with interactions on it) radiatively generates
+   unsuppressed `Δc²` and is experimentally dead. The GH limits and the L3 pinch are therefore
+   *kinematic recoverability theorems* — the continuum is decodable from discrete data in one chosen
+   frame, legitimate because the TARGET (the metric space; the invariant τ) is frame-independent. The
+   alternative (ontic-lattice) reading is falsified, by theorem.
+
+2. **L2/L3 is the geometric shadow of the CPSUV dichotomy.** Unweighted counting on the frame-anchored
+   lattice (L2) leaves an O(1) defect NO refinement removes (Manhattan 2 vs τ = √2 — a speed-splitting
+   floor); inserting the invariant per-step Minkowski weight BEFORE the limit (L3) makes the defect
+   decouple (→ 0 uniformly). CPSUV says the identical thing radiatively: frame-anchored regulator →
+   unsuppressed `g²/12π²`; covariance before the loop → `Δc² = 0` identically. Same moral, machine-checked
+   twice: Lorentz invariance cannot be recovered in a limit from frame-anchored counting — it must be in
+   the data before the limit.
+
+3. **Compactness decides — why the Euclidean half could average and the Lorentzian half had to insert.**
+   The Euclidean stencil program recovers isotropy in the limit (increasing stencil `R_N → ∞`) because
+   `SO(d)` is COMPACT. The diamond-tip test proved the Lorentzian analogue impossible at the regulator
+   level (`boostAvg_diverges` — boost noncompactness), and L2 is the deterministic-counting face of the
+   same fact. Hence L3 *inserts* the invariant weight (and causal sets resort to RANDOM sprinkling — the
+   only other frame-free option for discrete data).
+
+4. **One wall, two names.** This program's cited frontier ("the dynamical source" — what dynamics supplies
+   the weights/correlations we insert) and the gates' sole remaining LV door ("the dynamical-realization
+   gap" — only a non-equivariant enforcement mechanism reopens Lorentz violation) are the SAME object.
+   Sharpened constraint: whatever eventually supplies the stencil weights must be an EQUIVARIANT,
+   state-level mechanism; a frame-carrying dynamical source is pre-falsified.
+
+5. **Suggested next moves (not done):** (a) a *sprinkled L3* — formalize the Brightwell–Gregory
+   random-geodesic statement (longest chain in a Poisson sprinkling ∝ τ), completing the L2/L3 story from
+   the randomness side; (b) *state-level decoding* — decode geometry from per-diamond covariant entropy
+   data (`Q_D` on the diamond net) instead of cut-rank profiles on a fixed wire, connecting
+   geometry-as-output directly to the surviving branch of the capacity postulate. L4 (dS₂) is untouched
+   by all of this — pure continuum target-side, no regulator anywhere in it.
+
+Net: the gates threaten no theorem of this ladder — they fix its interpretation (codings, not ontology),
+explain its internal pattern (insertion beats averaging; compactness decides), and fuse its open wall with
+the capacity postulate's last open door into one target: an equivariant, state-level dynamical source.
