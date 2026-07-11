@@ -63,8 +63,14 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Δ self-adjoint (Δ†=Δ, von Neumann's S̄*S̄ theorem, itself a Mathlib-gap contribution) · Δ^{it}=towerFlow (THE
   IDENTIFICATION — the transported physical flow IS the spectral modular flow) · Tomita I (Δ^{it}MΔ^{−it}=M) · J
   anti-unitary + polar decomposition on the core (S̄=J∘Δ^{1/2}) · Tomita II inclusion (JMJ ⊆ M′) · non-traciality
-  (ω not a trace, Δ≠1, Δ^{it}≠id) · KMS-boundary. Capstone: `NonTracial.modular_data_complete_witness`. HONEST
-  BOUNDARY (never crossed): no strip-analyticity KMS, no full equality JMJ=M′ (RvD wall), no type classification
+  (ω not a trace, Δ≠1, Δ^{it}≠id) · KMS-boundary. Capstone: `NonTracial.modular_data_complete_witness`.
+  **★★★ UPDATE 2026-07-11 — THE RvD WALL HAS FALLEN: J·M·J = M′ IN FULL**
+  (`TowerGNS/CommutationEquality.lean`, `94d285f7`, duality campaign D2a:
+  `tomita_commutation_equality` / `jconj_image_eq_commutant` / `(JMJ)′ = M` / Ω cyclic+separating
+  for BOTH M and M′; LA1′'s "Kaplansky gap" was an ARTIFACT — the classical right-boundedness
+  estimate closes it, see the commutation-corridor block). The tower now carries the COMPLETE
+  both-halves Tomita–Takesaki commutation theorem — the first in any proof assistant. HONEST
+  BOUNDARY (never crossed): no strip-analyticity KMS, no type classification
   (Mathlib has no trace/factor/type API); finite-stage Gibbs inductive-limit only — the free-field/Type-III continuum
   is the named pivot. NOTE: this session's commits (J1–J9, N1–N4, KMS C1, four campaign plans) are **local-only**
   pending push authorization; paper/website last synced at the 36th first (J + non-traciality + KMS = pending firsts 37–39).
@@ -1607,6 +1613,27 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
     at the time-averaged level; uniqueness (`invariant_iff_record` — invariant states = records) +
     the necessity guard (`no_resolution_no_einselection` — a decoupled environment dephases
     nothing).
+  - **D1a — POINTER COMPETITION** (66 decls, `e7d3938f`, 2026-07-11, `PointerCompetition.lean`):
+    einselection with `[H_S, A] ≠ 0`, two exactly solvable strata. COMMUTING layer: the folded
+    frequency `ν = (h_n−h_m)+(a_n−a_m)b_k`, capstone under the shifted resolution hypothesis, and
+    ★ THE RESONANCE THEOREM (`resonance_protects_coherence` — the time-averaged decoherence factor
+    → the RESONANT WEIGHT: resonant spectra protect coherences, the machine-checked DFS witness).
+    NON-COMMUTING qubit, EXACTLY SOLVED (anticommuting pair ⟹ `Hq² = (1+λ²)·1`, closed-form `Uq`
+    with the entrywise Schrödinger certification): the EXACT record population
+    `1 − sin²(ωt)/(1+λ²)` ⟹ `records_not_invariant` (every λ — einselection under competition is
+    a REGIME) + `record_deviation_le`/`zeno_strong_coupling` (deviation ≤ 1/(1+λ²) UNIFORMLY in
+    time — the quantitative Zeno regime). Resonance + rotation = the two machine-checked failure
+    modes of einselection.
+  - **D4a — BULK RELAXATION** (27 decls, `f0dfa334`, 2026-07-11, `BulkRelaxation.lean`): THE
+    EMERGENT GEOMETRY IS THE CONSERVED CHARGE OF BOUNDARY DECOHERENCE — the ledger principle
+    (`ledger_Tsem_invariant`, `ledgerFunction_conserved`) with four charge instances (Born
+    weights, trace, the EQUILIBRIUM ENTROPY `S(dephase A)` with its area/4G K2a/JI reading CITED
+    + the K0 guard, and the K2a COUNTING TRACE connected FORMALLY); the contrast
+    (`coherence_decay` at exact rate 1); the package (`geometry_is_conserved_charge` — the
+    relaxation forgets everything EXCEPT the geometry); and through the held E2 decoder
+    ★ `bulk_metric_frozen`/`bulk_metric_frozen_emergent` — THE FIRST MACHINE-CHECKED DYNAMICAL
+    BULK–BOUNDARY STATEMENT: boundary decoherence does not move the bulk metric. HONEST:
+    CONSERVATION not GENERATION — no bulk EOM, no backreaction; expectation-level dictionary.
   ⚠ **HONEST (binding, in every header + audit pin):** the record/pointer basis was RC1's input —
   IC1 DERIVES it at the Cesàro/time-averaged level ONLY (finite environments recur — gate C — so
   pointwise t → ∞ dephasing is impossible); the pure-dephasing limit drops the self-Hamiltonian
@@ -2127,7 +2154,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (`commutantSymbol_gnsNorm_le`); the forms are inequivalent (w_m/w_n unbounded) — **J M J = M′
   holds up to the norm-control (Kaplansky) gap**; the Δ-smoothing escape = the named next campaign.
   HONEST: full equality NOT claimed; pointwise-on-orbit NOT SOT; no strip-KMS; no type (cited);
-  finite-stage Gibbs inductive limit; NOT QG.
+  finite-stage Gibbs inductive limit; NOT QG. **⟨SUPERSEDED on the gap, 2026-07-11: the Kaplansky
+  wall was an ARTIFACT — closed by `CommutationEquality.lean` `94d285f7` (D2a) via the classical
+  right-boundedness estimate: bimodularity (`starProjection_comm_towerRep`, the C1 engine) +
+  `T ∈ M′` give `‖π_C(a)(P_C TΩ)‖ ≤ ‖T‖‖π_C(a)Ω‖`, the COLUMN WITNESS cancels the Gibbs weight
+  exactly (`mulVec_bound_of_germ_bound`) ⟹ the Loewner bound ⟹ rep contractivity
+  (`towerRepCLM_opNorm_le`) ⟹ `‖R_{b_C}‖ ≤ ‖T‖` uniformly (`rightMul_symbol_norm_le`) ⟹ SOT ⟹
+  ★★★ `tomita_commutation_equality`: rightLimitVN = M′ — J·M·J = M′ IN FULL, the first complete
+  both-halves Tomita commutation theorem in any proof assistant. LA1′'s deliverables 1–3 are the
+  substrate the closure consumed. Remaining on this ladder: ONLY type III₁ (cited).⟩**
 
 **THE KMS-BOUNDARY CAMPAIGN (COMPLETE, THE_KMS_BOUNDARY_PLAN.md)** — the tower vacuum is a
   KMS-boundary state. K1 (`towerState_kms_boundary`) + K2 (`towerFlow_vectorState`) ALREADY

@@ -1,5 +1,17 @@
 # LIMIT ALGEBRA campaign — the genuine frontier after the tower's Tomita theory
 
+## ★★★ UPDATE (2026-07-11, same day): THE KAPLANSKY GAP IS CLOSED — J·M·J = M′ IN FULL
+`94d285f7` `TowerGNS/CommutationEquality.lean` (duality campaign D2a). The gap was an ARTIFACT of
+the wrong estimate: a GPT-5.5 consult identified the classical Rieffel–van Daele/Takesaki
+RIGHT-BOUNDEDNESS route — the uniform bound `‖R_{b_C}‖ ≤ ‖T‖` comes from `T ∈ M′` + the bimodular
+stage projection (never from the GNS norm of the symbol); the column witness cancels the Gibbs
+weight exactly, giving the Loewner bound and rep contractivity with no auxiliary norm.
+`tomita_commutation_equality`: rightLimitVN = M′ — with the held Tomita I and the full modular
+data, **the complete both-halves Tomita commutation theorem, the first in any proof assistant**.
+Remaining on this ladder: ONLY the type classification (III₁/S-invariant — no type API anywhere;
+Araki–Woods/Connes cited). The LA1′ status below is superseded on the gap; its deliverables 1–3
+remain the substrate the closure consumed.
+
 ## STATUS: LA1′ LANDED (2026-07-11, `15b9fb74`) — CHECKPOINT AT THE KAPLANSKY WALL, as planned
 `TowerGNS/CommutationTheorem.lean` (772 lines, 47 decls, all std-3, budget 0). Deliverables 1–3
 SHIPPED: the finite-stage commutation theorem; **`jconj_image_towerLimitVN` — J·M·J = rightLimitVN

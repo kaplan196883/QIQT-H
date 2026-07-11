@@ -207,6 +207,18 @@ std-3) moved **gap 1's M1 prerequisite** — and only that. Revised status:
   uniqueness + necessity guard). Einselection is no longer inserted — at the time-averaged level,
   in the measurement limit. Still open within (i): the self-Hamiltonian competition
   (`[H_S, A] ≠ 0`); and (ii)+(iii) — the capacity → ∞ limit and the graviton inside — are untouched.
+  **Duality-campaign update (2026-07-11, D1a/D4a/D2a):** within (i), the self-Hamiltonian
+  competition is now treated at the exactly-solvable level (D1a `e7d3938f`: the resonance/DFS
+  theorem + rotating-records witness + the quantitative Zeno regime — einselection's two failure
+  modes machine-checked, the coupling-dominant regime quantitative); the M4-adjacent first
+  DYNAMICAL bulk–boundary statement landed (D4a `f0dfa334`: the emergent geometry is the conserved
+  charge of boundary decoherence; frozen bulk metric — conservation, not generation); and on the
+  limit-algebra ladder of (ii), ★★★ **the Kaplansky gap CLOSED — J·M·J = M′ in full**
+  (D2a `94d285f7`, `tomita_commutation_equality`: the first complete both-halves Tomita
+  commutation theorem in any proof assistant; the gap was an artifact of the wrong estimate).
+  Remaining on that ladder: ONLY the type III₁ classification. Gap 1's composite now reads:
+  (i) einselection derived + competition characterized; (ii) the limit algebra complete through
+  full Tomita, type III₁ absent; (iii) the graviton-inside spectral statement — still the core.
 - **Gaps 2–6: unchanged today** (strong-half decoupling; interactions beyond Deser-2;
   scale-as-dimension; protection; 1/N tower).
 

@@ -64,8 +64,10 @@ line drawn where the roadmap draws it.
    ansatz; `IsPhysicalWedgeMode` named; HT plan open).
 5. **Interacting matter** (SM/YM — contains a Clay problem) and the CPSUV escape for interacting
    matter (open, ~10–20%).
-6. **The operator-algebra tail:** Type II dual-weight vN extension; JMJ = M′ past the Kaplansky
-   gap (Δ-smoothing route named); Type III₁ classification (no type API in any proof assistant).
+6. **The operator-algebra tail:** Type II dual-weight vN extension; ~~JMJ = M′ past the Kaplansky
+   gap~~ **CLOSED 2026-07-11** (`94d285f7` — the gap was an artifact; `tomita_commutation_equality`
+   completes the full both-halves Tomita theorem, the first in any proof assistant); Type III₁
+   classification (no type API in any proof assistant) — now the ONLY item on this ladder.
 7. λ's dynamical Lorentz-covariant law; the OP3b continuum Poincaré net; the 4D
    background-independent manifold.
 

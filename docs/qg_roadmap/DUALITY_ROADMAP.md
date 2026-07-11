@@ -96,6 +96,29 @@ and the third is already written down with its finite half proven.
 - **D3a:** the first continuum rung of `FlatSpaceRecordGravityCorrespondence` (scope with a
   design consult; the conjecture's finite evidence names the shape).
 
+## CAMPAIGN STATUS: COMPLETE (2026-07-11) — all three bricks FULL GREEN, all pushed
+
+- **D1a DONE** — `e7d3938f` `PointerCompetition.lean` (66 decls): THE RESONANCE THEOREM
+  (resonant modes protect coherences — the DFS witness; pointer bases not generic), the
+  rotating-records witness (exact population `1 − sin²(ωt)/(1+λ²)`: einselection under
+  competition is a REGIME), and the QUANTITATIVE ZENO bound (deviation ≤ 1/(1+λ²) uniformly in
+  time). D1's einselection story complete at the exactly-solvable level.
+- **D4a DONE** — `f0dfa334` `BulkRelaxation.lean` (27 decls): THE EMERGENT GEOMETRY IS THE
+  CONSERVED CHARGE OF BOUNDARY DECOHERENCE — the ledger principle, four charge instances (incl.
+  the equilibrium entropy with its area/4G reading and the K2a counting trace, formally), and
+  `bulk_metric_frozen`/`_emergent` — the first machine-checked dynamical bulk–boundary statement.
+- **D2a DONE — THE PRIZE** — `94d285f7` `TowerGNS/CommutationEquality.lean` (22 decls, green
+  first attempt): ★★★ **J·M·J = M′ IN FULL** (`tomita_commutation_equality`,
+  `jconj_image_eq_commutant`, `(JMJ)′ = M`, Ω cyclic+separating for both M and M′). LA1′'s
+  "Kaplansky gap" was an ARTIFACT of the wrong estimate — the consult identified the classical
+  right-boundedness route (bimodular stage projection + T ∈ M′ ⟹ ‖R_{b_C}‖ ≤ ‖T‖ uniformly; the
+  column witness cancels the Gibbs weight exactly, no auxiliary norm needed). With the held
+  Tomita I, S̄/Δ(†=Δ)/J/polar, non-traciality, KMS-boundary: **THE FULL TOMITA–TAKESAKI
+  COMMUTATION THEOREM for the tower limit — the first complete both-halves Tomita theorem in any
+  proof assistant.** D2's limit-algebra rung: only the TYPE classification (III₁) remains.
+- LESSON (recorded in memory): a wall named by one brick deserves a consult before being carried
+  forward — the Kaplansky wall dissolved under one short consult.
+
 ## CAMPAIGN (ACTIVE, 2026-07-11): D1a → D4a → D2a, sequential, loop-driven
 
 - **D1a — `PointerCompetition.lean`** (the honest hard case of einselection, made exactly
