@@ -11056,5 +11056,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PointerCompetition.records_not_invariant
 #print axioms QIQTH.PointerCompetition.record_deviation_le
 #print axioms QIQTH.PointerCompetition.zeno_strong_coupling
+-- BulkRelaxation.lean — DUALITY CAMPAIGN brick D4a (2026-07-11, DUALITY_ROADMAP.md): THE EMERGENT
+-- GEOMETRY IS THE CONSERVED CHARGE OF BOUNDARY DECOHERENCE — the statics→dynamics rung.  THE LEDGER
+-- PRINCIPLE: ledger (diagonal record data) is invariant along the whole relaxation
+-- (ledger_Tsem_invariant), and EVERY ledger-function is a conserved charge
+-- (ledgerFunction_conserved) — instances proved: Born weights, trace, THE EQUILIBRIUM ENTROPY
+-- S(dephase A) (equilibriumEntropy_conserved — the quantity that reads as A_τ/4G at saturation via
+-- the held K2a/JI calibration, CITED with conditions unchanged; + the K0 capacity guard), and on
+-- the held code the K2a COUNTING TRACE (tauCount_conserved — the area's combinatorial substrate,
+-- connected FORMALLY).  THE CONTRAST coherence_decay: every off-diagonal coherence dies at exact
+-- exponential rate 1.  PACKAGE geometry_is_conserved_charge: the boundary relaxation forgets
+-- everything EXCEPT the geometry.  THE METRIC TRAJECTORY through the held E2 decoder:
+-- ★ bulk_metric_frozen — any ledger-function area data induces a CONSTANT bulk metric trajectory
+-- along the entire relaxation; ★ bulk_metric_frozen_emergent — when the initial data is the
+-- ray-probe data of symmetric h, the frozen metric IS h (reconstruct_areaVar).  THE FIRST
+-- MACHINE-CHECKED DYNAMICAL BULK–BOUNDARY STATEMENT: boundary decoherence does not move the bulk
+-- metric — the metric is the fixed-point content of the boundary dynamics.  Free-flow contrast
+-- (coherent dynamics WAVES the metric — Q4 hHatT_wave) CITED.  HONEST: CONSERVATION not GENERATION
+-- — no bulk equation of motion, NO backreaction; E2 expectation-level dictionary (pointwise,
+-- linearized, chosen basis); area/4G reading = held K2a/JI chain CITED; the held area functionals
+-- take weights/links not densities — the counting trace + equilibrium entropy are the honest
+-- state-side realizations; finite corner; record basis an INPUT (RC1 firewall verbatim); NOT bulk
+-- Einstein evolution, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.BulkRelaxation.ledgerFunction_conserved
+#print axioms QIQTH.BulkRelaxation.equilibriumEntropy_conserved
+#print axioms QIQTH.BulkRelaxation.tauCount_conserved
+#print axioms QIQTH.BulkRelaxation.coherence_decay
+#print axioms QIQTH.BulkRelaxation.geometry_is_conserved_charge
+#print axioms QIQTH.BulkRelaxation.bulk_metric_frozen
+#print axioms QIQTH.BulkRelaxation.bulk_metric_frozen_emergent
 
 end QIQTH.AxiomAudit
