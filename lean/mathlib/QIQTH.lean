@@ -131,6 +131,7 @@ import QIQTH.TowerGNS.ConjFlow
 import QIQTH.TowerGNS.ConjImplements
 import QIQTH.TowerGNS.TomitaSecondHalf
 import QIQTH.TowerGNS.CommutationTheorem
+import QIQTH.TowerGNS.CommutationEquality
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius

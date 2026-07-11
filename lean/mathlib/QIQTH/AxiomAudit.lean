@@ -11085,5 +11085,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BulkRelaxation.geometry_is_conserved_charge
 #print axioms QIQTH.BulkRelaxation.bulk_metric_frozen
 #print axioms QIQTH.BulkRelaxation.bulk_metric_frozen_emergent
+-- TowerGNS/CommutationEquality.lean — DUALITY CAMPAIGN brick D2a (2026-07-11,
+-- DUALITY_ROADMAP.md): ★★★ TOMITA'S COMMUTATION THEOREM IN FULL — J·M·J = M′ for the tower limit,
+-- CLOSING LA1′'s Kaplansky gap, which was an ARTIFACT of the wrong estimate (consult-identified;
+-- classical Rieffel–van Daele/Takesaki right-boundedness).  THE CHAIN: (1) BIMODULARITY
+-- starProjection_comm_towerRep (V_C invariant under the ⋆-closed stage algebra ⟹ P_C in its
+-- commutant, via the held C1 invariant-projection engine); (2) THE RIGHT-BOUNDEDNESS ESTIMATE
+-- commutant_symbol_right_bounded (‖π_C(a)(P_C TΩ)‖ ≤ ‖T‖‖π_C(a)Ω‖ — bimodularity + T ∈ M′; the
+-- GNS norm of the symbol NEVER enters); (3) THE UNIFORM NORM BOUND rightMul_symbol_norm_le
+-- (‖R_{b_C}‖ ≤ ‖T‖ globally, uniformly in C — the J-flip to the jStage partner, the COLUMN WITNESS
+-- with exact Gibbs-weight cancellation ⟹ the Loewner bound ‖T‖²·1 − cᴴc ⪰ 0 ⟹ the R5-transported
+-- rep contractivity towerRepCLM_opNorm_le; no auxiliary matrix norm ever chosen); (4) SOT
+-- commutant_sotApprox (ε/3 with the uniform bound) ⟹ commutant_mem_rightLimitVN; (5) CAPSTONES
+-- commutant_le_rightLimitVN (M′ ⊆ JMJ — Tomita's hard half) + ★★★ tomita_commutation_equality
+-- (rightLimitVN = M′ as vN algebras) + jconj_image_eq_commutant (J·M·J = M′ as sets) +
+-- rightLimitVN_commutant_eq ((JMJ)′ = M) + dense_span_commutant_orbit_cyclicVec (Ω cyclic for M′ —
+-- the full standard-form symmetry).  With the held Tomita I (Δ^{it}MΔ^{−it} = M), S̄/Δ(†=Δ)/J/polar,
+-- non-traciality and KMS-boundary: THE FULL TOMITA–TAKESAKI COMMUTATION THEOREM for the tower
+-- limit state — to our knowledge the first complete (both-halves) Tomita theorem in any proof
+-- assistant.  HONEST: finite-stage Gibbs inductive limit (ITPFI-type tower) only; TYPE
+-- classification (III₁/S-invariant) ABSENT — Araki–Woods 1968/Connes 1973 CITED never invoked;
+-- no strip-analyticity KMS; the contractivity/column-witness lemmas are for THIS product-Gibbs
+-- tower; NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TowerGNS.starProjection_comm_towerRep
+#print axioms QIQTH.TowerGNS.commutant_symbol_right_bounded
+#print axioms QIQTH.TowerGNS.rightMul_symbol_norm_le
+#print axioms QIQTH.TowerGNS.commutant_sotApprox
+#print axioms QIQTH.TowerGNS.commutant_mem_rightLimitVN
+#print axioms QIQTH.TowerGNS.tomita_commutation_equality
+#print axioms QIQTH.TowerGNS.jconj_image_eq_commutant
+#print axioms QIQTH.TowerGNS.rightLimitVN_commutant_eq
+#print axioms QIQTH.TowerGNS.dense_span_commutant_orbit_cyclicVec
 
 end QIQTH.AxiomAudit
