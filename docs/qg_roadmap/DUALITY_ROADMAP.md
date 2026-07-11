@@ -96,6 +96,37 @@ and the third is already written down with its finite half proven.
 - **D3a:** the first continuum rung of `FlatSpaceRecordGravityCorrespondence` (scope with a
   design consult; the conjecture's finite evidence names the shape).
 
+## CAMPAIGN (ACTIVE, 2026-07-11): D1a → D4a → D2a, sequential, loop-driven
+
+- **D1a — `PointerCompetition.lean`** (the honest hard case of einselection, made exactly
+  solvable): (i) the COMMUTING layer — `H_S = diag h` shifts the decoherence frequencies to
+  `(h_n−h_m) + (a_n−a_m)b_k`, IC1's capstone survives under the shifted resolution hypothesis,
+  AND the new phenomenon machine-checked: **`resonance_protects_coherence`** — a resonant
+  environment mode (`h_n−h_m = −(a_n−a_m)b_k`, `w_k > 0`) leaves a nonvanishing time-averaged
+  coherence (the decoherence-free-subspace witness: pointer bases are NOT generic under
+  competition). (ii) the NON-COMMUTING qubit model, EXACTLY SOLVABLE via the anticommuting-pair
+  trick: `H = σ_x⊗1 + λ·σ_z⊗σ_z` has `H² = (1+λ²)·1`, so `U_t = cos(ωt)·1 − i(sin(ωt)/ω)·H`
+  in closed form (`ω = √(1+λ²)`) — **`records_not_invariant`** (the free part rotates records:
+  einselection under competition is a REGIME, not an identity) and **`zeno_strong_coupling`**
+  (as `λ → ∞` the reduced dynamics converges to record-preserving dephasing, deviation `O(1/λ)`
+  — the quantum-Zeno/strong-coupling regime as a theorem).
+- **D4a — `BulkRelaxation.lean`** (the statics→dynamics rung, honestly scoped):
+  **`area_conserved_along_relaxation`** — the record ledger (diagonal data) is `Tsem`-invariant
+  and every held area/count functional is a function of the ledger, so THE EMERGENT GEOMETRY IS
+  THE CONSERVED CHARGE OF BOUNDARY DECOHERENCE (the bulk metric constant while coherences decay
+  exponentially — equilibria-are-geometry upgraded to a conservation law along the approach);
+  the abstract metric-trajectory packaging `h(s) := reconstruct(areaData s)` (held E2 decoder,
+  linearity/uniqueness); the free-flow contrast (coherent parameters rotate — the graviton wave
+  through the emergence map, Q4 cited).
+- **D2a — the Δ-smoothing attempt** (the Kaplansky escape; CONSULT-GATED, checkpoint-early
+  permitted): GPT-5.5 design consult on the RvD smoothing route in the tower setting (spectral
+  compressions of Δ via the held resolvent borelFC), then ONE brick attempt; expected outcome a
+  characterized narrowing of the Kaplansky gap, full closure a stretch.
+- D3a (the conjecture's first continuum rung) = the named follow-on campaign, consult-first.
+- Discipline unchanged: one bg fable subagent per brick, independent verification, AxiomAudit
+  pins, full budget check, checkpoint at genuine walls; commits now PUSHED (authorization
+  standing, 2026-07-11).
+
 ## HONEST scope firewall (binding)
 
 This file plans; it claims nothing. Every "held" item above carries its original conditions
