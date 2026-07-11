@@ -151,10 +151,14 @@ such in any proof assistant:
 - **Non-traciality (N1–N4):** the tower vacuum is a **genuine non-tracial KMS state** — ω not a
   trace, **Δ ≠ 1**, Δ^{it}=towerFlow ≠ id (the Powers "not-the-tracial-case" separation).
 - **KMS-boundary capstone (C1):** `modular_data_complete_witness` bundles the full data (S̄, Δ,
-  Δ†=Δ, Δ^{it}=flow, Tomita I, J, polar-on-core, Tomita II inclusion, non-traciality, KMS-boundary).
+  Δ†=Δ, Δ^{it}=flow, Tomita I, J, polar-on-core, Tomita II, non-traciality, KMS-boundary).
+- **Tomita II in FULL — the RvD wall has fallen (D2a, 2026-07-11):** the commutation theorem
+  **J M J = M′** (full equality, not just the ⊆ inclusion) is now proved — `tomita_commutation_equality`
+  / `jconj_image_eq_commutant`, with Ω cyclic + separating for BOTH M and M′; the earlier "Kaplansky-gap"
+  obstruction was an artifact, closed by a classical right-boundedness estimate. The tower now carries the
+  **complete both-halves Tomita–Takesaki commutation theorem — the first in any proof assistant.**
 
-**HAVE NOT (honest scope, binding for public copy):** the reverse inclusion / full equality
-**J M J = M′** is Tomita's *hard* half (the named RvD route, NOT proved); no unbounded Δ^{1/2};
+**HAVE NOT (honest scope, binding for public copy):** no unbounded Δ^{1/2};
 no strip-analyticity KMS; **NO type classification** ("not the tracial case" is *not* "not type II"
 as an algebra statement; type III / S-invariant stays cited — Mathlib has no type API); finite-stage
 Gibbs inductive-limit only. Website world-firsts list carries items for the modular conjugation and

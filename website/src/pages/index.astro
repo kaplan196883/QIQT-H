@@ -110,7 +110,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <ul style="margin:.2rem 0 0;padding-left:1.3rem;line-height:1.55;font-size:1.05rem">
         <li>The <strong>von Neumann double-commutant theorem</strong> (A″ = SOT = WOT closure — a Mathlib gap, closed).</li>
         <li>An <strong>unbounded Stone theorem and spectral machinery beyond Mathlib</strong> — the PVM spectral theorem, bounded Borel functional calculus, and Stone-generator reconstruction.</li>
-        <li><strong><code>towerLimitVN</code></strong> — the GNS inductive-limit von Neumann algebra whose <strong>Tomita–Takesaki modular theory is now complete, the first in any proof assistant</strong>: the modular operator Δ, the group Δ<sup>it</sup>, and the conjugation J with the polar decomposition S̄ = J∘Δ<sup>½</sup>, both halves of Tomita's theorem (Δ<sup>it</sup> M Δ<sup>−it</sup> = M and J M J ⊆ M′), and a genuine non-tracial KMS state (Δ ≠ 1).</li>
+        <li><strong><code>towerLimitVN</code></strong> — the GNS inductive-limit von Neumann algebra whose <strong>Tomita–Takesaki modular theory is now complete, the first in any proof assistant</strong>: the modular operator Δ, the group Δ<sup>it</sup>, and the conjugation J with the polar decomposition S̄ = J∘Δ<sup>½</sup>, both halves of Tomita's theorem <strong>in full</strong> (Δ<sup>it</sup> M Δ<sup>−it</sup> = M and the commutation theorem J M J = M′), and a genuine non-tracial KMS state (Δ ≠ 1).</li>
         <li>The <strong>holographic count as a theorem</strong> (S = Σ log D = A/4G, finite branch), and the <strong>Araki–Woods III₁ fingerprint</strong> of the capacity code tower (first machine contact with the Type III₁ wall).</li>
         <li><strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).</li>
       </ul>
@@ -278,12 +278,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         <p>The record side is now a machine-checked dissipative dynamics, not a static ledger: a dephasing
           semigroup makes <strong>records form</strong> (every state converges to its record readout —
           decoherence as a theorem); the <strong>pointer basis emerges from the interaction coupling</strong>
-          (einselection <em>derived</em>, at the time-averaged level); and the channel is the λ-average of a jump
-          process whose <strong>Born weights are forced</strong> — <em>any</em> record-diagonal unraveling must
-          use exactly the Born weights (a finite answer to the circularity worry). So λ gets a concrete
-          realization: the jump time + selected record, one sample path = one actual world. <em>Scope:
-          time-averaged (finite environments recur); the coupling data are inputs; Born forced <em>given</em> the
-          channel, not ab initio (P5 not eliminated); finite, linearized, flat — not QG.</em></p>
+          (einselection <em>derived</em>, at the time-averaged level; and under a competing self-Hamiltonian the
+          two failure modes — resonance protection and Zeno rotation — are exactly solved); the channel is the
+          λ-average of a jump process whose <strong>Born weights are forced</strong> — <em>any</em> record-diagonal
+          unraveling must use exactly the Born weights (a finite answer to the circularity worry), so λ gets a
+          concrete realization: the jump time + selected record, one sample path = one actual world. And the
+          <strong>emergent geometry is the conserved charge</strong> of this relaxation — the first machine-checked
+          <em>dynamical</em> bulk–boundary statement (boundary decoherence forgets everything except the geometry;
+          it does not move the bulk metric). <em>Scope: time-averaged (finite environments recur); coupling data
+          are inputs; Born forced <em>given</em> the channel, not ab initio (P5 not eliminated); conservation, not
+          generation (no bulk EOM); finite, linearized, flat — not QG.</em></p>
         <span class="arrow">The theory →</span></a>
     </div>
   </div></section>
@@ -509,17 +513,19 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           operators; the generator of the physics IS the generator of Δ^it; and Δ^it implements
           the modular automorphisms and preserves the limit von Neumann algebra (honestly
           scoped: finite-stage Gibbs inductive-limit; no strip-KMS, no type).</li>
-        <li><strong>The modular conjugation J, and Tomita's theorem — second half (inclusion) — for an
-          inductive-limit state</strong> — <code>towerJ</code>, the σ-semilinear completion of
+        <li><strong>The modular conjugation J, and Tomita's theorem second half <em>in full</em> — J M J = M′ — for
+          an inductive-limit state</strong> — <code>towerJ</code>, the σ-semilinear completion of
           jStage&nbsp;a&nbsp;=&nbsp;√ρ·aᴴ·√ρ⁻¹ (no ℝ-reduction), a genuine involutive <strong>anti-unitary</strong>
           fixing Ω (J²&nbsp;=&nbsp;1, JΩ&nbsp;=&nbsp;Ω, ⟪Jξ,Jη⟫&nbsp;=&nbsp;⟪η,ξ⟫); the <strong>polar decomposition
-          on the core</strong> S̄&nbsp;=&nbsp;J∘Δ<sup>½</sup> (and F&nbsp;=&nbsp;Δ<sup>½</sup>∘J); commutation with
-          the modular group JΔ<sup>it</sup>&nbsp;=&nbsp;Δ<sup>it</sup>J; and J conjugating left into right
-          multiplication (J&nbsp;π(a)&nbsp;J&nbsp;=&nbsp;R<sub>jStage a</sub>) to give
-          <strong>J·towerLimitVN·J&nbsp;⊆&nbsp;towerLimitVN′</strong> with Ω separating for M′ — Tomita's theorem
-          second half in inclusion form. <em>Honestly scoped: the reverse inclusion / full equality
-          J&nbsp;M&nbsp;J&nbsp;=&nbsp;M′ is Tomita's hard half (the named RvD route); no unbounded Δ<sup>½</sup>;
-          finite-stage inductive-limit; no type.</em></li>
+          on the core</strong> S̄&nbsp;=&nbsp;J∘Δ<sup>½</sup>; commutation with the modular group
+          JΔ<sup>it</sup>&nbsp;=&nbsp;Δ<sup>it</sup>J; and J conjugating left into right multiplication — giving the
+          <strong>full commutation theorem J·towerLimitVN·J&nbsp;=&nbsp;towerLimitVN′</strong>
+          (<code>tomita_commutation_equality</code>), with Ω cyclic&nbsp;+&nbsp;separating for <em>both</em> M and M′.
+          <strong>The Rieffel–Van&nbsp;Daele "hard half" wall has fallen</strong> — the earlier Kaplansky-gap
+          obstruction was an artifact, closed by a classical right-boundedness estimate. So the tower now carries the
+          <strong>complete both-halves Tomita–Takesaki commutation theorem — the first in any proof assistant</strong>.
+          <em>Honest boundary (never crossed): no strip-analyticity KMS; no type classification (Mathlib has no
+          trace/factor/type API); finite-stage Gibbs inductive-limit only.</em></li>
         <li><strong>A genuine non-tracial KMS state for an inductive-limit von Neumann algebra (Δ&nbsp;≠&nbsp;1) —
           the tower's Tomita–Takesaki modular theory complete</strong> — the tower vacuum vector state is provably
           <em>not</em> a trace (⟪Ω, π(E<sub>nm</sub>)π(E<sub>mn</sub>)Ω⟫&nbsp;=&nbsp;w<sub>n</sub>&nbsp;≠&nbsp;w<sub>m</sub>),
