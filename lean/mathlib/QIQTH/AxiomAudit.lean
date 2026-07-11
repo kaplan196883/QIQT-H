@@ -11024,5 +11024,37 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.commutant_orbit_approx
 #print axioms QIQTH.TowerGNS.commutant_orbit_tendsto
 #print axioms QIQTH.TowerGNS.commutantSymbol_gnsNorm_le
+-- PointerCompetition.lean — DUALITY CAMPAIGN brick D1a (2026-07-11, DUALITY_ROADMAP.md):
+-- EINSELECTION WITH COMPETITION [H_S, A] ≠ 0 — the resonance caveat, the rotating-records witness,
+-- and the quantitative Zeno regime.  COMMUTING LAYER (general ι,κ, H_S = diag h): the exact
+-- solution reducedC_entry with the FOLDED frequency ν_{nmk} = (h n − h m) + (a n − a m)b k;
+-- einselection SURVIVES under the shifted resolution hypothesis (timeAvg_reducedC_tendsto_dephase);
+-- ★ THE RESONANCE THEOREM resonance_protects_coherence — the time-averaged decoherence factor
+-- converges to the RESONANT WEIGHT (Σ of w_k over ν_{nmk} = 0 modes), so a resonant system
+-- spectrum leaves a NONVANISHING time-averaged coherence (resonant_coherence_survives,
+-- two_mode_resonance): pointer bases are NOT generic under competition — the machine-checked
+-- decoherence-free-subspace witness.  NON-COMMUTING QUBIT, EXACTLY SOLVED: Hq λ = σ_x⊗1 + λσ_z⊗σ_z
+-- anticommuting pair ⟹ Hq² = (1+λ²)•1 (Hq_sq) ⟹ closed form Uq = cos(ωt)•1 − i(sin(ωt)/ω)•Hq,
+-- unitary, with THE SCHRÖDINGER CERTIFICATION Uq_entry_hasDerivAt (dU/dt = −iHU entrywise — no
+-- Matrix.exp).  THE EXACT RECORD POPULATION reducedQ_record_population = 1 − sin²(ωt)/(1+λ²);
+-- ★ records_not_invariant (EVERY λ: at t = (π/2)/ω the population < 1 — einselection under
+-- competition is a REGIME, not an identity: the free Hamiltonian rotates records);
+-- ★ record_deviation_le (deviation ≤ 1/(1+λ²) UNIFORMLY IN TIME) + zeno_strong_coupling (λ → ∞
+-- along ANY time path restores the record — the quantitative Zeno regime).  With IC1: the record
+-- basis emerges from the coupling WHEN the coupling dominates; resonance + rotation are the two
+-- machine-checked failure modes.  HONEST: non-commuting stratum is qubit⊗qubit (general
+-- [H_S,A] ≠ 0 has no closed form — CITED frontier); commuting layer diagonal-H_S only; Cesàro
+-- statements inherit gate-C finite-recurrence honesty (CITED); h/a/b/w/λ model INPUTS; no
+-- Lindblad/weak-coupling derivation (different regime, cited); finite corner; NOT bulk
+-- reconstruction, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.PointerCompetition.reducedC_entry
+#print axioms QIQTH.PointerCompetition.timeAvg_reducedC_tendsto_dephase
+#print axioms QIQTH.PointerCompetition.resonance_protects_coherence
+#print axioms QIQTH.PointerCompetition.resonant_coherence_survives
+#print axioms QIQTH.PointerCompetition.Uq_entry_hasDerivAt
+#print axioms QIQTH.PointerCompetition.reducedQ_record_population
+#print axioms QIQTH.PointerCompetition.records_not_invariant
+#print axioms QIQTH.PointerCompetition.record_deviation_le
+#print axioms QIQTH.PointerCompetition.zeno_strong_coupling
 
 end QIQTH.AxiomAudit

@@ -754,6 +754,7 @@ import QIQTH.RecordChannel
 import QIQTH.RecordEquilibrium
 import QIQTH.RecordUnraveling
 import QIQTH.InteractingChannel
+import QIQTH.PointerCompetition
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
