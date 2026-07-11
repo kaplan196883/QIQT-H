@@ -60,6 +60,25 @@ approximation); the eigenbasis method. Deliverables, in rising difficulty:
    finite-dimensional stages; the eigenbasis is explicit), take it; otherwise CHECKPOINT with
    (1)–(3) + the wall named precisely: "J M J = M′ up to the norm-control (Kaplansky) gap."
 
+## LA2 — `TowerGNS/Factor.lean` (2026-07-12): FACTORIALITY + THE FULL MODULAR SPECTRUM
+The type-III₁ rung, scoped honestly. With the commutation equality in hand:
+- **Mirrored right-bimodularity**: V_C is invariant under the ⋆-closed right stage action ⟹ P_C
+  commutes with the right multiplications (the C1 engine, mirrored).
+- **FACTORIALITY** (`towerLimitVN_factor` / `center_trivial`): for central T ∈ M ∩ M′, the
+  compressed symbol satisfies `germ(a·b_C) = germ(b_C·a)` for every stage element a (left chase via
+  left-bimodularity + T ∈ M′; right chase via right-bimodularity + T ∈ M = (M′)′ commuting with the
+  right multiplications) ⟹ b_C central in the stage matrix algebra ⟹ `b_C = λ_C·1` ⟹
+  `P_C(TΩ) = λ_C·Ω → TΩ ∈ ℂ·Ω` ⟹ `T = λ·1` (Ω separating). **The tower limit is a FACTOR.**
+- **THE FULL MODULAR SPECTRUM** (`spectrum_towerModularOp_eq_Ici` under the T3 two-frequency
+  irrational-ratio hypothesis): the matrix-unit eigenvectors give Δ point spectrum = the Gibbs
+  ratio set; T2/T3 Kronecker density ⟹ dense in (0,∞); spectrum closed + Δ ≥ 0 ⟹
+  `spec Δ = [0,∞)`. **The operator-level III₁ signature**: a factor whose modular spectrum for the
+  tower state is ALL of [0,∞).
+- HONEST CEILING: the Connes S-invariant proper (the infimum over ALL faithful normal states) and
+  the type classification machinery stay ABSENT/CITED (Connes 1973) — this brick upgrades the T3
+  ARITHMETIC fingerprint to an OPERATOR-SPECTRUM statement on a FACTOR, the strongest honest
+  III₁-adjacent claim without a type API.
+
 ## HONEST scope firewall (binding)
 
 No strip-KMS, no type/S-invariant/ITPFI/III₁ (Araki–Woods/Connes stay cited), no claim of the full
