@@ -120,10 +120,11 @@ The current-HEAD raw counts are **5,244 theorem/lemma declarations, 490 `.lean` 
 `#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-10). The inventory's
 §0 meta-counts **lag the loop** and should be refreshed. When aligning public copy, the theorem/file
 counts are authoritative from the grep above — NOT from the inventory snapshot. The website landing
-now reads "over 5,000 / **40** world-firsts" (the 40th first = the machine-checked
+now reads "over 5,000 / **41** world-firsts" (the 40th first = the machine-checked
 Gromov–Hausdorff limits of graph geodesics to *curved* metric spaces — the cone with
 curvature-as-a-theorem and the smooth sphere — and the same family decoded from the abstract state;
-`sphereGrid_toGHSpace_tendsto_sphere`, `polarGrid_toGHSpace_tendsto_cone`, `cone_no_isometric_embedding_into_inner`);
+`sphereGrid_toGHSpace_tendsto_sphere`, `polarGrid_toGHSpace_tendsto_cone`, `cone_no_isometric_embedding_into_inner`;
+the 41st = Williamson's symplectic normal form unconditional, `youla_pairing`, a Mathlib-first);
 "over 5,000 theorems across ~490 files" is the current phrasing. New this recount (2026-07-10): the
 "space from the state" emergent-geometry program (§6 of the inventory) — GH limits to interval / cube
 ∀d / flat torus / circle / tripod / cone / sphere, decoded from Bell cut-rank profiles, plus the

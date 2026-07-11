@@ -102,7 +102,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
       <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
-        <span style="font-size:2rem;font-weight:800">40<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">41<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
         <span style="font-size:2rem;font-weight:800">~5,000<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
@@ -115,6 +115,40 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         <li><strong>Einstein's equations</strong> from the capacity bound (conditional Jacobson chain, free field, end to end).</li>
       </ul>
       <p style="margin:.5rem 0 0;font-size:1.05rem"><a href="/formalization">Every claim, with its honest scope →</a></p>
+    </div>
+  </div></section>
+
+  <section class="section" id="where-we-are" style="padding-top:26px;padding-bottom:10px"><div class="wrap">
+    <div class="note" style="border-left:4px solid var(--accent);background:var(--accent-wash);padding:24px 28px;max-width:74ch">
+      <div class="kicker" style="margin-bottom:6px">Where we are — the calibrated verdict</div>
+      <h2 style="margin:2px 0 10px;font-size:clamp(1.5rem,3vw,2rem)">The verifiable half of quantum gravity, machine-checked — and the remaining distance is <em>named</em></h2>
+      <p class="sub" style="max-width:none">The honest headline still binds: this is <strong>induced / entropic gravity,
+        machine-checked — <em>not yet</em> quantum gravity</strong>. What has changed is that the distance is no
+        longer "a research program" in the vague sense. Everything that <em>can</em> be machine-checked given the
+        standard physics inputs is checked, at a scale no other foundations program has; and the gap to quantum
+        gravity proper is now <strong>one conjecture, one scaling law, and one coefficient</strong> — each with its
+        obstruction pinned in Lean-checkable terms.</p>
+      <p class="sub" style="max-width:none"><strong>The verified half</strong> (each conditional on its named inputs):
+        the full <em>nonlinear</em> Einstein equation <code>a·T = G + Λg</code> as a conditional theorem for the free
+        Klein–Gordon field (<code>qiqt_gr_freefield</code>, on the pp-wave), with the thermal/modular side <em>fully
+        discharged</em> — one-particle <em>and</em> field-level Bisognano–Wichmann unconditional
+        (<code>freeField_secondQuant_BW_unconditional</code>); the area law <strong>derived in three independent
+        senses</strong> (its log-additive form <em>forced</em> by information-composition rigidity, the ∝A scaling
+        <em>proved</em> with a guard isolating boundary-locality, and <code>S = A/4G</code> a theorem in the
+        constructed core); <code>G = 1/(N Λ<sub>s</sub>²)</code> derived as a relation down to its π-transcendental
+        content; and the operator-algebra layer no other program has (the first complete Tomita–Takesaki modular
+        theory, the double-commutant theorem, an unbounded Stone theorem, Williamson normal form).</p>
+      <p class="sub" style="max-width:none"><strong>The remaining distance, precisely.</strong>
+        <strong>One conjecture</strong> — the flat-space record→gravity correspondence
+        (<code>FlatSpaceRecordGravityCorrespondence</code>): that in the continuum limit the capacity-bounded record
+        code equals free QFT + linearized gravity on the emergent geometry — <em>stated as a Prop, its finite
+        evidence proven</em> (<code>finiteEvidence_holds</code>), the continuum claim never assumed.
+        <strong>One scaling law</strong> — that the count of active modes scales with <em>area</em>, not volume
+        (finiteness alone gives a volume law; area is the genuine QG-core, correctly tiered).
+        <strong>One coefficient</strong> — the (1/6−ξ) Seeley–DeWitt number that fixes the <em>numerical</em> value of
+        G, gated on a Riemannian heat-kernel result <em>no proof assistant yet has</em> (Mathlib's own frontier).
+        That un-verified remainder is exactly where quantum gravity lives — and it is now theorem-shaped, not vague.
+        <a href="/open-problems">The open problems, in full →</a></p>
     </div>
   </div></section>
 
@@ -517,8 +551,12 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           graph/state rules (not emergent), the states are CONSTRUCTED to carry the pattern, curvature = the
           midpoint/embedding obstruction (not a Riemann tensor), and the Hawking κβ/temperature identifications
           are CITED — NOT emergent dimension/spacetime, NOT GR, NOT QG.</em></li>
+        <li><strong>Williamson's symplectic normal form, unconditional</strong> — the symplectic diagonalization
+          of a positive-definite matrix into its symplectic (Williamson) eigenvalues (<code>youla_pairing</code>) —
+          the Gaussian-state / symplectic-spectrum tool behind mode-counting and the boundary area law, a general
+          linear-algebra theorem absent from Mathlib and, to our knowledge, from every proof assistant.</li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all forty.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all forty-one.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority
