@@ -65,9 +65,11 @@ line drawn where the roadmap draws it.
 5. **Interacting matter** (SM/YM — contains a Clay problem) and the CPSUV escape for interacting
    matter (open, ~10–20%).
 6. **The operator-algebra tail:** Type II dual-weight vN extension; ~~JMJ = M′ past the Kaplansky
-   gap~~ **CLOSED 2026-07-11** (`94d285f7` — the gap was an artifact; `tomita_commutation_equality`
-   completes the full both-halves Tomita theorem, the first in any proof assistant); Type III₁
-   classification (no type API in any proof assistant) — now the ONLY item on this ladder.
+   gap~~ **CLOSED 2026-07-11** (`94d285f7` — the full both-halves Tomita theorem, the first in any
+   proof assistant); ~~factoriality + modular spectrum~~ **CLOSED 2026-07-12** (`e3f4a757` LA2:
+   the tower limit is a FACTOR with σ((1+Δ)⁻¹) = [0,1] exactly — the operator-level III₁
+   SIGNATURE, hypothesis-free √2 instance). Remaining on this ladder: ONLY the Connes S-invariant /
+   type classification proper (needs a type API absent from every proof assistant).
 7. λ's dynamical Lorentz-covariant law; the OP3b continuum Poincaré net; the 4D
    background-independent manifold.
 

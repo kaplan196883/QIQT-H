@@ -69,9 +69,16 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `tomita_commutation_equality` / `jconj_image_eq_commutant` / `(JMJ)′ = M` / Ω cyclic+separating
   for BOTH M and M′; LA1′'s "Kaplansky gap" was an ARTIFACT — the classical right-boundedness
   estimate closes it, see the commutation-corridor block). The tower now carries the COMPLETE
-  both-halves Tomita–Takesaki commutation theorem — the first in any proof assistant. HONEST
-  BOUNDARY (never crossed): no strip-analyticity KMS, no type classification
-  (Mathlib has no trace/factor/type API); finite-stage Gibbs inductive-limit only — the free-field/Type-III continuum
+  both-halves Tomita–Takesaki commutation theorem — the first in any proof assistant.
+  **★★★ UPDATE 2026-07-12 (LA2, `e3f4a757`, `TowerGNS/Factor.lean`): THE TOWER LIMIT IS A FACTOR
+  with the FULL MODULAR SPECTRUM** — `towerLimitVN_factor` (center = ℂ·1, via the central-symbol
+  chase over the commutation equality), `spectrum_towerResolvent_eq_Icc` (σ_ℝ((1+Δ)⁻¹) = [0,1]
+  EXACTLY), `modular_spectrum_full` (closure of the modular point spectrum = [0,∞)), capstones
+  `operator_level_III1_signature` + the hypothesis-free `_sqrtTwo` instance — **the operator-level
+  type-III₁ SIGNATURE**: a factor, non-tracial, full modular spectrum for the tower state. HONEST
+  BOUNDARY (never crossed): the Connes S-invariant proper (inf over ALL faithful normal states) and
+  the type classification stay ABSENT/CITED; no strip-analyticity KMS;
+  finite-stage Gibbs inductive-limit only — the free-field/Type-III continuum
   is the named pivot. NOTE: this session's commits (J1–J9, N1–N4, KMS C1, four campaign plans) are **local-only**
   pending push authorization; paper/website last synced at the 36th first (J + non-traciality + KMS = pending firsts 37–39).
 - **What "axiom-free" means here:** the *conditional/structural mathematics* rests on no hidden axiom. It does

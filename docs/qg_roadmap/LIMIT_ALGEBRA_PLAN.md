@@ -60,6 +60,15 @@ approximation); the eigenbasis method. Deliverables, in rising difficulty:
    finite-dimensional stages; the eigenbasis is explicit), take it; otherwise CHECKPOINT with
    (1)–(3) + the wall named precisely: "J M J = M′ up to the norm-control (Kaplansky) gap."
 
+## ★★★ LA2 STATUS: LANDED FULL, BOTH PARTS (2026-07-12, `e3f4a757`, spectrum strategy α EXACT)
+`towerLimitVN_factor` (THE TOWER LIMIT IS A FACTOR — center = ℂ·1, the central-symbol chase with
+the λ-constancy trick), `spectrum_towerResolvent_eq_Icc` (σ_ℝ((1+Δ)⁻¹) = [0,1] EXACTLY),
+`modular_spectrum_full` (closure of the modular point spectrum = [0,∞)), and the capstones
+`operator_level_III1_signature` + the HYPOTHESIS-FREE `operator_level_III1_signature_sqrtTwo`.
+The limit-algebra ladder now ends at exactly ONE item: the Connes S-invariant / type
+classification proper (the infimum over ALL faithful normal states — needs a type API absent from
+every proof assistant; Araki–Woods/Connes cited).
+
 ## LA2 — `TowerGNS/Factor.lean` (2026-07-12): FACTORIALITY + THE FULL MODULAR SPECTRUM
 The type-III₁ rung, scoped honestly. With the commutation equality in hand:
 - **Mirrored right-bimodularity**: V_C is invariant under the ⋆-closed right stage action ⟹ P_C

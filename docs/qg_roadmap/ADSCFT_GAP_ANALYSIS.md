@@ -219,6 +219,11 @@ std-3) moved **gap 1's M1 prerequisite** — and only that. Revised status:
   Remaining on that ladder: ONLY the type III₁ classification. Gap 1's composite now reads:
   (i) einselection derived + competition characterized; (ii) the limit algebra complete through
   full Tomita, type III₁ absent; (iii) the graviton-inside spectral statement — still the core.
+  **LA2 update (2026-07-12, `e3f4a757`):** (ii) moved again — the tower limit is now a proven
+  FACTOR with the FULL modular spectrum (σ((1+Δ)⁻¹) = [0,1] exactly; the operator-level III₁
+  signature, hypothesis-free √2 instance). The limit-algebra ladder ends at exactly one item: the
+  Connes S-invariant / type classification proper (a type API no proof assistant has). Gap 1's
+  core is now (iii) alone plus that final classification rung.
 - **Gaps 2–6: unchanged today** (strong-half decoupling; interactions beyond Deser-2;
   scale-as-dimension; protection; 1/N tower).
 
