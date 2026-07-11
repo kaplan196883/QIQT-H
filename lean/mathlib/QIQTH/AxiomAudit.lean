@@ -11116,5 +11116,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.jconj_image_eq_commutant
 #print axioms QIQTH.TowerGNS.rightLimitVN_commutant_eq
 #print axioms QIQTH.TowerGNS.dense_span_commutant_orbit_cyclicVec
+-- TowerGNS/Factor.lean — LIMIT ALGEBRA brick LA2 (2026-07-12, LIMIT_ALGEBRA_PLAN.md): ★★★ THE
+-- FACTOR + THE FULL MODULAR SPECTRUM — the operator-level type-III₁ SIGNATURE.  PART 1
+-- FACTORIALITY: mirrored right-bimodularity (starProjection_comm_towerRightMul — the C1 engine on
+-- the ⋆-closed right stage action, T0_4 adjoints); the CENTRAL-SYMBOL CHASE
+-- (central_symbol_commutes: germ(a·b_C) = germ(b_C·a) via left+right bimodularity + centrality) ⟹
+-- b_C central in the stage matrix algebra ⟹ b_C = λ·1 (stage_central_eq_smul_one, matrix units)
+-- with λ = ⟪Ω,TΩ⟫ CONSTANT ACROSS STAGES (the λ-constancy trick — no limits of scalars) ⟹
+-- TΩ = λΩ ⟹ T = λ•1 by Ω separating: ★ center_eq_scalar + mem_center_iff_exists_smul_one +
+-- ★★ towerLimitVN_factor (HasTrivialCenter — the honest IsFactor, no Mathlib factor API exists).
+-- PART 2 THE FULL MODULAR SPECTRUM (strategy α, EXACT, through the bounded resolvent): the Gibbs
+-- ratio eigenvalue engineering + T2 Kronecker density under the T3-shaped hypotheses (two
+-- frequencies, each realized on infinitely many modes, irrational ratio, β ≠ 0, D_k ≥ 2) ⟹
+-- dense_gibbsRatioExponents ⟹ ★ spectrum_towerResolvent_eq_Icc — σ_ℝ((1+Δ)⁻¹) = [0,1] EXACTLY —
+-- and the Δ-level reading ★ modular_spectrum_full (closure of the modular point spectrum = [0,∞)).
+-- ★★ operator_level_III1_signature: FACTOR ∧ Δ ≠ 1 (non-tracial) ∧ FULL modular spectrum — and the
+-- HYPOTHESIS-FREE instance operator_level_III1_signature_sqrtTwo (qubit tower, frequencies {1,√2},
+-- irrational_sqrt_two).  HONEST: the spectrum is for THE TOWER STATE's modular operator — a
+-- SIGNATURE, not the Connes S-invariant (the infimum over ALL faithful normal states) and not a
+-- type classification (no type API in any proof assistant; Araki–Woods 1968 / Connes 1973 CITED
+-- never invoked); finite-stage Gibbs inductive limit (ITPFI-type tower); the frequency data are
+-- model inputs (√2 instance hypothesis-free); no strip-KMS; NOT the strong holographic principle,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.TowerGNS.starProjection_comm_towerRightMul
+#print axioms QIQTH.TowerGNS.central_symbol_commutes
+#print axioms QIQTH.TowerGNS.center_eq_scalar
+#print axioms QIQTH.TowerGNS.towerLimitVN_factor
+#print axioms QIQTH.TowerGNS.dense_gibbsRatioExponents
+#print axioms QIQTH.TowerGNS.spectrum_towerResolvent_eq_Icc
+#print axioms QIQTH.TowerGNS.modular_spectrum_full
+#print axioms QIQTH.TowerGNS.operator_level_III1_signature
+#print axioms QIQTH.TowerGNS.operator_level_III1_signature_sqrtTwo
 
 end QIQTH.AxiomAudit

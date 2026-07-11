@@ -132,6 +132,7 @@ import QIQTH.TowerGNS.ConjImplements
 import QIQTH.TowerGNS.TomitaSecondHalf
 import QIQTH.TowerGNS.CommutationTheorem
 import QIQTH.TowerGNS.CommutationEquality
+import QIQTH.TowerGNS.Factor
 import QIQTH.LinearizedEinstein
 import QIQTH.MatterCoupling
 import QIQTH.WedgeBoostClausius
