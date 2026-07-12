@@ -29,7 +29,7 @@ QIQT-H's ontology is **Φ-monism**: there is one substance — the universal wav
 
 ## What is machine-checked
 
-Over **5,000 theorems across ~490 files**, axiom-free (Lean's standard three only; project axiom budget 0, CI-guarded). Formalization firsts — to our knowledge, in any proof assistant:
+Over **5,000 theorems across ~495 files**, axiom-free (Lean's standard three only; project axiom budget 0, CI-guarded). Formalization firsts — to our knowledge, in any proof assistant:
 
 - The **first complete Tomita–Takesaki modular theory** for an inductive-limit (GNS) state — the modular operator Δ, the flow Δ^it, the conjugation J with polar decomposition S̄ = J∘Δ^½, both halves of Tomita's theorem (Δ^it M Δ^−it = M and J M J ⊆ M′), and a genuine non-tracial KMS state.
 - An **unbounded Stone theorem** + PVM spectral theorem + bounded Borel functional calculus — beyond current Mathlib.
