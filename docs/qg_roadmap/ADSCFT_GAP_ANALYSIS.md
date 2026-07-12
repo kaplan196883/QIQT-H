@@ -219,6 +219,12 @@ std-3) moved **gap 1's M1 prerequisite** — and only that. Revised status:
   Remaining on that ladder: ONLY the type III₁ classification. Gap 1's composite now reads:
   (i) einselection derived + competition characterized; (ii) the limit algebra complete through
   full Tomita, type III₁ absent; (iii) the graviton-inside spectral statement — still the core.
+  **D3a update (2026-07-12, `7393d3af`): gap 2's strong half has its FIRST CONTACT** — the DY7
+  conjecture's first two terms (micro record entropy = one-loop continuum entropy) now touch:
+  the finite record-region entropy provably converges to the EXACT c = 1 continuum thermal
+  entropy π²/(3β) (`record_entropy_continuum_limit`; the Bose integral and the Riemann-sum
+  theorem both proved from scratch — Mathlib-gap items). The strong half's remaining content:
+  the conical/heat-kernel leg, induced-G, the β → 0 saturation bridge, the limit interchange.
   **LA2 update (2026-07-12, `e3f4a757`):** (ii) moved again — the tower limit is now a proven
   FACTOR with the FULL modular spectrum (σ((1+Δ)⁻¹) = [0,1] exactly; the operator-level III₁
   signature, hypothesis-free √2 instance). The limit-algebra ladder ends at exactly one item: the

@@ -1651,6 +1651,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   law, NOT a continuum stochastic process; finite single corner; linearized, free, flat; NOT bulk
   reconstruction, NOT the strong holographic principle, NOT QG.
 
+- **THE CONTINUUM ENTROPY RUNG, D3a — `QIQTH/ContinuumEntropy.lean`** (**[AF]** std-3, 36 decls,
+  `7393d3af`, 2026-07-12; duality campaign, GPT-5.5-consult-verified design): **THE FIRST
+  CONTINUUM RUNG of `FlatSpaceRecordGravityCorrespondence`** (DY7) — the conjecture's first two
+  terms (micro record entropy = one-loop continuum entropy) touch at their simplest genuine
+  contact point. The Planck kernel `sInf` GENUINELY tied to the held DS3 D → ∞ limit
+  (`tendsto_thermalEntropy_sInf` — a Tendsto, not a shape match); ★ **THE BOSE INTEGRAL**
+  `integral_sInf` — `∫₀^∞ s_∞ = π²/3` FROM SCRATCH (geometric + log series, Tonelli via
+  `lintegral_tsum`, BASEL `hasSum_zeta_two` — no dilogarithms; **absent from Mathlib**) + the
+  scaled `π²/(3β)`; ★ **the Riemann-sum convergence theorem** `riemann_sum_tendsto_integral`
+  (**also absent from Mathlib** — proved via Heine–Cantor + adjacent-interval splitting);
+  ★★ `record_entropy_continuum_limit` — the finite record-region entropy sums converge along
+  refining mode families to the EXACT c = 1 massless-boson thermal entropy `π²/(3β)` (density
+  `π/(3β)` per unit length at the `Δω = π/L` spacing, `entropy_density_form`). HONEST (binding):
+  the positive-temperature limit ONLY — no conical singularities/heat-kernel area coefficients,
+  no UV renormalization/induced G, no β → 0 saturation (the A/4G statement lives in the
+  finite-truncated model), the D → ∞/mode-density limit INTERCHANGE not addressed; 1D massless;
+  mode families are INPUTS; NOT the conjecture (its first rung), NOT QG.
+
 - **THE DECOUPLING SHADOW, DS1 — `QIQTH/Decoupling/TruncatedCCR.lean`** (**[AF]** std-3;
   `THE_DECOUPLING_SHADOW_PLAN.md` — the finite forced core of the dictionary, from the Maldacena
   primary-source lesson: two sides as surviving descriptions of ONE parent under ONE limit;
