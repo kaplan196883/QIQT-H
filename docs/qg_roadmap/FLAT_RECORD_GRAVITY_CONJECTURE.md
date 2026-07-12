@@ -115,3 +115,32 @@ physical inputs — the Gaussian one-loop determinant log Z = ½∫(dt/t)Tr K, t
 continuation n → 1, the curved-space heat-kernel coefficient a₁ = R/6, the SAME-regulator physical
 assumption, and the cutoff/temperature-frequency identification D_eff ~ 1/x. Each is a standard-QFT
 input; none is a QIQT-H-specific gap. The skeleton is proved; the Prop awaits those inputs.
+
+## The cited-inputs discharge program (turning the five physical inputs into finite theorems)
+
+The five cited inputs are not QIQT-H-specific, but each can be given a machine-checked FINITE-level
+theorem (the continuum/regularization tail staying cited). Progress:
+
+- **Input #1 — the Gaussian one-loop determinant: DISCHARGED AT THE FINITE LEVEL (G1 `2e286419`).**
+  `QIQTH/OneLoopDeterminant.lean` proves, axiom-free (std-3), the *subtracted proper-time*
+  representation of the one-loop determinant for a finite positive spectrum {λ_k}:
+  - `integral_frullani` (general `a,b>0`) / `integral_frullani_one` — the Frullani log-integral
+    `log(a/b) = ∫₀^∞ (e^{−bt} − e^{−at})/t dt`, via the inner FTC representation
+    `(e^{−bt}−e^{−at})/t = ∫_b^a e^{−st} ds` + a genuine Tonelli/Lebesgue swap, closed by
+    `∫₀^∞ e^{−st} = 1/s` and `∫_b^a 1/s = log(a/b)`;
+  - ★★ `log_specDet_eq_properTime` — `log det A = ∫₀^∞ (N e^{−t} − Tr e^{−tA})/t dt`, a GENUINE
+    convergent Lebesgue integral: the Frullani subtraction of `N e^{−t}` removes the `t → 0` UV
+    divergence of the raw `∫ Tr K dt/t`, which does **not** converge;
+  - `gaussianIntegral_diagonal` — `∫ e^{−½ Σ λ_k x_k²} = ∏ √(2π/λ_k)`;
+  - ★★ `gaussianLogZ_eq_properTime` + capstone `finite_one_loop_determinant` — the assembly
+    `log Z = (N/2) log(2π) − ½ ∫₀^∞ (N e^{−t} − Tr e^{−tA})/t dt`.
+
+  Firewall: FINITE diagonal spectrum only; the continuum functional determinant, ζ-regularization,
+  heat-kernel small-`t` asymptotics, and the arbitrary `Matrix.PosDef` Gaussian stay CITED. The raw
+  `½∫(dt/t)Tr K` is honestly noted as non-convergent — only the subtracted form is proved. This
+  discharges input #1 at the finite level; it is NOT the conjecture, NOT the strong principle, NOT QG.
+
+- **Inputs #2–#5** — the replica n → 1 continuation, the curved-space a₁ = R/6, the SAME-regulator
+  assumption, the cutoff identification D_eff ~ 1/x — remain cited. #2 and #5 are likely tractable as
+  finite modeling/interpolation statements (like D3c's `coneCoeff`); #3 (curved a₁ = R/6) is gated on
+  Mathlib's own Riemannian heat-kernel / Seeley–DeWitt frontier and is research-grade, not forced.

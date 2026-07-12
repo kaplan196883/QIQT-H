@@ -1601,6 +1601,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   inputs, none QIQT-H-specific. Integer cones + 1D massless free scalar; a matching of DIVERGENCES
   at the saturation corner; NOT the conjecture, NOT the strong holographic principle, NOT QG.
 
+- **THE CITED-INPUTS DISCHARGE PROGRAM, G1 — `QIQTH/OneLoopDeterminant.lean`** (**[AF]** std-3,
+  budget 0, 2026-07-12, commit `2e286419`). Turns the FIRST of the DY7 conjecture's five cited
+  physical inputs — the Gaussian one-loop determinant `log Z = ½∫(dt/t)Tr K` — into a machine-checked
+  theorem AT THE FINITE LEVEL, via the *subtracted proper-time (Frullani)* representation for a finite
+  positive spectrum {λ_k}: `integral_frullani`/`integral_frullani_one` (the Frullani log-integral
+  `log(a/b) = ∫₀^∞ (e^{−bt}−e^{−at})/t`, via the inner FTC representation + a genuine Tonelli swap;
+  the ENNReal `lintegral_lintegral_swap` route, no product-integrability needed); ★★
+  `log_specDet_eq_properTime` (`log det A = ∫₀^∞ (N e^{−t} − Tr e^{−tA})/t` — a genuine convergent
+  Lebesgue integral: the Frullani subtraction of `N e^{−t}` removes the `t → 0` UV divergence of the
+  raw `∫ Tr K dt/t`, which does NOT converge); `gaussianIntegral_diagonal` (`∫ e^{−½Σλx²} = ∏√(2π/λ)`,
+  Mathlib `integral_gaussian` × Fubini `integral_fintype_prod`); ★★ `gaussianLogZ_eq_properTime` +
+  capstone `finite_one_loop_determinant` (`log Z = (N/2)log(2π) − ½ log det A` in proper-time form).
+  ⚠ **HONEST (binding):** FINITE diagonal spectrum only; the continuum functional determinant,
+  ζ-regularization, heat-kernel small-`t` asymptotics, and the arbitrary `Matrix.PosDef` Gaussian stay
+  CITED. The raw `½∫(dt/t)Tr K` is honestly non-convergent — only the subtracted form is proved.
+  Discharges input #1 at the finite level; NOT the conjecture, NOT the strong principle, NOT QG.
+  Inputs #2–#5 (replica n→1, curved a₁=R/6, same-regulator, cutoff D_eff~1/x) remain cited — #3 is
+  Mathlib-Riemannian-heat-kernel-gated (research-grade).
+
 - **THE RECORD CHANNEL / BOUNDARY DYNAMICS, RC1–RC3 — `QIQTH/RecordChannel.lean` +
   `RecordEquilibrium.lean` + `RecordUnraveling.lean`** (**[AF]** std-3, budget 0, 2026-07-10; commits
   `73fd89c4`/`ef64ea39`/`a63c9b73`; `RC_CAMPAIGN_PLAN.md` + `BOUNDARY_DYNAMICS_CANDIDATES.md` —
