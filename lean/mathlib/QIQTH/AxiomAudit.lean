@@ -11175,5 +11175,33 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ContinuumEntropy.riemann_sum_tendsto_integral
 #print axioms QIQTH.ContinuumEntropy.entropyRiemannSum_tendsto
 #print axioms QIQTH.ContinuumEntropy.record_entropy_continuum_limit
+-- HeatKernelThermal.lean — DUALITY CAMPAIGN brick D3b (2026-07-12; GPT-5.5 consult-verified exact
+-- chain): THE HEAT-KERNEL REPRESENTATION of the 1D thermal boson — the conjecture's one-loop leg
+-- acquires its proper-time form.  proper_time_integral (∫₀^∞ t⁻²e^{−a²/4t} = 4/a², explicit
+-- antiderivative + FTC-on-Ioi); ★ heat_logZ_density — THE WINDING IDENTITY: the winding-subtracted
+-- one-loop heat-kernel sum on the thermal cylinder S¹_β × ℝ (image sum over windings of the held
+-- derived flat kernel (4πt)^{−1/2} × the Euclidean-time factor) = π/(6β) EXACTLY (termwise
+-- proper-time + held Basel); canonical_logZ_density (the Bose free energy −(1/π)∫log(1−e^{−βω}) =
+-- the SAME π/(6β)) + ★ windings_eq_canonical — ONE OBJECT, TWO DESCRIPTIONS at the thermodynamic
+-- level; the thermodynamic relations (hasDerivAt_logZ_density: E/L = π/(6β²);
+-- entropy_density_relation: S/L = π/(3β)); ★★ heat_kernel_entropy_eq_record_entropy +
+-- record_entropy_has_heat_kernel_form — THE D3a JOIN: π/(3β) IS the DOS-weighted record-code
+-- continuum entropy (1/π)∫₀^∞ sInf(βω)dω (held integral_sInf_scaled): THE DY7 CONJECTURE'S FIRST
+-- TWO TERMS NOW BOTH POSSESS THE SAME MACHINE-CHECKED HEAT-KERNEL FORM — the one-loop leg is no
+-- longer prose.  THE GUARD naive_winding_diverges: dropping the Euclidean-time factor gives the
+-- HARMONIC sum — machine-checked divergence (the correct cylinder trace REQUIRES the factor).
+-- HONEST (the consult's scope, binding): the SMOOTH thermal cylinder ONLY — the CONE (Sommerfeld
+-- formulas, conical coefficients, t → 0 UV control, renormalization of G) is CITED as the next
+-- rung, not built; the m = 0 vacuum/UV winding is removed BY CONSTRUCTION (the thermal piece is
+-- DEFINED as the nonzero-winding sum — an honest definition, not a derived renormalization); no
+-- induced-G leg, no β → 0 saturation, no limit interchange beyond what is proved; 1D massless;
+-- NOT the conjecture (its second rung), NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.HeatKernelThermal.proper_time_integral
+#print axioms QIQTH.HeatKernelThermal.heat_logZ_density
+#print axioms QIQTH.HeatKernelThermal.canonical_logZ_density
+#print axioms QIQTH.HeatKernelThermal.windings_eq_canonical
+#print axioms QIQTH.HeatKernelThermal.heat_kernel_entropy_eq_record_entropy
+#print axioms QIQTH.HeatKernelThermal.record_entropy_has_heat_kernel_form
+#print axioms QIQTH.HeatKernelThermal.naive_winding_diverges
 
 end QIQTH.AxiomAudit
