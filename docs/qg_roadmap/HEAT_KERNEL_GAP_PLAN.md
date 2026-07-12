@@ -76,16 +76,18 @@ so value lands upstream even if we never reach Phase 6.
   now-derived theorem; retire input #3 from cited to proved; feed the coefficient into the D5 warp and
   the D4 autonomous-EOM curvature content.
 
-## 4. The pragmatic unblock (the interface pattern — optional, available now)
+## 4. The pragmatic unblock (the interface pattern — BUILT 2026-07-13)
 
-The repo's established move for a cited analytic frontier is the **typeclass-interface + instance**
-pattern (as with `EntropyBridge → DonaldSystem`). We may, at any time, package the heat-kernel facts as
-a `SeeleyDeWittData` / `HeatKernelExpansion` **typeclass** carrying `a₀ = 1` and `a₁ = R/6 + tr E` as
-fields, restate the downstream theorems against the interface, and later discharge it with the Phase-5
-**instance**. This sharpens option (b): it names the assumption once, reusably, instead of an ad-hoc
-`PhysicalInputs` field — and makes the eventual Phase-7 discharge a single instance, not a refactor.
-**Not built yet**; noted as the clean bridge if downstream work wants a named interface before Phase 5
-lands.
+The repo's established move for a cited analytic frontier is the **structure/typeclass-interface +
+instance** pattern (as with `EntropyBridge → DonaldSystem`). This is now **built**
+(`QIQTH/SeeleyDeWittInterface.lean`, commit `9dc0ad19`, axiom-free): `SeeleyDeWittData` names the
+heat-kernel facts `a₀ = 1`, `a₁ = R/6 + tr E` as structure fields (never a Lean `axiom`);
+`a1_eq_scalarA1_of_minimal` bridges the minimal-scalar case to G3's `scalarA1 0 R` form;
+`physicalInputs_of_seeleyDeWitt` sources G3's input #3 **from the interface**; and
+`flatSpaceCorrespondence_of_seeleyDeWitt` restates the conditional correspondence with its `a₁` input
+now an interface field. This **is option (b)** in its clean form: the assumption is named once,
+reusably, instead of an ad-hoc `PhysicalInputs` field — so the eventual **Phase-7 discharge is a single
+instance** (a `SeeleyDeWittData` built from the derived Phase-5 coefficient), not a refactor.
 
 ## 5. Honest scale + the operative stance
 
