@@ -74,3 +74,18 @@ cosecant sum Σ csc²(πk/n) = (n²−1)/3, is a Mathlib-first. HONEST: integer 
 analytic continuation, the general-angle Sommerfeld kernel, the one-loop determinant + UV
 regularization, and the A/4G coupling all CITED — the last is the D3d rung (design recorded, the
 Susskind–Uglum counterterm identity).
+
+## THE FOURTH RUNG (A/4G COUPLING) — LANDED (2026-07-12, `0aa98ee3`, `ConicalSakharov.lean`)
+The conical coefficient now couples to Newton's constant: the exact algebraic Susskind–Uglum
+content is machine-checked — the divergent one-loop entanglement entropy S_ent = (A/4)·δ(1/G)
+equals the area times the induced-1/G counterterm (`ent_eq_area_quarter_dInvG`), so entanglement
+entropy IS the counterterm renormalizing 1/G (`bare_entropy_renormalizes`), and the induced-only
+reading gives 4·G_ind·S_ent = A cutoff-INDEPENDENTLY (`induced_product`, holds at every finite
+cutoff, ε → 0 never taken). The D=4 specialization reproduces the held Sakharov ratio
+1/48π = (1/4)(1/12π) (`sakharov_ratio_join`, formal re-export); D=2 gives the c/6 log. Both joins
+(D3c's 1/6, the held Sakharov ratio) are FORMAL imports. HONEST: a REGULATED counterterm identity
+with the cutoff carried explicit — CITED: the Gaussian determinant, the replica identity, the
+n → 1 continuation, a₁ = R/6, the SAME-regulator physical assumption. The conjecture's
+'micro entropy = A/4G_ind' now has its exact one-loop-counterterm SKELETON machine-checked;
+the full `FlatSpaceRecordGravityCorrespondence` Prop (with those cited physical inputs discharged)
+remains open.
