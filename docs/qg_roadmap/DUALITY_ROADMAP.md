@@ -96,6 +96,22 @@ and the third is already written down with its finite half proven.
 - **D3a:** the first continuum rung of `FlatSpaceRecordGravityCorrespondence` (scope with a
   design consult; the conjecture's finite evidence names the shape).
 
+## ★ THE LEDGER AS OF 2026-07-12 (post D1a/D4a/D2a/LA2/D3a) — the six pieces, current status
+
+| Piece | Status | What landed / what remains |
+|---|---|---|
+| **D1 — interacting boundary Hamiltonian** | 🟢 derived + characterized at the solvable level | IC1: einselection derived (Cesàro); D1a: the resonance/DFS theorem + rotating-records witness + quantitative Zeno — the two failure modes and the recovery regime machine-checked. *Remains:* a general (non-solvable) interacting model — research-grade, honestly cited. |
+| **D2 — the limit theory (N → ∞ slot)** | 🟢 complete up to the type API | The full both-halves Tomita theorem (D2a — Kaplansky gap was an artifact); LA2: FACTOR + full modular spectrum (σ((1+Δ)⁻¹) = [0,1] exact; hypothesis-free √2 III₁ signature). *Remains:* the Connes S-invariant/type classification proper — an ecosystem type-API gap, not a proof gap. |
+| **D3 — strong decoupling (THE duality theorem)** | 🟡 first rung landed | D3a: the conjecture's first two terms TOUCH — finite record entropy → the exact c = 1 continuum thermal entropy π²/(3β) (Bose integral + Riemann-sum theorem from scratch, both Mathlib-gaps). *Remains (the core):* the heat-kernel/conical leg (D3b, the consult's named next rung), induced-G, the β → 0 saturation bridge, the limit interchange. |
+| **D4 — bulk dynamics from boundary dynamics** | 🟡 conservation half landed | D4a: geometry = the conserved charge of boundary decoherence; frozen bulk metric — the first dynamical bulk–boundary statement. *Remains:* GENERATION — a bulk equation of motion from boundary evolution; backreaction. |
+| **D5 — the radial dimension** | ⚪ substrate only | Exact RT unconditional; refinement tower with rigid invariant. *Remains:* the scale-as-dimension theorem. |
+| **D6 — protection** | ⚪ absent | *Remains:* everything; deepest blocker (the (1/6−ξ) coefficient) is gated on Mathlib's own Riemannian frontier. |
+
+**The critical path D1 → D2 → D3 now reads: two links effectively forged, the third begun.** The
+remaining distance to "duality" concentrates in D3's conical/induced-gravity legs (genuine research
+mathematics), the D3 limit-interchange, and the two parallel tracks D5/D6. Everything short of
+those is landed, pushed, and axiom-free.
+
 ## CAMPAIGN STATUS: COMPLETE (2026-07-11) — all three bricks FULL GREEN, all pushed
 
 - **D1a DONE** — `e7d3938f` `PointerCompetition.lean` (66 decls): THE RESONANCE THEOREM
