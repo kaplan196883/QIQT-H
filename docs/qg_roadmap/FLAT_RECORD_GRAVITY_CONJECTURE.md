@@ -169,3 +169,40 @@ theorem (the continuum/regularization tail staying cited). Progress:
   - **#5 the cutoff identification D_eff ~ 1/x** — a modeling choice fixing the exact offset (C = e);
     the log-matching itself is proved (D3e/f `tendsto_sInf_add_log`), but the identification of the
     density-of-states cutoff with the inverse temperature-frequency is stipulated, not derived.
+
+## The entailment is now machine-checked: the CONDITIONAL correspondence theorem (G3 `07898db8`)
+
+Because inputs #3/#4/#5 are physical assumptions rather than lemmas, the honest way to connect all
+the proved pieces is to make the **entailment itself** a theorem: `QIQTH/CorrespondenceAssembly.lean`
+turns `FlatSpaceRecordGravityCorrespondence` — a `def … : Prop` with NO proof term — into a
+**non-vacuous conditional theorem**, axiom-free (std-3).
+
+- **`flatSpaceCorrespondence_of_constructive (D : ConstructiveCLD) (h : PhysicalInputs D) :
+  FlatSpaceRecordGravityCorrespondence D.toOpaque`.** A `ConstructiveCLD` record carries the
+  lower-level building blocks (species count, area, the record-side entropy, the proper-time
+  regulator `I`, the curvature `R`, the supplied `a₁`, the Sakharov coefficient); the four opaque
+  `ContinuumLimitData` fields are **defined** from them (`microS` = the record-side entropy;
+  `loopS` = D3d's `Sent`; `Gind` = D3d's `Gind`; `Gsak` = `(sakInvG)⁻¹`) via `toOpaque`. The three
+  still-cited inputs are carried as `PhysicalInputs` **structure hypotheses over the building blocks
+  only** (never the opaque output fields — the vacuity guard).
+- **Non-vacuity — which equality is genuinely derived:** of the correspondence's three equalities,
+  the **middle one (`oneLoopConicalEntropy = area/(4·G_ind)`, the area law) is DERIVED** from D3d's
+  already-proved `induced_product` (`4·G_ind·S_ent = A`) + the nonzero guard — real mathematical
+  content, not an assumption. Equality #1 (`micro = loop`) routes through the carried cutoff
+  identification `cutoff_identifies` (input #5); equality #3 (`G_ind = G_sak`) routes through the
+  carried `newton_matches` (input #4, physically justified by #3+#4). So the theorem's logic is
+  honest: the non-trivial core (the area law) is proved; the two "identification" equalities are
+  exactly the cited physics, made explicit and auditable.
+- **The a₁ = R/6 algebraic core** ships alongside: `scalarA1 ξ R = (1/6−ξ)·R`, `a1_minimal`
+  (minimal scalar `ξ=0 ⟹ a₁ = R/6`), `xiConf_four` (4D conformal `ξ=1/6`), `a1_conformal_four`
+  (`⟹ a₁ = 0`). This is the algebraic coefficient once the local heat expansion is supplied; the
+  **analytic** Seeley–DeWitt identification (`heatTraceCoeff₁ = ∫(R/6+trE)`) needs Mathlib's absent
+  Riemannian heat-kernel theory and stays CITED. `newton_matches` is the finite stand-in for the
+  (Mathlib-gated) derivation of the induced Einstein–Hilbert coefficient from `a₁`.
+
+**What this does and does NOT change.** It does NOT discharge inputs #3/#4/#5 — they remain
+assumptions. It converts the conjecture from "a `Prop` with no proof term" into "a conditional
+theorem whose remaining assumptions are three explicitly-named, auditable physical inputs" — exactly
+how the rest of the QIQT-H substrate is stated (typeclass/structure hypotheses, never axioms). The
+conjecture as an *unconditional* statement is still **open**; what is now machine-checked is that the
+proved rungs + G1/G2 + the three named inputs **entail** it.

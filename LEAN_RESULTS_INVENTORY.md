@@ -1635,6 +1635,26 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **THE CONDITIONAL CORRESPONDENCE THEOREM + a₁=R/6 CORE, G3 — `QIQTH/CorrespondenceAssembly.lean`**
+  (**[AF]** std-3, budget 0, 2026-07-12, commit `07898db8`). Turns the DY7 conjecture
+  `FlatSpaceRecordGravityCorrespondence` — a `def…:Prop` with NO proof term — into a NON-VACUOUS
+  CONDITIONAL THEOREM. A `ConstructiveCLD` record of lower-level building blocks whose four opaque
+  `ContinuumLimitData` fields are DEFINED from the proved rungs (`microS` = record-side entropy;
+  `loopS` = D3d `Sent`; `GindV` = D3d `Gind`; `GsakV` = `(sakInvG)⁻¹`) via `toOpaque`; the three
+  still-cited inputs (#3 a₁=R/6, #4 same-regulator, #5 cutoff identification) carried as
+  `PhysicalInputs` STRUCTURE hypotheses over building blocks ONLY (never the opaque output fields —
+  the vacuity guard). ★★ `flatSpaceCorrespondence_of_constructive : PhysicalInputs D →
+  FlatSpaceRecordGravityCorrespondence D.toOpaque`. NON-VACUITY: the MIDDLE equality (loop =
+  area/4·Gind, the area law) is DERIVED from D3d's proved `induced_product`; only equalities #1
+  (micro=loop) and #3 (Gind=Gsak) route through the carried inputs — exactly the cited physics. PART
+  1 the a₁ algebraic core: `scalarA1 ξ R = (1/6−ξ)R`, `a1_minimal` (ξ=0⟹R/6), `xiConf_four` (4D
+  conformal ξ=1/6), `a1_conformal_four` (⟹0) + capstone `a1_core`. ⚠ **HONEST (binding):** proves the
+  ENTAILMENT (inputs ⟹ correspondence), making auditable what physics is assumed — does NOT discharge
+  the inputs; the conjecture as an UNCONDITIONAL statement stays open. The a₁ piece is the ALGEBRAIC
+  coefficient given the local heat expansion; the ANALYTIC Seeley–DeWitt identification needs
+  Mathlib's absent Riemannian heat-kernel theory (CITED). `newton_matches` is the finite stand-in for
+  the Mathlib-gated EH-coeff-from-a₁ derivation. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **THE RECORD CHANNEL / BOUNDARY DYNAMICS, RC1–RC3 — `QIQTH/RecordChannel.lean` +
   `RecordEquilibrium.lean` + `RecordUnraveling.lean`** (**[AF]** std-3, budget 0, 2026-07-10; commits
   `73fd89c4`/`ef64ea39`/`a63c9b73`; `RC_CAMPAIGN_PLAN.md` + `BOUNDARY_DYNAMICS_CANDIDATES.md` —
