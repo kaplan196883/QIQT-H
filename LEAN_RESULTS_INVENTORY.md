@@ -1635,6 +1635,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **THE GENERATION HALF OF BULK DYNAMICS, D4b — `QIQTH/BulkGeneration.lean`** (**[AF]** std-3,
+  budget 0, 2026-07-13, commit `250210e7`). The complement of D4a (which froze the metric under RC
+  dephasing): a boundary evolution that MOVES the record ledger induces a nontrivial bulk metric
+  TRAJECTORY, with the bulk EOM = the pushforward of the boundary rate equation through the LINEAR
+  area decoder. The honest source of ledger motion is a classical POPULATION-TRANSFER (Markov)
+  generator `Q` (`IsMarkovGeneratorCol`, col-sums-zero) — distinct from RC phase-dephasing AND the
+  free flow (both fix the diagonal). ★★ `bulk_chain`/`bulk_eom`:
+  `HasDerivAt (fun t => reconstruct'(areaOfLedger(p t))) (reconstruct'(areaOfLedger(Q·p s))) s` (the
+  composite-linear-decoder CLM chain rule); `pExp` = the `exp(tQ)·p0` trajectory with
+  `hasDerivAt_pExp` PROVED (solves `p'=Q·p`); `bulk_eom_exp` combines them; `reconstructL` bundles the
+  held `AreaMap.reconstruct` as a `LinearMap` (grounds the abstract law in the real decoder);
+  `frozen_of_velocity_ker` + `metric_moving_iff` = the honest D4a contrast. ⚠ **HONEST (binding):** the
+  PUSHFORWARD of a SPECIFIED boundary Markov dynamics through the FIXED linear decoder — NOT
+  RC/dephasing, NOT the free flow, NOT yet an AUTONOMOUS bulk gravitational EOM (velocity depends on
+  the ledger `p(s)`, not the metric `h(s)` alone — an autonomous bulk-only law needs `ker(decoder)`
+  `Q`-invariant, NOT claimed). Nontriviality a real hypothesis; finite-dim, linearized decoder, chosen
+  basis. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **THE CONDITIONAL CORRESPONDENCE THEOREM + a₁=R/6 CORE, G3 — `QIQTH/CorrespondenceAssembly.lean`**
   (**[AF]** std-3, budget 0, 2026-07-12, commit `07898db8`). Turns the DY7 conjecture
   `FlatSpaceRecordGravityCorrespondence` — a `def…:Prop` with NO proof term — into a NON-VACUOUS
