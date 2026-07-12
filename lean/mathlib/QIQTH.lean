@@ -762,6 +762,7 @@ import QIQTH.ContinuumEntropy
 import QIQTH.HeatKernelThermal
 import QIQTH.ConicalHeatKernel
 import QIQTH.ConicalSakharov
+import QIQTH.SaturationBridge
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

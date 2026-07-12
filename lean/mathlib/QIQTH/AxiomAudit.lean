@@ -11254,5 +11254,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConicalSakharov.susskind_uglum_ratio_dfour
 #print axioms QIQTH.ConicalSakharov.sakharov_ratio_join
 #print axioms QIQTH.ConicalSakharov.susskind_uglum_identity
+-- SaturationBridge.lean — DUALITY CAMPAIGN brick D3e/f (2026-07-12; gpt-5.5-pro-verified,
+-- opus-built): THE SATURATION BRIDGE + THE NON-COMMUTING (D→∞, β→0) LIMIT DIAGRAM — the β→0
+-- corner of the record/gravity correspondence, the FINAL D3 continuum rung.  PART 1 the CORE
+-- BRIDGE ★★ tendsto_sInf_add_log: the held ContinuumEntropy.sInf satisfies s_∞(x) + log x → 1,
+-- i.e. s_∞(x) = −log x + 1 + o(1) (x/(e^x−1)→1 and (1−e^{−x})/x→1 via the derivative of exp at 0,
+-- both absent from Mathlib) + sInf_logCutoff_bridge (D_eff·x → C ⟹ s_∞ − log D_eff → 1 − log C:
+-- the continuum per-mode log-divergence matches the finite saturated log D; D_eff ~ 1/x offset 1,
+-- exact matching C = e).  PART 2 the closed form thermalEntropy_closed (proved from scratch —
+-- geometric weighted-sum induction; the held DS3 truncated entropy had none) + THE THREE-REGIME
+-- NON-COMMUTING DIAGRAM: saturation_regime (D·x→0 ⟹ S_D − log D → 0), crossover_regime (D·x→c ⟹
+-- → truncCrossoverPhi c), continuum_regime (D·x→∞ ⟹ S_D + log x → 1) + ★★
+-- saturation_diagram_noncommuting THE GUARD: the renormalized finite part S_D − log D is
+-- SCHEDULE-DEPENDENT (→ 0 along x_D = 1/D², → truncCrossoverPhi 10 ≠ 0 along x_D = 10/D) — the
+-- (D→∞, β→0) limits DON'T commute; the finite A/4G saturation (log D) and the continuum thermal
+-- entropy (−log x + 1) are the two order-of-limits corners of ONE double sequence, the raw
+-- entropy diverging in both, the STRUCTURE differing in O(1).  HONEST (binding): PROVES the
+-- analytic log-matching s_∞ = log(1/x) + 1 + o(1) + the schedule-dependence; the cutoff /
+-- temperature-frequency IDENTIFICATION D_eff ~ 1/x (exact constant C = e) is a MODELING CHOICE
+-- NOT derived; a matching of DIVERGENCES, not a finite equality; 1D massless; NOT the conjecture
+-- (its final continuum rung), NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.SaturationBridge.tendsto_sInf_add_log
+#print axioms QIQTH.SaturationBridge.sInf_logCutoff_bridge
+#print axioms QIQTH.SaturationBridge.thermalEntropy_closed
+#print axioms QIQTH.SaturationBridge.saturation_regime
+#print axioms QIQTH.SaturationBridge.crossover_regime
+#print axioms QIQTH.SaturationBridge.continuum_regime
+#print axioms QIQTH.SaturationBridge.saturation_diagram_noncommuting
 
 end QIQTH.AxiomAudit
