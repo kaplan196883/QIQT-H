@@ -52,3 +52,14 @@ from Mathlib. HONEST: the positive-temperature limit ONLY — no conical/heat-ke
 G, no β → 0 saturation, the D → ∞/mode-density limit interchange not addressed, 1D massless; the
 next named rung (per the design consult) = the heat-kernel representation of the same 1D
 thermodynamics, then the conical/induced-gravity leg.
+
+## THE SECOND CONTINUUM RUNG — LANDED (2026-07-12, `04c22cb2`, `HeatKernelThermal.lean`)
+The conjecture's "one-loop continuum entropy" leg is no longer prose: the winding-subtracted
+one-loop heat-kernel sum on the thermal cylinder S¹_β × ℝ (the image sum over windings of the
+DERIVED flat kernel (4πt)^{−1/2}) evaluates EXACTLY to π/(6β) (`heat_logZ_density`), agrees with
+the canonical Bose free energy (`windings_eq_canonical` — one object, two descriptions), and its
+thermodynamic entropy π/(3β) IS the DOS-weighted D3a record entropy
+(`record_entropy_has_heat_kernel_form`). The guard `naive_winding_diverges` machine-checks that
+the Euclidean-time trace factor is load-bearing. HONEST: the SMOOTH cylinder only — the CONE
+(Sommerfeld, conical coefficients, UV control, renormalized G) is the cited next rung; the m = 0
+vacuum winding removed by construction; no induced-G, no β → 0 saturation, no limit interchange.
