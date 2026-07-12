@@ -767,6 +767,7 @@ import QIQTH.OneLoopDeterminant
 import QIQTH.ReplicaContinuation
 import QIQTH.CorrespondenceAssembly
 import QIQTH.BulkGeneration
+import QIQTH.ScaleDimension
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

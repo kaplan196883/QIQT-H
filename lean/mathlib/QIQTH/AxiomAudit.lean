@@ -11383,4 +11383,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BulkGeneration.reconstructL_apply
 #print axioms QIQTH.BulkGeneration.metric_moving_iff
 
+-- D5a — SCALE AS DIMENSION (duality campaign): the RADIAL / RG-scale direction added to the emergent
+-- geometry (Maldacena U = RG scale).  The held single-scale entanglement→distance pseudometric
+-- weightedCutDist (IsApproxPseudometric 0) extends to a bulk pseudometric on X × ℕ (boundary site ×
+-- refinement scale).  radialDepth Λ(k) = ∑_{n<k} forcedWeight n (the tower's log-additive κ·log
+-- forced-weight invariant = accumulated RG content); radialDist = |Λk−Λl| (a pseudometric:
+-- nonneg/self/symm/triangle); radialDepth_monotone (forced weights nonneg); ★ radialDist_add_of_
+-- monotone = ordered RG-depth ADDITIVITY (radial length is the geodesic RG depth).  scaleProdDist =
+-- spatial weightedCutDist ⊕ radial (L¹); ★★ scaleProd_isPseudometric; scaleProd_slice/_fiber.  ★★
+-- scaleAsDimension: the bulk product is a pseudometric whose SLICES are the boundary metric and whose
+-- FIBERS are additive RG-depth geodesics — the first machine-checked "entanglement at scale k = bulk
+-- radial depth k".  HONEST (binding): a KINEMATIC radial coordinate ONLY — does NOT establish AdS
+-- curvature, a warp factor, the Einstein equations, RT/HRT surfaces, causal/Lorentzian structure, or
+-- dynamics.  The L¹ product is a CHOSEN no-warp extension (not a derived warp factor); forcedWeight
+-- carried as a nonneg parameter (the tower's κ·log invariant is the intended instance);
+-- PSEUDOmetric, no separation claimed.  NOT the conjecture, NOT the strong holographic principle,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.ScaleDimension.scaleAsDimension
+#print axioms QIQTH.ScaleDimension.scaleProd_isPseudometric
+#print axioms QIQTH.ScaleDimension.radialDist_add_of_monotone
+#print axioms QIQTH.ScaleDimension.radialDepth_monotone
+
 end QIQTH.AxiomAudit
