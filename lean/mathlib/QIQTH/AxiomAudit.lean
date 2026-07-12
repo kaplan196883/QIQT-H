@@ -11147,5 +11147,33 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TowerGNS.modular_spectrum_full
 #print axioms QIQTH.TowerGNS.operator_level_III1_signature
 #print axioms QIQTH.TowerGNS.operator_level_III1_signature_sqrtTwo
+-- ContinuumEntropy.lean — DUALITY CAMPAIGN brick D3a (2026-07-12, DUALITY_ROADMAP.md; GPT-5.5
+-- consult-verified design): THE FIRST CONTINUUM RUNG of FlatSpaceRecordGravityCorrespondence (the
+-- DY7 conjecture) — the mode-density limit + the EXACT Bose integral.  sInf = the Planck entropy
+-- kernel, GENUINELY tied to the held DS3 D→∞ limit (sInf_eq_planck_form +
+-- tendsto_thermalEntropy_sInf — the truncated record-code per-mode entropy converges to THIS
+-- kernel); the two-series expansion (geometric + Mathlib's log series); the elementary exponential
+-- moments (Γ(2)); ★ THE BOSE INTEGRAL integral_sInf — ∫₀^∞ s_∞ = π²/3 FROM SCRATCH (Tonelli via
+-- lintegral_tsum + BASEL hasSum_zeta_two — no dilogarithms; a Mathlib-gap integral) + the scaled
+-- π²/(3β); the mode-density limit (riemann_sum_tendsto_integral — the Riemann-sum convergence
+-- theorem, ALSO absent from Mathlib, proved via Heine–Cantor + adjacent-interval splitting;
+-- entropyRiemannSum_tendsto; cutoff_integral_tendsto); ★★ record_entropy_continuum_limit — the
+-- finite record-region entropy sums converge along refining mode families to the EXACT c = 1
+-- massless-boson thermal entropy π²/(3β) (density π/(3β) per unit length with the Δω = π/L
+-- spacing, entropy_density_form): THE CONJECTURE'S FIRST TWO TERMS TOUCH at their simplest
+-- genuine contact point.  HONEST (the consult's scope, binding): this rung does NOT prove the
+-- conjecture — no conical singularities, no heat-kernel area coefficients, no UV
+-- renormalization/induced G, no gauge/contact/edge subtleties, NO β → 0 saturation (the A/4G
+-- statement lives in the finite-truncated model; this is the positive-temperature limit), and the
+-- D → ∞ / mode-density limit INTERCHANGE is NOT addressed (limits taken in the stated order);
+-- 1D massless; the refining mode families are INPUTS; NOT the strong holographic principle,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.ContinuumEntropy.tendsto_thermalEntropy_sInf
+#print axioms QIQTH.ContinuumEntropy.sInf_eq_tsum
+#print axioms QIQTH.ContinuumEntropy.integral_sInf
+#print axioms QIQTH.ContinuumEntropy.integral_sInf_scaled
+#print axioms QIQTH.ContinuumEntropy.riemann_sum_tendsto_integral
+#print axioms QIQTH.ContinuumEntropy.entropyRiemannSum_tendsto
+#print axioms QIQTH.ContinuumEntropy.record_entropy_continuum_limit
 
 end QIQTH.AxiomAudit
