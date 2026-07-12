@@ -11203,5 +11203,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatKernelThermal.heat_kernel_entropy_eq_record_entropy
 #print axioms QIQTH.HeatKernelThermal.record_entropy_has_heat_kernel_form
 #print axioms QIQTH.HeatKernelThermal.naive_winding_diverges
+-- ConicalHeatKernel.lean — DUALITY CAMPAIGN brick D3c (2026-07-12; GPT-5.5-consult-verified,
+-- opus-built): THE EXACT CONICAL HEAT-KERNEL EXCESS via the ℤ_n orbifold image method — the
+-- conical leg at the integer-cone level.  PART A (a Mathlib-FIRST) — the cosecant sum
+-- sum_csc_sq: Σ_{k=1}^{n−1} csc²(πk/n) = (n²−1)/3 via roots of unity (geomPoly log-derivative:
+-- P(1)=n, P'(1)=n(n−1)/2, P''(1)=n(n−1)(n−2)/3 ⟹ Σ1/(1−ζ)=(n−1)/2, Σ1/(1−ζ)²=(n−1)(5−n)/12; unit
+-- -circle bridge Σ1/|1−ζ|² = A−B = (n²−1)/12) + sum_inv_four_sin_sq.  PART B — the Gaussian
+-- rotation integral integral_Kplane_rot: ∫ (4πt)⁻¹ e^{−|x−R_θx|²/4t} = 1/(4 sin²(θ/2)),
+-- t-INDEPENDENT (the UV-finiteness of the conical excess, PROVED — distSq2_rot2 = 4sin²(θ/2)|x|²
+-- + the 2D product Gaussian π/c).  PART C — ★★ zmodConeExcess_eq = (n²−1)/(12n) /
+-- zmodConeExcess_eq_standard = (1/12)(n − 1/n): the QUOTIENT-normalized (1/n orbifold factor)
+-- integer-cone excess Tr K_cone − Area/4πt, EXACT and t-independent; the replica coefficient
+-- coneCoeff ν = (1/12)(ν − ν⁻¹) with ★ hasDerivAt_coneCoeff_one = 1/6 (the c/6 entanglement
+-- coefficient, c = 1, as the replica derivative of the machine-checked integer-cone excess);
+-- capstone conical_excess_exact.  HONEST (binding): INTEGER cones C_{2π/n} ONLY — the general
+-- -angle Sommerfeld formula CITED; the n → 1 analytic continuation (replica step) CITED — PROVED
+-- is the interpolation's agreement at integers + its derivative 1/6 at 1; the one-loop
+-- ½∫(dt/t)Tr K determinant + UV regularization CITED; smooth-manifold-with-defect, higher
+-- dimensions, coupling to A/4G ALL CITED; ties to held D3b cylinder (same kernel, different
+-- quotient) and the held cone layer (ConeFlat.cone_flat_iff) CITED; NOT the conjecture (its third
+-- rung), NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConicalHeatKernel.sum_csc_sq
+#print axioms QIQTH.ConicalHeatKernel.sum_inv_four_sin_sq
+#print axioms QIQTH.ConicalHeatKernel.integral_Kplane_rot
+#print axioms QIQTH.ConicalHeatKernel.zmodConeExcess_eq
+#print axioms QIQTH.ConicalHeatKernel.zmodConeExcess_eq_standard
+#print axioms QIQTH.ConicalHeatKernel.hasDerivAt_coneCoeff_one
+#print axioms QIQTH.ConicalHeatKernel.conical_excess_exact
 
 end QIQTH.AxiomAudit
