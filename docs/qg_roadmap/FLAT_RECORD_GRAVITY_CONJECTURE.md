@@ -162,7 +162,12 @@ theorem (the continuum/regularization tail staying cited). Progress:
 - **Inputs #3–#5 — remain cited (no clean finite Lean brick):**
   - **#3 the curved-space a₁ = R/6** — gated on Mathlib's own Riemannian heat-kernel / Seeley–DeWitt
     frontier; no proof assistant has this. Research-grade, not forced (watch/contribute to Mathlib's
-    differential-geometry effort). The flat-space π-content is already derived (`heatDensity_dDim`).
+    differential-geometry effort). The flat-space π-content is already derived (`heatDensity_dDim`), and
+    the algebraic content is proved (G3 `scalarA1`). **DECISION (2026-07-13):** this input is
+    DEFERRED — carried as an explicit labelled physical input (option (b), the
+    `PhysicalInputs.a1_eq_R_div_six` hypothesis in `CorrespondenceAssembly.lean`, never an axiom) while
+    everything else is closed; the phased discharge is `HEAT_KERNEL_GAP_PLAN.md`. We return to derive
+    it after the rest of the program lands.
   - **#4 the SAME-regulator assumption** — a physical modeling assumption (that the entropy and the
     `δ(1/G)` counterterm use the same UV regulator); not a mathematical theorem but a stipulation of
     the model. Carried honestly as a labelled hypothesis in D3d.
