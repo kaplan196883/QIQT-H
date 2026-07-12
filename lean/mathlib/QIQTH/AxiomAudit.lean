@@ -11230,5 +11230,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConicalHeatKernel.zmodConeExcess_eq_standard
 #print axioms QIQTH.ConicalHeatKernel.hasDerivAt_coneCoeff_one
 #print axioms QIQTH.ConicalHeatKernel.conical_excess_exact
+-- ConicalSakharov.lean — DUALITY CAMPAIGN brick D3d (2026-07-12; gpt-5.5-pro-verified design,
+-- opus-built): THE SUSSKIND–UGLUM COUNTERTERM IDENTITY — the one-loop conical/entanglement
+-- entropy renormalizes 1/G.  Regulated algebra with the cutoff functional I = J_ε carried
+-- EXPLICIT (ε → 0 NEVER taken): Sent N A I = N·A·I/12 (the 1/12 = ½ loop factor × D3c's 1/6
+-- replica coefficient, formally re-exported as replica_deriv_is_one_sixth from
+-- ConicalHeatKernel.hasDerivAt_coneCoeff_one), dInvG N I = N·I/3 (the a₁ = R/6 counterterm),
+-- Gind = dInvG⁻¹.  ★ ent_eq_area_quarter_dInvG: Sent = (A/4)·δ(1/G) — THE SUSSKIND–UGLUM IDENTITY;
+-- ★ bare_entropy_renormalizes: (A/4)invGbare + Sent = (A/4)invGren — entanglement entropy IS the
+-- 1/G counterterm; ★★ induced_product (dInvG ≠ 0): 4·Gind·Sent = A, cutoff-INDEPENDENT (holds at
+-- every finite cutoff).  D=4: sent_dfour + dInvG_dfour + susskind_uglum_ratio_dfour
+-- (1/48π = (1/4)(1/12π)) + sakharov_ratio_join (the held SakharovRatio.sakharov_ratio re-exported,
+-- now READ as S_ent : δ(1/G) = 1/4).  D=2: sent_dtwo = (1/6)log(L/ε) (the c/6 free-scalar
+-- entanglement entropy).  Capstone susskind_uglum_identity.  HONEST (binding): a REGULATED
+-- counterterm identity, NOT a cutoff-free equality of infinities; CITED — the Gaussian scalar
+-- determinant log Z = ½∫(dt/t)Tr K, the replica identity S = (1−q∂q)log Z_q|₁, the n → 1
+-- continuation, a₁ = R/6, the SAME regulator in S and δ(1/G); integer cones + one-loop free
+-- scalar only; the replica-convention sign footnote; NOT the conjecture (its fourth rung), NOT the
+-- strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ConicalSakharov.ent_eq_area_quarter_dInvG
+#print axioms QIQTH.ConicalSakharov.bare_entropy_renormalizes
+#print axioms QIQTH.ConicalSakharov.induced_product
+#print axioms QIQTH.ConicalSakharov.susskind_uglum_ratio_dfour
+#print axioms QIQTH.ConicalSakharov.sakharov_ratio_join
+#print axioms QIQTH.ConicalSakharov.susskind_uglum_identity
 
 end QIQTH.AxiomAudit
