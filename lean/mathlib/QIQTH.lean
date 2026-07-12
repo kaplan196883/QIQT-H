@@ -766,6 +766,7 @@ import QIQTH.SaturationBridge
 import QIQTH.OneLoopDeterminant
 import QIQTH.ReplicaContinuation
 import QIQTH.CorrespondenceAssembly
+import QIQTH.SeeleyDeWittInterface
 import QIQTH.BulkGeneration
 import QIQTH.ScaleDimension
 import QIQTH.BellCutRank

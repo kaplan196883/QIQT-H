@@ -11358,6 +11358,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CorrespondenceAssembly.xiConf_four
 #print axioms QIQTH.CorrespondenceAssembly.a1_core
 
+-- SEELEY–DEWITT INTERFACE — option (b): the deferred heat-kernel coefficient a₁=R/6+trE carried as a
+-- NAMED INTERFACE (the DonaldSystem typeclass-interface pattern), not an ad-hoc PhysicalInputs field.
+-- SeeleyDeWittData names a₀=1, a₁=R/6+trE as structure fields (NEVER a Lean axiom); a1_eq_scalarA1_
+-- of_minimal: for a minimal scalar (trE=0) the interface delivers a₁=R/6=scalarA1 0 R (G3's form);
+-- physicalInputs_of_seeleyDeWitt sources G3's PhysicalInputs #3 FROM the interface (#4/#5 carried);
+-- ★ flatSpaceCorrespondence_of_seeleyDeWitt: the conditional correspondence with its a₁ input now an
+-- interface field.  HONEST (binding): this is OPTION (b) — a₁=R/6 is CARRIED as an explicit named
+-- interface, NOT derived, NOT an axiom.  The interface's analytic discharge (proving a₁=R/6 from the
+-- Riemannian heat kernel) is the entire HEAT_KERNEL_GAP_PLAN.md (Phase 5), deferred/CITED — so the
+-- eventual discharge is a SINGLE instance, not a refactor.  Correspondence stays CONDITIONAL; NOT the
+-- conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.SeeleyDeWittInterface.SeeleyDeWittData.a1_eq_scalarA1_of_minimal
+#print axioms QIQTH.SeeleyDeWittInterface.physicalInputs_of_seeleyDeWitt
+#print axioms QIQTH.SeeleyDeWittInterface.flatSpaceCorrespondence_of_seeleyDeWitt
+
 -- D4b — THE GENERATION HALF OF BULK DYNAMICS (duality campaign): a boundary evolution that MOVES
 -- the record ledger induces a nontrivial bulk metric TRAJECTORY, with the bulk EOM = the pushforward
 -- of the boundary rate equation through the LINEAR area decoder.  D4a froze the metric under RC
