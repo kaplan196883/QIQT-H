@@ -1635,6 +1635,22 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **SCALE AS DIMENSION, D5a — `QIQTH/ScaleDimension.lean`** (**[AF]** std-3, budget 0, 2026-07-13,
+  commit `ef52d8f7`). The RADIAL / RG-scale direction added to the emergent geometry (Maldacena
+  U = RG scale). The held single-scale entanglement→distance pseudometric `weightedCutDist`
+  (`IsApproxPseudometric 0`) extends to a bulk pseudometric on `X × ℕ` (boundary site × refinement
+  scale). `radialDepth Λ(k) = ∑_{n<k} forcedWeight n` = the tower's log-additive κ·log forced-weight
+  invariant (accumulated RG content); `radialDist = |Λk−Λl|` a pseudometric; `radialDepth_monotone`;
+  ★ `radialDist_add_of_monotone` = ordered RG-depth ADDITIVITY (radial length = geodesic RG depth).
+  `scaleProdDist` = spatial `weightedCutDist` ⊕ radial (L¹); ★★ `scaleProd_isPseudometric`;
+  `scaleProd_slice`/`_fiber`. ★★ `scaleAsDimension`: the bulk product is a pseudometric whose SLICES
+  are the boundary metric and whose FIBERS are additive RG-depth geodesics — the first machine-checked
+  "entanglement at scale k = bulk radial depth k". ⚠ **HONEST (binding):** a KINEMATIC radial
+  coordinate ONLY — does NOT establish AdS curvature, a warp factor, the Einstein equations, RT/HRT
+  surfaces, causal/Lorentzian structure, or dynamics. The L¹ product is a CHOSEN no-warp extension;
+  `forcedWeight` a nonneg parameter (the tower's κ·log invariant is the intended instance);
+  PSEUDOmetric, no separation. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **THE GENERATION HALF OF BULK DYNAMICS, D4b — `QIQTH/BulkGeneration.lean`** (**[AF]** std-3,
   budget 0, 2026-07-13, commit `250210e7`). The complement of D4a (which froze the metric under RC
   dephasing): a boundary evolution that MOVES the record ledger induces a nontrivial bulk metric
