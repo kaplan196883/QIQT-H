@@ -38,3 +38,17 @@ finite thermal entropy at arbitrary β and an induced geometric area; that remai
 continuum frontier/conjecture."
 
 ⚠ NOT quantum gravity solved; no wall crossed. The conjecture is stated, not assumed.
+
+## THE FIRST CONTINUUM RUNG — LANDED (2026-07-12, `7393d3af`, `ContinuumEntropy.lean`)
+The conjecture's first two terms (micro record entropy = one-loop continuum entropy) now touch at
+their simplest genuine contact point, axiom-free: the finite record-region entropy (DY5 mode sums,
+whose per-mode D → ∞ limit is the DS3 Planck kernel — `tendsto_thermalEntropy_sInf`, a genuine
+tendsto to THIS kernel) converges along refining mode families to the EXACT continuum value
+`∫₀^∞ s_∞(βω) dω = π²/(3β)` (`record_entropy_continuum_limit`), the standard c = 1 massless-boson
+thermal entropy (density π/(3β) per unit length with the Δω = π/L spacing). The Bose integral
+`∫₀^∞ s_∞ = π²/3` is derived from scratch (geometric + log series, Tonelli, Basel — no
+dilogarithms), and the Riemann-sum convergence theorem was also proved from scratch — both absent
+from Mathlib. HONEST: the positive-temperature limit ONLY — no conical/heat-kernel leg, no induced
+G, no β → 0 saturation, the D → ∞/mode-density limit interchange not addressed, 1D massless; the
+next named rung (per the design consult) = the heat-kernel representation of the same 1D
+thermodynamics, then the conical/induced-gravity leg.

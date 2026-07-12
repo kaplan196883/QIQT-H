@@ -118,6 +118,18 @@ and the third is already written down with its finite half proven.
   proof assistant.** D2's limit-algebra rung: only the TYPE classification (III₁) remains.
 - LESSON (recorded in memory): a wall named by one brick deserves a consult before being carried
   forward — the Kaplansky wall dissolved under one short consult.
+- **LA2 DONE (2026-07-12)** — `e3f4a757`: the tower limit is a FACTOR with the full modular
+  spectrum (σ((1+Δ)⁻¹) = [0,1] exact; hypothesis-free √2 III₁ signature). D2's ladder ends at the
+  Connes S-invariant/type API alone.
+- **D3a DONE (2026-07-12)** — `7393d3af` `ContinuumEntropy.lean` (36 decls, consult-verified,
+  all 6 deliverables): THE FIRST CONTINUUM RUNG of `FlatSpaceRecordGravityCorrespondence` — the
+  Planck kernel genuinely tied to the held DS3 D → ∞ limit; ★ THE BOSE INTEGRAL ∫₀^∞ s_∞ = π²/3
+  from scratch (Tonelli + Basel — absent from Mathlib) + the Riemann-sum convergence theorem (also
+  absent from Mathlib); ★★ `record_entropy_continuum_limit` — the finite record-region entropy
+  converges along refining mode families to the EXACT c = 1 thermal entropy π²/(3β). The
+  conjecture's first two terms TOUCH. Remaining for D3: the conical/heat-kernel leg, induced-G,
+  the β → 0 saturation regime, the limit interchange — per the consult's rung ladder
+  (heat-kernel representation of the same 1D thermodynamics = the named next rung).
 
 ## CAMPAIGN (ACTIVE, 2026-07-11): D1a → D4a → D2a, sequential, loop-driven
 
