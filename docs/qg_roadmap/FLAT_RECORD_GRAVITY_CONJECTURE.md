@@ -89,3 +89,29 @@ n → 1 continuation, a₁ = R/6, the SAME-regulator physical assumption. The co
 'micro entropy = A/4G_ind' now has its exact one-loop-counterterm SKELETON machine-checked;
 the full `FlatSpaceRecordGravityCorrespondence` Prop (with those cited physical inputs discharged)
 remains open.
+
+## THE FIFTH / FINAL RUNG (SATURATION BRIDGE) — LANDED (2026-07-12, `22bbd7b2`, `SaturationBridge.lean`)
+The β→0 corner and the non-commuting-limit diagram are machine-checked: the core bridge
+`tendsto_sInf_add_log` proves s_∞(x) = −log x + 1 + o(1) (the continuum per-mode entropy's exact
+log-divergence), `sInf_logCutoff_bridge` matches it to the finite saturated log D (D_eff·x → C ⟹
+offset 1 − log C), and the three-regime theorem + `saturation_diagram_noncommuting` guard prove the
+(D→∞, β→0) limits DON'T commute — the finite A/4G saturation (log D) and the continuum thermal
+entropy (−log x + 1) are the two order-of-limits corners of one double sequence, quantitatively
+linked. HONEST: a matching of DIVERGENCES; the cutoff identification D_eff ~ 1/x is a modeling
+choice, not derived.
+
+## THE D3 LADDER — COMPLETE (2026-07-12). THE CONJECTURE'S SKELETON IS MACHINE-CHECKED TERM BY TERM.
+- D3a `7393d3af` — micro record entropy = the exact continuum thermal entropy π²/(3β) (Bose
+  integral + Riemann-sum theorem, both Mathlib-firsts).
+- D3b `04c22cb2` — the one-loop leg's heat-kernel (winding proper-time) form, = the canonical Bose
+  free energy (one object, two descriptions).
+- D3c `a1d3a65e` — the exact conical excess (1/12)(n−1/n), t-independent, + the c/6 replica
+  coefficient (cosecant sum a Mathlib-first).
+- D3d `0aa98ee3` — the Susskind–Uglum counterterm S_ent = (A/4)δ(1/G): entanglement entropy
+  renormalizes 1/G; 4·G_ind·S_ent = A cutoff-independent; the D=4 join to the held Sakharov ratio.
+- D3e/f `22bbd7b2` — the saturation bridge + the non-commuting-limit diagram.
+**WHAT REMAINS for the full `FlatSpaceRecordGravityCorrespondence` Prop:** discharging the CITED
+physical inputs — the Gaussian one-loop determinant log Z = ½∫(dt/t)Tr K, the replica analytic
+continuation n → 1, the curved-space heat-kernel coefficient a₁ = R/6, the SAME-regulator physical
+assumption, and the cutoff/temperature-frequency identification D_eff ~ 1/x. Each is a standard-QFT
+input; none is a QIQT-H-specific gap. The skeleton is proved; the Prop awaits those inputs.

@@ -1573,6 +1573,34 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   thermal entropy at arbitrary β and an induced geometric area; that remains the named continuum
   frontier/conjecture." ⚠ NOT QG solved; no wall crossed.
 
+- **THE D3 CONTINUUM-RUNG LADDER — the record/gravity correspondence's skeleton, machine-checked
+  term by term** (`ContinuumEntropy` + `HeatKernelThermal` + `ConicalHeatKernel` + `ConicalSakharov`
+  + `SaturationBridge`, all **[AF]** std-3, 2026-07-12, duality campaign, gpt-5.5(-pro)-consult-verified):
+  the five continuum rungs of `Conjectures.FlatSpaceRecordGravityCorrespondence` (DY7), each an
+  axiom-free theorem, with THREE Mathlib-firsts. **D3a `7393d3af`** `ContinuumEntropy.lean`: the
+  finite record entropy → the exact c = 1 continuum thermal entropy π²/(3β)
+  (`record_entropy_continuum_limit`); the **Bose integral** ∫₀^∞ s_∞ = π²/3 from scratch
+  (`integral_sInf`, Tonelli+Basel — a **Mathlib-first**) + the **Riemann-sum convergence theorem**
+  (`riemann_sum_tendsto_integral` — also a **Mathlib-first**). **D3b `04c22cb2`**
+  `HeatKernelThermal.lean`: the one-loop leg's winding heat-kernel form (`heat_logZ_density` =
+  π/(6β)) = the canonical Bose free energy (`windings_eq_canonical`) — one object, two descriptions;
+  the guard `naive_winding_diverges`. **D3c `a1d3a65e`** `ConicalHeatKernel.lean`: the exact ℤ_n
+  orbifold conical excess (1/12)(n−1/n), t-independent (`zmodConeExcess_eq_standard`), + the c/6
+  replica coefficient (`hasDerivAt_coneCoeff_one`); the **cosecant sum** Σ csc²(πk/n) = (n²−1)/3
+  (`sum_csc_sq` — a **Mathlib-first**). **D3d `0aa98ee3`** `ConicalSakharov.lean`: the Susskind–Uglum
+  counterterm S_ent = (A/4)δ(1/G) (`ent_eq_area_quarter_dInvG` — entanglement entropy renormalizes
+  1/G); 4·G_ind·S_ent = A cutoff-independent (`induced_product`); the D=4 join to the held Sakharov
+  ratio (`sakharov_ratio_join`). **D3e/f `22bbd7b2`** `SaturationBridge.lean`: the core bridge
+  s_∞(x) = −log x + 1 + o(1) (`tendsto_sInf_add_log`) matching the continuum log-divergence to the
+  finite log D (`sInf_logCutoff_bridge`), and the non-commuting three-regime diagram + guard
+  (`saturation_diagram_noncommuting` — the (D→∞, β→0) limits don't commute).
+  ⚠ **HONEST (binding):** the SKELETON of the conjecture is proved term by term; the full Prop
+  awaits its CITED physical inputs — the Gaussian one-loop determinant log Z = ½∫(dt/t)Tr K, the
+  replica n → 1 analytic continuation, the curved-space a₁ = R/6, the SAME-regulator assumption,
+  and the cutoff identification D_eff ~ 1/x (a modeling choice, not derived). All standard-QFT
+  inputs, none QIQT-H-specific. Integer cones + 1D massless free scalar; a matching of DIVERGENCES
+  at the saturation corner; NOT the conjecture, NOT the strong holographic principle, NOT QG.
+
 - **THE RECORD CHANNEL / BOUNDARY DYNAMICS, RC1–RC3 — `QIQTH/RecordChannel.lean` +
   `RecordEquilibrium.lean` + `RecordUnraveling.lean`** (**[AF]** std-3, budget 0, 2026-07-10; commits
   `73fd89c4`/`ef64ea39`/`a63c9b73`; `RC_CAMPAIGN_PLAN.md` + `BOUNDARY_DYNAMICS_CANDIDATES.md` —

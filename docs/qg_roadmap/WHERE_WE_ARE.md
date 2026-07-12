@@ -38,6 +38,16 @@ line drawn where the roadmap draws it.
    law with rigidity, equilibria stationary ∧ Lyapunov-stable ∧ Einstein, Born-jump unraveling
    with Born forced, einselection DERIVED from a coupling at the Cesàro level); the commutation
    corridor (JMJ = M′ up to the named Kaplansky gap).
+4½. **THE D3 SKELETON IS NOW MACHINE-CHECKED TERM BY TERM (2026-07-12).** The five continuum
+   rungs of `FlatSpaceRecordGravityCorrespondence` are all axiom-free theorems: continuum entropy
+   π²/(3β) (D3a `7393d3af`), its heat-kernel form (D3b `04c22cb2`), the exact conical coefficient
+   (1/12)(n−1/n) + the c/6 replica derivative (D3c `a1d3a65e`), the Susskind–Uglum counterterm
+   S_ent = (A/4)δ(1/G) (D3d `0aa98ee3`), and the saturation bridge + non-commuting-limit diagram
+   (D3e/f `22bbd7b2`) — with THREE Mathlib-firsts (the Bose integral, the Riemann-sum theorem, the
+   cosecant sum). The full Prop awaits its CITED standard-QFT inputs (the Gaussian one-loop
+   determinant, the replica n→1 continuation, the curved a₁=R/6, the same-regulator assumption, the
+   cutoff identification) — none QIQT-H-specific.
+
 5. **The missing correspondence is a single named Prop, not a vague hope.**
    `FlatSpaceRecordGravityCorrespondence` (`Conjectures.lean`, DY7): in the continuum limit the
    capacity-bounded record code with its dynamics equals free QFT + linearized gravity on the
