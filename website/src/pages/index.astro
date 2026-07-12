@@ -67,7 +67,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         information content of any bounded spacetime region is finite, and <strong>(P5)</strong> quantum
         equilibrium of the typicality measure — of which P2–P3 are the standard quantum-relativistic arena,
         so the irreducible new physics is <strong>P4 + P5, on the P1 ontology</strong>. We machine-verify the
-        entire development in Lean&nbsp;4 / Mathlib: over <strong>5,000 theorems across ~495 files</strong>,
+        entire development in Lean&nbsp;4 / Mathlib: over <strong>5,000 theorems across ~500 files</strong>,
         zero axioms beyond Lean's standard three, every physical input an explicitly named hypothesis.</p>
       <p class="sub" style="max-width:none">The measurement problem dissolves without collapse: decoherence
         supplies the record structure, λ (P1) makes exactly one history actual, and the Born rule is
@@ -141,12 +141,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
       <p class="sub" style="max-width:none"><strong>The remaining distance, precisely.</strong>
         <strong>One conjecture</strong> — the flat-space record→gravity correspondence
         (<code>FlatSpaceRecordGravityCorrespondence</code>): that in the continuum limit the capacity-bounded record
-        code equals free QFT + linearized gravity on the emergent geometry — <em>stated as a Prop, its finite
-        evidence proven</em> (<code>finiteEvidence_holds</code>), the continuum claim never assumed. Its
-        <strong>first continuum rung has since landed</strong> (<code>record_entropy_continuum_limit</code>): the
-        finite record-region entropy converges to the <em>exact</em> c = 1 thermal entropy π²/(3β) — the
-        conjecture's first two terms now touch (positive-temperature limit only; the conical / heat-kernel /
-        induced-G legs and the limit interchange stay open).
+        code equals free QFT + linearized gravity on the emergent geometry. Its <strong>entire skeleton is now
+        machine-checked, term by term</strong> — the continuum entropy π²/(3β), the heat-kernel form, the exact
+        conical coefficient + c/6, the <strong>Susskind–Uglum identity S<sub>ent</sub> = (A/4)·δ(1/G)</strong>
+        (entanglement entropy <em>is</em> the counterterm renormalizing 1/G), and the saturation bridge — and
+        <strong>2 of its 5 physical inputs are discharged as finite theorems</strong> (the Gaussian one-loop
+        determinant; the replica n→1 continuation giving S = −∂<sub>n</sub> log Z<sub>n</sub>|₁ = the von Neumann
+        entropy). What remains is sharply localized: three inputs — one (the curved a₁ = R/6) gated on Mathlib's
+        own Riemannian heat-kernel frontier, two physical modeling stipulations — plus the continuum assembly. The
+        Prop itself still carries <em>no proof term</em>: the conjecture is not proved — but the gap to it is now a
+        short, named list, not a fog.
         <strong>One scaling law</strong> — that the count of active modes scales with <em>area</em>, not volume
         (finiteness alone gives a volume law; area is the genuine QG-core, correctly tiered).
         <strong>One coefficient</strong> — the (1/6−ξ) Seeley–DeWitt number that fixes the <em>numerical</em> value of

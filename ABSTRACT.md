@@ -19,7 +19,7 @@ kinematics, **(P3)** microcausality, **(P4)** finite holographic capacity: the i
 of any bounded spacetime region is finite, and **(P5)** quantum equilibrium of the typicality
 measure — of which P2–P3 are the standard quantum-relativistic arena, so the irreducible new
 physics is **P4 + P5, on the P1 ontology**. We machine-verify the entire development in
-Lean 4 / Mathlib: over **5,000 theorems across ~495 files**, zero axioms beyond Lean's standard
+Lean 4 / Mathlib: over **5,000 theorems across ~500 files**, zero axioms beyond Lean's standard
 three, every physical input an explicitly named hypothesis.
 
 The measurement problem dissolves without collapse: decoherence supplies the record structure,
@@ -116,7 +116,7 @@ ships this.
 
 ## Count note (authoritative, 2026-07-10)
 
-The current-HEAD raw counts are **5,429 theorem/lemma declarations, 496 `.lean` files, 3,300
+The current-HEAD raw counts are **5,544 theorem/lemma declarations, 502 `.lean` files, ~3,350
 `#print axioms` directives** (grep over `lean/mathlib/QIQTH/`, recount 2026-07-10). The inventory's
 §0 meta-counts **lag the loop** and should be refreshed. When aligning public copy, the theorem/file
 counts are authoritative from the grep above — NOT from the inventory snapshot. The website landing
@@ -125,7 +125,7 @@ Gromov–Hausdorff limits of graph geodesics to *curved* metric spaces — the c
 curvature-as-a-theorem and the smooth sphere — and the same family decoded from the abstract state;
 `sphereGrid_toGHSpace_tendsto_sphere`, `polarGrid_toGHSpace_tendsto_cone`, `cone_no_isometric_embedding_into_inner`;
 the 41st = Williamson's symplectic normal form unconditional, `youla_pairing`, a Mathlib-first);
-"over 5,000 theorems across ~495 files" is the current phrasing. New this recount (2026-07-10): the
+"over 5,000 theorems across ~500 files" is the current phrasing. New this recount (2026-07-10): the
 "space from the state" emergent-geometry program (§6 of the inventory) — GH limits to interval / cube
 ∀d / flat torus / circle / tripod / cone / sphere, decoded from Bell cut-rank profiles, plus the
 Hawking–Euclidean layer `cone_flat_iff` (flat ⟺ θ=2π) and `hawking_two_pi_coincidence`; and the

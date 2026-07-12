@@ -8,7 +8,7 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **~495 files and over 5,000
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **~500 files and over 5,000
 theorems** (over 5,700 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
