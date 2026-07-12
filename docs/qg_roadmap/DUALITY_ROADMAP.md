@@ -1,6 +1,7 @@
 # DUALITY ROADMAP — what separates the verified dictionary from a genuine duality
 
-**Date:** 2026-07-12 (D3 skeleton complete + cited-inputs program G1/G2 landed; see the ledger).
+**Date:** 2026-07-12 (D3 skeleton complete + cited-inputs G1/G2 + the conditional-theorem G3 landed;
+see the ledger). The conjecture is now a CONDITIONAL theorem, not an unproven `Prop`.
 **Companions:** `ADSCFT_GAP_ANALYSIS.md` (the mechanism-by-mechanism
 comparison), `WHERE_WE_ARE.md` (the full-credit status), `FLAT_RECORD_GRAVITY_CONJECTURE.md`
 (the target statement + the cited-inputs discharge ledger). **Definition used throughout:** a DUALITY is two independently defined
@@ -42,8 +43,12 @@ calibrated to shared primitives (`AdSCFTComparison.lean`'s exact diagnosis of wh
 uniquely has). This statement EXISTS as the named Prop **`FlatSpaceRecordGravityCorrespondence`**
 (`Conjectures.lean`): micro continuum record entropy = one-loop conical entropy = area/4G_ind,
 ONE microscopic system computing both the states and G. Its finite half is PROVEN
-(`finiteEvidence_holds`); the continuum half is the conjecture.
-**Status:** stated, finite-evidenced, open. Proving it IS acquiring the duality.
+(`finiteEvidence_holds`); its continuum SKELETON is now machine-checked term by term (D3a–D3e/f); its
+two tractable physical inputs are finite theorems (G1/G2); and its ENTAILMENT is a conditional
+theorem (G3 — the three still-cited inputs, as labelled hypotheses, imply it). The UNCONDITIONAL
+continuum statement remains the conjecture.
+**Status:** skeleton complete · 2/5 inputs discharged · entailment machine-checked · the
+unconditional Prop still open (see the ledger row). Closing it IS acquiring the duality.
 
 ### D4 — bulk dynamics from boundary dynamics
 Held: statics (equilibria are Einstein states — `boundary_dynamics_equilibria_are_geometry`,
@@ -63,11 +68,14 @@ theorem — the decoded bulk is spatial and single-scale.
 
 ### D6 — protection (what makes a dictionary RIGID)
 Non-renormalization is why AdS/CFT's dictionary has fixed coefficients. No analogue exists here,
-which is why `N_eff/4`, `Λ_s`, and the heat-kernel `c_i` float — with the `c_i` blocker (the
-`(1/6−ξ)` Seeley–DeWitt coefficient) gated on the ecosystem-wide Riemannian heat-kernel gap that
-no proof assistant has crossed. Without protection, even a proven correspondence is a
-one-parameter FAMILY of dictionaries, not THE dictionary.
-**Status:** absent; the deepest blocker is external (Mathlib's own diff-geo frontier).
+which is why `N_eff/4`, `Λ_s`, and the heat-kernel `c_i` float. The `c_i` blocker (the `(1/6−ξ)`
+Seeley–DeWitt coefficient) is now HALF-crossed: its ALGEBRAIC content is a theorem (G3
+`CorrespondenceAssembly.lean` — `scalarA1 ξ R = (1/6−ξ)R`, minimal scalar `⟹ R/6`, 4D conformal
+`⟹ 0`), but the ANALYTIC identification `heatTraceCoeff₁ = ∫(R/6+trE)` stays gated on the
+ecosystem-wide Riemannian heat-kernel gap that no proof assistant has crossed. Without protection,
+even a proven correspondence is a one-parameter FAMILY of dictionaries, not THE dictionary.
+**Status:** absent as a mechanism; the coefficient's algebraic half is proved, its analytic half's
+deepest blocker is external (Mathlib's own diff-geo frontier).
 
 ## The dependency structure and the critical path
 
@@ -87,15 +95,22 @@ and the third is already written down with its finite half proven.
 
 ## Suggested next bricks (each loop-sized, in path order)
 
-- **D1a:** the pointer-competition model — `H = H_S + A⊗B` with `[H_S, A] ≠ 0`; target: the
-  einselected basis as a function of the coupling strength (the honest hard case of IC1).
-- **D4a:** the statics→dynamics rung — `h(s) := reconstruct(δA(T_s ρ))` and its evolution law
-  (composable from held pieces; the first machine-checked "boundary relaxation drives bulk
-  geometry in time").
-- **D2a:** the Δ-smoothing campaign (the Kaplansky escape — mollify the compression approximants
-  by bounded functions of the held Δ).
-- **D3a:** the first continuum rung of `FlatSpaceRecordGravityCorrespondence` (scope with a
-  design consult; the conjecture's finite evidence names the shape).
+The 2026-07-11/12 campaign bricks (D1a · D4a · D2a · LA2 · D3a–e · G1 · G2 · G3) all LANDED — see
+the ledger and the campaign logs below. The current frontier, in decreasing tractability:
+
+- **D4b — the GENERATION half of bulk dynamics** (the D4 remainder; likely the next tractable
+  brick): a bulk equation of motion from boundary evolution — `h(s) := reconstruct(δA(T_s ρ))` given
+  a genuine EVOLUTION law (not just D4a's conservation/frozen metric). Composable from held pieces;
+  no external gate. Consult-first on the honest evolution-law statement.
+- **D5a — the scale-as-dimension rung** (the D5 remainder): entanglement-at-all-scales → the
+  holographic radial direction, on the held refinement tower + exact RT. The decoded bulk is
+  currently spatial/single-scale; the theorem is absent, not obstructed.
+- **The a₁ = R/6 ANALYTIC identification** (the D3 input #3 / D6 `c_i` remainder): the algebraic
+  half is proved (G3); the analytic `heatTraceCoeff₁ = ∫(R/6+trE)` is GATED on Mathlib's absent
+  Riemannian heat-kernel theory — research-grade, a Mathlib contribution, NOT increment-grade.
+- **Encoding #4/#5 as physical postulates** (optional, honesty-of-record): the same-regulator and
+  cutoff-identification inputs are modeling stipulations, not theorems; they are already carried as
+  `PhysicalInputs` hypotheses in G3's conditional theorem — no further Lean work discharges them.
 
 ## D3d DESIGN — CONSULT DONE (gpt-5.5-pro, 2026-07-12): the Susskind–Uglum counterterm identity
 The honest formalizable rung is the CUTOFF-EXPLICIT counterterm identity (NOT a cutoff-free
@@ -122,7 +137,7 @@ S = (1−q∂_q)log Z_q|₁; the n → 1 analytic continuation; a₁ = R/6 for t
 regulator in S and δ(1/G). Integer-cone + one-loop free scalar; NOT the conjecture (its fourth
 rung), NOT QG.
 
-## ★ THE LEDGER AS OF 2026-07-12 (post D1a/D4a/D2a/LA2/D3a–e + cited-inputs G1/G2) — the six pieces, current status
+## ★ THE LEDGER AS OF 2026-07-12 (post D1a/D4a/D2a/LA2/D3a–e + cited-inputs G1/G2 + conditional-theorem G3) — the six pieces, current status
 
 | Piece | Status | What landed / what remains |
 |---|---|---|
@@ -134,12 +149,13 @@ rung), NOT QG.
 | **D6 — protection** | ⚪ absent | *Remains:* everything; deepest blocker (the (1/6−ξ) coefficient) is gated on Mathlib's own Riemannian frontier. |
 
 **The critical path D1 → D2 → D3 now reads: two links effectively forged, the third's SKELETON
-complete and 2 of its 5 physical inputs discharged at the finite level.** The remaining distance to
-"duality" is now sharply localized: the conjecture's `Prop` awaits three cited inputs (one — a₁=R/6
-— gated on Mathlib's own Riemannian frontier, two — same-regulator and the D_eff~1/x cutoff — that
-are physical modeling stipulations rather than theorems a proof assistant can discharge) plus the
-continuum assembly of the skeleton, together with the two parallel tracks D5/D6. Everything short of
-those is landed, pushed, and axiom-free.
+complete, 2 of its 5 physical inputs discharged at the finite level, and its ENTAILMENT machine-checked
+(G3 — inputs ⟹ correspondence).** The remaining distance to "duality" is now sharply localized: the
+conjecture's UNCONDITIONAL `Prop` awaits three cited inputs (one — a₁=R/6 — whose algebraic half is
+proved and whose analytic half is gated on Mathlib's own Riemannian frontier; two — same-regulator and
+the D_eff~1/x cutoff — that are physical modeling stipulations rather than theorems a proof assistant
+can discharge), together with the two parallel tracks D5/D6. Everything short of those is landed,
+pushed, and axiom-free — and the conjecture is now a conditional theorem, not an unproven Prop.
 
 ## CAMPAIGN STATUS: COMPLETE (2026-07-11) — all three bricks FULL GREEN, all pushed
 
