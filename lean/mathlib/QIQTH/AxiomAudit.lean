@@ -11282,4 +11282,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SaturationBridge.continuum_regime
 #print axioms QIQTH.SaturationBridge.saturation_diagram_noncommuting
 
+-- G1 — THE FINITE GAUSSIAN ONE-LOOP DETERMINANT (conjecture-input program, first of the DY7
+-- conjecture's FIVE cited physical inputs, discharged AT THE FINITE LEVEL): the Frullani /
+-- subtracted proper-time representation of the one-loop determinant.  PART A integral_frullani
+-- (log(a/b) = ∫₀^∞ (e^{−bt} − e^{−at})/t dt, general a,b>0, via the inner FTC representation
+-- (e^{−bt}−e^{−at})/t = ∫_b^a e^{−st} ds + a genuine Tonelli/Lebesgue swap between (0,∞) and [b,a],
+-- closed by ∫₀^∞ e^{−st} = 1/s and ∫_b^a 1/s = log(a/b)) + integral_frullani_one (b=1) +
+-- integrableOn_frullani(_one).  PART B ★★ log_specDet_eq_properTime: log det A = ∫₀^∞ (N e^{−t} −
+-- Tr e^{−tA})/t dt — a GENUINE convergent Lebesgue integral for a finite positive spectrum {λ_k};
+-- the Frullani subtraction of N e^{−t} removes the t→0 UV divergence of the raw ∫ Tr K dt/t (which
+-- does NOT converge).  PART C ★ gaussianIntegral_diagonal: ∫ e^{−½ Σ λ_k x_k²} = ∏ √(2π/λ_k) (the
+-- factorized product Gaussian: Mathlib integral_gaussian × Fubini integral_fintype_prod).  PART D
+-- ★★ gaussianLogZ_eq_properTime: log Z = (N/2) log(2π) − ½ ∫₀^∞ (N e^{−t} − Tr e^{−tA})/t dt +
+-- capstone finite_one_loop_determinant.  HONEST (binding): discharges ONE of the DY7 conjecture's
+-- five cited inputs AT THE FINITE LEVEL, NOT the conjecture.  FINITE-DIMENSIONAL only (a finite
+-- positive spectrum l : ι → ℝ, ∀k, 0 < l k — the record code's finite mode content); the CONTINUUM
+-- functional determinant / ζ-regularization / heat-kernel small-t asymptotics stay CITED.  The
+-- DIAGONAL Gaussian is used (the record spectrum is diagonal by construction); the arbitrary
+-- Matrix.PosDef Gaussian (needs the spectral theorem + orthogonal change of variables) is a
+-- SEPARATE cited brick.  The raw ½∫₀^∞ (dt/t) Tr K is NOT a convergent Lebesgue integral — only the
+-- Frullani-SUBTRACTED form is (that is the object proved).  NOT the strong holographic principle,
+-- NOT QG.  [AF] std-3.
+#print axioms QIQTH.OneLoopDeterminant.integral_frullani
+#print axioms QIQTH.OneLoopDeterminant.integral_frullani_one
+#print axioms QIQTH.OneLoopDeterminant.log_specDet_eq_properTime
+#print axioms QIQTH.OneLoopDeterminant.gaussianIntegral_diagonal
+#print axioms QIQTH.OneLoopDeterminant.gaussianLogZ_eq_properTime
+#print axioms QIQTH.OneLoopDeterminant.finite_one_loop_determinant
+
 end QIQTH.AxiomAudit
