@@ -11310,4 +11310,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OneLoopDeterminant.gaussianLogZ_eq_properTime
 #print axioms QIQTH.OneLoopDeterminant.finite_one_loop_determinant
 
+-- G2 — THE FINITE REPLICA n→1 CONTINUATION (conjecture-input program, SECOND of the DY7
+-- conjecture's five cited physical inputs, discharged AT THE FINITE LEVEL): the replica / Rényi
+-- calculus that turns "S = −∂ₙ log Zₙ|ₙ₌₁" into a theorem for a finite full-support spectrum.
+-- Defs: replicaZ p n = ∑ exp(n·log pᵢ) (= ∑ pᵢⁿ, powers as exp∘log for smoothness); replicaW =
+-- log∘replicaZ (the replica free energy); shannon p = −∑ pᵢ log pᵢ (the von Neumann/Shannon
+-- entropy); renyi p n = replicaW/(1−n).  replicaW_contDiff (ContDiff ℝ ⊤ — full smoothness, no
+-- weakening) + replicaW_one (w(1)=0 since ∑ pᵢ = 1).  ★★ replicaW_hasDerivAt_one: w'(1) = ∑ pᵢ log
+-- pᵢ (chain rule on log∘(finite sum of exp), replicaZ(1)=1).  ★★ replica_entropy_hasDerivAt: the
+-- TIGHT HEADLINE S = −∂ₙ w|ₙ₌₁ = shannon p.  renyi_tendsto_shannon: the Rényi n→1 limit
+-- (renyi n = −slope(w,1,n) → −w'(1) = shannon, via hasDerivAt_iff_tendsto_slope — NO L'Hôpital) +
+-- capstone finite_replica_continuation.  HONEST (binding): discharges input #2 AT THE FINITE
+-- LEVEL, NOT the conjecture.  FINITE full-support probability spectrum only (p : ι → ℝ, ∀i 0 < pᵢ,
+-- ∑ p = 1 — the record code's finite mode occupation); this is the finite spectral calculus AFTER
+-- one has Zₙ = Tr ρⁿ = ∑ pᵢⁿ.  It does NOT justify the physics load-bearing step — that the
+-- INTEGER-n geometric / orbifold replica path integrals pick out THIS analytic family (integer
+-- values alone do not determine a unique continuation); that identification stays CITED.  Real-
+-- analytic finite calculus; NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.ReplicaContinuation.replicaW_hasDerivAt_one
+#print axioms QIQTH.ReplicaContinuation.replica_entropy_hasDerivAt
+#print axioms QIQTH.ReplicaContinuation.renyi_tendsto_shannon
+#print axioms QIQTH.ReplicaContinuation.finite_replica_continuation
+
 end QIQTH.AxiomAudit
