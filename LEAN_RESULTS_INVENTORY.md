@@ -1620,6 +1620,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Inputs #2–#5 (replica n→1, curved a₁=R/6, same-regulator, cutoff D_eff~1/x) remain cited — #3 is
   Mathlib-Riemannian-heat-kernel-gated (research-grade).
 
+- **THE CITED-INPUTS DISCHARGE PROGRAM, G2 — `QIQTH/ReplicaContinuation.lean`** (**[AF]** std-3,
+  budget 0, 2026-07-12, commit `41f35b90`). Turns the SECOND of the DY7 conjecture's five cited
+  physical inputs — the replica `n → 1` analytic continuation `S = −∂_n log Z_n |_{n=1}` — into a
+  machine-checked theorem for a finite full-support probability spectrum `p : ι → ℝ` (`∀ i, 0 < p_i`,
+  `∑ p = 1`). With `w(n) = log(∑_i p_i^n)` (powers as `exp(n·log p_i)`): `replicaW_contDiff`
+  (`ContDiff ℝ ⊤`, full smoothness) + `replicaW_one` (`w(1)=0`); ★★ `replicaW_hasDerivAt_one`
+  (`w'(1) = ∑ p_i log p_i`); ★★ `replica_entropy_hasDerivAt` (the tight headline
+  `S = −∂_n w|_{n=1} =` the von Neumann/Shannon entropy `−∑ p_i log p_i`); `renyi_tendsto_shannon`
+  (the Rényi `n→1` limit via `hasDerivAt_iff_tendsto_slope` — no L'Hôpital) + capstone
+  `finite_replica_continuation`. ⚠ **HONEST (binding):** FINITE full-support spectrum only; the finite
+  spectral calculus AFTER one has `Z_n = Tr ρ^n = ∑ p_i^n`. Does NOT justify that the INTEGER-n
+  geometric/orbifold replica picks out THIS analytic family (integer values don't determine a unique
+  continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
+  conjecture, NOT the strong principle, NOT QG.
+
 - **THE RECORD CHANNEL / BOUNDARY DYNAMICS, RC1–RC3 — `QIQTH/RecordChannel.lean` +
   `RecordEquilibrium.lean` + `RecordUnraveling.lean`** (**[AF]** std-3, budget 0, 2026-07-10; commits
   `73fd89c4`/`ef64ea39`/`a63c9b73`; `RC_CAMPAIGN_PLAN.md` + `BOUNDARY_DYNAMICS_CANDIDATES.md` —

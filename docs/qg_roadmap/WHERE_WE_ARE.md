@@ -46,7 +46,15 @@ line drawn where the roadmap draws it.
    (D3e/f `22bbd7b2`) — with THREE Mathlib-firsts (the Bose integral, the Riemann-sum theorem, the
    cosecant sum). The full Prop awaits its CITED standard-QFT inputs (the Gaussian one-loop
    determinant, the replica n→1 continuation, the curved a₁=R/6, the same-regulator assumption, the
-   cutoff identification) — none QIQT-H-specific.
+   cutoff identification) — none QIQT-H-specific. **CITED-INPUTS DISCHARGE PROGRAM (2026-07-12):** the
+   two TRACTABLE physical inputs are now finite-level theorems — input #1 the Gaussian one-loop
+   determinant (G1 `2e286419`, `OneLoopDeterminant.lean`, the Frullani subtracted proper-time log-det)
+   and input #2 the replica n→1 continuation (G2 `41f35b90`, `ReplicaContinuation.lean`, S = −∂ₙ log
+   Zₙ|₁ as a theorem). The remaining three are NOT clean Lean bricks: #3 the curved a₁=R/6 is gated on
+   Mathlib's own Riemannian heat-kernel/Seeley–DeWitt frontier (research-grade); #4 the same-regulator
+   assumption is a physical modeling stipulation; #5 the cutoff identification D_eff~1/x is a modeling
+   choice (the log-matching itself is proved in D3e/f). The Prop stays open on #3–#5 + the continuum
+   assembly.
 
 5. **The missing correspondence is a single named Prop, not a vague hope.**
    `FlatSpaceRecordGravityCorrespondence` (`Conjectures.lean`, DY7): in the continuum limit the

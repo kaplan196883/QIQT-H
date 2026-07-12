@@ -140,7 +140,32 @@ theorem (the continuum/regularization tail staying cited). Progress:
   `½∫(dt/t)Tr K` is honestly noted as non-convergent — only the subtracted form is proved. This
   discharges input #1 at the finite level; it is NOT the conjecture, NOT the strong principle, NOT QG.
 
-- **Inputs #2–#5** — the replica n → 1 continuation, the curved-space a₁ = R/6, the SAME-regulator
-  assumption, the cutoff identification D_eff ~ 1/x — remain cited. #2 and #5 are likely tractable as
-  finite modeling/interpolation statements (like D3c's `coneCoeff`); #3 (curved a₁ = R/6) is gated on
-  Mathlib's own Riemannian heat-kernel / Seeley–DeWitt frontier and is research-grade, not forced.
+- **Input #2 — the replica n → 1 continuation: DISCHARGED AT THE FINITE LEVEL (G2 `41f35b90`).**
+  `QIQTH/ReplicaContinuation.lean` proves, axiom-free (std-3), the finite replica / Rényi calculus
+  that turns `S = −∂_n log Z_n |_{n=1}` into a theorem for a finite full-support probability spectrum
+  `p : ι → ℝ` (`∀ i, 0 < p_i`, `∑ p = 1`). With the replica free energy `w(n) = log(∑_i p_i^n)`
+  (powers as `exp(n·log p_i)` for smoothness):
+  - `replicaW_contDiff` — `w` is `ContDiff ℝ ⊤` (full smoothness); `replicaW_one` — `w(1) = 0`;
+  - ★★ `replicaW_hasDerivAt_one` — `w'(1) = ∑_i p_i log p_i` (chain rule on `log ∘ (finite exp-sum)`,
+    `Z(1) = 1`);
+  - ★★ `replica_entropy_hasDerivAt` — the tight headline `S = −∂_n w |_{n=1} = −∑ p_i log p_i` (the
+    von Neumann/Shannon entropy);
+  - `renyi_tendsto_shannon` — the Rényi `n → 1` limit `(1/(1−n)) log Z_n → S` via the slope
+    characterization (no L'Hôpital) + capstone `finite_replica_continuation`.
+
+  Firewall: FINITE full-support spectrum only; this is the finite spectral calculus AFTER one has
+  `Z_n = Tr ρ^n = ∑ p_i^n`. It does NOT justify the physics load-bearing step — that the INTEGER-n
+  geometric/orbifold replica path integrals pick out THIS analytic family (integer values alone do
+  not determine a unique continuation); that identification stays CITED. Discharges input #2 at the
+  finite level; NOT the conjecture, NOT the strong principle, NOT QG.
+
+- **Inputs #3–#5 — remain cited (no clean finite Lean brick):**
+  - **#3 the curved-space a₁ = R/6** — gated on Mathlib's own Riemannian heat-kernel / Seeley–DeWitt
+    frontier; no proof assistant has this. Research-grade, not forced (watch/contribute to Mathlib's
+    differential-geometry effort). The flat-space π-content is already derived (`heatDensity_dDim`).
+  - **#4 the SAME-regulator assumption** — a physical modeling assumption (that the entropy and the
+    `δ(1/G)` counterterm use the same UV regulator); not a mathematical theorem but a stipulation of
+    the model. Carried honestly as a labelled hypothesis in D3d.
+  - **#5 the cutoff identification D_eff ~ 1/x** — a modeling choice fixing the exact offset (C = e);
+    the log-matching itself is proved (D3e/f `tendsto_sInf_add_log`), but the identification of the
+    density-of-states cutoff with the inverse temperature-frequency is stipulated, not derived.
