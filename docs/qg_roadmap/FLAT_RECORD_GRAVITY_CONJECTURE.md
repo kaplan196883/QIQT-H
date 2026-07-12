@@ -63,3 +63,14 @@ thermodynamic entropy π/(3β) IS the DOS-weighted D3a record entropy
 the Euclidean-time trace factor is load-bearing. HONEST: the SMOOTH cylinder only — the CONE
 (Sommerfeld, conical coefficients, UV control, renormalized G) is the cited next rung; the m = 0
 vacuum winding removed by construction; no induced-G, no β → 0 saturation, no limit interchange.
+
+## THE THIRD CONTINUUM RUNG — LANDED (2026-07-12, `a1d3a65e`, `ConicalHeatKernel.lean`)
+The conical leg of the conjecture's one-loop entropy is now machine-checked at the integer-cone
+level, via the ℤ_n orbifold image method (no Sommerfeld): the non-area heat-trace excess of the
+cone C_{2π/n} = ℝ²/ℤ_n is EXACTLY (1/12)(n − 1/n), t-INDEPENDENT (`zmodConeExcess_eq_standard`),
+and its replica interpolation `coneCoeff` has derivative 1/6 at the smooth point
+(`hasDerivAt_coneCoeff_one` — the c/6 entanglement coefficient, c = 1). The arithmetic core, the
+cosecant sum Σ csc²(πk/n) = (n²−1)/3, is a Mathlib-first. HONEST: integer cones only; the n → 1
+analytic continuation, the general-angle Sommerfeld kernel, the one-loop determinant + UV
+regularization, and the A/4G coupling all CITED — the last is the D3d rung (design recorded, the
+Susskind–Uglum counterterm identity).
