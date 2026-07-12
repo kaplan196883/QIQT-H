@@ -96,6 +96,31 @@ and the third is already written down with its finite half proven.
 - **D3a:** the first continuum rung of `FlatSpaceRecordGravityCorrespondence` (scope with a
   design consult; the conjecture's finite evidence names the shape).
 
+## D3d DESIGN — CONSULT DONE (gpt-5.5-pro, 2026-07-12): the Susskind–Uglum counterterm identity
+The honest formalizable rung is the CUTOFF-EXPLICIT counterterm identity (NOT a cutoff-free
+cancellation of infinities). File `QIQTH/ConicalSakharov.lean` (import ConicalHeatKernel + cite
+SakharovRatio). Carry `I` (= the proper-time/IR cutoff functional J_ε) as an EXPLICIT named real
+— never take ε → 0. Core (pro's verified Lean algebra, trivially `ring`-provable):
+- `Sent N A I := N*A*I/12`; `dInvG N I := N*I/3`; `Gind N I := (dInvG N I)⁻¹`;
+  `invGren invGbare N I := invGbare + dInvG N I`.
+- ★ `ent_eq_area_quarter_dInvG : Sent N A I = (A/4)*dInvG N I` — THE SUSSKIND–UGLUM IDENTITY
+  (S_ent = A/4 · δ(1/G)).
+- ★ `bare_entropy_renormalizes : (A/4)*invGbare + Sent N A I = (A/4)*invGren invGbare N I` —
+  entanglement entropy IS the counterterm renormalizing 1/G.
+- ★★ `induced_product (h : dInvG N I ≠ 0) : 4*Gind N I*Sent N A I = A` — cutoff-INDEPENDENT
+  (holds at every finite cutoff; the honest S·4G = A).
+- THE JOIN TO D3c: the 1/12 in Sent = the replica derivative of D3c's `coneCoeff`
+  (`hasDerivAt_coneCoeff_one = 1/6`, times the ½ loop factor); SIGN NOTE (pro-caught): the entropy
+  operator is `(1 + n∂_n)` in the orbifold variable n (or `(1 − q∂_q)` for q = angle/2π) — use the
+  q-form or the +n form, NOT −n. THE JOIN TO THE HELD SAKHAROV: the D=4 specialization
+  I = 1/(4πε²) gives S = NA/(48πε²), δ(1/G) = N/(12πε²), so 1/48π = (1/4)·(1/12π) — the held
+  `SakharovRatio.sakharov_ratio` ratio, now READ as the S_ent : δ(1/G) = 1/4 relation. Deliver
+  the D=4 and D=2 (c/6 log(L/ε)) specializations as corollaries tying I to the explicit forms.
+FIREWALL (cited, per pro §6): the Gaussian determinant log Z = ½∫(dt/t)Tr K; the replica identity
+S = (1−q∂_q)log Z_q|₁; the n → 1 analytic continuation; a₁ = R/6 for the minimal scalar; the SAME
+regulator in S and δ(1/G). Integer-cone + one-loop free scalar; NOT the conjecture (its fourth
+rung), NOT QG.
+
 ## ★ THE LEDGER AS OF 2026-07-12 (post D1a/D4a/D2a/LA2/D3a) — the six pieces, current status
 
 | Piece | Status | What landed / what remains |
