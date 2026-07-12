@@ -11358,4 +11358,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CorrespondenceAssembly.xiConf_four
 #print axioms QIQTH.CorrespondenceAssembly.a1_core
 
+-- D4b — THE GENERATION HALF OF BULK DYNAMICS (duality campaign): a boundary evolution that MOVES
+-- the record ledger induces a nontrivial bulk metric TRAJECTORY, with the bulk EOM = the pushforward
+-- of the boundary rate equation through the LINEAR area decoder.  D4a froze the metric under RC
+-- dephasing (ledger-invariant ⟹ conserved area ⟹ frozen); D4b uses a classical POPULATION-TRANSFER
+-- (Markov) generator Q (IsMarkovGeneratorCol, col-sums-zero) — the honest source of ledger motion,
+-- distinct from RC phase-dephasing AND the free flow (both fix the diagonal).  ★★ bulk_chain /
+-- bulk_eom: HasDerivAt (fun t => reconstruct'(areaOfLedger(p t))) (reconstruct'(areaOfLedger(Q·p s)))
+-- s — the metric velocity is the composite-linear-decoder pushforward of the ledger velocity (CLM
+-- chain rule).  pExp = exp(tQ)·p0 trajectory; hasDerivAt_pExp PROVED (solves p'=Q·p); bulk_eom_exp
+-- combines them.  reconstructL bundles the held AreaMap.reconstruct as a LinearMap (grounds the
+-- abstract law in the real decoder); frozen_of_velocity_ker + metric_moving_iff = the honest D4a
+-- contrast (kernel velocity ⟹ frozen; nonzero decoded velocity ⟹ genuine motion).  HONEST (binding):
+-- the PUSHFORWARD of a SPECIFIED boundary Markov dynamics through the FIXED linear decoder — NOT
+-- RC/dephasing, NOT the free flow, NOT yet an AUTONOMOUS bulk gravitational EOM (the velocity depends
+-- on the ledger p(s), not on the metric h(s) alone; an autonomous bulk-only law needs
+-- ker(reconstruct∘areaOfLedger) Q-invariant, NOT claimed).  Nontriviality a real hypothesis;
+-- finite-dim, linearized decoder, chosen basis (Frobenius matrix norm fixed for well-formedness).
+-- NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.BulkGeneration.bulk_chain
+#print axioms QIQTH.BulkGeneration.bulk_eom
+#print axioms QIQTH.BulkGeneration.hasDerivAt_pExp
+#print axioms QIQTH.BulkGeneration.bulk_eom_exp
+#print axioms QIQTH.BulkGeneration.reconstructL_apply
+#print axioms QIQTH.BulkGeneration.metric_moving_iff
+
 end QIQTH.AxiomAudit
