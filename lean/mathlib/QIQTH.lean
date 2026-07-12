@@ -765,6 +765,7 @@ import QIQTH.ConicalSakharov
 import QIQTH.SaturationBridge
 import QIQTH.OneLoopDeterminant
 import QIQTH.ReplicaContinuation
+import QIQTH.CorrespondenceAssembly
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

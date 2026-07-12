@@ -11332,4 +11332,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ReplicaContinuation.renyi_tendsto_shannon
 #print axioms QIQTH.ReplicaContinuation.finite_replica_continuation
 
+-- G3 — THE CONDITIONAL-PROP ASSEMBLY + the a₁=R/6 algebraic core (conjecture-input program).
+-- Turns the DY7 conjecture `FlatSpaceRecordGravityCorrespondence` (a def…:Prop with NO proof term)
+-- into a NON-VACUOUS CONDITIONAL THEOREM.  PART 1 (a₁=R/6 algebraic core): scalarA1 ξ R =
+-- (1/6−ξ)·R; a1_minimal (ξ=0 ⟹ a₁=R/6); xiConf_four (4D conformal ξ=1/6); a1_conformal_four (⟹
+-- a₁=0) + capstone a1_core.  PART 2 (the assembly): a ConstructiveCLD record of lower-level
+-- building blocks whose four opaque ContinuumLimitData fields are DEFINED from them (microS =
+-- record-side entropy; loopS = D3d Sent; GindV = D3d Gind; GsakV = (sakInvG)⁻¹) via toOpaque;
+-- PhysicalInputs carries the three still-cited inputs (#3 a₁=R/6, #4 same-regulator, #5 cutoff
+-- identification) as STRUCTURE hypotheses over building blocks ONLY (never the opaque output
+-- fields).  ★★ flatSpaceCorrespondence_of_constructive: PhysicalInputs D ⟹
+-- FlatSpaceRecordGravityCorrespondence D.toOpaque.  NON-VACUITY: the MIDDLE equality (loop =
+-- area/4·Gind) is DERIVED from D3d's proved induced_product; only equalities #1 (micro=loop) and #3
+-- (Gind=Gsak) route through the carried physical inputs — exactly the cited physics.  HONEST
+-- (binding): this proves the ENTAILMENT (inputs ⟹ correspondence), making auditable what physics
+-- is assumed; it does NOT discharge the inputs and is NOT a proof of the conjecture.  The a₁=R/6
+-- piece is the ALGEBRAIC coefficient given the local heat expansion; the ANALYTIC Seeley–DeWitt
+-- identification (heatTraceCoeff₁ = ∫(R/6+trE)) needs Mathlib's absent Riemannian heat-kernel
+-- theory and stays CITED.  newton_matches is the finite stand-in for the (Mathlib-gated) derivation
+-- of the EH coefficient from a₁.  NOT the conjecture, NOT the strong holographic principle, NOT QG.
+-- [AF] std-3.
+#print axioms QIQTH.CorrespondenceAssembly.flatSpaceCorrespondence_of_constructive
+#print axioms QIQTH.CorrespondenceAssembly.a1_minimal
+#print axioms QIQTH.CorrespondenceAssembly.a1_conformal_four
+#print axioms QIQTH.CorrespondenceAssembly.xiConf_four
+#print axioms QIQTH.CorrespondenceAssembly.a1_core
+
 end QIQTH.AxiomAudit
