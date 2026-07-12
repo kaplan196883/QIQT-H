@@ -107,7 +107,7 @@ assistant** before (pointers and corrections welcome): a complete **Tomita–Tak
 for an inductive-limit state, an **unbounded Stone theorem** and spectral machinery beyond current
 Mathlib, and the **von Neumann double-commutant theorem** — plus the headline physics chain, the
 **semiclassical Einstein equations from a finite-entropy bound**, conditional and free-field, end to
-end. Over 5,000 theorems across ~500 files, with **no project-specific axioms and no `sorry`** — the final theorems
+end. Over 5,000 theorems across ~505 files, with **no project-specific axioms and no `sorry`** — the final theorems
 depend only on Lean's three standard classical axioms.
 
 ## The ask
