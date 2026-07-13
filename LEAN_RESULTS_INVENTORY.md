@@ -1649,7 +1649,13 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   `norm_boundedFC_sq` isometry identity); ★★ STRONG CONTINUITY in L²-spectral form —
   `heatSemigroup_sub_id_normSq` (`‖e^{−tA}x−x‖² = ∫‖e^{−ta}−1‖² dμ_x`) + `heatSemigroup_L2_tendsto_zero`
   (that integral `→ 0` as `t→0⁺` by dominated convergence), which together give `e^{−tA}x → x` — a
-  genuine **C₀-semigroup**. The generator `= −A` (unbounded + domains) stays the harder unbuilt piece. ⚠ **HONEST (binding):** the ABSTRACT operator
+  genuine **C₀-semigroup**. **B1 the GENERATOR `= −A` (same file, `28995c75`):** ★★
+  `heatSymbol_diffQuotient_L2_tendsto` (slope `(e^{−tA}x−x)/t → −Ax` in `L²(μ_x)`) + ★★
+  `hasDerivWithinAt_heatSemigroup` (the full one-sided `HasDerivWithinAt (fun t => e^{−tA}x) (−fcOp a x)
+  (Ici 0) 0`), `A = ∫a dE` the tower's unbounded `fcOp` — the real analogue of the tower's unitary Stone
+  generator. ⟹ Phase B COMPLETE: the abstract heat semigroup is a genuine **C₀-semigroup with generator
+  −A**, on our own tower. (The MANIFOLD instantiation — `Δ` on `L²(M)`, discrete spectrum, smooth kernel
+  — stays the Phase C/D/E wall.) ⚠ **HONEST (binding):** the ABSTRACT operator
   semigroup ONLY. It does NOT build the manifold heat kernel — that `Δ` on `L²(M)` is such an operator
   (Phase C), has discrete spectrum (Phase D — Rellich compactness, ABSENT from Mathlib), or has a smooth
   integral kernel (Phase E — elliptic regularity, ABSENT) are THE WALL (`HEAT_KERNEL_INFRASTRUCTURE_PLAN.md`),

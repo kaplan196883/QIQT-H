@@ -41,8 +41,12 @@ phase is claimed done until it is a machine-checked, axiom-free theorem.
   tower's `norm_boundedFC_sq` isometry identity — `heatSemigroup_norm_le_one` (the SHARP `‖e^{−tA}‖ ≤ 1`,
   upgrading the `2C` bound) and strong continuity in L²-spectral form (`heatSemigroup_sub_id_normSq`:
   `‖e^{−tA}x−x‖² = ∫‖e^{−ta}−1‖² dμ_x`; `heatSemigroup_L2_tendsto_zero`: that integral `→ 0` as `t→0⁺`
-  by dominated convergence) — together, `e^{−tA}x → x`, a genuine **C₀-semigroup**. *Remaining in B (the
-  harder piece, unbuilt):* the generator `= −A` (`d/dt e^{−tA}|₀` — unbounded operator + domains).
+  by dominated convergence) — together, `e^{−tA}x → x`, a genuine **C₀-semigroup**. **B1 — the generator
+  `= −A` ✅ BUILT** (`28995c75`): the real analogue of the tower's unitary Stone generator —
+  `heatSymbol_diffQuotient_L2_tendsto` (slope `(e^{−tA}x−x)/t → −Ax` in `L²(μ_x)`) AND the full one-sided
+  `hasDerivWithinAt_heatSemigroup` (`HasDerivWithinAt (fun t => e^{−tA}x) (−fcOp a x) (Ici 0) 0`),
+  `A = ∫a dE` the tower's unbounded `fcOp`. ⟹ **Phase B COMPLETE: the abstract heat semigroup is a
+  genuine C₀-semigroup with generator −A**, entirely on our own tower.
 - **Phase C — `Δ` on `L²(M)` IS a positive self-adjoint operator. ⛔ mostly wall.** Needs the manifold
   `L²` space (Bochner integral against the Riemannian volume), `Δ` as an unbounded operator, and
   essential self-adjointness. Partly reachable (we have unbounded self-adjoint theory), but the manifold
@@ -70,7 +74,8 @@ Ordered list of the next bricks, each an axiom-free green increment on our own t
 wall. The loop attempts these in order; at a wall it CHECKPOINTS honestly (records what's missing, does
 NOT force, NEVER axiom-izes) and stops.
 
-- **B1 — the generator `= −A`. ⚠ tractable-hard (NEXT).** For `x` in the domain (`∫ λ² dμ_x < ∞`),
+- **B1 — the generator `= −A`. ✅ BUILT (`28995c75`).** Both the L²-slope form and the full one-sided
+  `HasDerivWithinAt`; the C₀-semigroup now has its generator `−A`. (Original scope below.) For `x` in the domain (`∫ λ² dμ_x < ∞`),
   `lim_{t→0⁺} (e^{−tA}x − x)/t = −Ax`, where `Aх = ∫ a dE x` (the tower's unbounded FC, `UnboundedFC`).
   Spectral-integral + dominated-convergence argument (like strong continuity, one order up:
   `‖(e^{−tA}x−x)/t + Ax‖² = ∫ |(e^{−ta}−1)/t + a|² dμ_x → 0`). Consult first; build.
