@@ -1635,6 +1635,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **THE AUTONOMOUS BULK EOM, D4c — `QIQTH/BulkAutonomy.lean`** (**[AF]** std-3, budget 0, 2026-07-13,
+  commit `ccb5825d`). Closes the gap D4b explicitly left open: D4b's bulk metric velocity depends on the
+  boundary ledger `p(s)`, not the metric `h(s)=D(p s)` alone. D4c: when `ker D` is `Q`-invariant
+  (equivalently the intertwiner `D∘Q = Qbar∘D`), the velocity DESCENDS to a function of the metric
+  alone — an AUTONOMOUS law. `KerInvariant` + `kerInvariant_iff_fiber_congr`; ★★ `autonomous_descend_at`
+  (V agrees on `image D` ⟹ `HasDerivAt (D∘p) (V (D (p s))) s`) + `autonomous_descend_at_clm`
+  (`D∘Q=Qbar∘D` ⟹ velocity `Qbar(h s)`, a function of `h(s)` only) + `autonomous_descend_global_clm`;
+  ★ `no_descend_of_bad_kernel` = the NECESSITY no-go (kernel not `Q`-invariant ⟹ NO descended velocity
+  field exists). Part B `bulk_metric_autonomous(_global)`: the same in the D4b `Ledger`/`Metric`
+  vocabulary. ⚠ **HONEST (binding):** the KINEMATIC autonomy of the induced metric flow — the descent
+  condition is carried as a HYPOTHESIS (never an axiom), its NECESSITY proved. NOT the Einstein equation,
+  NOT an AdS/curved dynamical law, NOT backreaction (those = the heat-kernel-gated D5-warp/D6-curvature,
+  deferred). Finite-dim, linearized decoder. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **SCALE AS DIMENSION, D5a — `QIQTH/ScaleDimension.lean`** (**[AF]** std-3, budget 0, 2026-07-13,
   commit `ef52d8f7`). The RADIAL / RG-scale direction added to the emergent geometry (Maldacena
   U = RG scale). The held single-scale entanglement→distance pseudometric `weightedCutDist`

@@ -1,10 +1,32 @@
 # DUALITY ROADMAP — what separates the verified dictionary from a genuine duality
 
-**Date:** 2026-07-12 (D3 skeleton complete + cited-inputs G1/G2 + the conditional-theorem G3 landed;
-see the ledger). The conjecture is now a CONDITIONAL theorem, not an unproven `Prop`.
-**Companions:** `ADSCFT_GAP_ANALYSIS.md` (the mechanism-by-mechanism
+**Date:** 2026-07-13 (D3 skeleton + G1/G2 + G3 conditional theorem + D4b/D4c bulk dynamics + D5a radial
++ the Seeley–DeWitt interface; see the ledger). The conjecture is a CONDITIONAL theorem, not an
+unproven `Prop`. **Companions:** `ADSCFT_GAP_ANALYSIS.md` (the mechanism-by-mechanism
 comparison), `WHERE_WE_ARE.md` (the full-credit status), `FLAT_RECORD_GRAVITY_CONJECTURE.md`
-(the target statement + the cited-inputs discharge ledger). **Definition used throughout:** a DUALITY is two independently defined
+(the target statement + the cited-inputs discharge ledger), `HEAT_KERNEL_GAP_PLAN.md` (the deferred
+curvature wall).
+
+## ★ STATE OF CLOSE (2026-07-13) — the tractable program is closed; the residue is three external walls
+
+Every TRACTABLE item in this roadmap is now either a theorem or a cleanly-carried conditional (with its
+hypothesis a labelled structure/argument field, never a Lean `axiom`). The **entire remaining residue is
+three EXTERNAL walls**, none QIQT-H-specific, each documented and deferred:
+
+1. **The Riemannian heat-kernel / Seeley–DeWitt theory** — surfaces 3× (D3 input #3 `a₁=R/6`, D5 warp,
+   D6 curvature). Absent from every proof assistant; deferred with a phased plan
+   (`HEAT_KERNEL_GAP_PLAN.md`); `a₁=R/6` carried via the `SeeleyDeWittData` interface. Its Phase 1
+   (curvature) IS the live Mathlib effort (Gouëzel's Riemannian manifolds; Massot–Rothgang's
+   Levi-Civita PR) — track/contribute upstream, do not fork.
+2. **The von Neumann factor / type-III₁ classification API** (D2) — the Connes S-invariant / type
+   classification proper; absent from every proof assistant (the tower's III₁ *signature* — σ((1+Δ)⁻¹)
+   = [0,1] — is already proved; only the abstract type API is missing).
+3. **General interacting matter** (D1) — a non-solvable interacting boundary Hamiltonian; research-grade,
+   contains a Clay-type problem.
+
+Everything short of those three is landed, pushed, axiom-free, budget 0. The duality/DY7 conjecture is
+NOT proved — it is conditional on the carried inputs; closing the tractable work does not change that,
+it makes the remaining distance exactly these three named external walls. **Definition used throughout:** a DUALITY is two independently defined
 theories provably describing the same physics; a DICTIONARY is a set of proven correspondences
 between two bookkeepings of one constructed object. QIQT-H today holds the dictionary (much of it
 as theorems); this file enumerates exactly what is missing for the duality, item by item, each
@@ -57,10 +79,15 @@ CONSERVATION half (RC dephasing freezes the metric — geometry = conserved char
 the GENERATION half** (`BulkGeneration.lean`, `250210e7`): a boundary Markov population-transfer
 generator Q moves the ledger, and the bulk metric velocity is the LINEAR decoder pushforward of the
 rate equation `p' = Q·p` — the first machine-checked "boundary evolution generates bulk evolution."
-Missing: an AUTONOMOUS bulk-only equation of motion (the velocity still depends on the boundary
-ledger `p(s)`, not the metric `h(s)` alone — an autonomous law needs `ker(decoder)` `Q`-invariant),
-and backreaction. (In AdS/CFT the autonomy is automatic: one Hamiltonian, two readings.)
-**Status:** both halves (conservation + generation) landed; the autonomous bulk law + backreaction remain.
+**D4c delivered the AUTONOMY** (`BulkAutonomy.lean`, `ccb5825d`): when `ker(decoder)` is
+`Q`-invariant (the intertwiner `D∘Q = Qbar∘D`), the metric velocity descends to a function of the
+metric `h(s)` alone — the autonomous bulk law `HasDerivAt h (Qbar (h s)) s` — and the no-go
+`no_descend_of_bad_kernel` proves the condition is necessary, not decorative. So the bulk-dynamics
+KINEMATICS is complete (conservation + generation + autonomy). What remains — backreaction and the
+Einstein/curved dynamical content — is the heat-kernel-gated D5-warp/D6-curvature wall (deferred),
+not a separate D4 gap. (In AdS/CFT the autonomy is automatic: one Hamiltonian, two readings.)
+**Status:** all three kinematic halves landed; the curved/Einstein dynamical content is the shared
+heat-kernel wall, deferred.
 
 ### D5 — the radial dimension
 Entanglement-at-all-scales becoming the holographic direction (Maldacena's U = RG scale). Held:
@@ -161,7 +188,7 @@ rung), NOT QG.
 | **D1 — interacting boundary Hamiltonian** | 🟢 derived + characterized at the solvable level | IC1: einselection derived (Cesàro); D1a: the resonance/DFS theorem + rotating-records witness + quantitative Zeno — the two failure modes and the recovery regime machine-checked. *Remains:* a general (non-solvable) interacting model — research-grade, honestly cited. |
 | **D2 — the limit theory (N → ∞ slot)** | 🟢 complete up to the type API | The full both-halves Tomita theorem (D2a — Kaplansky gap was an artifact); LA2: FACTOR + full modular spectrum (σ((1+Δ)⁻¹) = [0,1] exact; hypothesis-free √2 III₁ signature). *Remains:* the Connes S-invariant/type classification proper — an ecosystem type-API gap, not a proof gap. |
 | **D3 — strong decoupling (THE duality theorem)** | 🟢 SKELETON COMPLETE + 2/5 cited inputs discharged (finite); the Prop itself still OPEN | **Skeleton (5 rungs, machine-checked term by term):** D3a `7393d3af` (continuum entropy π²/(3β); Bose integral + Riemann-sum theorem, both Mathlib-firsts) · D3b `04c22cb2` (heat-kernel winding form = canonical Bose free energy) · D3c `a1d3a65e` (exact conical coefficient (1/12)(n−1/n) + c/6 replica derivative; cosecant-sum Mathlib-first) · D3d `0aa98ee3` (Susskind–Uglum: S_ent = (A/4)δ(1/G), entanglement entropy renormalizes 1/G) · D3e/f `22bbd7b2` (saturation bridge + non-commuting-limit diagram). **Cited-inputs discharge program** (turning the conjecture's five physical inputs into finite theorems): **#1 Gaussian one-loop determinant — DONE finite, G1 `2e286419`** (`OneLoopDeterminant.lean`: the Frullani subtracted proper-time log-det `log det A = ∫(N e^{−t}−Tr e^{−tA})/t`, a genuine convergent Lebesgue integral killing the raw `∫ Tr K dt/t` UV divergence, + the diagonal Gaussian + the `log Z` assembly; continuum functional det / ζ-reg / arbitrary PosDef Gaussian stay cited). **#2 replica n→1 continuation — DONE finite, G2 `41f35b90`** (`ReplicaContinuation.lean`: `w(n)=log ∑ pᵢⁿ` smooth, `w(1)=0`, `w'(1)=∑ pᵢ log pᵢ`, so `replica_entropy_hasDerivAt` gives the headline `S = −∂ₙ log Zₙ|₁ =` the von Neumann entropy; `renyi_tendsto_shannon` = the Rényi limit via the slope characterization; the integer-n-geometric→analytic identification stays cited). *Remains (none a clean tractable Lean brick):* **#3** the curved a₁=R/6 (gated on Mathlib's own Riemannian heat-kernel/Seeley–DeWitt frontier — research-grade, no proof assistant has it); **#4** the same-regulator assumption (a physical modeling stipulation, not a theorem — carried as a labelled hypothesis in D3d); **#5** the cutoff identification D_eff~1/x (a modeling choice fixing the offset; the log-matching itself is proved in D3e/f). Discharge #3–#5 + assemble the continuum limit and `FlatSpaceRecordGravityCorrespondence` closes — as an UNCONDITIONAL statement it is a `def…:Prop` with NO proof term today. **BUT the ENTAILMENT is now machine-checked (G3 `07898db8`, `CorrespondenceAssembly.lean`):** `flatSpaceCorrespondence_of_constructive` — a `ConstructiveCLD` view builds the four opaque fields from the proved rungs, and the three still-cited inputs (#3/#4/#5), carried as `PhysicalInputs` structure hypotheses over building blocks (never axioms, never the output fields), IMPLY the correspondence. NON-VACUOUS: the middle equality (area law) is DERIVED from D3d's `induced_product`; only #1/#3 route through the carried inputs. Plus the a₁=R/6 algebraic core (`scalarA1 ξ R=(1/6−ξ)R`; ξ=0⟹R/6; 4D conformal ξ=1/6⟹0; the analytic Seeley–DeWitt identification stays Mathlib-gated). The conjecture is now "a conditional theorem whose only remaining assumptions are three named physical inputs" rather than an unproven Prop. |
-| **D4 — bulk dynamics from boundary dynamics** | 🟢 both halves landed (conservation + generation) | D4a: geometry = the conserved charge of boundary decoherence; frozen bulk metric. **D4b `250210e7` `BulkGeneration.lean`: the GENERATION half** — a boundary population-transfer (Markov, col-sums-zero) generator Q MOVES the ledger, and the bulk metric velocity = the LINEAR decoder pushforward of the rate equation `p'=Q·p` (`bulk_eom`; `pExp`=exp(tQ)·p0 trajectory with `hasDerivAt_pExp` proved; grounded in the held `AreaMap.reconstruct` via `reconstructL`; `frozen_of_velocity_ker`/`metric_moving_iff` = the honest D4a contrast). *Remains:* an AUTONOMOUS bulk-only EOM (velocity depends on the ledger p(s), not the metric h(s) alone — needs ker(decoder) Q-invariant, not claimed); backreaction. |
+| **D4 — bulk dynamics from boundary dynamics** | 🟢 all three: conservation + generation + AUTONOMY (conditional) | D4a: geometry = the conserved charge of boundary decoherence; frozen bulk metric. **D4b `250210e7`: the GENERATION half** — a boundary Markov (col-sums-zero) generator Q MOVES the ledger, and the bulk metric velocity = the LINEAR decoder pushforward of `p'=Q·p` (`bulk_eom`; `pExp` trajectory + `hasDerivAt_pExp`; grounded in the held `AreaMap.reconstruct`). **D4c `ccb5825d` `BulkAutonomy.lean`: the AUTONOMY** — when `ker(decoder)` is `Q`-invariant (intertwiner `D∘Q = Qbar∘D`), the metric velocity DESCENDS to a function of the metric `h(s)` alone: `HasDerivAt h (Qbar (h s)) s` (`autonomous_descend_at_clm`) — and the necessity no-go `no_descend_of_bad_kernel` proves the condition is required (kernel not Q-invariant ⟹ no descended velocity field). *Remains:* backreaction + the Einstein/curved dynamical content — that is the heat-kernel-gated D5-warp/D6-curvature wall (deferred), NOT a separate D4 gap. The bulk-dynamics KINEMATICS is now complete. |
 | **D5 — the radial dimension** | 🟡 radial coordinate landed (kinematic) | Exact RT unconditional; refinement tower with rigid invariant. **D5a `ef52d8f7` `ScaleDimension.lean`:** the log-additive forced-weight invariant supplies a radial axis; `weightedCutDist` extends to a bulk pseudometric on `X × ℕ` (slices = boundary metric, fibers = additive RG-depth geodesics) — the scale-as-dimension theorem. *Remains:* the warp/curvature OF the radial direction (a chosen no-warp L¹ product here) — its coefficient is the same `(1/6−ξ)` heat-kernel gate as D6. |
 | **D6 — protection** | ⚪ absent as a mechanism; the coefficient's algebraic half proved, its assumption now a clean interface | *Remains:* the non-renormalization mechanism. The `(1/6−ξ)` Seeley–DeWitt coefficient's ALGEBRAIC content is a theorem (G3 `CorrespondenceAssembly.lean`); its ANALYTIC identification (`heatTraceCoeff₁ = ∫(R/6+trE)`) is the deepest blocker — gated on Mathlib's own Riemannian heat-kernel frontier: the heat semigroup kernel, the small-`t` asymptotic expansion, the normal-coordinate parametrix, and the conical/distributional version are ALL absent from every proof assistant. This is the a₁=R/6 analytic wall (input #3 of the conjecture); a WALL, not increment-grade. **DEFERRED with a phased fill (`HEAT_KERNEL_GAP_PLAN.md`, decision 2026-07-13); option (b) now BUILT as a named interface: `SeeleyDeWittInterface.lean` (`9dc0ad19`) carries `a₁=R/6+trE` as a `SeeleyDeWittData` structure sourcing G3's input #3 (Phase-7 discharge = a single instance, not a refactor), and `HeatTraceAsymptotics.lean` (`3d03943a`) carries the short-time trace shape + proves the coefficient extraction (non-vacuous; Phase-4 obligation isolated). `a₁=R/6` CARRIED, never an axiom, never claimed derived.** |
 
