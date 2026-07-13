@@ -89,6 +89,16 @@ now an interface field. This **is option (b)** in its clean form: the assumption
 reusably, instead of an ad-hoc `PhysicalInputs` field — so the eventual **Phase-7 discharge is a single
 instance** (a `SeeleyDeWittData` built from the derived Phase-5 coefficient), not a refactor.
 
+**The asymptotic-SHAPE layer is also built** (`QIQTH/HeatTraceAsymptotics.lean`, commit `3d03943a`,
+axiom-free): `HeatTraceAsymptotics` extends `SeeleyDeWittData` with the trace function and the carried
+short-time expansion `Tr e^{−tP} = (4πt)^{−d/2}(a₀ + a₁ t + o(t))` (the `asymptotic` field — the
+deferred Phase-4 heat-kernel fact, never proved, never an axiom). What is PROVED is the coefficient
+EXTRACTION: `normalizedTrace_tendsto_one` (the normalized trace → 1, the leading Seeley–DeWitt
+normalization as a genuine limit) and `subleading_slope_eq_a1Laplace` (the subleading slope = R/6 + tr E
+= the carried `a₁`). This shows the interface is **non-vacuous** — the coefficients are determined by
+the trace — and pins down **exactly what Phase 4's eventual instance must supply**. The analytic content
+(building the actual asymptotic) stays the Phase-4 wall.
+
 ## 5. Honest scale + the operative stance
 
 - **Scale:** Phases 1–6 are a **multi-year, Mathlib-grade** undertaking; Phase 1 (curvature) and
