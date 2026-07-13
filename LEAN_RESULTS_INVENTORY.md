@@ -1635,6 +1635,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **HEAT COEFFICIENT DETERMINATION (heat-kernel Phase-5 downpayment; Gilkey invariance theory) —
+  `QIQTH/HeatCoeffDetermination.lean`** (**[AF]** std-3, budget 0, 2026-07-13, commit `f0831237`).
+  DERIVES Gilkey's heat-coefficient constants `c₁=1/6, c₂=1` (so `a₂ = R/6 + trE`, his Thm 4.8.16(b))
+  from the invariance ansatz + two model evaluations — the **1/6 becomes a THEOREM, not a stipulation**.
+  `HeatCoeffData ι` bundles `(heatCoeff2, tau, trE : ι→ℝ)` + CARRIED fields: `universal`
+  (`∃ cTau cE, ∀ P, heatCoeff2 P = cTau·tau P + cE·trE P` — Gilkey's weight-2-span-`{τ,E}` ansatz, i.e.
+  Weyl invariant theory / the heat-expansion analytic wall input, not in Mathlib), the flat constant-E
+  model value `(0,1,1)`, the curved E=0 model value `(T,0,T/6)`, `T≠0`. ★★ `constants_determined`: any
+  universal pair is FORCED to `(1/6,1)` (`model_det_ne_zero` = the `(0,1)`/`(T,0)` independence). ★★
+  `coeff2_eq`: `a₂ = τ/6 + trE` universally, DERIVED. `sphereFlatWitness : HeatCoeffData (Fin 2)` grounds
+  the curved value in OUR self-built unit-2-sphere `R=2` (`sphereFlatWitness_curvedTau_eq_sphere` ties
+  `curvedTau` to `CoordinateCurvature.scalarCurvature` via `SphereCheck.scalarCurvature_sphere`). ⚠
+  **HONEST (binding):** does NOT build the heat semigroup/kernel/short-time expansion (Phases 3–4, the
+  deep wall); it REDUCES the carried assumption from the specific number `a₁=R/6` UP to the weaker
+  invariance ansatz + one curved-model value (Gilkey's logic: universality propagates one measurement to
+  the universal law). The Fin-2 witness's universality is a non-vacuity witness only; the real content is
+  the abstract structure. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **COORDINATE SCALAR CURVATURE (heat-kernel Phase 1, coordinate flavor) — `QIQTH/CoordinateCurvature.lean`**
   (**[AF]** std-3, budget 0, 2026-07-13, commit `ae04203a`). The component/metric-2-jet scalar curvature
   `R(g)` built OURSELVES — an ALGEBRAIC function of the metric's 0/1/2-jet (`ginv`, `dg=∂g`, `ddg=∂∂g`)

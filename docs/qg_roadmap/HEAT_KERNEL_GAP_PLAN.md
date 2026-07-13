@@ -105,11 +105,14 @@ so value lands upstream even if we never reach Phase 6.
     theory for O(m) is itself not in Mathlib — carry it).
   - The **DETERMINATION** `c₁ = 1/6, c₂ = 1` is fixed by evaluating on model operators (flat-torus
     normalization `a₀ = (4π)^{−m/2}`, product/additivity Lemma 1.7.5) — this is ALGEBRA, formalizable.
-  - ⟹ **The honest coefficient-determination brick** (Phase-5 downpayment, tractable NOW): carry the
-    two-term ansatz + the model normalizations as labelled hypotheses, and DERIVE `c₁ = 1/6` (with our
-    sphere `R=2` check as one model evaluation). This *reduces* the carried assumption from the specific
-    number `a₁=R/6` up to the weaker Weyl-invariance ansatz — the 1/6 becomes derived, not stipulated.
-    Still does NOT build the heat expansion itself (Phases 3–4, the analytic wall).
+  - ⟹ **The coefficient-determination brick — BUILT ✅** (`HeatCoeffDetermination.lean`, `f0831237`,
+    [AF] std-3). `HeatCoeffData` carries the two-term invariance ansatz + the flat `(0,1,1)` and curved
+    `(T,0,T/6)` model evaluations as labelled fields; `constants_determined` DERIVES `c₁=1/6, c₂=1` (2×2
+    solve), `coeff2_eq` gives `a₂ = τ/6 + trE` universally, and `sphereFlatWitness` grounds the curved
+    value in our OWN self-built unit-2-sphere `R=2` (`CoordinateCurvature`). This *reduces* the carried
+    assumption from the specific number `a₁=R/6` UP to the weaker Weyl-invariance ansatz + one
+    curved-model value — the **1/6 is now a theorem, not a stipulation**. Still does NOT build the heat
+    expansion itself (Phases 3–4, the analytic wall).
 - **Phase 6 — the conical / replica version.** The heat kernel on a cone `C_β` / `ℤ_n` orbifold and the
   **conical contribution** to the coefficients — the piece the entanglement-entropy replica argument
   actually uses (ties to D3c's exact conical coefficient `(1/12)(n−1/n)`).
