@@ -11435,4 +11435,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatTraceAsymptotics.subleading_slope_eq_a1Laplace
 #print axioms QIQTH.HeatTraceAsymptotics.heatTrace_determines_coefficients
 
+-- D4c — THE AUTONOMOUS BULK-ONLY EQUATION OF MOTION (duality campaign; closes D4b's noted gap).
+-- D4b's bulk metric velocity depends on the boundary ledger p(s), NOT the metric h(s)=D(p s) alone.
+-- D4c: when ker D is Q-invariant (equivalently the intertwiner D∘Q = Qbar∘D holds), the velocity
+-- DESCENDS to a function of the metric alone — an AUTONOMOUS law.  KerInvariant + kerInvariant_iff_
+-- fiber_congr; ★★ autonomous_descend_at (V agrees on image D ⟹ HasDerivAt (D∘p) (V (D (p s))) s) +
+-- autonomous_descend_at_clm (D∘Q=Qbar∘D ⟹ velocity Qbar(h s), a function of h(s) only) +
+-- autonomous_descend_global_clm; ★ no_descend_of_bad_kernel = the NECESSITY no-go (kernel not
+-- Q-invariant ⟹ NO descended velocity field exists — two ledgers with the same metric give different
+-- metric velocities).  Part B bulk_metric_autonomous(_global): the same in the D4b Ledger/Metric
+-- vocabulary.  HONEST (binding): the KINEMATIC autonomy of the induced metric flow — the descent
+-- condition is carried as a HYPOTHESIS (never an axiom), and its NECESSITY is proved.  NOT the
+-- Einstein equation, NOT an AdS/curved dynamical law, NOT backreaction (those = the heat-kernel-gated
+-- D5 warp / D6 curvature, deferred).  Finite-dim, linearized decoder.  NOT the conjecture, NOT the
+-- strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.BulkAutonomy.autonomous_descend_at
+#print axioms QIQTH.BulkAutonomy.autonomous_descend_at_clm
+#print axioms QIQTH.BulkAutonomy.no_descend_of_bad_kernel
+#print axioms QIQTH.BulkAutonomy.bulk_metric_autonomous
+
 end QIQTH.AxiomAudit

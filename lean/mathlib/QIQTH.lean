@@ -770,6 +770,7 @@ import QIQTH.SeeleyDeWittInterface
 import QIQTH.HeatTraceAsymptotics
 import QIQTH.BulkGeneration
 import QIQTH.ScaleDimension
+import QIQTH.BulkAutonomy
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
