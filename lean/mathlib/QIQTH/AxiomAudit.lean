@@ -11608,18 +11608,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_asymptotic
 #print axioms QIQTH.SphereHeatTrace.weyl_density_integral
 #print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_summable
--- EM-1 (same file): the exact first-order Euler–Maclaurin decomposition of the sphere heat trace,
--- ★★ sphereHeatTrace_em1: Θ(t) = 1/t + 1/2 + ∫_{Ioi 0} (fract x − 1/2)·φ'(x) dx (φ = the sphere-trace
--- density (2x+1)e^{−t x(x+1)}), via Mathlib's Abel summation (sum_mul_eq_sub_integral_mul') — reducing
--- the a₁=R/6=1/3 constant to the SINGLE named limit ∫P₁φ' → −1/6.  sphereHeatTrace_emFract (Θ = 1 + 1/t
--- + ∫φ'·{x}); integral_emPhi'_eq (∫φ' = −1).  ⚠ HONEST (binding): the a₁ constant Θ−1/t → 1/3 is STILL
--- NOT proven — it now reduces to `∫(fract−½)φ' → −1/6`, whose closure needs a THIRD-order EM step (the
--- periodic-Bernoulli P₂/P₃ integration-by-parts with the mean-zero cancellation ∫₀¹P₂=0; the naive
--- ∫|φ''| bound is O(1) not o(1) — a subagent-caught error in the standard sketch).  Mathlib has the
--- Bernoulli POLYNOMIALS (bernoulliFun) + periodizedBernoulli on AddCircle but NO periodic-Bernoulli-on-ℝ
--- IBP API — the precise remaining gap.  a₀ validated on the curved sphere; a₁=R/6-on-sphere reduced to
--- one named limit, still walled.  NOT the conjecture, NOT the strong principle, NOT QG.  [AF] std-3.
+-- EM decomposition + ★★★ THE a₁=R/6 CLOSURE (same file).  sphereHeatTrace_em1: the exact first-order
+-- Euler–Maclaurin decomposition Θ(t) = 1/t + 1/2 + ∫_{Ioi 0} (fract x − 1/2)·φ'(x) dx (via Mathlib's
+-- Abel summation sum_mul_eq_sub_integral_mul').  ★★ sphere_R_limit: the named limit ∫(fract−½)φ' → −1/6,
+-- proven by DOUBLE integration by parts against the periodic Bernoulli functions B₂,B₃ (= emQ2,emQ3 via
+-- Int.fract) — BUILT FROM SCRATCH (Mathlib has NO EM-remainder formula / periodic-Bernoulli-on-ℝ API):
+-- per-interval IBP (ibp_interval) + telescoping (sphere_R_identity: R(t) = −(2−t)/12 + ∫Q₃φ''') + the
+-- ∫Q₃φ''' → 0 scaling bound (∫|φ'''|=O(√t), via the y=√t·x change of variables).  ★★★
+-- sphereHeatTrace_a1: Θ(t) − 1/t → 1/3 — the Seeley–DeWitt **a₁ = R/6 = 1/3 PROVEN analytically on the
+-- unit 2-sphere at the sum level** (R=2), matching CoordinateCurvature (sphere R=2) + DeWittDiagonal
+-- (u₁=τ/6=1/3).  ⚠ HONEST (binding): a₁=R/6 is VALIDATED on THIS curved geometry via the explicit S²
+-- spectrum + periodic-Bernoulli EM; it does NOT analytically discharge the GENERAL curved a₁=R/6 (the
+-- general curved heat-kernel EXISTENCE stays the wall).  NOT the conjecture, NOT the strong holographic
+-- principle, NOT QG.  [AF] std-3.
 #print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_em1
-#print axioms QIQTH.SphereHeatTrace.integral_emPhi'_eq
+#print axioms QIQTH.SphereHeatTrace.sphere_R_limit
+#print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_a1
 
 end QIQTH.AxiomAudit
