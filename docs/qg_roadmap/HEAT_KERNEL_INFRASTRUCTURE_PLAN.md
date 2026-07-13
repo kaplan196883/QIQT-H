@@ -82,12 +82,14 @@ NOT force, NEVER axiom-izes) and stops.
 - **C0 — the abstract positive self-adjoint generator. ✅ ALREADY HAVE.** Any PVM / nonneg symbol gives
   a positive self-adjoint `A` (our tower); the abstract "Laplace-type" operator is done. The MANIFOLD
   instantiation is C1 below.
-- **F0 — the abstract McKean–Singer / trace formula. ⚠ possibly tractable (finite-dim / trace-class
-  hypothesis form).** `Tr e^{−tA} = Σ_i e^{−λᵢ t}` for a positive self-adjoint `A` with discrete
-  spectrum `{λᵢ}` — as a CONDITIONAL statement carrying "discrete spectrum + trace-class" as a
-  hypothesis (the manifold guarantees it via D, the wall). Finite-dim version certainly; the
-  trace-class abstract version if Mathlib's `Schatten`/trace API suffices. Attempt; checkpoint if the
-  trace API fights.
+- **F0 — the abstract McKean–Singer / trace formula. ⛔ CHECKPOINTED — BLOCKED (2026-07-14).** The
+  genuine (infinite-dim) `Tr e^{−tA} = Σ_i e^{−λᵢ t}` is **not even definable** in our setting: Mathlib
+  has **no trace-class / Schatten / Hilbert–Schmidt operator API** (verified — absent from
+  `Mathlib/Analysis`). So the operator trace itself does not exist to state the formula. The only
+  tractable version is the FINITE-DIM matrix identity (`Matrix.trace (exp(−t•A)) = ∑ exp(−t μᵢ)`, via
+  `Analysis/Matrix/Spectrum`) — disconnected from the manifold heat kernel and low-value, so NOT built
+  (would be a box-checking toy). ⟹ **F0 joins the wall: the infinite-dim operator trace needs a
+  trace-class API that Mathlib lacks** (a further missing-infrastructure piece, alongside C1/D/E).
 - **C1 — `Δ` on `L²(M)` is positive self-adjoint. ⛔ WALL (manifold `L²`/`Δ`).** Needs the Riemannian
   volume `L²`, `Δ` as an unbounded operator on it, essential self-adjointness. Substantial; likely wall.
 - **D — discrete spectrum / compact resolvent. ⛔ THE WALL.** Rellich–Kondrachov (`H¹ ↪ L²` compact) —
@@ -99,6 +101,26 @@ NOT force, NEVER axiom-izes) and stops.
 (the manifold `L²`/Rellich/elliptic-regularity infrastructure, absent from Mathlib), STOP — record the
 exact missing Mathlib pieces in this doc, give the honest summary, and end. Do NOT spin on the wall; do
 NOT fake it with an axiom or a vacuous hypothesis.
+
+### LOOP OUTCOME (2026-07-14) — STOPPED at the wall, honestly
+
+**Built (the full abstract C₀-semigroup, on our own `Spectral/` tower, axiom-free):** Phase A
+(`heatSemigroup` + semigroup law + `t=0` + positivity, `5f0a132d`), Phase B (sharp `‖·‖≤1` + strong
+continuity, `c53978ac`), **B1 the generator `= −A`** (`28995c75`). ⟹ `e^{−tA}` is a genuine strongly-
+continuous contraction semigroup with generator `−A`, for any positive self-adjoint `A = ∫a dE`.
+
+**The wall — the exact missing Mathlib infrastructure (no brick/book closes these):**
+1. **Manifold `L²(M)` + `Δ` as an unbounded operator + essential self-adjointness** (Phase C1) — the
+   Riemannian-volume `L²` and the Laplacian on it are not set up.
+2. **Rellich–Kondrachov compactness** (`H¹ ↪ L²` compact on a compact manifold) (Phase D) — ABSENT.
+   Without it, no discrete spectrum.
+3. **Elliptic regularity + Sobolev embedding on manifolds** (Phase E) — ABSENT. Without it, no smooth
+   heat kernel `K_t(x,y)`.
+4. **A trace-class / Schatten operator API** (Phase F0) — ABSENT. Without it, `Tr e^{−tA}` is undefined.
+
+These four are the genuine, infrastructure-level frontier: each is a Mathlib-team-scale formalization,
+none QIQT-H-specific, none a knowledge gap. The heat-kernel EXISTENCE on a manifold is unreached; the
+`a₁ = R/6` coefficient stays derived (two ways) but not analytically discharged.
 
 ## 4. Firewall (binding)
 
