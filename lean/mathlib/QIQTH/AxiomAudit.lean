@@ -11592,4 +11592,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FlatTorusHeatKernel.heatTraceCircle_summable
 #print axioms QIQTH.FlatTorusHeatKernel.laplacian_eigenvalue_circle
 
+-- THE UNIT-2-SPHERE HEAT TRACE (breaking the wall for one CURVED explicit geometry — a₀ landed, a₁
+-- checkpointed).  sphereHeatTrace t = Σ_l (2l+1) e^{−t l(l+1)} (S² Laplacian: eigenvalue l(l+1), mult
+-- 2l+1).  ★★ sphereHeatTrace_asymptotic: t·sphereHeatTrace t → 1, i.e. Θ(t) ~ 1/t — the LEADING WEYL a₀
+-- on the CURVED sphere (proven via sum-integral comparison + the explicit sandwich bounds
+-- sphereHeatTrace_lower/upper_bound; weyl_density_integral: ∫(2x+1)e^{−t x(x+1)}dx = 1/t exact, the
+-- continuum a₀).  sphereHeatTrace_summable; sphereHeatTrace_factor (the e^{t/4}·S(t) identity);
+-- sphere_a1_eq_R_div_six (1/3 = 2/6, the target constant = R/6).  ⚠ HONEST (binding): the CONSTANT term
+-- (Θ(t) − 1/t → 1/3 = a₁ = R/6) is NOT proven — CHECKPOINTED: the sum-integral slack is O(1/√t),
+-- swamping the O(1) constant; closing it needs the subleading Euler–Maclaurin term (f(0)/2 − f'(0)/12 =
+-- 1/2 − 1/6 = 1/3), and Euler–Maclaurin is ABSENT from Mathlib.  So a₀ is validated on a curved
+-- manifold, but a₁=R/6-on-the-sphere stays OPEN (blocked on Euler–Maclaurin).  Breaks the wall for the
+-- sphere's a₀ ONLY; the general curved heat kernel + the a₁ analytic discharge stay the wall.  NOT the
+-- conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_asymptotic
+#print axioms QIQTH.SphereHeatTrace.weyl_density_integral
+#print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_summable
+
 end QIQTH.AxiomAudit
