@@ -12,9 +12,26 @@
     • a **uniform operator bound** `‖e^{−tA}‖ ≤ 2`             (`heatSemigroup_norm_le`),
     • **positivity** `0 ≤ Re⟪x, e^{−tA} x⟫`                    (`heatSemigroup_inner_nonneg`).
 
-  ⚠ The uniform bound is the tower's `2C` (here `C = 1`), NOT the sharp contraction
-  `‖e^{−tA}‖ ≤ 1`; the sharp bound needs a sharper FC estimate absent from the current
-  `boundedFC` layer.  This is stated honestly, not hidden.
+  ### Phase B additions (this file, below)
+
+    • the **SHARP contraction** `‖e^{−tA}‖ ≤ 1`                (`heatSemigroup_norm_le_one`),
+      now PROVEN via the tower's norm-squared identity
+      `‖boundedFC g x‖² = ∫ |g|² dμ_x` (`norm_boundedFC_sq`) — each `|e^{−t a}|² ≤ 1`
+      and `∫ 1 dμ_x = ‖x‖²` (`scalarMeasure_univ`).  This SUPERSEDES the honest `2C = 2`
+      note for this operator: the sharp `≤ 1` holds.
+    • the **norm-squared bridge** `‖e^{−tA}x − x‖² = ∫ |e^{−t a} − 1|² dμ_x`
+      (`heatSemigroup_sub_id_normSq`), and
+    • **STRONG CONTINUITY in `L²`-spectral form**: the spectral integral
+      `∫ |e^{−t a} − 1|² dμ_x → 0` as `t → 0⁺` (`heatSemigroup_L2_tendsto_zero`), by
+      dominated convergence over the finite scalar spectral measure `μ_x`.  Together the
+      bridge + the `L²`-limit MEAN `‖e^{−tA}x − x‖ → 0` (strong continuity of the
+      semigroup at the origin); the `L²` form is the clean statement that avoids threading
+      the dependent hypothesis `0 ≤ t` through a `fun t` (see note at the theorems).
+
+  ⚠ The earlier `‖e^{−tA}‖ ≤ 2` (`heatSemigroup_norm_le`) is kept as the tower's raw `2C`
+  bound; `heatSemigroup_norm_le_one` is the sharp replacement.  What remains genuinely
+  UNBUILT is the **generator** `−A = d/dt e^{−tA}|_{t=0}` as a densely-defined operator
+  (the harder piece: differentiability of the spectral integral, not just continuity).
 
   ## Scope (Phase A of `HEAT_KERNEL_INFRASTRUCTURE_PLAN.md`)
 
@@ -130,6 +147,99 @@ theorem heatSemigroup_inner_nonneg {a : Ω → ℝ} (ha : Measurable a) (ha0 : �
     simp only [hpt]; exact integral_ofReal
   rw [hre, Complex.ofReal_re]
   exact MeasureTheory.integral_nonneg (fun ω => (Real.exp_pos _).le)
+
+/-- **★ SHARP CONTRACTION** `‖e^{−tA}‖ ≤ 1` — the heat semigroup is a genuine
+    contraction (Phase B).  Proof via the tower's norm-squared identity
+    `‖boundedFC g x‖² = ∫ |g|² dμ_x` (`norm_boundedFC_sq`): each `|e^{−t a(ω)}|² ≤ 1`
+    (`heatSymbol_norm_le` squared), so
+    `‖e^{−tA}x‖² = ∫ |e^{−t a}|² dμ_x ≤ ∫ 1 dμ_x = (μ_x univ).toReal = ‖x‖²`
+    (`scalarMeasure_univ`), hence `‖e^{−tA}x‖ ≤ ‖x‖`.  Sharpens `heatSemigroup_norm_le`. -/
+theorem heatSemigroup_norm_le_one {a : Ω → ℝ} (ha : Measurable a) (ha0 : ∀ ω, 0 ≤ a ω)
+    {t : ℝ} (ht : 0 ≤ t) : ‖P.heatSemigroup ha ha0 ht‖ ≤ 1 := by
+  refine ContinuousLinearMap.opNorm_le_bound _ zero_le_one (fun x => ?_)
+  rw [one_mul]
+  have hsq : ‖P.heatSemigroup ha ha0 ht x‖ ^ 2 ≤ ‖x‖ ^ 2 := by
+    rw [heatSemigroup, P.norm_boundedFC_sq]
+    calc (∫ ω, ‖heatSymbol a t ω‖ ^ 2 ∂(P.scalarMeasure x))
+        ≤ ∫ _ω, (1 : ℝ) ∂(P.scalarMeasure x) := by
+          refine MeasureTheory.integral_mono_of_nonneg
+            (Filter.Eventually.of_forall (fun ω => sq_nonneg _))
+            (MeasureTheory.integrable_const (1 : ℝ))
+            (Filter.Eventually.of_forall (fun ω => ?_))
+          have := heatSymbol_norm_le ha0 ht ω
+          nlinarith [norm_nonneg (heatSymbol a t ω)]
+      _ = ‖x‖ ^ 2 := by
+          rw [MeasureTheory.integral_const, MeasureTheory.measureReal_def,
+            P.scalarMeasure_univ, ENNReal.toReal_ofReal (sq_nonneg _), smul_eq_mul, mul_one]
+  have h1 := Real.sqrt_le_sqrt hsq
+  rwa [Real.sqrt_sq (norm_nonneg _), Real.sqrt_sq (norm_nonneg _)] at h1
+
+/-- **★★ The norm-squared bridge for strong continuity**:
+    `‖e^{−tA}x − x‖² = ∫ |e^{−t a(ω)} − 1|² dμ_x`.  Since `1 = boundedFC(const 1)`
+    (`boundedFC_const`), the difference `e^{−tA} − 1 = boundedFC(e^{−t a} − 1)`, and the
+    identity is the tower's difference-norm law `norm_boundedFC_sub_sq`. -/
+theorem heatSemigroup_sub_id_normSq {a : Ω → ℝ} (ha : Measurable a) (ha0 : ∀ ω, 0 ≤ a ω)
+    {t : ℝ} (ht : 0 ≤ t) (x : H) :
+    ‖P.heatSemigroup ha ha0 ht x - x‖ ^ 2
+      = ∫ ω, ‖heatSymbol a t ω - 1‖ ^ 2 ∂(P.scalarMeasure x) := by
+  have hconst : P.boundedFC (f := fun _ => (1 : ℂ)) measurable_const
+      (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) x = x := by
+    rw [P.boundedFC_const (1 : ℂ)]; simp
+  have key := P.norm_boundedFC_sub_sq (heatSymbol_measurable ha t) zero_le_one
+    (heatSymbol_norm_le ha0 ht) measurable_const (norm_nonneg (1 : ℂ)) (fun _ => le_rfl) x
+  rw [hconst] at key
+  rw [heatSemigroup]
+  exact key
+
+/-- **★★ STRONG CONTINUITY (`L²`-spectral form)**: the spectral integral
+    `∫ |e^{−t a(ω)} − 1|² dμ_x → 0` as `t → 0⁺`.  By dominated convergence
+    (`tendsto_integral_filter_of_dominated_convergence`) over the FINITE scalar spectral
+    measure `μ_x`: the integrand is dominated by the constant `4` (since
+    `‖e^{−t a} − 1‖ ≤ ‖e^{−t a}‖ + 1 ≤ 2` for `t ≥ 0`) — integrable because `μ_x` is finite
+    — and converges pointwise to `0` (as `t → 0`, `e^{−t a(ω)} = exp(−t·a ω) → 1`).
+
+    Combined with `heatSemigroup_sub_id_normSq` this MEANS `‖e^{−tA}x − x‖ → 0`: strong
+    continuity of the semigroup at the origin.  (Stated in `L²`-form to avoid threading the
+    dependent hypothesis `0 ≤ t` through the `fun t`; the pointwise heat-symbol convergence
+    carries no such hypothesis.) -/
+theorem heatSemigroup_L2_tendsto_zero {a : Ω → ℝ} (ha : Measurable a) (ha0 : ∀ ω, 0 ≤ a ω)
+    (x : H) :
+    Filter.Tendsto (fun t : ℝ => ∫ ω, ‖heatSymbol a t ω - 1‖ ^ 2 ∂(P.scalarMeasure x))
+      (nhdsWithin 0 (Set.Ici (0 : ℝ))) (nhds 0) := by
+  have h := MeasureTheory.tendsto_integral_filter_of_dominated_convergence
+    (μ := P.scalarMeasure x)
+    (l := nhdsWithin 0 (Set.Ici (0 : ℝ)))
+    (F := fun (t : ℝ) (ω : Ω) => ‖heatSymbol a t ω - 1‖ ^ 2)
+    (f := fun _ : Ω => (0 : ℝ))
+    (bound := fun _ : Ω => (4 : ℝ))
+    (hF_meas := Filter.Eventually.of_forall (fun t =>
+      (((heatSymbol_measurable ha t).sub measurable_const).norm.pow_const 2).aestronglyMeasurable))
+    (h_bound := ?_) (bound_integrable := MeasureTheory.integrable_const (4 : ℝ))
+    (h_lim := ?_)
+  · simpa using h
+  · -- domination: ‖‖e^{−t a} − 1‖²‖ ≤ 4 for t ≥ 0
+    refine Filter.eventually_of_mem self_mem_nhdsWithin (fun t ht => ?_)
+    have ht0 : (0 : ℝ) ≤ t := ht
+    refine Filter.Eventually.of_forall (fun ω => ?_)
+    have hb : ‖heatSymbol a t ω - 1‖ ≤ 2 := by
+      calc ‖heatSymbol a t ω - 1‖ ≤ ‖heatSymbol a t ω‖ + ‖(1 : ℂ)‖ := norm_sub_le _ _
+        _ ≤ 1 + 1 := by
+            have := heatSymbol_norm_le ha0 ht0 ω; rw [norm_one]; linarith
+        _ = 2 := by norm_num
+    rw [Real.norm_of_nonneg (sq_nonneg _)]
+    nlinarith [hb, norm_nonneg (heatSymbol a t ω - 1)]
+  · -- pointwise convergence: e^{−t a(ω)} → 1, so ‖· − 1‖² → 0
+    refine Filter.Eventually.of_forall (fun ω => ?_)
+    have hc : Continuous (fun t : ℝ => heatSymbol a t ω) := by unfold heatSymbol; fun_prop
+    have h0 : heatSymbol a (0 : ℝ) ω = 1 := by simp [heatSymbol]
+    have htend : Filter.Tendsto (fun t : ℝ => heatSymbol a t ω)
+        (nhdsWithin 0 (Set.Ici (0 : ℝ))) (nhds 1) := by
+      have hh : Filter.Tendsto (fun t : ℝ => heatSymbol a t ω)
+          (nhdsWithin 0 (Set.Ici (0 : ℝ))) (nhds (heatSymbol a 0 ω)) :=
+        (hc.tendsto (0 : ℝ)).mono_left nhdsWithin_le_nhds
+      rwa [h0] at hh
+    have h2 := ((htend.sub (tendsto_const_nhds (x := (1 : ℂ)))).norm).pow 2
+    simpa using h2
 
 end ProjectionValuedMeasure
 

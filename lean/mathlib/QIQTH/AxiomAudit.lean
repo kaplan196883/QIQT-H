@@ -11550,5 +11550,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_zero
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_norm_le
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_inner_nonneg
+-- Phase-B remainder (same file): the SHARP contraction ‖e^{−tA}‖ ≤ 1 (heatSemigroup_norm_le_one —
+-- upgrades the 2C bound, via the tower's norm_boundedFC_sq isometry identity), and STRONG CONTINUITY in
+-- the L²-of-spectral-measure form: heatSemigroup_sub_id_normSq (‖e^{−tA}x − x‖² = ∫‖e^{−ta}−1‖² dμ_x)
+-- + heatSemigroup_L2_tendsto_zero (that integral → 0 as t→0⁺, via dominated convergence).  Together
+-- these MEAN e^{−tA}x → x — the property that makes it a genuine C₀-semigroup.  The generator = −A
+-- (d/dt e^{−tA}|₀, unbounded + domains) remains the harder unbuilt piece.  Same firewall: abstract
+-- operator semigroup ONLY; NOT the manifold heat kernel (Phases C/D/E = the wall).  [AF] std-3.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_norm_le_one
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_sub_id_normSq
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_L2_tendsto_zero
 
 end QIQTH.AxiomAudit
