@@ -1644,7 +1644,12 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   (via `boundedFC_mul` + `Complex.exp_add`); `heatSemigroup_zero` (`e^{0·A}=1`); `heatSemigroup_norm_le`
   (`‖e^{−tA}‖ ≤ 2`, the tower's `2C` with `C=1` — honestly NOT the sharp contraction `≤1`);
   `heatSemigroup_inner_nonneg` (positivity `0 ≤ Re⟪x, e^{−tA} x⟫`). The real/positive counterpart of the
-  tower's imaginary/unitary `expSymbol` (`e^{itf}`) family. ⚠ **HONEST (binding):** the ABSTRACT operator
+  tower's imaginary/unitary `expSymbol` (`e^{itf}`) family. **Phase-B remainder (same file, `c53978ac`):**
+  ★ `heatSemigroup_norm_le_one` — the SHARP `‖e^{−tA}‖ ≤ 1` (upgrading the `2C` bound via the tower's
+  `norm_boundedFC_sq` isometry identity); ★★ STRONG CONTINUITY in L²-spectral form —
+  `heatSemigroup_sub_id_normSq` (`‖e^{−tA}x−x‖² = ∫‖e^{−ta}−1‖² dμ_x`) + `heatSemigroup_L2_tendsto_zero`
+  (that integral `→ 0` as `t→0⁺` by dominated convergence), which together give `e^{−tA}x → x` — a
+  genuine **C₀-semigroup**. The generator `= −A` (unbounded + domains) stays the harder unbuilt piece. ⚠ **HONEST (binding):** the ABSTRACT operator
   semigroup ONLY. It does NOT build the manifold heat kernel — that `Δ` on `L²(M)` is such an operator
   (Phase C), has discrete spectrum (Phase D — Rellich compactness, ABSENT from Mathlib), or has a smooth
   integral kernel (Phase E — elliptic regularity, ABSENT) are THE WALL (`HEAT_KERNEL_INFRASTRUCTURE_PLAN.md`),

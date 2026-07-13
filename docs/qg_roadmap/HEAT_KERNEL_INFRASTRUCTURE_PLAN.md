@@ -37,8 +37,12 @@ phase is claimed done until it is a machine-checked, axiom-free theorem.
   `e^{−sA}e^{−tA} = e^{−(s+t)A}`, via `boundedFC_mul` + `Complex.exp_add`), `heatSemigroup_zero`
   (`e^{0·A}=1`), `heatSemigroup_norm_le` (`‖e^{−tA}‖ ≤ 2` — the tower's `2C`, honestly NOT the sharp
   `≤1`), and `heatSemigroup_inner_nonneg` (positivity). No new infrastructure — pure reuse of our tower.
-  *Remaining in B (stretch, not yet built):* strong continuity `e^{−tA} → 1` as `t → 0⁺`, the generator
-  `= −A`, and the sharp contraction `≤1`.
+  **Phase B remainder — sharp contraction + strong continuity ✅ BUILT** (same file, `c53978ac`): via the
+  tower's `norm_boundedFC_sq` isometry identity — `heatSemigroup_norm_le_one` (the SHARP `‖e^{−tA}‖ ≤ 1`,
+  upgrading the `2C` bound) and strong continuity in L²-spectral form (`heatSemigroup_sub_id_normSq`:
+  `‖e^{−tA}x−x‖² = ∫‖e^{−ta}−1‖² dμ_x`; `heatSemigroup_L2_tendsto_zero`: that integral `→ 0` as `t→0⁺`
+  by dominated convergence) — together, `e^{−tA}x → x`, a genuine **C₀-semigroup**. *Remaining in B (the
+  harder piece, unbuilt):* the generator `= −A` (`d/dt e^{−tA}|₀` — unbounded operator + domains).
 - **Phase C — `Δ` on `L²(M)` IS a positive self-adjoint operator. ⛔ mostly wall.** Needs the manifold
   `L²` space (Bochner integral against the Riemannian volume), `Δ` as an unbounded operator, and
   essential self-adjointness. Partly reachable (we have unbounded self-adjoint theory), but the manifold
