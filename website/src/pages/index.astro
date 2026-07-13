@@ -67,7 +67,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         information content of any bounded spacetime region is finite, and <strong>(P5)</strong> quantum
         equilibrium of the typicality measure — of which P2–P3 are the standard quantum-relativistic arena,
         so the irreducible new physics is <strong>P4 + P5, on the P1 ontology</strong>. We machine-verify the
-        entire development in Lean&nbsp;4 / Mathlib: over <strong>5,000 theorems across ~505 files</strong>,
+        entire development in Lean&nbsp;4 / Mathlib: over <strong>5,000 theorems across ~515 files</strong>,
         zero axioms beyond Lean's standard three, every physical input an explicitly named hypothesis.</p>
       <p class="sub" style="max-width:none">The measurement problem dissolves without collapse: decoherence
         supplies the record structure, λ (P1) makes exactly one history actual, and the Born rule is
@@ -161,8 +161,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         (finiteness alone gives a volume law; area is the genuine QG-core, correctly tiered).
         <strong>One coefficient</strong> — the (1/6−ξ) Seeley–DeWitt number that fixes the <em>numerical</em> value of
         G, gated on a Riemannian heat-kernel result <em>no proof assistant yet has</em> (Mathlib's own frontier).
-        That un-verified remainder is exactly where quantum gravity lives — and it is now theorem-shaped, not vague.
-        <a href="/open-problems">The open problems, in full →</a></p>
+        That un-verified remainder is exactly where quantum gravity lives — and it is now theorem-shaped, not vague.</p>
+      <p class="sub" style="max-width:none;margin-top:14px">Put another way: every <em>tractable</em> piece is now a theorem
+        or a cleanly-labelled conditional (its hypothesis a named structure, never a Lean axiom), so the entire
+        remaining residue is <strong>three external walls</strong> — <em>none of them QIQT-H-specific</em>: Mathlib's
+        own Riemannian heat-kernel / Seeley–DeWitt theory (its curvature half now <em>in-flight upstream in
+        Mathlib</em>; the analytic heat-kernel half the deep wall), a von Neumann factor / type-classification API
+        that <em>no proof assistant yet has</em> (the tower's III₁ <em>signature</em> is already proved), and
+        general interacting matter (a Clay-adjacent problem). The distance to quantum gravity is now, to a striking
+        degree, <strong>other people's infrastructure and one Millennium problem</strong> — not a private QIQT-H
+        mystery. <a href="/open-problems">The open problems, in full →</a></p>
     </div>
   </div></section>
 
@@ -301,10 +309,13 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           <strong>emergent geometry is the conserved charge</strong> of a pure dephasing relaxation (it forgets
           everything except the geometry), while an interacting <strong>boundary Markov flow drives a bulk-metric
           velocity</strong> (<code>bulk_eom</code> — the linear decoder pushforward of the rate equation) — the
-          first machine-checked bulk equation of motion <em>from</em> boundary evolution. <em>Scope: time-averaged
-          (finite environments recur); coupling data are inputs; Born forced <em>given</em> the channel, not ab
-          initio (P5 not eliminated); still no <em>autonomous</em> bulk-only EOM or backreaction; finite,
-          linearized, flat — not QG.</em></p>
+          first machine-checked bulk equation of motion <em>from</em> boundary evolution — and, when the decoder's
+          kernel is flow-invariant, that velocity <strong>descends to an autonomous bulk-only law</strong>
+          (<code>autonomous_descend_at_clm</code>, with a necessity no-go proving the condition is required). The
+          bulk-dynamics <em>kinematics</em> is complete. <em>Scope: time-averaged (finite environments recur);
+          coupling data are inputs; Born forced <em>given</em> the channel, not ab initio (P5 not eliminated); the
+          curved / backreacting / Einstein content stays behind the heat-kernel wall; finite, linearized, flat —
+          not QG.</em></p>
         <span class="arrow">The theory →</span></a>
     </div>
   </div></section>
