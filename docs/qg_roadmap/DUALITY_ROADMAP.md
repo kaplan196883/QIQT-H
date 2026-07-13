@@ -81,10 +81,18 @@ which is why `N_eff/4`, `Λ_s`, and the heat-kernel `c_i` float. The `c_i` block
 Seeley–DeWitt coefficient) is now HALF-crossed: its ALGEBRAIC content is a theorem (G3
 `CorrespondenceAssembly.lean` — `scalarA1 ξ R = (1/6−ξ)R`, minimal scalar `⟹ R/6`, 4D conformal
 `⟹ 0`), but the ANALYTIC identification `heatTraceCoeff₁ = ∫(R/6+trE)` stays gated on the
-ecosystem-wide Riemannian heat-kernel gap that no proof assistant has crossed. Without protection,
-even a proven correspondence is a one-parameter FAMILY of dictionaries, not THE dictionary.
-**Status:** absent as a mechanism; the coefficient's algebraic half is proved, its analytic half's
-deepest blocker is external (Mathlib's own diff-geo frontier).
+ecosystem-wide Riemannian heat-kernel gap that no proof assistant has crossed. **DECISION
+(2026-07-13): the analytic derivation is DEFERRED (phased fill = `HEAT_KERNEL_GAP_PLAN.md`); until
+then `a₁ = R/6` is carried via option (b) as a NAMED INTERFACE, not an ad-hoc hypothesis** —
+`SeeleyDeWittInterface.lean` (`9dc0ad19`) bundles `a₀=1, a₁=R/6+trE` as a `SeeleyDeWittData` structure
+(never an axiom) and sources G3's input #3 from it, so the eventual Phase-7 discharge is a SINGLE
+instance; `HeatTraceAsymptotics.lean` (`3d03943a`) adds the carried short-time trace shape and PROVES
+the coefficient extraction (normalized trace `→ 1`; subleading slope `→ R/6+trE`), showing the
+interface is non-vacuous and isolating exactly what Phase 4 must supply. Without protection, even a
+proven correspondence is a one-parameter FAMILY of dictionaries, not THE dictionary.
+**Status:** absent as a mechanism; the coefficient's algebraic half is proved and its assumption is
+now a clean named interface (option (b)); the analytic half's deepest blocker is external (Mathlib's
+own diff-geo frontier), deferred with a plan.
 
 ## The dependency structure and the critical path
 
@@ -146,7 +154,7 @@ S = (1−q∂_q)log Z_q|₁; the n → 1 analytic continuation; a₁ = R/6 for t
 regulator in S and δ(1/G). Integer-cone + one-loop free scalar; NOT the conjecture (its fourth
 rung), NOT QG.
 
-## ★ THE LEDGER AS OF 2026-07-13 (post D1a/D4a/D2a/LA2/D3a–e + G1/G2 + G3 + D4b generation + D5a radial) — the six pieces, current status
+## ★ THE LEDGER AS OF 2026-07-13 (post D1a/D4a/D2a/LA2/D3a–e + G1/G2 + G3 + D4b + D5a + the Seeley–DeWitt interface / heat-trace-shape layer) — the six pieces, current status
 
 | Piece | Status | What landed / what remains |
 |---|---|---|
@@ -155,7 +163,7 @@ rung), NOT QG.
 | **D3 — strong decoupling (THE duality theorem)** | 🟢 SKELETON COMPLETE + 2/5 cited inputs discharged (finite); the Prop itself still OPEN | **Skeleton (5 rungs, machine-checked term by term):** D3a `7393d3af` (continuum entropy π²/(3β); Bose integral + Riemann-sum theorem, both Mathlib-firsts) · D3b `04c22cb2` (heat-kernel winding form = canonical Bose free energy) · D3c `a1d3a65e` (exact conical coefficient (1/12)(n−1/n) + c/6 replica derivative; cosecant-sum Mathlib-first) · D3d `0aa98ee3` (Susskind–Uglum: S_ent = (A/4)δ(1/G), entanglement entropy renormalizes 1/G) · D3e/f `22bbd7b2` (saturation bridge + non-commuting-limit diagram). **Cited-inputs discharge program** (turning the conjecture's five physical inputs into finite theorems): **#1 Gaussian one-loop determinant — DONE finite, G1 `2e286419`** (`OneLoopDeterminant.lean`: the Frullani subtracted proper-time log-det `log det A = ∫(N e^{−t}−Tr e^{−tA})/t`, a genuine convergent Lebesgue integral killing the raw `∫ Tr K dt/t` UV divergence, + the diagonal Gaussian + the `log Z` assembly; continuum functional det / ζ-reg / arbitrary PosDef Gaussian stay cited). **#2 replica n→1 continuation — DONE finite, G2 `41f35b90`** (`ReplicaContinuation.lean`: `w(n)=log ∑ pᵢⁿ` smooth, `w(1)=0`, `w'(1)=∑ pᵢ log pᵢ`, so `replica_entropy_hasDerivAt` gives the headline `S = −∂ₙ log Zₙ|₁ =` the von Neumann entropy; `renyi_tendsto_shannon` = the Rényi limit via the slope characterization; the integer-n-geometric→analytic identification stays cited). *Remains (none a clean tractable Lean brick):* **#3** the curved a₁=R/6 (gated on Mathlib's own Riemannian heat-kernel/Seeley–DeWitt frontier — research-grade, no proof assistant has it); **#4** the same-regulator assumption (a physical modeling stipulation, not a theorem — carried as a labelled hypothesis in D3d); **#5** the cutoff identification D_eff~1/x (a modeling choice fixing the offset; the log-matching itself is proved in D3e/f). Discharge #3–#5 + assemble the continuum limit and `FlatSpaceRecordGravityCorrespondence` closes — as an UNCONDITIONAL statement it is a `def…:Prop` with NO proof term today. **BUT the ENTAILMENT is now machine-checked (G3 `07898db8`, `CorrespondenceAssembly.lean`):** `flatSpaceCorrespondence_of_constructive` — a `ConstructiveCLD` view builds the four opaque fields from the proved rungs, and the three still-cited inputs (#3/#4/#5), carried as `PhysicalInputs` structure hypotheses over building blocks (never axioms, never the output fields), IMPLY the correspondence. NON-VACUOUS: the middle equality (area law) is DERIVED from D3d's `induced_product`; only #1/#3 route through the carried inputs. Plus the a₁=R/6 algebraic core (`scalarA1 ξ R=(1/6−ξ)R`; ξ=0⟹R/6; 4D conformal ξ=1/6⟹0; the analytic Seeley–DeWitt identification stays Mathlib-gated). The conjecture is now "a conditional theorem whose only remaining assumptions are three named physical inputs" rather than an unproven Prop. |
 | **D4 — bulk dynamics from boundary dynamics** | 🟢 both halves landed (conservation + generation) | D4a: geometry = the conserved charge of boundary decoherence; frozen bulk metric. **D4b `250210e7` `BulkGeneration.lean`: the GENERATION half** — a boundary population-transfer (Markov, col-sums-zero) generator Q MOVES the ledger, and the bulk metric velocity = the LINEAR decoder pushforward of the rate equation `p'=Q·p` (`bulk_eom`; `pExp`=exp(tQ)·p0 trajectory with `hasDerivAt_pExp` proved; grounded in the held `AreaMap.reconstruct` via `reconstructL`; `frozen_of_velocity_ker`/`metric_moving_iff` = the honest D4a contrast). *Remains:* an AUTONOMOUS bulk-only EOM (velocity depends on the ledger p(s), not the metric h(s) alone — needs ker(decoder) Q-invariant, not claimed); backreaction. |
 | **D5 — the radial dimension** | 🟡 radial coordinate landed (kinematic) | Exact RT unconditional; refinement tower with rigid invariant. **D5a `ef52d8f7` `ScaleDimension.lean`:** the log-additive forced-weight invariant supplies a radial axis; `weightedCutDist` extends to a bulk pseudometric on `X × ℕ` (slices = boundary metric, fibers = additive RG-depth geodesics) — the scale-as-dimension theorem. *Remains:* the warp/curvature OF the radial direction (a chosen no-warp L¹ product here) — its coefficient is the same `(1/6−ξ)` heat-kernel gate as D6. |
-| **D6 — protection** | ⚪ absent as a mechanism; the coefficient's algebraic half proved | *Remains:* the non-renormalization mechanism. The `(1/6−ξ)` Seeley–DeWitt coefficient's ALGEBRAIC content is a theorem (G3 `CorrespondenceAssembly.lean`); its ANALYTIC identification (`heatTraceCoeff₁ = ∫(R/6+trE)`) is the deepest blocker — gated on Mathlib's own Riemannian heat-kernel frontier: the heat semigroup kernel, the small-`t` asymptotic expansion, the normal-coordinate parametrix, and the conical/distributional version are ALL absent from every proof assistant. This is the a₁=R/6 analytic wall (input #3 of the conjecture); a WALL, not increment-grade. **The phased fill is `HEAT_KERNEL_GAP_PLAN.md` (deferred by decision 2026-07-13); until then `a₁=R/6` is carried as an explicit labelled input (G3 `PhysicalInputs`, option (b)).** |
+| **D6 — protection** | ⚪ absent as a mechanism; the coefficient's algebraic half proved, its assumption now a clean interface | *Remains:* the non-renormalization mechanism. The `(1/6−ξ)` Seeley–DeWitt coefficient's ALGEBRAIC content is a theorem (G3 `CorrespondenceAssembly.lean`); its ANALYTIC identification (`heatTraceCoeff₁ = ∫(R/6+trE)`) is the deepest blocker — gated on Mathlib's own Riemannian heat-kernel frontier: the heat semigroup kernel, the small-`t` asymptotic expansion, the normal-coordinate parametrix, and the conical/distributional version are ALL absent from every proof assistant. This is the a₁=R/6 analytic wall (input #3 of the conjecture); a WALL, not increment-grade. **DEFERRED with a phased fill (`HEAT_KERNEL_GAP_PLAN.md`, decision 2026-07-13); option (b) now BUILT as a named interface: `SeeleyDeWittInterface.lean` (`9dc0ad19`) carries `a₁=R/6+trE` as a `SeeleyDeWittData` structure sourcing G3's input #3 (Phase-7 discharge = a single instance, not a refactor), and `HeatTraceAsymptotics.lean` (`3d03943a`) carries the short-time trace shape + proves the coefficient extraction (non-vacuous; Phase-4 obligation isolated). `a₁=R/6` CARRIED, never an axiom, never claimed derived.** |
 
 **The critical path D1 → D2 → D3 now reads: two links effectively forged, the third's SKELETON
 complete, 2 of its 5 physical inputs discharged at the finite level, and its ENTAILMENT machine-checked
@@ -175,6 +183,15 @@ the missing Riemannian heat-kernel / Seeley–DeWitt theory — absent from ever
 is the honest single remaining obstruction on this front: **the geometry OF the emergent directions
 (their curvature), gated on Mathlib's own differential-geometry frontier.** The kinematics — where
 the directions are, how entanglement lays them out, how boundary flow moves them — is machine-checked.
+
+**Update 2026-07-13 (the wall, parked cleanly):** rather than force the wall, it is DEFERRED with a
+phased fill plan (`HEAT_KERNEL_GAP_PLAN.md`) and the `a₁ = R/6` assumption is now carried the clean
+way — option (b) as a NAMED INTERFACE: `SeeleyDeWittInterface.lean` (`9dc0ad19`) makes `a₁=R/6+trE` a
+`SeeleyDeWittData` structure feeding G3's conditional theorem, so the eventual discharge is a single
+instance; `HeatTraceAsymptotics.lean` (`3d03943a`) carries the short-time trace shape and proves the
+coefficient extraction (non-vacuous; the Phase-4 obligation isolated). Nothing is claimed derived —
+`a₁=R/6` is a labelled interface field, never an axiom. The wall is documented, the assumption is
+named, and the derivation waits behind the plan until the rest of the program closes.
 
 ## CAMPAIGN STATUS: COMPLETE (2026-07-11) — all three bricks FULL GREEN, all pushed
 
