@@ -39,24 +39,37 @@ derived lemma, and unblocks the warp/curvature content of D4/D5.
 - the flat-space Gaussian integral (`integral_gaussian`), continuous functional calculus, the matrix /
   bounded-operator exponential, Bochner integration, `NormedSpace.exp` derivative lemmas.
 
-**LACKS (must build):**
-- the **Riemann curvature tensor**, **Levi-Civita connection** (as the metric-compatible torsion-free
-  connection), Ricci and **scalar curvature `R`** — no files exist (Mathlib's own acknowledged frontier);
+**LACKS — but Phase 1 is IN FLIGHT upstream (status checked 2026-07-13):**
+- the **Levi-Civita connection** — Rothgang/Massot: *uniqueness complete, existence near complete*
+  (~3k lines merged, ~4k in review; PR **#36845** "the Levi-Civita connection on a manifold", uniting
+  branch **#36036**, superseding the older #26221 "Mr. Covariant Derivatives");
+- the **Riemann curvature tensor** `R(X,Y)Z` — **actively under development** (WIP `curvatureTensorAux`,
+  `curvatureEndomorphismTensor` in #36036, last touched July 2026) — no longer absent, being written now;
+- **Ricci** and **scalar curvature `R`** — not yet begun, but these are metric *contractions* of the
+  Riemann tensor (mechanical once it lands), NOT new analytic theory. ⟹ Phase 1's endpoint (scalar `R`)
+  is on a foreseeable-quarters horizon, not years.
+
+**LACKS — the DEEP wall, no upstream activity (Phases 3–4, the true heart):**
 - the **connection/Bochner Laplacian** `∇²` on bundle sections and the Laplace-type class `P = −(∇²+E)`;
 - the **heat semigroup** `e^{−tP}` with a smooth **integral kernel** `K_t(x,y)`;
 - the **short-time asymptotic expansion** of `K_t(x,x)` and the **Seeley–DeWitt recursion** (transport
-  equations in normal coordinates);
+  equations in normal coordinates) — the analytic heart, on NO Mathlib roadmap;
 - the **conical / distributional** heat kernel (for the replica/entanglement-entropy use).
+
+⚠ Getting scalar `R` from Mathlib does NOT discharge `a₁ = R/6` — it only lets Phases 2–5 build on a
+real curvature substrate; the coefficient still waits on the Phase-3/4 heat-kernel expansion.
 
 ## 3. The phased build (bottom-up; each phase an axiom-free, green Lean checkpoint)
 
 Every phase ships independently and is **Mathlib-contributable in its own right** — the plan is written
 so value lands upstream even if we never reach Phase 6.
 
-- **Phase 1 — curvature.** Levi-Civita connection from a Riemannian metric (existence + uniqueness:
-  metric-compatible, torsion-free) on top of Mathlib's `CovariantDerivative`; the Riemann tensor
-  `R(X,Y)Z`; Ricci; **scalar curvature `R`**. *(This is the largest sub-project and overlaps Mathlib's
-  own diff-geo roadmap — coordinate upstream; contribute here first.)*
+- **Phase 1 — curvature. IN FLIGHT UPSTREAM (do not duplicate — track/contribute).** Levi-Civita
+  connection (uniqueness done, existence near done: PR #36845), the Riemann tensor `R(X,Y)Z` (WIP in the
+  uniting branch #36036), then Ricci and **scalar curvature `R`** (mechanical contractions, not yet
+  begun). This overlaps Mathlib's active diff-geo effort (Gouëzel Riemannian manifolds; Rothgang/Massot
+  connection+curvature) — the right move is to WATCH #36036/#36845 and contribute the Ricci/scalar-`R`
+  contractions when the curvature tensor stabilizes, NOT to build a private curvature library.
 - **Phase 2 — Laplace-type operators.** The connection (Bochner) Laplacian `∇²` on sections of a
   Riemannian vector bundle; the endomorphism term `E`; the Laplace-type class `P = −(∇² + E)`; its
   principal symbol and (formal) self-adjointness w.r.t. the metric volume.
