@@ -136,6 +136,17 @@ trace-class / manifold-`L²`-`Δ` entirely. ⚠ HONEST: breaks the wall ONLY for
 CURVED heat kernel stays walled; flat ⟹ `R = 0`, so it validates `a₀ = 1` but NOT `a₁ = R/6` (the flat
 torus has `a₁ = 0`). The curvature-carrying analytic discharge of `a₁ = R/6` still needs the wall.
 
+**The curved case — unit 2-sphere `S²` (`92350369`→`e271b1ea`, `QIQTH/SphereHeatTrace.lean`): `a₀`
+validated on a CURVED manifold; `a₁ = R/6` CHECKPOINTED.** `sphereHeatTrace t = Σ_l (2l+1) e^{−t l(l+1)}`
+(explicit `S²` Laplacian spectrum) with `sphereHeatTrace_asymptotic : t·Θ(t) → 1` (`Θ ~ 1/t`, the Weyl
+`a₀` on a curved geometry, via sum-integral comparison + explicit sandwich bounds; `weyl_density_integral`
+= the exact continuum `∫ = 1/t`). ⚠ The **constant `Θ(t) − 1/t → 1/3 = a₁ = R/6`** (`R=2`) is NOT proven —
+the sum-integral slack is `O(1/√t)`, swamping the `O(1)` constant. The math is settled (2nd-order
+Euler–Maclaurin: `f(0)/2 − f'(0)/12 = 1/2 − 1/6 = 1/3`) — it is a **formalization gap: Euler–Maclaurin is
+ABSENT from Mathlib**, a fifth missing-infrastructure piece. So `a₀` is validated on both a flat (circle)
+and a curved (sphere) manifold; the curvature-sensitive `a₁ = R/6` on the sphere is the current analytic
+frontier, blocked on Euler–Maclaurin.
+
 ## 4. Firewall (binding)
 
 Phases C–E are the genuine wall — Rellich compactness, elliptic regularity, Sobolev-on-manifolds — none
