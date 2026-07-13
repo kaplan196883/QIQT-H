@@ -64,6 +64,37 @@ operator with its group law, contraction, self-adjointness, and `t=0` identity �
 positive self-adjoint generator. It is NOT the manifold heat kernel (Phases C–E, the wall); it is the
 operator-semigroup foundation that the spectral route stands on, built from machinery we own.
 
+## 3′. CONCRETE BUILD SEQUENCE (the loop) — per-phase sub-bricks, tractable vs wall
+
+Ordered list of the next bricks, each an axiom-free green increment on our own tower until the genuine
+wall. The loop attempts these in order; at a wall it CHECKPOINTS honestly (records what's missing, does
+NOT force, NEVER axiom-izes) and stops.
+
+- **B1 — the generator `= −A`. ⚠ tractable-hard (NEXT).** For `x` in the domain (`∫ λ² dμ_x < ∞`),
+  `lim_{t→0⁺} (e^{−tA}x − x)/t = −Ax`, where `Aх = ∫ a dE x` (the tower's unbounded FC, `UnboundedFC`).
+  Spectral-integral + dominated-convergence argument (like strong continuity, one order up:
+  `‖(e^{−tA}x−x)/t + Ax‖² = ∫ |(e^{−ta}−1)/t + a|² dμ_x → 0`). Consult first; build.
+- **C0 — the abstract positive self-adjoint generator. ✅ ALREADY HAVE.** Any PVM / nonneg symbol gives
+  a positive self-adjoint `A` (our tower); the abstract "Laplace-type" operator is done. The MANIFOLD
+  instantiation is C1 below.
+- **F0 — the abstract McKean–Singer / trace formula. ⚠ possibly tractable (finite-dim / trace-class
+  hypothesis form).** `Tr e^{−tA} = Σ_i e^{−λᵢ t}` for a positive self-adjoint `A` with discrete
+  spectrum `{λᵢ}` — as a CONDITIONAL statement carrying "discrete spectrum + trace-class" as a
+  hypothesis (the manifold guarantees it via D, the wall). Finite-dim version certainly; the
+  trace-class abstract version if Mathlib's `Schatten`/trace API suffices. Attempt; checkpoint if the
+  trace API fights.
+- **C1 — `Δ` on `L²(M)` is positive self-adjoint. ⛔ WALL (manifold `L²`/`Δ`).** Needs the Riemannian
+  volume `L²`, `Δ` as an unbounded operator on it, essential self-adjointness. Substantial; likely wall.
+- **D — discrete spectrum / compact resolvent. ⛔ THE WALL.** Rellich–Kondrachov (`H¹ ↪ L²` compact) —
+  ABSENT from Mathlib. Not buildable in bricks. CHECKPOINT here.
+- **E — smooth integral kernel. ⛔ THE WALL.** Elliptic regularity + Sobolev embedding — ABSENT. Not
+  buildable. CHECKPOINT.
+
+**STOP CONDITION for the loop:** build B1 (+ F0 if tractable); when the next needed brick is C1/D/E
+(the manifold `L²`/Rellich/elliptic-regularity infrastructure, absent from Mathlib), STOP — record the
+exact missing Mathlib pieces in this doc, give the honest summary, and end. Do NOT spin on the wall; do
+NOT fake it with an axiom or a vacuous hypothesis.
+
 ## 4. Firewall (binding)
 
 Phases C–E are the genuine wall — Rellich compactness, elliptic regularity, Sobolev-on-manifolds — none
