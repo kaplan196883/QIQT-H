@@ -1635,6 +1635,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **THE ABSTRACT HEAT SEMIGROUP (heat-kernel analytic-infrastructure Phase A) —
+  `QIQTH/Spectral/HeatSemigroup.lean`** (**[AF]** std-3, budget 0, 2026-07-14, commit `5f0a132d`). The
+  abstract `e^{−tA}` of a positive self-adjoint operator, built on our OWN `QIQTH/Spectral` bounded Borel
+  functional calculus — NO new infrastructure. For a PVM `P` and a nonneg measurable generator symbol
+  `a : Ω → ℝ`, `heatSemigroup = P.boundedFC (fun ω => Complex.exp(−(t·a ω)))` (bounded by 1 for `t,a ≥ 0`)
+  = `e^{−tA}`, `A = ∫ a dE`. ★★ `heatSemigroup_mul` — the SEMIGROUP LAW `e^{−sA}·e^{−tA} = e^{−(s+t)A}`
+  (via `boundedFC_mul` + `Complex.exp_add`); `heatSemigroup_zero` (`e^{0·A}=1`); `heatSemigroup_norm_le`
+  (`‖e^{−tA}‖ ≤ 2`, the tower's `2C` with `C=1` — honestly NOT the sharp contraction `≤1`);
+  `heatSemigroup_inner_nonneg` (positivity `0 ≤ Re⟪x, e^{−tA} x⟫`). The real/positive counterpart of the
+  tower's imaginary/unitary `expSymbol` (`e^{itf}`) family. ⚠ **HONEST (binding):** the ABSTRACT operator
+  semigroup ONLY. It does NOT build the manifold heat kernel — that `Δ` on `L²(M)` is such an operator
+  (Phase C), has discrete spectrum (Phase D — Rellich compactness, ABSENT from Mathlib), or has a smooth
+  integral kernel (Phase E — elliptic regularity, ABSENT) are THE WALL (`HEAT_KERNEL_INFRASTRUCTURE_PLAN.md`),
+  named not built. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **DEWITT DIAGONAL HEAT COEFFICIENT (heat-kernel Phase-4 downpayment; Rosenberg §3.2.1 transport
   recursion) — `QIQTH/DeWittDiagonal.lean`** (**[AF]** std-3, budget 0, 2026-07-13, commit `163b33e8`).
   DERIVES the DeWitt/Minakshisundaram DIAGONAL heat coefficient `u₁(x,x) = τ/6` by JET-ALGEBRA — the

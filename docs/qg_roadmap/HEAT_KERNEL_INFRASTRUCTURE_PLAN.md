@@ -30,15 +30,15 @@ phase is claimed done until it is a machine-checked, axiom-free theorem.
 
 ## 2. The phases (each an axiom-free Lean checkpoint; ✅=built, ⚠=tractable-now, ⛔=wall)
 
-- **Phase A — the ABSTRACT heat semigroup `e^{−tA}` via our functional calculus. ⚠ TRACTABLE NOW → BUILDING.**
-  For a PVM `P` and a measurable nonneg generator symbol `a : Ω → ℝ` (`a ≥ 0`), define
-  `heatSemigroup t := P.boundedFC (fun ω => exp(−(t·a ω)))` (bounded by `1` for `t ≥ 0`, `a ≥ 0`). This
-  is `e^{−tA}` for the positive self-adjoint `A = ∫ a dE`. No new infrastructure — pure reuse of our tower.
-- **Phase B — the semigroup PROPERTIES. ⚠ mostly tractable.** From the `boundedFC` laws: the semigroup
-  law `e^{−sA}e^{−tA} = e^{−(s+t)A}` (`boundedFC_mul`), the identity `e^{−0·A} = 1` (`boundedFC_const`),
-  contraction `‖e^{−tA}‖ ≤ 1` (`boundedFC_norm_le`), self-adjointness + positivity (real nonneg symbol,
-  `inner_boundedFC`). *Stretch:* strong continuity `e^{−tA} → 1` as `t → 0⁺` (needs dominated
-  convergence on the scalar spectral measure) — attempt, else carry.
+- **Phase A + core of B — the ABSTRACT heat semigroup `e^{−tA}` via our functional calculus. ✅ BUILT**
+  (`QIQTH/Spectral/HeatSemigroup.lean`, `5f0a132d`, [AF] std-3). For a PVM `P` and a measurable nonneg
+  symbol `a : Ω → ℝ`, `heatSemigroup t = P.boundedFC (fun ω => exp(−(t·a ω)))` = `e^{−tA}` for the
+  positive self-adjoint `A = ∫ a dE`. Delivered: ★★ `heatSemigroup_mul` (the SEMIGROUP LAW
+  `e^{−sA}e^{−tA} = e^{−(s+t)A}`, via `boundedFC_mul` + `Complex.exp_add`), `heatSemigroup_zero`
+  (`e^{0·A}=1`), `heatSemigroup_norm_le` (`‖e^{−tA}‖ ≤ 2` — the tower's `2C`, honestly NOT the sharp
+  `≤1`), and `heatSemigroup_inner_nonneg` (positivity). No new infrastructure — pure reuse of our tower.
+  *Remaining in B (stretch, not yet built):* strong continuity `e^{−tA} → 1` as `t → 0⁺`, the generator
+  `= −A`, and the sharp contraction `≤1`.
 - **Phase C — `Δ` on `L²(M)` IS a positive self-adjoint operator. ⛔ mostly wall.** Needs the manifold
   `L²` space (Bochner integral against the Riemannian volume), `Δ` as an unbounded operator, and
   essential self-adjointness. Partly reachable (we have unbounded self-adjoint theory), but the manifold
