@@ -1635,6 +1635,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **THE 2-SPHERE HEAT TRACE + `a₁ = R/6` PROVEN ON A CURVED MANIFOLD — `QIQTH/SphereHeatTrace.lean`**
+  (**[AF]** std-3, budget 0, 2026-07-14, commits `e271b1ea`→`139eb004`). The heat trace of `e^{tΔ}` on the
+  unit 2-sphere, `sphereHeatTrace t = ∑' l:ℕ, (2l+1) e^{−t l(l+1)}` (explicit `S²` Laplacian spectrum).
+  ★ `sphereHeatTrace_asymptotic` (`t·Θ(t) → 1`, the Weyl `a₀` on a CURVED manifold) + `weyl_density_integral`
+  (`∫(2x+1)e^{−t x(x+1)} = 1/t`). ★★★ **`sphereHeatTrace_a1 : Θ(t) − 1/t → 1/3`** — the Seeley–DeWitt
+  **`a₁ = R/6` (`R=2`) PROVEN analytically on a curved manifold, at the sum level**. Route: `sphereHeatTrace_em1`
+  (the exact first-order Euler–Maclaurin decomposition `Θ = 1/t + 1/2 + ∫(fract−½)φ'`, via Mathlib's Abel
+  summation) reduces it to `sphere_R_limit` (`∫(fract−½)φ' → −1/6`), proven by a DOUBLE integration by parts
+  against the periodic Bernoulli functions `B₂,B₃` — built FROM SCRATCH (Mathlib has no EM-remainder /
+  periodic-Bernoulli-on-ℝ API): per-interval IBP (`ibp_interval`) + telescoping (`sphere_R_identity`:
+  `R(t) = −(2−t)/12 + ∫Q₃φ'''`) + the `∫|φ'''| = O(√t) → 0` scaling bound, the `B₃(integer)=0` mean-zero
+  cancellation killing the stubborn `O(1)` term. Matches `CoordinateCurvature` (sphere `R=2`) +
+  `DeWittDiagonal` (`u₁ = τ/6 = 1/3`): the SAME `a₁ = R/6`, now confirmed from the actual heat trace. ⚠
+  **HONEST (binding):** validates `a₁ = R/6` on THIS curved geometry via the explicit spectrum; does NOT
+  analytically discharge the GENERAL curved `a₁ = R/6` (the general curved heat-kernel EXISTENCE stays the
+  wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
+  the conjecture, NOT the strong principle, NOT QG.
+
 - **THE FLAT-TORUS HEAT TRACE (breaking the heat-kernel wall for one explicit geometry) —
   `QIQTH/FlatTorusHeatKernel.lean`** (**[AF]** std-3, budget 0, 2026-07-14, commit `92350369`). The heat
   trace of `e^{tΔ}` on the flat circle `ℝ/ℤ` — the ONE geometry where the heat kernel is fully explicit

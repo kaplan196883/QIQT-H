@@ -150,13 +150,20 @@ frontier, blocked on Euler–Maclaurin.
 **Progress on the sphere `a₁` (EM-1 identity, `e9908e3e`):** `sphereHeatTrace_em1` formalizes the exact
 first-order Euler–Maclaurin decomposition `Θ(t) = 1/t + 1/2 + ∫_{(0,∞)} (fract x − ½)·φ'(x) dx` (φ = the
 trace density `(2x+1)e^{−t x(x+1)}`), via Mathlib's **Abel summation** (`sum_mul_eq_sub_integral_mul'`).
-This **reduces `a₁ = R/6 = 1/3` to the SINGLE named limit** `∫ (fract − ½) φ' → −1/6`. The remaining gap
-is now precise: closing that limit needs a **third-order EM step** — the periodic-Bernoulli `P₂/P₃`
-integration-by-parts with the mean-zero cancellation `∫₀¹ P₂ = 0` (the naive `∫|φ''|` bound is `O(1)`, not
-`o(1)` — an error caught in the standard sketch). Mathlib has the Bernoulli *polynomials* (`bernoulliFun`)
-and `periodizedBernoulli` on `AddCircle`, but **no periodic-Bernoulli-on-ℝ integration-by-parts API** —
-that is the exact missing piece. So `a₁ = R/6` on the sphere is one named integral limit + one named
-Mathlib-gap (periodic-Bernoulli IBP) away from proven.
+This reduces `a₁ = R/6 = 1/3` to the single named limit `∫ (fract − ½) φ' → −1/6`.
+
+**★★★ `a₁ = R/6` PROVEN on the curved 2-sphere (`139eb004`).** `sphereHeatTrace_a1 : Θ(t) − 1/t → 1/3`
+— the Seeley–DeWitt `a₁ = R/6` (`R = 2` for the unit `S²`), analytically closed at the sum level from the
+EXPLICIT `S²` spectrum, axiom-free. The `∫(fract−½)φ' → −1/6` limit (`sphere_R_limit`) is proven by a
+**double integration by parts against the periodic Bernoulli functions `B₂, B₃`** — built entirely from
+scratch (Mathlib has no EM-remainder formula and no periodic-Bernoulli-on-ℝ API): per-interval IBP +
+telescoping (`sphere_R_identity`: `R(t) = −(2−t)/12 + ∫ Q₃ φ'''`) + the `∫|φ'''| = O(√t) → 0` scaling
+bound, with `B₃(integer) = 0` supplying the mean-zero cancellation that kills the stubborn `O(1)` term.
+It matches `CoordinateCurvature` (sphere `R = 2`) and `DeWittDiagonal` (`u₁ = τ/6 = 1/3`): the SAME
+`a₁ = R/6` now confirmed from the actual heat trace. ⚠ HONEST: validates `a₁ = R/6` on THIS curved
+geometry via the explicit spectrum + periodic-Bernoulli EM; it does NOT analytically discharge the GENERAL
+curved `a₁ = R/6` (the general curved heat-kernel EXISTENCE stays the wall). So `a₁ = R/6` is now validated
+on a curved manifold — through the crack, not the whole wall.
 
 ## 4. Firewall (binding)
 
