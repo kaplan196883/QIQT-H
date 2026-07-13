@@ -1635,6 +1635,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **COORDINATE SCALAR CURVATURE (heat-kernel Phase 1, coordinate flavor) — `QIQTH/CoordinateCurvature.lean`**
+  (**[AF]** std-3, budget 0, 2026-07-13, commit `ae04203a`). The component/metric-2-jet scalar curvature
+  `R(g)` built OURSELVES — an ALGEBRAIC function of the metric's 0/1/2-jet (`ginv`, `dg=∂g`, `ddg=∂∂g`)
+  via `christoffel` → `riemann` (from `christoffel` + `dChristoffel`) → `ricci` → `scalarCurvature`
+  (`= Σ g^{sj} Ric_{sj}`), with the identity `∂(g⁻¹) = −g⁻¹ dg g⁻¹` DEFINED into the formula
+  (`dInvMetric`) — NO Lean differentiation, NO `Matrix.inv` derivative (sidesteps the analytic wall). The
+  full sign convention is CERTIFIED by three checks: `scalarCurvature_flat_zeroJet` (flat ⟹ `R=0`),
+  `ConeCheck.scalarCurvature_cone` (polar-flat `dr²+4r²dθ²` away from apex ⟹ `R=0`), ★
+  `SphereCheck.scalarCurvature_sphere` (unit 2-sphere ⟹ `R=2` — the NONZERO check catching sign errors
+  the flat ones miss). ⚠ **HONEST (binding):** the COORDINATE/component scalar curvature — NOT the
+  abstract coordinate-free Riemann/Levi-Civita tensor (that is the live upstream Mathlib effort
+  #36036/#36845, do not confuse); for arbitrary jets it is the formal coordinate expression, tying it to
+  an actual metric needs (carried, not proved) `ginv=inverse(g)`, symmetry, `dg/ddg`=actual partials.
+  Phase 1 (coordinate flavor) of `HEAT_KERNEL_GAP_PLAN.md`; it does NOT discharge `a₁=R/6` (the
+  heat-kernel/Seeley–DeWitt expansion, Phases 3–4, is the deep wall) — it makes `SeeleyDeWittData.R` a
+  computable geometric quantity. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **THE AUTONOMOUS BULK EOM, D4c — `QIQTH/BulkAutonomy.lean`** (**[AF]** std-3, budget 0, 2026-07-13,
   commit `ccb5825d`). Closes the gap D4b explicitly left open: D4b's bulk metric velocity depends on the
   boundary ledger `p(s)`, not the metric `h(s)=D(p s)` alone. D4c: when `ker D` is `Q`-invariant
