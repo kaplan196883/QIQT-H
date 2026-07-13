@@ -11560,5 +11560,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_norm_le_one
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_sub_id_normSq
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_L2_tendsto_zero
+-- B1 (same file): the GENERATOR d/dt e^{−tA}x|₀ = −A x, A = fcOp a = ∫a dE (the tower's unbounded
+-- operator on fcDomain).  The REAL analogue of the tower's unitary Stone generator
+-- hasDerivAt_boundedFC_expSymbol (e^{itf}, generator i·A).  Delivered in BOTH forms: ★★
+-- heatSymbol_diffQuotient_L2_tendsto — the slope (e^{−tA}x−x)/t → −Ax in L²(μ_x)
+-- (∫‖(e^{−ta}−1)/t + a‖² dμ_x → 0), and ★★ hasDerivWithinAt_heatSemigroup — the full packaged ONE-SIDED
+-- derivative HasDerivWithinAt (fun t => e^{−tA}x) (−fcOp a x) (Ici 0) 0 (one-sided is the honest
+-- correct statement: e^{−ta} is bounded only for t≥0).  ⟹ the abstract heat semigroup is now a genuine
+-- C₀-semigroup WITH its generator −A.  HONEST (binding): the ABSTRACT operator generator ONLY; that
+-- Δ on L²(M) IS such an operator (Phase C) / has discrete spectrum (D, Rellich, ABSENT) / a smooth
+-- kernel (E, elliptic regularity, ABSENT) stay THE WALL.  NOT the conjecture, NOT the strong
+-- holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSymbol_diffQuotient_L2_tendsto
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivWithinAt_heatSemigroup
 
 end QIQTH.AxiomAudit

@@ -29,9 +29,29 @@
       the dependent hypothesis `0 ≤ t` through a `fun t` (see note at the theorems).
 
   ⚠ The earlier `‖e^{−tA}‖ ≤ 2` (`heatSemigroup_norm_le`) is kept as the tower's raw `2C`
-  bound; `heatSemigroup_norm_le_one` is the sharp replacement.  What remains genuinely
-  UNBUILT is the **generator** `−A = d/dt e^{−tA}|_{t=0}` as a densely-defined operator
-  (the harder piece: differentiability of the spectral integral, not just continuity).
+  bound; `heatSemigroup_norm_le_one` is the sharp replacement.
+
+  ### Phase B1 additions (the GENERATOR — this file, below)
+
+  The **generator** `−A = d/dt e^{−tA}|_{t=0⁺}` is now BUILT, as the REAL analogue of the tower's
+  unitary Stone generator `hasDerivAt_boundedFC_expSymbol` (`d/dt e^{itK} x|₀ = i·K x`).  Two forms
+  land, both axiom-free (std-3) and `sorry`-free:
+
+    • the **`L²`-spectral form** `heatSymbol_diffQuotient_L2_tendsto`: as `t → 0⁺`,
+      `∫ ‖(e^{−t a}−1)/t + a‖² dμ_x → 0` — i.e. the slope `(e^{−tA}x − x)/t → −A x` in `L²(μ_x)`
+      (via Bochner filter dominated convergence, dominated by `a² ∈ L¹(μ_x)`), and
+    • the **FULL packaged derivative** `hasDerivWithinAt_heatSemigroup`:
+      `HasDerivWithinAt (fun t => e^{−tA}x) (−A x) (Set.Ici 0) 0` — the honest **one-sided**
+      (semigroup-direction, `t ≥ 0`) derivative (the heat symbol is bounded by `1` only for `t ≥ 0`,
+      so a two-sided `HasDerivAt` is unavailable; the function is written
+      `fun t => if 0 ≤ t then heatSemigroup ... x else x`, a total `ℝ → H` equal to the genuine
+      semigroup on `[0,∞)`).  Assembled from the `L²` heart + the heat **distance identity**
+      `dist_boundedFC_add_fcOp_sq` (real/`−1` analogue of the tower's `dist_boundedFC_smul_fcOp_sq`,
+      lintegral-based to dodge the Bochner-`whnf` wall) via its truncation lemma
+      `boundedFC_add_fcTrunc_lintegral_tendsto`.
+
+  With `A = ∫ a dE = fcOp a` self-adjoint (`fcOp_symmetric`), this makes `t ↦ e^{−tA}` a genuine
+  `C₀`-contraction-semigroup with generator `−A` — the full abstract heat-semigroup package.
 
   ## Scope (Phase A of `HEAT_KERNEL_INFRASTRUCTURE_PLAN.md`)
 
@@ -79,6 +99,64 @@ theorem heatSymbol_norm_le {a : Ω → ℝ} (ha0 : ∀ ω, 0 ≤ a ω) {t : ℝ}
   calc Real.exp (-(t * a ω))
       ≤ Real.exp 0 := Real.exp_le_exp.mpr (neg_nonpos.mpr (mul_nonneg ht (ha0 ω)))
     _ = 1 := Real.exp_zero
+
+omit [MeasurableSpace Ω] in
+/-- **`heatSymbol` in exponential-of-product form** `e^{−t·a(ω)} = exp(−(↑t·↑a(ω)))` — the shape the
+    generic derivative/slope lemmas are stated in. -/
+theorem heatSymbol_eq_exp_neg_mul (a : Ω → ℝ) (t : ℝ) (ω : Ω) :
+    heatSymbol a t ω = Complex.exp (-((t : ℂ) * (a ω : ℂ))) := by
+  rw [heatSymbol]
+  congr 1
+  push_cast
+  ring
+
+/-- **Pointwise generator derivative** `d/dt e^{−t c}|₀ = −c` — the REAL analogue of the tower's unitary
+    `hasDerivAt_expSymbol` (`d/dt e^{itc}|₀ = i·c`).  The diff quotient `(e^{−tc}−1)/t → −c`. -/
+theorem heatSymbol_hasDerivAt (c : ℝ) :
+    HasDerivAt (fun t : ℝ => Complex.exp (-((t : ℂ) * (c : ℂ)))) (-(c : ℂ)) 0 := by
+  have h1 : HasDerivAt (fun t : ℝ => -((t : ℂ) * (c : ℂ))) (-(c : ℂ)) 0 := by
+    have hb : HasDerivAt (fun t : ℝ => (t : ℂ)) 1 0 := Complex.ofRealCLM.hasDerivAt
+    simpa using (hb.mul_const (c : ℂ)).neg
+  simpa using h1.cexp
+
+/-- **The heat difference-quotient slope** `(e^{−t c}−1)/t → −c` as `t→0` (`t≠0`) — the pointwise input
+    (in `𝓝[≠]0` slope form) to the generator relation, mirroring `expSymbol_slope_tendsto`. -/
+theorem heatSymbol_slope_tendsto (c : ℝ) :
+    Filter.Tendsto (fun t : ℝ => (Complex.exp (-((t : ℂ) * (c : ℂ))) - 1) / (t : ℂ))
+      (nhdsWithin 0 {0}ᶜ) (nhds (-(c : ℂ))) := by
+  have h := heatSymbol_hasDerivAt c
+  rw [hasDerivAt_iff_tendsto_slope] at h
+  refine h.congr fun t => ?_
+  simp only [slope, vsub_eq_sub, sub_zero, Complex.ofReal_zero, zero_mul, neg_zero,
+    Complex.exp_zero, Complex.real_smul, Complex.ofReal_inv]
+  ring
+
+omit [MeasurableSpace Ω] in
+/-- **Heat difference-quotient `L²` domination**: for `t>0` and `a ≥ 0`,
+    `‖(e^{−t a(ω)}−1)/t + a(ω)‖ ≤ a(ω)`.  Since `(e^{−t a}−1)/t ∈ [−a, 0]` (from `1−ta ≤ e^{−ta} ≤ 1`),
+    the deviation `(e^{−ta}−1)/t + a ∈ [0, a]`; the uniform `L²(μ_x)`-domination (by `a ∈ L²`) for the
+    dominated-convergence generator step.  Real analogue of `norm_expSymbol_sub_one_div_le`. -/
+theorem heatSymbol_diffQuotient_norm_le {a : Ω → ℝ} (ha0 : ∀ ω, 0 ≤ a ω) {t : ℝ} (ht : 0 < t)
+    (ω : Ω) :
+    ‖(heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)‖ ≤ a ω := by
+  have hexp : heatSymbol a t ω = ((Real.exp (-(t * a ω)) : ℝ) : ℂ) := by
+    rw [heatSymbol, Complex.ofReal_exp]
+  have hcx : (heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)
+      = (((Real.exp (-(t * a ω)) - 1) / t + a ω : ℝ) : ℂ) := by
+    rw [hexp]; push_cast; ring
+  rw [hcx, Complex.norm_real, Real.norm_eq_abs]
+  have he_ge : 1 - t * a ω ≤ Real.exp (-(t * a ω)) := by
+    have h := Real.add_one_le_exp (-(t * a ω)); linarith
+  have he_le : Real.exp (-(t * a ω)) ≤ 1 := by
+    have h0 : -(t * a ω) ≤ 0 := by nlinarith [ha0 ω, ht.le]
+    calc Real.exp (-(t * a ω)) ≤ Real.exp 0 := Real.exp_le_exp.mpr h0
+      _ = 1 := Real.exp_zero
+  have hlow : -(a ω) ≤ (Real.exp (-(t * a ω)) - 1) / t := by
+    rw [le_div_iff₀ ht]; nlinarith [he_ge]
+  have hupp : (Real.exp (-(t * a ω)) - 1) / t ≤ 0 := by
+    rw [div_nonpos_iff]; right; exact ⟨by linarith, ht.le⟩
+  rw [abs_le]
+  exact ⟨by nlinarith [hlow, ha0 ω], by linarith [hupp]⟩
 
 namespace ProjectionValuedMeasure
 
@@ -240,6 +318,266 @@ theorem heatSemigroup_L2_tendsto_zero {a : Ω → ℝ} (ha : Measurable a) (ha0 
       rwa [h0] at hh
     have h2 := ((htend.sub (tendsto_const_nhds (x := (1 : ℂ)))).norm).pow 2
     simpa using h2
+
+/-- **★★ The generator relation in `L²`-spectral form (B1)** — the heat analogue of the tower's Stone
+    generator relation `hasDerivAt_boundedFC_expSymbol`.  As `t → 0⁺` the slope of the heat symbol
+    converges to `−a` in `L²(μ_x)`:
+    `∫ ‖(e^{−t a(ω)}−1)/t + a(ω)‖² dμ_x → 0`.
+    Since `‖(e^{−tA}x − x)/t − (−A x)‖² = ∫ ‖(e^{−t a}−1)/t − (−a)‖² dμ_x` (the norm-squared bridge
+    `norm_boundedFC_sq` applied to the difference-quotient symbol), this MEANS
+    `(e^{−tA}x − x)/t → −A x` in `H` — i.e. `d/dt e^{−tA}x|_{0⁺} = −A x`, with `A = ∫ a dE = fcOp a`.
+    (Stated over `𝓝[>]0` — the honest one-sided/semigroup direction, `t ≥ 0`; this avoids threading the
+    dependent bound `0 ≤ t` through a bare `fun t`.)  Bochner dominated convergence over the finite
+    scalar spectral measure `μ_x`: pointwise `→ 0` from `heatSymbol_slope_tendsto`, dominated by
+    `a² ∈ L¹(μ_x)` (finite exactly because `x ∈ fcDomain a`), via `heatSymbol_diffQuotient_norm_le`. -/
+theorem heatSymbol_diffQuotient_L2_tendsto {a : Ω → ℝ} (ha : Measurable a) (ha0 : ∀ ω, 0 ≤ a ω)
+    {x : H} (hx : x ∈ P.fcDomain a) :
+    Filter.Tendsto
+      (fun t : ℝ => ∫ ω, ‖(heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)‖ ^ 2 ∂(P.scalarMeasure x))
+      (nhdsWithin 0 (Set.Ioi (0 : ℝ))) (nhds 0) := by
+  have hintsq : MeasureTheory.Integrable (fun ω => a ω ^ 2) (P.scalarMeasure x) :=
+    (P.mem_fcDomain_iff_integrable_sq ha x).mp hx
+  have h := MeasureTheory.tendsto_integral_filter_of_dominated_convergence
+    (μ := P.scalarMeasure x)
+    (l := nhdsWithin 0 (Set.Ioi (0 : ℝ)))
+    (F := fun (t : ℝ) (ω : Ω) => ‖(heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)‖ ^ 2)
+    (f := fun _ : Ω => (0 : ℝ))
+    (bound := fun ω => a ω ^ 2)
+    (hF_meas := Filter.Eventually.of_forall (fun t =>
+      (((((heatSymbol_measurable ha t).sub measurable_const).div_const _).add
+        (Complex.measurable_ofReal.comp ha)).norm.pow_const 2).aestronglyMeasurable))
+    (h_bound := ?_) (bound_integrable := hintsq) (h_lim := ?_)
+  · simpa using h
+  · -- domination on `t > 0`: `‖·‖² ≤ a²`
+    refine Filter.eventually_of_mem self_mem_nhdsWithin (fun t ht => ?_)
+    have htpos : (0 : ℝ) < t := ht
+    refine Filter.Eventually.of_forall (fun ω => ?_)
+    rw [Real.norm_of_nonneg (sq_nonneg _)]
+    have hle := heatSymbol_diffQuotient_norm_le ha0 htpos ω
+    nlinarith [hle, norm_nonneg ((heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)), ha0 ω]
+  · -- pointwise `→ 0` from the slope tendsto
+    refine Filter.Eventually.of_forall (fun ω => ?_)
+    have hsub : Set.Ioi (0 : ℝ) ⊆ {(0 : ℝ)}ᶜ := fun s hs => ne_of_gt hs
+    have hs := (heatSymbol_slope_tendsto (a ω)).mono_left (nhdsWithin_mono 0 hsub)
+    have hs' : Filter.Tendsto (fun t : ℝ => (heatSymbol a t ω - 1) / (t : ℂ))
+        (nhdsWithin 0 (Set.Ioi (0 : ℝ))) (nhds (-(a ω : ℂ))) :=
+      hs.congr (fun t => by rw [heatSymbol_eq_exp_neg_mul])
+    have hs0 : Filter.Tendsto (fun t : ℝ => (heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ))
+        (nhdsWithin 0 (Set.Ioi (0 : ℝ))) (nhds 0) := by
+      have := hs'.add (tendsto_const_nhds (x := (a ω : ℂ)))
+      simpa using this
+    have hpow := (hs0.norm).pow 2
+    simpa using hpow
+
+/-- **Truncation `L²`-convergence for the `h + ↑a` symbol** (the real/`+` analogue of the tower's
+    `complexSymbol_fcTrunc_lintegral_tendsto`): for a bounded symbol `h` and `x ∈ fcDomain a`,
+    `∫⁻ ‖h + ↑fcTrunc_m‖² dμ_x → ∫⁻ ‖h + ↑a‖² dμ_x`.  Sequential `lintegral` dominated convergence:
+    pointwise from `fcTrunc_tendsto`, dominated by `2C² + 2a²` (finite by `x ∈ fcDomain a` + finite
+    measure).  Stated at the `lintegral` level to dodge the `Bochner`-over-`scalarMeasure` `whnf` wall. -/
+theorem boundedFC_add_fcTrunc_lintegral_tendsto {a : Ω → ℝ} (ha : Measurable a) {x : H}
+    (hx : x ∈ P.fcDomain a) {h : Ω → ℂ} (hh : Measurable h) {C : ℝ} (hC : ∀ ω, ‖h ω‖ ≤ C) :
+    Filter.Tendsto
+      (fun m => ∫⁻ ω, ENNReal.ofReal (‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x))
+      Filter.atTop
+      (nhds (∫⁻ ω, ENNReal.ofReal (‖h ω + (a ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x))) := by
+  have hmeas : ∀ m, Measurable (fun ω => ENNReal.ofReal (‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2)) := fun m =>
+    ENNReal.measurable_ofReal.comp ((Measurable.norm (hh.add
+      (Complex.measurable_ofReal.comp (fcTrunc_measurable ha m)))).pow_const 2)
+  have hptbound : ∀ m ω, ‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2 ≤ 2 * C ^ 2 + 2 * (a ω) ^ 2 := by
+    intro m ω
+    have hfc : ‖((fcTrunc a m ω : ℝ) : ℂ)‖ = |fcTrunc a m ω| := by
+      rw [Complex.norm_real, Real.norm_eq_abs]
+    have h1 : ‖h ω + (fcTrunc a m ω : ℂ)‖ ≤ C + |a ω| := by
+      calc ‖h ω + (fcTrunc a m ω : ℂ)‖
+          ≤ ‖h ω‖ + ‖((fcTrunc a m ω : ℝ) : ℂ)‖ := norm_add_le _ _
+        _ ≤ C + |a ω| := by rw [hfc]; exact add_le_add (hC ω) (fcTrunc_abs_le_abs a m ω)
+    nlinarith [h1, norm_nonneg (h ω + (fcTrunc a m ω : ℂ)), abs_nonneg (a ω), sq_abs (a ω),
+      sq_nonneg (C - |a ω|)]
+  have hbound : ∀ m, (fun ω => ENNReal.ofReal (‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2))
+      ≤ᵐ[P.scalarMeasure x]
+      (fun ω => ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (a ω) ^ 2)) := fun m =>
+    Filter.Eventually.of_forall fun ω =>
+      (ENNReal.ofReal_le_ofReal (hptbound m ω)).trans ENNReal.ofReal_add_le
+  have hfin : ∫⁻ ω, (ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (a ω) ^ 2))
+      ∂(P.scalarMeasure x) ≠ ⊤ := by
+    rw [MeasureTheory.lintegral_add_left measurable_const]
+    refine ENNReal.add_ne_top.mpr ⟨?_, ?_⟩
+    · rw [MeasureTheory.lintegral_const]
+      exact ENNReal.mul_ne_top ENNReal.ofReal_ne_top
+        (by rw [P.scalarMeasure_univ]; exact ENNReal.ofReal_ne_top)
+    · have heq : ∫⁻ ω, ENNReal.ofReal (2 * (a ω) ^ 2) ∂(P.scalarMeasure x) = 2 * P.fcEnergy a x := by
+        calc ∫⁻ ω, ENNReal.ofReal (2 * (a ω) ^ 2) ∂(P.scalarMeasure x)
+            = ∫⁻ ω, 2 * ENNReal.ofReal ((a ω) ^ 2) ∂(P.scalarMeasure x) := by
+              refine MeasureTheory.lintegral_congr fun ω => ?_
+              rw [ENNReal.ofReal_mul (by norm_num : (0 : ℝ) ≤ 2), ENNReal.ofReal_ofNat]
+          _ = 2 * ∫⁻ ω, ENNReal.ofReal ((a ω) ^ 2) ∂(P.scalarMeasure x) :=
+              MeasureTheory.lintegral_const_mul 2 (ENNReal.measurable_ofReal.comp (ha.pow_const 2))
+          _ = 2 * P.fcEnergy a x := by rw [fcEnergy]
+      rw [heq]; exact ENNReal.mul_ne_top (by norm_num) ((P.mem_fcDomain).mp hx)
+  have hlim : ∀ᵐ ω ∂(P.scalarMeasure x), Filter.Tendsto
+      (fun m => ENNReal.ofReal (‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2)) Filter.atTop
+      (nhds (ENNReal.ofReal (‖h ω + (a ω : ℂ)‖ ^ 2))) := by
+    refine Filter.Eventually.of_forall fun ω => ?_
+    have h0 : Filter.Tendsto (fun m => ((fcTrunc a m ω : ℝ) : ℂ)) Filter.atTop (nhds (a ω : ℂ)) :=
+      (Complex.continuous_ofReal.tendsto (a ω)).comp (fcTrunc_tendsto a ω)
+    exact ENNReal.tendsto_ofReal (((tendsto_const_nhds.add h0).norm).pow 2)
+  exact MeasureTheory.tendsto_lintegral_of_dominated_convergence
+    (fun ω => ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (a ω) ^ 2)) hmeas hbound hfin hlim
+
+/-- **The heat distance identity** (the real analogue of the tower's `dist_boundedFC_smul_fcOp_sq`,
+    with scalar `−1` in place of `i`):  for a bounded symbol `h` and `x ∈ fcDomain a`,
+    `‖boundedFC(h) x + (∫a dE) x‖² = (∫⁻ ‖h + ↑a‖² dμ_x).toReal`.
+    Collapses the generator's double limit to a single limit: the distance of `boundedFC(h)x` to
+    `−A x = −(∫a dE)x` equals the `L²` distance of the symbol `h` to `−a`.  Limit-uniqueness of
+    `boundedFC(h)x + fcSeq_m x → boundedFC(h)x + fcOp x` (Claim A), the per-`m` identity
+    `‖boundedFC(h)x + fcSeq_m x‖² = (∫⁻‖h + ↑fcTrunc_m‖²).toReal` (Claim B, `boundedFC_add` +
+    `norm_boundedFC_sq`), and the truncation `L²`-convergence (`boundedFC_add_fcTrunc_lintegral_tendsto`). -/
+theorem dist_boundedFC_add_fcOp_sq {a : Ω → ℝ} (ha : Measurable a) {x : H} (hx : x ∈ P.fcDomain a)
+    {h : Ω → ℂ} (hh : Measurable h) {C : ℝ} (hC0 : 0 ≤ C) (hC : ∀ ω, ‖h ω‖ ≤ C) :
+    ‖P.boundedFC hh hC0 hC x + P.fcOp ha x‖ ^ 2
+      = (∫⁻ ω, ENNReal.ofReal (‖h ω + (a ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x)).toReal := by
+  have hA : Filter.Tendsto (fun m => P.boundedFC hh hC0 hC x + P.fcSeq ha m x) Filter.atTop
+      (nhds (P.boundedFC hh hC0 hC x + P.fcOp ha x)) :=
+    tendsto_const_nhds.add (P.fcSeq_tendsto_fcOp ha hx)
+  have hLHS : Filter.Tendsto (fun m => ‖P.boundedFC hh hC0 hC x + P.fcSeq ha m x‖ ^ 2) Filter.atTop
+      (nhds (‖P.boundedFC hh hC0 hC x + P.fcOp ha x‖ ^ 2)) := (hA.norm).pow 2
+  have hbnd : ∀ m ω, ‖((fcTrunc a m ω : ℝ) : ℂ)‖ ≤ (m : ℝ) := fun m ω => by
+    rw [Complex.norm_real, Real.norm_eq_abs]; exact fcTrunc_abs_le a m ω
+  have hB : ∀ m, ‖P.boundedFC hh hC0 hC x + P.fcSeq ha m x‖ ^ 2
+      = (∫⁻ ω, ENNReal.ofReal (‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x)).toReal := by
+    intro m
+    rw [fcSeq, ← ContinuousLinearMap.add_apply,
+      ← P.boundedFC_add hh (Complex.continuous_ofReal.measurable.comp (fcTrunc_measurable ha m))
+        hC0 m.cast_nonneg hC (hbnd m), P.norm_boundedFC_sq,
+      MeasureTheory.integral_eq_lintegral_of_nonneg_ae
+        (Filter.Eventually.of_forall fun ω => sq_nonneg _)
+        ((Measurable.norm (hh.add (Complex.measurable_ofReal.comp
+          (fcTrunc_measurable ha m)))).pow_const 2).aestronglyMeasurable]
+    simp only [Function.comp_apply]
+  have hfin_lim : ∫⁻ ω, ENNReal.ofReal (‖h ω + (a ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x) ≠ ⊤ := by
+    have hsum_fin : ∫⁻ ω, (ENNReal.ofReal (2 * C ^ 2) + ENNReal.ofReal (2 * (a ω) ^ 2))
+        ∂(P.scalarMeasure x) ≠ ⊤ := by
+      rw [MeasureTheory.lintegral_add_left measurable_const]
+      refine ENNReal.add_ne_top.mpr ⟨?_, ?_⟩
+      · rw [MeasureTheory.lintegral_const]
+        exact ENNReal.mul_ne_top ENNReal.ofReal_ne_top
+          (by rw [P.scalarMeasure_univ]; exact ENNReal.ofReal_ne_top)
+      · have heq : ∫⁻ ω, ENNReal.ofReal (2 * (a ω) ^ 2) ∂(P.scalarMeasure x) = 2 * P.fcEnergy a x := by
+          calc ∫⁻ ω, ENNReal.ofReal (2 * (a ω) ^ 2) ∂(P.scalarMeasure x)
+              = ∫⁻ ω, 2 * ENNReal.ofReal ((a ω) ^ 2) ∂(P.scalarMeasure x) := by
+                refine MeasureTheory.lintegral_congr fun ω => ?_
+                rw [ENNReal.ofReal_mul (by norm_num : (0 : ℝ) ≤ 2), ENNReal.ofReal_ofNat]
+            _ = 2 * ∫⁻ ω, ENNReal.ofReal ((a ω) ^ 2) ∂(P.scalarMeasure x) :=
+                MeasureTheory.lintegral_const_mul 2 (ENNReal.measurable_ofReal.comp (ha.pow_const 2))
+            _ = 2 * P.fcEnergy a x := by rw [fcEnergy]
+        rw [heq]; exact ENNReal.mul_ne_top (by norm_num) ((P.mem_fcDomain).mp hx)
+    refine ne_top_of_le_ne_top hsum_fin (MeasureTheory.lintegral_mono fun ω => ?_)
+    refine (ENNReal.ofReal_le_ofReal ?_).trans ENNReal.ofReal_add_le
+    have h1 : ‖h ω + (a ω : ℂ)‖ ≤ C + |a ω| := by
+      have hIa : ‖((a ω : ℝ) : ℂ)‖ = |a ω| := by rw [Complex.norm_real, Real.norm_eq_abs]
+      calc ‖h ω + (a ω : ℂ)‖ ≤ ‖h ω‖ + ‖((a ω : ℝ) : ℂ)‖ := norm_add_le _ _
+        _ ≤ C + |a ω| := by rw [hIa]; exact add_le_add (hC ω) le_rfl
+    nlinarith [h1, norm_nonneg (h ω + (a ω : ℂ)), abs_nonneg (a ω), sq_abs (a ω),
+      sq_nonneg (C - |a ω|)]
+  have hRHS : Filter.Tendsto
+      (fun m => (∫⁻ ω, ENNReal.ofReal (‖h ω + (fcTrunc a m ω : ℂ)‖ ^ 2)
+        ∂(P.scalarMeasure x)).toReal) Filter.atTop
+      (nhds ((∫⁻ ω, ENNReal.ofReal (‖h ω + (a ω : ℂ)‖ ^ 2) ∂(P.scalarMeasure x)).toReal)) :=
+    (ENNReal.continuousAt_toReal hfin_lim).tendsto.comp
+      (P.boundedFC_add_fcTrunc_lintegral_tendsto ha hx hh hC)
+  simp only [hB] at hLHS
+  exact tendsto_nhds_unique hLHS hRHS
+
+/-- **★★★ The abstract heat-semigroup generator (B1)** — `d/dt e^{−tA} x |_{0⁺} = −A x`, packaged as an
+    honest one-sided (semigroup-direction, `t ≥ 0`) derivative.  With `A = ∫a dE = fcOp a` the positive
+    self-adjoint operator, the strongly-continuous semigroup `t ↦ e^{−tA} x = heatSemigroup ... x` is
+    differentiable within `[0,∞)` at the origin with right derivative `−A x` on the domain `fcDomain a`.
+    This is the REAL analogue of the tower's Stone generator `hasDerivAt_boundedFC_expSymbol`
+    (`d/dt e^{itK} x|₀ = i·K x`): `e^{−ta}` replaces `e^{itf}`, `−a` replaces `i·f`, `−fcOp a` replaces
+    `i·fcOp f`, and the two-sided derivative becomes the one-sided `HasDerivWithinAt (Set.Ici 0)`
+    (the heat symbol is bounded by `1` only for `t ≥ 0`).
+
+    The function is written `fun t => if 0 ≤ t then heatSemigroup ... x else x` so it is a total `ℝ → H`
+    that equals the genuine semigroup on `[0,∞)`; the `else`-branch is irrelevant to the
+    within-`Ici 0` derivative.  Assembled from the `L²` analytic heart
+    (`heatSymbol_diffQuotient_L2_tendsto`) + the distance identity (`dist_boundedFC_add_fcOp_sq`):
+    `‖slope − (−A x)‖² = ∫‖(e^{−ta}−1)/t + a‖² → 0`, so the slope `→ −A x`. -/
+theorem hasDerivWithinAt_heatSemigroup {a : Ω → ℝ} (ha : Measurable a) (ha0 : ∀ ω, 0 ≤ a ω)
+    {x : H} (hx : x ∈ P.fcDomain a) :
+    HasDerivWithinAt (fun t : ℝ => if h : 0 ≤ t then P.heatSemigroup ha ha0 h x else x)
+      (- P.fcOp ha x) (Set.Ici 0) 0 := by
+  rw [hasDerivWithinAt_iff_tendsto_slope]
+  have hset : Set.Ici (0 : ℝ) \ {0} = Set.Ioi 0 := by
+    ext t
+    simp only [Set.mem_diff, Set.mem_Ici, Set.mem_singleton_iff, Set.mem_Ioi]
+    exact ⟨fun h => lt_of_le_of_ne h.1 (Ne.symm h.2), fun h => ⟨h.le, ne_of_gt h⟩⟩
+  rw [hset]
+  set F : ℝ → H := fun t => if h : 0 ≤ t then P.heatSemigroup ha ha0 h x else x with hFdef
+  have hF0 : F 0 = x := by
+    simp only [hFdef]
+    rw [dif_pos (le_refl (0 : ℝ)), P.heatSemigroup_zero ha ha0, ContinuousLinearMap.one_apply]
+  -- `‖slope − (−A x)‖² → 0`
+  have hkey : Filter.Tendsto (fun t : ℝ => ‖slope F 0 t - (- P.fcOp ha x)‖ ^ 2)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) := by
+    have hev : (fun t : ℝ => ‖slope F 0 t - (- P.fcOp ha x)‖ ^ 2)
+        =ᶠ[nhdsWithin 0 (Set.Ioi 0)]
+        (fun t : ℝ => ∫ ω, ‖(heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)‖ ^ 2
+          ∂(P.scalarMeasure x)) := by
+      filter_upwards [self_mem_nhdsWithin] with t ht
+      have htpos : (0 : ℝ) < t := ht
+      have hFt : F t = P.boundedFC (heatSymbol_measurable ha t) zero_le_one
+          (heatSymbol_norm_le ha0 htpos.le) x := by
+        simp only [hFdef]; exact dif_pos htpos.le
+      have hslope : slope F 0 t = (t : ℂ)⁻¹ • (P.boundedFC (heatSymbol_measurable ha t) zero_le_one
+          (heatSymbol_norm_le ha0 htpos.le) x - x) := by
+        simp only [slope, vsub_eq_sub, sub_zero]
+        rw [hF0, hFt, ← Complex.coe_smul, Complex.ofReal_inv]
+      have hsubx : P.boundedFC (heatSymbol_measurable ha t) zero_le_one
+            (heatSymbol_norm_le ha0 htpos.le) x - x
+          = P.boundedFC ((heatSymbol_measurable ha t).sub (measurable_const (a := (1 : ℂ))))
+              (add_nonneg zero_le_one zero_le_one)
+              (fun ω => (norm_sub_le _ _).trans
+                (add_le_add (heatSymbol_norm_le ha0 htpos.le ω) norm_one.le)) x := by
+        have h := P.boundedFC_sub (heatSymbol_measurable ha t) zero_le_one
+          (heatSymbol_norm_le ha0 htpos.le) (measurable_const (a := (1 : ℂ))) zero_le_one
+          (fun _ => norm_one.le)
+        have hc1 : P.boundedFC (measurable_const (a := (1 : ℂ))) zero_le_one (fun _ => norm_one.le)
+            = (1 : H →L[ℂ] H) := by
+          have h2 := P.boundedFC_const (1 : ℂ); rw [one_smul] at h2; exact h2
+        rw [hc1] at h
+        have happ := congrArg (fun T : H →L[ℂ] H => T x) h
+        simp only [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply] at happ
+        exact happ.symm
+      rw [hslope, hsubx, ← ContinuousLinearMap.smul_apply,
+        ← P.boundedFC_smul ((t : ℂ)⁻¹)
+          ((heatSymbol_measurable ha t).sub (measurable_const (a := (1 : ℂ))))
+          (add_nonneg zero_le_one zero_le_one)
+          (fun ω => (norm_sub_le _ _).trans
+            (add_le_add (heatSymbol_norm_le ha0 htpos.le ω) norm_one.le)),
+        sub_neg_eq_add, P.dist_boundedFC_add_fcOp_sq ha hx,
+        MeasureTheory.integral_eq_lintegral_of_nonneg_ae
+          (Filter.Eventually.of_forall fun ω => sq_nonneg _)
+          (show MeasureTheory.AEStronglyMeasurable
+              (fun ω => ‖(heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ)‖ ^ 2) (P.scalarMeasure x) from
+            (((((heatSymbol_measurable ha t).sub measurable_const).div_const (t : ℂ)).add
+              (Complex.measurable_ofReal.comp ha)).norm.pow_const 2).aestronglyMeasurable)]
+      congr 1
+      refine MeasureTheory.lintegral_congr fun ω => ?_
+      have hβ : (t : ℂ)⁻¹ * (heatSymbol a t ω - 1) + (a ω : ℂ)
+          = (heatSymbol a t ω - 1) / (t : ℂ) + (a ω : ℂ) := by rw [div_eq_mul_inv, mul_comm]
+      simp only [hβ]
+    rw [Filter.tendsto_congr' hev]
+    exact P.heatSymbol_diffQuotient_L2_tendsto ha ha0 hx
+  -- `‖·‖² → 0 ⟹ ‖·‖ → 0 ⟹ · → 0 ⟹ slope → −A x`
+  have hnorm : Filter.Tendsto (fun t : ℝ => ‖slope F 0 t - (- P.fcOp ha x)‖)
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) := by
+    have h := (Real.continuous_sqrt.tendsto 0).comp hkey
+    simp only [Real.sqrt_zero] at h
+    refine h.congr fun t => ?_
+    rw [Function.comp_apply, Real.sqrt_sq (norm_nonneg _)]
+  have hv := tendsto_zero_iff_norm_tendsto_zero.mpr hnorm
+  have := hv.add (tendsto_const_nhds (x := - P.fcOp ha x))
+  simpa using this
 
 end ProjectionValuedMeasure
 
