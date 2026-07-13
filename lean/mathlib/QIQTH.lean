@@ -767,6 +767,7 @@ import QIQTH.OneLoopDeterminant
 import QIQTH.ReplicaContinuation
 import QIQTH.CorrespondenceAssembly
 import QIQTH.SeeleyDeWittInterface
+import QIQTH.HeatTraceAsymptotics
 import QIQTH.BulkGeneration
 import QIQTH.ScaleDimension
 import QIQTH.BellCutRank

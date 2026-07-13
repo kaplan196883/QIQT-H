@@ -11419,4 +11419,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ScaleDimension.radialDist_add_of_monotone
 #print axioms QIQTH.ScaleDimension.radialDepth_monotone
 
+-- HEAT-TRACE ASYMPTOTIC-SHAPE INTERFACE (heat-kernel gap plan, §4 extension / Phase-4 obligation):
+-- adds the short-time trace-expansion SHAPE to the deferred Seeley–DeWitt interface.
+-- HeatTraceAsymptotics EXTENDS SeeleyDeWittData with `d`, `heatTrace`, and the CARRIED `asymptotic`
+-- field — the Phase-4 heat-kernel fact `Tr e^{−tP} = (4πt)^{−d/2}(a₀+a₁t+o(t))` in difference-quotient
+-- form (NEVER proved here, NEVER a Lean axiom).  What is PROVED is only the coefficient EXTRACTION from
+-- that carried asymptotic: normalizedTrace_tendsto_one (the normalized trace → 1, leading SDW
+-- normalization as a limit), ★★ subleading_slope_eq_a1Laplace (the subleading slope = R/6 + tr E = the
+-- carried a₁), capstone heatTrace_determines_coefficients.  This shows the interface is NON-VACUOUS and
+-- isolates exactly what Phase 4's eventual instance must supply.  HONEST (binding): does NOT build the
+-- heat semigroup / kernel / asymptotic expansion (Phases 1/3/4 — the Riemannian-heat-kernel wall,
+-- absent from every proof assistant); `a₁ = R/6` remains CARRIED (option b).  NOT the conjecture, NOT
+-- the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.HeatTraceAsymptotics.normalizedTrace_tendsto_one
+#print axioms QIQTH.HeatTraceAsymptotics.subleading_slope_eq_a1Laplace
+#print axioms QIQTH.HeatTraceAsymptotics.heatTrace_determines_coefficients
+
 end QIQTH.AxiomAudit
