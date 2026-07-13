@@ -11608,5 +11608,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_asymptotic
 #print axioms QIQTH.SphereHeatTrace.weyl_density_integral
 #print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_summable
+-- EM-1 (same file): the exact first-order Euler–Maclaurin decomposition of the sphere heat trace,
+-- ★★ sphereHeatTrace_em1: Θ(t) = 1/t + 1/2 + ∫_{Ioi 0} (fract x − 1/2)·φ'(x) dx (φ = the sphere-trace
+-- density (2x+1)e^{−t x(x+1)}), via Mathlib's Abel summation (sum_mul_eq_sub_integral_mul') — reducing
+-- the a₁=R/6=1/3 constant to the SINGLE named limit ∫P₁φ' → −1/6.  sphereHeatTrace_emFract (Θ = 1 + 1/t
+-- + ∫φ'·{x}); integral_emPhi'_eq (∫φ' = −1).  ⚠ HONEST (binding): the a₁ constant Θ−1/t → 1/3 is STILL
+-- NOT proven — it now reduces to `∫(fract−½)φ' → −1/6`, whose closure needs a THIRD-order EM step (the
+-- periodic-Bernoulli P₂/P₃ integration-by-parts with the mean-zero cancellation ∫₀¹P₂=0; the naive
+-- ∫|φ''| bound is O(1) not o(1) — a subagent-caught error in the standard sketch).  Mathlib has the
+-- Bernoulli POLYNOMIALS (bernoulliFun) + periodizedBernoulli on AddCircle but NO periodic-Bernoulli-on-ℝ
+-- IBP API — the precise remaining gap.  a₀ validated on the curved sphere; a₁=R/6-on-sphere reduced to
+-- one named limit, still walled.  NOT the conjecture, NOT the strong principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_em1
+#print axioms QIQTH.SphereHeatTrace.integral_emPhi'_eq
 
 end QIQTH.AxiomAudit

@@ -26,14 +26,30 @@ term** (`R = 2` ⟹ `R/6 = 1/3`).
      `1 + (1/t)e^{-2t} − 2√(π/t) ≤ Θ(t) ≤ 1 + 1/t + 2√(π/t)`.
 3. `sphere_a1_eq_R_div_six` — the arithmetic `1/3 = R/6` with `R = 2`, tying the constant to
    `CoordinateCurvature`'s sphere `R = 2` and `DeWittDiagonal`'s `u₁ = τ/6` (`τ = 2 ⟹ 1/3`).
+4. **The EXACT first-order Euler–Maclaurin identity** `sphereHeatTrace_em1`:
+   `Θ(t) = 1/t + 1/2 + ∫_{(0,∞)} (Int.fract x − 1/2)·φ'(x) dx` with `φ'(x) = (2 − t(2x+1)²)e^{-t x(x+1)}`.
+   Here `1/t` is the Weyl term `a₀`, `+1/2` is the `φ(0)/2` boundary term, and the remainder integral
+   `∫ P₁ φ'` (`P₁ = Int.fract − 1/2` the first periodic Bernoulli function) carries the curvature
+   constant. Built purely from Mathlib's Abel summation `sum_mul_eq_sub_integral_mul'` (unit
+   coefficients), splitting the floor weight `⌊x⌋+1 = (x+1) − {x}` and integrating `∫ φ'(x+1)` by
+   parts — using NO Euler–Maclaurin formula and NO Bernoulli substrate (Mathlib has neither the EM
+   remainder formula nor a periodic-Bernoulli-on-ℝ integration API). Supporting facts:
+   `emFinite` (the finite EM identity `∑_{k≤m} φ(k) = 1 + ∫_0^m φ + ∫_0^m φ'{x}`),
+   `integral_emPhi'_eq` (`∫_{(0,∞)} φ' = −1`), `integrableOn_emPhi'`/`integrableOn_emPhi'_fract`.
 
 **What is NOT (yet) formalized — the precise remaining gap.** The SUM-level constant limit
-`Θ(t) − 1/t → 1/3` is NOT proven. The two-sided sandwich above pins only the leading `1/t`: its slack
-is `O(1/√t)` (`2√(π/t)`), which dominates the `O(1)` constant, so it cannot resolve `+1/3`. Capturing
-the constant needs the subleading term of `S(t) = Σ (2l+1) e^{-t(l+1/2)²} ~ 1/t + 1/12` (Poisson
-summation / Euler–Maclaurin), which combines with the `e^{t/4}` prefactor's `+1/4` to give
-`1/4 + 1/12 = 1/3`. So this file validates `a₀` on a curved manifold and carries `a₁ = R/6 = 1/3` as
-an arithmetic/DeWitt label — it does NOT yet close the sum-level `a₁` limit.
+`Θ(t) − 1/t → 1/3` is NOT proven. Two facts are now in hand — the `O(1/√t)` sandwich (item 2, which
+pins only `a₀`) and the EXACT EM-1 identity `Θ(t) − 1/t = 1/2 + ∫ P₁ φ'` (item 4). What is missing is
+the *limit of the remainder*: `∫_{(0,∞)} P₁(x) φ'(x) dx → −1/6` as `t → 0⁺` (equivalently
+`∫ φ'·{x} → −2/3`). That limit is NOT the naive `‖P₁‖·∫|φ'|` bound (which is `O(1)`, since
+`∫|φ'| = O(1)`): it requires the *second/third*-order Euler–Maclaurin estimate — a further integration
+by parts against the periodic `P₂(x) = {x}²−{x}+1/6` (giving the boundary term `−φ'(0)/12 → −1/6`) and
+the mean-zero cancellation `∫₀¹ P₂ = 0` (so the `P₂`-remainder is genuinely third-order, `∼ ∫ P₃ φ'''`
+with `∫|φ'''| = O(√t) → 0`). Mathlib has the periodic Bernoulli *polynomials* (`ZetaValues.bernoulliFun`,
+`periodizedBernoulli` on `AddCircle`) but NO Euler–Maclaurin remainder formula and no
+periodic-Bernoulli-on-ℝ integration-by-parts API, so this `P₂`/`P₃` step is the precise wall. Thus this
+file closes `a₀` and the EM-1 identity on the curved sphere, and carries `a₁ = R/6 = 1/3` as an
+arithmetic/DeWitt label — it does NOT close the sum-level `a₁` limit `Θ(t) − 1/t → 1/3`.
 
 **Firewall (binding, honest).**
 
@@ -466,5 +482,234 @@ theorem sphereHeatTrace_asymptotic :
 (the scalar curvature of the unit `S²`). Ties `sphereHeatTrace_asymptotic`'s constant to
 `CoordinateCurvature`'s sphere curvature and `DeWittDiagonal`'s `u₁ = τ/6`. -/
 theorem sphere_a1_eq_R_div_six : (1 : ℝ) / 3 = 2 / 6 := by norm_num
+
+/-! ### The exact first-order Euler–Maclaurin identity for the heat trace
+
+The following block establishes the **exact** first-order Euler–Maclaurin (Abel-summation)
+identity for the `S²` heat trace,
+`Θ(t) = 1/t + 1/2 + ∫_{(0,∞)} (⟨x⟩ − 1/2)·φ'(x) dx`,
+where `φ(x) = (2x+1)e^{−t x(x+1)}` is the spectral density (`emPhi`), `φ'` its derivative
+(`emPhi'`), and `⟨x⟩ − 1/2 = Int.fract x − 1/2 = P₁(x)` the first periodic Bernoulli function.
+This is the honest EM-1 identity that isolates the `+1/2` boundary term (from `φ(0)/2`) and the
+remainder integral `∫ P₁ φ'` whose small-`t` limit is `−1/6` (giving the `a₁ = R/6 = 1/3` constant).
+Proving that remainder limit needs a *second/third*-order Euler–Maclaurin estimate — the periodic
+`P₂`, `P₃` machinery — which Mathlib lacks; hence the sum-level `Θ(t) − 1/t → 1/3` is NOT closed
+here. What lands is the EM-1 identity itself, built from Mathlib's `sum_mul_eq_sub_integral_mul'`
+(Abel summation) — no Euler–Maclaurin formula and no Bernoulli substrate required. -/
+
+/-- The `S²` spectral density `φ(x) = (2x+1) e^{-t x(x+1)}` (the continuous interpolation of the
+heat-trace summand; `emPhi t l = (2l+1) e^{-t l(l+1)}`). -/
+noncomputable def emPhi (t x : ℝ) : ℝ := (2 * x + 1) * Real.exp (-t * (x * (x + 1)))
+
+/-- The derivative of the spectral density: `φ'(x) = (2 − t(2x+1)²) e^{-t x(x+1)}`. -/
+noncomputable def emPhi' (t x : ℝ) : ℝ := (2 - t * (2 * x + 1) ^ 2) * Real.exp (-t * (x * (x + 1)))
+
+variable {t : ℝ}
+
+/-- `HasDerivAt emPhi emPhi'`: the density is differentiable with the stated derivative. -/
+theorem hasDerivAt_emPhi (x : ℝ) : HasDerivAt (emPhi t) (emPhi' t x) x := by
+  have hpoly : HasDerivAt (fun y : ℝ => y * (y + 1)) (2 * x + 1) x := by
+    have h1 : HasDerivAt (fun y : ℝ => y) 1 x := hasDerivAt_id x
+    have h2 : HasDerivAt (fun y : ℝ => y + 1) 1 x := by simpa using h1.add_const 1
+    have hm := h1.mul h2; convert hm using 1; ring
+  have hin : HasDerivAt (fun y : ℝ => -t * (y * (y + 1))) (-t * (2 * x + 1)) x := hpoly.const_mul (-t)
+  have hexp : HasDerivAt (fun y : ℝ => Real.exp (-t * (y * (y + 1))))
+      (Real.exp (-t * (x * (x + 1))) * (-t * (2 * x + 1))) x := hin.exp
+  have hlin : HasDerivAt (fun y : ℝ => 2 * y + 1) 2 x := by
+    simpa using ((hasDerivAt_id x).const_mul 2).add_const 1
+  have := hlin.mul hexp
+  unfold emPhi emPhi'; convert this using 1; ring
+
+theorem deriv_emPhi : deriv (emPhi t) = emPhi' t := funext fun x => (hasDerivAt_emPhi x).deriv
+@[fun_prop] theorem continuous_emPhi : Continuous (emPhi t) := by unfold emPhi; fun_prop
+@[fun_prop] theorem continuous_emPhi' : Continuous (emPhi' t) := by unfold emPhi'; fun_prop
+
+/-- Integrability of `φ'` on `(0,∞)` (dominated by a poly×gaussian). -/
+theorem integrableOn_emPhi' (ht : 0 < t) : IntegrableOn (emPhi' t) (Set.Ioi (0 : ℝ)) := by
+  have hE : IntegrableOn (fun x : ℝ => Real.exp (-t * x ^ 2)) (Set.Ioi (0 : ℝ)) :=
+    (integrable_exp_neg_mul_sq ht).integrableOn
+  have h1 : IntegrableOn (fun x : ℝ => x ^ (1 : ℝ) * Real.exp (-t * x ^ 2)) (Set.Ioi (0 : ℝ)) :=
+    (integrable_rpow_mul_exp_neg_mul_sq ht (by norm_num : (-1 : ℝ) < 1)).integrableOn
+  have h2 : IntegrableOn (fun x : ℝ => x ^ (2 : ℝ) * Real.exp (-t * x ^ 2)) (Set.Ioi (0 : ℝ)) :=
+    (integrable_rpow_mul_exp_neg_mul_sq ht (by norm_num : (-1 : ℝ) < 2)).integrableOn
+  set G : ℝ → ℝ := fun x => (2 + t) * Real.exp (-t * x ^ 2) + 4 * t * (x ^ (2 : ℝ) * Real.exp (-t * x ^ 2))
+      + 4 * t * (x ^ (1 : ℝ) * Real.exp (-t * x ^ 2)) with hG
+  have hGint : IntegrableOn G (Set.Ioi (0 : ℝ)) :=
+    ((hE.const_mul (2 + t)).add (h2.const_mul (4 * t))).add (h1.const_mul (4 * t))
+  refine Integrable.mono' hGint continuous_emPhi'.aestronglyMeasurable ?_
+  filter_upwards [ae_restrict_mem measurableSet_Ioi] with x hx
+  have hx0 : (0 : ℝ) < x := hx
+  rw [Real.norm_eq_abs]
+  have hrp1 : x ^ (1 : ℝ) = x := Real.rpow_one x
+  have hrp2 : x ^ (2 : ℝ) = x ^ 2 := by rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) by norm_num, Real.rpow_natCast]
+  rw [hG]; simp only [hrp1, hrp2]
+  have hEle : Real.exp (-t * (x * (x + 1))) ≤ Real.exp (-t * x ^ 2) := by
+    apply Real.exp_le_exp.mpr; nlinarith [ht.le, hx0.le]
+  have hEpos : 0 < Real.exp (-t * (x * (x + 1))) := Real.exp_pos _
+  have hcoef : |2 - t * (2 * x + 1) ^ 2| ≤ 2 + t * (2 * x + 1) ^ 2 := by
+    rw [abs_le]; constructor <;> nlinarith [sq_nonneg (2 * x + 1), ht.le]
+  calc |emPhi' t x| = |2 - t * (2 * x + 1) ^ 2| * Real.exp (-t * (x * (x + 1))) := by
+        unfold emPhi'; rw [abs_mul, abs_of_pos hEpos]
+    _ ≤ (2 + t * (2 * x + 1) ^ 2) * Real.exp (-t * x ^ 2) := mul_le_mul hcoef hEle hEpos.le (by positivity)
+    _ = (2 + t) * Real.exp (-t * x ^ 2) + 4 * t * (x ^ 2 * Real.exp (-t * x ^ 2))
+          + 4 * t * (x * Real.exp (-t * x ^ 2)) := by ring
+
+/-- Integrability of the EM-1 remainder integrand `φ'·{x}` on `(0,∞)` (`|{x}| ≤ 1`). -/
+theorem integrableOn_emPhi'_fract (ht : 0 < t) :
+    IntegrableOn (fun x => emPhi' t x * Int.fract x) (Set.Ioi (0 : ℝ)) := by
+  have hI := integrableOn_emPhi' ht
+  have hmeas : AEStronglyMeasurable (fun x => emPhi' t x * Int.fract x)
+      (volume.restrict (Set.Ioi 0)) :=
+    continuous_emPhi'.aestronglyMeasurable.mul (measurable_fract).aestronglyMeasurable
+  refine Integrable.mono' hI.norm hmeas ?_
+  filter_upwards [ae_restrict_mem measurableSet_Ioi] with x _
+  rw [norm_mul, Real.norm_eq_abs]
+  have hf : |Int.fract x| ≤ 1 := by
+    rw [abs_of_nonneg (Int.fract_nonneg x)]; exact (Int.fract_lt_one x).le
+  calc ‖emPhi' t x‖ * ‖Int.fract x‖ ≤ ‖emPhi' t x‖ * 1 := by
+        apply mul_le_mul_of_nonneg_left _ (norm_nonneg _); rwa [Real.norm_eq_abs]
+    _ = ‖emPhi' t x‖ := by ring
+
+/-- `φ(x) → 0` as `x → ∞` (needed for the FTC boundary term). -/
+theorem emPhi_tendsto_zero (ht : 0 < t) : Tendsto (emPhi t) atTop (𝓝 0) := by
+  have hlin : Tendsto (fun x : ℝ => -t * x) atTop atBot := by
+    simpa using (tendsto_id (α := ℝ)).const_mul_atTop_of_neg (neg_lt_zero.mpr ht)
+  have he : Tendsto (fun x : ℝ => Real.exp (-t * x)) atTop (𝓝 0) := Real.tendsto_exp_atBot.comp hlin
+  have hx : Tendsto (fun x : ℝ => x ^ (1 : ℝ) * Real.exp (-t * x)) atTop (𝓝 0) :=
+    tendsto_rpow_mul_exp_neg_mul_atTop_nhds_zero 1 t ht
+  have hub : Tendsto (fun x : ℝ => (2 * x + 1) * Real.exp (-t * x)) atTop (𝓝 0) := by
+    have h := (hx.const_mul 2).add he
+    simp only [mul_zero, add_zero] at h
+    refine h.congr' ?_
+    filter_upwards [eventually_gt_atTop (0 : ℝ)] with x hx0
+    rw [Real.rpow_one]; ring
+  have h0 : ∀ᶠ x : ℝ in atTop, 0 ≤ emPhi t x := by
+    filter_upwards [eventually_ge_atTop (0 : ℝ)] with x hx0; unfold emPhi; positivity
+  have hle : ∀ᶠ x : ℝ in atTop, emPhi t x ≤ (2 * x + 1) * Real.exp (-t * x) := by
+    filter_upwards [eventually_ge_atTop (0 : ℝ)] with x hx0
+    unfold emPhi; apply mul_le_mul_of_nonneg_left _ (by positivity)
+    apply Real.exp_le_exp.mpr
+    nlinarith [mul_nonneg hx0 hx0, mul_nonneg ht.le (mul_nonneg hx0 hx0)]
+  exact squeeze_zero' h0 hle hub
+
+/-- `∫_{(0,∞)} φ'(x) dx = φ(∞) − φ(0) = −1` (fundamental theorem of calculus). -/
+theorem integral_emPhi'_eq (ht : 0 < t) : ∫ x in Set.Ioi (0 : ℝ), emPhi' t x = -1 := by
+  have hcont : ContinuousWithinAt (emPhi t) (Set.Ici 0) 0 := continuous_emPhi.continuousWithinAt
+  have := integral_Ioi_of_hasDerivAt_of_tendsto hcont (fun x _ => hasDerivAt_emPhi x)
+    (integrableOn_emPhi' ht) (emPhi_tendsto_zero ht)
+  rw [this]; unfold emPhi; norm_num
+
+/-- `∫_{(0,∞)} φ(x) dx = 1/t`, restated for `emPhi` (from `weyl_density_integral`). -/
+private theorem emWeyl (ht : 0 < t) : ∫ x in Set.Ioi (0 : ℝ), emPhi t x = 1 / t := by
+  unfold emPhi; exact weyl_density_integral ht
+
+/-- Integrability of `φ` on `(0,∞)` (from `weyl_pack`). -/
+private theorem emIntegrable (ht : 0 < t) : IntegrableOn (emPhi t) (Set.Ioi (0 : ℝ)) := by
+  have h := (weyl_pack ht 1 0 (fun x hx => by have hx' : (0 : ℝ) < x := hx; nlinarith)).2
+  refine h.congr_fun (fun x _ => ?_) measurableSet_Ioi
+  unfold emPhi; congr 2; ring
+
+/-- **Finite Euler–Maclaurin (Abel) identity.** For every `m`,
+`∑_{k=0}^{m} φ(k) = 1 + ∫_0^m φ + ∫_0^m φ'(x)·{x} dx`. Built from Mathlib's Abel summation
+`sum_mul_eq_sub_integral_mul'` (with unit coefficients `c ≡ 1`): the raw floor weight `⌊x⌋+1` is
+split as `(x+1) − {x}`, and `∫_0^m φ'(x)(x+1)` is integrated by parts (FTC on `φ·(x+1)`). -/
+theorem emFinite (ht : 0 < t) (m : ℕ) :
+    ∑ k ∈ Finset.Icc 0 m, emPhi t k
+      = 1 + (∫ x in (0 : ℝ)..m, emPhi t x) + (∫ x in (0 : ℝ)..m, emPhi' t x * Int.fract x) := by
+  have hdiff : ∀ x ∈ Set.Icc (0 : ℝ) m, DifferentiableAt ℝ (emPhi t) x :=
+    fun x _ => (hasDerivAt_emPhi x).differentiableAt
+  have hintderiv : IntegrableOn (deriv (emPhi t)) (Set.Icc (0 : ℝ) m) := by
+    rw [deriv_emPhi]; exact continuous_emPhi'.integrableOn_Icc
+  have key := sum_mul_eq_sub_integral_mul' (c := fun _ => (1 : ℝ)) (f := emPhi t) m hdiff hintderiv
+  simp only [mul_one] at key
+  rw [key]
+  have hcard : (∑ _k ∈ Finset.Icc 0 m, (1 : ℝ)) = (m : ℝ) + 1 := by
+    rw [Finset.sum_const, Nat.card_Icc]; push_cast; ring
+  rw [hcard, deriv_emPhi]
+  have hfloor : ∫ x in Set.Ioc (0 : ℝ) m, emPhi' t x * ∑ _k ∈ Finset.Icc 0 ⌊x⌋₊, (1 : ℝ)
+      = ∫ x in Set.Ioc (0 : ℝ) m, emPhi' t x * ((⌊x⌋₊ : ℝ) + 1) := by
+    apply setIntegral_congr_fun measurableSet_Ioc
+    intro x hx
+    simp only [Finset.sum_const, Nat.card_Icc, Nat.sub_zero, nsmul_eq_mul, mul_one]
+    push_cast; ring
+  rw [hfloor, ← intervalIntegral.integral_of_le (Nat.cast_nonneg m)]
+  have hint_x1 : IntervalIntegrable (fun x => emPhi' t x * (x + 1)) volume 0 m :=
+    (continuous_emPhi'.mul (by fun_prop)).intervalIntegrable _ _
+  have hint_fr : IntervalIntegrable (fun x => emPhi' t x * Int.fract x) volume 0 m :=
+    (intervalIntegrable_iff_integrableOn_Ioc_of_le (Nat.cast_nonneg m)).mpr
+      ((integrableOn_emPhi'_fract ht).mono_set Set.Ioc_subset_Ioi_self)
+  have e1 : ∫ x in (0 : ℝ)..m, emPhi' t x * ((⌊x⌋₊ : ℝ) + 1)
+      = ∫ x in (0 : ℝ)..m, (emPhi' t x * (x + 1) - emPhi' t x * Int.fract x) := by
+    apply intervalIntegral.integral_congr
+    intro x hx
+    rw [Set.uIcc_of_le (Nat.cast_nonneg m)] at hx
+    have hx0 : 0 ≤ x := hx.1
+    have hfl : (⌊x⌋₊ : ℝ) = x - Int.fract x := by
+      have h2 : (⌊x⌋₊ : ℝ) = (⌊x⌋ : ℝ) := by exact_mod_cast Int.natCast_floor_eq_floor hx0
+      rw [Int.fract, h2]; ring
+    simp only [hfl]; ring
+  rw [e1, intervalIntegral.integral_sub hint_x1 hint_fr]
+  have hIBP : ∫ x in (0 : ℝ)..m, emPhi' t x * (x + 1)
+      = emPhi t m * (m + 1) - emPhi t 0 * 1 - ∫ x in (0 : ℝ)..m, emPhi t x := by
+    have hpsi : ∀ x : ℝ, HasDerivAt (fun y => emPhi t y * (y + 1))
+        (emPhi' t x * (x + 1) + emPhi t x * 1) x := by
+      intro x
+      exact (hasDerivAt_emPhi x).mul (by simpa using (hasDerivAt_id x).add_const 1)
+    have hftc : ∫ x in (0 : ℝ)..m, (emPhi' t x * (x + 1) + emPhi t x * 1)
+        = (emPhi t m * (m + 1)) - (emPhi t 0 * (0 + 1)) := by
+      rw [intervalIntegral.integral_eq_sub_of_hasDerivAt (fun x _ => hpsi x)]
+      exact (Continuous.intervalIntegrable (by fun_prop) _ _)
+    rw [intervalIntegral.integral_add (hint_x1)
+      (Continuous.intervalIntegrable (u := fun x : ℝ => emPhi t x * 1) (by fun_prop) _ _)] at hftc
+    simp only [mul_one] at hftc ⊢; linarith [hftc]
+  rw [hIBP]
+  have hphi0 : emPhi t 0 = 1 := by unfold emPhi; norm_num
+  rw [hphi0]; ring
+
+/-- The EM-1 identity in `{x}`-form: `Θ(t) = 1 + 1/t + ∫_{(0,∞)} φ'(x)·{x} dx`, obtained from
+`emFinite` by passing `m → ∞` (partial sums → `sphereHeatTrace`; `∫_0^m → ∫_{(0,∞)}`). -/
+theorem sphereHeatTrace_emFract (ht : 0 < t) :
+    sphereHeatTrace t = 1 + 1 / t + ∫ x in Set.Ioi (0 : ℝ), emPhi' t x * Int.fract x := by
+  have htendL : Tendsto (fun m : ℕ => ∑ k ∈ Finset.Icc 0 m, emPhi t k) atTop
+      (𝓝 (sphereHeatTrace t)) := by
+    have h1 : ∀ m : ℕ, ∑ k ∈ Finset.Icc 0 m, emPhi t k
+        = ∑ k ∈ Finset.range (m + 1),
+            (2 * (k : ℝ) + 1) * Real.exp (-t * ((k : ℝ) * ((k : ℝ) + 1))) := by
+      intro m; rw [← Nat.range_succ_eq_Icc_zero]; rfl
+    simp_rw [h1]
+    exact ((sphereHeatTrace_summable ht).hasSum.tendsto_sum_nat).comp (tendsto_add_atTop_nat 1)
+  have htendφ : Tendsto (fun m : ℕ => ∫ x in (0 : ℝ)..m, emPhi t x) atTop
+      (𝓝 (∫ x in Set.Ioi (0 : ℝ), emPhi t x)) :=
+    intervalIntegral_tendsto_integral_Ioi 0 (emIntegrable ht) tendsto_natCast_atTop_atTop
+  have htendfr : Tendsto (fun m : ℕ => ∫ x in (0 : ℝ)..m, emPhi' t x * Int.fract x) atTop
+      (𝓝 (∫ x in Set.Ioi (0 : ℝ), emPhi' t x * Int.fract x)) :=
+    intervalIntegral_tendsto_integral_Ioi 0 (integrableOn_emPhi'_fract ht)
+      tendsto_natCast_atTop_atTop
+  have htendR := (tendsto_const_nhds (x := (1 : ℝ)) (f := (atTop : Filter ℕ)) |>.add htendφ).add htendfr
+  have := tendsto_nhds_unique (htendL.congr (fun m => emFinite ht m)) htendR
+  rw [this, emWeyl ht]
+
+/-- **★ The exact first-order Euler–Maclaurin identity for the `S²` heat trace.**
+`Θ(t) = 1/t + 1/2 + ∫_{(0,∞)} (P₁ x)·φ'(x) dx`, where `P₁ x = Int.fract x − 1/2` is the first
+periodic Bernoulli function and `φ'(x) = (2 − t(2x+1)²)e^{-t x(x+1)}`. The `1/t` is the Weyl term
+`a₀`, the `+1/2` is the `φ(0)/2` boundary term, and the remainder `∫ P₁ φ'` carries the curvature
+constant: its `t → 0⁺` limit is `−1/6`, which would give `Θ(t) − 1/t → 1/2 − 1/6 = 1/3 = a₁ = R/6`.
+That remainder limit needs a second/third-order Euler–Maclaurin estimate (periodic `P₂`, `P₃`,
+with the mean-zero cancellation `∫₀¹ P₂ = 0`), absent from Mathlib — so this identity is the honest
+EM-1 checkpoint, and the sum-level `a₁` limit `Θ(t) − 1/t → 1/3` remains open. Proved purely from
+Abel summation (`sum_mul_eq_sub_integral_mul'`); uses NO Euler–Maclaurin/Bernoulli substrate and
+none of the missing curved-heat-kernel machinery. -/
+theorem sphereHeatTrace_em1 (ht : 0 < t) :
+    sphereHeatTrace t
+      = 1 / t + 1 / 2 + ∫ x in Set.Ioi (0 : ℝ), (Int.fract x - 1 / 2) * emPhi' t x := by
+  have hconv : ∫ x in Set.Ioi (0 : ℝ), (Int.fract x - 1 / 2) * emPhi' t x
+      = (∫ x in Set.Ioi (0 : ℝ), emPhi' t x * Int.fract x) + 1 / 2 := by
+    have hsplit : ∀ x, (Int.fract x - 1 / 2) * emPhi' t x
+        = emPhi' t x * Int.fract x - (1 / 2) * emPhi' t x := by intro x; ring
+    rw [setIntegral_congr_fun measurableSet_Ioi (fun x _ => hsplit x)]
+    rw [MeasureTheory.integral_sub (integrableOn_emPhi'_fract ht)
+      ((integrableOn_emPhi' ht).const_mul (1 / 2))]
+    rw [MeasureTheory.integral_const_mul, integral_emPhi'_eq ht]; ring
+  rw [hconv, sphereHeatTrace_emFract ht]; ring
 
 end QIQTH.SphereHeatTrace
