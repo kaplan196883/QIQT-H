@@ -452,6 +452,7 @@ import QIQTH.Spectral.SpectralTheorem
 -- ∫ f dE on a PVM — the domain D(∫f dE) = {x : ∫ f² dμ_x < ∞} as a ℂ-submodule (the keystone toward
 -- K = ∫ log(r/(2−r)) dE_R as a self-adjoint operator). Builds on scalarMeasure + the parallelogram law.
 import QIQTH.Spectral.UnboundedFC
+import QIQTH.Spectral.HeatSemigroup
 import QIQTH.Spectral.MultiplicationOp
 -- The POSITION PVM: E(A)=M_{𝟙_A} bundled as a genuine ProjectionValuedMeasure on L²(μ) (self-adjoint
 -- idempotents, PV-content, strong HasSum σ-additivity). The route to the momentum PVM (Fourier) / boost gen.

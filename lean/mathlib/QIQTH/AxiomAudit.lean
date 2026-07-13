@@ -11534,4 +11534,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DeWittDiagonal.MetricNormalCoordJet.thetaQuad_eq_neg_sixth_Ric
 #print axioms QIQTH.DeWittDiagonal.sphereTransportWitness_u1diag
 
+-- ABSTRACT HEAT SEMIGROUP (heat-kernel analytic-infrastructure plan, Phase A — built on our OWN
+-- Spectral tower's bounded Borel functional calculus).  For a PVM P and a nonneg measurable generator
+-- symbol a, heatSemigroup = P.boundedFC (e^{−t·a}) = the abstract e^{−tA} of the positive self-adjoint
+-- A = ∫ a dE.  ★★ heatSemigroup_mul: the SEMIGROUP LAW e^{−sA}·e^{−tA} = e^{−(s+t)A} (via boundedFC_mul
+-- + boundedFC_congr with Complex.exp_add); heatSemigroup_zero: e^{0·A}=1; heatSemigroup_norm_le: the
+-- uniform bound ‖e^{−tA}‖ ≤ 2 (the tower's 2C, C=1 — NOT the sharp contraction ≤1, stated honestly);
+-- heatSemigroup_inner_nonneg: POSITIVITY 0 ≤ Re⟪x, e^{−tA} x⟫ (integral of the nonneg real symbol).
+-- HONEST (binding): the ABSTRACT operator semigroup ONLY, from machinery we own.  It does NOT build the
+-- manifold heat kernel — that Δ on L²(M) is such an operator (Phase C), has discrete spectrum (Phase D
+-- — Rellich compactness, ABSENT from Mathlib), or has a smooth integral kernel (Phase E — elliptic
+-- regularity, ABSENT).  Those are THE WALL, named not built.  NOT the conjecture, NOT the strong
+-- holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_mul
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_zero
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_norm_le
+#print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSemigroup_inner_nonneg
+
 end QIQTH.AxiomAudit
