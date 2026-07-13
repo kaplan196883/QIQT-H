@@ -11454,4 +11454,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BulkAutonomy.no_descend_of_bad_kernel
 #print axioms QIQTH.BulkAutonomy.bulk_metric_autonomous
 
+-- COORDINATE SCALAR CURVATURE (heat-kernel gap plan, Phase 1 COORDINATE flavor — self-built).
+-- The component/metric-2-jet scalar curvature R(g): an ALGEBRAIC function of the metric's 0/1/2-jet
+-- (ginv, dg=∂g, ddg=∂∂g) via Christoffel → Riemann → Ricci → trace contractions, with the identity
+-- ∂(g⁻¹) = −g⁻¹ dg g⁻¹ DEFINED into the formula (dInvMetric) — NO Lean differentiation, NO Matrix.inv
+-- derivative.  scalarCurvature = Σ g^{sj} Ric_{sj}; the whole sign convention is CERTIFIED by three
+-- checks: scalarCurvature_flat_zeroJet (flat ⟹ R=0), ConeCheck.scalarCurvature_cone (polar-flat
+-- dr²+4r²dθ² away from apex ⟹ R=0), ★ SphereCheck.scalarCurvature_sphere (unit 2-sphere ⟹ R=2, the
+-- NONZERO check catching sign errors the flat ones miss).  HONEST (binding): the COORDINATE/component
+-- scalar curvature — NOT the abstract coordinate-free Riemann/Levi-Civita tensor (that is the live
+-- upstream Mathlib effort, PR #36036/#36845, do not confuse); for arbitrary jets it is the formal
+-- coordinate expression, tying it to an actual metric needs (carried, not proved) ginv=inverse(g),
+-- symmetry, dg/ddg = actual partials.  Phase 1 (coordinate flavor); it does NOT discharge a₁=R/6 —
+-- that identity is the heat-kernel/Seeley–DeWitt expansion (Phases 3–4, the deep wall), unaffected by
+-- having R as an object; scalar R here just makes SeeleyDeWittData.R a computable geometric quantity.
+-- NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.CoordinateCurvature.scalarCurvature
+#print axioms QIQTH.CoordinateCurvature.scalarCurvature_flat_zeroJet
+#print axioms QIQTH.CoordinateCurvature.ConeCheck.scalarCurvature_cone
+#print axioms QIQTH.CoordinateCurvature.SphereCheck.scalarCurvature_sphere
+
 end QIQTH.AxiomAudit
