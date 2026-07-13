@@ -147,6 +147,17 @@ ABSENT from Mathlib**, a fifth missing-infrastructure piece. So `a₀` is valida
 and a curved (sphere) manifold; the curvature-sensitive `a₁ = R/6` on the sphere is the current analytic
 frontier, blocked on Euler–Maclaurin.
 
+**Progress on the sphere `a₁` (EM-1 identity, `e9908e3e`):** `sphereHeatTrace_em1` formalizes the exact
+first-order Euler–Maclaurin decomposition `Θ(t) = 1/t + 1/2 + ∫_{(0,∞)} (fract x − ½)·φ'(x) dx` (φ = the
+trace density `(2x+1)e^{−t x(x+1)}`), via Mathlib's **Abel summation** (`sum_mul_eq_sub_integral_mul'`).
+This **reduces `a₁ = R/6 = 1/3` to the SINGLE named limit** `∫ (fract − ½) φ' → −1/6`. The remaining gap
+is now precise: closing that limit needs a **third-order EM step** — the periodic-Bernoulli `P₂/P₃`
+integration-by-parts with the mean-zero cancellation `∫₀¹ P₂ = 0` (the naive `∫|φ''|` bound is `O(1)`, not
+`o(1)` — an error caught in the standard sketch). Mathlib has the Bernoulli *polynomials* (`bernoulliFun`)
+and `periodizedBernoulli` on `AddCircle`, but **no periodic-Bernoulli-on-ℝ integration-by-parts API** —
+that is the exact missing piece. So `a₁ = R/6` on the sphere is one named integral limit + one named
+Mathlib-gap (periodic-Bernoulli IBP) away from proven.
+
 ## 4. Firewall (binding)
 
 Phases C–E are the genuine wall — Rellich compactness, elliptic regularity, Sobolev-on-manifolds — none
