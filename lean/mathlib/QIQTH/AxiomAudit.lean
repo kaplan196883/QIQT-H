@@ -11496,4 +11496,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatCoeffDetermination.HeatCoeffData.model_det_ne_zero
 #print axioms QIQTH.HeatCoeffDetermination.sphereFlatWitness_curvedTau_eq_sphere
 
+-- HEAT-COEFFICIENT → CORRESPONDENCE BRIDGE (relocating the a₁=R/6 assumption to its honest minimum).
+-- seeleyDeWittOfHeatCoeff builds the SeeleyDeWittData FROM a HeatCoeffData at index P — its a₁ identity
+-- field is now DERIVED (HeatCoeffData.coeff2_eq = Gilkey universality + model evals), not a bare
+-- stipulation.  ★ flatSpaceCorrespondence_of_heatCoeff: the full correspondence with the curvature-side
+-- assumption now sourced from the invariance ansatz + model evaluations, NOT a bare a₁=R/6.  HONEST
+-- (binding): this is a RELOCATION, NOT a removal — the assumptions are moved to their irreducible
+-- minimum (CARRIED: the universality/Weyl-invariance ansatz + the flat (0,1,1) and curved (T,0,T/6)
+-- model heat values — the number 1/6 still enters via the curved model; DERIVED: cTau=1/6, cE=1, the
+-- universal a₂=τ/6+trE formula, hence the correspondence).  The residue is exactly Gilkey Thm 4.8.16
+-- (the heat-trace short-time expansion), removable ONLY by building the heat semigroup/kernel/expansion
+-- (Phases 3–4, the deep wall) or by an axiom — this adds NEITHER.  Correspondence stays CONDITIONAL;
+-- NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.HeatCoeffBridge.seeleyDeWittOfHeatCoeff
+#print axioms QIQTH.HeatCoeffBridge.flatSpaceCorrespondence_of_heatCoeff
+
 end QIQTH.AxiomAudit

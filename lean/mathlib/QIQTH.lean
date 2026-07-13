@@ -773,6 +773,7 @@ import QIQTH.ScaleDimension
 import QIQTH.BulkAutonomy
 import QIQTH.CoordinateCurvature
 import QIQTH.HeatCoeffDetermination
+import QIQTH.HeatCoeffBridge
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
