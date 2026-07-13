@@ -93,6 +93,23 @@ so value lands upstream even if we never reach Phase 6.
 - **Phase 5 — the coefficients.** `a₀ = 1`; **`a₁ = R/6 + tr E`** (the target — discharges input #3);
   optionally `a₂` (Gilkey's formula) for higher corrections. The conformal specialization `ξ = 1/6`
   (`a₁ = (1/6−ξ)R`) already lives algebraically in `CorrespondenceAssembly.lean` (G3) and connects here.
+
+  **REFERENCE GROUNDING — Gilkey, *Invariance Theory…* (1st ed., `refs/InvarianceTheory1Ed.pdf`), read
+  2026-07-13.** Our carried identity is EXACTLY **Theorem 4.8.16(b):** for a Laplace-type operator
+  `P = P_∇ − E`, `a₂(x,P) = (4π)^{−m/2}·Tr(−R_ijij + 6E)/6` — i.e. `a₁ = R/6 + tr E` after stripping
+  `(4π)^{−m/2}·Tr` (Gilkey's `−R_ijij` = scalar curvature `τ` in his sign convention). Gilkey's
+  **invariance-theory method** is the formalizable route and shows *what is carriable vs derivable*:
+  - **Lemma 4.8.5(a):** the weight-2 invariant polynomials `S_{m,2,k}` are spanned by *exactly two* —
+    `R_ijij·I` and `E`. **Lemma 4.8.6:** `a₂ = Tr(S)` for `S` in that span. ⟹ `a₂ = c₁·τ + c₂·tr E` for
+    universal constants. This ansatz is the CARRIED heat-expansion+Weyl-invariance fact (Weyl invariant
+    theory for O(m) is itself not in Mathlib — carry it).
+  - The **DETERMINATION** `c₁ = 1/6, c₂ = 1` is fixed by evaluating on model operators (flat-torus
+    normalization `a₀ = (4π)^{−m/2}`, product/additivity Lemma 1.7.5) — this is ALGEBRA, formalizable.
+  - ⟹ **The honest coefficient-determination brick** (Phase-5 downpayment, tractable NOW): carry the
+    two-term ansatz + the model normalizations as labelled hypotheses, and DERIVE `c₁ = 1/6` (with our
+    sphere `R=2` check as one model evaluation). This *reduces* the carried assumption from the specific
+    number `a₁=R/6` up to the weaker Weyl-invariance ansatz — the 1/6 becomes derived, not stipulated.
+    Still does NOT build the heat expansion itself (Phases 3–4, the analytic wall).
 - **Phase 6 — the conical / replica version.** The heat kernel on a cone `C_β` / `ℤ_n` orbifold and the
   **conical contribution** to the coefficients — the piece the entanglement-entropy replica argument
   actually uses (ties to D3c's exact conical coefficient `(1/12)(n−1/n)`).
