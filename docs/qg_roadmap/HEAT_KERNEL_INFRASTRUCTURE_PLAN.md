@@ -122,6 +122,20 @@ These four are the genuine, infrastructure-level frontier: each is a Mathlib-tea
 none QIQT-H-specific, none a knowledge gap. The heat-kernel EXISTENCE on a manifold is unreached; the
 `a₁ = R/6` coefficient stays derived (two ways) but not analytically discharged.
 
+### CRACK IN THE WALL (2026-07-14) — the flat-torus heat trace, one explicit geometry breached
+
+`QIQTH/FlatTorusHeatKernel.lean` (`92350369`, [AF] std-3): the heat trace of `e^{tΔ}` on the flat circle
+`ℝ/ℤ` — the ONE geometry where the heat kernel is fully explicit and needs NONE of the four walls. Via the
+explicit Fourier spectrum `{(2πk)²}` / eigenfunctions `e^{2πikx}`: `heatTraceCircle t = Σ_k e^{−t(2πk)²}`
+(`heatTraceCircle_summable`), proven `= jacobiTheta(I·4πt)` (`heatTraceCircle_eq_jacobiTheta`, Mathlib's
+theta function) with the short-time **Weyl asymptotic** `~ (4πt)^{−1/2}` (`heatTraceCircle_asymptotic`, via
+the theta S-transformation functional equation) — the **Seeley–DeWitt `a₀ = 1` leading term on a REAL
+manifold**, axiom-free. This is the first actual heat trace in the repo: it demonstrates the heat-kernel
+program IS computable on an explicitly-solvable geometry, bypassing Rellich / elliptic regularity /
+trace-class / manifold-`L²`-`Δ` entirely. ⚠ HONEST: breaks the wall ONLY for this flat case; the general
+CURVED heat kernel stays walled; flat ⟹ `R = 0`, so it validates `a₀ = 1` but NOT `a₁ = R/6` (the flat
+torus has `a₁ = 0`). The curvature-carrying analytic discharge of `a₁ = R/6` still needs the wall.
+
 ## 4. Firewall (binding)
 
 Phases C–E are the genuine wall — Rellich compactness, elliptic regularity, Sobolev-on-manifolds — none

@@ -1635,6 +1635,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **THE FLAT-TORUS HEAT TRACE (breaking the heat-kernel wall for one explicit geometry) —
+  `QIQTH/FlatTorusHeatKernel.lean`** (**[AF]** std-3, budget 0, 2026-07-14, commit `92350369`). The heat
+  trace of `e^{tΔ}` on the flat circle `ℝ/ℤ` — the ONE geometry where the heat kernel is fully explicit
+  and needs NONE of the four missing-infrastructure walls. Via the explicit Fourier spectrum `{(2πk)²}`
+  and eigenfunctions `e^{2πikx}`: `heatTraceCircle t = ∑' k:ℤ, e^{−t(2πk)²}` (`heatTraceCircle_summable`,
+  Gaussian decay), ★ `heatTraceCircle_eq_jacobiTheta` (`= jacobiTheta(I·4πt)`, Mathlib's theta function),
+  ★★ `heatTraceCircle_asymptotic` — the short-time **Weyl asymptotic** `√(4πt)·heatTraceCircle t → 1`
+  (i.e. `~ (4πt)^{−1/2}` as `t→0⁺`, via the theta S-transformation functional equation + the `i∞` bound)
+  = the **Seeley–DeWitt `a₀ = 1` leading term on a REAL manifold**; `laplacian_eigenvalue_circle`
+  (`λ_k=(2πk)²`). The first actual heat trace in the repo — the abstract semigroup made concrete on an
+  explicitly-solvable geometry, bypassing Rellich / elliptic regularity / trace-class / manifold-`L²`-`Δ`.
+  ⚠ **HONEST (binding):** breaks the wall ONLY for this FLAT case; the general CURVED-manifold heat kernel
+  stays the wall. FLAT ⟹ `R=0`: validates `a₀=1` (Weyl) but NOT `a₁=R/6` (flat ⟹ `a₁=0`); the
+  curvature-carrying `a₁=R/6` analytic discharge stays open. The "trace" is the spectral sum in the
+  canonical Fourier eigenbasis (not a general basis-independent trace — that needs the absent trace-class
+  API). NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **THE ABSTRACT HEAT SEMIGROUP (heat-kernel analytic-infrastructure Phase A) —
   `QIQTH/Spectral/HeatSemigroup.lean`** (**[AF]** std-3, budget 0, 2026-07-14, commit `5f0a132d`). The
   abstract `e^{−tA}` of a positive self-adjoint operator, built on our OWN `QIQTH/Spectral` bounded Borel
