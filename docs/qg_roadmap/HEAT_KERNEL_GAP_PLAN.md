@@ -89,7 +89,15 @@ so value lands upstream even if we never reach Phase 6.
   (Levi's method / the formal solution truncated + remainder estimate).
 - **Phase 4 — the short-time expansion.** `K_t(x,x) ~ (4πt)^{−d/2} Σₖ aₖ(x) tᵏ` as `t → 0⁺`, with the
   **Seeley–DeWitt transport recursion** in Riemann normal coordinates producing the `aₖ` as universal
-  local invariants. This is the analytic heart.
+  local invariants. This is the analytic heart. **DOWNPAYMENT BUILT ✅** (`DeWittDiagonal.lean`,
+  `163b33e8`, [AF] std-3; grounded in Rosenberg §3.2.1 / BGV §2.5, `refs/`): the DIAGONAL coefficient
+  `u₁(x,x) = τ/6` is DERIVED by jet-algebra — the factor chain `Θ's −1/6·Ric → u₀=Θ^{−1/2}'s +1/12 →
+  flat-Laplacian-of-quadratic (=2·trace) → τ/6` genuinely computed (`u1diag_eq_tau_div_six`), with the
+  stronger layer deriving `Θ`'s `−1/6` from the metric's `−1/3·Riem` via the √det first-variation
+  (`thetaQuad_eq_neg_sixth_Ric`) and a sphere witness (`u₁=1/3`, τ=2 tied to `CoordinateCurvature`).
+  CARRIED (never axioms): the normal-coordinate van-Vleck 2-jet + the transport diagonal-reduction
+  `u₁(x,x)=−Δ_geom u₀|₀` (the exp map / geodesic / van Vleck / r-integration substrate). Does NOT build
+  the parametrix CONVERGENCE (§3.2.2 below).
 - **Phase 5 — the coefficients.** `a₀ = 1`; **`a₁ = R/6 + tr E`** (the target — discharges input #3);
   optionally `a₂` (Gilkey's formula) for higher corrections. The conformal specialization `ξ = 1/6`
   (`a₁ = (1/6−ξ)R`) already lives algebraically in `CorrespondenceAssembly.lean` (G3) and connects here.

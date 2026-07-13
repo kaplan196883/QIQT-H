@@ -1635,6 +1635,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuation) — that identification stays CITED. Discharges input #2 at the finite level; NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **DEWITT DIAGONAL HEAT COEFFICIENT (heat-kernel Phase-4 downpayment; Rosenberg §3.2.1 transport
+  recursion) — `QIQTH/DeWittDiagonal.lean`** (**[AF]** std-3, budget 0, 2026-07-13, commit `163b33e8`).
+  DERIVES the DeWitt/Minakshisundaram DIAGONAL heat coefficient `u₁(x,x) = τ/6` by JET-ALGEBRA — the
+  factor chain `Θ`'s `−1/6·Ric` → `u₀=Θ^{−1/2}`'s `+1/12` → flat-Laplacian-of-quadratic (`=2·trace`) →
+  `τ/6` genuinely computed. Part A the quadratic-jet algebra (`invSqrtQuad` ½-negate rule;
+  `analyticLapQuadAtZero_eq_trace = 2·∑Q_aa`). Part B ★★ `HeatTransportJet.u1diag_eq_tau_div_six` (for
+  ANY `HeatTransportJet`, `u₁diag = τ/6`). Part C ★ `MetricNormalCoordJet.thetaQuad_eq_neg_sixth_Ric` —
+  the STRONGER layer, DERIVING `Θ`'s `−1/6·Ric` from the metric's `−1/3·Riem` via the √det
+  first-variation (½ tr) + the Ricci contraction. Part D `sphereTransportWitness` — unit-2-sphere
+  grounding, `u1diag = 1/3` (= 2/6), τ=2 tied to `CoordinateCurvature.SphereCheck.scalarCurvature_sphere`.
+  ⚠ **HONEST (binding):** CARRIED (the geometric/analytic substrate, structure fields NEVER axioms): the
+  normal-coordinate volume/van-Vleck 2-jet (`Θ=1−(1/6)Ric·y²`, or metric `g=δ−(1/3)Riem·y²`), the √det
+  first-variation, the Ricci contraction, and the TRANSPORT diagonal-reduction `u₁(x,x)=−Δ_geom u₀|₀` —
+  these encode the exp map, geodesic distance, the van Vleck determinant, and the radial r-integration.
+  DOES NOT build the heat semigroup/kernel/parametrix CONVERGENCE (Rosenberg §3.2.2 / BGV §2.4 — the
+  analytic wall, no Mathlib substrate); computes the coefficient GIVEN the recursion + the
+  normal-coordinate geometry. Books grounding it: Gilkey + BGV + Rosenberg in `refs/`. NOT the abstract
+  coordinate-free tensor (upstream). NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **HEAT COEFFICIENT DETERMINATION (heat-kernel Phase-5 downpayment; Gilkey invariance theory) —
   `QIQTH/HeatCoeffDetermination.lean`** (**[AF]** std-3, budget 0, 2026-07-13, commit `f0831237`).
   DERIVES Gilkey's heat-coefficient constants `c₁=1/6, c₂=1` (so `a₂ = R/6 + trE`, his Thm 4.8.16(b))
