@@ -11574,4 +11574,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.heatSymbol_diffQuotient_L2_tendsto
 #print axioms QIQTH.Spectral.ProjectionValuedMeasure.hasDerivWithinAt_heatSemigroup
 
+-- THE FLAT-TORUS HEAT TRACE (breaking the heat-kernel wall for ONE explicit geometry).  The heat trace
+-- of e^{tΔ} on the flat circle ℝ/ℤ: the explicit Fourier spectral sum heatTraceCircle t = Σ_k
+-- e^{−t(2πk)²}, proven ★ heatTraceCircle_eq_jacobiTheta (= Mathlib's jacobiTheta(I·4πt)) with ★★
+-- heatTraceCircle_asymptotic (√(4πt)·heatTraceCircle t → 1, i.e. ~ (4πt)^{−1/2} as t→0⁺, via the theta
+-- S-transformation functional equation + the i∞ bound) — the WEYL / Seeley–DeWitt a₀=1 leading term on a
+-- REAL manifold.  heatTraceCircle_summable + laplacian_eigenvalue_circle (λ_k=(2πk)²).  HONEST (binding):
+-- breaks the heat-kernel wall ONLY for this FLAT geometry — the circle's spectrum {(2πk)²} and
+-- eigenfunctions e^{2πikx} are EXPLICIT (Fourier), needing NONE of the missing infrastructure (no Rellich
+-- compactness, no elliptic regularity, no general trace-class API, no manifold-L²/Δ machinery).  The
+-- GENERAL curved-manifold heat kernel stays the WALL.  FLAT ⟹ R=0: validates a₀=1 (Weyl), NOT a₁=R/6
+-- (flat ⟹ a₁=0); the a₁=R/6 analytic discharge stays open.  The "trace" is the spectral sum in the
+-- canonical Fourier eigenbasis (not a general basis-independent trace — that needs the absent trace-class
+-- API).  NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.FlatTorusHeatKernel.heatTraceCircle_eq_jacobiTheta
+#print axioms QIQTH.FlatTorusHeatKernel.heatTraceCircle_asymptotic
+#print axioms QIQTH.FlatTorusHeatKernel.heatTraceCircle_summable
+#print axioms QIQTH.FlatTorusHeatKernel.laplacian_eigenvalue_circle
+
 end QIQTH.AxiomAudit

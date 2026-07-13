@@ -776,6 +776,7 @@ import QIQTH.CoordinateCurvature
 import QIQTH.HeatCoeffDetermination
 import QIQTH.HeatCoeffBridge
 import QIQTH.DeWittDiagonal
+import QIQTH.FlatTorusHeatKernel
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
