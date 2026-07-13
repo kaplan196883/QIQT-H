@@ -11474,4 +11474,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CoordinateCurvature.ConeCheck.scalarCurvature_cone
 #print axioms QIQTH.CoordinateCurvature.SphereCheck.scalarCurvature_sphere
 
+-- HEAT COEFFICIENT DETERMINATION (heat-kernel gap plan, Phase-5 downpayment; grounded in Gilkey,
+-- Invariance Theory, Thm 4.8.16(b) + Lemmas 4.8.5/4.8.6, refs/InvarianceTheory1Ed.pdf).  DERIVES
+-- Gilkey's constants c₁=1/6, c₂=1 (so a₂=R/6+trE) from his INVARIANCE ANSATZ + two model evaluations —
+-- the 1/6 becomes a THEOREM, not a stipulation, given the carried facts.  HeatCoeffData bundles
+-- (heatCoeff2, tau, trE : ι→ℝ) + CARRIED fields: universality `∃ cTau cE, ∀P, heatCoeff2 P =
+-- cTau·tau P + cE·trE P` (Gilkey's weight-2-span-{τ,E} ansatz — Weyl invariant theory, the heat-
+-- expansion analytic wall input, not in Mathlib), the flat constant-E model value (0,1,1), the curved
+-- E=0 model value (T,0,T/6), T≠0.  ★★ constants_determined: any universal pair is FORCED to (1/6,1)
+-- (2×2 solve; model_det_ne_zero = the (0,1)/(T,0) independence).  ★★ coeff2_eq: a₂ = τ/6 + trE
+-- universally, DERIVED.  sphereFlatWitness : HeatCoeffData (Fin 2) grounds the curved model value in
+-- OUR OWN self-built unit-2-sphere R=2 (sphereFlatWitness_curvedTau_eq_sphere ties curvedTau to
+-- CoordinateCurvature.scalarCurvature via SphereCheck.scalarCurvature_sphere).  HONEST (binding):
+-- DOES NOT build the heat semigroup/kernel/short-time expansion (Phases 3–4, the deep wall); it
+-- REDUCES the carried assumption from the specific number a₁=R/6 UP to the weaker invariance ansatz +
+-- one curved-model value (Gilkey's logic: universality propagates one measurement to the universal
+-- law).  The Fin-2 witness's universality is a NON-VACUITY witness only; the real content is the
+-- abstract structure.  NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.HeatCoeffDetermination.HeatCoeffData.constants_determined
+#print axioms QIQTH.HeatCoeffDetermination.HeatCoeffData.coeff2_eq
+#print axioms QIQTH.HeatCoeffDetermination.HeatCoeffData.model_det_ne_zero
+#print axioms QIQTH.HeatCoeffDetermination.sphereFlatWitness_curvedTau_eq_sphere
+
 end QIQTH.AxiomAudit
