@@ -14,10 +14,15 @@ hypothesis a labelled structure/argument field, never a Lean `axiom`). The **ent
 three EXTERNAL walls**, none QIQT-H-specific, each documented and deferred:
 
 1. **The Riemannian heat-kernel / Seeley–DeWitt theory** — surfaces 3× (D3 input #3 `a₁=R/6`, D5 warp,
-   D6 curvature). Absent from every proof assistant; deferred with a phased plan
-   (`HEAT_KERNEL_GAP_PLAN.md`); `a₁=R/6` carried via the `SeeleyDeWittData` interface. Its Phase 1
-   (curvature) IS the live Mathlib effort (Gouëzel's Riemannian manifolds; Massot–Rothgang's
-   Levi-Civita PR) — track/contribute upstream, do not fork.
+   D6 curvature). Deferred with a phased plan (`HEAT_KERNEL_GAP_PLAN.md`); `a₁=R/6` carried via the
+   `SeeleyDeWittData` interface. **This wall is now HALF-dissolving upstream (status 2026-07-13):** its
+   *curvature* half (Phase 1 → scalar `R`) is the LIVE Mathlib effort — the Levi-Civita connection is
+   near-merged (Rothgang/Massot, PR #36845) and the Riemann curvature tensor is actively being written
+   (WIP in the uniting branch #36036); Ricci and scalar `R` are mechanical contractions on top, so
+   scalar `R` is on a foreseeable-quarters horizon (track/contribute upstream, do not fork). But its
+   *heat-kernel* half (Phases 3–4: the heat semigroup + kernel and the short-time Seeley–DeWitt
+   expansion — the analytic heart) has NO upstream activity and stays the deep wall. Getting scalar `R`
+   does NOT discharge `a₁=R/6`; it only lets Phases 2–5 build on a real curvature substrate.
 2. **The von Neumann factor / type-III₁ classification API** (D2) — the Connes S-invariant / type
    classification proper; absent from every proof assistant (the tower's III₁ *signature* — σ((1+Δ)⁻¹)
    = [0,1] — is already proved; only the abstract type API is missing).
@@ -117,9 +122,14 @@ instance; `HeatTraceAsymptotics.lean` (`3d03943a`) adds the carried short-time t
 the coefficient extraction (normalized trace `→ 1`; subleading slope `→ R/6+trE`), showing the
 interface is non-vacuous and isolating exactly what Phase 4 must supply. Without protection, even a
 proven correspondence is a one-parameter FAMILY of dictionaries, not THE dictionary.
+**Upstream status (2026-07-13):** the analytic blocker splits — the *curvature* input (scalar `R`) is
+being built in Mathlib NOW (Levi-Civita near-merged #36845; Riemann tensor WIP #36036; Ricci/scalar =
+mechanical contractions → foreseeable-quarters), but the *heat-kernel* half (the semigroup, kernel, and
+short-time Seeley–DeWitt expansion — Phases 3–4) has NO upstream activity and stays the deep wall.
+Scalar `R` alone does not give `a₁=R/6`.
 **Status:** absent as a mechanism; the coefficient's algebraic half is proved and its assumption is
-now a clean named interface (option (b)); the analytic half's deepest blocker is external (Mathlib's
-own diff-geo frontier), deferred with a plan.
+now a clean named interface (option (b)); the analytic half's curvature part is dissolving upstream
+while its heat-kernel part remains the external wall — deferred with a plan.
 
 ## The dependency structure and the critical path
 
