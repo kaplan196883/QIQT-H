@@ -11739,5 +11739,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.compactResolvent_hasEigenbasis
 #print axioms QIQTH.TraceClass.compactResolvent_heatTrace
 #print axioms QIQTH.TraceClass.heatOperator_of_summable
+-- GEOMETRIC-SIDE BRIDGE (L² integral kernel ⟹ bounded/HS operator; the McKean–Singer OTHER half,
+-- Tr=∫K(x,x); starts integral-operator theory absent from Mathlib, manifold-free σ-finite measure space).
+-- kernel_lintegral_section_eq (Tonelli ∫∫‖K‖²=‖K‖²_{L²(X²)}) + kernel_section_memLp (a.e. section K x ·∈L²).
+-- ★★ integralOpCLM: the integral operator T_K f x = ∫ K x y·f y as a bounded CLM on L²(μ) with
+-- eLpNorm_integralOp_le / integralOpCLM_opNorm_le ‖T_K‖ ≤ ‖K‖_{L²(X²)} (Schur/Cauchy–Schwarz bound
+-- lintegral_integralOp_enorm_sq_le proved in ℝ≥0∞ via Hölder; Lp-quotient descent via toLp_congr +
+-- a.e.-integrability from HolderTriple).  HONEST (binding): geometric-side BRIDGE infrastructure only; the
+-- HS-norm identity ‖T_K‖_HS=‖K‖_{L²} (Parseval over a basis) is CHECKPOINTED (a genuine follow-on).  Does
+-- NOT discharge the general a₁=R/6 — that is IRREDUCIBLY behind the manifold heat-kernel PARAMETRIX
+-- (curvature L0 + Riemannian volume/Sobolev L1 + parametrix short-time expansion L4), a LOCAL GEOMETRIC
+-- invariant; a₁=R/6 stays VALIDATED on S², not generally discharged.  Does NOT build the manifold heat
+-- kernel.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.kernel_lintegral_section_eq
+#print axioms QIQTH.TraceClass.kernel_section_memLp
+#print axioms QIQTH.TraceClass.eLpNorm_integralOp_le
+#print axioms QIQTH.TraceClass.integralOpCLM
+#print axioms QIQTH.TraceClass.integralOpCLM_opNorm_le
 
 end QIQTH.AxiomAudit

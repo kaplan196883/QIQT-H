@@ -1653,6 +1653,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **GEOMETRIC-SIDE BRIDGE: L² integral kernel ⟹ bounded (Hilbert–Schmidt) operator — starts integral-operator
+  theory absent from Mathlib, manifold-free — `QIQTH/TraceClass/IntegralKernel.lean`** (**[AF]** std-3, budget 0,
+  2026-07-14). The McKean–Singer OTHER half (`Tr = ∫ K(x,x)`), on any σ-finite measure space `(X, μ)` with a
+  kernel `K ∈ L²(X×X)`. Mathlib has ZERO integral-operator theory; this is the first bricks of it.
+  `kernel_lintegral_section_eq` (Tonelli `∫∫‖K‖² = ‖K‖²_{L²(X²)}`) + `kernel_section_memLp` (a.e. section
+  `K x · ∈ L²`). ★★ `integralOpCLM` — the integral operator `T_K f x = ∫ K x y · f y ∂μ` as a **bounded
+  continuous-linear operator** on `L²(μ)`, with `eLpNorm_integralOp_le` / `integralOpCLM_opNorm_le`:
+  `‖T_K‖ ≤ ‖K‖_{L²(X²)}` (the Schur/Cauchy–Schwarz bound `lintegral_integralOp_enorm_sq_le` proved entirely
+  in `ℝ≥0∞` via Hölder, sidestepping Bochner side-conditions; the delicate `Lp`-quotient descent closed via
+  `toLp_congr` + a.e.-integrability from `HolderTriple 2 2 1`). ⚠ **HONEST (binding):** this is geometric-side
+  BRIDGE infrastructure. The Hilbert–Schmidt identity `‖T_K‖_HS = ‖K‖_{L²(X²)}` (Parseval over a basis) is
+  **checkpointed** as a genuine follow-on. And critically: **this does NOT discharge the general `a₁ = R/6`** —
+  that is IRREDUCIBLY behind the manifold heat-kernel PARAMETRIX (curvature L0 + Riemannian volume/Sobolev L1
+  + parametrix short-time expansion L4); `a₁` is a LOCAL GEOMETRIC invariant, not reachable by any
+  abstract/measure-space brick. `a₁ = R/6` stays VALIDATED on `S²`, not generally discharged. Does NOT build
+  the manifold heat kernel. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **RESOLVENT BRIDGE: compact resolvent ⟹ discrete spectrum + McKean–Singer heat trace (the whole spectral
   side reduced to ONE input, manifold-free) — `QIQTH/TraceClass/ResolventSpectrum.lean`** (**[AF]** std-3,
   budget 0, 2026-07-14). Packages the entire spectral-side reduction of the general heat trace. ★★
