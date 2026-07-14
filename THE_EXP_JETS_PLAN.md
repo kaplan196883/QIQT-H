@@ -511,6 +511,20 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   inhomogeneous Grönwall ⟹ `‖S(1)‖=o(‖k‖)` ⟹ `HasFDerivAt (v↦fderiv exp_p v) (k↦h↦π Q^{hk}(1)) v` + continuity of
   `v↦Q^{hk}(1)` ⟹ `ContDiff¹ (fderiv exp_p)` ⟹ (via `expMap_contDiffOn_two_of_fderiv_contDiffOn_one`) **UNCONDITIONAL
   `ContDiff² exp_p`.** The analytic heart (the actual differentiability limit) — the hardest remaining Rung-2 brick.
+- **2026-07-15 (RUNG 2 cont. — 3c/4 residual estimate (A) — DONE, PUSHED `fa8799a0`):** `gronwall_vec_residual`
+  (inhomogeneous vector Grönwall on `[0,1]`: `S 0=0`, `S'=A·S+r`, `‖A‖≤K`, `‖r‖≤ρ` ⟹ `‖S 1‖≤ρ·e^K`) +
+  `expJet2_residual_hasDerivWithinAt` (the residual ODE identity: `S(t)=Φ'(t)(ιh)−Φ(t)(ιh)−Q(t)` ⟹
+  `S'=DF(Y_v)S + ([DF(Y_w)−DF(Y_v)](Φ'(ιh))−Θ^{hk})`) + `expJet2_residual_bound` (combined ⟹
+  `‖Φ'(1)(ιh)−Φ(1)(ιh)−Q(1)‖ ≤ ρ·e^{Kstar}`). **CHECKPOINT:** (A) reduced to the quadratic remainder bound
+  `‖r(t)‖ ≤ C‖k‖²`, NOT discharged. Its 3 missing ingredients (the multi-week analytic bulk):
+  **(i)** DF 2nd-order Taylor remainder `‖(DF(y)−DF(x))−D²F(x)(y−x)‖ ≤ C‖y−x‖²`;
+  **(ii)** 2nd-order tube accuracy `‖(Y_{v+k}−Y_v)(t)−Φ_v(t)(ιk)‖ ≤ C‖k‖²` (nested Grönwall, needs the geodesic
+  field's own C² Taylor remainder — only the C¹ `geodesicField_uniform_C1_remainder` exists);
+  **(iii)** the `[0,1]`-uniform first-variation Lipschitz `‖Φ_{v+k}(t)(ιh)−Φ_v(t)(ιh)‖ ≤ C‖k‖` (extend
+  `expFund_two_pt_diff` from `t=1` to `[0,1]`) + `D²F` symmetry (Mathlib `second_derivative_symmetric`, `F` is C∞).
+  ORDER OF ATTACK (easiest→hardest): (iii) [0,1]-Lipschitz + D²F-symm (tractable) → (i) DF 2nd-order Taylor
+  (Mathlib Taylor/`Convex.norm_image_sub…`, D³F bounded) → (ii) 2nd-order tube accuracy (the nested Grönwall) →
+  assemble `‖r‖≤C‖k‖²` → (B) HasFDerivAt → (C) continuity → (D) `ContDiff² exp_p` unconditional.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
