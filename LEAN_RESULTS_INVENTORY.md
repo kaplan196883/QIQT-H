@@ -1919,6 +1919,22 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Gilkey invariant for an ARBITRARY metric — that is the manifold heat-kernel PARAMETRIX (the wall). Same
   rigorous status as the `a₁`/`a₂` determinations. NOT the conjecture, NOT the strong principle, NOT QG.
 
+- **★★★ ABSTRACT COORDINATE-FREE CURVATURE of a connection (the coordinate-free curvature wall, broken at the
+  ALGEBRAIC level) — `QIQTH/CoordinateFreeCurvature.lean`** (**[AF]** std-3, budget 0, 2026-07-15). The first
+  genuinely COORDINATE-FREE curvature in the repo (all prior curved examples were component curvature in charts).
+  `KoszulConnection` (`cd : Derivation R A A → (M →ₗ[R] M)`, `cd_add`, `leibniz`) — vector fields as
+  DERIVATIONS, bracket = commutator `⁅X,Y⁆`, NO coordinates. Curvature
+  `F(X,Y) = cd X ∘ cd Y − cd Y ∘ cd X − cd ⁅X,Y⁆`. ★ **`curvature_smul` (`F(X,Y)(a•m) = a•F(X,Y)m`) —
+  TENSORIALITY**: the Leibniz cross-terms and first-order parts cancel (via `Derivation.commutator_apply`), so
+  curvature is a genuine TENSOR, packaged as `curvatureTensor : M →ₗ[A] M`. `curvature_antisymm`
+  (`F(X,Y) = −F(Y,X)`), `curvature_self`, biadditivity, and `flatConnection_curvature = 0` (non-vacuity witness).
+  ⚠ **HONEST (binding):** this is the ABSTRACT ALGEBRAIC coordinate-free curvature — the tensorial skeleton the
+  smooth Riemann tensor instantiates, coordinate-free BY CONSTRUCTION. It is NOT the smooth-manifold Riemann
+  curvature tensor (that additionally needs the tangent bundle + a Riemannian metric + the Levi-Civita
+  connection, Mathlib-WIP #36036/#36845, NOT built here); NOT the general curved heat kernel. It breaks the
+  coordinate-free-curvature wall at the ALGEBRAIC, not smooth-manifold-analytic, level. NOT the conjecture, NOT
+  the strong principle, NOT QG.
+
 - **★ SURFACE OF REVOLUTION — the first INHOMOGENEOUS curved manifold (NONCONSTANT scalar curvature) —
   `QIQTH/RevolutionSurface.lean`** (**[AF]** std-3, budget 0, 2026-07-15). `ds² = dr² + (1+r²)² dθ²` (profile
   `f(r) = 1+r²`). `hasDerivAt_revsurf_h`/`_dh` — `HasDerivAt`-verified that the fed jets are the genuine

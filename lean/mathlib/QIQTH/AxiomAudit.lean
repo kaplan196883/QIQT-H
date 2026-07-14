@@ -11504,6 +11504,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RevolutionSurface.revsurf_scalarCurvature
 #print axioms QIQTH.RevolutionSurface.revsurf_curvature_nonconstant
 #print axioms QIQTH.RevolutionSurface.revsurf_curvature_negative
+-- ★★★ ABSTRACT COORDINATE-FREE CURVATURE of a connection (algebraic; breaks the coordinate-free curvature wall
+-- at the ALGEBRAIC level).  KoszulConnection (cd:Derivation R A A→(M→ₗ[R]M), cd_add, leibniz) — vector fields
+-- as DERIVATIONS, bracket = commutator, NO coordinates.  curvature F(X,Y)=cd X∘cd Y−cd Y∘cd X−cd⁅X,Y⁆.
+-- ★ curvature_smul: F(X,Y)(a•m)=a•F(X,Y)m — TENSORIALITY (the Leibniz cross-terms + first-order parts cancel
+-- via Derivation.commutator_apply), so curvature is a genuine TENSOR: curvatureTensor : M→ₗ[A]M.
+-- curvature_antisymm (F(X,Y)=−F(Y,X)), curvature biadditive, flatConnection_curvature=0 (non-vacuity).
+-- HONEST (binding): the ABSTRACT ALGEBRAIC coordinate-free curvature — the tensorial skeleton the smooth
+-- Riemann tensor instantiates; coordinate-free BY CONSTRUCTION.  NOT the smooth-manifold Riemann tensor (needs
+-- tangent bundle + Riemannian metric + Levi-Civita = Mathlib WIP #36036/#36845, NOT built here); NOT the
+-- general curved heat kernel.  Breaks the coordinate-free-curvature wall at the ALGEBRAIC, not
+-- smooth-manifold-analytic, level.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.CoordinateFreeCurvature.KoszulConnection.curvature_smul
+#print axioms QIQTH.CoordinateFreeCurvature.KoszulConnection.curvatureTensor
+#print axioms QIQTH.CoordinateFreeCurvature.KoszulConnection.curvature_antisymm
+#print axioms QIQTH.CoordinateFreeCurvature.flatConnection_curvature
 
 -- HEAT COEFFICIENT DETERMINATION (heat-kernel gap plan, Phase-5 downpayment; grounded in Gilkey,
 -- Invariance Theory, Thm 4.8.16(b) + Lemmas 4.8.5/4.8.6, refs/InvarianceTheory1Ed.pdf).  DERIVES
