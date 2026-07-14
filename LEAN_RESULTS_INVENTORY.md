@@ -1884,6 +1884,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   the universal law). The Fin-2 witness's universality is a non-vacuity witness only; the real content is
   the abstract structure. NOT the conjecture, NOT the strong principle, NOT QG.
 
+- **★ THE `a₂` SEELEY–DEWITT COEFFICIENT DETERMINATION (the NEXT heat-kernel coefficient after `a₁ = R/6`) —
+  `QIQTH/HeatCoeff2Determination.lean`** (**[AF]** std-3, budget 0, 2026-07-15). Determines the universal
+  constants of the weight-4 heat coefficient `a₂ = α·R² + β·|Ric|² + γ·|Rm|² + δ·ΔR`, reproducing Gilkey
+  Thm 4.8.16 `a₂ = (1/360)(5R² − 2|Ric|² + 2|Rm|² + 12ΔR)`. ★★★ **`alpha_from_product` — `α = 1/72` DERIVED
+  SELF-CONTAINED** from the product-multiplicativity rule `a₂(M×N) = a₂(M) + a₂(N) + a₁(M)·a₁(N)` together
+  with `a₁ = R/6`: on a product only `R²` is non-additive, and its cross-term `2α·R_M R_N` must equal
+  `a₁(M)a₁(N) = (R_M/6)(R_N/6) = R_M R_N/36`, forcing `2α = 1/36`. This needs NO carried `a₂` value — only
+  `a₁ = R/6` (which I have) and the elementary product rule. `constants_determined` — the carried classical
+  round-sphere values `a₂(S²)=1/15`, `a₂(S³)=1/2`, `a₂(S⁴)=29/15` (via the constant-curvature invariants
+  `R=m(m−1)`, `|Ric|²=m(m−1)²`, `|Rm|²=2m(m−1)`, `ΔR=0`) force `(α,β,γ) = (1/72, −1/180, 1/180)`, with `α`
+  CROSS-CHECKING the product derivation (two independent routes agree). `a2_formula` + `a2_gilkey`:
+  `(α,β,γ,δ) = (5,−2,2,12)/360`. ⚠ **HONEST (binding):** DETERMINES the universal `a₂` constants from the
+  invariance ansatz (Gilkey Lemma 4.8.5, carried) + product structure + carried classical sphere values — the
+  SAME rigorous status as `HeatCoeffDetermination` for `a₁` (`α = 1/72` genuinely self-contained; `β,γ` from
+  carried sphere values; `δ = 12/360` the cited classical `ΔR` coefficient, which needs a non-homogeneous
+  computation since `ΔR=0` on all homogeneous models). Does NOT construct the manifold heat kernel or prove
+  `a₂(x)` equals this invariant for an ARBITRARY metric — that is the manifold heat-kernel PARAMETRIX (the
+  wall). NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **COORDINATE SCALAR CURVATURE (heat-kernel Phase 1, coordinate flavor) — `QIQTH/CoordinateCurvature.lean`**
   (**[AF]** std-3, budget 0, 2026-07-13, commit `ae04203a`). The component/metric-2-jet scalar curvature
   `R(g)` built OURSELVES — an ALGEBRAIC function of the metric's 0/1/2-jet (`ginv`, `dg=∂g`, `ddg=∂∂g`)

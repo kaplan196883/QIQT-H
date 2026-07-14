@@ -11807,4 +11807,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.mercer_traceE_eq_tsum_eigenvalues_of_hermitian
 #print axioms QIQTH.TraceClass.mercer_eigenvalues_nonneg
 
+-- ★★★ a₂ SEELEY–DEWITT COEFFICIENT DETERMINATION (the next heat-kernel coefficient after a₁=R/6).
+-- The weight-4 invariant ansatz a₂ = α·R² + β·|Ric|² + γ·|Rm|² + δ·ΔR (Gilkey Lemma 4.8.5, carried).
+-- ★ alpha_from_product: α = 1/72 DERIVED SELF-CONTAINED from the product-multiplicativity rule
+-- a₂(M×N)=a₂(M)+a₂(N)+a₁(M)a₁(N) + a₁=R/6 (the only non-additive invariant is R²; its cross-term
+-- 2αR_MR_N must equal (R_M/6)(R_N/6) ⟹ 2α=1/36).  constants_determined: the carried classical round-sphere
+-- values a₂(S²)=1/15, a₂(S³)=1/2, a₂(S⁴)=29/15 (κ=1, constant-curvature invariants R=m(m−1),
+-- |Ric|²=m(m−1)², |Rm|²=2m(m−1), ΔR=0) force (α,β,γ)=(1/72,−1/180,1/180); α CROSS-CHECKS the product
+-- derivation.  a2_formula + a2_gilkey: (α,β,γ,δ)=(5,−2,2,12)/360, i.e. a₂ = (1/360)(5R²−2|Ric|²+2|Rm|²+12ΔR)
+-- (Gilkey Thm 4.8.16).  HONEST (binding): DETERMINES the universal a₂ constants from invariance + product
+-- structure + carried classical sphere values — the SAME rigorous status as HeatCoeffDetermination for a₁
+-- (α=1/72 genuinely self-contained; β,γ from carried sphere values; δ=12/360 the cited classical ΔR
+-- coefficient, needs a non-homogeneous computation as ΔR=0 on homogeneous models).  Does NOT construct the
+-- manifold heat kernel or prove a₂(x)=this invariant for an ARBITRARY metric — that is the manifold
+-- heat-kernel PARAMETRIX (the wall).  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.HeatCoeff2Determination.alpha_from_product
+#print axioms QIQTH.HeatCoeff2Determination.constants_determined
+#print axioms QIQTH.HeatCoeff2Determination.a2_formula
+#print axioms QIQTH.HeatCoeff2Determination.a2_gilkey
+
 end QIQTH.AxiomAudit
