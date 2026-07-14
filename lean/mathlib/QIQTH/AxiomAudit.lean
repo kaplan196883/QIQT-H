@@ -11667,5 +11667,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.traceE_basis_indep
 #print axioms QIQTH.TraceClass.traceE_eq_hsInner
 #print axioms QIQTH.TraceClass.IsTraceClass.isHilbertSchmidt
+-- T3 — TRACE-CLASS IDEAL + CYCLICITY.  matrixElt_summable_sq (S_{ij}=⟪bᵢ,S bⱼ⟫ square-summable over ι×ι,
+-- mass ‖S‖²_HS) + traceE_comp_eq_tsum_matrixElt (Tr(S∘T)=∑'_{(i,k)}S_{ik}T_{ki}).  ★★ traceE_comp_comm_hs
+-- (HS-HS cyclicity Tr(S∘T)=Tr(T∘S) via the (i,k)↔(k,i) Fubini relabel, absolutely summable by
+-- Cauchy–Schwarz ≤‖S‖_HS‖T‖_HS).  IsTraceClass.comp_right/left_bounded (the two-sided IDEAL: A
+-- trace-class, B bounded ⟹ AB,BA trace-class).  ★★★ traceE_comp_comm (general cyclicity Tr(AB)=Tr(BA),
+-- A trace-class B bounded, via A=C⋆∘D).  HONEST (binding): completes the trace's algebraic laws
+-- (linearity+adjoint from T2, ideal+cyclicity here); foundation for Tr e^{−tΔ}; does NOT build the heat
+-- kernel or discharge general a₁=R/6 (L1/L3 manifold analysis stay the wall).  NOT the conjecture/
+-- strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.traceE_comp_comm_hs
+#print axioms QIQTH.TraceClass.traceE_comp_comm
+#print axioms QIQTH.TraceClass.IsTraceClass.comp_right_bounded
 
 end QIQTH.AxiomAudit
