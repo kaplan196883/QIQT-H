@@ -395,6 +395,28 @@ remain). Never claim numerical-G or a curved heat kernel.
   (see the PIVOT above)** ⟹ instantiate `RNCExpansion.heat_a1_of_gauge` at `g:=g̃` ⟹ **`κ=1/6` UNCONDITIONAL given the
   metric** (the carried gauge retired).
 
+## RUNG 3 — `ContDiff³ exp_p` (the concrete decomposition — a CLEAN MIRROR of Rung 2, pre-scoped 2026-07-15)
+Confirmed: Rung 3 mirrors Rung 2 brick-for-brick (the `D²F`/`Q^{hk}` machinery of `ExpMapContDiff2.lean` is the exact
+template). The Jet₃ THIRD variation `R^{hkl}(t)` is VECTOR-valued, solving the inhomogeneous linear ODE
+`R'(t) = DF(Y_v t)(R(t)) + Θ₃^{hkl}(t)`, `R(0)=0`, with source
+`Θ₃^{hkl}(t) = D³F(Y_v t)(P^h,P^k,P^l) + D²F(Y_v t)(P^h, Q^{kl}) + D²F(Y_v t)(P^k, Q^{hl}) + D²F(Y_v t)(P^l, Q^{hk})`
+(`P^• = Φ_v(·)(ι•)` first variations, `Q^{••}` = the built `expJet2Fund` second variations). Bricks (each a clean
+mirror, likely tractable):
+- [ ] **R3-D³F:** `contDiff_fderiv3_geodesicField := (contDiff_fderiv2_geodesicField g gi hC).fderiv_right le_top`
+  (C∞ one-liner) + `expJet_fderiv3_tube_bddAbove_unif` (mirror `expJet_fderiv2_tube_bddAbove_unif`, route through the
+  ℝ-valued `‖D³F q‖` for the deeper nested-CLM diamond) + `expJet_fderiv3_lipschitzOnWith` (mirror via
+  `ContDiffOn.exists_lipschitzOnWith`).
+- [ ] **R3-source:** `expJet3Rhs` (the 4-term `Θ₃` above; `Q` fed from `expJet2Fund`) + `_continuousOn` + `_norm_le`
+  (mirror `expJet2Rhs*` — the `D²F(P,Q)` cross terms reuse the `D²F` bound + `Q` continuity from `expJet2Fund`).
+- [ ] **R3-fund:** `expJet3Fund_local → _shifted → _shifted_integral → _glue → expJet3Fund` (mirror the `expJet2Fund`
+  chain VERBATIM — same affine field `F₃ t R = DF(Y_v t)(R)+Θ₃`, same `IsPicardLindelof`/glue; the only change is the
+  source `Θ₂ ⤳ Θ₃`).
+- [ ] **R3-capstone:** the residual Grönwall (mirror 3c/4) ⟹ `v↦fderiv² exp_p v` is `C¹` ⟹ `ContDiff³ exp_p`.
+- [ ] **R3→κ:** `ContDiff³ exp_p` ⟹ `ContDiff² g̃` (the pullback metric, derivative-loss) ⟹ the bridge
+  `rnc_christoffel_linearJet` + instantiate `heat_a1_of_gauge` at `g̃` ⟹ **`κ=1/6` UNCONDITIONAL given the metric.**
+  ⚠ Even at `κ=1/6`, general `a₁=R/6` STILL needs the P2 parametrix proper (the kernel existence + short-time
+  expansion) — the deep wall. NEVER claim general `a₁=R/6` / a curved heat kernel / numerical-G until P2.
+
 ## Verbatim HAVE / HAVE-NOT
 - **HAVE (target):** "The exp-map normal coordinates satisfy the RNC gauge — `g̃(0)=δ`, `∂g̃(0)=0`,
   `∂_{(l}Γ̃_{jk)}(0)=0` — derived from the exp map's finite jets at 0 (equilibrium-anchored Grönwall, no general
