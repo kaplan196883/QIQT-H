@@ -10166,6 +10166,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet2Val_smul_right
 #print axioms QIQTH.ExpMap.expJet2Val_norm_le
 #print axioms QIQTH.ExpMap.expJetD2
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, B-asm) — HasFDerivAt of fderiv exp_p (ExpMapContDiff2.lean).
+-- expMap_fderiv_hasFDerivAt: HasFDerivAt (fun w => fderiv exp_p w) (expJetD2 …) v for ‖v‖<expRho — i.e.
+-- v ↦ fderiv exp_p v is DIFFERENTIABLE with 2nd derivative the built CLM D²_v.  Supporting:
+-- expJet2_remainder_quadratic_bound' (‖h‖-separated remainder, C₀ indep of h), expMap_fderiv_sub_quadratic_opNorm
+-- (‖A_k‖_op ≤ C‖k‖² via opNorm_le_bound), expJetFund_norm_le_exp (‖Ψ t‖≤e^{Kstar} uniform),
+-- expJet2_remainder_quadratic_bound_unif (k-UNIFORM remainder, k inside the ∃ — via Kstar from
+-- expJet_fderiv_tube_bddAbove_unif + Cphi=e^{Kstar}); assembled with hasFDerivAt_iff_isLittleO_nhds_zero +
+-- Asymptotics.isLittleO_iff (Mc‖k‖²=(Mc‖k‖)‖k‖=o(‖k‖)).  HONEST: this is the second-derivative DIFFERENTIABILITY
+-- datum; ContDiff² exp_p still needs (C) continuity of v↦expJetD2 + (D) the discharge.  Does NOT give
+-- ContDiff²/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2_remainder_quadratic_bound'
+#print axioms QIQTH.ExpMap.expMap_fderiv_sub_quadratic_opNorm
+#print axioms QIQTH.ExpMap.expJetFund_norm_le_exp
+#print axioms QIQTH.ExpMap.expJet2_remainder_quadratic_bound_unif
+#print axioms QIQTH.ExpMap.expMap_fderiv_hasFDerivAt
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
