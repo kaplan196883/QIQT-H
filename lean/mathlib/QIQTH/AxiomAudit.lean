@@ -11647,6 +11647,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_eq
 #print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_a1
 #print axioms QIQTH.Sphere3HeatTrace.sphere3_a1_coeff_eq_a0_mul_R_div_six
+-- PRODUCT S²×S¹ — a₁=R/6 VALIDATED via a PRODUCT (additivity check; a NEW (R,a₁) data point).
+-- productHeatTrace = sphereHeatTrace·heatTraceCircle (the S²×S¹ trace = product of factor traces, d=3,
+-- R=R_{S²}+R_{S¹}=2).  ★★ productHeatTrace_a1: (t^{3/2}·Θ_prod − 1/(2√π))/t → 1/(6√π) = a₀·(R/6), R/6=1/3
+-- — a₁=R/6=1/3 on S²×S¹.  circle_rate: (√(4πt)·heatTraceCircle − 1)/t → 0 (the exp-small theta remainder,
+-- via norm_jacobiTheta_sub_one_le + x·e^{−x}→0).  product_a1_coeff_eq ties 1/(6√π)=(1/(2√π))·(2/6).  This
+-- is a NEW data point: same d=3 as S³ but R=2 (not 6), so a₁ tracks R not d, and a₁ (like R) is ADDITIVE
+-- under products.  ⟹ a₁=R/6 now machine-verified on flat torus (R=0) + S² (d=2,a₁=1/3) + S³ (d=3,a₁=1)
+-- + S²×S¹ (d=3,a₁=1/3) — FOUR explicit geometries incl. a product.  ⚠ HONEST (binding): validates via the
+-- explicit product spectrum (carried classical input); does NOT discharge the GENERAL curved a₁=R/6 (the
+-- manifold heat-kernel PARAMETRIX wall).  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.ProductHeatTrace.productHeatTrace_a1
+#print axioms QIQTH.ProductHeatTrace.productHeatTrace_a0
+#print axioms QIQTH.ProductHeatTrace.circle_rate
 
 -- TRACE-CLASS API, T1 — HILBERT–SCHMIDT OPERATORS (L5 of the heat-kernel full-infrastructure plan; the
 -- one self-contained buildable layer).  Pure functional analysis on a complex Hilbert space with a

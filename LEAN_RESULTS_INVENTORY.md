@@ -1673,6 +1673,21 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   is the root reason the general case needs the manifold heat-kernel PARAMETRIX (curvature + Riemannian volume
   + short-time expansion = the wall). NOT the conjecture, NOT the strong principle, NOT QG.
 
+- **THE `S²×S¹` PRODUCT HEAT TRACE + `a₁ = R/6` VALIDATED VIA A PRODUCT (additivity) —
+  `QIQTH/ProductHeatTrace.lean`** (**[AF]** std-3, budget 0, 2026-07-15). `productHeatTrace t :=
+  sphereHeatTrace t · heatTraceCircle t` — the `S²×S¹` heat trace as the product of the two factor traces
+  (`d=3`, `R = R_{S²}+R_{S¹} = 2`). ★★ **`productHeatTrace_a1`
+  (`(t^{3/2}·Θ_prod(t) − 1/(2√π))/t → 1/(6√π) = a₀·(R/6)`, `R/6=1/3`) — `a₁ = R/6 = 1/3` on `S²×S¹`.**
+  `circle_rate` (`(√(4πt)·heatTraceCircle − 1)/t → 0`, the circle's exp-small theta remainder, via Mathlib
+  `norm_jacobiTheta_sub_one_le` + `x·e^{−x} → 0`) is the one nontrivial step; assembly reuses
+  `sphereHeatTrace_a1` in `(A·B − a₀)/t = ((A−1)/t)·B + (B−a₀)/t`. `product_a1_coeff_eq` ties
+  `1/(6√π) = (1/(2√π))·(2/6)`. This is a **new `(R,a₁)` data point**: same dimension `d=3` as `S³` but `R=2`
+  (not `6`), so `a₁` tracks `R` not `d`, and `a₁` (like `R`) is ADDITIVE under products. ⟹ **`a₁ = R/6` now
+  machine-verified on FOUR explicit geometries: flat torus (`R=0`), `S²` (`d=2`, `a₁=1/3`), `S³` (`d=3`,
+  `a₁=1`), `S²×S¹` (`d=3`, `a₁=1/3`)** — including a product. ⚠ **HONEST (binding):** validates via the
+  explicit product spectrum (carried classical input); does NOT discharge the GENERAL curved `a₁ = R/6` (the
+  manifold heat-kernel-parametrix wall). NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **MERCER (toward `Tr T_K = ∫ K(x,x)`): self-adjointness + `Tr = Σλ` + positivity, for a continuous kernel on
   a compact space — `QIQTH/TraceClass/Mercer.lean`** (**[AF]** std-3, budget 0, 2026-07-14). The final
   geometric-bridge brick, on a compact second-countable `X` with finite measure `μ` and continuous kernel `K`.
