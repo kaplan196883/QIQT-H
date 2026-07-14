@@ -525,6 +525,19 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   ORDER OF ATTACK (easiest→hardest): (iii) [0,1]-Lipschitz + D²F-symm (tractable) → (i) DF 2nd-order Taylor
   (Mathlib Taylor/`Convex.norm_image_sub…`, D³F bounded) → (ii) 2nd-order tube accuracy (the nested Grönwall) →
   assemble `‖r‖≤C‖k‖²` → (B) HasFDerivAt → (C) continuity → (D) `ContDiff² exp_p` unconditional.
+- **2026-07-15 (RUNG 2 cont. — 3c/4 ingredients (iii)+(i) — DONE, PUSHED `b007cef6`, `348a144f`):**
+  (iii) `fderiv2_geodesicField_symm` (`D²F(x) a b = D²F(x) b a`, via Mathlib `ContDiffAt.isSymmSndFDerivAt`) +
+  `expFund_two_pt_diff_Icc` (the `[0,1]`-uniform first-variation Lipschitz, lifting `expFund_two_pt_diff`'s internal
+  Grönwall from `t=1`, same constant); (i) `geodesicField_DF_second_order_taylor`
+  (`‖DF(y)−DF(x)−D²F(x)(y−x)‖ ≤ L‖y−x‖²` on the tube ball, via `Convex.norm_image_sub_le_of_norm_fderiv_le'` on the
+  segment + `D²F` Lipschitz `expJet_fderiv2_lipschitzOnWith`). **(ii) NEXT (last ingredient) — decomposes cleanly,
+  NOT as hard as feared:** the tube residual `W(t)=Y_{v+k}(t)−Y_v(t)−Φ_v(t)(ιk)` has `W(0)=0`,
+  `W'=DF(Y_v)W + r` with `‖r‖≤C‖k‖²` from (ii-a) `F`'s OWN `C²` Taylor remainder (a DIRECT MIRROR of (i) with `DF`
+  Lipschitz instead of `D²F`) + (ii-b) the first-order tube Lipschitz `‖Y_{v+k}(t)−Y_v(t)‖≤C‖k‖`
+  (`geodesic_twopoint_gronwall`), then (ii-c) the already-built `gronwall_vec_residual` (may need a `[0,1]`-uniform
+  variant) ⟹ `‖W(t)‖≤C‖k‖²`. Then ASSEMBLE `‖r‖≤C‖k‖²` (r's DF-difference = `D²F(Y_v)(ΔY)+O(‖ΔY‖²)` [i],
+  `ΔY=Φ_v(ιk)+O(‖k‖²)` [ii], `D²F(Y_v)(Φ_v(ιk),Φ_v(ιh))=Θ^{hk}` [iii-symmetry]) → (B)/(C)/(D) ⟹ `ContDiff² exp_p`
+  UNCONDITIONAL.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
