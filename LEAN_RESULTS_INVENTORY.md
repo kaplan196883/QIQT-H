@@ -1653,6 +1653,26 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **THE TRACE-CLASS / SCHATTEN API (heat-kernel infrastructure layer L5, built ourselves, COMPLETE) —
+  `QIQTH/TraceClass/{HilbertSchmidt,Trace,Cyclic,Spectral}.lean`** (**[AF]** std-3, budget 0, 2026-07-14,
+  commits `c9a943e8`/`335d88ab`/`37a8ed45`/`517561f4`). The one big missing infinite-dimensional
+  functional-analysis layer, built brick-by-brick on Mathlib's `HilbertBasis` (Mathlib has the finite-dim
+  trace only). **T1 — Hilbert–Schmidt:** `hsNormSqE b T = ∑' ‖T bᵢ‖²` with ★ `hsNormSqE_basis_indep`
+  (basis-independence, unconditional in `ℝ≥0∞` via the Parseval double-sum swap) + `hsNormSqE_adjoint`
+  (`‖T‖_HS=‖T⋆‖_HS`) + the ideal bound. **T2 — trace-class + the trace:** `IsTraceClass T := ∃ A B HS,
+  T=A⋆∘B`; `traceE b T = ∑'⟪bᵢ,T bᵢ⟫` with ★ `traceE_basis_indep` (polarization) + `traceE_eq_hsInner`,
+  linearity, adjoint. **T3 — ideal + cyclicity:** ★★ `traceE_comp_comm` (`Tr(AB)=Tr(BA)`, `A` trace-class
+  `B` bounded, via `traceE_comp_comm_hs` HS–HS Fubian relabel + the ideal `comp_right/left_bounded`).
+  **T4 — McKean–Singer:** given an eigenbasis `A bᵢ = μᵢ•bᵢ`, ★★★ `traceE_eq_tsum_eigenvalues`
+  (`Tr A = ∑' μᵢ`, unconditional) + `mckean_singer_heatTrace` (`Tr e^{−tΔ} = Σ e^{−λt}`) +
+  `isTraceClass_of_summable_eigenvalues` (the `Summable μ ⟹` trace-class direction, ℓ²-diagonal
+  √μ-multiplier). Genuine upstream-worthy infinite-dim trace-class API; closes layer L5 of
+  `HEAT_KERNEL_FULL_INFRASTRUCTURE_PLAN.md`. ⚠ **HONEST (binding):** self-contained functional analysis; T4
+  CARRIES the eigenbasis as a HYPOTHESIS (the discrete spectrum = the L3/Rellich manifold-analysis wall, NOT
+  supplied here). Does NOT build the manifold heat kernel or discharge the general `a₁=R/6` (needs L1+L3);
+  `a₁=R/6` stays VALIDATED on `S²`, not generally discharged. NOT the conjecture, NOT the strong principle,
+  NOT QG.
+
 - **THE FLAT-TORUS HEAT TRACE (breaking the heat-kernel wall for one explicit geometry) —
   `QIQTH/FlatTorusHeatKernel.lean`** (**[AF]** std-3, budget 0, 2026-07-14, commit `92350369`). The heat
   trace of `e^{tΔ}` on the flat circle `ℝ/ℤ` — the ONE geometry where the heat kernel is fully explicit

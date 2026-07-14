@@ -38,9 +38,11 @@ directly** and prove its short-time expansion — which is the tower below.
 - **L4 — Heat kernel. ✅ (abstract half ours).** `e^{−tΔ}` ✅ (**built** — `HeatSemigroup.lean`: the
   abstract C₀-semigroup + generator `−A`). Then the smooth kernel `K_t(x,y) = Σ e^{−λt} φᵢ(x)φᵢ(y)` via
   Sobolev embedding + Weyl-law convergence. — *Reachable once L3 gives smooth eigenfunctions.*
-- **L5 — Trace-class + trace. 🔨 BUILD OURSELVES (self-contained).** A Schatten/trace-class API →
-  `Tr e^{−tΔ} = Σ e^{−λt} = ∫ K_t(x,x)` (McKean–Singer). — *Pure functional analysis, NO manifold/PDE
-  needed — the ONE big missing layer we can build in bricks and contribute upstream. Sub-plan below.*
+- **L5 — Trace-class + trace. ✅ DONE (built ourselves, T1–T4, axiom-free).** A Schatten/trace-class API →
+  `Tr e^{−tΔ} = Σ e^{−λt}` (McKean–Singer). — *Pure functional analysis, NO manifold/PDE needed — the ONE
+  big missing layer we built in bricks (upstream-worthy): `QIQTH/TraceClass/{HilbertSchmidt,Trace,Cyclic,
+  Spectral}.lean`. **Complete.** ⚠ the spectral bridge (T4) carries the eigenbasis as a HYPOTHESIS — the
+  discrete spectrum is exactly L3, not supplied here. Sub-plan below, all four bricks landed.*
 - **L6 — Short-time expansion → `a₁ = R/6`. ✅ (coefficient algebra ours).** `K_t(x,x) ~ (4πt)^{−d/2}Σaₖtᵏ`
   via the transport recursion — **built** (`DeWittDiagonal.lean`: `u₁(x,x)=R/6`; `CoordinateCurvature`,
   `HeatCoeffDetermination`). — *The top; needs the kernel below it to feed it.*
@@ -66,11 +68,14 @@ infinite-dim trace-class. Phased bricks (each axiom-free, green):
   `|Tr T| ≤ ‖T‖₁` (trace norm). Trace-class ⊆ HS ⊆ compact.
 - **T3 — Ideal + cyclicity.** `A` trace-class, `B` bounded ⟹ `AB, BA` trace-class; ★ `Tr(AB) = Tr(BA)`;
   `Tr` linear; `Tr T⋆ = conj (Tr T)`.
-- **T4 — Positive discrete-spectrum ⟹ `Tr = Σλ`.** For positive self-adjoint `A` with an eigenbasis
-  `{φᵢ, λᵢ}` (from L3, carried as hypothesis until then): `A` trace-class ⟺ `Summable λ`, and
-  `Tr A = ∑' λᵢ` — the McKean–Singer bridge; specializes to `Tr e^{−tΔ} = Σ e^{−λt}` (feeds L5→L6).
+- **T4 — Positive discrete-spectrum ⟹ `Tr = Σλ`. ✅ `517561f4`.** For `A` with an eigenbasis
+  `A(bᵢ)=μᵢ•bᵢ` (from L3, carried as hypothesis `hA` until then): `traceE_eq_tsum_eigenvalues` gives
+  `Tr A = ∑' μᵢ` unconditionally; `isTraceClass_of_summable_eigenvalues` gives the `Summable μ ⟹` trace-class
+  direction (ℓ²-diagonal √μ-multiplier); `mckean_singer_heatTrace` specializes to `Tr e^{−tΔ} = Σ e^{−λt}`
+  (feeds L5→L6). `re_traceE_eq_tsum_eigenvalues` for the real part.
 
-**Value:** T1–T4 give Mathlib a genuine trace-class API (upstream-worthy) and close the L5 layer. ⚠ Even
+**Status: L5 COMPLETE.** T1 `c9a943e8` · T2 `335d88ab` · T3 `37a8ed45` · T4 `517561f4` — all axiom-free,
+budget 0. T1–T4 give Mathlib a genuine trace-class API (upstream-worthy) and close the L5 layer. ⚠ Even
 with L5 done, the general `a₁=R/6` still waits on L1 + L3 (the manifold-analysis walls) — L5 unblocks the
 *trace/spectral* side, not the *manifold-existence* side.
 
@@ -80,9 +85,18 @@ with L5 done, the general `a₁=R/6` still waits on L1 + L3 (the manifold-analys
 
 The **whole** tower is NOT loopable by us: L1/L3 are community-scale analysis on the upstream L0 geometry.
 The **loopable** part is exactly **L5 (the trace-class API, T1→T4)** — self-contained, brick-shaped, ours to
-build. The loop drives T1→T4 to completion, each an axiom-free green brick under the standard discipline,
-then **checkpoints at the L1/L3 manifold-analysis wall** (records the exact missing pieces, does NOT force,
-NEVER axiom-izes) and stops. L2/L4/L6 are already ours; L0 is tracked upstream.
+build. **DONE 2026-07-14:** the loop drove T1→T4 to completion, each an axiom-free green brick under the
+standard discipline, and **stopped at the L1/L3 manifold-analysis wall** (recorded below, not forced, not
+axiom-ized). L2/L4/L6 are already ours; L0 is tracked upstream.
+
+**WHERE THE TOWER STANDS (2026-07-14).** OURS/DONE: L2 machinery, L4 abstract semigroup+generator, L5
+trace-class API (T1–T4), L6 coefficient algebra, L0 coordinate `R`. UPSTREAM (WIP, tracked): L0 Riemannian
+tensors. **THE REMAINING WALLS — L1 + L3 (community-scale, NOT buildable by us):** L1 = `L²(M)`/Sobolev
+`Hᵏ(M)` on a manifold vs the Riemannian volume measure (needs L0's volume + charts + partition of unity);
+L3 = Gårding's inequality → elliptic regularity → Rellich–Kondrachov compact embedding ⟹ **discrete spectrum
++ smooth eigenfunctions** (nothing exists in Mathlib; this is the input T4 CARRIES as a hypothesis). Only once
+L1+L3 exist and are assembled with L2/L4/L5/L6 does the general `a₁=R/6` become a theorem. Until then it stays
+VALIDATED on the specific cracks (`S²`, derived at coefficient level three ways), not generally discharged.
 
 ## Firewall (binding)
 
