@@ -7,6 +7,42 @@ algebra LA1′). Companion to `ADSCFT_GAP_ANALYSIS.md`. This document exists bec
 assessments UNDER-credited the repository; it states the position at full credit, with the honest
 line drawn where the roadmap draws it.
 
+## ★ UPDATE 2026-07-15 — heat-kernel front advanced · curvature substrate confirmed IN-REPO · the wall is the manifold parametrix
+
+Refines the heat-kernel / (1/6−ξ) items below (which framed scalar `R` as merely a Mathlib-upstream effort
+to "watch/contribute to"):
+
+- **The curvature substrate is BUILT IN-REPO (not just upstream).** An audit (2026-07-15) confirmed the repo has
+  carried a full differential-geometry/GR suite since **June 2026**: `Curvature.lean` (component
+  `christoffel/riemann/ricci/scalarCurv/einsteinTensor` + `riemann_first_bianchi`, `second_bianchi`,
+  `second_bianchi_contracted`, `twice_contracted_bianchi`), `ManifoldCurvature.lean` (coordinate-free Riemann
+  curvature endomorphism + tensoriality), `LeviCivita.lean` (Koszul-formula characterisation),
+  `PseudoRiemannian.lean`, `ChristoffelSmooth.lean` (C∞ regularity of `riemann`/`ricci`/`scalarCurv`),
+  `Geodesic.lean`, `EinsteinFieldEquation.lean` (`∇^μG_{μν}=0` → `f=−½R+Λ`). So "the (1/6−ξ) coefficient is
+  gated on Mathlib's own diff-geo frontier — watch/contribute upstream" (item 3 below) is **partly stale**: the
+  repo computes `R` (component + coordinate-free) itself. This session's `CoordinateCurvature.lean` was UNIFIED to
+  that base via `CurvatureBridge.lean` (`ffb88889`, `scalarCurvature_bridge` — jet-form = field-form, one canonical
+  base); the redundant `CoordinateFreeCurvature.lean` was reverted (`a3a42830`).
+- **The heat-kernel / Seeley–DeWitt front moved (all [AF] std-3, pushed):** `a₁ = R/6` **VALIDATED on four
+  explicit geometries** via explicit spectra — flat torus (`R=0`), `S²` (`a₁=1/3`), `S³` (`a₁=1`), `S²×S¹`
+  (`a₁=1/3`, product additivity); `a₂` and `a₃` Seeley–DeWitt coefficient **constants DETERMINED**
+  (`a₂=(1/360)(5R²−2|Ric|²+2|Rm|²+12ΔR)`, `α=1/72` self-contained from product-multiplicativity + `a₁`; `a₃`'s
+  reducible weight-6 coefficients likewise — all matching Gilkey); and a **trace-class / heat-trace operator
+  machine** built (absent from Mathlib): the trace-class API (HS, basis-independent trace, cyclicity, McKean–Singer
+  `Tr=Σλ`), compact spectral eigenbasis + `HS⟹compact` + resolvent bridge, integral operators `L²`-kernel⟹HS/compact,
+  and Mercer.
+- **The wall, now precise:** the genuine residue is the **manifold heat-kernel PARAMETRIX** — constructing the
+  smooth kernel `K_t(x,y)` on a general Riemannian manifold and proving its short-time diagonal expansion for an
+  ARBITRARY metric (needs the Riemannian-volume/Sobolev-on-`M` layer + the parametrix/Levi iteration). It is NOT
+  the curvature tensor (built) or the abstract Levi-Civita/Bianchi (built).
+
+⚠ **HONEST (binding):** `a₁ = R/6` is **VALIDATED on the explicit-spectrum geometries + its coefficient constants
+DETERMINED**, NOT generally discharged — so "the a₁ analysis-half DERIVED" (item 2 of *What we have*) and the
+(1/6−ξ)→numerical-G blocker (item 3 of *What remains*) still stand as OPEN for the general curved case, now gated
+precisely on the parametrix rather than on scalar `R`. The DY7 conjecture is unchanged (conditional theorem; input
+#3 open). See `LEAN_RESULTS_INVENTORY.md` + `HEAT_KERNEL_FULL_INFRASTRUCTURE_PLAN.md` + the ★ UPDATE block in
+`DUALITY_ROADMAP.md`.
+
 ## What we have — at full credit
 
 1. **The complete verified induced-gravity stack, end to end — and it is NOT merely linearized
@@ -76,8 +112,10 @@ line drawn where the roadmap draws it.
 2. **The Srednicki scaling** `#{active modes} ∝ A` — characterized as UN-CARRIABLE (carrying the
    count carries the theorem); Williamson is done, the correlation-decay asymptotics + continuum
    limit remain.
-3. **The (1/6−ξ) coefficient → numerical G** — gated on the ecosystem-wide Riemannian
-   heat-kernel/Seeley–DeWitt gap (watch/contribute to Mathlib's diff-geo effort).
+3. **The (1/6−ξ) coefficient → numerical G** — the general curved `a₁=R/6` is now gated precisely on the
+   **manifold heat-kernel PARAMETRIX** (kernel + short-time expansion for a general metric), NOT on scalar `R`:
+   the curvature substrate is built in-repo and `a₁=R/6` is validated on 4 explicit geometries + the `a₂`/`a₃`
+   coefficient constants determined (see the ★ UPDATE 2026-07-15 block above). Still open for the general case.
 4. **`hTkk`** — the physical wedge-smearing localization map (reduced to a calibrated rank-one
    ansatz; `IsPhysicalWedgeMode` named; HT plan open).
 5. **Interacting matter** (SM/YM — contains a Clay problem) and the CPSUV escape for interacting
