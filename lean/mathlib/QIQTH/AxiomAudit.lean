@@ -10064,6 +10064,21 @@ namespace QIQTH.AxiomAudit
 -- the full Q^{hk} on [0,1], does NOT give ContDiff² exp_p (needs full Q^{hk} + the parameter Grönwall), NOT κ=1/6,
 -- NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet2Fund_local
+-- ★ PARAMETRIX P1 RUNG 2 (3b, FULL [0,1]) — the Jet₂ second-variation fundamental solution Q^{hk} on [0,1]
+-- (ExpMapContDiff2.lean).  expJet2Fund: ∃Q, Q 0 = 0 ∧ ContinuousOn Q (Icc 0 1) ∧ [integral form] ∧ ∀t∈Icc 0 1,
+-- HasDerivWithinAt Q (DF(Y_v t)(Q t)+expJet2Rhs …) (Icc 0 1) t — the full solution of the vector inhomogeneous
+-- Jet₂ ODE Q'=DF(Y_v t)·Q + Θ^{hk}, Q(0)=0, the direct analog of expJetFund for the 2nd variation.  Built via
+-- expJet2Fund_shifted (arbitrary vector IC x₀, IsPicardLindelof centred at x₀, ball radius a=2(KdF‖x₀‖T+CθT)+1
+-- affine) → expJet2Fund_shifted_integral (FTC-2) → expJet2Fund_glue (partition induction, endpoint-matching
+-- concatenation — NO right-composition; the global source Θ pastes directly via integral_add_adjacent_intervals)
+-- → this capstone (N≥2(KdF+1), FTC-1).  expJet2Field_continuousOn = field continuity helper.  HONEST: this BUILDS
+-- Q^{hk} on [0,1]; it does NOT yet give ContDiff² exp_p — that needs 3c/4 (the parameter-residual Grönwall
+-- S_h=Φ_{v+h}−Φ_v−Q_v(h)=o(‖h‖) ⟹ v↦Φ_v(1) is C¹, then discharge expMap_contDiffOn_two_of_fderiv_contDiffOn_one).
+-- NOT κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2Fund_shifted
+#print axioms QIQTH.ExpMap.expJet2Field_continuousOn
+#print axioms QIQTH.ExpMap.expJet2Fund_shifted_integral
+#print axioms QIQTH.ExpMap.expJet2Fund
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
