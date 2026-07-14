@@ -10093,6 +10093,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.gronwall_vec_residual
 #print axioms QIQTH.ExpMap.expJet2_residual_hasDerivWithinAt
 #print axioms QIQTH.ExpMap.expJet2_residual_bound
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, remainder-bound ingredient iii) — D²F symmetry + [0,1] first-var Lipschitz
+-- (ExpMapContDiff2.lean).  fderiv2_geodesicField_symm: D²F(x) a b = D²F(x) b a (Mathlib
+-- ContDiffAt.isSymmSndFDerivAt on the C^∞ geodesic field; IsSymmSndFDerivAt unfolds definitionally to the fderiv
+-- form).  expFund_two_pt_diff_Icc: the [0,1]-UNIFORM first-variation Lipschitz ‖Φv t − Φw t‖ ≤ C‖v−w‖ ∀t∈Icc 0 1
+-- (lifts expFund_two_pt_diff's internal gronwall_Icc01_all bound from t=1 to all t via gronwallBound_zero_le_exp,
+-- same constant).  HONEST: two of the THREE ingredients of the quadratic remainder bound ‖r‖≤C‖k‖²; still MISSING
+-- (i) the DF 2nd-order Taylor remainder + (ii) 2nd-order tube accuracy.  Does NOT alone give ‖r‖≤C‖k‖², NOT
+-- ContDiff² exp_p, NOT κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT conjecture/QG.
+-- [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv2_geodesicField_symm
+#print axioms QIQTH.ExpMap.expFund_two_pt_diff_Icc
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

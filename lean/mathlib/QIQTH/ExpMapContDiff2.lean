@@ -1036,4 +1036,129 @@ theorem expJet2_residual_bound (g gi : Point n → Fin n → Fin n → ℝ)
     intro t ht
     exact expJet2_residual_hasDerivWithinAt g gi hC p v w Φ Φ' Q h k hΦd hΦ'd hQd t ht
 
+/-! ### Rung-2 remainder-bound ingredient (iii): `D²F` symmetry and the `[0,1]`-uniform Lipschitz -/
+
+/-- **The second Fréchet derivative `D²F = fderiv (fderiv F)` of the geodesic field is symmetric.**
+    `geodesicField g gi` is `C^∞` (`contDiff_geodesicField`), hence `C²`, so by Mathlib's
+    `ContDiffAt.isSymmSndFDerivAt` its second derivative is a symmetric bilinear map:
+    `D²F(x)(a)(b) = D²F(x)(b)(a)`.  A supporting ingredient of the Rung-2 quadratic remainder bound
+    `‖r(t)‖ ≤ C‖k‖²` (`THE_EXP_JETS_PLAN.md`); the mixed second partials of `F` commute. -/
+theorem fderiv2_geodesicField_symm (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x a b : Point n × Point n) :
+    (fderiv ℝ (fderiv ℝ (geodesicField g gi)) x) a b
+      = (fderiv ℝ (fderiv ℝ (geodesicField g gi)) x) b a :=
+  ((contDiff_geodesicField g gi hC).contDiffAt.isSymmSndFDerivAt le_top) a b
+
+set_option maxHeartbeats 2000000 in
+/-- **The `[0,1]`-UNIFORM first-variation Lipschitz bound.**  Same hypotheses as
+    `expFund_two_pt_diff` (which concludes only at `t = 1`), but the Lipschitz-in-`v` bound holds
+    UNIFORMLY for every `t ∈ [0,1]` with the SAME constant.  Its proof runs the identical difference
+    Grönwall (`gronwall_Icc01_all`) giving `‖Φv t − Φw t‖ ≤ gronwallBound 0 Kstar b t` on all of
+    `[0,1]`, then bounds `gronwallBound 0 Kstar b t ≤ b·e^{Kstar}` uniformly in `t ≤ 1`
+    (`gronwallBound_zero_le_exp`) — the `t = 1` constant is an upper bound for every `t ≤ 1`.
+
+    Supporting ingredient of the Rung-2 remainder bound `‖r(t)‖ ≤ C‖k‖²` (`THE_EXP_JETS_PLAN.md`):
+    callers need the first-variation Lipschitz control on the whole time interval, not just the
+    endpoint. -/
+theorem expFund_two_pt_diff_Icc (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v w : Point n) (Kf Ldf : NNReal) (Kstar : ℝ) (hKstar0 : 0 ≤ Kstar)
+    (hLipF : LipschitzOnWith Kf (geodesicField g gi)
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hLipDF : LipschitzOnWith Ldf (fderiv ℝ (geodesicField g gi))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hKstarv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ Kstar)
+    (hKstarw : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)‖ ≤ Kstar)
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hw : ‖w‖ ≤ expRho g gi hC p)
+    (Φv Φw : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦv0 : Φv 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦw0 : Φw 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦvd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φv (expJetPsi g gi hC p v t (Φv t)) (Set.Icc (0 : ℝ) 1) t)
+    (hΦwd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φw (expJetPsi g gi hC p w t (Φw t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φv t - Φw t‖
+      ≤ ((Ldf : ℝ) * Real.exp (Kf : ℝ) * Real.exp Kstar * Real.exp Kstar) * ‖v - w‖ := by
+  have hC₀ := expConst_nonneg g gi hC p
+  set Rb : ℝ := expConst g gi hC p * expRho g gi hC p with hRbdef
+  set S : Set (Point n × Point n) := Metric.closedBall ((p, 0) : Point n × Point n) Rb with hSdef
+  obtain ⟨hY0v, hYdv, hconfv⟩ := expTube_spec g gi hC p v hv
+  obtain ⟨hY0w, hYdw, hconfw⟩ := expTube_spec g gi hC p w hw
+  have hIcc_Ioo : ∀ t ∈ Set.Icc (0 : ℝ) 1, t ∈ Set.Ioo (-2 : ℝ) 2 :=
+    fun t ht => ⟨by linarith [ht.1], by linarith [ht.2]⟩
+  -- both tubes lie in the ball `S` on `[0,1]`.
+  have hSv : ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p v t ∈ S := by
+    intro t ht; rw [hSdef, Metric.mem_closedBall, dist_eq_norm]
+    calc ‖expTube g gi hC p v t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v‖ := hconfv t ht
+      _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hv hC₀
+  have hSw : ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p w t ∈ S := by
+    intro t ht; rw [hSdef, Metric.mem_closedBall, dist_eq_norm]
+    calc ‖expTube g gi hC p w t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖w‖ := hconfw t ht
+      _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hw hC₀
+  -- single-solution norm bound `‖Φw t‖ ≤ e^{Kstar}`.
+  have hΦwbound : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φw t‖ ≤ Real.exp Kstar := by
+    have hall := gronwall_Icc01_all Φw (fun t => expJetPsi g gi hC p w t (Φw t)) 1 Kstar 0
+      hΦwd (by rw [hΦw0]; exact ContinuousLinearMap.norm_id_le)
+      (fun t ht => by
+        rw [add_zero]
+        exact (expJetPsi_norm_le g gi hC p w t (Φw t)).trans
+          (mul_le_mul_of_nonneg_right (hKstarw t ht) (norm_nonneg _)))
+    intro t ht
+    have h := hall t ht
+    rw [gronwallBound_ε0, one_mul] at h
+    refine h.trans (Real.exp_le_exp.mpr ?_)
+    calc Kstar * t ≤ Kstar * 1 := mul_le_mul_of_nonneg_left ht.2 hKstar0
+      _ = Kstar := mul_one _
+  -- two-point tube separation `‖Y_v t − Y_w t‖ ≤ ‖v−w‖·e^{Kf}`.
+  have hdist0 : dist (expTube g gi hC p v 0) (expTube g gi hC p w 0) = ‖v - w‖ := by
+    rw [hY0v, hY0w, dist_eq_norm, Prod.mk_sub_mk, sub_self, Prod.norm_def, norm_zero,
+      max_eq_right (norm_nonneg _)]
+  have htwopoint := geodesic_twopoint_gronwall g gi (S := S) (K := Kf) hLipF
+    (fun t ht => hYdv t (hIcc_Ioo t ht)) (fun t ht => hYdw t (hIcc_Ioo t ht)) hSv hSw
+  have hYvw : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p v t - expTube g gi hC p w t‖ ≤ ‖v - w‖ * Real.exp (Kf : ℝ) := by
+    intro t ht
+    have h := htwopoint t ht
+    rw [hdist0, dist_eq_norm] at h
+    refine h.trans (mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr ?_) (norm_nonneg _))
+    calc (Kf : ℝ) * t ≤ (Kf : ℝ) * 1 := mul_le_mul_of_nonneg_left ht.2 (by positivity)
+      _ = (Kf : ℝ) := mul_one _
+  -- Lipschitz of `DF` in the space variable ⟹ two-point `DF`-difference bound.
+  have hDFvw : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+          - fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)‖
+        ≤ (Ldf : ℝ) * (‖v - w‖ * Real.exp (Kf : ℝ)) := by
+    intro t ht
+    have hd := hLipDF.dist_le_mul (expTube g gi hC p v t) (hSv t ht)
+      (expTube g gi hC p w t) (hSw t ht)
+    rw [dist_eq_norm, dist_eq_norm] at hd
+    exact hd.trans (mul_le_mul_of_nonneg_left (hYvw t ht) (by positivity))
+  -- the inhomogeneous constant `b` and the difference Grönwall.
+  set b : ℝ := (Ldf : ℝ) * ‖v - w‖ * Real.exp (Kf : ℝ) * Real.exp Kstar with hbdef
+  have hb0 : 0 ≤ b := by rw [hbdef]; positivity
+  have hEall := gronwall_Icc01_all (fun t => Φv t - Φw t)
+    (fun t => expJetPsi g gi hC p v t (Φv t) - expJetPsi g gi hC p w t (Φw t))
+    0 Kstar b
+    (fun t ht => (hΦvd t ht).sub (hΦwd t ht))
+    (by simp [hΦv0, hΦw0])
+    (fun t ht => by
+      show ‖expJetPsi g gi hC p v t (Φv t) - expJetPsi g gi hC p w t (Φw t)‖
+          ≤ Kstar * ‖Φv t - Φw t‖ + b
+      rw [expJetPsi_apply, expJetPsi_apply]
+      refine opFieldDiff_bound (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+        (fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)) _ _ (hKstarv t ht) ?_
+      rw [hbdef]
+      refine (mul_le_mul (hDFvw t ht) (hΦwbound t ht) (norm_nonneg _) (by positivity)).trans ?_
+      exact le_of_eq (by ring))
+  -- lift the per-`t` Grönwall bound to the uniform constant (monotone in `t ≤ 1`).
+  intro t ht
+  refine (hEall t ht).trans
+    ((gronwallBound_zero_le_exp Kstar b t hKstar0 hb0 ht.1 ht.2).trans ?_)
+  rw [hbdef]; exact le_of_eq (by ring)
+
 end QIQTH.ExpMap
