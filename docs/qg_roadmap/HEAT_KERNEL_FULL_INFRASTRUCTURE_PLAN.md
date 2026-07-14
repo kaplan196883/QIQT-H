@@ -40,7 +40,7 @@ directly** and prove its short-time expansion — which is the tower below.
   (L3b) the genuine manifold-analytic input *the resolvent `(Δ+1)⁻¹` is compact* (= Rellich–Kondrachov;
   still the community wall). Building L3a turns "the eigenbasis" from a monolithic wall into exactly the
   single labelled input "resolvent-compact", pushing the irreducible analysis as far up as it goes.
-- **L3a — Compact self-adjoint ⟹ eigen-`HilbertBasis`. 🔨 BUILDING (self-contained, manifold-free).**
+- **L3a — Compact self-adjoint ⟹ eigen-`HilbertBasis`. ✅ DONE (`e571c0b7`, self-contained, manifold-free).**
   Mathlib HAS the pieces (`InnerProductSpace/Spectrum.lean`: `orthogonalComplement_iSup_eigenspaces_eq_bot`
   for compact self-adjoint = eigenspaces dense; `finite_dimensional_eigenspace`; `orthogonalFamily_eigenspaces`;
   `orthonormal_sigma_orthonormal`; `exists_hilbertBasis`; `mkOfOrthogonalEqBot`) but does NOT ASSEMBLE the
@@ -48,9 +48,22 @@ directly** and prove its short-time expansion — which is the tower below.
   `compactSelfAdjoint_hasEigenbasis` + `compactSelfAdjoint_traceE_eq_tsum_eigenvalues`) DISCHARGES T4's
   carried eigenbasis hypothesis for every compact self-adjoint operator — upstream-worthy. ⚠ removes the
   eigenbasis assumption only for the COMPACT self-adjoint case; the manifold input (L3b) is untouched.
-- **L3b — Resolvent of `Δ` is compact (Rellich–Kondrachov). ⛔ community wall.** `(Δ+1)⁻¹` compact on
-  `L²(M)` — the one genuine manifold-analytic input that, fed to L3a, delivers `Δ`'s discrete spectrum +
-  eigenbasis. Nothing in Mathlib; needs L1 (Sobolev-on-`M`) + the compact-embedding theorem.
+- **L3a′ — Hilbert–Schmidt ⟹ compact. 🔨 BUILDING (`QIQTH/TraceClass/Compact.lean`).** `IsHilbertSchmidt ⟹
+  IsCompactOperator` (op-norm limit of finite-rank truncations) ⟹ `IsTraceClass ⟹ IsCompactOperator` ⟹ the
+  capstone *trace-class self-adjoint ⟹ Tr = Σλ with NO eigenbasis/compactness hypothesis*. Completes the
+  standard inclusion trace-class ⊆ HS ⊆ compact.
+- **L3c — Resolvent bridge: compact resolvent ⟹ operator eigenbasis + heat trace. 🔨 QUEUED (manifold-free).**
+  `QIQTH/TraceClass/ResolventSpectrum.lean`: for `R = (Δ+1)⁻¹` COMPACT + self-adjoint + INJECTIVE, L3a gives
+  `R bᵢ = ρᵢ bᵢ` with `ρᵢ ≠ 0` (injectivity), so `λᵢ := ρᵢ⁻¹ − 1` are the eigenvalues of `Δ`; and — given
+  Weyl summability `Σ e^{−tλᵢ} < ∞` (carried) — the diagonal heat operator is trace-class with
+  `Tr e^{−tΔ} = Σ e^{−tλᵢ}`. Packages the reduction: the discrete spectrum + heat trace are DERIVED from
+  "R compact", not assumed. Abstractly, compact ⟹ `ρᵢ → 0` ⟹ `λᵢ → ∞` (discreteness) is also free; only the
+  RATE (summability = Weyl) stays a manifold input.
+- **L3b — Resolvent of `Δ` is compact (Rellich–Kondrachov). ⛔ THE community wall (now the ONLY one on the
+  spectral side).** `(Δ+1)⁻¹` compact on `L²(M)` — the one genuine manifold-analytic input that, fed to
+  L3a+L3c, delivers `Δ`'s discrete spectrum, eigenbasis, and heat trace as THEOREMS. Nothing in Mathlib;
+  needs L1 (Sobolev-on-`M`) + the compact-embedding theorem. **This single statement is the whole residue of
+  the spectral side.**
 - **L4 — Heat kernel. ✅ (abstract half ours).** `e^{−tΔ}` ✅ (**built** — `HeatSemigroup.lean`: the
   abstract C₀-semigroup + generator `−A`). Then the smooth kernel `K_t(x,y) = Σ e^{−λt} φᵢ(x)φᵢ(y)` via
   Sobolev embedding + Weyl-law convergence. — *Reachable once L3 gives smooth eigenfunctions.*
