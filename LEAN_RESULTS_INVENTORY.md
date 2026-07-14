@@ -1653,6 +1653,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **HILBERT–SCHMIDT ⟹ COMPACT + the trace-class capstone (completes trace-class ⊆ HS ⊆ compact, manifold-free)
+  — `QIQTH/TraceClass/Compact.lean`** (**[AF]** std-3, budget 0, 2026-07-14). ★★ `IsHilbertSchmidt.isCompactOperator`
+  — every Hilbert–Schmidt operator is compact: `T` is the operator-norm limit of its finite-rank truncations
+  `F S x = ∑_{i∈S} ⟪bᵢ,x⟫ • T bᵢ` (each compact by corestricting to the finite-dim codomain
+  `span (T '' (b '' S))` + `isCompactOperator_of_locallyCompactSpace_dom`; `‖T − F S‖ ≤ √(∑_{i∉S}‖T bᵢ‖²) → 0`
+  via `tendsto_tsum_compl_atTop_zero` + a tail ℓ² Cauchy–Schwarz `tsum_mul_le_sqrt` + Parseval; assembled with
+  `isCompactOperator_of_tendsto`). `IsTraceClass.isCompactOperator` — trace-class ⊆ HS ⊆ compact (via T2's
+  `IsTraceClass.isHilbertSchmidt`). ★★★ `traceClass_selfAdjoint_traceE_eq_tsum_eigenvalues` — **a trace-class
+  self-adjoint operator's trace is the sum of its eigenvalues, with NEITHER a carried eigenbasis NOR a carried
+  compactness hypothesis**: compactness comes from HS, the eigenbasis from L3a
+  (`compactSelfAdjoint_traceE_eq_tsum_eigenvalues`). ⟹ the honest ceiling of the manifold-free spectral side:
+  every eigenbasis/compactness assumption on the trace side is now discharged. ⚠ **HONEST (binding):** pure
+  functional analysis; the manifold-analytic input "resolvent of `Δ` is compact" (Rellich–Kondrachov = L3b) is
+  UNTOUCHED, still the community wall. Does NOT build the manifold heat kernel or discharge the general
+  `a₁=R/6` (still needs L1 + L3b); `a₁=R/6` stays VALIDATED on `S²`, not generally discharged. NOT the
+  conjecture, NOT the strong principle, NOT QG.
+
 - **COMPACT SELF-ADJOINT ⟹ ORTHONORMAL EIGEN-HilbertBasis (the abstract core of the L3 wall, manifold-free)
   — `QIQTH/TraceClass/CompactSpectral.lean`** (**[AF]** std-3, budget 0, 2026-07-14). The L3 wall ("discrete
   spectrum + eigenbasis") splits into an ABSTRACT Hilbert-space fact and a manifold-analytic input; this

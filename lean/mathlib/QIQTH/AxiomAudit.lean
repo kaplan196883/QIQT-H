@@ -11708,5 +11708,20 @@ namespace QIQTH.AxiomAudit
 -- conjecture/strong-principle/QG.  [AF] std-3.
 #print axioms QIQTH.TraceClass.compactSelfAdjoint_hasEigenbasis
 #print axioms QIQTH.TraceClass.compactSelfAdjoint_traceE_eq_tsum_eigenvalues
+-- L3a′ — HILBERT–SCHMIDT ⟹ COMPACT (completes trace-class ⊆ HS ⊆ compact, manifold-free).
+-- IsHilbertSchmidt.isCompactOperator: T is the operator-norm limit of its finite-rank truncations
+-- F S x = ∑_{i∈S} ⟪bᵢ,x⟫•T bᵢ (each compact via finite-dim codomain corestriction +
+-- isCompactOperator_of_locallyCompactSpace_dom; ‖T−F S‖ ≤ √(∑_{i∉S}‖T bᵢ‖²) → 0 by
+-- tendsto_tsum_compl_atTop_zero + tail Cauchy–Schwarz + Parseval; assembled via
+-- isCompactOperator_of_tendsto).  IsTraceClass.isCompactOperator (trace-class ⊆ HS ⊆ compact).
+-- ★★★ traceClass_selfAdjoint_traceE_eq_tsum_eigenvalues: a trace-class self-adjoint operator's trace
+-- is the sum of its eigenvalues, with NO carried eigenbasis and NO carried compactness hypothesis —
+-- both discharged (compactness from HS, eigenbasis from L3a).  HONEST (binding): pure functional
+-- analysis; the manifold input "resolvent of Δ is compact" (Rellich = L3b) is UNTOUCHED, still the wall.
+-- Does NOT build the manifold heat kernel or discharge general a₁=R/6 (still needs L1+L3b); a₁=R/6 stays
+-- VALIDATED on S², not generally discharged.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.IsHilbertSchmidt.isCompactOperator
+#print axioms QIQTH.TraceClass.IsTraceClass.isCompactOperator
+#print axioms QIQTH.TraceClass.traceClass_selfAdjoint_traceE_eq_tsum_eigenvalues
 
 end QIQTH.AxiomAudit
