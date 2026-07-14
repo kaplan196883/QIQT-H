@@ -10079,6 +10079,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet2Field_continuousOn
 #print axioms QIQTH.ExpMap.expJet2Fund_shifted_integral
 #print axioms QIQTH.ExpMap.expJet2Fund
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, residual estimate A) — the Jet₂ residual ODE + vector Grönwall (ExpMapContDiff2.lean).
+-- gronwall_vec_residual: inhomogeneous vector Grönwall on [0,1] — S 0=0, HasDerivWithinAt S (A t (S t)+r t), ‖A t‖≤K,
+-- ‖r t‖≤ρ ⟹ ‖S 1‖≤ρ·e^K (abstract E; wraps gronwall_Icc01_all).  expJet2_residual_hasDerivWithinAt: the residual
+-- ODE identity — for S(t)=Φ'(t)(ιh)−Φ(t)(ιh)−Q(t), S'(t)=DF(Y_v t)(S t)+([DF(Y_w t)−DF(Y_v t)](Φ'(t)(ιh))−Θ^{hk}(t))
+-- (P^h solves the first-variation ODE via clm_apply; map_sub+abel rearrange).  expJet2_residual_bound: the two
+-- combined ⟹ ‖Φ'(1)(ιh)−Φ(1)(ιh)−Q(1)‖ ≤ ρ·e^{Kstar} for any [0,1]-bound ρ on the remainder ‖r‖.  HONEST
+-- CHECKPOINT: this is the residual estimate (A) REDUCED to the quadratic remainder bound ‖r(t)‖≤C‖k‖² — which is
+-- NOT discharged (needs the DF 2nd-order Taylor remainder + 2nd-order tube accuracy [C² geodesic remainder] + the
+-- [0,1]-uniform first-variation Lipschitz + D²F symmetry — the multi-week analytic bulk).  Does NOT give
+-- HasFDerivAt(v↦Φ_v 1)/(B), NOT continuity(C), NOT ContDiff² exp_p(D) — those are conditional on ‖r‖≤C‖k‖².  NOT
+-- κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.gronwall_vec_residual
+#print axioms QIQTH.ExpMap.expJet2_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet2_residual_bound
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

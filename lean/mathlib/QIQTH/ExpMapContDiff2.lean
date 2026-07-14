@@ -859,4 +859,181 @@ theorem expJet2Fund (g gi : Point n → Fin n → Fin n → ℝ)
   have hconst := hFTC.const_add (0 : Point n × Point n)
   exact hconst.congr (fun s hs => hQint s hs) (hQint t ht)
 
+/-! ### Sub-brick 3c — the parameter-residual estimate (the analytic heart of Rung 2)
+
+The map `v ↦ fderiv exp_p v = π ∘ Φ_v(1) ∘ ι` is differentiated in `v`.  For fixed direction `h`
+the first variation is `P^h_v(t) = Φ_v(t)(ι h)`; its parameter-derivative in direction `k` is the
+second variation `Q^{hk}_v(t)` built in `expJet2Fund`.  The Fréchet-derivative little-o reduces to
+the **parameter residual** `S(t) := Φ_{v+k}(t)(ι h) − Φ_v(t)(ι h) − Q^{hk}_v(t)` being `o(‖k‖)`.
+
+This sub-brick lands, `[AF]` and unconditionally green:
+* `expJet2_residual_hasDerivWithinAt` — the **residual ODE** (the Jet₂ analog of Rung 1's residual
+  identity): `S(0) = 0` and `S'(t) = DF(Y_v t)(S t) + r(t)` on `[0,1]`, where the inhomogeneous
+  remainder is `r(t) = [DF(Y_{v+k} t) − DF(Y_v t)](Φ_{v+k}(t)(ι h)) − Θ^{hk}(t)` with
+  `Θ^{hk} = expJet2Rhs …` the 3a source.
+* `gronwall_vec_residual` — a small-context **inhomogeneous vector Grönwall** on `[0,1]`:
+  `S(0) = 0`, `S' = A(S) + r`, `‖A‖ ≤ K`, `‖r‖ ≤ ρ` ⟹ `‖S(1)‖ ≤ ρ·e^{K}`.
+* `expJet2_residual_bound` — the two combined: **`‖S(1)‖ ≤ ρ·e^{Kstar}`** for any `[0,1]`-bound
+  `ρ` on `‖r(t)‖` and Jacobi bound `Kstar` on `‖DF(Y_v t)‖`.  This is the residual estimate (A) of
+  the plan **reduced to the single obligation `‖r(t)‖ ≤ ρ`** — with `ρ = C·‖k‖²` it would close the
+  Fréchet little-o.
+
+## Honest firewall — the exact remaining obstruction
+
+`expJet2_residual_bound` gives the full residual estimate `‖S(1)‖ ≤ ρ·e^{Kstar}` CONDITIONAL on the
+**quadratic remainder bound** `‖r(t)‖ ≤ C·‖k‖²` on `[0,1]`.  That bound is **NOT discharged here** and
+is the wall.  Its leading terms cancel (by symmetry of `D²F`, `Θ^{hk}` equals the linear-in-`k` part
+of the `DF`-difference), leaving a genuine `O(‖k‖²)` remainder, but proving it needs three ingredients
+not yet in the codebase:
+1. a **second-order Taylor remainder for `DF`**, `‖(DF(Y_{v+k}) − DF(Y_v)) − D²F(Y_v)(ΔY)‖ ≤ C‖ΔY‖²`;
+2. **second-order tube accuracy** `‖ (Y_{v+k}−Y_v)(t) − Φ_v(t)(ι k) ‖ ≤ C‖k‖²` (a nested inhomogeneous
+   Grönwall requiring the geodesic field's own `C²` Taylor remainder);
+3. the **`[0,1]`-uniform first-variation Lipschitz** `‖Φ_{v+k}(t)(ι h) − Φ_v(t)(ι h)‖ ≤ C‖k‖`
+   (`expFund_two_pt_diff` currently concludes only at `t = 1`) and **symmetry of `D²F`**
+   (`second_derivative_symmetric`).
+
+These are the multi-week analytic bulk; with them, `‖r‖ ≤ C‖k‖²` feeds `expJet2_residual_bound` to
+give `HasFDerivAt (v ↦ Φ_v(1)(ι h)) (k ↦ Q^{hk}_v(1)) v` (plan step (B)); a second parameter-Grönwall
+for `v ↦ Q^{hk}_v(1)` gives continuity (C); and (B)+(C) feed
+`expMap_contDiffOn_two_of_fderiv_contDiffOn_one` to give `ContDiff² exp_p` unconditionally (D).
+
+⚠ This does NOT reach `ContDiff²` (the remainder bound above is open), NOT `ContDiff³`, NOT `κ = 1/6`,
+NOT a heat-kernel parametrix, NOT `a₁ = R/6`, NOT numerical-`G`, and NOT the conjecture / QG. -/
+
+/-- **Small-context inhomogeneous vector Grönwall on `[0,1]`.**  If `S : ℝ → E` has `S 0 = 0` and
+    right derivative `A t (S t) + r t` within `[0,1]` at each `t ∈ [0,1]`, with `‖A t‖ ≤ K` and
+    `‖r t‖ ≤ ρ` there, then `‖S 1‖ ≤ ρ · e^{K}`.  Wraps `gronwall_Icc01_all` (the norm bound
+    `‖A t (S t) + r t‖ ≤ K·‖S t‖ + ρ` via `ContinuousLinearMap.le_opNorm`) and closes with
+    `gronwallBound_zero_le_exp`.  Abstract in `E` (tiny context) — the Jet₂ analog of the operator
+    Grönwall inside `expFund_two_pt_diff`. -/
+theorem gronwall_vec_residual {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (S r : ℝ → E) (A : ℝ → (E →L[ℝ] E)) (K ρ : ℝ) (hK0 : 0 ≤ K) (hρ0 : 0 ≤ ρ)
+    (hS0 : S 0 = 0)
+    (hderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt S (A t (S t) + r t) (Set.Icc (0 : ℝ) 1) t)
+    (hA : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖A t‖ ≤ K)
+    (hr : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖r t‖ ≤ ρ) :
+    ‖S 1‖ ≤ ρ * Real.exp K := by
+  have hall := gronwall_Icc01_all S (fun t => A t (S t) + r t) 0 K ρ hderiv
+    (by rw [hS0]; simp)
+    (fun t ht => by
+      calc ‖A t (S t) + r t‖ ≤ ‖A t (S t)‖ + ‖r t‖ := norm_add_le _ _
+        _ ≤ K * ‖S t‖ + ρ := by
+            refine add_le_add ?_ (hr t ht)
+            calc ‖A t (S t)‖ ≤ ‖A t‖ * ‖S t‖ := (A t).le_opNorm _
+              _ ≤ K * ‖S t‖ := mul_le_mul_of_nonneg_right (hA t ht) (norm_nonneg _))
+  have h1 : ‖S 1‖ ≤ gronwallBound 0 K ρ 1 := hall 1 (by norm_num [Set.mem_Icc])
+  exact h1.trans (gronwallBound_zero_le_exp K ρ 1 hK0 hρ0 (by norm_num) le_rfl)
+
+set_option maxHeartbeats 1000000 in
+/-- **The Jet₂ residual ODE (residual identity).**  With `Φ` the fundamental solution for parameter
+    `v` and `Φ'` for the perturbed parameter `w` (`= v + k`), and `Q` the second-variation witness of
+    `expJet2Fund` (whose derivative law is `Q'(t) = DF(Y_v t)(Q t) + Θ^{hk}(t)`), the parameter
+    residual `S(t) = Φ'(t)(ι h) − Φ(t)(ι h) − Q(t)` obeys, on `[0,1]`,
+    `S'(t) = DF(Y_v t)(S t) + ([DF(Y_w t) − DF(Y_v t)](Φ'(t)(ι h)) − Θ^{hk}(t))`.
+
+    Proof: `P^h_·(t) = Φ_·(t)(ι h)` solves `(P^h_·)' = DF(Y_· t)(P^h_·)` (differentiate the operator
+    ODE `Φ_·' = Ψ_·(Φ_·)` applied at the fixed vector `ι h`, `HasDerivWithinAt.clm_apply` against a
+    constant); subtracting the three curves and using linearity of `DF(Y_v t)` (`map_sub`) plus
+    `ContinuousLinearMap.sub_apply` rearranges the difference into the `DF(Y_v t)(S) + r` form. -/
+theorem expJet2_residual_hasDerivWithinAt (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v w : Point n)
+    (Φ Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Q : ℝ → (Point n × Point n)) (h k : Point n)
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t)
+    (hΦ'd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ' (expJetPsi g gi hC p w t (Φ' t)) (Set.Icc (0 : ℝ) 1) t)
+    (hQd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Q
+        ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Q t)
+           + expJet2Rhs g gi hC p v Φ h k t) (Set.Icc (0 : ℝ) 1) t)
+    (t : ℝ) (ht : t ∈ Set.Icc (0 : ℝ) 1) :
+    HasDerivWithinAt (fun s => Φ' s (expJetIota h) - Φ s (expJetIota h) - Q s)
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+          (Φ' t (expJetIota h) - Φ t (expJetIota h) - Q t)
+        + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)
+             - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ' t (expJetIota h))
+           - expJet2Rhs g gi hC p v Φ h k t))
+      (Set.Icc (0 : ℝ) 1) t := by
+  -- first variation `P^h_w(t) = Φ'(t)(ι h)` solves `(P^h_w)' = DF(Y_w t)(P^h_w)`.
+  have hP' : HasDerivWithinAt (fun s => Φ' s (expJetIota h))
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)) (Φ' t (expJetIota h)))
+      (Set.Icc (0 : ℝ) 1) t := by
+    have hcl := (hΦ'd t ht).clm_apply
+      (hasDerivWithinAt_const (x := t) (s := Set.Icc (0 : ℝ) 1) (c := expJetIota (n := n) h))
+    simpa only [expJetPsi_apply, ContinuousLinearMap.comp_apply, map_zero, add_zero] using hcl
+  -- first variation `P^h_v(t) = Φ(t)(ι h)` solves `(P^h_v)' = DF(Y_v t)(P^h_v)`.
+  have hP : HasDerivWithinAt (fun s => Φ s (expJetIota h))
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ t (expJetIota h)))
+      (Set.Icc (0 : ℝ) 1) t := by
+    have hcl := (hΦd t ht).clm_apply
+      (hasDerivWithinAt_const (x := t) (s := Set.Icc (0 : ℝ) 1) (c := expJetIota (n := n) h))
+    simpa only [expJetPsi_apply, ContinuousLinearMap.comp_apply, map_zero, add_zero] using hcl
+  -- the natural difference derivative.
+  have hcomb := (hP'.sub hP).sub (hQd t ht)
+  -- rearrange the target derivative into the natural one via linearity.
+  have heq :
+      (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+          (Φ' t (expJetIota h) - Φ t (expJetIota h) - Q t)
+        + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)
+             - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ' t (expJetIota h))
+           - expJet2Rhs g gi hC p v Φ h k t)
+      = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)) (Φ' t (expJetIota h))
+          - (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ t (expJetIota h))
+          - ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Q t)
+             + expJet2Rhs g gi hC p v Φ h k t) := by
+    simp only [map_sub, ContinuousLinearMap.sub_apply]
+    abel
+  rw [heq]
+  exact hcomb
+
+set_option maxHeartbeats 1000000 in
+/-- **The Jet₂ parameter-residual estimate (A), reduced to the remainder bound.**  With the
+    fundamental-solution and second-variation data of `expJet2_residual_hasDerivWithinAt` and the
+    initial conditions `Φ 0 = Φ' 0 = 1`, `Q 0 = 0`, given a `[0,1]`-bound `Kstar` on `‖DF(Y_v t)‖`
+    (`expJet_fderiv_tube_bddAbove`) and a `[0,1]`-bound `ρ` on the remainder
+    `‖[DF(Y_w t) − DF(Y_v t)](Φ'(t)(ι h)) − Θ^{hk}(t)‖`, one has
+    `‖Φ'(1)(ι h) − Φ(1)(ι h) − Q(1)‖ ≤ ρ · e^{Kstar}`.
+
+    Feeds the residual ODE (`expJet2_residual_hasDerivWithinAt`) into the vector Grönwall
+    (`gronwall_vec_residual`).  This is the residual estimate (A) of the Rung-2 plan **reduced to the
+    single obligation `‖r(t)‖ ≤ ρ`**; with `ρ = C·‖k‖²` (the OPEN quadratic remainder bound — see the
+    module firewall) it closes the Fréchet little-o for `v ↦ Φ_v(1)(ι h)`. -/
+theorem expJet2_residual_bound (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v w : Point n)
+    (Φ Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Q : ℝ → (Point n × Point n)) (h k : Point n)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦ'0 : Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hQ0 : Q 0 = 0)
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t)
+    (hΦ'd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ' (expJetPsi g gi hC p w t (Φ' t)) (Set.Icc (0 : ℝ) 1) t)
+    (hQd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Q
+        ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Q t)
+           + expJet2Rhs g gi hC p v Φ h k t) (Set.Icc (0 : ℝ) 1) t)
+    (Kstar ρ : ℝ) (hKstar0 : 0 ≤ Kstar) (hρ0 : 0 ≤ ρ)
+    (hKstar : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ Kstar)
+    (hr : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)
+           - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ' t (expJetIota h))
+         - expJet2Rhs g gi hC p v Φ h k t‖ ≤ ρ) :
+    ‖Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1‖ ≤ ρ * Real.exp Kstar := by
+  refine gronwall_vec_residual (fun s => Φ' s (expJetIota h) - Φ s (expJetIota h) - Q s)
+    (fun t => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)
+        - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ' t (expJetIota h))
+      - expJet2Rhs g gi hC p v Φ h k t)
+    (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) Kstar ρ hKstar0 hρ0
+    ?_ ?_ hKstar hr
+  · -- initial condition `S 0 = 0`.
+    simp only [hΦ0, hΦ'0, ContinuousLinearMap.id_apply, hQ0, sub_self]
+  · -- the residual ODE.
+    intro t ht
+    exact expJet2_residual_hasDerivWithinAt g gi hC p v w Φ Φ' Q h k hΦd hΦ'd hQd t ht
+
 end QIQTH.ExpMap
