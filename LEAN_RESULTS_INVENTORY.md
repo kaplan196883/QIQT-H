@@ -1919,6 +1919,20 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Gilkey invariant for an ARBITRARY metric — that is the manifold heat-kernel PARAMETRIX (the wall). Same
   rigorous status as the `a₁`/`a₂` determinations. NOT the conjecture, NOT the strong principle, NOT QG.
 
+- **★ SURFACE OF REVOLUTION — the first INHOMOGENEOUS curved manifold (NONCONSTANT scalar curvature) —
+  `QIQTH/RevolutionSurface.lean`** (**[AF]** std-3, budget 0, 2026-07-15). `ds² = dr² + (1+r²)² dθ²` (profile
+  `f(r) = 1+r²`). `hasDerivAt_revsurf_h`/`_dh` — `HasDerivAt`-verified that the fed jets are the genuine
+  derivatives of `h = f² = (1+r²)²` (`h' = 4r(1+r²)`, `h'' = 4+12r²`). ★★★ **`revsurf_scalarCurvature`
+  (`scalarCurvature (revGinv r) (revDg r) (revDdg r) = −4/(1+r²)` for all `r`)** — a NONCONSTANT curvature
+  FIELD (`= −2f''/f`; `R(0) = −4`, `R(1) = −2`, `R → 0` as `r → ∞`), computed via `CoordinateCurvature`.
+  `revsurf_curvature_nonconstant` (the values at `r=0` and `r=1` differ ⟹ genuinely inhomogeneous, unlike the
+  constant-curvature sphere/`H²`); `revsurf_curvature_negative`. ⟹ **the repo's curved surfaces now span flat
+  (`R=0`), sphere (`R=+2`), hyperbolic (`R=−2`), and NONCONSTANT (`R = −4/(1+r²)`)** — all component-computed
+  with `HasDerivAt`-verified derivatives. ⚠ **HONEST (binding):** metric field + scalar curvature in ONE global
+  coordinate chart, coordinate/component curvature; NOT the abstract coordinate-free curvature tensor /
+  `RiemannianMetric`-bundle integration (= L0 wall, Mathlib WIP); NOT the general curved heat kernel (parametrix
+  wall). NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **★ THE HYPERBOLIC PLANE `H²` — a curved Riemannian surface of constant NEGATIVE curvature `R = −2`
   (spanning the third curvature sign) — `QIQTH/HyperbolicPlane.lean`** (**[AF]** std-3, budget 0, 2026-07-15).
   The Poincaré upper half-plane with metric `g = diag(1/y², 1/y²)`. `isOpen_uhp` (`{p | 0 < p.2}` is open ⟹

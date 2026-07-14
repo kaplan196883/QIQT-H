@@ -11489,6 +11489,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HyperbolicPlane.hyperbolic_scalarCurvature
 #print axioms QIQTH.HyperbolicPlane.hyperbolic_curvature_negative
 #print axioms QIQTH.HyperbolicPlane.isOpen_uhp
+-- ★ SURFACE OF REVOLUTION — the first INHOMOGENEOUS (NONCONSTANT-curvature) curved manifold.
+-- ds²=dr²+(1+r²)²dθ² (profile f=1+r²).  hasDerivAt_revsurf_h/_dh: HasDerivAt-VERIFIED that the fed jets are
+-- the genuine derivatives of h=f²=(1+r²)² (h'=4r(1+r²), h''=4+12r²).  ★ revsurf_scalarCurvature:
+-- scalarCurvature(revGinv,revDg,revDdg) = −4/(1+r²) ∀r (= −2f''/f, R=2K) — a NONCONSTANT curvature FIELD
+-- (R(0)=−4, R(1)=−2, R→0 at ∞), computed via CoordinateCurvature.  revsurf_curvature_nonconstant (the values
+-- at r=0,1 differ ⟹ genuinely inhomogeneous, unlike the constant-curvature sphere/H²).  ⟹ curved surfaces now
+-- span flat (0) / sphere (+2) / hyperbolic (−2) / NONCONSTANT (−4/(1+r²)).  HONEST (binding): metric field +
+-- scalar curvature in ONE global coordinate chart, coordinate/component curvature; NOT the abstract
+-- coordinate-free curvature tensor / RiemannianMetric-bundle integration (= L0 wall, Mathlib WIP); NOT the
+-- general curved heat kernel (parametrix wall).  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.RevolutionSurface.hasDerivAt_revsurf_h
+#print axioms QIQTH.RevolutionSurface.hasDerivAt_revsurf_dh
+#print axioms QIQTH.RevolutionSurface.revsurf_scalarCurvature
+#print axioms QIQTH.RevolutionSurface.revsurf_curvature_nonconstant
+#print axioms QIQTH.RevolutionSurface.revsurf_curvature_negative
 
 -- HEAT COEFFICIENT DETERMINATION (heat-kernel gap plan, Phase-5 downpayment; grounded in Gilkey,
 -- Invariance Theory, Thm 4.8.16(b) + Lemmas 4.8.5/4.8.6, refs/InvarianceTheory1Ed.pdf).  DERIVES
