@@ -1662,9 +1662,15 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   continuous-linear operator** on `L²(μ)`, with `eLpNorm_integralOp_le` / `integralOpCLM_opNorm_le`:
   `‖T_K‖ ≤ ‖K‖_{L²(X²)}` (the Schur/Cauchy–Schwarz bound `lintegral_integralOp_enorm_sq_le` proved entirely
   in `ℝ≥0∞` via Hölder, sidestepping Bochner side-conditions; the delicate `Lp`-quotient descent closed via
-  `toLp_congr` + a.e.-integrability from `HolderTriple 2 2 1`). ⚠ **HONEST (binding):** this is geometric-side
-  BRIDGE infrastructure. The Hilbert–Schmidt identity `‖T_K‖_HS = ‖K‖_{L²(X²)}` (Parseval over a basis) is
-  **checkpointed** as a genuine follow-on. And critically: **this does NOT discharge the general `a₁ = R/6`** —
+  `toLp_congr` + a.e.-integrability from `HolderTriple 2 2 1`). **FOLLOW-ON — bridge now COMPLETE
+  (`QIQTH/TraceClass/IntegralKernelHS.lean`, [AF] std-3):** ★★ `isHilbertSchmidt_integralOpCLM` — `T_K` is
+  Hilbert–Schmidt (`∑ᵢ ‖T_K bᵢ‖² ≤ ‖K‖²_{L²(X²)}` via per-`x` Bessel on the section `conj(K x ·)` + a
+  finite-partial-sum bound `summable_of_sum_le` with `lintegral_finsetSum'`, cleanly avoiding the
+  uncountable-basis `lintegral_tsum` countability gap, + `kernel_lintegral_section_eq`) ⟹
+  `integralOpCLM_isCompactOperator` (compact, via L3a′ `IsHilbertSchmidt.isCompactOperator`). So integral
+  operators feed L3a (eigenbasis) + L3c (heat trace): **the entire NON-MANIFOLD heat-trace machine is now
+  formalized.** ⚠ **HONEST (binding):** this is geometric-side BRIDGE infrastructure. And critically:
+  **this does NOT discharge the general `a₁ = R/6`** —
   that is IRREDUCIBLY behind the manifold heat-kernel PARAMETRIX (curvature L0 + Riemannian volume/Sobolev L1
   + parametrix short-time expansion L4); `a₁` is a LOCAL GEOMETRIC invariant, not reachable by any
   abstract/measure-space brick. `a₁ = R/6` stays VALIDATED on `S²`, not generally discharged. Does NOT build

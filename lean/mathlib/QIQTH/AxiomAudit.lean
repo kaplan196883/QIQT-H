@@ -11756,5 +11756,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.eLpNorm_integralOp_le
 #print axioms QIQTH.TraceClass.integralOpCLM
 #print axioms QIQTH.TraceClass.integralOpCLM_opNorm_le
+-- GEOMETRIC-SIDE BRIDGE COMPLETE (L² kernel ⟹ Hilbert–Schmidt ⟹ compact).
+-- isHilbertSchmidt_integralOpCLM: the integral operator T_K of an L²(X×X) kernel is Hilbert–Schmidt
+-- (∑ᵢ‖T_K bᵢ‖² ≤ ‖K‖²_{L²(X²)} via per-x Bessel on the section conj(K x ·) + finite-partial-sum bound
+-- summable_of_sum_le with lintegral_finsetSum' swap — avoids the uncountable-basis lintegral_tsum gap +
+-- kernel_lintegral_section_eq).  integralOpCLM_isCompactOperator: hence compact (via L3a'
+-- IsHilbertSchmidt.isCompactOperator).  ⟹ integral operators feed L3a (eigenbasis) + L3c (heat trace):
+-- the entire NON-MANIFOLD heat-trace machine is now formalized.  HONEST (binding): geometric-side bridge
+-- infrastructure on a σ-finite measure space; does NOT discharge the general a₁=R/6 — that is IRREDUCIBLY
+-- behind the manifold heat-kernel PARAMETRIX (curvature L0 + Riemannian volume/Sobolev L1 + parametrix
+-- short-time expansion L4), a LOCAL GEOMETRIC invariant; a₁=R/6 stays VALIDATED on S², not generally
+-- discharged.  Does NOT build the manifold heat kernel.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.isHilbertSchmidt_integralOpCLM
+#print axioms QIQTH.TraceClass.integralOpCLM_isCompactOperator
 
 end QIQTH.AxiomAudit

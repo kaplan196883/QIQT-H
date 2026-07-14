@@ -787,6 +787,7 @@ import QIQTH.TraceClass.CompactSpectral
 import QIQTH.TraceClass.Compact
 import QIQTH.TraceClass.ResolventSpectrum
 import QIQTH.TraceClass.IntegralKernel
+import QIQTH.TraceClass.IntegralKernelHS
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
