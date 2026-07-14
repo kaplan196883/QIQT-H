@@ -1653,6 +1653,26 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **THE 3-SPHERE HEAT TRACE + `a₁ = R/6` PROVEN ON A SECOND CURVED MANIFOLD (`d=3`) —
+  `QIQTH/Sphere3HeatTrace.lean` + `QIQTH/Sphere3HeatTraceA1.lean`** (**[AF]** std-3, budget 0, 2026-07-15).
+  The heat trace of `e^{tΔ}` on the unit 3-sphere, `sphere3HeatTrace t = ∑' l, (l+1)² e^{−t l(l+2)}` (explicit
+  `S³` Laplacian spectrum: eigenvalue `l(l+2)`, multiplicity `(l+1)²`; `R=6`), with the exact reindex
+  `Θ₃(t) = eᵗ·∑_{m≥1} m² e^{−t m²}` (`sphere3HeatTrace_eq`, from `l(l+2)=(l+1)²−1`). `sphere3HeatTrace_a0`
+  (`t^{3/2}·Θ₃(t) → √π/4`, the Weyl `a₀` = `vol(S³)/(4πt)^{3/2}`). ★★★ **`sphere3HeatTrace_a1`
+  (`(t^{3/2}·Θ₃(t) − √π/4)/t → √π/4 = a₀·(R/6)`, `R/6=1`) — the Seeley–DeWitt `a₁ = R/6 = 1` PROVEN on the
+  curved `S³`.** The `a₁` constant is carried entirely by the `eᵗ` factor, so the remainder
+  `R(t) = S(t) − (√π/4)t^{−3/2}` only needs BOUNDING: a 1st+3rd-order Euler–Maclaurin against the periodic
+  Bernoulli `Q₃` (`F(x)=x²e^{−tx²}` even, `F(0)=F'(0)=0` ⟹ both boundary terms vanish) gives `R(t)=∫Q₃F'''`
+  with `∫|F'''| = 38` (`t`-independent, from the `√t`-scaling + the odd Gaussian moments `momExp3=1/(2t²)`,
+  `momExp5=1/t³`), so `|R(t)| ≤ 19` ⟹ `t^{1/2}R(t) → 0`; assembled with `(eᵗ−1)/t → 1`.
+  `sphere3_a1_coeff_eq_a0_mul_R_div_six` ties `√π/4 = a₀·(6/6)`. ⟹ **`a₁ = R/6` is now machine-verified on
+  THREE explicit geometries across dimensions 1–3: flat torus (`R=0`), `S²` (`d=2`, `a₁=1/3`), `S³` (`d=3`,
+  `a₁=1`)** — two curved cases in different dimensions with different curvatures, each matching `R/6` exactly.
+  ⚠ **HONEST (binding):** validates `a₁ = R/6` on `S³` via its EXPLICIT spectrum (carried classical input);
+  does NOT discharge the GENERAL curved `a₁ = R/6` — an arbitrary curved space has NO explicit spectrum, which
+  is the root reason the general case needs the manifold heat-kernel PARAMETRIX (curvature + Riemannian volume
+  + short-time expansion = the wall). NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **MERCER (toward `Tr T_K = ∫ K(x,x)`): self-adjointness + `Tr = Σλ` + positivity, for a continuous kernel on
   a compact space — `QIQTH/TraceClass/Mercer.lean`** (**[AF]** std-3, budget 0, 2026-07-14). The final
   geometric-bridge brick, on a compact second-countable `X` with finite measure `μ` and continuous kernel `K`.

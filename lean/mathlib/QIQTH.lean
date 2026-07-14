@@ -779,6 +779,7 @@ import QIQTH.DeWittDiagonal
 import QIQTH.FlatTorusHeatKernel
 import QIQTH.SphereHeatTrace
 import QIQTH.Sphere3HeatTrace
+import QIQTH.Sphere3HeatTraceA1
 import QIQTH.TraceClass.HilbertSchmidt
 import QIQTH.TraceClass.Trace
 import QIQTH.TraceClass.Cyclic

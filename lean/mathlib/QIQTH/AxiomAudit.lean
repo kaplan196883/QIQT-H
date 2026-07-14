@@ -11629,17 +11629,24 @@ namespace QIQTH.AxiomAudit
 -- sphere3HeatTrace t = Σ_l (l+1)² e^{−t l(l+2)} (S³ Laplacian: eigenvalue l(l+2), mult (l+1)²; R=6).
 -- sphere3HeatTrace_eq: the reindex Θ₃(t) = e^t·Σ_{m≥1} m² e^{−t m²} (l(l+2)=(l+1)²−1).  ★★
 -- sphere3HeatTrace_a0: t^{3/2}·Θ₃(t) → √π/4 — the WEYL a₀ on a SECOND curved manifold (via sum-integral
--- sandwich + e^t→1; Weyl-normalized vol(S³)/(4πt)^{3/2} = √π/4·t^{−3/2}).  ⚠ HONEST (binding): the a₁ =
--- R/6 = 1 (R=6) is NOT proven — CHECKPOINTED: the sum-integral sandwich has O(1/t) slack (too coarse for
--- the a₁ constant); closing it needs the exp-small Poisson remainder of the theta derivative
--- Σ m²e^{−tm²} = (√π/4)t^{−3/2} + (exp-small) — the theta-derivative packaging (same category as the S²
--- periodic-Bernoulli EM).  a₀ validated on a 2nd curved manifold; a₁=R/6-on-S³ stays the recorded gap.
--- Breaks the wall for S³'s a₀ ONLY; the GENERAL curved heat kernel + a₁ discharge stay walled (an
--- arbitrary curved space has NO explicit spectrum — the root reason the general case is the wall).
--- NOTE: a₁=R/6 IS already proven on the curved S² (sphereHeatTrace_a1) — the proof-of-concept on a curved
--- manifold is done.  NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+-- sandwich + e^t→1; Weyl-normalized vol(S³)/(4πt)^{3/2} = √π/4·t^{−3/2}).  ★★★ sphere3HeatTrace_a1
+-- (Sphere3HeatTraceA1.lean): (t^{3/2}·Θ₃(t) − √π/4)/t → √π/4 = a₀·(R/6), R/6=1 — the a₁ = R/6 = 1
+-- SEELEY–DEWITT CURVATURE COEFFICIENT PROVEN on the curved S³ (d=3, R=6), the CHECKPOINT NOW CLOSED.  The
+-- a₁ constant is carried by the e^t factor of Θ₃=e^t·S, so only the REMAINDER R(t)=S(t)−(√π/4)t^{−3/2}
+-- needs BOUNDING (not evaluating): 1st+3rd-order Euler–Maclaurin against periodic Bernoulli Q₃ (F(x)=x²e^{−tx²}
+-- even, F(0)=F'(0)=0, both boundary terms vanish) gives R(t)=∫Q₃F''' with ∫|F'''|=38 (t-independent, from the
+-- √t-scaling + odd Gaussian moments momExp3/momExp5), so |R(t)|≤19 ⟹ t^{1/2}R(t)→0; assemble with
+-- (e^t−1)/t→1.  sphere3_a1_coeff_eq_a0_mul_R_div_six ties √π/4 = a₀·(6/6).  ⟹ a₁=R/6 now VALIDATED on
+-- flat torus (R=0) + S² (d=2, R=2, a₁=1/3, sphereHeatTrace_a1) + S³ (d=3, R=6, a₁=1) — THREE explicit
+-- geometries across dims 1-2-3.  ⚠ HONEST (binding): VALIDATES a₁=R/6 on S³ via its EXPLICIT spectrum
+-- (carried classical input); does NOT discharge the GENERAL curved a₁=R/6 — an arbitrary curved space has NO
+-- explicit spectrum, the root reason the general case needs the manifold heat-kernel PARAMETRIX (curvature/
+-- volume/short-time expansion = the wall).  NOT the conjecture, NOT the strong holographic principle, NOT QG.
+-- [AF] std-3.
 #print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_a0
 #print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_eq
+#print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_a1
+#print axioms QIQTH.Sphere3HeatTrace.sphere3_a1_coeff_eq_a0_mul_R_div_six
 
 -- TRACE-CLASS API, T1 — HILBERT–SCHMIDT OPERATORS (L5 of the heat-kernel full-infrastructure plan; the
 -- one self-contained buildable layer).  Pure functional analysis on a complex Hilbert space with a
