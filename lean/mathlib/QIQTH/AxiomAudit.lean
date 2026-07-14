@@ -11694,5 +11694,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.re_traceE_eq_tsum_eigenvalues
 #print axioms QIQTH.TraceClass.mckean_singer_heatTrace
 #print axioms QIQTH.TraceClass.isTraceClass_of_summable_eigenvalues
+-- L3a — COMPACT SELF-ADJOINT ⟹ ORTHONORMAL EIGEN-HilbertBasis (the abstract core of the L3 wall,
+-- manifold-free).  compactSelfAdjoint_hasEigenbasis: for T compact + self-adjoint, ASSEMBLES the
+-- infinite-dim orthonormal eigen-HilbertBasis (Mathlib has the pieces — compact spectral-theorem density
+-- orthogonalComplement_iSup_eigenspaces_eq_bot + orthogonalFamily_eigenspaces + orthonormal_sigma_orthonormal
+-- + per-eigenspace exists_hilbertBasis + mkOfOrthogonalEqBot — but does NOT assemble it).
+-- compactSelfAdjoint_traceE_eq_tsum_eigenvalues: combines with traceE_eq_tsum_eigenvalues to give
+-- Tr T = ∑' μᵢ.  ⟹ DISCHARGES T4's carried eigenbasis hypothesis UNCONDITIONALLY for the compact
+-- self-adjoint case.  HONEST (binding): removes the eigenbasis assumption ONLY for COMPACT self-adjoint
+-- operators; the manifold-analytic input "resolvent of Δ is compact" (Rellich–Kondrachov = L3b) is NOT
+-- proved here and stays the community wall.  Does NOT build the manifold heat kernel or discharge general
+-- a₁=R/6 (still needs L1+L3b); a₁=R/6 stays VALIDATED on S², not generally discharged.  NOT the
+-- conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.compactSelfAdjoint_hasEigenbasis
+#print axioms QIQTH.TraceClass.compactSelfAdjoint_traceE_eq_tsum_eigenvalues
 
 end QIQTH.AxiomAudit

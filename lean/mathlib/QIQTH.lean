@@ -783,6 +783,7 @@ import QIQTH.TraceClass.HilbertSchmidt
 import QIQTH.TraceClass.Trace
 import QIQTH.TraceClass.Cyclic
 import QIQTH.TraceClass.Spectral
+import QIQTH.TraceClass.CompactSpectral
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

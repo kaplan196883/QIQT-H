@@ -1653,6 +1653,27 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **COMPACT SELF-ADJOINT ⟹ ORTHONORMAL EIGEN-HilbertBasis (the abstract core of the L3 wall, manifold-free)
+  — `QIQTH/TraceClass/CompactSpectral.lean`** (**[AF]** std-3, budget 0, 2026-07-14). The L3 wall ("discrete
+  spectrum + eigenbasis") splits into an ABSTRACT Hilbert-space fact and a manifold-analytic input; this
+  brick builds the abstract half. ★★★ `compactSelfAdjoint_hasEigenbasis` — for any `T : H →L[ℂ] H` with
+  `IsCompactOperator T` and `IsSelfAdjoint T`, ASSEMBLES an orthonormal eigen-`HilbertBasis`:
+  `∃ (κ) (b : HilbertBasis κ ℂ H) (μ : κ → ℝ), ∀ i, T (b i) = (μ i) • b i`. Mathlib has all the pieces
+  (`InnerProductSpace/Spectrum.lean`'s compact spectral theorem `orthogonalComplement_iSup_eigenspaces_eq_bot`
+  = eigenspaces dense, `orthogonalFamily_eigenspaces`, `finite_dimensional_eigenspace`;
+  `orthonormal_sigma_orthonormal`; per-eigenspace `exists_hilbertBasis`; `mkOfOrthogonalEqBot`) but does NOT
+  assemble the infinite-dim eigenbasis — the index `κ = Σ c:ℂ, (basis of eigenspace c)`, orthonormal across
+  eigenspaces by the orthogonal family + within by each `exists_hilbertBasis`, dense span from the compact
+  spectral theorem (`E c ≤ closure(span v)` via `Submodule.topologicalClosure_map` + `HilbertBasis.dense_span`),
+  eigenvalues real by `conj_eigenvalue_eq_self`. ★★ `compactSelfAdjoint_traceE_eq_tsum_eigenvalues` combines
+  with T4's `traceE_eq_tsum_eigenvalues` to give `Tr T = ∑' μᵢ`. ⟹ **DISCHARGES T4's carried eigenbasis
+  hypothesis UNCONDITIONALLY for the compact self-adjoint case** — the eigenbasis is no longer assumed, it is
+  proven to exist. ⚠ **HONEST (binding):** removes the eigenbasis assumption ONLY for COMPACT self-adjoint
+  operators; the manifold-analytic input "resolvent of `Δ` is compact" (Rellich–Kondrachov = layer L3b) is NOT
+  proved here and stays the community wall. Does NOT build the manifold heat kernel or discharge the general
+  `a₁=R/6` (still needs L1 + L3b); `a₁=R/6` stays VALIDATED on `S²`, not generally discharged. NOT the
+  conjecture, NOT the strong principle, NOT QG.
+
 - **THE TRACE-CLASS / SCHATTEN API (heat-kernel infrastructure layer L5, built ourselves, COMPLETE) —
   `QIQTH/TraceClass/{HilbertSchmidt,Trace,Cyclic,Spectral}.lean`** (**[AF]** std-3, budget 0, 2026-07-14,
   commits `c9a943e8`/`335d88ab`/`37a8ed45`/`517561f4`). The one big missing infinite-dimensional

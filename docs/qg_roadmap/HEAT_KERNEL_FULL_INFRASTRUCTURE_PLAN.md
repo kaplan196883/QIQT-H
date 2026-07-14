@@ -32,9 +32,25 @@ directly** and prove its short-time expansion — which is the tower below.
 - **L2 — `Δ` as an operator. ✅/🟡 (machinery ours).** `Δf = −div grad f`; then `Δ` unbounded, essentially
   self-adjoint on `L²(M)`. — *We OWN the unbounded self-adjoint / Stone / PVM tower (`QIQTH/Spectral`);
   missing = the manifold-specific essential-self-adjointness (needs L3's Gårding).*
-- **L3 — Elliptic theory. ⛔ THE CRUX (community, large).** Gårding's inequality → elliptic regularity →
-  Rellich–Kondrachov (`Hᵏ⁺¹↪Hᵏ` compact) ⟹ discrete spectrum + smooth eigenfunctions. — *The hardest,
-  most load-bearing layer; nothing exists.*
+- **L3 — Elliptic theory. ⛔ THE CRUX (community, large) — now DECOMPOSED.** Gårding's inequality →
+  elliptic regularity → Rellich–Kondrachov (`Hᵏ⁺¹↪Hᵏ` compact) ⟹ discrete spectrum + smooth
+  eigenfunctions. **The load-bearing conclusion "discrete spectrum + orthonormal eigenbasis" splits into
+  two independent pieces:** (L3a) the ABSTRACT Hilbert-space fact *a compact self-adjoint operator has an
+  orthonormal eigen-`HilbertBasis`* (Riesz–Schauder; NO manifold) — **buildable now**, see L3a below; and
+  (L3b) the genuine manifold-analytic input *the resolvent `(Δ+1)⁻¹` is compact* (= Rellich–Kondrachov;
+  still the community wall). Building L3a turns "the eigenbasis" from a monolithic wall into exactly the
+  single labelled input "resolvent-compact", pushing the irreducible analysis as far up as it goes.
+- **L3a — Compact self-adjoint ⟹ eigen-`HilbertBasis`. 🔨 BUILDING (self-contained, manifold-free).**
+  Mathlib HAS the pieces (`InnerProductSpace/Spectrum.lean`: `orthogonalComplement_iSup_eigenspaces_eq_bot`
+  for compact self-adjoint = eigenspaces dense; `finite_dimensional_eigenspace`; `orthogonalFamily_eigenspaces`;
+  `orthonormal_sigma_orthonormal`; `exists_hilbertBasis`; `mkOfOrthogonalEqBot`) but does NOT ASSEMBLE the
+  infinite-dim eigen-`HilbertBasis`. That assembly (`QIQTH/TraceClass/CompactSpectral.lean`:
+  `compactSelfAdjoint_hasEigenbasis` + `compactSelfAdjoint_traceE_eq_tsum_eigenvalues`) DISCHARGES T4's
+  carried eigenbasis hypothesis for every compact self-adjoint operator — upstream-worthy. ⚠ removes the
+  eigenbasis assumption only for the COMPACT self-adjoint case; the manifold input (L3b) is untouched.
+- **L3b — Resolvent of `Δ` is compact (Rellich–Kondrachov). ⛔ community wall.** `(Δ+1)⁻¹` compact on
+  `L²(M)` — the one genuine manifold-analytic input that, fed to L3a, delivers `Δ`'s discrete spectrum +
+  eigenbasis. Nothing in Mathlib; needs L1 (Sobolev-on-`M`) + the compact-embedding theorem.
 - **L4 — Heat kernel. ✅ (abstract half ours).** `e^{−tΔ}` ✅ (**built** — `HeatSemigroup.lean`: the
   abstract C₀-semigroup + generator `−A`). Then the smooth kernel `K_t(x,y) = Σ e^{−λt} φᵢ(x)φᵢ(y)` via
   Sobolev embedding + Weyl-law convergence. — *Reachable once L3 gives smooth eigenfunctions.*
