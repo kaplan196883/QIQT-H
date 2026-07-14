@@ -773,6 +773,7 @@ import QIQTH.BulkGeneration
 import QIQTH.ScaleDimension
 import QIQTH.BulkAutonomy
 import QIQTH.CoordinateCurvature
+import QIQTH.HyperbolicPlane
 import QIQTH.HeatCoeffDetermination
 import QIQTH.HeatCoeff2Determination
 import QIQTH.HeatCoeff3Determination

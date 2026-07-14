@@ -1919,6 +1919,22 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   Gilkey invariant for an ARBITRARY metric — that is the manifold heat-kernel PARAMETRIX (the wall). Same
   rigorous status as the `a₁`/`a₂` determinations. NOT the conjecture, NOT the strong principle, NOT QG.
 
+- **★ THE HYPERBOLIC PLANE `H²` — a curved Riemannian surface of constant NEGATIVE curvature `R = −2`
+  (spanning the third curvature sign) — `QIQTH/HyperbolicPlane.lean`** (**[AF]** std-3, budget 0, 2026-07-15).
+  The Poincaré upper half-plane with metric `g = diag(1/y², 1/y²)`. `isOpen_uhp` (`{p | 0 < p.2}` is open ⟹
+  a genuine manifold, being an open subset of `ℝ²`). ★ **derivative verification** — `hasDerivAt_hyp_gyy`
+  (`HasDerivAt (fun y => 1/y²) (−2/y³)`) and `hasDerivAt_hyp_dgyy` (`HasDerivAt (fun y => −2/y³) (6/y⁴)`):
+  the 1- and 2-jets fed to the curvature calculator are VERIFIED via Mathlib's `HasDerivAt` to be the genuine
+  derivatives of the metric field (curvature from real derivatives, not asserted). ★★★
+  **`hyperbolic_scalarCurvature` (`scalarCurvature (hypGinv y) (hypDg y) (hypDdg y) = −2` for all `y > 0`)** —
+  constant **negative** curvature, computed via `CoordinateCurvature`; `hyperbolic_curvature_negative`
+  (`R < 0`). ⟹ with flat/cone (`R = 0`) and the unit `S²` (`R = +2`), **all three curvature signs are now
+  computed component curvatures.** ⚠ **HONEST (binding):** a metric field + scalar curvature in ONE global
+  coordinate chart (`H²` has one), via the coordinate/component `CoordinateCurvature` machinery; NOT the
+  abstract coordinate-free curvature tensor, and NOT integrated into Mathlib's `RiemannianMetric`/tangent-bundle
+  API — that (and the general curved heat kernel) is the L0/parametrix frontier (Mathlib WIP). NOT the
+  conjecture, NOT the strong principle, NOT QG.
+
 - **COORDINATE SCALAR CURVATURE (heat-kernel Phase 1, coordinate flavor) — `QIQTH/CoordinateCurvature.lean`**
   (**[AF]** std-3, budget 0, 2026-07-13, commit `ae04203a`). The component/metric-2-jet scalar curvature
   `R(g)` built OURSELVES — an ALGEBRAIC function of the metric's 0/1/2-jet (`ginv`, `dg=∂g`, `ddg=∂∂g`)

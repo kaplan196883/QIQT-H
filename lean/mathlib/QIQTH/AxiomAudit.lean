@@ -11473,6 +11473,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CoordinateCurvature.scalarCurvature_flat_zeroJet
 #print axioms QIQTH.CoordinateCurvature.ConeCheck.scalarCurvature_cone
 #print axioms QIQTH.CoordinateCurvature.SphereCheck.scalarCurvature_sphere
+-- ★ THE HYPERBOLIC PLANE H² — a curved Riemannian surface of constant NEGATIVE curvature (new sign).
+-- The Poincaré upper half-plane (isOpen_uhp: {0<y} open ⟹ genuine manifold as an open ⊆ ℝ²), metric
+-- g=diag(1/y²,1/y²).  hasDerivAt_hyp_gyy/_dgyy: the fed 1-/2-jets are VERIFIED via Mathlib HasDerivAt as the
+-- genuine derivatives of 1/y² (∂=−2/y³, ∂²=6/y⁴) — curvature from real derivatives, not asserted.
+-- ★ hyperbolic_scalarCurvature: scalarCurvature(hypGinv,hypDg,hypDdg) = −2 ∀y>0 (constant negative curvature,
+-- via CoordinateCurvature).  hyperbolic_curvature_negative: R<0.  ⟹ with flat/cone (R=0) + unit S² (R=+2),
+-- all THREE curvature signs are now computed component curvatures.  HONEST (binding): a metric field + scalar
+-- curvature in ONE global coordinate chart (H² has one), via the coordinate/component CoordinateCurvature
+-- machinery; NOT the abstract coordinate-free curvature tensor, and NOT integrated into Mathlib's
+-- RiemannianMetric/tangent-bundle API — that (and the general curved heat kernel) is the L0/parametrix wall
+-- (Mathlib WIP).  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.HyperbolicPlane.hasDerivAt_hyp_gyy
+#print axioms QIQTH.HyperbolicPlane.hasDerivAt_hyp_dgyy
+#print axioms QIQTH.HyperbolicPlane.hyperbolic_scalarCurvature
+#print axioms QIQTH.HyperbolicPlane.hyperbolic_curvature_negative
+#print axioms QIQTH.HyperbolicPlane.isOpen_uhp
 
 -- HEAT COEFFICIENT DETERMINATION (heat-kernel gap plan, Phase-5 downpayment; grounded in Gilkey,
 -- Invariance Theory, Thm 4.8.16(b) + Lemmas 4.8.5/4.8.6, refs/InvarianceTheory1Ed.pdf).  DERIVES
