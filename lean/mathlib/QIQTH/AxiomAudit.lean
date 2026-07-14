@@ -10055,6 +10055,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet2Rhs
 #print axioms QIQTH.ExpMap.expJet2Rhs_continuousOn
 #print axioms QIQTH.ExpMap.expJet2Rhs_norm_le
+-- ★ PARAMETRIX P1 RUNG 2 (3b, local) — the Jet₂ second-variation LOCAL fundamental solution (ExpMapContDiff2.lean).
+-- expJet2Fund_local: ∃T>0 ∃Q, Q 0 = 0 ∧ HasDerivWithinAt Q (DF(Y_v t)(Q t)+expJet2Rhs …) (Icc 0 T) — the local
+-- solution of the VECTOR inhomogeneous Jet₂ ODE Q'=DF(Y_v t)·Q + Θ^{hk}, Q(0)=0, via Mathlib IsPicardLindelof for
+-- the affine field F₂ t Q=DF(Y_v t)(Q)+Θ (Lipschitz-in-Q const KdF since Θ const-in-Q; ‖Θ‖ bounded on compact
+-- [0,1] by exists_bound_of_continuousOn — vector codomain, no CLM diamond).  HONEST: LOCAL only (interval [0,T]);
+-- the [0,1] extension (shifted/glue from arbitrary initial data Q(τ_j)=M_j) is the remaining bulk; does NOT give
+-- the full Q^{hk} on [0,1], does NOT give ContDiff² exp_p (needs full Q^{hk} + the parameter Grönwall), NOT κ=1/6,
+-- NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2Fund_local
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

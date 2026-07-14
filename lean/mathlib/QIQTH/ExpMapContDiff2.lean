@@ -269,4 +269,125 @@ theorem expJet2Rhs_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
   refine mul_le_mul (mul_le_mul (hKstar t ht) hanorm (norm_nonneg _) hKstar0) hbnorm
     (norm_nonneg _) (mul_nonneg hKstar0 hCh0)
 
+/-! ### Sub-brick 3b — the LOCAL Jet₂ second-variation solution `Q^{hk}` -/
+
+set_option maxHeartbeats 1000000 in
+/-- **EXP-JET3b — the LOCAL second-variation fundamental solution `Q^{hk}`.**  For `‖v‖ ≤ expRho`
+    and `Φ` continuous on `[0,1]`, there is a short time `T > 0` and a VECTOR-valued curve
+    `Q : ℝ → Point n × Point n` with `Q 0 = 0` solving the INHOMOGENEOUS linear Jet₂ ODE
+    `Q'(t) = DF(Y_v t)(Q t) + Θ^{hk}(t)` on `[0, T]`, where `DF = fderiv (geodesicField g gi)`,
+    `Y_v t = expTube p v t`, and `Θ^{hk} = expJet2Rhs …` is the 3a source term.
+
+    Built by the FULL vector-normed `IsPicardLindelof` instantiation of the AFFINE field
+    `F₂ t Q := DF(Y_v t)(Q) + Θ^{hk}(t)` on `closedBall(0, 1)`, centred at `Q₀ = 0`:
+    the source `Θ` is CONSTANT in `Q`, so it drops out of the difference and `F₂` is `KdF`-Lipschitz
+    in `Q` (`KdF` = the `DF` tube bound `expJet_fderiv_tube_bddAbove`); it is continuous in `t`
+    (`DF(Y_v ·)` continuous ∘ `expJet2Rhs_continuousOn`); bounded by `KdF + Cθ` on the ball
+    (`Cθ` = a `[0,1]`-bound on `‖Θ‖`, obtained since `Θ` is continuous on the compact `Icc`); and the
+    interval constraint `(KdF + Cθ)·T ≤ 1` is met by `T = min 1 (1/(KdF + Cθ + 1))`.
+    The Mathlib extraction is `IsPicardLindelof.exists_eq_forall_mem_Icc_hasDerivWithinAt₀` (`r = 0`).
+
+    HONEST: this is the LOCAL (short-interval) Jet₂ solution — the affine vector-normed PL
+    instantiation.  It does NOT reach `Q^{hk}(1)` (that needs the inhomogeneous concatenation with
+    varying initial data past the `mul_max_le` interval bound), NOT the parameter-residual Grönwall
+    `∂_v Φ_v = Q`, NOT `ContDiff¹ (fderiv exp_p)`, NOT numerical-G. -/
+theorem expJet2Fund_local (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) (h k : Point n) :
+    ∃ T > (0 : ℝ), ∃ Q : ℝ → (Point n × Point n),
+      Q 0 = 0 ∧
+      ∀ t ∈ Set.Icc (0 : ℝ) T,
+        HasDerivWithinAt Q
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Q t)
+             + expJet2Rhs g gi hC p v Φ h k t) (Set.Icc (0 : ℝ) T) t := by
+  obtain ⟨KdF, hKdF0, hKdF⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  -- `Θ^{hk}` is continuous on the compact `[0,1]`, hence uniformly bounded by some `Cθ ≥ 0`.
+  have hΘcont : ContinuousOn (fun t => expJet2Rhs g gi hC p v Φ h k t) (Set.Icc (0 : ℝ) 1) :=
+    expJet2Rhs_continuousOn g gi hC p v hv Φ hΦcont h k
+  obtain ⟨Cθ0, hCθ0⟩ := isCompact_Icc.exists_bound_of_continuousOn hΘcont
+  set Cθ : ℝ := max Cθ0 0 with hCθdef
+  have hCθnn : 0 ≤ Cθ := le_max_right _ _
+  have hCθ : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖expJet2Rhs g gi hC p v Φ h k t‖ ≤ Cθ :=
+    fun t ht => (hCθ0 t ht).trans (le_max_left _ _)
+  -- the affine vector field `F₂ t Q = DF(Y_v t)(Q) + Θ^{hk}(t)`.
+  set F₂ : ℝ → (Point n × Point n) → (Point n × Point n) :=
+    fun t Q => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) Q
+      + expJet2Rhs g gi hC p v Φ h k t with hF₂
+  set T : ℝ := min 1 (1 / (KdF + Cθ + 1)) with hTdef
+  have hL0 : 0 ≤ KdF + Cθ := add_nonneg hKdF0 hCθnn
+  have hden : (0 : ℝ) < KdF + Cθ + 1 := by linarith
+  have hT0 : 0 < T := lt_min one_pos (by positivity)
+  have hTle1 : T ≤ 1 := min_le_left _ _
+  have hTle2 : T ≤ 1 / (KdF + Cθ + 1) := min_le_right _ _
+  set Lnn : NNReal := ⟨KdF + Cθ, hL0⟩ with hLnn
+  set Knn : NNReal := ⟨KdF, hKdF0⟩ with hKnn
+  have hIccsub : Set.Icc (0 : ℝ) T ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc_right hTle1
+  -- `DF(Y_v ·)` continuous on `[0,1]` (tube continuity ∘ `DF` C^∞).
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hDFtube : ContinuousOn
+      (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Set.Icc (0 : ℝ) 1) :=
+    hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)
+  -- assemble `IsPicardLindelof` for the affine field on `[0, T]`, centred at `0`.
+  have hpl : IsPicardLindelof F₂
+      (tmin := (0 : ℝ)) (tmax := T) ⟨0, ⟨le_refl 0, hT0.le⟩⟩
+      (0 : Point n × Point n) 1 0 Lnn Knn := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · -- Lipschitz in `Q` on `closedBall(0,1)` with constant `KdF` (source drops out).
+      intro t ht
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      rw [lipschitzOnWith_iff_dist_le_mul]
+      intro M _ N _
+      simp only [dist_eq_norm, hKnn]
+      have hsub : F₂ t M - F₂ t N
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (M - N) := by
+        simp only [hF₂, map_sub]; abel
+      rw [hsub]
+      calc ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (M - N)‖
+          ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M - N‖ :=
+            (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).le_opNorm _
+        _ ≤ KdF * ‖M - N‖ := mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)
+    · -- continuity in `t` for fixed `Q`.
+      intro x _
+      have h1 : ContinuousOn
+          (fun t => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x)
+          (Set.Icc (0 : ℝ) 1) := hDFtube.clm_apply continuousOn_const
+      exact ((h1.add hΘcont).mono hIccsub)
+    · -- uniform bound `‖F₂ t Q‖ ≤ KdF + Cθ` on `closedBall(0,1)`.
+      intro t ht x hx
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      have hxnorm : ‖x‖ ≤ 1 := by
+        have hd := Metric.mem_closedBall.mp hx
+        rw [dist_zero_right] at hd
+        simpa using hd
+      show ‖F₂ t x‖ ≤ KdF + Cθ
+      calc ‖F₂ t x‖
+          = ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x
+              + expJet2Rhs g gi hC p v Φ h k t‖ := by rw [hF₂]
+        _ ≤ ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x‖
+              + ‖expJet2Rhs g gi hC p v Φ h k t‖ := norm_add_le _ _
+        _ ≤ KdF * ‖x‖ + Cθ :=
+            add_le_add
+              (le_trans
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).le_opNorm x)
+                (mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)))
+              (hCθ t htIcc)
+        _ ≤ KdF + Cθ := by
+            have : KdF * ‖x‖ ≤ KdF * 1 := mul_le_mul_of_nonneg_left hxnorm hKdF0
+            linarith
+    · -- the interval constraint `(KdF + Cθ)·T ≤ 1`.
+      show (Lnn : ℝ) * max (T - ((⟨0, ⟨le_refl 0, hT0.le⟩⟩ : Set.Icc (0 : ℝ) T) : ℝ))
+          (((⟨0, ⟨le_refl 0, hT0.le⟩⟩ : Set.Icc (0 : ℝ) T) : ℝ) - 0) ≤ (1 : NNReal) - (0 : NNReal)
+      simp only [hLnn, NNReal.coe_one, NNReal.coe_zero, sub_zero, sub_self, max_eq_left hT0.le]
+      calc (KdF + Cθ) * T ≤ (KdF + Cθ) * (1 / (KdF + Cθ + 1)) :=
+            mul_le_mul_of_nonneg_left hTle2 hL0
+        _ ≤ 1 := by rw [mul_one_div, div_le_one hden]; linarith
+  obtain ⟨Q, hQ0, hQd⟩ := hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
+  refine ⟨T, hT0, Q, hQ0, fun t ht => ?_⟩
+  have hd := hQd t ht
+  simpa only [hF₂] using hd
+
 end QIQTH.ExpMap
