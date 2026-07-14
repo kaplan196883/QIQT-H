@@ -10148,6 +10148,24 @@ namespace QIQTH.AxiomAudit
 -- NOT ContDiff² exp_p (needs the CLM HasFDerivAt + continuity + discharge), NOT κ=1/6, NOT the parametrix (P2),
 -- NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_fderiv_sub_quadratic
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, B-CLM) — the second-derivative CLM D²_v (ExpMapContDiff2.lean).
+-- expJet2Fund_unique (the Jet₂ IVP solution is unique on [0,1] — S=Q₁−Q₂ solves the homogeneous eqn IC 0, gronwall
+-- ρ=0 ⟹ 0); expJet2Fund_value_bound (‖Q 1‖ ≤ (Kstar₂Cφ²e^{Kstar})‖h‖‖k‖); expJet2Val := (expJet2Fund …).choose 1
+-- (the chosen 2nd-variation value) with expJet2Val_{add,smul}_{left,right} (BILINEAR in (h,k) via source-linearity
+-- + uniqueness superposition); expJetD2 : Point n →L[ℝ] Point n →L[ℝ] Point n, expJetD2(k)(h)=π(expJet2Val h k),
+-- built via LinearMap.mkContinuous₂ (bilinearity + the value bound).  The packaged candidate SECOND DERIVATIVE.
+-- HONEST: builds D²_v; the HasFDerivAt wiring (B-asm: ‖h‖-separated remainder + opNorm_le_bound) + (C) continuity +
+-- (D) discharge remain before ContDiff² exp_p.  Does NOT give ContDiff²/κ=1/6/parametrix/general a₁=R/6/numerical-G.
+-- [AF] std-3 (Classical.choice is standard).
+#print axioms QIQTH.ExpMap.expJet2Fund_unique
+#print axioms QIQTH.ExpMap.expJet2Fund_value_bound
+#print axioms QIQTH.ExpMap.expJet2Val
+#print axioms QIQTH.ExpMap.expJet2Val_add_left
+#print axioms QIQTH.ExpMap.expJet2Val_smul_left
+#print axioms QIQTH.ExpMap.expJet2Val_add_right
+#print axioms QIQTH.ExpMap.expJet2Val_smul_right
+#print axioms QIQTH.ExpMap.expJet2Val_norm_le
+#print axioms QIQTH.ExpMap.expJetD2
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
