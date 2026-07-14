@@ -459,6 +459,14 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   fundamental solution `Q^{hk}` on `[0,1]` (mirror `expJetFund` local→shifted→glue with a source term, or Duhamel
   against `Φ_v`) — the bulk; (3c/4) `(h,k)↦π∘Q^{hk}(1)` is the second Fréchet derivative via the residual Grönwall,
   + continuity in `v` ⟹ `ContDiff² exp_p`.
+- **2026-07-15 (RUNG 2 cont. — 3a: the Jet₂ source `Θ` + regularity — DONE, PUSHED `7c5f8520`):** in
+  `ExpMapContDiff2.lean` ([AF] std-3): `expJet2Rhs g gi hC p v Φ h k t := D²F(Y_v t)(Φ t (ι h))(Φ t (ι k))` (`Φ`
+  abstract, mirrors `expFund_two_pt_diff`) + `expJet2Rhs_continuousOn` (`ContinuousOn.clm_apply` ×2 +
+  `expTube_continuousOn` + `D²F` cont) + `expJet2Rhs_norm_le` (`‖Θ‖ ≤ Kstar·(Cphi‖h‖)·(Cphi‖k‖)`, `le_opNorm` ×2 +
+  the `D²F` tube bound). The two ODE well-posedness inputs (continuity → local existence, bound → Grönwall) for the
+  next brick. **3b next:** `expJet2Fund` = the `Q^{hk}` inhomogeneous fundamental solution on `[0,1]`
+  (`Q(0)=0`, `Q(t)=∫₀ᵗ [DF(Y_v s)(Q s)+Θ(s)]ds`, `HasDerivWithinAt`) by mirroring `expJetFund_local→_shifted→_glue`
+  with the `expJet2Rhs` source — the multi-week bilinear bulk; decompose (local→shifted→glue) + checkpoint.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
