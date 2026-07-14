@@ -11825,5 +11825,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatCoeff2Determination.constants_determined
 #print axioms QIQTH.HeatCoeff2Determination.a2_formula
 #print axioms QIQTH.HeatCoeff2Determination.a2_gilkey
+-- ★★★ a₃ SEELEY–DEWITT COEFFICIENT — REDUCIBLE weight-6 coefficients determined self-contained (weight 6,
+-- the next coefficient after a₂).  heatProductConvolution: the k=3 Cauchy-product structure behind
+-- heat-coefficient multiplicativity under products.  ★ a3_reducible_from_product: from the product rule
+-- a₃(M×N)=a₃(M)+a₃(N)+a₁(M)a₂(N)+a₂(M)a₁(N) restricted to the reducible sector (only R³,R·|Ric|²,R·|Rm|²
+-- have product cross-terms), the a₃ coefficients are FORCED to cR3=1/1296, cRRic=−1/1080, cRRm=1/1080 —
+-- SELF-CONTAINED from product-multiplicativity + a₁=R/6 + the a₂ constants (no carried a₃ value).
+-- a3_reducible_gilkey: cross-check 1/1296=(35/9)/7!, −1/1080=(−14/3)/7!, 1/1080=(14/3)/7! — the reducible
+-- coefficients match Gilkey's a₃ EXACTLY.  HONEST (binding): DETERMINES the REDUCIBLE weight-6 a₃
+-- coefficients self-contained; the PRIMITIVE weight-6 invariants (|Ric|³/Rm³ contractions + derivative
+-- terms |∇R|²,|∇Ric|²,|∇Rm|²,R·ΔR,Δ²R) are ADDITIVE on products (no cross-terms) so products do NOT
+-- determine them — carried/cited Gilkey values, NOT done here.  Does NOT construct the manifold heat kernel
+-- or prove a₃(x)=the Gilkey invariant for an ARBITRARY metric — that is the manifold heat-kernel PARAMETRIX
+-- (the wall).  Same rigorous status as the a₁/a₂ determinations.  NOT the conjecture/strong-principle/QG.
+-- [AF] std-3.
+#print axioms QIQTH.HeatCoeff3Determination.a3_reducible_from_product
+#print axioms QIQTH.HeatCoeff3Determination.a3_reducible_gilkey
+#print axioms QIQTH.HeatCoeff3Determination.heatProductConvolution
 
 end QIQTH.AxiomAudit

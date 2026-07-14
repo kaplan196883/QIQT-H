@@ -775,6 +775,7 @@ import QIQTH.BulkAutonomy
 import QIQTH.CoordinateCurvature
 import QIQTH.HeatCoeffDetermination
 import QIQTH.HeatCoeff2Determination
+import QIQTH.HeatCoeff3Determination
 import QIQTH.HeatCoeffBridge
 import QIQTH.DeWittDiagonal
 import QIQTH.FlatTorusHeatKernel
