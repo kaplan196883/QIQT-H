@@ -11641,4 +11641,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_a0
 #print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_eq
 
+-- TRACE-CLASS API, T1 — HILBERT–SCHMIDT OPERATORS (L5 of the heat-kernel full-infrastructure plan; the
+-- one self-contained buildable layer).  Pure functional analysis on a complex Hilbert space with a
+-- HilbertBasis — Mathlib has NO ∞-dim HS/Schatten/trace-class.  hsNormSqE b T = ∑' i, (‖T(bᵢ)‖₊)² (the
+-- ℝ≥0∞ HS norm-squared).  ★ hsNormSqE_adjoint (‖T‖_HS = ‖T⋆‖_HS); ★★ hsNormSqE_basis_indep — the HS
+-- norm-squared is ONB-INDEPENDENT (Parseval double-sum swap, done unconditionally in ℝ≥0∞ via
+-- ENNReal.tsum_comm — NO summability hypothesis).  IsHilbertSchmidt (basis-free) + isHilbertSchmidt_iff/
+-- _adjoint + the two-sided IDEAL bound (hsNormSqE_comp_le, IsHilbertSchmidt.comp_left).  HONEST (binding):
+-- FOUNDATION for the trace / Tr e^{−tΔ}=Σe^{−λt}; does NOT itself build the heat kernel or discharge the
+-- general a₁=R/6 — the L1/L3 manifold-analysis (Sobolev-on-manifolds, elliptic regularity, Rellich) stay
+-- the community wall.  NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.hsNormSqE_basis_indep
+#print axioms QIQTH.TraceClass.hsNormSqE_adjoint
+#print axioms QIQTH.TraceClass.isHilbertSchmidt_adjoint
+
 end QIQTH.AxiomAudit

@@ -779,6 +779,7 @@ import QIQTH.DeWittDiagonal
 import QIQTH.FlatTorusHeatKernel
 import QIQTH.SphereHeatTrace
 import QIQTH.Sphere3HeatTrace
+import QIQTH.TraceClass.HilbertSchmidt
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut
