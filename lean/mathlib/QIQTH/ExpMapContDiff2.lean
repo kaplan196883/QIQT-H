@@ -1161,4 +1161,61 @@ theorem expFund_two_pt_diff_Icc (g gi : Point n → Fin n → Fin n → ℝ)
     ((gronwallBound_zero_le_exp Kstar b t hKstar0 hb0 ht.1 ht.2).trans ?_)
   rw [hbdef]; exact le_of_eq (by ring)
 
+/-! ### Sub-brick (i) — the `DF` second-order Taylor remainder is quadratic
+
+Rung-2-capstone ingredient (i): on the confined tube ball, the first-order Taylor remainder of
+`DF = fderiv F` about `x` is `O(‖y − x‖²)`.  Since `DF` is `C^∞` (`contDiff_fderiv_geodesicField`),
+its Fréchet derivative is `D²F = fderiv (fderiv F)` (`hasFDerivAt_fderiv_geodesicField`), which is
+Lipschitz on the (convex, compact) ball (`expJet_fderiv2_lipschitzOnWith`).  Applying the
+fixed-linear-map mean-value inequality `Convex.norm_image_sub_le_of_norm_fderiv_le'` to `DF` on the
+SEGMENT `[x, y]` (convex, `⊆ ball`), with the derivative-difference bound
+`‖D²F z − D²F x‖ ≤ L·‖z − x‖ ≤ L·‖y − x‖` (Lipschitz `+` `norm_sub_le_of_mem_segment`), gives the
+remainder estimate with constant `L·‖y − x‖`, i.e. the quadratic bound `L·‖y − x‖²`. -/
+
+/-- **`DF` second-order Taylor remainder is quadratic on the confined tube ball.**
+    With `L` a Lipschitz constant of `D²F = fderiv (fderiv F)` on the tube ball
+    `closedBall (p,0) (expConst·expRho)` (from `expJet_fderiv2_lipschitzOnWith`), the first-order
+    Taylor remainder of `DF = fderiv (geodesicField g gi)` about `x` is bounded by `L·‖y − x‖²`
+    for `x, y` in that ball.  Ingredient (i) of the Rung-2 capstone quadratic remainder bound. -/
+theorem geodesicField_DF_second_order_taylor (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (L : ℝ) (hL0 : 0 ≤ L)
+    (hLip : LipschitzOnWith L.toNNReal (fderiv ℝ (fderiv ℝ (geodesicField g gi)))
+      (Metric.closedBall ((p,0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (x y : Point n × Point n)
+    (hx : x ∈ Metric.closedBall ((p,0) : Point n × Point n)
+      (expConst g gi hC p * expRho g gi hC p))
+    (hy : y ∈ Metric.closedBall ((p,0) : Point n × Point n)
+      (expConst g gi hC p * expRho g gi hC p)) :
+    ‖fderiv ℝ (geodesicField g gi) y - fderiv ℝ (geodesicField g gi) x
+        - (fderiv ℝ (fderiv ℝ (geodesicField g gi)) x) (y - x)‖
+      ≤ L * ‖y - x‖ ^ 2 := by
+  -- The segment `[x, y]` is convex and sits inside the (convex) ball.
+  have hseg : segment ℝ x y ⊆
+      Metric.closedBall ((p,0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p) :=
+    (convex_closedBall _ _).segment_subset hx hy
+  -- `DF` is differentiable everywhere (it is `C^∞`).
+  have hdiff : ∀ z ∈ segment ℝ x y, DifferentiableAt ℝ (fderiv ℝ (geodesicField g gi)) z :=
+    fun z _ => (hasFDerivAt_fderiv_geodesicField g gi hC z).differentiableAt
+  -- Uniform bound on the derivative-difference over the segment: `‖D²F z − D²F x‖ ≤ L·‖y − x‖`.
+  have hbound : ∀ z ∈ segment ℝ x y,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) z
+          - fderiv ℝ (fderiv ℝ (geodesicField g gi)) x‖ ≤ L * ‖y - x‖ := by
+    intro z hz
+    have hd := hLip.dist_le_mul z (hseg hz) x hx
+    rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal L hL0] at hd
+    calc ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) z
+              - fderiv ℝ (fderiv ℝ (geodesicField g gi)) x‖
+        ≤ L * ‖z - x‖ := hd
+      _ ≤ L * ‖y - x‖ := mul_le_mul_of_nonneg_left (norm_sub_le_of_mem_segment hz) hL0
+  -- Mean-value inequality on the segment, fixed-linear-map (`φ = D²F x`) version.
+  have hmv := (convex_segment x y).norm_image_sub_le_of_norm_fderiv_le'
+    (f := fderiv ℝ (geodesicField g gi))
+    (φ := fderiv ℝ (fderiv ℝ (geodesicField g gi)) x)
+    (C := L * ‖y - x‖) hdiff hbound (left_mem_segment ℝ x y) (right_mem_segment ℝ x y)
+  calc ‖fderiv ℝ (geodesicField g gi) y - fderiv ℝ (geodesicField g gi) x
+          - (fderiv ℝ (fderiv ℝ (geodesicField g gi)) x) (y - x)‖
+      ≤ L * ‖y - x‖ * ‖y - x‖ := hmv
+    _ = L * ‖y - x‖ ^ 2 := by ring
+
 end QIQTH.ExpMap

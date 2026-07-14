@@ -10104,6 +10104,15 @@ namespace QIQTH.AxiomAudit
 -- [AF] std-3.
 #print axioms QIQTH.ExpMap.fderiv2_geodesicField_symm
 #print axioms QIQTH.ExpMap.expFund_two_pt_diff_Icc
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, remainder-bound ingredient i) — the DF 2nd-order Taylor remainder
+-- (ExpMapContDiff2.lean).  geodesicField_DF_second_order_taylor: on the confined tube ball (given D²F Lipschitz
+-- there with constant L, from expJet_fderiv2_lipschitzOnWith), ‖DF(y) − DF(x) − D²F(x)(y−x)‖ ≤ L·‖y−x‖².  Route:
+-- Convex.norm_image_sub_le_of_norm_fderiv_le' (the fixed-linear-map mean-value variant builds the φ-shift
+-- internally) on the segment [x,y] ⊆ ball, with ‖D²F z − D²F x‖ ≤ L·‖y−x‖ uniform on the segment.  Ingredient (i)
+-- of the quadratic remainder bound ‖r‖≤C‖k‖².  HONEST: with (iii) done, still MISSING (ii) 2nd-order tube accuracy.
+-- Does NOT alone give ‖r‖≤C‖k‖², NOT ContDiff² exp_p, NOT κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT
+-- numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_DF_second_order_taylor
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
