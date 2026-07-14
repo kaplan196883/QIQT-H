@@ -51,9 +51,11 @@ resolvent bridge, integral operators (`L²`-kernel⟹HS/compact), Mercer, `Spect
 `κ=1/6` **unconditional for the actual pullback metric** `g̃` needs `ContDiff³ exp_p` (derivative-loss: `g̃` uses
 `D exp_p`, so `ContDiff² g̃` needs `ContDiff³ exp_p`). Reachable via the FINITE augmented jet-ODE tower (NOT the
 general smooth-dependence theorem Mathlib lacks):
-- **Rung 1 — `ContDiff¹ exp_p`** via the Jet₁ augmented ODE `(Y,P)'=(F Y, DF(Y)∘P)`, IC `((p,v),1,0)`: PL
-  Lipschitz-dependence ⟹ `v↦(Y_v,Φ_v)` continuous ⟹ `fderiv exp_p` continuous. Days-scale; strengthens the 1-jet
-  from pointwise to continuous. **← the available next brick.**
+- **Rung 1 — `ContDiff¹ exp_p`. ✅ DONE 2026-07-15 (`ExpMapContDiff.lean`, [AF] std-3).** `expMap_contDiffOn_one`
+  (`ContDiffOn ℝ 1 exp_p (ball 0 expRho)`) via `fderivExpMap_continuousOn` (continuous `v↦fderiv exp_p v`), whose
+  crux `expFund_two_pt_diff` (`‖Φ_v 1 − Φ_w 1‖ ≤ C‖v−w‖`, the operator fundamental solution's Lipschitz dependence
+  on the initial velocity) CLOSED via the operator two-point Grönwall on the Jet₁ system — NOT the general C¹-flow
+  theorem. Strengthens the Jacobian 1-jet pointwise→continuous.
 - **Rung 2 — `ContDiff² exp_p`** (Jet₂: `Q'=DF Q + D²F(P,P)`, residual Grönwall ⟹ `o`). ~2–4 wk.
 - **Rung 3 — `ContDiff³ exp_p`** (Jet₃: `R'=DF R + D²F(P,Q)+D³F(P,P,P)`). ~4–8 wk. ⟹ the bridge
   `rnc_christoffel_linearJet` (`rncDΓ = pd(christoffel g̃)(0)`) + `ContDiff g̃` ⟹ instantiate `heat_a1_of_gauge` at

@@ -9997,6 +9997,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet_Ederiv_norm_le
 #print axioms QIQTH.ExpMap.expJet_pi_comp_iota_norm_le
 #print axioms QIQTH.ExpMap.hasFDerivAt_expMap_jacobian_one_jet
+-- ★ PARAMETRIX P1 RUNG 1 — ContDiff¹ exp_p (ExpMapContDiff.lean).  expMap_contDiffOn_one: the geodesic
+-- exp map is ContDiffOn ℝ 1 on ball 0 expRho — pointwise-differentiable (hasFDerivAt_expMap) + CONTINUOUS
+-- derivative (fderivExpMap_continuousOn).  The crux expFund_two_pt_diff: the operator fundamental solution
+-- Φ_v depends Lipschitz-continuously on the initial velocity v (‖Φ_v 1 − Φ_w 1‖ ≤ C‖v−w‖) — the operator
+-- two-point Grönwall on the Jet₁ system (field-difference via LipschitzOnWith DF + geodesic_twopoint_gronwall
+-- tube separation), CLOSED via the equilibrium technique (NOT the Mathlib-absent general C¹-flow theorem).
+-- ⟹ the Jacobian 1-jet strengthened pointwise→continuous.  HONEST (binding): Rung 1 of the ContDiff³ exp_p
+-- tower (THE_EXP_JETS_PLAN); does NOT unlock κ=1/6 for the pullback metric (needs full ContDiff³, Rungs 2–3,
+-- via g̃ derivative-loss), does NOT build the heat-kernel parametrix (P2), does NOT discharge general a₁=R/6,
+-- NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expFund_two_pt_diff
+#print axioms QIQTH.ExpMap.fderivExpMap_continuousOn
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_one
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
