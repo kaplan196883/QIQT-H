@@ -11723,5 +11723,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.IsHilbertSchmidt.isCompactOperator
 #print axioms QIQTH.TraceClass.IsTraceClass.isCompactOperator
 #print axioms QIQTH.TraceClass.traceClass_selfAdjoint_traceE_eq_tsum_eigenvalues
+-- L3c — RESOLVENT BRIDGE: compact resolvent ⟹ operator discrete spectrum + McKean–Singer heat trace
+-- (manifold-free; packages the whole spectral-side reduction).  compactResolvent_hasEigenbasis: R compact
+-- + self-adjoint + INJECTIVE ⟹ eigenbasis b with R bᵢ=ρᵢ•bᵢ, ρᵢ≠0 (L3a + injectivity: ρᵢ=0⟹bᵢ∈ker R=0,
+-- contra ‖bᵢ‖=1).  compactResolvent_heatTrace: for R=(Δ+1)⁻¹ the Δ-eigenvalues are λᵢ=ρᵢ⁻¹−1
+-- (R bᵢ=(λᵢ+1)⁻¹•bᵢ), and ANY operator diagonalized by b with heat eigenvalues e^{−tλᵢ} has
+-- traceE=∑'e^{−tλᵢ} (traceE_eq_tsum_eigenvalues).  heatOperator_of_summable: given Weyl summability of
+-- e^{−tλ}, the diagonal heat operator EXISTS, is IsTraceClass, and Tr=∑'e^{−tλ} (diagonal-multiplier
+-- construction + isTraceClass_of_summable_eigenvalues).  HONEST (binding): packages "R compact + Weyl
+-- summability ⟹ discrete spectrum + heat trace" as a THEOREM taking those as HYPOTHESES; does NOT prove R
+-- compact (= Rellich–Kondrachov = L3b, the manifold wall) or Weyl summability.  The whole spectral-side
+-- residue of the general heat trace is now the single input "resolvent of Δ compact".  Does NOT build the
+-- manifold heat kernel or discharge general a₁=R/6 (needs L1+L3b); a₁=R/6 stays VALIDATED on S², not
+-- generally discharged.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.compactResolvent_hasEigenbasis
+#print axioms QIQTH.TraceClass.compactResolvent_heatTrace
+#print axioms QIQTH.TraceClass.heatOperator_of_summable
 
 end QIQTH.AxiomAudit

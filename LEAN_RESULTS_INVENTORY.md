@@ -1653,6 +1653,24 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **RESOLVENT BRIDGE: compact resolvent ⟹ discrete spectrum + McKean–Singer heat trace (the whole spectral
+  side reduced to ONE input, manifold-free) — `QIQTH/TraceClass/ResolventSpectrum.lean`** (**[AF]** std-3,
+  budget 0, 2026-07-14). Packages the entire spectral-side reduction of the general heat trace. ★★
+  `compactResolvent_hasEigenbasis` — `R` compact + self-adjoint + INJECTIVE ⟹ eigenbasis `b` with
+  `R bᵢ = ρᵢ • bᵢ`, `ρᵢ ≠ 0` (from L3a `compactSelfAdjoint_hasEigenbasis` + injectivity: `ρᵢ=0 ⟹ bᵢ ∈ ker R = 0`,
+  contradicting `‖bᵢ‖=1`). ★★★ `compactResolvent_heatTrace` — for `R = (Δ+1)⁻¹` the `Δ`-eigenvalues are
+  `λᵢ = ρᵢ⁻¹ − 1` (`R bᵢ = (λᵢ+1)⁻¹ • bᵢ`), and ANY operator diagonalized by `b` with heat eigenvalues
+  `e^{−tλᵢ}` has `traceE = ∑' e^{−tλᵢ}` (`traceE_eq_tsum_eigenvalues`). `heatOperator_of_summable` — given
+  Weyl summability of `e^{−tλ}`, the diagonal heat operator EXISTS, is `IsTraceClass`, and `Tr = ∑' e^{−tλ}`
+  (diagonal-multiplier construction + `isTraceClass_of_summable_eigenvalues`). ⟹ the discrete spectrum, the
+  eigenbasis, and the McKean–Singer heat trace `Tr e^{−tΔ} = Σ e^{−tλ}` are all DERIVED from "R compact",
+  not assumed. ⚠ **HONEST (binding):** packages "R compact + Weyl summability ⟹ discrete spectrum + heat
+  trace" as a THEOREM taking those as HYPOTHESES; does NOT prove `R` compact (= Rellich–Kondrachov = layer
+  L3b, the manifold wall) or Weyl summability. **The whole spectral-side residue of the general heat trace is
+  now the single input "the resolvent of `Δ` is compact".** Does NOT build the manifold heat kernel or
+  discharge the general `a₁=R/6` (still needs L1 + L3b); `a₁=R/6` stays VALIDATED on `S²`, not generally
+  discharged. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **HILBERT–SCHMIDT ⟹ COMPACT + the trace-class capstone (completes trace-class ⊆ HS ⊆ compact, manifold-free)
   — `QIQTH/TraceClass/Compact.lean`** (**[AF]** std-3, budget 0, 2026-07-14). ★★ `IsHilbertSchmidt.isCompactOperator`
   — every Hilbert–Schmidt operator is compact: `T` is the operator-norm limit of its finite-rank truncations

@@ -52,13 +52,13 @@ directly** and prove its short-time expansion — which is the tower below.
   IsCompactOperator` (op-norm limit of finite-rank truncations) ⟹ `IsTraceClass ⟹ IsCompactOperator` ⟹ the
   capstone *trace-class self-adjoint ⟹ Tr = Σλ with NO eigenbasis/compactness hypothesis*. Completes the
   standard inclusion trace-class ⊆ HS ⊆ compact.
-- **L3c — Resolvent bridge: compact resolvent ⟹ operator eigenbasis + heat trace. 🔨 QUEUED (manifold-free).**
-  `QIQTH/TraceClass/ResolventSpectrum.lean`: for `R = (Δ+1)⁻¹` COMPACT + self-adjoint + INJECTIVE, L3a gives
+- **L3c — Resolvent bridge: compact resolvent ⟹ operator eigenbasis + heat trace. ✅ DONE (`ResolventSpectrum.lean`,
+  manifold-free).** For `R = (Δ+1)⁻¹` COMPACT + self-adjoint + INJECTIVE, `compactResolvent_hasEigenbasis` gives
   `R bᵢ = ρᵢ bᵢ` with `ρᵢ ≠ 0` (injectivity), so `λᵢ := ρᵢ⁻¹ − 1` are the eigenvalues of `Δ`; and — given
-  Weyl summability `Σ e^{−tλᵢ} < ∞` (carried) — the diagonal heat operator is trace-class with
-  `Tr e^{−tΔ} = Σ e^{−tλᵢ}`. Packages the reduction: the discrete spectrum + heat trace are DERIVED from
-  "R compact", not assumed. Abstractly, compact ⟹ `ρᵢ → 0` ⟹ `λᵢ → ∞` (discreteness) is also free; only the
-  RATE (summability = Weyl) stays a manifold input.
+  Weyl summability `Σ e^{−tλᵢ} < ∞` (carried) — `heatOperator_of_summable` builds the diagonal heat operator
+  trace-class with `Tr e^{−tΔ} = Σ e^{−tλᵢ}` (`compactResolvent_heatTrace` gives the trace identity for any
+  diagonalizing operator). Packages the reduction: the discrete spectrum + heat trace are DERIVED from
+  "R compact", not assumed.
 - **L3b — Resolvent of `Δ` is compact (Rellich–Kondrachov). ⛔ THE community wall (now the ONLY one on the
   spectral side).** `(Δ+1)⁻¹` compact on `L²(M)` — the one genuine manifold-analytic input that, fed to
   L3a+L3c, delivers `Δ`'s discrete spectrum, eigenbasis, and heat trace as THEOREMS. Nothing in Mathlib;
