@@ -416,6 +416,23 @@ with the Co-Authored-By trailer; update this plan + inventory. NO `sorry`; NEVER
 kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a carried frame choice, stated honestly.
 
 ## Progress log
+- **2026-07-15 (PARAMETRIX P1 RUNG 1 — `ContDiff¹ exp_p` — DONE, PUSHED `4bc842dd`):** `ExpMapContDiff.lean` ([AF]
+  std-3, budget 0). `expMap_contDiffOn_one` (`ContDiffOn ℝ 1 exp_p (ball 0 expRho)`) via `fderivExpMap_continuousOn`
+  (continuous `v↦fderiv exp_p v`); crux `expFund_two_pt_diff` (`‖Φ_v 1 − Φ_w 1‖ ≤ C‖v−w‖`, the operator fundamental
+  solution's Lipschitz dependence on the initial velocity) CLOSED via the operator two-point Grönwall on the Jet₁
+  system (equilibrium technique, NOT the Mathlib-absent general C¹-flow theorem). Strengthens the Jacobian 1-jet
+  pointwise→continuous.
+- **2026-07-15 (PARAMETRIX P1 RUNG 2 — `ContDiff² exp_p` — PARTIAL / CHECKPOINT, PUSHED `30e8ef0d`):**
+  `ExpMapContDiff2.lean` ([AF] std-3, budget 0). TWO green results, NOT the full `ContDiff²`:
+  (i) `expMap_contDiffOn_two_of_fderiv_contDiffOn_one` — the PROVEN Rung-2 REDUCTION: `ContDiff¹ (fderiv exp_p)` on
+  the ball ⟹ `ContDiff² exp_p` (Rung-1 differentiability + `fderivWithin=fderiv` on the open ball + Mathlib
+  `contDiffOn_succ_of_fderivWithin`), isolating the exact remaining obligation "`Φ_v(1)` is `C¹` in `v`";
+  (ii) the Jet₂ analytic ingredient `D²F = fderiv(fderiv F)` EXISTS and is `C^∞` (`contDiff_fderiv2_geodesicField`,
+  `hasFDerivAt_fderiv_geodesicField`). ⚠ **STILL OPEN (the multi-week bulk, NOT a Mathlib gap):** the `D²F` closed
+  form + the Jet₂ fundamental solution `Q_v` on `[0,1]` (a fresh bilinear-valued Picard–Lindelöf tower mirroring the
+  `expJetFund` chain) + the parameter-residual Grönwall ⟹ `v↦Φ_v(1)` is `C¹`. `ContDiff² exp_p` is NOT yet
+  unconditional. Next reachable brick: the `D²F` uniform operator-norm bound on the `[0,1]` tube (the Grönwall
+  coefficient bound, analog of `expJet_fderiv_tube_bddAbove_unif`), the prerequisite for the `Q_v` PL construction.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
