@@ -11654,5 +11654,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.hsNormSqE_basis_indep
 #print axioms QIQTH.TraceClass.hsNormSqE_adjoint
 #print axioms QIQTH.TraceClass.isHilbertSchmidt_adjoint
+-- T2 — TRACE-CLASS + THE (basis-independent) TRACE.  hsInner b S T = ∑' i ⟪S bᵢ, T bᵢ⟫ (the HS inner
+-- product, summable for HS S,T); ★★ hsInner_basis_indep (ONB-independent, via POLARIZATION of T1's
+-- hsNormSqE_basis_indep — no ℂ-valued Tonelli).  IsTraceClass T := ∃ A B HS, T = A⋆∘B;
+-- IsTraceClass.isHilbertSchmidt (trace-class ⊆ HS, via T1's ideal bound).  traceE b T = ∑' i ⟪bᵢ, T bᵢ⟫;
+-- ★ traceE_eq_hsInner (⟪bᵢ,A⋆B bᵢ⟫=⟪Abᵢ,Bbᵢ⟫); ★★★ traceE_basis_indep — THE TRACE IS ONB-INDEPENDENT
+-- (from the two).  + traceE_add/_smul/_adjoint (linearity + Tr T⋆ = conj Tr T).  HONEST (binding): the
+-- well-defined ∞-dim trace, foundation for Tr e^{−tΔ}=Σe^{−λt}; does NOT build the heat kernel or
+-- discharge general a₁=R/6 (L1/L3 manifold analysis stay the wall).  NOT the conjecture/strong-principle/QG.
+-- [AF] std-3.
+#print axioms QIQTH.TraceClass.hsInner_basis_indep
+#print axioms QIQTH.TraceClass.traceE_basis_indep
+#print axioms QIQTH.TraceClass.traceE_eq_hsInner
+#print axioms QIQTH.TraceClass.IsTraceClass.isHilbertSchmidt
 
 end QIQTH.AxiomAudit
