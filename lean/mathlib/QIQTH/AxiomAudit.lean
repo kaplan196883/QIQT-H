@@ -10010,6 +10010,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expFund_two_pt_diff
 #print axioms QIQTH.ExpMap.fderivExpMap_continuousOn
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_one
+-- ★ PARAMETRIX P1 RUNG 2 (CHECKPOINT) — toward ContDiff² exp_p (ExpMapContDiff2.lean).  Two green results:
+-- (i) expMap_contDiffOn_two_of_fderiv_contDiffOn_one — the PROVEN Rung-2 REDUCTION: ContDiff¹ (fderiv exp_p)
+--   on the ball ⟹ ContDiff² exp_p there (Rung-1 differentiability + fderivWithin=fderiv on the open ball +
+--   Mathlib contDiffOn_succ_of_fderivWithin), isolating the exact remaining obligation "Φ_v(1) is C¹ in v";
+-- (ii) contDiff_fderiv_geodesicField / contDiff_fderiv2_geodesicField / hasFDerivAt_fderiv_geodesicField —
+--   the Jet₂ analytic ingredient D²F = fderiv(fderiv F) EXISTS and is C^∞ (∂_vΨ_v at the existence+smoothness
+--   level).  HONEST (binding) — CHECKPOINT: ContDiff² exp_p is NOT produced unconditionally; the crux
+--   ContDiffOn ℝ 1 (fderiv exp_p) ball stays UNDISCHARGED — needs the D²F closed form + the Jet₂ fundamental
+--   solution Q_v on [0,1] (a fresh bilinear-valued PL tower, the multi-week bulk) + the parameter-residual
+--   Grönwall (NOT a Mathlib gap; pure assembly, not attempted).  Does NOT reach ContDiff³ (Rung 3, needed for
+--   κ=1/6 via g̃ derivative-loss), does NOT build the parametrix (P2), does NOT discharge general a₁=R/6, NOT
+--   numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_two_of_fderiv_contDiffOn_one
+#print axioms QIQTH.ExpMap.contDiff_fderiv_geodesicField
+#print axioms QIQTH.ExpMap.contDiff_fderiv2_geodesicField
+#print axioms QIQTH.ExpMap.hasFDerivAt_fderiv_geodesicField
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

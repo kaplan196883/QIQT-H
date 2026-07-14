@@ -694,6 +694,7 @@ import QIQTH.RNCExpansion
 -- numerical-G. Axiom-free (standard three).
 import QIQTH.ExpMap
 import QIQTH.ExpMapContDiff
+import QIQTH.ExpMapContDiff2
 import QIQTH.Polarization
 import QIQTH.RNCGauge
 import QIQTH.RNCGaugeExp

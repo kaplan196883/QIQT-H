@@ -56,7 +56,15 @@ general smooth-dependence theorem Mathlib lacks):
   crux `expFund_two_pt_diff` (`‖Φ_v 1 − Φ_w 1‖ ≤ C‖v−w‖`, the operator fundamental solution's Lipschitz dependence
   on the initial velocity) CLOSED via the operator two-point Grönwall on the Jet₁ system — NOT the general C¹-flow
   theorem. Strengthens the Jacobian 1-jet pointwise→continuous.
-- **Rung 2 — `ContDiff² exp_p`** (Jet₂: `Q'=DF Q + D²F(P,P)`, residual Grönwall ⟹ `o`). ~2–4 wk.
+- **Rung 2 — `ContDiff² exp_p`** (Jet₂: `Q'=DF Q + D²F(P,P)`, residual Grönwall ⟹ `o`). **⏳ PARTIAL / CHECKPOINT
+  2026-07-15 (`ExpMapContDiff2.lean`, [AF] std-3).** TWO green results: (i) `expMap_contDiffOn_two_of_fderiv_contDiffOn_one`
+  — the PROVEN Rung-2 REDUCTION: `ContDiff¹ (fderiv exp_p)` on the ball ⟹ `ContDiff² exp_p` (Rung-1 differentiability
+  + `fderivWithin=fderiv` on the open ball + Mathlib `contDiffOn_succ_of_fderivWithin`), isolating the exact remaining
+  obligation "`Φ_v(1)` is `C¹` in `v`"; (ii) the Jet₂ analytic ingredient `D²F = fderiv(fderiv F)` EXISTS and is `C^∞`
+  (`contDiff_fderiv2_geodesicField`, `hasFDerivAt_fderiv_geodesicField`). **STILL OPEN (the multi-week bulk, NOT a
+  Mathlib gap):** the `D²F` closed form + the Jet₂ fundamental solution `Q_v` on `[0,1]` (a fresh bilinear-valued PL
+  tower, mirroring the `expJetFund` chain) + the parameter-residual Grönwall ⟹ `v↦Φ_v(1)` is `C¹`. `ContDiff² exp_p`
+  is NOT yet produced unconditionally.
 - **Rung 3 — `ContDiff³ exp_p`** (Jet₃: `R'=DF R + D²F(P,Q)+D³F(P,P,P)`). ~4–8 wk. ⟹ the bridge
   `rnc_christoffel_linearJet` (`rncDΓ = pd(christoffel g̃)(0)`) + `ContDiff g̃` ⟹ instantiate `heat_a1_of_gauge` at
   `g̃` ⟹ **`κ=1/6` unconditional given the metric.** (Does NOT yet give general `a₁=R/6` — that needs the kernel.)
