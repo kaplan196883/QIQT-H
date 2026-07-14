@@ -477,6 +477,18 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (induction concatenating `N` pieces, each starting at the previous endpoint value) → `expJet2Fund` (the `[0,1]`
   capstone) — mirrors the `expJetFund_shifted→_glue→expJetFund` chain, adapted to the inhomogeneous vector case. Then
   3c/4 (residual Grönwall + continuity) closes `ContDiff² exp_p`.
+- **2026-07-15 (RUNG 2 cont. — 3b FULL `[0,1]`: `expJet2Fund` — DONE, PUSHED `8fd6d29a`):** the `Q^{hk}`
+  second-variation fundamental solution on all of `[0,1]` (`Q 0 = 0`, `ContinuousOn`, integral form, `HasDerivWithinAt
+  Q (DF(Y_v t)(Q t)+Θ^{hk}) (Icc 0 1)`), the direct analog of `expJetFund`. Chain: `expJet2Fund_shifted` (arbitrary
+  vector IC `x₀`, `IsPicardLindelof` centred at `x₀`, affine ball radius `a=2(KdF‖x₀‖T+CθT)+1`) →
+  `expJet2Fund_shifted_integral` (FTC-2) → `expJet2Fund_glue` (partition induction, endpoint-matching — NO
+  right-composition, the global source `Θ` pastes via `integral_add_adjacent_intervals`) → `expJet2Fund` (FTC-1).
+  `expJet2Field_continuousOn` = field continuity helper. This is exactly `D²exp_p(0)(h,k)=π(Q^{hk}(1))`.
+  **3c/4 next (the Rung-2 CAPSTONE):** the parameter-residual Grönwall `S(t)=Φ_{v+k}(t)(ιh)−Φ_v(t)(ιh)−Q^{hk}_v(t)`,
+  `S(0)=0`, `S'=DF(Y_v)S + o(‖k‖)` (D²F Taylor remainder + `expFund_two_pt_diff` + tube two-point bounds),
+  inhomogeneous Grönwall ⟹ `‖S(1)‖=o(‖k‖)` ⟹ `HasFDerivAt (v↦fderiv exp_p v) (k↦h↦π Q^{hk}(1)) v` + continuity of
+  `v↦Q^{hk}(1)` ⟹ `ContDiff¹ (fderiv exp_p)` ⟹ (via `expMap_contDiffOn_two_of_fderiv_contDiffOn_one`) **UNCONDITIONAL
+  `ContDiff² exp_p`.** The analytic heart (the actual differentiability limit) — the hardest remaining Rung-2 brick.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
