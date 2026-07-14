@@ -1653,6 +1653,23 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   wall — Rellich/elliptic-regularity/trace-class). The "trace" is the spectral sum over the eigenbasis. NOT
   the conjecture, NOT the strong principle, NOT QG.
 
+- **MERCER (toward `Tr T_K = ∫ K(x,x)`): self-adjointness + `Tr = Σλ` + positivity, for a continuous kernel on
+  a compact space — `QIQTH/TraceClass/Mercer.lean`** (**[AF]** std-3, budget 0, 2026-07-14). The final
+  geometric-bridge brick, on a compact second-countable `X` with finite measure `μ` and continuous kernel `K`.
+  `continuous_integralOp_apply` (`x ↦ ∫ K x y · f y` continuous for `f ∈ L¹`, via `continuousAt_of_dominated`)
+  + `eigenfunction_continuous` (`T_K`'s eigenfunctions have continuous representatives) + `memLp_of_continuous_kernel`
+  (continuous kernel on compact ⟹ `L²(μ×μ)`, so `integralOpCLM` applies). ★ `integralOpCLM_isSelfAdjoint`
+  (Hermitian `K` ⟹ self-adjoint `T_K`, full Fubini-in-`L²` via `integral_integral_swap`).
+  `mercer_traceE_eq_tsum_eigenvalues` + `_of_hermitian` (`Tr T_K = ∑' λᵢ`, from the compact self-adjoint
+  spectral theorem L3a). `mercer_eigenvalues_nonneg` (positive `T_K` ⟹ eigenvalues `≥ 0`). ⚠ **HONEST
+  (binding):** the full `Tr T_K = ∫ K(x,x)` reduces (via `Tr = Σλ`) to the Mercer DIAGONAL SERIES `∑λᵢ = ∫K(x,x)`,
+  whose step 1 — *operator-positive ⟹ pointwise positive-definite continuous kernel* — is **checkpointed** (the
+  genuine Mercer wall; no Mathlib support). This is geometric-side McKean–Singer bridge infrastructure; it does
+  NOT discharge the general `a₁ = R/6` — that is IRREDUCIBLY behind the manifold heat-kernel PARAMETRIX
+  (curvature L0 + Riemannian volume/Sobolev L1 + parametrix short-time expansion L4), a LOCAL GEOMETRIC
+  invariant. `a₁ = R/6` stays VALIDATED on `S²`, not generally discharged. Does NOT build the manifold heat
+  kernel. NOT the conjecture, NOT the strong principle, NOT QG.
+
 - **GEOMETRIC-SIDE BRIDGE: L² integral kernel ⟹ bounded (Hilbert–Schmidt) operator — starts integral-operator
   theory absent from Mathlib, manifold-free — `QIQTH/TraceClass/IntegralKernel.lean`** (**[AF]** std-3, budget 0,
   2026-07-14). The McKean–Singer OTHER half (`Tr = ∫ K(x,x)`), on any σ-finite measure space `(X, μ)` with a

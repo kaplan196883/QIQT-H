@@ -11769,5 +11769,22 @@ namespace QIQTH.AxiomAudit
 -- discharged.  Does NOT build the manifold heat kernel.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
 #print axioms QIQTH.TraceClass.isHilbertSchmidt_integralOpCLM
 #print axioms QIQTH.TraceClass.integralOpCLM_isCompactOperator
+-- MERCER (geometric-side McKean–Singer bridge, toward Tr T_K = ∫ K(x,x); continuous kernel on a compact
+-- second-countable space + finite measure).  continuous_integralOp_apply (x↦∫K x y·f y continuous for
+-- f∈L¹, via continuousAt_of_dominated) + eigenfunction_continuous (T_K eigenfunctions have continuous
+-- representatives).  ★ integralOpCLM_isSelfAdjoint (Hermitian kernel ⟹ self-adjoint T_K, full Fubini-in-L²
+-- via integral_integral_swap).  mercer_traceE_eq_tsum_eigenvalues + _of_hermitian (Tr T_K = ∑' λᵢ, from the
+-- compact self-adjoint spectral theorem L3a).  mercer_eigenvalues_nonneg (positive T_K ⟹ eigenvalues ≥ 0).
+-- HONEST (binding): the full Tr T_K = ∫ K(x,x) reduces (via Tr=∑λ) to the Mercer DIAGONAL SERIES ∑λᵢ=∫K(x,x),
+-- whose step 1 (operator-positive ⟹ pointwise positive-definite continuous kernel) is CHECKPOINTED — the
+-- genuine Mercer wall, no Mathlib support.  This is geometric-side bridge infrastructure; does NOT discharge
+-- the general a₁=R/6 — that is IRREDUCIBLY behind the manifold heat-kernel PARAMETRIX (curvature L0 +
+-- Riemannian volume/Sobolev L1 + parametrix short-time expansion L4), a LOCAL GEOMETRIC invariant; a₁=R/6
+-- stays VALIDATED on S², not generally discharged.  Does NOT build the manifold heat kernel.  NOT the
+-- conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.TraceClass.integralOpCLM_isSelfAdjoint
+#print axioms QIQTH.TraceClass.mercer_traceE_eq_tsum_eigenvalues
+#print axioms QIQTH.TraceClass.mercer_traceE_eq_tsum_eigenvalues_of_hermitian
+#print axioms QIQTH.TraceClass.mercer_eigenvalues_nonneg
 
 end QIQTH.AxiomAudit
