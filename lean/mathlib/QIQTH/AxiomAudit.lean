@@ -10128,6 +10128,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expTube_second_order_residual_hasDerivWithinAt
 #print axioms QIQTH.ExpMap.gronwall_vec_residual_Icc
 #print axioms QIQTH.ExpMap.expTube_second_order_accuracy
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, ASSEMBLY) — the quadratic remainder bound (ExpMapContDiff2.lean).
+-- expJet2_remainder_quadratic_bound: ∃C≥0, ∀t∈Icc 0 1, ‖(DF(Y_{v+k} t)−DF(Y_v t))(Φ'(t)(ιh)) − expJet2Rhs …‖ ≤
+-- C·‖k‖² — the residual r(t) of expJet2_residual_bound is quadratic in k.  Combines ALL THREE ingredients:
+-- r = T1+T2+T3 (via fderiv2_geodesicField_symm cancelling D²F(Φιk)(Φιh) vs expJet2Rhs=D²F(Φιh)(Φιk), then abel),
+-- T1 = DF 2nd-order Taylor (i)·Φ'(ιh) + tube separation, T2 = D²F(ΔY−Φιk)·Φ'(ιh) via tube accuracy (ii),
+-- T3 = D²F(Φιk)(Φ'(ιh)−Φ(ιh)) via [0,1]-Lipschitz (iii-a); le_opNorm/le_opNorm₂ throughout.  This is the ρ=C‖k‖²
+-- that expJet2_residual_bound's hr consumes ⟹ the residual estimate now closes to o(‖k‖).  HONEST: this is the
+-- ASSEMBLY of the remainder bound; still (B) HasFDerivAt + (C) continuity + (D) discharge remain before ContDiff²
+-- exp_p is unconditional.  Does NOT alone give ContDiff²/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2_remainder_quadratic_bound
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
