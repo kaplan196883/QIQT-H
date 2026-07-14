@@ -552,6 +552,19 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   `hasFDerivAt_expMap`); **(C)** continuity of `v↦π Q^{hk}(1)` (a `Q`-two-point Grönwall, mirror `expFund_two_pt_diff`);
   **(D)** `ContDiffOn ℝ 1 (fderiv exp_p) (ball)` ⟹ `expMap_contDiffOn_two` UNCONDITIONAL via
   `expMap_contDiffOn_two_of_fderiv_contDiffOn_one`.
+- **2026-07-15 (RUNG 2 cont. — ASSEMBLY + B pointwise — DONE, PUSHED `8425a4f6`, `4402b374`):**
+  `expJet2_remainder_quadratic_bound` (`∃C≥0, ∀t∈Icc 0 1, ‖r t‖≤C‖k‖²`, combining i+ii+iii via `abel` +
+  `fderiv2_geodesicField_symm`; helpers `clmApply_norm_le`/`clmApply2_norm_le`) + `expMap_fderiv_sub_quadratic`
+  (`∃ Qhk1 C≥0, ‖(fderiv exp_p (v+k)) h − (fderiv exp_p v) h − Qhk1‖ ≤ C‖k‖²`, `Qhk1=π(Q^{hk}(1))`, threading
+  `hasFDerivAt_expMap` [same witness = ODE spec + `.fderiv` identity] + `expJet2_residual_bound` + the assembly).
+  **REMAINING to `ContDiff²` — the CLM step (B-CLM) + (C) + (D):**
+  (B-CLM) build `D²_v : Point n →L[ℝ] Point n →L[ℝ] Point n`, `D²_v(k)(h)=π(Q^{hk}(1))`, via `Q^{hk}(1)` BILINEAR in
+  `(h,k)` (additive/homog in each — ODE uniqueness from `gronwall_vec_residual_Icc` with `ρ=0`: difference of
+  solutions solves homog IVP, IC 0 ⟹ 0) + bound `‖Q^{hk}(1)‖≤M‖h‖‖k‖` (Grönwall on `Q`), package via
+  `mkContinuous₂`/`IsBoundedBilinearMap`; then the `‖h‖`-separated remainder + `opNorm_le_bound` +
+  `hasFDerivAt_iff_isLittleO` ⟹ `HasFDerivAt (v↦fderiv exp_p v) D²_v v`.
+  (C) continuity of `v↦D²_v` (a `Q`-two-point Grönwall, mirror `expFund_two_pt_diff`).
+  (D) `ContDiffOn ℝ 1 (fderiv exp_p) ball` ⟹ `expMap_contDiffOn_two` UNCONDITIONAL.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
