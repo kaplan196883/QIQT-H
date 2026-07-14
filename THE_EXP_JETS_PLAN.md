@@ -445,6 +445,20 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   bounded), (3) the `Q_v` Jet₂ fundamental-solution PL tower on `[0,1]` (mirror `expJetFund` local→shifted→glue —
   the multi-week bulk), (4) the parameter-residual Grönwall ⟹ `v↦Φ_v(1)` is `C¹` ⟹ discharge the reduction ⟹
   `ContDiff² exp_p`.
+- **2026-07-15 (RUNG 2 cont. — `D²F` Lipschitz-on-ball — DONE, PUSHED `55a9f0ad`):** `expJet_fderiv2_lipschitzOnWith`
+  in `ExpMapContDiff2.lean` ([AF] std-3): `∃ Ld2f, LipschitzOnWith Ld2f D²F (closedBall (p,0) (expConst·expRho))`
+  — `D²F` is `C^∞`, so `ContDiffOn.exists_lipschitzOnWith` (Lipschitz-from-`C¹`-on-compact-convex) gives it directly,
+  mirroring the `DF` `hLipDF` discharge (no CLM diamond here). The two `D²F` field-regularity inputs (bound +
+  Lipschitz on the tube ball) `Q_v` consumes are now BOTH landed.
+  **KEY STRUCTURAL INSIGHT for `Q_v`:** the Jet₂ second variation `Q^{hk}(t)` is **VECTOR-valued** (`Point n×Point n`),
+  NOT CLM-valued — it solves the INHOMOGENEOUS linear ODE `Q'(t) = DF(Y_v t)·Q(t) + D²F(Y_v t)(P^h(t),P^k(t))`,
+  `Q(0)=0`, whose HOMOGENEOUS part is exactly what the built `Φ_v` (`expJetFund`, coefficient `expJetPsi`)
+  propagates. The inhomogeneous term `Θ^{hk}(t) = D²F(Y_v t)(Φ_v(t)(ι h), Φ_v(t)(ι k))` is continuous + bounded on
+  `[0,1]` (D²F tube bound × `Φ_v` continuity²). So brick (3) decomposes: (3a) define `Θ^{hk}` + prove its `[0,1]`
+  regularity (continuity + uniform bound) — the ODE well-posedness input, tractable; (3b) the inhomogeneous
+  fundamental solution `Q^{hk}` on `[0,1]` (mirror `expJetFund` local→shifted→glue with a source term, or Duhamel
+  against `Φ_v`) — the bulk; (3c/4) `(h,k)↦π∘Q^{hk}(1)` is the second Fréchet derivative via the residual Grönwall,
+  + continuity in `v` ⟹ `ContDiff² exp_p`.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
