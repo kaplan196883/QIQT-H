@@ -1,11 +1,54 @@
 # DUALITY ROADMAP — what separates the verified dictionary from a genuine duality
 
-**Date:** 2026-07-13 (D3 skeleton + G1/G2 + G3 conditional theorem + D4b/D4c bulk dynamics + D5a radial
-+ the Seeley–DeWitt interface; see the ledger). The conjecture is a CONDITIONAL theorem, not an
-unproven `Prop`. **Companions:** `ADSCFT_GAP_ANALYSIS.md` (the mechanism-by-mechanism
-comparison), `WHERE_WE_ARE.md` (the full-credit status), `FLAT_RECORD_GRAVITY_CONJECTURE.md`
-(the target statement + the cited-inputs discharge ledger), `HEAT_KERNEL_GAP_PLAN.md` (the deferred
-curvature wall).
+**Date:** 2026-07-13, **updated 2026-07-15** (heat-kernel front advanced — `a₁=R/6` validated on 4 geometries,
+`a₂`/`a₃` coefficients determined, trace-class/heat-trace machine built; curvature substrate confirmed IN-REPO;
+wall sharpened to the manifold parametrix — **see the ★ UPDATE 2026-07-15 block below, which supersedes the
+stale "scalar R is upstream-WIP" language**). The conjecture is a CONDITIONAL theorem, not an unproven `Prop`.
+**Companions:** `ADSCFT_GAP_ANALYSIS.md` (the mechanism-by-mechanism comparison), `WHERE_WE_ARE.md` (the
+full-credit status), `FLAT_RECORD_GRAVITY_CONJECTURE.md` (the target statement + the cited-inputs discharge
+ledger), `HEAT_KERNEL_GAP_PLAN.md` + `HEAT_KERNEL_FULL_INFRASTRUCTURE_PLAN.md` (the heat-kernel plans),
+`LEAN_RESULTS_INVENTORY.md` (the heat-kernel / curved-manifold / CurvatureBridge entries).
+
+## ★ UPDATE 2026-07-15 — the heat-kernel front advanced; the curvature substrate is IN-REPO; the wall is now precisely the manifold parametrix
+
+Two corrections + real progress supersede parts of the 2026-07-13 text below (which framed scalar `R`
+as merely "upstream-WIP, foreseeable-quarters" and the heat-kernel as wholly untouched):
+
+**(A) The curvature substrate is BUILT IN-REPO (not just upstream).** An audit (2026-07-15) confirmed the
+repo already carries — since **June 2026**, predating this front — a full differential-geometry/GR suite:
+`Curvature.lean` (component `christoffel/riemann/ricci/scalarCurv/einsteinTensor` + `riemann_first_bianchi`,
+`second_bianchi`, `second_bianchi_contracted`, `twice_contracted_bianchi`), `ManifoldCurvature.lean`
+(coordinate-free Riemann curvature endomorphism + tensoriality), `LeviCivita.lean` (Koszul-formula
+characterization), `PseudoRiemannian.lean` (Lorentzian metric + musical isos), `ChristoffelSmooth.lean`
+(C∞ regularity), `Geodesic.lean`, `EinsteinFieldEquation.lean` (`∇^μG_{μν}=0` via contracted Bianchi →
+`f=−½R+Λ`). So the "scalar `R` is a foreseeable-quarters upstream contraction" language below is **stale** —
+the repo computes `R` (both component and coordinate-free). This session's component calculator
+`CoordinateCurvature.lean` is now UNIFIED to that base: `CurvatureBridge.lean` (`ffb88889`,
+`scalarCurvature_bridge`) proves the jet-based `CoordinateCurvature.scalarCurvature = Curvature.scalarCurv`
+(field-based) — one canonical base, CoordinateCurvature its evaluable jet-interface. (The redundant
+`CoordinateFreeCurvature.lean` was reverted, `a3a42830`.)
+
+**(B) The heat-kernel/Seeley–DeWitt front moved substantially (all [AF] std-3, pushed).**
+- **`a₁ = R/6` VALIDATED on FOUR explicit geometries** via explicit spectra: flat torus (`R=0`), `S²`
+  (`d=2`, `a₁=1/3`, `139eb004`), `S³` (`d=3`, `a₁=1`, `Sphere3HeatTraceA1.lean`), `S²×S¹` (`d=3`, `a₁=1/3`,
+  product additivity). Two curved cases in different dimensions + a product — strong direct evidence.
+- **`a₂` and `a₃` Seeley–DeWitt coefficient CONSTANTS DETERMINED** (`HeatCoeff2/3Determination.lean`):
+  `a₂=(1/360)(5R²−2|Ric|²+2|Rm|²+12ΔR)` with `α=1/72` **self-contained** from product-multiplicativity +
+  `a₁=R/6`; `a₃`'s reducible weight-6 coefficients (`1/1296, −1/1080, 1/1080`) likewise, all matching Gilkey.
+- **A trace-class / operator-theoretic heat-trace machine built** (absent from Mathlib): the trace-class API
+  (`TraceClass/{HilbertSchmidt,Trace,Cyclic,Spectral}` — HS, the basis-independent trace, cyclicity,
+  McKean–Singer `Tr=Σλ`), the compact spectral eigenbasis + `HS⟹compact` + resolvent bridge, integral
+  operators `L²`-kernel⟹bounded/HS/compact, and Mercer (self-adjointness, `Tr=Σλ`, positivity).
+
+**(C) The wall, now precise.** The genuine residue on this front is NEITHER the curvature tensor (built)
+NOR the abstract Levi-Civita/Bianchi (built) — it is the **manifold heat-kernel PARAMETRIX**: constructing
+the smooth kernel `K_t(x,y)` on a general Riemannian manifold and proving its short-time diagonal expansion
+`K_t(x,x) ~ (4πt)^{−d/2}(1 + a₁ t + …)` for an ARBITRARY metric (needs the Riemannian volume/Sobolev-on-`M`
+layer + the parametrix/Levi iteration — no proof assistant has this). ⚠ **HONEST (binding):** `a₁=R/6` stays
+**VALIDATED on the explicit-spectrum geometries + its coefficient constants DETERMINED**, NOT generally
+discharged — conjecture input #3 (the general curved `a₁=R/6`) is still open, gated on the parametrix; the
+DY7 conjecture remains the conditional theorem described below. See `LEAN_RESULTS_INVENTORY.md` (the heat-kernel
++ curved-manifold + CurvatureBridge entries) and `HEAT_KERNEL_FULL_INFRASTRUCTURE_PLAN.md`.
 
 ## ★ STATE OF CLOSE (2026-07-13) — the tractable program is closed; the residue is three external walls
 
