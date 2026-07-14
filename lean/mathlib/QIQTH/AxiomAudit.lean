@@ -10138,6 +10138,16 @@ namespace QIQTH.AxiomAudit
 -- ASSEMBLY of the remainder bound; still (B) HasFDerivAt + (C) continuity + (D) discharge remain before ContDiff²
 -- exp_p is unconditional.  Does NOT alone give ContDiff²/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet2_remainder_quadratic_bound
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, B pointwise) — the little-o of fderiv exp_p (ExpMapContDiff2.lean).
+-- expMap_fderiv_sub_quadratic: ∃ Qhk1 C≥0, ‖(fderiv exp_p (v+k)) h − (fderiv exp_p v) h − Qhk1‖ ≤ C·‖k‖² (Qhk1 =
+-- π(Q^{hk}(1))).  Threads hasFDerivAt_expMap at v, v+k (each witness gives BOTH the ODE spec AND
+-- fderiv exp_p ·=π∘(·)(1)∘ι) → expJet2Fund → expJet_fderiv_tube_bddAbove (Kstar) →
+-- expJet2_remainder_quadratic_bound (ρ=C‖k‖²) → expJet2_residual_bound → apply π (le_opNorm, ‖π‖≤1) → rewrite via
+-- the .fderiv identities.  The pointwise 2nd-derivative little-o.  HONEST: does NOT yet give the CLM HasFDerivAt
+-- (needs Q^{hk} bilinearity in (h,k) [via ODE uniqueness = gronwall r=0] + an ‖h‖-separated remainder variant),
+-- NOT ContDiff² exp_p (needs the CLM HasFDerivAt + continuity + discharge), NOT κ=1/6, NOT the parametrix (P2),
+-- NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_fderiv_sub_quadratic
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

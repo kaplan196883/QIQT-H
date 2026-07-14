@@ -1722,4 +1722,76 @@ theorem expJet2_remainder_quadratic_bound (g gi : Point n → Fin n → Fin n �
       _ = (L * eKf ^ 2 * Cphi * ‖h‖ + Kstar2 * C2 * Cphi * ‖h‖ + Kstar2 * Cphi * C3 * ‖h‖)
             * ‖k‖ ^ 2 := by ring
 
+/-! ### Rung-2 capstone step (B) — the pointwise little-o of `fderiv exp_p`
+
+This is the payoff of the quadratic remainder bound.  Fixing a probe direction `h`, the difference of
+first derivatives `fderiv exp_p (v+k) h − fderiv exp_p v h` is approximated by the second-variation
+value `π(Q^{hk}_v(1))` up to a genuinely **quadratic-in-`k`** error:
+
+`‖ fderiv exp_p (v+k) h − fderiv exp_p v h − π(Q^{hk}_v(1)) ‖ ≤ C·‖k‖²`.
+
+This is the `o(‖k‖)` little-o of `v ↦ fderiv exp_p v` (pointwise in `h`), the differentiability datum
+of the second jet.  Threading:
+
+* two `hasFDerivAt_expMap` witnesses `Φ` (at `v`) and `Φ'` (at `v+k`) — each simultaneously an
+  ODE-spec propagator *and*, via `HasFDerivAt.fderiv`, the identity `fderiv exp_p · = π∘(·)(1)∘ι`;
+* the vector second variation `Q^{hk}_v` from `expJet2Fund`;
+* the Jacobi bound `Kstar` from `expJet_fderiv_tube_bddAbove` at `v`;
+* the quadratic remainder bound `‖r(t)‖ ≤ C‖k‖²` from `expJet2_remainder_quadratic_bound`, fed as the
+  `ρ` of `expJet2_residual_bound` ⟹ `‖Φ'(1)(ι h) − Φ(1)(ι h) − Q(1)‖ ≤ C‖k‖²·e^{Kstar}`;
+* applying `π` (`‖π‖ ≤ 1`) and rewriting `fderiv exp_p · h = π(·(1)(ι h))`.
+
+`Q^{hk}_v(1)` is exposed as `expJetPi (Q 1)` for the `expJet2Fund` witness `Q`.  The CLM-level
+`HasFDerivAt (fun v => fderiv exp_p v) D²_v v` is **not** built here — it needs `Q^{hk}` linear in
+`(h,k)` (ODE uniqueness + source linearity), a separate sub-brick; see the report/checkpoint. -/
+theorem expMap_fderiv_sub_quadratic (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v k h : Point n)
+    (hv : ‖v‖ < expRho g gi hC p) (hvk : ‖v + k‖ < expRho g gi hC p) :
+    ∃ (Qhk1 : Point n) (C : ℝ), 0 ≤ C ∧
+      ‖(fderiv ℝ (expMap g gi hC p) (v + k)) h
+          - (fderiv ℝ (expMap g gi hC p) v) h - Qhk1‖ ≤ C * ‖k‖ ^ 2 := by
+  -- the two propagators, each an ODE spec + a `fderiv` identity (via `HasFDerivAt.fderiv`).
+  obtain ⟨Φ, hΦ0, hΦderiv, hfdv⟩ := hasFDerivAt_expMap g gi hC p v hv
+  obtain ⟨Φ', hΦ'0, hΦ'deriv, hfdvk⟩ := hasFDerivAt_expMap g gi hC p (v + k) hvk
+  have hfd_v : fderiv ℝ (expMap g gi hC p) v
+      = expJetPi.comp ((Φ 1).comp (expJetIota (n := n))) := hfdv.fderiv
+  have hfd_vk : fderiv ℝ (expMap g gi hC p) (v + k)
+      = expJetPi.comp ((Φ' 1).comp (expJetIota (n := n))) := hfdvk.fderiv
+  -- continuity of the propagators from their ODE derivatives.
+  have hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1) :=
+    fun t ht => (hΦderiv t ht).continuousWithinAt
+  have hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) 1) :=
+    fun t ht => (hΦ'deriv t ht).continuousWithinAt
+  -- the vector second variation `Q^{hk}_v`.
+  obtain ⟨Q, hQ0, _hQcont, _hQint, hQderiv⟩ :=
+    expJet2Fund g gi hC p v Φ hv.le hΦcont h k
+  -- the Jacobi bound `Kstar` on `‖DF(Y_v t)‖`.
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv.le
+  -- the quadratic remainder bound `‖r(t)‖ ≤ C‖k‖²`.
+  obtain ⟨C, hC0, hrbd⟩ := expJet2_remainder_quadratic_bound g gi hC p v k h Φ Φ'
+    hv.le hvk.le hΦ0 hΦ'0 hΦcont hΦ'cont hΦderiv hΦ'deriv
+  -- fed as `ρ = C‖k‖²` into the residual/Grönwall estimate.
+  have hρ0 : (0 : ℝ) ≤ C * ‖k‖ ^ 2 := mul_nonneg hC0 (sq_nonneg _)
+  have hresidual : ‖Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1‖
+      ≤ (C * ‖k‖ ^ 2) * Real.exp Kstar :=
+    expJet2_residual_bound g gi hC p v (v + k) Φ Φ' Q h k hΦ0 hΦ'0 hQ0
+      hΦderiv hΦ'deriv hQderiv Kstar (C * ‖k‖ ^ 2) hKstar0 hρ0 hKstar hrbd
+  -- project by `π` (`‖π‖ ≤ 1`), which is the `.1` coordinate.
+  refine ⟨expJetPi (Q 1), C * Real.exp Kstar, mul_nonneg hC0 (Real.exp_pos _).le, ?_⟩
+  rw [hfd_vk, hfd_v]
+  simp only [ContinuousLinearMap.comp_apply]
+  have hπsub : expJetPi (Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1)
+      = expJetPi (Φ' 1 (expJetIota h)) - expJetPi (Φ 1 (expJetIota h)) - expJetPi (Q 1) := by
+    rw [map_sub, map_sub]
+  calc ‖expJetPi (Φ' 1 (expJetIota h)) - expJetPi (Φ 1 (expJetIota h)) - expJetPi (Q 1)‖
+      = ‖expJetPi (Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1)‖ := by rw [hπsub]
+    _ ≤ ‖expJetPi (n := n)‖ * ‖Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1‖ :=
+        (expJetPi (n := n)).le_opNorm _
+    _ ≤ 1 * ‖Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1‖ :=
+        mul_le_mul_of_nonneg_right expJetPi_opNorm_le (norm_nonneg _)
+    _ = ‖Φ' 1 (expJetIota h) - Φ 1 (expJetIota h) - Q 1‖ := one_mul _
+    _ ≤ (C * ‖k‖ ^ 2) * Real.exp Kstar := hresidual
+    _ = C * Real.exp Kstar * ‖k‖ ^ 2 := by ring
+
 end QIQTH.ExpMap
