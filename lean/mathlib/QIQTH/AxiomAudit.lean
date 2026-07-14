@@ -10113,6 +10113,21 @@ namespace QIQTH.AxiomAudit
 -- Does NOT alone give ‖r‖≤C‖k‖², NOT ContDiff² exp_p, NOT κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT
 -- numerical-G, NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesicField_DF_second_order_taylor
+-- ★ PARAMETRIX P1 RUNG 2 (3c/4, remainder-bound ingredient ii — the LAST one) — the 2nd-order tube accuracy
+-- (ExpMapContDiff2.lean).  expJet_fderiv_lipschitzOnWith (DF Lipschitz on the tube ball, mirror of the D²F one) +
+-- geodesicField_F_second_order_taylor (F's Taylor remainder ‖F y−F x−DF x(y−x)‖≤M‖y−x‖², mirror of the DF one) +
+-- expTube_second_order_residual_hasDerivWithinAt (the W=Y_{v+k}−Y_v−Φ(ιk) residual ODE W'=DF(Y_v)(W)+rF) +
+-- gronwall_vec_residual_Icc ([0,1]-uniform vector Grönwall) ⟹ expTube_second_order_accuracy:
+-- ∀t∈Icc 0 1, ‖Y_{v+k}(t)−Y_v(t)−Φ(t)(ιk)‖ ≤ (M·(e^{Kf})²·e^{Kstar})·‖k‖² (tube two-point separation
+-- ‖Y_{v+k}−Y_v‖≤‖k‖e^{Kf} via geodesic_twopoint_gronwall).  ALL THREE remainder-bound ingredients (i,ii,iii) now
+-- DONE.  HONEST: still the ASSEMBLY ‖r‖≤C‖k‖² + (B) HasFDerivAt + (C) continuity + (D) discharge remain before
+-- ContDiff² exp_p is unconditional.  Does NOT alone give ContDiff²/κ=1/6/parametrix/general a₁=R/6/numerical-G.
+-- [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet_fderiv_lipschitzOnWith
+#print axioms QIQTH.ExpMap.geodesicField_F_second_order_taylor
+#print axioms QIQTH.ExpMap.expTube_second_order_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.gronwall_vec_residual_Icc
+#print axioms QIQTH.ExpMap.expTube_second_order_accuracy
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

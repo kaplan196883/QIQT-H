@@ -1218,4 +1218,269 @@ theorem geodesicField_DF_second_order_taylor (g gi : Point n → Fin n → Fin n
       ≤ L * ‖y - x‖ * ‖y - x‖ := hmv
     _ = L * ‖y - x‖ ^ 2 := by ring
 
+/-! ### Rung-2 remainder-bound ingredient (ii): 2nd-order tube accuracy
+
+Two floor lemmas, direct mirrors one order down of the `D²F`/`DF` bricks above:
+* `expJet_fderiv_lipschitzOnWith` — `DF = fderiv F` is Lipschitz on the confined tube ball (mirror
+  of `expJet_fderiv2_lipschitzOnWith` with `contDiff_fderiv_geodesicField` in place of
+  `contDiff_fderiv2_geodesicField`);
+* `geodesicField_F_second_order_taylor` — `F = geodesicField`'s first-order Taylor remainder about
+  `x` is `O(‖y − x‖²)` on the tube ball (mirror of `geodesicField_DF_second_order_taylor` with
+  `F`/`DF` in place of `DF`/`D²F`). -/
+
+/-- **`DF` is Lipschitz on the confined tube ball.**  The direct `DF` analog of
+    `expJet_fderiv2_lipschitzOnWith` one order down.  `DF = fderiv (geodesicField g gi)` is `C^∞`
+    (`contDiff_fderiv_geodesicField`), hence `C¹`, and the tube ball
+    `Metric.closedBall (p,0) (expConst · expRho)` is compact and convex; a `C¹` map is Lipschitz on a
+    compact convex set (`ContDiffOn.exists_lipschitzOnWith`).  Ingredient (ii) of the Rung-2 capstone:
+    the `DF`-Lipschitz constant `M` that `geodesicField_F_second_order_taylor` consumes. -/
+theorem expJet_fderiv_lipschitzOnWith (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    ∃ Ldf : NNReal, LipschitzOnWith Ldf (fderiv ℝ (geodesicField g gi))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)) :=
+  ((contDiff_fderiv_geodesicField g gi hC).contDiffOn
+      (s := Metric.closedBall ((p, 0) : Point n × Point n)
+        (expConst g gi hC p * expRho g gi hC p))).exists_lipschitzOnWith
+    (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+
+/-- **`F` second-order Taylor remainder is quadratic on the confined tube ball.**
+    With `M` a Lipschitz constant of `DF = fderiv (geodesicField g gi)` on the tube ball
+    `closedBall (p,0) (expConst·expRho)` (from `expJet_fderiv_lipschitzOnWith`), the first-order
+    Taylor remainder of `F = geodesicField g gi` about `x` is bounded by `M·‖y − x‖²` for `x, y` in
+    that ball.  Ingredient (ii) of the Rung-2 capstone quadratic remainder bound — the direct `F`/`DF`
+    mirror of `geodesicField_DF_second_order_taylor`.  `F` is `C^∞` (`contDiff_geodesicField`), hence
+    differentiable everywhere; `DF` is `M`-Lipschitz on the (convex, compact) ball, and the
+    fixed-linear-map mean-value inequality `Convex.norm_image_sub_le_of_norm_fderiv_le'` on the segment
+    `[x, y]` (with `‖DF z − DF x‖ ≤ M·‖z − x‖ ≤ M·‖y − x‖`) yields the remainder constant `M·‖y − x‖`,
+    i.e. the quadratic bound `M·‖y − x‖²`. -/
+theorem geodesicField_F_second_order_taylor (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (M : ℝ) (hM0 : 0 ≤ M)
+    (hLip : LipschitzOnWith M.toNNReal (fderiv ℝ (geodesicField g gi))
+      (Metric.closedBall ((p,0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (x y : Point n × Point n)
+    (hx : x ∈ Metric.closedBall ((p,0) : Point n × Point n)
+      (expConst g gi hC p * expRho g gi hC p))
+    (hy : y ∈ Metric.closedBall ((p,0) : Point n × Point n)
+      (expConst g gi hC p * expRho g gi hC p)) :
+    ‖geodesicField g gi y - geodesicField g gi x
+        - (fderiv ℝ (geodesicField g gi) x) (y - x)‖
+      ≤ M * ‖y - x‖ ^ 2 := by
+  -- The segment `[x, y]` is convex and sits inside the (convex) ball.
+  have hseg : segment ℝ x y ⊆
+      Metric.closedBall ((p,0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p) :=
+    (convex_closedBall _ _).segment_subset hx hy
+  -- `F` is differentiable everywhere (it is `C^∞`).
+  have hdiff : ∀ z ∈ segment ℝ x y, DifferentiableAt ℝ (geodesicField g gi) z :=
+    fun z _ => ((contDiff_geodesicField g gi hC).differentiable (by simp)).differentiableAt
+  -- Uniform bound on the derivative-difference over the segment: `‖DF z − DF x‖ ≤ M·‖y − x‖`.
+  have hbound : ∀ z ∈ segment ℝ x y,
+      ‖fderiv ℝ (geodesicField g gi) z
+          - fderiv ℝ (geodesicField g gi) x‖ ≤ M * ‖y - x‖ := by
+    intro z hz
+    have hd := hLip.dist_le_mul z (hseg hz) x hx
+    rw [dist_eq_norm, dist_eq_norm, Real.coe_toNNReal M hM0] at hd
+    calc ‖fderiv ℝ (geodesicField g gi) z - fderiv ℝ (geodesicField g gi) x‖
+        ≤ M * ‖z - x‖ := hd
+      _ ≤ M * ‖y - x‖ := mul_le_mul_of_nonneg_left (norm_sub_le_of_mem_segment hz) hM0
+  -- Mean-value inequality on the segment, fixed-linear-map (`φ = DF x`) version.
+  have hmv := (convex_segment x y).norm_image_sub_le_of_norm_fderiv_le'
+    (f := geodesicField g gi)
+    (φ := fderiv ℝ (geodesicField g gi) x)
+    (C := M * ‖y - x‖) hdiff hbound (left_mem_segment ℝ x y) (right_mem_segment ℝ x y)
+  calc ‖geodesicField g gi y - geodesicField g gi x
+          - (fderiv ℝ (geodesicField g gi) x) (y - x)‖
+      ≤ M * ‖y - x‖ * ‖y - x‖ := hmv
+    _ = M * ‖y - x‖ ^ 2 := by ring
+
+/-! ### Rung-2 remainder-bound ingredient (ii), assembly — the 2nd-order tube accuracy
+
+The residual `W(t) := Y_{v+k}(t) − Y_v(t) − Φ_v(t)(ι k)` (with `Y_v = expTube p v`, `ι = expJetIota`,
+and `Φ_v` the abstract first-variation propagator of `expJetFund` for `v`) satisfies `W(0) = 0` and, on
+`[0,1]`, the inhomogeneous linear ODE `W'(t) = DF(Y_v t)(W t) + rF t`, where the source
+`rF t = F(Y_{v+k} t) − F(Y_v t) − DF(Y_v t)(Y_{v+k} t − Y_v t)` is `F`'s own first-order Taylor
+remainder.  Bounding `rF` by (ii-a) (`geodesicField_F_second_order_taylor`) and the two-point tube
+separation `‖Y_{v+k} t − Y_v t‖ ≤ ‖k‖·e^{Kf}` (`geodesic_twopoint_gronwall`), a `[0,1]`-uniform vector
+Grönwall (`gronwall_vec_residual_Icc`) yields the quadratic tube accuracy
+`‖W t‖ ≤ (M·(e^{Kf})²·e^{Kstar})·‖k‖²`. -/
+
+set_option maxHeartbeats 1000000 in
+/-- **The 2nd-order tube-accuracy residual ODE.**  With `Φ` the first-variation propagator for
+    parameter `v` (`expJetFund` witness, derivative law `Φ' = Ψ_v(Φ)`), the tube residual
+    `W(t) = Y_{v+k}(t) − Y_v(t) − Φ(t)(ι k)` obeys, on `[0,1]`,
+    `W'(t) = DF(Y_v t)(W t) + (F(Y_{v+k} t) − F(Y_v t) − DF(Y_v t)(Y_{v+k} t − Y_v t))`.
+
+    Proof: the tubes solve `Y_·' = F(Y_·)` (`expTube_spec`) and the first variation solves
+    `(Φ(ι k))' = DF(Y_v t)(Φ(ι k))` (differentiate `Φ' = Ψ_v(Φ)` applied at the fixed vector `ι k`,
+    `HasDerivWithinAt.clm_apply` against a constant); subtracting the three curves and using linearity
+    of `DF(Y_v t)` (`map_sub`) rearranges into the `DF(Y_v t)(W) + rF` form.  The `F`-analog of
+    `expJet2_residual_hasDerivWithinAt`, one order down. -/
+theorem expTube_second_order_residual_hasDerivWithinAt (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v k : Point n) (hvk : ‖v + k‖ ≤ expRho g gi hC p) (hv : ‖v‖ ≤ expRho g gi hC p)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t)
+    (t : ℝ) (ht : t ∈ Set.Icc (0 : ℝ) 1) :
+    HasDerivWithinAt
+      (fun s => expTube g gi hC p (v + k) s - expTube g gi hC p v s - Φ s (expJetIota k))
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+          (expTube g gi hC p (v + k) t - expTube g gi hC p v t - Φ t (expJetIota k))
+        + (geodesicField g gi (expTube g gi hC p (v + k) t)
+             - geodesicField g gi (expTube g gi hC p v t)
+             - (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                 (expTube g gi hC p (v + k) t - expTube g gi hC p v t)))
+      (Set.Icc (0 : ℝ) 1) t := by
+  have hIcc_Ioo : t ∈ Set.Ioo (-2 : ℝ) 2 := ⟨by linarith [ht.1], by linarith [ht.2]⟩
+  obtain ⟨_, hYdvk, _⟩ := expTube_spec g gi hC p (v + k) hvk
+  obtain ⟨_, hYdv, _⟩ := expTube_spec g gi hC p v hv
+  -- the two tubes' derivatives (within `[0,1]`).
+  have hYvk : HasDerivWithinAt (expTube g gi hC p (v + k))
+      (geodesicField g gi (expTube g gi hC p (v + k) t)) (Set.Icc (0 : ℝ) 1) t :=
+    (hYdvk t hIcc_Ioo).hasDerivWithinAt
+  have hYv : HasDerivWithinAt (expTube g gi hC p v)
+      (geodesicField g gi (expTube g gi hC p v t)) (Set.Icc (0 : ℝ) 1) t :=
+    (hYdv t hIcc_Ioo).hasDerivWithinAt
+  -- first variation `P^k_v(t) = Φ(t)(ι k)` solves `(P^k_v)' = DF(Y_v t)(P^k_v)`.
+  have hP : HasDerivWithinAt (fun s => Φ s (expJetIota k))
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ t (expJetIota k)))
+      (Set.Icc (0 : ℝ) 1) t := by
+    have hcl := (hΦd t ht).clm_apply
+      (hasDerivWithinAt_const (x := t) (s := Set.Icc (0 : ℝ) 1) (c := expJetIota (n := n) k))
+    simpa only [expJetPsi_apply, ContinuousLinearMap.comp_apply, map_zero, add_zero] using hcl
+  -- the natural difference derivative.
+  have hcomb := (hYvk.sub hYv).sub hP
+  -- rearrange the target derivative into the natural one via linearity of `DF(Y_v t)`.
+  have heq :
+      (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+          (expTube g gi hC p (v + k) t - expTube g gi hC p v t - Φ t (expJetIota k))
+        + (geodesicField g gi (expTube g gi hC p (v + k) t)
+             - geodesicField g gi (expTube g gi hC p v t)
+             - (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                 (expTube g gi hC p (v + k) t - expTube g gi hC p v t))
+      = geodesicField g gi (expTube g gi hC p (v + k) t)
+          - geodesicField g gi (expTube g gi hC p v t)
+          - (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Φ t (expJetIota k)) := by
+    simp only [map_sub]
+    abel
+  rw [heq]
+  exact hcomb
+
+/-- **`[0,1]`-uniform inhomogeneous vector Grönwall.**  The `∀ t ∈ [0,1]` version of
+    `gronwall_vec_residual`: under the same hypotheses (`S 0 = 0`, `S' = A(S) + r`, `‖A‖ ≤ K`,
+    `‖r‖ ≤ ρ`), `‖S t‖ ≤ ρ·e^{K}` uniformly for every `t ∈ [0,1]`.  Same `gronwall_Icc01_all` lift
+    as the tail of `expFund_two_pt_diff_Icc`: the per-`t` bound `‖S t‖ ≤ gronwallBound 0 K ρ t` is
+    monotone-dominated by the endpoint constant `ρ·e^{K}` (`gronwallBound_zero_le_exp`). -/
+theorem gronwall_vec_residual_Icc {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (S r : ℝ → E) (A : ℝ → (E →L[ℝ] E)) (K ρ : ℝ) (hK0 : 0 ≤ K) (hρ0 : 0 ≤ ρ)
+    (hS0 : S 0 = 0)
+    (hderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt S (A t (S t) + r t) (Set.Icc (0 : ℝ) 1) t)
+    (hA : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖A t‖ ≤ K)
+    (hr : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖r t‖ ≤ ρ) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖S t‖ ≤ ρ * Real.exp K := by
+  have hall := gronwall_Icc01_all S (fun t => A t (S t) + r t) 0 K ρ hderiv
+    (by rw [hS0]; simp)
+    (fun t ht => by
+      calc ‖A t (S t) + r t‖ ≤ ‖A t (S t)‖ + ‖r t‖ := norm_add_le _ _
+        _ ≤ K * ‖S t‖ + ρ := by
+            refine add_le_add ?_ (hr t ht)
+            calc ‖A t (S t)‖ ≤ ‖A t‖ * ‖S t‖ := (A t).le_opNorm _
+              _ ≤ K * ‖S t‖ := mul_le_mul_of_nonneg_right (hA t ht) (norm_nonneg _))
+  intro t ht
+  exact (hall t ht).trans (gronwallBound_zero_le_exp K ρ t hK0 hρ0 ht.1 ht.2)
+
+set_option maxHeartbeats 2000000 in
+/-- **EXP-JET (ii) — the 2nd-order tube accuracy.**  For `‖v + k‖ ≤ expRho`, `‖v‖ ≤ expRho`, with `M`
+    a `DF`-Lipschitz constant on the tube ball (`expJet_fderiv_lipschitzOnWith`), `Kf` an `F`-Lipschitz
+    constant on the same ball, `Kstar` a `[0,1]`-bound on `‖DF(Y_v t)‖`, and `Φ` the first-variation
+    propagator for `v` (`expJetFund` witness, `Φ 0 = 1`, derivative law `Φ' = Ψ_v(Φ)`), the tube
+    residual `W(t) = Y_{v+k}(t) − Y_v(t) − Φ(t)(ι k)` is `O(‖k‖²)` uniformly on `[0,1]`:
+    `‖W t‖ ≤ (M·(e^{Kf})²·e^{Kstar})·‖k‖²`.
+
+    Assembly: the residual ODE `W' = DF(Y_v)(W) + rF` (`expTube_second_order_residual_hasDerivWithinAt`)
+    with initial `W 0 = 0`; the source `‖rF t‖ ≤ M·‖Y_{v+k} t − Y_v t‖²` (`geodesicField_F_second_order_taylor`,
+    (ii-a)); the two-point tube separation `‖Y_{v+k} t − Y_v t‖ ≤ ‖k‖·e^{Kf}`
+    (`geodesic_twopoint_gronwall`), giving `‖rF t‖ ≤ M·(e^{Kf})²·‖k‖²`; then the `[0,1]`-uniform vector
+    Grönwall (`gronwall_vec_residual_Icc`).  Ingredient (ii) of the Rung-2 quadratic remainder bound. -/
+theorem expTube_second_order_accuracy (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v k : Point n) (hvk : ‖v + k‖ ≤ expRho g gi hC p) (hv : ‖v‖ ≤ expRho g gi hC p)
+    (M : ℝ) (hM0 : 0 ≤ M) (Kf : NNReal) (Kstar : ℝ) (hKstar0 : 0 ≤ Kstar)
+    (hLipF : LipschitzOnWith Kf (geodesicField g gi)
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hLipDF : LipschitzOnWith M.toNNReal (fderiv ℝ (geodesicField g gi))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hKstarv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ Kstar)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p (v + k) t - expTube g gi hC p v t - Φ t (expJetIota k)‖
+        ≤ (M * (Real.exp (Kf : ℝ)) ^ 2 * Real.exp Kstar) * ‖k‖ ^ 2 := by
+  have hC₀ := expConst_nonneg g gi hC p
+  set Rb : ℝ := expConst g gi hC p * expRho g gi hC p with hRbdef
+  set S : Set (Point n × Point n) := Metric.closedBall ((p, 0) : Point n × Point n) Rb with hSdef
+  obtain ⟨hY0vk, hYdvk, hconfvk⟩ := expTube_spec g gi hC p (v + k) hvk
+  obtain ⟨hY0v, hYdv, hconfv⟩ := expTube_spec g gi hC p v hv
+  have hIcc_Ioo : ∀ t ∈ Set.Icc (0 : ℝ) 1, t ∈ Set.Ioo (-2 : ℝ) 2 :=
+    fun t ht => ⟨by linarith [ht.1], by linarith [ht.2]⟩
+  -- both tubes lie in the ball `S` on `[0,1]`.
+  have hSvk : ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p (v + k) t ∈ S := by
+    intro t ht; rw [hSdef, Metric.mem_closedBall, dist_eq_norm]
+    calc ‖expTube g gi hC p (v + k) t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v + k‖ := hconfvk t ht
+      _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hvk hC₀
+  have hSv : ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p v t ∈ S := by
+    intro t ht; rw [hSdef, Metric.mem_closedBall, dist_eq_norm]
+    calc ‖expTube g gi hC p v t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v‖ := hconfv t ht
+      _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hv hC₀
+  -- two-point tube separation `‖Y_{v+k} t − Y_v t‖ ≤ ‖k‖·e^{Kf}`.
+  have hdist0 : dist (expTube g gi hC p (v + k) 0) (expTube g gi hC p v 0) = ‖k‖ := by
+    rw [hY0vk, hY0v, dist_eq_norm, Prod.mk_sub_mk, add_sub_cancel_left, sub_self, Prod.norm_def,
+      norm_zero, max_eq_right (norm_nonneg _)]
+  have htwopoint := geodesic_twopoint_gronwall g gi (S := S) (K := Kf) hLipF
+    (fun t ht => hYdvk t (hIcc_Ioo t ht)) (fun t ht => hYdv t (hIcc_Ioo t ht)) hSvk hSv
+  have hYvw : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p (v + k) t - expTube g gi hC p v t‖ ≤ ‖k‖ * Real.exp (Kf : ℝ) := by
+    intro t ht
+    have h := htwopoint t ht
+    rw [hdist0, dist_eq_norm] at h
+    refine h.trans (mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr ?_) (norm_nonneg _))
+    calc (Kf : ℝ) * t ≤ (Kf : ℝ) * 1 := mul_le_mul_of_nonneg_left ht.2 (by positivity)
+      _ = (Kf : ℝ) := mul_one _
+  -- the Taylor-remainder source bound `‖rF t‖ ≤ M·(e^{Kf})²·‖k‖²`.
+  set ρ : ℝ := M * (‖k‖ * Real.exp (Kf : ℝ)) ^ 2 with hρdef
+  have hρ0 : 0 ≤ ρ := by rw [hρdef]; positivity
+  have hr : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖geodesicField g gi (expTube g gi hC p (v + k) t)
+          - geodesicField g gi (expTube g gi hC p v t)
+          - (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              (expTube g gi hC p (v + k) t - expTube g gi hC p v t)‖ ≤ ρ := by
+    intro t ht
+    have htaylor := geodesicField_F_second_order_taylor g gi hC p M hM0 hLipDF
+      (expTube g gi hC p v t) (expTube g gi hC p (v + k) t) (hSv t ht) (hSvk t ht)
+    refine htaylor.trans ?_
+    rw [hρdef]
+    exact mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) (hYvw t ht) 2) hM0
+  -- initial condition `W 0 = 0`.
+  have hW0 : expTube g gi hC p (v + k) 0 - expTube g gi hC p v 0 - Φ 0 (expJetIota k) = 0 := by
+    rw [hY0vk, hY0v, hΦ0, ContinuousLinearMap.id_apply, expJetIota_apply]
+    ext <;> simp
+  -- apply the `[0,1]`-uniform vector Grönwall.
+  have hgron := gronwall_vec_residual_Icc
+    (fun s => expTube g gi hC p (v + k) s - expTube g gi hC p v s - Φ s (expJetIota k))
+    (fun t => geodesicField g gi (expTube g gi hC p (v + k) t)
+        - geodesicField g gi (expTube g gi hC p v t)
+        - (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+            (expTube g gi hC p (v + k) t - expTube g gi hC p v t))
+    (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) Kstar ρ hKstar0 hρ0 hW0
+    (fun t ht => expTube_second_order_residual_hasDerivWithinAt g gi hC p v k hvk hv Φ hΦd t ht)
+    hKstarv hr
+  intro t ht
+  refine (hgron t ht).trans (le_of_eq ?_)
+  rw [hρdef]; ring
+
 end QIQTH.ExpMap
