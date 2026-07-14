@@ -433,6 +433,18 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   `expJetFund` chain) + the parameter-residual Grönwall ⟹ `v↦Φ_v(1)` is `C¹`. `ContDiff² exp_p` is NOT yet
   unconditional. Next reachable brick: the `D²F` uniform operator-norm bound on the `[0,1]` tube (the Grönwall
   coefficient bound, analog of `expJet_fderiv_tube_bddAbove_unif`), the prerequisite for the `Q_v` PL construction.
+- **2026-07-15 (RUNG 2 cont. — `D²F` uniform tube bound — DONE, PUSHED `bd159c11`):** `expJet_fderiv2_tube_bddAbove_unif`
+  in `ExpMapContDiff2.lean` ([AF] std-3): `∃ Kstar≥0, ‖D²F(expTube p v t)‖ ≤ Kstar` uniformly over `‖v‖≤expRho`,
+  `t∈[0,1]` — the `D²F` analog of `expJet_fderiv_tube_bddAbove_unif`. Confinement (`expTube_spec`) → fixed compact
+  ball; `D²F` is `C^∞` (`contDiff_fderiv2_geodesicField`) → continuous; `IsCompact.exists_bound_of_continuousOn` on
+  the ℝ-valued `q↦‖D²F q‖` (routing through the scalar norm dodges the nested-CLM `E→L E→L E` instance diamond).
+  The Grönwall COEFFICIENT bound `Q_v` consumes. **STRATEGY NOTE (leaner path):** `Q_v` needs `D²F` as a BOUNDED +
+  LIPSCHITZ field on the tube (the `LipschitzOnWith (fderiv F)` shape `expFund_two_pt_diff` already consumes for
+  `DF`), NOT the giant `D²F` closed form — use the campaign's equilibrium-Grönwall technique. Remaining Rung-2
+  bricks: (2) `D²F` Lipschitz-on-tube (`Convex.lipschitzOnWith_of_nnnorm_fderiv_le` on the confined ball, `D³F`
+  bounded), (3) the `Q_v` Jet₂ fundamental-solution PL tower on `[0,1]` (mirror `expJetFund` local→shifted→glue —
+  the multi-week bulk), (4) the parameter-residual Grönwall ⟹ `v↦Φ_v(1)` is `C¹` ⟹ discharge the reduction ⟹
+  `ContDiff² exp_p`.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
