@@ -10035,6 +10035,15 @@ namespace QIQTH.AxiomAudit
 -- itself give ContDiff² exp_p (needs Q_v + the parameter Grönwall), NOT κ=1/6, NOT the parametrix (P2), NOT
 -- general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet_fderiv2_tube_bddAbove_unif
+-- ★ PARAMETRIX P1 RUNG 2 (cont.) — the D²F Lipschitz-on-tube-ball bound (ExpMapContDiff2.lean).
+-- expJet_fderiv2_lipschitzOnWith: ∃ Ld2f, LipschitzOnWith Ld2f D²F (closedBall (p,0) (expConst·expRho)) — D²F is
+-- C^∞ (contDiff_fderiv2_geodesicField), so ContDiffOn.exists_lipschitzOnWith (Lipschitz-from-C¹-on-compact-convex,
+-- convex_closedBall + isCompact_closedBall) gives it directly (mirrors the DF hLipDF discharge; no CLM diamond).
+-- The SECOND Q_v Grönwall ingredient (the LipschitzOnWith(fderiv F) shape expFund_two_pt_diff consumes for DF, now
+-- for D²F).  HONEST: with the tube bound, completes the D²F field-regularity inputs for the (future) Jet₂
+-- fundamental solution Q_v; does NOT by itself give ContDiff² exp_p (needs Q_v + the parameter Grönwall), NOT
+-- κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet_fderiv2_lipschitzOnWith
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
