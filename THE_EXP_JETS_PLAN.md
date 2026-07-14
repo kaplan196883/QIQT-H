@@ -538,6 +538,20 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   variant) ⟹ `‖W(t)‖≤C‖k‖²`. Then ASSEMBLE `‖r‖≤C‖k‖²` (r's DF-difference = `D²F(Y_v)(ΔY)+O(‖ΔY‖²)` [i],
   `ΔY=Φ_v(ιk)+O(‖k‖²)` [ii], `D²F(Y_v)(Φ_v(ιk),Φ_v(ιh))=Θ^{hk}` [iii-symmetry]) → (B)/(C)/(D) ⟹ `ContDiff² exp_p`
   UNCONDITIONAL.
+- **2026-07-15 (RUNG 2 cont. — 3c/4 ingredient (ii) — DONE, PUSHED `136d97a8`):** `expJet_fderiv_lipschitzOnWith`
+  (DF Lipschitz, mirror) + `geodesicField_F_second_order_taylor` (F Taylor remainder, mirror) +
+  `expTube_second_order_residual_hasDerivWithinAt` (the `W=Y_{v+k}−Y_v−Φ(ιk)` residual ODE) + `gronwall_vec_residual_Icc`
+  ([0,1]-uniform Grönwall) + capstone `expTube_second_order_accuracy` (`∀t∈Icc 0 1,
+  ‖Y_{v+k}(t)−Y_v(t)−Φ(t)(ιk)‖ ≤ (M(e^{Kf})²e^{Kstar})‖k‖²`, tube separation via `geodesic_twopoint_gronwall`).
+  **ALL THREE remainder-bound ingredients (i,ii,iii) DONE.** REMAINING to `ContDiff²`: **ASSEMBLE** `‖r(t)‖≤C‖k‖²` on
+  `[0,1]` where `r(t)=[DF(Y_{v+k} t)−DF(Y_v t)](Φ_{v+k}(t)(ιh))−Θ^{hk}(t)`, `Θ^{hk}=D²F(Y_v t)(Φ_v(t)(ιh))(Φ_v(t)(ιk))`:
+  the `DF`-difference `=D²F(Y_v)(ΔY)+O(‖ΔY‖²)` [i] with `ΔY=Φ_v(ιk)+O(‖k‖²)` [ii] and `‖ΔY‖=O(‖k‖)`, `Φ_{v+k}(ιh)=Φ_v(ιh)+O(‖k‖)`
+  [iii-Lipschitz], `D²F(Y_v)(Φ_v(ιk))(Φ_v(ιh))=Θ^{hk}` [iii-symmetry] ⟹ all cross terms `O(‖k‖²)` — a careful
+  triangle-inequality glue brick. Then **(B)** `‖S(1)‖≤ρe^{Kstar}` via `expJet2_residual_bound` with `ρ=C‖k‖²` ⟹
+  `HasFDerivAt (v↦fderiv exp_p v) (k↦h↦π Q^{hk}(1)) v` (+ the existential-Φ↔canonical-`fderiv exp_p` bridge via
+  `hasFDerivAt_expMap`); **(C)** continuity of `v↦π Q^{hk}(1)` (a `Q`-two-point Grönwall, mirror `expFund_two_pt_diff`);
+  **(D)** `ContDiffOn ℝ 1 (fderiv exp_p) (ball)` ⟹ `expMap_contDiffOn_two` UNCONDITIONAL via
+  `expMap_contDiffOn_two_of_fderiv_contDiffOn_one`.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
