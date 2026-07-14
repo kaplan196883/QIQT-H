@@ -782,6 +782,7 @@ import QIQTH.Sphere3HeatTrace
 import QIQTH.TraceClass.HilbertSchmidt
 import QIQTH.TraceClass.Trace
 import QIQTH.TraceClass.Cyclic
+import QIQTH.TraceClass.Spectral
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

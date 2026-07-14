@@ -11679,5 +11679,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TraceClass.traceE_comp_comm_hs
 #print axioms QIQTH.TraceClass.traceE_comp_comm
 #print axioms QIQTH.TraceClass.IsTraceClass.comp_right_bounded
+-- T4 — McKEAN–SINGER: POSITIVE DISCRETE-SPECTRUM ⟹ Tr = Σλ.  traceE_eq_tsum_eigenvalues (the load-bearing
+-- identity: for A with an eigenbasis A(bᵢ)=μᵢ•bᵢ, Tr A = ∑' i, μᵢ — unconditional; termwise
+-- inner_smul_right + orthonormality ⟪bᵢ,bᵢ⟫=1).  re_traceE_eq_tsum_eigenvalues ((Tr A).re = ∑' μᵢ).
+-- ★★★ mckean_singer_heatTrace (headline corollary Tr e^{−tΔ} = Σ e^{−λt}, eigenvalues e^{−tλᵢ}).
+-- isTraceClass_of_summable_eigenvalues (the ⟸ direction: Summable μ ⟹ A trace-class, via the ℓ²-diagonal
+-- √μ-multiplier B on lp transported through b.repr, HS with ∑‖B bᵢ‖²=∑μᵢ, B∘B=A on the dense basis span
+-- ⟹ A=(Bᴴ)ᴴ∘B).  HONEST (binding): the EIGENBASIS is CARRIED AS A HYPOTHESIS (hA) — the discrete spectrum
+-- is exactly the L3/Rellich manifold-analysis wall, NOT proved here; this closes the trace/spectral (L5)
+-- side GIVEN that input.  Does NOT build the manifold heat kernel or discharge general a₁=R/6 (needs
+-- L1+L3); a₁=R/6 stays VALIDATED on S², not generally discharged.  NOT the conjecture/strong-principle/QG.
+-- [AF] std-3.
+#print axioms QIQTH.TraceClass.traceE_eq_tsum_eigenvalues
+#print axioms QIQTH.TraceClass.re_traceE_eq_tsum_eigenvalues
+#print axioms QIQTH.TraceClass.mckean_singer_heatTrace
+#print axioms QIQTH.TraceClass.isTraceClass_of_summable_eigenvalues
 
 end QIQTH.AxiomAudit
