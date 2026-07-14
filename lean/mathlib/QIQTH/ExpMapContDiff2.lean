@@ -118,4 +118,36 @@ theorem hasFDerivAt_fderiv_geodesicField (g gi : Point n → Fin n → Fin n →
       (fderiv ℝ (fderiv ℝ (geodesicField g gi)) q) q :=
   ((contDiff_fderiv_geodesicField g gi hC).differentiable (by simp)).differentiableAt.hasFDerivAt
 
+/-- **Uniform operator-norm bound of `D²F` over the `[0,1]` confined tube.**  The direct `D²F`
+    analog of `expJet_fderiv_tube_bddAbove_unif` (which bounds the first derivative `DF`).
+    Confinement (`expTube_spec`) puts every tube point `expTube p v t` (for `‖v‖ ≤ expRho`,
+    `t ∈ [0,1]`) in a FIXED closed ball around `(p, 0)`; `D²F = fderiv (fderiv F)` is continuous
+    (`contDiff_fderiv2_geodesicField`), so a continuous function on that compact ball is bounded,
+    yielding a uniform `Kstar`. -/
+theorem expJet_fderiv2_tube_bddAbove_unif (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    ∃ Kstar : ℝ, 0 ≤ Kstar ∧ ∀ v : Point n, ‖v‖ ≤ expRho g gi hC p → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t)‖ ≤ Kstar := by
+  have hC₀ := expConst_nonneg g gi hC p
+  have hρ0 : 0 ≤ expRho g gi hC p := (expRho_pos g gi hC p).le
+  set Rb : ℝ := expConst g gi hC p * expRho g gi hC p with hRbdef
+  -- Route through the ℝ-valued norm function `q ↦ ‖D²F q‖` to avoid the nested-CLM topology
+  -- diamond that `exists_bound_of_continuousOn` hits on the codomain `E →L[ℝ] E →L[ℝ] E`.
+  have hdFcont : Continuous (fun q => ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) q‖) :=
+    ((contDiff_fderiv_geodesicField g gi hC).continuous_fderiv (by simp)).norm
+  obtain ⟨C, hC'⟩ :=
+    (isCompact_closedBall ((p, 0) : Point n × Point n) Rb).exists_bound_of_continuousOn
+      hdFcont.continuousOn
+  refine ⟨max C 0, le_max_right _ _, fun v hv t ht => ?_⟩
+  have hmem : expTube g gi hC p v t ∈ Metric.closedBall ((p, 0) : Point n × Point n) Rb := by
+    rw [Metric.mem_closedBall, dist_eq_norm]
+    obtain ⟨_, _, hconf⟩ := expTube_spec g gi hC p v hv
+    calc ‖expTube g gi hC p v t - ((p, 0) : Point n × Point n)‖
+        ≤ expConst g gi hC p * ‖v‖ := hconf t ht
+      _ ≤ Rb := by rw [hRbdef]; exact mul_le_mul_of_nonneg_left hv hC₀
+  have hbnd := hC' _ hmem
+  calc ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t)‖
+      ≤ C := le_trans (le_abs_self _) (by simpa using hbnd)
+    _ ≤ max C 0 := le_max_left _ _
+
 end QIQTH.ExpMap

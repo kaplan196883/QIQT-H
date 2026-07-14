@@ -10026,6 +10026,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.contDiff_fderiv_geodesicField
 #print axioms QIQTH.ExpMap.contDiff_fderiv2_geodesicField
 #print axioms QIQTH.ExpMap.hasFDerivAt_fderiv_geodesicField
+-- ★ PARAMETRIX P1 RUNG 2 (cont.) — the D²F uniform tube bound (ExpMapContDiff2.lean).
+-- expJet_fderiv2_tube_bddAbove_unif: ‖D²F(expTube p v t)‖ ≤ Kstar UNIFORMLY over ‖v‖≤expRho, t∈[0,1] — the
+-- confinement (expTube_spec) puts the tube in a FIXED compact ball, D²F is C^∞ (contDiff_fderiv2_geodesicField)
+-- hence continuous, IsCompact.exists_bound_of_continuousOn on the ℝ-valued q↦‖D²F q‖ (dodging the nested-CLM
+-- instance diamond) gives the bound.  This is the Grönwall COEFFICIENT bound the (future) Jet₂ fundamental
+-- solution Q_v construction consumes — the D²F analog of expJet_fderiv_tube_bddAbove_unif.  HONEST: does NOT by
+-- itself give ContDiff² exp_p (needs Q_v + the parameter Grönwall), NOT κ=1/6, NOT the parametrix (P2), NOT
+-- general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet_fderiv2_tube_bddAbove_unif
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
