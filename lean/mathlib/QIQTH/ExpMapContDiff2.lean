@@ -165,4 +165,108 @@ theorem expJet_fderiv2_lipschitzOnWith (g gi : Point n → Fin n → Fin n → �
         (expConst g gi hC p * expRho g gi hC p))).exists_lipschitzOnWith
     (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
 
+/-! ### Sub-brick 3a — the inhomogeneous source `Θ^{hk}` of the Jet₂ second-variation ODE
+
+The second variation `Q^{hk}(t)` of the flow (vector-valued in `Point n × Point n`) solves the
+INHOMOGENEOUS linear ODE `Q'(t) = DF(Y_v t)·Q(t) + Θ^{hk}(t)`, `Q(0) = 0`, whose homogeneous part is
+propagated by the built fundamental solution `Φ_v` (`expJetFund`, coefficient `expJetPsi`).  The
+inhomogeneous SOURCE is
+`Θ^{hk}(t) = D²F(Y_v t)( Φ_v(t)(ι h) )( Φ_v(t)(ι k) )`, `ι = expJetIota` (`h ↦ (0,h)`),
+`D²F = fderiv (fderiv F)` (`contDiff_fderiv2_geodesicField`).
+
+Because `Φ_v` is the ∃-object of `expJetFund` (not a global def), we PARAMETRIZE by an abstract `Φ`,
+exactly as `expFund_two_pt_diff` does.  This sub-brick delivers the source `def` plus its `[0,1]`
+regularity (continuity + a uniform norm bound), the well-posedness data the (next) `Q^{hk}`
+construction consumes.  It does NOT build `Q^{hk}` (the multi-week bilinear-valued PL tower). -/
+
+/-- **The inhomogeneous source term `Θ^{hk}(t)` of the Jet₂ second-variation ODE.**
+    `Θ^{hk}(t) = D²F(Y_v t)( Φ(t)(ι h) )( Φ(t)(ι k) )`, where `D²F = fderiv (fderiv F)` (the second
+    Fréchet derivative of the geodesic field, `contDiff_fderiv2_geodesicField`), `Y_v t = expTube p v t`
+    is the confined geodesic tube, `ι = expJetIota` (`h ↦ (0,h)`), and `Φ` is the operator-valued
+    fundamental solution (abstract argument, instantiated at `expJetFund`'s witness downstream).
+    `fderiv (fderiv F) x : E →L[ℝ] E →L[ℝ] E`, applied to the two vectors gives an element of `E`. -/
+noncomputable def expJet2Rhs (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n))) (h k : Point n) (t : ℝ) :
+    Point n × Point n :=
+  (fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t))
+    (Φ t (expJetIota h)) (Φ t (expJetIota k))
+
+@[simp] theorem expJet2Rhs_apply (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n))) (h k : Point n) (t : ℝ) :
+    expJet2Rhs g gi hC p v Φ h k t
+      = (fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t))
+          (Φ t (expJetIota h)) (Φ t (expJetIota k)) := rfl
+
+/-- **`Θ^{hk}` is continuous on `[0,1]`.**  For `‖v‖ ≤ expRho` and `Φ` continuous on `[0,1]`:
+    `D²F` is continuous (`contDiff_fderiv2_geodesicField`), `t ↦ Y_v t` is continuous on `[0,1]`
+    (`expTube_continuousOn`), so `t ↦ D²F(Y_v t)` is continuous there; `t ↦ Φ t (ι h)` and
+    `t ↦ Φ t (ι k)` are continuous (`ContinuousOn.clm_apply` against the fixed vectors `ι h`, `ι k`);
+    the bilinear CLM application `(A, a, b) ↦ A a b` is continuous, applied via `ContinuousOn.clm_apply`
+    twice. -/
+theorem expJet2Rhs_continuousOn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦ : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) (h k : Point n) :
+    ContinuousOn (fun t => expJet2Rhs g gi hC p v Φ h k t) (Set.Icc (0 : ℝ) 1) := by
+  -- `t ↦ D²F(Y_v t)` continuous on `[0,1]`.
+  have hD2cont : Continuous (fderiv ℝ (fderiv ℝ (geodesicField g gi))) :=
+    (contDiff_fderiv2_geodesicField g gi hC).continuous
+  have hA : ContinuousOn
+      (fun t => fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t))
+      (Set.Icc (0 : ℝ) 1) :=
+    hD2cont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)
+  -- `t ↦ Φ t (ι h)` and `t ↦ Φ t (ι k)` continuous on `[0,1]`.
+  have ha : ContinuousOn (fun t => Φ t (expJetIota h)) (Set.Icc (0 : ℝ) 1) :=
+    hΦ.clm_apply continuousOn_const
+  have hb : ContinuousOn (fun t => Φ t (expJetIota k)) (Set.Icc (0 : ℝ) 1) :=
+    hΦ.clm_apply continuousOn_const
+  -- assemble via the bilinear CLM application (`ContinuousOn.clm_apply` twice).
+  simpa only [expJet2Rhs_apply] using (hA.clm_apply ha).clm_apply hb
+
+/-- **Uniform `[0,1]` norm bound of `Θ^{hk}`.**  For `‖v‖ ≤ expRho`, `t ∈ [0,1]`, given a `D²F`
+    tube bound `Kstar` (`expJet_fderiv2_tube_bddAbove_unif`) and a `[0,1]`-bound `Cphi` on `‖Φ t‖`,
+    `‖Θ^{hk}(t)‖ ≤ Kstar · (Cphi·‖h‖) · (Cphi·‖k‖)`.  Two applications of `ContinuousLinearMap.le_opNorm`
+    for the bilinear `D²F`, and `‖ι h‖ ≤ ‖h‖` (`expJetIota` is a norm-`≤ 1` CLM).  This is the ODE
+    well-posedness bound the (next) `Q^{hk}` construction consumes. -/
+theorem expJet2Rhs_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n))) (h k : Point n)
+    (Kstar Cphi : ℝ) (hKstar0 : 0 ≤ Kstar) (hCphi0 : 0 ≤ Cphi)
+    (hKstar : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t)‖ ≤ Kstar)
+    (hCphi : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φ t‖ ≤ Cphi)
+    (t : ℝ) (ht : t ∈ Set.Icc (0 : ℝ) 1) :
+    ‖expJet2Rhs g gi hC p v Φ h k t‖ ≤ Kstar * (Cphi * ‖h‖) * (Cphi * ‖k‖) := by
+  set D2 := fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t) with hD2
+  set a := Φ t (expJetIota h) with ha
+  set b := Φ t (expJetIota k) with hb
+  -- `‖ι h‖ ≤ ‖h‖`, `‖ι k‖ ≤ ‖k‖`.
+  have hιh : ‖expJetIota (n := n) h‖ ≤ ‖h‖ := by
+    refine ((expJetIota (n := n)).le_opNorm h).trans ?_
+    simpa using mul_le_mul_of_nonneg_right expJetIota_opNorm_le (norm_nonneg h)
+  have hιk : ‖expJetIota (n := n) k‖ ≤ ‖k‖ := by
+    refine ((expJetIota (n := n)).le_opNorm k).trans ?_
+    simpa using mul_le_mul_of_nonneg_right expJetIota_opNorm_le (norm_nonneg k)
+  -- `‖a‖ ≤ Cphi·‖h‖`, `‖b‖ ≤ Cphi·‖k‖`.
+  have hanorm : ‖a‖ ≤ Cphi * ‖h‖ := by
+    calc ‖a‖ ≤ ‖Φ t‖ * ‖expJetIota (n := n) h‖ := (Φ t).le_opNorm _
+      _ ≤ Cphi * ‖h‖ :=
+        mul_le_mul (hCphi t ht) hιh (norm_nonneg _) hCphi0
+  have hbnorm : ‖b‖ ≤ Cphi * ‖k‖ := by
+    calc ‖b‖ ≤ ‖Φ t‖ * ‖expJetIota (n := n) k‖ := (Φ t).le_opNorm _
+      _ ≤ Cphi * ‖k‖ :=
+        mul_le_mul (hCphi t ht) hιk (norm_nonneg _) hCphi0
+  -- bilinear opNorm: `‖D2 a b‖ ≤ ‖D2‖·‖a‖·‖b‖ ≤ Kstar·(Cphi‖h‖)·(Cphi‖k‖)`.
+  have hCh0 : 0 ≤ Cphi * ‖h‖ := mul_nonneg hCphi0 (norm_nonneg _)
+  have hbil : ‖D2 a b‖ ≤ ‖D2‖ * ‖a‖ * ‖b‖ := by
+    calc ‖D2 a b‖ ≤ ‖D2 a‖ * ‖b‖ := (D2 a).le_opNorm b
+      _ ≤ (‖D2‖ * ‖a‖) * ‖b‖ :=
+        mul_le_mul_of_nonneg_right (D2.le_opNorm a) (norm_nonneg b)
+  refine le_trans (by simpa only [expJet2Rhs_apply, ← hD2, ← ha, ← hb] using hbil) ?_
+  refine mul_le_mul (mul_le_mul (hKstar t ht) hanorm (norm_nonneg _) hKstar0) hbnorm
+    (norm_nonneg _) (mul_nonneg hKstar0 hCh0)
+
 end QIQTH.ExpMap

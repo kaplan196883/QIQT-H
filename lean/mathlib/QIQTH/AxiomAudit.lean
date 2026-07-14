@@ -10044,6 +10044,17 @@ namespace QIQTH.AxiomAudit
 -- fundamental solution Q_v; does NOT by itself give ContDiff² exp_p (needs Q_v + the parameter Grönwall), NOT
 -- κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet_fderiv2_lipschitzOnWith
+-- ★ PARAMETRIX P1 RUNG 2 (cont.) — the Jet₂ second-variation SOURCE term + regularity (ExpMapContDiff2.lean).
+-- expJet2Rhs = D²F(Y_v t)(Φ(t)(ι h))(Φ(t)(ι k)) : the inhomogeneous source Θ^{hk}(t) of the VECTOR-valued Jet₂
+-- ODE Q'=DF(Y_v t)·Q + Θ, Q(0)=0 (whose homogeneous part = what Φ_v/expJetFund propagates; Φ abstract, mirrors
+-- expFund_two_pt_diff).  expJet2Rhs_continuousOn (ContinuousOn.clm_apply twice + expTube_continuousOn + D²F cont)
+-- + expJet2Rhs_norm_le (‖Θ‖ ≤ Kstar·(Cphi‖h‖)·(Cphi‖k‖) via le_opNorm twice + the D²F tube bound) = the ODE
+-- well-posedness inputs (continuity for local existence, bound for Grönwall).  HONEST: the SOURCE only; does NOT
+-- build the Q^{hk} fundamental solution (3b, the multi-week bulk), does NOT give ContDiff² exp_p, NOT κ=1/6, NOT
+-- the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2Rhs
+#print axioms QIQTH.ExpMap.expJet2Rhs_continuousOn
+#print axioms QIQTH.ExpMap.expJet2Rhs_norm_le
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
