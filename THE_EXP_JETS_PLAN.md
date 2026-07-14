@@ -467,6 +467,16 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   next brick. **3b next:** `expJet2Fund` = the `Q^{hk}` inhomogeneous fundamental solution on `[0,1]`
   (`Q(0)=0`, `Q(t)=∫₀ᵗ [DF(Y_v s)(Q s)+Θ(s)]ds`, `HasDerivWithinAt`) by mirroring `expJetFund_local→_shifted→_glue`
   with the `expJet2Rhs` source — the multi-week bilinear bulk; decompose (local→shifted→glue) + checkpoint.
+- **2026-07-15 (RUNG 2 cont. — 3b LOCAL: `expJet2Fund_local` — DONE, PUSHED `b3e65ce2`):** in
+  `ExpMapContDiff2.lean` ([AF] std-3): `∃T>0 ∃Q, Q 0 = 0 ∧ HasDerivWithinAt Q (DF(Y_v t)(Q t)+expJet2Rhs …) (Icc 0 T)`
+  — the LOCAL solution of the vector inhomogeneous Jet₂ ODE via Mathlib `IsPicardLindelof` for the affine field
+  `F₂ t Q = DF(Y_v t)(Q)+Θ` (Lipschitz-in-`Q` const `KdF` since `Θ` const-in-`Q`; `‖Θ‖` bounded on compact `[0,1]`
+  by `exists_bound_of_continuousOn` — vector codomain, no CLM diamond). Extraction:
+  `IsPicardLindelof.exists_eq_forall_mem_Icc_hasDerivWithinAt₀`. **Remaining for the full `Q^{hk}` on `[0,1]`:**
+  `expJet2Fund_shifted` (the local solver from ARBITRARY vector IC `Q(t₀)=x₀`, ball centred at `x₀`) → `expJet2Fund_glue`
+  (induction concatenating `N` pieces, each starting at the previous endpoint value) → `expJet2Fund` (the `[0,1]`
+  capstone) — mirrors the `expJetFund_shifted→_glue→expJetFund` chain, adapted to the inhomogeneous vector case. Then
+  3c/4 (residual Grönwall + continuity) closes `ContDiff² exp_p`.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
