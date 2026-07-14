@@ -778,6 +778,7 @@ import QIQTH.HeatCoeffBridge
 import QIQTH.DeWittDiagonal
 import QIQTH.FlatTorusHeatKernel
 import QIQTH.SphereHeatTrace
+import QIQTH.Sphere3HeatTrace
 import QIQTH.BellCutRank
 import QIQTH.ReducedDensity
 import QIQTH.RecordMincut

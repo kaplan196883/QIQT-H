@@ -11625,4 +11625,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SphereHeatTrace.sphere_R_limit
 #print axioms QIQTH.SphereHeatTrace.sphereHeatTrace_a1
 
+-- THE 3-SPHERE HEAT TRACE (breaking the wall for a SECOND curved geometry — a₀ landed, a₁ checkpointed).
+-- sphere3HeatTrace t = Σ_l (l+1)² e^{−t l(l+2)} (S³ Laplacian: eigenvalue l(l+2), mult (l+1)²; R=6).
+-- sphere3HeatTrace_eq: the reindex Θ₃(t) = e^t·Σ_{m≥1} m² e^{−t m²} (l(l+2)=(l+1)²−1).  ★★
+-- sphere3HeatTrace_a0: t^{3/2}·Θ₃(t) → √π/4 — the WEYL a₀ on a SECOND curved manifold (via sum-integral
+-- sandwich + e^t→1; Weyl-normalized vol(S³)/(4πt)^{3/2} = √π/4·t^{−3/2}).  ⚠ HONEST (binding): the a₁ =
+-- R/6 = 1 (R=6) is NOT proven — CHECKPOINTED: the sum-integral sandwich has O(1/t) slack (too coarse for
+-- the a₁ constant); closing it needs the exp-small Poisson remainder of the theta derivative
+-- Σ m²e^{−tm²} = (√π/4)t^{−3/2} + (exp-small) — the theta-derivative packaging (same category as the S²
+-- periodic-Bernoulli EM).  a₀ validated on a 2nd curved manifold; a₁=R/6-on-S³ stays the recorded gap.
+-- Breaks the wall for S³'s a₀ ONLY; the GENERAL curved heat kernel + a₁ discharge stay walled (an
+-- arbitrary curved space has NO explicit spectrum — the root reason the general case is the wall).
+-- NOTE: a₁=R/6 IS already proven on the curved S² (sphereHeatTrace_a1) — the proof-of-concept on a curved
+-- manifold is done.  NOT the conjecture, NOT the strong holographic principle, NOT QG.  [AF] std-3.
+#print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_a0
+#print axioms QIQTH.Sphere3HeatTrace.sphere3HeatTrace_eq
+
 end QIQTH.AxiomAudit
