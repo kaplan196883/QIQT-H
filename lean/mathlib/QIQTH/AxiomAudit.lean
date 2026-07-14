@@ -11473,6 +11473,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CoordinateCurvature.scalarCurvature_flat_zeroJet
 #print axioms QIQTH.CoordinateCurvature.ConeCheck.scalarCurvature_cone
 #print axioms QIQTH.CoordinateCurvature.SphereCheck.scalarCurvature_sphere
+-- ★★★ CURVATURE BRIDGE — the SINGLE-BASE consolidation: the jet-based CoordinateCurvature.scalarCurvature
+-- EQUALS the field-based Curvature.scalarCurv, so CoordinateCurvature is a PROVEN specialization of the
+-- canonical Curvature.lean base (not a duplicate concept).  christoffel_bridge (Γ agree) → ★★★
+-- dChristoffel_bridge (pd(Γ_field)=dChristoffel_jet: push pd through ½∑ via pd_mul/pd_sum, hgiD for ∂g⁻¹,
+-- pd_comm/Schwarz + metric symmetry to align second partials with dLowerGamma) → riemann_bridge → ricci_bridge
+-- → ★ scalarCurvature_bridge (CoordinateCurvature.scalarCurvature giM dgM ddgM = Curvature.scalarCurv g gi x).
+-- CARRIED (honest analytic inputs, binding): metric symmetry hgs; metric-component smoothness hgC (ContDiff ⊤,
+-- for the Schwarz mixed-partial commuting); the inverse-derivative identity hgiD ∂ₐg^{kl}=−g^{kp}(∂ₐg_{pq})g^{ql}
+-- (matches dInvMetric's design, NOT proved from gi=g⁻¹).  ⟹ Curvature.lean is the ONE canonical component
+-- scalar-curvature base; CoordinateCurvature is its evaluable jet-interface.  This unifies the COMPONENT scalar
+-- curvature; it is NOT the coordinate-free Riemann tensor (that is ManifoldCurvature.lean, a separate base),
+-- and NOT the general heat kernel.  NOT the conjecture/strong-principle/QG.  [AF] std-3.
+#print axioms QIQTH.CurvatureBridge.christoffel_bridge
+#print axioms QIQTH.CurvatureBridge.dChristoffel_bridge
+#print axioms QIQTH.CurvatureBridge.riemann_bridge
+#print axioms QIQTH.CurvatureBridge.ricci_bridge
+#print axioms QIQTH.CurvatureBridge.scalarCurvature_bridge
 -- ★ THE HYPERBOLIC PLANE H² — a curved Riemannian surface of constant NEGATIVE curvature (new sign).
 -- The Poincaré upper half-plane (isOpen_uhp: {0<y} open ⟹ genuine manifold as an open ⊆ ℝ²), metric
 -- g=diag(1/y²,1/y²).  hasDerivAt_hyp_gyy/_dgyy: the fed 1-/2-jets are VERIFIED via Mathlib HasDerivAt as the

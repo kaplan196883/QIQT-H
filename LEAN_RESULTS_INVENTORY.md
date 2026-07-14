@@ -1949,8 +1949,25 @@ Built 2026-06-30 from a 6-way parallel code audit (file:line verified). **Status
   API — that (and the general curved heat kernel) is the L0/parametrix frontier (Mathlib WIP). NOT the
   conjecture, NOT the strong principle, NOT QG.
 
+- **★★★ CURVATURE BRIDGE — the SINGLE-BASE consolidation (jet-form = field-form) — `QIQTH/CurvatureBridge.lean`**
+  (**[AF]** std-3, budget 0, 2026-07-15). Proves the repo's two component scalar-curvature formalizations are
+  ONE: `scalarCurvature_bridge` — the jet-based `CoordinateCurvature.scalarCurvature (giM, dgM, ddgM)` (fed the
+  metric field's actual 0/1/2-jets at `x`) EQUALS the field-based `Curvature.scalarCurv g gi x`. Chain:
+  `christoffel_bridge` → ★ `dChristoffel_bridge` (`pd(Γ_field) = dChristoffel_jet` — push `pd` through `½∑` via
+  `pd_mul`/`pd_sum`, `hgiD` for `∂g⁻¹`, Schwarz `pd_comm` + metric symmetry aligning the second partials) →
+  `riemann_bridge` → `ricci_bridge` → `scalarCurvature_bridge`. ⟹ **`Curvature.lean` is the canonical component
+  scalar-curvature base; `CoordinateCurvature` is its PROVEN evaluable jet-interface** (not a duplicate concept;
+  the redundancy introduced this session is resolved). CARRIED (honest analytic inputs): metric symmetry;
+  metric-component smoothness `ContDiff ⊤` (for the Schwarz mixed-partial commuting); the inverse-derivative
+  identity `∂ₐg^{kl}=−g^{kp}(∂ₐg_{pq})g^{ql}` (matches `dInvMetric`'s design, not proved from `gi=g⁻¹`).
+  ⚠ **HONEST:** unifies the COMPONENT scalar curvature; NOT the coordinate-free Riemann tensor (that is
+  `ManifoldCurvature.lean`, a distinct pre-existing base); NOT the general heat kernel. NOT the conjecture, NOT
+  the strong principle, NOT QG.
+
 - **COORDINATE SCALAR CURVATURE (heat-kernel Phase 1, coordinate flavor) — `QIQTH/CoordinateCurvature.lean`**
-  (**[AF]** std-3, budget 0, 2026-07-13, commit `ae04203a`). The component/metric-2-jet scalar curvature
+  (**[AF]** std-3, budget 0, 2026-07-13, commit `ae04203a`; **now unified with `Curvature.lean` via
+  `CurvatureBridge.scalarCurvature_bridge` — the evaluable jet-interface to the canonical `Curvature.scalarCurv`
+  base**). The component/metric-2-jet scalar curvature
   `R(g)` built OURSELVES — an ALGEBRAIC function of the metric's 0/1/2-jet (`ginv`, `dg=∂g`, `ddg=∂∂g`)
   via `christoffel` → `riemann` (from `christoffel` + `dChristoffel`) → `ricci` → `scalarCurvature`
   (`= Σ g^{sj} Ric_{sj}`), with the identity `∂(g⁻¹) = −g⁻¹ dg g⁻¹` DEFINED into the formula

@@ -26,6 +26,11 @@ The metric's 0/1/2-jet is carried as DATA:
   * `dg a`      : first partials `∂ₐ g_{jl}`,
   * `ddg a b`   : second partials `∂ₐ∂ᵦ g_{cd}`.
 Christoffel / Riemann / Ricci / scalar-R are pure algebraic `Finset.sum` contractions.
+
+UNIFIED WITH THE CANONICAL BASE: `QIQTH.CurvatureBridge.scalarCurvature_bridge` proves this jet-based
+`scalarCurvature` EQUALS the field-based `QIQTH.Curvature.scalarCurv` (when the jets are the metric field's
+actual derivatives + the carried `∂g⁻¹` identity). So this file is the *evaluable jet-interface* to the one
+canonical component scalar-curvature base `Curvature.lean`, not a separate curvature — one base, two views.
 -/
 import Mathlib
 
