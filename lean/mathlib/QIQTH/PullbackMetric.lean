@@ -2618,6 +2618,43 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
   `sum3_sym_contract`, vanishing by `expMap_rncDΓ_diag_zero` (step iii).  This large-but-finite
   Finset/ring assembly remains the open step, now with ALL its inputs (including step 2) present.
 
+  CHECKPOINT (2026-07 brick — analysis pass; goal shape VERIFIED, assembly NOT landed, file GREEN):
+  * The rewrite `simp only [expPullbackMetric_pd2_closed g gi hC p hg]` fires cleanly on BOTH brackets
+    of `expPullback_hpd2`, turning each into the explicit 9-term double sum `∑_a ∑_b (T1+…+T9)` under
+    the triple v-contraction `∑_l ∑_j ∑_k · v^l v^j v^k` (dumped and confirmed; sum-index map for the
+    A-bracket is x=l [outer ∂], x_1=j [inner ∂ = m], x_2=k [metric b-slot], so the metric second index
+    of the closed call is `k` and the inner-derivative index is `j`).  There is NO analytic gap left in
+    the substitution — the whole obligation is now a PURELY AMBIENT finite identity in the atoms
+    `pd(pd g)(p)` (∂²g), `pd g (p)` (∂g), `christoffel … p` (Γ), `pd(christoffel …) p` (∂Γ, only inside
+    the α2 blocks), `g p`, and `Pi.single` (Kronecker).
+  * The α2 blocks contract EXACTLY as follows (worked out, ready to encode via the landed `_contract_*`
+    lemmas + `rncD3Block`/`rncCrossBlock` (sym-)multilinearity): for the A-bracket T5-block
+    `∑_l ∑_j ∑_k g_{ak}(p)·(1/6•(D3(e_α,e_j,e_l)+Cross(e_α,e_j,e_l)+Cross(e_j,e_α,e_l)+Cross(e_l,e_α,e_j)))_a v^l v^j v^k`
+    contracts the two derivative slots (j via mid/source, l via right/source) leaving the k-slot free:
+    `= ∑_k v^k ∑_a g_{ak}(p)·(1/6•(D3(e_α,v,v)+Cross(e_α,v,v)+2·Cross(v,e_α,v)))_a`
+    (the last two Cross terms coincide under sk↔sl `rncCrossBlock_swap_source`).  T9 (metric slot `α`
+    fixed, both other slots contracted) and the two B-bracket α2 blocks contract by the same recipe.
+  * NO INVERTIBILITY SHORTCUT.  hpd2 (`W_α := 2A_α − B_α = 0`), the upper-index radial identity
+    `dGammaDiag(pd Γ̃) v i = 0`, and the differentiated-lowering relation
+    `W_α = 2 ∑_σ g(p)_{ασ}·dGammaDiag(pd Γ̃) v σ` are ALL mutually derivable through the invertible
+    pair g(p)/gi(p) (via `hinvF`: `∑_i g(p)_{βi} gi(p)_{iα} = δ_{βα}`, and the reduce-lemma identity
+    `dGammaDiag(pd Γ̃) v i = ½ ∑_α gi(p)^{iα} W_α`).  Hence NONE of the three is a shortcut for another:
+    the analytic content — that the ∂²g̃ combination actually vanishes — MUST enter through the closed
+    form `expPullbackMetric_pd2_closed` together with the abstract `expMap_rncDΓ_diag_zero` (the
+    `−∂Γ+ΓΓ` cancellation).  The remaining work is precisely the term-by-term (i)/(ii)/(iii) grind
+    above; no cheaper route exists.
+  * PRECISE REMAINING RING-IDENTITY: after (i) all α2 blocks are contracted (as above) and all the
+    Kronecker `Pi.single` sums collapsed, the goal is `2·⟨A-terms⟩ − ⟨B-terms⟩ = 0` where the surviving
+    pieces are: the explicit α1 Hessian `2⟨∂_l∂_j g_{αk}(p)⟩ − ⟨∂_l∂_α g_{jk}(p)⟩`; the ∂g·Γ terms
+    (T1's `∑_c`, T2, T3, T4, T7 of each bracket); the ΓΓ terms (T6, T8); and the contracted α2 blocks
+    (∂Γ inside D3, ΓΓ inside Cross).  Step (ii): apply `pd_christoffel_lower_fn` to each contracted
+    `∑_a g_{ak}(p)·∂Γ^a_{··}` inside the D3-blocks, exposing `∂²g(p)` that CANCELS the explicit α1
+    Hessian (this is the crux cancellation — the α1 term does NOT self-cancel).  Step (iii): the
+    residual ∂g·Γ + ΓΓ cubic reindexes onto `dGammaDiag (rncDΓ (christoffel … p) (pd(christoffel …) p)) v ?`
+    via `a3rawArr_contract_eq_a3` + `sum3_sym_contract` and vanishes by `expMap_rncDΓ_diag_zero`.
+    This is the several-hundred-line disciplined `Finset`/`ring` assembly; it is finite and unblocked
+    but was NOT completed in this pass.
+
 ### REGULARITY LEDGER (R3→κ) — recorded, not `sorry`
 
 * **Proved here:** `g̃ ∈ ContDiffOn ℝ 2` on the exp-ball (`contDiffOn_expPullbackMetric`), from
