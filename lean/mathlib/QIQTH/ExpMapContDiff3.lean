@@ -2881,4 +2881,156 @@ noncomputable def expJetD3 (g gi : Point n → Fin n → Fin n → ℝ)
   simp only [expJetD3, LinearMap.mkContinuous_apply, LinearMap.coe_mk, AddHom.coe_mk,
     expJetD3Inner_apply]
 
+/-! ### B-asm(3), pointwise stage — the per-`(h,k)` little-o of `fderiv² exp_p`
+
+The Rung-3 mirror of the Rung-2 pointwise split `expMap_fderiv_sub_quadratic`, one Fréchet order up.
+For fixed direction pair `(h,k)` and the first-variation propagators `Φ` (at `v`), `Φ'` (at `v+l`),
+the second-derivative value `expJetD2_· k h = π(Q^{hk}_·(1))` obeys the quadratic-in-`l` little-o
+`‖expJetD2_{v+l} k h − expJetD2_v k h − expJetD3_v(l) k h‖ ≤ C·‖l‖²`, i.e. the third derivative
+`expJetD3_v(l)(k)(h) = π(R^{hkl}_v(1))` is the genuine directional Fréchet increment of
+`v ↦ expJetD2_v k h` at `v` in direction `l`.
+
+Assembly (mirror of `expMap_fderiv_sub_quadratic`): instantiate the abstract second-variation slots
+`Qkl,Qhl,Qhk` of the Jet₃ third-variation ODE by the GENUINE second-variation curves
+`expJet2Curve · l`, `expJet2Curve h ·`, `expJet2Curve h k` (so the third-variation witness `R`
+coincides with the `expJet3ValG`/`expJetD3` datum); feed the `[0,1]`-uniform first-variation residuals
+`expJet2FirstVar_residual_Icc` (⟹ `hFVh,hFVk`) and the `[0,1]`-uniform second-variation two-point
+Lipschitz `expJet2_v_two_pt_Icc` (⟹ `hQlip`) into the Jet₃ quadratic remainder bound
+`expJet3_remainder_quadratic_bound` (ρ = C·‖l‖²), then into the Jet₃ residual/Grönwall estimate
+`expJet3_residual_bound`, giving `‖Q^{hk}_{v+l}(1) − Q^{hk}_v(1) − R^{hkl}_v(1)‖ ≤ C·‖l‖²·e^{Kstar}`;
+finally project by `π` (`‖π‖ ≤ 1`), identifying `π(Q^{hk}(1)) = expJetD2 k h` (`expJetD2_apply`) and
+`π(R^{hkl}(1)) = expJetD3(l) k h` (`expJetD3_apply`).
+
+HONEST SCOPE: this is the per-`(h,k)` pointwise little-o; the constant `C` depends on `(h,k)` (through
+the abstract Rung-2/Rung-3 remainder constants).  Promoting to the operator-norm CLM `HasFDerivAt`
+(uniform over `‖h‖,‖k‖ ≤ 1`) — the analog of `expMap_fderiv_hasFDerivAt` — needs the `‖h‖·‖k‖`-separated
+remainder, which is NOT available symbolically here (the `expJet2FirstVar_residual_Icc` constant is an
+abstract `∃ C`, not `_·‖h‖`); that CLM packaging is the checkpointed next step.  This does NOT give
+`ContDiff² (fderiv exp_p)` / `ContDiff³ exp_p`, NOT `κ = 1/6`, NOT the heat kernel / `a₁ = R/6`,
+NOT QG. -/
+set_option maxHeartbeats 3200000 in
+/-- **Pointwise little-o of `fderiv² exp_p` (per direction pair `(h,k)`).**  For `Φ` the first-variation
+    propagator witness at `v` and `Φ'` at `v+l` (both `Φ 0 = 1`, ODE law `Φ' = Ψ(Φ)`), and any `h,k`,
+    `∃ C ≥ 0, ‖expJetD2_{v+l} Φ' k h − expJetD2_v Φ k h − expJetD3_v Φ (l) k h‖ ≤ C·‖l‖²`. -/
+theorem expMap_fderiv2_sub_quadratic (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v l : Point n)
+    (Φ Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hvl : ‖v + l‖ ≤ expRho g gi hC p)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦ'0 : Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) 1))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t)
+    (hΦ'd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ' (expJetPsi g gi hC p (v + l) t (Φ' t)) (Set.Icc (0 : ℝ) 1) t)
+    (h k : Point n) :
+    ∃ C : ℝ, 0 ≤ C ∧
+      ‖expJetD2 g gi hC p (v + l) Φ' hvl hΦ'cont k h
+          - expJetD2 g gi hC p v Φ hv hΦcont k h
+          - expJetD3 g gi hC p v Φ hv hΦcont l k h‖ ≤ C * ‖l‖ ^ 2 := by
+  -- IC/ODE specs of the second- and third-variation curves (via `choose_spec`; `expJet2Curve`,
+  -- `expJet2Val`, `expJet3ValG` are all definitionally the corresponding `choose`).
+  obtain ⟨hQv0, -, -, hQvd⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec
+  obtain ⟨hQw0, -, -, hQwd⟩ := (expJet2Fund g gi hC p (v + l) Φ' hvl hΦ'cont h k).choose_spec
+  obtain ⟨hQkl0, -, -, hQkld⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont k l).choose_spec
+  obtain ⟨hQhl0, -, -, hQhld⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h l).choose_spec
+  obtain ⟨hR0, -, -, hRd⟩ :=
+    (expJet3Fund g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) h k l).choose_spec
+  -- Lipschitz constants + uniform tube bounds (for the two-point Lipschitz `(e)`).
+  obtain ⟨Kf, hLipF⟩ := ((contDiff_geodesicField g gi hC).contDiffOn
+      (s := Metric.closedBall ((p, 0) : Point n × Point n)
+        (expConst g gi hC p * expRho g gi hC p))).exists_lipschitzOnWith
+    (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+  obtain ⟨Ldf, hLipDF⟩ := expJet_fderiv_lipschitzOnWith g gi hC p
+  obtain ⟨Ld2f, hLipD2⟩ := expJet_fderiv2_lipschitzOnWith g gi hC p
+  obtain ⟨Kstar, hKstar0, hKstaru⟩ := expJet_fderiv_tube_bddAbove_unif g gi hC p
+  obtain ⟨Kstar₂, hKstar₂0, hK2u⟩ := expJet_fderiv2_tube_bddAbove_unif g gi hC p
+  -- (e) `[0,1]`-uniform two-point Lipschitz of `Q^{hk}_v, Q^{hk}_{v+l}` ⟹ `hQlip`.
+  obtain ⟨Ctp, hCtp0, htp⟩ := expJet2_v_two_pt_Icc g gi hC p v (v + l) hv hvl
+    Kf Ldf Ld2f Kstar Kstar₂ hKstar0 hKstar₂0 hLipF hLipDF hLipD2 hKstaru hK2u
+    Φ Φ' hΦ0 hΦ'0 hΦd hΦ'd
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+    (expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k) h k hQv0 hQw0 hQvd hQwd
+  have hQlip : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t
+          - expJet2Curve g gi hC p v Φ hv hΦcont h k t‖ ≤ (Ctp * ‖h‖ * ‖k‖) * ‖l‖ := by
+    intro t ht
+    rw [norm_sub_rev]
+    have hh := htp t ht
+    rw [show v - (v + l) = -l by abel, norm_neg] at hh
+    calc ‖expJet2Curve g gi hC p v Φ hv hΦcont h k t
+            - expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t‖
+        ≤ Ctp * ‖l‖ * ‖h‖ * ‖k‖ := hh
+      _ = (Ctp * ‖h‖ * ‖k‖) * ‖l‖ := by ring
+  -- `[0,1]`-uniform first-variation residuals ⟹ `hFVh, hFVk`.
+  obtain ⟨Cdh, hCdh0, hFVh0⟩ := expJet2FirstVar_residual_Icc g gi hC p v Φ Φ'
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l) h l hv hvl hΦ0 hΦ'0 hQhl0 hΦcont hΦ'cont
+    hΦd hΦ'd hQhld
+  obtain ⟨Cdk, hCdk0, hFVk0⟩ := expJet2FirstVar_residual_Icc g gi hC p v Φ Φ'
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l) k l hv hvl hΦ0 hΦ'0 hQkl0 hΦcont hΦ'cont
+    hΦd hΦ'd hQkld
+  -- the Jet₃ quadratic remainder bound `‖source(t)‖ ≤ Crem·‖l‖²`.
+  obtain ⟨Crem, hCrem0, hrem⟩ := expJet3_remainder_quadratic_bound g gi hC p v (v + l) l rfl
+    hv hvl Φ Φ'
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+    (expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k)
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k) h k hΦ0 hΦ'0 hΦd hΦ'd hQw0 hQwd rfl
+    (max Cdh Cdk) (Ctp * ‖h‖ * ‖k‖)
+    (le_trans hCdh0 (le_max_left _ _))
+    (mul_nonneg (mul_nonneg hCtp0 (norm_nonneg _)) (norm_nonneg _))
+    (fun t ht => (hFVh0 t ht).trans
+      (mul_le_mul_of_nonneg_right (le_max_left _ _) (sq_nonneg _)))
+    (fun t ht => (hFVk0 t ht).trans
+      (mul_le_mul_of_nonneg_right (le_max_right _ _) (sq_nonneg _)))
+    hQlip
+  -- the `[0,1]` Jacobi bound at `v` and the Jet₃ residual/Grönwall estimate.
+  obtain ⟨Kv, hKv0, hKv⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  have hres := expJet3_residual_bound g gi hC p v (v + l) Φ Φ'
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+    (expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k)
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+    (expJet3Fund g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) h k l).choose
+    h k l hQv0 hQw0 hR0 hQvd hQwd hRd Kv (Crem * ‖l‖ ^ 2) hKv0
+    (mul_nonneg hCrem0 (sq_nonneg _)) hKv (fun t ht => hrem t ht)
+  -- project by `π`, identify the value forms.
+  refine ⟨Crem * Real.exp Kv, mul_nonneg hCrem0 (Real.exp_pos _).le, ?_⟩
+  rw [expJetD2_apply, expJetD2_apply, expJetD3_apply]
+  calc ‖expJetPi (expJet2Val g gi hC p (v + l) Φ' hvl hΦ'cont h k)
+          - expJetPi (expJet2Val g gi hC p v Φ hv hΦcont h k)
+          - expJetPi (expJet3ValG g gi hC p v Φ hv hΦcont h k l)‖
+      = ‖expJetPi (expJet2Val g gi hC p (v + l) Φ' hvl hΦ'cont h k
+            - expJet2Val g gi hC p v Φ hv hΦcont h k
+            - expJet3ValG g gi hC p v Φ hv hΦcont h k l)‖ := by rw [map_sub, map_sub]
+    _ ≤ ‖expJetPi (n := n)‖ * ‖expJet2Val g gi hC p (v + l) Φ' hvl hΦ'cont h k
+            - expJet2Val g gi hC p v Φ hv hΦcont h k
+            - expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ :=
+        (expJetPi (n := n)).le_opNorm _
+    _ ≤ 1 * ‖expJet2Val g gi hC p (v + l) Φ' hvl hΦ'cont h k
+            - expJet2Val g gi hC p v Φ hv hΦcont h k
+            - expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ :=
+        mul_le_mul_of_nonneg_right expJetPi_opNorm_le (norm_nonneg _)
+    _ = ‖expJet2Val g gi hC p (v + l) Φ' hvl hΦ'cont h k
+            - expJet2Val g gi hC p v Φ hv hΦcont h k
+            - expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ := one_mul _
+    _ ≤ (Crem * ‖l‖ ^ 2) * Real.exp Kv := hres
+    _ = Crem * Real.exp Kv * ‖l‖ ^ 2 := by ring
+
 end QIQTH.ExpMap

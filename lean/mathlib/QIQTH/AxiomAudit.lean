@@ -10323,6 +10323,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet3ValG
 #print axioms QIQTH.ExpMap.expJetD3
 #print axioms QIQTH.ExpMap.expJetD3_apply
+-- ★ PARAMETRIX P1 RUNG 3 (B-asm3 pointwise) — the 3rd-derivative pointwise little-o (ExpMapContDiff3.lean).
+-- expMap_fderiv2_sub_quadratic: ∃C≥0, ‖expJetD2(v+l) k h − expJetD2 v k h − expJetD3 v l k h‖ ≤ C‖l‖² — the Rung-3
+-- mirror of expMap_fderiv_sub_quadratic, one level up.  Instantiates the Jet₃ Q·· slots by the genuine
+-- expJet2Curve 2nd variations (so R = expJet3ValG datum defeq); feeds expJet2FirstVar_residual_Icc (hFVh/hFVk) +
+-- expJet2_v_two_pt_Icc (hQlip) into expJet3_remainder_quadratic_bound → expJet3_residual_bound → π.  HONEST: the
+-- pointwise 3rd-deriv little-o.  Does NOT yet give the CLM HasFDerivAt (needs a ‖h‖/‖k‖-separated primed remainder
+-- layer), NOT ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_fderiv2_sub_quadratic
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
