@@ -10212,6 +10212,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.contDiff_fderiv3_geodesicField
 #print axioms QIQTH.ExpMap.expJet_fderiv3_tube_bddAbove_unif
 #print axioms QIQTH.ExpMap.expJet_fderiv3_lipschitzOnWith
+-- ★ PARAMETRIX P1 RUNG 3 (R3-source) — the Jet₃ 4-term source Θ₃ (ExpMapContDiff3.lean, mirror of expJet2Rhs).
+-- expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t = D³F(Y_v t)(Φ ιh)(Φ ιk)(Φ ιl) + D²F(Y_v t)(Φ ιh)(Qkl t)
+-- + D²F(Y_v t)(Φ ιk)(Qhl t) + D²F(Y_v t)(Φ ιl)(Qhk t) — the source of the vector Jet₃ ODE R'=DF(Y_v)R + Θ₃,
+-- R(0)=0 (Φ = first-variation propagator, Qkl/Qhl/Qhk = the expJet2Fund second-variation solutions).
+-- expJet3Rhs_continuousOn (ContinuousOn.clm_apply thrice/twice + expTube_continuousOn) + expJet3Rhs_norm_le
+-- (clmApply3_norm_le triple le_opNorm + clmApply2_norm_le) = the ODE well-posedness inputs.  HONEST: the SOURCE
+-- only; does NOT build R^{hkl} (R3-fund), NOT ContDiff³ exp_p, NOT κ=1/6, NOT the parametrix (P2), NOT general
+-- a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet3Rhs
+#print axioms QIQTH.ExpMap.expJet3Rhs_continuousOn
+#print axioms QIQTH.ExpMap.expJet3Rhs_norm_le
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
