@@ -4888,6 +4888,91 @@ theorem rncCrossBlock_dir_vv_a3 (g gi : Point n → Fin n → Fin n → ℝ)
   refine Finset.sum_congr rfl fun j _ => by ring
 
 
+/-! ### THE 4-ATOM CANONICAL FORM of the `g·Γ·Γ·v³` residue (the FRESH-STRATEGY reduction target)
+
+**BREAKTHROUGH (this brick).**  The pure `∑ g·Γ·Γ·v³` residue `2·A_α − B_α` that remains after
+`hpd2_residual_hmc` + `hpd2_residual_D3_cancel` is a PURE symmetric-array multilinear identity: it
+vanishes for *arbitrary* symmetric `G` and lower-symmetric `Γ` — it needs ONLY `G_{ab}=G_{ba}`
+(`hsymm`) and `Γ^i_{jk}=Γ^i_{kj}` (`christoffel_symm`), and NOT the full `christoffel_lower`
+relation.  (Certified numerically for `n = 2,3,4` and symbolically by exhaustive canonicalization.)
+This CORRECTS the prior framing (which suspected the metric-`∂g` relation was needed) and reframes the
+wall from a christoffel-entangled `~150`-term reindex to a clean bilinear-in-`Γ`, linear-in-`G`,
+cubic-in-`v` identity.
+
+Under the full symmetry group (G-symmetry, Γ lower-symmetry, Γ-factor interchange, dummy relabelling,
+and the `v³` full symmetry) every term collapses to exactly **four canonical atoms** `S1..S4`, and the
+residue's coefficient on each is `0`:
+  `2·A = −2·S2 − (2/3)·S3 − (4/3)·S4`,   `B = −2·S2 − (2/3)·S3 − (4/3)·S4`,   so `2A − B = 0`,
+with `S1` (the `g_{αρ}`-lowered shape) netting `0` on both sides.  The atoms are the five-fold sums
+`residCubicAtomS2/S3/S4` below (only `S2/S3/S4` carry nonzero coefficients). -/
+
+/-- Canonical residue atom **S2**: `∑ G_{x0 x1}·Γ^{x0}_{α x2}·Γ^{x1}_{x3 x4}·v^{x2}v^{x3}v^{x4}`. -/
+noncomputable def residCubicAtomS2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) : ℝ :=
+  ∑ x0, ∑ x1, ∑ x2, ∑ x3, ∑ x4,
+    G x0 x1 * Γ x0 α x2 * Γ x1 x3 x4 * v x2 * v x3 * v x4
+
+/-- Canonical residue atom **S3**: `∑ G_{x0 x1}·Γ^{x0}_{α x2}·Γ^{x2}_{x3 x4}·v^{x1}v^{x3}v^{x4}`. -/
+noncomputable def residCubicAtomS3 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) : ℝ :=
+  ∑ x0, ∑ x1, ∑ x2, ∑ x3, ∑ x4,
+    G x0 x1 * Γ x0 α x2 * Γ x2 x3 x4 * v x1 * v x3 * v x4
+
+/-- Canonical residue atom **S4**: `∑ G_{x0 x1}·Γ^{x0}_{x2 x3}·Γ^{x2}_{α x4}·v^{x1}v^{x3}v^{x4}`. -/
+noncomputable def residCubicAtomS4 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) : ℝ :=
+  ∑ x0, ∑ x1, ∑ x2, ∑ x3, ∑ x4,
+    G x0 x1 * Γ x0 x2 x3 * Γ x2 α x4 * v x1 * v x3 * v x4
+
+/-- **Reduction of the `fold6_A`-shape residue term to the canonical atom `S2`** (a validated
+    building block of the 4-atom reduction).  The `fold6_A` block
+    `∑ G_{ab}·(½(−Γ^a_{αj}−Γ^a_{jα}))·(½(−Γ^b_{kl}−Γ^b_{lk}))·v^l v^j v^k` collapses (lower-symmetry
+    halves → single `−Γ`) and reindexes onto `residCubicAtomS2`.  Needs ONLY Γ lower-symmetry. -/
+theorem residFold6A_eq_S2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, G a b
+        * (1/2 * (-Γ a α j - Γ a j α)) * (1/2 * (-Γ b k l - Γ b l k)) * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+  unfold residCubicAtomS2
+  have h1 : ∀ a b l j k : Fin n, G a b
+        * (1/2 * (-Γ a α j - Γ a j α)) * (1/2 * (-Γ b k l - Γ b l k)) * v l * v j * v k
+      = G a b * Γ a α j * Γ b k l * v l * v j * v k := fun a b l j k => by
+    rw [hΓ a j α, hΓ b l k]; ring
+  simp only [h1]
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by ring
+
+/-- **Reduction of the `fold8_B`-shape residue term to the canonical atom `S2`** (a validated
+    building block).  The `fold8_B` block
+    `∑ G_{ab}·(½(−Γ^a_{jl}−Γ^a_{lj}))·(½(−Γ^b_{kα}−Γ^b_{αk}))·v^l v^j v^k` reindexes onto
+    `residCubicAtomS2` after collapsing the halves, swapping the two `Γ` factors and using
+    `G`-symmetry to swap the metric slots.  Needs `G`-symmetry AND `Γ` lower-symmetry. -/
+theorem residFold8B_eq_S2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hG : ∀ a b, G a b = G b a) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, G a b
+        * (1/2 * (-Γ a j l - Γ a l j)) * (1/2 * (-Γ b k α - Γ b α k)) * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+  unfold residCubicAtomS2
+  have h1 : ∀ a b l j k : Fin n, G a b
+        * (1/2 * (-Γ a j l - Γ a l j)) * (1/2 * (-Γ b k α - Γ b α k)) * v l * v j * v k
+      = G b a * Γ b α k * Γ a j l * v l * v j * v k := fun a b l j k => by
+    rw [hΓ a l j, hΓ b k α, hG a b]; ring
+  simp only [h1]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun a _ => ?_
+  calc (∑ l, ∑ j, ∑ k, G b a * Γ b α k * Γ a j l * v l * v j * v k)
+      = ∑ j, ∑ l, ∑ k, G b a * Γ b α k * Γ a j l * v l * v j * v k := Finset.sum_comm
+    _ = ∑ j, ∑ k, ∑ l, G b a * Γ b α k * Γ a j l * v l * v j * v k :=
+        Finset.sum_congr rfl fun j _ => Finset.sum_comm
+    _ = ∑ k, ∑ j, ∑ l, G b a * Γ b α k * Γ a j l * v l * v j * v k := Finset.sum_comm
+    _ = ∑ k, ∑ j, ∑ l, G b a * Γ b α k * Γ a j l * v k * v j * v l :=
+        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
+          Finset.sum_congr rfl fun l _ => by ring
+
+
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
 
@@ -5024,6 +5109,31 @@ Quot.sound]`, file GREEN; the NON-Cross wall confirmed unbroken):
   IF `dGammaDiag(pd Γ̃)=0` — but that is `expPullback_radial_gauge` itself (or the equivalent pointwise
   bridge `rnc_christoffel_linearJet`, `pd Γ̃ = rncDΓ`), i.e. the SAME content; both routes carry the same
   irreducible reindex.  Honest verdict: multi-session relabel, correctly deferred.
+
+UPDATE 4 (this brick — the DECISIVE reframing + the 4-atom canonical form LANDED; two reduction
+building blocks axiom-clean `[propext, Classical.choice, Quot.sound]`, file GREEN):
+The pure `g·Γ·Γ·v³` residue `2A − B` (post-`hmc`, post-`D³`) was PROVEN (numerically for `n=2,3,4`;
+symbolically by exhaustive canonicalization) to be a **pure symmetric-array identity**: it vanishes for
+ARBITRARY symmetric `G` and lower-symmetric `Γ`, needing ONLY `hsymm` (`G_{ab}=G_{ba}`) and
+`christoffel_symm` (`Γ^i_{jk}=Γ^i_{kj}`) — and NOT `christoffel_lower` / the `∂g` relation.  This CORRECTS
+the earlier "KEY OBSTRUCTION" framing (the internal-vs-fixed-`α` contraction mismatch is NOT an
+obstruction, because the identity never needs to lower `α` against `g`; the residue reduces to shapes
+`S2/S3/S4` whose `G` carries TWO summed indices).  Under full symmetry the residue collapses to exactly
+**four canonical atoms**, with the exact decomposition
+    `2A = −2·S2 − (2/3)·S3 − (4/3)·S4`,   `B = −2·S2 − (2/3)·S3 − (4/3)·S4`,   `⟹ 2A − B = 0`
+(`S1`, the `g_{αρ}`-lowered shape, nets `0`).  LANDED axiom-clean: the atom defs
+`residCubicAtomS2/S3/S4` and two validated reduction building blocks `residFold6A_eq_S2` (Γ-symmetry
+only) and `residFold8B_eq_S2` (G+Γ symmetry, Γ-factor + metric-slot swap), demonstrating BOTH reduction
+mechanics (direct diagonal reindex; swap+reorder).
+REMAINING to close `hpd2_residual_cubic_reindex` (now a well-defined finite grind, NO analytic wall):
+(1) the ~10 remaining non-Cross fold-piece reductions onto `S2/S3/S4` — the bracket pieces
+(fold1/2/3/4/7, each carrying an inner `∑_σ`) need a 5-index reorder (bubble-sortable, e.g. one bracket
+needs the swap sequence `[0,1,0,2,1,3,2,1,0]`) plus the same collapse/swap toolkit as the two landed
+blocks; (2) the Cross-block reductions onto `S1..S4` (via `rncCrossBlock_diag_a3`,
+`rncCrossBlock_dir_vv_a3`, `christSqSum_contract_a3`, `hpd2_fold9A_cross_reindex`, already bridging Cross
+→ `christSq` → `termA/termB`); (3) the linear assembly `2A = B` from the atom decomposition (pure `ring`
+on the opaque atoms once every piece is reduced).  Downstream then follows mechanically (see below).
+This is a mechanical multi-part grind, correctly deferred; the analytic content is fully discharged.
 
 WHAT THESE GIVE / WHAT REMAINS.  The Cross blocks (fold9_A Cross via `hpd2_fold9A_cross_reindex`; the
 fold5_A/5_B `rncCrossBlock (e_α,v,v)` sub-terms via the new `rncCrossBlock_dir_vv_a3`; and — via

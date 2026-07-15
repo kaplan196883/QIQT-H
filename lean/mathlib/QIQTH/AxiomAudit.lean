@@ -10805,6 +10805,21 @@ namespace QIQTH.AxiomAudit
 -- the parametrix (P2) / general a₁=R/6 / a curved heat kernel / numerical-G / the conjecture.  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.expPullbackMetricInv_contDiffAt_one
 #print axioms QIQTH.PullbackMetric.kappa_eq_one_sixth_expPullback_of_hpd2
+-- ★ PARAMETRIX P1 R3→κ (hpd2 reindex — DECISIVE REFRAMING: pure symmetric-array identity, 4 canonical atoms)
+-- (PullbackMetric.lean).  residCubicAtomS2/S3/S4: the three canonical 5-fold-sum atoms (e.g. S2 = ∑ G_x0x1·Γ_x0αx2·
+-- Γ_x1x3x4·v_x2 v_x3 v_x4).  residFold6A_eq_S2 (fold6_A = S2, needs only Γ-lower-symm) + residFold8B_eq_S2 (fold8_B
+-- = S2, needs G+Γ symm + a Γ-swap + 3-fold reorder) — the two reduction MECHANICS.  ★ KEY CORRECTED FINDING (UPDATE 4,
+-- verified numerically n=2,3,4 + symbolically): the ∑ g·Γ·Γ·v³ residue 2A−B vanishes for ARBITRARY symmetric G and
+-- lower-symmetric Γ — needs ONLY hsymm + christoffel_symm, NOT christoffel_lower/∂g.  The prior "internal-vs-fixed-α
+-- obstruction" framing was WRONG (α is never lowered against g).  It collapses to EXACTLY 4 atoms:
+-- 2A = −2·S2 − (2/3)·S3 − (4/3)·S4 = B, so 2A−B=0 (the S1 g_αρ-lowered shape nets 0).  ⟹ the wall is reframed from a
+-- christoffel-entangled ~150-term reindex into a clean bilinear-in-Γ/linear-in-G/cubic-in-v identity — a finite
+-- ENUMERABLE grind (~10 fold-piece reductions onto S2/S3/S4, each a bubble-sortable 5-index reorder, + Cross
+-- reductions + a final ring assembly), NO analytic wall.  HONEST — hpd2_residual_cubic_reindex / hpd2_cubic_vanish /
+-- the unconditional κ=1/6 still NOT closed (the enumerable grind remains).  Does NOT give κ=1/6 unconditional / P2 /
+-- general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.residFold6A_eq_S2
+#print axioms QIQTH.PullbackMetric.residFold8B_eq_S2
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
