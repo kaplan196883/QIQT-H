@@ -70,9 +70,22 @@ general smooth-dependence theorem Mathlib lacks):
   `expJet2Fund_unique`); and the continuity `expJetD2_two_pt_diff` (`v`-Lipschitz of the 2nd derivative, from the
   parameter-Grönwall `expJet2Val_two_pt_diff`). ⚠ Does NOT yet give `κ=1/6` for the pullback metric `g̃` (needs
   `ContDiff³` = Rung 3, via the `g̃` derivative-loss), NOT the parametrix (P2), NOT general `a₁=R/6`.
-- **Rung 3 — `ContDiff³ exp_p`** (Jet₃: `R'=DF R + D²F(P,Q)+D³F(P,P,P)`). ~4–8 wk. ⟹ the bridge
-  `rnc_christoffel_linearJet` (`rncDΓ = pd(christoffel g̃)(0)`) + `ContDiff g̃` ⟹ instantiate `heat_a1_of_gauge` at
-  `g̃` ⟹ **`κ=1/6` unconditional given the metric.** (Does NOT yet give general `a₁=R/6` — that needs the kernel.)
+- **Rung 3 — `ContDiff³ exp_p`. ✅ DONE 2026-07-15 (`ExpMapContDiff3.lean`, [AF] std-3, `expMap_contDiffOn_three`,
+  NO hypothesis).** `ContDiffOn ℝ 3 (expMap …) (ball 0 expRho)` — the geodesic exp map is THREE times continuously
+  differentiable near 0, via the finite Jet₃ augmented ODE tower (a clean brick-for-brick mirror of Rung 2). Full
+  chain, all axiom-free: `D³F` regularity (`contDiff_fderiv3_geodesicField`, tube-bound, Lipschitz) + **D³F
+  permutation-symmetry `fderiv3_geodesicField_symm_{ab,bc,cyc}` — a genuine MATHLIB-GAP FILL** (Mathlib's
+  `FDeriv/Symmetric.lean` stops at the 2nd derivative); the Jet₃ source `expJet3Rhs`; the vector inhomogeneous
+  3rd-variation `expJet3Fund` (`R^{hkl}` on `[0,1]` via `IsPicardLindelof`); the frontier remainder bound
+  `expJet3_remainder_quadratic_bound` (the ~10-term first-order cancellation via the D³F/D²F symmetries); the
+  3rd-derivative CLM `expJetD3` (trilinear via `expJet2Curve` curve-bilinearity + `expJet3Fund_unique`);
+  `expMap_fderiv2_hasFDerivAt` (HasFDerivAt, 3rd deriv = `expJetD3`); the continuity `expJetD3_two_pt_diff` (from the
+  14-term parameter-Grönwall `expJet3Val_v_two_pt_diff`); and the discharge
+  `expMap_contDiffOn_three_of_fderiv2_contDiffOn_one`. ⚠ Does NOT by itself give `κ=1/6` — that is R3→κ next.
+- **R3→κ (next, now UNBLOCKED)** — the bridge `rnc_christoffel_linearJet` (`rncDΓ = pd(christoffel g̃)(0)`, needs the
+  C³ jet which now exists) + `ContDiff g̃` (the pullback metric, from `ContDiff³ exp_p` via derivative-loss) ⟹
+  instantiate `RNCExpansion.heat_a1_of_gauge` at `g̃` ⟹ **`κ=1/6` unconditional given the metric.** (Does NOT yet give
+  general `a₁=R/6` — that needs the kernel = P2.)
 
 ### P2 — the heat-kernel parametrix PROPER (the deep wall — the actual discharge)
 This is what proves the smooth kernel `K_t(x,y)` EXISTS and has the short-time diagonal expansion for an arbitrary

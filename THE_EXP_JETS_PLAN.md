@@ -572,6 +572,14 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★★★ 2026-07-15 — RUNG 3 DONE — `expMap_contDiffOn_three` UNCONDITIONAL (PUSHED `935240d5`, [AF] std-3):**
+  `ContDiffOn ℝ 3 (expMap g gi hC p) (ball 0 expRho)`, NO side hypothesis (`QIQTH/ExpMapContDiff3.lean`). The full
+  Jet₃ mirror of Rung 2 landed (~15 bricks): D³F regularity + **D³F symmetry `fderiv3_geodesicField_symm_*` (Mathlib-gap
+  fill)** → `expJet3Rhs` → `expJet3Fund` (`R^{hkl}` on `[0,1]`) → `expJet3_remainder_quadratic_bound` (frontier ~10-term
+  cancellation) → `expJetD3` CLM → `expMap_fderiv2_hasFDerivAt` → `expJetD3_two_pt_diff` (14-term `v`-Grönwall) →
+  `expMap_contDiffOn_three`. **Both `ContDiff²` and `ContDiff³` of `exp_p` are now unconditional.** NEXT = **R3→κ**
+  (UNBLOCKED): `rnc_christoffel_linearJet` bridge + `ContDiff g̃` ⟹ `heat_a1_of_gauge` at `g̃` ⟹ `κ=1/6` unconditional
+  given the metric. Still NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
