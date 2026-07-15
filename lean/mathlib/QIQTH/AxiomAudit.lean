@@ -10453,6 +10453,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.clm_duhamel_nilpotent
 #print axioms QIQTH.PullbackMetric.expJet2Curve_zero_eq
 #print axioms QIQTH.PullbackMetric.expJet3ValG_zero_eq
+-- ★ PARAMETRIX P1 R3→κ (a4-prereq) — the closed geodesic-field jet VALUES at the equilibrium (GeodesicFieldJets.lean).
+-- fderiv2_geodesicField_apply_zero: D²F(p,0)(Δx,Δu)(ξ,η) = (0, fun a => −∑_j∑_k Γ^a_{jk}(p)·(η_j Δu_k + Δu_j η_k)) —
+-- the closed D²F VALUE at (p,0), bilinear in Γ(p) ONLY (the u=0 collapse: every product-rule term times a base
+-- velocity (p,0).2=0 vanishes, leaving the two u-linear-Γ survivors; via fderiv2_geodesicField_reduce
+-- [fderiv_clm_apply const inner slot] + a compositional HasFDerivAt of y↦DF(y)(ξ,η) + ring).  fderiv3_geodesicField_reduce:
+-- D³F(x)(v₁)(v₂)(v₃) = D²(z↦DF(z)v₃)(x)(v₁)(v₂) (the D³F→D²Q reduction, any x).  Supporting: fderiv2_geodesicField_reduce,
+-- fderiv2_reduce_general.  HONEST — D²F(p,0) DONE; the closed D³F(p,0) VALUE (trilinear in ∂Γ(p)) is CHECKPOINTED
+-- (a ~2×-larger analogue = the D²Q(p,0) value lemma, machinery not obstruction).  These are (a4) prerequisites; do
+-- NOT yet give the a₃ match / expJetD3(0)=a₃ / the bridge / κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6,
+-- NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv2_geodesicField_reduce
+#print axioms QIQTH.ExpMap.fderiv2_geodesicField_apply_zero
+#print axioms QIQTH.ExpMap.fderiv2_reduce_general
+#print axioms QIQTH.ExpMap.fderiv3_geodesicField_reduce
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
