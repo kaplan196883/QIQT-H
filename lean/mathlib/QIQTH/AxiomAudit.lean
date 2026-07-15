@@ -10331,6 +10331,15 @@ namespace QIQTH.AxiomAudit
 -- pointwise 3rd-deriv little-o.  Does NOT yet give the CLM HasFDerivAt (needs a ‖h‖/‖k‖-separated primed remainder
 -- layer), NOT ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_fderiv2_sub_quadratic
+-- ★ PARAMETRIX P1 RUNG 3 (B-asm3 primed remainders) — the ‖h‖/‖k‖-separated bounds (ExpMapContDiff3.lean).
+-- expJet2FirstVar_residual_Icc': ∃C₀≥0, ∀h, ∀t∈Icc 0 1, ‖Φ'(t)(ιh)−Φ(t)(ιh)−expJet2Curve h l t‖ ≤ C₀‖h‖‖l‖²
+-- (‖h‖ pulled out, using the Rung-2 expJet2_remainder_quadratic_bound'); expJet3_remainder_quadratic_bound':
+-- ∃C₀≥0, ∀t∈Icc 0 1, ‖ρ(t)‖ ≤ C₀‖h‖‖k‖‖l‖² (‖h‖‖k‖ pulled out, from the separated inputs).  The opNorm_le_bound₂-
+-- ready separated remainders — the prerequisite the B-asm3 checkpoint flagged for the 3rd-derivative CLM
+-- HasFDerivAt.  HONEST: prerequisites only; do NOT give the CLM HasFDerivAt/ContDiff³/κ=1/6/parametrix/general
+-- a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2FirstVar_residual_Icc'
+#print axioms QIQTH.ExpMap.expJet3_remainder_quadratic_bound'
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
