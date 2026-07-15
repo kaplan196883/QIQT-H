@@ -3895,4 +3895,152 @@ theorem hpd2_B_folded (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hpd2_B_expand g gi hC p hg α v, ← hS1, ← hS2, ← hS3, ← hS4, ← hS5, ← hS7, ← hS9]
   simp only [add_mul, Finset.sum_add_distrib]
 
+/-! ### STEP (ii) — the block-`∂²g` conversion + the α1 cancellation (`hpd2_alpha1_cancel`) -/
+
+set_option maxHeartbeats 3200000 in
+/-- **`hpd2_block_dd_g` — the `w`-weighted metric contraction of `pd_christoffel_lower_fn`.**
+    Contracting a directional `∂Γ`-block `∑_r (∂_r Γ^σ_{λμ})·w^r` against the metric `∑_σ g_{σν}(p)·(·)`
+    and applying the differentiated lowered-Christoffel identity term-by-term, the `g·∂Γ` block becomes
+      `∑_r w^r·(½(∂_r∂_λ g_{νμ} + ∂_r∂_μ g_{νλ} − ∂_r∂_ν g_{λμ})(p) − ∑_σ ∂_r g_{σν}(p)·Γ^σ_{λμ}(p))`.
+    This is the metric-lowered `g·∂Γ → ∂²g − ∂g·Γ` conversion in the exact shape the folded RNC `D³`
+    blocks feed it (each block's inner `∂Γ` contraction is a `∑_r (∂_rΓ)·w^r`).  Pure `Finset`/`ring`
+    reindex on top of the landed `pd_christoffel_lower_fn`. -/
+theorem hpd2_block_dd_g (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (ν lam mu : Fin n) (w : Point n) :
+    (∑ σ, g p σ ν * (∑ r, pd (fun y => christoffel g gi σ lam mu y) r p * w r))
+      = ∑ r, w r * ((1 / 2) * (pd (fun y => pd (fun z => g z ν mu) lam y) r p
+                    + pd (fun y => pd (fun z => g z ν lam) mu y) r p
+                    - pd (fun y => pd (fun z => g z lam mu) ν y) r p)
+          - ∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ lam mu p) := by
+  -- (1) Pull the `σ`-metric sum inside the `r`-direction sum.
+  have hswap : (∑ σ, g p σ ν * (∑ r, pd (fun y => christoffel g gi σ lam mu y) r p * w r))
+      = ∑ r, w r * (∑ σ, g p σ ν * pd (fun y => christoffel g gi σ lam mu y) r p) := by
+    simp only [Finset.mul_sum]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun r _ => Finset.sum_congr rfl fun σ _ => by ring
+  -- (2) Convert each inner `∑_σ g_{σν}·∂_rΓ^σ_{λμ}` by the landed differentiated-lowering identity.
+  rw [hswap]
+  refine Finset.sum_congr rfl fun r _ => ?_
+  rw [pd_christoffel_lower_fn g gi hsymm hinvF hg hC p ν lam mu r]
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_D3_metric_contract` — the metric contraction of the RNC `D³` block into `∂²g − ∂g·Γ`.**
+    Contracting `rncD3Block` against `∑_a g_{aν}(p)·(·)` and applying `hpd2_block_dd_g` to each of the
+    block's three inner `∂Γ`-directional contractions EXPOSES the hidden second metric derivative:
+    the block, which is manifestly `∂Γ` in its raw form, becomes a `∂²g` piece (the metric-Hessian the
+    α1 fold1 term must cancel against) minus a `∂g·Γ` piece.  This is the load-bearing "step (ii)"
+    conversion that turns the folded `D³` blocks into `∂²g`-carrying terms. -/
+theorem hpd2_D3_metric_contract (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (ν : Fin n) (h k l : Point n) :
+    (∑ a, g p a ν * rncD3Block g gi p h k l a)
+      = -∑ j, ∑ m,
+          ((∑ r, l r * ((1 / 2) * (pd (fun y => pd (fun z => g z ν m) j y) r p
+                    + pd (fun y => pd (fun z => g z ν j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) ν y) r p)
+              - ∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ j m p))
+            * (h j * k m + k j * h m)
+          + (∑ r, h r * ((1 / 2) * (pd (fun y => pd (fun z => g z ν m) j y) r p
+                    + pd (fun y => pd (fun z => g z ν j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) ν y) r p)
+              - ∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ j m p))
+            * (l j * k m + k j * l m)
+          + (∑ r, k r * ((1 / 2) * (pd (fun y => pd (fun z => g z ν m) j y) r p
+                    + pd (fun y => pd (fun z => g z ν j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) ν y) r p)
+              - ∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ j m p))
+            * (l j * h m + h j * l m)) := by
+  have hBC : ∀ (w : Point n) (j m : Fin n),
+      (∑ a, g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * w r))
+        = ∑ r, w r * ((1 / 2) * (pd (fun y => pd (fun z => g z ν m) j y) r p
+                    + pd (fun y => pd (fun z => g z ν j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) ν y) r p)
+            - ∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ j m p) :=
+    fun w j m => hpd2_block_dd_g g gi hsymm hinvF hg hC p ν j m w
+  simp only [rncD3Block]
+  -- Move the metric sum through the `-∑_j∑_m`, reorder to `∑_j∑_m∑_a`, distribute onto the 3 blocks.
+  rw [show (∑ a, g p a ν * -∑ j, ∑ m,
+        ((∑ r, pd (fun y => christoffel g gi a j m y) r p * l r) * (h j * k m + k j * h m)
+          + (∑ r, pd (fun y => christoffel g gi a j m y) r p * h r) * (l j * k m + k j * l m)
+          + (∑ r, pd (fun y => christoffel g gi a j m y) r p * k r) * (l j * h m + h j * l m)))
+      = -∑ j, ∑ m, ∑ a, g p a ν *
+        ((∑ r, pd (fun y => christoffel g gi a j m y) r p * l r) * (h j * k m + k j * h m)
+          + (∑ r, pd (fun y => christoffel g gi a j m y) r p * h r) * (l j * k m + k j * l m)
+          + (∑ r, pd (fun y => christoffel g gi a j m y) r p * k r) * (l j * h m + h j * l m))
+      from by
+    simp only [mul_neg, Finset.mul_sum]
+    rw [Finset.sum_neg_distrib]
+    congr 1
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.sum_comm]]
+  congr 1
+  refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => ?_
+  -- For fixed `j,m`: distribute `∑_a g_{aν}·(A+B+C)` and pull the `a`-free factors out.
+  rw [show (∑ a, g p a ν *
+        ((∑ r, pd (fun y => christoffel g gi a j m y) r p * l r) * (h j * k m + k j * h m)
+          + (∑ r, pd (fun y => christoffel g gi a j m y) r p * h r) * (l j * k m + k j * l m)
+          + (∑ r, pd (fun y => christoffel g gi a j m y) r p * k r) * (l j * h m + h j * l m)))
+      = (h j * k m + k j * h m)
+          * (∑ a, g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * l r))
+        + (l j * k m + k j * l m)
+          * (∑ a, g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * h r))
+        + (l j * h m + h j * l m)
+          * (∑ a, g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * k r))
+      from by
+    have e1 : ∀ a : Fin n, g p a ν *
+          ((∑ r, pd (fun y => christoffel g gi a j m y) r p * l r) * (h j * k m + k j * h m)
+            + (∑ r, pd (fun y => christoffel g gi a j m y) r p * h r) * (l j * k m + k j * l m)
+            + (∑ r, pd (fun y => christoffel g gi a j m y) r p * k r) * (l j * h m + h j * l m))
+        = ((h j * k m + k j * h m) * (g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * l r))
+            + (l j * k m + k j * l m) * (g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * h r)))
+          + (l j * h m + h j * l m) * (g p a ν * (∑ r, pd (fun y => christoffel g gi a j m y) r p * k r)) :=
+      fun a => by ring
+    rw [Finset.sum_congr rfl fun a _ => e1 a, Finset.sum_add_distrib, Finset.sum_add_distrib,
+      ← Finset.mul_sum, ← Finset.mul_sum, ← Finset.mul_sum]]
+  rw [hBC l j m, hBC h j m, hBC k j m]
+  ring
+
+/-!
+### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
+
+LANDED (this brick, both axiom-clean `[propext, Classical.choice, Quot.sound]`, file GREEN):
+* `hpd2_block_dd_g` — the `w`-weighted metric contraction of the differentiated lowered-Christoffel
+  identity: `∑_σ g_{σν}(p)·(∑_r ∂_rΓ^σ_{λμ}(p)·w^r) = ∑_r w^r·(½(∂_r∂_λ g_{νμ}+∂_r∂_μ g_{νλ}−∂_r∂_ν g_{λμ})
+  − ∑_σ ∂_r g_{σν}·Γ^σ_{λμ})`.  This is exactly the shape each RNC `D³` inner `∂Γ`-contraction feeds.
+* `hpd2_D3_metric_contract` — the full metric contraction of `rncD3Block` into `∂²g − ∂g·Γ`:
+  `∑_a g_{aν}(p)·rncD3Block g gi p h k l a = −∑_j∑_m ( BC(l,j,m)·(h^j k^m+k^j h^m)
+    + BC(h,j,m)·(l^j k^m+k^j l^m) + BC(k,j,m)·(l^j h^m+h^j l^m) )`, where `BC(w,j,m)` is the
+  `hpd2_block_dd_g` bracket at `(ν, λ=j, μ=m, w)`.  This EXPOSES the hidden second metric derivative
+  the α1 `fold1` term cancels against (the block is manifestly `∂Γ` in raw form; contracted with the
+  metric it becomes `∂²g − ∂g·Γ`).
+
+REMAINING for `hpd2_alpha1_cancel` (the `∂²g`-matching, NOT landed — a large finite `Finset`/`ring`
+assembly, unblocked, all inputs now present):
+* The four folded `D³` blocks feed `hpd2_D3_metric_contract` as follows:
+  - `fold5_A`: `∑_k v^k·[∑_a g_{ak}·D3(e_α,v,v)_a]` — apply with `ν=k, h=e_α, k'=v, l'=v`.
+  - `fold9_A`: `∑_b g_{αb}·D3(v,v,v)_b` — apply with `ν=α` after `hsymm` (`g_{αb}=g_{bα}`), `h=k'=l'=v`.
+  - `fold5_B`, `fold9_B`: the `D3(v,e_α,v)`/`D3(v,v,v)`-type blocks with `α` in the MIDDLE slot,
+    metric `ν=k` (fold5_B) resp. `ν=α` via `hsymm` on `g_{jb}` with the free `j` (fold9_B, two-slot).
+* The verified `∂²g` content to be cancelled (v-contraction `⟨·⟩ = ∑_{ljk}·v^l v^j v^k`):
+  - `2·fold1_A` gives `+2·⟨∂_l∂_j g_{αk}⟩`; `−fold1_B` gives `−⟨∂_l∂_α g_{jk}⟩`.
+  - Each `D3`-block `∂²g` (from `hpd2_D3_metric_contract`) splits, at `h=e_α`, into a `∑_r δ_{αr}`
+    piece (`½(∂_α∂_· g_{··})`, the α-derivative Hessian) and two coincident `∑_r v^r` pieces
+    (`½(∂_·∂_· g_{k·})` with a `δ_α` in a metric/derivative slot).  Under the symmetric v-contraction
+    these regroup precisely into `−2·⟨∂_l∂_j g_{αk}⟩ + ⟨∂_l∂_α g_{jk}⟩` scaled by the `1/6`·(slot
+    multiplicities), cancelling the `fold1` combination.  The surviving `∂g·Γ` pieces (from `BC`)
+    join the `fold2/3/4/7` Leibniz terms and the `fold6/8` + `Cross` `ΓΓ` terms as the `∂²g`-free
+    residual — that residual, written out explicitly, is `hpd2_alpha1_cancel`'s RHS.
+* The wall is purely the disciplined transcription of that explicit `∂g·Γ + Γ∂Γ + ΓΓ` residual RHS
+  plus the `Finset`/`ring` closure; no analytic input remains (both conversion lemmas are landed).
+  This transcription-and-close was NOT completed in this brick (risk of a large broken assembly).
+-/
+
 end QIQTH.PullbackMetric

@@ -10675,6 +10675,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.rncCrossBlock_contract3
 #print axioms QIQTH.PullbackMetric.hpd2_A_folded
 #print axioms QIQTH.PullbackMetric.hpd2_B_folded
+-- ★ PARAMETRIX P1 R3→κ (hpd2 ∂²g-conversion helpers — the load-bearing step-(ii) lemmas) (PullbackMetric.lean).
+-- hpd2_block_dd_g: the w-weighted metric contraction of pd_christoffel_lower_fn — ∑_σ g_σν(p)·(∑_r ∂_rΓ^σ_λμ(p)·wʳ)
+-- = ∑_r wʳ(½(∂_r∂_λ g_νμ+∂_r∂_μ g_νλ−∂_r∂_ν g_λμ)(p) − ∑_σ ∂_r g_σν(p)·Γ^σ_λμ(p)) (the g·∂Γ→∂²g−∂g·Γ shape each
+-- folded D³ inner ∂Γ-contraction feeds).  ★ hpd2_D3_metric_contract: the FULL metric contraction of rncD3Block into
+-- ∂²g−∂g·Γ — ∑_a g_aν(p)·rncD3Block g gi p h k l a = −∑_j∑_m(BC(l,j,m)(hʲkᵐ+kʲhᵐ)+BC(h,j,m)(lʲkᵐ+kʲlᵐ)+BC(k,j,m)
+-- (lʲhᵐ+hʲlᵐ)) with BC = the hpd2_block_dd_g bracket — EXPOSES the 2nd metric derivative hidden inside the folded D³
+-- blocks.  HONEST — both conversion lemmas landed (NO analytic input remains), but hpd2_alpha1_cancel itself is NOT yet
+-- a theorem: the ∂²g cancellation (feed the 4 folded blocks through hpd2_D3_metric_contract; the h=e_α block ∂²g
+-- regroups under symmetric v-contraction into −2⟨∂_l∂_j g_αk⟩+⟨∂_l∂_α g_jk⟩ cancelling 2fold1_A−fold1_B) + the ∂g·Γ+
+-- Γ∂Γ residual transcription remain (pure Finset/ring, checkpointed, NOT sorry'd).  Does NOT give hpd2 / the
+-- unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hpd2_block_dd_g
+#print axioms QIQTH.PullbackMetric.hpd2_D3_metric_contract
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
