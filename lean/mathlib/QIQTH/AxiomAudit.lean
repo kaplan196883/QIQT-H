@@ -10181,6 +10181,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetFund_norm_le_exp
 #print axioms QIQTH.ExpMap.expJet2_remainder_quadratic_bound_unif
 #print axioms QIQTH.ExpMap.expMap_fderiv_hasFDerivAt
+-- ★★★ PARAMETRIX P1 RUNG 2 — DONE — UNCONDITIONAL ContDiff² exp_p (ExpMapContDiff2.lean).
+-- expMap_contDiffOn_two: ContDiffOn ℝ 2 (expMap g gi hC p) (ball 0 (expRho …)) — NO side hypothesis.  The geodesic
+-- exp map is TWICE continuously differentiable near 0, via the finite Jet₂ augmented ODE tower (equilibrium-Grönwall,
+-- NOT the general C²-flow / smooth-dependence theorem Mathlib lacks).  Closed by:
+-- expJet2Val_two_pt_diff (the analytic heart of (C): ‖Q^{hk}_v(1)−Q^{hk}_w(1)‖ ≤ C‖v−w‖‖h‖‖k‖, the second-variation
+--   value is Lipschitz in the base point v — a parameter-Grönwall via gronwall_vec_residual, combining tube
+--   two-point [geodesic_twopoint_gronwall] + Φ two-point [expFund_two_pt_diff_Icc] + DF/D²F Lipschitz + the
+--   trilinear telescope clm_bilinear_diff_norm_le on the difference ODE expJet2_v_residual_hasDerivWithinAt);
+-- expJetD2_two_pt_diff (‖expJetD2_v − expJetD2_w‖_op ≤ C‖v−w‖ via π + opNorm_le_bound) ⟹ v↦fderiv(fderiv exp_p)v is
+--   LipschitzOnWith ⟹ ContinuousOn (C); with DifferentiableOn (from expMap_fderiv_hasFDerivAt, B-asm) +
+--   contDiffOn_succ_of_fderivWithin ⟹ ContDiffOn 1 (fderiv exp_p) ⟹ (D) via
+--   expMap_contDiffOn_two_of_fderiv_contDiffOn_one.  ⚠ HONEST (binding) — Rung 2 of the ContDiff³ tower DONE, but
+--   this does NOT yet give κ=1/6 for the pullback metric g̃ (that needs ContDiff³ exp_p = Rung 3, via the g̃
+--   derivative-loss), does NOT build the heat-kernel parametrix (P2), does NOT discharge general a₁=R/6, is NOT
+--   numerical-G, and is NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2Fund_value_bound_Icc
+#print axioms QIQTH.ExpMap.expJet2_v_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet2_v_residual_norm_le
+#print axioms QIQTH.ExpMap.expJet2Val_two_pt_diff
+#print axioms QIQTH.ExpMap.expJetD2_two_pt_diff
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_two
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
