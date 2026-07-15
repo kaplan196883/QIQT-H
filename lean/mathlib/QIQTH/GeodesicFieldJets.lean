@@ -183,4 +183,191 @@ theorem fderiv3_geodesicField_reduce (g gi : Point n → Fin n → Fin n → ℝ
     exact ((hQC.fderiv_right (m := (⊤ : WithTop ℕ∞)) le_top).differentiable (by simp)).differentiableAt
   rw [fderiv2_reduce_general (fun z => fderiv ℝ F z v3) x v1 v2 hQdiff]
 
+set_option maxHeartbeats 1600000 in
+/-- **The general-point first derivative of the order-1 map `Q z = DF(z)(ξ,η)`, applied.**  This is
+    the direct analogue of `geodesicField_fderiv_apply` one order up: differentiating the CLOSED
+    order-1 acceleration block `Q(x,u) = (η, −∑_{jk}[(∑_l ∂_lΓ·ξ_l)u_j u_k + Γ η_j u_k + Γ u_j η_k])`
+    once more (product rule through `Γ∘fst`, `Scoef = ∑_l ∂_lΓ·ξ_l` and the velocity projections
+    `proj∘snd`) and applying to `(a₂,b₂)` gives the seven monomials below.  Its `x`-derivative brings
+    `fderiv Scoef`/`fderiv Γ` (the `∂²Γ`/`∂Γ` layers), its `u`-derivative brings the `b₂` velocity
+    directions.  At `u = 0` the four `u`-carrying monomials vanish; here the point is GENERAL, so all
+    seven survive — this is the closed form that the `D³F(p,0)` build (`fderiv3_geodesicField_apply_zero`)
+    transports and then differentiates a second time. -/
+theorem geodesicField_fderiv2_apply (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x u ξ η a₂ b₂ : Point n) :
+    fderiv ℝ (fun z => fderiv ℝ (geodesicField g gi) z ((ξ, η) : Point n × Point n))
+        ((x, u) : Point n × Point n) ((a₂, b₂) : Point n × Point n)
+      = ((0 : Point n), fun i => -∑ j, ∑ k, (
+          fderiv ℝ (fun z => ∑ l, pd (fun z => christoffel g gi i j k z) l z * ξ l) x a₂ * u j * u k
+        + (∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * b₂ j * u k
+        + (∑ l, pd (fun z => christoffel g gi i j k z) l x * ξ l) * u j * b₂ k
+        + fderiv ℝ (fun z => christoffel g gi i j k z) x a₂ * η j * u k
+        + christoffel g gi i j k x * η j * b₂ k
+        + fderiv ℝ (fun z => christoffel g gi i j k z) x a₂ * u j * η k
+        + christoffel g gi i j k x * b₂ j * η k)) := by
+  have hΓd : ∀ i j k, DifferentiableAt ℝ (fun z : Point n => christoffel g gi i j k z) x :=
+    fun i j k => ((hC i j k).differentiable (by simp)).differentiableAt
+  have hpdd : ∀ i j k l,
+      DifferentiableAt ℝ (fun z : Point n => pd (fun z => christoffel g gi i j k z) l z) x :=
+    fun i j k l => ((christoffel_pd_contDiff g gi hC i j k l).differentiable (by simp)).differentiableAt
+  -- `Scoef = ∑_l ∂_lΓ·ξ_l` differentiable at `x` (as a single scalar field).
+  have hScoefDiff : ∀ i j k, DifferentiableAt ℝ
+      (fun z : Point n => ∑ l, pd (fun z => christoffel g gi i j k z) l z * ξ l) x :=
+    fun i j k => DifferentiableAt.fun_sum (fun l _ => (hpdd i j k l).mul_const (ξ l))
+  -- `y ↦ Γ^i_{jk}(y.1)` and `y ↦ Scoef^i_{jk}(y.1)` HasFDerivAt at `(x,u)`.
+  have hΓf := fun i j k =>
+    HasFDerivAt.comp (f := Prod.fst) ((x, u) : Point n × Point n)
+      (hΓd i j k).hasFDerivAt hasFDerivAt_fst
+  have hScoefF := fun i j k =>
+    HasFDerivAt.comp (f := Prod.fst) ((x, u) : Point n × Point n)
+      (hScoefDiff i j k).hasFDerivAt hasFDerivAt_fst
+  -- velocity projection `y ↦ y.2 j` HasFDerivAt at `(x,u)`.
+  have hu := fun j => ((ContinuousLinearMap.proj (R := ℝ) j).comp
+      (ContinuousLinearMap.snd ℝ (Point n) (Point n))).hasFDerivAt (x := ((x, u) : Point n × Point n))
+  -- per-`(i,j,k)` summand HasFDerivAt (the three product families of the order-1 acceleration block).
+  have hterm := fun i j k =>
+    ((((hScoefF i j k).mul (hu j)).mul (hu k)).add
+      (((hΓf i j k).mul_const (η j)).mul (hu k))).add
+      (((hΓf i j k).mul (hu j)).mul_const (η k))
+  have hExpl := (hasFDerivAt_const (η : Point n) ((x, u) : Point n × Point n)).prodMk
+    (hasFDerivAt_pi.2 (fun i =>
+      (HasFDerivAt.fun_sum (u := (Finset.univ : Finset (Fin n))) (fun j _ =>
+        HasFDerivAt.fun_sum (u := (Finset.univ : Finset (Fin n))) (fun k _ => hterm i j k))).neg))
+  have hpt : ∀ y : Point n × Point n,
+      fderiv ℝ (geodesicField g gi) y ((ξ, η) : Point n × Point n)
+        = ((η : Point n), fun i => -∑ j, ∑ k,
+            ((∑ l, pd (fun z => christoffel g gi i j k z) l y.1 * ξ l) * y.2 j * y.2 k
+              + christoffel g gi i j k y.1 * η j * y.2 k
+              + christoffel g gi i j k y.1 * y.2 j * η k)) :=
+    fun y => by obtain ⟨x, u⟩ := y; exact geodesicField_fderiv_apply g gi hC x u ξ η
+  have hHFD : HasFDerivAt (fun y => fderiv ℝ (geodesicField g gi) y ((ξ, η) : Point n × Point n))
+      _ ((x, u) : Point n × Point n) :=
+    hExpl.congr_of_eventuallyEq (Filter.Eventually.of_forall fun y => hpt y)
+  rw [hHFD.fderiv]
+  refine Prod.ext ?_ ?_
+  · simp
+  · funext i
+    simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.pi_apply,
+      ContinuousLinearMap.neg_apply, ContinuousLinearMap.sum_apply, ContinuousLinearMap.add_apply,
+      ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
+      ContinuousLinearMap.proj_apply, smul_eq_mul, Function.comp_apply, Pi.mul_apply]
+    rw [neg_inj]
+    refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    ring
+
+set_option maxHeartbeats 4000000 in
+/-- **The closed-form VALUE of `D³F` at the equilibrium `(p,0)`.**  Trilinear in `∂Γ(p)` only (NO
+    `Γ`, NO `∂²Γ`): the `u = 0` kill removes both the `∂²Γ·u²`-family (which always pairs with two
+    velocities) and every once-differentiated leftover-`u` term, leaving exactly the survivors where
+    the two differentiations both landed on velocity slots.  With `v₁ = (a₁,b₁)` the outer direction,
+    `v₂ = (a₂,b₂)` the middle direction and `v₃ = (ξ,η)` the innermost `DF`-slot,
+    `D³F(p,0)(a₁,b₁)(a₂,b₂)(ξ,η) = (0, i ↦ −∑_{jk}[ (∑_l ∂_lΓ^i_{jk}(p)·ξ_l)(b₁_j b₂_k + b₂_j b₁_k)
+      + (∑_m ∂_mΓ^i_{jk}(p)·a₁_m)(η_j b₂_k + b₂_j η_k) + (∑_m ∂_mΓ^i_{jk}(p)·a₂_m)(η_j b₁_k + b₁_j η_k) ])`.
+    This is the last (a4) prerequisite of the `ContDiff³ exp_p` third-jet chain. -/
+theorem fderiv3_geodesicField_apply_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p a₁ b₁ a₂ b₂ ξ η : Point n) :
+    (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) ((p, 0) : Point n × Point n))
+        ((a₁, b₁) : Point n × Point n) ((a₂, b₂) : Point n × Point n) ((ξ, η) : Point n × Point n)
+      = ((0 : Point n), fun i => -∑ j, ∑ k,
+          ((∑ l, pd (fun z => christoffel g gi i j k z) l p * ξ l) * (b₁ j * b₂ k + b₂ j * b₁ k)
+            + (∑ m, pd (fun z => christoffel g gi i j k z) m p * a₁ m) * (η j * b₂ k + b₂ j * η k)
+            + (∑ m, pd (fun z => christoffel g gi i j k z) m p * a₂ m) * (η j * b₁ k + b₁ j * η k))) := by
+  rw [fderiv3_geodesicField_reduce g gi hC]
+  -- the closed order-1 map `Q z = DF(z)(ξ,η)` and the second reduction `D²Q(p,0)(v₁)(v₂)`.
+  have hQC : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z => fderiv ℝ (geodesicField g gi) z ((ξ, η) : Point n × Point n)) :=
+    (contDiff_fderiv_geodesicField g gi hC).clm_apply contDiff_const
+  have hQdiff : DifferentiableAt ℝ
+      (fderiv ℝ (fun z => fderiv ℝ (geodesicField g gi) z ((ξ, η) : Point n × Point n)))
+      ((p, 0) : Point n × Point n) :=
+    ((hQC.fderiv_right (m := (⊤ : WithTop ℕ∞)) le_top).differentiable (by simp)).differentiableAt
+  rw [fderiv2_reduce_general (fun z => fderiv ℝ (geodesicField g gi) z ((ξ, η) : Point n × Point n))
+    ((p, 0) : Point n × Point n) ((a₁, b₁) : Point n × Point n) ((a₂, b₂) : Point n × Point n) hQdiff]
+  -- differentiability layers at `p`.
+  have hΓd : ∀ i j k, DifferentiableAt ℝ (fun z : Point n => christoffel g gi i j k z) p :=
+    fun i j k => ((hC i j k).differentiable (by simp)).differentiableAt
+  have hpdd : ∀ i j k l,
+      DifferentiableAt ℝ (fun z : Point n => pd (fun z => christoffel g gi i j k z) l z) p :=
+    fun i j k l => ((christoffel_pd_contDiff g gi hC i j k l).differentiable (by simp)).differentiableAt
+  -- `Scoef = ∑_l ∂_lΓ·ξ_l` is `C^∞`, hence so are `x ↦ fderiv Γ x a₂` and `x ↦ fderiv Scoef x a₂`.
+  have hScoefCD : ∀ i j k, ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : Point n => ∑ l, pd (fun z => christoffel g gi i j k z) l z * ξ l) :=
+    fun i j k => ContDiff.sum (fun l _ => (christoffel_pd_contDiff g gi hC i j k l).mul contDiff_const)
+  have hScoefDiff : ∀ i j k, DifferentiableAt ℝ
+      (fun z : Point n => ∑ l, pd (fun z => christoffel g gi i j k z) l z * ξ l) p :=
+    fun i j k => ((hScoefCD i j k).differentiable (by simp)).differentiableAt
+  have hGa2Diff : ∀ i j k, DifferentiableAt ℝ
+      (fun x => fderiv ℝ (fun z => christoffel g gi i j k z) x a₂) p :=
+    fun i j k => (((ContinuousLinearMap.apply ℝ ℝ a₂).contDiff.comp
+      ((hC i j k).fderiv_right (m := (⊤ : WithTop ℕ∞)) le_top)).differentiable (by simp)).differentiableAt
+  have hcoefADiff : ∀ i j k, DifferentiableAt ℝ
+      (fun x => fderiv ℝ (fun z => ∑ l, pd (fun z => christoffel g gi i j k z) l z * ξ l) x a₂) p :=
+    fun i j k => (((ContinuousLinearMap.apply ℝ ℝ a₂).contDiff.comp
+      ((hScoefCD i j k).fderiv_right (m := (⊤ : WithTop ℕ∞)) le_top)).differentiable (by simp)).differentiableAt
+  -- HasFDerivAt building blocks at `(p,0)`.
+  have hΓf := fun i j k =>
+    HasFDerivAt.comp (f := Prod.fst) ((p, 0) : Point n × Point n)
+      (hΓd i j k).hasFDerivAt hasFDerivAt_fst
+  have hScoefF := fun i j k =>
+    HasFDerivAt.comp (f := Prod.fst) ((p, 0) : Point n × Point n)
+      (hScoefDiff i j k).hasFDerivAt hasFDerivAt_fst
+  have hGa2F := fun i j k =>
+    HasFDerivAt.comp (f := Prod.fst) ((p, 0) : Point n × Point n)
+      (hGa2Diff i j k).hasFDerivAt hasFDerivAt_fst
+  have hcoefAF := fun i j k =>
+    HasFDerivAt.comp (f := Prod.fst) ((p, 0) : Point n × Point n)
+      (hcoefADiff i j k).hasFDerivAt hasFDerivAt_fst
+  have hu := fun j => ((ContinuousLinearMap.proj (R := ℝ) j).comp
+      (ContinuousLinearMap.snd ℝ (Point n) (Point n))).hasFDerivAt (x := ((p, 0) : Point n × Point n))
+  -- per-`(i,j,k)` summand HasFDerivAt (the seven monomials of the general-point `D²Q`).
+  have hterm := fun i j k =>
+    ((((((
+      (((hcoefAF i j k).mul (hu j)).mul (hu k)).add
+      (((hScoefF i j k).mul_const (b₂ j)).mul (hu k))).add
+      (((hScoefF i j k).mul (hu j)).mul_const (b₂ k))).add
+      (((hGa2F i j k).mul_const (η j)).mul (hu k))).add
+      (((hΓf i j k).mul_const (η j)).mul_const (b₂ k))).add
+      (((hGa2F i j k).mul (hu j)).mul_const (η k))).add
+      (((hΓf i j k).mul_const (b₂ j)).mul_const (η k)))
+  have hExpl := (hasFDerivAt_const ((0 : Point n)) ((p, 0) : Point n × Point n)).prodMk
+    (hasFDerivAt_pi.2 (fun i =>
+      (HasFDerivAt.fun_sum (u := (Finset.univ : Finset (Fin n))) (fun j _ =>
+        HasFDerivAt.fun_sum (u := (Finset.univ : Finset (Fin n))) (fun k _ => hterm i j k))).neg))
+  -- transport to the closed order-1-derivative map (`geodesicField_fderiv2_apply` at each point).
+  have hpt : ∀ y : Point n × Point n,
+      fderiv ℝ (fun z => fderiv ℝ (geodesicField g gi) z ((ξ, η) : Point n × Point n)) y
+          ((a₂, b₂) : Point n × Point n)
+        = ((0 : Point n), fun i => -∑ j, ∑ k, (
+            fderiv ℝ (fun z => ∑ l, pd (fun z => christoffel g gi i j k z) l z * ξ l) y.1 a₂
+              * y.2 j * y.2 k
+          + (∑ l, pd (fun z => christoffel g gi i j k z) l y.1 * ξ l) * b₂ j * y.2 k
+          + (∑ l, pd (fun z => christoffel g gi i j k z) l y.1 * ξ l) * y.2 j * b₂ k
+          + fderiv ℝ (fun z => christoffel g gi i j k z) y.1 a₂ * η j * y.2 k
+          + christoffel g gi i j k y.1 * η j * b₂ k
+          + fderiv ℝ (fun z => christoffel g gi i j k z) y.1 a₂ * y.2 j * η k
+          + christoffel g gi i j k y.1 * b₂ j * η k)) :=
+    fun y => by obtain ⟨x, u⟩ := y; exact geodesicField_fderiv2_apply g gi hC x u ξ η a₂ b₂
+  have hHFD : HasFDerivAt
+      (fun y => fderiv ℝ (fun z => fderiv ℝ (geodesicField g gi) z ((ξ, η) : Point n × Point n)) y
+        ((a₂, b₂) : Point n × Point n)) _ ((p, 0) : Point n × Point n) :=
+    hExpl.congr_of_eventuallyEq (Filter.Eventually.of_forall fun y => hpt y)
+  rw [hHFD.fderiv]
+  refine Prod.ext ?_ ?_
+  · simp
+  · funext i
+    simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.pi_apply,
+      ContinuousLinearMap.neg_apply, ContinuousLinearMap.sum_apply, ContinuousLinearMap.add_apply,
+      ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
+      ContinuousLinearMap.proj_apply, smul_eq_mul, Function.comp_apply, Pi.mul_apply, Pi.zero_apply,
+      mul_zero, zero_mul, add_zero, zero_add]
+    rw [neg_inj]
+    refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [fderiv_apply_eq_sum_pd (fun z => christoffel g gi i j k z) p a₁ (hΓd i j k),
+        fderiv_apply_eq_sum_pd (fun z => christoffel g gi i j k z) p a₂ (hΓd i j k)]
+    ring
+
 end QIQTH.ExpMap

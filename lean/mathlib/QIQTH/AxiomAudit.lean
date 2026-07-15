@@ -10467,6 +10467,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.fderiv2_geodesicField_apply_zero
 #print axioms QIQTH.ExpMap.fderiv2_reduce_general
 #print axioms QIQTH.ExpMap.fderiv3_geodesicField_reduce
+-- ★ PARAMETRIX P1 R3→κ (a4-prereq DONE) — the D³F(p,0) closed value (GeodesicFieldJets.lean).
+-- geodesicField_fderiv2_apply (general-point aux: D(z↦DF(z)(ξ,η))(x,u)(a₂,b₂), 7 monomials incl ∂²Γ·u²) +
+-- fderiv3_geodesicField_apply_zero: D³F(p,0)(a₁,b₁)(a₂,b₂)(ξ,η) = (0, fun i => −∑_j∑_k [(∑_l ∂_lΓ^i_{jk}·ξ_l)(b₁_j b₂_k+b₂_j b₁_k)
+-- + (∑_m ∂_mΓ·a₁_m)(η_j b₂_k+b₂_j η_k) + (∑_m ∂_mΓ·a₂_m)(η_j b₁_k+b₁_j η_k)]) — TRILINEAR in ∂Γ(p) only (no ∂²Γ(p)
+-- survives the u=0 kill, matching RNC).  Route: fderiv3_geodesicField_reduce → fderiv2_reduce_general → twice
+-- product-rule HasFDerivAt (∂²Γ packaged as the single atom fderiv Scoef, dodging any ∂²Γ pd_pd helper) + u=0 kill +
+-- fderiv_apply_eq_sum_pd ×2 + ring.  BOTH (a4) prerequisites D²F(p,0)/D³F(p,0) now DONE.  HONEST: these are the
+-- closed jet VALUES; the (a4) a₃ match / expJetD3(0)=a₃ / the bridge / κ=1/6 remain (reachable assembly).  Do NOT
+-- give κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_fderiv2_apply
+#print axioms QIQTH.ExpMap.fderiv3_geodesicField_apply_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
