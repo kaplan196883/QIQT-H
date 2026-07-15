@@ -2589,6 +2589,35 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
   (`expPullbackMetricInv`, `expPullbackMetricInv_zero`, `expPullbackMetricInv_differentiableAt`,
   `pd_christoffel_expPullbackInv_zero`).
 
+  STEP 2 NOW LANDED (this brick, axiom-clean [propext, Classical.choice, Quot.sound]) —
+  `pd_christoffel_lower_fn`.  The differentiated lowered-Christoffel FUNCTION identity, the
+  `g·dGamma -> dd(g) - d(g)·Gamma` conversion the (ii) cancellation needs.  christoffel_lower holds at
+  EVERY `y` (function form, via the NEIGHBOURHOOD inverse relation `hinvF : forall y a b, ... = delta`
+  — the legitimate strengthening the AUDIT CORRECTION called for, since the ambient inverse metric is
+  global); differentiate both sides at `p` (Leibniz `pd_sum`/`pd_mul` on the left, `pd_const_mul`/
+  `pd_add`/`pd_sub` on the right), solve.  This EXPOSES the second metric derivative implicit inside the
+  ambient `g·dGamma`, exactly the term that cancels the explicit alpha1 metric-Hessian in step (ii).
+
+  THE ENDGAME REDUCTION NOW LANDED (this brick, axiom-clean) — the SOLE remaining wall is a pure
+  second-jet identity `hpd2`.  Two reduction lemmas collapse the whole cyclic-gauge target onto a
+  Christoffel-free, inverse-free second-jet contraction of the pullback metric:
+    - `expPullback_radial_gauge_of_pd2` : GIVEN the pure second-jet identity
+        hpd2 : forall a v, 2·<d_l d_j g~_{a k}> = <d_l d_a g~_{j k}>   (<·> = sum_{l,j,k} · v^l v^j v^k),
+      the radial diagonal dGammaDiag(...pd Gamma~...) v i = 0 for every v,i (= expPullback_radial_gauge
+      / hrad).  Immediate from dGammaDiag_pd_christoffel_expPullbackInv_reduce (whose RHS is
+      (1/2) sum_a gi(p)^{i a}·(2<d_l d_j g~_{a k}> - <d_l d_a g~_{j k}>)), zeroing each a-bracket by hpd2.
+    - `gauge_pd_christoffel_expPullbackInv_zero_of_pd2` : composing that with the mechanical
+      `gauge_pd_christoffel_expPullbackInv_zero`, the FULL cyclic gauge follows from the single hpd2.
+  So expPullback_radial_gauge (and the unconditional cyclic gauge) is now reduced END-TO-END to the ONE
+  obligation hpd2 — a statement PURELY about the pullback metric's second jet, no pullback Christoffel,
+  no pullback inverse.  PRECISE FINAL GRIND (unchanged in content, now crisply targeted): substitute
+  `expPullbackMetric_pd2_closed` into the two brackets of hpd2, contract the alpha2 blocks via the
+  `_contract_*` lemmas (step i), convert each block's ambient g(p)·dGamma via the NOW-LANDED
+  `pd_christoffel_lower_fn` (step ii — the dd(g) it exposes cancels the explicit alpha1 dd(g)(p)), and
+  reindex the surviving Gamma,dGamma cubic onto rncDGamma via `a3rawArr_contract_eq_a3` +
+  `sum3_sym_contract`, vanishing by `expMap_rncDΓ_diag_zero` (step iii).  This large-but-finite
+  Finset/ring assembly remains the open step, now with ALL its inputs (including step 2) present.
+
 ### REGULARITY LEDGER (R3→κ) — recorded, not `sorry`
 
 * **Proved here:** `g̃ ∈ ContDiffOn ℝ 2` on the exp-ball (`contDiffOn_expPullbackMetric`), from
@@ -2758,5 +2787,121 @@ theorem gauge_pd_christoffel_expPullbackInv_zero (g gi : Point n → Fin n → F
     fun l i' j k => pd_christoffel_expPullbackInv_lower_symm g gi hC p hsymm i' j k l
   have hcyc := cyclic_of_gaugeJet_lower_symm _ hsym hgj i a b c
   linarith [hcyc]
+
+/-! ### STEP 2 — the differentiated lowered-Christoffel identity (`g·∂Γ → ∂²g − ∂g·Γ`) -/
+
+set_option maxHeartbeats 3200000 in
+/-- **Differentiated lowered-Christoffel FUNCTION identity** (the step-2 `g·∂Γ → ∂²g − ∂g·Γ`
+    conversion).  `christoffel_lower` holds at EVERY point `y` (function form, from the neighbourhood
+    inverse relation `hinvF`), so it is an identity of FUNCTIONS of `y`:
+      `(∑_σ g_{σν}·Γ^σ_{λμ})(y) = ½(∂_λ g_{νμ} + ∂_μ g_{νλ} − ∂_ν g_{λμ})(y)`.
+    Differentiating both sides at `p` in direction `r` (Leibniz on the left, `∂` through the ½ and the
+    three second-partials on the right) and solving for the `g·∂Γ` term gives
+      `∑_σ g_{σν}(p)·∂_r Γ^σ_{λμ}(p)
+         = ½·(∂_r∂_λ g_{νμ} + ∂_r∂_μ g_{νλ} − ∂_r∂_ν g_{λμ})(p) − ∑_σ ∂_r g_{σν}(p)·Γ^σ_{λμ}(p)`.
+    This EXPOSES the second metric derivative `∂²g` hiding inside `g·∂Γ`, which is the term that cancels
+    the explicit `α1` metric-Hessian in the radial-gauge assembly.  Pure product-rule algebra; the sole
+    input past `christoffel_lower` is that the ambient inverse relation holds on a neighbourhood
+    (`hinvF : ∀ y`), a legitimate global regularity fact about the ambient inverse metric. -/
+theorem pd_christoffel_lower_fn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (ν lam mu r : Fin n) :
+    (∑ σ, g p σ ν * pd (fun y => christoffel g gi σ lam mu y) r p)
+      = (1 / 2) * (pd (fun y => pd (fun z => g z ν mu) lam y) r p
+                    + pd (fun y => pd (fun z => g z ν lam) mu y) r p
+                    - pd (fun y => pd (fun z => g z lam mu) ν y) r p)
+        - ∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ lam mu p := by
+  -- (1) The lowered-Christoffel identity as an equality of FUNCTIONS of `y`.
+  have hfun : (fun y => ∑ σ, g y σ ν * christoffel g gi σ lam mu y)
+      = (fun y => (1 / 2) * (pd (fun z => g z ν mu) lam y + pd (fun z => g z ν lam) mu y
+                    - pd (fun z => g z lam mu) ν y)) :=
+    funext fun y => christoffel_lower g gi hsymm y (fun a b => hinvF y a b) ν lam mu
+  -- (2) Differentiate both sides at `p` in direction `r`.
+  have hd : pd (fun y => ∑ σ, g y σ ν * christoffel g gi σ lam mu y) r p
+      = pd (fun y => (1 / 2) * (pd (fun z => g z ν mu) lam y + pd (fun z => g z ν lam) mu y
+                    - pd (fun z => g z lam mu) ν y)) r p := by rw [hfun]
+  -- (3) LHS via `pd_sum` + `pd_mul`.
+  have hLHS : pd (fun y => ∑ σ, g y σ ν * christoffel g gi σ lam mu y) r p
+      = (∑ σ, pd (fun y => g y σ ν) r p * christoffel g gi σ lam mu p)
+        + (∑ σ, g p σ ν * pd (fun y => christoffel g gi σ lam mu y) r p) := by
+    rw [pd_sum Finset.univ (fun σ y => g y σ ν * christoffel g gi σ lam mu y) r p
+          (fun σ _ => (PdiffAt_of_contDiff _ (hg σ ν) r p).mul
+            (PdiffAt_of_contDiff _ (hC σ lam mu) r p)),
+        Finset.sum_congr rfl (fun σ (_ : σ ∈ Finset.univ) =>
+          pd_mul (fun y => g y σ ν) (fun y => christoffel g gi σ lam mu y) r p
+            (PdiffAt_of_contDiff _ (hg σ ν) r p) (PdiffAt_of_contDiff _ (hC σ lam mu) r p)),
+        Finset.sum_add_distrib]
+  -- (4) RHS via `pd_const_mul`, `pd_sub`, `pd_add`; the three factors are `∂g`, differentiable by `hg`.
+  have hp1 : PdiffAt (fun y => pd (fun z => g z ν mu) lam y) r p := PdiffAt_pd _ (hg ν mu) lam r p
+  have hp2 : PdiffAt (fun y => pd (fun z => g z ν lam) mu y) r p := PdiffAt_pd _ (hg ν lam) mu r p
+  have hp3 : PdiffAt (fun y => pd (fun z => g z lam mu) ν y) r p := PdiffAt_pd _ (hg lam mu) ν r p
+  have hRHS : pd (fun y => (1 / 2) * (pd (fun z => g z ν mu) lam y + pd (fun z => g z ν lam) mu y
+                    - pd (fun z => g z lam mu) ν y)) r p
+      = (1 / 2) * (pd (fun y => pd (fun z => g z ν mu) lam y) r p
+                    + pd (fun y => pd (fun z => g z ν lam) mu y) r p
+                    - pd (fun y => pd (fun z => g z lam mu) ν y) r p) := by
+    rw [pd_const_mul (1 / 2) _ r p (by exact (hp1.add hp2).sub hp3),
+        pd_sub _ _ r p (hp1.add hp2) hp3, pd_add _ _ r p hp1 hp2]
+  -- (5) Combine and solve for the `g·∂Γ` term.
+  rw [hLHS, hRHS] at hd
+  linarith [hd]
+
+open QIQTH.RNCGauge in
+/-- **Radial gauge from the pure second-jet identity.**  Discharging `hrad` (i.e.
+    `expPullback_radial_gauge`) is EQUIVALENT — via the already-proven reduction
+    `dGammaDiag_pd_christoffel_expPullbackInv_reduce` — to the Christoffel-free, inverse-free
+    pure `∂²g̃(0)` contraction identity
+      `2·⟨∂_l∂_j g̃_{αk}⟩ = ⟨∂_l∂_α g̃_{jk}⟩`   (∀ α, v),
+    where `⟨·⟩` is the radial contraction `∑_{l,j,k} · v^l v^j v^k`.  Given that pure second-jet
+    identity `hpd2`, the radial diagonal `dGammaDiag (…pd Γ̃…) v i` vanishes for every `v, i`.
+    This isolates the SOLE remaining analytic wall as a statement purely about the pullback metric's
+    second jet — no pullback Christoffel, no pullback inverse. -/
+theorem expPullback_radial_gauge_of_pd2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hpd2 : ∀ (α : Fin n) (v : Point n),
+      2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+        - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k) = 0)
+    (v : Point n) (i : Fin n) :
+    dGammaDiag (fun l i j k =>
+        pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i j k x) l 0) v i = 0 := by
+  rw [dGammaDiag_pd_christoffel_expPullbackInv_reduce g gi hC p hsymm hinv hg v i]
+  rw [Finset.sum_congr rfl fun α (_ : α ∈ Finset.univ) => by rw [hpd2 α v, mul_zero]]
+  simp
+
+open QIQTH.RNCGauge in
+/-- **The cyclic normal-coordinate gauge for `g̃`, modulo the pure second-jet identity.**  Combining
+    `expPullback_radial_gauge_of_pd2` (which discharges `hrad` from the pure `∂²g̃` contraction
+    identity) with `gauge_pd_christoffel_expPullbackInv_zero`, the full three-term cyclic gauge
+    `∂_c Γ̃^i_{ab}(0) + ∂_a Γ̃^i_{bc}(0) + ∂_b Γ̃^i_{ca}(0) = 0` follows from the SINGLE pure second-jet
+    hypothesis `hpd2`.  This is the endgame wired to its final obligation: closing `hpd2` (the
+    `∂²g̃` contraction `2⟨∂_l∂_j g̃_{αk}⟩ = ⟨∂_l∂_α g̃_{jk}⟩`) makes the gauge unconditional. -/
+theorem gauge_pd_christoffel_expPullbackInv_zero_of_pd2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hpd2 : ∀ (α : Fin n) (v : Point n),
+      2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+        - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k) = 0)
+    (i a b c : Fin n) :
+    pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i a b x) c 0
+      + pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i b c x) a 0
+      + pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i c a x) b 0 = 0 :=
+  gauge_pd_christoffel_expPullbackInv_zero g gi hC p hsymm
+    (fun v i => expPullback_radial_gauge_of_pd2 g gi hC p hsymm hinv hg hpd2 v i) i a b c
 
 end QIQTH.PullbackMetric

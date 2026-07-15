@@ -10628,6 +10628,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.point_eq_sum_single
 #print axioms QIQTH.PullbackMetric.rncD3Block_add_left
 #print axioms QIQTH.PullbackMetric.rncCrossBlock_swap_source
+-- ★ PARAMETRIX P1 R3→κ (radial-identity step (ii) FLOOR + endgame reduced to ONE clean 2nd-jet obligation)
+-- (PullbackMetric.lean).  pd_christoffel_lower_fn: the DIFFERENTIATED lowered-Christoffel FUNCTION identity =
+-- the g·∂Γ→∂²g−∂g·Γ conversion ∑_σ g_σν(p)·∂_r Γ^σ_λμ(p) = ½(∂_r∂_λ g_νμ+∂_r∂_μ g_νλ−∂_r∂_ν g_λμ)(p) − ∑_σ ∂_r g_σν(p)·Γ^σ_λμ(p),
+-- from christoffel_lower at every y (needs the strengthened NEIGHBOURHOOD inverse hinvF : ∀ y a b, ∑_σ g y a σ·gi y σ b=δ —
+-- the AUDIT CORRECTION's legitimate globality) differentiated at p via pd_sum/pd_mul.  This exposes the ∂²g hidden in
+-- the ambient g·∂Γ that cancels the α1 metric-Hessian.  expPullback_radial_gauge_of_pd2 + gauge_..._of_pd2: the radial
+-- diagonal AND the cyclic gauge for g̃ now both follow from a SINGLE sharp obligation hpd2 : ∀ α v,
+-- 2·⟨∂_l∂_j g̃_αk⟩ = ⟨∂_l∂_α g̃_jk⟩ (⟨·⟩ = radial contraction) — PURELY about g̃'s 2nd jet, NO pullback Christoffel/inverse.
+-- HONEST — hpd2 itself is NOT yet discharged (⟹ the UNCONDITIONAL gauge / κ=1/6 not earned): the large-but-finite
+-- Finset/ring assembly (subst expPullbackMetric_pd2_closed, contract α2 via the step-(i) _contract_* lemmas, convert
+-- g(p)·∂Γ via pd_christoffel_lower_fn to cancel α1 ∂²g(p), reindex Γ,∂Γ cubic via a3rawArr_contract_eq_a3+
+-- sum3_sym_contract+expMap_rncDΓ_diag_zero) remains — all inputs now present, checkpointed, NOT sorry'd.  Does NOT
+-- give κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.pd_christoffel_lower_fn
+#print axioms QIQTH.PullbackMetric.expPullback_radial_gauge_of_pd2
+#print axioms QIQTH.PullbackMetric.gauge_pd_christoffel_expPullbackInv_zero_of_pd2
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
