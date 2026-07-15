@@ -19,6 +19,8 @@
 import Mathlib
 import QIQTH.ExpMapContDiff3
 import QIQTH.GeodesicFieldJets
+import QIQTH.RNCGauge
+import QIQTH.RNCGaugeExp
 
 namespace QIQTH.PullbackMetric
 
@@ -1858,6 +1860,60 @@ theorem pd_christoffel_expPullbackInv_zero (g gi : Point n → Fin n → Fin n �
     (expPullbackMetricInv_differentiableAt g gi hC p hinv hg) i j k l
 
 /-!
+### (β3) — THE CYCLIC NORMAL-COORDINATE GAUGE (the `heat_a1_of_gauge` consumer)
+
+The structural half of the endgame: `g̃` is symmetric (so its Christoffel symbol is lower-symmetric),
+and the six-fold `GaugeJet` (symmetrized normal-coordinate gauge, `QIQTH.RNCGauge.GaugeJet`) collapses,
+via that lower-symmetry, to the three-term CYCLIC gauge that `heat_a1_of_gauge` consumes.
+-/
+
+open QIQTH.RNCGauge in
+/-- **The pullback metric is symmetric.**  `g̃_{ij} = g̃_{ji}` (as component fields), for a symmetric
+    ambient metric `g`.  Immediate from the tensorial pullback formula: swapping `i,j` swaps the two
+    Jacobian factors, and `∑_{a,b} g_{ab} J_j^a J_i^b = ∑_{a,b} g_{ab} J_i^a J_j^b` by relabelling the
+    dummy pair and using `g_{ab} = g_{ba}`. -/
+theorem expPullbackMetric_symm (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (x : Point n) (i j : Fin n) :
+    expPullbackMetric g gi hC p x i j = expPullbackMetric g gi hC p x j i := by
+  simp only [expPullbackMetric]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
+  rw [hsymm (expMap g gi hC p x) a b]
+  ring
+
+/-- **The pullback Christoffel derivative is symmetric in its lower pair.**  Since `g̃` is symmetric,
+    `Γ̃^i_{jk} = Γ̃^i_{kj}` (`christoffel_symm`), hence the same holds after `∂_l` at `0`. -/
+theorem pd_christoffel_expPullbackInv_lower_symm (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a) (i j k l : Fin n) :
+    pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i j k x) l 0
+      = pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i k j x) l 0 := by
+  have hfun : (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+        i j k x)
+      = (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+        i k j x) := by
+    funext x
+    exact christoffel_symm (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+      (fun y a b => expPullbackMetric_symm g gi hC p hsymm y a b) i j k x
+  rw [hfun]
+
+open QIQTH.RNCGauge in
+/-- **From the six-fold gauge to the three-fold cyclic gauge.**  For ANY Christoffel first-jet array
+    `dΓ` that is symmetric in its lower pair (`dΓ l i j k = dΓ l i k j`) and satisfies the symmetrized
+    six-fold `GaugeJet`, the three-term cyclic sum vanishes:
+      `dΓ a i b c + dΓ b i c a + dΓ c i a b = 0`.
+    Proof: lower-symmetry pairs the six permutation terms into `2×` the cyclic sum. -/
+theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n → ℝ)
+    (hsym : ∀ l i j k, dΓ l i j k = dΓ l i k j) (hgauge : GaugeJet dΓ) (i a b c : Fin n) :
+    dΓ a i b c + dΓ b i c a + dΓ c i a b = 0 := by
+  have h := hgauge i a b c
+  rw [hsym a i c b, hsym b i a c, hsym c i b a] at h
+  linarith
+
+/-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
 * **The RNC value / first-order / connection jets of `g̃` at `0` are now PROVED** (all axiom-clean,
@@ -1982,14 +2038,31 @@ theorem pd_christoffel_expPullbackInv_zero (g gi : Point n → Fin n → Fin n �
          fully-instantiated analytic half:
            `∂_l Γ̃^i_{jk}(0) = ½ ∑_α g⁻¹(p)^{iα}·(∂_l∂_j g̃_{αk} + ∂_l∂_k g̃_{αj} − ∂_l∂_α g̃_{jk})(0)`,
          with `Γ̃` the ACTUAL Christoffel symbol of `g̃` paired with its own inverse `g̃⁻¹`.
-    (β2) **CHECKPOINTED (not yet closed).**  Exactly ONE algebraic identity remains for the full bridge
-         `rnc_christoffel_linearJet`:
-           `rncDΓ (fun i j k => christoffel g gi i j k p)
-                  (fun l i j k => pd (fun z => christoffel g gi i j k z) l p) l i j k
-             = pd (fun x => christoffel (expPullbackMetric g gi hC p)
-                     (expPullbackMetricInv g gi hC p) i j k x) l 0`.
-         ROUTE (all inputs now present, PURE finite `Finset` algebra, NO analytic input past Rung 3):
-         start from `pd_christoffel_expPullbackInv_zero` (RHS above ⟶ `½ ∑_α gi p^{iα}·(…∂²g̃…)`), then
+    (β3) **STRUCTURAL HALF LANDED axiom-clean (`import QIQTH.RNCGauge`/`RNCGaugeExp` now added).**  Three
+         reusable lemmas reduce the full cyclic gauge to a SINGLE scalar identity:
+           - `expPullbackMetric_symm` : `g̃_{ij} = g̃_{ji}` (from `g` symmetric) — so `g̃`'s Christoffel is
+             lower-symmetric (`christoffel_symm`).
+           - `pd_christoffel_expPullbackInv_lower_symm` : `∂_l Γ̃^i_{jk}(0) = ∂_l Γ̃^i_{kj}(0)`.
+           - `cyclic_of_gaugeJet_lower_symm` : for ANY lower-symmetric first-jet array satisfying the
+             six-fold `QIQTH.RNCGauge.GaugeJet`, the three-term CYCLIC gauge vanishes (the six permutations
+             pair into `2×` the cyclic sum).
+         Hence the target `heat_a1_of_gauge` consumer
+           `∂_a Γ̃^i_{bc}(0) + ∂_b Γ̃^i_{ca}(0) + ∂_c Γ̃^i_{ab}(0) = 0`
+         follows from `cyclic_of_gaugeJet_lower_symm` applied to `dΓ := fun l i j k => pd (christoffel g̃
+         g̃⁻¹ i j k) l 0`, whose lower-symmetry is `pd_christoffel_expPullbackInv_lower_symm` — leaving the
+         SOLE remaining obligation `GaugeJet dΓ`.  By `QIQTH.RNCGauge.gaugeJet_of_diag`, `GaugeJet dΓ`
+         reduces to the pullback RNC RADIAL-GEODESIC identity (a single scalar per `(v,i)`):
+           **`∑_l ∑_j ∑_k pd (fun x => christoffel g̃ g̃⁻¹ i j k x) l 0 · v^l · v^j · v^k = 0`.**
+    (β2) **CHECKPOINTED (the SOLE remaining wall — the analytic content of RNC).**  Either the radial
+         identity of (β3) OR the pointwise bridge `rnc_christoffel_linearJet`:
+           `pd (fun x => christoffel g̃ g̃⁻¹ i j k x) l 0
+             = rncDΓ (fun i j k => christoffel g gi i j k p)
+                     (fun l i j k => pd (fun z => christoffel g gi i j k z) l p) l i j k`.
+         (Given the pointwise bridge, `exp_rncGaugeJet` transfers `GaugeJet` directly; given the radial
+         identity, `gaugeJet_of_diag` does — the radial route is a single scalar contraction, likely the
+         shorter path, since `dGammaDiag (rncDΓ …) v i = 0` is `expMap_rncDΓ_diag_zero` already.)
+         ROUTE (all inputs present, PURE finite `Finset` algebra, NO analytic input past Rung 3):
+         start from `pd_christoffel_expPullbackInv_zero` (RHS ⟶ `½ ∑_α gi p^{iα}·(…∂²g̃…)`), then
          expand each of the three `∂²g̃(0)` brackets via `pd2_expPullbackMetric_at_zero`
          (`∂_l∂_m g̃_{ij}(0) = ∑_{a,b} ∂_l∂_m(g(exp·)_{ab}·J_i^a·J_j^b)(0)`) and `pd_pd_mul3_zero` (the
          nine-term twice-Leibniz), substituting the factor jets: value `g(p)` / `J(0)=δ` (`fderiv_expMap_zero`),
@@ -1997,15 +2070,18 @@ theorem pd_christoffel_expPullbackInv_zero (g gi : Point n → Fin n → Fin n �
          and the two SECOND jets `∂²(g∘exp)(0)` = (α1) `pd2_metric_comp_expMap_zero` and `∂²J(0)` = (α2)
          `pd2_jacobian_expMap_zero`.  Then the `∂²g` ambient blocks (the `∂_l∂_m g_{ab}(p)` term of (α1))
          cancel against the metric-compatibility contraction `christoffel_lower`, and the surviving
-         `Γ,∂Γ` cubic reindexes onto `rncDΓ` via `a3rawArr_contract_eq_a3` (`QIQTH.RNCGaugeExp`).  This is
-         a LARGE multi-lemma `Finset`/`ring` collection (≈ the size of `pd2_expPullbackMetric_at_zero`
-         times the nine `pd_pd_mul3` terms times three brackets), a reachable finite assembly, NOT a deep
-         obstruction — but not closed in this session.  (When resumed: `import QIQTH.RNCGauge`/`RNCGaugeExp`.)
+         `Γ,∂Γ` cubic reindexes onto `rncDΓ`/`a₃` via `a3rawArr_contract_eq_a3` (`QIQTH.RNCGaugeExp`) — for
+         the radial route, `expJetD3_zero_diagonal` already gives the `∂²J` contraction in closed `−∂Γ+ΓΓ`
+         form.  This is a LARGE multi-lemma `Finset`/`ring` collection (≈ the size of
+         `pd2_expPullbackMetric_at_zero` times the nine `pd_pd_mul3` terms times three brackets), a
+         reachable finite assembly, NOT a deep obstruction — but not closed in this session.
   VERDICT: (α1), (α2) [the two irreducible second-jet inputs], (β)-analytic-half
   [`pd_christoffel_expPullback_zero`] AND (β1) [`expPullbackMetricInv` + its 0-jet/differentiability +
-  the instantiated `pd_christoffel_expPullbackInv_zero`] are all LANDED axiom-clean, exceeding the
-  guaranteed floor.  What remains for the full `rnc_christoffel_linearJet` bridge is ONLY (β2) the pure
-  `rncDΓ` algebraic match (the `∂²g`-cancellation via `christoffel_lower` + the `a3rawArr` reindexing) —
+  the instantiated `pd_christoffel_expPullbackInv_zero`] AND (β3) [the structural cyclic-gauge reduction:
+  `expPullbackMetric_symm`, `pd_christoffel_expPullbackInv_lower_symm`, `cyclic_of_gaugeJet_lower_symm`]
+  are all LANDED axiom-clean, exceeding the guaranteed floor.  What remains for the full cyclic gauge is
+  ONLY (β2) — a single scalar `Finset` identity (the pullback RNC radial-geodesic identity, or the
+  pointwise `rncDΓ` match): the `∂²g`-cancellation via `christoffel_lower` + the `a3rawArr` reindexing —
   a reachable finite assembly, not a deep obstruction.  Checkpoints landed:
   value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`

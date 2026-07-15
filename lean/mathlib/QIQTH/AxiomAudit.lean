@@ -10557,6 +10557,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.expPullbackMetricInv_zero
 #print axioms QIQTH.PullbackMetric.expPullbackMetricInv_differentiableAt
 #print axioms QIQTH.PullbackMetric.pd_christoffel_expPullbackInv_zero
+-- ★ PARAMETRIX P1 R3→κ (bridge residual β3 — the STRUCTURAL HALF of the pullback gauge) (PullbackMetric.lean).
+-- expPullbackMetric_symm (g̃_ij=g̃_ji, from g symmetric); pd_christoffel_expPullbackInv_lower_symm (∂_l Γ̃^i_jk(0) =
+-- ∂_l Γ̃^i_kj(0), lower-pair symmetry of the ACTUAL pullback Christoffel derivative); cyclic_of_gaugeJet_lower_symm
+-- (abstract transfer: any lower-symmetric first-jet array satisfying the 6-fold GaugeJet has vanishing 3-term CYCLIC
+-- sum — the six permutations pair into 2× cyclic).  ⟹ heat_a1_of_gauge's hgauge for g̃ (∂_a Γ̃^i_bc + ∂_b Γ̃^i_ca +
+-- ∂_c Γ̃^i_ab = 0) now follows MECHANICALLY from these + gaugeJet_of_diag, leaving EXACTLY ONE scalar obligation:
+-- the pullback RNC radial identity ∑_ljk pd(christoffel g̃ g̃⁻¹ i j k) l 0 · vˡvʲvᵏ = 0 (= dGammaDiag(rncDΓ)v i = 0,
+-- equiv. the pointwise bridge pd(christoffel g̃)0 = rncDΓ).  That is the LARGE finite Finset/ring assembly (subst
+-- pd_christoffel_expPullbackInv_zero → pd2_expPullbackMetric_at_zero/pd_pd_mul3_zero with (α1)+(α2) jets → cancel ∂²g
+-- via christoffel_lower → surviving Γ,∂Γ cubic via a3rawArr_contract_eq_a3) — reachable, NO analytic input past Rung 3.
+-- HONEST — does NOT yet give the bridge / the gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.expPullbackMetric_symm
+#print axioms QIQTH.PullbackMetric.pd_christoffel_expPullbackInv_lower_symm
+#print axioms QIQTH.PullbackMetric.cyclic_of_gaugeJet_lower_symm
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
