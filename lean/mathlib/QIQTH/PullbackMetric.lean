@@ -4241,6 +4241,278 @@ theorem hpd2_fold9B_blockconv (g gi : Point n → Fin n → Fin n → ℝ)
   congr 1
   exact hpd2_D3_metric_contract g gi hsymm hinvF hg hC p j v (Pi.single α 1) v
 
+/-- **`hpd2_hessian_regroup` — the `∂²g` cancellation identity (recipe step (3), NO Clairaut).**
+    The metric-Hessian content produced by the fully-symmetric `v`-weighted contraction of the
+    (converted) `α2` `D³` block regroups — by pure dummy-index reindexing under the symmetric `v³`
+    weights (`Finset.sum_comm`, no equality of mixed partials) — into exactly the combination
+    `2·⟨∂_l∂_j g_{αk}⟩ − ⟨∂_l∂_α g_{jk}⟩` that the folded `α1` `fold1` term (`2·fold1_A − fold1_B`)
+    cancels.  The LHS is the fully-symmetrized block-Hessian core (`∑_{jm} (∑_r v^r·½(∂_r∂_j g_{αm}
+    + ∂_r∂_m g_{αj} − ∂_r∂_α g_{jm}))·v^j v^m`, without the `½`/`3`/`−6` block prefactors, which the
+    assembly carries), the RHS is `2·P − Q` with `P` = `fold1_A`'s Hessian and `Q` = `fold1_B`'s. -/
+theorem hpd2_hessian_regroup (g : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ j, ∑ m, (∑ r, v r * (pd (fun y => pd (fun z => g z α m) j y) r p
+              + pd (fun y => pd (fun z => g z α j) m y) r p
+              - pd (fun y => pd (fun z => g z j m) α y) r p)) * (v j * v m))
+      = 2 * (∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y α k) j z) l p * v l * v j * v k)
+        - (∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y j k) α z) l p * v l * v j * v k) := by
+  -- (1) distribute the inner product and split into three triple sums A3 + B3 − C3.
+  have hdist : (∑ j, ∑ m, (∑ r, v r * (pd (fun y => pd (fun z => g z α m) j y) r p
+              + pd (fun y => pd (fun z => g z α j) m y) r p
+              - pd (fun y => pd (fun z => g z j m) α y) r p)) * (v j * v m))
+      = (∑ j, ∑ m, ∑ r, v r * v j * v m * pd (fun y => pd (fun z => g z α m) j y) r p)
+        + (∑ j, ∑ m, ∑ r, v r * v j * v m * pd (fun y => pd (fun z => g z α j) m y) r p)
+        - (∑ j, ∑ m, ∑ r, v r * v j * v m * pd (fun y => pd (fun z => g z j m) α y) r p) := by
+    have h1 : (∑ j, ∑ m, (∑ r, v r * (pd (fun y => pd (fun z => g z α m) j y) r p
+              + pd (fun y => pd (fun z => g z α j) m y) r p
+              - pd (fun y => pd (fun z => g z j m) α y) r p)) * (v j * v m))
+        = ∑ j, ∑ m, ∑ r, (v r * v j * v m * pd (fun y => pd (fun z => g z α m) j y) r p
+              + v r * v j * v m * pd (fun y => pd (fun z => g z α j) m y) r p
+              - v r * v j * v m * pd (fun y => pd (fun z => g z j m) α y) r p) := by
+      refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => ?_
+      rw [Finset.sum_mul]
+      exact Finset.sum_congr rfl fun r _ => by ring
+    rw [h1]
+    simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+  -- (2) reindex each triple sum to the `fold1` `⟨·⟩` shape (pure `sum_comm`).
+  have hA3 : (∑ j, ∑ m, ∑ r, v r * v j * v m * pd (fun y => pd (fun z => g z α m) j y) r p)
+      = ∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y α k) j z) l p * v l * v j * v k := by
+    rw [Finset.sum_congr rfl (fun j (_ : j ∈ (Finset.univ : Finset (Fin n))) =>
+        Finset.sum_comm (f := fun m r => v r * v j * v m * pd (fun y => pd (fun z => g z α m) j y) r p))]
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun r _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun m _ => by ring
+  have hB3 : (∑ j, ∑ m, ∑ r, v r * v j * v m * pd (fun y => pd (fun z => g z α j) m y) r p)
+      = ∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y α k) j z) l p * v l * v j * v k := by
+    rw [Finset.sum_comm]
+    rw [Finset.sum_congr rfl (fun m (_ : m ∈ (Finset.univ : Finset (Fin n))) =>
+        Finset.sum_comm (f := fun j r => v r * v j * v m * pd (fun y => pd (fun z => g z α j) m y) r p))]
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun r _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun m _ => by ring
+  have hC3 : (∑ j, ∑ m, ∑ r, v r * v j * v m * pd (fun y => pd (fun z => g z j m) α y) r p)
+      = ∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y j k) α z) l p * v l * v j * v k := by
+    rw [Finset.sum_congr rfl (fun j (_ : j ∈ (Finset.univ : Finset (Fin n))) =>
+        Finset.sum_comm (f := fun m r => v r * v j * v m * pd (fun y => pd (fun z => g z j m) α y) r p))]
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun r _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun m _ => by ring
+  rw [hdist, hA3, hB3, hC3]
+  ring
+
+/-- **`hpd2_fold5_blocks_cancel` — the raw `D³`-block cancellation (recipe step (2), full symmetry).**
+    Because `rncD3Block` is fully symmetric in its three direction arguments (`rncD3Block_swap12`), the
+    `α2` `D³` blocks of `A.fold5` (`D3(e_α,v,v)`) and of `B.fold5`/`B.fold9` (`D3(v,e_α,v)`) are
+    literally EQUAL after the metric symmetry `hsymm` swap; with the `A`-block entering `2A` with weight
+    `2` and the two `B`-blocks entering `−B` with weight `1` each, they cancel identically at the RAW
+    block level — no `∂²g` conversion needed.  (The only surviving `D³` block is `A.fold9`'s
+    `D3(v,v,v)`, handled by `hpd2_fold9A_blockconv` + `hpd2_hessian_regroup`.) -/
+theorem hpd2_fold5_blocks_cancel (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    2 * ((1 / 6 : ℝ) * (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p (Pi.single α 1) v v a))
+      - ((1 / 6 : ℝ) * (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p v (Pi.single α 1) v a))
+      - ((1 / 6 : ℝ) * (∑ b, ∑ j, g p j b * v j * rncD3Block g gi p v (Pi.single α 1) v b)) = 0 := by
+  have e1 : (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p (Pi.single α 1) v v a)
+      = ∑ a, ∑ k, g p a k * v k * rncD3Block g gi p v (Pi.single α 1) v a :=
+    Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun k _ => by
+      rw [rncD3Block_swap12]
+  have e3 : (∑ b, ∑ j, g p j b * v j * rncD3Block g gi p v (Pi.single α 1) v b)
+      = ∑ a, ∑ k, g p a k * v k * rncD3Block g gi p v (Pi.single α 1) v a :=
+    Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun j _ => by
+      rw [hsymm p j b]
+  rw [e1, e3]; ring
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_fold9A_D3_hessian_christ` — factor `A.fold9`'s converted `D3(v,v,v)` block into the
+    `hpd2_hessian_regroup` core plus the `∂g·Γ` residual.**  Applying `hpd2_fold9A_blockconv` and
+    factoring each `BC = ∑_r w^r(½(∂²g-triple) − ∑_σ ∂g·Γ)` into its Hessian and Christoffel parts,
+    the (single surviving) `D³` block `∑_b g_{αb}·D3(v,v,v)_b` equals `−3·⟨Hessian core⟩ + 6·⟨∂g·Γ core⟩`,
+    where `⟨Hessian core⟩` is EXACTLY `hpd2_hessian_regroup`'s LHS and `⟨∂g·Γ core⟩` is the `∂²g`-free
+    Christoffel residual.  This is the bridge that turns the last block into `hessian_regroup`-ready form
+    (`−3·(2P−Q)`) while depositing its `∂g·Γ` piece into the residual. -/
+theorem hpd2_fold9A_D3_hessian_christ (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, g p α b * rncD3Block g gi p v v v b)
+      = -3 * (∑ j, ∑ m, (∑ r, v r * (pd (fun y => pd (fun z => g z α m) j y) r p
+              + pd (fun y => pd (fun z => g z α j) m y) r p
+              - pd (fun y => pd (fun z => g z j m) α y) r p)) * (v j * v m))
+        + 6 * (∑ j, ∑ m, (∑ r, v r * (∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p))
+              * (v j * v m)) := by
+  rw [hpd2_fold9A_blockconv g gi hsymm hinvF hg hC p α v]
+  rw [show (-3 * (∑ j, ∑ m, (∑ r, v r * (pd (fun y => pd (fun z => g z α m) j y) r p
+              + pd (fun y => pd (fun z => g z α j) m y) r p
+              - pd (fun y => pd (fun z => g z j m) α y) r p)) * (v j * v m))
+        + 6 * (∑ j, ∑ m, (∑ r, v r * (∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p))
+              * (v j * v m)))
+      = ∑ j, ∑ m,
+          (-3 * ((∑ r, v r * (pd (fun y => pd (fun z => g z α m) j y) r p
+                + pd (fun y => pd (fun z => g z α j) m y) r p
+                - pd (fun y => pd (fun z => g z j m) α y) r p)) * (v j * v m))
+           + 6 * ((∑ r, v r * (∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p))
+                * (v j * v m))) from by
+    rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]]
+  rw [← Finset.sum_neg_distrib]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [← Finset.sum_neg_distrib]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  set DDsum : Fin n → ℝ := fun r => pd (fun y => pd (fun z => g z α m) j y) r p
+              + pd (fun y => pd (fun z => g z α j) m y) r p
+              - pd (fun y => pd (fun z => g z j m) α y) r p with hDD
+  set Csum : Fin n → ℝ := fun r => ∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p with hCs
+  have hsplit : (∑ r, v r * ((1 / 2) * DDsum r - Csum r))
+      = (1 / 2) * (∑ r, v r * DDsum r) - (∑ r, v r * Csum r) := by
+    rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl fun r _ => by ring
+  show -(((∑ r, v r * ((1 / 2) * DDsum r - Csum r))) * (v j * v m + v j * v m)
+        + (∑ r, v r * ((1 / 2) * DDsum r - Csum r)) * (v j * v m + v j * v m)
+        + (∑ r, v r * ((1 / 2) * DDsum r - Csum r)) * (v j * v m + v j * v m))
+      = -3 * ((∑ r, v r * DDsum r) * (v j * v m)) + 6 * ((∑ r, v r * Csum r) * (v j * v m))
+  rw [hsplit]
+  ring
+
+set_option maxHeartbeats 12800000 in
+/-- **`hpd2_alpha1_cancel` — the `∂²g` (α1-Hessian) cancellation in `2·A − B` (recipe steps (1)–(4)).**
+    Starting from `2·(A-bracket) − (B-bracket)` of `hpd2` (in `expPullbackMetric` second-partial form),
+    fold via `hpd2_A_folded`/`hpd2_B_folded`, then convert ONLY `A.fold9`'s `D3(v,v,v)` block (the sole
+    block carrying `∂²g` that must be matched) via `hpd2_fold9A_D3_hessian_christ` into `−3·⟨Hessian core⟩
+    + 6·⟨∂g·Γ core⟩`, and regroup the Hessian core by `hpd2_hessian_regroup` (`= 2P − Q`).  The metric
+    Hessians `P = fold1_A` and `Q = fold1_B` (split off explicitly) then cancel the block Hessian
+    (`2P + (−(2P−Q)) − Q = 0`), leaving a fully `∂²g`-FREE residual in `{∂g, Γ, ∂Γ, g}`: the `fold1`
+    `∂g·Γ` parts, `fold2/3/4/6/7/8` (`∂g·Γ` and `ΓΓ`), the `fold5` `∂Γ`-blocks (`rncD3Block`/`rncCrossBlock`,
+    left intact — `∂Γ` is admissible), the `fold9` Cross (`ΓΓ`) block, and the `∂g·Γ` Christoffel core
+    from the converted `A.fold9` block.  Axiom-clean; `ring` closes after the four landed rewrites. -/
+theorem hpd2_alpha1_cancel (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+      - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k)
+      = 2 * (
+          -- fold1_A ∂g·Γ part (the α1 Hessian cancels against the block Hessian)
+          (∑ l, ∑ j, ∑ k, (∑ c, pd (fun y => g y α k) c p
+                * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p))) * v l * v j * v k)
+          -- fold2_A
+          + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) j p
+              * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p)) * v l * v j * v k)
+          -- fold3_A
+          + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y α b) j p
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold4_A
+          + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) l p
+              * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p)) * v l * v j * v k)
+          -- fold5_A (∂Γ block, allowed in residual)
+          + (∑ a, ∑ k, g p a k * v k *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+                  + rncCrossBlock g gi p (Pi.single α 1) v v a
+                  + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)))
+          -- fold6_A
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold7_A
+          + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y α b) l p
+              * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+          -- fold8_A
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+              * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+          -- fold9_A ∂g·Γ (Christoffel residual from converting its D3(v,v,v) block)
+          + (∑ j, ∑ m, (∑ r, v r * (∑ σ, pd (fun y => g y σ α) r p
+                * christoffel g gi σ j m p)) * (v j * v m))
+          -- fold9_A Cross part
+          + (1 / 2 : ℝ) * (∑ b, g p α b * rncCrossBlock g gi p v v v b))
+      - (
+          -- fold1_B ∂g·Γ part
+          (∑ l, ∑ j, ∑ k, (∑ c, pd (fun y => g y j k) c p
+                * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p))) * v l * v j * v k)
+          -- fold2_B
+          + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) α p
+              * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p)) * v l * v j * v k)
+          -- fold3_B
+          + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y j b) α p
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold4_B
+          + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) l p
+              * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p)) * v l * v j * v k)
+          -- fold5_B (∂Γ block)
+          + (∑ a, ∑ k, g p a k * v k *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+                  + rncCrossBlock g gi p v (Pi.single α 1) v a
+                  + rncCrossBlock g gi p (Pi.single α 1) v v a
+                  + rncCrossBlock g gi p v v (Pi.single α 1) a)))
+          -- fold6_B
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold7_B
+          + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y j b) l p
+              * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+          -- fold8_B
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+              * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+          -- fold9_B (∂Γ block)
+          + (∑ b, ∑ j, g p j b * v j *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+                  + rncCrossBlock g gi p v (Pi.single α 1) v b
+                  + rncCrossBlock g gi p (Pi.single α 1) v v b
+                  + rncCrossBlock g gi p v v (Pi.single α 1) b)))) := by
+  rw [hpd2_A_folded g gi hC p hg α v, hpd2_B_folded g gi hC p hg α v]
+  rw [hpd2_fold9A_split g gi p α v]
+  rw [hpd2_fold9A_D3_hessian_christ g gi hsymm hinvF hg hC p α v]
+  rw [hpd2_hessian_regroup g p α v]
+  -- split fold1_A and fold1_B into Hessian + ∂g·Γ so the Hessian atoms cancel.
+  have split1A : (∑ l, ∑ j, ∑ k,
+        (pd (fun z => pd (fun y => g y α k) j z) l p
+            + ∑ c, pd (fun y => g y α k) c p
+                * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+          * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y α k) j z) l p * v l * v j * v k)
+        + (∑ l, ∑ j, ∑ k, (∑ c, pd (fun y => g y α k) c p
+              * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p))) * v l * v j * v k) := by
+    rw [show (∑ l, ∑ j, ∑ k,
+          (pd (fun z => pd (fun y => g y α k) j z) l p
+              + ∑ c, pd (fun y => g y α k) c p
+                  * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+            * v l * v j * v k)
+        = ∑ l, ∑ j, ∑ k, (pd (fun z => pd (fun y => g y α k) j z) l p * v l * v j * v k
+            + (∑ c, pd (fun y => g y α k) c p
+                * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p))) * v l * v j * v k)
+        from Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+          Finset.sum_congr rfl fun k _ => by ring]
+    simp only [Finset.sum_add_distrib]
+  have split1B : (∑ l, ∑ j, ∑ k,
+        (pd (fun z => pd (fun y => g y j k) α z) l p
+            + ∑ c, pd (fun y => g y j k) c p
+                * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+          * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k, pd (fun z => pd (fun y => g y j k) α z) l p * v l * v j * v k)
+        + (∑ l, ∑ j, ∑ k, (∑ c, pd (fun y => g y j k) c p
+              * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p))) * v l * v j * v k) := by
+    rw [show (∑ l, ∑ j, ∑ k,
+          (pd (fun z => pd (fun y => g y j k) α z) l p
+              + ∑ c, pd (fun y => g y j k) c p
+                  * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+            * v l * v j * v k)
+        = ∑ l, ∑ j, ∑ k, (pd (fun z => pd (fun y => g y j k) α z) l p * v l * v j * v k
+            + (∑ c, pd (fun y => g y j k) c p
+                * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p))) * v l * v j * v k)
+        from Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+          Finset.sum_congr rfl fun k _ => by ring]
+    simp only [Finset.sum_add_distrib]
+  rw [split1A, split1B]
+  ring
+
+
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
 
@@ -4273,22 +4545,25 @@ LANDED (this brick — recipe steps (1)–(2) COMPLETE for ALL four `D³` blocks
   identical (h=k=l=v); `fold5A`/`fold5B` carry one `BC(e_α;k,j,m)` (the `α`-selected `∑_r δ_{αr}`
   piece) among two `BC(v;k,j,m)`; `fold9B` likewise with free `ν=j`.
 
-REMAINING for `hpd2_alpha1_cancel` (the `∂²g`-matching, recipe steps (3)–(4), NOT landed — a large
-finite `Finset` regroup + explicit residual RHS; all inputs above are now present and green):
-* Assemble `2·(fold1A..fold9A) − (fold1B..fold9B)` (via `hpd2_A_folded`/`hpd2_B_folded`), then `rw` the
-  four `*_split` + `*_D3ready` + `*_blockconv` lemmas to replace every `D³` block by its `∂²g − ∂g·Γ`.
-* The verified `∂²g` content to be cancelled (v-contraction `⟨·⟩ = ∑_{ljk}·v^l v^j v^k`):
-  - `2·fold1_A` gives `+2·⟨∂_l∂_j g_{αk}⟩`; `−fold1_B` gives `−⟨∂_l∂_α g_{jk}⟩`.
-  - Each block's `BC(e_α;·)` term contributes its `∑_r δ_{αr}` Hessian piece and the `BC(v;·)` terms
-    their `∑_r v^r` pieces; under the symmetric v-contraction (the `v^j v^m`, `v^l v^j v^k` weights are
-    fully symmetric, so `Finset.sum_comm`/reindex symmetrizes freely — NO Clairaut needed) the total
-    `1/6`·(slot-multiplicity) sum regroups into `−2·⟨∂_l∂_j g_{αk}⟩ + ⟨∂_l∂_α g_{jk}⟩`, cancelling the
-    `fold1` combination.  The surviving `−∂g·Γ` pieces of `BC` join `fold2/3/4/7` (Leibniz `∂g·Γ`),
-    `fold6/8` (`ΓΓ`), and the `Cross` (`ΓΓ`) terms as the `∂²g`-free residual = `hpd2_alpha1_cancel`'s RHS.
-* The wall is now purely (a) transcribing that explicit `∂g·Γ + ΓΓ` residual RHS and (b) the `Finset`
-  regroup/`ring` closure of the `∂²g` cancellation.  No analytic input remains; every conversion lemma
-  it consumes is landed above.  This step-(3)/(4) assembly was NOT completed in this brick (deferred to
-  avoid a large broken proof); the greenness above is the checkpoint.
+LANDED (this brick — recipe steps (3)–(4) COMPLETE; each axiom-clean `[propext, Classical.choice,
+Quot.sound]`, file GREEN — `hpd2_alpha1_cancel` FULLY CLOSED, `2·A − B` is now `∂²g`-free):
+* `hpd2_hessian_regroup` — the `∂²g` cancellation IDENTITY (recipe step (3), NO Clairaut): the
+  fully-symmetrized block-Hessian core `∑_{jm}(∑_r v^r·(∂_r∂_j g_{αm}+∂_r∂_m g_{αj}−∂_r∂_α g_{jm}))·v^j v^m`
+  `= 2·⟨∂_l∂_j g_{αk}⟩ − ⟨∂_l∂_α g_{jk}⟩ = 2P − Q`, by pure dummy reindex under the symmetric `v³` weights
+  (`Finset.sum_comm`; no equality of mixed partials).
+* `hpd2_fold5_blocks_cancel` — the RAW `D³`-block cancellation via full `rncD3Block` symmetry
+  (`rncD3Block_swap12` + `hsymm`): `2·A.fold5_D³ − B.fold5_D³ − B.fold9_D³ = 0` at the block level.  (This
+  bonus fact is NOT needed for the `∂²g`-free residual — the `fold5` `D³` blocks are `∂Γ`, admissible in
+  the residual — but records that they in fact cancel identically.)
+* `hpd2_fold9A_D3_hessian_christ` — factor `A.fold9`'s converted `D3(v,v,v)` block into
+  `−3·⟨Hessian core⟩ + 6·⟨∂g·Γ core⟩` (the bridge from `hpd2_fold9A_blockconv` to `hpd2_hessian_regroup`).
+* `hpd2_alpha1_cancel` — the assembly: `rw [hpd2_A_folded, hpd2_B_folded, hpd2_fold9A_split,
+  hpd2_fold9A_D3_hessian_christ, hpd2_hessian_regroup]`, split `fold1_A/fold1_B` into Hessian + `∂g·Γ`,
+  then `ring`.  Only `A.fold9`'s `D3(v,v,v)` needs conversion (the sole block carrying the `∂²g` that must
+  be MATCHED); the Hessians `2P` (`fold1_A`), `−Q` (`fold1_B`) and the block Hessian `−(2P−Q)` cancel to 0,
+  leaving the `∂²g`-FREE residual in `{∂g, Γ, ∂Γ, g}` (fold1 `∂g·Γ`, fold2/3/4/6/7/8, the fold5 `∂Γ`-blocks
+  intact, the fold9 Cross `ΓΓ`, and the fold9 `∂g·Γ` Christoffel core).  NOTE `hpd2_cubic_vanish` / the
+  full `2A−B=0` assembly are the NEXT bricks (NOT attempted here).
 -/
 
 end QIQTH.PullbackMetric

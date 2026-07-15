@@ -10710,6 +10710,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.hpd2_fold5A_blockconv
 #print axioms QIQTH.PullbackMetric.hpd2_fold5B_blockconv
 #print axioms QIQTH.PullbackMetric.hpd2_fold9B_blockconv
+-- ★★ PARAMETRIX P1 R3→κ (hpd2_alpha1_cancel — the ∂²g cancellation, FULLY LANDED) (PullbackMetric.lean).
+-- hpd2_hessian_regroup (the crux, NO Clairaut): ∑_j∑_m(∑_r vʳ(∂_r∂_j g_αm+∂_r∂_m g_αj−∂_r∂_α g_jm))·vʲvᵐ = 2P−Q
+-- (P=⟨∂_l∂_j g_αk⟩, Q=⟨∂_l∂_α g_jk⟩), by distributing into 3 triple sums + pure Finset.sum_comm reindex under the
+-- symmetric v³ weights.  hpd2_fold5_blocks_cancel (raw fold5 D³ blocks cancel via rncD3Block_swap12+hsymm).
+-- hpd2_fold9A_D3_hessian_christ: ∑_b g_αb·rncD3Block(v,v,v)_b = −3⟨Hessian core⟩+6⟨∂g·Γ core⟩.  ★★ hpd2_alpha1_cancel:
+-- 2·A_α − B_α = <explicit ∂²g-FREE residual in {∂g,Γ,∂Γ,g}(p)>.  KEY SIMPLIFICATION: only A.fold9's D3(v,v,v) needs
+-- conversion (∂Γ blocks are admissible in the residual, rncD3Block fully symmetric); the ∂²g cancels as 2P+(−(2P−Q))−Q
+-- =0, reindex needs NO mixed-partial equality.  ⟹ the entire ∂²g content of the radial identity is now discharged.
+-- HONEST — hpd2 itself still needs hpd2_cubic_vanish (the ∂²g-free Γ,∂Γ residual reindexed onto dGammaDiag(rncDΓ)v i=0
+-- via a3rawArr_contract_eq_a3+sum3_sym_contract+expMap_rncDΓ_diag_zero) + the 2A−B=0 assembly (expPullback_hpd2).
+-- Does NOT yet give hpd2 / the unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hpd2_hessian_regroup
+#print axioms QIQTH.PullbackMetric.hpd2_fold5_blocks_cancel
+#print axioms QIQTH.PullbackMetric.hpd2_fold9A_D3_hessian_christ
+#print axioms QIQTH.PullbackMetric.hpd2_alpha1_cancel
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
