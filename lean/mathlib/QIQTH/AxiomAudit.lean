@@ -10372,6 +10372,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet3Val_v_two_pt_diff
 #print axioms QIQTH.ExpMap.expJetD3_two_pt_diff
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_three
+-- ★ PARAMETRIX P1 R3→κ (start) — the pullback metric g̃ + its regularity (PullbackMetric.lean).
+-- expPullbackMetric g gi hC p x i j = Σ_{a,b} g(exp_p x) a b · (fderiv exp_p x)(eᵢ) a · (fderiv exp_p x)(eⱼ) b —
+-- the tensorial pullback g̃ = exp_p^* g.  contDiffOn_fderiv_expMap (fderiv exp_p ∈ C² on the ball, from ContDiff³)
+-- + contDiffOn_fderiv_expMap_component + contDiffOn_expPullbackMetric (g̃ ∈ ContDiffOn ℝ 2 on ball 0 expRho, SHARP:
+-- g̃ carries fderiv exp_p so C³ exp_p ⟹ C² g̃).  REGULARITY LEDGER (the finding): κ=1/6 for g̃ is REACHABLE FROM
+-- RUNG 3 — the gauge (pd²g̃) + √det 2-jet need only C²-at-0, which g̃ meets; the sole blocker is the over-strong
+-- ContDiff ⊤ in RNCExpansion.heat_a1_of_gauge (its proof uses ≤2 derivatives, so it is weakenable to ContDiffOn ℝ 2
+-- near 0).  NO Rung 4 needed.  HONEST: builds g̃ + regularity; does NOT yet give κ=1/6 (needs the weakened
+-- heat_a1_of_gauge + the bridge rncDΓ=pd(christoffel g̃)(0)), NOT the parametrix (P2), NOT general a₁=R/6,
+-- NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.expPullbackMetric
+#print axioms QIQTH.PullbackMetric.contDiffOn_fderiv_expMap
+#print axioms QIQTH.PullbackMetric.contDiffOn_fderiv_expMap_component
+#print axioms QIQTH.PullbackMetric.contDiffOn_expPullbackMetric
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

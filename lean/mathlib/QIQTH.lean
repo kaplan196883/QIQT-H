@@ -696,6 +696,7 @@ import QIQTH.ExpMap
 import QIQTH.ExpMapContDiff
 import QIQTH.ExpMapContDiff2
 import QIQTH.ExpMapContDiff3
+import QIQTH.PullbackMetric
 import QIQTH.Polarization
 import QIQTH.RNCGauge
 import QIQTH.RNCGaugeExp
