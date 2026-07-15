@@ -10768,6 +10768,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.christSqSum_contract_a3
 #print axioms QIQTH.PullbackMetric.rncCrossBlock_diag_a3
 #print axioms QIQTH.PullbackMetric.hpd2_fold9A_cross_reindex
+-- rncCrossBlock_dir_vv_a3: the mixed-direction (e_α,v,v) companion of rncCrossBlock_diag_a3 — rncCrossBlock(e_α,v,v)_i
+-- = 4·∑_j Γ^i_αj·(∑_ab Γ^j_ab v^a v^b) (two Pi.single-α Kronecker collapses via sum_ite_eq' + christoffel_symm merge).
+-- The geodesic-Γ² reduction of the fold5_A/fold5_B rncCrossBlock(e_α,v,v) sub-terms.  ⚠ hpd2_residual_cubic_reindex
+-- (the global g·Γ·Γ RNC-radial-geodesic identity) STILL the remaining wall (~150-term global relabel, resists
+-- ring/per-group; confirmed both routes carry the identical irreducible reindex).  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_dir_vv_a3
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

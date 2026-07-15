@@ -4825,6 +4825,67 @@ theorem hpd2_fold9A_cross_reindex (g gi : Point n → Fin n → Fin n → ℝ) (
   rw [rncCrossBlock_diag_a3 g gi p v b, ← christSqSum_contract_a3 g gi p v b]
   ring
 
+/-- **`rncCrossBlock_dir_vv_a3` — the mixed-direction `(e_α, v, v)` reduction of `rncCrossBlock`.**  With
+    the differentiation slot fixed at the basis vector `e_α` and both second-variation source slots set to
+    `v`, the `ΓΓ` cross block collapses to a single clean geodesic-`Γ²` form
+      `rncCrossBlock g gi p (e_α) v v i = 4·∑_j Γ^i_{αj}(p)·(∑_{a,b} Γ^j_{ab}(p) v^a v^b)`.
+    The two Kronecker deltas from the `Pi.single α` slot select `x₁=α` / `x=α`; the source pair
+    `(sl·sk + sk·sl) = 2 v v` gives the factor `2`, and `christoffel_symm` (`Γ^i_{αj}=Γ^i_{jα}`) merges the
+    two surviving sums into the factor `4`.  This is the `(e_α,v,v)` companion of `rncCrossBlock_diag_a3`
+    (all-`v`), supplying the reduction of the `fold5_A`/`fold5_B` `rncCrossBlock (e_α,v,v)` sub-terms onto
+    the geodesic `Γ²` shape — one building block of the remaining `hpd2_residual_cubic_reindex` wall.
+    Axiom-clean (`[propext, Classical.choice, Quot.sound]`). -/
+theorem rncCrossBlock_dir_vv_a3 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) (i : Fin n) :
+    rncCrossBlock g gi p (Pi.single α 1) v v i
+      = 4 * ∑ j, christoffel g gi i α j p * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) := by
+  simp only [rncCrossBlock, Pi.single_apply]
+  have key : ∀ x x1 : Fin n,
+      christoffel g gi i x x1 p *
+        (((-∑ j', ∑ m', christoffel g gi x j' m' p * (v j' * v m' + v j' * v m')) *
+            (if x1 = α then (1:ℝ) else 0)) +
+          ((if x = α then (1:ℝ) else 0) *
+            -∑ j', ∑ m', christoffel g gi x1 j' m' p * (v j' * v m' + v j' * v m')))
+      = (if x1 = α then
+            christoffel g gi i x x1 p *
+              (-∑ j', ∑ m', christoffel g gi x j' m' p * (v j' * v m' + v j' * v m')) else 0)
+        + (if x = α then
+            christoffel g gi i x x1 p *
+              (-∑ j', ∑ m', christoffel g gi x1 j' m' p * (v j' * v m' + v j' * v m')) else 0) := by
+    intro x x1; split_ifs <;> ring
+  simp only [key, Finset.sum_add_distrib]
+  rw [show (∑ x, ∑ x1, (if x1 = α then
+              christoffel g gi i x x1 p *
+                (-∑ j', ∑ m', christoffel g gi x j' m' p * (v j' * v m' + v j' * v m')) else 0))
+        = ∑ x, christoffel g gi i x α p *
+            (-∑ j', ∑ m', christoffel g gi x j' m' p * (v j' * v m' + v j' * v m'))
+      from Finset.sum_congr rfl fun x _ => by
+        rw [Finset.sum_ite_eq' Finset.univ α]; simp]
+  rw [show (∑ x, ∑ x1, (if x = α then
+              christoffel g gi i x x1 p *
+                (-∑ j', ∑ m', christoffel g gi x1 j' m' p * (v j' * v m' + v j' * v m')) else 0))
+        = ∑ x1, christoffel g gi i α x1 p *
+            (-∑ j', ∑ m', christoffel g gi x1 j' m' p * (v j' * v m' + v j' * v m'))
+      from by
+        rw [Finset.sum_comm]
+        exact Finset.sum_congr rfl fun x1 _ => by
+          rw [Finset.sum_ite_eq' Finset.univ α]; simp]
+  have hcoll : ∀ c : Fin n,
+      (-∑ j', ∑ m', christoffel g gi c j' m' p * (v j' * v m' + v j' * v m'))
+      = -(2 * ∑ a, ∑ b, christoffel g gi c a b p * v a * v b) := by
+    intro c
+    rw [Finset.mul_sum]
+    congr 1
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun b _ => by ring
+  simp only [hcoll]
+  have hs : ∀ x, christoffel g gi i x α p = christoffel g gi i α x p :=
+    fun x => christoffel_symm g gi hsymm i x α p
+  simp only [hs]
+  rw [← Finset.sum_add_distrib, ← Finset.sum_neg_distrib, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => by ring
+
 
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
@@ -4943,9 +5004,31 @@ UPDATE 2 (Cross fold-group LANDED axiom-clean; `reindexA_pb`/`reindexB_pb`/`chri
   — i.e. the fold9_A Cross reindexes EXACTLY onto the `Γ²` (`christSq`) shape carried by
   `dGammaDiag (rncDΓ …)`, the outer `(1/2)` cancelling the Cross factor `2`.
 
-WHAT THESE GIVE / WHAT REMAINS.  The Cross blocks (fold9_A Cross, and — via `rncCrossBlock_diag_a3` at
-`Pi.single` direction args + the `foldCross_*` toolkit — the fold5_A/5_B/9_B `rncCrossBlock` sub-terms)
-are now bridged to the `christSqA + christSqB` shape.  The GENUINELY-HARD remainder is the NON-Cross
+UPDATE 3 (this brick — one more Cross building block LANDED axiom-clean `[propext, Classical.choice,
+Quot.sound]`, file GREEN; the NON-Cross wall confirmed unbroken):
+* `rncCrossBlock_dir_vv_a3` — the mixed-direction `(e_α, v, v)` reduction of the `ΓΓ` cross block:
+  `rncCrossBlock g gi p (Pi.single α 1) v v i = 4·∑_j Γ^i_{αj}·(∑_{a,b} Γ^j_{ab} v^a v^b)`.  This is the
+  `(e_α,v,v)` companion of `rncCrossBlock_diag_a3` (all-`v`); it collapses the two `Pi.single α` Kronecker
+  deltas (`Finset.sum_ite_eq'`), uses `(sl·sk+sk·sl)=2vv` for the factor `2`, and `christoffel_symm` to
+  merge the two surviving sums into `4`.  It supplies the reduction of the `fold5_A`/`fold5_B`
+  `rncCrossBlock (e_α,v,v)` sub-terms onto the geodesic `Γ²` shape.  (The `(v,e_α,v)` companion —
+  `rncCrossBlock g gi p v (Pi.single α 1) v i = 4·∑_{j,m} Γ^i_{jm}·(∑_a Γ^j_{aα} v^a)·v^m` — was derived
+  by hand and is straightforward but was NOT landed this brick; it is the next mechanical Cross helper.)
+* STATUS UNCHANGED on the decisive wall: the automated attack
+  `rw [hpd2_residual_hmc]; simp only [rncD3Block, rncCrossBlock]; ring_nf` was re-confirmed to NORMALIZE
+  but NOT close (reaches a nonzero normalized polynomial) — `hpd2_residual_cubic_reindex` remains the
+  irreducible ~150-term global relabel of the NON-Cross `g·Γ·Γ` residue.  Also confirmed NO shortcut via
+  the metric-contraction route: `dGammaDiag_pd_christoffel_expPullbackInv_reduce` gives
+  `dGammaDiag(pd Γ̃) v i = ½ ∑_α gi^{iα}(2A_α−B_α)`, so `2A_β−B_β=0` would follow by contracting with `g`
+  IF `dGammaDiag(pd Γ̃)=0` — but that is `expPullback_radial_gauge` itself (or the equivalent pointwise
+  bridge `rnc_christoffel_linearJet`, `pd Γ̃ = rncDΓ`), i.e. the SAME content; both routes carry the same
+  irreducible reindex.  Honest verdict: multi-session relabel, correctly deferred.
+
+WHAT THESE GIVE / WHAT REMAINS.  The Cross blocks (fold9_A Cross via `hpd2_fold9A_cross_reindex`; the
+fold5_A/5_B `rncCrossBlock (e_α,v,v)` sub-terms via the new `rncCrossBlock_dir_vv_a3`; and — via
+`rncCrossBlock_diag_a3` at `Pi.single` direction args + the `foldCross_*` toolkit — the remaining
+fold5/9_B `rncCrossBlock` sub-terms) are bridged to the `christSqA + christSqB` shape.  The GENUINELY-HARD
+remainder is the NON-Cross
 `g·Γ·Γ` residue: fold1/2/3/4/7 (post-`hmc`), fold6/8, and the fold9_A `g·Γ·Γ` core.  KEY OBSTRUCTION
 (verified structurally this brick): these terms do NOT reindex per-group onto the target's `g(p)_{αρ}·christSq`
 slots — the residue's metric contracts an INTERNAL summed index (`∑_a g_{ab}Γ^a_{αj}Γ^b_{kl}` for fold6,
