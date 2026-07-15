@@ -572,6 +572,14 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★★★ 2026-07-16 — R3→κ MILESTONE: conditional κ=1/6 capstone for g̃ (PUSHED `12c414d6`, [AF] std-3):**
+  `heat_a1_of_gauge_c2` (finite-regularity variant, full _c2 chain, `ed2362c2`) + `expPullbackMetricInv_contDiffAt_one`
+  + **`kappa_eq_one_sixth_expPullback_of_hpd2`** — the a₁ heat coefficient at g̃ = (1/6−ξ)Rscl−m², instantiating
+  heat_a1_of_gauge_c2 at g̃ with every structural hypothesis discharged from the landed g̃ lemmas. ⚠⚠ STRICTLY
+  CONDITIONAL on `hpd2` (the ~150-term global g·Γ·Γ reindex `hpd2_residual_cubic_reindex`, NOT proved) + hframe (g₀(p)=δ)
+  + hg (C^∞) + hκgeo (√det↔ricci) + hRic (curvature nondeg). ⟹ the ENTIRE κ=1/6 chain is machine-checked green MODULO
+  exactly one explicit finite identity. NOT κ=1/6 unconditional. NEXT = grind that reindex (fresh Finset.sum_bij / bridge
+  / fold-group-pair strategy) or honest checkpoint.
 - **★ 2026-07-16 — R3→κ hpd2 near-complete; reduced to ONE finite Γ² global identity (PUSHED through `30a21542`, [AF]
   std-3):** the whole hpd2 pipeline landed axiom-free — A/B_folded → ∂²g-conversion (hpd2_block_dd_g/D3_metric_contract)
   → per-block reshaping (12 lemmas) → **hpd2_alpha1_cancel (2A−B ∂²g-FREE)** → hmc-conversion + ∂Γ/D³ cancel
