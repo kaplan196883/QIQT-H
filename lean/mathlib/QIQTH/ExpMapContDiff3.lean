@@ -303,4 +303,603 @@ theorem expJet3Rhs_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
     (add_le_add ((norm_add_le _ _).trans
       (add_le_add ((norm_add_le _ _).trans (add_le_add hb1 hb2)) hb3)) hb4)
 
+/-! ### Sub-brick R3-fund — the Jet₃ third-variation fundamental solution `R^{hkl}`
+
+The third variation `R^{hkl}(t)` (VECTOR-valued in `Point n × Point n`) solves the INHOMOGENEOUS
+linear ODE `R'(t) = DF(Y_v t)(R t) + Θ₃^{hkl}(t)`, `R(0) = 0`, with `Θ₃ = expJet3Rhs …` the R3-source
+term.  This is a CLOSE MIRROR of the landed Jet₂ chain (`expJet2Fund*` in `ExpMapContDiff2.lean`):
+the affine field `F₃ t R := DF(Y_v t)(R) + Θ₃^{hkl}(t)` has the SAME structure as `F₂` — the source is
+GLOBAL (constant in `R`, not propagator-scaled), so the `IsPicardLindelof` instantiation, the shifted
+solver, and the endpoint-matching glue are identical to the Jet₂ version, only the source symbol
+changes.  Delivered in order: `expJet3Fund_local` → `expJet3Field_continuousOn` → `expJet3Fund_shifted`
+→ `expJet3Fund_shifted_integral` → `expJet3Fund_glue` (private) → `expJet3Fund` (the `[0,1]` capstone).
+
+`Φ` is the abstract first-variation propagator and `Qkl,Qhl,Qhk` the abstract second-variation
+solutions (parametrized, as in `expJet3Rhs`); all carry `ContinuousOn (Icc 0 1)` hypotheses (needed
+for `expJet3Rhs_continuousOn`). -/
+
+set_option maxHeartbeats 1000000 in
+/-- **R3-fund LOCAL — the LOCAL Jet₃ third-variation solution `R^{hkl}`.**  For `‖v‖ ≤ expRho` and
+    `Φ`/`Qkl`/`Qhl`/`Qhk` continuous on `[0,1]`, there is a short time `T > 0` and a VECTOR-valued
+    curve `R : ℝ → Point n × Point n` with `R 0 = 0` solving the INHOMOGENEOUS linear Jet₃ ODE
+    `R'(t) = DF(Y_v t)(R t) + Θ₃^{hkl}(t)` on `[0, T]`, where `DF = fderiv (geodesicField g gi)`,
+    `Y_v t = expTube p v t`, and `Θ₃^{hkl} = expJet3Rhs …` is the R3-source term.  Verbatim mirror of
+    `expJet2Fund_local`: the affine vector-normed `IsPicardLindelof` instantiation of
+    `F₃ t R := DF(Y_v t)(R) + Θ₃^{hkl}(t)` on `closedBall(0,1)`, centred at `R₀ = 0` (source constant
+    in `R` ⟹ `KdF`-Lipschitz; source continuous on compact `[0,1]` ⟹ `Cθ`-bounded). -/
+theorem expJet3Fund_local (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n) :
+    ∃ T > (0 : ℝ), ∃ R : ℝ → (Point n × Point n),
+      R 0 = 0 ∧
+      ∀ t ∈ Set.Icc (0 : ℝ) T,
+        HasDerivWithinAt R
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R t)
+             + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc (0 : ℝ) T) t := by
+  obtain ⟨KdF, hKdF0, hKdF⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  -- `Θ₃^{hkl}` is continuous on the compact `[0,1]`, hence uniformly bounded by some `Cθ ≥ 0`.
+  have hΘcont : ContinuousOn (fun t => expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+      (Set.Icc (0 : ℝ) 1) :=
+    expJet3Rhs_continuousOn g gi hC p v hv Φ Qkl Qhl Qhk hΦcont hQkl hQhl hQhk h k l
+  obtain ⟨Cθ0, hCθ0⟩ := isCompact_Icc.exists_bound_of_continuousOn hΘcont
+  set Cθ : ℝ := max Cθ0 0 with hCθdef
+  have hCθnn : 0 ≤ Cθ := le_max_right _ _
+  have hCθ : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖ ≤ Cθ :=
+    fun t ht => (hCθ0 t ht).trans (le_max_left _ _)
+  -- the affine vector field `F₃ t R = DF(Y_v t)(R) + Θ₃^{hkl}(t)`.
+  set F₃ : ℝ → (Point n × Point n) → (Point n × Point n) :=
+    fun t R => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) R
+      + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t with hF₃
+  set T : ℝ := min 1 (1 / (KdF + Cθ + 1)) with hTdef
+  have hL0 : 0 ≤ KdF + Cθ := add_nonneg hKdF0 hCθnn
+  have hden : (0 : ℝ) < KdF + Cθ + 1 := by linarith
+  have hT0 : 0 < T := lt_min one_pos (by positivity)
+  have hTle1 : T ≤ 1 := min_le_left _ _
+  have hTle2 : T ≤ 1 / (KdF + Cθ + 1) := min_le_right _ _
+  set Lnn : NNReal := ⟨KdF + Cθ, hL0⟩ with hLnn
+  set Knn : NNReal := ⟨KdF, hKdF0⟩ with hKnn
+  have hIccsub : Set.Icc (0 : ℝ) T ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc_right hTle1
+  -- `DF(Y_v ·)` continuous on `[0,1]` (tube continuity ∘ `DF` C^∞).
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hDFtube : ContinuousOn
+      (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Set.Icc (0 : ℝ) 1) :=
+    hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)
+  -- assemble `IsPicardLindelof` for the affine field on `[0, T]`, centred at `0`.
+  have hpl : IsPicardLindelof F₃
+      (tmin := (0 : ℝ)) (tmax := T) ⟨0, ⟨le_refl 0, hT0.le⟩⟩
+      (0 : Point n × Point n) 1 0 Lnn Knn := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · -- Lipschitz in `R` on `closedBall(0,1)` with constant `KdF` (source drops out).
+      intro t ht
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      rw [lipschitzOnWith_iff_dist_le_mul]
+      intro M _ N _
+      simp only [dist_eq_norm, hKnn]
+      have hsub : F₃ t M - F₃ t N
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (M - N) := by
+        simp only [hF₃, map_sub]; abel
+      rw [hsub]
+      calc ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (M - N)‖
+          ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M - N‖ :=
+            (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).le_opNorm _
+        _ ≤ KdF * ‖M - N‖ := mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)
+    · -- continuity in `t` for fixed `R`.
+      intro x _
+      have h1 : ContinuousOn
+          (fun t => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x)
+          (Set.Icc (0 : ℝ) 1) := hDFtube.clm_apply continuousOn_const
+      exact ((h1.add hΘcont).mono hIccsub)
+    · -- uniform bound `‖F₃ t R‖ ≤ KdF + Cθ` on `closedBall(0,1)`.
+      intro t ht x hx
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      have hxnorm : ‖x‖ ≤ 1 := by
+        have hd := Metric.mem_closedBall.mp hx
+        rw [dist_zero_right] at hd
+        simpa using hd
+      show ‖F₃ t x‖ ≤ KdF + Cθ
+      calc ‖F₃ t x‖
+          = ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖ := by rw [hF₃]
+        _ ≤ ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x‖
+              + ‖expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖ := norm_add_le _ _
+        _ ≤ KdF * ‖x‖ + Cθ :=
+            add_le_add
+              (le_trans
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).le_opNorm x)
+                (mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)))
+              (hCθ t htIcc)
+        _ ≤ KdF + Cθ := by
+            have : KdF * ‖x‖ ≤ KdF * 1 := mul_le_mul_of_nonneg_left hxnorm hKdF0
+            linarith
+    · -- the interval constraint `(KdF + Cθ)·T ≤ 1`.
+      show (Lnn : ℝ) * max (T - ((⟨0, ⟨le_refl 0, hT0.le⟩⟩ : Set.Icc (0 : ℝ) T) : ℝ))
+          (((⟨0, ⟨le_refl 0, hT0.le⟩⟩ : Set.Icc (0 : ℝ) T) : ℝ) - 0) ≤ (1 : NNReal) - (0 : NNReal)
+      simp only [hLnn, NNReal.coe_one, NNReal.coe_zero, sub_zero, sub_self, max_eq_left hT0.le]
+      calc (KdF + Cθ) * T ≤ (KdF + Cθ) * (1 / (KdF + Cθ + 1)) :=
+            mul_le_mul_of_nonneg_left hTle2 hL0
+        _ ≤ 1 := by rw [mul_one_div, div_le_one hden]; linarith
+  obtain ⟨R, hR0, hRd⟩ := hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
+  refine ⟨T, hT0, R, hR0, fun t ht => ?_⟩
+  have hd := hRd t ht
+  simpa only [hF₃] using hd
+
+/-- **Continuity of the Jet₃ inhomogeneous field** `s ↦ DF(Y_v s)(R s) + Θ₃^{hkl}(s)` on any
+    `A ⊆ [0,1]` where `R` is continuous.  Direct mirror of `expJet2Field_continuousOn`, source
+    continuity via `expJet3Rhs_continuousOn`. -/
+theorem expJet3Field_continuousOn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n)
+    {A : Set ℝ} (hA : A ⊆ Set.Icc (0 : ℝ) 1)
+    {R : ℝ → (Point n × Point n)} (hR : ContinuousOn R A) :
+    ContinuousOn (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+      + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) A := by
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hDFtube : ContinuousOn
+      (fun s => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) A :=
+    (hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)).mono hA
+  have h1 : ContinuousOn
+      (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)) A :=
+    hDFtube.clm_apply hR
+  have h2 : ContinuousOn (fun s => expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) A :=
+    (expJet3Rhs_continuousOn g gi hC p v hv Φ Qkl Qhl Qhk hΦcont hQkl hQhl hQhk h k l).mono hA
+  exact h1.add h2
+
+set_option maxHeartbeats 1000000 in
+/-- **R3-fund SHIFTED — the shifted Jet₃ third-variation solver from arbitrary vector IC `x₀`.**
+    Direct mirror of `expJet2Fund_shifted`: the vector-normed `IsPicardLindelof` instantiation of
+    `F₃ t R := DF(Y_v t)(R) + Θ₃^{hkl}(t)` centred at `x₀` on `closedBall(x₀, a)` with the same
+    linear-in-`x₀` radius `a := 2·(KdF·‖x₀‖·T + Cθ·T) + 1`.  The reusable brick of the `[0,1]`
+    concatenation. -/
+theorem expJet3Fund_shifted (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n)
+    (KdF : ℝ) (hKdF0 : 0 ≤ KdF)
+    (hKdF : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF)
+    (t₀ T : ℝ) (ht₀ : 0 ≤ t₀) (hT : 0 < T) (hsum : t₀ + T ≤ 1) (hstep : 2 * KdF * T ≤ 1)
+    (x₀ : Point n × Point n) :
+    ∃ R : ℝ → (Point n × Point n),
+      R t₀ = x₀ ∧
+      ∀ t ∈ Set.Icc t₀ (t₀ + T),
+        HasDerivWithinAt R
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R t)
+             + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc t₀ (t₀ + T)) t := by
+  -- `Θ₃^{hkl}` is continuous on the compact `[0,1]`, hence uniformly bounded by some `Cθ ≥ 0`.
+  have hΘcont : ContinuousOn (fun t => expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+      (Set.Icc (0 : ℝ) 1) :=
+    expJet3Rhs_continuousOn g gi hC p v hv Φ Qkl Qhl Qhk hΦcont hQkl hQhl hQhk h k l
+  obtain ⟨Cθ0, hCθ0⟩ := isCompact_Icc.exists_bound_of_continuousOn hΘcont
+  set Cθ : ℝ := max Cθ0 0 with hCθdef
+  have hCθnn : 0 ≤ Cθ := le_max_right _ _
+  have hCθ : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖ ≤ Cθ :=
+    fun t ht => (hCθ0 t ht).trans (le_max_left _ _)
+  -- the affine vector field `F₃ t R = DF(Y_v t)(R) + Θ₃^{hkl}(t)`.
+  set F₃ : ℝ → (Point n × Point n) → (Point n × Point n) :=
+    fun t R => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) R
+      + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t with hF₃
+  have hTnn : 0 ≤ T := hT.le
+  -- ball radius (linear in `x₀`, chosen so the affine a-priori bound closes for ANY `x₀`).
+  set aval : ℝ := 2 * (KdF * ‖x₀‖ * T + Cθ * T) + 1 with haval
+  have haval0 : 0 ≤ aval := by
+    rw [haval]
+    have h1 : 0 ≤ KdF * ‖x₀‖ * T := mul_nonneg (mul_nonneg hKdF0 (norm_nonneg _)) hTnn
+    have h2 : 0 ≤ Cθ * T := mul_nonneg hCθnn hTnn
+    linarith
+  set Lval : ℝ := KdF * (‖x₀‖ + aval) + Cθ with hLval
+  have hLval0 : 0 ≤ Lval := by
+    rw [hLval]
+    have hm : 0 ≤ KdF * (‖x₀‖ + aval) :=
+      mul_nonneg hKdF0 (add_nonneg (norm_nonneg _) haval0)
+    linarith
+  set Ann : NNReal := ⟨aval, haval0⟩ with hAnndef
+  set Lnn : NNReal := ⟨Lval, hLval0⟩ with hLnndef
+  set Knn : NNReal := ⟨KdF, hKdF0⟩ with hKnn
+  have hIccsub : Set.Icc t₀ (t₀ + T) ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc ht₀ hsum
+  -- the interval constraint `L·T ≤ a`.
+  have hKT : KdF * T ≤ 1 / 2 := by linarith
+  have hstepPL : Lval * T ≤ aval := by
+    have key : aval * (KdF * T) ≤ aval * (1 / 2) := mul_le_mul_of_nonneg_left hKT haval0
+    have hLvalT : Lval * T = KdF * ‖x₀‖ * T + KdF * aval * T + Cθ * T := by rw [hLval]; ring
+    rw [hLvalT]
+    nlinarith [key, haval, haval0]
+  -- `DF(Y_v ·)` continuous on `[0,1]`.
+  have hdFcont : Continuous (fderiv ℝ (geodesicField g gi)) :=
+    (contDiff_geodesicField g gi hC).continuous_fderiv (by simp)
+  have hDFtube : ContinuousOn
+      (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Set.Icc (0 : ℝ) 1) :=
+    hdFcont.comp_continuousOn (expTube_continuousOn g gi hC p v hv)
+  -- assemble `IsPicardLindelof` for the affine field on `[t₀, t₀+T]`, centred at `x₀`.
+  have hpl : IsPicardLindelof F₃
+      (tmin := t₀) (tmax := t₀ + T) ⟨t₀, ⟨le_refl t₀, by linarith⟩⟩
+      x₀ Ann 0 Lnn Knn := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · -- Lipschitz in `R` with constant `KdF` (source drops out).
+      intro t ht
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      rw [lipschitzOnWith_iff_dist_le_mul]
+      intro M _ N _
+      simp only [dist_eq_norm, hKnn]
+      have hsub : F₃ t M - F₃ t N
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (M - N) := by
+        simp only [hF₃, map_sub]; abel
+      rw [hsub]
+      calc ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (M - N)‖
+          ≤ ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ * ‖M - N‖ :=
+            (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).le_opNorm _
+        _ ≤ KdF * ‖M - N‖ := mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)
+    · -- continuity in `t` for fixed `R`.
+      intro x _
+      have h1 : ContinuousOn
+          (fun t => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x)
+          (Set.Icc (0 : ℝ) 1) := hDFtube.clm_apply continuousOn_const
+      exact ((h1.add hΘcont).mono hIccsub)
+    · -- uniform bound `‖F₃ t x‖ ≤ L` on `closedBall(x₀, a)`.
+      intro t ht x hx
+      have htIcc : t ∈ Set.Icc (0 : ℝ) 1 := hIccsub ht
+      have hd : ‖x - x₀‖ ≤ aval := by
+        have h' := Metric.mem_closedBall.mp hx
+        rw [dist_eq_norm] at h'
+        exact h'
+      have hxx : (x - x₀) + x₀ = x := by abel
+      have hxnorm : ‖x‖ ≤ ‖x₀‖ + aval := by
+        calc ‖x‖ = ‖(x - x₀) + x₀‖ := by rw [hxx]
+          _ ≤ ‖x - x₀‖ + ‖x₀‖ := norm_add_le _ _
+          _ ≤ aval + ‖x₀‖ := by linarith
+          _ = ‖x₀‖ + aval := by ring
+      show ‖F₃ t x‖ ≤ Lval
+      calc ‖F₃ t x‖
+          = ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖ := by rw [hF₃]
+        _ ≤ ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) x‖
+              + ‖expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖ := norm_add_le _ _
+        _ ≤ KdF * ‖x‖ + Cθ :=
+            add_le_add
+              (le_trans
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)).le_opNorm x)
+                (mul_le_mul_of_nonneg_right (hKdF t htIcc) (norm_nonneg _)))
+              (hCθ t htIcc)
+        _ ≤ Lval := by
+            rw [hLval]
+            have hmul : KdF * ‖x‖ ≤ KdF * (‖x₀‖ + aval) :=
+              mul_le_mul_of_nonneg_left hxnorm hKdF0
+            linarith
+    · -- the interval constraint `L · max(T, 0) ≤ a`.
+      show (Lnn : ℝ) * max ((t₀ + T) - ((⟨t₀, ⟨le_refl t₀, by linarith⟩⟩ :
+              Set.Icc t₀ (t₀ + T)) : ℝ))
+          (((⟨t₀, ⟨le_refl t₀, by linarith⟩⟩ : Set.Icc t₀ (t₀ + T)) : ℝ) - t₀)
+            ≤ (Ann : ℝ) - ((0 : NNReal) : ℝ)
+      rw [NNReal.coe_zero, sub_zero]
+      show Lval * max ((t₀ + T) - t₀) (t₀ - t₀) ≤ aval
+      rw [sub_self, show (t₀ + T) - t₀ = T from by ring, max_eq_left hT.le]
+      exact hstepPL
+  obtain ⟨R, hR0, hRd⟩ := hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
+  refine ⟨R, hR0, fun t ht => ?_⟩
+  have hd := hRd t ht
+  simpa only [hF₃] using hd
+
+set_option maxHeartbeats 1000000 in
+/-- **R3-fund SHIFTED-INTEGRAL — the shifted Jet₃ solver in INTEGRAL form (the gluing brick).**
+    Direct mirror of `expJet2Fund_shifted_integral`: additionally packages the LOCAL INTEGRAL
+    EQUATION `R(t) = x₀ + ∫_{t₀}^t (DF(Y_v s)(R s) + Θ₃^{hkl}(s)) ds` via FTC-2.  Since the source is
+    GLOBAL, the `[0,1]` concatenation glues these directly by ENDPOINT VALUE — no right-composition. -/
+theorem expJet3Fund_shifted_integral (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n)
+    (KdF : ℝ) (hKdF0 : 0 ≤ KdF)
+    (hKdF : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF)
+    (t₀ T : ℝ) (ht₀ : 0 ≤ t₀) (hT : 0 < T) (hsum : t₀ + T ≤ 1) (hstep : 2 * KdF * T ≤ 1)
+    (x₀ : Point n × Point n) :
+    ∃ R : ℝ → (Point n × Point n),
+      R t₀ = x₀ ∧
+      ContinuousOn R (Set.Icc t₀ (t₀ + T)) ∧
+      (∀ t ∈ Set.Icc t₀ (t₀ + T),
+        HasDerivWithinAt R
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R t)
+             + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc t₀ (t₀ + T)) t) ∧
+      (∀ t ∈ Set.Icc t₀ (t₀ + T),
+        R t = x₀ + ∫ s in t₀..t,
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+             + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s)) := by
+  obtain ⟨R, hR0, hRd⟩ :=
+    expJet3Fund_shifted g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l
+      KdF hKdF0 hKdF t₀ T ht₀ hT hsum hstep x₀
+  have hIccsub : Set.Icc t₀ (t₀ + T) ⊆ Set.Icc (0 : ℝ) 1 := Set.Icc_subset_Icc ht₀ hsum
+  have hRcont : ContinuousOn R (Set.Icc t₀ (t₀ + T)) := fun s hs => (hRd s hs).continuousWithinAt
+  have hintegrand : ContinuousOn
+      (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) (Set.Icc t₀ (t₀ + T)) :=
+    expJet3Field_continuousOn g gi hC p v hv Φ Qkl Qhl Qhk hΦcont hQkl hQhl hQhk h k l
+      hIccsub hRcont
+  refine ⟨R, hR0, hRcont, hRd, fun t ht => ?_⟩
+  have hab : t₀ ≤ t := ht.1
+  have hsubt : Set.Icc t₀ t ⊆ Set.Icc t₀ (t₀ + T) := Set.Icc_subset_Icc_right ht.2
+  have hcont : ContinuousOn R (Set.Icc t₀ t) := hRcont.mono hsubt
+  have hderiv : ∀ x ∈ Set.Ioo t₀ t,
+      HasDerivWithinAt R
+        ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v x)) (R x)
+           + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l x) (Set.Ioi x) x := by
+    intro x hx
+    have hxIcc : x ∈ Set.Icc t₀ (t₀ + T) := hsubt ⟨hx.1.le, hx.2.le⟩
+    have hnhds : Set.Icc t₀ (t₀ + T) ∈ nhds x :=
+      Icc_mem_nhds hx.1 (lt_of_lt_of_le hx.2 ht.2)
+    exact ((hRd x hxIcc).hasDerivAt hnhds).hasDerivWithinAt
+  have hint : IntervalIntegrable
+      (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) MeasureTheory.volume t₀ t :=
+    (hintegrand.mono hsubt).intervalIntegrable_of_Icc hab
+  have hftc := intervalIntegral.integral_eq_sub_of_hasDeriv_right_of_le hab hcont hderiv hint
+  rw [hR0] at hftc
+  rw [hftc]; abel
+
+set_option maxHeartbeats 2000000 in
+/-- **The partition induction (endpoint-matching concatenation) for the Jet₃ solver.**  Direct mirror
+    of `expJet2Fund_glue`: for every `j ≤ N` builds a curve `R` on `[0, j/N]` with `R 0 = 0`,
+    continuous, obeying the GLOBAL integral equation `R t = 0 + ∫₀ᵗ (DF(Y_v s)(R s) + Θ₃^{hkl}(s)) ds`,
+    by induction gluing `R_j` and the shifted solver `U` at the endpoint value `R_j(j/N)`; the global
+    source pastes directly. -/
+private theorem expJet3Fund_glue (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n)
+    (KdF : ℝ) (hKdF0 : 0 ≤ KdF)
+    (hKdF : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ KdF)
+    (N : ℕ) (hN0 : 0 < N) (hstep : 2 * KdF * (1 / (N : ℝ)) ≤ 1) :
+    ∀ j : ℕ, j ≤ N →
+      ∃ R : ℝ → (Point n × Point n),
+        R 0 = 0 ∧
+        ContinuousOn R (Set.Icc (0 : ℝ) ((j : ℝ) / (N : ℝ))) ∧
+        (∀ t ∈ Set.Icc (0 : ℝ) ((j : ℝ) / (N : ℝ)),
+          R t = (0 : Point n × Point n) + ∫ s in (0 : ℝ)..t,
+            ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+               + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s)) := by
+  have hNpos : (0 : ℝ) < (N : ℝ) := by exact_mod_cast hN0
+  intro j
+  induction j with
+  | zero =>
+    intro _
+    refine ⟨fun _ => (0 : Point n × Point n), rfl, continuousOn_const, ?_⟩
+    intro t ht
+    have h0 : ((0 : ℕ) : ℝ) / (N : ℝ) = 0 := by rw [Nat.cast_zero, zero_div]
+    rw [h0] at ht
+    have htz : t = 0 := le_antisymm ht.2 ht.1
+    subst htz
+    simp only [intervalIntegral.integral_same, add_zero]
+  | succ m ih =>
+    intro hk
+    obtain ⟨Rj, hRj0, hRjcont, hRjint⟩ := ih (Nat.le_of_succ_le hk)
+    have hτnn : 0 ≤ (m : ℝ) / (N : ℝ) := div_nonneg (Nat.cast_nonneg m) hNpos.le
+    have hInpos : (0 : ℝ) < 1 / (N : ℝ) := by positivity
+    have hsucc : ((m + 1 : ℕ) : ℝ) / (N : ℝ) = (m : ℝ) / (N : ℝ) + 1 / (N : ℝ) := by
+      push_cast; ring
+    have hτm1le1 : (m : ℝ) / (N : ℝ) + 1 / (N : ℝ) ≤ 1 :=
+      hsucc ▸ (by rw [div_le_one hNpos]; exact_mod_cast hk)
+    obtain ⟨U, hU0, hUcont, hUderiv, hUint⟩ :=
+      expJet3Fund_shifted_integral g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l
+        KdF hKdF0 hKdF
+        ((m : ℝ) / (N : ℝ)) (1 / (N : ℝ)) hτnn hInpos hτm1le1 hstep (Rj ((m : ℝ) / (N : ℝ)))
+    set R' : ℝ → (Point n × Point n) :=
+      fun t => if t ≤ (m : ℝ) / (N : ℝ) then Rj t else U t with hR'def
+    have hR'_lo : ∀ s, s ≤ (m : ℝ) / (N : ℝ) → R' s = Rj s := by
+      intro s hs; rw [hR'def]; exact if_pos hs
+    have hR'_hi : ∀ s, ¬ (s ≤ (m : ℝ) / (N : ℝ)) → R' s = U s := by
+      intro s hs; rw [hR'def]; exact if_neg hs
+    -- EqOn on the two closed pieces (junction value matches: `Rj(τ_m) = x₀ = U(τ_m)`).
+    have hEqLo : Set.EqOn R' Rj (Set.Icc (0 : ℝ) ((m : ℝ) / (N : ℝ))) :=
+      fun s hs => hR'_lo s hs.2
+    have hEqHi : Set.EqOn R' U
+        (Set.Icc ((m : ℝ) / (N : ℝ)) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ))) := by
+      intro s hs
+      by_cases hsle : s ≤ (m : ℝ) / (N : ℝ)
+      · have hseq : s = (m : ℝ) / (N : ℝ) := le_antisymm hsle hs.1
+        rw [hR'_lo s hsle, hseq, hU0]
+      · rw [hR'_hi s hsle]
+    -- continuity of the glued curve on [0, (m+1)/N].
+    have hR'cont : ContinuousOn R' (Set.Icc (0 : ℝ) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ))) := by
+      have hunion : Set.Icc (0 : ℝ) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ))
+          = Set.Icc (0 : ℝ) ((m : ℝ) / (N : ℝ))
+            ∪ Set.Icc ((m : ℝ) / (N : ℝ)) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ)) :=
+        (Set.Icc_union_Icc_eq_Icc hτnn (by linarith)).symm
+      rw [hunion]
+      exact (hRjcont.congr hEqLo).union_of_isClosed (hUcont.congr hEqHi)
+        isClosed_Icc isClosed_Icc
+    -- integrand continuity for interval integrability.
+    have hcontψ' : ContinuousOn
+        (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+          + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s)
+        (Set.Icc (0 : ℝ) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ))) :=
+      expJet3Field_continuousOn g gi hC p v hv Φ Qkl Qhl Qhk hΦcont hQkl hQhl hQhk h k l
+        (Set.Icc_subset_Icc_right hτm1le1) hR'cont
+    rw [hsucc]
+    refine ⟨R', ?_, hR'cont, ?_⟩
+    · rw [hR'_lo 0 hτnn]; exact hRj0
+    · intro t ht
+      by_cases htle : t ≤ (m : ℝ) / (N : ℝ)
+      · -- t in [0, τm]: the curve is Rj there.
+        rw [hR'_lo t htle]
+        have hcong : (∫ s in (0 : ℝ)..t,
+              ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                 + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+            = ∫ s in (0 : ℝ)..t,
+              ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Rj s)
+                 + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) := by
+          apply intervalIntegral.integral_congr
+          intro s hs
+          rw [Set.uIcc_of_le ht.1] at hs
+          show (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s
+            = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Rj s)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s
+          rw [hR'_lo s (le_trans hs.2 htle)]
+        rw [hcong]
+        exact hRjint t ⟨ht.1, htle⟩
+      · -- t in (τm, τm + 1/N]: the curve is U there.
+        have htlt : (m : ℝ) / (N : ℝ) < t := not_le.mp htle
+        have htmem : t ∈ Set.Icc ((m : ℝ) / (N : ℝ)) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ)) :=
+          ⟨htlt.le, ht.2⟩
+        rw [hR'_hi t htle]
+        have hII1 : IntervalIntegrable
+            (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) MeasureTheory.volume 0 ((m : ℝ) / (N : ℝ)) :=
+          (hcontψ'.mono (Set.Icc_subset_Icc le_rfl (by linarith))).intervalIntegrable_of_Icc hτnn
+        have hII2 : IntervalIntegrable
+            (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) MeasureTheory.volume ((m : ℝ) / (N : ℝ)) t :=
+          (hcontψ'.mono (Set.Icc_subset_Icc hτnn ht.2)).intervalIntegrable_of_Icc htlt.le
+        have hsplit : (∫ s in (0 : ℝ)..t,
+              ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                 + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+            = (∫ s in (0 : ℝ)..((m : ℝ) / (N : ℝ)),
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                   + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+              + ∫ s in ((m : ℝ) / (N : ℝ))..t,
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                   + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) :=
+          (intervalIntegral.integral_add_adjacent_intervals hII1 hII2).symm
+        -- first piece = Rj(τm) - 0.
+        have hI1 : (∫ s in (0 : ℝ)..((m : ℝ) / (N : ℝ)),
+              ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                 + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+            = Rj ((m : ℝ) / (N : ℝ)) - (0 : Point n × Point n) := by
+          have hc : (∫ s in (0 : ℝ)..((m : ℝ) / (N : ℝ)),
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                   + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+              = ∫ s in (0 : ℝ)..((m : ℝ) / (N : ℝ)),
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Rj s)
+                   + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) := by
+            apply intervalIntegral.integral_congr
+            intro s hs
+            rw [Set.uIcc_of_le hτnn] at hs
+            show (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s
+              = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Rj s)
+                + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s
+            rw [hR'_lo s hs.2]
+          rw [hc, hRjint ((m : ℝ) / (N : ℝ)) ⟨hτnn, le_refl _⟩]; abel
+        -- second piece = U(t) - Rj(τm).
+        have hI2 : (∫ s in ((m : ℝ) / (N : ℝ))..t,
+              ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                 + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+            = U t - Rj ((m : ℝ) / (N : ℝ)) := by
+          have hc : (∫ s in ((m : ℝ) / (N : ℝ))..t,
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                   + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s))
+              = ∫ s in ((m : ℝ) / (N : ℝ))..t,
+                ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (U s)
+                   + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) := by
+            apply intervalIntegral.integral_congr
+            intro s hs
+            rw [Set.uIcc_of_le htlt.le] at hs
+            have hsmem : s ∈ Set.Icc ((m : ℝ) / (N : ℝ)) ((m : ℝ) / (N : ℝ) + 1 / (N : ℝ)) :=
+              ⟨hs.1, le_trans hs.2 ht.2⟩
+            show (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R' s)
+                + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s
+              = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (U s)
+                + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s
+            rw [hEqHi hsmem]
+          rw [hc, hUint t htmem]; abel
+        rw [hsplit, hI1, hI2]; abel
+
+set_option maxHeartbeats 2000000 in
+/-- **R3-fund CAPSTONE — the `[0,1]` Jet₃ third-variation fundamental solution `R^{hkl}`.**  Direct
+    mirror of `expJet2Fund`: for `‖v‖ ≤ expRho` and `Φ`/`Qkl`/`Qhl`/`Qhk` continuous on `[0,1]`, there
+    is a vector-valued curve `R : ℝ → Point n × Point n` with `R 0 = 0`, continuous on `[0,1]`, obeying
+    the GLOBAL integral equation `R t = 0 + ∫₀ᵗ (DF(Y_v s)(R s) + Θ₃^{hkl}(s)) ds`, and — by FTC-1 — the
+    inhomogeneous Jet₃ derivative law `HasDerivWithinAt R (DF(Y_v t)(R t) + Θ₃^{hkl}(t)) (Icc 0 1) t`
+    for every `t ∈ [0,1]`.  Built by concatenating `N ≥ 2(KdF+1)` shifted solvers
+    (`expJet3Fund_glue`).
+
+    HONEST: the `[0,1]` inhomogeneous Jet₃ third-variation solution `R^{hkl}` (the third-variation
+    transport of `h, k, l` through `D³F`/`D²F`).  It does NOT close `ContDiff² (fderiv exp_p)` /
+    `ContDiff³ exp_p`, NOT the parameter-residual identity `∂_v Q = R`, NOT `κ = 1/6`, NOT
+    numerical-`G`. -/
+theorem expJet3Fund (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n) :
+    ∃ R : ℝ → (Point n × Point n),
+      R 0 = 0 ∧
+      ContinuousOn R (Set.Icc (0 : ℝ) 1) ∧
+      (∀ t ∈ Set.Icc (0 : ℝ) 1,
+        R t = (0 : Point n × Point n) + ∫ s in (0 : ℝ)..t,
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+             + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s)) ∧
+      (∀ t ∈ Set.Icc (0 : ℝ) 1,
+        HasDerivWithinAt R
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R t)
+             + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc (0 : ℝ) 1) t) := by
+  obtain ⟨KdF, hKdF0, hKdF⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  obtain ⟨N, hN⟩ := exists_nat_ge (2 * (KdF + 1))
+  have hpos : (0 : ℝ) < 2 * (KdF + 1) := by linarith
+  have hNRpos : (0 : ℝ) < (N : ℝ) := hpos.trans_le hN
+  have hN0 : 0 < N := by exact_mod_cast hNRpos
+  have hstep : 2 * KdF * (1 / (N : ℝ)) ≤ 1 := by
+    have h2 : 2 * KdF * (1 / (N : ℝ)) = (2 * KdF) / (N : ℝ) := by ring
+    rw [h2, div_le_one hNRpos]; linarith [hN]
+  obtain ⟨R, hR0, hRcont, hRint⟩ :=
+    expJet3Fund_glue g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l
+      KdF hKdF0 hKdF N hN0 hstep N le_rfl
+  have hNN : (N : ℝ) / (N : ℝ) = 1 := div_self hNRpos.ne'
+  rw [hNN] at hRcont hRint
+  refine ⟨R, hR0, hRcont, hRint, ?_⟩
+  have hψcont : ContinuousOn
+      (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) (Set.Icc (0 : ℝ) 1) :=
+    expJet3Field_continuousOn g gi hC p v hv Φ Qkl Qhl Qhk hΦcont hQkl hQhl hQhk h k l
+      (subset_refl _) hRcont
+  intro t ht
+  have hII : IntervalIntegrable
+      (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (R s)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l s) MeasureTheory.volume 0 t :=
+    (hψcont.mono (Set.Icc_subset_Icc_right ht.2)).intervalIntegrable_of_Icc ht.1
+  haveI : Fact (t ∈ Set.Icc (0 : ℝ) 1) := ⟨ht⟩
+  have hmeas := hψcont.stronglyMeasurableAtFilter_nhdsWithin (μ := MeasureTheory.volume)
+    measurableSet_Icc t
+  have hFTC := intervalIntegral.integral_hasDerivWithinAt_right (s := Set.Icc (0 : ℝ) 1)
+    hII hmeas (hψcont t ht)
+  have hconst := hFTC.const_add (0 : Point n × Point n)
+  exact hconst.congr (fun s hs => hRint s hs) (hRint t ht)
+
 end QIQTH.ExpMap

@@ -10223,6 +10223,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet3Rhs
 #print axioms QIQTH.ExpMap.expJet3Rhs_continuousOn
 #print axioms QIQTH.ExpMap.expJet3Rhs_norm_le
+-- ★ PARAMETRIX P1 RUNG 3 (R3-fund) — the Jet₃ third-variation fundamental solution R^{hkl} on [0,1]
+-- (ExpMapContDiff3.lean, verbatim mirror of the expJet2Fund chain).  expJet3Fund: ∃R, R 0 = 0 ∧ ContinuousOn R
+-- (Icc 0 1) ∧ [integral form] ∧ ∀t∈Icc 0 1, HasDerivWithinAt R (DF(Y_v t)(R t)+expJet3Rhs …) (Icc 0 1) t — the full
+-- solution of the vector inhomogeneous Jet₃ ODE R'=DF(Y_v)R + Θ₃, R(0)=0.  Chain expJet3Fund_local (IsPicardLindelof,
+-- affine field F₃) → expJet3Field_continuousOn → expJet3Fund_shifted (arbitrary IC x₀) → expJet3Fund_shifted_integral
+-- → expJet3Fund_glue (partition induction, endpoint-matching, NO right-composition) → this capstone.  HONEST: builds
+-- R^{hkl} on [0,1]; does NOT yet give ContDiff³ exp_p (needs the residual Grönwall + HasFDerivAt + continuity +
+-- discharge, R3-capstone), NOT κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT conjecture/QG.
+-- [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet3Fund_local
+#print axioms QIQTH.ExpMap.expJet3Field_continuousOn
+#print axioms QIQTH.ExpMap.expJet3Fund_shifted
+#print axioms QIQTH.ExpMap.expJet3Fund_shifted_integral
+#print axioms QIQTH.ExpMap.expJet3Fund
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
