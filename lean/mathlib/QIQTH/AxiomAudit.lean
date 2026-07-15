@@ -10440,6 +10440,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.hasDerivWithinAt_id_add_smul
 #print axioms QIQTH.PullbackMetric.clm_propagator_nilpotent_unique
 #print axioms QIQTH.PullbackMetric.expFund_zero_eq
+-- ★ PARAMETRIX P1 R3→κ (a2,a3) — the closed INTEGRAL form of expJetD3(0) (PullbackMetric.lean).
+-- clm_duhamel_nilpotent (F-abstract constant-coeff inhomogeneous Duhamel: X'=A(X)+f, X 0=0, A∘A=0, f cont ⟹
+-- X 1 = ∫₀¹(id+(1−s)•A)(f s)ds — candidate Y=(id+t•A)(∫₀ᵗ(id−s•A)f) via FTC + clm_apply product rule +
+-- gronwall_vec_residual_Icc uniqueness).  expJet2Curve_zero_eq (Q^{hk}_0(1)=∫₀¹(id+(1−s)•linF)(expJet2Rhs…0 Φ s)ds)
+-- + expJet3ValG_zero_eq (R^{hkl}_0(1) likewise), so with expJetD3_apply: expJetD3 g gi hC p 0 Φ l k h =
+-- expJetPi(∫₀¹(id+(1−s)•linF)(expJet3Rhs…s)ds) — the closed integral form.  HONEST — (a4) the a₃ match CHECKPOINTED
+-- (WALL for now, reachable-with-machinery not deep): needs the closed-form VALUES D²F(p,0)/D³F(p,0) in Christoffel
+-- terms (fderiv2/fderiv3_geodesicField_apply — NOT in tree, extend geodesicField_fderiv_apply through the pd layers),
+-- then the polynomial-in-s integral + a3rawArr symmetrization.  So does NOT yet give expJetD3(0)=a₃ / the bridge /
+-- κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.clm_duhamel_nilpotent
+#print axioms QIQTH.PullbackMetric.expJet2Curve_zero_eq
+#print axioms QIQTH.PullbackMetric.expJet3ValG_zero_eq
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

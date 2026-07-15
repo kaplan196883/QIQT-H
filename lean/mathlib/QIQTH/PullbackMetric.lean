@@ -592,6 +592,192 @@ theorem expFund_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
     rw [← he]; exact hΦd t ht
   exact clm_propagator_nilpotent_unique linF linF_comp_linF Φ hΦ0 hΦd'
 
+/-- **Small-context inhomogeneous Duhamel for a NILPOTENT constant coefficient.**  Any `X : ℝ → F`
+    solving the inhomogeneous constant-coefficient vector ODE `X'(t) = A(X t) + f(t)`, `X(0) = 0`,
+    with `A` nilpotent of order 2 (`A∘A = 0`) and `f` continuous on `[0,1]`, has the CLOSED endpoint
+    value the variation-of-constants formula gives, with the finite propagator `exp((1−s)A) = 1 + (1−s)A`:
+      `X 1 = ∫₀¹ (1 + (1−s)•A)(f s) ds`.
+
+    Proof.  The candidate `Y(t) = (1 + t•A)(V t)`, `V(t) = ∫₀ᵗ (1 − s•A)(f s) ds`, solves the same IVP:
+    `V' = (1 − t•A)(f t)` (FTC), so by the CLM-application product rule `HasDerivWithinAt.clm_apply`
+    (with the affine-path derivative `hasDerivWithinAt_id_add_smul`),
+    `Y' = A(V t) + (1 + t•A)((1 − t•A)(f t)) = A(V t) + f t = A(Y t) + f t` — both simplifications use
+    `A∘A = 0` — and `Y 0 = 0`.  The homogeneous vector Grönwall `gronwall_vec_residual_Icc`
+    (`ρ = 0`, `K = ‖A‖`) forces `X = Y` on `[0,1]`; then `Y 1 = (1 + A)(∫₀¹(1 − s•A)(f s)ds)`, and pulling
+    the CLM `1 + A` inside the integral (`ContinuousLinearMap.intervalIntegral_comp_comm`) collapses
+    `(1 + A)(1 − s•A) = 1 + (1−s)•A` (again `A∘A = 0`).  Abstract in `F` (tiny context), the exact
+    inhomogeneous mirror of `clm_propagator_nilpotent_unique`. -/
+theorem clm_duhamel_nilpotent {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F] [CompleteSpace F]
+    (A : F →L[ℝ] F) (hA : A.comp A = 0)
+    (f : ℝ → F) (hf : ContinuousOn f (Set.Icc (0 : ℝ) 1))
+    (X : ℝ → F) (hX0 : X 0 = 0)
+    (hXd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt X (A (X t) + f t) (Set.Icc (0 : ℝ) 1) t) :
+    X 1 = ∫ s in (0 : ℝ)..1, (ContinuousLinearMap.id ℝ F + (1 - s) • A) (f s) := by
+  -- nilpotency in applied form.
+  have hAA : ∀ x : F, A (A x) = 0 := fun x => by
+    have := ContinuousLinearMap.ext_iff.mp hA x; simpa using this
+  -- the integrand `gg s = (1 − s•A)(f s)` and its continuity on `[0,1]`.
+  set gg : ℝ → F := fun s => (ContinuousLinearMap.id ℝ F - s • A) (f s) with hgg
+  have hCfield : ContinuousOn (fun s : ℝ => ContinuousLinearMap.id ℝ F - s • A)
+      (Set.Icc (0 : ℝ) 1) :=
+    continuousOn_const.sub ((continuous_id.smul continuous_const).continuousOn)
+  have hggc : ContinuousOn gg (Set.Icc (0 : ℝ) 1) := hCfield.clm_apply hf
+  set V : ℝ → F := fun t => ∫ s in (0 : ℝ)..t, gg s with hVdef
+  set Y : ℝ → F := fun t => (ContinuousLinearMap.id ℝ F + t • A) (V t) with hYdef
+  have hV0 : V 0 = 0 := by simp [hVdef]
+  have hY0 : Y 0 = 0 := by simp [hYdef, hV0]
+  -- FTC: `V' t = gg t`.
+  have hVd : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt V (gg t) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have hII : IntervalIntegrable gg MeasureTheory.volume 0 t :=
+      (hggc.mono (Set.Icc_subset_Icc_right ht.2)).intervalIntegrable_of_Icc ht.1
+    haveI : Fact (t ∈ Set.Icc (0 : ℝ) 1) := ⟨ht⟩
+    have hmeas := hggc.stronglyMeasurableAtFilter_nhdsWithin (μ := MeasureTheory.volume)
+      measurableSet_Icc t
+    exact intervalIntegral.integral_hasDerivWithinAt_right hII hmeas (hggc t ht)
+  -- `Y` solves the same IVP `Y' = A(Y) + f`, `Y 0 = 0`.
+  have hYd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Y (A (Y t) + f t) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have hc : HasDerivWithinAt (fun τ : ℝ => ContinuousLinearMap.id ℝ F + τ • A) A
+        (Set.Icc (0 : ℝ) 1) t := hasDerivWithinAt_id_add_smul A _ t
+    have hclm := hc.clm_apply (hVd t ht)
+    have hfterm : (ContinuousLinearMap.id ℝ F + t • A) (gg t) = f t := by
+      simp only [hgg, ContinuousLinearMap.add_apply, ContinuousLinearMap.sub_apply,
+        ContinuousLinearMap.id_apply, ContinuousLinearMap.smul_apply, map_sub, map_smul,
+        hAA (f t), smul_zero]
+      abel
+    have hAY : A (Y t) = A (V t) := by
+      simp only [hYdef, ContinuousLinearMap.add_apply, ContinuousLinearMap.id_apply,
+        ContinuousLinearMap.smul_apply, map_add, map_smul, hAA (V t), smul_zero, add_zero]
+    have heq : A (V t) + (ContinuousLinearMap.id ℝ F + t • A) (gg t) = A (Y t) + f t := by
+      rw [hfterm, hAY]
+    rw [heq] at hclm; exact hclm
+  -- Grönwall uniqueness `X = Y` on `[0,1]`.
+  have huniq := gronwall_vec_residual_Icc
+    (fun t => X t - Y t) (fun _ => (0 : F)) (fun _ => A) ‖A‖ 0 (norm_nonneg _) le_rfl
+    (by simp only [hX0, hY0, sub_zero])
+    (fun t ht => by
+      have hd := (hXd t ht).sub (hYd t ht)
+      have hval : (A (X t) + f t) - (A (Y t) + f t) = A (X t - Y t) + 0 := by
+        rw [map_sub]; abel
+      rwa [hval] at hd)
+    (fun _ _ => le_refl _) (fun _ _ => by simp)
+  have hXeqY : X 1 = Y 1 := by
+    have h0 : ‖X 1 - Y 1‖ ≤ 0 := by
+      simpa using huniq 1 (by norm_num [Set.mem_Icc])
+    exact sub_eq_zero.mp (norm_le_zero_iff.mp h0)
+  -- evaluate `Y 1`.
+  rw [hXeqY]
+  have hII1 : IntervalIntegrable gg MeasureTheory.volume 0 1 :=
+    hggc.intervalIntegrable_of_Icc (by norm_num)
+  have hpt : ∀ s : ℝ, (ContinuousLinearMap.id ℝ F + (1 : ℝ) • A) (gg s)
+      = (ContinuousLinearMap.id ℝ F + (1 - s) • A) (f s) := by
+    intro s
+    simp only [hgg, ContinuousLinearMap.add_apply, ContinuousLinearMap.sub_apply,
+      ContinuousLinearMap.id_apply, ContinuousLinearMap.smul_apply, map_sub, map_smul,
+      hAA (f s), one_smul, sub_smul]
+    abel
+  simp only [hYdef, hVdef]
+  rw [← ContinuousLinearMap.intervalIntegral_comp_comm _ hII1]
+  exact intervalIntegral.integral_congr (fun s _ => hpt s)
+
+/-- **(a2) — the CLOSED second-variation value at `v = 0`.**  The genuine second-variation curve
+    `Q^{hk}_0` (the `expJet2Curve` witness at `v = 0`) has the explicit endpoint value given by the
+    nilpotent Duhamel formula: along the constant `v = 0` tube the Jacobi coefficient is the CONSTANT
+    nilpotent `A₀ = linF` (`fderiv_geodesicField_expTube_zero`, `linF_comp_linF`), and the source is
+    the fixed `expJet2Rhs`; hence `clm_duhamel_nilpotent` gives
+      `Q^{hk}_0(1) = ∫₀¹ (1 + (1−s)•linF)(expJet2Rhs … 0 Φ h k s) ds`. -/
+theorem expJet2Curve_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k : Point n) :
+    expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k 1
+      = ∫ s in (0 : ℝ)..1,
+          (ContinuousLinearMap.id ℝ (Point n × Point n) + (1 - s) • (linF (n := n)))
+            (expJet2Rhs g gi hC p 0 Φ h k s) := by
+  obtain ⟨hQ0, -, -, hQderiv⟩ := (expJet2Fund g gi hC p 0 Φ hv0 hΦcont h k).choose_spec
+  have hXd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt (expJet2Fund g gi hC p 0 Φ hv0 hΦcont h k).choose
+        ((linF (n := n)) ((expJet2Fund g gi hC p 0 Φ hv0 hΦcont h k).choose t)
+          + expJet2Rhs g gi hC p 0 Φ h k t) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have hd := hQderiv t ht
+    rwa [fderiv_geodesicField_expTube_zero g gi hC p t ht] at hd
+  have hf : ContinuousOn (fun s => expJet2Rhs g gi hC p 0 Φ h k s) (Set.Icc (0 : ℝ) 1) :=
+    expJet2Rhs_continuousOn g gi hC p 0 hv0 Φ hΦcont h k
+  have hdu := clm_duhamel_nilpotent (linF (n := n)) linF_comp_linF
+    (fun s => expJet2Rhs g gi hC p 0 Φ h k s) hf
+    (expJet2Fund g gi hC p 0 Φ hv0 hΦcont h k).choose hQ0 hXd
+  simpa only [expJet2Curve] using hdu
+
+/-- **(a3) — the CLOSED third-variation value at `v = 0`.**  The genuine third-variation datum
+    `R^{hkl}_0(1) = expJet3ValG … 0` (the `expJet3Val` witness with the genuine second-variation curves
+    `expJet2Curve` in the `Q··` slots) has the explicit endpoint value from the same nilpotent Duhamel:
+    at `v = 0` the Jacobi coefficient is `A₀ = linF` and the source is the fixed `expJet3Rhs`, so
+      `R^{hkl}_0(1) = ∫₀¹ (1 + (1−s)•linF)(expJet3Rhs … 0 Φ Q_kl Q_hl Q_hk h k l s) ds`,
+    with `Q_·· = expJet2Curve …` the (themselves closed, by (a2)) genuine second-variation curves. -/
+theorem expJet3ValG_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k l : Point n) :
+    expJet3ValG g gi hC p 0 Φ hv0 hΦcont h k l
+      = ∫ s in (0 : ℝ)..1,
+          (ContinuousLinearMap.id ℝ (Point n × Point n) + (1 - s) • (linF (n := n)))
+            (expJet3Rhs g gi hC p 0 Φ
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s) := by
+  obtain ⟨hR0, -, -, hRderiv⟩ :=
+    (expJet3Fund g gi hC p 0 Φ
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) hv0 hΦcont
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h k) h k l).choose_spec
+  have hXd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt
+        (expJet3Fund g gi hC p 0 Φ
+          (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+          (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+          (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) hv0 hΦcont
+          (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont k l)
+          (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h l)
+          (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h k) h k l).choose
+        ((linF (n := n))
+            ((expJet3Fund g gi hC p 0 Φ
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) hv0 hΦcont
+              (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont k l)
+              (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h l)
+              (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h k) h k l).choose t)
+          + expJet3Rhs g gi hC p 0 Φ
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l t) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have hd := hRderiv t ht
+    rwa [fderiv_geodesicField_expTube_zero g gi hC p t ht] at hd
+  have hf : ContinuousOn
+      (fun s => expJet3Rhs g gi hC p 0 Φ
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s) (Set.Icc (0 : ℝ) 1) :=
+    expJet3Rhs_continuousOn g gi hC p 0 hv0 Φ
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) hΦcont
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h k) h k l
+  have hdu := clm_duhamel_nilpotent (linF (n := n)) linF_comp_linF _ hf _ hR0 hXd
+  simpa only [expJet3ValG, expJet3Val] using hdu
+
 /-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
@@ -632,29 +818,45 @@ theorem expFund_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
   `=o[𝓝 0] ‖v‖³` little-o, which does NOT differentiate for free) to `iteratedFDeriv ℝ 3 exp_p 0` via
   Mathlib's Taylor-coefficient uniqueness, then coordinate extraction + the `a3rawArr` symmetrization.
 
-  PROGRESS on route (a) — the `v = 0` TRIVIALIZATION is now LANDED (axiom-clean
-  `[propext, Classical.choice, Quot.sound]`): `expTube_zero` (the tube is CONSTANT `(p,0)` on `[0,1]`),
-  `fderiv_geodesicField_expTube_zero` (the Jacobi coefficient is the CONSTANT `A₀ = linF`), and
-  `linF_comp_linF` (`A₀² = 0`, so `Φ₀(t) = id + t·A₀`).  What still blocks route (a) — the EXACT
-  remaining goal — is the explicit evaluation of the two NESTED constant-coefficient inhomogeneous ODEs
-  at `t = 1`:
-    (a1) IDENTIFY the propagator: prove `Φ₀ = fun t => id + t·A₀` for THE `Φ` supplied by
-         `hasFDerivAt_expMap … 0` — needs an operator-ODE uniqueness lemma for `Φ' = A₀∘Φ`, `Φ(0)=id`
-         (Mathlib/tree has vector-valued `expJet2Fund_unique`/`expJet3Fund_unique` but NO
-         operator-propagator uniqueness lemma — this is the first missing brick);
-    (a2) SOLVE the 2nd variation: with `A₀`, `Φ₀` fixed, `expJet2Curve` solves `Q' = A₀∘Q + rhs₂(t)`,
-         `Q(0)=0`, where `rhs₂ = expJet2Rhs` is a fixed polynomial in `A₀, D²F(p,0), Φ₀`; its `t=1`
-         value is `∫₀¹ exp((1−s)A₀)·rhs₂(s) ds` — an explicit finite integral since `exp(sA₀)=id+sA₀`;
-    (a3) SOLVE the 3rd variation: `R' = A₀∘R + rhs₃(t)`, `R(0)=0` (`rhs₃ = expJet3Rhs` in
-         `A₀, D²F, D³F(p,0), Φ₀` and the `expJet2Curve` outputs from (a2)); `R(1) = ∫₀¹ exp((1−s)A₀)·rhs₃(s) ds`;
-    (a4) MATCH: `expJetPi (R(1))` (the `.1` block) against `a3rawArr`/`expMap_value_three_jet`.
-  VERDICT on the wall: route (a) is now REACHABLE-with-machinery — the analytic obstruction has been
-  reduced from an abstract 3rd Fréchet derivative to (a1)+(a2)+(a3), a finite chain of
-  constant-coefficient linear-ODE integrations (all coefficients are the finite polynomial
-  `id + s·A₀`, `A₀²=0`), PLUS the single genuinely-missing Mathlib-adjacent brick (a1)
-  (operator-propagator ODE uniqueness / `duhamel`-form representation of a linear inhomogeneous ODE
-  solution).  It is NOT a deep rung-4 obstruction; it is a bounded ODE-integration build gated on that
-  Duhamel/uniqueness brick.  Once (a1)+(a2)+(a3) give the closed `expJetD3 … 0 Φ`, the rest is reachable ASSEMBLY:
+  PROGRESS on route (a) — the `v = 0` TRIVIALIZATION and the FIRST THREE VARIATION SOLVES are now
+  LANDED (all axiom-clean `[propext, Classical.choice, Quot.sound]`):
+    - substrate: `expTube_zero` (the tube is CONSTANT `(p,0)` on `[0,1]`),
+      `fderiv_geodesicField_expTube_zero` (the Jacobi coefficient is the CONSTANT `A₀ = linF`),
+      `linF_comp_linF` (`A₀² = 0`, so `exp(sA₀) = id + s·A₀`);
+    - **(a1) LANDED** — `expFund_zero_eq`: THE first-variation propagator `Φ` from `hasFDerivAt_expMap … 0`
+      IS the finite polynomial `Φ₀(t) = id + t·A₀`, via the operator-propagator uniqueness brick
+      `clm_propagator_nilpotent_unique`;
+    - **the DUHAMEL BRICK LANDED** — `clm_duhamel_nilpotent`: the constant-coeff inhomogeneous
+      variation-of-constants formula `X'=A₀X+f, X 0=0, A₀²=0 ⟹ X 1 = ∫₀¹(id+(1−s)•A₀)(f s)ds`
+      (F-abstract; candidate `Y=(id+t•A₀)(∫₀ᵗ(id−s•A₀)f)` + `HasDerivWithinAt.clm_apply` product rule +
+      `gronwall_vec_residual_Icc` uniqueness + `intervalIntegral_comp_comm`);
+    - **(a2) LANDED** — `expJet2Curve_zero_eq`: the genuine 2nd-variation curve
+      `Q^{hk}_0(1) = ∫₀¹ (id+(1−s)•linF)(expJet2Rhs … 0 Φ h k s) ds`;
+    - **(a3) LANDED** — `expJet3ValG_zero_eq`: the genuine 3rd-variation datum
+      `R^{hkl}_0(1) = expJet3ValG … 0 = ∫₀¹ (id+(1−s)•linF)(expJet3Rhs … 0 Φ Q_kl Q_hl Q_hk h k l s) ds`
+      (the `Q_·· = expJet2Curve …` being themselves closed by (a2)).
+  Composing (a3) with `expJetD3_apply` gives the CLOSED INTEGRAL form of the target operator:
+    `expJetD3 g gi hC p 0 Φ l k h = expJetPi (∫₀¹ (id+(1−s)•linF)(expJet3Rhs … 0 Φ … h k l s) ds)`.
+
+  **THE EXACT REMAINING GOAL — (a4), the `a₃` MATCH — IS THE WALL.**  What is still missing is
+    **`expJetPi (R^{hkl}_0(1)) = a3rawArr`-contracted cubic Christoffel operator**
+  (`expMap_value_three_jet` / `a3rawArr_contract_eq_a3` / `rncDΓ`).  This requires evaluating the
+  integrand `expJet3Rhs … 0 Φ Q_kl Q_hl Q_hk h k l s` in CLOSED Christoffel form, which needs the
+  closed-form VALUES of the SECOND and THIRD Fréchet derivatives of `geodesicField` at the equilibrium
+  `(p,0)`:  `D²F(p,0) = fderiv²(geodesicField)(p,0)` and `D³F(p,0) = fderiv³(geodesicField)(p,0)`
+  expressed through `pd Γ` / `pd² Γ` (like `geodesicField_fderiv_apply` does for the FIRST derivative).
+  **Those closed-form `apply` lemmas are NOT in the tree** — only `geodesicField_fderiv_apply` (order 1,
+  closed), plus order-2/3 CONTINUITY, NORM-bound and SYMMETRY lemmas (`contDiff_fderiv{2,3}_geodesicField`,
+  `fderiv3_geodesicField_symm_{ab,bc,cyc}`).  Building `fderiv2_geodesicField_apply` /
+  `fderiv3_geodesicField_apply` (extend `geodesicField_fderiv_apply` one/two orders via the `pd`
+  layers — flagged "reachable by extending … one order" at `ExpMapContDiff2.lean:41`) is a genuine
+  multi-lemma build; after it, the residual is the polynomial-in-`s` integral evaluation
+  (`Φ₀ s (ι h) = (h,0)` is CONSTANT since `linF(h,0)=(0,0)`; `∫₀¹ sᵏ ds = 1/(k+1)`) and the `a3rawArr`
+  symmetrization.  VERDICT: **(a4) is a WALL for now** — reachable-with-machinery, not a deep
+  obstruction, but gated on the two genuinely-missing `D²F`/`D³F` closed-Christoffel-value lemmas.
+  It is NOT a higher-rung (Rung-4) obstruction; the analytic content stays third-jet.
+
+  Once (a4) closes the closed `expJetD3 … 0 Φ`, the rest is reachable ASSEMBLY:
     (ii) twice-Leibniz + chain-rule expansion of `pd² g̃(0)` into the `∂²g` (curvature-of-`g`),
          `∂g·∂J`, `g·∂²J` blocks (mirroring `pd_expPullback_summand_zero`), collapsing the `Pi.single`
          factors with `g(p)=δ`, `∂g̃(0)=0`, `pd_jacobian_expMap_zero`, and the new explicit `∂²J`;
