@@ -565,6 +565,13 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   `hasFDerivAt_iff_isLittleO` ⟹ `HasFDerivAt (v↦fderiv exp_p v) D²_v v`.
   (C) continuity of `v↦D²_v` (a `Q`-two-point Grönwall, mirror `expFund_two_pt_diff`).
   (D) `ContDiffOn ℝ 1 (fderiv exp_p) ball` ⟹ `expMap_contDiffOn_two` UNCONDITIONAL.
+- **★★★ 2026-07-15 — RUNG 2 DONE — `expMap_contDiffOn_two` UNCONDITIONAL (PUSHED `6775a2c9`, [AF] std-3):**
+  `ContDiffOn ℝ 2 (expMap g gi hC p) (ball 0 expRho)`, NO side hypothesis. The full B-CLM/B-asm/(C)/(D) chain landed:
+  `expJetD2` (the CLM 2nd derivative, bilinear via `expJet2Fund_unique`), `expMap_fderiv_hasFDerivAt` (differentiability,
+  B-asm), `expJet2Val_two_pt_diff` (the `v`-Lipschitz parameter-Grönwall — analytic heart of (C)), `expJetD2_two_pt_diff`
+  (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
+  (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
+  ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
 - **2026-07-07 (EXP-JET3c STEP 2, operator-norm + residual-identity toolkit + TWO checkpoints):** landed green
   ([AF] std-3, budget 0) the reusable toolkit the operator residual Grönwall consumes: **`matVecCLM_opNorm_le`**
   (`‖matVecCLM c‖ ≤ n·b`), **`expJetA1_opNorm_le`** (`‖A₁‖ ≤ 2n²Mc‖v‖`, order-1), **`expJetA2_opNorm_le`**
