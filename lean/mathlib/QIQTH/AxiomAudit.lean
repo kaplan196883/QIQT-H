@@ -10535,6 +10535,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.pd2_metric_comp_expMap_zero
 #print axioms QIQTH.PullbackMetric.pd2_jacobian_expMap_zero
 #print axioms QIQTH.PullbackMetric.pd_christoffel_expPullback_zero
+-- ★ PARAMETRIX P1 R3→κ (bridge residual β1 + β2-step1) — the SMOOTH PULLBACK INVERSE + the instantiated
+-- Christoffel-derivative of g̃ with its OWN inverse (PullbackMetric.lean).
+-- elemCLM/matToCLM (assemble a matrix field as a finite sum of scaled matrix-unit operators on Point n →L Point n)
+-- + matToCLM_mul_eq_one (matrix product ↦ operator composition = 1) + gi_mul_g_eq (left-inverse via mul_eq_one_comm).
+-- ★ expPullbackMetricInv: the smooth pullback inverse g̃⁻¹ near 0, built by inverting in the operator ring
+-- (Ring.inverse at the unit matToCLM(g p), avoiding all matrix-norm-instance headaches; entry read off by continuous
+-- evaluation).  ★ expPullbackMetricInv_zero (g̃⁻¹(0) = gi p, β1 requirement 1) + ★ expPullbackMetricInv_differentiableAt
+-- (differentiable at 0 via contDiffAt_ringInverse, β1 requirement 2) — DISCHARGE the gtildeInv/hgi0/hgi_diff hypotheses
+-- of pd_christoffel_expPullback_zero.  ★ pd_christoffel_expPullbackInv_zero: the instantiation at gtildeInv :=
+-- expPullbackMetricInv — LHS is now the derivative of the ACTUAL Christoffel symbol of g̃ paired with its own inverse
+-- (no carried field): ∂_l Γ̃^i_jk(0) = ½∑_α g⁻¹(p)^iα(∂_l∂_j g̃_αk+∂_l∂_k g̃_αj−∂_l∂_α g̃_jk)(0).  HONEST — the FULL
+-- bridge rnc_christoffel_linearJet is STILL a single remaining CHECKPOINTED identity (NOT sorry'd): pure finite
+-- Finset/ring algebra (≈3 brackets × 9 pd_pd_mul3_zero Leibniz terms × the ∑_{a,b} double sum) substituting the
+-- closed ∂²g̃(0) [pd2_expPullbackMetric_at_zero + the (α1)+(α2) 2nd-jets], cancelling the ∂²g ambient blocks via
+-- christoffel_lower, reindexing the surviving Γ,∂Γ cubic onto rncDΓ via a3rawArr_contract_eq_a3 — large assembly, NO
+-- new analytic input past Rung 3.  Does NOT yet give the bridge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.matToCLM_mul_eq_one
+#print axioms QIQTH.PullbackMetric.gi_mul_g_eq
+#print axioms QIQTH.PullbackMetric.ringInverse_metricCLM_zero
+#print axioms QIQTH.PullbackMetric.expPullbackMetricInv_zero
+#print axioms QIQTH.PullbackMetric.expPullbackMetricInv_differentiableAt
+#print axioms QIQTH.PullbackMetric.pd_christoffel_expPullbackInv_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

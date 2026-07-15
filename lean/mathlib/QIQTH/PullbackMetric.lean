@@ -1679,6 +1679,185 @@ theorem pd_christoffel_expPullback_zero (g gi : Point n → Fin n → Fin n → 
   exact Finset.sum_congr rfl (fun α _ => key α)
 
 /-!
+### (β1) — THE SMOOTH PULLBACK INVERSE `expPullbackMetricInv` (the guaranteed floor)
+
+We build the matrix inverse of the pullback metric `g̃(x)` near `0`, using the operator ring
+`Point n →L[ℝ] Point n` (which carries the standard global `NormedRing`/`NormedAlgebra`/`CompleteSpace`
+instances, hence `HasSummableGeomSeries`, avoiding all matrix-norm-instance headaches).  We assemble the
+metric matrix `g̃(x)` into a continuous linear operator `matToCLM (g̃ x)`, invert it with `Ring.inverse`
+(which is `C^∞` at the invertible point `matToCLM (g p)`, `contDiffAt_ringInverse`), and read off the
+`(μ,α)` entry.  The value at `0` is `gi p` (`matToCLM (g p)` is a unit with inverse `matToCLM (gi p)`),
+and the entry field is differentiable at `0` (`Ring.inverse` composed with the differentiable operator
+field, then evaluated).  These two facts discharge the `hgi0`/`hgi_diff` hypotheses of
+`pd_christoffel_expPullback_zero`.
+-/
+
+/-- The elementary operator `e_{ab} : v ↦ (v b) • e_a` on `Point n`
+    (`e_a = Pi.single a 1`).  Its matrix is the `(a,b)` matrix unit. -/
+noncomputable def elemCLM (a b : Fin n) : Point n →L[ℝ] Point n :=
+  (ContinuousLinearMap.proj (R := ℝ) (φ := fun _ : Fin n => ℝ) b).smulRight (Pi.single a (1 : ℝ))
+
+@[simp] theorem elemCLM_apply (a b : Fin n) (v : Point n) (i : Fin n) :
+    elemCLM a b v i = v b * (Pi.single a (1 : ℝ) : Point n) i := by
+  simp only [elemCLM, ContinuousLinearMap.smulRight_apply, ContinuousLinearMap.proj_apply,
+    Pi.smul_apply, smul_eq_mul]
+
+/-- Assemble a matrix `M : Fin n → Fin n → ℝ` into the continuous linear operator `v ↦ M ·ᵥ v`
+    on `Point n` (as a finite sum of scaled matrix units, so it is manifestly `C^∞` in `M`). -/
+noncomputable def matToCLM (M : Fin n → Fin n → ℝ) : Point n →L[ℝ] Point n :=
+  ∑ a, ∑ b, M a b • elemCLM a b
+
+/-- The operator `matToCLM M` acts as the matrix `M`: `(matToCLM M · v)_i = ∑_b M_{ib} v_b`. -/
+theorem matToCLM_apply (M : Fin n → Fin n → ℝ) (v : Point n) (i : Fin n) :
+    matToCLM M v i = ∑ b, M i b * v b := by
+  simp only [matToCLM, ContinuousLinearMap.sum_apply, ContinuousLinearMap.smul_apply,
+    Finset.sum_apply, Pi.smul_apply, smul_eq_mul, elemCLM_apply, Pi.single_apply]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun b _ => ?_
+  simp only [mul_ite, mul_one, mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+
+/-- If `M` is a matrix inverse of `N` (`∑_b M_{ib} N_{bc} = δ_{ic}`), then `matToCLM M ∘ matToCLM N = 1`
+    as operators.  (The operator ring's `*` is composition.) -/
+theorem matToCLM_mul_eq_one (M N : Fin n → Fin n → ℝ)
+    (h : ∀ i c, (∑ b, M i b * N b c) = if i = c then (1 : ℝ) else 0) :
+    matToCLM M * matToCLM N = 1 := by
+  apply ContinuousLinearMap.ext
+  intro v
+  rw [ContinuousLinearMap.mul_apply, ContinuousLinearMap.one_apply]
+  funext i
+  rw [matToCLM_apply]
+  calc ∑ b, M i b * (matToCLM N v b)
+      = ∑ b, M i b * (∑ c, N b c * v c) := by
+        refine Finset.sum_congr rfl fun b _ => by rw [matToCLM_apply]
+    _ = ∑ b, ∑ c, M i b * (N b c * v c) := by simp only [Finset.mul_sum]
+    _ = ∑ c, ∑ b, M i b * (N b c * v c) := Finset.sum_comm
+    _ = ∑ c, (∑ b, M i b * N b c) * v c := by
+        refine Finset.sum_congr rfl fun c _ => ?_
+        rw [Finset.sum_mul]; exact Finset.sum_congr rfl fun b _ => by ring
+    _ = ∑ c, (if i = c then (1 : ℝ) else 0) * v c := by
+        refine Finset.sum_congr rfl fun c _ => by rw [h i c]
+    _ = v i := by
+        simp only [ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+
+/-- The inverse metric `gi p` is a LEFT inverse of `g p` too: `∑_b (gi p)_{ib} (g p)_{bc} = δ_{ic}`.
+    (For square matrices over a commutative ring a right inverse is a two-sided inverse,
+    `Matrix.mul_eq_one_comm`.) -/
+theorem gi_mul_g_eq (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0) (i c : Fin n) :
+    (∑ b, gi p i b * g p b c) = if i = c then (1 : ℝ) else 0 := by
+  have hR : (Matrix.of (g p) : Matrix (Fin n) (Fin n) ℝ) * Matrix.of (gi p) = 1 := by
+    ext a b
+    rw [Matrix.mul_apply, Matrix.one_apply]
+    simpa only [Matrix.of_apply] using hinv a b
+  have hL : (Matrix.of (gi p) : Matrix (Fin n) (Fin n) ℝ) * Matrix.of (g p) = 1 :=
+    mul_eq_one_comm.mp hR
+  have h2 : (Matrix.of (gi p) * Matrix.of (g p) : Matrix (Fin n) (Fin n) ℝ) i c
+      = (1 : Matrix (Fin n) (Fin n) ℝ) i c := by rw [hL]
+  rw [Matrix.mul_apply, Matrix.one_apply] at h2
+  simpa only [Matrix.of_apply] using h2
+
+/-- **The smooth pullback inverse metric** `g̃⁻¹`, in component form: the `(μ,α)` entry of the operator
+    inverse of `matToCLM (g̃ x)`.  Near `0` (where `g̃(0) = g(p)` is invertible) this is the genuine
+    matrix inverse of the pullback metric `g̃(x)`. -/
+noncomputable def expPullbackMetricInv (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (x : Point n) (μ α : Fin n) : ℝ :=
+  (Ring.inverse (matToCLM (fun a b => expPullbackMetric g gi hC p x a b))) (Pi.single α (1 : ℝ)) μ
+
+/-- `matToCLM (g p)` is a unit in the operator ring, with inverse `matToCLM (gi p)`. -/
+noncomputable def metricCLMUnit0 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0) :
+    (Point n →L[ℝ] Point n)ˣ where
+  val := matToCLM (fun a b => expPullbackMetric g gi hC p 0 a b)
+  inv := matToCLM (gi p)
+  val_inv := matToCLM_mul_eq_one _ _ (by
+    intro i c; simp only [expPullbackMetric_at_zero]; exact hinv i c)
+  inv_val := matToCLM_mul_eq_one _ _ (by
+    intro i c; simp only [expPullbackMetric_at_zero]; exact gi_mul_g_eq g gi p hinv i c)
+
+/-- `Ring.inverse (matToCLM (g̃ 0)) = matToCLM (gi p)` (the operator inverse of `g̃(0) = g(p)`). -/
+theorem ringInverse_metricCLM_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0) :
+    Ring.inverse (matToCLM (fun a b => expPullbackMetric g gi hC p 0 a b)) = matToCLM (gi p) := by
+  rw [show (matToCLM (fun a b => expPullbackMetric g gi hC p 0 a b))
+        = ↑(metricCLMUnit0 g gi hC p hinv) from rfl, Ring.inverse_unit]
+  rfl
+
+/-- **(β1)a — the 0-jet value of the pullback inverse.**  `g̃⁻¹(0) = g⁻¹(p) = gi p`. -/
+theorem expPullbackMetricInv_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0) (μ α : Fin n) :
+    expPullbackMetricInv g gi hC p 0 μ α = gi p μ α := by
+  simp only [expPullbackMetricInv]
+  rw [ringInverse_metricCLM_zero g gi hC p hinv, matToCLM_apply]
+  simp only [Pi.single_apply, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ,
+    if_true]
+
+/-- **(β1)b — differentiability of the pullback inverse at `0`.**  Each entry `x ↦ g̃⁻¹(x)_{μα}` is
+    differentiable at `0`: `matToCLM (g̃ ·)` is differentiable (its entries are `C²`), `matToCLM (g̃ 0)`
+    is invertible, `Ring.inverse` is `C^∞` at a unit (`contDiffAt_ringInverse`), and entry-evaluation is
+    continuous-linear. -/
+theorem expPullbackMetricInv_differentiableAt (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (μ α : Fin n) :
+    DifferentiableAt ℝ (fun x => expPullbackMetricInv g gi hC p x μ α) 0 := by
+  -- the operator field `x ↦ matToCLM (g̃ x)` is differentiable at `0` (its entries are `C²`).
+  have hmet_diff : DifferentiableAt ℝ
+      (fun x => matToCLM (fun a b => expPullbackMetric g gi hC p x a b)) 0 := by
+    show DifferentiableAt ℝ
+      (fun x => ∑ a, ∑ b, expPullbackMetric g gi hC p x a b • elemCLM a b) 0
+    apply DifferentiableAt.fun_sum
+    intro a _
+    apply DifferentiableAt.fun_sum
+    intro b _
+    exact ((contDiffAt2_expPullbackMetric_zero g gi hC p hg a b).differentiableAt
+      (by norm_num)).smul (differentiableAt_const _)
+  -- `Ring.inverse` is `C^∞` at the unit `matToCLM (g̃ 0)`.
+  have hinv_cd : ContDiffAt ℝ (1 : WithTop ℕ∞) Ring.inverse
+      (matToCLM (fun a b => expPullbackMetric g gi hC p 0 a b)) :=
+    contDiffAt_ringInverse ℝ (metricCLMUnit0 g gi hC p hinv)
+  have hcomp := (hinv_cd.differentiableAt (by norm_num)).comp 0 hmet_diff
+  have hfull := ((ContinuousLinearMap.proj (R := ℝ) (φ := fun _ : Fin n => ℝ) μ).differentiableAt).comp
+    0 (((ContinuousLinearMap.apply ℝ (Point n)
+      (Pi.single α (1 : ℝ) : Point n)).differentiableAt).comp 0 hcomp)
+  have heq : (fun x => expPullbackMetricInv g gi hC p x μ α)
+      = fun x => (ContinuousLinearMap.proj (R := ℝ) (φ := fun _ : Fin n => ℝ) μ)
+          ((ContinuousLinearMap.apply ℝ (Point n) (Pi.single α (1 : ℝ) : Point n))
+            (Ring.inverse (matToCLM (fun a b => expPullbackMetric g gi hC p x a b)))) := by
+    funext x
+    simp only [expPullbackMetricInv, ContinuousLinearMap.apply_apply, ContinuousLinearMap.proj_apply]
+  rw [heq]
+  exact hfull
+
+/-- **(β2), STEP 1 — the pullback Christoffel derivative, with the smooth inverse discharged.**
+    Instantiating `pd_christoffel_expPullback_zero` at `gtildeInv := expPullbackMetricInv` (the genuine
+    matrix inverse of `g̃`, built in (β1)) and discharging its `hgi0`/`hgi_diff` hypotheses by
+    `expPullbackMetricInv_zero` / `expPullbackMetricInv_differentiableAt`:
+      `∂_l Γ̃^i_{jk}(0) = ½ ∑_α g⁻¹(p)^{iα}·(∂_l∂_j g̃_{αk} + ∂_l∂_k g̃_{αj} − ∂_l∂_α g̃_{jk})(0)`.
+    This is the fully-instantiated analytic half of the bridge — the LHS is now the derivative of the
+    ACTUAL Christoffel symbol of the pullback metric `g̃` (with its own inverse), no carried inverse
+    field.  The remaining step to `rnc_christoffel_linearJet` is the pure `rncDΓ` `Finset` algebra
+    (substitute the closed `∂²g̃(0)` and match `rncDΓ` via `christoffel_lower` + `a3rawArr_contract_eq_a3`). -/
+theorem pd_christoffel_expPullbackInv_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (i j k l : Fin n) :
+    pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i j k x) l 0
+      = (1 / 2) * ∑ α, gi p i α *
+          (pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+            + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+            - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0) :=
+  pd_christoffel_expPullback_zero g gi hC p (expPullbackMetricInv g gi hC p) hsymm hinv hg
+    (expPullbackMetricInv_zero g gi hC p hinv)
+    (expPullbackMetricInv_differentiableAt g gi hC p hinv hg) i j k l
+
+/-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
 * **The RNC value / first-order / connection jets of `g̃` at `0` are now PROVED** (all axiom-clean,
@@ -1792,29 +1971,50 @@ theorem pd_christoffel_expPullback_zero (g gi : Point n → Fin n → Fin n → 
         `∂_l Γ̃^i_{jk}(0) = ½ ∑_α g⁻¹(p)^{iα}·(∂_l∂_j g̃_{αk} + ∂_l∂_k g̃_{αj} − ∂_l∂_α g̃_{jk})(0)`.  The
         `∂g̃⁻¹` terms drop because they multiply `∂g̃(0)=0`; the surviving `gi p` factor multiplies the
         second-jet bracket.
-  **THE REMAINING (β) RESIDUAL — the pure `rncDΓ` algebra + the pullback-inverse construction.**
-    (β1) Construct the smooth pullback inverse `gtildeInv := expPullbackMetricInv` (matrix inverse of
-         `g̃` near `0`) and prove `gtildeInv(0) = gi p` and differentiability at `0` (the hypotheses of
-         `pd_christoffel_expPullback_zero`).  NOT YET DEFINED.
-    (β2) Substitute the closed `∂²g̃(0)` (via `pd2_expPullbackMetric_at_zero` +
-         `pd_pd_mul3_zero`, with the factor jets `g(p)`, `J(0)=δ`, `∂J(0)` and the two SECOND jets now
-         supplied by (α1)+(α2)) into the `½ ∑_α gi p^{iα}·(…)` combination of `pd_christoffel_expPullback_zero`,
-         and match `rncDΓ (christoffel g gi ··p) (pd (christoffel g gi ··) ·p)` via `christoffel_lower`
-         (metric compatibility) + `a3rawArr_contract_eq_a3` (`QIQTH.RNCGauge`/`RNCGaugeExp`).  The `∂²g`
-         ambient blocks (from (α1)) cancel against the metric-compatibility contractions, leaving the
-         pure `Γ,∂Γ` combination `rncDΓ`.  This is finite `Finset`/algebra — no rung past Rung 3, no new
-         analytic input — but a large multi-lemma assembly.  (Requires `import QIQTH.RNCGauge`.)
-  VERDICT: (α1), (α2) [the two irreducible second-jet inputs] AND (β)-analytic-half
-  [`pd_christoffel_expPullback_zero`] are all LANDED axiom-clean, exceeding the guaranteed floor.  What
-  remains for the full `rnc_christoffel_linearJet` bridge is (β1) the smooth pullback-inverse
-  construction + (β2) the pure `rncDΓ` algebraic match (the `∂²g`-cancellation via `christoffel_lower` +
-  the `a3rawArr` reindexing) — a reachable finite assembly, not a deep obstruction.  Checkpoints landed:
+  **THE REMAINING (β) RESIDUAL — the pure `rncDΓ` algebra.  (β1) LANDED; (β2) CHECKPOINTED.**
+    (β1) **LANDED axiom-clean** — the smooth pullback inverse `expPullbackMetricInv` (the `(μ,α)` entry of
+         the operator inverse `Ring.inverse (matToCLM g̃(x))` in the ring `Point n →L[ℝ] Point n`) with
+         `expPullbackMetricInv_zero` (`g̃⁻¹(0) = gi p`, via `matToCLM (g p)` being a unit with inverse
+         `matToCLM (gi p)`, `gi_mul_g_eq` supplying the left-inverse from `mul_eq_one_comm`) and
+         `expPullbackMetricInv_differentiableAt` (`Ring.inverse` is `C^∞` at the unit,
+         `contDiffAt_ringInverse`, composed with the differentiable operator field whose entries are
+         `C²`).  These discharge `hgi0`/`hgi_diff`, giving **`pd_christoffel_expPullbackInv_zero`** — the
+         fully-instantiated analytic half:
+           `∂_l Γ̃^i_{jk}(0) = ½ ∑_α g⁻¹(p)^{iα}·(∂_l∂_j g̃_{αk} + ∂_l∂_k g̃_{αj} − ∂_l∂_α g̃_{jk})(0)`,
+         with `Γ̃` the ACTUAL Christoffel symbol of `g̃` paired with its own inverse `g̃⁻¹`.
+    (β2) **CHECKPOINTED (not yet closed).**  Exactly ONE algebraic identity remains for the full bridge
+         `rnc_christoffel_linearJet`:
+           `rncDΓ (fun i j k => christoffel g gi i j k p)
+                  (fun l i j k => pd (fun z => christoffel g gi i j k z) l p) l i j k
+             = pd (fun x => christoffel (expPullbackMetric g gi hC p)
+                     (expPullbackMetricInv g gi hC p) i j k x) l 0`.
+         ROUTE (all inputs now present, PURE finite `Finset` algebra, NO analytic input past Rung 3):
+         start from `pd_christoffel_expPullbackInv_zero` (RHS above ⟶ `½ ∑_α gi p^{iα}·(…∂²g̃…)`), then
+         expand each of the three `∂²g̃(0)` brackets via `pd2_expPullbackMetric_at_zero`
+         (`∂_l∂_m g̃_{ij}(0) = ∑_{a,b} ∂_l∂_m(g(exp·)_{ab}·J_i^a·J_j^b)(0)`) and `pd_pd_mul3_zero` (the
+         nine-term twice-Leibniz), substituting the factor jets: value `g(p)` / `J(0)=δ` (`fderiv_expMap_zero`),
+         first jets `∂g(p)` (chain, `pd_comp_expMap_zero`) and `∂J(0)=½(−Γ−Γ)` (`pd_jacobian_expMap_zero`),
+         and the two SECOND jets `∂²(g∘exp)(0)` = (α1) `pd2_metric_comp_expMap_zero` and `∂²J(0)` = (α2)
+         `pd2_jacobian_expMap_zero`.  Then the `∂²g` ambient blocks (the `∂_l∂_m g_{ab}(p)` term of (α1))
+         cancel against the metric-compatibility contraction `christoffel_lower`, and the surviving
+         `Γ,∂Γ` cubic reindexes onto `rncDΓ` via `a3rawArr_contract_eq_a3` (`QIQTH.RNCGaugeExp`).  This is
+         a LARGE multi-lemma `Finset`/`ring` collection (≈ the size of `pd2_expPullbackMetric_at_zero`
+         times the nine `pd_pd_mul3` terms times three brackets), a reachable finite assembly, NOT a deep
+         obstruction — but not closed in this session.  (When resumed: `import QIQTH.RNCGauge`/`RNCGaugeExp`.)
+  VERDICT: (α1), (α2) [the two irreducible second-jet inputs], (β)-analytic-half
+  [`pd_christoffel_expPullback_zero`] AND (β1) [`expPullbackMetricInv` + its 0-jet/differentiability +
+  the instantiated `pd_christoffel_expPullbackInv_zero`] are all LANDED axiom-clean, exceeding the
+  guaranteed floor.  What remains for the full `rnc_christoffel_linearJet` bridge is ONLY (β2) the pure
+  `rncDΓ` algebraic match (the `∂²g`-cancellation via `christoffel_lower` + the `a3rawArr` reindexing) —
+  a reachable finite assembly, not a deep obstruction.  Checkpoints landed:
   value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`
   grounding (`expJetD3_zero_closed`/`expJetD3_zero_diagonal`), the closed `pd²g̃(0)` twice-Leibniz
   (`pd_pd_mul3_zero`/`pd2_expPullbackMetric_at_zero`), the two second-jet closed forms
-  (`pd2_metric_comp_expMap_zero`/`pd2_jacobian_expMap_zero`), and the Christoffel-derivative reduction
-  (`pd_christoffel_expPullback_zero`).
+  (`pd2_metric_comp_expMap_zero`/`pd2_jacobian_expMap_zero`), the Christoffel-derivative reduction
+  (`pd_christoffel_expPullback_zero`), and (β1) the smooth pullback inverse + its instantiation
+  (`expPullbackMetricInv`, `expPullbackMetricInv_zero`, `expPullbackMetricInv_differentiableAt`,
+  `pd_christoffel_expPullbackInv_zero`).
 
 ### REGULARITY LEDGER (R3→κ) — recorded, not `sorry`
 
