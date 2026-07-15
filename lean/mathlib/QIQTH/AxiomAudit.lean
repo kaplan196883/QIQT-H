@@ -10496,6 +10496,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.expJetD3_zero_integral
 #print axioms QIQTH.PullbackMetric.expJetD3_zero_closed
 #print axioms QIQTH.PullbackMetric.expJetD3_zero_diagonal
+-- ★ PARAMETRIX P1 R3→κ (a4c floor) — the twice-Leibniz ∂²g̃(0) + C²-local pd machinery (PullbackMetric.lean).
+-- pd_pd_eq_of_contDiffAt2 (C²-local ∂ᵢ∂ⱼf(0)=D²f(0)(eᵢ,eⱼ) — the ContDiffAt-2 analogue of Curvature.pd_pd_eq, since
+-- g̃ is only C²), PdiffAt_pd_zero_of_contDiffAt2, contDiffAt2_expPullbackMetric_zero (g̃∈ContDiffAt ℝ 2 at 0),
+-- pd2_expPullbackMetric_eq_fderiv2, pd_pd_mul3_zero (generic twice-Leibniz ∂_l∂_m(f₁f₂f₃)(0) for C²-at-0 factors),
+-- and ★ pd2_expPullbackMetric_at_zero: the closed ∂_l∂_m g̃_{ij}(0) = ∑_{a,b} ∂_l∂_m(g(exp·)_{ab}·Jᵢ^a·Jⱼ^b)(0)
+-- (∂² commutes through the finite ∑; each summand via pd_pd_mul3_zero, factor jets = the landed RNC values
+-- g(p)/J(0)=δ/∂J(0)=½(−Γ−Γ), irreducible 2nd-jet inputs = ∂²(g∘exp)(0), ∂²J(0)).  HONEST — the bridge
+-- rnc_christoffel_linearJet is CHECKPOINTED: residuals (α) the two 2nd-jet closed forms [∂²J(0)=expJetD3(0)
+-- slot-match, ∂²(g∘exp)(0) chain-rule] + (β) the metric-Christoffel ∂Γ̃(0)→rncDΓ match — reachable assembly, C²/
+-- third-jet, no Rung 4.  Does NOT yet give the bridge / κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT
+-- numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.pd_pd_eq_of_contDiffAt2
+#print axioms QIQTH.PullbackMetric.contDiffAt2_expPullbackMetric_zero
+#print axioms QIQTH.PullbackMetric.pd2_expPullbackMetric_eq_fderiv2
+#print axioms QIQTH.PullbackMetric.PdiffAt_pd_zero_of_contDiffAt2
+#print axioms QIQTH.PullbackMetric.pd_pd_mul3_zero
+#print axioms QIQTH.PullbackMetric.pd2_expPullbackMetric_at_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
