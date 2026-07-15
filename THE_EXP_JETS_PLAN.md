@@ -572,6 +572,16 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-15 — R3→κ BRIDGE (β1) smooth pullback inverse + (β2 step1) LANDED (PUSHED `b36117c5`, [AF] std-3,
+  `PullbackMetric.lean`):** (β1) GUARANTEED FLOOR fully closed — `elemCLM`/`matToCLM` (matrix field = finite sum of
+  scaled matrix-unit operators on `Point n →L Point n`) + `matToCLM_mul_eq_one` + `gi_mul_g_eq`; ★ `expPullbackMetricInv`
+  (g̃⁻¹ near 0 via `Ring.inverse` in the OPERATOR RING at the unit `matToCLM(g p)` — sidesteps matrix-norm instances),
+  `expPullbackMetricInv_zero` (=gi p), `expPullbackMetricInv_differentiableAt` (via `contDiffAt_ringInverse`) — discharge
+  the gtildeInv/hgi0/hgi_diff hyps. (β2 step1) `pd_christoffel_expPullbackInv_zero` = the instantiation ⟹ derivative of
+  the ACTUAL Γ̃ with its own inverse. ⚠ full bridge `rnc_christoffel_linearJet` now a SINGLE remaining CHECKPOINTED
+  identity (NOT sorry'd): pure finite Finset/ring algebra (≈3 brackets × 9 pd_pd_mul3_zero terms × ∑_{a,b}) subst
+  ∂²g̃(0) via (α1)+(α2), cancel ∂²g via `christoffel_lower`, reindex onto rncDΓ via `a3rawArr_contract_eq_a3`. NEXT =
+  finish (β2) ⟹ the bridge ⟹ the FINAL κ=1/6 brick.
 - **★ 2026-07-15 — R3→κ BRIDGE RESIDUALS (α1)+(α2)+(β-analytic) LANDED (PUSHED `038967a9`, [AF] std-3,
   `PullbackMetric.lean`):** the two irreducible 2nd-jets of the bridge are CLOSED plus the metric-Christoffel
   differentiation half. `pd_comp_expMap_zero` (general chain-rule ∂_l(h∘exp)(0)); **(α1) `pd2_metric_comp_expMap_zero`**
