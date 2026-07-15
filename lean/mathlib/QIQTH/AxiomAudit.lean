@@ -10245,6 +10245,16 @@ namespace QIQTH.AxiomAudit
 -- obligation hfd2 = ContDiff¹(fderiv²exp_p) (the expJet3Fund-based sub-campaign).  HONEST: reduction only; does NOT
 -- discharge hfd2, does NOT give ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_three_of_fderiv2_contDiffOn_one
+-- ★ PARAMETRIX P1 RUNG 3 (capstone residual-A) — the Jet₃ residual ODE + Grönwall value bound (ExpMapContDiff3.lean).
+-- expJet3_residual_hasDerivWithinAt: for S(t)=Qw t−Qv t−R t (Qw/Qv = 2nd-variation solutions for v+l/v, R = the
+-- expJet3Fund 3rd variation), S'=DF(Y_v)(S)+ρ with ρ=(DF(Y_w)−DF(Y_v))(Qw)+(expJet2Rhs_w−expJet2Rhs_v−expJet3Rhs),
+-- S(0)=0 — mirror of expJet2_residual_hasDerivWithinAt one level up (simpler: Qv/Qw/R already vector curves, just
+-- two HasDerivWithinAt.sub + map_sub + abel).  expJet3_residual_bound: gronwall_vec_residual ⟹ ‖Qw 1−Qv 1−R 1‖ ≤
+-- ρ·e^{Kstar}.  HONEST: the residual estimate REDUCED to a [0,1]-bound ρ on ‖ρ(t)‖; the quadratic ρ=C‖l‖² (which
+-- closes ContDiff¹(fderiv²exp_p) hence Rung 3) is the NEXT brick.  Does NOT give ContDiff³/κ=1/6/parametrix/general
+-- a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet3_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet3_residual_bound
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
