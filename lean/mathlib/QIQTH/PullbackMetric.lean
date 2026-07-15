@@ -498,6 +498,100 @@ theorem fderiv_geodesicField_expTube_zero (g gi : Point n → Fin n → Fin n �
   rw [expTube_zero g gi hC p t ht]
   exact (hasStrictFDerivAt_geodesicField g gi hC p).hasFDerivAt.fderiv
 
+/-- **Small-context CLM affine-path derivative.**  The affine path `τ ↦ 1 + τ·L` through the
+    operator algebra has the CONSTANT derivative `L`: the linear part `τ·L` differentiates to `L`
+    (`HasDerivWithinAt.smul_const`, then `one_smul`), and the constant `1` drops
+    (`HasDerivWithinAt.const_add`).  Kept abstract in `F` (tiny context) so the CLM
+    `HasDerivWithinAt`/instance search runs bare. -/
+theorem hasDerivWithinAt_id_add_smul {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+    (L : F →L[ℝ] F) (s : Set ℝ) (t : ℝ) :
+    HasDerivWithinAt (fun τ : ℝ => ContinuousLinearMap.id ℝ F + τ • L) L s t := by
+  have h1 : HasDerivWithinAt (fun τ : ℝ => τ • L) L s t := by
+    simpa using (hasDerivWithinAt_id t s).smul_const L
+  simpa using h1.const_add (ContinuousLinearMap.id ℝ F)
+
+/-- **Small-context operator-propagator uniqueness for a NILPOTENT constant coefficient.**  Any
+    `Φ : ℝ → (F →L[ℝ] F)` solving the homogeneous operator ODE `Φ'(t) = L∘Φ(t)`, `Φ(0) = 1`, with a
+    coefficient `L` that is nilpotent of order 2 (`L∘L = 0`), equals the finite polynomial
+    `Φ(t) = 1 + t·L` on `[0,1]`.
+
+    Proof.  The model `Ψ(t) = 1 + t·L` has derivative `L` (`hasDerivWithinAt_id_add_smul`) and solves
+    the same ODE: `L∘Ψ(t) = L∘1 + t·(L∘L) = L` (nilpotency).  Hence `S = Φ − Ψ` has `S(0) = 0` and the
+    homogeneous derivative `S'(t) = L∘S(t)`, so `‖S'(t)‖ ≤ ‖L‖·‖S(t)‖`; the homogeneous Grönwall
+    (`gronwall_Icc01_all`, `ε = δ = 0`, closed by `gronwallBound_ε0_δ0`) forces `‖S t‖ ≤ 0`, i.e.
+    `Φ = Ψ`.  Abstract in `F` (tiny context) — the CLM `whnf`/instance search runs bare, away from the
+    heavy `Point n × Point n` capstone context. -/
+theorem clm_propagator_nilpotent_unique {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+    (L : F →L[ℝ] F) (hL : L.comp L = 0)
+    (Φ : ℝ → (F →L[ℝ] F))
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ F)
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (L.comp (Φ t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1, Φ t = ContinuousLinearMap.id ℝ F + t • L := by
+  set S : ℝ → (F →L[ℝ] F) :=
+    fun s => Φ s - (ContinuousLinearMap.id ℝ F + s • L) with hSdef
+  -- `L∘Ψ(t) = L` via nilpotency `L∘L = 0`.
+  have hΨfield : ∀ t : ℝ, L.comp (ContinuousLinearMap.id ℝ F + t • L) = L := by
+    intro t
+    rw [ContinuousLinearMap.comp_add, ContinuousLinearMap.comp_id,
+      ContinuousLinearMap.comp_smul, hL, smul_zero, add_zero]
+  have hS0 : S 0 = 0 := by
+    simp only [hSdef, zero_smul, add_zero, hΦ0, sub_self]
+  -- `S` solves the homogeneous ODE `S'(t) = L∘S(t)`.
+  have hSderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt S (L.comp (S t)) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have hΨd : HasDerivWithinAt
+        (fun s => ContinuousLinearMap.id ℝ F + s • L) L (Set.Icc (0 : ℝ) 1) t :=
+      hasDerivWithinAt_id_add_smul L _ t
+    have hsub := (hΦd t ht).sub hΨd
+    have hval : L.comp (S t) = L.comp (Φ t) - L := by
+      simp only [hSdef, ContinuousLinearMap.comp_sub, hΨfield]
+    rw [hval]
+    exact hsub
+  have hbound : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖L.comp (S t)‖ ≤ ‖L‖ * ‖S t‖ + 0 := by
+    intro t _
+    have h := L.opNorm_comp_le (S t)
+    linarith [h]
+  have hgr := gronwall_Icc01_all S (fun t => L.comp (S t))
+    0 ‖L‖ 0 hSderiv (by rw [hS0]; simp) hbound
+  intro t ht
+  have hle : ‖S t‖ ≤ 0 := by
+    have := hgr t ht
+    rwa [gronwallBound_ε0_δ0] at this
+  have hSt : S t = 0 := norm_le_zero_iff.mp hle
+  rw [hSdef] at hSt
+  exact sub_eq_zero.mp hSt
+
+set_option maxHeartbeats 800000 in
+/-- **(a1) — the CLOSED first-variation propagator at `v = 0`.**  ANY fundamental solution `Φ` of
+    the Jacobi operator ODE `Φ' = Ψ₀(t)(Φ) = DF(Y₀ t)∘Φ`, `Φ(0) = 1`, along the constant `v = 0`
+    tube is the finite polynomial `Φ₀(t) = 1 + t·A₀`, with `A₀ = linF` the nilpotent
+    (`A₀² = 0`) equilibrium linearization.  This is the operator-propagator uniqueness brick (a1)
+    gating the closed-form `expJetD3 … 0`.
+
+    Proof.  Along the `v = 0` tube the Jacobi coefficient is the CONSTANT nilpotent linearization
+    `Ψ₀(t)(M) = DF(Y₀ t)∘M = linF∘M` (`fderiv_geodesicField_expTube_zero`, `expJetPsi_apply`), with
+    `linF∘linF = 0` (`linF_comp_linF`); the abstract nilpotent operator-propagator uniqueness
+    `clm_propagator_nilpotent_unique` then gives `Φ₀(t) = 1 + t·linF`. -/
+theorem expFund_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p 0 t (Φ t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)) := by
+  -- convert the ODE coefficient to the constant nilpotent `linF∘·`, then hand to the abstract brick.
+  have hΦd' : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ ((linF (n := n)).comp (Φ t)) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have he : expJetPsi g gi hC p 0 t (Φ t) = (linF (n := n)).comp (Φ t) := by
+      rw [expJetPsi_apply, fderiv_geodesicField_expTube_zero g gi hC p t ht]
+    rw [← he]; exact hΦd t ht
+  exact clm_propagator_nilpotent_unique linF linF_comp_linF Φ hΦ0 hΦd'
+
 /-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 

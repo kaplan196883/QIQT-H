@@ -10429,6 +10429,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.expTube_zero
 #print axioms QIQTH.PullbackMetric.linF_comp_linF
 #print axioms QIQTH.PullbackMetric.fderiv_geodesicField_expTube_zero
+-- ★ PARAMETRIX P1 R3→κ (a1) — the closed first-variation propagator at v=0 (PullbackMetric.lean).
+-- expFund_zero_eq: for the expJetFund witness Φ at v=0, ∀t∈Icc 0 1, Φ t = id + t•linF (the closed propagator
+-- Φ_0(t)=exp(tA₀)=id+tA₀).  Helpers: hasDerivWithinAt_id_add_smul (d/dt(1+t·L)=L) + clm_propagator_nilpotent_unique
+-- (F-ABSTRACT operator-propagator uniqueness: Φ'=L∘Φ, Φ(0)=id, L²=0 ⟹ Φ=1+t·L, via the homogeneous operator-Grönwall
+-- gronwall_Icc01_all + gronwallBound_ε0_δ0; abstracted in F to dodge the concrete-CLM whnf timeout).  The ONE
+-- genuinely-missing brick gating the closed expJetD3(0): now DONE.  HONEST: (a2)/(a3) the 2nd/3rd-variation
+-- constant-coeff integrals + (a4) the a₃ match + the bridge remain before κ=1/6.  Does NOT yet give κ=1/6, NOT the
+-- parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hasDerivWithinAt_id_add_smul
+#print axioms QIQTH.PullbackMetric.clm_propagator_nilpotent_unique
+#print axioms QIQTH.PullbackMetric.expFund_zero_eq
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
