@@ -601,4 +601,484 @@ theorem heat_a1_of_gauge (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
   -- Feed the DERIVED κ = 1/6 into the (moment-matrix-derived) a₁ assembly.
   exact heat_a1_of_RNC_derived t ht ξ m (fun i j => ricci g gi i j 0) κ hκ Rscl hR
 
+/-! ### FINITE-REGULARITY (`C²`) VARIANTS of the RNC → `a₁` chain
+
+    The `⊤`-regularity theorems above (`heat_a1_of_gauge` and its callees) demand `g, gi ∈ C^∞`.
+    Their proofs use only `≤ 2` derivatives of `g` and `≤ 1` derivative of `gi` at `0`, so they are
+    weakenable to the FINITE regularity the pullback metric `g̃ = expPullbackMetric` actually
+    satisfies: `g̃ ∈ ContDiffAt ℝ 2` at `0` (`contDiffAt2_expPullbackMetric_zero`) and its inverse
+    is only `C¹`/differentiable at `0` (`expPullbackMetricInv_differentiableAt`).
+
+    Below we add `_c2` variants with hypotheses `hg2 : ∀ a b, ContDiffAt ℝ 2 (g·· a b) 0` and
+    `hgi1 : ∀ a b, ContDiffAt ℝ 1 (gi·· a b) 0`, proved by the SAME proof bodies with the analytic
+    regularity primitives swapped for their local `ContDiffAt`/`DifferentiableAt` forms.  The
+    `⊤` originals are UNTOUCHED.  This is independent of the pullback-gauge reindex work and does
+    NOT itself give `κ = 1/6` (that needs `heat_a1_of_gauge_c2` instantiated at `g̃` with the
+    unconditional gauge, separately blocked on the `g·Γ·Γ` reindex). -/
+
+/-- Coordinate partial differentiability from Fréchet differentiability at a point (local form,
+    not needing global `ContDiff`).  Self-contained copy of the technique used downstream in
+    `QIQTH.PullbackMetric.pdiffAt_of_differentiableAt`. -/
+theorem pdiffAt_of_differentiableAt (f : Point n → ℝ) (l : Fin n) (x : Point n)
+    (hf : DifferentiableAt ℝ f x) : PdiffAt f l x := by
+  have hx : DifferentiableAt ℝ f ((Function.update x l) (x l)) := by
+    rw [Function.update_eq_self]; exact hf
+  exact hx.comp (x l) (hasDerivAt_update x l (x l)).differentiableAt
+
+/-- `PdiffAt` congruence on a neighbourhood — if `f = h` near `x` then `PdiffAt f = PdiffAt h`. -/
+theorem PdiffAt_congr_nhds {f h : Point n → ℝ} (l : Fin n) (x : Point n)
+    (hfh : ∀ᶠ y in nhds x, f y = h y) (H : PdiffAt h l x) : PdiffAt f l x := by
+  unfold PdiffAt at *
+  have htend : Filter.Tendsto (fun t => Function.update x l t) (nhds (x l)) (nhds x) := by
+    have hc := (hasDerivAt_update x l (x l)).continuousAt.tendsto
+    rw [Function.update_eq_self] at hc
+    exact hc
+  exact H.congr_of_eventuallyEq (htend.eventually hfh)
+
+/-- `C²`-localised analogue of `Curvature.pd_pd_eq`: `∂_i∂_j f(0) = D²f(0)(e_i, e_j)`, needing only
+    `ContDiffAt ℝ 2 f 0`. -/
+theorem pd_pd_eq_of_contDiffAt2 (f : Point n → ℝ) (i j : Fin n)
+    (hf : ContDiffAt ℝ 2 f 0) :
+    pd (fun y => pd f j y) i 0
+      = fderiv ℝ (fderiv ℝ f) 0 (Pi.single i 1) (Pi.single j 1) := by
+  have hdf_ev : ∀ᶠ y in nhds (0 : Point n), DifferentiableAt ℝ f y := by
+    have hev : ∀ᶠ y in nhds (0 : Point n), ContDiffAt ℝ 2 f y := hf.eventually (by norm_num)
+    filter_upwards [hev] with y hy using hy.differentiableAt (by norm_num)
+  have hfd2 : DifferentiableAt ℝ (fun y => fderiv ℝ f y) 0 :=
+    (hf.fderiv_right (m := 1) (by norm_num)).differentiableAt (by norm_num)
+  have e1 : (fun y => pd f j y) =ᶠ[nhds (0 : Point n)] (fun y => (fderiv ℝ f y) (Pi.single j 1)) := by
+    filter_upwards [hdf_ev] with y hy using pd_eq_fderiv f j y hy
+  rw [pd_congr i 0 e1,
+      pd_eq_fderiv _ i 0 (hfd2.clm_apply (differentiableAt_const _)),
+      fderiv_clm_apply hfd2 (differentiableAt_const _)]
+  simp
+
+/-- Second-order local partial differentiability at `0` from `ContDiffAt ℝ 2` — the `C²`-localised
+    analogue of `Curvature.PdiffAt_pd`. -/
+theorem PdiffAt_pd_zero_of_contDiffAt2 (f : Point n → ℝ) (m l : Fin n)
+    (hf : ContDiffAt ℝ 2 f 0) : PdiffAt (fun y => pd f m y) l 0 := by
+  have hfd2 : DifferentiableAt ℝ (fun y => fderiv ℝ f y) 0 :=
+    (hf.fderiv_right (m := 1) (by norm_num)).differentiableAt (by norm_num)
+  have hdf_ev : ∀ᶠ y in nhds (0 : Point n), DifferentiableAt ℝ f y := by
+    have hev : ∀ᶠ y in nhds (0 : Point n), ContDiffAt ℝ 2 f y := hf.eventually (by norm_num)
+    filter_upwards [hev] with y hy using hy.differentiableAt (by norm_num)
+  have e1 : (fun y => pd f m y) =ᶠ[nhds (0 : Point n)]
+      (fun y => (fderiv ℝ f y) (Pi.single m 1)) := by
+    filter_upwards [hdf_ev] with y hy using pd_eq_fderiv f m y hy
+  exact PdiffAt_congr_nhds l 0 e1
+    (pdiffAt_of_differentiableAt _ l 0 (hfd2.clm_apply (differentiableAt_const _)))
+
+/-- `C²`-localised **Schwarz** (`Curvature.pd_comm`): mixed partials commute at `0` from
+    `ContDiffAt ℝ 2 f 0`. -/
+theorem pd_comm_of_contDiffAt2 (f : Point n → ℝ) (i j : Fin n) (hf : ContDiffAt ℝ 2 f 0) :
+    pd (fun y => pd f j y) i 0 = pd (fun y => pd f i y) j 0 := by
+  rw [pd_pd_eq_of_contDiffAt2 f i j hf, pd_pd_eq_of_contDiffAt2 f j i hf]
+  exact (hf.isSymmSndFDerivAt (by simp)).eq _ _
+
+/-- `C²` variant of `pd_christoffel_origin`: needs only `g ∈ ContDiffAt ℝ 2` and `gi ∈ ContDiffAt ℝ 1`
+    at `0`. -/
+theorem pd_christoffel_origin_c2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hgi1 : ∀ a b, ContDiffAt ℝ 1 (fun y => gi y a b) 0)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (ν lam mu a : Fin n) :
+    pd (fun y => christoffel g gi ν lam mu y) a 0
+      = (1 / 2) * (pd (fun y => pd (fun w => g w ν mu) lam y) a 0
+                   + pd (fun y => pd (fun w => g w ν lam) mu y) a 0
+                   - pd (fun y => pd (fun w => g w lam mu) ν y) a 0) := by
+  have hBP : ∀ α, PdiffAt (fun y => pd (fun w => g w α mu) lam y
+      + pd (fun w => g w α lam) mu y - pd (fun w => g w lam mu) α y) a 0 := fun α =>
+    ((PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w α mu) lam a (hg2 α mu)).add
+      (PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w α lam) mu a (hg2 α lam))).sub
+      (PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w lam mu) α a (hg2 lam mu))
+  have hgiP : ∀ α, PdiffAt (fun y => gi y ν α) a 0 := fun α =>
+    pdiffAt_of_differentiableAt _ a 0 ((hgi1 ν α).differentiableAt (by norm_num))
+  have hsummand : ∀ α, pd (fun y => gi y ν α * (pd (fun w => g w α mu) lam y
+        + pd (fun w => g w α lam) mu y - pd (fun w => g w lam mu) α y)) a 0
+      = gi 0 ν α * (pd (fun y => pd (fun w => g w α mu) lam y) a 0
+          + pd (fun y => pd (fun w => g w α lam) mu y) a 0
+          - pd (fun y => pd (fun w => g w lam mu) α y) a 0) := by
+    intro α
+    rw [pd_mul (fun y => gi y ν α) _ a 0 (hgiP α) (hBP α),
+        pd_sub _ _ a 0 ((PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w α mu) lam a (hg2 α mu)).add
+          (PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w α lam) mu a (hg2 α lam)))
+          (PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w lam mu) α a (hg2 lam mu)),
+        pd_add _ _ a 0 (PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w α mu) lam a (hg2 α mu))
+          (PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w α lam) mu a (hg2 α lam))]
+    simp only [hdg0 α mu lam, hdg0 α lam mu, hdg0 lam mu α]
+    ring
+  simp only [christoffel]
+  rw [pd_const_mul _ _ a 0 (PdiffAt_sum univ _ a 0 (fun α _ => (hgiP α).mul (hBP α))),
+      pd_sum univ _ a 0 (fun α _ => (hgiP α).mul (hBP α)),
+      Finset.sum_congr rfl (fun α _ => hsummand α)]
+  simp only [hgi0, Matrix.one_apply, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq,
+    Finset.mem_univ, if_true]
+
+/-- `C²` variant of `sum_pd_christoffel_trace`. -/
+theorem sum_pd_christoffel_trace_c2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hgi1 : ∀ a b, ContDiffAt ℝ 1 (fun y => gi y a b) 0)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (c d : Fin n) :
+    (∑ ν, pd (fun y => christoffel g gi ν ν d y) c 0)
+      = (1 / 2) * ∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0 := by
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro ν _
+  rw [pd_christoffel_origin_c2 g gi hg2 hgi1 hgi0 hdg0 ν ν d c]
+  ring
+
+/-- `C²` variant of `sum_riemann_ii_zero`. -/
+theorem sum_riemann_ii_zero_c2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hgi1 : ∀ a b, ContDiffAt ℝ 1 (fun y => gi y a b) 0)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (c d : Fin n) :
+    (∑ ν, riemann g gi ν ν c d 0) = 0 := by
+  have hL : (∑ ν, pd (fun y => christoffel g gi ν d ν y) c 0)
+      = (1 / 2) * ∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0 := by
+    rw [show (∑ ν, pd (fun y => christoffel g gi ν d ν y) c 0)
+          = ∑ ν, pd (fun y => christoffel g gi ν ν d y) c 0 from
+        Finset.sum_congr rfl (fun ν _ => by
+          rw [show (fun y => christoffel g gi ν d ν y) = (fun y => christoffel g gi ν ν d y) from
+            funext (fun y => christoffel_symm g gi hsymm ν d ν y)])]
+    exact sum_pd_christoffel_trace_c2 g gi hg2 hgi1 hgi0 hdg0 c d
+  have hR : (∑ ν, pd (fun y => christoffel g gi ν c ν y) d 0)
+      = (1 / 2) * ∑ a, pd (fun y => pd (fun w => g w a a) c y) d 0 := by
+    rw [show (∑ ν, pd (fun y => christoffel g gi ν c ν y) d 0)
+          = ∑ ν, pd (fun y => christoffel g gi ν ν c y) d 0 from
+        Finset.sum_congr rfl (fun ν _ => by
+          rw [show (fun y => christoffel g gi ν c ν y) = (fun y => christoffel g gi ν ν c y) from
+            funext (fun y => christoffel_symm g gi hsymm ν c ν y)])]
+    exact sum_pd_christoffel_trace_c2 g gi hg2 hgi1 hgi0 hdg0 d c
+  have hswap : (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0)
+      = (∑ a, pd (fun y => pd (fun w => g w a a) c y) d 0) :=
+    Finset.sum_congr rfl (fun a _ => pd_comm_of_contDiffAt2 (fun w => g w a a) c d (hg2 a a))
+  rw [Finset.sum_congr rfl (fun ν _ => riemann_at_origin g gi hdg0 ν ν c d),
+      Finset.sum_sub_distrib, hL, hR, hswap]
+  ring
+
+/-- `C²` variant of `rnc_htr_of_gauge`. -/
+theorem rnc_htr_of_gauge_c2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hgi1 : ∀ a b, ContDiffAt ℝ 1 (fun y => gi y a b) 0)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (c d : Fin n) :
+    (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0) = -(2 / 3) * ricci g gi c d 0 := by
+  have key : ∀ p q : Fin n,
+      (∑ a, pd (fun y => pd (fun w => g w a a) q y) p 0) = -(2 / 3) * ricci g gi q p 0 := by
+    intro p q
+    have hc1 := sum_pd_christoffel_trace_c2 g gi hg2 hgi1 hgi0 hdg0 p q
+    have hsolve : (∑ ν, pd (fun y => christoffel g gi ν ν q y) p 0)
+        = (1 / 3) * ((∑ ν, riemann g gi ν ν p q 0) + (∑ ν, riemann g gi ν q p ν 0)) := by
+      rw [mul_add, Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl (fun ν _ => by
+        rw [pd_christoffel_solve g gi hdg0 hsymm hgauge ν p ν q]; ring)
+    have h2a := sum_riemann_ii_zero_c2 g gi hg2 hgi1 hgi0 hdg0 hsymm p q
+    have h2b : (∑ ν, riemann g gi ν q p ν 0) = - ricci g gi q p 0 := by
+      rw [show (∑ ν, riemann g gi ν q p ν 0) = ∑ ν, (-1 : ℝ) * riemann g gi ν q ν p 0 from
+            Finset.sum_congr rfl (fun ν _ => by rw [riemann_antisymm g gi ν q p ν 0]; ring),
+          ← Finset.mul_sum]
+      simp only [ricci]; ring
+    rw [hc1] at hsolve
+    rw [h2a, h2b] at hsolve
+    linarith [hsolve]
+  have hsw : (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0)
+      = (∑ a, pd (fun y => pd (fun w => g w a a) c y) d 0) :=
+    Finset.sum_congr rfl (fun a _ => pd_comm_of_contDiffAt2 (fun w => g w a a) c d (hg2 a a))
+  rw [hsw]
+  exact key d c
+
+/-! #### `C²` det / √det atoms -/
+
+/-- A finite product of `ContDiffAt ℝ 2`-at-`x` fields is `ContDiffAt ℝ 2` — local analogue of
+    `contDiff_prod`. -/
+theorem contDiffAt_prod {ι : Type*} (s : Finset ι) (F : ι → Point n → ℝ) (x : Point n)
+    (hF : ∀ i ∈ s, ContDiffAt ℝ 2 (fun y => F i y) x) :
+    ContDiffAt ℝ 2 (fun y => ∏ i ∈ s, F i y) x := by
+  classical
+  induction s using Finset.induction with
+  | empty => simp only [Finset.prod_empty]; exact contDiffAt_const
+  | insert a s ha ih =>
+      simp only [Finset.prod_insert ha]
+      exact (hF a (Finset.mem_insert_self a s)).mul
+        (ih (fun i hi => hF i (Finset.mem_insert_of_mem hi)))
+
+/-- A finite product of `DifferentiableAt`-at-`x` fields is `DifferentiableAt` (fderiv finite-product
+    rule, general domain). -/
+theorem differentiableAt_finset_prod {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (F : ι → Point n → ℝ) (x : Point n)
+    (hF : ∀ i ∈ s, DifferentiableAt ℝ (fun y => F i y) x) :
+    DifferentiableAt ℝ (fun y => ∏ i ∈ s, F i y) x :=
+  (HasFDerivAt.finsetProd (fun i hi => (hF i hi).hasFDerivAt)).differentiableAt
+
+/-- `C²` variant of `det_contDiff`: `det ∘ g` is `ContDiffAt ℝ 2` at `0` when the entries are. -/
+theorem det_contDiffAt2 (g : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0) :
+    ContDiffAt ℝ 2 (fun y => Matrix.det (g y)) 0 := by
+  rw [show (fun y => Matrix.det (g y))
+        = (fun y => ∑ σ : Equiv.Perm (Fin n), (↑↑(Equiv.Perm.sign σ) : ℝ) * ∏ i, g y (σ i) i)
+      from funext (fun y => Matrix.det_apply' _)]
+  apply ContDiffAt.sum
+  intro σ _
+  exact contDiffAt_const.mul
+    (contDiffAt_prod univ (fun i y => g y (σ i) i) 0 (fun i _ => hg2 (σ i) i))
+
+/-- Local **finite-product Leibniz for `pd`** — the `DifferentiableAt`-at-`x` analogue of `pd_prod`. -/
+theorem pd_prod_diff {ι : Type*} [DecidableEq ι] (s : Finset ι) (F : ι → Point n → ℝ)
+    (c : Fin n) (x : Point n)
+    (hF : ∀ i ∈ s, DifferentiableAt ℝ (fun y => F i y) x) :
+    pd (fun y => ∏ i ∈ s, F i y) c x
+      = ∑ i ∈ s, pd (F i) c x * ∏ j ∈ s.erase i, F j x := by
+  classical
+  induction s using Finset.induction with
+  | empty => simp only [Finset.prod_empty, Finset.sum_empty]; exact pd_const 1 c x
+  | insert a s ha ih =>
+      have hFa : PdiffAt (F a) c x :=
+        pdiffAt_of_differentiableAt _ c x (hF a (Finset.mem_insert_self a s))
+      have hFs : ∀ i ∈ s, DifferentiableAt ℝ (fun y => F i y) x :=
+        fun i hi => hF i (Finset.mem_insert_of_mem hi)
+      have hprod : PdiffAt (fun y => ∏ i ∈ s, F i y) c x :=
+        pdiffAt_of_differentiableAt _ c x (differentiableAt_finset_prod s F x hFs)
+      simp only [Finset.prod_insert ha]
+      rw [pd_mul (F a) (fun y => ∏ i ∈ s, F i y) c x hFa hprod, ih hFs,
+          Finset.sum_insert ha, Finset.erase_insert ha, Finset.mul_sum]
+      congr 1
+      apply Finset.sum_congr rfl
+      intro i hi
+      have hia : i ≠ a := fun h => ha (h ▸ hi)
+      rw [Finset.erase_insert_of_ne (Ne.symm hia), Finset.prod_insert (by
+            simp only [Finset.mem_erase]; exact fun h => ha h.2)]
+      ring
+
+/-- Local (pointwise) first derivative of `det g` — the `DifferentiableAt`-at-`y` analogue of
+    `pd_det`. -/
+theorem pd_det_diff (g : Point n → Fin n → Fin n → ℝ) (d : Fin n) (y : Point n)
+    (hy : ∀ a b, DifferentiableAt ℝ (fun w => g w a b) y) :
+    pd (fun w => Matrix.det (g w)) d y
+      = ∑ σ : Equiv.Perm (Fin n), (↑↑(Equiv.Perm.sign σ) : ℝ)
+          * ∑ k, pd (fun w => g w (σ k) k) d y * ∏ i ∈ univ.erase k, g y (σ i) i := by
+  rw [show (fun w => Matrix.det (g w))
+        = (fun w => ∑ σ : Equiv.Perm (Fin n), (↑↑(Equiv.Perm.sign σ) : ℝ) * ∏ i, g w (σ i) i)
+      from funext (fun w => Matrix.det_apply' _)]
+  rw [pd_sum univ _ d y (fun σ _ => PdiffAt_const_mul _ _ d y
+        (pdiffAt_of_differentiableAt _ d y
+          (differentiableAt_finset_prod univ (fun i w => g w (σ i) i) y
+            (fun i _ => hy (σ i) i))))]
+  apply Finset.sum_congr rfl
+  intro σ _
+  rw [pd_const_mul _ _ d y (pdiffAt_of_differentiableAt _ d y
+        (differentiableAt_finset_prod univ (fun i w => g w (σ i) i) y (fun i _ => hy (σ i) i))),
+      pd_prod_diff univ (fun i w => g w (σ i) i) d y (fun i _ => hy (σ i) i)]
+
+/-- `C²` variant of `det_pd_first`. -/
+theorem det_pd_first_c2 (g : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0) (e : Fin n) :
+    pd (fun w => Matrix.det (g w)) e 0 = 0 := by
+  rw [pd_det_diff g e 0 (fun a b => (hg2 a b).differentiableAt (by norm_num))]
+  apply Finset.sum_eq_zero
+  intro σ _
+  apply mul_eq_zero_of_right
+  apply Finset.sum_eq_zero
+  intro k _
+  rw [hdg0 (σ k) k e, zero_mul]
+
+set_option maxHeartbeats 800000 in
+/-- `C²` variant of `det_pd_pd_expand`.  The inner first-derivative identity `pd_det` is transported
+    from a single point to a NEIGHBOURHOOD of `0` (where all entries are differentiable, from
+    `ContDiffAt.eventually`) via `pd_congr`, then the outer `∂_c` distributes at `0` using the
+    `C²`-localised second-order `PdiffAt` facts. -/
+theorem det_pd_pd_expand_c2 (g : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0) (c d : Fin n) :
+    pd (fun y => pd (fun w => Matrix.det (g w)) d y) c 0
+      = ∑ σ : Equiv.Perm (Fin n), (↑↑(Equiv.Perm.sign σ) : ℝ)
+          * ∑ k, pd (fun y => pd (fun w => g w (σ k) k) d y) c 0
+              * ∏ i ∈ univ.erase k, g 0 (σ i) i := by
+  -- entries are differentiable on a neighbourhood of `0`.
+  have hdiff_ev : ∀ᶠ y in nhds (0 : Point n),
+      ∀ a b, DifferentiableAt ℝ (fun w => g w a b) y := by
+    rw [Filter.eventually_all]
+    intro a
+    rw [Filter.eventually_all]
+    intro b
+    filter_upwards [(hg2 a b).eventually (by norm_num)] with y hy
+      using hy.differentiableAt (by norm_num)
+  -- transport `pd_det` to the germ.
+  have hEq : (fun y => pd (fun w => Matrix.det (g w)) d y) =ᶠ[nhds (0 : Point n)]
+      (fun y => ∑ σ : Equiv.Perm (Fin n), (↑↑(Equiv.Perm.sign σ) : ℝ)
+          * ∑ k, pd (fun w => g w (σ k) k) d y * ∏ i ∈ univ.erase k, g y (σ i) i) := by
+    filter_upwards [hdiff_ev] with y hy using pd_det_diff g d y hy
+  rw [pd_congr c 0 hEq]
+  -- second-order `PdiffAt` facts at `0`.
+  have hPd : ∀ (σ : Equiv.Perm (Fin n)) (k : Fin n),
+      PdiffAt (fun y => pd (fun w => g w (σ k) k) d y) c 0 :=
+    fun σ k => PdiffAt_pd_zero_of_contDiffAt2 (fun w => g w (σ k) k) d c (hg2 (σ k) k)
+  have hPp : ∀ (σ : Equiv.Perm (Fin n)) (k : Fin n),
+      PdiffAt (fun y => ∏ i ∈ univ.erase k, g y (σ i) i) c 0 :=
+    fun σ k => pdiffAt_of_differentiableAt _ c 0
+      (differentiableAt_finset_prod (univ.erase k) (fun i y => g y (σ i) i) 0
+        (fun i _ => (hg2 (σ i) i).differentiableAt (by norm_num)))
+  rw [pd_sum univ _ c 0 (fun σ _ => PdiffAt_const_mul _ _ c 0
+        (PdiffAt_sum univ _ c 0 (fun k _ => (hPd σ k).mul (hPp σ k))))]
+  apply Finset.sum_congr rfl
+  intro σ _
+  rw [pd_const_mul _ _ c 0 (PdiffAt_sum univ _ c 0 (fun k _ => (hPd σ k).mul (hPp σ k)))]
+  congr 1
+  rw [pd_sum univ _ c 0 (fun k _ => (hPd σ k).mul (hPp σ k))]
+  apply Finset.sum_congr rfl
+  intro k _
+  rw [pd_mul (fun y => pd (fun w => g w (σ k) k) d y)
+        (fun y => ∏ i ∈ univ.erase k, g y (σ i) i) c 0 (hPd σ k) (hPp σ k)]
+  simp only [hdg0 (σ k) k d, zero_mul, add_zero]
+
+/-- `C²` variant of `sqrt_pd_pd`: `∂_c∂_d √F(0) = ½ ∂_c∂_d F(0)` at a critical point, needing only
+    `ContDiffAt ℝ 2 F 0`. -/
+theorem sqrt_pd_pd_c2 (F : Point n → ℝ) (c d : Fin n)
+    (hF : ContDiffAt ℝ 2 F 0) (hval : F 0 = 1) (hcrit : ∀ e, pd F e 0 = 0) :
+    pd (fun y => pd (fun w => Real.sqrt (F w)) d y) c 0
+      = (1 / 2) * pd (fun y => pd F d y) c 0 := by
+  have hne : F 0 ≠ 0 := by rw [hval]; norm_num
+  have hnhds : ∀ᶠ y in nhds (0 : Point n), F y ≠ 0 :=
+    hF.continuousAt.eventually_ne hne
+  have hdiff_ev : ∀ᶠ y in nhds (0 : Point n), DifferentiableAt ℝ F y := by
+    filter_upwards [hF.eventually (by norm_num)] with y hy using hy.differentiableAt (by norm_num)
+  have hchain : (fun y => pd (fun w => Real.sqrt (F w)) d y)
+      =ᶠ[nhds (0 : Point n)] (fun y => (1 / (2 * Real.sqrt (F y))) * pd F d y) := by
+    filter_upwards [hnhds, hdiff_ev] with y hy hdy
+    exact pd_comp_sqrt F d y (pdiffAt_of_differentiableAt F d y hdy) hy
+  rw [pd_congr c 0 hchain]
+  have hB : PdiffAt (fun y => pd F d y) c 0 := PdiffAt_pd_zero_of_contDiffAt2 F d c hF
+  have hγd : DifferentiableAt ℝ (fun t => F (Function.update 0 c t)) ((0 : Point n) c) :=
+    pdiffAt_of_differentiableAt F c 0 (hF.differentiableAt (by norm_num))
+  have hFxc : F (Function.update (0 : Point n) c ((0 : Point n) c)) = F 0 := by
+    rw [Function.update_eq_self]
+  have hsqrtd : DifferentiableAt ℝ Real.sqrt (F (Function.update (0 : Point n) c ((0 : Point n) c))) := by
+    rw [hFxc]; exact (Real.hasDerivAt_sqrt hne).differentiableAt
+  have hcompd : DifferentiableAt ℝ (fun t => Real.sqrt (F (Function.update 0 c t))) ((0 : Point n) c) :=
+    hsqrtd.comp ((0 : Point n) c) hγd
+  have hden : DifferentiableAt ℝ (fun t => 2 * Real.sqrt (F (Function.update 0 c t))) ((0 : Point n) c) :=
+    (differentiableAt_const 2).mul hcompd
+  have hdenne : (2 : ℝ) * Real.sqrt (F (Function.update (0 : Point n) c ((0 : Point n) c))) ≠ 0 := by
+    rw [hFxc, hval, Real.sqrt_one]; norm_num
+  have hA : PdiffAt (fun y => 1 / (2 * Real.sqrt (F y))) c 0 := by
+    show DifferentiableAt ℝ (fun t => 1 / (2 * Real.sqrt (F (Function.update 0 c t)))) ((0 : Point n) c)
+    simp only [one_div]
+    exact hden.inv hdenne
+  rw [pd_mul (fun y => 1 / (2 * Real.sqrt (F y))) (fun y => pd F d y) c 0 hA hB]
+  have hBx : pd F d 0 = 0 := hcrit d
+  have hAx : (1 : ℝ) / (2 * Real.sqrt (F 0)) = 1 / 2 := by
+    rw [hval, Real.sqrt_one]; norm_num
+  rw [hBx, mul_zero, zero_add, hAx]
+
+/-- `C²` variant of `sqrtdet_pd_pd`. -/
+theorem sqrtdet_pd_pd_c2 (g : Point n → Fin n → Fin n → ℝ) (Ric : Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (htr : ∀ c d, (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0) = -(2 / 3) * Ric c d)
+    (c d : Fin n) :
+    pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0 = -(1 / 3) * Ric c d := by
+  have hFcd : ContDiffAt ℝ 2 (fun y => Matrix.det (g y)) 0 := det_contDiffAt2 g hg2
+  have hg0mat : g 0 = (1 : Matrix (Fin n) (Fin n) ℝ) := by funext i j; exact hg0 i j
+  have hF0 : (fun y => Matrix.det (g y)) 0 = 1 := by
+    show Matrix.det (g 0) = 1; rw [hg0mat, Matrix.det_one]
+  have hcrit : ∀ e, pd (fun y => Matrix.det (g y)) e 0 = 0 := fun e => det_pd_first_c2 g hg2 hdg0 e
+  have hdet2 : pd (fun y => pd (fun w => Matrix.det (g w)) d y) c 0
+      = ∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0 := by
+    rw [det_pd_pd_expand_c2 g hg2 hdg0 c d,
+        Finset.sum_eq_single (1 : Equiv.Perm (Fin n))]
+    · simp only [Equiv.Perm.sign_one, Units.val_one, Int.cast_one, one_mul, Equiv.Perm.one_apply]
+      apply Finset.sum_congr rfl
+      intro k _
+      rw [Finset.prod_eq_one (fun i _ => by rw [hg0 i i]; exact Matrix.one_apply_eq i), mul_one]
+    · intro σ _ hσ
+      apply mul_eq_zero_of_right
+      apply Finset.sum_eq_zero
+      intro k _
+      apply mul_eq_zero_of_right
+      obtain ⟨i0, hi0mem, hi0⟩ := perm_moves_in_erase σ hσ k
+      exact Finset.prod_eq_zero hi0mem (by rw [hg0 (σ i0) i0]; exact Matrix.one_apply_ne hi0)
+    · intro h; exact absurd (Finset.mem_univ _) h
+  have key := sqrt_pd_pd_c2 (fun y => Matrix.det (g y)) c d hFcd hF0 hcrit
+  rw [hdet2, htr c d] at key
+  rw [show (1 : ℝ) / 2 * (-(2 / 3) * Ric c d) = -(1 / 3) * Ric c d from by ring] at key
+  exact key
+
+/-- `C²` variant of `sqrtdet_taylor_coeff`. -/
+theorem sqrtdet_taylor_coeff_c2 (g : Point n → Fin n → Fin n → ℝ) (Ric : Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (htr : ∀ c d, (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0) = -(2 / 3) * Ric c d)
+    (c d : Fin n) :
+    (1 / 2) * pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0 = -(1 / 6) * Ric c d := by
+  rw [sqrtdet_pd_pd_c2 g Ric hg2 hg0 hdg0 htr c d]; ring
+
+/-- `C²` variant of `sqrtdet_taylor_coeff_of_gauge`. -/
+theorem sqrtdet_taylor_coeff_of_gauge_c2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hgi1 : ∀ a b, ContDiffAt ℝ 1 (fun y => gi y a b) 0)
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (c d : Fin n) :
+    (1 / 2) * pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0
+      = -(1 / 6) * ricci g gi c d 0 :=
+  sqrtdet_taylor_coeff_c2 g (fun a b => ricci g gi a b 0) hg2 hg0 hdg0
+    (fun a b => rnc_htr_of_gauge_c2 g gi hg2 hgi1 hgi0 hdg0 hsymm hgauge a b) c d
+
+open QIQTH.HeatKernelA1 in
+/-- **`heat_a1_of_gauge_c2` — the FINITE-REGULARITY (`C²`) variant of `heat_a1_of_gauge`.**  Same
+    statement/conclusion, with the `ContDiff ⊤` hypotheses on `g`/`gi` replaced by the WEAKEST
+    regularity the proof uses: `g ∈ ContDiffAt ℝ 2` at `0` and `gi ∈ ContDiffAt ℝ 1` at `0` — exactly
+    what the pullback metric `g̃ = expPullbackMetric` and its inverse satisfy.  The proof body is the
+    same as `heat_a1_of_gauge`, calling the `_c2` chain (`sqrtdet_taylor_coeff_of_gauge_c2`). -/
+theorem heat_a1_of_gauge_c2 (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
+    (g gi : Point n → Fin n → Fin n → ℝ)
+    (hg2 : ∀ a b, ContDiffAt ℝ 2 (fun y => g y a b) 0)
+    (hgi1 : ∀ a b, ContDiffAt ℝ 1 (fun y => gi y a b) 0)
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hgi0 : ∀ i j, gi 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hgauge : ∀ i a b c, pd (fun y => christoffel g gi i b c y) a 0
+        + pd (fun y => christoffel g gi i c a y) b 0
+        + pd (fun y => christoffel g gi i a b y) c 0 = 0)
+    (κ : ℝ)
+    (hκgeo : ∀ c d, (1 / 2) * pd (fun y => pd (fun w => Real.sqrt (Matrix.det (g w))) d y) c 0
+        = -κ * ricci g gi c d 0)
+    (hRic : ∃ c d, ricci g gi c d 0 ≠ 0)
+    (Rscl : ℝ) (hR : Rscl = ∑ i, ricci g gi i i 0) :
+    (1 / (2 * t)) * (κ * ∑ i, ∑ j, ricci g gi i j 0 *
+        (∫ x : (Fin n → ℝ), (∏ k, heatKernel1D t (x k)) * (x i * x j))) - ξ * Rscl - m ^ 2
+      = (1 / 6 - ξ) * Rscl - m ^ 2 := by
+  obtain ⟨c, d, hcd⟩ := hRic
+  have hgc := sqrtdet_taylor_coeff_of_gauge_c2 g gi hg2 hgi1 hg0 hgi0 hdg0 hsymm hgauge c d
+  have heq : -κ * ricci g gi c d 0 = -(1 / 6) * ricci g gi c d 0 := by
+    rw [← hκgeo c d]; exact hgc
+  have h0 : (1 / 6 - κ) * ricci g gi c d 0 = 0 := by
+    have hrw : (1 / 6 - κ) * ricci g gi c d 0
+        = -κ * ricci g gi c d 0 - (-(1 / 6) * ricci g gi c d 0) := by ring
+    rw [hrw, heq, sub_self]
+  have hκ : κ = 1 / 6 := by
+    rcases mul_eq_zero.mp h0 with h | h
+    · exact (sub_eq_zero.mp h).symm
+    · exact absurd h hcd
+  exact heat_a1_of_RNC_derived t ht ξ m (fun i j => ricci g gi i j 0) κ hκ Rscl hR
+
 end QIQTH.RNCExpansion

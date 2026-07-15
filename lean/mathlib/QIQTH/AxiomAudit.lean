@@ -9609,6 +9609,21 @@ namespace QIQTH.AxiomAudit
 -- (remove hgauge → κ unpinned → conclusion fails). HONEST: κ=1/6 gauge-derived in the a₁ accounting
 -- ONLY — still NOT numerical-G (N, Λ_s, E/ξ remain), NOT a curved heat kernel. Axiom-free (std 3).
 #print axioms QIQTH.RNCExpansion.heat_a1_of_gauge
+-- ★ PARAMETRIX P1 R3→κ (heat_a1_of_gauge_c2 — the FINITE-REGULARITY variant, for instantiating at g̃) (RNCExpansion.lean).
+-- Identical statement/conclusion to heat_a1_of_gauge but the two ContDiff ⊤ hypotheses weakened to hg2 : ∀ a b,
+-- ContDiffAt ℝ 2 (g · a b) 0 and hgi1 : ∀ a b, ContDiffAt ℝ 1 (gi · a b) 0 — EXACTLY what g̃=expPullbackMetric
+-- (contDiffAt2_expPullbackMetric_zero) and its inverse expPullbackMetricInv (differentiable/C¹ at 0) satisfy.  Built by
+-- tracing + weakening the whole sqrtdet_taylor_coeff_of_gauge chain bottom-up: pd_pd_eq_of_contDiffAt2 /
+-- PdiffAt_pd_zero_of_contDiffAt2 / pd_comm_of_contDiffAt2 (C²-local pd machinery), pd_christoffel_origin_c2 /
+-- rnc_htr_of_gauge_c2 (Christoffel side), det_pd_pd_expand_c2 / sqrtdet_pd_pd_c2 / sqrtdet_taylor_coeff_c2 (√det side),
+-- sqrtdet_taylor_coeff_of_gauge_c2, heat_a1_of_gauge_c2.  Two links (pd_pd_eq, det_pd_pd_expand) needed germ-at-0
+-- EventuallyEq localizations (funext → ContDiffAt.eventually + pd_congr) since only the germ is C²; NO >2-derivative
+-- use found — clean weakening.  The ⊤ originals + callers untouched.  ⟹ κ=1/6 at g̃ now needs ONLY [the unconditional
+-- gauge (blocked on the hpd2_residual_cubic_reindex g·Γ·Γ identity) ∧ this c2 variant ∧ instantiation].  Does NOT by
+-- itself give κ=1/6 / the unconditional gauge / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.RNCExpansion.heat_a1_of_gauge_c2
+#print axioms QIQTH.RNCExpansion.sqrtdet_taylor_coeff_of_gauge_c2
+#print axioms QIQTH.RNCExpansion.rnc_htr_of_gauge_c2
 
 -- Geodesic.lean — GEO1: the geodesic ODE of a component connection (2026-07-06).
 -- The second-order geodesic equation γ''+Γ(γ)(γ',γ')=0 rewritten as the first-order autonomous field
