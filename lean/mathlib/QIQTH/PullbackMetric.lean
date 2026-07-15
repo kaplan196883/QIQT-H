@@ -4008,6 +4008,239 @@ theorem hpd2_D3_metric_contract (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hBC l j m, hBC h j m, hBC k j m]
   ring
 
+/-- **`hpd2_fold5A_split` — isolate the D³ block of `A`'s `fold5` (contract-ready) from its Cross terms.** -/
+theorem hpd2_fold5A_split (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)))
+      = (1 / 6 : ℝ) * (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p (Pi.single α 1) v v a)
+        + (1 / 6 : ℝ) * (∑ a, ∑ k, g p a k * v k
+            * (rncCrossBlock g gi p (Pi.single α 1) v v a
+              + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)) := by
+  have h1 : ∀ a k : Fin n, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a))
+      = (1 / 6 : ℝ) * (g p a k * v k * rncD3Block g gi p (Pi.single α 1) v v a)
+        + (1 / 6 : ℝ) * (g p a k * v k
+            * (rncCrossBlock g gi p (Pi.single α 1) v v a
+              + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)) := fun a k => by ring
+  simp only [h1, Finset.sum_add_distrib, Finset.mul_sum]
+
+/-- **`hpd2_fold9A_split` — isolate the D³ block of `A`'s `fold9` (contract-ready) from its Cross term.** -/
+theorem hpd2_fold9A_split (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, g p α b * ((1 / 6 : ℝ) * (rncD3Block g gi p v v v b + 3 * rncCrossBlock g gi p v v v b)))
+      = (1 / 6 : ℝ) * (∑ b, g p α b * rncD3Block g gi p v v v b)
+        + (1 / 2 : ℝ) * (∑ b, g p α b * rncCrossBlock g gi p v v v b) := by
+  have h1 : ∀ b : Fin n, g p α b * ((1 / 6 : ℝ) * (rncD3Block g gi p v v v b + 3 * rncCrossBlock g gi p v v v b))
+      = (1 / 6 : ℝ) * (g p α b * rncD3Block g gi p v v v b)
+        + (1 / 2 : ℝ) * (g p α b * rncCrossBlock g gi p v v v b) := fun b => by ring
+  simp only [h1, Finset.sum_add_distrib, Finset.mul_sum]
+
+/-- **`hpd2_fold5B_split` — isolate the D³ block of `B`'s `fold5` (contract-ready) from its Cross terms.** -/
+theorem hpd2_fold5B_split (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p v v (Pi.single α 1) a)))
+      = (1 / 6 : ℝ) * (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p v (Pi.single α 1) v a)
+        + (1 / 6 : ℝ) * (∑ a, ∑ k, g p a k * v k
+            * (rncCrossBlock g gi p v (Pi.single α 1) v a
+              + rncCrossBlock g gi p (Pi.single α 1) v v a
+              + rncCrossBlock g gi p v v (Pi.single α 1) a)) := by
+  have h1 : ∀ a k : Fin n, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p v v (Pi.single α 1) a))
+      = (1 / 6 : ℝ) * (g p a k * v k * rncD3Block g gi p v (Pi.single α 1) v a)
+        + (1 / 6 : ℝ) * (g p a k * v k
+            * (rncCrossBlock g gi p v (Pi.single α 1) v a
+              + rncCrossBlock g gi p (Pi.single α 1) v v a
+              + rncCrossBlock g gi p v v (Pi.single α 1) a)) := fun a k => by ring
+  simp only [h1, Finset.sum_add_distrib, Finset.mul_sum]
+
+/-- **`hpd2_fold9B_split` — isolate the D³ block of `B`'s `fold9` (contract-ready) from its Cross terms.** -/
+theorem hpd2_fold9B_split (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, ∑ j, g p j b * v j * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p (Pi.single α 1) v v b
+        + rncCrossBlock g gi p v v (Pi.single α 1) b)))
+      = (1 / 6 : ℝ) * (∑ b, ∑ j, g p j b * v j * rncD3Block g gi p v (Pi.single α 1) v b)
+        + (1 / 6 : ℝ) * (∑ b, ∑ j, g p j b * v j
+            * (rncCrossBlock g gi p v (Pi.single α 1) v b
+              + rncCrossBlock g gi p (Pi.single α 1) v v b
+              + rncCrossBlock g gi p v v (Pi.single α 1) b)) := by
+  have h1 : ∀ b j : Fin n, g p j b * v j * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p (Pi.single α 1) v v b
+        + rncCrossBlock g gi p v v (Pi.single α 1) b))
+      = (1 / 6 : ℝ) * (g p j b * v j * rncD3Block g gi p v (Pi.single α 1) v b)
+        + (1 / 6 : ℝ) * (g p j b * v j
+            * (rncCrossBlock g gi p v (Pi.single α 1) v b
+              + rncCrossBlock g gi p (Pi.single α 1) v v b
+              + rncCrossBlock g gi p v v (Pi.single α 1) b)) := fun b j => by ring
+  simp only [h1, Finset.sum_add_distrib, Finset.mul_sum]
+
+/-- **`hpd2_fold5A_D3ready`** — reorder `A.fold5`'s isolated D³ sum into `hpd2_D3_metric_contract` LHS
+    shape (`∑_k v^k·∑_a g_{ak}·D3(e_α,v,v)_a`), one contraction per outer index `k`. -/
+theorem hpd2_fold5A_D3ready (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p (Pi.single α 1) v v a)
+      = ∑ k, v k * (∑ a, g p a k * rncD3Block g gi p (Pi.single α 1) v v a) := by
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun k _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun a _ => by ring
+
+/-- **`hpd2_fold5B_D3ready`** — reorder `B.fold5`'s isolated D³ sum into contract LHS shape
+    (`∑_k v^k·∑_a g_{ak}·D3(v,e_α,v)_a`). -/
+theorem hpd2_fold5B_D3ready (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ a, ∑ k, g p a k * v k * rncD3Block g gi p v (Pi.single α 1) v a)
+      = ∑ k, v k * (∑ a, g p a k * rncD3Block g gi p v (Pi.single α 1) v a) := by
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun k _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun a _ => by ring
+
+/-- **`hpd2_fold9A_D3ready`** — swap the metric symmetry so `A.fold9`'s D³ sum is in contract LHS shape
+    (`∑_a g_{aα}·D3(v,v,v)_a`, `ν=α`). -/
+theorem hpd2_fold9A_D3ready (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, g p α b * rncD3Block g gi p v v v b)
+      = ∑ a, g p a α * rncD3Block g gi p v v v a :=
+  Finset.sum_congr rfl fun b _ => by rw [hsymm p α b]
+
+/-- **`hpd2_fold9B_D3ready`** — reorder + metric-symmetry swap so `B.fold9`'s D³ sum is in contract LHS
+    shape (`∑_j v^j·∑_b g_{bj}·D3(v,e_α,v)_b`, `ν=j` free). -/
+theorem hpd2_fold9B_D3ready (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, ∑ j, g p j b * v j * rncD3Block g gi p v (Pi.single α 1) v b)
+      = ∑ j, v j * (∑ b, g p b j * rncD3Block g gi p v (Pi.single α 1) v b) := by
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun b _ => by rw [hsymm p j b]; ring
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_fold9A_blockconv`** — apply `hpd2_D3_metric_contract` to `A.fold9`'s (reordered) D³ sum,
+    EXPOSING the second metric derivative: the manifestly-`∂Γ` block `∑_b g_{αb}·D3(v,v,v)_b` becomes
+    the explicit `∂²g − ∂g·Γ` form (three identical `BC(v;α,j,m)·2v^j v^m` terms, `ν=α`, `h=k=l=v`).
+    This is the end-to-end block-conversion for the simplest (full-diagonal, single-sum) fold; the other
+    three blocks (`fold5A`, `fold5B`, `fold9B`) convert identically via their `*_D3ready` reshapes. -/
+theorem hpd2_fold9A_blockconv (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, g p α b * rncD3Block g gi p v v v b)
+      = -∑ j, ∑ m,
+          ((∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z α m) j y) r p
+                    + pd (fun y => pd (fun z => g z α j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) α y) r p)
+              - ∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p))
+            * (v j * v m + v j * v m)
+          + (∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z α m) j y) r p
+                    + pd (fun y => pd (fun z => g z α j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) α y) r p)
+              - ∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p))
+            * (v j * v m + v j * v m)
+          + (∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z α m) j y) r p
+                    + pd (fun y => pd (fun z => g z α j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) α y) r p)
+              - ∑ σ, pd (fun y => g y σ α) r p * christoffel g gi σ j m p))
+            * (v j * v m + v j * v m)) := by
+  rw [hpd2_fold9A_D3ready g gi hsymm p α v]
+  exact hpd2_D3_metric_contract g gi hsymm hinvF hg hC p α v v v
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_fold5A_blockconv`** — `hpd2_D3_metric_contract` applied per outer `k` to `A.fold5`'s
+    (reshaped) D³ sum (`ν=k`, `h=e_α`, `k'=l'=v`), exposing `∂²g − ∂g·Γ`. -/
+theorem hpd2_fold5A_blockconv (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ k, v k * (∑ a, g p a k * rncD3Block g gi p (Pi.single α 1) v v a))
+      = ∑ k, v k * (-∑ j, ∑ m,
+          ((∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z k m) j y) r p
+                    + pd (fun y => pd (fun z => g z k j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) k y) r p)
+              - ∑ σ, pd (fun y => g y σ k) r p * christoffel g gi σ j m p))
+            * ((Pi.single α 1 : Point n) j * v m + v j * (Pi.single α 1 : Point n) m)
+          + (∑ r, (Pi.single α 1 : Point n) r * ((1 / 2) * (pd (fun y => pd (fun z => g z k m) j y) r p
+                    + pd (fun y => pd (fun z => g z k j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) k y) r p)
+              - ∑ σ, pd (fun y => g y σ k) r p * christoffel g gi σ j m p))
+            * (v j * v m + v j * v m)
+          + (∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z k m) j y) r p
+                    + pd (fun y => pd (fun z => g z k j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) k y) r p)
+              - ∑ σ, pd (fun y => g y σ k) r p * christoffel g gi σ j m p))
+            * (v j * (Pi.single α 1 : Point n) m + (Pi.single α 1 : Point n) j * v m))) := by
+  refine Finset.sum_congr rfl fun k _ => ?_
+  congr 1
+  exact hpd2_D3_metric_contract g gi hsymm hinvF hg hC p k (Pi.single α 1) v v
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_fold5B_blockconv`** — `hpd2_D3_metric_contract` applied per outer `k` to `B.fold5`'s
+    (reshaped) D³ sum (`ν=k`, `h=l'=v`, `k'=e_α`), exposing `∂²g − ∂g·Γ`. -/
+theorem hpd2_fold5B_blockconv (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ k, v k * (∑ a, g p a k * rncD3Block g gi p v (Pi.single α 1) v a))
+      = ∑ k, v k * (-∑ j, ∑ m,
+          ((∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z k m) j y) r p
+                    + pd (fun y => pd (fun z => g z k j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) k y) r p)
+              - ∑ σ, pd (fun y => g y σ k) r p * christoffel g gi σ j m p))
+            * (v j * (Pi.single α 1 : Point n) m + (Pi.single α 1 : Point n) j * v m)
+          + (∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z k m) j y) r p
+                    + pd (fun y => pd (fun z => g z k j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) k y) r p)
+              - ∑ σ, pd (fun y => g y σ k) r p * christoffel g gi σ j m p))
+            * (v j * (Pi.single α 1 : Point n) m + (Pi.single α 1 : Point n) j * v m)
+          + (∑ r, (Pi.single α 1 : Point n) r * ((1 / 2) * (pd (fun y => pd (fun z => g z k m) j y) r p
+                    + pd (fun y => pd (fun z => g z k j) m y) r p
+                    - pd (fun y => pd (fun z => g z j m) k y) r p)
+              - ∑ σ, pd (fun y => g y σ k) r p * christoffel g gi σ j m p))
+            * (v j * v m + v j * v m))) := by
+  refine Finset.sum_congr rfl fun k _ => ?_
+  congr 1
+  exact hpd2_D3_metric_contract g gi hsymm hinvF hg hC p k v (Pi.single α 1) v
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_fold9B_blockconv`** — `hpd2_D3_metric_contract` applied per free outer `j` to `B.fold9`'s
+    (reshaped) D³ sum (`ν=j`, `h=l'=v`, `k'=e_α`), exposing `∂²g − ∂g·Γ`. -/
+theorem hpd2_fold9B_blockconv (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ j, v j * (∑ b, g p b j * rncD3Block g gi p v (Pi.single α 1) v b))
+      = ∑ j, v j * (-∑ s, ∑ t,
+          ((∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z j t) s y) r p
+                    + pd (fun y => pd (fun z => g z j s) t y) r p
+                    - pd (fun y => pd (fun z => g z s t) j y) r p)
+              - ∑ σ, pd (fun y => g y σ j) r p * christoffel g gi σ s t p))
+            * (v s * (Pi.single α 1 : Point n) t + (Pi.single α 1 : Point n) s * v t)
+          + (∑ r, v r * ((1 / 2) * (pd (fun y => pd (fun z => g z j t) s y) r p
+                    + pd (fun y => pd (fun z => g z j s) t y) r p
+                    - pd (fun y => pd (fun z => g z s t) j y) r p)
+              - ∑ σ, pd (fun y => g y σ j) r p * christoffel g gi σ s t p))
+            * (v s * (Pi.single α 1 : Point n) t + (Pi.single α 1 : Point n) s * v t)
+          + (∑ r, (Pi.single α 1 : Point n) r * ((1 / 2) * (pd (fun y => pd (fun z => g z j t) s y) r p
+                    + pd (fun y => pd (fun z => g z j s) t y) r p
+                    - pd (fun y => pd (fun z => g z s t) j y) r p)
+              - ∑ σ, pd (fun y => g y σ j) r p * christoffel g gi σ s t p))
+            * (v s * v t + v s * v t))) := by
+  refine Finset.sum_congr rfl fun j _ => ?_
+  congr 1
+  exact hpd2_D3_metric_contract g gi hsymm hinvF hg hC p j v (Pi.single α 1) v
+
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
 
@@ -4022,25 +4255,40 @@ LANDED (this brick, both axiom-clean `[propext, Classical.choice, Quot.sound]`, 
   the α1 `fold1` term cancels against (the block is manifestly `∂Γ` in raw form; contracted with the
   metric it becomes `∂²g − ∂g·Γ`).
 
-REMAINING for `hpd2_alpha1_cancel` (the `∂²g`-matching, NOT landed — a large finite `Finset`/`ring`
-assembly, unblocked, all inputs now present):
-* The four folded `D³` blocks feed `hpd2_D3_metric_contract` as follows:
-  - `fold5_A`: `∑_k v^k·[∑_a g_{ak}·D3(e_α,v,v)_a]` — apply with `ν=k, h=e_α, k'=v, l'=v`.
-  - `fold9_A`: `∑_b g_{αb}·D3(v,v,v)_b` — apply with `ν=α` after `hsymm` (`g_{αb}=g_{bα}`), `h=k'=l'=v`.
-  - `fold5_B`, `fold9_B`: the `D3(v,e_α,v)`/`D3(v,v,v)`-type blocks with `α` in the MIDDLE slot,
-    metric `ν=k` (fold5_B) resp. `ν=α` via `hsymm` on `g_{jb}` with the free `j` (fold9_B, two-slot).
+LANDED (this brick — recipe steps (1)–(2) COMPLETE for ALL four `D³` blocks; each axiom-clean
+`[propext, Classical.choice, Quot.sound]`, file GREEN):
+* `hpd2_fold5A_split`, `hpd2_fold9A_split`, `hpd2_fold5B_split`, `hpd2_fold9B_split` — split each
+  folded `α2` block `(1/6)•(D3 + Cross…)` into its `D³` part (contract-ready) plus its `Cross` part
+  (pure `ΓΓ`, carries no `∂²g`, stays in the residual).  `fold9A` peels as `(1/6)·D3 + (1/2)·Cross`.
+* `hpd2_fold5A_D3ready`, `hpd2_fold5B_D3ready`, `hpd2_fold9A_D3ready`, `hpd2_fold9B_D3ready` — reshape
+  each isolated `D³` sum into the EXACT `hpd2_D3_metric_contract` LHS `∑_a g_{aν}·D3(…)_a`:
+  - `fold5A`: `∑_k v^k·(∑_a g_{ak}·D3(e_α,v,v)_a)` (`ν=k`).
+  - `fold5B`: `∑_k v^k·(∑_a g_{ak}·D3(v,e_α,v)_a)` (`ν=k`).
+  - `fold9A`: `∑_a g_{aα}·D3(v,v,v)_a` (`ν=α`, via `hsymm`).
+  - `fold9B`: `∑_j v^j·(∑_b g_{bj}·D3(v,e_α,v)_b)` (`ν=j` FREE, via `hsymm`).
+* `hpd2_fold9A_blockconv`, `hpd2_fold5A_blockconv`, `hpd2_fold5B_blockconv`, `hpd2_fold9B_blockconv` —
+  apply `hpd2_D3_metric_contract` to the reshaped sums, EXPOSING the second metric derivative: each
+  block is now the explicit `∂²g − ∂g·Γ` form `−∑_j∑_m (BC(·)·(slot-products))`, `BC` the
+  `hpd2_block_dd_g` bracket at the block's `ν` and directions.  `fold9A` has all three `BC(v;α,j,m)`
+  identical (h=k=l=v); `fold5A`/`fold5B` carry one `BC(e_α;k,j,m)` (the `α`-selected `∑_r δ_{αr}`
+  piece) among two `BC(v;k,j,m)`; `fold9B` likewise with free `ν=j`.
+
+REMAINING for `hpd2_alpha1_cancel` (the `∂²g`-matching, recipe steps (3)–(4), NOT landed — a large
+finite `Finset` regroup + explicit residual RHS; all inputs above are now present and green):
+* Assemble `2·(fold1A..fold9A) − (fold1B..fold9B)` (via `hpd2_A_folded`/`hpd2_B_folded`), then `rw` the
+  four `*_split` + `*_D3ready` + `*_blockconv` lemmas to replace every `D³` block by its `∂²g − ∂g·Γ`.
 * The verified `∂²g` content to be cancelled (v-contraction `⟨·⟩ = ∑_{ljk}·v^l v^j v^k`):
   - `2·fold1_A` gives `+2·⟨∂_l∂_j g_{αk}⟩`; `−fold1_B` gives `−⟨∂_l∂_α g_{jk}⟩`.
-  - Each `D3`-block `∂²g` (from `hpd2_D3_metric_contract`) splits, at `h=e_α`, into a `∑_r δ_{αr}`
-    piece (`½(∂_α∂_· g_{··})`, the α-derivative Hessian) and two coincident `∑_r v^r` pieces
-    (`½(∂_·∂_· g_{k·})` with a `δ_α` in a metric/derivative slot).  Under the symmetric v-contraction
-    these regroup precisely into `−2·⟨∂_l∂_j g_{αk}⟩ + ⟨∂_l∂_α g_{jk}⟩` scaled by the `1/6`·(slot
-    multiplicities), cancelling the `fold1` combination.  The surviving `∂g·Γ` pieces (from `BC`)
-    join the `fold2/3/4/7` Leibniz terms and the `fold6/8` + `Cross` `ΓΓ` terms as the `∂²g`-free
-    residual — that residual, written out explicitly, is `hpd2_alpha1_cancel`'s RHS.
-* The wall is purely the disciplined transcription of that explicit `∂g·Γ + Γ∂Γ + ΓΓ` residual RHS
-  plus the `Finset`/`ring` closure; no analytic input remains (both conversion lemmas are landed).
-  This transcription-and-close was NOT completed in this brick (risk of a large broken assembly).
+  - Each block's `BC(e_α;·)` term contributes its `∑_r δ_{αr}` Hessian piece and the `BC(v;·)` terms
+    their `∑_r v^r` pieces; under the symmetric v-contraction (the `v^j v^m`, `v^l v^j v^k` weights are
+    fully symmetric, so `Finset.sum_comm`/reindex symmetrizes freely — NO Clairaut needed) the total
+    `1/6`·(slot-multiplicity) sum regroups into `−2·⟨∂_l∂_j g_{αk}⟩ + ⟨∂_l∂_α g_{jk}⟩`, cancelling the
+    `fold1` combination.  The surviving `−∂g·Γ` pieces of `BC` join `fold2/3/4/7` (Leibniz `∂g·Γ`),
+    `fold6/8` (`ΓΓ`), and the `Cross` (`ΓΓ`) terms as the `∂²g`-free residual = `hpd2_alpha1_cancel`'s RHS.
+* The wall is now purely (a) transcribing that explicit `∂g·Γ + ΓΓ` residual RHS and (b) the `Finset`
+  regroup/`ring` closure of the `∂²g` cancellation.  No analytic input remains; every conversion lemma
+  it consumes is landed above.  This step-(3)/(4) assembly was NOT completed in this brick (deferred to
+  avoid a large broken proof); the greenness above is the checkpoint.
 -/
 
 end QIQTH.PullbackMetric

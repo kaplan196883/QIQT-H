@@ -572,6 +572,12 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-16 — R3→κ hpd2 ∂²g-conversion + per-block reshaping LANDED (PUSHED `c10af534` + this commit, [AF] std-3):**
+  `hpd2_block_dd_g` + `hpd2_D3_metric_contract` (g·∂Γ→∂²g−∂g·Γ; full rncD3Block metric contraction) + the 12 per-block
+  lemmas `hpd2_fold{5,9}{A,B}_{split,D3ready,blockconv}` taking each of the 4 folded D³ blocks to explicit ∂²g−∂g·Γ.
+  ⟹ hpd2_alpha1_cancel now pure Finset/ring (regroup the h=e_α/v BC-Hessian pieces via sum_comm — NO Clairaut — into
+  −2⟨∂_l∂_j g_αk⟩+⟨∂_l∂_α g_jk⟩ cancelling 2fold1_A−fold1_B; ∂g·Γ+ΓΓ+Cross residual). NEXT = complete hpd2_alpha1_cancel
+  → hpd2_cubic_vanish → assemble expPullback_hpd2.
 - **★ 2026-07-16 — R3→κ hpd2 block-folding + Kronecker collapse LANDED (PUSHED `dd84dc63`, 828 ins, [AF] std-3):**
   two-slot contraction infra (rncD3Block_contract2_{leftfix,mid} / rncCrossBlock_contract2_{sources,dirsource,dirsk} /
   contract3 / reorder4_jb) + hpd2_A_folded / hpd2_B_folded = A_α/B_α as the fully v-contracted 9-term sum, α2 blocks

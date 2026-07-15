@@ -10688,6 +10688,28 @@ namespace QIQTH.AxiomAudit
 -- unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.hpd2_block_dd_g
 #print axioms QIQTH.PullbackMetric.hpd2_D3_metric_contract
+-- ★ PARAMETRIX P1 R3→κ (hpd2 per-block ∂²g-conversion — the 4 folded D³ blocks reshaped to ∂²g−∂g·Γ)
+-- (PullbackMetric.lean).  For each of the 4 folded α2 D³ blocks (fold5_A/fold9_A/fold5_B/fold9_B): _split isolates the
+-- D³ part from the pure-ΓΓ Cross part; _D3ready reshapes the D³ sum into the exact hpd2_D3_metric_contract LHS
+-- ∑_a g_aν·D3(…)_a (fold9 via hsymm; B with α in the middle slot, free ν); _blockconv applies hpd2_D3_metric_contract
+-- to expose the 2nd metric derivative as −∑_j∑_m BC(·)·(slot-products).  ⟹ each block is now in explicit ∂²g−∂g·Γ
+-- form.  HONEST — the 12 lemmas are the checkpoint; hpd2_alpha1_cancel itself NOT yet a theorem: the ∂²g regroup (the
+-- BC(e_α)/BC(v) Hessian pieces regroup under the symmetric v-weights via sum_comm/reindex — NO Clairaut — into
+-- −2⟨∂_l∂_j g_αk⟩+⟨∂_l∂_α g_jk⟩ cancelling 2fold1_A−fold1_B) + the ∂²g-free residual transcription (∂g·Γ+ΓΓ+Cross)
+-- remain (pure Finset/ring, all inputs present, checkpointed, NOT sorry'd).  Does NOT give hpd2 / the unconditional
+-- gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hpd2_fold5A_split
+#print axioms QIQTH.PullbackMetric.hpd2_fold9A_split
+#print axioms QIQTH.PullbackMetric.hpd2_fold5B_split
+#print axioms QIQTH.PullbackMetric.hpd2_fold9B_split
+#print axioms QIQTH.PullbackMetric.hpd2_fold5A_D3ready
+#print axioms QIQTH.PullbackMetric.hpd2_fold5B_D3ready
+#print axioms QIQTH.PullbackMetric.hpd2_fold9A_D3ready
+#print axioms QIQTH.PullbackMetric.hpd2_fold9B_D3ready
+#print axioms QIQTH.PullbackMetric.hpd2_fold9A_blockconv
+#print axioms QIQTH.PullbackMetric.hpd2_fold5A_blockconv
+#print axioms QIQTH.PullbackMetric.hpd2_fold5B_blockconv
+#print axioms QIQTH.PullbackMetric.hpd2_fold9B_blockconv
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
