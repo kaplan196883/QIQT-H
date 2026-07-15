@@ -572,6 +572,11 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-16 — R3→κ radial-identity step (i): block-multilinearity of the RNC third-jet blocks LANDED (PUSHED
+  `42e1d8cc`, [AF] std-3):** 28 lemmas — rncD3Block symmetric-trilinear + rncCrossBlock linear-in-dir/sym-bilinear +
+  point_eq_sum_single + the load-bearing contraction forms rncD3Block_contract_{left,mid,right} /
+  rncCrossBlock_contract_{dir,sk,sl} (∑_a v^a·block(…e_a…)=block(…v…) = the missing tree infra). ⟹ steps (ii)+(iii)+(iv)
+  now have ALL pieces; NEXT = the christoffel_lower cancellation + reindex → close expPullback_radial_gauge → discharge hrad.
 - **★ 2026-07-16 — R3→κ RADIAL-IDENTITY FLOOR: the full closed ∂²g̃(0) LANDED (PUSHED `5749b9f7`, [AF] std-3,
   `PullbackMetric.lean`):** `contDiffAt2_metric_comp_expMap_zero`, `contDiffAt2_jacobian_component_expMap_zero`,
   `pd2_expPullback_summand_zero` (per-(a,b) closed 9-term 2nd jet), `expPullbackMetric_pd2_closed` (assembled closed
