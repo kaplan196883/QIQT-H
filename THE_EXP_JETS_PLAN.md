@@ -572,6 +572,13 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-15 — R3→κ BRIDGE (β3) structural half of the pullback gauge LANDED (PUSHED `d860fd45`, [AF] std-3,
+  `PullbackMetric.lean` + imports RNCGauge/RNCGaugeExp):** `expPullbackMetric_symm` (g̃_ij=g̃_ji),
+  `pd_christoffel_expPullbackInv_lower_symm` (∂_l Γ̃^i_jk(0)=∂_l Γ̃^i_kj(0)), `cyclic_of_gaugeJet_lower_symm`
+  (lower-symmetric first-jet + 6-fold GaugeJet ⟹ 3-term cyclic sum vanishes). ⟹ hgauge for g̃ now follows
+  mechanically + gaugeJet_of_diag, leaving EXACTLY ONE scalar obligation: the pullback RNC radial identity
+  `∑_ljk pd(christoffel g̃ g̃⁻¹ i j k) l 0 · vˡvʲvᵏ = 0` (= dGammaDiag(rncDΓ)v i = 0). Contraction route via
+  `a3rawArr_contract_eq_a3` + `sum3_sym_contract`. NEXT = close the radial identity ⟹ gauge ⟹ FINAL κ=1/6 brick.
 - **★ 2026-07-15 — R3→κ BRIDGE (β1) smooth pullback inverse + (β2 step1) LANDED (PUSHED `b36117c5`, [AF] std-3,
   `PullbackMetric.lean`):** (β1) GUARANTEED FLOOR fully closed — `elemCLM`/`matToCLM` (matrix field = finite sum of
   scaled matrix-unit operators on `Point n →L Point n`) + `matToCLM_mul_eq_one` + `gi_mul_g_eq`; ★ `expPullbackMetricInv`
