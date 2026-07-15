@@ -377,6 +377,76 @@ theorem expJet3Rhs_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
     (add_le_add ((norm_add_le _ _).trans
       (add_le_add ((norm_add_le _ _).trans (add_le_add hb1 hb2)) hb3)) hb4)
 
+/-! ### R3-source multilinearity — the matched-`Q` source-linearity helpers
+
+`expJet3Rhs` is multilinear in `(h,k,l)` jointly with its second-variation inputs, but ONLY when each
+`Q··` input varies in exactly the two directions it names (the third stays fixed).  These six helpers
+(scale/split in each of `l`, `h`, `k`) are the algebraic engine of the `expJet3Val` value facts, the
+Rung-3 analogs of `expJet2Rhs_{add,smul}_{left,right}`. -/
+
+/-- **Source `ℝ`-homogeneity in the `l`-slot.**  Scaling `l` by `c` (and the two `l`-carrying inputs
+    `Qkl,Qhl` by `c`, `Qhk` fixed) scales `Θ₃` by `c`. -/
+theorem expJet3Rhs_smul_l (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n)) (c : ℝ) (h k l : Point n) (t : ℝ) :
+    expJet3Rhs g gi hC p v Φ (fun s => c • Qkl s) (fun s => c • Qhl s) Qhk h k (c • l) t
+      = c • expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t := by
+  simp only [expJet3Rhs_apply, map_smul, ContinuousLinearMap.smul_apply, smul_add]
+
+/-- **Source additivity in the `l`-slot.**  Splitting `l` (and the two `l`-carrying inputs
+    `Qkl,Qhl`, `Qhk` shared) splits `Θ₃`. -/
+theorem expJet3Rhs_add_l (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl₁ Qkl₂ Qhl₁ Qhl₂ Qhk : ℝ → (Point n × Point n)) (h k l₁ l₂ : Point n) (t : ℝ) :
+    expJet3Rhs g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) (fun s => Qhl₁ s + Qhl₂ s) Qhk h k (l₁ + l₂) t
+      = expJet3Rhs g gi hC p v Φ Qkl₁ Qhl₁ Qhk h k l₁ t
+        + expJet3Rhs g gi hC p v Φ Qkl₂ Qhl₂ Qhk h k l₂ t := by
+  simp only [expJet3Rhs_apply, map_add, ContinuousLinearMap.add_apply]; abel
+
+/-- **Source `ℝ`-homogeneity in the `h`-slot.**  Scaling `h` by `c` (and the two `h`-carrying inputs
+    `Qhl,Qhk` by `c`, `Qkl` fixed) scales `Θ₃` by `c`. -/
+theorem expJet3Rhs_smul_h (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n)) (c : ℝ) (h k l : Point n) (t : ℝ) :
+    expJet3Rhs g gi hC p v Φ Qkl (fun s => c • Qhl s) (fun s => c • Qhk s) (c • h) k l t
+      = c • expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t := by
+  simp only [expJet3Rhs_apply, map_smul, ContinuousLinearMap.smul_apply, smul_add]
+
+/-- **Source additivity in the `h`-slot.**  Splitting `h` (and the two `h`-carrying inputs
+    `Qhl,Qhk`, `Qkl` shared) splits `Θ₃`. -/
+theorem expJet3Rhs_add_h (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl₁ Qhl₂ Qhk₁ Qhk₂ : ℝ → (Point n × Point n)) (h₁ h₂ k l : Point n) (t : ℝ) :
+    expJet3Rhs g gi hC p v Φ Qkl (fun s => Qhl₁ s + Qhl₂ s) (fun s => Qhk₁ s + Qhk₂ s) (h₁ + h₂) k l t
+      = expJet3Rhs g gi hC p v Φ Qkl Qhl₁ Qhk₁ h₁ k l t
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl₂ Qhk₂ h₂ k l t := by
+  simp only [expJet3Rhs_apply, map_add, ContinuousLinearMap.add_apply]; abel
+
+/-- **Source `ℝ`-homogeneity in the `k`-slot.**  Scaling `k` by `c` (and the two `k`-carrying inputs
+    `Qkl,Qhk` by `c`, `Qhl` fixed) scales `Θ₃` by `c`. -/
+theorem expJet3Rhs_smul_k (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n)) (c : ℝ) (h k l : Point n) (t : ℝ) :
+    expJet3Rhs g gi hC p v Φ (fun s => c • Qkl s) Qhl (fun s => c • Qhk s) h (c • k) l t
+      = c • expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t := by
+  simp only [expJet3Rhs_apply, map_smul, ContinuousLinearMap.smul_apply, smul_add]
+
+/-- **Source additivity in the `k`-slot.**  Splitting `k` (and the two `k`-carrying inputs
+    `Qkl,Qhk`, `Qhl` shared) splits `Θ₃`. -/
+theorem expJet3Rhs_add_k (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl₁ Qkl₂ Qhl Qhk₁ Qhk₂ : ℝ → (Point n × Point n)) (h k₁ k₂ l : Point n) (t : ℝ) :
+    expJet3Rhs g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) Qhl (fun s => Qhk₁ s + Qhk₂ s) h (k₁ + k₂) l t
+      = expJet3Rhs g gi hC p v Φ Qkl₁ Qhl Qhk₁ h k₁ l t
+        + expJet3Rhs g gi hC p v Φ Qkl₂ Qhl Qhk₂ h k₂ l t := by
+  simp only [expJet3Rhs_apply, map_add, ContinuousLinearMap.add_apply]; abel
+
 /-! ### Sub-brick R3-fund — the Jet₃ third-variation fundamental solution `R^{hkl}`
 
 The third variation `R^{hkl}(t)` (VECTOR-valued in `Point n × Point n`) solves the INHOMOGENEOUS
@@ -1800,5 +1870,393 @@ theorem expJet3_remainder_quadratic_bound (g gi : Point n → Fin n → Fin n �
     refine (norm_add_le _ _).trans (add_le_add ?_ hbE1)
     refine (norm_add_le _ _).trans (add_le_add ?_ hbC)
     refine (norm_add_le _ _).trans (add_le_add hbA hbB)
+
+/-! ### B-CLM(3) — uniqueness, value bound, and (matched-`Q`) trilinearity of the Jet₃ third variation
+
+The Rung-3 mirror of the landed Rung-2 B-CLM chain (`expJet2Fund_unique` → `expJet2Fund_value_bound`
+→ `expJet2Val` → the four `expJet2Val_{add,smul}_{left,right}` bilinearity facts → `expJetD2`).
+
+**Honest scope note on the linearity layer.**  Unlike the Jet₂ source `expJet2Rhs` — which is
+`D²F(Φ(ι h))(Φ(ι k))`, manifestly bilinear in `(h,k)` through the two EXPLICIT `Φ(ι·)` slots — the
+Jet₃ source `expJet3Rhs` carries three `D²F` CROSS-terms `D²F(Φ(ι·))(Q··)` whose second factors
+`Qkl/Qhl/Qhk` are ABSTRACT second-variation inputs that themselves depend on the two directions they
+name.  Consequently `R^{hkl}(1)` is NOT trilinear in `(h,k,l)` for FIXED abstract `Qkl,Qhl,Qhk`; it is
+multilinear only when the `Q··` inputs vary in the matched way (scale/split in exactly the directions
+they carry, while the third stays fixed).  We therefore land the honest **matched-`Q`** multilinearity:
+source-linearity helpers `expJet3Rhs_{smul,add}_{l,h,k}` and the six `expJet3Val_{smul,add}_{l,h,k}`
+value facts, each with the `Q··` inputs varied in the correct slots.  The full CLM packaging `expJetD3`
+would require instantiating `Qkl/Qhl/Qhk` as the genuine bilinear 2nd variations (`expJet2Val`-derived)
+so the composite is trilinear in three plain vectors; that wiring is a separate layer — see the closing
+checkpoint. -/
+
+/-- **Uniqueness of the Jet₃ third-variation IVP on `[0,1]`.**  Mirror of `expJet2Fund_unique`: the
+    inhomogeneous source `Θ₃^{hkl}` is CONSTANT in `R`, so two solutions `R₁,R₂` with the same IC agree
+    — the difference `S := R₁ - R₂` solves the HOMOGENEOUS Jacobi equation `S' = DF(Y_v)(S)` (the
+    sources cancel) with `S 0 = 0`, and `gronwall_vec_residual_Icc` with residual `ρ = 0` forces
+    `‖S t‖ ≤ 0` on `[0,1]`. -/
+theorem expJet3Fund_unique (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (h k l : Point n)
+    (R₁ R₂ : ℝ → (Point n × Point n)) (hR₁0 : R₁ 0 = 0) (hR₂0 : R₂ 0 = 0)
+    (hderiv₁ : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt R₁
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R₁ t)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc (0 : ℝ) 1) t)
+    (hderiv₂ : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt R₂
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R₂ t)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc (0 : ℝ) 1) t) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1, R₁ t = R₂ t := by
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  have hgron := gronwall_vec_residual_Icc
+    (fun t => R₁ t - R₂ t) (fun _ => (0 : Point n × Point n))
+    (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+    Kstar 0 hKstar0 le_rfl
+    (by simp only [hR₁0, hR₂0, sub_zero])
+    (fun t ht => by
+      have hd := (hderiv₁ t ht).sub (hderiv₂ t ht)
+      have hval : ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R₁ t)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+            - ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R₂ t)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R₁ t - R₂ t) + 0 := by
+        rw [map_sub, add_zero]; abel
+      rwa [hval] at hd)
+    (fun t ht => hKstar t ht)
+    (fun _ _ => by simp)
+  intro t ht
+  have h0 : ‖R₁ t - R₂ t‖ ≤ 0 := by simpa using hgron t ht
+  exact sub_eq_zero.mp (norm_le_zero_iff.mp h0)
+
+/-- **(2) `R^{hkl}(1)` value bound.**  For the inhomogeneous Jet₃ solution `R` (`R 0 = 0`,
+    `R' = DF(Y_v)(R) + Θ₃^{hkl}`), with a `[0,1]` Jacobi bound `Kstar` on `‖DF(Y_v t)‖`, the `D³F`/`D²F`
+    tube bounds `Kstar3`/`Kstar2`, a `[0,1]`-bound `Cphi` on `‖Φ t‖`, and `[0,1]`-bounds
+    `Cq_kl/Cq_hl/Cq_hk` on `‖Qkl/Qhl/Qhk‖`,
+    `‖R 1‖ ≤ (Kstar3·(Cφ‖h‖)(Cφ‖k‖)(Cφ‖l‖) + Kstar2·(Cφ‖h‖)·Cq_kl + Kstar2·(Cφ‖k‖)·Cq_hl
+             + Kstar2·(Cφ‖l‖)·Cq_hk)·e^{Kstar}`.  Proof: the four-term source bound
+    (`expJet3Rhs_norm_le`) is fed as the residual `ρ` into `gronwall_vec_residual` ⟹
+    `‖R 1‖ ≤ ρ·e^{Kstar}`. -/
+theorem expJet3Fund_value_bound (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n)) (h k l : Point n)
+    (Kstar Kstar3 Kstar2 Cphi Cq_kl Cq_hl Cq_hk : ℝ)
+    (hKstar0 : 0 ≤ Kstar) (hKstar30 : 0 ≤ Kstar3) (hKstar20 : 0 ≤ Kstar2) (hCphi0 : 0 ≤ Cphi)
+    (hKstar : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ Kstar)
+    (hKstar3 : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) (expTube g gi hC p v t)‖ ≤ Kstar3)
+    (hKstar2 : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t)‖ ≤ Kstar2)
+    (hCphi : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φ t‖ ≤ Cphi)
+    (hCqkl : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Qkl t‖ ≤ Cq_kl)
+    (hCqhl : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Qhl t‖ ≤ Cq_hl)
+    (hCqhk : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Qhk t‖ ≤ Cq_hk)
+    (R : ℝ → (Point n × Point n)) (hR0 : R 0 = 0)
+    (hderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt R
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (R t)
+        + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t) (Set.Icc (0 : ℝ) 1) t) :
+    ‖R 1‖ ≤ (Kstar3 * (Cphi * ‖h‖) * (Cphi * ‖k‖) * (Cphi * ‖l‖)
+        + Kstar2 * (Cphi * ‖h‖) * Cq_kl
+        + Kstar2 * (Cphi * ‖k‖) * Cq_hl
+        + Kstar2 * (Cphi * ‖l‖) * Cq_hk) * Real.exp Kstar := by
+  have hmem0 : (0 : ℝ) ∈ Set.Icc (0 : ℝ) 1 := by norm_num [Set.mem_Icc]
+  have hCqkl0 : 0 ≤ Cq_kl := (norm_nonneg _).trans (hCqkl 0 hmem0)
+  have hCqhl0 : 0 ≤ Cq_hl := (norm_nonneg _).trans (hCqhl 0 hmem0)
+  have hCqhk0 : 0 ≤ Cq_hk := (norm_nonneg _).trans (hCqhk 0 hmem0)
+  have hρ0 : (0 : ℝ) ≤ Kstar3 * (Cphi * ‖h‖) * (Cphi * ‖k‖) * (Cphi * ‖l‖)
+      + Kstar2 * (Cphi * ‖h‖) * Cq_kl
+      + Kstar2 * (Cphi * ‖k‖) * Cq_hl
+      + Kstar2 * (Cphi * ‖l‖) * Cq_hk := by positivity
+  have hΘbd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t‖
+        ≤ Kstar3 * (Cphi * ‖h‖) * (Cphi * ‖k‖) * (Cphi * ‖l‖)
+          + Kstar2 * (Cphi * ‖h‖) * Cq_kl
+          + Kstar2 * (Cphi * ‖k‖) * Cq_hl
+          + Kstar2 * (Cphi * ‖l‖) * Cq_hk :=
+    fun t ht => expJet3Rhs_norm_le g gi hC p v Φ Qkl Qhl Qhk h k l
+      Kstar3 Kstar2 Cphi Cq_kl Cq_hl Cq_hk hKstar30 hKstar20 hCphi0
+      hKstar3 hKstar2 hCphi hCqkl hCqhl hCqhk t ht
+  exact gronwall_vec_residual R (fun t => expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+    (fun t => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+    Kstar _ hKstar0 hρ0 hR0 hderiv hKstar hΘbd
+
+/-- **The chosen third-variation value** `R^{hkl}_v(1) : Point n × Point n`.  The canonical
+    representative of the (uniqueness-`expJet3Fund_unique`-well-defined) value at `t = 1` of the
+    `expJet3Fund` witness for direction triple `(h,k,l)` and second-variation inputs `Qkl,Qhl,Qhk`;
+    used to STATE the matched-`Q` multilinearity. -/
+noncomputable def expJet3Val (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l : Point n) : Point n × Point n :=
+  (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose 1
+
+/-- **Matched-`Q` `ℝ`-homogeneity of `R^{hkl}(1)` in the `l`-slot.**  `R^{h,k,c•l}(1) = c·R^{h,k,l}(1)`
+    when the two `l`-carrying inputs `Qkl,Qhl` scale by `c` (`Qhk` fixed): the chosen witness
+    `c•R^{h,k,l}` solves the `(c•l)` IVP by `expJet3Rhs_smul_l` + `expJet3Fund_unique`. -/
+theorem expJet3Val_smul_l (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (c : ℝ) (h k l : Point n) :
+    expJet3Val g gi hC p v Φ (fun s => c • Qkl s) (fun s => c • Qhl s) Qhk hv hΦcont
+        (hQkl.const_smul c) (hQhl.const_smul c) hQhk h k (c • l)
+      = c • expJet3Val g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l := by
+  obtain ⟨hR0, -, -, hRderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose_spec
+  obtain ⟨hRc0, -, -, hRcderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ (fun s => c • Qkl s) (fun s => c • Qhl s) Qhk hv hΦcont
+      (hQkl.const_smul c) (hQhl.const_smul c) hQhk h k (c • l)).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ (fun s => c • Qkl s) (fun s => c • Qhl s) Qhk hv
+    h k (c • l)
+    (expJet3Fund g gi hC p v Φ (fun s => c • Qkl s) (fun s => c • Qhl s) Qhk hv hΦcont
+      (hQkl.const_smul c) (hQhl.const_smul c) hQhk h k (c • l)).choose
+    (fun t => c • (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+    hRc0 (by simp only [hR0, smul_zero]) hRcderiv
+    (fun t ht => by
+      have hd := (hRderiv t ht).const_smul c
+      have hval :
+          c • ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                ((expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              (c • (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+            + expJet3Rhs g gi hC p v Φ (fun s => c • Qkl s) (fun s => c • Qhl s) Qhk h k (c • l) t := by
+        rw [smul_add, map_smul, expJet3Rhs_smul_l]
+      rwa [hval] at hd)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
+
+/-- **Matched-`Q` additivity of `R^{hkl}(1)` in the `l`-slot.**  `R^{h,k,l₁+l₂}(1) =
+    R^{h,k,l₁}(1)+R^{h,k,l₂}(1)` when the two `l`-carrying inputs `Qkl,Qhl` split (`Qhk` shared)
+    (`expJet3Rhs_add_l` + `expJet3Fund_unique`). -/
+theorem expJet3Val_add_l (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl₁ Qkl₂ Qhl₁ Qhl₂ Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl₁ : ContinuousOn Qkl₁ (Set.Icc (0 : ℝ) 1)) (hQkl₂ : ContinuousOn Qkl₂ (Set.Icc (0 : ℝ) 1))
+    (hQhl₁ : ContinuousOn Qhl₁ (Set.Icc (0 : ℝ) 1)) (hQhl₂ : ContinuousOn Qhl₂ (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (h k l₁ l₂ : Point n) :
+    expJet3Val g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) (fun s => Qhl₁ s + Qhl₂ s) Qhk hv hΦcont
+        (hQkl₁.add hQkl₂) (hQhl₁.add hQhl₂) hQhk h k (l₁ + l₂)
+      = expJet3Val g gi hC p v Φ Qkl₁ Qhl₁ Qhk hv hΦcont hQkl₁ hQhl₁ hQhk h k l₁
+        + expJet3Val g gi hC p v Φ Qkl₂ Qhl₂ Qhk hv hΦcont hQkl₂ hQhl₂ hQhk h k l₂ := by
+  obtain ⟨hR₁0, -, -, hR₁deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl₁ Qhl₁ Qhk hv hΦcont hQkl₁ hQhl₁ hQhk h k l₁).choose_spec
+  obtain ⟨hR₂0, -, -, hR₂deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl₂ Qhl₂ Qhk hv hΦcont hQkl₂ hQhl₂ hQhk h k l₂).choose_spec
+  obtain ⟨hR₃0, -, -, hR₃deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) (fun s => Qhl₁ s + Qhl₂ s) Qhk hv hΦcont
+      (hQkl₁.add hQkl₂) (hQhl₁.add hQhl₂) hQhk h k (l₁ + l₂)).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) (fun s => Qhl₁ s + Qhl₂ s)
+    Qhk hv h k (l₁ + l₂)
+    (expJet3Fund g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) (fun s => Qhl₁ s + Qhl₂ s) Qhk hv hΦcont
+      (hQkl₁.add hQkl₂) (hQhl₁.add hQhl₂) hQhk h k (l₁ + l₂)).choose
+    (fun t => (expJet3Fund g gi hC p v Φ Qkl₁ Qhl₁ Qhk hv hΦcont hQkl₁ hQhl₁ hQhk h k l₁).choose t
+      + (expJet3Fund g gi hC p v Φ Qkl₂ Qhl₂ Qhk hv hΦcont hQkl₂ hQhl₂ hQhk h k l₂).choose t)
+    hR₃0 (by simp only [hR₁0, hR₂0, add_zero]) hR₃deriv
+    (fun t ht => by
+      have hd := (hR₁deriv t ht).add (hR₂deriv t ht)
+      have hval :
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl₁ Qhl₁ Qhk hv hΦcont hQkl₁ hQhl₁ hQhk h k l₁).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl₁ Qhl₁ Qhk h k l₁ t)
+          + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl₂ Qhl₂ Qhk hv hΦcont hQkl₂ hQhl₂ hQhk h k l₂).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl₂ Qhl₂ Qhk h k l₂ t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl₁ Qhl₁ Qhk hv hΦcont hQkl₁ hQhl₁ hQhk h k l₁).choose t
+                + (expJet3Fund g gi hC p v Φ Qkl₂ Qhl₂ Qhk hv hΦcont hQkl₂ hQhl₂ hQhk h k l₂).choose t)
+            + expJet3Rhs g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) (fun s => Qhl₁ s + Qhl₂ s) Qhk
+                h k (l₁ + l₂) t := by
+        rw [map_add, expJet3Rhs_add_l]; abel
+      rwa [hval] at hd)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
+
+/-- **Matched-`Q` `ℝ`-homogeneity of `R^{hkl}(1)` in the `h`-slot.**  `R^{c•h,k,l}(1) = c·R^{h,k,l}(1)`
+    when the two `h`-carrying inputs `Qhl,Qhk` scale by `c` (`Qkl` fixed) (`expJet3Rhs_smul_h` +
+    `expJet3Fund_unique`). -/
+theorem expJet3Val_smul_h (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (c : ℝ) (h k l : Point n) :
+    expJet3Val g gi hC p v Φ Qkl (fun s => c • Qhl s) (fun s => c • Qhk s) hv hΦcont
+        hQkl (hQhl.const_smul c) (hQhk.const_smul c) (c • h) k l
+      = c • expJet3Val g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l := by
+  obtain ⟨hR0, -, -, hRderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose_spec
+  obtain ⟨hRc0, -, -, hRcderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl (fun s => c • Qhl s) (fun s => c • Qhk s) hv hΦcont
+      hQkl (hQhl.const_smul c) (hQhk.const_smul c) (c • h) k l).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ Qkl (fun s => c • Qhl s) (fun s => c • Qhk s) hv
+    (c • h) k l
+    (expJet3Fund g gi hC p v Φ Qkl (fun s => c • Qhl s) (fun s => c • Qhk s) hv hΦcont
+      hQkl (hQhl.const_smul c) (hQhk.const_smul c) (c • h) k l).choose
+    (fun t => c • (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+    hRc0 (by simp only [hR0, smul_zero]) hRcderiv
+    (fun t ht => by
+      have hd := (hRderiv t ht).const_smul c
+      have hval :
+          c • ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                ((expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              (c • (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl (fun s => c • Qhl s) (fun s => c • Qhk s) (c • h) k l t := by
+        rw [smul_add, map_smul, expJet3Rhs_smul_h]
+      rwa [hval] at hd)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
+
+/-- **Matched-`Q` additivity of `R^{hkl}(1)` in the `h`-slot.**  `R^{h₁+h₂,k,l}(1) =
+    R^{h₁,k,l}(1)+R^{h₂,k,l}(1)` when the two `h`-carrying inputs `Qhl,Qhk` split (`Qkl` shared)
+    (`expJet3Rhs_add_h` + `expJet3Fund_unique`). -/
+theorem expJet3Val_add_h (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl₁ Qhl₂ Qhk₁ Qhk₂ : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl₁ : ContinuousOn Qhl₁ (Set.Icc (0 : ℝ) 1)) (hQhl₂ : ContinuousOn Qhl₂ (Set.Icc (0 : ℝ) 1))
+    (hQhk₁ : ContinuousOn Qhk₁ (Set.Icc (0 : ℝ) 1)) (hQhk₂ : ContinuousOn Qhk₂ (Set.Icc (0 : ℝ) 1))
+    (h₁ h₂ k l : Point n) :
+    expJet3Val g gi hC p v Φ Qkl (fun s => Qhl₁ s + Qhl₂ s) (fun s => Qhk₁ s + Qhk₂ s) hv hΦcont
+        hQkl (hQhl₁.add hQhl₂) (hQhk₁.add hQhk₂) (h₁ + h₂) k l
+      = expJet3Val g gi hC p v Φ Qkl Qhl₁ Qhk₁ hv hΦcont hQkl hQhl₁ hQhk₁ h₁ k l
+        + expJet3Val g gi hC p v Φ Qkl Qhl₂ Qhk₂ hv hΦcont hQkl hQhl₂ hQhk₂ h₂ k l := by
+  obtain ⟨hR₁0, -, -, hR₁deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl Qhl₁ Qhk₁ hv hΦcont hQkl hQhl₁ hQhk₁ h₁ k l).choose_spec
+  obtain ⟨hR₂0, -, -, hR₂deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl Qhl₂ Qhk₂ hv hΦcont hQkl hQhl₂ hQhk₂ h₂ k l).choose_spec
+  obtain ⟨hR₃0, -, -, hR₃deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl (fun s => Qhl₁ s + Qhl₂ s) (fun s => Qhk₁ s + Qhk₂ s) hv hΦcont
+      hQkl (hQhl₁.add hQhl₂) (hQhk₁.add hQhk₂) (h₁ + h₂) k l).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ Qkl (fun s => Qhl₁ s + Qhl₂ s)
+    (fun s => Qhk₁ s + Qhk₂ s) hv (h₁ + h₂) k l
+    (expJet3Fund g gi hC p v Φ Qkl (fun s => Qhl₁ s + Qhl₂ s) (fun s => Qhk₁ s + Qhk₂ s) hv hΦcont
+      hQkl (hQhl₁.add hQhl₂) (hQhk₁.add hQhk₂) (h₁ + h₂) k l).choose
+    (fun t => (expJet3Fund g gi hC p v Φ Qkl Qhl₁ Qhk₁ hv hΦcont hQkl hQhl₁ hQhk₁ h₁ k l).choose t
+      + (expJet3Fund g gi hC p v Φ Qkl Qhl₂ Qhk₂ hv hΦcont hQkl hQhl₂ hQhk₂ h₂ k l).choose t)
+    hR₃0 (by simp only [hR₁0, hR₂0, add_zero]) hR₃deriv
+    (fun t ht => by
+      have hd := (hR₁deriv t ht).add (hR₂deriv t ht)
+      have hval :
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl Qhl₁ Qhk₁ hv hΦcont hQkl hQhl₁ hQhk₁ h₁ k l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl Qhl₁ Qhk₁ h₁ k l t)
+          + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl Qhl₂ Qhk₂ hv hΦcont hQkl hQhl₂ hQhk₂ h₂ k l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl Qhl₂ Qhk₂ h₂ k l t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl Qhl₁ Qhk₁ hv hΦcont hQkl hQhl₁ hQhk₁ h₁ k l).choose t
+                + (expJet3Fund g gi hC p v Φ Qkl Qhl₂ Qhk₂ hv hΦcont hQkl hQhl₂ hQhk₂ h₂ k l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl (fun s => Qhl₁ s + Qhl₂ s) (fun s => Qhk₁ s + Qhk₂ s)
+                (h₁ + h₂) k l t := by
+        rw [map_add, expJet3Rhs_add_h]; abel
+      rwa [hval] at hd)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
+
+/-- **Matched-`Q` `ℝ`-homogeneity of `R^{hkl}(1)` in the `k`-slot.**  `R^{h,c•k,l}(1) = c·R^{h,k,l}(1)`
+    when the two `k`-carrying inputs `Qkl,Qhk` scale by `c` (`Qhl` fixed) (`expJet3Rhs_smul_k` +
+    `expJet3Fund_unique`). -/
+theorem expJet3Val_smul_k (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1)) (c : ℝ) (h k l : Point n) :
+    expJet3Val g gi hC p v Φ (fun s => c • Qkl s) Qhl (fun s => c • Qhk s) hv hΦcont
+        (hQkl.const_smul c) hQhl (hQhk.const_smul c) h (c • k) l
+      = c • expJet3Val g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l := by
+  obtain ⟨hR0, -, -, hRderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose_spec
+  obtain ⟨hRc0, -, -, hRcderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ (fun s => c • Qkl s) Qhl (fun s => c • Qhk s) hv hΦcont
+      (hQkl.const_smul c) hQhl (hQhk.const_smul c) h (c • k) l).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ (fun s => c • Qkl s) Qhl (fun s => c • Qhk s) hv
+    h (c • k) l
+    (expJet3Fund g gi hC p v Φ (fun s => c • Qkl s) Qhl (fun s => c • Qhk s) hv hΦcont
+      (hQkl.const_smul c) hQhl (hQhk.const_smul c) h (c • k) l).choose
+    (fun t => c • (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+    hRc0 (by simp only [hR0, smul_zero]) hRcderiv
+    (fun t ht => by
+      have hd := (hRderiv t ht).const_smul c
+      have hval :
+          c • ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                ((expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+              + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              (c • (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose t)
+            + expJet3Rhs g gi hC p v Φ (fun s => c • Qkl s) Qhl (fun s => c • Qhk s) h (c • k) l t := by
+        rw [smul_add, map_smul, expJet3Rhs_smul_k]
+      rwa [hval] at hd)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
+
+/-- **Matched-`Q` additivity of `R^{hkl}(1)` in the `k`-slot.**  `R^{h,k₁+k₂,l}(1) =
+    R^{h,k₁,l}(1)+R^{h,k₂,l}(1)` when the two `k`-carrying inputs `Qkl,Qhk` split (`Qhl` shared)
+    (`expJet3Rhs_add_k` + `expJet3Fund_unique`). -/
+theorem expJet3Val_add_k (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl₁ Qkl₂ Qhl Qhk₁ Qhk₂ : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl₁ : ContinuousOn Qkl₁ (Set.Icc (0 : ℝ) 1)) (hQkl₂ : ContinuousOn Qkl₂ (Set.Icc (0 : ℝ) 1))
+    (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk₁ : ContinuousOn Qhk₁ (Set.Icc (0 : ℝ) 1)) (hQhk₂ : ContinuousOn Qhk₂ (Set.Icc (0 : ℝ) 1))
+    (h k₁ k₂ l : Point n) :
+    expJet3Val g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) Qhl (fun s => Qhk₁ s + Qhk₂ s) hv hΦcont
+        (hQkl₁.add hQkl₂) hQhl (hQhk₁.add hQhk₂) h (k₁ + k₂) l
+      = expJet3Val g gi hC p v Φ Qkl₁ Qhl Qhk₁ hv hΦcont hQkl₁ hQhl hQhk₁ h k₁ l
+        + expJet3Val g gi hC p v Φ Qkl₂ Qhl Qhk₂ hv hΦcont hQkl₂ hQhl hQhk₂ h k₂ l := by
+  obtain ⟨hR₁0, -, -, hR₁deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl₁ Qhl Qhk₁ hv hΦcont hQkl₁ hQhl hQhk₁ h k₁ l).choose_spec
+  obtain ⟨hR₂0, -, -, hR₂deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl₂ Qhl Qhk₂ hv hΦcont hQkl₂ hQhl hQhk₂ h k₂ l).choose_spec
+  obtain ⟨hR₃0, -, -, hR₃deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) Qhl (fun s => Qhk₁ s + Qhk₂ s) hv hΦcont
+      (hQkl₁.add hQkl₂) hQhl (hQhk₁.add hQhk₂) h (k₁ + k₂) l).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) Qhl
+    (fun s => Qhk₁ s + Qhk₂ s) hv h (k₁ + k₂) l
+    (expJet3Fund g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) Qhl (fun s => Qhk₁ s + Qhk₂ s) hv hΦcont
+      (hQkl₁.add hQkl₂) hQhl (hQhk₁.add hQhk₂) h (k₁ + k₂) l).choose
+    (fun t => (expJet3Fund g gi hC p v Φ Qkl₁ Qhl Qhk₁ hv hΦcont hQkl₁ hQhl hQhk₁ h k₁ l).choose t
+      + (expJet3Fund g gi hC p v Φ Qkl₂ Qhl Qhk₂ hv hΦcont hQkl₂ hQhl hQhk₂ h k₂ l).choose t)
+    hR₃0 (by simp only [hR₁0, hR₂0, add_zero]) hR₃deriv
+    (fun t ht => by
+      have hd := (hR₁deriv t ht).add (hR₂deriv t ht)
+      have hval :
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl₁ Qhl Qhk₁ hv hΦcont hQkl₁ hQhl hQhk₁ h k₁ l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl₁ Qhl Qhk₁ h k₁ l t)
+          + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl₂ Qhl Qhk₂ hv hΦcont hQkl₂ hQhl hQhk₂ h k₂ l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl₂ Qhl Qhk₂ h k₂ l t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl₁ Qhl Qhk₁ hv hΦcont hQkl₁ hQhl hQhk₁ h k₁ l).choose t
+                + (expJet3Fund g gi hC p v Φ Qkl₂ Qhl Qhk₂ hv hΦcont hQkl₂ hQhl hQhk₂ h k₂ l).choose t)
+            + expJet3Rhs g gi hC p v Φ (fun s => Qkl₁ s + Qkl₂ s) Qhl (fun s => Qhk₁ s + Qhk₂ s)
+                h (k₁ + k₂) l t := by
+        rw [map_add, expJet3Rhs_add_k]; abel
+      rwa [hval] at hd)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
 
 end QIQTH.ExpMap

@@ -10288,6 +10288,23 @@ namespace QIQTH.AxiomAudit
 -- ContDiff³ exp_p.  Does NOT give ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesicField_D2F_second_order_taylor
 #print axioms QIQTH.ExpMap.expJet3_remainder_quadratic_bound
+-- ★ PARAMETRIX P1 RUNG 3 (B-CLM3) — the 3rd-variation value: uniqueness, bound, multilinearity (ExpMapContDiff3.lean).
+-- expJet3Fund_unique (Jet₃ IVP unique on [0,1], gronwall ρ=0) + expJet3Fund_value_bound (‖R 1‖ ≤ 4-term source
+-- bound · e^{Kstar}) + expJet3Val := (expJet3Fund …).choose 1 + expJet3Val_{smul,add}_{l,h,k} (multilinearity in
+-- the honest MATCHED-Q form: each direction slot is linear only when the two Q·· inputs naming it split/scale
+-- accordingly, via source-linearity + superposition + expJet3Fund_unique).  HONEST CHECKPOINT: the CLM expJetD3 is
+-- NOT yet packaged — mkContinuous₃ needs plain trilinearity for fixed (Qkl,Qhl,Qhk), which holds only after the
+-- Q·· are instantiated as the genuine 2nd variations (a wiring layer, next).  Does NOT give ContDiff³/κ=1/6/
+-- parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet3Fund_unique
+#print axioms QIQTH.ExpMap.expJet3Fund_value_bound
+#print axioms QIQTH.ExpMap.expJet3Val
+#print axioms QIQTH.ExpMap.expJet3Val_smul_l
+#print axioms QIQTH.ExpMap.expJet3Val_add_l
+#print axioms QIQTH.ExpMap.expJet3Val_smul_h
+#print axioms QIQTH.ExpMap.expJet3Val_add_h
+#print axioms QIQTH.ExpMap.expJet3Val_smul_k
+#print axioms QIQTH.ExpMap.expJet3Val_add_k
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
