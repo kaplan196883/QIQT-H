@@ -10478,6 +10478,24 @@ namespace QIQTH.AxiomAudit
 -- give κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesicField_fderiv2_apply
 #print axioms QIQTH.ExpMap.fderiv3_geodesicField_apply_zero
+-- ★★ PARAMETRIX P1 R3→κ (a4a+a4b) — the CLOSED expJetD3(0)=a₃ value (PullbackMetric.lean).
+-- vec_ode_nilpotent_const (F-abstract: X'=A X+b, X 0=0, A²=0 ⟹ X t = t•b+(t²/2)•(A b)); expFundZero_iota
+-- (Φ_0 s(ι m)=(s•m,m)); expJet2Curve_zero_velocity ((Q_kl s).2=s•c_kl); expJet3Rhs_zero_eq (Θ₃ s=(0,s•W));
+-- expJetD3_zero_integral (π-reduction of the (a3) Duhamel integral).  ★ expJetD3_zero_closed:
+-- expJetD3 g gi hC p 0 Φ l k h = (1/6)•(rncD3Block + 3 rncCrossBlocks) — the explicit closed −∂Γ+ΓΓ value, the
+-- 1/6 = ∫₀¹(1−s)s ds.  ★ expJetD3_zero_diagonal: on l=k=h=v it equals EXACTLY the honest cubic a₃(v) of
+-- expMap_value_three_jet (−∑∂Γ·v³ + ∑Γ(Γv²)v + ∑Γ v(Γv²)), i.e. the third-jet = a3rawArr-contraction identity
+-- (via a3rawArr_contract_eq_a3).  The previous WALL (missing closed D²F/D³F values + explicit third-jet value)
+-- is now PROVED.  HONEST: (a4c) the bridge pd(christoffel g̃)(0)=rncDΓ remains (reachable assembly: twice-Leibniz
+-- pd²g̃(0) + metric-Christoffel), then the g̃ gauge + weakened heat_a1_of_gauge ⟹ κ=1/6.  Does NOT yet give κ=1/6,
+-- NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.vec_ode_nilpotent_const
+#print axioms QIQTH.PullbackMetric.expFundZero_iota
+#print axioms QIQTH.PullbackMetric.expJet2Curve_zero_velocity
+#print axioms QIQTH.PullbackMetric.expJet3Rhs_zero_eq
+#print axioms QIQTH.PullbackMetric.expJetD3_zero_integral
+#print axioms QIQTH.PullbackMetric.expJetD3_zero_closed
+#print axioms QIQTH.PullbackMetric.expJetD3_zero_diagonal
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

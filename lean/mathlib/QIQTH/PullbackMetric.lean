@@ -18,6 +18,7 @@
 -/
 import Mathlib
 import QIQTH.ExpMapContDiff3
+import QIQTH.GeodesicFieldJets
 
 namespace QIQTH.PullbackMetric
 
@@ -683,6 +684,123 @@ theorem clm_duhamel_nilpotent {F : Type*} [NormedAddCommGroup F] [NormedSpace �
   rw [← ContinuousLinearMap.intervalIntegral_comp_comm _ hII1]
   exact intervalIntegral.integral_congr (fun s _ => hpt s)
 
+/-- **Small-context general-`t` Duhamel for a NILPOTENT constant coefficient and CONSTANT source.**
+    Any `X : ℝ → F` solving the inhomogeneous constant-coefficient vector ODE `X'(t) = A(X t) + b`,
+    `X(0) = 0`, with `A` nilpotent of order 2 (`A∘A = 0`) and a CONSTANT source `b`, is the explicit
+    quadratic polynomial `X t = t•b + (t²/2)•(A b)` on `[0,1]`.
+
+    Proof.  The model `Y(t) = t•b + (t²/2)•(A b)` solves the same IVP: `Y'(t) = b + t•(A b)` and
+    `A(Y t) = t•(A b)` (nilpotency `A(A b)=0`), so `Y'(t) = A(Y t) + b` and `Y 0 = 0`.  The homogeneous
+    vector Grönwall `gronwall_vec_residual_Icc` (`ρ = 0`, `K = ‖A‖`) forces `X = Y` on `[0,1]`.  This is
+    the general-`t` (variable-endpoint), constant-source specialisation of `clm_duhamel_nilpotent`,
+    needed to solve the `v = 0` second-variation curve `Q_·· t` for ALL `t ∈ [0,1]` (the integrand of
+    (a3), not merely its endpoint). -/
+theorem vec_ode_nilpotent_const {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
+    (A : F →L[ℝ] F) (hA : A.comp A = 0) (b : F)
+    (X : ℝ → F) (hX0 : X 0 = 0)
+    (hXd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt X (A (X t) + b) (Set.Icc (0 : ℝ) 1) t) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1, X t = t • b + (t ^ 2 / 2) • (A b) := by
+  have hAA : ∀ x : F, A (A x) = 0 := fun x => by
+    have := ContinuousLinearMap.ext_iff.mp hA x; simpa using this
+  set Y : ℝ → F := fun t => t • b + (t ^ 2 / 2) • (A b) with hYdef
+  have hY0 : Y 0 = 0 := by simp [hYdef]
+  have hYd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Y (A (Y t) + b) (Set.Icc (0 : ℝ) 1) t := by
+    intro t ht
+    have ht1 : HasDerivWithinAt (fun τ : ℝ => τ • b) b (Set.Icc (0 : ℝ) 1) t := by
+      simpa using (hasDerivWithinAt_id t (Set.Icc (0 : ℝ) 1)).smul_const b
+    have hsq : HasDerivWithinAt (fun τ : ℝ => τ ^ 2 / 2) t (Set.Icc (0 : ℝ) 1) t := by
+      have h := ((hasDerivAt_pow 2 t).hasDerivWithinAt (s := Set.Icc (0 : ℝ) 1)).div_const 2
+      convert h using 1
+      norm_num
+    have ht2 : HasDerivWithinAt (fun τ : ℝ => (τ ^ 2 / 2) • (A b)) (t • (A b))
+        (Set.Icc (0 : ℝ) 1) t := by
+      simpa using hsq.smul_const (A b)
+    have hYd0 : HasDerivWithinAt Y (b + t • (A b)) (Set.Icc (0 : ℝ) 1) t := ht1.add ht2
+    have hAY : A (Y t) + b = b + t • (A b) := by
+      simp only [hYdef, map_add, map_smul, hAA b, smul_zero, add_zero]
+      abel
+    rw [hAY]; exact hYd0
+  have huniq := gronwall_vec_residual_Icc
+    (fun t => X t - Y t) (fun _ => (0 : F)) (fun _ => A) ‖A‖ 0 (norm_nonneg _) le_rfl
+    (by simp only [hX0, hY0, sub_zero])
+    (fun t ht => by
+      have hd := (hXd t ht).sub (hYd t ht)
+      have hval : (A (X t) + b) - (A (Y t) + b) = A (X t - Y t) + 0 := by rw [map_sub]; abel
+      rwa [hval] at hd)
+    (fun _ _ => le_refl _) (fun _ _ => by simp)
+  intro t ht
+  have h0 : ‖X t - Y t‖ ≤ 0 := by simpa using huniq t ht
+  have hXY := sub_eq_zero.mp (norm_le_zero_iff.mp h0)
+  rw [hXY]
+
+/-- **The first variation `Φ₀ t (ι m) = (t•m, m)` at `v = 0`.**  For the affine propagator
+    `Φ t = id + t•linF` (the `v = 0` fundamental solution, `expFund_zero_eq`), the first-variation
+    vector is `Φ t (ι m) = (id + t•linF)(0,m) = (0,m) + t•(m,0) = (t•m, m)` (since `linF(0,m)=(m,0)`). -/
+theorem expFundZero_iota
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦeq : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)))
+    (m : Point n) (t : ℝ) (ht : t ∈ Set.Icc (0 : ℝ) 1) :
+    Φ t (expJetIota m) = ((t • m, m) : Point n × Point n) := by
+  rw [hΦeq t ht]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.id_apply,
+    ContinuousLinearMap.smul_apply, expJetIota_apply, linF_apply, Prod.smul_mk, smul_zero,
+    Prod.mk_add_mk, zero_add, add_zero]
+
+/-- **The `v = 0` second-variation SOURCE is the CONSTANT `(0, c_{kl})`.**  Along the constant tube
+    `Y₀ t = (p,0)`, the Jet₂ source `Θ^{kl}(t) = D²F(p,0)(Φ t (ι k))(Φ t (ι l))` is `t`-independent:
+    `D²F(p,0)` depends only on the velocity slots (`Δu = k`, `η = l`), so with `Φ t (ι·) = (t•·, ·)`
+    (`expFundZero_iota`) and `fderiv2_geodesicField_apply_zero`,
+    `Θ^{kl}(t) = (0, a ↦ −∑_{jm} Γ^a_{jm}(p)(l_j k_m + k_j l_m))`. -/
+theorem expJet2Rhs_zero_const (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦeq : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)))
+    (k l : Point n) (t : ℝ) (ht : t ∈ Set.Icc (0 : ℝ) 1) :
+    expJet2Rhs g gi hC p 0 Φ k l t
+      = ((0 : Point n),
+          fun a => -∑ j, ∑ m, christoffel g gi a j m p * (l j * k m + k j * l m)) := by
+  rw [expJet2Rhs_apply, expTube_zero g gi hC p t ht,
+      expFundZero_iota Φ hΦeq k t ht, expFundZero_iota Φ hΦeq l t ht,
+      fderiv2_geodesicField_apply_zero g gi hC p (t • k) k (t • l) l]
+
+/-- **The `v = 0` second-variation curve VELOCITY component is linear-in-`t`.**  With the constant
+    source `(0, c_{kl})` (`expJet2Rhs_zero_const`) and the nilpotent coefficient `linF` along the
+    constant tube (`fderiv_geodesicField_expTube_zero`), the second-variation curve solves
+    `Q' = linF(Q) + (0,c_{kl})`, `Q(0)=0`; the constant-source nilpotent Duhamel `vec_ode_nilpotent_const`
+    gives `Q t = t•(0,c_{kl}) + (t²/2)•(c_{kl},0)`, whose velocity component is `(Q t).2 = t•c_{kl}`. -/
+theorem expJet2Curve_zero_velocity (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦeq : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)))
+    (k l : Point n) (t : ℝ) (ht : t ∈ Set.Icc (0 : ℝ) 1) :
+    (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l t).2
+      = t • (fun a => -∑ j, ∑ m,
+          christoffel g gi a j m p * (l j * k m + k j * l m) : Point n) := by
+  obtain ⟨hQ0, -, -, hQderiv⟩ := (expJet2Fund g gi hC p 0 Φ hv0 hΦcont k l).choose_spec
+  have hXd : ∀ s ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt (expJet2Fund g gi hC p 0 Φ hv0 hΦcont k l).choose
+        ((linF (n := n)) ((expJet2Fund g gi hC p 0 Φ hv0 hΦcont k l).choose s)
+          + ((0 : Point n),
+              fun a => -∑ j, ∑ m, christoffel g gi a j m p * (l j * k m + k j * l m)))
+        (Set.Icc (0 : ℝ) 1) s := by
+    intro s hs
+    have hd := hQderiv s hs
+    rw [fderiv_geodesicField_expTube_zero g gi hC p s hs,
+        expJet2Rhs_zero_const g gi hC p Φ hΦeq k l s hs] at hd
+    exact hd
+  have hval := vec_ode_nilpotent_const (linF (n := n)) linF_comp_linF
+    ((0 : Point n), fun a => -∑ j, ∑ m, christoffel g gi a j m p * (l j * k m + k j * l m))
+    (expJet2Fund g gi hC p 0 Φ hv0 hΦcont k l).choose hQ0 hXd t ht
+  simp only [expJet2Curve]
+  rw [hval]
+  simp only [linF_apply, Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero]
+
 /-- **(a2) — the CLOSED second-variation value at `v = 0`.**  The genuine second-variation curve
     `Q^{hk}_0` (the `expJet2Curve` witness at `v = 0`) has the explicit endpoint value given by the
     nilpotent Duhamel formula: along the constant `v = 0` tube the Jacobi coefficient is the CONSTANT
@@ -778,6 +896,268 @@ theorem expJet3ValG_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
   have hdu := clm_duhamel_nilpotent (linF (n := n)) linF_comp_linF _ hf _ hR0 hXd
   simpa only [expJet3ValG, expJet3Val] using hdu
 
+/-- **`π ∘ (id + c·A₀)` pointwise, `A₀ = linF`.**  Since `linF (x,u) = (u,0)`, the affine propagator
+    `(id + c•linF)` maps `w ↦ (w.1 + c•w.2, w.2)`, whose position projection is `w.1 + c•w.2`. -/
+theorem expJetPi_id_add_smul_linF (c : ℝ) (w : Point n × Point n) :
+    expJetPi ((ContinuousLinearMap.id ℝ (Point n × Point n) + c • (linF (n := n))) w)
+      = w.1 + c • w.2 := by
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.id_apply,
+    ContinuousLinearMap.smul_apply, linF_apply, expJetPi_apply, Prod.fst_add, Prod.smul_fst]
+
+/-- **(a4, reduction step) — the CLOSED SCALAR-INTEGRAL form of `expJetD3 … 0`.**  Applying the
+    position projection `π = expJetPi` to the nilpotent-Duhamel integral (a3) `expJet3ValG_zero_eq` and
+    commuting `π` through the interval integral (`intervalIntegral_comp_comm`, the integrand continuous
+    on `[0,1]` via `expJet3Rhs_continuousOn`/`expJet2Curve_continuousOn`) collapses the operator third
+    jet to the explicit `Point n`-valued integral
+      `expJetD3 … 0 Φ l k h = ∫₀¹ [ (Θ₃ s).1 + (1−s)•(Θ₃ s).2 ] ds`,
+    `Θ₃ s = expJet3Rhs … 0 Φ Q_kl Q_hl Q_hk h k l s` (genuine second-variation curves `Q_·· =
+    expJet2Curve …`).  This is the reduction half of (a4a): the remaining work is the closed
+    Christoffel evaluation of `(Θ₃ s).1`, `(Θ₃ s).2` (via `fderiv{2,3}_geodesicField_apply_zero`) plus
+    the polynomial-in-`s` integral. -/
+theorem expJetD3_zero_integral (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k l : Point n) :
+    expJetD3 g gi hC p 0 Φ hv0 hΦcont l k h
+      = ∫ s in (0 : ℝ)..1,
+          ((expJet3Rhs g gi hC p 0 Φ
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s).1
+            + (1 - s) • (expJet3Rhs g gi hC p 0 Φ
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+              (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s).2) := by
+  rw [expJetD3_apply, expJet3ValG_zero_eq g gi hC p Φ hv0 hΦcont h k l]
+  -- continuity of the Duhamel integrand on `[0,1]`.
+  have hRhs : ContinuousOn (fun s => expJet3Rhs g gi hC p 0 Φ
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s) (Set.Icc (0 : ℝ) 1) :=
+    expJet3Rhs_continuousOn g gi hC p 0 hv0 Φ
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) hΦcont
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p 0 Φ hv0 hΦcont h k) h k l
+  have hField : ContinuousOn
+      (fun s : ℝ => ContinuousLinearMap.id ℝ (Point n × Point n) + (1 - s) • (linF (n := n)))
+      (Set.Icc (0 : ℝ) 1) :=
+    continuousOn_const.add ((continuousOn_const.sub continuousOn_id).smul continuousOn_const)
+  have hII : IntervalIntegrable (fun s => (ContinuousLinearMap.id ℝ (Point n × Point n)
+      + (1 - s) • (linF (n := n))) (expJet3Rhs g gi hC p 0 Φ
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s))
+      MeasureTheory.volume 0 1 :=
+    (hField.clm_apply hRhs).intervalIntegrable_of_Icc (by norm_num)
+  rw [← ContinuousLinearMap.intervalIntegral_comp_comm expJetPi hII]
+  exact intervalIntegral.integral_congr (fun s _ => expJetPi_id_add_smul_linF _ _)
+
+/-- **The `∂Γ` (`D³F`) block of the closed RNC third-jet value** (up-index `i`, direction triple
+    `h,k,l`).  This is the `−∂Γ`-type trilinear form the `D³F(p,0)` term contributes. -/
+noncomputable def rncD3Block (g gi : Point n → Fin n → Fin n → ℝ) (p h k l : Point n) : Point n :=
+  fun i => -∑ j, ∑ m,
+    ((∑ r, pd (fun z => christoffel g gi i j m z) r p * l r) * (h j * k m + k j * h m)
+      + (∑ r, pd (fun z => christoffel g gi i j m z) r p * h r) * (l j * k m + k j * l m)
+      + (∑ r, pd (fun z => christoffel g gi i j m z) r p * k r) * (l j * h m + h j * l m))
+
+/-- **The `ΓΓ` (`D²F` cross) block of the closed RNC third-jet value.**  For differentiation direction
+    `dir` and second-variation source-directions `(sk, sl)`, this is the `ΓΓ`-type form the `D²F(p,0)`
+    cross-term contributes (the inner `−∑ Γ(sl·sk + sk·sl)` is the second-variation velocity coefficient
+    `c` from `expJet2Curve_zero_velocity`). -/
+noncomputable def rncCrossBlock (g gi : Point n → Fin n → Fin n → ℝ) (p dir sk sl : Point n) :
+    Point n :=
+  fun i => -∑ j, ∑ m, christoffel g gi i j m p
+    * ((-∑ j', ∑ m', christoffel g gi j j' m' p * (sl j' * sk m' + sk j' * sl m')) * dir m
+       + dir j * (-∑ j', ∑ m', christoffel g gi m j' m' p * (sl j' * sk m' + sk j' * sl m')))
+
+/-- **Pull a scalar out of a weighted finite sum.**  `∑ r, c_r·(s·v_r) = s·∑ r, c_r·v_r`. -/
+theorem sum_mul_smul_factor (c v : Fin n → ℝ) (s : ℝ) :
+    (∑ r, c r * (s * v r)) = s * ∑ r, c r * v r := by
+  rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun r _ => by ring
+
+set_option maxHeartbeats 1600000 in
+/-- **(a4a, pointwise) — the CLOSED Christoffel value of the third-jet integrand `Θ₃ s` at `v = 0`.**
+    For the affine propagator `Φ t = id + t•linF` (hypothesis `hΦeq`, supplied by `expFund_zero_eq`)
+    and `s ∈ [0,1]`, every one of the four terms of `expJet3Rhs` has vanishing POSITION component and a
+    velocity component LINEAR in `s`:
+      `Θ₃ s = (0, s • (rncD3Block + rncCrossBlock_h + rncCrossBlock_k + rncCrossBlock_l))`.
+    The `D³F(p,0)` term gives `s•rncD3Block` (each first variation `Φ s (ι·) = (s•·, ·)` carries one
+    `s` in its position slot, which `D³F(p,0)`'s `∂Γ·ξ` factor turns into the overall `s`); each `D²F`
+    cross-term gives `s•rncCrossBlock` (the second-variation velocity `(Q s).2 = s•c` of
+    `expJet2Curve_zero_velocity`).  All position components vanish because `D²F(p,0)`/`D³F(p,0)` are
+    velocity-valued at the equilibrium. -/
+theorem expJet3Rhs_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦeq : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)))
+    (h k l : Point n) (s : ℝ) (hs : s ∈ Set.Icc (0 : ℝ) 1) :
+    expJet3Rhs g gi hC p 0 Φ
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+        (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s
+      = ((0 : Point n), s • (rncD3Block g gi p h k l + rncCrossBlock g gi p h k l
+          + rncCrossBlock g gi p k h l + rncCrossBlock g gi p l h k)) := by
+  -- the `D³F` term.
+  have ht1 : (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) (expTube g gi hC p 0 s))
+        (Φ s (expJetIota h)) (Φ s (expJetIota k)) (Φ s (expJetIota l))
+      = ((0 : Point n), s • rncD3Block g gi p h k l) := by
+    rw [expTube_zero g gi hC p s hs, expFundZero_iota Φ hΦeq h s hs,
+        expFundZero_iota Φ hΦeq k s hs, expFundZero_iota Φ hΦeq l s hs,
+        fderiv3_geodesicField_apply_zero g gi hC p (s • h) h (s • k) k (s • l) l]
+    refine Prod.ext rfl ?_
+    funext i
+    simp only [rncD3Block, Pi.smul_apply, smul_eq_mul]
+    rw [mul_neg, neg_inj, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun m _ => ?_
+    simp only [sum_mul_smul_factor]
+    ring
+  -- the three `D²F` cross-terms (differentiation direction `dir`, source directions `(sk,sl)`).
+  have hcross : ∀ (dir sk sl : Point n),
+      (fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p 0 s))
+          (Φ s (expJetIota dir))
+          (expJet2Curve g gi hC p 0 Φ hv0 hΦcont sk sl s)
+        = ((0 : Point n), s • rncCrossBlock g gi p dir sk sl) := by
+    intro dir sk sl
+    rw [expTube_zero g gi hC p s hs, expFundZero_iota Φ hΦeq dir s hs,
+        show (expJet2Curve g gi hC p 0 Φ hv0 hΦcont sk sl s)
+            = (((expJet2Curve g gi hC p 0 Φ hv0 hΦcont sk sl s).1,
+                (expJet2Curve g gi hC p 0 Φ hv0 hΦcont sk sl s).2) : Point n × Point n) from rfl,
+        fderiv2_geodesicField_apply_zero g gi hC p (s • dir) dir
+          (expJet2Curve g gi hC p 0 Φ hv0 hΦcont sk sl s).1
+          (expJet2Curve g gi hC p 0 Φ hv0 hΦcont sk sl s).2,
+        expJet2Curve_zero_velocity g gi hC p Φ hv0 hΦcont hΦeq sk sl s hs]
+    refine Prod.ext rfl ?_
+    funext i
+    simp only [rncCrossBlock, Pi.smul_apply, smul_eq_mul]
+    rw [mul_neg, neg_inj, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun m _ => ?_
+    ring
+  rw [expJet3Rhs_apply, ht1, hcross h k l, hcross k h l, hcross l h k]
+  refine Prod.ext (by simp) ?_
+  simp only [Prod.snd_add, Prod.mk_add_mk, smul_add, add_zero]
+
+set_option maxHeartbeats 1600000 in
+/-- **(a4a) — THE CLOSED THIRD-JET VALUE of `exp_p` at `v = 0`.**  Composing the reduction
+    `expJetD3_zero_integral` with the closed integrand `expJet3Rhs_zero_eq` and the elementary integral
+    `∫₀¹ (1−s)·s ds = 1/6`, the abstract Rung-3 third-jet operator collapses to the explicit rational
+    Christoffel combination
+      `expJetD3 … 0 Φ l k h = (1/6)·(rncD3Block + rncCrossBlock_h + rncCrossBlock_k + rncCrossBlock_l)`.
+    This is the closed `−∂Γ + ΓΓ` value (up to the `a₃`-symmetrization bookkeeping): the `1/6` is
+    exactly the RNC cubic coefficient, matching `expMap_value_three_jet`. -/
+theorem expJetD3_zero_closed (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦeq : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)))
+    (h k l : Point n) :
+    expJetD3 g gi hC p 0 Φ hv0 hΦcont l k h
+      = (1 / 6 : ℝ) • (rncD3Block g gi p h k l + rncCrossBlock g gi p h k l
+          + rncCrossBlock g gi p k h l + rncCrossBlock g gi p l h k) := by
+  rw [expJetD3_zero_integral g gi hC p Φ hv0 hΦcont h k l]
+  have hpt : Set.EqOn
+      (fun s => ((expJet3Rhs g gi hC p 0 Φ
+            (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+            (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+            (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s).1
+          + (1 - s) • (expJet3Rhs g gi hC p 0 Φ
+            (expJet2Curve g gi hC p 0 Φ hv0 hΦcont k l)
+            (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h l)
+            (expJet2Curve g gi hC p 0 Φ hv0 hΦcont h k) h k l s).2))
+      (fun s => ((1 - s) * s) • (rncD3Block g gi p h k l + rncCrossBlock g gi p h k l
+          + rncCrossBlock g gi p k h l + rncCrossBlock g gi p l h k))
+      (Set.uIcc (0 : ℝ) 1) := by
+    intro s hs
+    have hs' : s ∈ Set.Icc (0 : ℝ) 1 := by
+      rwa [Set.uIcc_of_le (by norm_num : (0 : ℝ) ≤ 1)] at hs
+    simp only [expJet3Rhs_zero_eq g gi hC p Φ hv0 hΦcont hΦeq h k l s hs', zero_add, smul_smul]
+  rw [intervalIntegral.integral_congr hpt, intervalIntegral.integral_smul_const]
+  have hint : (∫ s in (0 : ℝ)..1, (1 - s) * s) = 1 / 6 := by
+    have e : (fun s : ℝ => (1 - s) * s) = fun s => s ^ 1 - s ^ 2 := by funext s; ring
+    rw [e, intervalIntegral.integral_sub
+        ((continuous_pow 1).intervalIntegrable 0 1) ((continuous_pow 2).intervalIntegrable 0 1),
+      integral_pow, integral_pow]
+    norm_num
+  rw [hint]
+
+set_option maxHeartbeats 1600000 in
+/-- **(a4b) — THE DIAGONAL `a₃` MATCH: the closed third jet grounds the exp-map value 3-jet.**  On the
+    diagonal `l = k = h = v`, the closed third-jet operator value `expJetD3 … 0 Φ v v v` equals EXACTLY
+    the honest cubic coefficient `a₃(v)` of `expMap_value_three_jet` (the `(1/6)•…` term):
+      `expJetD3 … 0 v v v = −∑ ∂Γ·v³ + ∑ Γ(Γv²)v + ∑ Γ v(Γv²)`.
+    Structurally: the `1/6` cancels the combinatorial `6` of the fully-symmetric `∂Γ` diagonal (three
+    identical `D³F` brackets, each with a doubled `v_j v_m`), and the `1/6·3·2` of the three identical
+    `D²F` cross-terms (each carrying the doubled second-variation source `∑Γ(v²+v²)=2∑Γv²`) yields the
+    two `ΓΓ` blocks.  Composed with `a3rawArr_contract_eq_a3` (RNCGaugeExp) this is the third-jet =
+    `a3rawArr`-contraction identity the R3→κ ledger needs. -/
+theorem expJetD3_zero_diagonal (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦeq : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      Φ t = ContinuousLinearMap.id ℝ (Point n × Point n) + t • (linF (n := n)))
+    (v : Point n) (i : Fin n) :
+    expJetD3 g gi hC p 0 Φ hv0 hΦcont v v v i
+      = -(∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * v l)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+              * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+              * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b)) := by
+  -- abbreviate the inner `Γv²` contraction so scalar-distribution never mis-targets it.
+  set S : Fin n → ℝ := fun x => ∑ a, ∑ b, christoffel g gi x a b p * v a * v b with hSdef
+  -- the doubled second-variation source: `∑ Γ (v²+v²) = 2·(∑ Γ v²) = 2·S x`.
+  have hinner : ∀ x : Fin n,
+      (∑ j', ∑ m', christoffel g gi x j' m' p * (v j' * v m' + v j' * v m')) = 2 * S x := by
+    intro x
+    simp only [hSdef]
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun b _ => by ring
+  -- the `D³F` (`∂Γ`) block reduces to `−6·∑∂Γ v³`.
+  have hD3 : rncD3Block g gi p v v v i
+      = -6 * (∑ j, ∑ k, ∑ l, pd (fun z => christoffel g gi i j k z) l p * v j * v k * v l) := by
+    simp only [rncD3Block]
+    rw [neg_mul, neg_inj, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun m _ => ?_
+    simp only [Finset.sum_mul]
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib, Finset.mul_sum]
+    exact Finset.sum_congr rfl fun r _ => by ring
+  -- the RHS `ΓΓ`-blocks, rewritten as a single double sum (with `S` an opaque atom).
+  have key : (2 : ℝ) * ((∑ j, ∑ k, christoffel g gi i j k p * S j * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p * v j * S k))
+      = ∑ j, ∑ m, 2 * (christoffel g gi i j m p * (S j * v m + v j * S m)) := by
+    simp only [mul_add, Finset.mul_sum]
+    rw [← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl fun m _ => by ring
+  -- each `D²F` (`ΓΓ`) cross block reduces to `2·(block₁ + block₂)`.
+  have hCross : rncCrossBlock g gi p v v v i
+      = 2 * ((∑ j, ∑ k, christoffel g gi i j k p * S j * v k)
+             + (∑ j, ∑ k, christoffel g gi i j k p * v j * S k)) := by
+    rw [key]
+    simp only [rncCrossBlock, hinner]
+    rw [← Finset.sum_neg_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [← Finset.sum_neg_distrib]
+    exact Finset.sum_congr rfl fun m _ => by ring
+  rw [expJetD3_zero_closed g gi hC p Φ hv0 hΦcont hΦeq v v v]
+  simp only [Pi.smul_apply, Pi.add_apply, smul_eq_mul, hD3, hCross]
+  ring
+
 /-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
@@ -838,36 +1218,38 @@ theorem expJet3ValG_zero_eq (g gi : Point n → Fin n → Fin n → ℝ)
   Composing (a3) with `expJetD3_apply` gives the CLOSED INTEGRAL form of the target operator:
     `expJetD3 g gi hC p 0 Φ l k h = expJetPi (∫₀¹ (id+(1−s)•linF)(expJet3Rhs … 0 Φ … h k l s) ds)`.
 
-  **THE EXACT REMAINING GOAL — (a4), the `a₃` MATCH — IS THE WALL.**  What is still missing is
-    **`expJetPi (R^{hkl}_0(1)) = a3rawArr`-contracted cubic Christoffel operator**
-  (`expMap_value_three_jet` / `a3rawArr_contract_eq_a3` / `rncDΓ`).  This requires evaluating the
-  integrand `expJet3Rhs … 0 Φ Q_kl Q_hl Q_hk h k l s` in CLOSED Christoffel form, which needs the
-  closed-form VALUES of the SECOND and THIRD Fréchet derivatives of `geodesicField` at the equilibrium
-  `(p,0)`:  `D²F(p,0) = fderiv²(geodesicField)(p,0)` and `D³F(p,0) = fderiv³(geodesicField)(p,0)`
-  expressed through `pd Γ` / `pd² Γ` (like `geodesicField_fderiv_apply` does for the FIRST derivative).
-  **Those closed-form `apply` lemmas are NOT in the tree** — only `geodesicField_fderiv_apply` (order 1,
-  closed), plus order-2/3 CONTINUITY, NORM-bound and SYMMETRY lemmas (`contDiff_fderiv{2,3}_geodesicField`,
-  `fderiv3_geodesicField_symm_{ab,bc,cyc}`).  Building `fderiv2_geodesicField_apply` /
-  `fderiv3_geodesicField_apply` (extend `geodesicField_fderiv_apply` one/two orders via the `pd`
-  layers — flagged "reachable by extending … one order" at `ExpMapContDiff2.lean:41`) is a genuine
-  multi-lemma build; after it, the residual is the polynomial-in-`s` integral evaluation
-  (`Φ₀ s (ι h) = (h,0)` is CONSTANT since `linF(h,0)=(0,0)`; `∫₀¹ sᵏ ds = 1/(k+1)`) and the `a3rawArr`
-  symmetrization.  VERDICT: **(a4) is a WALL for now** — reachable-with-machinery, not a deep
-  obstruction, but gated on the two genuinely-missing `D²F`/`D³F` closed-Christoffel-value lemmas.
-  It is NOT a higher-rung (Rung-4) obstruction; the analytic content stays third-jet.
+  **(a4a) + (a4b) NOW LANDED (axiom-clean `[propext, Classical.choice, Quot.sound]`).**  The
+  `D²F(p,0)` / `D³F(p,0)` closed-Christoffel VALUE lemmas were built in `QIQTH/GeodesicFieldJets.lean`
+  (`fderiv2_geodesicField_apply_zero`, `fderiv3_geodesicField_apply_zero`); on top of them:
+    - `expJetD3_zero_integral` : the `π`-reduction `expJetD3 … 0 Φ l k h = ∫₀¹[(Θ₃ s).1 + (1−s)•(Θ₃ s).2]ds`;
+    - `vec_ode_nilpotent_const` : the general-`t` constant-source nilpotent Duhamel `X t = t•b + (t²/2)•(A b)`;
+    - `expFundZero_iota` / `expJet2Rhs_zero_const` / `expJet2Curve_zero_velocity` : `Φ₀ s (ι m)=(s•m,m)`,
+      the CONSTANT second-variation source `(0,c_{kl})`, and the linear-in-`s` velocity `(Q_{kl} s).2 = s•c_{kl}`;
+    - **(a4a) `expJetD3_zero_closed`** : the EXPLICIT closed value
+        `expJetD3 … 0 Φ l k h = (1/6)•(rncD3Block h k l + rncCrossBlock_h + rncCrossBlock_k + rncCrossBlock_l)`,
+      obtained by substituting the closed `D²F`/`D³F` values + the `Φ₀`/`Q_··` first-and-second variations
+      into `Θ₃ s`, factoring the polynomial `∫₀¹ (1−s)·s ds = 1/6`;
+    - **(a4b) `expJetD3_zero_diagonal`** : the diagonal `l=k=h=v` value equals EXACTLY the honest cubic
+      `a₃(v)` of `expMap_value_three_jet` (`−∑∂Γ v³ + ∑Γ(Γv²)v + ∑Γ v(Γv²)`); the `1/6` cancels the
+      combinatorial `6` (∂Γ, three brackets × doubled `v_jv_m`) and the `3·2` (three cross-terms × doubled
+      source).  Composed with `a3rawArr_contract_eq_a3` (RNCGaugeExp) this is the third-jet = `a3rawArr`
+      contraction identity the R3→κ ledger needs.
 
-  Once (a4) closes the closed `expJetD3 … 0 Φ`, the rest is reachable ASSEMBLY:
+  **THE REMAINING GOAL — (a4c), the BRIDGE `pd (christoffel g̃)(0) = rncDΓ`.**  With the closed
+  `expJetD3(0)` value in hand (= the pullback-metric 2nd jet via `hasFDerivAt_fderiv2_expMap_zero`,
+  which pins `fderiv (fun w => D²exp_p w) 0`), the residual is the twice-Leibniz assembly:
     (ii) twice-Leibniz + chain-rule expansion of `pd² g̃(0)` into the `∂²g` (curvature-of-`g`),
          `∂g·∂J`, `g·∂²J` blocks (mirroring `pd_expPullback_summand_zero`), collapsing the `Pi.single`
-         factors with `g(p)=δ`, `∂g̃(0)=0`, `pd_jacobian_expMap_zero`, and the new explicit `∂²J`;
+         factors with `g(p)=δ`, `∂g̃(0)=0`, `pd_jacobian_expMap_zero`, and the explicit `∂²J` from (a4a);
     (iii) `∂_l christoffel g̃(0)` reduces (via `Γ̃(0)=0`, `g̃(0)=δ`, `∂g̃(0)=0`) to a linear combination
          of `∂²g̃(0)`, which the `christoffel`/`christoffel_lower` differentiation + `a3rawArr_contract_eq_a3`
          match to `rncDΓ (christoffel g gi ·p) (pd christoffel ·p)`.
-  VERDICT: the analytic content remains `C²`/third-jet (no higher rung than Rung 3 needed); the open
-  work is concentrated in the single explicit-value identity above.  This is the "cited smooth-dependence
-  frontier" the campaign deferred — a WALL, not reachable assembly, until that identity is built; after it,
-  Steps 2–3 are assembly.  Checkpoints landed: value + first-order + connection jets (`g̃(0)=δ`,
-  `∂g̃(0)=0`, `Γ̃(0)=0`) PLUS the level-2 differentiability core (`hasFDerivAt_fderiv2_expMap_zero`).
+  VERDICT: the analytic content remains `C²`/third-jet (no higher rung than Rung 3 needed).  The
+  explicit-value identity that was the previous WALL is now PROVED (a4a/a4b); (a4c) is the remaining
+  reachable assembly (Leibniz bookkeeping + the value-2-jet↔`expJetD3` identification), not a deep
+  obstruction.  Checkpoints landed: value + first-order + connection jets (`g̃(0)=δ`, `∂g̃(0)=0`,
+  `Γ̃(0)=0`), the level-2 differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), AND the closed
+  third-jet value + its `a₃` grounding (`expJetD3_zero_closed` / `expJetD3_zero_diagonal`).
 
 ### REGULARITY LEDGER (R3→κ) — recorded, not `sorry`
 
