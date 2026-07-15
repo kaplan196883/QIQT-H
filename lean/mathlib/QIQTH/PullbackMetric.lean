@@ -1390,6 +1390,295 @@ theorem pd2_expPullbackMetric_at_zero (g gi : Point n → Fin n → Fin n → �
   exact Finset.sum_congr rfl (fun a _ => pd_sum Finset.univ _ l 0 (fun b _ => qq a b))
 
 /-!
+### (α) STEP 3 residual — the two second-jet INPUTS in closed Christoffel form
+
+The twice-Leibniz `pd_pd_mul3_zero` reduces each `(a,b)`-summand of `∂²g̃(0)` to nine terms whose two
+genuine second-jet inputs are `∂²(g∘exp)(0)` (the metric-along-exp Hessian) and `∂²J(0)` (the exp-map
+Jacobian's second jet, i.e. the third jet of `exp`).  Here we land the FIRST of the two — the clean
+chain-rule Hessian of `g∘exp_p` at the centre — as `pd2_metric_comp_expMap_zero`.
+-/
+
+/-- **Expansion of a scalar functional on `Point n` over the standard basis.**  For a continuous linear
+    functional `L` and a vector `w`, `L w = ∑_c w_c · L(e_c)` — the coordinate expansion of `L` acting
+    on `w = ∑_c w_c • e_c`. -/
+theorem clm_functional_pi_expand (L : Point n →L[ℝ] ℝ) (w : Point n) :
+    L w = ∑ c, w c * L (Pi.single c 1) := by
+  have hw : w = ∑ c, w c • (Pi.single c 1 : Point n) := by
+    funext i
+    simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Pi.single_apply, mul_ite,
+      mul_one, mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+  conv_lhs => rw [hw]
+  rw [map_sum]
+  exact Finset.sum_congr rfl fun c _ => by rw [map_smul, smul_eq_mul]
+
+/-- **Generic chain rule at the exp-centre.**  For any scalar field `F` differentiable at `p`, the
+    pullback of its first partial through `exp_p` is trivial at `0`: `∂_l(F∘exp_p)(0) = ∂_l F(p)`.
+    (Since `exp_p 0 = p` and `D exp_p 0 = id`.)  The generalisation of `pd_metric_comp_expMap_zero`
+    from `g_{ab}` to an arbitrary differentiable `F` — used to transport `∂_c g(p)` back through the
+    Jacobian's second jet. -/
+theorem pd_comp_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (F : Point n → ℝ) (hF : DifferentiableAt ℝ F p) (l : Fin n) :
+    pd (fun x => F (expMap g gi hC p x)) l 0 = pd F l p := by
+  have hFp : HasFDerivAt F (fderiv ℝ F p) (expMap g gi hC p 0) := by
+    rw [expMap_apply_zero]; exact hF.hasFDerivAt
+  have hexp : HasFDerivAt (expMap g gi hC p) (ContinuousLinearMap.id ℝ (Point n)) 0 :=
+    (hasStrictFDerivAt_expMap g gi hC p).hasFDerivAt
+  have hchain : HasFDerivAt (fun x => F (expMap g gi hC p x))
+      ((fderiv ℝ F p).comp (ContinuousLinearMap.id ℝ (Point n))) 0 := hFp.comp 0 hexp
+  rw [pd_eq_fderiv _ l 0 hchain.differentiableAt, hchain.fderiv]
+  simp only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply]
+  exact (pd_eq_fderiv F l p hF).symm
+
+set_option maxHeartbeats 800000 in
+/-- **(α1) — the chain-rule Hessian of `g∘exp_p` at the centre.**  The mixed second partial of the
+    metric-along-exp field is the ambient metric's own Hessian at `p` plus a `∂g·(∂²exp)` correction:
+      `∂_l∂_m(g(exp·)_{ab})(0) = ∂_l∂_m g_{ab}(p) + ∑_c ∂_c g_{ab}(p)·½(−Γ^c_{ml}(p) − Γ^c_{lm}(p))`.
+    The `∑_c ∂_c g · Γ` term is the pullback correction: the exp-Jacobian's linear jet
+    `∂_l(D exp·e_m)_c(0) = ½(−Γ^c_{ml} − Γ^c_{lm})` (`pd_jacobian_expMap_zero`) contracts against the
+    ambient gradient.  Proof: near `0` the first partial `∂_m(g∘exp)` is (chain rule + basis expansion)
+    `∑_c ∂_c g(exp·)·(D exp·e_m)_c`; differentiating this sum at `0` (`pd_sum`/`pd_mul`), the
+    `∂_c g(exp·)` factor pulls back to `∂_l∂_c g(p)` (via `pd_comp_expMap_zero`, contracted by the
+    Kronecker `(D exp 0·e_m)_c = δ_{mc}`) and the Jacobian factor contributes its RNC first jet. -/
+theorem pd2_metric_comp_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (a b l m : Fin n) :
+    pd (fun y => pd (fun x => g (expMap g gi hC p x) a b) m y) l 0
+      = pd (fun z => pd (fun y => g y a b) m z) l p
+        + ∑ c, pd (fun y => g y a b) c p
+            * (1 / 2 * (-christoffel g gi c m l p - christoffel g gi c l m p)) := by
+  have hgabdiff : Differentiable ℝ (fun z => g z a b) := (hg a b).differentiable (by simp)
+  have hgabF : Differentiable ℝ (fun z => fderiv ℝ (fun z => g z a b) z) :=
+    ((hg a b).fderiv_right (m := 1) le_top).differentiable (by norm_num)
+  have hpdc : ∀ c : Fin n, (fun z => pd (fun y => g y a b) c z)
+      = (fun z => (fderiv ℝ (fun y => g y a b) z) (Pi.single c 1)) :=
+    fun c => funext fun z => pd_eq_fderiv _ c z (hgabdiff z)
+  have hpdc_diff : ∀ c : Fin n, DifferentiableAt ℝ (fun z => pd (fun y => g y a b) c z) p := by
+    intro c; rw [hpdc c]; exact (hgabF p).clm_apply (differentiableAt_const _)
+  have hball : Metric.ball (0 : Point n) (expRho g gi hC p) ∈ nhds (0 : Point n) :=
+    Metric.ball_mem_nhds 0 (expRho_pos g gi hC p)
+  have hE0 : DifferentiableAt ℝ (expMap g gi hC p) 0 :=
+    (hasStrictFDerivAt_expMap g gi hC p).hasFDerivAt.differentiableAt
+  -- STEP 1: the first partial `∂_m(g∘exp)` as a basis-expanded product sum near `0`.
+  have hstep1 : (fun y => pd (fun x => g (expMap g gi hC p x) a b) m y) =ᶠ[nhds 0]
+      (fun y => ∑ c, pd (fun z => g z a b) c (expMap g gi hC p y)
+          * (fderiv ℝ (expMap g gi hC p) y) (Pi.single m 1) c) := by
+    filter_upwards [hball] with y hy
+    have hEy : DifferentiableAt ℝ (expMap g gi hC p) y :=
+      ((expMap_contDiffOn_three g gi hC p).differentiableOn (by norm_num)).differentiableAt
+        (Metric.isOpen_ball.mem_nhds hy)
+    have hgy : DifferentiableAt ℝ (fun z => g z a b) (expMap g gi hC p y) := hgabdiff _
+    have hcomp : HasFDerivAt (fun x => g (expMap g gi hC p x) a b)
+        ((fderiv ℝ (fun z => g z a b) (expMap g gi hC p y)).comp
+          (fderiv ℝ (expMap g gi hC p) y)) y :=
+      hgy.hasFDerivAt.comp y hEy.hasFDerivAt
+    rw [pd_eq_fderiv _ m y hcomp.differentiableAt, hcomp.fderiv, ContinuousLinearMap.comp_apply,
+      clm_functional_pi_expand (fderiv ℝ (fun z => g z a b) (expMap g gi hC p y))
+        ((fderiv ℝ (expMap g gi hC p) y) (Pi.single m 1))]
+    refine Finset.sum_congr rfl fun c _ => ?_
+    rw [mul_comm, ← pd_eq_fderiv _ c (expMap g gi hC p y) hgy]
+  rw [pd_congr_nhds l 0 hstep1]
+  -- differentiability of the two per-`c` factors at `0`.
+  have hpA : ∀ c : Fin n,
+      PdiffAt (fun y => pd (fun z => g z a b) c (expMap g gi hC p y)) l 0 := by
+    intro c
+    refine pdiffAt_of_differentiableAt _ l 0 ?_
+    have hout : DifferentiableAt ℝ (fun z => pd (fun y => g y a b) c z) (expMap g gi hC p 0) := by
+      rw [expMap_apply_zero]; exact hpdc_diff c
+    exact hout.comp 0 hE0
+  have hpB : ∀ c : Fin n,
+      PdiffAt (fun y => (fderiv ℝ (expMap g gi hC p) y) (Pi.single m 1) c) l 0 := fun c =>
+    pdiffAt_of_differentiableAt _ l 0
+      (hasFDerivAt_jacobian_component_expMap_zero g gi hC p m c).differentiableAt
+  -- STEP 2: `∂_l` distributes over the finite `∑_c` and each summand is a two-term Leibniz.
+  rw [pd_sum Finset.univ (fun c y => pd (fun z => g z a b) c (expMap g gi hC p y)
+        * (fderiv ℝ (expMap g gi hC p) y) (Pi.single m 1) c) l 0
+      (fun c _ => (hpA c).mul (hpB c))]
+  have hsummand : ∀ c : Fin n,
+      pd (fun y => pd (fun z => g z a b) c (expMap g gi hC p y)
+          * (fderiv ℝ (expMap g gi hC p) y) (Pi.single m 1) c) l 0
+        = pd (fun z => pd (fun y => g y a b) c z) l p * (Pi.single m 1 : Point n) c
+          + pd (fun y => g y a b) c p
+              * (1 / 2 * (-christoffel g gi c m l p - christoffel g gi c l m p)) := by
+    intro c
+    rw [pd_mul _ _ l 0 (hpA c) (hpB c)]
+    congr 1
+    · congr 1
+      · exact pd_comp_expMap_zero g gi hC p (fun z => pd (fun y => g y a b) c z) (hpdc_diff c) l
+      · exact jacobian_component_expMap_at_zero g gi hC p m c
+    · congr 1
+      · rw [expMap_apply_zero]
+      · exact pd_jacobian_expMap_zero g gi hC p m c l
+  rw [Finset.sum_congr rfl (fun c _ => hsummand c), Finset.sum_add_distrib]
+  congr 1
+  simp only [Pi.single_apply, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finset.mem_univ,
+    if_true]
+
+/-- **Scalar CLM-composition `HasFDerivAt`** (small-context helper).  For a scalar-valued continuous
+    linear functional `Θ` on an arbitrary normed space `G` and a field `F : Point n → G` differentiable
+    at `0`, the composite `x ↦ Θ(F x)` is differentiable at `0` with derivative `Θ ∘ F'`.  Abstracting
+    `G` keeps the `HasFDerivAt.comp` instance/unification search away from the deeply-nested concrete
+    CLM tower — Lean's instance search stalls on `NormedSpace` for iterated `→L` codomains, but the
+    abstract `G` sidesteps it, and the concrete instances (already witnessed by `hF`) discharge on
+    application. -/
+theorem hasFDerivAt_scalar_clm_comp {G : Type*} [NormedAddCommGroup G] [NormedSpace ℝ G]
+    (Θ : G →L[ℝ] ℝ) (F : Point n → G) (X : Point n →L[ℝ] G) (hF : HasFDerivAt F X 0) :
+    HasFDerivAt (fun x => Θ (F x)) (Θ.comp X) 0 :=
+  Θ.hasFDerivAt.comp (0 : Point n) hF
+
+set_option maxHeartbeats 1600000 in
+/-- **(α2) — the second jet of the exp-map Jacobian component (the SLOT-MATCH).**  The mixed second
+    partial of the scalar Jacobian component `x ↦ (D exp_p x·e_i)_a` at `0` is the `a`-component of the
+    closed Rung-3 third-jet value `expJetD3(0)` on the basis triple `(e_l, e_m, e_i)`:
+      `∂_l∂_m (D exp_p·e_i)_a(0) = [ (1/6)·(rncD3Block + rncCrossBlock ×3) ]_a`.
+    Proof (the iterated-`pd` ↔ `fderiv` transport, via a SCALAR composition to dodge the nested-CLM
+    instance wall): the first partial `∂_m(D exp_p·e_i)_a` equals `Θ(D²exp_p ·)` for the scalar CLM
+    `Θ T = (T e_m e_i)_a` (chain rule: `fderiv φ = Λ ∘ D²exp_p`, `Λ T = T(e_i)_a`, then contract `e_m`);
+    differentiating that scalar composite at `0` (`hasFDerivAt_scalar_clm_comp` with the abstract
+    intermediate space) gives `Θ ∘ D(fun w => D²exp_p w)(0) = Θ ∘ expJetD3(0)Φ`
+    (`hasFDerivAt_fderiv2_expMap_zero` internals), pinned to the affine propagator `Φ = id + t·linF`
+    (`expFund_zero_eq`) and read off in closed Christoffel form by `expJetD3_zero_closed`. -/
+theorem pd2_jacobian_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (i a l m : Fin n) :
+    pd (fun y => pd (fun x => (fderiv ℝ (expMap g gi hC p) x) (Pi.single i 1) a) m y) l 0
+      = ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)
+          + rncCrossBlock g gi p (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)
+          + rncCrossBlock g gi p (Pi.single m 1) (Pi.single i 1) (Pi.single l 1)
+          + rncCrossBlock g gi p (Pi.single l 1) (Pi.single i 1) (Pi.single m 1))) a := by
+  -- the affine `v = 0` propagator `Φ`, its ODE data, and the closed third-jet HasFDerivAt.
+  have h0lt : ‖(0 : Point n)‖ < expRho g gi hC p := by
+    rw [norm_zero]; exact expRho_pos g gi hC p
+  obtain ⟨Φ, hΦ0, hΦd, hFD⟩ := hasFDerivAt_expMap g gi hC p 0 h0lt
+  have hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1) := fun t ht => (hΦd t ht).continuousWithinAt
+  have hΦeq := expFund_zero_eq g gi hC p Φ hΦ0 hΦd
+  set X : Point n →L[ℝ] Point n →L[ℝ] Point n →L[ℝ] Point n :=
+    expJetD3 g gi hC p 0 Φ h0lt.le hΦcont with hXdef
+  have hfd2 : HasFDerivAt (fun w => fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) w) X 0 :=
+    expMap_fderiv2_hasFDerivAt g gi hC p 0 Φ h0lt hΦ0 hΦcont hΦd hFD.fderiv
+  -- the evaluation-then-projection CLMs: `Λ T = T(e_i)_a` and `Θ T = (T e_m e_i)_a`.
+  set Λ : (Point n →L[ℝ] Point n) →L[ℝ] ℝ :=
+    (ContinuousLinearMap.proj a).comp (ContinuousLinearMap.apply ℝ (Point n) (Pi.single i 1))
+    with hΛdef
+  set Θ : (Point n →L[ℝ] (Point n →L[ℝ] Point n)) →L[ℝ] ℝ :=
+    (ContinuousLinearMap.proj a).comp
+      ((ContinuousLinearMap.apply ℝ (Point n) (Pi.single i 1)).comp
+        (ContinuousLinearMap.apply ℝ (Point n →L[ℝ] Point n) (Pi.single m 1))) with hΘdef
+  have hball : Metric.ball (0 : Point n) (expRho g gi hC p) ∈ nhds (0 : Point n) :=
+    Metric.ball_mem_nhds 0 (expRho_pos g gi hC p)
+  -- `∂_m(D exp_p·e_i)_a = Θ(D² exp_p)` near `0` (chain rule + `e_m`-contraction).
+  have hΘeq : (fun y => pd (fun x => (fderiv ℝ (expMap g gi hC p) x) (Pi.single i 1) a) m y)
+      =ᶠ[nhds 0] (fun y => Θ (fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) y)) := by
+    filter_upwards [hball] with y hy
+    have hGy : DifferentiableAt ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) y :=
+      ((contDiffOn_fderiv_expMap g gi hC p).differentiableOn (by norm_num)).differentiableAt
+        (Metric.isOpen_ball.mem_nhds hy)
+    have hΛcomp : HasFDerivAt (fun x => (fderiv ℝ (expMap g gi hC p) x) (Pi.single i 1) a)
+        (Λ.comp (fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) y)) y := by
+      refine (Λ.hasFDerivAt.comp y hGy.hasFDerivAt).congr_of_eventuallyEq
+        (Filter.Eventually.of_forall fun z => ?_)
+      simp only [hΛdef, Function.comp_apply, ContinuousLinearMap.comp_apply,
+        ContinuousLinearMap.apply_apply, ContinuousLinearMap.proj_apply]
+    rw [pd_eq_fderiv _ m y hΛcomp.differentiableAt, hΛcomp.fderiv]
+    simp only [hΘdef, hΛdef, ContinuousLinearMap.comp_apply, ContinuousLinearMap.apply_apply,
+      ContinuousLinearMap.proj_apply]
+  -- differentiate the scalar composite at `0` via the abstract-`G` helper.
+  have hstep : HasFDerivAt (fun y => Θ (fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) y))
+      (Θ.comp X) 0 :=
+    hasFDerivAt_scalar_clm_comp Θ
+      (fun w => fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) w) X hfd2
+  rw [pd_congr_nhds l 0 hΘeq, pd_eq_fderiv _ l 0 hstep.differentiableAt, hstep.fderiv]
+  -- pull `Θ` through the evaluation, then substitute the closed third-jet value.
+  simp only [hΘdef, ContinuousLinearMap.comp_apply, ContinuousLinearMap.apply_apply,
+    ContinuousLinearMap.proj_apply]
+  rw [hXdef, expJetD3_zero_closed g gi hC p Φ h0lt.le hΦcont hΦeq
+    (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)]
+
+/-!
+### (β) STEP 3 — the metric-Christoffel differentiation reduction (the analytic half of the bridge)
+
+The first partial of the pullback Christoffel at the centre reduces, via `∂g̃(0) = 0` and the value of
+the inverse metric at `0`, to `½ g⁻¹(p)^{iα}·(∂²g̃ combination)` — the pure second-jet input the `rncDΓ`
+match consumes.  This is the load-bearing analytic step of `(β)`: it needs only that the supplied
+pullback inverse `gtildeInv` restricts at `0` to `gi p` and is differentiable there (`∂g̃⁻¹(0)` never
+appears, because it multiplies the vanishing `∂g̃(0)`).
+-/
+
+set_option maxHeartbeats 1600000 in
+/-- **(β), analytic half — `∂_l Γ̃^i_{jk}(0)` in terms of the pullback's second jet.**  For the pullback
+    metric `g̃ = exp_p^* g` and ANY inverse field `gtildeInv` that equals `gi p` at the centre and is
+    differentiable there, the first derivative of the pullback Christoffel at `0` is
+      `∂_l Γ̃^i_{jk}(0) = ½ ∑_α g⁻¹(p)^{iα}·(∂_l∂_j g̃_{αk} + ∂_l∂_k g̃_{αj} − ∂_l∂_α g̃_{jk})(0)`.
+    Proof: unfold `christoffel`, pull `∂_l` through the `½·∑_α` (`pd_const_mul`/`pd_sum`) and the
+    Leibniz product `gtildeInv·(∂g̃-bracket)` (`pd_mul`); the `∂g̃⁻¹·(∂g̃-bracket)` term vanishes because
+    `∂g̃(0)=0` (`pd_expPullbackMetric_at_zero`), and the surviving `gtildeInv(0)=gi p` factor multiplies
+    the second-jet bracket `∂_l(∂g̃-bracket)(0)` (`pd_add`/`pd_sub`, with the `C²`-localised
+    second-order partial differentiability `PdiffAt_pd_zero_of_contDiffAt2`). -/
+theorem pd_christoffel_expPullback_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (gtildeInv : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hgi0 : ∀ μ α, gtildeInv 0 μ α = gi p μ α)
+    (hgi_diff : ∀ μ α, DifferentiableAt ℝ (fun x => gtildeInv x μ α) 0)
+    (i j k l : Fin n) :
+    pd (fun x => christoffel (expPullbackMetric g gi hC p) gtildeInv i j k x) l 0
+      = (1 / 2) * ∑ α, gi p i α *
+          (pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+            + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+            - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0) := by
+  -- `C²`-at-`0` regularity of each pullback-metric component.
+  have hC2 : ∀ μ ν, ContDiffAt ℝ 2 (fun x => expPullbackMetric g gi hC p x μ ν) 0 :=
+    fun μ ν => contDiffAt2_expPullbackMetric_zero g gi hC p hg μ ν
+  -- second-order partial differentiability of the three bracket pieces.
+  have hpT1 : ∀ α, PdiffAt (fun x => pd (fun y => expPullbackMetric g gi hC p y α k) j x) l 0 :=
+    fun α => PdiffAt_pd_zero_of_contDiffAt2 _ j l (hC2 α k)
+  have hpT2 : ∀ α, PdiffAt (fun x => pd (fun y => expPullbackMetric g gi hC p y α j) k x) l 0 :=
+    fun α => PdiffAt_pd_zero_of_contDiffAt2 _ k l (hC2 α j)
+  have hpT3 : ∀ α, PdiffAt (fun x => pd (fun y => expPullbackMetric g gi hC p y j k) α x) l 0 :=
+    fun α => PdiffAt_pd_zero_of_contDiffAt2 _ α l (hC2 j k)
+  -- the bracket `Br α` is partially differentiable at `0`.
+  have hpBr : ∀ α, PdiffAt (fun x => pd (fun y => expPullbackMetric g gi hC p y α k) j x
+      + pd (fun y => expPullbackMetric g gi hC p y α j) k x
+      - pd (fun y => expPullbackMetric g gi hC p y j k) α x) l 0 :=
+    fun α => ((hpT1 α).add (hpT2 α)).sub (hpT3 α)
+  -- each `α`-summand is partially differentiable at `0`.
+  have hpGi : ∀ α, PdiffAt (fun x => gtildeInv x i α) l 0 :=
+    fun α => pdiffAt_of_differentiableAt _ l 0 (hgi_diff i α)
+  have hpS : ∀ α, PdiffAt (fun x => gtildeInv x i α
+      * (pd (fun y => expPullbackMetric g gi hC p y α k) j x
+        + pd (fun y => expPullbackMetric g gi hC p y α j) k x
+        - pd (fun y => expPullbackMetric g gi hC p y j k) α x)) l 0 :=
+    fun α => (hpGi α).mul (hpBr α)
+  -- per-`α` Leibniz value.
+  have key : ∀ α, pd (fun x => gtildeInv x i α
+        * (pd (fun y => expPullbackMetric g gi hC p y α k) j x
+          + pd (fun y => expPullbackMetric g gi hC p y α j) k x
+          - pd (fun y => expPullbackMetric g gi hC p y j k) α x)) l 0
+      = gi p i α *
+          (pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+            + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+            - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0) := by
+    intro α
+    rw [pd_mul _ _ l 0 (hpGi α) (hpBr α)]
+    have hBr0 : (pd (fun y => expPullbackMetric g gi hC p y α k) j 0
+        + pd (fun y => expPullbackMetric g gi hC p y α j) k 0
+        - pd (fun y => expPullbackMetric g gi hC p y j k) α 0) = 0 := by
+      rw [pd_expPullbackMetric_at_zero g gi hC p hsymm hinv hg α k j,
+        pd_expPullbackMetric_at_zero g gi hC p hsymm hinv hg α j k,
+        pd_expPullbackMetric_at_zero g gi hC p hsymm hinv hg j k α]
+      ring
+    rw [hBr0, mul_zero, zero_add, hgi0]
+    congr 1
+    rw [pd_sub _ _ l 0 ((hpT1 α).add (hpT2 α)) (hpT3 α), pd_add _ _ l 0 (hpT1 α) (hpT2 α)]
+  simp only [christoffel]
+  rw [pd_const_mul _ _ l 0 (PdiffAt_sum Finset.univ _ l 0 (fun α _ => hpS α)),
+    pd_sum Finset.univ _ l 0 (fun α _ => hpS α)]
+  congr 1
+  exact Finset.sum_congr rfl (fun α _ => key α)
+
+/-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
 * **The RNC value / first-order / connection jets of `g̃` at `0` are now PROVED** (all axiom-clean,
@@ -1483,27 +1772,49 @@ theorem pd2_expPullbackMetric_at_zero (g gi : Point n → Fin n → Fin n → �
   jets are the landed RNC values (`g(p)`, `J(0)=δ`, `∂J(0)=½(−Γ−Γ)` via `pd_jacobian_expMap_zero`) and
   whose two SECOND-jet inputs are `∂²(g∘exp)(0)` and `∂²J(0)`.
 
-  **THE REMAINING GOAL — (a4c) STEP 3, the BRIDGE `pd (christoffel g̃)(0) = rncDΓ`.**  Two residual
-  identifications, both `C²`/third-jet (no rung past Rung 3):
-    (α) **the two second-jet INPUTS in closed Christoffel form.**  `∂²J(0) = ∂²_{lm}(D exp·e_i)_a(0)`
-        is the third jet `D³exp(0)` = the closed `expJetD3(0)` value (a4a) — needs the SLOT MATCH
-        `pd (fun y => pd (fun x => (D exp x)(e_i)_a) m y) l 0 = expJetD3 … 0 Φ e_l e_m e_i` component `a`
-        (transport iterated-`pd` ↔ iterated-`fderiv` via `pd_pd_eq_of_contDiffAt2` twice + pull the
-        evaluation/projection CLM through `fderiv`, then instantiate `Φ = id + t·linF` by `expFund_zero_eq`
-        and apply `expJetD3_zero_closed`); and `∂²(g∘exp)(0)` is the chain-rule second derivative
-        `∂²g(p)[e_l,e_m] − ∑_c ∂_c g(p)·Γ^c_{lm}(p)` (an ambient `∂²g` input + the closed `D²exp(0)=−Γ`).
-    (β) **the metric-Christoffel differentiation + `rncDΓ` match.**  `∂_l Γ̃^i_{jk}(0)` reduces (via
-        `Γ̃(0)=0`, `g̃(0)=δ`, `∂g̃(0)=0`, so the `∂g̃⁻¹` terms drop) to `½δ^{iα}(∂_l∂_j g̃_{αk}+∂_l∂_k g̃_{αj}
-        −∂_l∂_α g̃_{jk})(0)`; substitute STEP 2 + (α) and match `rncDΓ (christoffel g gi ··p)
-        (pd christoffel ··p)` via `christoffel_lower` + `a3rawArr_contract_eq_a3` (RNCGaugeExp).  The
-        `∂²g` ambient blocks cancel against the metric-compatibility contractions, leaving the pure
-        `Γ,∂Γ` combination `rncDΓ`.  (Requires `import QIQTH.RNCGauge`; nothing imports PullbackMetric.)
-  VERDICT: STEP 2 (`pd²g̃(0)`) — the guaranteed floor — is LANDED; the bridge residual is the slot-match
-  (α) + the Christoffel/`rncDΓ` match (β), a reachable assembly, not a deep obstruction.  Checkpoints
-  landed: value + first-order + connection jets (`g̃(0)=δ`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
+  **STEP 3 — the BRIDGE `pd (christoffel g̃)(0) = rncDΓ`.**  Now decomposed into (α1)+(α2) [LANDED] +
+  (β)-analytic-half [LANDED] + the pure `rncDΓ` algebra [remaining].
+    (α1) **`pd2_metric_comp_expMap_zero` — LANDED (axiom-clean).**  The chain-rule Hessian of `g∘exp` at
+        the centre: `∂_l∂_m(g(exp·)_{ab})(0) = ∂_l∂_m g_{ab}(p) + ∑_c ∂_c g_{ab}(p)·½(−Γ^c_{ml} − Γ^c_{lm})`.
+        Proof: near `0`, `∂_m(g∘exp)` is the basis-expanded product sum `∑_c ∂_c g(exp·)·(D exp·e_m)_c`
+        (`clm_functional_pi_expand`); differentiating (`pd_sum`/`pd_mul`), the `∂_c g(exp·)` factor pulls
+        back to `∂_l∂_c g(p)` (`pd_comp_expMap_zero`, Kronecker-collapsed by `(D exp 0·e_m)_c = δ_{mc}`)
+        and the Jacobian factor gives its RNC first jet (`pd_jacobian_expMap_zero`).
+    (α2) **`pd2_jacobian_expMap_zero` — LANDED (axiom-clean).**  The SLOT-MATCH:
+        `∂_l∂_m (D exp·e_i)_a(0) = [ (1/6)·(rncD3Block + rncCrossBlock ×3) ]_a`.  Proof (via a SCALAR
+        composition to dodge the nested-CLM `NormedSpace`-instance wall): `∂_m(D exp·e_i)_a = Θ(D²exp·)`
+        for the scalar CLM `Θ T = (T e_m e_i)_a` (chain rule + `e_m`-contraction); differentiating that
+        scalar composite (`hasFDerivAt_scalar_clm_comp` with abstract intermediate space) gives
+        `Θ ∘ expJetD3(0)Φ` (`hasFDerivAt_fderiv2_expMap_zero`), pinned to `Φ = id + t·linF`
+        (`expFund_zero_eq`) and read off by `expJetD3_zero_closed`.
+    (β-analytic) **`pd_christoffel_expPullback_zero` — LANDED (axiom-clean).**  For any inverse field
+        `gtildeInv` with `gtildeInv(0) = gi p` (differentiable at `0`),
+        `∂_l Γ̃^i_{jk}(0) = ½ ∑_α g⁻¹(p)^{iα}·(∂_l∂_j g̃_{αk} + ∂_l∂_k g̃_{αj} − ∂_l∂_α g̃_{jk})(0)`.  The
+        `∂g̃⁻¹` terms drop because they multiply `∂g̃(0)=0`; the surviving `gi p` factor multiplies the
+        second-jet bracket.
+  **THE REMAINING (β) RESIDUAL — the pure `rncDΓ` algebra + the pullback-inverse construction.**
+    (β1) Construct the smooth pullback inverse `gtildeInv := expPullbackMetricInv` (matrix inverse of
+         `g̃` near `0`) and prove `gtildeInv(0) = gi p` and differentiability at `0` (the hypotheses of
+         `pd_christoffel_expPullback_zero`).  NOT YET DEFINED.
+    (β2) Substitute the closed `∂²g̃(0)` (via `pd2_expPullbackMetric_at_zero` +
+         `pd_pd_mul3_zero`, with the factor jets `g(p)`, `J(0)=δ`, `∂J(0)` and the two SECOND jets now
+         supplied by (α1)+(α2)) into the `½ ∑_α gi p^{iα}·(…)` combination of `pd_christoffel_expPullback_zero`,
+         and match `rncDΓ (christoffel g gi ··p) (pd (christoffel g gi ··) ·p)` via `christoffel_lower`
+         (metric compatibility) + `a3rawArr_contract_eq_a3` (`QIQTH.RNCGauge`/`RNCGaugeExp`).  The `∂²g`
+         ambient blocks (from (α1)) cancel against the metric-compatibility contractions, leaving the
+         pure `Γ,∂Γ` combination `rncDΓ`.  This is finite `Finset`/algebra — no rung past Rung 3, no new
+         analytic input — but a large multi-lemma assembly.  (Requires `import QIQTH.RNCGauge`.)
+  VERDICT: (α1), (α2) [the two irreducible second-jet inputs] AND (β)-analytic-half
+  [`pd_christoffel_expPullback_zero`] are all LANDED axiom-clean, exceeding the guaranteed floor.  What
+  remains for the full `rnc_christoffel_linearJet` bridge is (β1) the smooth pullback-inverse
+  construction + (β2) the pure `rncDΓ` algebraic match (the `∂²g`-cancellation via `christoffel_lower` +
+  the `a3rawArr` reindexing) — a reachable finite assembly, not a deep obstruction.  Checkpoints landed:
+  value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`
-  grounding (`expJetD3_zero_closed`/`expJetD3_zero_diagonal`), AND the closed `pd²g̃(0)` twice-Leibniz
-  (`pd_pd_mul3_zero`/`pd2_expPullbackMetric_at_zero`).
+  grounding (`expJetD3_zero_closed`/`expJetD3_zero_diagonal`), the closed `pd²g̃(0)` twice-Leibniz
+  (`pd_pd_mul3_zero`/`pd2_expPullbackMetric_at_zero`), the two second-jet closed forms
+  (`pd2_metric_comp_expMap_zero`/`pd2_jacobian_expMap_zero`), and the Christoffel-derivative reduction
+  (`pd_christoffel_expPullback_zero`).
 
 ### REGULARITY LEDGER (R3→κ) — recorded, not `sorry`
 

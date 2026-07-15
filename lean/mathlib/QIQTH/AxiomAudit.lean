@@ -10513,6 +10513,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.PdiffAt_pd_zero_of_contDiffAt2
 #print axioms QIQTH.PullbackMetric.pd_pd_mul3_zero
 #print axioms QIQTH.PullbackMetric.pd2_expPullbackMetric_at_zero
+-- ★ PARAMETRIX P1 R3→κ (bridge residuals α1+α2+β-analytic) — the two irreducible 2nd-jets are now CLOSED, plus
+-- the metric-Christoffel differentiation half of the bridge (PullbackMetric.lean).
+-- pd_comp_expMap_zero (general chain-rule ∂_l(h∘exp)(0) Kronecker-collapsed by D exp 0 = id).
+-- (α1) pd2_metric_comp_expMap_zero: ∂_l∂_m(g(exp·)_{ab})(0) = ∂_l∂_m g_{ab}(p) + ∑_c ∂_c g_{ab}(p)·½(−Γ^c_{ml}−Γ^c_{lm})
+--   — the chain-rule Hessian, stated in iterated-pd form matching pd_pd_mul3_zero's consumer slots (D²g input =
+--   the ambient metric's own second partial).  (α2) pd2_jacobian_expMap_zero: ∂_l∂_m(D exp·eᵢ)_a(0) =
+--   [(1/6)·(rncD3Block + rncCrossBlock×3)]_a — the SLOT-MATCH ∂²J(0)=expJetD3(0).  Snag resolved: the direct
+--   fderiv²-of-composition route hits a Mathlib instance-synthesis wall on nested →L codomains; fixed by composing
+--   with a SCALAR-valued CLM Θ T=(T e_m e_i)_a over an abstract intermediate G (one fderiv, not two), then
+--   expFund_zero_eq (Φ=id+t·linF) + expJetD3_zero_closed read off the closed value.  (β analytic half)
+--   pd_christoffel_expPullback_zero: ∂_l Γ̃^i_{jk}(0) = ½∑_α g⁻¹(p)^{iα}(∂_l∂_j g̃_{αk}+∂_l∂_k g̃_{αj}−∂_l∂_α g̃_{jk})(0)
+--   (the ∂g̃⁻¹ terms drop against ∂g̃(0)=0).  HONEST — the FULL bridge rnc_christoffel_linearJet is still
+--   CHECKPOINTED: residuals (β1) construct the smooth pullback inverse expPullbackMetricInv + its 0-jet (=gi p,
+--   differentiable) [not yet defined] and (β2) the pure rncDΓ finite-Finset algebra [substitute the closed ∂²g̃(0)
+--   via pd2_expPullbackMetric_at_zero/pd_pd_mul3_zero with the (α1)+(α2) 2nd-jets, cancel the ∂²g ambient blocks via
+--   christoffel_lower, match rncDΓ via a3rawArr_contract_eq_a3] — large algebra, NO new analytic input past Rung 3.
+-- Does NOT yet give the bridge / κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G, NOT the
+-- conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.pd_comp_expMap_zero
+#print axioms QIQTH.PullbackMetric.pd2_metric_comp_expMap_zero
+#print axioms QIQTH.PullbackMetric.pd2_jacobian_expMap_zero
+#print axioms QIQTH.PullbackMetric.pd_christoffel_expPullback_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
