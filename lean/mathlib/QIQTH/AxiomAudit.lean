@@ -10269,6 +10269,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.fderiv3_geodesicField_symm_bc
 #print axioms QIQTH.ExpMap.fderiv3_geodesicField_symm_cyc
 #print axioms QIQTH.ExpMap.expJet2FirstVar_residual_Icc
+-- ★ PARAMETRIX P1 RUNG 3 (capstone prereq e) — the [0,1] 2nd-variation two-point Lipschitz (ExpMapContDiff3.lean).
+-- expJet2_v_two_pt_Icc: ∃C≥0, ∀t∈Icc 0 1, ‖Qv t − Qw t‖ ≤ C‖v−w‖‖h‖‖k‖ — the base-point Lipschitz dependence of the
+-- Jet₂ 2nd-variation curve, on all of [0,1].  Mirror of expJet2Val_two_pt_diff (t=1) via gronwall_vec_residual_Icc,
+-- reusing the public expJet2_v_residual_hasDerivWithinAt/_norm_le.  The last prerequisite (e) of the Jet₃ quadratic
+-- remainder bound.  HONEST: prerequisite only; does NOT give the ρ≤C‖l‖² assembly / ContDiff³ / κ=1/6 / parametrix /
+-- general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2_v_two_pt_Icc
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
