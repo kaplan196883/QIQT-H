@@ -572,6 +572,17 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-15 — R3→κ BRIDGE RESIDUALS (α1)+(α2)+(β-analytic) LANDED (PUSHED `038967a9`, [AF] std-3,
+  `PullbackMetric.lean`):** the two irreducible 2nd-jets of the bridge are CLOSED plus the metric-Christoffel
+  differentiation half. `pd_comp_expMap_zero` (general chain-rule ∂_l(h∘exp)(0)); **(α1) `pd2_metric_comp_expMap_zero`**
+  (∂_l∂_m(g(exp·)_ab)(0)=∂_l∂_m g_ab(p)+∑_c ∂_c g_ab(p)·½(−Γ^c_ml−Γ^c_lm), chain-rule Hessian, iterated-pd form);
+  **(α2) `pd2_jacobian_expMap_zero`** (the SLOT-MATCH ∂²J(0)=expJetD3(0); the fderiv²-of-composition route hits a
+  Mathlib instance-synthesis wall on nested →L codomains, RESOLVED via a scalar-valued CLM over an abstract
+  intermediate space + expFund_zero_eq + expJetD3_zero_closed); **(β analytic half) `pd_christoffel_expPullback_zero`**
+  (∂_l Γ̃^i_jk(0)=½∑_α g⁻¹(p)^iα(∂_l∂_j g̃_αk+∂_l∂_k g̃_αj−∂_l∂_α g̃_jk)(0)). ⚠ FULL bridge `rnc_christoffel_linearJet`
+  still CHECKPOINTED: residuals **(β1)** smooth pullback inverse `expPullbackMetricInv` + 0-jet, **(β2)** `rncDΓ`
+  finite-Finset algebra — NO new analytic input past Rung 3. Does NOT yet give κ=1/6 / P2 / general a₁=R/6. NEXT
+  brick = (β1)+(β2) ⟹ the bridge ⟹ then the FINAL κ=1/6 brick.
 - **★★★ 2026-07-15 — RUNG 3 DONE — `expMap_contDiffOn_three` UNCONDITIONAL (PUSHED `935240d5`, [AF] std-3):**
   `ContDiffOn ℝ 3 (expMap g gi hC p) (ball 0 expRho)`, NO side hypothesis (`QIQTH/ExpMapContDiff3.lean`). The full
   Jet₃ mirror of Rung 2 landed (~15 bricks): D³F regularity + **D³F symmetry `fderiv3_geodesicField_symm_*` (Mathlib-gap
