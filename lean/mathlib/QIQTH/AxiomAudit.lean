@@ -10587,6 +10587,25 @@ namespace QIQTH.AxiomAudit
 -- Does NOT yet give the UNCONDITIONAL gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3 (conditional).
 #print axioms QIQTH.PullbackMetric.dGammaDiag_pd_christoffel_expPullbackInv_reduce
 #print axioms QIQTH.PullbackMetric.gauge_pd_christoffel_expPullbackInv_zero
+-- ★ PARAMETRIX P1 R3→κ (radial-identity FLOOR — the full closed ∂²g̃(0)) (PullbackMetric.lean).
+-- contDiffAt2_metric_comp_expMap_zero (C²-at-0 of x↦g(exp·)_ab) + contDiffAt2_jacobian_component_expMap_zero
+-- (C²-at-0 of x↦(D exp·eᵢ)_a) — the two C²-regularity inputs.  pd2_expPullback_summand_zero: the per-(a,b) closed
+-- NINE-term second jet of g̃ (pd_pd_mul3_zero with every factor jet substituted by its landed RNC closed form:
+-- g(p), J(0)=δ, ∂J=½(−Γ−Γ), ∂g(p), the metric Hessian α1, the Jacobian 2nd jet α2 = (1/6)(rncD3Block+3·rncCrossBlock)).
+-- ★ expPullbackMetric_pd2_closed: the assembled closed ∂_l∂_m g̃_ij(0) = ∑_{a,b}(nine terms) — the full ∂²g̃(0) the
+-- radial identity consumes.  HONEST — expPullback_radial_gauge (⟹ the UNCONDITIONAL cyclic gauge) still NOT closed;
+-- after rw[dGammaDiag_..._reduce] + subst this closed form, THREE finite steps remain (RNC JET LEDGER (β2)): (i) the
+-- TRUE residual blocker = block-multilinearity of rncD3Block/rncCrossBlock (α2 enters two-slot NON-diagonal — metric
+-- slot at a basis vector, two derivative slots contracted with v — so expJetD3_zero_diagonal does NOT apply; the
+-- per-Point-argument linearity infra is the one piece NOT yet in the tree); (ii) the ∂²g(p) cancellation via
+-- christoffel_lower (VERIFIED correction: the individual-vanishing shortcut A_α=B_α=0 is FALSE — the gi(p)-weighted
+-- 2A−B combination with christoffel_lower is MANDATORY); (iii) Γ,∂Γ reindex onto dGammaDiag(rncDΓ)v i =0 via
+-- a3rawArr_contract_eq_a3 + sum3_sym_contract + expMap_rncDΓ_diag_zero.  Does NOT give κ=1/6 / P2 / general a₁=R/6.
+-- [AF] std-3.
+#print axioms QIQTH.PullbackMetric.contDiffAt2_metric_comp_expMap_zero
+#print axioms QIQTH.PullbackMetric.contDiffAt2_jacobian_component_expMap_zero
+#print axioms QIQTH.PullbackMetric.pd2_expPullback_summand_zero
+#print axioms QIQTH.PullbackMetric.expPullbackMetric_pd2_closed
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

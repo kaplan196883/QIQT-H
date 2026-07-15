@@ -1596,6 +1596,128 @@ theorem pd2_jacobian_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hXdef, expJetD3_zero_closed g gi hC p Φ h0lt.le hΦcont hΦeq
     (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)]
 
+/-- **`C²`-at-`0` regularity of the metric-along-exp factor `x ↦ g(exp_p x)_{ab}`.**  Restriction of
+    the ball-wide `ContDiffOn 2` (composition of the `C^∞` metric with the `C³` exp map) to the germ. -/
+theorem contDiffAt2_metric_comp_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (a b : Fin n) :
+    ContDiffAt ℝ 2 (fun x => g (expMap g gi hC p x) a b) 0 :=
+  (((hg a b).of_le le_top).comp_contDiffOn
+      ((expMap_contDiffOn_three g gi hC p).of_le (by norm_num))).contDiffAt
+    (Metric.ball_mem_nhds 0 (expRho_pos g gi hC p))
+
+/-- **`C²`-at-`0` regularity of the exp-map Jacobian component `x ↦ (D exp_p x·e_i)_a`.**  Restriction
+    of the ball-wide `ContDiffOn 2` (`contDiffOn_fderiv_expMap_component`) to the germ. -/
+theorem contDiffAt2_jacobian_component_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (i a : Fin n) :
+    ContDiffAt ℝ 2 (fun x => (fderiv ℝ (expMap g gi hC p) x) (Pi.single i 1) a) 0 :=
+  (contDiffOn_fderiv_expMap_component g gi hC p i a).contDiffAt
+    (Metric.ball_mem_nhds 0 (expRho_pos g gi hC p))
+
+set_option maxHeartbeats 1600000 in
+/-- **FLOOR — the closed nine-term second jet of one `(a,b)` summand of `g̃`.**  The mixed second
+    partial of the triple product `g(exp·)_{ab}·(D exp·e_i)_a·(D exp·e_j)_b` at `0`, with every factor
+    jet substituted by its landed RNC closed form: the value `g(p)_{ab}`, the Kronecker `J(0)=δ`, the
+    first jet `∂J(0)=½(−Γ−Γ)` (`pd_jacobian_expMap_zero`), the metric first jet `∂g(p)`
+    (`pd_metric_comp_expMap_zero`), the metric Hessian (α1, `pd2_metric_comp_expMap_zero`) and the
+    Jacobian second jet (α2, `pd2_jacobian_expMap_zero`).  Pure `rw` + `ring`; the one-order-up analogue
+    of `pd_expPullback_summand_zero`. -/
+theorem pd2_expPullback_summand_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (i j l m a b : Fin n) :
+    pd (fun y => pd (fun x =>
+          g (expMap g gi hC p x) a b
+          * (fderiv ℝ (expMap g gi hC p) x) (Pi.single i 1) a
+          * (fderiv ℝ (expMap g gi hC p) x) (Pi.single j 1) b) m y) l 0
+      = (pd (fun z => pd (fun y => g y a b) m z) l p
+            + ∑ c, pd (fun y => g y a b) c p
+                * (1 / 2 * (-christoffel g gi c m l p - christoffel g gi c l m p)))
+          * (Pi.single i 1 : Point n) a * (Pi.single j 1 : Point n) b
+        + pd (fun y => g y a b) m p
+            * (1 / 2 * (-christoffel g gi a i l p - christoffel g gi a l i p))
+            * (Pi.single j 1 : Point n) b
+        + pd (fun y => g y a b) m p * (Pi.single i 1 : Point n) a
+            * (1 / 2 * (-christoffel g gi b j l p - christoffel g gi b l j p))
+        + pd (fun y => g y a b) l p
+            * (1 / 2 * (-christoffel g gi a i m p - christoffel g gi a m i p))
+            * (Pi.single j 1 : Point n) b
+        + g p a b
+            * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single m 1) (Pi.single i 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single i 1) (Pi.single m 1))) a)
+            * (Pi.single j 1 : Point n) b
+        + g p a b
+            * (1 / 2 * (-christoffel g gi a i m p - christoffel g gi a m i p))
+            * (1 / 2 * (-christoffel g gi b j l p - christoffel g gi b l j p))
+        + pd (fun y => g y a b) l p * (Pi.single i 1 : Point n) a
+            * (1 / 2 * (-christoffel g gi b j m p - christoffel g gi b m j p))
+        + g p a b
+            * (1 / 2 * (-christoffel g gi a i l p - christoffel g gi a l i p))
+            * (1 / 2 * (-christoffel g gi b j m p - christoffel g gi b m j p))
+        + g p a b * (Pi.single i 1 : Point n) a
+            * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single m 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single j 1) (Pi.single m 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single m 1) (Pi.single j 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single m 1))) b) := by
+  rw [pd_pd_mul3_zero
+      (fun x => g (expMap g gi hC p x) a b)
+      (fun x => (fderiv ℝ (expMap g gi hC p) x) (Pi.single i 1) a)
+      (fun x => (fderiv ℝ (expMap g gi hC p) x) (Pi.single j 1) b) l m
+      (contDiffAt2_metric_comp_expMap_zero g gi hC p hg a b)
+      (contDiffAt2_jacobian_component_expMap_zero g gi hC p i a)
+      (contDiffAt2_jacobian_component_expMap_zero g gi hC p j b)]
+  simp only [expMap_apply_zero, jacobian_component_expMap_at_zero,
+    pd_metric_comp_expMap_zero g gi hC p hg, pd_jacobian_expMap_zero,
+    pd2_metric_comp_expMap_zero g gi hC p hg, pd2_jacobian_expMap_zero]
+
+set_option maxHeartbeats 1600000 in
+/-- **FLOOR — the CLOSED `∂²g̃(0)` twice-Leibniz form.**  Assembling `pd2_expPullbackMetric_at_zero`
+    (the mixed second partial commutes with the finite `∑_{a,b}`) with the per-summand closed nine-term
+    `pd2_expPullback_summand_zero`, the pullback metric's second jet at the centre is the explicit double
+    sum of the nine substituted-jet terms.  This is the closed `∂²g̃(0)` the radial identity consumes;
+    every factor jet is now in closed Christoffel / `rncD3Block`+`rncCrossBlock` form. -/
+theorem expPullbackMetric_pd2_closed (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (i j l m : Fin n) :
+    pd (fun y => pd (fun x => expPullbackMetric g gi hC p x i j) m y) l 0
+      = ∑ a, ∑ b,
+          ((pd (fun z => pd (fun y => g y a b) m z) l p
+              + ∑ c, pd (fun y => g y a b) c p
+                  * (1 / 2 * (-christoffel g gi c m l p - christoffel g gi c l m p)))
+            * (Pi.single i 1 : Point n) a * (Pi.single j 1 : Point n) b
+          + pd (fun y => g y a b) m p
+              * (1 / 2 * (-christoffel g gi a i l p - christoffel g gi a l i p))
+              * (Pi.single j 1 : Point n) b
+          + pd (fun y => g y a b) m p * (Pi.single i 1 : Point n) a
+              * (1 / 2 * (-christoffel g gi b j l p - christoffel g gi b l j p))
+          + pd (fun y => g y a b) l p
+              * (1 / 2 * (-christoffel g gi a i m p - christoffel g gi a m i p))
+              * (Pi.single j 1 : Point n) b
+          + g p a b
+              * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single i 1) (Pi.single m 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single m 1) (Pi.single i 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single l 1) (Pi.single i 1) (Pi.single m 1))) a)
+              * (Pi.single j 1 : Point n) b
+          + g p a b
+              * (1 / 2 * (-christoffel g gi a i m p - christoffel g gi a m i p))
+              * (1 / 2 * (-christoffel g gi b j l p - christoffel g gi b l j p))
+          + pd (fun y => g y a b) l p * (Pi.single i 1 : Point n) a
+              * (1 / 2 * (-christoffel g gi b j m p - christoffel g gi b m j p))
+          + g p a b
+              * (1 / 2 * (-christoffel g gi a i l p - christoffel g gi a l i p))
+              * (1 / 2 * (-christoffel g gi b j m p - christoffel g gi b m j p))
+          + g p a b * (Pi.single i 1 : Point n) a
+              * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single m 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single j 1) (Pi.single m 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single m 1) (Pi.single j 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single m 1))) b)) := by
+  rw [pd2_expPullbackMetric_at_zero g gi hC p hg i j l m]
+  exact Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ =>
+    pd2_expPullback_summand_zero g gi hC p hg i j l m a b
+
 /-!
 ### (β) STEP 3 — the metric-Christoffel differentiation reduction (the analytic half of the bridge)
 
@@ -2071,9 +2193,37 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
              `heat_a1_of_gauge`'s `hgauge` for the pullback metric, discharged MODULO the single
              hypothesis `hrad`.  So the endgame is now wired end-to-end: the ONLY missing input is the
              radial scalar identity below.
-    (β2) **CHECKPOINTED (the SOLE remaining wall — the analytic content of RNC).**  With (β3′) landed,
-         the wall is EXACTLY the reduced scalar identity (drop the `hrad` hypothesis of
-         `gauge_pd_christoffel_expPullbackInv_zero` by proving `expPullback_radial_gauge`):
+    (β2) **PARTIALLY LANDED — the closed `∂²g̃(0)` FLOOR is now built; the contraction/cancellation
+         remains.**  NEW axiom-clean lemmas (`[propext, Classical.choice, Quot.sound]`):
+           - `contDiffAt2_metric_comp_expMap_zero` / `contDiffAt2_jacobian_component_expMap_zero` : the
+             two `C²`-at-`0` factor-regularity facts that feed `pd_pd_mul3_zero`.
+           - **`pd2_expPullback_summand_zero`** : THE per-`(a,b)`-summand closed nine-term second jet, with
+             every factor jet substituted by its landed RNC form (value `g(p)`, `J(0)=δ`, `∂J(0)=½(−Γ−Γ)`,
+             the metric first jet `∂g(p)`, the metric Hessian (α1), the Jacobian second jet (α2) =
+             `(1/6)(rncD3Block + 3·rncCrossBlock)`).  Pure `rw [pd_pd_mul3_zero …]` + `simp only [<all jets>]`.
+           - **`expPullbackMetric_pd2_closed`** : the ASSEMBLED closed `∂_l∂_m g̃_{ij}(0) = ∑_{a,b}(nine
+             terms)` (`pd2_expPullbackMetric_at_zero` + the summand, `Finset.sum_congr`).  This is the
+             full closed `∂²g̃(0)` the radial identity consumes.
+         WHAT STILL REMAINS to discharge `expPullback_radial_gauge` (drop `hrad`): the CONTRACTION of the
+         closed `∂²g̃(0)` and the two cancellations.  Precisely — after `rw
+         [dGammaDiag_pd_christoffel_expPullbackInv_reduce]` the goal is
+           **`∑_α gi(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩) = 0`     (∀ v, i)**,
+         and substituting `expPullbackMetric_pd2_closed` for the two brackets leaves THREE mechanical but
+         sizeable finite steps, none present in the tree yet:
+           (i)  **block multilinear contraction** — `∑_l ∑_j rncD3Block/rncCrossBlock(…e_l…e_j…) v^l v^j
+                = block(…v…v…)`.  The `α2` second jet enters the contraction with its metric slot fixed at
+                a BASIS vector (`e_α` for `A`, `e_j`/`e_k` for `B`) and its two derivative slots contracted
+                with `v`, so this is a TWO-SLOT (not full-diagonal) contraction — `expJetD3_zero_diagonal`
+                does NOT apply; one must prove `rncD3Block`/`rncCrossBlock` linear in each `Point` argument.
+           (ii) **the `∂²g(p)` cancellation** — the ONLY `∂²g(p)` term in `A_α` is `⟨∂_l∂_j g_{αk}(p)⟩`
+                (from the `α1` block of the summand's `t1`); it does NOT vanish inside `A_α` alone, but the
+                combination `∑_α gi(p)^{iα}(2·⟨∂_l∂_j g_{αk}⟩ − ⟨∂_l∂_α g_{jk}⟩)` collapses under
+                `christoffel_lower` (metric compatibility) — the same cancellation that made `∂g̃(0)=0` in
+                `pd_expPullbackMetric_at_zero`, one order up.
+           (iii)**the `Γ,∂Γ` reindex/vanish** — the surviving cubic (the `α2` blocks + the `∂g·Γ` and `Γ·Γ`
+                terms) contracts, via `a3rawArr_contract_eq_a3` + `sum3_sym_contract`, onto
+                `dGammaDiag (rncDΓ …) v i`, which is `0` by `expMap_rncDΓ_diag_zero`.
+         (Equivalently the reduced scalar identity below.)
            **`∑_α gi(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩) = 0`     (∀ v, i)**,
          `⟨·⟩ := ∑_{l,j,k} · v^l v^j v^k` — the RHS of `dGammaDiag_pd_christoffel_expPullbackInv_reduce`.
          Equivalently the radial identity of (β3) OR the pointwise bridge `rnc_christoffel_linearJet`:
@@ -2106,13 +2256,17 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
   `expPullbackMetric_symm`, `pd_christoffel_expPullbackInv_lower_symm`, `cyclic_of_gaugeJet_lower_symm`]
   AND (β3′) [the radial reduction `dGammaDiag_pd_christoffel_expPullbackInv_reduce` + the mechanical
   cyclic-gauge capstone `gauge_pd_christoffel_expPullbackInv_zero` (modulo `hrad`)]
-  are all LANDED axiom-clean, exceeding the guaranteed floor.  What remains for the full cyclic gauge is
-  ONLY (β2) — a single scalar `Finset` identity, now in its CRISP reduced form (the RHS of
-  `dGammaDiag_pd_christoffel_expPullbackInv_reduce` set to `0`):
-  `∑_α gi(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩) = 0` — the `∂²g`-cancellation via
-  `christoffel_lower` + the `a3rawArr` reindexing — a reachable finite assembly, not a deep obstruction.
-  Discharging it removes the `hrad` hypothesis of `gauge_pd_christoffel_expPullbackInv_zero`, making the
-  cyclic gauge UNCONDITIONAL.  Checkpoints landed:
+  are all LANDED axiom-clean, exceeding the guaranteed floor.  **The (β2) FLOOR is now ALSO landed**
+  (`contDiffAt2_metric_comp_expMap_zero`, `contDiffAt2_jacobian_component_expMap_zero`,
+  `pd2_expPullback_summand_zero`, `expPullbackMetric_pd2_closed` — the CLOSED `∂²g̃(0)` twice-Leibniz).
+  What remains for the full cyclic gauge is the CONTRACTION of that closed `∂²g̃(0)` and its two
+  cancellations — the three steps (i) block multilinear contraction, (ii) `∂²g` cancellation via
+  `christoffel_lower`, (iii) `Γ,∂Γ` reindex to `rncDΓ` via `a3rawArr_contract_eq_a3` +
+  `expMap_rncDΓ_diag_zero` — spelled out in the (β2) checkpoint above; the block-multilinearity of step
+  (i) (`rncD3Block`/`rncCrossBlock` linear in each `Point` argument, for the TWO-SLOT non-diagonal
+  contraction) is the one piece not yet in the tree.  Discharging all three removes the `hrad`
+  hypothesis of `gauge_pd_christoffel_expPullbackInv_zero`, making the cyclic gauge UNCONDITIONAL.
+  Checkpoints landed:
   value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`
   grounding (`expJetD3_zero_closed`/`expJetD3_zero_diagonal`), the closed `pd²g̃(0)` twice-Leibniz
