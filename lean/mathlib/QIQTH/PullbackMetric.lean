@@ -4564,6 +4564,36 @@ Quot.sound]`, file GREEN — `hpd2_alpha1_cancel` FULLY CLOSED, `2·A − B` is 
   leaving the `∂²g`-FREE residual in `{∂g, Γ, ∂Γ, g}` (fold1 `∂g·Γ`, fold2/3/4/6/7/8, the fold5 `∂Γ`-blocks
   intact, the fold9 Cross `ΓΓ`, and the fold9 `∂g·Γ` Christoffel core).  NOTE `hpd2_cubic_vanish` / the
   full `2A−B=0` assembly are the NEXT bricks (NOT attempted here).
+
+### CHECKPOINT — `hpd2_cubic_vanish` decomposition (verified experimentally, NOT yet landed)
+
+The residual RHS of `hpd2_alpha1_cancel` splits into TWO parts:
+
+* **`∂Γ` (`D³`) part** — the `rncD3Block` sub-terms of `fold5_A`, `fold5_B`, `fold9_B`.  These cancel
+  IDENTICALLY: `2·((1/6)∑_{a,k} g_{ak}v^k·D3(e_α,v,v)_a) − ((1/6)∑ g v·D3(v,e_α,v)) −
+  ((1/6)∑_{b,j} g_{jb}v^j·D3(v,e_α,v)_b) = 0` is EXACTLY the already-landed `hpd2_fold5_blocks_cancel`
+  (via `rncD3Block_swap12` + `hsymm`).  Confirmed: the residual's `D³` coefficients (`2·(1/6)`, `−(1/6)`,
+  `−(1/6)`) match `hpd2_fold5_blocks_cancel` verbatim.
+
+* **`∂g·Γ` + `g·Γ·Γ` + Cross(`g·Γ·Γ`) remainder** — everything else (fold1/2/3/4/7 `∂g·Γ`, fold6/8
+  `g·Γ·Γ`, the `fold5_A/5_B/9_B` `rncCrossBlock` sub-terms, `fold9_A` Cross, and the `fold9_A` `∂g·Γ`
+  core).  This is `THE remaining wall`.  Metric compatibility converts every `∂g` to `g·Γ`:
+    `∂_c g_{ak}(p) = ∑_σ Γ^σ_{ca}(p)·g_{σk}(p) + ∑_σ Γ^σ_{ck}(p)·g_{aσ}(p)`   (`metric_compat`,
+  `covDeriv02 g gi g c a k p = 0`; VERIFIED to compile as a local rewrite `hmc`), after which the whole
+  remainder is a single-`g`, two-`Γ`, three-`v` contraction `∑ g·Γ·Γ·v³` that must vanish.  Its truth is
+  the RNC radial gauge; its Lean closure requires SUM-REINDEXING (relabelling the contracted `v`-dummies
+  by `Finset.sum_comm`) together with `christoffel`-lower symmetry — NEITHER of which `ring`/`ring_nf`/
+  `linarith` perform (they treat each distinct `∑`-nesting as an independent atom).  Experimentally,
+  `simp only [hmc, rncD3Block, rncCrossBlock]; ring_nf; linarith [hpd2_fold5_blocks_cancel …]` normalizes
+  but FAILS to close (confirmed: the normalized goal is a nonzero polynomial whose atoms differ only by
+  dummy reindexing).  The intended discharge is the file's own reindex toolkit (`reorder*`, `fold*`,
+  `a3rawArr_contract_eq_a3`, `sum3_sym_contract`) mapping the remainder onto
+  `dGammaDiag (rncDΓ (christoffel g gi · · · p) (pd (christoffel g gi · · ·) · p)) v ?`, which vanishes by
+  `QIQTH.RNCGauge.expMap_rncDΓ_diag_zero` — a ~200-term reindexing brick.
+
+Once `hpd2_cubic_vanish` lands, `expPullback_hpd2` (`∀ α v, 2A−B=0`), `expPullback_radial_gauge`, and the
+UNCONDITIONAL `gauge_pd_christoffel_expPullbackInv_zero'` (feeding `..._of_pd2`) all follow mechanically —
+the MILESTONE (unconditional cyclic RNC gauge for `g̃`).
 -/
 
 end QIQTH.PullbackMetric
