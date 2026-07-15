@@ -407,6 +407,54 @@ theorem christoffel_expPullbackMetric_zero (g gi : Point n → Fin n → Fin n �
   rw [Finset.sum_congr rfl (fun α _ => hz α), Finset.sum_const_zero, mul_zero]
 
 /-!
+### STEP 1 — the level-2 exp-Jacobian jet at `0` (the load-bearing second-order regularity fact)
+-/
+
+/-- **Step 1 (regularity core) — the exp-map second-derivative field is Fréchet-differentiable at `0`,
+    with derivative the abstract Rung-3 third-jet operator `expJetD3 … 0 Φ`.**  This is the direct
+    one-order-up mirror of `hasFDerivAt_fderiv_expMap_zero` (which handled `v ↦ D exp_p v`): here the
+    map is `w ↦ D²exp_p w = fderiv (fun z => fderiv exp_p z) w`, the Jacobian OF the Jacobian.
+
+    Proof: instantiate the Rung-3 second-derivative differentiability capstone
+    `expMap_fderiv2_hasFDerivAt` at `v = 0`.  The propagator `Φ` and its ODE/continuity data are
+    supplied by `hasFDerivAt_expMap` at `0` (`0` lies inside the exp-ball since `0 < expRho`); the
+    required `fderiv`-identity `fderiv exp_p 0 = π ∘ (Φ 1) ∘ ι` is `hFD.fderiv`.  The resulting
+    derivative is the (propagator-dependent) abstract third-jet operator `expJetD3 g gi hC p 0 Φ`.
+    Since `HasFDerivAt` pins the derivative uniquely, ANY admissible `Φ` gives the same value
+    `fderiv ℝ (fun w => fderiv² exp_p w) 0`.
+
+    Identifying that abstract value with the EXPLICIT cubic `a₃ = −∂Γ + ΓΓ` model of
+    `expMap_value_three_jet` — i.e. reading off `∂²_{lm}(D exp_p·e_i)_a(0)` in closed Christoffel
+    form — is the remaining second-order step recorded in the RNC LEDGER (the deferred
+    smooth-dependence frontier). -/
+theorem hasFDerivAt_fderiv2_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    ∃ (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+      (h0 : ‖(0 : Point n)‖ ≤ expRho g gi hC p)
+      (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)),
+      HasFDerivAt (fun w => fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) w)
+        (expJetD3 g gi hC p 0 Φ h0 hΦcont) 0 := by
+  have h0lt : ‖(0 : Point n)‖ < expRho g gi hC p := by
+    rw [norm_zero]; exact expRho_pos g gi hC p
+  obtain ⟨Φ, hΦ0, hΦd, hFD⟩ := hasFDerivAt_expMap g gi hC p 0 h0lt
+  have hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1) :=
+    fun t ht => (hΦd t ht).continuousWithinAt
+  exact ⟨Φ, h0lt.le, hΦcont,
+    expMap_fderiv2_hasFDerivAt g gi hC p 0 Φ h0lt hΦ0 hΦcont hΦd hFD.fderiv⟩
+
+/-- **Step 1 (differentiability corollary).**  The exp-map second-derivative field
+    `w ↦ D²exp_p w = fderiv (fun z => fderiv exp_p z) w` is differentiable at `0`.  This is the
+    genuinely reusable content of `hasFDerivAt_fderiv2_expMap_zero`: it is exactly what a twice-Leibniz
+    expansion of `∂²g̃(0)` (Step 2) needs from the Jacobian factors (each factor twice-differentiable
+    at `0`), independent of the still-abstract value `expJetD3 … 0`. -/
+theorem differentiableAt_fderiv2_expMap_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    DifferentiableAt ℝ
+      (fun w => fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) w) 0 := by
+  obtain ⟨Φ, h0, hΦcont, hfd⟩ := hasFDerivAt_fderiv2_expMap_zero g gi hC p
+  exact hfd.differentiableAt
+
+/-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
 * **The RNC value / first-order / connection jets of `g̃` at `0` are now PROVED** (all axiom-clean,
@@ -420,24 +468,43 @@ theorem christoffel_expPullbackMetric_zero (g gi : Point n → Fin n → Fin n �
   (`hasFDerivAt_fderiv_expMap_zero`) and reading off `expJetOneJetModel`; the metric side uses
   `christoffel_lower` (metric compatibility) + symmetry to make the Leibniz terms cancel identically.
 
-* **THE REMAINING WALL — the full bridge `rncDΓ = pd(christoffel g̃)(0)` (`rnc_christoffel_linearJet`)
-  is NOT closed here, and the residue is a genuine SECOND-ORDER computation, not mere assembly.**
-  `christoffel g̃` consumes `pd g̃` (first partials); `pd (christoffel g̃)` therefore consumes `pd² g̃`
-  (SECOND partials) of the pullback.  `pd² g̃(0)` is governed by the exp map's THIRD jet — the first
-  derivative of the *Jacobian's* derivative at `0`, i.e. the RNC analogue of
-  `hasFDerivAt_fderiv_expMap_zero` ONE LEVEL UP (a `HasFDerivAt` for `v ↦ D²exp_p v` at `0` whose model
-  value is the `a₃` combination `−∂Γ + ΓΓ` of `expMap_value_three_jet`).  The needed second-order
-  regularity witnesses EXIST (`expMap_fderiv2_hasFDerivAt`, `expMap_value_three_jet`,
-  `a3rawArr_contract_eq_a3`, and the abstract gauge `exp_rncGaugeJet`/`rncGaugeJet`), but the bridge
-  requires:  (i) a `HasFDerivAt (fun v => fderiv (fun z => fderiv exp_p z) v) L₂ 0` with `L₂`'s value
-  matching the `a₃` model (the level-2 mirror of `hasFDerivAt_fderiv_expMap_zero`, from
-  `expMap_fderiv2_hasFDerivAt` + a `‖v‖³ = o(‖v‖²)` little-o upgrade);  (ii) the twice-Leibniz +
-  chain-rule expansion of `pd² g̃(0)` into `∂²g`, `∂g·∂J`, `g·∂²J` blocks;  (iii) matching the resulting
-  contraction to `rncDΓ` via `a3rawArr_contract_eq_a3`.  This is the "cited smooth-dependence frontier"
-  the campaign deferred — reachable in PRINCIPLE from Rung 3 (the analytic content is `C²`/third-jet, no
-  higher rung needed), but it is a multi-lemma second-order build, NOT a one-brick assembly.  Landing
-  `Γ̃(0)=0` is the natural checkpoint: the value + first-order + connection jets are done; the
-  `∂Γ̃(0)` (curvature) jet is the open second-order step.
+* **STEP 1 LANDED (the level-2 regularity mirror) — `hasFDerivAt_fderiv2_expMap_zero` /
+  `differentiableAt_fderiv2_expMap_zero`.**  The Jacobian-of-Jacobian field
+  `w ↦ D²exp_p w = fderiv (fun z => fderiv exp_p z) w` is now proved Fréchet-differentiable at `0`
+  (axiom-clean: `[propext, Classical.choice, Quot.sound]`), the direct one-order-up mirror of
+  `hasFDerivAt_fderiv_expMap_zero`.  Its derivative is the abstract Rung-3 third-jet operator
+  `expJetD3 g gi hC p 0 Φ` (from `expMap_fderiv2_hasFDerivAt` instantiated at `v = 0`, propagator `Φ`
+  from `hasFDerivAt_expMap`; `HasFDerivAt` pins the value, so it is `Φ`-independent as
+  `fderiv (fun w => D²exp_p w) 0`).  NOTE (correction to the earlier plan): `expMap_fderiv2_hasFDerivAt`
+  is ALREADY a genuine `HasFDerivAt`, not a big-`O`; the anticipated "`‖v‖³ = o(‖v‖²)` little-o upgrade"
+  is unnecessary (there is no explicit-model level-2 big-`O` analogue of
+  `hasFDerivAt_expMap_jacobian_one_jet` in the tree, so the value comes out as the abstract `expJetD3`,
+  not the closed `a₃` form).
+
+* **THE REMAINING WALL — the EXPLICIT VALUE identification (the sole open second-order step).**
+  Every downstream piece (`∂²g̃(0)`, then `∂_l christoffel g̃(0)`, then the `rncDΓ` match) needs
+  `∂²_{lm}(D exp_p·e_i)_a(0)` in CLOSED Christoffel form.  Step 1 gives this second derivative
+  ABSTRACTLY as `expJetD3 g gi hC p 0 Φ`; what is missing is the single identity
+    **`expJetD3 g gi hC p 0 Φ  =  <the explicit cubic `a₃ = −∂Γ + ΓΓ` operator>`**
+  (equivalently `fderiv (fun w => D²exp_p w) 0` in closed Christoffel form matching
+  `a3rawArr`/`expMap_value_three_jet`).  This is NOT in the tree and is a genuine multi-lemma build:
+  `expJetD3` at `0` unfolds through the propagator's THIRD variation (`expJet3ValG`/`expJet2Curve`/`expJetPi`),
+  and grounding it in `a₃` requires either (a) evaluating that third-variation datum at `v = 0` in
+  closed form, or (b) a Taylor-uniqueness route from the VALUE 3-jet `expMap_value_three_jet` (a
+  `=o[𝓝 0] ‖v‖³` little-o, which does NOT differentiate for free) to `iteratedFDeriv ℝ 3 exp_p 0` via
+  Mathlib's Taylor-coefficient uniqueness, then coordinate extraction + the `a3rawArr` symmetrization.
+  Once that ONE explicit-value lemma exists, the rest is reachable ASSEMBLY:
+    (ii) twice-Leibniz + chain-rule expansion of `pd² g̃(0)` into the `∂²g` (curvature-of-`g`),
+         `∂g·∂J`, `g·∂²J` blocks (mirroring `pd_expPullback_summand_zero`), collapsing the `Pi.single`
+         factors with `g(p)=δ`, `∂g̃(0)=0`, `pd_jacobian_expMap_zero`, and the new explicit `∂²J`;
+    (iii) `∂_l christoffel g̃(0)` reduces (via `Γ̃(0)=0`, `g̃(0)=δ`, `∂g̃(0)=0`) to a linear combination
+         of `∂²g̃(0)`, which the `christoffel`/`christoffel_lower` differentiation + `a3rawArr_contract_eq_a3`
+         match to `rncDΓ (christoffel g gi ·p) (pd christoffel ·p)`.
+  VERDICT: the analytic content remains `C²`/third-jet (no higher rung than Rung 3 needed); the open
+  work is concentrated in the single explicit-value identity above.  This is the "cited smooth-dependence
+  frontier" the campaign deferred — a WALL, not reachable assembly, until that identity is built; after it,
+  Steps 2–3 are assembly.  Checkpoints landed: value + first-order + connection jets (`g̃(0)=δ`,
+  `∂g̃(0)=0`, `Γ̃(0)=0`) PLUS the level-2 differentiability core (`hasFDerivAt_fderiv2_expMap_zero`).
 
 ### REGULARITY LEDGER (R3→κ) — recorded, not `sorry`
 

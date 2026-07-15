@@ -10404,6 +10404,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.pd_jacobian_expMap_zero
 #print axioms QIQTH.PullbackMetric.pd_expPullbackMetric_at_zero
 #print axioms QIQTH.PullbackMetric.christoffel_expPullbackMetric_zero
+-- ★ PARAMETRIX P1 R3→κ (∂Γ̃(0) step 1) — the level-2 exp-Jacobian jet at 0 (PullbackMetric.lean).
+-- hasFDerivAt_fderiv2_expMap_zero: HasFDerivAt (fun w => fderiv (fun z => fderiv exp_p z) w) (expJetD3 … 0 Φ) 0 —
+-- the one-order-up mirror of hasFDerivAt_fderiv_expMap_zero (instantiate expMap_fderiv2_hasFDerivAt at v=0; NO
+-- little-o upgrade needed, it is already a genuine HasFDerivAt).  differentiableAt_fderiv2_expMap_zero: w↦D²exp_p w
+-- differentiable at 0 (the corollary a Step-2 twice-Leibniz needs).  HONEST — the R3→κ bridge now reduces to ONE
+-- explicit-value identity `expJetD3 … 0 Φ = <closed cubic a₃=−∂Γ+ΓΓ operator>` (the closed-form 3rd derivative of
+-- exp_p at 0 in Christoffel terms), CHECKPOINTED as a genuine multi-lemma WALL (the abstract expJetD3 value has no
+-- closed a₃ form in-tree; the VALUE 3-jet expMap_value_three_jet is a little-o that does not differentiate for
+-- free).  So does NOT yet give the bridge / κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6, NOT numerical-G,
+-- NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hasFDerivAt_fderiv2_expMap_zero
+#print axioms QIQTH.PullbackMetric.differentiableAt_fderiv2_expMap_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
