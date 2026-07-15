@@ -10202,6 +10202,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet2Val_two_pt_diff
 #print axioms QIQTH.ExpMap.expJetD2_two_pt_diff
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_two
+-- ★ PARAMETRIX P1 RUNG 3 (start) — the D³F regularity layer (ExpMapContDiff3.lean, mirror of the D²F bricks).
+-- contDiff_fderiv3_geodesicField (D³F=fderiv³ F is C^∞, one-liner .fderiv_right le_top), expJet_fderiv3_tube_bddAbove_unif
+-- (‖D³F(expTube p v t)‖≤Kstar uniform on [0,1] — ℝ-valued ‖D³F q‖ reroute + maxSynthPendingDepth 3 for the triply-
+-- nested CLM norm E→L E→L E→L E), expJet_fderiv3_lipschitzOnWith (D³F Lipschitz on the tube ball via
+-- ContDiffOn.exists_lipschitzOnWith).  HONEST: the Rung-3 D³F-regularity inputs only; does NOT give ContDiff³ exp_p
+-- (needs the Jet₃ source + R^{hkl} fundamental solution + residual Grönwall), NOT κ=1/6, NOT the parametrix (P2),
+-- NOT general a₁=R/6, NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.contDiff_fderiv3_geodesicField
+#print axioms QIQTH.ExpMap.expJet_fderiv3_tube_bddAbove_unif
+#print axioms QIQTH.ExpMap.expJet_fderiv3_lipschitzOnWith
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

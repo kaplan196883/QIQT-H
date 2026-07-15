@@ -695,6 +695,7 @@ import QIQTH.RNCExpansion
 import QIQTH.ExpMap
 import QIQTH.ExpMapContDiff
 import QIQTH.ExpMapContDiff2
+import QIQTH.ExpMapContDiff3
 import QIQTH.Polarization
 import QIQTH.RNCGauge
 import QIQTH.RNCGaugeExp
