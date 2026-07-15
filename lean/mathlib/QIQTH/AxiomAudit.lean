@@ -10355,6 +10355,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet2_v_two_pt_Icc_unif
 #print axioms QIQTH.ExpMap.expJet3_remainder_quadratic_bound_unif
 #print axioms QIQTH.ExpMap.expMap_fderiv2_hasFDerivAt
+-- ★★★ PARAMETRIX P1 RUNG 3 — DONE — UNCONDITIONAL ContDiff³ exp_p (ExpMapContDiff3.lean).
+-- expMap_contDiffOn_three: ContDiffOn ℝ 3 (expMap g gi hC p) (ball 0 (expRho …)) — NO side hypothesis.  The geodesic
+-- exp map is THREE times continuously differentiable near 0, via the finite Jet₃ augmented ODE tower (the whole
+-- Rung-3 mirror of Rung 2: D³F regularity + symmetry [Mathlib-gap fill] + expJet3Fund R^{hkl} on [0,1] + the
+-- frontier ρ≤C‖l‖² cancellation + expJetD3 CLM + HasFDerivAt + C(3) continuity).  Closed by: C(3)
+-- expJet3Val_v_two_pt_diff (‖R^{hkl}_v(1)−R^{hkl}_w(1)‖ ≤ C‖v−w‖‖h‖‖k‖‖l‖ — the 14-term 3rd-variation
+-- parameter-Grönwall) ⟹ expJetD3_two_pt_diff (‖expJetD3_v−expJetD3_w‖_op ≤ C‖v−w‖) ⟹ v↦fderiv²exp_p v LipschitzOnWith
+-- ⟹ ContinuousOn; with DifferentiableOn (expMap_fderiv2_hasFDerivAt) + contDiffOn_succ_of_fderivWithin (×2) ⟹
+-- expMap_contDiffOn_three_of_fderiv2_contDiffOn_one.  ⚠ HONEST (binding) — Rung 3 DONE, but ContDiff³ exp_p does NOT
+-- by itself give κ=1/6: that needs the rnc_christoffel_linearJet bridge + the pullback-metric g̃ instantiation of
+-- heat_a1_of_gauge (the NEXT step, R3→κ, now UNBLOCKED since the C³ jet exists).  Does NOT build the heat-kernel
+-- parametrix (P2), does NOT discharge general a₁=R/6, is NOT numerical-G, is NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet3Fund_value_bound_Icc
+#print axioms QIQTH.ExpMap.expJet3_v_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet3Val_v_two_pt_diff
+#print axioms QIQTH.ExpMap.expJetD3_two_pt_diff
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_three
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
