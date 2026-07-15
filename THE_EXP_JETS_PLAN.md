@@ -572,6 +572,13 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-16 — R3→κ step (ii) FLOOR + endgame reduced to ONE clean 2nd-jet obligation LANDED (PUSHED `f688a2af`,
+  [AF] std-3):** `pd_christoffel_lower_fn` (differentiated lowered-Christoffel g·∂Γ→∂²g−∂g·Γ, via christoffel_lower ∀y
+  + neighbourhood hinvF, differentiated) + `expPullback_radial_gauge_of_pd2` + `gauge_pd_christoffel_expPullbackInv_zero_of_pd2`:
+  the radial diagonal AND the cyclic gauge for g̃ both follow from a SINGLE obligation `hpd2 : ∀ α v,
+  2·⟨∂_l∂_j g̃_αk⟩ = ⟨∂_l∂_α g̃_jk⟩` — purely g̃'s 2nd jet, no Christoffel/inverse. NEXT = discharge hpd2 (subst
+  expPullbackMetric_pd2_closed → contract α2 via _contract_* → convert g(p)·∂Γ via pd_christoffel_lower_fn cancelling
+  α1 ∂²g(p) → reindex via a3rawArr_contract_eq_a3) ⟹ unconditional gauge ⟹ FINAL κ=1/6 brick.
 - **★ 2026-07-16 — R3→κ radial-identity step (i): block-multilinearity of the RNC third-jet blocks LANDED (PUSHED
   `42e1d8cc`, [AF] std-3):** 28 lemmas — rncD3Block symmetric-trilinear + rncCrossBlock linear-in-dir/sym-bilinear +
   point_eq_sum_single + the load-bearing contraction forms rncD3Block_contract_{left,mid,right} /
