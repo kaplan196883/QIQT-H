@@ -572,6 +572,15 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-16 — R3→κ hpd2 near-complete; reduced to ONE finite Γ² global identity (PUSHED through `30a21542`, [AF]
+  std-3):** the whole hpd2 pipeline landed axiom-free — A/B_folded → ∂²g-conversion (hpd2_block_dd_g/D3_metric_contract)
+  → per-block reshaping (12 lemmas) → **hpd2_alpha1_cancel (2A−B ∂²g-FREE)** → hmc-conversion + ∂Γ/D³ cancel
+  (Pieces 1+2a) → Γ² floor christSq_sym_contract + endpoint pin hpd2_cubic_target_zero → Cross-group reindex
+  (christSqSum_contract_a3/rncCrossBlock_diag_a3/hpd2_fold9A_cross_reindex). SOLE remaining = hpd2_residual_cubic_reindex:
+  a GLOBAL cancellation of the non-Cross g·Γ·Γ residue (the RNC radial-geodesic identity, NOT per-group — internal-index
+  vs fixed-α metric contraction). Hard-but-finite Γ², no analytic gap. Next strategy: exploit full v³-symmetry to a
+  common normal form. Downstream (hpd2_cubic_vanish → expPullback_hpd2 → unconditional gauge → κ=1/6 via heat_a1_of_gauge_c2)
+  all wired/mechanical after.
 - **★ 2026-07-16 — R3→κ hpd2 ∂²g-conversion + per-block reshaping LANDED (PUSHED `c10af534` + this commit, [AF] std-3):**
   `hpd2_block_dd_g` + `hpd2_D3_metric_contract` (g·∂Γ→∂²g−∂g·Γ; full rncD3Block metric contraction) + the 12 per-block
   lemmas `hpd2_fold{5,9}{A,B}_{split,D3ready,blockconv}` taking each of the 4 folded D³ blocks to explicit ∂²g−∂g·Γ.
