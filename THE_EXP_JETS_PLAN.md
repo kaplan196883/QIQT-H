@@ -572,6 +572,12 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-16 — R3→κ hpd2 discharge, expansion lemmas hpd2_A_expand + hpd2_B_expand LANDED (PUSHED `3d143908`,
+  [AF] std-3):** A_α/B_α = ∑_a∑_b∑_ljk(T1..T9)·vˡvʲvᵏ (subst expPullbackMetric_pd2_closed + reorder ∑_a∑_b to front via
+  reorder_ab_front/contract_ab_expand). First move of the hpd2 grind. NEXT bounded steps: block-folding (fold α2 blocks
+  vs v via step-(i) _contract_*; B two-slot needs contract2_mid/contract2_dirsource/reorder4_jb) + Kronecker collapse →
+  hpd2_alpha1_cancel → hpd2_cubic_vanish → assemble expPullback_hpd2. (Recovery: prior brick died writing nothing;
+  relaunched with write-as-you-go; rm'd 2 stray probes.)
 - **★ 2026-07-16 — R3→κ step (ii) FLOOR + endgame reduced to ONE clean 2nd-jet obligation LANDED (PUSHED `f688a2af`,
   [AF] std-3):** `pd_christoffel_lower_fn` (differentiated lowered-Christoffel g·∂Γ→∂²g−∂g·Γ, via christoffel_lower ∀y
   + neighbourhood hinvF, differentiated) + `expPullback_radial_gauge_of_pd2` + `gauge_pd_christoffel_expPullbackInv_zero_of_pd2`:
