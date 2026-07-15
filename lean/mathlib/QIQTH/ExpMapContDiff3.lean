@@ -902,4 +902,54 @@ theorem expJet3Fund (g gi : Point n → Fin n → Fin n → ℝ)
   have hconst := hFTC.const_add (0 : Point n × Point n)
   exact hconst.congr (fun s hs => hRint s hs) (hRint t ht)
 
+/-! ### The Rung-3 reduction to the crux `ContDiff¹ (fderiv² exp_p)` -/
+
+/-- **The Rung-3 reduction (proven).**  If the second-derivative map
+    `v ↦ fderiv (fun w => fderiv exp_p w) v` is `ContDiffOn ℝ 1` on the ball `‖v‖ < expRho`, then
+    `exp_p` is `ContDiffOn ℝ 3` there.  A clean mirror of the Rung-2 reduction
+    (`expMap_contDiffOn_two_of_fderiv_contDiffOn_one`), one Fréchet-derivative order higher.
+
+    Route (chain `contDiffOn_succ_of_fderivWithin` twice on the open ball, where
+    `fderivWithin = fderiv` via `fderivWithin_of_isOpen`):
+    * `F₁ := fderiv exp_p` is `ContDiffOn ℝ 1` on the ball (from Rung 2, `expMap_contDiffOn_two`
+      through `ContDiffOn.fderiv_of_isOpen`), hence `DifferentiableOn`; with the crux `hfd2` (which is
+      exactly `ContDiff¹ (fderivWithin F₁ s)` after `fderivWithin = fderiv`),
+      `contDiffOn_succ_of_fderivWithin` gives `ContDiffOn ℝ 2 F₁`.
+    * `exp_p` is `DifferentiableOn` (Rung 1, `expMap_contDiffOn_one`) with `fderivWithin exp_p s = F₁`;
+      `contDiffOn_succ_of_fderivWithin` on the `ContDiffOn ℝ 2 F₁` gives `ContDiffOn ℝ (2+1) exp_p`,
+      and `(2+1 : WithTop ℕ∞) = 3`.
+
+    HONEST: this ISOLATES the remaining Rung-3 obligation (`ContDiff¹ (fderiv² exp_p)`, the Jet₂
+    fundamental solution `Q_v` is `C¹` in `v`); it does NOT discharge it (that is the residual
+    sub-campaign built on `expJet3Fund`). -/
+theorem expMap_contDiffOn_three_of_fderiv2_contDiffOn_one
+    (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hfd2 : ContDiffOn ℝ 1 (fun v => fderiv ℝ (fun w => fderiv ℝ (expMap g gi hC p) w) v)
+      (Metric.ball (0 : Point n) (expRho g gi hC p))) :
+    ContDiffOn ℝ 3 (expMap g gi hC p) (Metric.ball (0 : Point n) (expRho g gi hC p)) := by
+  set s : Set (Point n) := Metric.ball (0 : Point n) (expRho g gi hC p) with hsdef
+  -- `F₁ := fderiv exp_p` is `ContDiffOn ℝ 1` on the open ball (Rung 2), hence `DifferentiableOn`.
+  have hF1cd1 : ContDiffOn ℝ 1 (fun v => fderiv ℝ (expMap g gi hC p) v) s :=
+    (expMap_contDiffOn_two g gi hC p).fderiv_of_isOpen Metric.isOpen_ball (by norm_num)
+  have hF1diff : DifferentiableOn ℝ (fun w => fderiv ℝ (expMap g gi hC p) w) s :=
+    hF1cd1.differentiableOn (by norm_num)
+  -- Step 2: `ContDiffOn ℝ 2 F₁ s`.
+  have hfw2 : ContDiffOn ℝ 1
+      (fun v => fderivWithin ℝ (fun w => fderiv ℝ (expMap g gi hC p) w) s v) s :=
+    hfd2.congr (fun v hv => fderivWithin_of_isOpen Metric.isOpen_ball hv)
+  have hF1cd2 : ContDiffOn ℝ (1 + 1) (fun w => fderiv ℝ (expMap g gi hC p) w) s :=
+    contDiffOn_succ_of_fderivWithin hF1diff (by simp) hfw2
+  have e2 : (1 : WithTop ℕ∞) + 1 = 2 := by norm_num
+  rw [e2] at hF1cd2
+  -- Step 3: `ContDiffOn ℝ 3 exp_p s`.
+  have hdiff : DifferentiableOn ℝ (expMap g gi hC p) s :=
+    (expMap_contDiffOn_one g gi hC p).differentiableOn (by norm_num)
+  have hfw3 : ContDiffOn ℝ 2 (fun v => fderivWithin ℝ (expMap g gi hC p) s v) s :=
+    hF1cd2.congr (fun v hv => fderivWithin_of_isOpen Metric.isOpen_ball hv)
+  have hres : ContDiffOn ℝ (2 + 1) (expMap g gi hC p) s :=
+    contDiffOn_succ_of_fderivWithin hdiff (by simp) hfw3
+  have e3 : (2 : WithTop ℕ∞) + 1 = 3 := by norm_num
+  rwa [e3] at hres
+
 end QIQTH.ExpMap

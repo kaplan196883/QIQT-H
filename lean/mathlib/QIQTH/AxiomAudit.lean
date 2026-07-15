@@ -10237,6 +10237,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet3Fund_shifted
 #print axioms QIQTH.ExpMap.expJet3Fund_shifted_integral
 #print axioms QIQTH.ExpMap.expJet3Fund
+-- ★ PARAMETRIX P1 RUNG 3 (R3-capstone reduction) — ContDiff³ ← ContDiff¹(fderiv²exp_p) (ExpMapContDiff3.lean).
+-- expMap_contDiffOn_three_of_fderiv2_contDiffOn_one: ContDiffOn ℝ 1 (fun v => fderiv (fun w => fderiv exp_p w) v)
+-- (ball) ⟹ ContDiffOn ℝ 3 (expMap …) (ball).  Chains contDiffOn_succ_of_fderivWithin TWICE on the open ball
+-- (fderivWithin=fderiv via fderivWithin_of_isOpen); the fderiv exp_p C¹/differentiability input from
+-- ContDiffOn.fderiv_of_isOpen on the unconditional expMap_contDiffOn_two (Rung 2).  Isolates the residual Rung-3
+-- obligation hfd2 = ContDiff¹(fderiv²exp_p) (the expJet3Fund-based sub-campaign).  HONEST: reduction only; does NOT
+-- discharge hfd2, does NOT give ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_three_of_fderiv2_contDiffOn_one
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
