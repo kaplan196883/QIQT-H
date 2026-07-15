@@ -2553,6 +2553,32 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
   of the lone `∂²g(p)` term across the `gi`-weighted `2A−B` combination] and (iii) [reindex the surviving
   `Γ,∂Γ` cubic onto `rncDΓ` via `a3rawArr_contract_eq_a3` + `sum3_sym_contract`, vanishing by
   `expMap_rncDΓ_diag_zero`].  These close `expPullback_radial_gauge` and the unconditional gauge.
+
+  **AUDIT CORRECTION (2026-07 brick, on the (ii) mechanism — recorded, no proof landed this pass):**
+  On close inspection the (ii) cancellation is NOT "cancel the lone `∂²g(p)` term" — it is subtler, and
+  this is very likely why the final assembly has resisted several bricks.  The `α1` metric-Hessian is the
+  ONLY source of an EXPLICIT ambient `∂²g(p)` (it enters `A` as `⟨∂_l∂_j g_{αk}⟩` and `B` as
+  `⟨∂_l∂_α g_{jk}⟩`).  These two do NOT cancel each other under the `v`-contraction (they are genuinely
+  different contractions of the `∂²g` tensor — `α` sits in a metric slot for `A` but in a derivative slot
+  for `B`), and there is no second EXPLICIT `∂²g` term to pair them with.  The `∂²g` they must cancel is
+  the one sitting IMPLICITLY inside the `α2` blocks: `rncD3Block` carries `pd (christoffel g gi ·) · p`
+  (`∂Γ`), and `∂Γ = ½(∂gi·∂g + gi·∂²g)`.  Exposing that implicit `∂²g` needs either (a) `gi ∈ C¹` at `0`
+  (to product-rule `pd (christoffel g gi)` open), or — cleaner, and reusing existing machinery — (b) the
+  AMBIENT inverse relation on a NEIGHBOURHOOD, `hinv : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = …`, which is
+  what `QIQTH.Curvature.lowered_riemann_eq`/`metric_compat`/the `prod`/`hmc` helpers already consume.
+  The current `expPullback_radial_gauge` target lists `hinv` only AT `p`, which is INSUFFICIENT for (ii);
+  the future brick should strengthen it to `∀ y` (a legitimate, non-trivialising regularity input — the
+  ambient metric inverse is global).  RECOMMENDED ROUTE: work in the `g̃`-LOWERED radial form.  Lowering
+  the upper index `i` by `g̃(0)=g(p)` (invertible) and using `∂g̃(0)=0` + `Γ̃(0)=0`, the radial identity
+  becomes the intrinsic scalar `X_i := ⟨2·∂_l∂_j g̃_{ik} − ∂_l∂_i g̃_{jk}⟩ = 0`
+  (`= ∂_l Γ̃_{lower,i,jk}(0)` contracted, via `christoffel_lower` for `g̃`, which needs `g̃·g̃⁻¹ = δ` only
+  at `0`).  Then expand `∂²g̃` (`expPullbackMetric_pd2_closed`), contract the `α2` blocks (`_contract_*`),
+  and convert each block's `g(p)·∂Γ` via the `prod`+`hmc` identity
+  `∑_α g(p)_{iα}·pd(christoffel g gi α c d) e p = pd(∑_α g_· iα·Γ^α_{cd})(e)(p) − ∑_α ∂_e g_{iα}·Γ^α_{cd}`
+  (pure product rule, no `hinv`) followed by `∑_α g_·_{iα}·Γ^α_{cd} = ½(∂g+∂g−∂g)` as a FUNCTION
+  (`christoffel_lower` at each `y` — the `∀ y` `hinv`); the resulting `∂²g` cancels the EXPLICIT `α1`
+  `∂²g(p)`, leaving the `Γ,∂Γ` cubic for step (iii).  (Step (i) block infra and step (iii)
+  `a3rawArr_contract_eq_a3`/`expMap_rncDΓ_diag_zero` are already landed and unaffected by this correction.)
   Checkpoints landed:
   value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`
