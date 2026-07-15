@@ -10606,6 +10606,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.contDiffAt2_jacobian_component_expMap_zero
 #print axioms QIQTH.PullbackMetric.pd2_expPullback_summand_zero
 #print axioms QIQTH.PullbackMetric.expPullbackMetric_pd2_closed
+-- ★ PARAMETRIX P1 R3→κ (radial-identity step (i) — BLOCK-MULTILINEARITY of the RNC third-jet blocks, the missing
+-- tree infrastructure) (PullbackMetric.lean).  The α2 Jacobian 2nd jet pd2_jacobian_expMap_zero=(1/6)(rncD3Block+
+-- 3·rncCrossBlock) enters the radial contraction TWO-SLOT NON-diagonally, so a diagonal shortcut fails; these prove
+-- the blocks are multilinear and, crucially, the ∑_a v^a·block(…e_a…)=block(…v…) contraction/basis-reconstitution.
+-- rncD3Block symmetric-trilinear: _add_left/_smul_left/_swap12/_swap23/_add_mid/_smul_mid/_add_right/_smul_right;
+-- rncCrossBlock linear-in-dir + symmetric-bilinear-in-(sk,sl): _add_dir/_smul_dir/_swap_source/_add_sk/_smul_sk/
+-- _add_sl/_smul_sl.  point_eq_sum_single (v=∑_a v^a•e_a) + the CONTRACTION forms rncD3Block_zero_left/_sum_left/
+-- _contract_left/_contract_mid/_contract_right and rncCrossBlock_zero_dir/_zero_sk/_sum_dir/_sum_sk/_contract_dir/
+-- _contract_sk/_contract_sl (the load-bearing two-slot non-diagonal contraction).  HONEST — this is the FLOOR for the
+-- radial identity; expPullback_radial_gauge (⟹ UNCONDITIONAL gauge) still NOT closed: steps (ii) the gi-weighted 2A−B
+-- ∂²g(p) cancellation via christoffel_lower + (iii) the Γ,∂Γ reindex onto dGammaDiag(rncDΓ)v i=0 via
+-- a3rawArr_contract_eq_a3+sum3_sym_contract+expMap_rncDΓ_diag_zero remain (checkpointed, NOT sorry'd).  Does NOT give
+-- κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.rncD3Block_contract_left
+#print axioms QIQTH.PullbackMetric.rncD3Block_contract_mid
+#print axioms QIQTH.PullbackMetric.rncD3Block_contract_right
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_contract_dir
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_contract_sk
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_contract_sl
+#print axioms QIQTH.PullbackMetric.point_eq_sum_single
+#print axioms QIQTH.PullbackMetric.rncD3Block_add_left
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_swap_source
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

@@ -981,6 +981,279 @@ theorem sum_mul_smul_factor (c v : Fin n → ℝ) (s : ℝ) :
     (∑ r, c r * (s * v r)) = s * ∑ r, c r * v r := by
   rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun r _ => by ring
 
+/-!
+### STEP (i) — block-multilinearity of `rncD3Block` / `rncCrossBlock`
+
+The two RNC third-jet blocks are symmetric-multilinear in their `Point`-valued direction arguments.
+These are pure `Finset`/`ring` identities (evaluated componentwise `… i`); they supply the missing
+tree infrastructure for the two-slot NON-diagonal contraction the radial identity consumes (the
+`α2` Jacobian second jet enters the contraction with two derivative slots contracted against `v` and
+one slot fixed at a basis vector, so no full-diagonal shortcut applies).
+-/
+
+-- `rncD3Block` is symmetric-trilinear in `(h, k, l)`.
+
+/-- **Additivity of `rncD3Block` in its first slot `h`.** -/
+theorem rncD3Block_add_left (g gi : Point n → Fin n → Fin n → ℝ) (p h₁ h₂ k l : Point n) (i : Fin n) :
+    rncD3Block g gi p (h₁ + h₂) k l i
+      = rncD3Block g gi p h₁ k l i + rncD3Block g gi p h₂ k l i := by
+  simp only [rncD3Block, Pi.add_apply]
+  rw [← neg_add, neg_inj, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  have hc : (∑ r, pd (fun z => christoffel g gi i j m z) r p * (h₁ r + h₂ r))
+      = (∑ r, pd (fun z => christoffel g gi i j m z) r p * h₁ r)
+        + (∑ r, pd (fun z => christoffel g gi i j m z) r p * h₂ r) := by
+    rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl fun r _ => by ring
+  rw [hc]; ring
+
+/-- **Homogeneity of `rncD3Block` in its first slot `h`.** -/
+theorem rncD3Block_smul_left (g gi : Point n → Fin n → Fin n → ℝ) (s : ℝ) (p h k l : Point n)
+    (i : Fin n) :
+    rncD3Block g gi p (s • h) k l i = s * rncD3Block g gi p h k l i := by
+  simp only [rncD3Block, Pi.smul_apply, smul_eq_mul]
+  rw [mul_neg, neg_inj, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  rw [sum_mul_smul_factor]; ring
+
+/-- **Symmetry of `rncD3Block` under swapping the first two slots `h ↔ k`.** -/
+theorem rncD3Block_swap12 (g gi : Point n → Fin n → Fin n → ℝ) (p h k l : Point n) (i : Fin n) :
+    rncD3Block g gi p h k l i = rncD3Block g gi p k h l i := by
+  simp only [rncD3Block]
+  rw [neg_inj]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => by ring
+
+/-- **Symmetry of `rncD3Block` under swapping the last two slots `k ↔ l`.** -/
+theorem rncD3Block_swap23 (g gi : Point n → Fin n → Fin n → ℝ) (p h k l : Point n) (i : Fin n) :
+    rncD3Block g gi p h k l i = rncD3Block g gi p h l k i := by
+  simp only [rncD3Block]
+  rw [neg_inj]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => by ring
+
+/-- **Additivity of `rncD3Block` in its middle slot `k`** (via `h ↔ k` symmetry). -/
+theorem rncD3Block_add_mid (g gi : Point n → Fin n → Fin n → ℝ) (p h k₁ k₂ l : Point n) (i : Fin n) :
+    rncD3Block g gi p h (k₁ + k₂) l i
+      = rncD3Block g gi p h k₁ l i + rncD3Block g gi p h k₂ l i := by
+  rw [rncD3Block_swap12, rncD3Block_add_left, rncD3Block_swap12 g gi p k₁ h l i,
+    rncD3Block_swap12 g gi p k₂ h l i]
+
+/-- **Homogeneity of `rncD3Block` in its middle slot `k`** (via `h ↔ k` symmetry). -/
+theorem rncD3Block_smul_mid (g gi : Point n → Fin n → Fin n → ℝ) (s : ℝ) (p h k l : Point n)
+    (i : Fin n) :
+    rncD3Block g gi p h (s • k) l i = s * rncD3Block g gi p h k l i := by
+  rw [rncD3Block_swap12, rncD3Block_smul_left, rncD3Block_swap12 g gi p k h l i]
+
+/-- **Additivity of `rncD3Block` in its last slot `l`** (via `k ↔ l` symmetry). -/
+theorem rncD3Block_add_right (g gi : Point n → Fin n → Fin n → ℝ) (p h k l₁ l₂ : Point n) (i : Fin n) :
+    rncD3Block g gi p h k (l₁ + l₂) i
+      = rncD3Block g gi p h k l₁ i + rncD3Block g gi p h k l₂ i := by
+  rw [rncD3Block_swap23, rncD3Block_add_mid, rncD3Block_swap23 g gi p h l₁ k i,
+    rncD3Block_swap23 g gi p h l₂ k i]
+
+/-- **Homogeneity of `rncD3Block` in its last slot `l`** (via `k ↔ l` symmetry). -/
+theorem rncD3Block_smul_right (g gi : Point n → Fin n → Fin n → ℝ) (s : ℝ) (p h k l : Point n)
+    (i : Fin n) :
+    rncD3Block g gi p h k (s • l) i = s * rncD3Block g gi p h k l i := by
+  rw [rncD3Block_swap23, rncD3Block_smul_mid, rncD3Block_swap23 g gi p h l k i]
+
+-- `rncCrossBlock` is linear in `dir` and symmetric-bilinear in the source pair `(sk, sl)`.
+-- Helpers for the inner second-variation velocity coefficient `∑_{j'm'} Γ (·⊗· + ·⊗·)`.
+
+/-- **Additivity of the inner second-variation coefficient in the varied source direction.** -/
+private theorem crossInner_add (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (q : Fin n)
+    (u a b : Point n) :
+    (∑ j', ∑ m', christoffel g gi q j' m' p * (u j' * (a m' + b m') + (a j' + b j') * u m'))
+      = (∑ j', ∑ m', christoffel g gi q j' m' p * (u j' * a m' + a j' * u m'))
+        + (∑ j', ∑ m', christoffel g gi q j' m' p * (u j' * b m' + b j' * u m')) := by
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j' _ => ?_
+  rw [← Finset.sum_add_distrib]
+  exact Finset.sum_congr rfl fun m' _ => by ring
+
+/-- **Homogeneity of the inner second-variation coefficient in the varied source direction.** -/
+private theorem crossInner_smul (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (q : Fin n)
+    (s : ℝ) (u a : Point n) :
+    (∑ j', ∑ m', christoffel g gi q j' m' p * (u j' * (s * a m') + (s * a j') * u m'))
+      = s * ∑ j', ∑ m', christoffel g gi q j' m' p * (u j' * a m' + a j' * u m') := by
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j' _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun m' _ => by ring
+
+/-- **Symmetry of the inner second-variation coefficient in the two source directions.** -/
+private theorem crossInner_symm (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (q : Fin n)
+    (a b : Point n) :
+    (∑ j', ∑ m', christoffel g gi q j' m' p * (a j' * b m' + b j' * a m'))
+      = (∑ j', ∑ m', christoffel g gi q j' m' p * (b j' * a m' + a j' * b m')) :=
+  Finset.sum_congr rfl fun j' _ => Finset.sum_congr rfl fun m' _ => by ring
+
+/-- **Additivity of `rncCrossBlock` in its differentiation direction `dir`.** -/
+theorem rncCrossBlock_add_dir (g gi : Point n → Fin n → Fin n → ℝ) (p dir₁ dir₂ sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p (dir₁ + dir₂) sk sl i
+      = rncCrossBlock g gi p dir₁ sk sl i + rncCrossBlock g gi p dir₂ sk sl i := by
+  simp only [rncCrossBlock, Pi.add_apply]
+  rw [← neg_add, neg_inj, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [← Finset.sum_add_distrib]
+  exact Finset.sum_congr rfl fun m _ => by ring
+
+/-- **Homogeneity of `rncCrossBlock` in its differentiation direction `dir`.** -/
+theorem rncCrossBlock_smul_dir (g gi : Point n → Fin n → Fin n → ℝ) (s : ℝ) (p dir sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p (s • dir) sk sl i = s * rncCrossBlock g gi p dir sk sl i := by
+  simp only [rncCrossBlock, Pi.smul_apply, smul_eq_mul]
+  rw [mul_neg, neg_inj, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun m _ => by ring
+
+/-- **Symmetry of `rncCrossBlock` under swapping the two source directions `sk ↔ sl`.** -/
+theorem rncCrossBlock_swap_source (g gi : Point n → Fin n → Fin n → ℝ) (p dir sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir sk sl i = rncCrossBlock g gi p dir sl sk i := by
+  simp only [rncCrossBlock]
+  rw [neg_inj]
+  refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => ?_
+  rw [crossInner_symm g gi p j sl sk, crossInner_symm g gi p m sl sk]
+
+/-- **Additivity of `rncCrossBlock` in its first source direction `sk`.** -/
+theorem rncCrossBlock_add_sk (g gi : Point n → Fin n → Fin n → ℝ) (p dir sk₁ sk₂ sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir (sk₁ + sk₂) sl i
+      = rncCrossBlock g gi p dir sk₁ sl i + rncCrossBlock g gi p dir sk₂ sl i := by
+  simp only [rncCrossBlock, Pi.add_apply]
+  rw [← neg_add, neg_inj, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  rw [crossInner_add g gi p j sl sk₁ sk₂, crossInner_add g gi p m sl sk₁ sk₂]
+  ring
+
+/-- **Homogeneity of `rncCrossBlock` in its first source direction `sk`.** -/
+theorem rncCrossBlock_smul_sk (g gi : Point n → Fin n → Fin n → ℝ) (s : ℝ) (p dir sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir (s • sk) sl i = s * rncCrossBlock g gi p dir sk sl i := by
+  simp only [rncCrossBlock, Pi.smul_apply, smul_eq_mul]
+  rw [mul_neg, neg_inj, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  rw [crossInner_smul g gi p j s sl sk, crossInner_smul g gi p m s sl sk]
+  ring
+
+/-- **Additivity of `rncCrossBlock` in its second source direction `sl`** (via `sk ↔ sl` symmetry). -/
+theorem rncCrossBlock_add_sl (g gi : Point n → Fin n → Fin n → ℝ) (p dir sk sl₁ sl₂ : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir sk (sl₁ + sl₂) i
+      = rncCrossBlock g gi p dir sk sl₁ i + rncCrossBlock g gi p dir sk sl₂ i := by
+  rw [rncCrossBlock_swap_source, rncCrossBlock_add_sk, rncCrossBlock_swap_source g gi p dir sl₁ sk i,
+    rncCrossBlock_swap_source g gi p dir sl₂ sk i]
+
+/-- **Homogeneity of `rncCrossBlock` in its second source direction `sl`** (via `sk ↔ sl` symmetry). -/
+theorem rncCrossBlock_smul_sl (g gi : Point n → Fin n → Fin n → ℝ) (s : ℝ) (p dir sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir sk (s • sl) i = s * rncCrossBlock g gi p dir sk sl i := by
+  rw [rncCrossBlock_swap_source, rncCrossBlock_smul_sk, rncCrossBlock_swap_source g gi p dir sl sk i]
+
+/-! #### The single-slot contraction (`apply_sum`) forms.
+
+Using multilinearity, contracting a block slot with a weight `v` (over the standard basis) reconstitutes
+`v` in that slot:  `∑_a v^a · block(…e_a…) = block(…v…)`.  These are the concrete forms the two-slot
+non-diagonal contraction of the radial identity consumes (the `α2` Jacobian second jet enters with two
+derivative slots to be contracted against `v`).  The chain is `zero → Finset.sum → contract`. -/
+
+/-- **Expansion of a `Point` over the standard basis:** `v = ∑ a, v^a • e_a`. -/
+theorem point_eq_sum_single (v : Point n) : v = ∑ a, v a • (Pi.single a 1 : Point n) := by
+  funext r
+  rw [Finset.sum_apply]
+  simp [Pi.single_apply, Finset.sum_ite_eq]
+
+theorem rncD3Block_zero_left (g gi : Point n → Fin n → Fin n → ℝ) (p k l : Point n) (i : Fin n) :
+    rncD3Block g gi p 0 k l i = 0 := by
+  simp only [rncD3Block, Pi.zero_apply, mul_zero, zero_mul, add_zero, Finset.sum_const_zero,
+    zero_add, neg_zero]
+
+/-- **`rncD3Block` distributes over a finite sum in its first slot.** -/
+theorem rncD3Block_sum_left {ι : Type*} (g gi : Point n → Fin n → Fin n → ℝ) (s : Finset ι)
+    (F : ι → Point n) (p k l : Point n) (i : Fin n) :
+    rncD3Block g gi p (∑ x ∈ s, F x) k l i = ∑ x ∈ s, rncD3Block g gi p (F x) k l i := by
+  induction s using Finset.cons_induction with
+  | empty => simp [rncD3Block_zero_left]
+  | cons a s ha ih => rw [Finset.sum_cons, rncD3Block_add_left, ih, Finset.sum_cons]
+
+/-- **First-slot contraction of `rncD3Block`:** `rncD3Block(v,k,l) = ∑_a v^a · rncD3Block(e_a,k,l)`. -/
+theorem rncD3Block_contract_left (g gi : Point n → Fin n → Fin n → ℝ) (p v k l : Point n) (i : Fin n) :
+    rncD3Block g gi p v k l i = ∑ a, v a * rncD3Block g gi p (Pi.single a 1) k l i := by
+  conv_lhs => rw [point_eq_sum_single v]
+  rw [rncD3Block_sum_left]
+  exact Finset.sum_congr rfl fun a _ => rncD3Block_smul_left g gi (v a) p (Pi.single a 1) k l i
+
+/-- **Middle-slot contraction of `rncD3Block`** (via `h ↔ k` symmetry). -/
+theorem rncD3Block_contract_mid (g gi : Point n → Fin n → Fin n → ℝ) (p h v l : Point n) (i : Fin n) :
+    rncD3Block g gi p h v l i = ∑ a, v a * rncD3Block g gi p h (Pi.single a 1) l i := by
+  rw [rncD3Block_swap12, rncD3Block_contract_left]
+  exact Finset.sum_congr rfl fun a _ => by rw [rncD3Block_swap12 g gi p (Pi.single a 1) h l i]
+
+/-- **Last-slot contraction of `rncD3Block`** (via `k ↔ l` symmetry). -/
+theorem rncD3Block_contract_right (g gi : Point n → Fin n → Fin n → ℝ) (p h k v : Point n) (i : Fin n) :
+    rncD3Block g gi p h k v i = ∑ a, v a * rncD3Block g gi p h k (Pi.single a 1) i := by
+  rw [rncD3Block_swap23, rncD3Block_contract_mid]
+  exact Finset.sum_congr rfl fun a _ => by rw [rncD3Block_swap23 g gi p h (Pi.single a 1) k i]
+
+theorem rncCrossBlock_zero_dir (g gi : Point n → Fin n → Fin n → ℝ) (p sk sl : Point n) (i : Fin n) :
+    rncCrossBlock g gi p 0 sk sl i = 0 := by
+  simp only [rncCrossBlock, Pi.zero_apply, mul_zero, zero_mul, add_zero, Finset.sum_const_zero,
+    neg_zero]
+
+theorem rncCrossBlock_zero_sk (g gi : Point n → Fin n → Fin n → ℝ) (p dir sl : Point n) (i : Fin n) :
+    rncCrossBlock g gi p dir 0 sl i = 0 := by
+  simp only [rncCrossBlock, Pi.zero_apply, mul_zero, zero_mul, add_zero, Finset.sum_const_zero,
+    neg_zero]
+
+/-- **`rncCrossBlock` distributes over a finite sum in its differentiation direction.** -/
+theorem rncCrossBlock_sum_dir {ι : Type*} (g gi : Point n → Fin n → Fin n → ℝ) (s : Finset ι)
+    (F : ι → Point n) (p sk sl : Point n) (i : Fin n) :
+    rncCrossBlock g gi p (∑ x ∈ s, F x) sk sl i = ∑ x ∈ s, rncCrossBlock g gi p (F x) sk sl i := by
+  induction s using Finset.cons_induction with
+  | empty => simp [rncCrossBlock_zero_dir]
+  | cons a s ha ih => rw [Finset.sum_cons, rncCrossBlock_add_dir, ih, Finset.sum_cons]
+
+/-- **`rncCrossBlock` distributes over a finite sum in its first source direction.** -/
+theorem rncCrossBlock_sum_sk {ι : Type*} (g gi : Point n → Fin n → Fin n → ℝ) (s : Finset ι)
+    (F : ι → Point n) (p dir sl : Point n) (i : Fin n) :
+    rncCrossBlock g gi p dir (∑ x ∈ s, F x) sl i = ∑ x ∈ s, rncCrossBlock g gi p dir (F x) sl i := by
+  induction s using Finset.cons_induction with
+  | empty => simp [rncCrossBlock_zero_sk]
+  | cons a s ha ih => rw [Finset.sum_cons, rncCrossBlock_add_sk, ih, Finset.sum_cons]
+
+/-- **Direction contraction of `rncCrossBlock`.** -/
+theorem rncCrossBlock_contract_dir (g gi : Point n → Fin n → Fin n → ℝ) (p v sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p v sk sl i = ∑ a, v a * rncCrossBlock g gi p (Pi.single a 1) sk sl i := by
+  conv_lhs => rw [point_eq_sum_single v]
+  rw [rncCrossBlock_sum_dir]
+  exact Finset.sum_congr rfl fun a _ => rncCrossBlock_smul_dir g gi (v a) p (Pi.single a 1) sk sl i
+
+/-- **First source-direction contraction of `rncCrossBlock`.** -/
+theorem rncCrossBlock_contract_sk (g gi : Point n → Fin n → Fin n → ℝ) (p dir v sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir v sl i = ∑ a, v a * rncCrossBlock g gi p dir (Pi.single a 1) sl i := by
+  conv_lhs => rw [point_eq_sum_single v]
+  rw [rncCrossBlock_sum_sk]
+  exact Finset.sum_congr rfl fun a _ => rncCrossBlock_smul_sk g gi (v a) p dir (Pi.single a 1) sl i
+
+/-- **Second source-direction contraction of `rncCrossBlock`** (via `sk ↔ sl` symmetry). -/
+theorem rncCrossBlock_contract_sl (g gi : Point n → Fin n → Fin n → ℝ) (p dir sk v : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir sk v i = ∑ a, v a * rncCrossBlock g gi p dir sk (Pi.single a 1) i := by
+  rw [rncCrossBlock_swap_source, rncCrossBlock_contract_sk]
+  exact Finset.sum_congr rfl fun a _ => by
+    rw [rncCrossBlock_swap_source g gi p dir (Pi.single a 1) sk i]
+
 set_option maxHeartbeats 1600000 in
 /-- **(a4a, pointwise) — the CLOSED Christoffel value of the third-jet integrand `Θ₃ s` at `v = 0`.**
     For the affine propagator `Φ t = id + t•linF` (hypothesis `hΦeq`, supplied by `expFund_zero_eq`)
@@ -2262,10 +2535,24 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
   What remains for the full cyclic gauge is the CONTRACTION of that closed `∂²g̃(0)` and its two
   cancellations — the three steps (i) block multilinear contraction, (ii) `∂²g` cancellation via
   `christoffel_lower`, (iii) `Γ,∂Γ` reindex to `rncDΓ` via `a3rawArr_contract_eq_a3` +
-  `expMap_rncDΓ_diag_zero` — spelled out in the (β2) checkpoint above; the block-multilinearity of step
-  (i) (`rncD3Block`/`rncCrossBlock` linear in each `Point` argument, for the TWO-SLOT non-diagonal
-  contraction) is the one piece not yet in the tree.  Discharging all three removes the `hrad`
-  hypothesis of `gauge_pd_christoffel_expPullbackInv_zero`, making the cyclic gauge UNCONDITIONAL.
+  `expMap_rncDΓ_diag_zero` — spelled out in the (β2) checkpoint above.  Discharging all three removes the
+  `hrad` hypothesis of `gauge_pd_christoffel_expPullbackInv_zero`, making the cyclic gauge UNCONDITIONAL.
+  **STEP (i) IS NOW LANDED axiom-clean** (`[propext, Classical.choice, Quot.sound]`) — the block
+  (symmetric-)multilinearity + contraction infrastructure, absent from the tree until now:
+    - `rncD3Block` symmetric-trilinear in `(h,k,l)`: `rncD3Block_add_left`/`_mid`/`_right`,
+      `rncD3Block_smul_left`/`_mid`/`_right`, `rncD3Block_swap12`/`_swap23`;
+    - `rncCrossBlock` linear in `dir` and symmetric-bilinear in `(sk,sl)`: `rncCrossBlock_add_dir`/`_sk`/
+      `_sl`, `rncCrossBlock_smul_dir`/`_sk`/`_sl`, `rncCrossBlock_swap_source`;
+    - the `apply_sum`/basis-reconstitution CONTRACTION forms (`point_eq_sum_single`, the `_zero_*`/`_sum_*`
+      distributions, and `rncD3Block_contract_left`/`_mid`/`_right`,
+      `rncCrossBlock_contract_dir`/`_sk`/`_sl`), which perform EXACTLY the TWO-SLOT non-diagonal
+      contraction `∑_a v^a · block(…e_a…) = block(…v…)` that the `α2` Jacobian second jet requires.
+  **REMAINING (precise, for a future brick):** substitute `expPullbackMetric_pd2_closed` into the two
+  brackets of `dGammaDiag_pd_christoffel_expPullbackInv_reduce`'s RHS, contract the `α2` blocks via the
+  `_contract_*` lemmas above, then discharge (ii) [`christoffel_lower` metric-compatibility cancellation
+  of the lone `∂²g(p)` term across the `gi`-weighted `2A−B` combination] and (iii) [reindex the surviving
+  `Γ,∂Γ` cubic onto `rncDΓ` via `a3rawArr_contract_eq_a3` + `sum3_sym_contract`, vanishing by
+  `expMap_rncDΓ_diag_zero`].  These close `expPullback_radial_gauge` and the unconditional gauge.
   Checkpoints landed:
   value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`
