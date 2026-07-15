@@ -572,6 +572,14 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-15 — R3→κ BRIDGE (β3′) radial reduction + CONDITIONAL cyclic gauge LANDED (PUSHED `b58a0a7e`, [AF]
+  std-3, `PullbackMetric.lean`):** `dGammaDiag_pd_christoffel_expPullbackInv_reduce` (dGammaDiag(pd(christoffel g̃)0)v i
+  = ½∑_α gi(p)^iα(2·⟨∂_l∂_j g̃_αk⟩ − ⟨∂_l∂_α g̃_jk⟩)) + `gauge_pd_christoffel_expPullbackInv_zero` = the cyclic gauge
+  (hgauge for g̃), proved mechanically but CONDITIONAL on the explicit non-vacuous `hrad` (the radial identity). Endgame
+  wired end-to-end; SOLE remaining obligation = `∑_α gi(p)^iα(2·⟨∂_l∂_j g̃_αk⟩ − ⟨∂_l∂_α g̃_jk⟩)=0`. HONEST: ∂²J enters
+  via the GENERAL non-diagonal pd2_jacobian_expMap_zero (no diagonal shortcut) ⟹ ~300-500 line Finset contraction;
+  Route GEO ruled out (no pullback-connection naturality). NEXT = grind the radial identity ⟹ hrad discharges ⟹
+  UNCONDITIONAL gauge ⟹ FINAL κ=1/6 brick.
 - **★ 2026-07-15 — R3→κ BRIDGE (β3) structural half of the pullback gauge LANDED (PUSHED `d860fd45`, [AF] std-3,
   `PullbackMetric.lean` + imports RNCGauge/RNCGaugeExp):** `expPullbackMetric_symm` (g̃_ij=g̃_ji),
   `pd_christoffel_expPullbackInv_lower_symm` (∂_l Γ̃^i_jk(0)=∂_l Γ̃^i_kj(0)), `cyclic_of_gaugeJet_lower_symm`
