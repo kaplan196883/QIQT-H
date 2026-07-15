@@ -1315,7 +1315,7 @@ set_option maxHeartbeats 3200000 in
     separation (`geodesic_twopoint_gronwall`), the `DF`/`D²F` Lipschitz constants, the `Φ` two-point
     Lipschitz (`expFund_two_pt_diff_Icc`), the `Φ`-norm bound (`expJetFund_norm_le_exp`) and the `Q`
     value bound (`expJet2Fund_value_bound_Icc`); then `gronwall_vec_residual_Icc`. -/
-theorem expJet2_v_two_pt_Icc (g gi : Point n → Fin n → Fin n → ℝ)
+theorem expJet2_v_two_pt_Icc_const (g gi : Point n → Fin n → Fin n → ℝ)
     (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
     (p v w : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) (hw : ‖w‖ ≤ expRho g gi hC p)
     (Kf Ldf Ld2f : NNReal) (Kstar Kstar₂ : ℝ) (hKstar0 : 0 ≤ Kstar) (hKstar₂0 : 0 ≤ Kstar₂)
@@ -1344,9 +1344,9 @@ theorem expJet2_v_two_pt_Icc (g gi : Point n → Fin n → Fin n → ℝ)
     (hQwd : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt Qw
       ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)) (Qw t)
         + expJet2Rhs g gi hC p w Φw h k t) (Set.Icc (0 : ℝ) 1) t) :
-    ∃ C : ℝ, 0 ≤ C ∧ ∀ t ∈ Set.Icc (0 : ℝ) 1,
+    ∀ t ∈ Set.Icc (0 : ℝ) 1,
       ‖Qv t - Qw t‖
-        ≤ C * ‖v - w‖ * ‖h‖ * ‖k‖ := by
+        ≤ expJet2VtpConst (Kf : ℝ) (Ldf : ℝ) (Ld2f : ℝ) Kstar Kstar₂ * ‖v - w‖ * ‖h‖ * ‖k‖ := by
   have hC₀ := expConst_nonneg g gi hC p
   set Rb : ℝ := expConst g gi hC p * expRho g gi hC p with hRbdef
   set S : Set (Point n × Point n) := Metric.closedBall ((p, 0) : Point n × Point n) Rb with hSdef
@@ -1481,12 +1481,52 @@ theorem expJet2_v_two_pt_Icc (g gi : Point n → Fin n → Fin n → ℝ)
     (fun t ht => expJet2_v_residual_hasDerivWithinAt g gi hC p v w Φv Φw Qv Qw h k hQvd hQwd t ht)
     (fun t ht => hKstarv t ht)
     (fun t ht => hrbound t ht)
-  -- read off the constant and package the existential.
-  refine ⟨expJet2VtpConst (Kf : ℝ) (Ldf : ℝ) (Ld2f : ℝ) Kstar Kstar₂,
-    expJet2VtpConst_nonneg _ _ _ _ _ Ldf.2 Ld2f.2 hKstar₂0, fun t ht => ?_⟩
+  -- read off the explicit constant.
+  intro t ht
   refine (hgron t ht).trans (le_of_eq ?_)
   rw [hρvaldef, hB1def, hB2def, hB3def, hB5def, hB6def, hB7def, hB8def, expJet2VtpConst]
   ring
+
+set_option maxHeartbeats 400000 in
+/-- **The (e) core — `∃`-packaged form** (compat wrapper of `expJet2_v_two_pt_Icc_const`).  The
+    `[0,1]`-uniform `v`-two-point Lipschitz of the second-variation curve with the constant packaged
+    existentially, as consumed by the pointwise `expMap_fderiv2_sub_quadratic`. -/
+theorem expJet2_v_two_pt_Icc (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v w : Point n) (hv : ‖v‖ ≤ expRho g gi hC p) (hw : ‖w‖ ≤ expRho g gi hC p)
+    (Kf Ldf Ld2f : NNReal) (Kstar Kstar₂ : ℝ) (hKstar0 : 0 ≤ Kstar) (hKstar₂0 : 0 ≤ Kstar₂)
+    (hLipF : LipschitzOnWith Kf (geodesicField g gi)
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hLipDF : LipschitzOnWith Ldf (fderiv ℝ (geodesicField g gi))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hLipD2F : LipschitzOnWith Ld2f (fderiv ℝ (fderiv ℝ (geodesicField g gi)))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)))
+    (hKstar : ∀ u : Point n, ‖u‖ ≤ expRho g gi hC p → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p u t)‖ ≤ Kstar)
+    (hKstar₂ : ∀ u : Point n, ‖u‖ ≤ expRho g gi hC p → ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p u t)‖ ≤ Kstar₂)
+    (Φv Φw : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hΦv0 : Φv 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦw0 : Φw 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦvd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φv (expJetPsi g gi hC p v t (Φv t)) (Set.Icc (0 : ℝ) 1) t)
+    (hΦwd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φw (expJetPsi g gi hC p w t (Φw t)) (Set.Icc (0 : ℝ) 1) t)
+    (Qv Qw : ℝ → (Point n × Point n)) (h k : Point n)
+    (hQv0 : Qv 0 = 0) (hQw0 : Qw 0 = 0)
+    (hQvd : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt Qv
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Qv t)
+        + expJet2Rhs g gi hC p v Φv h k t) (Set.Icc (0 : ℝ) 1) t)
+    (hQwd : ∀ t ∈ Set.Icc (0 : ℝ) 1, HasDerivWithinAt Qw
+      ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p w t)) (Qw t)
+        + expJet2Rhs g gi hC p w Φw h k t) (Set.Icc (0 : ℝ) 1) t) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖Qv t - Qw t‖
+        ≤ C * ‖v - w‖ * ‖h‖ * ‖k‖ :=
+  ⟨expJet2VtpConst (Kf : ℝ) (Ldf : ℝ) (Ld2f : ℝ) Kstar Kstar₂,
+    expJet2VtpConst_nonneg _ _ _ _ _ Ldf.2 Ld2f.2 hKstar₂0,
+    expJet2_v_two_pt_Icc_const g gi hC p v w hv hw Kf Ldf Ld2f Kstar Kstar₂ hKstar0 hKstar₂0
+      hLipF hLipDF hLipD2F hKstar hKstar₂ Φv Φw hΦv0 hΦw0 hΦvd hΦwd Qv Qw h k hQv0 hQw0 hQvd hQwd⟩
 
 /-! ### Sub-brick R3-(c′) — the `D²F` second-order Taylor remainder is quadratic
 
@@ -3411,5 +3451,561 @@ theorem expJet3_remainder_quadratic_bound' (g gi : Point n → Fin n → Fin n �
     refine (norm_add_le _ _).trans (add_le_add ?_ hbE1)
     refine (norm_add_le _ _).trans (add_le_add ?_ hbC)
     refine (norm_add_le _ _).trans (add_le_add hbA hbB)
+
+/-! ### Rung-3 uniform assembly — the `l`-uniform separated remainders and the CLM `HasFDerivAt`
+
+The pointwise little-o `expMap_fderiv2_sub_quadratic` has an `(h,k)`- and `l`-dependent constant.  The
+genuine third-derivative CLM `HasFDerivAt (v ↦ fderiv² exp_p v) D³_v v` needs a bound
+`‖A_l k h‖ ≤ C₀·‖l‖²·‖k‖·‖h‖` with `C₀` UNIFORM over both a neighbourhood of `l = 0` and the
+directions `(h,k)`.  The uniformity in `l` comes from the same devices as the Rung-2 `_unif`: the
+uniform tube bounds `expJet_fderiv_tube_bddAbove_unif` / `expJet_fderiv{2,3}_tube_bddAbove_unif` (one
+`Kstar` for all `‖w‖ ≤ expRho`) and the propagator norm bound `expJetFund_norm_le_exp` (one `e^{Kstar}`
+for every propagator witness).  Each Rung-3 sub-brick residual is re-cast with `l` (and the `v+l`
+propagator `Φ'`) UNIVERSALLY QUANTIFIED inside a single existential constant, so the constant is one
+fixed value covering every small `l`. -/
+
+set_option maxHeartbeats 1600000 in
+/-- **The `l`-UNIFORM `‖h‖`-separated first-variation residual.**  The `l`-uniform mirror of
+    `expJet2FirstVar_residual_Icc'`: a single `C₀ ≥ 0` works for EVERY varied direction `l`
+    (`‖v+l‖ ≤ expRho`) and every `v+l`-propagator `Φ'`.  The `l`-uniformity comes from feeding the
+    `l`-uniform Rung-2 remainder `expJet2_remainder_quadratic_bound_unif` (with direction `k := l`) into
+    the residual vector Grönwall (the outer factor `e^{Kstar}` uses the `v`-tube bound, independent of
+    `l`). -/
+theorem expJet2FirstVar_residual_Icc_unif (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∃ C₀ : ℝ, 0 ≤ C₀ ∧ ∀ (l : Point n), ‖v + l‖ ≤ expRho g gi hC p →
+      ∀ (Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n))),
+        Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n) →
+        ContinuousOn Φ' (Set.Icc (0 : ℝ) 1) →
+        (∀ t ∈ Set.Icc (0 : ℝ) 1,
+          HasDerivWithinAt Φ' (expJetPsi g gi hC p (v + l) t (Φ' t)) (Set.Icc (0 : ℝ) 1) t) →
+        ∀ (h : Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          ‖Φ' t (expJetIota h) - Φ t (expJetIota h)
+              - expJet2Curve g gi hC p v Φ hv hΦcont h l t‖ ≤ C₀ * ‖h‖ * ‖l‖ ^ 2 := by
+  obtain ⟨Cr, hCr0, hrbdU⟩ :=
+    expJet2_remainder_quadratic_bound_unif g gi hC p v Φ hv hΦ0 hΦcont hΦd
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  refine ⟨Cr * Real.exp Kstar, mul_nonneg hCr0 (Real.exp_pos _).le, ?_⟩
+  intro l hvl Φ' hΦ'0 hΦ'cont hΦ'd h t ht
+  obtain ⟨hQ0, -, -, hQd⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h l).choose_spec
+  have hgron := gronwall_vec_residual_Icc
+    (fun s => Φ' s (expJetIota h) - Φ s (expJetIota h)
+      - expJet2Curve g gi hC p v Φ hv hΦcont h l s)
+    (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p (v + l) s)
+        - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Φ' s (expJetIota h))
+      - expJet2Rhs g gi hC p v Φ h l s)
+    (fun s => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) Kstar (Cr * ‖h‖ * ‖l‖ ^ 2)
+    hKstar0 (mul_nonneg (mul_nonneg hCr0 (norm_nonneg _)) (pow_nonneg (norm_nonneg _) 2))
+    (by simp only [expJet2Curve, hΦ0, hΦ'0, ContinuousLinearMap.id_apply, hQ0, sub_self])
+    (fun s hs => expJet2_residual_hasDerivWithinAt g gi hC p v (v + l) Φ Φ'
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l) h l hΦd hΦ'd hQd s hs)
+    hKstar (fun s hs => hrbdU l hvl Φ' hΦ'0 hΦ'cont hΦ'd h s hs) t ht
+  calc ‖Φ' t (expJetIota h) - Φ t (expJetIota h)
+          - expJet2Curve g gi hC p v Φ hv hΦcont h l t‖
+      ≤ (Cr * ‖h‖ * ‖l‖ ^ 2) * Real.exp Kstar := hgron
+    _ = Cr * Real.exp Kstar * ‖h‖ * ‖l‖ ^ 2 := by ring
+
+set_option maxHeartbeats 1600000 in
+/-- **The `l`-UNIFORM second-variation two-point Lipschitz.**  A single `Ce ≥ 0` (the explicit
+    `expJet2VtpConst` built from the `l`-independent Lipschitz/uniform-tube constants) works for EVERY
+    varied direction `l` (`‖v+l‖ ≤ expRho`) and every `v+l`-propagator `Φ'`:
+    `‖Q^{hk}_{v+l}(t) − Q^{hk}_v(t)‖ ≤ Ce·‖h‖·‖k‖·‖l‖` on `[0,1]`, with `Q^{hk}` the genuine
+    second-variation curves `expJet2Curve`.  Proved by instantiating the explicit-constant
+    `expJet2_v_two_pt_Icc_const` at `w = v+l` with the genuine curves (`‖v−(v+l)‖ = ‖l‖`); the
+    constant is fixed because it depends only on the UNIFORM tube bounds. -/
+theorem expJet2_v_two_pt_Icc_unif (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∃ Ce : ℝ, 0 ≤ Ce ∧ ∀ (l : Point n) (hvl : ‖v + l‖ ≤ expRho g gi hC p),
+      ∀ (Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n))),
+        Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n) →
+        ∀ (hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) 1)),
+        (∀ t ∈ Set.Icc (0 : ℝ) 1,
+          HasDerivWithinAt Φ' (expJetPsi g gi hC p (v + l) t (Φ' t)) (Set.Icc (0 : ℝ) 1) t) →
+        ∀ (h k : Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          ‖expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t
+              - expJet2Curve g gi hC p v Φ hv hΦcont h k t‖ ≤ Ce * ‖h‖ * ‖k‖ * ‖l‖ := by
+  obtain ⟨Kf, hLipF⟩ := ((contDiff_geodesicField g gi hC).contDiffOn
+      (s := Metric.closedBall ((p, 0) : Point n × Point n)
+        (expConst g gi hC p * expRho g gi hC p))).exists_lipschitzOnWith
+    (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+  obtain ⟨Ldf, hLipDF⟩ := expJet_fderiv_lipschitzOnWith g gi hC p
+  obtain ⟨Ld2f, hLipD2⟩ := expJet_fderiv2_lipschitzOnWith g gi hC p
+  obtain ⟨Kstar, hKstar0, hKstaru⟩ := expJet_fderiv_tube_bddAbove_unif g gi hC p
+  obtain ⟨Kstar₂, hKstar₂0, hK2u⟩ := expJet_fderiv2_tube_bddAbove_unif g gi hC p
+  refine ⟨expJet2VtpConst (Kf : ℝ) (Ldf : ℝ) (Ld2f : ℝ) Kstar Kstar₂,
+    expJet2VtpConst_nonneg _ _ _ _ _ Ldf.2 Ld2f.2 hKstar₂0, ?_⟩
+  intro l hvl Φ' hΦ'0 hΦ'cont hΦ'd h k t ht
+  obtain ⟨hQv0, -, -, hQvd⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec
+  obtain ⟨hQw0, -, -, hQwd⟩ := (expJet2Fund g gi hC p (v + l) Φ' hvl hΦ'cont h k).choose_spec
+  have hconst := expJet2_v_two_pt_Icc_const g gi hC p v (v + l) hv hvl Kf Ldf Ld2f Kstar Kstar₂
+    hKstar0 hKstar₂0 hLipF hLipDF hLipD2 hKstaru hK2u Φ Φ' hΦ0 hΦ'0 hΦd hΦ'd
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+    (expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k) h k hQv0 hQw0 hQvd hQwd t ht
+  rw [show v - (v + l) = -l by abel, norm_neg] at hconst
+  rw [norm_sub_rev]
+  calc ‖expJet2Curve g gi hC p v Φ hv hΦcont h k t
+          - expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t‖
+      ≤ expJet2VtpConst (Kf : ℝ) (Ldf : ℝ) (Ld2f : ℝ) Kstar Kstar₂ * ‖l‖ * ‖h‖ * ‖k‖ := hconst
+    _ = expJet2VtpConst (Kf : ℝ) (Ldf : ℝ) (Ld2f : ℝ) Kstar Kstar₂ * ‖h‖ * ‖k‖ * ‖l‖ := by ring
+
+set_option maxHeartbeats 4000000 in
+/-- **The `l`-UNIFORM `‖h‖‖k‖`-separated Jet₃ quadratic remainder bound.**  The fusion of the
+    `‖h‖‖k‖`-separated `expJet3_remainder_quadratic_bound'` and the `l`-uniform devices: a SINGLE
+    `C₀ ≥ 0` — independent of the varied direction `l`, of the `v+l`-propagator `Φ'`, and of the probe
+    directions `(h,k)` — bounds the Jet₃ residual ODE source by `C₀·‖h‖·‖k‖·‖l‖²` for every small `l`.
+    The `l`-uniformity replaces the compactness DF-tube bound at `v+l` (which is `l`-dependent) by the
+    uniform `expJet_fderiv_tube_bddAbove_unif`, and feeds the `l`-uniform first-variation residual
+    (`expJet2FirstVar_residual_Icc_unif`) and second-variation two-point Lipschitz
+    (`expJet2_v_two_pt_Icc_unif`) with their single fixed constants; the source is written against the
+    GENUINE second-variation curves `expJet2Curve`.  This is the source-level datum the CLM
+    `HasFDerivAt` of `fderiv² exp_p` consumes (via the residual Grönwall + `π`). -/
+theorem expJet3_remainder_quadratic_bound_unif (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t) :
+    ∃ C₀ : ℝ, 0 ≤ C₀ ∧ ∀ (l : Point n) (hvl : ‖v + l‖ ≤ expRho g gi hC p)
+      (Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+      (_hΦ'0 : Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+      (hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) 1))
+      (hΦ'd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+        HasDerivWithinAt Φ' (expJetPsi g gi hC p (v + l) t (Φ' t)) (Set.Icc (0 : ℝ) 1) t)
+      (h k : Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖(fderiv ℝ (geodesicField g gi) (expTube g gi hC p (v + l) t)
+           - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+          (expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t)
+         + (expJet2Rhs g gi hC p (v + l) Φ' h k t
+            - expJet2Rhs g gi hC p v Φ h k t
+            - expJet3Rhs g gi hC p v Φ
+                (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+                (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+                (expJet2Curve g gi hC p v Φ hv hΦcont h k) h k l t)‖
+       ≤ C₀ * ‖h‖ * ‖k‖ * ‖l‖ ^ 2 := by
+  have hC₀ := expConst_nonneg g gi hC p
+  -- ── Lipschitz constants + uniform tube bounds (all `l`-independent) ─────────────────────────
+  obtain ⟨Kf, hLipF⟩ := ((contDiff_geodesicField g gi hC).contDiffOn
+      (s := Metric.closedBall ((p, 0) : Point n × Point n)
+        (expConst g gi hC p * expRho g gi hC p))).exists_lipschitzOnWith
+    (by simp) (convex_closedBall _ _) (isCompact_closedBall _ _)
+  obtain ⟨Ldf, hLipDF⟩ := expJet_fderiv_lipschitzOnWith g gi hC p
+  obtain ⟨Ld2f, hLipD2⟩ := expJet_fderiv2_lipschitzOnWith g gi hC p
+  obtain ⟨Ld3f, hLipD3⟩ := expJet_fderiv3_lipschitzOnWith g gi hC p
+  obtain ⟨Kstar, hKstar0, hKstaru⟩ := expJet_fderiv_tube_bddAbove_unif g gi hC p
+  obtain ⟨Kstar2, hKstar20, hD2bd⟩ := expJet_fderiv2_tube_bddAbove_unif g gi hC p
+  obtain ⟨Kstar3, hKstar30, hD3bd⟩ := expJet_fderiv3_tube_bddAbove_unif g gi hC p
+  obtain ⟨Cd, hCd0, hFVU⟩ := expJet2FirstVar_residual_Icc_unif g gi hC p v Φ hv hΦ0 hΦcont hΦd
+  obtain ⟨Ce, hCe0, hQlipU⟩ := expJet2_v_two_pt_Icc_unif g gi hC p v Φ hv hΦ0 hΦcont hΦd
+  set eKf : ℝ := Real.exp (Kf : ℝ) with heKf
+  have heKf0 : 0 ≤ eKf := (Real.exp_pos _).le
+  set eKs : ℝ := Real.exp Kstar with heKs
+  have heKs0 : 0 ≤ eKs := (Real.exp_pos _).le
+  set M : ℝ := (Ldf : ℝ) with hMdef
+  have hM0 : 0 ≤ M := Ldf.coe_nonneg
+  set L2 : ℝ := (Ld2f : ℝ) with hL2def
+  have hL2_0 : 0 ≤ L2 := Ld2f.coe_nonneg
+  set L3 : ℝ := (Ld3f : ℝ) with hL3def
+  have hL3_0 : 0 ≤ L3 := Ld3f.coe_nonneg
+  set C2 : ℝ := M * eKf ^ 2 * eKs with hC2def
+  have hC2_0 : 0 ≤ C2 := by rw [hC2def]; positivity
+  set C3 : ℝ := M * eKf * eKs * eKs with hC3def
+  have hC3_0 : 0 ≤ C3 := by rw [hC3def]; positivity
+  set CQ : ℝ := Kstar2 * eKs ^ 2 * eKs with hCQdef
+  have hCQ0 : 0 ≤ CQ := by rw [hCQdef]; positivity
+  have hLipDF_M : LipschitzOnWith M.toNNReal (fderiv ℝ (geodesicField g gi))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)) := by
+    rw [hMdef, Real.toNNReal_coe]; exact hLipDF
+  have hLipD2R : LipschitzOnWith L2.toNNReal (fderiv ℝ (fderiv ℝ (geodesicField g gi)))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)) := by
+    rw [hL2def, Real.toNNReal_coe]; exact hLipD2
+  have hLipD3R : LipschitzOnWith L3.toNNReal
+      (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))))
+      (Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p)) := by
+    rw [hL3def, Real.toNNReal_coe]; exact hLipD3
+  -- ── v-side uniform bounds (l-independent) ──────────────────────────────────────────────────
+  have hKstarv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)‖ ≤ Kstar := hKstaru v hv
+  have hK2v : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t)‖ ≤ Kstar2 := hD2bd v hv
+  have hK3v : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) (expTube g gi hC p v t)‖ ≤ Kstar3 :=
+    hD3bd v hv
+  have hΦnorm : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φ t‖ ≤ eKs :=
+    expJetFund_norm_le_exp g gi hC p v Φ Kstar hKstar0 hKstarv hΦ0 hΦd
+  obtain ⟨hY0v, hYdv, hconfv⟩ := expTube_spec g gi hC p v hv
+  have hmemv : ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p v t ∈
+      Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p) := by
+    intro t ht; rw [Metric.mem_closedBall, dist_eq_norm]
+    exact (hconfv t ht).trans (mul_le_mul_of_nonneg_left hv hC₀)
+  -- ── the `l,h,k`-independent witness constant ────────────────────────────────────────────────
+  refine ⟨L2 * eKf ^ 2 * CQ + Kstar2 * C2 * CQ + Kstar2 * eKs * Ce
+      + L3 * eKf ^ 2 * eKs ^ 2 + Kstar3 * C2 * eKs ^ 2
+      + Kstar3 * eKs ^ 2 * C3 + Kstar3 * eKs ^ 2 * C3
+      + Kstar2 * C3 ^ 2 + Kstar2 * Cd * eKs + Kstar2 * eKs * Cd, by positivity, ?_⟩
+  intro l hvl Φ' hΦ'0 hΦ'cont hΦ'd h k
+  -- ── the `v+l`-side bounds (l-dependent) + genuine curves/residuals ──────────────────────────
+  obtain ⟨hQw0, -, -, hQwd⟩ := (expJet2Fund g gi hC p (v + l) Φ' hvl hΦ'cont h k).choose_spec
+  have hKstarw : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p (v + l) t)‖ ≤ Kstar := hKstaru (v + l) hvl
+  have hK2w : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p (v + l) t)‖ ≤ Kstar2 :=
+    hD2bd (v + l) hvl
+  have hΦ'norm : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φ' t‖ ≤ eKs :=
+    expJetFund_norm_le_exp g gi hC p (v + l) Φ' Kstar hKstar0 hKstarw hΦ'0 hΦ'd
+  obtain ⟨hY0w, hYdw, hconfw⟩ := expTube_spec g gi hC p (v + l) hvl
+  have hmemw : ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p (v + l) t ∈
+      Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p) := by
+    intro t ht; rw [Metric.mem_closedBall, dist_eq_norm]
+    exact (hconfw t ht).trans (mul_le_mul_of_nonneg_left hvl hC₀)
+  have hsep : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p (v + l) t - expTube g gi hC p v t‖ ≤ ‖l‖ * eKf := by
+    have hIcc_Ioo : ∀ t ∈ Set.Icc (0 : ℝ) 1, t ∈ Set.Ioo (-2 : ℝ) 2 :=
+      fun t ht => ⟨by linarith [ht.1], by linarith [ht.2]⟩
+    have hdist0 : dist (expTube g gi hC p (v + l) 0) (expTube g gi hC p v 0) = ‖l‖ := by
+      rw [hY0w, hY0v, dist_eq_norm, Prod.mk_sub_mk, add_sub_cancel_left, sub_self, Prod.norm_def,
+        norm_zero, max_eq_right (norm_nonneg _)]
+    have htwo := geodesic_twopoint_gronwall g gi
+      (S := Metric.closedBall ((p, 0) : Point n × Point n) (expConst g gi hC p * expRho g gi hC p))
+      (K := Kf) hLipF
+      (fun t ht => hYdw t (hIcc_Ioo t ht)) (fun t ht => hYdv t (hIcc_Ioo t ht)) hmemw hmemv
+    intro t ht
+    have hh := htwo t ht
+    rw [hdist0, dist_eq_norm] at hh
+    refine hh.trans (mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr ?_) (norm_nonneg _))
+    calc (Kf : ℝ) * t ≤ (Kf : ℝ) * 1 := mul_le_mul_of_nonneg_left ht.2 (by positivity)
+      _ = (Kf : ℝ) := mul_one _
+  have htay : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (geodesicField g gi) (expTube g gi hC p (v + l) t)
+          - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)
+          - (fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t))
+              (expTube g gi hC p (v + l) t - expTube g gi hC p v t)‖
+        ≤ L2 * ‖expTube g gi hC p (v + l) t - expTube g gi hC p v t‖ ^ 2 :=
+    fun t ht => geodesicField_DF_second_order_taylor g gi hC p L2 hL2_0 hLipD2R
+      (expTube g gi hC p v t) (expTube g gi hC p (v + l) t) (hmemv t ht) (hmemw t ht)
+  have hD2tay : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p (v + l) t)
+          - fderiv ℝ (fderiv ℝ (geodesicField g gi)) (expTube g gi hC p v t)
+          - (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) (expTube g gi hC p v t))
+              (expTube g gi hC p (v + l) t - expTube g gi hC p v t)‖
+        ≤ L3 * ‖expTube g gi hC p (v + l) t - expTube g gi hC p v t‖ ^ 2 :=
+    fun t ht => geodesicField_D2F_second_order_taylor g gi hC p L3 hL3_0 hLipD3R
+      (expTube g gi hC p v t) (expTube g gi hC p (v + l) t) (hmemv t ht) (hmemw t ht)
+  have hacc : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expTube g gi hC p (v + l) t - expTube g gi hC p v t - Φ t (expJetIota l)‖ ≤ C2 * ‖l‖ ^ 2 :=
+    fun t ht => expTube_second_order_accuracy g gi hC p v l hvl hv M hM0 Kf Kstar hKstar0
+      hLipF hLipDF_M hKstarv Φ hΦ0 hΦd t ht
+  have hQwval : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t‖ ≤ CQ * ‖h‖ * ‖k‖ :=
+    expJet2Fund_value_bound_Icc g gi hC p (v + l) Φ' h k Kstar Kstar2 eKs
+      hKstar0 hKstar20 heKs0 hKstarw hK2w hΦ'norm
+      (expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k) hQw0 hQwd
+  have htwopt : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φ t - Φ' t‖ ≤ C3 * ‖l‖ := by
+    have hbase := expFund_two_pt_diff_Icc g gi hC p v (v + l) Kf Ldf Kstar hKstar0
+      hLipF hLipDF hKstarv hKstarw hv hvl Φ Φ' hΦ0 hΦ'0 hΦd hΦ'd
+    intro t ht
+    have hb := hbase t ht
+    rw [show v - (v + l) = -l by abel, norm_neg] at hb
+    exact hb
+  have hFVh : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖Φ' t (expJetIota h) - Φ t (expJetIota h)
+          - expJet2Curve g gi hC p v Φ hv hΦcont h l t‖ ≤ Cd * ‖h‖ * ‖l‖ ^ 2 :=
+    hFVU l hvl Φ' hΦ'0 hΦ'cont hΦ'd h
+  have hFVk : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖Φ' t (expJetIota k) - Φ t (expJetIota k)
+          - expJet2Curve g gi hC p v Φ hv hΦcont k l t‖ ≤ Cd * ‖k‖ * ‖l‖ ^ 2 :=
+    hFVU l hvl Φ' hΦ'0 hΦ'cont hΦ'd k
+  have hQlip : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t
+          - expJet2Curve g gi hC p v Φ hv hΦcont h k t‖ ≤ Ce * ‖h‖ * ‖k‖ * ‖l‖ :=
+    hQlipU l hvl Φ' hΦ'0 hΦ'cont hΦ'd h k
+  have hιh : ‖expJetIota (n := n) h‖ ≤ ‖h‖ :=
+    ((expJetIota (n := n)).le_opNorm h).trans (by
+      simpa using mul_le_mul_of_nonneg_right expJetIota_opNorm_le (norm_nonneg h))
+  have hιk : ‖expJetIota (n := n) k‖ ≤ ‖k‖ :=
+    ((expJetIota (n := n)).le_opNorm k).trans (by
+      simpa using mul_le_mul_of_nonneg_right expJetIota_opNorm_le (norm_nonneg k))
+  have hιl : ‖expJetIota (n := n) l‖ ≤ ‖l‖ :=
+    ((expJetIota (n := n)).le_opNorm l).trans (by
+      simpa using mul_le_mul_of_nonneg_right expJetIota_opNorm_le (norm_nonneg l))
+  -- ── the per-`t` chain (mirror of `expJet3_remainder_quadratic_bound'`) ──────────────────────
+  intro t ht
+  simp only [expJet2Rhs_apply, expJet3Rhs_apply]
+  set yv := expTube g gi hC p v t with hyvE
+  set yw := expTube g gi hC p (v + l) t with hywE
+  set dv := fderiv ℝ (geodesicField g gi) yv with hdvE
+  set dw := fderiv ℝ (geodesicField g gi) yw with hdwE
+  set d2v := fderiv ℝ (fderiv ℝ (geodesicField g gi)) yv with hd2vE
+  set d2w := fderiv ℝ (fderiv ℝ (geodesicField g gi)) yw with hd2wE
+  set d3v := fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) yv with hd3vE
+  set ph := Φ t (expJetIota h) with hphE
+  set pk := Φ t (expJetIota k) with hpkE
+  set pl := Φ t (expJetIota l) with hplE
+  set ph' := Φ' t (expJetIota h) with hph'E
+  set pk' := Φ' t (expJetIota k) with hpk'E
+  set qv := expJet2Curve g gi hC p v Φ hv hΦcont h k t with hqvE
+  set qw := expJet2Curve g gi hC p (v + l) Φ' hvl hΦ'cont h k t with hqwE
+  set qkl := expJet2Curve g gi hC p v Φ hv hΦcont k l t with hqklE
+  set qhl := expJet2Curve g gi hC p v Φ hv hΦcont h l t with hqhlE
+  have hph : ‖ph‖ ≤ eKs * ‖h‖ := clmApply_norm_le (Φ t) (expJetIota h) heKs0 (hΦnorm t ht) hιh
+  have hpk : ‖pk‖ ≤ eKs * ‖k‖ := clmApply_norm_le (Φ t) (expJetIota k) heKs0 (hΦnorm t ht) hιk
+  have hpl : ‖pl‖ ≤ eKs * ‖l‖ := clmApply_norm_le (Φ t) (expJetIota l) heKs0 (hΦnorm t ht) hιl
+  have hph' : ‖ph'‖ ≤ eKs * ‖h‖ :=
+    clmApply_norm_le (Φ' t) (expJetIota h) heKs0 (hΦ'norm t ht) hιh
+  have hpk' : ‖pk'‖ ≤ eKs * ‖k‖ :=
+    clmApply_norm_le (Φ' t) (expJetIota k) heKs0 (hΦ'norm t ht) hιk
+  have hd2n : ‖d2v‖ ≤ Kstar2 := hK2v t ht
+  have hd3n : ‖d3v‖ ≤ Kstar3 := hK3v t ht
+  have hph'ph : ‖ph' - ph‖ ≤ C3 * ‖l‖ * ‖h‖ := by
+    have hsub : ph' - ph = (Φ' t - Φ t) (expJetIota h) := by
+      rw [ContinuousLinearMap.sub_apply]
+    rw [hsub]
+    calc ‖(Φ' t - Φ t) (expJetIota h)‖
+        ≤ ‖Φ' t - Φ t‖ * ‖expJetIota (n := n) h‖ := (Φ' t - Φ t).le_opNorm _
+      _ ≤ (C3 * ‖l‖) * ‖h‖ :=
+          mul_le_mul (by rw [norm_sub_rev]; exact htwopt t ht) hιh (norm_nonneg _) (by positivity)
+      _ = C3 * ‖l‖ * ‖h‖ := by ring
+  have hpk'pk : ‖pk' - pk‖ ≤ C3 * ‖l‖ * ‖k‖ := by
+    have hsub : pk' - pk = (Φ' t - Φ t) (expJetIota k) := by
+      rw [ContinuousLinearMap.sub_apply]
+    rw [hsub]
+    calc ‖(Φ' t - Φ t) (expJetIota k)‖
+        ≤ ‖Φ' t - Φ t‖ * ‖expJetIota (n := n) k‖ := (Φ' t - Φ t).le_opNorm _
+      _ ≤ (C3 * ‖l‖) * ‖k‖ :=
+          mul_le_mul (by rw [norm_sub_rev]; exact htwopt t ht) hιk (norm_nonneg _) (by positivity)
+      _ = C3 * ‖l‖ * ‖k‖ := by ring
+  have heq :
+      (dw - dv) qw
+        + (d2w ph' pk' - d2v ph pk
+           - (d3v ph pk pl + d2v ph qkl + d2v pk qhl + d2v pl qv))
+      = (dw - dv - d2v (yw - yv)) qw
+        + (d2v (yw - yv - pl)) qw
+        + (d2v pl) (qw - qv)
+        + (d2w - d2v - d3v (yw - yv)) ph' pk'
+        + d3v (yw - yv - pl) ph' pk'
+        + d3v pl (ph' - ph) pk'
+        + d3v pl ph (pk' - pk)
+        + d2v (ph' - ph) (pk' - pk)
+        + d2v (ph' - ph - qhl) pk
+        + d2v ph (pk' - pk - qkl) := by
+    have hcyc : d3v pl ph pk = d3v ph pk pl :=
+      fderiv3_geodesicField_symm_cyc g gi hC yv pl ph pk
+    have hsym : d2v qhl pk = d2v pk qhl :=
+      fderiv2_geodesicField_symm g gi hC yv qhl pk
+    simp only [ContinuousLinearMap.sub_apply, map_sub]
+    rw [hcyc, hsym]
+    abel
+  rw [heq]
+  have hbA : ‖(dw - dv - d2v (yw - yv)) qw‖ ≤ (L2 * eKf ^ 2 * CQ * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 := by
+    calc ‖(dw - dv - d2v (yw - yv)) qw‖
+        ≤ ‖dw - dv - d2v (yw - yv)‖ * ‖qw‖ := (dw - dv - d2v (yw - yv)).le_opNorm _
+      _ ≤ (L2 * ‖yw - yv‖ ^ 2) * (CQ * ‖h‖ * ‖k‖) :=
+          mul_le_mul (htay t ht) (hQwval t ht) (norm_nonneg _) (by positivity)
+      _ ≤ (L2 * (‖l‖ * eKf) ^ 2) * (CQ * ‖h‖ * ‖k‖) :=
+          mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) (hsep t ht) 2) hL2_0)
+            (by positivity)
+      _ = (L2 * eKf ^ 2 * CQ * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 := by ring
+  have hbB : ‖(d2v (yw - yv - pl)) qw‖ ≤ (Kstar2 * C2 * CQ * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply2_norm_le d2v (yw - yv - pl) qw hKstar20 (by positivity) hd2n
+      (hacc t ht) (hQwval t ht)).trans (le_of_eq (by ring))
+  have hbC : ‖(d2v pl) (qw - qv)‖ ≤ (Kstar2 * eKs * Ce * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply2_norm_le d2v pl (qw - qv) hKstar20 (by positivity) hd2n hpl
+      (hQlip t ht)).trans (le_of_eq (by ring))
+  have hbE1 : ‖(d2w - d2v - d3v (yw - yv)) ph' pk'‖
+      ≤ (L3 * eKf ^ 2 * eKs ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 := by
+    calc ‖(d2w - d2v - d3v (yw - yv)) ph' pk'‖
+        ≤ (L3 * ‖yw - yv‖ ^ 2) * (eKs * ‖h‖) * (eKs * ‖k‖) :=
+          clmApply2_norm_le _ ph' pk' (by positivity) (by positivity) (hD2tay t ht) hph' hpk'
+      _ ≤ (L3 * (‖l‖ * eKf) ^ 2) * (eKs * ‖h‖) * (eKs * ‖k‖) :=
+          mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right
+            (mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (norm_nonneg _) (hsep t ht) 2) hL3_0)
+            (by positivity)) (by positivity)
+      _ = (L3 * eKf ^ 2 * eKs ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 := by ring
+  have hbE2 : ‖d3v (yw - yv - pl) ph' pk'‖
+      ≤ (Kstar3 * C2 * eKs ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply3_norm_le d3v (yw - yv - pl) ph' pk' hKstar30 (by positivity) (by positivity)
+      hd3n (hacc t ht) hph' hpk').trans (le_of_eq (by ring))
+  have hbE3 : ‖d3v pl (ph' - ph) pk'‖ ≤ (Kstar3 * eKs ^ 2 * C3 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply3_norm_le d3v pl (ph' - ph) pk' hKstar30 (by positivity) (by positivity)
+      hd3n hpl hph'ph hpk').trans (le_of_eq (by ring))
+  have hbE4 : ‖d3v pl ph (pk' - pk)‖ ≤ (Kstar3 * eKs ^ 2 * C3 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply3_norm_le d3v pl ph (pk' - pk) hKstar30 (by positivity) (by positivity)
+      hd3n hpl hph hpk'pk).trans (le_of_eq (by ring))
+  have hbE5 : ‖d2v (ph' - ph) (pk' - pk)‖ ≤ (Kstar2 * C3 ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply2_norm_le d2v (ph' - ph) (pk' - pk) hKstar20 (by positivity) hd2n
+      hph'ph hpk'pk).trans (le_of_eq (by ring))
+  have hbE6 : ‖d2v (ph' - ph - qhl) pk‖ ≤ (Kstar2 * Cd * eKs * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply2_norm_le d2v (ph' - ph - qhl) pk hKstar20 (by positivity) hd2n
+      (hFVh t ht) hpk).trans (le_of_eq (by ring))
+  have hbE7 : ‖d2v ph (pk' - pk - qkl)‖ ≤ (Kstar2 * eKs * Cd * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 :=
+    (clmApply2_norm_le d2v ph (pk' - pk - qkl) hKstar20 (by positivity) hd2n
+      hph (hFVk t ht)).trans (le_of_eq (by ring))
+  rw [show (L2 * eKf ^ 2 * CQ + Kstar2 * C2 * CQ + Kstar2 * eKs * Ce
+        + L3 * eKf ^ 2 * eKs ^ 2 + Kstar3 * C2 * eKs ^ 2
+        + Kstar3 * eKs ^ 2 * C3 + Kstar3 * eKs ^ 2 * C3
+        + Kstar2 * C3 ^ 2 + Kstar2 * Cd * eKs + Kstar2 * eKs * Cd)
+        * ‖h‖ * ‖k‖ * ‖l‖ ^ 2
+      = (L2 * eKf ^ 2 * CQ * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 + (Kstar2 * C2 * CQ * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (Kstar2 * eKs * Ce * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (L3 * eKf ^ 2 * eKs ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (Kstar3 * C2 * eKs ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (Kstar3 * eKs ^ 2 * C3 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (Kstar3 * eKs ^ 2 * C3 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 + (Kstar2 * C3 ^ 2 * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (Kstar2 * Cd * eKs * ‖h‖ * ‖k‖) * ‖l‖ ^ 2
+        + (Kstar2 * eKs * Cd * ‖h‖ * ‖k‖) * ‖l‖ ^ 2 from by ring]
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE7)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE6)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE5)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE4)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE3)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE2)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbE1)
+  refine (norm_add_le _ _).trans (add_le_add ?_ hbC)
+  refine (norm_add_le _ _).trans (add_le_add hbA hbB)
+
+set_option maxHeartbeats 1600000 in
+/-- **Rung-3 capstone (B-asm-3): `fderiv² exp_p` is Fréchet-differentiable with derivative `D³_v`.**
+    For `‖v‖ < expRho` and the first-variation propagator witness `Φ` at `v` (an `hasFDerivAt_expMap`
+    witness with the `fderiv` identity `fderiv exp_p v = π∘(Φ 1)∘ι`),
+    `HasFDerivAt (w ↦ fderiv² exp_p w) (D³_v) v` with `D³_v = expJetD3 … v Φ`.  Proof (mirror of the
+    Rung-2 `expMap_fderiv_hasFDerivAt`): the `l`-UNIFORM `‖h‖‖k‖`-separated Jet₃ source bound
+    (`expJet3_remainder_quadratic_bound_unif`) fed through the residual Grönwall
+    (`expJet3_residual_bound`) and projected by `π` gives, for every direction pair `(k,h)`,
+    `‖A_l k h‖ ≤ (C₀·e^{Kstar})·‖l‖²·‖k‖·‖h‖`; hence `‖A_l‖ ≤ Mc·‖l‖²`
+    (`Mc = C₀·e^{Kstar}`, `ContinuousLinearMap.opNorm_le_bound₂`) where
+    `A_l = fderiv²exp_p(v+l) − fderiv²exp_p(v) − D³_v l`; then `Mc·‖l‖² = o(‖l‖)` as `l → 0`
+    (`hasFDerivAt_iff_isLittleO_nhds_zero`, radius `min (expRho−‖v‖) (c/(Mc+1))`).  This is the
+    third-derivative differentiability datum of `exp_p`; it does NOT by itself give `ContDiff³`
+    (continuity of `v ↦ D³_v` is the next step), NOT `κ = 1/6`, NOT the heat kernel / `a₁ = R/6`,
+    NOT QG. -/
+theorem expMap_fderiv2_hasFDerivAt (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ < expRho g gi hC p)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦderiv : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t)
+    (hfdv : fderiv ℝ (expMap g gi hC p) v
+      = expJetPi.comp ((Φ 1).comp (expJetIota (n := n)))) :
+    HasFDerivAt (fun w => fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) w)
+      (expJetD3 g gi hC p v Φ hv.le hΦcont) v := by
+  obtain ⟨C₀, hC₀0, hrbdU⟩ :=
+    expJet3_remainder_quadratic_bound_unif g gi hC p v Φ hv.le hΦ0 hΦcont hΦderiv
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv.le
+  set Mc : ℝ := C₀ * Real.exp Kstar with hMcdef
+  have hMc0 : 0 ≤ Mc := mul_nonneg hC₀0 (Real.exp_pos _).le
+  rw [hasFDerivAt_iff_isLittleO_nhds_zero, Asymptotics.isLittleO_iff]
+  intro c hc
+  rw [Metric.eventually_nhds_iff]
+  refine ⟨min (expRho g gi hC p - ‖v‖) (c / (Mc + 1)),
+    lt_min (by linarith [hv]) (div_pos hc (by linarith)), fun l hl => ?_⟩
+  rw [dist_eq_norm, sub_zero] at hl
+  have hl1 : ‖l‖ < expRho g gi hC p - ‖v‖ := lt_of_lt_of_le hl (min_le_left _ _)
+  have hlM : ‖l‖ ≤ c / (Mc + 1) := (lt_of_lt_of_le hl (min_le_right _ _)).le
+  have hvl_lt : ‖v + l‖ < expRho g gi hC p :=
+    lt_of_le_of_lt (norm_add_le v l) (by linarith)
+  have hvl_le : ‖v + l‖ ≤ expRho g gi hC p := hvl_lt.le
+  -- the `v+l` first-variation propagator witness + the `fderiv exp_p` identity there.
+  obtain ⟨Φ', hΦ'0, hΦ'deriv, hfdvl'⟩ := hasFDerivAt_expMap g gi hC p (v + l) hvl_lt
+  have hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) 1) :=
+    fun t ht => (hΦ'deriv t ht).continuousWithinAt
+  have hfd_vl : fderiv ℝ (expMap g gi hC p) (v + l)
+      = expJetPi.comp ((Φ' 1).comp (expJetIota (n := n))) := hfdvl'.fderiv
+  -- the `fderiv²` identities at `v` and `v+l` (from the Rung-2 capstone).
+  have hfd2_v : fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) v
+      = expJetD2 g gi hC p v Φ hv.le hΦcont :=
+    (expMap_fderiv_hasFDerivAt g gi hC p v Φ hv hΦ0 hΦcont hΦderiv hfdv).fderiv
+  have hfd2_vl : fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) (v + l)
+      = expJetD2 g gi hC p (v + l) Φ' hvl_le hΦ'cont :=
+    (expMap_fderiv_hasFDerivAt g gi hC p (v + l) Φ' hvl_lt hΦ'0 hΦ'cont hΦ'deriv hfd_vl).fderiv
+  -- the `l`-uniform operator-norm bound `‖A_l‖ ≤ Mc·‖l‖²`.
+  have hAl : ‖fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) (v + l)
+      - fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) v
+      - expJetD3 g gi hC p v Φ hv.le hΦcont l‖ ≤ Mc * ‖l‖ ^ 2 := by
+    rw [hfd2_v, hfd2_vl]
+    refine ContinuousLinearMap.opNorm_le_bound₂ _ (mul_nonneg hMc0 (sq_nonneg _)) (fun k h => ?_)
+    obtain ⟨hQv0, -, -, hQvd⟩ := (expJet2Fund g gi hC p v Φ hv.le hΦcont h k).choose_spec
+    obtain ⟨hQw0, -, -, hQwd⟩ := (expJet2Fund g gi hC p (v + l) Φ' hvl_le hΦ'cont h k).choose_spec
+    obtain ⟨hR0, -, -, hRd⟩ :=
+      (expJet3Fund g gi hC p v Φ
+        (expJet2Curve g gi hC p v Φ hv.le hΦcont k l)
+        (expJet2Curve g gi hC p v Φ hv.le hΦcont h l)
+        (expJet2Curve g gi hC p v Φ hv.le hΦcont h k) hv.le hΦcont
+        (expJet2Curve_continuousOn g gi hC p v Φ hv.le hΦcont k l)
+        (expJet2Curve_continuousOn g gi hC p v Φ hv.le hΦcont h l)
+        (expJet2Curve_continuousOn g gi hC p v Φ hv.le hΦcont h k) h k l).choose_spec
+    have hρ0 : (0 : ℝ) ≤ C₀ * ‖h‖ * ‖k‖ * ‖l‖ ^ 2 :=
+      mul_nonneg (mul_nonneg (mul_nonneg hC₀0 (norm_nonneg _)) (norm_nonneg _)) (sq_nonneg _)
+    have hres := expJet3_residual_bound g gi hC p v (v + l) Φ Φ'
+      (expJet2Curve g gi hC p v Φ hv.le hΦcont h k)
+      (expJet2Curve g gi hC p (v + l) Φ' hvl_le hΦ'cont h k)
+      (expJet2Curve g gi hC p v Φ hv.le hΦcont k l)
+      (expJet2Curve g gi hC p v Φ hv.le hΦcont h l)
+      (expJet2Curve g gi hC p v Φ hv.le hΦcont h k)
+      (expJet3Fund g gi hC p v Φ
+        (expJet2Curve g gi hC p v Φ hv.le hΦcont k l)
+        (expJet2Curve g gi hC p v Φ hv.le hΦcont h l)
+        (expJet2Curve g gi hC p v Φ hv.le hΦcont h k) hv.le hΦcont
+        (expJet2Curve_continuousOn g gi hC p v Φ hv.le hΦcont k l)
+        (expJet2Curve_continuousOn g gi hC p v Φ hv.le hΦcont h l)
+        (expJet2Curve_continuousOn g gi hC p v Φ hv.le hΦcont h k) h k l).choose
+      h k l hQv0 hQw0 hR0 hQvd hQwd hRd Kstar (C₀ * ‖h‖ * ‖k‖ * ‖l‖ ^ 2) hKstar0 hρ0 hKstar
+      (fun t ht => hrbdU l hvl_le Φ' hΦ'0 hΦ'cont hΦ'deriv h k t ht)
+    simp only [ContinuousLinearMap.sub_apply]
+    rw [expJetD2_apply, expJetD2_apply, expJetD3_apply]
+    calc ‖expJetPi (expJet2Val g gi hC p (v + l) Φ' hvl_le hΦ'cont h k)
+            - expJetPi (expJet2Val g gi hC p v Φ hv.le hΦcont h k)
+            - expJetPi (expJet3ValG g gi hC p v Φ hv.le hΦcont h k l)‖
+        = ‖expJetPi (expJet2Val g gi hC p (v + l) Φ' hvl_le hΦ'cont h k
+              - expJet2Val g gi hC p v Φ hv.le hΦcont h k
+              - expJet3ValG g gi hC p v Φ hv.le hΦcont h k l)‖ := by rw [map_sub, map_sub]
+      _ ≤ ‖expJetPi (n := n)‖ * ‖expJet2Val g gi hC p (v + l) Φ' hvl_le hΦ'cont h k
+              - expJet2Val g gi hC p v Φ hv.le hΦcont h k
+              - expJet3ValG g gi hC p v Φ hv.le hΦcont h k l‖ :=
+          (expJetPi (n := n)).le_opNorm _
+      _ ≤ 1 * ‖expJet2Val g gi hC p (v + l) Φ' hvl_le hΦ'cont h k
+              - expJet2Val g gi hC p v Φ hv.le hΦcont h k
+              - expJet3ValG g gi hC p v Φ hv.le hΦcont h k l‖ :=
+          mul_le_mul_of_nonneg_right expJetPi_opNorm_le (norm_nonneg _)
+      _ = ‖expJet2Val g gi hC p (v + l) Φ' hvl_le hΦ'cont h k
+              - expJet2Val g gi hC p v Φ hv.le hΦcont h k
+              - expJet3ValG g gi hC p v Φ hv.le hΦcont h k l‖ := one_mul _
+      _ ≤ (C₀ * ‖h‖ * ‖k‖ * ‖l‖ ^ 2) * Real.exp Kstar := hres
+      _ = Mc * ‖l‖ ^ 2 * ‖k‖ * ‖h‖ := by rw [hMcdef]; ring
+  -- the little-o: `Mc·‖l‖² ≤ c·‖l‖` on the chosen radius.
+  have hMc : Mc * ‖l‖ ≤ c := by
+    have h1 : Mc * ‖l‖ ≤ Mc * (c / (Mc + 1)) := mul_le_mul_of_nonneg_left hlM hMc0
+    have h2 : Mc * (c / (Mc + 1)) ≤ c := by
+      rw [← mul_div_assoc, div_le_iff₀ (by linarith : (0 : ℝ) < Mc + 1)]
+      nlinarith [hc, hMc0]
+    linarith
+  show ‖fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) (v + l)
+      - fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) v
+      - expJetD3 g gi hC p v Φ hv.le hΦcont l‖ ≤ c * ‖l‖
+  calc ‖fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) (v + l)
+          - fderiv ℝ (fun z => fderiv ℝ (expMap g gi hC p) z) v
+          - expJetD3 g gi hC p v Φ hv.le hΦcont l‖
+      ≤ Mc * ‖l‖ ^ 2 := hAl
+    _ = (Mc * ‖l‖) * ‖l‖ := by ring
+    _ ≤ c * ‖l‖ := mul_le_mul_of_nonneg_right hMc (norm_nonneg _)
 
 end QIQTH.ExpMap

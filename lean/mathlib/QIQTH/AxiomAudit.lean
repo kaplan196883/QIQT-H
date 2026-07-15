@@ -10340,6 +10340,21 @@ namespace QIQTH.AxiomAudit
 -- a₁=R/6/numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet2FirstVar_residual_Icc'
 #print axioms QIQTH.ExpMap.expJet3_remainder_quadratic_bound'
+-- ★★ PARAMETRIX P1 RUNG 3 (B-asm3 CLM) — HasFDerivAt of fderiv²exp_p (ExpMapContDiff3.lean).
+-- expMap_fderiv2_hasFDerivAt: HasFDerivAt (fun w => fderiv (fun z => fderiv exp_p z) w) (expJetD3 …) v for
+-- ‖v‖<expRho — i.e. v ↦ fderiv²exp_p v is DIFFERENTIABLE with 3rd derivative the built CLM expJetD3.  Supporting
+-- l-UNIFORM separated bounds: expJet3_remainder_quadratic_bound_unif (single C₀ ∀ small l, Φ', (h,k):
+-- ‖ρ‖≤C₀‖h‖‖k‖‖l‖², via expJet_fderiv_tube_bddAbove_unif + expJetFund_norm_le_exp), expJet2_v_two_pt_Icc_unif,
+-- expJet2FirstVar_residual_Icc_unif, expJet2_v_two_pt_Icc_const (explicit-constant body; expJet2_v_two_pt_Icc now a
+-- thin ∃-wrapper, statement unchanged).  Assembly: opNorm_le_bound₂(A_l k h via expJet3_residual_bound+π) ⟹
+-- ‖A_l‖≤Mc‖l‖² + hasFDerivAt_iff_isLittleO_nhds_zero, mirror expMap_fderiv_hasFDerivAt.  HONEST: the 3rd-derivative
+-- DIFFERENTIABILITY datum; ContDiff³ exp_p still needs C(3) continuity of v↦expJetD3 + the discharge.  Does NOT give
+-- ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2_v_two_pt_Icc_const
+#print axioms QIQTH.ExpMap.expJet2FirstVar_residual_Icc_unif
+#print axioms QIQTH.ExpMap.expJet2_v_two_pt_Icc_unif
+#print axioms QIQTH.ExpMap.expJet3_remainder_quadratic_bound_unif
+#print axioms QIQTH.ExpMap.expMap_fderiv2_hasFDerivAt
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
