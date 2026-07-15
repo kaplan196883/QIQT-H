@@ -54,6 +54,80 @@ theorem contDiff_fderiv3_geodesicField (g gi : Point n → Fin n → Fin n → �
       (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi)))) :=
   (contDiff_fderiv2_geodesicField g gi hC).fderiv_right le_top
 
+/-! ### D³F symmetry — the third derivative is a symmetric trilinear map
+
+Mathlib supplies second-derivative symmetry only (`ContDiffAt.isSymmSndFDerivAt`); it has **no**
+general "iterated Fréchet derivative is symmetric under all argument permutations" API.  We bridge
+this gap for `D³F` of the (`C^∞`) geodesic field by proving the two adjacent transpositions that
+generate the full symmetric group `S₃`:
+* `fderiv3_geodesicField_symm_ab` — swap the FIRST two arguments, obtained by applying the
+  second-derivative-symmetry theorem to the (`C^∞`) function `DF = fderiv F` (`D³F = D²(DF)` is
+  symmetric in its two `D²`-slots);
+* `fderiv3_geodesicField_symm_bc` — swap the LAST two arguments, obtained by differentiating the
+  pointwise `D²F`-symmetry `D²F y = (D²F y).flip`: the flip is a linear isometry, so it commutes with
+  `fderiv` (`LinearIsometryEquiv.comp_fderiv`), giving `D³F x a = (D³F x a).flip`.
+Composing the two yields every permutation (e.g. the cyclic `l h k ↦ h k l` needed by the Rung-3
+cancellation).  This is the D³F-symmetry prerequisite of the quadratic residual bound. -/
+
+/-- **`D³F` is symmetric in its first two arguments.**  `D³F(x) a b c = D³F(x) b a c`.
+    `D³F = D²(DF)` where `DF = fderiv F` is `C^∞` (`contDiff_fderiv_geodesicField`); its second
+    derivative is a symmetric bilinear map (`ContDiffAt.isSymmSndFDerivAt`), i.e. `D³F(x) a b = D³F(x)
+    b a` as elements of `E →L F`; apply that CLM equality at `c`. -/
+theorem fderiv3_geodesicField_symm_ab (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x a b c : Point n × Point n) :
+    (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) a b c
+      = (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) b a c :=
+  DFunLike.congr_fun
+    (((contDiff_fderiv_geodesicField g gi hC).contDiffAt.isSymmSndFDerivAt le_top) a b) c
+
+/-- **`D³F` is symmetric in its last two arguments.**  `D³F(x) a b c = D³F(x) a c b`.
+    For each `y`, `D²F(y)` is a symmetric bilinear map (`fderiv2_geodesicField_symm`), i.e. `D²F(y) =
+    (D²F(y)).flip`; hence `D²F = flipₗᵢ ∘ D²F` as functions.  `flipₗᵢ` is a linear isometry, so it
+    commutes with the outer `fderiv` (`LinearIsometryEquiv.comp_fderiv`): `D³F(x) = (flipₗᵢ).comp
+    (D³F(x))`, giving `D³F(x) a = (D³F(x) a).flip` and thus the swap of `b,c`. -/
+theorem fderiv3_geodesicField_symm_bc (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x a b c : Point n × Point n) :
+    (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) a b c
+      = (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) a c b := by
+  set iso := ContinuousLinearMap.flipₗᵢ ℝ (Point n × Point n) (Point n × Point n)
+    (Point n × Point n) with hiso
+  -- `D²F = ⇑iso ∘ D²F` (pointwise flip-invariance of the symmetric bilinear `D²F y`).
+  have hcomp : (fderiv ℝ (fderiv ℝ (geodesicField g gi)))
+      = ⇑iso ∘ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) := by
+    funext y
+    simp only [Function.comp_apply, hiso, ContinuousLinearMap.coe_flipₗᵢ]
+    refine ContinuousLinearMap.ext fun u => ContinuousLinearMap.ext fun w => ?_
+    rw [ContinuousLinearMap.flip_apply]
+    exact (fderiv2_geodesicField_symm g gi hC y w u).symm
+  -- differentiate: `D³F x = (↑iso).comp (D³F x)` since `iso` (a linear isometry) commutes with fderiv.
+  have key : fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x
+      = (iso : ((Point n × Point n) →L[ℝ] (Point n × Point n) →L[ℝ] (Point n × Point n))
+            →L[ℝ] ((Point n × Point n) →L[ℝ] (Point n × Point n) →L[ℝ] (Point n × Point n))).comp
+          (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) := by
+    conv_lhs => rw [hcomp]
+    exact iso.comp_fderiv
+  -- read off the (b,c)-swap.
+  have h1 := DFunLike.congr_fun key a
+  rw [ContinuousLinearMap.comp_apply] at h1
+  conv_lhs => rw [h1]
+  simp only [hiso, LinearIsometryEquiv.coe_coe'', ContinuousLinearMap.coe_flipₗᵢ,
+    ContinuousLinearMap.flip_apply]
+
+/-- **`D³F` is fully symmetric: the cyclic permutation `(a,b,c) ↦ (b,c,a)`.**  `D³F(x) a b c = D³F(x)
+    b c a`, obtained by composing the two adjacent transpositions
+    (`fderiv3_geodesicField_symm_ab` then `_bc`).  This is the permutation the Rung-3 cancellation
+    uses to identify the pure `D³F` contraction of the three first variations with its
+    `expJet3Rhs` counterpart. -/
+theorem fderiv3_geodesicField_symm_cyc (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (x a b c : Point n × Point n) :
+    (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) a b c
+      = (fderiv ℝ (fderiv ℝ (fderiv ℝ (geodesicField g gi))) x) b c a := by
+  rw [fderiv3_geodesicField_symm_ab g gi hC x a b c,
+    fderiv3_geodesicField_symm_bc g gi hC x b a c]
+
 /-- **Uniform operator-norm bound of `D³F` over the `[0,1]` confined tube.**  The direct `D³F`
     analog of `expJet_fderiv2_tube_bddAbove_unif` (which bounds the second derivative `D²F`).
     Confinement (`expTube_spec`) puts every tube point `expTube p v t` (for `‖v‖ ≤ expRho`,
@@ -1082,5 +1156,71 @@ theorem expJet3_residual_bound (g gi : Point n → Fin n → Fin n → ℝ)
     intro t ht
     exact expJet3_residual_hasDerivWithinAt g gi hC p v w Φ Φ' Qv Qw Qkl Qhl Qhk R h k l
       hQvd hQwd hRd t ht
+
+/-! ### Sub-brick R3-firstvar — the `[0,1]`-uniform first-variation residual (quadratic)
+
+The Rung-3 cancellation needs, as an input, that each first-variation difference in the varied
+direction `l` agrees with the corresponding second variation up to `O(‖l‖²)`, UNIFORMLY on `[0,1]`
+(not just at the endpoint `t = 1`).  This is the LEVEL-UP, `[0,1]`-uniform sharpening of the Rung-2
+residual estimate `expJet2_residual_bound` (whose conclusion is only at `t = 1`); it is a pure
+assembly of already-landed Rung-2 pieces — NOT a new Mathlib gap.  It supplies the
+`‖Φ_{v+l}(t)(ιh) − Φ_v(t)(ιh) − Q^{hl}_v(t)‖ ≤ C‖l‖²` control (prerequisite 2 of the Rung-3
+`ρ ≤ C‖l‖²` remainder bound). -/
+
+set_option maxHeartbeats 1000000 in
+/-- **The `[0,1]`-uniform first-variation residual, quadratic in `l`.**  With `Φ` the first-variation
+    propagator for base point `v`, `Φ'` for `w = v + l`, and `Q` the `(h,l)` second-variation solution
+    for `v` (`Q' = DF(Y_v)(Q) + D²F(Y_v)(Φ(ιh))(Φ(ιl))`, `Q 0 = 0`), the first-variation residual
+    `S(t) = Φ'(t)(ιh) − Φ(t)(ιh) − Q(t)` is `O(‖l‖²)` uniformly on `[0,1]`:
+    `∃ C ≥ 0, ∀ t ∈ [0,1], ‖S(t)‖ ≤ C·‖l‖²`.
+
+    Assembly (mirror of `expJet2_residual_bound`, but at the `[0,1]`-uniform Grönwall):
+    (i) the Rung-2 quadratic remainder bound `expJet2_remainder_quadratic_bound` (with the varied
+    direction `k := l`) gives the `[0,1]` source estimate `‖r(t)‖ ≤ Cr·‖l‖²`; (ii) a `[0,1]` Jacobi
+    bound `Kstar` on `‖DF(Y_v t)‖` (`expJet_fderiv_tube_bddAbove`); (iii) the residual ODE
+    (`expJet2_residual_hasDerivWithinAt`) fed into the `[0,1]`-uniform vector Grönwall
+    (`gronwall_vec_residual_Icc`) yields `‖S(t)‖ ≤ (Cr·‖l‖²)·e^{Kstar}` for every `t ∈ [0,1]`. -/
+theorem expJet2FirstVar_residual_Icc (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p v : Point n)
+    (Φ Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Q : ℝ → (Point n × Point n)) (h l : Point n)
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hvl : ‖v + l‖ ≤ expRho g gi hC p)
+    (hΦ0 : Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hΦ'0 : Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n))
+    (hQ0 : Q 0 = 0)
+    (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hΦ'cont : ContinuousOn Φ' (Set.Icc (0 : ℝ) 1))
+    (hΦd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ (expJetPsi g gi hC p v t (Φ t)) (Set.Icc (0 : ℝ) 1) t)
+    (hΦ'd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Φ' (expJetPsi g gi hC p (v + l) t (Φ' t)) (Set.Icc (0 : ℝ) 1) t)
+    (hQd : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      HasDerivWithinAt Q
+        ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t)) (Q t)
+           + expJet2Rhs g gi hC p v Φ h l t) (Set.Icc (0 : ℝ) 1) t) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖Φ' t (expJetIota h) - Φ t (expJetIota h) - Q t‖ ≤ C * ‖l‖ ^ 2 := by
+  -- (i) the Rung-2 quadratic remainder of the residual ODE source (varied direction `k := l`).
+  obtain ⟨Cr, hCr0, hrbd⟩ := expJet2_remainder_quadratic_bound g gi hC p v l h Φ Φ'
+    hv hvl hΦ0 hΦ'0 hΦcont hΦ'cont hΦd hΦ'd
+  -- (ii) the `[0,1]` Jacobi bound on `‖DF(Y_v t)‖`.
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  refine ⟨Cr * Real.exp Kstar, mul_nonneg hCr0 (Real.exp_pos _).le, fun t ht => ?_⟩
+  -- (iii) residual ODE + `[0,1]`-uniform vector Grönwall.
+  have hgron := gronwall_vec_residual_Icc
+    (fun s => Φ' s (expJetIota h) - Φ s (expJetIota h) - Q s)
+    (fun s => (fderiv ℝ (geodesicField g gi) (expTube g gi hC p (v + l) s)
+        - fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) (Φ' s (expJetIota h))
+      - expJet2Rhs g gi hC p v Φ h l s)
+    (fun s => fderiv ℝ (geodesicField g gi) (expTube g gi hC p v s)) Kstar (Cr * ‖l‖ ^ 2)
+    hKstar0 (mul_nonneg hCr0 (pow_nonneg (norm_nonneg _) 2))
+    (by simp only [hΦ0, hΦ'0, ContinuousLinearMap.id_apply, hQ0, sub_self])
+    (fun s hs => expJet2_residual_hasDerivWithinAt g gi hC p v (v + l) Φ Φ' Q h l
+      hΦd hΦ'd hQd s hs)
+    hKstar hrbd t ht
+  calc ‖Φ' t (expJetIota h) - Φ t (expJetIota h) - Q t‖
+      ≤ (Cr * ‖l‖ ^ 2) * Real.exp Kstar := hgron
+    _ = Cr * Real.exp Kstar * ‖l‖ ^ 2 := by ring
 
 end QIQTH.ExpMap

@@ -10255,6 +10255,20 @@ namespace QIQTH.AxiomAudit
 -- a₁=R/6/numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet3_residual_hasDerivWithinAt
 #print axioms QIQTH.ExpMap.expJet3_residual_bound
+-- ★ PARAMETRIX P1 RUNG 3 (capstone prerequisites) — D³F symmetry + [0,1] first-variation residual (ExpMapContDiff3.lean).
+-- fderiv3_geodesicField_symm_ab (D³F x a b c = D³F x b a c, via 2nd-deriv symmetry of DF=fderiv F) +
+-- fderiv3_geodesicField_symm_bc (D³F x a b c = D³F x a c b, via D²F y=(D²F y).flip + LinearIsometryEquiv.comp_fderiv)
+-- + fderiv3_geodesicField_symm_cyc (cyclic, composed) — a GENUINE Mathlib-gap fill: Mathlib's FDeriv/Symmetric.lean
+-- stops at the 2nd derivative; these give the S₃ symmetry of D³F needed for the Jet₃ remainder cancellation.
+-- expJet2FirstVar_residual_Icc: ∃C, ∀t∈Icc 0 1, ‖Φ'(t)(ιh)−Φ(t)(ιh)−Q^{hl}(t)‖ ≤ C‖l‖² — the [0,1]-uniform
+-- sharpening of expJet2_residual_bound (t=1 → all t), via expJet2_remainder_quadratic_bound +
+-- expJet2_residual_hasDerivWithinAt + gronwall_vec_residual_Icc (pure assembly).  HONEST: two prerequisites of the
+-- Jet₃ quadratic remainder bound ‖ρ‖≤C‖l‖² — that full assembly still needs sub-brick (e) [Qw−Qv [0,1]-Lipschitz]
+-- + the cancellation identity.  Do NOT alone give ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv3_geodesicField_symm_ab
+#print axioms QIQTH.ExpMap.fderiv3_geodesicField_symm_bc
+#print axioms QIQTH.ExpMap.fderiv3_geodesicField_symm_cyc
+#print axioms QIQTH.ExpMap.expJet2FirstVar_residual_Icc
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
