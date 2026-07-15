@@ -10725,6 +10725,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.hpd2_fold5_blocks_cancel
 #print axioms QIQTH.PullbackMetric.hpd2_fold9A_D3_hessian_christ
 #print axioms QIQTH.PullbackMetric.hpd2_alpha1_cancel
+-- ★ PARAMETRIX P1 R3→κ (hpd2_cubic_vanish — hmc conversion + the ∂Γ/D³ cancel; the g·Γ·Γ reindex remains)
+-- (PullbackMetric.lean).  pd_g_eq_christ_lower: the metric-compat hmc rewrite ∂_lam g_μν(p) = ∑_σ Γ^σ_lam μ·g_σν +
+-- ∑_σ Γ^σ_lam ν·g_μσ (from metric_compat/covDeriv02=0).  hpd2_residual_hmc (Piece-1 FLOOR): 2·A_α − B_α = the residual
+-- with hmc applied to every ∂g·Γ term ⟹ all-g·Γ·Γ form (∂Γ/ΓΓ blocks kept).  hpd2_residual_D3_cancel (Piece-2a): the
+-- ∂Γ/D³ sub-part (fold5_A/5_B/9_B rncD3Block, weights 2(1/6)/−(1/6)/−(1/6)) = 0 via rncD3Block_swap12+hsymm.  HONEST —
+-- hpd2_cubic_vanish itself NOT yet a theorem: the pure ∑ g·Γ·Γ·v³ half (fold1/2/3/4/7 post-hmc + fold6/8 + the
+-- Cross/christSq terms) must be reindexed (~150-term Finset.sum_comm/reorder*/fold*) onto ∑_ρ g(p)_αρ·(christSq part of
+-- dGammaDiag(rncDΓ) v ρ) which vanishes by expMap_rncDΓ_diag_zero (the Γ² part cancels SEPARATELY from ∂Γ: a3sym's
+-- 6-perm average via sum3_sym_contract reproduces +christSqA+christSqB cancelling −christSqA−christSqB).  Then
+-- expPullback_hpd2 + the unconditional gauge follow mechanically via the _of_pd2 lemmas.  Does NOT give hpd2 / the
+-- unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.pd_g_eq_christ_lower
+#print axioms QIQTH.PullbackMetric.hpd2_residual_hmc
+#print axioms QIQTH.PullbackMetric.hpd2_residual_D3_cancel
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

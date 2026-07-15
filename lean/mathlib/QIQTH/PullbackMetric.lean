@@ -4513,6 +4513,148 @@ theorem hpd2_alpha1_cancel (g gi : Point n → Fin n → Fin n → ℝ)
   ring
 
 
+/-- **`pd_g_eq_christ_lower` — the metric-compatibility `∂g → g·Γ` rewrite (`hmc`).**  From
+    `metric_compat` (`∇_λ g_{μν} = 0`, i.e. `covDeriv02 g gi g lam mu ν p = 0`), the first metric
+    derivative is the two-Christoffel contraction
+      `∂_λ g_{μν}(p) = ∑_σ Γ^σ_{λμ}(p)·g_{σν}(p) + ∑_σ Γ^σ_{λν}(p)·g_{μσ}(p)`.
+    This is the local rewrite that converts every `∂g·Γ` term of the `hpd2_alpha1_cancel` residual into
+    a pure `g·Γ·Γ` contraction. -/
+theorem pd_g_eq_christ_lower (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (lam mu ν : Fin n) :
+    pd (fun y => g y mu ν) lam p
+      = (∑ σ, christoffel g gi σ lam mu p * g p σ ν)
+        + (∑ σ, christoffel g gi σ lam ν p * g p mu σ) := by
+  have h := metric_compat g gi hsymm p hinv lam mu ν
+  simp only [covDeriv02] at h
+  linarith [h]
+
+
+set_option maxHeartbeats 6400000 in
+/-- **Piece 1 (`hpd2_residual_hmc`) — the metric-compatibility conversion of the residual.**  Applying
+    the `∂g → g·Γ` rewrite `pd_g_eq_christ_lower` (`hmc`) to every `∂g·Γ` term of the
+    `hpd2_alpha1_cancel` residual (fold1/2/3/4/7 and the fold9_A `∂g·Γ` core), while keeping the
+    `∂Γ`/`ΓΓ` blocks (fold5/6/8/9 `rncD3Block`/`rncCrossBlock` and fold6/8 `g·Γ·Γ`) intact, turns the
+    full `∂²g`-free residual into a single-`g`, two-`Γ`, three-`v` (plus the `∂Γ` `D³` blocks)
+    contraction: `2·A_α − B_α = ∑ g·Γ·Γ·v³ (+ the admissible ∂Γ blocks)`.  Pure `hmc` substitution. -/
+theorem hpd2_residual_hmc (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+      - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k)
+      = 2 * (
+          -- fold1_A (∂g → g·Γ)
+          (∑ l, ∑ j, ∑ k, (∑ c, ((∑ σ, christoffel g gi σ c α p * g p σ k)
+                + (∑ σ, christoffel g gi σ c k p * g p α σ))
+                * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p))) * v l * v j * v k)
+          -- fold2_A
+          + (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ j a p * g p σ k)
+                + (∑ σ, christoffel g gi σ j k p * g p a σ))
+              * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p)) * v l * v j * v k)
+          -- fold3_A
+          + (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ j α p * g p σ b)
+                + (∑ σ, christoffel g gi σ j b p * g p α σ))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold4_A
+          + (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ l a p * g p σ k)
+                + (∑ σ, christoffel g gi σ l k p * g p a σ))
+              * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p)) * v l * v j * v k)
+          -- fold5_A (∂Γ block, unchanged)
+          + (∑ a, ∑ k, g p a k * v k *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+                  + rncCrossBlock g gi p (Pi.single α 1) v v a
+                  + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)))
+          -- fold6_A (g·Γ·Γ, unchanged)
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold7_A
+          + (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ l α p * g p σ b)
+                + (∑ σ, christoffel g gi σ l b p * g p α σ))
+              * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+          -- fold8_A (g·Γ·Γ, unchanged)
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+              * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+          -- fold9_A ∂g·Γ (∂g → g·Γ)
+          + (∑ j, ∑ m, (∑ r, v r * (∑ σ, ((∑ τ, christoffel g gi τ r σ p * g p τ α)
+                + (∑ τ, christoffel g gi τ r α p * g p σ τ))
+                * christoffel g gi σ j m p)) * (v j * v m))
+          -- fold9_A Cross (ΓΓ, unchanged)
+          + (1 / 2 : ℝ) * (∑ b, g p α b * rncCrossBlock g gi p v v v b))
+      - (
+          -- fold1_B
+          (∑ l, ∑ j, ∑ k, (∑ c, ((∑ σ, christoffel g gi σ c j p * g p σ k)
+                + (∑ σ, christoffel g gi σ c k p * g p j σ))
+                * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p))) * v l * v j * v k)
+          -- fold2_B
+          + (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ α a p * g p σ k)
+                + (∑ σ, christoffel g gi σ α k p * g p a σ))
+              * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p)) * v l * v j * v k)
+          -- fold3_B
+          + (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ α j p * g p σ b)
+                + (∑ σ, christoffel g gi σ α b p * g p j σ))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold4_B
+          + (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ l a p * g p σ k)
+                + (∑ σ, christoffel g gi σ l k p * g p a σ))
+              * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p)) * v l * v j * v k)
+          -- fold5_B (∂Γ block, unchanged)
+          + (∑ a, ∑ k, g p a k * v k *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+                  + rncCrossBlock g gi p v (Pi.single α 1) v a
+                  + rncCrossBlock g gi p (Pi.single α 1) v v a
+                  + rncCrossBlock g gi p v v (Pi.single α 1) a)))
+          -- fold6_B (g·Γ·Γ, unchanged)
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+          -- fold7_B
+          + (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, christoffel g gi σ l j p * g p σ b)
+                + (∑ σ, christoffel g gi σ l b p * g p j σ))
+              * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+          -- fold8_B (g·Γ·Γ, unchanged)
+          + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+              * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+              * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+          -- fold9_B (∂Γ block, unchanged)
+          + (∑ b, ∑ j, g p j b * v j *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+                  + rncCrossBlock g gi p v (Pi.single α 1) v b
+                  + rncCrossBlock g gi p (Pi.single α 1) v v b
+                  + rncCrossBlock g gi p v v (Pi.single α 1) b)))) := by
+  rw [hpd2_alpha1_cancel g gi hsymm hinvF hg hC p α v]
+  simp only [pd_g_eq_christ_lower g gi hsymm p (fun a b => hinvF p a b)]
+
+
+/-- **Piece 2a (`hpd2_residual_D3_cancel`) — the `∂Γ` (`D³`) part of the residual cancels identically.**
+    Isolating the `rncD3Block` sub-terms of `fold5_A`, `fold5_B`, `fold9_B` from the
+    `hpd2_residual_hmc` residual (each carrying its `(1/6)` weight, with `fold5_A` under the outer `2·`),
+    they cancel at the block level exactly as `hpd2_fold5_blocks_cancel`: `rncD3Block` is fully symmetric
+    in its three direction slots (`rncD3Block_swap12`), so `D3(e_α,v,v) = D3(v,e_α,v)` and the metric
+    symmetry `hsymm` makes the `fold9_B` block equal the `fold5_B` block; the coefficients `2·(1/6)`,
+    `−(1/6)`, `−(1/6)` then sum to zero.  This discharges the FIRST of the two residual sub-parts (the
+    `∂Γ` half); the remaining wall is the `∂g·Γ + g·Γ·Γ + Cross` (`g·Γ·Γ`) half. -/
+theorem hpd2_residual_D3_cancel (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    2 * (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p (Pi.single α 1) v v a))
+      - (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a))
+      - (∑ b, ∑ j, g p j b * v j * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v b)) = 0 := by
+  have e1 : (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p (Pi.single α 1) v v a))
+      = ∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a) :=
+    Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun k _ => by rw [rncD3Block_swap12]
+  have e3 : (∑ b, ∑ j, g p j b * v j * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v b))
+      = ∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a) :=
+    Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun j _ => by rw [hsymm p j b]
+  rw [e1, e3]; ring
+
+
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
 
@@ -4564,6 +4706,34 @@ Quot.sound]`, file GREEN — `hpd2_alpha1_cancel` FULLY CLOSED, `2·A − B` is 
   leaving the `∂²g`-FREE residual in `{∂g, Γ, ∂Γ, g}` (fold1 `∂g·Γ`, fold2/3/4/6/7/8, the fold5 `∂Γ`-blocks
   intact, the fold9 Cross `ΓΓ`, and the fold9 `∂g·Γ` Christoffel core).  NOTE `hpd2_cubic_vanish` / the
   full `2A−B=0` assembly are the NEXT bricks (NOT attempted here).
+
+### CHECKPOINT — `hpd2_cubic_vanish` decomposition — Piece 1 (`hmc`) + Piece 2a (`D³`) LANDED
+
+LANDED (this brick, all axiom-clean `[propext, Classical.choice, Quot.sound]`, file GREEN):
+* `pd_g_eq_christ_lower` — the metric-compatibility `∂g → g·Γ` rewrite (`hmc`), from `metric_compat`
+  (`covDeriv02 g gi g lam mu ν p = 0`): `∂_λ g_{μν}(p) = ∑_σ Γ^σ_{λμ}·g_{σν} + ∑_σ Γ^σ_{λν}·g_{μσ}`.
+* `hpd2_residual_hmc` (**Piece 1, the guaranteed floor**) — applies `hmc` to every `∂g·Γ` term of the
+  `hpd2_alpha1_cancel` residual (fold1/2/3/4/7 and the fold9_A `∂g·Γ` core), leaving the `∂Γ`/`ΓΓ`
+  blocks intact, giving `2·A_α − B_α = ∑ g·Γ·Γ·v³ (+ the admissible ∂Γ/D³ blocks)` in EXPLICIT form.
+  Proof: `rw [hpd2_alpha1_cancel]; simp only [pd_g_eq_christ_lower …]` (closes by reflexivity).
+* `hpd2_residual_D3_cancel` (**Piece 2a**) — the `∂Γ` (`D³`) sub-part of the residual (the fold5_A/5_B/
+  9_B `rncD3Block` terms with weights `2·(1/6)`, `−(1/6)`, `−(1/6)`) cancels identically, mirroring
+  `hpd2_fold5_blocks_cancel` (`rncD3Block_swap12` + `hsymm`).
+
+REMAINING WALL (`hpd2_cubic_vanish`, NOT landed) — the `g·Γ·Γ` half.  After `hpd2_residual_hmc` +
+`hpd2_residual_D3_cancel`, what is left is the pure single-`g`, two-`Γ`, three-`v` contraction: fold1/2/
+3/4/7 `∂g·Γ` (now `g·Γ·Γ` via `hmc`), fold6/8 `g·Γ·Γ`, the fold5_A/5_B/9_B `rncCrossBlock` sub-terms,
+the fold9_A `Cross` block, and the fold9_A `∂g·Γ` core (now `g·Γ·Γ`).  This `∑ g·Γ·Γ·v³` must vanish.
+On the diagonal, `dGammaDiag(rncDΓ) = 0` (`expMap_rncDΓ_diag_zero`) splits so that the `christSq` (`Γ²`)
+part cancels SEPARATELY from the `∂Γ` part — via `sum3_sym_contract` (the `a3sym` 6-permutation average
+reproduces the raw `+christSqA+christSqB` which then cancels `−christSqA−christSqB`).  So the closure is:
+reindex the `g·Γ·Γ` remainder onto `∑_ρ g(p)_{αρ}·(christSq part of dGammaDiag(rncDΓ (christoffel g gi
+··· p) (pd(christoffel g gi ···) · p)) v ρ)` (a ~150-term `Finset.sum_comm`/`reorder*`/`fold*` relabel
+matching the `rncCrossBlock`/`christoffel_lower` structure to `christSqA`/`christSqB` and the `a3sym`
+permutations), then `= ∑_ρ g(p)_{αρ}·0 = 0`.  This relabel is NEITHER `ring` nor `ring_nf` closable
+(distinct `∑`-nestings are atomic); it is the genuine remaining brick.  Once it closes, `expPullback_hpd2`
+(`2A−B=0`), then the unconditional `gauge_pd_christoffel_expPullbackInv_zero'` (via `…_of_pd2`) follow
+mechanically — the MILESTONE.
 
 ### CHECKPOINT — `hpd2_cubic_vanish` decomposition (verified experimentally, NOT yet landed)
 
