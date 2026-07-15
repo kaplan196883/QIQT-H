@@ -10739,6 +10739,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.pd_g_eq_christ_lower
 #print axioms QIQTH.PullbackMetric.hpd2_residual_hmc
 #print axioms QIQTH.PullbackMetric.hpd2_residual_D3_cancel
+-- ★ PARAMETRIX P1 R3→κ (hpd2_cubic_vanish Piece 2b — the Γ² floor + endpoint pin) (PullbackMetric.lean).
+-- christSq_sym_contract: the Γ²-analogue of sum3_sym_contract — the 6-permutation average of (christSqA+christSqB)
+-- contracts to its raw form, so the rncDΓ Γ²/christSq part cancels SEPARATELY from the ∂Γ part (the "Γ² cancels on its
+-- own" insight; proof = literal instantiation of RNCGauge.sum3_sym_contract).  hpd2_cubic_target_zero: the endpoint pin
+-- ∑_ρ g(p)_αρ·dGammaDiag(rncDΓ (christoffel g gi ·p) (pd(christoffel g gi)·p)) v ρ = 0 (via expMap_rncDΓ_diag_zero).
+-- ⟹ the two hardest CONCEPTUAL pieces of the reindex are now landed.  HONEST — hpd2_cubic_vanish itself NOT yet a
+-- theorem: the SOLE remaining sub-lemma is hpd2_residual_cubic_reindex (the ~150-term Finset.sum_comm/reorder*/fold*
+-- relabel of the post-hmc post-D³ g·Γ·Γ·v³ residue onto the hpd2_cubic_target_zero shape, matching each concrete
+-- christoffel/rncCrossBlock term via christoffel_lower to a christSqA/christSqB/a3sym slot — mechanical, not
+-- ring-closable).  Then hpd2_cubic_vanish → expPullback_hpd2 → the unconditional gauge follow mechanically.  Does NOT
+-- give hpd2 / the unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.christSq_sym_contract
+#print axioms QIQTH.PullbackMetric.hpd2_cubic_target_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

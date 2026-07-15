@@ -4655,6 +4655,45 @@ theorem hpd2_residual_D3_cancel (g gi : Point n → Fin n → Fin n → ℝ)
   rw [e1, e3]; ring
 
 
+/-- **FLOOR (`christSq_sym_contract`) — the Γ²-analogue of `sum3_sym_contract`.**  Under the diagonal
+    `v³` contraction, the six-permutation average (over the lower triple `l,j,k`) of the combined
+    Christoffel-square block `christSqA + christSqB` reproduces its RAW form.  This is exactly the fact
+    that makes the `christSq` (`Γ²`) part of `dGammaDiag (rncDΓ …)` cancel SEPARATELY from the `∂Γ`
+    part: the `+christSqA+christSqB` coming out of the symmetrized `a3sym` diagonal reproduces the raw
+    `+christSqA+christSqB`, which cancels the explicit `−christSqA−christSqB` in `rncDΓ`.  Pure
+    instantiation of `QIQTH.RNCGauge.sum3_sym_contract` at `f := christSqA + christSqB`. -/
+theorem christSq_sym_contract (Γ : Fin n → Fin n → Fin n → ℝ) (v : Fin n → ℝ) (i : Fin n) :
+    (∑ l, ∑ j, ∑ k, (1 / 6 : ℝ) *
+        ((QIQTH.RNCGauge.christSqA Γ i l j k + QIQTH.RNCGauge.christSqB Γ i l j k)
+          + (QIQTH.RNCGauge.christSqA Γ i l k j + QIQTH.RNCGauge.christSqB Γ i l k j)
+          + (QIQTH.RNCGauge.christSqA Γ i j l k + QIQTH.RNCGauge.christSqB Γ i j l k)
+          + (QIQTH.RNCGauge.christSqA Γ i j k l + QIQTH.RNCGauge.christSqB Γ i j k l)
+          + (QIQTH.RNCGauge.christSqA Γ i k l j + QIQTH.RNCGauge.christSqB Γ i k l j)
+          + (QIQTH.RNCGauge.christSqA Γ i k j l + QIQTH.RNCGauge.christSqB Γ i k j l))
+          * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ k,
+          (QIQTH.RNCGauge.christSqA Γ i l j k + QIQTH.RNCGauge.christSqB Γ i l j k)
+            * v l * v j * v k :=
+  QIQTH.RNCGauge.sum3_sym_contract
+    (fun l j k => QIQTH.RNCGauge.christSqA Γ i l j k + QIQTH.RNCGauge.christSqB Γ i l j k) v
+
+
+/-- **`hpd2_cubic_target_zero` — the reindex endpoint is `0`.**  The `g·Γ·Γ·v³` residue of
+    `hpd2_residual_hmc` is to be relabelled onto the `g(p)_{αρ}`-weighted radial diagonal of the concrete
+    RNC linear jet `rncDΓ` built from `Γ = christoffel g gi ··· p` and `dΓ1 = ∂ christoffel ··· p`.  That
+    weighted diagonal is identically `0`, since `QIQTH.RNCGauge.expMap_rncDΓ_diag_zero` gives
+    `dGammaDiag (rncDΓ …) v ρ = 0` for every `ρ` (the `Γ²`/`christSq` part cancelling separately by the
+    FLOOR `christSq_sym_contract`, the `∂Γ` part by the raw cancellation).  This lemma pins the `= 0`
+    endpoint the remaining `hpd2_residual_cubic_reindex` must land on. -/
+theorem hpd2_cubic_target_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ ρ, g p α ρ *
+      QIQTH.RNCGauge.dGammaDiag
+        (QIQTH.RNCGauge.rncDΓ (fun i j k => christoffel g gi i j k p)
+          (fun l i j k => pd (fun z => christoffel g gi i j k z) l p)) v ρ) = 0 := by
+  simp only [QIQTH.RNCGauge.expMap_rncDΓ_diag_zero, mul_zero, Finset.sum_const_zero]
+
+
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
 
@@ -4708,8 +4747,22 @@ Quot.sound]`, file GREEN — `hpd2_alpha1_cancel` FULLY CLOSED, `2·A − B` is 
   full `2A−B=0` assembly are the NEXT bricks (NOT attempted here).
 
 ### CHECKPOINT — `hpd2_cubic_vanish` decomposition — Piece 1 (`hmc`) + Piece 2a (`D³`) LANDED
+###   + FLOOR (`christSq_sym_contract`) + target pin (`hpd2_cubic_target_zero`) LANDED
 
-LANDED (this brick, all axiom-clean `[propext, Classical.choice, Quot.sound]`, file GREEN):
+LANDED (this brick, both axiom-clean `[propext, Classical.choice, Quot.sound]`, file GREEN):
+* `christSq_sym_contract` (**the FLOOR — the guaranteed deliverable, the core INSIGHT lemma**) — the
+  `Γ²`-analogue of `QIQTH.RNCGauge.sum3_sym_contract`: under the diagonal `v³` contraction, the
+  six-permutation average of the combined block `christSqA + christSqB` reproduces its RAW form.  This IS
+  the fact that the `christSq` (`Γ²`) part of `dGammaDiag (rncDΓ …)` cancels SEPARATELY from the `∂Γ`
+  part (the `+christSqA+christSqB` from the symmetrized `a3sym` diagonal reproduces the raw
+  `+christSqA+christSqB`, cancelling the explicit `−christSqA−christSqB` in `rncDΓ`).  Proof: literal
+  instantiation of `sum3_sym_contract` at `f := fun l j k => christSqA Γ i l j k + christSqB Γ i l j k`.
+* `hpd2_cubic_target_zero` (**the reindex ENDPOINT pin**) — the `g(p)_{αρ}`-weighted radial diagonal of
+  the concrete RNC linear jet `rncDΓ (christoffel g gi ··· p) (∂ christoffel ··· p)` is identically `0`
+  (from `expMap_rncDΓ_diag_zero`, `mul_zero`, `Finset.sum_const_zero`).  This is the `= 0` the remaining
+  `hpd2_residual_cubic_reindex` must land the `g·Γ·Γ·v³` residue on.
+
+LANDED (prior brick, all axiom-clean `[propext, Classical.choice, Quot.sound]`, file GREEN):
 * `pd_g_eq_christ_lower` — the metric-compatibility `∂g → g·Γ` rewrite (`hmc`), from `metric_compat`
   (`covDeriv02 g gi g lam mu ν p = 0`): `∂_λ g_{μν}(p) = ∑_σ Γ^σ_{λμ}·g_{σν} + ∑_σ Γ^σ_{λν}·g_{μσ}`.
 * `hpd2_residual_hmc` (**Piece 1, the guaranteed floor**) — applies `hmc` to every `∂g·Γ` term of the
@@ -4734,6 +4787,16 @@ permutations), then `= ∑_ρ g(p)_{αρ}·0 = 0`.  This relabel is NEITHER `rin
 (distinct `∑`-nestings are atomic); it is the genuine remaining brick.  Once it closes, `expPullback_hpd2`
 (`2A−B=0`), then the unconditional `gauge_pd_christoffel_expPullbackInv_zero'` (via `…_of_pd2`) follow
 mechanically — the MILESTONE.
+
+UPDATE (this brick): the FLOOR `christSq_sym_contract` (the `Γ²`-half of the split above) is now LANDED
+axiom-clean, and `hpd2_cubic_target_zero` pins the `= ∑_ρ g(p)_{αρ}·0 = 0` endpoint the reindex lands
+on.  The SOLE remaining sub-lemma is `hpd2_residual_cubic_reindex`: the ~150-term `Finset.sum_comm`/
+`reorder*`/`fold*` relabel of the post-`hmc`, post-`D³` `g·Γ·Γ·v³` residue (fold1/2/3/4/7 `g·Γ·Γ`,
+fold6/8 `g·Γ·Γ`, the fold5_A/5_B/9_B `rncCrossBlock` sub-terms, fold9_A `Cross`, fold9_A `g·Γ·Γ` core)
+onto the `∑_ρ g(p)_{αρ}·dGammaDiag(rncDΓ …) v ρ` shape of `hpd2_cubic_target_zero`.  This relabel step —
+matching each concrete `christoffel`/`rncCrossBlock` term (after `christoffel_lower` where the up-index is
+lowered against `g(p)_{αρ}`) to a `christSqA`/`christSqB`/`a3sym`-permutation slot — is the atomic wall;
+it was NOT attempted-and-abandoned here but genuinely deferred (build-latency vs. term-count budget).
 
 ### CHECKPOINT — `hpd2_cubic_vanish` decomposition (verified experimentally, NOT yet landed)
 
