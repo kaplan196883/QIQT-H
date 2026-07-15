@@ -572,6 +572,12 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★ 2026-07-16 — R3→κ hpd2 block-folding + Kronecker collapse LANDED (PUSHED `dd84dc63`, 828 ins, [AF] std-3):**
+  two-slot contraction infra (rncD3Block_contract2_{leftfix,mid} / rncCrossBlock_contract2_{sources,dirsource,dirsk} /
+  contract3 / reorder4_jb) + hpd2_A_folded / hpd2_B_folded = A_α/B_α as the fully v-contracted 9-term sum, α2 blocks
+  folded to the ledger forms (A: fold5 1/6(D3(e_α,v,v)+Cross(e_α,v,v)+2Cross(v,e_α,v)) + fold9 3-slot; B: α in middle,
+  a=j collapse, fold9 two-slot). RHS explicit in {∂²g,∂g,Γ,∂Γ,g}(p). NEXT: hpd2_alpha1_cancel (α1 ∂²g(p) cancel across
+  2A−B via pd_christoffel_lower_fn) → hpd2_cubic_vanish → assemble expPullback_hpd2.
 - **★ 2026-07-16 — R3→κ hpd2 discharge, expansion lemmas hpd2_A_expand + hpd2_B_expand LANDED (PUSHED `3d143908`,
   [AF] std-3):** A_α/B_α = ∑_a∑_b∑_ljk(T1..T9)·vˡvʲvᵏ (subst expPullbackMetric_pd2_closed + reorder ∑_a∑_b to front via
   reorder_ab_front/contract_ab_expand). First move of the hpd2 grind. NEXT bounded steps: block-folding (fold α2 blocks
