@@ -10752,6 +10752,22 @@ namespace QIQTH.AxiomAudit
 -- give hpd2 / the unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.christSq_sym_contract
 #print axioms QIQTH.PullbackMetric.hpd2_cubic_target_zero
+-- ★ PARAMETRIX P1 R3→κ (hpd2 reindex — the Cross fold-groups reindex onto christSq) (PullbackMetric.lean).
+-- christSqSum_contract_a3: bridges christSqA+christSqB (contracted) to the geodesic a₃ Γ²-shape of
+-- a3rawArr_contract_eq_a3 (via local re-derivations reindexA_pb/reindexB_pb of RNCGaugeExp.reindex_A/B).
+-- rncCrossBlock_diag_a3: rncCrossBlock(v,v,v) = 2·(that Γ²-shape) (factor 2 from sk·sl+sl·sk).  ★
+-- hpd2_fold9A_cross_reindex: the fold9_A Cross term (½·∑_b g_αb·rncCrossBlock(v,v,v)_b) reindexes EXACTLY onto
+-- ∑_b g_αb·(christSqA+christSqB contracted) — the Cross fold-group step of the reindex.  ⟹ the Cross parts of the
+-- residue reindex cleanly onto christSq.  ★ KEY STRUCTURAL FINDING (verified): the FULL reindex is NOT a sum of
+-- per-fold-group matches — the non-Cross g·Γ·Γ residue (fold1/2/3/4/7 post-hmc, fold6/8, fold9_A core) contracts the
+-- metric on an INTERNAL summed index (e.g. fold6 ∑_a g_ab Γ^a_αj Γ^b_kl) whereas the target lowers the FIXED α, and
+-- lowered Christoffel Γ_νλμ is NOT symmetric in (ν,λ) — so hpd2_residual_cubic_reindex is a GLOBAL cancellation over
+-- the whole 2A−B combination (the RNC radial-geodesic identity), resisting ring/per-group tactics.  HONEST — hpd2 /
+-- the unconditional gauge / κ=1/6 NOT reached; that global g·Γ·Γ identity is the irreducible remaining wall (the exp
+-- radial-geodesic content).  Does NOT give hpd2 / unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.christSqSum_contract_a3
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_diag_a3
+#print axioms QIQTH.PullbackMetric.hpd2_fold9A_cross_reindex
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

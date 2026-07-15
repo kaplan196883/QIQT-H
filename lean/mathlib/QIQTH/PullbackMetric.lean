@@ -4694,6 +4694,138 @@ theorem hpd2_cubic_target_zero (g gi : Point n → Fin n → Fin n → ℝ)
   simp only [QIQTH.RNCGauge.expMap_rncDΓ_diag_zero, mul_zero, Finset.sum_const_zero]
 
 
+/-- **`reindexA_pb` — the `christSqA`-block diagonal reindex** (mirrors `RNCGaugeExp.reindex_A`, private
+    there).  Pure `Finset` reordering `l,j,k,a ↦ a,k,l,j`. -/
+private lemma reindexA_pb (C : Fin n → Fin n → Fin n → ℝ) (v : Fin n → ℝ) (i : Fin n) :
+    (∑ l, ∑ j, ∑ k, (∑ a, C i a k * C a l j) * v l * v j * v k)
+      = ∑ j, ∑ k, C i j k * (∑ a, ∑ b, C j a b * v a * v b) * v k := by
+  have hL : (∑ l, ∑ j, ∑ k, (∑ a, C i a k * C a l j) * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ k, ∑ a, C i a k * C a l j * v l * v j * v k := by
+    simp only [Finset.sum_mul]
+  have hR : (∑ j, ∑ k, C i j k * (∑ a, ∑ b, C j a b * v a * v b) * v k)
+      = ∑ j, ∑ k, ∑ a, ∑ b, C i j k * C j a b * v a * v b * v k := by
+    simp only [Finset.mul_sum, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ =>
+      Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => by ring
+  rw [hL, hR]
+  calc (∑ l, ∑ j, ∑ k, ∑ a, C i a k * C a l j * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ a, ∑ k, C i a k * C a l j * v l * v j * v k :=
+        Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ => Finset.sum_comm
+    _ = ∑ l, ∑ a, ∑ j, ∑ k, C i a k * C a l j * v l * v j * v k :=
+        Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    _ = ∑ a, ∑ l, ∑ j, ∑ k, C i a k * C a l j * v l * v j * v k := Finset.sum_comm
+    _ = ∑ a, ∑ l, ∑ k, ∑ j, C i a k * C a l j * v l * v j * v k :=
+        Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    _ = ∑ a, ∑ k, ∑ l, ∑ j, C i a k * C a l j * v l * v j * v k :=
+        Finset.sum_congr rfl fun a _ => Finset.sum_comm
+    _ = ∑ j, ∑ k, ∑ a, ∑ b, C i j k * C j a b * v a * v b * v k := rfl
+
+/-- **`reindexB_pb` — the `christSqB`-block diagonal reindex** (mirrors `RNCGaugeExp.reindex_B`, private
+    there).  Pure `Finset` reordering `l,j,k,a ↦ j,a,l,k`. -/
+private lemma reindexB_pb (C : Fin n → Fin n → Fin n → ℝ) (v : Fin n → ℝ) (i : Fin n) :
+    (∑ l, ∑ j, ∑ k, (∑ a, C i j a * C a l k) * v l * v j * v k)
+      = ∑ j, ∑ k, C i j k * v j * (∑ a, ∑ b, C k a b * v a * v b) := by
+  have hL : (∑ l, ∑ j, ∑ k, (∑ a, C i j a * C a l k) * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ k, ∑ a, C i j a * C a l k * v l * v j * v k := by
+    simp only [Finset.sum_mul]
+  have hR : (∑ j, ∑ k, C i j k * v j * (∑ a, ∑ b, C k a b * v a * v b))
+      = ∑ j, ∑ k, ∑ a, ∑ b, C i j k * C k a b * v a * v j * v b := by
+    simp only [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ =>
+      Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => by ring
+  rw [hL, hR]
+  calc (∑ l, ∑ j, ∑ k, ∑ a, C i j a * C a l k * v l * v j * v k)
+      = ∑ j, ∑ l, ∑ k, ∑ a, C i j a * C a l k * v l * v j * v k := Finset.sum_comm
+    _ = ∑ j, ∑ l, ∑ a, ∑ k, C i j a * C a l k * v l * v j * v k :=
+        Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun l _ => Finset.sum_comm
+    _ = ∑ j, ∑ a, ∑ l, ∑ k, C i j a * C a l k * v l * v j * v k :=
+        Finset.sum_congr rfl fun j _ => Finset.sum_comm
+    _ = ∑ j, ∑ k, ∑ a, ∑ b, C i j k * C k a b * v a * v j * v b := rfl
+
+/-- **`christSqSum_contract_a3` — the `christSq` block diagonal contracts to the geodesic `a₃` `Γ²` shape.**
+    The diagonal `v³` contraction of `christSqA + christSqB` (built from the true Christoffel jet
+    `Γ = christoffel g gi ··· p`) equals the exp-map geodesic cubic `termA + termB` of
+    `RNCGaugeExp.a3rawArr_contract_eq_a3`.  Pure `Finset` reindex (`reindexA_pb`, `reindexB_pb`). -/
+theorem christSqSum_contract_a3 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (i : Fin n) :
+    (∑ l, ∑ j, ∑ k, (QIQTH.RNCGauge.christSqA (fun i j k => christoffel g gi i j k p) i l j k
+        + QIQTH.RNCGauge.christSqB (fun i j k => christoffel g gi i j k p) i l j k)
+          * v l * v j * v k)
+      = (∑ j, ∑ k, christoffel g gi i j k p
+            * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+            * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b)) := by
+  simp only [QIQTH.RNCGauge.christSqA, QIQTH.RNCGauge.christSqB]
+  rw [show (∑ l, ∑ j, ∑ k,
+        ((∑ a, christoffel g gi i a k p * christoffel g gi a l j p)
+          + (∑ a, christoffel g gi i j a p * christoffel g gi a l k p)) * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k, (∑ a, christoffel g gi i a k p * christoffel g gi a l j p) * v l * v j * v k)
+        + (∑ l, ∑ j, ∑ k, (∑ a, christoffel g gi i j a p * christoffel g gi a l k p) * v l * v j * v k)
+      from by
+        rw [← Finset.sum_add_distrib]
+        refine Finset.sum_congr rfl fun l _ => ?_
+        rw [← Finset.sum_add_distrib]
+        refine Finset.sum_congr rfl fun j _ => ?_
+        rw [← Finset.sum_add_distrib]
+        exact Finset.sum_congr rfl fun k _ => by ring]
+  rw [reindexA_pb (fun x y z => christoffel g gi x y z p) v i,
+      reindexB_pb (fun x y z => christoffel g gi x y z p) v i]
+
+/-- **`rncCrossBlock_diag_a3` — the `rncCrossBlock` full-diagonal equals `2·(a₃ `Γ²` shape)`.**  With all
+    three direction slots set to `v`, `rncCrossBlock g gi p v v v i` unfolds to `2·(termA + termB)`, the
+    geodesic cubic of `RNCGaugeExp.a3rawArr_contract_eq_a3` (the factor `2` from `sk·sl + sl·sk = 2 v v`).
+    Pure `ring`/`Finset` per-summand identity. -/
+theorem rncCrossBlock_diag_a3 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (i : Fin n) :
+    rncCrossBlock g gi p v v v i
+      = 2 * ((∑ j, ∑ k, christoffel g gi i j k p
+            * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+            * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b))) := by
+  have hin : ∀ c : Fin n, (∑ j', ∑ m', christoffel g gi c j' m' p * (v j' * v m' + v j' * v m'))
+      = 2 * ∑ a, ∑ b, christoffel g gi c a b p * v a * v b := by
+    intro c
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun b _ => by ring
+  have hRHS : (2:ℝ) * ((∑ j, ∑ k, christoffel g gi i j k p
+          * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v k)
+        + (∑ j, ∑ k, christoffel g gi i j k p
+          * v j * (∑ a, ∑ b, christoffel g gi k a b p * v a * v b)))
+      = ∑ j, ∑ m, (2 * (christoffel g gi i j m p
+                    * (∑ a, ∑ b, christoffel g gi j a b p * v a * v b) * v m)
+                  + 2 * (christoffel g gi i j m p
+                    * v j * (∑ a, ∑ b, christoffel g gi m a b p * v a * v b))) := by
+    rw [mul_add]
+    simp only [Finset.mul_sum]
+    rw [← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [← Finset.sum_add_distrib]
+  simp only [rncCrossBlock, hin]
+  rw [hRHS, ← Finset.sum_neg_distrib]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [← Finset.sum_neg_distrib]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  ring
+
+/-- **`hpd2_fold9A_cross_reindex` — the fold9_A `Cross` term reindexes onto the `christSq` shape.**  The
+    residue's fold9_A Cross term `(1/2)·∑_b g(p)_{αb}·rncCrossBlock g gi p v v v b` equals the
+    `g(p)_{αb}`-weighted `christSqA + christSqB` diagonal contraction — the `Γ²` shape carried by
+    `dGammaDiag (rncDΓ …)`.  This is the `reindex_cross` fold-group step: `rncCrossBlock_diag_a3` (Cross
+    `= 2·(a₃ Γ²)`) composed with `christSqSum_contract_a3` (`christSq = a₃ Γ²`), the factor `2` cancelling
+    the outer `(1/2)`.  Axiom-clean. -/
+theorem hpd2_fold9A_cross_reindex (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) :
+    (1 / 2 : ℝ) * (∑ b, g p α b * rncCrossBlock g gi p v v v b)
+      = ∑ b, g p α b * (∑ l, ∑ j, ∑ k,
+          (QIQTH.RNCGauge.christSqA (fun i j k => christoffel g gi i j k p) b l j k
+            + QIQTH.RNCGauge.christSqB (fun i j k => christoffel g gi i j k p) b l j k)
+            * v l * v j * v k) := by
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun b _ => ?_
+  rw [rncCrossBlock_diag_a3 g gi p v b, ← christSqSum_contract_a3 g gi p v b]
+  ring
+
+
 /-!
 ### CHECKPOINT — step (ii) block-`∂²g` conversion LANDED; `hpd2_alpha1_cancel` remaining matching
 
@@ -4797,6 +4929,31 @@ onto the `∑_ρ g(p)_{αρ}·dGammaDiag(rncDΓ …) v ρ` shape of `hpd2_cubic_
 matching each concrete `christoffel`/`rncCrossBlock` term (after `christoffel_lower` where the up-index is
 lowered against `g(p)_{αρ}`) to a `christSqA`/`christSqB`/`a3sym`-permutation slot — is the atomic wall;
 it was NOT attempted-and-abandoned here but genuinely deferred (build-latency vs. term-count budget).
+
+UPDATE 2 (Cross fold-group LANDED axiom-clean; `reindexA_pb`/`reindexB_pb`/`christSqSum_contract_a3`/
+`rncCrossBlock_diag_a3`/`hpd2_fold9A_cross_reindex`, all `[propext, Classical.choice, Quot.sound]`):
+* `christSqSum_contract_a3` — the diagonal `v³` contraction of `christSqA + christSqB` (built from the true
+  jet `Γ = christoffel g gi ··· p`) equals the geodesic `a₃` `Γ²` shape `termA + termB` of
+  `RNCGaugeExp.a3rawArr_contract_eq_a3`.  Pure `Finset` reindex (`reindexA_pb`/`reindexB_pb`, local
+  re-derivations of the private `RNCGaugeExp.reindex_A`/`reindex_B`).
+* `rncCrossBlock_diag_a3` — `rncCrossBlock g gi p v v v i = 2·(termA + termB)` (the factor `2` from
+  `sk·sl + sl·sk = 2·v v`); pure `ring`/`Finset` per-summand.
+* `hpd2_fold9A_cross_reindex` — THE `reindex_cross` fold-group step: the residue's fold9_A Cross term
+  `(1/2)·∑_b g(p)_{αb}·rncCrossBlock g gi p v v v b = ∑_b g(p)_{αb}·(∑_{ljk}(christSqA+christSqB)(b,l,j,k)·v³)`
+  — i.e. the fold9_A Cross reindexes EXACTLY onto the `Γ²` (`christSq`) shape carried by
+  `dGammaDiag (rncDΓ …)`, the outer `(1/2)` cancelling the Cross factor `2`.
+
+WHAT THESE GIVE / WHAT REMAINS.  The Cross blocks (fold9_A Cross, and — via `rncCrossBlock_diag_a3` at
+`Pi.single` direction args + the `foldCross_*` toolkit — the fold5_A/5_B/9_B `rncCrossBlock` sub-terms)
+are now bridged to the `christSqA + christSqB` shape.  The GENUINELY-HARD remainder is the NON-Cross
+`g·Γ·Γ` residue: fold1/2/3/4/7 (post-`hmc`), fold6/8, and the fold9_A `g·Γ·Γ` core.  KEY OBSTRUCTION
+(verified structurally this brick): these terms do NOT reindex per-group onto the target's `g(p)_{αρ}·christSq`
+slots — the residue's metric contracts an INTERNAL summed index (`∑_a g_{ab}Γ^a_{αj}Γ^b_{kl}` for fold6,
+`∑_σ g_{σk}Γ^σ_{cα}Γ^c_{jl}` for fold1) whereas the target lowers the FIXED `α` (`∑_ρ g_{αρ}Γ^ρ_{ak}Γ^a_{lj}`),
+and the lowered Christoffel `Γ_{ν λ μ}` is NOT symmetric in `(ν,λ)`.  Hence `hpd2_residual_cubic_reindex`
+is a GLOBAL cancellation over the full `2·A − B` combination (the RNC radial-geodesic identity), NOT a
+sum of per-fold matches; it is the irreducible wall.  Downstream (`hpd2_cubic_vanish` → `expPullback_hpd2`
+→ the UNCONDITIONAL `gauge_pd_christoffel_expPullbackInv_zero'` via `…_of_pd2`) stays mechanical once it lands.
 
 ### CHECKPOINT — `hpd2_cubic_vanish` decomposition (verified experimentally, NOT yet landed)
 
