@@ -2941,4 +2941,149 @@ theorem gauge_pd_christoffel_expPullbackInv_zero_of_pd2 (g gi : Point n → Fin 
   gauge_pd_christoffel_expPullbackInv_zero g gi hC p hsymm
     (fun v i => expPullback_radial_gauge_of_pd2 g gi hC p hsymm hinv hg hpd2 v i) i a b c
 
+/-! ### (β3) — the two bounded second-jet expansion sub-lemmas for `hpd2`
+
+Substituting `expPullbackMetric_pd2_closed` into each of the two brackets of `hpd2` and reordering the
+radial contraction `⟨·⟩ = ∑_{l,j,k} · v^l v^j v^k` to the canonical `∑_a∑_b`-outer form (the shape the
+metric-compatibility step (ii) consumes).  Pure `Finset` reindexing over the landed closed second jet.
+-/
+
+/-- **Bring the two closed-jet sum indices `a,b` to the front of a five-fold sum.**  Pure
+    `Finset.sum_comm` reindexing. -/
+private lemma reorder_ab_front (F : Fin n → Fin n → Fin n → Fin n → Fin n → ℝ) :
+    (∑ l, ∑ j, ∑ k, ∑ a, ∑ b, F l j k a b)
+      = ∑ a, ∑ b, ∑ l, ∑ j, ∑ k, F l j k a b := by
+  rw [show (∑ l, ∑ j, ∑ k, ∑ a, ∑ b, F l j k a b)
+        = ∑ l, ∑ j, ∑ a, ∑ k, ∑ b, F l j k a b from
+      Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ => Finset.sum_comm]
+  rw [show (∑ l, ∑ j, ∑ a, ∑ k, ∑ b, F l j k a b)
+        = ∑ l, ∑ a, ∑ j, ∑ k, ∑ b, F l j k a b from
+      Finset.sum_congr rfl fun l _ => Finset.sum_comm]
+  rw [show (∑ l, ∑ a, ∑ j, ∑ k, ∑ b, F l j k a b)
+        = ∑ a, ∑ l, ∑ j, ∑ k, ∑ b, F l j k a b from Finset.sum_comm]
+  rw [show (∑ a, ∑ l, ∑ j, ∑ k, ∑ b, F l j k a b)
+        = ∑ a, ∑ l, ∑ j, ∑ b, ∑ k, F l j k a b from
+      Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun l _ =>
+        Finset.sum_congr rfl fun j _ => Finset.sum_comm]
+  rw [show (∑ a, ∑ l, ∑ j, ∑ b, ∑ k, F l j k a b)
+        = ∑ a, ∑ l, ∑ b, ∑ j, ∑ k, F l j k a b from
+      Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun l _ => Finset.sum_comm]
+  rw [show (∑ a, ∑ l, ∑ b, ∑ j, ∑ k, F l j k a b)
+        = ∑ a, ∑ b, ∑ l, ∑ j, ∑ k, F l j k a b from
+      Finset.sum_congr rfl fun a _ => Finset.sum_comm]
+
+/-- **Distribute-and-reorder the radial contraction of a closed `∑_a∑_b` second jet.**  For any summand
+    `H a b l j k`, `∑_{l,j,k}(∑_a∑_b H)·v^l v^j v^k = ∑_a∑_b∑_{l,j,k} H·v^l v^j v^k`. -/
+private lemma contract_ab_expand (H : Fin n → Fin n → Fin n → Fin n → Fin n → ℝ) (v : Point n) :
+    (∑ l, ∑ j, ∑ k, (∑ a, ∑ b, H a b l j k) * v l * v j * v k)
+      = ∑ a, ∑ b, ∑ l, ∑ j, ∑ k, H a b l j k * v l * v j * v k := by
+  have hd : (∑ l, ∑ j, ∑ k, (∑ a, ∑ b, H a b l j k) * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ k, ∑ a, ∑ b, H a b l j k * v l * v j * v k := by
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_mul, Finset.sum_mul, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun a _ => by
+      rw [Finset.sum_mul, Finset.sum_mul, Finset.sum_mul]
+  rw [hd]
+  exact reorder_ab_front (fun l j k a b => H a b l j k * v l * v j * v k)
+
+set_option maxHeartbeats 3200000 in
+/-- **`hpd2_A_expand` — the closed expansion of the A-bracket of `hpd2`.**  Substituting the landed
+    closed second jet `expPullbackMetric_pd2_closed` (with `i:=α`, metric second index `k`, inner
+    derivative `j`, outer derivative `l`) into the radial contraction
+    `A_α = ∑_{l,j,k} ∂_l∂_j g̃_{αk}(0)·v^l v^j v^k` and reordering to the canonical `∑_a∑_b`-outer form,
+    `A_α` equals the explicit finite expression in `{∂²g(p), ∂g(p), Γ(p), ∂Γ(p), g(p)}` (the nine
+    substituted-jet terms of the twice-Leibniz, with the two `α2` blocks `rncD3Block`/`rncCrossBlock`
+    still in basis-vector form, ready for the step-(i) `_contract_*` folding). -/
+theorem hpd2_A_expand (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (α : Fin n) (v : Point n) :
+    (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+      = ∑ a, ∑ b, ∑ l, ∑ j, ∑ k,
+          ((pd (fun z => pd (fun y => g y a b) j z) l p
+              + ∑ c, pd (fun y => g y a b) c p
+                  * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+            * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b
+          + pd (fun y => g y a b) j p
+              * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+              * (Pi.single k 1 : Point n) b
+          + pd (fun y => g y a b) j p * (Pi.single α 1 : Point n) a
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p))
+          + pd (fun y => g y a b) l p
+              * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+              * (Pi.single k 1 : Point n) b
+          + g p a b
+              * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1))) a)
+              * (Pi.single k 1 : Point n) b
+          + g p a b
+              * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p))
+          + pd (fun y => g y a b) l p * (Pi.single α 1 : Point n) a
+              * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p))
+          + g p a b
+              * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+              * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p))
+          + g p a b * (Pi.single α 1 : Point n) a
+              * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1))) b))
+          * v l * v j * v k := by
+  simp only [expPullbackMetric_pd2_closed g gi hC p hg]
+  exact contract_ab_expand _ v
+
+set_option maxHeartbeats 3200000 in
+/-- **`hpd2_B_expand` — the closed expansion of the B-bracket of `hpd2`.**  Substituting the landed
+    closed second jet `expPullbackMetric_pd2_closed` (with `i:=j`, metric second index `k`, inner
+    derivative `α`, outer derivative `l`) into the radial contraction
+    `B_α = ∑_{l,j,k} ∂_l∂_α g̃_{jk}(0)·v^l v^j v^k` and reordering to the canonical `∑_a∑_b`-outer form,
+    `B_α` equals the explicit finite expression in `{∂²g(p), ∂g(p), Γ(p), ∂Γ(p), g(p)}`.  Note the
+    two-slot structure the ledger flags: in the closed second jet `α` is the INNER-derivative `m`-slot
+    (fixed), so the `α2` blocks carry `α` in a fixed derivative slot while `j` occupies the metric/first
+    lower slot — distinct from A's three-derivative-slot pattern. -/
+theorem hpd2_B_expand (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (α : Fin n) (v : Point n) :
+    (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k)
+      = ∑ a, ∑ b, ∑ l, ∑ j, ∑ k,
+          ((pd (fun z => pd (fun y => g y a b) α z) l p
+              + ∑ c, pd (fun y => g y a b) c p
+                  * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+            * (Pi.single j 1 : Point n) a * (Pi.single k 1 : Point n) b
+          + pd (fun y => g y a b) α p
+              * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+              * (Pi.single k 1 : Point n) b
+          + pd (fun y => g y a b) α p * (Pi.single j 1 : Point n) a
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p))
+          + pd (fun y => g y a b) l p
+              * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+              * (Pi.single k 1 : Point n) b
+          + g p a b
+              * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1))) a)
+              * (Pi.single k 1 : Point n) b
+          + g p a b
+              * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+              * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p))
+          + pd (fun y => g y a b) l p * (Pi.single j 1 : Point n) a
+              * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p))
+          + g p a b
+              * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+              * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p))
+          + g p a b * (Pi.single j 1 : Point n) a
+              * (((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1)
+                    + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1))) b))
+          * v l * v j * v k := by
+  simp only [expPullbackMetric_pd2_closed g gi hC p hg]
+  exact contract_ab_expand _ v
+
 end QIQTH.PullbackMetric

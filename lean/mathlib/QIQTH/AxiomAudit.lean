@@ -10644,6 +10644,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.pd_christoffel_lower_fn
 #print axioms QIQTH.PullbackMetric.expPullback_radial_gauge_of_pd2
 #print axioms QIQTH.PullbackMetric.gauge_pd_christoffel_expPullbackInv_zero_of_pd2
+-- ★ PARAMETRIX P1 R3→κ (hpd2 discharge — the TWO expansion lemmas) (PullbackMetric.lean).  The endgame's sole
+-- obligation hpd2 (∀ α v, 2·A_α − B_α = 0, A/B = radial contractions of g̃'s 2nd jet) is a finite term-by-term
+-- contraction being ground out sub-lemma by sub-lemma.  hpd2_A_expand / hpd2_B_expand: substitute
+-- expPullbackMetric_pd2_closed for each ∂²g̃(0) and reorder the closed-jet ∑_a∑_b to the front under the vˡvʲvᵏ
+-- contraction — the explicit closed forms A_α = ∑_a∑_b∑_ljk(T1..T9)·vˡvʲvᵏ (block slots (e_α,e_j,e_l),(e_k,e_j,e_l))
+-- and B_α likewise (α in the fixed inner-derivative m-slot ⟹ the distinct two-slot block structure).  Proofs =
+-- simp[expPullbackMetric_pd2_closed] + the private reorder_ab_front/contract_ab_expand helpers.  HONEST — this is the
+-- first move of the hpd2 grind; block-folding + Kronecker collapse + the α1 metric-compat cancellation
+-- (pd_christoffel_lower_fn) + the rncDΓ reindex (2A−B=0 closure) all REMAIN.  Does NOT give hpd2 / the unconditional
+-- gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hpd2_A_expand
+#print axioms QIQTH.PullbackMetric.hpd2_B_expand
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
