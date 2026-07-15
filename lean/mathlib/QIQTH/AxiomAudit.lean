@@ -10386,6 +10386,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.contDiffOn_fderiv_expMap
 #print axioms QIQTH.PullbackMetric.contDiffOn_fderiv_expMap_component
 #print axioms QIQTH.PullbackMetric.contDiffOn_expPullbackMetric
+-- ★ PARAMETRIX P1 R3→κ (bridge sub-lemmas — the RNC jet chain at 0) (PullbackMetric.lean).
+-- expMap_apply_zero (exp_p 0 = p), fderiv_expMap_zero (D exp_p 0 = id), expPullbackMetric_at_zero (g̃(0)=g(p)=δ in a
+-- p-orthonormal frame), hasFDerivAt_fderiv_expMap_zero (v↦D exp_p v differentiable at 0), pd_jacobian_expMap_zero
+-- (the load-bearing ∂_l(D exp_p·eᵢ)_a(0) = ½(−Γ^a_{il}−Γ^a_{li})), pd_expPullbackMetric_at_zero (∂_l g̃_{ij}(0)=0, RNC
+-- first-order flatness — Leibniz terms cancel via christoffel_lower metric-compatibility + symmetry),
+-- christoffel_expPullbackMetric_zero (Γ̃^μ_{νρ}(0)=0).  The RNC value + first-order + connection jets of the pullback
+-- metric.  HONEST — the full bridge rncDΓ=pd(christoffel g̃)(0) is CHECKPOINTED as a genuine SECOND-ORDER step:
+-- pd(christoffel g̃) needs pd²g̃(0) ← the exp map's 3rd jet (a level-2 HasFDerivAt of v↦fderiv²exp_p + twice-Leibniz
+-- + contraction to rncDΓ via a3rawArr_contract_eq_a3); reachable IN PRINCIPLE from Rung 3 (no Rung 4), but a
+-- multi-lemma build, NOT done here.  So does NOT yet give κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6,
+-- NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.expMap_apply_zero
+#print axioms QIQTH.PullbackMetric.fderiv_expMap_zero
+#print axioms QIQTH.PullbackMetric.expPullbackMetric_at_zero
+#print axioms QIQTH.PullbackMetric.hasFDerivAt_fderiv_expMap_zero
+#print axioms QIQTH.PullbackMetric.pd_jacobian_expMap_zero
+#print axioms QIQTH.PullbackMetric.pd_expPullbackMetric_at_zero
+#print axioms QIQTH.PullbackMetric.christoffel_expPullbackMetric_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
