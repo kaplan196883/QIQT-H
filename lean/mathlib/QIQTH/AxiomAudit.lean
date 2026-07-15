@@ -10276,6 +10276,18 @@ namespace QIQTH.AxiomAudit
 -- remainder bound.  HONEST: prerequisite only; does NOT give the ρ≤C‖l‖² assembly / ContDiff³ / κ=1/6 / parametrix /
 -- general a₁=R/6 / numerical-G.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet2_v_two_pt_Icc
+-- ★ PARAMETRIX P1 RUNG 3 (capstone ASSEMBLY) — the Jet₃ quadratic remainder bound (ExpMapContDiff3.lean).
+-- geodesicField_D2F_second_order_taylor: ‖D²F y − D²F x − D³F x(y−x)‖ ≤ L‖y−x‖² on the tube ball (mirror of the
+-- DF one, via D³F Lipschitz + Convex.norm_image_sub_le_of_norm_fderiv_le').  expJet3_remainder_quadratic_bound:
+-- ∃C≥0, ∀t∈Icc 0 1, ‖ρ(t)‖ ≤ C‖l‖² (ρ = the expJet3_residual_hasDerivWithinAt residual).  The ~10-error-term
+-- cancellation: first-order-in-l main terms cancel EXACTLY via fderiv3_geodesicField_symm_cyc (D³F cyclic) +
+-- fderiv2_geodesicField_symm (D²F) + Qhk=Qv definitional, then abel; the 10 error terms each bounded quadratic via
+-- clmApply{,2,3}_norm_le + the 2nd-order Taylors (DF/D²F/tube) + expFund_two_pt_diff_Icc + the (d) first-variation
+-- residuals + (e) 2nd-variation two-point.  Closes expJet3_residual_bound's ρ hypothesis ⟹ the Jet₃ residual
+-- estimate now closes to o(‖l‖).  HONEST: still (HasFDerivAt of expJetD2) + (continuity) + (discharge) remain before
+-- ContDiff³ exp_p.  Does NOT give ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_D2F_second_order_taylor
+#print axioms QIQTH.ExpMap.expJet3_remainder_quadratic_bound
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
