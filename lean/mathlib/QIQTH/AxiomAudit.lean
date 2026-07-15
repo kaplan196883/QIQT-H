@@ -10305,6 +10305,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet3Val_add_h
 #print axioms QIQTH.ExpMap.expJet3Val_smul_k
 #print axioms QIQTH.ExpMap.expJet3Val_add_k
+-- ★ PARAMETRIX P1 RUNG 3 (B-CLM3 d4) — the 3rd-derivative CLM expJetD3 (ExpMapContDiff3.lean).
+-- expJet2Curve := (expJet2Fund …).choose (the whole 2nd-variation witness curve) + expJet2Curve_continuousOn +
+-- expJet2Curve_{add,smul}_{left,right} (CURVE-level bilinearity ∀t∈Icc 0 1, via expJet2Fund_unique superposition —
+-- the curve-vs-value-at-1 upgrade).  expJet3Val_congr (value depends on Q·· only through their [0,1] values) +
+-- expJet3ValG (expJet3Val with Q·· := the genuine expJet2Curve) + expJet3ValG_{add,smul}_{l,h,k} (PLAIN trilinearity:
+-- expJet3Val_congr discharges source-matching, then the matched-Q facts) + expJet3ValG_norm_le.  ⟹ expJetD3 :
+-- Point n →L[ℝ] Point n →L[ℝ] Point n →L[ℝ] Point n (D³_v(l)(k)(h)=π(expJet3ValG h k l)), via iterated
+-- mkContinuous₂/mkContinuous (Mathlib has no mk₃).  The packaged 3rd derivative.  HONEST: builds D³_v; the
+-- HasFDerivAt(v↦fderiv²exp_p v)=expJetD3 [B-asm3] + continuity [C3] + discharge [D3] remain before ContDiff³ exp_p.
+-- Does NOT give ContDiff³/κ=1/6/parametrix/general a₁=R/6/numerical-G.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet2Curve
+#print axioms QIQTH.ExpMap.expJet2Curve_add_left
+#print axioms QIQTH.ExpMap.expJet2Curve_smul_left
+#print axioms QIQTH.ExpMap.expJet2Curve_add_right
+#print axioms QIQTH.ExpMap.expJet2Curve_smul_right
+#print axioms QIQTH.ExpMap.expJet3ValG
+#print axioms QIQTH.ExpMap.expJetD3
+#print axioms QIQTH.ExpMap.expJetD3_apply
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

@@ -2259,4 +2259,626 @@ theorem expJet3Val_add_k (g gi : Point n → Fin n → Fin n → ℝ)
   have h1 := huniq 1 (by norm_num [Set.mem_Icc])
   simpa only [expJet3Val] using h1
 
+/-! ### The genuine second-variation CURVE and its curve-level bilinearity on `[0,1]`
+
+The B-CLM(3) checkpoint identified the wall: `expJetD3` needs PLAIN trilinearity for FIXED inputs,
+but the matched-`Q` value facts split only when the abstract `Q··` inputs are varied in tandem.  The
+fix is to instantiate `Qkl/Qhl/Qhk` with the GENUINE second-variation curves `t ↦ Q^{··}(t)` — the
+`expJet2Fund` witnesses — which ARE bilinear in their two directions, so the matched-`Q` splitting is
+automatic.  Here we build that curve `expJet2Curve` and prove its curve-level (∀ `t ∈ [0,1]`)
+bilinearity by the SAME superposition-via-uniqueness argument as `expJet2Val_{add,smul}_{left,right}`,
+concluding at every `t` (not just `t = 1`).  This is the curve-vs-value upgrade the wiring needs. -/
+
+/-- The **genuine second-variation curve** `t ↦ Q^{hk}_v(t)`: the chosen `expJet2Fund` witness for the
+    direction pair `(h,k)`.  Its value at `t = 1` is `expJet2Val`; here we keep the whole curve, since
+    the Jet₃ source `expJet3Rhs` feeds the curve pointwise. -/
+noncomputable def expJet2Curve (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k : Point n) : ℝ → (Point n × Point n) :=
+  (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose
+
+/-- `expJet2Curve` is continuous on `[0,1]` (the `expJet2Fund` witness spec). -/
+theorem expJet2Curve_continuousOn (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k : Point n) :
+    ContinuousOn (expJet2Curve g gi hC p v Φ hv hΦcont h k) (Set.Icc (0 : ℝ) 1) :=
+  (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec.2.1
+
+/-- **Curve-level additivity of `Q^{hk}` in the first (`h`) slot, on `[0,1]`.**  The `∀ t`-upgrade of
+    `expJet2Val_add_left`: same superposition (`expJet2Rhs_add_left` + `expJet2Fund_unique`), but
+    keeping the whole-interval uniqueness conclusion. -/
+theorem expJet2Curve_add_left (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h₁ h₂ k : Point n) : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+    expJet2Curve g gi hC p v Φ hv hΦcont (h₁ + h₂) k t
+      = expJet2Curve g gi hC p v Φ hv hΦcont h₁ k t
+        + expJet2Curve g gi hC p v Φ hv hΦcont h₂ k t := by
+  obtain ⟨hQ₁0, -, -, hQ₁deriv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h₁ k).choose_spec
+  obtain ⟨hQ₂0, -, -, hQ₂deriv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h₂ k).choose_spec
+  obtain ⟨hQ₃0, -, -, hQ₃deriv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont (h₁ + h₂) k).choose_spec
+  have huniq := expJet2Fund_unique g gi hC p v Φ hv (h₁ + h₂) k
+    (expJet2Fund g gi hC p v Φ hv hΦcont (h₁ + h₂) k).choose
+    (fun t => (expJet2Fund g gi hC p v Φ hv hΦcont h₁ k).choose t
+      + (expJet2Fund g gi hC p v Φ hv hΦcont h₂ k).choose t)
+    hQ₃0 (by simp only [hQ₁0, hQ₂0, add_zero]) hQ₃deriv
+    (fun t ht => by
+      have hd := (hQ₁deriv t ht).add (hQ₂deriv t ht)
+      have hval :
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet2Fund g gi hC p v Φ hv hΦcont h₁ k).choose t)
+            + expJet2Rhs g gi hC p v Φ h₁ k t)
+          + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet2Fund g gi hC p v Φ hv hΦcont h₂ k).choose t)
+            + expJet2Rhs g gi hC p v Φ h₂ k t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet2Fund g gi hC p v Φ hv hΦcont h₁ k).choose t
+                + (expJet2Fund g gi hC p v Φ hv hΦcont h₂ k).choose t)
+            + expJet2Rhs g gi hC p v Φ (h₁ + h₂) k t := by
+        rw [map_add, expJet2Rhs_add_left]; abel
+      rwa [hval] at hd)
+  intro t ht
+  simpa only [expJet2Curve] using huniq t ht
+
+/-- **Curve-level ℝ-homogeneity of `Q^{hk}` in the first (`h`) slot, on `[0,1]`.** -/
+theorem expJet2Curve_smul_left (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (c : ℝ) (h k : Point n) : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+    expJet2Curve g gi hC p v Φ hv hΦcont (c • h) k t
+      = c • expJet2Curve g gi hC p v Φ hv hΦcont h k t := by
+  obtain ⟨hQ0, -, -, hQderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec
+  obtain ⟨hQc0, -, -, hQcderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont (c • h) k).choose_spec
+  have huniq := expJet2Fund_unique g gi hC p v Φ hv (c • h) k
+    (expJet2Fund g gi hC p v Φ hv hΦcont (c • h) k).choose
+    (fun t => c • (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose t)
+    hQc0 (by simp only [hQ0, smul_zero]) hQcderiv
+    (fun t ht => by
+      have hd := (hQderiv t ht).const_smul c
+      have hval :
+          c • ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                ((expJet2Fund g gi hC p v Φ hv hΦcont h k).choose t)
+              + expJet2Rhs g gi hC p v Φ h k t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              (c • (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose t)
+            + expJet2Rhs g gi hC p v Φ (c • h) k t := by
+        rw [smul_add, map_smul, expJet2Rhs_smul_left]
+      rwa [hval] at hd)
+  intro t ht
+  simpa only [expJet2Curve] using huniq t ht
+
+/-- **Curve-level additivity of `Q^{hk}` in the second (`k`) slot, on `[0,1]`.** -/
+theorem expJet2Curve_add_right (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k₁ k₂ : Point n) : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+    expJet2Curve g gi hC p v Φ hv hΦcont h (k₁ + k₂) t
+      = expJet2Curve g gi hC p v Φ hv hΦcont h k₁ t
+        + expJet2Curve g gi hC p v Φ hv hΦcont h k₂ t := by
+  obtain ⟨hQ₁0, -, -, hQ₁deriv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k₁).choose_spec
+  obtain ⟨hQ₂0, -, -, hQ₂deriv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k₂).choose_spec
+  obtain ⟨hQ₃0, -, -, hQ₃deriv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h (k₁ + k₂)).choose_spec
+  have huniq := expJet2Fund_unique g gi hC p v Φ hv h (k₁ + k₂)
+    (expJet2Fund g gi hC p v Φ hv hΦcont h (k₁ + k₂)).choose
+    (fun t => (expJet2Fund g gi hC p v Φ hv hΦcont h k₁).choose t
+      + (expJet2Fund g gi hC p v Φ hv hΦcont h k₂).choose t)
+    hQ₃0 (by simp only [hQ₁0, hQ₂0, add_zero]) hQ₃deriv
+    (fun t ht => by
+      have hd := (hQ₁deriv t ht).add (hQ₂deriv t ht)
+      have hval :
+          ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet2Fund g gi hC p v Φ hv hΦcont h k₁).choose t)
+            + expJet2Rhs g gi hC p v Φ h k₁ t)
+          + ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet2Fund g gi hC p v Φ hv hΦcont h k₂).choose t)
+            + expJet2Rhs g gi hC p v Φ h k₂ t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet2Fund g gi hC p v Φ hv hΦcont h k₁).choose t
+                + (expJet2Fund g gi hC p v Φ hv hΦcont h k₂).choose t)
+            + expJet2Rhs g gi hC p v Φ h (k₁ + k₂) t := by
+        rw [map_add, expJet2Rhs_add_right]; abel
+      rwa [hval] at hd)
+  intro t ht
+  simpa only [expJet2Curve] using huniq t ht
+
+/-- **Curve-level ℝ-homogeneity of `Q^{hk}` in the second (`k`) slot, on `[0,1]`.** -/
+theorem expJet2Curve_smul_right (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (c : ℝ) (h k : Point n) : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+    expJet2Curve g gi hC p v Φ hv hΦcont h (c • k) t
+      = c • expJet2Curve g gi hC p v Φ hv hΦcont h k t := by
+  obtain ⟨hQ0, -, -, hQderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec
+  obtain ⟨hQc0, -, -, hQcderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h (c • k)).choose_spec
+  have huniq := expJet2Fund_unique g gi hC p v Φ hv h (c • k)
+    (expJet2Fund g gi hC p v Φ hv hΦcont h (c • k)).choose
+    (fun t => c • (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose t)
+    hQc0 (by simp only [hQ0, smul_zero]) hQcderiv
+    (fun t ht => by
+      have hd := (hQderiv t ht).const_smul c
+      have hval :
+          c • ((fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+                ((expJet2Fund g gi hC p v Φ hv hΦcont h k).choose t)
+              + expJet2Rhs g gi hC p v Φ h k t)
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              (c • (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose t)
+            + expJet2Rhs g gi hC p v Φ h (c • k) t := by
+        rw [smul_add, map_smul, expJet2Rhs_smul_right]
+      rwa [hval] at hd)
+  intro t ht
+  simpa only [expJet2Curve] using huniq t ht
+
+/-! ### Packaging `expJetD3` — genuine trilinearity via the second-variation curves
+
+With the genuine curves in hand, `expJet3Val` becomes plain-trilinear in `(h,k,l)`.  The bridge is a
+`Q`-congruence lemma (`expJet3Val_congr`: the value depends on the `Q··` inputs only through their
+values on `[0,1]`, by `expJet3Fund_unique`) that lets us swap the combined genuine curve
+`expJet2Curve k (l₁+l₂)` for the sum `s ↦ expJet2Curve k l₁ s + expJet2Curve k l₂ s` (they agree on
+`[0,1]` by the curve bilinearity), after which the already-landed matched-`Q` value facts
+(`expJet3Val_{add,smul}_{l,h,k}`) discharge each slot.  Then a uniform value bound
+(`expJet3ValG_norm_le`, from `expJet3Fund_value_bound` + `expJet2Fund_value_bound_Icc`) and iterated
+`mkContinuous₂`/`mkContinuous` assemble the third-derivative CLM `expJetD3`. -/
+
+/-- **`Q`-congruence of `R^{hkl}(1)`.**  If the second-variation inputs `Qkl,Qhl,Qhk` agree on `[0,1]`
+    with `Qkl',Qhl',Qhk'`, then `expJet3Val` is unchanged: both chosen witnesses solve the same IVP on
+    `[0,1]` (the source `expJet3Rhs` at `t` depends on the `Q··` only through their value at `t`), so
+    `expJet3Fund_unique` forces the endpoint values to coincide.  This is the value-only interface that
+    lets us feed the genuine bilinear curves, whose combined/sum forms agree on `[0,1]` but not
+    globally. -/
+theorem expJet3Val_congr (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (Qkl Qhl Qhk Qkl' Qhl' Qhk' : ℝ → (Point n × Point n))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (hQkl : ContinuousOn Qkl (Set.Icc (0 : ℝ) 1)) (hQhl : ContinuousOn Qhl (Set.Icc (0 : ℝ) 1))
+    (hQhk : ContinuousOn Qhk (Set.Icc (0 : ℝ) 1))
+    (hQkl' : ContinuousOn Qkl' (Set.Icc (0 : ℝ) 1)) (hQhl' : ContinuousOn Qhl' (Set.Icc (0 : ℝ) 1))
+    (hQhk' : ContinuousOn Qhk' (Set.Icc (0 : ℝ) 1)) (h k l : Point n)
+    (eKl : ∀ t ∈ Set.Icc (0 : ℝ) 1, Qkl t = Qkl' t)
+    (eHl : ∀ t ∈ Set.Icc (0 : ℝ) 1, Qhl t = Qhl' t)
+    (eHk : ∀ t ∈ Set.Icc (0 : ℝ) 1, Qhk t = Qhk' t) :
+    expJet3Val g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l
+      = expJet3Val g gi hC p v Φ Qkl' Qhl' Qhk' hv hΦcont hQkl' hQhl' hQhk' h k l := by
+  obtain ⟨hR₁0, -, -, hR₁deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose_spec
+  obtain ⟨hR₂0, -, -, hR₂deriv⟩ :=
+    (expJet3Fund g gi hC p v Φ Qkl' Qhl' Qhk' hv hΦcont hQkl' hQhl' hQhk' h k l).choose_spec
+  have huniq := expJet3Fund_unique g gi hC p v Φ Qkl Qhl Qhk hv h k l
+    (expJet3Fund g gi hC p v Φ Qkl Qhl Qhk hv hΦcont hQkl hQhl hQhk h k l).choose
+    (expJet3Fund g gi hC p v Φ Qkl' Qhl' Qhk' hv hΦcont hQkl' hQhl' hQhk' h k l).choose
+    hR₁0 hR₂0 hR₁deriv
+    (fun t ht => by
+      have he : (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl' Qhl' Qhk' hv hΦcont hQkl' hQhl' hQhk' h k l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl' Qhl' Qhk' h k l t
+          = (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t))
+              ((expJet3Fund g gi hC p v Φ Qkl' Qhl' Qhk' hv hΦcont hQkl' hQhl' hQhk' h k l).choose t)
+            + expJet3Rhs g gi hC p v Φ Qkl Qhl Qhk h k l t := by
+        congr 1
+        rw [expJet3Rhs_apply, expJet3Rhs_apply, eKl t ht, eHl t ht, eHk t ht]
+      rw [← he]; exact hR₂deriv t ht)
+  have h1 := huniq 1 (by norm_num [Set.mem_Icc])
+  simpa only [expJet3Val] using h1
+
+/-- **The genuine third-variation value** `R^{hkl}_v(1)` with the `Q··` slots instantiated by the
+    genuine second-variation curves `expJet2Curve k l`, `expJet2Curve h l`, `expJet2Curve h k`.  This
+    is plain-trilinear in `(h,k,l)` (below), the datum packaged into `expJetD3`. -/
+noncomputable def expJet3ValG (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k l : Point n) : Point n × Point n :=
+  expJet3Val g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+    hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k)
+    h k l
+
+/-- **Additivity of `expJet3ValG` in the `l`-slot.**  Bridge the combined genuine curves to their sums
+    on `[0,1]` (`expJet2Curve_add_right`, `Qhk` fixed) via `expJet3Val_congr`, then apply the
+    matched-`Q` fact `expJet3Val_add_l`. -/
+theorem expJet3ValG_add_l (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k l₁ l₂ : Point n) :
+    expJet3ValG g gi hC p v Φ hv hΦcont h k (l₁ + l₂)
+      = expJet3ValG g gi hC p v Φ hv hΦcont h k l₁ + expJet3ValG g gi hC p v Φ hv hΦcont h k l₂ := by
+  have hbridge := expJet3Val_congr g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k (l₁ + l₂))
+      (expJet2Curve g gi hC p v Φ hv hΦcont h (l₁ + l₂))
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+      (fun s => expJet2Curve g gi hC p v Φ hv hΦcont k l₁ s
+        + expJet2Curve g gi hC p v Φ hv hΦcont k l₂ s)
+      (fun s => expJet2Curve g gi hC p v Φ hv hΦcont h l₁ s
+        + expJet2Curve g gi hC p v Φ hv hΦcont h l₂ s)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+      hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k (l₁ + l₂))
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h (l₁ + l₂))
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l₁).add
+        (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l₂))
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l₁).add
+        (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l₂))
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k)
+      h k (l₁ + l₂)
+      (expJet2Curve_add_right g gi hC p v Φ hv hΦcont k l₁ l₂)
+      (expJet2Curve_add_right g gi hC p v Φ hv hΦcont h l₁ l₂)
+      (fun _ _ => rfl)
+  simp only [expJet3ValG]
+  rw [hbridge]
+  exact expJet3Val_add_l g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l₁) (expJet2Curve g gi hC p v Φ hv hΦcont k l₂)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l₁) (expJet2Curve g gi hC p v Φ hv hΦcont h l₂)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l₁)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l₂)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l₁)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l₂)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) h k l₁ l₂
+
+/-- **ℝ-homogeneity of `expJet3ValG` in the `l`-slot** (`expJet2Curve_smul_right` + `expJet3Val_smul_l`). -/
+theorem expJet3ValG_smul_l (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (c : ℝ) (h k l : Point n) :
+    expJet3ValG g gi hC p v Φ hv hΦcont h k (c • l)
+      = c • expJet3ValG g gi hC p v Φ hv hΦcont h k l := by
+  have hbridge := expJet3Val_congr g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k (c • l))
+      (expJet2Curve g gi hC p v Φ hv hΦcont h (c • l))
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+      (fun s => c • expJet2Curve g gi hC p v Φ hv hΦcont k l s)
+      (fun s => c • expJet2Curve g gi hC p v Φ hv hΦcont h l s)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k)
+      hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k (c • l))
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h (c • l))
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l).const_smul c)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l).const_smul c)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k)
+      h k (c • l)
+      (expJet2Curve_smul_right g gi hC p v Φ hv hΦcont c k l)
+      (expJet2Curve_smul_right g gi hC p v Φ hv hΦcont c h l)
+      (fun _ _ => rfl)
+  simp only [expJet3ValG]
+  rw [hbridge]
+  exact expJet3Val_smul_l g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l) (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) c h k l
+
+/-- **Additivity of `expJet3ValG` in the `h`-slot** (`expJet2Curve_add_left` on the two `h`-carrying
+    curves `Qhl,Qhk`; `Qkl` fixed) + `expJet3Val_add_h`. -/
+theorem expJet3ValG_add_h (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h₁ h₂ k l : Point n) :
+    expJet3ValG g gi hC p v Φ hv hΦcont (h₁ + h₂) k l
+      = expJet3ValG g gi hC p v Φ hv hΦcont h₁ k l + expJet3ValG g gi hC p v Φ hv hΦcont h₂ k l := by
+  have hbridge := expJet3Val_congr g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont (h₁ + h₂) l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont (h₁ + h₂) k)
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (fun s => expJet2Curve g gi hC p v Φ hv hΦcont h₁ l s
+        + expJet2Curve g gi hC p v Φ hv hΦcont h₂ l s)
+      (fun s => expJet2Curve g gi hC p v Φ hv hΦcont h₁ k s
+        + expJet2Curve g gi hC p v Φ hv hΦcont h₂ k s)
+      hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont (h₁ + h₂) l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont (h₁ + h₂) k)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₁ l).add
+        (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₂ l))
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₁ k).add
+        (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₂ k))
+      (h₁ + h₂) k l
+      (fun _ _ => rfl)
+      (expJet2Curve_add_left g gi hC p v Φ hv hΦcont h₁ h₂ l)
+      (expJet2Curve_add_left g gi hC p v Φ hv hΦcont h₁ h₂ k)
+  simp only [expJet3ValG]
+  rw [hbridge]
+  exact expJet3Val_add_h g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h₁ l) (expJet2Curve g gi hC p v Φ hv hΦcont h₂ l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h₁ k) (expJet2Curve g gi hC p v Φ hv hΦcont h₂ k)
+    hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₁ l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₂ l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₁ k)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h₂ k) h₁ h₂ k l
+
+/-- **ℝ-homogeneity of `expJet3ValG` in the `h`-slot** (`expJet2Curve_smul_left` + `expJet3Val_smul_h`). -/
+theorem expJet3ValG_smul_h (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (c : ℝ) (h k l : Point n) :
+    expJet3ValG g gi hC p v Φ hv hΦcont (c • h) k l
+      = c • expJet3ValG g gi hC p v Φ hv hΦcont h k l := by
+  have hbridge := expJet3Val_congr g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont (c • h) l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont (c • h) k)
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (fun s => c • expJet2Curve g gi hC p v Φ hv hΦcont h l s)
+      (fun s => c • expJet2Curve g gi hC p v Φ hv hΦcont h k s)
+      hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont (c • h) l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont (c • h) k)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l).const_smul c)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k).const_smul c)
+      (c • h) k l
+      (fun _ _ => rfl)
+      (expJet2Curve_smul_left g gi hC p v Φ hv hΦcont c h l)
+      (expJet2Curve_smul_left g gi hC p v Φ hv hΦcont c h k)
+  simp only [expJet3ValG]
+  rw [hbridge]
+  exact expJet3Val_smul_h g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l) (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) c h k l
+
+/-- **Additivity of `expJet3ValG` in the `k`-slot** (`expJet2Curve_add_left` on `Qkl` — `k` first —
+    and `expJet2Curve_add_right` on `Qhk` — `k` second; `Qhl` fixed) + `expJet3Val_add_k`. -/
+theorem expJet3ValG_add_k (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (h k₁ k₂ l : Point n) :
+    expJet3ValG g gi hC p v Φ hv hΦcont h (k₁ + k₂) l
+      = expJet3ValG g gi hC p v Φ hv hΦcont h k₁ l + expJet3ValG g gi hC p v Φ hv hΦcont h k₂ l := by
+  have hbridge := expJet3Val_congr g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont (k₁ + k₂) l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h (k₁ + k₂))
+      (fun s => expJet2Curve g gi hC p v Φ hv hΦcont k₁ l s
+        + expJet2Curve g gi hC p v Φ hv hΦcont k₂ l s)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (fun s => expJet2Curve g gi hC p v Φ hv hΦcont h k₁ s
+        + expJet2Curve g gi hC p v Φ hv hΦcont h k₂ s)
+      hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont (k₁ + k₂) l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h (k₁ + k₂))
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k₁ l).add
+        (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k₂ l))
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k₁).add
+        (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k₂))
+      h (k₁ + k₂) l
+      (expJet2Curve_add_left g gi hC p v Φ hv hΦcont k₁ k₂ l)
+      (fun _ _ => rfl)
+      (expJet2Curve_add_right g gi hC p v Φ hv hΦcont h k₁ k₂)
+  simp only [expJet3ValG]
+  rw [hbridge]
+  exact expJet3Val_add_k g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k₁ l) (expJet2Curve g gi hC p v Φ hv hΦcont k₂ l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k₁) (expJet2Curve g gi hC p v Φ hv hΦcont h k₂)
+    hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k₁ l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k₂ l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k₁)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k₂) h k₁ k₂ l
+
+/-- **ℝ-homogeneity of `expJet3ValG` in the `k`-slot** (`expJet2Curve_smul_left` on `Qkl`,
+    `expJet2Curve_smul_right` on `Qhk`) + `expJet3Val_smul_k`. -/
+theorem expJet3ValG_smul_k (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1))
+    (c : ℝ) (h k l : Point n) :
+    expJet3ValG g gi hC p v Φ hv hΦcont h (c • k) l
+      = c • expJet3ValG g gi hC p v Φ hv hΦcont h k l := by
+  have hbridge := expJet3Val_congr g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont (c • k) l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h (c • k))
+      (fun s => c • expJet2Curve g gi hC p v Φ hv hΦcont k l s)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (fun s => c • expJet2Curve g gi hC p v Φ hv hΦcont h k s)
+      hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont (c • k) l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h (c • k))
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l).const_smul c)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      ((expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k).const_smul c)
+      h (c • k) l
+      (expJet2Curve_smul_left g gi hC p v Φ hv hΦcont c k l)
+      (fun _ _ => rfl)
+      (expJet2Curve_smul_right g gi hC p v Φ hv hΦcont c h k)
+  simp only [expJet3ValG]
+  rw [hbridge]
+  exact expJet3Val_smul_k g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l) (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) c h k l
+
+/-- **Uniform trilinear value bound for `expJet3ValG`.**  A single `M ≥ 0` (from the `[0,1]`
+    Jacobi/`D³F`/`D²F` tube bounds `Kstar/Kstar3/Kstar2`, a compactness bound `Cphi = ⨆‖Φ‖`, and the
+    curve value bound `‖Q^{··} t‖ ≤ M₂‖·‖‖·‖` from `expJet2Fund_value_bound_Icc`) with
+    `‖expJet3ValG h k l‖ ≤ M·‖h‖·‖k‖·‖l‖` for ALL `(h,k,l)`.  Fed into the CLM packaging. -/
+theorem expJet3ValG_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) :
+    ∃ M : ℝ, 0 ≤ M ∧ ∀ h k l : Point n,
+      ‖expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ ≤ M * ‖h‖ * ‖k‖ * ‖l‖ := by
+  obtain ⟨Kstar, hKstar0, hKstar⟩ := expJet_fderiv_tube_bddAbove g gi hC p v hv
+  obtain ⟨Kstar3, hKstar30, hKstar3u⟩ := expJet_fderiv3_tube_bddAbove_unif g gi hC p
+  obtain ⟨Kstar2, hKstar20, hKstar2u⟩ := expJet_fderiv2_tube_bddAbove_unif g gi hC p
+  have hKstar3 := hKstar3u v hv
+  have hKstar2 := hKstar2u v hv
+  obtain ⟨Cb, hCb⟩ := (isCompact_Icc).exists_bound_of_continuousOn hΦcont
+  set Cphi : ℝ := max Cb 0 with hCphidef
+  have hCphi0 : 0 ≤ Cphi := le_max_right _ _
+  have hCphi : ∀ t ∈ Set.Icc (0 : ℝ) 1, ‖Φ t‖ ≤ Cphi :=
+    fun t ht => (hCb t ht).trans (le_max_left _ _)
+  have hM₂0 : 0 ≤ Kstar2 * Cphi ^ 2 * Real.exp Kstar :=
+    mul_nonneg (mul_nonneg hKstar20 (sq_nonneg _)) (Real.exp_pos _).le
+  refine ⟨(Kstar3 * Cphi ^ 3 + 3 * (Kstar2 * (Kstar2 * Cphi ^ 2 * Real.exp Kstar) * Cphi))
+      * Real.exp Kstar,
+    by positivity, fun h k l => ?_⟩
+  -- curve value bounds on `[0,1]`
+  obtain ⟨-, -, -, hQklderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont k l).choose_spec
+  obtain ⟨-, -, -, hQhlderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h l).choose_spec
+  obtain ⟨-, -, -, hQhkderiv⟩ := (expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec
+  have hQkl0 := ((expJet2Fund g gi hC p v Φ hv hΦcont k l).choose_spec).1
+  have hQhl0 := ((expJet2Fund g gi hC p v Φ hv hΦcont h l).choose_spec).1
+  have hQhk0 := ((expJet2Fund g gi hC p v Φ hv hΦcont h k).choose_spec).1
+  have hCqkl : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet2Curve g gi hC p v Φ hv hΦcont k l t‖ ≤ (Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖k‖ * ‖l‖ :=
+    expJet2Fund_value_bound_Icc g gi hC p v Φ k l Kstar Kstar2 Cphi hKstar0 hKstar20 hCphi0
+      hKstar hKstar2 hCphi (expJet2Curve g gi hC p v Φ hv hΦcont k l) hQkl0 hQklderiv
+  have hCqhl : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet2Curve g gi hC p v Φ hv hΦcont h l t‖ ≤ (Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖h‖ * ‖l‖ :=
+    expJet2Fund_value_bound_Icc g gi hC p v Φ h l Kstar Kstar2 Cphi hKstar0 hKstar20 hCphi0
+      hKstar hKstar2 hCphi (expJet2Curve g gi hC p v Φ hv hΦcont h l) hQhl0 hQhlderiv
+  have hCqhk : ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      ‖expJet2Curve g gi hC p v Φ hv hΦcont h k t‖ ≤ (Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖h‖ * ‖k‖ :=
+    expJet2Fund_value_bound_Icc g gi hC p v Φ h k Kstar Kstar2 Cphi hKstar0 hKstar20 hCphi0
+      hKstar hKstar2 hCphi (expJet2Curve g gi hC p v Φ hv hΦcont h k) hQhk0 hQhkderiv
+  obtain ⟨hR0, -, -, hRderiv⟩ :=
+    (expJet3Fund g gi hC p v Φ
+      (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve g gi hC p v Φ hv hΦcont h k) hv hΦcont
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont k l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h l)
+      (expJet2Curve_continuousOn g gi hC p v Φ hv hΦcont h k) h k l).choose_spec
+  have hbd := expJet3Fund_value_bound g gi hC p v Φ
+    (expJet2Curve g gi hC p v Φ hv hΦcont k l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h l)
+    (expJet2Curve g gi hC p v Φ hv hΦcont h k) h k l
+    Kstar Kstar3 Kstar2 Cphi
+    ((Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖k‖ * ‖l‖)
+    ((Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖h‖ * ‖l‖)
+    ((Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖h‖ * ‖k‖)
+    hKstar0 hKstar30 hKstar20 hCphi0 hKstar hKstar3 hKstar2 hCphi hCqkl hCqhl hCqhk
+    _ hR0 hRderiv
+  calc ‖expJet3ValG g gi hC p v Φ hv hΦcont h k l‖
+      ≤ (Kstar3 * (Cphi * ‖h‖) * (Cphi * ‖k‖) * (Cphi * ‖l‖)
+          + Kstar2 * (Cphi * ‖h‖) * ((Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖k‖ * ‖l‖)
+          + Kstar2 * (Cphi * ‖k‖) * ((Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖h‖ * ‖l‖)
+          + Kstar2 * (Cphi * ‖l‖) * ((Kstar2 * Cphi ^ 2 * Real.exp Kstar) * ‖h‖ * ‖k‖))
+          * Real.exp Kstar := hbd
+    _ = (Kstar3 * Cphi ^ 3 + 3 * (Kstar2 * (Kstar2 * Cphi ^ 2 * Real.exp Kstar) * Cphi))
+          * Real.exp Kstar * ‖h‖ * ‖k‖ * ‖l‖ := by ring
+
+/-- **The inner (`k,h`)-bilinear slice `D³_v(l)` for a fixed `l`.**  `π(R^{hkl}_v(1))` as a genuine
+    continuous BILINEAR map in `(k,h)`, from the `expJet3ValG` `k`/`h` linearity facts (`mk₂`) and the
+    uniform bound `expJet3ValG_norm_le` (`‖π‖ ≤ 1`), via `LinearMap.mkContinuous₂`.  The bound constant
+    is `M·‖l‖` with `M = expJet3ValG_norm_le.choose`. -/
+noncomputable def expJetD3Inner (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) (l : Point n) :
+    Point n →L[ℝ] Point n →L[ℝ] Point n :=
+  LinearMap.mkContinuous₂
+    (LinearMap.mk₂ ℝ
+      (fun k h => expJetPi (expJet3ValG g gi hC p v Φ hv hΦcont h k l))
+      (fun k₁ k₂ h => by
+        simp only [expJet3ValG_add_k g gi hC p v Φ hv hΦcont h k₁ k₂ l, map_add])
+      (fun c k h => by
+        simp only [expJet3ValG_smul_k g gi hC p v Φ hv hΦcont c h k l, map_smul])
+      (fun k h₁ h₂ => by
+        simp only [expJet3ValG_add_h g gi hC p v Φ hv hΦcont h₁ h₂ k l, map_add])
+      (fun c k h => by
+        simp only [expJet3ValG_smul_h g gi hC p v Φ hv hΦcont c h k l, map_smul]))
+    ((expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose * ‖l‖)
+    (fun k h => by
+      have hb := (expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose_spec.2 h k l
+      simp only [LinearMap.mk₂_apply]
+      calc ‖expJetPi (expJet3ValG g gi hC p v Φ hv hΦcont h k l)‖
+          ≤ ‖expJetPi (n := n)‖ * ‖expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ :=
+            (expJetPi (n := n)).le_opNorm _
+        _ ≤ 1 * ‖expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ :=
+            mul_le_mul_of_nonneg_right expJetPi_opNorm_le (norm_nonneg _)
+        _ = ‖expJet3ValG g gi hC p v Φ hv hΦcont h k l‖ := one_mul _
+        _ ≤ (expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose * ‖h‖ * ‖k‖ * ‖l‖ := hb
+        _ = (expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose * ‖l‖ * ‖k‖ * ‖h‖ := by ring)
+
+@[simp] theorem expJetD3Inner_apply (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) (l k h : Point n) :
+    expJetD3Inner g gi hC p v Φ hv hΦcont l k h
+      = expJetPi (expJet3ValG g gi hC p v Φ hv hΦcont h k l) := rfl
+
+/-- Operator-norm bound for the inner slice: `‖D³_v(l)‖ ≤ M·‖l‖`. -/
+theorem expJetD3Inner_norm_le (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) (l : Point n) :
+    ‖expJetD3Inner g gi hC p v Φ hv hΦcont l‖
+      ≤ (expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose * ‖l‖ := by
+  unfold expJetD3Inner
+  exact LinearMap.mkContinuous₂_norm_le _
+    (mul_nonneg (expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose_spec.1 (norm_nonneg _)) _
+
+/-- **(4) The packaged third-derivative operator**
+    `D³_v : Point n →L[ℝ] Point n →L[ℝ] Point n →L[ℝ] Point n`, `D³_v(l)(k)(h) = π(R^{hkl}_v(1))` with
+    the genuine second-variation curves in the `Q··` slots.  A genuine CONTINUOUS TRILINEAR map: the
+    inner two slots `(k,h)` are `expJetD3Inner` (`mk₂` + `mkContinuous₂`), and the outer `l`-slot is
+    assembled via `LinearMap.mkContinuous` (Mathlib has no `mkContinuous₃`), with `l`-linearity from
+    `expJet3ValG_add_l/smul_l` and the bound `expJetD3Inner_norm_le`.  This is the CLM datum the
+    (downstream) third-order Fréchet layer consumes. -/
+noncomputable def expJetD3 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) :
+    Point n →L[ℝ] Point n →L[ℝ] Point n →L[ℝ] Point n :=
+  LinearMap.mkContinuous
+    { toFun := fun l => expJetD3Inner g gi hC p v Φ hv hΦcont l
+      map_add' := fun l₁ l₂ => by
+        refine ContinuousLinearMap.ext fun k => ContinuousLinearMap.ext fun h => ?_
+        simp only [ContinuousLinearMap.add_apply, expJetD3Inner_apply,
+          expJet3ValG_add_l g gi hC p v Φ hv hΦcont h k l₁ l₂, map_add]
+      map_smul' := fun c l => by
+        refine ContinuousLinearMap.ext fun k => ContinuousLinearMap.ext fun h => ?_
+        simp only [ContinuousLinearMap.smul_apply, RingHom.id_apply, expJetD3Inner_apply,
+          expJet3ValG_smul_l g gi hC p v Φ hv hΦcont c h k l, map_smul] }
+    (expJet3ValG_norm_le g gi hC p v Φ hv hΦcont).choose
+    (fun l => expJetD3Inner_norm_le g gi hC p v Φ hv hΦcont l)
+
+/-- **`expJetD3` application form.**  `D³_v(l)(k)(h) = π(R^{hkl}_v(1))` (genuine curves). -/
+@[simp] theorem expJetD3_apply (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p v : Point n)
+    (Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)))
+    (hv : ‖v‖ ≤ expRho g gi hC p) (hΦcont : ContinuousOn Φ (Set.Icc (0 : ℝ) 1)) (l k h : Point n) :
+    expJetD3 g gi hC p v Φ hv hΦcont l k h
+      = expJetPi (expJet3ValG g gi hC p v Φ hv hΦcont h k l) := by
+  simp only [expJetD3, LinearMap.mkContinuous_apply, LinearMap.coe_mk, AddHom.coe_mk,
+    expJetD3Inner_apply]
+
 end QIQTH.ExpMap
