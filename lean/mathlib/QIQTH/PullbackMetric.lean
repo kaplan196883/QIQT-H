@@ -2053,8 +2053,30 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
          SOLE remaining obligation `GaugeJet dΓ`.  By `QIQTH.RNCGauge.gaugeJet_of_diag`, `GaugeJet dΓ`
          reduces to the pullback RNC RADIAL-GEODESIC identity (a single scalar per `(v,i)`):
            **`∑_l ∑_j ∑_k pd (fun x => christoffel g̃ g̃⁻¹ i j k x) l 0 · v^l · v^j · v^k = 0`.**
-    (β2) **CHECKPOINTED (the SOLE remaining wall — the analytic content of RNC).**  Either the radial
-         identity of (β3) OR the pointwise bridge `rnc_christoffel_linearJet`:
+    (β3′) **THE RADIAL REDUCTION + THE MECHANICAL CYCLIC-GAUGE CAPSTONE — NOW LANDED axiom-clean
+         (`[propext, Classical.choice, Quot.sound]`).**  Two lemmas at the very end of this file:
+           - `dGammaDiag_pd_christoffel_expPullbackInv_reduce` : substituting the analytic half
+             `pd_christoffel_expPullbackInv_zero` into the radial diagonal `dGammaDiag` and using the
+             `j ↔ k` contraction symmetry, the radial-geodesic contraction becomes the CRISP pure
+             second-jet form
+               `dGammaDiag (…pd Γ̃…) v i
+                  = ½ ∑_α gi(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩)`,
+             where `⟨·⟩ := ∑_{l,j,k} · v^l v^j v^k`.  (Pure `Finset` algebra; helper `pull_alpha_out`.)
+           - `gauge_pd_christoffel_expPullbackInv_zero` : GIVEN the radial identity `hrad` (i.e.
+             `expPullback_radial_gauge`, the LHS of the reduction set to `0`), the full three-term CYCLIC
+             normal-coordinate gauge for `g̃`
+               `∂_c Γ̃^i_{ab}(0) + ∂_a Γ̃^i_{bc}(0) + ∂_b Γ̃^i_{ca}(0) = 0`
+             follows MECHANICALLY (`gaugeJet_of_diag` ⟹ six-fold `GaugeJet`, then
+             `pd_christoffel_expPullbackInv_lower_symm` + `cyclic_of_gaugeJet_lower_symm`).  This is
+             `heat_a1_of_gauge`'s `hgauge` for the pullback metric, discharged MODULO the single
+             hypothesis `hrad`.  So the endgame is now wired end-to-end: the ONLY missing input is the
+             radial scalar identity below.
+    (β2) **CHECKPOINTED (the SOLE remaining wall — the analytic content of RNC).**  With (β3′) landed,
+         the wall is EXACTLY the reduced scalar identity (drop the `hrad` hypothesis of
+         `gauge_pd_christoffel_expPullbackInv_zero` by proving `expPullback_radial_gauge`):
+           **`∑_α gi(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩) = 0`     (∀ v, i)**,
+         `⟨·⟩ := ∑_{l,j,k} · v^l v^j v^k` — the RHS of `dGammaDiag_pd_christoffel_expPullbackInv_reduce`.
+         Equivalently the radial identity of (β3) OR the pointwise bridge `rnc_christoffel_linearJet`:
            `pd (fun x => christoffel g̃ g̃⁻¹ i j k x) l 0
              = rncDΓ (fun i j k => christoffel g gi i j k p)
                      (fun l i j k => pd (fun z => christoffel g gi i j k z) l p) l i j k`.
@@ -2073,16 +2095,24 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
          `Γ,∂Γ` cubic reindexes onto `rncDΓ`/`a₃` via `a3rawArr_contract_eq_a3` (`QIQTH.RNCGaugeExp`) — for
          the radial route, `expJetD3_zero_diagonal` already gives the `∂²J` contraction in closed `−∂Γ+ΓΓ`
          form.  This is a LARGE multi-lemma `Finset`/`ring` collection (≈ the size of
-         `pd2_expPullbackMetric_at_zero` times the nine `pd_pd_mul3` terms times three brackets), a
-         reachable finite assembly, NOT a deep obstruction — but not closed in this session.
+         `pd2_expPullbackMetric_at_zero` times the nine `pd_pd_mul3` terms times two brackets `⟨T1⟩,⟨T3⟩`),
+         a reachable finite assembly, NOT a deep obstruction — but not closed in this session (the
+         `∂²J` term enters via the GENERAL, non-diagonal `pd2_jacobian_expMap_zero` =
+         `(1/6)(rncD3Block+3·rncCrossBlock)` at directions `(e_α, v, v)`, so the `expJetD3_zero_diagonal`
+         full-diagonal shortcut does NOT apply and the general contraction must be carried).
   VERDICT: (α1), (α2) [the two irreducible second-jet inputs], (β)-analytic-half
   [`pd_christoffel_expPullback_zero`] AND (β1) [`expPullbackMetricInv` + its 0-jet/differentiability +
   the instantiated `pd_christoffel_expPullbackInv_zero`] AND (β3) [the structural cyclic-gauge reduction:
   `expPullbackMetric_symm`, `pd_christoffel_expPullbackInv_lower_symm`, `cyclic_of_gaugeJet_lower_symm`]
+  AND (β3′) [the radial reduction `dGammaDiag_pd_christoffel_expPullbackInv_reduce` + the mechanical
+  cyclic-gauge capstone `gauge_pd_christoffel_expPullbackInv_zero` (modulo `hrad`)]
   are all LANDED axiom-clean, exceeding the guaranteed floor.  What remains for the full cyclic gauge is
-  ONLY (β2) — a single scalar `Finset` identity (the pullback RNC radial-geodesic identity, or the
-  pointwise `rncDΓ` match): the `∂²g`-cancellation via `christoffel_lower` + the `a3rawArr` reindexing —
-  a reachable finite assembly, not a deep obstruction.  Checkpoints landed:
+  ONLY (β2) — a single scalar `Finset` identity, now in its CRISP reduced form (the RHS of
+  `dGammaDiag_pd_christoffel_expPullbackInv_reduce` set to `0`):
+  `∑_α gi(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩) = 0` — the `∂²g`-cancellation via
+  `christoffel_lower` + the `a3rawArr` reindexing — a reachable finite assembly, not a deep obstruction.
+  Discharging it removes the `hrad` hypothesis of `gauge_pd_christoffel_expPullbackInv_zero`, making the
+  cyclic gauge UNCONDITIONAL.  Checkpoints landed:
   value + first-order + connection jets (`g̃(0)=g(p)`, `∂g̃(0)=0`, `Γ̃(0)=0`), the level-2
   differentiability core (`hasFDerivAt_fderiv2_expMap_zero`), the closed third-jet value + its `a₃`
   grounding (`expJetD3_zero_closed`/`expJetD3_zero_diagonal`), the closed `pd²g̃(0)` twice-Leibniz
@@ -2124,5 +2154,142 @@ theorem cyclic_of_gaugeJet_lower_symm (dΓ : Fin n → Fin n → Fin n → Fin n
   `C^∞` (or `C³`) pullback — an over-strong path.  The true blocker is the `⊤` in
   `heat_a1_of_gauge`, weakenable to finite `C²`.
 -/
+
+/-!
+### (β2) — THE RADIAL-GAUGE ENDGAME
+
+The reduction of the pullback RNC radial-geodesic identity to a pure second-jet contraction, and the
+mechanical assembly of the full cyclic normal-coordinate gauge for `g̃`.
+-/
+
+/-- **Generic `α`-pull for a triple radial contraction.**  `∑_{l,j,k} (∑_α c_α F_{α l j k}) v^l v^j v^k
+    = ∑_α c_α (∑_{l,j,k} F_{α l j k} v^l v^j v^k)`.  Pure `Finset` reordering. -/
+private lemma pull_alpha_out (c : Fin n → ℝ) (F : Fin n → Fin n → Fin n → Fin n → ℝ) (v : Fin n → ℝ) :
+    (∑ l, ∑ j, ∑ k, (∑ α, c α * F α l j k) * v l * v j * v k)
+      = ∑ α, c α * (∑ l, ∑ j, ∑ k, F α l j k * v l * v j * v k) := by
+  have hL : (∑ l, ∑ j, ∑ k, (∑ α, c α * F α l j k) * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ k, ∑ α, c α * F α l j k * v l * v j * v k :=
+    Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => by rw [Finset.sum_mul, Finset.sum_mul, Finset.sum_mul]
+  have hR : (∑ l, ∑ j, ∑ k, ∑ α, c α * F α l j k * v l * v j * v k)
+      = ∑ α, c α * (∑ l, ∑ j, ∑ k, F α l j k * v l * v j * v k) := by
+    rw [show (∑ l, ∑ j, ∑ k, ∑ α, c α * F α l j k * v l * v j * v k)
+          = ∑ l, ∑ j, ∑ α, ∑ k, c α * F α l j k * v l * v j * v k from
+        Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ => Finset.sum_comm]
+    rw [show (∑ l, ∑ j, ∑ α, ∑ k, c α * F α l j k * v l * v j * v k)
+          = ∑ l, ∑ α, ∑ j, ∑ k, c α * F α l j k * v l * v j * v k from
+        Finset.sum_congr rfl fun l _ => Finset.sum_comm]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun α _ => ?_
+    rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun l _ => ?_
+    rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun k _ => by ring
+  rw [hL, hR]
+
+open QIQTH.RNCGauge in
+/-- **Reduction of the radial contraction to the pullback second-jet.**  Substituting the analytic
+    half `pd_christoffel_expPullbackInv_zero` into the radial diagonal `dGammaDiag` and using the
+    `j ↔ k` symmetry of the contraction (which merges the first two bracket terms into a doubled one),
+    the radial-geodesic contraction becomes the pure `∂²g̃`-contraction combination
+      `½ ∑_α g⁻¹(p)^{iα}·(2·⟨∂_l∂_j g̃_{αk}⟩ − ⟨∂_l∂_α g̃_{jk}⟩)`,
+    where `⟨·⟩` denotes the radial contraction `∑_{l,j,k} · v^l v^j v^k`.  Pure `Finset` algebra
+    (distribute `½∑_α`, pull the `α`-sum out via `pull_alpha_out`, relabel `j ↔ k`); no analytic input
+    beyond the landed `pd_christoffel_expPullbackInv_zero`. -/
+theorem dGammaDiag_pd_christoffel_expPullbackInv_reduce (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (v : Point n) (i : Fin n) :
+    dGammaDiag (fun l i j k =>
+        pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i j k x) l 0) v i
+      = (1 / 2) * ∑ α, gi p i α *
+          (2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+                  expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+            - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+                  expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k)) := by
+  -- Unfold the diagonal contraction and the Christoffel first-jet.
+  simp only [dGammaDiag, pd_christoffel_expPullbackInv_zero g gi hC p hsymm hinv hg]
+  -- Fold the leading `½` into the `α`-coefficient, then pull the `α`-sum out (`pull_alpha_out`).
+  rw [show (∑ l, ∑ j, ∑ k, (1 / 2 * ∑ α, gi p i α *
+          (pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+            + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+            - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0))
+          * v l * v j * v k)
+        = ∑ l, ∑ j, ∑ k, (∑ α, (1 / 2 * gi p i α) *
+          (pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+            + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+            - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0))
+          * v l * v j * v k from
+      Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+        Finset.sum_congr rfl fun k _ => by rw [Finset.mul_sum]; ring_nf]
+  rw [pull_alpha_out (fun α => 1 / 2 * gi p i α)
+    (fun α l j k =>
+      pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+        + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+        - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0) v]
+  -- Split the bracket contraction; merge the two `T1`-type blocks by `j ↔ k` relabelling.
+  conv_rhs => rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun α _ => ?_
+  have hsplit : (∑ l, ∑ j, ∑ k,
+        (pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0
+          + pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0
+          - pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0)
+          * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k,
+          pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+        + (∑ l, ∑ j, ∑ k,
+          pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0 * v l * v j * v k)
+        - (∑ l, ∑ j, ∑ k,
+          pd (fun y => pd (fun x => expPullbackMetric g gi hC p x j k) α y) l 0
+            * v l * v j * v k) := by
+    simp only [add_mul, sub_mul, Finset.sum_add_distrib, Finset.sum_sub_distrib]
+  have hswap : (∑ l, ∑ j, ∑ k,
+        pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α j) k y) l 0 * v l * v j * v k)
+      = ∑ l, ∑ j, ∑ k,
+        pd (fun y => pd (fun x => expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k := by
+    refine Finset.sum_congr rfl fun l _ => ?_
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => by ring
+  rw [hsplit, hswap]; ring
+
+open QIQTH.RNCGauge in
+/-- **THE CYCLIC NORMAL-COORDINATE GAUGE for `g̃` (the `heat_a1_of_gauge` consumer).**  Given the
+    pullback RNC radial-geodesic identity `hrad` (the sole analytic wall, `expPullback_radial_gauge`),
+    the three-term cyclic sum of the pullback Christoffel first-jet at the centre vanishes:
+      `∂_c Γ̃^i_{ab}(0) + ∂_a Γ̃^i_{bc}(0) + ∂_b Γ̃^i_{ca}(0) = 0`.
+    Mechanical assembly: the radial diagonal vanishing `hrad` gives the six-fold `GaugeJet` via
+    `QIQTH.RNCGauge.gaugeJet_of_diag`; the lower-symmetry `pd_christoffel_expPullbackInv_lower_symm`
+    (from `g̃` symmetric) collapses the six permutations to `2×` the cyclic sum via
+    `cyclic_of_gaugeJet_lower_symm`.  This is `heat_a1_of_gauge`'s `hgauge` for the pullback metric,
+    modulo the single hypothesis `hrad` (which is `dGammaDiag_pd_christoffel_expPullbackInv_reduce`'s
+    left-hand side set to zero — the checkpointed radial identity). -/
+theorem gauge_pd_christoffel_expPullbackInv_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hrad : ∀ (v : Point n) (i : Fin n),
+      dGammaDiag (fun l i j k =>
+        pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i j k x) l 0) v i = 0)
+    (i a b c : Fin n) :
+    pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i a b x) c 0
+      + pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i b c x) a 0
+      + pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i c a x) b 0 = 0 := by
+  have hgj : GaugeJet (fun l i j k =>
+      pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+        i j k x) l 0) :=
+    gaugeJet_of_diag _ hrad
+  have hsym : ∀ l i' j k,
+      (fun l i j k => pd (fun x => christoffel (expPullbackMetric g gi hC p)
+          (expPullbackMetricInv g gi hC p) i j k x) l 0) l i' j k
+        = (fun l i j k => pd (fun x => christoffel (expPullbackMetric g gi hC p)
+          (expPullbackMetricInv g gi hC p) i j k x) l 0) l i' k j :=
+    fun l i' j k => pd_christoffel_expPullbackInv_lower_symm g gi hC p hsymm i' j k l
+  have hcyc := cyclic_of_gaugeJet_lower_symm _ hsym hgj i a b c
+  linarith [hcyc]
 
 end QIQTH.PullbackMetric

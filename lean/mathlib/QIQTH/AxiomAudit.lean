@@ -10571,6 +10571,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.expPullbackMetric_symm
 #print axioms QIQTH.PullbackMetric.pd_christoffel_expPullbackInv_lower_symm
 #print axioms QIQTH.PullbackMetric.cyclic_of_gaugeJet_lower_symm
+-- ★ PARAMETRIX P1 R3→κ (bridge β3′ — radial reduction + the CONDITIONAL cyclic gauge) (PullbackMetric.lean).
+-- dGammaDiag_pd_christoffel_expPullbackInv_reduce: substituting pd_christoffel_expPullbackInv_zero into
+-- RNCGauge.dGammaDiag + the j↔k contraction symmetry (merges the first two brackets into a doubled one) proves
+-- dGammaDiag(pd(christoffel g̃ g̃⁻¹)0) v i = ½∑_α gi(p)^{iα}(2·⟨∂_l∂_j g̃_αk⟩ − ⟨∂_l∂_α g̃_jk⟩) (⟨·⟩ = ∑_{ljk}·vˡvʲvᵏ);
+-- pure Finset algebra (helper pull_alpha_out).  ★ gauge_pd_christoffel_expPullbackInv_zero: the cyclic
+-- normal-coord gauge ∂_c Γ̃^i_ab(0)+∂_a Γ̃^i_bc(0)+∂_b Γ̃^i_ca(0)=0 (= heat_a1_of_gauge's hgauge for g̃), proved
+-- MECHANICALLY from gaugeJet_of_diag + pd_christoffel_expPullbackInv_lower_symm + cyclic_of_gaugeJet_lower_symm.
+-- ⚠ CONDITIONAL on the EXPLICIT NON-VACUOUS hypothesis hrad = the pullback RNC radial identity
+-- (∀ v i, dGammaDiag(pd(christoffel g̃)0) v i = 0) — NOT a Lean axiom, NOT vacuous; it is the SOLE remaining
+-- obligation, crisply reduced to ∑_α gi(p)^{iα}(2·⟨∂_l∂_j g̃_αk⟩ − ⟨∂_l∂_α g̃_jk⟩)=0.  HONEST FINDING: the ∂²J term
+-- enters via the GENERAL non-diagonal pd2_jacobian_expMap_zero at directions (e_α,v,v), so the expJetD3_zero_diagonal
+-- full-diagonal shortcut does NOT apply — the general ~300-500-line Finset/ring contraction (christoffel_lower
+-- ∂²g-cancellation + a3rawArr_contract_eq_a3 reindex) must be carried; NOT closed this session, NOT sorry'd.
+-- Does NOT yet give the UNCONDITIONAL gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3 (conditional).
+#print axioms QIQTH.PullbackMetric.dGammaDiag_pd_christoffel_expPullbackInv_reduce
+#print axioms QIQTH.PullbackMetric.gauge_pd_christoffel_expPullbackInv_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).
