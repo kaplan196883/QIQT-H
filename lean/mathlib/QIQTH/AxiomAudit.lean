@@ -10656,6 +10656,25 @@ namespace QIQTH.AxiomAudit
 -- gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.hpd2_A_expand
 #print axioms QIQTH.PullbackMetric.hpd2_B_expand
+-- ★ PARAMETRIX P1 R3→κ (hpd2 block-folding + Kronecker collapse) (PullbackMetric.lean).  The two-slot contraction
+-- infrastructure (the missing tree piece for the α2 blocks entering NON-diagonally) + the folded closed forms.
+-- rncD3Block_contract2_{leftfix,mid} / rncCrossBlock_contract2_{sources,dirsource,dirsk}: the two-slot
+-- ∑x∑y w·u·block(…e-fixed…) = block(…w…,…u…) folds (one slot fixed at a basis vector, two contracted);
+-- rncD3Block_contract3 / rncCrossBlock_contract3: the full three-slot diagonal folds.  ★ hpd2_A_folded /
+-- hpd2_B_folded: A_α (resp B_α) = the fully v-contracted 9-term sum fold1..fold9 with every α2 block folded to the
+-- ledger forms — A: 1/6(D3(e_α,v,v)+Cross(e_α,v,v)+2·Cross(v,e_α,v)) (fold5, a=α,b=k Kronecker) + D3(v,v,v)+3Cross(v,v,v)
+-- (fold9, 3-slot); B: 1/6(D3(v,e_α,v)+Cross(v,e_α,v)+Cross(e_α,v,v)+Cross(v,v,e_α)) with the a=j collapse and α in the
+-- MIDDLE slot (fold9 two-slot, j FREE).  RHS fully explicit in {∂²g(p),∂g(p),Γ(p),∂Γ(p),g(p)} (no residual blocks/
+-- Pi.single).  HONEST — the α1 metric-compat cancellation (hpd2_alpha1_cancel via pd_christoffel_lower_fn across
+-- 2A−B) + the Γ,∂Γ rncDΓ reindex (hpd2_cubic_vanish) + the final 2A−B=0 assembly (expPullback_hpd2) all REMAIN.  Does
+-- NOT give hpd2 / the unconditional gauge / κ=1/6 / P2 / general a₁=R/6 / numerical-G.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.rncD3Block_contract2_mid
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_contract2_dirsource
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_contract2_dirsk
+#print axioms QIQTH.PullbackMetric.rncD3Block_contract3
+#print axioms QIQTH.PullbackMetric.rncCrossBlock_contract3
+#print axioms QIQTH.PullbackMetric.hpd2_A_folded
+#print axioms QIQTH.PullbackMetric.hpd2_B_folded
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

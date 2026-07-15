@@ -3086,4 +3086,813 @@ theorem hpd2_B_expand (g gi : Point n → Fin n → Fin n → ℝ)
   simp only [expPullbackMetric_pd2_closed g gi hC p hg]
   exact contract_ab_expand _ v
 
+/-! ### (β3) — TWO-SLOT block contractions (the FLOOR helpers for the α2-block folding)
+
+These are the two-slot analogues of the step-(i) single-slot `rncD3Block_contract_{left,mid,right}` /
+`rncCrossBlock_contract_{dir,sk,sl}`.  Each fixes ONE block slot at a basis vector `e` and contracts the
+OTHER two slots against weights `w`/`u` over the standard basis — exactly the shape the α2 second jet
+enters with in `hpd2_A_expand`/`hpd2_B_expand` (two derivative slots run against `v`, one slot stays at
+the fixed `e_α`).  Same proof style: compose the two relevant single-slot `_contract_*` lemmas and pull
+the first weight into the inner sum. -/
+
+/-- **Two-slot contraction of `rncD3Block`, LEFT slot fixed** (contract mid + right against `w`/`u`).
+    Produces the `D3(e, w, u)` fold (`e_α` in the first slot, the other two contracted). -/
+theorem rncD3Block_contract2_leftfix (g gi : Point n → Fin n → Fin n → ℝ) (p e w u : Point n)
+    (i : Fin n) :
+    rncD3Block g gi p e w u i
+      = ∑ x, ∑ y, w x * u y * rncD3Block g gi p e (Pi.single x 1) (Pi.single y 1) i := by
+  rw [rncD3Block_contract_mid]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncD3Block_contract_right, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun y _ => by ring
+
+/-- **Two-slot contraction of `rncD3Block`, MID slot fixed** (contract left + right against `w`/`u`).
+    Produces the `D3(w, e, u)` fold (`e_α` in the middle slot, the other two contracted) — the two-slot
+    analogue of `rncD3Block_contract_mid`, per the ledger's B-structure. -/
+theorem rncD3Block_contract2_mid (g gi : Point n → Fin n → Fin n → ℝ) (p w e u : Point n)
+    (i : Fin n) :
+    rncD3Block g gi p w e u i
+      = ∑ x, ∑ y, w x * u y * rncD3Block g gi p (Pi.single x 1) e (Pi.single y 1) i := by
+  rw [rncD3Block_contract_left]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncD3Block_contract_right, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun y _ => by ring
+
+/-- **Two-slot contraction of `rncCrossBlock`, DIRECTION slot fixed** (contract both sources `sk`,`sl`).
+    Produces the `Cross(e, w, u)` fold. -/
+theorem rncCrossBlock_contract2_sources (g gi : Point n → Fin n → Fin n → ℝ) (p e w u : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p e w u i
+      = ∑ x, ∑ y, w x * u y * rncCrossBlock g gi p e (Pi.single x 1) (Pi.single y 1) i := by
+  rw [rncCrossBlock_contract_sk]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncCrossBlock_contract_sl, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun y _ => by ring
+
+/-- **Two-slot contraction of `rncCrossBlock`, one SOURCE slot (`sk`) fixed** (contract `dir` + `sl`).
+    Produces the `Cross(w, e, u)` fold — the fixed derivative-source-slot two-slot contraction the
+    ledger flags for the `A`/`B` cross terms. -/
+theorem rncCrossBlock_contract2_dirsource (g gi : Point n → Fin n → Fin n → ℝ) (p w e u : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p w e u i
+      = ∑ x, ∑ y, w x * u y * rncCrossBlock g gi p (Pi.single x 1) e (Pi.single y 1) i := by
+  rw [rncCrossBlock_contract_dir]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncCrossBlock_contract_sl, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun y _ => by ring
+
+/-- **Two-slot contraction of `rncCrossBlock`, second SOURCE slot (`sl`) fixed** (contract `dir` + `sk`).
+    Produces the `Cross(w, u, e)` fold — the `Cross(v,v,e_α)` shape B's T5 needs. -/
+theorem rncCrossBlock_contract2_dirsk (g gi : Point n → Fin n → Fin n → ℝ) (p w u e : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p w u e i
+      = ∑ x, ∑ y, w x * u y * rncCrossBlock g gi p (Pi.single x 1) (Pi.single y 1) e i := by
+  rw [rncCrossBlock_contract_dir]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncCrossBlock_contract_sk, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun y _ => by ring
+
+/-- **4-index reorder lining up the pulled `j` index next to the `b` factor** (per the ledger's
+    B-structure note: the `g_{jb}` factor of the T9 block wants `j` adjacent to `b`).  Pure inner
+    `Finset.sum_comm`. -/
+private lemma reorder4_jb (F : Fin n → Fin n → Fin n → Fin n → ℝ) :
+    (∑ a, ∑ b, ∑ l, ∑ j, F a b l j) = ∑ a, ∑ b, ∑ j, ∑ l, F a b l j :=
+  Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => Finset.sum_comm
+
+/-! ### (β3) — the block-folding + Kronecker-collapse infrastructure for `hpd2_A_folded`
+
+The reorders, `Pi.single` collapse helpers, three-slot contractions and the two- and three-slot folds
+that turn the `∑_a∑_b`-outer closed second jet of `hpd2_A_expand` into its fully `v`-contracted form.
+All pure `Finset`/`ring` scalar identities. -/
+
+-- reorders
+private lemma reorder_b_inner (F : Fin n → Fin n → Fin n → Fin n → ℝ) :
+    (∑ b, ∑ l, ∑ j, ∑ k, F b l j k) = ∑ l, ∑ j, ∑ k, ∑ b, F b l j k := by
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun l _ => ?_
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.sum_comm]
+
+private lemma reorder3_last_first (H : Fin n → Fin n → Fin n → ℝ) :
+    (∑ l, ∑ j, ∑ k, H l j k) = ∑ k, ∑ l, ∑ j, H l j k := by
+  rw [show (∑ l, ∑ j, ∑ k, H l j k) = ∑ l, ∑ k, ∑ j, H l j k from
+      Finset.sum_congr rfl fun l _ => Finset.sum_comm]
+  rw [Finset.sum_comm]
+
+private lemma reorder_a_inner5 (F : Fin n → Fin n → Fin n → Fin n → Fin n → ℝ) :
+    (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, F a b l j k) = ∑ b, ∑ l, ∑ j, ∑ k, ∑ a, F a b l j k := by
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun l _ => ?_
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.sum_comm]
+
+private lemma reorder3_rev (F : Fin n → Fin n → Fin n → ℝ) :
+    (∑ l, ∑ j, ∑ k, F l j k) = ∑ k, ∑ j, ∑ l, F l j k := by
+  rw [show (∑ l, ∑ j, ∑ k, F l j k) = ∑ l, ∑ k, ∑ j, F l j k from
+      Finset.sum_congr rfl fun l _ => Finset.sum_comm]
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun k _ => Finset.sum_comm
+
+private lemma reorder3_jkl (F : Fin n → Fin n → Fin n → ℝ) :
+    (∑ l, ∑ j, ∑ k, F l j k) = ∑ j, ∑ k, ∑ l, F l j k := by
+  rw [Finset.sum_comm]; refine Finset.sum_congr rfl fun j _ => Finset.sum_comm
+
+private lemma reorder3_lkj (F : Fin n → Fin n → Fin n → ℝ) :
+    (∑ l, ∑ j, ∑ k, F l j k) = ∑ l, ∑ k, ∑ j, F l j k :=
+  Finset.sum_congr rfl fun _ _ => Finset.sum_comm
+
+-- collapse helpers
+private lemma sum_mul_single_right (F : Fin n → ℝ) (k : Fin n) :
+    (∑ b, F b * (Pi.single k 1 : Point n) b) = F k := by
+  simp [Pi.single_apply, Finset.sum_ite_eq']
+
+private lemma collapse_single_mul (F : Fin n → ℝ) (k : Fin n) (R : ℝ) :
+    (∑ b, F b * (Pi.single k 1 : Point n) b * R) = F k * R := by
+  rw [show (∑ b, F b * (Pi.single k 1 : Point n) b * R)
+        = (∑ b, F b * (Pi.single k 1 : Point n) b) * R from by rw [Finset.sum_mul]]
+  rw [sum_mul_single_right]
+
+private lemma sum_single_mul_left (H : Fin n → ℝ) (α : Fin n) :
+    (∑ a, (Pi.single α 1 : Point n) a * H a) = H α := by
+  simp [Pi.single_apply, Finset.sum_ite_eq']
+
+private lemma double_collapse (G : Fin n → Fin n → ℝ) (α k : Fin n) (R : ℝ) :
+    (∑ a, ∑ b, G a b * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * R)
+      = G α k * R := by
+  rw [show (∑ a, ∑ b, G a b * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * R)
+        = ∑ a, (Pi.single α 1 : Point n) a * (∑ b, G a b * (Pi.single k 1 : Point n) b * R) from
+      Finset.sum_congr rfl fun a _ => by
+        rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun b _ => by ring]
+  rw [sum_single_mul_left (fun a => ∑ b, G a b * (Pi.single k 1 : Point n) b * R) α]
+  exact collapse_single_mul (fun b => G α b) k R
+
+private lemma double_collapse3 (G : Fin n → Fin n → ℝ) (α k : Fin n) (r1 r2 r3 : ℝ) :
+    (∑ a, ∑ b, G a b * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * r1 * r2 * r3)
+      = G α k * r1 * r2 * r3 := by
+  rw [show (∑ a, ∑ b,
+        G a b * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * r1 * r2 * r3)
+        = ∑ a, ∑ b,
+          G a b * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * (r1 * r2 * r3) from
+      Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => by ring]
+  rw [double_collapse]; ring
+
+private lemma reorder_ab_inner5 (F : Fin n → Fin n → Fin n → Fin n → Fin n → ℝ) :
+    (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, F a b l j k) = ∑ l, ∑ j, ∑ k, ∑ a, ∑ b, F a b l j k := by
+  rw [reorder_a_inner5 (fun a b l j k => F a b l j k)]
+  rw [reorder_a_inner5 (fun b l j k a => F a b l j k)]
+
+/-- **Full three-slot (diagonal) contraction of `rncD3Block`.** -/
+theorem rncD3Block_contract3 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (i : Fin n) :
+    rncD3Block g gi p v v v i
+      = ∑ x, ∑ y, ∑ z, v x * v y * v z *
+          rncD3Block g gi p (Pi.single x 1) (Pi.single y 1) (Pi.single z 1) i := by
+  rw [rncD3Block_contract_left]; refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncD3Block_contract_mid, Finset.mul_sum]; refine Finset.sum_congr rfl fun y _ => ?_
+  rw [rncD3Block_contract_right, Finset.mul_sum, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun z _ => by ring
+
+/-- **Full three-slot (diagonal) contraction of `rncCrossBlock`.** -/
+theorem rncCrossBlock_contract3 (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (i : Fin n) :
+    rncCrossBlock g gi p v v v i
+      = ∑ x, ∑ y, ∑ z, v x * v y * v z *
+          rncCrossBlock g gi p (Pi.single x 1) (Pi.single y 1) (Pi.single z 1) i := by
+  rw [rncCrossBlock_contract_dir]; refine Finset.sum_congr rfl fun x _ => ?_
+  rw [rncCrossBlock_contract_sk, Finset.mul_sum]; refine Finset.sum_congr rfl fun y _ => ?_
+  rw [rncCrossBlock_contract_sl, Finset.mul_sum, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun z _ => by ring
+
+-- 2-slot folds (l outer, j inner; weights v l v j)
+private lemma foldD3_leftfix (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) (a : Fin n) :
+    (∑ l, ∑ j, rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a * v l * v j)
+      = rncD3Block g gi p (Pi.single α 1) v v a := by
+  rw [rncD3Block_contract2_leftfix g gi p (Pi.single α 1) v v a, Finset.sum_comm]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_sources (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) (a : Fin n) :
+    (∑ l, ∑ j, rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a * v l * v j)
+      = rncCrossBlock g gi p (Pi.single α 1) v v a := by
+  rw [rncCrossBlock_contract2_sources g gi p (Pi.single α 1) v v a, Finset.sum_comm]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_dirsource_jl (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) (a : Fin n) :
+    (∑ l, ∑ j, rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a * v l * v j)
+      = rncCrossBlock g gi p v (Pi.single α 1) v a := by
+  rw [rncCrossBlock_contract2_dirsource g gi p v (Pi.single α 1) v a, Finset.sum_comm]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_dirsource_lj (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) (a : Fin n) :
+    (∑ l, ∑ j, rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1) a * v l * v j)
+      = rncCrossBlock g gi p v (Pi.single α 1) v a := by
+  rw [rncCrossBlock_contract2_dirsource g gi p v (Pi.single α 1) v a]
+  exact Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ => by ring
+
+-- 2-slot folds with the MIDDLE slot fixed (for the B-bracket's `α`-in-mid-slot blocks)
+private lemma foldD3_midfix (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) (a : Fin n) :
+    (∑ l, ∑ j, rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a * v l * v j)
+      = rncD3Block g gi p v (Pi.single α 1) v a := by
+  rw [rncD3Block_contract2_mid g gi p v (Pi.single α 1) v a, Finset.sum_comm]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_dirsk (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n)
+    (v : Point n) (a : Fin n) :
+    (∑ l, ∑ j, rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1) a * v l * v j)
+      = rncCrossBlock g gi p v v (Pi.single α 1) a := by
+  rw [rncCrossBlock_contract2_dirsk g gi p v v (Pi.single α 1) a]
+  exact Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ => by ring
+
+-- 3-slot folds (l outer, j mid, k inner; weights v l v j v k)
+private lemma foldD3_all (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (b : Fin n) :
+    (∑ l, ∑ j, ∑ k,
+        rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b * v l * v j * v k)
+      = rncD3Block g gi p v v v b := by
+  rw [rncD3Block_contract3 g gi p v b, reorder3_rev]
+  exact Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
+    Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_all_kjl (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (b : Fin n) :
+    (∑ l, ∑ j, ∑ k,
+        rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b * v l * v j * v k)
+      = rncCrossBlock g gi p v v v b := by
+  rw [rncCrossBlock_contract3 g gi p v b, reorder3_rev]
+  exact Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
+    Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_all_jkl (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (b : Fin n) :
+    (∑ l, ∑ j, ∑ k,
+        rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1) b * v l * v j * v k)
+      = rncCrossBlock g gi p v v v b := by
+  rw [rncCrossBlock_contract3 g gi p v b, reorder3_jkl]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ =>
+    Finset.sum_congr rfl fun l _ => by ring
+
+private lemma foldCross_all_lkj (g gi : Point n → Fin n → Fin n → ℝ) (p v : Point n) (b : Fin n) :
+    (∑ l, ∑ j, ∑ k,
+        rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1) b * v l * v j * v k)
+      = rncCrossBlock g gi p v v v b := by
+  rw [rncCrossBlock_contract3 g gi p v b, reorder3_lkj]
+  exact Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun k _ =>
+    Finset.sum_congr rfl fun j _ => by ring
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_A_folded` — the FOLDED closed form of the A-bracket of `hpd2`.**  Starting from
+    `hpd2_A_expand`, the `∑_a∑_b` Kronecker `Pi.single` couplings are collapsed (a=α / b=k where they
+    occur) and the two `α2` blocks are folded against `v`: the metric-jet block reduces to the ledger
+    form `1/6•(D3(e_α,v,v) + Cross(e_α,v,v) + 2·Cross(v,e_α,v))` (T5) and the Jacobian block to the
+    full-diagonal `1/6•(D3(v,v,v) + 3·Cross(v,v,v))` (T9).  RHS is the explicit scalar sum in
+    `{∂²g(p), ∂g(p), Γ(p), ∂Γ(p), g(p)}` fully contracted with `v` (no residual `Pi.single` in
+    derivative slots).  NO α1-cancellation / cubic reindex / 2A−B assembly — those are later bricks. -/
+theorem hpd2_A_folded (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (α : Fin n) (v : Point n) :
+    (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+      = -- fold1 (a=α,b=k)
+        (∑ l, ∑ j, ∑ k,
+          (pd (fun z => pd (fun y => g y α k) j z) l p
+              + ∑ c, pd (fun y => g y α k) c p
+                  * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+            * v l * v j * v k)
+        -- fold2 (b=k)
+        + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) j p
+            * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p)) * v l * v j * v k)
+        -- fold3 (a=α)
+        + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y α b) j p
+            * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+        -- fold4 (b=k)
+        + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) l p
+            * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p)) * v l * v j * v k)
+        -- fold5 (block, b=k)
+        + (∑ a, ∑ k, g p a k * v k *
+            ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+                + rncCrossBlock g gi p (Pi.single α 1) v v a
+                + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)))
+        -- fold6 = S6 (no Kronecker)
+        + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+            * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+            * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+        -- fold7 (a=α)
+        + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y α b) l p
+            * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+        -- fold8 = S8 (no Kronecker)
+        + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+            * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+            * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+        -- fold9 (block, a=α, 3-slot fold)
+        + (∑ b, g p α b *
+            ((1 / 6 : ℝ) * (rncD3Block g gi p v v v b + 3 * rncCrossBlock g gi p v v v b))) := by
+  have hS1 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k,
+        (pd (fun z => pd (fun y => g y a b) j z) l p
+            + ∑ c, pd (fun y => g y a b) c p
+                * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+          * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k,
+          (pd (fun z => pd (fun y => g y α k) j z) l p
+              + ∑ c, pd (fun y => g y α k) c p
+                  * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+            * v l * v j * v k) := by
+    rw [reorder_ab_inner5 (fun a b l j k =>
+        (pd (fun z => pd (fun y => g y a b) j z) l p
+            + ∑ c, pd (fun y => g y a b) c p
+                * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p)))
+          * (Pi.single α 1 : Point n) a * (Pi.single k 1 : Point n) b * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    exact double_collapse3 (fun a b => pd (fun z => pd (fun y => g y a b) j z) l p
+          + ∑ c, pd (fun y => g y a b) c p
+              * (1 / 2 * (-christoffel g gi c j l p - christoffel g gi c l j p))) α k
+        (v l) (v j) (v k)
+  have hS2 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) j p
+        * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) j p
+          * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p)) * v l * v j * v k) := by
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [reorder_b_inner (fun b l j k => pd (fun y => g y a b) j p
+        * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun b _ => show pd (fun y => g y a b) j p
+          * (1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p))
+          * (Pi.single k 1 : Point n) b * v l * v j * v k
+        = pd (fun y => g y a b) j p * (Pi.single k 1 : Point n) b
+          * ((1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun b => pd (fun y => g y a b) j p) k
+        ((1 / 2 * (-christoffel g gi a α l p - christoffel g gi a l α p)) * v l * v j * v k)]
+    ring
+  have hS3 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) j p * (Pi.single α 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+      = (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y α b) j p
+          * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k) := by
+    rw [reorder_a_inner5 (fun a b l j k => pd (fun y => g y a b) j p * (Pi.single α 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun l _ =>
+      Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun a _ => show pd (fun y => g y a b) j p * (Pi.single α 1 : Point n) a
+          * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k
+        = pd (fun y => g y a b) j p * (Pi.single α 1 : Point n) a
+          * ((1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun a => pd (fun y => g y a b) j p) α
+        ((1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)]
+    ring
+  have hS4 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) l p
+        * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) l p
+          * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p)) * v l * v j * v k) := by
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [reorder_b_inner (fun b l j k => pd (fun y => g y a b) l p
+        * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun b _ => show pd (fun y => g y a b) l p
+          * (1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p))
+          * (Pi.single k 1 : Point n) b * v l * v j * v k
+        = pd (fun y => g y a b) l p * (Pi.single k 1 : Point n) b
+          * ((1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun b => pd (fun y => g y a b) l p) k
+        ((1 / 2 * (-christoffel g gi a α j p - christoffel g gi a j α p)) * v l * v j * v k)]
+    ring
+  have hS5 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b *
+          ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1))) a
+          * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ a, ∑ k, g p a k * v k *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+              + rncCrossBlock g gi p (Pi.single α 1) v v a
+              + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a))) := by
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [reorder_b_inner (fun b l j k => g p a b *
+        ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1))) a
+        * (Pi.single k 1 : Point n) b * v l * v j * v k),
+      reorder3_last_first]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    have hstep : ∀ l j : Fin n,
+        (∑ b, g p a b *
+            ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1))) a
+            * (Pi.single k 1 : Point n) b * v l * v j * v k)
+          = g p a k * v k *
+              ((1 / 6 : ℝ) *
+                (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+                  + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+                  + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1) a))
+                * v l * v j := by
+      intro l j
+      set B : ℝ :=
+        ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1))) a with hBdef
+      rw [Finset.sum_congr rfl (fun b _ => show g p a b * B * (Pi.single k 1 : Point n) b * v l * v j * v k
+            = (g p a b * (Pi.single k 1 : Point n) b) * (B * v l * v j * v k) from by ring)]
+      rw [← Finset.sum_mul, sum_mul_single_right, hBdef]
+      simp only [Pi.smul_apply, Pi.add_apply, smul_eq_mul]; ring
+    simp only [hstep]
+    rw [show (∑ l, ∑ j, g p a k * v k *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1) a)) * v l * v j)
+        = g p a k * v k * (1 / 6 : ℝ) *
+          (∑ l, ∑ j,
+            (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+              + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+              + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+              + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1) a) * v l * v j)
+        from by
+      rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun l _ => ?_
+      rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by ring]
+    rw [show (∑ l, ∑ j,
+          (rncD3Block g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single α 1) (Pi.single j 1) a) * v l * v j)
+        = rncD3Block g gi p (Pi.single α 1) v v a + rncCrossBlock g gi p (Pi.single α 1) v v a
+          + rncCrossBlock g gi p v (Pi.single α 1) v a + rncCrossBlock g gi p v (Pi.single α 1) v a
+        from by
+      simp only [add_mul, Finset.sum_add_distrib]
+      rw [foldD3_leftfix, foldCross_sources, foldCross_dirsource_jl, foldCross_dirsource_lj]]
+    ring
+  have hS7 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) l p * (Pi.single α 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+      = (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y α b) l p
+          * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k) := by
+    rw [reorder_a_inner5 (fun a b l j k => pd (fun y => g y a b) l p * (Pi.single α 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun l _ =>
+      Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun a _ => show pd (fun y => g y a b) l p * (Pi.single α 1 : Point n) a
+          * (1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k
+        = pd (fun y => g y a b) l p * (Pi.single α 1 : Point n) a
+          * ((1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun a => pd (fun y => g y a b) l p) α
+        ((1 / 2 * (-christoffel g gi b k j p - christoffel g gi b j k p)) * v l * v j * v k)]
+    ring
+  have hS9 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b * (Pi.single α 1 : Point n) a
+          * ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1))) b
+          * v l * v j * v k)
+      = (∑ b, g p α b *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p v v v b + 3 * rncCrossBlock g gi p v v v b))) := by
+    rw [reorder_a_inner5 (fun a b l j k => g p a b * (Pi.single α 1 : Point n) a
+        * ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1))) b
+        * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun b _ => ?_
+    have hcol : ∀ l j k : Fin n,
+        (∑ a, g p a b * (Pi.single α 1 : Point n) a
+            * ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1))) b
+            * v l * v j * v k)
+          = g p α b * v l * v j * v k *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1) b)) := by
+      intro l j k
+      set B : ℝ :=
+        ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1))) b with hBdef
+      rw [Finset.sum_congr rfl (fun a _ => show g p a b * (Pi.single α 1 : Point n) a * B * v l * v j * v k
+            = g p a b * (Pi.single α 1 : Point n) a * (B * v l * v j * v k) from by ring)]
+      rw [show (∑ a, g p a b * (Pi.single α 1 : Point n) a * (B * v l * v j * v k))
+            = (∑ a, (Pi.single α 1 : Point n) a * (g p a b)) * (B * v l * v j * v k) from by
+          rw [Finset.sum_mul]; exact Finset.sum_congr rfl fun a _ => by ring]
+      rw [sum_single_mul_left (fun a => g p a b) α, hBdef]
+      simp only [Pi.smul_apply, Pi.add_apply, smul_eq_mul]; ring
+    simp only [hcol]
+    rw [show (∑ l, ∑ j, ∑ k, g p α b * v l * v j * v k *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1) b)))
+        = g p α b * (1 / 6 : ℝ) *
+            (∑ l, ∑ j, ∑ k,
+              (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1) b)
+              * v l * v j * v k) from by
+      rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun l _ => ?_
+      rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun j _ => ?_
+      rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun k _ => by ring]
+    rw [show (∑ l, ∑ j, ∑ k,
+          (rncD3Block g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single k 1) (Pi.single j 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single k 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single j 1) b)
+          * v l * v j * v k)
+        = rncD3Block g gi p v v v b + rncCrossBlock g gi p v v v b
+          + rncCrossBlock g gi p v v v b + rncCrossBlock g gi p v v v b from by
+      simp only [add_mul, Finset.sum_add_distrib]
+      rw [foldD3_all, foldCross_all_kjl, foldCross_all_jkl, foldCross_all_lkj]]
+    ring
+  rw [hpd2_A_expand g gi hC p hg α v, ← hS1, ← hS2, ← hS3, ← hS4, ← hS5, ← hS7, ← hS9]
+  simp only [add_mul, Finset.sum_add_distrib]
+
+set_option maxHeartbeats 6400000 in
+/-- **`hpd2_B_folded` — the FOLDED closed form of the B-bracket of `hpd2`.**  Same treatment as
+    `hpd2_A_folded`, applied to `hpd2_B_expand`.  Note the B-structure: the metric first index is the
+    contraction index `j` (a bound variable), so the `∑_a` Kronecker collapses to `a=j` (not the fixed
+    `α`); the two `α2` blocks carry `α` in the MIDDLE (source/mid) slot.  T5 folds (over `j,l`, free `k`)
+    to `1/6•(D3(v,e_α,v) + Cross(v,e_α,v) + Cross(e_α,v,v) + Cross(v,v,e_α))`; T9 folds (over `k,l`, with
+    `j` a FREE index — a two-slot fold, NOT the full-diagonal three-slot fold of A's T9) to the same
+    block combination indexed at `b`.  RHS is the explicit `v`-contracted scalar sum. -/
+theorem hpd2_B_folded (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (α : Fin n) (v : Point n) :
+    (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+        expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k,
+          (pd (fun z => pd (fun y => g y j k) α z) l p
+              + ∑ c, pd (fun y => g y j k) c p
+                  * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+            * v l * v j * v k)
+        + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) α p
+            * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p)) * v l * v j * v k)
+        + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y j b) α p
+            * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+        + (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) l p
+            * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p)) * v l * v j * v k)
+        + (∑ a, ∑ k, g p a k * v k *
+            ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+                + rncCrossBlock g gi p v (Pi.single α 1) v a
+                + rncCrossBlock g gi p (Pi.single α 1) v v a
+                + rncCrossBlock g gi p v v (Pi.single α 1) a)))
+        + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+            * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+            * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+        + (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y j b) l p
+            * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+        + (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b
+            * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+            * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+        + (∑ b, ∑ j, g p j b * v j *
+            ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+                + rncCrossBlock g gi p v (Pi.single α 1) v b
+                + rncCrossBlock g gi p (Pi.single α 1) v v b
+                + rncCrossBlock g gi p v v (Pi.single α 1) b))) := by
+  have hS1 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k,
+        (pd (fun z => pd (fun y => g y a b) α z) l p
+            + ∑ c, pd (fun y => g y a b) c p
+                * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+          * (Pi.single j 1 : Point n) a * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ l, ∑ j, ∑ k,
+          (pd (fun z => pd (fun y => g y j k) α z) l p
+              + ∑ c, pd (fun y => g y j k) c p
+                  * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+            * v l * v j * v k) := by
+    rw [reorder_ab_inner5 (fun a b l j k =>
+        (pd (fun z => pd (fun y => g y a b) α z) l p
+            + ∑ c, pd (fun y => g y a b) c p
+                * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p)))
+          * (Pi.single j 1 : Point n) a * (Pi.single k 1 : Point n) b * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    exact double_collapse3 (fun a b => pd (fun z => pd (fun y => g y a b) α z) l p
+          + ∑ c, pd (fun y => g y a b) c p
+              * (1 / 2 * (-christoffel g gi c α l p - christoffel g gi c l α p))) j k
+        (v l) (v j) (v k)
+  have hS2 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) α p
+        * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) α p
+          * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p)) * v l * v j * v k) := by
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [reorder_b_inner (fun b l j k => pd (fun y => g y a b) α p
+        * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun b _ => show pd (fun y => g y a b) α p
+          * (1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p))
+          * (Pi.single k 1 : Point n) b * v l * v j * v k
+        = pd (fun y => g y a b) α p * (Pi.single k 1 : Point n) b
+          * ((1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun b => pd (fun y => g y a b) α p) k
+        ((1 / 2 * (-christoffel g gi a j l p - christoffel g gi a l j p)) * v l * v j * v k)]
+    ring
+  have hS3 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) α p * (Pi.single j 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+      = (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y j b) α p
+          * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k) := by
+    rw [reorder_a_inner5 (fun a b l j k => pd (fun y => g y a b) α p * (Pi.single j 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun l _ =>
+      Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun a _ => show pd (fun y => g y a b) α p * (Pi.single j 1 : Point n) a
+          * (1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k
+        = pd (fun y => g y a b) α p * (Pi.single j 1 : Point n) a
+          * ((1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun a => pd (fun y => g y a b) α p) j
+        ((1 / 2 * (-christoffel g gi b k l p - christoffel g gi b l k p)) * v l * v j * v k)]
+    ring
+  have hS4 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) l p
+        * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ a, ∑ l, ∑ j, ∑ k, pd (fun y => g y a k) l p
+          * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p)) * v l * v j * v k) := by
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [reorder_b_inner (fun b l j k => pd (fun y => g y a b) l p
+        * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+        * (Pi.single k 1 : Point n) b * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun j _ =>
+      Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun b _ => show pd (fun y => g y a b) l p
+          * (1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p))
+          * (Pi.single k 1 : Point n) b * v l * v j * v k
+        = pd (fun y => g y a b) l p * (Pi.single k 1 : Point n) b
+          * ((1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun b => pd (fun y => g y a b) l p) k
+        ((1 / 2 * (-christoffel g gi a j α p - christoffel g gi a α j p)) * v l * v j * v k)]
+    ring
+  have hS5 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b *
+          ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1))) a
+          * (Pi.single k 1 : Point n) b * v l * v j * v k)
+      = (∑ a, ∑ k, g p a k * v k *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+              + rncCrossBlock g gi p v (Pi.single α 1) v a
+              + rncCrossBlock g gi p (Pi.single α 1) v v a
+              + rncCrossBlock g gi p v v (Pi.single α 1) a))) := by
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [reorder_b_inner (fun b l j k => g p a b *
+        ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1))) a
+        * (Pi.single k 1 : Point n) b * v l * v j * v k),
+      reorder3_last_first]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    have hstep : ∀ l j : Fin n,
+        (∑ b, g p a b *
+            ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1))) a
+            * (Pi.single k 1 : Point n) b * v l * v j * v k)
+          = g p a k * v k *
+              ((1 / 6 : ℝ) *
+                (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+                  + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+                  + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1) a))
+                * v l * v j := by
+      intro l j
+      set B : ℝ :=
+        ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1))) a with hBdef
+      rw [Finset.sum_congr rfl (fun b _ => show g p a b * B * (Pi.single k 1 : Point n) b * v l * v j * v k
+            = (g p a b * (Pi.single k 1 : Point n) b) * (B * v l * v j * v k) from by ring)]
+      rw [← Finset.sum_mul, sum_mul_single_right, hBdef]
+      simp only [Pi.smul_apply, Pi.add_apply, smul_eq_mul]; ring
+    simp only [hstep]
+    rw [show (∑ l, ∑ j, g p a k * v k *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1) a)) * v l * v j)
+        = g p a k * v k * (1 / 6 : ℝ) *
+          (∑ l, ∑ j,
+            (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+              + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+              + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+              + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1) a) * v l * v j)
+        from by
+      rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun l _ => ?_
+      rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by ring]
+    rw [show (∑ l, ∑ j,
+          (rncD3Block g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single j 1) (Pi.single α 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single j 1) (Pi.single l 1) a
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single j 1) (Pi.single α 1) a) * v l * v j)
+        = rncD3Block g gi p v (Pi.single α 1) v a + rncCrossBlock g gi p v (Pi.single α 1) v a
+          + rncCrossBlock g gi p (Pi.single α 1) v v a + rncCrossBlock g gi p v v (Pi.single α 1) a
+        from by
+      simp only [add_mul, Finset.sum_add_distrib]
+      rw [foldD3_midfix, foldCross_dirsource_jl, foldCross_sources, foldCross_dirsk]]
+    ring
+  have hS7 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y a b) l p * (Pi.single j 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+      = (∑ b, ∑ l, ∑ j, ∑ k, pd (fun y => g y j b) l p
+          * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k) := by
+    rw [reorder_a_inner5 (fun a b l j k => pd (fun y => g y a b) l p * (Pi.single j 1 : Point n) a
+        * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun l _ =>
+      Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_congr rfl (fun a _ => show pd (fun y => g y a b) l p * (Pi.single j 1 : Point n) a
+          * (1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k
+        = pd (fun y => g y a b) l p * (Pi.single j 1 : Point n) a
+          * ((1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)
+        from by ring)]
+    rw [collapse_single_mul (fun a => pd (fun y => g y a b) l p) j
+        ((1 / 2 * (-christoffel g gi b k α p - christoffel g gi b α k p)) * v l * v j * v k)]
+    ring
+  have hS9 : (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, g p a b * (Pi.single j 1 : Point n) a
+          * ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1)
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1))) b
+          * v l * v j * v k)
+      = (∑ b, ∑ j, g p j b * v j *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+              + rncCrossBlock g gi p v (Pi.single α 1) v b
+              + rncCrossBlock g gi p (Pi.single α 1) v v b
+              + rncCrossBlock g gi p v v (Pi.single α 1) b))) := by
+    rw [reorder_a_inner5 (fun a b l j k => g p a b * (Pi.single j 1 : Point n) a
+        * ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1)
+              + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1))) b
+        * v l * v j * v k)]
+    refine Finset.sum_congr rfl fun b _ => ?_
+    have hcol : ∀ l j k : Fin n,
+        (∑ a, g p a b * (Pi.single j 1 : Point n) a
+            * ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1)
+                  + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1))) b
+            * v l * v j * v k)
+          = g p j b * v l * v j * v k *
+              ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1) b)) := by
+      intro l j k
+      set B : ℝ :=
+        ((1 / 6 : ℝ) • (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1)
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1))) b with hBdef
+      rw [Finset.sum_congr rfl (fun a _ => show g p a b * (Pi.single j 1 : Point n) a * B * v l * v j * v k
+            = g p a b * (Pi.single j 1 : Point n) a * (B * v l * v j * v k) from by ring)]
+      rw [show (∑ a, g p a b * (Pi.single j 1 : Point n) a * (B * v l * v j * v k))
+            = (∑ a, (Pi.single j 1 : Point n) a * (g p a b)) * (B * v l * v j * v k) from by
+          rw [Finset.sum_mul]; exact Finset.sum_congr rfl fun a _ => by ring]
+      rw [sum_single_mul_left (fun a => g p a b) j, hBdef]
+      simp only [Pi.smul_apply, Pi.add_apply, smul_eq_mul]; ring
+    simp only [hcol]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [show (∑ l, ∑ k, g p j b * v l * v j * v k *
+          ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1) b)))
+        = g p j b * v j * (1 / 6 : ℝ) *
+            (∑ l, ∑ k,
+              (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1) b
+                + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1) b)
+              * v l * v k) from by
+      rw [Finset.mul_sum]; refine Finset.sum_congr rfl fun l _ => ?_
+      rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun k _ => by ring]
+    rw [show (∑ l, ∑ k,
+          (rncD3Block g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single k 1) (Pi.single α 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single α 1) (Pi.single k 1) (Pi.single l 1) b
+            + rncCrossBlock g gi p (Pi.single l 1) (Pi.single k 1) (Pi.single α 1) b)
+          * v l * v k)
+        = rncD3Block g gi p v (Pi.single α 1) v b + rncCrossBlock g gi p v (Pi.single α 1) v b
+          + rncCrossBlock g gi p (Pi.single α 1) v v b + rncCrossBlock g gi p v v (Pi.single α 1) b
+        from by
+      simp only [add_mul, Finset.sum_add_distrib]
+      rw [foldD3_midfix, foldCross_dirsource_jl, foldCross_sources, foldCross_dirsk]]
+    ring
+  rw [hpd2_B_expand g gi hC p hg α v, ← hS1, ← hS2, ← hS3, ← hS4, ← hS5, ← hS7, ← hS9]
+  simp only [add_mul, Finset.sum_add_distrib]
+
 end QIQTH.PullbackMetric
