@@ -10789,6 +10789,22 @@ namespace QIQTH.AxiomAudit
 -- (the global g·Γ·Γ RNC-radial-geodesic identity) STILL the remaining wall (~150-term global relabel, resists
 -- ring/per-group; confirmed both routes carry the identical irreducible reindex).  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.rncCrossBlock_dir_vv_a3
+-- ★★★ PARAMETRIX P1 R3→κ (THE CONDITIONAL κ=1/6 CAPSTONE for the pullback metric g̃) (PullbackMetric.lean).
+-- expPullbackMetricInv_contDiffAt_one: g̃⁻¹ is ContDiffAt ℝ 1 at 0 (matToCLM(g̃·) C¹ + Ring.inverse C^∞ at the unit +
+-- C^∞ eval CLMs) — the hgi1 input for the c2 heat lemma.  ★★★ kappa_eq_one_sixth_expPullback_of_hpd2: the a₁ heat
+-- coefficient at g̃ = (1/6−ξ)Rscl − m² — i.e. κ=1/6-in-the-a₁-accounting for the pullback metric g̃, obtained by
+-- instantiating heat_a1_of_gauge_c2 at g̃ and discharging EVERY structural hypothesis from the landed g̃ lemmas
+-- (hg2←contDiffAt2_expPullbackMetric_zero, hgi1←expPullbackMetricInv_contDiffAt_one, hg0/hgi0←expPullbackMetric_at_zero/
+-- expPullbackMetricInv_zero+hframe, hdg0←pd_expPullbackMetric_at_zero, hsymm←expPullbackMetric_symm, hgauge←
+-- gauge_pd_christoffel_expPullbackInv_zero_of_pd2 fed hpd2).  ⚠⚠ STRICTLY CONDITIONAL — the `_of_hpd2` name is
+-- load-bearing: the SOLE open hypothesis is hpd2 = the pullback RNC radial identity (the ~150-term global g·Γ·Γ
+-- reindex hpd2_residual_cubic_reindex, NOT yet proved), plus the standard inputs hframe (g₀(p)=δ orthonormal frame),
+-- hg (ambient C^∞), hκgeo (√det-Hessian↔ricci relation), hRic (curvature non-degeneracy).  This is NOT κ=1/6
+-- unconditional; it is "κ=1/6 for g̃ GIVEN hpd2 + frame + curvature + √det".  ⟹ the ENTIRE κ=1/6 chain is now
+-- machine-checked green MODULO exactly the single explicit finite identity hpd2.  Does NOT give κ=1/6 unconditional /
+-- the parametrix (P2) / general a₁=R/6 / a curved heat kernel / numerical-G / the conjecture.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.expPullbackMetricInv_contDiffAt_one
+#print axioms QIQTH.PullbackMetric.kappa_eq_one_sixth_expPullback_of_hpd2
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

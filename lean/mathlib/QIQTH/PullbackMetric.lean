@@ -21,6 +21,7 @@ import QIQTH.ExpMapContDiff3
 import QIQTH.GeodesicFieldJets
 import QIQTH.RNCGauge
 import QIQTH.RNCGaugeExp
+import QIQTH.RNCExpansion
 
 namespace QIQTH.PullbackMetric
 
@@ -5068,5 +5069,125 @@ Once `hpd2_cubic_vanish` lands, `expPullback_hpd2` (`∀ α v, 2A−B=0`), `expP
 UNCONDITIONAL `gauge_pd_christoffel_expPullbackInv_zero'` (feeding `..._of_pd2`) all follow mechanically —
 the MILESTONE (unconditional cyclic RNC gauge for `g̃`).
 -/
+
+/-! ### THE `κ = 1/6` CAPSTONE for the pullback metric `g̃` (conditional on `hpd2`) -/
+
+/-- **(β1)b⁺ — `C¹` regularity of the pullback inverse at `0`.**  Strengthening of
+    `expPullbackMetricInv_differentiableAt` from `DifferentiableAt` to `ContDiffAt ℝ 1`: the operator
+    field `x ↦ matToCLM (g̃ x)` is `C¹` at `0` (its entries are `C²`, `contDiffAt2_expPullbackMetric_zero`),
+    `matToCLM (g̃ 0)` is a unit (`metricCLMUnit0`), `Ring.inverse` is `C^∞` at a unit
+    (`contDiffAt_ringInverse`), and entry-evaluation is continuous-linear (hence `C^∞`).  This is exactly
+    the `hgi1 : ∀ a b, ContDiffAt ℝ 1 (gi · a b) 0` hypothesis of `heat_a1_of_gauge_c2`. -/
+theorem expPullbackMetricInv_contDiffAt_one (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hinv : ∀ a b, (∑ σ, g p a σ * gi p σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b)) (μ α : Fin n) :
+    ContDiffAt ℝ 1 (fun x => expPullbackMetricInv g gi hC p x μ α) 0 := by
+  -- the operator field `x ↦ matToCLM (g̃ x)` is `C¹` at `0` (its entries are `C²`).
+  have hmet_cd : ContDiffAt ℝ (1 : WithTop ℕ∞)
+      (fun x => matToCLM (fun a b => expPullbackMetric g gi hC p x a b)) 0 := by
+    show ContDiffAt ℝ (1 : WithTop ℕ∞)
+      (fun x => ∑ a, ∑ b, expPullbackMetric g gi hC p x a b • elemCLM a b) 0
+    apply ContDiffAt.sum
+    intro a _
+    apply ContDiffAt.sum
+    intro b _
+    exact ((contDiffAt2_expPullbackMetric_zero g gi hC p hg a b).of_le
+      (by norm_num)).smul contDiffAt_const
+  -- `Ring.inverse` is `C^∞` (hence `C¹`) at the unit `matToCLM (g̃ 0)`.
+  have hinv_cd : ContDiffAt ℝ (1 : WithTop ℕ∞) Ring.inverse
+      (matToCLM (fun a b => expPullbackMetric g gi hC p 0 a b)) :=
+    contDiffAt_ringInverse ℝ (metricCLMUnit0 g gi hC p hinv)
+  have hcomp := hinv_cd.comp 0 hmet_cd
+  have hfull := (((ContinuousLinearMap.proj (R := ℝ) (φ := fun _ : Fin n => ℝ) μ).contDiff
+      (n := (1 : WithTop ℕ∞))).contDiffAt).comp 0
+    ((((ContinuousLinearMap.apply ℝ (Point n) (Pi.single α (1 : ℝ) : Point n)).contDiff
+      (n := (1 : WithTop ℕ∞))).contDiffAt).comp 0 hcomp)
+  have heq : (fun x => expPullbackMetricInv g gi hC p x μ α)
+      = fun x => (ContinuousLinearMap.proj (R := ℝ) (φ := fun _ : Fin n => ℝ) μ)
+          ((ContinuousLinearMap.apply ℝ (Point n) (Pi.single α (1 : ℝ) : Point n))
+            (Ring.inverse (matToCLM (fun a b => expPullbackMetric g gi hC p x a b)))) := by
+    funext x
+    simp only [expPullbackMetricInv, ContinuousLinearMap.apply_apply, ContinuousLinearMap.proj_apply]
+  rw [heq]
+  exact hfull
+
+set_option maxHeartbeats 1600000 in
+/-- **THE `κ = 1/6` CAPSTONE for the pullback metric `g̃`, CONDITIONAL on the single open radial
+    identity `hpd2`.**  Instantiating `QIQTH.RNCExpansion.heat_a1_of_gauge_c2` at the pullback metric
+    `g̃ = expPullbackMetric g₀ gi₀ hC p` and its genuine matrix inverse
+    `g̃⁻¹ = expPullbackMetricInv g₀ gi₀ hC p`, with EVERY structural hypothesis of that theorem
+    discharged from the landed pullback lemmas:
+
+    * `hg2` (`g̃` is `C²` at `0`) — `contDiffAt2_expPullbackMetric_zero`;
+    * `hgi1` (`g̃⁻¹` is `C¹` at `0`) — `expPullbackMetricInv_contDiffAt_one`;
+    * `hg0` (`g̃(0) = δ`) — `expPullbackMetric_at_zero` + the orthonormal frame `hframe`;
+    * `hgi0` (`g̃⁻¹(0) = δ`) — `expPullbackMetricInv_zero` + (`hframe` + `hinvF` ⟹ `gi₀ p = δ`);
+    * `hdg0` (`∂g̃(0) = 0`) — `pd_expPullbackMetric_at_zero`;
+    * `hsymm` (`g̃` symmetric) — `expPullbackMetric_symm`;
+    * `hgauge` (cyclic RNC gauge for `g̃`) — `gauge_pd_christoffel_expPullbackInv_zero_of_pd2`, fed the
+      radial identity `hpd2`.
+
+    The result is the a₁-accounting `κ = 1/6`: the heat-coefficient `κ`-slot value equals
+    `(1/6 − ξ)·Rscl − m²`.  This is CONDITIONAL on exactly `hpd2` (the still-open pure `∂²g̃(0)`
+    radial-contraction identity `2⟨∂_l∂_j g̃_{αk}⟩ = ⟨∂_l∂_α g̃_{jk}⟩`), the orthonormal frame `hframe`,
+    the ambient smoothness `hg`, the standard `√det`-Hessian relation `hκgeo`, and curvature
+    non-degeneracy `hRic` — it does NOT assert `κ = 1/6` unconditionally. -/
+theorem kappa_eq_one_sixth_expPullback_of_hpd2
+    (g₀ gi₀ : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g₀ gi₀ a b c y)) (p : Point n)
+    (hsymm0 : ∀ y a b, g₀ y a b = g₀ y b a)
+    (hinvF : ∀ y a b, (∑ σ, g₀ y a σ * gi₀ y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g₀ y a b))
+    (hframe : ∀ i j, g₀ p i j = (if i = j then 1 else 0))
+    (hpd2 : ∀ (α : Fin n) (v : Point n),
+      2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g₀ gi₀ hC p x α k) j y) l 0 * v l * v j * v k)
+        - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g₀ gi₀ hC p x j k) α y) l 0 * v l * v j * v k) = 0)
+    (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
+    (κ : ℝ)
+    (hκgeo : ∀ c d, (1 / 2) * pd (fun y => pd (fun w =>
+          Real.sqrt (Matrix.det (expPullbackMetric g₀ gi₀ hC p w))) d y) c 0
+        = -κ * ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) c d 0)
+    (hRic : ∃ c d, ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) c d 0 ≠ 0)
+    (Rscl : ℝ)
+    (hR : Rscl = ∑ i, ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) i i 0) :
+    (1 / (2 * t)) * (κ * ∑ i, ∑ j,
+        ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) i j 0 *
+          (∫ x : (Fin n → ℝ), (∏ k, QIQTH.HeatKernelA1.heatKernel1D t (x k)) * (x i * x j)))
+        - ξ * Rscl - m ^ 2
+      = (1 / 6 - ξ) * Rscl - m ^ 2 := by
+  -- the ambient inverse relation at `p`, in the pointwise shape the pullback lemmas consume.
+  have hinv : ∀ a b, (∑ σ, g₀ p a σ * gi₀ p σ b) = if a = b then 1 else 0 := fun a b => hinvF p a b
+  -- `g₀ p = δ` (frame) and `g₀ p · gi₀ p = δ` force `gi₀ p = δ`.
+  have hgiδ : ∀ a b, gi₀ p a b = if a = b then 1 else 0 := by
+    intro a b
+    have h := hinvF p a b
+    simp only [hframe, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ,
+      if_true] at h
+    exact h
+  refine QIQTH.RNCExpansion.heat_a1_of_gauge_c2 t ht ξ m
+    (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p)
+    -- hg2 : g̃ is C² at 0
+    (fun a b => contDiffAt2_expPullbackMetric_zero g₀ gi₀ hC p hg a b)
+    -- hgi1 : g̃⁻¹ is C¹ at 0
+    (fun a b => expPullbackMetricInv_contDiffAt_one g₀ gi₀ hC p hinv hg a b)
+    -- hg0 : g̃(0) = δ
+    (fun i j => by
+      rw [expPullbackMetric_at_zero, hframe, Matrix.one_apply])
+    -- hgi0 : g̃⁻¹(0) = δ
+    (fun i j => by
+      rw [expPullbackMetricInv_zero g₀ gi₀ hC p hinv, hgiδ, Matrix.one_apply])
+    -- hdg0 : ∂g̃(0) = 0
+    (fun a b e => pd_expPullbackMetric_at_zero g₀ gi₀ hC p hsymm0 hinv hg a b e)
+    -- hsymm : g̃ symmetric
+    (fun y a b => expPullbackMetric_symm g₀ gi₀ hC p hsymm0 y a b)
+    -- hgauge : cyclic RNC gauge for g̃ (from hpd2)
+    (fun i a b c => by
+      have hg3 := gauge_pd_christoffel_expPullbackInv_zero_of_pd2
+        g₀ gi₀ hC p hsymm0 hinv hg hpd2 i a b c
+      linarith [hg3])
+    κ hκgeo hRic Rscl hR
 
 end QIQTH.PullbackMetric
