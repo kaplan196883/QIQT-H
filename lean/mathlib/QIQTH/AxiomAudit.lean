@@ -10416,6 +10416,19 @@ namespace QIQTH.AxiomAudit
 -- NOT the conjecture/QG.  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.hasFDerivAt_fderiv2_expMap_zero
 #print axioms QIQTH.PullbackMetric.differentiableAt_fderiv2_expMap_zero
+-- ★ PARAMETRIX P1 R3→κ (v=0 trivialization) — the constant-tube substrate for the closed expJetD3(0) form
+-- (PullbackMetric.lean).  expTube_zero (Y_0(t)=(p,0) constant on [0,1], zero-velocity geodesic, via expTube_spec
+-- confinement), linF_comp_linF (A₀=linF nilpotent A₀²=0 ⟹ Φ_0(t)=exp(tA₀)=id+tA₀), fderiv_geodesicField_expTube_zero
+-- (the Jacobi coefficient along the v=0 tube is the constant A₀=linF).  This DOWNGRADES the closed-form
+-- expJetD3(0)=a₃ wall to a bounded chain of constant-coefficient ODE integrations (rhs = the finite polynomial
+-- id+sA₀).  HONEST — CHECKPOINT: the closed value is gated on ONE genuinely-missing brick (a1) operator-propagator
+-- uniqueness/Duhamel (Φ_0=id+tA₀ for the expJetFund witness; the tree has vector-valued expJet2Fund_unique but no
+-- operator-valued propagator uniqueness); then (a2)/(a3) the 2nd/3rd-variation integrals + (a4) the a₃ match are
+-- reachable assembly, no Rung 4.  Does NOT yet give the bridge / κ=1/6, NOT the parametrix (P2), NOT general a₁=R/6,
+-- NOT numerical-G, NOT the conjecture/QG.  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.expTube_zero
+#print axioms QIQTH.PullbackMetric.linF_comp_linF
+#print axioms QIQTH.PullbackMetric.fderiv_geodesicField_expTube_zero
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

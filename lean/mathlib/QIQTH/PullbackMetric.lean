@@ -21,7 +21,7 @@ import QIQTH.ExpMapContDiff3
 
 namespace QIQTH.PullbackMetric
 
-open QIQTH.Curvature QIQTH.ExpMap
+open QIQTH.Curvature QIQTH.ExpMap QIQTH.Geodesic
 open Finset
 
 variable {n : ℕ}
@@ -455,6 +455,50 @@ theorem differentiableAt_fderiv2_expMap_zero (g gi : Point n → Fin n → Fin n
   exact hfd.differentiableAt
 
 /-!
+### The `v = 0` TRIVIALIZATION (toward the explicit `expJetD3 … 0` value)
+
+At `v = 0` the zero-initial-velocity geodesic tube collapses to the constant equilibrium `(p,0)`
+throughout `[0,1]` (`expTube_zero`, from confinement `‖Y₀(t) − (p,0)‖ ≤ expConst·‖0‖ = 0`).  Hence the
+geodesic-field Jacobian along the tube is the CONSTANT nilpotent linearization
+`A₀ = fderiv (geodesicField g gi) (p,0) = linF` (`fderiv_geodesicField_expTube_zero`), which satisfies
+`A₀² = 0` (`linF_comp_linF`) — so the first-variation propagator solves the constant-coefficient
+homogeneous equation `Φ' = A₀∘Φ`, `Φ(0) = id`, whose solution is `Φ₀(t) = exp(t·A₀) = id + t·A₀`.
+These are the load-bearing structural facts that turn `expJetD3 g gi hC p 0 Φ` into an EXPLICIT
+constant-coefficient integral (see the remaining-goal note in the ledger).
+-/
+
+/-- **`v = 0` tube trivialization.**  The zero-initial-velocity geodesic tube is CONSTANT at the
+    equilibrium `(p,0)` throughout `[0,1]`.  Immediate from `expTube_spec`'s confinement bound
+    `‖expTube p 0 t − (p,0)‖ ≤ expConst·‖0‖ = 0`. -/
+theorem expTube_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1, expTube g gi hC p 0 t = ((p, 0) : Point n × Point n) := by
+  obtain ⟨-, -, hconf⟩ :=
+    expTube_spec g gi hC p 0 (by rw [norm_zero]; exact (expRho_pos g gi hC p).le)
+  intro t ht
+  have h := hconf t ht
+  rw [norm_zero, mul_zero] at h
+  exact sub_eq_zero.mp (norm_eq_zero.mp (le_antisymm h (norm_nonneg _)))
+
+/-- **`A₀ = linF` is nilpotent of order 2.**  `linF (ξ,η) = (η,0)`, hence `linF∘linF (ξ,η) = (0,0)`.
+    This is why the `v = 0` propagator is the finite polynomial `Φ₀(t) = exp(t·A₀) = id + t·A₀`
+    (the constant-coefficient trivialization that makes `expJetD3 … 0` an explicit integral). -/
+theorem linF_comp_linF : (linF (n := n)).comp linF = 0 := by
+  refine ContinuousLinearMap.ext fun z => ?_
+  simp [linF_apply]
+
+/-- **`v = 0` field constant.**  Along the constant tube `Y₀(t) = (p,0)`, the geodesic-field Jacobian
+    is the CONSTANT nilpotent linearization `A₀ = linF` at the equilibrium.  Combines `expTube_zero`
+    with the strict-derivative computation `hasStrictFDerivAt_geodesicField` (`fderiv F (p,0) = linF`). -/
+theorem fderiv_geodesicField_expTube_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n) :
+    ∀ t ∈ Set.Icc (0 : ℝ) 1,
+      fderiv ℝ (geodesicField g gi) (expTube g gi hC p 0 t) = (linF : (Point n × Point n) →L[ℝ] _) := by
+  intro t ht
+  rw [expTube_zero g gi hC p t ht]
+  exact (hasStrictFDerivAt_geodesicField g gi hC p).hasFDerivAt.fderiv
+
+/-!
 ### RNC JET LEDGER (R3→κ) — what the exp-normal coordinates give for `g̃`, and the remaining wall
 
 * **The RNC value / first-order / connection jets of `g̃` at `0` are now PROVED** (all axiom-clean,
@@ -493,7 +537,30 @@ theorem differentiableAt_fderiv2_expMap_zero (g gi : Point n → Fin n → Fin n
   closed form, or (b) a Taylor-uniqueness route from the VALUE 3-jet `expMap_value_three_jet` (a
   `=o[𝓝 0] ‖v‖³` little-o, which does NOT differentiate for free) to `iteratedFDeriv ℝ 3 exp_p 0` via
   Mathlib's Taylor-coefficient uniqueness, then coordinate extraction + the `a3rawArr` symmetrization.
-  Once that ONE explicit-value lemma exists, the rest is reachable ASSEMBLY:
+
+  PROGRESS on route (a) — the `v = 0` TRIVIALIZATION is now LANDED (axiom-clean
+  `[propext, Classical.choice, Quot.sound]`): `expTube_zero` (the tube is CONSTANT `(p,0)` on `[0,1]`),
+  `fderiv_geodesicField_expTube_zero` (the Jacobi coefficient is the CONSTANT `A₀ = linF`), and
+  `linF_comp_linF` (`A₀² = 0`, so `Φ₀(t) = id + t·A₀`).  What still blocks route (a) — the EXACT
+  remaining goal — is the explicit evaluation of the two NESTED constant-coefficient inhomogeneous ODEs
+  at `t = 1`:
+    (a1) IDENTIFY the propagator: prove `Φ₀ = fun t => id + t·A₀` for THE `Φ` supplied by
+         `hasFDerivAt_expMap … 0` — needs an operator-ODE uniqueness lemma for `Φ' = A₀∘Φ`, `Φ(0)=id`
+         (Mathlib/tree has vector-valued `expJet2Fund_unique`/`expJet3Fund_unique` but NO
+         operator-propagator uniqueness lemma — this is the first missing brick);
+    (a2) SOLVE the 2nd variation: with `A₀`, `Φ₀` fixed, `expJet2Curve` solves `Q' = A₀∘Q + rhs₂(t)`,
+         `Q(0)=0`, where `rhs₂ = expJet2Rhs` is a fixed polynomial in `A₀, D²F(p,0), Φ₀`; its `t=1`
+         value is `∫₀¹ exp((1−s)A₀)·rhs₂(s) ds` — an explicit finite integral since `exp(sA₀)=id+sA₀`;
+    (a3) SOLVE the 3rd variation: `R' = A₀∘R + rhs₃(t)`, `R(0)=0` (`rhs₃ = expJet3Rhs` in
+         `A₀, D²F, D³F(p,0), Φ₀` and the `expJet2Curve` outputs from (a2)); `R(1) = ∫₀¹ exp((1−s)A₀)·rhs₃(s) ds`;
+    (a4) MATCH: `expJetPi (R(1))` (the `.1` block) against `a3rawArr`/`expMap_value_three_jet`.
+  VERDICT on the wall: route (a) is now REACHABLE-with-machinery — the analytic obstruction has been
+  reduced from an abstract 3rd Fréchet derivative to (a1)+(a2)+(a3), a finite chain of
+  constant-coefficient linear-ODE integrations (all coefficients are the finite polynomial
+  `id + s·A₀`, `A₀²=0`), PLUS the single genuinely-missing Mathlib-adjacent brick (a1)
+  (operator-propagator ODE uniqueness / `duhamel`-form representation of a linear inhomogeneous ODE
+  solution).  It is NOT a deep rung-4 obstruction; it is a bounded ODE-integration build gated on that
+  Duhamel/uniqueness brick.  Once (a1)+(a2)+(a3) give the closed `expJetD3 … 0 Φ`, the rest is reachable ASSEMBLY:
     (ii) twice-Leibniz + chain-rule expansion of `pd² g̃(0)` into the `∂²g` (curvature-of-`g`),
          `∂g·∂J`, `g·∂²J` blocks (mirroring `pd_expPullback_summand_zero`), collapsing the `Pi.single`
          factors with `g(p)=δ`, `∂g̃(0)=0`, `pd_jacobian_expMap_zero`, and the new explicit `∂²J`;
