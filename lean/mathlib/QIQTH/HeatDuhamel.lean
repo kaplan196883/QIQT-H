@@ -297,4 +297,107 @@ theorem heatConv_assoc (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) (
   rw [hP1, hReorderL, hTri, ← hReorderR]
   exact hP2.symm
 
+/-! ### 6. Discharging the reorderings — genuine interval↔Lebesgue Fubini
+
+    The two reordering hypotheses `hReorderL`/`hReorderR` of `heatConv_assoc` are NOT part of the
+    Mathlib-missing time-triangle carry: they are pure Fubini algebra combining
+    (i) an **interval↔Lebesgue** swap of the spatial `∫z`/`∫w` past the interval-integral in the time
+    variable (Mathlib's `intervalIntegral_integral_swap`), with (ii) the already-proven spatial swap
+    `heatConv_spatial_fubini`.  We discharge both as proven theorems here (under the genuine
+    joint-integrability side conditions the two swaps require), leaving `hTri` as the SOLE
+    genuinely-Mathlib-missing carry of the tightened associativity `heatConv_assoc'`. -/
+
+/-- **Interval↔Lebesgue Fubini** (the reachable measure-theoretic core of the reorderings).  For a
+    scalar integrand `G : Point n → ℝ → ℝ`, the outer spatial Lebesgue integral `∫z` and the inner
+    interval-integral `∫ s' in (0)..b` may be swapped, under the natural joint-integrability
+    hypothesis over `(volume.restrict (Set.uIoc 0 b)).prod volume` that Mathlib's
+    `intervalIntegral_integral_swap` demands.  This is genuine, non-vacuous measure theory (it FAILS
+    without joint integrability); it is explicitly NOT the Gaussian/Neumann convergence wall. -/
+theorem heatConv_interval_lebesgue_fubini {b : ℝ} (G : Point n → ℝ → ℝ)
+    (hG : Integrable (Function.uncurry (fun (s' : ℝ) (z : Point n) => G z s'))
+            ((volume.restrict (Set.uIoc 0 b)).prod volume)) :
+    (∫ z, ∫ s' in (0)..b, G z s') = ∫ s' in (0)..b, ∫ z, G z s' :=
+  (intervalIntegral_integral_swap hG).symm
+
+set_option maxHeartbeats 1000000 in
+/-- **`hReorderL` discharged.**  Moving the `∫z` from OUTSIDE `∫ s' in (0)..(t−s)` to INSIDE
+    (past `∫s'` then past `∫w`) is: (i) the interval↔Lebesgue swap `heatConv_interval_lebesgue_fubini`
+    of `∫z` past the `s'`-interval-integral, followed by (ii) the spatial swap
+    `heatConv_spatial_fubini` of `∫z` past `∫w`.  Carries only the two genuine joint-integrability
+    side conditions (`hIL` for the interval↔Lebesgue swap at each `s`; `hSp` for the spatial swap at
+    each `(s,s')`) — neither is vacuous, neither is the conclusion. -/
+theorem heatConv_reorderL (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (hIL : ∀ s, Integrable
+        (Function.uncurry (fun (s' : ℝ) (z : Point n) =>
+          ∫ w, A (t - s - s') x w * B s' w z * C s z y))
+        ((volume.restrict (Set.uIoc 0 (t - s))).prod volume))
+    (hSp : ∀ s s', Integrable
+        (Function.uncurry (fun (z w : Point n) =>
+          A (t - s - s') x w * B s' w z * C s z y))
+        (volume.prod volume)) :
+    (∫ s in (0)..t, ∫ z, ∫ s' in (0)..(t - s), ∫ w,
+        A (t - s - s') x w * B s' w z * C s z y)
+      = ∫ s in (0)..t, ∫ s' in (0)..(t - s), ∫ w, ∫ z,
+        A (t - s - s') x w * B s' w z * C s z y := by
+  refine intervalIntegral.integral_congr (fun s _ => ?_)
+  -- Step (i): swap `∫z` past the `s'`-interval-integral (interval↔Lebesgue).
+  rw [heatConv_interval_lebesgue_fubini
+        (fun (z : Point n) (s' : ℝ) => ∫ w, A (t - s - s') x w * B s' w z * C s z y) (hIL s)]
+  -- Step (ii): for each fixed `s'`, swap `∫z` past `∫w` (spatial Fubini).
+  refine intervalIntegral.integral_congr (fun s' _ => ?_)
+  exact heatConv_spatial_fubini
+    (fun z w => A (t - s - s') x w * B s' w z * C s z y) (hSp s s')
+
+set_option maxHeartbeats 1000000 in
+/-- **`hReorderR` discharged.**  Moving the `∫w` from OUTSIDE `∫ u' in (0)..u` to INSIDE (past `∫u'`;
+    the `∫z` is already innermost) is a single interval↔Lebesgue swap
+    `heatConv_interval_lebesgue_fubini` of `∫w` past the `u'`-interval-integral.  Carries only the
+    genuine joint-integrability side condition `hIR` at each `u`. -/
+theorem heatConv_reorderR (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (hIR : ∀ u, Integrable
+        (Function.uncurry (fun (u' : ℝ) (w : Point n) =>
+          ∫ z, A (t - u) x w * B (u - u') w z * C u' z y))
+        ((volume.restrict (Set.uIoc 0 u)).prod volume)) :
+    (∫ u in (0)..t, ∫ w, ∫ u' in (0)..u, ∫ z,
+        A (t - u) x w * B (u - u') w z * C u' z y)
+      = ∫ u in (0)..t, ∫ u' in (0)..u, ∫ w, ∫ z,
+        A (t - u) x w * B (u - u') w z * C u' z y := by
+  refine intervalIntegral.integral_congr (fun u _ => ?_)
+  exact heatConv_interval_lebesgue_fubini
+    (fun (w : Point n) (u' : ℝ) => ∫ z, A (t - u) x w * B (u - u') w z * C u' z y) (hIR u)
+
+set_option maxHeartbeats 1000000 in
+/-- **Tightened associativity** `(A * B) * C = A * (B * C)`, depending on ONLY the genuinely
+    Mathlib-missing time-triangle Fubini `hTri` (plus the integrability side conditions the two now-
+    proven reorderings require).  Obtained by feeding the proven `heatConv_reorderL`/`heatConv_reorderR`
+    into `heatConv_assoc`.
+
+    Compared to `heatConv_assoc`, the spatial/temporal reorderings `hReorderL`/`hReorderR` are no
+    longer assumed — they are discharged as genuine interval↔Lebesgue + spatial Fubini.  The SOLE
+    remaining non-integrability carry is `hTri`, the triangular time-Fubini
+    `∫₀ᵗ∫₀^{t−s} = ∫₀ᵗ∫₀^{u}` under `u = s+s', u' = s`, for which Mathlib has no direct lemma. -/
+theorem heatConv_assoc' (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (hIL : ∀ s, Integrable
+        (Function.uncurry (fun (s' : ℝ) (z : Point n) =>
+          ∫ w, A (t - s - s') x w * B s' w z * C s z y))
+        ((volume.restrict (Set.uIoc 0 (t - s))).prod volume))
+    (hSp : ∀ s s', Integrable
+        (Function.uncurry (fun (z w : Point n) =>
+          A (t - s - s') x w * B s' w z * C s z y))
+        (volume.prod volume))
+    (hTri :
+      (∫ s in (0)..t, ∫ s' in (0)..(t - s), ∫ w, ∫ z,
+          A (t - s - s') x w * B s' w z * C s z y)
+        = ∫ u in (0)..t, ∫ u' in (0)..u, ∫ w, ∫ z,
+          A (t - u) x w * B (u - u') w z * C u' z y)
+    (hIR : ∀ u, Integrable
+        (Function.uncurry (fun (u' : ℝ) (w : Point n) =>
+          ∫ z, A (t - u) x w * B (u - u') w z * C u' z y))
+        ((volume.restrict (Set.uIoc 0 u)).prod volume)) :
+    heatConv (heatConvK A B) C t x y = heatConv A (heatConvK B C) t x y :=
+  heatConv_assoc A B C t x y
+    (heatConv_reorderL A B C t x y hIL hSp)
+    hTri
+    (heatConv_reorderR A B C t x y hIR)
+
 end QIQTH.HeatDuhamel

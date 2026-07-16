@@ -12895,5 +12895,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatDuhamel.heatConvK_apply
 #print axioms QIQTH.HeatDuhamel.heatConv_spatial_fubini
 #print axioms QIQTH.HeatDuhamel.heatConv_assoc
+-- P2d ALGEBRA cont. — TIGHTENED associativity (HeatDuhamel.lean, 2026-07-17): the two reordering hyps of
+-- heatConv_assoc are DISCHARGED as theorems.  heatConv_interval_lebesgue_fubini = the interval↔Lebesgue swap
+-- (∫z past an interval-integral) via Mathlib's ready-made intervalIntegral_integral_swap — genuine, non-vacuous
+-- measure theory.  heatConv_reorderL (= interval↔Lebesgue + spatial swap) and heatConv_reorderR (single
+-- interval↔Lebesgue) are now PROVEN (carrying only genuine joint-integrability side conditions).  heatConv_assoc'
+-- = (A*B)*C=A*(B*C) depending on ONLY hTri (the triangular time-Fubini, Mathlib-MISSING) + integrability — the
+-- reorderings are no longer assumed.  ⚠ HONEST FIREWALL: reachable Fubini; hTri stays the sole non-integrability
+-- carry; NOT the Gaussian iterated-convolution CONVERGENCE wall, NOT true-kernel existence, NOT general a₁=R/6 (G3).
+#print axioms QIQTH.HeatDuhamel.heatConv_interval_lebesgue_fubini
+#print axioms QIQTH.HeatDuhamel.heatConv_reorderL
+#print axioms QIQTH.HeatDuhamel.heatConv_reorderR
+#print axioms QIQTH.HeatDuhamel.heatConv_assoc'
 
 end QIQTH.AxiomAudit
