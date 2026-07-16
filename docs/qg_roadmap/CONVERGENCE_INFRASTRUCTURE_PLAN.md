@@ -66,6 +66,17 @@ The source of convergence — realized NOT as a raw `k`-dim simplex Fubini but a
   super-exponential (Mittag-Leffler) decay driving convergence. Mathlib `Real.Gamma`, `Gamma_pos_of_pos`,
   `Gamma_ne_zero`.
 
+### C3 — the iterated-convolution factorial decay `QIQTH/TimeSimplexBeta.lean` ✅ LANDED (`e2cf6a14`, [AF] std-3)
+`iterKernel` + `iterKernel_eq` (`= (Γ(α+1)^k/Γ(k(α+1)))·t^(k(α+1)−1)·G_t`, `Nat.le_induction` on C2 + Γ
+telescoping). No checkpoints. The `1/Γ(k(α+1))` is the factorial decay.
+
+### C5a — the MODEL Neumann series is SUMMABLE `QIQTH/LeviSeries.lean` (rides on C3 + ratio test)
+The convergence payoff, self-contained on C3: **`iterKernel_series_summable`** — for `α ≥ 0` (β=α+1≥1;
+choose parametrix order `N ≥ d/2`), `t > 0`, `Summable (fun k => (Γ(α+1)^k/Γ((k+1)(α+1)))·t^((k+1)(α+1)−1))`
+(the model coefficient series; the Gaussian `G_t(x−y)` is a k-constant factor). Route: ratio test
+(`summable_of_ratio_norm_eventually_le`) — ratio `= Γ(α+1)t^β·Γ((k+1)β)/Γ((k+2)β) ≤ Γ(α+1)t^β/((k+1)β) → 0`
+(via `Γ((k+2)β) = Γ((k+1)β+β) ≥ ((k+1)β)Γ((k+1)β)` for β≥1, using `Gamma_add_one` + Γ-monotonicity on [1,∞)).
+
 ### C4 — the parametrix residual bound `QIQTH/HeatResidualBound.lean`
 Cast the built residual `E = (∂_t−Δ_g)H_N` (`HeatParametrixError`/`HeatParametrixOrder`) into C2 form:
 - **`residual_gaussPoly_bound`**: `|E(t,x,y)| ≤ C · t^{N−d/2} · G_{κ}(t,x−y)` (Gaussian × polynomial ×
