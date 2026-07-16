@@ -12907,5 +12907,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatDuhamel.heatConv_reorderL
 #print axioms QIQTH.HeatDuhamel.heatConv_reorderR
 #print axioms QIQTH.HeatDuhamel.heatConv_assoc'
+-- P2d ALGEBRA — TRIANGULAR TIME-FUBINI hTri DISCHARGED (HeatDuhamel.lean, 2026-07-17): the sole remaining
+-- non-integrability carry of heatConv_assoc' is now a PROVEN theorem.  tri_swap = the triangular interval-Fubini
+-- ∫₀ᵗ∫₀ᵘ = ∫₀ᵗ∫_{u'}ᵗ (both = masked-square integral in the two orders, swap via Tonelli integral_integral_swap +
+-- setIntegral_indicator bookkeeping).  triangular_time_fubini = tri_swap + the inner shift substitution
+-- (intervalIntegral.integral_comp_sub_right), realizing the volume-preserving shear (s,s')↦(s+s',s) det=1 at the
+-- iterated-integral level.  heatConv_assoc'' = (A*B)*C=A*(B*C) with NO hTri carry — UNCONDITIONAL modulo the genuine
+-- integrability side-conds (hIL/hSp/hIR + hTriInt Tonelli triangle) + 0≤t.  ⚠ HONEST FIREWALL: the ENTIRE Levi-series
+-- ALGEBRA (convolution+bilinearity+FTC-1+Duhamel principle+associativity) is now axiom-free with ZERO analytic carries;
+-- the ONLY remaining gap to the true kernel is the Gaussian iterated-convolution CONVERGENCE of the Neumann series
+-- (community-scale wall, Mathlib lacks it).  NOT true-kernel existence, NOT general a₁=R/6 (still G3 PhysicalInputs).
+#print axioms QIQTH.HeatDuhamel.tri_swap
+#print axioms QIQTH.HeatDuhamel.triangular_time_fubini
+#print axioms QIQTH.HeatDuhamel.heatConv_assoc''
 
 end QIQTH.AxiomAudit

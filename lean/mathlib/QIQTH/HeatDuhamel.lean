@@ -400,4 +400,142 @@ theorem heatConv_assoc' (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) 
     hTri
     (heatConv_reorderR A B C t x y hIR)
 
+/-! ### 7. Discharging the triangular time-Fubini `hTri` — a measure-preserving change of variables
+
+    The sole remaining non-integrability carry of `heatConv_assoc'` was `hTri`, the time-triangle
+    Fubini `∫₀ᵗ∫₀^{t−s} = ∫₀ᵗ∫₀^{u}` under `u = s+s', u' = s`.  We discharge it here as a PROVEN
+    scalar theorem `triangular_time_fubini`.
+
+    The route is genuine, reachable measure theory — NOT the Gaussian/Neumann convergence wall:
+    * `tri_swap` — the **triangular interval-Fubini swap**
+        `∫₀ᵗ∫₀ᵘ F u u' = ∫₀ᵗ∫_{u'}ᵗ F u u'`.
+      Both sides equal the integral of the MASKED integrand `𝟙{u'≤u}·F` over the square `[0,t]²`
+      w.r.t. the (restricted) product Lebesgue measure, in the two integration orders; the swap is
+      then exactly Tonelli `MeasureTheory.integral_integral_swap`.  The region↔iterated conversion is
+      the indicator/`setIntegral_indicator` bookkeeping (`Ioc_inter_Iic`, `Ioc ∩ Ici`).  Carries the
+      one genuine joint-integrability hypothesis over the restricted product measure that Tonelli
+      needs — non-vacuous (Tonelli FAILS without it), and not the conclusion.
+    * `triangular_time_fubini` — assembles `tri_swap` with the inner **shift substitution**
+      `∫_{u'}ᵗ G u' (u−u') du = ∫₀^{t−u'} G u' s' ds'` (`intervalIntegral.integral_comp_sub_right`,
+      a measure-preserving translation — the "`u = s+s'`" half of the shear).
+
+    This realizes the shear `Φ(s,s') = (s+s', s)` (`det = 1`, Lebesgue-preserving) at the level of the
+    iterated integrals: `tri_swap` transposes the triangle, the shift translates it. -/
+
+set_option maxHeartbeats 1000000 in
+/-- **Triangular interval-Fubini swap** `∫₀ᵗ∫₀ᵘ F u u' = ∫₀ᵗ∫_{u'}ᵗ F u u'` (`0 ≤ t`).  Both sides
+    equal the integral of the masked integrand `fun u u' => if u' ≤ u then F u u' else 0` over the
+    square `Ioc 0 t ×ˢ Ioc 0 t` w.r.t. the restricted product Lebesgue measure, in the two orders; the
+    swap is Tonelli.  The hypothesis `hM` is exactly the (genuine, non-vacuous) joint integrability
+    over the restricted product measure that `MeasureTheory.integral_integral_swap` requires. -/
+theorem tri_swap (F : ℝ → ℝ → ℝ) (t : ℝ) (ht : 0 ≤ t)
+    (hM : Integrable (Function.uncurry (fun u u' => if u' ≤ u then F u u' else 0))
+            ((volume.restrict (Set.Ioc 0 t)).prod (volume.restrict (Set.Ioc 0 t)))) :
+    (∫ u in (0)..t, ∫ u' in (0)..u, F u u')
+      = ∫ u' in (0)..t, ∫ u in u'..t, F u u' := by
+  -- LHS → masked square integral.
+  have hL : (∫ u in (0)..t, ∫ u' in (0)..u, F u u')
+      = ∫ u in Set.Ioc 0 t, ∫ u' in Set.Ioc 0 t, (if u' ≤ u then F u u' else 0) := by
+    rw [intervalIntegral.integral_of_le ht]
+    refine setIntegral_congr_fun measurableSet_Ioc (fun u hu => ?_)
+    obtain ⟨hu0, hut⟩ := hu
+    rw [intervalIntegral.integral_of_le hu0.le]
+    have hind : (fun u' => if u' ≤ u then F u u' else 0)
+        = (Set.Iic u).indicator (fun y => F u y) := by
+      funext v; simp only [Set.indicator_apply, Set.mem_Iic]
+    rw [hind, setIntegral_indicator measurableSet_Iic, Set.Ioc_inter_Iic, min_eq_right hut]
+  rw [hL, integral_integral_swap hM]
+  -- swapped masked square integral → RHS.
+  rw [intervalIntegral.integral_of_le ht]
+  refine setIntegral_congr_fun measurableSet_Ioc (fun u' hu' => ?_)
+  obtain ⟨hu'0, hu't⟩ := hu'
+  have hind : (fun u => if u' ≤ u then F u u' else 0)
+      = (Set.Ici u').indicator (fun x => F x u') := by
+    funext v; simp only [Set.indicator_apply, Set.mem_Ici]
+  rw [hind, setIntegral_indicator measurableSet_Ici]
+  have hset : Set.Ioc 0 t ∩ Set.Ici u' = Set.Icc u' t := by
+    ext x
+    simp only [Set.mem_inter_iff, Set.mem_Ioc, Set.mem_Ici, Set.mem_Icc]
+    constructor
+    · rintro ⟨⟨_, h2⟩, h3⟩; exact ⟨h3, h2⟩
+    · rintro ⟨h1, h2⟩; exact ⟨⟨lt_of_lt_of_le hu'0 h1, h2⟩, h1⟩
+  rw [hset, integral_Icc_eq_integral_Ioc]
+  exact (intervalIntegral.integral_of_le hu't).symm
+
+set_option maxHeartbeats 1000000 in
+/-- **Triangular time-Fubini** (the discharge of `hTri`): for `0 ≤ t`, under the genuine joint
+    integrability of the masked triangle integrand,
+      `∫₀ᵗ ∫₀^{t−s} G s s' = ∫₀ᵗ ∫₀^u G u' (u−u')`.
+    The map `(s,s') ↦ (s+s', s)` is the volume-preserving shear (`det = 1`); realized here as
+    `tri_swap` (transpose of the triangle) followed by the inner shift substitution
+    `∫_{u'}ᵗ G u' (u−u') du = ∫₀^{t−u'} G u' s' ds'`. -/
+theorem triangular_time_fubini (G : ℝ → ℝ → ℝ) (t : ℝ) (ht : 0 ≤ t)
+    (hInt : Integrable (Function.uncurry (fun u u' => if u' ≤ u then G u' (u - u') else 0))
+            ((volume.restrict (Set.Ioc 0 t)).prod (volume.restrict (Set.Ioc 0 t)))) :
+    (∫ s in (0)..t, ∫ s' in (0)..(t - s), G s s')
+      = ∫ u in (0)..t, ∫ u' in (0)..u, G u' (u - u') := by
+  rw [tri_swap (fun u u' => G u' (u - u')) t ht hInt]
+  refine intervalIntegral.integral_congr (fun u' _ => ?_)
+  rw [intervalIntegral.integral_comp_sub_right (fun x => G u' x) u']
+  simp only [sub_self]
+
+set_option maxHeartbeats 1000000 in
+/-- **Fully-tightened associativity** `(A * B) * C = A * (B * C)` — UNCONDITIONAL modulo
+    integrability.  The Mathlib-missing time-triangle carry `hTri` of `heatConv_assoc'` is now
+    DISCHARGED by `triangular_time_fubini`; what remains are exactly the joint-integrability side
+    conditions the three Fubini steps require:
+    * `hIL`, `hSp` — for the LEFT spatial/temporal reordering (`heatConv_reorderL`);
+    * `hIR` — for the RIGHT reordering (`heatConv_reorderR`);
+    * `hTriInt` — the triangle joint-integrability that Tonelli needs for the time change of
+      variables (`triangular_time_fubini`);
+    plus `ht : 0 ≤ t` (time is nonnegative).  There is NO remaining `hTri` carry: the triangular
+    time-Fubini is a proven theorem here, realizing the volume-preserving shear `(s,s') ↦ (s+s', s)`.
+
+    NB still explicitly SEPARATED from the Neumann-series convergence wall and from `a₁ = R/6`. -/
+theorem heatConv_assoc'' (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n) (ht : 0 ≤ t)
+    (hIL : ∀ s, Integrable
+        (Function.uncurry (fun (s' : ℝ) (z : Point n) =>
+          ∫ w, A (t - s - s') x w * B s' w z * C s z y))
+        ((volume.restrict (Set.uIoc 0 (t - s))).prod volume))
+    (hSp : ∀ s s', Integrable
+        (Function.uncurry (fun (z w : Point n) =>
+          A (t - s - s') x w * B s' w z * C s z y))
+        (volume.prod volume))
+    (hTriInt : Integrable
+        (Function.uncurry (fun (u u' : ℝ) =>
+          if u' ≤ u then (∫ w, ∫ z, A (t - u) x w * B (u - u') w z * C u' z y) else 0))
+        ((volume.restrict (Set.Ioc 0 t)).prod (volume.restrict (Set.Ioc 0 t))))
+    (hIR : ∀ u, Integrable
+        (Function.uncurry (fun (u' : ℝ) (w : Point n) =>
+          ∫ z, A (t - u) x w * B (u - u') w z * C u' z y))
+        ((volume.restrict (Set.uIoc 0 u)).prod volume)) :
+    heatConv (heatConvK A B) C t x y = heatConv A (heatConvK B C) t x y := by
+  -- Discharge `hTri` via `triangular_time_fubini` with
+  -- `G s s' := ∫ w, ∫ z, A (t − s − s') x w · B s' w z · C s z y`.
+  have hTri :
+      (∫ s in (0)..t, ∫ s' in (0)..(t - s), ∫ w, ∫ z,
+          A (t - s - s') x w * B s' w z * C s z y)
+        = ∫ u in (0)..t, ∫ u' in (0)..u, ∫ w, ∫ z,
+          A (t - u) x w * B (u - u') w z * C u' z y := by
+    have hInt' : Integrable
+        (Function.uncurry (fun (u u' : ℝ) =>
+          if u' ≤ u then (∫ w, ∫ z, A (t - u' - (u - u')) x w * B (u - u') w z * C u' z y) else 0))
+        ((volume.restrict (Set.Ioc 0 t)).prod (volume.restrict (Set.Ioc 0 t))) := by
+      have hfun0 :
+          (fun (u u' : ℝ) =>
+            if u' ≤ u then (∫ w, ∫ z, A (t - u' - (u - u')) x w * B (u - u') w z * C u' z y) else 0)
+          = (fun (u u' : ℝ) =>
+            if u' ≤ u then (∫ w, ∫ z, A (t - u) x w * B (u - u') w z * C u' z y) else 0) := by
+        funext u u'
+        rw [show t - u' - (u - u') = t - u from by ring]
+      rw [hfun0]; exact hTriInt
+    have htf := triangular_time_fubini
+      (fun s s' => ∫ w, ∫ z, A (t - s - s') x w * B s' w z * C s z y) t ht hInt'
+    refine htf.trans ?_
+    refine intervalIntegral.integral_congr (fun u _ => ?_)
+    refine intervalIntegral.integral_congr (fun u' _ => ?_)
+    show (∫ w, ∫ z, A (t - u' - (u - u')) x w * B (u - u') w z * C u' z y) = _
+    rw [show t - u' - (u - u') = t - u from by ring]
+  exact heatConv_assoc' A B C t x y hIL hSp hTri hIR
+
 end QIQTH.HeatDuhamel
