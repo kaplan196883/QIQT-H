@@ -12785,5 +12785,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixAnsatz.gaussDdim_diagonal_explicit
 #print axioms QIQTH.HeatParametrixAnsatz.heatParametrix_diagonal_expansion
 #print axioms QIQTH.HeatParametrixAnsatz.heatParametrix_diagonal_a1
+-- ★ PARAMETRIX P2 (P2b) — the DeWitt TRANSPORT RECURSION structure (HeatTransportRecursion.lean).
+-- transportOp Θ g gi v = Θ^{−1/2}·laplaceBeltrami g gi (Θ^{1/2}·v) — the conjugated-Laplacian recursion driver.
+-- TransportRecursion structure (carries the van-Vleck jet, g/gi, center x₀ with gi(x₀)=δ/Γ(x₀)=0, Θ, coefficients u,
+-- the diagonal recursion udiag_rec (k+1)u_{k+1}(x₀)=transportOp(u_k)(x₀), and transport_center — mirroring how
+-- DeWittDiagonal.HeatTransportJet carries transport_diag).  ★ u1_diag_eq_tau_div_six: u 1 x₀ = τ/6 — DERIVED (not
+-- carried) by driving udiag_rec 0 → transport_center → laplaceBeltrami_quadratic_at_center on u0Quad=(1/12)Ric ⟹ 2·tr
+-- = τ/6; u1_diag_eq_HeatTransportJet bridges to DeWittDiagonal's u1diag.  sphereTransportRecursion_u1_eq (unit S²,
+-- τ=2 ⟹ u₁=1/3) — nonzero-curvature witness, bridge NON-vacuous.  conjBase_eq_one (Θ^{1/2}Θ^{−1/2}=1, the r-independence
+-- the k=0 homogeneous eqn encodes).  HONEST — P2b recursion STRUCTURE with the u₁-diagonal τ/6 derived from the jet;
+-- the FULL derivation of udiag_rec from the off-diagonal radial geodesic ODE (r∂_r, ∂_r logΘ, integrating factor, r→0)
+-- is CHECKPOINTED as the analytic wall (needs geodesic-flow/exp-map machinery absent from the tree = P2c/P2d).  Does
+-- NOT give kernel existence / the O(t^N) error estimate / general a₁=R/6 (P2c–e, incl. the P2d Levi/Duhamel wall).  [AF] std-3.
+#print axioms QIQTH.HeatTransportRecursion.transportOp
+#print axioms QIQTH.HeatTransportRecursion.TransportRecursion.u1_diag_eq_tau_div_six
+#print axioms QIQTH.HeatTransportRecursion.TransportRecursion.u1_diag_eq_HeatTransportJet
+#print axioms QIQTH.HeatTransportRecursion.sphereTransportRecursion_u1_eq
 
 end QIQTH.AxiomAudit
