@@ -12834,6 +12834,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_expansion
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_a1
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_a1_explicit
+-- P2e MEASURE-THEORETIC UPGRADE (HeatParametrixTrace.lean, 2026-07-17): the finite-sample Finset trace is upgraded to a
+-- genuine measure-theoretic Riemannian-volume integral ∫·∂μ against a CARRIED volume measure μ.  parametrixDiagTraceInt_expansion
+-- (prefactor + finite-sum linearity via integral_const_mul/integral_finsetSum/integral_mul_const under the genuine integrability
+-- hyp hInt) and parametrixDiagTraceInt_a1 give W₀=Vol=∫√g dV, W₁=(1/6)∫R√g dV ⟹ a₁=(1/6)∫_M R√g dV as a GENUINE real integral.
+-- ⚠ HONEST FIREWALL: STILL the PARAMETRIX trace with carried μ/ud (ud₀=1, ud₁=R/6 labelled); ONLY upgrade = finite-sample sum →
+-- real ∫.  NOT the true Tr e^{−tΔ} (Levi/Duhamel convergence wall), NOT general a₁=R/6 (still G3 PhysicalInputs).  [AF] std-3.
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_expansion
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_a1
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_a1_explicit
 -- ★ PARAMETRIX P2 (CAPSTONE) — the parametrix diagonal trace a₁ with u₁ DERIVED (HeatParametrixTraceDerived.lean).
 -- parametrixDiagTrace_a1_derived: given a family T : ι → TransportRecursion (one per sample point) with the trace's
 -- ud_1 at each point = (T i).u 1 (its center), the trace a₁ = (heatKernel1D t 0)^n·(∑w + (1/6)(∑ (T i).jet.tau·w)t + ..)
