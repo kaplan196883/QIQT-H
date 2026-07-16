@@ -153,4 +153,19 @@ theorem sphereParametrixTraceA1 {ι : Type*} (s : Finset ι) (w : Point 2 → �
   have htau : (sphereTransportRecursion.jet.tau : ℝ) = 2 := rfl
   simp only [show (1 : ℕ) + 1 = 2 from rfl, Finset.Ico_self, Finset.sum_empty, add_zero, htau]
 
+/-- **Sphere cross-check — the parametrix `a₁` curvature IS the computed coordinate scalar
+    curvature.**  The `τ` (= `tr Ric`) driving the unit-2-sphere parametrix-trace `a₁` coefficient
+    (`sphereParametrixTraceA1`, where the `t¹`-coefficient density is `τ/6`) equals the independently
+    COMPUTED `QIQTH.CoordinateCurvature.scalarCurvature` of the unit 2-sphere (`= 2`, from the metric
+    2-jet).  This grounds the parametrix-level `a₁ = (1/6)∫R` in the actual coordinate curvature
+    invariant — the two lines (the heat-parametrix `τ/6` and the component curvature `R`) agree on
+    the sphere.  (Still PARAMETRIX-level and finite-sample; NOT the true kernel / general `a₁=R/6`.) -/
+theorem sphere_a1_curvature_eq_computed :
+    (sphereTransportRecursion.jet.tau : ℝ)
+      = QIQTH.CoordinateCurvature.scalarCurvature
+          QIQTH.CoordinateCurvature.SphereCheck.sphGinv
+          (fun a => Matrix.of fun i j => QIQTH.CoordinateCurvature.SphereCheck.sphDg a i j)
+          (fun a b => Matrix.of fun i j => QIQTH.CoordinateCurvature.SphereCheck.sphDdg a b i j) := by
+  rw [QIQTH.CoordinateCurvature.SphereCheck.scalarCurvature_sphere]; rfl
+
 end QIQTH.HeatParametrixTraceDerived

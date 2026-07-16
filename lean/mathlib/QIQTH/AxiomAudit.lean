@@ -12855,5 +12855,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixTraceDerived.parametrixDiagTrace_a1_derived
 #print axioms QIQTH.HeatParametrixTraceDerived.parametrixDiagTrace_a1_derived_trace_Ric
 #print axioms QIQTH.HeatParametrixTraceDerived.sphereParametrixTraceA1
+-- sphere_a1_curvature_eq_computed: the parametrix a₁ curvature driver on S² (sphereTransportRecursion.jet.tau=2, the
+-- τ=tr Ric in the (1/6)τ heat-trace coefficient) EQUALS the independently-computed CoordinateCurvature.scalarCurvature
+-- of the unit 2-sphere (=2, from the metric 2-jet) — the heat-parametrix τ/6 line and the component-curvature R line
+-- agree on the sphere.  Still parametrix-level/finite-sample; NOT the true kernel / general a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatParametrixTraceDerived.sphere_a1_curvature_eq_computed
 
 end QIQTH.AxiomAudit
