@@ -12962,5 +12962,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianConvBound.unitInterval_beta
 #print axioms QIQTH.GaussianConvBound.betaTimeIntegral_eq
 #print axioms QIQTH.GaussianConvBound.gaussTimePow_conv_beta
+-- C3 — the ITERATED-CONVOLUTION FACTORIAL-DECAY ENGINE (TimeSimplexBeta.lean): iterKernel α k = the k-fold
+-- left-convolution of the model kernel τ^α·G_τ; iterKernel_eq = iterKernel α k t x y =
+-- (Γ(α+1)^k/Γ(k(α+1)))·t^(k(α+1)−1)·G_t(x−y), a genuine Nat.le_induction (from k=1) on C2's
+-- gaussTimePow_conv_beta + the Γ telescoping [Γ(α+1)^k/Γ(k(α+1))]·Β(α+1,k(α+1)) = Γ(α+1)^{k+1}/Γ((k+1)(α+1)).
+-- The 1/Γ(k(α+1)) prefactor IS the factorial (Mittag-Leffler) decay driving Neumann-series convergence (C5).
+-- ⚠ HONEST FIREWALL: the FLAT self-similar iterated convolution (the decay ENGINE), NOT the true kernel, NOT
+-- a₁=R/6 (phases C5/C6).  [AF] std-3.
+#print axioms QIQTH.TimeSimplexBeta.iterKernel_one
+#print axioms QIQTH.TimeSimplexBeta.iterKernel_succ
+#print axioms QIQTH.TimeSimplexBeta.iterKernel_eq
 
 end QIQTH.AxiomAudit
