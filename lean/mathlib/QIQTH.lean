@@ -104,6 +104,7 @@ import QIQTH.FlatHeatEquation
 import QIQTH.GaussianConvolution
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
+import QIQTH.LeviSeries
 import QIQTH.HeatParametrixAnsatz
 import QIQTH.SpeciesCrossCheck
 import QIQTH.TowerGNS.FlowContinuity

@@ -12972,5 +12972,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TimeSimplexBeta.iterKernel_one
 #print axioms QIQTH.TimeSimplexBeta.iterKernel_succ
 #print axioms QIQTH.TimeSimplexBeta.iterKernel_eq
+-- C5a — the MODEL Neumann series CONVERGES (LeviSeries.lean): modelCoeff = the iterKernel_eq coefficient;
+-- gamma_ratio_tendsto_zero = Γ((k+1)β)/Γ((k+2)β)→0 for β≥1 (Gamma_add_one + Real.Gamma_strictMonoOn_Ici, CLEAN);
+-- modelCoeff_summable = Summable (ratio test summable_of_ratio_test_tendsto_lt_one, l=0) for α≥0, t>0;
+-- iterKernel_series_summable = the C3 model iterated-kernel series converges (modelCoeff × constant Gaussian).
+-- The factorial (Γ) decay of C3 verifiably produces a CONVERGENT series.  ⚠ HONEST FIREWALL: MODEL-series
+-- convergence, NOT the true-kernel residual bound (C4)/domination (C5b)/capstone (C6), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.LeviSeries.gamma_ratio_tendsto_zero
+#print axioms QIQTH.LeviSeries.modelCoeff_summable
+#print axioms QIQTH.LeviSeries.iterKernel_series_summable
 
 end QIQTH.AxiomAudit
