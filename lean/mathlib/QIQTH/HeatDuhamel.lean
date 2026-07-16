@@ -199,4 +199,102 @@ theorem duhamel_principle (g gi : Point n → Fin n → Fin n → ℝ)
     intervalIntegral.integral_congr fun s _ => hHeatEq s
   rw [hcancel, add_sub_cancel_right, hDelta]
 
+/-! ### 5. Associativity of the Duhamel convolution (Fubini algebra) -/
+
+/-- **The convolution packaged as a kernel** `heatConvK A B : ℝ → Point n → Point n → ℝ`.  A
+    `heatConv A B` is a scalar-per-`(t,x,y)` object; to iterate the Levi/Duhamel product
+    `H_N * E * E * …` we must feed a convolution back in as a *kernel* argument of `heatConv`.  This
+    repackaging is exactly that.  (`rfl`-transparent by `heatConvK_apply`.) -/
+noncomputable def heatConvK (A B : ℝ → Point n → Point n → ℝ) : ℝ → Point n → Point n → ℝ :=
+  fun τ p q => heatConv A B τ p q
+
+@[simp] theorem heatConvK_apply (A B : ℝ → Point n → Point n → ℝ) (τ : ℝ) (p q : Point n) :
+    heatConvK A B τ p q = heatConv A B τ p q := rfl
+
+/-- **Spatial Fubini** — the reachable measure-theoretic core of associativity.  For a jointly
+    integrable spatial integrand `F : Point n → Point n → ℝ`, the two orders of the iterated
+    Lebesgue integral over `Point n = Fin n → ℝ` agree.  In the associativity computation this is
+    exactly the swap of the `∫ z` and `∫ w` integrals carrying the two convolution kernels.  This is
+    genuine (non-vacuous) measure theory: it FAILS without the joint-integrability hypothesis, whose
+    shape (`Integrable (uncurry F) (volume.prod volume)`) is precisely what `integral_integral_swap`
+    requires.  This is NOT any analytic/Gaussian-bound wall. -/
+theorem heatConv_spatial_fubini (F : Point n → Point n → ℝ)
+    (hF : Integrable (Function.uncurry F) (volume.prod volume)) :
+    (∫ z, ∫ w, F z w) = ∫ w, ∫ z, F z w :=
+  integral_integral_swap hF
+
+set_option maxHeartbeats 1000000 in
+/-- **Associativity of the Duhamel convolution** `(A * B) * C = A * (B * C)`.
+
+    Writing both sides out over the space-time domain (`z, w` the two spatial integration variables
+    threaded through the three kernels, `s, s'` the two time variables on the triangle
+    `{0 ≤ s, 0 ≤ s', s + s' ≤ t}`):
+
+      `((A*B)*C)(t,x,y) = ∫₀ᵗ ∫_z ∫₀^{t−s} ∫_w  A(t−s−s') x w · B s' w z · C s z y`
+      `(A*(B*C))(t,x,y) = ∫₀ᵗ ∫_w ∫₀^{u}   ∫_z  A(t−u)   x w · B(u−u') w z · C u' z y`.
+
+    Under the time change of variables `u = s + s'`, `u' = s` the two integrands coincide, so the
+    identity is PURE Fubini/Tonelli algebra — NOT the analytic (Gaussian-bound) convergence wall.
+
+    This theorem PROVES, with no side hypotheses, the two constant-pull-out steps (the scalar
+    `C s z y` pulls through the inner `∫₀^{t−s} ∫_w` on the left; `A(t−u) x w` pulls into the inner
+    `∫₀^{u} ∫_z` on the right — both by `intervalIntegral.integral_mul_const`/`integral_const_mul`,
+    unconditional linearity).  It then REDUCES the identity to three explicit, non-vacuous carried
+    Fubini facts (each a genuine equality of a *fixed* four-fold integrand under a permuted
+    integration order — none is the conclusion, none is `True`, all hold whenever the joint integrand
+    is integrable):
+
+    * `hReorderL` — the spatial/temporal reordering on the LEFT: move the `∫_z` inward past
+      `∫₀^{t−s}` and `∫_w` (the `∫_z`↔`∫_w` swap is exactly `heatConv_spatial_fubini`);
+    * `hTri` — the **time-triangle Fubini** `∫₀ᵗ∫₀^{t−s} = ∫₀ᵗ∫₀^{u}` with the substitution
+      `u = s+s', u' = s`.  Mathlib has NO direct triangular interval-integral Fubini lemma
+      (only `regionBetween` volume formulae / group-translation `convolution_assoc`), so THIS is the
+      reachable-in-principle-but-Mathlib-missing carry;
+    * `hReorderR` — the mirror spatial/temporal reordering on the RIGHT (move `∫_w` inward past
+      `∫₀^{u}` and `∫_z`).
+
+    NB: this is genuine measure-theoretic algebra (Fubini), explicitly SEPARATED from the
+    Neumann-series convergence wall and from `a₁ = R/6`. -/
+theorem heatConv_assoc (A B C : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (hReorderL :
+      (∫ s in (0)..t, ∫ z, ∫ s' in (0)..(t - s), ∫ w,
+          A (t - s - s') x w * B s' w z * C s z y)
+        = ∫ s in (0)..t, ∫ s' in (0)..(t - s), ∫ w, ∫ z,
+          A (t - s - s') x w * B s' w z * C s z y)
+    (hTri :
+      (∫ s in (0)..t, ∫ s' in (0)..(t - s), ∫ w, ∫ z,
+          A (t - s - s') x w * B s' w z * C s z y)
+        = ∫ u in (0)..t, ∫ u' in (0)..u, ∫ w, ∫ z,
+          A (t - u) x w * B (u - u') w z * C u' z y)
+    (hReorderR :
+      (∫ u in (0)..t, ∫ w, ∫ u' in (0)..u, ∫ z,
+          A (t - u) x w * B (u - u') w z * C u' z y)
+        = ∫ u in (0)..t, ∫ u' in (0)..u, ∫ w, ∫ z,
+          A (t - u) x w * B (u - u') w z * C u' z y) :
+    heatConv (heatConvK A B) C t x y = heatConv A (heatConvK B C) t x y := by
+  have hP1 : heatConv (heatConvK A B) C t x y
+      = ∫ s in (0)..t, ∫ z, ∫ s' in (0)..(t - s), ∫ w,
+          A (t - s - s') x w * B s' w z * C s z y := by
+    simp only [heatConv, heatConvK]
+    refine intervalIntegral.integral_congr (fun s _ => ?_)
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun z => ?_))
+    dsimp only
+    rw [← intervalIntegral.integral_mul_const]
+    refine intervalIntegral.integral_congr (fun s' _ => ?_)
+    rw [← integral_mul_const]
+  have hP2 : heatConv A (heatConvK B C) t x y
+      = ∫ u in (0)..t, ∫ w, ∫ u' in (0)..u, ∫ z,
+          A (t - u) x w * B (u - u') w z * C u' z y := by
+    simp only [heatConv, heatConvK]
+    refine intervalIntegral.integral_congr (fun u _ => ?_)
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun w => ?_))
+    dsimp only
+    rw [← intervalIntegral.integral_const_mul]
+    refine intervalIntegral.integral_congr (fun u' _ => ?_)
+    rw [← integral_const_mul]
+    refine integral_congr_ae (Filter.Eventually.of_forall (fun z => ?_))
+    ring
+  rw [hP1, hReorderL, hTri, ← hReorderR]
+  exact hP2.symm
+
 end QIQTH.HeatDuhamel

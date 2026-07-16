@@ -12882,5 +12882,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatDuhamel.heatConv_hasDerivAt_upper
 #print axioms QIQTH.HeatDuhamel.heatConv_deriv_upper
 #print axioms QIQTH.HeatDuhamel.duhamel_principle
+-- P2d ALGEBRA cont. — ASSOCIATIVITY of the Duhamel convolution (HeatDuhamel.lean, 2026-07-17), the pure-Fubini fact
+-- that makes the iterated Levi series H_N*E*E*… well-defined.  heatConvK repackages A*B as a kernel (iterate the
+-- product); heatConv_spatial_fubini = the reachable measure-theoretic core (∫z∫w=∫w∫z under joint integrability, via
+-- integral_integral_swap) — UNCONDITIONAL modulo integrability.  heatConv_assoc = (A*B)*C=A*(B*C): PROVES the two
+-- constant-pull-out steps unconditionally, then REDUCES to 3 explicit non-vacuous carried Fubini reorderings
+-- (hReorderL/hReorderR spatial-temporal swaps + hTri the time-triangle Fubini u=s+s',u'=s — the latter Mathlib-MISSING:
+-- Mathlib has only rectangular integral_prod / regionBetween volume / group convolution_assoc, no triangular
+-- interval-integral Fubini).  ⚠ HONEST FIREWALL: this is reachable-in-principle Fubini/Tonelli, explicitly NOT the
+-- Gaussian iterated-convolution CONVERGENCE wall (community-scale), NOT true-kernel existence, NOT general a₁=R/6 (G3).
+#print axioms QIQTH.HeatDuhamel.heatConvK
+#print axioms QIQTH.HeatDuhamel.heatConvK_apply
+#print axioms QIQTH.HeatDuhamel.heatConv_spatial_fubini
+#print axioms QIQTH.HeatDuhamel.heatConv_assoc
 
 end QIQTH.AxiomAudit
