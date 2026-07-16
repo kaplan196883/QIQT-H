@@ -9,6 +9,28 @@ full-credit status), `FLAT_RECORD_GRAVITY_CONJECTURE.md` (the target statement +
 ledger), `HEAT_KERNEL_GAP_PLAN.md` + `HEAT_KERNEL_FULL_INFRASTRUCTURE_PLAN.md` (the heat-kernel plans),
 `LEAN_RESULTS_INVENTORY.md` (the heat-kernel / curved-manifold / CurvatureBridge entries).
 
+## ★ UPDATE 2026-07-17 (later) — the Levi/Duhamel CONVERGENCE machinery is now BUILT; the wall is now precisely the OFF-DIAGONAL PARAMETRIX
+
+Supersedes the "the wall is the Levi/Duhamel convergence bound" verdict of the block just below: the
+**convergence-infrastructure campaign (C1–C6, `CONVERGENCE_INFRASTRUCTURE_PLAN.md`) landed the entire
+Gaussian-bound Neumann-series CONVERGENCE machinery, axiom-free** — a proof-assistant first — and a conditional
+true-kernel capstone. **6 [AF] std-3 bricks, all pushed:** C1 Gaussian convolution semigroup
+(`GaussianConvolution.lean`) · C2 self-similar convolution identity + Beta/Γ (`GaussianConvBound.lean`) · C3 the
+iterated-convolution factorial-decay engine `iterKernel_eq = (Γ(α+1)^k/Γ(k(α+1)))·t^(k(α+1)−1)·G_t`
+(`TimeSimplexBeta.lean`) · C5a the MODEL Neumann series is summable · C5b heatConv domination · C5c
+`iterConv_bound` + **`leviSeries_summable` — the actual-residual Levi/Duhamel Neumann series CONVERGES**
+(`LeviSeries.lean`) · C6 the CONDITIONAL capstone `trueHeatKernel_heat_eqn` — `K = H + heatConv H F` solves
+`(∂_t−Δ_g)K = 0` via the built `duhamel_principle` + the Volterra identity (`TrueHeatKernel.lean`).
+
+**The wall, now maximally precise (one level deeper again):** the SINGLE remaining piece to UNCONDITIONAL
+general `a₁=R/6` is **C4 — the parametrix residual bound** `|E| ≤ C·t^{N−d/2}·G_κ`, which REDUCES to the
+**off-diagonal parametrix**: the geodesic distance `r(x,y)` and van-Vleck determinant `Θ(x,y)` as smooth functions
+with their Hamilton–Jacobi / transport derivative estimates — a genuinely SEPARATE, Mathlib-absent, multi-session
+wall (geodesic flow / exp-map at function level). ⚠ **HONEST (binding):** `a₁=R/6` for the TRUE kernel is NOT
+claimed — the capstone C6 is CONDITIONAL (carries the residual/Volterra facts); conjecture input #3 stays the
+carried G3 `PhysicalInputs`, now gated precisely on the off-diagonal parametrix rather than "the convergence bound"
+wholesale — again a sharper boundary. See `CONVERGENCE_INFRASTRUCTURE_PLAN.md`.
+
 ## ★ UPDATE 2026-07-17 — the manifold PARAMETRIX is now BUILT (reachable scaffolding); the wall is now precisely the Levi/Duhamel CONVERGENCE bound
 
 Supersedes the "the manifold heat-kernel PARAMETRIX … no proof assistant has this" verdict of the

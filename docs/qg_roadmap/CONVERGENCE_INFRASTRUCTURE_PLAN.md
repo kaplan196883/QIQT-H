@@ -108,16 +108,28 @@ The bridge from the model to the actual residual:
 `leviSeries_summable` (the actual-residual Neumann series converges). No checkpoints. **CONVERGENCE MACHINERY
 COMPLETE** (C1–C3, C5a–c).
 
-### C6 — TRUE KERNEL + the diagonal expansion ⟹ general `a₁ = R/6` `QIQTH/TrueHeatKernel.lean` (CAPSTONE, conditional)
-- **`trueHeatKernel`** `K := H_N + heatConv H_N F` and **`trueHeatKernel_heat_eqn`**: `(∂_t−Δ_g)K = 0`
-  (via the built `duhamel_principle` + the Volterra identity `F = −E + (−E)*F`) with `K_0 = δ` (the
-  parametrix delta-initial-condition).
-- **`trueHeatKernel_diag_expansion`**: `K(t,x,x) = H_N(t,x,x) + O(t^{N+1−d/2})` (the C5 bound on
-  `H_N*F` at the diagonal is higher-order), so the true diagonal `a₁` coefficient EQUALS the parametrix
-  one, `= R/6`.
-- **`heat_a1_eq_R_div_6`** — the payoff: general curved **`a₁ = R/6` for the TRUE kernel**, discharging
-  conjecture input #3 / the D3-#3, D5-warp, D6-`c_i` gate. Then instantiate `SeeleyDeWittData`
-  (the single Phase-7 instance the `DUALITY_ROADMAP` ledger anticipates).
+### C6 — TRUE KERNEL solves the heat equation `QIQTH/TrueHeatKernel.lean` ✅ LANDED conditional (`a26391d7`, [AF] std-3)
+- **`trueHeatKernel`** `K := H + heatConv H F`, **`leviSeries`** = the SIGNED `Σ(−E)^{*k}`, and
+  **`trueHeatKernel_heat_eqn`**: `(∂_t−Δ_g)K = 0` — pure `heatOp`-linearity algebra via the built
+  `duhamel_principle` + the Volterra identity `F = −E − E*F`, CARRYING `hE`/`hDuhamel`/`hVolterra` +
+  differentiability as genuine explicit hypotheses. `leviSeries_volterra` DERIVES the Volterra identity for
+  the signed series down to the single Mathlib-missing carry `hInter` (tsum/heatConv interchange).
+- ⚠ **CONDITIONAL:** "convergence machinery + residual/Volterra facts ⟹ the true kernel solves the heat
+  equation." NOT unconditional true-kernel existence, NOT unconditional `a₁=R/6`.
+
+## ★ CAMPAIGN STATUS (2026-07-17) — convergence machinery COMPLETE + conditional capstone; ONE wall remains
+The commissioned deliverable — the **Levi/Duhamel Gaussian-bound Neumann-series CONVERGENCE** — is BUILT
+axiom-free (C1–C5c, a proof-assistant first), and the conditional capstone C6 shows it assembles into a true
+kernel solving the heat equation. **The single remaining piece to UNCONDITIONAL `a₁=R/6` is C4** — the actual
+parametrix residual bound `|E| ≤ C·t^{N−d/2}·G_κ — which REDUCES to the OFF-DIAGONAL PARAMETRIX: the geodesic
+distance `r(x,y)` and van-Vleck determinant `Θ(x,y)` as smooth functions with their Hamilton–Jacobi / transport
+derivative estimates. That is a genuinely SEPARATE, Mathlib-absent, multi-session wall (geodesic flow / exp-map
+function-level). Until C4 lands, `a₁=R/6` for the true kernel stays the carried G3 `PhysicalInputs` input.
+
+### C4 — the parametrix residual bound `QIQTH/HeatResidualBound.lean` (THE REMAINING WALL — off-diagonal parametrix)
+Cast `E = (∂_t−Δ_g)H_N` into `|E(t,x,y)| ≤ C·t^{N−d/2}·G_κ(t,x−y)`. Needs the off-diagonal parametrix
+(`r(x,y)`, `Θ(x,y)` as functions + Gaussian derivative / polynomial-absorption estimates) — the deep wall.
+Discharging it turns the conditional C6 into unconditional `a₁=R/6` + the `SeeleyDeWittData` instance.
 
 ## Dependency / critical path
 ```
