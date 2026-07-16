@@ -28,8 +28,10 @@ labelled input (G3 `PhysicalInputs`) until C6 lands.
 
 ## The phases (each an [AF] std-3 green checkpoint). New file(s) under `QIQTH/`.
 
-### C1 — the Gaussian convolution SEMIGROUP (density level) `QIQTH/GaussianConvolution.lean`
+### C1 — the Gaussian convolution SEMIGROUP (density level) `QIQTH/GaussianConvolution.lean` ✅ LANDED (`3ed22d38`, [AF] std-3)
 The Chapman–Kolmogorov / spatial semigroup property — the foundational estimate:
+**DONE** via route (a) completion-of-square: `heatKernel1D_conv` (1-D) + `gaussDdim_conv` (d-dim, Pi-Fubini)
++ `heatKernel1D_pos`/`heatKernel1D_integrable` helpers. No checkpoints.
 - **`heatKernel1D_conv`** (1-D): `∫ z, heatKernel1D t (x−z) · heatKernel1D s (z−y) dz
   = heatKernel1D (t+s) (x−y)` for `t,s > 0`. Route: complete the square in `z`, then `integral_gaussian`
   (variances `2t + 2s = 2(t+s)` add); OR bridge `heatKernel1D t = gaussianPDFReal 0 (2t)` +
