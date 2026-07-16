@@ -791,6 +791,7 @@ import QIQTH.DeWittDiagonal
 import QIQTH.LaplaceBeltrami
 import QIQTH.HeatTransportRecursion
 import QIQTH.HeatParametrixError
+import QIQTH.HeatParametrixOrder
 import QIQTH.FlatTorusHeatKernel
 import QIQTH.SphereHeatTrace
 import QIQTH.Sphere3HeatTrace

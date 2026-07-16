@@ -12801,5 +12801,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatTransportRecursion.TransportRecursion.u1_diag_eq_tau_div_six
 #print axioms QIQTH.HeatTransportRecursion.TransportRecursion.u1_diag_eq_HeatTransportJet
 #print axioms QIQTH.HeatTransportRecursion.sphereTransportRecursion_u1_eq
+-- ★ PARAMETRIX P2 (P2c — first-order residual improvement at the diagonal) (HeatParametrixOrder.lean).
+-- heatResidual_leading_diag_vanish (order-0 flat-Gaussian residual =0 at the diagonal center); parametrixResidual (def
+-- = (∂_t−Δ_g)H_1 of the first-order ansatz); laplaceBeltrami_mul (★ the Δ_g PRODUCT RULE Δ_g(fh)=(Δ_g f)h+f(Δ_g h)+
+-- ∑_ij g^{ij}((∂_i f)(∂_j h)+(∂_j f)(∂_i h)) — the 2⟨∇f,∇h⟩_g cross-gradient, symmetric so no metric-symm assumed) +
+-- pd_pd_mul/_mixed (flat 2nd-order Leibniz) + laplaceBeltrami_gaussMul_at_zero (diagonal: ∂_iG(0)=0 drops the cross
+-- term ⟹ Δ_g(G·w)(0)=(Δ_gG)(0)w(0)+G(0)(Δ_g w)(0)).  ★ parametrixResidual_telescope (UNCONDITIONAL: at the diagonal the
+-- ∂_tG=Δ_gG flat-heat term cancels the (Δ_gG)w term, pushing the residual off leading order); ★
+-- parametrixResidual_transport_identity (with the u₁ transport eqn Θ^{−1/2}u₁(0)=Δ_g(Θ^{−1/2}u₀)(0): the t⁰ order
+-- cancels ⟹ residual = −G(0)·Δ_g(Θ^{−1/2}u₁)(0)·t = Rosenberg's −G·Θ^{−1/2}(Δ_g u_N)t^N for N=1 at the diagonal).  The
+-- transport eqn is CARRIED (satisfiable, non-vacuous; telescope is unconditional).  HONEST — the DIAGONAL first-order
+-- cancellation only; the OFF-diagonal (radial geodesic ODE / van-Vleck-as-function), the general-N recursion, the
+-- O(t^N) error estimate, P2d Levi/Duhamel convergence, P2e Riemannian-volume trace, the curved heat kernel, and general
+-- a₁=R/6 are NOT built (the community-scale wall Mathlib lacks the parabolic-PDE/geodesic-flow/manifold-integration infra
+-- for).  [AF] std-3.
+#print axioms QIQTH.HeatParametrixOrder.laplaceBeltrami_mul
+#print axioms QIQTH.HeatParametrixOrder.parametrixResidual_telescope
+#print axioms QIQTH.HeatParametrixOrder.parametrixResidual_transport_identity
 
 end QIQTH.AxiomAudit
