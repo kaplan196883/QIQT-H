@@ -93,11 +93,15 @@ The bridge from the model to the actual residual:
 - **`heatConv_mono`**: `0 ≤ A ≤ A'`, `0 ≤ B ≤ B'` pointwise ⟹ `heatConv A B ≤ heatConv A' B'` (integral monotonicity).
 - combined `heatConv_le_of_abs_le`. Foundation for the iterated bound.
 
+### C5b — the DOMINATION lemmas `QIQTH/LeviSeries.lean` ✅ LANDED (`1f4d12d3`, [AF] std-3)
+`heatConv_abs_le` + `heatConv_mono` + `heatConv_le_of_abs_le`. No checkpoints.
+
 ### C5c — iterated-convolution bound + NEUMANN SERIES CONVERGENCE `QIQTH/LeviSeries.lean` (DEEP)
-- **`iterConv_bound`**: `|E^{*k}(t,x,y)| ≤ C^k · iterKernel α k t x y` (induction using C5b domination + C2/C3),
-  CARRYING the one-step residual bound `|E| ≤ C · baseKernel α` as a hypothesis (discharged by C4).
-- **`leviSeries_summable`** + **`leviSeries`** `F := Σ_{k≥1} (−E)^{*k}`: absolute convergence from C5a + the
-  domination bound; the sum is a well-defined kernel.
+- **`iterE` / `iterConv_bound`**: `|E^{*k}(t,x,y)| ≤ C^k · iterKernel α k t x y` (induction using C5b domination
+  + C3's `iterKernel` recursion + heatConv bilinearity), CARRYING the one-step residual bound
+  `|E| ≤ C · baseKernel α` (`C ≥ 0`) + the requisite integrability as hypotheses.
+- **`leviSeries_summable`**: `Summable (fun k => iterE E (k+1) t x y)` — absolute convergence from `iterConv_bound`
+  + C5a (`iterKernel_series_summable`) via comparison (`Summable.of_nonneg_of_le` / dominated).
 
 ### C6 — TRUE KERNEL + the diagonal expansion ⟹ general `a₁ = R/6` `QIQTH/TrueHeatKernel.lean` (CAPSTONE)
 - **`trueHeatKernel`** `K := H_N + heatConv H_N F` and **`trueHeatKernel_heat_eqn`**: `(∂_t−Δ_g)K = 0`
