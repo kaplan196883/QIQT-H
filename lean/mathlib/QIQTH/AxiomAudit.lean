@@ -12834,5 +12834,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_expansion
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_a1
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_a1_explicit
+-- ★ PARAMETRIX P2 (CAPSTONE) — the parametrix diagonal trace a₁ with u₁ DERIVED (HeatParametrixTraceDerived.lean).
+-- parametrixDiagTrace_a1_derived: given a family T : ι → TransportRecursion (one per sample point) with the trace's
+-- ud_1 at each point = (T i).u 1 (its center), the trace a₁ = (heatKernel1D t 0)^n·(∑w + (1/6)(∑ (T i).jet.tau·w)t + ..)
+-- — the τ/6 DERIVED internally via (T i).u1_diag_eq_tau_div_six, NOT a carried scalarR/6 label.
+-- transportJetTau_eq_trace_Ric (τ = ∑_a Ric_aa) + parametrixDiagTrace_a1_derived_trace_Ric (t¹ coeff = (1/6)∫ tr Ric,
+-- manifestly the integrated scalar curvature) + sphereParametrixTraceA1 (unit-S² witness, a₁ coeff = (1/6)∑2·w,
+-- τ=2 derived — nonzero-curvature, non-vacuous).  ⚠⚠ HONEST — this ties the P2 chain: a₁=(1/6)∫R with u₁ derived from
+-- the transport recursion.  STILL (a) the PARAMETRIX trace, NOT the true Tr e^{−tΔ} (Levi/Duhamel kernel-existence =
+-- the wall); (b) a FINITE-SAMPLE Finset sum, NOT the Riemannian-volume manifold integral; (c) the transport recursion's
+-- udiag_rec is itself CARRIED (the off-diagonal radial-ODE = the wall).  NOT general a₁=R/6 for the true kernel, NOT
+-- numerical-G, NOT the conjecture.
+-- ═══ P2 PARAMETRIX BUILD — REACHABLE FRONTIER (8 [AF] std-3 bricks, 2026-07-16/17): LaplaceBeltrami (Δ_g) ·
+-- FlatHeatEquation (∂_tG=Δ_flatG) · HeatParametrixError (residual=0 at RNC center) · HeatParametrixAnsatz (H_N + diagonal
+-- a₁) · HeatTransportRecursion (u₁=τ/6 derived) · HeatParametrixOrder (first-order telescoping) · HeatParametrixTrace +
+-- ...Derived (parametrix a₁=(1/6)∫R, u₁ derived).  THE WALL (community-scale, Mathlib lacks the infra): off-diagonal
+-- parametrix (radial geodesic ODE / van-Vleck as function), general-N recursion, P2c-full O(t^{N−d/2}) estimate, P2d
+-- Levi/Duhamel convergence + true-kernel=parametrix+error, P2e-full manifold Riemannian-volume integration.  general
+-- a₁=R/6 for the TRUE kernel STILL a labelled input (G3 PhysicalInputs) behind P2d. ═══  [AF] std-3.
+#print axioms QIQTH.HeatParametrixTraceDerived.parametrixDiagTrace_a1_derived
+#print axioms QIQTH.HeatParametrixTraceDerived.parametrixDiagTrace_a1_derived_trace_Ric
+#print axioms QIQTH.HeatParametrixTraceDerived.sphereParametrixTraceA1
 
 end QIQTH.AxiomAudit

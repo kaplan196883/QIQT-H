@@ -793,6 +793,7 @@ import QIQTH.HeatTransportRecursion
 import QIQTH.HeatParametrixError
 import QIQTH.HeatParametrixOrder
 import QIQTH.HeatParametrixTrace
+import QIQTH.HeatParametrixTraceDerived
 import QIQTH.FlatTorusHeatKernel
 import QIQTH.SphereHeatTrace
 import QIQTH.Sphere3HeatTrace
