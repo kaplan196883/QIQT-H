@@ -12818,5 +12818,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixOrder.laplaceBeltrami_mul
 #print axioms QIQTH.HeatParametrixOrder.parametrixResidual_telescope
 #print axioms QIQTH.HeatParametrixOrder.parametrixResidual_transport_identity
+-- ★ PARAMETRIX P2 (P2e, parametrix level) — the diagonal heat-TRACE a₁=(1/6)∫R coefficient (HeatParametrixTrace.lean).
+-- parametrixDiagTrace N ud w s pt t = ∑_{i∈s}(heatKernel1D t 0)^n·(∑_{k≤N} ud_k(pt i)t^k)·w(pt i) — the finite-sample
+-- diagonal parametrix trace (at the diagonal the Gaussian=1, so it's ALGEBRAIC: no Gaussian integral).  diagTraceCoeff
+-- (W_k=∑_i ud_k·w).  parametrixDiagTrace_expansion (= (4πt)^{−d/2}·∑_{k≤N} W_k t^k).  ★ parametrixDiagTrace_a1 (ud_0=1,
+-- ud_1=R/6 ⟹ = (4πt)^{−d/2}(Vol + (1/6)(∑_i R(pt i)w(pt i))·t + ∑_{2≤k≤N}W_k t^k)): the t¹ coefficient is (1/6)·∫R —
+-- the Seeley–DeWitt a₁=(1/6)∫R heat-trace coefficient AT THE PARAMETRIX LEVEL.  parametrixDiagTrace_a1_explicit (leading
+-- manifestly (4πt)^{−d/2}·Vol).  ⚠⚠ HONEST SCOPE: PARAMETRIX diagonal trace with CARRIED diagonal Seeley coefficients
+-- (ud_0=1, ud_1=R/6 labelled DeWitt-normalization hyps, NOT derived here); a FINITE-SAMPLE Finset sum with carried
+-- volume density w=√det g, NOT the measure-theoretic Riemannian-volume integral.  This is NOT the true Tr e^{−tΔ} (needs
+-- the Levi/Duhamel kernel existence + error control = the wall), NOT the general a₁=R/6 from the actual recursion, NOT
+-- numerical-G / the conjecture.  The remaining pieces (off-diagonal transport, general-N recursion, P2d Levi/Duhamel,
+-- P2e-full manifold integration) are the community-scale wall (parabolic-PDE/geodesic-flow/manifold-integration infra
+-- Mathlib lacks).  [AF] std-3.
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_expansion
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_a1
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTrace_a1_explicit
 
 end QIQTH.AxiomAudit
