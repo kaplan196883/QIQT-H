@@ -49,12 +49,22 @@ polynomial with explicit constants.
   semigroup up to a κ-comparison; time part = the one-step Beta integral `∫₀ᵗ (t−s)^a s^b ds`).
 - The κ-comparison lemma (convolution slightly widens the Gaussian; dominate by a fixed `κ`).
 
-### C3 — the time-simplex Beta / factorial decay `QIQTH/TimeSimplexBeta.lean` (DEEP)
-The source of convergence: iterating C2 over the `k`-fold time simplex.
-- **`simplex_beta`**: `∫_{0<s₁<…<s_k<t} ∏ (s_i−s_{i−1})^{α} ds = t^{k(α+1)−1}·Γ(α+1)^k / Γ(k(α+1))`
-  (Dirichlet/Beta integral). Route: induction on `k` using `Real.betaIntegral` + `Real.Gamma_add_one`;
-  the `1/Γ(k(α+1))` gives the super-exponential (`~1/k!`) decay. Mathlib has `Real.betaIntegral`,
-  `Real.Gamma` — this is reachable but fiddly.
+### C2 — the self-similar convolution identity `QIQTH/GaussianConvBound.lean` ✅ LANDED (`b22c7d58`, [AF] std-3)
+`gaussTimePow_conv` (`heatConv (τ^a G_τ)(σ^b G_σ) = (∫₀ᵗ(t−s)^a s^b)·G_t`) + `betaTimeIntegral_eq`
+(`= t^(a+b+1)·Γ(a+1)Γ(b+1)/Γ(a+b+2)`, ℝ↔ℂ bridged via `Complex.betaIntegral`) + `gaussTimePow_conv_beta`.
+No checkpoints.
+
+### C3 — the iterated-convolution factorial decay `QIQTH/TimeSimplexBeta.lean` (DEEP — but tractable via C2 iteration)
+The source of convergence — realized NOT as a raw `k`-dim simplex Fubini but as the **iteration of C2's
+`gaussTimePow_conv_beta`** (the Beta factors telescope through `Β(x,y)=Γ(x)Γ(y)/Γ(x+y)`):
+- **`iterKernel α k`** (recursive): `iterKernel α 1 = τ^α G_τ`; `iterKernel α (k+1) = heatConv (τ^α G_τ)
+  (iterKernel α k)` (via `heatConvK`).
+- **`iterKernel_eq`**: for `α>−1`, `t>0`, `k≥1`,
+  `iterKernel α k t x y = (Γ(α+1)^k / Γ(k(α+1))) · t^(k(α+1)−1) · G_t(x−y)`. Induction on `k` using
+  `gaussTimePow_conv_beta` (with `a=α`, `b=k(α+1)−1`) + the Γ telescoping
+  `[Γ(α+1)^k/Γ(k(α+1))]·Β(α+1,k(α+1)) = Γ(α+1)^{k+1}/Γ((k+1)(α+1))`. The `1/Γ(k(α+1))` is the
+  super-exponential (Mittag-Leffler) decay driving convergence. Mathlib `Real.Gamma`, `Gamma_pos_of_pos`,
+  `Gamma_ne_zero`.
 
 ### C4 — the parametrix residual bound `QIQTH/HeatResidualBound.lean`
 Cast the built residual `E = (∂_t−Δ_g)H_N` (`HeatParametrixError`/`HeatParametrixOrder`) into C2 form:
