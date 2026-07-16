@@ -12951,5 +12951,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianConvolution.heatKernel1D_integrable
 #print axioms QIQTH.GaussianConvolution.heatKernel1D_conv
 #print axioms QIQTH.GaussianConvolution.gaussDdim_conv
+-- C2 — the SELF-SIMILAR Gaussian×time-power convolution identity (GaussianConvBound.lean): gaussTimePow_conv =
+-- heatConv (τ^a·G_τ) (σ^b·G_σ) t x y = (∫₀ᵗ(t−s)^a s^b ds)·G_t(x−y) (rides on C1 gaussDdim_conv + heatConv
+-- linearity, endpoints via integral_congr_ae); betaTimeIntegral_eq = ∫₀ᵗ(t−s)^a s^b = t^(a+b+1)·Β(a+1,b+1)
+-- in Γ closed form (via unitInterval_beta, bridged ℝ↔ℂ through Complex.betaIntegral — Mathlib has no real one);
+-- gaussTimePow_conv_beta = the identity in closed Β/Γ form.  This t^(a+b+1)·Β factor is what iterates over the
+-- time simplex (C3) to give factorial decay.  ⚠ HONEST FIREWALL: the FLAT one-step self-similar convolution,
+-- NOT the true kernel, NOT a₁=R/6 (phases C5/C6).  [AF] std-3.
+#print axioms QIQTH.GaussianConvBound.gaussTimePow_conv
+#print axioms QIQTH.GaussianConvBound.unitInterval_beta
+#print axioms QIQTH.GaussianConvBound.betaTimeIntegral_eq
+#print axioms QIQTH.GaussianConvBound.gaussTimePow_conv_beta
 
 end QIQTH.AxiomAudit

@@ -102,6 +102,7 @@ import QIQTH.HeatKernelA1
 import QIQTH.HeatKernelDDim
 import QIQTH.FlatHeatEquation
 import QIQTH.GaussianConvolution
+import QIQTH.GaussianConvBound
 import QIQTH.HeatParametrixAnsatz
 import QIQTH.SpeciesCrossCheck
 import QIQTH.TowerGNS.FlowContinuity
