@@ -572,6 +572,15 @@ kernel; the metric-orthonormal-frame `g(p)=δ` assumption (for `g̃(0)=δ`) is a
   (⟹ `ContinuousOn`), and `expMap_contDiffOn_two` (D). Rung 2 of the ContDiff³ tower COMPLETE. **NEXT = Rung 3**
   (`ContDiff³ exp_p`, pre-scoped in §RUNG 3 below — clean brick-for-brick mirror) ⟹ then `κ=1/6` unconditional for `g̃`.
   ⚠ Still: NOT `κ=1/6` yet, NOT the parametrix (P2), NOT general `a₁=R/6`, NOT numerical-G.
+- **★★★★ 2026-07-16 — R3→κ MILESTONE ACHIEVED: UNCONDITIONAL κ=1/6 for g̃ (PUSHED `87609f17`, 917 ins, [AF] std-3):**
+  the sole open identity `hpd2_residual_cubic_reindex` PROVED (the reframed 4-atom pure symmetric-array identity
+  2A=−2S2−2/3S3−4/3S4=B, closed via ~30 fold-piece reductions + a uniform 5-index `sum5_reindex` Equiv + christoffel_symm
+  + hsymm). FULL CASCADE, all UNCONDITIONAL, all [AF] std-3: `hpd2_cubic_vanish` → `expPullback_hpd2` →
+  `expPullback_radial_gauge` → `gauge_pd_christoffel_expPullbackInv_zero'` (cyclic RNC gauge for g̃, NO hpd2) → ★★★
+  `kappa_eq_one_sixth_expPullback` (heat a₁ coeff at g̃ = (1/6−ξ)Rscl−m², NO hpd2 hyp). ⟹ the ENTIRE R3→κ radial-gauge
+  chain is machine-checked axiom-free: κ=1/6 DERIVED in-Lean for the pullback metric of ANY smooth metric in an
+  orthonormal frame at p. ⚠ HONEST: κ=1/6 for g̃ specifically; NOT the general a₁=R/6 (P2 parametrix / Seeley–DeWitt,
+  labelled input), NOT numerical G, NOT the conjecture — those stay behind the P2 parametrix proper (Levi/Duhamel wall).
 - **★★★ 2026-07-16 — R3→κ MILESTONE: conditional κ=1/6 capstone for g̃ (PUSHED `12c414d6`, [AF] std-3):**
   `heat_a1_of_gauge_c2` (finite-regularity variant, full _c2 chain, `ed2362c2`) + `expPullbackMetricInv_contDiffAt_one`
   + **`kappa_eq_one_sixth_expPullback_of_hpd2`** — the a₁ heat coefficient at g̃ = (1/6−ξ)Rscl−m², instantiating

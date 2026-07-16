@@ -82,10 +82,17 @@ general smooth-dependence theorem Mathlib lacks):
   `expMap_fderiv2_hasFDerivAt` (HasFDerivAt, 3rd deriv = `expJetD3`); the continuity `expJetD3_two_pt_diff` (from the
   14-term parameter-Grönwall `expJet3Val_v_two_pt_diff`); and the discharge
   `expMap_contDiffOn_three_of_fderiv2_contDiffOn_one`. ⚠ Does NOT by itself give `κ=1/6` — that is R3→κ next.
-- **R3→κ (next, now UNBLOCKED)** — the bridge `rnc_christoffel_linearJet` (`rncDΓ = pd(christoffel g̃)(0)`, needs the
-  C³ jet which now exists) + `ContDiff g̃` (the pullback metric, from `ContDiff³ exp_p` via derivative-loss) ⟹
-  instantiate `RNCExpansion.heat_a1_of_gauge` at `g̃` ⟹ **`κ=1/6` unconditional given the metric.** (Does NOT yet give
-  general `a₁=R/6` — that needs the kernel = P2.)
+- **R3→κ. ✅✅ DONE 2026-07-16 — UNCONDITIONAL `κ=1/6` for the pullback metric `g̃` (`PullbackMetric.lean`, [AF] std-3,
+  `87609f17`).** The full chain landed axiom-free: the exp-jet endgame (`expJetD3(0)=a₃`, twice-Leibniz `pd²g̃(0)`,
+  `expPullbackMetric` + smooth inverse `expPullbackMetricInv`), the pullback-Christoffel derivative
+  `pd_christoffel_expPullbackInv_zero`, the finite-regularity `heat_a1_of_gauge_c2` (weakens `ContDiff ⊤`→`ContDiffAt 2`),
+  and — the crux — the pullback RNC radial identity `hpd2` proved as a pure symmetric-array identity (`2A−B=0` via the
+  4-atom `S2/S3/S4/S1c` reduction + a uniform 5-index `sum5_reindex` Equiv). Cascade: `hpd2_cubic_vanish` →
+  `expPullback_hpd2` → `expPullback_radial_gauge` → `gauge_pd_christoffel_expPullbackInv_zero'` → ★
+  **`kappa_eq_one_sixth_expPullback`** = the heat `a₁` coefficient at `g̃` = `(1/6−ξ)R − m²`, NO gauge hypothesis, only
+  the standard inputs (ambient `C^∞`, symmetry, `gi=g⁻¹`, orthonormal frame `g(p)=δ`, `κ` defined by the √det↔ricci
+  relation, curvature non-degeneracy). ⚠ HONEST: this is `κ=1/6` for the EXP-PULLBACK METRIC `g̃`; it does NOT give
+  the general `a₁=R/6` — that still needs the kernel = P2 (Seeley–DeWitt, labelled physical input).
 
 ### P2 — the heat-kernel parametrix PROPER (the deep wall — the actual discharge)
 This is what proves the smooth kernel `K_t(x,y)` EXISTS and has the short-time diagonal expansion for an arbitrary
