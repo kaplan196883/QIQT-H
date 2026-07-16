@@ -113,9 +113,12 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
 - `HeatParametrixTrace.lean` (`1a4e1a5b`) + `HeatParametrixTraceDerived.lean` (`552a093a`) — P2e (parametrix level): the
   diagonal heat-trace `= (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`, i.e. the **a₁ = (1/6)∫R** coefficient, with u₁ DERIVED from
   the transport recursion (`parametrixDiagTrace_a1_derived`), sphere witness. Finite-sample sum, carried diagonal coeffs.
-- ✅ **P2 REACHABLE FRONTIER COMPLETE (8 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
+- ✅ **P2 REACHABLE FRONTIER COMPLETE (9 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
   Seeley–DeWitt story is machine-checked: operator, flat heat solution, residual (=0 at RNC center), ansatz + diagonal
-  a₁, transport recursion (u₁=τ/6 derived), first-order telescoping, parametrix trace a₁=(1/6)∫R.
+  a₁, transport recursion (u₁=τ/6 derived), first-order telescoping, parametrix trace a₁=(1/6)∫R, PLUS the **P2d
+  ALGEBRAIC core** (`HeatDuhamel.lean`, 2026-07-17): the space-time Duhamel convolution `heatConv` + full bilinear
+  algebra + the FTC-1 boundary term FULLY PROVEN, and `duhamel_principle` reducing `(∂_t−Δ_g)(A*B)=B` to 4 explicit
+  non-vacuous analytic hypotheses — decomposing P2d into its (proven) algebra vs its (checkpointed) convergence.
 - ⚠ **THE WALL (community-scale, Mathlib lacks the infrastructure) — where the build honestly stops:** the off-diagonal
   parametrix (`udiag_rec` from the radial geodesic ODE / van-Vleck as a function), the general-N transport recursion,
   P2c-full `O(t^{N−d/2})` error estimate, **P2d Levi/Duhamel convergence + kernel existence** (true kernel = parametrix +
@@ -129,7 +132,10 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
 - **P2b — the transport recursion** for `u_k` (`DeWittDiagonal` has `u_1` diagonal; extend off-diagonal + all `k`).
 - **P2c — the error estimate** `(∂_t + Δ_x) H_N = O(t^{N−d/2})` (Gaussian × polynomial — hard bounds).
 - **P2d — the Levi/Duhamel convergence** `K = H_N + H_N * (error) + …` → the ACTUAL kernel. **THE analytic heart**
-  (iterated-convolution Gaussian-bound estimates; no proof assistant has this).
+  (iterated-convolution Gaussian-bound estimates; no proof assistant has this). ✅ **ALGEBRAIC core landed** (`HeatDuhamel.lean`,
+  [AF] std-3): the convolution `*` (`heatConv`) + bilinearity + FTC-1 boundary term are fully proven, and Duhamel's
+  principle is a genuine algebraic reduction to 4 carried analytic hyps. ⚠ **STILL the wall:** the under-integral
+  Leibniz half + the **Gaussian iterated-convolution CONVERGENCE** of the Neumann series (the community-scale piece).
 - **P2e — global assembly:** the Riemannian volume measure `dV` + `∫_M K_t(x,x) dV = Tr e^{−tΔ}` (ties to the L5
   trace-class/Mercer machine) ⟹ `Tr e^{−tΔ} ~ (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`.
 
