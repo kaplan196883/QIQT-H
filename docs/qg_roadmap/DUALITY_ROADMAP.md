@@ -236,24 +236,43 @@ D6 are parallel and independently valuable.
 Hamiltonian (D1), the completed limit algebra (D2), and the DY7 continuum correspondence (D3) —
 and the third is already written down with its finite half proven.
 
-## Suggested next bricks (each loop-sized, in path order)
+## Suggested next bricks — REFRESHED 2026-07-17 (the loop-sized D-bricks are exhausted; the residue is three research-grade walls)
 
-The 2026-07-11/12 campaign bricks (D1a · D4a · D2a · LA2 · D3a–e · G1 · G2 · G3) all LANDED — see
-the ledger and the campaign logs below. The current frontier, in decreasing tractability:
+The 2026-07-11/12 campaign bricks (D1a · D4a · D2a · LA2 · D3a–e · G1 · G2 · G3) all LANDED, **and
+so have the two "next tractable" bricks the previous version of this section listed:**
+- ~~**D4b — the GENERATION half of bulk dynamics**~~ **LANDED** (`250210e7`) — plus D4c AUTONOMY
+  (`ccb5825d`). D4 kinematics is now complete (conservation + generation + autonomy).
+- ~~**D5a — the scale-as-dimension rung**~~ **LANDED** (`ef52d8f7`) — the radial coordinate is a
+  kinematic theorem.
 
-- **D4b — the GENERATION half of bulk dynamics** (the D4 remainder; likely the next tractable
-  brick): a bulk equation of motion from boundary evolution — `h(s) := reconstruct(δA(T_s ρ))` given
-  a genuine EVOLUTION law (not just D4a's conservation/frozen metric). Composable from held pieces;
-  no external gate. Consult-first on the honest evolution-law statement.
-- **D5a — the scale-as-dimension rung** (the D5 remainder): entanglement-at-all-scales → the
-  holographic radial direction, on the held refinement tower + exact RT. The decoded bulk is
-  currently spatial/single-scale; the theorem is absent, not obstructed.
-- **The a₁ = R/6 ANALYTIC identification** (the D3 input #3 / D6 `c_i` remainder): the algebraic
-  half is proved (G3); the analytic `heatTraceCoeff₁ = ∫(R/6+trE)` is GATED on Mathlib's absent
-  Riemannian heat-kernel theory — research-grade, a Mathlib contribution, NOT increment-grade.
-- **Encoding #4/#5 as physical postulates** (optional, honesty-of-record): the same-regulator and
-  cutoff-identification inputs are modeling stipulations, not theorems; they are already carried as
-  `PhysicalInputs` hypotheses in G3's conditional theorem — no further Lean work discharges them.
+**With those done, there is no remaining loop-sized D-brick that is NOT gated on one of the three
+external walls.** The current frontier, in decreasing leverage:
+
+1. **The Riemannian heat-kernel `a₁ = R/6` — the highest-leverage wall (surfaces 3×: D3 input #3,
+   D5-warp, D6-`c_i`).** ★ **SUBSTANTIALLY ADVANCED 2026-07-16/17** — see the ★ UPDATE 2026-07-17
+   block at the top: the reachable manifold-parametrix scaffolding is now BUILT (14 [AF] std-3 bricks
+   — Δ_g, flat heat eqn, residual, ansatz + diagonal a₁, transport recursion `u₁=τ/6` derived, the
+   COMPLETE Levi/Duhamel algebra, and the P2e trace `a₁=(1/6)∫_M R√g dV` against a constructed volume
+   measure). The wall has moved from "the parametrix, nothing built" to the SINGLE named **Gaussian
+   iterated-convolution CONVERGENCE bound** of the Levi/Duhamel Neumann series. Closing it unblocks
+   D3-#3 + D5-warp + D6 simultaneously — but it is a **multi-session, Mathlib-grade parabolic-PDE
+   build** (Grigor'yan-territory iterated-convolution Gaussian bounds), NOT loop-sized. Needs an
+   explicit commission. See `THE_PARAMETRIX_CRITICAL_PATH.md` §P2.
+2. **The von Neumann type-III₁ classification API (D2 tail).** The III₁ *signature* is proved
+   (σ((1+Δ)⁻¹)=[0,1] exact, LA2); only the abstract Connes S-invariant / type API remains — absent
+   from every proof assistant. Research-grade, not loop-sized.
+3. **A genuine interacting D1 Hamiltonian.** D1's einselection story is complete at the
+   exactly-solvable level (D1a: resonance/DFS witness, exact non-commuting qubit, Zeno). A *duality*
+   needs one self-contained interacting boundary Hamiltonian from which the dephasing, the
+   geometry-decoding correlations, AND the equilibria all FOLLOW — Clay-adjacent, research-grade.
+- **Encoding #4/#5 as physical postulates** (honesty-of-record only): the same-regulator and
+  cutoff-identification inputs are modeling stipulations, already carried as `PhysicalInputs`
+  hypotheses in G3's conditional theorem — no further Lean work discharges them.
+
+**Bottom line:** the tractable duality bricks are done; the roadmap now stands at its three
+research-grade external walls, of which the heat-kernel `a₁=R/6` (wall 1) is both the most-connected
+AND the one with the most groundwork already laid — the natural target IF a multi-session convergence
+campaign is commissioned.
 
 ## D3d DESIGN — CONSULT DONE (gpt-5.5-pro, 2026-07-12): the Susskind–Uglum counterterm identity
 The honest formalizable rung is the CUTOFF-EXPLICIT counterterm identity (NOT a cutoff-free
