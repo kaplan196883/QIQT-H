@@ -7,6 +7,35 @@ algebra LA1′). Companion to `ADSCFT_GAP_ANALYSIS.md`. This document exists bec
 assessments UNDER-credited the repository; it states the position at full credit, with the honest
 line drawn where the roadmap draws it.
 
+## ★ UPDATE 2026-07-17 — the manifold PARAMETRIX is BUILT (14 [AF] bricks) · the wall is now the Levi/Duhamel CONVERGENCE bound
+
+Supersedes the "the wall is the manifold parametrix — no proof assistant has this" verdict of the
+2026-07-15 block below: the *reachable* parametrix scaffolding is now machine-checked (14 [AF] std-3
+bricks, all pushed), and the wall has moved one level deeper to a single named analytic bound.
+
+- **`R3→κ` closed:** `κ = 1/6` (the heat-`a₁` conformal coefficient) is now UNCONDITIONAL for the
+  exp-pullback metric `g̃` (`kappa_eq_one_sixth_expPullback`, `87609f17`) — the RNC radial identity `hpd2`
+  discharged, not carried.
+- **The P2 parametrix-level Seeley–DeWitt story is machine-checked:** Laplace–Beltrami `Δ_g`, the flat
+  Gaussian solving the heat equation, the residual `=0` at the RNC center, the parametrix ansatz `H_N` +
+  diagonal `a₁`, the DeWitt transport recursion with **`u₁=τ/6` DERIVED**, first-order residual telescoping,
+  and the parametrix diagonal **heat-trace `a₁=(1/6)∫R`** (`u₁` derived + `S²` cross-check).
+- **The P2d Levi/Duhamel ALGEBRA is COMPLETE — zero analytic carries** (`HeatDuhamel.lean`): the Duhamel
+  convolution + bilinearity + FTC-1; **Duhamel's principle** `(∂_t−Δ_g)(A*B)=B`; and **associativity
+  `(A*B)*C=A*(B*C)` UNCONDITIONAL modulo integrability** (both reorderings + the triangular time-Fubini
+  discharged via the measure-preserving shear). The iterated Levi product is algebraically well-founded.
+- **The P2e trace/volume side is a genuine integral against a CONSTRUCTED measure:** `a₁ = (1/6)∫_M R√g dV`
+  as a real `∫·∂μ`, with the Riemannian volume measure built via `volume.withDensity(√det g)` and tied to
+  the computed `CoordinateCurvature.scalarCurvature`.
+- **The wall, now maximally precise:** the ONE remaining gap to the true kernel is the **Gaussian
+  iterated-convolution CONVERGENCE** of the Levi/Duhamel Neumann series `K = H_N + H_N∗E + …` (plus P2b
+  off-diagonal van-Vleck) — Grigor'yan-territory parabolic-PDE analysis, a multi-session Mathlib-grade build.
+
+⚠ **HONEST (binding):** the whole P2 line is **PARAMETRIX-LEVEL with carried DeWitt coefficients** (`u₀=1`,
+`u₁=R/6` labelled) — NOT the true `Tr e^{−tΔ}`, NOT the general curved `a₁=R/6`. Conjecture input #3 stays
+open, now gated precisely on the convergence bound (a sharper boundary than "the parametrix" wholesale).
+See `THE_PARAMETRIX_CRITICAL_PATH.md` (§P2, 14 [AF] bricks).
+
 ## ★ UPDATE 2026-07-15 — heat-kernel front advanced · curvature substrate confirmed IN-REPO · the wall is the manifold parametrix
 
 Refines the heat-kernel / (1/6−ξ) items below (which framed scalar `R` as merely a Mathlib-upstream effort

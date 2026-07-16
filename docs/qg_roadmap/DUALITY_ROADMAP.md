@@ -9,6 +9,52 @@ full-credit status), `FLAT_RECORD_GRAVITY_CONJECTURE.md` (the target statement +
 ledger), `HEAT_KERNEL_GAP_PLAN.md` + `HEAT_KERNEL_FULL_INFRASTRUCTURE_PLAN.md` (the heat-kernel plans),
 `LEAN_RESULTS_INVENTORY.md` (the heat-kernel / curved-manifold / CurvatureBridge entries).
 
+## ★ UPDATE 2026-07-17 — the manifold PARAMETRIX is now BUILT (reachable scaffolding); the wall is now precisely the Levi/Duhamel CONVERGENCE bound
+
+Supersedes the "the manifold heat-kernel PARAMETRIX … no proof assistant has this" verdict of the
+2026-07-15 block (C): the *reachable* parametrix scaffolding is now machine-checked — **14 [AF] std-3
+bricks, all pushed** — and the wall has moved one level deeper, to a single named analytic bound.
+
+**(A) `R3→κ` — unconditional `κ = 1/6` for the pullback metric.** `kappa_eq_one_sixth_expPullback`
+(`PullbackMetric.lean`, `87609f17`): the heat-`a₁` conformal-coupling coefficient `κ = 1/6` is now an
+UNCONDITIONAL theorem for the exp-pullback metric `g̃ = exp_p^*g` (the RNC radial identity `hpd2` was
+discharged — a pure symmetric-array identity closed via `Finset.sum_bij'`), not a carried hypothesis.
+
+**(B) The P2 parametrix-level Seeley–DeWitt story is machine-checked** (all [AF] std-3, pushed):
+Laplace–Beltrami `Δ_g` (`LaplaceBeltrami.lean`); the flat Gaussian solving `∂_tG = Δ_flat G`
+(`FlatHeatEquation.lean`); the heat-operator residual `= 0` at the RNC center (`HeatParametrixError.lean`);
+the parametrix ansatz `H_N` + its diagonal `a₁` (`HeatParametrixAnsatz.lean`); the DeWitt transport
+recursion with **`u₁ = τ/6` DERIVED** + sphere witness (`HeatTransportRecursion.lean`); the first-order
+residual telescoping at the diagonal (`HeatParametrixOrder.lean`); and the parametrix diagonal **heat-trace
+`a₁ = (1/6)∫R`** with `u₁` derived-not-carried + the `S²` curvature cross-check
+(`HeatParametrixTrace.lean` / `…Derived.lean`).
+
+**(C) The P2d Levi/Duhamel ALGEBRA is COMPLETE — zero analytic carries** (`HeatDuhamel.lean`, all [AF]
+std-3): the space-time Duhamel convolution `heatConv` + full bilinearity + the FTC-1 boundary term;
+**Duhamel's principle** `(∂_t−Δ_g)(A*B) = B` (a genuine algebraic reduction to explicit analytic hyps);
+and **associativity `(A*B)*C = A*(B*C)` UNCONDITIONAL modulo integrability** (`heatConv_assoc''`), after
+discharging BOTH spatial/temporal reorderings (interval↔Lebesgue Fubini) AND the triangular time-Fubini
+(`triangular_time_fubini`, via the measure-preserving shear `(s,s')↦(s+s',s)`). The iterated Levi product
+is now algebraically well-founded in Lean.
+
+**(D) The P2e trace/volume side is now a genuine integral against a CONSTRUCTED measure**
+(`HeatParametrixTrace.lean`): `parametrixDiagTraceInt` upgrades the finite-sample trace to a real `∫·∂μ`,
+giving **`a₁ = (1/6)∫_M R√g dV` as a genuine measure-theoretic integral**; and the Riemannian volume
+measure is CONSTRUCTED from the metric density via `riemannianVolume = volume.withDensity(√det g)`
+(`parametrixDiagTraceInt_riemannian_a1`), with a bonus tying `scalarR` to the computed
+`CoordinateCurvature.scalarCurvature`.
+
+**(E) The wall, now maximally precise.** Everything reachable beneath the true kernel is built; the ONE
+remaining gap is the **Gaussian iterated-convolution CONVERGENCE** of the Levi/Duhamel Neumann series
+`K = H_N + H_N∗E + H_N∗E∗E + …` → the actual kernel (plus the P2b off-diagonal van-Vleck as a function).
+No proof assistant has iterated-convolution Gaussian bounds; this is Grigor'yan-territory parabolic-PDE
+analysis, a multi-session Mathlib-grade build. ⚠ **HONEST (binding):** the whole P2 line is
+**PARAMETRIX-LEVEL with carried DeWitt coefficients** (`u₀=1`, `u₁=R/6` labelled) — it is NOT the true
+`Tr e^{−tΔ}` and NOT the general curved `a₁=R/6`. Conjecture input #3 (general `a₁=R/6` for the TRUE
+kernel) is still open, now gated precisely on the convergence bound rather than on "the parametrix"
+wholesale — a genuinely sharper boundary. See `THE_PARAMETRIX_CRITICAL_PATH.md` (§P2, 14 [AF] bricks) +
+`HEAT_KERNEL_GAP_PLAN.md`.
+
 ## ★ UPDATE 2026-07-15 — the heat-kernel front advanced; the curvature substrate is IN-REPO; the wall is now precisely the manifold parametrix
 
 Two corrections + real progress supersede parts of the 2026-07-13 text below (which framed scalar `R`
