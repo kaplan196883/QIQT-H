@@ -103,7 +103,12 @@ The bridge from the model to the actual residual:
 - **`leviSeries_summable`**: `Summable (fun k => iterE E (k+1) t x y)` — absolute convergence from `iterConv_bound`
   + C5a (`iterKernel_series_summable`) via comparison (`Summable.of_nonneg_of_le` / dominated).
 
-### C6 — TRUE KERNEL + the diagonal expansion ⟹ general `a₁ = R/6` `QIQTH/TrueHeatKernel.lean` (CAPSTONE)
+### C5c — iterated bound + Neumann convergence `QIQTH/LeviSeries.lean` ✅ LANDED (`a5736f27`, [AF] std-3)
+`iterE` + `iterConv_bound` (`|E^{*k}| ≤ C^k·iterKernel`, induction on positive-time domination + C3) +
+`leviSeries_summable` (the actual-residual Neumann series converges). No checkpoints. **CONVERGENCE MACHINERY
+COMPLETE** (C1–C3, C5a–c).
+
+### C6 — TRUE KERNEL + the diagonal expansion ⟹ general `a₁ = R/6` `QIQTH/TrueHeatKernel.lean` (CAPSTONE, conditional)
 - **`trueHeatKernel`** `K := H_N + heatConv H_N F` and **`trueHeatKernel_heat_eqn`**: `(∂_t−Δ_g)K = 0`
   (via the built `duhamel_principle` + the Volterra identity `F = −E + (−E)*F`) with `K_0 = δ` (the
   parametrix delta-initial-condition).
