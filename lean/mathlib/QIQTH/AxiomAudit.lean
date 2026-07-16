@@ -12735,4 +12735,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatCoeff3Determination.a3_reducible_gilkey
 #print axioms QIQTH.HeatCoeff3Determination.heatProductConvolution
 
+-- ★ PARAMETRIX P2 (heat-kernel parametrix build, user-directed 2026-07-16) — FOUNDATION: the coordinate
+-- Laplace–Beltrami operator (LaplaceBeltrami.lean).  laplaceBeltrami g gi f x = ∑_ij g^{ij}(∂_i∂_j f − ∑_k Γ^k_ij ∂_k f)
+-- (the operator in the heat equation (∂_t−Δ_g)K=0 and the parametrix error estimate).  laplaceBeltrami_add/_const_mul
+-- (linearity); ★ laplaceBeltrami_at_rnc_center (RNC reduction: gi(x₀)=δ ∧ Γ(x₀)=0 ⟹ Δ_g f x₀ = ∑_i ∂_i² f x₀ = the
+-- FLAT Laplacian at a normal-coordinate center — links Δ_g to the flat heat operator + DeWittDiagonal.analyticLap);
+-- laplaceBeltrami_quadratic_at_center (on f=∑Q_ab y_a y_b at an RNC center Δ_g f = 2∑_a Q_aa = the trace, matching
+-- DeWittDiagonal.analyticLapQuadAtZero_eq_trace).  This is the FIRST P2 brick (the operator itself).  HONEST — does NOT
+-- by itself give the parametrix H_N / the kernel / general a₁=R/6 (those are P2a–e, incl. the P2d Levi/Duhamel
+-- community-scale wall Mathlib lacks the parabolic-PDE infra for).  Flat-Gaussian heat-PDE lemma DEFERRED.  [AF] std-3.
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_add
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_const_mul
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_at_rnc_center
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_quadratic_at_center
+
 end QIQTH.AxiomAudit

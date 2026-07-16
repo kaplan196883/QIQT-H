@@ -786,6 +786,7 @@ import QIQTH.HeatCoeff2Determination
 import QIQTH.HeatCoeff3Determination
 import QIQTH.HeatCoeffBridge
 import QIQTH.DeWittDiagonal
+import QIQTH.LaplaceBeltrami
 import QIQTH.FlatTorusHeatKernel
 import QIQTH.SphereHeatTrace
 import QIQTH.Sphere3HeatTrace
