@@ -97,6 +97,21 @@ general smooth-dependence theorem Mathlib lacks):
 ### P2 — the heat-kernel parametrix PROPER (the deep wall — the actual discharge)
 This is what proves the smooth kernel `K_t(x,y)` EXISTS and has the short-time diagonal expansion for an arbitrary
 metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 / BGV Ch2 / Gilkey Ch1):
+
+**★ P2 BUILD PROGRESS (user-directed 2026-07-16, 5 green [AF] std-3 bricks PUSHED):**
+- `LaplaceBeltrami.lean` (`9f9e9a34`) — the operator `Δ_g` + RNC-center reduction to the flat Laplacian + quadratic-trace.
+- `FlatHeatEquation.lean` (`91fdca0d`) — `heatKernel1D`/`gaussDdim` solve `∂_t G = Δ_flat G` (the leading term).
+- `HeatParametrixError.lean` (`710a6289`) — `heatResidual = (∂_t−Δ_g)G`, `= 0` at the RNC center (flat Gaussian = leading
+  parametrix), + the metric-deviation curvature form.
+- `HeatParametrixAnsatz.lean` (`3ea3f478`) — P2a: `heatParametrix` `H_N` as a function + `heatParametrix_diagonal_a1`
+  (`H_N(t,0) = (4πt)^{−d/2}(1 + (R/6)t + …)` — the diagonal a₁ structure).
+- `HeatTransportRecursion.lean` (`e9b765d5`) — P2b: `transportOp` + `TransportRecursion` structure +
+  `u1_diag_eq_tau_div_six` (u₁ diagonal = τ/6, DERIVED from the van-Vleck jet, sphere witness u₁=1/3) + DeWitt bridge.
+- ⚠ THE WALL located: the function-level transport (udiag_rec from the radial geodesic ODE), P2c-full O(t^{N−d/2}), P2d
+  Levi/Duhamel convergence + kernel existence, P2e Riemannian-volume trace — all need geodesic-flow/exp-map function-level
+  + parabolic-PDE + manifold-integration infrastructure Mathlib lacks (community-scale). general `a₁=R/6` stays a labelled
+  input behind P2d/P2e.
+
 - **P2a — the parametrix ansatz** `H_N(t,x,y) = (4πt)^{−d/2} e^{−r(x,y)²/4t} · Θ(x,y)^{−1/2} · Σ_{k≤N} u_k(x,y) t^k`
   (`r`=geodesic distance, `Θ`=van Vleck — `RNCExpansion` has the diagonal `√det`; needs `r` off-diagonal).
 - **P2b — the transport recursion** for `u_k` (`DeWittDiagonal` has `u_1` diagonal; extend off-diagonal + all `k`).
