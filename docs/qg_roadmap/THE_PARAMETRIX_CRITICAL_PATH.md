@@ -107,10 +107,22 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
   (`H_N(t,0) = (4πt)^{−d/2}(1 + (R/6)t + …)` — the diagonal a₁ structure).
 - `HeatTransportRecursion.lean` (`e9b765d5`) — P2b: `transportOp` + `TransportRecursion` structure +
   `u1_diag_eq_tau_div_six` (u₁ diagonal = τ/6, DERIVED from the van-Vleck jet, sphere witness u₁=1/3) + DeWitt bridge.
-- ⚠ THE WALL located: the function-level transport (udiag_rec from the radial geodesic ODE), P2c-full O(t^{N−d/2}), P2d
-  Levi/Duhamel convergence + kernel existence, P2e Riemannian-volume trace — all need geodesic-flow/exp-map function-level
-  + parabolic-PDE + manifold-integration infrastructure Mathlib lacks (community-scale). general `a₁=R/6` stays a labelled
-  input behind P2d/P2e.
+- `HeatParametrixOrder.lean` (`86b34b40`) — P2c: `laplaceBeltrami_mul` (the Δ_g product rule) + `parametrixResidual_telescope`
+  (unconditional) + `parametrixResidual_transport_identity` (first-order residual collapses to `−G·Θ^{−1/2}(Δ_g u₁)·t` at
+  the diagonal — the u₁ transport cancels the t⁰ order).
+- `HeatParametrixTrace.lean` (`1a4e1a5b`) + `HeatParametrixTraceDerived.lean` (`552a093a`) — P2e (parametrix level): the
+  diagonal heat-trace `= (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`, i.e. the **a₁ = (1/6)∫R** coefficient, with u₁ DERIVED from
+  the transport recursion (`parametrixDiagTrace_a1_derived`), sphere witness. Finite-sample sum, carried diagonal coeffs.
+- ✅ **P2 REACHABLE FRONTIER COMPLETE (8 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
+  Seeley–DeWitt story is machine-checked: operator, flat heat solution, residual (=0 at RNC center), ansatz + diagonal
+  a₁, transport recursion (u₁=τ/6 derived), first-order telescoping, parametrix trace a₁=(1/6)∫R.
+- ⚠ **THE WALL (community-scale, Mathlib lacks the infrastructure) — where the build honestly stops:** the off-diagonal
+  parametrix (`udiag_rec` from the radial geodesic ODE / van-Vleck as a function), the general-N transport recursion,
+  P2c-full `O(t^{N−d/2})` error estimate, **P2d Levi/Duhamel convergence + kernel existence** (true kernel = parametrix +
+  iterated-convolution error), and P2e-full manifold Riemannian-volume integration (replace the finite-sample/carried
+  √det g). These need geodesic-flow/exp-map function-level + parabolic-PDE + manifold-integration theory absent from
+  Mathlib. **General `a₁=R/6` for the TRUE kernel stays a labelled input (G3 `PhysicalInputs`) behind P2d/P2e** — the
+  entire reachable parametrix scaffolding is now built beneath it, axiom-free.
 
 - **P2a — the parametrix ansatz** `H_N(t,x,y) = (4πt)^{−d/2} e^{−r(x,y)²/4t} · Θ(x,y)^{−1/2} · Σ_{k≤N} u_k(x,y) t^k`
   (`r`=geodesic distance, `Θ`=van Vleck — `RNCExpansion` has the diagonal `√det`; needs `r` off-diagonal).
