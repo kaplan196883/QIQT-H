@@ -37,6 +37,7 @@
 -/
 import Mathlib
 import QIQTH.HeatParametrixAnsatz
+import QIQTH.CoordinateCurvature
 
 open Finset
 open QIQTH.Curvature QIQTH.HeatKernelA1 QIQTH.FlatHeatEquation QIQTH.HeatParametrixAnsatz
@@ -262,5 +263,130 @@ theorem parametrixDiagTraceInt_a1_explicit (N : ℕ) (ud : ℕ → Point n → �
             + (1 / 6) * (∫ x, scalarR x * w x ∂μ) * t
             + ∑ k ∈ Finset.Ico 2 (N + 1), diagTraceCoeffInt ud w μ k * t ^ k) := by
   rw [parametrixDiagTraceInt_a1 N ud w scalarR μ t hN hInt hud0 hud1, heatKernel1D_zero]
+
+/-! ### Riemannian volume measure — the volume measure CONSTRUCTED via `withDensity`.
+
+    The final measure-theoretic upgrade of this file: the "Riemannian volume" `μ` is no longer a
+    fully abstract carried `Measure`, but is CONSTRUCTED from a carried density `dens : Point n → ℝ`
+    (morally `dens = √det g`) as the Lebesgue-`volume` weighted by `dens`,
+    `dV = dens · dx`, via `MeasureTheory.Measure.withDensity`. The `a₁` coefficient of the parametrix
+    diagonal trace against this constructed `dV` is then the genuine measure-theoretic integral
+    `(1/6)∫_M R √g dx = (1/6)∫ x, dens x · R(x) ∂volume`.
+
+    ⚠ HONEST SCOPE (same firewall). This is STILL the PARAMETRIX trace with CARRIED diagonal Seeley
+    coefficients (`ud_0 = 1`, `ud_1 = R/6` labelled DeWitt-normalization hypotheses). The upgrade
+    delivered here is ONLY that the volume measure is now CONSTRUCTED (`volume.withDensity`) from a
+    carried nonneg density `dens`, rather than a fully abstract carried `Measure`. It is:
+      • NOT the true `Tr e^{−tΔ}` — that needs the Levi/Duhamel kernel existence + convergence wall;
+      • NOT the general `a₁ = R/6` from the Seeley–DeWitt recursion (`ud_0=1`, `ud_1=R/6` carried);
+      • `dens` is a CARRIED nonneg density, NOT `√det g` computed from a specific metric `g`.
+    No axioms, no `sorry`. -/
+
+open MeasureTheory in
+/-- **#9 — the Riemannian volume measure, constructed.** The Lebesgue `volume` on `Point n = Fin n → ℝ`
+    weighted by a carried nonneg density `dens` (morally `√det g`), `dV = dens · dx`, via
+    `Measure.withDensity`. Constructed, not carried abstractly. -/
+noncomputable def riemannianVolume (dens : Point n → ℝ) : Measure (Point n) :=
+  volume.withDensity (fun x => ENNReal.ofReal (dens x))
+
+open MeasureTheory in
+/-- **#10 — the weight-in-measure = weight-in-integrand bridge.** For a measurable nonneg density
+    `dens` and any `f`, integrating `f` against the constructed Riemannian volume equals integrating
+    `dens · f` against Lebesgue `volume`:
+
+      ∫ x, f x ∂(riemannianVolume dens) = ∫ x, dens x · f x ∂volume.
+
+    This is `integral_withDensity_eq_integral_toReal_smul` (density `ENNReal.ofReal (dens x)`, always
+    `< ∞`), with `(ENNReal.ofReal (dens x)).toReal = dens x` under nonnegativity and `smul = mul`. -/
+theorem integral_riemannianVolume (dens : Point n → ℝ) (hdens_meas : Measurable dens)
+    (hdens_nonneg : ∀ x, 0 ≤ dens x) (f : Point n → ℝ) :
+    ∫ x, f x ∂(riemannianVolume dens) = ∫ x, dens x * f x ∂volume := by
+  rw [riemannianVolume, integral_withDensity_eq_integral_toReal_smul hdens_meas.ennreal_ofReal
+    (Filter.Eventually.of_forall fun x => ENNReal.ofReal_lt_top)]
+  refine integral_congr_ae (Filter.Eventually.of_forall fun x => ?_)
+  simp only [smul_eq_mul, ENNReal.toReal_ofReal (hdens_nonneg x)]
+
+open MeasureTheory in
+/-- **#11 — the `a₁ = (1/6)∫_M R √g dx` heat-trace coefficient against the CONSTRUCTED Riemannian
+    volume.** Specialize `parametrixDiagTraceInt_a1` to `μ := riemannianVolume dens`, `w := 1` (the
+    volume density now lives in the measure). Under the DeWitt diagonal normalizations `ud_0 = 1`,
+    `ud_1 = R/6` (carried), for `N ≥ 1`:
+
+      Tr H_N(t) = (4πt)^{−d/2} · (Vol_g + (1/6)·(∫ R √g dx)·t + Σ_{2≤k≤N} W_k · t^k),
+
+    with `Vol_g = ∫ x, dens x ∂volume = ∫√g dx` and the `t¹` coefficient `(1/6)∫ x, dens x · R(x) ∂volume
+    = (1/6)∫_M R √g dx` — the Seeley–DeWitt `a₁ = (1/6)∫R`, now as a genuine integral against the
+    volume measure `dV = dens · dx` CONSTRUCTED via `withDensity`.
+
+    The integrability hypotheses of `parametrixDiagTraceInt_a1` are discharged by transporting the
+    carried Lebesgue-side integrability `hIntVol` of `x ↦ dens x · ud_k(x)` through
+    `integrable_withDensity_iff_integrable_smul'`.
+
+    ⚠ Parametrix-level, carried DeWitt coefficients, `dens` carried (not `√det g` from a metric):
+    NOT the true kernel trace `Tr e^{−tΔ}` (Levi/Duhamel), NOT the general `a₁ = R/6` derivation. -/
+theorem parametrixDiagTraceInt_riemannian_a1 (N : ℕ) (ud : ℕ → Point n → ℝ)
+    (scalarR : Point n → ℝ) (dens : Point n → ℝ) (t : ℝ) (hN : 1 ≤ N)
+    (hdens_meas : Measurable dens) (hdens_nonneg : ∀ x, 0 ≤ dens x)
+    (hIntVol : ∀ k ∈ Finset.range (N + 1), Integrable (fun x => dens x * ud k x) volume)
+    (hud0 : ∀ x, ud 0 x = 1)
+    (hud1 : ∀ x, ud 1 x = scalarR x / 6) :
+    parametrixDiagTraceInt N ud (fun _ => 1) (riemannianVolume dens) t
+      = (heatKernel1D t 0) ^ n
+        * ((∫ x, dens x ∂volume)
+            + (1 / 6) * (∫ x, dens x * scalarR x ∂volume) * t
+            + ∑ k ∈ Finset.Ico 2 (N + 1),
+                diagTraceCoeffInt ud (fun _ => 1) (riemannianVolume dens) k * t ^ k) := by
+  have hInt : ∀ k ∈ Finset.range (N + 1),
+      Integrable (fun x => ud k x * (fun _ => (1:ℝ)) x) (riemannianVolume dens) := by
+    intro k hk
+    simp only [mul_one]
+    rw [riemannianVolume, integrable_withDensity_iff_integrable_smul'
+      hdens_meas.ennreal_ofReal (Filter.Eventually.of_forall fun x => ENNReal.ofReal_lt_top)]
+    have hfun : (fun x => (ENNReal.ofReal (dens x)).toReal • ud k x)
+        = (fun x => dens x * ud k x) := by
+      funext x; rw [smul_eq_mul, ENNReal.toReal_ofReal (hdens_nonneg x)]
+    rw [hfun]
+    exact hIntVol k hk
+  rw [parametrixDiagTraceInt_a1 N ud (fun _ => 1) scalarR (riemannianVolume dens) t hN hInt
+    hud0 hud1]
+  simp only [integral_riemannianVolume dens hdens_meas hdens_nonneg, mul_one]
+
+open MeasureTheory in
+/-- **#12 (bonus) — the `a₁` heat-trace coefficient tied to the COMPUTED coordinate scalar
+    curvature.** Instantiate `scalarR := fun x => QIQTH.CoordinateCurvature.scalarCurvature (ginv x)
+    (dg x) (ddg x)` in `parametrixDiagTraceInt_riemannian_a1`, with the metric jets `ginv, dg, ddg`
+    carried over `Point n`. The DeWitt-normalization hypothesis `ud_1(x) = R(x)/6` now literally reads
+    "the diagonal Seeley coefficient is the computed coordinate scalar curvature over 6", so the `a₁`
+    coefficient of the parametrix diagonal trace against the constructed Riemannian volume is
+
+      (1/6)·∫ x, dens x · scalarCurvature (ginv x) (dg x) (ddg x) ∂volume  =  (1/6)∫_M R √g dx,
+
+    with `R` the coordinate scalar curvature `QIQTH.CoordinateCurvature.scalarCurvature`.
+
+    ⚠ Same firewall: parametrix-level with carried DeWitt coefficients; `dens` carried (not `√det g`);
+    the metric jets `ginv/dg/ddg` are carried and `ud_1 = R/6` is a labelled hypothesis, not derived.
+    NOT the true kernel trace `Tr e^{−tΔ}`, NOT the general `a₁ = R/6`. -/
+theorem parametrixDiagTraceInt_riemannian_coordCurv_a1
+    {d : Type*} [Fintype d] (N : ℕ) (ud : ℕ → Point n → ℝ)
+    (ginv : Point n → QIQTH.CoordinateCurvature.Mat d)
+    (dg : Point n → d → QIQTH.CoordinateCurvature.Mat d)
+    (ddg : Point n → d → d → QIQTH.CoordinateCurvature.Mat d)
+    (dens : Point n → ℝ) (t : ℝ) (hN : 1 ≤ N)
+    (hdens_meas : Measurable dens) (hdens_nonneg : ∀ x, 0 ≤ dens x)
+    (hIntVol : ∀ k ∈ Finset.range (N + 1), Integrable (fun x => dens x * ud k x) volume)
+    (hud0 : ∀ x, ud 0 x = 1)
+    (hud1 : ∀ x, ud 1 x
+        = QIQTH.CoordinateCurvature.scalarCurvature (ginv x) (dg x) (ddg x) / 6) :
+    parametrixDiagTraceInt N ud (fun _ => 1) (riemannianVolume dens) t
+      = (heatKernel1D t 0) ^ n
+        * ((∫ x, dens x ∂volume)
+            + (1 / 6)
+              * (∫ x, dens x
+                  * QIQTH.CoordinateCurvature.scalarCurvature (ginv x) (dg x) (ddg x) ∂volume) * t
+            + ∑ k ∈ Finset.Ico 2 (N + 1),
+                diagTraceCoeffInt ud (fun _ => 1) (riemannianVolume dens) k * t ^ k) :=
+  parametrixDiagTraceInt_riemannian_a1 N ud
+    (fun x => QIQTH.CoordinateCurvature.scalarCurvature (ginv x) (dg x) (ddg x))
+    dens t hN hdens_meas hdens_nonneg hIntVol hud0 hud1
 
 end QIQTH.HeatParametrixTrace

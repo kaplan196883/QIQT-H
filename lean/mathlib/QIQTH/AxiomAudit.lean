@@ -12843,6 +12843,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_expansion
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_a1
 #print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_a1_explicit
+-- P2e-FULL — the Riemannian volume measure CONSTRUCTED (HeatParametrixTrace.lean, 2026-07-17): the volume measure is no
+-- longer an abstract carried Measure but dV = dens·dx built via Measure.withDensity from a carried nonneg density `dens`
+-- (morally √det g).  integral_riemannianVolume = the weight-bridge (∫f d(dV) = ∫dens·f dvolume, via
+-- integral_withDensity_eq_integral_toReal_smul).  parametrixDiagTraceInt_riemannian_a1 = a₁=(1/6)∫_M R√g dx against the
+-- CONSTRUCTED dV (integrability discharged through integrable_withDensity_iff_integrable_smul').  _coordCurv_a1 (bonus) ties
+-- scalarR to the COMPUTED QIQTH.CoordinateCurvature.scalarCurvature(ginv,dg,ddg).  ⚠ HONEST FIREWALL: STILL parametrix-level,
+-- carried DeWitt coeffs (ud₁=R/6 labelled) + carried dens (NOT √det g from a metric); the ONLY upgrade = dV now constructed
+-- via withDensity.  NOT the true Tr e^{−tΔ} (Levi/Duhamel convergence wall), NOT general a₁=R/6 (still G3 PhysicalInputs).
+#print axioms QIQTH.HeatParametrixTrace.integral_riemannianVolume
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_riemannian_a1
+#print axioms QIQTH.HeatParametrixTrace.parametrixDiagTraceInt_riemannian_coordCurv_a1
 -- ★ PARAMETRIX P2 (CAPSTONE) — the parametrix diagonal trace a₁ with u₁ DERIVED (HeatParametrixTraceDerived.lean).
 -- parametrixDiagTrace_a1_derived: given a family T : ι → TransportRecursion (one per sample point) with the trace's
 -- ud_1 at each point = (T i).u 1 (its center), the trace a₁ = (heatKernel1D t 0)^n·(∑w + (1/6)(∑ (T i).jet.tau·w)t + ..)
