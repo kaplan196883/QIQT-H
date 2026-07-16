@@ -12749,5 +12749,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_const_mul
 #print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_at_rnc_center
 #print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_quadratic_at_center
+-- ★ PARAMETRIX P2 (P2c-leading) — the FLAT Gaussian solves the heat equation (FlatHeatEquation.lean).
+-- heatKernel1D_hasDerivAt_x (∂_x G=(−x/2t)G) → heatKernel1D_deriv2_x (∂²_x G=(x²/4t²−1/2t)G) → heatKernel1D_hasDerivAt_t
+-- (∂_t G=(x²/4t²−1/2t)G — the CRUX: the (4πt)^{−1/2} prefactor's t-derivative gives −1/2t·G, the exponent gives
+-- x²/4t²·G, and they're exactly what match) → heatKernel1D_heat_eqn (∂_t G=∂²_x G, 1-D).  gaussDdim=∏_k heatKernel1D
+-- (the moment-integral density) with gaussDdim_pd_i/_pd_pd_i (coordinate partials via the product rule) → ★
+-- gaussDdim_heat_eqn: ∂_t G = ∑_i ∂_i² G = Δ_flat G (d-dim) — the LEADING parametrix term solves the flat heat equation,
+-- the ∑_i ∂_i² form matching LaplaceBeltrami.laplaceBeltrami_at_rnc_center.  This is the P2c leading-order fact.
+-- HONEST — flat/leading term only; does NOT build the full parametrix H_N / the Riemannian kernel / the Seeley–DeWitt
+-- recursion / general a₁=R/6 (P2a–e, incl. the P2d Levi/Duhamel community-scale wall).  [AF] std-3.
+#print axioms QIQTH.FlatHeatEquation.heatKernel1D_heat_eqn
+#print axioms QIQTH.FlatHeatEquation.gaussDdim_pd_pd_i
+#print axioms QIQTH.FlatHeatEquation.gaussDdim_heat_eqn
 
 end QIQTH.AxiomAudit
