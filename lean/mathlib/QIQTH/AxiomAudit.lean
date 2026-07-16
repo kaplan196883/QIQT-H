@@ -10820,6 +10820,27 @@ namespace QIQTH.AxiomAudit
 -- general a₁=R/6 / numerical-G.  [AF] std-3.
 #print axioms QIQTH.PullbackMetric.residFold6A_eq_S2
 #print axioms QIQTH.PullbackMetric.residFold8B_eq_S2
+-- ★★★★ PARAMETRIX P1 R3→κ — MILESTONE: UNCONDITIONAL κ=1/6 FOR THE EXP-PULLBACK METRIC g̃ (PullbackMetric.lean).
+-- The sole open identity hpd2_residual_cubic_reindex (the ∑ g·Γ·Γ·v³ pure symmetric-array identity, reframed to 4
+-- atoms S2/S3/S4/S1c with 2A=−2S2−2/3S3−4/3S4=B) is now PROVED: ~30 fold-piece reduction lemmas (residFold{1,2,3,4,7}
+-- {A,B}_eq, residFold{5,6,8,9}*_eq, the Cross reductions residFold9ACross_eq/crossS*_shape/rncCrossBlock_dir_evv_a3,
+-- residD3_cancel) via a uniform 5-index Equiv reindex (sum5_reindex, round-trips by rfl) + christoffel_symm + hsymm.
+-- ⟹ the CASCADE, all UNCONDITIONAL, all [AF] std-3: hpd2_cubic_vanish (2A−B=0) → expPullback_hpd2 (∀ α v) →
+-- expPullback_radial_gauge (dGammaDiag(∂Γ̃)=0) → gauge_pd_christoffel_expPullbackInv_zero' (cyclic RNC gauge for g̃, NO
+-- hrad/hpd2) → ★★★ kappa_eq_one_sixth_expPullback: the heat a₁ coefficient at g̃ = (1/6−ξ)Rscl−m² with NO hpd2
+-- hypothesis (hpd2 discharged by the proved expPullback_hpd2).  Its remaining hyps are the STANDARD non-vacuous inputs:
+-- hC/hg (ambient C^∞), hsymm0 (g₀ symm), hinvF (gi₀=g₀⁻¹ on a nbhd), hframe (g₀(p)=δ RNC-adapted orthonormal frame),
+-- κ+hκgeo (κ DEFINED by the √det-Hessian↔ricci relation), hRic (curvature nondeg), Rscl+hR.  ⟹ the ENTIRE R3→κ
+-- radial-gauge chain is machine-checked axiom-free: κ=1/6 is DERIVED in-Lean for the pullback metric of ANY smooth
+-- metric in an orthonormal frame at p.  ⚠ HONEST SCOPE: this is κ=1/6 for the EXP-PULLBACK METRIC g̃ specifically; it
+-- does NOT establish the general a₁=R/6 (still the P2 parametrix / Seeley–DeWitt input, a labelled physical input in G3
+-- PhysicalInputs), NOT the numerical value of G, NOT a curved heat kernel, NOT the conjecture — those remain behind the
+-- P2 parametrix proper (the Levi/Duhamel community-scale wall).  [AF] std-3.
+#print axioms QIQTH.PullbackMetric.hpd2_cubic_vanish
+#print axioms QIQTH.PullbackMetric.expPullback_hpd2
+#print axioms QIQTH.PullbackMetric.expPullback_radial_gauge
+#print axioms QIQTH.PullbackMetric.gauge_pd_christoffel_expPullbackInv_zero'
+#print axioms QIQTH.PullbackMetric.kappa_eq_one_sixth_expPullback
 
 -- Polarization.lean — route-(c) Lemma 5 (2026-07-07): cubic diagonal-vanishing ⟹ full symmetrization.
 -- sixSym_eq_incl_excl: ∑_{σ∈S₃} T aσ bσ cσ = P(a+b+c) − P(a+b) − P(a+c) − P(b+c) + P(a)+P(b)+P(c) (P x := T x x x).

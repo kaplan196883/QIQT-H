@@ -4887,6 +4887,79 @@ theorem rncCrossBlock_dir_vv_a3 (g gi : Point n → Fin n → Fin n → ℝ)
   rw [← Finset.sum_add_distrib, ← Finset.sum_neg_distrib, Finset.mul_sum]
   refine Finset.sum_congr rfl fun j _ => by ring
 
+/-- **`rncCrossBlock` is symmetric in its two source-direction slots** (`sk ↔ sl`).  The inner
+    second-variation coefficient `sl_{j'}sk_{m'} + sk_{j'}sl_{m'}` is manifestly `sk↔sl` symmetric. -/
+theorem rncCrossBlock_sk_sl_symm (g gi : Point n → Fin n → Fin n → ℝ) (p dir sk sl : Point n)
+    (i : Fin n) :
+    rncCrossBlock g gi p dir sk sl i = rncCrossBlock g gi p dir sl sk i := by
+  simp only [rncCrossBlock]
+  have hin : ∀ c : Fin n,
+      (∑ j', ∑ m', christoffel g gi c j' m' p * (sl j' * sk m' + sk j' * sl m'))
+        = (∑ j', ∑ m', christoffel g gi c j' m' p * (sk j' * sl m' + sl j' * sk m')) :=
+    fun c => Finset.sum_congr rfl fun j' _ => Finset.sum_congr rfl fun m' _ => by ring
+  simp only [hin]
+
+/-- **`rncCrossBlock_dir_evv_a3` — the mixed-direction `(v, e_α, v)` reduction of `rncCrossBlock`.**
+    With the source pair `(e_α, v)`, the `ΓΓ` cross block collapses to
+      `rncCrossBlock g gi p v (e_α) v i = 4·∑_{j,m} Γ^i_{jm}(p)·(∑_a Γ^j_{αa}(p) v^a)·v^m`.
+    The inner second-variation sum picks the `α`-index via the two Kronecker deltas; `christoffel_symm`
+    merges the halves; the `Γ^i_{jm}` factor's `(j,m)`-symmetry doubles the two mirror terms.  This is
+    the `(v,e_α,v)` companion of `rncCrossBlock_dir_vv_a3`. -/
+theorem rncCrossBlock_dir_evv_a3 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) (i : Fin n) :
+    rncCrossBlock g gi p v (Pi.single α 1) v i
+      = 4 * ∑ j, ∑ m, christoffel g gi i j m p
+          * (∑ a, christoffel g gi j α a p * v a) * v m := by
+  simp only [rncCrossBlock, Pi.single_apply]
+  have hcoll : ∀ c : Fin n,
+      (∑ j', ∑ m', christoffel g gi c j' m' p
+          * (v j' * (if m' = α then (1:ℝ) else 0) + (if j' = α then (1:ℝ) else 0) * v m'))
+        = 2 * ∑ a, christoffel g gi c α a p * v a := by
+    intro c
+    have h1 : ∀ j' m' : Fin n, christoffel g gi c j' m' p
+          * (v j' * (if m' = α then (1:ℝ) else 0) + (if j' = α then (1:ℝ) else 0) * v m')
+        = (if m' = α then christoffel g gi c j' m' p * v j' else 0)
+          + (if j' = α then christoffel g gi c j' m' p * v m' else 0) := by
+      intro j' m'; split_ifs <;> ring
+    simp only [h1, Finset.sum_add_distrib]
+    rw [show (∑ j', ∑ m', (if m' = α then christoffel g gi c j' m' p * v j' else 0))
+          = ∑ j', christoffel g gi c j' α p * v j' from
+        Finset.sum_congr rfl fun j' _ => by rw [Finset.sum_ite_eq' Finset.univ α]; simp]
+    rw [show (∑ j', ∑ m', (if j' = α then christoffel g gi c j' m' p * v m' else 0))
+          = ∑ m', christoffel g gi c α m' p * v m' from by
+        rw [Finset.sum_comm]
+        exact Finset.sum_congr rfl fun m' _ => by rw [Finset.sum_ite_eq' Finset.univ α]; simp]
+    have hs : ∀ j', christoffel g gi c j' α p = christoffel g gi c α j' p :=
+      fun j' => christoffel_symm g gi hsymm c j' α p
+    simp only [hs]
+    rw [two_mul]
+  simp only [hcoll]
+  -- combine the two mirror halves via the (j,m)-symmetry of Γ^i_{jm}
+  have hswap : (∑ j, ∑ m, christoffel g gi i j m p * (v j * (2 * ∑ a, christoffel g gi m α a p * v a)))
+      = ∑ j, ∑ m, christoffel g gi i j m p * ((2 * ∑ a, christoffel g gi j α a p * v a) * v m) := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => ?_
+    rw [christoffel_symm g gi hsymm i m j p]; ring
+  rw [show (-∑ j, ∑ m, christoffel g gi i j m p
+        * ((-(2 * ∑ a, christoffel g gi j α a p * v a)) * v m
+          + v j * (-(2 * ∑ a, christoffel g gi m α a p * v a))))
+      = (∑ j, ∑ m, christoffel g gi i j m p * ((2 * ∑ a, christoffel g gi j α a p * v a) * v m))
+        + (∑ j, ∑ m, christoffel g gi i j m p * (v j * (2 * ∑ a, christoffel g gi m α a p * v a)))
+      from by
+        rw [← Finset.sum_add_distrib, ← Finset.sum_neg_distrib]
+        refine Finset.sum_congr rfl fun j _ => ?_
+        rw [← Finset.sum_add_distrib, ← Finset.sum_neg_distrib]
+        refine Finset.sum_congr rfl fun m _ => by ring]
+  rw [hswap]
+  have hX : (∑ j, ∑ m, christoffel g gi i j m p
+        * ((2 * ∑ a, christoffel g gi j α a p * v a) * v m))
+      = 2 * ∑ j, ∑ m, christoffel g gi i j m p * (∑ a, christoffel g gi j α a p * v a) * v m := by
+    conv_rhs => rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    conv_rhs => rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun m _ => by ring
+  simp only [hX]; ring
+
 
 /-! ### THE 4-ATOM CANONICAL FORM of the `g·Γ·Γ·v³` residue (the FRESH-STRATEGY reduction target)
 
@@ -4906,6 +4979,35 @@ residue's coefficient on each is `0`:
 with `S1` (the `g_{αρ}`-lowered shape) netting `0` on both sides.  The atoms are the five-fold sums
 `residCubicAtomS2/S3/S4` below (only `S2/S3/S4` carry nonzero coefficients). -/
 
+/-- **Collapse a 5-nested sum over `Fin n` into a single sum over the 5-fold product.**  Pure
+    `Fintype.sum_prod_type`.  The reusable bridge for the canonical residue-atom reindexings. -/
+private lemma sum5_prod (F : Fin n → Fin n → Fin n → Fin n → Fin n → ℝ) :
+    (∑ a, ∑ b, ∑ c, ∑ d, ∑ e, F a b c d e)
+      = ∑ x : Fin n × Fin n × Fin n × Fin n × Fin n,
+          F x.1 x.2.1 x.2.2.1 x.2.2.2.1 x.2.2.2.2 := by
+  simp only [Fintype.sum_prod_type]
+
+/-- **Reindex a 5-nested sum by a coordinate permutation `e`.**  The uniform mechanic for reducing a
+    residue fold-piece onto a canonical atom: any bubble-sort of five summation indices is a single
+    `Fintype.sum_equiv` on the product form. -/
+private lemma sum5_reindex (M N : Fin n → Fin n → Fin n → Fin n → Fin n → ℝ)
+    (e : (Fin n × Fin n × Fin n × Fin n × Fin n) ≃ (Fin n × Fin n × Fin n × Fin n × Fin n))
+    (h : ∀ x : Fin n × Fin n × Fin n × Fin n × Fin n,
+        M x.1 x.2.1 x.2.2.1 x.2.2.2.1 x.2.2.2.2
+          = N (e x).1 (e x).2.1 (e x).2.2.1 (e x).2.2.2.1 (e x).2.2.2.2) :
+    (∑ a, ∑ b, ∑ c, ∑ d, ∑ f, M a b c d f)
+      = (∑ a, ∑ b, ∑ c, ∑ d, ∑ f, N a b c d f) := by
+  rw [sum5_prod M, sum5_prod N]
+  exact Fintype.sum_equiv e _ _ h
+
+/-- The coordinate permutation `(b,l,j,k,σ) ↦ (σ,b,j,k,l)` used by several residue reindexings. -/
+private def perm_bljks_to_sbjkl :
+    (Fin n × Fin n × Fin n × Fin n × Fin n) ≃ (Fin n × Fin n × Fin n × Fin n × Fin n) where
+  toFun x := (x.2.2.2.2, x.1, x.2.2.1, x.2.2.2.1, x.2.1)
+  invFun y := (y.2.1, y.2.2.2.2, y.2.2.1, y.2.2.2.1, y.1)
+  left_inv _ := rfl
+  right_inv _ := rfl
+
 /-- Canonical residue atom **S2**: `∑ G_{x0 x1}·Γ^{x0}_{α x2}·Γ^{x1}_{x3 x4}·v^{x2}v^{x3}v^{x4}`. -/
 noncomputable def residCubicAtomS2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
     (v : Fin n → ℝ) (α : Fin n) : ℝ :=
@@ -4923,6 +5025,13 @@ noncomputable def residCubicAtomS4 (G : Fin n → Fin n → ℝ) (Γ : Fin n →
     (v : Fin n → ℝ) (α : Fin n) : ℝ :=
   ∑ x0, ∑ x1, ∑ x2, ∑ x3, ∑ x4,
     G x0 x1 * Γ x0 x2 x3 * Γ x2 α x4 * v x1 * v x3 * v x4
+
+/-- Canonical residue atom **S1c** (the `α`-on-metric, chained shape that cancels WITHIN each of `2A`
+    and `B`): `∑ G_{α x0}·Γ^{x0}_{x1 x2}·Γ^{x1}_{x3 x4}·v^{x2}v^{x3}v^{x4}`. -/
+noncomputable def residCubicAtomS1c (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) : ℝ :=
+  ∑ x0, ∑ x1, ∑ x2, ∑ x3, ∑ x4,
+    G α x0 * Γ x0 x1 x2 * Γ x1 x3 x4 * v x2 * v x3 * v x4
 
 /-- **Reduction of the `fold6_A`-shape residue term to the canonical atom `S2`** (a validated
     building block of the 4-atom reduction).  The `fold6_A` block
@@ -4971,6 +5080,759 @@ theorem residFold8B_eq_S2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n �
     _ = ∑ k, ∑ j, ∑ l, G b a * Γ b α k * Γ a j l * v k * v j * v l :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
           Finset.sum_congr rfl fun l _ => by ring
+
+/-- **Reduction of the `fold8_A`-shape residue term to `S2`.**  Collapses the lower-symmetry halves
+    (`Γ^a_{αl}`, `Γ^b_{kj}`) and reindexes onto `residCubicAtomS2`.  Needs ONLY Γ lower-symmetry. -/
+theorem residFold8A_eq_S2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, G a b
+        * (1/2 * (-Γ a α l - Γ a l α)) * (1/2 * (-Γ b k j - Γ b j k)) * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+  unfold residCubicAtomS2
+  have h1 : ∀ a b l j k : Fin n, G a b
+        * (1/2 * (-Γ a α l - Γ a l α)) * (1/2 * (-Γ b k j - Γ b j k)) * v l * v j * v k
+      = G a b * Γ a α l * Γ b k j * v l * v j * v k := fun a b l j k => by
+    rw [hΓ a l α, hΓ b j k]; ring
+  simp only [h1]
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
+  refine Finset.sum_congr rfl fun l _ => ?_
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ => by ring
+
+/-- **Reduction of the `fold6_B`-shape residue term to `S2`.**  Same collapsed form
+    (`Γ^a_{αj}·Γ^b_{kl}`) as `residFold6A_eq_S2`; reindexed onto `residCubicAtomS2`.  Γ-symmetry only. -/
+theorem residFold6B_eq_S2 (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ b, ∑ l, ∑ j, ∑ k, G a b
+        * (1/2 * (-Γ a j α - Γ a α j)) * (1/2 * (-Γ b k l - Γ b l k)) * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+  unfold residCubicAtomS2
+  have h1 : ∀ a b l j k : Fin n, G a b
+        * (1/2 * (-Γ a j α - Γ a α j)) * (1/2 * (-Γ b k l - Γ b l k)) * v l * v j * v k
+      = G a b * Γ a α j * Γ b k l * v l * v j * v k := fun a b l j k => by
+    rw [hΓ a j α, hΓ b l k]; ring
+  simp only [h1]
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by ring
+
+/-- **Reduction of the `fold3_A`-shape residue term to `−S2 − S1c`.**  The bracket
+    `((∑σ Γ^σ_{jα}·G_{σb}) + (∑σ Γ^σ_{jb}·G_{ασ}))·(−Γ^b_{kl})·v³` splits (metric-compat two-term) into
+    the `−S2` piece (`α` on the first Γ) and the `−S1c` piece (`α` on the metric).  Γ-symmetry only. -/
+theorem residFold3A_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ j α * G σ b) + (∑ σ, Γ σ j b * G α σ))
+        * (1 / 2 * (-Γ b k l - Γ b l k)) * v l * v j * v k)
+      = - residCubicAtomS2 G Γ v α - residCubicAtomS1c G Γ v α := by
+  have step1 : ∀ b l j k : Fin n,
+      ((∑ σ, Γ σ j α * G σ b) + (∑ σ, Γ σ j b * G α σ))
+          * (1 / 2 * (-Γ b k l - Γ b l k)) * v l * v j * v k
+        = (∑ σ, -(G σ b * Γ σ α j * Γ b k l * v l * v j * v k))
+          + (∑ σ, -(G α σ * Γ σ b j * Γ b k l * v l * v j * v k)) := by
+    intro b l j k
+    have e1 : (1 / 2 * (-Γ b k l - Γ b l k)) = -Γ b k l := by rw [hΓ b l k]; ring
+    rw [e1]
+    rw [show ((∑ σ, Γ σ j α * G σ b) + (∑ σ, Γ σ j b * G α σ)) * (-Γ b k l) * v l * v j * v k
+          = (∑ σ, Γ σ j α * G σ b) * (-(Γ b k l * v l * v j * v k))
+            + (∑ σ, Γ σ j b * G α σ) * (-(Γ b k l * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ j α]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ j b]; ring
+  have P0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G σ b * Γ σ α j * Γ b k l * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _ perm_bljks_to_sbjkl (fun x => by
+      obtain ⟨b, l, j, k, s⟩ := x
+      simp only [perm_bljks_to_sbjkl, Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G α σ * Γ σ b j * Γ b k l * v l * v j * v k)
+      = residCubicAtomS1c G Γ v α := by
+    unfold residCubicAtomS1c
+    exact sum5_reindex _ _ perm_bljks_to_sbjkl (fun x => by
+      obtain ⟨b, l, j, k, s⟩ := x
+      simp only [perm_bljks_to_sbjkl, Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold1_A`-shape residue term to `−S3 − S1c`.**  Γ-symmetry only. -/
+theorem residFold1A_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ l, ∑ j, ∑ k, (∑ c, ((∑ σ, Γ σ c α * G σ k) + (∑ σ, Γ σ c k * G α σ))
+        * (1 / 2 * (-Γ c j l - Γ c l j))) * v l * v j * v k)
+      = - residCubicAtomS3 G Γ v α - residCubicAtomS1c G Γ v α := by
+  have step1 : ∀ l j k : Fin n,
+      (∑ c, ((∑ σ, Γ σ c α * G σ k) + (∑ σ, Γ σ c k * G α σ))
+          * (1 / 2 * (-Γ c j l - Γ c l j))) * v l * v j * v k
+        = ∑ c, ((∑ σ, -(G σ k * Γ σ α c * Γ c j l * v l * v j * v k))
+            + (∑ σ, -(G α σ * Γ σ c k * Γ c j l * v l * v j * v k))) := by
+    intro l j k
+    rw [Finset.sum_mul, Finset.sum_mul, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun c _ => ?_
+    have e1 : (1 / 2 * (-Γ c j l - Γ c l j)) = -Γ c j l := by rw [hΓ c l j]; ring
+    rw [e1, show ((∑ σ, Γ σ c α * G σ k) + (∑ σ, Γ σ c k * G α σ)) * (-Γ c j l) * v l * v j * v k
+          = (∑ σ, Γ σ c α * G σ k) * (-(Γ c j l * v l * v j * v k))
+            + (∑ σ, Γ σ c k * G α σ) * (-(Γ c j l * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ c α]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+  have P0 : (∑ l, ∑ j, ∑ k, ∑ c, ∑ σ, G σ k * Γ σ α c * Γ c j l * v l * v j * v k)
+      = residCubicAtomS3 G Γ v α := by
+    unfold residCubicAtomS3
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.1, x.2.2.2.1, x.2.1, x.1),
+        fun y => (y.2.2.2.2, y.2.2.2.1, y.2.1, y.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨l, j, k, c, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ l, ∑ j, ∑ k, ∑ c, ∑ σ, G α σ * Γ σ c k * Γ c j l * v l * v j * v k)
+      = residCubicAtomS1c G Γ v α := by
+    unfold residCubicAtomS1c
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.2.2.1, x.2.1, x.1),
+        fun y => (y.2.2.2.2, y.2.2.2.1, y.2.2.1, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨l, j, k, c, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold2_A`-shape residue term to `−S4 − S2`.**  Γ-symmetry only. -/
+theorem residFold2A_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ j a * G σ k) + (∑ σ, Γ σ j k * G a σ))
+        * (1 / 2 * (-Γ a α l - Γ a l α)) * v l * v j * v k)
+      = - residCubicAtomS4 G Γ v α - residCubicAtomS2 G Γ v α := by
+  have step1 : ∀ a l j k : Fin n,
+      ((∑ σ, Γ σ j a * G σ k) + (∑ σ, Γ σ j k * G a σ))
+          * (1 / 2 * (-Γ a α l - Γ a l α)) * v l * v j * v k
+        = (∑ σ, -(G σ k * Γ σ a j * Γ a α l * v l * v j * v k))
+          + (∑ σ, -(G a σ * Γ σ j k * Γ a α l * v l * v j * v k)) := by
+    intro a l j k
+    have e1 : (1 / 2 * (-Γ a α l - Γ a l α)) = -Γ a α l := by rw [hΓ a l α]; ring
+    rw [e1, show ((∑ σ, Γ σ j a * G σ k) + (∑ σ, Γ σ j k * G a σ)) * (-Γ a α l) * v l * v j * v k
+          = (∑ σ, Γ σ j a * G σ k) * (-(Γ a α l * v l * v j * v k))
+            + (∑ σ, Γ σ j k * G a σ) * (-(Γ a α l * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ j a]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+  have P0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G σ k * Γ σ a j * Γ a α l * v l * v j * v k)
+      = residCubicAtomS4 G Γ v α := by
+    unfold residCubicAtomS4
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.1, x.2.2.1, x.2.1),
+        fun y => (y.2.2.1, y.2.2.2.2, y.2.2.2.1, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G a σ * Γ σ j k * Γ a α l * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.1, x.2.2.2.2, x.2.1, x.2.2.1, x.2.2.2.1),
+        fun y => (y.1, y.2.2.1, y.2.2.2.1, y.2.2.2.2, y.2.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold4_A`-shape residue term to `−S4 − S2`.**  Γ-symmetry only. -/
+theorem residFold4A_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ l a * G σ k) + (∑ σ, Γ σ l k * G a σ))
+        * (1 / 2 * (-Γ a α j - Γ a j α)) * v l * v j * v k)
+      = - residCubicAtomS4 G Γ v α - residCubicAtomS2 G Γ v α := by
+  have step1 : ∀ a l j k : Fin n,
+      ((∑ σ, Γ σ l a * G σ k) + (∑ σ, Γ σ l k * G a σ))
+          * (1 / 2 * (-Γ a α j - Γ a j α)) * v l * v j * v k
+        = (∑ σ, -(G σ k * Γ σ a l * Γ a α j * v l * v j * v k))
+          + (∑ σ, -(G a σ * Γ σ l k * Γ a α j * v l * v j * v k)) := by
+    intro a l j k
+    have e1 : (1 / 2 * (-Γ a α j - Γ a j α)) = -Γ a α j := by rw [hΓ a j α]; ring
+    rw [e1, show ((∑ σ, Γ σ l a * G σ k) + (∑ σ, Γ σ l k * G a σ)) * (-Γ a α j) * v l * v j * v k
+          = (∑ σ, Γ σ l a * G σ k) * (-(Γ a α j * v l * v j * v k))
+            + (∑ σ, Γ σ l k * G a σ) * (-(Γ a α j * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ l a]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+  have P0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G σ k * Γ σ a l * Γ a α j * v l * v j * v k)
+      = residCubicAtomS4 G Γ v α := by
+    unfold residCubicAtomS4
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.1, x.2.1, x.2.2.1),
+        fun y => (y.2.2.1, y.2.2.2.1, y.2.2.2.2, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G a σ * Γ σ l k * Γ a α j * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.1, x.2.2.2.2, x.2.2.1, x.2.1, x.2.2.2.1),
+        fun y => (y.1, y.2.2.2.1, y.2.2.1, y.2.2.2.2, y.2.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold7_A`-shape residue term to `−S2 − S1c`.**  Γ-symmetry only. -/
+theorem residFold7A_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ l α * G σ b) + (∑ σ, Γ σ l b * G α σ))
+        * (1 / 2 * (-Γ b k j - Γ b j k)) * v l * v j * v k)
+      = - residCubicAtomS2 G Γ v α - residCubicAtomS1c G Γ v α := by
+  have step1 : ∀ b l j k : Fin n,
+      ((∑ σ, Γ σ l α * G σ b) + (∑ σ, Γ σ l b * G α σ))
+          * (1 / 2 * (-Γ b k j - Γ b j k)) * v l * v j * v k
+        = (∑ σ, -(G σ b * Γ σ α l * Γ b k j * v l * v j * v k))
+          + (∑ σ, -(G α σ * Γ σ b l * Γ b k j * v l * v j * v k)) := by
+    intro b l j k
+    have e1 : (1 / 2 * (-Γ b k j - Γ b j k)) = -Γ b k j := by rw [hΓ b j k]; ring
+    rw [e1, show ((∑ σ, Γ σ l α * G σ b) + (∑ σ, Γ σ l b * G α σ)) * (-Γ b k j) * v l * v j * v k
+          = (∑ σ, Γ σ l α * G σ b) * (-(Γ b k j * v l * v j * v k))
+            + (∑ σ, Γ σ l b * G α σ) * (-(Γ b k j * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ l α]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ l b]; ring
+  have P0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G σ b * Γ σ α l * Γ b k j * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.1, x.2.1, x.2.2.2.1, x.2.2.1),
+        fun y => (y.2.1, y.2.2.1, y.2.2.2.2, y.2.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨b, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G α σ * Γ σ b l * Γ b k j * v l * v j * v k)
+      = residCubicAtomS1c G Γ v α := by
+    unfold residCubicAtomS1c
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.1, x.2.1, x.2.2.2.1, x.2.2.1),
+        fun y => (y.2.1, y.2.2.1, y.2.2.2.2, y.2.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨b, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold1_B`-shape residue term to `−S4 − S4`.**  G- and Γ-symmetry. -/
+theorem residFold1B_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hG : ∀ a b, G a b = G b a) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ l, ∑ j, ∑ k, (∑ c, ((∑ σ, Γ σ c j * G σ k) + (∑ σ, Γ σ c k * G j σ))
+        * (1 / 2 * (-Γ c α l - Γ c l α))) * v l * v j * v k)
+      = - residCubicAtomS4 G Γ v α - residCubicAtomS4 G Γ v α := by
+  have step1 : ∀ l j k : Fin n,
+      (∑ c, ((∑ σ, Γ σ c j * G σ k) + (∑ σ, Γ σ c k * G j σ))
+          * (1 / 2 * (-Γ c α l - Γ c l α))) * v l * v j * v k
+        = ∑ c, ((∑ σ, -(G σ k * Γ σ c j * Γ c α l * v l * v j * v k))
+            + (∑ σ, -(G σ j * Γ σ c k * Γ c α l * v l * v j * v k))) := by
+    intro l j k
+    rw [Finset.sum_mul, Finset.sum_mul, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun c _ => ?_
+    have e1 : (1 / 2 * (-Γ c α l - Γ c l α)) = -Γ c α l := by rw [hΓ c l α]; ring
+    rw [e1, show ((∑ σ, Γ σ c j * G σ k) + (∑ σ, Γ σ c k * G j σ)) * (-Γ c α l) * v l * v j * v k
+          = (∑ σ, Γ σ c j * G σ k) * (-(Γ c α l * v l * v j * v k))
+            + (∑ σ, Γ σ c k * G j σ) * (-(Γ c α l * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hG j σ]; ring
+  have P0 : (∑ l, ∑ j, ∑ k, ∑ c, ∑ σ, G σ k * Γ σ c j * Γ c α l * v l * v j * v k)
+      = residCubicAtomS4 G Γ v α := by
+    unfold residCubicAtomS4
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.1, x.2.2.2.1, x.2.1, x.1),
+        fun y => (y.2.2.2.2, y.2.2.2.1, y.2.1, y.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨l, j, k, c, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ l, ∑ j, ∑ k, ∑ c, ∑ σ, G σ j * Γ σ c k * Γ c α l * v l * v j * v k)
+      = residCubicAtomS4 G Γ v α := by
+    unfold residCubicAtomS4
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.1, x.2.2.2.1, x.2.2.1, x.1),
+        fun y => (y.2.2.2.2, y.2.1, y.2.2.2.1, y.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨l, j, k, c, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold2_B`-shape residue term to `−S3 − S2`.**  G- and Γ-symmetry. -/
+theorem residFold2B_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hG : ∀ a b, G a b = G b a) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ α a * G σ k) + (∑ σ, Γ σ α k * G a σ))
+        * (1 / 2 * (-Γ a j l - Γ a l j)) * v l * v j * v k)
+      = - residCubicAtomS3 G Γ v α - residCubicAtomS2 G Γ v α := by
+  have step1 : ∀ a l j k : Fin n,
+      ((∑ σ, Γ σ α a * G σ k) + (∑ σ, Γ σ α k * G a σ))
+          * (1 / 2 * (-Γ a j l - Γ a l j)) * v l * v j * v k
+        = (∑ σ, -(G σ k * Γ σ α a * Γ a j l * v l * v j * v k))
+          + (∑ σ, -(G σ a * Γ σ α k * Γ a j l * v l * v j * v k)) := by
+    intro a l j k
+    have e1 : (1 / 2 * (-Γ a j l - Γ a l j)) = -Γ a j l := by rw [hΓ a l j]; ring
+    rw [e1, show ((∑ σ, Γ σ α a * G σ k) + (∑ σ, Γ σ α k * G a σ)) * (-Γ a j l) * v l * v j * v k
+          = (∑ σ, Γ σ α a * G σ k) * (-(Γ a j l * v l * v j * v k))
+            + (∑ σ, Γ σ α k * G a σ) * (-(Γ a j l * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hG a σ]; ring
+  have P0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G σ k * Γ σ α a * Γ a j l * v l * v j * v k)
+      = residCubicAtomS3 G Γ v α := by
+    unfold residCubicAtomS3
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.1, x.2.2.1, x.2.1),
+        fun y => (y.2.2.1, y.2.2.2.2, y.2.2.2.1, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G σ a * Γ σ α k * Γ a j l * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.1, x.2.2.2.1, x.2.2.1, x.2.1),
+        fun y => (y.2.1, y.2.2.2.2, y.2.2.2.1, y.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold3_B`-shape residue term to `−S2 − S3`.**  G- and Γ-symmetry. -/
+theorem residFold3B_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hG : ∀ a b, G a b = G b a) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ α j * G σ b) + (∑ σ, Γ σ α b * G j σ))
+        * (1 / 2 * (-Γ b k l - Γ b l k)) * v l * v j * v k)
+      = - residCubicAtomS2 G Γ v α - residCubicAtomS3 G Γ v α := by
+  have step1 : ∀ b l j k : Fin n,
+      ((∑ σ, Γ σ α j * G σ b) + (∑ σ, Γ σ α b * G j σ))
+          * (1 / 2 * (-Γ b k l - Γ b l k)) * v l * v j * v k
+        = (∑ σ, -(G σ b * Γ σ α j * Γ b k l * v l * v j * v k))
+          + (∑ σ, -(G σ j * Γ σ α b * Γ b k l * v l * v j * v k)) := by
+    intro b l j k
+    have e1 : (1 / 2 * (-Γ b k l - Γ b l k)) = -Γ b k l := by rw [hΓ b l k]; ring
+    rw [e1, show ((∑ σ, Γ σ α j * G σ b) + (∑ σ, Γ σ α b * G j σ)) * (-Γ b k l) * v l * v j * v k
+          = (∑ σ, Γ σ α j * G σ b) * (-(Γ b k l * v l * v j * v k))
+            + (∑ σ, Γ σ α b * G j σ) * (-(Γ b k l * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hG j σ]; ring
+  have P0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G σ b * Γ σ α j * Γ b k l * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _ perm_bljks_to_sbjkl
+      (fun x => by obtain ⟨b, l, j, k, s⟩ := x; simp only [perm_bljks_to_sbjkl, Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G σ j * Γ σ α b * Γ b k l * v l * v j * v k)
+      = residCubicAtomS3 G Γ v α := by
+    unfold residCubicAtomS3
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.1, x.1, x.2.2.2.1, x.2.1),
+        fun y => (y.2.2.1, y.2.2.2.2, y.2.1, y.2.2.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨b, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold4_B`-shape residue term to `−S4 − S2`.**  Γ-symmetry only. -/
+theorem residFold4B_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ a, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ l a * G σ k) + (∑ σ, Γ σ l k * G a σ))
+        * (1 / 2 * (-Γ a j α - Γ a α j)) * v l * v j * v k)
+      = - residCubicAtomS4 G Γ v α - residCubicAtomS2 G Γ v α := by
+  have step1 : ∀ a l j k : Fin n,
+      ((∑ σ, Γ σ l a * G σ k) + (∑ σ, Γ σ l k * G a σ))
+          * (1 / 2 * (-Γ a j α - Γ a α j)) * v l * v j * v k
+        = (∑ σ, -(G σ k * Γ σ a l * Γ a α j * v l * v j * v k))
+          + (∑ σ, -(G a σ * Γ σ l k * Γ a α j * v l * v j * v k)) := by
+    intro a l j k
+    have e1 : (1 / 2 * (-Γ a j α - Γ a α j)) = -Γ a α j := by rw [hΓ a j α]; ring
+    rw [e1, show ((∑ σ, Γ σ l a * G σ k) + (∑ σ, Γ σ l k * G a σ)) * (-Γ a α j) * v l * v j * v k
+          = (∑ σ, Γ σ l a * G σ k) * (-(Γ a α j * v l * v j * v k))
+            + (∑ σ, Γ σ l k * G a σ) * (-(Γ a α j * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hΓ σ l a]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by ring
+  have P0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G σ k * Γ σ a l * Γ a α j * v l * v j * v k)
+      = residCubicAtomS4 G Γ v α := by
+    unfold residCubicAtomS4
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.1, x.2.1, x.2.2.1),
+        fun y => (y.2.2.1, y.2.2.2.1, y.2.2.2.2, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ a, ∑ l, ∑ j, ∑ k, ∑ σ, G a σ * Γ σ l k * Γ a α j * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.1, x.2.2.2.2, x.2.2.1, x.2.1, x.2.2.2.1),
+        fun y => (y.1, y.2.2.2.1, y.2.2.1, y.2.2.2.2, y.2.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨a, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold7_B`-shape residue term to `−S2 − S4`.**  G- and Γ-symmetry. -/
+theorem residFold7B_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hG : ∀ a b, G a b = G b a) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ b, ∑ l, ∑ j, ∑ k, ((∑ σ, Γ σ l j * G σ b) + (∑ σ, Γ σ l b * G j σ))
+        * (1 / 2 * (-Γ b k α - Γ b α k)) * v l * v j * v k)
+      = - residCubicAtomS2 G Γ v α - residCubicAtomS4 G Γ v α := by
+  have step1 : ∀ b l j k : Fin n,
+      ((∑ σ, Γ σ l j * G σ b) + (∑ σ, Γ σ l b * G j σ))
+          * (1 / 2 * (-Γ b k α - Γ b α k)) * v l * v j * v k
+        = (∑ σ, -(G b σ * Γ σ l j * Γ b α k * v l * v j * v k))
+          + (∑ σ, -(G σ j * Γ σ b l * Γ b α k * v l * v j * v k)) := by
+    intro b l j k
+    have e1 : (1 / 2 * (-Γ b k α - Γ b α k)) = -Γ b α k := by rw [hΓ b k α]; ring
+    rw [e1, show ((∑ σ, Γ σ l j * G σ b) + (∑ σ, Γ σ l b * G j σ)) * (-Γ b α k) * v l * v j * v k
+          = (∑ σ, Γ σ l j * G σ b) * (-(Γ b α k * v l * v j * v k))
+            + (∑ σ, Γ σ l b * G j σ) * (-(Γ b α k * v l * v j * v k)) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hG σ b]; ring
+    · exact Finset.sum_congr rfl fun σ _ => by rw [hG j σ, hΓ σ l b]; ring
+  have P0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G b σ * Γ σ l j * Γ b α k * v l * v j * v k)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.1, x.2.2.2.2, x.2.2.2.1, x.2.1, x.2.2.1),
+        fun y => (y.1, y.2.2.2.1, y.2.2.2.2, y.2.2.1, y.2.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨b, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  have Q0 : (∑ b, ∑ l, ∑ j, ∑ k, ∑ σ, G σ j * Γ σ b l * Γ b α k * v l * v j * v k)
+      = residCubicAtomS4 G Γ v α := by
+    unfold residCubicAtomS4
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.1, x.1, x.2.1, x.2.2.2.1),
+        fun y => (y.2.2.1, y.2.2.2.1, y.2.1, y.2.2.2.2, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨b, l, j, k, s⟩ := x; simp only [Equiv.coe_fn_mk]; ring)
+  simp only [step1, Finset.sum_add_distrib, Finset.sum_neg_distrib]
+  rw [P0, Q0]; ring
+
+/-- **Reduction of the `fold9_A` `∂g·Γ` core (post-`hmc`) to `S1c + S2`.**  G- and Γ-symmetry. -/
+theorem residFold9Acore_eq (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hG : ∀ a b, G a b = G b a) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ j, ∑ m, (∑ r, v r * (∑ σ, ((∑ τ, Γ τ r σ * G τ α) + (∑ τ, Γ τ r α * G σ τ))
+        * Γ σ j m)) * (v j * v m))
+      = residCubicAtomS1c G Γ v α + residCubicAtomS2 G Γ v α := by
+  have step1 : ∀ j m : Fin n,
+      (∑ r, v r * (∑ σ, ((∑ τ, Γ τ r σ * G τ α) + (∑ τ, Γ τ r α * G σ τ)) * Γ σ j m))
+          * (v j * v m)
+        = (∑ r, ∑ σ, ∑ τ, G α τ * Γ τ σ r * Γ σ j m * v r * v j * v m)
+          + (∑ r, ∑ σ, ∑ τ, G τ σ * Γ τ α r * Γ σ j m * v r * v j * v m) := by
+    intro j m
+    rw [Finset.sum_mul, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun r _ => ?_
+    rw [Finset.mul_sum, Finset.sum_mul, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun σ _ => ?_
+    rw [show v r * (((∑ τ, Γ τ r σ * G τ α) + (∑ τ, Γ τ r α * G σ τ)) * Γ σ j m) * (v j * v m)
+          = (∑ τ, Γ τ r σ * G τ α) * (Γ σ j m * v r * v j * v m)
+            + (∑ τ, Γ τ r α * G σ τ) * (Γ σ j m * v r * v j * v m) from by ring]
+    rw [Finset.sum_mul, Finset.sum_mul]
+    congr 1
+    · exact Finset.sum_congr rfl fun τ _ => by rw [hG τ α, hΓ τ r σ]; ring
+    · exact Finset.sum_congr rfl fun τ _ => by rw [hG σ τ, hΓ τ r α]; ring
+  have P0 : (∑ j, ∑ m, ∑ r, ∑ σ, ∑ τ, G α τ * Γ τ σ r * Γ σ j m * v r * v j * v m)
+      = residCubicAtomS1c G Γ v α := by
+    unfold residCubicAtomS1c
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.2.2.1, x.1, x.2.1),
+        fun y => (y.2.2.2.1, y.2.2.2.2, y.2.2.1, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨j, m, r, σ, τ⟩ := x; simp only [Equiv.coe_fn_mk])
+  have Q0 : (∑ j, ∑ m, ∑ r, ∑ σ, ∑ τ, G τ σ * Γ τ α r * Γ σ j m * v r * v j * v m)
+      = residCubicAtomS2 G Γ v α := by
+    unfold residCubicAtomS2
+    exact sum5_reindex _ _
+      ⟨fun x => (x.2.2.2.2, x.2.2.2.1, x.2.2.1, x.1, x.2.1),
+        fun y => (y.2.2.2.1, y.2.2.2.2, y.2.2.1, y.2.1, y.1), fun _ => rfl, fun _ => rfl⟩
+      (fun x => by obtain ⟨j, m, r, σ, τ⟩ := x; simp only [Equiv.coe_fn_mk])
+  simp only [step1, Finset.sum_add_distrib]
+  rw [P0, Q0]
+
+/-- **`crossS3_shape` — the `Cross(e_α,v,v)`-reduced geodesic `Γ²` shape is the atom `S3`.**  Pure
+    `Finset` distribution (identity index order). -/
+theorem crossS3_shape (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) :
+    (∑ a, ∑ k, G a k * v k * (∑ j, Γ a α j * (∑ b, ∑ c, Γ j b c * v b * v c)))
+      = residCubicAtomS3 G Γ v α := by
+  unfold residCubicAtomS3
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun k _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [show G a k * v k * (Γ a α j * (∑ b, ∑ c, Γ j b c * v b * v c))
+        = (G a k * v k * Γ a α j) * (∑ b, ∑ c, Γ j b c * v b * v c) from by ring, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun c _ => by ring
+
+/-- **`crossS4_shape` — the `Cross(v,e_α,v)`-reduced geodesic `Γ²` shape is the atom `S4`.**  Pure
+    `Finset` distribution (identity index order). -/
+theorem crossS4_shape (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) :
+    (∑ a, ∑ k, G a k * v k * (∑ j, ∑ m, Γ a j m * (∑ c, Γ j α c * v c) * v m))
+      = residCubicAtomS4 G Γ v α := by
+  unfold residCubicAtomS4
+  refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun k _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  rw [show G a k * v k * (Γ a j m * (∑ c, Γ j α c * v c) * v m)
+        = (G a k * v k * Γ a j m * v m) * (∑ c, Γ j α c * v c) from by ring, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun c _ => by ring
+
+/-- **`crossS1c_termA_shape` — the `termA` half of the diagonal cross block is the atom `S1c`.** -/
+theorem crossS1c_termA_shape (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) :
+    (∑ b, G α b * (∑ j, ∑ k, Γ b j k * (∑ a, ∑ c, Γ j a c * v a * v c) * v k))
+      = residCubicAtomS1c G Γ v α := by
+  unfold residCubicAtomS1c
+  refine Finset.sum_congr rfl fun b _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun k _ => ?_
+  rw [show G α b * (Γ b j k * (∑ a, ∑ c, Γ j a c * v a * v c) * v k)
+        = (G α b * Γ b j k * v k) * (∑ a, ∑ c, Γ j a c * v a * v c) from by ring, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun a _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun c _ => by ring
+
+/-- **`crossS1c_termB_shape` — the `termB` half of the diagonal cross block is the atom `S1c`.**
+    Needs Γ lower-symmetry (chain on the second lower index). -/
+theorem crossS1c_termB_shape (G : Fin n → Fin n → ℝ) (Γ : Fin n → Fin n → Fin n → ℝ)
+    (v : Fin n → ℝ) (α : Fin n) (hΓ : ∀ i j k, Γ i j k = Γ i k j) :
+    (∑ b, G α b * (∑ j, ∑ k, Γ b j k * v j * (∑ a, ∑ c, Γ k a c * v a * v c)))
+      = residCubicAtomS1c G Γ v α := by
+  have hstep : (∑ b, G α b * (∑ j, ∑ k, Γ b j k * v j * (∑ a, ∑ c, Γ k a c * v a * v c)))
+      = ∑ b, ∑ j, ∑ k, ∑ a, ∑ c, G α b * Γ b k j * Γ k a c * v j * v a * v c := by
+    refine Finset.sum_congr rfl fun b _ => ?_
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    rw [show G α b * (Γ b j k * v j * (∑ a, ∑ c, Γ k a c * v a * v c))
+          = (G α b * Γ b j k * v j) * (∑ a, ∑ c, Γ k a c * v a * v c) from by ring, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun c _ => by rw [hΓ b j k]; ring
+  rw [hstep]
+  unfold residCubicAtomS1c
+  exact sum5_reindex _ _
+    ⟨fun x => (x.1, x.2.2.1, x.2.1, x.2.2.2.1, x.2.2.2.2),
+      fun y => (y.1, y.2.2.1, y.2.1, y.2.2.2.1, y.2.2.2.2), fun _ => rfl, fun _ => rfl⟩
+    (fun x => by obtain ⟨b, j, k, a, c⟩ := x; simp only [Equiv.coe_fn_mk])
+
+/-- Distribute a scalar through a doubly-nested `Finset` sum. -/
+private lemma const_mul_sum2 (C : ℝ) (F : Fin n → Fin n → ℝ) :
+    C * (∑ a, ∑ k, F a k) = ∑ a, ∑ k, C * F a k := by
+  simp only [Finset.mul_sum]
+
+/-- **Reduction of the `fold9_A` `Cross` term to `S1c + S1c`.**  Via `hpd2_fold9A_cross_reindex`
+    (Cross → `christSq`), `christSqSum_contract_a3` (`christSq → termA + termB`), and the two
+    `crossS1c_term*_shape` reindexings.  Needs `hsymm` (through `christoffel_symm`). -/
+theorem residFold9ACross_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    (1 / 2 : ℝ) * (∑ b, g p α b * rncCrossBlock g gi p v v v b)
+      = residCubicAtomS1c (g p) (fun i j k => christoffel g gi i j k p) v α
+        + residCubicAtomS1c (g p) (fun i j k => christoffel g gi i j k p) v α := by
+  rw [hpd2_fold9A_cross_reindex g gi p α v]
+  have h1 : ∀ b : Fin n,
+      g p α b * (∑ l, ∑ j, ∑ k,
+          (QIQTH.RNCGauge.christSqA (fun i j k => christoffel g gi i j k p) b l j k
+            + QIQTH.RNCGauge.christSqB (fun i j k => christoffel g gi i j k p) b l j k)
+            * v l * v j * v k)
+        = g p α b * (∑ j, ∑ k, christoffel g gi b j k p
+              * (∑ a, ∑ c, christoffel g gi j a c p * v a * v c) * v k)
+          + g p α b * (∑ j, ∑ k, christoffel g gi b j k p
+              * v j * (∑ a, ∑ c, christoffel g gi k a c p * v a * v c)) := by
+    intro b; rw [christSqSum_contract_a3 g gi p v b]; ring
+  simp only [h1, Finset.sum_add_distrib]
+  rw [crossS1c_termA_shape (g p) (fun i j k => christoffel g gi i j k p) v α,
+      crossS1c_termB_shape (g p) (fun i j k => christoffel g gi i j k p) v α
+        (fun i j k => christoffel_symm g gi hsymm i j k p)]
+
+/-- **Reduction of the `fold5_A` block to its `D³` remainder plus `(2/3)·S3 + (4/3)·S4`.**  The Cross
+    sub-terms reduce via `rncCrossBlock_dir_vv_a3` / `rncCrossBlock_dir_evv_a3` and the `crossS3/S4`
+    shapes; the `D³` block is carried unchanged (it cancels in `2A − B`). -/
+theorem residFold5A_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)))
+      = (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p (Pi.single α 1) v v a))
+        + (2 / 3 : ℝ) * residCubicAtomS3 (g p) (fun i j k => christoffel g gi i j k p) v α
+        + (4 / 3 : ℝ) * residCubicAtomS4 (g p) (fun i j k => christoffel g gi i j k p) v α := by
+  have hL : (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + 2 * rncCrossBlock g gi p v (Pi.single α 1) v a)))
+      = (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p (Pi.single α 1) v v a))
+        + (2 / 3 : ℝ) * (∑ a, ∑ k, g p a k * v k
+            * (∑ j, christoffel g gi a α j p * (∑ b, ∑ c, christoffel g gi j b c p * v b * v c)))
+        + (4 / 3 : ℝ) * (∑ a, ∑ k, g p a k * v k
+            * (∑ j, ∑ m, christoffel g gi a j m p * (∑ c, christoffel g gi j α c p * v c) * v m)) := by
+    simp only [rncCrossBlock_dir_vv_a3 g gi hsymm p α v, rncCrossBlock_dir_evv_a3 g gi hsymm p α v]
+    conv_rhs => rw [const_mul_sum2, const_mul_sum2, ← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    conv_rhs => rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun k _ => by ring
+  rw [hL, crossS3_shape (g p) (fun i j k => christoffel g gi i j k p) v α,
+      crossS4_shape (g p) (fun i j k => christoffel g gi i j k p) v α]
+
+/-- **Reduction of the `fold5_B` block to its `D³` remainder plus `(2/3)·S3 + (4/3)·S4`.** -/
+theorem residFold5B_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p v v (Pi.single α 1) a)))
+      = (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a))
+        + (2 / 3 : ℝ) * residCubicAtomS3 (g p) (fun i j k => christoffel g gi i j k p) v α
+        + (4 / 3 : ℝ) * residCubicAtomS4 (g p) (fun i j k => christoffel g gi i j k p) v α := by
+  have hL : (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p v (Pi.single α 1) v a
+        + rncCrossBlock g gi p (Pi.single α 1) v v a
+        + rncCrossBlock g gi p v v (Pi.single α 1) a)))
+      = (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a))
+        + (2 / 3 : ℝ) * (∑ a, ∑ k, g p a k * v k
+            * (∑ j, christoffel g gi a α j p * (∑ b, ∑ c, christoffel g gi j b c p * v b * v c)))
+        + (4 / 3 : ℝ) * (∑ a, ∑ k, g p a k * v k
+            * (∑ j, ∑ m, christoffel g gi a j m p * (∑ c, christoffel g gi j α c p * v c) * v m)) := by
+    simp only [rncCrossBlock_sk_sl_symm g gi p v v (Pi.single α 1),
+      rncCrossBlock_dir_vv_a3 g gi hsymm p α v, rncCrossBlock_dir_evv_a3 g gi hsymm p α v]
+    conv_rhs => rw [const_mul_sum2, const_mul_sum2, ← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    conv_rhs => rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun k _ => by ring
+  rw [hL, crossS3_shape (g p) (fun i j k => christoffel g gi i j k p) v α,
+      crossS4_shape (g p) (fun i j k => christoffel g gi i j k p) v α]
+
+/-- **Reduction of the `fold9_B` block to its (`G`-transposed) `D³` remainder plus
+    `(2/3)·S3 + (4/3)·S4`.**  The outer `G_{jb}` is symmetrized to `G_{bj}` (`hsymm`) so the block reads
+    as the `crossS3/S4` shape with block index first. -/
+theorem residFold9B_eq (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a) (p : Point n) (α : Fin n) (v : Point n) :
+    (∑ b, ∑ j, g p j b * v j * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p (Pi.single α 1) v v b
+        + rncCrossBlock g gi p v v (Pi.single α 1) b)))
+      = (∑ b, ∑ j, g p b j * v j * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v b))
+        + (2 / 3 : ℝ) * residCubicAtomS3 (g p) (fun i j k => christoffel g gi i j k p) v α
+        + (4 / 3 : ℝ) * residCubicAtomS4 (g p) (fun i j k => christoffel g gi i j k p) v α := by
+  have hswap : (∑ b, ∑ j, g p j b * v j * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p (Pi.single α 1) v v b
+        + rncCrossBlock g gi p v v (Pi.single α 1) b)))
+      = (∑ b, ∑ j, g p b j * v j * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p (Pi.single α 1) v v b
+        + rncCrossBlock g gi p v v (Pi.single α 1) b))) :=
+    Finset.sum_congr rfl fun b _ => Finset.sum_congr rfl fun j _ => by rw [hsymm p j b]
+  rw [hswap]
+  have hL : (∑ b, ∑ j, g p b j * v j * ((1 / 6 : ℝ) * (rncD3Block g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p v (Pi.single α 1) v b
+        + rncCrossBlock g gi p (Pi.single α 1) v v b
+        + rncCrossBlock g gi p v v (Pi.single α 1) b)))
+      = (∑ b, ∑ j, g p b j * v j * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v b))
+        + (2 / 3 : ℝ) * (∑ b, ∑ j, g p b j * v j
+            * (∑ J, christoffel g gi b α J p * (∑ c, ∑ d, christoffel g gi J c d p * v c * v d)))
+        + (4 / 3 : ℝ) * (∑ b, ∑ j, g p b j * v j
+            * (∑ J, ∑ m, christoffel g gi b J m p * (∑ c, christoffel g gi J α c p * v c) * v m)) := by
+    simp only [rncCrossBlock_sk_sl_symm g gi p v v (Pi.single α 1),
+      rncCrossBlock_dir_vv_a3 g gi hsymm p α v, rncCrossBlock_dir_evv_a3 g gi hsymm p α v]
+    conv_rhs => rw [const_mul_sum2, const_mul_sum2, ← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun b _ => ?_
+    conv_rhs => rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun j _ => by ring
+  rw [hL, crossS3_shape (g p) (fun i j k => christoffel g gi i j k p) v α,
+      crossS4_shape (g p) (fun i j k => christoffel g gi i j k p) v α]
+
+/-- **The `D³` remainders cancel in `2A − B`.**  `D³(e_α,v,v) = D³(v,e_α,v)` (`rncD3Block_swap12`)
+    makes all three remainder sums equal; `2W − W − W = 0`. -/
+theorem residD3_cancel (g gi : Point n → Fin n → Fin n → ℝ) (p : Point n) (α : Fin n) (v : Point n) :
+    2 * (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p (Pi.single α 1) v v a))
+      - (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a))
+      - (∑ b, ∑ j, g p b j * v j * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v b)) = 0 := by
+  have e1 : (∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p (Pi.single α 1) v v a))
+      = ∑ a, ∑ k, g p a k * v k * ((1 / 6 : ℝ) * rncD3Block g gi p v (Pi.single α 1) v a) :=
+    Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun k _ => by rw [rncD3Block_swap12]
+  rw [e1]; ring
+
+set_option maxHeartbeats 12800000 in
+/-- **`hpd2_cubic_vanish` — THE `g·Γ·Γ·v³` residue vanishes: `2·A_α − B_α = 0`.**  The full
+    assembly of the 4-atom canonical form: every fold-piece of the post-`hmc` residue reduces to a
+    rational combination of the opaque atoms `S2/S3/S4/S1c` (plus a `D³` remainder), with
+      `2A = −2·S2 − (2/3)·S3 − (4/3)·S4`,  `B = −2·S2 − (2/3)·S3 − (4/3)·S4`,
+    the `S1c` shape netting `0` on each side and the `D³` remainders cancelling (`residD3_cancel`).
+    Needs only `hsymm` (metric symmetry) and `christoffel_symm` (Γ lower-symmetry) — the residue is a
+    pure symmetric-array identity. -/
+theorem hpd2_cubic_vanish (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) (α : Fin n) (v : Point n) :
+    2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+          expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+      - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+          expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k) = 0 := by
+  have hΓ : ∀ i j k, christoffel g gi i j k p = christoffel g gi i k j p :=
+    fun i j k => christoffel_symm g gi hsymm i j k p
+  have hG : ∀ a b, g p a b = g p b a := hsymm p
+  rw [hpd2_residual_hmc g gi hsymm hinvF hg hC p α v,
+      residFold1A_eq (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold2A_eq (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold3A_eq (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold4A_eq (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold5A_eq g gi hsymm p α v,
+      residFold6A_eq_S2 (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold7A_eq (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold8A_eq_S2 (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold9Acore_eq (g p) (fun i j k => christoffel g gi i j k p) v α hG hΓ,
+      residFold9ACross_eq g gi hsymm p α v,
+      residFold1B_eq (g p) (fun i j k => christoffel g gi i j k p) v α hG hΓ,
+      residFold2B_eq (g p) (fun i j k => christoffel g gi i j k p) v α hG hΓ,
+      residFold3B_eq (g p) (fun i j k => christoffel g gi i j k p) v α hG hΓ,
+      residFold4B_eq (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold5B_eq g gi hsymm p α v,
+      residFold6B_eq_S2 (g p) (fun i j k => christoffel g gi i j k p) v α hΓ,
+      residFold7B_eq (g p) (fun i j k => christoffel g gi i j k p) v α hG hΓ,
+      residFold8B_eq_S2 (g p) (fun i j k => christoffel g gi i j k p) v α hG hΓ,
+      residFold9B_eq g gi hsymm p α v]
+  linarith [residD3_cancel g gi p α v]
+
+/-- **`expPullback_hpd2` — THE pure second-jet radial identity for `g̃`, UNCONDITIONAL.**  The
+    `∀ α v` form of `hpd2_cubic_vanish`: `2⟨∂_l∂_j g̃_{αk}⟩ = ⟨∂_l∂_α g̃_{jk}⟩`.  This discharges the
+    single hypothesis `hpd2` on which the radial gauge / cyclic RNC gauge / `κ = 1/6` capstone were
+    conditional. -/
+theorem expPullback_hpd2 (g gi : Point n → Fin n → Fin n → ℝ)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (p : Point n) :
+    ∀ (α : Fin n) (v : Point n),
+      2 * (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g gi hC p x α k) j y) l 0 * v l * v j * v k)
+        - (∑ l, ∑ j, ∑ k, pd (fun y => pd (fun x =>
+              expPullbackMetric g gi hC p x j k) α y) l 0 * v l * v j * v k) = 0 :=
+  fun α v => hpd2_cubic_vanish g gi hsymm hinvF hg hC p α v
+
+open QIQTH.RNCGauge in
+/-- **`expPullback_radial_gauge` — the radial-diagonal gauge for `g̃`, UNCONDITIONAL.**  The pullback
+    Christoffel linear-jet diagonal `dGammaDiag(∂Γ̃)(0)` vanishes for every `v, i`, with the open
+    hypothesis `hpd2` now discharged by `expPullback_hpd2`. -/
+theorem expPullback_radial_gauge (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (v : Point n) (i : Fin n) :
+    dGammaDiag (fun l i j k =>
+        pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i j k x) l 0) v i = 0 :=
+  expPullback_radial_gauge_of_pd2 g gi hC p hsymm (fun a b => hinvF p a b) hg
+    (expPullback_hpd2 g gi hsymm hinvF hg hC p) v i
+
+/-- **`gauge_pd_christoffel_expPullbackInv_zero'` — the cyclic normal-coordinate gauge for `g̃`,
+    UNCONDITIONAL.**  `∂_c Γ̃^i_{ab}(0) + ∂_a Γ̃^i_{bc}(0) + ∂_b Γ̃^i_{ca}(0) = 0`, with `hpd2`
+    discharged by `expPullback_hpd2`. -/
+theorem gauge_pd_christoffel_expPullbackInv_zero' (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y)) (p : Point n)
+    (hsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (i a b c : Fin n) :
+    pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i a b x) c 0
+      + pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i b c x) a 0
+      + pd (fun x => christoffel (expPullbackMetric g gi hC p) (expPullbackMetricInv g gi hC p)
+          i c a x) b 0 = 0 :=
+  gauge_pd_christoffel_expPullbackInv_zero_of_pd2 g gi hC p hsymm (fun a b => hinvF p a b) hg
+    (expPullback_hpd2 g gi hsymm hinvF hg hC p) i a b c
 
 
 /-!
@@ -5299,5 +6161,39 @@ theorem kappa_eq_one_sixth_expPullback_of_hpd2
         g₀ gi₀ hC p hsymm0 hinv hg hpd2 i a b c
       linarith [hg3])
     κ hκgeo hRic Rscl hR
+
+set_option maxHeartbeats 1600000 in
+/-- **THE `κ = 1/6` CAPSTONE for the pullback metric `g̃`, UNCONDITIONAL.**  Identical to
+    `kappa_eq_one_sixth_expPullback_of_hpd2` but with the single open radial identity `hpd2`
+    DISCHARGED by the now-proved `expPullback_hpd2` (`hpd2_cubic_vanish`).  The heat-coefficient
+    `κ`-slot value equals `(1/6 − ξ)·Rscl − m²` for the exp-pullback metric `g̃ = expPullbackMetric g₀
+    gi₀ hC p`, needing only the orthonormal frame `hframe`, ambient smoothness `hg`/`hsymm0`/`hinvF`,
+    the standard `√det`-Hessian relation `hκgeo`, and curvature non-degeneracy `hRic`.
+
+    This is UNCONDITIONAL `κ = 1/6` for `g̃` — the milestone.  (It does NOT yet assert the general
+    `a₁ = R/6`, the numerical value of `G`, nor the full conjecture: those require the `P2`
+    parametrix / Seeley–DeWitt input, still carried as a labelled physical input elsewhere.) -/
+theorem kappa_eq_one_sixth_expPullback
+    (g₀ gi₀ : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g₀ gi₀ a b c y)) (p : Point n)
+    (hsymm0 : ∀ y a b, g₀ y a b = g₀ y b a)
+    (hinvF : ∀ y a b, (∑ σ, g₀ y a σ * gi₀ y σ b) = if a = b then 1 else 0)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g₀ y a b))
+    (hframe : ∀ i j, g₀ p i j = (if i = j then 1 else 0))
+    (t : ℝ) (ht : 0 < t) (ξ m : ℝ)
+    (κ : ℝ)
+    (hκgeo : ∀ c d, (1 / 2) * pd (fun y => pd (fun w =>
+          Real.sqrt (Matrix.det (expPullbackMetric g₀ gi₀ hC p w))) d y) c 0
+        = -κ * ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) c d 0)
+    (hRic : ∃ c d, ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) c d 0 ≠ 0)
+    (Rscl : ℝ)
+    (hR : Rscl = ∑ i, ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) i i 0) :
+    (1 / (2 * t)) * (κ * ∑ i, ∑ j,
+        ricci (expPullbackMetric g₀ gi₀ hC p) (expPullbackMetricInv g₀ gi₀ hC p) i j 0 *
+          (∫ x : (Fin n → ℝ), (∏ k, QIQTH.HeatKernelA1.heatKernel1D t (x k)) * (x i * x j)))
+        - ξ * Rscl - m ^ 2
+      = (1 / 6 - ξ) * Rscl - m ^ 2 :=
+  kappa_eq_one_sixth_expPullback_of_hpd2 g₀ gi₀ hC p hsymm0 hinvF hg hframe
+    (expPullback_hpd2 g₀ gi₀ hsymm0 hinvF hg hC p) t ht ξ m κ hκgeo hRic Rscl hR
 
 end QIQTH.PullbackMetric
