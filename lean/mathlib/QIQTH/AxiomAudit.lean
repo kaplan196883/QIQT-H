@@ -12761,5 +12761,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FlatHeatEquation.heatKernel1D_heat_eqn
 #print axioms QIQTH.FlatHeatEquation.gaussDdim_pd_pd_i
 #print axioms QIQTH.FlatHeatEquation.gaussDdim_heat_eqn
+-- ★ PARAMETRIX P2 (P2c-leading) — the heat-operator RESIDUAL of the flat Gaussian (HeatParametrixError.lean).
+-- heatResidual g gi t x = deriv(gaussDdim·x)t − laplaceBeltrami g gi (gaussDdim t) x = (∂_t−Δ_g)G on the flat leading
+-- term.  heatResidual_eq_flat_minus_g (=(Δ_flat−Δ_g)G via gaussDdim_heat_eqn — isolates the error as the flat−curved
+-- Laplacian difference).  ★ heatResidual_at_rnc_center (=0 at an RNC center gi=δ∧Γ=0, via laplaceBeltrami_at_rnc_center
+-- — the flat Gaussian is a genuine LEADING parametrix: the heat-operator error VANISHES on the diagonal).
+-- heatResidual_curvature_form (the explicit metric-deviation form ∑(δ^{ij}−g^{ij})∂_i∂_jG + ∑ g^{ij}Γ^k_ij ∂_kG — the
+-- symbolic u₁-transport input; the fully-explicit Gaussian off-diagonal-partial substitution is a later brick).  HONEST
+-- — P2c-leading only; does NOT build the full parametrix H_N / the Riemannian kernel / the transport recursion /
+-- general a₁=R/6 (P2a/P2b/P2c-full + the P2d Levi/Duhamel community-scale wall).  [AF] std-3.
+#print axioms QIQTH.HeatParametrixError.heatResidual_eq_flat_minus_g
+#print axioms QIQTH.HeatParametrixError.heatResidual_at_rnc_center
+#print axioms QIQTH.HeatParametrixError.heatResidual_curvature_form
 
 end QIQTH.AxiomAudit
