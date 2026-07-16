@@ -12990,5 +12990,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeviSeries.heatConv_abs_le
 #print axioms QIQTH.LeviSeries.heatConv_mono
 #print axioms QIQTH.LeviSeries.heatConv_le_of_abs_le
+-- C5c — the ITERATED RESIDUAL BOUND + NEUMANN-SERIES CONVERGENCE (LeviSeries.lean): iterE = k-fold conv of the
+-- residual E; iterConv_bound = |iterE E k t x y| ≤ C^k·iterKernel α k t x y (Nat.le_induction on the positive-time
+-- domination heatConv_le_of_abs_le_pos + iterKernel_succ + pow_succ), CARRYING the one-step residual bound
+-- hEbound (|E|≤C·baseKernel, for 0<τ — DISCHARGED by C4) + IterConvIntegrable (genuine per-step integrability,
+-- orthogonal to the conclusion); leviSeries_summable = Summable (fun k => iterE E (k+1) t x y) via comparison to the
+-- C5a model series (Γ decay beats geometric C^k). THE LEVI/DUHAMEL NEUMANN SERIES CONVERGES for the actual residual.
+-- ⚠ HONEST FIREWALL: convergence given the one-step residual bound (carried); NOT the true kernel, NOT a₁=R/6 (C6).
+-- The residual bound C4 reduces to the off-diagonal parametrix (geodesic r + van-Vleck Θ as functions) = a separate wall.
+#print axioms QIQTH.LeviSeries.iterKernel_nonneg
+#print axioms QIQTH.LeviSeries.heatConv_le_of_abs_le_pos
+#print axioms QIQTH.LeviSeries.iterConv_bound
+#print axioms QIQTH.LeviSeries.leviSeries_summable
 
 end QIQTH.AxiomAudit

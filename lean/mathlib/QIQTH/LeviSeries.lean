@@ -279,4 +279,226 @@ theorem heatConv_le_of_abs_le (A B A' B' : ℝ → Point n → Point n → ℝ) 
     (fun s z => hA (t - s) x z) (fun s z => hB s z y)
     hIf hIg hI2 hIsg
 
+/-! ### C5c — iterated bound + Neumann convergence.
+
+    This ties C5b (domination) + C3 (`iterKernel`) + C5a (model summable) together for the ACTUAL
+    residual `E`.  We bound the iterated residual convolutions `E^{*k}` (`iterE`) by the model
+    `C^k · iterKernel`, then conclude the Levi/Duhamel Neumann series for `E` CONVERGES.
+
+    * `iterE E k` — the `k`-fold iterated convolution of the residual `E` (mirrors `iterKernel`).
+    * `heatConv_le_of_abs_le_pos` — the positive-time domination step: it needs the one-step bounds
+      only for POSITIVE times (`0 < τ`), because `heatConv` integrates over `s ∈ (0,t)` where both
+      inner times `t−s` and `s` are positive.  This is what lets the one-step residual bound
+      (`hEbound`, stated for `0 < τ`) and the inductive hypothesis (positive-time bound on
+      `iterE E k`) actually feed the induction — `intervalIntegral.integral_mono_on_of_le_Ioo`
+      only needs the pointwise inequality on the OPEN interval.
+    * `iterConv_bound` — THE deliverable: `|iterE E k t x y| ≤ C^k · iterKernel α k t x y`, by
+      `Nat.le_induction` on `k` (base `k=1` = `hEbound`; step = `heatConv_le_of_abs_le_pos` +
+      scalar pull-out + `iterKernel_succ`).  The per-step integrability is CARRIED honestly as an
+      explicit indexed family `IterConvIntegrable` (genuine integral facts, never the conclusion).
+    * `leviSeries_summable` — the convergence conclusion: `Summable (fun k => iterE E (k+1) t x y)`,
+      by comparison (`Summable.of_norm_bounded`) with the dominating model series
+      `C^(k+1) · iterKernel α (k+1) t x y`, whose summability (`scaledIterKernel_summable`) follows
+      from the C5a ratio test — the `Γ` (factorial) decay beats any geometric `C^k`.
+
+    ⚠ HONEST SCOPE.  The one-step residual bound `hEbound` is CARRIED here (C4 discharges it, and C4
+    reduces to the off-diagonal parametrix — a separate wall).  This is C5c (actual-residual bound +
+    convergence), NOT the true curved kernel / `a₁ = R/6` (C6).  No axioms beyond the standard three,
+    no `sorry`. -/
+
+/-- **Positivity of the `d`-dim Gaussian** for `t > 0`: a product of strictly positive 1-D kernels. -/
+theorem gaussDdim_pos (t : ℝ) (ht : 0 < t) (x : Point n) : 0 < gaussDdim t x := by
+  unfold gaussDdim
+  exact Finset.prod_pos (fun k _ => QIQTH.GaussianConvolution.heatKernel1D_pos t (x k) ht)
+
+/-- **Nonnegativity of the model iterated kernel** for `α > −1`, `t > 0`, `k ≥ 1`: it equals
+    `modelCoeff α t k · gaussDdim t (x−y)`, a product of a positive coefficient and a positive
+    Gaussian (`iterKernel_eq`). -/
+theorem iterKernel_nonneg (α t : ℝ) (hα : -1 < α) (ht : 0 < t) (x y : Point n) {k : ℕ}
+    (hk : 1 ≤ k) : 0 ≤ iterKernel α k t x y := by
+  have hfac : iterKernel α k t x y = modelCoeff α t k * gaussDdim t (x - y) := by
+    rw [iterKernel_eq α hα t ht x y hk]; unfold modelCoeff; ring
+  rw [hfac]
+  exact mul_nonneg (modelCoeff_pos α t hα ht hk).le (gaussDdim_pos t ht (x - y)).le
+
+/-! #### The iterated residual convolution `iterE`. -/
+
+/-- **The `k`-fold iterated convolution of the residual kernel `E`** (the actual Levi/Duhamel
+    Neumann term).  Mirrors `TimeSimplexBeta.iterKernel`: `iterE E 1 = E`, and each step
+    left-convolves once more by `E`, `iterE E (k+1) = heatConvK E (iterE E k)` for `k ≥ 1`. -/
+noncomputable def iterE (E : ℝ → Point n → Point n → ℝ) : ℕ → (ℝ → Point n → Point n → ℝ)
+  | 0 => E
+  | 1 => E
+  | (k + 2) => heatConvK E (iterE E (k + 1))
+
+/-- One residual factor: `iterE E 1 = E`. -/
+theorem iterE_one (E : ℝ → Point n → Point n → ℝ) :
+    (iterE E 1 : ℝ → Point n → Point n → ℝ) = E := rfl
+
+/-- The recursion step (for `k ≥ 1`): `iterE E (k+1) = heatConvK E (iterE E k)`. -/
+theorem iterE_succ (E : ℝ → Point n → Point n → ℝ) {k : ℕ} (hk : 1 ≤ k) :
+    (iterE E (k + 1) : ℝ → Point n → Point n → ℝ) = heatConvK E (iterE E k) := by
+  obtain ⟨m, rfl⟩ : ∃ m, k = m + 1 := ⟨k - 1, by omega⟩
+  rfl
+
+/-! #### The positive-time domination step. -/
+
+/-- **The positive-time `heatConv` domination step.**  If `|A| ≤ A'` and `|B| ≤ B'` hold for all
+    POSITIVE times (`0 < τ`), `0 < t`, and the genuine integrabilities hold, then
+        `|heatConv A B t x y| ≤ heatConv A' B' t x y`.
+    Unlike `heatConv_le_of_abs_le` (which needs the bounds at ALL times), this only needs them for
+    `0 < τ`: `heatConv` integrates over `s ∈ (0,t)`, where the inner times `t−s` and `s` are both
+    positive, and `intervalIntegral.integral_mono_on_of_le_Ioo` only demands the pointwise
+    inequality on the OPEN interval `Ioo 0 t`.  This is exactly what lets the residual's one-step
+    bound (valid for `0 < τ`) and the positive-time inductive hypothesis feed the C5c induction.
+
+    Route: `heatConv_abs_le` (`|heatConv A B| ≤ heatConv |A| |B|`, all times), then
+    `integral_mono_on_of_le_Ioo` on the `∫s` (bounds only on `Ioo 0 t`) with `integral_mono` on the
+    inner `∫z` (`mul_le_mul` from `|A| ≤ A'`, `|B| ≤ B'`, both at positive inner times). -/
+theorem heatConv_le_of_abs_le_pos (A B A' B' : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (ht : 0 < t)
+    (hA : ∀ τ p q, 0 < τ → |A τ p q| ≤ A' τ p q)
+    (hB : ∀ τ p q, 0 < τ → |B τ p q| ≤ B' τ p q)
+    (hI1 : IntervalIntegrable (fun s => ‖∫ z, A (t - s) x z * B s z y‖) volume 0 t)
+    (hI2 : IntervalIntegrable (fun s => ∫ z, |A (t - s) x z| * |B s z y|) volume 0 t)
+    (hIf : ∀ s, Integrable (fun z => |A (t - s) x z| * |B s z y|))
+    (hIg : ∀ s, Integrable (fun z => A' (t - s) x z * B' s z y))
+    (hIsg : IntervalIntegrable (fun s => ∫ z, A' (t - s) x z * B' s z y) volume 0 t) :
+    |heatConv A B t x y| ≤ heatConv A' B' t x y := by
+  refine le_trans (heatConv_abs_le A B t x y ht.le hI1 hI2) ?_
+  simp only [heatConv]
+  refine intervalIntegral.integral_mono_on_of_le_Ioo ht.le hI2 hIsg (fun s hs => ?_)
+  obtain ⟨hs0, hst⟩ := hs
+  have hts : 0 < t - s := by linarith
+  refine integral_mono (hIf s) (hIg s) (fun z => ?_)
+  have hAz := hA (t - s) x z hts
+  have hBz := hB s z y hs0
+  exact mul_le_mul hAz hBz (abs_nonneg _) (le_trans (abs_nonneg _) hAz)
+
+/-! #### The iterated residual bound (THE deliverable) and Neumann convergence. -/
+
+/-- **The carried per-step integrability family** for `iterConv_bound`.  For every `k ≥ 1`, positive
+    time `t`, and points `x y`, this bundles the five genuine integral facts that
+    `heatConv_le_of_abs_le_pos` demands with `A = E`, `B = iterE E k`, `A' = C · baseKernel α`,
+    `B' = C^k · iterKernel α k`.  These are honest analytic hypotheses on the ACTUAL residual and its
+    model dominators — orthogonal to (never a restatement of) the conclusion `|iterE| ≤ …`. -/
+def IterConvIntegrable (E : ℝ → Point n → Point n → ℝ) (α C : ℝ) : Prop :=
+  ∀ (k : ℕ), 1 ≤ k → ∀ (t : ℝ), 0 < t → ∀ (x y : Point n),
+    IntervalIntegrable (fun s => ‖∫ z, E (t - s) x z * iterE E k s z y‖) volume 0 t ∧
+    IntervalIntegrable (fun s => ∫ z, |E (t - s) x z| * |iterE E k s z y|) volume 0 t ∧
+    (∀ s, Integrable (fun z => |E (t - s) x z| * |iterE E k s z y|)) ∧
+    (∀ s, Integrable (fun z => C * baseKernel α (t - s) x z * (C ^ k * iterKernel α k s z y))) ∧
+    IntervalIntegrable
+      (fun s => ∫ z, C * baseKernel α (t - s) x z * (C ^ k * iterKernel α k s z y)) volume 0 t
+
+/-- **★ THE C5c DELIVERABLE — the iterated residual bound.**  For `α ≥ 0`, `C ≥ 0`, the one-step
+    residual bound `hEbound : |E τ p q| ≤ C · baseKernel α τ p q` (all positive times), and the
+    carried per-step integrability family, the actual `k`-fold iterated residual convolution is
+    dominated by the model:
+        `|iterE E k t x y| ≤ C^k · iterKernel α k t x y`   (for `k ≥ 1`, `t > 0`).
+    Proof: `Nat.le_induction` on `k` from `1`.  Base `k = 1`: `iterE E 1 = E`, `iterKernel α 1 =
+    baseKernel α`, so the goal IS `hEbound`.  Step: `iterE E (k+1) = heatConv E (iterE E k)`
+    (`iterE_succ`); apply `heatConv_le_of_abs_le_pos` with `A' = C·base`, `B' = C^k·iterKernel α k`
+    (`hA` from `hEbound`, `hB` from the IH, both at positive inner times), then pull the scalars `C`,
+    `C^k` out (`heatConv_smul_left`/`_right`) and fold with `iterKernel_succ` and `pow_succ`. -/
+theorem iterConv_bound (E : ℝ → Point n → Point n → ℝ) (α C : ℝ)
+    (hEbound : ∀ τ p q, 0 < τ → |E τ p q| ≤ C * baseKernel α τ p q)
+    (hInt : IterConvIntegrable E α C) :
+    ∀ (k : ℕ), 1 ≤ k → ∀ (t : ℝ), 0 < t → ∀ (x y : Point n),
+      |iterE E k t x y| ≤ C ^ k * iterKernel α k t x y := by
+  intro k hk
+  induction k, hk using Nat.le_induction with
+  | base =>
+      intro t ht x y
+      rw [iterE_one, pow_one, iterKernel_one]
+      exact hEbound t x y ht
+  | succ m hm ih =>
+      intro t ht x y
+      obtain ⟨hI1, hI2, hIf, hIg, hIsg⟩ := hInt m hm t ht x y
+      rw [iterE_succ E hm, iterKernel_succ α hm]
+      simp only [heatConvK_apply]
+      have hbound := heatConv_le_of_abs_le_pos E (iterE E m)
+        (fun τ p q => C * baseKernel α τ p q) (fun τ p q => C ^ m * iterKernel α m τ p q)
+        t x y ht
+        (fun τ p q hτ => hEbound τ p q hτ)
+        (fun τ p q hτ => ih τ hτ p q)
+        hI1 hI2 hIf hIg hIsg
+      calc |heatConv E (iterE E m) t x y|
+          ≤ heatConv (fun τ p q => C * baseKernel α τ p q)
+              (fun τ p q => C ^ m * iterKernel α m τ p q) t x y := hbound
+        _ = C ^ (m + 1) * heatConv (baseKernel α) (iterKernel α m) t x y := by
+              rw [heatConv_smul_left C (baseKernel α)
+                    (fun τ p q => C ^ m * iterKernel α m τ p q),
+                  heatConv_smul_right (C ^ m) (baseKernel α) (iterKernel α m), pow_succ]
+              ring
+
+/-- **The scaled model coefficient series is summable.**  For `α ≥ 0`, `t > 0`, `C ≥ 0`,
+        `Summable (fun k => C^(k+1) · modelCoeff α t (k+1))`.
+    The extra geometric factor `C^(k+1)` does not spoil summability: the successive-term ratio picks
+    up an extra `C` but still `→ C · 0 = 0 < 1` (the `Γ` decay dominates), so the C5a ratio test
+    (`summable_of_ratio_test_tendsto_lt_one`) closes.  (`C = 0` handled separately: all terms `0`.) -/
+theorem scaledModelCoeff_summable (α t C : ℝ) (hα : 0 ≤ α) (ht : 0 < t) (hC : 0 ≤ C) :
+    Summable (fun k : ℕ => C ^ (k + 1) * modelCoeff α t (k + 1)) := by
+  rcases eq_or_lt_of_le hC with hC0 | hCpos
+  · -- C = 0: every term is 0.
+    have hz : (fun k : ℕ => C ^ (k + 1) * modelCoeff α t (k + 1)) = fun _ => (0 : ℝ) := by
+      funext k
+      rw [← hC0, zero_pow (Nat.succ_ne_zero k), zero_mul]
+    rw [hz]; exact summable_zero
+  · -- 0 < C: ratio test.
+    refine summable_of_ratio_test_tendsto_lt_one (l := 0) (by norm_num) ?_ ?_
+    · exact Eventually.of_forall (fun k =>
+        (mul_pos (pow_pos hCpos (k + 1))
+          (modelCoeff_pos α t (by linarith) ht (by omega : 1 ≤ k + 1))).ne')
+    · have hCne : C ≠ 0 := hCpos.ne'
+      have hratio :
+          (fun k : ℕ => ‖C ^ (k + 1 + 1) * modelCoeff α t (k + 1 + 1)‖
+              / ‖C ^ (k + 1) * modelCoeff α t (k + 1)‖)
+            = fun k : ℕ => C * (modelCoeff α t (k + 2) / modelCoeff α t (k + 1)) := by
+        funext k
+        have hden1 : (0 : ℝ) ≤ C ^ (k + 1 + 1) * modelCoeff α t (k + 1 + 1) :=
+          (mul_pos (pow_pos hCpos _)
+            (modelCoeff_pos α t (by linarith) ht (by omega : 1 ≤ k + 1 + 1))).le
+        have hden2 : (0 : ℝ) ≤ C ^ (k + 1) * modelCoeff α t (k + 1) :=
+          (mul_pos (pow_pos hCpos _)
+            (modelCoeff_pos α t (by linarith) ht (by omega : 1 ≤ k + 1))).le
+        rw [Real.norm_of_nonneg hden1, Real.norm_of_nonneg hden2, pow_succ]
+        have hCk : C ^ (k + 1) ≠ 0 := pow_ne_zero _ hCne
+        have hmk : modelCoeff α t (k + 1) ≠ 0 :=
+          (modelCoeff_pos α t (by linarith) ht (by omega : 1 ≤ k + 1)).ne'
+        field_simp
+      rw [hratio]
+      simpa using (modelCoeff_ratio_tendsto_zero α t hα ht).const_mul C
+
+/-- **The scaled model iterated-kernel series is summable.**  For `α ≥ 0`, `t > 0`, `C ≥ 0`, and
+    `x y`, `Summable (fun k => C^(k+1) · iterKernel α (k+1) t x y)`: each term factors as
+    `(C^(k+1) · modelCoeff α t (k+1)) · gaussDdim t (x−y)` (`iterKernel_eq`), a `k`-constant Gaussian
+    times the summable scaled coefficient. -/
+theorem scaledIterKernel_summable (α t C : ℝ) (hα : 0 ≤ α) (ht : 0 < t) (hC : 0 ≤ C)
+    (x y : Point n) :
+    Summable (fun k : ℕ => C ^ (k + 1) * iterKernel α (k + 1) t x y) := by
+  have heq : (fun k : ℕ => C ^ (k + 1) * iterKernel α (k + 1) t x y)
+      = fun k : ℕ => (C ^ (k + 1) * modelCoeff α t (k + 1)) * gaussDdim t (x - y) := by
+    funext k
+    rw [iterKernel_eq α (by linarith) t ht x y (by omega : 1 ≤ k + 1)]
+    unfold modelCoeff
+    ring
+  rw [heq]
+  exact (scaledModelCoeff_summable α t C hα ht hC).mul_right _
+
+/-- **★ THE C5c CONVERGENCE CONCLUSION — the Levi/Duhamel Neumann series for the residual `E`
+    converges.**  For `α ≥ 0`, `C ≥ 0`, the one-step residual bound `hEbound`, and the carried
+    per-step integrability, at every `t > 0` and `x y`,
+        `Summable (fun k => iterE E (k+1) t x y)`.
+    Route: each term is dominated in norm by `C^(k+1) · iterKernel α (k+1) t x y` (`iterConv_bound`),
+    and that model series is summable (`scaledIterKernel_summable` — the `Γ` decay beats the geometric
+    `C^k`), so the comparison test `Summable.of_norm_bounded` concludes. -/
+theorem leviSeries_summable (E : ℝ → Point n → Point n → ℝ) (α C : ℝ) (hα : 0 ≤ α) (hC : 0 ≤ C)
+    (hEbound : ∀ τ p q, 0 < τ → |E τ p q| ≤ C * baseKernel α τ p q)
+    (hInt : IterConvIntegrable E α C) (t : ℝ) (ht : 0 < t) (x y : Point n) :
+    Summable (fun k : ℕ => iterE E (k + 1) t x y) := by
+  refine Summable.of_norm_bounded (scaledIterKernel_summable α t C hα ht hC x y) (fun k => ?_)
+  rw [Real.norm_eq_abs]
+  exact iterConv_bound E α C hEbound hInt (k + 1) (by omega) t ht x y
+
 end QIQTH.LeviSeries
