@@ -12773,5 +12773,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatParametrixError.heatResidual_eq_flat_minus_g
 #print axioms QIQTH.HeatParametrixError.heatResidual_at_rnc_center
 #print axioms QIQTH.HeatParametrixError.heatResidual_curvature_form
+-- ★ PARAMETRIX P2 (P2a) — the parametrix ANSATZ as a function + its diagonal a₁ structure (HeatParametrixAnsatz.lean).
+-- heatParametrix N Θ u t x = gaussDdim t x·(Θ x)^{−1/2}·∑_{k≤N} u_k x·t^k (the DeWitt ansatz H_N; Θ=van Vleck, u_k the
+-- Seeley coefficients — CARRIED as function inputs, exactly as DeWittDiagonal carries its jet; deriving them is P2b).
+-- gaussDdim_diagonal(_explicit) (gaussDdim t 0 = (heatKernel1D t 0)^n = (4πt)^{−d/2}); heatParametrix_diagonal (at x=0,
+-- Θ(0)=1 the Θ^{−1/2} factor →1); heatParametrix_diagonal_expansion (= (4πt)^{−d/2}·∑_{k≤N} u_k(0) t^k); ★
+-- heatParametrix_diagonal_a1 (for N≥1, u_0(0)=1, u_1(0)=R/6: H_N(t,0) = (4πt)^{−d/2}(1 + (R/6)t + ∑_{2≤k≤N} u_k(0)t^k))
+-- — the diagonal a₁ heat-trace structure the general a₁=R/6 would read off.  HONEST — P2a (the ansatz) only; Θ/u_k
+-- carried; the DeWitt-τ bridge (u_1(0)=τ/6) DEFERRED to P2b; does NOT give kernel existence / the transport recursion /
+-- the error estimate / general a₁=R/6 (P2b–e, incl. the P2d Levi/Duhamel community-scale wall).  [AF] std-3.
+#print axioms QIQTH.HeatParametrixAnsatz.gaussDdim_diagonal_explicit
+#print axioms QIQTH.HeatParametrixAnsatz.heatParametrix_diagonal_expansion
+#print axioms QIQTH.HeatParametrixAnsatz.heatParametrix_diagonal_a1
 
 end QIQTH.AxiomAudit

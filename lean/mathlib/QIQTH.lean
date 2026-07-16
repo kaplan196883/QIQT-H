@@ -101,6 +101,7 @@ import QIQTH.HeatKernelOneD
 import QIQTH.HeatKernelA1
 import QIQTH.HeatKernelDDim
 import QIQTH.FlatHeatEquation
+import QIQTH.HeatParametrixAnsatz
 import QIQTH.SpeciesCrossCheck
 import QIQTH.TowerGNS.FlowContinuity
 import QIQTH.TowerGNS.Generator
