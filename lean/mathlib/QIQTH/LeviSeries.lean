@@ -30,9 +30,11 @@
 -/
 import Mathlib
 import QIQTH.TimeSimplexBeta
+import QIQTH.HeatDuhamel
 
 open Real MeasureTheory Filter Topology
-open QIQTH.Curvature QIQTH.FlatHeatEquation QIQTH.TimeSimplexBeta
+open QIQTH.Curvature QIQTH.FlatHeatEquation QIQTH.TimeSimplexBeta QIQTH.HeatDuhamel
+open scoped Interval
 
 namespace QIQTH.LeviSeries
 
@@ -187,5 +189,94 @@ theorem iterKernel_series_summable (α t : ℝ) (hα : 0 ≤ α) (ht : 0 < t) (x
     ring
   rw [heq]
   exact (modelCoeff_summable α t hα ht).mul_right _
+
+/-! ### C5b — domination lemmas for the space-time Duhamel convolution `heatConv`.
+
+    These bridge the MODEL bound (C3/C5a above) to the ACTUAL residual: they are the clean integral
+    inequalities on `heatConv` that let `|E^{*k}| ≤ C^k · iterKernel` be proved (C5c) from a one-step
+    bound on `E`.  Three lemmas:
+
+    * `heatConv_abs_le` (#1) — the integral **triangle inequality**
+        `|heatConv A B| ≤ heatConv |A| |B|`
+      (interval triangle `intervalIntegral.norm_integral_le_integral_norm`, needs only `0 ≤ t`, then
+      the inner Lebesgue triangle `norm_integral_le_integral_norm`, then `‖a·b‖ = |a|·|b|`);
+    * `heatConv_mono` (#2) — **monotonicity** under pointwise domination of nonnegative kernels
+      (`mul_le_mul` pointwise, then `MeasureTheory.integral_mono` on `∫z`, then
+      `intervalIntegral.integral_mono_on` on `∫s`);
+    * `heatConv_le_of_abs_le` (#3) — the C5c-facing combination
+        `|heatConv A B| ≤ heatConv A' B'`  from  `|A| ≤ A'`, `|B| ≤ B'`.
+
+    All integrability / nonnegativity hypotheses are carried EXACTLY as the underlying Mathlib
+    triangle / monotonicity lemmas demand — genuine (each fails without them), none vacuous, none the
+    conclusion.  This is phase C5b (domination); NOT the true kernel / `a₁ = R/6`. -/
+
+/-- **#1 — the integral triangle inequality for `heatConv`.**  For `0 ≤ t` and the two genuine
+    interval-integrabilities the triangle steps need,
+        `|heatConv A B t x y| ≤ heatConv |A| |B| t x y`.
+    Route: `|∫s ∫z A·B| = ‖∫s ∫z A·B‖ ≤ ∫s ‖∫z A·B‖`
+    (`intervalIntegral.norm_integral_le_integral_norm`, needs `0 ≤ t`),
+    then pointwise in `s`, `‖∫z A·B‖ ≤ ∫z ‖A·B‖ = ∫z |A|·|B|`
+    (`norm_integral_le_integral_norm` + `Real.norm_eq_abs`/`abs_mul`),
+    lifted through `intervalIntegral.integral_mono_on` (whence `hI1`/`hI2`). -/
+theorem heatConv_abs_le (A B : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (ht : 0 ≤ t)
+    (hI1 : IntervalIntegrable (fun s => ‖∫ z, A (t - s) x z * B s z y‖) volume 0 t)
+    (hI2 : IntervalIntegrable (fun s => ∫ z, |A (t - s) x z| * |B s z y|) volume 0 t) :
+    |heatConv A B t x y|
+      ≤ heatConv (fun τ p q => |A τ p q|) (fun τ p q => |B τ p q|) t x y := by
+  simp only [heatConv]
+  conv_lhs => rw [← Real.norm_eq_abs]
+  calc ‖∫ s in (0)..t, ∫ z, A (t - s) x z * B s z y‖
+      ≤ ∫ s in (0)..t, ‖∫ z, A (t - s) x z * B s z y‖ :=
+        intervalIntegral.norm_integral_le_integral_norm ht
+    _ ≤ ∫ s in (0)..t, ∫ z, |A (t - s) x z| * |B s z y| := by
+        refine intervalIntegral.integral_mono_on ht hI1 hI2 (fun s _ => ?_)
+        calc ‖∫ z, A (t - s) x z * B s z y‖
+            ≤ ∫ z, ‖A (t - s) x z * B s z y‖ := norm_integral_le_integral_norm _
+          _ = ∫ z, |A (t - s) x z| * |B s z y| := by
+                refine integral_congr_ae (Filter.Eventually.of_forall (fun z => ?_))
+                simp only [Real.norm_eq_abs, abs_mul]
+
+/-- **#2 — monotonicity of `heatConv` under pointwise domination.**  For `0 ≤ t`, nonnegative
+    kernels dominated pointwise (`A ≤ A'`, `B ≤ B'`), and the four genuine integrabilities the
+    monotonicity steps need,
+        `heatConv A B t x y ≤ heatConv A' B' t x y`.
+    Route: pointwise `A·B ≤ A'·B'` (`mul_le_mul` with `0 ≤ B`, `0 ≤ A'`), then
+    `MeasureTheory.integral_mono` on the `∫z`, then `intervalIntegral.integral_mono_on` on the `∫s`. -/
+theorem heatConv_mono (A B A' B' : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (ht : 0 ≤ t)
+    (hA0 : ∀ s z, 0 ≤ A (t - s) x z) (hB0 : ∀ s z, 0 ≤ B s z y)
+    (hAle : ∀ s z, A (t - s) x z ≤ A' (t - s) x z)
+    (hBle : ∀ s z, B s z y ≤ B' s z y)
+    (hIf : ∀ s, Integrable (fun z => A (t - s) x z * B s z y))
+    (hIg : ∀ s, Integrable (fun z => A' (t - s) x z * B' s z y))
+    (hIsf : IntervalIntegrable (fun s => ∫ z, A (t - s) x z * B s z y) volume 0 t)
+    (hIsg : IntervalIntegrable (fun s => ∫ z, A' (t - s) x z * B' s z y) volume 0 t) :
+    heatConv A B t x y ≤ heatConv A' B' t x y := by
+  simp only [heatConv]
+  refine intervalIntegral.integral_mono_on ht hIsf hIsg (fun s _ => ?_)
+  refine integral_mono (hIf s) (hIg s) ?_
+  intro z
+  exact mul_le_mul (hAle s z) (hBle s z) (hB0 s z) (le_trans (hA0 s z) (hAle s z))
+
+/-- **#3 — the C5c-facing combination.**  If `|A| ≤ A'` and `|B| ≤ B'` pointwise (so `A', B' ≥ 0`
+    are FORCED, `0 ≤ |·| ≤ ·`), `0 ≤ t`, and the genuine integrabilities hold, then
+        `|heatConv A B t x y| ≤ heatConv A' B' t x y`.
+    Proof: `heatConv_abs_le` (`|heatConv A B| ≤ heatConv |A| |B|`) then `heatConv_mono`
+    (`0 ≤ |A|,|B|`, `|A| ≤ A'`, `|B| ≤ B'`). -/
+theorem heatConv_le_of_abs_le (A B A' B' : ℝ → Point n → Point n → ℝ) (t : ℝ) (x y : Point n)
+    (ht : 0 ≤ t)
+    (hA : ∀ τ p q, |A τ p q| ≤ A' τ p q) (hB : ∀ τ p q, |B τ p q| ≤ B' τ p q)
+    (hI1 : IntervalIntegrable (fun s => ‖∫ z, A (t - s) x z * B s z y‖) volume 0 t)
+    (hI2 : IntervalIntegrable (fun s => ∫ z, |A (t - s) x z| * |B s z y|) volume 0 t)
+    (hIf : ∀ s, Integrable (fun z => |A (t - s) x z| * |B s z y|))
+    (hIg : ∀ s, Integrable (fun z => A' (t - s) x z * B' s z y))
+    (hIsg : IntervalIntegrable (fun s => ∫ z, A' (t - s) x z * B' s z y) volume 0 t) :
+    |heatConv A B t x y| ≤ heatConv A' B' t x y := by
+  refine le_trans (heatConv_abs_le A B t x y ht hI1 hI2) ?_
+  refine heatConv_mono (fun τ p q => |A τ p q|) (fun τ p q => |B τ p q|) A' B' t x y ht
+    (fun s z => abs_nonneg _) (fun s z => abs_nonneg _)
+    (fun s z => hA (t - s) x z) (fun s z => hB s z y)
+    hIf hIg hI2 hIsg
 
 end QIQTH.LeviSeries

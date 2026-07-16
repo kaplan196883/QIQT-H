@@ -12981,5 +12981,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeviSeries.gamma_ratio_tendsto_zero
 #print axioms QIQTH.LeviSeries.modelCoeff_summable
 #print axioms QIQTH.LeviSeries.iterKernel_series_summable
+-- C5b — the DOMINATION lemmas for heatConv (LeviSeries.lean): heatConv_abs_le (|heatConv A B| ≤ heatConv |A| |B|,
+-- integral triangle via intervalIntegral.norm_integral_le_integral_norm + norm_integral_le_integral_norm) +
+-- heatConv_mono (monotone under pointwise domination of nonneg kernels, via integral_mono + integral_mono_on) +
+-- heatConv_le_of_abs_le (the C5c-facing |heatConv A B| ≤ heatConv A' B' from |A|≤A', |B|≤B').  Genuine integrability/
+-- nonnegativity hyps matched to the Mathlib lemmas.  ⚠ HONEST FIREWALL: clean integral inequalities (the model→
+-- actual bridge), NOT the true kernel, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.LeviSeries.heatConv_abs_le
+#print axioms QIQTH.LeviSeries.heatConv_mono
+#print axioms QIQTH.LeviSeries.heatConv_le_of_abs_le
 
 end QIQTH.AxiomAudit
