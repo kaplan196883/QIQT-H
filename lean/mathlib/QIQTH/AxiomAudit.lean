@@ -13002,5 +13002,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeviSeries.heatConv_le_of_abs_le_pos
 #print axioms QIQTH.LeviSeries.iterConv_bound
 #print axioms QIQTH.LeviSeries.leviSeries_summable
+-- C6 — the CONDITIONAL CAPSTONE — the true kernel solves the heat equation (TrueHeatKernel.lean): heatOp = (∂_t−Δ_g)K;
+-- heatOp_add = linearity; leviSeries E = the SIGNED Levi series Σ(−1)^(k+1)E^{*(k+1)} = Σ(−E)^{*k} (alternating sign
+-- REQUIRED by the Volterra identity); trueHeatKernel K = H + heatConv H F; trueHeatKernel_heat_eqn = heatOp K = 0
+-- (PURE heatOp-linearity algebra) GIVEN hE (residual (∂_t−Δ)H=E), hDuhamel (duhamel_principle output for H*F),
+-- hVolterra (F=−E−E*F) + differentiability side-conds — all genuine, non-vacuous, none the conclusion; leviSeries_volterra
+-- DERIVES hVolterra for the signed series down to the SINGLE Mathlib-missing carry hInter (tsum/heatConv interchange).
+-- ⚠ HONEST FIREWALL: CONDITIONAL — "convergence machinery (C1–C5c) + residual/Volterra facts ⟹ the true kernel solves
+-- the heat equation".  Does NOT claim the true kernel exists unconditionally, NOT a₁=R/6 unconditionally.  The residual
+-- bound (C4) + diagonal-expansion extraction remain; C4 reduces to the OFF-DIAGONAL PARAMETRIX (geodesic r + van-Vleck
+-- Θ as functions) = a separate wall.  a₁=R/6 STILL the carried G3 PhysicalInputs input.  [AF] std-3.
+#print axioms QIQTH.TrueHeatKernel.heatOp_add
+#print axioms QIQTH.TrueHeatKernel.trueHeatKernel_heat_eqn
+#print axioms QIQTH.TrueHeatKernel.leviSeries_volterra
+#print axioms QIQTH.TrueHeatKernel.trueHeatKernel_heat_eqn_levi
 
 end QIQTH.AxiomAudit
