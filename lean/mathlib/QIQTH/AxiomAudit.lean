@@ -12860,5 +12860,27 @@ namespace QIQTH.AxiomAudit
 -- of the unit 2-sphere (=2, from the metric 2-jet) — the heat-parametrix τ/6 line and the component-curvature R line
 -- agree on the sphere.  Still parametrix-level/finite-sample; NOT the true kernel / general a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatParametrixTraceDerived.sphere_a1_curvature_eq_computed
+-- ═══ P2d DECOMPOSITION — the ALGEBRAIC core of the Levi/Duhamel parametrix correction (HeatDuhamel.lean,
+-- 2026-07-17).  heatConv = the space-time (Duhamel) convolution (A*B)(t,x,y)=∫₀ᵗ∫A(t−s,x,z)B(s,z,y)dz ds; its
+-- bilinear algebra (add/smul/zero, left+right) FULLY PROVEN under the natural integrability hyps; the FTC-1
+-- upper-limit boundary term (heatConv_hasDerivAt_upper/_deriv_upper) FULLY PROVEN.  duhamel_principle REDUCES the
+-- inhomogeneous-heat identity (∂_t−Δ_{g,x})(A*B)=B to FOUR explicit non-vacuous analytic hypotheses (diagonal
+-- Leibniz hLeibniz, fundamental-solution heat-eq hHeatEq, Laplacian-under-∫ hLapUnder, delta-initial hDelta) —
+-- genuine algebra (Leibniz split → heat-eq cancellation → boundary=source), NONE is the conclusion.  ⚠ HONEST
+-- FIREWALL: this is the ALGEBRAIC core of P2d only.  The CHECKPOINTED WALL (deliberately NOT attempted, carried):
+-- the under-integral Leibniz half (dominated convergence), and — the community-scale piece — the Gaussian
+-- iterated-convolution CONVERGENCE of the Neumann series K=H_N+H_N*E+…  NOT the true-kernel existence, NOT
+-- general a₁=R/6 for the TRUE kernel (STILL a labelled input, G3 PhysicalInputs, behind the convergence bound). ═══
+#print axioms QIQTH.HeatDuhamel.heatConv
+#print axioms QIQTH.HeatDuhamel.heatConv_add_left
+#print axioms QIQTH.HeatDuhamel.heatConv_add_right
+#print axioms QIQTH.HeatDuhamel.heatConv_smul_left
+#print axioms QIQTH.HeatDuhamel.heatConv_smul_right
+#print axioms QIQTH.HeatDuhamel.heatConv_zero_left
+#print axioms QIQTH.HeatDuhamel.heatConv_zero_right
+#print axioms QIQTH.HeatDuhamel.heatConvFrozen_diag
+#print axioms QIQTH.HeatDuhamel.heatConv_hasDerivAt_upper
+#print axioms QIQTH.HeatDuhamel.heatConv_deriv_upper
+#print axioms QIQTH.HeatDuhamel.duhamel_principle
 
 end QIQTH.AxiomAudit
