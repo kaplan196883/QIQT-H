@@ -12940,5 +12940,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatDuhamel.tri_swap
 #print axioms QIQTH.HeatDuhamel.triangular_time_fubini
 #print axioms QIQTH.HeatDuhamel.heatConv_assoc''
+-- ═══ CONVERGENCE INFRASTRUCTURE CAMPAIGN (CONVERGENCE_INFRASTRUCTURE_PLAN.md, commissioned 2026-07-17) — the
+-- Levi/Duhamel Gaussian-bound phases C1–C6 discharging general a₁=R/6 via true-kernel existence. ═══
+-- C1 — the Gaussian convolution SEMIGROUP (Chapman–Kolmogorov) (GaussianConvolution.lean): heatKernel1D_conv =
+-- ∫ G_t(x−z)·G_s(z−y)dz = G_{t+s}(x−y) (1-D, via completion-of-square + integral_gaussian + translation invariance);
+-- gaussDdim_conv = the d-dim version (Pi-Fubini factorization via integral_fintype_prod_eq_prod); + positivity/
+-- integrability helpers.  ⚠ HONEST FIREWALL: the FLAT (leading) parametrix convolution semigroup — a genuine Gaussian-
+-- analysis FOUNDATION for Levi/Duhamel convergence, NOT the true curved kernel, NOT a₁=R/6 (phases C5/C6).  [AF] std-3.
+#print axioms QIQTH.GaussianConvolution.heatKernel1D_pos
+#print axioms QIQTH.GaussianConvolution.heatKernel1D_integrable
+#print axioms QIQTH.GaussianConvolution.heatKernel1D_conv
+#print axioms QIQTH.GaussianConvolution.gaussDdim_conv
 
 end QIQTH.AxiomAudit
