@@ -83,11 +83,21 @@ Cast the built residual `E = (∂_t−Δ_g)H_N` (`HeatParametrixError`/`HeatPara
   the `t^{N−d/2}` smallness from the ansatz order). Carries the smoothness/compactness of the metric
   jets as explicit hyps (honest).
 
-### C5 — iterated-convolution bound + NEUMANN SERIES CONVERGENCE `QIQTH/LeviSeries.lean` (DEEP)
-- **`iterConv_bound`**: `|E^{*k}(t,x,y)| ≤ C^k · t^{k(N+1−d/2)−1}/Γ(k(N+1−d/2)) · G_{κ}(t,x−y)`
-  (combine C2 one-step + C3 simplex, by induction on `k`; uses the built `heatConv_assoc''`).
-- **`leviSeries_summable`** + **`leviSeries`** `F := Σ_{k≥1} (−E)^{*k}`: absolute convergence from the
-  `Γ` decay (ratio/root test); the sum is a well-defined kernel with a Gaussian bound.
+### C5a — the MODEL Neumann series is SUMMABLE `QIQTH/LeviSeries.lean` ✅ LANDED (`9892ab32`, [AF] std-3)
+`modelCoeff_summable` (ratio test on the Γ decay; clean Γ-monotonicity via `Real.Gamma_strictMonoOn_Ici`) +
+`iterKernel_series_summable`. No checkpoints.
+
+### C5b — the DOMINATION lemmas `QIQTH/LeviSeries.lean` (clean integral inequalities)
+The bridge from the model to the actual residual:
+- **`heatConv_abs_le`**: `|heatConv A B t x y| ≤ heatConv |A| |B| t x y` (integral/interval triangle inequality).
+- **`heatConv_mono`**: `0 ≤ A ≤ A'`, `0 ≤ B ≤ B'` pointwise ⟹ `heatConv A B ≤ heatConv A' B'` (integral monotonicity).
+- combined `heatConv_le_of_abs_le`. Foundation for the iterated bound.
+
+### C5c — iterated-convolution bound + NEUMANN SERIES CONVERGENCE `QIQTH/LeviSeries.lean` (DEEP)
+- **`iterConv_bound`**: `|E^{*k}(t,x,y)| ≤ C^k · iterKernel α k t x y` (induction using C5b domination + C2/C3),
+  CARRYING the one-step residual bound `|E| ≤ C · baseKernel α` as a hypothesis (discharged by C4).
+- **`leviSeries_summable`** + **`leviSeries`** `F := Σ_{k≥1} (−E)^{*k}`: absolute convergence from C5a + the
+  domination bound; the sum is a well-defined kernel.
 
 ### C6 — TRUE KERNEL + the diagonal expansion ⟹ general `a₁ = R/6` `QIQTH/TrueHeatKernel.lean` (CAPSTONE)
 - **`trueHeatKernel`** `K := H_N + heatConv H_N F` and **`trueHeatKernel_heat_eqn`**: `(∂_t−Δ_g)K = 0`
