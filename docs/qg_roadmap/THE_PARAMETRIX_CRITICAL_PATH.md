@@ -113,7 +113,7 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
 - `HeatParametrixTrace.lean` (`1a4e1a5b`) + `HeatParametrixTraceDerived.lean` (`552a093a`) — P2e (parametrix level): the
   diagonal heat-trace `= (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`, i.e. the **a₁ = (1/6)∫R** coefficient, with u₁ DERIVED from
   the transport recursion (`parametrixDiagTrace_a1_derived`), sphere witness. Finite-sample sum, carried diagonal coeffs.
-- ✅ **P2 REACHABLE FRONTIER COMPLETE (12 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
+- ✅ **P2 REACHABLE FRONTIER COMPLETE (13 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
   Seeley–DeWitt story is machine-checked: operator, flat heat solution, residual (=0 at RNC center), ansatz + diagonal
   a₁, transport recursion (u₁=τ/6 derived), first-order telescoping, parametrix trace a₁=(1/6)∫R, PLUS the **complete P2d
   ALGEBRAIC core** (`HeatDuhamel.lean`, 2026-07-17): the space-time Duhamel convolution `heatConv` + full bilinear
@@ -144,7 +144,11 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
   CONVERGENCE** of the Neumann series (no proof assistant has iterated-convolution Gaussian bounds) + the under-integral
   Leibniz half of Duhamel's principle.
 - **P2e — global assembly:** the Riemannian volume measure `dV` + `∫_M K_t(x,x) dV = Tr e^{−tΔ}` (ties to the L5
-  trace-class/Mercer machine) ⟹ `Tr e^{−tΔ} ~ (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`.
+  trace-class/Mercer machine) ⟹ `Tr e^{−tΔ} ~ (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`. ✅ **Measure-theoretic form landed**
+  (`HeatParametrixTrace.lean` `parametrixDiagTraceInt_a1`, [AF] std-3): the diagonal parametrix trace is now a genuine
+  `∫·∂μ` against a carried volume measure (not a finite-sample sum), giving `a₁ = (1/6)∫_M R√g dV` as a real integral.
+  ⚠ still parametrix-level (carried `μ`/`ud`); the volume measure is not yet constructed from a metric, and the tie to
+  the *true* trace stays behind the convergence wall.
 
 ### P3 — assemble the general discharge
 P1 (`κ=1/6` gauge) + P2 (kernel + expansion) + the L5 trace machine + `HeatCoeffDetermination` invariance ⟹
