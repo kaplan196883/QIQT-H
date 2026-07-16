@@ -113,7 +113,7 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
 - `HeatParametrixTrace.lean` (`1a4e1a5b`) + `HeatParametrixTraceDerived.lean` (`552a093a`) — P2e (parametrix level): the
   diagonal heat-trace `= (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`, i.e. the **a₁ = (1/6)∫R** coefficient, with u₁ DERIVED from
   the transport recursion (`parametrixDiagTrace_a1_derived`), sphere witness. Finite-sample sum, carried diagonal coeffs.
-- ✅ **P2 REACHABLE FRONTIER COMPLETE (11 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
+- ✅ **P2 REACHABLE FRONTIER COMPLETE (12 [AF] std-3 bricks, 2026-07-16/17).** The full parametrix-level local
   Seeley–DeWitt story is machine-checked: operator, flat heat solution, residual (=0 at RNC center), ansatz + diagonal
   a₁, transport recursion (u₁=τ/6 derived), first-order telescoping, parametrix trace a₁=(1/6)∫R, PLUS the **complete P2d
   ALGEBRAIC core** (`HeatDuhamel.lean`, 2026-07-17): the space-time Duhamel convolution `heatConv` + full bilinear
@@ -135,13 +135,14 @@ metric — i.e. what discharges general `a₁=R/6`. Sub-pieces (Rosenberg §3.2 
 - **P2d — the Levi/Duhamel convergence** `K = H_N + H_N * (error) + …` → the ACTUAL kernel. **THE analytic heart**
   (iterated-convolution Gaussian-bound estimates; no proof assistant has this). ✅ **ALGEBRAIC core COMPLETE** (`HeatDuhamel.lean`,
   [AF] std-3): the convolution `*` (`heatConv`) + bilinearity + FTC-1 boundary term fully proven; Duhamel's
-  principle a genuine algebraic reduction to 4 carried analytic hyps; **associativity `(A*B)*C=A*(B*C)`** (`heatConv_assoc'`)
-  — the two spatial/temporal reorderings are now **discharged as theorems** (`heatConv_reorderL/_reorderR` via the
-  interval↔Lebesgue Fubini `heatConv_interval_lebesgue_fubini` + the spatial `heatConv_spatial_fubini`), so associativity
-  depends on **only** the Mathlib-missing triangular time-Fubini `hTri` + integrability. The iterated Levi product is now
-  algebraically well-founded. ⚠ **STILL the wall:** the under-integral Leibniz half, the triangular time-Fubini `hTri`
-  (Mathlib-missing but reachable-in-principle), and — the community-scale piece — the **Gaussian iterated-convolution
-  CONVERGENCE** of the Neumann series (no proof assistant has iterated-convolution Gaussian bounds).
+  principle a genuine algebraic reduction to 4 carried analytic hyps; **associativity `(A*B)*C=A*(B*C)` now UNCONDITIONAL
+  modulo integrability** (`heatConv_assoc''`) — both spatial/temporal reorderings discharged (`heatConv_reorderL/_reorderR`
+  via the interval↔Lebesgue Fubini + spatial `heatConv_spatial_fubini`) AND the triangular time-Fubini discharged
+  (`triangular_time_fubini` via `tri_swap` = Tonelli on the masked square + the shift substitution, realizing the
+  volume-preserving shear `(s,s')↦(s+s',s)`). **The entire Levi-series algebra is now axiom-free with ZERO analytic
+  carries.** ⚠ **STILL the wall (the ONLY remaining gap to the true kernel):** the **Gaussian iterated-convolution
+  CONVERGENCE** of the Neumann series (no proof assistant has iterated-convolution Gaussian bounds) + the under-integral
+  Leibniz half of Duhamel's principle.
 - **P2e — global assembly:** the Riemannian volume measure `dV` + `∫_M K_t(x,x) dV = Tr e^{−tΔ}` (ties to the L5
   trace-class/Mercer machine) ⟹ `Tr e^{−tΔ} ~ (4πt)^{−d/2}(Vol + (1/6)∫R·t + …)`.
 
