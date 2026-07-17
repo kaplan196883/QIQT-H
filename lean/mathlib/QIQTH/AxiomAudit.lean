@@ -13179,5 +13179,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_uniform_C2_remainder
 #print axioms QIQTH.ExpMap.geodesicVariation_hNb_discharge
 #print axioms QIQTH.ExpMap.geodesicVariation_exists_uncond
+-- L2 — the SECOND-ORDER JACOBI EQUATION (JacobiEquation.lean): jacobiOperator + geodesicField_fderiv_eq_jacobiOperator
+-- (DF(x,v)(ξ,η)=(η,−jacobiOperator)); jacobiVariation_secondOrder = ξ''=−jacobiOperator (UNCONDITIONAL, pure
+-- differentiation of the 1st-order variational system); jacobiVariation_secondOrder_centered + riemannDeviation_at_center
+-- (the RNC-center forms).  ⚠ HONEST FIREWALL / CHECKPOINT — the subagent correctly found the literal jacobiOperator=R(ξ,v)v
+-- is FALSE in coordinates: the true Jacobi equation is D²ξ/dτ²=−R(ξ,v)v (COVARIANT 2nd derivative), and ξ'' ≠ D²ξ/dτ²
+-- off-center; the remaining step is the along-the-curve covariant-derivative machinery (at an RNC center Γ=0 so they
+-- AGREE — the exact discrepancy = the antisymmetrization/covariant correction, isolated in the centered lemmas).  NOT the
+-- covariant Jacobi equation, NOT Raychaudhuri (L3), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_eq_jacobiOperator
+#print axioms QIQTH.ExpMap.jacobiVariation_secondOrder
+#print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_centered
 
 end QIQTH.AxiomAudit

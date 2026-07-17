@@ -705,6 +705,7 @@ import QIQTH.RNCExpansion
 import QIQTH.ExpMap
 import QIQTH.GeodesicVariation
 import QIQTH.GeodesicSmoothDep
+import QIQTH.JacobiEquation
 import QIQTH.ExpMapContDiff
 import QIQTH.ExpMapContDiff2
 import QIQTH.ExpMapContDiff3
