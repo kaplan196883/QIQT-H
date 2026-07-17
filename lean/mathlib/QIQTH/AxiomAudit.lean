@@ -13138,5 +13138,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JacobianDet.expJacobianDet_zero
 #print axioms QIQTH.JacobianDet.expPullbackMetric_eq_jacMul
 #print axioms QIQTH.JacobianDet.det_expPullback_eq
+-- K2 — the EXP-JACOBIAN RADIAL STRUCTURE (JacobianRadial.lean): expJacobianDet continuity + expJacobianDet_pos_nhds
+-- (J>0 near 0, J(0)=1); jacobianDet_sq_eq (J² = det g̃/det(g∘exp), rearranged K1); radialDeriv_log_det_split
+-- (r∂_r log det g̃ = 2·r∂_r log J + r∂_r log det(g∘exp) — isolates the congruence expansion r∂_r log J as the ONE
+-- unknown K3/the Jacobi ODE supplies).  Carries genuine positivity + coordinate-differentiability hyps.
+-- ⚠ HONEST FIREWALL: J's reachable structure + the K4 setup; the VALUE of r∂_r log J (the Jacobi/congruence-expansion
+-- ODE) is K3 (the wall), NOT here; NOT the van-Vleck ODE (K4), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRadial.expJacobianDet_pos_nhds
+#print axioms QIQTH.JacobianRadial.jacobianDet_sq_eq
+#print axioms QIQTH.JacobianRadial.radialDeriv_log_det_split
 
 end QIQTH.AxiomAudit

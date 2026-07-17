@@ -709,6 +709,7 @@ import QIQTH.ExpMapContDiff3
 import QIQTH.GeodesicFieldJets
 import QIQTH.PullbackMetric
 import QIQTH.JacobianDet
+import QIQTH.JacobianRadial
 import QIQTH.VanVleck
 import QIQTH.Polarization
 import QIQTH.RNCGauge
