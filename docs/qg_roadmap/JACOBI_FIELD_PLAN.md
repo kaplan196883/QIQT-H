@@ -33,7 +33,9 @@ genuine wall.
 
 ## Phases (each an [AF] std-3 green checkpoint). New file(s) under `QIQTH/`.
 
-### K1 — the pullback-determinant = (exp-Jacobian)² bridge `QIQTH/JacobianDet.lean` (REACHABLE — first brick)
+### K1 — the pullback-determinant = (exp-Jacobian)² bridge `QIQTH/JacobianDet.lean` ✅ LANDED (`6c31ba66`, [AF] std-3)
+`expPullbackMetric` IS definitionally the honest pullback `Jᵀ(g∘exp)J`; `expJacobianMat/Det` + `det_expPullback_eq` (det g̃ = J²·det(g∘exp)). No checkpoints.
+
 `det g̃(v) = (det D(exp_p)_v)² · det (g ∘ exp_p)(v)` (since `g̃ = (Dexp)ᵀ (g∘exp) (Dexp)`, by
 `Matrix.det_mul`). This BRIDGES the van-Vleck `Θ=(det g̃)^{−1/2}` to the exp-map Jacobian `J = det Dexp`
 (whose radial ODE is the Jacobi equation). Reachable from `expPullbackMetric`'s pullback definition +
