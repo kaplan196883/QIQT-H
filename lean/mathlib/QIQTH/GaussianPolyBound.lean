@@ -75,4 +75,169 @@ theorem gaussian_poly_absorb (m : ℕ) {t : ℝ} (ht : 0 < t) (x : ℝ) :
         mul_le_mul_of_nonneg_left hkey hC
     _ = 8 ^ m * (m.factorial : ℝ) * t ^ m * Real.exp (-v) := by ring
 
+/-! ### C4b — flat-Gaussian derivative bounds.
+
+  The flat heat kernel's spatial derivatives, written as `(polynomial) × (kernel)` and bounded by a
+  clean widened Gaussian via the C4a absorption tool `gaussian_poly_absorb`. These are the analytic
+  TOOLS the C4 residual bound `E = (∂_t − Δ_g)H_N` will consume (differentiating the Gaussian factor
+  of the parametrix ansatz). Recall `heatKernel1D t x = (√(4πt))⁻¹·exp(−x²/(4t))`.
+
+  ⚠ HONEST SCOPE. These are the FLAT-Gaussian derivative tools only; they are NOT the residual bound
+  itself (that needs the off-diagonal parametrix — geodesic `r`, van-Vleck `Θ` — C4c, a separate
+  wall) and NOT the `a₁ = R/6` coefficient. No axioms, no `sorry`. -/
+
+open QIQTH.HeatKernelA1 QIQTH.FlatHeatEquation
+
+/-- **C4b #1 — the first spatial derivative in product form.** For `t > 0`,
+    `∂_x G_t(x) = (−x/(2t))·G_t(x)`. Immediate from `heatKernel1D_hasDerivAt_x`. -/
+theorem heatKernel1D_deriv_x_eq (t x : ℝ) (ht : 0 < t) :
+    deriv (fun x => heatKernel1D t x) x = (-x / (2 * t)) * heatKernel1D t x :=
+  (heatKernel1D_hasDerivAt_x t x ht).deriv
+
+/-- **C4b #2 — the second spatial derivative in product form.** For `t > 0`,
+    `∂²_x G_t(x) = ((x² − 2t)/(4t²))·G_t(x)` (the `(x²/(4t²) − 1/(2t))·G` of `heatKernel1D_deriv2_x`
+    put over the common denominator `4t²`). -/
+theorem heatKernel1D_deriv2_x_eq (t x : ℝ) (ht : 0 < t) :
+    deriv (fun x => deriv (fun x => heatKernel1D t x) x) x
+      = ((x ^ 2 - 2 * t) / (4 * t ^ 2)) * heatKernel1D t x := by
+  rw [heatKernel1D_deriv2_x t x ht]
+  have htne : t ≠ 0 := ht.ne'
+  congr 1
+  field_simp
+  ring
+
+set_option maxHeartbeats 1000000 in
+/-- **C4b #3 (THE REACHABLE PAYOFF) — the Gaussian bound on the Laplacian term.** For `t > 0`,
+    `|∂²_x G_t(x)| ≤ (5/2)·t⁻¹·(√(4πt))⁻¹·exp(−x²/(8t))`.
+    Route: `|∂²_x G| = (|x²−2t|/(4t²))·G ≤ ((x²+2t)/(4t²))·G` (split `|x²−2t| ≤ x²+2t`), then absorb
+    `x²·exp(−x²/4t) ≤ 8t·exp(−x²/8t)` (C4a, `m=1`) and `exp(−x²/4t) ≤ exp(−x²/8t)` (C4a, `m=0`), giving
+    numerator `≤ 10t·exp(−x²/8t)` and, over `4t²`, the constant `Cabs = 5/2`. The `(√(4πt))⁻¹`
+    prefactor is kept (the widened Gaussian is `(√(4πt))⁻¹·exp(−x²/8t)`, NOT `heatKernel1D (2t)`). -/
+theorem heatKernel1D_deriv2_x_abs_le (t x : ℝ) (ht : 0 < t) :
+    |deriv (fun x => deriv (fun x => heatKernel1D t x) x) x|
+      ≤ 5 / 2 * t⁻¹ * (Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (8 * t)) := by
+  have htne : t ≠ 0 := ht.ne'
+  have h4pit : (0 : ℝ) < 4 * Real.pi * t := mul_pos (mul_pos (by norm_num) Real.pi_pos) ht
+  have hApos : (0 : ℝ) < (Real.sqrt (4 * Real.pi * t))⁻¹ := inv_pos.mpr (Real.sqrt_pos.mpr h4pit)
+  have ht2 : (0 : ℝ) < 4 * t ^ 2 := mul_pos (by norm_num) (pow_pos ht 2)
+  have h4t2ne : (4 : ℝ) * t ^ 2 ≠ 0 := ht2.ne'
+  -- C4a single-term absorptions (m = 1 and m = 0)
+  have hm1 : x ^ 2 * Real.exp (-x ^ 2 / (4 * t)) ≤ 8 * t * Real.exp (-x ^ 2 / (8 * t)) := by
+    simpa using gaussian_poly_absorb 1 ht x
+  have hm0 : Real.exp (-x ^ 2 / (4 * t)) ≤ Real.exp (-x ^ 2 / (8 * t)) := by
+    simpa using gaussian_poly_absorb 0 ht x
+  -- |x²−2t| ≤ x²+2t
+  have hnum_abs : |x ^ 2 - 2 * t| ≤ x ^ 2 + 2 * t := by
+    rw [abs_le]; constructor <;> nlinarith [sq_nonneg x, ht.le]
+  have habs : |(x ^ 2 - 2 * t) / (4 * t ^ 2)| ≤ (x ^ 2 + 2 * t) / (4 * t ^ 2) := by
+    rw [abs_div, abs_of_pos ht2, div_eq_mul_inv, div_eq_mul_inv]
+    exact mul_le_mul_of_nonneg_right hnum_abs (by positivity)
+  -- numerator bound: (x²+2t)·exp(−x²/4t) ≤ 10t·exp(−x²/8t)
+  have h2texp : 2 * t * Real.exp (-x ^ 2 / (4 * t)) ≤ 2 * t * Real.exp (-x ^ 2 / (8 * t)) :=
+    mul_le_mul_of_nonneg_left hm0 (by linarith)
+  have hnum : (x ^ 2 + 2 * t) * Real.exp (-x ^ 2 / (4 * t))
+      ≤ 10 * t * Real.exp (-x ^ 2 / (8 * t)) := by
+    calc (x ^ 2 + 2 * t) * Real.exp (-x ^ 2 / (4 * t))
+        = x ^ 2 * Real.exp (-x ^ 2 / (4 * t)) + 2 * t * Real.exp (-x ^ 2 / (4 * t)) := by ring
+      _ ≤ 8 * t * Real.exp (-x ^ 2 / (8 * t)) + 2 * t * Real.exp (-x ^ 2 / (8 * t)) :=
+          add_le_add hm1 h2texp
+      _ = 10 * t * Real.exp (-x ^ 2 / (8 * t)) := by ring
+  -- core Gaussian bound with the (√(4πt))⁻¹ prefactor stripped
+  have hcore : (x ^ 2 + 2 * t) / (4 * t ^ 2) * Real.exp (-x ^ 2 / (4 * t))
+      ≤ 5 / 2 * t⁻¹ * Real.exp (-x ^ 2 / (8 * t)) := by
+    calc (x ^ 2 + 2 * t) / (4 * t ^ 2) * Real.exp (-x ^ 2 / (4 * t))
+        = (x ^ 2 + 2 * t) * Real.exp (-x ^ 2 / (4 * t)) * (4 * t ^ 2)⁻¹ := by ring
+      _ ≤ 10 * t * Real.exp (-x ^ 2 / (8 * t)) * (4 * t ^ 2)⁻¹ :=
+          mul_le_mul_of_nonneg_right hnum (by positivity)
+      _ = 5 / 2 * t⁻¹ * Real.exp (-x ^ 2 / (8 * t)) := by field_simp; ring
+  rw [heatKernel1D_deriv2_x_eq t x ht, heatKernel1D]
+  calc |(x ^ 2 - 2 * t) / (4 * t ^ 2)
+          * ((Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (4 * t)))|
+      = |(x ^ 2 - 2 * t) / (4 * t ^ 2)|
+          * ((Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (4 * t))) := by
+        rw [abs_mul, abs_of_pos (mul_pos hApos (Real.exp_pos _))]
+    _ ≤ (x ^ 2 + 2 * t) / (4 * t ^ 2)
+          * ((Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (4 * t))) :=
+        mul_le_mul_of_nonneg_right habs (by positivity)
+    _ = (Real.sqrt (4 * Real.pi * t))⁻¹
+          * ((x ^ 2 + 2 * t) / (4 * t ^ 2) * Real.exp (-x ^ 2 / (4 * t))) := by ring
+    _ ≤ (Real.sqrt (4 * Real.pi * t))⁻¹
+          * (5 / 2 * t⁻¹ * Real.exp (-x ^ 2 / (8 * t))) :=
+        mul_le_mul_of_nonneg_left hcore hApos.le
+    _ = 5 / 2 * t⁻¹ * (Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (8 * t)) := by ring
+
+set_option maxHeartbeats 1000000 in
+/-- **C4b #4 (THE ODD FIRST DERIVATIVE, √t honestly) — the Gaussian bound on the gradient term.**
+    For `t > 0`, `|∂_x G_t(x)| ≤ √2·(√t)⁻¹·(√(4πt))⁻¹·exp(−x²/(8t))`.
+    The odd `|x|` forces a `√t` (NOT an `rpow`): the crux is `|x|·exp(−x²/8t) ≤ √(8t)`, proved by
+    squaring — `(|x|·exp(−x²/8t))² = x²·exp(−x²/4t) ≤ 8t` via C4a (`m=1`) and `exp(−x²/8t) ≤ 1`.
+    Splitting `exp(−x²/4t) = exp(−x²/8t)²` then gives `|x|·exp(−x²/4t) ≤ √(8t)·exp(−x²/8t)`, and
+    `√(8t)/(2t) = √2·(√t)⁻¹` yields the constant `√2`. -/
+theorem heatKernel1D_deriv_x_abs_le (t x : ℝ) (ht : 0 < t) :
+    |deriv (fun x => heatKernel1D t x) x|
+      ≤ Real.sqrt 2 * (Real.sqrt t)⁻¹ * (Real.sqrt (4 * Real.pi * t))⁻¹
+        * Real.exp (-x ^ 2 / (8 * t)) := by
+  have htne : t ≠ 0 := ht.ne'
+  have h4pit : (0 : ℝ) < 4 * Real.pi * t := mul_pos (mul_pos (by norm_num) Real.pi_pos) ht
+  have hApos : (0 : ℝ) < (Real.sqrt (4 * Real.pi * t))⁻¹ := inv_pos.mpr (Real.sqrt_pos.mpr h4pit)
+  have h2t : (0 : ℝ) < 2 * t := by linarith
+  -- C4a (m = 1): x²·exp(−x²/4t) ≤ 8t·exp(−x²/8t)
+  have hm1 : x ^ 2 * Real.exp (-x ^ 2 / (4 * t)) ≤ 8 * t * Real.exp (-x ^ 2 / (8 * t)) := by
+    simpa using gaussian_poly_absorb 1 ht x
+  -- exp(−x²/8t) ≤ 1
+  have hle0 : -x ^ 2 / (8 * t) ≤ 0 := by
+    rw [div_le_iff₀ (by linarith : (0 : ℝ) < 8 * t)]; nlinarith [sq_nonneg x]
+  have hexp1 : Real.exp (-x ^ 2 / (8 * t)) ≤ 1 := by
+    rw [← Real.exp_zero]; exact Real.exp_le_exp.mpr hle0
+  -- x²·exp(−x²/4t) ≤ 8t
+  have hle8t : x ^ 2 * Real.exp (-x ^ 2 / (4 * t)) ≤ 8 * t := by
+    calc x ^ 2 * Real.exp (-x ^ 2 / (4 * t))
+          ≤ 8 * t * Real.exp (-x ^ 2 / (8 * t)) := hm1
+      _ ≤ 8 * t * 1 := by apply mul_le_mul_of_nonneg_left hexp1; linarith
+      _ = 8 * t := by ring
+  -- (|x|·exp(−x²/8t))² = x²·exp(−x²/4t)
+  have hsq : (|x| * Real.exp (-x ^ 2 / (8 * t))) ^ 2 = x ^ 2 * Real.exp (-x ^ 2 / (4 * t)) := by
+    have hexp : -x ^ 2 / (8 * t) + -x ^ 2 / (8 * t) = -x ^ 2 / (4 * t) := by field_simp; ring
+    rw [mul_pow, sq_abs, pow_two (Real.exp (-x ^ 2 / (8 * t))), ← Real.exp_add, hexp]
+  -- crux odd bound: |x|·exp(−x²/8t) ≤ √(8t)
+  have hcrux : |x| * Real.exp (-x ^ 2 / (8 * t)) ≤ Real.sqrt (8 * t) := by
+    rw [show |x| * Real.exp (-x ^ 2 / (8 * t))
+          = Real.sqrt ((|x| * Real.exp (-x ^ 2 / (8 * t))) ^ 2) from
+        (Real.sqrt_sq (by positivity)).symm]
+    apply Real.sqrt_le_sqrt
+    rw [hsq]; exact hle8t
+  -- split the exponent
+  have hexp_split : Real.exp (-x ^ 2 / (4 * t))
+      = Real.exp (-x ^ 2 / (8 * t)) * Real.exp (-x ^ 2 / (8 * t)) := by
+    rw [← Real.exp_add]; congr 1; field_simp; ring
+  have hxexp4 : |x| * Real.exp (-x ^ 2 / (4 * t))
+      ≤ Real.sqrt (8 * t) * Real.exp (-x ^ 2 / (8 * t)) := by
+    rw [hexp_split, ← mul_assoc]
+    exact mul_le_mul_of_nonneg_right hcrux (Real.exp_pos _).le
+  -- √(8t) = 2·√2·√t  and  √(8t)/(2t) = √2·(√t)⁻¹
+  have h8t : Real.sqrt (8 * t) = 2 * Real.sqrt 2 * Real.sqrt t := by
+    rw [show (8 : ℝ) * t = 2 ^ 2 * (2 * t) from by ring,
+        Real.sqrt_mul (by positivity) (2 * t), Real.sqrt_sq (by norm_num : (0 : ℝ) ≤ 2),
+        Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 2) t]
+    ring
+  have hsqrt8 : Real.sqrt (8 * t) / (2 * t) = Real.sqrt 2 * (Real.sqrt t)⁻¹ := by
+    have hst : Real.sqrt t ≠ 0 := (Real.sqrt_pos.mpr ht).ne'
+    rw [h8t, show (2 : ℝ) * t = 2 * (Real.sqrt t * Real.sqrt t) from by
+          rw [Real.mul_self_sqrt ht.le]]
+    field_simp
+  rw [heatKernel1D_deriv_x_eq t x ht, heatKernel1D]
+  calc |(-x / (2 * t)) * ((Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (4 * t)))|
+      = |x| / (2 * t) * ((Real.sqrt (4 * Real.pi * t))⁻¹ * Real.exp (-x ^ 2 / (4 * t))) := by
+        rw [abs_mul, abs_of_pos (mul_pos hApos (Real.exp_pos _)), abs_div, abs_neg,
+            abs_of_pos h2t]
+    _ = (Real.sqrt (4 * Real.pi * t))⁻¹ / (2 * t) * (|x| * Real.exp (-x ^ 2 / (4 * t))) := by
+        ring
+    _ ≤ (Real.sqrt (4 * Real.pi * t))⁻¹ / (2 * t)
+          * (Real.sqrt (8 * t) * Real.exp (-x ^ 2 / (8 * t))) :=
+        mul_le_mul_of_nonneg_left hxexp4 (div_nonneg hApos.le (by linarith))
+    _ = Real.sqrt (8 * t) / (2 * t) * (Real.sqrt (4 * Real.pi * t))⁻¹
+          * Real.exp (-x ^ 2 / (8 * t)) := by ring
+    _ = Real.sqrt 2 * (Real.sqrt t)⁻¹ * (Real.sqrt (4 * Real.pi * t))⁻¹
+          * Real.exp (-x ^ 2 / (8 * t)) := by rw [hsqrt8]
+
 end QIQTH.GaussianPolyBound

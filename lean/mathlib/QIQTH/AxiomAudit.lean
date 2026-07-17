@@ -13023,5 +13023,15 @@ namespace QIQTH.AxiomAudit
 -- parametrix: geodesic r + van-Vleck Θ as functions — a separate wall), NOT a₁=R/6.  Crude m! constant.  [AF] std-3.
 #print axioms QIQTH.GaussianPolyBound.pow_mul_exp_neg_le_factorial
 #print axioms QIQTH.GaussianPolyBound.gaussian_poly_absorb
+-- C4b — the FLAT-GAUSSIAN DERIVATIVE BOUNDS (GaussianPolyBound.lean): heatKernel1D_deriv_x_eq (∂_x G = (−x/2t)G) +
+-- heatKernel1D_deriv2_x_eq (∂²_x G = ((x²−2t)/4t²)G) product forms; heatKernel1D_deriv2_x_abs_le (|∂²_x G| ≤
+-- (5/2)t⁻¹(√4πt)⁻¹e^{−x²/8t}, Laplacian Gaussian bound via C4a) + heatKernel1D_deriv_x_abs_le (odd first-deriv,
+-- |∂_x G| ≤ √2(√t)⁻¹(√4πt)⁻¹e^{−x²/8t}, √t handled honestly).  ⚠ HONEST FIREWALL: flat-Gaussian derivative TOOLS
+-- for the C4 residual bound; NOT the residual bound (needs off-diagonal parametrix — geodesic r, van-Vleck Θ, C4c),
+-- NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv_x_eq
+#print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv2_x_eq
+#print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv2_x_abs_le
+#print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv_x_abs_le
 
 end QIQTH.AxiomAudit
