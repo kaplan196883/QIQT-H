@@ -685,6 +685,7 @@ import QIQTH.EinsteinEquationOfState
 import QIQTH.SpectralSum
 import QIQTH.EntanglementFirstLaw
 import QIQTH.Curvature
+import QIQTH.RadialDistance
 -- GEO1: the geodesic ODE of a component connection — local existence + uniqueness via Picard–Lindelöf
 -- on the phase space Point n × Point n. Geodesic EXISTENCE only: NOT the exp-map / normal coordinates,
 -- does NOT discharge the RNC gauge (gated on smooth dependence on IC, absent from Mathlib), NOT numerical-G.

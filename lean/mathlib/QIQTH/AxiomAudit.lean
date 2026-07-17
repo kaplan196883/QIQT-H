@@ -13044,5 +13044,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VanVleck.vanVleck_expPullback_zero
 #print axioms QIQTH.VanVleck.vanVleck_pos
 #print axioms QIQTH.VanVleck.vanVleck_contDiffAt
+-- J2 — the RNC RADIAL COORDINATE + EULER FIELD (RadialDistance.lean): rncRadialSq = ∑(vⁱ)² (= r²) + rncRadial = √r²;
+-- rncRadialSq_contDiff (C∞); pd_rncRadialSq (∇r² = 2v, via the inline coordinate-projection derivative pd_coord_sq);
+-- radialDeriv f v = ∑ vⁱ·pd f i v (the Euler radial field ∑vⁱ∂ᵢ = r∂_r) + radialDeriv_rncRadialSq = 2r² (Euler's
+-- degree-2 identity, the operator the DeWitt transport recursion J3 uses).  ⚠ HONEST FIREWALL: the RNC radial
+-- COORDINATE (definitional in normal coords) + Euler field; NOT the Gauss-lemma minimizing-geodesic claim (the
+-- sup-norm≠∑(vⁱ)² false identity was correctly avoided), NOT the residual bound, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.RadialDistance.rncRadialSq_contDiff
+#print axioms QIQTH.RadialDistance.pd_rncRadialSq
+#print axioms QIQTH.RadialDistance.radialDeriv_rncRadialSq
 
 end QIQTH.AxiomAudit
