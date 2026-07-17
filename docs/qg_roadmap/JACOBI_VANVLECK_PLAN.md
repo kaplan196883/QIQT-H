@@ -54,7 +54,10 @@ No checkpoints. — original spec:
 - The DeWitt transport recursion `(k + r∂_r)u_k = Θ^{1/2}Δ_g(Θ^{−1/2}u_{k−1})` solved ALONG RADIAL RAYS
   from `y` (a 1-D ODE in `r`), extending `DeWittDiagonal` (which has the diagonal `u_1=τ/6`) off-diagonal.
 
-### J4 — the parametrix as a function `QIQTH/ParametrixFunction.lean`
+### J4 — the parametrix as a function `QIQTH/ParametrixFunction.lean` ✅ LANDED (`577e8116`, [AF] std-3)
+`transportCoeff T` (concrete off-diagonal u_k) + `transportCoeff_succ_transport_eq` (DeWitt recursion via J3) +
+`heatParametrixFn = heatParametrix (vanVleck G) (transportCoeff T)` (reused ansatz) + diagonal value/expansion/a1
+(u_0(0)=1 derived; u_1(0)=R/6 the carried J6 input). Transport source T carried abstractly. No checkpoints. — spec:
 - **`H_N(t,x,y) := (4πt)^{−d/2}·e^{−r_y(v)²/4t}·vanVleck(v)·Σ_{k≤N} u_k(v)·t^k`** (v = RNC coords of x).
   Assemble J1+J2+J3 into the actual parametrix kernel.
 
