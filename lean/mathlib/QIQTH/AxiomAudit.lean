@@ -13190,5 +13190,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_eq_jacobiOperator
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_centered
+-- L2c (partial — #1/#2) — the COVARIANT-DERIVATIVE MACHINERY (CovariantJacobi.lean): covariantDerivAlong (the covariant
+-- derivative Dξ/dτ of a vector field along a curve, (Dξ/dτ)^i = (ξ^i)' + ∑Γⁱⱼₖ(γ)(γ^j)'ξ^k) + covariantSecondDeriv
+-- (D²ξ/dτ², apply twice) + _apply expansions + hasDerivAt_comp_curve (ray chain rule).  Salvaged from the L2c agent
+-- that died mid-#3 (partial file BUILT green; stray probe removed, docstring corrected to not overclaim #3).  ⚠ HONEST
+-- FIREWALL: the covariant-derivative MACHINERY only; the covariant Jacobi equation D²ξ/dτ²=−R(ξ,v)v (#3) is NOT proved
+-- here — it is the L2c continuation.  NOT Raychaudhuri (L3), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantDerivAlong_apply
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_apply
+#print axioms QIQTH.ExpMap.hasDerivAt_comp_curve
 
 end QIQTH.AxiomAudit
