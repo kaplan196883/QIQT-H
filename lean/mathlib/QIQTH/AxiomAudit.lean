@@ -13168,5 +13168,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicVariation_residual_bound
 #print axioms QIQTH.ExpMap.geodesicVariation_exists
 #print axioms QIQTH.ExpMap.geodesicVariation_hasDerivAt_of_smoothDep
+-- L2b — the UNIFORM C² FIELD REMAINDER → hNb DISCHARGED (GeodesicSmoothDep.lean): decay_order_two_remainder_convex
+-- (general vector-valued 2nd-order Taylor remainder on a convex set, ‖F a − F b − DF(b)(a−b)‖ ≤ M‖a−b‖²) →
+-- geodesicField_uniform_C2_remainder (the C² field remainder, differentiability of F and fderiv F PROVED from hC,
+-- only the field-level ‖∂²F‖≤M₂ carried) → geodesicVariation_hNb_discharge (feeds it + geodesic_twopoint_gronwall into
+-- the exact hNb shape) → geodesicVariation_exists_uncond (the IC-derivative EXISTS with L2a's hNb DISCHARGED).  ★ The
+-- first-order geodesic smooth-dependence-on-IC is now UNCONDITIONAL modulo standard geometric regularity (convexity,
+-- ‖∂²F‖≤M₂, Lipschitz, tube containment — all genuine).  ⚠ HONEST FIREWALL: first-order smooth-dependence only; NOT
+-- the 2nd-order Jacobi equation (L2), NOT Raychaudhuri (L3), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_uniform_C2_remainder
+#print axioms QIQTH.ExpMap.geodesicVariation_hNb_discharge
+#print axioms QIQTH.ExpMap.geodesicVariation_exists_uncond
 
 end QIQTH.AxiomAudit
