@@ -97,3 +97,5 @@ genuine walls (esp J3/J5); NEVER fake. NOT the true kernel / a₁=R/6 until J6.
 - J5-resbound ✅ residue decay bounds, ResidueBound.lean (`5c481d78`)
 - J5-vanvleck (in flight): the leading van-Vleck cancellation — THE crux where R/6 enters (Delta_g Theta -> Ric via sqrtdet_taylor_coeff). Expected checkpoint.
 - J5b (todo): assemble |E| <= C t^(N-d/2) G_kappa. J6 (todo): unconditional a1=R/6.
+- J5-vanvleck ✅ (`0748fd8f`): ★ parametrix DIAGONAL a₁=R/6 DERIVED (van-Vleck 2-jet: laplaceBeltrami_detpow_diag Δ_g((det g)^-1/4)(0)=(∑Ric_ii)/6 → u₁(0)=R/6 → heatParametrixFn_diagonal_a1_derived).
+- ⛔ TERMINAL WALL: true-kernel a₁=R/6 needs the OFF-diagonal O(1/t) van-Vleck cancellation = the radial-log-det / Jacobi-field identity (geodesic smooth-dependence-on-IC, Mathlib-absent — same wall as C4c start). Diagonal R/6 closes (radialDeriv_zero=0 there); off-diagonal is the wall. J5b/J6 blocked on it.
