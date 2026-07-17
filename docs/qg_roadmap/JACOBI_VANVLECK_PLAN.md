@@ -62,6 +62,13 @@ No checkpoints. — original spec:
   Assemble J1+J2+J3 into the actual parametrix kernel.
 
 ### J5 — the residual Gaussian bound `QIQTH/HeatResidualBound.lean` (DEEP — the analytic core)
+**✅ J5a LANDED (`f8cfb79e`, [AF] std-3):** `parametrixResidual_telescope_N` — the FULL general-N residual telescoping
+`(∂_t−Δ_g)H_N(t,0) = −G(0)·Δ_g(Θ^{−1/2}u_N)(0)·t^N` AT THE DIAGONAL (v=0, exactly what the heat-trace a₁ needs) +
+`foldedCoeff`/`telescope_bracket`/`laplaceBeltrami_sum_pow`. ⚠ CHECKPOINT: diagonal only; off-diagonal blocked by the
+cross-gradient ⟨∇G,∇w⟩ term. **J5-offdiag (in flight):** the cross-gradient = radial-derivative identity
+`∑ᵢ ∂ᵢG ∂ᵢw = (−1/2t)G·(r∂_r w)` (the Euler field absorbs it — why the off-diagonal telescoping CAN work) + the
+off-diagonal telescoping, checkpointing the flat-Gaussian curvature term `(∂_t−Δ_g)G`. **J5b (todo):** the Gaussian
+bound on the tail via C4a/C4b. — original spec:
 - **`|E(t,x,y)| = |(∂_t−Δ_g)H_N| ≤ C·t^{N−d/2}·G_κ(t, r_y(v))`** — via C4a/C4b (Gaussian derivative +
   polynomial absorption) + the transport-recursion cancellation (the `u_k` are chosen to kill the leading
   orders). Discharges the `hEbound` hypothesis carried by C5c/C6.
