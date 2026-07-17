@@ -13114,5 +13114,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ResidueBound.residue_christoffel_bound
 #print axioms QIQTH.ResidueBound.residue_metricdev_bound
 #print axioms QIQTH.ResidueBound.residue_pair_bound
+-- J5-vanvleck — the VAN-VLECK LEADING CANCELLATION / where R/6 ENTERS (VanVleckCancellation.lean): ★ the parametrix
+-- DIAGONAL a₁=R/6 is now DERIVED (not carried).  laplaceBeltrami_detpow_diag = Δ_g((det g)^{−1/4})(0) = (∑Ric_ii)/6
+-- (the actual 2-jet computation: van-Vleck power-chain rule p=−1/4 × metric-Hessian-trace tr∂∂(det)=−⅔Ric ⟹ R/6);
+-- rpow_pd_pd_crit + det_pd_pd_diag + radialDeriv_zero the supporting jets; transportSource_diag_eq_scalarCurv
+-- (transportOp(vanVleck) 1 (0) = R/6); transportCoeff_vanVleck_one_diag (u₁(0)=R/6 for the concrete van-Vleck DeWitt
+-- source); heatParametrixFn_diagonal_a1_derived (DISCHARGES the labelled hu1 of heatParametrixFn_diagonal_a1 — the
+-- parametrix diagonal a₁=R/6 is a THEOREM).  Carries the RNC metric-Hessian-trace datum htr (RNC gauge, genuine) +
+-- RNC-center conditions.  ⚠ HONEST FIREWALL / CHECKPOINT: the DIAGONAL R/6 is derived; the OFF-diagonal O(1/t) leading
+-- cancellation is CHECKPOINTED (needs the radial-log-det/Jacobi-field identity, Mathlib-absent — at the diagonal it is
+-- 0 via radialDeriv_zero, which is why the diagonal closes).  NOT the off-diagonal residual bound, NOT the TRUE-kernel
+-- a₁=R/6 (J6 — still needs the off-diagonal cancellation + J5b + Levi correction).  [AF] std-3.
+#print axioms QIQTH.VanVleckCancellation.laplaceBeltrami_detpow_diag
+#print axioms QIQTH.VanVleckCancellation.transportSource_diag_eq_scalarCurv
+#print axioms QIQTH.VanVleckCancellation.transportCoeff_vanVleck_one_diag
+#print axioms QIQTH.VanVleckCancellation.heatParametrixFn_diagonal_a1_derived
 
 end QIQTH.AxiomAudit
