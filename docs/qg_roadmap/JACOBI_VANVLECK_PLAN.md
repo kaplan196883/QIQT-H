@@ -1,0 +1,74 @@
+# JACOBI / VAN-VLECK CAMPAIGN — the off-diagonal parametrix (C4c), commissioned 2026-07-17
+
+**Goal.** Build the off-diagonal parametrix objects the residual bound (C4) needs — the **van-Vleck
+determinant `Θ(x,y)`** and the **radial geodesic distance `r(x,y)`** as smooth functions — thereby
+discharging C4c, turning the conditional capstone C6 unconditional, and yielding **general curved
+`a₁ = R/6`** (conjecture input #3; the shared gate under D3-#3, D5-warp, D6-`c_i`).
+
+**The reachable-decomposition insight.** The earlier "wall" framing (`ExpMap.lean`: off-radial Jacobi
+field / Mathlib-absent smooth-dependence-on-IC) is about the FULL joint `(p,v)`-dependence of `exp_p`.
+But the heat parametrix + the DIAGONAL `a₁` only need the parametrix with the **base point `y` FIXED as
+the RNC center**: then `r(x,y) = |v|` (RNC radial arc-length, `v` = RNC coords of `x`) and the van-Vleck
+`Θ` reduces to the **pullback metric `g̃ = exp_y^* g`** volume distortion `(det g̃)^{−1/2}` — and `det g̃`
++ its R/6 Taylor coefficient are ALREADY built (`RNCExpansion.lean`: `det`, `sqrtdet`,
+`sqrtdet_taylor_coeff`). So the centered parametrix is substantially reachable; the genuinely deep parts
+are the off-diagonal transport ODE (J3) and the full residual estimate (J5).
+
+**Honest scale (binding).** Multi-session, Mathlib-grade. Reachable early phases (J1 van-Vleck, J2 radial
+distance); deep risk concentrated in **J3** (off-diagonal transport recursion as functions) and **J5**
+(the residual Gaussian bound). `a₁=R/6` is NOT claimed unconditionally until J6 lands; until then C6 stays
+conditional and `a₁=R/6` is the carried G3 input. Checkpoint precisely at genuine walls; never fake.
+
+## What is already BUILT (rides on)
+- `RNCExpansion.lean`: `det g̃` is C∞ (`det_contDiff`), its 1st/2nd derivatives (`pd_det`, `det_pd_pd_expand`),
+  `sqrtdet_pd_pd`/`sqrtdet_taylor_coeff` (the `−⅙ Ric` = R/6 source), + `_c2` finite-regularity variants.
+- `PullbackMetric.lean`: `expPullbackMetric` `g̃ = exp_y^* g`, `expPullbackMetric_at_zero` (`g̃(0)=δ`),
+  the christoffel/2-jet at 0, **`kappa_eq_one_sixth_expPullback`** (the κ=1/6 for g̃).
+- `ExpMap.lean`/`ExpMapContDiff.lean`: `geodesicField`, `geodesicSol`, `expMap_contDiffOn_one` (exp C¹),
+  `fderivExpMap_continuousOn`, the radial 2-jet `= −Γ`, Grönwall bounds.
+- The convergence machinery (C1–C6) + C4a/C4b flat-Gaussian tools.
+
+## Phases (each an [AF] std-3 green checkpoint). New file(s) under `QIQTH/`.
+
+### J1 — the van-Vleck determinant `QIQTH/VanVleck.lean` (REACHABLE — first brick)
+- **`vanVleck g̃ v := (Real.sqrt (Matrix.det (g̃ v)))⁻¹`** — the van-Vleck–Morette determinant in RNC
+  (volume distortion of `exp_y`), `Θ(exp_y v, y)`.
+- **`vanVleck_zero`**: `vanVleck g̃ 0 = 1` (since `g̃(0)=δ`, `det = 1`, `√1⁻¹ = 1`).
+- **`vanVleck_contDiff`** / smoothness from `det_contDiff` + `Real.sqrt` (on `det > 0`).
+- **`vanVleck_pos`**, and the short-time link: `vanVleck = (sqrtdet)⁻¹`, so its 2-jet at 0 is `+⅙ Ric`
+  (sign-flip of `sqrtdet_taylor_coeff`) — the van-Vleck side of `a₁=R/6`.
+
+### J2 — the radial geodesic distance `QIQTH/RadialDistance.lean`
+- **`r_y(v) = ‖v‖`** in RNC (the RNC radial arc-length property): the geodesic `t ↦ exp_y(tv)` has constant
+  speed `‖v‖_{g(y)}`, so the geodesic distance `y → exp_y v` is `‖v‖`. Route: metric-compatibility of
+  `geodesicField` (‖velocity‖ conserved) — check what `ExpMap.lean` gives.
+
+### J3 — the off-diagonal transport coefficients `QIQTH/RadialTransport.lean` (DEEP)
+- The DeWitt transport recursion `(k + r∂_r)u_k = Θ^{1/2}Δ_g(Θ^{−1/2}u_{k−1})` solved ALONG RADIAL RAYS
+  from `y` (a 1-D ODE in `r`), extending `DeWittDiagonal` (which has the diagonal `u_1=τ/6`) off-diagonal.
+
+### J4 — the parametrix as a function `QIQTH/ParametrixFunction.lean`
+- **`H_N(t,x,y) := (4πt)^{−d/2}·e^{−r_y(v)²/4t}·vanVleck(v)·Σ_{k≤N} u_k(v)·t^k`** (v = RNC coords of x).
+  Assemble J1+J2+J3 into the actual parametrix kernel.
+
+### J5 — the residual Gaussian bound `QIQTH/HeatResidualBound.lean` (DEEP — the analytic core)
+- **`|E(t,x,y)| = |(∂_t−Δ_g)H_N| ≤ C·t^{N−d/2}·G_κ(t, r_y(v))`** — via C4a/C4b (Gaussian derivative +
+  polynomial absorption) + the transport-recursion cancellation (the `u_k` are chosen to kill the leading
+  orders). Discharges the `hEbound` hypothesis carried by C5c/C6.
+
+### J6 — unconditional `a₁ = R/6` `QIQTH/HeatA1Unconditional.lean` (CAPSTONE)
+- Feed J5's residual bound into C5c (`leviSeries_summable`) + C6 (`trueHeatKernel_heat_eqn`, now
+  unconditional) + the diagonal expansion ⟹ **general `a₁ = R/6` for the true kernel**; instantiate
+  `SeeleyDeWittData` (the single Phase-7 instance the DUALITY_ROADMAP ledger anticipates).
+
+## Dependency
+```
+J1 (van-Vleck) ──┐
+J2 (radial r) ───┼──► J4 (parametrix fn) ──► J5 (residual bound) ──► J6 (a₁=R/6)
+J3 (transport) ──┘                              ↑ C4a/C4b, C5c, C6
+```
+
+## Discipline (unchanged)
+One bg OPUS brick per phase; `#print axioms ⊆ std-3`; AxiomAudit pin (honest firewall); budget 0; commit
+explicit paths + PUSH; update this plan + memory. `a₁=R/6` NOT claimed until J6. Checkpoint precisely at
+genuine walls (esp J3/J5); NEVER fake. NOT the true kernel / a₁=R/6 until J6.
