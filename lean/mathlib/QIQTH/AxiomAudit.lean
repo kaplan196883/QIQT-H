@@ -13033,5 +13033,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv2_x_eq
 #print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv2_x_abs_le
 #print axioms QIQTH.GaussianPolyBound.heatKernel1D_deriv_x_abs_le
+-- ═══ JACOBI/VAN-VLECK CAMPAIGN (JACOBI_VANVLECK_PLAN.md, C4c, commissioned 2026-07-17) — the off-diagonal parametrix
+-- → unconditional a₁=R/6, phases J1–J6. ═══
+-- J1 — the VAN-VLECK–MORETTE DETERMINANT (VanVleck.lean): vanVleck G v = (√det(G v))⁻¹ = Θ = (det g̃)^{−1/2} (the exp-map
+-- volume distortion); vanVleck_zero/_of_eq_one (Θ(0)=1 from det g̃(0)=1 / g̃(0)=δ); vanVleck_expPullback_zero (Θ(0)=1
+-- for g̃=exp_p^*g, sourced from expPullbackMetric_at_zero + orthonormal frame — the honest RNC instance); vanVleck_pos
+-- (det g̃>0); vanVleck_contDiffAt (smoothness via det_contDiff+sqrt+inv).  ⚠ HONEST FIREWALL: the van-Vleck determinant
+-- OBJECT only; NOT the residual bound / full off-diagonal parametrix (J4/J5), NOT a₁=R/6 (J6).  [AF] std-3.
+#print axioms QIQTH.VanVleck.vanVleck_zero
+#print axioms QIQTH.VanVleck.vanVleck_expPullback_zero
+#print axioms QIQTH.VanVleck.vanVleck_pos
+#print axioms QIQTH.VanVleck.vanVleck_contDiffAt
 
 end QIQTH.AxiomAudit
