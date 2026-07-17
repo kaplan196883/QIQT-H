@@ -40,7 +40,9 @@ conditional and `a₁=R/6` is the carried G3 input. Checkpoint precisely at genu
 - **`vanVleck_pos`**, and the short-time link: `vanVleck = (sqrtdet)⁻¹`, so its 2-jet at 0 is `+⅙ Ric`
   (sign-flip of `sqrtdet_taylor_coeff`) — the van-Vleck side of `a₁=R/6`.
 
-### J2 — the radial geodesic distance `QIQTH/RadialDistance.lean`
+### J2 — the radial geodesic distance `QIQTH/RadialDistance.lean` ✅ LANDED (`cf938a8b`, [AF] std-3)
+`rncRadialSq=∑(vⁱ)²`/`rncRadial=√` + smoothness + `pd_rncRadialSq` (∇r²=2v) + `radialDeriv` Euler field + `radialDeriv_rncRadialSq=2r²`.
+(Correctly avoided the false `‖v‖²=∑(vⁱ)²` sup-norm identity.) No checkpoints. — original spec:
 - **`r_y(v) = ‖v‖`** in RNC (the RNC radial arc-length property): the geodesic `t ↦ exp_y(tv)` has constant
   speed `‖v‖_{g(y)}`, so the geodesic distance `y → exp_y v` is `‖v‖`. Route: metric-compatibility of
   `geodesicField` (‖velocity‖ conserved) — check what `ExpMap.lean` gives.
