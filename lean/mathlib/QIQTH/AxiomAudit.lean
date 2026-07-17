@@ -13157,5 +13157,16 @@ namespace QIQTH.AxiomAudit
 -- that primitive as hV/hswap.  NOT the 2nd-order Jacobi equation (L2), NOT Raychaudhuri (L3), NOT a₁=R/6 (K6).  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesicVariation_velocity_hasDerivAt
 #print axioms QIQTH.ExpMap.geodesicVariation_hasDerivAt
+-- L2a — the SMOOTH-DEPENDENCE-ON-IC PRIMITIVE, discharged via Grönwall (GeodesicSmoothDep.lean): the residual
+-- R = flow(x₀+hw) − flow(x₀) − h·V solves R'=DF(Y₁)R+N (expJet_linVariation_residual_deriv) ⟹ geodesicVariation_residual_bound
+-- (‖R‖≤C·exp K, varying-coeff residual Grönwall, UNCONDITIONAL) ⟹ geodesicVariation_exists (o(h²)⟹ the IC-derivative
+-- EXISTS = the variational solution V — discharges L1's hV) + geodesicVariation_hswap (discharges the mixed-partial) +
+-- geodesicVariation_hasDerivAt_of_smoothDep (feeds them into L1 ⟹ the variational eqn).  ⚠ HONEST FIREWALL: the
+-- first-order C¹-dependence-on-IC mechanism is now UNCONDITIONAL modulo the SINGLE carried hyp hNb = the uniform
+-- quadratic (C²) Taylor remainder of geodesicField on the tube (repo has the C¹ version geodesicField_uniform_C1_remainder;
+-- the C² version is the labelled checkpoint).  NOT the 2nd-order Jacobi equation (L2), NOT Raychaudhuri (L3), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicVariation_residual_bound
+#print axioms QIQTH.ExpMap.geodesicVariation_exists
+#print axioms QIQTH.ExpMap.geodesicVariation_hasDerivAt_of_smoothDep
 
 end QIQTH.AxiomAudit

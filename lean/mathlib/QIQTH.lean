@@ -704,6 +704,7 @@ import QIQTH.RNCExpansion
 -- numerical-G. Axiom-free (standard three).
 import QIQTH.ExpMap
 import QIQTH.GeodesicVariation
+import QIQTH.GeodesicSmoothDep
 import QIQTH.ExpMapContDiff
 import QIQTH.ExpMapContDiff2
 import QIQTH.ExpMapContDiff3
