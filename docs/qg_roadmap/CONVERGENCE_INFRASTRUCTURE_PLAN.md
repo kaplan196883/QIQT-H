@@ -128,8 +128,8 @@ function-level). Until C4 lands, `a₁=R/6` for the true kernel stays the carrie
 
 ### C4 — the parametrix residual bound `QIQTH/HeatResidualBound.lean` (THE REMAINING WALL — off-diagonal parametrix)
 Cast `E = (∂_t−Δ_g)H_N` into `|E(t,x,y)| ≤ C·t^{N−d/2}·G_κ(t,x−y)`. Decomposed (commissioned 2026-07-17 "keep going"):
-- **C4a — polynomial-absorption Gaussian bound** `QIQTH/GaussianPolyBound.lean` (REACHABLE, in flight):
-  `(x²)^m·e^{−x²/4t} ≤ 8^m·m!·t^m·e^{−x²/8t}` (via `v^m e^{−v} ≤ m!` from the exp series). The analytic tool.
+- **C4a — polynomial-absorption Gaussian bound** `QIQTH/GaussianPolyBound.lean` ✅ LANDED (`b89473214`, [AF] std-3):
+  `(x²)^m·e^{−x²/4t} ≤ 8^m·m!·t^m·e^{−x²/8t}` (via `v^m e^{−v} ≤ m!`, `pow_mul_exp_neg_le_factorial`). The analytic tool.
 - **C4b — derivative bounds on the flat Gaussian** (`∂_t`, `∂_i`, `∂_i∂_j` of `gaussDdim` = `gaussDdim`×poly-in-(x/t),
   then C4a) — reachable Gaussian analysis.
 - **C4c — the off-diagonal parametrix** (geodesic distance `r(x,y)`, van-Vleck `Θ(x,y)` as smooth functions +
