@@ -101,6 +101,7 @@ import QIQTH.HeatKernelOneD
 import QIQTH.HeatKernelA1
 import QIQTH.HeatKernelDDim
 import QIQTH.FlatHeatEquation
+import QIQTH.GaussianPolyBound
 import QIQTH.GaussianConvolution
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta

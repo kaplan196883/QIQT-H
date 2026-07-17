@@ -13016,5 +13016,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TrueHeatKernel.trueHeatKernel_heat_eqn
 #print axioms QIQTH.TrueHeatKernel.leviSeries_volterra
 #print axioms QIQTH.TrueHeatKernel.trueHeatKernel_heat_eqn_levi
+-- C4a — the POLYNOMIAL-ABSORPTION Gaussian bound (GaussianPolyBound.lean), the analytic tool for the C4 residual bound:
+-- pow_mul_exp_neg_le_factorial (v^m·exp(−v) ≤ m! for v≥0, via Real.pow_div_factorial_le_exp) + gaussian_poly_absorb
+-- ((x²)^m·exp(−x²/4t) ≤ 8^m·m!·t^m·exp(−x²/8t) for t>0 — polynomial×narrow-Gaussian bounded by t-power×wider-Gaussian).
+-- ⚠ HONEST FIREWALL: the polynomial-absorption TOOL only; NOT the residual bound C4 (which still needs the off-diagonal
+-- parametrix: geodesic r + van-Vleck Θ as functions — a separate wall), NOT a₁=R/6.  Crude m! constant.  [AF] std-3.
+#print axioms QIQTH.GaussianPolyBound.pow_mul_exp_neg_le_factorial
+#print axioms QIQTH.GaussianPolyBound.gaussian_poly_absorb
 
 end QIQTH.AxiomAudit
