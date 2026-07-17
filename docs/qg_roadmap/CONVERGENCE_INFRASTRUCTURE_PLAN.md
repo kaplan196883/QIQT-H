@@ -127,9 +127,16 @@ derivative estimates. That is a genuinely SEPARATE, Mathlib-absent, multi-sessio
 function-level). Until C4 lands, `a₁=R/6` for the true kernel stays the carried G3 `PhysicalInputs` input.
 
 ### C4 — the parametrix residual bound `QIQTH/HeatResidualBound.lean` (THE REMAINING WALL — off-diagonal parametrix)
-Cast `E = (∂_t−Δ_g)H_N` into `|E(t,x,y)| ≤ C·t^{N−d/2}·G_κ(t,x−y)`. Needs the off-diagonal parametrix
-(`r(x,y)`, `Θ(x,y)` as functions + Gaussian derivative / polynomial-absorption estimates) — the deep wall.
-Discharging it turns the conditional C6 into unconditional `a₁=R/6` + the `SeeleyDeWittData` instance.
+Cast `E = (∂_t−Δ_g)H_N` into `|E(t,x,y)| ≤ C·t^{N−d/2}·G_κ(t,x−y)`. Decomposed (commissioned 2026-07-17 "keep going"):
+- **C4a — polynomial-absorption Gaussian bound** `QIQTH/GaussianPolyBound.lean` (REACHABLE, in flight):
+  `(x²)^m·e^{−x²/4t} ≤ 8^m·m!·t^m·e^{−x²/8t}` (via `v^m e^{−v} ≤ m!` from the exp series). The analytic tool.
+- **C4b — derivative bounds on the flat Gaussian** (`∂_t`, `∂_i`, `∂_i∂_j` of `gaussDdim` = `gaussDdim`×poly-in-(x/t),
+  then C4a) — reachable Gaussian analysis.
+- **C4c — the off-diagonal parametrix** (geodesic distance `r(x,y)`, van-Vleck `Θ(x,y)` as smooth functions +
+  Hamilton–Jacobi/transport derivative estimates) — THE DEEP WALL (geodesic flow / exp-map function-level, Mathlib-absent).
+- **C4d — assemble** `|E| ≤ C·t^{N−d/2}·G_κ` from the ansatz + C4a/b + the transport-recursion cancellation + C4c.
+Discharging C4 turns the conditional C6 into unconditional `a₁=R/6` + the `SeeleyDeWittData` instance. C4a/b are the
+reachable tools; C4c is the genuine remaining wall.
 
 ## Dependency / critical path
 ```
