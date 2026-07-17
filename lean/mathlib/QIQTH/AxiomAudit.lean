@@ -13071,5 +13071,16 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁=R/6 (J6).  [AF] std-3.
 #print axioms QIQTH.ParametrixFunction.transportCoeff_succ_transport_eq
 #print axioms QIQTH.ParametrixFunction.heatParametrixFn_diagonal_a1
+-- J5a — the RESIDUAL TELESCOPING IDENTITY, general-N AT THE DIAGONAL (HeatResidualBound.lean, the DEEP analytic core):
+-- foldedCoeff Θ u k = Θ^{−1/2}u_k; laplaceBeltrami_sum_pow (Δ_g over the t-polynomial); telescope_bracket (the algebraic
+-- heart: given (k+1)a_{k+1}=b_k, Σaₖ·k·t^{k−1} − Σbₖtᵏ = −b_N t^N); parametrixResidual_telescope_N =
+-- (∂_t−Δ_g)H_N(t,0) = −G(0)·Δ_g(Θ^{−1/2}u_N)(0)·t^N — the FULL general-N diagonal telescoping (all orders t^0..t^{N−1}
+-- cancelled by the transport recursion hrec), generalizing HeatParametrixOrder's N=1 diagonal identity.  Carries t>0,
+-- RNC-center (gi(0)=δ, Γ(0)=0), ContDiff folded coeffs, the transport recursion hrec — all genuine (sphere witness),
+-- non-vacuous (holds for N=0 too).  ⚠ HONEST FIREWALL / CHECKPOINT: DIAGONAL (v=0) only — exactly what the diagonal
+-- heat-trace a₁ needs; the off-diagonal (v≠0) telescoping is blocked by the cross-gradient ⟨∇G,∇w⟩ term (∂ᵢG(0)=0 is
+-- what makes the diagonal split clean).  NOT the Gaussian bound on the tail (J5b), NOT a₁=R/6 (J6).  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.telescope_bracket
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_telescope_N
 
 end QIQTH.AxiomAudit
