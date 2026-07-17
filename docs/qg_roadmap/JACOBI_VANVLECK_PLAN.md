@@ -89,3 +89,11 @@ J3 (transport) ──┘                              ↑ C4a/C4b, C5c, C6
 One bg OPUS brick per phase; `#print axioms ⊆ std-3`; AxiomAudit pin (honest firewall); budget 0; commit
 explicit paths + PUSH; update this plan + memory. `a₁=R/6` NOT claimed until J6. Checkpoint precisely at
 genuine walls (esp J3/J5); NEVER fake. NOT the true kernel / a₁=R/6 until J6.
+
+### J5 progress log (2026-07-17)
+- J5a ✅ diagonal residual telescoping (`f8cfb79e`)
+- J5-offdiag ✅ off-diagonal residual decomposition, 2 named O(r²) residues (`a56021cf`)
+- J5-residue ✅ RNC O(r)/O(r²) decay estimates, RNCDecay.lean (`0821b184`)
+- J5-resbound ✅ residue decay bounds, ResidueBound.lean (`5c481d78`)
+- J5-vanvleck (in flight): the leading van-Vleck cancellation — THE crux where R/6 enters (Delta_g Theta -> Ric via sqrtdet_taylor_coeff). Expected checkpoint.
+- J5b (todo): assemble |E| <= C t^(N-d/2) G_kappa. J6 (todo): unconditional a1=R/6.
