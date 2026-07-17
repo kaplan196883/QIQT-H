@@ -7,6 +7,44 @@ algebra LA1′). Companion to `ADSCFT_GAP_ANALYSIS.md`. This document exists bec
 assessments UNDER-credited the repository; it states the position at full credit, with the honest
 line drawn where the roadmap draws it.
 
+## ★ UPDATE 2026-07-17 (late) — the CONVERGENCE bound is CROSSED · parametrix diagonal `a₁=R/6` DERIVED · the wall is now ODE smooth-dependence-on-IC
+
+Supersedes the block just below ("the wall is the Levi/Duhamel convergence bound"): that bound is now
+BUILT, and two further campaigns pushed the frontier all the way to a single Mathlib-absent ODE primitive.
+**~24 [AF] std-3 bricks total, all pushed, budget 0** (HEAD `bca6c087`), across four chained campaigns:
+
+- **Convergence infrastructure (C1–C6 + C4a/C4b), DONE.** The Levi/Duhamel Gaussian-bound Neumann-series
+  **convergence** — the analytic heart of manifold heat-kernel EXISTENCE, a proof-assistant first:
+  Gaussian convolution semigroup (`GaussianConvolution`) · self-similar identity + Beta/Γ
+  (`GaussianConvBound`) · the factorial-decay engine `iterKernel_eq` (`TimeSimplexBeta`) · model-series
+  summability + `heatConv` domination + `iterConv_bound`/`leviSeries_summable` — **the series converges**
+  (`LeviSeries`) · the CONDITIONAL true-kernel capstone `K=H+heatConv H F` solves `(∂_t−Δ_g)K=0`
+  (`TrueHeatKernel`, via the built `duhamel_principle` + the Volterra identity) · polynomial-absorption
+  + flat-Gaussian derivative bounds (`GaussianPolyBound`). See `CONVERGENCE_INFRASTRUCTURE_PLAN.md`.
+- **Jacobi/van-Vleck (J1–J5-vanvleck), DONE — ★ the parametrix DIAGONAL `a₁=R/6` is DERIVED (not
+  carried):** van-Vleck determinant `Θ=(det g̃)^{−1/2}` (`VanVleck`) · RNC radial coordinate + Euler field
+  (`RadialDistance`) · the radial transport-ODE operator (`RadialTransport`) · the parametrix function
+  assembly (`ParametrixFunction`) · the general-N diagonal residual telescoping + the off-diagonal residual
+  DECOMPOSITION into two named `O(r²)` residues + decay estimates + residue Gaussian bounds
+  (`HeatResidualBound`/`RNCDecay`/`ResidueBound`) · **`VanVleckCancellation`**:
+  `Δ_g((det g)^{−1/4})(0) = (∑Ric_ii)/6`, so `u₁(0)=R/6` and the parametrix diagonal `a₁=R/6` is a THEOREM.
+- **Jacobi-field (K1–K2), DONE:** the bridge `det g̃ = (exp-Jacobian)²·det(g∘exp)` (`JacobianDet`) + the
+  exp-Jacobian radial structure isolating `r∂_r log J` (`JacobianRadial`).
+- **ODE-variational (L1), DONE:** the geodesic variational equation (`GeodesicVariation`) — UNCONDITIONAL
+  for the tangential Jacobi field, CONDITIONAL for the general case, **pinning the entire remaining gap to
+  ONE Mathlib-absent primitive** (isolated as `hV`/`hswap`).
+
+**The wall, now maximally precise:** unconditional TRUE-kernel `a₁=R/6` needs **smooth dependence of ODE
+solutions on initial conditions** (→ the Jacobi equation `Y''=−R(Y,γ')γ'` → Raychaudhuri → the `r∂_r log J`
+ODE). Confirmed absent from Mathlib (`Analysis/ODE` = Picard–Lindelöf + Grönwall only); the repo has it at
+first order (exp C¹ = the Jacobi field). Discharging it fully is a multi-month, Mathlib-PR-scale foundational
+build. ⚠ **HONEST (binding):** the parametrix DIAGONAL `a₁=R/6` is DERIVED; the TRUE-kernel `a₁=R/6` is
+CONDITIONAL on that ODE primitive and is **NOT claimed** — conjecture input #3 stays the carried G3 input,
+now gated precisely on ODE-smooth-dependence-on-IC. The gate has traveled, every hop machine-checked:
+*manifold parametrix → convergence bound → off-diagonal parametrix → off-radial Jacobi field → ODE
+smooth-dependence-on-IC.* See `CONVERGENCE_INFRASTRUCTURE_PLAN.md`, `JACOBI_VANVLECK_PLAN.md`,
+`JACOBI_FIELD_PLAN.md`, `ODE_VARIATIONAL_PLAN.md`.
+
 ## ★ UPDATE 2026-07-17 — the manifold PARAMETRIX is BUILT (14 [AF] bricks) · the wall is now the Levi/Duhamel CONVERGENCE bound
 
 Supersedes the "the wall is the manifold parametrix — no proof assistant has this" verdict of the
