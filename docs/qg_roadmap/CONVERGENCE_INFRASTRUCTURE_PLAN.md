@@ -130,13 +130,28 @@ function-level). Until C4 lands, `a₁=R/6` for the true kernel stays the carrie
 Cast `E = (∂_t−Δ_g)H_N` into `|E(t,x,y)| ≤ C·t^{N−d/2}·G_κ(t,x−y)`. Decomposed (commissioned 2026-07-17 "keep going"):
 - **C4a — polynomial-absorption Gaussian bound** `QIQTH/GaussianPolyBound.lean` ✅ LANDED (`b89473214`, [AF] std-3):
   `(x²)^m·e^{−x²/4t} ≤ 8^m·m!·t^m·e^{−x²/8t}` (via `v^m e^{−v} ≤ m!`, `pow_mul_exp_neg_le_factorial`). The analytic tool.
-- **C4b — derivative bounds on the flat Gaussian** (`∂_t`, `∂_i`, `∂_i∂_j` of `gaussDdim` = `gaussDdim`×poly-in-(x/t),
-  then C4a) — reachable Gaussian analysis.
+- **C4b — derivative bounds on the flat Gaussian** `QIQTH/GaussianPolyBound.lean` ✅ LANDED (`d4e4166b`, [AF] std-3):
+  `heatKernel1D_deriv_x_eq`/`_deriv2_x_eq` (product forms) + `_deriv2_x_abs_le` (Laplacian Gaussian bound via C4a) +
+  `_deriv_x_abs_le` (odd first-deriv, √t honest). Reachable Gaussian analysis.
 - **C4c — the off-diagonal parametrix** (geodesic distance `r(x,y)`, van-Vleck `Θ(x,y)` as smooth functions +
-  Hamilton–Jacobi/transport derivative estimates) — THE DEEP WALL (geodesic flow / exp-map function-level, Mathlib-absent).
+  their Hamilton–Jacobi/transport derivative estimates) — ⛔ **THE DEEP WALL, confirmed 2026-07-17.** Investigation:
+  the repo HAS `ExpMap.lean` (`geodesicField`/`geodesicSol`/Grönwall + the radial 2-jet = −Γ) and `RNCExpansion.lean`
+  (`sqrtdet` + the R/6 coefficient) — but `ExpMap.lean` (its own docstring, lines ~998–1000) documents the boundary:
+  the radial 2-jet is the "radial DIAGONAL, NOT the RNC gauge (which needs the off-radial Jacobian field / higher jets
+  — the **Mathlib-absent smooth-dependence-on-IC**)." The van-Vleck `Θ(x,y)` and off-diagonal `r(x,y)` need exactly
+  that off-radial **Jacobi field** (smooth dependence of geodesics on initial conditions), which Mathlib lacks. The
+  reachable radial/diagonal pieces are ALREADY built (parametrix diagonal + `sqrtdet`); there is NO clean reachable
+  C4c sub-brick. Discharging C4c is a genuine SEPARATE multi-session foundational campaign (Jacobi-field / geodesic
+  smooth-dependence-on-IC infrastructure) — itself the size of the parametrix campaign.
 - **C4d — assemble** `|E| ≤ C·t^{N−d/2}·G_κ` from the ansatz + C4a/b + the transport-recursion cancellation + C4c.
-Discharging C4 turns the conditional C6 into unconditional `a₁=R/6` + the `SeeleyDeWittData` instance. C4a/b are the
-reachable tools; C4c is the genuine remaining wall.
+  Blocked on C4c.
+
+## ★ C4 STATUS (2026-07-17) — reachable tools done; C4c off-radial Jacobi field is the wall
+C4a (polynomial absorption) + C4b (flat-Gaussian derivative bounds) LANDED axiom-free — the reachable analytic tools.
+**C4c (the off-diagonal parametrix / van-Vleck `Θ`) is a genuine Mathlib-absent wall** — the off-radial Jacobi field /
+smooth-dependence-of-geodesics-on-IC, documented as absent in the repo's own `ExpMap.lean`. Discharging C4 (⟹ unconditional
+`a₁=R/6` + the `SeeleyDeWittData` instance) requires commissioning that Jacobi-field infrastructure as a further
+multi-session campaign. Until then C6 stays CONDITIONAL and `a₁=R/6` stays the carried G3 input.
 
 ## Dependency / critical path
 ```
