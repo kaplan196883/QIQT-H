@@ -13082,5 +13082,17 @@ namespace QIQTH.AxiomAudit
 -- what makes the diagonal split clean).  NOT the Gaussian bound on the tail (J5b), NOT a₁=R/6 (J6).  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.telescope_bracket
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_telescope_N
+-- J5-offdiag — the CROSS-GRADIENT = RADIAL-DERIVATIVE identity + off-diagonal residual decomposition (HeatResidualBound.lean):
+-- gaussDdim_pd_eq (∇G = G·(−v/2t), at every v); crossGrad_eq_radial (∑ᵢ ∂ᵢG ∂ᵢh = (−1/2t)·G·radialDeriv h — THE key
+-- identity: the Euler field r∂_r absorbs the cross-gradient); flatCrossTerm_eq (the flat symmetric cross block =
+-- (−1/t)G·r∂_r h); parametrixResidual_offdiag_decomp (FULL off-diagonal (∂_t−Δ_g)H_N split into 4 explicit pieces via
+-- the FULL curved laplaceBeltrami_mul, cross-gradient KEPT); parametrixResidual_offdiag_absorbed (the absorption step —
+-- piece II = G·Σ(k+r∂_r)w_k t^{k−1}, the DeWitt transport-operator LHS).  ⚠ HONEST FIREWALL / CHECKPOINT: converts the
+-- off-diagonal telescoping into a precise decomposition with TWO named residues (both →0 at v=0, recovering J5a): (I) the
+-- flat-Gaussian curvature (∂_t−Δ_g)G [needs Δ_g−Δ_flat off-diag] and (IV) the metric-deviation (gⁱʲ−δⁱʲ) cross term
+-- [needs gⁱʲ−δⁱʲ=O(r²)].  NOT the full off-diagonal telescoping, NOT the Gaussian bound (J5b), NOT a₁=R/6 (J6).  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.crossGrad_eq_radial
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_offdiag_decomp
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_offdiag_absorbed
 
 end QIQTH.AxiomAudit

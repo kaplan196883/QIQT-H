@@ -56,10 +56,12 @@ import Mathlib
 import QIQTH.ParametrixFunction
 import QIQTH.HeatParametrixOrder
 import QIQTH.GaussianPolyBound
+import QIQTH.RadialDistance
 
 open Finset
 open QIQTH.Curvature QIQTH.LaplaceBeltrami QIQTH.FlatHeatEquation QIQTH.HeatKernelA1
 open QIQTH.HeatParametrixError QIQTH.HeatParametrixAnsatz QIQTH.HeatParametrixOrder
+open QIQTH.RadialDistance
 
 namespace QIQTH.HeatResidualBound
 
@@ -231,5 +233,225 @@ theorem parametrixResidual_telescope_N (N : ℕ) (g gi : Point n → Fin n → F
   unfold parametrixResidualN
   rw [hderivval, hΔval, hheat]
   linear_combination gaussDdim t (0 : Point n) * hbr
+
+/-! ### J5-offdiag — the cross-gradient = radial-derivative identity and the off-diagonal
+    residual decomposition (the analytic crux).
+
+  J5a telescoped the residual AT THE DIAGONAL (`v = 0`), where the Gaussian gradient `∂ᵢG(0) = 0`
+  lets `laplaceBeltrami_gaussMul_at_zero` DROP the cross-gradient term of `laplaceBeltrami_mul`.
+  Off the diagonal that term is NONZERO.  This section proves the structural fact that makes the
+  off-diagonal construction work: the (Euclidean) cross-gradient `Σᵢ (∂ᵢG)(∂ᵢh)` is EXACTLY a
+  radial-derivative term — the Euler field `r∂_r` — because `∂ᵢG = (−vⁱ/2t)G`.  This is why the
+  DeWitt `(k + r∂_r)`-transport recursion is built to absorb it. -/
+
+/-! #### #1 — the Gaussian gradient `∂ᵢG(v) = (−vⁱ/2t)G(v)` (off the diagonal too). -/
+
+/-- **The Gaussian gradient, everywhere.**  `∂ᵢ G_t(v) = (−vⁱ/(2t))·G_t(v)` — the componentwise
+    gradient of the flat `d`-dimensional Gaussian, valid at EVERY point `v` (not just the center).
+    This is `FlatHeatEquation.gaussDdim_pd_i`; unlike the diagonal simplification of J5a it does NOT
+    vanish for `v ≠ 0`.  It is the seed of the cross-gradient = radial-derivative identity. -/
+theorem gaussDdim_pd_eq (t : ℝ) (ht : 0 < t) (v : Point n) (i : Fin n) :
+    pd (fun y => gaussDdim t y) i v = (-(v i) / (2 * t)) * gaussDdim t v :=
+  gaussDdim_pd_i t ht v i
+
+/-! #### #2 — THE KEY IDENTITY: the cross-gradient IS the radial derivative. -/
+
+/-- **THE CROSS-GRADIENT = RADIAL-DERIVATIVE IDENTITY.**  For any smooth field `h`, the Euclidean
+    inner product of the Gaussian gradient with `∇h`,
+      `Σᵢ (∂ᵢG)(∂ᵢh) = (−1/(2t))·G·(r∂_r h)` ,
+    where `r∂_r h = radialDeriv h = Σᵢ vⁱ ∂ᵢh` is the Euler radial field.  MECHANISM: `∂ᵢG =
+    (−vⁱ/2t)G` (#1), so `Σᵢ ∂ᵢG ∂ᵢh = (−1/2t)G·Σᵢ vⁱ ∂ᵢh = (−1/2t)G·(r∂_r h)` — the coordinate
+    weight `vⁱ` from the Gaussian gradient is EXACTLY the Euler field's weight.  This is THE reason
+    the off-diagonal telescoping can work: the cross-gradient term is a radial-derivative term, and
+    the transport recursion `(k + r∂_r)w_k = Δ_g w_{k−1}` is designed to absorb it. -/
+theorem crossGrad_eq_radial (t : ℝ) (ht : 0 < t) (h : Point n → ℝ) (v : Point n) :
+    (∑ i, pd (fun y => gaussDdim t y) i v * pd h i v)
+      = (-1 / (2 * t)) * gaussDdim t v * radialDeriv h v := by
+  simp only [radialDeriv]
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [gaussDdim_pd_eq t ht v i]; ring
+
+/-- **The full (symmetric, flat-metric) cross-gradient term equals `−(1/t)·G·(r∂_r h)`.**  Under the
+    RNC-center flat inverse metric `gⁱʲ = δⁱʲ`, the cross-gradient block of `laplaceBeltrami_mul`,
+      `Σᵢⱼ δⁱʲ ((∂ᵢG)(∂ⱼh) + (∂ⱼG)(∂ᵢh)) = 2·Σᵢ (∂ᵢG)(∂ᵢh)` ,
+    collapses (via #2) to `−(1/t)·G·(r∂_r h)`.  This is the cross-gradient term written as the pure
+    radial-derivative term the transport recursion absorbs — the identity behind the "radial term
+    absorbs the cross-gradient" step of the off-diagonal telescoping. -/
+theorem flatCrossTerm_eq (t : ℝ) (ht : 0 < t) (h : Point n → ℝ) (v : Point n) :
+    (∑ i, ∑ j, (if i = j then (1 : ℝ) else 0)
+        * (pd (fun y => gaussDdim t y) i v * pd h j v
+            + pd (fun y => gaussDdim t y) j v * pd h i v))
+      = (-1 / t) * gaussDdim t v * radialDeriv h v := by
+  have hstep : ∀ i : Fin n, (∑ j, (if i = j then (1 : ℝ) else 0)
+      * (pd (fun y => gaussDdim t y) i v * pd h j v
+          + pd (fun y => gaussDdim t y) j v * pd h i v))
+      = 2 * (pd (fun y => gaussDdim t y) i v * pd h i v) := by
+    intro i
+    simp only [ite_mul, one_mul, zero_mul]
+    rw [Finset.sum_ite_eq Finset.univ i
+      (fun j => pd (fun y => gaussDdim t y) i v * pd h j v
+        + pd (fun y => gaussDdim t y) j v * pd h i v)]
+    simp only [Finset.mem_univ, if_true]
+    ring
+  rw [Finset.sum_congr rfl (fun i _ => hstep i), ← Finset.mul_sum,
+      crossGrad_eq_radial t ht h v]
+  rw [div_eq_mul_inv, div_eq_mul_inv, mul_inv]
+  ring
+
+/-! #### #3 — the off-diagonal residual decomposition and the "radial term absorbs the
+    cross-gradient" step (the reachable part of the crux; the curvature term is checkpointed). -/
+
+/-- **THE OFF-DIAGONAL RESIDUAL DECOMPOSITION (general metric, general point `v`).**  Without any
+    diagonal simplification, the heat-operator residual of `H_N = G·Σ_{k≤N} w_k t^k` splits, by the
+    `∂_t` product rule and the FULL curved product rule `laplaceBeltrami_mul` (cross-gradient kept),
+    into four pieces:
+      `(∂_t − Δ_g)H_N(t,v)`
+        `= ((∂_t G) − Δ_g G)(v)·Σ_{k≤N} w_k(v) t^k`          -- (I) the flat-Gaussian CURVATURE term
+        `+ G(v)·Σ_{k≤N} w_k(v)·(k t^{k−1})`                   -- (II) the ∂_t of the coefficient poly
+        `− G(v)·Σ_{k≤N} (Δ_g w_k)(v) t^k`                     -- (III) the Δ_g of the coefficient poly
+        `− Σᵢⱼ gⁱʲ ((∂ᵢG)(∂ⱼP) + (∂ⱼG)(∂ᵢP))(v)` .            -- (IV) the cross-gradient
+    At the diagonal (`v = 0`) piece (I) vanishes (flat heat equation + `Δ_g = Δ_flat` at an RNC
+    center) and piece (IV) vanishes (`∂ᵢG(0) = 0`), recovering J5a.  Off the diagonal neither
+    vanishes: (I) is the flat-Gaussian curvature residue `(∂_t − Δ_g)G` and (IV) is the cross-gradient
+    that #2/`flatCrossTerm_eq` identify as a radial-derivative term.  This decomposition is a genuine,
+    unconditional identity (only coefficient smoothness `hw` is used). -/
+theorem parametrixResidual_offdiag_decomp (N : ℕ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (Θ : Point n → ℝ) (u : ℕ → Point n → ℝ) (t : ℝ) (ht : 0 < t) (v : Point n)
+    (hw : ∀ k, ContDiff ℝ ⊤ (foldedCoeff Θ u k)) :
+    parametrixResidualN N g gi Θ u t v
+      = (deriv (fun s => gaussDdim s v) t - laplaceBeltrami g gi (gaussDdim t) v)
+          * (∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * t ^ k)
+        + gaussDdim t v
+            * (∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * ((k : ℝ) * t ^ (k - 1)))
+        - gaussDdim t v
+            * (∑ k ∈ Finset.range (N + 1), laplaceBeltrami g gi (foldedCoeff Θ u k) v * t ^ k)
+        - (∑ i, ∑ j, gi v i j
+            * (pd (fun y => gaussDdim t y) i v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) j v
+              + pd (fun y => gaussDdim t y) j v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) i v)) := by
+  -- (A) the `t`-derivative of `H_N(·,v)` via the product rule `(∂_t G)·P + G·(∂_t P)`
+  have hgaussHD : HasDerivAt (fun s => gaussDdim s v)
+      (deriv (fun s => gaussDdim s v) t) t := by
+    have hFP := HasDerivAt.fun_finsetProd
+      (fun (i : Fin n) (_ : i ∈ (Finset.univ : Finset (Fin n))) =>
+        heatKernel1D_hasDerivAt_t t (v i) ht)
+    exact hFP.differentiableAt.hasDerivAt
+  have hpoly : HasDerivAt
+      (fun s => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * s ^ k)
+      (∑ k ∈ Finset.range (N + 1),
+        foldedCoeff Θ u k v * ((k : ℝ) * t ^ (k - 1))) t := by
+    have key : HasDerivAt
+        (∑ k ∈ Finset.range (N + 1), fun s : ℝ => foldedCoeff Θ u k v * s ^ k)
+        (∑ k ∈ Finset.range (N + 1),
+          foldedCoeff Θ u k v * ((k : ℝ) * t ^ (k - 1))) t :=
+      HasDerivAt.sum (fun k _ => (hasDerivAt_pow k t).const_mul (foldedCoeff Θ u k v))
+    have hfun : (∑ k ∈ Finset.range (N + 1), fun s : ℝ => foldedCoeff Θ u k v * s ^ k)
+        = (fun s => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * s ^ k) := by
+      funext s; simp only [Finset.sum_apply]
+    rw [hfun] at key
+    exact key
+  have hderiv_fun : (fun s => heatParametrix N Θ u s v)
+      = (fun s => gaussDdim s v
+          * ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * s ^ k) :=
+    funext (fun s => heatParametrix_folded N Θ u s v)
+  have hderivval : deriv (fun s => heatParametrix N Θ u s v) t
+      = deriv (fun s => gaussDdim s v) t
+          * (∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * t ^ k)
+        + gaussDdim t v
+          * ∑ k ∈ Finset.range (N + 1),
+              foldedCoeff Θ u k v * ((k : ℝ) * t ^ (k - 1)) := by
+    rw [hderiv_fun]; exact (hgaussHD.mul hpoly).deriv
+  -- (B) the `Δ_g` of `H_N(t,·)` via the FULL curved product rule (cross-gradient KEPT)
+  have hwsum : ContDiff ℝ ⊤
+      (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) :=
+    ContDiff.sum (fun k _ => (hw k).mul contDiff_const)
+  have hHeq : heatParametrix N Θ u t
+      = (fun y => gaussDdim t y * ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) :=
+    funext (fun y => heatParametrix_folded N Θ u t y)
+  have hΔval : laplaceBeltrami g gi (heatParametrix N Θ u t) v
+      = laplaceBeltrami g gi (gaussDdim t) v
+          * (∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * t ^ k)
+        + gaussDdim t v
+          * (∑ k ∈ Finset.range (N + 1), laplaceBeltrami g gi (foldedCoeff Θ u k) v * t ^ k)
+        + ∑ i, ∑ j, gi v i j
+            * (pd (fun y => gaussDdim t y) i v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) j v
+              + pd (fun y => gaussDdim t y) j v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) i v) := by
+    rw [hHeq,
+        laplaceBeltrami_mul g gi (fun y => gaussDdim t y)
+          (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) v
+          (gaussDdim_contDiff t) hwsum,
+        laplaceBeltrami_sum_pow g gi (foldedCoeff Θ u) t v N hw]
+  unfold parametrixResidualN
+  rw [hderivval, hΔval]
+  ring
+
+/-- **THE OFF-DIAGONAL ABSORPTION IDENTITY — "the radial term absorbs the cross-gradient".**
+    Rewriting the cross-gradient of the decomposition as its FLAT part plus a metric-deviation part
+    (`gⁱʲ = δⁱʲ + (gⁱʲ − δⁱʲ)`), the flat part is `−(1/t)·G·(r∂_r P)` (`flatCrossTerm_eq`, via the
+    #2 identity), so its subtraction in `(∂_t − Δ_g)H_N` becomes `+(1/t)·G·(r∂_r P)` — the RADIAL
+    TRANSPORT term.  Hence the residual is
+      `(∂_t − Δ_g)H_N(t,v)`
+        `= ((∂_t G) − Δ_g G)(v)·P(v)`                                   -- (I) curvature residue ⚠ CHECKPOINT
+        `+ G(v)·( ∂_t P + (1/t)·(r∂_r P) )(v)`                          -- (II) the RADIAL-TRANSPORT operator
+        `− G(v)·Σ_{k≤N} (Δ_g w_k)(v) t^k`                               -- (III) Δ_g of the coefficients
+        `− Σᵢⱼ (gⁱʲ − δⁱʲ)((∂ᵢG)(∂ⱼP)+(∂ⱼG)(∂ᵢP))(v)` .                 -- (IV) metric-deviation residue ⚠ CHECKPOINT
+    Piece (II) is exactly `∂_t P + t⁻¹ r∂_r P = Σ_k (k w_k + r∂_r w_k) t^{k−1}`, the flat-Gaussian
+    radial-transport operator whose order-`t^{k−1}` term is `(k + r∂_r)w_k` — precisely the LHS of the
+    DeWitt off-diagonal transport recursion `(k + r∂_r)w_k = Δ_g w_{k−1}`.  So the cross-gradient of
+    the curved Laplacian has been ABSORBED into the radial transport, converting J5a's diagonal-only
+    telescoping into a precise identity whose ONLY obstructions to full off-diagonal telescoping are
+    the two flagged residues:
+      • (I)  the flat-Gaussian CURVATURE term `(∂_t − Δ_g)G` off-diagonal — the metric-deviation of
+             the Laplacian acting on the Gaussian (needs the off-diagonal `Δ_g − Δ_flat` estimate);
+      • (IV) the metric-deviation of the cross-gradient, `Σᵢⱼ (gⁱʲ − δⁱʲ)(…)` (needs `gⁱʲ − δⁱʲ =
+             O(r²)` from RNC).
+    Both vanish at the diagonal (`v = 0`), recovering J5a; both are the genuine residue of J5-offdiag.
+    (Only coefficient smoothness `hw` is used; the metric is arbitrary.) -/
+theorem parametrixResidual_offdiag_absorbed (N : ℕ) (g gi : Point n → Fin n → Fin n → ℝ)
+    (Θ : Point n → ℝ) (u : ℕ → Point n → ℝ) (t : ℝ) (ht : 0 < t) (v : Point n)
+    (hw : ∀ k, ContDiff ℝ ⊤ (foldedCoeff Θ u k)) :
+    parametrixResidualN N g gi Θ u t v
+      = (deriv (fun s => gaussDdim s v) t - laplaceBeltrami g gi (gaussDdim t) v)
+          * (∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * t ^ k)
+        + gaussDdim t v
+            * (∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k v * ((k : ℝ) * t ^ (k - 1)))
+        + (1 / t) * gaussDdim t v
+            * radialDeriv (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) v
+        - gaussDdim t v
+            * (∑ k ∈ Finset.range (N + 1), laplaceBeltrami g gi (foldedCoeff Θ u k) v * t ^ k)
+        - (∑ i, ∑ j, (gi v i j - (if i = j then (1 : ℝ) else 0))
+            * (pd (fun y => gaussDdim t y) i v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) j v
+              + pd (fun y => gaussDdim t y) j v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) i v)) := by
+  -- split the curved cross-gradient into its metric-deviation part + the flat (δ) part
+  have hsplit : (∑ i, ∑ j, gi v i j
+        * (pd (fun y => gaussDdim t y) i v
+              * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) j v
+          + pd (fun y => gaussDdim t y) j v
+              * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) i v))
+      = (∑ i, ∑ j, (gi v i j - (if i = j then (1 : ℝ) else 0))
+          * (pd (fun y => gaussDdim t y) i v
+                * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) j v
+            + pd (fun y => gaussDdim t y) j v
+                * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) i v))
+        + (∑ i, ∑ j, (if i = j then (1 : ℝ) else 0)
+            * (pd (fun y => gaussDdim t y) i v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) j v
+              + pd (fun y => gaussDdim t y) j v
+                  * pd (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) i v)) := by
+    rw [← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    ring
+  rw [parametrixResidual_offdiag_decomp N g gi Θ u t ht v hw, hsplit,
+      flatCrossTerm_eq t ht
+        (fun y => ∑ k ∈ Finset.range (N + 1), foldedCoeff Θ u k y * t ^ k) v]
+  ring
 
 end QIQTH.HeatResidualBound
