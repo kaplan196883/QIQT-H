@@ -13094,5 +13094,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.crossGrad_eq_radial
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_offdiag_decomp
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_offdiag_absorbed
+-- J5-residue — the RNC METRIC-DEVIATION DECAY ESTIMATES (RNCDecay.lean): decay_order_one (f 0=0 + ‖fderiv f‖≤M on
+-- B(0,ρ) ⟹ |f v|≤M‖v‖, via the convex MVT Convex.norm_image_sub_le_of_norm_fderiv_le); fderiv_decay (gradient decay);
+-- decay_order_two (vanishing-to-2nd-order + C² + ‖fderiv²‖≤M ⟹ |f v|≤M‖v‖², crude M-constant not sharp M/2) +
+-- _order_one/two_radial (rncRadial restatements via ‖v‖≤rncRadial v).  ⚠ HONEST FIREWALL: the GENERAL vanishing-to-order-m
+-- decay estimates (reusable vector-calculus tool for the two J5-offdiag residues Γ=O(r), gⁱʲ−δⁱʲ=O(r²)); NOT yet the
+-- residue bounds themselves, NOT the residual bound, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.RNCDecay.decay_order_one
+#print axioms QIQTH.RNCDecay.decay_order_two
+#print axioms QIQTH.RNCDecay.decay_order_two_radial
 
 end QIQTH.AxiomAudit
