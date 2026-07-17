@@ -47,7 +47,10 @@ conditional and `a₁=R/6` is the carried G3 input. Checkpoint precisely at genu
   speed `‖v‖_{g(y)}`, so the geodesic distance `y → exp_y v` is `‖v‖`. Route: metric-compatibility of
   `geodesicField` (‖velocity‖ conserved) — check what `ExpMap.lean` gives.
 
-### J3 — the off-diagonal transport coefficients `QIQTH/RadialTransport.lean` (DEEP)
+### J3 — the off-diagonal transport coefficients `QIQTH/RadialTransport.lean` ✅ LANDED (`74323c99`, [AF] std-3)
+`radialTransportSolve k f v = ∫₀¹ s^(k−1) f(s•v) ds` + `radialTransportSolve_transport_eq` (`(k+r∂_r)u_k = f`, k≥1,
+ContDiff f, via ray chain rule + Leibniz-under-∫ + IBP — the clean no-singularity route) + `radialTransportSolve_one_const`.
+No checkpoints. — original spec:
 - The DeWitt transport recursion `(k + r∂_r)u_k = Θ^{1/2}Δ_g(Θ^{−1/2}u_{k−1})` solved ALONG RADIAL RAYS
   from `y` (a 1-D ODE in `r`), extending `DeWittDiagonal` (which has the diagonal `u_1=τ/6`) off-diagonal.
 
