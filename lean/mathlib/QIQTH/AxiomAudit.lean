@@ -13103,5 +13103,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCDecay.decay_order_one
 #print axioms QIQTH.RNCDecay.decay_order_two
 #print axioms QIQTH.RNCDecay.decay_order_two_radial
+-- J5-resbound — the RESIDUE DECAY BOUNDS (ResidueBound.lean): rncRadialSq_pow_mul_gaussDdim_le (the core multidim
+-- absorption (rncRadialSq v)^m·G ≤ 8^m m! t^m·G_wide, lifting C4a to the radial coord) + rncRadialCubed_mul_gaussDdim_le
+-- (odd r³ via √t, honest); residue_christoffel_bound (|Γ·∂ᵢG·w| ≤ 4MW·G_wide, the Γ=O(r) term) + residue_metricdev_bound
+-- (|(gⁱʲ−δⁱʲ)·∂ᵢG·∂ⱼw| ≤ (√3072 MW/2)√t·G_wide, the O(r²) term) + residue_pair_bound (combined, the "residual ≤ Gaussian"
+-- shape).  ⚠ HONEST FIREWALL: the residue decay bounds CARRYING the metric decay (Γ=O(r), gⁱʲ−δⁱʲ=O(r²)) ABSTRACTLY;
+-- the concrete PullbackMetric-jet sourcing + the full Σᵢⱼ assembly are downstream; NOT the concrete residual bound, NOT
+-- a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ResidueBound.rncRadialSq_pow_mul_gaussDdim_le
+#print axioms QIQTH.ResidueBound.residue_christoffel_bound
+#print axioms QIQTH.ResidueBound.residue_metricdev_bound
+#print axioms QIQTH.ResidueBound.residue_pair_bound
 
 end QIQTH.AxiomAudit

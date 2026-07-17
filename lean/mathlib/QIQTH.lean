@@ -805,6 +805,7 @@ import QIQTH.RadialTransport
 import QIQTH.HeatParametrixError
 import QIQTH.HeatParametrixOrder
 import QIQTH.HeatResidualBound
+import QIQTH.ResidueBound
 import QIQTH.HeatParametrixTrace
 import QIQTH.HeatParametrixTraceDerived
 import QIQTH.FlatTorusHeatKernel
