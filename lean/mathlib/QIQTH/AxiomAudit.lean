@@ -13147,5 +13147,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JacobianRadial.expJacobianDet_pos_nhds
 #print axioms QIQTH.JacobianRadial.jacobianDet_sq_eq
 #print axioms QIQTH.JacobianRadial.radialDeriv_log_det_split
+-- L1 — the GEODESIC VARIATIONAL EQUATION (GeodesicVariation.lean, the ODE-variational/Jacobi-equation campaign K3):
+-- IsGeodesicVariationAt (the predicate V'(t) = DF(γ(t))·V(t), coefficient = the honest fderiv of geodesicField);
+-- geodesicVariation_velocity_hasDerivAt (UNCONDITIONAL — the tangential/velocity variation V=γ' solves it, pure chain
+-- rule via hasFDerivAt_geodesicField_fderiv + the geodesic ODE); geodesicVariation_hasDerivAt (CONDITIONAL general
+-- variation, carrying the two genuine ODE-smooth-dependence-on-IC hyps: hV = the IC-derivative exists, hswap = the
+-- mixed-partial ∂_t∂_s=∂_s∂_t interchange — the chain-rule half is DISCHARGED).  ⚠ HONEST FIREWALL: Mathlib LACKS
+-- ODE-smooth-dependence-on-IC (confirmed: Analysis/ODE has only Picard-Lindelöf+Grönwall); this brick precisely ISOLATES
+-- that primitive as hV/hswap.  NOT the 2nd-order Jacobi equation (L2), NOT Raychaudhuri (L3), NOT a₁=R/6 (K6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicVariation_velocity_hasDerivAt
+#print axioms QIQTH.ExpMap.geodesicVariation_hasDerivAt
 
 end QIQTH.AxiomAudit
