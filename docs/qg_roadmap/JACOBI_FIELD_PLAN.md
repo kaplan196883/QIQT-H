@@ -71,3 +71,8 @@ kernel**; instantiate `SeeleyDeWittData`.
 One bg OPUS brick per phase; `#print axioms ⊆ std-3`; AxiomAudit pin (honest firewall); budget 0; commit +
 push (SEPARATE fast calls); update this plan + memory. `a₁=R/6` (true kernel) NOT claimed until K6. K3 is
 the genuine wall — decompose or checkpoint honestly; NEVER fake.
+
+### K progress (2026-07-17)
+- K1 ✅ (`6c31ba66`) pullback-det=(exp-Jacobian)² bridge (JacobianDet.lean).
+- K2 ✅ (`7e0bfa75`) exp-Jacobian radial structure + radial-log split (JacobianRadial.lean) — isolates r∂_r log J as the one unknown.
+- ⛔ K3 = THE TERMINAL WALL (confirmed by investigation): the r∂_r log J congruence ODE (Jacobi/Raychaudhuri for the exp-Jacobian DETERMINANT) needs the OFF-RADIAL Jacobian field / higher jets — documented as the Mathlib-absent smooth-dependence-on-IC gap in ExpMap.lean:998-1000. The repo has the radial 2-jet (⟹ diagonal R/6, DERIVED in J5-vanvleck) + the linear-variation residual, but the off-radial determinant ODE is the genuine research-grade wall. K4/K5/K6 blocked on it. HELD — no theatre brick at the wall.
