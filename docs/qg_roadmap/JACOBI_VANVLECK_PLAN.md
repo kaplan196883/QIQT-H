@@ -30,7 +30,9 @@ conditional and `a₁=R/6` is the carried G3 input. Checkpoint precisely at genu
 
 ## Phases (each an [AF] std-3 green checkpoint). New file(s) under `QIQTH/`.
 
-### J1 — the van-Vleck determinant `QIQTH/VanVleck.lean` (REACHABLE — first brick)
+### J1 — the van-Vleck determinant `QIQTH/VanVleck.lean` ✅ LANDED (`3c9662e6`, [AF] std-3)
+`vanVleck G v = (√det(G v))⁻¹` + `vanVleck_zero`/`_of_eq_one` (Θ(0)=1) + `vanVleck_expPullback_zero` (diagonal for
+`g̃=exp_p^*g` via `expPullbackMetric_at_zero`) + `vanVleck_pos` + `vanVleck_contDiffAt`. No checkpoints.
 - **`vanVleck g̃ v := (Real.sqrt (Matrix.det (g̃ v)))⁻¹`** — the van-Vleck–Morette determinant in RNC
   (volume distortion of `exp_y`), `Θ(exp_y v, y)`.
 - **`vanVleck_zero`**: `vanVleck g̃ 0 = 1` (since `g̃(0)=δ`, `det = 1`, `√1⁻¹ = 1`).
