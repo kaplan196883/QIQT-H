@@ -43,3 +43,7 @@ One bg OPUS brick per phase; `#print axioms ⊆ std-3`; AxiomAudit pin (honest f
 push (SEPARATE fast calls); update plan + memory. This is the Mathlib-absent ODE-smooth-dependence
 primitive — L2 (2nd-order variational) is the genuine wall; decompose or checkpoint honestly, NEVER fake.
 `a₁=R/6` NOT claimed until K6.
+
+### L progress (2026-07-17)
+- L1 LANDED (53b5dd74) GeodesicVariation.lean — the geodesic variational equation: UNCONDITIONAL for the velocity/tangential Jacobi field (V=gamma' solves V'=DF(gamma)V, chain rule); CONDITIONAL general variation isolating the Mathlib-absent ODE-smooth-dependence-on-IC primitive as 2 named hyps (hV: IC-derivative exists, hswap: mixed-partial interchange).
+- REMAINING = building ODE-smooth-dependence-on-IC unconditionally (discharge hV/hswap -> L2 2nd-order Jacobi eqn Y''=-RY -> L3 Raychaudhuri det ODE -> K4-K6). Mathlib LACKS this (Analysis/ODE = Picard-Lindelof + Gronwall only); it is a genuine multi-month Mathlib-PR-scale foundational build. The primitive is now precisely isolated. NATURAL TERMINAL CHECKPOINT of the loop-brick mode.
