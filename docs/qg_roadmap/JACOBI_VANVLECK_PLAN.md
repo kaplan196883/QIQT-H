@@ -65,7 +65,7 @@ No checkpoints. — original spec:
 **✅ J5a LANDED (`f8cfb79e`, [AF] std-3):** `parametrixResidual_telescope_N` — the FULL general-N residual telescoping
 `(∂_t−Δ_g)H_N(t,0) = −G(0)·Δ_g(Θ^{−1/2}u_N)(0)·t^N` AT THE DIAGONAL (v=0, exactly what the heat-trace a₁ needs) +
 `foldedCoeff`/`telescope_bracket`/`laplaceBeltrami_sum_pow`. ⚠ CHECKPOINT: diagonal only; off-diagonal blocked by the
-cross-gradient ⟨∇G,∇w⟩ term. **J5-offdiag (in flight):** the cross-gradient = radial-derivative identity
+cross-gradient ⟨∇G,∇w⟩ term. **✅ J5-offdiag LANDED (`a56021cf`):** the cross-gradient = radial-derivative identity
 `∑ᵢ ∂ᵢG ∂ᵢw = (−1/2t)G·(r∂_r w)` (the Euler field absorbs it — why the off-diagonal telescoping CAN work) + the
 off-diagonal telescoping, checkpointing the flat-Gaussian curvature term `(∂_t−Δ_g)G`. **J5b (todo):** the Gaussian
 bound on the tail via C4a/C4b. — original spec:
