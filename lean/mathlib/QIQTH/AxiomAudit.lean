@@ -13053,5 +13053,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RadialDistance.rncRadialSq_contDiff
 #print axioms QIQTH.RadialDistance.pd_rncRadialSq
 #print axioms QIQTH.RadialDistance.radialDeriv_rncRadialSq
+-- J3 — the RADIAL TRANSPORT SOLUTION OPERATOR (RadialTransport.lean): radialTransportSolve k f v = ∫₀¹ s^(k−1) f(s•v) ds
+-- (the DeWitt transport ODE solved along rays); radialTransportSolve_transport_eq = (k + r∂_r)(u_k) = f for k≥1,
+-- ContDiff f (PROVED via ray chain rule hasDerivAt_ray + Leibniz-under-∫ with a compactness dominating bound + IBP —
+-- the clean ∫₀¹ route, NO r^{−k} singularity); radialTransportSolve_one_const (u_0 base = 1).  ⚠ HONEST FIREWALL: the
+-- transport-equation solution OPERATOR (the engine for the off-diagonal u_k); NOT the full parametrix (J4), NOT the
+-- residual bound (J5), NOT a₁=R/6 (J6).  [AF] std-3.
+#print axioms QIQTH.RadialTransport.radialTransportSolve_transport_eq
+#print axioms QIQTH.RadialTransport.radialTransportSolve_one_const
 
 end QIQTH.AxiomAudit

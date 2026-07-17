@@ -799,6 +799,7 @@ import QIQTH.LaplaceBeltrami
 import QIQTH.HeatDuhamel
 import QIQTH.TrueHeatKernel
 import QIQTH.HeatTransportRecursion
+import QIQTH.RadialTransport
 import QIQTH.HeatParametrixError
 import QIQTH.HeatParametrixOrder
 import QIQTH.HeatParametrixTrace
