@@ -107,6 +107,7 @@ import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries
 import QIQTH.HeatParametrixAnsatz
+import QIQTH.ParametrixFunction
 import QIQTH.SpeciesCrossCheck
 import QIQTH.TowerGNS.FlowContinuity
 import QIQTH.TowerGNS.Generator

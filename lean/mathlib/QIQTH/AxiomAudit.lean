@@ -13061,5 +13061,15 @@ namespace QIQTH.AxiomAudit
 -- residual bound (J5), NOT a₁=R/6 (J6).  [AF] std-3.
 #print axioms QIQTH.RadialTransport.radialTransportSolve_transport_eq
 #print axioms QIQTH.RadialTransport.radialTransportSolve_one_const
+-- J4 — the PARAMETRIX FUNCTION ASSEMBLY (ParametrixFunction.lean): transportCoeff T = the concrete off-diagonal
+-- coefficient family (u_0=1, u_{k+1}=radialTransportSolve (k+1) (T u_k)); transportCoeff_succ_transport_eq = the DeWitt
+-- recursion (k+1+r∂_r)u_{k+1} = T u_k (via J3's radialTransportSolve_transport_eq, carries ContDiff (T u_k));
+-- heatParametrixFn N G T = heatParametrix N (vanVleck G) (transportCoeff T) (REUSES the existing ansatz — convention
+-- matched); heatParametrixFn_diagonal/_expansion/_a1 (diagonal value, u_0(0)=1 from transportCoeff_zero DERIVED, only
+-- u_1(0)=R/6 carried as the J6 input).  ⚠ HONEST FIREWALL: the parametrix ASSEMBLY + concrete transport coefficients;
+-- the transport SOURCE T (=Θ^{−1/2}Δ_g(Θ^{1/2}·)) is carried abstractly (Δ_g wiring = J5); NOT the residual bound (J5),
+-- NOT a₁=R/6 (J6).  [AF] std-3.
+#print axioms QIQTH.ParametrixFunction.transportCoeff_succ_transport_eq
+#print axioms QIQTH.ParametrixFunction.heatParametrixFn_diagonal_a1
 
 end QIQTH.AxiomAudit
