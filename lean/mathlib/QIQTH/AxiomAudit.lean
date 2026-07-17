@@ -13129,5 +13129,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VanVleckCancellation.transportSource_diag_eq_scalarCurv
 #print axioms QIQTH.VanVleckCancellation.transportCoeff_vanVleck_one_diag
 #print axioms QIQTH.VanVleckCancellation.heatParametrixFn_diagonal_a1_derived
+-- ═══ JACOBI-FIELD CAMPAIGN (JACOBI_FIELD_PLAN.md, the off-diagonal van-Vleck ODE / last wall, commissioned 2026-07-17) ═══
+-- K1 — the PULLBACK-DET = (exp-Jacobian)² BRIDGE (JacobianDet.lean): expPullbackMetric IS definitionally the honest
+-- pullback Jᵀ(g∘exp)J (KEY finding); expJacobianMat/Det (D exp_p as a matrix + its det J, J(0)=1); expPullbackMetric_eq_jacMul
+-- (g̃ = Jᵀ(g∘exp)J) + det_expPullback_eq (det g̃ = J²·det(g∘exp), via det_mul/det_transpose).  Bridges the van-Vleck
+-- Θ=(det g̃)^{−1/2} to the exp-map Jacobian J (whose radial ODE = the Jacobi equation K3).  ⚠ HONEST FIREWALL: the
+-- algebraic van-Vleck↔exp-Jacobian bridge; NOT the Jacobi equation (K3, the wall), NOT the van-Vleck ODE (K4), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianDet.expJacobianDet_zero
+#print axioms QIQTH.JacobianDet.expPullbackMetric_eq_jacMul
+#print axioms QIQTH.JacobianDet.det_expPullback_eq
 
 end QIQTH.AxiomAudit
