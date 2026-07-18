@@ -13216,5 +13216,15 @@ namespace QIQTH.AxiomAudit
 -- (needs matrix Jacobi field + inverse + singular-at-center limit — the labelled checkpoint), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesicDeviation_trace_eq_ricci
 #print axioms QIQTH.ExpMap.covariantJacobi_trace_at_center
+-- K4-leading (directional van-Vleck 2-jet, off-diagonal) — VanVleckRadial.lean: radialDeriv_quadraticForm (UNCONDITIONAL —
+-- Euler's identity: the radial/Euler derivative r∂_r of a general quadratic form ∑ab c_ab w^a w^b equals 2× the form) +
+-- sqrtdet_directional_hessian_ricci (∑cd v^c v^d ∂_c∂_d √det g(0) = −(1/3)∑cd Ric_cd v^c v^d — the LEADING OFF-DIAGONAL
+-- van-Vleck curvature coefficient in ALL directions, from RNCExpansion.sqrtdet_pd_pd's metric 2-jet; carries hg/hg0/hdg0/htr
+-- exactly as sqrtdet_pd_pd, htr load-bearing).  ⚠ HONEST FIREWALL: the LEADING (2-jet) directional term ONLY — obtained
+-- algebraically from the RNC metric 2-jet WITHOUT any matrix Jacobi field / Y⁻¹.  NOT the uniform-in-v van-Vleck radial ODE
+-- (r∂_r) log √det g̃ that cancels the off-diagonal O(1/t) term (needs the exp-map Jacobian radial structure = the singular
+-- matrix Jacobi field, the Mathlib-absent wall at the end of VanVleckCancellation.lean), NOT a₁=R/6 for the true kernel.  [AF] std-3.
+#print axioms QIQTH.VanVleckRadial.radialDeriv_quadraticForm
+#print axioms QIQTH.VanVleckRadial.sqrtdet_directional_hessian_ricci
 
 end QIQTH.AxiomAudit
