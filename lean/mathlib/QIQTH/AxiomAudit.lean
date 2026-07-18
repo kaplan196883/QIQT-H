@@ -13190,14 +13190,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_eq_jacobiOperator
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_centered
--- L2c (partial — #1/#2) — the COVARIANT-DERIVATIVE MACHINERY (CovariantJacobi.lean): covariantDerivAlong (the covariant
+-- L2c (#1/#2) — the COVARIANT-DERIVATIVE MACHINERY (CovariantJacobi.lean): covariantDerivAlong (the covariant
 -- derivative Dξ/dτ of a vector field along a curve, (Dξ/dτ)^i = (ξ^i)' + ∑Γⁱⱼₖ(γ)(γ^j)'ξ^k) + covariantSecondDeriv
--- (D²ξ/dτ², apply twice) + _apply expansions + hasDerivAt_comp_curve (ray chain rule).  Salvaged from the L2c agent
--- that died mid-#3 (partial file BUILT green; stray probe removed, docstring corrected to not overclaim #3).  ⚠ HONEST
--- FIREWALL: the covariant-derivative MACHINERY only; the covariant Jacobi equation D²ξ/dτ²=−R(ξ,v)v (#3) is NOT proved
--- here — it is the L2c continuation.  NOT Raychaudhuri (L3), NOT a₁=R/6.  [AF] std-3.
+-- (D²ξ/dτ², apply twice) + _apply expansions + hasDerivAt_comp_curve (ray chain rule).  [AF] std-3.
 #print axioms QIQTH.ExpMap.covariantDerivAlong_apply
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_apply
 #print axioms QIQTH.ExpMap.hasDerivAt_comp_curve
+-- L2c (#3 — CENTERED) — the COVARIANT JACOBI EQUATION AT AN RNC CENTER (CovariantJacobi.lean):
+-- covariantSecondDeriv_at_center (the KEY INSIGHT: even where Γ=0, D²ξ/dτ² = −jacobiOperator + ∑(∑∂ₐΓⁱⱼₖ·vᵃ)vʲξᵏ —
+-- the surviving ∂Γ correction from differentiating the connection term Γ(v,ξ)) + covariantJacobi_finset_match (the
+-- ∂Γ-antisymmetrization index identity via Γ-lower-symm + v-symm) + covariant_jacobi_equation_centered (the deliverable
+-- D²ξ/dτ² = −R(ξ,v)v = −riemannGeodesicDeviation, at Γ=0).  Carried hyps (hgsymm, hC, geodesic ODE hγ, variational ODE
+-- hVar, RNC-center gauge hΓ0) are genuine, non-vacuous — NONE assume the conclusion.  ⚠ HONEST FIREWALL: this is the
+-- CENTERED case ONLY.  NOT the off-center covariant Jacobi identity (general Γ≠0 — the labelled checkpoint), NOT
+-- Raychaudhuri / r∂_r log J (L3), NOT a₁=R/6 (K6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_at_center
+#print axioms QIQTH.ExpMap.covariantJacobi_finset_match
+#print axioms QIQTH.ExpMap.covariant_jacobi_equation_centered
 
 end QIQTH.AxiomAudit
