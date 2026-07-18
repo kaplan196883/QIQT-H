@@ -1,4 +1,7 @@
 import QIQTH.Curvature
+import QIQTH.ExpMap
+import QIQTH.JacobiEquation
+import QIQTH.CovariantJacobi
 
 /-!
 # Raychaudhuri focusing — the geometry behind Jacobson's front half
@@ -282,3 +285,104 @@ theorem raychaudhuri_focusing_at_equilibrium (g gi : Point n → Fin n → Fin n
   rw [raychaudhuri_geodesic g gi hsymm V hVC hC hgeo x, hequil, neg_zero, zero_sub]
 
 end QIQTH.Curvature
+
+/-!
+## Phase L3 addendum — the Ricci SOURCE TERM via the (covariant) Jacobi-field route
+
+The section above builds Raychaudhuri via the Ricci identity / covariant divergence of a vector
+field.  This addendum lands the SAME `−Ric(v,v)` source through the ODE-variational (Jacobi-field)
+machinery of `QIQTH/JacobiEquation.lean` + `QIQTH/CovariantJacobi.lean`, which is the branch on the
+critical path to the diagonal heat-kernel structure.  Two axiom-clean bricks (no `sorry`):
+
+* `geodesicDeviation_trace_eq_ricci` — UNCONDITIONAL: the trace over the coordinate basis of the
+  geodesic-deviation ("Jacobi") operator `ξ ↦ R(ξ,v)v` equals the Ricci quadratic form
+  `∑_{σν} R_{σν} v^σ v^ν`.  This is the whole "relate the deviation operator to Ricci" content.
+
+* `covariantJacobi_trace_at_center` — the traced centred covariant Jacobi equation over a
+  basis-aligned family of Jacobi variations equals `−Ric(v,v)` — the Raychaudhuri source term.
+
+⚠ SCOPE (what these are NOT): NOT the full Raychaudhuri congruence ODE `θ' + θ²/(n−1) + Ric = 0`
+(the shear/expansion square and the `θ'` evolution need the matrix Jacobi field, not the traced
+pointwise identity); NOT the `θ = r ∂_r log J = tr(Y⁻¹ Y')` determinant-ODE connection to K1/K2's
+`det g̃ = J² · det(g∘exp)` (that needs the matrix Jacobi field, its inverse, and the
+singular-at-centre limit — the labelled checkpoint); NOT `a₁ = R/6`.  All carried hypotheses of
+`covariantJacobi_trace_at_center` are genuine and mirror `covariant_jacobi_equation_centered`
+verbatim — none assume the conclusion; `geodesicDeviation_trace_eq_ricci` has no hypotheses beyond
+`g, gi, x, v`.
+-/
+
+namespace QIQTH.ExpMap
+
+open QIQTH.Curvature QIQTH.Geodesic
+open Finset Topology
+
+set_option maxHeartbeats 4000000
+
+variable {n : ℕ}
+
+/-- **Trace identity (unconditional).**  The trace over the coordinate basis `e_i` of the
+    geodesic-deviation operator `ξ ↦ R(ξ,v)v` equals the Ricci quadratic form `Ric(v,v)`:
+      `∑ i, [R(e_i, v)v]^i  =  ∑_{σν} R_{σν} v^σ v^ν`.
+    The basis vector `e_i = (fun k => if k = i then 1 else 0)` collapses the `μ`-sum of
+    `riemannGeodesicDeviation` to `μ = i`, and `∑_i R^i_{σ i ν} = R_{σν}` is the Ricci contraction.
+    No regularity or gauge hypotheses — pure finite-sum algebra. -/
+theorem geodesicDeviation_trace_eq_ricci (g gi : Point n → Fin n → Fin n → ℝ) (x v : Point n) :
+    ∑ i, riemannGeodesicDeviation g gi x v (fun k => if k = i then (1:ℝ) else 0) i
+      = ∑ σ, ∑ ν, ricci g gi σ ν x * v σ * v ν := by
+  -- Collapse the basis vector inside each `i`-summand: `μ`-sum picks out `μ = i`.
+  have key : ∀ i, riemannGeodesicDeviation g gi x v (fun k => if k = i then (1:ℝ) else 0) i
+      = ∑ σ, ∑ ν, riemann g gi i σ i ν x * v σ * v ν := by
+    intro i
+    simp only [riemannGeodesicDeviation, mul_ite, mul_one, mul_zero, ite_mul, zero_mul]
+    refine Finset.sum_congr rfl (fun σ _ => ?_)
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl (fun ν _ => ?_)
+    rw [Finset.sum_ite_eq']
+    simp
+  simp only [key, ricci, Finset.sum_mul]
+  -- Reorder `∑ i ∑ σ ∑ ν  →  ∑ σ ∑ ν ∑ i` to match the Ricci contraction `∑_i R^i_{σiν}`.
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun σ _ => ?_)
+  rw [Finset.sum_comm]
+
+/-- **Traced centred covariant Jacobi equation = the Raychaudhuri source term.**
+    For a geodesic `γ = (x,v)` (`hγ`) at a Riemann-normal-coordinate centre
+    (`hΓ0 : Γ(γ t).1 = 0`), and a FAMILY `V : Fin n → (ℝ → Point×Point)` of Jacobi variations
+    (`hVar`) whose i-th position variation is the i-th coordinate basis vector at the base time `t`
+    (`hbasis`), the trace of the covariant second derivatives equals minus the Ricci quadratic form
+    of the velocity:
+      `∑ i, [D²(V i)/dτ²]^i  =  −∑_{σν} R_{σν}(γ t) v^σ v^ν`   (`v = γ'`).
+    Applies `covariant_jacobi_equation_centered` to each `V i` (`D²(V i)/dτ² = −R(·,v)v`), reads off
+    the i-th component, substitutes the basis alignment `hbasis`, and closes with the trace identity
+    `geodesicDeviation_trace_eq_ricci`.  The `−Ric(v,v)` source term of the Raychaudhuri congruence
+    equation.  Regularity/gauge inputs carried verbatim from the centred covariant Jacobi equation —
+    none assume the conclusion. -/
+theorem covariantJacobi_trace_at_center (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (hgsymm : ∀ y a b, g y a b = g y b a)
+    {γ : ℝ → Point n × Point n} {V : Fin n → (ℝ → Point n × Point n)} {t : ℝ}
+    (hγ : ∀ τ, HasDerivAt γ (geodesicField g gi (γ τ)) τ)
+    (hVar : ∀ i, ∀ τ, IsGeodesicVariationAt g gi γ (V i) τ)
+    (hΓ0 : ∀ i j k, christoffel g gi i j k (γ t).1 = 0)
+    (hbasis : ∀ i, (V i t).1 = (fun k => if k = i then (1:ℝ) else 0)) :
+    ∑ i, covariantSecondDeriv g gi (fun τ => (γ τ).1) (fun τ => (V i τ).1) t i
+      = - ∑ σ, ∑ ν, ricci g gi σ ν (γ t).1 * (γ t).2 σ * (γ t).2 ν := by
+  -- Per-field covariant Jacobi equation, i-th component, with the basis substitution.
+  have step : ∀ i, covariantSecondDeriv g gi (fun τ => (γ τ).1) (fun τ => (V i τ).1) t i
+      = - riemannGeodesicDeviation g gi (γ t).1 (γ t).2
+          (fun k => if k = i then (1:ℝ) else 0) i := by
+    intro i
+    have h := congrFun (covariant_jacobi_equation_centered g gi hC hgsymm hγ (hVar i) hΓ0) i
+    rw [Pi.neg_apply] at h
+    rw [h, hbasis i]
+  calc ∑ i, covariantSecondDeriv g gi (fun τ => (γ τ).1) (fun τ => (V i τ).1) t i
+      = ∑ i, - riemannGeodesicDeviation g gi (γ t).1 (γ t).2
+                (fun k => if k = i then (1:ℝ) else 0) i :=
+        Finset.sum_congr rfl (fun i _ => step i)
+    _ = - ∑ i, riemannGeodesicDeviation g gi (γ t).1 (γ t).2
+                (fun k => if k = i then (1:ℝ) else 0) i := by
+        rw [Finset.sum_neg_distrib]
+    _ = - ∑ σ, ∑ ν, ricci g gi σ ν (γ t).1 * (γ t).2 σ * (γ t).2 ν := by
+        rw [geodesicDeviation_trace_eq_ricci g gi (γ t).1 (γ t).2]
+
+end QIQTH.ExpMap

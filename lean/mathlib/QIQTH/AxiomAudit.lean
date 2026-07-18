@@ -13207,5 +13207,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_at_center
 #print axioms QIQTH.ExpMap.covariantJacobi_finset_match
 #print axioms QIQTH.ExpMap.covariant_jacobi_equation_centered
+-- L3 (Ricci SOURCE term) — the Raychaudhuri source via the covariant Jacobi-field route (Raychaudhuri.lean addendum,
+-- namespace QIQTH.ExpMap): geodesicDeviation_trace_eq_ricci (UNCONDITIONAL — the trace over the coordinate basis of the
+-- geodesic-deviation operator ξ↦R(ξ,v)v equals the Ricci quadratic form ∑σν R_σν v^σ v^ν) + covariantJacobi_trace_at_center
+-- (the traced CENTERED covariant Jacobi eqn over a basis-aligned Jacobi congruence = −Ric(v,v)).  ⚠ HONEST FIREWALL: the
+-- Ricci SOURCE TERM only.  NOT the full Raychaudhuri congruence ODE θ'+θ²/(n−1)+Ric=0 (needs the matrix Jacobi field, not
+-- the traced pointwise identity), NOT the θ=r∂_r log J=tr(Y⁻¹Y') determinant-ODE connection to K1/K2 det g̃=J²·det(g∘exp)
+-- (needs matrix Jacobi field + inverse + singular-at-center limit — the labelled checkpoint), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicDeviation_trace_eq_ricci
+#print axioms QIQTH.ExpMap.covariantJacobi_trace_at_center
 
 end QIQTH.AxiomAudit
