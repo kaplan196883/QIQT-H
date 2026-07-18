@@ -734,6 +734,7 @@ import QIQTH.LeviCivita
 import QIQTH.ClausiusIntegral
 import QIQTH.ClausiusToPernull
 import QIQTH.Raychaudhuri
+import QIQTH.RaychaudhuriConstCurv
 import QIQTH.Unruh
 import QIQTH.FQBoundConditional
 import QIQTH.FQBoundCGP

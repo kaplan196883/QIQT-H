@@ -13226,5 +13226,17 @@ namespace QIQTH.AxiomAudit
 -- matrix Jacobi field, the Mathlib-absent wall at the end of VanVleckCancellation.lean), NOT a₁=R/6 for the true kernel.  [AF] std-3.
 #print axioms QIQTH.VanVleckRadial.radialDeriv_quadraticForm
 #print axioms QIQTH.VanVleckRadial.sqrtdet_directional_hessian_ricci
+-- CONSTANT-CURVATURE model — the EXACT van-Vleck/Raychaudhuri radial ODE (RaychaudhuriConstCurv.lean): from the scalar
+-- Jacobi ODE S''=−K·S, the geodesic-deviation log-derivative u=S'/S satisfies the EXACT Riccati u'=−K−u² (all orders, not
+-- just the 2-jet) — jacobi_logderiv_riccati; θ=(n−1)u obeys the Raychaudhuri ODE θ'=(n−1)(−K−u²) (division-free) and the
+-- textbook θ'=−(n−1)K−θ²/(n−1) (hn:2≤n) — raychaudhuri_constant_curvature[_theta]; jacobiOde_sin witnesses the unit sphere
+-- (K=1) realizes the hypotheses.  This CLOSES the uniform-in-r (all-orders) van-Vleck radial ODE EXACTLY for the canonical
+-- CONSTANT-curvature model, WITHOUT any matrix Jacobi field / Y⁻¹ ((n−1)K = Ric(∂_r,∂_r), tying to L3's Ricci source term).
+-- ⚠ HONEST FIREWALL: the CONSTANT-curvature model ONLY.  NOT the general variable-curvature true heat kernel (still needs the
+-- off-radial matrix Jacobi field + Y⁻¹, the Mathlib-absent wall), NOT a₁=R/6 in general.  [AF] std-3.
+#print axioms QIQTH.RaychaudhuriConstCurv.jacobi_logderiv_riccati
+#print axioms QIQTH.RaychaudhuriConstCurv.raychaudhuri_constant_curvature
+#print axioms QIQTH.RaychaudhuriConstCurv.raychaudhuri_constant_curvature_theta
+#print axioms QIQTH.RaychaudhuriConstCurv.jacobiOde_sin
 
 end QIQTH.AxiomAudit
