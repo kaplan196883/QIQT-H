@@ -13226,6 +13226,17 @@ namespace QIQTH.AxiomAudit
 -- matrix Jacobi field, the Mathlib-absent wall at the end of VanVleckCancellation.lean), NOT a₁=R/6 for the true kernel.  [AF] std-3.
 #print axioms QIQTH.VanVleckRadial.radialDeriv_quadraticForm
 #print axioms QIQTH.VanVleckRadial.sqrtdet_directional_hessian_ricci
+-- K4-leading (cont.) — the leading van-Vleck radial ODE in EXACT POLYNOMIAL form (VanVleckRadial.lean): sqrtdet_pd_zero
+-- (the linear Taylor term ∂_c√det g(0)=0 at the RNC center, from det_pd_first) + sqrtdet_taylorModel_radialDeriv_ricci
+-- (radialDeriv of the quadratic Taylor MODEL of √det g, w↦1+½∑cd(∂_c∂_d√det g(0))w^c w^d, equals −(1/3)∑cd Ric_cd v^c v^d —
+-- the leading van-Vleck radial ODE, gluing radialDeriv_quadraticForm + sqrtdet_directional_hessian_ricci; carries hg/hg0/hdg0/htr).
+-- Helpers radialDeriv_add_const_scalar ((r∂_r)(a+k·Q)=k·(r∂_r)Q) + radialDeriv_taylorModel_quadratic (generic model Euler identity).
+-- ⚠ HONEST FIREWALL: the leading 2-jet term of the quadratic Taylor MODEL of √det g — NOT √det g itself beyond its 2-jet,
+-- NOT the uniform-in-v all-orders van-Vleck radial ODE (off-radial Jacobi Y⁻¹ wall), NOT a₁=R/6 for the true kernel.  [AF] std-3.
+#print axioms QIQTH.VanVleckRadial.sqrtdet_pd_zero
+#print axioms QIQTH.VanVleckRadial.sqrtdet_taylorModel_radialDeriv_ricci
+#print axioms QIQTH.VanVleckRadial.radialDeriv_add_const_scalar
+#print axioms QIQTH.VanVleckRadial.radialDeriv_taylorModel_quadratic
 -- CONSTANT-CURVATURE model — the EXACT van-Vleck/Raychaudhuri radial ODE (RaychaudhuriConstCurv.lean): from the scalar
 -- Jacobi ODE S''=−K·S, the geodesic-deviation log-derivative u=S'/S satisfies the EXACT Riccati u'=−K−u² (all orders, not
 -- just the 2-jet) — jacobi_logderiv_riccati; θ=(n−1)u obeys the Raychaudhuri ODE θ'=(n−1)(−K−u²) (division-free) and the

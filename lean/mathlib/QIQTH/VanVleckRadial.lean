@@ -177,4 +177,88 @@ theorem sqrtdet_directional_hessian_ricci (g : Point n → Fin n → Fin n → �
   rw [sqrtdet_pd_pd g Ric hg hg0 hdg0 htr c d]
   ring
 
+/-! ### The leading van-Vleck radial ODE in exact quadratic-Taylor-model form -/
+
+/-- **Radial (Euler) derivative of a constant-plus-scaled field**: `(r ∂_r)(a + k·Q) = k·(r ∂_r) Q`.
+    The additive constant drops (`∂ᵢ const = 0`) and the scalar pulls through the Euler operator. -/
+theorem radialDeriv_add_const_scalar (Q : Point n → ℝ) (a k : ℝ) (v : Point n)
+    (hQ : ∀ i, PdiffAt Q i v) :
+    radialDeriv (fun w => a + k * Q w) v = k * radialDeriv Q v := by
+  simp only [radialDeriv]
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  have hconst : PdiffAt (fun _ : Point n => a) i v := by exact differentiableAt_const a
+  have hkQ : PdiffAt (fun w => k * Q w) i v := PdiffAt_const_mul k Q i v (hQ i)
+  rw [pd_add (fun _ => a) (fun w => k * Q w) i v hconst hkQ,
+      pd_const a i v, zero_add, pd_const_mul k Q i v (hQ i)]
+  ring
+
+/-- **The radial derivative of the quadratic Taylor MODEL** `w ↦ 1 + ½ ∑_{cd} C_{cd} wᶜwᵈ`
+    equals the directional contraction `∑_{cd} C_{cd} vᶜvᵈ` of its Hessian coefficient `C`.
+    (The constant `1` drops, and Euler's identity `radialDeriv_quadraticForm` supplies the factor
+    `2`, which the `½` cancels.)  UNCONDITIONAL in `C`. -/
+theorem radialDeriv_taylorModel_quadratic (C : Fin n → Fin n → ℝ) (v : Point n) :
+    radialDeriv (fun w => 1 + (1 / 2) * ∑ c, ∑ d, C c d * w c * w d) v
+      = ∑ c, ∑ d, C c d * v c * v d := by
+  have hPdQ : ∀ i, PdiffAt (fun w => ∑ c, ∑ d, C c d * w c * w d) i v := by
+    intro i
+    refine PdiffAt_sum Finset.univ _ i v (fun c _ =>
+      PdiffAt_sum Finset.univ _ i v (fun d _ => ?_))
+    exact PdiffAt_of_contDiff (fun w => C c d * w c * w d)
+      ((contDiff_const.mul (coord_contDiff c)).mul (coord_contDiff d)) i v
+  have step1 :
+      radialDeriv (fun w => 1 + (1 / 2) * ∑ c, ∑ d, C c d * w c * w d) v
+        = (1 / 2) * radialDeriv (fun w => ∑ c, ∑ d, C c d * w c * w d) v :=
+    radialDeriv_add_const_scalar (fun w => ∑ c, ∑ d, C c d * w c * w d) 1 (1 / 2) v hPdQ
+  rw [step1, radialDeriv_quadraticForm C v]; ring
+
+/-- **Deliverable 1 — the linear Taylor term of `√det g` vanishes at the RNC centre.**
+    At the normal-coordinate origin `det g (0) = det 1 = 1 ≠ 0`, so `√ ∘ det g` is differentiable
+    there; the chain rule gives `∂_c √det g (0) = (∂_c det g (0))/(2√det g(0))`, and the numerator
+    `∂_c det g (0)` vanishes because the metric's first jet vanishes (`det_pd_first`). -/
+theorem sqrtdet_pd_zero (g : Point n → Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0) (c : Fin n) :
+    pd (fun y => Real.sqrt (Matrix.det (g y))) c 0 = 0 := by
+  have hg0mat : g 0 = (1 : Matrix (Fin n) (Fin n) ℝ) := by
+    funext i j; exact hg0 i j
+  have hne : Matrix.det (g 0) ≠ 0 := by rw [hg0mat, Matrix.det_one]; norm_num
+  rw [pd_comp_sqrt (fun w => Matrix.det (g w)) c 0
+        (PdiffAt_of_contDiff _ (det_contDiff g hg) c 0) hne,
+      det_pd_first g hg hdg0 c, mul_zero]
+
+/-- **Deliverable 2 — the leading van-Vleck radial ODE, exact polynomial form.**
+    Let `M w := 1 + ½ ∑_{cd} (∂_c∂_d √det g (0)) wᶜwᵈ` be the quadratic Taylor MODEL of `√det g`
+    at the RNC centre: its constant is `√det g(0) = 1`, its linear term vanishes
+    (`sqrtdet_pd_zero`), and its Hessian is the exact 2-jet `∂_c∂_d √det g (0)`.  Then the radial
+    (Euler) derivative of this model is the leading van-Vleck curvature term
+    `(r ∂_r) M = −(1/3) Ric(v,v)`, obtained by gluing the model-quadratic Euler identity
+    `radialDeriv_taylorModel_quadratic` to the directional Hessian↔Ricci contraction
+    `sqrtdet_directional_hessian_ricci`.  The four carried hypotheses (`hg`, `hg0`, `hdg0`, `htr`)
+    are genuine equations on the metric — none assumes the conclusion.  This is the leading 2-jet
+    term only; NOT `√det g` beyond its 2-jet, NOT the uniform-in-`v` all-orders radial ODE, NOT
+    `a₁ = R/6` for the true kernel. -/
+theorem sqrtdet_taylorModel_radialDeriv_ricci (g : Point n → Fin n → Fin n → ℝ)
+    (Ric : Fin n → Fin n → ℝ)
+    (hg : ∀ a b, ContDiff ℝ ⊤ (fun y => g y a b))
+    (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
+    (hdg0 : ∀ a b e, pd (fun y => g y a b) e 0 = 0)
+    (htr : ∀ c d, (∑ a, pd (fun y => pd (fun w => g w a a) d y) c 0) = -(2 / 3) * Ric c d)
+    (v : Point n) :
+    radialDeriv (fun w => 1 + (1 / 2) * ∑ c, ∑ d,
+        (pd (fun y => pd (fun w' => Real.sqrt (Matrix.det (g w'))) d y) c 0) * w c * w d) v
+      = -(1 / 3) * ∑ c, ∑ d, Ric c d * v c * v d := by
+  have hmodel :
+      radialDeriv (fun w => 1 + (1 / 2) * ∑ c, ∑ d,
+          (pd (fun y => pd (fun w' => Real.sqrt (Matrix.det (g w'))) d y) c 0) * w c * w d) v
+        = ∑ c, ∑ d,
+          (pd (fun y => pd (fun w' => Real.sqrt (Matrix.det (g w'))) d y) c 0) * v c * v d :=
+    radialDeriv_taylorModel_quadratic
+      (fun c d => pd (fun y => pd (fun w' => Real.sqrt (Matrix.det (g w'))) d y) c 0) v
+  rw [hmodel]
+  have key := sqrtdet_directional_hessian_ricci g Ric hg hg0 hdg0 htr v
+  rw [← key]
+  exact Finset.sum_congr rfl (fun c _ => Finset.sum_congr rfl (fun d _ => by ring))
+
 end QIQTH.VanVleckRadial
