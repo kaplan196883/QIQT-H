@@ -13293,5 +13293,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MatrixRaychaudhuri.hasDerivAt_matrix_inv
 #print axioms QIQTH.MatrixRaychaudhuri.matrix_riccati
 #print axioms QIQTH.MatrixRaychaudhuri.trace_raychaudhuri
+-- M2b-1 (off-radial matrix Jacobi campaign, parallel-FRAME route through the off-center covariant-Jacobi wall) — the
+-- PARALLEL-TRANSPORT ISOMETRY (ParallelTransport.lean): parallel_metricInner_const proves d/dτ(∑_ab g_ab(γ)·e_a·f_b) = 0 for
+-- vector fields e,f PARALLEL along γ (covariantDerivAlong = 0, carried as hep/hfp), from metric_compat's ∂g=Γg+Γg identity +
+-- the parallel condition, via a full pairwise Finset cancellation of the Γ-terms (closed to 0, no checkpoint).  So parallel
+-- transport is an ISOMETRY and an orthonormal frame stays orthonormal — the foundation of the parallel-frame route to the
+-- clean matrix Jacobi eqn Ỹ''=−R̃Ỹ.  ⚠ HONEST FIREWALL: the isometry only — e,f carried as parallel (NOT constructed:
+-- existence = M2b-2); NOT the frame Jacobi eqn (M2b-3), NOT tr R̃=Ric (M2b-4), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ParallelTransport.parallel_metricInner_const
 
 end QIQTH.AxiomAudit
