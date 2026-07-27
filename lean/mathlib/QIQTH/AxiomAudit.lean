@@ -13268,5 +13268,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MatrixJacobi.hadamardFactor_det_ne_zero_eventually
 #print axioms QIQTH.MatrixJacobi.hadamardFactor_isUnit_eventually
 #print axioms QIQTH.MatrixJacobi.matrixJacobi_regularized
+-- M3 (off-radial matrix Jacobi campaign) — the DETERMINANT / LOG SPLIT (MatrixJacobi.lean): det_matrixJacobi_eq
+-- ((Y τ).det = τ^n · (hadamardFactor Y' τ).det, via Matrix.det_smul) + log_det_matrixJacobi_split (Real.log((Y τ).det) =
+-- n·log τ + log((hadamardFactor Y' τ).det) for τ≠0, det W≠0) — isolating the SINGULAR radial n·log τ from the FINITE
+-- curvature term log det W.  ⚠ HONEST FIREWALL: the ABSTRACT det/log split only — does NOT identify Y with D exp_p (M2b),
+-- NOT the K1/K2 det g̃ bridge, NOT the van-Vleck radial ODE (M4), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.MatrixJacobi.det_matrixJacobi_eq
+#print axioms QIQTH.MatrixJacobi.log_det_matrixJacobi_split
 
 end QIQTH.AxiomAudit

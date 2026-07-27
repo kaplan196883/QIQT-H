@@ -76,4 +76,45 @@ theorem matrixJacobi_regularized
   ⟨fun τ => hadamardFactor_smul hY hY'c hY0 τ,
     hadamardFactor_isUnit_eventually Y' hY'c h0⟩
 
+/-! ### M3 — determinant / log split
+
+The Hadamard factorization `Y τ = τ • W τ` (with `W = hadamardFactor Y'`) passes to the
+**determinant**, giving `det (Y τ) = τ ^ n · det (W τ)`, and — taking logs where everything is
+nonzero — to the additive **log split**
+`log det (Y τ) = n · log τ + log det (W τ)`.
+
+This isolates the **singular radial term** `n · log τ` (the flat/radial expansion of the full
+Jacobian determinant, which diverges as `τ → 0`) from the **finite curvature part** `log det W`
+(regular at the centre since `det (W 0) = det (Y' 0)`).  It is exactly the structural separation the
+van-Vleck / Raychaudhuri radial ODE (phase M4) needs.
+
+Honest scope: this is the **abstract** det/log split for a curve `Y` with `Y 0 = 0`.  It does **not**
+supply the geometric identification `Y = D exp_p` (phase M2b), so it does **not** yet bridge to the
+geodesic Jacobian identity `det g̃ = J² · det (g ∘ exp)` (K1/K2); nor does it build the van-Vleck
+radial ODE (M4) or the heat-kernel coefficient `a₁ = R/6` (M6). -/
+
+/-- **Determinant of the matrix Jacobi field.**  From the Hadamard factorization `Y τ = τ • W τ`
+(`hadamardFactor_smul`) and `det (c • M) = c ^ (card) * det M` (`Matrix.det_smul`, with
+`Fintype.card (Fin n) = n`), the determinant factors as
+`det (Y τ) = τ ^ n * det (hadamardFactor Y' τ)`. -/
+theorem det_matrixJacobi_eq
+    (Y Y' : ℝ → Matrix (Fin n) (Fin n) ℝ) (hY : ∀ τ, HasDerivAt Y (Y' τ) τ)
+    (hY'c : Continuous Y') (hY0 : Y 0 = 0) (τ : ℝ) :
+    (Y τ).det = τ ^ n * (QIQTH.HadamardFactor.hadamardFactor Y' τ).det := by
+  rw [hadamardFactor_smul hY hY'c hY0 τ, Matrix.det_smul, Fintype.card_fin]
+
+/-- **Log split of the Jacobi determinant.**  Where `τ ≠ 0` and `det (hadamardFactor Y' τ) ≠ 0`,
+taking logs of `det (Y τ) = τ ^ n * det W` (`det_matrixJacobi_eq`) via `Real.log_mul` and
+`Real.log_pow` gives the additive split
+`log det (Y τ) = n · log τ + log det (hadamardFactor Y' τ)`.
+The first summand `n · log τ` is the **singular radial** part; the second is the **finite curvature**
+part. -/
+theorem log_det_matrixJacobi_split
+    (Y Y' : ℝ → Matrix (Fin n) (Fin n) ℝ) (hY : ∀ τ, HasDerivAt Y (Y' τ) τ)
+    (hY'c : Continuous Y') (hY0 : Y 0 = 0) {τ : ℝ} (hτ : τ ≠ 0)
+    (hW : (QIQTH.HadamardFactor.hadamardFactor Y' τ).det ≠ 0) :
+    Real.log ((Y τ).det)
+      = (n : ℝ) * Real.log τ + Real.log ((QIQTH.HadamardFactor.hadamardFactor Y' τ).det) := by
+  rw [det_matrixJacobi_eq Y Y' hY hY'c hY0 τ, Real.log_mul (pow_ne_zero n hτ) hW, Real.log_pow]
+
 end QIQTH.MatrixJacobi
