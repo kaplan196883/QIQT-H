@@ -55,6 +55,11 @@ frame · M2b-2 covariant deriv = ordinary deriv in the frame · M2b-3 Jacobi fie
 `tr R̃ = Ric`. This is a fresh multi-session sub-campaign (parallel transport + frame geometry, Mathlib/repo-absent
 off-center). a₁=R/6 gates on it.
 
+**M2b progress:**
+- M2b-1 ✅ (`2d5b7170`) `ParallelTransport.lean` — parallel_metricInner_const: d/dτ⟨e,f⟩_g=0 for parallel e,f (from metric_compat + parallel condition, full Γ-term Finset cancellation to 0). Parallel transport is an isometry ⟹ orthonormal frames stay orthonormal. All [AF] std-3. e,f carried as parallel.
+- M2b-4 (in flight) — tr R̃=Ric in an ORTHONORMAL FRAME: ∑_i ⟨R(e_i,v)v,e_i⟩_g = Ric(v,v) for any g-orthonormal {e_i}. Generalizes L3 (center-only, coordinate basis) to a general orthonormal frame, hence holds ALONG THE RAY (coordinate-free Ricci definition). Key = completeness ∑_i e_i^a e_i^b = g^{ab} from orthonormality. Independent of parallel-transport existence.
+- M2b-2 (parallel-transport EXISTENCE, frame ODE) + M2b-3 (transform the repo's along-ray coordinate Jacobi eqn ξ''=−jacobiOperator into the parallel frame ⟹ clean Ỹ''=−R̃Ỹ, the Γ terms absorbed by parallel transport — THE wall-crossing) remain.
+
 ### M5 — off-diagonal `O(1/t)` van-Vleck cancellation  (discharge `VanVleckCancellation` checkpoint)
 Feed M4 into `HeatResidualBound.parametrixResidual_offdiag_absorbed` piece (II): the radial-transport term
 `+(1/t)G(r∂_r P)` now cancels for ALL `v`, killing the `O(1/t)` singular term. Discharges K5.
