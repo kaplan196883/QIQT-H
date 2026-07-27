@@ -42,6 +42,19 @@ L3 `covariantJacobi_trace_at_center`). `W(0)` invertible ⟹ `W⁻¹` regular on
 Raychaudhuri/van-Vleck ODE whose trace is `−Ric(v,v)` at leading order (L3) and the full expression at all
 orders. Delivers the UNIFORM-in-`v` `(r∂_r) log√det g̃ = …` the checkpoint needs. Decompose or checkpoint.
 
+### M2b ASSESSMENT (2026-07-18) — the genuine geometric wall, and the path through it
+Reading `JacobiEquation.lean`: the repo's coordinate Jacobi ODE is `ξ'' = −jacobiOperator(x,v,ξ,ξ')` where
+`jacobiOperator` DEPENDS ON `ξ'` (the `Γ·ξ'·v` terms), so off-center it is `ξ''+B(τ)ξ'+C(τ)ξ=0`, NOT the clean
+`Y''=−A(τ)Y` that M4b consumes; and `tr(coordinate jacobiOperator) ≠ Ric` (only `tr(covariant R)=Ric`, L3). So the
+physics Raychaudhuri `θ'=−Ric−tr(Θ²)` is unreachable without the OFF-CENTER covariant Jacobi eqn — the same wall that
+stalled the L2c off-center agents 3×. **The clean path through (M2b, textbook):** build PARALLEL TRANSPORT along the
+geodesic (frame ODE `e_i'(τ)=−Γ(γ')e_i`); in the parallel orthonormal frame the covariant derivative = ordinary
+derivative, so the Jacobi field's frame-components `Ỹ` satisfy the CLEAN `Ỹ''=−R̃(τ)Ỹ` with `tr R̃ = Ric` — directly
+feeding M4b. This AVOIDS the messy off-center coordinate Finset identity. Sub-phases: M2b-1 parallel transport ODE +
+frame · M2b-2 covariant deriv = ordinary deriv in the frame · M2b-3 Jacobi field in the frame `Ỹ''=−R̃Ỹ` · M2b-4
+`tr R̃ = Ric`. This is a fresh multi-session sub-campaign (parallel transport + frame geometry, Mathlib/repo-absent
+off-center). a₁=R/6 gates on it.
+
 ### M5 — off-diagonal `O(1/t)` van-Vleck cancellation  (discharge `VanVleckCancellation` checkpoint)
 Feed M4 into `HeatResidualBound.parametrixResidual_offdiag_absorbed` piece (II): the radial-transport term
 `+(1/t)G(r∂_r P)` now cancels for ALL `v`, killing the `O(1/t)` singular term. Discharges K5.
