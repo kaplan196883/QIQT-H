@@ -13284,5 +13284,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JacobiFormula.matrix_det_contDiff
 #print axioms QIQTH.JacobiFormula.hasDerivAt_matrix_det
 #print axioms QIQTH.JacobiFormula.hasDerivAt_log_det_matrix
+-- M4b (off-radial matrix Jacobi campaign) — the abstract MATRIX RAYCHAUDHURI / RICCATI (MatrixRaychaudhuri.lean):
+-- hasDerivAt_matrix_inv ((Y⁻¹)' = −Y⁻¹Y'Y⁻¹ via hasFDerivAt_ringInverse + Matrix.nonsing_inv_eq_ringInverse bridge) +
+-- matrix_riccati (Θ:=Y'Y⁻¹ obeys Θ'=−A−Θ² from the matrix Jacobi ODE Y''=−A·Y) + trace_raychaudhuri (θ:=tr Θ obeys the
+-- Raychaudhuri ODE θ'=−tr A−tr(Θ²), via Matrix.traceLinearMap).  ⚠ HONEST FIREWALL: A is ABSTRACT — does NOT derive the
+-- geodesic matrix Jacobi ODE Y''=−R(τ)Y from curvature / identify Y with D exp_p (M2b, the off-radial wall), NOT tr A=Ric,
+-- NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.MatrixRaychaudhuri.hasDerivAt_matrix_inv
+#print axioms QIQTH.MatrixRaychaudhuri.matrix_riccati
+#print axioms QIQTH.MatrixRaychaudhuri.trace_raychaudhuri
 
 end QIQTH.AxiomAudit
