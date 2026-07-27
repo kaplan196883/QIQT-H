@@ -13249,5 +13249,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RaychaudhuriConstCurv.raychaudhuri_constant_curvature
 #print axioms QIQTH.RaychaudhuriConstCurv.raychaudhuri_constant_curvature_theta
 #print axioms QIQTH.RaychaudhuriConstCurv.jacobiOde_sin
+-- M1 (off-radial matrix Jacobi / Y⁻¹ campaign, MATRIX_JACOBI_PLAN.md) — the HADAMARD SMOOTH-FACTORIZATION primitive
+-- (HadamardFactor.lean): for a C¹ f:ℝ→F (F a real Banach space) with f 0 = 0, hadamardFactor f' τ := ∫₀¹ f'(t·τ)dt gives
+-- f τ = τ • hadamardFactor f' τ (hadamardFactor_smul, via FTC) + hadamardFactor_zero (g 0 = f'(0)) + hadamardFactor_continuous
+-- (parametric-integral continuity).  Mathlib LACKS this (its Complex/Hadamard.lean is the unrelated three-lines theorem).
+-- ⚠ HONEST FIREWALL: the regularization PRIMITIVE only (removes the Y(τ)/τ singularity so W⁻¹ is regular near the center).
+-- NOT the matrix Jacobi field Y=τW (M2), NOT the uniform van-Vleck radial ODE (M4), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.HadamardFactor.hadamardFactor_smul
+#print axioms QIQTH.HadamardFactor.hadamardFactor_zero
+#print axioms QIQTH.HadamardFactor.hadamardFactor_continuous
 
 end QIQTH.AxiomAudit
