@@ -13258,5 +13258,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HadamardFactor.hadamardFactor_smul
 #print axioms QIQTH.HadamardFactor.hadamardFactor_zero
 #print axioms QIQTH.HadamardFactor.hadamardFactor_continuous
+-- M2 (off-radial matrix Jacobi campaign) — the REGULARIZED-INVERTIBILITY payoff (MatrixJacobi.lean): a matrix curve Y with
+-- Y 0 = 0 and det Y'(0) ≠ 0 factors (M1) as Y = τ • W (W = hadamardFactor Y') with W INVERTIBLE on a neighborhood of the
+-- center — hadamardFactor_det_ne_zero_eventually (det W τ ≠ 0 near 0) + hadamardFactor_isUnit_eventually (W τ a unit near 0) +
+-- matrixJacobi_regularized (Y = τ•W ∧ W invertible near 0).  So W⁻¹ is regular exactly where the polar Y⁻¹ is singular.
+-- ⚠ HONEST FIREWALL: the ABSTRACT regularized structure only — does NOT identify Y with the geodesic exp-Jacobian D exp_p or
+-- prove Y''=−R(τ)Y (geometric M2b), NOT the van-Vleck radial ODE (M4), NOT a₁=R/6 (M6).  Y'(0)=I carried abstractly as
+-- det Y'(0)≠0.  [AF] std-3.
+#print axioms QIQTH.MatrixJacobi.hadamardFactor_det_ne_zero_eventually
+#print axioms QIQTH.MatrixJacobi.hadamardFactor_isUnit_eventually
+#print axioms QIQTH.MatrixJacobi.matrixJacobi_regularized
 
 end QIQTH.AxiomAudit

@@ -104,6 +104,7 @@ import QIQTH.FlatHeatEquation
 import QIQTH.GaussianPolyBound
 import QIQTH.GaussianConvolution
 import QIQTH.HadamardFactor
+import QIQTH.MatrixJacobi
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries
