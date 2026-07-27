@@ -13275,5 +13275,14 @@ namespace QIQTH.AxiomAudit
 -- NOT the K1/K2 det g̃ bridge, NOT the van-Vleck radial ODE (M4), NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.MatrixJacobi.det_matrixJacobi_eq
 #print axioms QIQTH.MatrixJacobi.log_det_matrixJacobi_split
+-- M4a (off-radial matrix Jacobi campaign) — the analytic JACOBI FORMULA (JacobiFormula.lean): matrix_det_contDiff (Matrix.det
+-- is C^∞) + hasDerivAt_matrix_det (d/dτ det(W τ) = tr(adjugate(W τ)·W'τ) — the Mathlib-ABSENT analytic determinant derivative,
+-- built entrywise via Matrix.det_apply' + product rule + Cramer/adjugate collapse) + hasDerivAt_log_det_matrix (d/dτ log det(W τ)
+-- = tr((W τ)⁻¹·W'τ) for IsUnit det — the regularized expansion θ = tr(W⁻¹W') core of the van-Vleck/Raychaudhuri ODE).
+-- ⚠ HONEST FIREWALL: the ABSTRACT analytic toolkit only (arbitrary smooth matrix curve) — does NOT identify W with the
+-- geodesic Jacobi field / D exp_p (M2b), NOT the uniform van-Vleck radial ODE (M4-full), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.JacobiFormula.matrix_det_contDiff
+#print axioms QIQTH.JacobiFormula.hasDerivAt_matrix_det
+#print axioms QIQTH.JacobiFormula.hasDerivAt_log_det_matrix
 
 end QIQTH.AxiomAudit

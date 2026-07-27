@@ -105,6 +105,7 @@ import QIQTH.GaussianPolyBound
 import QIQTH.GaussianConvolution
 import QIQTH.HadamardFactor
 import QIQTH.MatrixJacobi
+import QIQTH.JacobiFormula
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries
