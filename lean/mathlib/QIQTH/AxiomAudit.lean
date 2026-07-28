@@ -13515,5 +13515,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.covariantDerivAlong_frame_combo_at
 #print axioms QIQTH.ExpMap.covariantDerivAlong_congr_nhds
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_frame_combo_nhds
+-- FRAME-ROUTE localization #3 / ASSEMBLY (a₁=R/6 endgame / duality wall #1, B''=−R̃B sub-campaign) — FrameJacobiEquationNhds.lean:
+-- covariantSecondDeriv_congr_nhds (covariantSecondDeriv depends only on the germ at t, via covariantDerivAlong_congr_nhds ×2 +
+-- Filter.Eventually.eventually_nhds) + frame_jacobi_equation_nhds (localizes frame_jacobi_equation from ∀τ to ∀ᶠτ in 𝓝 t: swaps
+-- covariant_jacobi_equation_nhds + covariantSecondDeriv_frame_combo_nhds into hcj/hfc, hexp loosened to EventuallyEq).  So the frame
+-- Jacobi equation Yt''=−∑_j⟨R̃ e_j,e_k⟩ Yt_j now applies to the exp-flow at interior t (hγ from expTube_spec Ioo(-2,2), hVar from
+-- expDiff_flow).  ⚠ HONEST FIREWALL: localizes the frame Jacobi equation — it does NOT construct the parallel frame along the exp
+-- geodesic, NOT wire frame_ricci_trace (tr R̃=Ric), NOT the matrix B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_congr_nhds
+#print axioms QIQTH.ExpMap.frame_jacobi_equation_nhds
 
 end QIQTH.AxiomAudit
