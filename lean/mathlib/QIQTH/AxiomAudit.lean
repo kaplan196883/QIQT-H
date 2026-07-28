@@ -13524,5 +13524,15 @@ namespace QIQTH.AxiomAudit
 -- geodesic, NOT wire frame_ricci_trace (tr R̃=Ric), NOT the matrix B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_congr_nhds
 #print axioms QIQTH.ExpMap.frame_jacobi_equation_nhds
+-- FRAME-ROUTE CAPSTONE (a₁=R/6 endgame / duality wall #1, B''=−R̃B sub-campaign, piece 7/7 of the localized frame route) —
+-- FrameRaychaudhuri.lean: frame_raychaudhuri_ricci_nhds assembles the −Ric Raychaudhuri θ'=−Ric(γ',γ')−tr(Θ²) for the exp-flow FRAME
+-- Jacobi field, composing the four built pieces: per-column frame_jacobi_equation_nhds → frameJacobi_matrix_ode (matrix Jacobi ODE
+-- Y''=−R̃Y) → frame_ricci_trace (frame curvature trace = Ric) → geodesic_raychaudhuri.  ⚠ HONEST FIREWALL: CONDITIONAL on carried,
+-- GENUINE (non-vacuous, audited) frame data — geodesic/variation ODEs (hγ,hVar), component/frame regularity (hY,hY2,he), parallelism
+-- (hpar, covariantDerivAlong=0), orthonormality/completeness identities at t (hortho,hcomplete,hinv), frame decomposition (hexp),
+-- matrix-deriv regularity (hYmat,hY'mat), no-conjugate invertibility (hu).  It does NOT construct the parallel orthonormal frame
+-- (M2b-2 parallel-transport ODE existence — carried), does NOT connect θ_Y (frame) to the coordinate exp-differential θ_B / real J,
+-- NOT B''=−R̃B for the real matrix, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.frame_raychaudhuri_ricci_nhds
 
 end QIQTH.AxiomAudit

@@ -116,6 +116,7 @@ import QIQTH.FrameCovariantDerivNhds
 import QIQTH.FrameJacobiEquation
 import QIQTH.FrameJacobiEquationNhds
 import QIQTH.GeodesicRaychaudhuri
+import QIQTH.FrameRaychaudhuri
 import QIQTH.RaychaudhuriLogDet
 import QIQTH.RadialRayDeriv
 import QIQTH.VanVleckRaychaudhuri
