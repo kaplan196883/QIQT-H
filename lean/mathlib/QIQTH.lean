@@ -123,6 +123,7 @@ import QIQTH.TraceRaychaudhuriRescale
 import QIQTH.RadialRayDeriv
 import QIQTH.VanVleckRaychaudhuri
 import QIQTH.ParallelOrthonormal
+import QIQTH.OrthonormalFrameExists
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
 import QIQTH.ExpMatrixJacobi

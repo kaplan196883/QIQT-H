@@ -13547,5 +13547,12 @@ namespace QIQTH.AxiomAudit
 -- exp geodesic.  ⚠ HONEST FIREWALL: hγ discharged, frame data still carried — does NOT construct the parallel frame (M2b-2 ODE, carried),
 -- NOT discharge hVar concretely (avoids coupling hexp to the existential flow Φ), NOT connect θ_Y to the coordinate van-Vleck J, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expFlow_frame_raychaudhuri
+-- PARALLEL-FRAME IC FLOOR (a₁=R/6 endgame / duality wall #1, frame-existence bottleneck b) — OrthonormalFrameExists.lean:
+-- exists_gorthonormal_frame proves a metric-orthonormal frame EXISTS at a point where the metric is positive-definite (G.PosDef ⟹
+-- ∃ e, ∑_{ab} G_{ab} e_i^a e_j^b = δ_ij), via the real spectral theorem (E = U·diag(λ^{-1/2}), star E·G·E = 1).  This is exactly the
+-- h0 initial condition consumed by parallel_orthonormal_preserved (G := g(γ 0)).  ⚠ HONEST FIREWALL: the BASE-POINT IC floor ONLY —
+-- it does NOT build the parallel transport of the frame along the curve (the linear frame ODE e_i'=−Γ(γ)(γ',e_i), M2b-2, still open),
+-- does NOT discharge expFlow_frame_raychaudhuri's carried frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Curvature.exists_gorthonormal_frame
 
 end QIQTH.AxiomAudit
