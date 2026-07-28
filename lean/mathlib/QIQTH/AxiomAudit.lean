@@ -13569,5 +13569,12 @@ namespace QIQTH.AxiomAudit
 -- θ_Y'=−Ric (exp-flow Raychaudhuri) or the trace connection, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.logdet_gtilde_split
 #print axioms QIQTH.ExpMap.logdet_gtilde_ray_secondDeriv
+-- (a) DISCHARGE PIECE h2 (a₁=R/6 endgame / duality wall #1, coordinate-connection capstone) — LogJSecondDerivRescale.lean:
+-- logJ_ray_secondDeriv_eq proves LJ'' = LB'' + n, i.e. deriv²(log J∘ray) 1 = deriv²(log det B∘ray) 1 + n, by differentiating the
+-- rescaling log J(s•v) = log det B(s) − n·log s (hresc_of_pos) TWICE (EventuallyEq.deriv_eq + Real.hasDerivAt_log/hasDerivAt_inv +
+-- HasDerivAt.unique).  This is the h2 in the capstone chain 2 LJ''+Lg''=2(θ_B'+n)+Lg''.  ⚠ HONEST FIREWALL: the rescaling 2nd-deriv
+-- relation only (carries genuine differentiability + 2nd-deriv hyps); it does NOT wire θ_B'=θ_Y'−½Lg'' (h3) or θ_Y'=−Ric, NOT the full
+-- −2Ric van-Vleck ODE, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.logJ_ray_secondDeriv_eq
 
 end QIQTH.AxiomAudit
