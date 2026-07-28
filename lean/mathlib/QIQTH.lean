@@ -121,6 +121,7 @@ import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
 import QIQTH.ExpJacobianRescale
 import QIQTH.ExpJacobianRicci
+import QIQTH.VanVleckRicciODE
 import QIQTH.VanVleckTransportRadial
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta

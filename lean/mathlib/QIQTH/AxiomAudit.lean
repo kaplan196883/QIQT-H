@@ -13417,5 +13417,12 @@ namespace QIQTH.AxiomAudit
 -- a labeled geometric INPUT — the n·log s subtraction is the singular Jacobi/regularization).  ⚠ HONEST FIREWALL: CONDITIONAL on
 -- hresc (rescaling proof = EXP-JET3-3a's checkpointed Φ-smooth-dependence deep target), NOT M5, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJacobianDet_radialDeriv_eq_raychaudhuri_sub_n
+-- ★ EXP-JET3-3c (Y=D exp campaign) — the CORRECTED van-Vleck radial ODE carrying −Ric (VanVleckRicciODE.lean):
+-- vanVleck_radialDeriv_ricci_form proves radialDeriv(log det g̃) = 2·(θ_B − n) + radialDeriv(log det(g∘exp)), θ_B=tr(B'(1)·B(1)⁻¹)
+-- the Raychaudhuri expansion of the clean matrix Jacobi field B (θ_B'=−Ric−tr Θ² via B''=−R̃B/geodesic_raychaudhuri) — combining
+-- EXP-JET3-3b + K2 radialDeriv_log_det_split.  This is the van-Vleck radial ODE that genuinely carries −Ric (the corrected form of
+-- the tautological vanVleck_radialDeriv_via_raychaudhuri).  ⚠ HONEST FIREWALL: CONDITIONAL on hresc (the rescaling det B=sⁿ·
+-- expJacobianDet, EXP-JET3-3a's checkpointed Φ-smooth-dependence target) + K2 regularity; NOT the M5 O(1/t) cancellation, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_radialDeriv_ricci_form
 
 end QIQTH.AxiomAudit
