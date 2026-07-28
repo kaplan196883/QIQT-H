@@ -13732,5 +13732,12 @@ namespace QIQTH.AxiomAudit
 -- (alignment Γc.1=expTube on Ioo) + covariantDerivAlong_curve_congr (hpar rewrite Γc.1→expTube).  ★ DISCHARGES the frame-existence input carried by frame_raychaudhuri_ricci_nhds.
 -- ⚠ HONEST: local (∃δ, uncontrolled) — no global frame-transport in repo; van-Vleck interior s₀ is choosable in (0,δ).  Does NOT yet feed vanVleck_ray_secondDeriv_ricci_at, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.parallelFrame_expTube_exists
+-- (b4-final-h4) ★★ h4 WITH FRAME DATA DISCHARGED (a₁=R/6 endgame / duality wall #1, culminating assembly) — VanVleckH4Assembled.lean:
+-- vanVleck_h4_assembled: from christoffel/metric ContDiff + symmetry + inverse-metric + PosDef(g p) + ‖v‖<expRho, ∃δ>0 ∀s₀∈Ioo 0 δ ∃ frame e, Jacobi V,
+-- (hY2 : C² reg of frameComponent) → (hu_ev : no-conjugate IsUnit of Y near s₀) → deriv²(log det Y)s₀ = −Ric − Sh(shear).  ★★ The FRAME DATA IS FULLY
+-- DISCHARGED (he/hpar/hortho/hcomplete/hinv from parallelFrame_expTube_exists; V/hVar from expDiff_flow_isGeodesicVariation; hexp from frameComponents_hexp;
+-- hY/hYmat/hY'mat/hu from frameComponent(Matrix)_hasDerivAt) — only hY2 (2nd-order reg) + hu_ev (no-conjugate) remain as GENUINE carried arrows.
+-- ⚠ HONEST FIREWALL: this is the h4 term (−Ric−Sh) with frame data discharged; does NOT yet wire log det Y → coordinate van-Vleck J (that = b4-vanvleck via hrel), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_h4_assembled
 
 end QIQTH.AxiomAudit
