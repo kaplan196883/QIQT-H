@@ -13651,5 +13651,12 @@ namespace QIQTH.AxiomAudit
 -- frame_ricci_trace / expFlow_frame_raychaudhuri, derived from hortho + hinv.  ⚠ HONEST FIREWALL: a general linear-algebra completeness
 -- identity — it does NOT construct the frame nor discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Curvature.gorthonormal_frame_complete
+-- (b3d-2) FRAME-GEODESIC = expTube ALIGNMENT (a₁=R/6 endgame / duality wall #1, step b) — FrameGeodesicAlign.lean:
+-- frameTransport_geodesic_eq_expTube — the (x,ξ) projection of a frame-transport curve started at (p,v) EQUALS expTube on the transport
+-- interval (Set.EqOn … (Ioo a b)), via geodesic_local_unique.  The confinement/Lipschitz set is PROVED internally (compact-subinterval
+-- closed-ball + ContDiffOn.exists_lipschitzOnWith on geodesicField) — NOT carried.  So the parallel frame lives along the exp geodesic.
+-- ⚠ HONEST FIREWALL: the geodesic alignment only — it does NOT package the frame data (he/hpar/hortho/hcomplete along expTube, next
+-- b3d-3) nor discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.frameTransport_geodesic_eq_expTube
 
 end QIQTH.AxiomAudit

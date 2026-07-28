@@ -737,6 +737,7 @@ import QIQTH.RNCDecay
 import QIQTH.Geodesic
 import QIQTH.ParallelTransportField
 import QIQTH.FrameTransportField
+import QIQTH.FrameGeodesicAlign
 import QIQTH.ParallelTransportParallel
 import QIQTH.FrameTransportParallel
 -- RNC1: the √det g atom of the Riemann-normal-coordinate 2nd-order expansion — √det g = 1 − ⅙R_{cd}x^cx^d,
