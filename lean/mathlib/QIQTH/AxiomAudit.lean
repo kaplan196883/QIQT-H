@@ -13409,5 +13409,13 @@ namespace QIQTH.AxiomAudit
 -- (needs repo-absent no-conjugate-points + derivWithin-Jacobi + frame-det machinery).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_smul_eq_expTube
 #print axioms QIQTH.ExpMap.hasDerivAt_expMap_smul_ray
+-- ★ EXP-JET3-3b (Y=D exp campaign) — the RICCI-CARRYING exp-Jacobian connection (ExpJacobianRicci.lean):
+-- expJacobianDet_radialDeriv_eq_raychaudhuri_sub_n proves radialDeriv(log expJacobianDet) v = (B'1·(B1)⁻¹).trace − n = θ_B − n,
+-- where θ_B is the Raychaudhuri expansion of the CLEAN matrix Jacobi field B (θ_B'=−Ric−tr Θ² via B''=−R̃B/geodesic_raychaudhuri).
+-- This routes the van-Vleck ODE through the clean Jacobi field so it genuinely carries −Ric (fixing the tautology of the plain
+-- bridge), CONDITIONAL on hresc (the RESCALING det B(s)=sⁿ·expJacobianDet(s•v) = standard Jacobi=differential identity, carried as
+-- a labeled geometric INPUT — the n·log s subtraction is the singular Jacobi/regularization).  ⚠ HONEST FIREWALL: CONDITIONAL on
+-- hresc (rescaling proof = EXP-JET3-3a's checkpointed Φ-smooth-dependence deep target), NOT M5, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJacobianDet_radialDeriv_eq_raychaudhuri_sub_n
 
 end QIQTH.AxiomAudit
