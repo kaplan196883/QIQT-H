@@ -13386,5 +13386,11 @@ namespace QIQTH.AxiomAudit
 -- fields only — does NOT yet assemble expJacobianMat into a matrix Jacobi field or prove det Y=expJacobianDet (later EXP-JET3
 -- bricks), does NOT discharge hYexp, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expDiff_flow_isGeodesicVariation
+-- EXP-JET3-2 (Y=D exp campaign) — expJacobianMat IS the matrix of Jacobi-field positions (ExpJacobianFlow.lean):
+-- expJacobianMat_eq_flow bundles EXP-JET3-1's flow Φ with the identity expJacobianMat g gi hC p v = fun a i => ((Φ 1)(0,e_i)).1 a
+-- (via HasFDerivAt.fderiv + expJetIota=(0,·)/expJetPi=.1) — so the (a,i) entry is the position part of the Jacobi field with IC
+-- (0,e_i) at t=1.  ⚠ HONEST FIREWALL: expJacobianMat columns = Jacobi positions only — does NOT prove the matrix Jacobi ODE
+-- Y''=−R̃Y for expJacobianMat, NOT det=expJacobianDet ray connection / hYexp discharge (EXP-JET3-3), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expJacobianMat_eq_flow
 
 end QIQTH.AxiomAudit
