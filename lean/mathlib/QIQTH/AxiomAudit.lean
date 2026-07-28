@@ -13433,5 +13433,12 @@ namespace QIQTH.AxiomAudit
 -- NOT the full O(1/t) cancellation (matching vs flat-Gaussian (I) + metric-deviation (IV)), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.radialDeriv_rpow
 #print axioms QIQTH.ExpMap.radialDeriv_foldedCoeff_leading
+-- M5-c (a₁=R/6 endgame) — the parametrix transport term in RAYCHAUDHURI FORM (ParametrixTransportRicci.lean):
+-- parametrixTransport_raychaudhuri_form proves radialDeriv((det g̃)^{1/4}) = ¼(det g̃)^{1/4}·(2(θ_B−n)+radialDeriv(log det g∘exp)),
+-- combining M5-b (+1/4 transport chain rule) + EXP-JET3-3c (van-Vleck Ricci ODE).  So the parametrix off-diagonal (1/t)·G·
+-- radialDeriv(foldedCoeff 0) transport term is expressed via the Raychaudhuri θ_B (θ_B'=−Ric).  ⚠ HONEST FIREWALL: the transport
+-- term in Raychaudhuri form, CONDITIONAL on hresc (rescaling) + B/K2 hyps — NOT the full O(1/t) cancellation (matching vs
+-- flat-Gaussian (I) + metric-deviation (IV)), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.parametrixTransport_raychaudhuri_form
 
 end QIQTH.AxiomAudit

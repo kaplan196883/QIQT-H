@@ -124,6 +124,7 @@ import QIQTH.ExpJacobianRicci
 import QIQTH.VanVleckRicciODE
 import QIQTH.VanVleckTransportRadial
 import QIQTH.ParametrixTransportRadial
+import QIQTH.ParametrixTransportRicci
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries
