@@ -13639,5 +13639,11 @@ namespace QIQTH.AxiomAudit
 -- the transported frame — it does NOT yet package the orthonormal-frame data (hpar/he/hortho/hcomplete, next floor b3d), NOT discharge
 -- vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.parallelFrameTransport_local_existence
+-- (b3d-1) FRAME-COLUMN PARALLELISM (a₁=R/6 endgame / duality wall #1, step b) — FrameTransportParallel.lean:
+-- frameTransport_covariantDeriv_zero — each column (Γc·).2.2 m of the whole-frame parallel-transport curve is PARALLEL along the
+-- geodesic (Γc·).1: covariantDerivAlong g gi (Γc.1) (Γc.2.2 m) t = 0 (mirror of parallelTransport_covariantDeriv_zero with the frame-index
+-- projection).  The per-column hpar for parallel_orthonormal_preserved.  ⚠ HONEST FIREWALL: per-column parallelism only — it does NOT
+-- package the orthonormal-frame data (hortho/he/hcomplete, next b3d-2), NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.frameTransport_covariantDeriv_zero
 
 end QIQTH.AxiomAudit
