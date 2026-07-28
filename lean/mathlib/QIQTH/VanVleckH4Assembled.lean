@@ -45,10 +45,13 @@ import QIQTH.ParallelFrameExpTube
 import QIQTH.FrameComponentsHexp
 import QIQTH.FrameComponentsDeriv
 import QIQTH.ExpDiffVariation
+import QIQTH.ExpJacobianRescale
+import QIQTH.OrthonormalFrameDet
+import QIQTH.JacobianDet
 
 namespace QIQTH.ExpMap
 
-open QIQTH.Curvature QIQTH.Geodesic Finset Matrix
+open QIQTH.Curvature QIQTH.Geodesic QIQTH.JacobianDet Finset Matrix
 open scoped Topology Matrix.Norms.Elementwise
 
 set_option maxHeartbeats 2000000
@@ -88,7 +91,23 @@ theorem vanVleck_h4_assembled (g gi : Point n → Fin n → Fin n → ℝ)
     (hgpd : Matrix.PosDef (g p : Matrix (Fin n) (Fin n) ℝ)) :
     ∃ (δ : ℝ), 0 < δ ∧ ∀ s₀ ∈ Set.Ioo (0 : ℝ) δ,
       ∃ (e : Fin n → ℝ → Point n) (V : Fin n → ℝ → Point n × Point n),
-        (∀ j i, ∀ᶠ τ in nhds s₀,
+        -- exposed FRAME-side facts, discharged internally (orthonormality, frame det ≠ 0):
+        (∀ᶠ s in nhds s₀, ∀ i k,
+            (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
+              = if i = k then (1 : ℝ) else 0) ∧
+        (∀ᶠ s in nhds s₀,
+            (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det ≠ 0) ∧
+        -- exposed exp-flow data `Φ` (with `Φ 0 = id`, the `[0,1]` Jacobi law, and `V = Φ(0,e_j)`):
+        -- this surfaces enough to discharge the radial-Jacobi link `hBV` in a downstream file
+        -- (`radialJacobiLink_of_tubeTransverseVariation`), which cannot be imported here (cycle).
+        (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+            Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+            (∀ (z : Point n × Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+                HasDerivWithinAt (fun s => Φ s z)
+                  (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ t z))
+                  (Set.Icc (0 : ℝ) 1) t) ∧
+            (∀ j s, V j s = Φ s ((0 : Point n), (Pi.single j (1 : ℝ) : Point n)))) ∧
+        ((∀ j i, ∀ᶠ τ in nhds s₀,
             HasDerivAt (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i))
               (deriv (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i)) τ) τ) →
         (∀ᶠ s in nhds s₀,
@@ -108,7 +127,7 @@ theorem vanVleck_h4_assembled (g gi : Point n → Fin n → Fin n → ℝ)
                   * ((Matrix.of (fun k j =>
                       deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k) s₀))
                     * (Matrix.of (fun k j =>
-                      frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s₀))⁻¹)).trace := by
+                      frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s₀))⁻¹)).trace) := by
   classical
   -- (1) the parallel orthonormal frame + full frame data along the exp geodesic
   obtain ⟨δ, e, hδpos, hdata⟩ :=
@@ -134,7 +153,45 @@ theorem vanVleck_h4_assembled (g gi : Point n → Fin n → Fin n → ℝ)
     ⟨by linarith [hs₀1.1], by linarith [hs₀1.2]⟩
   -- the frame data at `s₀`
   obtain ⟨he, hpar, hortho, hcomplete, hinv⟩ := hdata s₀ hs₀δ
-  refine ⟨e, V, fun hY2 hu_ev => ?_⟩
+  -- ===== discharge the exposed frame-side facts (orthonormality, det E ≠ 0) + surface Φ-data =====
+  -- `hortho_ev` : `g`-orthonormality of the frame in the `expMap` form, near `s₀`
+  have hortho_ev : ∀ᶠ s in nhds s₀, ∀ i k,
+      (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
+        = if i = k then (1 : ℝ) else 0 := by
+    filter_upwards [isOpen_Ioo.mem_nhds hs₀δ, Ioo_mem_nhds hs₀1.1 hs₀1.2] with s hsδ hs01 i k
+    have hs1 : |s| ≤ 1 := by rw [abs_le]; exact ⟨by linarith [hs01.1], by linarith [hs01.2]⟩
+    rw [expMap_smul_eq_expTube g gi hC p v hv.le hs1]
+    exact (hdata s hsδ).2.2.1 i k
+  -- `hEdet` : `det E ≠ 0`, from `Eᵀ G E = 1` (`gorthonormal_det_sq`)
+  have hEdet : ∀ᶠ s in nhds s₀,
+      (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det ≠ 0 := by
+    filter_upwards [hortho_ev] with s hs
+    set Emat : Matrix (Fin n) (Fin n) ℝ := Matrix.of (fun a i => e i s a) with hEmatd
+    set Gmat : Matrix (Fin n) (Fin n) ℝ :=
+      Matrix.of (fun a b => g (expMap g gi hC p (s • v)) a b) with hGmatd
+    have hE1 : Ematᵀ * Gmat * Emat = 1 := by
+      ext i k
+      rw [Matrix.mul_apply]
+      simp only [Matrix.mul_apply, Matrix.transpose_apply, hEmatd, hGmatd, Matrix.of_apply,
+        Matrix.one_apply]
+      rw [← hs i k]
+      simp_rw [Finset.sum_mul]
+      rw [Finset.sum_comm]
+      exact Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => by ring
+    have hsq := gorthonormal_det_sq Gmat Emat hE1
+    intro hzero
+    rw [hzero] at hsq
+    simp at hsq
+  -- `Φ-data` : the exp-flow, with `V = Φ(0,e_j)` (surfaced for the downstream `hBV` discharge)
+  have hΦdata : ∃ Φ' : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+      Φ' 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+      (∀ (z : Point n × Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+          HasDerivWithinAt (fun s => Φ' s z)
+            (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ' t z))
+            (Set.Icc (0 : ℝ) 1) t) ∧
+      (∀ j s, V j s = Φ' s ((0 : Point n), (Pi.single j (1 : ℝ) : Point n))) :=
+    ⟨Φ, hΦ0, hflow, fun j s => by simp only [hVdef]⟩
+  refine ⟨e, V, hortho_ev, hEdet, hΦdata, fun hY2 hu_ev => ?_⟩
   -- ===== the Jacobi variation property `hVar` (interior upgrade of the exp-flow column law) =====
   have hVar : ∀ j, ∀ᶠ τ in nhds s₀,
       IsGeodesicVariationAt g gi (expTube g gi hC p v) (V j) τ := by

@@ -110,23 +110,25 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
     (hgpd : Matrix.PosDef (g p : Matrix (Fin n) (Fin n) ℝ)) :
     ∃ (δ : ℝ), 0 < δ ∧ ∀ s₀ ∈ Set.Ioo (0 : ℝ) δ,
       ∃ (e : Fin n → ℝ → Point n) (V : Fin n → ℝ → Point n × Point n),
-        -- carried FRAME-side arrows:
-        (∀ j i, ∀ᶠ τ in nhds s₀,
+        -- exposed exp-flow data `Φ` (threaded) for the downstream `hBV` discharge (`V = Φ(0,e_j)`):
+        (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+            Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+            (∀ (z : Point n × Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+                HasDerivWithinAt (fun s => Φ s z)
+                  (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ t z))
+                  (Set.Icc (0 : ℝ) 1) t) ∧
+            (∀ j s, V j s = Φ s ((0 : Point n), (Pi.single j (1 : ℝ) : Point n)))) ∧
+        -- carried FRAME-side arrows (`hortho`/`hEdet` now discharged inside the engine):
+        ((∀ j i, ∀ᶠ τ in nhds s₀,
             HasDerivAt (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i))
               (deriv (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i)) τ) τ) →
         (∀ᶠ s in nhds s₀,
             IsUnit (Matrix.of (fun k j =>
                 frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s)
               : Matrix (Fin n) (Fin n) ℝ)) →
-        -- carried radial-Jacobi link (alignment, see docstring):
+        -- carried radial-Jacobi link (discharged downstream from the Φ-data):
         (∀ᶠ s in nhds s₀, ∀ a j,
             (V j s).1 a = (s • expJacobianMat g gi hC p (s • v)) a j) →
-        -- carried FRAME-side arrows:
-        (∀ᶠ s in nhds s₀, ∀ i k,
-            (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
-              = if i = k then (1 : ℝ) else 0) →
-        (∀ᶠ s in nhds s₀,
-            0 < (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det) →
         (∀ᶠ s in nhds s₀, DifferentiableAt ℝ (fun u => Real.log ((Matrix.of (fun k j =>
             frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k u)
               : Matrix (Fin n) (Fin n) ℝ).det)) s) →
@@ -148,7 +150,7 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
                       deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k) s₀))
                     * (Matrix.of (fun k j =>
                       frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s₀))⁻¹)).trace
-              + 2 * (n : ℝ) / s₀ ^ 2 := by
+              + 2 * (n : ℝ) / s₀ ^ 2) := by
   -- the assembled engine
   obtain ⟨δ, hδ, hbody⟩ := vanVleck_ricci_assembled g gi hC hg hgsymm hgisymm hginv p v hv hgpd
   -- the `C²` radius for `log J` (a metric ball around the centre in `x`-space)
@@ -211,8 +213,8 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
     Filter.eventually_of_mem hballnhds (fun s hs => haball hs)
   have hs₀mem : s₀ ∈ Set.Ioo (0 : ℝ) δ :=
     ⟨hs₀.1, lt_of_lt_of_le hs₀.2 (min_le_left δ a)⟩
-  obtain ⟨e, V, hchain⟩ := hbody s₀ hs₀mem
-  refine ⟨e, V, fun hY2 hu_ev hBV hortho hEdet hYev hLY2 => ?_⟩
+  obtain ⟨e, V, hΦdata, hchain⟩ := hbody s₀ hs₀mem
+  refine ⟨e, V, hΦdata, fun hY2 hu_ev hBV hYev hLY2 => ?_⟩
   -- ===== discharge the coordinate germs =====
   -- positivity arrows
   have hpos : ∀ᶠ s in nhds s₀, 0 < expJacobianDet g gi hC p (s • v) :=
@@ -286,7 +288,7 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
   obtain ⟨hLmev, hLm2⟩ := contDiffAt_two_deriv_germs hLm_cda
   obtain ⟨hLBev, hLB2⟩ := contDiffAt_two_deriv_germs hLB_cda
   -- ===== assemble =====
-  exact hchain hY2 hu_ev hγ hBV hortho hEdet hGdet hBdet hsplit hLJev hLmev hpos hLBev hYev
+  exact hchain hY2 hu_ev hγ hBV hGdet hBdet hsplit hLJev hLmev hpos hLBev hYev
     hLJ2 hLm2 hLB2 hLY2
 
 end QIQTH.ExpMap

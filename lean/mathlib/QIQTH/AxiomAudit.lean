@@ -13773,5 +13773,13 @@ namespace QIQTH.AxiomAudit
 --   exp-flow V, but vanVleck_h4_assembled returns V opaquely through ∃, so no unification (needs the refactor surfacing V as data).  Remaining: 2 deep {hY2,hu_ev}
 --   + frame-side {hortho,hEdet,hYev,hLY2} (reachable via concrete-(e,V) refactor) + hBV (refactor-alignment).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_ricci_reduced
+-- (b4-refactor) ★★ (e,V) EXPOSED ⟹ hBV/hortho/hEdet DISCHARGED, van-Vleck −Ric ↓ to {hY2,hu_ev,hYev,hLY2} (a₁=R/6 endgame / duality wall #1) — VanVleckRicciFrameReduced.lean:
+-- vanVleck_ricci_frame_reduced: same van-Vleck −Ric conclusion as vanVleck_ricci_reduced, carrying ONLY (hY2)→(hu_ev)→(hYev)→(hLY2).  The engine files
+--   (vanVleck_h4_assembled/vanVleck_ricci_assembled/vanVleck_ricci_reduced) were EDITED (Route B) to SURFACE the exp-flow Φ-data (Φ, Φ0=id, [0,1] Jacobi law,
+--   V j s=Φ s(0,e_j)); this new top file (downstream of the radial-Jacobi machinery, avoiding an import cycle) discharges hBV (radialJacobiLink_of_tubeTransverseVariation
+--   + tubeTransverse_hasDerivAt_phase, V aligned) + hortho (parallelFrame_expTube_exists + expMap_smul_eq_expTube) + hEdet (gorthonormal_det_sq, det E≠0 — interface
+--   corrected 0<det E → det E≠0, the true fact since exists_gorthonormal_frame gives no orientation).  ⚠ REMAINING carried: {hY2, hu_ev}[deep] + {hYev, hLY2}[ordinary
+--   log det Y regularity, derivable from hY2+hu_ev — honest checkpoint, not a wall].  NOT a₁=R/6.  [AF] std-3.  (Edited-engine pins above still std-3, statements enriched.)
+#print axioms QIQTH.ExpMap.vanVleck_ricci_frame_reduced
 
 end QIQTH.AxiomAudit

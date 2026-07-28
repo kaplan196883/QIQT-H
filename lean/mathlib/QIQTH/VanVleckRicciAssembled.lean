@@ -91,7 +91,7 @@ theorem frameComponent_logdet_hrel (g gi : Point n → Fin n → Fin n → ℝ)
         (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
           = if i = k then (1 : ℝ) else 0)
     (hEdet : ∀ᶠ s in nhds s₀,
-        0 < (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det)
+        (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det ≠ 0)
     (hGdet : ∀ᶠ s in nhds s₀,
         0 < (Matrix.of (fun a b => g (expMap g gi hC p (s • v)) a b)
               : Matrix (Fin n) (Fin n) ℝ).det)
@@ -140,7 +140,7 @@ theorem frameComponent_logdet_hrel (g gi : Point n → Fin n → Fin n → ℝ)
   have hdetY : Ymat.det = Bmat.det * Gmat.det * Emat.det := by
     rw [hYM, Matrix.det_transpose, Matrix.det_mul, Matrix.det_mul, Matrix.det_transpose]
   -- (4) the orthonormal metric factor: `log det E = −½ log det G`.
-  have hEpos : 0 < Emat.det := hEdets
+  have hEne : Emat.det ≠ 0 := hEdets
   have hGpos : 0 < Gmat.det := hGdets
   have hBpos : 0 < Bmat.det := hBdets
   have hlogsq : Real.log (Emat.det ^ 2) = - Real.log Gmat.det :=
@@ -150,7 +150,7 @@ theorem frameComponent_logdet_hrel (g gi : Point n → Fin n → Fin n → ℝ)
     push_cast at hlogsq; linarith
   -- (5) assemble the log identity.
   have hLHS : ((fun t : ℝ => t • expJacobianMat g gi hC p (t • v)) s).det = Bmat.det := rfl
-  rw [hLHS, hdetY, Real.log_mul (mul_ne_zero hBpos.ne' hGpos.ne') hEpos.ne',
+  rw [hLHS, hdetY, Real.log_mul (mul_ne_zero hBpos.ne' hGpos.ne') hEne,
     Real.log_mul hBpos.ne' hGpos.ne', hlogE]
   ring
 
@@ -183,23 +183,27 @@ theorem vanVleck_ricci_assembled (g gi : Point n → Fin n → Fin n → ℝ)
     (hgpd : Matrix.PosDef (g p : Matrix (Fin n) (Fin n) ℝ)) :
     ∃ (δ : ℝ), 0 < δ ∧ ∀ s₀ ∈ Set.Ioo (0 : ℝ) δ,
       ∃ (e : Fin n → ℝ → Point n) (V : Fin n → ℝ → Point n × Point n),
+        -- exposed exp-flow data `Φ` (threaded from `vanVleck_h4_assembled`) for a downstream
+        -- discharge of the radial-Jacobi link `hBV` (`V = Φ(0,e_j)`):
+        (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+            Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+            (∀ (z : Point n × Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+                HasDerivWithinAt (fun s => Φ s z)
+                  (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ t z))
+                  (Set.Icc (0 : ℝ) 1) t) ∧
+            (∀ j s, V j s = Φ s ((0 : Point n), (Pi.single j (1 : ℝ) : Point n)))) ∧
         -- the two carried follow-on arrows of `vanVleck_h4_assembled`:
-        (∀ j i, ∀ᶠ τ in nhds s₀,
+        ((∀ j i, ∀ᶠ τ in nhds s₀,
             HasDerivAt (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i))
               (deriv (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i)) τ) τ) →
         (∀ᶠ s in nhds s₀,
             IsUnit (Matrix.of (fun k j =>
                 frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s)
               : Matrix (Fin n) (Fin n) ℝ)) →
-        -- the carried geometric germs feeding `hrel`:
+        -- the carried geometric germs feeding `hrel` (`hortho`/`hEdet` are now discharged inside):
         (∀ᶠ s in nhds s₀, (expTube g gi hC p v s).1 = expMap g gi hC p (s • v)) →
         (∀ᶠ s in nhds s₀, ∀ a j,
             (V j s).1 a = (s • expJacobianMat g gi hC p (s • v)) a j) →
-        (∀ᶠ s in nhds s₀, ∀ i k,
-            (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
-              = if i = k then (1 : ℝ) else 0) →
-        (∀ᶠ s in nhds s₀,
-            0 < (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det) →
         (∀ᶠ s in nhds s₀,
             0 < (Matrix.of (fun a b => g (expMap g gi hC p (s • v)) a b)
                   : Matrix (Fin n) (Fin n) ℝ).det) →
@@ -237,11 +241,11 @@ theorem vanVleck_ricci_assembled (g gi : Point n → Fin n → Fin n → ℝ)
                       deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k) s₀))
                     * (Matrix.of (fun k j =>
                       frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s₀))⁻¹)).trace
-              + 2 * (n : ℝ) / s₀ ^ 2 := by
+              + 2 * (n : ℝ) / s₀ ^ 2) := by
   obtain ⟨δ, hδ, hbody⟩ := vanVleck_h4_assembled g gi hC hg hgsymm hgisymm hginv p v hv hgpd
   refine ⟨δ, hδ, fun s₀ hs₀ => ?_⟩
-  obtain ⟨e, V, hh4⟩ := hbody s₀ hs₀
-  refine ⟨e, V, fun hY2 hu_ev hγ hBV hortho hEdet hGdet hBdet hsplit hLJev hLmev hpos hLBev hYev
+  obtain ⟨e, V, hortho, hEdet, hΦdata, hh4⟩ := hbody s₀ hs₀
+  refine ⟨e, V, hΦdata, fun hY2 hu_ev hγ hBV hGdet hBdet hsplit hLJev hLmev hpos hLBev hYev
     hLJ2 hLm2 hLB2 hLY2 => ?_⟩
   have h4 := hh4 hY2 hu_ev
   have hrel := frameComponent_logdet_hrel g gi hC p v e V hγ hBV hortho hEdet hGdet hBdet
