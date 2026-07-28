@@ -13338,5 +13338,14 @@ namespace QIQTH.AxiomAudit
 -- does NOT assemble the Raychaudhuri eqn (next brick), NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.ExpMap.riemannGeodesicDeviation_linear
 #print axioms QIQTH.ExpMap.frame_jacobi_equation
+-- ★★ M4-full (off-radial matrix Jacobi campaign) — the GEODESIC RAYCHAUDHURI EQUATION (GeodesicRaychaudhuri.lean), the physics
+-- equation OFF-CENTER, the objective of crossing the M2b-3 wall: geodesic_raychaudhuri (HasDerivAt θ (−Ric(v,v)−tr(Θ²)) with
+-- θ=tr(Y'Y⁻¹) — assembling M4b trace_raychaudhuri + the inputs hjac (Y''=−R̃Y, from M2b-5) + htr ((R̃).trace=∑σν ricci·vσvν=Ric,
+-- from M2b-4 frame_ricci_trace); both inputs are proven-elsewhere facts about Y/R̃, NEITHER is the conclusion) + frameJacobi_matrix_ode
+-- (columnwise→matrix packaging discharging hjac: Y''=−R̃Y from the per-column frame_jacobi_equation).  ⚠ HONEST FIREWALL: the
+-- geodesic Raychaudhuri ODE along the ray — the parallel orthonormal FRAME existence is still M2b-2 (carried upstream), the
+-- θ↔r∂_r log J van-Vleck bridge (M3/K1/K2) is next, and this is NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesic_raychaudhuri
+#print axioms QIQTH.ExpMap.frameJacobi_matrix_ode
 
 end QIQTH.AxiomAudit
