@@ -95,3 +95,4 @@ combination = componentwise deriv) → M2b-5 (project the covariant Jacobi eqn o
 ⟹ Ỹ''=−R̃Ỹ) → feed M4b `trace_raychaudhuri` + M2b-4 `tr R̃=Ric` ⟹ geodesic Raychaudhuri θ'=−Ric(v,v)−tr(Θ²)
 along the ray → M4-full/M5/M6 ⟹ a₁=R/6. M2b-2 (parallel-transport existence) carriable-as-hyp, discharge later.
 - M2b-3a ✅ (`9cd64412`) FrameCovariantDeriv.lean — covariantDerivAlong_frame_combo + covariantSecondDeriv_frame_combo (covariant deriv = componentwise ordinary deriv in a parallel frame). NEXT: M2b-5 projection → Ỹ''=−R̃Ỹ.
+- M2b-5 ✅ (`d3f933ce`) FrameJacobiEquation.lean — frame_jacobi_equation (Yt_k''=−∑_j R̃_kj Yt_j, i.e. Ỹ''=−R̃Ỹ) + riemannGeodesicDeviation_linear. The clean matrix Jacobi ODE from projecting M2b-3 onto a parallel orthonormal frame. NEXT: Raychaudhuri assembly (package columnwise Y''=−R̃Y + M4b trace_raychaudhuri + M2b-4 tr R̃=Ric ⟹ geodesic Raychaudhuri θ'=−Ric−tr Θ² along the ray).
