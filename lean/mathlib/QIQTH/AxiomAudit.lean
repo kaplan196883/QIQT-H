@@ -13604,5 +13604,12 @@ namespace QIQTH.AxiomAudit
 -- of ONE transported vector — it does NOT build the orthonormal FRAME (next floor: n copies + parallel_orthonormal_preserved), NOT
 -- discharge vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.parallelTransport_local_existence
+-- (b3a) PARALLEL-TRANSPORT PARALLELISM (a₁=R/6 endgame / duality wall #1, step b, the hpar) — ParallelTransportParallel.lean:
+-- parallelTransport_covariantDeriv_zero — the transported vector (Γc·).2.2 of a geodesicTransportField integral curve is PARALLEL along
+-- the geodesic (Γc·).1: covariantDerivAlong g gi (Γc.1) (Γc.2.2) t = 0 (from covariantDerivAlong_apply + component projections; the e-ODE
+-- deriv(e)=−Γ(x)(ξ,e) cancels the connection term Γ(x)(ξ,e)).  This is the hpar hypothesis of parallel_orthonormal_preserved.
+-- ⚠ HONEST FIREWALL: parallelism of ONE transported vector — it does NOT build the orthonormal FRAME (next: n copies + ortho IC +
+-- localized preservation), NOT discharge vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.parallelTransport_covariantDeriv_zero
 
 end QIQTH.AxiomAudit

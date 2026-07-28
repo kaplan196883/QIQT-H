@@ -733,6 +733,7 @@ import QIQTH.RNCDecay
 -- does NOT discharge the RNC gauge (gated on smooth dependence on IC, absent from Mathlib), NOT numerical-G.
 import QIQTH.Geodesic
 import QIQTH.ParallelTransportField
+import QIQTH.ParallelTransportParallel
 -- RNC1: the √det g atom of the Riemann-normal-coordinate 2nd-order expansion — √det g = 1 − ⅙R_{cd}x^cx^d,
 -- CONDITIONAL on a carried tr∂∂g(0)=−⅔Ric (RNC3 discharges it). The ⅙ = source of the κ=1/6 conformal factor.
 -- NOT numerical-G, NOT a curved heat kernel. Standard three axioms.
