@@ -13590,5 +13590,12 @@ namespace QIQTH.AxiomAudit
 -- log det Y−½ log det g), the frame Raychaudhuri result h4, and no-conjugate positivity hpos + differentiability.  It does NOT construct
 -- the parallel frame (M2b-2 ODE — carried; the (b) grind discharges it), does NOT discharge h4/hrel, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_ray_secondDeriv_ricci
+-- (b1) PARALLEL-TRANSPORT FIELD (a₁=R/6 endgame / duality wall #1, step b = discharge the frame data) — ParallelTransportField.lean:
+-- geodesicTransportField (the AUTONOMOUS combined field F(x,ξ,e)=(ξ,−Γ(x)ξξ,−Γ(x)ξe) on the extended phase space Point×Point×Point:
+-- geodesic in (x,ξ) + parallel transport e'=−Γ(x)(ξ,e) in e) + contDiff_geodesicTransportField (its C∞ regularity, mirroring
+-- contDiff_geodesicField).  This is the Picard–Lindelöf INGREDIENT for parallel-transport existence.  ⚠ HONEST FIREWALL: the field +
+-- ContDiff only — it does NOT prove existence (next floor via exists_forall_mem_closedBall_..._hasDerivAt₀), NOT the frame construction,
+-- NOT discharge vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.contDiff_geodesicTransportField
 
 end QIQTH.AxiomAudit
