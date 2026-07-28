@@ -134,6 +134,7 @@ import QIQTH.FrameReconstruct
 import QIQTH.FrameComponentsHexp
 import QIQTH.FrameComponentsDeriv
 import QIQTH.CovariantDerivCurveCongr
+import QIQTH.ParallelFrameExpTube
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -13725,5 +13725,12 @@ namespace QIQTH.AxiomAudit
 -- ⚠ Pure germ-congruence connector: lets the parallel-frame data (built along the transport curve Γc.1) be rewritten onto expTube via the
 -- geodesic alignment Γc.1=ᶠexpTube.1.  Does NOT construct the frame nor discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.covariantDerivAlong_curve_congr
+-- (b4-frame-exists) ★ PARALLEL ORTHONORMAL FRAME ALONG expTube EXISTS — M2b-2 FRAME-EXISTENCE DISCHARGE (a₁=R/6 endgame / duality wall #1) — ParallelFrameExpTube.lean:
+-- parallelFrame_expTube_exists: from christoffel/metric ContDiff + symmetry + inverse-metric + PosDef(g p), ∃ δ>0, ∃ frame e, ∀ t∈Ioo(-δ)δ the FULL
+-- frame data holds along expTube g gi hC p v: he (C¹) ∧ hpar (covariantDerivAlong=0) ∧ hortho (g-orthonormal) ∧ hcomplete (∑eᵢ⊗eᵢ=gi) ∧ hinv.
+-- Built by parallelFrameTransport_local_existence (IC = exists_gorthonormal_frame at p) + parallelOrthoFrame_data (data along Γc.1) + frameTransport_geodesic_eq_expTube
+-- (alignment Γc.1=expTube on Ioo) + covariantDerivAlong_curve_congr (hpar rewrite Γc.1→expTube).  ★ DISCHARGES the frame-existence input carried by frame_raychaudhuri_ricci_nhds.
+-- ⚠ HONEST: local (∃δ, uncontrolled) — no global frame-transport in repo; van-Vleck interior s₀ is choosable in (0,δ).  Does NOT yet feed vanVleck_ray_secondDeriv_ricci_at, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.parallelFrame_expTube_exists
 
 end QIQTH.AxiomAudit
