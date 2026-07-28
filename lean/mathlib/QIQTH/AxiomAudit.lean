@@ -13672,5 +13672,13 @@ namespace QIQTH.AxiomAudit
 -- Matrix.det_mul/det_nonsing_inv.  This is the hrel hypothesis of vanVleck_ray_secondDeriv_ricci.  ⚠ HONEST FIREWALL: the frame-decomp
 -- log-det identity only — it does NOT prove the frame Raychaudhuri h4 (θ_Y'=−Ric), NOT the discharge assembly, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Curvature.logdet_frame_decomp_eventuallyEq
+-- (b4) GENERIC-POINT VAN-VLECK ENABLERS (a₁=R/6 endgame / duality wall #1, reparametrize to interior s₀) — VanVleckGenericPoint.lean:
+-- logdet_gtilde_ray_secondDeriv_at (the split at a GENERIC eval point t: deriv²(log det g̃∘ray) t = 2 LJ''+Lg'', 1→t re-index) +
+-- logJ_ray_secondDeriv_eq_at (the rescaling 2nd-deriv at generic t>0: LJ'' = LB'' + n/t², via deriv(s⁻¹) t = −(t²)⁻¹ + a hresc_of_pos_at
+-- helper generalizing hresc to 𝓝 t).  These enable the van-Vleck −Ric ODE at an INTERIOR point s₀∈(0,1) — where h4 = the already-proven
+-- expFlow_frame_raychaudhuri (interior t), AVOIDING the s=1 endpoint of expDiff_flow's [0,1] variation.  ⚠ HONEST FIREWALL: parametric
+-- generic-point restatements only — NOT the interior-s₀ van-Vleck assembly, NOT the discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.logdet_gtilde_ray_secondDeriv_at
+#print axioms QIQTH.ExpMap.logJ_ray_secondDeriv_eq_at
 
 end QIQTH.AxiomAudit
