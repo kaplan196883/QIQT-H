@@ -121,6 +121,7 @@ import QIQTH.GeodesicRaychaudhuri
 import QIQTH.FrameRaychaudhuri
 import QIQTH.ExpFlowRaychaudhuri
 import QIQTH.RaychaudhuriLogDet
+import QIQTH.LogDetSecondDerivTrace
 import QIQTH.TraceRaychaudhuriRescale
 import QIQTH.RadialRayDeriv
 import QIQTH.VanVleckRaychaudhuri

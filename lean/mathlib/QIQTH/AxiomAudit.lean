@@ -13687,5 +13687,11 @@ namespace QIQTH.AxiomAudit
 -- GENUINE standard frame data (Y, hrel, h4) + no-conjugate — the FINAL DISCHARGE (instantiate Y=E⁻¹B, frame data via alignment, hrel via
 -- logdet_frame_decomp_eventuallyEq, h4 via expFlow_frame_raychaudhuri at s₀) makes it unconditional.  NOT the discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_ray_secondDeriv_ricci_at
+-- (b4-h4 connector) LOG-DET 2ND-DERIV = θ-DERIV (a₁=R/6 endgame / duality wall #1, discharge) — LogDetSecondDerivTrace.lean:
+-- logdet_secondDeriv_eq_trace_deriv — deriv²(log det Y) s₀ = deriv(fun s => (Y' s * (Y s)⁻¹).trace) s₀ (from raychaudhuri_logdet_firstderiv
+-- giving deriv(log det Y)=ᶠ θ_Y=tr(Y'Y⁻¹), then EventuallyEq.deriv_eq).  This gives the van-Vleck h4 = deriv²(log det Y) s₀ = −Ric−Sh
+-- directly from the frame Raychaudhuri θ_Y'=−Ric−Sh (expFlow_frame_raychaudhuri).  ⚠ HONEST FIREWALL: a general calculus connector —
+-- it does NOT prove the frame Raychaudhuri itself, NOT the discharge assembly, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.logdet_secondDeriv_eq_trace_deriv
 
 end QIQTH.AxiomAudit
