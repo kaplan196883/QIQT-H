@@ -13478,5 +13478,11 @@ namespace QIQTH.AxiomAudit
 -- FIRST-derivative θ_B form only — it does NOT prove B''=−R̃B (the deep 2nd-order primitive needed for the −Ric SECOND-derivative),
 -- NOT hJv/hpos themselves, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.JacobianRegularity.expJacobianDet_radialDeriv_real
+-- 2nd-ORDER REGULARITY FLOOR of the real exp-Jacobi field (a₁=R/6 endgame) — JacobiC2.lean: expJacobiRay_contDiffAt_two proves
+-- B(s):=s•expJacobianMat(s•v) is ContDiffAt ℝ 2 at s=1 (via entrywise C² floor expJacobianMat_entry_contDiffOn_two + contDiffAt_pi×2
+-- + ray composition, under the elementwise matrix norm).  Hence B' AND B'' both EXIST at s=1 — the full regularity precondition for
+-- the matrix Jacobi identity.  ⚠ HONEST FIREWALL: 2nd-order REGULARITY only — it does NOT prove the identity B''=−R̃B (the deep
+-- 2nd-order geodesic smooth-dependence primitive, the SINGLE remaining obstruction to the −Ric van-Vleck ODE on the real J), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRegularity.expJacobiRay_contDiffAt_two
 
 end QIQTH.AxiomAudit
