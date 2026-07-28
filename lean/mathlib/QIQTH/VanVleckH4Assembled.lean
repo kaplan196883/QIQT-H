@@ -97,6 +97,9 @@ theorem vanVleck_h4_assembled (g gi : Point n → Fin n → Fin n → ℝ)
               = if i = k then (1 : ℝ) else 0) ∧
         (∀ᶠ s in nhds s₀,
             (Matrix.of (fun a i => e i s a) : Matrix (Fin n) (Fin n) ℝ).det ≠ 0) ∧
+        -- exposed frame `C¹` data (`e` is `C¹` along the ray) for a downstream `hu_ev`/`hYev` discharge:
+        (∀ i a, ∀ᶠ τ in nhds s₀,
+            HasDerivAt (fun s => e i s a) (deriv (fun s => e i s a) τ) τ) ∧
         -- exposed exp-flow data `Φ` (with `Φ 0 = id`, the `[0,1]` Jacobi law, and `V = Φ(0,e_j)`):
         -- this surfaces enough to discharge the radial-Jacobi link `hBV` in a downstream file
         -- (`radialJacobiLink_of_tubeTransverseVariation`), which cannot be imported here (cycle).
@@ -191,7 +194,7 @@ theorem vanVleck_h4_assembled (g gi : Point n → Fin n → Fin n → ℝ)
             (Set.Icc (0 : ℝ) 1) t) ∧
       (∀ j s, V j s = Φ' s ((0 : Point n), (Pi.single j (1 : ℝ) : Point n))) :=
     ⟨Φ, hΦ0, hflow, fun j s => by simp only [hVdef]⟩
-  refine ⟨e, V, hortho_ev, hEdet, hΦdata, fun hY2 hu_ev => ?_⟩
+  refine ⟨e, V, hortho_ev, hEdet, he, hΦdata, fun hY2 hu_ev => ?_⟩
   -- ===== the Jacobi variation property `hVar` (interior upgrade of the exp-flow column law) =====
   have hVar : ∀ j, ∀ᶠ τ in nhds s₀,
       IsGeodesicVariationAt g gi (expTube g gi hC p v) (V j) τ := by

@@ -183,6 +183,13 @@ theorem vanVleck_ricci_assembled (g gi : Point n → Fin n → Fin n → ℝ)
     (hgpd : Matrix.PosDef (g p : Matrix (Fin n) (Fin n) ℝ)) :
     ∃ (δ : ℝ), 0 < δ ∧ ∀ s₀ ∈ Set.Ioo (0 : ℝ) δ,
       ∃ (e : Fin n → ℝ → Point n) (V : Fin n → ℝ → Point n × Point n),
+        -- exposed frame-side data (orthonormality of `e` and its `C¹` regularity) for a downstream
+        -- discharge of the frame-Jacobi invertibility `hu_ev` and log-det differentiability `hYev`:
+        (∀ᶠ s in nhds s₀, ∀ i k,
+            (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
+              = if i = k then (1 : ℝ) else 0) ∧
+        (∀ i a, ∀ᶠ τ in nhds s₀,
+            HasDerivAt (fun s => e i s a) (deriv (fun s => e i s a) τ) τ) ∧
         -- exposed exp-flow data `Φ` (threaded from `vanVleck_h4_assembled`) for a downstream
         -- discharge of the radial-Jacobi link `hBV` (`V = Φ(0,e_j)`):
         (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
@@ -244,8 +251,8 @@ theorem vanVleck_ricci_assembled (g gi : Point n → Fin n → Fin n → ℝ)
               + 2 * (n : ℝ) / s₀ ^ 2) := by
   obtain ⟨δ, hδ, hbody⟩ := vanVleck_h4_assembled g gi hC hg hgsymm hgisymm hginv p v hv hgpd
   refine ⟨δ, hδ, fun s₀ hs₀ => ?_⟩
-  obtain ⟨e, V, hortho, hEdet, hΦdata, hh4⟩ := hbody s₀ hs₀
-  refine ⟨e, V, hΦdata, fun hY2 hu_ev hγ hBV hGdet hBdet hsplit hLJev hLmev hpos hLBev hYev
+  obtain ⟨e, V, hortho, hEdet, he, hΦdata, hh4⟩ := hbody s₀ hs₀
+  refine ⟨e, V, hortho, he, hΦdata, fun hY2 hu_ev hγ hBV hGdet hBdet hsplit hLJev hLmev hpos hLBev hYev
     hLJ2 hLm2 hLB2 hLY2 => ?_⟩
   have h4 := hh4 hY2 hu_ev
   have hrel := frameComponent_logdet_hrel g gi hC p v e V hγ hBV hortho hEdet hGdet hBdet

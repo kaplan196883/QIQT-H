@@ -110,6 +110,13 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
     (hgpd : Matrix.PosDef (g p : Matrix (Fin n) (Fin n) ℝ)) :
     ∃ (δ : ℝ), 0 < δ ∧ ∀ s₀ ∈ Set.Ioo (0 : ℝ) δ,
       ∃ (e : Fin n → ℝ → Point n) (V : Fin n → ℝ → Point n × Point n),
+        -- exposed frame-side data (orthonormality of `e` and its `C¹` regularity) for a downstream
+        -- discharge of the frame-Jacobi invertibility `hu_ev` and log-det differentiability `hYev`:
+        (∀ᶠ s in nhds s₀, ∀ i k,
+            (∑ a, ∑ b, g (expMap g gi hC p (s • v)) a b * e i s a * e k s b)
+              = if i = k then (1 : ℝ) else 0) ∧
+        (∀ i a, ∀ᶠ τ in nhds s₀,
+            HasDerivAt (fun s => e i s a) (deriv (fun s => e i s a) τ) τ) ∧
         -- exposed exp-flow data `Φ` (threaded) for the downstream `hBV` discharge (`V = Φ(0,e_j)`):
         (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
             Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
@@ -213,8 +220,8 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
     Filter.eventually_of_mem hballnhds (fun s hs => haball hs)
   have hs₀mem : s₀ ∈ Set.Ioo (0 : ℝ) δ :=
     ⟨hs₀.1, lt_of_lt_of_le hs₀.2 (min_le_left δ a)⟩
-  obtain ⟨e, V, hΦdata, hchain⟩ := hbody s₀ hs₀mem
-  refine ⟨e, V, hΦdata, fun hY2 hu_ev hBV hYev hLY2 => ?_⟩
+  obtain ⟨e, V, hortho, he, hΦdata, hchain⟩ := hbody s₀ hs₀mem
+  refine ⟨e, V, hortho, he, hΦdata, fun hY2 hu_ev hBV hYev hLY2 => ?_⟩
   -- ===== discharge the coordinate germs =====
   -- positivity arrows
   have hpos : ∀ᶠ s in nhds s₀, 0 < expJacobianDet g gi hC p (s • v) :=

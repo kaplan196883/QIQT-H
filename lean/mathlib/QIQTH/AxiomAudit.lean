@@ -13781,5 +13781,11 @@ namespace QIQTH.AxiomAudit
 --   corrected 0<det E → det E≠0, the true fact since exists_gorthonormal_frame gives no orientation).  ⚠ REMAINING carried: {hY2, hu_ev}[deep] + {hYev, hLY2}[ordinary
 --   log det Y regularity, derivable from hY2+hu_ev — honest checkpoint, not a wall].  NOT a₁=R/6.  [AF] std-3.  (Edited-engine pins above still std-3, statements enriched.)
 #print axioms QIQTH.ExpMap.vanVleck_ricci_frame_reduced
+-- (b4-hu-hYev) ★★★ hu_ev + hYev DISCHARGED ⟹ van-Vleck −Ric conditional on ONLY {hY2, hLY2} (a₁=R/6 endgame / duality wall #1) — VanVleckRicciFrameReduced2.lean:
+-- vanVleck_ricci_frame_reduced2: the interior van-Vleck −Ric radial ODE carrying ONLY (hY2)→(hLY2).  Engine files enriched (Option A) to thread he (frame C¹) + hortho_ev
+--   through the exposure.  hu_ev DISCHARGED via Matrix.isUnit_iff_isUnit_det + det Y=det B·det G·det E (Y=(BᵀGE)ᵀ): det E≠0/det G≠0 (gorthonormal_det_sq), det B>0
+--   (det_smul + expJacobianDet_pos_nhds + s>0).  hYev DISCHARGED via frameComponentMatrix_hasDerivAt (Y C¹ from g∘γ/V/e entrywise C¹) + raychaudhuri_logdet_firstderiv.differentiableAt.
+-- ⚠ REMAINING: {hY2 (frame C² = the ONE deep primitive, 2nd-order geodesic smooth-dependence), hLY2 (2nd-deriv germ of log det Y — folds from hY2+hu_ev via matrix log-det calculus)}.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_ricci_frame_reduced2
 
 end QIQTH.AxiomAudit
