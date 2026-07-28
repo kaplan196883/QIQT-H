@@ -13534,5 +13534,11 @@ namespace QIQTH.AxiomAudit
 -- (M2b-2 parallel-transport ODE existence — carried), does NOT connect θ_Y (frame) to the coordinate exp-differential θ_B / real J,
 -- NOT B''=−R̃B for the real matrix, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.frame_raychaudhuri_ricci_nhds
+-- TRACE-RAYCHAUDHURI det-rescale connection tool (a₁=R/6 endgame / duality wall #1) — TraceRaychaudhuriRescale.lean:
+-- trace_raychaudhuri_det_factor proves the trace-Raychaudhuri θ=tr(Y'Y⁻¹) transforms additively under a scalar determinant rescaling:
+-- if log det N =ᶠ[𝓝 τ] log det M + f then (N'N⁻¹).trace = (M'M⁻¹).trace + f' (via raychaudhuri_logdet_firstderiv on both + HasDerivAt.unique).
+-- With f=−½ log det(g∘γ) this is the θ_B(coordinate)↔θ_Y(frame) connection (frame det E=1/√det g).  ⚠ HONEST FIREWALL: a general
+-- determinant-rescaling identity — it does NOT prove B''=−R̃B, the −Ric van-Vleck ODE, or a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.trace_raychaudhuri_det_factor
 
 end QIQTH.AxiomAudit
