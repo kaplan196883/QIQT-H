@@ -145,6 +145,7 @@ import QIQTH.LogJSecondDerivRescale
 import QIQTH.VanVleckGenericPoint
 import QIQTH.Deriv2SubHalf
 import QIQTH.VanVleckRayRicci
+import QIQTH.VanVleckRayRicciAt
 import QIQTH.VanVleckTransportRadial
 import QIQTH.ParametrixTransportRadial
 import QIQTH.ParametrixTransportRicci

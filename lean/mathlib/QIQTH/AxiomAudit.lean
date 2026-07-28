@@ -13680,5 +13680,12 @@ namespace QIQTH.AxiomAudit
 -- generic-point restatements only — NOT the interior-s₀ van-Vleck assembly, NOT the discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.logdet_gtilde_ray_secondDeriv_at
 #print axioms QIQTH.ExpMap.logJ_ray_secondDeriv_eq_at
+-- (b4-s₀) INTERIOR-POINT VAN-VLECK −Ric ODE (a₁=R/6 endgame / duality wall #1) — VanVleckRayRicciAt.lean: vanVleck_ray_secondDeriv_ricci_at
+-- proves deriv²[log det g̃(s•v)]|_{s₀} = −2·Ric − 2·Sh + 2·n/s₀² at a GENERIC interior s₀>0 (the s=1 mirror with 1→s₀, +2n→+2n/s₀²),
+-- assembling logdet_gtilde_ray_secondDeriv_at + logJ_ray_secondDeriv_eq_at + deriv2_eventuallyEq_sub_half + h4.  This reparametrizes OFF
+-- the s=1 endpoint so h4 = the already-proven expFlow_frame_raychaudhuri (interior t=s₀).  ⚠ HONEST FIREWALL: CONDITIONAL on the carried
+-- GENUINE standard frame data (Y, hrel, h4) + no-conjugate — the FINAL DISCHARGE (instantiate Y=E⁻¹B, frame data via alignment, hrel via
+-- logdet_frame_decomp_eventuallyEq, h4 via expFlow_frame_raychaudhuri at s₀) makes it unconditional.  NOT the discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_ray_secondDeriv_ricci_at
 
 end QIQTH.AxiomAudit
