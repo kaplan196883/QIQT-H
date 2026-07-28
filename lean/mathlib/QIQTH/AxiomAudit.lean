@@ -13611,5 +13611,12 @@ namespace QIQTH.AxiomAudit
 -- ⚠ HONEST FIREWALL: parallelism of ONE transported vector — it does NOT build the orthonormal FRAME (next: n copies + ortho IC +
 -- localized preservation), NOT discharge vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.parallelTransport_covariantDeriv_zero
+-- (b3b-i) POINTWISE METRIC-INNER-CONST (a₁=R/6 endgame / duality wall #1, step b) — ParallelMetricInnerAt.lean:
+-- parallel_metricInner_const_at — the at-τ form of parallel_metricInner_const (M2b-1): the g-inner product ⟨e,f⟩_g of two
+-- parallel-transported vectors has derivative 0 AT τ, needing the transport ODE (hep/hfp) only at the single point τ.  This makes it
+-- applicable to a LOCALLY-existing parallel transport (an interval, not ∀τ) — so orthonormality is preserved on the transport
+-- neighborhood via is_const_of_deriv_eq_zero.  ⚠ HONEST FIREWALL: the pointwise metric-preservation only — it does NOT build the
+-- orthonormal FRAME (next: localized preservation + n-vector assembly), NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ParallelTransport.parallel_metricInner_const_at
 
 end QIQTH.AxiomAudit
