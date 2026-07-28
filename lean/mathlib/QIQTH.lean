@@ -110,6 +110,7 @@ import QIQTH.MatrixRaychaudhuri
 import QIQTH.ParallelTransport
 import QIQTH.FrameRicci
 import QIQTH.CovariantJacobiOffCenter
+import QIQTH.FrameCovariantDeriv
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries

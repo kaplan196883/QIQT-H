@@ -13321,5 +13321,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_expand
 #print axioms QIQTH.ExpMap.covariantJacobiOffCenter_finset_match
 #print axioms QIQTH.ExpMap.covariant_jacobi_equation
+-- M2b-3a (off-radial matrix Jacobi campaign, parallel-frame route) — the FRAME COVARIANT DERIVATIVE (FrameCovariantDeriv.lean):
+-- covariantDerivAlong_frame_combo (covariantDerivAlong g gi γ (∑_i Y_i·e_i) = ∑_i (deriv Y_i)·e_i for a PARALLEL frame, hpar) +
+-- covariantSecondDeriv_frame_combo (twice ⟹ ∑_i (deriv² Y_i)·e_i).  In a parallel frame the covariant derivative acts as the
+-- ORDINARY derivative on components — combined with covariant_jacobi_equation (M2b-3) + orthonormality this projects to the
+-- clean frame Jacobi eqn Ỹ''=−R̃Ỹ (M2b-5).  ⚠ HONEST FIREWALL: the covariant-deriv-=-componentwise-deriv half only — e_i
+-- parallel carried as hpar (existence = M2b-2), NOT the projection Ỹ''=−R̃Ỹ (M2b-5), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantDerivAlong_frame_combo
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_frame_combo
 
 end QIQTH.AxiomAudit
