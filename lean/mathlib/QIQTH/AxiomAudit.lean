@@ -13378,5 +13378,13 @@ namespace QIQTH.AxiomAudit
 -- orthonormality.  ⚠ HONEST FIREWALL: does NOT construct the parallel frame (existence = M2b-2, the linear frame ODE, carried
 -- as he/hep); NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ParallelTransport.parallel_orthonormal_preserved
+-- ★ EXP-JET3-1 (Y=D exp campaign) — the exp-differential flow is a GEODESIC VARIATION (ExpDiffVariation.lean):
+-- expDiff_flow_isGeodesicVariation bundles hasFDerivAt_expMap's operator flow Φ (Φ 0=id, fderiv exp_p v = π∘Φ(1)∘ι) with the
+-- fact that, applied to any fixed w, V_w(t)=(Φ t)w satisfies the geodesic variational equation V_w'(t)=DF(expTube t)(V_w t)
+-- within [0,1] (via ContinuousLinearMap.apply on Φ's HasDerivWithinAt + expJetPsi_apply).  So the columns of D exp_p ARE
+-- Jacobi fields — the foundation of the Y=D exp identification discharging hYexp.  ⚠ HONEST FIREWALL: D exp columns = Jacobi
+-- fields only — does NOT yet assemble expJacobianMat into a matrix Jacobi field or prove det Y=expJacobianDet (later EXP-JET3
+-- bricks), does NOT discharge hYexp, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expDiff_flow_isGeodesicVariation
 
 end QIQTH.AxiomAudit
