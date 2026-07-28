@@ -13362,5 +13362,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RadialDistance.radialDeriv_eq_fderiv
 #print axioms QIQTH.RadialDistance.hasDerivAt_ray
 #print axioms QIQTH.RadialDistance.radialDeriv_eq_ray_deriv
+-- ★ CONDITIONAL VAN-VLECK BRIDGE (off-radial matrix Jacobi campaign) — the physics identity θ=r∂_r log J (VanVleckRaychaudhuri.lean):
+-- raychaudhuri_expansion_eq_radialDeriv_logJ (radialDeriv(log expJacobianDet) v = (Y' 1·(Y 1)⁻¹).trace = θ, the geodesic
+-- Raychaudhuri expansion) + vanVleck_radialDeriv_via_raychaudhuri (radialDeriv(log det g̃) v = 2θ + radialDeriv(log det(g∘exp)) v,
+-- via K1/K2 radialDeriv_log_det_split).  Connects the geodesic Raychaudhuri (θ'=−Ric−tr Θ²) to the van-Vleck determinant det g̃.
+-- ⚠ HONEST FIREWALL: CONDITIONAL on hYexp (the labeled geometric input Y=D exp_p: matrix-Jacobi det along the ray = the exp-
+-- Jacobian J, near s=1) — hYexp is a genuine hypothesis (dischargeable via the repo's EXP-JET3, currently incomplete), NOT the
+-- conclusion.  Does NOT discharge Y=D exp, NOT the O(1/t) cancellation (M5), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.raychaudhuri_expansion_eq_radialDeriv_logJ
+#print axioms QIQTH.ExpMap.vanVleck_radialDeriv_via_raychaudhuri
 
 end QIQTH.AxiomAudit

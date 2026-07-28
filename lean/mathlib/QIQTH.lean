@@ -115,6 +115,7 @@ import QIQTH.FrameJacobiEquation
 import QIQTH.GeodesicRaychaudhuri
 import QIQTH.RaychaudhuriLogDet
 import QIQTH.RadialRayDeriv
+import QIQTH.VanVleckRaychaudhuri
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries
