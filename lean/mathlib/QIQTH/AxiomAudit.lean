@@ -13347,5 +13347,12 @@ namespace QIQTH.AxiomAudit
 -- θ↔r∂_r log J van-Vleck bridge (M3/K1/K2) is next, and this is NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesic_raychaudhuri
 #print axioms QIQTH.ExpMap.frameJacobi_matrix_ode
+-- LOG-DET BRIDGE (off-radial matrix Jacobi campaign) — the Raychaudhuri expansion as the log-det derivative (RaychaudhuriLogDet.lean):
+-- raychaudhuri_logdet_firstderiv (d/dτ log det Y = tr(Y'Y⁻¹) = θ, via M4a hasDerivAt_log_det_matrix + trace_mul_comm) +
+-- raychaudhuri_logdet (θ = d/dτ log det Y ∧ θ' = −Ric(v,v)−tr(Θ²) — the Jacobi-determinant potential log det Y obeys the
+-- geodesic Raychaudhuri equation).  ⚠ HONEST FIREWALL: abstract matrix Y — the geometric identification Y=D exp_p (⟹ det Y↔
+-- exp-Jacobian J↔det g̃ via K1/K2) and the van-Vleck radial ODE r∂_r log det g̃→Ric are the NEXT gate, NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.raychaudhuri_logdet_firstderiv
+#print axioms QIQTH.ExpMap.raychaudhuri_logdet
 
 end QIQTH.AxiomAudit

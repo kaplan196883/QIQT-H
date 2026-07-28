@@ -113,6 +113,7 @@ import QIQTH.CovariantJacobiOffCenter
 import QIQTH.FrameCovariantDeriv
 import QIQTH.FrameJacobiEquation
 import QIQTH.GeodesicRaychaudhuri
+import QIQTH.RaychaudhuriLogDet
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries
