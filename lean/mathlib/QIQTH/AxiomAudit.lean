@@ -13739,5 +13739,16 @@ namespace QIQTH.AxiomAudit
 -- hY/hYmat/hY'mat/hu from frameComponent(Matrix)_hasDerivAt) — only hY2 (2nd-order reg) + hu_ev (no-conjugate) remain as GENUINE carried arrows.
 -- ⚠ HONEST FIREWALL: this is the h4 term (−Ric−Sh) with frame data discharged; does NOT yet wire log det Y → coordinate van-Vleck J (that = b4-vanvleck via hrel), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_h4_assembled
+-- (b4-vanvleck) ★★★ VAN-VLECK −Ric SKELETON, FRAME ROUTE FULLY WIRED (a₁=R/6 endgame / duality wall #1) — VanVleckRicciAssembled.lean:
+-- frameComponent_logdet_hrel: the hrel crux (fun s=>log det(s•expJacobianMat…)) =ᶠ log det Y − ½ log det(g∘exp), for Y=of(frameComponent),
+--   proved DIRECTLY via det Y = det B·det G·det E (transpose/det_mul + gorthonormal_logdet) — no matrix inverse.  [AF] std-3.
+-- vanVleck_ricci_assembled: ∃δ>0 ∀s₀∈Ioo 0 δ ∃e,V, (hY2)→(hu_ev)→(hγ)→(hBV radial-Jacobi J(s)=s·(dexp)_{sv})→(hortho)→(hEdet/hGdet/hBdet pos)
+--   →(hsplit + analytic 2nd-deriv germs + hpos) → deriv²[log det g̃(s•v)]|s₀ = −2·Ric − 2·tr((Y'Y⁻¹)²) + 2n/s₀².  ★★★ The van-Vleck −Ric EQUATION
+--   with the FRAME ROUTE (frame existence + h4 + hrel) FULLY ASSEMBLED — combining vanVleck_h4_assembled + frameComponent_logdet_hrel + vanVleck_ray_secondDeriv_ricci_at.
+-- ⚠ HONEST FIREWALL: the algebraic/geometric SKELETON is complete; the result is CONDITIONAL on genuine (non-vacuous, non-conclusion) carried arrows —
+--   {hY2 C²-reg, hu_ev no-conjugate} + geometric {hγ expTube=exp, hBV radial-Jacobi link (NOT yet a repo lemma, only s=1 endpoint), hortho, det-positivity}
+--   + standard analytic germs (hsplit, differentiability, four 2nd-deriv HasDerivAt).  Discharging these (follow-on bricks) ⟹ unconditional.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.frameComponent_logdet_hrel
+#print axioms QIQTH.ExpMap.vanVleck_ricci_assembled
 
 end QIQTH.AxiomAudit
