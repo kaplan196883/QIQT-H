@@ -13765,5 +13765,13 @@ namespace QIQTH.AxiomAudit
 --   hypothesis ((Φ s (0,e_j)).1 a =ᶠ (s•expJacobianMat(s•v)) a j, Φ = expDiff_flow's flow).  ★★ The transverse smooth-dependence primitive hΦvar is DISCHARGED;
 --   hBV is now UNCONDITIONAL at interior s₀∈(0,1) (exactly the assembled use in VanVleckH4Assembled).  ⚠ scope: (0,1) geodesic interior.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.radialJacobiLink_uncond
+-- (b4-smooth-coord) COORDINATE GERM BUNDLE DISCHARGED (a₁=R/6 endgame / duality wall #1, discharge campaign) — VanVleckRicciReduced.lean:
+-- vanVleck_ricci_reduced: the van-Vleck −Ric radial ODE with 11 COORDINATE-side germs discharged INLINE from repo exp-Jacobian smoothness/positivity
+--   (hγ←expMap_smul_eq_expTube; hpos←expJacobianDet_pos_nhds; hGdet←PosDef.det_pos; hBdet←det_smul; hsplit←logdet_gtilde_split; hLJev/hLJ2←log_expJacobianDet C²;
+--    hLmev/hLm2←expMap C² + det-smoothness; hLBev/hLB2←hresc_of_pos_at) — reducing ~17 arrows to 7 CARRIED: {hY2,hu_ev,hBV,hortho,hEdet,hYev,hLY2}.
+-- + helpers contDiffAt_two_deriv_germs, contDiffAt_matrixDet.  ⚠ HONEST: hBV is CARRIED not discharged — radialJacobiLink_uncond proves it for the EXPLICIT
+--   exp-flow V, but vanVleck_h4_assembled returns V opaquely through ∃, so no unification (needs the refactor surfacing V as data).  Remaining: 2 deep {hY2,hu_ev}
+--   + frame-side {hortho,hEdet,hYev,hLY2} (reachable via concrete-(e,V) refactor) + hBV (refactor-alignment).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_ricci_reduced
 
 end QIQTH.AxiomAudit

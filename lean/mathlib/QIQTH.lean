@@ -139,6 +139,7 @@ import QIQTH.VanVleckH4Assembled
 import QIQTH.VanVleckRicciAssembled
 import QIQTH.RadialJacobiLink
 import QIQTH.TransverseVariationDischarge
+import QIQTH.VanVleckRicciReduced
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
