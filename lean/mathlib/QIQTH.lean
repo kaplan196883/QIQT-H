@@ -124,6 +124,7 @@ import QIQTH.RadialRayDeriv
 import QIQTH.VanVleckRaychaudhuri
 import QIQTH.ParallelOrthonormal
 import QIQTH.OrthonormalFrameExists
+import QIQTH.OrthonormalFrameDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
 import QIQTH.ExpMatrixJacobi

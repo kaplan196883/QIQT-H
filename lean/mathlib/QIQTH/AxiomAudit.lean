@@ -13554,5 +13554,12 @@ namespace QIQTH.AxiomAudit
 -- it does NOT build the parallel transport of the frame along the curve (the linear frame ODE e_i'=−Γ(γ)(γ',e_i), M2b-2, still open),
 -- does NOT discharge expFlow_frame_raychaudhuri's carried frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Curvature.exists_gorthonormal_frame
+-- METRIC-FACTOR lemma (a₁=R/6 endgame / duality wall #1, coordinate connection a) — OrthonormalFrameDet.lean: gorthonormal_det_sq
+-- ((det E)²·det G = 1 for a g-orthonormal frame Eᵀ·G·E=1, via det_mul/det_transpose) + gorthonormal_logdet (log(det E²)=−log det G).
+-- This is the SOURCE of the f=−½ log det g metric factor that feeds trace_raychaudhuri_det_factor for the θ_B(coord)↔θ_Y(frame)
+-- connection (frame det E=1/√det g).  ⚠ HONEST FIREWALL: a general determinant identity — it does NOT prove the θ connection itself,
+-- NOT the det Y=sⁿ·J·√det g relation, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Curvature.gorthonormal_det_sq
+#print axioms QIQTH.Curvature.gorthonormal_logdet
 
 end QIQTH.AxiomAudit
