@@ -13618,5 +13618,12 @@ namespace QIQTH.AxiomAudit
 -- neighborhood via is_const_of_deriv_eq_zero.  ⚠ HONEST FIREWALL: the pointwise metric-preservation only — it does NOT build the
 -- orthonormal FRAME (next: localized preservation + n-vector assembly), NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ParallelTransport.parallel_metricInner_const_at
+-- (b3b-ii) INTERVAL ORTHONORMALITY (a₁=R/6 endgame / duality wall #1, step b) — ParallelInnerInterval.lean:
+-- parallelPair_metricInner_eq_on_Ioo — the g-inner product ⟨e,f⟩_g of two parallel-transported vectors is CONSTANT on the transport
+-- interval Ioo a b (parallel_metricInner_const_at gives deriv 0 at each point; IsOpen.is_const_of_deriv_eq_zero on the open
+-- preconnected interval).  So an orthonormal IC at an interior t propagates to orthonormality on the whole transport neighborhood
+-- (hortho).  ⚠ HONEST FIREWALL: interval orthonormality preservation — it does NOT assemble the n-vector FRAME (next: b3c) nor
+-- discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ParallelTransport.parallelPair_metricInner_eq_on_Ioo
 
 end QIQTH.AxiomAudit

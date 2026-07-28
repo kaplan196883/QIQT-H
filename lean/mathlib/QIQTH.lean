@@ -109,6 +109,7 @@ import QIQTH.JacobiFormula
 import QIQTH.MatrixRaychaudhuri
 import QIQTH.ParallelTransport
 import QIQTH.ParallelMetricInnerAt
+import QIQTH.ParallelInnerInterval
 import QIQTH.FrameRicci
 import QIQTH.CovariantJacobiOffCenter
 import QIQTH.CovariantJacobiNhds
