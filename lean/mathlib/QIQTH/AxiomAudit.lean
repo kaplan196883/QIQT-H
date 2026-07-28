@@ -13461,5 +13461,13 @@ namespace QIQTH.AxiomAudit
 -- establishes that radialDeriv²(log J) EXISTS off-center (the regularity half of the van-Vleck 2nd-order structure); it does NOT
 -- prove the Jacobi identity B''=−R̃B, NOT hresc, NOT the van-Vleck −Ric ODE unconditional, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.JacobianRegularity.log_expJacobianDet_contDiffOn_two
+-- hresc DISCHARGE (a₁=R/6 endgame, van-Vleck ODE conditional-hyp removal) — JacobiRescale.lean: hresc_of_pos proves the carried
+-- rescaling hypothesis hresc of expJacobianDet_radialDeriv_eq_raychaudhuri_sub_n HOLDS for the concrete B s := s•expJacobianMat(s•v),
+-- via Matrix.det_smul (det(s•M)=sⁿ·det M) + Real.log_mul/log_pow, conditional ONLY on hpos (∀ᶠ s in 𝓝 1, expJacobianDet(s•v)>0 —
+-- the no-conjugate-point positivity, carried like K2's expJacobianDet>0).  This converts hresc from an opaque "carried standard
+-- Jacobi-field↔exp-differential identity" into a TRANSPARENT determinant-homogeneity computation + an explicit positivity label.
+-- ⚠ HONEST FIREWALL: discharges hresc for THIS B down to no-conjugate positivity; does NOT prove hpos itself, NOT the Jacobi
+-- identity B''=−R̃B (the deep primitive), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRegularity.hresc_of_pos
 
 end QIQTH.AxiomAudit
