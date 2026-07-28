@@ -119,6 +119,7 @@ import QIQTH.VanVleckRaychaudhuri
 import QIQTH.ParallelOrthonormal
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
+import QIQTH.VanVleckTransportRadial
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries

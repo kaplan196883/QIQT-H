@@ -13392,5 +13392,14 @@ namespace QIQTH.AxiomAudit
 -- (0,e_i) at t=1.  ⚠ HONEST FIREWALL: expJacobianMat columns = Jacobi positions only — does NOT prove the matrix Jacobi ODE
 -- Y''=−R̃Y for expJacobianMat, NOT det=expJacobianDet ray connection / hYexp discharge (EXP-JET3-3), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expJacobianMat_eq_flow
+-- M5-a (off-radial matrix Jacobi campaign, parametrix O(1/t) side) — the van-Vleck TRANSPORT-TERM chain rule (VanVleckTransportRadial.lean):
+-- radialDeriv_rpow_neg_half (radialDeriv((f)^(−1/2)) v = −½·(f v)^(−1/2)·radialDeriv(log f) v, clean chain rule) + radialDeriv_vanVleck_factor
+-- (applied to Θ=(det g̃)^(−1/2)).  Connects the parametrix off-diagonal residual's transport term (1/t)·G·radialDeriv(Θ) (foldedCoeff…0=Θ,
+-- from parametrixResidual_offdiag_absorbed) to radialDeriv(log det g̃) — hence (via vanVleck_radialDeriv_via_raychaudhuri, CONDITIONAL on
+-- Y=D exp) to the Raychaudhuri expansion θ.  ⚠ HONEST FIREWALL: the chain-rule identity for the transport term ONLY — does NOT perform the
+-- full O(1/t) cancellation (matching vs the flat-Gaussian curvature piece (I) + metric-deviation (IV) = deeper M5), NOT a₁=R/6, and the
+-- θ-link stays conditional on Y=D exp.  [AF] std-3.
+#print axioms QIQTH.ExpMap.radialDeriv_rpow_neg_half
+#print axioms QIQTH.ExpMap.radialDeriv_vanVleck_factor
 
 end QIQTH.AxiomAudit
