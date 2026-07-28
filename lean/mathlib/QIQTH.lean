@@ -117,6 +117,7 @@ import QIQTH.FrameJacobiEquation
 import QIQTH.FrameJacobiEquationNhds
 import QIQTH.GeodesicRaychaudhuri
 import QIQTH.FrameRaychaudhuri
+import QIQTH.ExpFlowRaychaudhuri
 import QIQTH.RaychaudhuriLogDet
 import QIQTH.TraceRaychaudhuriRescale
 import QIQTH.RadialRayDeriv

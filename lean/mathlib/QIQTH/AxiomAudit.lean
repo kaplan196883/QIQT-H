@@ -13540,5 +13540,12 @@ namespace QIQTH.AxiomAudit
 -- With f=−½ log det(g∘γ) this is the θ_B(coordinate)↔θ_Y(frame) connection (frame det E=1/√det g).  ⚠ HONEST FIREWALL: a general
 -- determinant-rescaling identity — it does NOT prove B''=−R̃B, the −Ric van-Vleck ODE, or a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.trace_raychaudhuri_det_factor
+-- EXP-FLOW −Ric RAYCHAUDHURI (a₁=R/6 endgame / duality wall #1) — ExpFlowRaychaudhuri.lean: expFlow_frame_raychaudhuri specializes
+-- frame_raychaudhuri_ricci_nhds to the REAL exp geodesic γ=expTube g gi hC p v.  hγ (the geodesic ODE) is DISCHARGED from expTube_spec
+-- (Ioo(-2,2)⊇𝓝 t, interior t∈Ioo 0 1); hVar + the full parallel-orthonormal frame data (e,Yt,hY,hY2,he,hpar,hortho,hcomplete,hinv,
+-- hexp,hYmat,hY'mat,hu) are CARRIED as GENUINE (audited non-vacuous) hypotheses.  Conclusion = genuine θ'=−Ric(γ',γ')−tr(Θ²) for the
+-- exp geodesic.  ⚠ HONEST FIREWALL: hγ discharged, frame data still carried — does NOT construct the parallel frame (M2b-2 ODE, carried),
+-- NOT discharge hVar concretely (avoids coupling hexp to the existential flow Φ), NOT connect θ_Y to the coordinate van-Vleck J, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expFlow_frame_raychaudhuri
 
 end QIQTH.AxiomAudit
