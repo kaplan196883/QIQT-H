@@ -13750,5 +13750,13 @@ namespace QIQTH.AxiomAudit
 --   + standard analytic germs (hsplit, differentiability, four 2nd-deriv HasDerivAt).  Discharging these (follow-on bricks) ⟹ unconditional.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.frameComponent_logdet_hrel
 #print axioms QIQTH.ExpMap.vanVleck_ricci_assembled
+-- (b4-hBV) RADIAL JACOBI LINK — hBV REDUCED to one labeled primitive (a₁=R/6 endgame / duality wall #1, discharge campaign) — RadialJacobiLink.lean:
+-- radialJacobiLink_of_transverseRescale: hBV [(V j s).1 a =ᶠ (s•expJacobianMat(s•v)) a j] from hΦresc (Φ position = fderiv exp_p(s•v)(s•w); s• via map_smul).
+-- radialJacobiLink_of_geodesicVariation: hBV reduced ONE NOTCH DEEPER, to hΦvar (Φ position = velocity-variation deriv of exp_p(s•v+ε•(s•w)) at ε=0) —
+--   the s• factor + fderiv exp_p produced INSIDE via hasFDerivAt_expMap + comp_hasDerivAt + HasDerivAt.unique; only the raw transverse Jacobi-as-variation carried.
+-- ⚠ HONEST: FLOOR F1 — hBV is REDUCED to the single labeled genuine primitive hΦvar/hΦresc = the checkpointed TRANSVERSE smooth-dependence-of-geodesics-on-IC
+--   (the w-direction the radial expMap_smul_eq_expTube floor does NOT supply).  NOT a full hBV discharge; NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.radialJacobiLink_of_transverseRescale
+#print axioms QIQTH.ExpMap.radialJacobiLink_of_geodesicVariation
 
 end QIQTH.AxiomAudit

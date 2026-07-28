@@ -137,6 +137,7 @@ import QIQTH.CovariantDerivCurveCongr
 import QIQTH.ParallelFrameExpTube
 import QIQTH.VanVleckH4Assembled
 import QIQTH.VanVleckRicciAssembled
+import QIQTH.RadialJacobiLink
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
