@@ -116,6 +116,7 @@ import QIQTH.GeodesicRaychaudhuri
 import QIQTH.RaychaudhuriLogDet
 import QIQTH.RadialRayDeriv
 import QIQTH.VanVleckRaychaudhuri
+import QIQTH.ParallelOrthonormal
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries

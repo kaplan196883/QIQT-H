@@ -13371,5 +13371,12 @@ namespace QIQTH.AxiomAudit
 -- conclusion.  Does NOT discharge Y=D exp, NOT the O(1/t) cancellation (M5), NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.ExpMap.raychaudhuri_expansion_eq_radialDeriv_logJ
 #print axioms QIQTH.ExpMap.vanVleck_radialDeriv_via_raychaudhuri
+-- M2b-2a (off-radial matrix Jacobi campaign) — ORTHONORMALITY PRESERVATION under parallel transport (ParallelOrthonormal.lean):
+-- parallel_orthonormal_preserved proves a parallel frame orthonormal at τ=0 (h0) stays orthonormal for all τ (∑ab g_ab(γτ)·
+-- e_i^a·e_j^b = δ_ij), from the M2b-1 isometry (parallel_metricInner_const: ⟨e_i,e_j⟩_g has derivative 0) + is_const_of_deriv_eq_zero.
+-- DISCHARGES the hortho hypothesis carried by frame_jacobi_equation/geodesic Raychaudhuri, GIVEN parallel transport + initial
+-- orthonormality.  ⚠ HONEST FIREWALL: does NOT construct the parallel frame (existence = M2b-2, the linear frame ODE, carried
+-- as he/hep); NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ParallelTransport.parallel_orthonormal_preserved
 
 end QIQTH.AxiomAudit
