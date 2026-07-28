@@ -13706,5 +13706,11 @@ namespace QIQTH.AxiomAudit
 -- vanVleck_ray_secondDeriv_ricci_at, CONDITIONAL on the carried frame data (still to be constructed from the parallel frame + exp-flow
 -- Jacobi fields); NOT the frame-data construction, NOT the full discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expFlow_frame_h4
+-- (b4-Yt/hexp) FRAME COMPONENTS + hexp (a₁=R/6 endgame / duality wall #1, discharge) — FrameComponentsHexp.lean:
+-- frameComponent (Yt_ji := ⟨(V j).1, e_i⟩_g = ∑ g(γ s) (V j).1 e_i) + frameComponents_hexp (∑_i Yt_ji e_i =ᶠ[𝓝 t] (V j).1, the hexp
+-- decomposition, via gorthonormal_frame_reconstruct pointwise using ∀ᶠ completeness/inverse/symmetry along the curve).  This is the
+-- hexp hypothesis of expFlow_frame_raychaudhuri/expFlow_frame_h4.  ⚠ HONEST FIREWALL: the Yt definition + hexp only — it does NOT build
+-- the Yt matrix regularity (hY/hYmat) nor no-conjugate hu, NOT the full discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.frameComponents_hexp
 
 end QIQTH.AxiomAudit
