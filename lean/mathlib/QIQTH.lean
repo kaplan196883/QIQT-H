@@ -127,6 +127,7 @@ import QIQTH.VanVleckRaychaudhuri
 import QIQTH.ParallelOrthonormal
 import QIQTH.OrthonormalFrameExists
 import QIQTH.OrthonormalFrameDet
+import QIQTH.OrthonormalFrameComplete
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
 import QIQTH.ExpMatrixJacobi

@@ -13645,5 +13645,11 @@ namespace QIQTH.AxiomAudit
 -- projection).  The per-column hpar for parallel_orthonormal_preserved.  ⚠ HONEST FIREWALL: per-column parallelism only — it does NOT
 -- package the orthonormal-frame data (hortho/he/hcomplete, next b3d-2), NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.frameTransport_covariantDeriv_zero
+-- (hcomplete) ORTHONORMAL FRAME COMPLETENESS (a₁=R/6 endgame / duality wall #1, step b frame packaging) — OrthonormalFrameComplete.lean:
+-- gorthonormal_frame_complete — a g-orthonormal frame is COMPLETE: ∑_i e_i^μ e_i^ν = gi^μν, from Eᵀ·G·E=1 ⟹ E·Eᵀ=G⁻¹=Giᵀ
+-- (Matrix.mul_eq_one_comm + the metric inverse), using inverse-metric symmetry hGisymm (genuine).  This is the hcomplete hypothesis of
+-- frame_ricci_trace / expFlow_frame_raychaudhuri, derived from hortho + hinv.  ⚠ HONEST FIREWALL: a general linear-algebra completeness
+-- identity — it does NOT construct the frame nor discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Curvature.gorthonormal_frame_complete
 
 end QIQTH.AxiomAudit
