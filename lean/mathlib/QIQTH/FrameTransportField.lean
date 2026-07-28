@@ -76,4 +76,23 @@ theorem contDiff_geodesicFrameTransportField (g gi : Point n → Fin n → Fin n
       ((contDiff_apply ℝ ℝ k).comp
         ((contDiff_apply ℝ (Point n) m).comp (contDiff_snd.comp contDiff_snd)))
 
+/-- **Local existence (Picard–Lindelöf) of the geodesic + whole-frame parallel-transport integral
+    curve.**  Mirroring `QIQTH.Geodesic.parallelTransport_local_existence`, from the `C^∞` regularity
+    of the combined field (`contDiff_geodesicFrameTransportField`) Mathlib's local-existence theorem
+    produces, through each initial state `z₀ = (p, v, E₀)` and each base time `t₀`, an integral curve
+    `γ : ℝ → Point n × Point n × (Fin n → Point n)` with `γ t₀ = z₀` and `HasDerivAt γ` equal to the
+    field on an interval `(t₀ - ε, t₀ + ε)`.  Interpretation: `γ.1` is the geodesic position, `γ.2.1`
+    the velocity, and `γ.2.2 : Fin n → Point n` the parallel-transported FRAME `{e_m(t)}` — each frame
+    vector `γ.2.2 m` obeys `(e_m)'_a = −Γ(γ.1)(γ.2.1, e_m)_a`, so the whole frame `E₀` is transported
+    in parallel along the geodesic.  Does NOT yet package the orthonormal-frame data
+    (`hpar`/`he`/`hortho`/`hcomplete` — the next floor), discharge the van-Vleck frame data, nor
+    establish `a₁ = R/6`. -/
+theorem parallelFrameTransport_local_existence (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (z₀ : Point n × Point n × (Fin n → Point n)) (t₀ : ℝ) :
+    ∃ γ : ℝ → Point n × Point n × (Fin n → Point n), γ t₀ = z₀ ∧ ∃ ε > (0 : ℝ),
+      ∀ t ∈ Set.Ioo (t₀ - ε) (t₀ + ε), HasDerivAt γ (geodesicFrameTransportField g gi (γ t)) t :=
+  (((contDiff_geodesicFrameTransportField g gi hC).of_le le_top).contDiffAt
+    (x := z₀)).exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀ t₀
+
 end QIQTH.Geodesic

@@ -13632,5 +13632,12 @@ namespace QIQTH.AxiomAudit
 -- geodesic + the entire parallel frame {e_m}.  ⚠ HONEST FIREWALL: the field + ContDiff only — NOT existence (next), NOT the
 -- orthonormal-frame packaging, NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.contDiff_geodesicFrameTransportField
+-- (b3c-ii) WHOLE-FRAME TRANSPORT EXISTENCE (a₁=R/6 endgame / duality wall #1, step b) — FrameTransportField.lean:
+-- parallelFrameTransport_local_existence — ∃ integral curve (γ, frame) of geodesicFrameTransportField near t₀ (Picard–Lindelöf,
+-- verbatim copy of parallelTransport_local_existence with the whole-frame field).  γ.2.2 : Fin n → Point n is the PARALLEL FRAME
+-- {e_m(t)} transported along the geodesic; ONE curve carries the geodesic + the entire frame.  ⚠ HONEST FIREWALL: local existence of
+-- the transported frame — it does NOT yet package the orthonormal-frame data (hpar/he/hortho/hcomplete, next floor b3d), NOT discharge
+-- vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.parallelFrameTransport_local_existence
 
 end QIQTH.AxiomAudit
