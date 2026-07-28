@@ -13597,5 +13597,12 @@ namespace QIQTH.AxiomAudit
 -- ContDiff only — it does NOT prove existence (next floor via exists_forall_mem_closedBall_..._hasDerivAt₀), NOT the frame construction,
 -- NOT discharge vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.contDiff_geodesicTransportField
+-- (b2) PARALLEL-TRANSPORT LOCAL EXISTENCE (a₁=R/6 endgame / duality wall #1, step b) — ParallelTransportField.lean:
+-- parallelTransport_local_existence — ∃ integral curve (γ,e) of geodesicTransportField near t₀ (Picard–Lindelöf via
+-- ContDiffAt.exists_forall_mem_closedBall_..._hasDerivAt₀), a verbatim copy of geodesic_local_existence with the extended field.
+-- The e-component (γ.2.2) is the PARALLEL-TRANSPORTED vector along the geodesic (e'=−Γ(x)(ξ,e)).  ⚠ HONEST FIREWALL: local existence
+-- of ONE transported vector — it does NOT build the orthonormal FRAME (next floor: n copies + parallel_orthonormal_preserved), NOT
+-- discharge vanVleck_ray_secondDeriv_ricci's carried frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.parallelTransport_local_existence
 
 end QIQTH.AxiomAudit

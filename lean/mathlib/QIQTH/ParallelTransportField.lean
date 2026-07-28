@@ -69,4 +69,27 @@ theorem contDiff_geodesicTransportField (g gi : Point n → Fin n → Fin n → 
         ((contDiff_apply ℝ ℝ j).comp (contDiff_fst.comp contDiff_snd))).mul
       ((contDiff_apply ℝ ℝ k).comp (contDiff_snd.comp contDiff_snd))
 
+/-- **Local existence of the geodesic + parallel-transport integral curve (Picard–Lindelöf).**
+    For any initial phase point `z₀ = (p, v, e₀) ∈ Point n × Point n × Point n` and any base time
+    `t₀`, there is a curve `γ : ℝ → Point n × Point n × Point n` with `γ t₀ = z₀` solving the
+    first-order autonomous system `γ' t = F(γ t)` (with `F = geodesicTransportField g gi`) on an
+    open interval `(t₀ − ε, t₀ + ε)`.  Mirrors `geodesic_local_existence` exactly, swapping in the
+    extended field and phase space.  The components read: `γ.1` = geodesic position, `γ.2.1` =
+    velocity (`γ.1' = γ.2.1`, `γ.2.1' = −Γ(γ.1)(γ.2.1, γ.2.1)`), and `γ.2.2` = the
+    PARALLEL-TRANSPORTED vector `e(t)` along the geodesic (`e'(t) = −Γ(γ.1)(γ.2.1, e)`, i.e. the
+    covariant derivative of `e` along `γ.2.1` vanishes — parallelism).  Starting `z₀ = (p, v, e₀)`
+    transports `e₀` along the geodesic from `p` with velocity `v`.  Uses the `C¹` Picard–Lindelöf
+    lemma `ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀`.
+
+    HONEST: existence only.  This does NOT yet build the orthonormal FRAME (n copies of the
+    transported vector plus `parallel_orthonormal_preserved`, the next floor), does NOT discharge the
+    van-Vleck carried frame data, and does NOT establish `a₁ = R/6`. -/
+theorem parallelTransport_local_existence (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    (z₀ : Point n × Point n × Point n) (t₀ : ℝ) :
+    ∃ γ : ℝ → Point n × Point n × Point n, γ t₀ = z₀ ∧ ∃ ε > (0 : ℝ),
+      ∀ t ∈ Set.Ioo (t₀ - ε) (t₀ + ε), HasDerivAt γ (geodesicTransportField g gi (γ t)) t :=
+  (((contDiff_geodesicTransportField g gi hC).of_le le_top).contDiffAt
+    (x := z₀)).exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀ t₀
+
 end QIQTH.Geodesic
