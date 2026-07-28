@@ -13719,5 +13719,11 @@ namespace QIQTH.AxiomAudit
 -- the C¹ regularity of the frame components only (hYmat ingredient) — it does NOT build hu (no-conjugate) nor the discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.frameComponent_hasDerivAt
 #print axioms QIQTH.ExpMap.frameComponentMatrix_hasDerivAt
+-- (b4-curve-congr) COVARIANT-DERIV CURVE-GERM CONGRUENCE (a₁=R/6 endgame / duality wall #1, assembly connector) — CovariantDerivCurveCongr.lean:
+-- covariantDerivAlong_curve_congr: γ₁=ᶠ[𝓝 τ]γ₂ ⟹ covariantDerivAlong g gi γ₁ ξ τ = covariantDerivAlong g gi γ₂ ξ τ
+-- (the curve enters covariantDerivAlong both as christoffel base γ τ and as velocity deriv γ τ; congruence uses eq_of_nhds + deriv_eq).
+-- ⚠ Pure germ-congruence connector: lets the parallel-frame data (built along the transport curve Γc.1) be rewritten onto expTube via the
+-- geodesic alignment Γc.1=ᶠexpTube.1.  Does NOT construct the frame nor discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantDerivAlong_curve_congr
 
 end QIQTH.AxiomAudit
