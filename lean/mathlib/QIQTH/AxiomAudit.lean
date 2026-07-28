@@ -13506,5 +13506,14 @@ namespace QIQTH.AxiomAudit
 -- B''=−R̃B (needs covariantSecondDeriv_frame_combo_nhds + frame_jacobi_equation_nhds + parallel frame), NOT tr R̃=Ric, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_expand_nhds
 #print axioms QIQTH.ExpMap.covariant_jacobi_equation_nhds
+-- FRAME-ROUTE localization #2 (a₁=R/6 endgame / duality wall #1, B''=−R̃B sub-campaign) — FrameCovariantDerivNhds.lean: localizes the
+-- FRAME covariant 2nd-derivative combo from ∀τ to 𝓝 t.  (A) covariantDerivAlong_frame_combo_at (pointwise #1, hyps at the single τ);
+-- (B) covariantDerivAlong_congr_nhds (covariantDerivAlong depends only on the germ: f=ᶠ[𝓝 τ]h ⟹ equal, via EventuallyEq.deriv_eq +
+-- self_of_nhds); (C) covariantSecondDeriv_frame_combo_nhds (the frame 2nd-deriv combo with ∀ᶠτ in 𝓝 t hyps, using (B) to rewrite the
+-- inner covariant-deriv field at t).  ⚠ HONEST FIREWALL: localizes the frame covariant 2nd-deriv machinery — does NOT prove the frame
+-- Jacobi equation Yt''=−R̃Yt (needs frame_jacobi_equation_nhds), NOT tr R̃=Ric, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantDerivAlong_frame_combo_at
+#print axioms QIQTH.ExpMap.covariantDerivAlong_congr_nhds
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_frame_combo_nhds
 
 end QIQTH.AxiomAudit

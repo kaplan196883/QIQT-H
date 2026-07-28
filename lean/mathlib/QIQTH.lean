@@ -112,6 +112,7 @@ import QIQTH.FrameRicci
 import QIQTH.CovariantJacobiOffCenter
 import QIQTH.CovariantJacobiNhds
 import QIQTH.FrameCovariantDeriv
+import QIQTH.FrameCovariantDerivNhds
 import QIQTH.FrameJacobiEquation
 import QIQTH.GeodesicRaychaudhuri
 import QIQTH.RaychaudhuriLogDet
