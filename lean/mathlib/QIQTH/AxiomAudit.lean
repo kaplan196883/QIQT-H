@@ -13484,5 +13484,12 @@ namespace QIQTH.AxiomAudit
 -- the matrix Jacobi identity.  ⚠ HONEST FIREWALL: 2nd-order REGULARITY only — it does NOT prove the identity B''=−R̃B (the deep
 -- 2nd-order geodesic smooth-dependence primitive, the SINGLE remaining obstruction to the −Ric van-Vleck ODE on the real J), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.JacobianRegularity.expJacobiRay_contDiffAt_two
+-- B''=−R̃B BRIDGE (a₁=R/6 endgame, into the deep primitive) — JacobiSecondOrderLocal.lean: jacobiVariation_secondOrder_nhds
+-- LOCALIZES the unconditional coordinate 2nd-order Jacobi equation jacobiVariation_secondOrder from a ∀τ hypothesis to a
+-- NEIGHBORHOOD (∀ᶠ τ in 𝓝 t) of the geodesic-variation system, via HasDerivAt.congr_of_eventuallyEq.  This is the bridge letting
+-- #2 apply to the exp-flow (which gives the first-order system only on [0,1]; at interior t∈(0,1), Icc 0 1∈𝓝 t upgrades
+-- HasDerivWithinAt→HasDerivAt).  ⚠ HONEST FIREWALL: still the COORDINATE equation ξ''=−jacobiOperator — it does NOT prove the
+-- curvature identification jacobiOperator=R̃ (the checkpointed #3 analytic core), NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_nhds
 
 end QIQTH.AxiomAudit

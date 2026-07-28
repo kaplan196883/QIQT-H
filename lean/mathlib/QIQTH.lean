@@ -734,6 +734,7 @@ import QIQTH.ExpMap
 import QIQTH.GeodesicVariation
 import QIQTH.GeodesicSmoothDep
 import QIQTH.JacobiEquation
+import QIQTH.JacobiSecondOrderLocal
 import QIQTH.CovariantJacobi
 import QIQTH.ExpMapContDiff
 import QIQTH.ExpMapContDiff2
