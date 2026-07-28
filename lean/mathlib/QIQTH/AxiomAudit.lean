@@ -13582,5 +13582,13 @@ namespace QIQTH.AxiomAudit
 -- capstone chain).  ⚠ HONEST FIREWALL: a general calculus identity — it does NOT supply the frame decomposition, NOT the −2Ric
 -- van-Vleck ODE, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.deriv2_eventuallyEq_sub_half
+-- ★ (a) COORDINATE-CONNECTION CAPSTONE — VAN-VLECK −Ric ON THE REAL J (a₁=R/6 endgame / duality wall #1) — VanVleckRayRicci.lean:
+-- vanVleck_ray_secondDeriv_ricci proves deriv²[log det g̃(s•v)]|₁ = −2·Ric − 2·Sh + 2n on the REAL exp-Jacobian, assembling (FULL
+-- landed-lemma invocation, not carried) logdet_gtilde_ray_secondDeriv (split) + logJ_ray_secondDeriv_eq (h2) + deriv2_eventuallyEq_sub_half
+-- (h3, frame decomposition) + h4 (frame Raychaudhuri θ_Y'=−Ric−Sh), the metric factor Lm'' cancelling.  ⚠ HONEST FIREWALL: CONDITIONAL
+-- on carried GENUINE (audited non-vacuous) standard inputs — the frame Jacobi matrix Y, the frame decomposition hrel (log det B=ᶠ
+-- log det Y−½ log det g), the frame Raychaudhuri result h4, and no-conjugate positivity hpos + differentiability.  It does NOT construct
+-- the parallel frame (M2b-2 ODE — carried; the (b) grind discharges it), does NOT discharge h4/hrel, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_ray_secondDeriv_ricci
 
 end QIQTH.AxiomAudit
