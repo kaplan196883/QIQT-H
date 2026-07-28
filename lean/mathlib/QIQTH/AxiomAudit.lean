@@ -13401,5 +13401,13 @@ namespace QIQTH.AxiomAudit
 -- θ-link stays conditional on Y=D exp.  [AF] std-3.
 #print axioms QIQTH.ExpMap.radialDeriv_rpow_neg_half
 #print axioms QIQTH.ExpMap.radialDeriv_vanVleck_factor
+-- EXP-JET3-3a (Y=D exp campaign) — the ray-vs-geodesic RESCALING identity (ExpJacobianRescale.lean): expMap_smul_eq_expTube
+-- (exp_p(s•v) = (expTube p v s).1 for ‖v‖≤expRho, |s|≤1 — the exp-ray IS the direction-v geodesic tube's position, via
+-- geodesic_rescale + geodesic_local_unique) + hasDerivAt_expMap_smul_ray (d/ds exp_p(s•v) = the geodesic velocity (expTube p v s).2
+-- at parameter s).  The S1 rescaling FLOOR toward W(τ)=expJacobianMat(τ•v).  ⚠ HONEST FIREWALL: the ray-vs-geodesic identity only —
+-- the deep TARGET (Φ-flow rescaling / τ-scaling D exp(τv)[τw]=J_w(τ) / det B=τⁿ·expJacobianDet / hYexp discharge) is CHECKPOINTED
+-- (needs repo-absent no-conjugate-points + derivWithin-Jacobi + frame-det machinery).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_smul_eq_expTube
+#print axioms QIQTH.ExpMap.hasDerivAt_expMap_smul_ray
 
 end QIQTH.AxiomAudit
