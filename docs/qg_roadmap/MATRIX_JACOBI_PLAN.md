@@ -85,3 +85,12 @@ genuine walls; decompose or checkpoint honestly, NEVER fake. This is a multi-ses
 - M4b ✅ (`5164c89f`) `MatrixRaychaudhuri.lean` — hasDerivAt_matrix_inv ((Y⁻¹)'=−Y⁻¹Y'Y⁻¹ via hasFDerivAt_ringInverse + Matrix.nonsing_inv_eq_ringInverse) + matrix_riccati (Θ:=Y'Y⁻¹, Θ'=−A−Θ² from Y''=−A·Y) + trace_raychaudhuri (θ:=tr Θ, θ'=−tr A−tr(Θ²) via traceLinearMap). All [AF] std-3, budget 0. Abstract A.
 - ★ THE ABSTRACT ANALYTIC TOOLKIT (M1–M4b) IS COMPLETE (6 files: HadamardFactor, MatrixJacobi[+M3], JacobiFormula, MatrixRaychaudhuri). Everything reachable WITHOUT the geometry is landed: the regularization (Y=τW, W⁻¹ regular), the det/log split, the analytic Jacobi formula (d/dτ log det W = tr(W⁻¹W')), and the matrix Raychaudhuri (θ'=−tr A−tr Θ²).
 - ⚠ M2b (GEOMETRIC identification Y=D exp_p, Y''=−R(τ)Y along rays — the off-radial Jacobi eqn, the same off-center wall that stalled the L2c off-center agents) + M4-full (feeding tr A=Ric into the Raychaudhuri ODE) remain the deep geometric walls.
+
+## ★★★★ M2b-3 WALL CROSSED (2026-07-18)
+`covariant_jacobi_equation` (`d2f9b5e6`, CovariantJacobiOffCenter.lean) — the OFF-CENTER covariant Jacobi
+equation `D²ξ/dτ² = −R(ξ,v)v` ALONG THE WHOLE RAY (hyps = centered minus `hΓ0`; no vacuity), CLOSED axiom-clean
+(the identity that stalled 3 prior agents). ΓΓ-group closed by an explicit involution on `Fin n⁴`. THE geometric
+wall gating a₁=R/6 is removed. Remaining (now downhill): M2b-3a (covariantDerivAlong of a parallel-frame
+combination = componentwise deriv) → M2b-5 (project the covariant Jacobi eqn onto the parallel orthonormal frame
+⟹ Ỹ''=−R̃Ỹ) → feed M4b `trace_raychaudhuri` + M2b-4 `tr R̃=Ric` ⟹ geodesic Raychaudhuri θ'=−Ric(v,v)−tr(Θ²)
+along the ray → M4-full/M5/M6 ⟹ a₁=R/6. M2b-2 (parallel-transport existence) carriable-as-hyp, discharge later.
