@@ -108,6 +108,7 @@ import QIQTH.MatrixJacobi
 import QIQTH.JacobiFormula
 import QIQTH.MatrixRaychaudhuri
 import QIQTH.ParallelTransport
+import QIQTH.FrameRicci
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries

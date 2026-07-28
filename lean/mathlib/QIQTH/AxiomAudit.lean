@@ -13301,5 +13301,14 @@ namespace QIQTH.AxiomAudit
 -- clean matrix Jacobi eqn Ỹ''=−R̃Ỹ.  ⚠ HONEST FIREWALL: the isometry only — e,f carried as parallel (NOT constructed:
 -- existence = M2b-2); NOT the frame Jacobi eqn (M2b-3), NOT tr R̃=Ric (M2b-4), NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.ParallelTransport.parallel_metricInner_const
+-- M2b-4 (off-radial matrix Jacobi campaign, parallel-frame route) — the FRAME RICCI TRACE (FrameRicci.lean):
+-- frame_ricci_trace proves ∑_i ∑_ab g_ab·(R(e_i,v)v)^a·e_i^b = ∑_σν ricci_σν·v^σ·v^ν for an orthonormal frame {e_i} — the
+-- coordinate-free definition of Ricci as the trace of the curvature operator w↦R(w,v)v, holding at ANY point hence ALONG THE
+-- RAY (generalizing L3 geodesicDeviation_trace_eq_ricci, which was center-only in the coordinate basis).  Supplies tr R̃=Ric
+-- for the parallel-frame route.  Carries hcomplete (frame completeness ∑_i e_i^μ e_i^b = gi^{μb}, a standard exact frame
+-- identity — completeness-from-orthonormality deferred to a Matrix-inversion brick) + hinv (metric-inverse); neither assumes
+-- the conclusion.  ⚠ HONEST FIREWALL: the frame Ricci trace only — NOT parallel-frame existence (M2b-2), NOT the frame Jacobi
+-- eqn Ỹ''=−R̃Ỹ (M2b-3, the wall-crossing), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.FrameRicci.frame_ricci_trace
 
 end QIQTH.AxiomAudit
