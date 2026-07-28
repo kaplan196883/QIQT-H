@@ -13354,5 +13354,13 @@ namespace QIQTH.AxiomAudit
 -- exp-Jacobian J↔det g̃ via K1/K2) and the van-Vleck radial ODE r∂_r log det g̃→Ric are the NEXT gate, NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.ExpMap.raychaudhuri_logdet_firstderiv
 #print axioms QIQTH.ExpMap.raychaudhuri_logdet
+-- RADIAL↔RAY BRIDGE (off-radial matrix Jacobi campaign) — the Euler operator = ray derivative (RadialRayDeriv.lean):
+-- radialDeriv_eq_fderiv (radialDeriv f v = fderiv f v v) + hasDerivAt_ray + radialDeriv_eq_ray_deriv (radialDeriv f v =
+-- deriv(s↦f(s•v)) 1).  The parametrization bridge connecting K2's van-Vleck radialDeriv(log J) (Euler, tangent-space) to the
+-- RAY-parametrized geodesic Raychaudhuri expansion θ = d/ds log det Y.  ⚠ HONEST FIREWALL: the parametrization identity only —
+-- NOT the Y=D exp identification, NOT the van-Vleck radial ODE, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.RadialDistance.radialDeriv_eq_fderiv
+#print axioms QIQTH.RadialDistance.hasDerivAt_ray
+#print axioms QIQTH.RadialDistance.radialDeriv_eq_ray_deriv
 
 end QIQTH.AxiomAudit
