@@ -13625,5 +13625,12 @@ namespace QIQTH.AxiomAudit
 -- (hortho).  ⚠ HONEST FIREWALL: interval orthonormality preservation — it does NOT assemble the n-vector FRAME (next: b3c) nor
 -- discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ParallelTransport.parallelPair_metricInner_eq_on_Ioo
+-- (b3c-i) WHOLE-FRAME TRANSPORT FIELD (a₁=R/6 endgame / duality wall #1, step b) — FrameTransportField.lean:
+-- geodesicFrameTransportField (autonomous field on Point×Point×(Fin n→Point n), F(x,ξ,E)=(ξ,−Γξξ,fun m a=>−Γ(x)(ξ,E m) a):
+-- geodesic in (x,ξ) + parallel transport of the WHOLE FRAME E in one system) + contDiff_geodesicFrameTransportField (its C∞,
+-- mirroring contDiff_geodesicTransportField with a double contDiff_pi over frame×vector indices).  So ONE integral curve carries the
+-- geodesic + the entire parallel frame {e_m}.  ⚠ HONEST FIREWALL: the field + ContDiff only — NOT existence (next), NOT the
+-- orthonormal-frame packaging, NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.contDiff_geodesicFrameTransportField
 
 end QIQTH.AxiomAudit
