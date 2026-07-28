@@ -13440,5 +13440,11 @@ namespace QIQTH.AxiomAudit
 -- term in Raychaudhuri form, CONDITIONAL on hresc (rescaling) + B/K2 hyps — NOT the full O(1/t) cancellation (matching vs
 -- flat-Gaussian (I) + metric-deviation (IV)), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.parametrixTransport_raychaudhuri_form
+-- B-SIDE FLOOR (a₁=R/6 endgame, Y=D exp) — the exp-derived matrix Jacobi field endpoints (ExpMatrixJacobi.lean):
+-- expMatrixJacobi_flow bundles the Φ_v flow (from EXP-JET3-1) with B(0)=0 (Φ 0=id) and B(1)=expJacobianMat (EXP-JET3-2),
+-- where B(t)=Matrix.of((Φ t)(0,e_i)).1.  ⚠ HONEST FIREWALL: the FLOOR only (endpoints + first-variation flow) — the interior
+-- matrix Jacobi ODE B''=−R̃B is CHECKPOINTED (needs the interior 2nd derivative of the flow + covariant M2b-3 identification +
+-- the ∀τ-vs-[0,1] restriction of covariant_jacobi_equation).  Does NOT discharge the θ_B'=−Ric B-side hyp, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expMatrixJacobi_flow
 
 end QIQTH.AxiomAudit
