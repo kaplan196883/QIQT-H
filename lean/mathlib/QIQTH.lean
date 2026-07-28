@@ -123,6 +123,7 @@ import QIQTH.ExpJacobianRescale
 import QIQTH.ExpJacobianRicci
 import QIQTH.VanVleckRicciODE
 import QIQTH.VanVleckTransportRadial
+import QIQTH.ParametrixTransportRadial
 import QIQTH.GaussianConvBound
 import QIQTH.TimeSimplexBeta
 import QIQTH.LeviSeries

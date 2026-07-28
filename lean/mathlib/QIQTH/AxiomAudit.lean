@@ -13424,5 +13424,14 @@ namespace QIQTH.AxiomAudit
 -- the tautological vanVleck_radialDeriv_via_raychaudhuri).  ⚠ HONEST FIREWALL: CONDITIONAL on hresc (the rescaling det B=sⁿ·
 -- expJacobianDet, EXP-JET3-3a's checkpointed Φ-smooth-dependence target) + K2 regularity; NOT the M5 O(1/t) cancellation, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_radialDeriv_ricci_form
+-- M5-b (a₁=R/6 endgame, parametrix side) — the CORRECT parametrix transport term (ParametrixTransportRadial.lean):
+-- radialDeriv_rpow (general-power radial chain rule: radialDeriv((f)^p) v = p·(f v)^p·radialDeriv(log f) v) + radialDeriv_foldedCoeff_leading
+-- (p=1/4 at det g̃: radialDeriv((det g̃)^{1/4}) = ¼(det g̃)^{1/4}·radialDeriv(log det g̃)).  The leading folded coefficient is
+-- foldedCoeff 0 = Θ^{−1/2}·u_0 = (det g̃)^{1/4}·u_0 (Θ=vanVleck=(det g̃)^{−1/2}), so THIS +1/4 power is the correct parametrix
+-- (1/t)·G·radialDeriv(foldedCoeff 0) transport term — CORRECTING M5-a's −1/2 (= Θ itself, not the folded coeff).  Combined with
+-- vanVleck_radialDeriv_ricci_form it expresses the transport term via θ_B.  ⚠ HONEST FIREWALL: the transport-term chain rule only —
+-- NOT the full O(1/t) cancellation (matching vs flat-Gaussian (I) + metric-deviation (IV)), NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.radialDeriv_rpow
+#print axioms QIQTH.ExpMap.radialDeriv_foldedCoeff_leading
 
 end QIQTH.AxiomAudit
