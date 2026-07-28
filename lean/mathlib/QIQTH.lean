@@ -138,6 +138,7 @@ import QIQTH.ParallelFrameExpTube
 import QIQTH.VanVleckH4Assembled
 import QIQTH.VanVleckRicciAssembled
 import QIQTH.RadialJacobiLink
+import QIQTH.TransverseVariationDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

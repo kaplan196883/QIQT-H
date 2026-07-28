@@ -13758,5 +13758,12 @@ namespace QIQTH.AxiomAudit
 --   (the w-direction the radial expMap_smul_eq_expTube floor does NOT supply).  NOT a full hBV discharge; NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.radialJacobiLink_of_transverseRescale
 #print axioms QIQTH.ExpMap.radialJacobiLink_of_geodesicVariation
+-- (b4-hΦvar) ★★ hΦvar DISCHARGED ⟹ hBV UNCONDITIONAL (a₁=R/6 endgame / duality wall #1, discharge campaign) — TransverseVariationDischarge.lean:
+-- residual_bound_rightDeriv (variation-localised RIGHT-derivative reproof of geodesicVariation_residual_bound, Grönwall via norm_le_gronwallBound_of_norm_deriv_right_le
+--   — dissolves the τ=0,1 endpoint obstruction) → tubeTransverse_hasDerivAt_phase (HasDerivAt (ε↦expTube p (v+ε•w) s)(Φ s (0,w)) 0, o(ε) via geodesicField_uniform_C1_remainder,
+--   NO 2nd-order bound — sidesteps the double-CLM normed diamond) → radialJacobiLink_of_tubeTransverseVariation → ★★ radialJacobiLink_uncond: hBV with NO carried
+--   hypothesis ((Φ s (0,e_j)).1 a =ᶠ (s•expJacobianMat(s•v)) a j, Φ = expDiff_flow's flow).  ★★ The transverse smooth-dependence primitive hΦvar is DISCHARGED;
+--   hBV is now UNCONDITIONAL at interior s₀∈(0,1) (exactly the assembled use in VanVleckH4Assembled).  ⚠ scope: (0,1) geodesic interior.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.radialJacobiLink_uncond
 
 end QIQTH.AxiomAudit
