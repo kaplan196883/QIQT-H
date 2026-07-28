@@ -129,6 +129,7 @@ import QIQTH.ParallelOrthonormal
 import QIQTH.OrthonormalFrameExists
 import QIQTH.OrthonormalFrameDet
 import QIQTH.OrthonormalFrameComplete
+import QIQTH.FrameReconstruct
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

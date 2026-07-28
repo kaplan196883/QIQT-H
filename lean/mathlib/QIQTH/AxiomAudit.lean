@@ -13693,5 +13693,11 @@ namespace QIQTH.AxiomAudit
 -- directly from the frame Raychaudhuri θ_Y'=−Ric−Sh (expFlow_frame_raychaudhuri).  ⚠ HONEST FIREWALL: a general calculus connector —
 -- it does NOT prove the frame Raychaudhuri itself, NOT the discharge assembly, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.logdet_secondDeriv_eq_trace_deriv
+-- (b4-hexp) ORTHONORMAL FRAME RECONSTRUCTION (a₁=R/6 endgame / duality wall #1, discharge) — FrameReconstruct.lean:
+-- gorthonormal_frame_reconstruct — an orthonormal frame reconstructs any vector from its metric components: ∑_i ⟨V,e_i⟩_g e_i^μ = V^μ
+-- (from completeness ∑_i e_i^μ e_i^ν=gi + metric inverse + inverse-metric symmetry, pure finite-sum algebra).  This is the hexp core of
+-- expFlow_frame_raychaudhuri (frame components Yt_ji=⟨V_j,e_i⟩ reconstruct V_j).  ⚠ HONEST FIREWALL: a general linear-algebra identity —
+-- it does NOT build the Yt matrix regularity nor the frame Raychaudhuri, NOT the discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Curvature.gorthonormal_frame_reconstruct
 
 end QIQTH.AxiomAudit
