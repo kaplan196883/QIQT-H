@@ -13576,5 +13576,11 @@ namespace QIQTH.AxiomAudit
 -- relation only (carries genuine differentiability + 2nd-deriv hyps); it does NOT wire θ_B'=θ_Y'−½Lg'' (h3) or θ_Y'=−Ric, NOT the full
 -- −2Ric van-Vleck ODE, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.logJ_ray_secondDeriv_eq
+-- (a) CAPSTONE h3 TOOL (a₁=R/6 endgame / duality wall #1, coordinate connection) — Deriv2SubHalf.lean: deriv2_eventuallyEq_sub_half
+-- (GENERAL: F =ᶠ[𝓝 t] G − ½H ⟹ deriv²F t = G'' − ½H'', via EventuallyEq.deriv_eq ×2 + HasDerivAt.sub/const_mul).  Instantiated with
+-- log det B =ᶠ log det Y − ½ log det(g∘γ) (frame decomposition B=E·Yᵀ, det E=1/√det g) it gives θ_B' = θ_Y' − ½ Lg'' (the h3 of the
+-- capstone chain).  ⚠ HONEST FIREWALL: a general calculus identity — it does NOT supply the frame decomposition, NOT the −2Ric
+-- van-Vleck ODE, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.deriv2_eventuallyEq_sub_half
 
 end QIQTH.AxiomAudit

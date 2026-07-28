@@ -138,6 +138,7 @@ import QIQTH.ExpJacobianRicci
 import QIQTH.VanVleckRicciODE
 import QIQTH.VanVleckLogDetSplit
 import QIQTH.LogJSecondDerivRescale
+import QIQTH.Deriv2SubHalf
 import QIQTH.VanVleckTransportRadial
 import QIQTH.ParametrixTransportRadial
 import QIQTH.ParametrixTransportRicci
