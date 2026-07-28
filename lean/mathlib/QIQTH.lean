@@ -136,6 +136,7 @@ import QIQTH.JacobiC2
 import QIQTH.ExpJacobianRescale
 import QIQTH.ExpJacobianRicci
 import QIQTH.VanVleckRicciODE
+import QIQTH.VanVleckLogDetSplit
 import QIQTH.VanVleckTransportRadial
 import QIQTH.ParametrixTransportRadial
 import QIQTH.ParametrixTransportRicci

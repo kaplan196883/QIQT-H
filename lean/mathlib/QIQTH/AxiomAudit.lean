@@ -13561,5 +13561,13 @@ namespace QIQTH.AxiomAudit
 -- NOT the det Y=sⁿ·J·√det g relation, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Curvature.gorthonormal_det_sq
 #print axioms QIQTH.Curvature.gorthonormal_logdet
+-- VAN-VLECK LOG-DET SPLIT (a₁=R/6 endgame / duality wall #1, coordinate-connection capstone piece 1) — VanVleckLogDetSplit.lean:
+-- logdet_gtilde_split (log det g̃ = 2 log J + log det(g∘exp), from g̃=Jᵀ(g∘exp)J via expPullbackMetric_eq_jacMul + det_mul) +
+-- logdet_gtilde_ray_secondDeriv (the 2nd ray-derivative decomposes additively: deriv²(log det g̃∘ray) 1 = 2 LJ'' + Lg'', carrying
+-- eventual-differentiability + 2nd-deriv regularity of the two ray-pieces as GENUINE hyps).  The calculus backbone toward
+-- d²/ds²[log det g̃(s•v)]|₁ = −2Ric−2tr Θ²+2n.  ⚠ HONEST FIREWALL: the split + additive 2nd-deriv only — it does NOT yet wire
+-- θ_Y'=−Ric (exp-flow Raychaudhuri) or the trace connection, NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.logdet_gtilde_split
+#print axioms QIQTH.ExpMap.logdet_gtilde_ray_secondDeriv
 
 end QIQTH.AxiomAudit
