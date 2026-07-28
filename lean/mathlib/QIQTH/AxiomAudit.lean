@@ -13712,5 +13712,12 @@ namespace QIQTH.AxiomAudit
 -- hexp hypothesis of expFlow_frame_raychaudhuri/expFlow_frame_h4.  ⚠ HONEST FIREWALL: the Yt definition + hexp only — it does NOT build
 -- the Yt matrix regularity (hY/hYmat) nor no-conjugate hu, NOT the full discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.frameComponents_hexp
+-- (b4-Yt-reg) FRAME-COMPONENT DERIVATIVE / hYmat INGREDIENT (a₁=R/6 endgame / duality wall #1, discharge) — FrameComponentsDeriv.lean:
+-- frameComponent_hasDerivAt (entry-level: HasDerivAt (frameComponent … j k) (product-rule value) t, from g∘γ/V/e HasDerivAt C¹ via
+-- HasDerivAt.mul + HasDerivAt.fun_sum) + frameComponentMatrix_hasDerivAt (the matrix HasDerivAt of Y=Matrix.of(frameComponent),
+-- via hasDerivAt_pi ×2 under the elementwise matrix norm — matches expFlow_frame_raychaudhuri's hYmat verbatim).  ⚠ HONEST FIREWALL:
+-- the C¹ regularity of the frame components only (hYmat ingredient) — it does NOT build hu (no-conjugate) nor the discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.frameComponent_hasDerivAt
+#print axioms QIQTH.ExpMap.frameComponentMatrix_hasDerivAt
 
 end QIQTH.AxiomAudit

@@ -132,6 +132,7 @@ import QIQTH.OrthonormalFrameDet
 import QIQTH.OrthonormalFrameComplete
 import QIQTH.FrameReconstruct
 import QIQTH.FrameComponentsHexp
+import QIQTH.FrameComponentsDeriv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
