@@ -120,6 +120,7 @@ import QIQTH.FrameJacobiEquationNhds
 import QIQTH.GeodesicRaychaudhuri
 import QIQTH.FrameRaychaudhuri
 import QIQTH.ExpFlowRaychaudhuri
+import QIQTH.ExpFlowFrameH4
 import QIQTH.RaychaudhuriLogDet
 import QIQTH.LogDetSecondDerivTrace
 import QIQTH.TraceRaychaudhuriRescale

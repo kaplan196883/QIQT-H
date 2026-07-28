@@ -13699,5 +13699,12 @@ namespace QIQTH.AxiomAudit
 -- expFlow_frame_raychaudhuri (frame components Yt_ji=⟨V_j,e_i⟩ reconstruct V_j).  ⚠ HONEST FIREWALL: a general linear-algebra identity —
 -- it does NOT build the Yt matrix regularity nor the frame Raychaudhuri, NOT the discharge, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Curvature.gorthonormal_frame_reconstruct
+-- (b4-h4) VAN-VLECK h4 PRODUCER (a₁=R/6 endgame / duality wall #1, discharge) — ExpFlowFrameH4.lean: expFlow_frame_h4 chains
+-- expFlow_frame_raychaudhuri (θ_Y'=−Ric−Sh) with logdet_secondDeriv_eq_trace_deriv (deriv²(log det Y)=deriv θ_Y) to produce the exact
+-- van-Vleck h4: deriv²(log det Y) t = −Ric − Sh, for the exp-flow frame Jacobi matrix Y=of(Yt).  Carries expFlow_frame_raychaudhuri's
+-- frame data + hYmat_ev/hu_ev (∀ᶠ matrix regularity/unit, genuine).  ⚠ HONEST FIREWALL: the h4 hypothesis of
+-- vanVleck_ray_secondDeriv_ricci_at, CONDITIONAL on the carried frame data (still to be constructed from the parallel frame + exp-flow
+-- Jacobi fields); NOT the frame-data construction, NOT the full discharge, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expFlow_frame_h4
 
 end QIQTH.AxiomAudit
