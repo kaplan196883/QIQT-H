@@ -13666,5 +13666,11 @@ namespace QIQTH.AxiomAudit
 -- ⚠ HONEST FIREWALL: the frame data along (Γc·).1 — the caller rewrites to expTube (frameTransport_geodesic_eq_expTube) and adapts
 -- Ioo→𝓝; it does NOT construct the exp-flow Jacobi components Yt, NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.parallelOrthoFrame_data
+-- (b4-hrel) FRAME-DECOMPOSITION LOG-DET RELATION (a₁=R/6 endgame / duality wall #1, van-Vleck discharge) — FrameDecompLogDet.lean:
+-- logdet_frame_decomp_eventuallyEq — for the frame Jacobi matrix Y := E⁻¹·B (frame components of the coordinate Jacobi matrix B, E a
+-- g-orthonormal frame), log det B =ᶠ[𝓝 t] log det Y − ½ log det G, from det E=1/√det G (gorthonormal_logdet/gorthonormal_det_sq) +
+-- Matrix.det_mul/det_nonsing_inv.  This is the hrel hypothesis of vanVleck_ray_secondDeriv_ricci.  ⚠ HONEST FIREWALL: the frame-decomp
+-- log-det identity only — it does NOT prove the frame Raychaudhuri h4 (θ_Y'=−Ric), NOT the discharge assembly, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Curvature.logdet_frame_decomp_eventuallyEq
 
 end QIQTH.AxiomAudit
