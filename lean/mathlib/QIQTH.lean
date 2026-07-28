@@ -121,6 +121,7 @@ import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
 import QIQTH.ExpMatrixJacobi
 import QIQTH.ExpJacobianRegularity
+import QIQTH.LogJacobianRegularity
 import QIQTH.ExpJacobianRescale
 import QIQTH.ExpJacobianRicci
 import QIQTH.VanVleckRicciODE

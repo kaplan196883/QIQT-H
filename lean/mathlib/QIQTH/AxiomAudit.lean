@@ -13454,5 +13454,12 @@ namespace QIQTH.AxiomAudit
 -- Jacobi identity B''=−R̃B (the =−R̃B content stays the checkpointed deep primitive), NOT hresc, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.JacobianRegularity.expJacobianMat_entry_contDiffOn_two
 #print axioms QIQTH.JacobianRegularity.expJacobianDet_contDiffOn_two
+-- REGULARITY FLOOR (a₁=R/6 endgame, off-center B'') — the LOG van-Vleck / exp-Jacobian determinant is C² near the center
+-- (LogJacobianRegularity.lean): log_expJacobianDet_contDiffOn_two proves ∃ r>0, ContDiffOn ℝ 2 (x ↦ log(expJacobianDet x))
+-- (ball 0 r), via expJacobianDet_contDiffOn_two (det C²) + expJacobianDet_pos_nhds (J>0 near 0, since J(0)=1) + ContDiffOn.log.
+-- log det g̃ / log J is exactly the quantity the van-Vleck radial ODE differentiates.  ⚠ HONEST FIREWALL: REGULARITY ONLY —
+-- establishes that radialDeriv²(log J) EXISTS off-center (the regularity half of the van-Vleck 2nd-order structure); it does NOT
+-- prove the Jacobi identity B''=−R̃B, NOT hresc, NOT the van-Vleck −Ric ODE unconditional, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRegularity.log_expJacobianDet_contDiffOn_two
 
 end QIQTH.AxiomAudit
