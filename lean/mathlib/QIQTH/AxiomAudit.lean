@@ -13310,5 +13310,16 @@ namespace QIQTH.AxiomAudit
 -- the conclusion.  ⚠ HONEST FIREWALL: the frame Ricci trace only — NOT parallel-frame existence (M2b-2), NOT the frame Jacobi
 -- eqn Ỹ''=−R̃Ỹ (M2b-3, the wall-crossing), NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.FrameRicci.frame_ricci_trace
+-- ★ M2b-3 (off-radial matrix Jacobi campaign) — THE OFF-CENTER COVARIANT JACOBI EQUATION (CovariantJacobiOffCenter.lean), the
+-- WALL-CROSSING that stalled 3 prior L2c agents.  covariantSecondDeriv_expand (the unconditional off-center expansion of
+-- D²ξ/dτ², all Γ/∂Γ/ΓΓ/Γξ' terms live, no hΓ0) + covariantJacobiOffCenter_finset_match (the master index-matching identity,
+-- ΓΓ-group closed via an explicit involution on Fin n⁴) + covariant_jacobi_equation (D²ξ/dτ² = −R(ξ,v)v ALONG THE WHOLE RAY —
+-- exactly covariant_jacobi_equation_centered's hyps MINUS hΓ0: hC regularity, hgsymm symmetry, hγ geodesic ODE, hVar variation;
+-- NO center restriction, NO vacuity).  This is the geodesic-deviation equation off-center, gating true-kernel a₁=R/6.
+-- ⚠ HONEST FIREWALL: this is the off-center covariant Jacobi IDENTITY — it removes the wall but does NOT itself give the
+-- Raychaudhuri θ'=−Ric−tr(Θ²) assembly, NOT parallel-transport existence (M2b-2), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_expand
+#print axioms QIQTH.ExpMap.covariantJacobiOffCenter_finset_match
+#print axioms QIQTH.ExpMap.covariant_jacobi_equation
 
 end QIQTH.AxiomAudit
