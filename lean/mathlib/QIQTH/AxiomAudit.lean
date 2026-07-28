@@ -13498,5 +13498,13 @@ namespace QIQTH.AxiomAudit
 -- exp-differential — it does NOT prove the curvature identification jacobiOperator=R̃ (the checkpointed #3 analytic core), NOT the
 -- covariant B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expFlow_column_coordinate_jacobi
+-- FRAME-ROUTE localization (a₁=R/6 endgame, B''=−R̃B sub-campaign) — CovariantJacobiNhds.lean: localizes the off-center covariant
+-- 2nd-derivative expansion + covariant Jacobi equation from ∀τ hγ/hVar to ∀ᶠτ in 𝓝 t.  covariantSecondDeriv_expand_nhds converts
+-- the global funext hfun to an EventuallyEq (via Filter.EventuallyEq.deriv_eq); covariant_jacobi_equation_nhds reuses the finset match.
+-- This is the bridge letting the covariant Jacobi machinery apply to the exp-flow (geodesic on Ioo(-2,2), variation on [0,1] →
+-- HasDerivAt at interior t).  ⚠ HONEST FIREWALL: localizes the covariant/coordinate 2nd-deriv machinery — it does NOT prove the FRAME
+-- B''=−R̃B (needs covariantSecondDeriv_frame_combo_nhds + frame_jacobi_equation_nhds + parallel frame), NOT tr R̃=Ric, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.covariantSecondDeriv_expand_nhds
+#print axioms QIQTH.ExpMap.covariant_jacobi_equation_nhds
 
 end QIQTH.AxiomAudit
