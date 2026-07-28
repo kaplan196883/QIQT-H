@@ -94,3 +94,4 @@ wall gating a₁=R/6 is removed. Remaining (now downhill): M2b-3a (covariantDeri
 combination = componentwise deriv) → M2b-5 (project the covariant Jacobi eqn onto the parallel orthonormal frame
 ⟹ Ỹ''=−R̃Ỹ) → feed M4b `trace_raychaudhuri` + M2b-4 `tr R̃=Ric` ⟹ geodesic Raychaudhuri θ'=−Ric(v,v)−tr(Θ²)
 along the ray → M4-full/M5/M6 ⟹ a₁=R/6. M2b-2 (parallel-transport existence) carriable-as-hyp, discharge later.
+- M2b-3a ✅ (`9cd64412`) FrameCovariantDeriv.lean — covariantDerivAlong_frame_combo + covariantSecondDeriv_frame_combo (covariant deriv = componentwise ordinary deriv in a parallel frame). NEXT: M2b-5 projection → Ỹ''=−R̃Ỹ.
