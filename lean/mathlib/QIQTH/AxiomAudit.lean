@@ -13491,5 +13491,12 @@ namespace QIQTH.AxiomAudit
 -- HasDerivWithinAt→HasDerivAt).  ⚠ HONEST FIREWALL: still the COORDINATE equation ξ''=−jacobiOperator — it does NOT prove the
 -- curvature identification jacobiOperator=R̃ (the checkpointed #3 analytic core), NOT B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_nhds
+-- B''=−R̃B step 2 (a₁=R/6 endgame, coordinate Jacobi on the REAL exp-flow) — ExpFlowJacobi.lean: expFlow_column_coordinate_jacobi
+-- applies jacobiVariation_secondOrder_nhds to the actual exp-flow columns (V=Φ·w, γ=expTube) at interior t∈(0,1): the position part
+-- satisfies the COORDINATE 2nd-order Jacobi equation deriv²((Φ·w).1) = −jacobiOperator.  Bridges expDiff_flow's [0,1]-only
+-- geodesic-variation system to HasDerivAt (Icc 0 1∈𝓝 τ, Ioo 0 1∈𝓝 t).  ⚠ HONEST FIREWALL: COORDINATE ξ''=−jacobiOperator for the
+-- exp-differential — it does NOT prove the curvature identification jacobiOperator=R̃ (the checkpointed #3 analytic core), NOT the
+-- covariant B''=−R̃B, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.expFlow_column_coordinate_jacobi
 
 end QIQTH.AxiomAudit
