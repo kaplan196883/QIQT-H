@@ -13329,5 +13329,14 @@ namespace QIQTH.AxiomAudit
 -- parallel carried as hpar (existence = M2b-2), NOT the projection Ỹ''=−R̃Ỹ (M2b-5), NOT a₁=R/6 (M6).  [AF] std-3.
 #print axioms QIQTH.ExpMap.covariantDerivAlong_frame_combo
 #print axioms QIQTH.ExpMap.covariantSecondDeriv_frame_combo
+-- ★ M2b-5 (off-radial matrix Jacobi campaign, parallel-frame route) — THE FRAME JACOBI EQUATION Ỹ''=−R̃Ỹ (FrameJacobiEquation.lean):
+-- riemannGeodesicDeviation_linear (R(·,v)v linear in the deviation vector) + frame_jacobi_equation (deriv²(Yt k) t =
+-- −∑_j R̃_{kj}·Yt_j, with R̃_{kj}=∑_ab g_ab·(R(e_j,v)v)^a·(e_k)^b — the clean matrix Jacobi ODE from projecting the OFF-CENTER
+-- covariant Jacobi eqn (M2b-3) onto a parallel orthonormal frame via covariantSecondDeriv_frame_combo (M2b-3a) + orthonormality).
+-- tr R̃ = Ric by frame_ricci_trace (M2b-4) ⟹ this is the A=R̃ input for M4b's matrix Raychaudhuri θ'=−tr R̃−tr(Θ²)=−Ric−tr(Θ²).
+-- ⚠ HONEST FIREWALL: the parallel orthonormal frame is carried as hyps (hpar/hortho/hexp) — its EXISTENCE is M2b-2 (not built);
+-- does NOT assemble the Raychaudhuri eqn (next brick), NOT a₁=R/6 (M6).  [AF] std-3.
+#print axioms QIQTH.ExpMap.riemannGeodesicDeviation_linear
+#print axioms QIQTH.ExpMap.frame_jacobi_equation
 
 end QIQTH.AxiomAudit
