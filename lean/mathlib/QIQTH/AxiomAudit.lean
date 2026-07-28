@@ -13658,5 +13658,13 @@ namespace QIQTH.AxiomAudit
 -- ⚠ HONEST FIREWALL: the geodesic alignment only — it does NOT package the frame data (he/hpar/hortho/hcomplete along expTube, next
 -- b3d-3) nor discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.Geodesic.frameTransport_geodesic_eq_expTube
+-- (b3d-3) PARALLEL ORTHONORMAL FRAME DATA (a₁=R/6 endgame / duality wall #1, step b frame packaging) — ParallelOrthoFrameData.lean:
+-- parallelOrthoFrame_data — from a frame-transport curve Γc on Ioo lo hi with g-orthonormal IC at t₀, proves ALL FOUR frame-data pieces
+-- along (Γc·).1: he (frame regularity, component HasDerivAt), hpar (per-column covariantDerivAlong=0 = frameTransport_covariantDeriv_zero),
+-- hortho (orthonormality preserved on the interval = parallelPair_metricInner_eq_on_Ioo + IC), hcomplete (∑_i e_i^μ e_i^ν=gi =
+-- gorthonormal_frame_complete pointwise).  All carried hyps GENUINE (audited: hIC is initial orthonormality, not the conclusion).
+-- ⚠ HONEST FIREWALL: the frame data along (Γc·).1 — the caller rewrites to expTube (frameTransport_geodesic_eq_expTube) and adapts
+-- Ioo→𝓝; it does NOT construct the exp-flow Jacobi components Yt, NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.Geodesic.parallelOrthoFrame_data
 
 end QIQTH.AxiomAudit
