@@ -142,6 +142,7 @@ import QIQTH.TransverseVariationDischarge
 import QIQTH.VanVleckRicciReduced
 import QIQTH.VanVleckRicciFrameReduced
 import QIQTH.VanVleckRicciFrameReduced2
+import QIQTH.FrameComponentsSecondDeriv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

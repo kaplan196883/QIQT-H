@@ -13787,5 +13787,13 @@ namespace QIQTH.AxiomAudit
 --   (det_smul + expJacobianDet_pos_nhds + s>0).  hYev DISCHARGED via frameComponentMatrix_hasDerivAt (Y C¹ from g∘γ/V/e entrywise C¹) + raychaudhuri_logdet_firstderiv.differentiableAt.
 -- ⚠ REMAINING: {hY2 (frame C² = the ONE deep primitive, 2nd-order geodesic smooth-dependence), hLY2 (2nd-deriv germ of log det Y — folds from hY2+hu_ev via matrix log-det calculus)}.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_ricci_frame_reduced2
+-- (b4-hY2) ★★★ hY2 FULLY DISCHARGED AS A LEMMA — the LAST DEEP PRIMITIVE proven (a₁=R/6 endgame / duality wall #1) — FrameComponentsSecondDeriv.lean:
+-- A reusable 2nd-order germ calculus C2germ (closed under +/·/∑, produced by ContDiffAt ℝ 2) ⟹ frameComponent_hY2germ (frameComponent g γ e V j i is C²
+--   ⟹ the hY2 germ) with ALL THREE factors discharged: gComp_expTube_c2germ (metric g(γ) via expMap C² + g C^∞), frameVarComp_c2germ (variation V via
+--   jacobiVariation_secondOrder_nhds on the surfaced Φ), ★ parallelFrameComp_c2germ (frame e — THE CRUX — via transport ODE deriv e=−Γ(γ)γ'e from hpar
+--   + Γ∘γ C¹ + expTube position C²).  Capstone frameComponent_hY2_of_frameData: produces the exact hY2 of vanVleck_ricci_frame_reduced2 for interior s₀∈(0,1)
+--   from the frame data (Φ,hflow,hVeq,he,hpar).  ⚠ hY2 the MATH is DONE (e-C² crux proven, NOT carried).  Residual to literal (b)-closure = PLUMBING: surface hpar in
+--   vanVleck_ricci_reduced's ∃ (one conjunct, like he) then feed the capstone ⟹ van-Vleck −Ric unconditional modulo hLY2 (folds from hY2+hu_ev).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.frameComponent_hY2_of_frameData
 
 end QIQTH.AxiomAudit
