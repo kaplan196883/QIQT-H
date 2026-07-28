@@ -13446,5 +13446,13 @@ namespace QIQTH.AxiomAudit
 -- matrix Jacobi ODE B''=−R̃B is CHECKPOINTED (needs the interior 2nd derivative of the flow + covariant M2b-3 identification +
 -- the ∀τ-vs-[0,1] restriction of covariant_jacobi_equation).  Does NOT discharge the θ_B'=−Ric B-side hyp, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.expMatrixJacobi_flow
+-- REGULARITY FLOOR (a₁=R/6 endgame, off-center B'') — the van-Vleck / exp-Jacobian determinant is C² on the exp ball
+-- (ExpJacobianRegularity.lean): expJacobianMat_entry_contDiffOn_two (each entry x↦(fderiv exp_p x)(e_i) a is C² on the ball,
+-- from expMap_contDiffOn_three C³ + fderiv_of_isOpen + CLM evaluation) + expJacobianDet_contDiffOn_two (J=det(D exp_p) is C²,
+-- entrywise via Matrix.det_apply' + ContDiffOn.sum/mul).  ⚠ HONEST FIREWALL: REGULARITY ONLY — establishes that the van-Vleck
+-- determinant's second radial/covariant derivative EXISTS off-center (the regularity half of B''=−R̃B); it does NOT prove the
+-- Jacobi identity B''=−R̃B (the =−R̃B content stays the checkpointed deep primitive), NOT hresc, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRegularity.expJacobianMat_entry_contDiffOn_two
+#print axioms QIQTH.JacobianRegularity.expJacobianDet_contDiffOn_two
 
 end QIQTH.AxiomAudit
