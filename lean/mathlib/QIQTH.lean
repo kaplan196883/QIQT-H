@@ -123,6 +123,7 @@ import QIQTH.ExpMatrixJacobi
 import QIQTH.ExpJacobianRegularity
 import QIQTH.LogJacobianRegularity
 import QIQTH.JacobiRescale
+import QIQTH.JacobiDerivReal
 import QIQTH.ExpJacobianRescale
 import QIQTH.ExpJacobianRicci
 import QIQTH.VanVleckRicciODE

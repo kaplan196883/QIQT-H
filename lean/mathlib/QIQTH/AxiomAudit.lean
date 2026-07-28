@@ -13469,5 +13469,14 @@ namespace QIQTH.AxiomAudit
 -- ⚠ HONEST FIREWALL: discharges hresc for THIS B down to no-conjugate positivity; does NOT prove hpos itself, NOT the Jacobi
 -- identity B''=−R̃B (the deep primitive), NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.JacobianRegularity.hresc_of_pos
+-- van-Vleck FIRST-DERIVATIVE ON THE REAL EXP-DIFFERENTIAL (a₁=R/6 endgame consolidation) — JacobiDerivReal.lean:
+-- expJacobianDet_radialDeriv_real assembles the van-Vleck radial first-derivative (θ_B form) for the ACTUAL exp-differential
+-- B(s):=s•expJacobianMat(s•v): ∃ Bd, HasDerivAt B Bd 1 ∧ radialDeriv(log expJacobianDet) v = (Bd·(expJacobianMat v)⁻¹).trace − n.
+-- Applies expJacobianDet_radialDeriv_eq_raychaudhuri_sub_n with ALL four hyps discharged: hB (matrix chain rule via hasDerivAt_pi×2
+-- + HasDerivAt.fun_mul), hu (Matrix.isUnit_iff_isUnit_det from hJv), hJdiff (log-det C² floor), hresc (hresc_of_pos).  Conditional
+-- ONLY on the carried no-conjugate data hJv (J(v)>0) + hpos (J(s•v)>0 near s=1) + hv (v in exp ball).  ⚠ HONEST FIREWALL: the
+-- FIRST-derivative θ_B form only — it does NOT prove B''=−R̃B (the deep 2nd-order primitive needed for the −Ric SECOND-derivative),
+-- NOT hJv/hpos themselves, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRegularity.expJacobianDet_radialDeriv_real
 
 end QIQTH.AxiomAudit
