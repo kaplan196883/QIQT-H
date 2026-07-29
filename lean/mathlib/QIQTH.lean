@@ -162,6 +162,7 @@ import QIQTH.GaussianWidthTolerant
 import QIQTH.ParametrixResidualTPower
 import QIQTH.ParametrixHEboundWiring
 import QIQTH.TrueKernelA1
+import QIQTH.TrueKernelA1Reduced
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

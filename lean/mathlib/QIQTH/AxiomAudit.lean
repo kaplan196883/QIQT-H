@@ -13945,5 +13945,12 @@ namespace QIQTH.AxiomAudit
 --   interchange/integrability/Duhamel facts (hInt/hInter/hDuhamel/hE) + correction-order hCorrHigher.  a₁=R/6 STILL NOT CLAIMED unconditionally — gated on discharging C4c.  [AF] std-3.
 #print axioms QIQTH.TrueKernelA1.trueKernel_diag_a1_of_correction_higher_order
 #print axioms QIQTH.TrueKernelA1.trueKernel_diagonal_a1_eq_R6
+-- (M6-reduce) REDUCED conditional a₁=R/6 — 2 of 5 analytic carries discharged (a₁=R/6 duality wall #1, M6) — TrueKernelA1Reduced.lean:
+-- trueKernel_diagonal_a1_eq_R6_residual (E:=heatOp g gi H, the stronger form): true kernel solves heat eqn ∧ diagonal t¹-coeff = R/6, carrying ONLY hEboundW (C4c, now on the
+-- ACTUAL residual heatOp g gi H) + hInt (IterConvIntegrableW) + hDuhamel (parametrix Duhamel output, note extra E*F) + hInter (tsum·heatConv interchange) + hHdiag + RNC data.
+-- hCorrHigher DISCHARGED (concrete remainder witness, NOT ∃-collapsed — R/6 stays the derived van-Vleck value) + hE DISCHARGED (E:=heatOp = rfl).  Honest per-carry verdict: hInt/hDuhamel/hInter
+-- are GENUINE analytic carries (not reachable while H abstract — need measurability/Duhamel machinery; hInter near-Mathlib-gap = integral_tsum needs AEMeasurable of E).  ⚠⚠⚠ STILL CONDITIONAL —
+-- a₁=R/6 NOT claimed unconditionally; the whole obstruction = hEboundW (C4c off-diagonal parametrix over all base points + far-field) + the 3 standard analytic carries.  [AF] std-3.
+#print axioms QIQTH.TrueKernelA1.trueKernel_diagonal_a1_eq_R6_residual
 
 end QIQTH.AxiomAudit
