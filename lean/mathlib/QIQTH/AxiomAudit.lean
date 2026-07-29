@@ -13801,5 +13801,13 @@ namespace QIQTH.AxiomAudit
 --   frameComponent_hY2_of_frameData fed the surfaced (Φ,hflow,hVeq,he,hpar).  ⚠ REMAINING: hLY2 (2nd-deriv germ of log det Y) ONLY — folds from hY2+hu_ev via the log-det
 --   matrix calculus (hasDerivAt_log_det_matrix).  One brick from (b)-CLOSURE (van-Vleck −Ric unconditional).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_ricci_frame_reduced3
+-- ★★★★★ (b)-SIDE CLOSED — VAN-VLECK −Ric RADIAL ODE FULLY UNCONDITIONAL (a₁=R/6 duality wall #1, b-side) — VanVleckRicciUnconditional.lean:
+-- vanVleck_ricci_unconditional: from ONLY the top-level metric data (g/gi, christoffel+metric ContDiff, symmetry, inverse-metric, PosDef(g p), ‖v‖<expRho),
+--   ∃δ>0 ∀s₀∈Ioo 0 δ ∃ e V, deriv²[log det g̃(s•v)]|_{s₀} = −2·Ric(u,u) − 2·tr((Y'Y⁻¹)²) + 2n/s₀².  ★★★ ZERO carried hypothesis arrows — the off-center geodesic
+--   van-Vleck/Raychaudhuri −Ric on the REAL coordinate exp-Jacobian J is now UNCONDITIONAL.  ALL previously-carried arrows discharged: frame existence (M2b-2), hBV (transverse
+--   smooth-dependence hΦvar), hu_ev (no-conjugate), hYev, hY2 (frame C² incl. the off-radial transport-ODE crux), hLY2 (log det Y C² via the C2germ calculus), + the
+--   coordinate germ bundle.  Built on vanVleck_ricci_reduced (surfaces all frame data) + frameComponent_hY2_of_frameData + an in-file C2germ log-det calculus.
+-- ⚠ This closes the (b)-SIDE ONLY.  a₁=R/6 is NOT claimed — the (c)-side (M5 off-diagonal O(1/t) cancellation + M6 SeeleyDeWitt) remains.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_ricci_unconditional
 
 end QIQTH.AxiomAudit
