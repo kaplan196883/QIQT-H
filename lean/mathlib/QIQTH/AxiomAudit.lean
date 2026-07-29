@@ -13817,5 +13817,12 @@ namespace QIQTH.AxiomAudit
 --   reachable-decomposable (residue = (I)+(IV) O(1/t) RNC-curvature-matching bricks); M6 (SeeleyDeWitt convergence) = community-scale.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ParametrixRadialTransportSplit.radialDeriv_sum_pow
 #print axioms QIQTH.ParametrixRadialTransportSplit.radialTransportTerm_leading_split
+-- (c2) M5 piece-(IV) O(1/t) ISOLATION (a₁=R/6 duality wall #1, (c)-side) — ParametrixDeviationCrossTerm.lean:
+-- deviationCrossTerm_leading + _parametrix: the metric-deviation cross-gradient piece (IV) ∑ᵢⱼ(gⁱʲ−δ)((∂ᵢG)(∂ⱼP)+(∂ⱼG)(∂ᵢP))
+--   = (1/t)·G·((−½)∑ᵢⱼ(gⁱʲ−δ)(vⁱ∂ⱼP+vʲ∂ᵢP)) — the exact O(1/t) isolation via ∂ᵢG=(−vⁱ/2t)G (gaussDdim_pd_eq), t>0 only, mirroring flatCrossTerm_eq
+--   on the deviation part.  ⚠ FLOOR F2: (gⁱʲ−δ) carried SYMBOLIC — repo has NO closed RNC leading coeff (gⁱʲ−δ=−⅓R vᵃvᵝ), only abstract O(r²) decay
+--   (residue_metricdev_bound).  F1 upgrade = build the RNC inverse-metric 2-jet.  Step of M5 off-diagonal O(1/t) cancellation.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.deviationCrossTerm_leading
+#print axioms QIQTH.HeatResidualBound.deviationCrossTerm_leading_parametrix
 
 end QIQTH.AxiomAudit
