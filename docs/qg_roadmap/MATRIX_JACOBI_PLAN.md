@@ -303,3 +303,12 @@ a₁=R/6 NOT claimed until M5+M6 unconditional; M6 residual-bound/convergence ma
 (M6-C6)[NEXT] the a₁-extraction capstone: assemble the true-kernel diagonal a₁=R/6 CONDITIONAL on the convergence (carry hEboundW/hInter/hDuhamel/hVolterra), using the width-2 engine + transport recursion + u₁(0)=R/6 — isolating the ENTIRE remaining obstruction to a₁=R/6 to precisely the single C4c input.
 C4c (global off-diagonal parametrix around every base point + far-field cutoff) = the genuine terminal community-scale wall — sustained foundational build, NOT loop-brick-sized. a₁=R/6 carried, NOT claimed.
 ═══════════════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════════════════
+★★★★ (M6-C6) CONDITIONAL TRUE-KERNEL a₁=R/6 CAPSTONE ✅ (`4fc62235`) TrueKernelA1.lean:
+trueKernel_diagonal_a1_eq_R6 — GIVEN hEboundW (C4c) + standard analytic facts, trueHeatKernel solves heat eqn AND diagonal t¹-coeff = EXACTLY R/6. Key: trueKernel_diag_a1_of_correction_higher_order (Levi correction O(t²) diag ⟹ true a₁=parametrix a₁=R/6). [AF] std-3, budget 0. ~99 bricks.
+⚠⚠⚠ CONDITIONAL, NOT unconditional a₁=R/6. ENTIRE obstruction isolated to:
+  (1) C4c = hEboundW global off-diagonal parametrix (far-field + all-base-point; local part PROVED) = terminal community-scale wall.
+  (2) reachable analytic carries: hInt (IterConvIntegrableW) · hInter (tsum·heatConv, Mathlib integral_tsum-reachable) · hDuhamel · hE · hCorrHigher (Levi O(t²)).
+★ "DO IT ALL" TERMINAL-WALL RESULT: wall(i) off-diag cancellation DELIVERED to a₁-order (Taylor framework was reachable); wall(ii) M6 G3 CLOSED+G2 VACUOUS+G1 REDUCED+C6 CONDITIONAL. a₁=R/6 = ONE C4c primitive from unconditional.
+(NEXT) discharge reachable analytic carries (hCorrHigher/hInt/hInter/hDuhamel) ⟹ a₁=R/6 conditional on JUST C4c; then C4c off-diagonal parametrix = sustained sub-project or honest hold.
+═══════════════════════════════════════════════════════════════════════════
