@@ -14012,4 +14012,11 @@ namespace QIQTH.AxiomAudit
 -- Remaining cutresidual carry: hEnear (near residual bound).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.parametrixH_annulus_bounds
 
+-- (C4c-hEnear) ★ NEAR/INTERIOR UNCUT-PARAMETRIX RESIDUAL BOUND on a b-ball (a₁=R/6 duality wall #1, C4c build) — NearResidualBound.lean:
+-- near_uncutResidual_gaussianWide_ball: for the CONCRETE H = heatParametrix 0 Θ u t, ∃ b>0, ∀ w, rncRadialSq w ≤ b² → |∂_t H − Δ_g H| ≤ Cslice·gaussDdimWide t w
+-- (Cslice = (1 + 32n²MW + L)·(√2)ⁿ) — the hEnear carry of cutoffResidual_global_gaussianWide_bound (near region (a)).  From the proved slice residualN0_local_baseKernelW_slice
+-- (∂_t H − Δ_g H is DEFINITIONALLY parametrixResidualN 0), baseKernelW 2 0 ≤ gaussDdimWide (gaussDdimWide_eq_scaled_baseKernelW), ρ-ball→b-ball (b:=ρ/2, norm_le_rncRadial); 0≤L derived from hlap.
+-- ★ Discharges the LAST cutresidual carry hEnear, carrying only the genuine slice data (RNC gauge, O(r²) deviation hdev, coeff bounds hw0bd/hlap).  Remaining C4c step = ASSEMBLE. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball
+
 end QIQTH.AxiomAudit
