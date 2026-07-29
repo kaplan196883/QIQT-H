@@ -159,6 +159,7 @@ import QIQTH.ParametrixResidualGaussianBound
 import QIQTH.ParametrixResidualN0Bound
 import QIQTH.ParametrixResidualBaseKernel
 import QIQTH.GaussianWidthTolerant
+import QIQTH.ParametrixResidualTPower
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

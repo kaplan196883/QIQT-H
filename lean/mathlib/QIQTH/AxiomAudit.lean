@@ -13919,5 +13919,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianWidthTolerant.gaussTimePow_conv_beta_scaled
 #print axioms QIQTH.GaussianWidthTolerant.iterKernelW_eq
 #print axioms QIQTH.GaussianWidthTolerant.iterKernelW_series_summable
+-- (M6-G2) ★ M6 t-POWER GAP (G2) VACUOUS — Neumann summability admits α=0 (a₁=R/6 duality wall #1, M6) — ParametrixResidualTPower.lean:
+-- leviSeries_summable_alpha_zero: from hEbound |E τ p q| ≤ C·gaussDdim τ (p−q) [NO time-power, α=0], the Levi/Duhamel Neumann series is Summable — because modelCoeff_summable/
+-- leviSeries_summable require only 0≤α (NOT 0<α; the ratio test bottoms out at Γ-ratio β=α+1≥1), convergence driven by FACTORIAL (Γ/Beta) decay not any t-power.  + baseKernel_zero_eq
+-- + iterKernel_zero_eq (iterKernel 0 k = t^{k−1}/Γ(k)·G_t) + iterConv_bound_alpha_zero.  ★ G2 dissolves: the α=0-shaped residualN0_gaussian_bound already feeds the iteration.
+-- (DeWitt transport recursion IS proven — transportCoeff_succ_transport_eq — load-bearing only for the LIMIT coefficient u₁(0)=R/6, orthogonal to G2.)  ⚠ Remaining M6: G1 (local→global v→(p−q) + far-field, deep C4c) + C6 limit-identification.  a₁=R/6 = carried, NOT claimed.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.leviSeries_summable_alpha_zero
+#print axioms QIQTH.HeatResidualBound.iterKernel_zero_eq
 
 end QIQTH.AxiomAudit
