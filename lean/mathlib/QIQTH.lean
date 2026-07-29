@@ -151,6 +151,7 @@ import QIQTH.RNCInverseMetricJet
 import QIQTH.ParametrixFlatCurvatureResidue
 import QIQTH.ParametrixResidualO1Total
 import QIQTH.ParametrixOffDiagCancellation
+import QIQTH.ParametrixHessianCancellation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

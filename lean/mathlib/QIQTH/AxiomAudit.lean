@@ -13857,5 +13857,14 @@ namespace QIQTH.AxiomAudit
 --   (∂²totalRadialO1_coeff(0)=0 = the Ricci-order cancellation, reachable via sqrtdet_pd_pd van-Vleck Hessian) + full general-v (blocked on Taylor framework).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_grad
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_grad_vanishes
+-- (c7) ★ M5 OFF-DIAGONAL CANCELLATION — HESSIAN FACE = CURVATURE (Ricci) ORDER (a₁=R/6 duality wall #1, (c)-side) — ParametrixHessianCancellation.lean:
+-- totalRadialO1_coeff_center_hessian (∂²coeff(0) = ∂²(coeffA)(0)·w₀ [term I Ricci] + 2·Hess(w₀) [term II] + 0 [term IV, UNCONDITIONAL via ∂gⁱʲ(0)=0 + Leibniz counting])
+-- + coeffA_center_hessian (term I explicit: ∂²coeffA(0) = ⅓Ric_{ab} − ½(Σ∂_bΓ^a_{ii}+Σ∂_aΓ^b_{ii}); the ∂Γ-divergence does NOT further reduce to Ric with repo symmetries — honest)
+-- + totalRadialO1_coeff_center_hessian_vanishes (=0 given the van-Vleck coeff-Hessian datum hw0hess = the sqrtdet_pd_pd-class 2-jet, load-bearing labeled).
+-- ★ The off-diagonal O(1/t) cancellation is now established to VALUE(c5)+GRADIENT(c6)+HESSIAN = the a₁-relevant CURVATURE order at the RNC centre.
+-- ⚠ TERMINAL: full all-orders general-v =0 blocked on absent Taylor-o(r²) framework (Mathlib-absent); M6 SeeleyDeWitt convergence = community-scale.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_hessian
+#print axioms QIQTH.HeatResidualBound.coeffA_center_hessian
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_hessian_vanishes
 
 end QIQTH.AxiomAudit
