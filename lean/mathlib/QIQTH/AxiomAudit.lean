@@ -13970,5 +13970,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.radialCutoff_contDiff
 #print axioms QIQTH.HeatResidualBound.radialCutoff_eq_one
 #print axioms QIQTH.HeatResidualBound.radialCutoff_eq_zero
+-- (C4c-annulus) ANNULUS EXPONENTIAL-SMALLNESS Gaussian bound — C4c far-field brick 2 (a₁=R/6 duality wall #1, C4c build) — AnnulusGaussianBound.lean:
+-- invT_pow_exp_le (core: (1/t)^k·exp(−rncRadialSq v/8t) ≤ (8/a²)^k·k! for a²≤rncRadialSq v — exp beats poly, via GaussianPolyBound.pow_mul_exp_neg_le_factorial x^m·e^{−x}≤m!)
+-- + gaussDdim_eq_wide_mul (ratio identity gaussDdim t v = exp(−rncRadialSq v/8t)·gaussDdimWide t v — SAME prefactor, exact, no (√2)ⁿ)
+-- + invTpow_gaussDdim_le_gaussDdimWide (★ (1/t)^k·gaussDdim t v ≤ (8/a²)^k·k!·gaussDdimWide t v on the annulus, UNIFORM in t>0).  ★ Controls the annulus-supported cutoff-derivative terms
+-- ∇χ/Δ_gχ of the C4c cutoff-parametrix residual (off-diagonal exp-small beats any 1/t^k).  Toward residual_global_baseKernelW_of_gaussianCofactor ⟹ unconditional a₁=R/6.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.invTpow_gaussDdim_le_gaussDdimWide
+#print axioms QIQTH.HeatResidualBound.invT_pow_exp_le
 
 end QIQTH.AxiomAudit
