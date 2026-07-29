@@ -13872,5 +13872,13 @@ namespace QIQTH.AxiomAudit
 --   expJacobianDet_pos_ray_of_pos_nhds (positivity-on-𝓝v ⟹ no-conjugate along the ray).  ⚠ near-center domain only (conjugate points may occur away from 0).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.JacobianRegularity.expJacobianDet_radialDeriv_real_uncond
 #print axioms QIQTH.JacobianRegularity.expJacobianDet_pos_ray_of_pos_nhds
+-- (T1) ★ GENERAL-v 2nd-ORDER PEANO TAYLOR — the RNC-Taylor framework primitive (a₁=R/6 duality wall #1, closes the "Mathlib-absent" wall i) — RNCTaylorPeano.lean:
+-- pd_taylor_two_peano: f C² at 0 ⟹ (f v − f 0 − ∑ᵢ pd f i 0·vⁱ − ½∑ᵢⱼ pd(pd f j)i 0·vⁱvʲ) =o[𝓝 0](‖v‖²) — the general-v 2nd-order Peano expansion in the repo pd
+--   language.  Built from Mathlib Convex.isLittleO_pow_succ (there is NO ready multivariable 2nd-order Peano in Mathlib) + a mean-value argument (remainder deriv = Df−L−Bx =o(‖x‖)
+--   via ContDiffAt.isSymmSndFDerivAt) + the repo pd↔fderiv bridges (pd_eq_fderiv, pd_pd_eq_of_contDiffAt2).  Crux iteratedFDeriv²→∑∑pd (sndFDeriv_apply_eq_sum_pd) CLOSED.
+--   + pd_taylor_one_peano (1st-order).  ★ This DISCHARGES the general-v Taylor-o(r²) framework the c6/c7 off-diagonal cancellation was checkpointed on — it was reachable, NOT a wall.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.RNCExpansion.pd_taylor_two_peano
+#print axioms QIQTH.RNCExpansion.pd_taylor_one_peano
+#print axioms QIQTH.RNCExpansion.sndFDeriv_apply_eq_sum_pd
 
 end QIQTH.AxiomAudit
