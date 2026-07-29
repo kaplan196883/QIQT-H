@@ -148,6 +148,7 @@ import QIQTH.VanVleckRicciUnconditional
 import QIQTH.ParametrixRadialTransportSplit
 import QIQTH.ParametrixDeviationCrossTerm
 import QIQTH.RNCInverseMetricJet
+import QIQTH.ParametrixFlatCurvatureResidue
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -13833,5 +13833,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCExpansion.pd_pd_gInv_eq_neg_metric
 #print axioms QIQTH.RNCExpansion.rnc_metric_hessian
 #print axioms QIQTH.RNCExpansion.rnc_gInv_hessian
+-- (c4) M5 piece-(I) O(1/t) ISOLATION — flat-Gaussian curvature residue (a₁=R/6 duality wall #1, (c)-side) — ParametrixFlatCurvatureResidue.lean:
+-- gaussDdim_pd_pd_eq (Gaussian mixed 2nd-partial ∂ᵢ∂ⱼG=(vⁱvʲ/4t²−δ/2t)G, new) + flatCurvatureResidue_leading[_parametrix]:
+--   piece (I) (∂_t G − Δ_g G)(v) = (1/t)·G·[½∑(gⁱⁱ−1) − ½∑gⁱʲΓᵏᵢⱼvᵏ] + (1/t²)·G·[−¼∑(gⁱʲ−δ)vⁱvʲ] — the O(1/t) isolation via Gaussian ∂G/∂²G
+--   substitution (t>0 only), mirroring c2.  ⚠ FINDING: piece (I) carries BOTH 1/t AND 1/t² orders (Δ_g hits G with 2nd derivs), unlike piece (IV) pure 1/t.
+--   FLOOR F2: (gⁱʲ−δ) and Γ carried SYMBOLIC (F1 = substitute rnc_gInv_hessian + Γ 1-jet at RNC centre 0).  Step of M5 cancellation.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_pd_pd_eq
+#print axioms QIQTH.HeatResidualBound.flatCurvatureResidue_leading
 
 end QIQTH.AxiomAudit
