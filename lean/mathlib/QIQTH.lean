@@ -154,6 +154,7 @@ import QIQTH.ParametrixOffDiagCancellation
 import QIQTH.ParametrixHessianCancellation
 import QIQTH.RadialRicciUnconditional
 import QIQTH.RNCTaylorPeano
+import QIQTH.ParametrixOffDiagLittleO
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

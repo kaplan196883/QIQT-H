@@ -13880,5 +13880,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCExpansion.pd_taylor_two_peano
 #print axioms QIQTH.RNCExpansion.pd_taylor_one_peano
 #print axioms QIQTH.RNCExpansion.sndFDeriv_apply_eq_sum_pd
+-- (T-capstone) ★★ FULL GENERAL-v OFF-DIAGONAL O(1/t) CANCELLATION TO CURVATURE ORDER (a₁=R/6 duality wall #1, wall i to a₁-order) — ParametrixOffDiagLittleO.lean:
+-- totalRadialO1_coeff_isLittleO: (fun v => totalRadialO1_coeff g gi Θ u v) =o[𝓝 0](‖v‖²) — the M5 off-diagonal O(1/t) residual coefficient vanishes to 2nd (curvature/a₁)
+--   order UNIFORMLY near the RNC centre (not just at v=0).  Proof: pd_taylor_two_peano (T1 general-v 2nd-order Peano) fed the vanishing value(c5)/gradient(c6)/Hessian(c7);
+--   hcoeffC2 (coeff ContDiffAt 2) ASSEMBLED from constituents.  c7's van-Vleck 2-jet supplied in explicit Ricci form via public coeffA_center_hessian (hw0hessRicci).
+-- ★★ DELIVERS terminal wall (i) [general-v off-diagonal cancellation, checkpointed by c6/c7 as blocked on the "Mathlib-absent" Taylor framework] to the a₁-relevant curvature order —
+--   the framework (T1) was reachable.  ⚠ carries RNC gauge suite + van-Vleck 2-jet (same as √det chain).  Remaining: M6 (feed o(r²) into the residual Gaussian bound + Levi-Duhamel convergence).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_isLittleO
 
 end QIQTH.AxiomAudit
