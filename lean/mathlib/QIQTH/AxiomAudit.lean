@@ -13849,5 +13849,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_offdiag_O1_total
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_N0_O1_isolated
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_vanishes
+-- (c6) M5 OFF-DIAGONAL CANCELLATION — GRADIENT FACE (a₁=R/6 duality wall #1, (c)-side) — ParametrixOffDiagCancellation.lean:
+-- totalRadialO1_coeff_center_grad (∂_e totalRadialO1_coeff(0) = ∂_e w₀(0) under RNC-centre gauge — the curvature-carrying A-term + deviation term
+--   contribute 0 to the gradient, only the Euler radial r∂_r w₀ survives) + totalRadialO1_coeff_center_grad_vanishes (=0 given van-Vleck flatness ∂w₀(0)=0).
+--   Extends c5's diagonal VALUE face by one Taylor order.  ⚠ HONEST: Route (a) — NOT full off-diagonal =0.  Route (b) exact confirmed UNAVAILABLE (no exact general-v
+--   DeWitt transport identity in repo); NO general-v Taylor-o(r²) framework (only pointwise-at-0 2-jets) — a genuine library/Mathlib gap.  Remaining: Hessian face
+--   (∂²totalRadialO1_coeff(0)=0 = the Ricci-order cancellation, reachable via sqrtdet_pd_pd van-Vleck Hessian) + full general-v (blocked on Taylor framework).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_grad
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_grad_vanishes
 
 end QIQTH.AxiomAudit
