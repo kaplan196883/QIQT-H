@@ -223,3 +223,16 @@ along the ray → M4-full/M5/M6 ⟹ a₁=R/6. M2b-2 (parallel-transport existenc
   RESIDUAL to (b)-CLOSURE = pure plumbing: (b4-hpar-hY2)[NEXT] surface hpar in engine ∃ (thread through vanVleck_h4_assembled→ricci_assembled→ricci_reduced→frame_reduced→frame_reduced2, same pattern as he threading; hpar already computed from parallelFrame_expTube_exists) + feed frameComponent_hY2_of_frameData ⟹ discharge hY2 ⟹ reduce to {hLY2}. (b4-hLY2) fold hLY2 (2nd-deriv germ of log det Y) from hY2+hu_ev via hasDerivAt_log_det_matrix 6468ed65 + det/log C² composition ⟹ van-Vleck −Ric UNCONDITIONAL ⟹ ★★★ (b) CLOSED. Then (c): C4c off-diagonal parametrix + M6 [THE_PARAMETRIX_CRITICAL_PATH.md §P2, community-scale]. a₁=R/6 NOT claimed until (b)+M5+M6 unconditional.
 - ★★★ (b4-hpar-hY2) hY2 DISCHARGED IN CHAIN ✅ (`80aeabd8`) vanVleck_ricci_frame_reduced3: van-Vleck −Ric carries ONLY {hLY2}. hpar surfaced through 5-layer engine ∃ chain; hY2 via frameComponent_hY2_of_frameData. All chain thms std-3, budget 0. ~81 bricks. ONE BRICK FROM (b)-CLOSURE.
   (b4-hLY2)[NEXT — THE (b)-CLOSER] fold hLY2 (2nd-deriv germ of log det Y) from the exposed frame data: Y=Matrix.of(frameComponent) is ContDiffAt 2 (frameComponent C² from FrameComponentsSecondDeriv + matrix contDiffAt_pi) ⟹ det Y ContDiffAt 2 (contDiffAt_matrixDet) ; det Y≠0 (hu_ev, det-product) ⟹ log det Y ContDiffAt 2 (Real.contDiffAt_log at det≠0) ⟹ hLY2 via contDiffAt_two_deriv_germs. Feed vanVleck_ricci_frame_reduced3 ⟹ ★★★ van-Vleck −Ric UNCONDITIONAL ⟹ (b) CLOSED = off-center geodesic van-Vleck −Ric on real J fully unconditional. Then (c): C4c off-diagonal parametrix + M6 [THE_PARAMETRIX_CRITICAL_PATH.md §P2, community-scale]. a₁=R/6 NOT claimed until (b)+M5+M6 unconditional.
+
+═══════════════════════════════════════════════════════════════════════════
+★★★★★ (b)-SIDE CLOSED (2026-07-29, `308f48b3`, ~82 [AF] bricks, budget 0) ★★★★★
+vanVleck_ricci_unconditional (VanVleckRicciUnconditional.lean): the off-center geodesic
+van-Vleck/Raychaudhuri −Ric radial ODE deriv²[log det g̃(s•v)]|s₀ = −2Ric(u,u) − 2tr((Y'Y⁻¹)²) + 2n/s₀²
+on the REAL coordinate exp-Jacobian J is FULLY UNCONDITIONAL — ZERO carried arrows beyond top-level
+metric data. Every primitive discharged axiom-free: frame-existence, hBV (transverse smooth-dep hΦvar),
+hu_ev (no-conjugate), hYev, hY2 (frame C² incl off-radial transport crux), hLY2 (C2germ log-det), coord germs.
+═══════════════════════════════════════════════════════════════════════════
+REMAINING = (c)-SIDE ONLY: M5 off-diagonal O(1/t) cancellation (VanVleckCancellation — the now-unconditional
+radial −Ric ODE is EXACTLY its needed input) + M6 (a₁=R/6 + SeeleyDeWittData). a₁=R/6 NOT claimed until (b)+M5+M6.
+NEXT (c1): read THE_PARAMETRIX_CRITICAL_PATH.md §P2 + VanVleckCancellation.lean; assess how the unconditional
+van-Vleck −Ric feeds the off-diagonal O(1/t) absorption (parametrixResidual_offdiag_absorbed); design first (c) brick.
