@@ -13977,5 +13977,11 @@ namespace QIQTH.AxiomAudit
 -- ∇χ/Δ_gχ of the C4c cutoff-parametrix residual (off-diagonal exp-small beats any 1/t^k).  Toward residual_global_baseKernelW_of_gaussianCofactor ⟹ unconditional a₁=R/6.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.invTpow_gaussDdim_le_gaussDdimWide
 #print axioms QIQTH.HeatResidualBound.invT_pow_exp_le
+-- (C4c-leibniz) LAPLACE–BELTRAMI LEIBNIZ PRODUCT RULE — C4c far-field brick 3 (a₁=R/6 duality wall #1, C4c build) — LaplaceBeltramiLeibniz.lean:
+-- pd_pd_mul (2nd-order pd Leibniz) + laplaceBeltrami_mul: Δ_g(f·h) = f·Δ_gh + h·Δ_gf + 2∑ᵢⱼgⁱʲ(pd f i)(pd h j), from pd_mul (repo) + laplaceBeltrami def + cross-term
+-- symmetrization (hgisymm load-bearing).  Carries f,h ContDiff ℝ ⊤ + hgisymm (genuine).  ★ Gives the cutoff-parametrix residual identity (∂_t−Δ_g)(χH) = χ·E − H·Δ_gχ − 2gⁱʲ∂ᵢχ∂ⱼH
+-- (χ t-independent) — the Δ_gχ/∂χ terms are annulus-supported ⟹ exp-small (invTpow_gaussDdim_le_gaussDdimWide).  Toward residual_global_baseKernelW_of_gaussianCofactor ⟹ unconditional a₁=R/6.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_mul
+#print axioms QIQTH.LaplaceBeltrami.pd_pd_mul
 
 end QIQTH.AxiomAudit

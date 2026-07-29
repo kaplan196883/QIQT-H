@@ -166,6 +166,7 @@ import QIQTH.TrueKernelA1Reduced
 import QIQTH.C4cDecomposition
 import QIQTH.SmoothCutoff
 import QIQTH.AnnulusGaussianBound
+import QIQTH.LaplaceBeltramiLeibniz
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
