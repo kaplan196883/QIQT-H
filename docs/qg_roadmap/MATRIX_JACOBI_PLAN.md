@@ -258,3 +258,14 @@ van-Vleck −Ric feeds the off-diagonal O(1/t) absorption (parametrixResidual_of
 a₁=R/6 NOT claimed — gated on both. (b)-side unconditional van-Vleck −Ric = complete deliverable; M5 to curvature order = reachable (c) result.
 OPTIONAL final reachable brick: (c-sibling) 1st-deriv radial −Ric UNCONDITIONAL near center (discharge hJv/hpos in expJacobianDet_radialDeriv_real via expJacobianDet_pos_nhds + hu_ev det-product technique). Then HOLD at the terminal walls.
 ═══════════════════════════════════════════════════════════════════════════
+- (c-sibling) 1st-DERIV RADIAL −Ric UNCONDITIONAL near center ✅ (`999076a5`) RadialRicciUnconditional.lean: expJacobianDet_radialDeriv_real_uncond — ∀ᶠ v in 𝓝 0, radialDeriv(log J)=tr(B'(1)(D exp)⁻¹)−n with hJv/hpos/hv all discharged via expJacobianDet_pos_nhds; only hC remains. Near-center. 1st-order sibling of the (b)-closer. [AF] std-3, budget 0. ~90 bricks.
+═══════════════════════════════════════════════════════════════════════════
+★★★ SESSION CHECKPOINT (2026-07-29, ~90 [AF] bricks this run, budget 0, all pushed) ★★★
+REACHABLE (b)+(c) WORK COMPLETE. Deliverables:
+  • (b)-SIDE CLOSED: vanVleck_ricci_unconditional (308f48b3) — off-center van-Vleck −Ric radial ODE FULLY UNCONDITIONAL on real J (all deep primitives discharged: frame existence, hBV/transverse smooth-dep hΦvar, hu_ev no-conjugate, hY2 frame C², hLY2, coord germs).
+  • (c)/M5: off-diagonal O(1/t) cancellation to VALUE+GRAD+HESSIAN = curvature/Ricci order (c1-c7) + 1st-deriv radial −Ric unconditional near center (c-sibling).
+TWO TERMINAL WALLS (genuine, Mathlib-scale — NOT loop-brick-sized; HOLD, don't grind theatrically):
+  (i) full all-orders general-v off-diagonal =0 — needs a general-v RNC Taylor-o(r²) framework (Mathlib-absent; sustained sub-project).
+  (ii) M6 = SeeleyDeWitt true-kernel convergence / full residual Gaussian bound (P2d Levi-Duhamel; community-scale).
+a₁=R/6 NOT claimed — gated on both. To pursue further = commission the RNC-Taylor framework and/or M6 convergence as sustained multi-session builds.
+═══════════════════════════════════════════════════════════════════════════
