@@ -13983,5 +13983,12 @@ namespace QIQTH.AxiomAudit
 -- (χ t-independent) — the Δ_gχ/∂χ terms are annulus-supported ⟹ exp-small (invTpow_gaussDdim_le_gaussDdimWide).  Toward residual_global_baseKernelW_of_gaussianCofactor ⟹ unconditional a₁=R/6.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_mul
 #print axioms QIQTH.LaplaceBeltrami.pd_pd_mul
+-- (C4c-support) CUTOFF ANNULUS-SUPPORT — C4c far-field brick 4 (a₁=R/6 duality wall #1, C4c build) — CutoffAnnulusSupport.lean:
+-- radialCutoff_eventuallyEq_one/zero (radialCutoff =ᶠ[𝓝 v] 1 for rncRadialSq v<a², =ᶠ 0 for >b²) + pd_radialCutoff_eq_zero_of_near/far (pd=0 off annulus) + pd_pd_radialCutoff_eq_zero_of_near/far
+-- (2nd partials =0 off annulus) + pd_congr_eventuallyEq helper.  ★ The cutoff-derivative terms ∂ᵢχ/Δ_gχ of the parametrix residual are CONFINED to the annulus [a²,b²] (χ locally constant off it).
+-- Combined with laplaceBeltrami_mul + invTpow_gaussDdim_le_gaussDdimWide + near bound ⟹ (next brick) global |cutoff-residual|≤B·gaussDdim ⟹ residual_global_baseKernelW_of_gaussianCofactor ⟹ C4c far-field.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.pd_radialCutoff_eq_zero_of_near
+#print axioms QIQTH.HeatResidualBound.pd_radialCutoff_eq_zero_of_far
+#print axioms QIQTH.HeatResidualBound.pd_pd_radialCutoff_eq_zero_of_near
 
 end QIQTH.AxiomAudit
