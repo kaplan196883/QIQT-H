@@ -13936,5 +13936,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.leviSeries_summableW
 #print axioms QIQTH.HeatResidualBound.neumann_summable_alpha0_width2
 #print axioms QIQTH.HeatResidualBound.residualN0_local_baseKernelW_slice
+-- (M6-C6) ★★★ CONDITIONAL TRUE-KERNEL a₁=R/6 CAPSTONE — obstruction isolated to the single C4c primitive (a₁=R/6 duality wall #1, M6) — TrueKernelA1.lean:
+-- trueKernel_diag_a1_of_correction_higher_order (KEY: Levi correction heatConv H F diagonal = pref·t²·cRem = O(t²) ⟹ the t¹ coeff of trueHeatKernel diagonal is INHERITED unchanged
+--   from the parametrix ⟹ true a₁ = parametrix a₁) + trueKernel_diagonal_a1_eq_R6 (the CONDITIONAL capstone: heatOp(trueHeatKernel)=0 ∧ trueHeatKernel diagonal = pref·(1 + (∑Ric_ii/6)·t + t²·(…))
+--   — the true heat kernel solves the heat eqn AND has diagonal t¹-coefficient EXACTLY R/6).  Via neumann_summable_alpha0_width2 (width-2 engine) + heatParametrixFn_diagonal_a1_derived + transportCoeff_vanVleck_one_diag (u₁(0)=R/6).
+-- ⚠⚠⚠ CRITICAL FIREWALL: this is CONDITIONAL, NOT unconditional a₁=R/6.  The ENTIRE remaining obstruction is isolated to ONE genuine carried primitive: hEboundW = the global width-2
+--   off-diagonal parametrix bound = the C4c wall (far-field off the RNC ball + all-base-point q≠0; local/base-0 part PROVED by residualN0_local_baseKernelW_slice) + standard analytic
+--   interchange/integrability/Duhamel facts (hInt/hInter/hDuhamel/hE) + correction-order hCorrHigher.  a₁=R/6 STILL NOT CLAIMED unconditionally — gated on discharging C4c.  [AF] std-3.
+#print axioms QIQTH.TrueKernelA1.trueKernel_diag_a1_of_correction_higher_order
+#print axioms QIQTH.TrueKernelA1.trueKernel_diagonal_a1_eq_R6
 
 end QIQTH.AxiomAudit
