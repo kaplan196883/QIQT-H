@@ -14005,5 +14005,11 @@ namespace QIQTH.AxiomAudit
 -- hHann/hDHann (concrete-H annulus derivs) + hEnear (near residual bound).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.gi_bound_on_annulus
 #print axioms QIQTH.HeatResidualBound.laplaceBeltrami_radialCutoff_bound_on_annulus
+-- (C4c-Hbounds) CONCRETE-H ANNULUS DERIVATIVE BOUNDS — C4c far-field reduction (a₁=R/6 duality wall #1, C4c build) — ParametrixHAnnulusBounds.lean:
+-- parametrixH_annulus_bounds: for H = gaussDdim·cofactor, ∃M≥0, |H w|≤M·gaussDdim t w ∧ |pd H j w|≤M·(1/t)·gaussDdim t w on the annulus [a²,b²] — the hHann/hDHann carries of
+-- cutoffResidual_global_gaussianWide_bound.  Via pd_mul (Leibniz) + gaussDdim_pd_eq (∂gaussDdim=(−v_j/2t)gaussDdim) + |v_j|≤b + exists_bound_on_annulus (cofactor+∂cofactor bounded).
+-- ★ Discharges hHann/hDHann, reducing them to genuine cofactor C¹-regularity (hcof_cont/hcof_pdiff/hdcof_cont — true for the geometric cofactor Θ^{-1/2}Σu_k t^k on the inj ball).
+-- Remaining cutresidual carry: hEnear (near residual bound).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.parametrixH_annulus_bounds
 
 end QIQTH.AxiomAudit

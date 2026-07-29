@@ -170,6 +170,7 @@ import QIQTH.LaplaceBeltramiLeibniz
 import QIQTH.CutoffAnnulusSupport
 import QIQTH.CutoffResidualGlobalBound
 import QIQTH.CutoffAnnulusBounds
+import QIQTH.ParametrixHAnnulusBounds
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
