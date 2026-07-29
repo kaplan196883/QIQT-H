@@ -13926,5 +13926,15 @@ namespace QIQTH.AxiomAudit
 -- (DeWitt transport recursion IS proven — transportCoeff_succ_transport_eq — load-bearing only for the LIMIT coefficient u₁(0)=R/6, orthogonal to G2.)  ⚠ Remaining M6: G1 (local→global v→(p−q) + far-field, deep C4c) + C6 limit-identification.  a₁=R/6 = carried, NOT claimed.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.leviSeries_summable_alpha_zero
 #print axioms QIQTH.HeatResidualBound.iterKernel_zero_eq
+-- (M6-G1) ★★ M6 NEUMANN CONVERGENCE REDUCED to the single C4c input (a₁=R/6 duality wall #1, M6) — ParametrixHEboundWiring.lean:
+-- The width-2 Levi engine (the deferred G3 wiring, done at the residual's actual width): IterConvIntegrableW + iterConvW_bound + scaledIterKernelW_summable + leviSeries_summableW
+-- (a width-κ one-step bound |E τ p q|≤C·baseKernelW κ 0 τ p q drives Summable of the Neumann series) + neumann_summable_alpha0_width2 (κ=2,α=0 capstone) + residualN0_local_baseKernelW_slice
+-- (concrete parametrixResidualN 0 ≤ baseKernelW 2 0 t v 0 on a ball — the LOCAL near-diagonal part PROVED, all RNC/curvature hyps genuine).
+-- ★★ M6 true-kernel Neumann convergence is now REDUCED to ONE named input: the GLOBAL width-2 one-step bound hEboundW (∀ τ p q).  Its local/base-0 part is proved; the two open
+-- components = (1) FAR-FIELD off the RNC injectivity ball (needs cutoff, NOT Gaussian-tail-reachable) + (2) OFF-DIAGONAL all-base-point parametrix (q≠0) — i.e. exactly the documented C4c wall.
+-- ⚠ G3 CLOSED + G2 VACUOUS + G1 reduced to the single C4c input.  Remaining M6 = C4c global off-diagonal parametrix + IterConvIntegrableW + C6 limit-identification.  a₁=R/6 = carried, NOT claimed.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.leviSeries_summableW
+#print axioms QIQTH.HeatResidualBound.neumann_summable_alpha0_width2
+#print axioms QIQTH.HeatResidualBound.residualN0_local_baseKernelW_slice
 
 end QIQTH.AxiomAudit
