@@ -13887,5 +13887,12 @@ namespace QIQTH.AxiomAudit
 -- ★★ DELIVERS terminal wall (i) [general-v off-diagonal cancellation, checkpointed by c6/c7 as blocked on the "Mathlib-absent" Taylor framework] to the a₁-relevant curvature order —
 --   the framework (T1) was reachable.  ⚠ carries RNC gauge suite + van-Vleck 2-jet (same as √det chain).  Remaining: M6 (feed o(r²) into the residual Gaussian bound + Levi-Duhamel convergence).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_isLittleO
+-- (M6-1) M6 LEADING-RESIDUAL GAUSSIAN BOUND (a₁=R/6 duality wall #1, (c)-side M6/C4d) — ParametrixResidualGaussianBound.lean:
+-- residualLeading_gaussian_bound: ∀ε>0 ∀ᶠ v in 𝓝 0, |(1/t)·gaussDdim t v·totalRadialO1_coeff g gi Θ u v| ≤ ε·gaussDdimWide t v — the leading 1/t singular residual
+--   of the N=0 parametrix residual is ε-GAUSSIAN bounded (o(1)·Gaussian) near the RNC centre, because the off-diagonal cancellation makes coeff=o(r²).  Via
+--   totalRadialO1_coeff_isLittleO.bound + rncRadialSq_mul_gaussDdim_le (C4a poly-absorption, m=1: r²·G ≤ 8t·G_wide) fully absorbing the 1/t.  A genuine C4d sub-piece.
+-- ⚠ HONEST: the LEADING 1/t term only; remaining M6: (1/t²)·G·O(r⁴) residue (C4a m=2) + −G·Δ_g w₀ driver + fixed-radius assembly (∀ᶠ→fixed-C) + wiring into
+--   leviSeries/iterConv_bound → trueHeatKernel (C5c/C6, conditional capstone carries hE/hDuhamel/hVolterra).  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.residualLeading_gaussian_bound
 
 end QIQTH.AxiomAudit
