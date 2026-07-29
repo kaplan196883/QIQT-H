@@ -13866,5 +13866,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_hessian
 #print axioms QIQTH.HeatResidualBound.coeffA_center_hessian
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_hessian_vanishes
+-- (c-sibling) 1st-DERIVATIVE RADIAL −Ric UNCONDITIONAL near center (a₁=R/6 duality wall #1, (c)-side sibling of the (b)-closer) — RadialRicciUnconditional.lean:
+-- expJacobianDet_radialDeriv_real_uncond: ∀ᶠ v in 𝓝 0, radialDeriv(log J) v = tr(B'(1)·(D exp_v)⁻¹) − n on the REAL exp-Jacobian, with the no-conjugate positivity
+--   hJv/hpos AND the domain hv ALL DISCHARGED via expJacobianDet_pos_nhds (J>0 near 0, J(0)=1) — only top-level hC (christoffel C^∞) remains.  + feed lemma
+--   expJacobianDet_pos_ray_of_pos_nhds (positivity-on-𝓝v ⟹ no-conjugate along the ray).  ⚠ near-center domain only (conjugate points may occur away from 0).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.JacobianRegularity.expJacobianDet_radialDeriv_real_uncond
+#print axioms QIQTH.JacobianRegularity.expJacobianDet_pos_ray_of_pos_nhds
 
 end QIQTH.AxiomAudit
