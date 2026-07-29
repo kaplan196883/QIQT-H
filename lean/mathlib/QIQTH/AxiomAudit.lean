@@ -13901,5 +13901,14 @@ namespace QIQTH.AxiomAudit
 -- ⚠ HONEST: the one-step C·kernel template MATCHES iterConv_bound's hEbound (fixed-C·baseKernel); remaining M6: (a) general-N residual t^{N−d/2}·G, (b) gaussDdimWide→baseKernel/v→(p,q) adapter, (c) feed iterConv_bound/leviSeries→trueHeatKernel (C6).  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.residualN0_gaussian_bound
 #print axioms QIQTH.HeatResidualBound.residualQuadratic_gaussian_bound
+-- (M6-2) RESIDUAL→CONVERGENCE ADAPTER + M6 STRUCTURAL-GAP ASSESSMENT (a₁=R/6 duality wall #1, M6) — ParametrixResidualBaseKernel.lean:
+-- gaussDdimWide_eq_scaled_gaussDdim (★ width identity: gaussDdimWide t v = (√2)ⁿ·gaussDdim (2t) v) + baseKernel_zero_apply + gaussDdimWide_eq_scaled_baseKernel
+-- + eventually_nhds_zero_ball + residualBound_local_baseKernel + residualN0_local_baseKernel_bound (|parametrixResidualN 0| ≤ C·(√2)ⁿ·baseKernel 0 (2t) v 0 on a ball).
+-- ⚠⚠ HONEST STRUCTURAL GAP (assessment, NOT paperwork): the diagonal single-coordinate residual bound does NOT discharge iterConv_bound's hEbound — THREE genuine mismatches:
+--   G1 GLOBAL-in-space vs local-near-diagonal (Levi convolves over all z — load-bearing; = the C4c off-diagonal-parametrix wall, needs cutoff/partition/far-field tail);
+--   G2 all-τ+τ^α vs fixed-t/α=0 (needs general-N residual for the t-power); G3 WIDTH wide-8t vs narrow-4t same-time (needs width-tolerant Levi iteration, rebuild TimeSimplexBeta).
+--   M6 convergence is NOT "a few wiring bricks" — G1/G3 are community-scale.  This file supplies the wiring that HOLDS + pins the remainder.  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.gaussDdimWide_eq_scaled_gaussDdim
+#print axioms QIQTH.HeatResidualBound.residualN0_local_baseKernel_bound
 
 end QIQTH.AxiomAudit
