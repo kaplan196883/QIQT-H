@@ -13910,5 +13910,14 @@ namespace QIQTH.AxiomAudit
 --   M6 convergence is NOT "a few wiring bricks" — G1/G3 are community-scale.  This file supplies the wiring that HOLDS + pins the remainder.  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.gaussDdimWide_eq_scaled_gaussDdim
 #print axioms QIQTH.HeatResidualBound.residualN0_local_baseKernel_bound
+-- (M6-G3) ★ M6 WIDTH GAP (G3) CLOSED at model level (a₁=R/6 duality wall #1, M6) — GaussianWidthTolerant.lean:
+-- The Levi/Duhamel Neumann iteration is SCALE-INVARIANT (G_{κa}*G_{κb}=G_{κ(a+b)}, Β/Γ factor width-independent): gaussDdim_conv_scaled + gaussTimePow_conv_beta_scaled
+-- (width-κ self-similar identity) + baseKernelW/iterKernelW/iterKernelW_eq (width-κ k-fold convolution = same factorial decay ·gaussDdim(κt)) + iterKernelW_series_summable
+-- (Neumann series CONVERGES at width κ) + gaussDdimWide_eq_scaled_baseKernelW (residual's wide 8t Gaussian = (√2)ⁿ·baseKernelW 2 0 — iterates).  ★ G3 was MECHANICAL (scale-invariance),
+-- NOT a TimeSimplexBeta rebuild wall.  ⚠ Remaining M6: G2 (fixed-t/α=0 → ∀τ/α>0, general-N + DeWitt transport) + G1 (local→global, far-field tail = deep C4c wall) — both orthogonal to width.
+-- One deferred mechanical piece: κ-parametrize iterConv_bound (width-agnostic dominators, no new analysis).  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
+#print axioms QIQTH.GaussianWidthTolerant.gaussTimePow_conv_beta_scaled
+#print axioms QIQTH.GaussianWidthTolerant.iterKernelW_eq
+#print axioms QIQTH.GaussianWidthTolerant.iterKernelW_series_summable
 
 end QIQTH.AxiomAudit
