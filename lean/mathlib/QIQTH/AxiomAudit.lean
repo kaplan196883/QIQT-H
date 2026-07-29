@@ -13952,5 +13952,15 @@ namespace QIQTH.AxiomAudit
 -- are GENUINE analytic carries (not reachable while H abstract — need measurability/Duhamel machinery; hInter near-Mathlib-gap = integral_tsum needs AEMeasurable of E).  ⚠⚠⚠ STILL CONDITIONAL —
 -- a₁=R/6 NOT claimed unconditionally; the whole obstruction = hEboundW (C4c off-diagonal parametrix over all base points + far-field) + the 3 standard analytic carries.  [AF] std-3.
 #print axioms QIQTH.TrueKernelA1.trueKernel_diagonal_a1_eq_R6_residual
+-- (C4c-assess) C4c DECOMPOSITION — diagonal far-field reduced to Gaussian-cofactor boundedness; the two genuine community-scale sub-walls named (a₁=R/6 duality wall #1) — C4cDecomposition.lean:
+-- gaussDdim_le_scaled_baseKernelW_two (GLOBAL, no-ball: gaussDdim t v ≤ (√2)ⁿ·baseKernelW 2 0 t v 0) + residual_global_baseKernelW_of_gaussianCofactor (IF |R v|≤B·gaussDdim t v globally THEN
+--   global baseKernelW bound — pins the far-field to ONE input: global Gaussian-COFACTOR boundedness = the cutoff) + residual_global_baseKernelW_of_near_far + residualN0_global_baseKernelW_reduced
+--   (F2: the PROVED near slice + one far-field input ⟹ global base-0 width-2 bound on the diagonal chart).
+-- ⚠⚠⚠ HONEST VERDICT: C4c is NOT one primitive — it splits into TWO genuine COMMUNITY-SCALE walls (both Mathlib-gap, NOT loop-brick-sized): (1) FAR-FIELD CUTOFF (χ·H parametrix — needs
+--   Riemannian distance / injectivity radius / smooth cutoffs / Δ_g(χH), all absent) + (2) OFF-DIAGONAL all-base-point two-point E(τ,p,q) q≠0 (needs normal-coordinate RECENTERING infra; the
+--   (b)-side free base point covers only the coefficient-ODE half, not the two-point construction).  Diagonal-chart far-field IS reduced to the single cofactor-boundedness input (landed).
+-- ★ a₁=R/6 is proven CONDITIONAL on {C4c = these 2 community-scale sub-walls + hInt/hDuhamel/hInter}.  NOT claimed unconditionally.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.residual_global_baseKernelW_of_gaussianCofactor
+#print axioms QIQTH.HeatResidualBound.residualN0_global_baseKernelW_reduced
 
 end QIQTH.AxiomAudit
