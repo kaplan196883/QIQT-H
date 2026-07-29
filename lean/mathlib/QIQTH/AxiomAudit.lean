@@ -13998,5 +13998,12 @@ namespace QIQTH.AxiomAudit
 -- (hgibd/hDchi/hLapChi).  Next brick (C4c-Hbounds) discharges hHann/hDHann from concrete H=gaussDdim·cofactor.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_global_gaussianWide_bound
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_global_baseKernelW_bound
+-- (C4c-annulusbd) χ/METRIC ANNULUS BOUNDS DISCHARGED via compactness — C4c far-field reduction (a₁=R/6 duality wall #1, C4c build) — CutoffAnnulusBounds.lean:
+-- annulus_isCompact ({a²≤rncRadialSq≤b²} compact: closed=rncRadialSq⁻¹(Icc) + bounded ⊆ closedBall|b|, via finite-dim ProperSpace) + exists_bound_on_annulus (continuous f bounded on compact annulus)
+-- + gi_bound_on_annulus (⟹ hgibd) + pd_radialCutoff_bound_on_annulus (⟹ hDchi, χ self-contained C∞) + laplaceBeltrami_radialCutoff_bound_on_annulus (⟹ hLapChi) + laplaceBeltrami_radialCutoff_continuous.
+-- ★ Discharges the 3 χ/metric annulus carries of cutoffResidual_global_gaussianWide_bound, carrying only genuine hgi_cont/hchris_cont (metric/Christoffel continuity).  Remaining cutresidual carries:
+-- hHann/hDHann (concrete-H annulus derivs) + hEnear (near residual bound).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.gi_bound_on_annulus
+#print axioms QIQTH.HeatResidualBound.laplaceBeltrami_radialCutoff_bound_on_annulus
 
 end QIQTH.AxiomAudit
