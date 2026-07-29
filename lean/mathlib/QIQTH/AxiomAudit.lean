@@ -13824,5 +13824,14 @@ namespace QIQTH.AxiomAudit
 --   (residue_metricdev_bound).  F1 upgrade = build the RNC inverse-metric 2-jet.  Step of M5 off-diagonal O(1/t) cancellation.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.deviationCrossTerm_leading
 #print axioms QIQTH.HeatResidualBound.deviationCrossTerm_leading_parametrix
+-- (c3) M5 RNC INVERSE-METRIC 2-JET (a₁=R/6 duality wall #1, (c)-side) — RNCInverseMetricJet.lean:
+-- pd_pd_gInv_eq_neg_metric (UNCONDITIONAL sign-flip: ∂²gⁱʲ(0)=−∂²g_ij(0), from the genuine inverse relation ∑gⁱˢg_σj=δ)
+-- + rnc_metric_hessian (metric TENSOR 2-jet ∂²g_ij(0)=⅓(R^i_baj+R^i_jab+R^j_bai+R^j_iab), from pd_christoffel_origin/solve — the tensor jet
+--   was NOT a foundational wall, one brick from the Christoffel machinery) + rnc_gInv_hessian (F1: the CLOSED curvature coeff of gⁱʲ−δⁱʲ=⅓R vᵃvᵝ+o(r²)).
+-- ⚠ HONEST: the closed R-value rides hgauge (the SAME normal-coordinate gauge the repo's √det RNC chain already carries — NOT a new axiom, load-bearing);
+--   sign-flip core is fully unconditional.  Upgrades the c2 piece-(IV) O(1/t) isolation to explicit curvature.  Does NOT yet close M5 O(1/t) cancellation.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.RNCExpansion.pd_pd_gInv_eq_neg_metric
+#print axioms QIQTH.RNCExpansion.rnc_metric_hessian
+#print axioms QIQTH.RNCExpansion.rnc_gInv_hessian
 
 end QIQTH.AxiomAudit
