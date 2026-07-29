@@ -13990,5 +13990,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.pd_radialCutoff_eq_zero_of_near
 #print axioms QIQTH.HeatResidualBound.pd_radialCutoff_eq_zero_of_far
 #print axioms QIQTH.HeatResidualBound.pd_pd_radialCutoff_eq_zero_of_near
+-- (C4c-cutresidual) ★★ GLOBAL CUTOFF-RESIDUAL BOUND — C4c FAR-FIELD (diagonal chart) CLOSED (a₁=R/6 duality wall #1, C4c build) — CutoffResidualGlobalBound.lean:
+-- cutoffResidual_global_gaussianWide_bound: ∃ B≥0, ∀ v, |χ·∂_tH − Δ_g(χH)| ≤ B·gaussDdimWide t v (χ=radialCutoff a b) — the GLOBAL cutoff-parametrix residual Gaussian bound (width-2 shape).
+-- Region split via laplaceBeltrami_mul_inf + C4c-support (near rncRadialSq<a² χ=1 cutoff-terms=0 ⟹ R=E; annulus [a²,b²] each term ≤ B·gaussDdimWide via invTpow; far χ=0 ⟹ R=0) + gaussDdim_le_gaussDdimWide.
+-- + cutoffResidual_global_baseKernelW_bound (baseKernelW 2 form) + laplaceBeltrami_radialCutoff_zero_near/far.  ★★ CLOSES the C4c FAR-FIELD (diagonal chart) — the last of the 5 far-field bricks.
+-- ⚠ CONDITIONAL on GENUINE carried analytic bounds (none vacuous): hEnear (near residual ≤ C·gaussDdimWide) + hHann/hDHann (concrete-H |H|,|∂H| ≤ poly(1/t)·gaussDdim on annulus) + χ/metric annulus bounds
+-- (hgibd/hDchi/hLapChi).  Next brick (C4c-Hbounds) discharges hHann/hDHann from concrete H=gaussDdim·cofactor.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_global_gaussianWide_bound
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_global_baseKernelW_bound
 
 end QIQTH.AxiomAudit
