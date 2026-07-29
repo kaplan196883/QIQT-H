@@ -13840,5 +13840,14 @@ namespace QIQTH.AxiomAudit
 --   FLOOR F2: (gⁱʲ−δ) and Γ carried SYMBOLIC (F1 = substitute rnc_gInv_hessian + Γ 1-jet at RNC centre 0).  Step of M5 cancellation.  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.gaussDdim_pd_pd_eq
 #print axioms QIQTH.HeatResidualBound.flatCurvatureResidue_leading
+-- (c5) M5 OFF-DIAGONAL O(1/t) TOTAL ASSEMBLY + diagonal cancellation (a₁=R/6 duality wall #1, (c)-side) — ParametrixResidualO1Total.lean:
+-- parametrixResidual_offdiag_O1_total (the full N residual with all 3 singular pieces (I)/(IV)/(II) substituted into normal form — the single O(1/t) collection point)
+-- + totalRadialO1_coeff (the assembled leading O(1/t) coeff = the k=0 DeWitt transport-equation terms) + parametrixResidual_N0_O1_isolated (N=0 clean exhibit)
+-- + totalRadialO1_coeff_center_vanishes (DIAGONAL v=0 cancellation =0 under gⁱⁱ(0)=1 — validates the pieces sum correctly).  ⚠ HONEST: floor (A)+ — assembled + DIAGONAL
+--   cancellation done; the OFF-diagonal (v≠0) =0 is CHECKPOINTED (needs the RNC-substitution/Taylor closer identifying the symbolic (gⁱʲ,Γ) A-term with radialDeriv(w_0)
+--   via the b-side van-Vleck/Raychaudhuri identity — the general-v DeWitt transport identity is not a general-v algebraic fact, only a point-0 RNC identity).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_offdiag_O1_total
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_N0_O1_isolated
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_center_vanishes
 
 end QIQTH.AxiomAudit
