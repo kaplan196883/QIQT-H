@@ -116,7 +116,7 @@ theorem vanVleck_ricci_frame_reduced (g gi : Point n → Fin n → Fin n → ℝ
   have hs₀δ : s₀ ∈ Set.Ioo (0 : ℝ) δ :=
     ⟨hs₀.1, lt_of_lt_of_le hs₀.2 (min_le_left δ 1)⟩
   have hs₀1 : s₀ < 1 := lt_of_lt_of_le hs₀.2 (min_le_right δ 1)
-  obtain ⟨e, V, _hortho, _he, hΦdata, hchain⟩ := hbody s₀ hs₀δ
+  obtain ⟨e, V, _hortho, _he, _hpar, hΦdata, hchain⟩ := hbody s₀ hs₀δ
   obtain ⟨Φ, hΦ0, hflow, hVeq⟩ := hΦdata
   -- ===== discharge the radial-Jacobi link `hBV` from the surfaced `Φ`-data =====
   have hBV : ∀ᶠ s in nhds s₀, ∀ a j,

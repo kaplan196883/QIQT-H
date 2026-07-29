@@ -76,8 +76,22 @@ theorem vanVleck_ricci_frame_reduced2 (g gi : Point n → Fin n → Fin n → �
     (hgpd : Matrix.PosDef (g p : Matrix (Fin n) (Fin n) ℝ)) :
     ∃ (δ : ℝ), 0 < δ ∧ ∀ s₀ ∈ Set.Ioo (0 : ℝ) δ,
       ∃ (e : Fin n → ℝ → Point n) (V : Fin n → ℝ → Point n × Point n),
-        -- carried FRAME-side arrows (`hu_ev`/`hYev` are now discharged, alongside `hBV`/`hortho`/`hEdet`):
-        (∀ j i, ∀ᶠ τ in nhds s₀,
+        -- surfaced frame construction data for a downstream `hY2` (frame `C²`) discharge via
+        -- `frameComponent_hY2_of_frameData`: frame `C¹` regularity `he`, exp-flow `Φ`-data, and frame
+        -- parallelism `hpar`:
+        (∀ i a, ∀ᶠ τ in nhds s₀,
+            HasDerivAt (fun s => e i s a) (deriv (fun s => e i s a) τ) τ) ∧
+        (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
+            Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
+            (∀ (z : Point n × Point n), ∀ t ∈ Set.Icc (0 : ℝ) 1,
+                HasDerivWithinAt (fun s => Φ s z)
+                  (fderiv ℝ (geodesicField g gi) (expTube g gi hC p v t) (Φ t z))
+                  (Set.Icc (0 : ℝ) 1) t) ∧
+            (∀ j s, V j s = Φ s ((0 : Point n), (Pi.single j (1 : ℝ) : Point n)))) ∧
+        (∀ i, ∀ᶠ τ in nhds s₀,
+            covariantDerivAlong g gi (fun τ => (expTube g gi hC p v τ).1) (e i) τ = 0) ∧
+        -- carried FRAME-side arrow (`hu_ev`/`hYev` discharged, alongside `hBV`/`hortho`/`hEdet`):
+        ((∀ j i, ∀ᶠ τ in nhds s₀,
             HasDerivAt (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i))
               (deriv (deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j i)) τ) τ) →
         (HasDerivAt (deriv (fun s : ℝ => Real.log ((Matrix.of (fun k j =>
@@ -98,7 +112,7 @@ theorem vanVleck_ricci_frame_reduced2 (g gi : Point n → Fin n → Fin n → �
                       deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k) s₀))
                     * (Matrix.of (fun k j =>
                       frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k s₀))⁻¹)).trace
-              + 2 * (n : ℝ) / s₀ ^ 2 := by
+              + 2 * (n : ℝ) / s₀ ^ 2) := by
   -- the frame-reduced engine (now surfacing the frame data `hortho`/`he` and the exp-flow `Φ`-data)
   obtain ⟨δ, hδ, hbody⟩ := vanVleck_ricci_reduced g gi hC hg hgsymm hgisymm hginv p v hv hgpd
   -- a positivity radius in the ray parameter `s` for `J = det (D exp) > 0`
@@ -118,7 +132,7 @@ theorem vanVleck_ricci_frame_reduced2 (g gi : Point n → Fin n → Fin n → �
     lt_of_lt_of_le hs₀.2 (le_trans (min_le_right δ (min a 1)) (min_le_left a 1))
   have hs₀abs1 : |s₀| < 1 := abs_lt.mpr ⟨by linarith [hs₀.1], hs₀lt1⟩
   -- the exposed frame data + exp-flow `Φ`-data + carried chain
-  obtain ⟨e, V, hortho_ev, he, hΦdata, hchain⟩ := hbody s₀ hs₀δ
+  obtain ⟨e, V, hortho_ev, he, hpar, hΦdata, hchain⟩ := hbody s₀ hs₀δ
   obtain ⟨Φ, hΦ0, hflow, hVeq⟩ := hΦdata
   -- ===== near-`s₀` coordinate germs (`hpos`, `hγ`, `hBdet`) =====
   have hmemball : s₀ ∈ Metric.ball (0 : ℝ) a := by
@@ -270,7 +284,8 @@ theorem vanVleck_ricci_frame_reduced2 (g gi : Point n → Fin n → Fin n → �
           deriv (frameComponent g (fun u => (expTube g gi hC p v u).1) e V j k) u)
         : Matrix (Fin n) (Fin n) ℝ))
       hd hu).differentiableAt
-  -- ===== assemble: feed the discharged `hu_ev`, `hBV`, `hYev`; carry only `hY2`/`hLY2` =====
-  exact ⟨e, V, fun hY2 hLY2 => hchain hY2 hu_ev hBV hYev hLY2⟩
+  -- ===== assemble: surface the frame data (`he`/`Φ`/`hpar`); carry only the `hY2`→`hLY2` arrow =====
+  exact ⟨e, V, he, ⟨Φ, hΦ0, hflow, hVeq⟩, hpar,
+    fun hY2 hLY2 => hchain hY2 hu_ev hBV hYev hLY2⟩
 
 end QIQTH.ExpMap

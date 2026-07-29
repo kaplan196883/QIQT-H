@@ -13795,5 +13795,11 @@ namespace QIQTH.AxiomAudit
 --   from the frame data (Φ,hflow,hVeq,he,hpar).  ⚠ hY2 the MATH is DONE (e-C² crux proven, NOT carried).  Residual to literal (b)-closure = PLUMBING: surface hpar in
 --   vanVleck_ricci_reduced's ∃ (one conjunct, like he) then feed the capstone ⟹ van-Vleck −Ric unconditional modulo hLY2 (folds from hY2+hu_ev).  NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ExpMap.frameComponent_hY2_of_frameData
+-- (b4-hpar-hY2) ★★★ hY2 DISCHARGED IN THE CHAIN ⟹ van-Vleck −Ric carries ONLY {hLY2} (a₁=R/6 endgame / duality wall #1) — VanVleckRicciFrameReduced3.lean:
+-- vanVleck_ricci_frame_reduced3: the interior van-Vleck −Ric radial ODE carrying ONLY (hLY2).  hpar (frame parallelism) SURFACED through the 5-layer engine ∃ chain
+--   (vanVleck_h4_assembled→ricci_assembled→ricci_reduced→frame_reduced→frame_reduced2, additive threading; curve-alignment definitional, no rewrite); hY2 DISCHARGED via
+--   frameComponent_hY2_of_frameData fed the surfaced (Φ,hflow,hVeq,he,hpar).  ⚠ REMAINING: hLY2 (2nd-deriv germ of log det Y) ONLY — folds from hY2+hu_ev via the log-det
+--   matrix calculus (hasDerivAt_log_det_matrix).  One brick from (b)-CLOSURE (van-Vleck −Ric unconditional).  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ExpMap.vanVleck_ricci_frame_reduced3
 
 end QIQTH.AxiomAudit

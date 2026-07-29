@@ -117,6 +117,10 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
               = if i = k then (1 : ℝ) else 0) ∧
         (∀ i a, ∀ᶠ τ in nhds s₀,
             HasDerivAt (fun s => e i s a) (deriv (fun s => e i s a) τ) τ) ∧
+        -- exposed frame PARALLELISM `hpar` (threaded), for a downstream `hY2` (frame `C²`) discharge
+        -- via `frameComponent_hY2_of_frameData`:
+        (∀ i, ∀ᶠ τ in nhds s₀,
+            covariantDerivAlong g gi (fun τ => (expTube g gi hC p v τ).1) (e i) τ = 0) ∧
         -- exposed exp-flow data `Φ` (threaded) for the downstream `hBV` discharge (`V = Φ(0,e_j)`):
         (∃ Φ : ℝ → ((Point n × Point n) →L[ℝ] (Point n × Point n)),
             Φ 0 = ContinuousLinearMap.id ℝ (Point n × Point n) ∧
@@ -220,8 +224,8 @@ theorem vanVleck_ricci_reduced (g gi : Point n → Fin n → Fin n → ℝ)
     Filter.eventually_of_mem hballnhds (fun s hs => haball hs)
   have hs₀mem : s₀ ∈ Set.Ioo (0 : ℝ) δ :=
     ⟨hs₀.1, lt_of_lt_of_le hs₀.2 (min_le_left δ a)⟩
-  obtain ⟨e, V, hortho, he, hΦdata, hchain⟩ := hbody s₀ hs₀mem
-  refine ⟨e, V, hortho, he, hΦdata, fun hY2 hu_ev hBV hYev hLY2 => ?_⟩
+  obtain ⟨e, V, hortho, he, hpar, hΦdata, hchain⟩ := hbody s₀ hs₀mem
+  refine ⟨e, V, hortho, he, hpar, hΦdata, fun hY2 hu_ev hBV hYev hLY2 => ?_⟩
   -- ===== discharge the coordinate germs =====
   -- positivity arrows
   have hpos : ∀ᶠ s in nhds s₀, 0 < expJacobianDet g gi hC p (s • v) :=
