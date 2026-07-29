@@ -13894,5 +13894,12 @@ namespace QIQTH.AxiomAudit
 -- ⚠ HONEST: the LEADING 1/t term only; remaining M6: (1/t²)·G·O(r⁴) residue (C4a m=2) + −G·Δ_g w₀ driver + fixed-radius assembly (∀ᶠ→fixed-C) + wiring into
 --   leviSeries/iterConv_bound → trueHeatKernel (C5c/C6, conditional capstone carries hE/hDuhamel/hVolterra).  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.residualLeading_gaussian_bound
+-- (M6-1b) FULL N=0 RESIDUAL GAUSSIAN BOUND (a₁=R/6 duality wall #1, M6/C4d) — ParametrixResidualN0Bound.lean:
+-- residualN0_gaussian_bound: ∀ᶠ v in 𝓝 0, |parametrixResidualN 0 g gi Θ u t v| ≤ (1 + 32n²MW + L)·gaussDdimWide t v — the FULL three-term N=0 parametrix residual
+--   is Gaussian-bounded near the RNC centre: leading 1/t (M6-1, ε=1) + (1/t²)·G·quadratic (residualQuadratic_gaussian_bound, m=2 poly-absorption r⁴·G≤128t²·G_wide) + Δ_g w₀ driver.
+-- + gaussDdim_le_gaussDdimWide (narrow→wide) + residualQuadratic_gaussian_bound (term 2).  Carries genuine O(r²) metric-deviation decay (hdev), w₀-bound (hw0bd), Δ_g w₀-bound (hlap).
+-- ⚠ HONEST: the one-step C·kernel template MATCHES iterConv_bound's hEbound (fixed-C·baseKernel); remaining M6: (a) general-N residual t^{N−d/2}·G, (b) gaussDdimWide→baseKernel/v→(p,q) adapter, (c) feed iterConv_bound/leviSeries→trueHeatKernel (C6).  a₁=R/6 = carried G3, NOT claimed.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.residualN0_gaussian_bound
+#print axioms QIQTH.HeatResidualBound.residualQuadratic_gaussian_bound
 
 end QIQTH.AxiomAudit
