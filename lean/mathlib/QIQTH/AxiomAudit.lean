@@ -13809,5 +13809,13 @@ namespace QIQTH.AxiomAudit
 --   coordinate germ bundle.  Built on vanVleck_ricci_reduced (surfaces all frame data) + frameComponent_hY2_of_frameData + an in-file C2germ log-det calculus.
 -- ⚠ This closes the (b)-SIDE ONLY.  a₁=R/6 is NOT claimed — the (c)-side (M5 off-diagonal O(1/t) cancellation + M6 SeeleyDeWitt) remains.  [AF] std-3.
 #print axioms QIQTH.ExpMap.vanVleck_ricci_unconditional
+-- (c1) M5 FIRST BRICK — radial-transport residual O(1/t) isolation (a₁=R/6 duality wall #1, (c)-side) — ParametrixRadialTransportSplit.lean:
+-- radialDeriv_sum_pow (radialDeriv commutes past a finite Σ_k c_k·t^k — the radialDeriv counterpart of laplaceBeltrami_sum_pow, missing primitive)
+-- + radialTransportTerm_leading_split ((1/t)·G·radialDeriv(Σ_{k≤N} w_k t^k) = (1/t)·G·radialDeriv(w_0) + G·Σ_{k<N} radialDeriv(w_{k+1})·t^k) —
+--   ISOLATES the sole O(1/t) singular term (k=0 van-Vleck order (1/t)·G·radialDeriv(w_0), w_0=(det g̃)^{1/4}) of parametrixResidual_offdiag_absorbed
+--   from a regular t⁰+ tail; the entry point of the already-built M5-a/b/c → Raychaudhuri chain.  ⚠ M5 = off-diagonal O(1/t) cancellation, now
+--   reachable-decomposable (residue = (I)+(IV) O(1/t) RNC-curvature-matching bricks); M6 (SeeleyDeWitt convergence) = community-scale.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.ParametrixRadialTransportSplit.radialDeriv_sum_pow
+#print axioms QIQTH.ParametrixRadialTransportSplit.radialTransportTerm_leading_split
 
 end QIQTH.AxiomAudit

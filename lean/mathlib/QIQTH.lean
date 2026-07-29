@@ -145,6 +145,7 @@ import QIQTH.VanVleckRicciFrameReduced2
 import QIQTH.FrameComponentsSecondDeriv
 import QIQTH.VanVleckRicciFrameReduced3
 import QIQTH.VanVleckRicciUnconditional
+import QIQTH.ParametrixRadialTransportSplit
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
