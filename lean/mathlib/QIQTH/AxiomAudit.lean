@@ -13962,5 +13962,13 @@ namespace QIQTH.AxiomAudit
 -- ★ a₁=R/6 is proven CONDITIONAL on {C4c = these 2 community-scale sub-walls + hInt/hDuhamel/hInter}.  NOT claimed unconditionally.  [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.residual_global_baseKernelW_of_gaussianCofactor
 #print axioms QIQTH.HeatResidualBound.residualN0_global_baseKernelW_reduced
+-- (C4c-cutoff) ★ SMOOTH RADIAL CUTOFF — C4c cutoff-parametrix foundational primitive (a₁=R/6 duality wall #1, C4c far-field build) — SmoothCutoff.lean:
+-- radialCutoff a b v := Real.smoothTransition((b²−rncRadialSq v)/(b²−a²)) — a C∞ radial cutoff on Point n (sup-norm, non-smooth directly ⟹ compose 1D smoothTransition with smooth rncRadialSq).
+-- radialCutoff_contDiff (ContDiff ℝ ∞ — C∞ not analytic ⊤, since smoothTransition is not analytic) + radialCutoff_eq_one (≡1 on rncRadialSq≤a²) + radialCutoff_eq_zero (≡0 on ≥b²) + nonneg/le_one.
+-- ★ The cutoff-parametrix rests on this; the cutoff-derivative terms ∇χ/Δ_gχ are supported on the annulus a²≤rncRadialSq≤b² (Gaussian-small).  First brick of the C4c far-field build toward
+-- discharging residual_global_baseKernelW_of_gaussianCofactor ⟹ unconditional a₁=R/6.  NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.radialCutoff_contDiff
+#print axioms QIQTH.HeatResidualBound.radialCutoff_eq_one
+#print axioms QIQTH.HeatResidualBound.radialCutoff_eq_zero
 
 end QIQTH.AxiomAudit
