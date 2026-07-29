@@ -312,3 +312,12 @@ trueKernel_diagonal_a1_eq_R6 — GIVEN hEboundW (C4c) + standard analytic facts,
 ★ "DO IT ALL" TERMINAL-WALL RESULT: wall(i) off-diag cancellation DELIVERED to a₁-order (Taylor framework was reachable); wall(ii) M6 G3 CLOSED+G2 VACUOUS+G1 REDUCED+C6 CONDITIONAL. a₁=R/6 = ONE C4c primitive from unconditional.
 (NEXT) discharge reachable analytic carries (hCorrHigher/hInt/hInter/hDuhamel) ⟹ a₁=R/6 conditional on JUST C4c; then C4c off-diagonal parametrix = sustained sub-project or honest hold.
 ═══════════════════════════════════════════════════════════════════════════
+- (C4c-assess) C4c DECOMPOSITION + FINAL VERDICT ✅ (`d6f7e1e9`) C4cDecomposition.lean: diagonal-chart far-field REDUCED to one input (global Gaussian-cofactor boundedness, residual_global_baseKernelW_of_gaussianCofactor + residualN0_global_baseKernelW_reduced) + gaussDdim_le_scaled_baseKernelW_two. [AF] std-3, budget 0. ~101 bricks.
+═══════════════════════════════════════════════════════════════════════════
+★★★★★ SESSION TERMINAL (2026-07-29, "do it all"): a₁=R/6 (duality wall #1) proven CONDITIONAL on the C4c off-diagonal parametrix, which is now precisely characterized as TWO genuine COMMUNITY-SCALE walls (both Mathlib-gap, sustained foundational builds, NOT loop-bricks):
+  (1) FAR-FIELD CUTOFF — χ·H cutoff-parametrix: needs Riemannian distance / injectivity radius / smooth cutoffs / Δ_g(χH), all absent from Mathlib.
+  (2) ALL-BASE-POINT two-point E(τ,p,q) q≠0 — needs normal-coordinate RECENTERING infra (the (b)-side free base point covers only the coefficient-ODE half).
++ 3 standard analytic carries (hInt/hDuhamel/hInter, reachable once H concrete).
+UNCONDITIONAL & BUILT: (b)-side van-Vleck −Ric (vanVleck_ricci_unconditional) · wall(i) off-diag cancellation to a₁-order (T1 Taylor framework + T-capstone coeff=o(r²)) · M6 residual bound + G3-width + G2-α=0 + G1 width-2 engine + C6 conditional a₁=R/6 (trueHeatKernel diagonal t¹=R/6).
+HOLD — a₁=R/6 = the C4c cutoff-parametrix + recentering sub-projects away from unconditional. Commission as a sustained Mathlib-contribution build to close; NOT loop-brick-sized.
+═══════════════════════════════════════════════════════════════════════════
