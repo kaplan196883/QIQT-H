@@ -14089,4 +14089,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCExpansion.sqrtdet_contDiffAt_two
 #print axioms QIQTH.RNCExpansion.prod_contDiffAt_two
 
+-- (RECENTER R3b) ★ FINITE-REGULARITY N=0 RESIDUAL ISOLATION (a₁=R/6 recenter campaign) — ResidualN0FiniteReg.lean:
+-- parametrixResidual_N0_O1_isolated_C2: parametrixResidualN 0 = (1/t)·G·totalRadialO1_coeff + (1/t²)·G·[−¼Σ(gⁱʲ−δ)vⁱvʲ]·w₀ − G·Δ_g w₀, from a SINGLE finite-reg carry hw0 (ContDiffAt ℝ 2 (foldedCoeff Θ u 0) v)
+-- (down from the ⊤-version's ∀k ContDiff ⊤). + laplaceBeltrami_mul_mixed_C2 (un-symmetrised C² Leibniz, needs NO inverse-metric-symmetry) + offdiag decomp/absorbed/O1_total_N0_C2. Reuses R1 pd_pd_mul_C2/PdiffAt_of_contDiffAt.
+-- ⚠ HONEST SUB-WALL: the FULL residualN0_gaussian_bound_C2 is BLOCKED — its term (1) residualLeading_gaussian_bound/totalRadialO1_coeff_isLittleO needs g̃∈C³ (little-o Hessian face differentiates Christoffel Γ=∂g twice = ∂³g),
+-- strictly above the C² that expPullbackMetric supplies (repo exp is ContDiffOn ℝ 3 = Rung-3 capstone ⟹ g̃ C²; g̃∈C³ needs exp∈C⁴ = a Rung-4 smooth-dependence ladder extension). R3b landed the isolation (deepest reachable at C²); term (1) = the C³/Rung-4 sub-wall. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_N0_O1_isolated_C2
+#print axioms QIQTH.HeatResidualBound.laplaceBeltrami_mul_mixed_C2
+
 end QIQTH.AxiomAudit
