@@ -14236,4 +14236,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4Val_congr
 #print axioms QIQTH.ExpMap.expJet3Curve_add_l
 
+-- (JET-4 TOWER J4-4b COMPLETE: the expJetD4 CLM-packaging chain (1)→(4), goal expJetD4_two_pt_diff landed) ★ — ExpJet4DFull.lean:
+-- (1) expJet4Rhs_{add,smul}_{h,k,l,m} (8 matched-Q source-linearity, simp+abel) → (2) expJet4Val_{add,smul}_{h,k,l,m} + expJet3Curve_congr + expJet3CurveG(+_continuousOn)+6 trilinearity + expJet_fderiv4_tube_bddAbove_unif (uniform fderiv⁴ tube bound) + expJet4ValG(def)+_norm_le+8 multilinearity
+-- → (3) expJetD4Inner/expJetD4Mid/expJetD4 quadrilinear CLM (nested mkContinuous₂/mkContinuous, +_apply/_norm_le) → (4) expJetD4_two_pt_diff = ‖expJetD4…v… − expJetD4…w…‖ ≤ expJet4VtpConst·‖v−w‖ (project expJet4Val_v_two_pt_diff by expJetPi + 4× opNorm_le_bound).
+-- All std-3, genuine hyps (Kf,Ldf..Ld4f Lipschitz + Kstar..Kstar4 tube + Φv,Φw propagator = exactly expJetD3_two_pt_diff's constants one Fréchet order up). Mirror expJetD3 packaging (ExpMapContDiff3). NEXT J4-5: hfd3=ContDiffOn 1 (fderiv³exp) ⟹ exp∈C⁴ UNCONDITIONAL. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJetD4_two_pt_diff
+#print axioms QIQTH.ExpMap.expJetD4_apply
+#print axioms QIQTH.ExpMap.expJet4ValG_norm_le
+
 end QIQTH.AxiomAudit
