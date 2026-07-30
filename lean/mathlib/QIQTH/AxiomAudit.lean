@@ -14097,4 +14097,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_N0_O1_isolated_C2
 #print axioms QIQTH.HeatResidualBound.laplaceBeltrami_mul_mixed_C2
 
+-- (RECENTER Rung-4) ★ exp ContDiffOn ℝ 4 — CONDITIONAL reduction + unconditional field 4th-deriv (a₁=R/6 recenter campaign) — ExpMapContDiff4.lean:
+-- contDiff_fderiv4_geodesicField (UNCONDITIONAL: the geodesic field's 4th Fréchet derivative is C∞, .fderiv_right one order above Rung-3) + expMap_contDiffOn_four_of_fderiv3_contDiffOn_one
+-- (Rung-4 reduction: exp∈ContDiffOn ℝ 4 on the ball, CONDITIONAL on hfd3 = ContDiffOn 1 (fderiv³ exp_p) = the exp Jet₄ regularity; chains contDiffOn_succ_of_fderivWithin ×3 off the unconditional Rung-3 capstone).
+-- ⚠⚠ TERMINAL WALL: unconditional Rung-4 (discharging hfd3) needs the Jet₄ FUNDAMENTAL-SOLUTION TOWER (4th-variation ODE expJet4Rhs/Fund + Grönwall two-point Lipschitz expJetD4_two_pt_diff) = the analog of the repo's ~4700-line expJetD3 tower = GENUINELY ABSENT, multi-month Mathlib-PR-scale (the smooth-dependence-on-IC wall, one rung above Rung-3). exp∈C⁴ ⟹ expPullbackMetric∈C³ ⟹ unblocks residual term (1)/R3c. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_four_of_fderiv3_contDiffOn_one
+#print axioms QIQTH.ExpMap.contDiff_fderiv4_geodesicField
+
 end QIQTH.AxiomAudit
