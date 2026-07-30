@@ -14081,4 +14081,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_global_gaussianWide_bound_C2
 #print axioms QIQTH.HeatResidualBound.contDiffAt_two_of_contDiffOn_two
 
+-- (RECENTER R3a) ★ GENERAL-BASE-POINT FINITE-REGULARITY RNC-EXPANSION PRIMITIVES (a₁=R/6 recenter campaign) — RNCExpansionFiniteReg.lean:
+-- det_contDiffAt_two (det of a per-entry-ContDiffAt-2 matrix is ContDiffAt 2 at general x, via Matrix.det_apply' polynomial) + sqrtdet_contDiffAt_two (√det ContDiffAt 2 at general x, given det(g x)≠0, via ContDiffAt.sqrt)
+-- + prod_contDiffAt_two (product of C² is C²). The general-BASE-POINT analogues the near-diagonal slice needs (the at-0 C² RNC chain — det_contDiffAt2/sqrtdet_pd_pd_c2/heat_a1_of_gauge_c2 — already existed, ed2362c2).
+-- ★ R3a of the RECENTER campaign: finite-regularity RNC surface for the near-slice. NEXT R3b = ParametrixResidualN0Bound at C² (consumes these + contDiffAt_two_of_contDiffOn_two). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.RNCExpansion.det_contDiffAt_two
+#print axioms QIQTH.RNCExpansion.sqrtdet_contDiffAt_two
+#print axioms QIQTH.RNCExpansion.prod_contDiffAt_two
+
 end QIQTH.AxiomAudit

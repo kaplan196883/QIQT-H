@@ -179,6 +179,7 @@ import QIQTH.IterConvIntegrableFull
 import QIQTH.IterEMeasurable
 import QIQTH.LaplaceBeltramiFiniteReg
 import QIQTH.CutoffResidualFiniteReg
+import QIQTH.RNCExpansionFiniteReg
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
