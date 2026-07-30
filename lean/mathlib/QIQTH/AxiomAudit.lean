@@ -14209,6 +14209,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4Fund_unique
 #print axioms QIQTH.ExpMap.expJet4Fund_value_bound_Icc
 
+-- (JET-4 TOWER J4-3, partial ingredients) ★ TWO-POINT LIPSCHITZ HEART — reusable ingredients — ExpJet4Val.lean:
+-- expJet3Val_v_two_pt_Icc_const (NEW [0,1]-uniform 3rd-variation two-point bound ‖Rv t−Rw t‖≤C·‖v−w‖·‖h‖‖k‖‖l‖ ∀t∈Icc 0 1 — didn't exist before, only the t=1 value; the jet-4 (3+1) telescope needs it) +
+-- expJet4_v_residual_hasDerivWithinAt (the Jet₄ residual-ODE identity: D=Rv−Rw solves D'=DF(Y_v)·D + [DF(Y_v)−DF(Y_w)]Rw + (Θ₄^v−Θ₄^w)) + expJet4Val_v_two_pt_diff_gronwall (Grönwall application concluding ‖Rv 1−Rw 1‖≤ρ₄·exp Kstar, carrying the GENUINE non-vacuous ρ₄-residual bound hrbound).
+-- Verbatim one-order-up mirror of the jet-3 crux ingredients. ⚠ FULL expJet4Val_v_two_pt_diff NOT closed — needs the 51-term ρ₄-telescope discharging hrbound (J4-3-remainder), reducing to the landed lower-jet two-point diffs + value bounds. NOT exp∈C⁴/a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Val_v_two_pt_diff_gronwall
+#print axioms QIQTH.ExpMap.expJet4_v_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet3Val_v_two_pt_Icc_const
+
 -- (CONVERGENCE hInter) ★★ tsum/heatConv INTERCHANGE FULLY DISCHARGED — NOT a Mathlib gap (a₁=R/6 convergence trio) — LeviInterchange.lean:
 -- heatConv_leviSeries_interchange: heatConv E (leviSeries E) t x y = ∑' k, heatConv E (sign·iterE E (k+1)) t x y — EXACTLY the hInter carry of trueKernel_diagonal_a1_eq_R6/leviSeries_volterra, from hEbound+hEzero+hEmeas+C+ht.
 -- ★★ KEY: hInter is NOT genuinely Mathlib-blocked (corrects the repo docs' "Summable-continuity of heatConv missing" claim) — MeasureTheory.integral_tsum_of_summable_integral_norm fits BOTH layers (inner ∫z + outer interval ∫s in 0..t via integral_of_le + Ioc restriction),
