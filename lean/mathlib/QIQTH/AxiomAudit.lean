@@ -14046,4 +14046,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.modelZ_integrableW
 #print axioms QIQTH.HeatResidualBound.modelS_intervalIntegrableW
 
+-- (M6-carry) ★★ FULL IterConvIntegrableW DISCHARGE from hEbound + E-regularity (a₁=R/6 duality wall #1, M6 analytic carries) — IterConvIntegrableFull.lean:
+-- iterConvIntegrableW_of_bound_continuous: (hEbound: ∀τ p q, 0<τ → |E τ p q|≤C·baseKernelW 2 0 τ p q) + (hEzero: E=0 at τ≤0) + (hE_zmeas/hIterE_zmeas: AEStronglyMeasurable space-slices of E/iterE)
+-- + (hConv_meas: joint (s,z)-measurability of the Duhamel convolution integrand) ⟹ IterConvIntegrableW E 2 0 C (ALL FIVE conjuncts, every k≥1). Discharges the hInt carry of trueKernel_diagonal_a1_eq_R6
+-- ENTIRELY down to hEbound + genuine E-regularity. Joint induction: Dall (domination |iterE E k|≤C^k·iterKernelW via heatConv_le_of_abs_le_pos) + mkI (5 conjuncts: 1/2/3 via Integrable.mono' + boundary-vanishing,
+-- 4/5 = iterConvIntegrableW_model verbatim). hEmeas is 4 GENUINE MeasureTheory props (none vacuous, all hold for continuous Gaussian-built E; hC:0≤C dropped as unneeded). Remaining for the concrete E=parametrixResidualN 0:
+-- discharge hEzero(n≥1 Gaussian)/hE_zmeas/hIterE_zmeas(continuity) + hConv_meas(variable-upper-limit Duhamel convolution joint measurability = the precise remaining measure-theory primitive). hEbound=recenter wall. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.iterConvIntegrableW_of_bound_continuous
+
 end QIQTH.AxiomAudit

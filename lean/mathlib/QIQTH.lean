@@ -175,6 +175,7 @@ import QIQTH.NearResidualBound
 import QIQTH.CutoffResidualAssembled
 import QIQTH.RecenterReduction
 import QIQTH.ModelIntegrableW
+import QIQTH.IterConvIntegrableFull
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
