@@ -14251,4 +14251,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4_residual_bound
 #print axioms QIQTH.ExpMap.expJet4_residual_hasDerivWithinAt
 
+-- (JET-4 TOWER J4-5b-prereq: the three genuinely-absent order-4 D⁴F primitives the quadratic-remainder cancellation needs) ★ — ExpJet4Prereq.lean, all proved OUTRIGHT (not firewalls), mirror the order-3 D³F cluster one Fréchet order up:
+-- expJet_fderiv4_lipschitzOnWith (D⁴F Lipschitz on the confined tube ball, mirror expJet_fderiv3_lipschitzOnWith:172 via contDiff_fderiv4_geodesicField)
+-- + geodesicField_D3F_second_order_taylor (‖D³F y − D³F x − D⁴F x(y−x)‖ ≤ L‖y−x‖² given D⁴F Lipschitz as INPUT; mirror geodesicField_D2F_second_order_taylor:1547 — the D⁴F-Lipschitz is a genuine input, the MVT/Taylor argument is the content, conclusion ≠ hypothesis)
+-- + fderiv4_geodesicField_symm_{ab,bc,cd,cyc} (D⁴F argument-permutation symmetry: 3 adjacent transpositions generate S₄, full coverage; mirror fderiv3_geodesicField_symm_ab/bc/cyc:76-129 via isSymmSndFDerivAt + flipₗᵢ/comp_fderiv lifting). All std-3.
+-- ⚠ NEXT J4-5b-real: the full ~1500-line expJet4_remainder_quadratic_bound cancellation (mirror ExpMapContDiff3:1605) consuming these + expJet_fderiv4_tube_bddAbove_unif + expJet3Val_v_two_pt_Icc_const, carrying only hFVh/hFVk/hQlip-analogue INPUTS. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet_fderiv4_lipschitzOnWith
+#print axioms QIQTH.ExpMap.geodesicField_D3F_second_order_taylor
+#print axioms QIQTH.ExpMap.fderiv4_geodesicField_symm_cyc
+
 end QIQTH.AxiomAudit
