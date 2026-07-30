@@ -14260,4 +14260,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_D3F_second_order_taylor
 #print axioms QIQTH.ExpMap.fderiv4_geodesicField_symm_cyc
 
+-- (JET-4 TOWER J4-5b-real: THE deep order-4 quadratic-remainder cancellation — the O(‖m‖²) little-o that gives fderiv³ differentiability) ★★ — ExpJet4Remainder.lean:
+-- expJet4_remainder_quadratic_bound : ∃ C, 0≤C ∧ ∀ t∈[0,1], ‖(DF(Y_w)−DF(Y_v))(Qw) + (Θ₃_w − Θ₃_v − Θ₄_v)‖ ≤ C·‖m‖²  (w=v+m). The FULL 14-term Faà-di-Bruno cancellation DERIVED via a 5-block telescope (Block0 top-variation cancels T14; Block1 pure D³F/D⁴F Taylor via geodesicField_D3F_second_order_taylor+fderiv4_geodesicField_symm_cyc cancels T1/T4/T6/T7; Blocks2-4 the three D²F cross-terms via fderiv3_symm_ab+fderiv2_symm cancel the remaining 9). Mirror expJet3_remainder_quadratic_bound (ExpMapContDiff3:1605) one Fréchet order up.
+-- ⚠ NON-TAUTOLOGICAL (verified): the O(‖m‖²) conclusion is DERIVED; carried hyps are strictly LOWER-order INPUTS ONLY (first→second var residuals hFPh/hFPk/hFPl, second→third var residuals hFQkl/hFQhl/hFQhk each ≤Cd‖m‖² on DIFFERENT quantities; solution-Lipschitz hQlip* ≤Ce‖m‖; value bounds hV*; ODE data) — EXACTLY the hFVh/hFVk/hQlip firewall the order-3 original carries. NONE equals/implies the conclusion. All genuinely used. std-3.
+-- ⚠ NEXT J4-5c (_' :3144 variant) → J4-5d (_unif :3576, discharges the carried hFP*/hFQ*/hQlip*/hV* inputs from the genuine expJet2Curve/expJet3CurveG solutions) → J4-5e (expMap_fderiv3_hasFDerivAt :3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4_remainder_quadratic_bound
+
 end QIQTH.AxiomAudit
