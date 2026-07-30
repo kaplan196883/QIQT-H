@@ -177,6 +177,7 @@ import QIQTH.RecenterReduction
 import QIQTH.ModelIntegrableW
 import QIQTH.IterConvIntegrableFull
 import QIQTH.IterEMeasurable
+import QIQTH.LaplaceBeltramiFiniteReg
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

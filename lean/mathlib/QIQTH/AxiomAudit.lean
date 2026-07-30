@@ -14064,4 +14064,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.iterE_zmeas
 #print axioms QIQTH.HeatResidualBound.conv_meas
 
+-- (RECENTER R1) ★ FINITE-REGULARITY LAPLACE–BELTRAMI LEIBNIZ (a₁=R/6 recenter campaign, toward unconditional hEboundW ∀q) — LaplaceBeltramiFiniteReg.lean:
+-- laplaceBeltrami_mul_C2: Δ_g(f·h) x = f·Δ_gh + h·Δ_gf + 2gⁱʲ∂ᵢf∂ⱼh from ContDiffAt ℝ 2 f x + ContDiffAt ℝ 2 h x + hgisymm (metric enters only as VALUES at x — NO metric-regularity hyp; same conclusion as the ⊤-version laplaceBeltrami_mul).
+-- + pd_pd_mul_C2 (2nd-partial product rule at ContDiffAt 2) + general-point extractors PdiffAt_of_contDiffAt (ContDiffAt 1⟹PdiffAt) / PdiffAt_pd_of_contDiffAt (ContDiffAt 2⟹PdiffAt(pd·), general-base-point port of the at-0 RNCExpansion/PullbackMetric versions).
+-- ★ R1 of the RECENTER campaign: the finite-regularity (C²) refactor foundation — lets the whole C4c residual chain be re-proven at the ContDiffOn ℝ 2 regularity the q-centered expPullbackMetric actually provides. No carried hyps. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.LaplaceBeltrami.laplaceBeltrami_mul_C2
+#print axioms QIQTH.LaplaceBeltrami.pd_pd_mul_C2
+#print axioms QIQTH.LaplaceBeltrami.PdiffAt_pd_of_contDiffAt
+#print axioms QIQTH.LaplaceBeltrami.PdiffAt_of_contDiffAt
+
 end QIQTH.AxiomAudit
