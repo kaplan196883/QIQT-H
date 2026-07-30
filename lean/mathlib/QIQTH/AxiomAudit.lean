@@ -14166,4 +14166,12 @@ namespace QIQTH.AxiomAudit
 -- ⚠⚠ R6 UNIFORMITY-IN-p SUB-WALL: hEboundW_of_uniform_perBasePoint needs the SAME constant ∀ base points q (B/Kg/Kc2/M/W/L uniform in p). NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW
 
+-- (RECENTER R6) ★★★ ABSTRACT hEboundW ∀q ASSEMBLY (a₁=R/6 recenter campaign, CULMINATING) — RecenterHEboundW.lean:
+-- hEboundW_of_perBasePoint_bound: given hunif (∀q τ>0 ∀p |E τ p q|≤B·gaussDdimWide τ (Vmap q p) — UNIFORMITY-IN-q, single B) + hcoord (gaussDdim(2τ)(Vmap q p)≤D·gaussDdim(2τ)(p−q) — COORDINATE-CHANGE v↔p−q) ⟹
+-- ∀τ p q |E τ p q| ≤ (B·(√2)ⁿ·D)·baseKernelW 2 0 τ p q = EXACTLY the hEboundW carry-shape of trueKernel_diagonal_a1_eq_R6. Via gaussDdimWide_eq_scaled_gaussDdim + hcoord transport + hEboundW_of_uniform_perBasePoint (6678447a).
+-- + ContinuousOn-on-annulus bricks (exists_bound_on_annulus_of_continuousOn/_subset + gi_bound/laplaceBeltrami_radialCutoff_bound_on_annulus_of_continuousOn) discharging R5's hgi_ann/hLapChi_ann SHAPE from LOCAL ContDiffOn (annulus⊆exp-ball).
+-- ⚠ HONEST: hunif/hcoord are genuine satisfiable geometric Props (bounded-geometry uniformity + near-diag coord comparison), CARRIED not proved (bounded-geometry infra out of scope). Discharges the hEboundW SHAPE only; trueKernel's other carries (hInt/hE/hDuhamel/hInter/hHdiag/hCorrHigher) remain. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.hEboundW_of_perBasePoint_bound
+#print axioms QIQTH.HeatResidualBound.gi_bound_on_annulus_of_continuousOn
+
 end QIQTH.AxiomAudit
