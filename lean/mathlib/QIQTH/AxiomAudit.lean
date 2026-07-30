@@ -14036,4 +14036,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hEboundW_of_uniform_perBasePoint
 #print axioms QIQTH.HeatResidualBound.hEboundW_iff_uniform_perBasePoint
 
+-- (M6-carry) ★ MODEL-SIDE GAUSSIAN INTEGRABILITY of IterConvIntegrableW conjuncts (4)&(5) (a₁=R/6 duality wall #1, M6 analytic carries) — ModelIntegrableW.lean:
+-- iterConvIntegrableW_model (κ C) (hκ:0<κ): ∀ k≥1, t>0, x y, (∀ s, Integrable (fun z => C·baseKernelW κ 0 (t−s) x z·(C^k·iterKernelW κ 0 k s z y))) ∧ IntervalIntegrable (∫ z, [same]) 0 t
+-- — the MODEL-dominator (Gaussian) integrability conjuncts of IterConvIntegrableW E κ 0 C, discharged UNCONDITIONALLY (no dependence on E/geometry/recenter). All κ>0 (incl. 2), all k≥1, all t>0, general n (incl. n=0).
+-- Via baseKernelW_zero_apply + iterKernelW_eq → gaussDdim_mul_integrable (product of two d-dim Gaussians integrable) + gaussDdim_conv (widths add) → const·s^(k−1) rpow-interval-integrable.
+-- + modelZ_integrableW (conjunct 4) + modelS_intervalIntegrableW (conjunct 5) + workhorses gaussDdim_mul_integrable/heatKernel1D_mul_integrable. Reduces hInt (IterConvIntegrableW) of trueKernel_diagonal_a1_eq_R6 by 2/5 conjuncts.
+-- Residual-side conjuncts (1)(2)(3) = E-dependent, honestly still carried (need iterE continuity + Gaussian domination). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.iterConvIntegrableW_model
+#print axioms QIQTH.HeatResidualBound.modelZ_integrableW
+#print axioms QIQTH.HeatResidualBound.modelS_intervalIntegrableW
+
 end QIQTH.AxiomAudit
