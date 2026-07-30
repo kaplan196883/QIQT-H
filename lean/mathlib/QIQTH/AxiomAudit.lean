@@ -14137,4 +14137,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.near_uncutResidual_expPullback
 #print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_contDiffAt_two
 
+-- (RECENTER R4b) ★ DISCHARGE two carried gauge hyps of the q-centered hEnear (a₁=R/6 recenter campaign) — RecenterConnectC3b.lean:
+-- christoffel_expPullback_contDiffAt_two (discharges hCd: Γ̃ ∈ ContDiffAt ℝ 2 at 0, from g̃∈C³ [hfd3] + g̃⁻¹∈C² [expPullbackMetricInv_contDiffAt_two] + contDiffAt_two_of_contDiffOn_two) +
+-- pd_expPullbackMetricInv_zero (discharges hdgi0: ∂g̃⁻¹(0)=0, by Leibniz on g̃⁻¹·g̃=δ + pd_expPullbackMetric_at_zero, a NET removal since it only uses already-present hyps). Both genuinely used, none vacuous.
+-- ⚠ Piece 3 (hw0hessRicci van-Vleck/DeWitt jet) HONESTLY a genuine sub-wall (agent rejected the vacuous w₀=0 route): needs a q-centered DeWitt-coefficient construction — a NEW contracted-Christoffel ∑_i∂Γ̃^a_{ii}(0) second-jet identity + rpow congruence + factor-2 coeff bookkeeping (reachable chain: rnc_htr_of_gauge_c2 → sqrtdet_pd_pd_c2 → new identity). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.christoffel_expPullback_contDiffAt_two
+#print axioms QIQTH.HeatResidualBound.pd_expPullbackMetricInv_zero
+
 end QIQTH.AxiomAudit
