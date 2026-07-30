@@ -14189,6 +14189,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4Rhs_continuousOn
 #print axioms QIQTH.ExpMap.expJet4Rhs_norm_le
 
+-- (JET-4 TOWER J4-2a) ★ LOCAL PICARD–LINDELÖF for the 4th-variation fundamental-solution ODE — ExpJet4Fund.lean:
+-- expJet4Fund_local: ∃ T>0, ∃ R, R 0 = 0 ∧ ∀ t∈Icc 0 T, HasDerivWithinAt R (DF(Y_v t)·R t + expJet4Rhs …) (Icc 0 T) t — the local existence for R'=DF(Y_v)·R+Θ₄, R(0)=0, via IsPicardLindelof.
+-- ★ VERBATIM one-Fréchet-order-up MIRROR of expJet3Fund_local (ExpMapContDiff3.lean:474): linear part DF(Y_v)·R + PL scaffolding byte-identical; ONLY change Θ₃→Θ₄ (expJet4Rhs, J4-1) + expJet4Rhs_continuousOn. No carried hyps beyond the mirror. Φ/Q kept abstract (instantiated at the [0,1] capstone).
+-- NEXT J4-2b = expJet4Field_continuousOn → _shifted → _glue → expJet4Fund ([0,1] global capstone, mirror expJet3Fund chain). NOT exp∈C⁴/a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Fund_local
+
 -- (CONVERGENCE hInter) ★★ tsum/heatConv INTERCHANGE FULLY DISCHARGED — NOT a Mathlib gap (a₁=R/6 convergence trio) — LeviInterchange.lean:
 -- heatConv_leviSeries_interchange: heatConv E (leviSeries E) t x y = ∑' k, heatConv E (sign·iterE E (k+1)) t x y — EXACTLY the hInter carry of trueKernel_diagonal_a1_eq_R6/leviSeries_volterra, from hEbound+hEzero+hEmeas+C+ht.
 -- ★★ KEY: hInter is NOT genuinely Mathlib-blocked (corrects the repo docs' "Summable-continuity of heatConv missing" claim) — MeasureTheory.integral_tsum_of_summable_integral_norm fits BOTH layers (inner ∫z + outer interval ∫s in 0..t via integral_of_le + Ioc restriction),
