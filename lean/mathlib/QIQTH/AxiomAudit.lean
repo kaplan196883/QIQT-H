@@ -14182,4 +14182,17 @@ namespace QIQTH.AxiomAudit
 -- Remaining to UNCONDITIONAL: convergence trio hDuhamel/hInter[Mathlib-gap Summable-continuity of heatConv]/hCorrHigher + concrete geometric instantiation of {hunif,hcoord,hEmeas,hE,hHdiag} + exp Jet₄ tower (hfd3). NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_recenter
 
+-- (JET-4 TOWER J4-1) ★ 4th-VARIATION ODE RHS FIELD (toward unconditional exp∈C⁴ ⟹ discharge hfd3 ⟹ truly-unconditional a₁=R/6) — ExpJet4Rhs.lean:
+-- expJet4Rhs: the 4th-variation ODE right-hand-side field (14-term Faà-di-Bruno: 1 [D⁴F·P⁴] + 6 [D³F·P·P·Q²] + 3 [D²F·Q²·Q²] + 4 [D²F·P·Q³]) + expJet4Rhs_apply (@[simp] rfl) + expJet4Rhs_continuousOn (ContinuousOn on Icc 0 1) + expJet4Rhs_norm_le (the 14-term bound).
+-- ★ FAITHFUL one-Fréchet-order-up MIRROR of expJet3Rhs (ExpMapContDiff3.lean:242-375), uses contDiff_fderiv4_geodesicField. No carried hyps beyond the mirror set. J4-1 = foundation rung of the JET-4 tower (docs/qg_roadmap/JET4_TOWER_PLAN.md).
+-- NEXT J4-2 = expJet4Fund (fundamental solution via IsPicardLindelof, mirror expJet3Fund). Then J4-3/4/5 → hfd3 discharged → exp∈C⁴ unconditional. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Rhs_continuousOn
+#print axioms QIQTH.ExpMap.expJet4Rhs_norm_le
+
+-- (CONVERGENCE hInter) ★★ tsum/heatConv INTERCHANGE FULLY DISCHARGED — NOT a Mathlib gap (a₁=R/6 convergence trio) — LeviInterchange.lean:
+-- heatConv_leviSeries_interchange: heatConv E (leviSeries E) t x y = ∑' k, heatConv E (sign·iterE E (k+1)) t x y — EXACTLY the hInter carry of trueKernel_diagonal_a1_eq_R6/leviSeries_volterra, from hEbound+hEzero+hEmeas+C+ht.
+-- ★★ KEY: hInter is NOT genuinely Mathlib-blocked (corrects the repo docs' "Summable-continuity of heatConv missing" claim) — MeasureTheory.integral_tsum_of_summable_integral_norm fits BOTH layers (inner ∫z + outer interval ∫s in 0..t via integral_of_le + Ioc restriction),
+-- the Σ∫‖·‖ summability supplied by the built domination iterConvW_bound + gaussDdim_conv + scaledIterKernelW_summable. STRICT reduction: converts the carried hInter into the same hEbound/hEzero/hEmeas carries the tower already runs on (hInt derived internally via iterConvIntegrableW_of_bound_baseMeas). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.heatConv_leviSeries_interchange
+
 end QIQTH.AxiomAudit

@@ -193,6 +193,8 @@ import QIQTH.RecenterConnectC3c
 import QIQTH.RecenterCutoffC3
 import QIQTH.RecenterHEboundW
 import QIQTH.RecenterA1Capstone
+import QIQTH.ExpJet4Rhs
+import QIQTH.LeviInterchange
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
