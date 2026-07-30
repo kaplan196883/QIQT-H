@@ -14054,4 +14054,14 @@ namespace QIQTH.AxiomAudit
 -- discharge hEzero(n≥1 Gaussian)/hE_zmeas/hIterE_zmeas(continuity) + hConv_meas(variable-upper-limit Duhamel convolution joint measurability = the precise remaining measure-theory primitive). hEbound=recenter wall. NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.iterConvIntegrableW_of_bound_continuous
 
+-- (M6-carry) ★★ iterE / DUHAMEL-CONVOLUTION MEASURABILITY PROPAGATION (a₁=R/6 duality wall #1, M6 analytic carries) — IterEMeasurable.lean:
+-- iterConvIntegrableW_of_bound_baseMeas: from hEbound + hEzero + a SINGLE genuine base measurability hEmeas (StronglyMeasurable (fun q:ℝ×Point×Point => E q.1 q.2.1 q.2.2), measure-free) ⟹ IterConvIntegrableW E 2 0 C.
+-- Discharges the hIterE_zmeas + hConv_meas regularity carries of iterConvIntegrableW_of_bound_continuous by INDUCTION: iterE_joint_stronglyMeasurable (carrier) → iterE_zmeas (=hIterE_zmeas) + conv_meas (=hConv_meas).
+-- ★ The variable-upper-limit interval integral ∫ u in 0..s measurability is DISCHARGED (not carried) via measure-free Fubini StronglyMeasurable.integral_prod_right' + Ioc-indicator product-measurability.
+-- ★★ Combined with iterConvIntegrableW_of_bound_continuous (6887b297): the full hInt (IterConvIntegrableW) of trueKernel_diagonal_a1_eq_R6 now reduces to just hEbound + hEzero + hEmeas — all reachable for the
+-- concrete E=parametrixResidualN 0 (joint continuity ⟹ hEmeas via Continuous.stronglyMeasurable; hEzero via gaussDdim vanishing τ≤0, n≥1) EXCEPT hEbound = the recenter/off-diagonal (C4c) wall. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.iterConvIntegrableW_of_bound_baseMeas
+#print axioms QIQTH.HeatResidualBound.iterE_zmeas
+#print axioms QIQTH.HeatResidualBound.conv_meas
+
 end QIQTH.AxiomAudit
