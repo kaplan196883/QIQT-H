@@ -14027,4 +14027,13 @@ namespace QIQTH.AxiomAudit
 -- rest = the near lemma's RNC/curvature/deviation data. C4c FAR-FIELD (DIAGONAL CHART, base 0) UNCONDITIONAL modulo genuine metric-continuity. Remaining C4c = recenter (q≠0). NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_diag_hEboundW
 
+-- (C4c-recenter) ★ RECENTER REDUCTION (all-base-point q≠0) (a₁=R/6 duality wall #1, C4c build) — RecenterReduction.lean:
+-- hEboundW_of_uniform_perBasePoint: the GLOBAL width-2 target hEboundW (∀τ p q |E τ p q|≤C·baseKernelW 2 0 τ p q) follows from the per-base-point Gaussian family
+-- UniformPerBasePointGaussian E C (∀q τ, 0<τ → ∀p |E τ p q|≤C·gaussDdim(2τ)(p−q)), via baseKernelW_zero_apply (baseKernelW 2 0 τ p q = gaussDdim(2τ)(p−q)).
+-- + hEboundW_iff_uniform_perBasePoint: the LOSSLESS Iff (both directions) certifying the reduction adds/discards NO content.
+-- ★ Isolates the ENTIRE remaining obstruction to hEboundW to precisely: "the base-0 diagonal residual bound (cutoffResidual_diag_hEboundW / residualN0_local_baseKernelW_slice), UNIFORM in q."
+-- Step-1 finding: arbitrary-center exp/RNC (expMap p, expPullbackMetric, RNC gauge jets) EXISTS but is only ContDiffOn ℝ 2-on-a-ball vs the residual chain's ContDiff ℝ ⊤-global ⟹ the recenter wall is genuinely infrastructure-scale (finite-regularity vs global-⊤). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.hEboundW_of_uniform_perBasePoint
+#print axioms QIQTH.HeatResidualBound.hEboundW_iff_uniform_perBasePoint
+
 end QIQTH.AxiomAudit
