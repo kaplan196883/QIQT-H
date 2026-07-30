@@ -14174,4 +14174,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hEboundW_of_perBasePoint_bound
 #print axioms QIQTH.HeatResidualBound.gi_bound_on_annulus_of_continuousOn
 
+-- (RECENTER R7 — CLOSING CAPSTONE) ★★★ a₁=R/6 CONDITIONAL ON THE RECENTER-REDUCED SET (a₁=R/6 recenter campaign) — RecenterA1Capstone.lean:
+-- trueKernel_diagonal_a1_recenter: SAME conclusion as trueKernel_diagonal_a1_eq_R6 (trueHeatKernel diagonal t¹-coeff = (∑Ric_ii)/6), but with the two hardest carries DISCHARGED via the recenter+measurability machinery:
+-- hEboundW ← hEboundW_of_perBasePoint_bound (from hunif uniformity-in-q + hcoord coord-change, C=B·√2ⁿ·D) + hInt ← iterConvIntegrableW_of_bound_baseMeas (from hEboundW + hEzero + hEmeas). Composed cleanly, no adapter.
+-- ⚠ EXPLICITLY CONDITIONAL — NOT unconditional a₁=R/6. Carries the recenter-reduced set {hunif, hcoord, hEzero, hEmeas, hE, hHdiag, hCorrHigher, hDuhamel, hInter} + RNC data (all genuine, hD load-bearing for 0≤C, none vacuous).
+-- ★★★ THE CLOSING CAPSTONE of the RECENTER campaign (R1–R7, ~143 [AF] bricks): connects the finite-regularity refactor + q-centered chart connection (hEboundW) + M6 measurability (hInt) to the a₁=R/6 statement.
+-- Remaining to UNCONDITIONAL: convergence trio hDuhamel/hInter[Mathlib-gap Summable-continuity of heatConv]/hCorrHigher + concrete geometric instantiation of {hunif,hcoord,hEmeas,hE,hHdiag} + exp Jet₄ tower (hfd3). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_recenter
+
 end QIQTH.AxiomAudit
