@@ -14130,4 +14130,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball_C3
 #print axioms QIQTH.HeatResidualBound.residualN0_local_baseKernelW_slice_C3
 
+-- (RECENTER R4a) ★★ CONNECT q-CENTERED expPullbackMetric → near-diagonal residual hEnear (a₁=R/6 recenter campaign) — RecenterConnectC3.lean:
+-- near_uncutResidual_expPullback: instantiates near_uncutResidual_gaussianWide_ball_C3 at the q-centered metric g̃=expPullbackMetric g₀ gi₀ hC p, g̃⁻¹=expPullbackMetricInv — the q-centered near-diagonal residual bound.
+-- ★★ 8 of ~13 gauge hyps DISCHARGED from existing pullback lemmas: hg/hgiC (C² g̃/g̃⁻¹ via contDiffAt2_expPullbackMetric_zero + new expPullbackMetricInv_contDiffAt_two) + hg0/hgi0 (g̃(0)=δ) + hdg0 (∂g̃(0)=0) + hΓ0 (Γ̃(0)=0) + hsymm + hgauge (cyclic ∂Γ̃).
+-- CARRIED genuine (none vacuous): hCd (C² Γ̃, one lemma from hfd3), hdgi0 (∂g̃⁻¹(0)=0, short Leibniz), hinvT (pointwise g̃ nondegeneracy), hdev (O(r²)), + the van-Vleck/DeWitt jet hw0/hw0flat/hw0hessRicci/hw0bd/hlap (= R4b sub-wall: q-centered DeWitt coefficient). Precedent kappa_eq_one_sixth_expPullback (PullbackMetric.lean:6176) discharges the same gauge set for heat_a1_of_gauge_c2. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_expPullback
+#print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_contDiffAt_two
+
 end QIQTH.AxiomAudit
