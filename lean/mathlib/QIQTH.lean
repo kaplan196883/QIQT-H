@@ -200,6 +200,7 @@ import QIQTH.ExpJet4FundGlobal
 import QIQTH.ExpJet4FundBounds
 import QIQTH.ExpJet4Val
 import QIQTH.ExpJet4ValFull
+import QIQTH.ExpJet4D
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

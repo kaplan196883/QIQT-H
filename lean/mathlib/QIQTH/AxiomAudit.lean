@@ -14229,4 +14229,11 @@ namespace QIQTH.AxiomAudit
 -- the Σ∫‖·‖ summability supplied by the built domination iterConvW_bound + gaussDdim_conv + scaledIterKernelW_summable. STRICT reduction: converts the carried hInter into the same hEbound/hEzero/hEmeas carries the tower already runs on (hInt derived internally via iterConvIntegrableW_of_bound_baseMeas). NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.heatConv_leviSeries_interchange
 
+-- (JET-4 TOWER J4-4, partial packaging foundation) ★ 3rd-variation CURVE + 4th-variation VALUE for the expJetD4 packaging — ExpJet4D.lean:
+-- Layer A: expJet3Curve (genuine 3rd-variation curve = expJet3Fund.choose) + _continuousOn/_one + 6 trilinearity lemmas (add/smul in h/k/l via expJet3Fund_unique + expJet3Rhs linearity), mirror expJet2Curve* one order up, ∀t∈[0,1].
+-- Layer B: expJet4Val (4th-variation value = expJet4Fund.choose 1) + expJet4Val_congr (Q-congruence via expJet4Fund_unique). All std-3, genuine hyps.
+-- ⚠ FULL expJetD4_two_pt_diff NOT closed — needs sub-chain: expJet4Rhs_{add,smul}_{h,k,l,m} → expJet3CurveG + expJet4Val_{add,smul} + expJet4ValG multilinear + expJetD4 (quadrilinear CLM) → expJetD4_two_pt_diff (project expJet4Val_v_two_pt_diff + 4× opNorm_le_bound). J4-4b next. NOT exp∈C⁴/a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Val_congr
+#print axioms QIQTH.ExpMap.expJet3Curve_add_l
+
 end QIQTH.AxiomAudit
