@@ -14116,4 +14116,11 @@ namespace QIQTH.AxiomAudit
 -- Large finite-reg port: T1 pd_taylor_two_peano (already C²) + germ-localised 2nd-deriv calculus (pd_pd_add/sub/const_mul/sum_C2) + c6/c7 grad/Hessian at C² + Ricci converter via rnc_htr_of_gauge_c2 + contDiffAt_pd_of_contDiffAt3 (new 3rd-partial extractor). Reuses R1/R3a. NEXT = residualLeading_gaussian_bound at C³ ⟹ residualN0_gaussian_bound_C3. NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_isLittleO_C3
 
+-- (RECENTER R3c-3) ★★ FULL N=0 RESIDUAL GAUSSIAN BOUND AT FINITE REGULARITY (a₁=R/6 recenter campaign) — ResidualN0GaussianC3.lean:
+-- residualN0_gaussian_bound_C3: ∀ᶠ v in 𝓝 0, |parametrixResidualN 0 g gi Θ u t v| ≤ (1+32n²MW+L)·gaussDdimWide t v, with hg/hgiC/hCd weakened ⊤→ContDiffAt ℝ 2 (at 0) + hw : ∀k ContDiff ⊤ REPLACED by hw0 : ContDiffAt ℝ 3 (foldedCoeff Θ u 0) 0.
+-- + residualLeading_gaussian_bound_C3 (leading term, uses R3c-2 totalRadialO1_coeff_isLittleO_C3). ★★ COMPLETES R3b's blocked term-1: the full near-diagonal N=0 residual bound now holds at FINITE regularity (only k=0 coeff used at N=0; residualQuadratic reused verbatim hw-free).
+-- ★ This is the finite-regularity replacement for residualN0_gaussian_bound, feeding the near-slice hEnear at C² metric + C³ w₀ — exactly what the q-centered expPullbackMetric (∈C³, R3c-1) supplies. NEXT = near-slice residualN0_local_baseKernelW_slice at finite reg. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.residualN0_gaussian_bound_C3
+#print axioms QIQTH.HeatResidualBound.residualLeading_gaussian_bound_C3
+
 end QIQTH.AxiomAudit
