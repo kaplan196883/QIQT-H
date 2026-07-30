@@ -14151,4 +14151,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hw0hessRicci_expPullback
 #print axioms QIQTH.HeatResidualBound.sum_pd_christoffel_ii_trace_c2
 
+-- (RECENTER R4c) ★★ CLEAN q-CENTERED hEnear — all GEOMETRIC hyps discharged (a₁=R/6 recenter campaign) — RecenterConnectC3c.lean:
+-- near_uncutResidual_expPullback_clean: the q-centered near-diagonal residual bound ∃b>0 ∀w rncRadialSq w≤b² → |∂_tH − Δ_g̃ H| ≤ Cslice·gaussDdimWide t w, with EVERY geometric hyp discharged
+-- (hCd/hdgi0/hw0/hw0flat/hw0hessRicci from R4a/R4b/R4b-follow + this brick's hw0_expPullback [ContDiffAt 3 via det∈C³/hfd3 + rpow] + hw0flat_expPullback [∂w₀(0)=0 via hfold+det_pd_first_c2] + foldedCoeff_locBounded_expPullback).
+-- ★★ Final carried set = ONLY genuine irreducibles: hfd3 (exp Jet₄ tower, terminal wall) + hfold (van-Vleck normalization foldedCoeff=(det g̃)^{−¼}) + hinvT (∀-y inverse — the R5 injectivity-ball-cutoff job, genuinely false out-of-ball) + t/M/W/L analytic bounds hdev/hw0bd/hlap (O(r²)/boundedness). NEXT R5 = 2-point cutoff (localizes hinvT) → R6 hEboundW ∀q. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_expPullback_clean
+#print axioms QIQTH.HeatResidualBound.hw0_expPullback
+#print axioms QIQTH.HeatResidualBound.hw0flat_expPullback
+
 end QIQTH.AxiomAudit
