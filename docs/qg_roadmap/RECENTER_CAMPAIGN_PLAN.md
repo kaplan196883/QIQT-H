@@ -23,3 +23,6 @@ turning the conditional a₁=R/6 (trueKernel_diagonal_a1_eq_R6) into UNCONDITION
 - R5 injectivity-ball cutoff: 2-point χ(p,q) supported in {dist<inj}, H̃=χ·H on the q-chart, residual vanishes beyond.
 - R6 assemble: q-centered hEbound for all q ⟹ hEboundW via hEboundW_of_uniform_perBasePoint (6678447a) ⟹ discharge hInt/convergence ⟹ unconditional a₁=R/6.
 Decompose honestly; checkpoint at each genuine sub-wall. a₁=R/6 NOT claimed until R6.
+
+## Progress
+- R1 ✅ (`pending-hash`) LaplaceBeltramiFiniteReg.lean: laplaceBeltrami_mul_C2 + pd_pd_mul_C2 + PdiffAt_of_contDiffAt (ContDiffAt 1⟹PdiffAt) + PdiffAt_pd_of_contDiffAt (ContDiffAt 2⟹PdiffAt(pd·)). Full ContDiffAt 2, no carried hyps, metric enters only as values (no metric-reg hyp). [AF] std-3. Extractors reusable by R2+. NEXT R2 = finite-reg near-diagonal residual slice + the ContDiffOn 2 → ContDiffAt 2 interior bridge (ContDiffOn.contDiffAt + IsOpen.mem_nhds) so the C² Leibniz rules apply to the actual pullback-metric residual.
