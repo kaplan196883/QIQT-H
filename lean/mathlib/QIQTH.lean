@@ -183,6 +183,7 @@ import QIQTH.RNCExpansionFiniteReg
 import QIQTH.ResidualN0FiniteReg
 import QIQTH.ExpMapContDiff4
 import QIQTH.PullbackMetricC3
+import QIQTH.OffDiagLittleOFiniteReg
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

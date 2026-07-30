@@ -14110,4 +14110,10 @@ namespace QIQTH.AxiomAudit
 -- residual-chain leading term (its coefficient carries Γ=∂g̃; little-o 2-jet differentiates Γ twice = ∂³g̃). hfd3 carried (= exp Jet₄ tower, un-built terminal wall). R3c-1 of the recenter campaign. NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.PullbackMetric.contDiffOn_expPullbackMetric_three
 
+-- (RECENTER R3c-2) ★★ OFF-DIAGONAL LEADING-TERM LITTLE-O AT FINITE REGULARITY (a₁=R/6 recenter campaign) — OffDiagLittleOFiniteReg.lean:
+-- totalRadialO1_coeff_isLittleO_C3: totalRadialO1_coeff(v) = o[𝓝 0](‖v‖²) with the ⊤ hyps weakened to hg/hgiC/hC : ContDiffAt ℝ 2 (at 0) + hw0 : ContDiffAt ℝ 3 (foldedCoeff Θ u 0) 0.
+-- ★★ DISCHARGES the C³ sub-wall R3b flagged (term (1) residualLeading): the leading O(1/t) coefficient vanishes to 2nd order at finite regularity. hg genuinely only C² (Γ decoupled as independent hC), hw0 the C³ carrier (its radial ∂∂(r∂_r w₀) forces ∂w₀∈C²).
+-- Large finite-reg port: T1 pd_taylor_two_peano (already C²) + germ-localised 2nd-deriv calculus (pd_pd_add/sub/const_mul/sum_C2) + c6/c7 grad/Hessian at C² + Ricci converter via rnc_htr_of_gauge_c2 + contDiffAt_pd_of_contDiffAt3 (new 3rd-partial extractor). Reuses R1/R3a. NEXT = residualLeading_gaussian_bound at C³ ⟹ residualN0_gaussian_bound_C3. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.totalRadialO1_coeff_isLittleO_C3
+
 end QIQTH.AxiomAudit
