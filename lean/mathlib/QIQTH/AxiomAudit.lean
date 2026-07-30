@@ -14159,4 +14159,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hw0_expPullback
 #print axioms QIQTH.HeatResidualBound.hw0flat_expPullback
 
+-- (RECENTER R5) ★★ q-CENTERED CUTOFF RESIDUAL BOUND (per-base-point hEboundW slice) (a₁=R/6 recenter campaign) — RecenterCutoffC3.lean:
+-- cutoffResidual_expPullback_hEboundW: for g̃=expPullbackMetric, H=heatParametrix 0 Θ u t, ∃ 0<a<b, ∃ B≥0, ∀v |χ·∂_tH − Δ_g̃(χ·H) v| ≤ B·gaussDdimWide t v — the per-base-point width-2 Gaussian residual bound.
+-- Instantiates cutoffResidual_global_gaussianWide_bound_C2 (R2) at g̃; discharges hEnear[near_uncutResidual_expPullback_clean R4c] + hH2/hHann/hDHann[heatParametrix_folded + parametrixH_annulus_bounds] + hDchi.
+-- Carried genuine residue: hgisymm (no expPullbackMetricInv_symm lemma; base-0 also carries) + hgi_ann/hLapChi_ann (g̃⁻¹/Δ_g̃χ annulus bounds — base-0 CutoffAnnulusBounds need GLOBAL continuity but g̃ has only LOCAL/ball ContDiffOn; fix = ContinuousOn-on-annulus variant) + hw0smooth + R4c near-inputs (hfd3/hfold/hinvT/M/W/L).
+-- ⚠⚠ R6 UNIFORMITY-IN-p SUB-WALL: hEboundW_of_uniform_perBasePoint needs the SAME constant ∀ base points q (B/Kg/Kc2/M/W/L uniform in p). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW
+
 end QIQTH.AxiomAudit

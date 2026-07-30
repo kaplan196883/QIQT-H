@@ -190,6 +190,7 @@ import QIQTH.RecenterConnectC3
 import QIQTH.RecenterConnectC3b
 import QIQTH.RecenterDeWittC3
 import QIQTH.RecenterConnectC3c
+import QIQTH.RecenterCutoffC3
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
