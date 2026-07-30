@@ -14019,4 +14019,12 @@ namespace QIQTH.AxiomAudit
 -- ★ Discharges the LAST cutresidual carry hEnear, carrying only the genuine slice data (RNC gauge, O(r²) deviation hdev, coeff bounds hw0bd/hlap).  Remaining C4c step = ASSEMBLE. NOT a₁=R/6. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball
 
+-- (C4c-assemble) ★★ DIAGONAL-CHART CUTOFF RESIDUAL BOUND (hEboundW), FULLY ASSEMBLED (a₁=R/6 duality wall #1, C4c build) — CutoffResidualAssembled.lean:
+-- cutoffResidual_diag_hEboundW: for the CONCRETE H = heatParametrix 0 Θ u t (= gaussDdim t · foldedCoeff Θ u 0, via heatParametrix_folded), dtH = ∂_t H,
+-- ∃ 0<a<b, ∃ B≥0, ∀ v, |χ·∂_tH − Δ_g(χ·H) v| ≤ B·gaussDdimWide t v (χ=radialCutoff a b) — the diagonal-chart width-2 hEboundW feeding neumann_summable_alpha0_width2.
+-- ★★ ALL carries of cutoffResidual_global_gaussianWide_bound discharged: hEnear[near_uncutResidual_gaussianWide_ball] + hHann/hDHann[parametrixH_annulus_bounds,
+-- cofactor = foldedCoeff Θ u 0 via hw 0] + hgibd/hDchi/hLapChi[CutoffAnnulusBounds]. Genuinely new carries = only honest metric facts hgisymm/hgi_cont/hchris_cont;
+-- rest = the near lemma's RNC/curvature/deviation data. C4c FAR-FIELD (DIAGONAL CHART, base 0) UNCONDITIONAL modulo genuine metric-continuity. Remaining C4c = recenter (q≠0). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_diag_hEboundW
+
 end QIQTH.AxiomAudit

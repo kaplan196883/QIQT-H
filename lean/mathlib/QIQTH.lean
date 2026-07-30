@@ -172,6 +172,7 @@ import QIQTH.CutoffResidualGlobalBound
 import QIQTH.CutoffAnnulusBounds
 import QIQTH.ParametrixHAnnulusBounds
 import QIQTH.NearResidualBound
+import QIQTH.CutoffResidualAssembled
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
