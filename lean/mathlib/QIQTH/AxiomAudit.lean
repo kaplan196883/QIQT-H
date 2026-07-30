@@ -14144,4 +14144,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.christoffel_expPullback_contDiffAt_two
 #print axioms QIQTH.HeatResidualBound.pd_expPullbackMetricInv_zero
 
+-- (RECENTER R4b-follow) ★★ q-CENTERED VAN-VLECK/DeWITT JET hw0hessRicci DISCHARGED (a₁=R/6 recenter campaign) — RecenterDeWittC3.lean:
+-- hw0hessRicci_expPullback: FULLY proves the hw0hessRicci van-Vleck condition for g̃=expPullbackMetric, modulo ONE genuine carried hyp hfold (foldedCoeff Θ u 0 =ᶠ (det g̃)^{−¼} = the physical Van Vleck–Morette normalization Θ=√det g̃, u₀=1).
+-- ★★ RESOLVED the factor-2 tension (it was a SIGN ERROR): van-Vleck power is (det g̃)^{−¼} (Δ^{1/2}), NOT +¼; double-symmetric Hess = ⅓Ric·w₀ matches the RHS. Crux new lemma sum_pd_christoffel_ii_trace_c2 (∑ᵢ∂_bΓ^a_{ii}(0)=⅔Ric via pd_christoffel_solve + Riemann pair symmetry — SUPERSEDES the coeffA_center_hessian docstring's contrary claim).
+-- + vanvleck_hessian_c2 (Hess((det g̃)^{−¼})=⅙Ric) + rpow_pd_pd_c2/pd_comp_rpow (critical-point rpow chain rules) + rnc_riemann_hessian_c2/riemann_pair_symm_c2/sum_riemann_aibi_eq_ricci_c2/ricci_symm_c2 (C² origin-Riemann symmetries). All RNC data discharged for g̃ from PullbackMetric lemmas. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.hw0hessRicci_expPullback
+#print axioms QIQTH.HeatResidualBound.sum_pd_christoffel_ii_trace_c2
+
 end QIQTH.AxiomAudit
