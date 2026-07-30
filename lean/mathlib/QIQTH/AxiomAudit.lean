@@ -14073,4 +14073,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LaplaceBeltrami.PdiffAt_pd_of_contDiffAt
 #print axioms QIQTH.LaplaceBeltrami.PdiffAt_of_contDiffAt
 
+-- (RECENTER R2) ★ FINITE-REGULARITY FAR-FIELD CUTOFF-RESIDUAL BOUND (a₁=R/6 recenter campaign) — CutoffResidualFiniteReg.lean:
+-- cutoffResidual_global_gaussianWide_bound_C2: the far-field cutoff-parametrix residual bound ∃B≥0 ∀v |χ·dtH − Δ_g(χ·H) v| ≤ B·gaussDdimWide t v, with hH WEAKENED ContDiff ℝ ∞ → hH2 (∀ w, ContDiffAt ℝ 2 H w),
+-- swapping laplaceBeltrami_mul_inf → laplaceBeltrami_mul_C2 (R1). Same conclusion + all other carries genuine (hEnear/hHann/hDHann/hgibd/hDchi/hLapChi/hgisymm) as the ∞ original.
+-- + contDiffAt_two_of_contDiffOn_two (ContDiffOn ℝ 2 f s + IsOpen s + x∈s ⟹ ContDiffAt ℝ 2 f x) — the bridge feeding the q-centered expPullbackMetric (ContDiffOn ℝ 2 on exp-ball) into the pointwise-ContDiffAt-2 residual chain.
+-- ★ R2 of the RECENTER campaign: far-field cutoff residual now works at C² regularity. NEXT R3 = near-diagonal residual slice at finite regularity (RNC 2-jet). NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_global_gaussianWide_bound_C2
+#print axioms QIQTH.HeatResidualBound.contDiffAt_two_of_contDiffOn_two
+
 end QIQTH.AxiomAudit
