@@ -14202,6 +14202,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4Fund
 #print axioms QIQTH.ExpMap.expJet4Fund_shifted
 
+-- (JET-4 TOWER J4-2c) ★ UNIQUENESS + VALUE BOUNDS for the 4th-variation fundamental solution — ExpJet4FundBounds.lean:
+-- expJet4Fund_unique (two [0,1] solutions of the same inhomog linear IVP agree, via gronwall_vec_residual_Icc residual 0) + expJet4Fund_value_bound (‖R 1‖ ≤ ρ₄·exp Kstar) + expJet4Fund_value_bound_Icc (Icc-uniform).
+-- The 14-term ρ₄ a-priori bound matches expJet4Rhs_norm_le exactly (via gronwall_vec_residual + expJet4Rhs_norm_le). VERBATIM mirror of expJet3Fund_unique/_value_bound/_value_bound_Icc (ExpMapContDiff3.lean:1937/1979/4016).
+-- ★ The J4-3 prerequisites (uniqueness pins the witness; value_bound_Icc is the M₄ a-priori bound in the two-point ρ-telescope). NEXT J4-3 = expJet4Val_v_two_pt_diff (two-point Lipschitz analytic HEART). NOT exp∈C⁴/a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Fund_unique
+#print axioms QIQTH.ExpMap.expJet4Fund_value_bound_Icc
+
 -- (CONVERGENCE hInter) ★★ tsum/heatConv INTERCHANGE FULLY DISCHARGED — NOT a Mathlib gap (a₁=R/6 convergence trio) — LeviInterchange.lean:
 -- heatConv_leviSeries_interchange: heatConv E (leviSeries E) t x y = ∑' k, heatConv E (sign·iterE E (k+1)) t x y — EXACTLY the hInter carry of trueKernel_diagonal_a1_eq_R6/leviSeries_volterra, from hEbound+hEzero+hEmeas+C+ht.
 -- ★★ KEY: hInter is NOT genuinely Mathlib-blocked (corrects the repo docs' "Summable-continuity of heatConv missing" claim) — MeasureTheory.integral_tsum_of_summable_integral_norm fits BOTH layers (inner ∫z + outer interval ∫s in 0..t via integral_of_le + Ioc restriction),
