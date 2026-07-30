@@ -14244,4 +14244,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJetD4_apply
 #print axioms QIQTH.ExpMap.expJet4ValG_norm_le
 
+-- (JET-4 TOWER J4-5a: first sub-brick of the order-4 QUADRATIC-remainder chain toward expMap_fderiv3_hasFDerivAt) ★ — ExpJet4Residual.lean:
+-- expJet4_residual_hasDerivWithinAt (pointwise residual-ODE identity for S=Qw−Qv−R, one Fréchet order up from expJet3_residual_hasDerivWithinAt: Qv,Qw = order-3 expJet3Rhs solutions, R = order-4 expJet4Rhs solution, source = expJet3Rhs(w)−expJet3Rhs(v)−expJet4Rhs(v)·m; via (hQwd.sub hQvd).sub hRd + map_sub/abel)
+-- + expJet4_residual_bound (Grönwall endpoint ‖Qw 1 − Qv 1 − R 1‖ ≤ ρ·exp Kstar via gronwall_vec_residual). Honest firewall: hr ([0,1]-uniform remainder ‖ρ(t)‖≤ρ) + hKstar (tube Jacobi bound) carried as explicit hyps EXACTLY as the order-3 original. All std-3, genuine hyps.
+-- ⚠ NEXT J4-5b: expJet4_remainder_quadratic_bound (mirror ExpMapContDiff3:1605, discharges hr with ρ=C·‖m‖²) → _'(:3144) → _unif(:3576) → expMap_fderiv3_hasFDerivAt(:3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4_residual_bound
+#print axioms QIQTH.ExpMap.expJet4_residual_hasDerivWithinAt
+
 end QIQTH.AxiomAudit
