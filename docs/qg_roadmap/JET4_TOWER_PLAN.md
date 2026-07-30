@@ -18,10 +18,15 @@ jet-4 tower (mirror each jet-3 lemma). Templates (jet-3 → jet-4):
 - expMap_fderiv2_hasFDerivAt + Rung-3 capstone  →  expMap_fderiv3_hasFDerivAt + Rung-4 capstone (hfd3 discharged ⟹ expMap_contDiffOn_four UNCONDITIONAL)
 
 ## Bricks (J4-series)
-- J4-1 [NEXT] expJet4Rhs (4th-variation ODE RHS field) + expJet4Rhs_apply + _continuousOn (Icc 0 1) + _norm_le — mirror expJet3Rhs (ExpMapContDiff3.lean:242-375) one order up.
+- J4-1 ✅ (5e44674e) expJet4Rhs (4th-variation ODE RHS field) + expJet4Rhs_apply + _continuousOn (Icc 0 1) + _norm_le — mirror expJet3Rhs (ExpMapContDiff3.lean:242-375) one order up.
 - J4-2 expJet4Fund (fundamental solution): _local + _shifted + _glue + expJet4Fund + _unique + _value_bound + _value_bound_Icc — mirror expJet3Fund chain.
 - J4-3 expJet4Val_v_two_pt_diff (analytic heart, two-point Lipschitz ‖R⁴_v(1)−R⁴_w(1)‖≤C‖v−w‖‖h‖‖k‖‖l‖‖m‖) — mirror expJet3Val_v_two_pt_diff.
 - J4-4 expJetD4_two_pt_diff — mirror expJetD3_two_pt_diff.
 - J4-5 expMap_fderiv3_hasFDerivAt + assemble: fderiv³exp Lipschitz⟹continuous + differentiable ⟹ ContDiffOn 1 (fderiv³exp) = hfd3 ⟹ feed expMap_contDiffOn_four_of_fderiv3_contDiffOn_one (eb8ab4cd) ⟹ expMap_contDiffOn_four UNCONDITIONAL.
 - J4-6 discharge hfd3 wherever the recenter chain carries it (R3c-1 contDiffOn_expPullbackMetric_three → g̃∈C³ unconditional → the whole recenter conditional set loses hfd3).
 Each brick = a green [AF] std-3 mirror. LONG but every rung is reachable. Then a₁=R/6 loses hfd3 (still conditional on the convergence trio + geometric wiring until those land too).
+
+## Progress
+- J4-1 ✅ (5e44674e) ExpJet4Rhs.lean: expJet4Rhs (14-term Faà-di-Bruno RHS) + _apply/_continuousOn/_norm_le, mirror expJet3Rhs. [AF] std-3. Confirmed the tower IS a faithful mirror (14 terms = the one-order-up analog of jet-3's 4).
+- (parallel) hInter ✅ (4bff8b12) LeviInterchange.lean: heatConv_leviSeries_interchange — the convergence-trio interchange FULLY discharged; NOT a Mathlib gap (integral_tsum_of_summable_integral_norm + built domination). Reduces trueKernel's hInter carry to hEbound/hEzero/hEmeas. Convergence trio now: hDuhamel (via leviSeries_volterra + this hInter) + hCorrHigher remain.
+- NEXT J4-2 = expJet4Fund (fundamental solution via IsPicardLindelof, mirror expJet3Fund chain). Big rung — decompose: J4-2a expJet4Fund_local (PL instantiation on [0,T] centred at 0, mirror expJet3Fund_local:474) → J4-2b _shifted/_glue/expJet4Fund (existence on [0,1]) → J4-2c _unique/_value_bound/_value_bound_Icc.
