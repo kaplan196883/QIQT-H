@@ -14104,4 +14104,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_four_of_fderiv3_contDiffOn_one
 #print axioms QIQTH.ExpMap.contDiff_fderiv4_geodesicField
 
+-- (RECENTER R3c-1) ★ q-CENTERED PULLBACK METRIC ∈ ContDiffOn ℝ 3 (a₁=R/6 recenter campaign, option-b: conditional on exp Jet₄ regularity hfd3) — PullbackMetricC3.lean:
+-- contDiffOn_expPullbackMetric_three: g̃ᵢⱼ = expPullbackMetric ∈ ContDiffOn ℝ 3 on the exp-ball, CONDITIONAL on hfd3 (exp Jet₄ third-jet C¹ regularity, from Rung-4) + hg (ambient metric C∞).
+-- Mirrors contDiffOn_expPullbackMetric (C²) one Fréchet order up via expMap_contDiffOn_four_of_fderiv3_contDiffOn_one + helpers contDiffOn_fderiv_expMap_three / _component_three. ★ Upgrades g̃ C²→C³, which unblocks the
+-- residual-chain leading term (its coefficient carries Γ=∂g̃; little-o 2-jet differentiates Γ twice = ∂³g̃). hfd3 carried (= exp Jet₄ tower, un-built terminal wall). R3c-1 of the recenter campaign. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.PullbackMetric.contDiffOn_expPullbackMetric_three
+
 end QIQTH.AxiomAudit
