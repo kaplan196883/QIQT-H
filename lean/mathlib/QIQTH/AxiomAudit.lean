@@ -14195,6 +14195,13 @@ namespace QIQTH.AxiomAudit
 -- NEXT J4-2b = expJet4Field_continuousOn → _shifted → _glue → expJet4Fund ([0,1] global capstone, mirror expJet3Fund chain). NOT exp∈C⁴/a₁=R/6. [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet4Fund_local
 
+-- (JET-4 TOWER J4-2b) ★ [0,1] GLOBAL 4th-variation FUNDAMENTAL SOLUTION — ExpJet4FundGlobal.lean:
+-- expJet4Fund: ∃ R, R 0 = 0 ∧ ContinuousOn R (Icc 0 1) ∧ (integral eqn) ∧ ∀ t∈Icc 0 1, HasDerivWithinAt R (DF(Y_v t)·R t + expJet4Rhs …) (Icc 0 1) t — the [0,1] global solution of the 4th-variation ODE,
+-- via the glue chain expJet4Field_continuousOn → expJet4Fund_shifted → _shifted_integral → _glue(private) → expJet4Fund. VERBATIM mirror of the expJet3Fund chain (ExpMapContDiff3.lean:581-996); linear part/KdF/Cθ/shift-radius/gluing byte-identical, only Θ₃→Θ₄.
+-- Φ/Q abstract (instantiated at a later rung). No carried hyps beyond the mirror. NEXT J4-3 = expJet4Val_v_two_pt_diff (two-point Lipschitz analytic heart). NOT exp∈C⁴/a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Fund
+#print axioms QIQTH.ExpMap.expJet4Fund_shifted
+
 -- (CONVERGENCE hInter) ★★ tsum/heatConv INTERCHANGE FULLY DISCHARGED — NOT a Mathlib gap (a₁=R/6 convergence trio) — LeviInterchange.lean:
 -- heatConv_leviSeries_interchange: heatConv E (leviSeries E) t x y = ∑' k, heatConv E (sign·iterE E (k+1)) t x y — EXACTLY the hInter carry of trueKernel_diagonal_a1_eq_R6/leviSeries_volterra, from hEbound+hEzero+hEmeas+C+ht.
 -- ★★ KEY: hInter is NOT genuinely Mathlib-blocked (corrects the repo docs' "Summable-continuity of heatConv missing" claim) — MeasureTheory.integral_tsum_of_summable_integral_norm fits BOTH layers (inner ∫z + outer interval ∫s in 0..t via integral_of_le + Ioc restriction),

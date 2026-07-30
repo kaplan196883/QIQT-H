@@ -196,6 +196,7 @@ import QIQTH.RecenterA1Capstone
 import QIQTH.ExpJet4Rhs
 import QIQTH.LeviInterchange
 import QIQTH.ExpJet4Fund
+import QIQTH.ExpJet4FundGlobal
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
