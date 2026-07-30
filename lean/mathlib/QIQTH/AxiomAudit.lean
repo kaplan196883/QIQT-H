@@ -14123,4 +14123,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.residualN0_gaussian_bound_C3
 #print axioms QIQTH.HeatResidualBound.residualLeading_gaussian_bound_C3
 
+-- (RECENTER R3c-4) ★ NEAR-DIAGONAL SLICE + b-BALL hEnear AT FINITE REGULARITY (a₁=R/6 recenter campaign) — NearResidualC3.lean:
+-- residualN0_local_baseKernelW_slice_C3 (|parametrixResidualN 0|≤Cslice·baseKernelW 2 0 t v 0 on a ρ-ball) + near_uncutResidual_gaussianWide_ball_C3 (the hEnear shape: ∃b>0 ∀w rncRadialSq w≤b² → |∂_tH−Δ_gH|≤Cslice·gaussDdimWide t w).
+-- Both with hg/hgiC/hCd : ContDiffAt ℝ 2 (at 0) + hw0 : ContDiffAt ℝ 3 (foldedCoeff Θ u 0) 0 (from residualN0_gaussian_bound_C3). Pure hypothesis-swap ports (localiser + b-ball wrapping regularity-free). ★ The hEnear SOURCE at finite regularity — R3c complete.
+-- NEXT R4 = connect the q-centered expPullbackMetric (∈C³ R3c-1) into near_uncutResidual_gaussianWide_ball_C3 for arbitrary base points q. NOT a₁=R/6. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball_C3
+#print axioms QIQTH.HeatResidualBound.residualN0_local_baseKernelW_slice_C3
+
 end QIQTH.AxiomAudit

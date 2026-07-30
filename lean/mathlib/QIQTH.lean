@@ -185,6 +185,7 @@ import QIQTH.ExpMapContDiff4
 import QIQTH.PullbackMetricC3
 import QIQTH.OffDiagLittleOFiniteReg
 import QIQTH.ResidualN0GaussianC3
+import QIQTH.NearResidualC3
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
