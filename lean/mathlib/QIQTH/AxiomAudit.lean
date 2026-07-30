@@ -14217,6 +14217,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4_v_residual_hasDerivWithinAt
 #print axioms QIQTH.ExpMap.expJet3Val_v_two_pt_Icc_const
 
+-- (JET-4 TOWER J4-3 COMPLETE) ★★★ TWO-POINT LIPSCHITZ HEART, full 51-term ρ₄-telescope closed inline — ExpJet4ValFull.lean:
+-- expJet4Val_v_two_pt_diff: ‖R⁴_v(1) − R⁴_w(1)‖ ≤ expJet4VtpConst·‖v−w‖·‖h‖‖k‖‖l‖‖m‖ — the Lipschitz-in-v of the 4th-variation fundamental solution's value, via the residual-ODE D=Rv−Rw + the full 51-term ρ₄-telescope
+-- (1 [DF]Rw + 5 D⁴F(1+1+1+1) + 24 D³F(2+1+1) + 9 D²F(2+2) + 12 D²F(3+1), closed inline via a 15-group telescope + clmApply4_norm_le/clm4_diff_eq/regroup14) + expJet4Val_v_two_pt_diff_gronwall.
+-- ★★★ THE HARDEST rung of the JET-4 tower — FULL inline closure (route A, NOT firewalled): carries only the genuine 4th-derivative Lipschitz hLipD4F + tube-bound Kstar4 data (one-order-up analogs of the jet-3 crux's carried data, real, non-vacuous). NEXT J4-4 = expJetD4_two_pt_diff (lift to fderiv³exp Lipschitz). NOT exp∈C⁴/a₁=R/6. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4Val_v_two_pt_diff
+
 -- (CONVERGENCE hInter) ★★ tsum/heatConv INTERCHANGE FULLY DISCHARGED — NOT a Mathlib gap (a₁=R/6 convergence trio) — LeviInterchange.lean:
 -- heatConv_leviSeries_interchange: heatConv E (leviSeries E) t x y = ∑' k, heatConv E (sign·iterE E (k+1)) t x y — EXACTLY the hInter carry of trueKernel_diagonal_a1_eq_R6/leviSeries_volterra, from hEbound+hEzero+hEmeas+C+ht.
 -- ★★ KEY: hInter is NOT genuinely Mathlib-blocked (corrects the repo docs' "Summable-continuity of heatConv missing" claim) — MeasureTheory.integral_tsum_of_summable_integral_norm fits BOTH layers (inner ∫z + outer interval ∫s in 0..t via integral_of_le + Ioc restriction),
