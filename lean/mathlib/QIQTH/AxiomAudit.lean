@@ -14827,4 +14827,18 @@ namespace QIQTH.AxiomAudit
 -- sup-bounds → single B → hunif; + hcoord) + hDuhamel. J4-61 = uniformFlowExp pullback+hinge. [AF]
 #print axioms QIQTH.ExpMap.uniformConfinedTubeOn_exists
 
+-- J4-61 (UniformFlowPullback.lean, ns QIQTH.PullbackMetric): the uniformFlowExp pullback metric + hinge
+-- (Brick-A pullback-nondeg field). uniformFlowPullbackMetric q v = Σ_{ab} g(uniformFlowExp q v)_{ab}·
+-- (D uniformFlowExp_q v·e_i)_a·(D…·e_j)_b — genuine congruence, exact mirror of expPullbackMetric.
+-- uniformFlowPullbackMetric_isUnit_of_fderiv_isUnit: IsUnit(fderiv(uniformFlowExp q) v) + hg(base metric
+-- nondeg at uniformFlowExp q v) ⟹ IsUnit(matToCLM(uniformFlowPullbackMetric q v)) — near-verbatim reuse
+-- of J4-58 (isUnit_matToCLM_congr + matToCLM_jacMat, both expMap-agnostic). uniformConfinedTubeOn_
+-- pullback_isUnit: feeds the certificate's hnondeg (J4-60) ⟹ pullback-nondeg over q∈K on the uniform
+-- radius. hg carried as genuine geometry, not the conclusion. std-3.
+-- ⚠ Brick-A pullback-nondeg field DONE for uniformFlowExp. Remaining Brick-A: uniform C³ reg for
+-- uniformFlowExp (needs uniform C⁴ — a sub-tower; C¹-in-IC variational-flow prereq per K2/K3 firewall) +
+-- uniform 2-var sup-bounds over K×B̄(0,r₀) → single B → hunif; + hcoord. Then hDuhamel. [AF] std-3.
+#print axioms QIQTH.PullbackMetric.uniformFlowPullbackMetric_isUnit_of_fderiv_isUnit
+#print axioms QIQTH.PullbackMetric.uniformConfinedTubeOn_pullback_isUnit
+
 end QIQTH.AxiomAudit
