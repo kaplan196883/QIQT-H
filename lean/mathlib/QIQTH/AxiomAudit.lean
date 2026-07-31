@@ -14684,4 +14684,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.linODE_inhomog_exists_on_Icc
 #print axioms QIQTH.ExpMap.secondVariation_field_exists
 
+-- J4-50 (SecondVariationLipschitz.lean): (F3a) the hAd Lipschitz-in-q engine + two reusable
+-- LipschitzOnWith producers. geodesicField_lipschitzOnWith_of_isCompact_convex +
+-- fderiv_geodesicField_lipschitzOnWith_of_isCompact_convex (∃ Lipschitz const for geodesicField /
+-- fderiv(geodesicField) on any compact convex phase set, via Convex.lipschitzOnWith_of_nnnorm_fderiv_le
+-- + bddOn_compact). fderiv_geodesicField_twopoint_dist_bound (the hAd shape): for two geodesic ODE
+-- solutions Y₁,Y₂ in S, ‖fderiv(gf)(Y₁ τ)−fderiv(gf)(Y₂ τ)‖ ≤ Lg·exp Kg·dist(Y₁ 0)(Y₂ 0) — via
+-- two-point geodesic Grönwall (geodesic_twopoint_gronwall ExpMap:400) ∘ mean-value Lipschitz. D₀=Lg·e^Kg,
+-- dist(Y₁0)(Y₂0)=dist q q'. std-3.
+-- ⚠ (J) NOT self-contained — F3a (hAd) landed; CARRIED still = (F3b) hSd [three-fold Lipschitz-in-q of
+-- the coupling Src=fderiv²(gf)(Ybase)(Vf.1)(Ybase.2): needs fderiv²(gf) Lipschitz producer + 2-pt
+-- Grönwalls for (Vf.1) and (Ybase.2) q-dependence + trilinear split — the last genuine math wall] +
+-- (F4) capstone assembly (common compact S* over K + thread all binders + hlink + matched constants).
+-- J4-51 = F3b, then J4-52 = F4. [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv_geodesicField_twopoint_dist_bound
+#print axioms QIQTH.ExpMap.fderiv_geodesicField_lipschitzOnWith_of_isCompact_convex
+
 end QIQTH.AxiomAudit
