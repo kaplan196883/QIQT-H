@@ -214,6 +214,7 @@ import QIQTH.PullbackMetricC3Uncond
 import QIQTH.RecenterResidualUncond
 import QIQTH.RecenterAnnulusUncond
 import QIQTH.PullbackMetricNondegNearZero
+import QIQTH.FlatTail
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

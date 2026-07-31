@@ -14325,4 +14325,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.expPullbackMetric_isUnit_near_zero
 #print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_continuousOn_ball
 
+-- (JET-4 TOWER J4-10: the flat-tail lemma — the analytic core replacing the no-conjugate-points wall) ★ — FlatTail.lean (ns QIQTH.HeatResidualBound):
+-- exp_neg_inv_flat (a>0) (k N : ℕ) : ∃ C≥0, ∀ t>0, (1/t)^k · exp(-a/t) ≤ C·t^N — the far-field annulus Gaussian is O(t^N) ∀N (flat as t→0). Proved for ALL t>0 (T-independent C=(k+N)!/a^(k+N)) via pow_mul_exp_neg_le_factorial (GaussianPolyBound:36). std-3, elementary, honest constant.
+-- ⚠ This is the tool (per GPT-5.5 pivot) that lets the q-centered parametrix be cut off inside B(0,ρ₀) [g̃-nondeg holds] and the far-field discarded as O(t^N), AVOIDING the global no-conjugate-points theorem. NEXT J4-11 = local-parametrix radius refactor (cutoff support ⊆ ball r, r<ρ₀; annulus bounds via expPullbackMetricInv_continuousOn_ball + far-field O(t^N) via THIS) ⟹ cutoffResidual→hEboundW producer hyps only (g,gi,p). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.exp_neg_inv_flat
+
 end QIQTH.AxiomAudit
