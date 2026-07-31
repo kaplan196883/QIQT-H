@@ -14651,4 +14651,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.confined_doubled_family_with_variation_exists
 #print axioms QIQTH.ExpMap.doubledVariation_narrowpad_hasDerivAt_Icc
 
+-- J4-48 (DoubledFamilyLink.lean): discharges the bridge's hlink (first-jet endpoint identity) via
+-- ODE-uniqueness. doubled_endpoint_eq_expMap_fderiv: for a confined doubled integral curve Y with
+-- Y 0 = ((q,w),(0,b)), (Y 1).2.1 = fderiv (expMap g gi hC q) w b. PROOF (two Grönwall ODE-uniqueness
+-- steps, ODE_solution_unique_of_mem_Icc_right): (E-base) geodesic phase factor (Y·).1 = expTube q w
+-- (both solve geodesic ODE from (q,w), confined) + (E2) fderiv(expMap q) w = expJetPi∘Φ 1∘expJetIota
+-- (expDiff_flow_isGeodesicVariation) so fderiv(expMap q) w b = ((Φ 1)(0,b)).1 = Jacobi column Vb along
+-- expTube + (E-jac) (Y·).2 and Vb solve the SAME Jacobi ODE X'=DF(expTube τ)X with SAME seed (0,b) ⟹
+-- equal at τ=1, project .1. hlink_of_confined_doubled_family: the bridge's exact hlink binder shape
+-- (∀s∈Icc(-σ)σ, (Y s 1).2.1 = fderiv(expMap q)(v+s·a) b). Added input hrad: ‖v+s·a‖<expRho q = genuine
+-- exp-tube admissibility, discharged at final assembly from bridge hr_lt + σ-window (NOT smuggled);
+-- conclusion not a hyp. std-3.
+-- ⚠ (J) NOT self-contained — hlink now DERIVED; the ONLY carried block left = the SECOND-VARIATION
+-- block (Zf/Src/hZf/h0d/hKbd/hZ/h0cap/hKbcap/hAd/hXb/hSd). J4-49 = that block ⟹ feed bridge ⟹ (J). [AF]
+#print axioms QIQTH.ExpMap.doubled_endpoint_eq_expMap_fderiv
+#print axioms QIQTH.ExpMap.hlink_of_confined_doubled_family
+
 end QIQTH.AxiomAudit
