@@ -14604,4 +14604,20 @@ namespace QIQTH.AxiomAudit
 -- extension. Same names + conclusions; 2 files; both std-3; downstream green; no external consumer.
 #print axioms QIQTH.ExpMap.confined_doubled_family_exists
 
+-- J4-45 (DoubledFamilyFullSupply.lean): (B1) the s-perturbed confined doubled family for the per-(a,b)
+-- supply. sPerturbed_confined_doubled_family_exists (hC + IsCompact K): ∃ρ>0 ∃C₀≥0 ∃σ(q v a b)>0 ∃Y,
+-- ∀q∈K ∀v(‖v‖≤ρ/2) ∀a b, ∀s∈Icc(-(σ q v a b))(σ q v a b): Y…s 0 = ((q,v+s·a),(0,b)) ∧ hYode on CLOSED
+-- Icc 0 1 (two-sided endpoints, exact bridge shape) ∧ geodesic-factor confinement ‖(Y…s τ).1-(q,0)‖ ≤
+-- C₀‖v+s·a‖ ∧ hIC exact affine Y…s 0 - Y…0 0 = s•((0,a),(0,0)). σ q v a b = ρ/(2(1+‖a‖)) keeps
+-- ‖v+s·a‖≤ρ. DERIVED (choice from a genuine confined doubled integral curve: geodesic_apriori_
+-- confinement_uniform ⊗ geodesicJacobi_narrowpad ⊗ doubledField_prod_hasDerivAt); SATISFIABLE not
+-- vacuous. Supporting: linODE_exists_hasDerivAt_Icc_narrow (narrow-pad [-1/2,3/2] two-sided closed-Icc
+-- linODE existence — gets closed-interval derivs from a base on the tube's open window) +
+-- geodesicJacobi_narrowpad_hasDerivAt_Icc. std-3.
+-- ⚠ (J) NOT self-contained. B1 discharges (S1) ODE/IC/geodesic-confinement structure; CARRIED bridge
+-- binders remain: hmem full-point confinement (needs Jacobi-factor Grönwall bound ‖J‖≤‖(0,b)‖e^{K'} +
+-- product ball ⟹ now satisfiable per-(a,b)) + Vf/hVode/hV0 + hlink (exp-deriv=Jacobi id) + 2nd-var
+-- block (Zf/Src/hZf/h0d/hKbd/hZ/h0cap/hKbcap/hAd/hXb/hSd). J4-46 = hmem Grönwall + Vf. [AF] std-3.
+#print axioms QIQTH.ExpMap.sPerturbed_confined_doubled_family_exists
+
 end QIQTH.AxiomAudit
