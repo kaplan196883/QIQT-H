@@ -220,6 +220,7 @@ import QIQTH.RecenterCutoffLocal
 import QIQTH.ExpMapLocalInverse
 import QIQTH.GaussCompare
 import QIQTH.BoundedGeometry
+import QIQTH.BoundedGeometryConfine
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

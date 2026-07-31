@@ -14360,4 +14360,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicField_fderiv_bddOn_compact
 #print axioms QIQTH.ExpMap.christoffel_bddOn_compact
 
+-- (TWO-POINT PHASE Brick A2 / J4-17: uniform-over-compact geodesic confinement — the hard core of the bounded-geometry bottleneck, FULLY DERIVED) ★★ — BoundedGeometryConfine.lean (ns QIQTH.ExpMap):
+-- geodesic_apriori_confinement_uniform {K compact} : ∃ ρ>0 C₀≥0, ∀ q∈K, ∀ ‖v‖≤ρ, ∃ Y (tube from base q) with Y 0=(q,v) ∧ geodesic-ODE ∧ ‖Y t−(q,0)‖≤C₀‖v‖ — a SINGLE uniform ρ,C₀ for ALL q∈K. Mirror geodesic_apriori_confinement:554 with base q ranging over K. DERIVED (NO firewall): ONE compact-convex phase ball S=closedBall(p₀,0)(R+2); uniform field bound M + uniform Lipschitz Klip (A1 #3/#4 + Convex.lipschitzOnWith_of_nnnorm_fderiv_le); ONE IsPicardLindelof.of_time_independent (CFL M·T≤1, T=1/(M+1)) ⟹ q-independent flow+L'; geodesic_rescale to [0,1]. std-3.
+-- ★ Brick A hard core DONE. Follow-on (re-pin downstream to uniform tube: uniform expTube_spec/expPullbackMetric bounds/nondeg radius/uncond3 B) = a multi-brick sub-program — consult GPT-5.5 on the minimal cut (can uncond3's B be made uniform directly from this tube vs full uniform re-derivation). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesic_apriori_confinement_uniform
+
 end QIQTH.AxiomAudit
