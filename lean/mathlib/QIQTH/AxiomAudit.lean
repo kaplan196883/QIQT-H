@@ -14620,4 +14620,19 @@ namespace QIQTH.AxiomAudit
 -- block (Zf/Src/hZf/h0d/hKbd/hZ/h0cap/hKbcap/hAd/hXb/hSd). J4-46 = hmem Grönwall + Vf. [AF] std-3.
 #print axioms QIQTH.ExpMap.sPerturbed_confined_doubled_family_exists
 
+-- J4-46 (DoubledFamilyConfine.lean): (C1)+(C2) discharge the bridge's hmem (full-doubled-point
+-- confinement). sPerturbed_confined_doubled_family_confined_exists extends B1 with a per-(a,b) compact
+-- convex S q v a b = closedBall((q,0))(C₀ρ) ×ˢ closedBall(0)(‖(0,b)‖·exp K'_q) [K'_q = uniform op-norm
+-- of fderiv(geodesicField) over the geodesic ball via geodesicField_fderiv_bddOn_compact] and PROVES
+-- hmem: Y…s τ=(P τ,J τ)∈S via Set.mem_prod — geodesic factor by B1 confinement, Jacobi factor by the
+-- GRÖNWALL bound ‖J τ‖≤‖(0,b)‖·exp K'_q (Mathlib norm_le_gronwallBound_of_norm_deriv_right_le on
+-- J'=A(τ)J, ‖A‖≤K'_q, via gronwallBound_ε0 + Real.exp_le_exp). hScompact/hSconvex from IsCompact/Convex
+-- .prod of closedBalls. S is (a,b)-dependent + s,τ-independent. SATISFIABLE (concrete product ball,
+-- hmem derived not assumed). Hyps = hC + IsCompact K. std-3.
+-- ⚠ (J) NOT self-contained. Discharged now: hScompact/hSconvex/hmem (+ B1 hYode/hIC/σ). CARRIED:
+-- Vf/hVode/hV0 (C3, needs padded-continuous Jacobi base — strengthen geodesicJacobi_narrowpad to expose
+-- ContinuousOn J [-1/2,3/2]) + hlink (exp-deriv=Jacobi id) + 2nd-var block (Zf/Src/hZf/h0d/hKbd/hZ/
+-- h0cap/hKbcap/hAd/hXb/hSd). J4-47 = Vf. [AF] std-3.
+#print axioms QIQTH.ExpMap.sPerturbed_confined_doubled_family_confined_exists
+
 end QIQTH.AxiomAudit
