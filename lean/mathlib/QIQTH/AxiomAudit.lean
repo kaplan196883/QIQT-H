@@ -14541,4 +14541,22 @@ namespace QIQTH.AxiomAudit
 -- bridge ⟹ (J) fully self-contained. [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_doubled_supply
 
+-- J4-40 (DoubledFamilyConstruction.lean): reuse cores for the doubled-family supply + a CRITICAL
+-- structural finding. doubledField_prod_hasDerivAt (hYode IS a repackaging: a doubledField integral
+-- curve = geodesic phase-flow ⊗ Jacobi field, via HasDerivAt.prodMk) + doubledField_equilibrium
+-- (((q,0),(0,0)) is a zero) + doubledField_prod_mem_prod (product-set confinement shape). All DERIVED,
+-- std-3.
+-- ⚠⚠ CRITICAL FINDING (honesty correction): the doubled-family supply of the J4-35→J4-39 tower is
+-- UNSATISFIABLE for a≠0 as currently quantified. The engine autonomousField_variation_exists{,_uncond}
+-- (+ doubledField_variation_exists_uncond, hid_of_doubled_data, the J4-39 bridge) carries
+-- hmem: ∀ s:ℝ, ∀ τ∈Icc 0 1, Y s τ ∈ S (S COMPACT) together with hIC: ∀ s:ℝ, Y s 0 - Y 0 0 = s•p.
+-- For p≠0, Y s 0 = Y 0 0 + s•p is an UNBOUNDED affine line in s ⟹ cannot lie in compact S ∀s ⟹ the
+-- hypotheses are jointly CONTRADICTORY. The theorems remain TRUE + std-3, but the supply cannot be
+-- instantiated for the real a≠0 case, so the "(J) reduced to supply" reduction is (as quantified)
+-- illusory. FIX (agent + GPT-5.5 concur, mathematically standard): the s-derivative at 0 is LOCAL, so
+-- ∀ s:ℝ → ∀ s∈Icc(-σ)σ throughout hmem/hIC/hYode/hNb makes confinement satisfiable while preserving
+-- HasDerivAt … 0. J4-41 = the bounded-s reformulation across the engine tower. [AF] std-3.
+#print axioms QIQTH.ExpMap.doubledField_prod_hasDerivAt
+#print axioms QIQTH.ExpMap.doubledField_equilibrium
+
 end QIQTH.AxiomAudit
