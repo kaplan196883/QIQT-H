@@ -14330,4 +14330,11 @@ namespace QIQTH.AxiomAudit
 -- ⚠ This is the tool (per GPT-5.5 pivot) that lets the q-centered parametrix be cut off inside B(0,ρ₀) [g̃-nondeg holds] and the far-field discarded as O(t^N), AVOIDING the global no-conjugate-points theorem. NEXT J4-11 = local-parametrix radius refactor (cutoff support ⊆ ball r, r<ρ₀; annulus bounds via expPullbackMetricInv_continuousOn_ball + far-field O(t^N) via THIS) ⟹ cutoffResidual→hEboundW producer hyps only (g,gi,p). NOT a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.exp_neg_inv_flat
 
+-- (JET-4 TOWER J4-11: within-ρ₀ continuity producers — the hgi_cont/hchris_cont residue for annuli inside the nondeg ball) ★ — AnnulusContinuityWithinRho.lean (ns QIQTH.HeatResidualBound):
+-- expPullbackMetricInv_continuousOn_annulus_within (∃ρ₀>0, ∀ a b i j, 0≤b→b<ρ₀→ ContinuousOn g̃⁻¹ on {a²≤rncRadialSq≤b²}) + christoffel_expPullback_continuousOn_annulus_within (same for Γ̃) — verbatim-match cutoffResidual_expPullback_hEboundW_uncond2's hgi_cont/hchris_cont shapes, restricted to b<ρ₀. DERIVED from expPullbackMetricInv_continuousOn_ball (J4-9) + g̃∈C³. std-3.
+-- ★ Part-B scoping (RecenterCutoffC3:97): the cutoff radii a,b are NOT fixed — b from near_uncutResidual (monotone neighborhood radius, RecenterCutoffC3:143), a=b/2 (:147); the global engine cutoffResidual_global_gaussianWide_bound_C2 takes a,b as FREE params + flat-tail handles far-field ⟹ a,b CAN be shrunk <ρ₀ without breaking the ∃B bound. J4-12 = refactor cutoffResidual to pick b'=min b (ρ₀/2), discharging hgi_cont/hchris_cont via these producers.
+-- ⚠ NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_continuousOn_annulus_within
+#print axioms QIQTH.HeatResidualBound.christoffel_expPullback_continuousOn_annulus_within
+
 end QIQTH.AxiomAudit
