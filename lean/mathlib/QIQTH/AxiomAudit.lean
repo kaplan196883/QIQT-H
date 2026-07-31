@@ -14667,4 +14667,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubled_endpoint_eq_expMap_fderiv
 #print axioms QIQTH.ExpMap.hlink_of_confined_doubled_family
 
+-- J4-49 (SecondVariationSupply.lean): (F1)+(F2) of the 2nd-variation block. linODE_inhomog_exists_on_Icc
+-- (the missing INHOMOGENEOUS linODE engine: ∃J, J 0=w₀ ∧ HasDerivAt J (A τ (J τ)+src τ) τ on [0,1] for
+-- ContinuousOn A/src [-1,2]; PROVED by state-augmentation Ã(X,u)=(A X+u·src,0) on E×ℝ over the repo's
+-- homogeneous linODE_exists_hasDerivAt_Icc, ℝ-tracker deriv 0 ⟹ u≡1). secondVariation_field_exists:
+-- ∃Zf, Zf 0=seed ∧ HasDerivAt Zf (fderiv(geodesicField)(bcurve τ)(Zf τ)+fderiv²(geodesicField)(bcurve τ)
+-- (pfield τ)(wfield τ)) τ ∧ ‖Zf τ‖≤gronwallBound ‖seed‖ K' Smax τ — EXACTLY the bridge hZf/hZ ODE-shape +
+-- seed (h0d/h0cap) + hXb Grönwall bound. Operator/source continuity from contDiff_geodesicField
+-- (ContDiff.fderiv_right twice). Grönwall = norm_le_gronwallBound_of_norm_deriv_right_le. Genuine, not
+-- vacuous. std-3.
+-- ⚠ (J) NOT self-contained — F1/F2 give the generic Zf/ODE/seed/bound; CARRIED still = (F3) Lipschitz-
+-- in-q hAd/hSd (engines PRESENT: geodesic_twopoint_gronwall ExpMap:400 ∘ LipschitzOnWith(fderiv gf) on
+-- compact — needs threading Ybase=(Y…0).1 a,b-independent) + (F4) final capstone (obtain package
+-- Y/Vf/σ/S, specialize Zf/Src to those curves, feed expMap_common_nondeg_radius_of_doubled_supply ⟹ (J)).
+-- J4-50 = F3+F4. [AF] std-3.
+#print axioms QIQTH.ExpMap.linODE_inhomog_exists_on_Icc
+#print axioms QIQTH.ExpMap.secondVariation_field_exists
+
 end QIQTH.AxiomAudit

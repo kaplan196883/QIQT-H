@@ -250,6 +250,7 @@ import QIQTH.DoubledFamilyFullSupply
 import QIQTH.DoubledFamilyConfine
 import QIQTH.DoubledVariationField
 import QIQTH.DoubledFamilyLink
+import QIQTH.SecondVariationSupply
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
