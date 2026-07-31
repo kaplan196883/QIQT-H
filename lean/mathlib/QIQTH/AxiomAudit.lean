@@ -14407,4 +14407,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_position_hasFDerivAt_exists
 #print axioms QIQTH.ExpMap.jacobiSol_unique
 
+-- ((J)-tower J-d analytic gate / J4-25: cubic uniform Taylor remainder — the LAST genuinely-new analytic input for (J)) ★★ — DecayOrderThree.lean (ns QIQTH.ExpMap):
+-- decay_order_three_remainder_convex : on convex S, given F/fderiv F differentiable + IsSymmSndFDerivAt + the 2nd-derivative Lipschitz-at-b bound ‖fderiv²F z − fderiv²F b‖≤M‖z−b‖, ‖F a − F b − DF b(a−b) − ½·D²F b(a−b)(a−b)‖ ≤ M·‖a−b‖³. DERIVED (hand-rolled mirror of decay_order_two_remainder_convex :298 one order up: fderiv R = DF−DF b−D²F b(·−b) via HasFDerivAt.clm_apply + IsSymmSndFDerivAt.eq, inner remainder ≤M‖·‖² via Convex.norm_image_sub_le_of_norm_fderiv_le', integrated by Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le). std-3, no sorry.
+-- ⚠ HYPOTHESIS NOTE (genuine, documented): stated with the 2nd-deriv Lipschitz-at-b bound (DOUBLE nested-CLM norm, synthesizable) NOT ‖fderiv³F‖≤M (TRIPLE norm un-synthesizable for abstract E,G — Mathlib operator-norm instance loops); the Lipschitz form is IMPLIED by ‖fderiv³F‖≤M (plain MVT on fderiv²F, dischargeable at the concrete geodesic type Point n×Point n where the triple norm resolves) and is the genuine analytic INPUT, NOT the conclusion. ★ LAST new ANALYTIC input for (J); remaining J-d = bilinear bookkeeping (2nd variational eqn + this ⟹ 2nd-order base-point jet HasFDerivAt; joint (q,v) 2-jet continuity ⟹ hjoint ⟹ discharge (J)) + concrete-type discharge of hlip2/hsymm. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.decay_order_three_remainder_convex
+
 end QIQTH.AxiomAudit
