@@ -14732,4 +14732,19 @@ namespace QIQTH.AxiomAudit
 -- X₀=M2·Cp·Cw·(e^K'−1)/K'). Pointwise ingredients all proved; folding = genuine construction. [AF] std-3.
 #print axioms QIQTH.ExpMap.s1_doubled_supply_package
 
+-- J4-53 (UniformFlowTransfer.lean): Layer-2 transfer lemmas for the opaque-expRho re-architecture +
+-- scope finding. eventuallyEq_of_eqOn_ball (EqOn on ball ⟹ =ᶠ[𝓝 v]) + isUnit_fderiv_of_eqOn_ball
+-- (IsUnit(fderiv F v) transports to IsUnit(fderiv f v) via EventuallyEq.fderiv_eq) + compact_nondeg_of_
+-- uniform_flow_eqOn (∀q∈K EqOn(Exp q)(F q)(ball 0 ρeq) + F-nondeg on ball 0 ρF ⟹ Exp-nondeg on
+-- ball 0 min(ρeq,ρF)). Generic over E, std-3. The transfer LAYER of the re-architecture.
+-- ★ SCOPE FINDING (J4-53 Part 2): the opaque-expRho re-architecture is LOCAL to the (J) bridge — the
+-- (J) bridge expMap_common_nondeg_radius_of_doubled_supply is referenced ONLY in its own file +
+-- CommonNondegRadius (S1 producer) + this audit; NO Recenter/TrueKernel file consumes it; the a₁=R/6
+-- capstone trueKernel_diagonal_a1_recenter uses RNC/Hessian + Gaussian bounds (not ∀q∈K nondeg);
+-- expPullbackMetric nondeg is delivered locally (expPullbackMetric_isUnit_near_zero). expMap_eq_flow_
+-- endpoint gives OVERLAP-only EqOn (ball 0 min(expRho q,ρ_K)) — still opaque. FIX (J4-54): hoist F :=
+-- uniformFlowExp (from geodesic_apriori_confinement_uniform, uniform ρ_K), restate hlink + bridge
+-- against F, close (J)-for-F via compact_nondeg_of_uniform_flow_eqOn with hEq:=EqOn.refl. [AF] std-3.
+#print axioms QIQTH.ExpMap.compact_nondeg_of_uniform_flow_eqOn
+
 end QIQTH.AxiomAudit
