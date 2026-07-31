@@ -14272,4 +14272,10 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-5d (_unif :3576, discharges the carried hFP*/hFQ*/hQlip*/hV* inputs from the genuine expJet2Curve/expJet3CurveG solutions; may CALL this ' theorem) → J4-5e (expMap_fderiv3_hasFDerivAt :3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet4_remainder_quadratic_bound'
 
+-- (JET-4 TOWER J4-5d1: the second→third variation residual — the ONE missing input-discharge for the order-4 _unif brick) ★ — ExpJet3SecondVarResidual.lean:
+-- expJet3SecondVar_residual_Icc_unif : ∃ C₀, 0≤C₀ ∧ ∀ l (‖v+l‖≤ρ) Φ' … h k, ∀ t, ‖Q²_{v+l}(h,k) − Q²_v(h,k) − Q³_v(h,k,l)‖ ≤ C₀·‖h‖·‖k‖·‖l‖²  (Q²=expJet2Curve, Q³=expJet3Curve genuine). The hFQ* input of expJet4_remainder_quadratic_bound' (J4-5c). Mirror expJet2FirstVar_residual_Icc_unif (ExpMapContDiff3:3474) ONE variation level up, built from EXISTING order-3 infra (NOT order-4).
+-- ⚠ NON-TAUTOLOGICAL: O(‖l‖²) DERIVED via gronwall_vec_residual_Icc + expJet3_remainder_quadratic_bound_unif (source) + expJet3_residual_hasDerivWithinAt (ODE) + expJet_fderiv_tube_bddAbove (Kstar) — all proved lemmas, none a hypothesis; witness C₀=Cr·exp(Kstar). std-3.
+-- ⚠ NEXT J4-5d2 = expJet4_remainder_quadratic_bound_unif (mirror :3576): obtain hFP*←expJet2FirstVar_residual_Icc_unif + hFQ*←THIS + hQlip*←expJet2/3_v_two_pt + hV*←value bounds, CALL expJet4_remainder_quadratic_bound'. Then J4-5e (expMap_fderiv3_hasFDerivAt :3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet3SecondVar_residual_Icc_unif
+
 end QIQTH.AxiomAudit
