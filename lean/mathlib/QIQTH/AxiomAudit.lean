@@ -14424,4 +14424,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_local
 #print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_basepoint
 
+-- ((J)-tower brick-1 / J4-28: base-point 2nd-order Taylor of the endpoint map with cubic remainder — the per-q 2-jet substrate for hunif) ★ — BasepointSecondJetFDeriv.lean (ns QIQTH.ExpMap):
+-- geodesicBasepoint_endpoint_secondOrder_taylor : ‖W δ t − W 0 t − V δ t − ½·(fderiv²(δ'↦W δ' t)|₀ δ) δ‖ ≤ M·‖δ‖³ (linear term = the 1st-order Jacobi endpoint field V δ t, via HasFDerivAt.fderiv of J-c's L) + _position_ variant (Prod.fst projection). DERIVED by welding decay_order_three_remainder_convex (cubic remainder at a=δ,b=0) with geodesicBasepoint_endpoint_hasFDerivAt_exists (J-c). Carries the same geometric-regularity bundle as J-c + the base-point (δ-side) C² regularity of δ'↦W δ' t (hEdiff/hEdiff2/hEsymm/hElip2 — the honest analogue of the PROVEN concrete expMap∈C⁴, for the abstract tube family; none = conclusion). std-3.
+-- ★ hunif shape CONFIRMED = base-point uniform-in-v modulus of ‖fderiv²(expMap g gi hC q) v‖ (BasepointSecondJet:arg). Remaining: (1) base-point Lipschitz-in-q of the 2-jet uniform in direction [the q-modulus, genuinely-new] (2) uniform bound over K×B̄ (compactness + BoundedGeometry Grönwall constants) (3) hunif (4) concrete-expMap WELD via UniformFlowBridge (D²exp=D²F, iterated EventuallyEq; F = uniform confinement flow = a W-family). ⟹ discharge (J). (a)=bricks1-3 tractable next grind; (b)=weld mechanically available via J4-20. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_secondOrder_taylor
+#print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_position_secondOrder_taylor
+
 end QIQTH.AxiomAudit
