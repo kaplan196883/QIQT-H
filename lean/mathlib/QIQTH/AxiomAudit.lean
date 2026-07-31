@@ -14401,4 +14401,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_position_hasDerivAt
 #print axioms QIQTH.ExpMap.geodesicVariation_exists_uncond_dir
 
+-- ((J)-tower J-c / J4-24: base-point FULL Fréchet derivative — base-point 1st-order smooth-dependence COMPLETE) ★★ — BasepointFDeriv.lean (ns QIQTH.ExpMap):
+-- jacobiSol_unique (linear-ODE uniqueness of Jacobi solutions, via geodesicVariation_residual_bound with Y0=both endpoints ⟹ C=0 homogeneous Grönwall — no external ODE-uniqueness lemma) + geodesicBasepoint_endpoint_hasFDerivAt (HasFDerivAt (fun δ=>W δ t) L 0 from the uniform-in-direction quadratic remainder ‖W δ t−W 0 t−V δ t‖≤C‖δ‖²) + geodesicBasepoint_endpoint_hasFDerivAt_exists (CLM L constructed: add/smul linearity of δ↦V δ t via jacobiSol_unique, LinearMap.toContinuousLinearMap finite-dim) + geodesicBasepoint_endpoint_position_hasFDerivAt_exists (position projection = the exp-shaped q↦exp_q(v) base-point derivative). All DERIVED, carrying the SAME genuine geometric-regularity inputs as J-b (one direction slot wider, no new analysis). std-3.
+-- ⚠ (J) FEASIBILITY: base-point 1st-order DONE. Remaining = J-d base-point 2nd-order jet (2nd variational eqn + the ONE genuinely-new analytic lemma = cubic uniform Taylor remainder decay_order_three_remainder_convex from ‖∂³F‖≤M₃; decay_order_two_remainder_convex is 2nd-order only, doesn't extend) + bilinear bookkeeping (ExpJet4* infra) → joint (q,v) 2-jet continuity ⟹ hjoint ⟹ discharge (J). Moderately tractable; the C³-remainder is the single analytic gate. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_position_hasFDerivAt_exists
+#print axioms QIQTH.ExpMap.jacobiSol_unique
+
 end QIQTH.AxiomAudit

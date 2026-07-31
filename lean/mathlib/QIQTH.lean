@@ -227,6 +227,7 @@ import QIQTH.UniformFlowBridge
 import QIQTH.UniformSecondJetCompact
 import QIQTH.Christoffel2Jet
 import QIQTH.BasepointSmoothDep
+import QIQTH.BasepointFDeriv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
