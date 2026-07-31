@@ -14303,4 +14303,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_fderiv3_contDiffOn_one
 #print axioms QIQTH.ExpMap.contDiffOn_expPullbackMetric_three_uncond
 
+-- (JET-4 TOWER J4-7: the RNC-residual chain #2→#5 is now hfd3-FREE — the cutoff-residual→hEboundW branch unconditionalized) ★★ — RecenterResidualUncond.lean (ns QIQTH.HeatResidualBound):
+-- christoffel_expPullback_contDiffAt_two_uncond + hw0_expPullback_uncond + near_uncutResidual_expPullback_clean_uncond + cutoffResidual_expPullback_hEboundW_uncond — each = the original (RecenterConnectC3b:68 / RecenterConnectC3c:131,219 / RecenterCutoffC3:97) with the hfd3 hypothesis REMOVED, proved by feeding QIQTH.ExpMap.expMap_fderiv3_contDiffOn_one at the hfd3 slot; all OTHER genuine geometric hyps (hg/hinv/hframe/Θ/u/hfold/hinvT/hdev/hw0bd/hlap/annulus data) KEPT. std-3.
+-- ⚠ POST-J4-7 STATUS: hfd3 discharged END-TO-END. Inside trueKernel_diagonal_a1_recenter, hEboundW/hInt are already produced from {hunif,hcoord,hEzero,hEmeas}. Remaining ABSTRACT capstone inputs = hunif (needs #4_uncond wired via R6 uniform-in-q/all-τ assembler + E-identification) · hcoord · hEmeas · hHdiag · hE · convergence trio (hDuhamel/hInter/hCorrHigher). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW_uncond
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_expPullback_clean_uncond
+#print axioms QIQTH.HeatResidualBound.hw0_expPullback_uncond
+
 end QIQTH.AxiomAudit
