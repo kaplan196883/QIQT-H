@@ -218,6 +218,7 @@ import QIQTH.FlatTail
 import QIQTH.AnnulusContinuityWithinRho
 import QIQTH.RecenterCutoffLocal
 import QIQTH.ExpMapLocalInverse
+import QIQTH.GaussCompare
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

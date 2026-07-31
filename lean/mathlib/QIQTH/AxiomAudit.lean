@@ -14348,4 +14348,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expLocalInverse
 #print axioms QIQTH.ExpMap.hasStrictFDerivAt_expLocalInverse
 
+-- (TWO-POINT PHASE Brick H2 / J4-15: Gaussian width-comparison — the hcoord width-fix tool) ★ — GaussCompare.lean (ns QIQTH.HeatResidualBound):
+-- gaussDdim_le_of_norm_ge (c>0) (τ>0) (c²·rncRadialSq w ≤ rncRadialSq u) : gaussDdim (2τ) u ≤ (c^n)⁻¹ · gaussDdim (2τ/c²) w — the near-isometry ‖u‖≥c‖w‖ ⟹ widened-RHS Gaussian bound. DERIVED via gaussDdim_eq_exp (prefactor √-identity cancels c⁻ⁿ vs cⁿ; reduces to exp-monotonicity of hnorm). std-3, no c≤1 needed.
+-- ⚠ NEXT H1 hcoord fix = instantiate c=1−ε, w=p−q, u=Vmap q p with the near-isometry from hasStrictFDerivAt_expLocalInverse (deriv=id at p); UNIFORM-in-q version needs Brick A (the bottleneck). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_le_of_norm_ge
+
 end QIQTH.AxiomAudit
