@@ -14278,4 +14278,10 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-5d2 = expJet4_remainder_quadratic_bound_unif (mirror :3576): obtain hFP*←expJet2FirstVar_residual_Icc_unif + hFQ*←THIS + hQlip*←expJet2/3_v_two_pt + hV*←value bounds, CALL expJet4_remainder_quadratic_bound'. Then J4-5e (expMap_fderiv3_hasFDerivAt :3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet3SecondVar_residual_Icc_unif
 
+-- (JET-4 TOWER J4-5d2: the l/m/h/k-UNIFORM order-4 quadratic-remainder bound — ALL analytic inputs discharged) ★★ — ExpJet4RemainderUnif.lean:
+-- expJet4_remainder_quadratic_bound_unif : ∃ C₀, 0≤C₀ ∧ ∀ m (‖v+m‖≤ρ) Φ' … h k l, ∀ t, ‖(DF_{v+m}−DF_v)(Q³_{v+m}) + (Θ₃_{v+m}−Θ₃_v−Θ₄_v)‖ ≤ C₀·‖h‖·‖k‖·‖l‖·‖m‖²  — a SINGLE C₀ chosen up front (uniform over m/Φ'/h/k/l). Mirror expJet3_remainder_quadratic_bound_unif (ExpMapContDiff3:3576) one order up.
+-- ⚠ STRONGEST NON-TAUTOLOGY: hypotheses are ONLY the base ODE data (hΦ0/hΦcont/hΦd) — NO analytic input carried. All inputs DISCHARGED INSIDE the proof: hFP*←expJet2FirstVar_residual_Icc_unif; hFQ*←expJet3SecondVar_residual_Icc_unif; hQlip←expJet3Val_v_two_pt_Icc_unif (new helper in-file, wraps _const); hQlipkl*←expJet2_v_two_pt_Icc_unif; hV*←expJet2/3Fund_value_bound_Icc. Bound DERIVED by re-inlining the 5-block cancellation with UNIFORM tube bounds (calling _' would give an m-DEPENDENT constant — same reason order-3 _unif re-inlines). std-3.
+-- ⚠ NEXT J4-5e = expMap_fderiv3_hasFDerivAt (mirror :3898): obtain C₀ from this + expJet4_residual_bound Grönwall + π + opNorm_le_bound ⟹ ‖A_m‖≤Mc‖m‖² ⟹ HasFDerivAt (fun w=>fderiv³exp w) (expJetD4…) v. Then hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4_remainder_quadratic_bound_unif
+
 end QIQTH.AxiomAudit
