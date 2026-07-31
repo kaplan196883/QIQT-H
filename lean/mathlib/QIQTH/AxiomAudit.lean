@@ -14716,4 +14716,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.secondVariation_source_twopoint_dist_bound
 #print axioms QIQTH.ExpMap.fderiv2_geodesicField_twopoint_dist_bound
 
+-- J4-52 (CommonNondegRadius.lean): (F4 partial) the (S1) supply package, UNCONDITIONAL. s1_doubled_
+-- supply_package (hC + IsCompact K): ∃r>0 ∃σ(>0) ∃Y ∃Vf ∃S, hScompact∧hSconvex∧hYode∧hVode∧hV0∧hIC∧hmem
+-- — the ENTIRE (S1) block of the bridge, obtained from confined_doubled_family_with_variation_exists
+-- with r=ρ/2. DERIVED. std-3.
+-- ⚠ (J) NOT self-contained — F4 was NOT pure threading. TWO GENUINE RESIDUALS (honest firewall):
+-- (a) hr_lt : ∀q∈K, r<expRho q = compact-uniform INJECTIVITY radius. expRho q := (exists_confined_tube
+-- _family g gi hC q).choose = a per-q OPAQUE Classical.choose (ExpMap:728), NO continuity/uniform-over-K
+-- provenance ⟹ hr_lt NOT provable directly (the J4-20-anticipated wall). Also gates hlink (needs hrad:
+-- ‖v+s·a‖<expRho q). Route = re-architect onto uniform flow F (expMap_eq_flow_endpoint, UniformFlow
+-- Bridge) OR uniform expRho lower bound — needs architecture decision (consult).
+-- (b) second-variation/geometry block folding into the bridge's SINGLE-constant/common-set shape: 3 glue
+-- lemmas (common compact convex S* over K ⟹ uniform Kg/Lg/Lg2/Kb/M2 ⟹ one D₀/Sr₀; a,b-independent
+-- Ybase=(Y…0).1 via geodesic ODE uniqueness; Zf/Src via secondVariation_field_exists seed 0 ⟹ hXb with
+-- X₀=M2·Cp·Cw·(e^K'−1)/K'). Pointwise ingredients all proved; folding = genuine construction. [AF] std-3.
+#print axioms QIQTH.ExpMap.s1_doubled_supply_package
+
 end QIQTH.AxiomAudit
