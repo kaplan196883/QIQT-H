@@ -233,23 +233,24 @@ theorem hid_of_doubled_data (g gi : Point n → Fin n → Fin n → ℝ)
     (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
     {Fam : Point n → Point n}
     {Zf : Point n → Point n → ℝ → Point n × Point n}
-    {v : Point n} {K : ℝ} (hK0 : 0 ≤ K)
+    {v : Point n} {K σ : ℝ} (hK0 : 0 ≤ K) (hσ : 0 < σ)
     {S : Set ((Point n × Point n) × (Point n × Point n))}
     (hScompact : IsCompact S) (hSconvex : Convex ℝ S)
     (Y : Point n → Point n → ℝ → ℝ → (Point n × Point n) × (Point n × Point n))
     (Vf : Point n → Point n → ℝ → (Point n × Point n) × (Point n × Point n))
     (hdiff : DifferentiableAt ℝ (fun w => fderiv ℝ Fam w) v)
-    (hYode : ∀ a b : Point n, ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
+    (hYode : ∀ a b : Point n, ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       HasDerivAt (Y a b s) (doubledField g gi (Y a b s τ)) τ)
     (hVode : ∀ a b : Point n, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       HasDerivAt (Vf a b)
         (fderiv ℝ (doubledField g gi) (Y a b 0 τ) (Vf a b τ)) τ)
     (hV0 : ∀ a b : Point n, Vf a b 0
       = (((0 : Point n), a), ((0 : Point n), (0 : Point n))))
-    (hIC : ∀ a b : Point n, ∀ s : ℝ, Y a b s 0 - Y a b 0 0
+    (hIC : ∀ a b : Point n, ∀ s ∈ Set.Icc (-σ) σ, Y a b s 0 - Y a b 0 0
       = s • (((0 : Point n), a), ((0 : Point n), (0 : Point n))))
-    (hmem : ∀ a b : Point n, ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y a b s τ ∈ S)
-    (hlink : ∀ a b : Point n, ∀ s : ℝ, (Y a b s 1).2.1 = fderiv ℝ Fam (v + s • a) b)
+    (hmem : ∀ a b : Point n, ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y a b s τ ∈ S)
+    (hlink : ∀ a b : Point n, ∀ s ∈ Set.Icc (-σ) σ,
+      (Y a b s 1).2.1 = fderiv ℝ Fam (v + s • a) b)
     (hZf : ∀ a b : Point n, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       HasDerivAt (fun τ => Zf a b τ)
         (fderiv ℝ (geodesicField g gi) (Y a b 0 τ).1 (Zf a b τ)
@@ -264,7 +265,7 @@ theorem hid_of_doubled_data (g gi : Point n → Fin n → Fin n → ℝ)
   have hf : HasFDerivAt (fun w => fderiv ℝ Fam w) B v := hdiff.hasFDerivAt
   -- directional smooth dependence of the doubled flow endpoint (J4-36 engine)
   have hdouble := doubledField_variation_exists_uncond g gi hC hScompact hSconvex
-    (t := 1) (Set.right_mem_Icc.mpr (by norm_num))
+    (t := 1) (Set.right_mem_Icc.mpr (by norm_num)) hσ
     (Y := Y a b) (V := Vf a b) (p := (((0 : Point n), a), ((0 : Point n), (0 : Point n))))
     (S := S) (hYode a b) (hVode a b) (hV0 a b) (hIC a b) (hmem a b)
   -- project onto the second-factor position; rewrite via the first-jet link
@@ -274,12 +275,14 @@ theorem hid_of_doubled_data (g gi : Point n → Fin n → Fin n → ℝ)
         (ContinuousLinearMap.snd ℝ (Point n × Point n)
           (Point n × Point n)))).hasFDerivAt.comp_hasDerivAt 0 hdouble
     simpa using hcomp
+  -- `HasDerivAt` at `0` is LOCAL: the first-jet link only needs to hold on the `s`-window
+  -- `Icc (-σ) σ ∈ 𝓝 0`, so the two functions agree eventually near `0`.
   have hdir : HasDerivAt (fun s : ℝ => (fderiv ℝ Fam (v + s • a)) b) ((Vf a b 1).2.1) 0 := by
-    have hfun : (fun s : ℝ => (Y a b s 1).2.1)
-        = (fun s : ℝ => (fderiv ℝ Fam (v + s • a)) b) := by
-      funext s; rw [hlink a b s]
-    rw [hfun] at hdir0
-    exact hdir0
+    have hIccnhds : Set.Icc (-σ) σ ∈ 𝓝 (0 : ℝ) := Icc_mem_nhds (by linarith) hσ
+    have heq : (fun s : ℝ => (fderiv ℝ Fam (v + s • a)) b)
+        =ᶠ[𝓝 (0 : ℝ)] (fun s : ℝ => (Y a b s 1).2.1) :=
+      Filter.eventuallyEq_of_mem hIccnhds (fun s hs => (hlink a b s hs).symm)
+    exact hdir0.congr_of_eventuallyEq heq
   -- (c2): the CLM value equals the doubled second-factor endpoint
   have hval : B a b = (Vf a b 1).2.1 := clm_fderiv_value_of_directional hf hdir
   -- (d): the doubled second-factor endpoint equals the `Zf` position endpoint

@@ -95,7 +95,7 @@ variable {n : ℕ}
     geodesic ODE / geometry data. -/
 theorem expMap_common_nondeg_radius_of_doubled_supply (g gi : Point n → Fin n → Fin n → ℝ)
     (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
-    {K : Set (Point n)} (hK : IsCompact K) {r K' D₀ X₀ Sr₀ : ℝ} (hr : 0 < r)
+    {K : Set (Point n)} (hK : IsCompact K) {r K' D₀ X₀ Sr₀ σ : ℝ} (hr : 0 < r) (hσ : 0 < σ)
     (hK'0 : 0 ≤ K') (hD₀ : 0 ≤ D₀) (hX₀ : 0 ≤ X₀) (hSr₀ : 0 ≤ Sr₀)
     (hr_lt : ∀ q ∈ K, r < expRho g gi hC q)
     -- base-geodesic curve, phase second-order field, source (for the capstone `hbnd`):
@@ -111,8 +111,8 @@ theorem expMap_common_nondeg_radius_of_doubled_supply (g gi : Point n → Fin n 
     (hScompact : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, IsCompact (S q v))
     (hSconvex : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, Convex ℝ (S q v))
     -- (S1) doubled-family ODE / IC / confinement:
-    (hYode : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n, ∀ s : ℝ,
-      ∀ τ ∈ Set.Icc (0 : ℝ) 1,
+    (hYode : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
+      ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
         HasDerivAt (Y q v a b s) (doubledField g gi (Y q v a b s τ)) τ)
     (hVode : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
       ∀ τ ∈ Set.Icc (0 : ℝ) 1,
@@ -120,13 +120,16 @@ theorem expMap_common_nondeg_radius_of_doubled_supply (g gi : Point n → Fin n 
           (fderiv ℝ (doubledField g gi) (Y q v a b 0 τ) (Vf q v a b τ)) τ)
     (hV0 : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
       Vf q v a b 0 = (((0 : Point n), a), ((0 : Point n), (0 : Point n))))
-    (hIC : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n, ∀ s : ℝ,
+    (hIC : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
+      ∀ s ∈ Set.Icc (-σ) σ,
       Y q v a b s 0 - Y q v a b 0 0
         = s • (((0 : Point n), a), ((0 : Point n), (0 : Point n))))
-    (hmem : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n, ∀ s : ℝ,
+    (hmem : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
+      ∀ s ∈ Set.Icc (-σ) σ,
       ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y q v a b s τ ∈ S q v)
     -- (S2) first-jet link:
-    (hlink : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n, ∀ s : ℝ,
+    (hlink : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
+      ∀ s ∈ Set.Icc (-σ) σ,
       (Y q v a b s 1).2.1 = fderiv ℝ (expMap g gi hC q) (v + s • a) b)
     -- (S1) doubled second-variation `Zf` ODE data (pointwise, for `hid_of_doubled_data`):
     (hZf : ∀ q ∈ K, ∀ v ∈ Metric.closedBall (0 : Point n) r, ∀ a b : Point n,
@@ -165,14 +168,14 @@ theorem expMap_common_nondeg_radius_of_doubled_supply (g gi : Point n → Fin n 
     intro q hq v hv a b
     have hdiff : DifferentiableAt ℝ (fun w => fderiv ℝ (expMap g gi hC q) w) v :=
       expMap_jetMap_differentiableAt_uniform g gi hC hr_lt q hq v hv
-    exact hid_of_doubled_data g gi hC hK'0 (hScompact q hq v hv) (hSconvex q hq v hv)
+    exact hid_of_doubled_data g gi hC hK'0 hσ (hScompact q hq v hv) (hSconvex q hq v hv)
       (Y q v) (Vf q v) hdiff
-      (fun a b s τ hτ => hYode q hq v hv a b s τ hτ)
+      (fun a b s hs τ hτ => hYode q hq v hv a b s hs τ hτ)
       (fun a b τ hτ => hVode q hq v hv a b τ hτ)
       (fun a b => hV0 q hq v hv a b)
-      (fun a b s => hIC q hq v hv a b s)
-      (fun a b s τ hτ => hmem q hq v hv a b s τ hτ)
-      (fun a b s => hlink q hq v hv a b s)
+      (fun a b s hs => hIC q hq v hv a b s hs)
+      (fun a b s hs τ hτ => hmem q hq v hv a b s hs τ hτ)
+      (fun a b s hs => hlink q hq v hv a b s hs)
       (fun a b τ hτ => hZf q hq v hv a b τ hτ)
       (fun a b => h0d q hq v hv a b)
       (fun a b τ hτ => hKbd q hq v hv a b τ hτ)

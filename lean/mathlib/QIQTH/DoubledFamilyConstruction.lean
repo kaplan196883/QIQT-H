@@ -36,7 +36,17 @@
 
   ## HONEST CHECKPOINT (binding) — why `(J)` is NOT closed self-contained here
 
-  **STRUCTURAL BLOCKER (surfaced this brick).**  The bridge's confinement hypothesis is
+  ✅ **UPDATE (J4-41): the `∀ s : ℝ` STRUCTURAL BLOCKER described below is now RESOLVED.**  The engine
+  tower (`autonomousField_variation_exists{,_uncond}`, `doubledField_variation_exists_uncond`,
+  `hid_of_doubled_data`, the CLOSE bridge `expMap_common_nondeg_radius_of_doubled_supply`) was
+  reformulated so every `∀ s : ℝ` supply binder is now `∀ s ∈ Set.Icc (-σ) σ` (`σ > 0` threaded), which
+  makes `(hmem ∧ hIC)` SATISFIABLE (bounded IC segment + bounded-`τ` Grönwall spread fits in a compact
+  ball), while the `HasDerivAt … 0` conclusion is preserved (locality of the derivative at `0`).  The
+  three reuse cores in THIS file (`doubledField_prod_hasDerivAt` etc.) are unchanged and remain the
+  building blocks a bounded-`s` doubled-family construction consumes.  The paragraph below is retained
+  as the historical record of the defect that J4-41 fixed.
+
+  **STRUCTURAL BLOCKER (surfaced this brick; RESOLVED by J4-41).**  The bridge's confinement hypothesis is
       `hmem : ∀ s : ℝ, ∀ τ ∈ Icc 0 1, Y q v a b s τ ∈ S q v`
   together with the affine initial-condition hypothesis
       `hIC : ∀ s : ℝ, Y q v a b s 0 − Y q v a b 0 0 = s • ((0,a),(0,0))`,

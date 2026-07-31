@@ -14556,6 +14556,11 @@ namespace QIQTH.AxiomAudit
 -- illusory. FIX (agent + GPT-5.5 concur, mathematically standard): the s-derivative at 0 is LOCAL, so
 -- ∀ s:ℝ → ∀ s∈Icc(-σ)σ throughout hmem/hIC/hYode/hNb makes confinement satisfiable while preserving
 -- HasDerivAt … 0. J4-41 = the bounded-s reformulation across the engine tower. [AF] std-3.
+-- ✅ RESOLVED by J4-41 (below): the ∀s:ℝ supply binders in autonomousField_variation_exists{,_uncond},
+-- doubledField_variation_exists_uncond, hid_of_doubled_data, expMap_common_nondeg_radius_of_doubled_
+-- supply are now ∀s∈Icc(-σ)σ (σ>0 threaded). Supply DEMONSTRABLY SATISFIABLE (bounded IC segment
+-- {Y 0 0+s•p : |s|≤σ} + bounded-τ Grönwall spread ≤2σ‖p‖e^K ⟹ fits in a compact ball S). Same
+-- theorem names; HasDerivAt…0 conclusion preserved (littleO on 𝓝 0 via min-radius / Icc_mem_nhds).
 #print axioms QIQTH.ExpMap.doubledField_prod_hasDerivAt
 #print axioms QIQTH.ExpMap.doubledField_equilibrium
 

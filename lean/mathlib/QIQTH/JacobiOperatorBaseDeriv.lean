@@ -164,16 +164,16 @@ theorem doubledField_variation_exists_uncond (g gi : Point n → Fin n → Fin n
     {Y : ℝ → ℝ → (Point n × Point n) × (Point n × Point n)}
     {V : ℝ → (Point n × Point n) × (Point n × Point n)}
     {p : (Point n × Point n) × (Point n × Point n)}
-    {S : Set ((Point n × Point n) × (Point n × Point n))}
+    {S : Set ((Point n × Point n) × (Point n × Point n))} {σ : ℝ}
     (hScompact : IsCompact S) (hSconvex : Convex ℝ S)
-    {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) 1)
-    (hYode : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
+    {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) 1) (hσ : 0 < σ)
+    (hYode : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       HasDerivAt (Y s) (doubledField g gi (Y s τ)) τ)
     (hVode : ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       HasDerivAt V (fderiv ℝ (doubledField g gi) (Y 0 τ) (V τ)) τ)
     (hV0 : V 0 = p)
-    (hIC : ∀ s : ℝ, Y s 0 - Y 0 0 = s • p)
-    (hmem : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y s τ ∈ S) :
+    (hIC : ∀ s ∈ Set.Icc (-σ) σ, Y s 0 - Y 0 0 = s • p)
+    (hmem : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y s τ ∈ S) :
     HasDerivAt (fun s => Y s t) (V t) 0 := by
   set G : ((Point n × Point n) × (Point n × Point n)) → ((Point n × Point n) × (Point n × Point n)) :=
     doubledField g gi with hGdef
@@ -195,10 +195,11 @@ theorem doubledField_variation_exists_uncond (g gi : Point n → Fin n → Fin n
       (fun x _ => hdiff x (by trivial))
       (fun x hx => by rw [← NNReal.coe_le_coe]; simpa [hK₀def] using hKfbd x hx)
       hSconvex
+  have h0mem : (0 : ℝ) ∈ Set.Icc (-σ) σ := ⟨by linarith, hσ.le⟩
   have hKb : ∀ τ ∈ Set.Icc (0 : ℝ) 1, ‖fderiv ℝ G (Y 0 τ)‖ ≤ Kf :=
-    fun τ hτ => hKfbd (Y 0 τ) (hmem 0 τ hτ)
+    fun τ hτ => hKfbd (Y 0 τ) (hmem 0 h0mem τ hτ)
   -- (b) apply the abstract autonomous first-order smooth-dependence engine to `Φ := G`.
-  exact QIQTH.AutonomousDep.autonomousField_variation_exists_uncond G hKf0 ht hSconvex
+  exact QIQTH.AutonomousDep.autonomousField_variation_exists_uncond G hKf0 ht hσ hSconvex
     hdiff hdiff2 hbound2 hLip hYode hVode hV0 hIC hKb hmem
 
 end QIQTH.ExpMap

@@ -143,31 +143,35 @@ theorem autonomousField_variation_residual_bound (Φ : E → E)
     the conclusion that this solution IS the IC-derivative is a genuinely different statement). -/
 theorem autonomousField_variation_exists (Φ : E → E)
     {Y : ℝ → ℝ → E} {V : ℝ → E} {p : E}
-    {K Cn : ℝ} (hK0 : 0 ≤ K) (hCn0 : 0 ≤ Cn) {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) 1)
-    (hYode : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt (Y s) (Φ (Y s τ)) τ)
+    {K Cn σ : ℝ} (hK0 : 0 ≤ K) (hCn0 : 0 ≤ Cn) {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) 1)
+    (hσ : 0 < σ)
+    (hYode : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt (Y s) (Φ (Y s τ)) τ)
     (hVode : ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt V (fderiv ℝ Φ (Y 0 τ) (V τ)) τ)
     (hV0 : V 0 = p)
-    (hIC : ∀ s : ℝ, Y s 0 - Y 0 0 = s • p)
+    (hIC : ∀ s ∈ Set.Icc (-σ) σ, Y s 0 - Y 0 0 = s • p)
     (hKb : ∀ τ ∈ Set.Icc (0 : ℝ) 1, ‖fderiv ℝ Φ (Y 0 τ)‖ ≤ K)
-    (hNb : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
+    (hNb : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       ‖Φ (Y s τ) - Φ (Y 0 τ) - fderiv ℝ Φ (Y 0 τ) (Y s τ - Y 0 τ)‖ ≤ Cn * s ^ 2) :
     HasDerivAt (fun s => Y s t) (V t) 0 := by
-  have hbnd : ∀ s : ℝ, ‖Y s t - Y 0 t - s • V t‖ ≤ Cn * s ^ 2 * Real.exp K := by
-    intro s
+  have h0mem : (0 : ℝ) ∈ Set.Icc (-σ) σ := ⟨by linarith, hσ.le⟩
+  -- The residual/Grönwall quadratic bound holds on the bounded `s`-window `[-σ, σ]` (a nbhd of 0).
+  have hbnd : ∀ s ∈ Set.Icc (-σ) σ,
+      ‖Y s t - Y 0 t - s • V t‖ ≤ Cn * s ^ 2 * Real.exp K := by
+    intro s hs
     have hJ : ∀ τ ∈ Set.Icc (0 : ℝ) 1,
-        HasDerivAt (fun σ => s • V σ)
-          (fderiv ℝ Φ (Y 0 τ) ((fun σ => s • V σ) τ)) τ := by
+        HasDerivAt (fun u => s • V u)
+          (fderiv ℝ Φ (Y 0 τ) ((fun u => s • V u) τ)) τ := by
       intro τ hτ
       have hcs := (hVode τ hτ).const_smul s
       have he : s • fderiv ℝ Φ (Y 0 τ) (V τ) = fderiv ℝ Φ (Y 0 τ) (s • V τ) :=
         (map_smul (fderiv ℝ Φ (Y 0 τ)) s (V τ)).symm
       rw [he] at hcs
       exact hcs
-    have h0 : Y s 0 - Y 0 0 - (fun σ => s • V σ) 0 = 0 := by
+    have h0 : Y s 0 - Y 0 0 - (fun u => s • V u) 0 = 0 := by
       simp only
-      rw [hIC s, hV0]; abel
+      rw [hIC s hs, hV0]; abel
     have := autonomousField_variation_residual_bound Φ hK0
-      (mul_nonneg hCn0 (sq_nonneg s)) (hYode 0) (hYode s) hJ h0 hKb (hNb s) t ht
+      (mul_nonneg hCn0 (sq_nonneg s)) (hYode 0 h0mem) (hYode s hs) hJ h0 hKb (hNb s hs) t ht
     simpa using this
   rw [hasDerivAt_iff_isLittleO_nhds_zero]
   simp only [zero_add]
@@ -176,13 +180,19 @@ theorem autonomousField_variation_exists (Φ : E → E)
   set M : ℝ := Cn * Real.exp K with hMdef
   have hM0 : 0 ≤ M := mul_nonneg hCn0 (Real.exp_pos K).le
   rw [Metric.eventually_nhds_iff]
-  refine ⟨c / (M + 1), by positivity, fun s hs => ?_⟩
+  -- Radius = `min (c/(M+1)) σ`: small enough for the little-o AND inside the bounded `s`-window.
+  refine ⟨min (c / (M + 1)) σ, lt_min (by positivity) hσ, fun s hs => ?_⟩
   rw [dist_eq_norm, sub_zero] at hs
+  have hsc : ‖s‖ < c / (M + 1) := lt_of_lt_of_le hs (min_le_left _ _)
+  have hsσ : ‖s‖ < σ := lt_of_lt_of_le hs (min_le_right _ _)
+  have hsmem : s ∈ Set.Icc (-σ) σ := by
+    rw [Real.norm_eq_abs] at hsσ
+    exact ⟨(abs_lt.mp hsσ).1.le, (abs_lt.mp hsσ).2.le⟩
   have hrw : Cn * s ^ 2 * Real.exp K = M * ‖s‖ ^ 2 := by
     rw [hMdef]; rw [Real.norm_eq_abs, sq_abs]; ring
-  have hkey : ‖Y s t - Y 0 t - s • V t‖ ≤ M * ‖s‖ ^ 2 := hrw ▸ hbnd s
+  have hkey : ‖Y s t - Y 0 t - s • V t‖ ≤ M * ‖s‖ ^ 2 := hrw ▸ hbnd s hsmem
   have hMs : M * ‖s‖ ≤ c := by
-    have hlt : ‖s‖ * (M + 1) < c := (lt_div_iff₀ (by positivity)).mp hs
+    have hlt : ‖s‖ * (M + 1) < c := (lt_div_iff₀ (by positivity)).mp hsc
     nlinarith [norm_nonneg s, hM0]
   calc ‖Y s t - Y 0 t - s • V t‖
       ≤ M * ‖s‖ ^ 2 := hkey
@@ -228,21 +238,23 @@ theorem autonomous_twopoint_gronwall (Φ : E → E)
     `Cn = M₂·(‖p‖·e^{K₀})²`. -/
 theorem autonomousField_hNb_discharge (Φ : E → E)
     {Y : ℝ → ℝ → E} {p : E} {S : Set E}
-    {M₂ : ℝ} {K₀ : NNReal} (hconv : Convex ℝ S)
+    {M₂ : ℝ} {K₀ : NNReal} {σ : ℝ} (hσ : 0 < σ) (hconv : Convex ℝ S)
     (hdiff : ∀ x ∈ S, DifferentiableAt ℝ Φ x)
     (hdiff2 : ∀ x ∈ S, DifferentiableAt ℝ (fderiv ℝ Φ) x)
     (hbound2 : ∀ x ∈ S, ‖fderiv ℝ (fderiv ℝ Φ) x‖ ≤ M₂)
     (hLip : LipschitzOnWith K₀ Φ S)
-    (hYode : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt (Y s) (Φ (Y s τ)) τ)
-    (hIC : ∀ s : ℝ, Y s 0 - Y 0 0 = s • p)
-    (hmem : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y s τ ∈ S) :
-    ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
+    (hYode : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt (Y s) (Φ (Y s τ)) τ)
+    (hIC : ∀ s ∈ Set.Icc (-σ) σ, Y s 0 - Y 0 0 = s • p)
+    (hmem : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y s τ ∈ S) :
+    ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1,
       ‖Φ (Y s τ) - Φ (Y 0 τ) - fderiv ℝ Φ (Y 0 τ) (Y s τ - Y 0 τ)‖
         ≤ (M₂ * (‖p‖ * Real.exp K₀) ^ 2) * s ^ 2 := by
-  intro s τ hτ
-  have htp := autonomous_twopoint_gronwall Φ hLip (hYode s) (hYode 0) (hmem s) (hmem 0) τ hτ
+  have h0mem : (0 : ℝ) ∈ Set.Icc (-σ) σ := ⟨by linarith, hσ.le⟩
+  intro s hs τ hτ
+  have htp := autonomous_twopoint_gronwall Φ hLip (hYode s hs) (hYode 0 h0mem)
+    (hmem s hs) (hmem 0 h0mem) τ hτ
   have hd0 : dist (Y s 0) (Y 0 0) = |s| * ‖p‖ := by
-    rw [dist_eq_norm, hIC s, norm_smul, Real.norm_eq_abs]
+    rw [dist_eq_norm, hIC s hs, norm_smul, Real.norm_eq_abs]
   have hexp : Real.exp ((K₀ : ℝ) * τ) ≤ Real.exp K₀ := by
     apply Real.exp_le_exp.mpr
     calc (K₀ : ℝ) * τ ≤ (K₀ : ℝ) * 1 := mul_le_mul_of_nonneg_left hτ.2 (NNReal.coe_nonneg K₀)
@@ -255,9 +267,9 @@ theorem autonomousField_hNb_discharge (Φ : E → E)
       _ = |s| * ‖p‖ * Real.exp ((K₀ : ℝ) * τ) := by rw [hd0]
       _ ≤ |s| * ‖p‖ * Real.exp K₀ := mul_le_mul_of_nonneg_left hexp (by positivity)
   have hrem := QIQTH.ExpMap.decay_order_two_remainder_convex Φ M₂ hconv
-    (fun x hx => hdiff x hx) (fun x hx => hdiff2 x hx) hbound2 (hmem s τ hτ) (hmem 0 τ hτ)
+    (fun x hx => hdiff x hx) (fun x hx => hdiff2 x hx) hbound2 (hmem s hs τ hτ) (hmem 0 h0mem τ hτ)
   have hnn : 0 ≤ M₂ :=
-    le_trans (norm_nonneg (fderiv ℝ (fderiv ℝ Φ) (Y 0 τ))) (hbound2 (Y 0 τ) (hmem 0 τ hτ))
+    le_trans (norm_nonneg (fderiv ℝ (fderiv ℝ Φ) (Y 0 τ))) (hbound2 (Y 0 τ) (hmem 0 h0mem τ hτ))
   refine hrem.trans ?_
   have hsq : ‖Y s τ - Y 0 τ‖ ^ 2 ≤ (|s| * ‖p‖ * Real.exp K₀) ^ 2 := by
     have := mul_le_mul hL hL (norm_nonneg _) hLnn
@@ -277,23 +289,24 @@ theorem autonomousField_hNb_discharge (Φ : E → E)
     `QIQTH.ExpMap.geodesicVariation_exists_uncond`, with `Cn = M₂·(‖p‖·e^{K₀})²`. -/
 theorem autonomousField_variation_exists_uncond (Φ : E → E)
     {Y : ℝ → ℝ → E} {V : ℝ → E} {p : E}
-    {S : Set E} {M₂ K : ℝ} {K₀ : NNReal} (hK0 : 0 ≤ K)
-    {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) 1) (hconv : Convex ℝ S)
+    {S : Set E} {M₂ K σ : ℝ} {K₀ : NNReal} (hK0 : 0 ≤ K)
+    {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) 1) (hσ : 0 < σ) (hconv : Convex ℝ S)
     (hdiff : ∀ x ∈ S, DifferentiableAt ℝ Φ x)
     (hdiff2 : ∀ x ∈ S, DifferentiableAt ℝ (fderiv ℝ Φ) x)
     (hbound2 : ∀ x ∈ S, ‖fderiv ℝ (fderiv ℝ Φ) x‖ ≤ M₂)
     (hLip : LipschitzOnWith K₀ Φ S)
-    (hYode : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt (Y s) (Φ (Y s τ)) τ)
+    (hYode : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt (Y s) (Φ (Y s τ)) τ)
     (hVode : ∀ τ ∈ Set.Icc (0 : ℝ) 1, HasDerivAt V (fderiv ℝ Φ (Y 0 τ) (V τ)) τ)
     (hV0 : V 0 = p)
-    (hIC : ∀ s : ℝ, Y s 0 - Y 0 0 = s • p)
+    (hIC : ∀ s ∈ Set.Icc (-σ) σ, Y s 0 - Y 0 0 = s • p)
     (hKb : ∀ τ ∈ Set.Icc (0 : ℝ) 1, ‖fderiv ℝ Φ (Y 0 τ)‖ ≤ K)
-    (hmem : ∀ s : ℝ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y s τ ∈ S) :
+    (hmem : ∀ s ∈ Set.Icc (-σ) σ, ∀ τ ∈ Set.Icc (0 : ℝ) 1, Y s τ ∈ S) :
     HasDerivAt (fun s => Y s t) (V t) 0 := by
+  have h0mem : (0 : ℝ) ∈ Set.Icc (-σ) σ := ⟨by linarith, hσ.le⟩
   have hnn : 0 ≤ M₂ :=
-    le_trans (norm_nonneg (fderiv ℝ (fderiv ℝ Φ) (Y 0 t))) (hbound2 (Y 0 t) (hmem 0 t ht))
+    le_trans (norm_nonneg (fderiv ℝ (fderiv ℝ Φ) (Y 0 t))) (hbound2 (Y 0 t) (hmem 0 h0mem t ht))
   have hCn0 : 0 ≤ M₂ * (‖p‖ * Real.exp K₀) ^ 2 := mul_nonneg hnn (sq_nonneg _)
-  exact autonomousField_variation_exists Φ hK0 hCn0 ht hYode hVode hV0 hIC hKb
-    (autonomousField_hNb_discharge Φ hconv hdiff hdiff2 hbound2 hLip hYode hIC hmem)
+  exact autonomousField_variation_exists Φ hK0 hCn0 ht hσ hYode hVode hV0 hIC hKb
+    (autonomousField_hNb_discharge Φ hσ hconv hdiff hdiff2 hbound2 hLip hYode hIC hmem)
 
 end QIQTH.AutonomousDep
