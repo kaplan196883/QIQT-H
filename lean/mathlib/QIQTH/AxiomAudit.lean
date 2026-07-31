@@ -14779,4 +14779,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_hasFDerivAt
 #print axioms QIQTH.ExpMap.flowVelocity_endpoint_hasFDerivAt_window_exists
 
+-- ★★ J4-56 (UniformFlowNondegClose.lean): (K3) CLOSES (J)-for-F — the compact-uniform exp-nondeg gate
+-- for the UNIFORM-flow exp map, SELF-CONTAINED. uniformFlowExp_common_nondeg_radius: for hC + IsCompact
+-- K, ∃ρ₀>0 ∀q∈K ∀v ‖v‖<ρ₀ → IsUnit(fderiv (uniformFlowExp g gi hC hK q) v). Hyps ONLY hC + IsCompact K;
+-- NO expRho/hr_lt/carried-IsUnit; conclusion not a hyp. All DERIVED:
+-- L0 (L_0=id): flat Jacobi field Jflat_δ τ=(τ•δ,δ) solves V'=DF(q,0)V (jacobiOperator g gi q 0 =0 by
+--   zero-velocity vanishing, hjac0), endpoint .1=δ ⟹ L_0=id.
+-- L-lip (‖L_v−id‖≤C_D‖v‖ uniform q∈K): linODE_twopoint_diff_bound comparing V^v_δ (Jacobi along tube
+--   through (q,v)) vs Jflat_δ; coefficient gap ‖DF(tube τ)−DF(q,0)‖≤M₂C₀‖v‖ (fderiv MVT + K1 confinement);
+--   ⟹ ‖(V^v_δ 1).1−δ‖≤(M₂C₀e^{K_f})‖v‖‖δ‖. UNIFORMITY: M₂/K_f/K₀ over ONE compact convex
+--   S=closedBall(0,Rbase+C₀ρ) (K⊆closedBall p₀ R) ⟹ C_D q-independent.
+-- L-neumann: isUnit_one_sub_of_norm_lt_one (‖1−L_v‖<1). L-assemble: ρ₀=min ρ_K (1/(2(C_D+1))), operator
+--   explicit via K2 flowVelocity_endpoint_hasFDerivAt_window_exists, fderiv=L_v by HasFDerivAt.fderiv.
+-- ⟹ the ENTIRE J4-35→J4-56 (h3a)/(J) tower CLOSED for the uniform-flow exp map. Downstream: replaces
+-- the expRho-gated expMap_common_nondeg_radius (hr_lt/hjet blockers) in Brick-A→hunif→recenter→a₁=R/6.
+-- ⚠ a₁=R/6 STILL conditional: (J)-for-F is a LEAF of Brick-A (uniform-geometry packet) → hunif →
+-- recenter capstone → convergence. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_common_nondeg_radius
+
 end QIQTH.AxiomAudit
