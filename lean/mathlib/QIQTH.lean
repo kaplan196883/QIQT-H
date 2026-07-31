@@ -212,6 +212,7 @@ import QIQTH.ExpMapFDeriv3
 import QIQTH.ExpMapContDiffFour
 import QIQTH.PullbackMetricC3Uncond
 import QIQTH.RecenterResidualUncond
+import QIQTH.RecenterAnnulusUncond
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

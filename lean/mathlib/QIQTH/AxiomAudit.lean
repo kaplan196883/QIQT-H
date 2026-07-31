@@ -14310,4 +14310,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.near_uncutResidual_expPullback_clean_uncond
 #print axioms QIQTH.HeatResidualBound.hw0_expPullback_uncond
 
+-- (JET-4 TOWER J4-8: discharge the annulus bounds hgi_ann/hLapChi_ann of the cutoff-residual brick) ★ — RecenterAnnulusUncond.lean (ns QIQTH.HeatResidualBound):
+-- expPullbackMetricInv_continuousOn_of_isUnit (g̃ ContinuousOn S + matToCLM(g̃) IsUnit on S ⟹ g̃⁻¹ ContinuousOn S; via matToCLM continuity + contDiffAt_ringInverse units-continuity) — the bridge g̃-nondeg ⟹ g̃⁻¹-continuous.
+-- + cutoffResidual_expPullback_hEboundW_uncond2 : same conclusion as _uncond but hgi_ann+hLapChi_ann REMOVED (DERIVED internally via gi_bound_on_annulus_of_continuousOn + laplaceBeltrami_radialCutoff_bound_on_annulus_of_continuousOn), replaced by the strictly-WEAKER continuity residue hgi_cont/hchris_cont (ContinuousOn g̃⁻¹/Γ̃ on annuli). std-3, non-tautological (IsUnit firewall explicit).
+-- ⚠ SUB-WALL found (honest): g̃-nondegeneracy-on-BALL is MISSING — repo has g̃⁻¹ regularity ONLY at 0 (matToCLM(g̃ 0) IsUnit = metricCLMUnit0); no ∀ x,‖x‖<expRho, IsUnit(matToCLM(g̃ x)) (needs D exp_p x INVERTIBLE on ball / no conjugate points; repo has hasFDerivAt_expMap [D exp exists] + local-homeo-at-0, NOT invertible-off-0). This is the concrete J4-9 prerequisite for hgi_cont/hchris_cont ⟹ hunif.
+-- ⚠ NEXT: J4-9 = g̃ nondeg on ball (D exp invertible on ball) OR the hunif uniform-in-q assembler (hEboundW_of_uniform_perBasePoint:86 + E-identification). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW_uncond2
+#print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_continuousOn_of_isUnit
+
 end QIQTH.AxiomAudit
