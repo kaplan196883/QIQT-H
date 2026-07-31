@@ -14418,4 +14418,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_second_jet_joint_cont_of_base_uniform
 #print axioms QIQTH.ExpMap.joint_continuousOn_of_fiber_cont_of_uniform
 
+-- ((J)-tower d1 foundation / J4-27: base-point 2nd-order Jacobi — jacobiVariation_secondOrder is direction-agnostic) ★ — BasepointJacobi2.lean (ns QIQTH.ExpMap):
+-- jacobiVariation_secondOrder_local (GENUINELY-NEW: the 2nd-order Jacobi ODE ξ''=−jacobiOperator at interior t needing IsGeodesicVariationAt only on a NBHD ∀ᶠτ∈𝓝t, via HasDerivAt.congr_of_eventuallyEq — removes the global-ODE obstacle for [0,1]-confined families) + jacobiVariation_secondOrder_dir (base-point packaging by verbatim instantiation V:=V δ, γ:=W 0 — jacobiVariation_secondOrder is velocity-only in DOCSTRING not proof, same J4-23 phenomenon one order up) + jacobiVariation_secondOrder_basepoint (family bridge: hVode on Icc 0 1 ⟹ 2nd-order Jacobi at t∈Ioo 0 1). All DERIVE the 2nd-order ODE from the carried 1st-order variation input (same KIND as velocity side). std-3.
+-- ⚠ REMAINING to hunif ⟹ discharge (J): (1) base-point 2nd-order JET HasFDerivAt(fun δ=>V δ t) L₂ 0 [supplied 2nd-order field V₂ = honest ODE input; cubic remainder + bilinear CLM] (2) uniform bound over K×B̄ (compactness) (3) Lipschitz-in-q ⟹ hunif (4) concrete-expMap WELD via UniformFlowBridge (D²exp=D²F on overlap, iterated EventuallyEq; F=uniform-flow W-family) — the load-bearing residual (5) hunif⟹BasepointSecondJet.expMap_second_jet_joint_cont_of_base_uniform⟹(J). Bricks 1-3 incremental (same kind as 1st-order); brick 4 = apply abstract machinery to F + transfer. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_local
+#print axioms QIQTH.ExpMap.jacobiVariation_secondOrder_basepoint
+
 end QIQTH.AxiomAudit
