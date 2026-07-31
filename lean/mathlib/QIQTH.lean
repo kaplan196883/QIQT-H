@@ -205,6 +205,7 @@ import QIQTH.ExpJet4DFull
 import QIQTH.ExpJet4Residual
 import QIQTH.ExpJet4Prereq
 import QIQTH.ExpJet4Remainder
+import QIQTH.ExpJet4RemainderP
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -14266,4 +14266,10 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-5c (_' :3144 variant) → J4-5d (_unif :3576, discharges the carried hFP*/hFQ*/hQlip*/hV* inputs from the genuine expJet2Curve/expJet3CurveG solutions) → J4-5e (expMap_fderiv3_hasFDerivAt :3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet4_remainder_quadratic_bound
 
+-- (JET-4 TOWER J4-5c: the explicit-directional-factor variant of the order-4 quadratic-remainder cancellation) ★ — ExpJet4RemainderP.lean:
+-- expJet4_remainder_quadratic_bound' : ∃ C, 0≤C ∧ ∀ t, ‖(DF_w−DF_v)(Qw) + (Θ₃_w−Θ₃_v−Θ₄_v)‖ ≤ C·‖h‖·‖k‖·‖l‖·‖m‖²  (C is h,k,l-INDEPENDENT so downstream opNorm_le_bound extracts the operator norm). Same 5-block telescope as expJet4_remainder_quadratic_bound (J4-5b-real) copied verbatim, with ‖h‖‖k‖‖l‖ threaded through every numeric bound; mirror expJet3_remainder_quadratic_bound' (ExpMapContDiff3:3144).
+-- ⚠ NON-TAUTOLOGICAL (verified): conclusion DERIVED; carried hyps = explicit-factor lower-order INPUTS only (hFP*/hFQ* residuals, hQlip* Lipschitz ≤Ce·…·‖m‖, hV* value bounds, ODE data) — none equals the conclusion. All genuinely used. std-3.
+-- ⚠ NEXT J4-5d (_unif :3576, discharges the carried hFP*/hFQ*/hQlip*/hV* inputs from the genuine expJet2Curve/expJet3CurveG solutions; may CALL this ' theorem) → J4-5e (expMap_fderiv3_hasFDerivAt :3898) → hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expJet4_remainder_quadratic_bound'
+
 end QIQTH.AxiomAudit
