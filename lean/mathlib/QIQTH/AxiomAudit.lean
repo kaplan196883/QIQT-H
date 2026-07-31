@@ -14454,4 +14454,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_velocity_ode_data
 #print axioms QIQTH.ExpMap.flowVelocity_secondJet_hbnd_of_ode_data
 
+-- ((J)-tower / J4-33: velocity 2-jet EXISTS + symmetric + cubic Taylor control (h1+h2); (J) gated on the single crisp residual (h3)=hid) ★★ — VelocitySecondJetId.lean (ns QIQTH.ExpMap):
+-- flowVelocity_endpoint_hasFDerivAt(_exists) (velocity-slot 1st Fréchet derivative of flow endpoint, seed (0,δ), L constructed via jacobiSol_unique — verbatim velocity analogue of geodesicBasepoint_endpoint_hasFDerivAt_exists) + _position_ + flowVelocity_endpoint_secondOrder_taylor(_position_) (velocity-slot 2nd-order Taylor with cubic remainder, linear term pinned to V δ t; welds decay_order_three_remainder_convex + h1). All DERIVED, carrying same genuine base/geometric/supplied-Jacobi data as the base-point tower; NO smuggled hid/hbnd/hFoplip/hunif. std-3.
+-- ⚠ (J) gated on ONE crisp residual (h3)=hid: identify the velocity 2-jet's bilinear COEFFICIENT VALUE fderiv²(δ'↦W δ' t)|₀ a b = (Zf … 1).1 (the quadratic-term = 2nd-order-variation-field-endpoint link the whole jet tower stops short of). Route (ii) recommended: smooth dependence of the 1st Jacobi field V on base velocity w (differentiate the 1st-order identification once more, match ∂_w V to Zf), reusing geodesicVariation_exists_dir one order up. NOTE: h1/h2 at base increment 0; arbitrary-v is a trivial affine reparametrization (chain rule) left un-mechanized since (h3) gates regardless. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.flowVelocity_endpoint_secondOrder_taylor
+#print axioms QIQTH.ExpMap.flowVelocity_endpoint_hasFDerivAt_exists
+
 end QIQTH.AxiomAudit
