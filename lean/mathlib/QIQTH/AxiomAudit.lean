@@ -14487,4 +14487,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledField_variation_exists_uncond
 #print axioms QIQTH.ExpMap.contDiff_doubledField
 
+-- J4-37 (JacobiOperatorFDeriv.lean): the (c)+(d) analytic BRIDGE from the J4-36 scalar core to a
+-- POINTWISE hid. doubledField_fderiv_snd_apply (block formula (DG e u).2 = DF(e.1)u.2 +
+-- D²F(e.1)(u.1)(e.2), the coupling making the doubled linearized ODE a second-variation ODE) →
+-- doubledField_secondFactor_ode (V₂'=DF·V₂+Src, Src=D²F(...)(V.1)(Y.2)) → doubledField_secondFactor_
+-- endpoint_eq (via secondVariation_endpoint_unique: (V 1).2=Zf 1) → clm_fderiv_value_of_directional
+-- (from HasFDerivAt of the jet map + scalar directional identity ⟹ B a b = c, via HasDerivAt.unique)
+-- → hid_of_doubled_data: (fderiv (fun w=>fderiv Fam w) v) a b = (Zf a b 1).1 = the hid predicate,
+-- DERIVED (welding J4-36 engine + CLM-value step + endpoint id). Hyps genuine data only (hdiff =
+-- DifferentiableAt jet-map regularity, doubled-family ODE/IC/confinement, hlink first-jet value,
+-- Zf second-var ODE data); NO hid/HasFDerivAt/(J)-conclusion carried. std-3.
+-- ⚠ (J) NOT discharged — (h3a) analytic firewall DISSOLVED at pointwise level; reduced to a uniform-
+-- SUPPLY/CONSTRUCTION residual: exhibit the doubled families (geodesic+Jacobi integral curves through
+-- the perturbed IC) + hlink + hdiff UNIFORMLY over compact K ⟹ ∀q∈K hid via hid_of_doubled_data ⟹
+-- feed expMap_common_nondeg_radius_of_velocity_ode_data ⟹ (J). Uses only existing machinery
+-- (a-priori confinement, flowVelocity_endpoint_position_hasFDerivAt_exists, ExpMapContDiffFour).
+-- [AF] std-3.
+#print axioms QIQTH.ExpMap.hid_of_doubled_data
+#print axioms QIQTH.ExpMap.doubledField_secondFactor_endpoint_eq
+#print axioms QIQTH.ExpMap.clm_fderiv_value_of_directional
+
 end QIQTH.AxiomAudit
