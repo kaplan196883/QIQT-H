@@ -216,6 +216,7 @@ import QIQTH.RecenterAnnulusUncond
 import QIQTH.PullbackMetricNondegNearZero
 import QIQTH.FlatTail
 import QIQTH.AnnulusContinuityWithinRho
+import QIQTH.RecenterCutoffLocal
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

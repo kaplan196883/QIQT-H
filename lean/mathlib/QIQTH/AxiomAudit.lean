@@ -14337,4 +14337,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_continuousOn_annulus_within
 #print axioms QIQTH.HeatResidualBound.christoffel_expPullback_continuousOn_annulus_within
 
+-- (JET-4 TOWER J4-12: local-support cutoff-residual→hEboundW producer — hgi_cont/hchris_cont DISCHARGED) ★★ — RecenterCutoffLocal.lean (ns QIQTH.HeatResidualBound):
+-- cutoffResidual_expPullback_hEboundW_uncond3 : SAME hEboundW conclusion as _uncond2 but with hgi_cont AND hchris_cont REMOVED (genuinely discharged). Proof replays cutoffResidual's construction SHRINKING the cutoff radii into the nondeg ball: near_uncutResidual_expPullback_clean_uncond gives monotone b; b'=min b (ρ₀/2)<ρ₀ (ρ₀=min of the two J4-11 within-ρ₀ producers' radii), a'=b'/2; hEnear' at b' by monotonicity; annulus bounds at (a',b') via the J4-11 producers + gi_bound/laplaceBeltrami compactness bricks; feed cutoffResidual_global_gaussianWide_bound_C2. Realizes the GPT-5.5 LOCAL-SUPPORT strategy (cutoff inside B(0,ρ₀), no full-ball nondeg). Other genuine hyps kept (hsymm0/hinvF/hg/hframe/Θ/u/hw0smooth/hfold/hinvT/hgisymm/M/W/L/hdev/hw0bd/hlap). std-3, no sorry.
+-- ⚠ NEXT J4-13 = hunif: lift uncond3's per-(p,t) hEboundW to the capstone's per-base-point uniform-in-q/all-τ hunif via hEboundW_of_uniform_perBasePoint (RecenterReduction:86) + E-IDENTIFICATION (capstone E τ p q = q-centered pullback cutoff residual under Vmap q p=exp_q⁻¹(p)); sub-point = uniform-small-ρ₀ for q near p. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW_uncond3
+
 end QIQTH.AxiomAudit
