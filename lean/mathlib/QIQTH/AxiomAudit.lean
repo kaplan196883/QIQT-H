@@ -14564,4 +14564,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledField_prod_hasDerivAt
 #print axioms QIQTH.ExpMap.doubledField_equilibrium
 
+-- J4-42 (GenericJacobiExists.lean): the identified HARD residual (J1) for the doubled-family supply
+-- — GENERIC [0,1] linear-ODE (Jacobi-field) EXISTENCE over an ARBITRARY continuous base curve, the
+-- piece the expTube-welded expJet…Fund solvers did not provide. linODE_exists_on_Icc: for any
+-- ContinuousOn A [0,1] + seed w₀, ∃ J, J 0 = w₀ ∧ ∀τ∈[0,1] HasDerivWithinAt J (A τ (J τ)) [0,1] τ —
+-- PROVED via ‖A‖ bounded on compact ⟹ N>2·sup‖A‖ nodes ⟹ prefix-induction gluing of single-subinterval
+-- Picard–Lindelöf solutions (Mathlib IsPicardLindelof.exists_eq_forall_mem_Icc_hasDerivWithinAt₀;
+-- single-[0,1] impossible once Lipschitz≥1 per its mul_max_le field — GPT-5.5 confirmed, concatenation
+-- mandatory). Two-sided upgrade linODE_exists_hasDerivAt_Icc (closed [0,1], seed at 0, forward⊕backward
+-- glued) + geodesic specializations geodesicJacobi_exists_{on_Icc,hasDerivAt_Ioo,hasDerivAt_Icc}
+-- (A τ = fderiv (geodesicField g gi)(Ybase τ), continuity DERIVED from contDiff_geodesicField). Hyps =
+-- ONLY continuity of A/Ybase + seed; conclusion is ∃ J (genuine, non-vacuous existence), nothing
+-- smuggled. std-3.
+-- ⚠ (J) NOT self-contained — (J1) closes the hard ODE-existence residual; the remaining (J2) doubled-
+-- family ASSEMBLY (pair J with confined geodesic phase-flow P via doubledField_prod_hasDerivAt ⟹ Y;
+-- product-ball confinement S bounded-s via doubledField_prod_mem_prod ⟹ hmem/hIC; hlink via
+-- flowVelocity_endpoint_position_hasFDerivAt_exists; Zf/base data) ⟹ feed reformulated bridge ⟹ (J).
+-- [AF] std-3.
+#print axioms QIQTH.ExpMap.linODE_exists_on_Icc
+#print axioms QIQTH.ExpMap.geodesicJacobi_exists_hasDerivAt_Icc
+
 end QIQTH.AxiomAudit
