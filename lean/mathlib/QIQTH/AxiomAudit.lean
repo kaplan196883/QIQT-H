@@ -14342,4 +14342,10 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-13 = hunif: lift uncond3's per-(p,t) hEboundW to the capstone's per-base-point uniform-in-q/all-τ hunif via hEboundW_of_uniform_perBasePoint (RecenterReduction:86) + E-IDENTIFICATION (capstone E τ p q = q-centered pullback cutoff residual under Vmap q p=exp_q⁻¹(p)); sub-point = uniform-small-ρ₀ for q near p. NOT a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW_uncond3
 
+-- (TWO-POINT PHASE Brick C1 / J4-14: construct Vmap = exp_p⁻¹ (the local inverse exponential, previously an unbuilt abstract capstone param)) ★ — ExpMapLocalInverse.lean (ns QIQTH.ExpMap):
+-- expLocalInverse (=IFT local inverse of expMap g gi hC p via hasStrictFDerivAt_expMap_refl.localInverse) + expLocalInverse_expMap_eventually (left inv ∀ᶠ 𝓝 0) + expMap_expLocalInverse_eventually (right inv ∀ᶠ 𝓝 p) + expLocalInverse_apply_basepoint (=0 at p) + hasStrictFDerivAt_expLocalInverse (deriv=id at p, the near-isometry fact for hcoord/H1). DERIVED via genuine Mathlib IFT (HasStrictFDerivAt.localInverse/to_localInverse); Classical.choice inherent to IFT = std-3.
+-- ⚠ Vmap q p := expLocalInverse q p now concrete (was a free capstone param). NEXT: Brick C2 E-identification (E τ p q via q-centered cutoff residual ∘ Vmap) + H2 gaussian-comparison; Brick A uniform-in-q packet remains the bottleneck (this is per-p only, ∀ᶠ). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expLocalInverse
+#print axioms QIQTH.ExpMap.hasStrictFDerivAt_expLocalInverse
+
 end QIQTH.AxiomAudit
