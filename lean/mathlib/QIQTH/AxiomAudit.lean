@@ -14390,4 +14390,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_second_jet_bddOn_uniform_of_joint_cont
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_joint_cont
 
+-- ((J)-tower sub-brick J-a / J4-22: uniform christoffel 2-jet bound on compact — the one cheap coefficient prerequisite) ★ — Christoffel2Jet.lean (ns QIQTH.ExpMap):
+-- christoffel_fderiv2_bddOn_compact : ∃Kb≥0, ∀y∈K, ∀abc, ‖fderiv(fderiv(christoffel …)) y‖≤Kb — DERIVED via ContDiff.fderiv_right (Γ C^∞ ⟹ fderiv Γ C^∞ ⟹ nested 2nd jet continuous) + IsCompact.exists_bound_of_continuousOn. Mirror christoffel_fderiv_bddOn_compact one order up. std-3.
+-- ⚠ (J)-TOWER VERDICT (J4-22): closing (J) [joint 2nd-order smooth-dependence of exp on IC] is a LARGE NEW development, NOT an assembly. CORE gap = BASE-POINT (starting-point q) smooth-dependence of the geodesic flow through the opaque per-q expTube — absent from repo (GeodesicSmoothDep is 1st-order VELOCITY-variation only; jacobiVariation_secondOrder is velocity too) AND Mathlib (PL flow is Lipschitz-in-IC only). Decomposition: J-a ✅ (this) → J-b base-point 1st-order variation [LARGE] → J-c base-point 2nd-order [LARGE, deepest] → J-d joint-continuity assembly ⟹ hjoint. Comparable to the whole GeodesicSmoothDep build, one order up + position slot = MANY sessions. Grinding per feedback_close_all_gaps. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.christoffel_fderiv2_bddOn_compact
+
 end QIQTH.AxiomAudit

@@ -225,6 +225,7 @@ import QIQTH.UniformExpJacobian
 import QIQTH.UniformExpSecondJet
 import QIQTH.UniformFlowBridge
 import QIQTH.UniformSecondJetCompact
+import QIQTH.Christoffel2Jet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
