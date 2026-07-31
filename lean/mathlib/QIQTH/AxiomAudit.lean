@@ -14318,4 +14318,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_expPullback_hEboundW_uncond2
 #print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_continuousOn_of_isUnit
 
+-- (JET-4 TOWER J4-9: g̃ nondegenerate on a DEFINITE sub-ball around 0 — via openness of units, unblocked by exp∈C⁴) ★ — PullbackMetricNondegNearZero.lean (ns QIQTH.HeatResidualBound):
+-- expPullbackMetric_isUnit_near_zero : ∃ ρ₀>0, ∀ ‖x‖<ρ₀, IsUnit (matToCLM (g̃ x)) — DERIVED via Units.isOpen (Mathlib) + x↦matToCLM(g̃ x) ContinuousAt 0 (contDiffAt2_expPullbackMetric_zero) + matToCLM(g̃ 0) unit (metricCLMUnit0). No fderiv/IFT.
+-- + expPullbackMetricInv_continuousOn_ball : ∃ ρ₀>0, ContinuousOn (g̃⁻¹ ·μα) (ball 0 ρ₀) (ρ₀=min ρU expRho; feeds expPullbackMetricInv_continuousOn_of_isUnit). The hgi_cont-on-small-annuli producer. std-3.
+-- ⚠ HONEST LIMIT: ρ₀ from openness is NON-EXPLICIT/generally < expRho ⟹ discharges hgi_cont/hchris_cont ONLY for annuli ⊆ ball ρ₀, NOT the ∀-a-b hypothesis (annuli up to expRho where conjugate points may degenerate g̃). Full-ball nondeg = the genuine NO-CONJUGATE-POINTS wall (D exp invertible up to expRho, Jacobi/first-conjugate estimate absent from Mathlib). NEXT design choice: (1) cap cutoff support b≤ρ₀ [tractable, may disturb Gaussian residue] or (2) no-conjugate-points [research-grade] or pivot to hEmeas/hcoord/hHdiag/hE/convergence trio. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.HeatResidualBound.expPullbackMetric_isUnit_near_zero
+#print axioms QIQTH.HeatResidualBound.expPullbackMetricInv_continuousOn_ball
+
 end QIQTH.AxiomAudit
