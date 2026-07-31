@@ -14507,4 +14507,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledField_secondFactor_endpoint_eq
 #print axioms QIQTH.ExpMap.clm_fderiv_value_of_directional
 
+-- J4-38 (JacobiUniformSupply.lean): supply ingredient (S3) for the (J) capstone's hid — the jet-map
+-- differentiability hdiff, DERIVED. expMap_jetMap_differentiableAt: DifferentiableAt (fun w=>fderiv
+-- (expMap q) w) v from expMap_contDiffOn_four (exp_q∈C⁴) via ContDiffAt.fderiv_right (1+1≤4) →
+-- .differentiableAt. expMap_jetMap_differentiableAt_uniform: the same ∀q∈K ∀v∈closedBall 0 r with
+-- r<expRho q (closedBall_subset_ball) = exactly the hdiff binder hid_of_doubled_data consumes.
+-- Carried inputs ONLY hC (+hr_lt/compact K for the uniform form) — genuine geometric/compactness
+-- data, no regularity smuggling; conclusion is DifferentiableAt not the (J)-conclusion. std-3.
+-- ⚠ (J) STILL NOT discharged — (S3) DONE, reduced to the entangled (S1)+(S2) SUPPLY construction:
+-- (S1) assemble the doubled families Y/Vf = geodesic⊗Jacobi flow as ONE doubledField integral curve
+-- through the perturbed IC, confined in a compact convex tube (raw ρ,C₀ from geodesic_apriori_
+-- confinement_uniform) uniformly over K + (S2) hlink first-jet value id (flowVelocity_endpoint_
+-- position_hasFDerivAt_exists, rides on S1) ⟹ ∀q∈K hid via hid_of_doubled_data ⟹ feed
+-- expMap_common_nondeg_radius_of_velocity_ode_data ⟹ (J). [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_jetMap_differentiableAt
+#print axioms QIQTH.ExpMap.expMap_jetMap_differentiableAt_uniform
+
 end QIQTH.AxiomAudit
