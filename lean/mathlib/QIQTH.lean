@@ -256,6 +256,7 @@ import QIQTH.SecondVariationSourceLip
 import QIQTH.CommonNondegRadius
 import QIQTH.UniformFlowTransfer
 import QIQTH.UniformFlowNondeg
+import QIQTH.UniformFlowFDeriv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

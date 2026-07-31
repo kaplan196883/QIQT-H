@@ -14763,4 +14763,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowRadius_pos
 #print axioms QIQTH.ExpMap.expMap_eq_uniformFlowExp_on_overlap
 
+-- J4-55 (UniformFlowFDeriv.lean): (K2) HasFDerivAt of the uniform-flow exp map in the IC, expRho-FREE.
+-- uniformFlowExp_hasFDerivAt: for hC + IsCompact K + q∈K + ‖w‖<ρ_K, ∃L, HasFDerivAt (uniformFlowExp q)
+-- L w (L = velocity Jacobi endpoint operator along the uniform tube). Mathlib PL gives only Lipschitz-
+-- in-IC, so this is a GENUINE variational proof: a σ-windowed mirror flowVelocity_endpoint_hasFDerivAt_
+-- window{,_exists} of the velocity-slot first-jet core (perturbed-tube hyps restricted ‖δ‖≤σ, little-o
+-- nbhd shrunk into min σ (c/(Ctot+1)); Jacobi field along the FIXED base tube via geodesicJacobi_narrow
+-- pad ⟹ globally-defined + linear-in-seed ⟹ genuine CLM via jacobiSol_unique + finite-dim), REUSING
+-- geodesic_twopoint_gronwall / geodesicField_uniform_C2_remainder / geodesicVariation_residual_bound
+-- one level down. Perturbed tubes δ↦uniformFlowTube q (w+δ) on ‖δ‖≤ρ_K−‖w‖, recentred by translation.
+-- Hyps ONLY hC+IsCompact K+q∈K+‖w‖<ρ_K; NO expRho; conclusion ∃L HasFDerivAt not a hyp. std-3.
+-- ⚠ (J)-for-F NOT yet closed — K2 (HasFDerivAt) done; K3 = Neumann/IsUnit (‖L−id‖<1 uniform over q∈K,
+-- small w ⟹ IsUnit L, fderiv=L via HasFDerivAt.fderiv) ⟹ ∃ρ₀>0 ∀q∈K ∀v ‖v‖<ρ₀→IsUnit(fderiv(uniform
+-- FlowExp q) v) = (J)-for-F. J4-56 = K3. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_hasFDerivAt
+#print axioms QIQTH.ExpMap.flowVelocity_endpoint_hasFDerivAt_window_exists
+
 end QIQTH.AxiomAudit
