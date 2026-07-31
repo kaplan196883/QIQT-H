@@ -234,6 +234,7 @@ import QIQTH.BasepointJacobi2
 import QIQTH.BasepointSecondJetFDeriv
 import QIQTH.BasepointJetModulus
 import QIQTH.BasepointJetLipschitz
+import QIQTH.FlowVelocitySecondJet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

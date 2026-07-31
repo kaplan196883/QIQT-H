@@ -14442,4 +14442,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.fderiv2_expMap_eq_uniform_flow_on_overlap
 #print axioms QIQTH.ExpMap.fderiv2_eqOn_of_fderiv_eqOn_isOpen
 
+-- ((J)-tower / J4-31: hFoplip DISCHARGED — (J) reduced to ONE input, the 2nd-order velocity Jacobi field Z + its identification hid) ★★★ — FlowVelocitySecondJet.lean (ns QIQTH.ExpMap):
+-- opNorm_sub_le_of_bilinear_bound (‖A a b − B a b‖≤c‖a‖‖b‖ ⟹ ‖A−B‖≤c, 2× opNorm_le_bound) + flowVelocity_secondJet_endpoint_twopoint_bound (inhomog 2nd-order velocity two-point ODE endpoint bound, from linODE_twopoint_diff_bound) + flowVelocity_secondJet_op_lipschitz_of_jet_data (hFoplip DERIVED from hid + hbnd) + expMap_second_jet_hunif_of_velocity_jet_data (⟹ hunif via the weld) + expMap_common_nondeg_radius_of_velocity_jet_data (the (J) payload: ∃ρ₀ common exp-nondeg over K from hK/hr/(I1) hr_lt/weld hweld/jet data hid+hbnd). All DERIVED; hFoplip/hunif NOT smuggled, no hyp=conclusion. std-3.
+-- ★★★ (J) REDUCED to ONE genuine input: Z (2nd-order velocity Jacobi jet field) + hid (fderiv²(F_q)v(a,b)=Z q v a b 1) — the velocity-slot 2nd-derivative variational identification (honest analogue of the 1st-order geodesicBasepoint_endpoint_hasFDerivAt, which is FULLY BUILT). hbnd reduces to Z's inhomog linearized-geodesic ODE via the landed engines + BoundedGeometry. Everything downstream of Z+hid is DERIVED. NEXT = construct Z + prove hid (mirrors BasepointFDeriv in velocity slot, direction-swap; jacobiVariation_secondOrder exists). Then downstream: uniform pullback jets → uniform B → hunif(q∈K) capstone → LOCALIZE → hDuhamel → trueKernel_diagonal_a1_eq_R6_residual. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_velocity_jet_data
+#print axioms QIQTH.ExpMap.flowVelocity_secondJet_op_lipschitz_of_jet_data
+
 end QIQTH.AxiomAudit
