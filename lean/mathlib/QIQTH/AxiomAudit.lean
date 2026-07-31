@@ -14430,4 +14430,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_secondOrder_taylor
 #print axioms QIQTH.ExpMap.geodesicBasepoint_endpoint_position_secondOrder_taylor
 
+-- ((J)-tower bricks 1-3 / J4-29: q-modulus of the velocity 2-jet — hunif reduced to a single operator q-Lipschitz input) ★★ — BasepointJetModulus.lean (ns QIQTH.ExpMap):
+-- linODE_twopoint_diff_bound (GENUINELY-NEW two-point q-Grönwall engine, geometry-free: two solutions of Xᵢ'=AᵢXᵢ+bᵢ same seed ⟹ ‖X₁t−X₂t‖≤(Dcoef·Xb+Dsrc)·exp K from ‖A₁‖≤K/‖A₁−A₂‖≤Dcoef/‖X₂‖≤Xb/‖b₁−b₂‖≤Dsrc, via norm_le_gronwallBound_of_norm_deriv_right_le; covers homogeneous Jacobi + inhomogeneous 2nd-order jet) + jacobi_twopoint_diff_bound (geodesic specialization, two-point analogue of jacobiSol_unique) + hunif_of_lipschitz (Lipschitz-uniform-in-fibre ⟹ ∀ε∃δ modulus) + expMap_second_jet_hunif_of_op_lipschitz (ROUTE-P CAPSTONE: operator q-Lipschitz hoplip ⟹ hunif, via reverse-triangle) + _joint_cont_of_op_lipschitz + _common_nondeg_radius_of_op_lipschitz (chained). All DERIVED; carried = genuine ODE/geometric inputs + hoplip (operator-diff, strictly stronger than hunif's norm-diff — honest reduction, NOT restatement). std-3.
+-- ★ hunif REDUCED to hoplip = ‖fderiv²(exp_q)v − fderiv²(exp_{q'})v‖≤Λ·dist(q,q') (uniform v∈B̄, q,q'∈K). Remaining to close hoplip⟹(J): (1) velocity 2nd-order jet ODE (identify fderiv²(exp_q)v as inhomog linear field, curvature source; linODE_twopoint_diff_bound is the ready engine) (2) concrete-expMap 2nd-order WELD via UniformFlowBridge (D²exp=D²F on overlap) (3) uniform-K constants (Dcoef=M₂·dist·e^{K₀} via BoundedGeometry). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.linODE_twopoint_diff_bound
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_op_lipschitz
+
 end QIQTH.AxiomAudit
