@@ -259,6 +259,7 @@ import QIQTH.UniformFlowNondeg
 import QIQTH.UniformFlowFDeriv
 import QIQTH.UniformFlowNondegClose
 import QIQTH.PullbackNondegFromFDeriv
+import QIQTH.UniformRadiusCert
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

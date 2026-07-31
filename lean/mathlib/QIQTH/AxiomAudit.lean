@@ -14812,4 +14812,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.expPullbackMetric_isUnit_of_fderiv_isUnit
 #print axioms QIQTH.PullbackMetric.isUnit_matToCLM_iff
 
+-- J4-60 (UniformRadiusCert.lean): Brick-A(β) ENTRY POINT — the uniform-radius CERTIFICATE that replaces
+-- the unprovable hr_lt (∀q∈K r<expRho q) interface. structure UniformConfinedTubeOn g gi hC hK r (Prop):
+-- hr(0<r) + hconf(∀q∈K ∀‖v‖≤r: uniformFlowTube through (q,v) = confined geodesic integral curve, exact
+-- geodesic_apriori_confinement_uniform shape) + hnondeg(∀q∈K ∀‖v‖<r: IsUnit(fderiv(uniformFlowExp q) v)).
+-- uniformConfinedTubeOn_exists: hC+IsCompact K ⟹ ∃r>0 UniformConfinedTubeOn — UNCONDITIONAL, genuine
+-- positive r=min(uniformFlowRadius, ρ₀); hconf PROVED from uniformFlowTube_spec (J4-17), hnondeg PROVED
+-- from uniformFlowExp_common_nondeg_radius (J4-56). ★ THE (J)-for-F milestone IS the certificate's
+-- nondeg field — the (J)/(h3a) tower is load-bearing, not orphaned. Cert INHABITED (constructor genuinely
+-- builds it), NO expRho, no vacuous field. UniformConfinedTubeOn.fderiv_isUnit corollary. Firewalled as
+-- FUTURE fields (not smuggled): pullback-metric nondeg (needs uniformFlowExp pullback + J4-58-analogue
+-- hinge) + C³ pullback reg (needs uniform C⁴). std-3.
+-- ⚠ a₁=R/6 still gated on the rest of Brick-A (uniformFlowExp pullback+hinge, uniform C³ reg, uniform
+-- sup-bounds → single B → hunif; + hcoord) + hDuhamel. J4-61 = uniformFlowExp pullback+hinge. [AF]
+#print axioms QIQTH.ExpMap.uniformConfinedTubeOn_exists
+
 end QIQTH.AxiomAudit
