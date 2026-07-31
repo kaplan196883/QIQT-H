@@ -14384,4 +14384,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.fderiv_expMap_eq_uniform_flow_on_overlap
 #print axioms QIQTH.ExpMap.expMap_eq_flow_endpoint
 
+-- (TWO-POINT PHASE / J4-21: reduce the uniform 2nd-jet bound (I2) to ONE clean joint-continuity input — the honest reduction endpoint) ★ — UniformSecondJetCompact.lean (ns QIQTH.ExpMap):
+-- expMap_second_jet_bddOn_uniform_of_joint_cont : given hjoint = ContinuousOn (fun p => ‖fderiv²(exp_{p.1}) p.2‖) (K ×ˢ closedBall 0 r) [joint 2nd-jet operator-norm continuity — a STRICTLY-WEAKER qualitative input, stated as NORM-continuity to dodge the CLM topology diamond], DERIVES ∃M, ∀q∈K ∀‖x‖<r, ‖fderiv²(exp_q) x‖≤M (=J4-19's (I2)) via IsCompact.exists_bound_of_continuousOn on the compact product. + expMap_common_nondeg_radius_of_joint_cont (chains into J4-19 ⟹ common ρ₀ over K conditional ONLY on (I1) hrad + (J) hjoint). std-3, non-tautological (hjoint ≠ conclusion).
+-- ★★ HONEST ENDPOINT: the compact-uniform a₁=R/6 exp-jet package is now REDUCED to TWO clean minimal inputs: (I1) uniform injectivity radius r≤expRho q over K, and (J) joint 2nd-order smooth-dependence-on-IC continuity. BOTH are genuine Mathlib gaps (higher-order smooth-dependence of an ODE flow on IC; the repo's GeodesicSmoothDep is 1st-order only; Mathlib IsPicardLindelof gives only Lipschitz-in-IC). Closing (J)/(I1) = a MULTI-SESSION 2nd-variational-equation development, NOT an incremental brick. ⟹ CHECKPOINT: commissioned target (exp∈C⁴/hfd3) DONE unconditional; remaining local a₁=R/6 reduced to (I1)+(J) = a genuine multi-session smooth-dependence campaign + hDuhamel + localized assembly. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_second_jet_bddOn_uniform_of_joint_cont
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_joint_cont
+
 end QIQTH.AxiomAudit
