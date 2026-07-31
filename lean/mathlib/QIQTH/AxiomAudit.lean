@@ -14472,4 +14472,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AutonomousDep.autonomousField_variation_exists_uncond
 #print axioms QIQTH.AutonomousDep.autonomousField_variation_exists
 
+-- J4-36 (JacobiOperatorBaseDeriv.lean): the (h3a) CORE, the abstract engine specialized to the
+-- DOUBLED tangent field G(P,W)=(geodesicField P, D(geodesicField)(P)·W) on E=State×State.
+-- doubledField + contDiff_doubledField (C^∞ from hC via ContDiff.prodMk/clm_apply +
+-- contDiff_fderiv_geodesicField) + doubledField_fderiv{,2}_bddOn_compact (‖DG‖,‖D²G‖ bounded on
+-- compact, discharging the engine's hbound2/hLip/hKb from hC) ⟹ doubledField_variation_exists_uncond:
+-- HasDerivAt (fun s=>Y s t)(V t) 0 for the doubled geodesic/Jacobi flow, per-direction base-IC
+-- smooth dependence = the analytic content of (h3a). Hyps are ONLY genuine base data (hC, compact+
+-- convex S, ODE hYode/hVode, hV0, linear IC hIC, tube hmem); conclusion NOT a hyp; V is a supplied
+-- linearized-ODE solution (engine's non-circular design). DERIVED via specialization. std-3.
+-- ⚠ (J) NOT discharged — reduced to residual (c) CLM-upgrade/projection of the scalar HasDerivAt to
+-- the operator-valued HasFDerivAt (fun w=>fderiv(Fam q) w) B v + (d) identify B=(Zf …).1 via
+-- secondVariation_endpoint_unique ⟹ hid_of_firstJet_hasFDerivAt ⟹ hid ⟹ (J). [AF] std-3.
+#print axioms QIQTH.ExpMap.doubledField_variation_exists_uncond
+#print axioms QIQTH.ExpMap.contDiff_doubledField
+
 end QIQTH.AxiomAudit

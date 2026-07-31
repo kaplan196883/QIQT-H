@@ -239,6 +239,7 @@ import QIQTH.FlowVelocityJacobiField
 import QIQTH.VelocitySecondJetId
 import QIQTH.VelocityJacobiBaseDep
 import QIQTH.AutonomousSmoothDep
+import QIQTH.JacobiOperatorBaseDeriv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
