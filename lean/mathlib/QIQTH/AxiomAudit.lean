@@ -14797,4 +14797,19 @@ namespace QIQTH.AxiomAudit
 -- recenter capstone → convergence. [AF] std-3.
 #print axioms QIQTH.ExpMap.uniformFlowExp_common_nondeg_radius
 
+-- J4-58 (PullbackNondegFromFDeriv.lean, ns QIQTH.PullbackMetric): the fderiv→pullback-metric nondeg
+-- HINGE. expPullbackMetric_isUnit_of_fderiv_isUnit: IsUnit(fderiv(expMap g gi hC p) v) + hg IsUnit(mat
+-- ToCLM(g(exp_p v))) ⟹ IsUnit(matToCLM(expPullbackMetric g gi hC p v)). The pullback metric IS literally
+-- the congruence g̃_{ij}=g(exp)_{ab}(D exp·e_i)_a(D exp·e_j)_b = Jᵀ(g∘exp)J (PullbackMetric:43-48), so:
+-- H1 congruence identification (simp+sum_comm+ring, inline convert) + H2 isUnit_matToCLM_iff (matToCLM
+-- A unit ↔ A unit, via Matrix.toLinAlgEquiv' ∘ Module.End.toContinuousLinearMap) + matToCLM_jacMat
+-- (matToCLM(jacMat J)=J standard-basis round-trip) + H3 isUnit_matToCLM_congr (Jᵀ unit via
+-- Matrix.isUnit_iff_isUnit_det + det_transpose, then IsUnit.mul²). hg carried as GENUINE geometry (base
+-- metric nondeg at exp_p v), NOT the conclusion; conclusion derived from hJ∧hg. Matches the flagged stub
+-- shape (RecenterAnnulusUncond:44-46, = expPullbackMetric_isUnit_near_zero output). std-3.
+-- ⚠ Connects the fderiv-nondeg (J)/(h3a) work to the pullback IsUnit the residual chain consumes; but
+-- a₁=R/6 still gated on the LARGE Brick-A uniform packet + hDuhamel (2 jet-4-tower-sized grinds). [AF]
+#print axioms QIQTH.PullbackMetric.expPullbackMetric_isUnit_of_fderiv_isUnit
+#print axioms QIQTH.PullbackMetric.isUnit_matToCLM_iff
+
 end QIQTH.AxiomAudit
