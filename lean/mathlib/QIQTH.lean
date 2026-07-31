@@ -210,6 +210,7 @@ import QIQTH.ExpJet3SecondVarResidual
 import QIQTH.ExpJet4RemainderUnif
 import QIQTH.ExpMapFDeriv3
 import QIQTH.ExpMapContDiffFour
+import QIQTH.PullbackMetricC3Uncond
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

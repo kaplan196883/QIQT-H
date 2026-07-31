@@ -14296,4 +14296,11 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-6: feed this into contDiffOn_expPullbackMetric_three (R3c-1) to discharge its hfd3 ⟹ g̃∈C³ UNCONDITIONAL ⟹ recenter capstone trueKernel_diagonal_a1_recenter sheds hfd3. Then remaining a₁=R/6 conditions = convergence trio (hDuhamel/hCorrHigher) + geometric wiring (hunif/hcoord/hEmeas). NOT a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_four
 
+-- (JET-4 TOWER J4-6a: propagate exp∈C⁴ ⟹ hfd3 DISCHARGED ⟹ g̃∈C³ UNCONDITIONAL) ★★ — PullbackMetricC3Uncond.lean:
+-- expMap_fderiv3_contDiffOn_one : ContDiffOn ℝ 1 (fderiv³ exp_p) (ball 0 expRho) — the hfd3 obligation, now UNCONDITIONAL (hyps ONLY g,gi,hC,p). Derived by iterating ContDiffOn.fderiv_of_isOpen 3× off expMap_contDiffOn_four (C⁴⟹C³⟹C²⟹C¹). Matches PullbackMetricC3:87 hfd3 byte-for-byte.
+-- + contDiffOn_expPullbackMetric_three_uncond : ContDiffOn ℝ 3 (expPullbackMetric g gi hC p · i j) (ball …) — g̃∈C³ UNCONDITIONAL (hyps g,gi,hC,p,hg,i,j; NO hfd3). Proof = contDiffOn_expPullbackMetric_three fed by expMap_fderiv3_contDiffOn_one. std-3.
+-- ⚠ NEXT J4-7: feed expMap_fderiv3_contDiffOn_one into the hfd3-carrying RNC-residual chain #2→#5 (christoffel_expPullback_contDiffAt_two RecenterConnectC3b:68 → hw0_expPullback RecenterConnectC3c:131 → near_uncutResidual_expPullback_clean RecenterConnectC3c:219 → cutoffResidual_expPullback_hEboundW RecenterCutoffC3:97) to make the concrete cutoff-residual→hEboundW→hunif wiring unconditional. The 4 RNC jet-value facts (hg0/hΓ/hdg0/htr) need only g̃∈C² — already unconditional. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_fderiv3_contDiffOn_one
+#print axioms QIQTH.ExpMap.contDiffOn_expPullbackMetric_three_uncond
+
 end QIQTH.AxiomAudit
