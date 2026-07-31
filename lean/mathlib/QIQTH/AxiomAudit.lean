@@ -14597,6 +14597,11 @@ namespace QIQTH.AxiomAudit
 -- design consult): hid is BILINEAR in (a,b) (D²Fam and Zf both bilinear), so restrict supply to bounded
 -- ‖a‖,‖b‖≤1 + EXTEND hid to all a,b by bilinearity — OR make S depend on a,b. J4-44 = the correct
 -- hid-supply reformulation + construction. [AF] std-3.
+-- ✅ RESOLVED by J4-44: GPT-5.5 (C) — pure quantifier-order artifact. hid_of_doubled_data + the CLOSE
+-- bridge expMap_common_nondeg_radius_of_doubled_supply now take σ : q v a b → ℝ (hσ : ∀ q v a b, 0<…)
+-- and S : q v a b → Set (per-(a,b) window + compact set), introduced AFTER the ∀ a b binder ⟹ supply
+-- SATISFIABLE (S q v a b = closed ball radius ~C(1+‖a‖)(1+‖b‖), σ small so v+s·a in-domain); NO bilinear
+-- extension. Same names + conclusions; 2 files; both std-3; downstream green; no external consumer.
 #print axioms QIQTH.ExpMap.confined_doubled_family_exists
 
 end QIQTH.AxiomAudit
