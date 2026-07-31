@@ -14747,4 +14747,20 @@ namespace QIQTH.AxiomAudit
 -- against F, close (J)-for-F via compact_nondeg_of_uniform_flow_eqOn with hEq:=EqOn.refl. [AF] std-3.
 #print axioms QIQTH.ExpMap.compact_nondeg_of_uniform_flow_eqOn
 
+-- J4-54 (UniformFlowNondeg.lean): (K1) the UNIFORM-flow exp-map infrastructure, hoisting F to a named
+-- def with genuine uniform-over-K provenance (NO opaque per-q selector). uniformFlowRadius/uniformFlow
+-- Const (single ρ_K,C₀ over compact K from geodesic_apriori_confinement_uniform) + uniformFlow_family/
+-- uniformFlow_tube_exists + uniformFlowTube (Skolemized tube) + uniformFlowExp q w := (uniformFlowTube
+-- q w 1).1 = the uniform-flow geodesic endpoint (= "the exp map" carrying uniform provenance) +
+-- uniformFlowTube_spec{,_ic,_ode,_conf} (IC (q,w) / geodesic ODE on (-2,2) / C₀‖w‖-confinement for
+-- ‖w‖≤ρ_K) + expMap_eq_uniformFlowExp_on_overlap (expMap q = uniformFlowExp q on ball 0 min(expRho q,
+-- ρ_K), via expMap_eq_flow_endpoint + ODE-uniqueness). std-3. This replaces the opaque expRho with the
+-- uniform ρ_K for the compact-uniform nondeg gate.
+-- ⚠ (J)-for-F NOT yet closed — K1 (infrastructure) done; K2 (F-endpoint identity = doubled Jacobi
+-- endpoint .2.1 = fderiv(uniformFlowExp q)(v+s·a) b for ‖v+s·a‖<ρ_K, mirror doubled_endpoint_eq_expMap
+-- _fderiv J4-48 for F) + K3 (F-bridge ⟹ ∃ρ₀>0 ∀q∈K IsUnit(fderiv(uniformFlowExp q) v), hyps hC+IsCompact
+-- K, no expRho/hr_lt) REMAIN. J4-55 = K2+K3. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowRadius_pos
+#print axioms QIQTH.ExpMap.expMap_eq_uniformFlowExp_on_overlap
+
 end QIQTH.AxiomAudit
