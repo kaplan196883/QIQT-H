@@ -14353,4 +14353,11 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT H1 hcoord fix = instantiate c=1−ε, w=p−q, u=Vmap q p with the near-isometry from hasStrictFDerivAt_expLocalInverse (deriv=id at p); UNIFORM-in-q version needs Brick A (the bottleneck). NOT a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.HeatResidualBound.gaussDdim_le_of_norm_ge
 
+-- (TWO-POINT PHASE Brick A1 / J4-16: uniform-over-compact ambient bounds — the easy prerequisite of the bounded-geometry bottleneck) ★ — BoundedGeometry.lean (ns QIQTH.ExpMap):
+-- christoffel_bddOn_compact + christoffel_fderiv_bddOn_compact + geodesicField_bddOn_compact + geodesicField_fderiv_bddOn_compact — ∃Kb≥0, ∀y∈K (compact), |christoffel|/‖∂christoffel‖/‖geodesicField‖/‖∂geodesicField‖ ≤ Kb. DERIVED via IsCompact.exists_bound_of_continuousOn (christoffel/geodesicField ContDiff⟹continuous⟹bounded on compact). std-3. #4 = uniform Lipschitz modulus for the geodesic field (feeds A2).
+-- ★ Part-B A2 SCOPE: geodesic_apriori_confinement's ρ/C₀ are OPAQUE (point-local Picard-Lindelöf at (p,0), NOT explicit-in-christoffel); A2 = geodesic_apriori_confinement_uniform is a RE-DERIVATION whose one non-mechanical step = a COMPACT-UNIFORM Picard-Lindelöf existence lemma (uniform Lipschitz #4 + field bound #3 on compact convex thickening S ⟹ IsPicardLindelof uniform-time), then geodesic_apriori_bound Grönwall ⟹ q-independent C₀. expRho/expConst get NO uniform bound (opaque .choose) ⟹ A2 BYPASSES them with a fresh uniform radius (downstream re-pinning to the uniform tube = follow-on wiring). Brick A = large sub-program (uniform analogues of exp→pullback→residual stack).
+-- ⚠ NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_bddOn_compact
+#print axioms QIQTH.ExpMap.christoffel_bddOn_compact
+
 end QIQTH.AxiomAudit
