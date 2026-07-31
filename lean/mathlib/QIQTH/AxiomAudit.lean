@@ -14635,4 +14635,20 @@ namespace QIQTH.AxiomAudit
 -- h0cap/hKbcap/hAd/hXb/hSd). J4-47 = Vf. [AF] std-3.
 #print axioms QIQTH.ExpMap.sPerturbed_confined_doubled_family_confined_exists
 
+-- J4-47 (DoubledVariationField.lean): (D1)+(D2)+(D3) discharge the bridge's Vf/hVode/hV0. D1
+-- linODE_exists_narrowpad_continuousOn: extracts padded ContinuousOn J [-1/2,3/2] from the narrow-pad
+-- glue witness (the piece linODE_exists_hasDerivAt_Icc_narrow dropped) + geodesicJacobi_narrowpad_
+-- continuousOn (geodesic specialization). D2 doubledVariation_narrowpad_hasDerivAt_Icc: Vf as a GENUINE
+-- linODE solution with generator fderiv(doubledField)(Ybase₀ τ) (continuous via contDiff_doubledField)
+-- + seed ((0,a),(0,0)) ⟹ ∃V, hV0 ∧ hVode (engine outputs, not vacuous). D3 confined_doubled_family_
+-- with_variation_exists: the (S1)+Vf package (hC + IsCompact K ⟹ σ/Y/Vf/S with hV0/hVode/hYode/hIC/
+-- hScompact/hSconvex/hmem, Y…0 padded-continuous so Vf's base is continuous). Vf ∃-produced by linODE
+-- engine — non-vacuous. std-3.
+-- ⚠ (J) NOT self-contained. Bridge supply discharged: σ/hYode/hIC/hScompact/hSconvex/hmem/Vf/hVode/hV0.
+-- CARRIED: hlink (first-jet endpoint id: weld Y's Jacobi factor to expMap-as-flow-endpoint via
+-- flowVelocity_endpoint_position_hasFDerivAt_exists + linODE uniqueness) + 2nd-var block (Zf/Src/hZf/
+-- h0d/hKbd/hZ/h0cap/hKbcap/hAd/hXb/hSd). J4-48 = hlink. [AF] std-3.
+#print axioms QIQTH.ExpMap.confined_doubled_family_with_variation_exists
+#print axioms QIQTH.ExpMap.doubledVariation_narrowpad_hasDerivAt_Icc
+
 end QIQTH.AxiomAudit
