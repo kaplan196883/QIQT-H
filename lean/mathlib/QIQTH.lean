@@ -229,6 +229,7 @@ import QIQTH.Christoffel2Jet
 import QIQTH.BasepointSmoothDep
 import QIQTH.BasepointFDeriv
 import QIQTH.DecayOrderThree
+import QIQTH.BasepointSecondJet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
