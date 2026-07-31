@@ -223,6 +223,7 @@ import QIQTH.BoundedGeometry
 import QIQTH.BoundedGeometryConfine
 import QIQTH.UniformExpJacobian
 import QIQTH.UniformExpSecondJet
+import QIQTH.UniformFlowBridge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

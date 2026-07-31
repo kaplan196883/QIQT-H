@@ -14378,4 +14378,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_uniform_inputs
 #print axioms QIQTH.ExpMap.expMap_secondJet_differentiableAt
 
+-- (TWO-POINT PHASE / J4-20: ODE-uniqueness BRIDGE expMap = uniform-flow endpoint on the overlap — bypasses the opaque per-q .choose radii) ★★ — UniformFlowBridge.lean (ns QIQTH.ExpMap):
+-- expMap_eq_flow_endpoint (expMap q v = (Y 1).1 for any confined geodesic-ODE flow Y with IC (q,v), ‖v‖≤expRho q; via ODE_solution_unique_of_mem_Icc_right — expTube and Y coincide on [0,1]) + expMap_eq_uniform_flow_on_overlap (packaged over compact K with the SINGLE uniform ρ from geodesic_apriori_confinement_uniform) + fderiv_expMap_eq_uniform_flow_on_overlap (F=uniform-flow endpoint skolemized; expMap=F on the open overlap ball ⟹ Filter.EventuallyEq.fderiv_eq ⟹ fderiv expMap = fderiv F there, F carrying single-(ρ,C₀)-over-K provenance). All DERIVED, no firewall. std-3.
+-- ★ F (uniform-flow endpoint) is a concrete UNIFORMLY-controlled stand-in for expMap on the overlap, NOT welded to opaque expTube/expRho/expConst ⟹ uniform Jacobian/2-jet bounds proved for F transfer to expMap's fderiv on ‖v‖<min(expRho q)ρ. ARCHITECTURE: the clean move is to RE-ARCHITECT the two-point construction onto F (as "expUniform"), transfer back to expMap at the end via this bridge — a LARGE multi-session sub-program past the commissioned milestone (exp∈C⁴/hfd3, DONE). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv_expMap_eq_uniform_flow_on_overlap
+#print axioms QIQTH.ExpMap.expMap_eq_flow_endpoint
+
 end QIQTH.AxiomAudit
