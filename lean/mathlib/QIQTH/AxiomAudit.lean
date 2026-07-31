@@ -14466,4 +14466,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.secondVariation_endpoint_unique
 #print axioms QIQTH.ExpMap.hid_of_firstJet_hasFDerivAt
 
+-- ((J)-tower (h3a) foundation / J4-35: abstract smooth-dependence engine for a general autonomous field — the largest analytic component of (h3a), DERIVED + reusable) ★★ — AutonomousSmoothDep.lean (ns QIQTH.AutonomousDep):
+-- For an abstract autonomous field Φ:E→E: autonomous_linVariation_residual_deriv (residual ODE R'=DΦ(Y₁)R+N) + autonomousField_variation_residual_bound (residual Grönwall) + autonomousField_variation_exists (IC-derivative HasDerivAt (fun s=>Y s t)(V t) 0, cond on quadratic remainder hNb) + autonomous_twopoint_gronwall (two-point flow-Lipschitz, Mathlib dist_le_of_trajectories_ODE) + autonomousField_hNb_discharge (quadratic remainder from C² bound via decay_order_two_remainder_convex) + autonomousField_variation_exists_uncond (IC-derivative with hNb DISCHARGED, carrying only genuine field-regularity). ALL DERIVED, near-verbatim generalization of the PROVEN geodesicVariation_exists (geodesicField→Φ, (0,w)→p). std-3.
+-- ⚠ (h3a) sub-tower remaining (mechanical, NO new analytic wall): apply to the DOUBLED tangent field G(Y,V)=(F(Y),DF(Y)V) [instantiate Φ:=G on E=State×State; G is C² from F=geodesicField C^∞, inputs from hC via a C³ field bound] ⟹ HasFDerivAt of the Jacobi solution operator in base IC = (h3a) → identify ∂_w V (projection on 2nd factor) → close hid (via secondVariation_endpoint_unique + hid_of_firstJet_hasFDerivAt) → discharge (J) ⟹ unconditional common nondeg + uniform D² over K. Then downstream (uniform pullback jets → uniform B → localize capstone → hDuhamel → assembly). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.AutonomousDep.autonomousField_variation_exists_uncond
+#print axioms QIQTH.AutonomousDep.autonomousField_variation_exists
+
 end QIQTH.AxiomAudit
