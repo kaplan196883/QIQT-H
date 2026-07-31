@@ -14448,4 +14448,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_velocity_jet_data
 #print axioms QIQTH.ExpMap.flowVelocity_secondJet_op_lipschitz_of_jet_data
 
+-- ((J)-tower / J4-32: hbnd DERIVED; (J) gated on ONE residual input hid = the 2nd-order velocity jet identification) ★★ — FlowVelocityJacobiField.lean (ns QIQTH.ExpMap):
+-- flowVelocity_secondJet_hbnd_of_ode_data (DERIVES hbnd ‖(Zf q v a b 1).1 − (Zf q' …).1‖ ≤ (D₀X₀+Sr₀)·exp K'·dist q q'·‖a‖‖b‖ from the two-point engine flowVelocity_secondJet_endpoint_twopoint_bound + primitive ODE/const data hZ/h0/hKb/hAd/hXb/hSd) + expMap_common_nondeg_radius_of_velocity_ode_data (the (J) capstone from ODE data: constructs Z from Zf, derives hbnd, chains ⟹ ∃ρ₀ common exp-nondeg over K). All DERIVED; NO smuggled hbnd/hFoplip/hunif; no hyp=conclusion. std-3.
+-- ★★ (J) now gated ONLY on hid = fderiv²(Fam q)v(a,b)=(Zf q v a b 1).1 (2nd-order velocity jet ODE identification — the velocity-slot analogue of the fully-built 1st-order BasepointFDeriv, adding the fderiv²↔ODE-endpoint link the base-point BasepointSecondJetFDeriv omitted). All other carried inputs are primitive BoundedGeometry-available base-geodesic ODE/geometry facts; Z constructed not carried. hid estimated 2-3 bricks (velocity 1st-jet at arbitrary base v; 2nd-jet existence via .choose; IsSymmSndFDerivAt + cubic remainder identification). Then downstream: uniform pullback jets → uniform B → hunif(q∈K) capstone → LOCALIZE → hDuhamel → trueKernel_diagonal_a1_eq_R6_residual. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_velocity_ode_data
+#print axioms QIQTH.ExpMap.flowVelocity_secondJet_hbnd_of_ode_data
+
 end QIQTH.AxiomAudit
