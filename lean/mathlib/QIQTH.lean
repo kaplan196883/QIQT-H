@@ -252,6 +252,7 @@ import QIQTH.DoubledVariationField
 import QIQTH.DoubledFamilyLink
 import QIQTH.SecondVariationSupply
 import QIQTH.SecondVariationLipschitz
+import QIQTH.SecondVariationSourceLip
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

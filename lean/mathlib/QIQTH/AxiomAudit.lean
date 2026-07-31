@@ -14700,4 +14700,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.fderiv_geodesicField_twopoint_dist_bound
 #print axioms QIQTH.ExpMap.fderiv_geodesicField_lipschitzOnWith_of_isCompact_convex
 
+-- J4-51 (SecondVariationSourceLip.lean): (F3b) FULLY discharges the bridge's hSd — the three-fold
+-- Lipschitz-in-q of the 2nd-order coupling source. G0 fderiv2_geodesicField_lipschitzOnWith_of_isCompact
+-- _convex (J4-50 producer one deriv up) + G-A fderiv2_geodesicField_twopoint_dist_bound
+-- (‖fderiv²gf(Y₁ τ)−fderiv²gf(Y₂ τ)‖≤Lg2·exp Kg·dist(Y₁ 0)(Y₂ 0)) + G-Σ secondVariation_source_twopoint
+-- _dist_bound: for Src=fderiv²gf(Yᵢ)(pᵢ)(wᵢ), ‖Src₁ τ−Src₂ τ‖ ≤ (Lg2·exp Kg·Cp·Cw + 2·M2·Lg·exp Kg·
+-- exp Kb·Cp·Cw)·dist(Y₁ 0)(Y₂ 0)·‖a‖·‖b‖ = the hSd shape with EXPLICIT a,b-independent Sr₀. Trilinear
+-- split (F₁−F₂)(p₁)(w₁)+F₂(p₁−p₂)(w₁)+F₂(p₂)(w₁−w₂) via map_sub+abel; terms B/C via the EXISTING
+-- jacobi_twopoint_diff_bound (BasepointJetModulus, J4-29) — pfield=(Vf).1, wfield=(Y…0).2 both solve the
+-- SAME Jacobi linODE differing only in seed, no new engine needed. std-3.
+-- ✅ BOTH F3a (hAd) + F3b (hSd) now discharged as hAd/hSd-shaped API lemmas over generic confined ODE
+-- families. ⚠ (J) NOT self-contained — remaining = F4 MECHANICAL capstone (instantiate the API lemmas
+-- to the package curves + dist(Y₁ 0)(Y₂ 0)=dist q q' id + Cp/Cw from Jacobi Grönwall + feed
+-- expMap_common_nondeg_radius_of_doubled_supply). No further math wall expected. J4-52 = F4. [AF] std-3.
+#print axioms QIQTH.ExpMap.secondVariation_source_twopoint_dist_bound
+#print axioms QIQTH.ExpMap.fderiv2_geodesicField_twopoint_dist_bound
+
 end QIQTH.AxiomAudit
