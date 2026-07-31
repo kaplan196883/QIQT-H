@@ -14436,4 +14436,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.linODE_twopoint_diff_bound
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_op_lipschitz
 
+-- ((J)-tower / J4-30: 2nd-order weld — the OPAQUE-TUBE FIREWALL DISSOLVED; (J) reduced to one CONCRETE flow-side input) ★★★ — BasepointJetLipschitz.lean (ns QIQTH.ExpMap):
+-- fderiv2_eqOn_of_fderiv_eqOn_isOpen (pure-analysis 2nd-order weld engine: fderiv EqOn open U ⟹ fderiv² EqOn U, via EventuallyEq.fderiv_eq iterated) + fderiv2_expMap_eq_uniform_flow_on_overlap (concrete: fderiv²(exp_q)v = fderiv²(F_q)v for ‖v‖<min(expRho q)ρ, iterating UniformFlowBridge's 1st-order expMap=F) + expMap_second_jet_hunif_of_flow_op_lipschitz (hunif from the weld hweld + the FLOW-SIDE op-Lipschitz hFoplip). All DERIVED, std-3.
+-- ★★ THE OPAQUE-TUBE FIREWALL IS DISSOLVED: hunix/(J) moved off the Classical.choose expTube onto the CONCRETE geodesic-flow endpoint family F. (J) now reduces to ONE concrete input hFoplip = ‖fderiv²(F_q)v − fderiv²(F_{q'})v‖≤Λ·dist(q,q') (uniform v∈B̄, q,q'∈K), which is ONE lemma away: (2a) the 2nd-variation identification fderiv²F = velocity-2nd-jet Jacobi field (analogue for the 2nd derivative of BasepointFDeriv's 1st); the engine linODE_twopoint_diff_bound (J4-29) + uniform constants (BoundedGeometry) for (2b/3) are ALREADY in place. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.fderiv2_expMap_eq_uniform_flow_on_overlap
+#print axioms QIQTH.ExpMap.fderiv2_eqOn_of_fderiv_eqOn_isOpen
+
 end QIQTH.AxiomAudit
