@@ -14284,4 +14284,10 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-5e = expMap_fderiv3_hasFDerivAt (mirror :3898): obtain C₀ from this + expJet4_residual_bound Grönwall + π + opNorm_le_bound ⟹ ‖A_m‖≤Mc‖m‖² ⟹ HasFDerivAt (fun w=>fderiv³exp w) (expJetD4…) v. Then hfd3 → exp∈C⁴. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.expJet4_remainder_quadratic_bound_unif
 
+-- (JET-4 TOWER J4-5e: the FINAL differentiability rung — fderiv³exp is differentiable with derivative expJetD4) ★★ — ExpMapFDeriv3.lean:
+-- expMap_fderiv3_hasFDerivAt : HasFDerivAt (fun w => fderiv³ exp_p w) (expJetD4 g gi hC p v Φ hv.le hΦcont) v — exact one-Fréchet-order-up mirror of expMap_fderiv2_hasFDerivAt (ExpMapContDiff3:3898); same base-data hyps (g,gi,hC,p,v,Φ,hv,hΦ0,hΦcont,hΦderiv,hfdv), conclusion nests fderiv one deeper with the packaged quadrilinear expJetD4.
+-- ⚠ NON-TAUTOLOGICAL: HasFDerivAt DERIVED via the genuine little-o (hasFDerivAt_iff_isLittleO_nhds_zero); the operator bound ‖A_m‖≤Mc·‖m‖² is PROVED (3 nested opNorm_le_bound peeling l,k,h) from expJet4_remainder_quadratic_bound_unif fed through expJet4_residual_bound Grönwall + expJetPi projection — NOT carried. No hyp = conclusion. std-3.
+-- ⚠ NEXT J4-5f/assemble: hfd3=ContDiffOn 1 (fderiv³exp) from THIS (differentiability) + expJetD4_two_pt_diff (fderiv⁴=expJetD4 continuity) via contDiffOn_succ_of_fderivWithin ⟹ expMap_contDiffOn_four_of_fderiv3_contDiffOn_one (eb8ab4cd) ⟹ exp∈C⁴ UNCONDITIONAL ⟹ J4-6 sheds hfd3 in recenter chain. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_fderiv3_hasFDerivAt
+
 end QIQTH.AxiomAudit

@@ -208,6 +208,7 @@ import QIQTH.ExpJet4Remainder
 import QIQTH.ExpJet4RemainderP
 import QIQTH.ExpJet3SecondVarResidual
 import QIQTH.ExpJet4RemainderUnif
+import QIQTH.ExpMapFDeriv3
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
