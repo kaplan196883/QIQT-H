@@ -14372,4 +14372,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_common_nondeg_radius
 #print axioms QIQTH.ExpMap.expMap_jacobian_near_id_uniform
 
+-- (TWO-POINT PHASE / J4-19: discharge the differentiability half of hjet; reduce to two uniform-geometry inputs) ★ — UniformExpSecondJet.lean (ns QIQTH.ExpMap):
+-- expMap_secondJet_differentiableAt (‖x‖<expRho q ⟹ DifferentiableAt (fderiv exp_q) x) — DERIVED from expMap_contDiffOn_four (C⁴⟹fderiv exp∈C³⟹DifferentiableOn). + expMap_second_jet_bddOn_uniform (produces J4-18's hjet shape: differentiability conjunct PROVED, uniform bound carried) + expMap_common_nondeg_radius_of_uniform_inputs (feeds hjet into J4-18 ⟹ ∃ρ₀ common nondeg, CONDITIONAL on I1∧I2). std-3, no sorry, non-tautological.
+-- ⚠ LOAD-BEARING FINDING: expMap is welded to per-q OPAQUE Classical.choose selectors (expRho/expConst/expTube, irreducible); repo has NO uniform-over-K lower bound on expRho ⟹ two carried genuine inputs: (I1) hrad = uniform injectivity radius r≤expRho q over K [GATING; needs a BRIDGE: expMap .choose tube = geodesic_apriori_confinement_uniform flow via ODE uniqueness, transfer to uniform radius]; (I2) hbnd = uniform ‖D²exp_q‖≤M [via joint-smooth flow once I1, or uniform 2nd-variational Grönwall]. NEXT J4-20 = (I1) expRho_bddBelow_compact (the bridge). Then (I2), then rest of exp-jet package ⟹ uniform B ⟹ hunif q∈K ⟹ localize capstone. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_uniform_inputs
+#print axioms QIQTH.ExpMap.expMap_secondJet_differentiableAt
+
 end QIQTH.AxiomAudit

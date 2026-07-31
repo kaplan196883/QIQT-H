@@ -222,6 +222,7 @@ import QIQTH.GaussCompare
 import QIQTH.BoundedGeometry
 import QIQTH.BoundedGeometryConfine
 import QIQTH.UniformExpJacobian
+import QIQTH.UniformExpSecondJet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
