@@ -14290,4 +14290,10 @@ namespace QIQTH.AxiomAudit
 -- ⚠ NEXT J4-5f/assemble: hfd3=ContDiffOn 1 (fderiv³exp) from THIS (differentiability) + expJetD4_two_pt_diff (fderiv⁴=expJetD4 continuity) via contDiffOn_succ_of_fderivWithin ⟹ expMap_contDiffOn_four_of_fderiv3_contDiffOn_one (eb8ab4cd) ⟹ exp∈C⁴ UNCONDITIONAL ⟹ J4-6 sheds hfd3 in recenter chain. NOT exp∈C⁴/a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.expMap_fderiv3_hasFDerivAt
 
+-- (JET-4 TOWER J4-5f CAPSTONE: exp ∈ C⁴ UNCONDITIONAL — the whole jet-4 tower's payoff) ★★★ — ExpMapContDiffFour.lean:
+-- expMap_contDiffOn_four : ContDiffOn ℝ 4 (expMap g gi hC p) (Metric.ball 0 (expRho g gi hC p)) — hypotheses are ONLY the base data (g,gi,hC,p); NO hfd3, NO C⁴/Lipschitz/continuity side hypothesis. exp_p ∈ C⁴ on the injectivity ball is now UNCONDITIONAL. Faithful one-Fréchet-order-up mirror of expMap_contDiffOn_three (ExpMapContDiff3:4713).
+-- DERIVED via the assembly: expMap_contDiffOn_four_of_fderiv3_contDiffOn_one (reduction) + hdiffF3 (via expMap_fderiv3_hasFDerivAt.differentiableAt) + hcont (fderiv⁴=expJetD4 Lipschitz⟹continuous via expJetD4_two_pt_diff + expJet4VtpConst) + contDiffOn_succ_of_fderivWithin. std-3.
+-- ⚠ NEXT J4-6: feed this into contDiffOn_expPullbackMetric_three (R3c-1) to discharge its hfd3 ⟹ g̃∈C³ UNCONDITIONAL ⟹ recenter capstone trueKernel_diagonal_a1_recenter sheds hfd3. Then remaining a₁=R/6 conditions = convergence trio (hDuhamel/hCorrHigher) + geometric wiring (hunif/hcoord/hEmeas). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_four
+
 end QIQTH.AxiomAudit
