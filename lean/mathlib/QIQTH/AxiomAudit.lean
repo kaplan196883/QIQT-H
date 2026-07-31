@@ -14460,4 +14460,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.flowVelocity_endpoint_secondOrder_taylor
 #print axioms QIQTH.ExpMap.flowVelocity_endpoint_hasFDerivAt_exists
 
+-- ((J)-tower / J4-34: the two clean endpoints of hid's (h3); (J) residual isolated to (h3a) = a smooth-dependence SUB-TOWER) ★ — VelocityJacobiBaseDep.lean (ns QIQTH.ExpMap):
+-- secondVariation_endpoint_unique (h3b, reusable: two fields solving the SAME inhomog linearized geodesic ODE + same seed agree on [0,1] — from linODE_twopoint_diff_bound at the q=q' diagonal Dcoef=Dsrc=0 ⟹ bound 0; this is ∂_w V = Zf once ∂_w V is known to solve the 2nd-variation ODE) + hid_of_firstJet_hasFDerivAt (h3c, formal CLM bridge: HasFDerivAt (fun w=>fderiv Fam w) B v + B a b=(Zf a b 1).1 ⟹ hid, via HasFDerivAt.fderiv). Both DERIVED, std-3, no smuggling (h3c's hyp is a DIFFERENTIABILITY statement, strictly stronger than the value-equation, not the conclusion).
+-- ⚠ (J) residual = (h3a): the CLM Fréchet-differentiability of the Jacobi SOLUTION OPERATOR in the base velocity, HasFDerivAt (fun w=>fderiv(Fam q)w) B v with B a b=(Zf q v a b 1).1. GPT-5.5 consult CONFIRMED: this is a full 2nd smooth-dependence proof (Lipschitz bounds can't give differentiability); needs the GeodesicSmoothDep residual-Grönwall + C²-remainder engines GENERALIZED off geodesicField to the DOUBLED tangent field G(Y,V)=(F(Y),DF(Y)V) — a dedicated multi-brick SUB-TOWER, NOT a single brick. Same class of parameter-regularity the tower already carries. Once (h3a) lands, (h3b)+(h3c) close hid ⟹ discharge (J). NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.secondVariation_endpoint_unique
+#print axioms QIQTH.ExpMap.hid_of_firstJet_hasFDerivAt
+
 end QIQTH.AxiomAudit
