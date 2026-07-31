@@ -14523,4 +14523,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_jetMap_differentiableAt
 #print axioms QIQTH.ExpMap.expMap_jetMap_differentiableAt_uniform
 
+-- J4-39 (JacobiDoubledFamily.lean): the CLOSE bridge — gate (J) WITHOUT the opaque hid.
+-- expMap_common_nondeg_radius_of_doubled_supply: specializes Fam:=expMap (so hweld=rfl, hdiff
+-- discharged by (S3) expMap_jetMap_differentiableAt_uniform), CARRIES the doubled-family SUPPLY over
+-- K (Y/Vf/S/Zf/Src/Ybase data + hYode/hVode/hV0/hIC/hmem ODE-IC-confinement + hlink FIRST-jet value
+-- eq + Zf 2nd-var ODE data + base-geodesic variation/geometry data), DERIVES hid ∀q∈K,v∈B̄(0,r),a,b
+-- via hid_of_doubled_data, and chains to expMap_common_nondeg_radius_of_velocity_ode_data. Concl =
+-- ∃ρ₀>0 ∀q∈K ∀v ‖v‖<ρ₀ → IsUnit (fderiv (expMap q) v) = gate (J). ⚠ NO hid/HasFDerivAt/hbnd/hunif/
+-- hFoplip among hyps (all such strings are docstring or the internal `have hid` derivation);
+-- conclusion NOT a hyp. The opaque 2nd-order velocity-jet identification hid — the single carried
+-- input the whole VelocityJacobiBaseDep/VelocitySecondJetId/FlowVelocityJacobiField tower firewalled
+-- — is now DERIVED. GPT-5.5-confirmed non-circular (hlink is FIRST-jet, hid differentiates it once
+-- more in s). std-3.
+-- ⚠ (J) STILL NOT self-contained — reduced to the (S1)+(S2) doubled-family SUPPLY construction
+-- (carried here as genuine geometric ODE data): build confined geodesic⊗Jacobi doubledField integral
+-- curves uniformly over K + hlink from flowVelocity_endpoint_position_hasFDerivAt_exists ⟹ feed this
+-- bridge ⟹ (J) fully self-contained. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius_of_doubled_supply
+
 end QIQTH.AxiomAudit

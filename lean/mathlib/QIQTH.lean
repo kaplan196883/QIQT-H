@@ -242,6 +242,7 @@ import QIQTH.AutonomousSmoothDep
 import QIQTH.JacobiOperatorBaseDeriv
 import QIQTH.JacobiOperatorFDeriv
 import QIQTH.JacobiUniformSupply
+import QIQTH.JacobiDoubledFamily
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
