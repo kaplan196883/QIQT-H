@@ -221,6 +221,7 @@ import QIQTH.ExpMapLocalInverse
 import QIQTH.GaussCompare
 import QIQTH.BoundedGeometry
 import QIQTH.BoundedGeometryConfine
+import QIQTH.UniformExpJacobian
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

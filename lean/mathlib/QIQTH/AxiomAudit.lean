@@ -14365,4 +14365,11 @@ namespace QIQTH.AxiomAudit
 -- ★ Brick A hard core DONE. Follow-on (re-pin downstream to uniform tube: uniform expTube_spec/expPullbackMetric bounds/nondeg radius/uncond3 B) = a multi-brick sub-program — consult GPT-5.5 on the minimal cut (can uncond3's B be made uniform directly from this tube vs full uniform re-derivation). NOT a₁=R/6 yet. [AF] std-3.
 #print axioms QIQTH.ExpMap.geodesic_apriori_confinement_uniform
 
+-- (TWO-POINT PHASE Brick A / J4-18: uniform exp-Jacobian near-Id ⟹ COMMON nondeg radius ρ₀ over compact K) ★ — UniformExpJacobian.lean (ns QIQTH.ExpMap):
+-- expMap_jacobian_near_id_uniform : given hjet (uniform 2nd-order jet bound: ∀q∈K ∀‖x‖<r, ‖D²exp_q x‖≤M — a genuine uniform-C² INPUT), ‖D_v exp_q(v) − Id‖ ≤ M·‖v‖ ∀q∈K,‖v‖<r — DERIVED via Convex.norm_image_sub_le_of_norm_fderiv_le + fderiv_expMap_zero=Id.
+-- + expMap_common_nondeg_radius : ∃ ρ₀>0, ∀q∈K, ‖v‖<ρ₀ ⟹ IsUnit(D_v exp_q(v)) (ρ₀=min r (1/(2(M+1)))), via ‖1−D‖<1 ⟹ isUnit_one_sub_of_norm_lt_one. The COMMON nondeg radius (uniform replacement for the per-p openness-of-units ρ₀). std-3, non-tautological (hjet=input, conclusions derived).
+-- ⚠ NEXT: derive hjet's M itself (uniform ‖D²exp_q‖ over q∈K via the variational Jacobi ODE + BoundedGeometry uniform bounds) ⟹ unconditional; then uniform pullback jets M/W/L → near-zero radius b → annular constants Kg/Kc2/Mann/a as compact suprema → uniform B → hunif for q∈K → LOCALIZE capstone instantiation to q∈K. NOT a₁=R/6 yet. [AF] std-3.
+#print axioms QIQTH.ExpMap.expMap_common_nondeg_radius
+#print axioms QIQTH.ExpMap.expMap_jacobian_near_id_uniform
+
 end QIQTH.AxiomAudit
