@@ -14584,4 +14584,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.linODE_exists_on_Icc
 #print axioms QIQTH.ExpMap.geodesicJacobi_exists_hasDerivAt_Icc
 
+-- J4-43 (DoubledFamilyAssembly.lean): (A1) the confined doubled integral-curve HEART of the (S1)
+-- supply. confined_doubled_family_exists: for hC + IsCompact K, ∃ρ>0 ∃C₀≥0 ∀q∈K ∀v(‖v‖≤ρ) ∀b,
+-- ∃ Y, Y 0 = ((q,v),(0,b)) ∧ (∀τ∈Ioo 0 1, HasDerivAt Y (doubledField(Y τ)) τ) ∧ geodesic-factor
+-- confinement ‖(Y τ).1-(q,0)‖ ≤ C₀‖v‖. DERIVED by welding geodesic_apriori_confinement_uniform (P)
+-- ⊗ geodesicJacobi_exists_on_Icc (J, seed (0,b)) ⊗ doubledField_prod_hasDerivAt. Hyps = hC + IsCompact K
+-- only; conclusion is ∃-package, not the (J) radius. std-3.
+-- ⚠ (J) NOT self-contained. A1 builds the per-seed heart; remaining bridge binders CARRIED. ⚠⚠ SECOND
+-- SATISFIABILITY TENSION (like the ∀s one, J4-40): the bridge's hmem confines Y q v a b s τ into a
+-- compact S q v INDEPENDENT of a,b, but Y scales with the UNBOUNDED directions a,b (geodesic velocity
+-- v+s·a and Jacobi factor J~‖b‖ leave any fixed compact) ⟹ still not fully satisfiable. FIX (pending
+-- design consult): hid is BILINEAR in (a,b) (D²Fam and Zf both bilinear), so restrict supply to bounded
+-- ‖a‖,‖b‖≤1 + EXTEND hid to all a,b by bilinearity — OR make S depend on a,b. J4-44 = the correct
+-- hid-supply reformulation + construction. [AF] std-3.
+#print axioms QIQTH.ExpMap.confined_doubled_family_exists
+
 end QIQTH.AxiomAudit

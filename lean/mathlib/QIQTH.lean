@@ -245,6 +245,7 @@ import QIQTH.JacobiUniformSupply
 import QIQTH.JacobiDoubledFamily
 import QIQTH.DoubledFamilyConstruction
 import QIQTH.GenericJacobiExists
+import QIQTH.DoubledFamilyAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
