@@ -320,4 +320,213 @@ theorem uniformFlowPullbackMetricInv_dev (g gi : Point n → Fin n → Fin n →
   rw [haeq i j]
   exact hdv i j
 
+/-! ### The UNIFORM-`M` layer: jet values transfer + Taylor from the uniform `C²` packet.
+
+The per-`q` capstone above transfers the whole deviation bound through the weld (per-`q` constant `M`).
+The J4-83 uniform assembly needs ONE `M` over `q ∈ K`; for that we transfer ONLY the jet VALUES at `0`
+(`g̃(0) = δ`, `∂g̃(0) = 0`) through the weld, and re-run the Taylor bound with the UNIFORM constants of
+`uniformFlowPullbackMetric_c2_uniform_full`, pushing through the inverse with
+`uniformInverseMetric_bound` via `A⁻¹ − 1 = A⁻¹(1 − A)`. -/
+
+/-- **Germ congruence of `pd`.**  `F =ᶠ[𝓝 x] G ⟹ ∂_e F(x) = ∂_e G(x)` (`pd` sees only the germ; the
+    coordinate ray is continuous, so the eventual equality pulls back along it). -/
+theorem pd_congr_eventuallyEq {F G : Point n → ℝ} (e : Fin n) {x : Point n}
+    (h : F =ᶠ[nhds x] G) : pd F e x = pd G e x := by
+  have hγ0 : Function.update x e (x e) = x := Function.update_eq_self e x
+  have htend : Filter.Tendsto (fun t : ℝ => Function.update x e t) (nhds (x e)) (nhds x) := by
+    have hc : ContinuousAt (Function.update x e) (x e) :=
+      (hasDerivAt_update x e (x e)).continuousAt
+    have hct := hc.tendsto
+    rwa [hγ0] at hct
+  have hcomp : (fun t : ℝ => F (Function.update x e t))
+      =ᶠ[nhds (x e)] (fun t => G (Function.update x e t)) := htend.eventually h
+  simp only [pd]
+  exact hcomp.deriv_eq
+
+/-- **Weld transfer of the FORWARD metric.**  On a `𝓝 0`-neighbourhood, the `uniformFlowExp` pullback
+    metric agrees entrywise with the `expMap` pullback metric at base point `q` (same mechanism as the
+    inverse weld: `expMap_eq_uniformFlowExp_on_overlap` + `EventuallyEq.fderiv_eq`). -/
+theorem uniformFlowPullbackMetric_eq_expPullbackMetric_eventually
+    (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    {K : Set (Point n)} (hK : IsCompact K) (q : Point n) (hq : q ∈ K) :
+    ∀ᶠ v in nhds (0 : Point n), ∀ i j : Fin n,
+      uniformFlowPullbackMetric g gi hC hK q v i j = expPullbackMetric g gi hC q v i j := by
+  set c : ℝ := min (expRho g gi hC q) (uniformFlowRadius g gi hC hK) with hc
+  have hcpos : 0 < c := lt_min (expRho_pos g gi hC q) (uniformFlowRadius_pos g gi hC hK)
+  have hballOpen : IsOpen {w : Point n | ‖w‖ < c} := isOpen_lt continuous_norm continuous_const
+  have hmem : {w : Point n | ‖w‖ < c} ∈ nhds (0 : Point n) :=
+    hballOpen.mem_nhds (by simpa using hcpos)
+  have hEqOn : Set.EqOn (uniformFlowExp g gi hC hK q) (expMap g gi hC q) {w : Point n | ‖w‖ < c} :=
+    fun w hw => (expMap_eq_uniformFlowExp_on_overlap g gi hC hK q hq w hw).symm
+  filter_upwards [hmem] with v hv
+  intro i j
+  have hval : uniformFlowExp g gi hC hK q v = expMap g gi hC q v := hEqOn hv
+  have hev : (uniformFlowExp g gi hC hK q) =ᶠ[nhds v] (expMap g gi hC q) :=
+    Filter.eventuallyEq_of_mem (hballOpen.mem_nhds hv) hEqOn
+  have hfd : fderiv ℝ (uniformFlowExp g gi hC hK q) v = fderiv ℝ (expMap g gi hC q) v :=
+    hev.fderiv_eq
+  simp only [uniformFlowPullbackMetric, expPullbackMetric, hval, hfd]
+
+/-- **RNC jet values at `0` of the `uniformFlowExp` pullback metric.**  `g̃(0) = δ` (frame) and
+    `∂g̃(0) = 0` — transferred through the forward weld from the proven `expPullbackMetric` jet library
+    (`expPullbackMetric_at_zero`, `pd_expPullbackMetric_at_zero`), using germ-locality of the value and
+    of `pd` (`pd_congr_eventuallyEq`). -/
+theorem uniformFlowPullbackMetric_jet_zero (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    {K : Set (Point n)} (hK : IsCompact K)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hgsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (q : Point n) (hq : q ∈ K)
+    (hframe : ∀ i j, g q i j = (if i = j then (1 : ℝ) else 0)) :
+    (∀ i j, uniformFlowPullbackMetric g gi hC hK q 0 i j = (if i = j then (1 : ℝ) else 0))
+    ∧ (∀ i j e, pd (fun v => uniformFlowPullbackMetric g gi hC hK q v i j) e (0 : Point n) = 0) := by
+  have hB := uniformFlowPullbackMetric_eq_expPullbackMetric_eventually g gi hC hK q hq
+  constructor
+  · intro i j
+    have h0 := hB.self_of_nhds
+    rw [h0 i j, expPullbackMetric_at_zero g gi hC q i j]
+    exact hframe i j
+  · intro i j e
+    have hent : (fun v => uniformFlowPullbackMetric g gi hC hK q v i j)
+        =ᶠ[nhds (0 : Point n)] (fun v => expPullbackMetric g gi hC q v i j) :=
+      hB.mono fun v hv => hv i j
+    rw [pd_congr_eventuallyEq e hent]
+    exact pd_expPullbackMetric_at_zero g gi hC q hgsymm (fun a b => hinvF q a b) hg i j e
+
+/-- **UNIFORM forward-metric quadratic deviation.**  ONE radius `r₀ > 0` and ONE constant `M ≥ 0` with
+    `|g̃(v) i j − δ_ij| ≤ M·‖v‖²` for every `q ∈ K`, `‖v‖ ≤ r₀`.  Taylor (`RNCDecay.decay_order_two`)
+    from the transferred jet values at `0` (`uniformFlowPullbackMetric_jet_zero`) and the UNIFORM `C²`
+    packet `uniformFlowPullbackMetric_c2_uniform_full` (both `HasFDerivAt` layers + `‖D²‖ ≤ M`). -/
+theorem uniformFlowPullbackMetric_dev_uniform (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    {K : Set (Point n)} (hK : IsCompact K)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hgsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hframeK : ∀ q ∈ K, ∀ i j, g q i j = (if i = j then (1 : ℝ) else 0)) :
+    ∃ r₀ > (0 : ℝ), ∃ M : ℝ, 0 ≤ M ∧ ∀ q ∈ K, ∀ v : Point n, ‖v‖ ≤ r₀ → ∀ i j : Fin n,
+      |uniformFlowPullbackMetric g gi hC hK q v i j - (if i = j then (1 : ℝ) else 0)|
+        ≤ M * ‖v‖ ^ 2 := by
+  obtain ⟨r₀, hr₀0, M, hpk⟩ := uniformFlowPullbackMetric_c2_uniform_full g gi hg hC hK
+  refine ⟨r₀ / 2, by positivity, max 0 M, le_max_left _ _, ?_⟩
+  intro q hq v hv i j
+  obtain ⟨hjet0, hjetpd⟩ :=
+    uniformFlowPullbackMetric_jet_zero g gi hC hK hg hgsymm hinvF q hq (hframeK q hq)
+  set f : Point n → ℝ :=
+    fun w => uniformFlowPullbackMetric g gi hC hK q w i j - (if i = j then (1 : ℝ) else 0) with hf
+  have hballs : ∀ w : Point n, w ∈ Metric.closedBall (0 : Point n) (r₀ / 2) → ‖w‖ < r₀ := by
+    intro w hw
+    rw [Metric.mem_closedBall, dist_zero_right] at hw
+    linarith
+  have hfd_eq : fderiv ℝ f
+      = fderiv ℝ (fun w => uniformFlowPullbackMetric g gi hC hK q w i j) := by
+    funext w
+    exact fderiv_sub_const _
+  -- value jet.
+  have hf0 : f 0 = 0 := by rw [hf]; simp only [hjet0 i j, sub_self]
+  -- derivative jet: `fderiv f 0 = 0` from the vanishing partials + packet differentiability at `0`.
+  have h0mem : ‖(0 : Point n)‖ < r₀ := by rw [norm_zero]; exact hr₀0
+  have hdf0 : fderiv ℝ f 0 = 0 := by
+    rw [hfd_eq]
+    exact fderiv_zero_of_pd_zero
+      ((hpk q hq 0 h0mem i j).1.differentiableAt) (fun e => hjetpd i j e)
+  -- differentiability + bound hypotheses on the closed half-ball, from the uniform packet.
+  have hdiff : ∀ w ∈ Metric.closedBall (0 : Point n) (r₀ / 2), DifferentiableAt ℝ f w := by
+    intro w hw
+    exact ((hpk q hq w (hballs w hw) i j).1.differentiableAt).sub (differentiableAt_const _)
+  have hdiff2 : ∀ w ∈ Metric.closedBall (0 : Point n) (r₀ / 2),
+      DifferentiableAt ℝ (fderiv ℝ f) w := by
+    intro w hw
+    rw [hfd_eq]
+    exact (hpk q hq w (hballs w hw) i j).2.1.differentiableAt
+  have hbound2 : ∀ w ∈ Metric.closedBall (0 : Point n) (r₀ / 2),
+      ‖fderiv ℝ (fderiv ℝ f) w‖ ≤ max 0 M := by
+    intro w hw
+    rw [hfd_eq]
+    exact le_trans (hpk q hq w (hballs w hw) i j).2.2.2.2 (le_max_right _ _)
+  have hdecay := decay_order_two f (max 0 M) (r₀ / 2) (by positivity)
+    hf0 hdf0 hdiff hdiff2 hbound2 hv
+  simpa only [hf] using hdecay
+
+/-- **★ J4-82 UNIFORM capstone — `hdev` with ONE constant over `q ∈ K`.**
+    `∃ r₀ > 0, ∃ M ≥ 0, ∀ q ∈ K, ∀ ‖v‖ < r₀, ∀ i j, |g̃⁻¹(v) i j − δ_ij| ≤ M · rncRadialSq v` for
+    `g̃⁻¹ = uniformFlowPullbackMetricInv g gi hC hK q` — the uniform-in-`q` strengthening of
+    `uniformFlowPullbackMetricInv_dev` (which the J4-83 uniform-B packet needs).  Neumann push through
+    the uniform inverse bound: `A⁻¹ − 1 = A⁻¹(1 − A)` (`Ring.inverse_mul_cancel`), so the entry
+    deviation is `≤ ‖A⁻¹‖ · ‖(1−A)e_j‖ ≤ Kinv · M_dev·‖v‖² ≤ Kinv·M_dev · rncRadialSq v`
+    (`uniformInverseMetric_bound` + `uniformFlowPullbackMetric_dev_uniform`; `‖v‖² ≤ rncRadialSq v` on
+    the sup-norm chart).  Hypotheses ONLY `hg`+`hC`+`hK`+`hgnd`+`hgsymm`+`hinvF`+`hframeK`, all genuine
+    (satisfiable by `g = gi = δ`); NO `expRho` in the statement.  NOT `a₁ = R/6`. -/
+theorem uniformFlowPullbackMetricInv_dev_uniform (g gi : Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => christoffel g gi a b c y))
+    {K : Set (Point n)} (hK : IsCompact K)
+    (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
+    (hgnd : ∀ y : Point n, IsUnit (matToCLM (fun a b => g y a b)))
+    (hgsymm : ∀ y a b, g y a b = g y b a)
+    (hinvF : ∀ y a b, (∑ σ, g y a σ * gi y σ b) = if a = b then 1 else 0)
+    (hframeK : ∀ q ∈ K, ∀ i j, g q i j = (if i = j then (1 : ℝ) else 0)) :
+    ∃ r₀ > (0 : ℝ), ∃ M : ℝ, 0 ≤ M ∧ ∀ q ∈ K, ∀ v : Point n, ‖v‖ < r₀ → ∀ i j : Fin n,
+      |uniformFlowPullbackMetricInv g gi hC hK q v i j - (if i = j then (1 : ℝ) else 0)|
+        ≤ M * rncRadialSq v := by
+  obtain ⟨r₁, hr₁0, Md, hMd0, hdev⟩ :=
+    uniformFlowPullbackMetric_dev_uniform g gi hC hK hg hgsymm hinvF hframeK
+  obtain ⟨r₂, hr₂0, Kinv, hinvB⟩ := uniformInverseMetric_bound g gi hg hC hK hgnd
+  refine ⟨min r₁ r₂, lt_min hr₁0 hr₂0, max 0 Kinv * Md,
+    mul_nonneg (le_max_left _ _) hMd0, ?_⟩
+  intro q hq v hv i j
+  have hv1 : ‖v‖ ≤ r₁ := le_of_lt (lt_of_lt_of_le hv (min_le_left _ _))
+  have hv2 : ‖v‖ < r₂ := lt_of_lt_of_le hv (min_le_right _ _)
+  obtain ⟨hU, hKn, _⟩ := hinvB q hq v hv2
+  set A : Point n →L[ℝ] Point n :=
+    matToCLM (fun a b => uniformFlowPullbackMetric g gi hC hK q v a b) with hA
+  -- the Neumann identity `A⁻¹(1 − A) = A⁻¹ − 1`.
+  have hid : Ring.inverse A * (1 - A) = Ring.inverse A - 1 := by
+    rw [mul_sub, mul_one, Ring.inverse_mul_cancel _ hU]
+  -- entries of `(1 − A)e_j` are the forward-metric deviations.
+  have hzk : ∀ k : Fin n, ((1 - A) (Pi.single j (1 : ℝ))) k
+      = (if k = j then (1 : ℝ) else 0) - uniformFlowPullbackMetric g gi hC hK q v k j := by
+    intro k
+    have hAw : (A (Pi.single j (1 : ℝ))) k = uniformFlowPullbackMetric g gi hC hK q v k j := by
+      rw [hA, matToCLM_apply]
+      simp only [Pi.single_apply, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq',
+        Finset.mem_univ, if_true]
+    rw [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply, Pi.sub_apply, hAw,
+      Pi.single_apply]
+  have hznorm : ‖(1 - A) (Pi.single j (1 : ℝ))‖ ≤ Md * ‖v‖ ^ 2 := by
+    rw [pi_norm_le_iff_of_nonneg (by positivity)]
+    intro k
+    rw [Real.norm_eq_abs, hzk k, abs_sub_comm]
+    exact hdev q hq v hv1 k j
+  -- the entry deviation IS the `i`-th coordinate of `A⁻¹((1−A)e_j)`.
+  have hmain : uniformFlowPullbackMetricInv g gi hC hK q v i j - (if i = j then (1 : ℝ) else 0)
+      = ((Ring.inverse A) ((1 - A) (Pi.single j (1 : ℝ)))) i := by
+    have hRA : Ring.inverse A ((1 - A) (Pi.single j (1 : ℝ)))
+        = Ring.inverse A (Pi.single j (1 : ℝ)) - Pi.single j (1 : ℝ) := by
+      have h1 : (1 - A) (Pi.single j (1 : ℝ))
+          = Pi.single j (1 : ℝ) - A (Pi.single j (1 : ℝ)) := by
+        rw [ContinuousLinearMap.sub_apply, ContinuousLinearMap.one_apply]
+      have h2 : Ring.inverse A (A (Pi.single j (1 : ℝ))) = Pi.single j (1 : ℝ) := by
+        rw [← ContinuousLinearMap.mul_apply, Ring.inverse_mul_cancel _ hU,
+          ContinuousLinearMap.one_apply]
+      rw [h1, map_sub, h2]
+    rw [hRA, Pi.sub_apply, Pi.single_apply]
+    simp only [uniformFlowPullbackMetricInv, hA]
+  rw [hmain]
+  calc |((Ring.inverse A) ((1 - A) (Pi.single j (1 : ℝ)))) i|
+      = ‖((Ring.inverse A) ((1 - A) (Pi.single j (1 : ℝ)))) i‖ := (Real.norm_eq_abs _).symm
+    _ ≤ ‖(Ring.inverse A) ((1 - A) (Pi.single j (1 : ℝ)))‖ := norm_le_pi_norm _ i
+    _ ≤ ‖Ring.inverse A‖ * ‖(1 - A) (Pi.single j (1 : ℝ))‖ := ContinuousLinearMap.le_opNorm _ _
+    _ ≤ max 0 Kinv * (Md * ‖v‖ ^ 2) :=
+        mul_le_mul (le_trans hKn (le_max_right _ _)) hznorm (norm_nonneg _) (le_max_left _ _)
+    _ ≤ max 0 Kinv * Md * rncRadialSq v := by
+        have hsq : ‖v‖ ^ 2 ≤ rncRadialSq v := by
+          rw [← rncRadial_sq]
+          nlinarith [norm_le_rncRadial v, norm_nonneg v, rncRadial_nonneg v]
+        calc max 0 Kinv * (Md * ‖v‖ ^ 2) = max 0 Kinv * Md * ‖v‖ ^ 2 := by ring
+          _ ≤ max 0 Kinv * Md * rncRadialSq v := by
+              apply mul_le_mul_of_nonneg_left hsq
+              exact mul_nonneg (le_max_left _ _) hMd0
+
 end QIQTH.ExpMap

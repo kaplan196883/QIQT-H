@@ -15170,4 +15170,29 @@ namespace QIQTH.AxiomAudit
 -- uniformity of M across K, if needed at the hunif lift, is a J4-83 concern (Taylor from uniform C²).
 #print axioms QIQTH.ExpMap.uniformFlowPullbackMetricInv_dev
 
+-- ★ J4-82u (UniformFlowJetZero.lean, uniform-M layer): hdev with ONE constant over q∈K (indep build-
+-- verified). Per the gpt-5.6-sol consult: transfer only jet VALUES at 0 through the forward weld
+-- (uniformFlowPullbackMetric_eq_expPullbackMetric_eventually + pd_congr_eventuallyEq ⟹ uniformFlow-
+-- PullbackMetric_jet_zero: g̃(0)=δ, ∂g̃(0)=0), then Taylor with the UNIFORM C² constants
+-- (c2_uniform_full) ⟹ uniformFlowPullbackMetric_dev_uniform, pushed through the inverse via
+-- A⁻¹−1 = A⁻¹(1−A) + uniformInverseMetric_bound ⟹ uniformFlowPullbackMetricInv_dev_uniform. std-3.
+#print axioms QIQTH.ExpMap.uniformFlowPullbackMetricInv_dev_uniform
+
+-- ★★ J4-83 (UniformResidualPacket.lean): the producer→packet re-plumb (indep build-verified). S1
+-- census: the RecenterCutoffC3:97 producer body is a thin assembly of TWO already-abstract engines
+-- (near_uncutResidual_gaussianWide_ball_C3 NearResidualC3:129 + cutoffResidual_global_gaussianWide_
+-- bound_C2 CutoffResidualFiniteReg:73) — so the re-plumb is a RE-INSTANTIATION, not a 1000-line port.
+-- cutoffResidual_bound_from_packet: construction-independent per-base-point width-2 Gaussian residual
+-- bound from the RNC near-jet packet + cutoff/annulus packet — NO expMap/expRho/expPullbackMetric.
+-- cutoffResidual_uniformFlow_hEboundW: instantiated at uniformFlowPullbackMetric(Inv) per q∈K, with
+-- hsymm ← uniformFlowPullbackMetric_symm and hdev ← J4-82; remaining fields carried as genuine
+-- q-centered inputs. std-3 both.
+-- ⚠ FIREWALL (exact, the ONE deep wall to full hEboundW): a UNIFORM (radius-localized) NEAR ENGINE —
+-- near_uncutResidual_gaussianWide_ball_C3 returns per-q b=ρ/2 + per-q constant; needs re-plumb fed by
+-- the uniform C³ Taylor control (UniformFlowThird*). Also: packet's global ∀y/∀a,b fields vs the
+-- uniformFlow ball-local lemmas ⟹ needs a ball-local producer variant (shrink near-b below r₀).
+-- Weld jet-transfers for the near-jet fields are mechanically available (this file) but not yet wired.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_bound_from_packet
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_hEboundW
+
 end QIQTH.AxiomAudit

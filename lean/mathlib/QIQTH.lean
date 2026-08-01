@@ -284,6 +284,7 @@ import QIQTH.UniformResidualB
 import QIQTH.UniformInverseMetric
 import QIQTH.UniformFlowMetricInvProps
 import QIQTH.UniformFlowJetZero
+import QIQTH.UniformResidualPacket
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
