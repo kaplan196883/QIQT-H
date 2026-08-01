@@ -15113,4 +15113,17 @@ namespace QIQTH.AxiomAudit
 -- Hyps ONLY hg+hC+IsCompact K. std-3. Next: J4-80 hunif assembly toward TrueKernelA1Reduced:153.
 #print axioms QIQTH.ExpMap.uniformFlowPullbackMetric_c2_uniform_full
 
+-- J4-80 (UniformResidualB.lean): hunif assembler step 1 — the FORWARD-metric packet (indep build-
+-- verified). uniformResidual_forwardMetric_packet: ONE r₀>0 + ONE M, ∀q∈K ∀‖v‖<r₀ ∀ij: g̃ C⁰/C¹/C²
+-- bounds ≤ M + IsUnit(fderiv uniformFlowExp) + IsUnit(matToCLM g̃) — assembles c2_uniform_full +
+-- common_nondeg_radius + the J4-61 hinge at r₀ = min rC ρ₀. New GENUINE input hgnd = base-metric
+-- nondeg at flow endpoints (satisfiable: flat g=δ; not the conclusion). std-3.
+-- ★ S1 AUDIT FINDING (consumer = cutoffResidual_expPullback_hEboundW RecenterCutoffC3:97 via
+-- hEboundW_of_uniform_perBasePoint RecenterReduction:86): the carried residue is almost entirely on
+-- the INVERSE metric g̃⁻¹ (hgi_ann/hLapChi_ann/hdev) and the R4c/R5 chain lives over expMap/expRho —
+-- re-target to uniformFlowExp needed. ⚠ FIREWALL (exact): ∃r₀>0 ∃Kinv ∀q∈K ∀‖v‖<r₀,
+-- ‖Ring.inverse(matToCLM g̃)‖ ≤ Kinv. Route A = joint-in-q continuity brick (absent). Route B =
+-- upgrade common_nondeg_radius to return ‖J⁻¹‖≤2 (Neumann tail) + tube-EVT ‖(g∘F)⁻¹‖. J4-80b = Route B.
+#print axioms QIQTH.ExpMap.uniformResidual_forwardMetric_packet
+
 end QIQTH.AxiomAudit

@@ -280,6 +280,7 @@ import QIQTH.UniformFlowThirdDiag
 import QIQTH.UniformFlowThirdUncond
 import QIQTH.UniformFlowMetricC2
 import QIQTH.UniformFlowMetricC2Bound
+import QIQTH.UniformResidualB
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
