@@ -190,3 +190,17 @@ mechanical wiring → hDuhamel (Rosenberg §3.2.2) → TrueKernelA1Reduced:153.
 FIREWALL (honest, assembly-only): uniform C¹/C² entry opNorm bounds pending — all
 sub-bounds exist uniformly (Mg0, Mj, Hessian R3, third W3, EVT ‖Dg‖/‖D²g‖ on the
 endpoint tube). J4-79b = IsC2At-with-bounds product lemma ×2 + finite triangle sums.
+
+## J4-79b (5b5f2eb8) — ★★ W4 COMPLETE: Brick-A(β) REGULARITY + BOUNDS CLOSED
+`QIQTH/UniformFlowMetricC2Bound.lean`, [AF] std-3, indep build-verified. Discharges the
+J4-79 C¹/C² firewall — NOTHING left firewalled in W4:
+- `uniformFlowExp_tube_continuous_bound` (EVT on the displacement tube, Q1 generalized);
+- `HasC2BoundAt` Leibniz bound calculus (product law A₀B₂+2A₁B₁+A₂B₀);
+- `metricFactor_c2Bound` + `jacobianEntry_c2Bound` (Mj/Hessian/W3 feed C⁰/C¹/C²);
+- capstone `uniformFlowPullbackMetric_c2_uniform_full`: ∃r₀>0 ∃M ∀q∈K ∀‖v‖<r₀ ∀ij —
+  both HasFDerivAt layers + |g̃|≤M + ‖D‖≤M + ‖D²‖≤M. Hyps ONLY hg+hC+IsCompact K.
+STATUS: Brick-A(β) fully closed (exp C⁰..C³ + g̃ C⁰..C² uniform over K).
+NEXT: J4-80 (in flight) = hunif uniform-B assembler (RecenterReduction:86 consumer);
+then hcoord → mechanical wiring → hDuhamel (Rosenberg §3.2.2) → TrueKernelA1Reduced:153.
+Gotchas banked: opNorm_add_le for CLM norms; point-free fderiv_mul bridging; clm_comp
+const route for L∘h(w); maxSynthPendingDepth 4 for 4-level CLM Norm; standalone ring have.
