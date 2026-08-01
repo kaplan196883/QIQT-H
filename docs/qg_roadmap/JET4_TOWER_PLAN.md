@@ -342,3 +342,13 @@ ONE hunif firewall left: E-IDENTIFICATION (global heatOp g gi H vs recentred cut
 residual — Laplace–Beltrami pullback naturality under the uniformFlowExp chart; the
 arbitrary-center chart wall named in RecenterReduction Step-1). J4-89 (census + core)
 in flight.
+
+## J4-89 (59029ce2) — ★ E-identification CENSUS + D²φ-free transport cores
+`QIQTH/ResidualChartTransport.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+CENSUS: capstone hEboundW = |heatOp g gi H| ≤ C·baseKernelW (GLOBAL-chart LB; H pinned by
+hHdiag); reduction RecenterReduction:86+:101; NO LB-naturality lemma existed; coordinate
+naturality is D²φ-dependent. CORES: pd_comp + pullbackInv_trace_contraction (J·g̃⁻¹·Jᵀ=G⁻¹)
++ pd_pd_comp. FIREWALL: D²φ pointwise + Christoffel transformation + assembly + E-id.
+J4-90 (in flight): KEY INSIGHT — naturality is a GENERAL C² diffeomorphism computation
+(no geodesic input): ∂g̃ product expansion → Christoffel transform (∂J-symmetry from
+Mathlib) → abstract laplaceBeltrami_pullback_naturality → instantiate at uniformFlowExp.
