@@ -15139,4 +15139,21 @@ namespace QIQTH.AxiomAudit
 -- onto uniformFlowExp using forward packet + this inverse bound.
 #print axioms QIQTH.ExpMap.uniformInverseMetric_bound
 
+-- ★ J4-81 (UniformFlowMetricInvProps.lean): consumer-shaped inverse props (indep build-verified).
+-- Matches the RecenterCutoffC3:97 hypothesis shapes over uniformFlowExp: D1 uniformFlowPullbackMetric-
+-- Inv (exact expPullbackMetricInv convention) via matToCLM_invMat (entrywise inverse reassembles to
+-- Ring.inverse — CLMs agree on Pi.single basis); D2 hinvT BOTH orders; D3 hgisymm (matrix-transpose
+-- uniqueness, genuine hgsymm); D4 hgi_ann uniform (ball + annulus); bundled capstone uniformFlow-
+-- PullbackMetricInv_props. D5 uniformFlowChristoffel_uniform_bound (|Γ̃|≤KΓ via inverse bound × C¹
+-- entry bound, pd_eq_fderiv). D6-hLapChi uniformFlowLaplaceBeltrami_radialCutoff_annulus_bound —
+-- assembled DIRECTLY from D4+D5 bounds (bypasses the ContinuousOn-annulus wall that blocked the
+-- opaque expPullback route). Hyps ONLY hg+hC+hK+hgnd+hgsymm. std-3 all.
+-- ⚠ FIREWALL (exact, the ONE remaining consumer metric-side input): D6-hdev
+-- ∀ᶠ v in 𝓝 0, ∀ij, |g̃⁻¹(v) i j − δ| ≤ M·rncRadialSq v — needs the uniformFlowExp RNC jet-at-0
+-- (D uniformFlowExp_q 0 = id + ∂g̃(0)=0 Gauss structure; exists only for expPullbackMetric via
+-- pd_expPullbackMetric_at_zero). J4-82 = the uniformFlow jet-at-0 brick.
+#print axioms QIQTH.ExpMap.uniformFlowPullbackMetricInv_props
+#print axioms QIQTH.ExpMap.uniformFlowChristoffel_uniform_bound
+#print axioms QIQTH.ExpMap.uniformFlowLaplaceBeltrami_radialCutoff_annulus_bound
+
 end QIQTH.AxiomAudit
