@@ -15195,4 +15195,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_bound_from_packet
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_hEboundW
 
+-- ★ J4-84 (UniformNearEngine.lean, ns HeatResidualBound): the NEAR ENGINE made uniform (indep build-
+-- verified). N1 census: the per-q source is the RADIUS ρ internally chosen by eventually_nhds_zero_
+-- ball inside residualN0_gaussian_bound_C3's ∀ᶠ (constant C=(1+32n²MW+L)(√2)ⁿ already explicit).
+-- N2 near_uncutResidual_gaussianWide_ball_from_packet (honest refactor boundary = explicit-radius
+-- residual bound hRes; internal choose replaced) + _ball_C3_viaPacket (satisfiability re-derivation,
+-- non-circularity check; drops the (√2)ⁿ round-trip ⟹ sharper constant). N3 near_uncutResidual_
+-- uniform: ONE b=ρ_u/2 + ONE C over q∈K from the uniform residual input hResU. std-3 all.
+-- ⚠ FIREWALLS (exact): (F-res) ∃ρ_u>0 ∃C≥0 ∀q∈K ∀‖v‖<ρ_u |parametrixResidualN 0 g̃_q g̃⁻¹_q Θ u t v|
+-- ≤ C·gaussDdimWide — term (2) already uniform (dev_uniform; w₀ q-independent), wall = term (1)
+-- uniform little-o of totalRadialO1_coeff (uniform C³ Taylor remainder over K) + term (3) uniform
+-- Laplacian L. (F-cut) explicit-B variant of cutoffResidual_global_gaussianWide_bound_C2 (B hidden
+-- existentially; Mann/Kc1 q-independent, Kg/Kc2 have uniform suppliers) ⟹ uniform assembly.
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball_from_packet
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_uniform
+
 end QIQTH.AxiomAudit
