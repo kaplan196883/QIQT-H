@@ -15050,4 +15050,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.trilinear_opNorm_le_of_symm_diag_bound
 #print axioms QIQTH.ExpMap.symm_trilinear_polarization
 
+-- J4-76 (UniformFlowThirdBoundClose.lean): D1 + P2 + conditional W3 (indep build-verified). D1
+-- uniformFlowExp_hessianMap_differentiableAt (the CLM-valued THIRD jet exists: double piRing/
+-- differentiableAt_pi lift of W2's per-seed jets ⟹ B₃=fderiv(fun w=>fderiv(fun u=>fderiv(uniformFlowExp
+-- q) u) w) v genuine). P2 uniformFlowExp_thirdJet_symm23 (differentiate hessian_symm via EventuallyEq.
+-- fderiv_eq + flip CLM) + uniformFlowExp_thirdJet_symm12 (Clairaut second_derivative_symmetric on
+-- G_b: u↦fderiv(uniformFlowExp) u b, fed R2+D1). W3 uniformFlowExp_thirdDeriv_opNorm_le_of_diag_bound:
+-- hdiag(‖B₃ a a a‖≤M‖a‖³ uniform) ⟹ ∃M'=(9/2)M, ‖B₃(q,v)‖≤M' — via J4-75 trilinear polarization + P2.
+-- Mirrors the R3 pattern (J4-69 reduction → J4-70 value-id). All DERIVED, no expRho. std-3.
+-- ⚠ W3 NOT unconditional: carried (P1) the diagonal VALUE-ID B₃(q,v) a a a = (Z₃ 1)-endpoint (the
+-- d/ds[(U_s 1).2.1]|₀ ↔ W1 Src₃ identification — whole-file ODE-uniqueness brick one order up from Z1)
+-- discharging hdiag with M:=M₃j. J4-77 = P1 ⟹ W3 unconditional; then W4 g̃∈C². [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_opNorm_le_of_diag_bound
+#print axioms QIQTH.ExpMap.uniformFlowExp_hessianMap_differentiableAt
+
 end QIQTH.AxiomAudit
