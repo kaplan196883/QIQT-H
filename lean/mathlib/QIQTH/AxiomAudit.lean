@@ -14886,4 +14886,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.uniformFlowPullbackMetric_entry_uniform_bound
 #print axioms QIQTH.PullbackMetric.uniformFlowExp_metric_entry_uniform_bound
 
+-- J4-65 (UniformFlowSecondJet.lean): Brick-A regularity climb, 2nd-order (R1). uniformFlowTube_second
+-- Variation_uniform_bound: hC+IsCompact K ⟹ ∃r₀>0 ∃M₂j≥0 ∀q∈K ∀‖v‖≤r₀ ∀a, ∃ V Zf, V solves the 1st-var
+-- linODE (seed (0,a)), Zf solves the inhomog 2nd-var linODE Zf'=DF(Y)Zf+D²F(Y)(V,V) (seed 0), AND
+-- ‖Zf τ‖≤M₂j·‖a‖² (uniform quadratic Grönwall bound). r₀=ρ_K/2, M₂j=gronwallBound 0 K_f (M₂(exp K_f)²) 1
+-- fixed before intro (K_f,M₂ = field-Jacobian/2nd-field sups over ONE compact S covering all base tubes).
+-- q-uniform, no expRho. KEY: runs on CLOSED [0,1] via RIGHT-within-derivatives (norm_le_gronwall
+-- Bound_of_norm_deriv_right_le only needs Ici-derivs on Ico 0 1), sidestepping the open-(-2,2)-window
+-- padding wall. New engine linODE_inhomog_within_exists_on_Icc ([0,1] within-deriv inhomog linODE via
+-- state-augmentation) + hasDerivWithinAt_Ici_of_Icc01 + gronwallBound_zero_mul_ε. std-3.
+-- ⚠ R2 (Hessian HasFDerivAt (fun w=>fderiv(uniformFlowExp q) w) B₂ v, value=(Zf 1).1 via hid_of_doubled
+-- _data but needs hdiff=jet-map differentiability = two-sided 2nd-order little-o) + R3 (opNorm bound,
+-- =R1's τ=1 bound given R2) FIREWALLED. J4-66 = R2 via narrowpad-continuous doubled-field flow, OR 3rd
+-- variation → C³. Brick-A still needs C³ (⟹ g̃∈C²) for M/L; then uniform B → hunif; +hcoord; then hDuhamel.
+#print axioms QIQTH.ExpMap.uniformFlowTube_secondVariation_uniform_bound
+#print axioms QIQTH.ExpMap.linODE_inhomog_within_exists_on_Icc
+
 end QIQTH.AxiomAudit
