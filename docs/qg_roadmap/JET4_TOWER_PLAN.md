@@ -216,3 +216,16 @@ INVERSE metric g̃⁻¹ (hgi_ann/hLapChi_ann/hdev); the R4c/R5 chain lives over 
 ⟹ re-target onto uniformFlowExp is the infrastructure step (J4-81+).
 FIREWALL (exact): ∃r₀>0 ∃Kinv ∀q∈K ∀‖v‖<r₀ ‖Ring.inverse(matToCLM g̃)‖≤Kinv.
 J4-80b (in flight) = Route B: Neumann ‖J⁻¹‖≤2 + tube-EVT ‖(g∘F)⁻¹‖ + congruence.
+
+## J4-80b (9a18cf32) — ★ uniform g̃⁻¹ bound: the J4-80 firewall DISCHARGED (Route B complete)
+`QIQTH/UniformInverseMetric.lean`, [AF] std-3, indep build-verified. Nothing firewalled:
+- P1 `uniformFlowExp_common_nondeg_radius_quant` (Grönwall/Neumann tail re-derived KEEPING
+  C_D ⟹ ‖(fderiv uniformFlowExp)⁻¹‖ ≤ 2 uniform) + `norm_ringInverse_one_sub_le`.
+- P2 `uniformFlowExp_baseMetricInv_uniform_bound` (tube-EVT, Ring.inverse continuous at
+  units; genuine hgnd = global metric nondeg).
+- P3 `norm_ringInverse_matToCLM_congr_le` (congruence bound cJ·cG·cJ·n²; sup-norm transpose
+  handled entrywise — no Cramer/Matrix.inv).
+- Capstone `uniformInverseMetric_bound`: uniform IsUnit(matToCLM g̃) + ‖Ring.inverse‖ ≤ Kinv
+  + entrywise ≤ Kinv (extraction form matches expPullbackMetricInv). Hyps hg+hC+hK+hgnd.
+NEXT: J4-81 (in flight) = consumer-shaped inverse props (hinvT/hgisymm/hgi_ann/Γ̃ bound,
++ hLapChi_ann/hdev if reachable) toward cutoffResidual_expPullback_hEboundW:97.
