@@ -331,3 +331,14 @@ hypothesis as the old chain) ⟹ `cutoffResidual_uniformFlow_unconditional` — 
 single-(a,b,B) uniform residual bound over K. F-res/F-cut/hCoeffU chain (J4-84→87) CLOSED.
 Remaining to global hEboundW: τ-quantification + per-base-point E-identification (J4-88
 in flight; Sol routes in the consult record above).
+
+## J4-88 (c7b54f78) — ★★ τ-QUANTIFICATION CLOSED: ∀τ>0 with τ-free constants
+`QIQTH/UniformTauResidual.lean` (ns HeatResidualBound), [AF] std-3, indep build-verified.
+Consumer needs literal ∀τ>0 — delivered. The Mann τ-growth was a packaging artefact
+(derivative absorbed directly into gaussDdimWide, (1/τ)G ≤ (8/a²)G_wide). New simpler
+explicit-B engine + τ-quantified F-res/near ⟹ `cutoffResidual_uniformFlow_unconditional_
+tau` (∃(a,b,B) τ-free, ∀τ>0 ∀q∈K ∀v; same hyps as J4-87).
+ONE hunif firewall left: E-IDENTIFICATION (global heatOp g gi H vs recentred cutoff
+residual — Laplace–Beltrami pullback naturality under the uniformFlowExp chart; the
+arbitrary-center chart wall named in RecenterReduction Step-1). J4-89 (census + core)
+in flight.
