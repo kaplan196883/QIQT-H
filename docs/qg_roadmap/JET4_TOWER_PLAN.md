@@ -305,3 +305,18 @@ coeffBound` — BOTH conditional ONLY on hCoeffU (uniform O(r²) of totalRadialO
 CORRECTED ASSESSMENT (mine, vs agent's C³ claim): hCoeffU needs only the EXISTING C²
 layer — Γ̃ linear decay via Γ̃(0)=0 (jet_zero) + MVT with ∂Γ̃ bounded by the second
 Fréchet layer + ∂g̃⁻¹=−g̃⁻¹(∂g̃)g̃⁻¹ (differentiate Σg̃⁻¹g̃=δ entrywise). J4-87 in flight.
+
+## Consult record (gpt-5.6-sol, 2026-08-02 ~07:00) — three verdicts for the hunif endgame
+1. hCoeffU derivative counting CONFIRMED: C² layer + jet-zero suffice (no C³); ∂Γ̃ from
+   ∂(g̃⁻¹)=−g̃⁻¹(∂g̃)g̃⁻¹ + second Fréchet layer; segment MVT needs only differentiability
+   + bound (no continuity of ∂Γ̃). Caveat: "second layer" = HasFDerivAt data (the
+   derivative FIELD differentiable), which c2_uniform_full provides.
+2. τ-uniformity (the ∀τ gap to RecenterReduction:86): quantify the engines over 0<τ(≤T)
+   from the start with reusable Gaussian absorption lemmas (r^k·τ^{-m}·e^{−r²/4τ} ≤
+   C·e^{−r²/8τ}, annulus variants with r≥a>0); constants come out τ-free on (0,T].
+   ⚠ (0,T] does NOT give ∀τ>0 automatically — split at T, separate direct bound for τ≥T
+   (elementary at N=0 but must be checked; polynomial τ-corrections can obstruct).
+3. E-identification (Vmap gap): define E by the chart residual inside + ZERO outside;
+   cutoff support strictly inside the chart domain; three lemmas (chart identification /
+   E=0 outside / trivial bound 0≤B·gauss outside). Never apply a partial Vmap outside
+   its domain — piecewise extension explicit in the capstone statement.
