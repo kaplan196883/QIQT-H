@@ -284,3 +284,13 @@ explicit-radius residual bound hRes) + `_viaPacket` satisfiability check (sharpe
 FIREWALLS: (F-res) uniform residual bound — term (1) uniform little-o of totalRadialO1_
 coeff (uniform C³ Taylor remainder) + term (3) uniform Laplacian L [term (2) already
 uniform]. (F-cut) explicit-B cutoff-engine variant — J4-85 in flight.
+
+## J4-85 (bf055099) — ★★ F-cut DISCHARGED: explicit-B cutoff engine + uniform assembly
+`QIQTH/UniformCutoffEngine.lean` (ns HeatResidualBound), [AF] std-3, indep build-verified.
+B exposed: C + M·Kc2 + 2n²·Kg·Kc1·M·(8/a²). `_explicitB` (packaging-only change) +
+`uniformFlowPullbackMetricInv_symm_global` (junk-value trick sheds hgisymm) +
+`cutoffResidual_uniformFlow_uniform` (SINGLE (a,b,B) over K; b=min(ρ_u/2,rmin/2), a=b/2;
+same-B by fixing constants before ∀q) + `_gaussDdim` (width-2 shape).
+Conditional ONLY on hResU = F-res. Gaps to RecenterReduction:86: fixed-t vs ∀τ, q∈K vs
+∀q, E-identification (Vmap). J4-86 (F-res: quantitative little-o replacement via
+dev_uniform + uniform Laplacian L) in flight.
