@@ -204,3 +204,15 @@ NEXT: J4-80 (in flight) = hunif uniform-B assembler (RecenterReduction:86 consum
 then hcoord → mechanical wiring → hDuhamel (Rosenberg §3.2.2) → TrueKernelA1Reduced:153.
 Gotchas banked: opNorm_add_le for CLM norms; point-free fderiv_mul bridging; clm_comp
 const route for L∘h(w); maxSynthPendingDepth 4 for 4-level CLM Norm; standalone ring have.
+
+## J4-80 (a01032c5) — hunif assembler step 1: uniform FORWARD-metric packet
+`QIQTH/UniformResidualB.lean`, [AF] std-3, indep build-verified.
+`uniformResidual_forwardMetric_packet`: ONE r₀>0 + ONE M, ∀q∈K ∀‖v‖<r₀ ∀ij — g̃ C⁰/C¹/C²
+≤ M + IsUnit(fderiv uniformFlowExp) + IsUnit(matToCLM g̃). New genuine hyp hgnd (base
+metric nondeg at endpoints).
+★ S1 FINDING: the hunif consumer (cutoffResidual_expPullback_hEboundW RecenterCutoffC3:97
+via hEboundW_of_uniform_perBasePoint RecenterReduction:86) carries residue mostly on the
+INVERSE metric g̃⁻¹ (hgi_ann/hLapChi_ann/hdev); the R4c/R5 chain lives over expMap/expRho
+⟹ re-target onto uniformFlowExp is the infrastructure step (J4-81+).
+FIREWALL (exact): ∃r₀>0 ∃Kinv ∀q∈K ∀‖v‖<r₀ ‖Ring.inverse(matToCLM g̃)‖≤Kinv.
+J4-80b (in flight) = Route B: Neumann ‖J⁻¹‖≤2 + tube-EVT ‖(g∘F)⁻¹‖ + congruence.
