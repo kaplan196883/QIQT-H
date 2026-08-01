@@ -14919,4 +14919,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledFlow_endpoint_baseVelocity_hasFDerivAt_exists
 #print axioms QIQTH.ExpMap.autonomousFlow_endpoint_hasFDerivAt_window_exists
 
+-- J4-67 (UniformFlowSecondSupply.lean): R2-a + R2-b of the 2nd-order climb (independently built green).
+-- R2-a uniformFlow_doubledEndpoint_baseVelocity_hasFDerivAt: the base-velocity-perturbed CONFINED
+-- doubled uniform-tube supply Wδ=(uniformFlowTube q (v+δ), Jf δ) (Jacobi seed (0,b), G-integral curve via
+-- doubledField_prod_hasDerivAt, confined in closedBall((q,0),C₀ρ)×ˢclosedBall(0,‖(0,b)‖e^Kb), IC
+-- Wδ 0−W0 0=((0,δ),(0,0))) fed to J4-66 ⟹ ∃L HasFDerivAt(fun δ=>(uniformFlowTube q(v+δ)1, Jf δ 1)) L 0.
+-- R2-b uniformFlowExp_fderiv_apply_eq (EXPOSES the K2 endpoint operator: fderiv(uniformFlowExp q) w b =
+-- (J 1).1 for J the velocity-Jacobi with seed (0,b), via re-deriving the K2 window-capstone +
+-- jacobiSol_unique) + uniformFlowExp_fderiv_apply_hasFDerivAt (per-SEED Fréchet 2nd-jet: ∃L₂ HasFDerivAt
+-- (fun w=>fderiv(uniformFlowExp q) w b) L₂ v, projecting R2-a's .2.1 + recentre). Genuine HasFDerivAt, no
+-- expRho, no smuggled conclusion; discharges the hdiff obligation R1 flagged, per-b. std-3.
+-- ⚠ FULL R2 (CLM-valued Hessian ∃B₂ HasFDerivAt(fun w=>fderiv(uniformFlowExp q) w) B₂ v) FIREWALLED —
+-- needs the finite-dim assembly (CLM-valued map differentiable iff basis-evaluations differentiable;
+-- (Point n→L Point n)≃L(Point n)^n / differentiableAt_pi) lifting R2-b's per-seed derivs. J4-68 = that
+-- assembly ⟹ R2; then R3 (R1 τ=1 bound) + 3rd variation → C³. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlow_doubledEndpoint_baseVelocity_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_apply_hasFDerivAt
+
 end QIQTH.AxiomAudit
