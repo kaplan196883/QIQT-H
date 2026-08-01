@@ -14949,4 +14949,19 @@ namespace QIQTH.AxiomAudit
 -- uniform → single B → hunif; +hcoord; then hDuhamel. J4-69 = R3 + 3rd variation. [AF] std-3.
 #print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_hasFDerivAt
 
+-- J4-69 (UniformFlowHessianBound.lean): R3 REDUCTION + 2 reusable lemmas (indep build-verified).
+-- bilinear_opNorm_le_of_symm_diag_bound (generic, any real normed space): symmetric bilinear B with
+-- ‖B a a‖≤M‖a‖² ⟹ ‖B‖≤2M, via polarization (4•B a b=B(a+b)(a+b)−B(a−b)(a−b)) + opNorm_le_bound₂ (const
+-- 2M not M since Point n=Fin n→ℝ is sup-norm, no parallelogram law; ∃M is all R3 needs). uniformFlowExp
+-- _hessian_symm (B₂ symmetric, via second_derivative_symmetric_of_eventually + K2 eventual 1st-deriv +
+-- R2 2nd-deriv). uniformFlowExp_hessian_opNorm_le_of_diag_bound: hdiag(uniform diagonal ‖B₂ a a‖≤M‖a‖²
+-- over q∈K) ⟹ ∃M' ‖B₂(q,v)‖≤M' (M'=2M before intro). Genuine reduction, no expRho, no smuggled bound.
+-- ⚠ R3 NOT fully closed: the diagonal bound hdiag is CARRIED — discharging it needs the diagonal VALUE-id
+-- B₂ a a=(Zf 1).1 feeding R1's bound, but R1's Zf is DIAGONAL + within-derivative ([0,1], padded tube
+-- continuous only on (-2,2)) while hid_of_doubled_data's hZf needs TWO-SIDED HasDerivAt ⟹ needs a
+-- two-sided doubled 2nd-variation supply (one order above R2-a). J4-70 = that supply ⟹ hdiag ⟹ R3
+-- unconditional; then 3rd variation → C³ ⟹ g̃∈C² → M/L uniform → hunif; +hcoord; hDuhamel. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_hessian_opNorm_le_of_diag_bound
+#print axioms QIQTH.ExpMap.uniformFlowExp_hessian_symm
+
 end QIQTH.AxiomAudit
