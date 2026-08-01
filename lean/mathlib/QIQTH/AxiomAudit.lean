@@ -15224,4 +15224,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_uniform
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_uniform_gaussDdim
 
+-- ★★ J4-86 (UniformResidualBound.lean, ns HeatResidualBound): F-res REDUCED to ONE input (indep
+-- build-verified). R1: totalRadialO1_coeff = coeffAF·w₀ + radialDeriv(w₀) + coeffDevF; the per-q ∀ᶠ
+-- little-o replaced by explicit-radius bounds for terms (2)+(3): residualQuadratic_pointwise (explicit-
+-- v core, 32n²MW) + uniformFlowLaplaceBeltrami_w0_near_uniform (R2: uniform L near 0, EVT + D4/D5).
+-- uniformResidual_gaussian_bound (R3): F-res in the exact hResU shape, C = 8C_c+32n²MW+L, conditional
+-- ONLY on hCoeffU = ∃ρ_c C_c ∀q∈K ∀‖v‖<ρ_c |totalRadialO1_coeff g̃_q g̃⁻¹_q Θ u v| ≤ C_c·rncRadialSq v.
+-- cutoffResidual_uniformFlow_of_coeffBound (R4): full single-(a,b,B) cutoff bound conditional ONLY on
+-- hCoeffU. std-3 all. ⚠ Agent assessed hCoeffU as blocked on a uniform ∂Γ̃/C³-metric layer; MY
+-- ASSESSMENT (J4-87): over-counted by one order — |Γ̃(v)|≤C·r needs Γ̃(0)=0 (jet_zero) + bounded ∂Γ̃
+-- (MVT), and ∂Γ̃ ~ ∂(g̃⁻¹)·∂g̃ + g̃⁻¹·∂²g̃ needs only the EXISTING C² layer + inverse bounds
+-- (∂g̃⁻¹ = −g̃⁻¹(∂g̃)g̃⁻¹ via fderiv_inverse). J4-87 = hCoeffU from existing bounds.
+#print axioms QIQTH.HeatResidualBound.uniformResidual_gaussian_bound
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_of_coeffBound
+
 end QIQTH.AxiomAudit
