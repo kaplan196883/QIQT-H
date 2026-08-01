@@ -156,3 +156,25 @@ Single hardest = Brick A (laborious-not-research). J4-14 = C1 (build Vmap = exp_
 - **J4-75** (UniformFlowThirdBound.lean) — W3 polarization half (indep build-verified): symm_trilinear_polarization (24-fold parallelogram-free identity) + trilinear_opNorm_le_of_symm_diag_bound (‖B‖≤(9/2)M from symmetric diagonal bound), generic/reusable, one-order-up of J4-69. GPT-5.5: per-slot Grönwall route BLOCKED (confinement grows with ‖a‖,‖b‖). W3 residual: P1 diagonal value-id (tripled-flow hid-analogue) + P2 B₃ symmetry (Clairaut). J4-76 = P1+P2 ⟹ W3 (M₃=(9/2)M₃j from W1). [AF] std-3.
 - **J4-76** (UniformFlowThirdBoundClose.lean) — D1+P2+conditional-W3 (indep build-verified): uniformFlowExp_hessianMap_differentiableAt (CLM-valued 3rd jet via double piRing lift) + thirdJet_symm23/symm12 (differentiated hessian_symm + Clairaut) + uniformFlowExp_thirdDeriv_opNorm_le_of_diag_bound (hdiag ⟹ ‖B₃‖≤(9/2)M uniform). W3 residual = P1 diagonal value-id (d/ds[(U_s 1).2.1]|₀ ↔ W1 Z₃, discharges hdiag with M=M₃j). J4-77 = P1 ⟹ W3 unconditional. [AF] std-3.
 - **J4-77** (UniformFlowThirdDiag.lean) — Q1a diagonal value-id (indep build-verified): uniformFlowExp_thirdDeriv_diag_value_perSeed (B₃(q,v) a a a = L₃ a, via D1 + line-restriction + W2 per-seed + HasDerivAt.unique). W3 residual reduced to ‖L₃ a‖≤M₃j‖a‖³ — needs the Xcmp comparison-field brick (engine L δ=V δ 1 clause re-plumb + packed within-uniqueness + 3 fderiv-applied lemmas; GPT-5.5 no-shortcut). J4-78 = Xcmp ⟹ W3 unconditional. [AF] std-3.
+
+## J4-78 (aa2b8f4b) — ★★ W3 UNCONDITIONAL: C³ LAYER OF BRICK-A(β) CLOSED
+`QIQTH/UniformFlowThirdUncond.lean` (ns QIQTH.ExpMap), [AF] std-3, indep build-verified.
+The Xcmp comparison-field brick, exactly per the GPT-5.5-confirmed spec (no shortcut existed):
+- Reusable applied block lemmas: `genericDoubled_fderiv_fst/snd_apply`,
+  `fderiv_fderiv_doubledField_apply` (+`_fst`/`_snd`) — D²(doubledField) applied block via
+  the evaluation-commutes-with-fderiv route.
+- `autonomousLinODE_within_unique` — within-[0,1] Grönwall uniqueness (reconciles W1's
+  within-derivatives vs the engine's two-sided ones).
+- `comparisonField_hasDerivWithinAt` — Xcmp τ = ((V τ,W τ),(W τ,Z₃ τ)) solves the
+  Φ̃-linearized ODE along ((Y,V),(V,W)); RHS reduces EXACTLY to W1's (V',W',W',Z₃')
+  (Src₃ matched up to abel).
+- `uniformFlow_quadrupleEndpoint_baseVelocity_hasFDerivAt_withField` — J4-73 engine
+  re-plumbed KEEPING ∀δ, L δ = Vf δ 1 and exposing the linearized family+ODE+seed.
+- X1 `uniformFlowExp_thirdDeriv_diag_cubic_bound`: B₃ a a a = (Xcmp 1).2.2.1 = (Z₃ 1).1
+  via three within-uniqueness pins (Jf 0 = V; Uf 0 = (V,W); Vf a = Xcmp) ⟹
+  ‖B₃ a a a‖ ≤ M₃j‖a‖³ (M₃j = W1's constant; r₀ = min r₀_W1 ρ_K).
+- X2 = W3 `uniformFlowExp_thirdDeriv_opNorm_le`: with J4-76 polarization, ‖B₃‖ ≤ (9/2)M₃j
+  uniform on the common ball — hyps ONLY hC + IsCompact K. The hdiag firewall is a THEOREM.
+STATUS: Brick-A(β) regularity climb C⁰/C¹/C² /C³ ALL CLOSED unconditional.
+NEXT: J4-79 = W4 (g̃ = Jᵀ(g∘F)J ∈ C² with uniform bounds) → hunif assembly → hcoord →
+mechanical wiring → hDuhamel (Rosenberg §3.2.2) → TrueKernelA1Reduced:153.
