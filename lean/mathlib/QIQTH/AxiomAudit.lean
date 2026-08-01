@@ -14992,4 +14992,20 @@ namespace QIQTH.AxiomAudit
 -- g̃∈C² assembly (large). J4-72 = W2. [AF] std-3.
 #print axioms QIQTH.ExpMap.uniformFlowTube_thirdVariation_uniform_bound
 
+-- J4-72 (UniformFlowThirdFDeriv.lean): W2 infrastructure (indep build-verified). X1 ROUTE VERDICT
+-- (GPT-5.5 high): R2-a/b reuse INSUFFICIENT for the 3rd jet (their doubled-endpoint derivative's .2.1
+-- IS D²E(a,b), .2.2 is Jacobi velocity — neither is the 3rd jet); W2 needs the QUADRUPLED field
+-- Φ̃ = genericDoubled (doubledField g gi). Landed: uniformFlowExp_fderiv_apply_differentiableOn (W2-pre,
+-- from R2-b) + genericDoubled (generic Jacobi doubling, doubledField = genericDoubled geodesicField) +
+-- contDiff_genericDoubled + genericDoubled_fderiv{,2}_bddOn_compact (field-agnostic regularity supply) +
+-- contDiff_quadrupledField + quadrupledField_fderiv{,2}_bddOn_compact (instantiated from hC) — exactly
+-- the engine-regularity inputs the future quadruple-flow supply consumes (same role contDiff_doubled
+-- Field played for C²). All 7 DERIVED from hC+IsCompact+R2-b. std-3.
+-- ⚠ W2 (3rd-jet HasFDerivAt) CARRIED: needs the QUADRUPLE-flow SUPPLY (R2-a one order up: W̃ δ =
+-- ((tube(v+δ),Jf δ),Φ̃-linearized) as Φ̃-integral curve, confined, windowed IC) fed to the field-agnostic
+-- J4-66 engine + a scalar-slot value-id one order up. W3 (‖B₃‖ bound) + W4 (g̃∈C²) carried. J4-73 =
+-- the quadruple supply ⟹ W2. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_apply_differentiableOn
+#print axioms QIQTH.ExpMap.contDiff_quadrupledField
+
 end QIQTH.AxiomAudit
