@@ -15210,4 +15210,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball_from_packet
 #print axioms QIQTH.HeatResidualBound.near_uncutResidual_uniform
 
+-- ★★ J4-85 (UniformCutoffEngine.lean, ns HeatResidualBound): F-cut DISCHARGED (indep build-verified).
+-- B-assembly exposed: B = C + M·Kc2 + 2n²·Kg·Kc1·M·(8/a²) (near/annulus/far split, 8/a² from
+-- invTpow_gaussDdim_le_gaussDdimWide). cutoffResidual_global_gaussianWide_bound_explicitB (C1, proof
+-- verbatim, packaging swapped) + uniformFlowPullbackMetricInv_symm_global (global g̃⁻¹ symmetry via
+-- Ring.inverse_non_unit junk-value — sheds the carried hgisymm) + cutoffResidual_uniformFlow_uniform
+-- (C2: SINGLE (a,b,B) over q∈K; radius bookkeeping b=min(ρ_u/2, rmin/2), a=b/2; same-B reuse by
+-- fixing Kg/Kc2/Mann/Kc1 before ∀q) + _gaussDdim (C3: width-2 gaussDdim(2t) shape). std-3 all.
+-- ⚠ CONDITIONAL ONLY on hResU = F-res (uniform residual bound; open residue = uniform C³ Taylor
+-- little-o of totalRadialO1_coeff + uniform Laplacian L). C3→hEboundW_of_uniform_perBasePoint gaps:
+-- (i) fixed t vs ∀τ (ii) q∈K vs ∀q (iii) E-identification Vmap. J4-86 = F-res.
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_global_gaussianWide_bound_explicitB
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_uniform
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_uniform_gaussDdim
+
 end QIQTH.AxiomAudit
