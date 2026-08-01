@@ -15254,4 +15254,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.uniformCoeff_bound
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional
 
+-- ★★ J4-88 (UniformTauResidual.lean, ns HeatResidualBound): τ-QUANTIFICATION CLOSED (indep build-
+-- verified). Consumer verdict: hEboundW_of_uniform_perBasePoint (RecenterReduction:86) + the capstone
+-- need literally ∀τ>0 (not (0,T]) — DELIVERED. τ-trace: every chain constant already τ-free EXCEPT
+-- Mann (packaging artefact — |∂ⱼH| absorbed directly into gaussDdimWide via (1/τ)G ≤ (8/a²)G_wide,
+-- deleting the M·(1/t) factor; new engine simpler than J4-85's). parametrixCofactor value/deriv
+-- τ-uniform annulus bounds + cutoffResidual_gaussianWide_tauUniform_engine (B = C + Kcof·Kc2 +
+-- 2n²KgKc1Kder) + τ-quantified F-res/near ⟹ CAPSTONE cutoffResidual_uniformFlow_unconditional_tau:
+-- ∃(a,b,B) τ-free, ∀τ>0 ∀q∈K ∀v — same hyps as J4-87. std-3 all.
+-- ⚠ FIREWALL (the ONE remaining hunif piece, honest): E-IDENTIFICATION — capstone's E = heatOp g gi H
+-- is the GLOBAL residual in the original chart at base 0; our bound is the recentered cutoff residual
+-- under g̃_q in v. Width convertible (G_wide = (√2)ⁿ·gaussDdim(2τ)); the identification needs the
+-- arbitrary-base-point exp-transport (the ⊤-global smoothness of the arbitrary-center chart wall
+-- named in RecenterReduction's Step-1 finding). NOT a one-lemma gap. J4-89.
+#print axioms QIQTH.HeatResidualBound.parametrixCofactor_deriv_annulus_gaussDdimWide_tauUniform
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_gaussianWide_tauUniform_engine
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional_tau
+
 end QIQTH.AxiomAudit
