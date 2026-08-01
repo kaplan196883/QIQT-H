@@ -294,3 +294,14 @@ same-B by fixing constants before ∀q) + `_gaussDdim` (width-2 shape).
 Conditional ONLY on hResU = F-res. Gaps to RecenterReduction:86: fixed-t vs ∀τ, q∈K vs
 ∀q, E-identification (Vmap). J4-86 (F-res: quantitative little-o replacement via
 dev_uniform + uniform Laplacian L) in flight.
+
+## J4-86 (6bfd9831) — ★★ F-res REDUCED to hCoeffU: terms 2+3 discharged
+`QIQTH/UniformResidualBound.lean` (ns HeatResidualBound), [AF] std-3, indep build-verified.
+Split coeffAF·w₀ + radialDeriv(w₀) + coeffDevF; per-q ∀ᶠ little-o replaced by explicit-
+radius bounds: `residualQuadratic_pointwise` (32n²MW, consumes dev_uniform) +
+`uniformFlowLaplaceBeltrami_w0_near_uniform` (uniform L near 0). `uniformResidual_
+gaussian_bound` (exact hResU shape, C=8C_c+32n²MW+L) + `cutoffResidual_uniformFlow_of_
+coeffBound` — BOTH conditional ONLY on hCoeffU (uniform O(r²) of totalRadialO1_coeff).
+CORRECTED ASSESSMENT (mine, vs agent's C³ claim): hCoeffU needs only the EXISTING C²
+layer — Γ̃ linear decay via Γ̃(0)=0 (jet_zero) + MVT with ∂Γ̃ bounded by the second
+Fréchet layer + ∂g̃⁻¹=−g̃⁻¹(∂g̃)g̃⁻¹ (differentiate Σg̃⁻¹g̃=δ entrywise). J4-87 in flight.
