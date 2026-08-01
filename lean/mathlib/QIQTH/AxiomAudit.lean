@@ -15022,4 +15022,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_quadrupleEndpoint_component_hasFDerivAt
 #print axioms QIQTH.ExpMap.uniformFlow_quadrupleEndpoint_baseVelocity_hasFDerivAt
 
+-- ★ J4-74 (UniformFlowThirdJetClose.lean): W2 CLOSED (indep build-verified) — the per-seed THIRD jet of
+-- uniformFlowExp. Z1 uniformFlowExp_hessian_value_id: for ANY J (Jacobi seed (0,b) along tube(v)) and U
+-- (doubledField-linearized seed ((0,a),(0,0)) along (tube,J)): B₂(v) a b = (U 1).2.1 — PROVED via
+-- reconstructing J4-70's hid supply (value-id only, bound section dropped) + hid_of_doubled_data +
+-- jacobiSol_unique (base Jacobi factors equal) + autonomousLinODE_unique (linearized fields equal).
+-- Z2 uniformFlow_thirdJet_hasFDerivAt: ∃L₃ HasFDerivAt (fun w => (fderiv(fun u=>fderiv(uniformFlowExp q)
+-- u) w) a b) L₃ v — from J4-73's component HasFDerivAt + Z1-as-EventuallyEq on the window +
+-- congr_of_eventuallyEq + recentre. Slot-order B₂·a b direct (a=base-velocity dir, b=Jacobi dir), no
+-- symm bridge needed. All DERIVED, no expRho. std-3.
+-- ⚠ C³ remaining: W3 uniform ‖B₃‖ bound (Grönwall on quadruple 2nd-var endpoint, 3rd-order analogue of
+-- J4-70's diagonal bound — value-id Z1 + W1's Z₃ cubic bound + polarization) + W4 uniformFlowExp∈C³ ⟹
+-- g̃∈C² assembly (piRing-lift + product/chain rules). J4-75 = W3. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlow_thirdJet_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_hessian_value_id
+
 end QIQTH.AxiomAudit
