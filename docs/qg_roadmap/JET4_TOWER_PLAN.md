@@ -320,3 +320,14 @@ Fréchet layer + ∂g̃⁻¹=−g̃⁻¹(∂g̃)g̃⁻¹ (differentiate Σg̃⁻
    cutoff support strictly inside the chart domain; three lemmas (chart identification /
    E=0 outside / trivial bound 0≤B·gauss outside). Never apply a partial Vmap outside
    its domain — piecewise extension explicit in the capstone statement.
+
+## J4-87 (c110bcfd) — ★★★ hCoeffU DISCHARGED: uniform cutoff residual UNCONDITIONAL (fixed t)
+`QIQTH/UniformCoeffBound.lean` (ns HeatResidualBound), [AF] std-3, indep build-verified.
+The C²-suffices assessment HELD (Sol-confirmed); landed route simpler still — MVT one
+level down: `pd_linear_decay` (|∂g̃(v)|≤Kpd‖v‖ from jet_zero + fderiv_decay on the
+genuine layer-2 HasFDerivAt data) ⟹ `uniformFlowChristoffel_linear_decay` (entrywise, no
+inverse calculus) ⟹ `uniformCoeff_bound` (hCoeffU; extra input hw0flat = the SAME gauge
+hypothesis as the old chain) ⟹ `cutoffResidual_uniformFlow_unconditional` — the full
+single-(a,b,B) uniform residual bound over K. F-res/F-cut/hCoeffU chain (J4-84→87) CLOSED.
+Remaining to global hEboundW: τ-quantification + per-base-point E-identification (J4-88
+in flight; Sol routes in the consult record above).
