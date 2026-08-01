@@ -259,3 +259,18 @@ architecture) ⟹ per-base-point bound w/ SINGLE B ⟹ RecenterReduction:86 ⟹ 
 hDuhamel decomposition (gpt-5.6-sol, bankable order) recorded in loop state: Gaussian
 convolution calculus → Levi iterate bounds → ε-truncated identity → delta-family
 (Lemma 3.14) → ε→0 → partial sums → series interchange.
+
+## J4-82u + J4-83 (ac38c464) — ★★ uniform-M hdev + producer→packet re-plumb
+[AF] std-3, indep build-verified.
+J4-82u (UniformFlowJetZero.lean +209 lines): jet-values-only transfer (forward weld +
+pd_congr_eventuallyEq ⟹ jet_zero g̃(0)=δ, ∂g̃(0)=0) + Taylor with UNIFORM C² constants ⟹
+`uniformFlowPullbackMetricInv_dev_uniform` — hdev with ONE M over K (the consult's design).
+J4-83 (UniformResidualPacket.lean, ns HeatResidualBound): census found the producer body
+is a thin assembly of TWO already-abstract engines ⟹ re-instantiation not port:
+`cutoffResidual_bound_from_packet` (construction-independent, no exp objects) +
+`cutoffResidual_uniformFlow_hEboundW` (per-q at uniformFlowPullbackMetric; hsymm+hdev
+supplied from uniform machinery, rest carried genuine).
+FIREWALL (exact): full uniform hEboundW = UNIFORM NEAR ENGINE (per-q b=ρ/2 + constant in
+near_uncutResidual_gaussianWide_ball_C3 / residualN0_local_baseKernelW_slice_C3) + ball-
+local producer variant (global ∀y/∀a,b fields vs ball-local uniform lemmas).
+J4-84 (in flight) = UniformNearEngine.lean attacking exactly this.
