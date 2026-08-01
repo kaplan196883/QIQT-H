@@ -178,3 +178,15 @@ The Xcmp comparison-field brick, exactly per the GPT-5.5-confirmed spec (no shor
 STATUS: Brick-A(β) regularity climb C⁰/C¹/C² /C³ ALL CLOSED unconditional.
 NEXT: J4-79 = W4 (g̃ = Jᵀ(g∘F)J ∈ C² with uniform bounds) → hunif assembly → hcoord →
 mechanical wiring → hDuhamel (Rosenberg §3.2.2) → TrueKernelA1Reduced:153.
+
+## J4-79 (270891aa) — W4 differentiability + C⁰ half: g̃ entries C² on the uniform ball
+`QIQTH/UniformFlowMetricC2.lean` (ns QIQTH.ExpMap), [AF] std-3, indep build-verified.
+- `IsC2At` scalar 2-jet calculus (eventual DifferentiableAt + differentiable fderiv-map;
+  const/add/mul/finsetSum closure) — geometry-free, reusable.
+- `isC2At_jacobianEntry` (CLM-apply/proj evaluation route + D1 third jet),
+  `isC2At_metricFactor` (hg chain rule), entry assembly + both HasFDerivAt layers.
+- Capstone `uniformFlowPullbackMetric_c2_uniform`: ∃r₀>0 ∃M ∀q∈K ∀‖v‖<r₀ ∀ij — both
+  Fréchet layers exist + |g̃_ij(v)| ≤ M. Hyps ONLY hg+hC+IsCompact K.
+FIREWALL (honest, assembly-only): uniform C¹/C² entry opNorm bounds pending — all
+sub-bounds exist uniformly (Mg0, Mj, Hessian R3, third W3, EVT ‖Dg‖/‖D²g‖ on the
+endpoint tube). J4-79b = IsC2At-with-bounds product lemma ×2 + finite triangle sums.
