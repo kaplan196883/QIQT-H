@@ -14841,4 +14841,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackMetric.uniformFlowPullbackMetric_isUnit_of_fderiv_isUnit
 #print axioms QIQTH.PullbackMetric.uniformConfinedTubeOn_pullback_isUnit
 
+-- J4-62 (UniformFlowRegBound.lean): Brick-A piece (I) scope + first rung. SCOPE VERDICT (agent+GPT-5.5):
+-- the residual sup-constants M/W/L need g̃∈C² ⟺ uniformFlowExp∈C³ (velocity slot; the existing expMap
+-- producer wants g̃∈C³/F∈C⁴ via hfd3 — a refactorable interface gap, minimal math is C³). Current
+-- uniformFlowExp regularity = ONLY C¹ (uniformFlowExp_hasFDerivAt J4-55, pointwise-per-q, no joint
+-- continuity). ⟹ piece (I) is a LARGE joint higher-regularity sub-tower (2 orders short: 2nd + 3rd
+-- velocity variation over K, joint-continuous; then EASY uniformization by compactness which CONSUMES
+-- the joint jets). Reuse AutonomousSmoothDep + JacobiOperatorFDeriv doubled-field 2nd-jet (plausibly
+-- +1 order to C²); 3rd order = new. Overlap uniformFlowExp=expMap gives per-q C⁴ only on shrinking ball
+-- (expRho), NOT uniform. FIRST RUNG landed: uniformFlowExp_displacement_uniform_bound (∃M≥0 ∀q∈K
+-- ∀‖v‖≤ρ_K, ‖uniformFlowExp q v − q‖≤M, M=C₀ρ_K from C⁰ tube confinement) — makes the g-factor of g̃
+-- uniformly bounded. std-3.
+-- ⚠ Brick-A remainder (regularity half) = LARGE: J4-63 joint-cont fderiv over K×ball → uniform Jacobian
+-- bound; J4-64 2nd variation → C²; J4-65 3rd variation → C³ ⟹ g̃∈C² ⟹ M/W/L uniform → single B → hunif;
+-- + hcoord; then hDuhamel. De-risk: refactor producer to minimal C² interface first. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_displacement_uniform_bound
+
 end QIQTH.AxiomAudit
