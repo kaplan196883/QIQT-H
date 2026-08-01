@@ -15303,4 +15303,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.pullback_christoffel_transform
 #print axioms QIQTH.HeatResidualBound.laplaceBeltrami_pullback_naturality
 
+-- ★★★ J4-91 (PullbackNaturalityLocal.lean, ns HeatResidualBound): NATURALITY INSTANTIATED AT
+-- uniformFlowExp — the J4-90 firewall BROKEN, NOTHING left firewalled (indep build-verified).
+-- KEY FINDING: the three Fréchet layers hold at EVERY point of the open ball ⟹ genuine ContDiffAt 2
+-- assembles via contDiffAt_succ_iff_hasFDerivAt twice + D²φ ContinuousOn (contDiffAt2_uniformFlowExp
+-- = the firewall-breaker). Tower localized verbatim at per-point regularity (φ per-comp ContDiffAt 2,
+-- g entries ContDiffAt 1 at φx, f ContDiffAt 2; Schwarz via isSymmSndFDerivAt; germ-EventuallyEq
+-- route for pd_pd_comp_local). pullbackMet_eq_uniformFlowPullbackMetric bridges. CAPSTONES:
+-- laplaceBeltrami_pullback_naturality_local (abstract local) + laplaceBeltrami_uniformFlow_naturality
+-- (∃r₀>0 ∀q∈K ∀‖v‖<r₀: Δ_{g̃_q}(f∘φ_q)(v) = (Δ_g f)(φ_q v); φ-regularity/Jacobian/identification/
+-- inverse-relation DISCHARGED; carried = genuine far-point geometry only). std-3 all.
+-- NEXT: J4-92 = E-witness assembly (zero-extension + chart-id/E=0/trivial-bound + hcoord + feed
+-- RecenterReduction:86/:101 ⟹ GLOBAL hEboundW = hunif core).
+#print axioms QIQTH.HeatResidualBound.contDiffAt2_uniformFlowExp
+#print axioms QIQTH.HeatResidualBound.laplaceBeltrami_pullback_naturality_local
+#print axioms QIQTH.HeatResidualBound.laplaceBeltrami_uniformFlow_naturality
+
 end QIQTH.AxiomAudit
