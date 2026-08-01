@@ -15319,4 +15319,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.laplaceBeltrami_pullback_naturality_local
 #print axioms QIQTH.HeatResidualBound.laplaceBeltrami_uniformFlow_naturality
 
+-- ★★ J4-92 (GlobalResidualWitness.lean, ns HeatResidualBound): THE E-IDENTIFICATION TRANSPORT (indep
+-- build-verified; gpt-5.6-sol consulted on witness design). globalCutoffParametrixWitness H_w τ p q :=
+-- χ_{a,b}(Vmap q p)·H₀(τ, Vmap q p) with Vmap ABSTRACT + per-v left-inverse germ hypothesis (kills
+-- the uniformFlowExp/expMap identity dependency). W2 heatOp_globalWitness_eq_recentred_inChart:
+-- heatOp g gi H_w τ (φ_q v) q = the recentred cutoff-residual bracket (∂_τ by deriv_const_mul_field
+-- + germ point-value; Δ by REVERSE naturality + laplaceBeltrami_congr_nhds) — connects the capstone's
+-- E to the τ-uniform engine's bracket. W3 globalWitness_residual_bound_inChart: |heatOp g gi H_w| ≤
+-- B·gaussDdimWide τ v in-chart, single τ-free (a,b,B) over K. std-3 both.
+-- ⚠ CARRIED (per Sol, honest): hgerm (Vmap left-inverse germ) + witness ContDiffAt 2 at φ_q v (the
+-- off-diagonal C² of the inverse chart) + hcoord + the global ∀p feed. ⚠ MY NEXT-STEP ASSESSMENT
+-- (J4-93): Sol's "infrastructure-scale" may be beatable — contDiffAt2_uniformFlowExp + IsUnit fderiv
+-- = EXACTLY Mathlib IFT input (ContDiffAt.to_localInverse) ⟹ C² local inverse near every ball point
+-- ⟹ discharge hgerm + witness regularity.
+#print axioms QIQTH.HeatResidualBound.heatOp_globalWitness_eq_recentred_inChart
+#print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_inChart
+
 end QIQTH.AxiomAudit

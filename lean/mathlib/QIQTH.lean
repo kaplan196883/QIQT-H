@@ -293,6 +293,7 @@ import QIQTH.UniformTauResidual
 import QIQTH.ResidualChartTransport
 import QIQTH.PullbackNaturality
 import QIQTH.PullbackNaturalityLocal
+import QIQTH.GlobalResidualWitness
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
