@@ -270,6 +270,7 @@ import QIQTH.UniformFlowSecondSupply
 import QIQTH.UniformFlowHessian
 import QIQTH.UniformFlowHessianBound
 import QIQTH.UniformFlowHessianDiag
+import QIQTH.UniformFlowThirdJet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -14979,4 +14979,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_hessian_opNorm_le
 #print axioms QIQTH.ExpMap.uniformFlowExp_hessian_diag_bound
 
+-- J4-71 (UniformFlowThirdJet.lean): C³ layer OPENED (W1, indep build-verified). uniformFlowTube_third
+-- Variation_uniform_bound: hC+IsCompact K ⟹ ∃r₀>0 ∃M₃j≥0 ∀q∈K ∀‖v‖≤r₀ ∀a, ∃ V W Z₃ solving the
+-- 1st/2nd/3rd-variation linODEs along the uniform tube (source Src₃ = D³F(V,V,V)+2·D²F(V,W)+D²F(W,V) —
+-- the ∂_ε of the 2nd-var ODE, un-collapsed no-symmetry form) with ‖Z₃ τ‖ ≤ M₃j·‖a‖³ (uniform CUBIC
+-- Grönwall bound). All on CLOSED [0,1] via right-within-derivs (T-within); linODE_inhomog_within engine
+-- reused twice (W, Z₃); constants Kf/M₂/M₃ = sups over ONE compact phase ball over K, M₃j=gronwallBound
+-- 0 Kf (M₃e^{3Kf}+3M₂e^{Kf}M₂j) 1, all chosen before intro. maxSynthPendingDepth 10 for the triple-CLM
+-- instance. No expRho, all DERIVED. std-3.
+-- ⚠ C³ REMAINING: W2 per-seed 3rd-jet EXISTENCE (hid-analogue one order up via field-agnostic engine on
+-- Φ:=doubledField, medium-large) + W3 uniform ‖B₃‖ bound (small given W2) + W4 uniformFlowExp∈C³ ⟹
+-- g̃∈C² assembly (large). J4-72 = W2. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowTube_thirdVariation_uniform_bound
+
 end QIQTH.AxiomAudit
