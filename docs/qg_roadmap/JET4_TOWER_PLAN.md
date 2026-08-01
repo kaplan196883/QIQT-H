@@ -352,3 +352,12 @@ naturality is D²φ-dependent. CORES: pd_comp + pullbackInv_trace_contraction (J
 J4-90 (in flight): KEY INSIGHT — naturality is a GENERAL C² diffeomorphism computation
 (no geodesic input): ∂g̃ product expansion → Christoffel transform (∂J-symmetry from
 Mathlib) → abstract laplaceBeltrami_pullback_naturality → instantiate at uniformFlowExp.
+
+## J4-90 (a5d39760) — ★★★ LB PULLBACK NATURALITY: the abstract heart of the E-identification
+`QIQTH/PullbackNaturality.lean` (ns HeatResidualBound), [AF] std-3, indep build-verified.
+The general-diffeomorphism insight HELD (J4-89 pessimism overturned): naturality is pure
+computation for any smooth φ with invertible Jacobian. Chain: pullbackMet + metric-deriv
+Leibniz + christoffel-combo (Schwarz cancellations) + `pullback_christoffel_transform`
+(CRUX: the RAISED law — contract vs J so J·g̃⁻¹·Jᵀ=g⁻¹ collapses, Dφ⁻¹ never forms) +
+CAPSTONE `laplaceBeltrami_pullback_naturality`. FIREWALL: local instantiation at
+uniformFlowExp (ContDiffAt-on-ball tower re-run) = J4-91 (in flight).
