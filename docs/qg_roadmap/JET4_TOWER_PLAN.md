@@ -370,3 +370,12 @@ regularity; `laplaceBeltrami_uniformFlow_naturality` on the uniform ball with on
 genuine far-point hypotheses carried. NEXT: J4-92 (in flight) = the E-witness assembly
 (H_w via Vmap/zero-extension → residual transport via naturality → in/out-chart bounds →
 hcoord width-margin → RecenterReduction feed ⟹ global hEboundW = hunif core).
+
+## J4-92 (942d236f) — ★★ the E-IDENTIFICATION TRANSPORT
+`QIQTH/GlobalResidualWitness.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+`globalCutoffParametrixWitness` H_w (abstract Vmap + per-v left-inverse germ) + W2
+`heatOp_globalWitness_eq_recentred_inChart` (heatOp of H_w at φ_q v = the recentred
+bracket; reverse naturality + germ-locality) + W3 in-chart bound (single τ-free (a,b,B)).
+Carried (Sol-honest): hgerm + witness far-point C² + hcoord + global feed. MY counter-
+assessment: Mathlib IFT (ContDiffAt.to_localInverse ⟸ contDiffAt2_uniformFlowExp +
+IsUnit fderiv) should discharge hgerm + regularity — J4-93 in flight.
