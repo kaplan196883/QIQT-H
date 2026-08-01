@@ -15064,4 +15064,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_opNorm_le_of_diag_bound
 #print axioms QIQTH.ExpMap.uniformFlowExp_hessianMap_differentiableAt
 
+-- J4-77 (UniformFlowThirdDiag.lean): Q1a the diagonal VALUE-ID (indep build-verified). uniformFlowExp_
+-- thirdDeriv_diag_value_perSeed: ∃L₃, HasFDerivAt(fun w=>f₂(w) a a) L₃ v ∧ B₃(q,v) a a a = L₃ a — the
+-- one-order-up mirror of clm_fderiv_value_of_directional (D1's HasFDerivAt chained along s↦v+s·a +
+-- double ContinuousLinearMap.apply + W2's per-seed jet on the same line + HasDerivAt.unique). Reduces
+-- the W3 firewall from the abstract B₃-diagonal to the CONCRETE L₃ (J4-73's projected quadruple endpoint
+-- derivative). std-3.
+-- ⚠ W3 residual (GPT-5.5-confirmed no shortcut): ‖L₃ a‖ ≤ M₃j‖a‖³ needs the engine's L δ = V δ 1 clause
+-- (J4-73 discards it) ⟹ COMPARISON-FIELD brick: re-plumb the quadruple engine call with Xcmp τ =
+-- ((V τ,W τ),(W τ,Z₃ τ)), one packed autonomousLinODE_unique (within-variant to reconcile W1's within-
+-- derivs vs the engine's two-sided), + 3 reusable fderiv-applied lemmas (genericDoubled_fderiv_apply /
+-- doubledField_fderiv_apply / fderiv_fderiv_doubledField_apply). ~500 lines, self-contained. Naive
+-- Grönwall on Vf blows up (base carries the ‖a‖² 2nd-var factor). J4-78 = the Xcmp brick ⟹ hdiag with
+-- M:=M₃j ⟹ W3 unconditional; then W4 g̃∈C². [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_diag_value_perSeed
+
 end QIQTH.AxiomAudit
