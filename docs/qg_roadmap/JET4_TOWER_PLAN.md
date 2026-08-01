@@ -243,3 +243,19 @@ All RecenterCutoffC3:97 metric-side inputs EXCEPT hdev, uniform over K:
 FIREWALL (exact): hdev ∀ᶠ v in 𝓝 0, |g̃⁻¹(v)−δ| ≤ M·rncRadialSq v — needs uniformFlowExp
 RNC jet-at-0 (g̃(0)=δ w/ hframe, ∂g̃(0)=0). J4-82 (in flight) = Route T (per-q weld to
 expMap via ODE uniqueness, transfer pd_expPullbackMetricInv_zero) or Route D (direct jets).
+
+## J4-82 (8d2626a1) — ★ hdev DISCHARGED: all metric-side hunif consumer inputs closed
+`QIQTH/UniformFlowJetZero.lean`, [AF] std-3, indep build-verified. Route T (GPT-5.5 +
+gpt-5.6-sol consult): weld expMap =ᶠ uniformFlowExp near 0 per q (J4-20 bridge) ⟹
+EventuallyEq.fderiv_eq ⟹ equal pullback metrics ⟹ Ring.inverse pointwise congruence
+(total fn, no nondeg needed). No expPullback hdev producer existed — built:
+pd_expPullbackMetricInv_zero_clean + contDiffAt_two_quadratic_decay +
+expPullbackMetricInv_dev. Capstone `uniformFlowPullbackMetricInv_dev` = the EXACT
+RecenterCutoffC3:97 hdev shape over uniformFlowExp (per-q M; uniform-M upgrade via
+Taylor from uniform C² = J4-83 concern if needed). Tricks: nested-CLM topology-diamond
+dodge (exact's lenient isDefEq), germ-local pd, hypothesis-clean near-0 inverse identity.
+NEXT: J4-83 (in flight) = producer→packet refactor (ResidualEstimateData; consult
+architecture) ⟹ per-base-point bound w/ SINGLE B ⟹ RecenterReduction:86 ⟹ hunif.
+hDuhamel decomposition (gpt-5.6-sol, bankable order) recorded in loop state: Gaussian
+convolution calculus → Levi iterate bounds → ε-truncated identity → delta-family
+(Lemma 3.14) → ε→0 → partial sums → series interchange.
