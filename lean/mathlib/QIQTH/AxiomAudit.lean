@@ -14964,4 +14964,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_hessian_opNorm_le_of_diag_bound
 #print axioms QIQTH.ExpMap.uniformFlowExp_hessian_symm
 
+-- ★ J4-70 (UniformFlowHessianDiag.lean): R3 CLOSED UNCONDITIONAL (indep build-verified). uniformFlowExp_
+-- hessian_diag_bound (∃r₀>0≤ρ_K ∃M≥0 ∀q∈K ∀‖v‖<r₀ ∀a, ‖B₂(q,v) a a‖≤M‖a‖²) + uniformFlowExp_hessian_
+-- opNorm_le (∃r₀>0 ∃M' ∀q∈K ∀‖v‖<r₀, ‖B₂(q,v)‖≤M') — hyps ONLY hC+IsCompact K, NO hdiag/expRho carried.
+-- Route T via hid_of_doubled_data fed a genuine inline supply: Y a b s=(uniformFlowTube q (v+s·a),
+-- velocity-Jacobi seed (0,b)) [built DIRECTLY from uniformFlowTube — NOT sPerturbed_confined (defeq-
+-- different geodesic breaks hlink)], Vf from doubledVariation_narrowpad, hlink from uniformFlowExp_
+-- fderiv_apply_eq (R2-b), hdiff from R2. ★ KEY SIMPLIFICATION: Zf:=(Vf·).2 ⟹ hZf DERIVED from
+-- doubledField_secondFactor_ode, h0=rfl — dissolves the within-vs-two-sided tension (no clamp/inhomog
+-- solver/R1 needed). M=gronwallBound 0 C₁ (C₂e^{2C₁}) 1 uniform (C₁,C₂ field sups over ONE compact S₀
+-- over K); σ=ρ/(4(1+‖a‖)), r₀=ρ/2. + doubledField_fderiv_fst_apply helper. GPT-5.5 route-consult. std-3.
+-- ⟹ Brick-A regularity: C⁰-bounds ✓ C¹+bound ✓ C² (R2) ✓ C²-bound (R3) ✓. NEXT: 3rd velocity variation
+-- → C³ ⟹ g̃∈C² → M/L uniform → single B → hunif; +hcoord; then hDuhamel. J4-71 = 3rd variation. [AF]
+#print axioms QIQTH.ExpMap.uniformFlowExp_hessian_opNorm_le
+#print axioms QIQTH.ExpMap.uniformFlowExp_hessian_diag_bound
+
 end QIQTH.AxiomAudit
