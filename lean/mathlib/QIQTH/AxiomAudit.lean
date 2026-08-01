@@ -15092,4 +15092,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_diag_cubic_bound
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_opNorm_le
 
+-- J4-79 (UniformFlowMetricC2.lean): W4 differentiability + C⁰ half (indep build-verified). The IsC2At
+-- scalar 2-jet calculus (eventual DifferentiableAt + differentiable fderiv-map; +/*/finsetSum/const
+-- closure via fderiv_mul + congr_of_eventuallyEq) ⟹ (1) isC2At_jacobianEntry (CLM-apply/proj evJ∘Jac
+-- route, D1 third jet), (2) isC2At_metricFactor (hg chain rule), (3) pullback-metric entries IsC2At +
+-- both HasFDerivAt layers, (5) capstone uniformFlowPullbackMetric_c2_uniform: ∃r₀>0 ∃M ∀q∈K ∀‖v‖<r₀
+-- ∀ij: both Fréchet layers exist + |g̃_ij(v)| ≤ M — hyps ONLY hg+hC+IsCompact K. std-3.
+-- ⚠ FIREWALL (honest, assembly-only): uniform C¹/C² opNorm bounds of the entries NOT yet discharged —
+-- every sub-bound exists uniformly (Mg0 Q1, Mj J4-63, Hessian R3, third W3, ‖Dg‖/‖D²g‖ EVT on the
+-- endpoint tube); J4-79b = IsC2At-with-bounds product lemma applied twice + finite triangle sums.
+#print axioms QIQTH.ExpMap.uniformFlowPullbackMetric_c2_uniform
+#print axioms QIQTH.ExpMap.uniformFlowPullbackMetric_entry_isC2At
+
 end QIQTH.AxiomAudit
