@@ -15008,4 +15008,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_apply_differentiableOn
 #print axioms QIQTH.ExpMap.contDiff_quadrupledField
 
+-- J4-73 (QuadrupleFlowSupply.lean): W2 supply Y1-Y3 + component projection (indep build-verified; agent
+-- stalled on report, banked by main loop). genericDoubled_prod_hasDerivAt ((P,J) with J'=DΦ(P)J is a
+-- genericDoubled-integral curve) + uniformFlow_quadrupleEndpoint_baseVelocity_hasFDerivAt (the QUADRUPLE
+-- family: base-velocity-perturbed W̃δ = ((uniformFlowTube q(v+δ), Jf δ [Jacobi seed (0,b)]), Uf δ
+-- [doubled-linearized seed ((0,a),(0,0))]) as genuine integral curves on the window, endpoint
+-- HasFDerivAt via the field-agnostic J4-66 engine with Φ̃-regularity from J4-72) + uniformFlow_
+-- quadrupleEndpoint_component_hasFDerivAt (projection: ∃L₃ HasFDerivAt (fun δ => (Uf δ 1).2.1) L₃ 0 —
+-- the δ-derivative of the 2nd-variation position endpoint). All DERIVED, no expRho. std-3.
+-- ⚠ W2 residual = Y4 VALUE-ID: (Uf δ 1).2.1 = B₂(v+δ) a b on the window (via J4-70's hid value chain +
+-- uniqueness) ⟹ recentre ⟹ W2 ∃L₃ HasFDerivAt(fun w=>B₂(w) a b) L₃ v. Then W3 ‖B₃‖ bound + W4 g̃∈C².
+-- J4-74 = Y4 ⟹ W2. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlow_quadrupleEndpoint_component_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlow_quadrupleEndpoint_baseVelocity_hasFDerivAt
+
 end QIQTH.AxiomAudit
