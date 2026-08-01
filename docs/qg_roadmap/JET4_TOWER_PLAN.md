@@ -274,3 +274,13 @@ FIREWALL (exact): full uniform hEboundW = UNIFORM NEAR ENGINE (per-q b=ρ/2 + co
 near_uncutResidual_gaussianWide_ball_C3 / residualN0_local_baseKernelW_slice_C3) + ball-
 local producer variant (global ∀y/∀a,b fields vs ball-local uniform lemmas).
 J4-84 (in flight) = UniformNearEngine.lean attacking exactly this.
+
+## J4-84 (984e39d9) — ★ near engine UNIFORM: packet refactor + one radius/constant over K
+`QIQTH/UniformNearEngine.lean` (ns HeatResidualBound), [AF] std-3, indep build-verified.
+Census: per-q source = the radius ρ inside eventually_nhds_zero_ball (constant already
+explicit). `near_uncutResidual_gaussianWide_ball_from_packet` (refactor boundary = the
+explicit-radius residual bound hRes) + `_viaPacket` satisfiability check (sharper constant,
+(√2)ⁿ dropped) + `near_uncutResidual_uniform` (ONE b=ρ_u/2 + ONE C over K from hResU).
+FIREWALLS: (F-res) uniform residual bound — term (1) uniform little-o of totalRadialO1_
+coeff (uniform C³ Taylor remainder) + term (3) uniform Laplacian L [term (2) already
+uniform]. (F-cut) explicit-B cutoff-engine variant — J4-85 in flight.
