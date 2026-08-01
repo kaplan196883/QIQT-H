@@ -14936,4 +14936,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_doubledEndpoint_baseVelocity_hasFDerivAt
 #print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_apply_hasFDerivAt
 
+-- ★ J4-68 (UniformFlowHessian.lean): R2 CLOSED — the CLM-valued Hessian existence for uniformFlowExp
+-- (2nd-order regularity). uniformFlowExp_fderiv_hasFDerivAt: hC+IsCompact K, q∈K, ‖v‖<ρ_K ⟹ ∃B₂,
+-- HasFDerivAt (fun w=>fderiv(uniformFlowExp q) w) B₂ v (the CLM-valued jet map w↦fderiv(uniformFlowExp q)
+-- w : Point n → (Point n→L Point n) is Fréchet-differentiable at v). Finite-dim assembly (Point n=Fin n→ℝ):
+-- Mathlib ContinuousLinearEquiv.piRing (Fin n) : ((Fin n→ℝ)→L Point n)≃L(Fin n→Point n) [coord eval L↦
+-- L(Pi.single i 1) by rfl] + comp_differentiableAt_iff + differentiableAt_pi, each coordinate = R2-b
+-- (uniformFlowExp_fderiv_apply_hasFDerivAt at Pi.single i 1). B₂=fderiv F v via DifferentiableAt.
+-- hasFDerivAt. Genuine, no expRho, DERIVED from R2-b + Mathlib. std-3. (Independently build-verified.)
+-- ⚠ R3 (uniform Hessian bound ∃M₂j ‖B₂‖≤M₂j over q∈K via R1's ‖Zf 1‖≤M₂j‖a‖² + double-CLM opNorm↔Zf id)
+-- FIREWALLED. Brick-A now: C¹ ✓, C² ✓ (R2). Remaining: R3 bound + 3rd variation → C³ (⟹ g̃∈C²) → M/L
+-- uniform → single B → hunif; +hcoord; then hDuhamel. J4-69 = R3 + 3rd variation. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_hasFDerivAt
+
 end QIQTH.AxiomAudit
