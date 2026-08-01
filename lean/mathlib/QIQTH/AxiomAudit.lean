@@ -15079,4 +15079,17 @@ namespace QIQTH.AxiomAudit
 -- M:=M₃j ⟹ W3 unconditional; then W4 g̃∈C². [AF] std-3.
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_diag_value_perSeed
 
+-- ★★ J4-78 (UniformFlowThirdUncond.lean): W3 UNCONDITIONAL — C³ LAYER CLOSED (indep build-verified).
+-- The Xcmp comparison-field brick, exactly as specced: (i) reusable block lemmas genericDoubled_fderiv_
+-- fst/snd_apply + fderiv_fderiv_doubledField_apply (D²(doubledField) applied block, ev-commute route);
+-- (ii) autonomousLinODE_within_unique (within-[0,1] Grönwall uniqueness); (iii) comparisonField_
+-- hasDerivWithinAt: Xcmp τ = ((V,W),(W,Z₃)) solves the Φ̃-linearized ODE along ((Y,V),(V,W)) — RHS
+-- reduces exactly to W1's (V',W',W',Z₃') incl. Src₃ up to abel; (iv) engine re-plumb _withField KEEPING
+-- ∀δ, L δ = Vf δ 1; (v) X1 uniformFlowExp_thirdDeriv_diag_cubic_bound: B₃ a a a = (Xcmp 1).2.2.1 =
+-- (Z₃ 1).1 via three within-uniqueness pins (Jf 0=V, Uf 0=(V,W), Vf a=Xcmp) ⟹ ‖B₃ a a a‖ ≤ M₃j‖a‖³;
+-- (vi) X2 = W3: with J4-76's polarization, ‖B₃‖ ≤ (9/2)M₃j — hyps ONLY hC + IsCompact K. The former
+-- hdiag firewall is now a THEOREM. std-3 both. Next: W4 = g̃ ∈ C² assembly.
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_diag_cubic_bound
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdDeriv_opNorm_le
+
 end QIQTH.AxiomAudit
