@@ -14857,4 +14857,18 @@ namespace QIQTH.AxiomAudit
 -- + hcoord; then hDuhamel. De-risk: refactor producer to minimal C² interface first. [AF] std-3.
 #print axioms QIQTH.ExpMap.uniformFlowExp_displacement_uniform_bound
 
+-- J4-63 (UniformFlowJacobianBound.lean): Brick-A uniform JACOBIAN bound. uniformFlowExp_fderiv_uniform_
+-- bound: hC+IsCompact K ⟹ ∃Mj ∀q∈K ∀‖v‖<ρ_K, ‖fderiv(uniformFlowExp q) v‖≤Mj — FULLY proved, Mj=exp(Kf)
+-- q-INDEPENDENT (Kf=geodesicField_fderiv_bddOn_compact over ONE compact S=closedBall(0,(R+‖p₀‖)+C₀ρ_K)
+-- covering all base tubes; Mj chosen before intro q v). NO expRho. Route (crux resolved as predicted, no
+-- joint continuity needed): rebuild explicit Jacobi-endpoint CLM Lpos (mirror J4-56 prelude ~90%),
+-- fderiv=Lpos via HasFDerivAt.fderiv, then Grönwall opNorm ‖Lpos‖≤exp Kf (norm_le_gronwallBound_of_norm
+-- _deriv_right_le + gronwallBound_ε0 + opNorm_le_bound, reuse J4-46). + _closedBall variant (r₀=ρ_K/2).
+-- std-3. Unlocks uniform pullback-metric entry bounds (|g̃_ij|≤‖g∘exp‖·Mj² Cauchy-Schwarz, with
+-- displacement J4-62 bounding the g-factor).
+-- ⚠ Brick-A remainder: uniform g̃-entry bounds (C⁰, now unlockable) + 2nd/3rd velocity variation → C³ ⟹
+-- M/W/L uniform → single B → hunif; + hcoord; then hDuhamel. [AF] std-3.
+#print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_uniform_bound
+#print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_uniform_bound_closedBall
+
 end QIQTH.AxiomAudit
