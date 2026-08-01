@@ -15287,4 +15287,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.pullbackInv_trace_contraction
 #print axioms QIQTH.HeatResidualBound.pd_pd_comp
 
+-- ★★★ J4-90 (PullbackNaturality.lean, ns HeatResidualBound): LAPLACE–BELTRAMI PULLBACK NATURALITY —
+-- THE ABSTRACT HEART OF THE E-IDENTIFICATION (indep build-verified; gpt-5.6-sol consulted once for
+-- N3 bookkeeping). The general-diffeomorphism insight HELD (J4-89's "infrastructure-scale" verdict
+-- overturned): Δ_{φ*g}(f∘φ)(x) = (Δ_g f)(φx) is pure computation for ANY smooth φ with invertible
+-- Jacobian — no geodesic/ODE input. Chain: pullbackMet def + pullback_metric_deriv (Leibniz, D²φ
+-- blocks explicit) + pullback_christoffel_combo (Schwarz + hgsymm cancellations) + pullback_
+-- christoffel_transform (CRUX: the RAISED law Σ_k Γ̃^k_ij·∂_mφ_k = ΣΣ Γ^m_ab(φx)∂φ∂φ + ∂∂φ^m —
+-- contracting against J collapses J·g̃⁻¹·Jᵀ=g⁻¹, so Dφ⁻¹ NEVER forms) + CAPSTONE laplaceBeltrami_
+-- pullback_naturality. All hyps genuine (φ=id, g=δ satisfies). std-3 all four.
+-- ⚠ FIREWALL (exact): N5 instantiation at φ=uniformFlowExp — N4 consumes GLOBAL ContDiff ⊤ φ (the
+-- pd chain-rule tower is built at ⊤) but uniformFlowExp is only C²-on-ball; needs a ContDiffAt-on-
+-- ball re-run of the pd_comp/pd_pd_comp/pd_comm tower. J4-91.
+#print axioms QIQTH.HeatResidualBound.pullback_metric_deriv
+#print axioms QIQTH.HeatResidualBound.pullback_christoffel_transform
+#print axioms QIQTH.HeatResidualBound.laplaceBeltrami_pullback_naturality
+
 end QIQTH.AxiomAudit
