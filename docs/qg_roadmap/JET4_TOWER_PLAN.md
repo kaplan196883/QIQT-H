@@ -361,3 +361,12 @@ Leibniz + christoffel-combo (Schwarz cancellations) + `pullback_christoffel_tran
 (CRUX: the RAISED law — contract vs J so J·g̃⁻¹·Jᵀ=g⁻¹ collapses, Dφ⁻¹ never forms) +
 CAPSTONE `laplaceBeltrami_pullback_naturality`. FIREWALL: local instantiation at
 uniformFlowExp (ContDiffAt-on-ball tower re-run) = J4-91 (in flight).
+
+## J4-91 (7d1af69a) — ★★★ naturality INSTANTIATED at uniformFlowExp: J4-90 firewall broken
+`QIQTH/PullbackNaturalityLocal.lean` (817 lines, ns HeatResidualBound), [AF] std-3, indep
+verified. NOTHING firewalled. KEY: the three Fréchet layers hold at EVERY ball point ⟹
+genuine ContDiffAt 2 (`contDiffAt2_uniformFlowExp`). Tower localized at per-point
+regularity; `laplaceBeltrami_uniformFlow_naturality` on the uniform ball with only
+genuine far-point hypotheses carried. NEXT: J4-92 (in flight) = the E-witness assembly
+(H_w via Vmap/zero-extension → residual transport via naturality → in/out-chart bounds →
+hcoord width-margin → RecenterReduction feed ⟹ global hEboundW = hunif core).
