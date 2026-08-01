@@ -229,3 +229,17 @@ J4-80b (in flight) = Route B: Neumann ‖J⁻¹‖≤2 + tube-EVT ‖(g∘F)⁻�
   + entrywise ≤ Kinv (extraction form matches expPullbackMetricInv). Hyps hg+hC+hK+hgnd.
 NEXT: J4-81 (in flight) = consumer-shaped inverse props (hinvT/hgisymm/hgi_ann/Γ̃ bound,
 + hLapChi_ann/hdev if reachable) toward cutoffResidual_expPullback_hEboundW:97.
+
+## J4-81 (11886b69) — ★ consumer-shaped inverse props over uniformFlowExp
+`QIQTH/UniformFlowMetricInvProps.lean`, [AF] std-3, indep build-verified.
+All RecenterCutoffC3:97 metric-side inputs EXCEPT hdev, uniform over K:
+- D1 `uniformFlowPullbackMetricInv` (expPullbackMetricInv convention) + `matToCLM_invMat`
+  (entrywise inverse reassembles to Ring.inverse — key device).
+- D2 hinvT both orders; D3 hgisymm (transpose uniqueness, genuine hgsymm);
+- D4 hgi_ann (ball+annulus) — bundled `uniformFlowPullbackMetricInv_props`;
+- D5 `uniformFlowChristoffel_uniform_bound`; D6-hLapChi
+  `uniformFlowLaplaceBeltrami_radialCutoff_annulus_bound` (bounds bypass continuity —
+  sidesteps the ContinuousOn-annulus wall of the opaque expPullback route).
+FIREWALL (exact): hdev ∀ᶠ v in 𝓝 0, |g̃⁻¹(v)−δ| ≤ M·rncRadialSq v — needs uniformFlowExp
+RNC jet-at-0 (g̃(0)=δ w/ hframe, ∂g̃(0)=0). J4-82 (in flight) = Route T (per-q weld to
+expMap via ODE uniqueness, transfer pd_expPullbackMetricInv_zero) or Route D (direct jets).
