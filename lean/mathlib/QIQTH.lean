@@ -290,6 +290,7 @@ import QIQTH.UniformCutoffEngine
 import QIQTH.UniformResidualBound
 import QIQTH.UniformCoeffBound
 import QIQTH.UniformTauResidual
+import QIQTH.ResidualChartTransport
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

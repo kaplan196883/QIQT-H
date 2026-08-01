@@ -15271,4 +15271,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_gaussianWide_tauUniform_engine
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional_tau
 
+-- ★ J4-89 (ResidualChartTransport.lean, ns HeatResidualBound): E-identification CENSUS + D²φ-free
+-- transport cores (indep build-verified; gpt-5.6-sol consulted pre-build). CENSUS: capstone hEboundW
+-- input = |heatOp g gi H τ p q| ≤ C·baseKernelW 2 0 τ p q (E concrete = global residual, H a function-
+-- variable pinned by hHdiag; heatOp uses GLOBAL-chart laplaceBeltrami); reduction via RecenterReduction
+-- :86 + :101 (Vmap + hcoord); NO LB-naturality lemma exists anywhere in the repo; the pointwise
+-- naturality Δ_{φ*g}(f∘φ)=(Δ_g f)∘φ in coordinate form is GENUINELY D²φ-dependent (∂∂(f∘φ) spins off
+-- ∂f·D²φ which must cancel the pullback-Christoffel transformation). LANDED CORES: pd_comp (1st-order
+-- chain rule), pullbackInv_trace_contraction (J·g̃⁻¹·Jᵀ = G⁻¹ pure matrix algebra — kills the
+-- inverse-Jacobian obstruction), pd_pd_comp (2nd-order chain rule with the explicit D²φ block).
+-- std-3 all. ⚠ FIREWALL (exact, infrastructure-scale): pointwise D²(uniformFlowExp) + contracted
+-- Christoffel transformation law + assembled naturality + global E-identification. J4-90 = the D²φ
+-- pointwise object from the second-variation tower + the transformation law.
+#print axioms QIQTH.HeatResidualBound.pd_comp
+#print axioms QIQTH.HeatResidualBound.pullbackInv_trace_contraction
+#print axioms QIQTH.HeatResidualBound.pd_pd_comp
+
 end QIQTH.AxiomAudit
