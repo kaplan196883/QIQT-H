@@ -15126,4 +15126,17 @@ namespace QIQTH.AxiomAudit
 -- upgrade common_nondeg_radius to return ‖J⁻¹‖≤2 (Neumann tail) + tube-EVT ‖(g∘F)⁻¹‖. J4-80b = Route B.
 #print axioms QIQTH.ExpMap.uniformResidual_forwardMetric_packet
 
+-- ★ J4-80b (UniformInverseMetric.lean): the J4-80 firewall DISCHARGED — uniform g̃⁻¹ bound (indep
+-- build-verified). Route B fully landed, NOTHING firewalled: (P1) uniformFlowExp_common_nondeg_radius_
+-- quant (re-derived Grönwall/Neumann tail KEEPING C_D ⟹ ‖(fderiv uniformFlowExp)⁻¹‖≤2) + norm_ring
+-- Inverse_one_sub_le (geom-series Neumann); (P2) uniformFlowExp_baseMetricInv_uniform_bound (tube-EVT
+-- on ‖Ring.inverse∘matToCLM∘g‖, continuous at units); (P3) norm_ringInverse_matToCLM_congr_le
+-- (congruence inverse bound cJ·cG·cJ·n², sup-norm transpose via entrywise norm_matToCLM_le_sum —
+-- sidesteps Cramer). Capstone uniformInverseMetric_bound: ∃r₀>0 ∃Kinv ∀q∈K ∀‖v‖<r₀: IsUnit(matToCLM g̃)
+-- + ‖Ring.inverse(matToCLM g̃)‖≤Kinv + entrywise ≤Kinv (extraction form = expPullbackMetricInv's).
+-- Hyps ONLY hg+hC+hK+hgnd (global metric nondeg, genuine, satisfiable g=δ). Kinv=2·Kb·2n². std-3.
+-- NEXT: J4-81 = re-target the R4c/R5 residual chain (RecenterCutoffC3:97 hgi_ann/hLapChi_ann/hdev)
+-- onto uniformFlowExp using forward packet + this inverse bound.
+#print axioms QIQTH.ExpMap.uniformInverseMetric_bound
+
 end QIQTH.AxiomAudit
