@@ -15238,4 +15238,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.uniformResidual_gaussian_bound
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_of_coeffBound
 
+-- ★★★ J4-87 (UniformCoeffBound.lean, ns HeatResidualBound): hCoeffU DISCHARGED — the UNIFORM CUTOFF
+-- RESIDUAL BOUND IS FULLY UNCONDITIONAL (indep build-verified). My corrected assessment HELD (Sol-
+-- confirmed): C² + jet-zero suffice, no C³. Decisive shortcut (simpler than even my spec): push the
+-- O(r) onto ∂g̃ itself — uniformFlowPullbackMetric_pd_linear_decay (|∂g̃(v)|≤Kpd‖v‖ from ∂g̃(0)=0 +
+-- fderiv_decay MVT on the C² second layer) ⟹ uniformFlowChristoffel_linear_decay |Γ̃(v)|≤KdΓ‖v‖ (NO
+-- Ring.inverse calculus needed) ⟹ uniformCoeff_bound (hCoeffU exact) ⟹ cutoffResidual_uniformFlow_
+-- unconditional: ∃(a,b,B) single over q∈K, |χ·∂ₜH − Δ_g̃(χH)| ≤ B·gaussDdimWide t v — hyps ONLY
+-- hg/hC/hK/hgnd/hgsymm/hinvF/hframeK + hw0smooth + hw0flat (∂w₀(0)=0, the SAME genuine gauge input as
+-- the old chain, satisfiable g=δ,Θ=1). std-3 all five. F-res+F-cut+hCoeffU ALL CLOSED.
+-- REMAINING to global hEboundW (Sol-verdicts recorded in JET4_TOWER_PLAN): (i) ∀τ — quantify engines
+-- over 0<τ≤T with Gaussian absorption lemmas + separate τ≥T direct bound; (ii) ∀q localization;
+-- (iii) E-identification via zero-extension (cutoff support strictly inside chart; 3 lemmas).
+#print axioms QIQTH.HeatResidualBound.uniformFlowChristoffel_linear_decay
+#print axioms QIQTH.HeatResidualBound.uniformCoeff_bound
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional
+
 end QIQTH.AxiomAudit
