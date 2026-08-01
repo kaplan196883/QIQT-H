@@ -15104,4 +15104,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowPullbackMetric_c2_uniform
 #print axioms QIQTH.ExpMap.uniformFlowPullbackMetric_entry_isC2At
 
+-- ★★ J4-79b (UniformFlowMetricC2Bound.lean): W4 COMPLETE — Brick-A(β) REGULARITY+BOUNDS CLOSED (indep
+-- build-verified). J4-79's C¹/C² firewall discharged, NOTHING left firewalled: HasC2BoundAt Leibniz
+-- calculus (const/add/mul A₀B₂+2A₁B₁+A₂B₀/finsetSum) + uniformFlowExp_tube_continuous_bound (EVT on
+-- the displacement tube, Q1 generalized) + metricFactor_c2Bound (chain rule, hg) + jacobianEntry_
+-- c2Bound (evJ route: Mj/Hessian/W3 feed C⁰/C¹/C²) ⟹ capstone uniformFlowPullbackMetric_c2_uniform_
+-- full: ∃r₀>0 ∃M ∀q∈K ∀‖v‖<r₀ ∀ij — BOTH HasFDerivAt layers + |g̃|≤M + ‖D entry‖≤M + ‖D² entry‖≤M.
+-- Hyps ONLY hg+hC+IsCompact K. std-3. Next: J4-80 hunif assembly toward TrueKernelA1Reduced:153.
+#print axioms QIQTH.ExpMap.uniformFlowPullbackMetric_c2_uniform_full
+
 end QIQTH.AxiomAudit
