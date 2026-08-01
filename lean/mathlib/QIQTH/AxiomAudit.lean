@@ -14902,4 +14902,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowTube_secondVariation_uniform_bound
 #print axioms QIQTH.ExpMap.linODE_inhomog_within_exists_on_Icc
 
+-- J4-66 (UniformFlowSecondFDeriv.lean): the missing ENABLER for R2 (2nd-order Fréchet existence of
+-- uniformFlowExp) — the field-agnostic Fréchet first-jet on the DOUBLED field (only the DIRECTIONAL
+-- abstract engine existed before). autonomousLinODE_unique (abstract Jacobi/linearized-ODE uniqueness
+-- for any Φ:E→E) + autonomousFlow_endpoint_hasFDerivAt_window (abstract σ-windowed FRÉCHET first-jet
+-- HasFDerivAt (fun δ=>W δ t) L 0 via per-direction quadratic remainder ‖W δ t−W 0 t−V δ t‖≤Ctot‖δ‖²) +
+-- autonomousFlow_endpoint_hasFDerivAt_window_exists (CLM L constructed, [FiniteDimensional]) +
+-- doubledFlow_endpoint_baseVelocity_hasFDerivAt_exists (Φ:=doubledField g gi; all G-regularity from
+-- contDiff_doubledField + doubledField_fderiv{,2}_bddOn_compact). std-3. GPT-5.5-confirmed: expMap-C⁴
+-- transfer can't remove the expRho guard, so this abstract route is the fewest-hard-lemmas path.
+-- ⚠ R2 itself FIREWALLED (∃B₂ HasFDerivAt(fun w=>fderiv(uniformFlowExp q) w) B₂ v) — still needs R2-a
+-- (base-velocity-perturbed confined doubled uniform-tube supply, analogue of confined_doubled_family_
+-- with_variation but perturbing v not seed a; ~150-250 lines) + R2-b (strengthen K2 to EXPOSE the Jacobi
+-- endpoint operator L explicitly) + R2-c (bilinear B₂ assembly from R1's Zf). R3 = R1 τ=1 bound, carried.
+-- J4-67 = R2-a + R2-b. [AF] std-3.
+#print axioms QIQTH.ExpMap.doubledFlow_endpoint_baseVelocity_hasFDerivAt_exists
+#print axioms QIQTH.ExpMap.autonomousFlow_endpoint_hasFDerivAt_window_exists
+
 end QIQTH.AxiomAudit
