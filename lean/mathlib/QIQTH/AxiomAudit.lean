@@ -15037,4 +15037,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_thirdJet_hasFDerivAt
 #print axioms QIQTH.ExpMap.uniformFlowExp_hessian_value_id
 
+-- J4-75 (UniformFlowThirdBound.lean): W3 polarization half (indep build-verified). GPT-5.5 route
+-- verdict: per-slot Grönwall BLOCKED (base-curve confinement grows with ‖a‖,‖b‖ — the naive quadruple
+-- Grönwall blows up); land the field-agnostic TRILINEAR polarization instead. 4 generic theorems (any
+-- real normed E,F): symm_trilinear_polarization (24•B x y z = p(x+y+z)−p(x+y−z)−p(x−y+z)+p(x−y−z),
+-- parallelogram-free, needs the two transposition symmetries) + symm_trilinear_deg3_bound +
+-- trilinear_norm_apply_le_of_symm_diag_bound (‖B x y z‖≤(9/2)M‖x‖‖y‖‖z‖) + trilinear_opNorm_le_of_
+-- symm_diag_bound (‖B‖≤(9/2)M) — one-order-up analogue of J4-69's bilinear 2M. All DERIVED. std-3.
+-- ⚠ W3 for uniformFlowExp NOT closed: carried (P1) diagonal value-id B₃(q,v)(a,a,a)=(Z₃ 1).1 (the
+-- hid-analogue for the TRIPLED flow, whole-file brick) + (P2) B₃ full symmetry (Clairaut on the nested
+-- 3rd jet). Given P1+P2, W3 = short corollary with M₃=(9/2)M₃j from W1. J4-76 = P1+P2 ⟹ W3. [AF] std-3.
+#print axioms QIQTH.ExpMap.trilinear_opNorm_le_of_symm_diag_bound
+#print axioms QIQTH.ExpMap.symm_trilinear_polarization
+
 end QIQTH.AxiomAudit
