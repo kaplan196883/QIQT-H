@@ -283,6 +283,7 @@ import QIQTH.UniformFlowMetricC2Bound
 import QIQTH.UniformResidualB
 import QIQTH.UniformInverseMetric
 import QIQTH.UniformFlowMetricInvProps
+import QIQTH.UniformFlowJetZero
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

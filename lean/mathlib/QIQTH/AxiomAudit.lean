@@ -15156,4 +15156,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowChristoffel_uniform_bound
 #print axioms QIQTH.ExpMap.uniformFlowLaplaceBeltrami_radialCutoff_annulus_bound
 
+-- ★ J4-82 (UniformFlowJetZero.lean): hdev DISCHARGED — J4-81's last metric-side firewall closed
+-- (indep build-verified). Route T weld architecture (GPT-5.5/5.6-sol consult): expMap_eq_uniformFlow-
+-- Exp_on_overlap (J4-20 bridge) ⟹ equal fderiv (EventuallyEq.fderiv_eq) ⟹ equal pullback metrics ⟹
+-- equal Ring.inverse (pointwise congruence, total fn, no nondeg needed) ⟹ Taylor bound run on the
+-- expMap side where RNC jets exist. NOTE: no expPullback hdev producer existed — built it here:
+-- pd_expPullbackMetricInv_zero_clean (hypothesis-clean ∂g̃⁻¹(0)=0, near-0 inverse identity from
+-- expPullbackMetric_isUnit_near_zero, NOT ∀y hinvT) + contDiffAt_two_quadratic_decay (generic C²+
+-- zero-jet ⟹ quadratic decay) + expPullbackMetricInv_dev ⟹ CAPSTONE uniformFlowPullbackMetricInv_dev:
+-- ∃M≥0 ∀ᶠ v in 𝓝 0 ∀ij |g̃_u⁻¹(v)−δ| ≤ M·rncRadialSq v — the EXACT RecenterCutoffC3:97 hdev consumer
+-- shape over uniformFlowExp. Hyps hg+hC+hK+hgsymm+hinvF+hframe(q), all genuine; expRho proof-internal
+-- only (per-q eventual statement — no uniform-radius claim). std-3. M is per-q (consumer shape);
+-- uniformity of M across K, if needed at the hunif lift, is a J4-83 concern (Taylor from uniform C²).
+#print axioms QIQTH.ExpMap.uniformFlowPullbackMetricInv_dev
+
 end QIQTH.AxiomAudit
