@@ -14871,4 +14871,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_uniform_bound
 #print axioms QIQTH.ExpMap.uniformFlowExp_fderiv_uniform_bound_closedBall
 
+-- J4-64 (UniformPullbackEntryBound.lean, ns QIQTH.PullbackMetric): Brick-A uniform C⁰ pullback-metric
+-- ENTRY bound. uniformFlowExp_metric_entry_uniform_bound (∃Mg0≥0 ∀q∈K ∀‖v‖≤ρ_K ∀a b, |g(uniformFlowExp
+-- q v) a b|≤Mg0 — g-factor bounded on the fixed compact image T=closedBall(p₀,R+M) from J4-62 displacement
+-- + hg metric-continuity, via IsCompact.exists_bound_of_continuousOn) + uniformFlowPullbackMetric_entry_
+-- uniform_bound (∃r₀>0 ∃Mg ∀q∈K ∀‖v‖≤r₀ ∀i j, |uniformFlowPullbackMetric q v i j|≤Mg=Σ Mg0·Mj'²; r₀=ρ_K/2,
+-- Mg chosen before intro; Jacobian entries ≤Mj via J4-63 le_opNorm+Pi.norm_single; Cauchy-Schwarz/triangle
+-- Finset.abs_sum_le_sum_abs+mul_le_mul). hg (∀ a b, ContDiff ⊤ (g · a b)) carried as GENUINE geometry
+-- (ambient metric smooth, NOT derivable from hC which only constrains christoffel); same shape as
+-- ChristoffelSmooth/AnnulusContinuityWithinRho. No expRho. std-3.
+-- ⚠ Brick-A C⁰-bounds DONE (displacement/Jacobian/g̃-entry). Remaining regularity gap = 2nd/3rd velocity
+-- variation → uniformFlowExp∈C³ ⟹ g̃∈C² for M/L constants (the higher-jet sub-tower); then uniform B →
+-- hunif; + hcoord; then hDuhamel. [AF] std-3.
+#print axioms QIQTH.PullbackMetric.uniformFlowPullbackMetric_entry_uniform_bound
+#print axioms QIQTH.PullbackMetric.uniformFlowExp_metric_entry_uniform_bound
+
 end QIQTH.AxiomAudit

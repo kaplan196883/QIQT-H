@@ -263,6 +263,7 @@ import QIQTH.UniformRadiusCert
 import QIQTH.UniformFlowPullback
 import QIQTH.UniformFlowRegBound
 import QIQTH.UniformFlowJacobianBound
+import QIQTH.UniformPullbackEntryBound
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
