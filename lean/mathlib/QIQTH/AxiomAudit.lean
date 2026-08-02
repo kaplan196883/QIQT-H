@@ -15455,4 +15455,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_chartGaussian_final_below
 #print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW_final
 
+-- ★★★★ J4-100 (UniformChartRadius.lean, ns HeatResidualBound): THE hunif SUMMIT — hEboundW FULLY
+-- UNCONDITIONAL (indep build-verified). Route Q: Mathlib ApproximatesLinearOn (its toOpenPartial-
+-- Homeomorph EXPOSES source = s exactly — what ContDiffAt.toOpenPartialHomeomorph couldn't).
+-- U1 uniformFlowExp_approximatesLinearOn (Id approximant via near-id MVT, δ₀ ≤ 1/(2(C_D+1)), c<1;
+-- n=0 via subsingleton_or_nontrivial). U2 uniformChart_exists + uniformInverseChart (SINGLE δ₀ over
+-- K; germ + C² + open-image + compact-closure) + uniformInverseChart_huniformChart (the huniformChart
+-- SHAPE discharged). U3 chart-generic copies (_of_good_gen/_final_gen — the J4-98/99 chain was chart-
+-- independent, mechanical substitution) ⟹ CAPSTONE gatedWitness_hEboundW_unconditional:
+-- ∃ a b B S, ∀τ p q, 0<τ → |heatOp g gi (gatedKernel K S (globalCutoffParametrixWitness Θ u a b
+-- (uniformInverseChart g gi hC hK)))| ≤ B·baseKernelW 2 0 τ p q — hyps ONLY hg/hC/hK/hgnd/hgsymm/
+-- hinvF/hframeK/Θ/u/hw0smooth/hw0flat. std-3. NOTE: built on uniformInverseChart (basepointInverse-
+-- Chart's per-q opaque radius makes its huniformChart unprovable — downstream consumes the NEW chart).
+-- ⟹ THE hunif/hEboundW TOWER (J4-80…J4-100, 21 bricks) IS COMPLETE. Remaining capstone inputs:
+-- hInt/hEzero/hEmeas + hHdiag + hDH/hDConv/hCH/hCConv + RNC jets (wiring, J4-101) + hDuhamel/hInter
+-- (the last tower-sized wall) ⟹ TrueKernelA1Reduced:153. NOT a₁=R/6 yet.
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_approximatesLinearOn
+#print axioms QIQTH.HeatResidualBound.uniformInverseChart_huniformChart
+#print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW_unconditional
+
 end QIQTH.AxiomAudit
