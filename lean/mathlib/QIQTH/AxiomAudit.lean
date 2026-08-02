@@ -15849,4 +15849,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hk_coord_integral_le
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel
 
+-- ★★ J4-125 (SliverEstimates.lean, ns HeatResidualBound): the LINEWISE HEAT-SLIVER ESTIMATES —
+-- indep build-verified. LANDED: gaussian_grad_moment_zero + gaussian_grad_cancel (S0a: the
+-- gradient analogue is t-FREE ≤ L·(9/8·n) — no divergence at first order) + sliver_rpow
+-- (∫₀^ε τ^{−1/2} = 2√ε) + sliver_rpow_sub + sliver_bound_of_rpow (S0b) + sliver1_zeroth_bound
+-- (S1: the j=0 terminal sliver ≤ C·ε, x free) + sliver2_bound (S2 THE PRIZE: the formal
+-- second-derivative sliver ≤ (L·(15/2·n) + (3/4)M₁·C_L·G_a(0))·2√ε + M₂·C_L·G_a(0)·ε — the
+-- 3-term ∂ᵢ²(G·A) Leibniz split with the G4 cancellation on term 1, crude τ^{−1/2} on term 2,
+-- mass-one on term 3; the Lipschitz carry hqLip is load-bearing ONLY for term 1). std-3 all.
+-- ⚠ INTERFACE CARRIES (satisfiable by the N=1 witness): hD2Hexpand (the formal Leibniz shape
+-- of ∂ᵢ²H at x=0) + hAampBdd/hA1ampBdd/hA2ampBdd (amplitude bounds M₀/M₁/M₂) + hqLip (the
+-- hFLocLip family) + hFdom + measurability. NEXT: the amplitude package instantiating
+-- D2H/Aamp from the concrete witness; the finite-ε differentiation; assembly. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussian_grad_cancel
+#print axioms QIQTH.HeatResidualBound.sliver_rpow
+#print axioms QIQTH.HeatResidualBound.sliver1_zeroth_bound
+#print axioms QIQTH.HeatResidualBound.sliver2_bound
+
 end QIQTH.AxiomAudit
