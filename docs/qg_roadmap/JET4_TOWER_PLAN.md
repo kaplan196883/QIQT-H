@@ -658,3 +658,15 @@ first — may already cover it).
 NEXT: J4-122 = truncated-Duhamel skeleton (Sol 2.1-2.4): Ktrunc/Boundary/Etrunc/Da defs +
 hDa_trunc (finite-gap a-slot Leibniz) + hLap_trunc (finite-gap Δ_x interchange) +
 Da = LapTrunc + Etrunc (E-combination BEFORE ε→0) + hTruncDuhamel.
+
+## J4-122 BANKED (219ee736) — 2026-08-03: hDuhamel REDUCED to hDaLim
+TruncatedDuhamel.lean [AF std-3, raw 0 @ 9405 jobs]: the finite-ε skeleton (2.1 hDa_trunc,
+2.3 hE_combination ∂_t−Δ_x=E-before-limit, 2.4 truncDuhamel_deriv + heatOp_trunc) +
+hDuhamel_of_daLim + hDuhamel_leviSeries_of_daLim (capstone shape VERBATIM). Carries:
+hDaLim (THE hard one) + hLap (2.2) + hDerivConv + hBoundaryLim + F2 family.
+NEXT: J4-123 = DuhamelLimitWiring.lean: W1 hBoundaryLim ⟸ boundary_tendstoLocallyUniformlyOn
+(pointwise, sub_sub_cancel reconcile); W2 Etrunc→E*F (sliver ≤ const·ε, E has NO 1/τ);
+W3 hDerivConv ⟸ hDConv chain (hasDerivAt_of_tendstoLocallyUniformlyOn + truncDuhamel_deriv);
+W4 hDuhamel_leviSeries_final (conditional ONLY on hDaLim + hLap + F2 + dominations + meas).
+THEN: hDaLim deep-dive (Sol consult: tractable vs long-term carry) + hLap + hCH/hCConv-C² +
+regularity family + gauge + FINAL ASSEMBLY.
