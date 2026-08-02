@@ -15704,4 +15704,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.heatConv_eps_differentiable
 #print axioms QIQTH.HeatResidualBound.hDConv_of_deltaFamily
 
+-- ★★ J4-116 (ConvApproximants.lean, ns HeatResidualBound): the CONCRETE APPROXIMANTS (indep build-
+-- verified). KEY FINDING: the Chapman–Kolmogorov semigroup identity EXISTS axiom-free from the C1
+-- campaign (GaussianConvolution.gaussDdim_conv: ∫_z G_t(x−z)G_s(z−y) = G_{t+s}(x−y)) — the honest
+-- content behind the hFII carry. LANDED: epsSeq (ε_m=1/(m+1)) + heatConv_tail_tendsto (hfg via the
+-- SLICK primitive-continuity route — continuousOn_primitive_interval' + within-tendsto, no explicit
+-- tail estimate) + hDConv_of_delta_epsFamily (abstract payoff) + vanVleckGatedWitness def +
+-- hDConv_gatedWitnessN1_epsFamily (the EXACT capstone hDConv shape). std-3 all.
+-- ⚠ THE 3 CARRIES (exact): hFII (interval-integrability — dischargeable via gaussDdim_conv + the D1
+-- domination, J4-117); hJoint (the regular 2-D HasFDerivAt at (u,u−ε_m) — engine C2+C3ε assembly,
+-- J4-117); hDelta (Lemma 3.14 delta-family — THE singular brick, J4-118).
+#print axioms QIQTH.HeatResidualBound.heatConv_tail_tendsto
+#print axioms QIQTH.HeatResidualBound.hDConv_of_delta_epsFamily
+#print axioms QIQTH.HeatResidualBound.hDConv_gatedWitnessN1_epsFamily
+
 end QIQTH.AxiomAudit
