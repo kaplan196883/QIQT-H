@@ -379,3 +379,14 @@ bracket; reverse naturality + germ-locality) + W3 in-chart bound (single τ-free
 Carried (Sol-honest): hgerm + witness far-point C² + hcoord + global feed. MY counter-
 assessment: Mathlib IFT (ContDiffAt.to_localInverse ⟸ contDiffAt2_uniformFlowExp +
 IsUnit fderiv) should discharge hgerm + regularity — J4-93 in flight.
+
+## J4-93 (6da221a0) — ★★★ THE IFT LAYER: inverse-chart regularity DISCHARGED
+`QIQTH/UniformFlowLocalInverse.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+Sol's "infrastructure-scale" call REFUTED — Mathlib IFT (ContDiffAt.localInverse /
+toOpenPartialHomeomorph) fed by contDiffAt2_uniformFlowExp + common_nondeg_radius:
+per-(q,v) local inverse (I1) + SINGLE per-q total `basepointInverseChart` (germ + C² at
+every in-ball v; no injectivity-radius lemma needed) + J4-92 antecedents DISCHARGED (I3)
++ `globalWitness_residual_bound_inChart_unconditional` (I4; residue = far-point metric
+conditions derivable from global hyps). NEXT: J4-94 (in flight) = hunif closer
+(antecedent plumbing + out-of-chart zero-extension [crux: e.symm off-target junk ⟹ maybe
+indicator-gated witness] + hcoord + hunif_final).
