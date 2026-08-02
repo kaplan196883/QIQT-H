@@ -410,3 +410,11 @@ only geometric+heat) + `heatOp_eq_zero_of_locally_zero` (H2-core) + `metricInv_l
 right`. DECISIVE: same-width hcoord PROVED structurally unsatisfiable (τ→0 forces
 ‖p−q‖≤‖v‖) ⟹ width-margin engine re-run forced (Sol G₁→G_{3/2}→G₂, verdict above).
 J4-95 (WidthMarginEngine) in flight. Also firewalled: H2-transfer (φ_q open-map exposure).
+
+## J4-95 (2eb876bc) — ★★★ WIDTH-MARGIN RE-PLUMB COMPLETE: τ→0 obstruction RESOLVED
+`QIQTH/WidthMarginEngine.lean` (18 thms, ns HeatResidualBound), [AF] std-3, indep verified.
+M1 width-parametric absorptions (single gaussDdim_width_ratio identity; A3 chart transfer
+= the unlock) + M2 narrow engine (G_{3/2}, width 6τ; no unpaired r² — τ-caveat moot) +
+M3 `globalWitness_residual_bound_chartGaussian` at the CONSUMER width gaussDdim(2τ)(φ_qv−q).
+ONE input left: hdisp near-isometry budget — J4-96 (in flight) discharges via retained
+Neumann bound + segment MVT + ℓ²-direct summation (dodges the sup-norm n-factor).
