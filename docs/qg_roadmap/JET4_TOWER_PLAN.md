@@ -427,3 +427,11 @@ unconditional near-id `‖Dφ−Id‖≤C_D‖v‖` (Grönwall tail re-derivatio
 CAPSTONE `globalWitness_residual_bound_chartGaussian_final` — hyps only geometric+heat.
 NEXT: J4-97 (in flight) = the ∀p assembly (gated witness trichotomy + q-gate +
 RecenterReduction feed) ⟹ GLOBAL hEboundW.
+
+## J4-97 (73e238ea) — ★★★ gating machinery + hEboundW reduction to ONE hypothesis
+`QIQTH/GlobalHunifAssembly.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+`heatOp_congr_nhds` + `gatedKernel` (q-gate ∘ set-gate; τ-independent hard gate ⟹ exact
+time germ) + in/out transfer legs + `gatedKernel_hEboundW_of_trichotomy` — the EXACT
+capstone hEboundW primitive, conditional on the single per-p trichotomy htri.
+J4-98 (in flight) = htri discharge: chart-openness exposure + gate S=φ_q''(ball r₀'')
+with closure⊆V + the 3-LEG variant (in-ball bound / off-closure / χ-collar locally-0).
