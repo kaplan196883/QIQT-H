@@ -314,6 +314,7 @@ import QIQTH.GatedWitnessMeas
 import QIQTH.GatedWitnessEmeas
 import QIQTH.HeatConvRegularity
 import QIQTH.ConcreteDominations
+import QIQTH.GatedWitnessPackage
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

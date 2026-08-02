@@ -15675,4 +15675,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.exists_D1_constants_of_gateSqControl
 #print axioms QIQTH.HeatResidualBound.gateSqControl_of_flowBall
 
+-- ★★★ J4-114 (GatedWitnessPackage.lean, ns HeatResidualBound): the CERTIFICATE MERGE + D2 (indep
+-- build-verified). (A) merge depth: TWO chain layers strengthened (_of_good_pkg re-exports the
+-- square-comparison + membership through the extended hgood existential body — the .choose-spec
+-- re-export trick; _lin_pkg discharges at c=(b+ρc)/2 with 4/3≤3/2 slack) ⟹ gatedWitnessN1_package:
+-- ONE shared S carrying hEboundW_le ∧ GateSqControl ∧ 0∈S-facts ∧ D1 domination ∧ W(0,0)=0.
+-- (B) leviSeries_dominatedW_le (abstract, UNCONDITIONAL: C_L = Σ C^{k+1}·modelCoeff, summable, no
+-- Real.exp) + leviSeries_gatedWitnessN1_dominated (concrete, conditional only on the pre-existing
+-- hEmeas gate — no new firewall). std-3 all five. NEXT: D5 hDConv assembly (FTC-upper + C3ε with
+-- both dominations; STOP at the delta-family boundary), then the ε-Duhamel identity + Lemma 3.14.
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_package
+#print axioms QIQTH.HeatResidualBound.leviSeries_dominatedW_le
+#print axioms QIQTH.HeatResidualBound.leviSeries_gatedWitnessN1_dominated
+
 end QIQTH.AxiomAudit
