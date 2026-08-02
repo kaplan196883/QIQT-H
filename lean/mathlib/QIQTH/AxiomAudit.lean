@@ -15552,4 +15552,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gatedWitnessN1_diag_eval_vanVleck
 #print axioms QIQTH.HeatResidualBound.gatedKernel_hEboundW_le_of_mixedCover
 
+-- ★★★★ J4-106 (OrderOneGeometry.lean, ns HeatResidualBound): THE LAST GEOMETRIC LEG — with J4-105's
+-- T5, the capstone's TWO HARDEST N=1 inputs are BOTH CONCRETE (indep build-verified). (B) transport
+-- mirrors near-verbatim (profile was abstract in the N=0 proofs). (A) cutoff assembly WITHOUT
+-- re-running the engine chain: fire the profile-independent engine at fixed τ with AFFINE-in-τ
+-- constants (C=B₀ᵣ+B₁ᵣτ etc.), collect back by ring; mixed annulus bounds by splitting H₁ =
+-- gauss·w₀ + τ·gauss·w₁ and reusing the existing cofactor lemmas at both profiles. (C) mixed 3-leg
+-- cover + chart-generic + uniformInverseChart instantiation (huniformChart discharged) ⟹
+-- gatedWitnessN1_hEboundW_le_vanVleck: ∀t τ p q, 0<τ→τ≤t → |heatOp(gatedKernel K S H₁_vV)| ≤
+-- C(1+t)·baseKernelW 2 0 — THE restricted capstone's hEboundW_le, concrete. std-3 all.
+-- ⚠ CARRIED (genuine, next): hCoeffU0 (dischargeable via uniformCoeff_bound J4-87 — mechanical) +
+-- hCoeffU1 (the SHIFTED-profile coefficient bound — ⚠ ∂w₁(0)=0 may FAIL for van-Vleck u₁ ⟹ the O(r²)
+-- shape may need weakening to O(r) + τ-margin absorption — Sol consult next) + hInt/hEzero/hEmeas +
+-- hDH/hDConv/hCH/hCConv + hDuhamel/hInter + gauge inputs. NOT a₁=R/6 yet.
+#print axioms QIQTH.HeatResidualBound.heatOp_globalWitnessN1_eq_recentred_inChart
+#print axioms QIQTH.HeatResidualBound.cutoffResidualN1_uniformFlow_narrow_mixed_below
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hEboundW_le_vanVleck
+
 end QIQTH.AxiomAudit
