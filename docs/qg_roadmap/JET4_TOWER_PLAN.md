@@ -435,3 +435,12 @@ time germ) + in/out transfer legs + `gatedKernel_hEboundW_of_trichotomy` — the
 capstone hEboundW primitive, conditional on the single per-p trichotomy htri.
 J4-98 (in flight) = htri discharge: chart-openness exposure + gate S=φ_q''(ball r₀'')
 with closure⊆V + the 3-LEG variant (in-ball bound / off-closure / χ-collar locally-0).
+
+## J4-98 (b2ba7be1) — ★★★ 3-leg cover: hEboundW reduced to the RADIUS-ORDERING residue
+`QIQTH/HunifTrichotomy.lean` (389 lines, ns HeatResidualBound), [AF] std-3, indep verified.
+J4-97's 2-leg htri too coarse at the frontier — resolved by the 3-leg cover (in-gate /
+off-closure / χ-collar with the ‖W p‖=c pinch, no injectivity, no e.symm agreement).
+Unconditional: `basepointChart_exists_strong` (W1) + `chartImage_ball_open_closure` +
+cover reductions + collar engine. Conditional on hgood: `gatedWitness_hEboundW` — sole
+residue = b < c radius ordering under the τ-free transport radius. J4-99 (in flight) =
+b-parametric engine + quantifier hoist ⟹ discharge ⟹ the hEboundW primitive.
