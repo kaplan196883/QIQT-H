@@ -706,3 +706,12 @@ sliver bounds j=0,1,2 on the FORMAL-derivative integrals — Sliver2 via the 3-t
 ∂ᵢ²(G·A) expansion + G4 with q := Aamp·F (hqLip carry = the hFLocLip family) + amplitude
 interface hyps hAfact/hAampBdd/D1/D2 + derivative-domination tails; identification with
 actual derivatives = the LATER finite-ε differentiation brick).
+
+## J4-125 BANKED — 2026-08-03: THE SLIVER ESTIMATES
+SliverEstimates.lean [AF std-3, raw 0 @ 9408]: S0a grad-cancel (t-FREE!) + S0b 2√ε family +
+S1 j=0 ≤ C·ε + S2 sliver2_bound (3-term Leibniz + G4; Lipschitz carry only on term 1).
+Interface carries fixed: hD2Hexpand + M₀/M₁/M₂ + hqLip + hFdom + meas.
+NEXT: J4-126 = AmplitudePackage.lean (instantiate D2H/Aamp from vanVleckGatedWitness:
+A1 x=0 factorization + the x-derivative layer from the C⁴ chart tower; A2 compactness bounds;
+A3 half-concrete fallback = u₀-layer + documented derivative residue). Then finite-ε
+differentiation; then hDaLimLU assembly conditional on {hFLocLip, amplitude residue}.
