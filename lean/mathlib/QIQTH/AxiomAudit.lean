@@ -15718,4 +15718,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDConv_of_delta_epsFamily
 #print axioms QIQTH.HeatResidualBound.hDConv_gatedWitnessN1_epsFamily
 
+-- ★★ J4-117 (ConvCarriesDischarge.lean, ns HeatResidualBound): the TWO REGULAR CARRIES of the
+-- eps-family hDConv reduction DISCHARGED (indep build-verified). LANDED: gaussDdim_zero_antitone
+-- (diagonal-peak width-monotonicity) + heatConvInner_intervalIntegrable_gaussianDom (the ENTIRE
+-- domination content of hFII: Chapman–Kolmogorov gaussDdim_conv collapses the s-pairing bound to
+-- the single constant G_{(3/2)u}(0) — widths (3/2)(u−s)+2s ≥ (3/2)u uniformly; only base
+-- s-measurability carried) + heatConvFrozen_hasFDerivAt_of_partials (joint 2-D HasFDerivAt from
+-- the hpar/htime/hR partial decomposition F = H(a)+J(t)+R — two frozen partials alone do NOT give
+-- a joint derivative, Sol-confirmed) + hDConv_of_delta_final / hDConv_gatedWitnessN1_of_delta_final
+-- (hFII and hJoint GONE from the capstone shape). std-3 all.
+-- ⚠ REMAINING CARRIES (exact, honest): hDelta (Lemma 3.14 delta-family — THE singular brick,
+-- J4-118) + hMeasFII (base s-measurability) + hpar/htime (frozen Leibniz/FTC partials) + hR
+-- (moving-corner little-o remainder — reduces to joint continuity of the inner pairing) + the
+-- D1/Levi dominations carried parametrically (proven elsewhere: GateSqControl D1 + Levi-series
+-- domination). NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_zero_antitone
+#print axioms QIQTH.HeatResidualBound.heatConvInner_intervalIntegrable_gaussianDom
+#print axioms QIQTH.HeatResidualBound.heatConvFrozen_hasFDerivAt_of_partials
+#print axioms QIQTH.HeatResidualBound.hDConv_of_delta_final
+#print axioms QIQTH.HeatResidualBound.hDConv_gatedWitnessN1_of_delta_final
+
 end QIQTH.AxiomAudit
