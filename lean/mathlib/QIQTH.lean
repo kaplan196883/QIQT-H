@@ -296,6 +296,7 @@ import QIQTH.PullbackNaturalityLocal
 import QIQTH.GlobalResidualWitness
 import QIQTH.UniformFlowLocalInverse
 import QIQTH.GlobalWitnessHunif
+import QIQTH.WidthMarginEngine
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

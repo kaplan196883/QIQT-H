@@ -15370,4 +15370,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.heatOp_eq_zero_of_locally_zero
 #print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_inChart_final
 
+-- ★★★ J4-95 (WidthMarginEngine.lean, ns HeatResidualBound): THE WIDTH-MARGIN RE-PLUMB COMPLETE —
+-- J4-94's τ→0 obstruction RESOLVED (indep build-verified; Sol architecture executed in full).
+-- Primitive-width finding: parametrix = gaussDdim τ (G₁, width 4τ); Sol τ-caveat held with NO
+-- unpaired r² (every polynomial pairs with an inverse-time power ⟹ all narrow constants τ-free).
+-- M1: gaussDdim_width_ratio (single identity underlying all) + A1 rncRadialSq_pow_mul + A2 invTpow
+-- annulus + A3 gaussDdim_le_gaussDdim_chart (c·r²_w ≤ d·r²_v ⟹ transfer) + (1,3/2) specializations.
+-- M2: full narrow engine ⟹ cutoffResidual_uniformFlow_unconditional_tau_narrow (∃(a,b,B) τ-free,
+-- ∀τ>0 ∀q∈K, |bracket| ≤ B·gaussDdim((3/2)τ) v — WIDTH 6τ, strict margin to the consumer's 8τ).
+-- M3: narrow transport chain (W2 equality ⟹ chain copies by swapping the bound input) ⟹
+-- globalWitness_residual_bound_chartGaussian: |heatOp g gi H_w τ (φ_q v) q| ≤ B·gaussDdim(2τ)(φ_q v−q)
+-- — THE CONSUMER-WIDTH per-base-point bound. std-3 all 18.
+-- ⚠ ONE input left (genuine, satisfiable flat, NOT the conclusion): hdisp = (3/2)‖φ_q v−q‖² ≤ 2‖v‖²
+-- (near-isometry width budget). MY ASSESSMENT (J4-96): dischargeable NOW — Neumann ‖Dφ−id‖≤C_D‖w‖
+-- (kept in uniformFlowExp_common_nondeg_radius_quant) + φ_q(0)=q + MVT ⟹ ‖φ(v)−q‖ ≤ (1+C_D r)‖v‖;
+-- shrink r so (1+C_D r)² ≤ 4/3.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_le_gaussDdim_chart
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional_tau_narrow
+#print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_chartGaussian
+
 end QIQTH.AxiomAudit
