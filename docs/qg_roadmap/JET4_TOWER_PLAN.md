@@ -645,3 +645,16 @@ bounds EXIST in repo); helper heatConv_tsum_of_summable_integral_norm; plumbing 
 truncated-Duhamel skeleton (2.1-2.4); then hDaLim formulation with DaLim := Δ_x(H*F)+E*F.
 NEXT: J4-121 per Sol statement list (leviLeftTerm, factorial L¹ bound, majorant summable,
 integral_tsum helper, instantiation, coefficient normalization, hInter).
+
+## J4-121 CORRECTION — 2026-08-03: hInter was ALREADY CLOSED (4bff8b12, Jul 31)
+LeviInterchange.lean (heatConv_leviSeries_interchange) has been in main since Jul 31: hInter
+reduced to the standard {hEbound, hEzero, hEmeas, hC, ht} carries via
+integral_tsum_of_summable_integral_norm ×2 + iterConvW_bound + gaussDdim_conv +
+scaledIterKernelW_summable. Tonight's J4-121 agent verified it green (std-3) — NO new bank.
+⚠ don't-under-credit failure repeated: grep QIQTH/ + AxiomAudit BEFORE launching a brick.
+Known residue noted by verification: hEbound there is ∀τ>0 unrestricted vs the capstone's
+τ≤t-restricted hEboundW_le — reconciliation is a small wiring increment (check RestrictedEboundW
+first — may already cover it).
+NEXT: J4-122 = truncated-Duhamel skeleton (Sol 2.1-2.4): Ktrunc/Boundary/Etrunc/Da defs +
+hDa_trunc (finite-gap a-slot Leibniz) + hLap_trunc (finite-gap Δ_x interchange) +
+Da = LapTrunc + Etrunc (E-combination BEFORE ε→0) + hTruncDuhamel.
