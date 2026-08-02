@@ -479,3 +479,11 @@ CENSUS: residual identities already general-N in-repo; ~150 N=0 sites statement-
 packet consumer (+N=1), `parametrixResidual_one_diag_tail` (τ¹ tail = −G·Δw₁(0)·t),
 `globalCutoffParametrixWitnessN`. J4-103 (in flight) = the N=1 Gaussian bound (w₁ jets +
 four-term C³ estimate; ⚠ large-τ hEboundW-shape question flagged for early Sol consult).
+
+## J4-103 (8cfedba9) — ★★ THE N=1 GAUSSIAN BOUND (the order-N rebuild's genuine new brick)
+`QIQTH/ResidualN1GaussianBound.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+`foldedCoeff_shift` rfl ⟹ the N=0 bound reuses verbatim for w₁; `parametrixResidual_one_
+split` (R₁ = R₀[u] + H₀[u'] + t·R₀[u'], exact) ⟹ `residualN1_gaussian_bound` (+ ball):
+(C₀+W₁+t·C₁)·gaussDdimWide. New genuine inputs = the w₁ jets. LARGE-τ: baseKernelW's α
+slot is a τ-margin; capstone α=0 unsatisfiable for N=1 ∀τ; theory needs only τ∈(0,t].
+J4-104 (in flight) = restricted-hypothesis capstone census/variant.
