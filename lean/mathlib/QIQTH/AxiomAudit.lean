@@ -15791,4 +15791,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.boundary_tendstoLocallyUniformlyOn
 #print axioms QIQTH.HeatResidualBound.hDelta_gatedWitnessN1_final
 
+-- ★★★ J4-122 (TruncatedDuhamel.lean, ns HeatResidualBound): the ε-TRUNCATED DUHAMEL SKELETON —
+-- hDuhamel REDUCED to the single hDaLim carry (indep build-verified). LANDED: DaTrunc/
+-- BoundaryTrunc/Etrunc/LapTrunc defs + hDa_trunc (2.1: τ₀-slot Leibniz via the
+-- heatConv_hasDerivAt_underIntegral engine) + hE_combination (2.3: DaTrunc = LapTrunc + Etrunc —
+-- the ∂_t−Δ_x=E combination at FINITE ε, where each separate full limit would diverge 1/τ) +
+-- truncDuhamel_deriv (2.4a: deriv of the moving-diagonal = DaTrunc + BoundaryTrunc) +
+-- heatOp_trunc (2.4b) + hDuhamel_of_daLim (THE REDUCTION: heatOp(H*F) = F + E*F from
+-- {hDaLim pointwise-at-t with the SPECIFIC target Δ_x(H*F)+E*F, hBoundaryLim (proven content),
+-- hDerivConv, F2-interface hpar/htime/hR}) + hDuhamel_leviSeries_of_daLim (capstone hDuhamel
+-- shape VERBATIM). std-3 all.
+-- ⚠ REMAINING CARRIES (exact, honest): hDaLim (THE hard C²ₓ truncation-tail / moment-cancellation
+-- limit) + hLap (Brick 2.2: second-order Laplacian↔integral interchange at finite gap — genuine,
+-- deferred) + hDerivConv (the hDConv derivative-of-limit machinery, J4-123 wiring) +
+-- hBoundaryLim instantiation + F2 regularity family. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.hDa_trunc
+#print axioms QIQTH.HeatResidualBound.hE_combination
+#print axioms QIQTH.HeatResidualBound.truncDuhamel_deriv
+#print axioms QIQTH.HeatResidualBound.heatOp_trunc
+#print axioms QIQTH.HeatResidualBound.hDuhamel_of_daLim
+#print axioms QIQTH.HeatResidualBound.hDuhamel_leviSeries_of_daLim
+
 end QIQTH.AxiomAudit
