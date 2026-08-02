@@ -627,3 +627,21 @@ main via T2u + Heine–Cantor; ε·u₁; off-ball (3/2)ε-tail via T1 + gaussDdi
 mass defect via T1) + concrete hDelta_gatedWitnessN1_final (hBoundary killed).
 Traps for the agent recorded: indicator_of_notMem, integral_finsetSum, heatKernel1D_pos
 arg order, beta-redex show-reduce, (n := n) pinning.
+
+## J4-120 BANKED (52c41399) — 2026-08-03: BRICK 2 hBoundary DISCHARGED
+BoundaryAssembly.lean [AF std-3, raw 0 @ 9404 jobs]: boundary_tendstoLocallyUniformlyOn (T3,
+full 4-way split via T2u + Heine–Cantor + tails) + hDelta_gatedWitnessN1_final (concrete hDelta,
+hBoundary GONE) + peak/evenness/B-sup helpers. hDConv delta-chain closed up to hDaLim.
+SOL CONSULT (2026-08-03, J4-121 spec): (1) hDuhamel decomposition: do NOT split ∂_t/Δ_x full
+limits (each diverges 1/τ — needs moment cancellation); COMBINE at finite ε: heatConvFrozen a-slot
+Leibniz (Brick 2.1 hDa_trunc, regular u−s≥ε) + Δ_x finite-gap interchange (2.2 hLap_trunc) +
+E-combination BEFORE ε→0 (2.3 Da m u = LapTrunc m u + Etrunc m u) + hTruncDuhamel (2.4);
+limits: Boundary→F PROVEN (delta family), Etrunc→E*F easy (E has NO 1/τ), LapTrunc limit = THE
+hard C²_x truncation-tail (carry as hDaLim : Da → Δ_x(H*F)+E*F — the honest analytic carry);
+then hDuhamel = pure algebra (hDuhamel_of_derivValue). (2) hInter: integral_tsum on
+(volume.restrict (Ioc 0 t)).prod volume + factorial majorant M k = C₀(C₁t)^{k+1}/(k+1)! (Levi
+bounds EXIST in repo); helper heatConv_tsum_of_summable_integral_norm; plumbing not hard.
+(3) ORDER: J4-121 = hInter FIRST (self-contained, retires capstone input II); then J4-122 =
+truncated-Duhamel skeleton (2.1-2.4); then hDaLim formulation with DaLim := Δ_x(H*F)+E*F.
+NEXT: J4-121 per Sol statement list (leviLeftTerm, factorial L¹ bound, majorant summable,
+integral_tsum helper, instantiation, coefficient normalization, hInter).
