@@ -15537,4 +15537,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.mixedAlpha_to_alpha0_le
 #print axioms QIQTH.HeatResidualBound.capstone_inputs_N1_shape
 
+-- ★★★ J4-105 (OrderOneTower.lean, ns HeatResidualBound): the N=1 TOWER RE-RUN — T1+T4+T5 (indep
+-- build-verified). T1 uniformResidualN1_narrow_mixed (ANALYTIC HEART: |R₁| ≤ (B₀+B₁τ)·gaussDdim(3/2τ)
+-- uniform over K — the J4-103 split + the profile-abstract N=0 narrow engine at u AND u' + middle
+-- gauss·w₁ into B₀; new inputs = hCoeffU1/hw at the shifted profile, same shape). T5 gatedWitnessN1_
+-- diag_eval(+_vanVleck): the EXACT hHdiag shape at N=1 (heatParametrixFn 1). T4 gatedKernel_hEboundW_
+-- mixed_of_cover + _le_of_mixedCover: the 3-leg mixed cover ⟹ the restricted capstone's hEboundW_le
+-- (C(1+t)·baseKernelW 2 0 on (0,t]). std-3 all five.
+-- ⚠ FIREWALL (the last geometric leg, J4-106): the N=1 TRANSPORT IDENTITY (heatOp_globalWitness_eq_
+-- recentred_inChart at heatParametrix 1) + the N=1 CUTOFF ENGINE ((B₀+B₁τ)-threading through the
+-- cutoff assembly) — connect T1's in-chart bound to T4's cover hypothesis. Mechanical mirrors of
+-- J4-92 W2 + J4-95 M2 at the N=1 profile.
+#print axioms QIQTH.HeatResidualBound.uniformResidualN1_narrow_mixed
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_diag_eval_vanVleck
+#print axioms QIQTH.HeatResidualBound.gatedKernel_hEboundW_le_of_mixedCover
+
 end QIQTH.AxiomAudit
