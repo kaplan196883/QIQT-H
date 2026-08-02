@@ -462,3 +462,12 @@ witness| ≤ B·baseKernelW 2 0 τ p q — hyps ONLY hg/hC/hK/hgnd/hgsymm/hinvF/
 hw0smooth/hw0flat. THE hunif/hEboundW TOWER (J4-80…J4-100, 21 bricks, ONE session) IS
 COMPLETE. Remaining to a₁=R/6: capstone wiring (hHdiag concrete-parametrix identification
 + hInt/hEzero/hEmeas + hDH/hDConv/hCH/hCConv + RNC jets) + hDuhamel/hInter (last wall).
+
+## J4-101 (2ec8c9a5) — ★★ WIRING CENSUS + concrete van-Vleck hEboundW
+`QIQTH/CapstoneWiring.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+CENSUS: gauge inputs carried genuine; hEboundW LANDED (`gatedWitness_hEboundW_vanVleck`
+at Θ:=vanVleck g, u:=transportCoeff — the capstone's slot); hHdiag = ORDER-N REBUILD
+(N=0 version landed via `gatedWitness_diag_eval_vanVleck`; capstone's hN:1≤N keeps the
+t·u₁ term, u₁(0)=R/6 = the extracted coefficient — order-0 witness cannot satisfy);
+hInt/hEzero wiring-medium (hEzero needs n≥1); hDuhamel/hInter + conv-regularity = the
+LAST WALL. J4-102 (in flight) = order-N rebuild census + N=1 near-residual core.
