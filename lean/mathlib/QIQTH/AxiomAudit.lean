@@ -15648,4 +15648,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.heatConv_hasDerivAt_underIntegral
 #print axioms QIQTH.HeatResidualBound.heatConvInner_hasFDerivAt_space
 
+-- ★★★ J4-112 (ConcreteDominations.lean, ns HeatResidualBound): D4 VERDICT + the C²-WEAKENED CAPSTONE
+-- + hDH (indep build-verified). D4 DECISIVE: the capstone's hCH/hCConv ContDiff ⊤ slots are consumed
+-- ONLY through laplaceBeltrami_add's ≤2 derivatives AND are UNSATISFIABLE for the chart-based H_G
+-- (uniformInverseChart is C² only) ⟹ the C² weakening is FORCED and SUFFICIENT: laplaceBeltrami_
+-- add_C2 + heatOp_add_C2 + trueHeatKernel_heat_eqn(_levi)_C2 ⟹ trueKernel_diagonal_a1_eq_R6_
+-- residual_restricted_C2 (hCH/hCConv : ContDiffAt ℝ 2 at 0 — the FINAL capstone shape). D3:
+-- heatParametrixFn_one_diag_differentiableAt + gatedWitnessN1_hDH (concrete hDH discharge — the
+-- diag-eval holds ∀u so funext collapses to the explicit formula). std-3 all six.
+-- ⚠ FIREWALLED (module note): D1 |H_G| Gaussian domination (chart transfer + compact-support sup);
+-- D2 leviSeries domination on (0,T] (iterConvW_bound_le route); D5 hDConv (two-term moving-diagonal
+-- Leibniz; needs D1+D2 + the ε→0 delta-family). J4-113 = D1+D2.
+#print axioms QIQTH.HeatResidualBound.laplaceBeltrami_add_C2
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_restricted_C2
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hDH
+
 end QIQTH.AxiomAudit
