@@ -496,3 +496,10 @@ Census: every hEboundW/hInt use is at τ≤t (single site, Ioo 0 t integrals). R
 `capstone_inputs_N1_shape` (the N=1 mixed-α bound ⟹ the restricted capstone's slot).
 J4-105 (in flight) = the N=1 tower re-run (T1 uniform bound via split+reuse → T2 narrow
 → T3 abstract-layer re-instantiation → T4 gatedWitnessN1_hEboundW_mixed → T5 N=1 hHdiag).
+
+## J4-105 (7fdc1399) — ★★★ N=1 TOWER RE-RUN: analytic heart + mixed cover + hHdiag
+`QIQTH/OrderOneTower.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+T1 `uniformResidualN1_narrow_mixed` ((B₀+B₁τ)·G_{3/2} uniform over K — split + profile-
+abstract N=0 engine at u AND u'); T5 `gatedWitnessN1_diag_eval_vanVleck` (hHdiag at N=1!);
+T4 mixed cover ⟹ the restricted capstone's hEboundW_le. FIREWALL: the N=1 transport
+identity + cutoff engine (geometric leg, mechanical mirrors) = J4-106 (in flight).
