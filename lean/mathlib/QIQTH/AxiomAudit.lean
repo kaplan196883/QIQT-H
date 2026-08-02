@@ -15504,4 +15504,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.parametrixResidual_one_diag_tail
 #print axioms QIQTH.HeatResidualBound.globalCutoffParametrixWitnessN_zero
 
+-- ★★ J4-103 (ResidualN1GaussianBound.lean, ns HeatResidualBound): THE N=1 GAUSSIAN BOUND — the
+-- genuine new brick of the order-N rebuild LANDED (indep build-verified; Sol consult on large-τ).
+-- B1 profile-shift is rfl (foldedCoeff reads u only at k ⟹ shifted profile u' j := u(j+1) reuses the
+-- N=0 bound verbatim for w₁). parametrixResidual_one_split: R₁ = R₀[u] + H₀[u'] + t·R₀[u'] (exact,
+-- metric-arbitrary). residualN1_gaussian_bound (+_gaussianWide_ball explicit-radius): |R₁| ≤
+-- (C₀ + W₁ + t·C₁)·gaussDdimWide — new genuine inputs = the w₁ jets (hw1flat/hw1hessRicci/hw1bd/
+-- hlap1, same shape as w₀'s). std-3 all.
+-- ⚠ LARGE-τ VERDICT (Sol-confirmed): baseKernelW κ α = τ^α·gaussDdim(κτ) — the α slot IS a τ-margin;
+-- the capstone hardcodes α=0 and the raw N=1 residual CANNOT satisfy τ-free α=0 ∀τ (linear-τ diagonal
+-- tail); sharp shape = α=1 via transport cancellation, or (1+τ) coarse, or (0,T]-restriction (Duhamel
+-- only integrates τ≤t — the ∀τ hypothesis is STRONGER than the theory needs). J4-104 = capstone
+-- hEboundW-shape fix (α-parametric Levi machinery census + α=1 or (0,T] capstone variant).
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_one_split
+#print axioms QIQTH.HeatResidualBound.residualN1_gaussian_bound
+#print axioms QIQTH.HeatResidualBound.residualN1_gaussianWide_ball
+
 end QIQTH.AxiomAudit

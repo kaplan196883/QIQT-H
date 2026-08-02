@@ -304,6 +304,7 @@ import QIQTH.RadiusOrdering
 import QIQTH.UniformChartRadius
 import QIQTH.CapstoneWiring
 import QIQTH.OrderNResidual
+import QIQTH.ResidualN1GaussianBound
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
