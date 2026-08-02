@@ -100,7 +100,10 @@ theorem gatedWitness_diag_eval (K : Set (Point n)) (S : Point n → Set (Point n
     exactly the assembled parametrix function AT ORDER 0:
         `gatedKernel … t 0 0 = heatParametrixFn 0 g (transportOp (vanVleck g) g gi) t 0`.
     This is the capstone's `hHdiag` shape but with `N = 0` — the honest reachable order for the current
-    tower witness (`heatParametrixFn_eq` is definitional; no `det g̃(0)=1` needed at order 0). -/
+    tower witness (`heatParametrixFn_eq` is definitional; no `det g̃(0)=1` needed at order 0).
+    ⚠ The capstone needs `N ≥ 1`, which the order-0 witness cannot satisfy (`u₁(0) = R/6 ≠ 0`); this
+    lemma is the template whose `N = 1` sibling closes `hHdiag` once the witness is re-instantiated at
+    the minimal `N = 1` parametrix (see the census note). -/
 theorem gatedWitness_diag_eval_vanVleck (g gi : Point n → Fin n → Fin n → ℝ)
     (K : Set (Point n)) (S : Point n → Set (Point n)) (a b : ℝ) (ha : 0 < a) (hab : a < b)
     (Vmap : Point n → Point n → Point n) (t : ℝ)
@@ -149,9 +152,10 @@ theorem gatedWitness_hEboundW_vanVleck (g gi : Point n → Fin n → Fin n → �
 /-!
   ══════════════════════════════════════════════════════════════════════════════════════════════
   ## FULL WIRING CENSUS — `trueKernel_diagonal_a1_eq_R6_residual` (`H := H_G`, `C := B`).
+  (Sol-consult verdicts incorporated.)
 
   For each hypothesis of the residual capstone, its status against the concrete gated van-Vleck
-  witness `H_G` (order-0), classified as: [WIRING-EASY] · [WIRING-MEDIUM] · [ORDER-N REBUILD] ·
+  witness `H_G` (order-0), classified as: [WIRING-EASY] · [WIRING-MEDIUM] · [N=1 RE-PLUMB] ·
   [hDuhamel/Levi WALL] · [GENUINE GAUGE INPUT].
 
     • `hg`,`hg0`,`hgi`,`hΓ`,`hdg0`,`htr`,`hsrc`  — [GENUINE GAUGE INPUT].  RNC/metric-Hessian data
@@ -164,18 +168,72 @@ theorem gatedWitness_hEboundW_vanVleck (g gi : Point n → Fin n → Fin n → �
       profile), with `C := B`.  The former sole residue `huniformChart` is discharged upstream.
 
     • `hHdiag` : `H_G t 0 0 = heatParametrixFn N g (transportOp (vanVleck g) g gi) t 0`, `1 ≤ N`
-      — [ORDER-N REBUILD].  `gatedWitness_diag_eval_vanVleck` proves this AT `N = 0`
-      (`H_G t 0 0 = heatParametrixFn 0 …`).  For `N ≥ 1` it is FALSE for the current witness: the
-      order-N diagonal carries the derived `transportCoeff₁(0)·t = (R/6)·t` term, absent from the
-      order-0 `H_G`.  Requires `globalCutoffParametrixWitness` re-run with `heatParametrix N`.  This is
-      the single obstruction to feeding both `hEboundW` and `hHdiag` from one witness.
+      — [N=1 RE-PLUMB].  CANNOT hold for the order-0 witness (`u₁(0) = R/6 ≠ 0` generically; the
+      `Ico 2 (N+1)` remainder only drops `u₂+`).  The witness must be re-instantiated at the MINIMAL
+      `N = 1` parametrix.  RE-PLUMB COST CENSUS (what is N-generic vs hardcoded `N = 0`):
+
+        N-GENERIC (reusable as-is):
+          – `parametrixResidualN N` (def) + `parametrixResidual_telescope_N` + `telescope_bracket`
+            (`HeatResidualBound.lean`) — the general-N residual and its diagonal telescoping;
+          – `heatParametrix_folded N`, `laplaceBeltrami_sum_pow` — folded form + Δ-linearity, any N;
+          – the ENTIRE gate/cover layer: `gatedKernel`, `gatedKernel_hEboundW_of_cover`
+            (`HunifTrichotomy.lean`, abstract `H`), `gatedWitness_hEboundW_of_good_gen` (abstract
+            `W`; only the PROFILE inside is N=0), `iterConvIntegrableW_of_bound_baseMeas`,
+            the Levi width-2 engine (`leviSeries_summableW`, `iterConvW_bound`,
+            `scaledIterKernelW_summable`) — all take an abstract `E`/`H`;
+          – `gatedWitness_diag_eval` (THIS FILE) — gate-generic; the `N = 1` sibling is a one-liner
+            (`heatParametrix 1` in place of `heatParametrix 0` after the witness swap).
+
+        HARDCODED `N = 0` (must be re-run at `N = 1`; `heatParametrix 0` / `parametrixResidualN 0`
+        sites counted by grep):
+          – the witness DEF itself: `globalCutoffParametrixWitness` (`GlobalResidualWitness.lean`,
+            10 sites) — needs an `N` parameter or an `N = 1` twin;
+          – the near-diagonal residual bound chain: `residualN0_gaussian_bound`
+            (`ParametrixResidualN0Bound.lean`) and its C3 twin `residualN0_gaussian_bound_C3`
+            (`ResidualN0GaussianC3.lean`) — NO N-generic sibling exists (grep: none); all
+            coefficient-level inputs are `foldedCoeff Θ u 0`-only.  At `N = 1` the residual bracket
+            gains the `w₁`-terms, so the chain needs NEW genuine inputs: `hw1smooth`/`hw1flat`, a
+            `w₁` Hessian–Ricci analogue, and the k=0 transport link `1·w₁(0) = Δ_g w₀(0)`
+            (available: `transportCoeff_succ_transport_eq`);
+          – `residualN0_local_baseKernelW_slice` (+`_C3`) (`ParametrixHEboundWiring.lean` /
+            `NearResidualC3.lean`, 15 `parametrixResidualN 0` sites);
+          – the τ-derivative/cutoff engine files (each folds `heatParametrix 0` into the
+            `deriv`/collar algebra): `CutoffResidualAssembled` (13) · `RecenterCutoffLocal` (13) ·
+            `RecenterCutoffC3` (14) · `UniformNearEngine` (9) · `UniformCutoffEngine` (15) ·
+            `UniformTauResidual` (13) · `UniformResidualPacket` (13) · `WidthMarginEngine` (14) ·
+            `RadiusOrdering` (31) · `UniformChartRadius` (10) — ≈ 12 files / ≈ 150 sites.  Most
+            sites are the SAME `funext … heatParametrix_folded; simp` unfold pattern, so the
+            re-plumb is mechanical-but-long, driven by one new `N = 1` profile lemma pack
+            (τ-derivative of `gauss·(w₀ + τ·w₁)`, collar bounds for the `w₁` term).
+
+      WHERE `N = 1` HELPS (the τ¹ dividend): the `N = 1` diagonal residual is `O(τ¹)`
+      (`parametrixResidual_telescope_N`: `−G·Δ(w_N)·τ^N`), i.e. α = 1 in `baseKernelW`-form.  NOT
+      needed for Neumann summability (G2 is VACUOUS — `leviSeries_summable_alpha_zero` / the width-2
+      engine run at α = 0 on factorial Γ-decay), but it (i) tames the τ→0⁺ boundary: `hEzero`-style
+      vanishing and the `hDH` τ-differentiability at small τ get a genuine `τ¹` margin instead of an
+      `O(1)` bracket; (ii) shrinks the one-step constant feeding every iterated-convolution bound;
+      (iii) makes the Duhamel integrand `∫₀ᵗ E(t−s)·F(s)` integrable-at-the-endpoint with room to
+      spare — easing the diff-under-integral package of the `hDuhamel` wall.
 
     • `hInt` : `IterConvIntegrableW (heatOp g gi H_G) 2 0 C`  — [WIRING-MEDIUM].  Producible by
-      `IterEMeasurable.iterConvIntegrableW_of_bound_baseMeas` from `hEboundW` (have it) + `hEzero`
-      (heat-operator vanishing at `τ ≤ 0`) + `hEmeas` (joint strong measurability of `heatOp g gi H_G`).
-      `hEmeas` is a genuine measurability carry for the piecewise (gate-indicator × smooth-profile)
-      witness and its `deriv`/`laplaceBeltrami`; the gate `S q` is OPEN, so the indicators are
-      measurable and the pieces continuous on the open gate — reachable but not a one-liner.
+      `iterConvIntegrableW_of_bound_baseMeas` from `hEboundW` (LANDED) + `hEzero` + `hEmeas`.
+      `hEmeas` ROUTE (corrected): `heatOp` = τ-`deriv` − `laplaceBeltrami`, and BOTH slots are
+      PARAMETERIZED derivatives — the τ-slot `p ↦ deriv (fun s => H s p q) τ` explicitly, and the
+      spatial slot too, since `pd f i x = deriv (fun t => f (update x i t)) (x i)` (`Curvature.lean`)
+      is a parameterized 1D `deriv`, NOT a whole-map `fderiv` — so Mathlib's unconditional
+      `measurable_deriv`/`measurable_fderiv` (FDeriv.Measurable, measurable in the POINT for a FIXED
+      function) does not compose directly for either slot.  Robust route: prove the EXPLICIT smooth
+      formula for `heatOp g gi H_G` on the open gate (the gate is τ-independent, so on `S q` the
+      kernel is the smooth `χ(W q p)·H₀(τ, W q p)` and `heatOp` is its classical expression), `0`
+      off `closure (S q)`, and handle the frontier: `∂(S q)` = the C¹-chart image of a sphere =
+      Lipschitz image of a null set = null, so an a.e.-congr (`AEStronglyMeasurable.congr`) closes
+      an AE-version.  ⚠ CAUTION: `iterConvIntegrableW_of_bound_baseMeas` demands FULL
+      `StronglyMeasurable` (its `iterE_zmeas`/`conv_meas` inductions run on it); an arbitrary
+      frontier-junk piecewise function is NOT automatically Borel, so either (a) reprove the
+      induction pack with AE inputs (lateral but standard), or (b) show the frontier values are
+      genuinely measurable (they are: `heatOp` of a fixed kernel is built from countable limits of
+      measurable difference quotients ONCE the kernel itself is jointly measurable — `H_G` is, as
+      indicator×continuous).  Reachable; not a one-liner.
 
     • `hEzero` : `heatOp g gi H_G τ = 0` for `τ ≤ 0`  — [WIRING-MEDIUM].  For `n ≥ 1`,
       `gaussDdim τ x = 0` at `τ ≤ 0` (`heatKernel1D_of_nonpos`), so `H_G(τ,·,q) ≡ 0`, giving `Δ_g = 0`;
@@ -192,8 +250,12 @@ theorem gatedWitness_hEboundW_vanVleck (g gi : Point n → Fin n → Fin n → �
       `H_G` part is smooth near the diagonal (gate = neighbourhood of the origin, cutoff `≡ 1`, profile
       `C∞`), but the convolution parts ride on the Levi series and belong with the `hDuhamel` wall.
 
-  NET.  `hEboundW` is LANDED for the concrete witness; the order-0 `hHdiag` is LANDED; the pair cannot
-  be packaged into ONE `N ≥ 1` capstone witness without the order-N rebuild of the residual tower.
+  NET + WIRING ORDER.  `hEboundW` is LANDED for the concrete witness; the gate-generic diag-eval is
+  LANDED (feeds the `N = 1` `hHdiag` after the witness swap); the capstone pair needs the `N = 1`
+  re-plumb censused above.  HIGHEST-LEVERAGE NEXT BRICK (per consult): the convolution
+  regularity/diff-under-integral package for `heatConv` — it feeds `hCH`/`hCConv`/`hDH`/`hDConv` AND
+  the future `hDuhamel` discharge simultaneously; second = the `N = 1` profile lemma pack; third =
+  the `hEmeas`/`hEzero` measurability pair.
 -/
 
 end QIQTH.HeatResidualBound
