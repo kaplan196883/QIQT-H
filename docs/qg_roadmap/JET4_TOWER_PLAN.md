@@ -521,3 +521,12 @@ ceiling) ⟹ `gatedWitnessN1_hEboundW_le_vanVleck_final`: NO coefficient hypothe
 STATUS: hEboundW_le + hHdiag both maximally clean at N=1. Remaining: hEmeas/hInt →
 conv-regularity (hDH/hDConv/hCH/hCConv) → hDuhamel/hInter (LAST wall) → gauge → assembly
 via trueKernel_diagonal_a1_eq_R6_residual_restricted.
+
+## J4-109 (caa2b128) — ★★ hInt via the TIME-CAP producer
+`QIQTH/GatedWitnessMeas.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+The ∀τ-mismatch resolved by the time-cap (Sol-confirmed): `timeCap` + causal equality
+`iterE_timeCap_eq` ⟹ `iterConvIntegrableW_of_locally_bound_baseMeas` (FULL hInt from the
+(0,T]-local family, zero downstream re-plumb) + the concrete hand-off
+`gatedWitnessN1_hInt_of_hEmeas`. FIREWALL: hEmeas (joint SM of heatOp H_G — the
+parameterized-deriv + choose-chart crux; J4-110 in flight on the joint-measurability
+routes: smooth-dependence / closed-graph / Picard iterates; carried-hyp fallback).
