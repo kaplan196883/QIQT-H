@@ -15474,4 +15474,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.uniformInverseChart_huniformChart
 #print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW_unconditional
 
+-- ★★ J4-101 (CapstoneWiring.lean, ns HeatResidualBound): the WIRING CENSUS + concrete van-Vleck
+-- hEboundW (indep build-verified; Sol consult confirmed the N-mismatch pre-census). CENSUS: capstone
+-- hyps classify as — GAUGE INPUTS (hg/hg0/hgi/hΓ/hdg0/htr/hsrc, carried genuine); hEboundW WIRING-
+-- EASY (LANDED: gatedWitness_hEboundW_vanVleck at Θ:=vanVleck g, u:=transportCoeff — the capstone's
+-- hEboundW slot, hyps only geometric + van-Vleck hw0smooth/hw0flat); hHdiag ORDER-N REBUILD (landed
+-- at N=0: gatedWitness_diag_eval_vanVleck via uniformInverseChart_zero + gate-collapse; the capstone's
+-- hN:1≤N demands the t·u₁ term with u₁(0)=R/6 — the EXTRACTED coefficient — so the order-0 witness
+-- CANNOT satisfy it; re-run the witness/residual tower at heatParametrix N — the next genuine piece);
+-- hInt/hEzero WIRING-MEDIUM (hEzero needs n≥1 — junk-deriv at τ=0 + empty-product breaks n=0);
+-- hDuhamel/hInter + convolution regularity = the LAST WALL. Lateral note: the tower's ∃S is opaque —
+-- diag eval stated with explicit-S hyp. std-3 all.
+#print axioms QIQTH.HeatResidualBound.uniformInverseChart_zero
+#print axioms QIQTH.HeatResidualBound.gatedWitness_diag_eval_vanVleck
+#print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW_vanVleck
+
 end QIQTH.AxiomAudit
