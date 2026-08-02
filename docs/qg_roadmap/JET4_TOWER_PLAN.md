@@ -599,3 +599,18 @@ IsCompact.uniformContinuousOn Heine-Cantor; (iii) hDelta = hDaLim.add hBoundary
 (TendstoLocallyUniformlyOn.add), D u := DaLim u + B u 0 0. hDaLim deferred (same singular
 integrand as Da). A-side: fixed diagonal ball where A = G·(u₀+τu₁), 4-way split
 (main/ε·u₁/off-ball via (3/2)ε-domination tail/mass defect).
+
+## J4-118 BANKED (f8f8ab50) — 2026-08-03
+DeltaFamilyBoundary.lean [AF std-3, raw 0 @ 9402 jobs]: mass-one gaussDdim_integral_eq_one
++ THE Lemma-3.14 approximate-identity core tendsto_integral_gaussDdim_smul (NEAR/FAR split;
+conditional hmeas + hTail) + tendstoLocallyUniformlyOn_add (Mathlib lacks it — proved) +
+hDelta_of_boundary(_shifted) + hDelta_gatedWitnessN1_of_boundary (concrete hDelta feed,
+D u = DaLim u + B u 0 0). HONEST: Brick 2 hBoundary (moving-peak concentration) NOT proved —
+BOTH factors m-dependent (peak A(ε_m) AND drift B(u−ε_m)); needs the equicontinuous-FAMILY
+variant of the approximate identity + Heine–Cantor from hBcont. Carries now: hTail, hBoundary,
+hmeas, hDaLim.
+NEXT: J4-119 = GaussianTailBoundary.lean: (T1) hTail via 1-D tail × union bound (|z|≥δ ⟹
+∃k |z_k|≥δ/√n; ≤ n·tail1D·mass — AVOID n-D change of variables) + (T2) equicontinuous-family
+approximate identity (∀η ∃δ ∀ᶠm ∀z∈ball δ, |h m z − c|≤η ⟹ ∫G_{ε_m}h_m → c) + (T3) hBoundary
+= Brick 2 via T2 with h m z := u₀ z·B(u−ε_m,z,0), Heine–Cantor on Icc(a/2,T)×closedBall 0 r₀,
+4-way split (main/ε·u₁/off-ball (3/2)ε-tail/mass defect).
