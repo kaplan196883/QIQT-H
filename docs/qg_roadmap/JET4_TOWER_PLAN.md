@@ -695,3 +695,14 @@ hDaLimLU ⟺ LapTrunc → Δ_x(H*F) (Etrunc part PROVEN). NOT a monolith — spl
 NEXT: J4-124 = hGaugeLap (the normal-coordinate reduction — early, load-bearing, medium) +
 Gaussian coordinate-derivative formulas + second-moment identities (seeds exist). Then the
 cancellation lemma; then amplitude package; then slivers.
+
+## J4-124 BANKED (18aa16ed) — 2026-08-03: THE CANCELLATION LIBRARY
+GaussianHessianCancel.lean [AF std-3, raw 0 @ 9407]: G1 Hessian coefficient + G2 exact
+∫∂ᵢ²G = 0 + G3 weighted moments ((15/2)/√t workhorse via the G_{2t} re-route, no 4th moment)
++ G4 gaussian_hessian_cancel (Lipschitz q ⟹ ≤ L·(15/2·n)/√t). All at x=0 (RNC center).
+Deferred small: grad-cancel odd analogue + 2√ε corollary → J4-125.
+NEXT: J4-125 = SliverEstimates.lean (S0 grad-cancel + rpow sliver corollary; S1/S2 linewise
+sliver bounds j=0,1,2 on the FORMAL-derivative integrals — Sliver2 via the 3-term
+∂ᵢ²(G·A) expansion + G4 with q := Aamp·F (hqLip carry = the hFLocLip family) + amplitude
+interface hyps hAfact/hAampBdd/D1/D2 + derivative-domination tails; identification with
+actual derivatives = the LATER finite-ε differentiation brick).
