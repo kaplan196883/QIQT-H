@@ -15352,4 +15352,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.basepointInverseChart_spec
 #print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_inChart_unconditional
 
+-- ★★ J4-94 (GlobalWitnessHunif.lean, ns HeatResidualBound): H1 + zero-extension core + a DECISIVE
+-- structural finding (indep build-verified). LANDED: metricInv_left_of_right (right⟹left inverse via
+-- the operator route — matToCLM eval + unit two-sidedness; sheds hGiG); heatOp_eq_zero_of_locally_zero
+-- (H2-core: heatOp = 0 where H locally 0 in t and space — ∂_τ by EventuallyEq.deriv_eq, Δ germ-local;
+-- Vmap-agnostic, reusable for ANY gated witness); globalWitness_residual_bound_inChart_final (H1: the
+-- J4-93 bound with ALL four far-point antecedents discharged from global hyps — hyps now ONLY
+-- hg/hC/hK/hgnd/hgsymm/hinvF/hframeK/Θ/u/hw0smooth/hw0flat). std-3 all.
+-- ⚠ FIREWALL 1 (H2-transfer): gated witness H_w' := if p ∈ φ_q''closedBall then H_w else 0 (e.symm
+-- off-target junk confirmed) — transfer needs φ_q OPEN at v (hidden in the IFT partial homeo).
+-- ⚠⚠ FIREWALL 2 (H4/H5, DECISIVE WIDTH FINDING): gaussDdimWide τ v = 2^{n/2}·gaussDdim(2τ) v EXACTLY
+-- (same width 8τ) ⟹ the consumer comparison forces ‖p−q‖ ≤ ‖v‖ as τ→0⁺ — FALSE in general (geodesic
+-- spreading). The long-carried "hcoord same-width unsatisfiable" note is now PROVED structural: the
+-- τ-uniform ENGINE must be re-run to a NARROWER target width (margin absorbs the (1+C‖v‖) metric-vs-
+-- Euclidean factor near-diagonal). J4-95 = width-margin engine re-plumb (Sol consult first).
+#print axioms QIQTH.HeatResidualBound.metricInv_left_of_right
+#print axioms QIQTH.HeatResidualBound.heatOp_eq_zero_of_locally_zero
+#print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_inChart_final
+
 end QIQTH.AxiomAudit
