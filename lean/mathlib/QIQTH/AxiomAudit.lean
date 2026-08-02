@@ -15812,4 +15812,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDuhamel_of_daLim
 #print axioms QIQTH.HeatResidualBound.hDuhamel_leviSeries_of_daLim
 
+-- ★★★ J4-123 (DuhamelLimitWiring.lean, ns HeatResidualBound): the LIMIT WIRING — all three
+-- soft carries of the J4-122 reduction DISCHARGED (indep build-verified). LANDED:
+-- boundaryTrunc_tendsto (W1: pointwise boundary limit from the PROVEN Brick-2 loc-unif) +
+-- etrunc_tendsto_of_kernel/etrunc_tendsto (W2: the Etrunc sliver limit = heatConv_tail_tendsto
+-- with hFII discharged by the F1 Chapman–Kolmogorov bound) + truncDuhamel_hasDerivAt (HasDerivAt
+-- upgrade of the truncated identity) + derivConv_tendsto (W3: the derivative-of-limit via
+-- hasDerivAt_of_tendstoLocallyUniformlyOn) + hDuhamel_final + hDuhamel_leviSeries_final
+-- (W4: the capstone hDuhamel shape VERBATIM). std-3 all.
+-- ⚠ THE REMAINING CARRIES of the capstone hDuhamel (exact): hDaLimLU (THE sole hard limit —
+-- loc-unif DaTrunc → Δ_x(H*F) + E*F specific-value; carries the hDaLim/hLap content) +
+-- F2 regularity family (hpar/htime/hR eventual) + hFII (H*F-pairing interval-integrability) +
+-- the boundary interface family (near-diagonal hAnear/u₀/u₁ + dominations + hBcont +
+-- measurability — satisfiable by the N=1 witness). NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.boundaryTrunc_tendsto
+#print axioms QIQTH.HeatResidualBound.etrunc_tendsto
+#print axioms QIQTH.HeatResidualBound.truncDuhamel_hasDerivAt
+#print axioms QIQTH.HeatResidualBound.derivConv_tendsto
+#print axioms QIQTH.HeatResidualBound.hDuhamel_final
+#print axioms QIQTH.HeatResidualBound.hDuhamel_leviSeries_final
+
 end QIQTH.AxiomAudit

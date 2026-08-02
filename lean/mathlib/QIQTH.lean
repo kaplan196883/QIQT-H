@@ -322,6 +322,7 @@ import QIQTH.DeltaFamilyBoundary
 import QIQTH.GaussianTailBoundary
 import QIQTH.BoundaryAssembly
 import QIQTH.TruncatedDuhamel
+import QIQTH.DuhamelLimitWiring
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
