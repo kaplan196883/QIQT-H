@@ -471,3 +471,11 @@ at Θ:=vanVleck g, u:=transportCoeff — the capstone's slot); hHdiag = ORDER-N 
 t·u₁ term, u₁(0)=R/6 = the extracted coefficient — order-0 witness cannot satisfy);
 hInt/hEzero wiring-medium (hEzero needs n≥1); hDuhamel/hInter + conv-regularity = the
 LAST WALL. J4-102 (in flight) = order-N rebuild census + N=1 near-residual core.
+
+## J4-102 (771f8248) — ★ order-N rebuild OPENED
+`QIQTH/OrderNResidual.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+CENSUS: residual identities already general-N in-repo; ~150 N=0 sites statement-level
+(proofs N-agnostic); genuinely new = ONLY the N=1 Gaussian bound. LANDED: N-generic near
+packet consumer (+N=1), `parametrixResidual_one_diag_tail` (τ¹ tail = −G·Δw₁(0)·t),
+`globalCutoffParametrixWitnessN`. J4-103 (in flight) = the N=1 Gaussian bound (w₁ jets +
+four-term C³ estimate; ⚠ large-τ hEboundW-shape question flagged for early Sol consult).
