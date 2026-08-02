@@ -561,3 +561,11 @@ standalone ∃ not engine-consumable ⟹ the certificate form: `GateSqControl` +
 `exists_D1_constants_of_gateSqControl` (|gated H₁| ≤ (A₀+A₁τ)√(3/2)ⁿ·G_{3/2}(p−q) ∀τ>0)
 + `gateSqControl_of_flowBall` (certificate from chart germ + hdisp). J4-114 (in flight) =
 the certificate MERGE into the hE chain's ∃S + D2 Levi domination.
+
+## J4-114 (6d27f99c) + J4-115 (85d25db0) — the shared-S package + hDConv→hDelta
+J4-114 `GatedWitnessPackage.lean`: the certificate MERGE (gatedWitnessN1_package — ONE
+shared S: hEboundW_le ∧ GateSqControl ∧ 0∈S ∧ D1 ∧ W(0,0)=0; .choose-spec re-export) +
+leviSeries_dominatedW_le (abstract UNCONDITIONAL Levi domination).
+J4-115 `HeatConvDeriv.lean`: hDConv REDUCED to hDelta (Sol: ε-split; the never-evaluated-
+limit trick — hasDerivAt_of_tendstoLocallyUniformlyOn with existential D). Remaining D5:
+concrete approximants (J4-116 in flight) + Lemma 3.14 (the irreducible singular brick).
