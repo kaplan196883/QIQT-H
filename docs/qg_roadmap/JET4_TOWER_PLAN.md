@@ -614,3 +614,16 @@ NEXT: J4-119 = GaussianTailBoundary.lean: (T1) hTail via 1-D tail × union bound
 approximate identity (∀η ∃δ ∀ᶠm ∀z∈ball δ, |h m z − c|≤η ⟹ ∫G_{ε_m}h_m → c) + (T3) hBoundary
 = Brick 2 via T2 with h m z := u₀ z·B(u−ε_m,z,0), Heine–Cantor on Icc(a/2,T)×closedBall 0 r₀,
 4-way split (main/ε·u₁/off-ball (3/2)ε-tail/mass defect).
+
+## J4-119 BANKED (a60bdaa8) — 2026-08-03
+GaussianTailBoundary.lean [AF std-3, raw 0 @ 9403 jobs]: T1 hTail UNCONDITIONAL
+(gaussDdim_tail_tendsto_zero; explicit n·√2·e^{−δ²/8t}; Pi sup-metric union bound, no √n) +
+T1★ tendsto_integral_gaussDdim_smul_of_meas (Lemma 3.14 with hTail gone) + T2 family variant +
+T2u tendstoUniformlyOn_integral_gaussDdim_smul_family (parameter-uniform main-term engine).
+T3 hBoundary deferred (200+-line 4-way assembly; T2u full-space vs ball-r₀ A-form mismatch
+needs an off-ball A-tail bridge).
+NEXT: J4-120 = BoundaryAssembly.lean: T3 boundary_tendstoLocallyUniformlyOn (4-way split:
+main via T2u + Heine–Cantor; ε·u₁; off-ball (3/2)ε-tail via T1 + gaussDdim diagonal cap;
+mass defect via T1) + concrete hDelta_gatedWitnessN1_final (hBoundary killed).
+Traps for the agent recorded: indicator_of_notMem, integral_finsetSum, heatKernel1D_pos
+arg order, beta-redex show-reduce, (n := n) pinning.
