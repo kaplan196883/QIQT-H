@@ -418,3 +418,12 @@ M1 width-parametric absorptions (single gaussDdim_width_ratio identity; A3 chart
 M3 `globalWitness_residual_bound_chartGaussian` at the CONSUMER width gaussDdim(2τ)(φ_qv−q).
 ONE input left: hdisp near-isometry budget — J4-96 (in flight) discharges via retained
 Neumann bound + segment MVT + ℓ²-direct summation (dodges the sup-norm n-factor).
+
+## J4-96 (6138f431) — ★★★ hdisp DISCHARGED: consumer-width bound fully unconditional in-chart
+`QIQTH/NearIsometryBudget.lean` (ns ExpMap + HeatResidualBound), [AF] std-3, indep verified.
+Ball-restatement required (global hdisp false). `uniformFlowExp_zero` (confinement at 0) +
+unconditional near-id `‖Dφ−Id‖≤C_D‖v‖` (Grönwall tail re-derivation) + displacement
+`‖φv−q−v‖≤C_D‖v‖²` (segment MVT) + `uniformFlowExp_hdisp_ball` (ℓ²-direct, n absorbed) ⟹
+CAPSTONE `globalWitness_residual_bound_chartGaussian_final` — hyps only geometric+heat.
+NEXT: J4-97 (in flight) = the ∀p assembly (gated witness trichotomy + q-gate +
+RecenterReduction feed) ⟹ GLOBAL hEboundW.
