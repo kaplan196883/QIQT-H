@@ -503,3 +503,10 @@ T1 `uniformResidualN1_narrow_mixed` ((B₀+B₁τ)·G_{3/2} uniform over K — s
 abstract N=0 engine at u AND u'); T5 `gatedWitnessN1_diag_eval_vanVleck` (hHdiag at N=1!);
 T4 mixed cover ⟹ the restricted capstone's hEboundW_le. FIREWALL: the N=1 transport
 identity + cutoff engine (geometric leg, mechanical mirrors) = J4-106 (in flight).
+
+## ★★★★ J4-106 (c5bf16b3) — the LAST GEOMETRIC LEG: two hardest capstone inputs CONCRETE at N=1
+`QIQTH/OrderOneGeometry.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+Transport mirrors near-verbatim + the affine-in-τ engine trick (no chain re-run) + the
+mixed 3-leg cover ⟹ `gatedWitnessN1_hEboundW_le_vanVleck`. With J4-105's hHdiag: the
+restricted capstone's hEboundW_le AND hHdiag both concrete. Carried: hCoeffU0/U1 (J4-107
+in flight; ∂w₁(0) subtlety), hInt/hEzero/hEmeas, hD*/conv, hDuhamel/hInter, gauge.
