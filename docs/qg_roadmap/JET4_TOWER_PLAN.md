@@ -402,3 +402,11 @@ from the width-4τ (G₁) primitives FORCED. Lean shape: width-parametric absorp
 lemmas, capstones at c=3/2 (copy-adjust). ⚠ τ-caveat: r²G₁ ≤ Cτ·G_{3/2} carries a τ —
 uniform when paired with the 1/τ residual factor; if unpaired use min(Cτ, ρ²).
 Final statement stays at width 2 — the hardcoded Levi machinery unchanged.
+
+## J4-94 (e701b5f4) — ★★ H1 discharged + zero-extension core + THE WIDTH FINDING
+`QIQTH/GlobalWitnessHunif.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+`globalWitness_residual_bound_inChart_final` (all far-point antecedents discharged — hyps
+only geometric+heat) + `heatOp_eq_zero_of_locally_zero` (H2-core) + `metricInv_left_of_
+right`. DECISIVE: same-width hcoord PROVED structurally unsatisfiable (τ→0 forces
+‖p−q‖≤‖v‖) ⟹ width-margin engine re-run forced (Sol G₁→G_{3/2}→G₂, verdict above).
+J4-95 (WidthMarginEngine) in flight. Also firewalled: H2-transfer (φ_q open-map exposure).
