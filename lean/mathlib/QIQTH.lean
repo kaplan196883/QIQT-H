@@ -311,6 +311,7 @@ import QIQTH.OrderOneGeometry
 import QIQTH.CoeffBoundsN1
 import QIQTH.CoeffU1Fix
 import QIQTH.GatedWitnessMeas
+import QIQTH.GatedWitnessEmeas
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

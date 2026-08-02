@@ -15616,4 +15616,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.iterConvIntegrableW_of_locally_bound_baseMeas
 #print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hInt_of_hEmeas
 
+-- ★★ J4-110 (GatedWitnessEmeas.lean, ns HeatResidualBound): hEmeas DECOMPOSED to its irreducible
+-- residue (indep build-verified; Sol ODE-measurability consult). VERDICT: route-(b) WALLS twice over
+-- — W1: uniformFlowExp is per-(q,w) Classical.choose with NO joint structure (multi-week ODE-
+-- measurability endeavour per Sol); W2 (independent): measurable_deriv_with_param needs joint
+-- CONTINUITY, and laplaceBeltrami's NESTED pd needs the first-pd field continuous ⟹ W1 again.
+-- LANDED (flow-agnostic, reusable): E3a/b/c pd/∂_τ/pd² field SM from joint continuity (via
+-- measurable_deriv_with_param + Function.update reparam) + E3d heatOp SM from the three fields +
+-- coefficient measurability + E3e the clean reduction. E4 gatedWitnessN1_hInt_of_kernelContinuity:
+-- hInt from {Continuous(H_G), Continuous(∂ⱼH_G ∀j), hgiM, hchrM} — the monolithic hEmeas replaced by
+-- granular satisfiable inputs whose sole irreducible residue = the flow's joint q-regularity
+-- (3rd surfacing of this wall; deferred). std-3 all. NEXT: pivot to the hDuhamel campaign (needs no
+-- joint-q) — conv-regularity package first per Sol.
+#print axioms QIQTH.HeatResidualBound.stronglyMeasurable_pd_field_of_jointContinuous
+#print axioms QIQTH.HeatResidualBound.heatOp_stronglyMeasurable_of_jointContinuous
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hInt_of_kernelContinuity
+
 end QIQTH.AxiomAudit
