@@ -554,3 +554,10 @@ the C² chart witness ⟹ `trueKernel_diagonal_a1_eq_R6_residual_restricted_C2` 
 capstone shape (hCH/hCConv : ContDiffAt ℝ 2 at 0). hDH discharged concretely
 (`gatedWitnessN1_hDH`). Firewalled: D1 |H_G| domination, D2 leviSeries domination,
 D5 hDConv assembly. J4-113 (D1+D2) in flight.
+
+## J4-113 (46fbfc59) — ★★ D1 witness domination (conditional GateSqControl form)
+Additions to `ConcreteDominations.lean`, [AF] std-3, indep verified. Sol packaging verdict:
+standalone ∃ not engine-consumable ⟹ the certificate form: `GateSqControl` +
+`exists_D1_constants_of_gateSqControl` (|gated H₁| ≤ (A₀+A₁τ)√(3/2)ⁿ·G_{3/2}(p−q) ∀τ>0)
++ `gateSqControl_of_flowBall` (certificate from chart germ + hdisp). J4-114 (in flight) =
+the certificate MERGE into the hE chain's ∃S + D2 Levi domination.
