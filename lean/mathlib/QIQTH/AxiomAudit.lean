@@ -15489,4 +15489,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gatedWitness_diag_eval_vanVleck
 #print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW_vanVleck
 
+-- ★ J4-102 (OrderNResidual.lean, ns HeatResidualBound): the ORDER-N rebuild opened (indep build-
+-- verified). CENSUS: the residual IDENTITIES are already general-N (parametrixResidual_telescope_N,
+-- _offdiag_absorbed, transportCoeff_succ_transport_eq); ~150 N=0 sites are STATEMENT-level (proofs
+-- N-agnostic — from_packet is literally `simpa only [parametrixResidualN]`); genuinely new = ONLY the
+-- N=1 residual Gaussian BOUND (residualN0_gaussian_bound_C3 analogue). LANDED: near_uncutResidual_
+-- gaussianWide_ball_from_packet_orderN (+_one), parametrixResidual_one_diag_tail (N=1 diagonal
+-- residual = −G·Δ(w₁)(0)·t — the τ¹ tail, via telescope at N=1 + hrec1 w₁(0)=Δw₀(0)),
+-- globalCutoffParametrixWitnessN (+_zero rfl-reduction). std-3 all four.
+-- ⚠ FIREWALL (the genuine new brick, J4-103): the N=1 residual Gaussian bound for gauss·(w₀+t·w₁) —
+-- needs hw1smooth/hw1flat + a w₁ Hessian–Ricci analogue + the four-term C³ off-diagonal estimate;
+-- then the ~150-site mechanical 0→N sweep.
+#print axioms QIQTH.HeatResidualBound.near_uncutResidual_gaussianWide_ball_from_packet_orderN
+#print axioms QIQTH.HeatResidualBound.parametrixResidual_one_diag_tail
+#print axioms QIQTH.HeatResidualBound.globalCutoffParametrixWitnessN_zero
+
 end QIQTH.AxiomAudit
