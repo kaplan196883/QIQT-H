@@ -15438,4 +15438,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gatedKernel_hEboundW_of_cover
 #print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW
 
+-- ★★★ J4-99 (RadiusOrdering.lean, ns HeatResidualBound): τ-uniformity + radius ordering DISCHARGED —
+-- the hEboundW summit reduced to ONE isolated K-uniform-chart input (indep build-verified).
+-- R1 CONFIRMED: engine monotone in b — `cutoffResidual_uniformFlow_unconditional_tau_narrow_below`
+-- (∀ρc>0, engine with b<ρc; b := min(min bN (rmin/2))(ρc/2), zero other edits). R2: quantifier hoist
+-- SUCCEEDED per-q (r₀ genuinely τ-free; needed ∀f-naturality restatement with f-free radius +
+-- hoisted transport identity) ⟹ `globalWitness_residual_bound_chartGaussian_final_below` (ceiling-
+-- threaded, ∀q∈K ∃r₀>0 ∀τ>0). R4 `gatedWitness_hEboundW_final`: the hEboundW primitive — radius-
+-- opacity circularity broken by choosing rN/r₁ BEFORE (a,b), ceiling ρc := min(min rN δ₀) r₁,
+-- gate c := (b+ρc)/2. std-3 all five.
+-- ⚠ ONE input left (genuine, satisfiable flat, strictly weaker than hgood): huniformChart = the
+-- K-UNIFORM IFT source-ball radius δ₀ (per-q basepointChart δ has no packaged uniform lower bound;
+-- K-uniform NONDEG radius exists — only the source-ball radius missing). J4-100 = quantitative
+-- uniform IFT radius from the uniform Lipschitz-Dφ (Hessian bound) + near-id data (Banach fixed pt).
+#print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional_tau_narrow_below
+#print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_chartGaussian_final_below
+#print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW_final
+
 end QIQTH.AxiomAudit

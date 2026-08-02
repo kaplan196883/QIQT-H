@@ -300,6 +300,7 @@ import QIQTH.WidthMarginEngine
 import QIQTH.NearIsometryBudget
 import QIQTH.GlobalHunifAssembly
 import QIQTH.HunifTrichotomy
+import QIQTH.RadiusOrdering
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
