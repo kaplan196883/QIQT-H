@@ -15688,4 +15688,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.leviSeries_dominatedW_le
 #print axioms QIQTH.HeatResidualBound.leviSeries_gatedWitnessN1_dominated
 
+-- ★★ J4-115 (HeatConvDeriv.lean, ns HeatResidualBound): hDConv REDUCED to hDelta (indep build-
+-- verified; Sol route verdict: ε-SPLIT, not ℝ-convolution — the convolution API can't see the
+-- post-z-integral pairing bilinearly, and ∂_τA ~ τ^{-n/2-1} isn't dominated at 0 anyway). LANDED:
+-- V1 heatConv_eq_integral_full (vanishing bridge, unconditional); V2a/b engine t-diffs; V2c
+-- heatConvFrozen_diagShift_hasDerivAt (the 2-variable u-role chain rule, L(1,1) trick); V2d
+-- heatConv_eps_differentiable; PAYOFF hDConv_of_deltaFamily: DifferentiableAt of the convolution
+-- from {eventual HasDerivAt of approximants (hf) + pointwise convergence (hfg) + hDelta =
+-- TendstoLocallyUniformlyOn of the DERIVATIVES with an EXISTENTIAL never-evaluated limit} — the
+-- delta boundary term is never computed. std-3 all seven.
+-- ⚠ REMAINING D5 bricks: concrete-1 (joint HasFDerivAt for the gated witness/Levi pair ⟹ hf);
+-- concrete-2 (tail convergence hfg); concrete-3 = LEMMA 3.14 (the delta-family hDelta — THE
+-- irreducible singular brick; Rosenberg ~3565 + Gilkey §1.6 as spec). J4-116 = concrete-1+2.
+#print axioms QIQTH.HeatResidualBound.heatConv_eq_integral_full
+#print axioms QIQTH.HeatResidualBound.heatConv_eps_differentiable
+#print axioms QIQTH.HeatResidualBound.hDConv_of_deltaFamily
+
 end QIQTH.AxiomAudit
