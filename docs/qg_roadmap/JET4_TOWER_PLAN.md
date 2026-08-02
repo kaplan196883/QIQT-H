@@ -538,3 +538,11 @@ Direct route WALLS: W1 flow joint-q (Classical.choose, multi-week per Sol) + W2 
 `gatedWitnessN1_hInt_of_kernelContinuity` (hInt from granular {Continuous H_G,
 Continuous ∂ⱼH_G, hgiM, hchrM}). The joint-q residue = carried, clearly-labelled.
 PIVOT: the hDuhamel campaign (needs no joint-q) — J4-111 conv-regularity in flight.
+
+## J4-111 (ca80bbec) — ★★ the hDuhamel CAMPAIGN OPENER: conv-regularity engine
+`QIQTH/HeatConvRegularity.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+C1 integrability + C2 continuity/FTC-upper + C3ε ε-truncated Leibniz (the key brick) +
+C4p space-fderiv. Campaign map: B1 hDConv assembly, B2 ContDiff-⊤ induction, B3 concrete
+dominations. J4-112 (in flight): D1 |H_G| chart-transfer domination, D2 leviSeries
+domination, D3 hDH (explicit diagonal), D4 ⚠ hCH ⊤-vs-C²-chart assessment (load-bearing),
+D5 hDConv assembly to the delta-family boundary.
