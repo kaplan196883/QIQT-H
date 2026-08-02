@@ -390,3 +390,15 @@ every in-ball v; no injectivity-radius lemma needed) + J4-92 antecedents DISCHAR
 conditions derivable from global hyps). NEXT: J4-94 (in flight) = hunif closer
 (antecedent plumbing + out-of-chart zero-extension [crux: e.symm off-target junk ⟹ maybe
 indicator-gated witness] + hcoord + hunif_final).
+
+## Consult record (gpt-5.6-sol, 2026-08-02 ~11:30) — WIDTH-MARGIN verdict for J4-95
+Architecture CONFIRMED: three-width chain G₁ → G_{3/2} → G₂ (Gc(τ,v) := gaussDdim(c·τ) v):
+1. Polynomial/derivative absorption: τ^{−k}‖v‖^m·G_a ≤ C·τ^{m/2−k}·G_b for 1≤a<b.
+2. Annular absorption: r≥r₀ ⟹ τ^{−k}·G_a ≤ C(a,b,k,r₀)·G_b, ∀τ>0 (width diff gives e^{−A/τ}).
+3. Chart transfer with width budget: ‖φ_q(v)−q‖ ≤ L‖v‖ ∧ cL² < d ⟹ G_c(τ,v) ≤ C·G_d(τ,φ_q(v)−q);
+   c=3/2, d=2, L²≤9/8 gives cL²=27/16<2 — strict room.
+Post-hoc conversion from the width-8τ output IMPOSSIBLE (cubic error/τ unbounded) — re-run
+from the width-4τ (G₁) primitives FORCED. Lean shape: width-parametric absorption+transfer
+lemmas, capstones at c=3/2 (copy-adjust). ⚠ τ-caveat: r²G₁ ≤ Cτ·G_{3/2} carries a τ —
+uniform when paired with the 1/τ residual factor; if unpaired use min(Cτ, ρ²).
+Final statement stays at width 2 — the hardcoded Levi machinery unchanged.
