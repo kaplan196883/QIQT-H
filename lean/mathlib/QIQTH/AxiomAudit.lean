@@ -15422,4 +15422,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gatedKernel_uniform_perBasePoint_of_trichotomy
 #print axioms QIQTH.HeatResidualBound.gatedKernel_hEboundW_of_trichotomy
 
+-- ★★★ J4-98 (HunifTrichotomy.lean, ns HeatResidualBound): the 3-LEG COVER + chart exposure — htri
+-- superseded, hEboundW reduced to ONE radius-ordering residue (indep build-verified). Frontier verdict:
+-- J4-97's 2-leg htri IS too coarse at the gate frontier; the 3-leg cover works: leg1 in-gate (J4-96
+-- bound, covers ALL of S q — no annular gap), leg2 off-closure, leg3 frontier collar (‖W p‖=c>b ⟹
+-- radialCutoff locally 0 in BOTH slots ⟹ gated heatOp = 0; needs only chart continuity+point-value,
+-- NOT e.symm agreement). basepointChart_exists_strong (T1/W1: ⇑e=φ_q total, ball⊆source, open image
+-- API) + chartImage_ball_open_closure + gatedKernel cover reductions + collar engine — ALL
+-- unconditional std-3. gatedWitness_hEboundW(-_of_good): the hEboundW primitive conditional on hgood,
+-- whose SOLE irreducible content = the radius ordering b < c (cutoff-support inside the τ-uniform
+-- transport radius; verified genuinely unforced — annulus-supplier radii vs transport radius
+-- unrelated; transport radius VALUE is τ-free = min ρ₀ uniformFlowRadius). J4-99 = radius-ordering
+-- sub-tower (b-parametric engine + τ-free-radius restatement of J4-96).
+#print axioms QIQTH.HeatResidualBound.basepointChart_exists_strong
+#print axioms QIQTH.HeatResidualBound.gatedKernel_hEboundW_of_cover
+#print axioms QIQTH.HeatResidualBound.gatedWitness_hEboundW
+
 end QIQTH.AxiomAudit
