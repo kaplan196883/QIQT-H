@@ -510,3 +510,14 @@ Transport mirrors near-verbatim + the affine-in-τ engine trick (no chain re-run
 mixed 3-leg cover ⟹ `gatedWitnessN1_hEboundW_le_vanVleck`. With J4-105's hHdiag: the
 restricted capstone's hEboundW_le AND hHdiag both concrete. Carried: hCoeffU0/U1 (J4-107
 in flight; ∂w₁(0) subtlety), hInt/hEzero/hEmeas, hD*/conv, hDuhamel/hInter, gauge.
+
+## J4-107 (626f5d3d) + ★★★★ J4-108 (b705a605) — coefficient walls CLOSED
+J4-107 `CoeffBoundsN1.lean`: hCoeffU0 DISCHARGED (van-Vleck flatness derived from gauge
+via the Jacobi/det chain) + hEzero (Iic-uniqueness at τ=0) + K2 verdict (O(r²) hCoeffU1
+PROVEN FALSE — 2∂u₁(0)=∂(Tu₀)(0)≠0).
+J4-108 `CoeffU1Fix.lean`: the fix fully landed — odd-power absorption r·G ≤ C√τ·G' +
+O(r) coefficient bound (no flatness) + √τ≤1+τ GLOBAL fold (better than the planned
+ceiling) ⟹ `gatedWitnessN1_hEboundW_le_vanVleck_final`: NO coefficient hypotheses.
+STATUS: hEboundW_le + hHdiag both maximally clean at N=1. Remaining: hEmeas/hInt →
+conv-regularity (hDH/hDConv/hCH/hCConv) → hDuhamel/hInter (LAST wall) → gauge → assembly
+via trueKernel_diagonal_a1_eq_R6_residual_restricted.
