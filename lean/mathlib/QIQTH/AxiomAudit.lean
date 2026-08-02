@@ -15520,4 +15520,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.residualN1_gaussian_bound
 #print axioms QIQTH.HeatResidualBound.residualN1_gaussianWide_ball
 
+-- ★★★ J4-104 (RestrictedEboundW.lean, ns HeatResidualBound): THE CAPSTONE SHAPE FIX — the N=1
+-- hEboundW obstruction DISSOLVED (indep build-verified). F1 CENSUS VERDICT: every hEboundW/hInt use
+-- in the capstone chain is at τ≤t (single consumption site TrueKernelA1:168 → neumann_summable →
+-- leviSeries_summableW → iterConvW_bound → heatConv over Ioo 0 t). Route β: (0,t]-restricted chain
+-- mirrors (heatConv_le_of_abs_le_pos_le / iterConvW_bound_le / leviSeries_summableW_le / neumann_
+-- summable_alpha0_width2_le) ⟹ trueKernel_diagonal_a1_eq_R6_residual_restricted — the capstone with
+-- hEboundW weakened to ∀τ≤t (hInt kept full; trick: hExp closed via field_simp+ring instead of
+-- hCorrHigher-rw). Plus baseKernelW_one_eq_tau_mul + mixedAlpha_to_alpha0_le (α-mixture ⟹ α=0 with
+-- C(1+T) on (0,T]) + capstone_inputs_N1_shape (the N=1 witness's mixed-α bound ⟹ EXACTLY the
+-- restricted capstone's hEboundW_le). std-3 all.
+-- ⚠ REMAINING (the C4c wall re-run at N=1): LOCAL→GLOBAL + single-t→∀τ≤t uniformization of J4-103's
+-- ball bound = the hunif-tower re-run at N=1 (mechanical: the tower is abstract in the profile;
+-- ~150 statement-level 0→N sites) + hInt/hEmeas/hEzero + hDuhamel. NOT a₁=R/6 yet.
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_restricted
+#print axioms QIQTH.HeatResidualBound.mixedAlpha_to_alpha0_le
+#print axioms QIQTH.HeatResidualBound.capstone_inputs_N1_shape
+
 end QIQTH.AxiomAudit
