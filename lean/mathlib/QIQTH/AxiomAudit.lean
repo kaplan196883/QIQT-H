@@ -15335,4 +15335,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.heatOp_globalWitness_eq_recentred_inChart
 #print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_inChart
 
+-- ★★★ J4-93 (UniformFlowLocalInverse.lean, ns HeatResidualBound): THE IFT LAYER — Sol's
+-- "infrastructure-scale" call REFUTED (indep build-verified; no consult needed, Mathlib IFT API
+-- resolved every fork). contDiffAt2_uniformFlowExp + common_nondeg_radius = exactly Mathlib's
+-- ContDiffAt.localInverse/toOpenPartialHomeomorph inputs: (I1) uniformFlowExp_localInverse_exists
+-- (per-(q,v) Vloc with left-inverse germ + ContDiffAt 2 at φ_q v); (I2) basepointInverseChart —
+-- SINGLE per-q total inverse chart (base-point OpenPartialHomeomorph e.symm on K, 0 off; germ + C²
+-- at EVERY in-ball v via eventually_left_inverse + contDiffAt_symm — avoids needing an injectivity-
+-- radius lemma); (I3) globalWitness_hypotheses_discharged (J4-92's hgerm + witness-C² DISCHARGED for
+-- the concrete chart); (I4) globalWitness_residual_bound_inChart_unconditional (W3 with the Vmap-side
+-- antecedents gone; remaining antecedents = genuine far-point metric conditions hg1/hU/hGGi/hGiG —
+-- NOTE: these look derivable from the GLOBAL hg/hgnd/hinvF/hgsymm, J4-94). std-3 all five.
+-- ⚠ REMAINING to hunif: far-point antecedent discharge + out-of-chart zero-extension (∀p global) +
+-- hcoord width-margin + RecenterReduction feed. NOT a₁=R/6.
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_localInverse_exists
+#print axioms QIQTH.HeatResidualBound.basepointInverseChart_spec
+#print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_inChart_unconditional
+
 end QIQTH.AxiomAudit
