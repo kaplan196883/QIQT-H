@@ -15663,4 +15663,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_restricted_C2
 #print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hDH
 
+-- ★★ J4-113 (ConcreteDominations.lean additions): D1 witness domination, CONDITIONAL form (indep
+-- build-verified; Sol packaging verdict: standalone ∃ NOT engine-consumable — two existentials never
+-- certify a shared (a,b,S); conditional-certificate form landed instead). GateSqControl (the gate
+-- certificate ∀q∈K ∀p∈S q, rncRadialSq(p−q) ≤ (3/2)·rncRadialSq(W q p)) + EVT amplitude sup +
+-- globalWitnessN1_absDominated_of_sqControl + gatedWitnessN1_D1_of_gateSqControl +
+-- exists_D1_constants_of_gateSqControl: |gated H₁| ≤ (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim((3/2)τ)(p−q) ∀τ>0 +
+-- gateSqControl_of_flowBall (the certificate from chart-inverse + hdisp, abstract in φ,W). std-3 all.
+-- ⚠ FIREWALLED: the combined-capstone MERGE (the hE chain's opaque ∃S must be extended to return the
+-- certificate — J4-114 controlled chain-extension); D2 leviSeries domination; D5 hDConv.
+#print axioms QIQTH.HeatResidualBound.exists_D1_constants_of_gateSqControl
+#print axioms QIQTH.HeatResidualBound.gateSqControl_of_flowBall
+
 end QIQTH.AxiomAudit

@@ -29,11 +29,26 @@
       gated composition `gatedWitnessN1_hDH` discharging the capstone's `hDH` for the concrete
       van-Vleck witness `H_G` via the diag-eval `gatedWitnessN1_diag_eval_vanVleck`.
 
-  ⚠ HONEST SCOPE (firewall).  NOT attempted here (the remaining hDuhamel/Levi bricks, mapped in the
-  closing comment):
-    • (D1) the pointwise Gaussian domination `|H_G τ p q| ≤ C_H·gaussDdim(c_H·τ)(p−q)` — needs the
-      near-isometry CHART TRANSFER (J4-96, `NearIsometryBudget`) converting the chart-variable width
-      `gaussDdim τ (W_q p)` to the `(p−q)` width, plus a compact-support amplitude sup bound;
+    • (D1, J4-113) THE WITNESS GAUSSIAN DOMINATION, CONDITIONAL FORM.  For the gated order-1 van-Vleck
+      witness `H_G`, the pointwise bound `|H_G τ p q| ≤ (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim((3/2)τ)(p−q)`
+      (`τ > 0`), delivered CONDITIONALLY on a `GateSqControl` certificate (the near-isometry
+      square-comparison `rncRadialSq (p−q) ≤ (3/2)·rncRadialSq (W_q p)` on the gate — exactly what the
+      chart transfer `gaussDdim_le_gaussDdim_chart` consumes).  Decomposition:
+        • `exists_cutoff_foldedCoeff_bound` — the compact-support amplitude sup (EVT on `closedBall 0 b`,
+          off-ball via `radialCutoff_eq_zero`): `∃ A ≥ 0, ∀ v, |radialCutoff a b v · w_k v| ≤ A`;
+        • `globalWitnessN1_absDominated_of_sqControl` — the UNGATED pointwise estimate, from the two
+          amplitude sups + the square-comparison via `gaussDdim_le_gaussDdim_chart (c=1,d=3/2)`;
+        • `gatedWitnessN1_D1_of_gateSqControl` — the GATED lift (off-gate `= 0`; on-gate the ungated
+          estimate) and its `∃ A₀ A₁` packaging `exists_D1_constants_of_gateSqControl`;
+        • `gateSqControl_of_flowBall` — the geometry lemma producing `GateSqControl` for the concrete
+          flow-ball gate `S q = φ_q '' ball 0 c` from the chart-inverse property + the `hdisp`
+          near-isometry budget (`uniformFlowExp_hdisp_ball`, J4-96).
+
+  ⚠ HONEST SCOPE (firewall).  D1 above is CONDITIONAL on `GateSqControl` (a gate-geometry certificate).
+  The MERGE with the opaque `gatedWitnessN1_hEboundW_le_vanVleck_final` capstone (exposing its `S` so a
+  single `∃ a b … S` carries `hEboundW_le ∧ hDH ∧ D1` together) is NOT done here — it needs the hE chain
+  strengthened to also return the `GateSqControl` certificate; the conditional theorem is immediately
+  reusable once that `S` is exposed (per the standard opaque-∃ non-recoverability).  Also NOT attempted:
     • (D2) the Levi-series domination `|leviSeries (heatOp g gi H_G) τ p q| ≤ C_L(T)·baseKernelW …`
       on `(0,T]` — the width-2 engine sum (`leviSeries_summableW_le` / `iterConvW_bound_le`);
     • (D5) the `hDConv` two-term diagonal Leibniz assembly (needs the ε→0 delta-family removal).
@@ -47,7 +62,7 @@ open MeasureTheory
 open QIQTH.Curvature QIQTH.LaplaceBeltrami QIQTH.TrueHeatKernel QIQTH.HeatDuhamel QIQTH.LeviSeries
 open QIQTH.ParametrixFunction QIQTH.HeatParametrixAnsatz QIQTH.FlatHeatEquation QIQTH.VanVleck
 open QIQTH.HeatTransportRecursion QIQTH.RadialDistance QIQTH.VanVleckCancellation
-open QIQTH.GaussianWidthTolerant
+open QIQTH.GaussianWidthTolerant QIQTH.RNCDecay QIQTH.ResidueBound
 open scoped BigOperators Topology
 
 namespace QIQTH.HeatResidualBound
@@ -303,15 +318,164 @@ theorem gatedWitnessN1_hDH (g gi : Point n → Fin n → Fin n → ℝ)
   rw [hcongr]
   exact heatParametrixFn_one_diag_differentiableAt g (transportOp (vanVleck g) g gi) t ht
 
+/-! ### D1. The witness Gaussian domination `|H_G| ≤ C_H·gaussDdim`, CONDITIONAL on `GateSqControl`. -/
+
+/-- **`GateSqControl` — the gate square-comparison certificate.**  The single geometric fact the D1
+    chart transfer needs from the gate: on the gate (`q ∈ K`, `p ∈ S q`), the ambient displacement
+    `p − q` is controlled by the chart-variable `W q p` with the near-isometry margin
+    `rncRadialSq (p − q) ≤ (3/2)·rncRadialSq (W q p)`.  This abstracts the near-isometry width budget
+    away from the concrete flow-ball gate; `gateSqControl_of_flowBall` discharges it for
+    `S q = φ_q '' ball 0 c`. -/
+def GateSqControl (K : Set (Point n)) (S : Point n → Set (Point n))
+    (W : Point n → Point n → Point n) : Prop :=
+  ∀ q, q ∈ K → ∀ p, p ∈ S q → rncRadialSq (p - q) ≤ (3 / 2 : ℝ) * rncRadialSq (W q p)
+
+/-- **D1a — the compact-support amplitude sup.**  The cutoff-folded coefficient
+    `v ↦ radialCutoff a b v · foldedCoeff Θ u k v` is continuous (product of the smooth cutoff and the
+    `C∞` folded coefficient) and supported in `closedBall 0 b` (the cutoff vanishes for
+    `b² ≤ rncRadialSq v`, via `radialCutoff_eq_zero`), hence globally bounded by its EVT sup on the
+    compact ball (`IsCompact.exists_bound_of_continuousOn`).  Genuine hypotheses `0 < a < b` (for the
+    cutoff geometry) and the folded smoothness `hwk` (for continuity). -/
+theorem exists_cutoff_foldedCoeff_bound (Θ : Point n → ℝ) (u : ℕ → Point n → ℝ) (a b : ℝ) (k : ℕ)
+    (ha : 0 < a) (hab : a < b)
+    (hwk : ContDiff ℝ (⊤ : WithTop ℕ∞) (foldedCoeff Θ u k)) :
+    ∃ A : ℝ, 0 ≤ A ∧ ∀ v : Point n, |radialCutoff a b v * foldedCoeff Θ u k v| ≤ A := by
+  have hb0 : 0 < b := lt_trans ha hab
+  have hcont : Continuous (fun v : Point n => radialCutoff a b v * foldedCoeff Θ u k v) :=
+    (radialCutoff_contDiff a b).continuous.mul hwk.continuous
+  obtain ⟨C, hC⟩ := (isCompact_closedBall (0 : Point n) b).exists_bound_of_continuousOn
+    hcont.continuousOn
+  refine ⟨max C 0, le_max_right _ _, fun v => ?_⟩
+  by_cases hv : v ∈ Metric.closedBall (0 : Point n) b
+  · have h := hC v hv
+    rw [Real.norm_eq_abs] at h
+    exact h.trans (le_max_left _ _)
+  · rw [mem_closedBall_zero_iff, not_le] at hv
+    have hb2 : b ^ 2 ≤ rncRadialSq v := by
+      have hnr : ‖v‖ ≤ rncRadial v := norm_le_rncRadial v
+      have hlt : b < rncRadial v := lt_of_lt_of_le hv hnr
+      rw [← rncRadial_sq v]
+      nlinarith [hlt, hb0.le]
+    rw [radialCutoff_eq_zero ha hab hb2, zero_mul, abs_zero]
+    exact le_max_right _ _
+
+/-- **D1b — the UNGATED pointwise witness domination.**  For `τ > 0`, with the two amplitude sups
+    `A₀`, `A₁` (`|radialCutoff·w_k (W q p)| ≤ A_k`) and the gate square-comparison `hsq`, the order-1
+    global-cutoff witness is Gaussian-dominated at the ambient displacement width:
+        `|globalCutoffParametrixWitnessN 1 Θ u a b W τ p q|
+            ≤ (A₀ + A₁·τ)·√(3/2)ⁿ·gaussDdim((3/2)·τ)(p − q)`.
+    Folds the witness (`heatParametrix_folded`), bounds `|Φ₀ + τ·Φ₁| ≤ A₀ + A₁τ`, and transfers the
+    chart-variable width to `(p − q)` via `gaussDdim_le_gaussDdim_chart` (`c = 1`, `d = 3/2`, whose
+    width budget is exactly `hsq`). -/
+theorem globalWitnessN1_absDominated_of_sqControl (Θ : Point n → ℝ) (u : ℕ → Point n → ℝ)
+    (a b : ℝ) (W : Point n → Point n → Point n) (τ : ℝ) (p q : Point n) (hτ : 0 < τ)
+    (A₀ A₁ : ℝ) (hA₀ : 0 ≤ A₀) (hA₁ : 0 ≤ A₁)
+    (hbnd0 : |radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)| ≤ A₀)
+    (hbnd1 : |radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p)| ≤ A₁)
+    (hsq : rncRadialSq (p - q) ≤ (3 / 2 : ℝ) * rncRadialSq (W q p)) :
+    |globalCutoffParametrixWitnessN 1 Θ u a b W τ p q|
+      ≤ (A₀ + A₁ * τ) * Real.sqrt (3 / 2) ^ n * gaussDdim (3 / 2 * τ) (p - q) := by
+  have hval : globalCutoffParametrixWitnessN 1 Θ u a b W τ p q
+      = gaussDdim τ (W q p) * (radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)
+          + radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p) * τ) := by
+    simp only [globalCutoffParametrixWitnessN, heatParametrix_folded, Finset.sum_range_succ,
+      Finset.sum_range_zero, zero_add, pow_zero, pow_one, mul_one]
+    ring
+  rw [hval]
+  have hG0 : (0 : ℝ) ≤ gaussDdim τ (W q p) := gaussDdim_nonneg _ _
+  have hAτ : (0 : ℝ) ≤ A₀ + A₁ * τ := add_nonneg hA₀ (mul_nonneg hA₁ hτ.le)
+  have hstep1 : |gaussDdim τ (W q p) * (radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)
+          + radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p) * τ)|
+      ≤ gaussDdim τ (W q p) * (A₀ + A₁ * τ) := by
+    rw [abs_mul, abs_of_nonneg hG0]
+    apply mul_le_mul_of_nonneg_left _ hG0
+    calc |radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)
+            + radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p) * τ|
+        ≤ |radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)|
+            + |radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p) * τ| := abs_add_le _ _
+      _ = |radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)|
+            + |radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p)| * τ := by
+            rw [abs_mul (radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p)) τ, abs_of_pos hτ]
+      _ ≤ A₀ + A₁ * τ := add_le_add hbnd0 (mul_le_mul_of_nonneg_right hbnd1 hτ.le)
+  have hchart := gaussDdim_le_gaussDdim_chart (c := (1 : ℝ)) (d := (3 / 2 : ℝ)) one_pos
+    (by norm_num) hτ (v := W q p) (w := p - q) (by rw [one_mul]; exact hsq)
+  rw [one_mul, show ((3 : ℝ) / 2 / 1) = 3 / 2 from by norm_num] at hchart
+  calc |gaussDdim τ (W q p) * (radialCutoff a b (W q p) * foldedCoeff Θ u 0 (W q p)
+            + radialCutoff a b (W q p) * foldedCoeff Θ u 1 (W q p) * τ)|
+      ≤ gaussDdim τ (W q p) * (A₀ + A₁ * τ) := hstep1
+    _ ≤ (Real.sqrt (3 / 2) ^ n * gaussDdim (3 / 2 * τ) (p - q)) * (A₀ + A₁ * τ) :=
+        mul_le_mul_of_nonneg_right hchart hAτ
+    _ = (A₀ + A₁ * τ) * Real.sqrt (3 / 2) ^ n * gaussDdim (3 / 2 * τ) (p - q) := by ring
+
+/-- **D1c — the GATED witness domination, from a `GateSqControl` certificate.**  Lifts D1b through the
+    hard gate: off-gate (`q ∉ K` or `p ∉ S q`) the gated kernel vanishes and the RHS is nonnegative;
+    on-gate the square-comparison `hgate` feeds `globalWitnessN1_absDominated_of_sqControl`.  The
+    amplitude bounds are the GLOBAL sups (`∀ v`) from `exists_cutoff_foldedCoeff_bound`. -/
+theorem gatedWitnessN1_D1_of_gateSqControl (Θ : Point n → ℝ) (u : ℕ → Point n → ℝ)
+    (a b : ℝ) (W : Point n → Point n → Point n) (K : Set (Point n)) (S : Point n → Set (Point n))
+    (A₀ A₁ : ℝ) (hA₀ : 0 ≤ A₀) (hA₁ : 0 ≤ A₁)
+    (hb0 : ∀ v : Point n, |radialCutoff a b v * foldedCoeff Θ u 0 v| ≤ A₀)
+    (hb1 : ∀ v : Point n, |radialCutoff a b v * foldedCoeff Θ u 1 v| ≤ A₁)
+    (hgate : GateSqControl K S W) :
+    ∀ (τ : ℝ) (p q : Point n), 0 < τ →
+      |gatedKernel K S (globalCutoffParametrixWitnessN 1 Θ u a b W) τ p q|
+        ≤ (A₀ + A₁ * τ) * Real.sqrt (3 / 2) ^ n * gaussDdim (3 / 2 * τ) (p - q) := by
+  intro τ p q hτ
+  have hRHS : (0 : ℝ) ≤ (A₀ + A₁ * τ) * Real.sqrt (3 / 2) ^ n * gaussDdim (3 / 2 * τ) (p - q) :=
+    mul_nonneg (mul_nonneg (add_nonneg hA₀ (mul_nonneg hA₁ hτ.le))
+      (pow_nonneg (Real.sqrt_nonneg _) n)) (gaussDdim_nonneg _ _)
+  by_cases hq : q ∈ K
+  · by_cases hp : p ∈ S q
+    · rw [gatedKernel_apply_of_mem K S _ τ hq hp]
+      exact globalWitnessN1_absDominated_of_sqControl Θ u a b W τ p q hτ A₀ A₁ hA₀ hA₁
+        (hb0 _) (hb1 _) (hgate q hq p hp)
+    · rw [gatedKernel_apply_of_notMem K S _ τ p q (Or.inr hp), abs_zero]; exact hRHS
+  · rw [gatedKernel_apply_of_notMem K S _ τ p q (Or.inl hq), abs_zero]; exact hRHS
+
+/-- **D1d — the `∃ A₀ A₁` packaging.**  Combines the two amplitude sups
+    (`exists_cutoff_foldedCoeff_bound` at `k = 0, 1`) with the gated lift `gatedWitnessN1_D1_of_gateSqControl`
+    into the affine-domination existential, given a `GateSqControl` certificate for `(K, S, W)`. -/
+theorem exists_D1_constants_of_gateSqControl (Θ : Point n → ℝ) (u : ℕ → Point n → ℝ)
+    (a b : ℝ) (W : Point n → Point n → Point n) (K : Set (Point n)) (S : Point n → Set (Point n))
+    (ha : 0 < a) (hab : a < b)
+    (hw : ∀ k, ContDiff ℝ (⊤ : WithTop ℕ∞) (foldedCoeff Θ u k))
+    (hgate : GateSqControl K S W) :
+    ∃ A₀ A₁ : ℝ, 0 ≤ A₀ ∧ 0 ≤ A₁ ∧ ∀ (τ : ℝ) (p q : Point n), 0 < τ →
+      |gatedKernel K S (globalCutoffParametrixWitnessN 1 Θ u a b W) τ p q|
+        ≤ (A₀ + A₁ * τ) * Real.sqrt (3 / 2) ^ n * gaussDdim (3 / 2 * τ) (p - q) := by
+  obtain ⟨A₀, hA₀, hb0⟩ := exists_cutoff_foldedCoeff_bound Θ u a b 0 ha hab (hw 0)
+  obtain ⟨A₁, hA₁, hb1⟩ := exists_cutoff_foldedCoeff_bound Θ u a b 1 ha hab (hw 1)
+  exact ⟨A₀, A₁, hA₀, hA₁,
+    gatedWitnessN1_D1_of_gateSqControl Θ u a b W K S A₀ A₁ hA₀ hA₁ hb0 hb1 hgate⟩
+
+/-- **D1e — the geometry lemma: `GateSqControl` for the concrete flow-ball gate.**  For the flow-ball
+    gate `S q = φ_q '' ball 0 c` (with `φ` the flow and `W` its inverse chart), the square-comparison
+    holds from the chart-inverse property `hinv` (`W_q (φ_q v) = v` on the ball) and the near-isometry
+    width budget `hdisp` (`(3/2)·rncRadialSq (φ_q v − q) ≤ 2·rncRadialSq v` for `‖v‖ < r₁`, e.g.
+    `uniformFlowExp_hdisp_ball`), given the radius nesting `c ≤ r₁`.  Fully abstract in `φ`, `W` — no
+    dependence on the concrete `uniformFlowExp`; instantiate with `φ = uniformFlowExp …`,
+    `W = uniformInverseChart …`. -/
+theorem gateSqControl_of_flowBall (K : Set (Point n)) (W φ : Point n → Point n → Point n) (c r₁ : ℝ)
+    (hcr : c ≤ r₁)
+    (hinv : ∀ q ∈ K, ∀ v : Point n, ‖v‖ < c → W q (φ q v) = v)
+    (hdisp : ∀ q ∈ K, ∀ v : Point n, ‖v‖ < r₁ →
+      (3 / 2 : ℝ) * rncRadialSq (φ q v - q) ≤ 2 * rncRadialSq v) :
+    GateSqControl K (fun q => φ q '' Metric.ball 0 c) W := by
+  intro q hq p hp
+  obtain ⟨v, hvmem, hvp⟩ := hp
+  rw [mem_ball_zero_iff] at hvmem
+  rw [← hvp, hinv q hq v hvmem]
+  have hd := hdisp q hq v (lt_of_lt_of_le hvmem hcr)
+  nlinarith [hd, rncRadialSq_nonneg v, rncRadialSq_nonneg (φ q v - q)]
+
 /-! ### Campaign map — the remaining hDuhamel/Levi bricks (D1, D2, D5), NOT attempted here.
 
-    ▸ D1 (pointwise Gaussian domination of `H_G`).  `|H_G τ p q| ≤ C_H·gaussDdim(c_H·τ)(p−q)`.
-      On the gate `H_G = radialCutoff·(gaussDdim τ (W_q p))·amplitude`; the cutoff is `≤ 1` and the
-      amplitude `(vanVleck)^{−1/2}·(w₀+τ·w₁)` is bounded on the compact chart-ball, giving the EASY
-      chart-variable bound `|H_G τ p q| ≤ C(1+τ)·gaussDdim τ (W_q p)`.  The `(W_q p)`→`(p−q)` width
-      conversion is the NEAR-ISOMETRY CHART TRANSFER (J4-96, `NearIsometryBudget` — `‖p−q‖ ≤
-      √(4/3)·‖W p‖`, `‖W p‖ ≤ 2‖p−q‖` on the gate), producing `gaussDdim((3/2)τ)(p−q)` with margin.
-      Off-gate `H_G = 0`.  Needs the chart-transfer machinery loaded.
+    ▸ D1 (pointwise Gaussian domination of `H_G`).  LANDED CONDITIONALLY above (J4-113):
+      `gatedWitnessN1_D1_of_gateSqControl` / `exists_D1_constants_of_gateSqControl` give
+      `|H_G τ p q| ≤ (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim((3/2)τ)(p−q)` given a `GateSqControl` certificate,
+      discharged for the flow-ball gate by `gateSqControl_of_flowBall` (from the chart inverse + the
+      `hdisp` near-isometry budget).  REMAINING: merge the certificate into the opaque hE capstone so
+      one `∃ … S` carries `hEboundW_le ∧ hDH ∧ D1` (needs the hE chain to expose its `S`).
 
     ▸ D2 (Levi-series domination).  `|leviSeries (heatOp g gi H_G) τ p q| ≤ C_L(T)·baseKernelW 2 0`
       on `(0,T]`, from the width-2 engine: term-bound via `iterConvW_bound_le`, summed against the
