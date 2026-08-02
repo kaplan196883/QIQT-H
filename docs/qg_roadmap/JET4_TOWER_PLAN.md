@@ -546,3 +546,11 @@ C4p space-fderiv. Campaign map: B1 hDConv assembly, B2 ContDiff-⊤ induction, B
 dominations. J4-112 (in flight): D1 |H_G| chart-transfer domination, D2 leviSeries
 domination, D3 hDH (explicit diagonal), D4 ⚠ hCH ⊤-vs-C²-chart assessment (load-bearing),
 D5 hDConv assembly to the delta-family boundary.
+
+## J4-112 (1bd50402) — ★★★ the C²-WEAKENED FINAL CAPSTONE + hDH
+`QIQTH/ConcreteDominations.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+D4 DECISIVE: ⊤-smoothness slots consumed only via ≤2 derivatives AND unsatisfiable for
+the C² chart witness ⟹ `trueKernel_diagonal_a1_eq_R6_residual_restricted_C2` = THE FINAL
+capstone shape (hCH/hCConv : ContDiffAt ℝ 2 at 0). hDH discharged concretely
+(`gatedWitnessN1_hDH`). Firewalled: D1 |H_G| domination, D2 leviSeries domination,
+D5 hDConv assembly. J4-113 (D1+D2) in flight.
