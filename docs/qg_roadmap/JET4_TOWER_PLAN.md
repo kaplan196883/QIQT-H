@@ -530,3 +530,11 @@ The ∀τ-mismatch resolved by the time-cap (Sol-confirmed): `timeCap` + causal 
 `gatedWitnessN1_hInt_of_hEmeas`. FIREWALL: hEmeas (joint SM of heatOp H_G — the
 parameterized-deriv + choose-chart crux; J4-110 in flight on the joint-measurability
 routes: smooth-dependence / closed-graph / Picard iterates; carried-hyp fallback).
+
+## J4-110 (a1656872) — ★★ hEmeas DECOMPOSED; joint-q wall deferred (3rd surfacing)
+`QIQTH/GatedWitnessEmeas.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+Direct route WALLS: W1 flow joint-q (Classical.choose, multi-week per Sol) + W2 nested-pd
+(deriv_with_param needs joint continuity). LANDED: flow-agnostic E3 field lemmas +
+`gatedWitnessN1_hInt_of_kernelContinuity` (hInt from granular {Continuous H_G,
+Continuous ∂ⱼH_G, hgiM, hchrM}). The joint-q residue = carried, clearly-labelled.
+PIVOT: the hDuhamel campaign (needs no joint-q) — J4-111 conv-regularity in flight.
