@@ -670,3 +670,28 @@ W3 hDerivConv ⟸ hDConv chain (hasDerivAt_of_tendstoLocallyUniformlyOn + truncD
 W4 hDuhamel_leviSeries_final (conditional ONLY on hDaLim + hLap + F2 + dominations + meas).
 THEN: hDaLim deep-dive (Sol consult: tractable vs long-term carry) + hLap + hCH/hCConv-C² +
 regularity family + gauge + FINAL ASSEMBLY.
+
+## J4-123 BANKED (92ae55c5) — 2026-08-03: hDuhamel = hDaLimLU + families ONLY
+DuhamelLimitWiring.lean [AF std-3, raw 0 @ 9406]: W1 boundaryTrunc_tendsto + W2 etrunc_tendsto
++ truncDuhamel_hasDerivAt + W3 derivConv_tendsto + W4 hDuhamel_(leviSeries_)final (capstone
+VERBATIM). ALL soft carries of J4-122 discharged.
+
+## SOL hDaLim ARCHITECTURE (consult 2026-08-03, recorded verbatim intent)
+hDaLimLU ⟺ LapTrunc → Δ_x(H*F) (Etrunc part PROVEN). NOT a monolith — split:
+- THREE labelled interfaces: hGaugeLap (Δ_g at 0 = Σᵢ∂ᵢ² under hg0/hgi/hΓ/hdg0 gauge — MEDIUM,
+  prove early); hParametrixC2Gaussian (small-time H = G·A factorization + A/∂A/∂²A bounds +
+  support, from the concrete witness — HARD/wall-ish but extractable); hFLocLip (spatial
+  Lipschitz of F on compact positive-time slabs — genuinely NEW input, NOT implied by Gaussian
+  domination; carry short-term; discharge later via F = −E − E*F resolvent + E-spatial-difference
+  Gaussian bound |∇_zE| ≤ Ct^{-1/2}G_{ct} — avoid termwise Levi differentiation).
+- Then PROVE: hGaussianHessianCancellation (∫∂ᵢ²G_τ = 0 second-moment; Lipschitz multiplier
+  gains τ^{-1/2} integrable; seed = gaussianSecondMoment_oneD) + sliver estimates j=0,1,2
+  (LINEWISE coordinate derivatives, NOT Fréchet Hessian) + finite-ε coordinate differentiation
+  + derivative-of-limit ×2 + u-uniformity + gauge-sum assembly.
+- Difficulty map: gauge lemma M; moments M; weighted Gaussian deriv estimates H; cancellation H;
+  amplitude package H/wall; sliver-2 H; finite-ε 2nd-order H; assembly E-M. Mathlib gaps:
+  campaign-specific Gaussian cancellation library needed (no generic PDE theorem).
+- Do NOT fully unfold the Levi series (F stays abstract with hFLocLip).
+NEXT: J4-124 = hGaugeLap (the normal-coordinate reduction — early, load-bearing, medium) +
+Gaussian coordinate-derivative formulas + second-moment identities (seeds exist). Then the
+cancellation lemma; then amplitude package; then slivers.
