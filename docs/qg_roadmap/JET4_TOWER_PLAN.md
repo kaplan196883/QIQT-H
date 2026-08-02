@@ -582,3 +582,20 @@ joint-2D-from-partials; F3 hDConv_gatedWitnessN1_of_delta_final (only deferred f
 NEXT: J4-118 = the delta-family brick (Lemma 3.14 ⟹ hDelta, THE singular brick; Sol consult
 on Lean shape first), then eps-Duhamel identity + hInter, then hCConv-C2 concrete, then gauge +
 final assembly via trueKernel_diagonal_a1_eq_R6_residual_restricted_C2.
+
+## J4-117 BANKED (aa5c3568) — 2026-08-03
+ConvCarriesDischarge.lean [AF std-3, raw 0 @ 9401 jobs]: hFII + hJoint GONE from the
+capstone hDConv shape. gaussDdim_zero_antitone + heatConvInner_intervalIntegrable_gaussianDom
+(hFII domination fully discharged via gaussDdim_conv Chapman-Kolmogorov, constant G_{(3/2)u}(0))
++ heatConvFrozen_hasFDerivAt_of_partials (joint 2-D from hpar/htime/hR, F=H+J+R decomposition)
++ hDConv_(gatedWitnessN1_)of_delta_final. Remaining hDConv carries: hDelta + hMeasFII +
+hpar/htime + hR (⟸ joint continuity of inner pairing) + parametric dominations.
+NEXT (Sol-consulted 2026-08-03, decomposition CONFIRMED): J4-118 = hBoundary brick =
+Lemma 3.14 delta-family: (i) helper tendsto_integral_gaussDdim_smul via NEAR/FAR split
+(NOT substitution: mass-1 ∫gaussDdim=1 from gaussianZerothMoment_oneD product + Gaussian
+tail→0; Mathlib has NO usable peak-function lemma); (ii) boundary_tendstoUniformlyOn_compact
+under hBcont := ContinuousOn (fun (x:ℝ×Point n) => B x.1 x.2 0) (Ioc 0 T ×ˢ univ) via
+IsCompact.uniformContinuousOn Heine-Cantor; (iii) hDelta = hDaLim.add hBoundary
+(TendstoLocallyUniformlyOn.add), D u := DaLim u + B u 0 0. hDaLim deferred (same singular
+integrand as Da). A-side: fixed diagonal ball where A = G·(u₀+τu₁), 4-way split
+(main/ε·u₁/off-ball via (3/2)ε-domination tail/mass defect).
