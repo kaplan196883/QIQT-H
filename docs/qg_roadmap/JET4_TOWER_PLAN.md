@@ -444,3 +444,11 @@ Unconditional: `basepointChart_exists_strong` (W1) + `chartImage_ball_open_closu
 cover reductions + collar engine. Conditional on hgood: `gatedWitness_hEboundW` — sole
 residue = b < c radius ordering under the τ-free transport radius. J4-99 (in flight) =
 b-parametric engine + quantifier hoist ⟹ discharge ⟹ the hEboundW primitive.
+
+## J4-99 (17e7cc9a) — ★★★ τ-uniformity + radius ordering DISCHARGED
+`QIQTH/RadiusOrdering.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+R1 engine monotone in b (`_below` variant, ∀ρc); R2 per-q τ-free r₀ hoist (∀f-naturality
++ hoisted transport); R4 `gatedWitness_hEboundW_final` — the circularity broken by
+choosing radii BEFORE (a,b). ONE input left: huniformChart = K-uniform IFT source-ball
+radius. J4-100 (in flight) = quantitative uniform IFT via ApproximatesLinearOn (exposed
+source!) with Id as the linear approximation (near-id + Hessian-Lipschitz uniform data).
