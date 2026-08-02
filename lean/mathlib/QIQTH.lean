@@ -310,6 +310,7 @@ import QIQTH.OrderOneTower
 import QIQTH.OrderOneGeometry
 import QIQTH.CoeffBoundsN1
 import QIQTH.CoeffU1Fix
+import QIQTH.GatedWitnessMeas
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -15598,4 +15598,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.uniformResidualN1_narrow_mixed_lin
 #print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hEboundW_le_vanVleck_final
 
+-- ★★ J4-109 (GatedWitnessMeas.lean, ns HeatResidualBound): hInt via the TIME-CAP producer (indep
+-- build-verified; Sol-consulted). Producer shapes: iterConvIntegrableW_of_bound_baseMeas needs FULL
+-- ∀τ α=0 + hEzero + JOINT StronglyMeasurable (measure-free Fubini ⟹ genuine SM, not AE). ∀τ-mismatch
+-- RESOLVED by the time-cap (Sol: cleanest of three options): timeCap T E has a full α=0 bound
+-- trivially; iterE_timeCap_eq (causal equality below the cap) transfers conjuncts (1)(2)(3); (4)(5)
+-- are pure-Gaussian model facts ⟹ iterConvIntegrableW_of_locally_bound_baseMeas: FULL
+-- IterConvIntegrableW from the (0,T]-local bound family — ZERO downstream re-plumb. Concrete hand-off
+-- gatedWitnessN1_hInt_of_hEmeas: (0,t] bound + [hEmeas ⟹ hInt at any Cmodel]. std-3 all.
+-- ⚠ FIREWALL (the ONE remaining wiring input, expensive): hEmeas = joint SM of heatOp g gi H_G —
+-- both slots are PARAMETERIZED 1D derivs; stronglyMeasurable_deriv_with_param needs joint CONTINUITY
+-- (gate discontinuity + Classical.choose chart block it); naive difference-quotient limit UNSOUND
+-- (≠ deriv off the differentiability set). Sound route (census): gated normal form eliminating the
+-- choose under the gate + vanishing-2-JET cutoff-frontier lemma (value-null insufficient — 2nd derivs)
+-- + explicit Eformula via deriv_with_param on the continuous subtype branch. J4-110.
+#print axioms QIQTH.HeatResidualBound.iterE_timeCap_eq
+#print axioms QIQTH.HeatResidualBound.iterConvIntegrableW_of_locally_bound_baseMeas
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hInt_of_hEmeas
+
 end QIQTH.AxiomAudit
