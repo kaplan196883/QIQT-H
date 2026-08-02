@@ -15756,4 +15756,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDelta_of_boundary
 #print axioms QIQTH.HeatResidualBound.hDelta_gatedWitnessN1_of_boundary
 
+-- ★★ J4-119 (GaussianTailBoundary.lean, ns HeatResidualBound): the GAUSSIAN TAIL discharged +
+-- the family approximate-identity engines — indep build-verified. LANDED: heatKernel1D_tail_le
+-- (∫_{|y|≥δ} G_t ≤ √2·e^{−δ²/8t}) + slab_integral_eq_oneDim (Fubini cylinder factorization) +
+-- tail_le_sum_slabs (Pi sup-metric: (ball 0 δ)ᶜ ⊆ ⋃ᵢ{δ≤|z i|}, NO √n factor) + gaussDdim_tail_le
+-- (≤ n·√2·e^{−δ²/8t}) + gaussDdim_tail_tendsto_zero (T1: hTail UNCONDITIONAL — no analytic carry)
+-- + tendsto_integral_gaussDdim_smul_of_meas (T1★: Lemma 3.14 with hTail GONE, only hmeas) +
+-- tendsto_integral_gaussDdim_smul_family (T2: equicontinuous-family variant) +
+-- tendstoUniformlyOn_integral_gaussDdim_smul_family (T2u: parameter-uniform engine for the
+-- Brick-2 main term). std-3 all.
+-- ⚠ REMAINING: hBoundary (Brick 2 4-way split assembly — T2u main-term engine + T1 tails now
+-- ALL present; needs the off-ball A-tail mismatch lemma + Heine–Cantor + time floor; J4-120) +
+-- hmeas family + hDaLim. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_tail_tendsto_zero
+#print axioms QIQTH.HeatResidualBound.tendsto_integral_gaussDdim_smul_of_meas
+#print axioms QIQTH.HeatResidualBound.tendsto_integral_gaussDdim_smul_family
+#print axioms QIQTH.HeatResidualBound.tendstoUniformlyOn_integral_gaussDdim_smul_family
+
 end QIQTH.AxiomAudit
