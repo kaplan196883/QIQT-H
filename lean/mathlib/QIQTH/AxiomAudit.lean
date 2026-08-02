@@ -15569,4 +15569,33 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidualN1_uniformFlow_narrow_mixed_below
 #print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hEboundW_le_vanVleck
 
+-- ★★ J4-107 (CoeffBoundsN1.lean, ns HeatResidualBound): hCoeffU0 DISCHARGED + hEzero + THE K2
+-- VERDICT (indep build-verified; Sol-confirmed). K1: vanVleck_foldedCoeff_zero_flat (∂w₀(0)=0 DERIVED
+-- from genuine gauge hdg0+hg0 via the Jacobi/det chain — improves on J4-101's carried hw0flat) ⟹
+-- hCoeffU0_vanVleck (uniformCoeff_bound instantiated; only hw0smooth + gauge carried). K3: heatOp_
+-- gatedWitnessN1_eq_zero_of_nonpos (hEzero for the gated N=1 witness; τ=0 handled by Iic-within-
+-- derivative uniqueness, no diagonal split; needs 1≤n). K2 folding brick tau_mul_sqrt_le_affine.
+-- ⚠ K2 VERDICT (load-bearing): ∂w₁(0)=0 is FALSE for van-Vleck (2∂u₁(0)=∂(Tu₀)(0)≠0 from the
+-- transport ODE) ⟹ the O(r²) hCoeffU1 is GENUINELY FALSE — undischargeable. SOUND ROUTE (J4-108):
+-- the O(r) shifted-profile coefficient bound (uniformCoeff_bound minus the flatness term) + T1
+-- re-plumb via width margin r·G_a ≤ C·√τ·G_b ⟹ τ·√τ ≤ (1+t)·τ folds into the affine capstone shape.
+#print axioms QIQTH.HeatResidualBound.vanVleck_foldedCoeff_zero_flat
+#print axioms QIQTH.HeatResidualBound.hCoeffU0_vanVleck
+#print axioms QIQTH.HeatResidualBound.heatOp_gatedWitnessN1_eq_zero_of_nonpos
+
+-- ★★★★ J4-108 (CoeffU1Fix.lean, ns HeatResidualBound): the hCoeffU1 FIX FULLY LANDED — the N=1
+-- hEboundW_le with NO coefficient hypotheses (indep build-verified). L1 rncRadial_mul_gaussDdim_le_
+-- width (odd-power absorption r·G_c ≤ C·√τ·G_d, scalar y·e^{−y}≤1). L2 uniformCoeffLinear_bound (the
+-- O(r) coefficient bound WITHOUT flatness — radialDeriv via C¹ sup; O(r²) summands demoted by
+-- r² ≤ √n·ρ·r). L3a/L3 the O(r)-fed narrow chains (√τ/τ term). KEY TRICK (better than planned):
+-- √τ ≤ 1+τ GLOBALLY ⟹ the affine ∀τ>0 shape is kept — the entire downstream chain drop-in reusable.
+-- L4 gatedWitnessN1_hEboundW_le_vanVleck_final: hyps ONLY hg/hC/hK/hgnd/hgsymm/hinvF/hframeK + hw
+-- (van-Vleck foldedCoeff smoothness family) + hdg0/hg0 gauge — hCoeffU0 discharged internally
+-- (J4-107), the false hCoeffU1 replaced by the PROVED O(r) bound. std-3 all.
+-- STATUS: the capstone's hEboundW_le + hHdiag both maximally clean at N=1. Remaining: hEmeas + hInt;
+-- hDH/hDConv/hCH/hCConv (conv-regularity package); hDuhamel/hInter (the LAST wall); gauge inputs.
+#print axioms QIQTH.HeatResidualBound.uniformCoeffLinear_bound
+#print axioms QIQTH.HeatResidualBound.uniformResidualN1_narrow_mixed_lin
+#print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hEboundW_le_vanVleck_final
+
 end QIQTH.AxiomAudit

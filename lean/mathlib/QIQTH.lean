@@ -308,6 +308,8 @@ import QIQTH.ResidualN1GaussianBound
 import QIQTH.RestrictedEboundW
 import QIQTH.OrderOneTower
 import QIQTH.OrderOneGeometry
+import QIQTH.CoeffBoundsN1
+import QIQTH.CoeffU1Fix
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
