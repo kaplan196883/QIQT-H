@@ -715,3 +715,29 @@ NEXT: J4-126 = AmplitudePackage.lean (instantiate D2H/Aamp from vanVleckGatedWit
 A1 x=0 factorization + the x-derivative layer from the C⁴ chart tower; A2 compactness bounds;
 A3 half-concrete fallback = u₀-layer + documented derivative residue). Then finite-ε
 differentiation; then hDaLimLU assembly conditional on {hFLocLip, amplitude residue}.
+
+## J4-126 BANKED (a0d5086e) — 2026-08-03: AMPLITUDE PACKAGE + THE CHART FINDING
+AmplitudePackage.lean [AF std-3, raw 0 @ 9409]: A0 map (on-gate value = radialCutoff(W z 0)·
+G_τ(W z 0)·Θ^{-1/2}(W z 0)·(u₀+u₁τ)(W z 0) — Gaussian argument = CHART IMAGE) +
+vanVleckGatedWitness_zero_factor + witnessSecondXDeriv anchor + AmplitudeDerivativeData +
+amplitudePackage_sliver_bound. FINDING: literal hAnear NOT satisfied by the witness (chart
+argument); reconciliation = new frontier.
+
+## SOL ADAPTER PLAN (consult 2026-08-03 #2): "R2.5" — L¹ KERNEL-REPLACEMENT ADAPTER
+Keep ALL proven plain-z interfaces; add the adapter layer:
+- B1 chartGauss_l1_sub_plain_tendsto (5/10): ∫|G_τ(W z)−G_τ(z)| → 0 on the active set S,
+  hyps = coarse coercivity (c‖z‖²≤‖W z‖² on S — excludes remote zeros; must come from chart
+  injectivity/gate) + shrinking-ball near-isometry hasymp (∀δ ∃r); proof = two-stage ε (δ then
+  r then τ): inside ball the (1±δ)-width sandwich U−L with exact full-space integral
+  (1−δ)^{-n/2}−(1+δ)^{-n/2}; outside = tails via gaussDdim_width_ratio. NO change of variables;
+  mass J=1 falls out.
+- B2 bounded-multiplier corollary (2/10); B3 repackage amplitude ũ₀/ũ₁ := (cutoff·Θ^{-1/2}·u)∘W
+  with ũ₀(0)=1 (3/10); B4 boundary wrapper: I_chart − B(u,0,0) = (I_chart−I_plain) + proven
+  (3/10).
+- SLIVER-2 (separate, later): S1 exact Gaussian chain-rule Hessian formula (⟨Y,Pᵢ⟩²/4τ² −
+  (‖Pᵢ‖²+⟨Y,Qᵢ⟩)/2τ shape) (4/10) + S2 Leibniz normal form (4-5/10) + S3 chart-jet package
+  Y=z+O(‖z‖²), Pᵢ=±eᵢ+O(‖z‖), Qᵢ=qᵢ+O(‖z‖) from C⁴ tower (5-6/10) + S4 general weighted-moment
+  envelope ∫τ^{-m}‖z‖^k G_{κτ} ≤ Cτ^{k/2−m} (4/10) + S5 quantitative cubic replacement
+  |G_τ(Wz)−G_τ(z)| ≤ C‖z‖³/τ·G_{κτ}(z) (7/10) + S6 normal form: canonical Hermite + centerJet
+  (do NOT abs the odd ⟨z,qᵢ⟩/2τ term — exact parity cancellation!) + remainder (7/10).
+ORDER: B1→B2→B3→B4 (J4-127) then S1..S6.
