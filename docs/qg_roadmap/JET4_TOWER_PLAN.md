@@ -569,3 +569,16 @@ leviSeries_dominatedW_le (abstract UNCONDITIONAL Levi domination).
 J4-115 `HeatConvDeriv.lean`: hDConv REDUCED to hDelta (Sol: ε-split; the never-evaluated-
 limit trick — hasDerivAt_of_tendstoLocallyUniformlyOn with existential D). Remaining D5:
 concrete approximants (J4-116 in flight) + Lemma 3.14 (the irreducible singular brick).
+
+## J4-116 BANKED (a3b463be) — 2026-08-02
+ConvApproximants.lean [AF std-3, raw 0 @ 9373 jobs]: epsSeq + heatConv_tail_tendsto
+(primitive-continuity, no tail estimate) + hDConv_of_delta_epsFamily (never-evaluated-limit
+eps-split) + vanVleckGatedWitness + hDConv_gatedWitnessN1_epsFamily = the EXACT capstone
+hDConv shape, conditional ONLY on {hFII, hJoint, hDelta}.
+IN FLIGHT: J4-117 ConvCarriesDischarge.lean (agent a1e9361b46130abba, restarted post-suspend
+2026-08-02 22:43): F1 hFII via D1×Levi dominations + gaussDdim_conv semigroup
+(widths (3/2)(u−s)+2s ≥ (3/2)u); F2 hJoint via FTC b-partial + C3eps u-partial +
+joint-2D-from-partials; F3 hDConv_gatedWitnessN1_of_delta_final (only deferred family + hDelta).
+NEXT: J4-118 = the delta-family brick (Lemma 3.14 ⟹ hDelta, THE singular brick; Sol consult
+on Lean shape first), then eps-Duhamel identity + hInter, then hCConv-C2 concrete, then gauge +
+final assembly via trueKernel_diagonal_a1_eq_R6_residual_restricted_C2.
