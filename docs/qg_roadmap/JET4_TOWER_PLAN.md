@@ -487,3 +487,12 @@ split` (R₁ = R₀[u] + H₀[u'] + t·R₀[u'], exact) ⟹ `residualN1_gaussian
 (C₀+W₁+t·C₁)·gaussDdimWide. New genuine inputs = the w₁ jets. LARGE-τ: baseKernelW's α
 slot is a τ-margin; capstone α=0 unsatisfiable for N=1 ∀τ; theory needs only τ∈(0,t].
 J4-104 (in flight) = restricted-hypothesis capstone census/variant.
+
+## J4-104 (3a10aab9) — ★★★ capstone SHAPE FIX: the N=1 hEboundW obstruction DISSOLVED
+`QIQTH/RestrictedEboundW.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+Census: every hEboundW/hInt use is at τ≤t (single site, Ioo 0 t integrals). Route β:
+(0,t]-restricted chain mirrors ⟹ `trueKernel_diagonal_a1_eq_R6_residual_restricted`
+(hEboundW weakened to ∀τ≤t) + `mixedAlpha_to_alpha0_le` (C(1+T) collapse) +
+`capstone_inputs_N1_shape` (the N=1 mixed-α bound ⟹ the restricted capstone's slot).
+J4-105 (in flight) = the N=1 tower re-run (T1 uniform bound via split+reuse → T2 narrow
+→ T3 abstract-layer re-instantiation → T4 gatedWitnessN1_hEboundW_mixed → T5 N=1 hHdiag).
