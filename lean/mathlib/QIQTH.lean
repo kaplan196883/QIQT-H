@@ -318,6 +318,7 @@ import QIQTH.GatedWitnessPackage
 import QIQTH.HeatConvDeriv
 import QIQTH.ConvApproximants
 import QIQTH.ConvCarriesDischarge
+import QIQTH.DeltaFamilyBoundary
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

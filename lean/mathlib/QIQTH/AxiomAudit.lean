@@ -15738,4 +15738,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDConv_of_delta_final
 #print axioms QIQTH.HeatResidualBound.hDConv_gatedWitnessN1_of_delta_final
 
+-- ★★ J4-118 (DeltaFamilyBoundary.lean, ns HeatResidualBound): the DELTA-FAMILY brick (Rosenberg
+-- Lemma 3.14 analogue) — indep build-verified. LANDED: gaussDdim_integral_eq_one (n-D mass-one
+-- from gaussianZerothMoment_oneD via the Fintype product) + gaussDdim_integrable +
+-- tendsto_integral_gaussDdim_smul (THE approximate-identity core: ε_m ↓ 0, bounded h continuous
+-- at 0 ⟹ ∫ G_{ε_m}·h → h 0, genuine NEAR/FAR split against mass-one) +
+-- tendstoLocallyUniformlyOn_add (no Mathlib .add — proved) + hDelta_of_boundary(_shifted) +
+-- hDelta_gatedWitnessN1_of_boundary (the concrete hDelta feed for the N=1 witness). std-3 all.
+-- ⚠ REMAINING CARRIES (exact, honest): hTail (Gaussian ball-complement mass → 0 as width → 0 —
+-- genuine decay fact, dischargeable via 1-D tail × product/union bound or scaling; J4-119) +
+-- hBoundary (Brick 2 moving-peak concentration ∫ A(ε_m)·B(u−ε_m) → B(u,0,0) locally uniformly —
+-- needs the EQUICONTINUOUS-FAMILY variant of the approximate identity + Heine–Cantor from
+-- hBcont; the genuinely singular residue) + hmeas + hDaLim. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_integral_eq_one
+#print axioms QIQTH.HeatResidualBound.tendsto_integral_gaussDdim_smul
+#print axioms QIQTH.HeatResidualBound.tendstoLocallyUniformlyOn_add
+#print axioms QIQTH.HeatResidualBound.hDelta_of_boundary
+#print axioms QIQTH.HeatResidualBound.hDelta_gatedWitnessN1_of_boundary
+
 end QIQTH.AxiomAudit
