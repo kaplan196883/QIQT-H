@@ -320,6 +320,7 @@ import QIQTH.ConvApproximants
 import QIQTH.ConvCarriesDischarge
 import QIQTH.DeltaFamilyBoundary
 import QIQTH.GaussianTailBoundary
+import QIQTH.BoundaryAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

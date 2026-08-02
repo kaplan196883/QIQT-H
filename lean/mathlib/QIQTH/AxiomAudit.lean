@@ -15773,4 +15773,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.tendsto_integral_gaussDdim_smul_family
 #print axioms QIQTH.HeatResidualBound.tendstoUniformlyOn_integral_gaussDdim_smul_family
 
+-- ★★★ J4-120 (BoundaryAssembly.lean, ns HeatResidualBound): BRICK 2 hBoundary DISCHARGED —
+-- indep build-verified. LANDED: heatKernel1D_le_diagonal + gaussDdim_le_diagonal (peak bounds) +
+-- gaussDdim_zero_sub (evenness) + B_le_MB (s-uniform Levi sup via peak + width-antitone) +
+-- integrableOn_gauss_mul_bddOn_ball + boundary_tendstoLocallyUniformlyOn (T3: the moving-peak
+-- concentration ∫ A(ε_m) 0 z · B(u−ε_m) z 0 → B u 0 0 locally uniformly — the FULL 4-way split:
+-- MAIN via T2u with a clamped indicator family + Heine–Cantor on Icc (a/2) T ×ˢ closedBall 0 r₀;
+-- EPS ≤ ε·C₁·M_B; OFF-BALL via the (3/2)ε-tail + peak cap; mass defect) +
+-- hDelta_gatedWitnessN1_final (the CONCRETE hDelta feed with hBoundary GONE — the delta-family
+-- chain of hDConv is now closed up to hDaLim). std-3 all.
+-- ⚠ REMAINING CARRIES (exact, honest): hDaLim (frozen-Leibniz partial limit) + the geometric
+-- near-diagonal family for the concrete witness (hAnear/hu₀.../hu₁ — parametrix 2-jet facts,
+-- satisfiable) + dominations (proven elsewhere, parametric) + measurability family + then the
+-- ε-Duhamel identity/hInter/hCConv-C²/gauge for the capstone. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_le_diagonal
+#print axioms QIQTH.HeatResidualBound.B_le_MB
+#print axioms QIQTH.HeatResidualBound.boundary_tendstoLocallyUniformlyOn
+#print axioms QIQTH.HeatResidualBound.hDelta_gatedWitnessN1_final
+
 end QIQTH.AxiomAudit
