@@ -452,3 +452,13 @@ R1 engine monotone in b (`_below` variant, ∀ρc); R2 per-q τ-free r₀ hoist 
 choosing radii BEFORE (a,b). ONE input left: huniformChart = K-uniform IFT source-ball
 radius. J4-100 (in flight) = quantitative uniform IFT via ApproximatesLinearOn (exposed
 source!) with Id as the linear approximation (near-id + Hessian-Lipschitz uniform data).
+
+## ★★★★ J4-100 (e5b98332) — THE hunif SUMMIT: hEboundW FULLY UNCONDITIONAL
+`QIQTH/UniformChartRadius.lean` (ns HeatResidualBound), [AF] std-3, indep verified.
+Mathlib ApproximatesLinearOn (source EXPOSED) + near-id MVT ⟹ K-uniform chart radius ⟹
+`uniformInverseChart` + huniformChart discharged ⟹ chart-generic capstone copies ⟹
+`gatedWitness_hEboundW_unconditional`: ∃ a b B S, ∀τ p q, |heatOp of the gated concrete
+witness| ≤ B·baseKernelW 2 0 τ p q — hyps ONLY hg/hC/hK/hgnd/hgsymm/hinvF/hframeK/Θ/u/
+hw0smooth/hw0flat. THE hunif/hEboundW TOWER (J4-80…J4-100, 21 bricks, ONE session) IS
+COMPLETE. Remaining to a₁=R/6: capstone wiring (hHdiag concrete-parametrix identification
++ hInt/hEzero/hEmeas + hDH/hDConv/hCH/hCConv + RNC jets) + hDuhamel/hInter (last wall).
