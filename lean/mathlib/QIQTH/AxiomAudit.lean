@@ -15866,4 +15866,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.sliver1_zeroth_bound
 #print axioms QIQTH.HeatResidualBound.sliver2_bound
 
+-- ★★ J4-126 (AmplitudePackage.lean, ns HeatResidualBound): the AMPLITUDE PACKAGE for the
+-- concrete N=1 witness (indep build-verified; deliberate A3 route). LANDED:
+-- heatParametrix_one_apply + vanVleckGatedWitness_gate_apply (the A0 MAP formalized: on-gate
+-- value = radialCutoff·G_τ(W z 0)·Θ(W z 0)^{-1/2}·(u₀+u₁τ) — Gaussian argument is the CHART
+-- IMAGE) + vanVleckGatedWitness_zero_factor (honest x=0 factorization isolating the
+-- chart-image Gaussian) + witnessSecondXDeriv def (pd∘pd anchor — non-vacuity) +
+-- amplitudePackage_sliver_bound (the concrete-witness 2nd-derivative sliver obeys the √ε
+-- bound given the AmplitudeDerivativeData bundle). std-3 all.
+-- ⚠ STRUCTURAL FINDING (bankable): the literally-carried hAnear shape A τ 0 z =
+-- G_τ(z)·(u₀ z+τu₁ z) is NOT satisfied by the witness as-is — the Gaussian argument is
+-- W z 0 (chart image), and u₀/u₁ sit outside G. Discharge = the CHART-GAUSSIAN
+-- RECONCILIATION: rncRadialSq(W z 0) = ‖z‖² + O(‖z‖⁴) near-isometry + absorbing the O(‖z‖⁴)
+-- Gaussian discrepancy into the amplitude. Same geometry blocks hD2Hexpand (carried in the
+-- data bundle). This is the NEW frontier brick. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.heatParametrix_one_apply
+#print axioms QIQTH.HeatResidualBound.vanVleckGatedWitness_gate_apply
+#print axioms QIQTH.HeatResidualBound.vanVleckGatedWitness_zero_factor
+#print axioms QIQTH.HeatResidualBound.amplitudePackage_sliver_bound
+
 end QIQTH.AxiomAudit

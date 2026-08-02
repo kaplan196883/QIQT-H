@@ -325,6 +325,7 @@ import QIQTH.TruncatedDuhamel
 import QIQTH.DuhamelLimitWiring
 import QIQTH.GaussianHessianCancel
 import QIQTH.SliverEstimates
+import QIQTH.AmplitudePackage
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
