@@ -15632,4 +15632,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.heatOp_stronglyMeasurable_of_jointContinuous
 #print axioms QIQTH.HeatResidualBound.gatedWitnessN1_hInt_of_kernelContinuity
 
+-- ★★ J4-111 (HeatConvRegularity.lean, ns HeatResidualBound): THE hDuhamel CAMPAIGN OPENER — the
+-- conv-regularity/diff-under-integral engine (indep build-verified). heatConv structure: interval-
+-- integral in s over [0,t] × Bochner ∫z; heatConvFrozen freezes the second t-role. LANDED:
+-- C1a/b integrand integrability (abstract + Gaussian-dominated via gaussDdim_mul_integrable);
+-- C2 inner continuity (continuous_of_dominated) + heatConvFrozen_hasDerivAt_upper_of_dominated
+-- (the FTC upper-limit derivative outright); C3z under-∫z Leibniz; C3ε heatConv_hasDerivAt_
+-- underIntegral (the ε-truncated Leibniz — Sol's step-3 engine, THE key brick); C4p first
+-- space-fderiv rung. std-3 all. Namespace finding: the dominated-deriv lemmas live in the ROOT
+-- namespace (only interval variants under intervalIntegral).
+-- ⚠ CAMPAIGN MAP (firewalled): B1 hDConv = FTC-upper ⊕ ε→0 at the moving diagonal (Sol 4-5 + chain
+-- rule); B2 hCConv = C4p iterated to ⊤ (poly×Gaussian induction) + outer lift; B3 = concrete
+-- Gaussian domination of H_G/leviSeries E (the width-2 engine's summable bounds should feed this).
+#print axioms QIQTH.HeatResidualBound.heatConvFrozen_hasDerivAt_upper_of_dominated
+#print axioms QIQTH.HeatResidualBound.heatConv_hasDerivAt_underIntegral
+#print axioms QIQTH.HeatResidualBound.heatConvInner_hasFDerivAt_space
+
 end QIQTH.AxiomAudit

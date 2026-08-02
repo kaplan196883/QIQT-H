@@ -312,6 +312,7 @@ import QIQTH.CoeffBoundsN1
 import QIQTH.CoeffU1Fix
 import QIQTH.GatedWitnessMeas
 import QIQTH.GatedWitnessEmeas
+import QIQTH.HeatConvRegularity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
