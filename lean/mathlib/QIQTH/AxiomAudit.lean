@@ -15832,4 +15832,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDuhamel_final
 #print axioms QIQTH.HeatResidualBound.hDuhamel_leviSeries_final
 
+-- ★★ J4-124 (GaussianHessianCancel.lean, ns HeatResidualBound): the GAUSSIAN-HESSIAN
+-- CANCELLATION LIBRARY (indep build-verified) — the reusable analytic core of the hDaLim/
+-- LapTrunc limit. LANDED (all at the RNC center x=0, which is all the capstone needs):
+-- gaussDdim_pd_pd_i_coeff (G1: ∂ᵢ²G = ((zᵢ)²−2t)/(4t²)·G) + gaussian_hessian_moment_zero
+-- (G2: the EXACT second-moment cancellation ∫ ∂ᵢ²G = 0 — moment 2t minus mass 2t) + the G3
+-- weighted moments (|y|-moment (3/2)√t; Hessian-abs t⁻¹; Hessian-abs×|y| (15/2)/√t via the
+-- exp(−y²/8t) = √(8πt)·G_{2t} re-route, NO 4th moment) + hk_coord_integral_le (n-D
+-- per-coordinate) + gaussian_hessian_cancel (G4: Lipschitz q ⟹
+-- |∫ ∂ᵢ²G·q| ≤ L·(15/2·n)/√t — the τ^{−1/2} gain that makes the second-derivative sliver
+-- integrable). std-3 all.
+-- ⚠ DEFERRED (small, honest): the odd-moment/gradient analogue gaussian_grad_cancel + the
+-- G5 sliver corollary ∫₀^ε τ^{−1/2} = 2√ε (next brick alongside the slivers). NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_moment_zero
+#print axioms QIQTH.HeatResidualBound.hk_absHess_absY_moment_le
+#print axioms QIQTH.HeatResidualBound.hk_coord_integral_le
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel
+
 end QIQTH.AxiomAudit
