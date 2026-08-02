@@ -15389,4 +15389,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.cutoffResidual_uniformFlow_unconditional_tau_narrow
 #print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_chartGaussian
 
+-- ★★★ J4-96 (NearIsometryBudget.lean, ns ExpMap + HeatResidualBound): hdisp DISCHARGED — the
+-- CONSUMER-WIDTH per-base-point bound is FULLY UNCONDITIONAL in-chart (indep build-verified).
+-- Ball-restatement was REQUIRED (global hdisp false — geodesic spreading; M3 only uses it on the
+-- ball). D1 uniformFlowExp_zero (φ_q(0)=q via confinement at w=0 — no ODE uniqueness needed);
+-- uniformFlowExp_fderiv_near_id_quant (‖Dφ−Id‖≤C_D‖v‖ UNCONDITIONAL — re-derived ~180-line Grönwall
+-- tail, proof-internal to _quant and the exposed Hessian route was hdiag-conditional so avoided);
+-- D2 displacement ‖φ_q v−q−v‖ ≤ C_D‖v‖² (segment MVT on w↦φ(w)−w); rncRadialSq_add_le helper;
+-- D3 uniformFlowExp_hdisp_ball (ℓ²-direct, n absorbed: (1+2nC_Dr+nC_D²r²)≤4/3 by shrinking r);
+-- CAPSTONE globalWitness_residual_bound_chartGaussian_final: |heatOp g gi H_w τ (φ_q v) q| ≤
+-- B·gaussDdim(2τ)(φ_q v−q) — hyps ONLY hg/hC/hK/hgnd/hgsymm/hinvF/hframeK/Θ/u/hw0smooth/hw0flat.
+-- std-3 all. NEXT (J4-97): out-of-chart zero-extension (gated witness + φ_q open-map exposure) +
+-- ∀p assembly ⟹ RecenterReduction:86 feed ⟹ GLOBAL hEboundW.
+#print axioms QIQTH.ExpMap.uniformFlowExp_zero
+#print axioms QIQTH.ExpMap.uniformFlowExp_displacement_bound
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_hdisp_ball
+#print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_chartGaussian_final
+
 end QIQTH.AxiomAudit
