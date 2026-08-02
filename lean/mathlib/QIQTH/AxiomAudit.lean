@@ -15406,4 +15406,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.uniformFlowExp_hdisp_ball
 #print axioms QIQTH.HeatResidualBound.globalWitness_residual_bound_chartGaussian_final
 
+-- ★★★ J4-97 (GlobalHunifAssembly.lean, ns HeatResidualBound): THE ∀p GATING MACHINERY + consumer-
+-- shape reduction (indep build-verified; Sol consult confirmed the hard-gate design + surfaced the
+-- quantifier-order obstruction ruling out smooth/τ-dependent gates). heatOp_congr_nhds (G1, fully
+-- general) + gatedKernel (q-gate ∘ set-gate; τ-independent hard gate ⟹ time germ EXACT, no ∂_τχ) +
+-- G2a in-gate transfer + G2b out-gate/out-K zero (via heatOp_eq_zero_of_locally_zero) +
+-- gatedKernel_uniform_perBasePoint_of_trichotomy (G3) + gatedKernel_hEboundW_of_trichotomy (G4):
+-- the EXACT capstone hEboundW primitive shape ∀τ p q, |heatOp g gi (gatedKernel K S H)| ≤
+-- C·baseKernelW 2 0 τ p q — conditional on ONE hypothesis htri (per-p trichotomy). std-3 all 5.
+-- ⚠ FIREWALL (htri discharge = J4-98): (W1) chart-image openness — expose the IFT OpenPartial-
+-- Homeomorph open-map/target from basepointChart_exists (currently .choose-hidden; e.target open +
+-- φ_q''ball ⊆ target); (W2) support containment (active-cutoff ⟹ ‖v‖<r₀ radius nesting + frontier
+-- in the radialCutoff zero collar). Then gatedKernel(H_w) feeds the capstone hEboundW DIRECTLY.
+#print axioms QIQTH.HeatResidualBound.heatOp_congr_nhds
+#print axioms QIQTH.HeatResidualBound.gatedKernel_uniform_perBasePoint_of_trichotomy
+#print axioms QIQTH.HeatResidualBound.gatedKernel_hEboundW_of_trichotomy
+
 end QIQTH.AxiomAudit

@@ -298,6 +298,7 @@ import QIQTH.UniformFlowLocalInverse
 import QIQTH.GlobalWitnessHunif
 import QIQTH.WidthMarginEngine
 import QIQTH.NearIsometryBudget
+import QIQTH.GlobalHunifAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
