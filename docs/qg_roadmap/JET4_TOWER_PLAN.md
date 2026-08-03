@@ -1074,3 +1074,11 @@ lever: inner meas on volume.restrict K suffices) + p=0 chart slice
 DISCHARGED (chartOrigin_continuousOn at S=K). CAPSTONE hKmeas_concrete_v3
 ← {hSm, hg, hgpos, hu, hVmapMeasK restricted-K, hGateDiff}. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-168 — ChartGeneralPContinuity (LANDED b75dceed)
+The p=0 Groenwall GENERALIZES to all reachable p (p = flow endpoint only,
+never ODE data): chartP_lipschitz_modulus + chartP_continuousOn +
+hVmapMeasK_at_p_of_geom + the honest per-p disjunction
+hVmapMeasK_of_geomOrMeas (far p not overclaimed). CAPSTONE
+hKmeas_concrete_v4 ← {hSm, hg, hgpos, hu, hChartP, hGateDiff}.
+std-3 raw 0. NOT a1=R/6.
