@@ -15885,4 +15885,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.vanVleckGatedWitness_zero_factor
 #print axioms QIQTH.HeatResidualBound.amplitudePackage_sliver_bound
 
+-- ★★ J4-127 (ChartGaussAdapter.lean, ns HeatResidualBound): the L¹ CHART-TO-PLAIN GAUSSIAN
+-- ADAPTER (Sol "R2.5"; indep build-verified) — reconciles the chart-image Gaussian of the
+-- concrete witness with ALL proven plain-z interfaces WITHOUT touching them. LANDED:
+-- Gk radial calculus + Gk_scaled (the (1±δ)-width scaled-Gaussian identity) +
+-- chartDiff_integrableOn + chartGauss_l1_sub_plain_tendsto (B1: ∫_S |G_τ(W z) − G_τ(z)| → 0
+-- as τ→0⁺, under hcoarse coercivity + hasymp shrinking-ball near-isometry — two-stage ε,
+-- exact inner-ball mass difference (√(1−δ))⁻ⁿ−(√(1+δ))⁻ⁿ, coarse tails outside; NO change of
+-- variables) + chartGauss_l1_mul_bdd_tendsto (B2 bounded multiplier) + chartAmp0/chartAmp1 +
+-- witness_amp_affine + witness_sub_plain (B3: H_G − plain-kernel = adapter-difference ×
+-- (ũ₀+τũ₁) — EXACTLY B2's multiplier shape). std-3 all.
+-- ⚠ CARRIED: B4 boundary_chart_wrapper assembly (needs concrete hAdom/hBcont/ũ₀ 0 = 1
+-- center values + bounds from ConcreteDominations + the J4-105..108 layer — next brick) +
+-- hcoarse/hasymp discharge for the concrete uniformInverseChart (NearIsometryBudget layer).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.Gk_scaled
+#print axioms QIQTH.HeatResidualBound.chartGauss_l1_sub_plain_tendsto
+#print axioms QIQTH.HeatResidualBound.chartGauss_l1_mul_bdd_tendsto
+#print axioms QIQTH.HeatResidualBound.witness_amp_affine
+#print axioms QIQTH.HeatResidualBound.witness_sub_plain
+
 end QIQTH.AxiomAudit
