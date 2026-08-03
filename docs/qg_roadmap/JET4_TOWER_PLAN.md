@@ -927,3 +927,9 @@ SpatialC2.lean [AF std-3, raw 0 @ 9430]: hCH genuinely proven; hCConv 2-layer re
 a1_R6_of_residue_hCH_discharged. NEXT: J4-148 = DaLimLocUnif.lean (the hDaLimLU loc-unif
 upgrade — K-uniform sliver/Etrunc/LapTrunc constants). Then engine instantiations,
 ε-pinning, joint-q assessment, base-point family.
+
+## J4-148 BANKED — 2026-08-03: THE LOC-UNIF UPGRADE (hDaLimLU + hDerivLU discharged)
+DaLimLocUnif.lean [AF std-3, raw 0 @ 9431]: U1-U4 all landed; both consumer shapes verbatim.
+NOTE: hLHSlim (the Δ_g(frozen)→Δ_g(full) limit) = U2's lapTrunc_tendstoUniformlyOn content
+— threadable. NEXT: Sol consult on the JOINT-Q WALL (measurable-selection vs re-construction
+routes), then J4-149 per verdict.
