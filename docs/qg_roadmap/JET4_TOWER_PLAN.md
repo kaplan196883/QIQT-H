@@ -949,3 +949,11 @@ W z 0 = −D_v exp₀(W 0 z)[W 0 z] (fixed-base only — could bypass base-point
 the diagonal map!) before the variational-equation C² campaign (HIGH difficulty, limited
 Mathlib turnkey support). Restricted-measure note: measurability may need volume.restrict K
 or a canonical extension.
+
+## J4-149 BANKED — 2026-08-03: THE JOINT-Q AUDIT + TRANSFER (residue isolated)
+FlowJointRegularity.lean [AF std-3, raw 0 @ 9432]: AUDIT: flow = .choose over EXPOSED
+geodesic ODE (Grönwall viable); modulus per-v only; reversal infeasible; consumer =
+diagonal only. LANDED: antilipschitz + chart_joint_velocity_modulus (residue = base-flow
+difference) + hWmeas₀_of_continuousOn. NEXT: J4-150 = GeodesicGronwall.lean (W1 geodesicField
+Lipschitz on the confinement compact; W2 two-tube Grönwall comparison; W3 flow difference
+≤ e^L‖q−q'‖; W4 hW0 ⟹ hWmeas₀ UNCONDITIONAL).
