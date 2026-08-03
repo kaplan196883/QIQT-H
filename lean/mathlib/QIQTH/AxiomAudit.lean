@@ -16389,4 +16389,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.witness_sliver2_eventual
 #print axioms QIQTH.HeatResidualBound.hbnd_witness_final
 
+-- ★★★ J4-158 (PartialsToFDeriv.lean, ns QIQTH.PartialsToFDeriv): THE CLASSICAL THEOREM
+-- (indep build-verified; the J4-155-identified genuine Mathlib gap, REUSABLE):
+-- partials_continuous_hasFDerivAt — continuous coordinate partials on a ball ⟹ HasFDerivAt
+-- with the derivative Σᵢ gᵢ(x₀)·projᵢ, on Fin n → ℝ with the Pi sup-norm. The full
+-- telescoping coordinate-path + orientation-free 1-D MVT + isLittleO argument (incl. the
+-- n=0 degenerate case). PLUS hAssembly_reduced: hCConv_L1_of_partialsContinuity's hAssembly
+-- slot closed-to-continuity (the new carry = the dominated-convergence continuity of the
+-- derivative-integral coefficients — one honest layer better). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.PartialsToFDeriv.partials_continuous_hasFDerivAt
+#print axioms QIQTH.PartialsToFDeriv.hAssembly_reduced
+
 end QIQTH.AxiomAudit
