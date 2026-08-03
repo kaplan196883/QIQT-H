@@ -912,3 +912,12 @@ F2FamilyDischarge.lean [AF std-3, raw 0 @ 9428]: hFII + htime + hpar + hR discha
 NEXT: J4-146 = CapstoneStatus.lean (S1 machine-checked supply chain per capstone input;
 S2 a1_R6_of_residue — THE ONE THEOREM with exactly the remaining residue as hypotheses;
 S3 honest gap doc). Then grind the S2 list.
+
+## J4-146 BANKED — 2026-08-03: ★★ a1_R6_of_residue — THE MACHINE-CHECKED REDUCTION ★★
+CapstoneStatus.lean [AF std-3, raw 0 @ 9429]: three capstone slots discharged at the witness
++ a1_R6_of_residue (the a₁=R/6 conclusion conditional on the explicit residue: GATE + GAUGE
++ 7 ANALYTIC slots, each with a landed reduction supplier). Irreducible frontier: joint-q
+ODE regularity + loc-unif hDaLimLU. 30 bricks 2026-08-03.
+NEXT: J4-147 = SpatialC2.lean (hCH via the C² chart composition; hCConv via the Q1/Q2
+engine derivative-continuity). Then hDaLimLU loc-unif upgrade + engine instantiations +
+ε-pinning + the joint-q wall assessment.
