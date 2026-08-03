@@ -16701,4 +16701,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TransportOpSmoothness.radialTransportSolve_fderiv
 #print axioms QIQTH.TransportOpSmoothness.radialTransportSolve_contDiff_one
 
+-- ★★★ J4-175 (HuInftyRebase.lean, ns QIQTH.HuInftyRebase): hu CLOSED AT ∞ (indep
+-- build-verified). Part A audit: NO consumer genuinely needs ω — all uses are
+-- level-generic interface algebra or C⁰/C² downcasts (full table in the file header);
+-- rebasing consumer statements ⊤↦∞ is a one-token interface edit with unchanged proofs.
+-- Part B ★ the generic Banach-valued ray-integral tower: rayIntegral m g v = ∫s^m•g(s•v);
+-- rayIntegral_hasFDerivAt (the m↦m+1 derivative-bumping identity) + rayIntegral_fderiv +
+-- rayIntegral_contDiff_nat (induction on N with the codomain F generalized inside the ∀ —
+-- the IH applies at Point n →L F; ω-clause vacuous via natCast_ne_top) +
+-- rayIntegral_contDiff_infty + radialTransportSolve_eq_rayIntegral +
+-- radialTransportSolve_contDiff_infty (hSolve at ∞ PROVEN). Part C ★★
+-- laplaceBeltrami_contDiff_infty + transportOp_preserves_contDiff_infty (the ∞ hT mirror)
+-- + hu_infty_closed — ∀k ContDiff ℝ ∞ (transportCoeff …) from {hg, hgi, hgpos} ONLY —
+-- the hu carry FULLY CLOSED at ∞. Re-thread: hw_discharged_infty +
+-- heatParametrix_contDiff_space_infty + witnessInner_continuous_ofInfty +
+-- vanVleck_witnessInner_continuous_ofGeom (end-to-end continuity from geometry alone;
+-- ω nowhere required). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HuInftyRebase.rayIntegral_hasFDerivAt
+#print axioms QIQTH.HuInftyRebase.rayIntegral_fderiv
+#print axioms QIQTH.HuInftyRebase.rayIntegral_contDiff_nat
+#print axioms QIQTH.HuInftyRebase.rayIntegral_contDiff_infty
+#print axioms QIQTH.HuInftyRebase.radialTransportSolve_eq_rayIntegral
+#print axioms QIQTH.HuInftyRebase.radialTransportSolve_contDiff_infty
+#print axioms QIQTH.HuInftyRebase.laplaceBeltrami_contDiff_infty
+#print axioms QIQTH.HuInftyRebase.transportOp_preserves_contDiff_infty
+#print axioms QIQTH.HuInftyRebase.hu_infty_closed
+#print axioms QIQTH.HuInftyRebase.hw_discharged_infty
+#print axioms QIQTH.HuInftyRebase.heatParametrix_contDiff_space_infty
+#print axioms QIQTH.HuInftyRebase.witnessInner_continuous_ofInfty
+#print axioms QIQTH.HuInftyRebase.vanVleck_witnessInner_continuous_ofGeom
+
 end QIQTH.AxiomAudit
