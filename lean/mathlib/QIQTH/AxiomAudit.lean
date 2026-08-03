@@ -15905,4 +15905,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.witness_amp_affine
 #print axioms QIQTH.HeatResidualBound.witness_sub_plain
 
+-- ★★ J4-128 (ChartWrapperConcrete.lean, ns HeatResidualBound): the CONCRETE chart wrapper
+-- layer (indep build-verified). LANDED: chartW0_zero (W₀ 0 = 0) + chartAmp0_at_zero
+-- (ũ₀ 0 = 1 — the EXACT hu₀one input of the proven boundary interface, via vanVleck_zero +
+-- transportCoeff_zero + radialCutoff_eq_one) + chartAmp1_at_zero (= the u₁(0) R/6 seed) +
+-- chartGauss_concrete_(sub_plain|mul_bdd)_tendsto (B1/B2 specialized to the concrete W₀,
+-- conditional on the labelled chart inputs) + witness_mul_split_on_gate (the C3 three-way
+-- integrand split scaffold). std-3 all.
+-- ⚠ ISOLATED GEOMETRIC INPUTS (the recognized blocker, honestly labelled): (1) the INVERSE-
+-- chart near-isometry rncRadialSq(W₀ z) = ‖z‖² + O(‖z‖⁴)-family (hcoarse₀/hasymp₀) — the
+-- tower has only the EXP-side displacement (uniformFlowExp_displacement_bound); deriving the
+-- W-side bound from it = NEXT brick (inverse-function estimate); (2) base-point continuity/
+-- measurability of z ↦ W₀ z and the amplitudes (chart is .choose-built per base point);
+-- (3) uniform gate-ball containment ∃ρ, ball 0 ρ ⊆ {z : 0 ∈ S z}. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.chartW0_zero
+#print axioms QIQTH.HeatResidualBound.chartAmp0_at_zero
+#print axioms QIQTH.HeatResidualBound.chartGauss_concrete_sub_plain_tendsto
+#print axioms QIQTH.HeatResidualBound.witness_mul_split_on_gate
+
 end QIQTH.AxiomAudit
