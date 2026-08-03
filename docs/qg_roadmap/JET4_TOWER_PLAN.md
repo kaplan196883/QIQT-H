@@ -805,3 +805,14 @@ SliverAssembly.lean [AF std-3, raw 0 @ 9416]: T1' Hermite bridges PROVEN + exp_t
 + witness_sliver2_assembly ((C₀+C₁)·2√ε + C₂·ε). Carried: hNormalForm + hInner0/1/2 + meas.
 NEXT: J4-134 = InnerSliceBounds.lean (discharge hInner0/1/2: I0 via S5b replacement + bridges
 + G4 cancellation (hqLip); I1 crude gradient; I2 mass; I3 witness_sliver2_final composite).
+
+## J4-134 BANKED — 2026-08-03: I1+I2 DISCHARGED + THE COERCIVITY LEVER
+InnerSliceBounds.lean [AF std-3, raw 0 @ 9417]: gaussDdim_halfcoer_le + selfmul product +
+hInner1/2_discharge (exact assembly shapes, explicit constants). I0 deferred: k=5 moment +
+entangled Hermite threading.
+NEXT: J4-135 = HessianSliceBound.lean (M5 oneD_absMoment5 (AM-GM from k=4 + even k=6) +
+oneD_absMoment6 + I0 hInner0_discharge (E1 replacement worst-term ‖z‖⁵/τ³→τ^{−1/2}; E2
+proven bridges; E3 G4 with hqLip) + I3 witness_sliver2_final — the sliver-2 chart program
+CLOSED modulo {hNormalForm, hqLip, hco/hYdisp/hJ3/hJ3Q, M₀/₁/₂, hFdom, meas}).
+Traps added: ∫ z binder greedy (parenthesize); field_simp mixed τ/√τ (set w := √τ);
+gcongr nonneg side-goals; sorryAx grep + ^error: + exit code.
