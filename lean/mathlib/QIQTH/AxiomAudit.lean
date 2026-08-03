@@ -16045,4 +16045,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hInner0_discharge
 #print axioms QIQTH.HeatResidualBound.witness_sliver2_final
 
+-- ★★★ J4-136 (RemainderIntegration.lean, ns HeatResidualBound): the hRem DISCHARGE — E2 fully
+-- proven (indep build-verified). LANDED: normPow_gauss_tau (width-τ moment wrapper) +
+-- tE2_bracket_poly (the pointwise polynomial bracket via the three T1' bridges) +
+-- tE2_slice_bound (THE E2 half fully proven: 6-monomial expansion ‖z‖^{3..6}/τ² + ‖z‖^{1,2}/τ,
+-- termwise moments, √τ₀-folds — explicit C_E2) + hRem_discharge (the EXACT hRem shape,
+-- C_R = C_E1 + C_E2) + witness_sliver2_complete (the composite with hRem GONE and hInt0
+-- DERIVED — the concrete sliver-2 √ε bound). std-3 all.
+-- ⚠ REMAINING CARRIES of the sliver-2 program (exact, honest): hRemE1 (the T_E1
+-- Gaussian-replacement half |∫T_E1| ≤ C_E1·τ^{−1/2} — the degree-10 moment grind, model-zero,
+-- toolset complete: exp_neg_div_sub_le + two-term rnsq-diff + moments; next brick) +
+-- hIntT1/T2/T3 integrabilities + hNormalForm + hqLip + hco/hYdisp/hJ3/hJ3Q + amplitude
+-- bounds + hFdom. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.tE2_bracket_poly
+#print axioms QIQTH.HeatResidualBound.tE2_slice_bound
+#print axioms QIQTH.HeatResidualBound.hRem_discharge
+#print axioms QIQTH.HeatResidualBound.witness_sliver2_complete
+
 end QIQTH.AxiomAudit
