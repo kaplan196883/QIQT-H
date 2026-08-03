@@ -1146,3 +1146,11 @@ Verified addendum in A1_R6_RESIDUE_STATUS.md: J4-160..175 brick table
 (every theorem re-read), the honest L1 residue, the v6 correction, the
 tractability verdict. hjoint confirmed the last open G2 slot; hu now
 DERIVED (not parallel-carried); walls unchanged. NOT a1=R/6.
+
+### J4-177 — JointMeasurability (LANDED 96e938bf)
+hjoint (the last open G2 slot) REDUCED: abstract-measure difference-
+quotient lever + ae_prod_of_ae_ae (honest MeasurableSet side-condition)
++ gated indicator glue + hjoint_concrete (exact slot). New residue =
+hinnerJ ONLY (inner parametrix joint measurability; gaussDdim vanishes
+at tau<=0); other carries unify with the census. std-3 raw 0.
+NOT a1=R/6.
