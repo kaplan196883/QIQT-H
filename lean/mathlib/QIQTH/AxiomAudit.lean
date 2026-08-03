@@ -16378,4 +16378,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.chartField_secondJet_general
 #print axioms QIQTH.HeatResidualBound.chartField_secondJet_domain
 
+-- ★★ J4-157 (UniformCRDischarge.lean, ns HeatResidualBound): THE m-UNIFORM C_R — the
+-- witness→hbnd chain CLOSED end-to-end (indep build-verified). THE ∃-STRUCTURE FINDING:
+-- the grand is per-ε-shaped but the witnessed constant is value-level ε-free; the move =
+-- extract C_R ONCE at a master gap ε₀ (hRem_discharge + tE1_slice_bound), then fire the
+-- explicit-C_R witness_sliver2_final at every ε := epsSeq m ≤ ε₀ (window restriction).
+-- LANDED: witness_sliver2_eventual (U1: the m-uniform eventual bound with the i-independent
+-- threshold) + hbnd_witness_final (U2: the exact ∀m hbnd slot of sliver_sum_bound —
+-- NOTHING NEW CARRIED). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.witness_sliver2_eventual
+#print axioms QIQTH.HeatResidualBound.hbnd_witness_final
+
 end QIQTH.AxiomAudit

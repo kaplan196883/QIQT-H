@@ -355,6 +355,7 @@ import QIQTH.EngineInstantiation
 import QIQTH.AmplitudeFamilyDischarge
 import QIQTH.CConvLayerDischarge
 import QIQTH.GeneralBaseJets
+import QIQTH.UniformCRDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
