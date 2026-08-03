@@ -16318,4 +16318,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gate_ball_floor
 #print axioms QIQTH.HeatResidualBound.a1_R6_of_residue_hCH_hInter_discharged
 
+-- ★★★ J4-152 (EngineInstantiation.lean, ns HeatResidualBound): THE ENGINE INSTANTIATION
+-- (indep build-verified). LANDED: witnessFieldDeriv/witnessFieldDeriv2 (the concrete dH/dHH
+-- kernels; center = witnessSecondXDeriv by rfl) + witnessFieldDeriv_gate_eq (the on-gate
+-- first-derivative formula via germ + gaussComp_pd) + the off-gate vanishings + the E2
+-- Gaussian-envelope domination + witness_secondOrder_interchange (E3: the full concrete
+-- second-order interchange for the witness) + epsSeq_sliver_side_conditions +
+-- hbnd_witness_supplied (E4: the ε-pinning; hbnd slot supplied given the eventual ε-free
+-- bound). std-3 all.
+-- ⚠ CARRIED: the chart jet family (base-0 proven), amplitude PdiffAt/bounds, gate
+-- memberships, the engine analytic families, the m-uniform C_R eventual bound. NOT a₁=R/6.
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv_gate_eq
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv_gate_abs_le
+#print axioms QIQTH.HeatResidualBound.witness_secondOrder_interchange
+#print axioms QIQTH.HeatResidualBound.hbnd_witness_supplied
+
 end QIQTH.AxiomAudit
