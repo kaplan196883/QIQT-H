@@ -835,3 +835,13 @@ replace_bound with 2nC_W‖z‖³+nC_W²‖z‖⁴); R2 crude polyChart cap; R3 
 (k,m) ∈ {(5..10,3),(3..6,2)} with oneD_absMoment10 added; R4 hRemE1_discharge +
 witness_sliver2_grand + hIntT1/2/3 attempts). After: sliver-2 closed to interface residue ⟹
 pivot to finite-ε differentiation + hNormalForm + gauge assembly ⟹ hDaLimLU.
+
+## J4-137 BANKED — 2026-08-03: SLIVER-2 INTEGRATION CLOSED (witness_sliver2_grand)
+GaussReplaceSlice.lean [AF std-3, raw 0 @ 9420]: hRemE1 discharged (two-term rnsq-diff +
+degree-10 termwise moments); both remainder halves now theorems. Sliver-2 residue =
+interface only: {hco/hYdisp/hJ3/hJ3Q, M₀/₁/₂, hFdom, hNormalForm, hqLip, integrabilities}.
+NEXT: J4-138 = NormalFormDischarge.lean (N1 hNormalForm_concrete via gaussComp_amp_pd_pd
+instantiation for the witness — jets from ChartJetBounds, general-base as J1b/C² carry;
+N2 witness_sliver2_concrete for the actual witnessSecondXDeriv; N3 LapTrunc connection via
+laplaceBeltrami_at_rnc_center begin). Then finite-ε differentiation + derivative-of-limit +
+gauge assembly ⟹ hDaLimLU.
