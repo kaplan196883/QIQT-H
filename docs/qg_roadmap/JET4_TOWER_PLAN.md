@@ -788,3 +788,14 @@ J1 existence via inverse-function differentiability; J2 center values P=eᵢ at 
 POSSIBLE q_i = 0 under the capstone gauge hΓ(0)=0 — would kill the centerJet at the
 assembly point!; J3 quantitative ‖P−eᵢ‖ ≤ C‖z‖, ‖Q‖ ≤ C_Q via fderiv-near-id + Neumann
 inversion + BasepointJetModulus). Then S6 assembly.
+
+## J4-132 BANKED — 2026-08-03: CHART JETS — P=eᵢ EXACT; CENTERJET DEAD AT ASSEMBLY POINT
+ChartJetBounds.lean [AF std-3, raw 0 @ 9415]: DV₀(0)=Id tower-derived; centerJet contraction
+∑(V₀0)ₖQₖ = 0 unconditionally (V₀0=0). Carried: J1b + raw D²V₀(0)=0 + J3 z-moduli.
+⚠ S6 nuance: the vanishing is at base 0; the sliver integrand's jets sit at base z — the
+centerJet there is O(‖z‖·C_Q/τ)·G ⟹ CRUDELY integrable (τ^{-1/2} rate) given ‖Q(z)‖ ≤ C_Q
+(J3 carry) — NO parity argument needed anywhere.
+NEXT: J4-133 = SliverAssembly.lean (S6: concrete witnessSecondXDeriv sliver ≤ C√ε — normal
+form + Hermite-argument bridge via S5 cubic replacement + jet expansions (J3 labelled) +
+centerJet crude + G4 cancellation with hqLip ⟹ the concrete AmplitudeDerivativeData
+discharge modulo {hqLip, J3 moduli, J1b, meas}).
