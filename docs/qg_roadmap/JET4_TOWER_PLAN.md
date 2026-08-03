@@ -888,3 +888,12 @@ from J4-129 lemmas — domain reconciliation ball-vs-global; G2 hbnd ε-uniformi
 the constants ARE ε-free, extract; G3 thread ⟹ hDuhamel_next). Then deep residue
 (hFLocLip/hqLip resolvent; hJ3/J1b base-point bootstrap; hWmeas₀; gate-ball; hLHSlim) +
 capstone side (hCH/hCConv-C², F2 family, hFII, gauge) + FINAL ASSEMBLY.
+
+## J4-143 BANKED — 2026-08-03: GEOMETRIC MODULI DISCHARGED (Yext + ε-uniform constant)
+GeometricModuliThreading.lean [AF std-3, raw 0 @ 9426]: G1 global hco/hYdisp exact via the
+extension trick; G2 hbnd finite-max uniformization. Carried: G3 threading (Pext=eᵢ/Qext=0
+design), hGateSub, upstream pinning.
+NEXT: J4-144 = LeviLipschitz.lean (F1 E-spatial-difference from gradient carry; F2 the
+resolvent Lipschitz F=−E−E*F with (s−r)^{−1/2} integrating to 2√s ⟹ hFLocLip/hqLip in the
+sliver-stack shape). Then G3 + hLHSlim + hWmeas₀/gate-ball/J1b + capstone side + FINAL
+ASSEMBLY.
