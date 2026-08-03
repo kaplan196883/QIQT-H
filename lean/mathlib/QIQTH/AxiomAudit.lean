@@ -16062,4 +16062,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hRem_discharge
 #print axioms QIQTH.HeatResidualBound.witness_sliver2_complete
 
+-- ★★★ J4-137 (GaussReplaceSlice.lean, ns HeatResidualBound): hRemE1 DISCHARGED — SLIVER-2's
+-- LAST INTEGRATION GRIND CLOSED (indep build-verified; recovered from one agent stall via
+-- resume). LANDED: oneD_absMoment10 + gaussDdim_replace_bound_gen (abstract-error kernel
+-- replacement) + rncRadialSq_diff_bound (the two-term |r²_{Yz}−r²_z| ≤ 2nC_W‖z‖³+nC_W²‖z‖⁴)
+-- + gaussReplace_E1_bound (R1 pointwise) + polyChart_abs_bound (R2 crude cap) +
+-- tE1_slice_bound (R3: explicit C_E1, degrees 3..10 monomials, sympy-preverified degree-10
+-- coefficient algebra) + hRemE1_discharge (the EXACT carried shape) + witness_sliver2_grand
+-- (hRemE1 GONE — BOTH remainder halves now theorems). std-3 all.
+-- ⚠ THE SLIVER-2 INTERFACE RESIDUE (final, honest): geometric inputs {hco, hYdisp, hJ3,
+-- hJ3Q} + amplitude bounds {M₀,M₁,M₂} + hFdom + hNormalForm + hqLip + the split-algebra
+-- integrabilities {hIntT1/2/3, hInt1/2} (no Y/P/Q measurability hyps in scope — deliberate)
+-- + strip parameters. NEXT PHASE: finite-ε differentiation + hNormalForm discharge + gauge
+-- assembly ⟹ hDaLimLU. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.oneD_absMoment10
+#print axioms QIQTH.HeatResidualBound.gaussDdim_replace_bound_gen
+#print axioms QIQTH.HeatResidualBound.rncRadialSq_diff_bound
+#print axioms QIQTH.HeatResidualBound.tE1_slice_bound
+#print axioms QIQTH.HeatResidualBound.hRemE1_discharge
+#print axioms QIQTH.HeatResidualBound.witness_sliver2_grand
+
 end QIQTH.AxiomAudit
