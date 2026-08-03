@@ -16120,4 +16120,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDaLim_full
 #print axioms QIQTH.HeatResidualBound.hDuhamel_assembled
 
+-- ★★★ J4-140 (SliverSumPlumbing.lean, ns HeatResidualBound): hDuhamel_semifinal — THE
+-- ONE-THEOREM COMPLETE-RESIDUE MILESTONE (indep build-verified). LANDED: sliver_sum_bound
+-- (P1: per-coordinate √ε bounds summed over Fin n into the exact B/hSliver/hBlim package) +
+-- hDuhamel_semifinal (P2: hDuhamel_assembled with ALL SIX supplier slots discharged by the
+-- proven lemmas hE_combination/etrunc_tendsto/boundaryTrunc_tendsto/derivConv_tendsto +
+-- sliver_sum_bound — conclusion heatOp(H*F) = F + E*F). std-3 all.
+-- ⚠ THE GROUPED COMPLETE RESIDUE (one place, honest): GAUGE {hgi, hΓ} · INTERCHANGE
+-- {hInterchange, hLapFull, hDa, hLap} · INTEGRABILITY {hII_lo/hi, hLapZ/hEZ, hLapS/hES,
+-- hmeas} · GEOMETRIC-MODULI {D0/D1, hbnd (⟸ witness_sliver2_concrete distilled — the
+-- ε-uniformization is a small future brick), r₀/τ₀, hAnear, hu₀ family} · AMPLITUDE
+-- {A₀/A₁, E₀/E₁, C₀/C₁, C_L} · DOMINATION {hAdom, hEdom, hEzero, hBdom} · F2-REGULARITY
+-- {hderiv, D/hDerivLU, hfg} · MEASURABILITY {hBcont, hAmeas/hBmeas, hu₀meas/hu₁meas}.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.sliver_sum_bound
+#print axioms QIQTH.HeatResidualBound.hDuhamel_semifinal
+
 end QIQTH.AxiomAudit
