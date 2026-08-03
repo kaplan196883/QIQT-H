@@ -799,3 +799,9 @@ NEXT: J4-133 = SliverAssembly.lean (S6: concrete witnessSecondXDeriv sliver ≤ 
 form + Hermite-argument bridge via S5 cubic replacement + jet expansions (J3 labelled) +
 centerJet crude + G4 cancellation with hqLip ⟹ the concrete AmplitudeDerivativeData
 discharge modulo {hqLip, J3 moduli, J1b, meas}).
+
+## J4-133 BANKED — 2026-08-03: S6 ASSEMBLY (bridges + skeleton)
+SliverAssembly.lean [AF std-3, raw 0 @ 9416]: T1' Hermite bridges PROVEN + exp_tail_beats_inv
++ witness_sliver2_assembly ((C₀+C₁)·2√ε + C₂·ε). Carried: hNormalForm + hInner0/1/2 + meas.
+NEXT: J4-134 = InnerSliceBounds.lean (discharge hInner0/1/2: I0 via S5b replacement + bridges
++ G4 cancellation (hqLip); I1 crude gradient; I2 mass; I3 witness_sliver2_final composite).
