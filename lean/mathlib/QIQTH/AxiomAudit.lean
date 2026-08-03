@@ -16679,4 +16679,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GeomPTransportAssess.hu_of_solve_smooth
 #print axioms QIQTH.GeomPTransportAssess.hu_concrete_of_solve_smooth
 
+-- ★★★ J4-174 (TransportOpSmoothness.lean, ns QIQTH.TransportOpSmoothness): hT discharged
+-- + the solve C¹ rung (indep build-verified). Part A: laplaceBeltrami_contDiff (from
+-- contDiff_pd iterated + christoffel_contDiff + hgi) + transportOp_preserves_contDiff
+-- (Θ^{±½} via vanVleck_contDiffAt + rpow_const_of_ne, nonvanishing from vanVleck_pos) +
+-- ★ hT_discharged — the EXACT hT premise of hu_concrete_of_solve_smooth, reduced to banked
+-- geometry {hg, hgi, hgpos}. Part B: radialTransportSolve_hasFDerivAt (the induction-step
+-- identity ∂(I_m f) = I_{m+1}(∂f) via hasFDerivAt_integral_of_dominated_of_fderiv_le on
+-- the compact tube) + _differentiable + _fderiv + ★ radialTransportSolve_contDiff_one (the
+-- C¹ rung). ⚠ STRUCTURAL FINDING: (⊤ : WithTop ℕ∞) = ω is the ANALYTIC level in this
+-- toolchain — diff-under-the-integral reaches every finite order (hence ∞) but NOT ω;
+-- ω-analyticity of the parametric ray integral is a genuine Mathlib gap. hu stays honestly
+-- reduced: hT DISCHARGED, hSolve carried (sharpened to "analyticity of the ray integral";
+-- candidate dissolution: re-base the hu chain at ∞ if consumers only need finite order).
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.TransportOpSmoothness.laplaceBeltrami_contDiff
+#print axioms QIQTH.TransportOpSmoothness.transportOp_preserves_contDiff
+#print axioms QIQTH.TransportOpSmoothness.hT_discharged
+#print axioms QIQTH.TransportOpSmoothness.radialTransportSolve_hasFDerivAt
+#print axioms QIQTH.TransportOpSmoothness.radialTransportSolve_differentiable
+#print axioms QIQTH.TransportOpSmoothness.radialTransportSolve_fderiv
+#print axioms QIQTH.TransportOpSmoothness.radialTransportSolve_contDiff_one
+
 end QIQTH.AxiomAudit

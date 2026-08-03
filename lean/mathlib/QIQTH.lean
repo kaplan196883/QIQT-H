@@ -371,6 +371,7 @@ import QIQTH.OnGateFieldRegularity
 import QIQTH.ChartFieldC2General
 import QIQTH.ConcreteGateAssembly
 import QIQTH.GeomPTransportAssess
+import QIQTH.TransportOpSmoothness
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
