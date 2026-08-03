@@ -1046,3 +1046,13 @@ witness ∀x, on-gate = coercive-envelope data via the hGateData dichotomy)
 pd-vanishing levers. Envelope-branch residue = {hGateData('), hFbd}.
 L1 residue overall: {hC2fam, hGateData('), hWmeas+hWdiff, hjoint, hFmeas}.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-165 — WitnessMeasDeriv (LANDED 95a718e3)
+hWmeas/hWdiff round: gated-indicator measurability lever (reusable),
+hWmeas exact slot ← {hKm, hSm, hIn}; hWdiff off-gate leg DISCHARGED
+unconditionally, on-gate PdiffAt⟹HasDerivAt, exact slot via a.e.-z
+dichotomy; CAPSTONE hKmeas_concrete ← {hKm, hSm, hIn, hGateDiff}.
+Key structural finding: inner kernel z-enters only through
+uniformInverseChart z p (radialCutoff·heatParametrix of the chart), so
+hIn = chart z-continuity. L1 residue: {hC2fam, hGateData('),
+hKm+hSm+hIn+hGateDiff, hjoint, hFmeas}. std-3 raw 0. NOT a1=R/6.
