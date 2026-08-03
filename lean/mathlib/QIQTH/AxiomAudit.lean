@@ -16400,4 +16400,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PartialsToFDeriv.partials_continuous_hasFDerivAt
 #print axioms QIQTH.PartialsToFDeriv.hAssembly_reduced
 
+-- ★★★ J4-160 (GcoefContinuity.lean, ns QIQTH.GcoefContinuity): the gcoef-continuity carry
+-- (indep build-verified): continuousAt_doubleIntegral_of_dominated — the REUSABLE abstract
+-- nested engine (inner MeasureTheory.continuousAt_of_dominated per a.e. s, fed by
+-- filter_upwards into the outer intervalIntegral.continuousAt_of_dominated_interval) for
+-- x ↦ ∫s∫z K s x z. PLUS gcoef_continuity_discharge (the VERBATIM hcont slot of
+-- hAssembly_reduced for K = dH i (t−s) x z · F s z) + hCConv_L1_final (the full L1 ∃-shape:
+-- linewise HasDerivAt + gcoef continuity + coordinate representation ⟹ HasFDerivAt on a
+-- 𝓝 0 set, composing hAssembly_reduced ∘ hCConv_L1_of_partialsContinuity; the coordinate
+-- identity (D x)(single i 1) = gcoef i x via Finset.sum_eq_single). Remaining carry = the
+-- G2 per-(i,x₀) domination/continuity bundle for dH := witnessFieldDeriv (engine inputs,
+-- satisfiable from witnessFieldDeriv_gate_eq/_gate_abs_le, labelled). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.GcoefContinuity.continuousAt_doubleIntegral_of_dominated
+#print axioms QIQTH.GcoefContinuity.gcoef_continuity_discharge
+#print axioms QIQTH.GcoefContinuity.hCConv_L1_final
+
 end QIQTH.AxiomAudit
