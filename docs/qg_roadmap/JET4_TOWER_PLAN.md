@@ -1038,3 +1038,11 @@ hdomS_from_uniform + pd_aestronglyMeasurable_of_slice (reusable lever) +
 hKmeas_from_witness. L1 residue now {hC2fam (genuine general-centre C²),
 henvU instantiation, hWmeas+hWdiff, hjoint, hFmeas}. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-164 — HenvUInstantiation (LANDED 32cf3344)
+henvU/henv ASSEMBLED (C₀=(Bs·Ba+Bd)·(√2)ⁿ, κ=2; off-gate z∉K kills the
+witness ∀x, on-gate = coercive-envelope data via the hGateData dichotomy)
++ concrete capstones hdomS_assembled/hzbound_assembled + the reusable
+pd-vanishing levers. Envelope-branch residue = {hGateData('), hFbd}.
+L1 residue overall: {hC2fam, hGateData('), hWmeas+hWdiff, hjoint, hFmeas}.
+std-3 raw 0. NOT a1=R/6.
