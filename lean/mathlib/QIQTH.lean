@@ -331,6 +331,7 @@ import QIQTH.ChartWrapperConcrete
 import QIQTH.InverseChartDisplacement
 import QIQTH.ChartJetHessian
 import QIQTH.GaussianMomentEnvelope
+import QIQTH.ChartJetBounds
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -15975,4 +15975,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gaussDdim_replace_bound
 #print axioms QIQTH.HeatResidualBound.weighted_chart_replace_bound
 
+-- ★★★ J4-132 (ChartJetBounds.lean, ns HeatResidualBound): the S3 CHART-JET LAYER — with the
+-- DECISIVE finding (indep build-verified). LANDED (unconditional given 0 ∈ K):
+-- chartField_contDiffAt_center (V₀ C² at the field-center, TOWER-derived via the germ at
+-- φ₀0 = 0) + chartField_germ_center + chartField_centerValue_base0 (V₀ 0 = 0) +
+-- expFlow_fderiv_id_center (Dφ₀(0) = Id) + chartField_fderiv_center (J2a: DV₀(0) = Id) +
+-- chartField_firstJet_center/_single_center (P i = eᵢ EXACT, in the gaussComp_pd_pd line
+-- shape) + chartField_firstJet_of_contDiffAt (general base, labelled C² carry) +
+-- chartField_centerJet_term_vanishes_base0 (J2b: THE CENTERJET CONTRACTION
+-- ∑ₖ (V₀ 0)ₖ·Qₖ = 0 for EVERY Q — the centerJet term of the Hessian normal form DIES at
+-- the assembly point UNCONDITIONALLY, no gauge needed, since V₀ 0 = 0). std-3 all.
+-- ⚠ CARRIED (honest): J1b second-field-jet existence + the raw D²V₀(0) = 0 value (reduces
+-- to the exp-second-jet-at-center −½Γ(0) = 0 under the gauge — absent from the tower) +
+-- J3 base-point z-moduli (blocker (2) family). NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.chartField_contDiffAt_center
+#print axioms QIQTH.HeatResidualBound.chartField_fderiv_center
+#print axioms QIQTH.HeatResidualBound.chartField_firstJet_center
+#print axioms QIQTH.HeatResidualBound.chartField_centerJet_term_vanishes_base0
+
 end QIQTH.AxiomAudit
