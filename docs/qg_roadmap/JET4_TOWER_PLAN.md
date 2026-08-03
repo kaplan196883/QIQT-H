@@ -816,3 +816,13 @@ proven bridges; E3 G4 with hqLip) + I3 witness_sliver2_final — the sliver-2 ch
 CLOSED modulo {hNormalForm, hqLip, hco/hYdisp/hJ3/hJ3Q, M₀/₁/₂, hFdom, meas}).
 Traps added: ∫ z binder greedy (parenthesize); field_simp mixed τ/√τ (set w := √τ);
 gcongr nonneg side-goals; sorryAx grep + ^error: + exit code.
+
+## J4-135 BANKED — 2026-08-03: I0 + THE I3 MILESTONE
+HessianSliceBound.lean [AF std-3, raw 0 @ 9418]: moment tower k≤9 complete + T_E3 exact
+cancellation @ τ^{−1/2} + polyChartDiff pointwise + hInner0_discharge + witness_sliver2_final
+(all three slices in). Carried: hRem (cancellation-free remainder — J4-136 pure integration)
++ hqLip + geometric inputs.
+NEXT: J4-136 = RemainderIntegration.lean (hRem discharge: T_E2 via polyChartDiff × moments
+k=2..6 with τ₀-absorption; T_E1 via two-term herr (2nC_W‖z‖³+nC_W²‖z‖⁴) × replace-bound ×
+moments k≤9; conclusion witness_sliver2_complete — carries only {hNormalForm, hqLip,
+hco/hYdisp/hJ3/hJ3Q, M₀/₁/₂, hFdom, meas}).
