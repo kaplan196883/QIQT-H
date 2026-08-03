@@ -897,3 +897,11 @@ NEXT: J4-144 = LeviLipschitz.lean (F1 E-spatial-difference from gradient carry; 
 resolvent Lipschitz F=−E−E*F with (s−r)^{−1/2} integrating to 2√s ⟹ hFLocLip/hqLip in the
 sliver-stack shape). Then G3 + hLHSlim + hWmeas₀/gate-ball/J1b + capstone side + FINAL
 ASSEMBLY.
+
+## J4-144 BANKED — 2026-08-03: hFLocLip/hqLip DISCHARGED (the resolvent route)
+LeviLipschitz.lean [AF std-3, raw 0 @ 9427]: the last genuinely-new analytic input of the
+Duhamel residue is closed (segment MVT + 2√s integration + Volterra assembly + the exact
+consumer hqLip triple). Carried: hVol/hE1/hSlice + integrabilities + amplitude family.
+NEXT: J4-145 = F2FamilyDischarge.lean (R1 htime via the upper-FTC engine; R2 hpar via
+hDa_trunc; R3 hR via the mixed-increment route; R4 hFII H*F-pairing mirror; R5 thread).
+Then G3 + hLHSlim + hWmeas₀/gate-ball/J1b + hCH/hCConv-C² + gauge + FINAL ASSEMBLY.
