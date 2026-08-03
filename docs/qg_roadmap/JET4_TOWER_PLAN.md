@@ -905,3 +905,10 @@ consumer hqLip triple). Carried: hVol/hE1/hSlice + integrabilities + amplitude f
 NEXT: J4-145 = F2FamilyDischarge.lean (R1 htime via the upper-FTC engine; R2 hpar via
 hDa_trunc; R3 hR via the mixed-increment route; R4 hFII H*F-pairing mirror; R5 thread).
 Then G3 + hLHSlim + hWmeas₀/gate-ball/J1b + hCH/hCConv-C² + gauge + FINAL ASSEMBLY.
+
+## J4-145 BANKED — 2026-08-03: THE F2-REGULARITY GROUP CLOSED
+F2FamilyDischarge.lean [AF std-3, raw 0 @ 9428]: hFII + htime + hpar + hR discharged
+(the little-o proven; local-continuity FTC route) + hDuhamel_final_of_f2carries.
+NEXT: J4-146 = CapstoneStatus.lean (S1 machine-checked supply chain per capstone input;
+S2 a1_R6_of_residue — THE ONE THEOREM with exactly the remaining residue as hypotheses;
+S3 honest gap doc). Then grind the S2 list.
