@@ -1124,3 +1124,11 @@ parametric integral; continuity rung PROVEN (radialTransportSolve_-
 continuous + transportCoeff_continuous_of_preserve); hu reduced to
 {hSolve, hT} operator premises (C^∞-under-integral absent in Mathlib).
 std-3 raw 0. NOT a1=R/6.
+
+### J4-174 — TransportOpSmoothness (LANDED 82cf2f3c)
+hT FULLY DISCHARGED (laplaceBeltrami + transportOp preserve C^inf from
+{hg, hgi, hgpos}); the solve C1 rung + the induction-step identity
+d(I_m f) = I_{m+1}(df). STRUCTURAL: top = omega = analytic here — the
+ray integral reaches all finite orders + infinity but not omega; hSolve
+sharpened to ray-integral analyticity; candidate = infinity-rebase of
+the hu chain (J4-175). std-3 raw 0. NOT a1=R/6.
