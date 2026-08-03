@@ -779,3 +779,12 @@ NEXT: J4-131 = GaussianMomentEnvelope.lean (S4 general ∫τ^{-m}‖z‖^k G_{κ
 envelope via 1-D moments k=0..4 + S5 quantitative cubic replacement |G_τ(Wz)−G_τ(z)| ≤
 C‖z‖³/τ·G_{κτ}(z) via MVT + chartW0_rncRadialSq_error + Gk_scaled; weighted corollary
 τ^{(k+1)/2}). Then S3 jet bounds + S6 assembly into sliver2_bound.
+
+## J4-131 BANKED (916c0cde) — 2026-08-03: S4 ENVELOPES + S5 CUBIC REPLACEMENT
+GaussianMomentEnvelope.lean [AF std-3, raw 0 @ 9414]: 1-D moments k=0..4 + n-D envelope +
+S5b gaussDdim_replace_bound (exact J4-129 hyp shapes) + S5c (√τ)^{k+1} weighted rate.
+NEXT: J4-132 = ChartJetBounds.lean (S3: field-slot jets of V := uniformInverseChart z ·:
+J1 existence via inverse-function differentiability; J2 center values P=eᵢ at z=0 +
+POSSIBLE q_i = 0 under the capstone gauge hΓ(0)=0 — would kill the centerJet at the
+assembly point!; J3 quantitative ‖P−eᵢ‖ ≤ C‖z‖, ‖Q‖ ≤ C_Q via fderiv-near-id + Neumann
+inversion + BasepointJetModulus). Then S6 assembly.
