@@ -863,3 +863,11 @@ residue: {hgi/hΓ, hInterchange, hLapFull, hII, B/hSliver/hBlim (⟸ sliver-2), 
 outputs}. NEXT: J4-140 = SliverSumPlumbing.lean (P1 hSliver/hBlim instantiation; P2 thread
 the 4 proven lemmas ⟹ hDuhamel_semifinal; P3 begin hInterchange). Then the deep residue +
 final assembly.
+
+## J4-140 BANKED — 2026-08-03: hDuhamel_semifinal (ONE theorem, complete grouped residue)
+SliverSumPlumbing.lean [AF std-3, raw 0 @ 9423]: all six supplier slots discharged.
+Residue groups: GAUGE {hgi,hΓ} · INTERCHANGE {hInterchange,hLapFull,hDa,hLap} ·
+INTEGRABILITY · GEOMETRIC-MODULI {hbnd distilled — ε-uniformization small brick} ·
+AMPLITUDE · DOMINATION · F2 · MEASURABILITY.
+NEXT: J4-141 = SecondOrderInterchange.lean (Q1 first-order differentiation under ∫∫ at the
+finite gap; Q2 second-order; Q3 hLapFull improper route; Q4 thread hDa/hLap).
