@@ -16172,4 +16172,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hLapFull_of_lims
 #print axioms QIQTH.HeatResidualBound.hDuhamel_penultimate
 
+-- ★★ J4-143 (GeometricModuliThreading.lean, ns HeatResidualBound): GEOMETRIC MODULI
+-- discharged for the concrete chart (indep build-verified). LANDED: chartYext (the extension
+-- Yext := chart on K ∩ ball else −z) + chartYext_hco_hYdisp (G1: hco (c=1/2) + hYdisp
+-- (C_W‖z‖²) hold GLOBALLY — on-gate via chartW0_rncRadialSq_error/chartW0_displacement,
+-- off-gate the −id cases EXACT by rnsq parity; + the agreement lemma on K ∩ ball) +
+-- epsSeq_antitone + hbnd_from_eventual (G2: the ε-uniform sliver constant via the
+-- finite-max trick — the ∀m hbnd shape from the eventual bound). std-3 all.
+-- ⚠ CARRIED: G3 threading (Pext := eᵢ/Qext := 0 off-gate — the P-jet sign trap confirmed:
+-- −id does NOT extend the field jets; hGateSub gate ⊆ K ∩ ball side condition) + the
+-- upstream ε-free-amplitude pinning. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.chartYext_hco_hYdisp
+#print axioms QIQTH.HeatResidualBound.epsSeq_antitone
+#print axioms QIQTH.HeatResidualBound.hbnd_from_eventual
+
 end QIQTH.AxiomAudit
