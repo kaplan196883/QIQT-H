@@ -1056,3 +1056,12 @@ Key structural finding: inner kernel z-enters only through
 uniformInverseChart z p (radialCutoff·heatParametrix of the chart), so
 hIn = chart z-continuity. L1 residue: {hC2fam, hGateData('),
 hKm+hSm+hIn+hGateDiff, hjoint, hFmeas}. std-3 raw 0. NOT a1=R/6.
+
+### J4-166 — GateChartMeasurability (LANDED 1b92d7de)
+hKm DISCHARGED (IsCompact.measurableSet); hIn reduced to {hw, hVmapMeas}
+via the composition lever (inner slice = (cutoff·parametrix)∘chart;
+spatial continuity unconditional in τ); hKmeas_concrete_v2 capstone.
+Findings: S free at the capstone (hSm genuine); chart z-continuity
+banked only p=0-on-subsets (hVmapMeas honest carry). L1 residue:
+{hC2fam, hGateData('), hSm, hw, hVmapMeas, hGateDiff, hjoint, hFmeas}.
+std-3 raw 0. NOT a1=R/6.
