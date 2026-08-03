@@ -992,3 +992,9 @@ m-uniform C_R / uniform-in-z / general-base J1b if walled).
 GeneralBaseJets.lean [AF std-3, raw 0 @ 9438]: the second-jet existence at general base
 (exact consumed shapes). VERDICTS: hEgrad = 3-5-brick third-jet layer (DEFERRED, honest);
 m-uniform C_R = tractable plumbing (J4-157); J1b = done.
+
+## J4-157 BANKED — 2026-08-04: THE m-UNIFORM C_R (the witness→hbnd chain closed)
+UniformCRDischarge.lean [AF std-3, raw 0 @ 9439]: the master-gap ∃-hoisting; nothing new
+carried. NEXT: J4-158 = PartialsToFDeriv.lean (the classical continuous-partials⟹FDeriv
+theorem on Fin n — the identified reusable Mathlib gap; then hAssembly reduced to the
+partials' continuity).
