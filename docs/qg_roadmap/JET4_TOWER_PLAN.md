@@ -879,3 +879,12 @@ finite gap + hInterchange_discharge VERBATIM. Carried: dominated-engine families
 threading via hDa_trunc + hInterchange_discharge ⟹ hEcomb_discharged; T2 hLapFull reduction
 (Q2-instances + hLHSlim carry + sliver rate ⟹ uniqueness-of-limits); T3 hDuhamel_penultimate
 with the INTERCHANGE group reduced).
+
+## J4-142 BANKED — 2026-08-03: THE INTERCHANGE GROUP CLOSED (hDuhamel_penultimate)
+InterchangeThreading.lean [AF std-3, raw 0 @ 9425]: hDa/hLap threaded (Δ↔pd∘pd adapter
+PROVEN) + hLapFull reduced (hLHSlim carry + sliver squeeze) + hDuhamel_penultimate.
+NEXT: J4-143 = GeometricModuliThreading.lean (G1 hco/hYdisp discharge for the concrete chart
+from J4-129 lemmas — domain reconciliation ball-vs-global; G2 hbnd ε-uniformization —
+the constants ARE ε-free, extract; G3 thread ⟹ hDuhamel_next). Then deep residue
+(hFLocLip/hqLip resolvent; hJ3/J1b base-point bootstrap; hWmeas₀; gate-ball; hLHSlim) +
+capstone side (hCH/hCConv-C², F2 family, hFII, gauge) + FINAL ASSEMBLY.
