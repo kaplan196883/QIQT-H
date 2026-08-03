@@ -352,6 +352,7 @@ import QIQTH.FlowJointRegularity
 import QIQTH.GeodesicGronwall
 import QIQTH.ResidueThreading
 import QIQTH.EngineInstantiation
+import QIQTH.AmplitudeFamilyDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

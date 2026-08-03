@@ -16333,4 +16333,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.witness_secondOrder_interchange
 #print axioms QIQTH.HeatResidualBound.hbnd_witness_supplied
 
+-- ★★ J4-154 (AmplitudeFamilyDischarge.lean, ns HeatResidualBound): THE AMPLITUDE FAMILY
+-- SUPPLIED (indep build-verified; F3-frontier top item). LANDED: amp_contDiffAt_center
+-- (unconditional at z=0) + amp_contDiffAt_general (given hWz/hdetz) +
+-- amp_pdiffAt_center/general + amp_pd_pdiffAt_center/general (the hAmp2 slot EXACTLY, both
+-- bases) + amp_bound/amp_deriv_bound center/general (the E2 Ba/Bd slots, ball-existential) +
+-- chartField_contDiffAt_center_general (the general-base hWz PROVIDER via the germ at the
+-- image point + chartW0_rightInverse) + amp_hAmp1_of_globalC1 (the ∀x hAmp1 reduction).
+-- std-3 all.
+-- ⚠ CARRIED: general-base hWz/hdetz (reducible via the provider + Riemannian positivity);
+-- the global-C¹ for ∀x hAmp1; uniform-in-z constants. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.amp_contDiffAt_center
+#print axioms QIQTH.HeatResidualBound.amp_pd_pdiffAt_general
+#print axioms QIQTH.HeatResidualBound.amp_bound_general
+#print axioms QIQTH.HeatResidualBound.chartField_contDiffAt_center_general
+
 end QIQTH.AxiomAudit
