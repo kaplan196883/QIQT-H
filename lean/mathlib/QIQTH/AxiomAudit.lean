@@ -16136,4 +16136,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.sliver_sum_bound
 #print axioms QIQTH.HeatResidualBound.hDuhamel_semifinal
 
+-- ★★★ J4-141 (SecondOrderInterchange.lean, ns HeatResidualBound): hInterchange DISCHARGED —
+-- the riskiest INTERCHANGE carry (indep build-verified; the agent caught+fixed a
+-- conclusion-in-disguise draft itself). LANDED: innerZ_line_hasDerivAt (the inner ∫z spatial
+-- line-derivative engine) + line_pd_double_integral (the outer ∫s nesting + pd-unfold) +
+-- pd_heatConvFrozen_interchange (Q1 first-order) + pd_pd_heatConvFrozen_interchange (Q2:
+-- second-order under the double integral at the finite gap, via germ-congruence + the core
+-- fired twice) + hInterchange_discharge (the VERBATIM carried shape of hDuhamel_semifinal's
+-- hInterchange, per (m,i)). std-3 all.
+-- ⚠ CARRIED (labelled, satisfiable via C4b + the positive gap): the z/s domination +
+-- measurability families for the dominated engines, hQ1-on-nbhd (⟸ Q1), hpdpdH
+-- identification. Remaining INTERCHANGE residue: hLapFull (improper b→u version) + hDa/hLap
+-- threading. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.innerZ_line_hasDerivAt
+#print axioms QIQTH.HeatResidualBound.line_pd_double_integral
+#print axioms QIQTH.HeatResidualBound.pd_heatConvFrozen_interchange
+#print axioms QIQTH.HeatResidualBound.pd_pd_heatConvFrozen_interchange
+#print axioms QIQTH.HeatResidualBound.hInterchange_discharge
+
 end QIQTH.AxiomAudit
