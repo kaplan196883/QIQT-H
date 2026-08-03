@@ -976,3 +976,8 @@ instantiation + the ε-pinning thread).
 EngineInstantiation.lean [AF std-3, raw 0 @ 9435]: the concrete dH/dHH kernels + on-gate
 formulas + domination + the concrete second-order interchange + the ε-pinning.
 NEXT: J4-153 = the final-state documentation census (docs only), then the next residue brick.
+
+## J4-154 BANKED — 2026-08-03: THE AMPLITUDE FAMILY SUPPLIED (F3 top item)
+AmplitudeFamilyDischarge.lean [AF std-3, raw 0 @ 9436]: hAmp2 both bases + bounds + the
+general-base hWz provider (germ at the image point + right-inverse). NEXT: J4-155 =
+CConvLayerDischarge.lean (the hCConv L1 layer + the hdetz-general small lemma).
