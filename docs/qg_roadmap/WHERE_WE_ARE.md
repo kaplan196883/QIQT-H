@@ -1,5 +1,34 @@
 # WHERE WE ARE — the recalibrated status (2026-07-11)
 
+## ★ UPDATE 2026-08-03 — the a₁=R/6 CONDITIONAL CHAIN, 37 more bricks (J4-116…J4-152) · full census filed
+
+Supersedes the a₁=R/6 status of the 2026-07-17 blocks below (which pinned the wall at "ODE
+smooth-dependence-on-IC"): the exp∈C⁴/hfd3 side is unconditional (jet-4 tower), and the 2026-08-03
+session pushed the hunif/Duhamel/sliver machinery all the way to a single reduced conditional theorem.
+
+- **The chain (4 theorems, each strictly reducing the surface):** the abstract capstone
+  `trueKernel_diagonal_a1_eq_R6_residual_restricted_C2` (`ConcreteDominations.lean`) →
+  `a1_R6_of_residue` (`CapstoneStatus.lean`, J4-146; `hHdiag`/`hDH` discharged at the concrete N=1
+  van-Vleck witness) → `a1_R6_of_residue_hCH_discharged` (`SpatialC2.lean`, J4-147; `hCH` proven,
+  `hCConv` split) → `a1_R6_of_residue_hCH_hInter_discharged` (`ResidueThreading.lean`, J4-151; `hInter`
+  gone, traded for the more-basic Levi domination). Same conclusion throughout: the diagonal expansion
+  with leading coefficient **(∑ᵢ Ricᵢᵢ)/6 = R/6** (the derived van-Vleck value, unconditional).
+- **Walls felled this session:** the delta-family/Lemma 3.14 · the moving-peak Brick 2 · the ε-Duhamel
+  skeleton + the ∂_t−Δ_x=E move · the τ^{−1/2} cancellation library · both sliver-2 remainder halves ·
+  the chart-image L¹ adapter + inverse-chart near-isometry · the normal-form discharge · the
+  Laplacian-sliver assembly (hDaLimLU) · the interchange group · the resolvent Lipschitz · the C⁰
+  joint-q wall (geodesic Grönwall ⟹ `z↦W z 0` Lipschitz ⟹ hWmeas₀ unconditional) · hCH · the threading
+  sweeps · the engine instantiation. All [AF] std-3, raw axiom count 0, each brick indep build-verified,
+  pushed through commit `61263553`.
+- **The honest frontier for UNCONDITIONAL a₁=R/6** (compact-uniform, `q∈K` — a global ∀q bound is false
+  for a wild-at-∞ metric): **F1** the joint base-point ODE-regularity/measurability wall (C⁰ diagonal
+  closed; full joint `(τ,p,q)` measurability = the one deep, Mathlib-scale residue) · **F2** a positive
+  floor on the `.choose`-built gate radius · **F3** a large-but-tractable interface-assembly tail.
+- ⚠ **HONEST (binding):** this is **NOT** unconditional a₁=R/6. It is a machine-checked *conditional*
+  theorem whose residue is real and enumerated. Conjecture input #3 stays the carried G3 input.
+  **Full census: `A1_R6_RESIDUE_STATUS.md`** (theorem chain · supplier map · grouped residue · walls
+  felled · frontier).
+
 **Provenance:** a full pass of `LEAN_RESULTS_INVENTORY.md` (§0 meta-audit, §8 cited frontiers, §9
 scope) + the roadmap tier docs + `FLAT_RECORD_GRAVITY_CONJECTURE.md`, after the 2026-07-10/11 arc
 (Lorentzian ladder L1–L4 · Lorentz gates reproduced · boundary dynamics RC1–RC3 + IC1 · limit
