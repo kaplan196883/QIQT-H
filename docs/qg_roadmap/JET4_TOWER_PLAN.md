@@ -826,3 +826,12 @@ NEXT: J4-136 = RemainderIntegration.lean (hRem discharge: T_E2 via polyChartDiff
 k=2..6 with τ₀-absorption; T_E1 via two-term herr (2nC_W‖z‖³+nC_W²‖z‖⁴) × replace-bound ×
 moments k≤9; conclusion witness_sliver2_complete — carries only {hNormalForm, hqLip,
 hco/hYdisp/hJ3/hJ3Q, M₀/₁/₂, hFdom, meas}).
+
+## J4-136 BANKED — 2026-08-03: hRem DISCHARGED (E2 proven)
+RemainderIntegration.lean [AF std-3, raw 0 @ 9419]: tE2_slice_bound (E2 fully proven) +
+hRem_discharge (exact shape) + witness_sliver2_complete (hRem gone, hInt0 derived).
+NEXT: J4-137 = GaussReplaceSlice.lean (hRemE1: R1 two-term G-diff pointwise bound (mirror
+replace_bound with 2nC_W‖z‖³+nC_W²‖z‖⁴); R2 crude polyChart cap; R3 termwise moments
+(k,m) ∈ {(5..10,3),(3..6,2)} with oneD_absMoment10 added; R4 hRemE1_discharge +
+witness_sliver2_grand + hIntT1/2/3 attempts). After: sliver-2 closed to interface residue ⟹
+pivot to finite-ε differentiation + hNormalForm + gauge assembly ⟹ hDaLimLU.
