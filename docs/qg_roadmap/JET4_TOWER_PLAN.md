@@ -1020,3 +1020,12 @@ integrable, endpoint null), hzbound DISCHARGED IN SHAPE (x-free dominator
 (C₀·Cf)·G_{κ(t−s)}(z); near-regime envelope PROVEN from E2 + the
 chart-Gaussian carry). Open in G2: hzmeas/hsmeas/hsbound/hBint → J4-162.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-162 — WitnessDerivMeasurability (LANDED b2e9bc63) — L1 LAYER COMPLETE
+hsbound + hBint DISCHARGED (constant B = C0·Cf via mass-one Gaussian);
+hzmeas/hsmeas in-shape reductions; CAPSTONE g2_bundle_assembled feeds ALL
+SEVEN gcoef_continuity_discharge hypotheses at witnessFieldDeriv. The hCConv
+L1 continuity chain is now structurally complete, resting on the six-carry
+labelled residue {hC2fam, henv, hKmeas, hFmeas, hjoint, hdomS} (each
+satisfiable). Next: discharge the carries concretely (J4-163) or the census
+tractables. std-3 raw 0. NOT a1=R/6.
