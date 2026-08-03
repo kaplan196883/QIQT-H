@@ -845,3 +845,12 @@ instantiation for the witness — jets from ChartJetBounds, general-base as J1b/
 N2 witness_sliver2_concrete for the actual witnessSecondXDeriv; N3 LapTrunc connection via
 laplaceBeltrami_at_rnc_center begin). Then finite-ε differentiation + derivative-of-limit +
 gauge assembly ⟹ hDaLimLU.
+
+## J4-138 BANKED — 2026-08-03: hNormalForm DISCHARGED (witness_sliver2_concrete)
+NormalFormDischarge.lean [AF std-3, raw 0 @ 9421]: pd germ-congruence + hNormalForm_concrete
++ off-gate vanishing + the terminal √ε bound for the ACTUAL witnessSecondXDeriv.
+NEXT: J4-139 = LapTruncAssembly.lean (L1 gauge reduction via laplaceBeltrami_at_rnc_center;
+L2 finite-gap Δ↔∫ interchange (labelled family OK); L3 the sliver-difference identity +
+limit via witness_sliver2_concrete rate √ε_m; L4 hDaLimLU assembly: Da = LapTrunc + Etrunc
+(proven) + L3 ⟹ Tendsto Da → Δ_x(H*F)+E*F = THE hDuhamel_of_daLim target — the conditional
+hDaLimLU discharge).
