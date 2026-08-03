@@ -16596,4 +16596,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateSetMeasurability.hWmeas_from_carries_restricted_Krel
 #print axioms QIQTH.GateSetMeasurability.hKmeas_concrete_v5
 
+-- ★★★ J4-170 (OnGateFieldRegularity.lean, ns QIQTH.OnGateFieldRegularity): the SHARED
+-- field-slot regularity core for hGateDiff + hC2fam (indep build-verified):
+-- gatedWitness_eventuallyEq_inner (the local-coincidence lever — z∈K, x₀ ∈ open S z ⟹
+-- gated witness =ᶠ[𝓝 x₀] innerKernelField); innerKernel_contDiffAt_field (the hCH_discharge
+-- comp tower lifted from centre 0 to general x₀, from the carried chart field-slot C²
+-- hWC2 + hg/hgpos/hu); gatedWitness_contDiffAt_field (on-gate C² via congr_of_eventuallyEq)
+-- + _offK (off-gate constant-0); pdiffAt_of_differentiableAt (reusable) +
+-- gatedWitness_pdiffAt_field; ★★ hC2fam_from_chart + hGateDiff_from_chart (the EXACT slots
+-- consumed by g2_bundle_assembled / hKmeas_concrete_v5, reduced to the a.e.-z gate
+-- dichotomies + the chart-C² family) + ★★★ hGateDiff_hC2fam_shared_core (BOTH slots from
+-- one geometric root). Chart field-slot C² at general points confirmed banked only at the
+-- centre — carried with the inverse-function-theorem satisfiability note. std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.OnGateFieldRegularity.gatedWitness_eventuallyEq_inner
+#print axioms QIQTH.OnGateFieldRegularity.innerKernel_contDiffAt_field
+#print axioms QIQTH.OnGateFieldRegularity.gatedWitness_contDiffAt_field
+#print axioms QIQTH.OnGateFieldRegularity.gatedWitness_contDiffAt_field_offK
+#print axioms QIQTH.OnGateFieldRegularity.pdiffAt_of_differentiableAt
+#print axioms QIQTH.OnGateFieldRegularity.gatedWitness_pdiffAt_field
+#print axioms QIQTH.OnGateFieldRegularity.hC2fam_from_chart
+#print axioms QIQTH.OnGateFieldRegularity.hGateDiff_from_chart
+#print axioms QIQTH.OnGateFieldRegularity.hGateDiff_hC2fam_shared_core
+
 end QIQTH.AxiomAudit
