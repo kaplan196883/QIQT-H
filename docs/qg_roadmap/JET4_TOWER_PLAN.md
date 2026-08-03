@@ -1089,3 +1089,11 @@ left-/right-inverse identities); K-relative weakening confirmed
 architecturally (consumers use only hKm.inter hSm) + 3 re-threaded
 levers; flow-ball discharge lemmas; CAPSTONE hKmeas_concrete_v5 ←
 {hSmK, hg, hgpos, hu, hChartP, hGateDiff}. std-3 raw 0. NOT a1=R/6.
+
+### J4-170 — OnGateFieldRegularity (LANDED 700d6c39)
+The SHARED field-slot regularity core: local-coincidence lever + the
+hCH comp tower lifted to general x₀ + on/off-gate C² + PdiffAt levers;
+hC2fam_from_chart + hGateDiff_from_chart (the exact consumer slots) +
+hGateDiff_hC2fam_shared_core (BOTH from one root). The one remaining
+regularity core = chart field-slot C² at general points (banked only at
+centre; IFT satisfiability). std-3 raw 0. NOT a1=R/6.
