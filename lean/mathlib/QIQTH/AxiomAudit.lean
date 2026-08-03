@@ -16236,4 +16236,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.capstone_hEboundW_le_supplied
 #print axioms QIQTH.HeatResidualBound.a1_R6_of_residue
 
+-- ★★★ J4-147 (SpatialC2.lean, ns HeatResidualBound): hCH DISCHARGED + hCConv REDUCED
+-- (indep build-verified). LANDED: hCH_discharge (ContDiffAt ℝ 2 of the witness spatial slice
+-- at 0 — GENUINELY PROVEN via the germ factorization on the open gate + the base-0 chart C²
+-- (chartField_contDiffAt_center) + factor-wise ContDiffAt composition (cutoff/gaussDdim/
+-- vanVleck-rpow/transport) + congr_of_eventuallyEq) + hCConv_reduction (the honest 2-layer
+-- structure via contDiffAt_succ_iff_hasFDerivAt: L1 the dominated first-derivative family +
+-- L2 C¹ of the derivative map — the singular second layer is the Laplacian-sliver content) +
+-- a1_R6_of_residue_hCH_discharged (hCH GONE from the residue; hCConv refactored; new
+-- carries only hSopen + hu transport-smoothness). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.hCH_discharge
+#print axioms QIQTH.HeatResidualBound.hCConv_reduction
+#print axioms QIQTH.HeatResidualBound.a1_R6_of_residue_hCH_discharged
+
 end QIQTH.AxiomAudit

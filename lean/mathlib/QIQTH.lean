@@ -346,6 +346,7 @@ import QIQTH.GeometricModuliThreading
 import QIQTH.LeviLipschitz
 import QIQTH.F2FamilyDischarge
 import QIQTH.CapstoneStatus
+import QIQTH.SpatialC2
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
