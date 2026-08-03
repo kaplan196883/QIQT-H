@@ -363,6 +363,7 @@ import QIQTH.WitnessDerivMeasurability
 import QIQTH.G2CarryDischarge
 import QIQTH.HenvUInstantiation
 import QIQTH.WitnessMeasDeriv
+import QIQTH.GateChartMeasurability
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -16514,4 +16514,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessMeasDeriv.hWdiff_from_gateDiff
 #print axioms QIQTH.WitnessMeasDeriv.hKmeas_concrete
 
+-- ★★★ J4-166 (GateChartMeasurability.lean, ns QIQTH.GateChartMeasurability): hKm+hIn round
+-- (indep build-verified): compactGate_measurableSet (hKm DISCHARGED — IsCompact.measurableSet);
+-- witnessInner_continuous (radialCutoff·heatParametrix spatially continuous ∀τ — NO τ>0
+-- restriction needed, radialCutoff_contDiff + heatParametrix_contDiff_space are unconditional);
+-- hIn_composed_aestronglyMeasurable (★ the composition lever — inner slice defeq
+-- (cutoff·parametrix)∘(Vmap · p), Continuous.comp_aestronglyMeasurable);
+-- hIn_concrete_of_chart_measurable + hIn_concrete_of_chart_continuous (the exact hIn slot
+-- ← {hw foldedCoeff-smoothness, hVmapMeas chart z-measurability}; continuity⟹measurability
+-- variant included); ★ hKmeas_concrete_v2 CAPSTONE — hKmeas ← {hSm, hw, hVmapMeas, hGateDiff}
+-- with hKm+hIn gone. Findings: S is a FREE variable at the capstone (hSm genuinely a carry);
+-- uniformInverseChart z-continuity banked only at p=0 on subsets (GeodesicGronwall/
+-- FlowJointRegularity ContinuousOn) — global hVmapMeas honestly carried. std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.GateChartMeasurability.compactGate_measurableSet
+#print axioms QIQTH.GateChartMeasurability.witnessInner_continuous
+#print axioms QIQTH.GateChartMeasurability.hIn_composed_aestronglyMeasurable
+#print axioms QIQTH.GateChartMeasurability.hIn_concrete_of_chart_measurable
+#print axioms QIQTH.GateChartMeasurability.hIn_concrete_of_chart_continuous
+#print axioms QIQTH.GateChartMeasurability.hKmeas_concrete_v2
+
 end QIQTH.AxiomAudit
