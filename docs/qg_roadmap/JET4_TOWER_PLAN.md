@@ -1097,3 +1097,12 @@ hC2fam_from_chart + hGateDiff_from_chart (the exact consumer slots) +
 hGateDiff_hC2fam_shared_core (BOTH from one root). The one remaining
 regularity core = chart field-slot C² at general points (banked only at
 centre; IFT satisfiability). std-3 raw 0. NOT a1=R/6.
+
+### J4-171 — ChartFieldC2General (LANDED f695250e) — REGULARITY CORE CLOSED
+KEY DISCOVERY: the chart is C² at EVERY reachable point already (the
+quantitative IFT ran inside the chart construction —
+uniformInverseChart_huniformChart). Abstract IFT identification core
+(reusable, generic Banach) + concrete no-hypothesis discharge + base-point
+non-vacuity witness + hFieldReg/hFieldReg2 families + the FULL
+hGateDiff∧hC2fam pipeline from reachable-gate geometry at one δ₀.
+std-3 raw 0. NOT a1=R/6.
