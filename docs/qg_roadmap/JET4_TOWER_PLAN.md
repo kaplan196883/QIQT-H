@@ -998,3 +998,8 @@ UniformCRDischarge.lean [AF std-3, raw 0 @ 9439]: the master-gap ∃-hoisting; n
 carried. NEXT: J4-158 = PartialsToFDeriv.lean (the classical continuous-partials⟹FDeriv
 theorem on Fin n — the identified reusable Mathlib gap; then hAssembly reduced to the
 partials' continuity).
+
+## J4-158 BANKED — 2026-08-04: THE CLASSICAL PARTIALS→FDERIV THEOREM
+PartialsToFDeriv.lean [AF std-3, raw 0 @ 9440; ns QIQTH.PartialsToFDeriv]: the reusable
+Mathlib-gap theorem proven in full + hAssembly closed-to-continuity.
+NEXT: J4-159 = the census refresh (J4-154..158 layer into A1_R6_RESIDUE_STATUS.md).
