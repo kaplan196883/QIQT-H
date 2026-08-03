@@ -369,6 +369,7 @@ import QIQTH.ChartGeneralPContinuity
 import QIQTH.GateSetMeasurability
 import QIQTH.OnGateFieldRegularity
 import QIQTH.ChartFieldC2General
+import QIQTH.ConcreteGateAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

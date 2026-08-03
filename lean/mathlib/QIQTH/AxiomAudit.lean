@@ -16641,4 +16641,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartFieldC2General.hFieldReg_from_reachableGate
 #print axioms QIQTH.ChartFieldC2General.hGateDiff_hC2fam_from_reachableGate
 
+-- ★★★ J4-172 (ConcreteGateAssembly.lean, ns QIQTH.ConcreteGateAssembly): the concrete
+-- flow-ball gate wiring (indep build-verified): reachableGate_concrete (S z = φ_z '' ball
+-- 0 c, 0<c<δ₀ — openness + left-inverse + reachability + C² ALL from the one banked
+-- uniformInverseChart_huniformChart spec); flowBallGate_hRI_onGate (the RIGHT-inverse
+-- DERIVED on the gate from the left inverse alone: φ_z(W z (φ_z v)) = φ_z v);
+-- hGateDiff_hC2fam_concrete (both witness slots for the concrete gate from bare COVERAGE
+-- families + hg/hgpos/hu); hKmeas_concrete_v6 (hLI/hChartP/hSmK/hGateDiff all internally
+-- discharged — carries {hGeomP = ∀p {hball,hnorm,hRI} on K, hMemNear coverage, hg, hgpos,
+-- hu}); hC2fam_concrete_final (carries just {hMemPt point-coverage, hg, hgpos, hu});
+-- l1_residue_status (the census reduction: {hGeomP, hMemNear, hMemPt, hg, hgpos, hu} ⟹
+-- concrete hKmeas ∧ hC2fam). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ConcreteGateAssembly.reachableGate_concrete
+#print axioms QIQTH.ConcreteGateAssembly.flowBallGate_hRI_onGate
+#print axioms QIQTH.ConcreteGateAssembly.hGateDiff_hC2fam_concrete
+#print axioms QIQTH.ConcreteGateAssembly.hKmeas_concrete_v6
+#print axioms QIQTH.ConcreteGateAssembly.hC2fam_concrete_final
+#print axioms QIQTH.ConcreteGateAssembly.l1_residue_status
+
 end QIQTH.AxiomAudit
