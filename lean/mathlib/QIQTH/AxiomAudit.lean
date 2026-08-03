@@ -16264,4 +16264,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hDaLimLU_discharge
 #print axioms QIQTH.HeatResidualBound.hDerivLU_discharge
 
+-- ★★★ J4-149 (FlowJointRegularity.lean, ns HeatResidualBound): THE JOINT-Q AUDIT + FIRST
+-- BRICK (indep build-verified). AUDIT FINDINGS (decisive): uniformFlowExp = opaque .choose
+-- over an EXPOSED geodesic ODE (uniformFlowTube_spec: IC + HasDerivAt geodesicField +
+-- confinement — CASE C, the two-solution Grönwall stability route is VIABLE); the
+-- BasepointJetModulus is per-v base-only (NOT joint); NO flow-reversal lemmas (the geodesic
+-- reversal bypass infeasible without the group law); the live consumer needs only the
+-- DIAGONAL z ↦ W z 0. LANDED: uniformFlowExp_antilipschitz_lower (inverse stability from
+-- ApproximatesLinearOn) + chart_joint_velocity_modulus (THE TRANSFER: ‖w−w'‖ ≤
+-- C_inv·(‖φ_q w − φ_{q'} w'‖ + ‖φ_{q'} w' − φ_q w'‖) — isolating the residue to the
+-- base-flow difference at fixed velocity) + gaussDdim_cont + hWmeas₀_of_continuousOn (the
+-- hWmeas₀ conditional discharge from the narrow hW0 continuity bridge). std-3 all.
+-- ⚠ NEXT: the two-solution Grönwall for the geodesic ODE (uniform Lipschitz of
+-- geodesicField on the confinement region + both tubes confined) ⟹ the base-flow difference
+-- → 0 ⟹ hW0 ⟹ hWmeas₀ unconditional. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_antilipschitz_lower
+#print axioms QIQTH.HeatResidualBound.chart_joint_velocity_modulus
+#print axioms QIQTH.HeatResidualBound.hWmeas₀_of_continuousOn
+
 end QIQTH.AxiomAudit
