@@ -770,3 +770,12 @@ NEXT: J4-130 = ChartJetHessian.lean (S1 exact Gaussian chain-rule Hessian for
 x ↦ gaussDdim τ (W z x): G·[⟨V,∂ᵢV⟩²/4τ² − (⟨∂ᵢV,∂ᵢV⟩+⟨V,∂ᵢ²V⟩)/2τ] + S2 Leibniz normal
 form toward the S6 canonical-Hermite + centerJet + remainder decomposition of
 witnessSecondXDeriv; jet hyps carried, C⁴-satisfiable).
+
+## J4-130 BANKED — 2026-08-03: THE CHART-JET HESSIAN (S1+S2+S3-seed, exact)
+ChartJetHessian.lean [AF std-3, raw 0 @ 9413]: gaussComp_pd/pd_pd (exact chart Hessian) +
+gaussComp_amp_pd_pd (Leibniz) + gaussComp_amp_center_decomp (canonical Hermite + EXACT odd
+centerJet + cross; no estimates). NO commutation carry.
+NEXT: J4-131 = GaussianMomentEnvelope.lean (S4 general ∫τ^{-m}‖z‖^k G_{κτ} ≤ Cτ^{k/2−m}
+envelope via 1-D moments k=0..4 + S5 quantitative cubic replacement |G_τ(Wz)−G_τ(z)| ≤
+C‖z‖³/τ·G_{κτ}(z) via MVT + chartW0_rncRadialSq_error + Gk_scaled; weighted corollary
+τ^{(k+1)/2}). Then S3 jet bounds + S6 assembly into sliver2_bound.
