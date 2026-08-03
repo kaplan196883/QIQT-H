@@ -965,3 +965,9 @@ z ↦ W z 0 LIPSCHITZ ⟹ hWmeas₀ unconditional (carried: hRI + on-domain). Th
 4×-surfaced base-point-regularity wall's C⁰/measurability layer is DOWN.
 NEXT: J4-151 = ResidueThreading.lean (T1 hRI re-export; T2 hLHSlim ⟸ U2; T3 hVol/hE1/hSlice;
 T4 gate-ball; T5 a1_R6_of_residue_v3 refresh).
+
+## J4-151 BANKED — 2026-08-03: THE THREADING SWEEP (hRI/hLHSlim/hVol/hInter GONE)
+ResidueThreading.lean [AF std-3, raw 0 @ 9434]: four residue items discharged; gate-ball
+derived modulo the cf floor; hWmeas₀'s hRI slot supplied; hInter removed from the capstone
+residue. NEXT: J4-152 = EngineInstantiation.lean (the dominated-engine dH/dHH concrete
+instantiation + the ε-pinning thread).
