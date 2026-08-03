@@ -16220,4 +16220,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hR_discharge
 #print axioms QIQTH.HeatResidualBound.hDuhamel_final_of_f2carries
 
+-- ★★★★ J4-146 (CapstoneStatus.lean, ns HeatResidualBound): THE CAPSTONE INVENTORY —
+-- a1_R6_of_residue (indep build-verified). LANDED: capstone_hHdiag_supplied (⟸ the J4-105
+-- diagonal evaluation) + capstone_hDH_supplied (⟸ J4-112 D3) + capstone_hEboundW_le_supplied
+-- (existential re-export of the J4-115 summit) + a1_R6_of_residue: THE STATE-OF-THE-ART —
+-- the a₁=R/6 capstone conclusion for the CONCRETE N=1 witness (heatOp(trueHeatKernel)=0 ∧
+-- the diagonal expansion with (Σ Ric i i)/6·t), conditional on the explicit machine-checked
+-- residue: GATE DATA + GAUGE (hg/hg0/hgi/hΓ/hdg0/htr/hsrc) + ANALYTIC {hEboundW_le, hInt,
+-- hDuhamel, hInter, hDConv, hCH, hCConv} — each analytic slot has a LANDED reduction
+-- supplier (S1 census in the header); the irreducible frontier inside = the joint base-point
+-- q-regularity (ODE-measurability, 3× surfaced) + the loc-unif delta-family hDaLimLU.
+-- std-3 all. NOT a₁ = R/6 UNCONDITIONALLY — the residue is real and enumerated.
+#print axioms QIQTH.HeatResidualBound.capstone_hHdiag_supplied
+#print axioms QIQTH.HeatResidualBound.capstone_hDH_supplied
+#print axioms QIQTH.HeatResidualBound.capstone_hEboundW_le_supplied
+#print axioms QIQTH.HeatResidualBound.a1_R6_of_residue
+
 end QIQTH.AxiomAudit
