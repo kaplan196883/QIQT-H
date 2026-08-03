@@ -1012,3 +1012,11 @@ The gcoef-continuity carry closed at the abstract + exact-shape level:
 shape). Remaining in this layer: the G2 per-(i,x₀) domination/continuity bundle
 for dH := witnessFieldDeriv (labelled; satisfiable from
 witnessFieldDeriv_gate_eq/_gate_abs_le) → J4-161. std-3 raw 0. NOT a1=R/6.
+
+### J4-161 — WitnessDerivDomination (LANDED d7e265af)
+The G2 concrete bundle for dH := witnessFieldDeriv: hzcont DISCHARGED
+(pd-of-C² continuity, exact G3 shape), hzint DISCHARGED (Gaussian envelope
+integrable, endpoint null), hzbound DISCHARGED IN SHAPE (x-free dominator
+(C₀·Cf)·G_{κ(t−s)}(z); near-regime envelope PROVEN from E2 + the
+chart-Gaussian carry). Open in G2: hzmeas/hsmeas/hsbound/hBint → J4-162.
+std-3 raw 0. NOT a1=R/6.
