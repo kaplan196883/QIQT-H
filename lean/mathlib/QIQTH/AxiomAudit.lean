@@ -16416,4 +16416,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GcoefContinuity.gcoef_continuity_discharge
 #print axioms QIQTH.GcoefContinuity.hCConv_L1_final
 
+-- ★★★ J4-161 (WitnessDerivDomination.lean, ns QIQTH.WitnessDerivDomination): the G2
+-- concrete domination bundle for dH := witnessFieldDeriv (indep build-verified):
+-- hzcont DISCHARGED (hzcont_witness — the exact G3 shape, from the carried field-slot-C²
+-- family via pd_continuousAt_of_contDiffAt + witnessFieldDeriv_continuousAt + the F-glue);
+-- hzint DISCHARGED (hzint_witness via envelope_integrable — Gaussian envelope integrable,
+-- endpoint {t} null); hzbound DISCHARGED IN SHAPE (hzbound_witness — x-free dominator
+-- (C₀·Cf)·gaussDdim (κ(t−s)) z from the bare-kernel envelope henv, itself grounded in the
+-- PROVED near-regime witnessFieldDeriv_gate_envelope, a multiplicative reduction on E2's
+-- witnessFieldDeriv_gate_abs_le with the x-free chart-Gaussian carry hgauss_env).
+-- Carries (satisfiable, never-the-conclusion): hC2fam (per SpatialC2 on-gate), hgauss_env
+-- (near-isometry coercivity geometry), henv, E2 gate data, hFbd. Still open in the G2
+-- layer: hzmeas/hsmeas/hsbound/hBint (measurability halves + outer s-layer). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.WitnessDerivDomination.pd_continuousAt_of_contDiffAt
+#print axioms QIQTH.WitnessDerivDomination.witnessFieldDeriv_continuousAt
+#print axioms QIQTH.WitnessDerivDomination.witnessFieldDeriv_mul_const_continuousAt
+#print axioms QIQTH.WitnessDerivDomination.hzcont_witness
+#print axioms QIQTH.WitnessDerivDomination.witnessFieldDeriv_gate_envelope
+#print axioms QIQTH.WitnessDerivDomination.hzbound_witness
+#print axioms QIQTH.WitnessDerivDomination.envelope_integrable
+#print axioms QIQTH.WitnessDerivDomination.hzint_witness
+
 end QIQTH.AxiomAudit

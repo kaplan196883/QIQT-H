@@ -358,6 +358,7 @@ import QIQTH.GeneralBaseJets
 import QIQTH.UniformCRDischarge
 import QIQTH.PartialsToFDeriv
 import QIQTH.GcoefContinuity
+import QIQTH.WitnessDerivDomination
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
