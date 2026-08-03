@@ -1132,3 +1132,11 @@ d(I_m f) = I_{m+1}(df). STRUCTURAL: top = omega = analytic here — the
 ray integral reaches all finite orders + infinity but not omega; hSolve
 sharpened to ray-integral analyticity; candidate = infinity-rebase of
 the hu chain (J4-175). std-3 raw 0. NOT a1=R/6.
+
+### J4-175 — HuInftyRebase (LANDED 43fba045) — HU CLOSED AT INFINITY
+The generic Banach rayIntegral C^inf tower (m->m+1 fderiv bumping,
+F-generalized induction) + radialTransportSolve_contDiff_infty (hSolve
+at infinity PROVEN) + transportOp infinity mirror + hu_infty_closed
+from {hg, hgi, hgpos} ONLY. Audit: no consumer genuinely needs omega;
+top->infinity rebases are one-token interface edits. std-3 raw 0.
+NOT a1=R/6.
