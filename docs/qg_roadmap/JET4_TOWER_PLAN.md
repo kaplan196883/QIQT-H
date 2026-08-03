@@ -1106,3 +1106,10 @@ uniformInverseChart_huniformChart). Abstract IFT identification core
 non-vacuity witness + hFieldReg/hFieldReg2 families + the FULL
 hGateDiff∧hC2fam pipeline from reachable-gate geometry at one δ₀.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-172 — ConcreteGateAssembly (LANDED a99862fa)
+The concrete flow-ball gate wired end-to-end: openness + left-inverse +
+reachability + C² all from the one banked chart spec; the right-inverse
+DERIVED on-gate; hKmeas_concrete_v6 ← {hGeomP, hMemNear, hg, hgpos, hu};
+hC2fam_concrete_final ← {hMemPt, hg, hgpos, hu}; l1_residue_status =
+the machine-checked census reduction. std-3 raw 0. NOT a1=R/6.
