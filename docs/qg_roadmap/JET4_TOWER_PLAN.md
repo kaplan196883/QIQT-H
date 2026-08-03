@@ -981,3 +981,9 @@ NEXT: J4-153 = the final-state documentation census (docs only), then the next r
 AmplitudeFamilyDischarge.lean [AF std-3, raw 0 @ 9436]: hAmp2 both bases + bounds + the
 general-base hWz provider (germ at the image point + right-inverse). NEXT: J4-155 =
 CConvLayerDischarge.lean (the hCConv L1 layer + the hdetz-general small lemma).
+
+## J4-155 BANKED — 2026-08-04: hdetz PROVEN + THE hCConv L1 LAYER
+CConvLayerDischarge.lean [AF std-3, raw 0 @ 9437]: hdetz (displacement route) +
+hConvDeriv_linewise (singular-limit dominated) + the exact L1 shape (assembly carry).
+NEXT: J4-156 = EGradDischarge.lean (ASSESS hEgrad third-jet wall first; pivot to the
+m-uniform C_R / uniform-in-z / general-base J1b if walled).
