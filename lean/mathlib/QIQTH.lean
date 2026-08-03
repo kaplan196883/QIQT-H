@@ -328,6 +328,7 @@ import QIQTH.SliverEstimates
 import QIQTH.AmplitudePackage
 import QIQTH.ChartGaussAdapter
 import QIQTH.ChartWrapperConcrete
+import QIQTH.InverseChartDisplacement
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

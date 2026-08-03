@@ -15923,4 +15923,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.chartGauss_concrete_sub_plain_tendsto
 #print axioms QIQTH.HeatResidualBound.witness_mul_split_on_gate
 
+-- ★★★ J4-129 (InverseChartDisplacement.lean, ns HeatResidualBound): BLOCKER (1) DISCHARGED —
+-- the INVERSE-CHART near-isometry derived from the tower's exp-side bound (indep
+-- build-verified). LANDED: chartW0_displacement (D1: ‖W₀ z + z‖ ≤ 4C_D·‖z‖² — the right
+-- inverse recovered via Mathlib ApproximatesLinearOn.surjOn_closedBall_of_nonlinearRightInverse
+-- + the germ pin, then the bootstrap; sign W₀ z ≈ −z, harmless by rnsq parity) +
+-- chartW0_rncRadialSq_error + chartW0_nearIsometry (D2: hcoarse₀ (c=1/2) + hasymp₀ in the
+-- EXACT carried shapes, for any S ⊆ K ∩ ball 0 r) + chartW0_l1_sub_plain_of_meas (the
+-- concrete L¹ kernel replacement with near-isometry FULLY discharged — only base
+-- measurability hWmeas₀ carried). std-3 all.
+-- ⚠ REMAINING BLOCKERS (honest): (2) base-point measurability/continuity of z ↦ W₀ z — the
+-- tower has NO base-point regularity of the flow map (only the second-jet operator-norm
+-- modulus, BasepointJetModulus); hWmeas₀ carried labelled; (3) gate-ball containment (cf
+-- floor). NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.chartW0_displacement
+#print axioms QIQTH.HeatResidualBound.chartW0_rncRadialSq_error
+#print axioms QIQTH.HeatResidualBound.chartW0_nearIsometry
+#print axioms QIQTH.HeatResidualBound.chartW0_l1_sub_plain_of_meas
+
 end QIQTH.AxiomAudit
