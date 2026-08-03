@@ -16534,4 +16534,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateChartMeasurability.hIn_concrete_of_chart_continuous
 #print axioms QIQTH.GateChartMeasurability.hKmeas_concrete_v2
 
+-- ★★★ J4-167 (FoldedCoeffChartMeas.lean, ns QIQTH.FoldedCoeffChartMeas): hw + restricted
+-- chart-measurability round (indep build-verified): foldedCoeff_vanVleck_contDiff +
+-- hw_discharged — hw DISCHARGED to {hg metric-smooth, hgpos det>0, hu transportCoeff-smooth}
+-- via banked vanVleck_contDiffAt/vanVleck_pos + rpow_const_of_ne (the Θ^{-1/2} half proven;
+-- radialTransportSolve smoothness genuinely unbanked ⟹ hu stays the standard carry).
+-- gatedKernel_slice_aestronglyMeasurable_of_restricted (★ the restricted lever —
+-- aestronglyMeasurable_indicator_iff + mono_measure: inner meas on volume.restrict K
+-- suffices for the FULL-volume gated slice) + hIn_composed_aestronglyMeasurable_ofMeasure +
+-- hInK_concrete_of_chartK_measurable + vanVleckGatedWitness_slice_aestronglyMeasurable_-
+-- ofRestricted + hWmeas_from_carries_restricted + hVmapMeasK_zero_of_geom (p=0 slice
+-- DISCHARGED from banked chartOrigin_continuousOn at S=K under its geometric side-conditions)
+-- + ★ hKmeas_concrete_v3 CAPSTONE: hKmeas ← {hSm, hg, hgpos, hu, hVmapMeasK (restricted-K,
+-- strictly weaker), hGateDiff}. General-p chart z-continuity confirmed genuinely unbanked.
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.FoldedCoeffChartMeas.foldedCoeff_vanVleck_contDiff
+#print axioms QIQTH.FoldedCoeffChartMeas.hw_discharged
+#print axioms QIQTH.FoldedCoeffChartMeas.gatedKernel_slice_aestronglyMeasurable_of_restricted
+#print axioms QIQTH.FoldedCoeffChartMeas.hIn_composed_aestronglyMeasurable_ofMeasure
+#print axioms QIQTH.FoldedCoeffChartMeas.hInK_concrete_of_chartK_measurable
+#print axioms QIQTH.FoldedCoeffChartMeas.vanVleckGatedWitness_slice_aestronglyMeasurable_ofRestricted
+#print axioms QIQTH.FoldedCoeffChartMeas.hWmeas_from_carries_restricted
+#print axioms QIQTH.FoldedCoeffChartMeas.hVmapMeasK_zero_of_geom
+#print axioms QIQTH.FoldedCoeffChartMeas.hKmeas_concrete_v3
+
 end QIQTH.AxiomAudit
