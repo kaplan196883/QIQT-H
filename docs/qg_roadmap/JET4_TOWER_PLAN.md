@@ -854,3 +854,12 @@ L2 finite-gap Δ↔∫ interchange (labelled family OK); L3 the sliver-differenc
 limit via witness_sliver2_concrete rate √ε_m; L4 hDaLimLU assembly: Da = LapTrunc + Etrunc
 (proven) + L3 ⟹ Tendsto Da → Δ_x(H*F)+E*F = THE hDuhamel_of_daLim target — the conditional
 hDaLimLU discharge).
+
+## J4-139 BANKED — 2026-08-03: ★ THE CONDITIONAL hDaLimLU DISCHARGE ★
+LapTruncAssembly.lean [AF std-3, raw 0 @ 9422]: hDaLim_full (DaTrunc → Δ_g(H*F)+E*F) +
+hDuhamel_assembled (heatOp(H*F) = F + E*F end-to-end). The hDaLim carry — THE sole hard
+limit the whole Duhamel wall funneled into — is discharged conditional on the explicit
+residue: {hgi/hΓ, hInterchange, hLapFull, hII, B/hSliver/hBlim (⟸ sliver-2), 4 proven-lemma
+outputs}. NEXT: J4-140 = SliverSumPlumbing.lean (P1 hSliver/hBlim instantiation; P2 thread
+the 4 proven lemmas ⟹ hDuhamel_semifinal; P3 begin hInterchange). Then the deep residue +
+final assembly.
