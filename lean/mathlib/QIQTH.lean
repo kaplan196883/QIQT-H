@@ -329,6 +329,7 @@ import QIQTH.AmplitudePackage
 import QIQTH.ChartGaussAdapter
 import QIQTH.ChartWrapperConcrete
 import QIQTH.InverseChartDisplacement
+import QIQTH.ChartJetHessian
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

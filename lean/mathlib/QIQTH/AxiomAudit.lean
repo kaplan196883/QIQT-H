@@ -15941,4 +15941,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.chartW0_nearIsometry
 #print axioms QIQTH.HeatResidualBound.chartW0_l1_sub_plain_of_meas
 
+-- ★★ J4-130 (ChartJetHessian.lean, ns HeatResidualBound): the CHART-JET GAUSSIAN HESSIAN —
+-- S1+S2+S3-seed of the sliver-2 chart program (indep build-verified; NO carried commutation:
+-- the pd-of-normal-form route closed pd∘pd honestly). LANDED: gaussComp_pd (S1a: pd of
+-- G(V·) = G·(−⟨V,P⟩/2τ)) + gaussComp_pd_pd (S1b: the exact chart Hessian
+-- G·[⟨V,P⟩²/4τ² − (⟨P,P⟩+⟨V,Q⟩)/2τ]) + gaussComp_amp_pd_pd (S2: 3-term Leibniz with
+-- amplitude jets) + gaussComp_amp_center_decomp (S3-seed: x₀=0 exact regrouping into the
+-- canonical Hermite piece + the EXACT odd-parity centerJet −⟨Y,Q⟩/2τ·G·A0 + cross/mass terms
+-- — no estimates, parity preserved for the later cancellation). Jet hypotheses = satisfiable
+-- C⁴-tower facts. pd convention: pd f i x = deriv (fun t => f (update x i t)) (x i);
+-- witness x-slot = the FIELD point (chart V := uniformInverseChart z ·). std-3 all.
+-- ⚠ NEXT: S4 weighted-moment envelopes + S5 quantitative cubic replacement + S3 jet bounds
+-- + S6 estimates feeding sliver2_bound. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussComp_pd
+#print axioms QIQTH.HeatResidualBound.gaussComp_pd_pd
+#print axioms QIQTH.HeatResidualBound.gaussComp_amp_pd_pd
+#print axioms QIQTH.HeatResidualBound.gaussComp_amp_center_decomp
+
 end QIQTH.AxiomAudit
