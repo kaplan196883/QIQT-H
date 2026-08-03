@@ -16659,4 +16659,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConcreteGateAssembly.hC2fam_concrete_final
 #print axioms QIQTH.ConcreteGateAssembly.l1_residue_status
 
+-- ★★★ J4-173 (GeomPTransportAssess.lean, ns QIQTH.GeomPTransportAssess): the hGeomP audit
+-- + hu assessment (indep build-verified). ⚠ HONEST CORRECTION: v6's hGeomP is
+-- UNSATISFIABLE-IN-GENERAL (unrestricted ∀p right-inverse fails beyond the injectivity
+-- reach ⟹ hKmeas_concrete_v6 is VACUOUS for general metrics — superseded, kept only as a
+-- stepping stone; do NOT cite v6). ★ hKmeas_concrete_v7 — the honest re-thread: per-p
+-- DISJUNCTION {hball,hnorm,hRI} at p OR {MeasurableSet (K ∩ gate-set), restricted-K slice
+-- measurability} (the paired RIGHT branch is REQUIRED — ae-measurability alone can't
+-- manufacture the measurable set); ball-hLI derived internally; both branches satisfiable,
+-- disjunction total. hu: radialTransportSolve IS the explicit parametric integral
+-- ∫ s in 0..1, s^(k-1)·f(s•v) (NOT .choose); ★ radialTransportSolve_continuous PROVEN
+-- (parametric-interval-integral continuity) + transportCoeff_continuous_of_preserve (the
+-- continuity-level hu analogue, fully proved); hu REDUCED not claimed via
+-- hu_of_solve_smooth + hu_concrete_of_solve_smooth (induction from two operator-level
+-- premises hSolve/hT — C^∞-under-the-integral not in Mathlib). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GeomPTransportAssess.hKmeas_concrete_v7
+#print axioms QIQTH.GeomPTransportAssess.radialTransportSolve_continuous
+#print axioms QIQTH.GeomPTransportAssess.transportCoeff_continuous_of_preserve
+#print axioms QIQTH.GeomPTransportAssess.hu_of_solve_smooth
+#print axioms QIQTH.GeomPTransportAssess.hu_concrete_of_solve_smooth
+
 end QIQTH.AxiomAudit
