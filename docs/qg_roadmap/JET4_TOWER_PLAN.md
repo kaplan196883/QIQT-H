@@ -1140,3 +1140,9 @@ at infinity PROVEN) + transportOp infinity mirror + hu_infty_closed
 from {hg, hgi, hgpos} ONLY. Audit: no consumer genuinely needs omega;
 top->infinity rebases are one-token interface edits. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-176 — census refresh (LANDED 6e5c09cd)
+Verified addendum in A1_R6_RESIDUE_STATUS.md: J4-160..175 brick table
+(every theorem re-read), the honest L1 residue, the v6 correction, the
+tractability verdict. hjoint confirmed the last open G2 slot; hu now
+DERIVED (not parallel-carried); walls unchanged. NOT a1=R/6.
