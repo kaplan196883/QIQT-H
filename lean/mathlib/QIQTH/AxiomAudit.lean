@@ -16619,4 +16619,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OnGateFieldRegularity.hGateDiff_from_chart
 #print axioms QIQTH.OnGateFieldRegularity.hGateDiff_hC2fam_shared_core
 
+-- ★★★ J4-171 (ChartFieldC2General.lean, ns QIQTH.ChartFieldC2General): the chart field-C²
+-- general-point brick (indep build-verified). KEY DISCOVERY (don't-under-credit vindicated):
+-- uniformInverseChart_huniformChart ALREADY delivers ContDiffAt ℝ 2 at EVERY reachable
+-- point φ_z v (‖v‖ < δ₀) — the quantitative IFT was run inside the chart construction.
+-- chartField_contDiffAt_of_leftInverse_germ (★ the abstract IFT identification core,
+-- generic RCLike/Banach: C^N φ + invertible HasFDerivAt + left-inverse germ ⟹ C^N of the
+-- inverse at φ v₀, via to_localInverse + localInverse_unique + congr_of_eventuallyEq);
+-- chartField_contDiffAt_reachable_uniform (★ the concrete discharge — NO metric hyps);
+-- chartField_contDiffAt_basePoint_viaIFT (the abstract core fully instantiated at the base
+-- point from contDiffAt2_uniformFlowExp + fderiv-near-id + the germ — non-vacuity witness);
+-- hFieldReg2_from_reachableGate + hFieldReg_from_reachableGate (J4-170's families from
+-- pure reachable-gate geometry) + ★★★ hGateDiff_hC2fam_from_reachableGate (the FULL
+-- pipeline: BOTH exact witness slots — PdiffAt ∧ ContDiffAt-2 families — from
+-- reachable-gate geometry at one uniform δ₀ + hg/hgpos/hu). Off-centre strict-derivative
+-- equiv (no-conjugate-points wall) NOT needed. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ChartFieldC2General.chartField_contDiffAt_of_leftInverse_germ
+#print axioms QIQTH.ChartFieldC2General.chartField_contDiffAt_reachable_uniform
+#print axioms QIQTH.ChartFieldC2General.chartField_contDiffAt_basePoint_viaIFT
+#print axioms QIQTH.ChartFieldC2General.hFieldReg2_from_reachableGate
+#print axioms QIQTH.ChartFieldC2General.hFieldReg_from_reachableGate
+#print axioms QIQTH.ChartFieldC2General.hGateDiff_hC2fam_from_reachableGate
+
 end QIQTH.AxiomAudit
