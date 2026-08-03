@@ -750,3 +750,13 @@ the literal hAnear!). Carried: B4 assembly + concrete hcoarse/hasymp (J4-128).
 NEXT: J4-128 = ChartWrapperConcrete.lean: C1 hcoarse/hasymp discharge from NearIsometryBudget
 (|rnsq(Wz)−rnsq z| ≤ 2‖z‖·‖Wz−z‖+‖Wz−z‖² algebra; shrink-or-tails for the full gate);
 C2 center values ũ₀ 0 = 1 + bounds; C3 boundary_chart_wrapper_concrete assembly.
+
+## J4-128 BANKED — 2026-08-03: CONCRETE WRAPPER LAYER + THE ISOLATED INPUTS
+ChartWrapperConcrete.lean [AF std-3, raw 0 @ 9411]: center values DONE (ũ₀ 0 = 1 = hu₀one!;
+chartAmp1_at_zero = the R/6 seed) + concrete B1/B2 + the C3 split scaffold. Isolated inputs:
+(1) inverse-chart near-isometry (exp-side→W-side bootstrap, J4-129); (2) base-point
+continuity/measurability of z ↦ W₀ z (.choose obstacle); (3) gate-ball containment.
+NEXT: J4-129 = InverseChartDisplacement.lean: D1 the bootstrap ‖v₀ ± z‖ ≤ C‖z‖² from
+φ_z(v₀) = 0 + exp displacement (SIGN: W z 0 ≈ −z; rnsq is even — fine); D2 hasymp₀/hcoarse₀
+in the exact carried shapes; D3 measurability via uniqueness/selection or honest carry;
+D4 gate-ball via cf floor; D5 boundary_chart_wrapper_final.
