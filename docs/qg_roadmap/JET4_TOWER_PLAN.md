@@ -933,3 +933,19 @@ DaLimLocUnif.lean [AF std-3, raw 0 @ 9431]: U1-U4 all landed; both consumer shap
 NOTE: hLHSlim (the Δ_g(frozen)→Δ_g(full) limit) = U2's lapTrunc_tendstoUniformlyOn content
 — threadable. NEXT: Sol consult on the JOINT-Q WALL (measurable-selection vs re-construction
 routes), then J4-149 per verdict.
+
+## SOL JOINT-Q VERDICT (consult 2026-08-03 #4): ATTACK THE FORWARD FLOW
+Routes rated: measurable-selection REJECTED (no jets); outer-envelopes REJECTED; the plan:
+Step 0 AUDIT (#print BasepointJetModulus/uniformFlowExp — is the modulus (q,v)-joint or
+per-q? what is the flow's construction: ODE/Picard/series/choose?; classify P/Q consumers:
+W z 0 only vs moving-base jets); Step 1 the quantitative joint Lipschitz
+uniformFlowExp_lipschitzOn_base_field (Grönwall on the phase-space ODE with frozen-q
+augmentation, or iterate-limit continuity for Picard/series constructions); Step 2 the
+chart transfer ‖W q p − W q' p'‖ ≤ C(‖p−p'‖ + flow-modulus) via the ApproximatesLinearOn
+lower-Lipschitz — closes hWmeas₀ + amplitude measurability WITHOUT chart refactor (the
+closed-graph route also valid but the quantitative estimate is shorter); Step 3 vertical
+jets if the modulus is joint; Step 4 the sliver jets: CHECK the geodesic-reversal bypass
+W z 0 = −D_v exp₀(W 0 z)[W 0 z] (fixed-base only — could bypass base-point C² entirely for
+the diagonal map!) before the variational-equation C² campaign (HIGH difficulty, limited
+Mathlib turnkey support). Restricted-measure note: measurability may need volume.restrict K
+or a canonical extension.
