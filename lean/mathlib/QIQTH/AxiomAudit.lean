@@ -16362,4 +16362,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hConvDeriv_linewise
 #print axioms QIQTH.HeatResidualBound.hCConv_L1_of_partialsContinuity
 
+-- ★★ J4-156 (GeneralBaseJets.lean, ns HeatResidualBound): GENERAL-BASE J1b SECOND JETS
+-- (indep build-verified) + THE F3 ASSESSMENT. VERDICTS: hEgrad = a genuine 3-5-brick
+-- third-jet layer (the field-slot chart is only C²; needs gaussComp_pd_pd_pd + third
+-- moments — deferred); m-uniform C_R = tractable plumbing (strip-level constants, the
+-- sliver-sum layer re-exposure); J1b = EXECUTED. LANDED: hasDerivAt_update_line +
+-- chartField_firstJet_nhds_of_contDiffAt (the near-0 hJetV shape) +
+-- chartField_secondJet_of_contDiffAt (★ the J1b hJetP existence via ContDiffAt.fderiv_right)
+-- + chartField_secondJet_general (the bundle in hNormalForm_concrete's exact shapes) +
+-- chartField_secondJet_center (z=0 UNCONDITIONAL) + chartField_secondJet_domain (∀ z ∈ the
+-- domain via the germ-at-image-point provider). std-3 all.
+-- ⚠ CARRIED: the global ∀x hJetV, the z-modulus ‖Q z‖ ≤ C_Q (the J3 base-point item),
+-- D²V₀(0)=0. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.chartField_secondJet_of_contDiffAt
+#print axioms QIQTH.HeatResidualBound.chartField_secondJet_general
+#print axioms QIQTH.HeatResidualBound.chartField_secondJet_domain
+
 end QIQTH.AxiomAudit
