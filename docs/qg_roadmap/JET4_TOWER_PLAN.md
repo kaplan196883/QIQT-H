@@ -871,3 +871,11 @@ INTEGRABILITY · GEOMETRIC-MODULI {hbnd distilled — ε-uniformization small br
 AMPLITUDE · DOMINATION · F2 · MEASURABILITY.
 NEXT: J4-141 = SecondOrderInterchange.lean (Q1 first-order differentiation under ∫∫ at the
 finite gap; Q2 second-order; Q3 hLapFull improper route; Q4 thread hDa/hLap).
+
+## J4-141 BANKED — 2026-08-03: hInterchange DISCHARGED (the riskiest INTERCHANGE carry)
+SecondOrderInterchange.lean [AF std-3, raw 0 @ 9424]: Q1+Q2 second-order under-∫∫ at the
+finite gap + hInterchange_discharge VERBATIM. Carried: dominated-engine families
+(C4b-satisfiable) + hQ1-nbhd + hpdpdH. NEXT: J4-142 = InterchangeThreading.lean (T1 hDa/hLap
+threading via hDa_trunc + hInterchange_discharge ⟹ hEcomb_discharged; T2 hLapFull reduction
+(Q2-instances + hLHSlim carry + sliver rate ⟹ uniqueness-of-limits); T3 hDuhamel_penultimate
+with the INTERCHANGE group reduced).
