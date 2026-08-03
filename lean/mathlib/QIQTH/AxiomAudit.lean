@@ -16348,4 +16348,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.amp_bound_general
 #print axioms QIQTH.HeatResidualBound.chartField_contDiffAt_center_general
 
+-- ★★ J4-155 (CConvLayerDischarge.lean, ns HeatResidualBound): hdetz + THE hCConv L1 LAYER
+-- (indep build-verified). LANDED: hdetz_general (0 < det(g(W₀ z)) on a ball — det continuity
+-- + the RNC gauge + the DISPLACEMENT-route continuity of W₀ at 0, no Grönwall needed) +
+-- hConvDeriv_linewise (the per-coordinate first spatial derivative of the conv under both
+-- integrals AT THE SINGULAR gap-free limit — the dominated engine with the NON-constant
+-- interval-integrable (t−s)^{−1/2} dominator) + hCConv_L1_of_partialsContinuity (the EXACT
+-- L1/hfam shape of SpatialC2.hCConv_reduction, from linewise + the labelled partials→FDeriv
+-- assembly — no general Fin-n-domain Mathlib lemma exists, verified). std-3 all.
+-- ⚠ CARRIED: the s-domination bundle (C4b-dischargeable) + hAssembly (partials→FDeriv
+-- continuity). NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.hdetz_general
+#print axioms QIQTH.HeatResidualBound.hConvDeriv_linewise
+#print axioms QIQTH.HeatResidualBound.hCConv_L1_of_partialsContinuity
+
 end QIQTH.AxiomAudit
