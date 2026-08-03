@@ -16202,4 +16202,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.resolvent_lipschitz_pointwise
 #print axioms QIQTH.HeatResidualBound.hqLip_discharge
 
+-- ★★★ J4-145 (F2FamilyDischarge.lean, ns HeatResidualBound): THE F2-REGULARITY GROUP CLOSED
+-- (indep build-verified). LANDED: heatConvInner_intervalIntegrable_H (R4: hFII — the H*F
+-- pairing mirror, only hMeasFII carried) + htime_pointwise/htime_discharge (R1: FTC
+-- upper-limit at the gap via integral_hasDerivAt_right + LOCAL continuity — the global
+-- wrapper is unusable at the frozen-at-u singularity, noted) + hpar_pointwise/hpar_discharge
+-- (R2: the C3ε engine; the DaTrunc derivative slot definitional) + hR_of_crossBound +
+-- hR_discharge (R3: the little-o proof DONE here — mixed second difference ≤ L|h||k| ≤
+-- c‖v‖·‖v‖ ⟹ HasFDerivAt 0; only the cross-Lipschitz hCross carried) +
+-- hDuhamel_final_of_f2carries (R5: all four F2 slots of hDuhamel_final threaded — the
+-- Duhamel output conditional only on the boundary interface + hDaLimLU-loc-unif). std-3 all.
+-- ⚠ CARRIES: hMeasFII + hInnerCont + hUfloor + the C3ε engine interface + hCross — all
+-- satisfiable, C4b/domination-sourced. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.heatConvInner_intervalIntegrable_H
+#print axioms QIQTH.HeatResidualBound.htime_discharge
+#print axioms QIQTH.HeatResidualBound.hpar_discharge
+#print axioms QIQTH.HeatResidualBound.hR_discharge
+#print axioms QIQTH.HeatResidualBound.hDuhamel_final_of_f2carries
+
 end QIQTH.AxiomAudit
