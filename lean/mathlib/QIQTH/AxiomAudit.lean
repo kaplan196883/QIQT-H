@@ -16575,4 +16575,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartGeneralPContinuity.hVmapMeasK_of_geomOrMeas
 #print axioms QIQTH.ChartGeneralPContinuity.hKmeas_concrete_v4
 
+-- ★★★ J4-169 (GateSetMeasurability.lean, ns QIQTH.GateSetMeasurability): hSm round
+-- (indep build-verified): mem_flowBall_iff_chart (the equivalence lever, BOTH directions:
+-- p ∈ φ_z '' ball ⟺ W z p ∈ ball — → from the banked left-inverse germ on the ball,
+-- ← from the right-inverse identity already carried by chartP). Architectural finding
+-- CONFIRMED: every consumer uses hKm/hSm only as hKm.inter hSm ⟹ the K-relative
+-- MeasurableSet (K ∩ {z|p∈S z}) suffices (strictly weaker). K-relative re-thread:
+-- gatedKernel_slice_..._of_restricted_Krel + vanVleckGatedWitness_..._ofRestricted_Krel +
+-- hWmeas_from_carries_restricted_Krel. Flow-ball discharge:
+-- chartPreimageBall_Krel_measurableSet (chartP_continuousOn + continuousOn_iff' rel-open)
+-- + flowBallGate_Krel_measurableSet + flowBallGate_hSmK_of_geom (raw-geometry form).
+-- ★ hKmeas_concrete_v5 CAPSTONE: hKmeas ← {hSmK (weaker, flow-ball-dischargeable), hg,
+-- hgpos, hu, hChartP, hGateDiff}. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GateSetMeasurability.mem_flowBall_iff_chart
+#print axioms QIQTH.GateSetMeasurability.chartPreimageBall_Krel_measurableSet
+#print axioms QIQTH.GateSetMeasurability.flowBallGate_Krel_measurableSet
+#print axioms QIQTH.GateSetMeasurability.flowBallGate_hSmK_of_geom
+#print axioms QIQTH.GateSetMeasurability.gatedKernel_slice_aestronglyMeasurable_of_restricted_Krel
+#print axioms QIQTH.GateSetMeasurability.vanVleckGatedWitness_slice_aestronglyMeasurable_ofRestricted_Krel
+#print axioms QIQTH.GateSetMeasurability.hWmeas_from_carries_restricted_Krel
+#print axioms QIQTH.GateSetMeasurability.hKmeas_concrete_v5
+
 end QIQTH.AxiomAudit
