@@ -1029,3 +1029,12 @@ L1 continuity chain is now structurally complete, resting on the six-carry
 labelled residue {hC2fam, henv, hKmeas, hFmeas, hjoint, hdomS} (each
 satisfiable). Next: discharge the carries concretely (J4-163) or the census
 tractables. std-3 raw 0. NOT a1=R/6.
+
+### J4-163 — G2CarryDischarge (LANDED 885c88f0)
+The six-carry round: gaussDdim_coercivity_envelope (the geometric core —
+coercivity ⟹ G_τ(w) ≤ (√2)ⁿ·G_{2τ}(base), τ-free constant) +
+witnessFieldDeriv_gate_envelope_coercive (hgauss_env carry gone) +
+hdomS_from_uniform + pd_aestronglyMeasurable_of_slice (reusable lever) +
+hKmeas_from_witness. L1 residue now {hC2fam (genuine general-centre C²),
+henvU instantiation, hWmeas+hWdiff, hjoint, hFmeas}. std-3 raw 0.
+NOT a1=R/6.
