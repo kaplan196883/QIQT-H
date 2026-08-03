@@ -16474,4 +16474,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.G2CarryDischarge.pd_aestronglyMeasurable_of_slice
 #print axioms QIQTH.G2CarryDischarge.hKmeas_from_witness
 
+-- ★★★ J4-164 (HenvUInstantiation.lean, ns QIQTH.HenvUInstantiation): the henvU/henv
+-- instantiation (indep build-verified): pd_eq_zero_of_line_eventuallyEq_zero +
+-- pd_eq_zero_of_eventuallyEq_zero (off-gate pd-vanishing levers, reusable);
+-- henvU_assembled (the EXACT henvU slot: |witnessFieldDeriv i (t−s) x z| ≤
+-- (Bs·Ba+Bd)·(√2)ⁿ · gaussDdim (2(t−s)) z, κ=2, from the hGateData x-uniform on/off-gate
+-- dichotomy — off-gate z∉K kills the witness for ALL x via witnessFieldDeriv_offGate_eq_zero,
+-- on-gate = the coercive-envelope hypotheses); henv_assembled (the ∀ᵐs→∀ᶠx variant);
+-- capstones hdomS_assembled + hzbound_assembled (fed through hdomS_from_uniform /
+-- hzbound_witness — the concrete F-weighted dominator slots). Envelope branch residue =
+-- {hGateData(') dichotomy, hFbd}; hGateData satisfiable (off-gate genuine membership;
+-- on-gate inhabited with jet banked at centre + coercivity banked base-uniform at field
+-- point 0 — field-uniformity honestly inside the carry, noted). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HenvUInstantiation.pd_eq_zero_of_line_eventuallyEq_zero
+#print axioms QIQTH.HenvUInstantiation.pd_eq_zero_of_eventuallyEq_zero
+#print axioms QIQTH.HenvUInstantiation.henvU_assembled
+#print axioms QIQTH.HenvUInstantiation.henv_assembled
+#print axioms QIQTH.HenvUInstantiation.hdomS_assembled
+#print axioms QIQTH.HenvUInstantiation.hzbound_assembled
+
 end QIQTH.AxiomAudit

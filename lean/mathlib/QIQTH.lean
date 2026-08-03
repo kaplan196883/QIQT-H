@@ -361,6 +361,7 @@ import QIQTH.GcoefContinuity
 import QIQTH.WitnessDerivDomination
 import QIQTH.WitnessDerivMeasurability
 import QIQTH.G2CarryDischarge
+import QIQTH.HenvUInstantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
