@@ -334,6 +334,7 @@ import QIQTH.GaussianMomentEnvelope
 import QIQTH.ChartJetBounds
 import QIQTH.SliverAssembly
 import QIQTH.InnerSliceBounds
+import QIQTH.HessianSliceBound
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

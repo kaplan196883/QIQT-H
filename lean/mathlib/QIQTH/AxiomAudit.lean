@@ -16027,4 +16027,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hInner1_discharge
 #print axioms QIQTH.HeatResidualBound.hInner2_discharge
 
+-- ★★★ J4-135 (HessianSliceBound.lean, ns HeatResidualBound): I0 + THE I3 MILESTONE (indep
+-- build-verified). LANDED: oneD_absMoment5..9 (the full moment tower — odd k via the banked
+-- AM-GM step oneD_absMoment_odd) + hessianPlain_slice_bound (T_E3: the EXACT ∫∂ᵢ²G = 0
+-- cancellation delivered at the (15/2·n·L)·τ^{−1/2} rate) + polyChartDiff_abs_bound (T_E2
+-- pointwise via all four T1' bridges) + hInner0_discharge (I0: the EXACT hInner0 shape,
+-- C₀ = 15/2·n·L + C_R) + witness_sliver2_final (I3: the COMPOSITE — the full concrete
+-- sliver-2 bound ≤ (C₀+C₁)·2√ε + C₂·ε with all three slices discharged). std-3 all.
+-- ⚠ CARRIED (honest): hRem (the T_E1+T_E2 entangled remainder ≤ C_R·τ^{−1/2} — satisfiable,
+-- identically 0 in the model Y=−id/P=eᵢ/Q=0; the full discharge = pure moment integration
+-- with the now-complete toolset: polyChartDiff_abs_bound + M5-M9 + gaussDdim_replace_bound;
+-- next brick) + hqLip + geometric/amplitude inputs. The exact cancellation content is IN;
+-- only the cancellation-FREE polynomial remainder is carried. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.oneD_absMoment5
+#print axioms QIQTH.HeatResidualBound.hessianPlain_slice_bound
+#print axioms QIQTH.HeatResidualBound.polyChartDiff_abs_bound
+#print axioms QIQTH.HeatResidualBound.hInner0_discharge
+#print axioms QIQTH.HeatResidualBound.witness_sliver2_final
+
 end QIQTH.AxiomAudit
