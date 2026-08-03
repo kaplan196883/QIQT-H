@@ -16186,4 +16186,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.epsSeq_antitone
 #print axioms QIQTH.HeatResidualBound.hbnd_from_eventual
 
+-- ★★★ J4-144 (LeviLipschitz.lean, ns HeatResidualBound): hFLocLip/hqLip DISCHARGED via the
+-- RESOLVENT route (indep build-verified) — the last genuinely-new analytic input of the
+-- Duhamel residue. LANDED: norm_sub_le_of_fderiv_bound (the segment MVT) + E_slice_lipschitz
+-- + heatConv_diff_bound (the GENUINE (s−r)^{−1/2} → 2√s integration via the reflected-sliver
+-- pattern) + resolvent_lipschitz_pointwise (|F s z 0 − F s z' 0| ≤ (L_E + K·2√s)·dist z z'
+-- from the Volterra identity F = −E − E*F — NO termwise Levi differentiation) +
+-- abs_F_le_diagonal (the F-sup peak bound) + hqLip_discharge (the EXACT consumer triple:
+-- Lipschitz + AEStronglyMeasurable + bounded for z ↦ A₀·F, product rule). std-3 all.
+-- ⚠ CARRIED (labelled, satisfiable): hVol (= leviSeries_volterra output), hE1 (⟸ the
+-- gradient carry via E_slice_lipschitz), hSlice (the per-r ζ-collapse — Sol's recommended
+-- interface), inner integrabilities, amplitude Lipschitz/sup/meas. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.norm_sub_le_of_fderiv_bound
+#print axioms QIQTH.HeatResidualBound.heatConv_diff_bound
+#print axioms QIQTH.HeatResidualBound.resolvent_lipschitz_pointwise
+#print axioms QIQTH.HeatResidualBound.hqLip_discharge
+
 end QIQTH.AxiomAudit
