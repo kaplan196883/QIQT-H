@@ -1082,3 +1082,10 @@ hVmapMeasK_at_p_of_geom + the honest per-p disjunction
 hVmapMeasK_of_geomOrMeas (far p not overclaimed). CAPSTONE
 hKmeas_concrete_v4 ← {hSm, hg, hgpos, hu, hChartP, hGateDiff}.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-169 — GateSetMeasurability (LANDED 23774e15)
+Flow-ball hSm: mem_flowBall_iff_chart (both directions, from the banked
+left-/right-inverse identities); K-relative weakening confirmed
+architecturally (consumers use only hKm.inter hSm) + 3 re-threaded
+levers; flow-ball discharge lemmas; CAPSTONE hKmeas_concrete_v5 ←
+{hSmK, hg, hgpos, hu, hChartP, hGateDiff}. std-3 raw 0. NOT a1=R/6.
