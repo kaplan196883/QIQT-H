@@ -1065,3 +1065,12 @@ Findings: S free at the capstone (hSm genuine); chart z-continuity
 banked only p=0-on-subsets (hVmapMeas honest carry). L1 residue:
 {hC2fam, hGateData('), hSm, hw, hVmapMeas, hGateDiff, hjoint, hFmeas}.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-167 — FoldedCoeffChartMeas (LANDED fdf89a67)
+hw DISCHARGED (Θ^{-1/2} prefactor proven from vanVleck_contDiffAt +
+vanVleck_pos; residue {hg, hgpos, hu} — radialTransportSolve smoothness
+genuinely unbanked). The restricted-K measurability route (indicator-iff
+lever: inner meas on volume.restrict K suffices) + p=0 chart slice
+DISCHARGED (chartOrigin_continuousOn at S=K). CAPSTONE hKmeas_concrete_v3
+← {hSm, hg, hgpos, hu, hVmapMeasK restricted-K, hGateDiff}. std-3 raw 0.
+NOT a1=R/6.
