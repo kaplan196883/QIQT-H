@@ -971,3 +971,8 @@ ResidueThreading.lean [AF std-3, raw 0 @ 9434]: four residue items discharged; g
 derived modulo the cf floor; hWmeas₀'s hRI slot supplied; hInter removed from the capstone
 residue. NEXT: J4-152 = EngineInstantiation.lean (the dominated-engine dH/dHH concrete
 instantiation + the ε-pinning thread).
+
+## J4-152 BANKED — 2026-08-03: THE ENGINE INSTANTIATION
+EngineInstantiation.lean [AF std-3, raw 0 @ 9435]: the concrete dH/dHH kernels + on-gate
+formulas + domination + the concrete second-order interchange + the ε-pinning.
+NEXT: J4-153 = the final-state documentation census (docs only), then the next residue brick.
