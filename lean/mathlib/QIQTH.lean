@@ -341,6 +341,7 @@ import QIQTH.NormalFormDischarge
 import QIQTH.LapTruncAssembly
 import QIQTH.SliverSumPlumbing
 import QIQTH.SecondOrderInterchange
+import QIQTH.InterchangeThreading
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

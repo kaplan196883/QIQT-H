@@ -16154,4 +16154,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.pd_pd_heatConvFrozen_interchange
 #print axioms QIQTH.HeatResidualBound.hInterchange_discharge
 
+-- ★★★ J4-142 (InterchangeThreading.lean, ns HeatResidualBound): THE INTERCHANGE GROUP CLOSED
+-- (indep build-verified). LANDED: hDa_threaded (hDa_trunc per-m thread — shapes identical) +
+-- hLap_threaded (the honest Δ↔pd∘pd adapter: lapTrunc_eq_sum_pdpd + hInterchange + Σᵢ pushed
+-- under both integrals + the integrand-level flat reduction Σᵢ pdpdH = Δ_g(H-slice)(0) via
+-- laplaceBeltrami_at_rnc_center — an honest PROOF, not a carry) + hEcomb_discharged +
+-- hLapFull_of_lims (T2: truncated identity + hLHSlim + the sliver-rate squeeze meeting at
+-- tendsto_nhds_unique) + hDuhamel_penultimate (heatOp(H*F) = F + E*F with the INTERCHANGE
+-- group {hInterchange, hLapFull, hDa, hLap} REPLACED by the engine-family inputs). std-3 all.
+-- ⚠ UPDATED INTERCHANGE residue: {dH/dHH engine domination/measurability families, hpdpdH +
+-- hpdpdH_slice identifications, hQ1I nbhd, Da-Leibniz engine family, hpdpdZ, hLHSlim
+-- (Δ_g(frozen) → Δ_g(H*F), the derivative-of-limit carry)}. All other groups carried
+-- through. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.hDa_threaded
+#print axioms QIQTH.HeatResidualBound.hLap_threaded
+#print axioms QIQTH.HeatResidualBound.hEcomb_discharged
+#print axioms QIQTH.HeatResidualBound.hLapFull_of_lims
+#print axioms QIQTH.HeatResidualBound.hDuhamel_penultimate
+
 end QIQTH.AxiomAudit
