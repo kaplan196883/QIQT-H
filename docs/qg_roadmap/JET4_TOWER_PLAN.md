@@ -921,3 +921,9 @@ ODE regularity + loc-unif hDaLimLU. 30 bricks 2026-08-03.
 NEXT: J4-147 = SpatialC2.lean (hCH via the C² chart composition; hCConv via the Q1/Q2
 engine derivative-continuity). Then hDaLimLU loc-unif upgrade + engine instantiations +
 ε-pinning + the joint-q wall assessment.
+
+## J4-147 BANKED — 2026-08-03: hCH DISCHARGED + hCConv REDUCED
+SpatialC2.lean [AF std-3, raw 0 @ 9430]: hCH genuinely proven; hCConv 2-layer reduction;
+a1_R6_of_residue_hCH_discharged. NEXT: J4-148 = DaLimLocUnif.lean (the hDaLimLU loc-unif
+upgrade — K-uniform sliver/Etrunc/LapTrunc constants). Then engine instantiations,
+ε-pinning, joint-q assessment, base-point family.
