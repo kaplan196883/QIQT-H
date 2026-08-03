@@ -741,3 +741,12 @@ Keep ALL proven plain-z interfaces; add the adapter layer:
   |G_τ(Wz)−G_τ(z)| ≤ C‖z‖³/τ·G_{κτ}(z) (7/10) + S6 normal form: canonical Hermite + centerJet
   (do NOT abs the odd ⟨z,qᵢ⟩/2τ term — exact parity cancellation!) + remainder (7/10).
 ORDER: B1→B2→B3→B4 (J4-127) then S1..S6.
+
+## J4-127 BANKED (ea2aa854) — 2026-08-03: THE CHART-TO-PLAIN ADAPTER (B1+B2+B3)
+ChartGaussAdapter.lean [AF std-3, raw 0 @ 9410]: Gk_scaled + B1 (L¹ replacement, two-stage ε,
+no change-of-vars) + B2 (bounded multiplier) + B3 (witness_sub_plain — the concrete witness
+minus the SYNTHETIC plain kernel = adapter difference × (ũ₀+τũ₁); the plain kernel satisfies
+the literal hAnear!). Carried: B4 assembly + concrete hcoarse/hasymp (J4-128).
+NEXT: J4-128 = ChartWrapperConcrete.lean: C1 hcoarse/hasymp discharge from NearIsometryBudget
+(|rnsq(Wz)−rnsq z| ≤ 2‖z‖·‖Wz−z‖+‖Wz−z‖² algebra; shrink-or-tails for the full gate);
+C2 center values ũ₀ 0 = 1 + bounds; C3 boundary_chart_wrapper_concrete assembly.
