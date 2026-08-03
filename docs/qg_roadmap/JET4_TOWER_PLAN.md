@@ -1113,3 +1113,14 @@ reachability + C² all from the one banked chart spec; the right-inverse
 DERIVED on-gate; hKmeas_concrete_v6 ← {hGeomP, hMemNear, hg, hgpos, hu};
 hC2fam_concrete_final ← {hMemPt, hg, hgpos, hu}; l1_residue_status =
 the machine-checked census reduction. std-3 raw 0. NOT a1=R/6.
+
+### J4-173 — GeomPTransportAssess (LANDED b68e7409) — v6 SUPERSEDED
+⚠ HONEST CORRECTION: hKmeas_concrete_v6's hGeomP is unsatisfiable in
+general (∀p right-inverse fails beyond the injectivity reach) — v6 is
+VACUOUS for general metrics; superseded by hKmeas_concrete_v7 (per-p
+geometry-OR-{measurable set + slice measurability} disjunction, the
+paired right branch required). hu: radialTransportSolve = explicit
+parametric integral; continuity rung PROVEN (radialTransportSolve_-
+continuous + transportCoeff_continuous_of_preserve); hu reduced to
+{hSolve, hT} operator premises (C^∞-under-integral absent in Mathlib).
+std-3 raw 0. NOT a1=R/6.
