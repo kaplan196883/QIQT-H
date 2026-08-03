@@ -16558,4 +16558,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FoldedCoeffChartMeas.hVmapMeasK_zero_of_geom
 #print axioms QIQTH.FoldedCoeffChartMeas.hKmeas_concrete_v3
 
+-- ★★★ J4-168 (ChartGeneralPContinuity.lean, ns QIQTH.ChartGeneralPContinuity): general-p
+-- chart continuity (indep build-verified): the p=0 Grönwall GENERALIZES — p enters the
+-- inverse chart ONLY as the flow endpoint (φ_z(W z p) = p), never as ODE coefficient data;
+-- term-1 of the transfer becomes ‖p−p‖=0 (sub_self), term-2 is the p-independent W3 base
+-- bound (norm_sub_rev). chartP_lipschitz_modulus (‖W z p − W z' p‖ ≤ Λ‖z−z'‖ on S ⊆ K
+-- under the p-analogue side-conditions: ball, ‖W z p‖ ≤ ρ_K, right-inverse) +
+-- chartP_continuousOn + hVmapMeasK_at_p_of_geom (the restricted-K slice measurability at
+-- every geometrically-reachable p) + hVmapMeasK_of_geomOrMeas (∀p via the honest per-p
+-- geometry-OR-measurability disjunction hChartP — far p beyond the injectivity reach is
+-- NOT overclaimed) + ★ hKmeas_concrete_v4 CAPSTONE: hKmeas ← {hSm, hg, hgpos, hu, hChartP,
+-- hGateDiff}. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ChartGeneralPContinuity.chartP_lipschitz_modulus
+#print axioms QIQTH.ChartGeneralPContinuity.chartP_continuousOn
+#print axioms QIQTH.ChartGeneralPContinuity.hVmapMeasK_at_p_of_geom
+#print axioms QIQTH.ChartGeneralPContinuity.hVmapMeasK_of_geomOrMeas
+#print axioms QIQTH.ChartGeneralPContinuity.hKmeas_concrete_v4
+
 end QIQTH.AxiomAudit
