@@ -16011,4 +16011,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.exp_tail_beats_inv
 #print axioms QIQTH.HeatResidualBound.witness_sliver2_assembly
 
+-- ★★ J4-134 (InnerSliceBounds.lean, ns HeatResidualBound): the PER-SLICE inner bounds I1+I2
+-- DISCHARGED (indep build-verified). LANDED: gaussDdim_halfcoer_le (THE coercivity lever:
+-- ½r²_z ≤ r²_w ⟹ G_τ(w) ≤ (√2)^n·G_{2τ}(z) — tames the entangled chart argument) +
+-- gaussDdim_selfmul_integrable/_integral (two-width same-point product = G_{a+b}(0)) +
+-- normP_le + hInner2_discharge (I2: the mass slice, C₂ = (√2)^n·M₂·C_L·G_a(0), O(1)) +
+-- hInner1_discharge (I1: the gradient slice, explicit C₁, crude (u−s)^{−1/2} rate) — both
+-- in EXACTLY the shapes carried by witness_sliver2_assembly. All hyps global parametric,
+-- jointly satisfiable (model Y=−id, P=eᵢ, Q=0). std-3 all.
+-- ⚠ CARRIED (honest): I0 (the Hessian slice hInner0) — blocked on (a) the k=5 1-D absolute
+-- moment (derivable from banked k=4 + even k=6 block via AM-GM — next brick) and (b) the
+-- entangled G_τ(Yz)-Hermite cancellation threading. I3 composite follows I0. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.gaussDdim_halfcoer_le
+#print axioms QIQTH.HeatResidualBound.gaussDdim_selfmul_integral
+#print axioms QIQTH.HeatResidualBound.hInner1_discharge
+#print axioms QIQTH.HeatResidualBound.hInner2_discharge
+
 end QIQTH.AxiomAudit
