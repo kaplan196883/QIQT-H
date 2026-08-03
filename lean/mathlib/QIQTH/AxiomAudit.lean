@@ -15958,4 +15958,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gaussComp_amp_pd_pd
 #print axioms QIQTH.HeatResidualBound.gaussComp_amp_center_decomp
 
+-- ★★ J4-131 (GaussianMomentEnvelope.lean, ns HeatResidualBound): S4 MOMENT ENVELOPES + S5
+-- QUANTITATIVE CUBIC REPLACEMENT (indep build-verified). LANDED: hk_even_moment_le
+-- (∫G_t(y²)^m ≤ 8^m·m!·√2·t^m) + oneD_absMoment0..4 ((√t)^k form, explicit constants) +
+-- norm_pow_le_sum_abs_pow + pow_norm_mul_gauss_integral (S4b n-D sup-norm envelope,
+-- parametric 1-D moment feed) + exp_neg_div_sub_le (S5a: elementary 1−e^{−x}≤x route, no MVT)
+-- + gaussDdim_replace_bound (S5b: |G_τ(Wz)−G_τ z| ≤ L'‖z‖³/(4τ)·(√2)^n·G_{2τ}(z) under the
+-- EXACT herr/hmin shapes discharged by chartW0_rncRadialSq_error + chartW0_nearIsometry) +
+-- weighted_chart_replace_bound (S5c: ∫_ball ‖z‖^k·|diff| ≤ C·(√τ)^{k+1} — the rate the
+-- singular Hermite terms need). std-3 all.
+-- ⚠ NEXT: S3 chart-jet bounds (Pᵢ/Qᵢ) + S6 assembly into sliver2_bound ⟹ the concrete
+-- hD2Hexpand discharge. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.hk_even_moment_le
+#print axioms QIQTH.HeatResidualBound.pow_norm_mul_gauss_integral
+#print axioms QIQTH.HeatResidualBound.exp_neg_div_sub_le
+#print axioms QIQTH.HeatResidualBound.gaussDdim_replace_bound
+#print axioms QIQTH.HeatResidualBound.weighted_chart_replace_bound
+
 end QIQTH.AxiomAudit
