@@ -373,6 +373,7 @@ import QIQTH.ConcreteGateAssembly
 import QIQTH.GeomPTransportAssess
 import QIQTH.TransportOpSmoothness
 import QIQTH.HuInftyRebase
+import QIQTH.JointMeasurability
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

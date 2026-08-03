@@ -16731,4 +16731,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HuInftyRebase.witnessInner_continuous_ofInfty
 #print axioms QIQTH.HuInftyRebase.vanVleck_witnessInner_continuous_ofGeom
 
+-- ★★★ J4-177 (JointMeasurability.lean, ns QIQTH.JointMeasurability): hjoint — the LAST
+-- open G2 slot — reduced (indep build-verified): pd_aestronglyMeasurable_of_slice_prod
+-- (the J4-163 difference-quotient lever generalized to an abstract measure — instantiated
+-- at the product); ae_prod_of_ae_ae (the iterated→product Fubini direction via
+-- ae_prod_iff_ae_ae, with the GENUINE MeasurableSet side-condition exposed honestly —
+-- the converse-direction counterexample is real); witness_joint_aestronglyMeasurable
+-- (the gated indicator glue: the gate set is s-independent ⟹ product-measurable);
+-- hjoint_from_witness (the lever + HasDerivAt.mul_const lift) + ★ hjoint_concrete —
+-- the EXACT hjoint slot of g2_bundle_assembled, final carries: hinnerJ (inner parametrix
+-- joint measurability — the ONE genuinely new residue; τ≤0 note: gaussDdim vanishes there,
+-- so the eventual discharge = joint continuity on τ>0 + product-null {s=t}), hKmeasSet /
+-- hSmeasSet / hFjoint (unify with existing census carries), hWdiffJ (product lift of the
+-- banked per-z hWdiff via ae_prod_of_ae_ae). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.JointMeasurability.pd_aestronglyMeasurable_of_slice_prod
+#print axioms QIQTH.JointMeasurability.ae_prod_of_ae_ae
+#print axioms QIQTH.JointMeasurability.witness_joint_aestronglyMeasurable
+#print axioms QIQTH.JointMeasurability.hjoint_from_witness
+#print axioms QIQTH.JointMeasurability.hjoint_concrete
+
 end QIQTH.AxiomAudit
