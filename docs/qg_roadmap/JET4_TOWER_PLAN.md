@@ -987,3 +987,8 @@ CConvLayerDischarge.lean [AF std-3, raw 0 @ 9437]: hdetz (displacement route) +
 hConvDeriv_linewise (singular-limit dominated) + the exact L1 shape (assembly carry).
 NEXT: J4-156 = EGradDischarge.lean (ASSESS hEgrad third-jet wall first; pivot to the
 m-uniform C_R / uniform-in-z / general-base J1b if walled).
+
+## J4-156 BANKED — 2026-08-04: GENERAL-BASE J1b JETS + THE F3 ASSESSMENT
+GeneralBaseJets.lean [AF std-3, raw 0 @ 9438]: the second-jet existence at general base
+(exact consumed shapes). VERDICTS: hEgrad = 3-5-brick third-jet layer (DEFERRED, honest);
+m-uniform C_R = tractable plumbing (J4-157); J1b = done.
