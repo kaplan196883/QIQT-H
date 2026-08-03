@@ -16438,4 +16438,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessDerivDomination.envelope_integrable
 #print axioms QIQTH.WitnessDerivDomination.hzint_witness
 
+-- ★★★ J4-162 (WitnessDerivMeasurability.lean, ns QIQTH.WitnessDerivMeasurability): the
+-- remaining G2 slots (indep build-verified): hsbound DISCHARGED (hsbound_witness — B ≡
+-- C₀·Cf constant via norm_integral_le + gaussDdim_integral_eq_one MASS-ONE normalization);
+-- hBint DISCHARGED (hBint_witness, intervalIntegrable_const); hzmeas/hsmeas in-shape
+-- reductions (AEStronglyMeasurable.mul / .integral_prod_right' with [SFinite ν]).
+-- ★ CAPSTONE g2_bundle_assembled: ALL SEVEN gcoef_continuity_discharge hypotheses fed at
+-- dH := witnessFieldDeriv (3 from J4-161 + 4 here), concluding the gcoef ContinuousAt
+-- family — the hCConv L1 continuity chain closed to the labelled six-carry residue
+-- {hC2fam, henv, hKmeas, hFmeas, hjoint, hdomS} (each satisfiable, never-the-conclusion;
+-- hdomS = the honest ∀ᶠx→∀ᵐs reorder of the x-free envelope). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.WitnessDerivMeasurability.hsbound_witness
+#print axioms QIQTH.WitnessDerivMeasurability.hBint_witness
+#print axioms QIQTH.WitnessDerivMeasurability.hzmeas_witness
+#print axioms QIQTH.WitnessDerivMeasurability.hsmeas_witness
+#print axioms QIQTH.WitnessDerivMeasurability.g2_bundle_assembled
+
 end QIQTH.AxiomAudit
