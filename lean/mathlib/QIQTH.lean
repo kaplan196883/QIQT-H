@@ -337,6 +337,7 @@ import QIQTH.InnerSliceBounds
 import QIQTH.HessianSliceBound
 import QIQTH.RemainderIntegration
 import QIQTH.GaussReplaceSlice
+import QIQTH.NormalFormDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

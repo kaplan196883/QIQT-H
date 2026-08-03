@@ -16082,4 +16082,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hRemE1_discharge
 #print axioms QIQTH.HeatResidualBound.witness_sliver2_grand
 
+-- ★★★ J4-138 (NormalFormDischarge.lean, ns HeatResidualBound): hNormalForm DISCHARGED
+-- on-gate for the CONCRETE witness (indep build-verified). LANDED:
+-- pd_congr_of_eventuallyEq + pd_pd_congr_of_eventuallyEq (pd is LOCAL — germ congruence,
+-- first and second order) + chartFieldAmp def + hNormalForm_concrete (N1: the EXACT equality
+-- witnessSecondXDeriv = sTerm0+sTerm1+sTerm2 with the concrete chart/amplitude jets, via the
+-- on-gate nbhd factorization + gaussComp_amp_pd_pd; jet package carried, z=0 instance
+-- PROVEN) + witnessSecondXDeriv_offGate_eq_zero (N3: the off-gate integrand vanishes) +
+-- witness_sliver2_concrete (N2: the terminal √ε bound for the ACTUAL witness second
+-- x-derivative). std-3 all.
+-- ⚠ CARRIED (honest): the jet-existence family for general base (proven at z=0; J1b/C²) +
+-- the geometric moduli hco/hYdisp/hJ3/hJ3Q about the concrete Yc/Pc/Qc (the J4-129
+-- near-isometry inputs — dischargeable, base-slot plumbing deferred) + amplitude bounds +
+-- hqLip + integrabilities. NEXT PHASE: LapTrunc/gauge assembly ⟹ hDaLimLU. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.pd_congr_of_eventuallyEq
+#print axioms QIQTH.HeatResidualBound.hNormalForm_concrete
+#print axioms QIQTH.HeatResidualBound.witnessSecondXDeriv_offGate_eq_zero
+#print axioms QIQTH.HeatResidualBound.witness_sliver2_concrete
+
 end QIQTH.AxiomAudit
