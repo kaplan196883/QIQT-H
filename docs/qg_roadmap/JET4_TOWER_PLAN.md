@@ -760,3 +760,13 @@ NEXT: J4-129 = InverseChartDisplacement.lean: D1 the bootstrap ‖v₀ ± z‖ �
 φ_z(v₀) = 0 + exp displacement (SIGN: W z 0 ≈ −z; rnsq is even — fine); D2 hasymp₀/hcoarse₀
 in the exact carried shapes; D3 measurability via uniqueness/selection or honest carry;
 D4 gate-ball via cf floor; D5 boundary_chart_wrapper_final.
+
+## J4-129 BANKED — 2026-08-03: BLOCKER (1) DOWN — inverse-chart near-isometry PROVEN
+InverseChartDisplacement.lean [AF std-3, raw 0 @ 9412]: chartW0_displacement (bootstrap via
+ApproximatesLinearOn right-inverse + germ pin; W₀ z ≈ −z) + chartW0_nearIsometry (hcoarse₀
+c=1/2 + hasymp₀ exact shapes) + chartW0_l1_sub_plain_of_meas (only hWmeas₀ carried).
+Blockers left: (2) base-point flow regularity (labelled hWmeas₀), (3) gate-ball cf floor.
+NEXT: J4-130 = ChartJetHessian.lean (S1 exact Gaussian chain-rule Hessian for
+x ↦ gaussDdim τ (W z x): G·[⟨V,∂ᵢV⟩²/4τ² − (⟨∂ᵢV,∂ᵢV⟩+⟨V,∂ᵢ²V⟩)/2τ] + S2 Leibniz normal
+form toward the S6 canonical-Hermite + centerJet + remainder decomposition of
+witnessSecondXDeriv; jet hyps carried, C⁴-satisfiable).
