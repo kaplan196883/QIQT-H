@@ -15993,4 +15993,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.chartField_firstJet_center
 #print axioms QIQTH.HeatResidualBound.chartField_centerJet_term_vanishes_base0
 
+-- ★★ J4-133 (SliverAssembly.lean, ns HeatResidualBound): the S6 SLIVER ASSEMBLY (indep
+-- build-verified). LANDED: the T1' HERMITE-ARGUMENT BRIDGES (innerYP_add_zi_bound — the
+-- quadratic gain |⟨Y,P⟩+z i| from the near-isometry + jet moduli; innerYP_sq_sub_zi_sq_bound
+-- — the cubic gain; innerPP_sub_one_bound; innerYQ_bound — the centerJet linear gain) +
+-- exp_tail_beats_inv (e^{−c/τ}/τ ≤ 4τ/c² — the off-gate tail beats the 1/τ divergence) +
+-- witness_sliver2_assembly (the 3-term split + triangle + √ε outer integration:
+-- |sliver| ≤ (C₀+C₁)·2√ε + C₂·ε). std-3 all.
+-- ⚠ CARRIED (interface, honest): hNormalForm (the concrete 3-term Leibniz identity =
+-- gaussComp_amp_pd_pd instantiated; jet existence inside) + the per-slice inner bounds
+-- hInner0/1/2 with (u−s)^{−1/2} rates (the bridges make them satisfiable; the entangled
+-- G_τ(Yz)-vs-G_τ(z) pointwise domination discharge = next brick) + integrability family.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.innerYP_add_zi_bound
+#print axioms QIQTH.HeatResidualBound.innerYP_sq_sub_zi_sq_bound
+#print axioms QIQTH.HeatResidualBound.innerYQ_bound
+#print axioms QIQTH.HeatResidualBound.exp_tail_beats_inv
+#print axioms QIQTH.HeatResidualBound.witness_sliver2_assembly
+
 end QIQTH.AxiomAudit
