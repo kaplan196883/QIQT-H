@@ -325,3 +325,147 @@ DEFERRED WALLS: the `hEgrad` third-jet layer (~3–5 bricks); **F1** the joint `
 ODE-measurability (the one deep Mathlib-scale residue); **F2** the cf gate-radius floor. BY-DESIGN:
 the GAUGE / RNC normal-coordinate inputs. Still NOT `a₁ = R/6` — a machine-checked conditional
 (compact-uniform) theorem with a real, enumerated, correctly-tiered residue.
+
+---
+
+## Addendum (2026-08-04): the hCConv L1 branch — J4-160…175
+
+Sixteen further bricks (`J4-160`…`J4-175`, commits `0ac1936d`…`43fba045`, ledger `f2b845b9`) drive the
+`hCConv` **L1 spatial-derivative branch** — the `(D, hConvDeriv, hConvD1)` layer that the endpoint
+`a1_R6_of_residue_hCH_hInter_discharged` (`ResidueThreading.lean:293`) carries. The branch supplies the
+`hConvDeriv` slot (the `∃ u ∈ 𝓝 0, ∀ x∈u, HasFDerivAt (p ↦ heatConv H F t p 0) (D x) x` shape) by proving
+the first spatial derivative of the heat convolution under `∫∫` (`hCConv_L1_final`, J4-160), then grinding
+the resulting `gcoef`-continuity + witness-measurability + chart-geometry carries down to an honest,
+satisfiable residue. All `[AF]` std-3 (raw axiom 0: `propext`/`Classical.choice`/`Quot.sound`), no `sorry`,
+no `expRho`, each `#print axioms`-pinned at landing. Pin blocks `AxiomAudit.lean` ~16403–16720. **Still NOT
+`a₁ = R/6`** — this hardens ONE branch of the conditional chain; the outer residue (§5, F1/F2/hEgrad, GAUGE)
+is untouched. Every theorem statement below was re-read against the Lean before writing this addendum.
+
+### The brick table (verified against the pinned statements)
+
+| J4 | file / namespace | key theorems (verified) | what closed / reduced |
+|----|------------------|--------------------------|------------------------|
+| 160 | `GcoefContinuity` | `hCConv_L1_final`, `gcoef_continuity_discharge` | The L1 `∃`-shape assembled: `hCConv_L1_final` composes `PartialsToFDeriv.hAssembly_reduced` ∘ `HeatResidualBound.hCConv_L1_of_partialsContinuity` from `{hlin, hcont, hDrep}`. Reduces the `hConvDeriv` slot to a linewise-derivative family + gcoef-continuity + coordinate representation. |
+| 161 | `WitnessDerivDomination` | G2 bundle: `hzcont`/`hzint` discharged, `hzbound` in shape | Three of the seven G2 slots of `gcoef_continuity_discharge` discharged at `witnessFieldDeriv`; `hzbound` reduced to a bare-kernel envelope. |
+| 162 | `WitnessDerivMeasurability` | `g2_bundle_assembled` | **★★** Assembles ALL SEVEN G2 hyps at `witnessFieldDeriv` (dominators `(C₀·Cf)·G_{κ(t−s)}`, mass-one) → the `hcont` slot of `hAssembly_reduced`. Verified carries: `hC2fam, henv, hKmeas, hFmeas, hjoint, hdomS, hFbd`. |
+| 163 | `G2CarryDischarge` | `gaussDdim_coercivity_envelope`, `hdomS_from_uniform`, `hKmeas_from_witness` | The x-free Gaussian envelope `G_τ(w) ≤ (√2)ⁿ·G_{2τ}(base)` under near-isometry coercivity (verified full proof, no carry); `hdomS` reordered to an x-uniform bare envelope `henvU`; `hKmeas` reduced (via a general slice-measurability lever) to `{hWmeas, hWdiff}`. |
+| 164 | `HenvUInstantiation` | `henvU_assembled`, `henv_assembled`, `hdomS_assembled`, `hzbound_assembled` | The `henvU`/`henv` envelopes assembled from an x-uniform on-gate/off-gate **dichotomy carry** `hGateData`/`hGateData'`; `hdomS` and `hzbound` legs reduced to `{hGateData(′), hFbd}`. |
+| 165 | `WitnessMeasDeriv` | `hWdiff_offGate` (unconditional), `hKmeas_concrete` | Off-gate field-slice derivative `= 0` proved unconditionally; `hKmeas_concrete` reduces the concrete `hKmeas` slot to four lighter carries `{hKm, hSm, hIn, hGateDiff}`. |
+| 166 | `GateChartMeasurability` | `compactGate_measurableSet`, `hIn_composed_…`, `hKmeas_concrete_v2` | `hKm` **DISCHARGED** unconditionally (`MeasurableSet K` from `IsCompact K`); `hIn` reduced via a composition lever to `{hw, hVmapMeas}`. |
+| 167 | `FoldedCoeffChartMeas` | `hw_discharged`, `gatedKernel_slice_…_of_restricted`, `hVmapMeasK_zero_of_geom`, `hKmeas_concrete_v3` | `hw` reduced to `{hg, hgpos, hu}`; the restricted-`K` indicator route weakens `hVmapMeas` to `volume.restrict K`; the `p=0` slice discharged from the banked near-isometry. |
+| 168 | `ChartGeneralPContinuity` | `chartP_lipschitz_modulus`, `chartP_continuousOn`, `hVmapMeasK_of_geomOrMeas`, `hKmeas_concrete_v4` | General-`p` origin-chart Grönwall Lipschitz + `z`-continuity; the honest **per-`p` geometry-OR-measurability disjunction** discharge of `hVmapMeasK`. |
+| 169 | `GateSetMeasurability` | `mem_flowBall_iff_chart`, `hKmeas_concrete_v5` | The flow-ball ↔ chart equivalence lever; `hSm` re-threaded to a `K`-relative `hSmK`. |
+| 170 | `OnGateFieldRegularity` | `hGateDiff_hC2fam_shared_core` | **★★★** BOTH remaining field-slot carries (`hGateDiff`, `hC2fam`) produced from ONE shared geometric root (on-gate coincidence with the inner kernel + local-coincidence lever). |
+| 171 | `ChartFieldC2General` | `chartField_contDiffAt_reachable_uniform`, `hGateDiff_hC2fam_from_reachableGate` | **★** Chart `C²` at EVERY reachable point (single uniform radius `δ₀`), **NO metric hyps** — reads off `uniformInverseChart_huniformChart`'s IFT clause. Full pipeline capstone for both carries. |
+| 172 | `ConcreteGateAssembly` | `reachableGate_concrete`, `flowBallGate_hRI_onGate`, `hC2fam_concrete_final`, `l1_residue_status`, ~~`hKmeas_concrete_v6`~~ | Instantiates the abstract gate `S` with the concrete flow-ball gate `S z = φ_z '' ball 0 c`; openness / left-inverse / on-gate right-inverse / reachability all DERIVED. `hKmeas_concrete_v6` landed but is **SUPERSEDED** next brick (see Corrections). |
+| 173 | `GeomPTransportAssess` | v6-vacuity audit, `hKmeas_concrete_v7`, `radialTransportSolve_continuous`, `hu_of_solve_smooth` | The honest **per-`p` disjunction** replacing v6's unsatisfiable `hGeomP`; the transport ray-integral continuity rung PROVEN; `hu` reduced to two operator premises `{hSolve, hT}`. |
+| 174 | `TransportOpSmoothness` | `hT_discharged`, `radialTransportSolve_contDiff_one`, the `⊤=ω` finding | `hT` (transport op preserves `C^∞`) **DISCHARGED**; the `C¹` ray-integral rung proven; the finding that `(⊤:WithTop ℕ∞)=ω` is the ANALYTIC level → `hSolve` at `ω` is a genuine Mathlib gap (no parametric-analytic-integral lemma). |
+| 175 | `HuInftyRebase` | generic `rayIntegral` tower, `radialTransportSolve_contDiff_infty`, `hu_infty_closed`, `hw_discharged_infty` | **`hu` CLOSED at `∞`** from `{hg, hgi, hgpos}` ALONE (`hu_infty_closed`, verified) — no longer an independent carry; the consumer `⊤↦∞` audit table shows every consumer is `∞`-safe. |
+
+### The current honest residue of the L1 / hCConv branch (each with its exact carrier + status)
+
+1. **The `v7` per-`p` disjunction** — carrier `GeomPTransportAssess.hKmeas_concrete_v7`. For each field point
+   `p`: EITHER the geometric triple `{hball : W z p ∈ ball 0 (modulus p), hnorm : ‖W z p‖ ≤ ρ_K,
+   hRI : φ_z(W z p) = p}` on `K`, OR the far-`p` pair `{MeasurableSet (K ∩ {z | p ∈ S z}),
+   AEStronglyMeasurable (z ↦ W z p) |_K}`. **Satisfiable and total**: the LEFT branch is discharged for
+   every reachable `p` (`reachableGate_concrete` + `flowBallGate_hRI_onGate`); the RIGHT branch carries only
+   the genuine far-`p` measurability residue. Honest (never unsatisfiable).
+
+2. **Coverage geometry `hMemNear`/`hMemPt`** — carriers `ConcreteGateAssembly.hKmeas_concrete_v6`/
+   `hC2fam_concrete_final`/`l1_residue_status`. Per relevant `(x₀, z)` with `z ∈ K`, the field point lies in
+   the gate: `x₀ ∈ φ_z '' ball 0 c`. This is the design intent of the gate (built to cover the reach);
+   satisfiable, never the witness.
+
+3. **Standard metric inputs `hg`/`hgi`/`hgpos`** — GAUGE by-design (metric `C^∞`, inverse `C^∞`,
+   `0 < det g`). ⚠ Since J4-175, `hu` (transport-coefficient smoothness) **DERIVES from exactly these three**
+   at the `C^∞` level (`hu_infty_closed`, verified) — so `hu` is no longer an independent residue item on the
+   `∞` chain.
+
+4. **`hjoint` — the last open G2 slot** — carrier `WitnessDerivMeasurability.g2_bundle_assembled`. Joint
+   `(s,z)`-ae-strong-measurability of `(s,z) ↦ witnessFieldDeriv … (t−s) x p₂ · F s p₂` on the product measure.
+   **Not discharged by any J4-160…175 brick** (verified: `hjoint` occurs only as the carried hyp of the bundle,
+   no dedicated supplier). Satisfiable from the same gate/Gaussian/amplitude structure measured jointly; NOT
+   the fibrewise-integrated conclusion. This is the genuine last-standing G2 measurability carry.
+
+5. **`hFmeas` — source `F` measurability** — carrier `g2_bundle_assembled`. Each slice `z ↦ F s z`
+   `AEStronglyMeasurable`. Instantiation-level (a property of the explicit source term `F`).
+
+6. **`hGateData`/`hGateData'` + `hFbd` (envelope side, J4-164)** — carriers `HenvUInstantiation.hdomS_assembled`/
+   `hzbound_assembled`. The x-uniform on-gate/off-gate DICHOTOMY families (off-gate: witness `≡ 0`; on-gate:
+   the exact hypotheses `witnessFieldDeriv_gate_envelope_coercive` consumes, with fixed factor sup-bounds
+   `Bs`/`Ba`/`Bd`), plus the scalar `F`-sup-bound `hFbd : |F| ≤ Cf`. Satisfiable.
+
+7. **The `⊤↦∞` consumer-statement rebases** — mechanical interface edits, enumerated in the
+   `HuInftyRebase.lean` Part-A audit table: `foldedCoeff_vanVleck_contDiff`, `hw_discharged`,
+   `witnessInner_continuous`, `heatParametrix_contDiff_space`, `innerKernel_contDiffAt_field`,
+   `gatedWitness_contDiffAt_field`, `hCH_discharge`, and the `hu` slot of `a1_R6_of_residue_hCH_discharged`.
+   Each is verified `∞`-safe (interface consumers reproduce the level via `.mul`/`.sum`/`.add`; downcast
+   consumers take `C⁰`/`C²` via `.continuous`/`.of_le`); only the statement TYPE reads `⊤`. Purely
+   interface-level plumbing — no proof body uses `AnalyticOnNhd` or the `n = ω` branch of
+   `contDiff_succ_iff_fderiv`.
+
+8. **The chart-`P` geometry `{hball, hnorm, hRI}` for general `p` on `K`** — subsumed into item 1's LEFT
+   disjunct (the on-gate instance of `hRI` is DERIVED by `flowBallGate_hRI_onGate`; the full-`K`/all-`p`
+   instance rides the honest disjunction).
+
+*(Also noted at the operator level: `hSolve` at the `ω` (analytic) level is a genuine Mathlib gap — no
+parametric-analytic-integral lemma. But every consumer needs only `∞`, and `hu` closes AT `∞`, so `hSolve`
+at `ω` is NOT actually required. The `ω`-level `hu` is not on the critical path.)*
+
+### Corrections
+
+- **`hKmeas_concrete_v6` is SUPERSEDED** (`ConcreteGateAssembly.lean:214`, struck through in the table). Its
+  hypothesis `hGeomP` is a genuinely **unrestricted `∀ p : Point n`** of the chart triple, whose third clause
+  `hRI : φ_z (W z p) = p` (chart right-inverse at `p`) **FAILS for far `p`** beyond the chart's uniform reach
+  (for a metric with finite injectivity radius, such `p` is not the exponential image of any velocity in the
+  ball). So `hGeomP` is **unsatisfiable in general** — the J4-168 far-`p` obstruction re-imported — which makes
+  v6 a vacuously-true / soundness-hollow statement, not a usable reduction. J4-173's `hKmeas_concrete_v7`
+  replaces it with the honest per-`p` disjunction (residue item 1). *[Precision note: the earlier framing
+  called `hGeomP` "vacuous"; the exact mechanism is "unsatisfiable-in-general unrestricted `∀p`", not a literal
+  `:= True` — the effect is the same (v6 unusable), and v7 is the honest form.]*
+
+- **The `⊤ = ω` structural finding** (J4-174). In this toolchain `(⊤ : WithTop ℕ∞) = ω` is the ANALYTIC level,
+  whereas `∞ = ((⊤ : ℕ∞) : WithTop ℕ∞)` is `C^∞`. The van-Vleck / Laplace–Beltrami building blocks are
+  real-analytic (Part A closes at `ω`), but the ray INTEGRAL of an analytic family is analytic only by a
+  theorem Mathlib lacks. The finite-order differentiation-under-the-integral induction reaches every `C^N`
+  (hence `C^∞`) but not `ω`. Consequence: `hu` closes at `∞` (all any consumer needs), and the `ω`-level solve
+  premise is a real analytic gap that is off the critical path.
+
+### The unchanged outer residue (endpoint `a1_R6_of_residue_hCH_hInter_discharged`, verified)
+
+The endpoint theorem's carried surface (re-read verbatim, `ResidueThreading.lean:293`) is unchanged by this
+branch: GATE `{hChr,hK,S,a,b,ha,hab,hK0,hS0,hSopen,H,hHeq}` · GAUGE `{hg,hg0,hgi,hΓ,hdg0,htr,hsrc,hu}` · Levi
+domination `{hEbound,hEzero,hEmeas}` · `{hEboundW_le,hInt,hDuhamel,hDConv}` · hCConv layers
+`{D,hConvDeriv,hConvD1}` (the branch this addendum hardens). The remaining outer walls, unmoved:
+
+- **GAUGE / RNC** `{hg,hg0,hgi,hΓ,hdg0,htr,hsrc,hu}` — by-design normal-coordinate inputs. `hu` now
+  additionally DERIVABLE at `∞` from `{hg,hgi,hgpos}` (J4-175), modulo the `⊤↦∞` rebase.
+- **F1 — the joint base-point ODE-measurability wall** `hEmeas`
+  (`StronglyMeasurable (q ↦ heatOp g gi H q.1 q.2.1 q.2.2)`) and the joint continuity feeding `hInt`. The
+  single deep Mathlib-scale residue (smooth/measurable dependence of the `.choose`-built flow on its base
+  point). **Untouched** — the L1 branch is orthogonal to it.
+- **F2 — the `cf` gate-radius floor** (`∃ρ₀>0, ∀z∈K, ρ₀ ≤ cf z`). Moderate positivity fact. Untouched.
+- **The `hEgrad` third-jet wall** — the field-slot chart is only `C²`; `hEgrad` needs a genuine 3–5-brick
+  third-jet development (`gaussComp_pd_pd_pd` + third moments). **DEFERRED** (J4-156 verdict), unmoved.
+- The `{hEbound,hEzero,hEboundW_le,hInt,hDuhamel,hDConv}` Levi/Duhamel/domination families (satisfiable
+  interface assembly, laborious not research-grade).
+
+### Tractability verdict
+
+The `hCConv` L1 branch is now **substantially mechanical**. The `hKmeas` measurability chain is threaded to the
+honest `v7` per-`p` disjunction (each branch satisfiable, the disjunction total); `hu` is **CLOSED at `C^∞`**
+(reduces to the metric inputs); `hKm` is discharged unconditionally; the field-slot `C²` regularity is proved
+at every reachable point with no metric hypotheses; and the gcoef-continuity conclusion is assembled by
+`g2_bundle_assembled`. What is left on this branch is genuinely tractable plumbing: `hjoint` (the last open G2
+joint-measurability slot — satisfiable), `hFmeas` (instantiation), the coverage geometry `hMemNear`/`hMemPt`
+(by-design), the `hGateData` dichotomy + `hFbd`, and the mechanical `⊤↦∞` consumer-statement rebases. No new
+research wall entered on this branch.
+
+The **walls are unchanged and outside this branch**: **F1** (the joint `hEmeas` base-point ODE-measurability —
+the one deep Mathlib-scale residue), **F2** (the `cf` floor), and the **`hEgrad` third-jet layer** (deferred,
+~3–5 bricks). The GAUGE / RNC inputs remain by-design.
+
+**⚠ `a₁ = R/6` remains CONDITIONAL** — a machine-checked, compact-uniform conditional theorem
+(`a1_R6_of_residue_hCH_hInter_discharged`) whose residue is real, enumerated, and correctly tiered. This
+addendum hardened one branch (`hConvDeriv`/`hCConv` L1); it changed no result's labels and did not touch
+F1/F2/hEgrad.
