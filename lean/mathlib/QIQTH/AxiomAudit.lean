@@ -16249,4 +16249,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hCConv_reduction
 #print axioms QIQTH.HeatResidualBound.a1_R6_of_residue_hCH_discharged
 
+-- ★★★ J4-148 (DaLimLocUnif.lean, ns HeatResidualBound): THE LOC-UNIF UPGRADE of the hDaLim
+-- chain (indep build-verified). LANDED: tendstoUniformlyOn_of_bound (the u-free-bound
+-- squeeze workhorse) + lapTrunc_sub_bound + etrunc_tendstoUniformlyOn (U1) +
+-- lapTrunc_tendstoUniformlyOn (U2) + hDaLimLU_discharge (U3: the EXACT hDaLimLU input of
+-- hDuhamel_final — TendstoLocallyUniformlyOn of DaTrunc to Δ_g(H*F)+E*F) +
+-- hDerivLU_discharge (U4: the EXACT hDerivLU input of derivConv_tendsto). The combined
+-- triangle bound B(ε_m)+Be(ε_m) bypasses uniform-family .add friction. std-3 all.
+-- ⚠ CARRIED: gauge + interchange family + adjacency integrabilities + the u-free sliver/tail
+-- bounds B/Be with rates + hEcomb + the proven boundary loc-unif as input. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.tendstoUniformlyOn_of_bound
+#print axioms QIQTH.HeatResidualBound.etrunc_tendstoUniformlyOn
+#print axioms QIQTH.HeatResidualBound.lapTrunc_tendstoUniformlyOn
+#print axioms QIQTH.HeatResidualBound.hDaLimLU_discharge
+#print axioms QIQTH.HeatResidualBound.hDerivLU_discharge
+
 end QIQTH.AxiomAudit
