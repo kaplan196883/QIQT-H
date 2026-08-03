@@ -350,6 +350,7 @@ import QIQTH.SpatialC2
 import QIQTH.DaLimLocUnif
 import QIQTH.FlowJointRegularity
 import QIQTH.GeodesicGronwall
+import QIQTH.ResidueThreading
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

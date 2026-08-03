@@ -16300,4 +16300,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GeodesicGronwall.chartOrigin_lipschitz_modulus
 #print axioms QIQTH.GeodesicGronwall.hWmeas₀_unconditional
 
+-- ★★★ J4-151 (ResidueThreading.lean, ns HeatResidualBound): THE THREADING SWEEP — four
+-- residue items GONE (indep build-verified). LANDED: chartW0_rightInverse (T1: the hRI
+-- re-export — φ_z(W z 0) = 0 extracted from the J4-129 surjOn+germ-pin proof) +
+-- hLHSlim_discharge (T2: ⟸ U2's lapTrunc_tendstoUniformlyOn.tendsto_at — LapTrunc
+-- definitional) + hVol_discharge (T3: ⟸ leviSeries_volterra + the PROVEN interchange —
+-- the resolvent's Volterra slot supplied) + gate_ball_floor (T4: 0 ∈ the gate for small ‖z‖
+-- DERIVED via T1 + the displacement bound; only the cf-radius floor carried) +
+-- hWmeas₀_unconditional_of_ball (T5a: the hRI slot supplied) +
+-- a1_R6_of_residue_hCH_hInter_discharged (T5b: hInter REMOVED from the capstone residue,
+-- traded for the hEbound/hEzero/hEmeas domination family). std-3 all.
+-- ⚠ GONE: hRI, hLHSlim, hVol, hInter. CARRIED: the cf floor, hball/hnorm W₀ facts,
+-- hEbound/hEzero/hEmeas. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.chartW0_rightInverse
+#print axioms QIQTH.HeatResidualBound.hLHSlim_discharge
+#print axioms QIQTH.HeatResidualBound.hVol_discharge
+#print axioms QIQTH.HeatResidualBound.gate_ball_floor
+#print axioms QIQTH.HeatResidualBound.a1_R6_of_residue_hCH_hInter_discharged
+
 end QIQTH.AxiomAudit
