@@ -16493,4 +16493,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HenvUInstantiation.hdomS_assembled
 #print axioms QIQTH.HenvUInstantiation.hzbound_assembled
 
+-- ★★★ J4-165 (WitnessMeasDeriv.lean, ns QIQTH.WitnessMeasDeriv): hWmeas/hWdiff round
+-- (indep build-verified): gatedKernel_slice_aestronglyMeasurable (reusable lever — gated
+-- slice = indicator of K ∩ {z|p∈S z} ⟹ AEStronglyMeasurable.indicator) +
+-- vanVleckGatedWitness_slice_aestronglyMeasurable + hWmeas_from_carries (the EXACT hWmeas
+-- slot from {hKm : MeasurableSet K, hSm, hIn inner-kernel z-meas} — all strictly lighter;
+-- inner kernel z-enters ONLY through uniformInverseChart z p, so hIn satisfiable from
+-- chart z-continuity); hWdiff_offGate (z∉K leg DISCHARGED unconditionally — slice ≡ 0,
+-- witnessFieldDeriv_offGate_eq_zero); hWdiff_onGate (PdiffAt ⟹ HasDerivAt, genuine
+-- non-tautological reduction); hWdiff_from_gateDiff (the EXACT hWdiff slot via a.e.-z
+-- gate dichotomy); ★ hKmeas_concrete capstone (hKmeas slot now rests on
+-- {hKm, hSm, hIn, hGateDiff} — hKm satisfiable via IsCompact.measurableSet, hSm/hIn
+-- genuine geometric/regularity carries, hGateDiff the on-gate PdiffAt family). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.WitnessMeasDeriv.gatedKernel_slice_aestronglyMeasurable
+#print axioms QIQTH.WitnessMeasDeriv.vanVleckGatedWitness_slice_aestronglyMeasurable
+#print axioms QIQTH.WitnessMeasDeriv.hWmeas_from_carries
+#print axioms QIQTH.WitnessMeasDeriv.hWdiff_offGate
+#print axioms QIQTH.WitnessMeasDeriv.hWdiff_onGate
+#print axioms QIQTH.WitnessMeasDeriv.hWdiff_from_gateDiff
+#print axioms QIQTH.WitnessMeasDeriv.hKmeas_concrete
+
 end QIQTH.AxiomAudit
