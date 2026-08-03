@@ -360,6 +360,7 @@ import QIQTH.PartialsToFDeriv
 import QIQTH.GcoefContinuity
 import QIQTH.WitnessDerivDomination
 import QIQTH.WitnessDerivMeasurability
+import QIQTH.G2CarryDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -16454,4 +16454,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessDerivMeasurability.hsmeas_witness
 #print axioms QIQTH.WitnessDerivMeasurability.g2_bundle_assembled
 
+-- ★★★ J4-163 (G2CarryDischarge.lean, ns QIQTH.G2CarryDischarge): the six-carry discharge
+-- round (indep build-verified): ★ gaussDdim_coercivity_envelope — THE GEOMETRIC CORE:
+-- under coercivity ½·r²_base ≤ r²_w, G_τ(w) ≤ (√2)ⁿ·G_{2τ}(base) (Gk_anti + Gk_scaled at
+-- s=½; τ-FREE constant). witnessFieldDeriv_gate_envelope_coercive replaces the hgauss_env
+-- carry by proved envelope + pure-geometry chart coercivity (near-isometry output); on-gate
+-- constant (Bs·Ba+Bd)·(√2)ⁿ at width 2τ. hdomS_from_uniform — the exact hdomS slot from an
+-- x-uniform bare envelope henvU (satisfiable from the coercive envelope). ★
+-- pd_aestronglyMeasurable_of_slice — reusable lever: pd is ae-strongly-measurable from
+-- slice measurability + a.e. HasDerivAt (difference-quotient limit via slope +
+-- aestronglyMeasurable_of_tendsto_ae). hKmeas_from_witness — the exact hKmeas slot from
+-- hWmeas + hWdiff (strictly lighter, 0-th-slot carries). Status: henv-core DISCHARGED,
+-- hdomS/hKmeas REDUCED; hC2fam honest carry (general-centre C² is a genuine
+-- strictly-stronger input vs the centre-only SpatialC2 fact); hjoint/hFmeas carried
+-- documented. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.G2CarryDischarge.gaussDdim_coercivity_envelope
+#print axioms QIQTH.G2CarryDischarge.witnessFieldDeriv_gate_envelope_coercive
+#print axioms QIQTH.G2CarryDischarge.hdomS_from_uniform
+#print axioms QIQTH.G2CarryDischarge.pd_aestronglyMeasurable_of_slice
+#print axioms QIQTH.G2CarryDischarge.hKmeas_from_witness
+
 end QIQTH.AxiomAudit
