@@ -1003,3 +1003,12 @@ partials' continuity).
 PartialsToFDeriv.lean [AF std-3, raw 0 @ 9440; ns QIQTH.PartialsToFDeriv]: the reusable
 Mathlib-gap theorem proven in full + hAssembly closed-to-continuity.
 NEXT: J4-159 = the census refresh (J4-154..158 layer into A1_R6_RESIDUE_STATUS.md).
+
+### J4-160 — GcoefContinuity (LANDED 0ac1936d)
+The gcoef-continuity carry closed at the abstract + exact-shape level:
+`continuousAt_doubleIntegral_of_dominated` (reusable nested dominated engine),
+`gcoef_continuity_discharge` (verbatim hcont of hAssembly_reduced), and
+`hCConv_L1_final` (linewise + assembly + continuity ⟹ the full L1 ∃-HasFDerivAt
+shape). Remaining in this layer: the G2 per-(i,x₀) domination/continuity bundle
+for dH := witnessFieldDeriv (labelled; satisfiable from
+witnessFieldDeriv_gate_eq/_gate_abs_le) → J4-161. std-3 raw 0. NOT a1=R/6.
