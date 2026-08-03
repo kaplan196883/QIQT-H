@@ -16100,4 +16100,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.witnessSecondXDeriv_offGate_eq_zero
 #print axioms QIQTH.HeatResidualBound.witness_sliver2_concrete
 
+-- ★★★★ J4-139 (LapTruncAssembly.lean, ns HeatResidualBound): THE CONDITIONAL hDaLimLU
+-- DISCHARGE — the target of the entire hDaLim campaign (indep build-verified). LANDED:
+-- lapTrunc_eq_sum_pdpd + lap_heatConv_eq_sum_pdpd (L1: RNC flat reduction) +
+-- sliverBound_tendsto_zero (the √ε_m rate) + lapTrunc_tendsto (L3: the sliver-difference
+-- limit LapTrunc → Δ_g(H*F) via adjacency peel + squeeze) + hDaLim_discharge + hDaLim_full
+-- (L4: DaTrunc → Δ_g(H*F) + E*F — the EXACT hDuhamel_of_daLim target) + hDuhamel_assembled
+-- (★ the capstone hDuhamel conclusion heatOp(H*F) = F + E*F, end-to-end). std-3 all.
+-- ⚠ THE EXPLICIT RESIDUE of hDuhamel_assembled (complete, honest): {hgi/hΓ gauge;
+-- hInterchange (L2 finite-gap 2nd-order differentiation under ∫∫ — the riskiest carry);
+-- hLapFull (untruncated version); hII_lo/hII_hi interval-integrabilities; B/hSliver/hBlim
+-- (dischargeable from witness_sliver2_concrete + sliverBound_tendsto_zero — sum-over-coords
+-- plumbing); hEcomb (⟸ hE_combination PROVEN); hEtrunc (⟸ etrunc_tendsto PROVEN);
+-- hBoundaryLim (⟸ boundaryTrunc_tendsto PROVEN); hDerivConv (⟸ derivConv_tendsto PROVEN)}.
+-- The whole Duhamel wall = this residue + the sliver-2 interface family. NOT a₁ = R/6.
+#print axioms QIQTH.HeatResidualBound.lapTrunc_eq_sum_pdpd
+#print axioms QIQTH.HeatResidualBound.lapTrunc_tendsto
+#print axioms QIQTH.HeatResidualBound.hDaLim_discharge
+#print axioms QIQTH.HeatResidualBound.hDaLim_full
+#print axioms QIQTH.HeatResidualBound.hDuhamel_assembled
+
 end QIQTH.AxiomAudit
