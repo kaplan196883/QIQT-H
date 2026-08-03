@@ -16282,4 +16282,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.chart_joint_velocity_modulus
 #print axioms QIQTH.HeatResidualBound.hWmeas₀_of_continuousOn
 
+-- ★★★★ J4-150 (GeodesicGronwall.lean, ns HeatResidualBound): THE C⁰ LAYER OF THE LAST
+-- STRUCTURAL WALL CLOSED (indep build-verified). LANDED:
+-- geodesicField_lipschitzOnWith_closedBall (W1) + uniformTube_twopoint_diff_bound (W2: the
+-- NONLINEAR two-solution Grönwall — dist(tube q, tube q') ≤ dist q q'·e^{Lt}, via Mathlib's
+-- dist_le_of_trajectories_ODE_of_mem on the exposed geodesic ODE, both tubes in the convex
+-- confinement ball; the Prod max-norm kills the shared velocity) +
+-- uniformFlowExp_base_diff_bound (W3: the base-flow difference ≤ e^L·‖q−q'‖ — the EXACT
+-- residue the J4-149 transfer isolated) + chartOrigin_lipschitz_modulus (W4a: ‖W z 0 −
+-- W z' 0‖ ≤ C_inv·e^L·‖z−z'‖ — z ↦ W z 0 is LIPSCHITZ) + chartOrigin_continuousOn +
+-- hWmeas₀_unconditional (threaded through hWmeas₀_of_continuousOn). std-3 all.
+-- ⚠ CARRIED (honest side-conditions): hRI (the right-inverse φ_z(W z 0) = 0 — the
+-- J4-129-recovered fact) + on-domain memberships. NOT a₁ = R/6.
+#print axioms QIQTH.GeodesicGronwall.geodesicField_lipschitzOnWith_closedBall
+#print axioms QIQTH.GeodesicGronwall.uniformTube_twopoint_diff_bound
+#print axioms QIQTH.GeodesicGronwall.uniformFlowExp_base_diff_bound
+#print axioms QIQTH.GeodesicGronwall.chartOrigin_lipschitz_modulus
+#print axioms QIQTH.GeodesicGronwall.hWmeas₀_unconditional
+
 end QIQTH.AxiomAudit
