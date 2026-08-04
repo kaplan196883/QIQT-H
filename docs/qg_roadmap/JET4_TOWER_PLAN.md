@@ -1303,3 +1303,12 @@ makes this composition yield the target verbatim. Remaining honest
 frontier: C4c (the genuine Seeley-DeWitt content), W1/W2 flow wall,
 annulus-gradient composition, gate-uniform third-jet constant, L2 hD1
 threading, the omega-hsrc audit. std-3 raw 0. NOT a1=R/6.
+
+### J4-195 — OmegaHsrcC4cAudit (LANDED 9b4d0d2e) — omega-hsrc REMOVED
+Part A: hsrc traced (C1/C0 downcasts only, no analyticity) => the C1
+keystone + full infinity re-thread => a1_R6_of_residue_inf (the
+top-hsrc carry REMOVED; composes with hsrc_from_geometry). Part B:
+the honest C4c correction — the off-diagonal singular heads are
+GENUINE curvature (domination not cancellation is the repo route; the
+true cancellation = the Jacobi/exp radial ODE Mathlib gap) + the
+diagonal singular-free identity. std-3 raw 0. NOT a1=R/6.
