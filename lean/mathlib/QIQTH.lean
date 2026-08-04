@@ -401,6 +401,7 @@ import QIQTH.XUniformSliverFull
 import QIQTH.LeviCarriesAssembly
 import QIQTH.GateOpennessExport
 import QIQTH.LeviSeriesLocalData
+import QIQTH.InterchangeLocalRebase
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

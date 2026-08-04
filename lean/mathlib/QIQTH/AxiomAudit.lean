@@ -17272,4 +17272,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeviSeriesLocalData.leviSeriesLocalData_of_windowBound
 #print axioms QIQTH.LeviSeriesLocalData.hInt_from_seriesData
 
+-- ★★★ J4-206 (InterchangeLocalRebase.lean, ns QIQTH.InterchangeLocalRebase; Sol Ph3;
+-- indep build-verified): the SOL VERDICT CONFIRMED — the banked interchange's global
+-- bound entered at exactly three points; the one genuinely-global object (hInt) is
+-- off-loaded to the J4-205 package; the dom/one-step bounds are used only at s, t−s ∈
+-- (0,T] — NO load-bearing global use survives. ★ heatConv_leviSeries_interchange_local
+-- (the interchange core byte-identical; only the bound-plumbing localized) + ★ the global
+-- corollary heatConv_leviSeries_interchange_global' (T := t; one proof two interfaces) +
+-- ★★ hInter_from_local_data — the EXACT v4 hInter slot from {the (0,T] local bound (the
+-- package's exported bound), hEzero, hEmeas (the honest named carry), hglobal ceiling
+-- family}. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.InterchangeLocalRebase.heatConv_leviSeries_interchange_local
+#print axioms QIQTH.InterchangeLocalRebase.heatConv_leviSeries_interchange_global'
+#print axioms QIQTH.InterchangeLocalRebase.hInter_from_local_data
+
 end QIQTH.AxiomAudit
