@@ -17006,4 +17006,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CompactJetBounds.residualCoeffAWeighted_continuous
 #print axioms QIQTH.CompactJetBounds.residualCoeffA_tau_weighted_bound
 
+-- ★★★ J4-191 (GaussianGradAbsorption.lean, ns QIQTH.GaussianGradAbsorption; the hEgrad
+-- tail step (iii); indep build-verified): the reusable absorption family with EXPLICIT
+-- constants (factorial route via the banked pow_mul_exp_neg_le_factorial — no tendsto
+-- machinery): pow_mul_exp_neg_half_sq_le + exp_moment_absorption (the 1D core) +
+-- radial_ratio_pow_exp_le + ★ gaussDdim_radial_pow_absorption (the general doubling-width
+-- lever (r/√τ)^k·G_τ ≤ C·G_{2τ}, via the banked gaussDdim_eq_wide_mul +
+-- gaussDdimWide_eq_scaled_gaussDdim ratio identities) + ★ gaussDdim_linear_absorption
+-- (|v_j|/τ·G_τ ≤ C·τ^{-1/2}·G_{2τ}) + ★ gaussDdim_quadratic_absorption (r²/τ²·G_τ ≤
+-- C·τ⁻¹·G_{2τ}) + sqrtInv_pow_exp_le + ★ annulus_negPow_exp_le (τ⁻ᵐ·e^{-a²/4τ} ≤ C·√τ —
+-- ALL negative powers absorb on the annulus with the √τ GAIN). Covers exactly the k=1/k=2/
+-- general-k powers the J4-189 gradient formula needs. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GaussianGradAbsorption.pow_mul_exp_neg_half_sq_le
+#print axioms QIQTH.GaussianGradAbsorption.exp_moment_absorption
+#print axioms QIQTH.GaussianGradAbsorption.radial_ratio_pow_exp_le
+#print axioms QIQTH.GaussianGradAbsorption.gaussDdim_radial_pow_absorption
+#print axioms QIQTH.GaussianGradAbsorption.gaussDdim_linear_absorption
+#print axioms QIQTH.GaussianGradAbsorption.gaussDdim_quadratic_absorption
+#print axioms QIQTH.GaussianGradAbsorption.sqrtInv_pow_exp_le
+#print axioms QIQTH.GaussianGradAbsorption.annulus_negPow_exp_le
+
 end QIQTH.AxiomAudit
