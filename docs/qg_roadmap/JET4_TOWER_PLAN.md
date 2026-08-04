@@ -1527,3 +1527,11 @@ n scalar ContDiffAt facts). Residue = hD1_from_data's own sliver carries per com
 (bulk HasFDerivAt/limit, x-uniform hsliver + vanishing, order-2 continuity). WALLS NOW:
 hDaLimLU ONLY. std-3 all 4, budget raw 0. NOT a₁=R/6. NEXT: J4-220 DaLimLUWallRecon
 (THE FINAL WALL).
+
+## J4-220 (2026-08-05, 0e634bf0) — DaLimLUWallRecon: the final-wall census [AF]
+hDaLimLU family census: everything BANKED or DATA except ★ hEbnd (+Be/hEblim) — the
+RATED x/u-uniform residual-tail bound (etrunc_tendsto is un-rated). NEW:
+sliver_sum_bound_U (the ∀u∈U upgrade; u-free B(e)=∑(D0·2√e+D1·e)→0) +
+hDaLimLU_of_sliverData (sliver slots eliminated). LADDER: E2 (peel the tail under
+hEdom+hBdom, mirror the sliver peel) + E3 (rate). THE LAST WALL IS ONE BRICK WIDE.
+std-3 both, budget raw 0. NOT a₁=R/6. NEXT: J4-221 ETailRateBound (E2).
