@@ -1418,3 +1418,17 @@ The identity was FULLY BANKED (J4-118/119); the gap was only the
 nhdsWithin-0+ filter form (upgraded, no new analysis). The hDelta slot
 remains assembled to hBoundary (Brick 2) — audit next. std-3 raw 0.
 NOT a1=R/6.
+
+## J4-209 (2026-08-05, 0b179174) — HDConvThreading: the hDConv chain audit + threading + v6 [AF]
+Sol final plan Ph7. THE AUDIT: every slot of hDConv_gatedWitnessN1_of_delta_final has a
+banked provider — hpar/htime/hR (F2FamilyDischarge J4-145 R1-R3), hDelta
+(hDelta_gatedWitnessN1_final J4-120; **hBoundary/Brick-2 moving-peak DISCHARGED inside**
+via boundary_tendstoLocallyUniformlyOn), hDaLim→hDaLimLU (hDaLimLU_discharge, DaLimLocUnif
+U3). SOLE hard chain residue = **hDaLimLU** (L3/L4 sliver/tail/interchange family:
+pdpdH/hInterchange/hLapFull/hII_lo/hII_hi/hSliver/hEbnd/hEcomb + RNC hgi,hΓ). Rest =
+satisfiable analytic data (dominations/measurabilities/parametrix family/C3ε engine/
+cross-Lipschitz/floor/inner-continuity; hMeasFII deferred base meas).
+LANDED: hDConv_from_banked (chain composed at the concrete witness, Da := DaTrunc H F);
+a1_R6_of_residue_inf_v6 (= v5 minus black-box hDConv, re-derived internally). Post-v6
+walls: hDaLimLU + hD1 (+ Levi/Duhamel interface + facades = data). std-3, budget raw 0.
+NOT a₁=R/6. NEXT: Ph8 TruncatedDuhamelData facade.
