@@ -17187,4 +17187,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HD1ConcreteWiring.sliver_bound_tendsto_zero
 #print axioms QIQTH.HD1ConcreteWiring.hD1_reduction
 
+-- ★★★ J4-201 (XUniformSliver.lean, ns QIQTH.XUniformSliver; indep build-verified): ★★★
+-- THE PINNING MAP: ROUTE A — the sliver chain's centre-pinning is INTERFACE-ONLY (every
+-- estimate link is field-free; the sole field-dependent link is the F-cap via B_le_MB,
+-- and the Gaussian peak bound gaussDdim(2s)(z−x) ≤ gaussDdim(2s)(0) is x-free with the
+-- SAME constant). F_le_const_xuniform (the x-uniform field cap) + sliverRateConst (the
+-- explicit x-free per-slice constant) + tE1_slice_abstract (the constant-cap E1 core) +
+-- ★ tE1_slice_xuniform (the per-slice bound at EVERY x, same constant) + ★★
+-- sliver_rate_hsbound (∃C, ∀x ∀s, ‖∫z …‖ ≤ C·(u−s)^{-1/2} — the EXACT
+-- gderiv_continuousAt hsbound shape). NO new carries (the tE1_slice_bound set verbatim).
+-- SCOPE (honest): this banks the E1 half; the full √ε x-uniform composite needs the same
+-- treatment of the E2/T1-T3 halves (RemainderIntegration.witness_sliver2_complete
+-- hard-codes F·0) — the next brick. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.XUniformSliver.F_le_const_xuniform
+#print axioms QIQTH.XUniformSliver.sliverRateConst_nonneg
+#print axioms QIQTH.XUniformSliver.tE1_slice_abstract
+#print axioms QIQTH.XUniformSliver.tE1_slice_xuniform
+#print axioms QIQTH.XUniformSliver.sliver_rate_hsbound
+
 end QIQTH.AxiomAudit
