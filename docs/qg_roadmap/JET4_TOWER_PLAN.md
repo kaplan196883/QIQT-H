@@ -1493,3 +1493,10 @@ first-pd + J4-198 second-pd) feeds it continuity-free. Banked: tripleHEmeas_of_s
 p) / G-b (off-diag Hessian) / G-c (∂_τ rep). WALLS NOW: hDaLimLU + hD1 CLM lift. The
 B5 variational Grönwall is OFF the critical path. std-3, budget raw 0. NOT a₁=R/6.
 NEXT: G-a GatedDerivRepProduct.
+
+## J4-216 (2026-08-05, 24df6db5) — GatedDerivRepProduct: G-a + G-b diagonal [AF]
+Product-coordinate gate-eq extension: gatedDerivRepProd + everywhere-identity +
+firstFieldPd_prod_stronglyMeasurable = BorelDischargeSurface conjunct (2) EXACT (rfl
+bridge); suppliers = measurabilities only. G-b diagonal (gatedDeriv2RepProd) landed.
+Honest gaps: G-b MIXED (needs new gaussComp_amp_pd_pd_mixed normal form) + G-c (∂_τ
+gate-eq rep). std-3 all 7, budget raw 0. NOT a₁=R/6. NEXT: G-c GatedTauDerivRep.
