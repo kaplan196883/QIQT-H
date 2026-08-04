@@ -17286,4 +17286,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InterchangeLocalRebase.heatConv_leviSeries_interchange_global'
 #print axioms QIQTH.InterchangeLocalRebase.hInter_from_local_data
 
+-- ★★★ J4-207 (CConvConcreteThreading.lean, ns QIQTH.CConvConcreteThreading; Sol Ph4;
+-- indep build-verified): ★ hCConv_concrete_from_data — the hCConv C² slot at the CONCRETE
+-- vanVleckGatedWitness from {the five facade bundles at F := leviSeries (heatOp H),
+-- explicit D, hD1} via set-aliases + the facade (hfam defeq held, no massaging) +
+-- hCConv_reduction. ★★★ a1_R6_of_residue_inf_v5 — the capstone with hCConv replaced
+-- in-place by the ingredient set; inner carries = {hInt, hDuhamel, hInter, hDConv, hCH}
+-- + bundles + hD1. SOUND FIREWALL CALL: the ∀S bundle-provider shape REJECTED (a
+-- possibly-false universal = the vacuity hole); v5 takes the specific gate + its exported
+-- properties (satisfiable at the package gate). The sole genuinely-open analytic carry
+-- here = hD1 (the scalar↔CLM lift of hD1_from_data — the honest L2 slot). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CConvConcreteThreading.hCConv_concrete_from_data
+#print axioms QIQTH.CConvConcreteThreading.a1_R6_of_residue_inf_v5
+
 end QIQTH.AxiomAudit
