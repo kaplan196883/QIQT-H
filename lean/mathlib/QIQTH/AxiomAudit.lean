@@ -17368,4 +17368,26 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6 — still conditional.
 #print axioms QIQTH.CapstoneAssembly.a1_R6_of_geometry_and_frontier
 
+-- ★★★ J4-212 (HEmeasRecon.lean, ns QIQTH.HEmeasRecon; Sol Ph10 recon; indep
+-- build-verified): THE hEmeas OBLIGATION MAP. Load-bearing finding: hEmeas has TWO
+-- ORTHOGONAL axes — the .choose-free factor/diagonal axis (DISCHARGED from geometry:
+-- factorDiagonal_discharged ← ParametrixGradientMeas) and the flow/triple axis, whose
+-- single .choose entry is uniformFlowExp/uniformFlowTube (UniformFlowNondeg). OBL-6
+-- (origin chart) DISCHARGED (hWmeas0_discharged ← GeodesicGronwall W1-W4). OBL-1 (triple
+-- hEmeas) REDUCES (kernelCont_reduces_hEmeas, E3e) to OBL-2 (joint C⁰) + OBL-3 (hKp1).
+-- STRETCH PROVED: flow_base_continuousOn_of_gronwall — genuinely NEW base-slot
+-- continuity of the .choose flow (← uniformFlowExp_base_diff_bound Lipschitz modulus);
+-- per FlowJointRegularity §3 the tower had NO base-slot fact. THE LADDER: B2 joint
+-- continuity weld (B1✓ + contDiffAt2_uniformFlowExp) → B3 inverse-chart base continuity
+-- (OBL-5) → B4 kernel joint continuity (OBL-2) → B5 ★ WALL = base-point C¹ variational
+-- Grönwall (OBL-3/hKp1 — Grönwall gives a Lipschitz modulus, not a derivative; no
+-- exposed base-point fderiv of the .choose flow) → B6 final wrapper.
+-- heatOp_qregularity_of_jointCont certifies the wrapper content = exactly OBL-2+OBL-3.
+-- Named walls after recon: hDaLimLU + hKp1(B5). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HEmeasRecon.factorDiagonal_discharged
+#print axioms QIQTH.HEmeasRecon.hWmeas0_discharged
+#print axioms QIQTH.HEmeasRecon.kernelCont_reduces_hEmeas
+#print axioms QIQTH.HEmeasRecon.flow_base_continuousOn_of_gronwall
+#print axioms QIQTH.HEmeasRecon.heatOp_qregularity_of_jointCont
+
 end QIQTH.AxiomAudit
