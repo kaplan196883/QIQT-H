@@ -16775,4 +16775,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InnerKernelJointMeas.hinnerJ_discharged
 #print axioms QIQTH.InnerKernelJointMeas.hjoint_final
 
+-- ★★★ J4-179 (CoeffContWdiffLift.lean, ns QIQTH.CoeffContWdiffLift): coefficient carries
+-- discharged + the hWdiffJ lift (indep build-verified). Part A: vanVleck_continuous
+-- (det_contDiff.continuous → √ → inv₀ on ≠0 from hgpos), vanVleck_ne_zero (vanVleck_pos),
+-- huc_discharged (via hu_infty_closed.continuous — the C⁰-preservation trap CONFIRMED:
+-- transportOp does NOT preserve C⁰, the ∞-chain is the honest route), hjoint_from_geometry
+-- (inner-kernel carries → {hg, hgi, hgpos, hVmapMeas}). Part B: hWdiff_from_gateDiff'
+-- (the ∀ᶠx-first reorder variant from the reordered gate-dichotomy carry — the invalid
+-- quantifier swap avoided honestly; generic base measure ν); hWdiffJ_from_slices (the
+-- ae_prod lift; the HasDerivAt-set measurability hMeasSet CARRIED honestly — no
+-- measurableSet_tendsto route in Mathlib; satisfiable via the w-continuity of the concrete
+-- slices); ★★ hjoint_from_geometry_final — the full hjoint slot, final carries
+-- {hKmeasSet, hSmeasSet, hFjoint, hVmapMeas, hg, hgi, hgpos, hGateDiff', hMeasSet}.
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.CoeffContWdiffLift.vanVleck_continuous
+#print axioms QIQTH.CoeffContWdiffLift.vanVleck_ne_zero
+#print axioms QIQTH.CoeffContWdiffLift.huc_discharged
+#print axioms QIQTH.CoeffContWdiffLift.hjoint_from_geometry
+#print axioms QIQTH.CoeffContWdiffLift.hWdiff_from_gateDiff'
+#print axioms QIQTH.CoeffContWdiffLift.hWdiffJ_from_slices
+#print axioms QIQTH.CoeffContWdiffLift.hjoint_from_geometry_final
+
 end QIQTH.AxiomAudit
