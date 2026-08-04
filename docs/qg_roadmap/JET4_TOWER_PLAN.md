@@ -1312,3 +1312,12 @@ the honest C4c correction — the off-diagonal singular heads are
 GENUINE curvature (domination not cancellation is the repo route; the
 true cancellation = the Jacobi/exp radial ODE Mathlib gap) + the
 diagonal singular-free identity. std-3 raw 0. NOT a1=R/6.
+
+### J4-196 — census #3 (LANDED e6844f94)
+The definitive residue: hsrc/hCH DISCHARGED from geometry; hEboundW
+dischargeable (width-2 domination, GateSqControl from flowBall); the
+Levi carries = satisfiable interface assembly; L2 hD1 = the remaining
+hCConv gap. Walls re-tiered: Jacobi/exp ODE needed ONLY for the true
+off-diagonal value (NOT for hEboundW); W1/W2 flow; L2 hD1; K-uniform
+expRho; annulus-grad. Verdict: grind (c)(d)(e)+Levi; Sol-consult
+(a)(b). NOT a1=R/6.
