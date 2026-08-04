@@ -1592,3 +1592,12 @@ agreement. v6 REFUSED (off-image choose_q = junk, unprovable — firewall). DECI
 NEXT: do the gate-eq consumers need the RAW chart meas or only gated compositions
 (regional G would suffice; radii chain S q vs flow image to verify). std-3, raw 0.
 NOT a₁=R/6. NEXT: J4-228 GatedChartMeasAudit.
+
+## J4-228 (2026-08-05, 355fa68b) — GatedChartMeasAudit: ★ GATED-SUFFICIENT ★ [AF]
+The decisive audit: raw chart meas enters every consumer only ×amplitude factors that
+vanish for ‖W‖≥b ⟹ each rep = its Gc-twin pointwise; twin measurable WITHOUT the raw
+chart. Banked: hWG_of_unguarded (guard strictly weaker — non-vacuous), four _v2 reps,
+three conjunct capstones _v2, ★ tripleHEmeas_concrete_v3 (chart-meas conjunct
+DISCHARGED: regional Gc + hWG). Residues: (1) hWG's geometric fact = general-field-point
+right-inverse germ (origin-only banked); (2) the v6 entry-point wrapper. std-3 all 11,
+raw 0. NOT a₁=R/6. NEXT: J4-229 RightInverseGeneral (A: the germ; B: the v6 wrapper).
