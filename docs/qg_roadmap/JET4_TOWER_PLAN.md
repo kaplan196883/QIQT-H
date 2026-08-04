@@ -1463,3 +1463,12 @@ modulus). LADDER: B1✓ → B2 joint weld → B3 inverse chart (OBL-5) → B4 ke
 → B5 ★WALL = base-point C¹ variational Grönwall (OBL-3) → B6 wrapper
 (heatOp_qregularity_of_jointCont certifies content). NAMED WALLS: hDaLimLU + hKp1(B5)
 (+ hD1 CLM lift). std-3, budget raw 0. NOT a₁=R/6. NEXT: B2 FlowJointContinuity.
+
+## J4-213 (2026-08-05, 6ac4cf7d) — FlowJointContinuity: B2 joint flow continuity [AF]
+hEmeas ladder B2. uniformFlowExp_joint_continuousWithinAt/_continuousOn on K ×ˢ ball 0
+ρ_K — triangle weld: W3 base Lipschitz (uniform in w) + velocity slot at fixed q₀
+(contDiffAt2.continuousAt). ContinuousWithinAt = honest shape. + B4 seed
+uniformFlowExp_smoothFactor_continuousOn. B3 discovered ALREADY BANKED
+(ChartGeneralPContinuity.chartP_continuousOn — don't-under-credit vindicated again).
+OBL-2 residual gap documented (inverse-chart entry + τ/p slots E3a-E3e + reach).
+std-3, budget raw 0. NOT a₁=R/6. NEXT: B4 KernelJointContinuity (OBL-2).
