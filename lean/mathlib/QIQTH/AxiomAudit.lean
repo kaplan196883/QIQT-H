@@ -16796,4 +16796,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CoeffContWdiffLift.hWdiffJ_from_slices
 #print axioms QIQTH.CoeffContWdiffLift.hjoint_from_geometry_final
 
+-- ★★★ J4-180 (GateDiffWiringMeasSet.lean, ns QIQTH.GateDiffWiringMeasSet): hGateDiff' +
+-- hMeasSet round (indep build-verified). Part A: τ-UNIFORMITY CONFIRMED (gate/chart
+-- geometry τ-independent; the ∀ᵐs slot via ae_of_all); the ∞-mirrors
+-- innerKernel/gatedWitness_contDiffAt_field_infty + gatedWitness_pdiffAt_field_infty
+-- (hu at ∞ from hu_infty_closed — ω never touched); ★ hGateDiff'_from_coverage — the
+-- EXACT J4-179 hGateDiff' slot from {hg, hgi, hgpos} + the s-independent ν-generic
+-- coverage carry hCover. Part B: le_mul_abs_of_rat_dense (density extension) + ★
+-- hasDerivAt_iff_rat_of_continuous (the rational ε-δ characterization for continuous f)
+-- + ★ measurableSet_hasDerivAt_of_continuous_slices (the GENERAL lever: ⋂ε⋃δ⋂h over ℚ)
+-- + hMeasSet_of_sliceCont (the EXACT hMeasSet slot ← {hSliceCont (the honest boundary
+-- residue), hWq/hWa/hDmeas (J4-178 joint-measurability interface)}). ★★★
+-- hjoint_fully_geometric CAPSTONE — the full hjoint slot, final carries {hg, hgi, hgpos,
+-- hKmeasSet, hSmeasSet, hFjoint, hVmapMeas, hCover, hSliceCont, hWq, hWa, hDmeas}.
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GateDiffWiringMeasSet.innerKernel_contDiffAt_field_infty
+#print axioms QIQTH.GateDiffWiringMeasSet.gatedWitness_contDiffAt_field_infty
+#print axioms QIQTH.GateDiffWiringMeasSet.gatedWitness_pdiffAt_field_infty
+#print axioms QIQTH.GateDiffWiringMeasSet.hGateDiff'_from_coverage
+#print axioms QIQTH.GateDiffWiringMeasSet.le_mul_abs_of_rat_dense
+#print axioms QIQTH.GateDiffWiringMeasSet.hasDerivAt_iff_rat_of_continuous
+#print axioms QIQTH.GateDiffWiringMeasSet.measurableSet_hasDerivAt_of_continuous_slices
+#print axioms QIQTH.GateDiffWiringMeasSet.hMeasSet_of_sliceCont
+#print axioms QIQTH.GateDiffWiringMeasSet.hjoint_fully_geometric
+
 end QIQTH.AxiomAudit
