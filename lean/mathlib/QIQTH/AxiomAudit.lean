@@ -16860,4 +16860,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InftyRebaseCapstone.hCH_discharge_from_geometry
 #print axioms QIQTH.InftyRebaseCapstone.hsrc_from_geometry
 
+-- ★★★ J4-183 (CConvFacade.lean, ns QIQTH.CConvFacade; Sol plan step 2; indep
+-- build-verified, FIRST-BUILD-GREEN): the bundled hCConv facade. Five Prop bundles with
+-- VERBATIM banked field shapes (CConvMetricData {hg,hgi,hgpos}; CConvChartGateData
+-- {hKmeasSet,hSmeasSet,hVmapMeas,hCover,hChartB,hSliceData,hKmeas}; CConvSourceData
+-- {hFjoint,hFbd,hFmeas}; CConvDerivativeData {hDmeas,hlin,hDrep} — the J4-184..186
+-- replacement target; CConvEnvelopeData {hcoef,hC2fam,hGateData,hGateData'}) +
+-- shared_chart_consequences ({hΘc,hΘne,huc} derived ONCE from metric) + ★★★
+-- hCConv_discharged_from_data — the full thread shared→hjoint_instantiated→
+-- henv/hdomS_assembled→g2_bundle_assembled→hCConv_L1_final, ν:=volume, κ:=2,
+-- C₀:=(Bs·Ba+Bd)·(√2)ⁿ pinned defeq. ⚠ HONEST GAP: the facade conclusion IS verbatim
+-- hCConv_reduction's hfam (the L1 layer); the residue's C² hCConv still needs L2
+-- (hD1 : ContDiffAt 1 D 0 — the hEgrad tail) + the leviSeries specialization. J4-184
+-- natural task: the flow-ball S-instantiation (v7's existential fixes S — incompatible
+-- with the general-S facade; wiring it forces the concrete gate everywhere). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CConvFacade.shared_chart_consequences
+#print axioms QIQTH.CConvFacade.hCConv_discharged_from_data
+
 end QIQTH.AxiomAudit

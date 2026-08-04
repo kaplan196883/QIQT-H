@@ -379,6 +379,7 @@ import QIQTH.CoeffContWdiffLift
 import QIQTH.GateDiffWiringMeasSet
 import QIQTH.InftyRebaseCapstone
 import QIQTH.SliceInterfaceInstantiation
+import QIQTH.CConvFacade
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
