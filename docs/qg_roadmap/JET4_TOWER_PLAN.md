@@ -1321,3 +1321,10 @@ hCConv gap. Walls re-tiered: Jacobi/exp ODE needed ONLY for the true
 off-diagonal value (NOT for hEboundW); W1/W2 flow; L2 hD1; K-uniform
 expRho; annulus-grad. Verdict: grind (c)(d)(e)+Levi; Sol-consult
 (a)(b). NOT a1=R/6.
+
+### J4-197 — EboundWiringHD1 (LANDED fe70ecb6)
+hEboundW discharged into a1_R6_of_residue_inf_v2 (the carry GONE from
+the capstone surface; provider defeq + the C*(1+t) reshape) + the
+abstract dominated-differentiation lever (the derivative analogue of
+the J4-160 engine) + the hD1 assessment (missing = the order-2 gate
+envelope + order-2 measurability). std-3 raw 0. NOT a1=R/6.
