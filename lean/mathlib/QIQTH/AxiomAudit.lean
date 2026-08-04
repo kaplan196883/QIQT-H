@@ -17108,4 +17108,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OmegaHsrcC4cAudit.a1_R6_of_residue_inf
 #print axioms QIQTH.OmegaHsrcC4cAudit.residualCoeffA_diag_singular_free
 
+-- ★★★ J4-197 (EboundWiringHD1.lean, ns QIQTH.EboundWiringHD1; indep build-verified):
+-- Part A — hEboundW_from_geometry (the provider gatedWitnessN1_hEboundW_le_vanVleck_final
+-- is DEFEQ to the capstone's H-shape; the only glue = the C ↦ C·(1+t) constant reshape
+-- [ht : 0 ≤ t honest] — GateSqControl fully internal to the provider) + ★★★
+-- a1_R6_of_residue_inf_v2 — the capstone with hEboundW_le GONE from the surface (gate
+-- a/b/S/C' provider-chosen existentially); remaining inner carries = {hS0, hInt, hDuhamel,
+-- hInter, hDConv, hCH, hCConv} (the satisfiable interface assembly per census #3).
+-- Part B — ★ hasFDerivAt_doubleIntegral_of_dominated (the abstract dominated-DIFFERENTIATION
+-- lever: x ↦ ∫s∫z K differentiable with derivative ∫∫K' under two-layer domination —
+-- the derivative analogue of the J4-160 engine; open-nbhd load-bearing). hD1 ASSESSMENT:
+-- banked at order 2 = {witnessFieldDeriv2(+center/offGate), sliver2_bound, the J4-191
+-- extra absorption}; MISSING = {the order-2 gate envelope (E2 one order up), the order-2
+-- joint measurability (the J4-185 pattern at order 2)} — the next two bricks. std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.EboundWiringHD1.hEboundW_from_geometry
+#print axioms QIQTH.EboundWiringHD1.a1_R6_of_residue_inf_v2
+#print axioms QIQTH.EboundWiringHD1.hasFDerivAt_doubleIntegral_of_dominated
+
 end QIQTH.AxiomAudit
