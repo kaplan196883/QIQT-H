@@ -1342,3 +1342,10 @@ sliver piece verbatim); the bulk lemma (truncation defeats the wall) +
 the uniform-limit-of-derivatives skeleton (the analytic heart of hD1).
 Remaining: the concrete wiring + gderiv continuity. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-200 — HD1ConcreteWiring (LANDED 79a7abfe)
+The hD1-slot verdict (= HasFDerivAt family + D' continuity) + all four
+feeds (sliver-rate hBint, gderiv_continuousAt, endpoint convergence,
+sqrt-eps vanishing, hD1_reduction). Honest finding: witness_sliver2 is
+centre-only — the x-uniform upgrade is the remaining carry. std-3
+raw 0. NOT a1=R/6.
