@@ -1187,3 +1187,23 @@ effectively exhausted: residue = satisfiable-by-design geometric/
 measurability data + hDmeas + the v7 disjunction + the top->infinity
 interface rebases + hGateData envelope. Next: Sol consult on walls +
 final assembly. std-3 raw 0. NOT a1=R/6.
+
+### SOL CONSULT (2026-08-04, post-J4-181) — THE ENDGAME PLAN
+Verdict: layered assembly with ONE bundled facade (4-5 Prop bundles:
+Metric/ChartGate/Source/Derivative/Envelope data; envelope parallel to
+L1, rejoining only at the final hCConv constructor). hDmeas: replace
+exact deriv-measurability by the MEASURABLE EXPLICIT REPRESENTATIVE D
+(the gated E1 formula) + measurable Good = {HasDerivAt slice (D x)}
+(the banked rational lever) + ae_prod on Good + uniqueness => deriv
+=ae D — no exact-Borel-deriv theorem needed. F2: compact open-tube
+lemma (finite subcover min), NOT continuity of the .choose radius —
+1-2 bricks IF the chart spec gives joint openness (audit first). F1:
+materially easier now — factorize E first, reuse the support-
+globalization; 2-3 bricks if chart spec is jointly regular, 4-7 if the
+parameter-ODE measurability must be built. hEgrad: 5-7 bricks (jet
+pack -> factorization -> differentiate -> r/t G <= C t^{-1/2} G' 
+absorption -> cutoff annulus -> assembly). PLAN: J4-182 top->infinity
+rebase sweep NOW; 183 facade; 184 measurable-derivative-representative
+interface; 185 gated-D instantiation; 186 close hDmeas + full hCConv;
+187 generic tube lemma; 188 F2 close; 189 factorized E normal form;
+190 inner joint meas of E; 191 F1 close; then the 5-brick hEgrad tail.
