@@ -1251,3 +1251,11 @@ Gaussian factorization repackaged from banked algebra) +
 cutoffError_eq_cutoff_gauss_A_sub_annulus + annulus supports + the F1
 measurability feeds (unified factor carries). Serves both F1 and
 hEgrad. std-3 raw 0. NOT a1=R/6.
+
+### J4-188 — ErrorKernelJointMeas (LANDED c8ccff2e) — Sol step 10
+All six factor carries DISCHARGED from geometry; the full normal form
+chi*(G*A) - annulus measurable from geometry + the ONE carry hDH (the
+parametrix spatial gradient). F1 slot identified (the triple
+StronglyMeasurable, ResidueThreading:316); remaining F1 = hDH + the
+W1/W2 q-regularity flow wall. 1/tau^2 blowup honestly documented.
+std-3 raw 0. NOT a1=R/6.
