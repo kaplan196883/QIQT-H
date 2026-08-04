@@ -17026,4 +17026,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianGradAbsorption.sqrtInv_pow_exp_le
 #print axioms QIQTH.GaussianGradAbsorption.annulus_negPow_exp_le
 
+-- ★★★ J4-192 (ChartThirdJet.lean, ns QIQTH.ChartThirdJet; the first mixed-third-jet
+-- brick; indep build-verified): ★ uniformFlowExp_contDiffAt_four — the C⁴ upgrade DERIVED
+-- (uniformFlowExp is .choose-banked at C² only, BUT expMap_eq_uniformFlowExp_on_overlap
+-- + the exp∈C⁴ tower + congr_of_eventuallyEq bridge it — derived, not carried) + ★★ the
+-- no-conjugate-points invertibility DISSOLVED on the uniform ball via the Neumann series
+-- (uniformFlowExp_fderiv_near_id_quant ⟹ ‖1−Dφ‖<1 ⟹ IsUnit ⟹ CLE.ofUnit, fed into the
+-- J4-171 abstract IFT core at N:=4) ⟹ chartField_contDiffAt_four_reachable (+ _basePoint)
+-- — the C⁴ chart at reachable points, ZERO new carries (only the per-base ‖v‖ < expRho z
+-- guard, pre-existing). chartField_thirdJet_of_contDiffAt (+ _basePoint, _reachable) —
+-- the third field line-jet EXISTS (mirrors GeneralBaseJets one order up). Deferred to the
+-- next brick: the third-jet compact bounds + the parametrix corollary (continuity-of-value
+-- heavier). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ChartThirdJet.uniformFlowExp_contDiffAt_four
+#print axioms QIQTH.ChartThirdJet.chartField_contDiffAt_four_reachable
+#print axioms QIQTH.ChartThirdJet.chartField_contDiffAt_four_basePoint
+#print axioms QIQTH.ChartThirdJet.chartField_thirdJet_of_contDiffAt
+#print axioms QIQTH.ChartThirdJet.chartField_thirdJet_basePoint
+#print axioms QIQTH.ChartThirdJet.chartField_thirdJet_reachable
+
 end QIQTH.AxiomAudit
