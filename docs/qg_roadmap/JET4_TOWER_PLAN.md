@@ -1432,3 +1432,13 @@ LANDED: hDConv_from_banked (chain composed at the concrete witness, Da := DaTrun
 a1_R6_of_residue_inf_v6 (= v5 minus black-box hDConv, re-derived internally). Post-v6
 walls: hDaLimLU + hD1 (+ Levi/Duhamel interface + facades = data). std-3, budget raw 0.
 NOT a₁=R/6. NEXT: Ph8 TruncatedDuhamelData facade.
+
+## J4-210 (2026-08-05, ce18a73c) — TruncatedDuhamelData: the semantic Levi/Duhamel facade [AF]
+Sol Ph8. The v5/v6 five-slot cluster {hEboundW_le,hInt,hDuhamel,hInter,hDConv} → four Prop
+bundles (Core.hIdentity→hDuhamel; Bulk.hDiff→hDConv; Endpoint.hEbound/hIntegrable→
+hEboundW_le/hInt; Interchange.hSeries→hInter). Adapters: hDuhamel_of_truncatedData +
+duhamelInterface_of_truncatedData (four bundles → the full 5-conjunction). Providers:
+Core ← hDuhamel_leviSeries_of_daLim (rests on hDaLimLU), Interchange ←
+heatConv_leviSeries_interchange (DATA residue), Endpoint ←
+iterConvIntegrableW_of_bound_baseMeas (hEbound = envelope DATA), Bulk ←
+hDConv_from_banked (J4-209). std-3, budget raw 0. NOT a₁=R/6. NEXT: Ph9 CapstoneAssembly.
