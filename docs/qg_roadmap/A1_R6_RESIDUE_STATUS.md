@@ -469,3 +469,136 @@ the one deep Mathlib-scale residue), **F2** (the `cf` floor), and the **`hEgrad`
 (`a1_R6_of_residue_hCH_hInter_discharged`) whose residue is real, enumerated, and correctly tiered. This
 addendum hardened one branch (`hConvDeriv`/`hCConv` L1); it changed no result's labels and did not touch
 F1/F2/hEgrad.
+
+---
+
+## Addendum (2026-08-05): the Sol endgame execution — J4-182…195
+
+Fourteen bricks landed since the L1 addendum, executing the Sol endgame plan (2026-08-04). Net effect:
+the `hsrc` `⊤→∞` carry is **removed**; the F1 **factor axis** is fully discharged from geometry; the
+chart is now **C⁴** (no-conjugate-points **dissolved**); the C4c off-diagonal premise is honestly
+**corrected** (it is genuine curvature, not a recursion residual). Every result below is `std-3`
+(`propext`, `Classical.choice`, `Quot.sound`) and `sorry`-free per its `#print axioms` block and the
+`AxiomAudit` ledger. **⚠ `a₁ = R/6` remains CONDITIONAL** — this addendum moved and re-tiered the
+residue; it did not close it.
+
+### The brick table (verified against the pinned statements)
+
+| Brick | File | Verified key result | Status |
+|---|---|---|---|
+| J4-182 | `InftyRebaseCapstone.lean` | `hCH_discharge_from_geometry` (spatial-`C²` witness-diag from `{hg,hgi,hgpos}`); `hsrc_from_geometry` (`hsrc` at honest `∞`) | std-3, DERIVED |
+| J4-183 | `CConvFacade.lean` | five `:Prop` bundles (`Metric/ChartGate/Source/Derivative/Envelope`) + `hCConv_discharged_from_data` → the L1 `∃ w∈𝓝 0, HasFDerivAt (heatConv…)` shape | std-3 |
+| J4-184 | `FlowBallInstantiation.lean` | `chartGateData_flowBall` (builds `ChartGate` from flow-ball geometry) + `facade_flowBall` (L1 `hfam` at gate `S z = φ_z '' ball 0 c`, ∀ `0<c<δ₀`) | std-3 |
+| J4-185 | `GatedDInstantiation.lean` | `witnessFieldDeriv_measurable_of_gateEq` + `hDmeas_discharged` (the exact `CConvDerivativeData.hDmeas` field, per-fibre) | std-3 |
+| J4-186 | `CompactTubeLemma.lean` | `compact_tube`/`compact_tube_ball` + **F2 VERDICT** `flowBall_gateRadius_floor` — the concrete gate has floor `b < c`; **F2 already discharged** (tube lemma not load-bearing) | std-3 |
+| J4-187 | `ErrorKernelFactorization.lean` | `cutoffError_eq_cutoff_gauss_A_sub_annulus` — the **E normal form** `E = χ·(G_τ·A) − annulusTerms`, `A = residualCoeffA`; `residualCoeffA_measurable_of_factors` (F1 feed) | std-3 |
+| J4-188 | `ErrorKernelJointMeas.lean` | `cutoffError_normalForm_measurable_from_geometry` — all factor carries from `{hg,hgi,hgpos}` (the F1 factor axis, assembled) | std-3 |
+| J4-189 | `ParametrixGradientMeas.lean` | `cutoffError_normalForm_measurable_final` — the last derivative-field `hDH` **eliminated**; **F1 factor axis DONE from geometry**; W1/W2 flow `q`-regularity isolated as the residual wall | std-3 |
+| J4-190 | `CompactJetBounds.lean` | `JetBoundPack` + `residualCoeffA_tau_weighted_bound`: `τ²·|residualCoeffA| ≤ C` (the τ²-cleared amplitude bound, compact-uniform) | std-3 |
+| J4-191 | `GaussianGradAbsorption.lean` | the absorption family (`gaussDdim` radial/linear/quadratic power-×-Gaussian absorptions, `sqrtInv_pow`/`annulus_negPow`) | std-3 |
+| J4-192 | `ChartThirdJet.lean` | `uniformFlowExp_contDiffAt_four` — **chart C⁴ DERIVED** (via `expMap↔uniformFlowExp` overlap bridge + `expMap_contDiffOn_four`); **no-conjugate-points DISSOLVED** (Neumann on uniform ball); `chartField_thirdJet_{of_contDiffAt,basePoint,reachable}` | std-3 |
+| J4-193 | `ThirdJetBounds.lean` | `residualCoeffA_grad_tau_weighted_bound`; `parametrix_contDiffAt_three_field` (field-C³ parametrix); third-derivative continuity | std-3 |
+| J4-194 | `GradEAssembly.lean` | `gradGA_bound`: `|∂ᵢ(G·A)| ≤ C·τ^{−5/2}·G_{2τ}`; **ALIGNMENT VERDICT** — the gap to the target `τ^{−1/2}·G_{2τ}` is the **gradient of the already-carried zeroth C4c `τ^{−2}` wall**, not an independent gap | std-3 |
+| J4-195 | `OmegaHsrcC4cAudit.lean` | `a1_R6_of_residue_inf` (the `⊤`-`hsrc` carry **REMOVED**, `hsrc` now at `∞`); the **C4c honest correction**; `residualCoeffA_diag_singular_free` | std-3 |
+
+### The definitive current residue — `a1_R6_of_residue_inf` (OmegaHsrcC4cAudit.lean:388), enumerated
+
+The `∞`-capstone's **machine-checked hypothesis interface** (verbatim-summarised; `hHdiag`/`hDH` are now
+supplied internally by `capstone_hHdiag_supplied`/`capstone_hDH_supplied`, so they are **off** the outer
+surface). Grouped by honest status:
+
+**(1) GAUGE / RNC — by-design normal-coordinate inputs** (the campaign's genuine geometric givens):
+- `hg : ∀ a b, ContDiff ℝ ⊤ (g·· a b)`, `hg0 : g 0 = I`, `hgi : gi 0 = δ`, `hΓ : christoffel g gi (0)=0`,
+  `hdg0 : ∂g(0)=0`, `htr : ∑ₐ ∂∂(g a a) = −(2/3)·Ric` (the RNC 2-jet identity), `hChr : ∀ a b c,
+  ContDiff ℝ ⊤ (christoffel g gi a b c)`. — **satisfiable-by-design** (RNC).
+
+**(2) Gate geometry — by-design chart data:**
+- `hK : IsCompact K`, `hK0 : 0∈K`, `hS0 : 0∈S 0`, `ha : 0<a`, `hab : a<b`, `hHeq : H =
+  vanVleckGatedWitness g gi hChr hK S a b` (defines the witness), `t,ht:0<t`, `C,hCnn:0≤C`. —
+  **satisfiable-by-design.**
+
+**(3) `hsrc : ContDiff ℝ ∞ (transportOp (vanVleck g) g gi (transportCoeff … 0))`** — **DISCHARGED from
+geometry**: `InftyRebaseCapstone.hsrc_from_geometry` delivers exactly this `∞` form from `{hg,hgi,hgpos}`.
+The `⊤` (analytic) typing is **gone** (Part A trace: `hsrc` reaches only `C¹/C⁰` atoms in
+`radialTransportSolve_transport_eq_ofC1`).
+
+**(4) `hEboundW_le : ∀ τ p q, 0<τ → τ≤t → |heatOp g gi H τ p q| ≤ C·baseKernelW 2 0 τ p q`** —
+**DISCHARGEABLE from geometry**: `CoeffU1Fix.gatedWitnessN1_hEboundW_le_vanVleck_final` proves
+`|heatOp…| ≤ (C·(1+t))·baseKernelW 2 0` from `{hg,hC,hgnd,hgsymm,hinvF,hframeK,hw,hdg0,hg0}` via Gaussian
+**domination** into the width-2 kernel (the D1 `gaussDdim((3/2)τ)` estimate, `GateSqControl` supplied for
+the flow-ball gate by `gateSqControl_of_flowBall`). Modulo the trivial `C ↦ C·(1+t)` constant reshape (`t`
+fixed) this **is** the slot. **NOT** the Jacobi wall — this is domination, not cancellation-to-zero.
+
+**(5) Levi / Duhamel interface carries** — `hInt` (`IterConvIntegrableW`), `hDuhamel`, `hInter` (Neumann
+`∑'`), `hDConv` (`DifferentiableAt` of the convolution): **satisfiable interface-assembly** (laborious,
+not research-grade).
+
+**(6) `hCH : ContDiffAt ℝ 2 (fun p => H t p 0) 0`** — **DISCHARGED from geometry** by
+`InftyRebaseCapstone.hCH_discharge_from_geometry` (from `{hg,hgi,hgpos}` + chart carries).
+
+**(7) `hCConv : ContDiffAt ℝ 2 (fun p => heatConv H (leviSeries…) t p 0) 0`** — the Levi-convolution
+field-`C²`. Its **L1 layer** (the `∃ w∈𝓝 0, HasFDerivAt` shape) is now delivered by the facade
+(`CConvFacade.hCConv_discharged_from_data` / `FlowBallInstantiation.facade_flowBall`) from the five data
+bundles. The **`C²`/L2 tail** — `hD1 : ContDiffAt ℝ 1 D 0` on the derivative representative — **remains
+the reported gap** (facade docstring: "NOT the `C²` residue slot; the `hD1` tail remains the reported gap").
+
+### The walls (final honest list)
+
+- **(a) The off-diagonal van-Vleck cancellation — the Jacobi / exp-map radial ODE.** The identity
+  `(r∂_r) log √(det g̃)(v) = −2·(Δ_flat r²/4 − d/2)` (`VanVleckCancellation` CHECKPOINT, verified) needs
+  the exponential-map / Jacobi-field machinery **absent from every proof assistant** (the shared
+  Riemannian-heat-kernel gap). **What it is NOT needed for:** the `τ`-free zeroth envelope `hEboundW_le`.
+  Per J4-195's Part-B correction (and the `gatedWitnessN1_hEboundW_le_vanVleck_final` provider), that
+  envelope is obtained by **Gaussian domination into a wider width-2 kernel, conditional on the
+  `GateSqControl` near-isometry certificate — INDEPENDENT of the Jacobi cancellation**. The Jacobi ODE is
+  needed only for the **genuine off-diagonal cancellation-to-zero** (the true `a₁ = R/6` value for `v≠0`,
+  i.e. that `vanVleck` solves the leading transport ODE so `E` has no `O(1/τ)` head off-diagonal). It is
+  **off the domination critical path**.
+- **(b) W1/W2 flow `q`-regularity (F1).** Joint continuity (W1) and joint `C¹` (W2) of the gated kernel
+  `H_G(τ,p,q)` in the base point `q`, which runs through the opaque `Classical.choose` geodesic flow
+  `uniformFlowExp`. `ParametrixGradientMeas` closes the **factor axis** but explicitly **cannot** supply
+  the `q`-continuity of the flow-dependent kernel — a distinct ODE-smooth-dependence (parameterised
+  Picard / closed integral-solution + Lusin–Souslin) endeavour. **Genuine wall.**
+- **(c) L2 `hD1` + the `hCConv` `C²` gap.** The `ContDiffAt ℝ 1 D 0` upgrade of the Levi-convolution
+  derivative representative (the `C²` field slot). The L1 `∃`-`HasFDerivAt` shape is done via the facade;
+  the `C¹`-of-the-derivative tail is the residue. **Satisfiable, non-trivial plumbing.**
+- **(d) The gate-uniform third-jet constant (`expRho`).** Chart `C⁴` and third-jet **existence** land
+  (J4-192), but the `z`-slot guard `‖v‖ < expRho g gi hC z` is a **per-base-point** `.choose`-fixed
+  radius; a single K-uniform radius over `expRho` is **not** extracted (near-id/chart/flow radii ARE
+  K-uniform). The third-jet **value** and its `τ^{−1/2}` Gaussian-moment modulus (`gaussComp_pd_pd_pd` +
+  third moments) are later bricks. **Mechanical, deferred.**
+- **(e) The annulus-gradient composition.** The full `∇(∂_τH − Δ_pH)` assembly aligning `gradGA_bound`'s
+  honest `τ^{−5/2}·G_{2τ}` to the `hEgrad` target `τ^{−1/2}·G_{2τ}`. Per J4-194's verdict this is the
+  **gradient of the already-carried zeroth C4c `τ^{−2}` wall**, not an independent gap — it aligns
+  verbatim once (a)'s zeroth bound gives a genuinely bounded amplitude. **Mechanical, multi-brick.**
+
+### Tractability verdict + recommendation
+
+The Sol endgame narrowed the residue sharply: `hsrc` closed at `∞` (⊤ carry gone), `hCH` closed from
+geometry, the **F1 factor axis** closed from geometry, chart **C⁴** derived, no-conjugate-points
+**dissolved**, `hEboundW_le` shown **dischargeable-from-geometry** (domination, not cancellation), and the
+C4c off-diagonal premise **honestly corrected** (genuine curvature). What remains splits cleanly:
+
+- **Grind (mechanical / interface):** (c) the `hCConv` L2 `hD1`; (d) the K-uniform `expRho` radius +
+  third-jet value/modulus; (e) the annulus-gradient `τ`-power alignment; and the `hInt/hDuhamel/hInter/
+  hDConv` Levi carries. None is research-grade.
+- **Sol consult (research-grade Mathlib-scale walls):** (a) the Jacobi/exp radial-ODE off-diagonal
+  cancellation, and (b) the W1/W2 flow `q`-regularity of the `Classical.choose` `uniformFlowExp`. Both are
+  the shared proof-assistant Riemannian-heat-kernel / ODE-smooth-dependence gaps; each is a multi-week
+  endeavour, not the next increment.
+
+**Discrepancy FLAGGED.** `GradEAssembly`'s header calls the zeroth `τ`-free envelope "CARRIED, not derived"
+(citing the `1/τ²` Laurent head of the raw `residualCoeffA`), whereas J4-195 and the
+`gatedWitnessN1_hEboundW_le_vanVleck_final` provider show `hEboundW_le` **is** proved from geometry via
+width-2 domination. Reconciliation: "carried" there refers to the abstract `RestrictedEboundW` **hypothesis
+slot** (and to cancellation-to-zero of the amplitude, which is genuinely not done), **not** to the absence
+of a provider for the domination bound. The bound-on-`E` slot is therefore classed here as
+**dischargeable-from-geometry**, and the Jacobi cancellation is correctly re-tiered as needed only for the
+true off-diagonal **value**, off the domination path. Minor: the provider gives `(C·(1+t))·baseKernelW`
+vs. the capstone's `C·baseKernelW` — a trivial `t`-fixed constant reshape.
+
+**⚠ `a₁ = R/6` remains CONDITIONAL** — a machine-checked, compact-uniform conditional theorem
+(`a1_R6_of_residue_inf`) whose residue is real, enumerated, and correctly tiered. This addendum removed the
+`⊤`-`hsrc` carry, discharged the F1 factor axis and `hCH` from geometry, derived chart `C⁴`, and hardened
+the `hCConv` L1 facade; the two genuine research walls (Jacobi off-diagonal cancellation, W1/W2 flow
+regularity) are unchanged.
