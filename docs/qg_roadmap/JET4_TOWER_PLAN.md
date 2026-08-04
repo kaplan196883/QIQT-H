@@ -1472,3 +1472,13 @@ uniformFlowExp_smoothFactor_continuousOn. B3 discovered ALREADY BANKED
 (ChartGeneralPContinuity.chartP_continuousOn — don't-under-credit vindicated again).
 OBL-2 residual gap documented (inverse-chart entry + τ/p slots E3a-E3e + reach).
 std-3, budget raw 0. NOT a₁=R/6. NEXT: B4 KernelJointContinuity (OBL-2).
+
+## J4-214 (2026-08-05, cb72f2a9) — KernelJointContinuity: B4 honest verdict [AF]
+Global OBL-2 (Continuous over ℝ×Pⁿ×Pⁿ) UNSATISFIABLE — structural edges E-τ0 (diagonal
+Gaussian blow-up at τ=0) + E-gate (hard set-gate jumps at ∂K/∂(S q)). Maximal honest:
+kernelBase_jointContinuousOn_pos ({τ>0}) + kernelGated_jointContinuousOn_inGate.
+hEmeas_of_hKp1 REFUSED (unsatisfiable hyp — firewall held). KEY DISCOVERY: the strong
+measurability OBL-2 fed is ALREADY discharged via the Borel route
+(InnerKernelJointMeas.hinnerJ_discharged/hjoint_final, globally Borel across τ=0) —
+the OBL-2 continuity line RETIRES; whether hKp1 (OBL-3) is needed AT ALL = next audit.
+std-3, budget raw 0. NOT a₁=R/6. NEXT: J4-215 HEmeasBorelAudit (may retire hKp1).
