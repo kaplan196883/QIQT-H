@@ -1394,3 +1394,9 @@ named wall. Honest frontier if hEmeas fails: the q-continuity of the
 endpoint-flow velocity jets on the compact good tube. DON'T cite as
 frontier: hInter/hCConv/hDelta/the raw Duhamel bundle (engineering).
 Total ordinary work ~31-55 bricks.
+
+### J4-205 — LeviSeriesLocalData (LANDED 4eced3e3) — Sol Ph1+Ph2
+The shared series package (structure + tsum-measurability + envelope
+lemmas + builder + hInt accessor); banked domination reused; the
+joint-(s,z) bonus honestly removed (whnf loop, follow-on).
+std-3 raw 0. NOT a1=R/6.
