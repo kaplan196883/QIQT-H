@@ -17664,4 +17664,26 @@ namespace QIQTH.AxiomAudit
 -- tripleHEmeas_concrete_v3? std-3. NOT a₁ = R/6.
 #print axioms QIQTH.ChartRepConstruction.flowInverse_jointMeasurable_regional
 
+-- ★★★ J4-228 (GatedChartMeasAudit.lean, ns QIQTH.GatedChartMeasAudit; THE DECISIVE
+-- CONSUMER AUDIT; indep build-verified): ★ GATED-SUFFICIENT on ALL FOUR consumers ★.
+-- The raw chart measurability enters every rep only through gaussDdim∘W + moment
+-- coefficients, ALWAYS multiplied by an amplitude factor (chartFieldAmp = radialCutoff·
+-- amp or its pd's) that VANISHES for ‖W‖≥b — so each rep equals its Gc-substituted twin
+-- pointwise, and the twin is measurable WITHOUT hChartMeas. Banked: hWG_of_unguarded
+-- (the guard is strictly WEAKER than hChartRep — non-vacuity certified), four _v2 reps
+-- (raw hChartMeas DROPPED for the regional Gc + the guard hWG), three BorelDischarge
+-- conjunct capstones _v2, and ★ tripleHEmeas_concrete_v3 — S1 with the chart-
+-- measurability conjunct DISCHARGED (regional Gc + hWG), identities reused unchanged.
+-- Residues: (1) hWG's one open geometric fact = the GENERAL-field-point right-inverse
+-- germ ‖W q p‖<b≤ρ ⟹ φ_q(W q p) = p (chartW0_rightInverse is origin-only); (2) v6
+-- needs a v4-with-tripleHEmeas-input entry point (the original chain hardwires the
+-- unguarded tripleHEmeas_concrete). std-3 all 11. NOT a₁ = R/6.
+#print axioms QIQTH.GatedChartMeasAudit.hWG_of_unguarded
+#print axioms QIQTH.GatedChartMeasAudit.gatedTauRepProd_measurable_v2
+#print axioms QIQTH.GatedChartMeasAudit.gatedMixed2RepProd_measurable_v2
+#print axioms QIQTH.GatedChartMeasAudit.tauDeriv_prod_stronglyMeasurable_v2
+#print axioms QIQTH.GatedChartMeasAudit.firstFieldPd_prod_stronglyMeasurable_v2
+#print axioms QIQTH.GatedChartMeasAudit.secondFieldPd_prod_stronglyMeasurable_v2
+#print axioms QIQTH.GatedChartMeasAudit.tripleHEmeas_concrete_v3
+
 end QIQTH.AxiomAudit
