@@ -1518,3 +1518,12 @@ identity + conjunct (3) ∀(i,j) = exact hP2. ★ tripleHEmeas_concrete: S1 DISC
 CONTINUITY-FREE (all 5 conjuncts; residue = genuine measurable-jet suppliers only).
 The OBL-2/OBL-3 continuity ladder fully obsoleted by the Borel route. std-3 all 11,
 budget raw 0. NOT a₁=R/6. WALLS NOW: hDaLimLU + hD1 CLM lift. NEXT: J4-219 HD1CLMLift.
+
+## J4-219 (2026-08-05, d93785c2) — HD1CLMLift: the hD1 CLM-lift wall CLOSED [AF]
+J4-211's caveat resolved: NOT a wrong scalar fact — the gap was pure componentwise→CLM
+assembly. contDiffAt_clm_of_scalar_components + hD1_clm_of_scalar_and_rep +
+hD1_concrete_from_scalar (c i = proj i) + ★ a1_R6_of_residue_inf_v7 (CLM hD1 binder →
+n scalar ContDiffAt facts). Residue = hD1_from_data's own sliver carries per component
+(bulk HasFDerivAt/limit, x-uniform hsliver + vanishing, order-2 continuity). WALLS NOW:
+hDaLimLU ONLY. std-3 all 4, budget raw 0. NOT a₁=R/6. NEXT: J4-220 DaLimLUWallRecon
+(THE FINAL WALL).
