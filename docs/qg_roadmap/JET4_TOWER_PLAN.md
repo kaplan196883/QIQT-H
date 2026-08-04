@@ -1214,3 +1214,11 @@ rebased in place; hCH_discharge_from_geometry + hsrc_from_geometry
 (geometry-only). FINDING: the deep a1_R6_of_residue hsrc slot demands
 omega — future audit whether that slot's use is omega-genuine.
 Sol plan step 1 done. std-3 raw 0. NOT a1=R/6.
+
+### J4-183 — CConvFacade (LANDED 311429cd) — Sol plan step 2
+Five verbatim-shaped Prop bundles + shared_chart_consequences +
+hCConv_discharged_from_data (the full L1 thread, first-build-green).
+HONEST GAP: facade = hCConv_reduction's hfam (L1) verbatim; the C2
+residue slot needs L2 hD1 (hEgrad tail) + leviSeries specialization.
+J4-184 = flow-ball S-instantiation + measurable-D adapter.
+std-3 raw 0. NOT a1=R/6.
