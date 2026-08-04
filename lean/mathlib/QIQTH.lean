@@ -383,6 +383,7 @@ import QIQTH.CConvFacade
 import QIQTH.FlowBallInstantiation
 import QIQTH.GatedDInstantiation
 import QIQTH.CompactTubeLemma
+import QIQTH.ErrorKernelFactorization
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

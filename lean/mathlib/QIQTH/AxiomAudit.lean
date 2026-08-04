@@ -16931,4 +16931,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CompactTubeLemma.admissible_gate_uniform_radius
 #print axioms QIQTH.CompactTubeLemma.flowBall_gateRadius_floor
 
+-- ★★★ J4-187 (ErrorKernelFactorization.lean, ns QIQTH.ErrorKernelFactorization; Sol step
+-- 9; indep build-verified): the E factorized normal form — ALL FIVE goals.
+-- heatOp_gated_split (E = χ·(∂H−ΔH) − annulusTerms, isolating the banked engine Leibniz);
+-- ★ residual_eq_gauss_mul_A (parametrixResidualN = G_τ·residualCoeffA — the Gaussian
+-- factorization repackaged from parametrixResidual_offdiag_O1_total, don't-under-credit
+-- vindicated) + cutoffError_eq_cutoff_gauss_A_sub_annulus (the full assembled form
+-- E = χ·(G·A) − annulus); annulusTerms_eq_zero_near/far (the banked cutoff supports);
+-- residualCoeffA_measurable_of_factors + annulusTerms_measurable_of_factors (the F1
+-- feeds — joint measurability from the SAME unified factor carries as J4-185: gi/christoffel/
+-- foldedCoeff/its Laplacian/radialDeriv/pd-P fields). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ErrorKernelFactorization.heatOp_gated_split
+#print axioms QIQTH.ErrorKernelFactorization.residual_eq_gauss_mul_A
+#print axioms QIQTH.ErrorKernelFactorization.cutoffError_eq_cutoff_gauss_A_sub_annulus
+#print axioms QIQTH.ErrorKernelFactorization.annulusTerms_eq_zero_near
+#print axioms QIQTH.ErrorKernelFactorization.annulusTerms_eq_zero_far
+#print axioms QIQTH.ErrorKernelFactorization.residualCoeffA_measurable_of_factors
+#print axioms QIQTH.ErrorKernelFactorization.annulusTerms_measurable_of_factors
+
 end QIQTH.AxiomAudit
