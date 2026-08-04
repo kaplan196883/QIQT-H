@@ -1328,3 +1328,10 @@ the capstone surface; provider defeq + the C*(1+t) reshape) + the
 abstract dominated-differentiation lever (the derivative analogue of
 the J4-160 engine) + the hD1 assessment (missing = the order-2 gate
 envelope + order-2 measurability). std-3 raw 0. NOT a1=R/6.
+
+### J4-198 — SecondDerivEnvelope (LANDED f5b3fe43)
+The order-2 gate formula/envelope/coercive + the measurability mirror
++ THE PROVEN VERDICT: the naive hD1 dominator rate (t-s)^{-1} is NOT
+interval-integrable (theorem!) while the (t-s)^{-1/2} sliver rate IS
+=> hD1 = the sliver-truncation mirror one order up. std-3 raw 0.
+NOT a1=R/6.
