@@ -17332,4 +17332,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDConvThreading.hDConv_from_banked
 #print axioms QIQTH.HDConvThreading.a1_R6_of_residue_inf_v6
 
+-- ★★★ J4-210 (TruncatedDuhamelData.lean, ns QIQTH.TruncatedDuhamelData; Sol Ph8; indep
+-- build-verified): the SEMANTIC Levi/Duhamel facade — the v5/v6 five-slot interface
+-- cluster {hEboundW_le, hInt, hDuhamel, hInter, hDConv} packaged into four Prop bundles
+-- with slot-verbatim fields (TruncatedDuhamelCore.hIdentity→hDuhamel;
+-- BulkLimitData.hDiff→hDConv; EndpointData.hEbound/hIntegrable→hEboundW_le/hInt;
+-- InterchangeData.hSeries→hInter). Adapters: hDuhamel_of_truncatedData (Core-only —
+-- sibling deps would be fake, firewall) + duhamelInterface_of_truncatedData (the genuine
+-- four-bundle → 5-conjunction assembly the capstone consumes). Providers:
+-- truncatedDuhamelCore_of_daLim (← hDuhamel_leviSeries_of_daLim; rests on the hDaLimLU
+-- wall), interchangeData_of_banked (← heatConv_leviSeries_interchange; residue = DATA),
+-- endpointData_of_banked (← iterConvIntegrableW_of_bound_baseMeas; hEbound = geometric
+-- envelope DATA). Bulk.hDiff provider = hDConv_from_banked (J4-209, not re-plumbed —
+-- its residue is the near-diagonal/sliver family). No vacuous fields; no conclusion
+-- smuggling. std-3 all. NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.TruncatedDuhamelData.hDuhamel_of_truncatedData
+#print axioms QIQTH.TruncatedDuhamelData.duhamelInterface_of_truncatedData
+#print axioms QIQTH.TruncatedDuhamelData.truncatedDuhamelCore_of_daLim
+#print axioms QIQTH.TruncatedDuhamelData.interchangeData_of_banked
+#print axioms QIQTH.TruncatedDuhamelData.endpointData_of_banked
+
 end QIQTH.AxiomAudit
