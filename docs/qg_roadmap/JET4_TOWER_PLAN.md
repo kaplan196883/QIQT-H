@@ -1452,3 +1452,14 @@ hDaLimLU**. ⚠ hD1 caveat: hD1_from_data is scalar-typed vs the CLM-valued Dmap
 missing, hD1 NOT fully banked. Rejections (size-based, in-header): local-data threading
 + the _walls stretch re-expose larger ∀τ>0-global residues. std-3, budget raw 0.
 NOT a₁=R/6. NEXT: Ph10 recon (hEmeas obligation map + variational-jet shape-match).
+
+## J4-212 (2026-08-05, b23ee9f4) — HEmeasRecon: the hEmeas obligation map + B1 [AF]
+Sol Ph10 recon. hEmeas = TWO axes: factor/diagonal (.choose-free) DISCHARGED from
+geometry; flow/triple axis single .choose entry = uniformFlowExp (base q enters only via
+uniformInverseChart). OBL-4/OBL-6 discharged; OBL-1 (triple hEmeas) reduces via E3e to
+OBL-2 (joint C⁰) + OBL-3 (hKp1, joint C¹-in-base). STRETCH: flow_base_continuousOn_of_
+gronwall = the FIRST base-slot continuity of the .choose flow (Grönwall Lipschitz
+modulus). LADDER: B1✓ → B2 joint weld → B3 inverse chart (OBL-5) → B4 kernel C⁰ (OBL-2)
+→ B5 ★WALL = base-point C¹ variational Grönwall (OBL-3) → B6 wrapper
+(heatOp_qregularity_of_jointCont certifies content). NAMED WALLS: hDaLimLU + hKp1(B5)
+(+ hD1 CLM lift). std-3, budget raw 0. NOT a₁=R/6. NEXT: B2 FlowJointContinuity.
