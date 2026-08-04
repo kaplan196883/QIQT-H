@@ -16987,4 +16987,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ParametrixGradientMeas.heatParametrix_pd_measurable_from_geometry
 #print axioms QIQTH.ParametrixGradientMeas.cutoffError_normalForm_measurable_final
 
+-- ★★★ J4-190 (CompactJetBounds.lean, ns QIQTH.CompactJetBounds; the hEgrad tail step (i);
+-- indep build-verified): exists_bound_closedBall(_family) (the compact-bound levers) +
+-- JetBoundPack (per-field ∃-sup-bounds on closedBall 0 b: gi/christoffel/foldedCoeff/
+-- radialDeriv/laplaceBeltrami/pd) + jetBoundPack_from_geometry (the builder — every field
+-- mechanical from continuity+compactness) + pd_poly_eq_sum + ★ residualCoeffAWeighted(_eq)
+-- — the τ²-CLEARED amplitude with the pole-clearing identity (field_simp; the cleared form
+-- is a genuine polynomial-in-τ) + residualCoeffAWeighted_continuous + ★★
+-- residualCoeffA_tau_weighted_bound: τ²·|A| ≤ C on (0,T]×closedBall (compact-box route).
+-- hEgrad SLOT CONFIRMED: the LeviLipschitz ∇E bound = the mixed-third-jet layer (3-5
+-- bricks, per the J4-156 assessment) — this brick supplies its amplitude input, honestly
+-- NOT the gradient bound itself. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.CompactJetBounds.exists_bound_closedBall
+#print axioms QIQTH.CompactJetBounds.exists_bound_closedBall_family
+#print axioms QIQTH.CompactJetBounds.jetBoundPack_from_geometry
+#print axioms QIQTH.CompactJetBounds.pd_poly_eq_sum
+#print axioms QIQTH.CompactJetBounds.residualCoeffAWeighted_eq
+#print axioms QIQTH.CompactJetBounds.residualCoeffAWeighted_continuous
+#print axioms QIQTH.CompactJetBounds.residualCoeffA_tau_weighted_bound
+
 end QIQTH.AxiomAudit
