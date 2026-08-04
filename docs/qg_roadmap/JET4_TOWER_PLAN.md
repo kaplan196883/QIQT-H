@@ -1279,3 +1279,10 @@ The absorption lever family with explicit factorial constants: 1D core,
 general doubling-width, linear/quadratic campaign forms, annulus
 sqrt-tau-gain family. Covers exactly the gradient-formula powers.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-192 — ChartThirdJet (LANDED 6b7d2894) — the third-jet layer opens
+uniformFlowExp C4 DERIVED (the overlap bridge to the exp tower); the
+no-conjugate-points invertibility DISSOLVED (Neumann on the uniform
+ball); the C4 chart at reachable points; third-jet existence. ZERO new
+carries. Next: third-jet compact bounds + parametrix corollary + the
+grad-E expansion. std-3 raw 0. NOT a1=R/6.
