@@ -17151,4 +17151,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SecondDerivEnvelope.order2_naive_dominator_not_intervalIntegrable
 #print axioms QIQTH.SecondDerivEnvelope.sliver_rate_intervalIntegrable
 
+-- ★★★ J4-199 (HD1SliverRoute.lean, ns QIQTH.HD1SliverRoute; indep build-verified): ★★★
+-- THE MAP IS DIRECT — the hD1 sliver piece IS the SAME integral family the banked sliver
+-- chain bounds VERBATIM (witness_sliver2_grand/final bound |∫_{u−ε}^u ∫z D2H·F| ≤ C·√ε+C₂ε
+-- with D2H = the very second-field-derivative kernel hD1 differentiates under; u:=t) —
+-- no order-up mirror needed. bulk_order2_dominator_intervalIntegrable (the truncation
+-- defeats the J4-198 wall: C·(t−s)⁻¹ IS integrable on (0,t−ε)) + gcoef_bulk_hasFDerivAt
+-- (the J4-197 lever at endpoint t−ε with the honest order-2 dominator) +
+-- tendstoUniformlyOn_of_dist_le_bound + ★★ hD1_bulk_sliver_reduction (the uniform-limit-
+-- of-derivatives skeleton via hasFDerivAt_of_tendstoUniformlyOn: bulk derivatives + bulk
+-- pointwise convergence + the √ε sliver control ⟹ gcoef HasFDerivAt with the ∫∫dHH·F
+-- derivative — the analytic heart of hD1). Remaining assembly: the concrete wiring
+-- (K:=dH·F, K':=dHH·F, l:=𝓝[>]0, b:=C·√ε) + gderiv continuity. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HD1SliverRoute.bulk_order2_dominator_intervalIntegrable
+#print axioms QIQTH.HD1SliverRoute.gcoef_bulk_hasFDerivAt
+#print axioms QIQTH.HD1SliverRoute.tendstoUniformlyOn_of_dist_le_bound
+#print axioms QIQTH.HD1SliverRoute.hD1_bulk_sliver_reduction
+
 end QIQTH.AxiomAudit
