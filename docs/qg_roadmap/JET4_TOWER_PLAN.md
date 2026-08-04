@@ -1553,3 +1553,11 @@ n-scalar route: WALL-FREE, CLM-FREE, same conclusion. LEAVES: GEOMETRY + CD + DA
 GENUINE-GAP NONE (pdpdH→Ric not open — htr carries the trace). LADDER R1-R7 ⟹ FINAL
 a1_R6_of_geometry (the _heatOp_qregularity shape SUPERSEDED — no q-regularity needed).
 std-3 all 3, budget raw 0. NOT a₁=R/6. NEXT: J4-223 AssemblyLadderR1R2.
+
+## J4-223 (2026-08-05, 009a351a) — AssemblyLadderR1R2: R1 landed; R2 size-rejected [AF]
+R1: a1_R6_assembled_v2 — opaque bundles GONE (hEmeas ← tripleHEmeas_concrete defeq;
+hEzero shared; hEbound ← one new hEboundFull ∀τ>0 binder). HONEST: the geometry
+provider is τ≤t-weakened; the builders need ∀τ>0 — carried as DATA. Net +6 binders
+(depth over count; no opaque Prop bundle left). R2: ALL THREE size-rejected (no ∀u∈U
+producers; 1→~14 / 1→~4+hLHSlim / 1→≥4). std-3, budget raw 0. NOT a₁=R/6.
+NEXT: R3 core unbundle (hDaLim free).
