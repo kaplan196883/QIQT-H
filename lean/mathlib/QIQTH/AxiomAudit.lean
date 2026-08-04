@@ -17390,4 +17390,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HEmeasRecon.flow_base_continuousOn_of_gronwall
 #print axioms QIQTH.HEmeasRecon.heatOp_qregularity_of_jointCont
 
+-- ★★★ J4-213 (FlowJointContinuity.lean, ns QIQTH.FlowJointContinuity; hEmeas ladder B2;
+-- indep build-verified): JOINT continuity of the .choose geodesic flow —
+-- uniformFlowExp_joint_continuousWithinAt/_continuousOn on K ×ˢ ball 0 ρ_K, the triangle
+-- weld anchored at (q₀,w₀): term 1 by the W3 base Lipschitz modulus
+-- (uniformFlowExp_base_diff_bound, uniform over ‖w‖≤ρ_K), term 2 by the velocity slot at
+-- fixed q₀ (contDiffAt2_uniformFlowExp.continuousAt). ContinuousWithinAt (not full
+-- ContinuousAt) is the HONEST shape — K not assumed a nbhd. Plus the B4 seed
+-- uniformFlowExp_smoothFactor_continuousOn (Continuous.comp_continuousOn). B3 found
+-- ALREADY BANKED = ChartGeneralPContinuity.chartP_continuousOn (not duplicated). OBL-2
+-- remaining gap documented honestly (inverse-chart entry + τ/p slots via E3a-E3e +
+-- on-set→whole-space reach) — NO fabricated total implication. std-3 all.
+-- NOT a₁ = R/6 — walls hDaLimLU + hKp1(B5) + hD1-CLM-lift remain.
+#print axioms QIQTH.FlowJointContinuity.uniformFlowExp_joint_continuousWithinAt
+#print axioms QIQTH.FlowJointContinuity.uniformFlowExp_joint_continuousOn
+#print axioms QIQTH.FlowJointContinuity.uniformFlowExp_smoothFactor_continuousOn
+
 end QIQTH.AxiomAudit
