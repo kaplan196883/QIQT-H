@@ -403,6 +403,7 @@ import QIQTH.GateOpennessExport
 import QIQTH.LeviSeriesLocalData
 import QIQTH.InterchangeLocalRebase
 import QIQTH.CConvConcreteThreading
+import QIQTH.GaussianApproxIdentity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
