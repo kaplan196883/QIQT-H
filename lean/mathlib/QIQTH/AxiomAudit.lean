@@ -17489,4 +17489,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GatedTauDerivRep.tauDeriv_prod_stronglyMeasurable
 #print axioms QIQTH.GatedTauDerivRep.tripleHEmeas_concrete_of_mixed
 
+-- ★★★ J4-218 (ChartJetHessianMixed.lean, ns QIQTH.ChartJetHessianMixed; G-b MIXED —
+-- THE LAST MEASURABILITY BRICK; indep build-verified): ★ THE MEASURABILITY FAMILY IS
+-- CLOSED ★. gaussComp_amp_pd_pd_mixed — the mixed ∂_i∂_j on-gate normal form DERIVED
+-- (no banked off-diagonal Gaussian second-derivative existed): mixed second moment =
+-- ⟨V,Pi⟩⟨V,Pj⟩/(4τ²) (NO −1/(2τ) off-diagonal) + cross-jet ⟨Pi,Pj⟩ + second-jet ⟨V,Q⟩ +
+-- amp-gradient cross terms; setting i=j recovers the diagonal (one general-index form
+-- covers both). gatedMixed2RepProd + measurability + the everywhere identity (three
+-- dichotomy legs incl. τ≤0 and off-gate zero). secondFieldPd_prod_stronglyMeasurable =
+-- conjunct (3) for ALL (i,j) = the exact hP2 shape. ★ tripleHEmeas_concrete: S1 (the
+-- concrete triple hEmeas) DISCHARGED CONTINUITY-FREE — all five BorelDischargeSurface
+-- conjuncts done (G-c τ / G-a first-pd / G-b full Hessian / gi / christoffel), residue
+-- = only the genuine measurable-jet-supplier existentials. The a₁ endgame's open walls
+-- are now ELSEWHERE: hDaLimLU + hD1 CLM lift (+ satisfiable analytic data). std-3 all
+-- 11. NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.ChartJetHessianMixed.gaussComp_pd_pd_mixed
+#print axioms QIQTH.ChartJetHessianMixed.gaussComp_amp_pd_pd_mixed
+#print axioms QIQTH.ChartJetHessianMixed.gatedMixed2RepProd_measurable
+#print axioms QIQTH.ChartJetHessianMixed.witnessMixed2_eq_gatedMixed2RepProd
+#print axioms QIQTH.ChartJetHessianMixed.secondFieldPd_prod_measurable
+#print axioms QIQTH.ChartJetHessianMixed.secondFieldPd_prod_stronglyMeasurable
+#print axioms QIQTH.ChartJetHessianMixed.tripleHEmeas_concrete
+
 end QIQTH.AxiomAudit
