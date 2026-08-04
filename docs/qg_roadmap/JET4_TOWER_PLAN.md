@@ -1584,3 +1584,11 @@ measurability = definitional wall. Discharged the piecewise half
 shared hChartRep (∃ measurable representative agreeing on-gate). v5 threaded. The true
 content: CONSTRUCT the representative from the flow (Θ jointly cont (B2) + injective
 (Neumann) ⟹ Lusin–Souslin). std-3, raw 0. NOT a₁=R/6. NEXT: J4-227 ChartRepConstruction.
+
+## J4-227 (2026-08-05, e7dd1550) — ChartRepConstruction: the Lusin–Souslin layer [AF]
+flowInverse_jointMeasurable_regional: Θ ContinuousOn (B2) + InjOn (germ) on
+K ×ˢ closedBall 0 ρ ⟹ measurableEmbedding ⟹ global measurable G with ON-IMAGE
+agreement. v6 REFUSED (off-image choose_q = junk, unprovable — firewall). DECISIVE
+NEXT: do the gate-eq consumers need the RAW chart meas or only gated compositions
+(regional G would suffice; radii chain S q vs flow image to verify). std-3, raw 0.
+NOT a₁=R/6. NEXT: J4-228 GatedChartMeasAudit.
