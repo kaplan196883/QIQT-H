@@ -1355,3 +1355,10 @@ ROUTE A: the sliver pinning is interface-only (the F-cap x-uniform,
 same constant); the E1 per-slice x-uniform + sliver_rate_hsbound in
 the exact consumer shape; NO new carries. Scope: E2/T1-T3 halves next.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-202 — XUniformSliverFull (LANDED e6b54406) — HD1 INTERFACE-CLOSED
+All halves x-uniform (route A, none resisted); witness_sliver2_xuniform
+(the sqrt-eps composite at every x); hD1_from_data — the interface-level
+hD1 closure from the unified carries. Remaining: the componentwise CLM
+lift + the concrete data threading + the Levi-carries assembly.
+std-3 raw 0. NOT a1=R/6.
