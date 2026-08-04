@@ -397,6 +397,7 @@ import QIQTH.SecondDerivEnvelope
 import QIQTH.HD1SliverRoute
 import QIQTH.HD1ConcreteWiring
 import QIQTH.XUniformSliver
+import QIQTH.XUniformSliverFull
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

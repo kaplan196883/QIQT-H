@@ -17205,4 +17205,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.XUniformSliver.tE1_slice_xuniform
 #print axioms QIQTH.XUniformSliver.sliver_rate_hsbound
 
+-- ★★★ J4-202 (XUniformSliverFull.lean, ns QIQTH.XUniformSliverFull; indep build-verified):
+-- ALL FOUR goals — the FULL x-uniform sliver composite + the interface-level hD1 closure.
+-- The decomposition traced (sliver2_complete → _final → _assembly; hNormalForm splits
+-- sTerm0[E1+E2 via hRem]+sTerm1[T1]+sTerm2[T2]); EVERY half went x-uniform via the J4-201
+-- route-A F-cap (none resisted): tE2_slice_abstract/_xuniform (+tE2RateConst),
+-- hInner1_xuniform, hInner2_xuniform (the peak-cap + mass-one route), hRem_xuniform.
+-- ★★ witness_sliver2_xuniform — the √ε composite AT EVERY x (the assembly shift-trick:
+-- witness_sliver2_assembly is F-generic; fun s z _ => F s z x beta-matches; the raw
+-- _complete-level shift confirmed unsatisfiable — the abstract-cap re-derivations were
+-- genuinely required). ★★★ hD1_from_data — ContDiffAt ℝ 1 gfull 0 from the unified
+-- carries {hbulkderiv, hbulk_tendsto, hsliver (←the composite), hb, hcont} — the
+-- INTERFACE-LEVEL hD1 CLOSURE (componentwise CLM lift noted). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.XUniformSliverFull.tE2RateConst_nonneg
+#print axioms QIQTH.XUniformSliverFull.tE2_slice_abstract
+#print axioms QIQTH.XUniformSliverFull.tE2_slice_xuniform
+#print axioms QIQTH.XUniformSliverFull.hInner1_xuniform
+#print axioms QIQTH.XUniformSliverFull.hInner2_xuniform
+#print axioms QIQTH.XUniformSliverFull.hRem_xuniform
+#print axioms QIQTH.XUniformSliverFull.witness_sliver2_xuniform
+#print axioms QIQTH.XUniformSliverFull.hD1_from_data
+
 end QIQTH.AxiomAudit
