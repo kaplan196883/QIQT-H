@@ -1362,3 +1362,9 @@ All halves x-uniform (route A, none resisted); witness_sliver2_xuniform
 hD1 closure from the unified carries. Remaining: the componentwise CLM
 lift + the concrete data threading + the Levi-carries assembly.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-203 — LeviCarriesAssembly (LANDED 8a4a793b)
+hS0 DISCHARGED (v3 via the strengthened gatedWitnessN1_package);
+the honest provider map: the four remaining Levi slots stay carried
+(wall-cored bundles: hEmeas=W1/W2, hDelta; hDuhamel = net expansion).
+hCH needs hSopen (small extension next). std-3 raw 0. NOT a1=R/6.
