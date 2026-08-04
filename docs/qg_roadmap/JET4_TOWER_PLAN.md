@@ -1222,3 +1222,11 @@ HONEST GAP: facade = hCConv_reduction's hfam (L1) verbatim; the C2
 residue slot needs L2 hD1 (hEgrad tail) + leviSeries specialization.
 J4-184 = flow-ball S-instantiation + measurable-D adapter.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-184 — FlowBallInstantiation (LANDED 66da4a2d) — Sol steps 3-4
+chartGateData_flowBall (3/7 fields from geometry; carries minimized to
+{hSmeasSet-full, hVmapMeas, hChartB, hSliceData}) +
+goodProd_hasDerivAt_of_carries + derivativeData_of_rep +
+facade_flowBall (the L1 hfam at the concrete gate, c-indexed).
+Honest hlin-pointwise vs hDmeas-ae split recorded. std-3 raw 0.
+NOT a1=R/6.
