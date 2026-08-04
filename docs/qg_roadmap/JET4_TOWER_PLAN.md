@@ -1266,3 +1266,10 @@ measurable from GEOMETRY ALONE. F1 VERDICT: factor axis DONE; the
 remaining F1 = the W1/W2 flow q-regularity wall (joint continuity/C1
 of H_G across the .choose base-point flow — the honest Sol route-(b)
 parameter-ODE wall, recorded not attempted). std-3 raw 0. NOT a1=R/6.
+
+### J4-190 — CompactJetBounds (LANDED 64a3232e) — hEgrad step (i)
+The compact-bound levers + JetBoundPack + geometry builder +
+pd_poly_eq_sum + the tau^2-cleared amplitude (pole-clearing identity;
+the cleared form is a genuine polynomial) + tau^2*|A| <= C on the
+compact box. hEgrad slot confirmed = the mixed-third-jet LeviLipschitz
+layer (3-5 bricks). std-3 raw 0. NOT a1=R/6.
