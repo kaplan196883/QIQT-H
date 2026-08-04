@@ -1177,3 +1177,13 @@ characterization + the general measurable-set lever + hMeasSet reduced
 to {hSliceCont, hWq, hWa, hDmeas}. CAPSTONE hjoint_fully_geometric <-
 {hg, hgi, hgpos, hKmeasSet, hSmeasSet, hFjoint, hVmapMeas, hCover,
 hSliceCont, hWq, hWa, hDmeas}. std-3 raw 0. NOT a1=R/6.
+
+### J4-181 — SliceInterfaceInstantiation (LANDED b3d6f181) — L1 PLUMBING EXHAUSTED
+The support-condition identity (gated = inner everywhere; jump lands
+where the kernel is 0; design b < c) + slice continuity + hSliceCont +
+Borel hWq/hWa mirrors + hjoint_instantiated. hDmeas stays the honest
+carry (both routes examined and rejected). The L1 plumbing is now
+effectively exhausted: residue = satisfiable-by-design geometric/
+measurability data + hDmeas + the v7 disjunction + the top->infinity
+interface rebases + hGateData envelope. Next: Sol consult on walls +
+final assembly. std-3 raw 0. NOT a1=R/6.
