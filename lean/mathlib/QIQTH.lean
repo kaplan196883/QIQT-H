@@ -415,6 +415,7 @@ import QIQTH.GatedDerivRepProduct
 import QIQTH.GatedTauDerivRep
 import QIQTH.ChartJetHessianMixed
 import QIQTH.HD1CLMLift
+import QIQTH.DaLimLUWallRecon
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

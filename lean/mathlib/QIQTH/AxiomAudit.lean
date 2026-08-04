@@ -17529,4 +17529,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HD1CLMLift.hD1_concrete_from_scalar
 #print axioms QIQTH.HD1CLMLift.a1_R6_of_residue_inf_v7
 
+-- ★★★ J4-220 (DaLimLUWallRecon.lean, ns QIQTH.DaLimLUWallRecon; THE FINAL WALL RECON;
+-- indep build-verified): the hDaLimLU_discharge family census. VERDICT: after
+-- threading, the SOLE genuinely-open member is hEbnd (+Be/hEblim) — the x/u-uniform
+-- RATED residual-tail bound ‖heatConv (heatOp H) F u 0 0 − Etrunc m u‖ ≤ Be(εₘ)→0
+-- (the banked etrunc_tendsto gives only the UN-rated pointwise limit). Everything else:
+-- hgi/hΓ (RNC DATA), pdpdH (DATA — closed form underwritten by J4-218), hInterchange
+-- (BANKED SecondOrderInterchange), hLapFull (BANKED InterchangeThreading, carry hLHSlim
+-- = F2 fact), hII_lo/hII_hi (Gaussian-domination DATA), hSliver/hBlim (BANKED with the
+-- ★ NEW u-uniform upgrade sliver_sum_bound_U — the u-free B(e)=∑ᵢ(D0·2√e+D1·e) hitting
+-- the exact ∀u∈U slot the u-free bank did NOT match), hEcomb (BANKED TruncatedDuhamel).
+-- ★ hDaLimLU_of_sliverData: the capstone threading with B/hSliver/hBlim ELIMINATED.
+-- THE LADDER: one brick E2 (hEbnd_discharge — peel the residual tail under hEdom (D1
+-- domination) + hBdom, mirroring the banked sliver adjacency-peel) + E3 (the rate,
+-- same √ε argument) closes the LAST member. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.DaLimLUWallRecon.sliver_sum_bound_U
+#print axioms QIQTH.DaLimLUWallRecon.hDaLimLU_of_sliverData
+
 end QIQTH.AxiomAudit
