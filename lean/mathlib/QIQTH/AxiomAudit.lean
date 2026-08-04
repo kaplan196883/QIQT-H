@@ -17254,4 +17254,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateOpennessExport.gatedWitnessN1_package_open
 #print axioms QIQTH.GateOpennessExport.a1_R6_of_residue_inf_v4
 
+-- ★★★ J4-205 (LeviSeriesLocalData.lean, ns QIQTH.LeviSeriesLocalData; Sol final plan
+-- Phase 1; indep build-verified): the shared series package. The structure
+-- LeviSeriesLocalData E C T (9 fields → the three consumers: hEmeas/htermMeas/hmajor/
+-- hmajorSum/hInt/hFmeas/hFenv). ★ leviSeries_stronglyMeasurable_of_termwise (the generic
+-- tsum-measurability: partial sums + HasSum.tendsto_sum_nat + aestronglyMeasurable_of_-
+-- tendsto_ae) + ★ leviSeries_bound_of_majorant (the alternating-series envelope) +
+-- leviSeriesLocalData_of_windowBound (the builder from {hC, hT, hEbnd window bound,
+-- hEzero, hEmeas (the honest M1 carry), hglobal every-ceiling family}) +
+-- hInt_from_seriesData (Phase 2 accessor). Banked domination REUSED (iterConvW_bound,
+-- the Γ-decay summability, leviSeries_dominatedW_le, iterConvIntegrableW_of_locally_-
+-- bound_baseMeas). HONEST removal: the joint (s,z) tsum-measurability bonus hit a genuine
+-- whnf reduction loop (product-measure ae plumbing over Fin n → ℝ) — documented as the
+-- follow-on. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.LeviSeriesLocalData.leviSeries_stronglyMeasurable_of_termwise
+#print axioms QIQTH.LeviSeriesLocalData.leviSeries_bound_of_majorant
+#print axioms QIQTH.LeviSeriesLocalData.leviSeriesLocalData_of_windowBound
+#print axioms QIQTH.LeviSeriesLocalData.hInt_from_seriesData
+
 end QIQTH.AxiomAudit
