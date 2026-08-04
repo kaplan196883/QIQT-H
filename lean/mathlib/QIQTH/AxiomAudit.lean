@@ -16895,4 +16895,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FlowBallInstantiation.derivativeData_of_rep
 #print axioms QIQTH.FlowBallInstantiation.facade_flowBall
 
+-- ★★★ J4-185 (GatedDInstantiation.lean, ns QIQTH.GatedDInstantiation; Sol step 5; indep
+-- build-verified): the gated-D measurable representative — ALL SIX Sol steps.
+-- gatedDerivRep (the K-indicator of the E1 on-gate closed form) + gatedDerivRep_measurable
+-- + witnessFieldDeriv_eq_zero_of_nonpos (τ≤0 both vanish) + ★
+-- witnessFieldDeriv_eq_gatedDerivRep (the EVERYWHERE identification via the three-way
+-- dichotomy z∉K / z∈K,τ≤0 / z∈K,τ>0-gate-eq) + ★★
+-- witnessFieldDeriv_measurable_of_gateEq (the joint measurability — the hDmeas content,
+-- reduced to lower-order factor carries {hChartMeas Borel-chart, hPmeas jet, hAmpMeas/
+-- hAmpDerivMeas, hgate}) + hDmeas_discharged (the EXACT CConvDerivativeData.hDmeas field)
+-- + hMeasSet_from_geometry + goodProd_from_geometry + derivativeData_from_geometry
+-- (hlin/hDrep inputs per the honest J4-184 split). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GatedDInstantiation.gatedDerivRep_measurable
+#print axioms QIQTH.GatedDInstantiation.witnessFieldDeriv_eq_zero_of_nonpos
+#print axioms QIQTH.GatedDInstantiation.witnessFieldDeriv_eq_gatedDerivRep
+#print axioms QIQTH.GatedDInstantiation.witnessFieldDeriv_measurable_of_gateEq
+#print axioms QIQTH.GatedDInstantiation.hDmeas_discharged
+#print axioms QIQTH.GatedDInstantiation.hMeasSet_from_geometry
+#print axioms QIQTH.GatedDInstantiation.goodProd_from_geometry
+#print axioms QIQTH.GatedDInstantiation.derivativeData_from_geometry
+
 end QIQTH.AxiomAudit
