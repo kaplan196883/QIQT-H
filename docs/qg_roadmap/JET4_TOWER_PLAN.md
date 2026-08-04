@@ -1161,3 +1161,11 @@ measurability across tau=0 + the nu-slice product lift) + hjoint_final:
 the last G2 slot closes from {hKmeasSet, hSmeasSet, hFjoint, hThetac,
 hThetane, huc, hVmapMeas, hWdiffJ} — all unified-or-reducible carries.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-179 — CoeffContWdiffLift (LANDED bfd87522)
+hThetac/hThetane/huc DISCHARGED from geometry (huc via the infinity
+chain — transportOp does not preserve C0, trap confirmed); the
+forall-x-first hWdiff reorder variant + the ae_prod hWdiffJ lift
+(hMeasSet carried honestly); hjoint_from_geometry_final <-
+{hKmeasSet, hSmeasSet, hFjoint, hVmapMeas, hg, hgi, hgpos, hGateDiff',
+hMeasSet}. std-3 raw 0. NOT a1=R/6.
