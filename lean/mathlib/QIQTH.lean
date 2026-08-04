@@ -398,6 +398,7 @@ import QIQTH.HD1SliverRoute
 import QIQTH.HD1ConcreteWiring
 import QIQTH.XUniformSliver
 import QIQTH.XUniformSliverFull
+import QIQTH.LeviCarriesAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

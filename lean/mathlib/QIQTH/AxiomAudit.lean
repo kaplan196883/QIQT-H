@@ -17226,4 +17226,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.XUniformSliverFull.witness_sliver2_xuniform
 #print axioms QIQTH.XUniformSliverFull.hD1_from_data
 
+-- ★★★ J4-203 (LeviCarriesAssembly.lean, ns QIQTH.LeviCarriesAssembly; indep
+-- build-verified): hS0 DISCHARGED — v3 swaps to the strengthened provider
+-- gatedWitnessN1_package (the concrete flow-ball gate exports 0∈K → 0∈S 0 via
+-- uniformFlowExp_zero) ⟹ ★ a1_R6_of_residue_inf_v3 (the hS0 antecedent removed;
+-- inner residue = {hInt, hDuhamel, hInter, hDConv, hCH, hCConv}). THE HONEST PROVIDER
+-- MAP: the remaining four Levi slots stay carried — each banked provider RELOCATES the
+-- clean slot into a wall-cored bundle (hInt/hInter need hEmeas = the W1/W2 wall;
+-- hInter also has a global-vs-local τ-bound mismatch; hDuhamel = net ~40-hypothesis
+-- expansion; hDConv relocates to the hDelta singular-limit core). hCH additionally
+-- needs hSopen (the package doesn't export gate-openness — a small extension brick).
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.LeviCarriesAssembly.a1_R6_of_residue_inf_v3
+
 end QIQTH.AxiomAudit
