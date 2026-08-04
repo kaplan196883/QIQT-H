@@ -1544,3 +1544,12 @@ cap; Be(e)=(E₀+E₁e)·√(3/2)ⁿ·C_L·gaussDdim aT 0·e, u-free). E3: Be_te
 member remains. Walls arc complete: measurability (cp102) + hD1 lift (cp103) + hDaLimLU
 (here). Residue = geometric wiring (pdpdH→Ric) + concrete-witness instantiation.
 std-3 all 4, budget raw 0. NOT a₁=R/6. NEXT: J4-222 GrandAssemblyRecon.
+
+## J4-222 (2026-08-05, cd3cf30d) — GrandAssemblyRecon: ★★ a1_R6_assembled ★★ [AF]
+The grand assembly. Build-checked trace: DaLimLUGoal DEFEQ to the frontier hDaLimLU slot
+(daLimLU_reduces_to_pointwise → core hDaLim); tripleHEmeas_is_hEmeas_slot (Iff.rfl).
+★ a1_R6_assembled = geometry_and_frontier + hDaLimLU internally discharged + hD1 via
+n-scalar route: WALL-FREE, CLM-FREE, same conclusion. LEAVES: GEOMETRY + CD + DATA;
+GENUINE-GAP NONE (pdpdH→Ric not open — htr carries the trace). LADDER R1-R7 ⟹ FINAL
+a1_R6_of_geometry (the _heatOp_qregularity shape SUPERSEDED — no q-regularity needed).
+std-3 all 3, budget raw 0. NOT a₁=R/6. NEXT: J4-223 AssemblyLadderR1R2.
