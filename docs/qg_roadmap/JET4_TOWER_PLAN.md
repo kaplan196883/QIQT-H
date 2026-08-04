@@ -1610,3 +1610,12 @@ Gc = a THEOREM) + hWG_of_regional_support (only carry = hImg) + v2' (htriple dir
 Chart residue = ONE geometry fact hImg (guard → image membership; radii c vs ρ next).
 Analytic residue unchanged. std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-230 ImageSupportDischarge (the hImg audit → possibly v7).
+
+## J4-230 (2026-08-05, 4ba37791) — ImageSupportDischarge: hImg split + ⚠⚠ CRITICAL FLAG [AF]
+S-guard hImg FULLY CLOSED (hWG_gate_concrete: Gc internal, radii-only). Amplitude guard
+= modulo hSurj (off-image surjectivity, the named wall) — the Cfield disjunct is a free
+field, so no single-fact reduction; v7 honestly not delivered. ⚠⚠ FLAG: the hgate
+carriers of tripleHEmeas_concrete(+v3) demand ∀-w S-membership — possibly satisfiable
+only at K=∅ ⟹ POTENTIAL VACUITY of the hcar supplier line (J4-218→v6). J4-231 = the
+satisfiability audit (the axiom-budget blind-spot pattern) BEFORE crediting further.
+std-3 all 6, raw 0. NOT a₁=R/6.
