@@ -1535,3 +1535,12 @@ sliver_sum_bound_U (the ∀u∈U upgrade; u-free B(e)=∑(D0·2√e+D1·e)→0) 
 hDaLimLU_of_sliverData (sliver slots eliminated). LADDER: E2 (peel the tail under
 hEdom+hBdom, mirror the sliver peel) + E3 (rate). THE LAST WALL IS ONE BRICK WIDE.
 std-3 both, budget raw 0. NOT a₁=R/6. NEXT: J4-221 ETailRateBound (E2).
+
+## J4-221 (2026-08-05, 43cc9bfb) — ETailRateBound: ★★ ALL NAMED WALLS DOWN ★★ [AF]
+E2: strip-difference identity proved inline (rfl + Chasles); hEbnd_discharge = MemETail
+verbatim (hEdom+hFdom+vanishing; inner_slice_bound via Chapman-Kolmogorov + antitone
+cap; Be(e)=(E₀+E₁e)·√(3/2)ⁿ·C_L·gaussDdim aT 0·e, u-free). E3: Be_tendsto_zero.
+★ hDaLimLU_from_data: the COMPLETE DaLimLUGoal from pure data — no irreducible open
+member remains. Walls arc complete: measurability (cp102) + hD1 lift (cp103) + hDaLimLU
+(here). Residue = geometric wiring (pdpdH→Ric) + concrete-witness instantiation.
+std-3 all 4, budget raw 0. NOT a₁=R/6. NEXT: J4-222 GrandAssemblyRecon.
