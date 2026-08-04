@@ -16949,4 +16949,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ErrorKernelFactorization.residualCoeffA_measurable_of_factors
 #print axioms QIQTH.ErrorKernelFactorization.annulusTerms_measurable_of_factors
 
+-- ★★★ J4-188 (ErrorKernelJointMeas.lean, ns QIQTH.ErrorKernelJointMeas; Sol step 10;
+-- indep build-verified): pd_polySum_eq (pd/polynomial commutation) +
+-- radialDeriv_continuous_of_inf + ★ residualCoeffA_measurable_from_geometry (ALL SIX
+-- J4-187 factor carries DISCHARGED from {hg,hgi,hgpos} only) +
+-- heatParametrix_uncurry_measurable_from_geometry + annulusTerms_measurable_from_geometry
+-- + ★★ cutoffError_normalForm_measurable_from_geometry (the full χ·(G·A) − annulus
+-- measurable from geometry + the ONE honest carry hDH = the parametrix spatial-gradient
+-- field ∂ⱼH). F1 SLOT IDENTIFIED: hEmeas = StronglyMeasurable of the TRIPLE (τ,p,q)
+-- heatOp in ResidueThreading:316; the on-gate diagonal collapse feeds from here; the
+-- remaining F1 residue = hDH + the GatedWitnessEmeas W1/W2 q-regularity flow wall
+-- (distinct, untouched). ⚠ τ-STRUCTURE: residualCoeffA has a genuine 1/τ² head — NOT
+-- bounded across τ=0 (no false boundedness lemma asserted; the honest forms are [ε,t]
+-- bounds or the Gaussian-tamed G·A product). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ErrorKernelJointMeas.pd_polySum_eq
+#print axioms QIQTH.ErrorKernelJointMeas.radialDeriv_continuous_of_inf
+#print axioms QIQTH.ErrorKernelJointMeas.residualCoeffA_measurable_from_geometry
+#print axioms QIQTH.ErrorKernelJointMeas.heatParametrix_uncurry_measurable_from_geometry
+#print axioms QIQTH.ErrorKernelJointMeas.annulusTerms_measurable_from_geometry
+#print axioms QIQTH.ErrorKernelJointMeas.cutoffError_normalForm_measurable_from_geometry
+
 end QIQTH.AxiomAudit
