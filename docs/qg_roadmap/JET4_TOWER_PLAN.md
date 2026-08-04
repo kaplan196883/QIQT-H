@@ -1230,3 +1230,10 @@ goodProd_hasDerivAt_of_carries + derivativeData_of_rep +
 facade_flowBall (the L1 hfam at the concrete gate, c-indexed).
 Honest hlin-pointwise vs hDmeas-ae split recorded. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-185 — GatedDInstantiation (LANDED a27aa270) — Sol step 5
+The gated-D measurable representative: gatedDerivRep (K-indicator of
+the E1 form) + the EVERYWHERE identification (three-way dichotomy) +
+witnessFieldDeriv joint measurability <- lower-order factor carries +
+hDmeas_discharged (the exact bundle field) + the geometry builders.
+All six Sol sub-steps landed. std-3 raw 0. NOT a1=R/6.
