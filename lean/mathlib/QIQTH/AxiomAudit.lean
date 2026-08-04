@@ -17470,4 +17470,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GatedDerivRepProduct.witnessFieldDeriv2_eq_gatedDeriv2RepProd
 #print axioms QIQTH.GatedDerivRepProduct.secondFieldPd_prod_diag_measurable
 
+-- ★★★ J4-217 (GatedTauDerivRep.lean, ns QIQTH.GatedTauDerivRep; measurability brick
+-- G-c; indep build-verified): the τ-derivative gate-equation representative. The HONEST
+-- τ≤0 resolution: the gate is τ-INDEPENDENT, so on-gate the identity is funext-global;
+-- for τ≤0 the witness vanishes on Iic τ and HasDerivWithinAt.deriv_eq_zero
+-- (uniqueDiffWithinAt_Iic) forces deriv = 0 with NO diagonal case analysis (at the
+-- diagonal Lean's junk deriv = 0 anyway; off-diagonal flat-differentiable = 0 — both
+-- land on 0 via the left-window argument). On τ>0: product rule with ∂_τ gaussDdim from
+-- gaussDdim_heat_eqn + gaussDdim_pd_pd_i; ∂_τ amp carried as Cfield (amp affine in τ).
+-- tauDeriv_prod_stronglyMeasurable = BorelDischargeSurface conjunct (1) EXACT.
+-- ★ STRETCH LANDED: tripleHEmeas_concrete_of_mixed — the concrete triple hEmeas via
+-- tripleHEmeas_of_surface with conjuncts 1 (this file) + 2 (J4-216) discharged from
+-- suppliers and ONLY the mixed i≠j Hessian slice carried as hP2. The residual
+-- measurability gap for S1-concrete = EXACTLY the mixed Hessian (gaussComp_amp_pd_pd_
+-- mixed, next brick). std-3 all 4. NOT a₁ = R/6 — walls hDaLimLU + hD1 CLM lift remain.
+#print axioms QIQTH.GatedTauDerivRep.gatedTauRepProd_measurable
+#print axioms QIQTH.GatedTauDerivRep.witnessTauDeriv_eq_gatedTauRepProd
+#print axioms QIQTH.GatedTauDerivRep.tauDeriv_prod_stronglyMeasurable
+#print axioms QIQTH.GatedTauDerivRep.tripleHEmeas_concrete_of_mixed
+
 end QIQTH.AxiomAudit
