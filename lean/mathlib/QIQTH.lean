@@ -427,6 +427,7 @@ import QIQTH.GatedChartMeasAudit
 import QIQTH.RightInverseGeneral
 import QIQTH.ImageSupportDischarge
 import QIQTH.HgateSatAudit
+import QIQTH.GatedRepSFix
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

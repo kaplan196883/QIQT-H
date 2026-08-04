@@ -17758,4 +17758,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS
 #print axioms QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4
 
+-- ★★★ J4-232 (GatedRepSFix.lean, ns QIQTH.GatedRepSFix; the field/field² S-re-gating —
+-- THE VACUITY FIX COMPLETE at S1; indep build-verified): gatedDerivRepProdS +
+-- gatedMixed2RepProdS (FULL-gate indicators, bodies byte-identical to the originals ⟹
+-- defeq to the gate-eq RHS) + the everywhere identities under the CONDITIONAL hgate
+-- (S-membership as hypothesis — satisfiable) + _measurable (hKSmeas) + the v4 conjunct
+-- capstones (2)+(3). HONEST NEW OBLIGATION the τ template missed: hOffS/hOffS2 — the
+-- field derivatives do NOT vanish pointwise off S (differentiation in the field
+-- variable sees nearby on-gate mass), so the off-S vanishing of the raw pd is carried
+-- explicitly = the radialCutoff-support fact (true at the concrete witness, not
+-- vacuous). ★ tripleHEmeas_concrete_v4: S1 with ALL hypotheses satisfiable at the
+-- concrete gate — corrects the vacuous J4-218 version. Gc/hWG composition documented,
+-- deferred (raw-chart route carried for interface uniformity; the S+Gc combined _v5 is
+-- the recipe). v7 re-thread = mechanical, planned. std-3 all 9. NOT a₁ = R/6.
+#print axioms QIQTH.GatedRepSFix.gatedDerivRepProdS_measurable
+#print axioms QIQTH.GatedRepSFix.witnessFieldDeriv_eq_gatedDerivRepProdS
+#print axioms QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4
+#print axioms QIQTH.GatedRepSFix.gatedMixed2RepProdS_measurable
+#print axioms QIQTH.GatedRepSFix.witnessMixed2_eq_gatedMixed2RepProdS
+#print axioms QIQTH.GatedRepSFix.secondFieldPd_prod_stronglyMeasurable_v4
+#print axioms QIQTH.GatedRepSFix.tripleHEmeas_concrete_v4
+
 end QIQTH.AxiomAudit
