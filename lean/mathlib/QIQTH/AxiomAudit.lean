@@ -17352,4 +17352,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TruncatedDuhamelData.interchangeData_of_banked
 #print axioms QIQTH.TruncatedDuhamelData.endpointData_of_banked
 
+-- ★★★ J4-211 (CapstoneAssembly.lean, ns QIQTH.CapstoneAssembly; Sol Ph9; indep
+-- build-verified): a1_R6_of_geometry_and_frontier — v6's conclusion with the four flat
+-- Levi/Duhamel slots {hEboundW_le, hInt, hDuhamel, hInter} replaced by the three J4-210
+-- bundles (endpoint : EndpointData / core : TruncatedDuhamelCore / inter :
+-- InterchangeData; BulkLimitData deliberately omitted — v6 internalizes hDConv, taking
+-- it would double-provide). Pure composition (refine v6 + defeq per-slot closes); no new
+-- analysis. Size-based rejections recorded in-header: local-data threading
+-- (hInt_from_seriesData / hInter_from_local_data re-expose LARGER ∀τ>0-global residues),
+-- hD1_from_data threading (scalar-typed, does NOT match the CLM-valued Dmap — hD1's
+-- provider needs a lift, so hD1 = provider-at-different-type, NOT fully banked), and the
+-- _walls stretch (providers re-expose larger residues). THE MASTER ENUMERATION: GEOMETRY
+-- flat + BANKED bundles + DATA (CConv facades, hCH, the hDConv analytic block) + ONE
+-- WALL at capstone level = hDaLimLU (the L3/L4 sliver/interchange loc-unif limit).
+-- std-3. NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.CapstoneAssembly.a1_R6_of_geometry_and_frontier
+
 end QIQTH.AxiomAudit

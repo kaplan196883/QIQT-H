@@ -406,6 +406,7 @@ import QIQTH.CConvConcreteThreading
 import QIQTH.GaussianApproxIdentity
 import QIQTH.HDConvThreading
 import QIQTH.TruncatedDuhamelData
+import QIQTH.CapstoneAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
