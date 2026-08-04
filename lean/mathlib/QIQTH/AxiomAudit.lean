@@ -16915,4 +16915,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GatedDInstantiation.goodProd_from_geometry
 #print axioms QIQTH.GatedDInstantiation.derivativeData_from_geometry
 
+-- ★★★ J4-186 (CompactTubeLemma.lean, ns QIQTH.CompactTubeLemma; Sol steps 7-8; indep
+-- build-verified): compact_tube + compact_tube_ball (the generic tube lemma via Mathlib's
+-- generalized_tube_lemma — reusable) + admissible_gate_uniform_radius (jointly-open gate
+-- ⟹ uniform radius, the satisfiable-by-spec reduction) + flowBall_gateRadius_floor.
+-- ★★★ THE F2 AUDIT VERDICT: F2 IS ALREADY DISCHARGED IN THE REPO — the chart spec
+-- (uniformInverseChart_huniformChart) banks a SINGLE K-uniform δ₀ (the quantitative IFT's
+-- uniform source ball), and the E-bound gate radius in gatedWitness_hEboundW_final_gen is
+-- the uniform constant c = (b+ρc)/2 > b > 0 (the per-base .choose cf is bounded below by
+-- b since every good witness carries b < c). No separate per-base floor is in doubt; the
+-- tube lemma is banked as the general instrument, not load-bearing here. hCover confirmed
+-- orthogonal (a.e.-z coverage carry, honestly carried). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.CompactTubeLemma.compact_tube
+#print axioms QIQTH.CompactTubeLemma.compact_tube_ball
+#print axioms QIQTH.CompactTubeLemma.admissible_gate_uniform_radius
+#print axioms QIQTH.CompactTubeLemma.flowBall_gateRadius_floor
+
 end QIQTH.AxiomAudit
