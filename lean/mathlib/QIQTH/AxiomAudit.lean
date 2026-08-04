@@ -17616,4 +17616,17 @@ namespace QIQTH.AxiomAudit
 -- GENUINE-GAP: NONE. std-3. NOT a₁ = R/6.
 #print axioms QIQTH.AssemblyLadderR3.a1_R6_assembled_v3
 
+-- ★★★ J4-225 (AssemblyLadderR5.lean, ns QIQTH.AssemblyLadderR5; ladder R1½+R5; indep
+-- build-verified): a1_R6_assembled_v4 = v3 with hchrMeas DISCHARGED FREE (← hChr
+-- .continuous.measurable, strict −1) and hgiMeas DEEPENED to hgiC (Continuous — gi had
+-- no v3 smoothness; net-neutral, more geometric). HONEST BLOCKS recorded: hcar*
+-- (global joint chart Borel measurability + general-gate-point PdiffAt + Cfield
+-- HasDerivAt = genuine new analysis — no discharger exists, adversarially grepped);
+-- hgD1/R5 SIZE-REJECTED (witness_sliver2_xuniform demands ~30 fresh per-slice carries;
+-- the integrated D0/D1/hbnd binders do NOT match — 1 binder → dozens). The three
+-- remaining real-analysis items named: (1) hcar* closure, (2) concrete-gcoef sliver,
+-- (3) the F2/hFII family for hDerivConv. GENUINE-GAP: NONE at the conditional level.
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.AssemblyLadderR5.a1_R6_assembled_v4
+
 end QIQTH.AxiomAudit
