@@ -17648,4 +17648,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJointBorel.tripleHEmeas_concrete_v2
 #print axioms QIQTH.ChartJointBorel.a1_R6_assembled_v5
 
+-- ★★★ J4-227 (ChartRepConstruction.lean, ns QIQTH.ChartRepConstruction; the hChartRep
+-- construction; indep build-verified): flowInverse_jointMeasurable_regional — the
+-- Lusin–Souslin layer: Θ(q,v)=(q,φ_q v) ContinuousOn+InjOn on the compact Borel
+-- K ×ˢ closedBall 0 ρ (ρ = min δ₀ ρ_K/2; InjOn from the GERM left-inverse, cheaper
+-- than antilipschitz) ⟹ ContinuousOn.measurableEmbedding (Polish) ⟹
+-- exists_measurable_extend gives the global measurable G with ON-IMAGE agreement
+-- chart(q, φ_q v) = G(q, φ_q v). ★ v6 CORRECTLY REFUSED: hChartRep's agreement is ∀p
+-- but the spec pins choose_q only on the flow image — off-image choose_q is junk with
+-- no measurable-in-q structure; delivering v6 would fake off-image agreement (firewall
+-- held). THE DECISIVE NEXT AUDIT: do gatedTauRepProd_measurable /
+-- firstFieldPd_prod actually consume the RAW chart measurability, or does the
+-- radialCutoff gate (chartFieldAmp vanishes for chart-values outside the RNC ball)
+-- kill off-image contributions so the regional G suffices for a
+-- tripleHEmeas_concrete_v3? std-3. NOT a₁ = R/6.
+#print axioms QIQTH.ChartRepConstruction.flowInverse_jointMeasurable_regional
+
 end QIQTH.AxiomAudit
