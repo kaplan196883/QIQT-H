@@ -1368,3 +1368,9 @@ hS0 DISCHARGED (v3 via the strengthened gatedWitnessN1_package);
 the honest provider map: the four remaining Levi slots stay carried
 (wall-cored bundles: hEmeas=W1/W2, hDelta; hDuhamel = net expansion).
 hCH needs hSopen (small extension next). std-3 raw 0. NOT a1=R/6.
+
+### J4-204 — GateOpennessExport (LANDED 4a5bc111)
+The openness was hgood's bundled 5th conjunct; the package re-merge
+exports it; a1_R6_of_residue_inf_v4 (hCH DISCHARGED; +hgiC/hgpos).
+Inner residue: {hInt, hDuhamel, hInter, hDConv, hCConv}. Next: the
+Sol walls-consult. std-3 raw 0. NOT a1=R/6.
