@@ -1636,3 +1636,12 @@ field pd's don't vanish pointwise off S — the radialCutoff-support vanishing c
 explicitly, true at the concrete witness). ★ tripleHEmeas_concrete_v4 = S1 with ALL
 hypotheses satisfiable (corrects the vacuous J4-218). Gc/hWG _v5 recipe + v7 re-thread
 documented. std-3 all 9, raw 0. NOT a₁=R/6. NEXT: J4-233 AssemblyV7Rethread.
+
+## J4-233 (2026-08-05, 6545456d) — AssemblyV7Rethread: ★ v7 the credited capstone ★ [AF]
+a1_R6_assembled_v7 = v2' + htriple ← tripleHEmeas_concrete_v4 internal. Gc route
+REMOVED (the chart-side Gc/hWG/germ wall BYPASSED via the v4 raw-conjunct route);
+vacuous hcar forms → v4 conditional (+hOffS) + hKSmeas. ALL suppliers satisfiable.
+Ladder: 1 concrete-S (MED-LARGE; hKSmeas = product-lift via the banked embedding) →
+2 Gc+S opt → 3 facades (LARGE) → 4 hDConv pile (LARGE) → 5 R2 trio (LARGE) → 6
+core/envelopes (MED) → 7 a1_R6_of_geometry (MED). std-3, raw 0. NOT a₁=R/6.
+NEXT: J4-234 ConcreteGateInstantiation.
