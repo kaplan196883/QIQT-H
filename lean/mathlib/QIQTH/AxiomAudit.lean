@@ -17314,4 +17314,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianApproxIdentity.gaussDdim_approx_identity_family
 #print axioms QIQTH.GaussianApproxIdentity.gaussDdim_approx_identity_of_family
 
+-- ★★★ J4-209 (HDConvThreading.lean, ns QIQTH.HDConvThreading; Sol Ph7; indep
+-- build-verified): THE hDConv-CHAIN AUDIT + threading + v6. THE AUDIT VERDICT: every
+-- carry of hDConv_gatedWitnessN1_of_delta_final has a banked provider — hpar/htime/hR
+-- via the F2FamilyDischarge trio (J4-145), hDelta via hDelta_gatedWitnessN1_final
+-- (J4-120, hBoundary = Brick-2 moving-peak DISCHARGED inside via
+-- boundary_tendstoLocallyUniformlyOn), hDaLim in loc-unif shape via hDaLimLU_discharge
+-- (DaLimLocUnif U3). SOLE irreducible hard residue of the chain = hDaLimLU (the L3/L4
+-- sliver/tail/interchange geometric family), carried as one clean loc-unif limit;
+-- everything else = satisfiable analytic data (dominations, measurabilities,
+-- near-diagonal parametrix family, C3ε engine, cross-Lipschitz, floor, inner-continuity;
+-- hMeasFII = genuine deferred base measurability). hDConv_from_banked composes the full
+-- chain at the concrete witness (Da := DaTrunc H F). a1_R6_of_residue_inf_v6 = v5 with
+-- the black-box hDConv REMOVED, re-derived internally; same conclusion. Post-v6 walls:
+-- hDaLimLU + hD1 + the v5-inherited Levi/Duhamel interface + facades. std-3 all.
+-- NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.HDConvThreading.hDConv_from_banked
+#print axioms QIQTH.HDConvThreading.a1_R6_of_residue_inf_v6
+
 end QIQTH.AxiomAudit
