@@ -1628,3 +1628,11 @@ radius: 9 files carry it as an OPEN INPUT — LATENT TRAP, not unsoundness (the 
 gatedTauRepProdS full-gate + conditional hgate + tauDeriv_prod_stronglyMeasurable_v4
 (SATISFIABLE). J4-232 = the field/field² surgery ⟹ tripleHEmeas_concrete_v4 ⟹ v7.
 std-3 all 9, raw 0. NOT a₁=R/6.
+
+## J4-232 (2026-08-05, 3a9d1dfc) — GatedRepSFix: ★ THE VACUITY FIX COMPLETE AT S1 ★ [AF]
+Field/field² S-re-gating: full-gate reps (bodies byte-identical ⟹ defeq to the gate-eq
+RHS) + conditional hgate + hKSmeas + v4 conjuncts (2)(3). HONEST NEW: hOffS/hOffS2 (the
+field pd's don't vanish pointwise off S — the radialCutoff-support vanishing carried
+explicitly, true at the concrete witness). ★ tripleHEmeas_concrete_v4 = S1 with ALL
+hypotheses satisfiable (corrects the vacuous J4-218). Gc/hWG _v5 recipe + v7 re-thread
+documented. std-3 all 9, raw 0. NOT a₁=R/6. NEXT: J4-233 AssemblyV7Rethread.
