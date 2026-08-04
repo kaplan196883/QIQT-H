@@ -17546,4 +17546,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DaLimLUWallRecon.sliver_sum_bound_U
 #print axioms QIQTH.DaLimLUWallRecon.hDaLimLU_of_sliverData
 
+-- ★★★ J4-221 (ETailRateBound.lean, ns QIQTH.ETailRateBound; BRICK E2 — the last member
+-- of the last wall; indep build-verified): ★ THE hDaLimLU WALL IS REDUCED TO PURE DATA ★.
+-- The strip-difference identity PROVED inline (heatConv − Etrunc = the width-εₘ strip
+-- integral; rfl-unfolds + Chasles). hEbnd_discharge hits MemETail VERBATIM: the rated
+-- bound via hEdom (D1 Gaussian domination) + hFdom (width-2) + the vanishing hyps
+-- (hEzero/hFzero kill the s≤0/τ≤0 excursions ⟹ no εₘ<u restriction); per-slice constant
+-- by inner_slice_bound (Chapman–Kolmogorov gaussDdim_conv + gaussDdim_zero_antitone at
+-- the floor aT). Be(e) = (E₀+E₁e)·√(3/2)ⁿ·C_L·gaussDdim aT 0·e — u-FREE.
+-- Be_tendsto_zero = E3. ★ hDaLimLU_from_data: the COMPLETE DaLimLUGoal from pure data
+-- (gauge + interchange/lapfull/ecomb banked carries + integrabilities + sliver
+-- amplitudes + the two dominations) — threads E2+E3 into hDaLimLU_of_sliverData. NO
+-- irreducible open member remains at the hDaLimLU level. Honest: NOT a₁=R/6 — the
+-- geometric wiring (pdpdH→Ric) + remaining instantiation layers unchanged. std-3 all 4.
+#print axioms QIQTH.ETailRateBound.inner_slice_bound
+#print axioms QIQTH.ETailRateBound.hEbnd_discharge
+#print axioms QIQTH.ETailRateBound.Be_tendsto_zero
+#print axioms QIQTH.ETailRateBound.hDaLimLU_from_data
+
 end QIQTH.AxiomAudit
