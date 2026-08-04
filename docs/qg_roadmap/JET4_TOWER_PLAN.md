@@ -1335,3 +1335,10 @@ The order-2 gate formula/envelope/coercive + the measurability mirror
 interval-integrable (theorem!) while the (t-s)^{-1/2} sliver rate IS
 => hD1 = the sliver-truncation mirror one order up. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-199 — HD1SliverRoute (LANDED 3326bc68)
+THE MAP IS DIRECT (the banked witness_sliver2 bounds cover the hD1
+sliver piece verbatim); the bulk lemma (truncation defeats the wall) +
+the uniform-limit-of-derivatives skeleton (the analytic heart of hD1).
+Remaining: the concrete wiring + gderiv continuity. std-3 raw 0.
+NOT a1=R/6.
