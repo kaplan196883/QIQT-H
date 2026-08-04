@@ -1374,3 +1374,23 @@ The openness was hgood's bundled 5th conjunct; the package re-merge
 exports it; a1_R6_of_residue_inf_v4 (hCH DISCHARGED; +hgiC/hgpos).
 Inner residue: {hInt, hDuhamel, hInter, hDConv, hCConv}. Next: the
 Sol walls-consult. std-3 raw 0. NOT a1=R/6.
+
+### SOL CONSULT #3 (2026-08-05, post-J4-204) — THE FINAL PLAN
+Phases: (1) LeviSeriesLocalData package [3-5 bricks] -> (2) hInt from
+hEmeas+series [1-3] -> (3) the hInter LOCAL rebase [4-7; the global
+bound is an API artifact, not load-bearing] -> (4) the hCConv concrete
+threading [5-8; pin D/F explicitly, never replace F by an ae-rep in
+ContDiffAt goals] -> (5) plain Gaussian approximate identity [3-5] ->
+(6) the witness hDelta specialization [4-8] -> (7) hDConv threading
+[2-4] -> (8) the TruncatedDuhamelData facade [7-12; package not
+reprove] -> (9) final assembly [2-3] -> (10) the BOUNDED hEmeas
+attempt [16-26 if the variational jets are accessible: full-initial-
+state Groenwall + the product endpoint map Theta(q,v)=(q,Exp_q v) +
+the inverse-jet formulas + the Neumann region; 6-8 recon bricks first,
+stop if the jets are behind new choices]. FINAL SHAPE:
+a1_R6_of_geometry_and_heatOp_qregularity (P : GeometryPackage)
+(hQ : HeatOpTripleMeasurableWall P) : a1 = R/6 — pure geometry + ONE
+named wall. Honest frontier if hEmeas fails: the q-continuity of the
+endpoint-flow velocity jets on the compact good tube. DON'T cite as
+frontier: hInter/hCConv/hDelta/the raw Duhamel bundle (engineering).
+Total ordinary work ~31-55 bricks.
