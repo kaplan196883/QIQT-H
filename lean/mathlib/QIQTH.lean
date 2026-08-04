@@ -393,6 +393,7 @@ import QIQTH.ThirdJetBounds
 import QIQTH.GradEAssembly
 import QIQTH.OmegaHsrcC4cAudit
 import QIQTH.EboundWiringHD1
+import QIQTH.SecondDerivEnvelope
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

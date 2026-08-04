@@ -17126,4 +17126,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EboundWiringHD1.a1_R6_of_residue_inf_v2
 #print axioms QIQTH.EboundWiringHD1.hasFDerivAt_doubleIntegral_of_dominated
 
+-- ★★★ J4-198 (SecondDerivEnvelope.lean, ns QIQTH.SecondDerivEnvelope; indep
+-- build-verified): the order-2 hD1 feed — ALL FOUR goals. witnessFieldDeriv2_gate_eq
+-- (the on-gate order-2 formula at general field point — pure composition of the banked
+-- gaussComp_amp_pd_pd normal form) + _gate_abs_le (the E2 envelope one order up) +
+-- _envelope_coercive (x-free (√2)ⁿ·G_{2τ}) + the J4-185 measurability mirror at order 2
+-- (gatedDeriv2Rep + the dichotomy + witnessFieldDeriv2_measurable_of_gateEq). ★★★ THE
+-- INTEGRABILITY VERDICT (the crux, PROVEN not just assessed):
+-- order2_naive_dominator_not_intervalIntegrable — the naive order-2 dominator rate
+-- C·(t−s)⁻¹ is NOT interval-integrable (the J4-197 lever's hBint slot has NO admissible
+-- dominator at the honest rate — the naive route PROVABLY FAILS); +
+-- sliver_rate_intervalIntegrable — the (t−s)^{-1/2} sliver-survivor rate IS integrable
+-- ⟹ hD1 MUST mirror the banked sliver-truncation machinery (the hDaLimLU chain's
+-- bulk/sliver split with the cancellation τ⁻¹→τ^{-1/2} upgrade) one order up.
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.SecondDerivEnvelope.pd_pd_congr_at
+#print axioms QIQTH.SecondDerivEnvelope.witnessFieldDeriv2_gate_eq
+#print axioms QIQTH.SecondDerivEnvelope.witnessFieldDeriv2_gate_abs_le
+#print axioms QIQTH.SecondDerivEnvelope.witnessFieldDeriv2_envelope_coercive
+#print axioms QIQTH.SecondDerivEnvelope.gatedDeriv2Rep_measurable
+#print axioms QIQTH.SecondDerivEnvelope.witnessFieldDeriv2_eq_zero_of_nonpos
+#print axioms QIQTH.SecondDerivEnvelope.witnessFieldDeriv2_eq_gatedDeriv2Rep
+#print axioms QIQTH.SecondDerivEnvelope.witnessFieldDeriv2_measurable_of_gateEq
+#print axioms QIQTH.SecondDerivEnvelope.order2_naive_dominator_not_intervalIntegrable
+#print axioms QIQTH.SecondDerivEnvelope.sliver_rate_intervalIntegrable
+
 end QIQTH.AxiomAudit
