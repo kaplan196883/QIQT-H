@@ -1154,3 +1154,10 @@ quotient lever + ae_prod_of_ae_ae (honest MeasurableSet side-condition)
 hinnerJ ONLY (inner parametrix joint measurability; gaussDdim vanishes
 at tau<=0); other carries unify with the census. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-178 — InnerKernelJointMeas (LANDED e5117ac0) — HJOINT CLOSES
+hinnerJ DISCHARGED (tau<=0 vanishing ladder + direct-Borel global
+measurability across tau=0 + the nu-slice product lift) + hjoint_final:
+the last G2 slot closes from {hKmeasSet, hSmeasSet, hFjoint, hThetac,
+hThetane, huc, hVmapMeas, hWdiffJ} — all unified-or-reducible carries.
+std-3 raw 0. NOT a1=R/6.
