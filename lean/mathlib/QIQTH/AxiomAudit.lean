@@ -17424,4 +17424,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KernelJointContinuity.kernelBase_jointContinuousOn_pos
 #print axioms QIQTH.KernelJointContinuity.kernelGated_jointContinuousOn_inGate
 
+-- ★★★ J4-215 (HEmeasBorelAudit.lean, ns QIQTH.HEmeasBorelAudit; THE DEFINITIVE hEmeas
+-- RE-AUDIT; indep build-verified): ★ hKp1 (OBL-3) RETIRES AS A WALL ★. The census: S1
+-- (triple hEmeas) is THE one upstream measurability slot feeding the whole Levi/Duhamel
+-- interface (EndpointData/InterchangeData both take it; S2 reduces via iterE_zmeas).
+-- TWO routes to S1: Route A (E3e) needs hKcont+hKp1 — hKp1 arose ONLY from
+-- measurable_deriv_with_param needing joint continuity in the .choose base; Route B
+-- (E3d heatOp_stronglyMeasurable_of_deriv_fields) = PURE measurable algebra, and the
+-- banked gate-equation machinery (witnessFieldDeriv_measurable_of_gateEq J4-185 +
+-- witnessFieldDeriv2_measurable_of_gateEq J4-198) supplies its derivative-field
+-- measurabilities with q entering ONLY through carried measurable values. Banked:
+-- triple_hEmeas_of_borel_deriv_fields, firstFieldPd/secondFieldPd_measurable_of_gateEq,
+-- endpoint_integrable_of_tripleHEmeas, iterE_zslice_of_tripleHEmeas, and the airtight
+-- tripleHEmeas_of_surface (BorelDischargeSurface = measurabilities ONLY, no continuity).
+-- Residue = THREE ROUTINE Borel-extension bricks: G-a (varying field point p), G-b
+-- (off-diagonal Hessian i≠j), G-c (∂_τ gate-eq representative) — same banked kind, NOT
+-- the ODE wall. UPDATED WALLS: hDaLimLU (+ hD1 CLM lift, outside this family). The
+-- B5/hFlowBaseC1 variational Grönwall is OFF the critical path. std-3 all six.
+-- NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.HEmeasBorelAudit.triple_hEmeas_of_borel_deriv_fields
+#print axioms QIQTH.HEmeasBorelAudit.firstFieldPd_measurable_of_gateEq
+#print axioms QIQTH.HEmeasBorelAudit.secondFieldPd_measurable_of_gateEq
+#print axioms QIQTH.HEmeasBorelAudit.endpoint_integrable_of_tripleHEmeas
+#print axioms QIQTH.HEmeasBorelAudit.iterE_zslice_of_tripleHEmeas
+#print axioms QIQTH.HEmeasBorelAudit.tripleHEmeas_of_surface
+
 end QIQTH.AxiomAudit
