@@ -17069,4 +17069,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ThirdJetBounds.chartField_secondJetField_contDiffAt_basePoint
 #print axioms QIQTH.ThirdJetBounds.chartField_thirdJet_component_bound
 
+-- ★★★ J4-194 (GradEAssembly.lean, ns QIQTH.GradEAssembly; indep build-verified): the ∇E
+-- absorption assembly. ★ gradGA_bound — |pd(G·A)| ≤ C·τ^{-5/2}·G_{2τ} on (0,T]×closedBall
+-- from {hg,hgi,hw} (pure composition of the 190/191/193 bricks; the PdiffAt input
+-- discharged via residualCoeffA_slice_pdiffAt — no carried differentiability).
+-- gradE_split_triangle + gradE_bound_assembled (the E-gradient triangle at the normal
+-- form; the annulus-gradient term honestly exposed as the named carry).
+-- ★★★ THE ALIGNMENT VERDICT: baseKernelW 2 0 = bare G_{2τ} (α=0, NO τ-power); the
+-- τ^{-5/2}-vs-τ^{-1/2} gap = the GRADIENT OF THE ALREADY-CARRIED C4c DeWitt-cancellation
+-- wall (the zeroth |E| ≤ C·baseKernelW already assumes the 1/τ² amplitude head away) —
+-- NOT a new gap; once C4c is discharged the identical composition yields τ^{-1/2}·G_{2τ}
+-- verbatim. This file bounds the honest τ^{-5/2} form from the uncancelled amplitude —
+-- no cancellation smuggled. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GradEAssembly.residualCoeffA_slice_pdiffAt
+#print axioms QIQTH.GradEAssembly.gradGA_bound
+#print axioms QIQTH.GradEAssembly.gradE_split_triangle
+#print axioms QIQTH.GradEAssembly.gradE_bound_assembled
+
 end QIQTH.AxiomAudit
