@@ -1568,3 +1568,11 @@ data). hDerivConv size-rejected (≥4 new families) — one clean limit binder. 
 corrected: facades are INPUTS (full unbundle ≈ +15) — partial only. Next genuine
 discharges: R1½ suppliers-from-smoothness + R5 hgD1 (size-gated). std-3, raw 0.
 NOT a₁=R/6. NEXT: J4-225 R1½+R5.
+
+## J4-225 (2026-08-05, 0efdf6a5) — AssemblyLadderR5: v4 (honest partial) [AF]
+hchrMeas −1 FREE (hChr.continuous.measurable); hgiMeas→hgiC deepened. BLOCKS honest:
+hcar* (global joint chart Borel + general-gate PdiffAt + Cfield HasDerivAt = new
+analysis); hgD1 size-rejected (~30 per-slice carries vs the integrated D0/D1/hbnd).
+Three real-analysis items named: hcar* closure / concrete-gcoef sliver / F2+hFII.
+std-3, raw 0. NOT a₁=R/6. NEXT: J4-226 ChartJointBorel (hcar* item 1a — Borel NOT
+continuity, the unsatisfiability doesn't apply; representative-swap route in reserve).
