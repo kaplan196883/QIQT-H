@@ -17602,4 +17602,18 @@ namespace QIQTH.AxiomAudit
 -- gate BoundaryAssembly/hDerivLU carries first). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.AssemblyLadderR1R2.a1_R6_assembled_v2
 
+-- ★★★ J4-224 (AssemblyLadderR3.lean, ns QIQTH.AssemblyLadderR3; ladder R3 — the core
+-- unbundle; indep build-verified): a1_R6_assembled_v3 = v2 with the LAST opaque bundle
+-- (core : TruncatedDuhamelCore) REMOVED, net-NEUTRAL binder count (−core +hDerivConv).
+-- Internally discharged FREE from already-carried data: hDaLim (← hDaLimLU_from_data →
+-- daLimLU_reduces_to_pointwise .tendsto_at htU — the same 30-arg composition one level
+-- deeper) + hBoundaryLim (← boundaryTrunc_tendsto W1, every carry already a v2 binder).
+-- hDerivConv SIZE-REJECTED for threading (derivConv_tendsto needs the F2 family
+-- hpar/htime/hR + hFII, ≥4 new binder families) — kept as ONE clean pointwise limit.
+-- R4 CORRECTION recorded: hCConv_discharged_from_data is DOWNSTREAM (consumes the five
+-- bundles — already called internally); real R4 = per-bundle unbundling ≈ net +15 —
+-- expect a documented partial. No opaque Prop bundle remains anywhere in v3's surface.
+-- GENUINE-GAP: NONE. std-3. NOT a₁ = R/6.
+#print axioms QIQTH.AssemblyLadderR3.a1_R6_assembled_v3
+
 end QIQTH.AxiomAudit

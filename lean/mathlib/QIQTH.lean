@@ -419,6 +419,7 @@ import QIQTH.DaLimLUWallRecon
 import QIQTH.ETailRateBound
 import QIQTH.GrandAssemblyRecon
 import QIQTH.AssemblyLadderR1R2
+import QIQTH.AssemblyLadderR3
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
