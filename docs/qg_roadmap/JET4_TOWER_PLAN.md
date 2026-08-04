@@ -1273,3 +1273,9 @@ pd_poly_eq_sum + the tau^2-cleared amplitude (pole-clearing identity;
 the cleared form is a genuine polynomial) + tau^2*|A| <= C on the
 compact box. hEgrad slot confirmed = the mixed-third-jet LeviLipschitz
 layer (3-5 bricks). std-3 raw 0. NOT a1=R/6.
+
+### J4-191 — GaussianGradAbsorption (LANDED a3b7e0e8) — hEgrad step (iii)
+The absorption lever family with explicit factorial constants: 1D core,
+general doubling-width, linear/quadratic campaign forms, annulus
+sqrt-tau-gain family. Covers exactly the gradient-formula powers.
+std-3 raw 0. NOT a1=R/6.
