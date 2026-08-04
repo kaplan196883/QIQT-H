@@ -385,6 +385,7 @@ import QIQTH.GatedDInstantiation
 import QIQTH.CompactTubeLemma
 import QIQTH.ErrorKernelFactorization
 import QIQTH.ErrorKernelJointMeas
+import QIQTH.ParametrixGradientMeas
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

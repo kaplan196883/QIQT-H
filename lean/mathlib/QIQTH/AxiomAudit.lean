@@ -16969,4 +16969,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ErrorKernelJointMeas.annulusTerms_measurable_from_geometry
 #print axioms QIQTH.ErrorKernelJointMeas.cutoffError_normalForm_measurable_from_geometry
 
+-- ★★★ J4-189 (ParametrixGradientMeas.lean, ns QIQTH.ParametrixGradientMeas; indep
+-- build-verified): heatParametrix_pd_eq (the gradient identity — Leibniz on the folded
+-- form + the banked gaussDdim_pd_eq Gaussian derivative + pd_polySum_eq; closed by rw) +
+-- ★ heatParametrix_pd_measurable_of_folded (the hDH DISCHARGE: gradient = the explicit
+-- formula EVERYWHERE — τ>0 the identity, τ≤0 both sides 0 [0<n]; factor-by-factor
+-- measurable) + heatParametrix_pd_measurable_from_geometry (the exact J4-188 hDH shape ←
+-- {0<n, hg, hgi, hgpos}) + ★★ cutoffError_normalForm_measurable_final — the E diagonal
+-- normal form χ·(G·A) − annulus jointly measurable from GEOMETRY ALONE (no derivative
+-- carry left on the factor side). ★★★ THE F1 VERDICT: F1 ⟸ {the factor axis DONE here,
+-- the W1/W2 flow q-regularity — GatedWitnessEmeas needs joint continuity/C¹ of H_G across
+-- the .choose base-point flow, NOT dischargeable with the diagonal/chart machinery; the
+-- honest Sol route-(b) parameter-ODE wall, recorded not attempted}. std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ParametrixGradientMeas.heatParametrix_pd_eq
+#print axioms QIQTH.ParametrixGradientMeas.heatParametrix_pd_measurable_of_folded
+#print axioms QIQTH.ParametrixGradientMeas.heatParametrix_pd_measurable_from_geometry
+#print axioms QIQTH.ParametrixGradientMeas.cutoffError_normalForm_measurable_final
+
 end QIQTH.AxiomAudit
