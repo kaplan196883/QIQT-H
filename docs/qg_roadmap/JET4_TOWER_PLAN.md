@@ -1509,3 +1509,12 @@ Conjunct (1) EXACT. ★ STRETCH: tripleHEmeas_concrete_of_mixed — S1-concrete 
 the mixed i≠j Hessian (hP2) carried. Remaining measurability = ONE brick
 (gaussComp_amp_pd_pd_mixed). std-3 all 4, budget raw 0. NOT a₁=R/6.
 NEXT: J4-218 ChartJetHessianMixed (the LAST measurability brick).
+
+## J4-218 (2026-08-05, 2f894d30) — ChartJetHessianMixed: ★ MEASURABILITY FAMILY CLOSED ★ [AF]
+The last measurability brick. gaussComp_amp_pd_pd_mixed DERIVED (mixed second moment
+⟨V,Pi⟩⟨V,Pj⟩/(4τ²), no −1/(2τ) off-diagonal; + cross-jet + second-jet + amp-cross);
+i=j recovers the diagonal — one general-index form. gatedMixed2RepProd + everywhere
+identity + conjunct (3) ∀(i,j) = exact hP2. ★ tripleHEmeas_concrete: S1 DISCHARGED
+CONTINUITY-FREE (all 5 conjuncts; residue = genuine measurable-jet suppliers only).
+The OBL-2/OBL-3 continuity ladder fully obsoleted by the Borel route. std-3 all 11,
+budget raw 0. NOT a₁=R/6. WALLS NOW: hDaLimLU + hD1 CLM lift. NEXT: J4-219 HD1CLMLift.
