@@ -1561,3 +1561,10 @@ provider is τ≤t-weakened; the builders need ∀τ>0 — carried as DATA. Net 
 (depth over count; no opaque Prop bundle left). R2: ALL THREE size-rejected (no ∀u∈U
 producers; 1→~14 / 1→~4+hLHSlim / 1→≥4). std-3, budget raw 0. NOT a₁=R/6.
 NEXT: R3 core unbundle (hDaLim free).
+
+## J4-224 (2026-08-05, 46a9759a) — AssemblyLadderR3: v3, the last opaque bundle gone [AF]
+Net-neutral: −core +hDerivConv. hDaLim + hBoundaryLim discharged FREE (already-carried
+data). hDerivConv size-rejected (≥4 new families) — one clean limit binder. R4
+corrected: facades are INPUTS (full unbundle ≈ +15) — partial only. Next genuine
+discharges: R1½ suppliers-from-smoothness + R5 hgD1 (size-gated). std-3, raw 0.
+NOT a₁=R/6. NEXT: J4-225 R1½+R5.
