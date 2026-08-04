@@ -1442,3 +1442,13 @@ Core ← hDuhamel_leviSeries_of_daLim (rests on hDaLimLU), Interchange ←
 heatConv_leviSeries_interchange (DATA residue), Endpoint ←
 iterConvIntegrableW_of_bound_baseMeas (hEbound = envelope DATA), Bulk ←
 hDConv_from_banked (J4-209). std-3, budget raw 0. NOT a₁=R/6. NEXT: Ph9 CapstoneAssembly.
+
+## J4-211 (2026-08-05, 6dbf022e) — CapstoneAssembly: a1_R6_of_geometry_and_frontier [AF]
+Sol Ph9. v6's conclusion; four flat Levi/Duhamel slots → the three J4-210 bundles
+(endpoint/core/inter; Bulk omitted — hDConv already internal to v6). Pure composition.
+MASTER ENUMERATION: GEOMETRY flat · BANKED bundles (core rests on hDaLimLU) · DATA
+(CConv facades, hCH, the hDConv analytic block) · **ONE WALL at capstone level =
+hDaLimLU**. ⚠ hD1 caveat: hD1_from_data is scalar-typed vs the CLM-valued Dmap — lift
+missing, hD1 NOT fully banked. Rejections (size-based, in-header): local-data threading
++ the _walls stretch re-expose larger ∀τ>0-global residues. std-3, budget raw 0.
+NOT a₁=R/6. NEXT: Ph10 recon (hEmeas obligation map + variational-jet shape-match).
