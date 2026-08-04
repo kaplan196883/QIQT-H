@@ -1500,3 +1500,12 @@ firstFieldPd_prod_stronglyMeasurable = BorelDischargeSurface conjunct (2) EXACT 
 bridge); suppliers = measurabilities only. G-b diagonal (gatedDeriv2RepProd) landed.
 Honest gaps: G-b MIXED (needs new gaussComp_amp_pd_pd_mixed normal form) + G-c (∂_τ
 gate-eq rep). std-3 all 7, budget raw 0. NOT a₁=R/6. NEXT: G-c GatedTauDerivRep.
+
+## J4-217 (2026-08-05, 47fa4206) — GatedTauDerivRep: G-c + tripleHEmeas_concrete_of_mixed [AF]
+τ gate-eq rep. Honest τ≤0: gate τ-independent ⟹ funext-global identity; τ≤0 witness ≡0
+on Iic τ ⟹ HasDerivWithinAt.deriv_eq_zero forces deriv=0 (no diagonal case analysis;
+junk-deriv at the diagonal is 0 anyway). τ>0: product rule + gaussDdim_heat_eqn.
+Conjunct (1) EXACT. ★ STRETCH: tripleHEmeas_concrete_of_mixed — S1-concrete with ONLY
+the mixed i≠j Hessian (hP2) carried. Remaining measurability = ONE brick
+(gaussComp_amp_pd_pd_mixed). std-3 all 4, budget raw 0. NOT a₁=R/6.
+NEXT: J4-218 ChartJetHessianMixed (the LAST measurability brick).
