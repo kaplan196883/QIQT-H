@@ -1619,3 +1619,12 @@ carriers of tripleHEmeas_concrete(+v3) demand ∀-w S-membership — possibly sa
 only at K=∅ ⟹ POTENTIAL VACUITY of the hcar supplier line (J4-218→v6). J4-231 = the
 satisfiability audit (the axiom-budget blind-spot pattern) BEFORE crediting further.
 std-3 all 6, raw 0. NOT a₁=R/6.
+
+## J4-231 (2026-08-05, 57b1c46f) — HgateSatAudit: ⚠⚠ VACUOUS CONFIRMED + the fix [AF]
+The hcar carriers assert S-membership as a CONCLUSION over all field points ⟹
+UNSATISFIABLE at the concrete gate unless K=∅ (impossibility proofs banked). Blast
+radius: 9 files carry it as an OPEN INPUT — LATENT TRAP, not unsoundness (the v* line
+= valid conditionals). Root cause: base-only indicator gating. FIX proved (τ template):
+gatedTauRepProdS full-gate + conditional hgate + tauDeriv_prod_stronglyMeasurable_v4
+(SATISFIABLE). J4-232 = the field/field² surgery ⟹ tripleHEmeas_concrete_v4 ⟹ v7.
+std-3 all 9, raw 0. NOT a₁=R/6.
