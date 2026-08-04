@@ -17686,4 +17686,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GatedChartMeasAudit.secondFieldPd_prod_stronglyMeasurable_v2
 #print axioms QIQTH.GatedChartMeasAudit.tripleHEmeas_concrete_v3
 
+-- ★★★ J4-229 (RightInverseGeneral.lean, ns QIQTH.RightInverseGeneral; indep
+-- build-verified): ★ a1_R6_assembled_v6 — the raw off-image joint chart measurability
+-- is ELIMINATED from the entire a₁=R/6 assembly ★. KEY FINDING: the concrete S-gate IS
+-- the flow image (ConcreteGateAssembly: S z := φ_z '' ball 0 c;
+-- flowBallGate_hRI_onGate already proves the on-gate right-inverse). Banked:
+-- rightInverse_general (φ_q(chart q p) = p for p ∈ φ_q '' ball 0 δ₀ — the germ +
+-- image-membership; the origin chartW0_rightInverse is its p=0 case), hWG_concrete
+-- (the regional Gc repackaged: ∃ ρ>0, Gc measurable, on-IMAGE agreement — Gc now a
+-- THEOREM), hWG_of_regional_support (bridge to the exact v3 hWG slot for ANY guard P,
+-- carrying only hImg : P w → image membership), a1_R6_assembled_v2' (htriple as direct
+-- input — the raw-chart supplier block replaced by ONE hypothesis), and ★ v6 (htriple ←
+-- tripleHEmeas_concrete_v3 internally — the GATED route throughout). Chart-side
+-- residue = ONE pure-geometry fact: hImg (amplitude-support ⊆ flow-image; the
+-- amplitude guard bounds ‖W‖ but off-image W is junk — the S-gate conjunct of the
+-- WITNESS may supply it, next audit). Analytic residue unchanged (= the J4-222/223
+-- conditional surface). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.RightInverseGeneral.rightInverse_general
+#print axioms QIQTH.RightInverseGeneral.hWG_concrete
+#print axioms QIQTH.RightInverseGeneral.hWG_of_regional_support
+#print axioms QIQTH.RightInverseGeneral.a1_R6_assembled_v2'
+#print axioms QIQTH.RightInverseGeneral.a1_R6_assembled_v6
+
 end QIQTH.AxiomAudit

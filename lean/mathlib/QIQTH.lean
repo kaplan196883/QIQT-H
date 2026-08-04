@@ -424,6 +424,7 @@ import QIQTH.AssemblyLadderR5
 import QIQTH.ChartJointBorel
 import QIQTH.ChartRepConstruction
 import QIQTH.GatedChartMeasAudit
+import QIQTH.RightInverseGeneral
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
