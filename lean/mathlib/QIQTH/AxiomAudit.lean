@@ -17586,4 +17586,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GrandAssemblyRecon.tripleHEmeas_is_hEmeas_slot
 #print axioms QIQTH.GrandAssemblyRecon.a1_R6_assembled
 
+-- ★★★ J4-223 (AssemblyLadderR1R2.lean, ns QIQTH.AssemblyLadderR1R2; ladder R1+R2; indep
+-- build-verified): R1 LANDED — a1_R6_assembled_v2 = a1_R6_assembled with the two opaque
+-- EndpointData/InterchangeData bundles REMOVED, both hEmeas slots discharged internally
+-- ← tripleHEmeas_concrete (defeq via the Iff.rfl trace), hEzero shared, hEbound ← the
+-- ONE new hEboundFull binder. HONEST τ-WINDOW FINDING: hEboundW_from_geometry gives
+-- only τ≤t but BOTH builders need ∀τ>0 (the Volterra/iterConv engines run over all
+-- τ>0) — the unrestricted envelope carried as satisfiable geometric DATA, NOT taken
+-- from the weakened provider. Net binder count +6 — honest depth-vs-count trade stated
+-- in-header: no opaque Prop bundle remains; the surface bottoms out in measurable
+-- suppliers + DATA. R2 = TOTAL SIZE-REJECTION (all three members kept): no ∀u∈U
+-- producers exist — hInterchange 1→~14 (fixed-u 2nd-derivative engine), hLapFull 1→~4
+-- incl. the hard hLHSlim F2 fact, hEcomb 1→≥4 per-(m,u). Next: R3 core unbundle (hDaLim
+-- is FREE via the already-carried hDaLimLU data → daLimLU_reduces_to_pointwise; size-
+-- gate BoundaryAssembly/hDerivLU carries first). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.AssemblyLadderR1R2.a1_R6_assembled_v2
+
 end QIQTH.AxiomAudit
