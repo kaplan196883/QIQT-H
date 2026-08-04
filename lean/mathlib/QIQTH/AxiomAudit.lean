@@ -16750,4 +16750,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JointMeasurability.hjoint_from_witness
 #print axioms QIQTH.JointMeasurability.hjoint_concrete
 
+-- ★★★ J4-178 (InnerKernelJointMeas.lean, ns QIQTH.InnerKernelJointMeas): hinnerJ
+-- DISCHARGED + hjoint FINAL (indep build-verified): the τ≤0 vanishing ladder
+-- (heatKernel1D/gaussDdim [0<n]/heatParametrix — √nonpos=0, inv_zero) + joint (τ,w)
+-- continuity on {τ>0} (heatKernel1D/gaussDdim/witnessInner) + ★ the DIRECT-Borel route:
+-- heatKernel1D/gaussDdim/witnessInner_measurable_uncurry are GLOBALLY measurable across
+-- τ=0 (√/inv/exp measurable junk; rpow via Continuous.rpow_const needing Θ≠0 — honest
+-- hΘne) — stronger than the piecewise plan; aemeasurable_chart_snd (the ν-slice → product
+-- lift via Measure.map_snd_prod); ★★ hinnerJ_discharged (the EXACT hinnerJ slot ←
+-- {hΘc, hΘne, huc (reducible via transportCoeff_continuous_of_preserve), hVmapMeas
+-- (ν-level chart carry, unifies with the J4-168 family)}) + ★★★ hjoint_final — the exact
+-- hjoint conclusion of g2_bundle_assembled from {hKmeasSet, hSmeasSet, hFjoint, hΘc,
+-- hΘne, huc, hVmapMeas, hWdiffJ}. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.InnerKernelJointMeas.heatKernel1D_eq_zero_of_nonpos
+#print axioms QIQTH.InnerKernelJointMeas.gaussDdim_eq_zero_of_nonpos
+#print axioms QIQTH.InnerKernelJointMeas.heatParametrix_eq_zero_of_nonpos
+#print axioms QIQTH.InnerKernelJointMeas.heatKernel1D_continuousOn_pos
+#print axioms QIQTH.InnerKernelJointMeas.gaussDdim_continuousOn_pos
+#print axioms QIQTH.InnerKernelJointMeas.witnessInner_jointContinuousOn_pos
+#print axioms QIQTH.InnerKernelJointMeas.heatKernel1D_uncurry_measurable
+#print axioms QIQTH.InnerKernelJointMeas.gaussDdim_uncurry_measurable
+#print axioms QIQTH.InnerKernelJointMeas.witnessInner_measurable_uncurry
+#print axioms QIQTH.InnerKernelJointMeas.aemeasurable_chart_snd
+#print axioms QIQTH.InnerKernelJointMeas.hinnerJ_discharged
+#print axioms QIQTH.InnerKernelJointMeas.hjoint_final
+
 end QIQTH.AxiomAudit
