@@ -17779,4 +17779,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GatedRepSFix.secondFieldPd_prod_stronglyMeasurable_v4
 #print axioms QIQTH.GatedRepSFix.tripleHEmeas_concrete_v4
 
+-- ★★★ J4-233 (AssemblyV7Rethread.lean, ns QIQTH.AssemblyV7Rethread; the v7 re-thread;
+-- indep build-verified): ★ a1_R6_assembled_v7 — THE CREDITED CONCRETE-CLOSABLE CAPSTONE
+-- ★. = RightInverseGeneral.a1_R6_assembled_v2' with htriple ← GatedRepSFix.
+-- tripleHEmeas_concrete_v4 internally. Binder-diff vs v6: the Gc/hGmeas chart route
+-- REMOVED (v7 bypasses the chart-side Gc/hWG/germ wall entirely — the raw-chart
+-- measurability conjunct route); the vacuous v2/v3 hcar forms REPLACED by the v4
+-- conditional forms (+hOffS/hOffS2); +hKSmeas. EVERY supplier binder satisfiable at
+-- the concrete flow-ball gate with K ≠ ∅. STRETCH honestly blocked at v7 level: S is
+-- ABSTRACT here — hKSmeas needs the PRODUCT-lift joint measurability (banked
+-- flowBallGate_hSmK_of_geom is per-fixed-p only — a genuine new brick at concrete S);
+-- hOffS from radialCutoff_eq_zero/CutoffAnnulusSupport once S fixed. THE ORDERED
+-- REMAINING LADDER (honest sizes): 1 concrete-S instantiation (MED-LARGE) → 2 Gc+S
+-- _v5 (MED, optional) → 3 CConv facade pile (LARGE) → 4 hDConv analytic pile (LARGE) →
+-- 5 R2 trio (LARGE) → 6 core/envelopes (MED) → 7 a1_R6_of_geometry wrap (MED).
+-- std-3. NOT a₁ = R/6 — conditional on the (all-satisfiable) surface.
+#print axioms QIQTH.AssemblyV7Rethread.a1_R6_assembled_v7
+
 end QIQTH.AxiomAudit
