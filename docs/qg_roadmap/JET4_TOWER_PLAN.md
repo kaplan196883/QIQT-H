@@ -1412,3 +1412,9 @@ The hCConv threading at the concrete witness + a1_R6_of_residue_inf_v5
 (inner carries {hInt, hDuhamel, hInter, hDConv, hCH} + bundles + hD1);
 the forall-S provider vacuity-hole soundly rejected. std-3 raw 0.
 NOT a1=R/6.
+
+### J4-208 — GaussianApproxIdentity (LANDED 943fd1f3) — Sol Ph5 collapsed
+The identity was FULLY BANKED (J4-118/119); the gap was only the
+nhdsWithin-0+ filter form (upgraded, no new analysis). The hDelta slot
+remains assembled to hBoundary (Brick 2) — audit next. std-3 raw 0.
+NOT a1=R/6.
