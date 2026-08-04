@@ -16878,4 +16878,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvFacade.shared_chart_consequences
 #print axioms QIQTH.CConvFacade.hCConv_discharged_from_data
 
+-- ★★★ J4-184 (FlowBallInstantiation.lean, ns QIQTH.FlowBallInstantiation; Sol steps 3-4;
+-- indep build-verified): chartGateData_flowBall — the ChartGate bundle at the CONCRETE
+-- flow-ball gate (∃δ₀>0, ∀c∈(0,δ₀)): hKmeasSet/hCover/hKmeas DISCHARGED from geometry
+-- (v7 machinery, existential unpacked once, two δ₀'s unified via min, hMemNear DERIVED
+-- from hMemCov via ae_of_all — deduplicated); carried minimized {hSmeasSet full-form,
+-- hVmapMeas, hChartB, hSliceData}. goodProd_hasDerivAt_of_carries — the Sol product-a.e.
+-- HasDerivAt wiring (ae_prod_of_ae_ae ∘ hMeasSet_of_sliceCont). derivativeData_of_rep.
+-- ★★ facade_flowBall — hCConv_discharged_from_data at the flow-ball gate: ∃δ₀>0, ∀c∈(0,δ₀),
+-- the VERBATIM L1 hfam slot (c-indexed D since hDrep is c-dependent). HONEST SPLIT
+-- recorded: hlin is ∀x∈u pointwise (rides the C² regularity chain, NOT producible from
+-- a.e. routes); the ae_prod object is the hDmeas-side lever only. L2 hD1 gap unchanged.
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.FlowBallInstantiation.chartGateData_flowBall
+#print axioms QIQTH.FlowBallInstantiation.goodProd_hasDerivAt_of_carries
+#print axioms QIQTH.FlowBallInstantiation.derivativeData_of_rep
+#print axioms QIQTH.FlowBallInstantiation.facade_flowBall
+
 end QIQTH.AxiomAudit
