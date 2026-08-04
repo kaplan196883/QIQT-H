@@ -1286,3 +1286,10 @@ no-conjugate-points invertibility DISSOLVED (Neumann on the uniform
 ball); the C4 chart at reachable points; third-jet existence. ZERO new
 carries. Next: third-jet compact bounds + parametrix corollary + the
 grad-E expansion. std-3 raw 0. NOT a1=R/6.
+
+### J4-193 — ThirdJetBounds (LANDED 839d9385) — all four goals
+tau^2*|pd A| <= C (the fderiv-slice route, no symbolic gradient) +
+the grad(G*A) skeleton + the field-C3 parametrix + third-derivative
+continuity/compact lever + the pd_slice_eq_fderiv bridge. Honest
+residue: the gate-uniform third-jet constant (per-base expRho
+non-uniformity). std-3 raw 0. NOT a1=R/6.
