@@ -1349,3 +1349,9 @@ feeds (sliver-rate hBint, gderiv_continuousAt, endpoint convergence,
 sqrt-eps vanishing, hD1_reduction). Honest finding: witness_sliver2 is
 centre-only — the x-uniform upgrade is the remaining carry. std-3
 raw 0. NOT a1=R/6.
+
+### J4-201 — XUniformSliver (LANDED ac30a37a)
+ROUTE A: the sliver pinning is interface-only (the F-cap x-uniform,
+same constant); the E1 per-slice x-uniform + sliver_rate_hsbound in
+the exact consumer shape; NO new carries. Scope: E2/T1-T3 halves next.
+std-3 raw 0. NOT a1=R/6.
