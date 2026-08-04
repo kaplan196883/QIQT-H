@@ -17449,4 +17449,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HEmeasBorelAudit.iterE_zslice_of_tripleHEmeas
 #print axioms QIQTH.HEmeasBorelAudit.tripleHEmeas_of_surface
 
+-- ★★★ J4-216 (GatedDerivRepProduct.lean, ns QIQTH.GatedDerivRepProduct; measurability
+-- brick G-a + G-b-diagonal; indep build-verified): the PRODUCT-COORDINATE gate-equation
+-- extension. gatedDerivRepProd (+ _measurable + the everywhere-identity
+-- witnessFieldDeriv_eq_gatedDerivRepProd) generalize the J4-185 fixed-x machinery to
+-- (τ,p,q); firstFieldPd_prod_stronglyMeasurable hits BorelDischargeSurface conjunct (2)
+-- EXACTLY (the pd↔witnessFieldDeriv step is rfl), carrying only genuine measurable
+-- suppliers (chart/jet/amp/amp-pd + the on-gate jet family) — NO continuity. G-b
+-- DIAGONAL also landed (gatedDeriv2RepProd + secondFieldPd_prod_diag_measurable).
+-- HONEST GAPS named in-file: G-b MIXED (pd_i∘pd_j, i≠j — needs a genuinely new
+-- gaussComp_amp_pd_pd_mixed Leibniz-Gaussian normal form; ChartJetHessian is
+-- diagonal-only) + G-c (the ∂_τ on-gate closed form — new brick, deferred per
+-- only-if-routine). tripleHEmeas_concrete correctly NOT wired (conjuncts 1 + mixed-3
+-- open). std-3 all 7. NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.GatedDerivRepProduct.gatedDerivRepProd_measurable
+#print axioms QIQTH.GatedDerivRepProduct.witnessFieldDeriv_eq_gatedDerivRepProd
+#print axioms QIQTH.GatedDerivRepProduct.firstFieldPd_prod_measurable
+#print axioms QIQTH.GatedDerivRepProduct.firstFieldPd_prod_stronglyMeasurable
+#print axioms QIQTH.GatedDerivRepProduct.gatedDeriv2RepProd_measurable
+#print axioms QIQTH.GatedDerivRepProduct.witnessFieldDeriv2_eq_gatedDeriv2RepProd
+#print axioms QIQTH.GatedDerivRepProduct.secondFieldPd_prod_diag_measurable
+
 end QIQTH.AxiomAudit

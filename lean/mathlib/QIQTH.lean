@@ -411,6 +411,7 @@ import QIQTH.HEmeasRecon
 import QIQTH.FlowJointContinuity
 import QIQTH.KernelJointContinuity
 import QIQTH.HEmeasBorelAudit
+import QIQTH.GatedDerivRepProduct
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
