@@ -17406,4 +17406,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FlowJointContinuity.uniformFlowExp_joint_continuousOn
 #print axioms QIQTH.FlowJointContinuity.uniformFlowExp_smoothFactor_continuousOn
 
+-- ★★★ J4-214 (KernelJointContinuity.lean, ns QIQTH.KernelJointContinuity; hEmeas ladder
+-- B4; indep build-verified): the HONEST B4 verdict — the literal global-Continuous OBL-2
+-- shape is UNSATISFIABLE for the concrete kernel (two structural edges: E-τ0 = τ=0
+-- diagonal Gaussian blow-up (value 0 but gaussDdim τ 0 → +∞ along τ↓0 at p=q); E-gate =
+-- the hard set-gate jumps at ∂K/∂(S q)). Delivered the MAXIMAL honest globalization:
+-- kernelBase_jointContinuousOn_pos (on {τ>0}, ← witnessInner_jointContinuousOn_pos ∘
+-- (τ,V q p) with the carried satisfiable hVjoint) + kernelGated_jointContinuousOn_inGate
+-- (transfer to vanVleckGatedWitness on in-gate regions via ContinuousOn.congr). The
+-- payoff hEmeas_of_hKp1 CORRECTLY REFUSED — instantiating kernelCont_reduces_hEmeas
+-- needs the unsatisfiable global hKcont (firewall held). KEY DISCOVERY: the joint strong
+-- measurability OBL-2 was meant to feed is ALREADY discharged WITHOUT global continuity
+-- via the Borel route (InnerKernelJointMeas.hinnerJ_discharged / hjoint_final — globally
+-- Borel across τ=0). ⟹ the OBL-2 continuity line retires; the flow-axis wall remains
+-- OBL-3/hKp1 ONLY IF the pd-measurability truly needs it — next brick audits that.
+-- std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.KernelJointContinuity.kernelBase_jointContinuousOn_pos
+#print axioms QIQTH.KernelJointContinuity.kernelGated_jointContinuousOn_inGate
+
 end QIQTH.AxiomAudit

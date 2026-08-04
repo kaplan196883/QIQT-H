@@ -409,6 +409,7 @@ import QIQTH.TruncatedDuhamelData
 import QIQTH.CapstoneAssembly
 import QIQTH.HEmeasRecon
 import QIQTH.FlowJointContinuity
+import QIQTH.KernelJointContinuity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
