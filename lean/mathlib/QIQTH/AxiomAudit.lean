@@ -16820,4 +16820,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateDiffWiringMeasSet.hMeasSet_of_sliceCont
 #print axioms QIQTH.GateDiffWiringMeasSet.hjoint_fully_geometric
 
+-- ★★★ J4-181 (SliceInterfaceInstantiation.lean, ns QIQTH.SliceInterfaceInstantiation):
+-- the slice/interface instantiation (indep build-verified). ★ THE SUPPORT-CONDITION
+-- IDENTITY: gatedWitness_fieldSlot_eq_inner_of_support (z∈K + cutoff vanishes off S z ⟹
+-- gated = inner EVERYWHERE — the indicator jump lands where the kernel is already 0;
+-- design intent b < c: gate strictly contains the cutoff support; the support condition
+-- carried honestly since off-reach W z q is .choose junk) + slice continuity
+-- (gatedWitness_slice_continuous_of_support + _zero_of_notMemK) + hSliceCont_of_data
+-- (the EXACT J4-180 slot from the per-p dichotomy hSliceData). Borel mirrors:
+-- gatedFieldpoint_measurable_of_inner + gcpw_fieldpoint_measurable_of_chartBorel +
+-- hWq_of_chartBorel / hWa_of_chartBorel (the EXACT slots ← {hKmeasSet, hSmeasSet, hΘc,
+-- hΘne, huc, hChartB Borel-chart}). ★★★ hjoint_instantiated CAPSTONE. hDmeas stays the
+-- HONEST carry (measurable_deriv_with_param needs joint continuity across ∂K — false;
+-- slope-limsup ≠ deriv off the differentiability set — both routes examined and rejected,
+-- never faked). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.SliceInterfaceInstantiation.innerKernelField_eq_zero_of_cutoff_zero
+#print axioms QIQTH.SliceInterfaceInstantiation.gatedWitness_fieldSlot_eq_inner_of_support
+#print axioms QIQTH.SliceInterfaceInstantiation.gatedWitness_slice_continuous_of_support
+#print axioms QIQTH.SliceInterfaceInstantiation.gatedWitness_slice_zero_of_notMemK
+#print axioms QIQTH.SliceInterfaceInstantiation.hSliceCont_of_data
+#print axioms QIQTH.SliceInterfaceInstantiation.gatedFieldpoint_measurable_of_inner
+#print axioms QIQTH.SliceInterfaceInstantiation.gcpw_fieldpoint_measurable_of_chartBorel
+#print axioms QIQTH.SliceInterfaceInstantiation.hWq_of_chartBorel
+#print axioms QIQTH.SliceInterfaceInstantiation.hWa_of_chartBorel
+#print axioms QIQTH.SliceInterfaceInstantiation.hjoint_instantiated
+
 end QIQTH.AxiomAudit
