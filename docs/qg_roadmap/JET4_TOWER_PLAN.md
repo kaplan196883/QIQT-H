@@ -1576,3 +1576,11 @@ analysis); hgD1 size-rejected (~30 per-slice carries vs the integrated D0/D1/hbn
 Three real-analysis items named: hcar* closure / concrete-gcoef sliver / F2+hFII.
 std-3, raw 0. NOT a₁=R/6. NEXT: J4-226 ChartJointBorel (hcar* item 1a — Borel NOT
 continuity, the unsatisfiability doesn't apply; representative-swap route in reserve).
+
+## J4-226 (2026-08-05, 98cbe58c) — ChartJointBorel: hcar* → ONE hChartRep (v5) [AF]
+The chart read: off-gate CONSTANT 0; on-gate .choose that FORGOT E_q.symm ⟹ raw joint
+measurability = definitional wall. Discharged the piecewise half
+(chartJoint_measurable_of_rep); tripleHEmeas_concrete_v2 = 3 opaque conjuncts → 1
+shared hChartRep (∃ measurable representative agreeing on-gate). v5 threaded. The true
+content: CONSTRUCT the representative from the flow (Θ jointly cont (B2) + injective
+(Neumann) ⟹ Lusin–Souslin). std-3, raw 0. NOT a₁=R/6. NEXT: J4-227 ChartRepConstruction.
