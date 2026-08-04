@@ -17732,4 +17732,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ImageSupportDischarge.hImg_chartFieldAmp_of_surjectivity
 #print axioms QIQTH.ImageSupportDischarge.hWG_chartFieldAmp_of_surjectivity
 
+-- ★★★ J4-231 (HgateSatAudit.lean, ns QIQTH.HgateSatAudit; THE SATISFIABILITY AUDIT;
+-- indep build-verified): ⚠⚠ VACUOUS CONFIRMED ⚠⚠ — the hcarTau/hcarField/hcarField2
+-- carriers assert S-membership as a bare CONCLUSION over ALL field points ⟹
+-- UNSATISFIABLE at the concrete gate (S z = φ_z '' ball 0 c ≠ univ) unless K = ∅.
+-- Lean impossibility proofs banked: gate_Sconj_impossible(₂), hcarTau/hcarField/
+-- hcarField2_unsat, hcarTau_unsat_of_nonempty_proper. BLAST RADIUS: 9 files carry the
+-- shape as an OPEN INPUT (never discharged) — a LATENT VACUITY TRAP, not unsoundness:
+-- every a1_R6_assembled_v* is a valid conditional whose concrete antecedent is
+-- unsatisfiable as written. ROOT CAUSE: gatedTauRepProd was indicator-gated on the
+-- BASE set only, so the identity needed the over-strong hypothesis to erase the
+-- {q∈K, p∉S q, τ>0} region. THE FIX (τ template FULLY RE-PROVED, std-3):
+-- gatedTauRepProdS (FULL-gate indicator {q∈K ∧ p∈S q}) + _measurable (satisfiable
+-- hKSmeas) + witnessTauDeriv_eq_gatedTauRepProdS (S-membership as HYPOTHESIS; the
+-- illicit region now an honest 0=0 branch) + tauDeriv_prod_stronglyMeasurable_v4
+-- (conjunct 1 with SATISFIABLE hypotheses). Follow-up: the identical surgery on the
+-- field/field² reps ⟹ tripleHEmeas_concrete_v4 ⟹ the v6 re-thread. std-3 all 9.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HgateSatAudit.gate_Sconj_impossible
+#print axioms QIQTH.HgateSatAudit.hcarTau_unsat
+#print axioms QIQTH.HgateSatAudit.hcarField_unsat
+#print axioms QIQTH.HgateSatAudit.hcarField2_unsat
+#print axioms QIQTH.HgateSatAudit.hcarTau_unsat_of_nonempty_proper
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdS_measurable
+#print axioms QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS
+#print axioms QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4
+
 end QIQTH.AxiomAudit
