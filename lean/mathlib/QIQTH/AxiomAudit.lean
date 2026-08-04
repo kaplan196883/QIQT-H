@@ -17168,4 +17168,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HD1SliverRoute.tendstoUniformlyOn_of_dist_le_bound
 #print axioms QIQTH.HD1SliverRoute.hD1_bulk_sliver_reduction
 
+-- ★★★ J4-200 (HD1ConcreteWiring.lean, ns QIQTH.HD1ConcreteWiring; indep build-verified):
+-- THE hD1-SLOT VERDICT: ContDiffAt ℝ 1 D 0 = EXACTLY {∀w∈u HasFDerivAt D (D' w) w +
+-- ContinuousOn D' u} (contDiffAt_succ_iff_hasFDerivAt + contDiffAt_zero) — both feeds now
+-- available. sliver_rate_const_intervalIntegrable (the concrete hBint) +
+-- ★ gderiv_continuousAt (the J4-160 engine at the order-2 kernel with the sliver-rate
+-- dominator — D' continuity; the (t−s)^{-1/2} hsbound = the honest cancellation carry) +
+-- bulk_tendsto_of_primitive (the endpoint convergence via primitive continuity) +
+-- sliver_bound_tendsto_zero (the √ε vanishing) + ★★ hD1_reduction (the top-level closure:
+-- the two ingredients ⟹ ContDiffAt ℝ 1 D 0). UNIFORMITY FINDING (honest): the banked
+-- witness_sliver2_grand is CENTRE-ONLY per-component — the x-uniform upgrade is the
+-- remaining carry for the componentwise lift. hD1 reduced to {the x-uniform sliver
+-- upgrade, the sliver-rate hsbound, the L1-chain geometric data}. std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HD1ConcreteWiring.sliver_rate_const_intervalIntegrable
+#print axioms QIQTH.HD1ConcreteWiring.gderiv_continuousAt
+#print axioms QIQTH.HD1ConcreteWiring.bulk_tendsto_of_primitive
+#print axioms QIQTH.HD1ConcreteWiring.sliver_bound_tendsto_zero
+#print axioms QIQTH.HD1ConcreteWiring.hD1_reduction
+
 end QIQTH.AxiomAudit

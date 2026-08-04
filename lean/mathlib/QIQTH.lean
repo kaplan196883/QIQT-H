@@ -395,6 +395,7 @@ import QIQTH.OmegaHsrcC4cAudit
 import QIQTH.EboundWiringHD1
 import QIQTH.SecondDerivEnvelope
 import QIQTH.HD1SliverRoute
+import QIQTH.HD1ConcreteWiring
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
