@@ -17564,4 +17564,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ETailRateBound.Be_tendsto_zero
 #print axioms QIQTH.ETailRateBound.hDaLimLU_from_data
 
+-- ★★★ J4-222 (GrandAssemblyRecon.lean, ns QIQTH.GrandAssemblyRecon; THE GRAND ASSEMBLY;
+-- indep build-verified): ★ a1_R6_assembled BUILDS — WALL-FREE and CLM-FREE ★. The
+-- composition trace, build-checked: (a) hDaLimLU_from_data's DaLimLUGoal is DEFEQ to
+-- the frontier's hDaLimLU slot at H=Wit, F=leviSeries (DaLim inferred; gauge abbrevs
+-- MemGaugeGi/Gamma = the capstone's RNC facts verbatim; aT floor from hUfloor);
+-- daLimLU_reduces_to_pointwise feeds the core's hDaLim via .tendsto_at htU. (b)
+-- tripleHEmeas_is_hEmeas_slot (Iff.rfl): tripleHEmeas_concrete = the single hEmeas slot
+-- of BOTH endpoint/interchange bundle providers, same concrete witness. (c) v7 + the
+-- frontier are ORTHOGONAL and COMBINE: a1_R6_assembled = geometry_and_frontier with
+-- hDaLimLU internally discharged (← hDaLimLU_from_data) AND hD1 ← the n-scalar hgD1
+-- route (hD1_concrete_from_scalar). THE LEAF ENUMERATION: GEOMETRY + CONCRETE-
+-- DISCHARGEABLE + DATA — ★ GENUINE-GAP: NONE at the conditional level (pdpdH→Ric is NOT
+-- open: htr already carries the Ricci trace; pdpdH enters only as a bounded
+-- representative). THE LADDER: R1 hEmeas-unbundle → R2 interchange/lapfull/ecomb → R3
+-- core hBoundaryLim/hDerivConv → R4 facades → R5 hgD1 → R6 dominations/integrabilities
+-- → R7 htr ⟹ FINAL a1_R6_of_geometry (the old _heatOp_qregularity shape SUPERSEDED —
+-- no q-regularity hypothesis needed). std-3 all 3. NOT a₁ = R/6 — conditional until
+-- the ladder closes.
+#print axioms QIQTH.GrandAssemblyRecon.daLimLU_reduces_to_pointwise
+#print axioms QIQTH.GrandAssemblyRecon.tripleHEmeas_is_hEmeas_slot
+#print axioms QIQTH.GrandAssemblyRecon.a1_R6_assembled
+
 end QIQTH.AxiomAudit
