@@ -17629,4 +17629,23 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6.
 #print axioms QIQTH.AssemblyLadderR5.a1_R6_assembled_v4
 
+-- ★★★ J4-226 (ChartJointBorel.lean, ns QIQTH.ChartJointBorel; the hcar* key conjunct;
+-- indep build-verified): the chart's off-gate definition READ — uniformInverseChart =
+-- if q ∈ K then (choose_q) p else 0; off-gate CONSTANT 0 (measurable); on-gate = the
+-- .choose of an existential that FORGOT the concrete E_q.symm inverse ⟹ the raw joint
+-- measurability is a DEFINITIONAL WALL (q ↦ choose(h q) has no measurable structure;
+-- per-q continuity only local). Route (b) representative-swap confirmed useless (chart
+-- fixed). DISCHARGED the joint/off-gate half: chartJoint_measurable_of_rep
+-- (Measurable.piecewise on {w.2.2 ∈ K}; F/hFmeas/hFagree load-bearing) —
+-- tripleHEmeas_concrete_v2 drops the three opaque Measurable(chart) conjuncts for ONE
+-- shared hChartRep : ∃ F, Measurable F ∧ on-gate agreement. ★ a1_R6_assembled_v5 =
+-- v4 with 3 chart-measurabilities → 1 hChartRep. The honest true content: the flow
+-- inverse IS jointly measurable (Θ(q,v)=(q,Exp_q v) continuous (B2) + injective
+-- (Neumann) ⟹ Lusin–Souslin measurable inverse) — a real CONSTRUCTION brick, not a
+-- wall. Remaining in the trimmed existentials: amp/pd measurabilities (mechanical) +
+-- the general-gate PdiffAt/HasDerivAt jets (deeper). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.ChartJointBorel.chartJoint_measurable_of_rep
+#print axioms QIQTH.ChartJointBorel.tripleHEmeas_concrete_v2
+#print axioms QIQTH.ChartJointBorel.a1_R6_assembled_v5
+
 end QIQTH.AxiomAudit

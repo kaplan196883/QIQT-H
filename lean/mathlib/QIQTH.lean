@@ -421,6 +421,7 @@ import QIQTH.GrandAssemblyRecon
 import QIQTH.AssemblyLadderR1R2
 import QIQTH.AssemblyLadderR3
 import QIQTH.AssemblyLadderR5
+import QIQTH.ChartJointBorel
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
