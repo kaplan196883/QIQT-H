@@ -1400,3 +1400,9 @@ The shared series package (structure + tsum-measurability + envelope
 lemmas + builder + hInt accessor); banked domination reused; the
 joint-(s,z) bonus honestly removed (whnf loop, follow-on).
 std-3 raw 0. NOT a1=R/6.
+
+### J4-206 — InterchangeLocalRebase (LANDED 6516852b) — Sol Ph3
+The Sol verdict confirmed (no load-bearing global use); the local
+interchange + global corollary + hInter_from_local_data (the exact v4
+slot mod {local bound, hEzero, hEmeas, hglobal}). std-3 raw 0.
+NOT a1=R/6.
