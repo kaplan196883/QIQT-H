@@ -17239,4 +17239,19 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6.
 #print axioms QIQTH.LeviCarriesAssembly.a1_R6_of_residue_inf_v3
 
+-- ★★★ J4-204 (GateOpennessExport.lean, ns QIQTH.GateOpennessExport; indep build-verified):
+-- THE KEY FINDING — the gate openness was a BUNDLED CONJUNCT of hgood all along (the 5th
+-- of 8; IsOpen (φ_q '' ball 0 c) at exactly c = cf q); the landed package just didn't
+-- export it. The _of_good → _lin → package merge re-run with openness threaded (the
+-- J4-114 pattern): gatedWitnessN1_hEboundW_le_of_good_pkg_open + _lin_pkg_open + ★
+-- gatedWitnessN1_package_open (exports the (0,t] bound + 0∈S 0 + IsOpen (S 0)) + ★★★
+-- a1_R6_of_residue_inf_v4 — hCH DISCHARGED internally (hCH_discharge_from_geometry at
+-- the package gate; v4 adds the two geometry inputs hgiC/hgpos it needs). INNER RESIDUE
+-- AFTER v4: {hInt, hDuhamel, hInter, hDConv, hCConv} — the four wall-cored Levi slots +
+-- the hCConv facade threading. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GateOpennessExport.gatedWitnessN1_hEboundW_le_of_good_pkg_open
+#print axioms QIQTH.GateOpennessExport.gatedWitnessN1_hEboundW_le_lin_pkg_open
+#print axioms QIQTH.GateOpennessExport.gatedWitnessN1_package_open
+#print axioms QIQTH.GateOpennessExport.a1_R6_of_residue_inf_v4
+
 end QIQTH.AxiomAudit
