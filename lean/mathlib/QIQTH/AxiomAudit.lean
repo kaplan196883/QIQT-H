@@ -17086,4 +17086,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GradEAssembly.gradE_split_triangle
 #print axioms QIQTH.GradEAssembly.gradE_bound_assembled
 
+-- ★★★ J4-195 (OmegaHsrcC4cAudit.lean, ns QIQTH.OmegaHsrcC4cAudit; indep build-verified):
+-- PART A — the ω-hsrc AUDIT + REMOVAL: hsrc traced to its sole genuine consumer
+-- (radialTransportSolve_transport_eq) where it is used at C¹/C⁰ ONLY (three downcast
+-- atoms, no analyticity) ⟹ radialTransportSolve_transport_eq_ofC1 (the true C¹ keystone
+-- interface) + the full ∞ re-thread (_infty chain through transportCoeff/heatParametrixFn/
+-- trueKernel) ⟹ ★★★ a1_R6_of_residue_inf — the capstone with hsrc at ∞, byte-identical
+-- otherwise; composes with hsrc_from_geometry ⟹ THE ⊤-hsrc CARRY IS REMOVED (the
+-- geometry→capstone rung closed at the honest level). PART B — the C4c VERDICT
+-- (honest correction): the off-diagonal 1/τ²+1/τ heads of residualCoeffA are GENUINE
+-- CURVATURE brackets (not recursion residuals — the "bracket vanishing" premise is FALSE
+-- off-diagonal); the repo's hEboundW route is Gaussian DOMINATION (D1 + GateSqControl),
+-- not cancellation; the true off-diagonal van-Vleck cancellation = the Jacobi/exp radial
+-- ODE shared Mathlib gap (VanVleckCancellation CHECKPOINT). ★
+-- residualCoeffA_diag_singular_free — at v=0 under RNC gauge every singular head drops
+-- (the diagonal face of the R/6 chain, honestly separated). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.OmegaHsrcC4cAudit.radialTransportSolve_transport_eq_ofC1
+#print axioms QIQTH.OmegaHsrcC4cAudit.radialTransportSolve_transport_eq_infty
+#print axioms QIQTH.OmegaHsrcC4cAudit.heatParametrixFn_diagonal_a1_derived_infty
+#print axioms QIQTH.OmegaHsrcC4cAudit.trueKernel_diagonal_a1_eq_R6_residual_restricted_C2_infty
+#print axioms QIQTH.OmegaHsrcC4cAudit.a1_R6_of_residue_inf
+#print axioms QIQTH.OmegaHsrcC4cAudit.residualCoeffA_diag_singular_free
+
 end QIQTH.AxiomAudit
