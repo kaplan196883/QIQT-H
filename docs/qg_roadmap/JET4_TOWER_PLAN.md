@@ -1169,3 +1169,11 @@ forall-x-first hWdiff reorder variant + the ae_prod hWdiffJ lift
 (hMeasSet carried honestly); hjoint_from_geometry_final <-
 {hKmeasSet, hSmeasSet, hFjoint, hVmapMeas, hg, hgi, hgpos, hGateDiff',
 hMeasSet}. std-3 raw 0. NOT a1=R/6.
+
+### J4-180 — GateDiffWiringMeasSet (LANDED 9119dbd4)
+hGateDiff' wired geometry-only (tau-uniformity confirmed; infinity
+mirrors — omega never touched) + the rational eps-delta HasDerivAt
+characterization + the general measurable-set lever + hMeasSet reduced
+to {hSliceCont, hWq, hWa, hDmeas}. CAPSTONE hjoint_fully_geometric <-
+{hg, hgi, hgpos, hKmeasSet, hSmeasSet, hFjoint, hVmapMeas, hCover,
+hSliceCont, hWq, hWa, hDmeas}. std-3 raw 0. NOT a1=R/6.
