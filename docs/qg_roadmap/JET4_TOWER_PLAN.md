@@ -1207,3 +1207,10 @@ rebase sweep NOW; 183 facade; 184 measurable-derivative-representative
 interface; 185 gated-D instantiation; 186 close hDmeas + full hCConv;
 187 generic tube lemma; 188 F2 close; 189 factorized E normal form;
 190 inner joint meas of E; 191 F1 close; then the 5-brick hEgrad tail.
+
+### J4-182 — the top->infinity sweep + InftyRebaseCapstone (LANDED a42ab9ad)
+6/7 consumer groups already mirror-covered (no churn); hCH_discharge
+rebased in place; hCH_discharge_from_geometry + hsrc_from_geometry
+(geometry-only). FINDING: the deep a1_R6_of_residue hsrc slot demands
+omega — future audit whether that slot's use is omega-genuine.
+Sol plan step 1 done. std-3 raw 0. NOT a1=R/6.
