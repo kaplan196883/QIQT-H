@@ -1293,3 +1293,13 @@ the grad(G*A) skeleton + the field-C3 parametrix + third-derivative
 continuity/compact lever + the pd_slice_eq_fderiv bridge. Honest
 residue: the gate-uniform third-jet constant (per-base expRho
 non-uniformity). std-3 raw 0. NOT a1=R/6.
+
+### J4-194 — GradEAssembly (LANDED dda1e7ca) — the hEgrad machinery COMPLETE
+gradGA_bound (|pd(G*A)| <= C*tau^{-5/2}*G_{2tau} from geometry) + the
+E-gradient triangle (annulus term exposed). THE ALIGNMENT VERDICT: the
+tau-power gap to the tau^{-1/2} slot = the GRADIENT of the already-
+carried C4c DeWitt-cancellation wall — NOT a new gap; discharging C4c
+makes this composition yield the target verbatim. Remaining honest
+frontier: C4c (the genuine Seeley-DeWitt content), W1/W2 flow wall,
+annulus-gradient composition, gate-uniform third-jet constant, L2 hD1
+threading, the omega-hsrc audit. std-3 raw 0. NOT a1=R/6.
