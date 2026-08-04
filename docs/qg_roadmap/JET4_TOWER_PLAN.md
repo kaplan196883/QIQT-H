@@ -1259,3 +1259,10 @@ parametrix spatial gradient). F1 slot identified (the triple
 StronglyMeasurable, ResidueThreading:316); remaining F1 = hDH + the
 W1/W2 q-regularity flow wall. 1/tau^2 blowup honestly documented.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-189 — ParametrixGradientMeas (LANDED 62fd1c86)
+The gradient identity + hDH DISCHARGED + the E diagonal normal form
+measurable from GEOMETRY ALONE. F1 VERDICT: factor axis DONE; the
+remaining F1 = the W1/W2 flow q-regularity wall (joint continuity/C1
+of H_G across the .choose base-point flow — the honest Sol route-(b)
+parameter-ODE wall, recorded not attempted). std-3 raw 0. NOT a1=R/6.
