@@ -1244,3 +1244,10 @@ F2 was ALREADY DISCHARGED — the chart spec is K-uniform (single delta_0
 from the quantitative IFT), and the E-bound gate radius is the uniform
 constant c = (b+rho_c)/2 > b > 0. Remaining walls: F1, hEgrad/L2 only.
 std-3 raw 0. NOT a1=R/6.
+
+### J4-187 — ErrorKernelFactorization (LANDED e84467c4) — Sol step 9
+The E normal form: heatOp_gated_split + residual_eq_gauss_mul_A (the
+Gaussian factorization repackaged from banked algebra) +
+cutoffError_eq_cutoff_gauss_A_sub_annulus + annulus supports + the F1
+measurability feeds (unified factor carries). Serves both F1 and
+hEgrad. std-3 raw 0. NOT a1=R/6.
