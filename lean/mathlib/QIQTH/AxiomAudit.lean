@@ -17511,4 +17511,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetHessianMixed.secondFieldPd_prod_stronglyMeasurable
 #print axioms QIQTH.ChartJetHessianMixed.tripleHEmeas_concrete
 
+-- ★★★ J4-219 (HD1CLMLift.lean, ns QIQTH.HD1CLMLift; the hD1 CLM lift; indep
+-- build-verified): ★ THE hD1 CLM-LIFT WALL IS CLOSED ★. The honest diagnosis: NOT a
+-- wrong scalar fact — hD1_from_data at gfull := gcoef i gives exactly the per-coordinate
+-- ContDiffAt ℝ 1; the gap was pure componentwise→CLM assembly. Banked:
+-- contDiffAt_clm_of_scalar_components (ContDiffAt.sum ∘ .smul ∘ const — Mathlib-fed),
+-- hD1_clm_of_scalar_and_rep (+ hDrep on-nbhd via congr_of_eventuallyEq),
+-- hD1_concrete_from_scalar (consumes CConvDerivativeData.hDrep; c i =
+-- ContinuousLinearMap.proj i, s = univ), and ★ a1_R6_of_residue_inf_v7 = v5 with the
+-- CLM hD1 binder replaced by n scalar ContDiffAt facts (hgD1). Remaining hD1 residue =
+-- hD1_from_data's own carry list per component (bulk HasFDerivAt family, bulk limit,
+-- the x-uniform sliver bound hsliver + its vanishing, order-2 deriv-field continuity)
+-- — the honest sliver-route data, precisely named. WALLS NOW: hDaLimLU ONLY (+
+-- satisfiable analytic data + the sliver carries). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.HD1CLMLift.contDiffAt_clm_of_scalar_components
+#print axioms QIQTH.HD1CLMLift.hD1_clm_of_scalar_and_rep
+#print axioms QIQTH.HD1CLMLift.hD1_concrete_from_scalar
+#print axioms QIQTH.HD1CLMLift.a1_R6_of_residue_inf_v7
+
 end QIQTH.AxiomAudit
