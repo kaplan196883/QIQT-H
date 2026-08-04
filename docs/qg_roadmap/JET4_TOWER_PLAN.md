@@ -1482,3 +1482,14 @@ measurability OBL-2 fed is ALREADY discharged via the Borel route
 (InnerKernelJointMeas.hinnerJ_discharged/hjoint_final, globally Borel across τ=0) —
 the OBL-2 continuity line RETIRES; whether hKp1 (OBL-3) is needed AT ALL = next audit.
 std-3, budget raw 0. NOT a₁=R/6. NEXT: J4-215 HEmeasBorelAudit (may retire hKp1).
+
+## J4-215 (2026-08-05, a74bf64c) — HEmeasBorelAudit: ★ hKp1 RETIRES ★ [AF]
+THE DEFINITIVE hEmeas RE-AUDIT. S1 (triple hEmeas) = the one upstream measurability slot
+(feeds EndpointData/InterchangeData; S2 via iterE_zmeas). Route A (E3e) needed
+hKcont+hKp1 — an ARTEFACT (measurable_deriv_with_param wants joint continuity in the
+.choose base). Route B (E3d) = pure Borel algebra; the banked gate-eq machinery (J4-185
+first-pd + J4-198 second-pd) feeds it continuity-free. Banked: tripleHEmeas_of_surface
+(BorelDischargeSurface = measurabilities ONLY) + 5 more. Residue = ROUTINE G-a (varying
+p) / G-b (off-diag Hessian) / G-c (∂_τ rep). WALLS NOW: hDaLimLU + hD1 CLM lift. The
+B5 variational Grönwall is OFF the critical path. std-3, budget raw 0. NOT a₁=R/6.
+NEXT: G-a GatedDerivRepProduct.
