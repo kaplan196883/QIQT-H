@@ -16845,4 +16845,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliceInterfaceInstantiation.hWa_of_chartBorel
 #print axioms QIQTH.SliceInterfaceInstantiation.hjoint_instantiated
 
+-- ★★★ J4-182 (the ⊤↦∞ rebase sweep + InftyRebaseCapstone.lean, ns
+-- QIQTH.InftyRebaseCapstone; indep full-aggregator-verified): SWEEP VERDICT — 6 of 7
+-- consumer groups already covered by the J4-175/J4-180 ∞-mirrors (skipped, no churn);
+-- only SpatialC2.hCH_discharge genuinely rebased ⊤→∞ in place (downcasts .of_le h2inf;
+-- one call-site .of_le le_top fix; public interfaces unchanged, pins valid).
+-- ★ hCH_discharge_from_geometry — the C² witness fact END-TO-END from {hg, hgi, hgpos} +
+-- gate/chart geometry via hu_infty_closed (no ⊤ hu carry anywhere). ★ hsrc_from_geometry
+-- — the ∞-level transportOp smoothness of u₀ from geometry. ⚠ FINDING: the deep
+-- a1_R6_of_residue hsrc slot demands ⊤(=ω analytic) — genuinely unreachable from
+-- geometry (the J4-174 analytic-solve wall); a future audit should check whether that
+-- slot's USE is ω-genuine or rebasable (the J4-175 audit pattern). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.InftyRebaseCapstone.hCH_discharge_from_geometry
+#print axioms QIQTH.InftyRebaseCapstone.hsrc_from_geometry
+
 end QIQTH.AxiomAudit

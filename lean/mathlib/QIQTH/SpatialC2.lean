@@ -47,7 +47,7 @@ open QIQTH.Curvature QIQTH.LaplaceBeltrami QIQTH.TrueHeatKernel QIQTH.HeatDuhame
 open QIQTH.ParametrixFunction QIQTH.HeatParametrixAnsatz QIQTH.FlatHeatEquation QIQTH.VanVleck
 open QIQTH.HeatTransportRecursion QIQTH.RadialDistance QIQTH.VanVleckCancellation QIQTH.HeatParametrixOrder
 open QIQTH.GaussianWidthTolerant QIQTH.RNCDecay QIQTH.ResidueBound QIQTH.PullbackMetric
-open scoped BigOperators Topology Interval
+open scoped BigOperators Topology Interval ContDiff
 
 namespace QIQTH.HeatResidualBound
 
@@ -72,7 +72,7 @@ theorem hCH_discharge (g gi : Point n → Fin n → Fin n → ℝ)
     (t : ℝ) (hK0 : (0 : Point n) ∈ K) (hS0 : (0 : Point n) ∈ S 0) (hSopen : IsOpen (S 0))
     (hg : ∀ a b, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => g y a b))
     (hg0 : ∀ i j, g 0 i j = (1 : Matrix (Fin n) (Fin n) ℝ) i j)
-    (hu : ∀ k, ContDiff ℝ (⊤ : WithTop ℕ∞)
+    (hu : ∀ k, ContDiff ℝ (∞ : WithTop ℕ∞)
       (transportCoeff (transportOp (vanVleck g) g gi) k)) :
     ContDiffAt ℝ 2 (fun p => vanVleckGatedWitness g gi hChr hK S a b t p 0) (0 : Point n) := by
   -- the BASE-0 field chart and its center facts.
@@ -112,13 +112,16 @@ theorem hCH_discharge (g gi : Point n → Fin n → Fin n → ℝ)
     rw [hW0, hvv0]; norm_num
   have hrpow : ContDiffAt ℝ 2 (fun p => vanVleck g (W p) ^ (-(1 : ℝ) / 2)) (0 : Point n) :=
     hvv.rpow_const_of_ne hne
-  -- the two transport coefficients through the chart.
+  -- the two transport coefficients through the chart (`hu` now at `∞`; downcast `2 ≤ ∞`).
+  have h2inf : (2 : WithTop ℕ∞) ≤ (∞ : WithTop ℕ∞) := by
+    have h := (WithTop.coe_le_coe.mpr (le_top : (2 : ℕ∞) ≤ ⊤))
+    simpa using h
   have hu0 : ContDiffAt ℝ 2
       (fun p => transportCoeff (transportOp (vanVleck g) g gi) 0 (W p)) (0 : Point n) :=
-    (((hu 0).contDiffAt).of_le le_top).comp 0 hW2
+    (((hu 0).contDiffAt).of_le h2inf).comp 0 hW2
   have hu1 : ContDiffAt ℝ 2
       (fun p => transportCoeff (transportOp (vanVleck g) g gi) 1 (W p)) (0 : Point n) :=
-    (((hu 1).contDiffAt).of_le le_top).comp 0 hW2
+    (((hu 1).contDiffAt).of_le h2inf).comp 0 hW2
   -- assemble the amplitude and the product.
   have hsum : ContDiffAt ℝ 2
       (fun p => transportCoeff (transportOp (vanVleck g) g gi) 0 (W p)
@@ -207,7 +210,9 @@ theorem a1_R6_of_residue_hCH_discharged
                             / ((QIQTH.HeatKernelA1.heatKernel1D t 0) ^ n * t ^ 2))) := by
   -- C1: discharge `hCH` from the germ/chart tower.
   have hCH : ContDiffAt ℝ 2 (fun p => H t p 0) (0 : Point n) := by
-    rw [hHeq]; exact hCH_discharge g gi hChr hK S a b t hK0 hS0 hSopen hg hg0 hu
+    rw [hHeq]
+    exact hCH_discharge g gi hChr hK S a b t hK0 hS0 hSopen hg hg0
+      (fun k => (hu k).of_le le_top)
   -- C2: reduce `hCConv` from the two analytic layers.
   have hCConv : ContDiffAt ℝ 2
       (fun p => heatConv H (leviSeries (heatOp g gi H)) t p 0) (0 : Point n) :=

@@ -377,6 +377,7 @@ import QIQTH.JointMeasurability
 import QIQTH.InnerKernelJointMeas
 import QIQTH.CoeffContWdiffLift
 import QIQTH.GateDiffWiringMeasSet
+import QIQTH.InftyRebaseCapstone
 import QIQTH.SliceInterfaceInstantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
