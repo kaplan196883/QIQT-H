@@ -1406,3 +1406,9 @@ The Sol verdict confirmed (no load-bearing global use); the local
 interchange + global corollary + hInter_from_local_data (the exact v4
 slot mod {local bound, hEzero, hEmeas, hglobal}). std-3 raw 0.
 NOT a1=R/6.
+
+### J4-207 — CConvConcreteThreading (LANDED 664e46e5) — Sol Ph4
+The hCConv threading at the concrete witness + a1_R6_of_residue_inf_v5
+(inner carries {hInt, hDuhamel, hInter, hDConv, hCH} + bundles + hD1);
+the forall-S provider vacuity-hole soundly rejected. std-3 raw 0.
+NOT a1=R/6.
