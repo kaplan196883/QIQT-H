@@ -389,6 +389,7 @@ import QIQTH.ParametrixGradientMeas
 import QIQTH.CompactJetBounds
 import QIQTH.GaussianGradAbsorption
 import QIQTH.ChartThirdJet
+import QIQTH.ThirdJetBounds
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

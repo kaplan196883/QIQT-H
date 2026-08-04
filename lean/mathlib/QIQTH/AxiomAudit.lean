@@ -17045,4 +17045,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartThirdJet.chartField_thirdJet_basePoint
 #print axioms QIQTH.ChartThirdJet.chartField_thirdJet_reachable
 
+-- ★★★ J4-193 (ThirdJetBounds.lean, ns QIQTH.ThirdJetBounds; indep build-verified): ALL
+-- FOUR goals. ★ residualCoeffA_grad_tau_weighted_bound — τ²·|pd A| ≤ C on the compact box
+-- (the elegant route: the τ²-weight is field-constant so passes through pd; the pd via
+-- the NEW pd_slice_eq_fderiv param/slice bridge; fderiv of the joint-C^∞ cleared amplitude
+-- continuous ⟹ bounded — no symbolic gradient computed). gradGA_term_bound_skeleton (the
+-- ∇(G·A) triangle skeleton). parametrix_contDiffAt_three_field (+_basePoint) — the field-C³
+-- parametrix (J4-170 comp tower at order 3, hWC3 from the C⁴ chart).
+-- chartField_secondJetField_contDiffAt (+_continuousAt, _basePoint) — the third
+-- field-derivative exists & is continuous from chart-C⁴ + chartField_thirdJet_component_bound
+-- (the compact lever). Support: pd_slice_eq_fderiv + residualCoeffAWeighted_contDiff.
+-- HONEST residue noted: the GATE-UNIFORM third-jet sup constant still blocked by the
+-- per-base expRho non-uniformity (per-point continuity + compact lever delivered, not a
+-- gate-wide constant). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ThirdJetBounds.pd_slice_eq_fderiv
+#print axioms QIQTH.ThirdJetBounds.residualCoeffAWeighted_contDiff
+#print axioms QIQTH.ThirdJetBounds.residualCoeffA_grad_tau_weighted_bound
+#print axioms QIQTH.ThirdJetBounds.gradGA_term_bound_skeleton
+#print axioms QIQTH.ThirdJetBounds.parametrix_contDiffAt_three_field
+#print axioms QIQTH.ThirdJetBounds.parametrix_contDiffAt_three_field_basePoint
+#print axioms QIQTH.ThirdJetBounds.chartField_secondJetField_contDiffAt
+#print axioms QIQTH.ThirdJetBounds.chartField_secondJetField_continuousAt
+#print axioms QIQTH.ThirdJetBounds.chartField_secondJetField_contDiffAt_basePoint
+#print axioms QIQTH.ThirdJetBounds.chartField_thirdJet_component_bound
+
 end QIQTH.AxiomAudit
