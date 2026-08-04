@@ -17708,4 +17708,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RightInverseGeneral.a1_R6_assembled_v2'
 #print axioms QIQTH.RightInverseGeneral.a1_R6_assembled_v6
 
+-- ★★★ J4-230 (ImageSupportDischarge.lean, ns QIQTH.ImageSupportDischarge; the hImg
+-- audit; indep build-verified): THE GUARD VERDICT — the hWG guard is the AMPLITUDE
+-- disjunction (chartFieldAmp ≠ 0 ∨ its pd's/Cfield ≠ 0), S-membership ABSENT (it lives
+-- in the separate hgate conjunct). hImg SPLITS: (i) S-membership guard FULLY CLOSED —
+-- hImg_gate_of_radii (pure Set.image_mono, only hc : c ≤ ρ) + ★ hWG_gate_concrete (Gc
+-- internal, radii-only guarded agreement); (ii) amplitude guard closed MODULO the named
+-- wall hSurj (off-image surjectivity ‖W‖<b → p ∈ flow image — the chart's .choose is
+-- junk off-image; satisfiable, not banked); the support half banked unconditionally
+-- (norm_lt_of_chartFieldAmp_ne_zero). v7 honestly NOT delivered (the Cfield disjunct is
+-- a free field; the surjectivity is open). NEXT BRICK = strengthen the four reps'
+-- guards to S-membership (re-prove _v3 bodies in a NEW file) ⟹ hImg = radii.
+-- ⚠⚠ CRITICAL FLAG (f)3: tripleHEmeas_concrete_v3's hgate carriers demand ∀ w
+-- (EVERY field point) ∈ S w.2.2 — for the concrete gate ≠ univ this may be satisfiable
+-- ONLY at K = ∅ ⟹ POTENTIAL VACUITY in the supplier existentials (the
+-- axiom-budget-blind-spot pattern). The satisfiability audit is the TOP-PRIORITY next
+-- brick — the honest form is the ae/coverage geometry (hMemNear/hMemPt), not ∀ w.
+-- std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.ImageSupportDischarge.norm_lt_of_chartFieldAmp_ne_zero
+#print axioms QIQTH.ImageSupportDischarge.gateBall_subset_flowImage_closedBall
+#print axioms QIQTH.ImageSupportDischarge.hImg_gate_of_radii
+#print axioms QIQTH.ImageSupportDischarge.hWG_gate_concrete
+#print axioms QIQTH.ImageSupportDischarge.hImg_chartFieldAmp_of_surjectivity
+#print axioms QIQTH.ImageSupportDischarge.hWG_chartFieldAmp_of_surjectivity
+
 end QIQTH.AxiomAudit
