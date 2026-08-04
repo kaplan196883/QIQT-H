@@ -1601,3 +1601,12 @@ three conjunct capstones _v2, ★ tripleHEmeas_concrete_v3 (chart-meas conjunct
 DISCHARGED: regional Gc + hWG). Residues: (1) hWG's geometric fact = general-field-point
 right-inverse germ (origin-only banked); (2) the v6 entry-point wrapper. std-3 all 11,
 raw 0. NOT a₁=R/6. NEXT: J4-229 RightInverseGeneral (A: the germ; B: the v6 wrapper).
+
+## J4-229 (2026-08-05, 47ad1239) — RightInverseGeneral: ★ v6 — raw chart meas ELIMINATED ★ [AF]
+KEY: the concrete S-gate IS the flow image (S z = φ_z '' ball 0 c; on-gate right-inverse
+already banked). rightInverse_general (germ + image membership) + hWG_concrete (regional
+Gc = a THEOREM) + hWG_of_regional_support (only carry = hImg) + v2' (htriple direct) +
+★ v6 (tripleHEmeas ← v3 internal — no raw chart measurability anywhere in the assembly).
+Chart residue = ONE geometry fact hImg (guard → image membership; radii c vs ρ next).
+Analytic residue unchanged. std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-230 ImageSupportDischarge (the hImg audit → possibly v7).
