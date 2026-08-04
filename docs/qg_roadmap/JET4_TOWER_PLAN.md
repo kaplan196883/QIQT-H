@@ -1237,3 +1237,10 @@ the E1 form) + the EVERYWHERE identification (three-way dichotomy) +
 witnessFieldDeriv joint measurability <- lower-order factor carries +
 hDmeas_discharged (the exact bundle field) + the geometry builders.
 All six Sol sub-steps landed. std-3 raw 0. NOT a1=R/6.
+
+### J4-186 — CompactTubeLemma (LANDED 80c29340) — F2 OFF THE WALLS LIST
+Generic tube lemma banked (via generalized_tube_lemma) + the F2 AUDIT:
+F2 was ALREADY DISCHARGED — the chart spec is K-uniform (single delta_0
+from the quantitative IFT), and the E-bound gate radius is the uniform
+constant c = (b+rho_c)/2 > b > 0. Remaining walls: F1, hEgrad/L2 only.
+std-3 raw 0. NOT a1=R/6.
