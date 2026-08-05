@@ -18239,4 +18239,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SecondOrderInterchangeConcrete.witness_MemInterchange
 #print axioms QIQTH.SecondOrderInterchangeConcrete.witness_MemInterchange_majorant
 
+-- ★★★ J4-257 (FixedGateSourceProviders.lean, ns QIQTH.FixedGateSourceProviders; wide
+-- bricks 8+4; indep build-verified): the Levi source slice + the fixed-gate providers.
+-- CConvSourceData: hFjoint DISCHARGED (the LeviSeriesLocalData package, no carry);
+-- hFmeas DISCHARGED (iterE_zmeas + the honest all-s hFsum carry); hFbd CARRIED (the
+-- bank gives only the non-uniform Gaussian domination — the uniform constant is a
+-- genuine input). sourceData_of_leviLocalData = the builder. fixedGateWideDominations
+-- = hAdom/hBdom wide analogues COMPOSED from the wide bank at the fixed gate.
+-- hEboundFull CARRIED honest (the provider chooses its own existential gate
+-- internally — the W3 wall; no fixed-gate-accepting version without edits).
+-- fixedGateProviders_bundle = everything at the ONE gate. ⚠ TRAP: the monolithic
+-- CConvSourceData by-block whnf-timed-out even at 3.2M — SPLIT the field proofs into
+-- top-level lemmas (25s). Brick-11 carries enumerated: hFbd/hFsum/hEboundFull-fixed/
+-- the package inputs/the coherence tie/the orthogonal CConv fields. std-3 all 5.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.FixedGateSourceProviders.leviSource_zslice_aesm
+#print axioms QIQTH.FixedGateSourceProviders.leviSource_joint_aesm
+#print axioms QIQTH.FixedGateSourceProviders.sourceData_of_leviLocalData
+#print axioms QIQTH.FixedGateSourceProviders.fixedGateWideDominations
+#print axioms QIQTH.FixedGateSourceProviders.fixedGateProviders_bundle
+
 end QIQTH.AxiomAudit
