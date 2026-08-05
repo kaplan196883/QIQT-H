@@ -18220,4 +18220,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SecondOrderMajorants.secondBoundConst_intervalIntegrable
 #print axioms QIQTH.SecondOrderMajorants.secondOrder_inner_bound_slot
 
+-- ★★★ J4-256 (SecondOrderInterchangeConcrete.lean, ns
+-- QIQTH.SecondOrderInterchangeConcrete; wide brick 10; indep build-verified): ★ THE W2
+-- ENGINE FIRED ★. witnessFieldDeriv2_shifted_hD2 (the snb-uniform field-shifted
+-- second-order domination: the off-gate leg DISCHARGED (witnessFieldDeriv2_offGate_
+-- eq_zero + RHS nonneg); the on-gate leg = the honest hOn carry — the field-shifted
+-- near-isometry, the brick-11-parallel general-p construction).
+-- witness_secondOrder_hbound_slot (the hbound discharge via the majorants).
+-- ★ witness_MemInterchange(_majorant): the VERBATIM DaLimLUWallRecon.MemInterchange
+-- body produced for the concrete witness (pdpdH := witnessSecondXDeriv); the majorant
+-- form fires the engine with bound/hbdd/hbound INTERNAL — residual surface = hQ1/
+-- hFmeas/hFint/hF'meas/hdiff (providers named: pd_heatConvFrozen_interchange, the
+-- ChartJointBorel wiring, F1, innerZ) + hOn/hF. The W2 interchange member is now
+-- PRODUCIBLE; the composition into hDaLimLU_of_sliverData is downstream assembly.
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.SecondOrderInterchangeConcrete.witnessFieldDeriv2_shifted_hD2
+#print axioms QIQTH.SecondOrderInterchangeConcrete.witness_secondOrder_hbound_slot
+#print axioms QIQTH.SecondOrderInterchangeConcrete.witness_MemInterchange
+#print axioms QIQTH.SecondOrderInterchangeConcrete.witness_MemInterchange_majorant
+
 end QIQTH.AxiomAudit

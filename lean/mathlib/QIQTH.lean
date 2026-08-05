@@ -451,6 +451,7 @@ import QIQTH.WideWitnessAmplitude
 import QIQTH.WideSliverBoundary
 import QIQTH.FixedGateDichotomy
 import QIQTH.SecondOrderMajorants
+import QIQTH.SecondOrderInterchangeConcrete
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
