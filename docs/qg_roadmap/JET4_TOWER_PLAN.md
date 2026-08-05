@@ -1705,3 +1705,12 @@ eliminated) + the FINAL supplier bundle. Only shape-work left: the literal ∃-b
 (kernel-freeze) — SIDESTEP identified: tripleHEmeas_Gc via tripleHEmeas_of_surface →
 the v2' htriple slot (no restatement). std-3 all 6, raw 0. NOT a₁=R/6.
 NEXT: J4-241 GcConsumerMirror (conjunct-3 + τ mirrors → tripleHEmeas_Gc → v8).
+
+## J4-241 (2026-08-05, 7114200a) — GcConsumerMirror: ★★ the htriple supplier side CLOSED ★★ [AF]
+The conjunct-3 + τ mirrors landed; ★ tripleHEmeas_Gc = S1 AS A THEOREM at the concrete
+gate (chart-wall-free, satisfiable Gc-carriers; the .choose wall never appears). The
+plug type-checks into v2''s htriple slot verbatim (hC := hChr) — v8 = mechanical,
+deferred. Remaining piles: (1) the routine concrete Gc-carrier ∃-bundle (banked
+piecewise); (2) the v2' ANALYTIC residue (hEboundFull/core/hCH/facades/hDConv/R2/
+envelopes) = the genuine curvature analytics. std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-242 EnvelopeCoreDischarge (the analytic ladder opener).
