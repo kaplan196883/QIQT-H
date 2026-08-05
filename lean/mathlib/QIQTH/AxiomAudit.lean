@@ -18628,4 +18628,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EnrichedChartBundle.bundleDet_tendsto_one
 #print axioms QIQTH.EnrichedChartBundle.chartImage_approx_identity_v3
 
+-- ## J4-279 (GateAnnulusSplit): ★★★ THE FIXED-f CHART-IMAGE AI IS DONE ★★★
+-- offBall_integral_tendsto_zero (the annulus limit: wide domination + the τ↦lam·τ
+-- reparametrized Gaussian tail + squeeze) + hGgate_of_gate_activation (the v3 hGgate
+-- = z∈K ∧ 0∈S z on the ball, from hKball + hSact — satisfiable via the openness
+-- export) + ★★★ chartImage_approx_identity_final: Tendsto (∫ z, Wit τ 0 z·f z)
+-- (𝓝[>]0) (𝓝 (f 0)) — hGgate AND hSupp ELIMINATED. Remaining hyps ALL satisfiable:
+-- geometry + metric + det g 0=1 + 0<a<b + f (meas/bdd/cont-0) + gate carries
+-- (rS/hKball/hSact ← gatedWitnessN1_package_open) + hWslice (banked
+-- vanVleckGatedWitness_slice_aestronglyMeasurable) + the zeroth wide domination
+-- (banked zeroth_domination_global). Internal: ρcap = min ρA rS; on-ball via the
+-- Layer-C base + CoV congr; off-ball via the annulus lemma; recombine
+-- integral_add_compl. NOTE: the near-isometry lower bound was NOT needed (the
+-- domination is already base-point). THE W1 FIXED-f LIMIT-VALUE MEMBER IS CLOSED;
+-- residual = the MOVING-f step → hBoundaryLim. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.GateAnnulusSplit.offBall_integral_tendsto_zero
+#print axioms QIQTH.GateAnnulusSplit.hGgate_of_gate_activation
+#print axioms QIQTH.GateAnnulusSplit.chartImage_approx_identity_final
+
 end QIQTH.AxiomAudit

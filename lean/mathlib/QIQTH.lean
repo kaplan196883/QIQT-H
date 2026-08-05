@@ -474,6 +474,7 @@ import QIQTH.FixedFChartImageAI
 import QIQTH.BaseSlotAmplitude
 import QIQTH.FixedFTrioDischarge
 import QIQTH.EnrichedChartBundle
+import QIQTH.GateAnnulusSplit
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
