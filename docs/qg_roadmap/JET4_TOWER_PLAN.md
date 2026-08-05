@@ -1653,3 +1653,11 @@ v7-restatement FREEZES the kernel (~130-binder choose-heavy defeq — never mate
 the full capstone restatement again); hOffS lives INSIDE the hcar existentials (step 2
 = the radialCutoff support-closure brick); hgiMeas = genuine input (no gi regularity
 carried). std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-235 OffSVanishing.
+
+## J4-235 (2026-08-05, 8bb219e7) — OffSVanishing: step 2 done [AF]
+The collar lemma via the CLEAN support-closure route (U = closure(φ''ball b)ᶜ; no
+frontier analysis; radii 0<a<b<c<δ₀ honest). hOffS/hOffS2_concrete = the exact
+GatedRepSFix v4 conjunct shapes. ★ concreteGate_carriers_discharged_v2 = the running
+bundle (5 discharges under one δ₀). Remaining in the hcar existentials: the on-gate C²
+jets + the jet-coefficient measurability block. std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-236 OnGateJets (the last hcar content).
