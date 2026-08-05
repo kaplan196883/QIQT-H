@@ -1829,3 +1829,10 @@ annulus_invpow_exp_le (dimension-independent super-poly decay) + the support-bas
 global dominations (hSupp carry) + global_of_near_far (the trichotomy globaliser).
 W4 hGateData carried (the exact-width on-gate envelope = the brick-11-parallel
 construction). std-3 all 6, raw 0. NOT a₁=R/6. NEXT: J4-255 SecondOrderMajorants (brick 9).
+
+## J4-255 (2026-08-06, b105c5ba) — SecondOrderMajorants: wide brick 9 [AF]
+The W2 engine's bound/hbdd/hbound slots FILLED u-uniformly + non-singularly:
+window_inv_le (the truncated-window key — (u−s)⁻¹ ≤ ε_m⁻¹; the ε→0 limit = the closed
+sliver/DaLim machinery) + secondBoundConst + the slot theorems. Brick 10 remaining:
+the concrete snb-uniform second-order domination + measurability plumbing + threading.
+std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-256 SecondOrderInterchangeConcrete (brick 10).
