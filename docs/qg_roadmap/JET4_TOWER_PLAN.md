@@ -1794,3 +1794,10 @@ width-gap infra (τ^{-m}e^{-a²/cτ} ≤ Cτ^N on the annulus). THE 11-BRICK ORD
 7 FixedGateDichotomy → 8 FixedGateSourceSlice → 9 SecondOrderMajorants →
 10 SecondOrderInterchangeConcrete → 11 WideA1Assembly (the parallel wide capstone
 proving the SAME final proposition).
+
+## J4-250 (2026-08-06, 5511366c) — GaussianWidthTransfer: wide brick 1/11 [AF]
+The master width-gap lemmas: gaussDdim_closed; gaussDdim_width_ratio_le (G_τ(w) ≤
+(√lam)^n·exp(−c·r²/τ)·G_{lamτ}(z) under the (1−eta)-gate); the series sup
+y^k e^{−cy} ≤ k!/c^k; poly_absorb + k=0/1/2 + mixed instances; integrability
+re-exports. ⚠ lam not λ. std-3 all 10, raw 0. NOT a₁=R/6.
+NEXT: J4-251 InverseChartNormalJets (wide bricks 2+3).
