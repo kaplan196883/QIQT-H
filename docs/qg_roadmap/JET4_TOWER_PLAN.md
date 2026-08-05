@@ -2033,3 +2033,14 @@ the bundle to hbaseC1/hbaseC1Nhd. Rank 2 = the C¹ refactor; rank 3 = doubled-ma
 strict+two-point (INSUFFICIENT for M1 — no derivative field); rank 5 = carry hbaseC2
 labelled (honest fallback, true of the real exp chart). Mathlib joint C^k ODE-flow
 dependence: NOT usable off-the-shelf — don't plan around it.
+
+## J4-273 (2026-08-06, a2ff61a9) — GeodesicReversalRoute: ★★ THE J3 BLOCKER → hT0 ★★ [AF]
+The SOL#6 chain ALL LANDED: (R) flipVel algebra + the reversal ODE fact · (REACH)
+E z (−u) = q by ODE uniqueness · (RI0) chart0_rightInverse · ★ (I)
+baseSlot_eventuallyEq_neg_terminalVel (Wbv =ᶠ −T₀∘(U 0 ·), hyps only hC/hK/K∈𝓝0) ·
+(T) the full M1–M4 Wbv bundle gated ONLY on hT0 : ContDiffAt ℝ 2 (terminalVel0) 0 —
+a fixed-base velocity-endpoint C² (bank: first Fréchet derivative at 0 + position C⁴;
+the velocity slot is one order less). The .choose base-slot coherence is REPLACED by a
+standard fixed-base ODE regularity. std-3 all 7, raw 0. NOT a₁=R/6.
+NEXT: J4-274 TerminalVelC2 (hT0 — mirror the position-C⁴ tower at the velocity
+component to order 2; check if C¹+strict suffices per the rank-2 refactor).
