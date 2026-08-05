@@ -440,6 +440,7 @@ import QIQTH.GcConsumerMirror
 import QIQTH.EnvelopeCoreDischarge
 import QIQTH.DerivConvDischarge
 import QIQTH.DataPileWitnessAudit
+import QIQTH.InnerMeasFubini
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -18017,4 +18017,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DataPileWitnessAudit.timeWindow_concrete
 #print axioms QIQTH.DataPileWitnessAudit.windowNbhd_concrete
 
+-- ★★★ J4-245 (InnerMeasFubini.lean, ns QIQTH.InnerMeasFubini; map item [2]; indep
+-- build-verified): ★ THE F2 INNER TRIO IS DISCHARGED ★ — the gated-indicator route
+-- (the gate depends only on z at field 0 ⟹ indicator ∘ Prod.snd-preimage; the J4-205
+-- product-ae trap avoided) + AEStronglyMeasurable.integral_prod_right' Fubini +
+-- hBcont-fed Levi joint measurability. hMeasFII/hFmeas/hF'meas/hInnerCont _concrete —
+-- all four conclusions match the v2' binder shapes VERBATIM (drop-in). ★
+-- f2Pack_concrete = the bundled self-contained F2 supply; honest carries: hInner
+-- (ungated inner-parametrix joint (s,z) meas at field 0), hWitDeriv (∂_τ gate-eq
+-- Borel rep), hLeviJoint, hKm/hSm0, hContDom (local dominated-continuity data) — each
+-- satisfiable, of the already-banked kind, NO structural wall. Newly-exposed frontier:
+-- discharge the three carried joint families to zero-carry (replicate
+-- hinnerJ_discharged at p=0; the G-c ∂_τ rep; the local Gaussian dominator from
+-- hAdom/hBdom). std-3 all 9. NOT a₁ = R/6.
+#print axioms QIQTH.InnerMeasFubini.innerIntegral_aesm
+#print axioms QIQTH.InnerMeasFubini.gatedWitnessShift_joint_aesm
+#print axioms QIQTH.InnerMeasFubini.leviJoint_of_hBcont
+#print axioms QIQTH.InnerMeasFubini.innerIntegral_continuousOn_of_dominated
+#print axioms QIQTH.InnerMeasFubini.hMeasFII_concrete
+#print axioms QIQTH.InnerMeasFubini.hFmeas_concrete
+#print axioms QIQTH.InnerMeasFubini.hF'meas_concrete
+#print axioms QIQTH.InnerMeasFubini.hInnerCont_concrete
+#print axioms QIQTH.InnerMeasFubini.f2Pack_concrete
+
 end QIQTH.AxiomAudit
