@@ -2094,3 +2094,11 @@ carries ← the openness export; hWslice + the zeroth domination banked). The W1
 FIXED-f limit-value member is CLOSED (the near-isometry lower bound wasn't needed —
 the domination is base-point). std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-280 MovingFBoundaryLim (the moving-f 3ε step → hBoundaryLim).
+
+## J4-280 (2026-08-06, e7ec469f) — MovingFBoundaryLim: hBoundaryLim W1-free mod hMovingCorr [AF]
+SEQ composition + frozenBoundary_tendsto (the frozen 2nd term via the fixed-f AI, no
+hAnear) + hBoundaryLim_concrete (conditional on the labelled hMovingCorr; satisfiable
+via compact uniform continuity + witness mass + annulus tail). F-facts: hf_meas/hf_bdd
+satisfiable-banked; hf_cont unbanked (Levi continuity). NEXT WALL: hDerivConv wants
+the LOC-UNIF boundary limit. std-3 all 4, raw 0. NOT a₁=R/6.
+NEXT: J4-281 MovingCorrAssembly (Levi joint continuity via M-test + hMovingCorr + hf_cont).
