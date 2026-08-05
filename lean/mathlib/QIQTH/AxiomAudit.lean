@@ -18407,4 +18407,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ProviderSideExports.hEboundW_wide_from_geometry_open_inter
 #print axioms QIQTH.ProviderSideExports.wide_a1_R6_interface_discharged_v2
 
+-- ## J4-266 (DaLimLUConcreteDischarge): hDaLimLU PARTIAL at the concrete gate.
+-- hDaLimLU_concrete = the COMPLETE DaLimLUGoal at the concrete N=1 witness with
+-- pdpdH := witnessSecondXDeriv: hInterchange DISCHARGED (witness_MemInterchange,
+-- J4-256, trading the opaque member for its genuine diff-under-∫ sub-facts, carried) +
+-- hEzero DISCHARGED (hEzeroE_concrete, 1≤n); carried honest DATA: hgi/hΓ RNC gauge,
+-- hLapFull, hII_lo/hII_hi, sliver D0/D1/hbnd (dischargeable via amplitudePackage once
+-- AmplitudeDerivativeData is built at witnessSecondXDeriv), hEdom, hFdom/hFzero,
+-- hIlo/hIhi, hEcomb (banked hE_combination). ★ STRUCTURAL FINDINGS: (1) the Da-limit
+-- is W1-FREE (hDaLimLU_from_data does NOT reference hAnear — W1 lives only in the
+-- boundary pile feeding hBoundaryLim); (2) the hDuhamel/hDConv provider export is
+-- blocked on W1 (hAnear at a provider-chosen gate: satisfiability not established ⟹
+-- correctly NOT forced; the wide bank J4-252/253 is the designed weapon). Capstone
+-- carry list unchanged (v3 not yet reachable). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.DaLimLUConcreteDischarge.hDaLimLU_concrete
+
 end QIQTH.AxiomAudit
