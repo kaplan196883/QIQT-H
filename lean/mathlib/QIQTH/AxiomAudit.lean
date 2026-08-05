@@ -18439,4 +18439,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WideBoundaryLimDischarge.wide_boundaryTrunc_bound
 #print axioms QIQTH.WideBoundaryLimDischarge.wide_boundaryTrunc_bound_concrete
 
+-- ## J4-268 (ChartImageApproxIdentity): ★ Layer C — the MOVING approximate identity ★
+-- Per SOL #5: gaussDdim_set_approx_identity_moving (Ω∈𝓝 0 + eventual AE-meas +
+-- eventual uniform bound + the JOINT (τ,w)→(0⁺,0) local convergence hlocal — used
+-- UNWEAKENED; pointwise+bound would be insufficient, the h(w/√τ) spike) ⟹
+-- ∫_Ω G_τ·g τ → L on 𝓝[>]0. The 3ε/concentration proof (NOT DCT — no fixed
+-- dominator): reusable sub-lemmas gaussDdim_setIntegral_le_one +
+-- gaussDdim_set_mass_tendsto_one (Ω.indicator 1 fed to the banked base AI) +
+-- gaussDdim_ballCompl_mass_tendsto_zero (tail) + gaussDdim_set_moving_dist_bound
+-- (the fixed-τ near/far split). RESIDUAL toward hBoundaryLim: Layer A (gate
+-- set-integral rewrite), Layer B (chart change-of-variables), the concrete
+-- instantiation (g/Ω/L + hmeas/hbound/hlocal from the witness amplitude).
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_setIntegral_le_one
+#print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_set_mass_tendsto_one
+#print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_ballCompl_mass_tendsto_zero
+#print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_set_moving_dist_bound
+#print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_set_approx_identity_moving
+
 end QIQTH.AxiomAudit

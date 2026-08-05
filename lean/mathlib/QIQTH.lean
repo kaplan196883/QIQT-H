@@ -463,6 +463,7 @@ import QIQTH.InterfaceArrowCensus
 import QIQTH.ProviderSideExports
 import QIQTH.DaLimLUConcreteDischarge
 import QIQTH.WideBoundaryLimDischarge
+import QIQTH.ChartImageApproxIdentity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
