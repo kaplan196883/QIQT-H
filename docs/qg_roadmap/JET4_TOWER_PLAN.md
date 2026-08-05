@@ -2044,3 +2044,13 @@ the velocity slot is one order less). The .choose base-slot coherence is REPLACE
 standard fixed-base ODE regularity. std-3 all 7, raw 0. NOT a₁=R/6.
 NEXT: J4-274 TerminalVelC2 (hT0 — mirror the position-C⁴ tower at the velocity
 component to order 2; check if C¹+strict suffices per the rank-2 refactor).
+
+## J4-274 (2026-08-06, 34bd0214) — TerminalVelC2: ★★ hT0 LANDED — THE J3 BLOCKER DEAD ★★ [AF]
+Route (a) geodesic homogeneity, NO new tower: terminalVel0 v = fderiv (uniformFlowExp 0)
+v [v] (scaleVel algebra + degree-2 homogeneity + the reparametrisation ODE-uniqueness
+identity + the diagonal identity) ⟹ terminalVel0_contDiffAt_two (C⁴→C³→C², the "one
+order less") ⟹ ★★ baseVaryingIFTPackage_unconditional: the full M1–M4 Wbv bundle from
+only (hC, hK, K∈𝓝 0). The .choose/joint-base J3 blocker is REMOVED. std-3 all 5,
+raw 0. NOT a₁=R/6. NEXT: J4-275 FixedFChartImageAI (plug the bundle into the
+conditional capstone + discharge the Layer-C trio + (b) joint amplitude limit +
+(c) A₀(0)=1 labelled).
