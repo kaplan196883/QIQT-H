@@ -18545,4 +18545,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GeodesicReversalRoute.hbaseC2_of_terminalVel_contDiffAt
 #print axioms QIQTH.GeodesicReversalRoute.baseVaryingIFTPackage_of_terminalVel_contDiffAt
 
+-- ## J4-274 (TerminalVelC2): ★★ hT0 LANDED — THE J3 BLOCKER IS DEAD ★★
+-- Route (a) GEODESIC HOMOGENEITY, no new jet tower: terminalVel0 v =
+-- fderiv (uniformFlowExp 0) v [v] (the velocity endpoint = the position differential
+-- on the diagonal) — geodesicField_scaleVel (degree-2 homogeneity of the Christoffel
+-- quadratic) + uniformFlow_scale_position (reparametrisation via ODE uniqueness,
+-- mirroring the reversal lemma) + terminalVel0_apply_eq_fderiv_diag ⟹
+-- ★ terminalVel0_contDiffAt_two (= hT0; spends C⁴→C³ via ContDiffAt.fderiv_right +
+-- clm_apply — exactly the audit's "one order less") ⟹
+-- ★★ baseVaryingIFTPackage_unconditional: the FULL M1–M4 base-varying CoV bundle for
+-- Wbv with NO regularity hypothesis beyond (hC, hK, K ∈ 𝓝 0). The .choose/joint-base
+-- J3 blocker of the W1 chart-image AI is REMOVED. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.TerminalVelC2.geodesicField_scaleVel
+#print axioms QIQTH.TerminalVelC2.uniformFlow_scale_position
+#print axioms QIQTH.TerminalVelC2.terminalVel0_apply_eq_fderiv_diag
+#print axioms QIQTH.TerminalVelC2.terminalVel0_contDiffAt_two
+#print axioms QIQTH.TerminalVelC2.baseVaryingIFTPackage_unconditional
+
 end QIQTH.AxiomAudit

@@ -469,6 +469,7 @@ import QIQTH.ChartIFTPackage
 import QIQTH.ChartImageAIConcrete
 import QIQTH.BaseVaryingIFTPackage
 import QIQTH.GeodesicReversalRoute
+import QIQTH.TerminalVelC2
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
