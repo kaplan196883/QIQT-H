@@ -2169,3 +2169,10 @@ The Chapman–Kolmogorov identity (via the banked gaussDdim_conv_scaled) + the z
 the (s,z)-free u-envelope M·u^{k−1} + its integrability. E4 (measurability) + E5 (the
 engine instantiation: per-E bounds + the w-integrability bridge) = the wiring brick.
 std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-290 IterEEngineWiring.
+
+## J4-290 (2026-08-06, 13fc8ecf) — IterEEngineWiring: W1–W4 DONE [AF]
+The per-E bounds threaded + the w-measurability/integrability + the OUTER hbound at
+the actual integrand (M·u^{k−1}) + the wired engines (∀k at the concrete E). NO slot
+mismatches. Remaining per-level carries: (C-meas) parametric-Fubini u-measurability +
+(C-cont) the inner-engine recursion; + the banked concrete providers. std-3 all 7,
+raw 0. NOT a₁=R/6. NEXT: J4-291 InnerEngineRecursion (C-meas + C-cont).
