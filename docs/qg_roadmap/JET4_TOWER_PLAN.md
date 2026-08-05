@@ -1732,3 +1732,11 @@ three truncation limits internal — the core slot needs nothing new). NO analyt
 residue remains; the frontier = DATA-pile satisfiability at the concrete witness +
 facades + geometry. std-3 both, raw 0. NOT a₁=R/6.
 NEXT: J4-244 DataPileWitnessAudit (the don't-under-credit sweep).
+
+## J4-244 (2026-08-05, 3caad761) — DataPileWitnessAudit: the N=1 audit + THE MAP [AF]
+9 concrete discharges (hCH/hsrc from geometry; hAmeas; hEzeroE; hEboundFull-existential-
+gate; hchrMeas; the gate carriers; the time window T:=2t; nb). Anchor = v7. THE
+FINAL-DISTANCE MAP: [1]S concrete-S re-thread (incremental) [2]M the F2 inner
+(s,z)-meas trio (next; widest unblock) [3]M sliver/hD2Hexpand [4]M CConv [5]M/L W3
+gate-compat [6]L W2 Leibniz identity [7]L W1 hAnear SHAPE-WRONG [8]S/M jets+Gc.
+std-3 all 9, raw 0. NOT a₁=R/6. NEXT: J4-245 InnerMeasFubini (map [2]).
