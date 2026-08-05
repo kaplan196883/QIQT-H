@@ -18298,4 +18298,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WidthAdapters.eboundW_le_diag_of_gaussDdim
 #print axioms QIQTH.WidthAdapters.witness_zeroth_baseKernelW_diag
 
+-- ★★★ J4-260 (ResidualAssemblyRecon.lean, ns QIQTH.ResidualAssemblyRecon; the
+-- post-wide [1] recon+discharge; indep build-verified): ★★ THE RESIDUAL ASSEMBLY WALL
+-- IS CLOSED at all κ≥2 ★★. THE RECON: the width-2 provider's cancellation is the
+-- PARAMETRIX-RESIDUAL IDENTITY (heatOp of the witness = parametrixResidualN on-gate;
+-- the DeWitt transport equations bake the τ⁻¹ cancellations in; the O(r)/τ leftover →
+-- O(1) via the odd-power width absorption r·G_{3/2} ≤ √τ·G_2); the chart-image →
+-- base-point transfer = the 3/2→2 width margin paying the near-isometry budget —
+-- THE PROVIDER WAS INTRINSICALLY WIDE ALL ALONG. VERDICT: REUSABLE at κ≥2 (a pure
+-- width-up transfer); genuinely-new only below 2 (not needed). LANDED:
+-- baseKernelW_two_le_of_two_le (the width-up transfer — the ONLY new ingredient) +
+-- hEboundW_widen (abstract) + hEboundW_wide_from_geometry (the slot from geometry at
+-- free κ≥2, ∀(p,q) — the [2] lift NOT needed, the provider was already ∀(p,q)!) +
+-- ★ wide_a1_R6_of_residue_inf_hEboundW_discharged (the capstone with the residual
+-- slot INTERNAL; existential provider-chosen gate sidesteps W3). REMAINING: [small]
+-- hInt at κ; [medium] hCConv/facades; the W3 fixed-gate wall only if a unified
+-- external gate is ever required. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ResidualAssemblyRecon.baseKernelW_two_le_of_two_le
+#print axioms QIQTH.ResidualAssemblyRecon.hEboundW_widen
+#print axioms QIQTH.ResidualAssemblyRecon.hEboundW_wide_from_geometry
+#print axioms QIQTH.ResidualAssemblyRecon.wide_a1_R6_of_residue_inf_hEboundW_discharged
+
 end QIQTH.AxiomAudit
