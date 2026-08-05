@@ -1865,3 +1865,16 @@ The bridge + the wide IterConvIntegrableW producers + the slot glue + the live-b
 end-to-end composition at p=0. The width machinery gates NOTHING. hEboundW_le waits on
 [1] (the residual assembly — the heat-equation cancellation) + [2] (p=0→∀(p,q)).
 std-3 all 7, raw 0. NOT a₁=R/6. NEXT: J4-260 ResidualAssemblyRecon ([1]).
+
+## J4-260 (2026-08-05, ed953238) — ResidualAssemblyRecon: ★★ THE RESIDUAL WALL CLOSED (κ≥2) ★★ [AF]
+THE RECON: the width-2 hEboundW provider's cancellation = the PARAMETRIX-RESIDUAL
+IDENTITY (on-gate heatOp witness = parametrixResidualN via htransport; the DeWitt
+transport equations bake the τ⁻¹ cancellations in; O(r)/τ → O(1) via odd-power width
+absorption r·G_{3/2} ≤ √τ·G_2); the chart-image→base transfer = the 3/2→2 width margin
+paying the near-isometry budget ⟹ THE PROVIDER WAS INTRINSICALLY WIDE ALL ALONG, and
+already ∀(p,q) (post-wide item [2] NOT needed). ★ baseKernelW_two_le_of_two_le (the
+pure width-up transfer, the only new math) + hEboundW_widen + hEboundW_wide_from_geometry
+(the capstone slot from geometry at free κ≥2) + wide_a1_R6_of_residue_inf_hEboundW_discharged
+(the residual slot INTERNAL; the existential provider-chosen gate sidesteps W3).
+REMAINING: [small] hInt at κ; [medium] hCConv/facades; the carries.
+std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-261 WideHIntDischarge (hInt at κ).
