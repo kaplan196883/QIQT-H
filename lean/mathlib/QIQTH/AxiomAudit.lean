@@ -17918,4 +17918,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FlowDerivMeasurable.flowInverseSecondJet_measurable
 #print axioms QIQTH.FlowDerivMeasurable.flowInverseSecondJet_measurable_component
 
+-- ★★★ J4-240 (AmpPdComposition.lean, ns QIQTH.AmpPdComposition; the amp-pd wall;
+-- indep build-verified): ★★ ALL THREE ChartRepFinal RESIDUE CLASSES ARE NOW THEOREMS ★★
+-- (chart value J4-238, chart jets J4-239, amp/amp-pd HERE — all as Gc-route measurable
+-- twins). ampFieldPd_measurable + ampFieldSecondPd_measurable via the ONCE-proven
+-- abstract engine measurable_dq_witness (the decisive trap: inlining the heavy
+-- chartFieldAmp defs into the tendsto loop caused deterministic whnf timeouts even at
+-- 3.2M heartbeats — abstracting fld/AG made the file build in 30s).
+-- ★ firstFieldPd_prod_measurable_Gc: the CHART-WALL-FREE consumer producing EXACTLY
+-- the v4 downstream conclusion (Measurable witnessFieldDeriv, BorelDischargeSurface
+-- conjunct 2) from Gc-swapped inputs — the raw-chart hypothesis ELIMINATED.
+-- concreteGate_ampPd_Gc_supplier_FINAL = the k-independent supplier bundle. THE ONLY
+-- REMAINING SUPPLIER SHAPE-WORK: the v6 capstone reshape (the literal ∃-bodies still
+-- name the .choose-unprovable raw conjuncts; every ingredient is a theorem; the
+-- blocker is purely the kernel-freeze restatement — a lighter assembly, not new math).
+-- Next mechanical mirror: secondFieldPd_prod_measurable_Gc. std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.AmpPdComposition.exists_measurable_ampGc
+#print axioms QIQTH.AmpPdComposition.measurable_dq_witness
+#print axioms QIQTH.AmpPdComposition.ampFieldPd_measurable
+#print axioms QIQTH.AmpPdComposition.ampFieldSecondPd_measurable
+#print axioms QIQTH.AmpPdComposition.firstFieldPd_prod_measurable_Gc
+#print axioms QIQTH.AmpPdComposition.concreteGate_ampPd_Gc_supplier_FINAL
+
 end QIQTH.AxiomAudit
