@@ -18334,4 +18334,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WideHIntDischarge.hInt_wide_of_surface
 #print axioms QIQTH.WideHIntDischarge.iterConvIntegrableW_wide
 
+-- ## J4-262 (TruncatedHIntRethread): ★ THE AFFINE OBSTRUCTION DISSOLVED (small-time) ★
+-- C-ROUTE CONFIRMED by consumption-site audit: every consumer of IterConvIntegrableW
+-- touches it only at the OUTER conclusion time (WideA1Assembly.lean:131 →
+-- RestrictedEboundW.iterConvW_bound_le, outer-t only) ⟹ the J4-261 all-τ obstruction
+-- was a τ-range artifact. IterConvIntegrableWOn (the t≤T₀-truncated 5-fact family) +
+-- eboundW_affine_to_fixed_trunc (affine C·(1+τ) → fixed C·(1+T₀) on the window) +
+-- the truncated producer + iterConvIntegrableWOn_of_affine_trunc (affine bound ⟹
+-- truncated family, the minimum bankable) + iterConvW_bound_le_trunc +
+-- leviSeries_summableW_le_trunc (the capstone's exact hInt consumption, truncated
+-- drop-in) + levi_converges_from_affine_trunc (END-TO-END: affine geometry bound ⟹
+-- Neumann convergence on 0<t≤T₀). HONEST RESIDUAL: the capstone rethread itself
+-- (retyping the hInt binder to IterConvIntegrableWOn + the one-line swap at
+-- WideA1Assembly.lean:131) is NOT YET materialized — next brick. std-3 all 6.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.TruncatedHIntRethread.eboundW_affine_to_fixed_trunc
+#print axioms QIQTH.TruncatedHIntRethread.iterConvIntegrableWOn_of_bound_baseMeas_trunc
+#print axioms QIQTH.TruncatedHIntRethread.iterConvIntegrableWOn_of_affine_trunc
+#print axioms QIQTH.TruncatedHIntRethread.iterConvW_bound_le_trunc
+#print axioms QIQTH.TruncatedHIntRethread.leviSeries_summableW_le_trunc
+#print axioms QIQTH.TruncatedHIntRethread.levi_converges_from_affine_trunc
+
 end QIQTH.AxiomAudit
