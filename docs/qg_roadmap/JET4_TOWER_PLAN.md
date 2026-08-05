@@ -2078,3 +2078,10 @@ capstone, FOUR carries: hGgate + hSupp + hbound + hlocal). RESIDUAL: the enriche
 partial-homeo bundle (V-continuity + sub-ball images) for hbound/hlocal. ⚠ new trap:
 ContinuousOn.comp + ascribed lambda over the .choose chart = whnf blowup. std-3 all 5,
 raw 0. NOT a₁=R/6. NEXT: J4-278 EnrichedChartBundle (→ v3 with 2 carries).
+
+## J4-278 (2026-08-06, 839bb1c2) — EnrichedChartBundle: ★★ hbound+hlocal DISCHARGED ★★ [AF]
+enrichedChartBundle (ρcap parameter + V-continuity/IsOpen Ω/V 0=0/f'=fderiv/det
+exports) + the (W) wrappers + chartImage_approx_identity_v3: the fixed-f W1 capstone
+carrying ONLY hGgate + hSupp. The ρ-fit crux solved by capping ρ ≤ ρA. std-3 all 4,
+raw 0. NOT a₁=R/6. NEXT: J4-279 GateAnnulusSplit (kill hGgate/hSupp at the concrete
+witness → the fixed-f FINAL), then moving-f → hBoundaryLim.
