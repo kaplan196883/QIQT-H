@@ -18792,4 +18792,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartComposedHeatOp.chartComposedHeatOp_jointContinuousOn
 #print axioms QIQTH.ChartComposedHeatOp.heatOpGatedWitness_jointContinuousOn_final
 
+-- ## J4-288 (ChartJetFactsDischarge): ★ the chart facts INTERNAL ★
+-- The generic jet engines (pd_continuousOn_open + pd_pd_continuousOn_open — second
+-- jets from C² ONLY via germ-local pd_congr + fderiv-of-fderiv — + lift_snd) +
+-- J1 chartField_contDiffOn_ball (the centre ContDiffAt → an on-ball C²) + J2/J3/J4
+-- (the exact hWc2/hWc1cont/hWc2cont shapes) + ★ J5
+-- heatOpGatedWitness_jointContinuousOn_chartFree: the E-continuity capstone with the
+-- chart facts DISCHARGED — remaining carries are all g-level (hw/hΘc/hΘne/huc
+-- coefficient regularity, hgi/hChr, gate data hSopen/hsub, the cutoff germ hcut; all
+-- satisfiable). STRETCH (R-dom envelope) not attempted — the next brick. std-3 all 7.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ChartJetFactsDischarge.pd_continuousOn_open
+#print axioms QIQTH.ChartJetFactsDischarge.pd_pd_continuousOn_open
+#print axioms QIQTH.ChartJetFactsDischarge.chartField_contDiffOn_ball
+#print axioms QIQTH.ChartJetFactsDischarge.hWc2_of_contDiffOn_ball
+#print axioms QIQTH.ChartJetFactsDischarge.hWc1cont_of_contDiffOn_ball
+#print axioms QIQTH.ChartJetFactsDischarge.hWc2cont_of_contDiffOn_ball
+#print axioms QIQTH.ChartJetFactsDischarge.heatOpGatedWitness_jointContinuousOn_chartFree
+
 end QIQTH.AxiomAudit
