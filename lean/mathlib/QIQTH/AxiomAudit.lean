@@ -18146,4 +18146,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InverseChartNormalJets.FixedFlowGateData.gate
 #print axioms QIQTH.InverseChartNormalJets.FixedFlowGateData.poly_absorb
 
+-- ★★★ J4-252 (WideWitnessAmplitude.lean, ns QIQTH.WideWitnessAmplitude; wide brick 5;
+-- indep build-verified): the wide-Gaussian witness dominations.
+-- witness_zero_eq_gauss_mul_amp (the factorization bridge to chartFieldAmp);
+-- zeroth_domination (|H_G| ≤ C·G_{lam·τ} via the bridge + |amp|≤M + poly_absorb 0;
+-- off-gate literally 0); zeroth_domination_global (hSupp carried honestly — the
+-- cutoff-inside-ball chicken-and-egg cannot be broken from the banked one-sided gate);
+-- second_domination (the CLEAN Sol shape ≤ C·τ⁻¹·G_{lam·τ} from the carried two-term
+-- chart-image envelope + poly_absorb 0/1); ★ WideAmplitudePackage.of_data. Honest
+-- carries: hAmp0 (amp sup-bound), hSecondEnv (the chart-image envelope — delimited by
+-- witnessSecondXDeriv_chartImage_expand, dischargeable via the CompactJetBounds lever
+-- + the upper near-isometry as a follow-on), hSupp. ⚠ NEW TRAP: GL is reserved
+-- Mathlib notation. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.WideWitnessAmplitude.witness_zero_eq_gauss_mul_amp
+#print axioms QIQTH.WideWitnessAmplitude.WideAmplitudeData.zeroth_domination
+#print axioms QIQTH.WideWitnessAmplitude.WideAmplitudeData.zeroth_domination_global
+#print axioms QIQTH.WideWitnessAmplitude.WideAmplitudeData.second_domination
+#print axioms QIQTH.WideWitnessAmplitude.WideAmplitudePackage.of_data
+
 end QIQTH.AxiomAudit
