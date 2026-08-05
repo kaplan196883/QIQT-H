@@ -18775,4 +18775,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GatedWitnessHeatOpBridge.heatOpWitness_eq_chartParametrix_of_gate_cut
 #print axioms QIQTH.GatedWitnessHeatOpBridge.heatOpGatedWitness_jointContinuousOn_of_chartParametrix
 
+-- ## J4-287 (ChartComposedHeatOp): ★★ hBcont DISCHARGED — E's continuity CONCRETE ★★
+-- The full D1–D6 chain: the composed pd/pd² chain rules (via the READY-MADE banked
+-- pd_comp (ResidualChartTransport) + pd_pd_comp_local (PullbackNaturalityLocal)!) +
+-- the ∂_τ-term composition (the chart lift Φ:(τ,z)↦(τ,W₀ z)) + the Δ-term assembly +
+-- chartComposedHeatOp_jointContinuousOn (= hBcont, carrying only satisfiable
+-- coefficient/geometry/chart-fact hyps) + heatOpGatedWitness_jointContinuousOn_final
+-- (the boundary chain's E-continuity with hBcont INTERNAL, instantiated at N=1,
+-- Θ*=vanVleck, u*=transportCoeff∘transportOp, W₀=the base-0 chart). RESIDUAL: the
+-- chart facts (hWc2/hWc1cont/hWc2cont — on-ball C²+jet continuity from the banked
+-- centre ContDiffAt; the natural next brick) + the standing coefficient/geometry/
+-- cutoff-germ carries. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.ChartComposedHeatOp.chartComposed_pd_eq
+#print axioms QIQTH.ChartComposedHeatOp.chartComposed_pd_pd_eq
+#print axioms QIQTH.ChartComposedHeatOp.chartComposed_dtau_jointContinuousOn
+#print axioms QIQTH.ChartComposedHeatOp.chartComposedHeatOp_jointContinuousOn
+#print axioms QIQTH.ChartComposedHeatOp.heatOpGatedWitness_jointContinuousOn_final
+
 end QIQTH.AxiomAudit
