@@ -18508,4 +18508,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartImageAIConcrete.boundary_integral_eq_chartImage_integral
 #print axioms QIQTH.ChartImageAIConcrete.chartImage_approx_identity_conditional
 
+-- ## J4-272 (BaseVaryingIFTPackage): gap (a) reduced to ONE input (hbaseC2).
+-- baseVaryingChart_hasFDerivAt_center: ★ UNCONDITIONAL — Wbv is differentiable at 0
+-- with derivative −id, DERIVED from the banked quadratic displacement bound
+-- chartW0_displacement (which IS the little-o) + uniformInverseChart_zero; needs
+-- K ∈ 𝓝 0. baseVaryingIFTPackage: the FULL M1–M4 CoV bundle + image-nbhd for Wbv,
+-- conditional on ONLY hbaseC2 : ContDiffAt ℝ 2 Wbv 0 (M2/M3 PROVEN via
+-- toOpenPartialHomeomorph; M4 det(−id)=(−1)ⁿ≠0) — exactly the J4-271 consumer shape.
+-- ★ hbaseC2 = the recognized J3 BLOCKER (base-slot regularity of the .choose chart;
+-- confirmed across ChartJetBounds/GeneralBaseJets/InverseChartDisplacement headers):
+-- the geodesic smooth-dependence tower has the exp-FLOW base dependence but it was
+-- never threaded through the .choose INVERSE. (c) A₀(0)=1 deferred honestly (u₀(0)=1
+-- is a carried DeWitt input across the assembly, not a bare lemma). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.BaseVaryingIFTPackage.baseVaryingChart_hasFDerivAt_center
+#print axioms QIQTH.BaseVaryingIFTPackage.baseVaryingIFTPackage
+
 end QIQTH.AxiomAudit

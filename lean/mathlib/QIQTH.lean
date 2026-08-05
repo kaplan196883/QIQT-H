@@ -467,6 +467,7 @@ import QIQTH.ChartImageApproxIdentity
 import QIQTH.ChartGaussianChangeVar
 import QIQTH.ChartIFTPackage
 import QIQTH.ChartImageAIConcrete
+import QIQTH.BaseVaryingIFTPackage
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
