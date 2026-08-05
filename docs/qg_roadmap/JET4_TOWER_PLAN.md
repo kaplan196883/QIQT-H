@@ -1723,3 +1723,12 @@ DATA (the amplitude grows linearly — no fixed C; clean fix = relax the consume
 τ≤t, an edit). ORDERED RESIDUE: dominations → hIlo/hIhi → sliver → R2 → facades →
 hgD1 → hEboundFull → hDerivConv. std-3, raw 0. NOT a₁=R/6.
 NEXT: J4-243 DerivConvDischarge (the deepest residue).
+
+## J4-243 (2026-08-05, bca9564d) — DerivConvDischarge: ★★ the core limit tower CLOSED ★★ [AF]
+The carry census: EVERY leaf of derivConv_tendsto is carried-already by v2' (hderiv ←
+F2 trio; hfg ← tail + hFII with the never-threaded hAzero find; hDerivLU ← the carried
+loc-unif piles). NEW-DATA: NONE. derivConv_of_data + ★ core_of_v2prime_data_FULL (all
+three truncation limits internal — the core slot needs nothing new). NO analytic-limit
+residue remains; the frontier = DATA-pile satisfiability at the concrete witness +
+facades + geometry. std-3 both, raw 0. NOT a₁=R/6.
+NEXT: J4-244 DataPileWitnessAudit (the don't-under-credit sweep).
