@@ -1740,3 +1740,10 @@ FINAL-DISTANCE MAP: [1]S concrete-S re-thread (incremental) [2]M the F2 inner
 (s,z)-meas trio (next; widest unblock) [3]M sliver/hD2Hexpand [4]M CConv [5]M/L W3
 gate-compat [6]L W2 Leibniz identity [7]L W1 hAnear SHAPE-WRONG [8]S/M jets+Gc.
 std-3 all 9, raw 0. NOT a₁=R/6. NEXT: J4-245 InnerMeasFubini (map [2]).
+
+## J4-245 (2026-08-05, 79b88ae7) — InnerMeasFubini: map [2] DONE [AF]
+The F2 inner trio discharged (gated-indicator lever + integral_prod_right' Fubini +
+hBcont-fed Levi joint meas; product-ae trap avoided). All four conclusions = the v2'
+binder shapes verbatim. f2Pack_concrete = the bundle; carries hInner/hWitDeriv/
+hLeviJoint/hContDom (bankable-kind, no wall). std-3 all 9, raw 0. NOT a₁=R/6.
+NEXT: J4-246 F2CarryDischarge (the three carries → zero-carry).
