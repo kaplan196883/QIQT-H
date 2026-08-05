@@ -1669,3 +1669,11 @@ affine in τ) ⟹ bundle v3 (7 families, one δ₀). TWO residues to the full su
 block: (1) hcarField2's GLOBAL-y jet family (over-strong packaging — the J4-231/232
 surgery pattern again, neighbourhood-only reshape) + (2) hChartRep (the .choose wall).
 std-3 all 7, raw 0. NOT a₁=R/6. NEXT: J4-237 Field2NbhdReshape.
+
+## J4-237 (2026-08-05, 292aca3f) — Field2NbhdReshape: the third quantifier surgery [AF]
+The hcarField2 global-y weakened (only 3 funext steps were global → EventuallyEq on the
+open gate; j-families ∀y∈S, rest at p). Reshaped identity (rep UNCHANGED) + v5
+measurability shapes + the general-p second jet + ★ hcarField2_hgate_concrete
+SATISFIED + bundle v4. ⟹ ALL THREE suppliers' jet/gate conjuncts satisfiable at the
+concrete gate; ONE obligation left = hChartRep. std-3 all 9, raw 0. NOT a₁=R/6.
+NEXT: J4-238 ChartRepFinal (the decision brick).
