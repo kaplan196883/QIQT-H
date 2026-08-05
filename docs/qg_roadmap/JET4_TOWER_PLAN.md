@@ -1687,3 +1687,12 @@ exposes no derivative — needs the measurable joint field-derivative of the flo
 inverse; the difference-quotient-limit route on the open gate = the attack). hcarTau
 in-principle fully value-swappable. std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-239 FlowDerivMeasurable (the last supplier wall).
+
+## J4-239 (2026-08-05, 07a7e15d) — FlowDerivMeasurable: ★ the field-derivative wall broke ★ [AF]
+The measurable joint field-derivative of the flow inverse = a THEOREM: indicator
+difference-quotient sequences of the Gc value-rep + measurable_of_tendsto_metrizable +
+the C² on-gate convergence; the mixed second jet one level up; the _component versions
+certify the same witnesses satisfy the hgate HasDerivAt conjuncts. ChartRepFinal
+residue (3) discharged. Remaining to the v7 supplier payoff: the chart-VALUE Gc-reshape
+(kernel-freeze constrained — lighter assembly) + the amp field-pd composition (inputs
+now supplied). std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-240 AmpPdComposition.
