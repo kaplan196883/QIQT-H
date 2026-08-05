@@ -1808,3 +1808,11 @@ c=1/2 + sharp (1±δ); the sign W₀ z ≈ −z; no base-side third jets needed)
 chart_width_gate + the FixedFlowGateData record + .of_geometry + .gate + .poly_absorb
 (the wide hAnear/hD2Hexpand shapes ready). std-3 all 4, raw 0. NOT a₁=R/6.
 NEXT: J4-252 WideWitnessAmplitude (brick 5).
+
+## J4-252 (2026-08-06, d0d6450f) — WideWitnessAmplitude: wide brick 5 [AF]
+The factorization bridge + zeroth_domination (≤ C·G_{lamτ}; off-gate 0) +
+zeroth_domination_global (hSupp carried — the one-sided-gate chicken-and-egg honest) +
+second_domination (the clean ≤ C·τ⁻¹·G_{lamτ}) + ★ WideAmplitudePackage.of_data.
+Carries: hAmp0/hSecondEnv (CompactJetBounds + upper near-isometry = follow-ons)/hSupp.
+⚠ GL reserved notation. std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-253 WideSliverBoundary (brick 6).
