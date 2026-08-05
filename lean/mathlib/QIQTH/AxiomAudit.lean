@@ -18713,4 +18713,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatOpWitnessContinuity.convStepIntegrand_pointwise_bound
 #print axioms QIQTH.HeatOpWitnessContinuity.convStepIntegrand_pointwise_bound_gauss
 
+-- ## J4-284 (ParametrixPartsContinuity): ★ (i) FULLY PROVEN; (ii)/(iii) reduced ★
+-- gaussDdim_deriv_t_eq (the Gaussian τ-derivative CLOSED FORM via the heat equation)
+-- + gaussDdim_deriv_t_jointContinuousOn (unconditional on τ>0) +
+-- heatParametrix_deriv_t_eq (the full parametrix τ-derivative closed form, HasDerivAt
+-- by hand) + ★ heatParametrix_deriv_jointContinuousOn ((i) DONE — the exact hDcont
+-- slot; genuinely new reusable analytic content) +
+-- laplaceBeltrami_jointContinuousOn_of_parts ((ii) reduced to the hpd1/hpd2 spatial
+-- partial continuities) + hIdent_gateTransfer ((iii) gate-stripped via
+-- gatedKernel_heatOp_eq_of_mem_nhds) + heatOpWitness_jointContinuousOn_concrete
+-- (COMPOSE: (i) internal; carries only hLcont (ii) + hIdent (iii)).
+-- ⚠ FINDING: NO standalone banked heatOp = parametrixResidualN lemma exists — the
+-- transport identity is BURIED inside CoeffU1Fix's L4 proof (~853); (iii) needs an
+-- extraction brick. (ii) residual = the ∂²(Gaussian·Θ^{-½}·poly) second-partial
+-- continuity (needs Θ,u ∈ C²). std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.ParametrixPartsContinuity.gaussDdim_deriv_t_eq
+#print axioms QIQTH.ParametrixPartsContinuity.gaussDdim_deriv_t_jointContinuousOn
+#print axioms QIQTH.ParametrixPartsContinuity.heatParametrix_deriv_t_eq
+#print axioms QIQTH.ParametrixPartsContinuity.heatParametrix_deriv_jointContinuousOn
+#print axioms QIQTH.ParametrixPartsContinuity.laplaceBeltrami_jointContinuousOn_of_parts
+#print axioms QIQTH.ParametrixPartsContinuity.hIdent_gateTransfer
+#print axioms QIQTH.ParametrixPartsContinuity.heatOpWitness_jointContinuousOn_concrete
+
 end QIQTH.AxiomAudit
