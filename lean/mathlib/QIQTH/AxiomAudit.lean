@@ -17975,4 +17975,19 @@ namespace QIQTH.AxiomAudit
 -- hgD1 → hEboundFull → hDerivConv. std-3. NOT a₁ = R/6.
 #print axioms QIQTH.EnvelopeCoreDischarge.core_of_v2prime_data
 
+-- ★★★ J4-243 (DerivConvDischarge.lean, ns QIQTH.DerivConvDischarge; the hDerivConv
+-- discharge; indep build-verified): ★★ THE CORE LIMIT TOWER IS FULLY CLOSED ★★.
+-- THE CARRY CENSUS: every leaf of derivConv_tendsto's three carries is CARRIED-ALREADY
+-- by v2' — hderiv ← the F2 trio (hpar/htime/hR dischargers, engine = the carried
+-- pile), hfg ← heatConv_tail_tendsto + hFII (F1 domination; the non-obvious find: v2'
+-- already carries hAzero), hDerivLU ← hDaLimLU + boundary loc-unif (both from carried
+-- piles). NEW-DATA: NONE. derivConv_of_data = the exact hDerivConv shape;
+-- ★ core_of_v2prime_data_FULL = TruncatedDuhamelCore with ALL THREE truncation limits
+-- (hDaLim/hBoundaryLim/hDerivConv) discharged internally — the core slot needs NOTHING
+-- beyond v2''s binders. NO analytic-limit residue remains at the conditional level;
+-- the frontier = the DATA-pile satisfiability for the concrete witness + the facades.
+-- std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.DerivConvDischarge.derivConv_of_data
+#print axioms QIQTH.DerivConvDischarge.core_of_v2prime_data_FULL
+
 end QIQTH.AxiomAudit
