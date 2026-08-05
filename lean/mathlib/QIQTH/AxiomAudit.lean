@@ -18355,4 +18355,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TruncatedHIntRethread.leviSeries_summableW_le_trunc
 #print axioms QIQTH.TruncatedHIntRethread.levi_converges_from_affine_trunc
 
+-- ## J4-263 (WideA1AssemblyTrunc): ★★ BOTH RESIDUAL SLOTS INTERNAL ★★
+-- wide_a1_R6_trunc = the WideA1Assembly capstone source with EXACTLY two edits (hInt
+-- binder → IterConvIntegrableWOn on the window (0,t], the one consuming call →
+-- leviSeries_summableW_le_trunc at htT := le_rfl); CONCLUSION IDENTICAL.
+-- wide_a1_R6_of_residue_inf_trunc = the wrapper rethreaded. ★★
+-- wide_a1_R6_both_slots_internal = the κ≥2 capstone with BOTH hEboundW_le AND hInt
+-- INTERNAL (shorter than the J4-260 capstone by exactly the hInt arrow): both slots
+-- filled from hEboundW_wide_from_geometry's provider-chosen-gate bound at the SAME
+-- fixed C'' (the affine (1+t) factor is a constant at fixed t — the affine route not
+-- even needed; the J4-261 obstruction never arises on the window); hInt via the
+-- truncated producer + hEzeroE_concrete (1≤n). HONEST REMAINING CARRIES: 1≤n · the
+-- ∀-gate S1 measurability (tripleHEmeas; dischargeable via tripleHEmeas_of_surface) ·
+-- base geometry hyps (hg/hg0/hgi/hΓ/hdg0/htr/hsrc/hgnd/hgsymm/hinvF/hframeK/hw/hChr/
+-- hK/hK0) · the inner Levi/Duhamel interface arrows (hS0/hDuhamel/hInter/hDConv/hCH/
+-- hCConv). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.WideA1AssemblyTrunc.wide_a1_R6_trunc
+#print axioms QIQTH.WideA1AssemblyTrunc.wide_a1_R6_of_residue_inf_trunc
+#print axioms QIQTH.WideA1AssemblyTrunc.wide_a1_R6_both_slots_internal
+
 end QIQTH.AxiomAudit

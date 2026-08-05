@@ -458,6 +458,7 @@ import QIQTH.WidthAdapters
 import QIQTH.ResidualAssemblyRecon
 import QIQTH.WideHIntDischarge
 import QIQTH.TruncatedHIntRethread
+import QIQTH.WideA1AssemblyTrunc
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
