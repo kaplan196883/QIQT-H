@@ -1878,3 +1878,14 @@ pure width-up transfer, the only new math) + hEboundW_widen + hEboundW_wide_from
 (the residual slot INTERNAL; the existential provider-chosen gate sidesteps W3).
 REMAINING: [small] hInt at κ; [medium] hCConv/facades; the carries.
 std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-261 WideHIntDischarge (hInt at κ).
+
+## J4-261 (2026-08-05, 331cd206) — WideHIntDischarge: hInt REDUCED; the affine τ-range mismatch [AF]
+iterConvIntegrableW_wide (the abstract slot shape) + hInt_wide_from_geometry (hEzero
+DISCHARGED via hEzeroE_concrete, 1≤n) + hInt_wide_of_surface (hEmeas → the
+continuity-free BorelDischargeSurface). ★ INTEL: the capstone consumes both residual
+slots at ONE C', but the geometric provider gives only τ≤t with AFFINE C·(1+t);
+all-τ fixed-C is unobtainable (the prefactor survives width changes) ⟹ the stretch
+NOT produced (firewall). Obstruction = τ-range/affine coefficient, NOT the gate.
+FIX HYPOTHESIS: a₁=R/6 is a t→0⁺ asymptotic — a small-time truncation (t≤T₀) makes
+the constant C·(1+T₀) fixed. std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-262 TruncatedHIntRethread (the small-time truncation).
