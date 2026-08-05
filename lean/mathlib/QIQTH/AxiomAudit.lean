@@ -18756,4 +18756,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ParametrixSpatialPartials.heatOpWitness_jointContinuousOn_final
 #print axioms QIQTH.ParametrixSpatialPartials.heatOpWitness_jointContinuousOn_geometry
 
+-- ## J4-286 (GatedWitnessHeatOpBridge): the bridge landed; ★ the CHART-COMPOSED finding ★
+-- STRUCTURAL: the witness is NOT a plain heatParametrix — on-gate it is
+-- radialCutoff·heatParametrix 1 Θ* u* τ (W 0 z) at the CHART IMAGE (Θ*=vanVleck g,
+-- u*=transportCoeff(transportOp…), W=uniformInverseChart; W 0 fixes 0 only pointwise,
+-- NOT an identity germ) ⟹ the J4-285 plain capstone does not apply verbatim.
+-- LANDED: witness_near_zero_eq_chartParametrix (L1, unconditional def-chain collapse)
+-- + heatOpWitness_eq_heatOp_cutoffChart (L2a gate strip) +
+-- heatOp_cutoffChart_eq_chartParametrix (L2b cutoff germ) +
+-- heatOpWitness_eq_chartParametrix_of_gate_cut (the composed reduction) +
+-- heatOpGatedWitness_jointContinuousOn_of_chartParametrix (L3: E's continuity ←
+-- hBcont). THE ONE OPEN INPUT: hBcont = the CHART-COMPOSED geometry capstone
+-- (heatOp of heatParametrix∘(W 0 ·) joint continuity — the parametrix jets (banked
+-- closed forms) composed with the chart jets (banked C²)). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.GatedWitnessHeatOpBridge.witness_near_zero_eq_chartParametrix
+#print axioms QIQTH.GatedWitnessHeatOpBridge.heatOpWitness_eq_heatOp_cutoffChart
+#print axioms QIQTH.GatedWitnessHeatOpBridge.heatOp_cutoffChart_eq_chartParametrix
+#print axioms QIQTH.GatedWitnessHeatOpBridge.heatOpWitness_eq_chartParametrix_of_gate_cut
+#print axioms QIQTH.GatedWitnessHeatOpBridge.heatOpGatedWitness_jointContinuousOn_of_chartParametrix
+
 end QIQTH.AxiomAudit
