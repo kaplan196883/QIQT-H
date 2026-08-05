@@ -1924,3 +1924,14 @@ by hS0+hCH; surviving antecedents hDuhamel/hInter/hDConv/hCConv; carries 1≤n +
 ∀-gate + base geometry incl. hgiC/hgpos). ROUTE: provider-side export at the concrete
 gated-witness gate (the hS0/hCH pattern). std-3 both, raw 0. NOT a₁=R/6.
 NEXT: J4-265 ProviderSideExports (hDuhamel/hInter at the concrete gate).
+
+## J4-265 (2026-08-06, 13077977) — ProviderSideExports: ★ hInter EXPORTED ★ [AF]
+The hS0/hCH pattern extended: the per-S hInter interchange identity proven at the
+concrete gate (InterchangeLocalRebase.hInter_from_local_data, J4-206) — the crux: the
+universal-over-ceiling export gives hEbnd AND hglobal from one source; hEzero via
+hEzeroE_concrete; width-2 interchange, width-free hInter ⟹ feeds the κ capstone.
+wide_a1_R6_interface_discharged_v2: implication = hDuhamel → hDConv → hCConv → ⟨a₁⟩.
+CENSUS: exported hS0/hCH/hInter · surviving hDuhamel (hDaLimLU wall + 3 per-S
+truncation-limit facts) / hDConv (analytic residue + hDaLimLU) / hCConv (5 facades).
+hDaLimLU = the shared blocker. std-3 both, raw 0. NOT a₁=R/6.
+NEXT: J4-266 DaLimLUConcreteDischarge (the shared wall at the concrete gate).
