@@ -18457,4 +18457,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_set_moving_dist_bound
 #print axioms QIQTH.ChartImageApproxIdentity.gaussDdim_set_approx_identity_moving
 
+-- ## J4-269 (ChartGaussianChangeVar): ★ Layer B (abstract) — the chart CoV ★
+-- chart_gaussian_change_variables: ∫_S G_τ(W z)·B z = ∫_{W''S} G_τ w·(B(V w)/J(V w))
+-- from the standard CoV data (MeasurableSet S, HasFDerivWithinAt field, InjOn, left
+-- inverse on S, J = |det f'| > 0) via Mathlib's UNCONDITIONAL
+-- integral_image_eq_integral_abs_det_fderiv_smul + on-S J-cancellation. Matches the
+-- Layer C consumer shape (Ω := W''S, g τ w := B(V w)/J(V w)). CONCRETE corollary NOT
+-- landed — the missing-fact bundle M1–M4 (within-derivative field on a gate / InjOn
+-- radius / left inverse V / uniform det lower bound) = ONE uniform local IFT package
+-- for uniformInverseChart on a small ball (⚠ grep the bank: Vmap=exp⁻¹-via-IFT
+-- 891c5847 + InverseChartNormalJets J4-251 near-isometry likely carry most pieces).
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.ChartGaussianChangeVar.chart_gaussian_change_variables
+
 end QIQTH.AxiomAudit
