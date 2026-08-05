@@ -1836,3 +1836,10 @@ window_inv_le (the truncated-window key — (u−s)⁻¹ ≤ ε_m⁻¹; the ε�
 sliver/DaLim machinery) + secondBoundConst + the slot theorems. Brick 10 remaining:
 the concrete snb-uniform second-order domination + measurability plumbing + threading.
 std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-256 SecondOrderInterchangeConcrete (brick 10).
+
+## J4-256 (2026-08-06, d63ad309) — SecondOrderInterchangeConcrete: ★ the W2 engine FIRED ★ [AF]
+The snb-uniform field-shifted second-order domination (off-gate discharged; hOn carry =
+the field-shifted near-isometry, brick-11-parallel) + the hbound discharge + ★
+witness_MemInterchange(_majorant) = the verbatim MemInterchange member PRODUCIBLE for
+the concrete witness (residual = the named providers hQ1/hFmeas/hFint/hF'meas/hdiff +
+hOn/hF). std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-257 FixedGateSourceProviders (8+4).
