@@ -1901,3 +1901,14 @@ levi_converges_from_affine_trunc (END-TO-END: affine geometry bound ⟹ Neumann
 convergence on 0<t≤T₀). RESIDUAL: the capstone rethread (hInt binder retype + the
 one-line swap) not yet materialized. std-3 all 6, raw 0. NOT a₁=R/6.
 NEXT: J4-263 WideA1AssemblyTrunc (the rethreaded capstone + hInt internal).
+
+## J4-263 (2026-08-06, f9ab23ec) — WideA1AssemblyTrunc: ★★ BOTH RESIDUAL SLOTS INTERNAL ★★ [AF]
+wide_a1_R6_trunc (the capstone source, exactly 2 edits, conclusion IDENTICAL) +
+wide_a1_R6_of_residue_inf_trunc + ★★ wide_a1_R6_both_slots_internal (κ≥2; both
+hEboundW_le AND hInt internal — shorter than the J4-260 capstone by the hInt arrow).
+Constant finding: NO mismatch — hEboundW_wide_from_geometry's τ≤t bound is at a single
+fixed C'' (the affine (1+t) factor is constant at fixed t); both slots fill at the
+same C''; the affine route wasn't even needed. HONEST CARRIES: 1≤n · ∀-gate S1
+tripleHEmeas (→ tripleHEmeas_of_surface) · base geometry hyps · the inner Levi/Duhamel
+arrows hS0/hDuhamel/hInter/hDConv/hCH/hCConv. std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-264 InterfaceArrowCensus (banked-provider census + discharge of the arrows).
