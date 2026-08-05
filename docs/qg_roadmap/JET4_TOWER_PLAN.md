@@ -1677,3 +1677,13 @@ measurability shapes + the general-p second jet + ★ hcarField2_hgate_concrete
 SATISFIED + bundle v4. ⟹ ALL THREE suppliers' jet/gate conjuncts satisfiable at the
 concrete gate; ONE obligation left = hChartRep. std-3 all 9, raw 0. NOT a₁=R/6.
 NEXT: J4-238 ChartRepFinal (the decision brick).
+
+## J4-238 (2026-08-05, f077945a) — ChartRepFinal: the value half discharged [AF]
+The audit: chart LITERAL in the existentials; conjuncts split — (1) raw chart SWAPPABLE
+(S-gate Gc, hWG_gate_concrete — pure radii, no surjectivity); (2) amp value + Cfield
+SWAPPABLE + DISCHARGED (chartFieldAmpGc/chartTauAmpGc measurable + on-gate swaps);
+(3) THE ONE WALL = the chart field-JETS/amp field-pd measurabilities (value-only Gc
+exposes no derivative — needs the measurable joint field-derivative of the flow
+inverse; the difference-quotient-limit route on the open gate = the attack). hcarTau
+in-principle fully value-swappable. std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-239 FlowDerivMeasurable (the last supplier wall).
