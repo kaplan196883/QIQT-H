@@ -1998,3 +1998,13 @@ chart_gaussian_change_variables_concrete (CONCRETE Layer B). ⚠ orientation fla
 base-0 vs base-varying — reconcile at the W1 assembly. RESIDUAL: Layer A + the
 moving-integrand trio. std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-271 ChartImageAIConcrete (the A+B+C composition).
+
+## J4-271 (2026-08-06, 90950d2e) — ChartImageAIConcrete: Layer A + conditional A∘B∘C [AF]
+★★ ORIENTATION VERDICT: "W₀" is OVERLOADED — the factorization/wide pipeline is
+BASE-varying (Wbv: z ↦ uniformInverseChart z 0); the J4-270 package is FIELD-varying;
+agree only at 0 ⟹ cannot plug. LANDED: boundary_integral_eq_gate_integral (Layer A
+CONCRETE) + boundary_integral_eq_chartImage_integral (A∘B at an abstract Wbv bundle) +
+chartImage_approx_identity_conditional (the fixed-f W1 member conditional on: (a) the
+Wbv CoV bundle, (b) the JOINT amplitude limit, (c) A₀(0)=1). std-3 all 3, raw 0.
+NOT a₁=R/6. NEXT: J4-272 BaseVaryingIFTPackage (gap (a); InverseChartNormalJets is
+Wbv-oriented — reuse; UniformFlowLocalInverse.basepointChart_exists — check its chart).
