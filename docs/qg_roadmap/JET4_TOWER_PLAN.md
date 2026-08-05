@@ -1972,3 +1972,11 @@ A(0,0)=J(0); √Δ diag = 1; watch only the integration-measure density ρ(0)).
 Amplitude hyp needed JOINT: Tendsto A ((𝓝[>]0).prod (𝓝 0)) (𝓝 A(0,0)) — derive from
 compact joint continuity if only per-z is banked. Avoid: same-width comparison (=hAnear),
 rescaling+DCT (more work), inverse-map |det DV| (unless V-bank stronger).
+
+## J4-268 (2026-08-06, 6858c5fd) — ChartImageApproxIdentity: ★ Layer C landed ★ [AF]
+gaussDdim_set_approx_identity_moving (the set-valued MOVING approximate identity; the
+JOINT hlocal unweakened; 3ε/concentration NOT DCT) + the reusable subs
+(setIntegral_le_one, set_mass_tendsto_one, ballCompl_mass_tendsto_zero,
+set_moving_dist_bound). RESIDUAL toward hBoundaryLim: Layer A (gate rewrite), Layer B
+(chart change-of-variables), the concrete instantiation. std-3 all 5, raw 0.
+NOT a₁=R/6. NEXT: J4-269 ChartGaussianChangeVar (Layer B + A).
