@@ -18524,4 +18524,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseVaryingIFTPackage.baseVaryingChart_hasFDerivAt_center
 #print axioms QIQTH.BaseVaryingIFTPackage.baseVaryingIFTPackage
 
+-- ## J4-273 (GeodesicReversalRoute): ★★ THE J3 BLOCKER REDUCED TO hT0 ★★
+-- The SOL#6 reversal chain, ALL LANDED: (R) geodesicField_flipVel (Γ even in v) +
+-- geodesic_reversal_hasDerivAt (the reversed curve solves the same autonomous system)
+-- · (REACH) uniformFlow_reversal_reach (E z (−u) = q via ODE_solution_unique, mirroring
+-- expMap_eq_flow_endpoint) · (RI0) chart0_rightInverse + terminalVel0_norm_le ·
+-- ★ (I) baseSlot_eventuallyEq_neg_terminalVel: Wbv =ᶠ[𝓝 0] −T₀∘(U 0 ·) — the
+-- structural prize (hyps only hC/hK/K∈𝓝0) · (T) hbaseC2_of_terminalVel_contDiffAt +
+-- baseVaryingIFTPackage_of_terminalVel_contDiffAt = the full M1–M4 Wbv bundle gated
+-- ONLY on hT0 : ContDiffAt ℝ 2 (terminalVel0) 0 — a FIXED-BASE velocity-endpoint C²
+-- (the bank has the first Fréchet derivative at 0, flowVelocity_endpoint_hasFDerivAt_
+-- exists; position reaches C⁴; the velocity slot is one order less) — strictly weaker
+-- than and orthogonal to the .choose base-slot coherence it replaces. (V)=hT0 = the
+-- next brick. std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.GeodesicReversalRoute.geodesicField_flipVel
+#print axioms QIQTH.GeodesicReversalRoute.geodesic_reversal_hasDerivAt
+#print axioms QIQTH.GeodesicReversalRoute.uniformFlow_reversal_reach
+#print axioms QIQTH.GeodesicReversalRoute.chart0_rightInverse
+#print axioms QIQTH.GeodesicReversalRoute.baseSlot_eventuallyEq_neg_terminalVel
+#print axioms QIQTH.GeodesicReversalRoute.hbaseC2_of_terminalVel_contDiffAt
+#print axioms QIQTH.GeodesicReversalRoute.baseVaryingIFTPackage_of_terminalVel_contDiffAt
+
 end QIQTH.AxiomAudit
