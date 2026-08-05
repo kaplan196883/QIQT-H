@@ -1859,3 +1859,9 @@ mechanical swap. ★ wide_a1_R6_of_residue_inf_v5 = the SAME conclusion at ANY �
 wide bank feeds at κ:=lam). POST-WIDE MAP: [1] residual assembly (∂_τH−Δ_gH; LARGE)
 [2] p=0→(p,q) (MED) [3-4] width adapters (SMALL) [5] CConv instantiation (MED).
 std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-259 WidthAdapters ([3]+[4]).
+
+## J4-259 (2026-08-06, c720e788) — WidthAdapters: post-wide [3]+[4] done [AF]
+The bridge + the wide IterConvIntegrableW producers + the slot glue + the live-bank
+end-to-end composition at p=0. The width machinery gates NOTHING. hEboundW_le waits on
+[1] (the residual assembly — the heat-equation cancellation) + [2] (p=0→∀(p,q)).
+std-3 all 7, raw 0. NOT a₁=R/6. NEXT: J4-260 ResidualAssemblyRecon ([1]).
