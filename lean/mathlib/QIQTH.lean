@@ -442,6 +442,7 @@ import QIQTH.DerivConvDischarge
 import QIQTH.DataPileWitnessAudit
 import QIQTH.InnerMeasFubini
 import QIQTH.F2CarryDischarge2
+import QIQTH.ContDomWindow
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

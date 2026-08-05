@@ -18055,4 +18055,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.F2CarryDischarge2.hWitDeriv_discharged
 #print axioms QIQTH.F2CarryDischarge2.f2Pack_concrete_v2
 
+-- ★★★ J4-247 (ContDomWindow.lean, ns QIQTH.ContDomWindow; the hContDom brick; indep
+-- build-verified): the last F2 carry's ANALYTIC HALF discharged. The window dominator
+-- gaussDdim_window_le (gaussDdim σ x ≤ (√(σhi/σlo))^n · gaussDdim σhi x — per-coord
+-- heatKernel1D_window_le; ₊/₋ invalid identifier chars → hi/lo).
+-- hContDom_of_gaussDom (abstract: the integrable product-Gaussian dominator + the
+-- uniform norm bound on the δ := min s₀ (u−s₀)/2 window from hAdom/hBdom) +
+-- hContDom_discharged (the exact InnerMeasFubini carry shape at the concrete
+-- witness/Levi pair; the two lighter conjuncts hmeas/hcont carried honestly — the
+-- gate is z-discontinuous so joint continuity is false, correctly not faked).
+-- ★ f2Pack_concrete_v3: all three J4-245 carries now internal; the remaining binders
+-- = v2'-level measurability/continuity/domination data only. std-3 all 5.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ContDomWindow.heatKernel1D_window_le
+#print axioms QIQTH.ContDomWindow.gaussDdim_window_le
+#print axioms QIQTH.ContDomWindow.hContDom_of_gaussDom
+#print axioms QIQTH.ContDomWindow.hContDom_discharged
+#print axioms QIQTH.ContDomWindow.f2Pack_concrete_v3
+
 end QIQTH.AxiomAudit
