@@ -2149,3 +2149,11 @@ def-collapse + L2a gate strip + L2b cutoff germ + the composed reduction + L3
 (E's continuity ← hBcont). THE ONE OPEN INPUT: hBcont = heatOp of heatParametrix∘(W 0 ·)
 joint continuity (parametrix jets ∘ the banked field-slot chart C²). std-3 all 5,
 raw 0. NOT a₁=R/6. NEXT: J4-287 ChartComposedHeatOp (hBcont via the chain rule).
+
+## J4-287 (2026-08-06, 0ee1c898) — ChartComposedHeatOp: ★★ hBcont DISCHARGED ★★ [AF]
+The D1–D6 chain (the banked pd_comp/pd_pd_comp_local chain rules + the chart lift +
+the Δ assembly) ⟹ chartComposedHeatOp_jointContinuousOn (= hBcont) +
+heatOpGatedWitness_jointContinuousOn_final (E's continuity CONCRETE; carries = the
+chart facts hWc2/hWc1cont/hWc2cont + coefficient/geometry/cutoff-germ, all
+satisfiable). std-3 all, raw 0. NOT a₁=R/6.
+NEXT: J4-288 ChartJetFactsDischarge (the chart facts + start the R-dom envelope).
