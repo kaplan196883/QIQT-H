@@ -17878,4 +17878,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Field2NbhdReshape.hcarField2_hgate_concrete
 #print axioms QIQTH.Field2NbhdReshape.concreteGate_carriers_discharged_v4
 
+-- ★★★ J4-238 (ChartRepFinal.lean, ns QIQTH.ChartRepFinal; the hChartRep decision;
+-- indep build-verified): THE AUDIT — the chart is LITERAL (fixed) in the existentials;
+-- the measurability conjuncts split THREE ways: (1) the raw joint chart = SWAPPABLE
+-- (on the S-gate the chart = the banked measurable Gc via hWG_gate_concrete — the
+-- S-guard makes image-support PURE RADII, no surjectivity wall); (2) the amplitude
+-- value + Cfield = SWAPPABLE (chartFieldAmp is a continuous function of the chart
+-- VALUE alone) — DISCHARGED here: chartFieldAmpGc/chartTauAmpGc + _prod_measurable +
+-- the on-gate agreement swaps; (3) the chart field-JETS (P/Q) + amplitude field-pd
+-- measurabilities = THE ONE REMAINING WALL — a value-only Lusin–Souslin Gc exposes no
+-- derivative; needs the measurable joint FIELD-DERIVATIVE of the flow inverse (one
+-- Lusin–Souslin layer beyond the banked value construction; the difference-quotient-
+-- limit route on the open gate = the honest next attack). hcarTau is in principle
+-- fully value-swappable (no field-derivative conjunct); hcarField/Field2 blocked
+-- SOLELY by (3). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.ChartRepFinal.chartFieldAmpGc_prod_measurable
+#print axioms QIQTH.ChartRepFinal.chartFieldAmp_eq_chartFieldAmpGc_of_agree
+#print axioms QIQTH.ChartRepFinal.chartFieldAmp_eq_chartFieldAmpGc_on_gate
+#print axioms QIQTH.ChartRepFinal.chartTauAmpGc_prod_measurable
+#print axioms QIQTH.ChartRepFinal.chartFieldTauAmp_eq_chartTauAmpGc_of_agree
+
 end QIQTH.AxiomAudit
