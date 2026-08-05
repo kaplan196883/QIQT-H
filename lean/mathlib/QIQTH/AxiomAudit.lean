@@ -18663,4 +18663,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MovingFBoundaryLim.frozenBoundary_tendsto
 #print axioms QIQTH.MovingFBoundaryLim.hBoundaryLim_concrete
 
+-- ## J4-281 (MovingCorrAssembly): the M-test packaging + the witness-mass bound.
+-- leviSlice_z_continuousOn_of_termwise + leviSlice_z_continuousAt_zero_of_termwise
+-- (the EXACT hf_cont shape, reduced to the M-test data) +
+-- leviSlice_jointContinuousOn_of_termwise (the joint (s,z) compact version for the
+-- Heine step) — each carries the genuine M-test data: TERMWISE continuity of the
+-- iterE convolution terms + a summable envelope (satisfiable via iterConv_bound).
+-- witnessSlice_mass_le + epsSeq_witnessSlice_mass_eventually_le (∫|Wit(ε_m)| ≤ CW
+-- from the zeroth domination + Gaussian mass one). hBoundaryLim_unconditional
+-- deliberately NOT produced (firewall): the isolated residual = (a) the termwise
+-- iterE joint continuity (the parametric-continuity-of-convolution wall) + (b) the
+-- on/off-ball hMovingCorr recombination. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.MovingCorrAssembly.leviSlice_z_continuousOn_of_termwise
+#print axioms QIQTH.MovingCorrAssembly.leviSlice_z_continuousAt_zero_of_termwise
+#print axioms QIQTH.MovingCorrAssembly.leviSlice_jointContinuousOn_of_termwise
+#print axioms QIQTH.MovingCorrAssembly.witnessSlice_mass_le
+#print axioms QIQTH.MovingCorrAssembly.epsSeq_witnessSlice_mass_eventually_le
+
 end QIQTH.AxiomAudit
