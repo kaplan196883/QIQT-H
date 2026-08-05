@@ -1766,3 +1766,11 @@ jets/twins/agreements; exists_forall_radius min-reconciliation; the opaque-obtai
 fixed). ★ tripleHEmeas_Gc_concrete = S1 from GEOMETRY + radii + measurability ONLY.
 NO missing pieces. Map remaining: [1] the v2' re-thread, [3] sliver, [4] CConv, walls.
 std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-249 SliverCConvBatch ([3]+[4] recon).
+
+## J4-249 (2026-08-06, 7f1aeaf2) — SliverCConvBatch: sliver = W1 (verdict) [AF]
+hD2Hexpand MISMATCH precisely delimited: base-point vs chart-image Gaussian; the ratio
+exp(−O(‖z‖⁴)/4τ) unabsorbable with bounded amplitudes ⟹ sliver [3] ≡ hAnear [7] ≡ W1
+= the near-isometry campaign (rncRadialSq(W z 0)=‖z‖²+O(‖z‖⁴) + ratio absorption).
+Banked: witnessSecondXDeriv_chartImage_expand (the honest starting form). CConv: W4 +
+Source = genuine DATA. Frontier: [1] re-thread + W1 campaign + W2/W3/W4. std-3, raw 0.
+NOT a₁=R/6. NEXT: the gpt-5.6-sol W1/W2/W3 route consult, then the recommended brick.
