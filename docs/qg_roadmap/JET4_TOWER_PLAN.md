@@ -2054,3 +2054,11 @@ only (hC, hK, K∈𝓝 0). The .choose/joint-base J3 blocker is REMOVED. std-3 a
 raw 0. NOT a₁=R/6. NEXT: J4-275 FixedFChartImageAI (plug the bundle into the
 conditional capstone + discharge the Layer-C trio + (b) joint amplitude limit +
 (c) A₀(0)=1 labelled).
+
+## J4-275 (2026-08-06, bd42c7e7) — FixedFChartImageAI: ★ THE PLUG — 12 → 5 carries ★ [AF]
+chartImage_measurableSet_of_bundle (hΩmeas via Lusin–Souslin) +
+chartImage_approx_identity_of_amp ((ρ,V,f') PRODUCED from the J4-274 bundle; M1–M4 +
+hΩnhds + hΩmeas discharged). CARRIES (5): hGgate + hSupp + hmeas/hbound/hlocal.
+INTEL: the trio needs BASE-SLOT amplitude facts (the amp bank is field-slot; van-Vleck
+symmetry = candidate dividend); hSupp radius mismatch (ρ_S vs ρ) → the ball/annulus
+split. std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-276 BaseSlotAmplitude (+annulus split).
