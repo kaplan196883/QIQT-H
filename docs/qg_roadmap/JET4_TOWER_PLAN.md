@@ -2069,3 +2069,12 @@ symmetry/reversal needed). baseSlotAmp_continuousOn/_bound/_joint_limit/_centreV
 (A₀ = radialCutoff·vanVleck^{-½}·u₀ at 0; =1 given the labelled RNC normalization).
 The J4-275 hbound/hlocal carries reduce to the V/det/f wrapper. std-3 all 4, raw 0.
 NOT a₁=R/6. NEXT: J4-277 FixedFTrioDischarge (the v2 capstone), then (B) annulus.
+
+## J4-277 (2026-08-06, 50c1e98b) — FixedFTrioDischarge: hAmpCentre PROVEN; 5 → 4 [AF]
+baseChartAmp_centre_eq_one (A₀ = 1 from 0∈K, 0<a<b, det g 0 = 1 — the labelled
+normalization now a THEOREM) + chartImage_trio_hmeas (the C3 member discharged via
+measurable_extend, no V-continuity) + chartImage_approx_identity_v2 (the fixed-f W1
+capstone, FOUR carries: hGgate + hSupp + hbound + hlocal). RESIDUAL: the enriched
+partial-homeo bundle (V-continuity + sub-ball images) for hbound/hlocal. ⚠ new trap:
+ContinuousOn.comp + ascribed lambda over the .choose chart = whnf blowup. std-3 all 5,
+raw 0. NOT a₁=R/6. NEXT: J4-278 EnrichedChartBundle (→ v3 with 2 carries).
