@@ -1980,3 +1980,11 @@ JOINT hlocal unweakened; 3ε/concentration NOT DCT) + the reusable subs
 set_moving_dist_bound). RESIDUAL toward hBoundaryLim: Layer A (gate rewrite), Layer B
 (chart change-of-variables), the concrete instantiation. std-3 all 5, raw 0.
 NOT a₁=R/6. NEXT: J4-269 ChartGaussianChangeVar (Layer B + A).
+
+## J4-269 (2026-08-06, fe4d230e) — ChartGaussianChangeVar: Layer B abstract [AF]
+chart_gaussian_change_variables: ∫_S G_τ(Wz)·B = ∫_{W''S} G_τ·(B∘V/J∘V) from standard
+CoV data via the UNCONDITIONAL Mathlib Jacobian formula + on-S J-cancellation; matches
+the Layer C consumer shape. Concrete corollary blocked on M1–M4 (within-derivative
+field on a gate / InjOn radius / left inverse / uniform det bound) = ONE uniform local
+IFT package for uniformInverseChart (bank: Vmap-via-IFT 891c5847, J4-251 near-isometry,
+expMap C²). std-3, raw 0. NOT a₁=R/6. NEXT: J4-270 ChartIFTPackage (M1–M4).
