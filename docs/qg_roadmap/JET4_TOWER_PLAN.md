@@ -1935,3 +1935,14 @@ CENSUS: exported hS0/hCH/hInter · surviving hDuhamel (hDaLimLU wall + 3 per-S
 truncation-limit facts) / hDConv (analytic residue + hDaLimLU) / hCConv (5 facades).
 hDaLimLU = the shared blocker. std-3 both, raw 0. NOT a₁=R/6.
 NEXT: J4-266 DaLimLUConcreteDischarge (the shared wall at the concrete gate).
+
+## J4-266 (2026-08-06, c2d284ec) — DaLimLUConcreteDischarge: hDaLimLU partial; Da-limit W1-FREE [AF]
+hDaLimLU_concrete = the complete DaLimLUGoal at the concrete N=1 witness (pdpdH :=
+witnessSecondXDeriv): hInterchange (witness_MemInterchange) + hEzero discharged;
+carried DATA: hgi/hΓ, hLapFull, hII_lo/hII_hi, sliver D0/D1/hbnd (→ amplitudePackage
+once AmplitudeDerivativeData built at witnessSecondXDeriv), hEdom, hFdom/hFzero,
+hIlo/hIhi, hEcomb. ★★ STRUCTURAL: (1) the Da-limit is W1-FREE (hAnear only in the
+boundary pile → hBoundaryLim); (2) the hDuhamel/hDConv export is BLOCKED ON W1
+(provider-gate satisfiability of hAnear unestablished — not forced). The wide bank
+(J4-250/252/253) is the designed weapon. Capstone carry unchanged. std-3, raw 0.
+NOT a₁=R/6. NEXT: J4-267 WideBoundaryLimDischarge (hBoundaryLim via the wide forms).
