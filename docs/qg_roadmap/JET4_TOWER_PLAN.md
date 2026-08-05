@@ -1816,3 +1816,10 @@ second_domination (the clean ≤ C·τ⁻¹·G_{lamτ}) + ★ WideAmplitudePacka
 Carries: hAmp0/hSecondEnv (CompactJetBounds + upper near-isometry = follow-ons)/hSupp.
 ⚠ GL reserved notation. std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-253 WideSliverBoundary (brick 6).
+
+## J4-253 (2026-08-06, e4be04dc) — WideSliverBoundary: wide brick 6 [AF]
+The crude τ⁻¹ route proven DIVERGENT (the √ε comes from the moment structure) — the
+moment-aware route carried. wide_sliver_sum_bound(_U) + wide_second_inner_slice_bound
++ gaussDdim_wide_approx_identity(_family). Brick-11 carries: sliver hbnd, boundary-f
+continuity, the 7/8 globalization. std-3 all 6, raw 0. NOT a₁=R/6.
+NEXT: J4-254 FixedGateDichotomy (brick 7).
