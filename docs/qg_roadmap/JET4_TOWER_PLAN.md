@@ -1946,3 +1946,29 @@ boundary pile → hBoundaryLim); (2) the hDuhamel/hDConv export is BLOCKED ON W1
 (provider-gate satisfiability of hAnear unestablished — not forced). The wide bank
 (J4-250/252/253) is the designed weapon. Capstone carry unchanged. std-3, raw 0.
 NOT a₁=R/6. NEXT: J4-267 WideBoundaryLimDischarge (hBoundaryLim via the wide forms).
+
+## J4-267 (2026-08-06, a148f07d) — WideBoundaryLimDischarge: W1 partial (boundedness wide) [AF]
+The W1 wall precise: hBoundaryLim's provider consumes hAnear at ONE site (hball_eq);
+hAnear FALSE at the concrete witness (chart-image Gaussian). LANDED:
+wide_boundary_inner_bound + wide_boundaryTrunc_bound + wide_boundaryTrunc_bound_concrete
+(the boundedness member discharged at the concrete gate via the wide bank). BLOCKED:
+the limit-value member — needs the CHART-IMAGE APPROXIMATE IDENTITY.
+
+## ★ SOL CONSULT #5 (2026-08-06) — the chart-image approximate identity ARCHITECTURE
+Ranked plan (least new work): (1) open-gate SET integral (Layer A: boundary_integral_eq
+_gate_integral via off-gate vanishing) → (2) chart change-of-variables on the open gate
+(Layer B: chart_gaussian_change_variables via MeasureTheory.integral_image_eq_integral_
+abs_det_fderiv_smul applied to W, J=|det DW|>0 on the shrunken gate, use the REAL C¹
+chart not the measurable representative for the derivative; set-integrals not global
+indicators; boundary: witness must vanish on Sᶜ INCL. the boundary or a.e.) → (3) the
+generic SET-VALUED MOVING approximate identity gaussDdim_set_approx_identity_moving:
+hyps = Ω ∈ 𝓝 0 + eventual AEStronglyMeasurable on Ω.restrict + eventual uniform bound
++ JOINT local convergence at (0⁺,0) (∀ε∃r: eventually ∀ᵐw, ‖w‖<r→‖g τ w−L‖<ε) — ⚠
+pointwise+bound NOT sufficient (the h(w/√τ) spike counterexample); proof = 3ε with the
+banked base AI applied to ball-complement indicators + the constant 1 + Ω.indicator
+(NOT plain DCT — no fixed dominator). Then q τ w := A τ (V w)·F(t−τ)(V w) 0/J(V w) →
+A(0,0)·F(t,0,0)/J(0) = F t 0 0 (normalization CONFIRMED: A(0,0)=J(0)=1 in RNC; obligation
+A(0,0)=J(0); √Δ diag = 1; watch only the integration-measure density ρ(0)).
+Amplitude hyp needed JOINT: Tendsto A ((𝓝[>]0).prod (𝓝 0)) (𝓝 A(0,0)) — derive from
+compact joint continuity if only per-z is banked. Avoid: same-width comparison (=hAnear),
+rescaling+DCT (more work), inverse-map |det DV| (unless V-bank stronger).
