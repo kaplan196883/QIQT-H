@@ -18319,4 +18319,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ResidualAssemblyRecon.hEboundW_wide_from_geometry
 #print axioms QIQTH.ResidualAssemblyRecon.wide_a1_R6_of_residue_inf_hEboundW_discharged
 
+-- ## J4-261 (WideHIntDischarge): the hInt slot REDUCED (hEzero discharged; ⚠ NOT closed
+-- from geometry). iterConvIntegrableW_wide (the abstract slot shape) + T1/T2 specializations
+-- to the concrete witness with hEzero DISCHARGED (hEzeroE_concrete, needs 1 ≤ n) and hEmeas
+-- reduced to the continuity-free BorelDischargeSurface. ⚠ SHAPE-MISMATCH INTEL: the capstone
+-- consumes BOTH residual slots at ONE constant C', but the geometric provider
+-- (hEboundW_wide_from_geometry) supplies only the τ ≤ t bound with an AFFINE-in-cutoff
+-- constant C·(1+t) — extending to all τ gives C·(1+τ), which admits NO fixed-constant
+-- Gaussian majorant (the prefactor survives width changes). So hInt still CARRIES the
+-- all-τ fixed-C one-step bound; the obstruction is the τ-range/affine coefficient, NOT
+-- the gate (gates thread fine). The stretch capstone was deliberately NOT produced
+-- (would risk an unsatisfiable carried hypothesis). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.WideHIntDischarge.hInt_wide_from_geometry
+#print axioms QIQTH.WideHIntDischarge.hInt_wide_of_surface
+#print axioms QIQTH.WideHIntDischarge.iterConvIntegrableW_wide
+
 end QIQTH.AxiomAudit
