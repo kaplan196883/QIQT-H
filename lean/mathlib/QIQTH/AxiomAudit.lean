@@ -18422,4 +18422,21 @@ namespace QIQTH.AxiomAudit
 -- carry list unchanged (v3 not yet reachable). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.DaLimLUConcreteDischarge.hDaLimLU_concrete
 
+-- ## J4-267 (WideBoundaryLimDischarge): W1 PARTIAL — the boundedness member discharged.
+-- The W1 wall stated precisely: hBoundaryLim's sole provider consumes the exact-width
+-- factorization hAnear at ONE site (BoundaryAssembly hball_eq); at the concrete
+-- witness hAnear is FALSE (the Gaussian peaks at the CHART IMAGE W₀z, not z).
+-- LANDED: wide_boundary_inner_bound (zeroth wide domination + Levi bound ⟹
+-- Chapman–Kolmogorov envelope) + wide_boundaryTrunc_bound (the boundary-sequence
+-- BOUNDEDNESS member, width → 2t > 0 finite) + wide_boundaryTrunc_bound_concrete
+-- (the same at the concrete van-Vleck gate from WideAmplitudeData; ONE boundary-pile
+-- member discharged wide). ⚠ THE LIMIT-VALUE member remains blocked: the wide approx
+-- identity is base-point but the concrete integrand carries the chart-image Gaussian;
+-- MISSING LEMMA (for consult): the chart-image approximate identity with van-Vleck
+-- normalization — ∫ gaussDdim τ (W₀ z)·chartFieldAmp·f → f 0 via change-of-variables
+-- w = W₀ z + Jacobian-vs-amp cancellation at 0. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.WideBoundaryLimDischarge.wide_boundary_inner_bound
+#print axioms QIQTH.WideBoundaryLimDischarge.wide_boundaryTrunc_bound
+#print axioms QIQTH.WideBoundaryLimDischarge.wide_boundaryTrunc_bound_concrete
+
 end QIQTH.AxiomAudit
