@@ -18826,4 +18826,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RDomEnvelope.convStepBound_uEnvelope_bound
 #print axioms QIQTH.RDomEnvelope.uEnvelope_integrableOn
 
+-- ## J4-290 (IterEEngineWiring): ★ the engine wiring (W1–W4) DONE ★
+-- convStepIntegrand_bound_wired (the per-E bounds threaded via iterConvW_bound) +
+-- _aestronglyMeasurable (the w-slot) + _integrable (Integrable.mono' vs the modelZ
+-- dominator) + ★ convStepIntegral_uEnvelope_bound (the OUTER hbound slot at the
+-- ACTUAL integrand: ‖∫_w …‖ ≤ M·u^{k−1}) + iterE_succ_jointContinuousOn_wired
+-- (hbnd_int+hbound FILLED; carries hmeas/hcont) + iterE_jointContinuousOn_wired/
+-- _concrete (∀k at E := heatOp(witness), the M-test feed). NO slot mismatches.
+-- REMAINING per-level carries: (C-meas) the parametric-Fubini u-measurability
+-- (dischargeable from the S1/iterE_joint_stronglyMeasurable machinery) + (C-cont)
+-- the INNER-engine output continuity (the recursive parametric-continuity brick);
+-- plus the concrete hEbound/hInt/hEmeas/hbase (banked providers). std-3 all 7.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.IterEEngineWiring.convStepIntegrand_bound_wired
+#print axioms QIQTH.IterEEngineWiring.convStepIntegrand_aestronglyMeasurable
+#print axioms QIQTH.IterEEngineWiring.convStepIntegrand_integrable
+#print axioms QIQTH.IterEEngineWiring.convStepIntegral_uEnvelope_bound
+#print axioms QIQTH.IterEEngineWiring.iterE_succ_jointContinuousOn_wired
+#print axioms QIQTH.IterEEngineWiring.iterE_jointContinuousOn_wired
+#print axioms QIQTH.IterEEngineWiring.iterE_jointContinuousOn_concrete
+
 end QIQTH.AxiomAudit
