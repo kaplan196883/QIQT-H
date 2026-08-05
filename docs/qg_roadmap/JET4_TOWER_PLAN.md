@@ -1747,3 +1747,9 @@ hBcont-fed Levi joint meas; product-ae trap avoided). All four conclusions = the
 binder shapes verbatim. f2Pack_concrete = the bundle; carries hInner/hWitDeriv/
 hLeviJoint/hContDom (bankable-kind, no wall). std-3 all 9, raw 0. NOT a₁=R/6.
 NEXT: J4-246 F2CarryDischarge (the three carries → zero-carry).
+
+## J4-246 (2026-08-05, 14c72940) — F2CarryDischarge2: 2/3 carries discharged [AF]
+hInner (← witnessInner_measurable_uncurry section + field-0 chart AEMeas) + hWitDeriv
+(← the τ gate-eq rep section, satisfiable Cfield carrier). hContDom = the remaining
+carry (the per-window Gaussian dominator brick). f2Pack_concrete_v2 = the pack with
+both internal. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-247 ContDomWindow.
