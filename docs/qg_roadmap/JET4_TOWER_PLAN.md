@@ -2163,3 +2163,9 @@ The generic jet engines (second jets from C² only) + J1–J4 + J5
 heatOpGatedWitness_jointContinuousOn_chartFree (carries all g-level: coefficient
 regularity + hgi/hChr + gate data + cutoff germ, all satisfiable). std-3 all 7, raw 0.
 NOT a₁=R/6. NEXT: J4-289 RDomEnvelope (the integral envelope → the Levi chain).
+
+## J4-289 (2026-08-06, 0645a065) — RDomEnvelope: the dominator side DONE (E1–E3) [AF]
+The Chapman–Kolmogorov identity (via the banked gaussDdim_conv_scaled) + the z-peak +
+the (s,z)-free u-envelope M·u^{k−1} + its integrability. E4 (measurability) + E5 (the
+engine instantiation: per-E bounds + the w-integrability bridge) = the wiring brick.
+std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-290 IterEEngineWiring.
