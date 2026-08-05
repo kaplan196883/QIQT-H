@@ -18073,4 +18073,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ContDomWindow.hContDom_discharged
 #print axioms QIQTH.ContDomWindow.f2Pack_concrete_v3
 
+-- ★★★ J4-248 (JetsGcUnification.lean, ns QIQTH.JetsGcUnification; map item [8]; indep
+-- build-verified): ★★ THE htriple SLOT IS 100% CONCRETE ★★. The three Gc-carriers
+-- assembled from the banked pieces (hcarTau via the primitive
+-- chartFieldAmp_hasDerivAt_tau + the value swap — the opaque-obtain trap fixed;
+-- hcarField via flowInverseJet_measurable_component + ampFieldPd + the hgate + hOffS;
+-- hcarField2 via flowInverseSecondJet_measurable_component at (i,j) AND (i,i) + the
+-- amp twins + the weakened hgate + hOffS2). The radii reconciled via the
+-- exists_forall_radius helper (finite min over Fin n / Fin n × Fin n).
+-- ★ tripleHEmeas_Gc_concrete: S1 for the concrete gated witness from GEOMETRY + radii
+-- + gi/christoffel-measurability ONLY — no chart-wall binder, no .choose, no capstone
+-- restatement. NO missing pieces found. Remaining map: [1] the v2' htriple re-thread,
+-- [3] sliver, [4] CConv, the walls W1-W3. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.JetsGcUnification.exists_forall_radius
+#print axioms QIQTH.JetsGcUnification.hcarTau_Gc_concrete
+#print axioms QIQTH.JetsGcUnification.hcarField_Gc_concrete
+#print axioms QIQTH.JetsGcUnification.hcarField2_Gc_concrete
+#print axioms QIQTH.JetsGcUnification.tripleHEmeas_Gc_concrete
+
 end QIQTH.AxiomAudit
