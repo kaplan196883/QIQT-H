@@ -1696,3 +1696,12 @@ certify the same witnesses satisfy the hgate HasDerivAt conjuncts. ChartRepFinal
 residue (3) discharged. Remaining to the v7 supplier payoff: the chart-VALUE Gc-reshape
 (kernel-freeze constrained — lighter assembly) + the amp field-pd composition (inputs
 now supplied). std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-240 AmpPdComposition.
+
+## J4-240 (2026-08-05, 365e4a93) — AmpPdComposition: ★★ all three residue classes = theorems ★★ [AF]
+The amp-pd wall closed (first + mixed second, via the once-proven abstract DQ engine —
+the whnf trap: never inline heavy defs into tendsto loops). ★ firstFieldPd_prod_
+measurable_Gc = the chart-wall-free conjunct-2 consumer (raw-chart hypothesis
+eliminated) + the FINAL supplier bundle. Only shape-work left: the literal ∃-bodies
+(kernel-freeze) — SIDESTEP identified: tripleHEmeas_Gc via tripleHEmeas_of_surface →
+the v2' htriple slot (no restatement). std-3 all 6, raw 0. NOT a₁=R/6.
+NEXT: J4-241 GcConsumerMirror (conjunct-3 + τ mirrors → tripleHEmeas_Gc → v8).
