@@ -2142,3 +2142,10 @@ plain kernel) + heatOpWitness_jointContinuousOn_geometry ((i)+(ii)+(iii) interna
 carries only coefficient regularity + hgi/hChr). RESIDUAL: the gated-witness bridge
 (cutoff × chart transport near 0) + the R-dom envelope. std-3 all 7, raw 0.
 NOT a₁=R/6. NEXT: J4-286 GatedWitnessHeatOpBridge.
+
+## J4-286 (2026-08-06, 58ac1b61) — GatedWitnessHeatOpBridge: the bridge; chart-composed [AF]
+The witness on-gate = radialCutoff·heatParametrix at the CHART IMAGE (not plain). L1
+def-collapse + L2a gate strip + L2b cutoff germ + the composed reduction + L3
+(E's continuity ← hBcont). THE ONE OPEN INPUT: hBcont = heatOp of heatParametrix∘(W 0 ·)
+joint continuity (parametrix jets ∘ the banked field-slot chart C²). std-3 all 5,
+raw 0. NOT a₁=R/6. NEXT: J4-287 ChartComposedHeatOp (hBcont via the chain rule).
