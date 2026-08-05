@@ -439,6 +439,7 @@ import QIQTH.AmpPdComposition
 import QIQTH.GcConsumerMirror
 import QIQTH.EnvelopeCoreDischarge
 import QIQTH.DerivConvDischarge
+import QIQTH.DataPileWitnessAudit
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

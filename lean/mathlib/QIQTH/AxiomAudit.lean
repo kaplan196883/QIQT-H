@@ -17990,4 +17990,31 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DerivConvDischarge.derivConv_of_data
 #print axioms QIQTH.DerivConvDischarge.core_of_v2prime_data_FULL
 
+-- ★★★ J4-244 (DataPileWitnessAudit.lean, ns QIQTH.DataPileWitnessAudit; the N=1-witness
+-- DATA audit; indep build-verified): the 8-family sweep of the concrete bank. NINE
+-- concrete discharges threaded: hCH_concrete + hsrc_concrete (← InftyRebaseCapstone
+-- from-geometry), hAmeas_concrete, hEzeroE_concrete, hEboundFull_from_geometry_
+-- existentialGate (3 reshapes noted: C(1+t)/τ≤t/existential gate), hchrMeas_concrete,
+-- concreteGate_carriers_concrete, timeWindow_concrete (T:=2t real witness),
+-- windowNbhd_concrete. ANCHOR CORRECTION: the live capstone is v7 (v6's hcar block =
+-- the proven-unsatisfiable conclusion-form). THE FINAL-DISTANCE MAP (ordered): [1]
+-- SMALL concrete-S v7 re-thread (kernel-freeze needs incremental set-based assembly);
+-- [2] MED the F2 inner (s,z)-measurability trio {hMeasFII,hFmeas,hF'meas}+hInnerCont
+-- (the widest unblock, NO structural wall — next brick); [3] MED sliver via
+-- hD2Hexpand; [4] MED CConv instances; [5] MED/LARGE the gate-compatibility meta-wall
+-- W3 (one common flow-ball gate across the existential providers); [6] LARGE the
+-- second-order Leibniz identity W2 (pdpdH/interchange trio); [7] LARGE the hAnear
+-- SHAPE-WRONG structural wall W1 (chart-image vs z Gaussian — AmplitudePackage
+-- BLOCKER); [8] SMALL/MED the supplier jets + Gc unification (hSurj carry). std-3 all
+-- 9. NOT a₁ = R/6.
+#print axioms QIQTH.DataPileWitnessAudit.hCH_concrete
+#print axioms QIQTH.DataPileWitnessAudit.hsrc_concrete
+#print axioms QIQTH.DataPileWitnessAudit.hAmeas_concrete
+#print axioms QIQTH.DataPileWitnessAudit.hEzeroE_concrete
+#print axioms QIQTH.DataPileWitnessAudit.hEboundFull_from_geometry_existentialGate
+#print axioms QIQTH.DataPileWitnessAudit.hchrMeas_concrete
+#print axioms QIQTH.DataPileWitnessAudit.concreteGate_carriers_concrete
+#print axioms QIQTH.DataPileWitnessAudit.timeWindow_concrete
+#print axioms QIQTH.DataPileWitnessAudit.windowNbhd_concrete
+
 end QIQTH.AxiomAudit
