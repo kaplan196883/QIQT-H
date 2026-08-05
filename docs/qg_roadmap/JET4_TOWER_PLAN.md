@@ -1801,3 +1801,10 @@ The master width-gap lemmas: gaussDdim_closed; gaussDdim_width_ratio_le (G_τ(w)
 y^k e^{−cy} ≤ k!/c^k; poly_absorb + k=0/1/2 + mixed instances; integrability
 re-exports. ⚠ lam not λ. std-3 all 10, raw 0. NOT a₁=R/6.
 NEXT: J4-251 InverseChartNormalJets (wide bricks 2+3).
+
+## J4-251 (2026-08-06, e6ce8514) — InverseChartNormalJets: wide bricks 2+3 [AF]
+★ The near-isometry WAS BANKED (InverseChartDisplacement.chartW0_nearIsometry — coarse
+c=1/2 + sharp (1±δ); the sign W₀ z ≈ −z; no base-side third jets needed). LANDED:
+chart_width_gate + the FixedFlowGateData record + .of_geometry + .gate + .poly_absorb
+(the wide hAnear/hD2Hexpand shapes ready). std-3 all 4, raw 0. NOT a₁=R/6.
+NEXT: J4-252 WideWitnessAmplitude (brick 5).
