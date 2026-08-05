@@ -18374,4 +18374,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WideA1AssemblyTrunc.wide_a1_R6_of_residue_inf_trunc
 #print axioms QIQTH.WideA1AssemblyTrunc.wide_a1_R6_both_slots_internal
 
+-- ## J4-264 (InterfaceArrowCensus): the inner-arrow CENSUS + hS0/hCH DISCHARGED.
+-- THE CENSUS (the gate (a,b,S) is provider-chosen/existential; arrows about the hidden
+-- S can only be met by provider EXPORTS or all-gate providers): hS0 BANKED→DISCHARGED
+-- (GateOpennessExport.gatedWitnessN1_package_open ∘ hEboundW_widen) · hCH
+-- BANKED→DISCHARGED (InftyRebaseCapstone.hCH_discharge_from_geometry; costs hgiC+hgpos)
+-- · hDuhamel GENUINE (endpointData_of_banked is per-S) · hInter GENUINE (per-S) ·
+-- hDConv PARTIAL (hDConv_from_banked: per-S + needs hDaLimLU) · hCConv PARTIAL
+-- (hCConv_discharged_from_data: per-S + 5 facade bundles) · S1 ∀-gate PARTIAL
+-- (per-(S,a,b) suppliers banked; no pure-geometry ∀-provider; the ∀ cannot weaken to
+-- the unnameable provider instance). LANDED: hEboundW_wide_from_geometry_open (the
+-- residual provider strengthened with the two gate-centre exports) +
+-- wide_a1_R6_interface_discharged (the shortest honest capstone: J4-263's list + hgiC
+-- + hgpos, the implication SHORTER by hS0 and hCH; surviving antecedents
+-- hDuhamel/hInter/hDConv/hCConv). std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.InterfaceArrowCensus.hEboundW_wide_from_geometry_open
+#print axioms QIQTH.InterfaceArrowCensus.wide_a1_R6_interface_discharged
+
 end QIQTH.AxiomAudit
