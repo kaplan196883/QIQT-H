@@ -448,6 +448,7 @@ import QIQTH.SliverCConvBatch
 import QIQTH.GaussianWidthTransfer
 import QIQTH.InverseChartNormalJets
 import QIQTH.WideWitnessAmplitude
+import QIQTH.WideSliverBoundary
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

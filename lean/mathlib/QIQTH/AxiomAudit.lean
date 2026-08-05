@@ -18164,4 +18164,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WideWitnessAmplitude.WideAmplitudeData.second_domination
 #print axioms QIQTH.WideWitnessAmplitude.WideAmplitudePackage.of_data
 
+-- ★★★ J4-253 (WideSliverBoundary.lean, ns QIQTH.WideSliverBoundary; wide brick 6;
+-- indep build-verified): THE CONVERGENCE ANALYSIS — the crude τ⁻¹ domination route
+-- GENUINELY DIVERGES on the strip (∫t⁻¹ = ∞; confirmed vs the banked narrow proofs:
+-- the finite √ε comes from the three-term MOMENT structure, not a τ⁻¹ sup) — the
+-- moment-aware route wins, per-coordinate √ε amplitudes carried as input (their
+-- derivation = the wide moment brick via 7-10). LANDED: wide_sliver_sum_bound(_U)
+-- (the √ε rate at the wide width, mirroring the narrow plumbing);
+-- wide_second_inner_slice_bound (the honest per-slice τ⁻¹ building block);
+-- gaussDdim_wide_approx_identity(_family) (the wide-width boundary/hAnear-analogue via
+-- wide_width_tendsto ∘ the banked approximate identity). Brick-11 needs: the sliver
+-- hbnd carry (wide witness_sliver2 analogue), the amplitude continuity for the
+-- boundary f, the globalization of the second domination (bricks 7/8 trichotomy).
+-- std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.WideSliverBoundary.wide_width_tendsto
+#print axioms QIQTH.WideSliverBoundary.gaussDdim_wide_approx_identity
+#print axioms QIQTH.WideSliverBoundary.gaussDdim_wide_approx_identity_family
+#print axioms QIQTH.WideSliverBoundary.wide_second_inner_slice_bound
+#print axioms QIQTH.WideSliverBoundary.wide_sliver_sum_bound
+#print axioms QIQTH.WideSliverBoundary.wide_sliver_sum_bound_U
+
 end QIQTH.AxiomAudit
