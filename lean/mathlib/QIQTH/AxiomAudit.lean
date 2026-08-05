@@ -18562,4 +18562,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TerminalVelC2.terminalVel0_contDiffAt_two
 #print axioms QIQTH.TerminalVelC2.baseVaryingIFTPackage_unconditional
 
+-- ## J4-275 (FixedFChartImageAI): ★ THE PLUG — 12 inputs → 5 carries ★
+-- chartImage_measurableSet_of_bundle (hΩmeas DISCHARGED via Lusin–Souslin:
+-- ContinuousOn.measurableEmbedding on the injective differentiable image — the
+-- ConcreteGateInstantiation pattern) + chartImage_approx_identity_of_amp (the J4-274
+-- bundle OBTAINED and fed into the J4-271 conditional capstone: (ρ,V,f') now PRODUCED;
+-- M1–M4 + hΩnhds + hΩmeas discharged). HONEST CARRIES (5): hGgate + hSupp (τ-uniform
+-- off-ball vanishing — ⚠ RADIUS MISMATCH intel: the witness gate ρ_S is fixed
+-- independently of the CoV ball ρ; if ρ_S > ρ the honest fix = the ball/annulus split
+-- already in WideBoundaryLimDischarge) + the Layer-C trio hmeas/hbound/hlocal — ⚠ the
+-- trio needs BASE-SLOT amplitude facts (chartFieldAmp τ (V w) 0 as a function of the
+-- BASE, jointly in τ); the whole banked amplitude bank is FIELD-slot — the J4-271
+-- orientation obstruction resurfacing for the amplitude (the van-Vleck symmetry
+-- Δ(p,q)=Δ(q,p) is the candidate dividend). std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.FixedFChartImageAI.chartImage_measurableSet_of_bundle
+#print axioms QIQTH.FixedFChartImageAI.chartImage_approx_identity_of_amp
+
 end QIQTH.AxiomAudit
