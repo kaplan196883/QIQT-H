@@ -1889,3 +1889,15 @@ NOT produced (firewall). Obstruction = τ-range/affine coefficient, NOT the gate
 FIX HYPOTHESIS: a₁=R/6 is a t→0⁺ asymptotic — a small-time truncation (t≤T₀) makes
 the constant C·(1+T₀) fixed. std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-262 TruncatedHIntRethread (the small-time truncation).
+
+## J4-262 (2026-08-05, 28051a6b) — TruncatedHIntRethread: ★ THE AFFINE OBSTRUCTION DISSOLVED ★ [AF]
+C-ROUTE CONFIRMED: every IterConvIntegrableW consumer touches only the OUTER conclusion
+time (WideA1Assembly:131 → RestrictedEboundW, outer-t only) ⟹ the J4-261 all-τ
+obstruction was a τ-range artifact. IterConvIntegrableWOn (t≤T₀ family) +
+eboundW_affine_to_fixed_trunc (affine C·(1+τ) → fixed C·(1+T₀)) + the truncated
+producer + iterConvIntegrableWOn_of_affine_trunc + iterConvW_bound_le_trunc +
+leviSeries_summableW_le_trunc (the capstone's exact hInt consumption, drop-in proven) +
+levi_converges_from_affine_trunc (END-TO-END: affine geometry bound ⟹ Neumann
+convergence on 0<t≤T₀). RESIDUAL: the capstone rethread (hInt binder retype + the
+one-line swap) not yet materialized. std-3 all 6, raw 0. NOT a₁=R/6.
+NEXT: J4-263 WideA1AssemblyTrunc (the rethreaded capstone + hInt internal).
