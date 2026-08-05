@@ -17854,4 +17854,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OnGateJets.hcarTau_hasDeriv_concrete
 #print axioms QIQTH.OnGateJets.concreteGate_carriers_discharged_v3
 
+-- ★★★ J4-237 (Field2NbhdReshape.lean, ns QIQTH.Field2NbhdReshape; the hcarField2
+-- neighbourhood reshape; indep build-verified): the global-y over-strong quantifier
+-- SURGICALLY WEAKENED (the third instance of the J4-231/232 disease, fixed by the same
+-- pattern). Minimal-quantifier finding: the mixed identity's only global-y uses were
+-- three funext steps — replaced by EventuallyEq on the open gate + pd_congr/
+-- PdiffAt_congr_nhds; the j-families need ∀ y ∈ S z, everything else at p only.
+-- LANDED: gaussComp(_amp)_pd_pd_mixed_nbhd + witnessMixed_gate_eq_nbhd +
+-- witnessMixed2_eq_gatedMixed2RepProdS_nbhd (the rep UNCHANGED) + the v5 measurability
+-- shapes + chartFieldSecondJet_hasDerivAt (general-p/(i,j) port) + ★
+-- hcarField2_hgate_concrete (SATISFIED at the concrete gate) + the bundle
+-- concreteGate_carriers_discharged_v4. ⟹ EVERY derivative/jet/on-gate/off-gate
+-- conjunct of ALL THREE suppliers is now satisfiable at the concrete flow-ball gate;
+-- the ONLY remaining v7 supplier obligation = the hChartRep measurability block (the
+-- .choose wall). std-3 all 9. NOT a₁ = R/6.
+#print axioms QIQTH.Field2NbhdReshape.gaussComp_pd_pd_mixed_nbhd
+#print axioms QIQTH.Field2NbhdReshape.gaussComp_amp_pd_pd_mixed_nbhd
+#print axioms QIQTH.Field2NbhdReshape.witnessMixed_gate_eq_nbhd
+#print axioms QIQTH.Field2NbhdReshape.witnessMixed2_eq_gatedMixed2RepProdS_nbhd
+#print axioms QIQTH.Field2NbhdReshape.secondFieldPd_prod_measurable_v5
+#print axioms QIQTH.Field2NbhdReshape.secondFieldPd_prod_stronglyMeasurable_v5
+#print axioms QIQTH.Field2NbhdReshape.chartFieldSecondJet_hasDerivAt
+#print axioms QIQTH.Field2NbhdReshape.hcarField2_hgate_concrete
+#print axioms QIQTH.Field2NbhdReshape.concreteGate_carriers_discharged_v4
+
 end QIQTH.AxiomAudit

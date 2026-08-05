@@ -432,6 +432,7 @@ import QIQTH.AssemblyV7Rethread
 import QIQTH.ConcreteGateInstantiation
 import QIQTH.OffSVanishing
 import QIQTH.OnGateJets
+import QIQTH.Field2NbhdReshape
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
