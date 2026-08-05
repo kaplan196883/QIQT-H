@@ -1645,3 +1645,11 @@ Ladder: 1 concrete-S (MED-LARGE; hKSmeas = product-lift via the banked embedding
 2 Gc+S opt → 3 facades (LARGE) → 4 hDConv pile (LARGE) → 5 R2 trio (LARGE) → 6
 core/envelopes (MED) → 7 a1_R6_of_geometry (MED). std-3, raw 0. NOT a₁=R/6.
 NEXT: J4-234 ConcreteGateInstantiation.
+
+## J4-234 (2026-08-05, 8e028690) — ConcreteGateInstantiation: step 1 partial [AF]
+hKSmeas_concrete (product-lift via the open-ball Lusin–Souslin embedding, rebuilt
+parametrically — no ρ carry) + hchrMeas + hS0 + the discharge bundle. HONEST: the full
+v7-restatement FREEZES the kernel (~130-binder choose-heavy defeq — never materialize
+the full capstone restatement again); hOffS lives INSIDE the hcar existentials (step 2
+= the radialCutoff support-closure brick); hgiMeas = genuine input (no gi regularity
+carried). std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-235 OffSVanishing.
