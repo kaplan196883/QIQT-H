@@ -1759,3 +1759,10 @@ gaussDdim_window_le (the compact-window dominator) + hContDom_of_gaussDom +
 hContDom_discharged (the honest shape: joint (s,z) continuity is FALSE — the slice
 hmeas/hcont carried). f2Pack_concrete_v3 = all three J4-245 carries internal; residue
 = v2'-level data. std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-248 JetsGcUnification (map [8]).
+
+## J4-248 (2026-08-05, d6891133) — JetsGcUnification: ★★ the htriple slot 100% CONCRETE ★★ [AF]
+The three Gc-carriers assembled internal (hcarTau/hcarField/hcarField2 from the banked
+jets/twins/agreements; exists_forall_radius min-reconciliation; the opaque-obtain trap
+fixed). ★ tripleHEmeas_Gc_concrete = S1 from GEOMETRY + radii + measurability ONLY.
+NO missing pieces. Map remaining: [1] the v2' re-thread, [3] sliver, [4] CConv, walls.
+std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-249 SliverCConvBatch ([3]+[4] recon).
