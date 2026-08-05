@@ -2118,3 +2118,11 @@ the M-test hterm feed). RESIDUAL: (R-base) heatOp-witness joint continuity (one
 operator past the banked in-gate kernel continuity) + (R-dom) the post-rescale
 dominations (from iterConvW_bound, t₁>0). std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-283 HeatOpWitnessContinuity (R-base + R-dom → Levi continuity concrete).
+
+## J4-283 (2026-08-06, 29f53406) — HeatOpWitnessContinuity: (R-base) reduced + (R-dom) pointwise [AF]
+The congruence reduction (identity + explicit-F continuity) + the deriv−laplaceBeltrami
+parts decomposition + the COMPOSE into the ALL skeleton + the pointwise integrand
+dominations. REMAINING: (R-base) = the ∂_τ/Δ-of-heatParametrix continuities on τ>0 +
+the hIdent discharge (htransport on a gate ball); (R-dom) = the integral-envelope
+construction. std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-284 ParametrixPartsContinuity ((i) ∂_τ + (ii) Δ + (iii) hIdent).
