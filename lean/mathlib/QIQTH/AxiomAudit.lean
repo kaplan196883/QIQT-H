@@ -18594,4 +18594,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotAmplitude.baseSlotAmp_joint_limit
 #print axioms QIQTH.BaseSlotAmplitude.baseSlotAmp_centreValue
 
+-- ## J4-277 (FixedFTrioDischarge): ★ hAmpCentre PROVEN + hmeas DISCHARGED — 5 → 4 ★
+-- baseChartAmp_centre_eq_one: chartFieldAmp 0 0 0 = 1 from 0∈K, 0<a<b, det g 0 = 1
+-- (radialCutoff_eq_one + vanVleck_zero + transportCoeff_zero) — the J4-276 labelled
+-- normalization is now a THEOREM. chartImage_trio_hmeas: the C3 measurability member
+-- FULLY discharged (measurable_extend over the Lusin–Souslin embedding — needs NO
+-- V-continuity). chartImage_approx_identity_v2: the fixed-f W1 capstone carrying FOUR
+-- inputs (hGgate + hSupp + hbound + hlocal); hΩmeas/hmeas internal, (ρ,V,f') produced.
+-- HONEST RESIDUAL: hbound/hlocal need the ENRICHED partial-homeo bundle (V-continuity
+-- + sub-ball open images so a compact closedBall sits inside the continuity region) —
+-- the J4-274 bundle exposes f' only pointwise. ⚠ trap logged: ContinuousOn.comp with
+-- an ascribed lambda over the .choose chart = whnf blowup; replicate the body at
+-- fixed τ instead. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.FixedFTrioDischarge.baseChartAmp_centre_eq_one
+#print axioms QIQTH.FixedFTrioDischarge.bundleV_mapsTo_ball
+#print axioms QIQTH.FixedFTrioDischarge.subtypeIntegrand_measurable
+#print axioms QIQTH.FixedFTrioDischarge.chartImage_trio_hmeas
+#print axioms QIQTH.FixedFTrioDischarge.chartImage_approx_identity_v2
+
 end QIQTH.AxiomAudit
