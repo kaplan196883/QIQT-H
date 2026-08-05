@@ -18259,4 +18259,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FixedGateSourceProviders.fixedGateWideDominations
 #print axioms QIQTH.FixedGateSourceProviders.fixedGateProviders_bundle
 
+-- ★★★ J4-258 (WideA1Assembly.lean, ns QIQTH.WideA1Assembly; wide brick 11 — THE WIDE
+-- CAPSTONE; indep build-verified): ★★ SOL #4 CONFIRMED AT CODE LEVEL ★★ — the
+-- exact-width boundary/amplitude forms appear NOWHERE in the conclusion chain (grep
+-- zero hits in OmegaHsrcC4cAudit); the LEADING term (heatKernel1D^n·(1+Ric/6·t+...))
+-- = hParam ∘ hHeat, both width-INDEPENDENT (the DeWitt cancellation); the ONLY width-2
+-- hardcoding = the single neumann_summable_alpha0_width2_le call feeding the residual
+-- summability — the engine leviSeries_summableW_le is fully width-parametric ⟹ the
+-- MECHANICAL swap at free κ>0. LANDED: wide_trueKernel_diagonal_..._infty +
+-- wide_a1_R6_of_residue_inf + ★ wide_a1_R6_of_residue_inf_v5 (the SAME conclusion,
+-- the residual domination at ANY width κ — the wide bank feeds at κ := lam via
+-- baseKernelW lam 0 τ = gaussDdim(lam·τ)). THE POST-WIDE MAP: [1] the residual
+-- assembly wall (heatOp = ∂_τH − Δ_gH domination — ∂_τ + Christoffel + assembly;
+-- LARGE, shared with the narrow route); [2] the p=0→(p,q) uniformization (MED);
+-- [3-4] thin width adapters (SMALL); [5] the CConv bundle instantiation (MED).
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.WideA1Assembly.wide_trueKernel_diagonal_a1_eq_R6_residual_restricted_C2_infty
+#print axioms QIQTH.WideA1Assembly.wide_a1_R6_of_residue_inf
+#print axioms QIQTH.WideA1Assembly.wide_a1_R6_of_residue_inf_v5
+
 end QIQTH.AxiomAudit
