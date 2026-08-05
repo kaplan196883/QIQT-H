@@ -18646,4 +18646,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateAnnulusSplit.hGgate_of_gate_activation
 #print axioms QIQTH.GateAnnulusSplit.chartImage_approx_identity_final
 
+-- ## J4-280 (MovingFBoundaryLim): ★ hBoundaryLim W1-FREE (modulo hMovingCorr) ★
+-- epsSeq_tendsto_nhdsWithin + tendsto_comp_epsSeq (SEQ) + frozenBoundary_tendsto
+-- (the FROZEN 2nd term: ∫ Wit(ε_m)·F t · 0 → F t 0 0 — the fixed-f AI at the frozen
+-- Levi slice, NO hAnear) + hBoundaryLim_concrete (the truncated-Duhamel boundary
+-- member, conditional on ONE labelled carry hMovingCorr = the moving-f correction → 0;
+-- satisfiable via uniform continuity on compact + bounded witness mass + the annulus
+-- tail — the assembly is the follow-on brick). F-FACT MAP: hf_meas/hf_bdd carried-
+-- satisfiable (banked providers named); hf_cont genuinely unbanked (Levi continuity
+-- at the gate). ★ THE NEXT WALL (per the stretch recon): hDerivConv needs the
+-- LOC-UNIF boundary limit (tendstoLocallyUniformlyOn), not the pointwise one — the
+-- hDuhamel/hDConv export stays W1-blocked through hDerivConv until the AI is promoted
+-- to loc-unif in t. std-3 all 3+. NOT a₁ = R/6.
+#print axioms QIQTH.MovingFBoundaryLim.epsSeq_tendsto_nhdsWithin
+#print axioms QIQTH.MovingFBoundaryLim.tendsto_comp_epsSeq
+#print axioms QIQTH.MovingFBoundaryLim.frozenBoundary_tendsto
+#print axioms QIQTH.MovingFBoundaryLim.hBoundaryLim_concrete
+
 end QIQTH.AxiomAudit
