@@ -18130,4 +18130,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianWidthTransfer.gaussDdim_width_integrable
 #print axioms QIQTH.GaussianWidthTransfer.gaussDdim_width_mul_integrable
 
+-- ★★★ J4-251 (InverseChartNormalJets.lean, ns QIQTH.InverseChartNormalJets; wide
+-- bricks 2+3; indep build-verified): ★ THE NEAR-ISOMETRY WAS ALREADY BANKED ★
+-- (don't-under-credit pays again): InverseChartDisplacement.chartW0_nearIsometry
+-- (coarse c=1/2 gate + the sharp (1±δ) asymptotic), chartW0_displacement
+-- (‖W₀ z + z‖ ≤ C‖z‖² — the SIGN: W₀ z ≈ −z), chartW0_rncRadialSq_error. NO base-side
+-- third-jet machinery needed; sup-vs-Euclidean a non-issue (all in rncRadialSq).
+-- LANDED: chart_width_gate ((η,lam) = (1−c, 1/c+1) admissible from ANY coarse c>0);
+-- the FixedFlowGateData record (a<b<r + η/lam/gap + the gate) + .of_geometry
+-- constructor (radii a:=r/3, b:=2r/3); .gate = the exact gaussDdim_width_ratio_le
+-- hypothesis; .poly_absorb = the capstone plug into gaussDdim_poly_absorb (the wide
+-- hAnear/hD2Hexpand shapes ready for brick 5). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.InverseChartNormalJets.chart_width_gate
+#print axioms QIQTH.InverseChartNormalJets.FixedFlowGateData.of_geometry
+#print axioms QIQTH.InverseChartNormalJets.FixedFlowGateData.gate
+#print axioms QIQTH.InverseChartNormalJets.FixedFlowGateData.poly_absorb
+
 end QIQTH.AxiomAudit
