@@ -18578,4 +18578,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FixedFChartImageAI.chartImage_measurableSet_of_bundle
 #print axioms QIQTH.FixedFChartImageAI.chartImage_approx_identity_of_amp
 
+-- ## J4-276 (BaseSlotAmplitude): ★ THE BASE-SLOT AMPLITUDE WALL RESOLVED (route iii) ★
+-- The amplitude factors ENTIRELY through Wbv (radialCutoff(Wbv z)·vanVleck(Wbv z)^{-½}
+-- ·(u₀+u₁τ)(Wbv z)) ⟹ base-continuity comes from the CoV bundle's M1 slot — no
+-- symmetry/reversal needed. baseSlotAmp_continuousOn (joint (τ,z) on s ×ˢ U, cond only
+-- on hWbv-continuity) + baseSlotAmp_bound (the compact uniform bound — discharges the
+-- base-slot content of the J4-275 hbound carry) + baseSlotAmp_joint_limit (the
+-- (τ,z)→(0⁺,0) limit to A₀ = chartFieldAmp 0 0 0 — the hlocal amplitude ingredient) +
+-- baseSlotAmp_centreValue (A₀ = radialCutoff a b 0·vanVleck g 0^{-½}·u₀ 0; = 1 once
+-- the labelled RNC normalization is supplied — carried, not proved). RESIDUAL: the
+-- V/det/f wrapper composition (v2 capstone) + the (B) annulus split. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.BaseSlotAmplitude.baseSlotAmp_continuousOn
+#print axioms QIQTH.BaseSlotAmplitude.baseSlotAmp_bound
+#print axioms QIQTH.BaseSlotAmplitude.baseSlotAmp_joint_limit
+#print axioms QIQTH.BaseSlotAmplitude.baseSlotAmp_centreValue
+
 end QIQTH.AxiomAudit

@@ -471,6 +471,7 @@ import QIQTH.BaseVaryingIFTPackage
 import QIQTH.GeodesicReversalRoute
 import QIQTH.TerminalVelC2
 import QIQTH.FixedFChartImageAI
+import QIQTH.BaseSlotAmplitude
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
