@@ -17940,4 +17940,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmpPdComposition.firstFieldPd_prod_measurable_Gc
 #print axioms QIQTH.AmpPdComposition.concreteGate_ampPd_Gc_supplier_FINAL
 
+-- ★★★ J4-241 (GcConsumerMirror.lean, ns QIQTH.GcConsumerMirror; the Gc mirrors + the
+-- S1 sidestep; indep build-verified): ★★ THE htriple SUPPLIER SIDE IS CLOSED via the
+-- Gc route ★★. secondFieldPd_prod_measurable_Gc (conjunct-3 mirror; the v5 identity →
+-- indicator agreement → Gc-body algebra) + tauDeriv_prod_measurable_Gc (conjunct-1;
+-- value swaps only) + ★ tripleHEmeas_Gc: S1 AS A THEOREM at the concrete gate —
+-- chart-wall-free, satisfiable Gc-carriers (conditional S-membership; the raw
+-- off-image .choose measurability NEVER appears), assembled via tripleHEmeas_of_surface
+-- with J4-240's conjunct-2 consumer. THE PLUG TYPE-CHECKED: taking hC := hChr, the
+-- conclusion IS a1_R6_assembled_v2''s htriple binder type verbatim — v8 = the
+-- mechanical v2'-copy with the htriple binder block swapped (same shape as the
+-- already-built v6; deferred, no new math). Remaining: (1) the routine concrete
+-- ∃-supplier bundle for the Gc-carriers (all banked piecewise), (2) the v2' analytic
+-- a₁=R/6 residue (hEboundFull/core/hCH/facades/hDConv/R2/envelopes) — the genuine
+-- curvature analytics, orthogonal to the closed supplier story. std-3 all 3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.GcConsumerMirror.secondFieldPd_prod_measurable_Gc
+#print axioms QIQTH.GcConsumerMirror.tauDeriv_prod_measurable_Gc
+#print axioms QIQTH.GcConsumerMirror.tripleHEmeas_Gc
+
 end QIQTH.AxiomAudit
