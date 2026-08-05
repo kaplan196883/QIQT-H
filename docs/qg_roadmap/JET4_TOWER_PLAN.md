@@ -2008,3 +2008,28 @@ chartImage_approx_identity_conditional (the fixed-f W1 member conditional on: (a
 Wbv CoV bundle, (b) the JOINT amplitude limit, (c) A₀(0)=1). std-3 all 3, raw 0.
 NOT a₁=R/6. NEXT: J4-272 BaseVaryingIFTPackage (gap (a); InverseChartNormalJets is
 Wbv-oriented — reuse; UniformFlowLocalInverse.basepointChart_exists — check its chart).
+
+## J4-272 (2026-08-06, f9a607e8) — BaseVaryingIFTPackage: gap (a) → ONE input [AF]
+baseVaryingChart_hasFDerivAt_center (UNCONDITIONAL: D Wbv(0) = −id from the banked
+displacement bound) + baseVaryingIFTPackage (the full M1–M4 + image-nbhd bundle,
+conditional ONLY on hbaseC2 = base-slot ContDiffAt 2 at 0 — the recognized J3 blocker;
+M2/M3 proven, M4 det(−id)=(−1)ⁿ). (c) A₀(0)=1 deferred (u₀(0)=1 is a carried DeWitt
+input, not a bare lemma). std-3 both, raw 0. NOT a₁=R/6.
+
+## ★ SOL CONSULT #6 (2026-08-06) — hbaseC2 via GEODESIC REVERSAL (ranked #1)
+THE IDENTITY: U z 0 = − terminalVelocity 0 (U 0 z) eventually at 0 (reverse the
+geodesic from (0, U 0 z) ending at (z, u): start (z, −u) ends at 0 ⟹ left-inverse at
+base z gives U z 0 = −u). NEEDS ONLY: (1) the banked FIELD-slot C² of U 0 · (chart at
+base 0), (2) fixed-base C² (or C¹ after refactor) of terminalVelocity 0 in the initial
+velocity (the velocity projection of the phase flow — MUCH weaker than joint base
+dependence; the same ODE machinery as expMap_contDiffOn_four), (3) a reusable
+time-reversal lemma (flow 1 p v = (q,u) ⟹ flow 1 q (−u) = (p,−v), by ODE uniqueness),
+(4) gate management (4 eventual memberships from continuity+compact-uniform radii).
+Transfer: EventuallyEq.contDiffAt_iff / ContDiffAt.congr_of_eventuallyEq. AVOIDS the
+.choose coherence AND joint base regularity entirely. ⚠ ALSO: C² is likely OVERKILL —
+M1–M4 need only local C¹ (+ the strict derivative at 0 from C¹); consider refactoring
+the bundle to hbaseC1/hbaseC1Nhd. Rank 2 = the C¹ refactor; rank 3 = doubled-map IFT
+(needs joint C² — the (J)-tower gives pointwise first-order only, NOT joint); rank 4 =
+strict+two-point (INSUFFICIENT for M1 — no derivative field); rank 5 = carry hbaseC2
+labelled (honest fallback, true of the real exp chart). Mathlib joint C^k ODE-flow
+dependence: NOT usable off-the-shelf — don't plan around it.
