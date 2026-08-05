@@ -18278,4 +18278,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WideA1Assembly.wide_a1_R6_of_residue_inf
 #print axioms QIQTH.WideA1Assembly.wide_a1_R6_of_residue_inf_v5
 
+-- ★★★ J4-259 (WidthAdapters.lean, ns QIQTH.WidthAdapters; post-wide items [3]+[4];
+-- indep build-verified): the thin width adapters DONE. baseKernelW_zero_diag (the
+-- bridge — baseKernelW_zero_apply existed; + gaussDdim evenness);
+-- iterConvIntegrableW_of_bound_{continuous,baseMeas}_wide (the width-2 producers
+-- replicated at free κ — the model producer was already parametric, the carriers
+-- width-free) ⟹ the capstone hInt slot at any κ. eboundW_le_diag_of_gaussDdim (the
+-- abstract slot glue) + witness_zeroth_baseKernelW_diag (the LIVE bank composed
+-- end-to-end into the exact baseKernelW slot shape at p=0). HONEST: hEboundW_le
+-- genuinely waits on [1] (the residual assembly — the bank bounds H_G and D²H_G, NOT
+-- heatOp = ∂_τH − Δ_gH; assemble ∂_τ + the gⁱʲ∂∂ − Γ∂ contraction) and [2] (p=0 →
+-- ∀(p,q)). The width machinery no longer gates anything. std-3 all 7.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.WidthAdapters.heatKernel1D_neg
+#print axioms QIQTH.WidthAdapters.gaussDdim_neg
+#print axioms QIQTH.WidthAdapters.baseKernelW_zero_diag
+#print axioms QIQTH.WidthAdapters.iterConvIntegrableW_of_bound_continuous_wide
+#print axioms QIQTH.WidthAdapters.iterConvIntegrableW_of_bound_baseMeas_wide
+#print axioms QIQTH.WidthAdapters.eboundW_le_diag_of_gaussDdim
+#print axioms QIQTH.WidthAdapters.witness_zeroth_baseKernelW_diag
+
 end QIQTH.AxiomAudit
