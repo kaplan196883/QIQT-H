@@ -2102,3 +2102,11 @@ via compact uniform continuity + witness mass + annulus tail). F-facts: hf_meas/
 satisfiable-banked; hf_cont unbanked (Levi continuity). NEXT WALL: hDerivConv wants
 the LOC-UNIF boundary limit. std-3 all 4, raw 0. NOT a₁=R/6.
 NEXT: J4-281 MovingCorrAssembly (Levi joint continuity via M-test + hMovingCorr + hf_cont).
+
+## J4-281 (2026-08-06, 9ae45c09) — MovingCorrAssembly: M-test packaging + mass bound [AF]
+The Levi M-test lemmas (z-only + joint + the ContinuousAt-0 hf_cont shape; genuine
+data = termwise iterE continuity + summable envelope) + the witness-mass lemmas
+(∫|Wit(ε_m)| ≤ CW). hBoundaryLim_unconditional withheld (firewall). ISOLATED RESIDUAL:
+(a) termwise iterE joint continuity (parametric convolution continuity) + (b) the
+hMovingCorr recombination. std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-282 IterEContinuity (induction: E joint continuity base + heatConv step).
