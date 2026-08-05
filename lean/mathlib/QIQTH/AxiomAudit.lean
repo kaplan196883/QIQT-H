@@ -17796,4 +17796,22 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6 — conditional on the (all-satisfiable) surface.
 #print axioms QIQTH.AssemblyV7Rethread.a1_R6_assembled_v7
 
+-- ★★★ J4-234 (ConcreteGateInstantiation.lean, ns QIQTH.ConcreteGateInstantiation;
+-- ladder step 1; indep build-verified): the concrete-gate carrier discharges.
+-- hKSmeas_concrete — the PRODUCT-lift joint gate measurability at S = φ_·''ball 0 c
+-- for any 0<c<δ₀ (δ₀ = min germ-radius flow-radius): the Lusin–Souslin embedding
+-- REBUILT parametrically on the OPEN ball K ×ˢ ball 0 c (no closedBall/ρ carry
+-- needed) ⟹ the graph Borel via measurableSet_image + the measurable swap.
+-- hchrMeas_concrete (← hChr) + hS0_concrete (← uniformFlowExp_zero) + the bundle
+-- concreteGate_carriers_discharged (the three v7 binders provable at the concrete
+-- gate). HONEST: the full a1_R6_concreteGate restatement deterministically FREEZES the
+-- kernel (choose-heavy 130-binder defeq — reproducible; not heartbeats) — the bundle
+-- carries the identical content; the v7 wiring is a mechanical S-substitution needing
+-- a lighter elaboration strategy. hOffS (inside the hcar existentials) + hgiMeas (no
+-- gi regularity carried) + the jet suppliers stay carried. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ConcreteGateInstantiation.hKSmeas_concrete
+#print axioms QIQTH.ConcreteGateInstantiation.hchrMeas_concrete
+#print axioms QIQTH.ConcreteGateInstantiation.hS0_concrete
+#print axioms QIQTH.ConcreteGateInstantiation.concreteGate_carriers_discharged
+
 end QIQTH.AxiomAudit

@@ -429,6 +429,7 @@ import QIQTH.ImageSupportDischarge
 import QIQTH.HgateSatAudit
 import QIQTH.GatedRepSFix
 import QIQTH.AssemblyV7Rethread
+import QIQTH.ConcreteGateInstantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
