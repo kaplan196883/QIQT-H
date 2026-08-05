@@ -18489,4 +18489,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartIFTPackage.chartImage_mem_nhds
 #print axioms QIQTH.ChartIFTPackage.chart_gaussian_change_variables_concrete
 
+-- ## J4-271 (ChartImageAIConcrete): Layer A concrete + the A∘B∘C conditional capstone.
+-- ★★ ORIENTATION VERDICT (load-bearing): "W₀" is OVERLOADED — the factorization/wide
+-- pipeline uses the BASE-varying chart Wbv : z ↦ uniformInverseChart g gi hC hK z 0,
+-- but the J4-270 IFT package is for the FIELD-varying Wfv : z ↦ uniformInverseChart 0 z;
+-- they agree only at 0 ⟹ the J4-270 bundle CANNOT plug into the boundary integral.
+-- LANDED: boundary_integral_eq_gate_integral (LAYER A, CONCRETE: indicator collapse +
+-- on-gate factorization; off-gate vanishing is EVERYWHERE not a.e.) +
+-- boundary_integral_eq_chartImage_integral (A∘B at an abstract Wbv CoV bundle) +
+-- chartImage_approx_identity_conditional (the A∘B∘C capstone: the fixed-f W1
+-- limit-value member CONDITIONAL on the Wbv bundle + hΩ + the Layer-C trio).
+-- MISSING (the honest gap list): (a) the BASE-VARYING CoV bundle M1–M4 for Wbv
+-- (⚠ InverseChartNormalJets/the width-gate bank ARE Wbv-oriented — grep before
+-- building anew); (b) the JOINT (τ,z)→(0⁺,0) amplitude limit (only per-z C² at 0
+-- banked); (c) the centre normalization A₀(0)=1 (radialCutoff·vanVleck^{-½}·u₀ at 0).
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.ChartImageAIConcrete.boundary_integral_eq_gate_integral
+#print axioms QIQTH.ChartImageAIConcrete.boundary_integral_eq_chartImage_integral
+#print axioms QIQTH.ChartImageAIConcrete.chartImage_approx_identity_conditional
+
 end QIQTH.AxiomAudit
