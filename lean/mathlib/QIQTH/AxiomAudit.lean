@@ -18470,4 +18470,23 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6.
 #print axioms QIQTH.ChartGaussianChangeVar.chart_gaussian_change_variables
 
+-- ## J4-270 (ChartIFTPackage): ★ M1–M4 ALL PROVEN at the real chart ★
+-- chartIFTPackage (only carried inputs = the geometry (hC,hK,h0K) the bank already
+-- carries): ∃ρ>0 ∃V f', the FULL CoV data bundle on ball 0 ρ for
+-- W₀ = uniformInverseChart g gi hC hK 0 — M1 within-derivative field (C² nbhd via
+-- ContDiffAt.eventually), M2 InjOn (Φ.injOn, ContDiffAt.toOpenPartialHomeomorph —
+-- PROVEN not carried), M3 left inverse V = Φ.symm (PROVEN), M4 |det|>0 (det
+-- continuity at det Id = 1) — PLUS the image-neighbourhood glue. The decisive centre
+-- facts were BANKED (ChartJetBounds: chartField_contDiffAt_center /
+-- centerValue_base0 / fderiv_center = Id; the IFT incantation mirrored from
+-- UniformFlowLocalInverse.basepointChart_exists). chartImage_mem_nhds (the Layer-C
+-- Ω∈𝓝0 glue) + chart_gaussian_change_variables_concrete (the concrete Layer B).
+-- ⚠ ORIENTATION FLAG: this is the base-0 field-slot chart; InverseChartNormalJets'
+-- width gate uses the base-varying orientation — reconcile at the W1 assembly.
+-- RESIDUAL: Layer A (gate rewrite) + the moving-integrand hmeas/hbound/hlocal.
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.ChartIFTPackage.chartIFTPackage
+#print axioms QIQTH.ChartIFTPackage.chartImage_mem_nhds
+#print axioms QIQTH.ChartIFTPackage.chart_gaussian_change_variables_concrete
+
 end QIQTH.AxiomAudit
