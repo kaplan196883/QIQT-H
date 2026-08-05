@@ -18184,4 +18184,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WideSliverBoundary.wide_sliver_sum_bound
 #print axioms QIQTH.WideSliverBoundary.wide_sliver_sum_bound_U
 
+-- ★★★ J4-254 (FixedGateDichotomy.lean, ns QIQTH.FixedGateDichotomy; wide brick 7;
+-- indep build-verified): the annulus decay + the global dominations.
+-- annulus_invpow_exp_le ((τ⁻¹)^m·exp(−a²/4τ) ≤ C·τ^N via the J4-250 series sup —
+-- dimension-independent, NO n param) + _const + annulus_gaussDdim_le (the splitter).
+-- zeroth/second_global_of_package: the SUPPORT-based globalization (∀z) of the on-ball
+-- wide dominations — the honest hSupp carry (the outer-cutoff support pulled through
+-- the near-isometry; satisfiable, not the conclusion). global_of_near_far: the
+-- engine-wired trichotomy globaliser (the +C·τ^N remainder kept SEPARATE per Sol).
+-- W4 hGateData VERDICT: CARRIED — the fields are the exact-width on-gate
+-- chart-derivative envelope (Pval/HasDerivAt/PdiffAt/sup-bounds/the η=1/2 radial
+-- gate), orthogonal to the dichotomy — the concrete on-gate builder is the
+-- brick-11-parallel construction. std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.FixedGateDichotomy.annulus_invpow_exp_le
+#print axioms QIQTH.FixedGateDichotomy.annulus_invpow_exp_le_const
+#print axioms QIQTH.FixedGateDichotomy.annulus_gaussDdim_le
+#print axioms QIQTH.FixedGateDichotomy.zeroth_global_of_package
+#print axioms QIQTH.FixedGateDichotomy.second_global_of_package
+#print axioms QIQTH.FixedGateDichotomy.global_of_near_far
+
 end QIQTH.AxiomAudit
