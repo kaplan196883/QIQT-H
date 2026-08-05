@@ -18040,4 +18040,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InnerMeasFubini.hInnerCont_concrete
 #print axioms QIQTH.InnerMeasFubini.f2Pack_concrete
 
+-- ★★★ J4-246 (F2CarryDischarge2.lean, ns QIQTH.F2CarryDischarge2; indep
+-- build-verified): 2 of 3 J4-245 carries DISCHARGED. hInner_discharged (← the banked
+-- witnessInner_measurable_uncurry ∘ the (s,z)↦(c−s, V z 0) section + the field-0 chart
+-- AEMeasurable — reduced to {hΘc,hΘne,huc,hVmap0}); hWitDeriv_discharged (← the τ
+-- gate-eq rep tauDeriv_prod_stronglyMeasurable_v4 ∘ the (c−s,0,z) section — reduced to
+-- {hn,hKSmeas,hcar} with the SATISFIABLE conditional Cfield carrier). hContDom honestly
+-- NOT discharged (the per-window integrable Gaussian dominator = a genuine separate
+-- brick; the marginal sub-piece reductions rejected). ★ f2Pack_concrete_v2: the F2
+-- four-slot pack with hInner/hWitDeriv INTERNAL — remaining binders = v2'-level
+-- (hKm/hSm0/hLeviJoint/hBcont/hUpos/hUT/hContDom) + the light suppliers. std-3 all 3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.F2CarryDischarge2.hInner_discharged
+#print axioms QIQTH.F2CarryDischarge2.hWitDeriv_discharged
+#print axioms QIQTH.F2CarryDischarge2.f2Pack_concrete_v2
+
 end QIQTH.AxiomAudit
