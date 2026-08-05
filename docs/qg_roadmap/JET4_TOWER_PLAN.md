@@ -1753,3 +1753,9 @@ hInner (← witnessInner_measurable_uncurry section + field-0 chart AEMeas) + hW
 (← the τ gate-eq rep section, satisfiable Cfield carrier). hContDom = the remaining
 carry (the per-window Gaussian dominator brick). f2Pack_concrete_v2 = the pack with
 both internal. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-247 ContDomWindow.
+
+## J4-247 (2026-08-05, fff8d7aa) — ContDomWindow: f2Pack v3 (all carries internal) [AF]
+gaussDdim_window_le (the compact-window dominator) + hContDom_of_gaussDom +
+hContDom_discharged (the honest shape: joint (s,z) continuity is FALSE — the slice
+hmeas/hcont carried). f2Pack_concrete_v3 = all three J4-245 carries internal; residue
+= v2'-level data. std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-248 JetsGcUnification (map [8]).
