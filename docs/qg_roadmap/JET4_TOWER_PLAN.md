@@ -2085,3 +2085,12 @@ exports) + the (W) wrappers + chartImage_approx_identity_v3: the fixed-f W1 caps
 carrying ONLY hGgate + hSupp. The ρ-fit crux solved by capping ρ ≤ ρA. std-3 all 4,
 raw 0. NOT a₁=R/6. NEXT: J4-279 GateAnnulusSplit (kill hGgate/hSupp at the concrete
 witness → the fixed-f FINAL), then moving-f → hBoundaryLim.
+
+## J4-279 (2026-08-06, 80921877) — GateAnnulusSplit: ★★★ THE FIXED-f AI IS DONE ★★★ [AF]
+offBall_integral_tendsto_zero (annulus: wide domination + reparametrized tail) +
+hGgate_of_gate_activation + chartImage_approx_identity_final: ∫ Wit τ 0 z·f z → f 0
+on 𝓝[>]0 with hGgate/hSupp ELIMINATED; every remaining hypothesis satisfiable (gate
+carries ← the openness export; hWslice + the zeroth domination banked). The W1
+FIXED-f limit-value member is CLOSED (the near-isometry lower bound wasn't needed —
+the domination is base-point). std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-280 MovingFBoundaryLim (the moving-f 3ε step → hBoundaryLim).
