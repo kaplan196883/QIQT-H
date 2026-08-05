@@ -2062,3 +2062,10 @@ hΩnhds + hΩmeas discharged). CARRIES (5): hGgate + hSupp + hmeas/hbound/hlocal
 INTEL: the trio needs BASE-SLOT amplitude facts (the amp bank is field-slot; van-Vleck
 symmetry = candidate dividend); hSupp radius mismatch (ρ_S vs ρ) → the ball/annulus
 split. std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-276 BaseSlotAmplitude (+annulus split).
+
+## J4-276 (2026-08-06, 2474f90c) — BaseSlotAmplitude: the amp wall resolved (route iii) [AF]
+The amp factors entirely through Wbv ⟹ base-continuity = the CoV bundle's M1 slot (no
+symmetry/reversal needed). baseSlotAmp_continuousOn/_bound/_joint_limit/_centreValue
+(A₀ = radialCutoff·vanVleck^{-½}·u₀ at 0; =1 given the labelled RNC normalization).
+The J4-275 hbound/hlocal carries reduce to the V/det/f wrapper. std-3 all 4, raw 0.
+NOT a₁=R/6. NEXT: J4-277 FixedFTrioDischarge (the v2 capstone), then (B) annulus.
