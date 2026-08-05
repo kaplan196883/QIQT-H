@@ -18203,4 +18203,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FixedGateDichotomy.second_global_of_package
 #print axioms QIQTH.FixedGateDichotomy.global_of_near_far
 
+-- ★★★ J4-255 (SecondOrderMajorants.lean, ns QIQTH.SecondOrderMajorants; wide brick 9;
+-- indep build-verified): the W2 engine's bound/hbdd/hbound slots FILLED u-uniformly
+-- and NON-SINGULARLY. window_inv_le — THE KEY: on the truncated window s ≤ u−ε_m the
+-- raw (u−s)⁻¹ endpoint is bounded by ε_m⁻¹ (the interchange members live at the
+-- truncations; the ε→0 limit is the already-closed sliver/DaLim machinery).
+-- secondBoundConst (the constant majorant: ε_m⁻¹ endpoint × the diagonal-peak floor
+-- of the added convolution width) + _nonneg + _intervalIntegrable (= hbdd) +
+-- secondOrder_inner_bound_slot (= hbound, everywhere-on-window; the genuine hD2/hF
+-- domination inputs — the second_global_of_package shape + the Levi envelope).
+-- Brick 10 remaining: the concrete snb-uniform second-order domination (the
+-- witnessFieldDeriv2 analog of the banked first-order gate_abs_le) + the measurability
+-- plumbing + the engine threading per (m,i). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.SecondOrderMajorants.window_inv_le
+#print axioms QIQTH.SecondOrderMajorants.secondBoundConst_nonneg
+#print axioms QIQTH.SecondOrderMajorants.secondBoundConst_intervalIntegrable
+#print axioms QIQTH.SecondOrderMajorants.secondOrder_inner_bound_slot
+
 end QIQTH.AxiomAudit
