@@ -1774,3 +1774,23 @@ exp(−O(‖z‖⁴)/4τ) unabsorbable with bounded amplitudes ⟹ sliver [3] �
 Banked: witnessSecondXDeriv_chartImage_expand (the honest starting form). CConv: W4 +
 Source = genuine DATA. Frontier: [1] re-thread + W1 campaign + W2/W3/W4. std-3, raw 0.
 NOT a₁=R/6. NEXT: the gpt-5.6-sol W1/W2/W3 route consult, then the recommended brick.
+
+## SOL CONSULT #4 (2026-08-06) — THE W1-W4 ROUTE (gpt-5.6-sol, recorded verbatim-gist)
+★ DECISIVE: the exact-width amplitude package (hAnear/hD2Hexpand as demanded) is
+GENERALLY FALSE — the ratio G_τ(q z)/G_τ(z) → ∞ as τ→0 for any fixed z with
+‖q z‖<‖z‖; Gaussian suppression helps after integration, NOT as a pointwise τ-uniform
+amplitude bound. DO NOT prove the old forms — build the PARALLEL WIDE package:
+G_{λτ}(z) with strict width gap (η-shrunk gate, 1/λ < 1−η ⟹ (‖z‖²/τ)^k·G_τ(q z) ≤
+C·G_{λτ}(z)). Chart jets needed: q(0)=0, Dq(0)=I, D²q(0)=0 + CUBIC/quadratic/linear
+remainders (‖q−z‖≤C‖z‖³ etc.) — from the flow ODE jets differentiated through the germ
++ ThirdJetBounds (C² alone INSUFFICIENT); htr not needed here. W2: uniform-in-u
+majorants, ONE master engine instantiation; ⚠ the raw s⁻¹ endpoint is NOT integrable —
+use the banked cancellation/splitting. W3: plumbing (FixedFlowGateData record;
+re-instantiate providers at ONE fixed gate; ⚠ integral-domain conclusions need
+re-instantiation not restriction). W4: near/annulus/outside trichotomy from the same
+width-gap infra (τ^{-m}e^{-a²/cτ} ≤ Cτ^N on the annulus). THE 11-BRICK ORDER:
+1 GaussianWidthTransfer → 2 FixedFlowGateData → 3 InverseChartNormalJets →
+4 FixedGateProviders → 5 WideWitnessAmplitude → 6 WideSliverBoundary →
+7 FixedGateDichotomy → 8 FixedGateSourceSlice → 9 SecondOrderMajorants →
+10 SecondOrderInterchangeConcrete → 11 WideA1Assembly (the parallel wide capstone
+proving the SAME final proposition).
