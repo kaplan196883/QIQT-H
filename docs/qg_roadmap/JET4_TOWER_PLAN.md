@@ -1912,3 +1912,15 @@ same C''; the affine route wasn't even needed. HONEST CARRIES: 1≤n · ∀-gate
 tripleHEmeas (→ tripleHEmeas_of_surface) · base geometry hyps · the inner Levi/Duhamel
 arrows hS0/hDuhamel/hInter/hDConv/hCH/hCConv. std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-264 InterfaceArrowCensus (banked-provider census + discharge of the arrows).
+
+## J4-264 (2026-08-06, 62f7bfa8) — InterfaceArrowCensus: the CENSUS; hS0+hCH DISCHARGED [AF]
+CENSUS (gate (a,b,S) provider-chosen/existential ⟹ per-S arrows need provider EXPORTS):
+hS0 DISCHARGED (gatedWitnessN1_package_open ∘ hEboundW_widen) · hCH DISCHARGED
+(hCH_discharge_from_geometry, +hgiC/hgpos) · hDuhamel GENUINE (per-S) · hInter GENUINE
+(per-S) · hDConv PARTIAL (per-S + hDaLimLU) · hCConv PARTIAL (per-S + 5 facades) · S1
+∀-gate PARTIAL (per-(S,a,b) banked; no ∀-provider). LANDED:
+hEboundW_wide_from_geometry_open + wide_a1_R6_interface_discharged (implication shorter
+by hS0+hCH; surviving antecedents hDuhamel/hInter/hDConv/hCConv; carries 1≤n + S1
+∀-gate + base geometry incl. hgiC/hgpos). ROUTE: provider-side export at the concrete
+gated-witness gate (the hS0/hCH pattern). std-3 both, raw 0. NOT a₁=R/6.
+NEXT: J4-265 ProviderSideExports (hDuhamel/hInter at the concrete gate).
