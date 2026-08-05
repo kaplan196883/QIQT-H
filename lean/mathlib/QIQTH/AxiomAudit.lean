@@ -18810,4 +18810,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetFactsDischarge.hWc2cont_of_contDiffOn_ball
 #print axioms QIQTH.ChartJetFactsDischarge.heatOpGatedWitness_jointContinuousOn_chartFree
 
+-- ## J4-289 (RDomEnvelope): ★ the dominator side of R-dom DONE (E1–E3) ★
+-- iterKernelW_zero_apply (the α=0 closed form) + convStepBound_integral_eq (the
+-- Chapman–Kolmogorov identity: ∫_w (C·baseKernelW s₁)·(C^k·iterKernelW k s₂) =
+-- C^{k+1}·Γ(k)⁻¹·s₂^{k−1}·gaussDdim (κ(s₁+s₂)) z — via the banked
+-- gaussDdim_conv_scaled semigroup) + the z-peak reduction +
+-- convStepBound_uEnvelope_bound (the (s,z)-FREE u-envelope M·u^{k−1} on the compact)
+-- + uEnvelope_integrableOn. E4 (the measurability slots) + E5 (the engine
+-- instantiation at the concrete E: thread the banked iterConvW_bound per-E bounds +
+-- the w-integrability bridge) carried honestly — the wiring brick. std-3 all 5.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.RDomEnvelope.iterKernelW_zero_apply
+#print axioms QIQTH.RDomEnvelope.convStepBound_integral_eq
+#print axioms QIQTH.RDomEnvelope.convStepBound_integral_le_diagonal
+#print axioms QIQTH.RDomEnvelope.convStepBound_uEnvelope_bound
+#print axioms QIQTH.RDomEnvelope.uEnvelope_integrableOn
+
 end QIQTH.AxiomAudit

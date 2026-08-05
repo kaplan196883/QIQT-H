@@ -484,6 +484,7 @@ import QIQTH.ParametrixSpatialPartials
 import QIQTH.GatedWitnessHeatOpBridge
 import QIQTH.ChartComposedHeatOp
 import QIQTH.ChartJetFactsDischarge
+import QIQTH.RDomEnvelope
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
