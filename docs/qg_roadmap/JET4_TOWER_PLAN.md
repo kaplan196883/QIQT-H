@@ -2110,3 +2110,11 @@ data = termwise iterE continuity + summable envelope) + the witness-mass lemmas
 (a) termwise iterE joint continuity (parametric convolution continuity) + (b) the
 hMovingCorr recombination. std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-282 IterEContinuity (induction: E joint continuity base + heatConv step).
+
+## J4-282 (2026-08-06, 60e6eefc) — IterEContinuity: the moving-limit wall resolved [AF]
+heatConv_eq_smul_unitInterval (σ=s·u, unconditional) + the double dominated-continuity
+STEP engines + iterE_succ (every k≥1) + iterE_jointContinuousOn (the ALL skeleton =
+the M-test hterm feed). RESIDUAL: (R-base) heatOp-witness joint continuity (one
+operator past the banked in-gate kernel continuity) + (R-dom) the post-rescale
+dominations (from iterConvW_bound, t₁>0). std-3 all 5, raw 0. NOT a₁=R/6.
+NEXT: J4-283 HeatOpWitnessContinuity (R-base + R-dom → Levi continuity concrete).
