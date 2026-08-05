@@ -18612,4 +18612,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FixedFTrioDischarge.chartImage_trio_hmeas
 #print axioms QIQTH.FixedFTrioDischarge.chartImage_approx_identity_v2
 
+-- ## J4-278 (EnrichedChartBundle): ★★ hbound + hlocal DISCHARGED — v3 carries TWO ★★
+-- enrichedChartBundle (the J4-274 bundle re-run with a ρcap parameter + the exports:
+-- ContinuousOn V Ω, IsOpen Ω, V 0 = 0, f' = fderiv Wbv, 1/2 < |det| on the ball,
+-- det-continuity at 0, |det(fderiv Wbv 0)| = 1) + bundleV_tendsto_zero +
+-- bundleDet_tendsto_one + ★★ chartImage_approx_identity_v3: the fixed-f W1 capstone
+-- carrying ONLY hGgate + hSupp (obstruction (B), the ball/annulus split) beyond the
+-- standing satisfiable inputs ({hg,hgi,hgpos}, det g 0 = 1, f measurable/bounded/
+-- cont-at-0, 0<a<b). The ρ-choice crux solved by the CAP: ρ ≤ ρA (the amp radius) so
+-- V(Ω) ⊆ the amp closedBall; hbound = CA·Cf/(1/2); hlocal = the product-filter limit
+-- amp·f/|det| → 1·f0/1 unpacked via eventually_prod_iff. The J4-277 whnf trap avoided
+-- (Tendsto.comp only). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.EnrichedChartBundle.enrichedChartBundle
+#print axioms QIQTH.EnrichedChartBundle.bundleV_tendsto_zero
+#print axioms QIQTH.EnrichedChartBundle.bundleDet_tendsto_one
+#print axioms QIQTH.EnrichedChartBundle.chartImage_approx_identity_v3
+
 end QIQTH.AxiomAudit
