@@ -17814,4 +17814,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConcreteGateInstantiation.hS0_concrete
 #print axioms QIQTH.ConcreteGateInstantiation.concreteGate_carriers_discharged
 
+-- ★★★ J4-235 (OffSVanishing.lean, ns QIQTH.OffSVanishing; ladder step 2; indep
+-- build-verified): the off-gate vanishing DISCHARGED at the concrete gate. The collar
+-- lemma witness_eventuallyEq_zero_offGate via the CLEAN support-closure route (no
+-- frontier analysis): U = (closure (φ_q '' ball 0 b))ᶜ is open and contains every
+-- p ∉ S q (closed-map conjunct: closure(φ''ball b) ⊆ φ''closedBall b ⊆ S q via b<c);
+-- on U the gate kills off-S values and the germ left-inverse + radialCutoff support
+-- (‖v‖<b contradiction) kills on-S values. Radii honest: 0<a<b<c<δ₀. hOffS_concrete +
+-- hOffS2_concrete = the EXACT GatedRepSFix v4 conjunct shapes (pd of locally-zero = 0;
+-- one level up via eventually_eventually_nhds). ★ concreteGate_carriers_discharged_v2:
+-- the running bundle — J4-234's three binders + both off-S conjuncts, one shared δ₀.
+-- Remaining inside the hcar existentials: the on-gate C² jets (Pfield/Qfield witnesses
+-- + amp PdiffAt) + the jet-coefficient measurability block. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.OffSVanishing.pd_zero_fun
+#print axioms QIQTH.OffSVanishing.witness_eventuallyEq_zero_offGate
+#print axioms QIQTH.OffSVanishing.hOffS_concrete
+#print axioms QIQTH.OffSVanishing.hOffS2_concrete
+#print axioms QIQTH.OffSVanishing.concreteGate_carriers_discharged_v2
+
 end QIQTH.AxiomAudit
