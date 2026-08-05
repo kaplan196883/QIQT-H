@@ -1661,3 +1661,11 @@ GatedRepSFix v4 conjunct shapes. ★ concreteGate_carriers_discharged_v2 = the r
 bundle (5 discharges under one δ₀). Remaining in the hcar existentials: the on-gate C²
 jets + the jet-coefficient measurability block. std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-236 OnGateJets (the last hcar content).
+
+## J4-236 (2026-08-05, ee7cfd74) — OnGateJets: the on-gate C² jets (bundle v3) [AF]
+The C²-at-gate-points was banked (chartField_contDiffAt_reachable_uniform); centre-only
+machinery ported to general p. hcarField hgate FULLY satisfied + hcarTau ∂_τ (amp
+affine in τ) ⟹ bundle v3 (7 families, one δ₀). TWO residues to the full supplier
+block: (1) hcarField2's GLOBAL-y jet family (over-strong packaging — the J4-231/232
+surgery pattern again, neighbourhood-only reshape) + (2) hChartRep (the .choose wall).
+std-3 all 7, raw 0. NOT a₁=R/6. NEXT: J4-237 Field2NbhdReshape.
