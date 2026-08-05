@@ -18697,4 +18697,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.IterEContinuity.iterE_succ_jointContinuousOn_of_dominated
 #print axioms QIQTH.IterEContinuity.iterE_jointContinuousOn
 
+-- ## J4-283 (HeatOpWitnessContinuity): (R-base) reduced + (R-dom) pointwise.
+-- heatOpWitness_jointContinuousOn_of_identity (congruence onto an explicit F on the
+-- compact) + parametrixResidualN_jointContinuousOn_of_parts (∂_τ-term + Δ_z-term ⟹
+-- the residual's continuity) + iterE_jointContinuousOn_of_heatOpWitness (the COMPOSE
+-- into the ALL skeleton) + convStepIntegrand_pointwise_bound(_gauss) (the (R-dom)
+-- pointwise integrand domination from the banked iterConvW bounds). REMAINING MAP:
+-- (R-base) = the ∂_τ/Δ-of-heatParametrix joint continuities on τ>0 + the hIdent
+-- discharge from CoeffU1Fix htransport on a gate ball; (R-dom) = the integral-envelope
+-- construction (integrate over w, uniform in z, u-integrable on Ioc 0 1). The STRETCH
+-- deliberately not forced. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.HeatOpWitnessContinuity.heatOpWitness_jointContinuousOn_of_identity
+#print axioms QIQTH.HeatOpWitnessContinuity.parametrixResidualN_jointContinuousOn_of_parts
+#print axioms QIQTH.HeatOpWitnessContinuity.iterE_jointContinuousOn_of_heatOpWitness
+#print axioms QIQTH.HeatOpWitnessContinuity.convStepIntegrand_pointwise_bound
+#print axioms QIQTH.HeatOpWitnessContinuity.convStepIntegrand_pointwise_bound_gauss
+
 end QIQTH.AxiomAudit
