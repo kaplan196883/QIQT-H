@@ -1850,3 +1850,12 @@ The Levi source slice (hFjoint discharged no-carry; hFmeas + hFsum carry; hFbd c
 + hEboundFull carried (the W3 wall: the provider picks its own existential gate) +
 fixedGateProviders_bundle. ⚠ the monolithic-by-block whnf trap → split lemmas.
 std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-258 WideA1Assembly (brick 11 — the recon).
+
+## J4-258 (2026-08-06, 0f6f8df2) — WideA1Assembly: ★★ THE WIDE CAMPAIGN COMPLETE ★★ [AF]
+Sol #4 confirmed at code level: the exact-width forms appear NOWHERE in the conclusion
+chain; the leading term = hParam∘hHeat (width-independent DeWitt cancellation); the
+only width-2 hardcoding = one summability call over a width-parametric engine ⟹ the
+mechanical swap. ★ wide_a1_R6_of_residue_inf_v5 = the SAME conclusion at ANY κ (the
+wide bank feeds at κ:=lam). POST-WIDE MAP: [1] residual assembly (∂_τH−Δ_gH; LARGE)
+[2] p=0→(p,q) (MED) [3-4] width adapters (SMALL) [5] CConv instantiation (MED).
+std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-259 WidthAdapters ([3]+[4]).
