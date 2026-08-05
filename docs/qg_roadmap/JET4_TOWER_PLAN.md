@@ -1714,3 +1714,12 @@ deferred. Remaining piles: (1) the routine concrete Gc-carrier ∃-bundle (banke
 piecewise); (2) the v2' ANALYTIC residue (hEboundFull/core/hCH/facades/hDConv/R2/
 envelopes) = the genuine curvature analytics. std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-242 EnvelopeCoreDischarge (the analytic ladder opener).
+
+## J4-242 (2026-08-05, 650401bf) — EnvelopeCoreDischarge: the analytic census + core [AF]
+v2' still carries core raw (predates R3) — core_of_v2prime_data discharges it from
+carried data + ONE hDerivConv limit (hDaLim + hBoundaryLim FREE). CENSUS: NO hard wall
+at the conditional level; deepest = hDerivConv's F2 family. hEboundFull ∀τ>0 = genuine
+DATA (the amplitude grows linearly — no fixed C; clean fix = relax the consumers to
+τ≤t, an edit). ORDERED RESIDUE: dominations → hIlo/hIhi → sliver → R2 → facades →
+hgD1 → hEboundFull → hDerivConv. std-3, raw 0. NOT a₁=R/6.
+NEXT: J4-243 DerivConvDischarge (the deepest residue).
