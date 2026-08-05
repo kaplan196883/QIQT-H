@@ -1823,3 +1823,9 @@ moment-aware route carried. wide_sliver_sum_bound(_U) + wide_second_inner_slice_
 + gaussDdim_wide_approx_identity(_family). Brick-11 carries: sliver hbnd, boundary-f
 continuity, the 7/8 globalization. std-3 all 6, raw 0. NOT a₁=R/6.
 NEXT: J4-254 FixedGateDichotomy (brick 7).
+
+## J4-254 (2026-08-06, e9f182f9) — FixedGateDichotomy: wide brick 7 [AF]
+annulus_invpow_exp_le (dimension-independent super-poly decay) + the support-based
+global dominations (hSupp carry) + global_of_near_far (the trichotomy globaliser).
+W4 hGateData carried (the exact-width on-gate envelope = the brick-11-parallel
+construction). std-3 all 6, raw 0. NOT a₁=R/6. NEXT: J4-255 SecondOrderMajorants (brick 9).
