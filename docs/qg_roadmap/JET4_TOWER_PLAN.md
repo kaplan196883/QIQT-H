@@ -2126,3 +2126,11 @@ dominations. REMAINING: (R-base) = the ∂_τ/Δ-of-heatParametrix continuities 
 the hIdent discharge (htransport on a gate ball); (R-dom) = the integral-envelope
 construction. std-3 all 5, raw 0. NOT a₁=R/6.
 NEXT: J4-284 ParametrixPartsContinuity ((i) ∂_τ + (ii) Δ + (iii) hIdent).
+
+## J4-284 (2026-08-06, cfe6e01a) — ParametrixPartsContinuity: (i) proven; (ii)/(iii) reduced [AF]
+The Gaussian + parametrix τ-derivative closed forms + joint continuity ((i) = the
+hDcont slot DONE) + the laplaceBeltrami parts reduction ((ii) → hpd1/hpd2) + the gate
+transfer ((iii) → the ungated identity) + the COMPOSE (carries only (ii)+(iii)).
+⚠ FINDING: no standalone heatOp = parametrixResidualN lemma — buried in CoeffU1Fix
+~853; extraction brick needed. std-3 all 7, raw 0. NOT a₁=R/6.
+NEXT: J4-285 ParametrixSpatialPartials ((ii) partials + (iii) extraction).
