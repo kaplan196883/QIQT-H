@@ -18091,4 +18091,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JetsGcUnification.hcarField2_Gc_concrete
 #print axioms QIQTH.JetsGcUnification.tripleHEmeas_Gc_concrete
 
+-- ★★★ J4-249 (SliverCConvBatch.lean, ns QIQTH.SliverCConvBatch; map [3]+[4] recon;
+-- indep build-verified): THE hD2Hexpand VERDICT = MISMATCH, precisely delimited — the
+-- demanded form is in the BASE-POINT Gaussian gaussDdim τ z with τ-UNIFORM amplitude
+-- bounds; the banked mixed normal form is in the CHART-IMAGE Gaussian gaussDdim τ
+-- (W z 0); the ratio exp(−O(‖z‖⁴)/(4τ)) cannot be absorbed with bounded amplitudes ⟹
+-- the sliver [3] is THE SAME structural wall as [7]/W1 (the near-isometry
+-- rncRadialSq(W z 0) = ‖z‖² + O(‖z‖⁴) + Gaussian-ratio absorption — ONE geometric
+-- campaign, not a plumbing brick; the trivial algebraic solution violates the bounds,
+-- correctly rejected). BANKED: witnessSecondXDeriv_chartImage_expand — the honest
+-- second-order chart-image starting form (the ∀x∈S nbhd identity per the vacuity
+-- discipline). CConv censused: ChartGate 4/7 + hlin/hDrep + hGateData(') (W4, no
+-- builder) + Source slice = genuine DATA, nothing composes tonight. NOTE: the agent's
+-- next-brick rec (the F2 trio) is STALE — J4-245/246/247 already landed it. The true
+-- frontier: [1] the re-thread + the W1 geometric campaign + W2/W3/W4. std-3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.SliverCConvBatch.witnessSecondXDeriv_chartImage_expand
+
 end QIQTH.AxiomAudit
