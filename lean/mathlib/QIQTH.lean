@@ -477,6 +477,7 @@ import QIQTH.EnrichedChartBundle
 import QIQTH.GateAnnulusSplit
 import QIQTH.MovingFBoundaryLim
 import QIQTH.MovingCorrAssembly
+import QIQTH.IterEContinuity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

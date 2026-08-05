@@ -18680,4 +18680,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MovingCorrAssembly.witnessSlice_mass_le
 #print axioms QIQTH.MovingCorrAssembly.epsSeq_witnessSlice_mass_eventually_le
 
+-- ## J4-282 (IterEContinuity): ★ THE MOVING-LIMIT WALL RESOLVED — the STEP engine ★
+-- heatConv_eq_smul_unitInterval (σ = s·u: heatConv = s • ∫₀¹ — the fixed-domain form;
+-- UNCONDITIONAL, the load-bearing trick) + the double continuousOn_of_dominated
+-- engines (heatConvSpatial_/heatConv_jointContinuousOn_of_dominated — THE STEP:
+-- heatConv of continuous+dominated is jointly continuous on Icc×closedBall) +
+-- iterE_succ_jointContinuousOn_of_dominated (every k≥1) + iterE_jointContinuousOn
+-- (the ALL induction skeleton = the exact M-test hterm feed). RESIDUAL (2 named
+-- satisfiable carries): (R-base) joint continuity of E = heatOp Wit (the ∂_τ−Δ
+-- residual — one operator past the banked kernelGated_jointContinuousOn_inGate) +
+-- (R-dom) the per-level integrable Gaussian dominations post-rescale (from the banked
+-- iterConvW_bound on t₁>0). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.IterEContinuity.heatConv_eq_smul_unitInterval
+#print axioms QIQTH.IterEContinuity.heatConvSpatial_jointContinuousOn_of_dominated
+#print axioms QIQTH.IterEContinuity.heatConv_jointContinuousOn_of_dominated
+#print axioms QIQTH.IterEContinuity.iterE_succ_jointContinuousOn_of_dominated
+#print axioms QIQTH.IterEContinuity.iterE_jointContinuousOn
+
 end QIQTH.AxiomAudit
