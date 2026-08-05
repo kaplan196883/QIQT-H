@@ -434,6 +434,7 @@ import QIQTH.OffSVanishing
 import QIQTH.OnGateJets
 import QIQTH.Field2NbhdReshape
 import QIQTH.ChartRepFinal
+import QIQTH.FlowDerivMeasurable
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

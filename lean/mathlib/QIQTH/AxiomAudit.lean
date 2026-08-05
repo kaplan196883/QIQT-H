@@ -17898,4 +17898,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartRepFinal.chartTauAmpGc_prod_measurable
 #print axioms QIQTH.ChartRepFinal.chartFieldTauAmp_eq_chartTauAmpGc_of_agree
 
+-- ★★★ J4-239 (FlowDerivMeasurable.lean, ns QIQTH.FlowDerivMeasurable; the LAST
+-- field-derivative wall; indep build-verified): ★ THE MEASURABLE JOINT FIELD-DERIVATIVE
+-- OF THE FLOW INVERSE IS A THEOREM ★. flowInverseJet_measurable — the first jet via the
+-- indicator difference-quotient sequence (DQ of the banked Gc value-rep, hₘ=1/(m+1)) +
+-- measurable_of_tendsto_metrizable + the C² on-gate convergence
+-- (hasDerivAt_iff_tendsto_slope + the Gc=W value-swap on the eventual shift); off-gate
+-- indicator ⟹ 0→0. flowInverseSecondJet_measurable — the mixed second jet, the same
+-- route ONE LEVEL UP (DQ of the first-jet witness). The _component versions certify the
+-- SAME witnesses also satisfy the exact hgate HasDerivAt conjuncts (via
+-- HasDerivAt.congr_of_eventuallyEq on the open gate). ChartRepFinal's residue class (3)
+-- DISCHARGED. Remaining to the full v7 payoff: (1) the chart-VALUE Gc-reshape of the
+-- capstone (blocked by the kernel-freeze constraint — needs a lighter assembly, not
+-- new math) + (2) the amplitude field-pd chain-rule composition (jet inputs now
+-- supplied). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.FlowDerivMeasurable.update_eq_add_smul_single
+#print axioms QIQTH.FlowDerivMeasurable.flowInverseJet_measurable
+#print axioms QIQTH.FlowDerivMeasurable.flowInverseJet_measurable_component
+#print axioms QIQTH.FlowDerivMeasurable.flowInverseSecondJet_measurable
+#print axioms QIQTH.FlowDerivMeasurable.flowInverseSecondJet_measurable_component
+
 end QIQTH.AxiomAudit
