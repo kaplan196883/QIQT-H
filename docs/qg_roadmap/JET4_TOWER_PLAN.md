@@ -1988,3 +1988,13 @@ the Layer C consumer shape. Concrete corollary blocked on M1–M4 (within-deriva
 field on a gate / InjOn radius / left inverse / uniform det bound) = ONE uniform local
 IFT package for uniformInverseChart (bank: Vmap-via-IFT 891c5847, J4-251 near-isometry,
 expMap C²). std-3, raw 0. NOT a₁=R/6. NEXT: J4-270 ChartIFTPackage (M1–M4).
+
+## J4-270 (2026-08-06, c8a46fa9) — ChartIFTPackage: ★ M1–M4 ALL PROVEN ★ [AF]
+chartIFTPackage (carries only (hC,hK,h0K)): the full CoV bundle on ball 0 ρ for the
+base-0 chart — M1 derivative field, M2 InjOn PROVEN (ContDiffAt.toOpenPartialHomeomorph),
+M3 left inverse PROVEN, M4 |det|>0; banked centre facts (ChartJetBounds) + the
+UniformFlowLocalInverse IFT incantation. + chartImage_mem_nhds (Ω∈𝓝0 glue) +
+chart_gaussian_change_variables_concrete (CONCRETE Layer B). ⚠ orientation flag:
+base-0 vs base-varying — reconcile at the W1 assembly. RESIDUAL: Layer A + the
+moving-integrand trio. std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-271 ChartImageAIConcrete (the A+B+C composition).
