@@ -2134,3 +2134,11 @@ transfer ((iii) → the ungated identity) + the COMPOSE (carries only (ii)+(iii)
 ⚠ FINDING: no standalone heatOp = parametrixResidualN lemma — buried in CoeffU1Fix
 ~853; extraction brick needed. std-3 all 7, raw 0. NOT a₁=R/6.
 NEXT: J4-285 ParametrixSpatialPartials ((ii) partials + (iii) extraction).
+
+## J4-285 (2026-08-06, 94c5dd59) — ParametrixSpatialPartials: (ii) discharged; (iii) plain [AF]
+hpd1 (congruence onto the banked first-partial closed form) + the second-partial closed
+form + hpd2 + the Δ-term assembly + heatOp_heatParametrix_eq_residual (DEFINITIONAL,
+plain kernel) + heatOpWitness_jointContinuousOn_geometry ((i)+(ii)+(iii) internal;
+carries only coefficient regularity + hgi/hChr). RESIDUAL: the gated-witness bridge
+(cutoff × chart transport near 0) + the R-dom envelope. std-3 all 7, raw 0.
+NOT a₁=R/6. NEXT: J4-286 GatedWitnessHeatOpBridge.
