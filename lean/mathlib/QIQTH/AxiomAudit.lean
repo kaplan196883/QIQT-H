@@ -18391,4 +18391,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InterfaceArrowCensus.hEboundW_wide_from_geometry_open
 #print axioms QIQTH.InterfaceArrowCensus.wide_a1_R6_interface_discharged
 
+-- ## J4-265 (ProviderSideExports): ★ hInter EXPORTED (the 3rd arrow down) ★
+-- The hS0/hCH export pattern extended: hEboundW_wide_from_geometry_open_inter = the
+-- provider ∃ strengthened with the per-S hInter interchange identity, proven at the
+-- concrete gate via InterchangeLocalRebase.hInter_from_local_data (J4-206) — the crux:
+-- gatedWitnessN1_package_open exports its bound UNIVERSALLY over the ceiling, so both
+-- hEbnd (slice t'=t) and hglobal (∀T') come from ONE export; hEzero via
+-- hEzeroE_concrete (1≤n); interchange is width-2 and hInter width-free ⟹ feeds the
+-- width-κ capstone unchanged. wide_a1_R6_interface_discharged_v2 = the capstone with
+-- the implication now hDuhamel → hDConv → hCConv → ⟨a₁ 2-jet⟩ (hInter INTERNAL).
+-- CENSUS AFTER: exported hS0/hCH/hInter; surviving hDuhamel (bottoms out at the
+-- loc-unif hDaLimLU WALL + 3 per-S truncation-limit facts) · hDConv (hDConv_from_banked:
+-- analytic residue + hDaLimLU, per-S) · hCConv (5 facade bundles, per-S, data-heavy).
+-- hDaLimLU = the shared blocker for hDuhamel AND hDConv. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.ProviderSideExports.hEboundW_wide_from_geometry_open_inter
+#print axioms QIQTH.ProviderSideExports.wide_a1_R6_interface_discharged_v2
+
 end QIQTH.AxiomAudit
