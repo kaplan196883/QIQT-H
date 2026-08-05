@@ -2157,3 +2157,9 @@ heatOpGatedWitness_jointContinuousOn_final (E's continuity CONCRETE; carries = t
 chart facts hWc2/hWc1cont/hWc2cont + coefficient/geometry/cutoff-germ, all
 satisfiable). std-3 all, raw 0. NOT a₁=R/6.
 NEXT: J4-288 ChartJetFactsDischarge (the chart facts + start the R-dom envelope).
+
+## J4-288 (2026-08-06, 6fd52c79) — ChartJetFactsDischarge: the chart facts internal [AF]
+The generic jet engines (second jets from C² only) + J1–J4 + J5
+heatOpGatedWitness_jointContinuousOn_chartFree (carries all g-level: coefficient
+regularity + hgi/hChr + gate data + cutoff germ, all satisfiable). std-3 all 7, raw 0.
+NOT a₁=R/6. NEXT: J4-289 RDomEnvelope (the integral envelope → the Levi chain).
