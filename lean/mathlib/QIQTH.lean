@@ -437,6 +437,7 @@ import QIQTH.ChartRepFinal
 import QIQTH.FlowDerivMeasurable
 import QIQTH.AmpPdComposition
 import QIQTH.GcConsumerMirror
+import QIQTH.EnvelopeCoreDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

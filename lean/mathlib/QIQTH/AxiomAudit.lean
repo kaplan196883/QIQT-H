@@ -17959,4 +17959,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GcConsumerMirror.tauDeriv_prod_measurable_Gc
 #print axioms QIQTH.GcConsumerMirror.tripleHEmeas_Gc
 
+-- ★★★ J4-242 (EnvelopeCoreDischarge.lean, ns QIQTH.EnvelopeCoreDischarge; the analytic
+-- ladder opener; indep build-verified): the v2' ANALYTIC CENSUS + the core discharge.
+-- STRUCTURAL FINDING: v2' still carries core as a raw binder (its line predates R3's
+-- unbundle). core_of_v2prime_data — TruncatedDuhamelCore at the concrete witness from
+-- v2's carried data + the SINGLE hDerivConv limit (hDaLim ← hDaLimLU_from_data ∘
+-- daLimLU_reduces_to_pointwise FREE; hBoundaryLim ← boundaryTrunc_tendsto FREE; the R3
+-- trick lifted standalone, abstract in Wit — no kernel-freeze). THE CENSUS: no hard
+-- WALL survives at the conditional level; the deepest residue = hDerivConv's F2 family
+-- (hpar/htime/hR + hDerivLU + hfg/hFII, ≥4 families). hEboundFull VERDICT: the ∀τ>0
+-- form does NOT follow from the τ≤t provider NOR from hEdom (the (E₀+E₁τ) amplitude
+-- grows unboundedly — no fixed C) — genuine DATA; the clean fix = relax the two
+-- consumers to τ≤t (edit, deferred). Sliver/hIlo-hIhi kept DATA (net-enlarge / window
+-- verdicts). ORDERED RESIDUE: dominations → hIlo/hIhi → sliver → R2 trio → facades →
+-- hgD1 → hEboundFull → hDerivConv. std-3. NOT a₁ = R/6.
+#print axioms QIQTH.EnvelopeCoreDischarge.core_of_v2prime_data
+
 end QIQTH.AxiomAudit
