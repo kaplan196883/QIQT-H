@@ -1843,3 +1843,10 @@ the field-shifted near-isometry, brick-11-parallel) + the hbound discharge + ★
 witness_MemInterchange(_majorant) = the verbatim MemInterchange member PRODUCIBLE for
 the concrete witness (residual = the named providers hQ1/hFmeas/hFint/hF'meas/hdiff +
 hOn/hF). std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-257 FixedGateSourceProviders (8+4).
+
+## J4-257 (2026-08-06, 1d5fff26) — FixedGateSourceProviders: wide bricks 8+4 [AF]
+The Levi source slice (hFjoint discharged no-carry; hFmeas + hFsum carry; hFbd carried
+— the τ-uniform constant is genuine input) + the fixed-gate wide dominations (composed)
++ hEboundFull carried (the W3 wall: the provider picks its own existential gate) +
+fixedGateProviders_bundle. ⚠ the monolithic-by-block whnf trap → split lemmas.
+std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-258 WideA1Assembly (brick 11 — the recon).
