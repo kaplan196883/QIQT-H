@@ -480,6 +480,7 @@ import QIQTH.MovingCorrAssembly
 import QIQTH.IterEContinuity
 import QIQTH.HeatOpWitnessContinuity
 import QIQTH.ParametrixPartsContinuity
+import QIQTH.ParametrixSpatialPartials
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -18735,4 +18735,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ParametrixPartsContinuity.hIdent_gateTransfer
 #print axioms QIQTH.ParametrixPartsContinuity.heatOpWitness_jointContinuousOn_concrete
 
+-- ## J4-285 (ParametrixSpatialPartials): ★★ (ii) FULLY DISCHARGED + (iii) standalone ★★
+-- heatParametrix_pd_jointContinuousOn (hpd1, congruence onto the BANKED
+-- ParametrixGradientMeas.heatParametrix_pd_eq) + heatParametrix_pd_pd_eq (the second-
+-- partial closed form by product rule) + heatParametrix_pd_pd_jointContinuousOn (hpd2)
+-- + heatParametrix_laplaceBeltrami_jointContinuousOn ((ii) assembled) +
+-- heatOp_heatParametrix_eq_residual ((iii) — DEFINITIONAL for the plain kernel: both
+-- sides = ∂_τH − Δ_gH) + heatOpWitness_jointContinuousOn_final ((i)+(iii) internal) +
+-- ★★ heatOpWitness_jointContinuousOn_geometry ((i)+(ii)+(iii) ALL internal; carries
+-- only coefficient regularity hΘc/hΘne/huc/hw + geometry hgi/hChr — satisfiable via
+-- the chart-jet banks). HONEST RESIDUAL: the identity is for the PLAIN parametrix
+-- kernel; the CONCRETE gated van-Vleck witness bridge (the cutoff × chart-transport
+-- htransport, CoeffU1Fix L4 ~853, L4-local not self-contained) remains the buried
+-- content; hIdent_gateTransfer bridges gated→ungated. std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.ParametrixSpatialPartials.heatParametrix_pd_jointContinuousOn
+#print axioms QIQTH.ParametrixSpatialPartials.heatParametrix_pd_pd_eq
+#print axioms QIQTH.ParametrixSpatialPartials.heatParametrix_pd_pd_jointContinuousOn
+#print axioms QIQTH.ParametrixSpatialPartials.heatParametrix_laplaceBeltrami_jointContinuousOn
+#print axioms QIQTH.ParametrixSpatialPartials.heatOp_heatParametrix_eq_residual
+#print axioms QIQTH.ParametrixSpatialPartials.heatOpWitness_jointContinuousOn_final
+#print axioms QIQTH.ParametrixSpatialPartials.heatOpWitness_jointContinuousOn_geometry
+
 end QIQTH.AxiomAudit
