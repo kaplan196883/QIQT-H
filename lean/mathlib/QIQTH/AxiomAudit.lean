@@ -17832,4 +17832,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OffSVanishing.hOffS2_concrete
 #print axioms QIQTH.OffSVanishing.concreteGate_carriers_discharged_v2
 
+-- ★★★ J4-236 (OnGateJets.lean, ns QIQTH.OnGateJets; the on-gate C² jets; indep
+-- build-verified): the analytic jet block DISCHARGED at the concrete gate.
+-- Don't-under-credit: chartField_contDiffAt_reachable_uniform (C² at EVERY gate point,
+-- one δ₀) was banked; the centre-only first-jet/amp machinery ported to general p.
+-- LANDED: chartFieldFirstJet_hasDerivAt (Pfield := fderiv applied to Pi.single) +
+-- ampField_contDiffAt/pdiffAt (general-p) + chartFieldAmp_hasDerivAt_tau (the amp is
+-- AFFINE in τ — Cfield unconditional) ⟹ hcarField_hgate_concrete (the EXACT on-gate
+-- hgate triple, fully satisfied) + hcarTau_hasDeriv_concrete + ★ the running bundle
+-- concreteGate_carriers_discharged_v3 (7 discharge families under one δ₀). THE TWO
+-- NAMED RESIDUES (correctly NOT faked): (1) hcarField2's hgate demands the first-jet
+-- family GLOBALLY in y (the off-image chart is .choose junk — a global-C¹ carry would
+-- be UNSATISFIABLE; needs a chart representative or a neighbourhood-only reshaping of
+-- witnessMixed_gate_eq); (2) the measurability block = the ChartJointBorel .choose
+-- wall (factored to hChartRep). std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.OnGateJets.chartFieldFirstJet_hasDerivAt
+#print axioms QIQTH.OnGateJets.ampField_contDiffAt
+#print axioms QIQTH.OnGateJets.ampField_pdiffAt
+#print axioms QIQTH.OnGateJets.chartFieldAmp_hasDerivAt_tau
+#print axioms QIQTH.OnGateJets.hcarField_hgate_concrete
+#print axioms QIQTH.OnGateJets.hcarTau_hasDeriv_concrete
+#print axioms QIQTH.OnGateJets.concreteGate_carriers_discharged_v3
+
 end QIQTH.AxiomAudit
