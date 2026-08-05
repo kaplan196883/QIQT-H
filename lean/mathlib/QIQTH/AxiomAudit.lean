@@ -18108,4 +18108,26 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁ = R/6.
 #print axioms QIQTH.SliverCConvBatch.witnessSecondXDeriv_chartImage_expand
 
+-- ★★★ J4-250 (GaussianWidthTransfer.lean, ns QIQTH.GaussianWidthTransfer; WIDE ROUTE
+-- brick 1/11 per Sol consult #4; indep build-verified): the master width-gap lemmas.
+-- gaussDdim_closed (the product = the closed (√4πt)⁻ⁿ·exp(−r²/4t) form);
+-- gaussDdim_width_ratio_le (G_τ(w) ≤ (√lam)^n·exp(−c·r²(z)/τ)·G_{lam·τ}(z) under the
+-- gate (1−η)r²(z) ≤ r²(w) — minimal hyps, no sign assumptions);
+-- pow_mul_exp_neg_le_factorial_div (the calculus-free series sup y^k e^{−cy} ≤ k!/c^k);
+-- gaussDdim_poly_absorb + the named k=0/1/2 + mixed j≤k instances (the wide
+-- hAnear/hD2Hexpand shapes; the leftover 1/τ^{k−j} stays); the width integrability +
+-- convolution re-exports. ⚠ TRAP RECORDED: λ is the reserved lambda token — the width
+-- parameter is named lam in ALL downstream bricks. Shapes confirmed to match bricks
+-- 5-8's consumers. std-3 all 10. NOT a₁ = R/6.
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_closed
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_width_ratio_le
+#print axioms QIQTH.GaussianWidthTransfer.pow_mul_exp_neg_le_factorial_div
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_poly_absorb
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_absorb_zero
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_absorb_one
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_absorb_two
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_absorb_mixed
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_width_integrable
+#print axioms QIQTH.GaussianWidthTransfer.gaussDdim_width_mul_integrable
+
 end QIQTH.AxiomAudit

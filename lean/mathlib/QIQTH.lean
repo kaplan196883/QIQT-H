@@ -445,6 +445,7 @@ import QIQTH.F2CarryDischarge2
 import QIQTH.ContDomWindow
 import QIQTH.JetsGcUnification
 import QIQTH.SliverCConvBatch
+import QIQTH.GaussianWidthTransfer
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
