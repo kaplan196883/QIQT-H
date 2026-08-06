@@ -19162,4 +19162,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDerivConvComposition.hDerivConv_conditional
 #print axioms QIQTH.HDerivConvComposition.truncatedDuhamelCore_conditional
 
+-- ## J4-311 (HDuhamelExportRethread): ★★ THE CAPSTONE hDuhamel SLOT IS A THEOREM ★★
+-- X0 GATE-IDENTITY VERDICT: IDENTICAL — the capstone's provider-chosen S is the one
+-- concrete van-Vleck gate (gatedWitnessN1_package_open), the SAME (S,a,b)/witness the
+-- whole boundary chain is parameterized by; the J4-265 pattern applies directly.
+-- hDerivConv_AT_GATE (X1a — the W1-free composition at the gate) + truncatedDuhamel-
+-- Core_AT_GATE (X1 robust) + truncatedDuhamelCore_AT_GATE_FULL (X1 union — the honest
+-- satisfiable census: RNC gauge, MemLapFull, interval-integrabilities, sliver, Gaussian
+-- dominations, MemECombine, the W2 family, F2 pile, hFII, frozen/moving lists, the
+-- single W1-free hBoundaryLim; hFeq by rfl) + hDuhamelSlot_AT_GATE (X2 — the EXACT
+-- hDuhamel antecedent of wide_a1_R6_interface_discharged_v2, proven; hDuhamel_of_
+-- truncatedData projection). X3 (the v3 capstone restatement) deferred by design
+-- (~130-binder kernel-freeze rule) — the per-S fact a v3 would ∃-intro is fully in
+-- hand. Surviving capstone arrows: hDConv → hCConv. NO hAnear anywhere. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HDuhamelExportRethread.hDerivConv_AT_GATE
+#print axioms QIQTH.HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE
+#print axioms QIQTH.HDuhamelExportRethread.hDuhamelSlot_AT_GATE
+#print axioms QIQTH.HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL
+
 end QIQTH.AxiomAudit
