@@ -2842,3 +2842,14 @@ g_p=I). ONE OF THE FOUR LABELLED INPUTS (hGauss) IS NOW DERIVED for the pullback
 route. Residue: the C∞-vs-C⁴ facade scope (labelled) + ∂g̃(0)=0 + inverse/
 positivity (derivable). std-3 all 6, raw 0. NOT a₁=R/6. NEXT: J4-348 =
 PullbackGeometryLegs (∂g̃(0)=0 + inverse/positivity + the C∞ verdict).
+
+## J4-348 (2026-08-07, 6fe4574b) — PullbackGeometryLegs: NO C∞ WALL; hpd2 THE SOLE RESIDUE [AF]
+THE BANKED FINDING: the D²exp jet + ∂g̃(0)=0 were ALREADY BANKED (pd_jacobian_
+expMap_zero / pd_expPullbackMetric_at_zero). L2 delivered (isUnit/rightInverse/
+det>0 eventually). ★ L3 VERDICT: the correct pullback consumer =
+RNCExpansion.heat_a1_of_gauge_c2 (FINITE-ORDER, already instantiated at g̃ via
+kappa_eq_one_sixth_expPullback_of_hpd2) — NO C∞-vs-C⁴ wall on this route. THE
+SOLE OPEN RESIDUE: the labelled hpd2 (the ∂²g̃(0) radial-contraction identity —
+likely a linear consequence of the PROVEN cyclic T-identity at g̃). std-3 all 4,
+raw 0. NOT a₁=R/6. NEXT: J4-349 = Hpd2FromCyclic (the cyclic→hpd2 algebra +
+potentially κ=1/6 AT THE PULLBACK).
