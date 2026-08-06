@@ -528,6 +528,7 @@ import QIQTH.CConvV2ChartInterface
 import QIQTH.CConvV2WgInstantiation
 import QIQTH.CConvV2DerivRep
 import QIQTH.CConvV2Facade
+import QIQTH.DaLimCensusRecon
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

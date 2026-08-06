@@ -19570,4 +19570,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2Facade.hD1_v2
 #print axioms QIQTH.CConvV2Facade.hCConvSlot_AT_GATE_v2
 
+-- ## J4-331 (DaLimCensusRecon): THE hDaLimLU CENSUS — NO POISONS, 3 DISCHARGES
+-- X0: every binder of hDaLimLU_concrete classified. (A) gauge DERIVABLE-NOW
+-- (discharged: memGaugeGi_of_geometry, memGaugeGamma_of_hdg0); (B) the W2 family
+-- BANKED (witness_MemInterchange); (C) hLapFull = the deepest wall (Laplacian
+-- comparison → the F2 C²-limit); (D) hII_lo/hi routine (pairing+Beta); (E) the √ε
+-- sliver needs hD2Hexpand; (F) hEdom = a width-narrowing brick (3/2 < 2 — stronger
+-- tail but REACHABLE via Gaussian-slack absorption, β-seeded — satisfiable, not a
+-- poison); (G) hFdom derivable from the landed Levi domination + hFzero small;
+-- (H) hIlo/hi routine; (I) hEcomb DERIVABLE-NOW (discharged: memECombine_of_data).
+-- ★ SATISFIABILITY AUDIT: NO over-quantified artefact in the Da-limit pile — the
+-- three facade poisons do NOT recur. X2 REMAINDER (dependency order): hFzero →
+-- hFdom → the pairings → hbnd → hEdom → hLapFull. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.DaLimCensusRecon.memGaugeGi_of_geometry
+#print axioms QIQTH.DaLimCensusRecon.memGaugeGamma_of_hdg0
+#print axioms QIQTH.DaLimCensusRecon.memECombine_of_data
+
 end QIQTH.AxiomAudit
