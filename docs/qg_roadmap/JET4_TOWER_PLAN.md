@@ -2875,3 +2875,13 @@ factorization G_τ(V·)·A near 0 (the chart-image Gaussian identity / RNC
 near-isometry with O(‖z‖⁴) absorption — the AmplitudePackage's flagged hard input).
 std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-351 = HrepGermFactorization (the germ from
 the banked on-gate factorization + openness + the chart-jet center identities).
+
+## J4-351 (2026-08-07, 985c6641) — HrepGermFactorization: THE GERM DISCHARGED + THE hV0 CRUX [AF]
+The hrep germ DISCHARGED (the banked on-gate factorization + the open gate).
+THE CRUX: hV0 is FALSE at the true chart off-flat (the iff-characterization +
+the exact exp((rz−r_{W0})/(4τ)) ratio — bounded ONLY in the √ε sliver ‖z‖~√τ).
+The exact-shape hD2Hexpand with uniform amplitude bounds = a flat/diagonal-locus
+identity; its consumption lives in the √ε collar. hD2Hexpand_concrete = the
+bridge composed with hV0 the isolated per-(τ,z) residue. std-3 all 5, raw 0.
+NOT a₁=R/6. NEXT: Sol consult on the hV0 regime re-specification (the 4th
+corrected-field case), then J4-352.
