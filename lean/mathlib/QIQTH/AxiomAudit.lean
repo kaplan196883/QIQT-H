@@ -19821,4 +19821,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussLemmaAssembly.gauss_coordinate_contraction
 #print axioms QIQTH.GaussLemmaAssembly.gauss_coordinate_contraction_gauge
 
+-- ## J4-346 (GaussLemmaFlowData): THE hGauss GERM DELIVERED (the final-brick shape)
+-- F1 flow_jacobi_field (the ∃-Φ named-conjunct extraction via expDiff_flow_
+-- isGeodesicVariation: J(0)=0, Jp(0)=w, hJ1 = D exp·w near-banked from (FD), + the
+-- INTERIOR first-order variational system on Ioo 0 1). ⚠ KEY FINDING: the flow's
+-- derivatives are within-Icc[0,1]; the J4-345 assembly demanded Ioo(-2,2) — the
+-- honest closure route = interior-MVT (E′=W, W′=0 on Ioo 0 1 + Icc-continuity +
+-- exists_hasDerivAt_eq_slope), documented in-header, the follow-on brick.
+-- F2 gauss_contraction_concrete + F3 ★ hGauss_pullback (the =ᶠ[𝓝 0] germ in the
+-- EXACT consumer binder order — matches cyclicT_of_hGauss/htr_adapter) — surviving
+-- hyp = the per-point Gauss identity hgball (reduced, not window-blocked) + F4
+-- expPullbackMetric_zero_gauge (g̃(0)=I PROVEN). F4 VERDICT: the capstone C∞ hg at
+-- the pullback = the ONE genuine labelled smoothness residue (the pullback caps at
+-- C⁴ via expMap_contDiffOn_four); ∂g̃(0)=0 + inverse/positivity = derivable-with-
+-- work. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.GaussLemmaFlowData.flow_jacobi_field
+#print axioms QIQTH.GaussLemmaFlowData.gauss_contraction_concrete
+#print axioms QIQTH.GaussLemmaFlowData.hGauss_pullback
+#print axioms QIQTH.GaussLemmaFlowData.expPullbackMetric_zero_gauge
+
 end QIQTH.AxiomAudit
