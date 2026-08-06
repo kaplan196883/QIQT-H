@@ -19304,4 +19304,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RicciSourceCoeff.pd_christoffel_at_zero
 #print axioms QIQTH.RicciSourceCoeff.riemann_at_zero
 
+-- ## J4-319 (FacadeBundleFields): THE hCConv FIELD CENSUS + 5 PER-FIELD DISCHARGES
+-- P0 (corrected — DataPileWitnessAudit Family 7 was STALE re CConvSourceData):
+-- the 18 fields + hD1 = 2 ND (hKmeasSet, hcoef) · 7 DH with banked builders
+-- (hCover/reachableGate_concrete, hKmeas/hKmeas_concrete_v7, hFjoint+hFmeas/
+-- leviSource_*_aesm + LeviSeriesLocalData, hDmeas/hDmeas_discharged,
+-- hC2fam/hC2fam_concrete_final, hD1/hD1_from_data) · 9 GENUINE WALLS in two
+-- clusters: (i) B2 chart-inverse OFF-IMAGE measurability ×4 (hSmeasSet/hVmapMeas/
+-- hChartB/hSliceData — flowInverse_jointMeasurable_regional only agrees on-image)
+-- + (ii) B5 on-gate Gaussian dichotomy ×2 (hGateData/hGateData' = W4), plus hFbd,
+-- hlin, hDrep. ⚠ CONSTRADIUS finding: the literal gate does NOT simplify B2 (the
+-- walls are off-image chart-inverse, orthogonal to the radius). P1 discharges:
+-- hKmeasSet_field, hCover_field, hFjoint_field + hFmeas_field (the leviSource
+-- engines specialized verbatim to the gate's residual kernel), hcoef_field.
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.FacadeBundleFields.hKmeasSet_field
+#print axioms QIQTH.FacadeBundleFields.hCover_field
+#print axioms QIQTH.FacadeBundleFields.hFjoint_field
+#print axioms QIQTH.FacadeBundleFields.hFmeas_field
+#print axioms QIQTH.FacadeBundleFields.hcoef_field
+
 end QIQTH.AxiomAudit
