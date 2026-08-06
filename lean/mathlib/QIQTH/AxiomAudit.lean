@@ -18902,4 +18902,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenBaseWChain.heatOpWitness_fixedBase_active_chartFree
 #print axioms QIQTH.FrozenBaseWChain.heatOpWitness_fixedBase_continuousOn
 
+-- ## J4-294 (GapACoverGapB): ★ the Gap-A COVER + the G2 reduction ★
+-- heatOpWitness_fixedBase_originBall (the near paste on the ORIGIN ball at any base w)
+-- + _far (the whole-ball-far zero slice, satisfiable at ‖w‖ > R + √(3/2)·b) +
+-- continuousOn_timeAffine_comp (the bridge into the engine's (s−su) slot) +
+-- iterE_jointContinuousOn_all(_concrete) (the ∀k continuity REDUCED to ONE carry:
+-- hcont — the a.e.-u inner continuity; hmeas discharged outright; hbase = G1@0).
+-- hcont's named sub-walls: (i) the ∀w active bank assembly, (ii) the Gap-B R*-radius
+-- IH localization, (iii) the uniform S-dom dominator. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.GapACoverGapB.heatOpWitness_fixedBase_originBall
+#print axioms QIQTH.GapACoverGapB.heatOpWitness_fixedBase_originBall_far
+#print axioms QIQTH.GapACoverGapB.continuousOn_timeAffine_comp
+#print axioms QIQTH.GapACoverGapB.iterE_jointContinuousOn_all
+#print axioms QIQTH.GapACoverGapB.iterE_jointContinuousOn_all_concrete
+
 end QIQTH.AxiomAudit
