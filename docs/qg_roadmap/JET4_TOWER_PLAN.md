@@ -2176,3 +2176,31 @@ the actual integrand (M·u^{k−1}) + the wired engines (∀k at the concrete E)
 mismatches. Remaining per-level carries: (C-meas) parametric-Fubini u-measurability +
 (C-cont) the inner-engine recursion; + the banked concrete providers. std-3 all 7,
 raw 0. NOT a₁=R/6. NEXT: J4-291 InnerEngineRecursion (C-meas + C-cont).
+
+## J4-291 (2026-08-06, 9c173d54) — InnerEngineRecursion: C-meas discharged; the map [AF]
+The parametric-Fubini u-measurability from hEmeas alone (C-meas GONE) + the inner
+engine soundly wired. THE MAP: the genuine walls = (S-dom) p-uniform dominator +
+Gap-A (E at second-arg w; the base is the (·,·,0) slice) + Gap-B (iterE at first-arg
+w off-ball; the IH is ball-anchored). std-3 all 5, raw 0. NOT a₁=R/6.
+
+## ★ SOL CONSULT #7 (2026-08-06) — the Gap-A/B/S-dom ARCHITECTURE
+KEY CORRECTIONS: (1) Gap-A localizes via the FIRST factor's finite-range support —
+z∈B_R + gate range b ⟹ the active w-region ⊆ B_{R*}=B(0,R+b); off it E(·,z,w)≡0 for
+all z∈B_R (needs the LOCAL zero: Wit ≡ 0 on an OPEN nbhd + heatOp locality, NOT
+pointwise; ⚠ the boundary is NOT killable by null-sections under the current engine —
+the CRITICAL repo check: is the cutoff's derivative-relevant support STRICTLY inside
+the hard gate (closure cutoffSupport ⊆ gateInterior, a zero collar)? If yes NO
+discontinuity anywhere and everything glues). (2) Gap-B: the "first factor kills far
+w" claim is WRONG for iterE itself (near-diagonal gates propagate); the fix = the IH
+QUANTIFIED OVER ALL (t₁,t₂,R) — P k := ∀ t₁ t₂ R, ContinuousOn (iterE k) (Icc ×ˢ
+closedBall 0 R); instantiate at (ut₁,ut₂,R*) + compose (s,z)↦(su,w). The base case
+globalizes via the zero collar (E(·,·,0) continuous on EVERY ball: banked small-ball
+chain + local zero outside the support). (3) S-dom: constant × indicator of B_{R*}
+(fixed u; constants may blow up in u — harmless, the outer envelope handles u) —
+NOT the Gaussian-product optimization. (4) Gap-A near-region: generalize the J4-285/
+287/288 chain to FROZEN base w (refactor the centre facts to ∀q; NO translation
+covariance, NO joint-w regularity needed — per-w only; measurability stays with the
+banked Fubini). ENDGAME PRE-EMPTS: uniform convergence on the EXACT compact + an
+ENLARGED K' for the moving correction + Heine on K' + keep u∈(0,1) a.e. + the
+measurability separate. RANKINGS recorded (fixed-base-w chain 1st for A; all-radii
+IH 1st for B; indicator dominator 1st for S-dom).
