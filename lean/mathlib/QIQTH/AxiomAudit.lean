@@ -19324,4 +19324,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FacadeBundleFields.hFmeas_field
 #print axioms QIQTH.FacadeBundleFields.hcoef_field
 
+-- ## J4-320 (B2MeasurabilityDissolution): ★ 3 OF THE 4 B2 WALLS DOWN ★ (Sol-guided)
+-- Wall 1 (hSmeasSet) FELL in the K-restricted form: gateGraph2_measurableSet (the
+-- 3-var banked graph → the 2-var section) + hSmeasSet_Krestricted + the field-shaped
+-- hSmeasSet_field_Krestricted; the RAW (no-K) set is an honest documented residue
+-- (off-K = analytic-set projection, not banked). Walls 2/3 (hVmapMeas/hChartB)
+-- DISSOLVED as interface artefacts at the piecewise chart Wg := if (z,p)∈Γ then G
+-- else 0 (no .choose): wg_zslice_measurable + wg_vmap_aemeasurable +
+-- wg_chartB_measurable + the on-gate C² transfer (wg_eventuallyEq_chart_onGate +
+-- wg_contDiffAt_onGate) + wg_walls23_from_banked (satisfiability from
+-- flowInverse_jointMeasurable_regional + hKSmeas_concrete). ⚠ VERDICT: the current
+-- CConvChartGateData HARDWIRES uniformInverseChart — consuming Wg needs a facade
+-- variant (chart as parameter); vanVleckGatedWitness itself is unaffected. Wall 4
+-- (hSliceData) PARTIAL: radialCutoff_zero_on_frontier_collar (leg a). SOL VERDICTS
+-- RECORDED: hFbd LIKELY FALSE AS STATED (s^{-n/2} singular; L¹ facade variant is
+-- the honest fix); hlin/hDrep joint with the hDConv diff-under-∫ tranche;
+-- hGateData/hGateData' = one shared quantitative Gaussian-jet theorem. std-3 all 10.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.B2MeasurabilityDissolution.gateGraph2_measurableSet
+#print axioms QIQTH.B2MeasurabilityDissolution.hSmeasSet_Krestricted
+#print axioms QIQTH.B2MeasurabilityDissolution.hSmeasSet_field_Krestricted
+#print axioms QIQTH.B2MeasurabilityDissolution.wg_zslice_measurable
+#print axioms QIQTH.B2MeasurabilityDissolution.wg_vmap_aemeasurable
+#print axioms QIQTH.B2MeasurabilityDissolution.wg_chartB_measurable
+#print axioms QIQTH.B2MeasurabilityDissolution.wg_eventuallyEq_chart_onGate
+#print axioms QIQTH.B2MeasurabilityDissolution.wg_contDiffAt_onGate
+#print axioms QIQTH.B2MeasurabilityDissolution.wg_walls23_from_banked
+#print axioms QIQTH.B2MeasurabilityDissolution.radialCutoff_zero_on_frontier_collar
+
 end QIQTH.AxiomAudit
