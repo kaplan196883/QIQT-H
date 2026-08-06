@@ -2212,3 +2212,11 @@ frontier vanishing was banked) — no re-choice. (B1/B2) local zero via heatOp l
 globalized base case (hEA/hoff carried — the radii/wiring reconciliation is the
 residual). std-3 all 9+, raw 0. NOT a₁=R/6.
 NEXT: J4-293 FrozenBaseWChain (Gap-A near region per SOL#7).
+
+## J4-293 (2026-08-06, 6f63c6e6) — FrozenBaseWChain: ★★ Gap-A's chain COMPLETE ★★ [AF]
+The census: only TWO base-0-specific facts, both re-proven parametric; W w w = 0 ⟹
+co-centred at w. F1 (∀-base centre facts) + F3 (the re-centred chart-composed chain) +
+F2 (the base-w on-gate reduction) + F4 (heatOpWitness_fixedBase_continuousOn at every
+base w, near+off pasted). RESIDUAL: the chart-ball cover (per-w slices → the
+origin-centred family). std-3 all 21, raw 0. NOT a₁=R/6.
+NEXT: J4-294 GapACoverGapB (the cover + the all-radii IH + S-dom).
