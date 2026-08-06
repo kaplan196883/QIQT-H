@@ -18928,4 +18928,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HcontAssembly.iterE_jointContinuousOn_strong
 #print axioms QIQTH.HcontAssembly.leviSlice_jointContinuousOn_of_strong
 
+-- ## J4-296 (GapASdomInstantiation): ★★ Gap-A DISCHARGED (the K-gate route) ★★
+-- THE COVERAGE VERDICT: the Gap-A slice partitions by the HARD K-GATE, not a norm
+-- annulus — w ∈ K (near: the frozen bank through the time-affine bridge on the shrunk
+-- window) / w ∉ K (E ≡ 0 identically — gatedKernel_heatOp_eq_zero_of_notMem) ⟹
+-- hGapA proved ∀w (ae_of_all); the a.e.-u only drops the null u=1; the feared lower
+-- near-isometry bound is MOOT. heatOpWitness_baseNotMem_eq_zero + hGapA_concrete +
+-- iterE/leviSlice_jointContinuousOn_concrete_final (Gap-A no longer an input). THE
+-- REMAINING TWO CARRIES: hnear (per-w∈K, satisfiable via the origin-ball cover — the
+-- frozen-active-bank uniformity residual) + hSdom (the indicator dominator — the
+-- documented RDomEnvelope-style build, next brick). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.GapASdomInstantiation.heatOpWitness_baseNotMem_eq_zero
+#print axioms QIQTH.GapASdomInstantiation.hGapA_concrete
+#print axioms QIQTH.GapASdomInstantiation.iterE_jointContinuousOn_concrete_final
+#print axioms QIQTH.GapASdomInstantiation.leviSlice_jointContinuousOn_concrete_final
+
 end QIQTH.AxiomAudit

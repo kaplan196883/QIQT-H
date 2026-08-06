@@ -491,6 +491,7 @@ import QIQTH.ZeroCollarLocalZero
 import QIQTH.FrozenBaseWChain
 import QIQTH.GapACoverGapB
 import QIQTH.HcontAssembly
+import QIQTH.GapASdomInstantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
