@@ -19246,4 +19246,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VaryingRadiusS1Provider.hKSmeas_varying
 #print axioms QIQTH.VaryingRadiusS1Provider.tripleHEmeas_at_varying_flowball_gate
 
+-- ## J4-316 (ConstRadiusGateExport): ★★ THE Measurable-cf RESIDUE IS DISSOLVED ★★
+-- U0: the hgood 7-conjunct bundle is discharged in _lin_pkg_open UNIFORMLY at the
+-- single constant c=(b+ρc)/2 — no per-q optimality ever used the .choose; every
+-- package field transfers verbatim at the constant. gatedWitnessN1_hEboundW_le_of_
+-- good_CONST + _le_lin_CONST + gatedWitnessN1_package_open_CONSTRADIUS = the full
+-- provider gate package re-exported with the LITERAL constant-radius gate (no
+-- .choose in the gate). tripleHEmeas_AT_CONSTRADIUS_GATE = S1 at that gate from
+-- geometry-only hypotheses (Measurable cf ⟹ measurable_const — DISSOLVED; the
+-- surviving c<δ₀ = an honest satisfiable chart-vs-jet reach antecedent, carried
+-- never assumed). constRadius_package_and_S1 = the bundled package∧S1 fact the
+-- future v3-export will consume. Remaining to DELETE hEmeas from the capstone:
+-- the v3-export provider refactor (the deliberate ~130-binder brick). std-3 all 5.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ConstRadiusGateExport.gatedWitnessN1_hEboundW_le_of_good_CONST
+#print axioms QIQTH.ConstRadiusGateExport.gatedWitnessN1_hEboundW_le_lin_CONST
+#print axioms QIQTH.ConstRadiusGateExport.gatedWitnessN1_package_open_CONSTRADIUS
+#print axioms QIQTH.ConstRadiusGateExport.tripleHEmeas_AT_CONSTRADIUS_GATE
+#print axioms QIQTH.ConstRadiusGateExport.constRadius_package_and_S1
+
 end QIQTH.AxiomAudit
