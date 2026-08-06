@@ -19880,4 +19880,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackGeometryLegs.expPullbackMetric_rightInverse_eventually
 #print axioms QIQTH.PullbackGeometryLegs.expPullbackMetric_det_pos_eventually
 
+-- ## J4-349 (Hpd2FromCyclic): THE hpd2 CYCLIC-ROUTE CROSS-CHECK
+-- P0: hpd2 = 2·⟨T g̃ α k l j⟩ − ⟨T g̃ j k l α⟩ = 0 (⟨⟩ = the v³ contraction).
+-- KEY MATH FINDING: the four-instance cyclic gives 2A + C = 0 (NOT hpd2's 2A − C);
+-- hpd2 additionally needs A = 0 from the DIAGONAL Gauss cyclic — both families
+-- load-bearing. hpd2_of_cyclicT (UNCONDITIONAL abstract algebra — the six-
+-- permutation v³ reindex) + hcd_expPullback (Schwarz at g̃ DISCHARGED from
+-- C²-at-0 via Clairaut/isSymmSndFDerivAt — not a carry) + hpd2_expPullback_of_
+-- cyclic (carries = the two g̃-cyclic identities, ⊤-blocked-but-satisfiable) +
+-- kappa_eq_one_sixth_expPullback_via_cyclic (κ=1/6 at g̃ via the cyclic route).
+-- ⚠ HONESTY (per dont-undercredit): hpd2 was ALREADY unconditional in-repo
+-- (PullbackMetric.expPullback_hpd2, the residFold route) and the composed
+-- kappa_eq_one_sixth_expPullback EXISTS (PullbackMetric:6176) — this file = the
+-- INDEPENDENT cyclic-T cross-check of the same identity. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.Hpd2FromCyclic.hpd2_of_cyclicT
+#print axioms QIQTH.Hpd2FromCyclic.hcd_expPullback
+#print axioms QIQTH.Hpd2FromCyclic.hpd2_expPullback_of_cyclic
+#print axioms QIQTH.Hpd2FromCyclic.kappa_eq_one_sixth_expPullback_via_cyclic
+
 end QIQTH.AxiomAudit
