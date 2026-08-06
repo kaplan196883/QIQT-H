@@ -19490,4 +19490,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2WitnessStar.pointwise_domWide
 #print axioms QIQTH.CConvV2WitnessStar.hdomS_v2Wide
 
+-- ## J4-327 (CConvV2ChartInterface): FACADE-v2 BRICKS 3+4 (the chart-parametric interface)
+-- T0 CENSUS: hjoint_instantiated's internals = copy-with-edits at the opaque chart
+-- (only hWjoint consumed — NO new SliceChartData field needed); WitnessDerivMeasur-
+-- ability = ALREADY CHART-OPAQUE (zero uniformInverseChart occurrences — no copy);
+-- HenvUInstantiation's hdomS/henv legs = dead old-plumbing SKIPPED (replaced by the
+-- banked wide legs); the missing ∀ᵐs→∀ᶠx WIDE order = T3 here. gatedWitnessW (the
+-- Vmap-parametric witness) + gatedWitnessW_uniformInverseChart (the rfl bridge) +
+-- the T1 legs (support identity, slice continuity, the Borel witness measurabilities
+-- hWqW/hWaW, sliceInterfaceW_of_data = the assembled three legs) + henv_v2Wide (the
+-- wide ∀ᵐs→∀ᶠx domination). ARCHITECTURAL FINDING: the full hjoint_fully_geometric
+-- capstone also consumes the chart-intrinsic hVmapMeas/hCover — routed through Wg in
+-- brick 11 (banked wg_vmap_aemeasurable/wg_contDiffAt_onGate). std-3 all 11.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2ChartInterface.gatedWitnessW_uniformInverseChart
+#print axioms QIQTH.CConvV2ChartInterface.gcpwWField_eq_zero_of_cutoff_zero
+#print axioms QIQTH.CConvV2ChartInterface.gatedWitnessW_fieldSlot_eq_inner_of_support
+#print axioms QIQTH.CConvV2ChartInterface.gatedWitnessW_slice_continuous_of_support
+#print axioms QIQTH.CConvV2ChartInterface.gatedWitnessW_slice_zero_of_notMemK
+#print axioms QIQTH.CConvV2ChartInterface.hSliceContW_of_data
+#print axioms QIQTH.CConvV2ChartInterface.gcpwWField_measurable
+#print axioms QIQTH.CConvV2ChartInterface.hWqW_of_chartBorel
+#print axioms QIQTH.CConvV2ChartInterface.hWaW_of_chartBorel
+#print axioms QIQTH.CConvV2ChartInterface.sliceInterfaceW_of_data
+#print axioms QIQTH.CConvV2ChartInterface.henv_v2Wide
+
 end QIQTH.AxiomAudit
