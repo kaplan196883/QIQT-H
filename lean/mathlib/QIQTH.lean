@@ -505,6 +505,7 @@ import QIQTH.MovingCorrRecombination
 import QIQTH.EnvelopeWiringLocUnif
 import QIQTH.LocUnifDerivConv
 import QIQTH.TUniformFrozenAI
+import QIQTH.HDerivConvComposition
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

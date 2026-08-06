@@ -19147,4 +19147,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TUniformFrozenAI.frozenAI_locUnif
 #print axioms QIQTH.TUniformFrozenAI.hbdryLU_W1free_of_frozen_locUnif
 
+-- ## J4-310 (HDerivConvComposition): ★★ THE FIXED-GATE hDerivConv IS W1-FREE ★★
+-- hmovLU_concrete (H1 — no abstract carry) + hbdryLU_CONCRETE (H2 — the exact
+-- hbdryLUTarget from the satisfiable list, NO hAnear) + hDerivConv_conditional (H3 —
+-- the derivConv_of_data steps (b)+(c) replicated with OUR W1-free hbdryLU; carries =
+-- the F2 regularity pile + the hFII tails + hDaLimLU) + truncatedDuhamelCore_
+-- conditional (H4 — the pile composed; the load-bearing hDaLim-vs-hDaLimLU bridge =
+-- .tendsto_at). ★ THE VERDICT: the untruncated-gate W1 flag governs ONLY the
+-- provider-∃ export (the OLD core_of_v2prime_data_FULL path) — the fixed-gate chain
+-- carries NO hAnear; the open surface = the F2 pile + the hDaLimLU DATA census, none
+-- of it W1. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.HDerivConvComposition.hmovLU_concrete
+#print axioms QIQTH.HDerivConvComposition.hbdryLU_CONCRETE
+#print axioms QIQTH.HDerivConvComposition.hDerivConv_conditional
+#print axioms QIQTH.HDerivConvComposition.truncatedDuhamelCore_conditional
+
 end QIQTH.AxiomAudit
