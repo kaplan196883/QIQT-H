@@ -2306,3 +2306,11 @@ hf_cont discharge + hBoundaryLim_ASSEMBLED (hf_cont internal via the FINAL bundl
 RESIDUAL: the hMovingCorr integral recombination (mass × sup + tails + split) + the
 hf_meas/hf_bdd feeds. std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-306 MovingCorrRecombination (B2 → hBoundaryLim fully internal).
+
+## J4-306 (2026-08-06, 54dc0f0d) — MovingCorrRecombination: ★★ hBoundaryLim FULLY INTERNAL ★★ [AF]
+The m-uniform sequence tails + the on-ball mass×sup + the 3ε assembly (kernel-agnostic)
++ hBoundaryLim_FULLY_INTERNAL (hMovingCorr GONE — proven from B1 + the mass + the
+tails; hf_cont internal). The two new satisfiable carries: the window-uniform global
+Levi bound (provider named) + the moving-slice measurability (provider named). std-3
+all 4, raw 0. NOT a₁=R/6. NEXT: J4-307 EnvelopeWiringLocUnif (the carriers wired +
+the loc-unif start).
