@@ -19553,4 +19553,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2DerivRep.hlin_as_D
 #print axioms QIQTH.CConvV2DerivRep.hD1_conditional
 
+-- ## J4-330 (CConvV2Facade): ★★★ THE 14-BRICK FACADE-v2 CHAIN IS COMPLETE ★★★
+-- W0.3 KEY RESOLUTION: the coefficient continuity hcont need NOT come from the
+-- poisoned g2_bundle_assembled chain — gcoef i x = (D x)(Pi.single i 1), so hcont
+-- follows from hD1's C¹ continuity (ContDiffAt.eventually + ContinuousAt.clm_apply);
+-- the old bridge hCConv_L1_final reused as-is. hfam_v2 (the L1 ∃-HasFDerivAt family)
+-- + hD1_v2 (the L2 re-export) + hCConvSlot_AT_GATE_v2 (★ the EXACT capstone hCConv
+-- antecedent from the v2 census ONLY, via hCConv_reduction at D := Dmap).
+-- v1→v2: hGateData ×2 + hFbd (the three adjudicated-false fields) DIE; the poisoned
+-- hjoint/henv/hdomS/g2 chain removed. SURVIVING CENSUS (complete): the open nbhd,
+-- the hlin linewise family (its diff-under-∫ carries dischargeable from the WIDE
+-- legs + the chart-opaque measurability bank + sourceDataV2), the L2 sliver census.
+-- hGateData/hGateData'/hFbd/hAnear: NOT in the dependency cone. std-3 all 3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2Facade.hfam_v2
+#print axioms QIQTH.CConvV2Facade.hD1_v2
+#print axioms QIQTH.CConvV2Facade.hCConvSlot_AT_GATE_v2
+
 end QIQTH.AxiomAudit
