@@ -19773,4 +19773,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussLemmaTransverse.covariant_pairing_hasDerivAt_zero
 #print axioms QIQTH.GaussLemmaTransverse.gauss_transverse_linear
 
+-- ## J4-343 (RiemannFirstPairAntisym): hvanish DISCHARGED (mod the Jacobi ODE)
+-- V1 riemannLower_expansion (the GENERAL-POINT lowered-Riemann formula: the ½∂∂g
+-- combination + the ΓΓg terms — the four leftover gΓΓ cancel pairwise against
+-- Riemann's own ΓΓ; Schwarz kills the shared ∂∂g) + V2 riemannLower_first_pair_
+-- antisymm (Rlow_{abcd} + Rlow_{bacd} = 0 — FULLY proven incl. the ΓΓ part) +
+-- antisym_contract + V3 hvanish_from_antisym (the EXACT hvanish shape of
+-- covariant_pairing_hasDerivAt_zero, discharged given hJac : ∇∇J = −R(J,γ̇)γ̇ —
+-- the satisfiable Jacobi-ODE input, the next brick's target). The transverse leg's
+-- curvature half is CLOSED. hGauss remaining: the Jacobi-ODE instantiation →
+-- homogeneity → the coordinate assembly → the frame transport. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.RiemannFirstPairAntisym.antisym_contract
+#print axioms QIQTH.RiemannFirstPairAntisym.riemannLower_expansion
+#print axioms QIQTH.RiemannFirstPairAntisym.riemannLower_first_pair_antisymm
+#print axioms QIQTH.RiemannFirstPairAntisym.hvanish_from_antisym
+
 end QIQTH.AxiomAudit
