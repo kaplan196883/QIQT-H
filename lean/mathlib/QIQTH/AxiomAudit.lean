@@ -19284,4 +19284,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OuterCarryRecon.hgi_of_geometry
 #print axioms QIQTH.OuterCarryRecon.hgnd_of_hgpos
 
+-- ## J4-318 (RicciSourceCoeff): ★ THE htr ALGEBRA IS CLOSED (R3 reduced to (†)) ★
+-- Q0: htr (ProviderSideExports:177) = ∀ c d, ∑_a ∂_c∂_d g_{aa}(0) = -(2/3) Ric c d.
+-- The -(2/3) IS the trace of the classical -(1/3) NC 2-jet (†):
+-- ∂_c∂_d g_{ab}(0) = -(1/3)(R_{acbd}+R_{adbc}). Chain: ric_of_lowered +
+-- lowered_diag_swap + jet_trace_sum + ricci_diag_contract ⟹ htr_of_geometry (the
+-- capstone htr binder VERBATIM from hjet=(†) + hRic + hpair); htr_hypotheses_
+-- satisfiable (flat witness — no vacuity hole, per feedback_axiom_budget_blind_spot);
+-- pd_christoffel_at_zero + riemann_at_zero = the honest bridge from abstract Rlow to
+-- the REAL riemann g gi at 0 (ΓΓ dies, Schwarz cancels). SOLE RESIDUE: (†) the full
+-- four-index NC 2-jet — the van-Vleck bank has it only DIRECTIONALLY (Ric(v,v)).
+-- R2 walls untouched. std-3 all 8. NOT a₁ = R/6.
+#print axioms QIQTH.RicciSourceCoeff.ric_of_lowered
+#print axioms QIQTH.RicciSourceCoeff.lowered_diag_swap
+#print axioms QIQTH.RicciSourceCoeff.jet_trace_sum
+#print axioms QIQTH.RicciSourceCoeff.ricci_diag_contract
+#print axioms QIQTH.RicciSourceCoeff.htr_of_geometry
+#print axioms QIQTH.RicciSourceCoeff.htr_hypotheses_satisfiable
+#print axioms QIQTH.RicciSourceCoeff.pd_christoffel_at_zero
+#print axioms QIQTH.RicciSourceCoeff.riemann_at_zero
+
 end QIQTH.AxiomAudit
