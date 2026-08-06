@@ -2680,3 +2680,11 @@ XUniformSliverFull object) · B3 the Tendsto re-export (const.sub hsliver).
 GlobalGatedRawBound predicate · C2 the consumer adapter · C3 the capstone_with_hraw
 facade. The hraw PROOF = a separate later campaign (loc-unif M2 + finite-cover +
 cutoff absorption), NOT on the critical path.
+
+## J4-334 (2026-08-07, e38ac3c4) — (†) BRICKS A1+A2: THE pd CALCULUS + THE CYCLIC-T IDENTITY [AF]
+A1 NCGaussPd3: pd_coord + pd_coord_mul + pd3_coord_mul (only the Kronecker hits
+survive at 0) + pd3_sum. A2 NCGaussToCyclicT: pd_eventuallyEq + T_symm_cd/ab +
+cyclicT_gauss + ★ cyclicT_of_hGauss (T_{abcd}+T_{acbd}+T_{bcad} = 0 from the
+labelled hGauss gauge input, by linarith on the four cyclic instances). std-3 all,
+raw 0. NOT a₁=R/6. NEXT: J4-335 = A3 (metric_secondJet_eq_riemann — the linear
+system pins T ⟹ (†)) + A4 (htr_from_hGauss — the R3 wall fully reduced to hGauss).
