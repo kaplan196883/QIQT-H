@@ -2328,3 +2328,10 @@ movingCorr_tUniform (the t-uniform 3ε) + hbdryLU_of_movingCorr_frozen (the W1-f
 composition). L2 = the residual wall: the t-uniform FROZEN limit (the AI moduli
 uniform in u; only f_u's modulus is u-dependent — the t-uniform Heine supplies it).
 std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-309 TUniformFrozenAI (L2 → hbdryLU → hDerivConv).
+
+## J4-309 (2026-08-06, 2f1bc07f) — TUniformFrozenAI: ★★ L2 CLOSED ★★ [AF]
+The f≡1 mass-one trick (T1, the sole AI reuse) + the Heine u-uniform modulus (T2) +
+the 3-piece t-uniform split (T3) + the loc-unif form (T4) + the exact hbdryLUTarget
+composition (T5; sole carry = the mechanical hmovLU promotion). FLAG: the
+untruncated-gate W1 aspect to examine at the hDerivConv composition. std-3 all 5,
+raw 0. NOT a₁=R/6. NEXT: J4-310 HDerivConvComposition.
