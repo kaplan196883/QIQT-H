@@ -2204,3 +2204,11 @@ banked Fubini). ENDGAME PRE-EMPTS: uniform convergence on the EXACT compact + an
 ENLARGED K' for the moving correction + Heine on K' + keep u∈(0,1) a.e. + the
 measurability separate. RANKINGS recorded (fixed-base-w chain 1st for A; all-radii
 IH 1st for B; indicator dominator 1st for S-dom).
+
+## J4-292 (2026-08-06, cc79e433) — ZeroCollarLocalZero: ★★ THE COLLAR HOLDS ★★ [AF]
+(A) the cutoff support strictly inside the gate (c = (b+ρc)/2 > b definitional; the
+frontier vanishing was banked) — no re-choice. (B1/B2) local zero via heatOp locality
++ (C) the active-region bounds (R* = R + √(3/2)·b) + (D) the pasting skeleton + the
+globalized base case (hEA/hoff carried — the radii/wiring reconciliation is the
+residual). std-3 all 9+, raw 0. NOT a₁=R/6.
+NEXT: J4-293 FrozenBaseWChain (Gap-A near region per SOL#7).
