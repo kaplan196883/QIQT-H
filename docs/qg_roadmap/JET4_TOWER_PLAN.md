@@ -2562,3 +2562,14 @@ sourceDataV2_concrete = CConvSourceDataV2 for the concrete gate source (carries:
 LeviSeriesLocalData + hFsum + hgMeas). v2 DONE: 1,2,5,10 of 14. std-3 all 8, raw 0.
 NOT a₁=R/6. NEXT: J4-325 = bricks 6+7 (ChartComparison α₁/α₂ — the two-sided radial
 comparison + Jacobian bound feeding brick 9's (⋆) proof).
+
+## J4-325 (2026-08-07, 516a14d1) — FACADE-v2 BRICKS 6+7: ChartComparison α₁/α₂ [AF]
+C0: the ½-radial conjunct banked at the centre (chartW0 nearIsometry); the general-x
+coercivity = the honest carry (= hmin of witnessFieldDeriv_gate_envelope_coercive);
+HgateSatAudit's poison was Bs, never the radial. C1 α₁ re-exports; C2 the two-sided
+centre comparison; C3 the compact upper + the Cauchy–Schwarz/Jacobian chain; C4 ★
+THE TRANSFER PROVED: √r²_W·τ⁻¹·gaussDdim τ (W z x) ≤ √2·2ⁿ·τ^{-1/2}·gaussDdim(4τ) z
+(β1 at the banked c₀=½). Brick-9 inputs named: general-x coercivity, Jacobian L, the
+width bookkeeping (4τ vs hStar's 2τ — the wide-variant route). v2 DONE 1,2,5,6,7,10
+of 14. std-3 all 13, raw 0. NOT a₁=R/6. NEXT: J4-326 = bricks 8+9 (WitnessStar — the
+(⋆) analytic heart, the wide-variant decision).
