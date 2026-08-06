@@ -2517,3 +2517,27 @@ regardless: gaussian_beats_linear (β1, explicit s^{−1/2}) + gaussian_beats_qu
 scalar core = β1; Ba/Bd conjuncts survive, only Bs is poisoned. std-3 all 7, raw 0.
 NOT a₁=R/6. NEXT: Sol consult on the corrected-facade-v2 design (the (⋆) envelope +
 L¹ hFbd + the chart-parametric re-thread — one consolidated v2 chain?), then J4-323.
+
+## SOL CONSULT #9 (2026-08-06, post-J4-322) — THE FACADE-v2 DESIGN (14 bricks)
+Decisions: (1) surgery = (c)-as-contract: DELETE hGateData/hGateData' (do NOT weaken
+the naked quotient — |N/2(t−s)| ≤ Bs(t−s)^{-1/2} is STILL false; the Gaussian must
+participate); the new B5 contract = hStar: ∃C≥0,∀x∈u,∀i,∀s∈Ioc 0 t,∀z,
+|witnessFieldDeriv| ≤ C·(t−s)^{-1/2}·gaussDdim(2(t−s))z (pointwise uniform — kills
+the ∀ᶠ/∀ᵐ reorder duplication); concrete proof via a separate bridge theorem.
+(2) hFbd fix = hFpair: IntegrableOn (fun s => (t−s)^{-1/2}·∫ gaussDdim(2(t−s))z·|F s z|)
+(Ioc 0 t) — derived from |F s z| ≤ CF·s^γ·G_{cF·s}(z) with γ>−1 (Levi conservative
+γ=−1/2; Beta(1/2,1/2) endpoint; iterates improve m(γ₀+1)−1 but the series keeps γ₀).
+(3) chart re-thread MERGED into the v2 campaign via a SliceChartData package
+(instantiate at uniformInverseChart AND Wg) — separate generic modules, not one
+monolith, and NOT patch-after-duplicate. (4) hlin from the BANKED hDConv loc-unif
+machinery (hDerivConv_conditional/hDConv_W1free specialized to update x i w) — NO
+second dominated-differentiation development; hDrep by definition of D + algebra.
+THE 14 BRICKS: 1 Contracts (V2 structures) · 2 GaussianPairing (sourcePair_of_
+gaussian_bound, β-integral) · 3 ChartJoint (chart-parametric hjoint copies) · 4
+ChartSlices · 5 EnvelopeFromStar (hdomS/henv_v2 NEW from hStar+hFpair) · 6 α₁
+ChartComparisonLocal (exp/log identities, no heat asymptotics) · 7 α₂ Uniform
+(c·r² ≤ r_x² ≤ C·r² + the log-derivative bound) · 8 WitnessProductRule (at Wg) · 9
+WitnessStarConcrete ((⋆) proven: α₂ + β1; β2 NOT here) · 10 LeviSource (γ=−1/2
+adapter) · 11 WgInstantiation (the deferred chart residue discharged) · 12
+HDerivConv (hlin from banked) · 13 DRepresentation (D def + hDrep + hD1 via sliver;
+β2 if needed) · 14 Facade (hCConvSlot_AT_GATE_v2).
