@@ -19103,4 +19103,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MovingCorrRecombination.movingCorr_tendsto_zero
 #print axioms QIQTH.MovingCorrRecombination.hBoundaryLim_FULLY_INTERNAL
 
+-- ## J4-307 (EnvelopeWiringLocUnif): ★★★ hBoundaryLim DONE ★★★
+-- leviSlice_window_uniform_bound (E1: the single Cf via the width-2 envelope +
+-- diagonal-peak + width-antitone; the floor keeps all slice times positive) +
+-- leviSlice_moving_meas (E2) + heine_timeShift_sup_tendsto_tUniform (the STRETCH:
+-- the t-UNIFORM Heine sup — the loc-unif promotion's key ingredient) + ★★★
+-- hBoundaryLim_DONE: the truncated-Duhamel boundary member with the two envelope
+-- carries COLLAPSED into ONE banked LeviSeriesLocalData package + a satisfiable
+-- window floor (ε₀=1 works since epsSeq ≤ 1, t>1). NO opaque carry survives.
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.EnvelopeWiringLocUnif.leviSlice_window_uniform_bound
+#print axioms QIQTH.EnvelopeWiringLocUnif.leviSlice_moving_meas
+#print axioms QIQTH.EnvelopeWiringLocUnif.heine_timeShift_sup_tendsto_tUniform
+#print axioms QIQTH.EnvelopeWiringLocUnif.hBoundaryLim_DONE
+
 end QIQTH.AxiomAudit
