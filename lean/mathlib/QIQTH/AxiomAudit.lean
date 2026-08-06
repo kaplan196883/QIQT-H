@@ -18883,4 +18883,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ZeroCollarLocalZero.continuousOn_of_active_open_zero_off
 #print axioms QIQTH.ZeroCollarLocalZero.E_slice_continuousOn_off_support
 
+-- ## J4-293 (FrozenBaseWChain): ★★ Gap-A's frozen-base chain COMPLETE (F1–F4) ★★
+-- THE CENSUS: base-parametric verbatim = the chart spec/φ_q 0 = q/the gate apply/the
+-- chain rules/the parametrix continuities/the whole ZeroCollar layer; base-0-specific
+-- = EXACTLY TWO cheap facts, both re-proven parametric (chartField_contDiffAt_center's
+-- proof was literally base-parametric; the D1c–D5 wrappers were only DOMAIN-hardwired
+-- to closedBall 0 — re-proven co-centred at arbitrary c). KEY: W w w = 0 ⟹ the base-w
+-- C² region is ball w ρc — the chain is CO-CENTRED AT w. LANDED (F1)
+-- chartField_contDiffAt_center_at/ball_at (∀w∈K) + (F3) the re-centred chart-composed
+-- chain (…_at) + (F2) the base-w on-gate reduction + (F4)
+-- heatOpWitness_fixedBase_{active_continuousOn, active_chartFree, continuousOn}
+-- (the near+off paste at every base w). RESIDUAL: the chart-ball COVER step (the
+-- per-w w-centred slices → the origin-centred a.e.-w family — a covering argument,
+-- NOT a base obstruction). std-3 all 21. NOT a₁ = R/6.
+#print axioms QIQTH.FrozenBaseWChain.chartField_contDiffAt_center_at
+#print axioms QIQTH.FrozenBaseWChain.chartComposedHeatOp_jointContinuousOn_at
+#print axioms QIQTH.FrozenBaseWChain.heatOpWitness_fixedBase_active_continuousOn
+#print axioms QIQTH.FrozenBaseWChain.heatOpWitness_fixedBase_active_chartFree
+#print axioms QIQTH.FrozenBaseWChain.heatOpWitness_fixedBase_continuousOn
+
 end QIQTH.AxiomAudit
