@@ -19840,4 +19840,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussLemmaFlowData.hGauss_pullback
 #print axioms QIQTH.GaussLemmaFlowData.expPullbackMetric_zero_gauge
 
+-- ## J4-347 (GaussInteriorMVT): ★★ THE hGAUSS CAMPAIGN ANALYTICALLY CLOSED ★★
+-- THE CONSTANCY TOOL: Lagrange's MVT (exists_hasDerivAt_eq_slope) — derivatives
+-- needed ONLY on the open interior + Icc-continuity ⟹ the endpoint-derivative
+-- worry sidestepped entirely. const_of_ioo_deriv_zero + linear_of_interior (the
+-- two-MVT E(1) = E(0) + W(0)) + covariant_field_hasDerivAt (the ONE new
+-- computation: the interior triple-product rule matching hcJp exactly) +
+-- gauss_interior_identity (the per-point first-variation Gauss identity DERIVED
+-- from the flow — both the window carry and the hJd/hcJd/hcJp carries discharged)
+-- + hgball_concrete + ★ hGauss_pullback_concrete (the =ᶠ germ with NO
+-- Gauss-identity carry — surviving: the ordinary geometry hyps (hsymm/hinv/hg) +
+-- the base gauge g_p=I). THE hGAUSS REMAINING RESIDUE (per the F4 verdict): the
+-- C∞-vs-C⁴ facade scope note (labelled) + the derivable legs (∂g̃(0)=0,
+-- inverse/positivity near 0). std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.GaussInteriorMVT.const_of_ioo_deriv_zero
+#print axioms QIQTH.GaussInteriorMVT.linear_of_interior
+#print axioms QIQTH.GaussInteriorMVT.covariant_field_hasDerivAt
+#print axioms QIQTH.GaussInteriorMVT.gauss_interior_identity
+#print axioms QIQTH.GaussInteriorMVT.hgball_concrete
+#print axioms QIQTH.GaussInteriorMVT.hGauss_pullback_concrete
+
 end QIQTH.AxiomAudit
