@@ -2614,3 +2614,16 @@ re-export. Dmap (the CLM representative) + hDrep_of_def (rfl) + hlin_as_D (the
 verbatim field) + hD1_conditional (the named per-coordinate sliver census →
 hD1_from_data + the CLM lift). v2 DONE 1–13 of 14. std-3 all, raw 0. NOT a₁=R/6.
 NEXT: J4-330 = brick 14 THE FACADE (hCConvSlot_AT_GATE_v2 from the v2 census only).
+
+## J4-330 (2026-08-07, 81581da9) — ★★★ THE 14-BRICK FACADE-v2 CHAIN IS COMPLETE ★★★ [AF]
+hCConvSlot_AT_GATE_v2 = the EXACT capstone hCConv antecedent from the v2 census
+ONLY, via the unchanged SpatialC2.hCConv_reduction at D := Dmap. KEY RESOLUTION:
+hcont derived from hD1's C¹ (gcoef i x = (D x)(single i 1)) — the poisoned
+g2_bundle chain bypassed entirely; the old linewise→Fréchet bridge reused.
+v1→v2: hGateData ×2 + hFbd DEAD; hAnear absent from the cone. SURVIVING CENSUS:
+(a) the open field nbhd; (b) the hlin linewise family (diff-under-∫ carries
+dischargeable from hStarWide_concrete/hFpairWide/envelope_integrable_v2Wide + the
+chart-opaque measurability bank + sourceDataV2_concrete); (c) the L2 sliver census
+(hD1_conditional). THE WHOLE SOL-#9 v2 CAMPAIGN (J4-323→330, bricks 1–14) CLOSED IN
+8 BRICKS OF WORK. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-331 = the hDaLimLU DATA
+census recon+discharge (the next endgame-map item), then (†), then R0/R1.
