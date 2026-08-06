@@ -2637,3 +2637,12 @@ order): 1 hFzero (small) → 2 hFdom (Levi-domination re-export) → 3 hIlo/hi +
 hII_lo/hi (pairing+Beta) → 4 hbnd (√ε sliver, hD2Hexpand) → 5 hEdom (width-3/2
 narrowing, β-seeded) → 6 hLapFull (the deepest — Laplacian comparison → the F2
 C²-limit). std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-332 = the easy tranche (1–3).
+
+## J4-332 (2026-08-07, b2b3fc95) — DaLimEasyTranche: Da-LIMIT ITEMS 1–3 DISCHARGED [AF]
+hFzero_concrete (iterE/leviSeries vanishing at s≤0) + hFdom_concrete (the
+width-MATCHED Levi domination re-export) + the four strip integrabilities
+(hIlo/hIhi + hII_lo/hII_hi=MemAdjLo/Hi via pairing_intervalIntegrable — the widths
+ADD ⟹ constant peak, no sliver). Carries: LeviSeriesLocalData + two Gaussian
+dominations + hmeas, all satisfiable. Remainder: 4 hbnd → 5 hEdom → 6 hLapFull.
+std-3 all 9, raw 0. NOT a₁=R/6. NEXT: J4-333 = the hard tranche (hbnd recon +
+the hEdom width-parametricity verdict).
