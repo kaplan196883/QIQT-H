@@ -531,6 +531,8 @@ import QIQTH.CConvV2Facade
 import QIQTH.DaLimCensusRecon
 import QIQTH.DaLimEasyTranche
 import QIQTH.DaLimHardTranche
+import QIQTH.NCGaussPd3
+import QIQTH.NCGaussToCyclicT
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

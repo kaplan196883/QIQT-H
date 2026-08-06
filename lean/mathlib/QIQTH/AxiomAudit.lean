@@ -19622,4 +19622,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DaLimHardTranche.gaussian_beats_power
 #print axioms QIQTH.DaLimHardTranche.hEdom_of_gaussPoly_residual
 
+-- ## J4-334 (NCGaussPd3 + NCGaussToCyclicT): (†) BRICKS A1+A2 (Sol #10)
+-- A1: the pd product-rule calculus — pd_coord (the Kronecker derivative, newly
+-- derived), pd_coord_mul (∂_r(x_j·f) = δ_{jr}f + x_j∂_rf), pd3_coord_mul (the
+-- third-derivative-at-0: only the Kronecker hits survive), pd3_sum (the finite-sum
+-- corollary). A2: pd_eventuallyEq (germ propagation through pd layers) +
+-- pd3_coord_zero + T_symm_cd (Schwarz) / T_symm_ab (metric symmetry) +
+-- cyclicT_gauss (the differentiated hGauss ⟹ T_{irpq}+T_{iqpr}+T_{ipqr} = 0) +
+-- ★ cyclicT_of_hGauss (the four cyclic instances + symmetry normalization ⟹
+-- T_{abcd} + T_{acbd} + T_{bcad} = 0, by linarith). hGauss = the ONE labelled
+-- satisfiable gauge input (normal coordinates exist; the exp-pullback derivation
+-- deferred). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.NCGaussPd3.pd_coord
+#print axioms QIQTH.NCGaussPd3.pd_coord_mul
+#print axioms QIQTH.NCGaussPd3.pd3_coord_mul
+#print axioms QIQTH.NCGaussPd3.pd3_sum
+#print axioms QIQTH.NCGaussToCyclicT.pd_eventuallyEq
+#print axioms QIQTH.NCGaussToCyclicT.cyclicT_gauss
+#print axioms QIQTH.NCGaussToCyclicT.cyclicT_of_hGauss
+
 end QIQTH.AxiomAudit
