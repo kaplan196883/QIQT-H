@@ -525,6 +525,7 @@ import QIQTH.CConvV2LeviSource
 import QIQTH.CConvV2ChartComparison
 import QIQTH.CConvV2WitnessStar
 import QIQTH.CConvV2ChartInterface
+import QIQTH.CConvV2WgInstantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

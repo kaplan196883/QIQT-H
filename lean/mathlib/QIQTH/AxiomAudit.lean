@@ -19515,4 +19515,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2ChartInterface.sliceInterfaceW_of_data
 #print axioms QIQTH.CConvV2ChartInterface.henv_v2Wide
 
+-- ## J4-328 (CConvV2WgInstantiation): FACADE-v2 BRICK 11 — THE Wg BRIDGE IS CLEAN
+-- U2 VERDICT: globalCutoffParametrixWitnessN evaluates Vmap ONLY at the same (q,p)
+-- pair on-gate — NO cutoff collar needed. wg_agree_onGate (on-gate Wg = the chart,
+-- via the agreement property, .choose never unfolded) + gatedWitnessW_Wg_eq_
+-- vanVleckGatedWitness (THE LOAD-BEARING function-level bridge, funext + gate case
+-- split) + wg_agree_onGate_satisfiable (∃ c,G,Γ — non-vacuous, from wg_walls23) +
+-- sliceChartData_at_Wg (hWjoint INTERNAL from wg_chartB_measurable; 4 geometry
+-- carries satisfiable) + sliceInterface_CONCRETE (the three legs for the CONCRETE
+-- witness — the chart-intrinsic hVmapMeas/hChartB walls INTERNAL; carries =
+-- hSmeasSet + coeff + hSliceData + chart package + hAgree) + wg_hCover_leg.
+-- The J4-321 chart-hardwiring residue is DISCHARGED. v2 DONE 1–11 of 14; REMAIN
+-- 12,13,14. std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2WgInstantiation.sliceChartData_at_Wg
+#print axioms QIQTH.CConvV2WgInstantiation.wg_agree_onGate
+#print axioms QIQTH.CConvV2WgInstantiation.gatedWitnessW_Wg_eq_vanVleckGatedWitness
+#print axioms QIQTH.CConvV2WgInstantiation.wg_agree_onGate_satisfiable
+#print axioms QIQTH.CConvV2WgInstantiation.sliceInterface_CONCRETE
+#print axioms QIQTH.CConvV2WgInstantiation.wg_hCover_leg
+
 end QIQTH.AxiomAudit
