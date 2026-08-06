@@ -549,6 +549,7 @@ import QIQTH.GaussInteriorMVT
 import QIQTH.PullbackGeometryLegs
 import QIQTH.Hpd2FromCyclic
 import QIQTH.D2HExpandRecon
+import QIQTH.HrepGermFactorization
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

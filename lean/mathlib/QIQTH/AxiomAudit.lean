@@ -19918,4 +19918,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.D2HExpandRecon.witnessSecondXDeriv_expand_bridge
 #print axioms QIQTH.D2HExpandRecon.residueJets_satisfiable
 
+-- ## J4-351 (HrepGermFactorization): THE hrep GERM DISCHARGED + THE hV0 CRUX
+-- R0 VERDICT: hV0 (gaussDdim τ (W z 0) = gaussDdim τ z) is FALSE at the true chart
+-- off-flat — chartImageGauss_exact_iff (hV0 ⟺ rncRadialSq(W z 0) = rncRadialSq z;
+-- the banked near-isometry gap is O(‖z‖³)) and chartImageGauss_ratio (the EXACT
+-- exp((rz−r_{W0})/(4τ)) ratio — bounded in the √ε sliver ‖z‖~√τ, unbounded at
+-- fixed τ). The exact-shape hD2Hexpand with uniformly-bounded amplitudes cannot
+-- hold at the true chart — a flat/diagonal-locus identity consumed downstream only
+-- in the √ε collar (an honest regime boundary, not vacuity — the jets were
+-- machine-checked satisfiable). vanVleckGatedWitness_germ_factor (the hrep germ
+-- DISCHARGED: the banked on-gate factorization + the open gate ∈ 𝓝 0) +
+-- chartImageGauss_center (the exact identity at 0) + hD2Hexpand_concrete (the
+-- bridge composed, hrep eliminated; carries = the chart/amplitude jets + the four
+-- center identities with hV0 the isolated per-(τ,z) geometric residue). std-3
+-- all 5. NOT a₁ = R/6.
+#print axioms QIQTH.HrepGermFactorization.vanVleckGatedWitness_germ_factor
+#print axioms QIQTH.HrepGermFactorization.chartImageGauss_ratio
+#print axioms QIQTH.HrepGermFactorization.chartImageGauss_exact_iff
+#print axioms QIQTH.HrepGermFactorization.chartImageGauss_center
+#print axioms QIQTH.HrepGermFactorization.hD2Hexpand_concrete
+
 end QIQTH.AxiomAudit
