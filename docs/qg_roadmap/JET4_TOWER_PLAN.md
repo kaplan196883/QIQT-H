@@ -2717,3 +2717,24 @@ measurabilities + the amplitude bundle (hD2Hexpand) + Fubini reps + THE LABELLED
 hraw + hPd2conv. The facade poisons do not recur. std-3 all, raw 0. NOT a₁=R/6.
 NEXT: Sol consult on the v3-export architecture (the last heavy composition), then
 J4-338 toward a1_R6_from_labelled.
+
+## SOL CONSULT #11 (2026-08-07, post-J4-337) — THE v3-EXPORT ARCHITECTURE (5 bricks)
+VERDICT: O2 (O3 fallback) — NEVER consume the v2 ∃ (the destructed S is logically
+opaque; witness identity does not survive ∃-elim; O4-post-hoc has the same problem).
+Route: grep the capstone's proof for the theorem applied immediately before the
+final ∃-intro; export/apply THAT pre-∃ inner theorem at the concrete gate (O2); if
+not separately named, a thin trimmed core via the same lower-level lemma (O3). The
+v2 capstone stays untouched read-only; v3 = a SIBLING export from the same core.
+BRICKS: 1 wide_a1_R6_core_AT_CONSTRADIUS (the thin apply-wrapper core: base + hS1 +
+htr + the three slot antecedents → the a₁ 2-jet conclusion; no labelled inputs
+here) · 2 the htr adapter (re-export htr_from_hGauss) · 3 the Da-data adapter
+(re-export hDaLimLU_from_labelled) · 4 A1R6GateSlots (a shallow Prop structure;
+the three slots via refine ⟨?_,?_,?_⟩, each field its own theorem if slow) · 5
+a1_R6_from_labelled (the final facade: the shallow side-condition structures
+(GeometryRaw/GaugeRaw/WindowSide/DaAnalyticSide/BoundaryCensus/C2CensusV2 — reuse
+J4-337-style bundles, explicit args, no mega-record/extends chains) + the FOUR
+EXPLICIT labelled inputs (hGauss/hraw/hD2Hexpand/hPd2conv) → ⟨a₁ 2-jet⟩; internally
+have-chains: hS1/htr/hDa/slots then exact the core). GUARDRAILS: never restate/
+unfold/destruct v2; ≤1 heavy application per brick; exact/apply + typed haves; no
+broad simpa/simp_all/convert; the one shared syntactic Gate def everywhere; scalar
+equalities in tiny standalone lemmas (change + exact); split any brick >1-2 min.
