@@ -19738,4 +19738,22 @@ namespace QIQTH.AxiomAudit
 -- std-3. THE HONEST CONDITIONAL MILESTONE.
 #print axioms QIQTH.A1R6FromLabelled.a1_R6_from_labelled
 
+-- ## J4-341 (GaussLemmaFirstVariation): THE hGauss CAMPAIGN BRICK 1 — THE RADIAL LEG
+-- R0: the geodesic ODE IS banked (geodesicField + expTube_spec); metric
+-- compatibility banked (christoffel_lower); the Jacobi bank has the matrix ODE +
+-- Raychaudhuri but NO symplectic/Wronskian conservation; the energy identity was
+-- NOT banked — delivered here. G1a geodesic_energy_deriv_eq_zero (the pure
+-- metric-compatibility algebra: the energy derivative vanishes given the geodesic
+-- acceleration) + G1b energy_hasDerivAt_along_geodesic (+ _zero) + G1c
+-- geodesic_energy_conservation (★ the RADIAL Gauss identity: g_{exp_p v}(γ̇,γ̇) =
+-- g_p(v,v) on the exp tube, via constant_of_has_deriv_right_zero). REMAINING
+-- hGauss map: (a) the transverse Jacobi conservation g(J,γ̇)=t·const (a NEW
+-- symplectic identity, not in the bank) + (b) homogeneity D exp(v)·v = γ̇(1)
+-- (ExpJacobianRescale partial) + (c) the coordinate assembly + (d) the frame
+-- transport. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.GaussLemmaFirstVariation.geodesic_energy_deriv_eq_zero
+#print axioms QIQTH.GaussLemmaFirstVariation.energy_hasDerivAt_along_geodesic
+#print axioms QIQTH.GaussLemmaFirstVariation.energy_hasDerivAt_zero
+#print axioms QIQTH.GaussLemmaFirstVariation.geodesic_energy_conservation
+
 end QIQTH.AxiomAudit
