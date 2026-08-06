@@ -517,6 +517,7 @@ import QIQTH.RicciSourceCoeff
 import QIQTH.FacadeBundleFields
 import QIQTH.B2MeasurabilityDissolution
 import QIQTH.ChartParamFacadeVariant
+import QIQTH.GaussianJetTheorem
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

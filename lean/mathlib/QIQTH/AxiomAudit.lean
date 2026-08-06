@@ -19368,4 +19368,27 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁ = R/6.
 #print axioms QIQTH.ChartParamFacadeVariant.chartGateDataW_of_Wg
 
+-- ## J4-322 (GaussianJetTheorem): ★★ hGateData/hGateData' ADJUDICATED FALSE-AS-STATED ★★
+-- G0 NEGATIVE VERDICT (the third facade artefact, after ∀S-hEmeas and hFbd): the
+-- on-gate conjunct bounds the log-gradient |∑Wₖ·Pvalₖ/(2(t−s))| by a CONSTANT Bs,
+-- but the numerator is s-independent and generically nonzero ⟹ the quantity →∞ as
+-- s→t⁻ on a positive-measure interval, which ∀ᵐ s cannot escape; the facade demands
+-- s-power 0 where −1/2 is forced (the standard heat-kernel gradient estimate).
+-- PROVEN as gateData_numerator_shape_unsat (the impossibility, satisfiable
+-- antecedents: 0<μA, A⊆K, c≤|N| on A). Brick β BANKED regardless: the scalar
+-- absorption workhorses gaussian_beats_linear (β1: r·s⁻¹e^{−ar²/s} ≤
+-- (2√(a−a'))⁻¹·s^{−1/2}e^{−a'r²/s}) + gaussian_beats_quadratic (β2: cost s⁻¹) +
+-- mul_exp_neg auxiliaries. THE CORRECTED FACADE VARIANT (⋆) documented: the
+-- (t−s)^{−1/2}-weighted VALUE-LEVEL domination |witnessFieldDeriv| ≤
+-- C·(t−s)^{−1/2}·gaussDdim(2(t−s))z — still s-integrable, sufficient downstream;
+-- its scalar core IS β1. Ba/Bd conjuncts individually satisfiable; only Bs is the
+-- artefact. std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.GaussianJetTheorem.mul_exp_neg_le_one
+#print axioms QIQTH.GaussianJetTheorem.mul_exp_neg_sq_le_half
+#print axioms QIQTH.GaussianJetTheorem.mul_exp_neg_mul_sq_le
+#print axioms QIQTH.GaussianJetTheorem.one_add_mul_exp_neg_le
+#print axioms QIQTH.GaussianJetTheorem.gaussian_beats_linear
+#print axioms QIQTH.GaussianJetTheorem.gaussian_beats_quadratic
+#print axioms QIQTH.GaussianJetTheorem.gateData_numerator_shape_unsat
+
 end QIQTH.AxiomAudit
