@@ -2472,3 +2472,20 @@ radius-orthogonal). P1: hKmeasSet_field, hCover_field, hFjoint_field + hFmeas_fi
 (the leviSource engines at the gate's residual kernel verbatim), hcoef_field.
 std-3 all 5, raw 0. NOT a₁=R/6. NEXT: gpt-5.6-sol consult on the two wall clusters,
 then J4-320 on the Sol-informed easiest wall.
+
+## J4-320 (2026-08-06, a6b8da97) — B2MeasurabilityDissolution: ★ 3 OF 4 B2 WALLS DOWN ★ [AF]
+Sol-guided (consult recorded here). Wall 1 hSmeasSet FELL K-restricted (the banked
+Lusin–Souslin graph sectioned; raw no-K = honest residue). Walls 2/3 hVmapMeas/
+hChartB DISSOLVED at the piecewise chart Wg := if (z,p)∈Γ then G else 0 —
+measurability + on-gate C² transfer + satisfiability all proven; ⚠ CConvChartGateData
+HARDWIRES uniformInverseChart ⟹ consuming Wg needs a chart-parametric facade
+VARIANT (vanVleckGatedWitness unaffected). Wall 4 partial (frontier-collar leg a).
+FULL SOL VERDICTS: hFbd LIKELY FALSE AS STATED (s^{-n/2} singular at (0,0); honest
+fix = L¹/time-integrable facade variant — the ∀S-artefact pattern again); hlin/hDrep
+= joint with the hDConv diff-under-∫ tranche (hasFDerivAt_integral_of_dominated,
+affine line map, w-neighborhood domination, no facade cycle); hGateData ×2 = ONE
+shared quantitative Gaussian-jet theorem (α chart jets on compact + β scalar Gaussian
+absorption lemmas + γ product assembly; ⚠ s-power bookkeeping — 1st deriv costs
+s^{-1/2}, 2nd costs s^{-1}). std-3 all 10, raw 0. NOT a₁=R/6. NEXT: J4-321
+ChartParamFacadeVariant (the chart-parametric bundle + Wg instantiation +
+hCConvSlot_AT_GATE_v2 with the B2 measurability internal).
