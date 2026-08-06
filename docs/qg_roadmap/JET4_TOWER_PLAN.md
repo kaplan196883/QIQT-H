@@ -2830,3 +2830,15 @@ C∞-of-pullback = the one labelled smoothness residue (C⁴ cap); ∂g̃(0)=0 +
 inverse/positivity derivable-with-work. std-3 all 4, raw 0. NOT a₁=R/6. NEXT:
 J4-347 = GaussInteriorMVT (E′=W, W′=0 on the interior + the MVT closure ⟹
 hgball_concrete ⟹ the hGauss campaign closes mod the C∞ scope note).
+
+## J4-347 (2026-08-07, 1b4db10a) — ★★ THE hGAUSS CAMPAIGN ANALYTICALLY CLOSED ★★ [AF]
+THE TOOL: Lagrange's MVT (exists_hasDerivAt_eq_slope) — interior derivatives +
+Icc-continuity only; the J4-346 endpoint worry sidestepped. covariant_field_
+hasDerivAt (the one new interior product-rule computation) + gauss_interior_
+identity (the per-point Gauss identity DERIVED from the flow; the window + the
+hJd/hcJd/hcJp carries all discharged) + hgball_concrete + ★ hGauss_pullback_
+concrete (the =ᶠ germ with NO Gauss carry; surviving = ordinary geometry hyps +
+g_p=I). ONE OF THE FOUR LABELLED INPUTS (hGauss) IS NOW DERIVED for the pullback
+route. Residue: the C∞-vs-C⁴ facade scope (labelled) + ∂g̃(0)=0 + inverse/
+positivity (derivable). std-3 all 6, raw 0. NOT a₁=R/6. NEXT: J4-348 =
+PullbackGeometryLegs (∂g̃(0)=0 + inverse/positivity + the C∞ verdict).
