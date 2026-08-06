@@ -2405,3 +2405,15 @@ Shedding the outer hEmeas carry = the constant→varying-radius (cf q) extension
 strengthened provider internalizing S1. std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-315
 VaryingRadiusS1Provider (is the varying gate-set OPEN? → hKSmeas free → carriers →
 tripleHEmeas at the provider's exact gate → the strengthened provider).
+
+## J4-315 (2026-08-06, 3c440af9) — VaryingRadiusS1Provider: S1 AT THE VARYING GATE mod Measurable cf [AF]
+V0: the provider's cf hides the CONSTANT (b+ρc)/2 behind an opaque Classical.choose;
+Route A (joint openness) dead (per-fibre only; K compact). hKSmeas_varying = the
+banked constant-radius Lusin–Souslin engine extended to the graph-of-radius domain
+D = {(q,v) | q∈K ∧ ‖v‖ < cf q} — joint gate-set measurability at varying radius
+REDUCED EXACTLY to Measurable cf (+ reach bound δ₀). tripleHEmeas_at_varying_
+flowball_gate = S1 at the provider's exact gate shape, conditional on Measurable cf
++ the three satisfiable base-field carriers. SINGLE NAMED RESIDUE: Measurable cf —
+dissolvable by a new provider export exposing the constant radius (no .choose).
+std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-316 ConstRadiusGateExport (the constant-
+radius package re-export → cf ≡ const measurable → S1 at THE gate).
