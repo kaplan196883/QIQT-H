@@ -19029,4 +19029,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FullGateAssembly.cutoffChart_heatOp_formula_jointContinuousOn
 #print axioms QIQTH.FullGateAssembly.heatOp_cutoffChart_jointContinuousOn_at
 
+-- ## J4-302 (FastA5Fix): ★★ THE CONCRETE FULL-GATE CAPSTONE — 55s (was ~52min) ★★
+-- The root-cause fix: the kernel defeq isolated into the SCALAR lemma
+-- heatOp_globalCutoff_eq_A4kernel_at (unfold+simp, cheap) — then TWO syntactic
+-- .congr steps with pre-typed EqOn witnesses (no whnf). A4_concrete_continuousOn
+-- (the pure A4 application at Θ*=vanVleck, u*=transportCoeff∘transportOp, the base-w
+-- chart) + ★ heatOpWitness_fixedBase_fullGate (E(·,·,w) continuous on the FULL gate
+-- compact — plateau+annulus; carries = gate data + t₁>0 + R<ρc + the chart C² + the
+-- coefficient/geometry regularity + hgisymm) + _chartFree (the chart C² internal via
+-- F1). F5e/A6 (the hactive wiring into H2Instantiation via the originBall cover) =
+-- the next increment; the origin-vs-w reconciliation = the same named residual.
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.FastA5Fix.heatOp_globalCutoff_eq_A4kernel_at
+#print axioms QIQTH.FastA5Fix.A4_concrete_continuousOn
+#print axioms QIQTH.FastA5Fix.heatOpWitness_fixedBase_fullGate
+#print axioms QIQTH.FastA5Fix.heatOpWitness_fixedBase_fullGate_chartFree
+
 end QIQTH.AxiomAudit

@@ -497,6 +497,7 @@ import QIQTH.HgeoDischarge
 import QIQTH.H2Instantiation
 import QIQTH.TransitionAnnulusCont
 import QIQTH.FullGateAssembly
+import QIQTH.FastA5Fix
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
