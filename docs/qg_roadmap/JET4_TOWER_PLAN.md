@@ -2233,3 +2233,10 @@ iterE_jointContinuousOn_strong (∀k; carries only hGapA + hSdom, both satisfiab
 the covers) + leviSlice_jointContinuousOn_of_strong (the M-test capstone = hf_cont's
 shape). std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-296 GapASdomInstantiation (hGapA/hSdom concrete ⟹ the Levi continuity done).
+
+## J4-296 (2026-08-06, 366c5e36) — GapASdomInstantiation: ★★ Gap-A DISCHARGED ★★ [AF]
+THE K-GATE ROUTE: w∈K (near, the frozen bank + the bridge) / w∉K (E ≡ 0 — the base
+gate) partitions ALL w; hGapA proved ∀w; the lower near-isometry bound MOOT. The
+concrete Levi continuity now carries TWO: hnear (the frozen-bank uniformity) + hSdom
+(the indicator dominator, documented build). std-3 all 4, raw 0. NOT a₁=R/6.
+NEXT: J4-297 SdomHnearDischarge (the last two carries → hf_cont DONE).
