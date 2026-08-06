@@ -2541,3 +2541,13 @@ WitnessStarConcrete ((⋆) proven: α₂ + β1; β2 NOT here) · 10 LeviSource (
 adapter) · 11 WgInstantiation (the deferred chart residue discharged) · 12
 HDerivConv (hlin from banked) · 13 DRepresentation (D def + hDrep + hD1 via sliver;
 β2 if needed) · 14 Facade (hCConvSlot_AT_GATE_v2).
+
+## J4-323 (2026-08-06, 746b1ad7) — FACADE-v2 BRICKS 1+2 [AF]
+Brick 1 CConvV2Contracts: CConvSourceDataV2 (+hFpair, −hFbd) + CConvWitnessEnvelope-
+DataV2 (+hStar, −hGateData ×2) + SliceChartData (chart-parametric survivor package)
++ satisfiability guards. Brick 2 CConvV2GaussianPairing: P1–P5 ALL —
+gaussDdim_pairing_integral (one step from the banked gaussDdim_conv!) +
+betaPow_integrableOn (γ>−1 split Beta) + sourcePair_of_gaussian_bound (the full
+hFpair adapter; sole carry = satisfiable hgMeas). std-3 all, raw 0. NOT a₁=R/6.
+NEXT: J4-324 = v2 bricks 5 (EnvelopeFromStar: hdomS/henv_v2 from hStar+hFpair) + 10
+(LeviSource: the γ=−1/2 adapter from the banked domination).
