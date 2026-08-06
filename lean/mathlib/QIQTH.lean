@@ -512,6 +512,7 @@ import QIQTH.CConvFacadeGate
 import QIQTH.S1TripleHEmeasGate
 import QIQTH.VaryingRadiusS1Provider
 import QIQTH.ConstRadiusGateExport
+import QIQTH.OuterCarryRecon
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

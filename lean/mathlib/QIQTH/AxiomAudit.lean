@@ -19265,4 +19265,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConstRadiusGateExport.tripleHEmeas_AT_CONSTRADIUS_GATE
 #print axioms QIQTH.ConstRadiusGateExport.constRadius_package_and_S1
 
+-- ## J4-317 (OuterCarryRecon): ★★★ THE DEFINITIVE CAPSTONE-ANTECEDENT CENSUS ★★★
+-- T0 (in the file header): every antecedent of wide_a1_R6_interface_discharged_v2
+-- classified. (i) the three inner arrows each have banked GATE slots (J4-311/312/
+-- 313). (ii) S1/hEmeas content complete (J4-316; the ∀S artefact recorded). (iii)
+-- the analytic residue (hInter/hInt/hEbound/hEzero/hS0/hSopen/hCH) is ALL ALREADY
+-- INTERNAL in v2 — the residue has migrated into the three slot piles. (iv) base
+-- geometry: genuine carries = hn,t,κ,K,hChr,hg,hgiC,hgpos,hgsymm,hinvF,hframeK,
+-- hdg0,hsrc,hw + htr (★ the Ricci-source physics coefficient); DERIVED HERE:
+-- hg0_of_hframeK, hGamma_of_hdg0, hgi_of_hg0_hinvF, hgi_of_geometry (gi 0 = I),
+-- hgnd_of_hgpos (det>0 ⟹ IsUnit matToCLM). T2 REMAINDER (dependency order):
+-- R0 retire-∀S rethread · R1 compose the three slots into v2 · R2 the slot data
+-- piles (hDaLimLU loc-unif wall; diff-under-∫ family; 4 facade bundles + hD1) ·
+-- R3 derive htr (RNC 2-jet ⟹ −(2/3)Ric). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.OuterCarryRecon.hg0_of_hframeK
+#print axioms QIQTH.OuterCarryRecon.hGamma_of_hdg0
+#print axioms QIQTH.OuterCarryRecon.hgi_of_hg0_hinvF
+#print axioms QIQTH.OuterCarryRecon.hgi_of_geometry
+#print axioms QIQTH.OuterCarryRecon.hgnd_of_hgpos
+
 end QIQTH.AxiomAudit
