@@ -2264,3 +2264,10 @@ I1 = the gate-into-chart-ball containment (no banked φ-displacement bound; shri
 gate) · I2 = the transition-annulus continuity (the plateau-only F4 doesn't cover
 where the cutoff varies; the product-rule extension of the D-chain). std-3 all 3,
 raw 0. NOT a₁=R/6. NEXT: J4-300 TransitionAnnulusCont (I2 + I1).
+
+## J4-300 (2026-08-06, c3ba2080) — TransitionAnnulusCont: T1+T2 banked; T3 deferred [AF]
+The Leibniz heatOp(c·B) expansion + the parametrix t-differentiability + the VALUE
+joint continuity (new) + the fixed-field Δ_g continuity. T3 (the full-gate assembly ⟹
+I2) typechecked once but cut for a ~20-min elaboration blowup — the recipe documented;
+the re-land = aggressive top-level splitting. std-3 all 4, raw 0. NOT a₁=R/6.
+NEXT: J4-301 FullGateAssembly (the split T3 re-land → I2 → hf_cont mod I1).
