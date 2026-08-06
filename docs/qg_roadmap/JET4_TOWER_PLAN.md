@@ -2853,3 +2853,15 @@ SOLE OPEN RESIDUE: the labelled hpd2 (the ∂²g̃(0) radial-contraction identit
 likely a linear consequence of the PROVEN cyclic T-identity at g̃). std-3 all 4,
 raw 0. NOT a₁=R/6. NEXT: J4-349 = Hpd2FromCyclic (the cyclic→hpd2 algebra +
 potentially κ=1/6 AT THE PULLBACK).
+
+## J4-349 (2026-08-07, ba0dce1f) — Hpd2FromCyclic: THE CYCLIC CROSS-CHECK [AF]
+hpd2 = 2A − C = 0; the four-instance cyclic gives 2A + C = 0 — hpd2 needs BOTH
+families (A = 0 from the diagonal Gauss cyclic). hpd2_of_cyclicT (unconditional
+abstract algebra) + hcd_expPullback (Schwarz at g̃ via Clairaut — discharged) +
+hpd2_expPullback_of_cyclic (carries = the two ⊤-blocked satisfiable g̃-cyclics) +
+kappa_eq_one_sixth_expPullback_via_cyclic. ⚠ HONESTY: hpd2 was ALREADY
+unconditional in-repo (expPullback_hpd2, residFold) and the composed
+kappa_eq_one_sixth_expPullback EXISTS — the pullback κ=1/6 was already closed;
+J4-341..349 = the INDEPENDENT Gauss-lemma/cyclic derivation + the hGauss labelled
+input CLOSED for the pullback route. std-3 all 4, raw 0. NOT a₁=R/6. NEXT:
+J4-350 = D2HExpandRecon (the next labelled campaign).
