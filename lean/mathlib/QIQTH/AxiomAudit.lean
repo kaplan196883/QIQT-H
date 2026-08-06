@@ -19060,4 +19060,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HactiveWiring.hactive_concrete
 #print axioms QIQTH.HactiveWiring.leviSlice_hf_cont
 
+-- ## J4-304 (GateGeometryResiduals): ★★ hf_cont CLOSED at this level ★★
+-- gate_closure_subset_chartBall (I1: the image route via the banked quadratic
+-- displacement + hclos + the honest radii c + C_D·c² < ρc) +
+-- gate_far_implies_chartFar (the collar: the contrapositive via the left-inverse
+-- germ + norm_le_rncRadial; the honest window b + C_D·b² < Rg) + ★
+-- leviSlice_hf_cont_FINAL — the Levi 0-slice joint continuity; FINAL INPUTS: the
+-- banked four + the envelope + hgeoBundle/hfgBundle (per w∈K: ALL banked exports
+-- (chart C², the gate shape, hclos, hinv, the displacement datum, the FastA5Fix
+-- full-gate ContinuousOn) + the jointly-satisfiable radii relations — the provider
+-- shrinks b). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.GateGeometryResiduals.gate_closure_subset_chartBall
+#print axioms QIQTH.GateGeometryResiduals.gate_far_implies_chartFar
+#print axioms QIQTH.GateGeometryResiduals.leviSlice_hf_cont_FINAL
+
 end QIQTH.AxiomAudit

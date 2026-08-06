@@ -499,6 +499,7 @@ import QIQTH.TransitionAnnulusCont
 import QIQTH.FullGateAssembly
 import QIQTH.FastA5Fix
 import QIQTH.HactiveWiring
+import QIQTH.GateGeometryResiduals
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
