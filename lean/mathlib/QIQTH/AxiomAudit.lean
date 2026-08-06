@@ -19352,4 +19352,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.B2MeasurabilityDissolution.wg_walls23_from_banked
 #print axioms QIQTH.B2MeasurabilityDissolution.radialCutoff_zero_on_frontier_collar
 
+-- ## J4-321 (ChartParamFacadeVariant): THE CHART-PARAMETRIC BUNDLE (walls 2/3 INTERNAL)
+-- N0 VERDICT (corrects a J4-320 note): the consumer is NOT chart-opaque — the
+-- witness ITSELF contains uniformInverseChart (via globalCutoffParametrixWitnessN,
+-- ConvApproximants:161–166) and the slice-interface machinery (SliceInterface-
+-- Instantiation.hjoint_instantiated + HenvUInstantiation + WitnessDerivMeasurability)
+-- hardwires the chart in statements AND proofs. CConvChartGateDataW = the
+-- chart-parametric variant (4 chart-mentioning fields take opaque W'; 3 chart-free
+-- fields verbatim); chartGateDataW_of_Wg = the Wg instantiation with walls 2/3
+-- (hVmapMeas/hChartB) DISCHARGED INTERNALLY from MeasurableSet Γ + Measurable G.
+-- N2/N3 (the re-threaded consumer + slot v2) BLOCKED on the named residue: a
+-- chart-parametric re-derivation of hjoint_instantiated/henv/g2 (a new-file
+-- duplication brick, sound but heavy). Remaining hCConv W-surface: hSmeasSet(raw)/
+-- hSliceData carries + hFbd + hlin/hDrep + hGateData ×2 + the N0 residue. std-3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ChartParamFacadeVariant.chartGateDataW_of_Wg
+
 end QIQTH.AxiomAudit

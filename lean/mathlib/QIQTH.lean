@@ -516,6 +516,7 @@ import QIQTH.OuterCarryRecon
 import QIQTH.RicciSourceCoeff
 import QIQTH.FacadeBundleFields
 import QIQTH.B2MeasurabilityDissolution
+import QIQTH.ChartParamFacadeVariant
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
