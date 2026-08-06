@@ -19197,4 +19197,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDConvGateThreading.hDConv_AT_GATE
 #print axioms QIQTH.HDConvGateThreading.hDConvSlot_AT_GATE
 
+-- ## J4-313 (CConvFacadeGate): ★★ THE CAPSTONE hCConv SLOT IS A THEOREM ★★
+-- ★ ALL THREE inner capstone arrows now have AT_GATE slot theorems (J4-311/312/313).
+-- Z0 RECON: the hCConv slot = the spatial-C² ContDiffAt ℝ 2 of the diagonal heatConv;
+-- unfolds via the banked CConvConcreteThreading.hCConv_concrete_from_data into the
+-- FIVE CConvFacade bundles (B1 metric, B2 chart/gate measurability, B3 source,
+-- B4 derivative + explicit D, B5 envelope) + the hD1 L2 carry. POISONING AUDIT: the
+-- C² route is structurally DISJOINT from the W1/hAnear boundary machinery — hCConv is
+-- NOT W1-poisoned. Z1: B1 (CConvMetricData) discharged at the gate from raw geometry
+-- the capstone already carries; B2–B5 + hD1 = the honest satisfiable census (partial
+-- field dischargers exist but whnf-time-out as full-bundle constructors). Z2:
+-- hCConvSlot_AT_GATE = the VERBATIM capstone hCConv antecedent, proven W1-free from
+-- the census. Z3 (⟨a₁⟩ extraction) correctly deferred to the heavy v3-export. std-3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CConvFacadeGate.hCConvSlot_AT_GATE
+
 end QIQTH.AxiomAudit
