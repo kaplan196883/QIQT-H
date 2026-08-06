@@ -2753,3 +2753,20 @@ adapters). htr_adapter + daLim_for_slots + A1R6GateSlots + a1_R6_slots_AT_GATE
 (all three fields wired, one banked producer per field). v3 remains: brick 5 only.
 std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-340 = a1_R6_from_labelled (THE FINAL
 FACADE — the a₁ 2-jet over the four labelled inputs + the satisfiable censuses).
+
+## J4-340 (2026-08-07, 3a67981a) — ★★★★ THE v3 CHAIN IS COMPLETE ★★★★ [AF]
+a1_R6_from_labelled = THE CONDITIONAL a₁=R/6 MILESTONE: the a₁ two-jet (heatOp
+vanishing + the trueHeatKernel expansion with the GENUINE Ricci scalar
+(∑ᵢ ricci)/6 in the O(t) coefficient) at the literal constant-radius gate, from
+THE FOUR LABELLED INPUTS (hGauss, hraw, hD2Hexpand, hPd2conv) + the base
+geometry/gauge/window raw inputs + the package facts (satisfiability =
+constRadius_package_and_S1; hS1 under c<δ₀) + the satisfiable census piles
+(Da-limit ~60 / Duhamel-core ~90 with shared binders de-duplicated / F2 + frozen/
+moving / CConv-v2 sliver). NO shape residues — the full composition type-checked.
+THE SOL-#11 PLAN (bricks 1–5, J4-338/339/340) COMPLETE. std-3, raw 0.
+⚠ NOT unconditional a₁=R/6. THE REMAINING SURFACE = the four labelled derivation
+campaigns: hGauss (the exp-pullback Gauss lemma, ~3 bricks per SOL #10) · hraw
+(loc-unif M2 + finite cover + cutoff absorption) · hD2Hexpand (the Leibniz-Gaussian
+derivative layer) · hPd2conv (the full-side diff-under-∫ deep wall) + the census
+satisfiability sweeps. NEXT: J4-341 = the hGauss campaign brick 1 (the
+first-variation/Gauss-lemma recon).
