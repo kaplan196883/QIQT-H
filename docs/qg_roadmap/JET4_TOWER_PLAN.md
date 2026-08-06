@@ -2292,3 +2292,10 @@ derived from the banked capstone) + leviSlice_hf_cont (the Levi 0-slice continui
 inputs = the banked four + the envelope + hgeo (I1) + hfg (the full-gate + the PURE
 GEOMETRIC collar)). The two residuals are pure gate-geometry. std-3 all 5, raw 0.
 NOT a₁=R/6. NEXT: J4-304 GateGeometryResiduals (I1 + the collar → hf_cont FINAL).
+
+## J4-304 (2026-08-06, be059a50) — GateGeometryResiduals: ★★ hf_cont CLOSED ★★ [AF]
+I1 (the image/displacement route + honest radii) + the collar (the contrapositive via
+the left-inverse germ) + leviSlice_hf_cont_FINAL: the Levi 0-slice continuity from
+the banked four + the envelope + the per-w bundles (all banked exports + satisfiable
+radii). std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-305 BoundaryLimAssembly (Heine + hMovingCorr ⟹ hBoundaryLim ASSEMBLED).
