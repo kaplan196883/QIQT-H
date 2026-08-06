@@ -2585,3 +2585,14 @@ Ioo 0 t; off-gate zero; carries hgate + hdata, satisfiable) + the S4 wide legs
 (hFpairWide, envelope/pointwise/hdomS Wide, the width-generic pairing). v2 DONE
 1,2,5,6,7,8,9,10 of 14. std-3 all 11, raw 0. NOT a₁=R/6. NEXT: J4-327 = bricks 3+4
 (the chart-parametric slice-interface copies at SliceChartData).
+
+## J4-327 (2026-08-07, 2d231e47) — FACADE-v2 BRICKS 3+4: ChartInterface [AF]
+T0: hjoint's internals copy-with-edits at the opaque chart (only hWjoint consumed);
+WitnessDerivMeasurability ALREADY chart-opaque; the dead old-plumbing skipped;
+henv_v2Wide = the missing ∀ᵐs→∀ᶠx wide order. gatedWitnessW (Vmap-parametric) + the
+rfl bridge + the T1 three-leg interface (sliceInterfaceW_of_data). FINDING: the full
+hjoint_fully_geometric capstone also consumes the chart-intrinsic hVmapMeas/hCover —
+routed through Wg in brick 11 (banked wg_* theorems). v2 DONE 1–10 of 14; REMAIN
+11,12,13,14. std-3 all 11, raw 0. NOT a₁=R/6. NEXT: J4-328 = brick 11
+(WgInstantiation: SliceChartData at Wg + the witness-equality bridge + the concrete
+three legs with the chart walls INTERNAL).
