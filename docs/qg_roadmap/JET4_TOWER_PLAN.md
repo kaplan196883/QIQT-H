@@ -2688,3 +2688,13 @@ cyclicT_gauss + ★ cyclicT_of_hGauss (T_{abcd}+T_{acbd}+T_{bcad} = 0 from the
 labelled hGauss gauge input, by linarith on the four cyclic instances). std-3 all,
 raw 0. NOT a₁=R/6. NEXT: J4-335 = A3 (metric_secondJet_eq_riemann — the linear
 system pins T ⟹ (†)) + A4 (htr_from_hGauss — the R3 wall fully reduced to hGauss).
+
+## J4-335 (2026-08-07, 991ad478) — ★★ (†) IS A THEOREM — THE R3 WALL REDUCED TO hGauss ★★ [AF]
+riemann_at_zero_T (the T-atom repackaging, defeq) + the four cyclic Gauss relations
+pin F=A ⟹ metric_secondJet_eq_riemann = (†): T g a b c d = −(1/3)(R_{acbd}+R_{adbc})
+(linarith on opaque atoms) + riemann_pair_symm_at_zero (discharges hpair) +
+★ htr_from_hGauss (the capstone htr from hg/hgsymm/hgiC/hgi0/hdg0/hGauss ALONE).
+The previously-opaque (†) residue of J4-318 is now a theorem; the R3 Ricci-source
+wall rests on the ONE labelled satisfiable hGauss gauge input. std-3 all 4, raw 0.
+NOT a₁=R/6. NEXT: J4-336 = the hLHSlim bricks B1–B3 (+B4 hLapFull_concrete — the
+Da-limit census would then close mod the labelled inputs).
