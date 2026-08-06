@@ -19117,4 +19117,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EnvelopeWiringLocUnif.heine_timeShift_sup_tendsto_tUniform
 #print axioms QIQTH.EnvelopeWiringLocUnif.hBoundaryLim_DONE
 
+-- ## J4-308 (LocUnifDerivConv): the hbdryLU slot recon + L1/L3.
+-- THE SLOT: derivConv_of_data internally builds hbdryLU : TendstoLocallyUniformlyOn
+-- (fun m u => BoundaryTrunc H F m u) (fun u => F u 0 0) atTop U — currently fed by
+-- the hAnear-poisoned BoundaryAssembly provider. LANDED: movingCorr_tUniform (L1 —
+-- the t-uniform 3ε moving correction: the on-ball via the t-uniform Heine sup + the
+-- t-free mass/tails ⟹ TendstoUniformlyOn on the window) + hbdryLUTarget (the slot
+-- named) + hbdryLU_of_movingCorr_frozen (L3 — the W1-free composition: the slot from
+-- {moving loc-unif} + {frozen loc-unif}). L2 = THE RESIDUAL WALL (precisely named):
+-- the t-uniform FROZEN limit (the fixed-f AI's ε-δ moduli made uniform in u — the AI
+-- re-run with the joint-continuity/Heine modulus). L4 (hDerivConv) = L2 + the banked
+-- hDaLimLU_concrete (+ its data pile). std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.LocUnifDerivConv.movingCorr_tUniform
+#print axioms QIQTH.LocUnifDerivConv.hbdryLU_of_movingCorr_frozen
+
 end QIQTH.AxiomAudit

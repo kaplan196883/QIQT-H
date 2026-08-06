@@ -503,6 +503,7 @@ import QIQTH.GateGeometryResiduals
 import QIQTH.BoundaryLimAssembly
 import QIQTH.MovingCorrRecombination
 import QIQTH.EnvelopeWiringLocUnif
+import QIQTH.LocUnifDerivConv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
