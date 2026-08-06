@@ -19605,4 +19605,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DaLimEasyTranche.hII_lo_concrete
 #print axioms QIQTH.DaLimEasyTranche.hII_hi_concrete
 
+-- ## J4-333 (DaLimHardTranche): Da-LIMIT ITEM 4 DONE, ITEM 5 REDUCED
+-- A0/A1: hbnd_concrete — item 4 DISCHARGED via the banked amplitudePackage_sliver_
+-- bound (carries = the AmplitudeDerivativeData bundle (hard field hD2Hexpand) +
+-- satisfiable window relations). A2 THE WIDTH-ENTRY MAP: width 2 is pinned only in
+-- the COLLAPSED global-gated bound (the polynomial absorbed inside the read-only
+-- CoeffU1Fix chain — cannot narrow pointwise); the ungated in-chart M2 engine
+-- ALREADY delivers width 3/2 per-base (globalWitness_residual_bound_inChart_final_
+-- narrow); the block = the global-gated assembly (the C4c wall) at both widths.
+-- gaussian_beats_power ((r²/s)^k·e^{−ar²/s} ≤ (k!/(a−a')^k)·e^{−a'r²/s} — the ∀k
+-- absorption engine) + hEdom_of_gaussPoly_residual (the honest conditional bridge:
+-- hEdom's exact binder from the named satisfiable width-1 residual hraw =
+-- P·((r²/τ+1)·gaussDdim τ), E₀=13P). Da-limit remainder: hLapFull (deepest) +
+-- the named residues (hraw, hD2Hexpand). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.DaLimHardTranche.hbnd_concrete
+#print axioms QIQTH.DaLimHardTranche.gaussian_beats_power
+#print axioms QIQTH.DaLimHardTranche.hEdom_of_gaussPoly_residual
+
 end QIQTH.AxiomAudit
