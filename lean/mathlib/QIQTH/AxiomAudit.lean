@@ -18943,4 +18943,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GapASdomInstantiation.iterE_jointContinuousOn_concrete_final
 #print axioms QIQTH.GapASdomInstantiation.leviSlice_jointContinuousOn_concrete_final
 
+-- ## J4-297 (SdomHnearDischarge): ★★ hSdom FULLY DISCHARGED + the C1 capstone ★★
+-- hSdom_concrete (CONSTRUCTIVE, no residuals: the K-gate zero localizes the dominator
+-- to the finite-measure K; on K the banked bounds peaked by gaussDdim_le_diagonal +
+-- the width-antitone give the (s,z,w)-free M(u); bnd u = M(u)·𝟙_K integrable) +
+-- hnear_concrete (the faithful re-quantification; the surviving carry = the Hgeo
+-- geometric bundle per w∈K: open U + chart continuity + the active A + hEA + the
+-- collar hoff — the CHART-DOMAIN VERDICT: hWwcont is only USED at off-active points
+-- where the collar makes it available; carried honestly, not faked) + ★
+-- leviSlice_jointContinuousOn_DONE: the concrete Levi 0-slice continuity with S-dom
+-- REMOVED — FINAL INPUTS: hEbound/hInt/hEmeas/hbase (banked) + hnear (Hgeo) + the
+-- summable envelope. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.SdomHnearDischarge.hSdom_concrete
+#print axioms QIQTH.SdomHnearDischarge.hnear_concrete
+#print axioms QIQTH.SdomHnearDischarge.leviSlice_jointContinuousOn_DONE
+
 end QIQTH.AxiomAudit
