@@ -2885,3 +2885,20 @@ identity; its consumption lives in the √ε collar. hD2Hexpand_concrete = the
 bridge composed with hV0 the isolated per-(τ,z) residue. std-3 all 5, raw 0.
 NOT a₁=R/6. NEXT: Sol consult on the hV0 regime re-specification (the 4th
 corrected-field case), then J4-352.
+
+## SOL CONSULT #12 (2026-08-07, post-J4-351) — THE hD2Hexpand RE-SPECIFICATION
+VERDICT: (c) COLLAR-RESTRICTED with the z-Gaussian conclusion, CONSTRUCTED via the
+ratio mechanism of (a). The corrected bundle AmplitudeDerivativeDataOn Regime
+(predicate premises, not subtypes; Regime = 0<τ ∧ τ≤τ₀ ∧ ‖z‖≤c√τ ∧ chartDomain z
+— intrinsic, ε-free); the true-chart amplitudes = ρ·chartAmp with ρ =
+exp((r_z−r_{W0})/(4τ)) and ρ ≤ K = exp(Lc³√τ₀/4) on the regime; the corrected
+constants K·M_j. The chart-Gaussian form stays a banked intermediate (NOT the
+consumer contract — (b) would cause the largest re-derivation; (a) would force the
+consumer to re-uniformize). BRICKS: 1 the corrected bundle + the chart-native
+adapter (gauss(W z 0) = ρ·gauss(z) + ρ≤K) · 2 the amplitudePackage_sliver_bound
+re-derivation (the hbnd CONCLUSION syntactically UNCHANGED — collar_to_regime
+inside; K absorbed into M's; no ρ/K/Regime exposure) · 3 the concrete true-chart
+discharge (J4-350's expansion + the ratio rewrite + ρ≤K; β1/β2/gaussian_beats_power
+unchanged mod constants; NO product-rule corrections — ρ is x'-free). SAFETY: the
+restriction dies inside the sliver-bound proof; hbnd_concrete/hDaLimLU_from_
+labelled/a1_R6_from_labelled binder-UNCHANGED.
