@@ -19074,4 +19074,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateGeometryResiduals.gate_far_implies_chartFar
 #print axioms QIQTH.GateGeometryResiduals.leviSlice_hf_cont_FINAL
 
+-- ## J4-305 (BoundaryLimAssembly): ★ hf_cont INTERNAL; the on-ball sup landed ★
+-- heine_timeShift_sup_tendsto (B1: the eventual-uniform time-shift sup from
+-- IsCompact.uniformContinuousOn — the sSup-free (UNIF) ingredient) +
+-- frozenSlice_continuousAt_zero_of_jointContinuousOn (B3: hf_cont DISCHARGED from
+-- the FINAL's joint continuity) + ★ hBoundaryLim_ASSEMBLED (the boundary member with
+-- hf_cont internal; the FINAL continuity bundle threaded). THE RESIDUAL (named): the
+-- hMovingCorr integral recombination — on-ball (mass × B1's sup ≤ CW·ε) + the two
+-- offBall tails + integral_add_compl; plus the frozen-slice hf_meas/hf_bdd
+-- (banked/satisfiable). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.BoundaryLimAssembly.heine_timeShift_sup_tendsto
+#print axioms QIQTH.BoundaryLimAssembly.frozenSlice_continuousAt_zero_of_jointContinuousOn
+#print axioms QIQTH.BoundaryLimAssembly.hBoundaryLim_ASSEMBLED
+
 end QIQTH.AxiomAudit
