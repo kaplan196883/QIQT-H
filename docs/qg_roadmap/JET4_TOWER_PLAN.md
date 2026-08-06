@@ -2390,3 +2390,18 @@ piles (hDaLimLU data, F2, hFII, frozen/moving, B2–B5+hD1) · base geometry + 1
 the heavy X3 v3-export (the residual provider re-exporting the per-S censuses) · the
 final a1_R6_of_geometry assembly. std-3, raw 0. NOT a₁=R/6. NEXT: J4-314
 S1TripleHEmeasGate (the S1 ∀-gate recon + discharge).
+
+## J4-314 (2026-08-06, 214c3523) — S1TripleHEmeasGate: ★ THE S1 ∀-GATE RESOLVED (interface artefact CAUGHT) ★ [AF]
+tripleHEmeas = a SINGLE joint StronglyMeasurable over (τ,p,q) of heatOp at the
+witness. ⚠ STRUCTURAL VERDICT (per feedback_axiom_budget_blind_spot): the capstone's
+literal `∀ S a b, tripleHEmeas` antecedent is UNSATISFIABLE — a non-measurable
+gate-function falsifies the gatedKernel indicator; an over-general interface artefact
+(the provider applies hEmeas at exactly ONE self-chosen gate: the uniformFlowExp
+flow-ball with q-varying radius cf q). Banked honest content: tripleHEmeas_flowball_
+geometry (∃δ₀, S1 at every constant-radius flow-ball gate in (b,δ₀) — geometry-only
+satisfiability witness) + tripleHEmeas_at_measurable_gate (S1 at ANY gate with the
+honest hKSmeas + satisfiable field-derivative carriers). Poisoning audit: none.
+Shedding the outer hEmeas carry = the constant→varying-radius (cf q) extension + a
+strengthened provider internalizing S1. std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-315
+VaryingRadiusS1Provider (is the varying gate-set OPEN? → hKSmeas free → carriers →
+tripleHEmeas at the provider's exact gate → the strengthened provider).
