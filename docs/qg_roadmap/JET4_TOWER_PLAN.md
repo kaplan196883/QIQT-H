@@ -2285,3 +2285,10 @@ The scalar-defeq isolation (heatOp_globalCutoff_eq_A4kernel_at, outside Continuo
 continuous on the FULL gate (plateau+annulus), 57× faster. RESIDUAL: F5e/A6 (the
 hactive wiring) + the origin-vs-w reconciliation. std-3 all 4, raw 0. NOT a₁=R/6.
 NEXT: J4-303 HactiveWiring (→ hf_cont mod I1).
+
+## J4-303 (2026-08-06, f0e4e9ef) — HactiveWiring: hactive's analytic half discharged [AF]
+The W1 interior extraction + hactive_of_fullGate + hactive_concrete (the ContinuousOn
+derived from the banked capstone) + leviSlice_hf_cont (the Levi 0-slice continuity;
+inputs = the banked four + the envelope + hgeo (I1) + hfg (the full-gate + the PURE
+GEOMETRIC collar)). The two residuals are pure gate-geometry. std-3 all 5, raw 0.
+NOT a₁=R/6. NEXT: J4-304 GateGeometryResiduals (I1 + the collar → hf_cont FINAL).
