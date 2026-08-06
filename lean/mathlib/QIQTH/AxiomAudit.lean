@@ -18916,4 +18916,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GapACoverGapB.iterE_jointContinuousOn_all
 #print axioms QIQTH.GapACoverGapB.iterE_jointContinuousOn_all_concrete
 
+-- ## J4-295 (HcontAssembly): ★★ THE INDUCTION CLOSED — Gap-B INTERNALIZED ★★
+-- Index verdict: iterE (k+1) = heatConvK E (iterE k) ⟹ PLAIN single-step induction
+-- (P k ⟹ P (k+1); not strong). iterE_gapB_comp (the IH→hcontIter composition through
+-- the affine section) + iterE_jointContinuousOn_strong (∀k, P k — Gap-B discharged
+-- INTERNALLY from the IH; hmeas from hEmeas; carries ONLY hGapA + hSdom per rung,
+-- both satisfiable via the J4-292/294 covers) + ★ leviSlice_jointContinuousOn_of_strong
+-- (the M-test capstone: the full Levi 0-slice joint continuity = the hf_cont shape,
+-- same carries + the summable envelope). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HcontAssembly.iterE_gapB_comp
+#print axioms QIQTH.HcontAssembly.iterE_jointContinuousOn_strong
+#print axioms QIQTH.HcontAssembly.leviSlice_jointContinuousOn_of_strong
+
 end QIQTH.AxiomAudit
