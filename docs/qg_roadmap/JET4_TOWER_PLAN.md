@@ -2865,3 +2865,13 @@ kappa_eq_one_sixth_expPullback EXISTS — the pullback κ=1/6 was already closed
 J4-341..349 = the INDEPENDENT Gauss-lemma/cyclic derivation + the hGauss labelled
 input CLOSED for the pullback route. std-3 all 4, raw 0. NOT a₁=R/6. NEXT:
 J4-350 = D2HExpandRecon (the next labelled campaign).
+
+## J4-350 (2026-08-07, 5b680261) — D2HExpandRecon: hD2Hexpand → ONE GERM RESIDUE [AF]
+The AmplitudeDerivativeData 24-field census CLEAN (no artefacts — like the Da-limit
+pile). The Leibniz–Gaussian layer FULLY discharged (witnessSecondXDeriv_expand_
+bridge onto the banked gaussComp_amp_center_decomp; the germ-locality pd lemmas;
+the machine-checked flat satisfiability witness). THE ONE WALL: hrep — the germ
+factorization G_τ(V·)·A near 0 (the chart-image Gaussian identity / RNC
+near-isometry with O(‖z‖⁴) absorption — the AmplitudePackage's flagged hard input).
+std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-351 = HrepGermFactorization (the germ from
+the banked on-gate factorization + openness + the chart-jet center identities).
