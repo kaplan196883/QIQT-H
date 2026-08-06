@@ -2220,3 +2220,9 @@ F2 (the base-w on-gate reduction) + F4 (heatOpWitness_fixedBase_continuousOn at 
 base w, near+off pasted). RESIDUAL: the chart-ball cover (per-w slices → the
 origin-centred family). std-3 all 21, raw 0. NOT a₁=R/6.
 NEXT: J4-294 GapACoverGapB (the cover + the all-radii IH + S-dom).
+
+## J4-294 (2026-08-06, afc52579) — GapACoverGapB: the cover + the G2 reduction [AF]
+The origin-ball Gap-A cover (near paste + far zero, all w) + the time-affine bridge +
+iterE_jointContinuousOn_all(_concrete) reduced to ONE carry hcont (sub-walls: the ∀w
+active bank, the Gap-B R*-IH localization, the S-dom dominator). std-3 all 5, raw 0.
+NOT a₁=R/6. NEXT: J4-295 HcontAssembly (the strong induction + S-dom + the ∀w family).
