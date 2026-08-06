@@ -542,6 +542,7 @@ import QIQTH.A1R6FromLabelled
 import QIQTH.GaussLemmaFirstVariation
 import QIQTH.GaussLemmaTransverse
 import QIQTH.RiemannFirstPairAntisym
+import QIQTH.GaussLemmaHomogeneity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

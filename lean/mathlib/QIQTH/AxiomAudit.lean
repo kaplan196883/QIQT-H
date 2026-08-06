@@ -19789,4 +19789,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RiemannFirstPairAntisym.riemannLower_first_pair_antisymm
 #print axioms QIQTH.RiemannFirstPairAntisym.hvanish_from_antisym
 
+-- ## J4-344 (GaussLemmaHomogeneity): THE EULER HOMOGENEITY + THE COVARIANT BRIDGE
+-- H1 exp_euler_homogeneity(_interior): D exp_p(v)·v = γ̇_v(1) — UNCONDITIONAL
+-- (the banked ExpJacobianRescale ray facts + geodesic_local_unique + the endpoint
+-- via within-Iic derivative uniqueness). H2 jacobi_covariant_ode: the raw
+-- variational ODE (the banked jacobiVariation_secondOrder ξ'' = −jacobiOperator)
+-- → the covariant hJac shape (cJp + Γ(u,cJ) = −∑R·u·J·u) — the complete Γ/∂Γ
+-- algebra (J' cancels by christoffel_symm; ∂Γ antisymmetrizes into the Riemann
+-- derivative part; ΓΓ matches); carries = hJODE (banked) + hcJ (a definition) +
+-- hcJp (the product rule), all satisfiable. THE hGAUSS CHAIN IS ALGEBRAICALLY
+-- CLOSED END-TO-END; the remaining wiring = the concrete Jacobi-field
+-- instantiation (expJacobianMat_eq_flow → the HasDerivAt data) + the coordinate
+-- assembly + the frame transport. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.GaussLemmaHomogeneity.exp_euler_homogeneity_interior
+#print axioms QIQTH.GaussLemmaHomogeneity.exp_euler_homogeneity
+#print axioms QIQTH.GaussLemmaHomogeneity.jacobi_covariant_ode
+
 end QIQTH.AxiomAudit
