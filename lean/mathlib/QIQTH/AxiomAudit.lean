@@ -19657,4 +19657,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NCRiemannTwoJet.riemann_pair_symm_at_zero
 #print axioms QIQTH.NCRiemannTwoJet.htr_from_hGauss
 
+-- ## J4-336 (FrozenLaplaceSliver): hLHSlim RESHAPED TO hPd2conv (B1–B4)
+-- F0 VERDICTS: B1 was banked generic (laplaceBeltrami_at_rnc_center); every
+-- existing LapTrunc→full limit is CIRCULAR (assumes hLapFull); XUniformSliverFull
+-- IS x-UNIFORM but bounds ∫∫D2H·F, which identifies with the Laplacian difference
+-- only THROUGH the full-side interchange — the deep wall stands. B1
+-- lapFrozen/lapFull_origin_eq_sum_pdpd + hLHSlim_concrete (the EXACT hLapFull_of_
+-- lims binder from the named atomic carrier hPd2conv : per-coordinate ∂ᵢ∂ᵢ(frozen_m)
+-- 0 → ∂ᵢ∂ᵢ(full) 0 — satisfiable, non-circular) + hLapFull_of_pd2conv (hLapFull_of_
+-- lims with hLHSlim replaced by hPd2conv). The Da-limit item 6 carry is now the
+-- more atomic hPd2conv; its closure = the full-side diff-under-∫ (SOL-#10 deep
+-- wall), honest labelled residue. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.FrozenLaplaceSliver.lapFrozen_origin_eq_sum_pdpd
+#print axioms QIQTH.FrozenLaplaceSliver.lapFull_origin_eq_sum_pdpd
+#print axioms QIQTH.FrozenLaplaceSliver.hLHSlim_concrete
+#print axioms QIQTH.FrozenLaplaceSliver.hLapFull_of_pd2conv
+
 end QIQTH.AxiomAudit
