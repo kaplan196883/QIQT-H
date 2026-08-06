@@ -501,6 +501,7 @@ import QIQTH.FastA5Fix
 import QIQTH.HactiveWiring
 import QIQTH.GateGeometryResiduals
 import QIQTH.BoundaryLimAssembly
+import QIQTH.MovingCorrRecombination
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

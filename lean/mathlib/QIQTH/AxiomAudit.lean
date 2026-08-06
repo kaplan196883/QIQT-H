@@ -19087,4 +19087,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BoundaryLimAssembly.frozenSlice_continuousAt_zero_of_jointContinuousOn
 #print axioms QIQTH.BoundaryLimAssembly.hBoundaryLim_ASSEMBLED
 
+-- ## J4-306 (MovingCorrRecombination): ★★ hMovingCorr PROVEN — hBoundaryLim FULLY
+-- INTERNAL ★★. offBall_seq_tendsto_zero (the m-uniform sequence tails — one lemma,
+-- both tails) + onBallDiff_tendsto_zero (mass × the B1 sup ≤ CW·ε) +
+-- movingCorr_tendsto_zero (R1+R4: the per-m integral_add_compl split + the 3ε
+-- assembly, kernel-agnostic) + ★★ hBoundaryLim_FULLY_INTERNAL: the boundary member
+-- with hMovingCorr GONE (proven from B1 + the mass + the tails), hf_cont internal.
+-- THE TWO NEW SATISFIABLE CARRIES (replacing the opaque hMovingCorr): the
+-- window-uniform global Levi bound |F(t−ε_m) z 0| ≤ Cf (named provider:
+-- leviSeries_gatedWitnessN1_dominated × the Gaussian diagonal — the envelope wiring
+-- brick) + the moving-slice measurability (named provider: the LeviSeriesLocalData
+-- termwise lemma). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.MovingCorrRecombination.offBall_seq_tendsto_zero
+#print axioms QIQTH.MovingCorrRecombination.onBallDiff_tendsto_zero
+#print axioms QIQTH.MovingCorrRecombination.movingCorr_tendsto_zero
+#print axioms QIQTH.MovingCorrRecombination.hBoundaryLim_FULLY_INTERNAL
+
 end QIQTH.AxiomAudit
