@@ -18975,4 +18975,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HgeoDischarge.hnear_twoCover
 #print axioms QIQTH.HgeoDischarge.leviSlice_jointContinuousOn_FINAL
 
+-- ## J4-299 (H2Instantiation): H2 down to TWO clean residuals.
+-- chartField_continuousOn_ball_at (I3 discharged — the ∃V half of H2 fully banked:
+-- V := ball w ρc, open, containment threaded, chart continuous) + H2_concrete (the
+-- exact H2 bundle from hgeo (F1 C² + the I1 containment closure(S w) ⊆ ball w ρc) +
+-- hactive (the I2 active set + collar)) + ★ leviSlice_jointContinuousOn_CONCRETE
+-- (the Levi 0-slice continuity; FINAL INPUTS: the banked hEbound/hInt/hEmeas/hbase +
+-- hgeo + hactive + the envelope). THE TWO RESIDUALS (precisely stated, satisfiable):
+-- I1 = the gate-into-chart-ball containment (the .choose gate radius c vs F1's ρc are
+-- independent selectors; no banked φ-displacement norm bound — satisfiable by
+-- shrinking the gate) · I2 = the TRANSITION-ANNULUS continuity (a² < rncRadialSq < b²
+-- where the cutoff varies — the banked F4 capstone covers only the cutoff≡1 plateau;
+-- heatOp of the C² cutoff×chart-parametrix is continuous there, merely unformalized).
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.H2Instantiation.chartField_continuousOn_ball_at
+#print axioms QIQTH.H2Instantiation.H2_concrete
+#print axioms QIQTH.H2Instantiation.leviSlice_jointContinuousOn_CONCRETE
+
 end QIQTH.AxiomAudit

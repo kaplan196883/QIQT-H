@@ -494,6 +494,7 @@ import QIQTH.HcontAssembly
 import QIQTH.GapASdomInstantiation
 import QIQTH.SdomHnearDischarge
 import QIQTH.HgeoDischarge
+import QIQTH.H2Instantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
