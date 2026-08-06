@@ -19413,4 +19413,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2GaussianPairing.betaPow_integrableOn
 #print axioms QIQTH.CConvV2GaussianPairing.sourcePair_of_gaussian_bound
 
+-- ## J4-324 (CConvV2EnvelopeFromStar + CConvV2LeviSource): FACADE-v2 BRICKS 5+10
+-- Brick 5 (E0–E4): the old hdomS/henv_assembled dominator ((Bs·Ba+Bd)(√2)ⁿ·Cf·
+-- gaussDdim — poisoned via the false Bs and Cf) replaced by the TRUE v2 dominator
+-- C·(t−s)^{-1/2}·gaussDdim(2(t−s))z·|F s z|: pointwise_dom_v2 +
+-- envelope_integrable_v2 (from hFpair) + hdomS_v2/henv_v2 (BOTH old filter orders,
+-- trivially, since hStar is pointwise-uniform) + zslice_integrable_v2. Brick 10
+-- (L0–L3): ★ the banked Levi domination (LeviSeriesLocalData.hFenv →
+-- leviSeries_dominatedW_le, baseKernelW_zero_apply: baseKernelW 2 0 τ p q =
+-- gaussDdim(2τ)(p−q)) has γ=0 — NO s-singularity, milder than Sol's conservative
+-- γ=−1/2: leviSlice_gaussian_bound_of_dom + leviSource_gaussian_bound +
+-- sourceDataV2_concrete (CConvSourceDataV2 for the CONCRETE gate Levi source;
+-- carries = the LeviSeriesLocalData package + hFsum + hgMeas, all satisfiable).
+-- v2 bricks DONE: 1,2,5,10. REMAIN: 3,4,6,7,8,9,11,12,13,14. std-3 all 8.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2EnvelopeFromStar.pointwise_dom_v2
+#print axioms QIQTH.CConvV2EnvelopeFromStar.envelope_integrable_v2
+#print axioms QIQTH.CConvV2EnvelopeFromStar.hdomS_v2
+#print axioms QIQTH.CConvV2EnvelopeFromStar.henv_v2
+#print axioms QIQTH.CConvV2EnvelopeFromStar.zslice_integrable_v2
+#print axioms QIQTH.CConvV2LeviSource.leviSlice_gaussian_bound_of_dom
+#print axioms QIQTH.CConvV2LeviSource.leviSource_gaussian_bound
+#print axioms QIQTH.CConvV2LeviSource.sourceDataV2_concrete
+
 end QIQTH.AxiomAudit
