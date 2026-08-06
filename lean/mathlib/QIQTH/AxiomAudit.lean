@@ -19534,4 +19534,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2WgInstantiation.sliceInterface_CONCRETE
 #print axioms QIQTH.CConvV2WgInstantiation.wg_hCover_leg
 
+-- ## J4-329 (CConvV2DerivRep): FACADE-v2 BRICKS 12+13 (hlin / D / hDrep / hD1)
+-- V0: heatConv = ∫ s in 0..t, ∫ z (interval-of-Lebesgue). ROUTE VERDICT: (a) the
+-- banked hDConv machinery differentiates in TIME — wrong variable for hlin; (b) the
+-- SPATIAL linewise diff-under-∫ was ALREADY BANKED (HeatResidualBound.hConvDeriv_
+-- linewise, the (t−s)^{-1/2} dominated route) — brick 12 = a re-export.
+-- update_eq_affine_line + Dmap (the CLM representative, def) + Dmap_apply_single +
+-- hlin_linewise (the HasDerivAt with the honest diff-under-∫ census: measurability
+-- legs, base interval-integrability, the interval-integrable dominator, the inner
+-- HasDerivAt family) + hDrep_of_def (rfl) + hlin_as_D (the VERBATIM
+-- CConvDerivativeData.hlin field) + hD1_conditional (per-coordinate sliver census →
+-- hD1_from_data + hD1_clm_of_scalar_and_rep). v2 DONE 1–13 of 14; REMAIN 14 (the
+-- facade assembly). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2DerivRep.update_eq_affine_line
+#print axioms QIQTH.CConvV2DerivRep.Dmap_apply_single
+#print axioms QIQTH.CConvV2DerivRep.hlin_linewise
+#print axioms QIQTH.CConvV2DerivRep.hDrep_of_def
+#print axioms QIQTH.CConvV2DerivRep.hlin_as_D
+#print axioms QIQTH.CConvV2DerivRep.hD1_conditional
+
 end QIQTH.AxiomAudit
