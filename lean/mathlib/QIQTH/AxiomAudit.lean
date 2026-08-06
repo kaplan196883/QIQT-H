@@ -19721,4 +19721,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.A1R6SlotAdapters.daLim_for_slots
 #print axioms QIQTH.A1R6SlotAdapters.a1_R6_slots_AT_GATE
 
+-- ## J4-340 (A1R6FromLabelled): ★★★★ THE v3 CHAIN IS COMPLETE ★★★★
+-- a1_R6_from_labelled — THE CONDITIONAL a₁=R/6 MILESTONE: the a₁ two-jet (the
+-- heatOp vanishing + the trueHeatKernel expansion with the GENUINE Ricci scalar
+-- (∑ᵢ ricci g gi i i 0)/6 in the O(t) coefficient) at the literal constant-radius
+-- gate, derived from: the FOUR LABELLED INPUTS (hGauss, hraw, hD2Hexpand-in-dataAmp,
+-- hPd2conv) + the base geometry/gauge/window raw inputs + the package facts
+-- (satisfiability certified by constRadius_package_and_S1; hS1 under the honest
+-- c<δ₀ reach) + the satisfiable census piles (the Da-limit ~60, the Duhamel-core
+-- ~90 with shared binders de-duplicated, the F2/frozen/moving lists, the CConv-v2
+-- sliver census). The whole composition type-checked with NO shape residues.
+-- The SOL-#11 v3-export plan (bricks 1–5, J4-338/339/340) is COMPLETE.
+-- ⚠ NOT unconditional a₁ = R/6 — the four labelled inputs remain open derivation
+-- campaigns (hGauss: the exp-pullback Gauss lemma; hraw: loc-unif M2 + cover;
+-- hD2Hexpand: the Leibniz-Gaussian layer; hPd2conv: the full-side diff-under-∫).
+-- std-3. THE HONEST CONDITIONAL MILESTONE.
+#print axioms QIQTH.A1R6FromLabelled.a1_R6_from_labelled
+
 end QIQTH.AxiomAudit

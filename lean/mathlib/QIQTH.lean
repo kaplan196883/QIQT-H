@@ -538,6 +538,7 @@ import QIQTH.FrozenLaplaceSliver
 import QIQTH.GlobalRawBoundFacade
 import QIQTH.A1R6CoreAtGate
 import QIQTH.A1R6SlotAdapters
+import QIQTH.A1R6FromLabelled
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
