@@ -19045,4 +19045,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FastA5Fix.heatOpWitness_fixedBase_fullGate
 #print axioms QIQTH.FastA5Fix.heatOpWitness_fixedBase_fullGate_chartFree
 
+-- ## J4-303 (HactiveWiring): ★ hactive's ANALYTIC half DISCHARGED ★
+-- continuousAt_of_continuousOn_gateCompact (W1, pure topology) + the concrete
+-- interior extraction + hactive_of_fullGate (the exact hactive bundle from the
+-- full-gate ContinuousOn + a pure geometric collar) + hactive_concrete (the
+-- ContinuousOn conjunct DERIVED from the banked FastA5Fix capstone) + ★
+-- leviSlice_hf_cont: the Levi 0-slice joint continuity carrying ONLY the banked four
+-- + the envelope + hgeo (F1 chart C² + the I1 containment) + hfg (the full-gate +
+-- PURE GEOMETRIC collar bundle) + standing structural hyps. Both surviving residuals
+-- are pure gate-geometry facts (satisfiable). ~60s build. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.HactiveWiring.continuousAt_of_continuousOn_gateCompact
+#print axioms QIQTH.HactiveWiring.heatOpWitness_fixedBase_continuousAt_interior
+#print axioms QIQTH.HactiveWiring.hactive_of_fullGate
+#print axioms QIQTH.HactiveWiring.hactive_concrete
+#print axioms QIQTH.HactiveWiring.leviSlice_hf_cont
+
 end QIQTH.AxiomAudit
