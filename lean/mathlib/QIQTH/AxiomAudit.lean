@@ -19181,4 +19181,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDuhamelExportRethread.hDuhamelSlot_AT_GATE
 #print axioms QIQTH.HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL
 
+-- ## J4-312 (HDConvGateThreading): ★★ THE CAPSTONE hDConv SLOT IS A THEOREM ★★
+-- KEY FINDING: HDConvThreading.hDConv_from_banked is W1-POISONED (its route runs
+-- through hDelta_gatedWitnessN1_final → the hAnear boundary provider) — NOT usable
+-- at the gate. The fix: hDConv_W1free (the DifferentiableAt analog of J4-310's
+-- hDerivConv_conditional — verbatim up to hDerivLU := tendstoLocallyUniformlyOn_add
+-- hDaLimLU hbdryLU, then hDConv_of_deltaFamily instead of derivConv_tendsto) +
+-- hDConv_AT_GATE (at the concrete gate; hDaLimLU/hbdryLU internal from the banked
+-- concretes; census = the FULL union MINUS hBoundaryLim — the pointwise boundary
+-- limit is only needed for the Core identity, not DifferentiableAt) +
+-- hDConvSlot_AT_GATE (the VERBATIM capstone hDConv antecedent — the slot IS the
+-- DifferentiableAt directly, no bundle extraction). NO hAnear. Surviving inner
+-- capstone arrow: hCConv → ⟨a₁ 2-jet⟩. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HDConvGateThreading.hDConv_W1free
+#print axioms QIQTH.HDConvGateThreading.hDConv_AT_GATE
+#print axioms QIQTH.HDConvGateThreading.hDConvSlot_AT_GATE
+
 end QIQTH.AxiomAudit

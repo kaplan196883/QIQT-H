@@ -507,6 +507,7 @@ import QIQTH.LocUnifDerivConv
 import QIQTH.TUniformFrozenAI
 import QIQTH.HDerivConvComposition
 import QIQTH.HDuhamelExportRethread
+import QIQTH.HDConvGateThreading
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
