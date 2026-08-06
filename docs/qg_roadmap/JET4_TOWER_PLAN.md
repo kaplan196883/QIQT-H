@@ -2606,3 +2606,11 @@ chart-intrinsic hVmapMeas/hChartB walls INTERNAL) + wg_hCover_leg. THE J4-321
 CHART-HARDWIRING RESIDUE IS DISCHARGED. v2 DONE 1–11 of 14. std-3 all 6, raw 0.
 NOT a₁=R/6. NEXT: J4-329 = bricks 12+13 (hlin from the banked hDConv machinery via
 the affine line map; D + hDrep by definition; hD1 via the banked sliver adapters).
+
+## J4-329 (2026-08-07, 7137acb5) — FACADE-v2 BRICKS 12+13: hlin / D / hDrep / hD1 [AF]
+ROUTE VERDICT: the banked hDConv machinery = TIME variable (wrong for hlin); the
+SPATIAL linewise diff-under-∫ was ALREADY BANKED (hConvDeriv_linewise) — brick 12 a
+re-export. Dmap (the CLM representative) + hDrep_of_def (rfl) + hlin_as_D (the
+verbatim field) + hD1_conditional (the named per-coordinate sliver census →
+hD1_from_data + the CLM lift). v2 DONE 1–13 of 14. std-3 all, raw 0. NOT a₁=R/6.
+NEXT: J4-330 = brick 14 THE FACADE (hCConvSlot_AT_GATE_v2 from the v2 census only).
