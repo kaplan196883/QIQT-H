@@ -2362,3 +2362,16 @@ X3 (the v3 restatement) deferred by design (the ~130-binder kernel-freeze rule);
 per-S fact a v3 would ∃-intro is fully in hand. Surviving capstone arrows: hDConv →
 hCConv. NO hAnear anywhere. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-312
 HDConvGateThreading (hDConv_from_banked at the same gate → hDConvSlot_AT_GATE).
+
+## J4-312 (2026-08-06, 98a72317) — HDConvGateThreading: ★★ THE CAPSTONE hDConv SLOT IS A THEOREM ★★ [AF]
+KEY FINDING: HDConvThreading.hDConv_from_banked is W1-POISONED (route via
+hDelta_gatedWitnessN1_final → the hAnear boundary provider) — not honestly usable at
+the provider gate. The fix: hDConv_W1free (the DifferentiableAt analog of J4-310's
+hDerivConv_conditional — same hDerivLU := tendstoLocallyUniformlyOn_add hDaLimLU
+hbdryLU, closed by hDConv_of_deltaFamily) + hDConv_AT_GATE (hDaLimLU/hbdryLU internal
+from the banked concretes; census = the FULL union MINUS hBoundaryLim) +
+hDConvSlot_AT_GATE (the VERBATIM capstone hDConv antecedent — the slot IS the
+DifferentiableAt). NO hAnear. ★ BOTH hDuhamel (J4-311) AND hDConv slots are now
+theorems at the concrete gate; the surviving inner capstone arrow = hCConv → ⟨a₁
+2-jet⟩. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-313 CConvFacadeGate (the hCConv
+five-bundle recon + discharge at the gate → hCConvSlot_AT_GATE).
