@@ -2573,3 +2573,15 @@ THE TRANSFER PROVED: √r²_W·τ⁻¹·gaussDdim τ (W z x) ≤ √2·2ⁿ·τ^
 width bookkeeping (4τ vs hStar's 2τ — the wide-variant route). v2 DONE 1,2,5,6,7,10
 of 14. std-3 all 13, raw 0. NOT a₁=R/6. NEXT: J4-326 = bricks 8+9 (WitnessStar — the
 (⋆) analytic heart, the wide-variant decision).
+
+## J4-326 (2026-08-07, 7fe0ccf2) — FACADE-v2 BRICKS 8+9: ★★★ THE (⋆) HEART IS PROVEN ★★★ [AF]
+The bank already had the on-gate product rule (witnessFieldDeriv_gate_eq) — brick 8
+a re-export; only the constant-Bs packaging was poisoned. THE WIDTH: the wide
+4(t−s) route (c₀=½ banked; c₀=1 unobtainable); the contract stays at 2(t−s), the
+concrete witness satisfies the WIDE form. witnessFieldDeriv_starWide_onGate: |wfd| ≤
+(½√n·L·√2·2ⁿ·Ba + 2ⁿ·Bd·√t)·τ^{-1/2}·gaussDdim(4τ)z — s-UNIFORM constant; assembly
+= product rule + Cauchy–Schwarz + β1 transfer + ampWiden4. hStarWide_concrete (∃C on
+Ioo 0 t; off-gate zero; carries hgate + hdata, satisfiable) + the S4 wide legs
+(hFpairWide, envelope/pointwise/hdomS Wide, the width-generic pairing). v2 DONE
+1,2,5,6,7,8,9,10 of 14. std-3 all 11, raw 0. NOT a₁=R/6. NEXT: J4-327 = bricks 3+4
+(the chart-parametric slice-interface copies at SliceChartData).
