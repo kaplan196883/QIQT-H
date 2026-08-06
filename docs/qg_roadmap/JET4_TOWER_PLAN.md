@@ -2256,3 +2256,11 @@ replaces the impossible origin-U; off-gate via the hard-gate zero (no chart); th
 collar via the far lemma. hnear_twoCover (the satisfiable H2 bundle) +
 leviSlice_jointContinuousOn_FINAL (the banked four + H2 + the envelope). std-3 all 4,
 raw 0. NOT a₁=R/6. NEXT: J4-299 H2Instantiation (the fields ∀w∈K → hf_cont DONE).
+
+## J4-299 (2026-08-06, 41a5c174) — H2Instantiation: H2 → I1 + I2 [AF]
+The ∃V half discharged (V := ball w ρc via F1); H2_concrete + leviSlice_
+jointContinuousOn_CONCRETE (the banked four + hgeo(I1) + hactive(I2) + envelope).
+I1 = the gate-into-chart-ball containment (no banked φ-displacement bound; shrink the
+gate) · I2 = the transition-annulus continuity (the plateau-only F4 doesn't cover
+where the cutoff varies; the product-rule extension of the D-chain). std-3 all 3,
+raw 0. NOT a₁=R/6. NEXT: J4-300 TransitionAnnulusCont (I2 + I1).
