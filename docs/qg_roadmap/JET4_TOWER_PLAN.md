@@ -2809,3 +2809,13 @@ algebra; carries hJODE-banked/hcJ-def/hcJp-product-rule). THE hGAUSS CHAIN IS
 ALGEBRAICALLY CLOSED; remaining wiring = the Jacobi instantiation + the coordinate
 assembly + the frame transport. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-345 =
 GaussLemmaAssembly (the instantiation + the pairing assembly + ∑g̃_ij v^j = v^i).
+
+## J4-345 (2026-08-07, 59b01cc6) — GaussLemmaAssembly: THE FULL GAUSS LEMMA [AF]
+gauss_first_variation(_dexp) (the whole chain wired: the initial data + T3 linear
+growth + the curvature kill ⟹ g_{exp v}(D exp(v)·w, γ̇(1)) = g_p(w,v)) +
+gauss_coordinate_contraction(_gauge) (★ ∑g̃_ij v^j = v^i at the RNC base gauge —
+the exact hGauss shape; expPullbackMetric reused). REMAINING (the final hGauss
+brick): the flow-data HasDerivAt discharge (via the banked ∃-Φ) + the germ shape +
+the frame/capstone transport. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-346 =
+GaussLemmaFlowData (F1 the flow data + F2 the concrete contraction + F3 the germ +
+F4 the transport-scope verdict incl. the C⁴-vs-C∞ check).
