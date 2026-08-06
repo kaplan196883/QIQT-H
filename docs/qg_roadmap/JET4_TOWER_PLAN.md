@@ -2335,3 +2335,15 @@ the 3-piece t-uniform split (T3) + the loc-unif form (T4) + the exact hbdryLUTar
 composition (T5; sole carry = the mechanical hmovLU promotion). FLAG: the
 untruncated-gate W1 aspect to examine at the hDerivConv composition. std-3 all 5,
 raw 0. NOT a₁=R/6. NEXT: J4-310 HDerivConvComposition.
+
+## J4-310 (2026-08-06, 93255114) — HDerivConvComposition: ★★ THE FIXED-GATE hDerivConv IS W1-FREE ★★ [AF]
+hmovLU_concrete (H1, the movingCorr_tUniform loc-unif promotion — no abstract carry)
++ hbdryLU_CONCRETE (H2, the exact hbdryLUTarget from the satisfiable frozen+moving
+lists — NO hAnear) + hDerivConv_conditional (H3, derivConv_of_data steps (b)+(c)
+replicated with OUR W1-free hbdryLU; carries = the F2 regularity pile + hFII tails +
+hDaLimLU) + truncatedDuhamelCore_conditional (H4, the pile composed; the hDaLim-vs-
+hDaLimLU bridge = .tendsto_at). THE VERDICT: W1 (hAnear) survives ONLY in the OLD
+provider-∃ export path (core_of_v2prime_data_FULL); the fixed-gate chain is clean —
+open surface = the F2 pile + the hDaLimLU DATA census, none of it W1. std-3 all 4,
+raw 0. NOT a₁=R/6. NEXT: J4-311 the provider-∃ export re-thread through the new Core
+(gate-identity check → hDuhamel internal → wide_a1_R6_interface_discharged_v3).
