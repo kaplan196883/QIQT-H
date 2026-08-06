@@ -2248,3 +2248,11 @@ chart-domain verdict: hWwcont only used off-active where the collar provides it)
 leviSlice_jointContinuousOn_DONE (FINAL INPUTS: the banked four + hnear(Hgeo) + the
 envelope). std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-298 HgeoDischarge (the bundle from the collar geometry → hf_cont DONE).
+
+## J4-298 (2026-08-06, a49cee35) — HgeoDischarge: ★★ hnear via the TWO-COVER ★★ [AF]
+⚠ HONESTY CATCH: the J4-297 Hgeo shape was UNSATISFIABLE for far w (the chart is
+garbage off ball w ρc) — superseded, not forced. The two-cover fix: V ⊇ closure(S w)
+replaces the impossible origin-U; off-gate via the hard-gate zero (no chart); the
+collar via the far lemma. hnear_twoCover (the satisfiable H2 bundle) +
+leviSlice_jointContinuousOn_FINAL (the banked four + H2 + the envelope). std-3 all 4,
+raw 0. NOT a₁=R/6. NEXT: J4-299 H2Instantiation (the fields ∀w∈K → hf_cont DONE).
