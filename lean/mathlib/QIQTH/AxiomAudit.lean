@@ -19229,4 +19229,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.S1TripleHEmeasGate.tripleHEmeas_flowball_geometry
 #print axioms QIQTH.S1TripleHEmeasGate.tripleHEmeas_at_measurable_gate
 
+-- ## J4-315 (VaryingRadiusS1Provider): S1 AT THE PROVIDER'S VARYING GATE mod Measurable cf
+-- V0 RECON: the provider's cf = (if hq : q ∈ K then (hgood q hq).choose else 0);
+-- in _lin_pkg_open the hgood witness is instantiated with the CONSTANT (b+ρc)/2 but
+-- Classical.choose is opaque — no measurability survives. Route A (joint openness)
+-- DEAD (per-fibre openness only; K compact not open). The route: extend the banked
+-- constant-radius Lusin–Souslin engine (ConcreteGateInstantiation.hKSmeas_concrete)
+-- to the graph-of-radius domain D = {(q,v) | q ∈ K ∧ ‖v‖ < cf q}, Borel iff
+-- Measurable cf. hKSmeas_varying = joint gate-set measurability at varying radius
+-- REDUCED EXACTLY to Measurable cf (+ the reach bound δ₀). tripleHEmeas_at_varying_
+-- flowball_gate = S1 at the provider's gate shape, conditional on Measurable cf +
+-- the three satisfiable base-field carriers (transfer from the constant machinery).
+-- THE SINGLE NAMED RESIDUE: Measurable cf for the .choose-built radius — dissolvable
+-- by a provider export exposing the constant radius (next brick). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.VaryingRadiusS1Provider.hKSmeas_varying
+#print axioms QIQTH.VaryingRadiusS1Provider.tripleHEmeas_at_varying_flowball_gate
+
 end QIQTH.AxiomAudit
