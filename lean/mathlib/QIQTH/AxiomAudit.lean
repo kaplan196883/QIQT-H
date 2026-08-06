@@ -18958,4 +18958,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SdomHnearDischarge.hnear_concrete
 #print axioms QIQTH.SdomHnearDischarge.leviSlice_jointContinuousOn_DONE
 
+-- ## J4-298 (HgeoDischarge): ★★ hnear DISCHARGED via the TWO-COVER (Hgeo superseded) ★★
+-- ⚠ HONESTY CATCH (per the blind-spot audit): the J4-297 Hgeo shape was UNSATISFIABLE
+-- for far bases w (it demanded the chart continuous on an origin-centred U ⊇
+-- closedBall 0 R — the chart is .choose-garbage off ball w ρc). THE FIX: the
+-- two-open-cover — continuousOn_of_active_twoRegionZero (the abstract combinator) +
+-- heatOpWitness_originBall_twoCover (V ⊇ closure (S w) replaces the impossible U;
+-- off-gate germ via the HARD-GATE zero, NO chart; collar germ via the J4-292 far
+-- lemma) + hnear_twoCover (the exact hnear slot from the SATISFIABLE per-w H2 bundle:
+-- V := ball w ρc (F1), the collar from the gate margin c−b>0, hEA from the active
+-- chain) + ★ leviSlice_jointContinuousOn_FINAL (the Levi 0-slice continuity; inputs =
+-- the banked four + H2 (satisfiable ∀w∈K) + the envelope + radii/positivity).
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.HgeoDischarge.continuousOn_of_active_twoRegionZero
+#print axioms QIQTH.HgeoDischarge.heatOpWitness_originBall_twoCover
+#print axioms QIQTH.HgeoDischarge.hnear_twoCover
+#print axioms QIQTH.HgeoDischarge.leviSlice_jointContinuousOn_FINAL
+
 end QIQTH.AxiomAudit

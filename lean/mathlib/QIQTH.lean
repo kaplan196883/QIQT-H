@@ -493,6 +493,7 @@ import QIQTH.GapACoverGapB
 import QIQTH.HcontAssembly
 import QIQTH.GapASdomInstantiation
 import QIQTH.SdomHnearDischarge
+import QIQTH.HgeoDischarge
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
