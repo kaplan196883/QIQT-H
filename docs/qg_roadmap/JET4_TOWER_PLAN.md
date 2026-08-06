@@ -2738,3 +2738,11 @@ have-chains: hS1/htr/hDa/slots then exact the core). GUARDRAILS: never restate/
 unfold/destruct v2; ≤1 heavy application per brick; exact/apply + typed haves; no
 broad simpa/simp_all/convert; the one shared syntactic Gate def everywhere; scalar
 equalities in tiny standalone lemmas (change + exact); split any brick >1-2 min.
+
+## J4-338 (2026-08-07, 90882103) — A1R6CoreAtGate: v3 BRICK 1 — THE PRE-∃ CORE (O2) [AF]
+K0: O2 — the inner carrier (WideA1AssemblyTrunc.wide_a1_R6_of_residue_inf_trunc) is
+PUBLIC. wide_a1_R6_core_AT_CONSTRADIUS = the thin wrapper at the literal constGate:
+base + package fields + hS1 (per-gate, replacing ∀-hEmeas) + htr + the three flat
+slot antecedents → the a₁ 2-jet; ONE heavy application at native κ=2. v2 untouched.
+std-3, raw 0. NOT a₁=R/6. NEXT: J4-339 = v3 bricks 2+3+4 (the htr/Da adapters +
+A1R6GateSlots).
