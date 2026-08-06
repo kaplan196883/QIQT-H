@@ -2430,3 +2430,20 @@ at the constant gate. Deleting hEmeas from the capstone = the deliberate v3-expo
 provider refactor. std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-317 OuterCarryRecon (the
 COMPLETE classified capstone-antecedent census + discharge of derivable base-geometry
 carries via the banked recenter/RNC machinery).
+
+## J4-317 (2026-08-06, bcac67db) — OuterCarryRecon: ★★★ THE DEFINITIVE REMAINING-SURFACE MAP ★★★ [AF]
+T0 census of EVERY wide_a1_R6_interface_discharged_v2 antecedent: (i) the three inner
+arrows each have banked GATE slots (hDuhamelSlot/hDConvSlot/hCConvSlot, J4-311/312/
+313); (ii) S1/hEmeas content complete (J4-316); (iii) the analytic residue (hInter/
+hInt/hEbound/hEzero/hS0/hSopen/hCH) is ALL ALREADY INTERNAL in v2 — migrated into
+the slot piles; (iv) 4 normalization carries DERIVED (hg0_of_hframeK, hGamma_of_hdg0,
+hgi_of_hg0_hinvF/hgi_of_geometry, hgnd_of_hgpos); genuine carries = smoothness/
+positivity/symmetry/window data + htr (★ the Ricci-source physics coefficient).
+T2 ENDGAME MAP (dependency order):
+  R0 — retire the ∀S hEmeas via constRadius_package_and_S1 (interface rethread).
+  R1 — compose the three gate slots into v2 (composition, no new math).
+  R2 — the slot data piles at the concrete gate (the GENUINE analytic walls):
+       hDuhamel's hDaLimLU census (F2/hFII/hBoundaryLim_DONE banked), hDConv's
+       diff-under-∫ family, hCConv's 4 facade bundles + hD1.
+  R3 — derive htr (RNC 2-jet ⟹ −(2/3)Ric; the K4/van-Vleck 2-jet bank should feed).
+std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-318 RicciSourceCoeff (R3 recon + derivation).
