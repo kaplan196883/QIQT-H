@@ -2447,3 +2447,15 @@ T2 ENDGAME MAP (dependency order):
        diff-under-∫ family, hCConv's 4 facade bundles + hD1.
   R3 — derive htr (RNC 2-jet ⟹ −(2/3)Ric; the K4/van-Vleck 2-jet bank should feed).
 std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-318 RicciSourceCoeff (R3 recon + derivation).
+
+## J4-318 (2026-08-06, 48fed9db) — RicciSourceCoeff: ★ THE htr ALGEBRA CLOSED (R3 → (†)) ★ [AF]
+htr (ProviderSideExports:177) = ∀ c d, ∑_a ∂_c∂_d g_{aa}(0) = -(2/3) Ric c d; the
+-(2/3) IS the trace of the classical -(1/3) NC 2-jet (†) ∂_c∂_d g_{ab}(0) =
+-(1/3)(R_{acbd}+R_{adbc}). ric_of_lowered + lowered_diag_swap + jet_trace_sum +
+ricci_diag_contract ⟹ htr_of_geometry (the capstone binder VERBATIM from hjet=(†) +
+hRic + hpair); htr_hypotheses_satisfiable (flat witness, no vacuity);
+pd_christoffel_at_zero + riemann_at_zero (the honest bridge to the REAL riemann g gi:
+ΓΓ dies at 0, Schwarz cancels). SOLE R3 RESIDUE: (†) the four-index NC 2-jet — the
+van-Vleck bank is directional-only (Ric(v,v), 3e36639c). R2 untouched. std-3 all 8,
+raw 0. NOT a₁=R/6. NEXT: J4-319 FacadeBundleFields (R2 easiest tranche: the hCConv
+B2–B5 per-field census + discharges; the CONSTRADIUS gate may simplify B2).
