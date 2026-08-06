@@ -2656,3 +2656,27 @@ global-gated assembly. Delivered: gaussian_beats_power (the ∀k absorption engi
 hEdom_of_gaussPoly_residual (the honest bridge from the named width-1 residual
 hraw). Da-limit remainder: 6 hLapFull + the named residues (hraw, hD2Hexpand).
 std-3 all 3, raw 0. NOT a₁=R/6. NEXT: Sol consult on (†)/hLapFull/C4c, then J4-334.
+
+## SOL CONSULT #10 (2026-08-07, post-J4-333) — THE THREE DEEP WALLS
+(a) (†) THE NC 2-JET: ⚠ (†) is FALSE for a general 0-jet-gauged metric (arbitrary
+symmetric ∂∂g) — the honest statement is (†)-given-hGauss, the Gauss-lemma
+contraction hGauss : ∀ i, (fun x => ∑ j, g i j x * x j) =ᶠ[𝓝 0] (fun x => x i)
+(the ONE-contraction Christoffel radial identity is TOO STRONG/false; the two-
+contraction geodesic identity too weak). BRICKS: A1 NCGaussPd3 (the pd-product
+third-derivative-at-0 lemmas — the product rule kills all but the Kronecker hits) ·
+A2 NCGaussToCyclicT (differentiate hGauss thrice → T_{ipqr}+T_{iqpr}+T_{irpq}=0;
+the FOUR instances combine linearly: 2(A+B+D) = h₁+h₂+h₃−h₄ = 0 ⟹ the cyclic
+T-identity) · A3 NCRiemannTwoJet (the cyclic identity + riemann_at_zero + metric/
+Schwarz symmetry ⟹ (†) by linear arithmetic on opaque T-atoms) · A4 the labelled-
+input facade (hGauss = one more gauge input; satisfiable — normal coordinates
+exist; deriving it from the exp tower = a separate ~3-brick Gauss-lemma campaign).
+(b) hLHSlim: the SAME cancellation as the banked Laplacian sliver — the heat-eq
+rewrite does NOT soften it (the ∂τ sliver = the AI boundary term). BRICKS: B1
+LaplaceAtRNCOrigin (Δ_g f 0 = ∑ᵢ∂ᵢ∂ᵢf under the gauge) · B2 the frozen=full−sliver
+decomposition adapter (W2 interchange + interval split, identify with the
+XUniformSliverFull object) · B3 the Tendsto re-export (const.sub hsliver).
+(c) hraw: KEEP LABELLED (per-base M2 does not compactify cheaply: base-uniformity
++ exact width-1 preservation are real infrastructure). BRICKS: C1 the
+GlobalGatedRawBound predicate · C2 the consumer adapter · C3 the capstone_with_hraw
+facade. The hraw PROOF = a separate later campaign (loc-unif M2 + finite-cover +
+cutoff absorption), NOT on the critical path.
