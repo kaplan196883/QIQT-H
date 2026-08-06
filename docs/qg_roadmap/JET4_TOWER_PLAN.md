@@ -2819,3 +2819,14 @@ brick): the flow-data HasDerivAt discharge (via the banked ∃-Φ) + the germ sh
 the frame/capstone transport. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-346 =
 GaussLemmaFlowData (F1 the flow data + F2 the concrete contraction + F3 the germ +
 F4 the transport-scope verdict incl. the C⁴-vs-C∞ check).
+
+## J4-346 (2026-08-07, a3b8957b) — GaussLemmaFlowData: THE hGauss GERM DELIVERED [AF]
+F1 flow_jacobi_field (the named-conjunct ∃-Φ extraction; J(0)=0/Jp(0)=w/hJ1 + the
+interior variational system). KEY FINDING: the flow gives within-Icc[0,1]
+derivatives vs the assembly's Ioo(-2,2) — the closure = the interior-MVT route
+(documented in-header). F2/F3 ★ hGauss_pullback (the =ᶠ germ in the EXACT consumer
+binder order; surviving hyp = hgball) + F4 g̃(0)=I proven. F4 VERDICT: the capstone
+C∞-of-pullback = the one labelled smoothness residue (C⁴ cap); ∂g̃(0)=0 +
+inverse/positivity derivable-with-work. std-3 all 4, raw 0. NOT a₁=R/6. NEXT:
+J4-347 = GaussInteriorMVT (E′=W, W′=0 on the interior + the MVT closure ⟹
+hgball_concrete ⟹ the hGauss campaign closes mod the C∞ scope note).
