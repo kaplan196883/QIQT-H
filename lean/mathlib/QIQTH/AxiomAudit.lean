@@ -19899,4 +19899,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Hpd2FromCyclic.hpd2_expPullback_of_cyclic
 #print axioms QIQTH.Hpd2FromCyclic.kappa_eq_one_sixth_expPullback_via_cyclic
 
+-- ## J4-350 (D2HExpandRecon): hD2Hexpand REDUCED TO ONE GERM RESIDUE
+-- D0: the AmplitudeDerivativeData 24-field census — CLEAN (no over-quantified
+-- field, no singular prefactor; unlike the three facade artefacts). hD2Hexpand =
+-- the Leibniz–Gaussian second-derivative expansion of the witness; the RHS
+-- coefficients match gaussDdim_pd_pd_i/_pd_i exactly. pd_congr_of_eventuallyEq +
+-- pd_pd_congr (germ-locality of pd/pd²) + ★ witnessSecondXDeriv_expand_bridge
+-- (the ENTIRE Leibniz algebra discharged onto the banked gaussComp_amp_center_
+-- decomp; the exact hD2Hexpand RHS with Aamp = A 0, A1amp = −2∂ᵢA(0), A2amp =
+-- ∂ᵢ²A(0)) + residueJets_satisfiable (the machine-checked flat witness — no
+-- vacuity). THE ONE REMAINING WALL: hrep — the germ factorization G_τ(V·)·A near
+-- 0 (the chart-image Gaussian identity gaussDdim τ (W z 0) = gaussDdim τ z; the
+-- RNC near-isometry with the O(‖z‖⁴) discrepancy absorbed into the amplitude —
+-- the AmplitudePackage header's flagged 'ONE hard geometric input'). std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.D2HExpandRecon.pd_congr_of_eventuallyEq
+#print axioms QIQTH.D2HExpandRecon.pd_pd_congr_of_eventuallyEq
+#print axioms QIQTH.D2HExpandRecon.witnessSecondXDeriv_expand_bridge
+#print axioms QIQTH.D2HExpandRecon.residueJets_satisfiable
+
 end QIQTH.AxiomAudit
