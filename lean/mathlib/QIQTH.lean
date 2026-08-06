@@ -487,6 +487,7 @@ import QIQTH.ChartJetFactsDischarge
 import QIQTH.RDomEnvelope
 import QIQTH.IterEEngineWiring
 import QIQTH.InnerEngineRecursion
+import QIQTH.ZeroCollarLocalZero
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

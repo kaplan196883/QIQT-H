@@ -18863,4 +18863,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InnerEngineRecursion.innerStep_cont_ae
 #print axioms QIQTH.InnerEngineRecursion.innerRecursion_step_reduced
 
+-- ## J4-292 (ZeroCollarLocalZero): ★★ THE ZERO COLLAR HOLDS ★★
+-- (A) VERDICT: the cutoff-active support (rncRadial < b) sits STRICTLY inside the
+-- concrete provider gate (φ_q '' ball 0 c with c = (b+ρc)/2 > b — GateOpennessExport
+-- LEG 3 already banked the frontier vanishing); the annulus b ≤ ‖·‖ < c is the collar.
+-- No radii re-choice needed. cutoff_active_subset_sublevel + isOpen_cutoff_sublevel +
+-- (B1) gatedWitness_eventuallyEq_zero_of_far + (B2) heatOpGatedWitness_eq_zero_of_far
+-- (heatOp locality via the germ) + (C) the active-region bounds (chart + ambient:
+-- ‖z−w‖ ≤ √(3/2)·b ⟹ R* = R + √(3/2)·b — the S-dom localization) + (D-skeleton)
+-- continuousOn_of_active_open_zero_off (fully general pasting) + (D)
+-- E_slice_continuousOn_off_support (the globalized base case, carrying the banked
+-- active-continuity hEA + the collar hoff — the radii/wiring reconciliation is the
+-- residual). std-3 all 9+. NOT a₁ = R/6.
+#print axioms QIQTH.ZeroCollarLocalZero.cutoff_active_subset_sublevel
+#print axioms QIQTH.ZeroCollarLocalZero.gatedWitness_eventuallyEq_zero_of_far
+#print axioms QIQTH.ZeroCollarLocalZero.heatOpGatedWitness_eq_zero_of_far
+#print axioms QIQTH.ZeroCollarLocalZero.heatOpGatedWitness_active_chart
+#print axioms QIQTH.ZeroCollarLocalZero.heatOpGatedWitness_active_norm
+#print axioms QIQTH.ZeroCollarLocalZero.continuousOn_of_active_open_zero_off
+#print axioms QIQTH.ZeroCollarLocalZero.E_slice_continuousOn_off_support
+
 end QIQTH.AxiomAudit
