@@ -19464,4 +19464,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2ChartComparison.chart_gradient_gaussDdim_transfer
 #print axioms QIQTH.CConvV2ChartComparison.chart_gradient_gaussDdim_transfer_half
 
+-- ## J4-326 (CConvV2WitnessStar): ★★★ THE (⋆) HEART IS PROVEN ★★★ (v2 bricks 8+9)
+-- S0-1: the bank ALREADY had the on-gate product rule (witnessFieldDeriv_gate_eq:
+-- wfd = G·(−∑WₖPvalₖ/(2τ))·A + G·∂ᵢA) — brick 8 = a re-export; the coercive
+-- theorem's constant-Bs packaging was the poison, NOT the decomposition. S0-2 THE
+-- WIDTH: the wide 4(t−s) route taken (c₀=½ banked; c₀=1 unobtainable); the v2
+-- contract stays at 2(t−s), the CONCRETE witness satisfies the WIDE form, all
+-- downstream legs width-uniform. witnessFieldDeriv_starWide_onGate (THE HEART:
+-- |wfd i τ p z| ≤ (½√n·L·√2·2ⁿ·Ba + 2ⁿ·Bd·√t)·τ^{-1/2}·gaussDdim(4τ)z — the
+-- s-UNIFORM constant via √t; assembly = product rule + Cauchy–Schwarz numerator +
+-- the β1 transfer + gaussDdim_ampWiden4) + hStarWide_concrete (∃C≥0 on Ioo 0 t;
+-- off-gate zero branch; honest carries hgate + the per-point hdata package, all
+-- satisfiable) + the S4 wide legs (abLowerW, sourcePairWidth_of_gaussian_bound
+-- (width-generic), hFpairWide, envelope_integrable_v2Wide, pointwise_domWide,
+-- hdomS_v2Wide). std-3 all 11. NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2WitnessStar.sqrtInv_eq_rpow
+#print axioms QIQTH.CConvV2WitnessStar.gaussDdim_ampWiden4
+#print axioms QIQTH.CConvV2WitnessStar.witnessFieldDeriv_productRule
+#print axioms QIQTH.CConvV2WitnessStar.witnessFieldDeriv_starWide_onGate
+#print axioms QIQTH.CConvV2WitnessStar.hStarWide_concrete
+#print axioms QIQTH.CConvV2WitnessStar.abLowerW
+#print axioms QIQTH.CConvV2WitnessStar.sourcePairWidth_of_gaussian_bound
+#print axioms QIQTH.CConvV2WitnessStar.hFpairWide
+#print axioms QIQTH.CConvV2WitnessStar.envelope_integrable_v2Wide
+#print axioms QIQTH.CConvV2WitnessStar.pointwise_domWide
+#print axioms QIQTH.CConvV2WitnessStar.hdomS_v2Wide
+
 end QIQTH.AxiomAudit
