@@ -2321,3 +2321,10 @@ sup (the loc-unif key) + hBoundaryLim_DONE (the two envelope carries collapsed i
 ONE banked LeviSeriesLocalData package + a satisfiable floor; NO opaque carry).
 std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-308 LocUnifDerivConv (→ hDerivConv →
 the hDuhamel export).
+
+## J4-308 (2026-08-06, 7629a413) — LocUnifDerivConv: the slot recon + L1/L3 [AF]
+The hbdryLU slot named (TendstoLocallyUniformlyOn of BoundaryTrunc → F u 0 0 on U) +
+movingCorr_tUniform (the t-uniform 3ε) + hbdryLU_of_movingCorr_frozen (the W1-free
+composition). L2 = the residual wall: the t-uniform FROZEN limit (the AI moduli
+uniform in u; only f_u's modulus is u-dependent — the t-uniform Heine supplies it).
+std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-309 TUniformFrozenAI (L2 → hbdryLU → hDerivConv).
