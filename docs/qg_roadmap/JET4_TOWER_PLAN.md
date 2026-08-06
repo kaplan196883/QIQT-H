@@ -2790,3 +2790,13 @@ ONE named hvanish — the first-pair antisymmetry contraction) + T3 the linear g
 the hvanish brick → homogeneity → coordinate assembly → frame transport. std-3 all
 5, raw 0. NOT a₁=R/6. NEXT: J4-343 = RiemannFirstPairAntisym (hvanish discharged
 from the general-point lowered-Riemann antisymmetry).
+
+## J4-343 (2026-08-07, 23ccf3cd) — RiemannFirstPairAntisym: hvanish DISCHARGED [AF]
+V1 the general-point lowered-Riemann expansion (½∂∂g + ΓΓg; the gΓΓ pairwise
+cancellation + Schwarz) + V2 the first-pair antisymmetry (FULLY, incl. the ΓΓ part)
++ V3 hvanish_from_antisym (the exact hvanish of the transverse leg, given the
+satisfiable Jacobi-ODE hJac). The transverse curvature half CLOSED. hGauss
+remaining: the Jacobi-ODE instantiation → homogeneity → the coordinate assembly →
+the frame transport. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-344 =
+GaussLemmaHomogeneity (the Euler homogeneity + the hJac instantiation from the
+matrix-Jacobi flow).
