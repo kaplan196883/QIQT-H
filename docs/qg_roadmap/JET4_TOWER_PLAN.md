@@ -2746,3 +2746,10 @@ base + package fields + hS1 (per-gate, replacing ∀-hEmeas) + htr + the three f
 slot antecedents → the a₁ 2-jet; ONE heavy application at native κ=2. v2 untouched.
 std-3, raw 0. NOT a₁=R/6. NEXT: J4-339 = v3 bricks 2+3+4 (the htr/Da adapters +
 A1R6GateSlots).
+
+## J4-339 (2026-08-07, e6fd4210) — A1R6SlotAdapters: v3 BRICKS 2+3+4 [AF]
+L3: the Da thread is DIRECT (DaLimLUGoal abbrev-defeq to the slot consumers — no
+adapters). htr_adapter + daLim_for_slots + A1R6GateSlots + a1_R6_slots_AT_GATE
+(all three fields wired, one banked producer per field). v3 remains: brick 5 only.
+std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-340 = a1_R6_from_labelled (THE FINAL
+FACADE — the a₁ 2-jet over the four labelled inputs + the satisfiable censuses).
