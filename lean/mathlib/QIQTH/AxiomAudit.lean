@@ -19008,4 +19008,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TransitionAnnulusCont.heatParametrix_value_jointContinuousOn_pos
 #print axioms QIQTH.TransitionAnnulusCont.laplaceBeltrami_fixedField_jointContinuousOn
 
+-- ## J4-301 (FullGateAssembly): ★ the generic T3 core LANDED (fast) ★
+-- The split factor library A1a–A1f (cutoff∘chart value/jets/Δ; parametrix∘chart
+-- value/jets; the cross sum) + A3 (the four-term Leibniz formula's ContinuousOn) +
+-- ★ A4 heatOp_cutoffChart_jointContinuousOn_at — the GENERIC transition-annulus core:
+-- heatOp(χ∘W₀ · H∘W₀) continuous on the gate, plateau AND annulus in ONE argument
+-- (carries only the chart C² + coefficient regularity + hgi/hChr + hgisymm). Every
+-- shipped build ≤ ~1m17s. ⚠ A5 (the CONCRETE capstone) TYPECHECKS (verified once,
+-- exit 0) but its elaboration is ~52min — the .congr defeq against the .choose-heavy
+-- concrete terms; THE FIX (mapped): re-state A4 abstractly in Vmap so the reduction
+-- defeq is checked ONCE over abstract terms, then apply syntactically. A5c/A6 sit on
+-- top. std-3 all 9. NOT a₁ = R/6.
+#print axioms QIQTH.FullGateAssembly.cutoffChart_value_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.cutoffChart_pd_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.cutoffChart_pd_pd_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.cutoffChart_laplaceBeltrami_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.parametrixChart_value_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.parametrixChart_pd_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.cutoffParametrix_crossTerm_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.cutoffChart_heatOp_formula_jointContinuousOn
+#print axioms QIQTH.FullGateAssembly.heatOp_cutoffChart_jointContinuousOn_at
+
 end QIQTH.AxiomAudit
