@@ -2375,3 +2375,18 @@ DifferentiableAt). NO hAnear. ★ BOTH hDuhamel (J4-311) AND hDConv slots are no
 theorems at the concrete gate; the surviving inner capstone arrow = hCConv → ⟨a₁
 2-jet⟩. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-313 CConvFacadeGate (the hCConv
 five-bundle recon + discharge at the gate → hCConvSlot_AT_GATE).
+
+## J4-313 (2026-08-06, dbe25b5c) — CConvFacadeGate: ★★★ ALL THREE INNER CAPSTONE ARROWS ARE THEOREMS ★★★ [AF]
+The hCConv slot = the spatial-C² ContDiffAt of the diagonal heatConv; unfolds via the
+banked CConvConcreteThreading.hCConv_concrete_from_data into the FIVE CConvFacade
+bundles (B1 metric, B2 chart/gate measurability, B3 source, B4 derivative + explicit
+D, B5 envelope) + the hD1 L2 carry. POISONING AUDIT: the C² route is structurally
+DISJOINT from the W1/hAnear boundary machinery — NOT W1-poisoned. B1 discharged at
+the gate from raw geometry the capstone already carries; hCConvSlot_AT_GATE = the
+VERBATIM capstone hCConv antecedent, proven from the honest satisfiable census
+(B2–B5 + hD1). With J4-311 (hDuhamel) + J4-312 (hDConv), all three inner arrows now
+have AT_GATE slot theorems. REMAINING SURFACE: S1 ∀-gate (tripleHEmeas) · the census
+piles (hDaLimLU data, F2, hFII, frozen/moving, B2–B5+hD1) · base geometry + 1≤n ·
+the heavy X3 v3-export (the residual provider re-exporting the per-S censuses) · the
+final a1_R6_of_geometry assembly. std-3, raw 0. NOT a₁=R/6. NEXT: J4-314
+S1TripleHEmeasGate (the S1 ∀-gate recon + discharge).
