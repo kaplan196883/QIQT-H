@@ -2314,3 +2314,10 @@ tails; hf_cont internal). The two new satisfiable carries: the window-uniform gl
 Levi bound (provider named) + the moving-slice measurability (provider named). std-3
 all 4, raw 0. NOT a₁=R/6. NEXT: J4-307 EnvelopeWiringLocUnif (the carriers wired +
 the loc-unif start).
+
+## J4-307 (2026-08-06, 80d7944b) — EnvelopeWiringLocUnif: ★★★ hBoundaryLim DONE ★★★ [AF]
+The window-uniform Levi bound + the moving-slice measurability + the t-UNIFORM Heine
+sup (the loc-unif key) + hBoundaryLim_DONE (the two envelope carries collapsed into
+ONE banked LeviSeriesLocalData package + a satisfiable floor; NO opaque carry).
+std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-308 LocUnifDerivConv (→ hDerivConv →
+the hDuhamel export).
