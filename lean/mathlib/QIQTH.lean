@@ -518,6 +518,8 @@ import QIQTH.FacadeBundleFields
 import QIQTH.B2MeasurabilityDissolution
 import QIQTH.ChartParamFacadeVariant
 import QIQTH.GaussianJetTheorem
+import QIQTH.CConvV2Contracts
+import QIQTH.CConvV2GaussianPairing
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -19391,4 +19391,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianJetTheorem.gaussian_beats_quadratic
 #print axioms QIQTH.GaussianJetTheorem.gateData_numerator_shape_unsat
 
+-- ## J4-323 (CConvV2Contracts + CConvV2GaussianPairing): FACADE-v2 BRICKS 1+2
+-- Per SOL CONSULT #9 (the 14-brick plan). Brick 1: CConvSourceDataV2 (hFjoint/
+-- hFmeas verbatim + hFpair — replaces the adjudicated-false hFbd) +
+-- CConvWitnessEnvelopeDataV2 (hcoef/hC2fam verbatim + hStar the (t−s)^{-1/2}-
+-- weighted (⋆) contract — replaces the proven-false hGateData ×2) + SliceChartData
+-- (the chart-parametric survivor package for bricks 3/4/7) + the satisfiability
+-- guards sourceDataV2_zero / sliceChartData_trivial (hStar's concrete discharge =
+-- brick 9, honestly noted). Brick 2: P1–P5 ALL LANDED — gaussDdim_pairing_integral
+-- (∫ gaussDdim a · gaussDdim b = gaussDdim(a+b) 0, via the banked gaussDdim_conv)
+-- + gaussDdim_zero(_antitone) + abLower + betaPow_integrableOn (the split Beta
+-- integrability, γ>−1) + sourcePair_of_gaussian_bound (the FULL hFpair adapter;
+-- sole carry = the hgMeas parametric-measurability side condition, satisfiable).
+-- std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2Contracts.sourceDataV2_zero
+#print axioms QIQTH.CConvV2Contracts.sliceChartData_trivial
+#print axioms QIQTH.CConvV2GaussianPairing.gaussDdim_zero
+#print axioms QIQTH.CConvV2GaussianPairing.gaussDdim_pair_integrable
+#print axioms QIQTH.CConvV2GaussianPairing.gaussDdim_pairing_integral
+#print axioms QIQTH.CConvV2GaussianPairing.abLower
+#print axioms QIQTH.CConvV2GaussianPairing.betaPow_integrableOn
+#print axioms QIQTH.CConvV2GaussianPairing.sourcePair_of_gaussian_bound
+
 end QIQTH.AxiomAudit
