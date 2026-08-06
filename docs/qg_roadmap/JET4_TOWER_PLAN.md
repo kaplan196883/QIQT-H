@@ -2503,3 +2503,17 @@ Remaining hCConv surface: hSmeasSet(raw)/hSliceData carries · hFbd (likely-fals
 stated, L¹ fix) · hlin/hDrep (joint w/ hDConv) · hGateData ×2 (Gaussian-jet) · the
 N0 re-thread residue. std-3, raw 0. NOT a₁=R/6. NEXT: J4-322 GaussianJetTheorem
 (Sol's α/β/γ; SATISFIABILITY VERDICT FIRST — the s-power bookkeeping).
+
+## J4-322 (2026-08-06, 79b755eb) — GaussianJetTheorem: ★★ hGateData ×2 ADJUDICATED FALSE-AS-STATED ★★ [AF]
+THE THIRD FACADE ARTEFACT (after the capstone ∀S and hFbd-likely-false): the B5
+on-gate conjunct bounds the log-gradient |∑Wₖ·Pvalₖ/(2(t−s))| by a CONSTANT Bs; the
+numerator is s-independent and generically nonzero ⟹ blow-up as s→t⁻ on a positive-
+measure interval (∀ᵐ cannot escape); s-power 0 demanded where −1/2 is forced.
+PROVEN: gateData_numerator_shape_unsat (satisfiable antecedents — the impossibility
+as a Lean theorem, parallel to HgateSatAudit.gate_Sconj_impossible). Brick β BANKED
+regardless: gaussian_beats_linear (β1, explicit s^{−1/2}) + gaussian_beats_quadratic
+(β2, s⁻¹) + the mul_exp_neg auxiliaries. THE CORRECTED VARIANT (⋆): the
+(t−s)^{−1/2}-weighted VALUE-LEVEL domination — s-integrable, sufficient downstream,
+scalar core = β1; Ba/Bd conjuncts survive, only Bs is poisoned. std-3 all 7, raw 0.
+NOT a₁=R/6. NEXT: Sol consult on the corrected-facade-v2 design (the (⋆) envelope +
+L¹ hFbd + the chart-parametric re-thread — one consolidated v2 chain?), then J4-323.
