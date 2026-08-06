@@ -2781,3 +2781,12 @@ tube). hGauss remaining: (a) transverse Jacobi conservation (new symplectic) ·
 transport. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-342 = the transverse leg
 (GaussLemmaTransverse: d/dt[g(J,γ̇)] = g(J',γ̇) → the Jacobi-ODE second step →
 the linear-growth conclusion).
+
+## J4-342 (2026-08-07, c6c5d0fb) — GaussLemmaTransverse: THE hGauss TRANSVERSE LEG [AF]
+T1a the covariant-pairing algebra (pure metric_compat, no ½-factors) + the generic
+pairing HasDerivAt + T1b (E_J' = the covariant pairing) + T2b (conditional on the
+ONE named hvanish — the first-pair antisymmetry contraction) + T3 the linear growth
+(double constancy). J abstract; the matrix instantiation later. hGauss remaining:
+the hvanish brick → homogeneity → coordinate assembly → frame transport. std-3 all
+5, raw 0. NOT a₁=R/6. NEXT: J4-343 = RiemannFirstPairAntisym (hvanish discharged
+from the general-point lowered-Riemann antisymmetry).
