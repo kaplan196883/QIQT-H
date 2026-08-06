@@ -19641,4 +19641,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NCGaussToCyclicT.cyclicT_gauss
 #print axioms QIQTH.NCGaussToCyclicT.cyclicT_of_hGauss
 
+-- ## J4-335 (NCRiemannTwoJet): ★★ (†) IS A THEOREM — THE R3 WALL REDUCED TO hGauss ★★
+-- THE WORKED LINEAR SYSTEM: riemann_at_zero repackaged in T-atoms (riemann_at_zero_T,
+-- defeq); the four cyclic Gauss relations (h_a..h_d from cyclicT_of_hGauss) pin
+-- F = A (sum-of-four + pairwise combinations), whence −(1/3)(R_{acbd}+R_{adbc}) =
+-- −(1/6)(−6A) = A. metric_secondJet_eq_riemann = (†): T g a b c d =
+-- −(1/3)(riemann a c b d 0 + riemann a d b c 0) — closed by linarith on opaque
+-- T-atoms. riemann_pair_symm_at_zero (no cyclic input needed — term-by-term after
+-- the symmetries) discharges J4-318's hpair. ★ htr_from_hGauss: the capstone htr
+-- binder from hg/hgsymm/hgiC/hgi0/hdg0/hGauss ALONE (hjet=A3, hRic=ricci_diag_
+-- contract, hpair discharged) — the R3 Ricci-source wall now rests on the ONE
+-- labelled satisfiable hGauss gauge input. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.NCRiemannTwoJet.riemann_at_zero_T
+#print axioms QIQTH.NCRiemannTwoJet.metric_secondJet_eq_riemann
+#print axioms QIQTH.NCRiemannTwoJet.riemann_pair_symm_at_zero
+#print axioms QIQTH.NCRiemannTwoJet.htr_from_hGauss
+
 end QIQTH.AxiomAudit
