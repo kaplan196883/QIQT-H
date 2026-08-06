@@ -540,6 +540,7 @@ import QIQTH.A1R6CoreAtGate
 import QIQTH.A1R6SlotAdapters
 import QIQTH.A1R6FromLabelled
 import QIQTH.GaussLemmaFirstVariation
+import QIQTH.GaussLemmaTransverse
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

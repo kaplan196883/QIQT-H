@@ -19756,4 +19756,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussLemmaFirstVariation.energy_hasDerivAt_zero
 #print axioms QIQTH.GaussLemmaFirstVariation.geodesic_energy_conservation
 
+-- ## J4-342 (GaussLemmaTransverse): THE hGauss TRANSVERSE LEG
+-- T1a transverse_pairing_deriv_eq_covariant (the pure metric_compat algebra — the
+-- raw pairing derivative = the covariant pairing; no ½-factors, two permutation
+-- helpers) + the generic pairing_hasDerivAt_along_geodesic + T1b (E_J' = the
+-- covariant pairing) + T2b covariant_pairing_hasDerivAt_zero (conditional on the
+-- ONE named satisfiable hvanish — the curvature first-pair antisymmetry contraction,
+-- true for Jacobi fields; its general-point derivation = its own brick) + T3
+-- gauss_transverse_linear (the double-constancy linear growth on the tube).
+-- J abstract (componentwise HasDerivAt hypotheses; the matrix instantiation later).
+-- hGauss remaining: the hvanish/antisymmetry brick · homogeneity · the coordinate
+-- assembly · the frame transport. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.GaussLemmaTransverse.transverse_pairing_deriv_eq_covariant
+#print axioms QIQTH.GaussLemmaTransverse.pairing_hasDerivAt_along_geodesic
+#print axioms QIQTH.GaussLemmaTransverse.transverse_pairing_hasDerivAt
+#print axioms QIQTH.GaussLemmaTransverse.covariant_pairing_hasDerivAt_zero
+#print axioms QIQTH.GaussLemmaTransverse.gauss_transverse_linear
+
 end QIQTH.AxiomAudit
