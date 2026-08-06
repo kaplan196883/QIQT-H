@@ -2347,3 +2347,18 @@ provider-∃ export path (core_of_v2prime_data_FULL); the fixed-gate chain is cl
 open surface = the F2 pile + the hDaLimLU DATA census, none of it W1. std-3 all 4,
 raw 0. NOT a₁=R/6. NEXT: J4-311 the provider-∃ export re-thread through the new Core
 (gate-identity check → hDuhamel internal → wide_a1_R6_interface_discharged_v3).
+
+## J4-311 (2026-08-06, 3b2d4a2e) — HDuhamelExportRethread: ★★ THE CAPSTONE hDuhamel SLOT IS A THEOREM ★★ [AF]
+X0 GATE-IDENTITY VERDICT: IDENTICAL — the wide capstone's provider-chosen S IS the one
+concrete van-Vleck gate (gatedWitnessN1_package_open), the same (S,a,b)/witness the
+whole J4-266→310 boundary chain is parameterized by; the J4-265 pattern applies with
+no gate mismatch. hDerivConv_AT_GATE (the W1-free composition at the gate) +
+truncatedDuhamelCore_AT_GATE (robust) + truncatedDuhamelCore_AT_GATE_FULL (the honest
+union census: RNC gauge, MemLapFull, interval-integrabilities, sliver, Gaussian
+dominations, MemECombine, the W2 family, F2 pile, hFII, frozen/moving lists, the
+single W1-free hBoundaryLim) + hDuhamelSlot_AT_GATE (the EXACT hDuhamel antecedent of
+wide_a1_R6_interface_discharged_v2, PROVEN — hDuhamel_of_truncatedData projection).
+X3 (the v3 restatement) deferred by design (the ~130-binder kernel-freeze rule); the
+per-S fact a v3 would ∃-intro is fully in hand. Surviving capstone arrows: hDConv →
+hCConv. NO hAnear anywhere. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-312
+HDConvGateThreading (hDConv_from_banked at the same gate → hDConvSlot_AT_GATE).
