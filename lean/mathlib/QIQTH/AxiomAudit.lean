@@ -19586,4 +19586,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DaLimCensusRecon.memGaugeGamma_of_hdg0
 #print axioms QIQTH.DaLimCensusRecon.memECombine_of_data
 
+-- ## J4-332 (DaLimEasyTranche): Da-LIMIT ITEMS 1–3 DISCHARGED
+-- Z1 hFzero_concrete (iterE/leviSeries vanishing at s≤0 via hEzeroE + degenerate
+-- intervals) + Z2 hFdom_concrete (the width-MATCHED Levi domination re-export from
+-- LeviSeriesLocalData.hFenv + baseKernelW_zero_apply; carry = the data package) +
+-- Z3 the four strip integrabilities (hIlo/hIhi/hII_lo/hII_hi via the pairing engine
+-- pairing_intervalIntegrable: the widths ADD ⟹ the z-pairing peak is a CONSTANT —
+-- no (t−s)^{-1/2} sliver; carries = two Gaussian dominations + hmeas). Da-limit
+-- remainder now: 4 hbnd (hD2Hexpand) → 5 hEdom (width-3/2 narrowing) → 6 hLapFull
+-- (the Laplacian comparison, deepest). std-3 all 9. NOT a₁ = R/6.
+#print axioms QIQTH.DaLimEasyTranche.iterE_eq_zero_of_nonpos
+#print axioms QIQTH.DaLimEasyTranche.leviSeries_eq_zero_of_nonpos
+#print axioms QIQTH.DaLimEasyTranche.hFzero_concrete
+#print axioms QIQTH.DaLimEasyTranche.hFdom_concrete
+#print axioms QIQTH.DaLimEasyTranche.pairing_intervalIntegrable
+#print axioms QIQTH.DaLimEasyTranche.hIlo_concrete
+#print axioms QIQTH.DaLimEasyTranche.hIhi_concrete
+#print axioms QIQTH.DaLimEasyTranche.hII_lo_concrete
+#print axioms QIQTH.DaLimEasyTranche.hII_hi_concrete
+
 end QIQTH.AxiomAudit
