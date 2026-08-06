@@ -2770,3 +2770,14 @@ campaigns: hGauss (the exp-pullback Gauss lemma, ~3 bricks per SOL #10) · hraw
 derivative layer) · hPd2conv (the full-side diff-under-∫ deep wall) + the census
 satisfiability sweeps. NEXT: J4-341 = the hGauss campaign brick 1 (the
 first-variation/Gauss-lemma recon).
+
+## J4-341 (2026-08-07, 30d51d70) — GaussLemmaFirstVariation: THE hGauss RADIAL LEG [AF]
+R0: the geodesic ODE banked (geodesicField+expTube_spec); metric compat banked
+(christoffel_lower); the Jacobi bank has NO symplectic conservation; the energy
+identity NEW here. G1a the compat-algebra derivative-zero + G1b the ODE product
+rule + G1c ★ geodesic_energy_conservation (the RADIAL Gauss identity on the exp
+tube). hGauss remaining: (a) transverse Jacobi conservation (new symplectic) ·
+(b) homogeneity (ExpJacobianRescale partial) · (c) coordinate assembly · (d) frame
+transport. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-342 = the transverse leg
+(GaussLemmaTransverse: d/dt[g(J,γ̇)] = g(J',γ̇) → the Jacobi-ODE second step →
+the linear-growth conclusion).
