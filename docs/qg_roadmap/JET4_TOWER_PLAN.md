@@ -2627,3 +2627,13 @@ chart-opaque measurability bank + sourceDataV2_concrete); (c) the L2 sliver cens
 (hD1_conditional). THE WHOLE SOL-#9 v2 CAMPAIGN (J4-323→330, bricks 1–14) CLOSED IN
 8 BRICKS OF WORK. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-331 = the hDaLimLU DATA
 census recon+discharge (the next endgame-map item), then (†), then R0/R1.
+
+## J4-331 (2026-08-07, 8106d1be) — DaLimCensusRecon: THE hDaLimLU CENSUS (NO POISONS) [AF]
+Every hDaLimLU_concrete binder classified: gauge + hEcomb DISCHARGED
+(memGaugeGi_of_geometry / memGaugeGamma_of_hdg0 / memECombine_of_data); the W2
+family BANKED (witness_MemInterchange). ★ SATISFIABILITY AUDIT CLEAN — the three
+facade poisons do NOT recur; the Da-limit pile is honest. X2 REMAINDER (dependency
+order): 1 hFzero (small) → 2 hFdom (Levi-domination re-export) → 3 hIlo/hi +
+hII_lo/hi (pairing+Beta) → 4 hbnd (√ε sliver, hD2Hexpand) → 5 hEdom (width-3/2
+narrowing, β-seeded) → 6 hLapFull (the deepest — Laplacian comparison → the F2
+C²-limit). std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-332 = the easy tranche (1–3).
