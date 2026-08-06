@@ -2707,3 +2707,13 @@ binder from the atomic hPd2conv carrier, non-circular) + hLapFull_of_pd2conv.
 Labelled inputs now: hGauss, hraw, hD2Hexpand, hPd2conv. std-3 all 4, raw 0.
 NOT a₁=R/6. NEXT: J4-337 = the hraw C1–C3 packaging + hDaLimLU_from_labelled (the
 whole Da-limit pile as ONE theorem over the labelled-input list).
+
+## J4-337 (2026-08-07, 889ccec7) — ★★★ THE Da-LIMIT PILE = ONE THEOREM ★★★ [AF]
+GlobalGatedRawBound (the hraw predicate) + hEdom_of_globalRawBound + the six
+sub-assembly groups + hDaLimLU_from_labelled: ALL ~45 hDaLimLU_concrete binders
+plumbed through the banked dischargers (J4-331..336). SURVIVING: the geometry/gauge
+raw inputs + the W2 family + window data + LeviSeriesLocalData + dominations/
+measurabilities + the amplitude bundle (hD2Hexpand) + Fubini reps + THE LABELLED
+hraw + hPd2conv. The facade poisons do not recur. std-3 all, raw 0. NOT a₁=R/6.
+NEXT: Sol consult on the v3-export architecture (the last heavy composition), then
+J4-338 toward a1_R6_from_labelled.
