@@ -19860,4 +19860,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussInteriorMVT.hgball_concrete
 #print axioms QIQTH.GaussInteriorMVT.hGauss_pullback_concrete
 
+-- ## J4-348 (PullbackGeometryLegs): THE DERIVABLE LEGS + THE DECISIVE L3 VERDICT
+-- THE BANKED-JET FINDING (per feedback_dont_undercredit_repo): the D²exp jet WAS
+-- banked (pd_jacobian_expMap_zero, the closed Christoffel form) and L1 ∂g̃(0)=0
+-- WAS fully proved (pd_expPullbackMetric_at_zero) — expPullbackMetric_one_jet_zero
+-- = the named re-export. L2: matToCLM_isUnit_eventually + expPullbackMetric_
+-- rightInverse_eventually (the genuine matrix-inverse identity for the banked
+-- expPullbackMetricInv) + expPullbackMetric_det_pos_eventually. ★ L3 VERDICT: the
+-- CORRECT pullback consumer is RNCExpansion.heat_a1_of_gauge_c2 (finite-order:
+-- ContDiffAt 2 g̃ / ContDiffAt 1 g̃⁻¹, geometry at 0 only) — ALREADY instantiated
+-- at g̃ by the banked kappa_eq_one_sixth_expPullback_of_hpd2; NO C∞-vs-C⁴ wall on
+-- this route (the ⊤-facade (B) is a separate future campaign). THE SOLE OPEN
+-- ANALYTIC RESIDUE of the pullback route: the labelled hpd2 (the ∂²g̃(0)
+-- radial-contraction identity 2⟨∂_l∂_j g̃_{αk}⟩ = ⟨∂_l∂_α g̃_{jk}⟩ — likely
+-- derivable from the PROVEN cyclic T-identity at g̃, the next brick). std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.PullbackGeometryLegs.expPullbackMetric_one_jet_zero
+#print axioms QIQTH.PullbackGeometryLegs.matToCLM_isUnit_eventually
+#print axioms QIQTH.PullbackGeometryLegs.expPullbackMetric_rightInverse_eventually
+#print axioms QIQTH.PullbackGeometryLegs.expPullbackMetric_det_pos_eventually
+
 end QIQTH.AxiomAudit
