@@ -19131,4 +19131,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LocUnifDerivConv.movingCorr_tUniform
 #print axioms QIQTH.LocUnifDerivConv.hbdryLU_of_movingCorr_frozen
 
+-- ## J4-309 (TUniformFrozenAI): ★★ L2 CLOSED — the t-uniform frozen AI ★★
+-- witnessMass_tendsto_one (T1 — the AI at f ≡ 1: the u-free mass-one limit; the SOLE
+-- AI reuse, internals not re-opened) + frozenModulus_uniform (T2 — the Heine–Cantor
+-- u-uniform modulus from the joint continuity) + frozenAI_tUniform (T3 — the 3-piece
+-- split: mass×modulus + the tails + the mass-defect ⟹ TendstoUniformlyOn) +
+-- frozenAI_locUnif (T4) + hbdryLU_W1free_of_frozen_locUnif (T5 — the exact
+-- hbdryLUTarget from the satisfiable list + the carried hmovLU (L1's output, the
+-- mechanical .tendstoLocallyUniformlyOn promotion)). ⚠ the hDerivConv STRETCH not
+-- attempted — the untruncated-gate export's W1 aspect (per DaLimLUConcreteDischarge)
+-- to examine in the composition brick. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.TUniformFrozenAI.witnessMass_tendsto_one
+#print axioms QIQTH.TUniformFrozenAI.frozenModulus_uniform
+#print axioms QIQTH.TUniformFrozenAI.frozenAI_tUniform
+#print axioms QIQTH.TUniformFrozenAI.frozenAI_locUnif
+#print axioms QIQTH.TUniformFrozenAI.hbdryLU_W1free_of_frozen_locUnif
+
 end QIQTH.AxiomAudit
