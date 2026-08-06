@@ -2698,3 +2698,12 @@ The previously-opaque (†) residue of J4-318 is now a theorem; the R3 Ricci-sou
 wall rests on the ONE labelled satisfiable hGauss gauge input. std-3 all 4, raw 0.
 NOT a₁=R/6. NEXT: J4-336 = the hLHSlim bricks B1–B3 (+B4 hLapFull_concrete — the
 Da-limit census would then close mod the labelled inputs).
+
+## J4-336 (2026-08-07, f7c39139) — FrozenLaplaceSliver: hLHSlim → hPd2conv [AF]
+F0: B1 was banked generic; every LapTrunc→full limit is CIRCULAR (assumes hLapFull);
+XUniformSliverFull IS x-UNIFORM but crosses the Laplacian difference only through
+the full-side interchange — the deep wall stands. hLHSlim_concrete (the exact
+binder from the atomic hPd2conv carrier, non-circular) + hLapFull_of_pd2conv.
+Labelled inputs now: hGauss, hraw, hD2Hexpand, hPd2conv. std-3 all 4, raw 0.
+NOT a₁=R/6. NEXT: J4-337 = the hraw C1–C3 packaging + hDaLimLU_from_labelled (the
+whole Da-limit pile as ONE theorem over the labelled-input list).
