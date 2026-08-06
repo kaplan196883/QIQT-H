@@ -2489,3 +2489,17 @@ absorption lemmas + γ product assembly; ⚠ s-power bookkeeping — 1st deriv c
 s^{-1/2}, 2nd costs s^{-1}). std-3 all 10, raw 0. NOT a₁=R/6. NEXT: J4-321
 ChartParamFacadeVariant (the chart-parametric bundle + Wg instantiation +
 hCConvSlot_AT_GATE_v2 with the B2 measurability internal).
+
+## J4-321 (2026-08-06, 79e4e336) — ChartParamFacadeVariant: WALLS 2/3 INTERNAL AT Wg [AF]
+N0 CORRECTED VERDICT: the witness ITSELF contains uniformInverseChart (via
+globalCutoffParametrixWitnessN) and the slice-interface machinery
+(hjoint_instantiated/HenvUInstantiation/WitnessDerivMeasurability) hardwires the
+chart in statements AND proofs — the consumer is NOT chart-opaque.
+CConvChartGateDataW (chart-parametric: 4 chart fields opaque W', 3 chart-free
+verbatim) + chartGateDataW_of_Wg (walls 2/3 hVmapMeas/hChartB DISCHARGED INTERNALLY
+from MeasurableSet Γ + Measurable G). N2/N3 blocked on the named residue: the
+chart-parametric re-derivation of hjoint/henv/g2 (sound, heavy, deferred).
+Remaining hCConv surface: hSmeasSet(raw)/hSliceData carries · hFbd (likely-false-as-
+stated, L¹ fix) · hlin/hDrep (joint w/ hDConv) · hGateData ×2 (Gaussian-jet) · the
+N0 re-thread residue. std-3, raw 0. NOT a₁=R/6. NEXT: J4-322 GaussianJetTheorem
+(Sol's α/β/γ; SATISFIABILITY VERDICT FIRST — the s-power bookkeeping).
