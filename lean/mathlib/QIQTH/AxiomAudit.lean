@@ -19436,4 +19436,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvV2LeviSource.leviSource_gaussian_bound
 #print axioms QIQTH.CConvV2LeviSource.sourceDataV2_concrete
 
+-- ## J4-325 (CConvV2ChartComparison): FACADE-v2 BRICKS 6+7 (α₁/α₂)
+-- C0: rncRadialSq = ∑v² (QIQTH.RadialDistance); the ½-radial conjunct IS banked at
+-- the centre x=0 (chartW0_rncRadialSq_error/nearIsometry — InverseChartDisplacement);
+-- the general x∈S z coercivity = the honest carried input (= the hmin of
+-- witnessFieldDeriv_gate_envelope_coercive); HgateSatAudit's poison was the Bs
+-- numerator, never the radial conjunct. C1 α₁ re-exports (germ left-inverse, the
+-- Pval column, √rncRadialSq). C2 α₂-lower: chart_radial_twosided_center (½r²_z ≤
+-- r²_{W z 0} ≤ 2r²_z on the shrunk radius) + the SliceChartData-shaped lower.
+-- C3: the upper on compact + the Cauchy–Schwarz/Jacobian numerator chain
+-- (|∑WₖPₖ| ≤ √r²_W·√n·L). C4 ★ THE TRANSFER: gradient_scalar_transfer (β1-based)
+-- + chart_gradient_gaussDdim_transfer(_half) — √r²_W·τ⁻¹·gaussDdim τ (W z x) ≤
+-- √2·2ⁿ·τ^{-1/2}·gaussDdim(4τ) z at the banked c₀=½. BRICK-9 REMAINING INPUTS:
+-- the general-x coercivity carry, the uniform Jacobian L, the width bookkeeping
+-- (gaussDdim(4τ) vs the hStar contract's 2τ). std-3 all 13. NOT a₁ = R/6.
+#print axioms QIQTH.CConvV2ChartComparison.sqrt_rncRadialSq
+#print axioms QIQTH.CConvV2ChartComparison.chart_leftInverse_gate
+#print axioms QIQTH.CConvV2ChartComparison.chart_firstJet_column_center
+#print axioms QIQTH.CConvV2ChartComparison.chart_radial_twosided_center
+#print axioms QIQTH.CConvV2ChartComparison.chart_radialLower_center
+#print axioms QIQTH.CConvV2ChartComparison.rncRadialSq_le_card_normSq
+#print axioms QIQTH.CConvV2ChartComparison.chart_radialUpper_of_normBound
+#print axioms QIQTH.CConvV2ChartComparison.numerator_cauchy_schwarz
+#print axioms QIQTH.CConvV2ChartComparison.jacobian_sumSq_le
+#print axioms QIQTH.CConvV2ChartComparison.numerator_le_radial_mul
+#print axioms QIQTH.CConvV2ChartComparison.gradient_scalar_transfer
+#print axioms QIQTH.CConvV2ChartComparison.chart_gradient_gaussDdim_transfer
+#print axioms QIQTH.CConvV2ChartComparison.chart_gradient_gaussDdim_transfer_half
+
 end QIQTH.AxiomAudit

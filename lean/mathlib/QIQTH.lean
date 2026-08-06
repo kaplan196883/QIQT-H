@@ -522,6 +522,7 @@ import QIQTH.CConvV2Contracts
 import QIQTH.CConvV2GaussianPairing
 import QIQTH.CConvV2EnvelopeFromStar
 import QIQTH.CConvV2LeviSource
+import QIQTH.CConvV2ChartComparison
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
