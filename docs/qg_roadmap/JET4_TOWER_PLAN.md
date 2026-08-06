@@ -2646,3 +2646,13 @@ ADD ⟹ constant peak, no sliver). Carries: LeviSeriesLocalData + two Gaussian
 dominations + hmeas, all satisfiable. Remainder: 4 hbnd → 5 hEdom → 6 hLapFull.
 std-3 all 9, raw 0. NOT a₁=R/6. NEXT: J4-333 = the hard tranche (hbnd recon +
 the hEdom width-parametricity verdict).
+
+## J4-333 (2026-08-07, 5c76a7a2) — DaLimHardTranche: ITEM 4 DONE, ITEM 5 REDUCED [AF]
+Item 4 hbnd DISCHARGED (amplitudePackage_sliver_bound; carries = the
+AmplitudeDerivativeData bundle (hard field hD2Hexpand) + window relations). Item 5
+hEdom — THE WIDTH-ENTRY MAP: width 2 pinned only in the collapsed global-gated
+bound; the in-chart M2 engine is ALREADY at width 3/2 per-base; the block = the C4c
+global-gated assembly. Delivered: gaussian_beats_power (the ∀k absorption engine) +
+hEdom_of_gaussPoly_residual (the honest bridge from the named width-1 residual
+hraw). Da-limit remainder: 6 hLapFull + the named residues (hraw, hD2Hexpand).
+std-3 all 3, raw 0. NOT a₁=R/6. NEXT: Sol consult on (†)/hLapFull/C4c, then J4-334.
