@@ -2271,3 +2271,10 @@ joint continuity (new) + the fixed-field Δ_g continuity. T3 (the full-gate asse
 I2) typechecked once but cut for a ~20-min elaboration blowup — the recipe documented;
 the re-land = aggressive top-level splitting. std-3 all 4, raw 0. NOT a₁=R/6.
 NEXT: J4-301 FullGateAssembly (the split T3 re-land → I2 → hf_cont mod I1).
+
+## J4-301 (2026-08-06, 835583ea) — FullGateAssembly: ★ the generic T3 core ★ [AF]
+The split factor library (A1a–f) + the formula continuity (A3) + A4 (the generic
+transition-annulus core — plateau+annulus in one; builds ≤ ~1m17s). A5 (the concrete
+capstone) typechecks but ~52min elaboration (the .congr defeq vs .choose-heavy terms);
+THE FIX mapped: Vmap-abstract A4 + the one-time syntactic reduction. std-3 all 9,
+raw 0. NOT a₁=R/6. NEXT: J4-302 FastA5Fix (the abstract restatement → the capstone).
