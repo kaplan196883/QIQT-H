@@ -18992,4 +18992,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.H2Instantiation.H2_concrete
 #print axioms QIQTH.H2Instantiation.leviSlice_jointContinuousOn_CONCRETE
 
+-- ## J4-300 (TransitionAnnulusCont): T1+T2 banked; T3 = the verified-but-deferred glue.
+-- heatOp_cutoffChart_mul_expand (T1 — the Leibniz expansion: heatOp(c·B) = c·heatOp B
+-- − B·Δ_g c − 2∑ gⁱʲ ∂_i c ∂_j B; genuine C²/differentiability + metric-symmetry
+-- hyps) + heatParametrix_differentiableAt_t (T2a) +
+-- heatParametrix_value_jointContinuousOn_pos (T2b — the VALUE continuity, new) +
+-- laplaceBeltrami_fixedField_jointContinuousOn (T2c). ⚠ T3 (the full-gate assembly ⟹
+-- hactive/I2) TYPECHECKED once end-to-end but was CUT: ~20-min single-module
+-- elaboration (the heavy ContinuousOn typeclass search — the known monolithic-assembly
+-- whnf trap); the exact recipe is documented in the header; the re-land needs
+-- aggressive top-level splitting. I2 NOT discharged here; I1 carried. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.TransitionAnnulusCont.heatOp_cutoffChart_mul_expand
+#print axioms QIQTH.TransitionAnnulusCont.heatParametrix_differentiableAt_t
+#print axioms QIQTH.TransitionAnnulusCont.heatParametrix_value_jointContinuousOn_pos
+#print axioms QIQTH.TransitionAnnulusCont.laplaceBeltrami_fixedField_jointContinuousOn
+
 end QIQTH.AxiomAudit
