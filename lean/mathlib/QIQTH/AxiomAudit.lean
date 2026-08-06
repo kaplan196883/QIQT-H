@@ -19694,4 +19694,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GlobalRawBoundFacade.memLapFull_from_labelled
 #print axioms QIQTH.GlobalRawBoundFacade.hDaLimLU_from_labelled
 
+-- ## J4-338 (A1R6CoreAtGate): v3 BRICK 1 — THE PRE-∃ CORE AT THE GATE (O2)
+-- K0 VERDICT: O2 — the capstone's pre-∃ inner implication carrier is PUBLIC:
+-- WideA1AssemblyTrunc.wide_a1_R6_of_residue_inf_trunc (the v2 proof: obtain the
+-- provider gate → ∃-intro → exact the inner theorem). wide_a1_R6_core_AT_
+-- CONSTRADIUS = the thin O2 apply-wrapper at the LITERAL constGate (the one shared
+-- syntactic gate def): base geometry/gauge + the package fields at (a,b,c,C) +
+-- hS1 (per-gate, replacing the over-general ∀-hEmeas) + htr (explicit, brick 2
+-- feeds) + the three FLAT slot antecedents → the a₁ 2-jet; internally typed haves
+-- (hg0'/hS0/hSopen/hbound_slice/hEz/hInt/hInter/hCH), ONE heavy application at the
+-- native width κ=2 (no widening). The v2 capstone untouched (never restated/
+-- unfolded/destructed, per SOL #11). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.A1R6CoreAtGate.wide_a1_R6_core_AT_CONSTRADIUS
+
 end QIQTH.AxiomAudit
