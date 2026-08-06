@@ -2278,3 +2278,10 @@ transition-annulus core — plateau+annulus in one; builds ≤ ~1m17s). A5 (the 
 capstone) typechecks but ~52min elaboration (the .congr defeq vs .choose-heavy terms);
 THE FIX mapped: Vmap-abstract A4 + the one-time syntactic reduction. std-3 all 9,
 raw 0. NOT a₁=R/6. NEXT: J4-302 FastA5Fix (the abstract restatement → the capstone).
+
+## J4-302 (2026-08-06, bcec49e6) — FastA5Fix: ★★ the concrete capstone in 55s ★★ [AF]
+The scalar-defeq isolation (heatOp_globalCutoff_eq_A4kernel_at, outside ContinuousOn)
++ two syntactic .congr steps ⟹ heatOpWitness_fixedBase_fullGate(_chartFree): E(·,·,w)
+continuous on the FULL gate (plateau+annulus), 57× faster. RESIDUAL: F5e/A6 (the
+hactive wiring) + the origin-vs-w reconciliation. std-3 all 4, raw 0. NOT a₁=R/6.
+NEXT: J4-303 HactiveWiring (→ hf_cont mod I1).
