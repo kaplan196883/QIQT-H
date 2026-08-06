@@ -19707,4 +19707,18 @@ namespace QIQTH.AxiomAudit
 -- unfolded/destructed, per SOL #11). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.A1R6CoreAtGate.wide_a1_R6_core_AT_CONSTRADIUS
 
+-- ## J4-339 (A1R6SlotAdapters): v3 BRICKS 2+3+4
+-- L3 KEY VERDICT: the Da thread is DIRECT — hDaLimLU_from_labelled carries S
+-- generically; at constGate it concludes DaLimLUGoal, which unfolds (abbrev) to
+-- exactly the TendstoLocallyUniformlyOn shape hDConv_W1free and the Duhamel core
+-- consume — no adapter, no change-of-gate lemma. htr_adapter (the core's htr at
+-- Ric := ricci g gi · · 0, re-exporting htr_from_hGauss) + daLim_for_slots (the
+-- defeq certification) + A1R6GateSlots (the shallow three-field Prop) +
+-- a1_R6_slots_AT_GATE (all three fields wired: the Duhamel core, the hDConv_W1free
+-- census + hbdryLU, the hCConvSlot_v2 facade census; subst + refine ⟨?_,?_,?_⟩,
+-- one banked producer per field). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.A1R6SlotAdapters.htr_adapter
+#print axioms QIQTH.A1R6SlotAdapters.daLim_for_slots
+#print axioms QIQTH.A1R6SlotAdapters.a1_R6_slots_AT_GATE
+
 end QIQTH.AxiomAudit
