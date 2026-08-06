@@ -2551,3 +2551,14 @@ betaPow_integrableOn (γ>−1 split Beta) + sourcePair_of_gaussian_bound (the fu
 hFpair adapter; sole carry = satisfiable hgMeas). std-3 all, raw 0. NOT a₁=R/6.
 NEXT: J4-324 = v2 bricks 5 (EnvelopeFromStar: hdomS/henv_v2 from hStar+hFpair) + 10
 (LeviSource: the γ=−1/2 adapter from the banked domination).
+
+## J4-324 (2026-08-06, e2282d90) — FACADE-v2 BRICKS 5+10 [AF]
+Brick 5 EnvelopeFromStar: the poisoned constant-dominator replaced by the TRUE
+C·(t−s)^{-1/2}·gaussDdim·|F| envelope — pointwise_dom_v2 + envelope_integrable_v2 +
+hdomS_v2/henv_v2 (both old filter orders trivial from the pointwise-uniform hStar) +
+zslice_integrable_v2. Brick 10 LeviSource: ★ the banked Levi domination has γ=0 (NO
+s-singularity — leviSeries_dominatedW_le + baseKernelW_zero_apply = gaussDdim(2τ));
+sourceDataV2_concrete = CConvSourceDataV2 for the concrete gate source (carries:
+LeviSeriesLocalData + hFsum + hgMeas). v2 DONE: 1,2,5,10 of 14. std-3 all 8, raw 0.
+NOT a₁=R/6. NEXT: J4-325 = bricks 6+7 (ChartComparison α₁/α₂ — the two-sided radial
+comparison + Jacobian bound feeding brick 9's (⋆) proof).
