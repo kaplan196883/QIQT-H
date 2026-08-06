@@ -18846,4 +18846,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.IterEEngineWiring.iterE_jointContinuousOn_wired
 #print axioms QIQTH.IterEEngineWiring.iterE_jointContinuousOn_concrete
 
+-- ## J4-291 (InnerEngineRecursion): C-meas DISCHARGED; THE SLOT MAP.
+-- convStepIntegral_u_aestronglyMeasurable(_wired): the parametric-Fubini
+-- u-measurability from hEmeas alone (AEStronglyMeasurable.integral_prod_right') —
+-- the OUTER C-meas carry GONE. innerStep_cont_of_slots/_ae + innerRecursion_step_
+-- reduced: the inner engine soundly wired; ★ THE MAP: (S-meas) derived; the genuine
+-- walls = (S-dom) the p-UNIFORM integrable spatial dominator + Gap-A (E's (time,z)-
+-- continuity at SECOND spatial arg = w over ALL space — the banked base is the
+-- (·,·,0) slice only) + Gap-B (iterE k's continuity at first arg w OUTSIDE the ball
+-- — the outer IH is ball-anchored). The base/ball mismatch is REAL — the base-0-
+-- anchored J4-285/287/288 chain needs a general-w parameterization or a two-point/
+-- homogeneity argument (Sol consult warranted). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.InnerEngineRecursion.convStepIntegral_u_aestronglyMeasurable
+#print axioms QIQTH.InnerEngineRecursion.convStepIntegral_u_aestronglyMeasurable_wired
+#print axioms QIQTH.InnerEngineRecursion.innerStep_cont_of_slots
+#print axioms QIQTH.InnerEngineRecursion.innerStep_cont_ae
+#print axioms QIQTH.InnerEngineRecursion.innerRecursion_step_reduced
+
 end QIQTH.AxiomAudit
