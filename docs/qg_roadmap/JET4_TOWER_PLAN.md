@@ -2417,3 +2417,16 @@ flowball_gate = S1 at the provider's exact gate shape, conditional on Measurable
 dissolvable by a new provider export exposing the constant radius (no .choose).
 std-3 both, raw 0. NOT a₁=R/6. NEXT: J4-316 ConstRadiusGateExport (the constant-
 radius package re-export → cf ≡ const measurable → S1 at THE gate).
+
+## J4-316 (2026-08-06, 0ceaea33) — ConstRadiusGateExport: ★★ S1 CONTENT COMPLETE (Measurable cf DISSOLVED) ★★ [AF]
+The hgood 7-conjunct bundle in _lin_pkg_open is uniform at the constant c=(b+ρc)/2 —
+the .choose never carried per-q content. The full gate package re-exported with the
+LITERAL constant gate (…_of_good_CONST + …_le_lin_CONST + gatedWitnessN1_package_
+open_CONSTRADIUS) + tripleHEmeas_AT_CONSTRADIUS_GATE (geometry-only; Measurable cf ⟹
+measurable_const; c<δ₀ chart-vs-jet reach = honest carried antecedent) +
+constRadius_package_and_S1 (the bundled fact for the v3-export). THE S1 STORY
+(J4-314→316): unsatisfiable-∀S artefact caught → reduced to Measurable cf → dissolved
+at the constant gate. Deleting hEmeas from the capstone = the deliberate v3-export
+provider refactor. std-3 all 5, raw 0. NOT a₁=R/6. NEXT: J4-317 OuterCarryRecon (the
+COMPLETE classified capstone-antecedent census + discharge of derivable base-geometry
+carries via the banked recenter/RNC machinery).
