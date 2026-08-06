@@ -2240,3 +2240,11 @@ gate) partitions ALL w; hGapA proved ∀w; the lower near-isometry bound MOOT. T
 concrete Levi continuity now carries TWO: hnear (the frozen-bank uniformity) + hSdom
 (the indicator dominator, documented build). std-3 all 4, raw 0. NOT a₁=R/6.
 NEXT: J4-297 SdomHnearDischarge (the last two carries → hf_cont DONE).
+
+## J4-297 (2026-08-06, 4630d528) — SdomHnearDischarge: ★★ hSdom DISCHARGED + C1 ★★ [AF]
+hSdom_concrete (constructive: the K-gate zero localizes to 𝟙_K; the banked bounds
+peaked ⟹ M(u)) + hnear_concrete (the Hgeo bundle = the surviving carry; the
+chart-domain verdict: hWwcont only used off-active where the collar provides it) +
+leviSlice_jointContinuousOn_DONE (FINAL INPUTS: the banked four + hnear(Hgeo) + the
+envelope). std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-298 HgeoDischarge (the bundle from the collar geometry → hf_cont DONE).
