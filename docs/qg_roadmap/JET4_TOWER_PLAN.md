@@ -2800,3 +2800,12 @@ remaining: the Jacobi-ODE instantiation → homogeneity → the coordinate assem
 the frame transport. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-344 =
 GaussLemmaHomogeneity (the Euler homogeneity + the hJac instantiation from the
 matrix-Jacobi flow).
+
+## J4-344 (2026-08-07, 5caec8da) — GaussLemmaHomogeneity: EULER + THE COVARIANT BRIDGE [AF]
+H1 exp_euler_homogeneity UNCONDITIONAL (D exp_p(v)·v = γ̇_v(1) — the banked rescale
+ray facts + chain rule + within-Iic endpoint uniqueness). H2 jacobi_covariant_ode
+(the raw variational ODE → the exact hJac covariant shape; the complete Γ/∂Γ
+algebra; carries hJODE-banked/hcJ-def/hcJp-product-rule). THE hGAUSS CHAIN IS
+ALGEBRAICALLY CLOSED; remaining wiring = the Jacobi instantiation + the coordinate
+assembly + the frame transport. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-345 =
+GaussLemmaAssembly (the instantiation + the pairing assembly + ∑g̃_ij v^j = v^i).
