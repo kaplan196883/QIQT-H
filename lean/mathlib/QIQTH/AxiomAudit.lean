@@ -19805,4 +19805,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussLemmaHomogeneity.exp_euler_homogeneity
 #print axioms QIQTH.GaussLemmaHomogeneity.jacobi_covariant_ode
 
+-- ## J4-345 (GaussLemmaAssembly): THE FULL GAUSS LEMMA + THE COORDINATE FORM
+-- The whole hGauss chain WIRED: gauss_first_variation (E_J(0)=0 + W(0)=g_p(w,v) +
+-- the T3 linear growth + the J4-343/344 curvature kill ⟹ g_{exp v}(J(1),γ̇(1)) =
+-- g_p(w,v)) + _dexp (the classical first-variation shape) + gauss_coordinate_
+-- contraction (via exp_euler_homogeneity + CLM linearity; expPullbackMetric REUSED
+-- from the banked PullbackMetric.lean) + _gauge (★ ∑_j g̃_ij(v)·v^j = v^i at the
+-- RNC base gauge — the exact hGauss contraction shape at the base point).
+-- REMAINING (the final hGauss brick): (i) the per-s flow-data HasDerivAt discharge
+-- (hJd/hcJd/hcJp — differentiation-in-initial-conditions, satisfiable via the
+-- banked Φ) + (ii) the =ᶠ germ/frame transport to the capstone consumer. std-3
+-- all 4. NOT a₁ = R/6.
+#print axioms QIQTH.GaussLemmaAssembly.gauss_first_variation
+#print axioms QIQTH.GaussLemmaAssembly.gauss_first_variation_dexp
+#print axioms QIQTH.GaussLemmaAssembly.gauss_coordinate_contraction
+#print axioms QIQTH.GaussLemmaAssembly.gauss_coordinate_contraction_gauge
+
 end QIQTH.AxiomAudit
