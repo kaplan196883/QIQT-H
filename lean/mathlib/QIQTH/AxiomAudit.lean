@@ -19673,4 +19673,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenLaplaceSliver.hLHSlim_concrete
 #print axioms QIQTH.FrozenLaplaceSliver.hLapFull_of_pd2conv
 
+-- ## J4-337 (GlobalRawBoundFacade): ★★★ THE Da-LIMIT PILE = ONE THEOREM ★★★
+-- C1 GlobalGatedRawBound (the width-1 hraw predicate, verbatim) + C2
+-- hEdom_of_globalRawBound (the consumer adapter via the banked bridge) + the SIX
+-- sub-assembly groups (gauge / source / integrability / sliver / eCombine /
+-- memLapFull_from_labelled — the last consumes hPd2conv via hLapFull_of_pd2conv
+-- with the sliver-sum supplied internally) + ★ hDaLimLU_from_labelled: ALL ~45
+-- binders of hDaLimLU_concrete plumbed through the banked dischargers — the WHOLE
+-- Da-limit pile concluded (DaLimLUGoal at the endgame gate) from: the geometry/
+-- gauge raw inputs + the W2 family + window data + LeviSeriesLocalData + the
+-- Gaussian dominations/measurabilities + the amplitude bundle (hard field
+-- hD2Hexpand) + the Fubini reps + THE LABELLED hraw + hPd2conv. The three facade
+-- poisons do NOT recur. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.GlobalRawBoundFacade.hEdom_of_globalRawBound
+#print axioms QIQTH.GlobalRawBoundFacade.gauge_from_geometry
+#print axioms QIQTH.GlobalRawBoundFacade.source_from_leviData
+#print axioms QIQTH.GlobalRawBoundFacade.integrability_from_dominations
+#print axioms QIQTH.GlobalRawBoundFacade.sliver_from_ampData
+#print axioms QIQTH.GlobalRawBoundFacade.eCombine_from_data
+#print axioms QIQTH.GlobalRawBoundFacade.memLapFull_from_labelled
+#print axioms QIQTH.GlobalRawBoundFacade.hDaLimLU_from_labelled
+
 end QIQTH.AxiomAudit
