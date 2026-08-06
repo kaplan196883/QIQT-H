@@ -19212,4 +19212,21 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁ = R/6.
 #print axioms QIQTH.CConvFacadeGate.hCConvSlot_AT_GATE
 
+-- ## J4-314 (S1TripleHEmeasGate): ★ THE S1 ∀-GATE RESOLVED TO ITS HONEST FORM ★
+-- W0 RECON: tripleHEmeas = a SINGLE joint StronglyMeasurable over (τ,p,q) of heatOp
+-- at the witness (Route-B measurable-algebra surface). ⚠ STRUCTURAL VERDICT (per
+-- feedback_axiom_budget_blind_spot): the capstone's literal `∀ S a b, tripleHEmeas`
+-- antecedent is UNSATISFIABLE — a non-measurable gate-function S falsifies it (the
+-- gatedKernel indicator). It is an over-general interface artefact: the provider
+-- applies hEmeas at exactly ONE self-chosen gate (the flow-ball with q-varying
+-- radius cf q). POISONING AUDIT: none (measurability family disjoint from W1).
+-- The honest banked content: tripleHEmeas_flowball_geometry (∃δ₀, ∀ radius c∈(b,δ₀),
+-- S1 holds at the geometric flow-ball gate — the satisfiability witness) +
+-- tripleHEmeas_at_measurable_gate (S1 at ANY gate with the honest hKSmeas +
+-- satisfiable field-derivative carriers — the canonical per-gate slot). Shedding the
+-- outer hEmeas carry = the constant→varying-radius (cf q) extension + a strengthened
+-- provider internalizing S1 (next brick). std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.S1TripleHEmeasGate.tripleHEmeas_flowball_geometry
+#print axioms QIQTH.S1TripleHEmeasGate.tripleHEmeas_at_measurable_gate
+
 end QIQTH.AxiomAudit
