@@ -2459,3 +2459,16 @@ pd_christoffel_at_zero + riemann_at_zero (the honest bridge to the REAL riemann 
 van-Vleck bank is directional-only (Ric(v,v), 3e36639c). R2 untouched. std-3 all 8,
 raw 0. NOT a₁=R/6. NEXT: J4-319 FacadeBundleFields (R2 easiest tranche: the hCConv
 B2–B5 per-field census + discharges; the CONSTRADIUS gate may simplify B2).
+
+## J4-319 (2026-08-06, c103f5b5) — FacadeBundleFields: THE hCConv FIELD CENSUS + 5 DISCHARGES [AF]
+P0 (corrected — DataPileWitnessAudit Family 7 stale): 18 fields + hD1 = 2 ND + 7 DH
+(banked builders: reachableGate_concrete, hKmeas_concrete_v7, leviSource_*_aesm +
+LeviSeriesLocalData, hDmeas_discharged, hC2fam_concrete_final, hD1_from_data) +
+9 GENUINE WALLS in two clusters: (i) B2 chart-inverse OFF-IMAGE measurability ×4
+(hSmeasSet/hVmapMeas/hChartB/hSliceData — flowInverse_jointMeasurable_regional
+agrees only on-image) + (ii) B5 on-gate Gaussian dichotomy ×2 (hGateData/hGateData'
+= W4), plus hFbd, hlin, hDrep. ⚠ CONSTRADIUS does NOT simplify B2 (off-image walls,
+radius-orthogonal). P1: hKmeasSet_field, hCover_field, hFjoint_field + hFmeas_field
+(the leviSource engines at the gate's residual kernel verbatim), hcoef_field.
+std-3 all 5, raw 0. NOT a₁=R/6. NEXT: gpt-5.6-sol consult on the two wall clusters,
+then J4-320 on the Sol-informed easiest wall.
