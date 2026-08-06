@@ -2299,3 +2299,10 @@ the left-inverse germ) + leviSlice_hf_cont_FINAL: the Levi 0-slice continuity fr
 the banked four + the envelope + the per-w bundles (all banked exports + satisfiable
 radii). std-3 all 3, raw 0. NOT a₁=R/6.
 NEXT: J4-305 BoundaryLimAssembly (Heine + hMovingCorr ⟹ hBoundaryLim ASSEMBLED).
+
+## J4-305 (2026-08-06, f8abc8cf) — BoundaryLimAssembly: hf_cont internal; B1 landed [AF]
+heine_timeShift_sup_tendsto (the eventual-uniform Heine sup) + the frozen-slice
+hf_cont discharge + hBoundaryLim_ASSEMBLED (hf_cont internal via the FINAL bundle).
+RESIDUAL: the hMovingCorr integral recombination (mass × sup + tails + split) + the
+hf_meas/hf_bdd feeds. std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-306 MovingCorrRecombination (B2 → hBoundaryLim fully internal).
