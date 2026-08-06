@@ -2226,3 +2226,10 @@ The origin-ball Gap-A cover (near paste + far zero, all w) + the time-affine bri
 iterE_jointContinuousOn_all(_concrete) reduced to ONE carry hcont (sub-walls: the ∀w
 active bank, the Gap-B R*-IH localization, the S-dom dominator). std-3 all 5, raw 0.
 NOT a₁=R/6. NEXT: J4-295 HcontAssembly (the strong induction + S-dom + the ∀w family).
+
+## J4-295 (2026-08-06, 4e4b0094) — HcontAssembly: ★★ THE INDUCTION CLOSED ★★ [AF]
+Index verdict: plain single-step induction. iterE_gapB_comp (Gap-B ← the IH) +
+iterE_jointContinuousOn_strong (∀k; carries only hGapA + hSdom, both satisfiable via
+the covers) + leviSlice_jointContinuousOn_of_strong (the M-test capstone = hf_cont's
+shape). std-3 all 3, raw 0. NOT a₁=R/6.
+NEXT: J4-296 GapASdomInstantiation (hGapA/hSdom concrete ⟹ the Levi continuity done).
