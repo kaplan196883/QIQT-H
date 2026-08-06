@@ -2596,3 +2596,13 @@ routed through Wg in brick 11 (banked wg_* theorems). v2 DONE 1–10 of 14; REMA
 11,12,13,14. std-3 all 11, raw 0. NOT a₁=R/6. NEXT: J4-328 = brick 11
 (WgInstantiation: SliceChartData at Wg + the witness-equality bridge + the concrete
 three legs with the chart walls INTERNAL).
+
+## J4-328 (2026-08-07, 25991695) — FACADE-v2 BRICK 11: THE Wg BRIDGE IS CLEAN [AF]
+U2: globalCutoffParametrixWitnessN evaluates Vmap ONLY at the same on-gate (q,p) —
+no collar. wg_agree_onGate + gatedWitnessW_Wg_eq_vanVleckGatedWitness (the function-
+level bridge) + the satisfiability certificate + sliceChartData_at_Wg (hWjoint
+INTERNAL) + sliceInterface_CONCRETE (the three legs for the concrete witness — the
+chart-intrinsic hVmapMeas/hChartB walls INTERNAL) + wg_hCover_leg. THE J4-321
+CHART-HARDWIRING RESIDUE IS DISCHARGED. v2 DONE 1–11 of 14. std-3 all 6, raw 0.
+NOT a₁=R/6. NEXT: J4-329 = bricks 12+13 (hlin from the banked hDConv machinery via
+the affine line map; D + hDrep by definition; hD1 via the banked sliver adapters).
