@@ -20269,4 +20269,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AffineRawResidual.tauResidualN0_Or_graded_quadPoly_width1
 #print axioms QIQTH.AffineRawResidual.rawResidualN1_affine_graded_quadPoly_width1
 
+-- ## J4-370 (AffineGateTransport): the 1→4/3 affine fold + the transport promotion
+-- rawResidualN1_affine_graded_quadPoly_width43 (the chart-frame inner
+-- AffineGateBound shape at the target width; √(4/3)ⁿ folds into both affine
+-- coefficients) + heatOp_globalCutoffWitness_transport (the pre-871 htransport
+-- block of CoeffU1Fix:853-868 promoted standalone over the two honest carries
+-- hpt (chart-inverse point fact, discharged at :831) and hlap (laplaceBeltrami
+-- naturality, discharged at :840-852)). OPEN toward AffineGateBound: (2b) the
+-- annulus width-trade at ≤4/3 (the bank's engine is 3/2-only; r≥a>0 makes the
+-- width tradeable — new lemma needed) + brick (3) the v→(p−q) transfer (needs
+-- the width-4/3 near-isometry budget; the banked hdisp is the fixed 3/2→2
+-- pairing — re-parametrize uniformFlowExp_displacement_bound). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.AffineGateTransport.rawResidualN1_affine_graded_quadPoly_width43
+#print axioms QIQTH.AffineGateTransport.heatOp_globalCutoffWitness_transport
+
 end QIQTH.AxiomAudit
