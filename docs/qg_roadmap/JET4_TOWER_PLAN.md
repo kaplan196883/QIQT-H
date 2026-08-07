@@ -2983,3 +2983,11 @@ carries + the hBoundaryLim pile + the raw geometry/certified package + the
 genuine data piles (dataLevi/dominations/W2/§I-J-K). The derivable members drop
 for their raw providers. std-3 all 7, raw 0. NOT a₁=R/6. NEXT: J4-359 =
 HrawCampaignOne (the width-question verdict + the uniformization recon).
+
+## J4-359 (2026-08-07, c465a2c4) — HrawCampaignOne: THE OPENER VERDICTS + LEGS [AF]
+Q1 no collapse (the width-1-with-poly entry stands; its transfer → ambient 4/3 <
+3/2). Q2 ★ the constant ALREADY UNIFORM over K (no cover extraction). Q3 the
+support = the gate (the far region empty). Legs: the width mono + hEdom_of_
+polyfree_width + the off-support zero + gatedRawBound_of_onGate. REMAINING: the
+width-1 in-chart pre-collapse form + the two-sided transfer + the polynomial
+re-expression. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-360 = HrawChartTransfer.
