@@ -3017,3 +3017,20 @@ the same hEdom. The quadratic bridge + transfer + assembly + ★ hEdom_concrete_
 RESIDUE: hgate (satisfiable, named) + the mechanical hEdom-accepting re-thread.
 std-3 all, raw 0. NOT a₁=R/6. NEXT: the hPd2conv Sol consult (the v2-route
 hypothesis — the s-integral representation may break the J4-336 circularity).
+
+## SOL CONSULT #14 (2026-08-07, post-J4-362) — ★★★ THE hPd2conv DEEP WALL DISSOLVES ★★★
+VERDICT: YES — the v2 route breaks the J4-336 circularity. ∂ᵢ∂ᵢ(full conv)(0) =
+∂ᵢ[the Dmap coefficient gcoef i](0) — the full-side second derivative is obtained
+by differentiating the s-INTEGRAL-REPRESENTED first-derivative coefficient (the
+banked hfam_v2/Dmap theorem, the (t−s)^{-1/2}-dominated FIRST interchange), NOT a
+full-side second interchange. The hD1 census (hbulkderiv/hbulk_tendsto/hsliver/
+hcont) is frozen-side-only + the candidate ⟹ NON-CIRCULAR, and its hbulk_tendsto
+at x=0 IS the needed frozen→full convergence. hPd2conv = A COROLLARY of the
+already-carried sliver census. THE ONE INTERFACE POINT: the bare ContDiffAt hD1
+forgets its derivative = the candidate — re-export the candidate-identification
+(pd i (gcoef i) 0 = gderiv i 0) from hD1_from_data's proof (API extraction, not
+analysis). THE 3 BRICKS: 1 the full-side bookkeeping (hfam_v2 ⟹ pd(conv) = gcoef
+locally; pd² = pd(gcoef) = gderiv(0) via the identification) · 2 the frozen-side
+(the proper-integral truncated version; hbulkderiv ⟹ pd²(frozen_m) = gderivₘ(0);
+finite bad m irrelevant atTop) · 3 the census convergence (hbulk_tendsto at 0 ⟹
+the Tendsto; the √ε sliver as backup). NO new domination needed.
