@@ -20038,4 +20038,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverAssemblyMatched.sliver_inner_matched_bound
 #print axioms QIQTH.SliverAssemblyMatched.amplitudePackageOn_sliver_bound
 
+-- ## J4-357 (DisplacementDerivative): hdisp RESOLVED UNCONDITIONALLY
+-- THE RECON (per dont-undercredit — the O4 'never established' note was WRONG):
+-- the base-side 1-jet WAS banked (baseVaryingChart_hasFDerivAt_center: fderiv
+-- Wbv 0 = −id ⟹ Db(0) = 0) + the C² banked (terminalVel0_contDiffAt_two →
+-- hbaseC2) + the modulus (contDiffAt_two_fderiv_sub_zero_bound — the abstract
+-- ContDiffAt-2 ⟹ locally-Lipschitz-fderiv core). ★ displacement_deriv_bound
+-- (hdisp: ‖fderiv b z‖ ≤ C'‖z‖ near 0, UNCONDITIONAL given hC/hK/K∈𝓝 0) +
+-- cubic_contact_gradient_concrete (the O4 hypotheses discharged) +
+-- collar_product_lipschitz_increment (the Lip(ρ·A_chart) algebraic core; the
+-- L_{A_chart} data carry named). THE SLIVER CENSUS: hdisp RESOLVED; remaining =
+-- hcubic(sat) · hgate · hjets · hcenter. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.DisplacementDerivative.contDiffAt_two_fderiv_sub_zero_bound
+#print axioms QIQTH.DisplacementDerivative.displacement_deriv_bound
+#print axioms QIQTH.DisplacementDerivative.cubic_contact_gradient_concrete
+#print axioms QIQTH.DisplacementDerivative.collar_product_lipschitz_increment
+
 end QIQTH.AxiomAudit
