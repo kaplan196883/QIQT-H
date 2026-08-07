@@ -3537,3 +3537,15 @@ Route 2 landed: the moment cancellation (∫∂²G=0 ⟹ the signed z-pairing O(
 BANKED hmeas2Hi_slice AESM + ONE satisfiable carry hGpow (m-uniform Cpair — the exact
 moment-aware WideSliverBoundary deliverable). Wall A = {capped-Lo (banked)} ∪ {hGpow}.
 raw 0; build 26s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-393 (ae955f50): SOL #16 brick 4 — the non-Levi box floor built
+
+`QIQTH/NonLeviBoxContinuity.lean` (10 decls std-3). THE SLOT VERDICT: the banked x-slot heatOp
+box machinery does NOT transport to the z-slot (different Laplacian evaluation points); the
+scalar/structural pieces are slot-blind and were re-applied correctly. The N1 piece
+continuities + N3 (the Δ-slice; metric factors constant at 0; the hpd2 diagonal IS the
+witnessSecondXDeriv member) + N2 (the heatOp slice) + the CAP box families (exact carry
+shapes) + the STRIP compositions. Carries: Θ/u regularity (satisfiable) + the witness ∂_τ-slice
++ spatial partials. J4-394 = Sol brick 5 (the z-slot leviIter induction, base = N2).
+raw 0; build 46s. NOT a₁ = R/6 (CONDITIONAL).
