@@ -20653,4 +20653,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MemAdjHiSliver.intervalIntegrable_invSqrt_sub
 #print axioms QIQTH.MemAdjHiSliver.hII_hi_from_sliver
 
+-- ## J4-393 (NonLeviBoxContinuity): SOL #16 BRICK 4 — the box floor built
+-- THE SLOT VERDICT: the banked heatOp box machinery (x-slot, heatOp p.1 p.2
+-- 0) does NOT transport to the needed z-slot (heatOp p.1 0 p.2) — genuinely
+-- different objects (the Laplacian evaluates at different points); the
+-- scalar Gaussian continuities + the structural reductions ARE slot-blind
+-- and were re-applied in the correct orientation. LANDED: the N1 piece
+-- continuities (gaussDdim/deriv/heatParametrix-deriv on the box, via .mono
+-- of the banked strips) + N3 the Δ-slice reduction (metric factors CONSTANT
+-- at the frozen 0; carries hpd1/hpd2 — the hpd2 diagonal IS the
+-- witnessSecondXDeriv box member) + N2 the heatOp-slice reduction + the
+-- CAP/STRIP capstones in the EXACT hLapCont/hHeatCont_of_boxes carry shapes
+-- + the full strip compositions. Honest carries: Θ/u regularity
+-- (vanVleck_pos/contDiffAt satisfiable) + the witness ∂_τ-slice + the
+-- spatial-partial continuities. J4-394 = the z-slot leviIter induction
+-- (this brick supplies the base). std-3 all 10. NOT a₁ = R/6.
+#print axioms QIQTH.NonLeviBoxContinuity.box_subset_pos
+#print axioms QIQTH.NonLeviBoxContinuity.gaussDdim_continuousOn_box
+#print axioms QIQTH.NonLeviBoxContinuity.gaussDdim_deriv_t_continuousOn_box
+#print axioms QIQTH.NonLeviBoxContinuity.heatParametrix_deriv_t_continuousOn_box
+#print axioms QIQTH.NonLeviBoxContinuity.laplaceBeltrami_slice_continuousOn_box_of_parts
+#print axioms QIQTH.NonLeviBoxContinuity.heatOp_slice_continuousOn_box_of_parts
+#print axioms QIQTH.NonLeviBoxContinuity.hLapCont_boxes_of_partials
+#print axioms QIQTH.NonLeviBoxContinuity.hHeatCont_boxes_of_slice_parts
+#print axioms QIQTH.NonLeviBoxContinuity.hLapCont_strip_of_partials
+#print axioms QIQTH.NonLeviBoxContinuity.hHeatCont_strip_of_slice_parts
+
 end QIQTH.AxiomAudit

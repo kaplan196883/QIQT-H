@@ -591,6 +591,7 @@ import QIQTH.AllUSliceMeas
 import QIQTH.LapContBoxGlue
 import QIQTH.CappedAdom2Audit
 import QIQTH.MemAdjHiSliver
+import QIQTH.NonLeviBoxContinuity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
