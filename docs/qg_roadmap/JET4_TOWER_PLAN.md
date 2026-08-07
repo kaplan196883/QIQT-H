@@ -3770,3 +3770,15 @@ signatures; no hraw/hgate/witness survival), the ∃-elim order (fix G₀ first,
 restricted-vs-unrestricted amplitude (no silent typeclass/simpa regression), the m-uniform
 quantifier order preserved, the gate term syntactically identical everywhere, the final
 #print axioms audit.
+
+---
+## J4-408 (8a1f2a29): SOL #18 brick 1 — the fixed-gate G₁/census bridge
+
+`QIQTH/ConstGateAssembly.lean` (std-3). THE SLOT AUDIT: a1_R6_slots_AT_GATE = {hDuhamel ←
+hDuhamelSlot_AT_GATE (TruncatedDuhamelCore) · hDConv ← hDConv_W1free (hDaLimLU_from_labelled
+@ constGate + hbdryLU_CONCRETE) · hCConv ← hCConvSlot_AT_GATE_v2 · htr ← htr_adapter}. THE
+hEdom VERDICT: the ∃-witnesses don't defeq-match the constGate — the layer is
+hEdom_vanVleck_of_hgate_affine (explicit S,a,b); the constGate IS the census gate shape.
+ConstGateAssemblyData: hEdom/hEz/hS1 REAL; hpkgBound/hmemS0/hopenS0 honest carries
+(satisfiable via constRadius_package_and_S1). J4-409 = the slots bundle. raw 0; build 27s.
+NOT a₁ = R/6 (CONDITIONAL).
