@@ -20114,4 +20114,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HrawChartTransfer.hEdom_of_gatedRawBoundWidth
 #print axioms QIQTH.HrawChartTransfer.hraw_variant_concrete
 
+-- ## J4-361 (HrawNearIsometryConcrete): THE CONCRETE NEAR-ISOMETRY CLOSED
+-- N1 BANKED (uniformFlowExp_displacement_bound — the D2 quadratic displacement;
+-- the same engine that fed chartW0_displacement) — re-exported as
+-- flowDisplacement_bound. N2 rncRadialSq_abs_sub_le (the polarization with the
+-- honest sup-vs-ℓ² n-cofactors). N3 ★ nearIsometry_concrete — the EXACT
+-- T1-hypothesis of chartTransfer_from_nearIsometry, with the explicit shrunk gate
+-- r* (the C_D‖v‖ ≤ 1/2 bootstrap ⟹ r²_z ≥ ‖v‖²/4 ⟹ the (1/4)-budget). hraw
+-- remaining: step 1 (the pre-collapse in-chart extraction — the hgate carry) +
+-- step 3 (the wiring). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HrawNearIsometryConcrete.flowDisplacement_bound
+#print axioms QIQTH.HrawNearIsometryConcrete.rncRadialSq_abs_sub_le
+#print axioms QIQTH.HrawNearIsometryConcrete.nearIsometry_concrete
+
 end QIQTH.AxiomAudit
