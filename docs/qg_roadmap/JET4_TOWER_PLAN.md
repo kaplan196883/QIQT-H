@@ -3791,3 +3791,36 @@ at the concrete Ricci) + finalA1Slots_from_data (the 3 slots ← the ONE A1R6Gat
 htr ← the single hGauss carry) + ★ .fire (the a₁ TWO-JET from {the J4-408 base + this bundle +
 base geometry}; the Ricci substitution by defeq). J4-410 = the one-line public capstone +
 the final audits. raw 0; build 27s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ★★★★★ J4-410 (89cb4df0): THE CAPSTONE — a1_R6_from_data
+
+`QIQTH/A1R6FromData.lean`: **the one-line public capstone** of the a₁=R/6 campaign's
+J4-363..410 window. From exactly FOUR semantic input groups — (A) base geometry/gauge,
+(B) the ConstGateAssemblyData carries (the AFFINE hgate + v4 measurabilities +
+hpkgBound/hmemS0/hopenS0), (C) the ONE A1R6GateSlots package, (D) the single hGauss carry —
+THE a₁ TWO-JET at the literal constGate:
+`heatOp … = 0 ∧ trueHeatKernel t 0 0 = (heatKernel1D t 0)ⁿ·(1 + ((∑ᵢ ricci g gi i i 0)/6)·t + t²·…)`.
+std-3; raw 0; the forbidden-name audits ALL CLEAN.
+
+## THE FINAL HONEST SUMMARY (verbatim from the capstone docstring)
+a1_R6_from_data is the maximally-unconditional **CONDITIONAL** a₁ two-jet, NOT an
+unconditional a₁ = R/6. What remains genuinely CONDITIONAL:
+(a) the A1R6GateSlots censuses (Duhamel ~90-binder + W1-free + L2 sliver) — each satisfiable
+    and largely fired by the F-pile bricks, but still binder-shaped;
+(b) the ConstGateAssemblyData carries — the affine hgate (DERIVABLE via the J4-368..380 arc's
+    hEdom_from_geometry at the ∃-gate, carried explicit-gate here); the v4 measurability
+    carriers; hpkgBound/hmemS0/hopenS0 (satisfiable via constRadius_package_and_S1, whose
+    ∃-witnesses do not defeq-match a caller-chosen literal gate);
+(c) hGauss — DERIVED in-bank (hGauss_pullback_concrete etc.), absorbable later;
+(d) THE DEEP CONDITIONALITY NEVER CLAIMED CLOSED — the convergence-trio content inside the
+    Duhamel census, and hence the a₁ = R/6 statement itself, remains CONDITIONAL.
+
+## THE WINDOW ARC (J4-363..410, ~48 bricks, all std-3 raw 0)
+cp247 all four labelled inputs resolved → cp264 the hgate label RETIRED (the 13-brick Sol #15
+affine arc) → cp265-281 the census campaign (the geometry-census master + the pile discharges)
+→ cp286 WALL A CLOSED (the moment route) → cp279/289-291 the C/D/E/F piles closed → cp292-294
+the Sol #18 three-brick final assembly → THE CAPSTONE. THE GRIND IS PAUSED FOR USER REVIEW.
+The natural next targets (user's choice): absorb hGauss into the capstone; the slot-census
+firings threaded end-to-end; the constRadius parametric re-run discharging hpkgBound/hmemS0/
+hopenS0; the deep Duhamel/convergence campaign.
