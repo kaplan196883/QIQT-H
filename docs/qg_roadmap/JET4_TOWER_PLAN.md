@@ -3690,3 +3690,13 @@ surviving carries enumerated (per-s slots + hgate + hEndpoint + continuity — a
 **ALL THE SOL #16/#17 ANALYTIC WALLS ARE NOW BRIDGED/CLOSED.** The remaining surface = the slot
 discharges (J4-403) + B (hDa/hLap) + F (per-u census) + G₁ + H. raw 0; build ~50s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-403 (0afb6dca): the wall-A slot discharges + the m-uniform aggregation
+
+`QIQTH/SlotDischarges.lean` (10 decls). S1 SEVEN slots (hqz/hqzmeas/hgate/h0/hf2bound/
+hf3bound/hcomp — from the DataAmpAssembly hqLip data, the collar wrappers, rhoRatio_center,
+the dominator mechanism, hcomp_concrete) · S2 ★ hinner_window_of_slotBound (THE QUANTIFIER
+TRAP RESOLVED: the constants before m,s; hslot over all 0<τ≤τ₀, never over m; no εₘ in K₁/K₀)
+· S3 memLapFull_from_slotBound. THE RESIDUAL LIST (machine-checkable): {hslot, hcap
+(satisfiable), hEndpoint (measure-zero), hcensus}. raw 0; build 33s. NOT a₁ = R/6 (CONDITIONAL).
