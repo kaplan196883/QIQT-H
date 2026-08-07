@@ -20955,4 +20955,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PerUCensusTuple.hfull_pd1_fired
 #print axioms QIQTH.PerUCensusTuple.hPd2conv_perU_fired
 
+-- ## J4-408 (ConstGateAssembly): SOL #18 brick 1 — the fixed-gate G₁ bridge
+-- THE AUDIT: the seven-slot interface = a1_R6_slots_AT_GATE (hDuhamel ←
+-- hDuhamelSlot_AT_GATE · hDConv ← hDConv_W1free · hCConv ←
+-- hCConvSlot_AT_GATE_v2 · htr ← htr_adapter); the hEdom fixed-gate verdict:
+-- hEdom_from_geometry's ∃-witnesses don't defeq-match the constGate — the
+-- one-layer-earlier copy is hEdom_vanVleck_of_hgate_affine (explicit S,a,b);
+-- and constGate IS the census machinery's own gate shape (φ '' ball 0 c).
+-- ConstGateAssemblyData (6 fields at G₀) + constGate_assembly_data_from_data
+-- (hEdom/hEz/hS1 built for real; hpkgBound/hmemS0/hopenS0 honest carries —
+-- satisfiable via constRadius_package_and_S1, the ∃-witness mismatch noted).
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.ConstGateAssembly.constGate_assembly_data_from_data
+
 end QIQTH.AxiomAudit
