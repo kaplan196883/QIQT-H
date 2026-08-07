@@ -2945,3 +2945,13 @@ collar_matched (Sol's exact shape, B₁=0) + T4 the 1/τ tail sanity. The carry:
 collar Lipschitz hq (satisfiable per the Lip(ρ·A_chart) analysis). std-3 all 6,
 raw 0. NOT a₁=R/6. NEXT: J4-355 = brick 2 (the off-collar matched domination + the
 cubic-contact gradient recon).
+
+## J4-355 (2026-08-07, 0f706a35) — SliverOffCollarMatched: SOL-#13 BRICK 2 [AF]
+O1 the weighted comparison (|G^chart−G| ≤ (Ln/4)(√C')ⁿ(‖z‖³/τ)G_{C'τ}; the width
+algebra + the shrunk-gate concrete corollary). O2 the difference decomposition.
+O3 sliver_term1_off_collar_matched (B₁'=0; the increment PROVEN; the comparison
+leg = the named hcomp moment carry). O4 cubic_contact_gradient_bound + THE
+VERDICT: needs Db = O(‖z‖) (the derivative-level displacement carry, SHARED with
+brick 1's hqLip; not banked). std-3 all 10, raw 0. NOT a₁=R/6. NEXT: J4-356 =
+brick 3 (the assembly: A₀T_τ cancels; the hcomp discharge; terms 2/3; ⟹ the
+unchanged hbnd ⟹ hD2Hexpand fully closed mod the enumerated carries).
