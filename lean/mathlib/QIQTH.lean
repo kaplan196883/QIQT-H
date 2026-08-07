@@ -598,6 +598,7 @@ import QIQTH.W2Package
 import QIQTH.W2Finish
 import QIQTH.AmpGeometryBundle
 import QIQTH.AmpQuantBundle
+import QIQTH.DataAmpAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

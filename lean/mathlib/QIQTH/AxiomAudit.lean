@@ -20794,4 +20794,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmpQuantBundle.L_A_chart_carries_intro
 #print axioms QIQTH.AmpQuantBundle.hcubic_carries_intro
 
+-- ## J4-400 (DataAmpAssembly): SOL #17 E3 — the dataAmp assembly
+-- D1 the Φ∘W_bv BASE-slot composition (chartAmp_base_contDiffAt_of_carries +
+-- _center discharging hWbv/hdet at base 0 — hAmpC1/hAmpC2 UNCONDITIONAL at 0;
+-- L_A landed via the discharged hA1). D2 ALL THREE: M_ρ≤collarK (re-export) ·
+-- L_ρ LANDED (ρ = exp((r²−r²∘W_bv)/4τ) C²-at-0 ⟹ Lipschitz) · M_A local.
+-- D3 concrete_hqLip_of_carries — the EXACT hqLip field of
+-- amplitudeDataOn_concrete (Lq explicit). D4 the honest census
+-- {hMAcollar, hLevi, hiso, hjets, hmeas} + THE HONESTY NOTE: the unrestricted
+-- census-(vi) AmplitudeDerivativeData is NOT constructible at the true chart
+-- (hV0 false off-flat, per J4-351/356) — the assembled object is the
+-- collar-restricted AmplitudeDerivativeDataOn whose hD2Hexpand closes via
+-- hD2HexpandOn_concrete. A1 handoff: the concrete amplitudes + the
+-- collar-conditioned hD2Hexpand + hqLip; the residual = compactness
+-- bookkeeping. std-3 all (the intro axiom-free). NOT a₁ = R/6.
+#print axioms QIQTH.DataAmpAssembly.chartAmp_base_contDiffAt_of_carries
+#print axioms QIQTH.DataAmpAssembly.chartAmp_base_contDiffAt_center
+#print axioms QIQTH.DataAmpAssembly.chartAmp_base_contDiffAt_one_center
+#print axioms QIQTH.DataAmpAssembly.chartAmp_base_lipschitz_center
+#print axioms QIQTH.DataAmpAssembly.chartAmp_base_bounded_near_zero
+#print axioms QIQTH.DataAmpAssembly.abs_rhoRatio_le_collarK
+#print axioms QIQTH.DataAmpAssembly.rhoRatio_base_contDiffAt_of_carries
+#print axioms QIQTH.DataAmpAssembly.rhoRatio_base_lipschitzOn_ball
+#print axioms QIQTH.DataAmpAssembly.rhoRatio_base_lipschitz_center
+#print axioms QIQTH.DataAmpAssembly.concrete_hqLip_of_carries
+#print axioms QIQTH.DataAmpAssembly.dataAmp_assembly_carries_intro
+
 end QIQTH.AxiomAudit
