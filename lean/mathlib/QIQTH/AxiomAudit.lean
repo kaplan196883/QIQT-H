@@ -20168,4 +20168,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Pd2ConvDissolution.pd2_at_zero_eq
 #print axioms QIQTH.Pd2ConvDissolution.hPd2conv_from_census
 
+-- ## J4-364 (LabelledRethreadV2): THE hraw LABEL RETIRED — the hgate re-thread
+-- The mechanical re-thread of the one-theorem labelled assembly:
+-- hDaLimLU_from_labelled_v2 (the compiled-source copy of hDaLimLU_from_labelled
+-- with the {P,hP,hraw} trio replaced by the direct width-3/2 hEdom ∃-binder) +
+-- hEdom_vanVleck_of_hgate (the one-delta bridge vanVleckGatedWitness =
+-- gatedKernel K S (globalCutoffParametrixWitnessN 1 …) feeding
+-- HrawPreCollapse.hEdom_concrete_final; simp only [vanVleckGatedWitness] head
+-- rewrite only — no .choose internals touched) + ★ hDaLimLU_from_hgate (the
+-- capstone: the un-dischargeable global width-1 LINEAR hraw label REPLACED by
+-- the honest reachable on-gate width-4/3 QUADRATIC hgate carry; identical
+-- DaLimLUGoal conclusion). Surviving labelled inputs of the assembly: hgate
+-- (the M2-ingredient derivation, later campaign) + dataAmp.hD2Hexpand (→ the
+-- sliver carries) + hPd2conv (→ the census corollary; per-u instantiation
+-- later). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.LabelledRethreadV2.hDaLimLU_from_labelled_v2
+#print axioms QIQTH.LabelledRethreadV2.hEdom_vanVleck_of_hgate
+#print axioms QIQTH.LabelledRethreadV2.hDaLimLU_from_hgate
+
 end QIQTH.AxiomAudit
