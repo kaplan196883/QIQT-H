@@ -607,6 +607,7 @@ import QIQTH.PerUProviders
 import QIQTH.HD1Concrete
 import QIQTH.PerUCensusTuple
 import QIQTH.ConstGateAssembly
+import QIQTH.FinalA1Slots
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

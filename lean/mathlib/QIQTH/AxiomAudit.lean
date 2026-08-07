@@ -20968,4 +20968,16 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6.
 #print axioms QIQTH.ConstGateAssembly.constGate_assembly_data_from_data
 
+-- ## J4-409 (FinalA1Slots): SOL #18 brick 2 — the slots bundle + the firing
+-- FinalA1SlotsAtConstGate (the Prop carrier at G₀: the 3 verbatim slot
+-- binders + htr at the concrete Ricci) + finalA1Slots_from_data (the 3 slots
+-- ← the ONE A1R6GateSlots package; htr ← the single hGauss carry through
+-- htr_adapter) + ★ FinalA1SlotsAtConstGate.fire (wide_a1_R6_core_AT_
+-- CONSTRADIUS applied at Ric := ricci g gi · · 0 to {the J4-408 base bundle
+-- + this bundle + base geometry} ⟹ THE a₁ TWO-JET; the Ricci
+-- beta-substitution unified by defeq). J4-410 = the one-line public wrap +
+-- the final audits. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.FinalA1Slots.finalA1Slots_from_data
+#print axioms QIQTH.FinalA1Slots.FinalA1SlotsAtConstGate.fire
+
 end QIQTH.AxiomAudit
