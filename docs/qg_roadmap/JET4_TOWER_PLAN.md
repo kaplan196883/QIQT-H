@@ -3265,3 +3265,14 @@ leg (J4-374): instantiate `rawResidualN1_affine_graded_quadPoly_width1` AT the p
 its hdev/hcoeff/hlap carries are exactly the pullback-frame uniform bounds the compiled _lin
 chain already discharges (hCoeffU0_vanVleck etc. live in the flow frame). Then the annulus (2b),
 then the combined ∃-capstone. raw 0; build 24s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-374 (7a881a65): the pullback-metric affine BALL LEG of AffineGateBound
+
+`QIQTH/PullbackAffineBallLeg.lean` (3 decls std-3). P0: the raw affine estimate is GENERIC in
+(g,gi) — direct pullback instantiation; carries discharge from the banked flow-frame uniforms;
+the transfer legs metric-independent. `pullbackAffine_width1` → `pullbackAffine_onBall` →
+★ `gatedHeatOp_pullbackAffine_onBallPlateau` — THE ON-GATE BALL LEG: |heatOp(gated witness)| ≤
+(P₀+P₁τ)·quadPoly·G_{(4/3)τ}(ambient) on ball ∩ plateau ∩ gate-interior. Remaining: the
+annulus (2b, J4-375) + the ∃-capstone; the banked affine finishers then complete hgate→hEdom.
+raw 0; build 29s. NOT a₁ = R/6 (CONDITIONAL).
