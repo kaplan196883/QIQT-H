@@ -20393,4 +20393,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AnnulusAmbientTransfer.cutoffResidual_annulusAmbient43_bound
 #print axioms QIQTH.AnnulusAmbientTransfer.gatedHeatOp_affine_onAnnulus
 
+-- ## J4-377 (AffineGateCapstone): the 3-region stitching of AffineGateBound
+-- expPoint_of_mem_closure (C1: p∈closure(S q) ⟹ p=φ_q v, ‖v‖≤c — the
+-- _of_good hclos closure fact mirrored) + gatedHeatOp_eq_zero_exterior (C2:
+-- the collar b<‖v‖≤c vanishing — NOT empty by construction; radialCutoff=0
+-- germ + heatOp locality) + ★ affineGateBound_of_legs (C3: the full 3-way
+-- stitch — given the two UNIFORM leg bounds hplat/hann, AffineGateBound
+-- follows with (max P₀, max P₁); plugs directly into
+-- hDaLimLU_from_hgate_affine_census_v2 step (vii)). C4 honestly DEFERRED:
+-- the banked legs emit per-(q,v,τ) constants from per-point carries — the
+-- residual gap to an unconditional hgate = THE FLOW-FRAME UNIFORMIZATION
+-- (per-point → uniform (P₀,P₁) over compact K; J4-378) + the census data
+-- piles. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.AffineGateCapstone.expPoint_of_mem_closure
+#print axioms QIQTH.AffineGateCapstone.gatedHeatOp_eq_zero_exterior
+#print axioms QIQTH.AffineGateCapstone.affineGateBound_of_legs
+
 end QIQTH.AxiomAudit
