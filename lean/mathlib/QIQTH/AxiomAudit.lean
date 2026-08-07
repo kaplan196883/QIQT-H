@@ -20284,4 +20284,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AffineGateTransport.rawResidualN1_affine_graded_quadPoly_width43
 #print axioms QIQTH.AffineGateTransport.heatOp_globalCutoffWitness_transport
 
+-- ## J4-371 (NearIsometry43Budget): the width-4/3 near-isometry budget (ball leg)
+-- uniformFlowExp_hdisp43_ball (w₀=5/4: (5/4)·rncRadialSq(φ_q v−q) ≤
+-- (4/3)·rncRadialSq v on a small ball — the 16/15 reserve absorbs the ℓ²
+-- near-identity slack, r₁ = min ρ₀ (min 1 (1/(15D))); exact mirror of the
+-- banked 3/2→2 hdisp_ball with tighter constants) +
+-- uniformFlowExp_gaussDdim_transfer_43 (the Gaussian leg via
+-- gaussDdim_le_gaussDdim_chart: G_{(5/4)τ}(v) ≤ √(16/15)ⁿ·G_{(4/3)τ}(p−q)).
+-- Ball-local ONLY; the (2b) annulus width-trade + the polynomial-factor leg
+-- (transfer43_quad, J4-372) remain. Both DERIVED (no carries). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.NearIsometry43Budget.uniformFlowExp_hdisp43_ball
+#print axioms QIQTH.NearIsometry43Budget.uniformFlowExp_gaussDdim_transfer_43
+
 end QIQTH.AxiomAudit
