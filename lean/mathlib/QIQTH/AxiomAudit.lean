@@ -20980,4 +20980,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FinalA1Slots.finalA1Slots_from_data
 #print axioms QIQTH.FinalA1Slots.FinalA1SlotsAtConstGate.fire
 
+-- ## ★★★★★ J4-410 (A1R6FromData): THE PUBLIC CAPSTONE — a1_R6_from_data
+-- The one-line theorem: {(A) base geometry/gauge, (B) the ConstGateAssembly
+-- carries (the AFFINE hgate + the v4 measurabilities + hpkgBound/hmemS0/
+-- hopenS0), (C) the ONE A1R6GateSlots package, (D) the single hGauss carry}
+-- ⟹ THE a₁ TWO-JET at the literal constGate: heatOp vanishing ∧
+-- trueHeatKernel t 0 0 = (heatKernel1D t 0)ⁿ·(1 + ((∑ᵢ ricci g gi i i 0)/6)·t
+-- + t²·…). THE AUDITS ALL CLEAN: no legacy hraw, no retired hgate shape, no
+-- floating ∃-witnesses, no unrestricted AmplitudeDerivativeData, no raw
+-- hD2Hexpand/hPd2conv. THE SOL #18 SEQUENCE (J4-408..410) COMPLETE.
+-- CONDITIONAL on: (a) the slot censuses (satisfiable, largely fired by the
+-- F pile), (b) the assembly carries (derivable/satisfiable), (c) hGauss
+-- (derived in-bank), (d) THE DEEP Duhamel/convergence content — a₁ = R/6
+-- remains CONDITIONAL and was never claimed otherwise. std-3.
+#print axioms QIQTH.A1R6FromData.a1_R6_from_data
+
 end QIQTH.AxiomAudit
