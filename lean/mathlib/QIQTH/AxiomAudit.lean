@@ -20352,4 +20352,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PullbackAffineBallLeg.pullbackAffine_onBall
 #print axioms QIQTH.PullbackAffineBallLeg.gatedHeatOp_pullbackAffine_onBallPlateau
 
+-- ## J4-375 (AnnulusAffineLeg): THE ANNULUS (2b) LEG at width 4/3
+-- ★ THE MAP VERDICT: the 3/2 was NOT irreversible on the annulus — the engine
+-- (cutoffResidual_narrow_tauUniform_engine) is width-AGNOSTIC in its proof,
+-- and the general-(c,d) tail-trade already existed banked
+-- (invTpow_gaussDdim_le_width_annulus: (1/τ)^k·G_{cτ} ≤ const·G_{dτ} on
+-- r≥a, τ-FREE constant — exp(−a²/…τ) beats τ^{−k}). 3/2 is irreversible only
+-- on the PLATEAU (the quadPoly widening), already handled by the ball leg.
+-- LANDED: invTpow_gaussDdim_le_narrow43 (c=1,d=4/3, const (16/a²)^k·k!) +
+-- gaussDdim_le_gaussDdim_narrow43 + the promoted annulus per-term bounds
+-- (parametrixCofactor_value/deriv_annulus43) + ★ cutoffResidual_annulus43_
+-- bound (the annulus cutoff residual in the exact AffineGateBound inner shape
+-- (P₀+P₁τ)·quadPoly·G_{4/3} in the chart frame; P₁ = the honest near-leg
+-- affine carry; no (1+t) cap, no surviving τ-power). Remaining: the ambient
+-- v→z chart transfer of the annulus bound (J4-376) + the 3-region ∃-capstone
+-- (plateau ⊕ annulus ⊕ far-support-zero). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.AnnulusAffineLeg.invTpow_gaussDdim_le_narrow43
+#print axioms QIQTH.AnnulusAffineLeg.gaussDdim_le_gaussDdim_narrow43
+#print axioms QIQTH.AnnulusAffineLeg.parametrixCofactor_value_annulus43
+#print axioms QIQTH.AnnulusAffineLeg.parametrixCofactor_deriv_annulus43
+#print axioms QIQTH.AnnulusAffineLeg.cutoffResidual_annulus43_bound
+
 end QIQTH.AxiomAudit
