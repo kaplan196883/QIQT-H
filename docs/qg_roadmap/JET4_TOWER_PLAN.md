@@ -3105,3 +3105,16 @@ Residue: U3 = the mechanical census-thread (`hDaLimLU_from_hgate_census`, J4-366
 germ-link carries (hfam_v2's hlin/hD1 + per-u hQ1 threading — hQ1 is ALREADY a binder of the
 assembly, so the frozen link may thread for free). All 3 std-3; raw 0; build 28s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-366 (7234f374): the hPd2conv LABEL RETIRED from the assembly — the census-thread
+
+`QIQTH/HgateCensusAssembly.lean` (ns `QIQTH.HgateCensusAssembly`): `hDaLimLU_from_hgate_census`
+= the verbatim ~40-binder `hDaLimLU_from_hgate` signature with the atomic per-u `hPd2conv`
+binder (viii) replaced by the 14-binder per-u sliver census + germ links (`hPd2conv_perU`'s
+block; no collisions); body = one application. Identical `DaLimLUGoal` conclusion.
+
+Assembly's surviving labelled inputs: `hgate` (M2 derivation) · `dataAmp.hD2Hexpand` (→ the
+matched sliver carries) · `hfull_pd1`/`hfrozen_pd1` (germ links: frozen → the assembly's OWN
+`hQ1` binder, internal discharge = J4-367; full → banked `hfam_v2`, carries not yet assembly
+binders, deferred as a lateral trade). std-3; raw 0; build 27s. NOT a₁ = R/6 (CONDITIONAL).
