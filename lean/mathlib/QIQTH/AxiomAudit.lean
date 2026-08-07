@@ -20555,4 +20555,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ECombinationDischarge.hEZ_windowed
 #print axioms QIQTH.ECombinationDischarge.hLapZ_from_dom
 
+-- ## J4-387 (ESLegWidening): the (ix) s-legs widened to ∀u
+-- intervalIntegrable_of_deg (the degenerate case CLOSED UNCONDITIONALLY: the
+-- reversed interval Ι 0 (u−εₘ) ⊆ {s≤0} where the Levi source vanishes) +
+-- hES_all/hLapS_all (the EXACT ∀(m u) census binders; case u−εₘ>0 via
+-- pairing_intervalIntegrable at the ceiling Tc:=u — the every-ceiling
+-- Gaussian-domination carries hAdomEvery/hLapDomEvery/hFdomEvery, matching
+-- the dataLevi hglobal carry structure; no witnessSecondXDeriv bridge —
+-- the laplaceBeltrami slice fed directly). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.ESLegWidening.intervalIntegrable_of_deg
+#print axioms QIQTH.ESLegWidening.hES_all
+#print axioms QIQTH.ESLegWidening.hLapS_all
+
 end QIQTH.AxiomAudit

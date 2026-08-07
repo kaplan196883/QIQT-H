@@ -585,6 +585,7 @@ import QIQTH.SliceMeasurability
 import QIQTH.JointContinuityAtoms
 import QIQTH.DataLeviDischarge
 import QIQTH.ECombinationDischarge
+import QIQTH.ESLegWidening
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
