@@ -2921,3 +2921,19 @@ the bounds + the integrand identity, hV0-free). ★ THE CARRY TRANSFORMED: hD2He
 CLOSED on the collar; the residue = THE OFF-COLLAR SLIVER REMAINDER (the tail +
 the moment split). std-3 all 6, raw 0. NOT a₁=R/6. NEXT: Sol consult on the split
 design (the A(0)-moment full-space + Lipschitz-increment architecture), then J4-354.
+
+## SOL CONSULT #13 (2026-08-07, post-J4-353) — THE MATCHED-PAIR SLIVER SPLIT
+DECISIVE: the raw on/off-collar split does NOT close — ∫_{off}|H_τ| = a(c)/τ
+(τ-independent numerator) ⟹ the truncated constant mode gives poly(c)e^{−κc²}·∫dτ/τ
+= LOG-DIVERGENT at the endpoint; gaussian_beats_power only improves the c-constant.
+THE FIX: the MATCHED-PAIR architecture — the tail moment T_τ = ∫_{off}H_τ must stay
+PAIRED: Brick 1 (on-collar, tail-matched): ‖I_on + A₀·T_τ‖ ≤ B₀/√τ + B₁ (the
+A₀-collar-moment = −A₀T_τ by the full-space cancellation; the increment via the
+collar hqLip). Brick 2 (off-collar, matched): ‖I_off − A₀·T_τ‖ ≤ B₀'/√τ + B₁' —
+compare the chart-native leading term DIRECTLY with H_τ·A₀ via the weighted
+|G_τ^chart − G_τ| ≤ C‖z‖³/τ·G_{C'τ} + the amplitude increment; NEVER estimate ρ
+alone off-collar (use G_τ·ρ = G_τ^chart). Brick 3 (assembly): the A₀T_τ cancels ⟹
+the unchanged hbnd with c-dependent constants absorbed. hqLip: collar-restricted
+suffices; Lip(ρ·A_chart) ≤ K·L_chart + M_chart·K·C_r·c²/4 GIVEN the quantitative
+cubic-contact gradient estimate ‖∇(r_z − r_{W₀z})‖ ≤ C_r‖z‖² — THE honest carry if
+not banked (tangent-isometry + C^{1,1} control; also exactly what Brick 2 needs).
