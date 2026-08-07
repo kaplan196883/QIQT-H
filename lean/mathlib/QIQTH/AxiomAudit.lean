@@ -20718,4 +20718,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeviMTest.hBcontEvery_of_carries
 #print axioms QIQTH.LeviMTest.leviSeries_stripContOn_of_data
 
+-- ## J4-396 (W2Package): the D pile — the map + 2 fields discharged
+-- THE MAP: the census (ii) 8 binders ARE witness_MemInterchange's binders;
+-- the _majorant sibling discharges bound/hbdd/hbound INTERNALLY; the live
+-- demand = {hQ1, hFmeas, hFint, hF'meas, hdiff}. DISCHARGED: w2_hFmeas +
+-- w2_hF'meas (the verbatim InnerMeasFubini patterns at the field-derivative
+-- kernels; carries = the honest joint (s,z) legs) + w2_measPack (bundles
+-- ONLY the two — the absorption rule). THE FAMILY IDENTITY: the per-rung
+-- carries beneath htermBoxEvery run on the SAME Fubini engine — one package
+-- serves both. Residue: hQ1 (pd_heatConvFrozen_interchange route) + hFint
+-- (window/shape adaptation) + hdiff (innerZ_line_hasDerivAt re-export) —
+-- J4-397 finishes D then fires the reduced-interface MemInterchange.
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.W2Package.w2_hFmeas
+#print axioms QIQTH.W2Package.«w2_hF'meas»
+#print axioms QIQTH.W2Package.w2_measPack
+
 end QIQTH.AxiomAudit
