@@ -2974,3 +2974,12 @@ hasFDerivAt_center ⟹ Db(0)=0) + the C² banked ⟹ displacement_deriv_bound
 CENSUS: hdisp resolved; remaining = hcubic(sat)·hgate·hjets·hcenter. std-3 all 4,
 raw 0. NOT a₁=R/6. NEXT: J4-358 = CensusSweepOne (the a1_R6_from_labelled
 hypothesis piles' concrete instantiation sweep).
+
+## J4-358 (2026-08-07, ced39b3d) — CensusSweepOne: THE CENSUS SWEPT [AF]
+7 composed group discharges (gauge/ecombine/source/strip/adj/interchange/
+census_lapfull-flagship). THE POST-SWEEP LIST: the four labelled inputs (hGauss
+pullback-derived · hraw · hD2Hexpand-in-dataAmp · hPd2conv) + the 4 sliver
+carries + the hBoundaryLim pile + the raw geometry/certified package + the
+genuine data piles (dataLevi/dominations/W2/§I-J-K). The derivable members drop
+for their raw providers. std-3 all 7, raw 0. NOT a₁=R/6. NEXT: J4-359 =
+HrawCampaignOne (the width-question verdict + the uniformization recon).
