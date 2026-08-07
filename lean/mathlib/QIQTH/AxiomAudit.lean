@@ -20867,4 +20867,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GpowClosure.memLapFull_from_gpow_chain
 #print axioms QIQTH.GpowClosure.gpow_closure_carries_intro
 
+-- ## J4-403 (SlotDischarges): the wall-A slot discharges + the ∀-s aggregation
+-- S1 SEVEN slots: hqz (← concrete_hqLip data) + hqzmeas + hgate (← the
+-- collar wrappers) + h0 (← rhoRatio_center) + hf2bound/hf3bound (← the
+-- dominator mechanism) + hcomp (← hcomp_concrete at R=c√τ). S2 ★
+-- hinner_window_of_slotBound (the EXACT capstone hypothesis shape;
+-- QUANTIFIER TRAP RESOLVED: L/Bcomp/Q/Sconst bound BEFORE m,s; hslot over
+-- all 0<τ≤τ₀ never over m; no εₘ in K₁/K₀). S3 memLapFull_from_slotBound
+-- (⟹ the full MemLapFull member). The residual list (machine-checkable):
+-- {hslot, hcap (satisfiable epsSeq 0 ≤ τ₀), hEndpoint (τ=0 measure-zero),
+-- hcensus (the remaining chain inputs)}. std-3 all (the intro axiom-free).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.SlotDischarges.hqz_slot_of_data
+#print axioms QIQTH.SlotDischarges.hqzmeas_slot_of_data
+#print axioms QIQTH.SlotDischarges.hgate_of_collarRegime_cover
+#print axioms QIQTH.SlotDischarges.h0_slot_of_center
+#print axioms QIQTH.SlotDischarges.hf2bound_slot_of_dom
+#print axioms QIQTH.SlotDischarges.hf3bound_slot_of_dom
+#print axioms QIQTH.SlotDischarges.hcomp_slot_of_dom
+#print axioms QIQTH.SlotDischarges.hinner_window_of_slotBound
+#print axioms QIQTH.SlotDischarges.memLapFull_from_slotBound
+#print axioms QIQTH.SlotDischarges.slot_discharge_residuals_intro
+
 end QIQTH.AxiomAudit
