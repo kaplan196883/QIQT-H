@@ -3008,3 +3008,12 @@ N1 banked (uniformFlowExp_displacement_bound re-exported). N2 the polarization
 explicit shrunk gate; the C_D‖v‖≤1/2 bootstrap). hraw remaining: the pre-collapse
 extraction + the wiring. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-362 =
 HrawPreCollapse (the extraction + the wiring ⟹ hEdom discharged ⟹ hraw CLOSED).
+
+## J4-362 (2026-08-07, a80bedcf) — HrawPreCollapse: THE QUADRATIC RECONCILIATION [AF]
+THE 5TH INTERFACE FINDING: the honest pre-collapse form is width-1 QUADRATIC (the
+T2 metric-deviation term); the extra power = A WIDTH (one widening absorbs it) ⟹
+the same hEdom. The quadratic bridge + transfer + assembly + ★ hEdom_concrete_final
+(the exact hEdom from the honest on-gate width-4/3 quadratic hgate carry). THE hraw
+RESIDUE: hgate (satisfiable, named) + the mechanical hEdom-accepting re-thread.
+std-3 all, raw 0. NOT a₁=R/6. NEXT: the hPd2conv Sol consult (the v2-route
+hypothesis — the s-integral representation may break the J4-336 circularity).
