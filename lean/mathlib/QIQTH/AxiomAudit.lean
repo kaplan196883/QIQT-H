@@ -20424,4 +20424,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LegUniformization.plat_residual_uniform_width43
 #print axioms QIQTH.LegUniformization.gatedHeatOp_plateau_uniform
 
+-- ## J4-379 (AnnulusUniformization): THE ANNULUS LEG UNIFORMIZED
+-- width1_residual_uniform (the hwidth1 lift — a single (ρ,P₀,P₁) width-1
+-- pullback residual bound over K) + hEnear_uniform (the 1→5/4 fold) +
+-- ★ gatedHeatOp_annulus_uniform (FULL: the six suppliers obtained once, the
+-- τ-affine Kcof/Kder B₀/B₁ re-fold verified by ring, the leg-agnostic
+-- hpt/hlap glue reused — the hann_uniform in the exact stitch binder shape).
+-- BOTH width-4/3 QUAD legs now uniform over K. A3 blocked on the ∃-vs-∀
+-- (a,b) mismatch: each leg ∃-chooses its own (a,b); the stitch needs ONE
+-- shared pair ⟹ J4-380 = the common-(a,b) shell (∀-(a,b) leg restatements +
+-- the ConstRadiusGateExport hgoodC gate-fact bundle re-pointed at the QUAD
+-- legs) ⟹ AffineGateBound concrete ⟹ hEdom from geometry (hgate RETIRED).
+-- Surviving carries: hCoeffU0/hCoeffLin1 (banked satisfiable) + geometry +
+-- folded smoothness. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.AnnulusUniformization.width1_residual_uniform
+#print axioms QIQTH.AnnulusUniformization.hEnear_uniform
+#print axioms QIQTH.AnnulusUniformization.gatedHeatOp_annulus_uniform
+
 end QIQTH.AxiomAudit
