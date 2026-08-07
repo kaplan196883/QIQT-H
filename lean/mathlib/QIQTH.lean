@@ -570,6 +570,7 @@ import QIQTH.HgateAffineRepair
 import QIQTH.AffineRawResidual
 import QIQTH.AffineGateTransport
 import QIQTH.NearIsometry43Budget
+import QIQTH.Transfer43Quad
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

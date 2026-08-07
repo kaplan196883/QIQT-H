@@ -20297,4 +20297,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NearIsometry43Budget.uniformFlowExp_hdisp43_ball
 #print axioms QIQTH.NearIsometry43Budget.uniformFlowExp_gaussDdim_transfer_43
 
+-- ## J4-372 (Transfer43Quad): the width-4/3 quad transfer + the ambient ball leg
+-- chartTransfer43_quad_from_nearIsometry: quadPoly(r²_v/τ)·G_{(5/4)τ}(v) ≤
+-- B·quadPoly(r²_z/τ)·G_{(4/3)τ}(z), z=φ_q v−q, B=(25/16)·√(16/15)ⁿ — the
+-- Gaussian leg = J4-371 N2, the poly leg = the banked TWO-SIDED budget
+-- (nearIsometry_concrete J4-361 via nearIsometry_budgets δ=1/4: r²_v ≤
+-- (5/4)r²_z — dont-undercredit paid off again). ambientAffine_onBall: the
+-- chart-frame width-1 affine estimate folded 1→5/4 then transferred — ∃P₀P₁:
+-- |parametrixResidualN 1| ≤ (P₀+P₁τ)·quadPoly(r²_z/τ)·G_{(4/3)τ}(z) on the
+-- ball (the ball leg of the AffineGateBound precursor). Remaining: the on-gate
+-- glue (radialCutoff=1 interior identification + 2a transport) = J4-373; the
+-- annulus (2b); the combined ∃-capstone. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.Transfer43Quad.chartTransfer43_quad_from_nearIsometry
+#print axioms QIQTH.Transfer43Quad.ambientAffine_onBall
+
 end QIQTH.AxiomAudit
