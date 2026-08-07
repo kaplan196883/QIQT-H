@@ -20938,4 +20938,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HD1Concrete.hbulk_tendsto_concrete
 #print axioms QIQTH.HD1Concrete.hD1_concrete
 
+-- ## J4-407 (PerUCensusTuple): SOL #17 F3 — THE F PILE CLOSES
+-- hfam_v2_concrete (fired from hlin_field_concrete + hD1_concrete; the L1
+-- ∃-HasFDerivAt family with the Dmap representative) + hfull_pd1_fired (the
+-- exact per-u census germ via pd_germ_eq_of_family) + ★
+-- hPd2conv_perU_fired (the exact binder (viii): sSet=univ, hb/hbulk_tendsto
+-- discharged, fbulk=fbulkInt, the Dmap_apply_single bridge). The three Sol
+-- #17 named exports (hlin/hD1/hfull_pd1) all live. Residual carries
+-- enumerated: hProv (7 legs) + hGint + hbulkderiv/hsliver/hcont (shared,
+-- one carry two consumers) + the data fields + hfrozen_pd1 (dischargeable
+-- via hQ1; route G₁ through census_v2 to shed it). THE HANDOFF: the census
+-- plumbing is MECHANICALLY CLOSED through F3; the blocking surface = the
+-- convergence trio + the geometric wiring + hgate/hD2Hexpand (the honest
+-- labelled inputs). J4-408 = G₁+H per SOL #18. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.PerUCensusTuple.hfam_v2_concrete
+#print axioms QIQTH.PerUCensusTuple.hfull_pd1_fired
+#print axioms QIQTH.PerUCensusTuple.hPd2conv_perU_fired
+
 end QIQTH.AxiomAudit

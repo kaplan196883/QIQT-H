@@ -605,6 +605,7 @@ import QIQTH.SlotDischarges
 import QIQTH.HDaHLapWiring
 import QIQTH.PerUProviders
 import QIQTH.HD1Concrete
+import QIQTH.PerUCensusTuple
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
