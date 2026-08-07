@@ -602,6 +602,7 @@ import QIQTH.DataAmpAssembly
 import QIQTH.GpowBridge
 import QIQTH.GpowClosure
 import QIQTH.SlotDischarges
+import QIQTH.HDaHLapWiring
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

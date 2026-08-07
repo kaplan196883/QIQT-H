@@ -20889,4 +20889,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotDischarges.memLapFull_from_slotBound
 #print axioms QIQTH.SlotDischarges.slot_discharge_residuals_intro
 
+-- ## J4-404 (HDaHLapWiring): SOL B1+B2 — the (ix) hDa/hLap census wiring
+-- hDa_census_from_threaded (T1a specialized per-u; the eight time-Leibniz
+-- carriers honest — the w2_* bank is FIELD-side and discharges none of the
+-- TIME-derivative carriers; the maximal honest reduction) +
+-- hLap_census_from_threaded (T1b: ★ hpdpdH_slice DISCHARGED BY rfl
+-- (witnessSecondXDeriv unfolds α-equal to the required pd∘pd slice);
+-- hInterchange discharged on U by memInterchange_at_gate (the ∀u tail
+-- honest); hgi/hΓ from gauge_from_geometry; hpdpdZ/hII_lo reducible to the
+-- banked dominations). The (ix) pile: hDa/hLap reduced to the engines ·
+-- hEZ/hLapZ banked · hES/hLapS windowed (the ∀u widening open). J4-405 =
+-- F1 (the per-u providers + the ∀u-tail widening). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HDaHLapWiring.hDa_census_from_threaded
+#print axioms QIQTH.HDaHLapWiring.hLap_census_from_threaded
+
 end QIQTH.AxiomAudit
