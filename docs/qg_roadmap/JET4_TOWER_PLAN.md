@@ -2937,3 +2937,11 @@ the unchanged hbnd with c-dependent constants absorbed. hqLip: collar-restricted
 suffices; Lip(ρ·A_chart) ≤ K·L_chart + M_chart·K·C_r·c²/4 GIVEN the quantitative
 cubic-contact gradient estimate ‖∇(r_z − r_{W₀z})‖ ≤ C_r‖z‖² — THE honest carry if
 not banked (tangent-isometry + C^{1,1} control; also exactly what Brick 2 needs).
+
+## J4-354 (2026-08-07, 2a7dbc93) — SliverTailMatched: SOL-#13 BRICK 1 COMPLETE [AF]
+T1 the EXACT pairing (∫_C H = −T_τ, via the banked full-space moment) + T2 the
+increment (≤ L(15n/2)/√τ via the banked √τ-gain moments) + T3 ★ sliver_term1_on_
+collar_matched (Sol's exact shape, B₁=0) + T4 the 1/τ tail sanity. The carry: the
+collar Lipschitz hq (satisfiable per the Lip(ρ·A_chart) analysis). std-3 all 6,
+raw 0. NOT a₁=R/6. NEXT: J4-355 = brick 2 (the off-collar matched domination + the
+cubic-contact gradient recon).
