@@ -20588,4 +20588,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EveryCeilingFamilies.gaussDdim_crude_to_capped
 #print axioms QIQTH.EveryCeilingFamilies.hLapS_all_capped
 
+-- ## J4-389 (AllUSliceMeas): the ∀u hmeas slices discharged
+-- The verdict: the ESLegWidening hmeas carries ARE J4-383 instances modulo
+-- (a) the ∀u dichotomy (u−εₘ≤0 ⟹ the window ⊆{s≤0}, Levi vanishes, a.e.-0)
+-- + (b) the ceiling Tc:=u (every-ceiling continuity families, the J4-388
+-- pattern) + (c) the hLapS first factor = the FULL laplaceBeltrami slice
+-- (simpler than hmeas2 — single window, no i-index). pairingSlice_aesm (the
+-- generic dichotomy helper) + hmeasHeatLevi_allU + hmeasLapLevi_allU (the
+-- exact carry shapes). Carries: hFzero (banked) + hHeatContEvery/hBcontEvery
+-- (banked box-glue per ceiling) + hLapContEvery (the ONE new atom — the
+-- laplaceBeltrami-slice box-glue, J4-390 mirrors hSecCont_of_boxes).
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.AllUSliceMeas.pairingSlice_aesm
+#print axioms QIQTH.AllUSliceMeas.hmeasHeatLevi_allU
+#print axioms QIQTH.AllUSliceMeas.hmeasLapLevi_allU
+
 end QIQTH.AxiomAudit
