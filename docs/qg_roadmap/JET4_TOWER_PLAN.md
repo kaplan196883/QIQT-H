@@ -3236,3 +3236,14 @@ verdict confirmed: the transfer needs w₀·rncRadialSq(p−q) ≤ (4/3)·rncRad
 Remaining to AffineGateBound: the quad transfer (poly leg, J4-372) · (2b) the annulus
 width-trade · the on-gate assembly · the combined ∃-capstone. std-3 both; raw 0; build 43s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-372 (51aba6e7): the width-4/3 quad transfer + the ambient affine ball leg
+
+`QIQTH/Transfer43Quad.lean`: `chartTransfer43_quad_from_nearIsometry` (B = (25/16)·√(16/15)ⁿ;
+poly leg from the banked TWO-SIDED nearIsometry_concrete J4-361 budget — dont-undercredit) +
+`ambientAffine_onBall` (the chart width-1 affine estimate folded 1→5/4 then transferred:
+∃P₀P₁ ≥ 0, |parametrixResidualN 1| ≤ (P₀+P₁τ)·quadPoly(r²_z/τ)·G_{(4/3)τ}(z) on the ball —
+the BALL LEG of the AffineGateBound precursor). Remaining: the on-gate glue (J4-373:
+radialCutoff=1 interior + 2a transport + gatedKernel agreement) · the annulus (2b) · the
+combined ∃-capstone. std-3 both; raw 0; build ~30s. NOT a₁ = R/6 (CONDITIONAL).
