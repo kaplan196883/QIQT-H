@@ -20054,4 +20054,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DisplacementDerivative.cubic_contact_gradient_concrete
 #print axioms QIQTH.DisplacementDerivative.collar_product_lipschitz_increment
 
+-- ## J4-358 (CensusSweepOne): THE CENSUS SWEEP — 7 COMPOSED DISCHARGES
+-- C1 the classified census of a1_R6_from_labelled's piles. C2 the composed
+-- group lemmas: census_gauge + census_ecombine + census_source + census_strip +
+-- census_adj + census_interchange (the W2 → MemInterchange) + census_lapfull
+-- (the flagship: gauge+interchange+adjacency+sliver+hPd2conv ⟹ MemLapFull).
+-- C3 THE DEFINITIVE POST-SWEEP LIST: (1) the FOUR labelled inputs (hGauss —
+-- derived for the pullback route; hraw; hD2Hexpand-in-dataAmp; hPd2conv) ·
+-- (2) the 4 sliver carries · (3) the hBoundaryLim pile (banked, own inputs) ·
+-- (4) the raw geometry/gauge/window + the certified package facts · (5) the
+-- genuine data piles (dataLevi, dominations, the W2 family, the §I/J/K binders).
+-- The derivable members (hgiMem/hΓMem/hEcomb/hII/hIlo-hi/hLapFull/hFdom/hFzero/
+-- MemInterchange) DROP from the final antecedent for their raw providers. std-3
+-- all 7. NOT a₁ = R/6.
+#print axioms QIQTH.CensusSweepOne.census_gauge
+#print axioms QIQTH.CensusSweepOne.census_ecombine
+#print axioms QIQTH.CensusSweepOne.census_source
+#print axioms QIQTH.CensusSweepOne.census_strip
+#print axioms QIQTH.CensusSweepOne.census_adj
+#print axioms QIQTH.CensusSweepOne.census_interchange
+#print axioms QIQTH.CensusSweepOne.census_lapfull
+
 end QIQTH.AxiomAudit
