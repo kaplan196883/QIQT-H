@@ -2966,3 +2966,11 @@ hD2Hexpand INPUT reduced to the five carries. std-3, raw 0. NOT a₁=R/6. NEXT:
 J4-357 = DisplacementDerivative (the hdisp campaign — likely NEARLY BANKED via
 the J4-273/274 terminal-velocity machinery: W z 0 = −T₀-form + TerminalVelC2 ⟹
 Db = id − DT₀ with DT₀(0)=id ⟹ the C²-modulus Lipschitz).
+
+## J4-357 (2026-08-07, 21ff6a10) — DisplacementDerivative: hdisp RESOLVED [AF]
+The dont-undercredit strike: the base-side 1-jet WAS banked (baseVaryingChart_
+hasFDerivAt_center ⟹ Db(0)=0) + the C² banked ⟹ displacement_deriv_bound
+(UNCONDITIONAL) + cubic_contact_gradient_concrete + the Lip core. THE SLIVER
+CENSUS: hdisp resolved; remaining = hcubic(sat)·hgate·hjets·hcenter. std-3 all 4,
+raw 0. NOT a₁=R/6. NEXT: J4-358 = CensusSweepOne (the a1_R6_from_labelled
+hypothesis piles' concrete instantiation sweep).
