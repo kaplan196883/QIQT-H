@@ -20844,4 +20844,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GpowBridge.leviSecondPairing_le_invSqrt
 #print axioms QIQTH.GpowBridge.hGpow_bridge_handoff_intro
 
+-- ## J4-402 (GpowClosure): SOL #17 A3 — ★★★ WALL A CLOSED (modulo enumerated carries)
+-- C1: abs_integral_le_of_dom (the dominator mechanism) + ★ hon_concrete (the
+-- on-collar identity from sliverIntegrand_on_collar) + hcomp_concrete +
+-- ★★ leviSecondPairing_inner_bound_concrete (the per-(τ,s) matched inner
+-- bound at the concrete witness). C2: K_nonneg + the Cpair production.
+-- C3: ★ hGpow_uIoc_of_Ioo_zeroEndpoint (the Ioo→uIoc upgrade; the s=u τ=0
+-- endpoint via Inner=0 + 0^{-1/2}=0) + ★★★ memLapFull_from_gpow_chain (the
+-- FULL closure threading: leviSecondPairing_le_invSqrt →
+-- hII_hi_from_sliver → MemAdjHi → memLapFull_from_pairing_dominations ⟹
+-- MemLapFull — NO uncapped second-derivative domination anywhere). The
+-- surviving carries enumerated in gpow_closure_carries (the per-s slot
+-- carries + hgate + hEndpoint + the continuity carries — all satisfiable).
+-- THE SOL #16/#17 ANALYTIC WALLS ARE ALL BRIDGED/CLOSED; the rest = wiring.
+-- std-3 all (the intro axiom-free). NOT a₁ = R/6.
+#print axioms QIQTH.GpowClosure.abs_integral_le_of_dom
+#print axioms QIQTH.GpowClosure.hon_concrete
+#print axioms QIQTH.GpowClosure.hcomp_concrete
+#print axioms QIQTH.GpowClosure.leviSecondPairing_inner_bound_concrete
+#print axioms QIQTH.GpowClosure.K_nonneg
+#print axioms QIQTH.GpowClosure.hGpow_uIoc_of_Ioo_zeroEndpoint
+#print axioms QIQTH.GpowClosure.memLapFull_from_gpow_chain
+#print axioms QIQTH.GpowClosure.gpow_closure_carries_intro
+
 end QIQTH.AxiomAudit
