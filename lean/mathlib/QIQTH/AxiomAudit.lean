@@ -20186,4 +20186,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LabelledRethreadV2.hEdom_vanVleck_of_hgate
 #print axioms QIQTH.LabelledRethreadV2.hDaLimLU_from_hgate
 
+-- ## J4-365 (Pd2ConvPerU): the per-u hPd2conv census instantiation
+-- The germ links + the per-u wrapper over the J4-363 discharger.
+-- hfull_pd1_concrete (the full-side germ from the banked CConvV2Facade.hfam_v2
+-- via pd_germ_eq_of_family; gcoef = the Dmap coefficient = the s-integral, per
+-- Dmap_apply_single) + hfrozen_pd1_from_hQ1 (U0 finding: NO frozen ∃-family
+-- needed — the banked W2 hQ1 pointwise formula on V ∈ 𝓝 0 IS the germ) +
+-- ★ hPd2conv_perU (the EXACT per-u binder (viii) of hDaLimLU_from_hgate, by
+-- ∀-intro plumbing of hPd2conv_from_census over the u-indexed census family).
+-- Residue: U3 = the mechanical census-thread of the assembly (J4-366).
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.Pd2ConvPerU.hfull_pd1_concrete
+#print axioms QIQTH.Pd2ConvPerU.hfrozen_pd1_from_hQ1
+#print axioms QIQTH.Pd2ConvPerU.hPd2conv_perU
+
 end QIQTH.AxiomAudit
