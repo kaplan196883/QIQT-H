@@ -3247,3 +3247,21 @@ poly leg from the banked TWO-SIDED nearIsometry_concrete J4-361 budget — dont-
 the BALL LEG of the AffineGateBound precursor). Remaining: the on-gate glue (J4-373:
 radialCutoff=1 interior + 2a transport + gatedKernel agreement) · the annulus (2b) · the
 combined ∃-capstone. std-3 both; raw 0; build ~30s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-373 (9e373d31): the on-gate glue (2c) + ★ THE PULLBACK-METRIC FINDING
+
+`QIQTH/OnGateGlue.lean` (7 decls std-3): G1 the plateau germ + the transport-RHS =
+`parametrixResidualN 1` identification (ANY metric; cutoff through ∂_τ by =1, through Δ by
+`laplaceBeltrami_congr_nhds`) · G2 the hpt/hlap discharges standalone (from CoeffU1Fix:831-852) ·
+G3 the plateau identities `heatOp(witness) = pullback-residual` — ungated AND gated (the gate
+layer = the banked `gatedKernel_heatOp_eq_of_mem_nhds`, GlobalHunifAssembly:138; no S-specific
+facts beyond `S q ∈ 𝓝 p`).
+
+★ THE FINDING (composition honestly NOT forced): the transport yields the **PULLBACK-metric**
+residual (`uniformFlowPullbackMetric` frame); the J4-372 ball leg bounds the **ORIGINAL-metric**
+residual — different objects (different Christoffels). Fix = the pullback-metric affine ball
+leg (J4-374): instantiate `rawResidualN1_affine_graded_quadPoly_width1` AT the pullback metric —
+its hdev/hcoeff/hlap carries are exactly the pullback-frame uniform bounds the compiled _lin
+chain already discharges (hCoeffU0_vanVleck etc. live in the flow frame). Then the annulus (2b),
+then the combined ∃-capstone. raw 0; build 24s. NOT a₁ = R/6 (CONDITIONAL).
