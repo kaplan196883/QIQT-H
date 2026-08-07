@@ -3318,3 +3318,17 @@ assembly step (vii). C4 honestly deferred: the banked legs are per-(q,v,τ); the
 an unconditional hgate = THE FLOW-FRAME UNIFORMIZATION (J4-378 — the suppliers are the banked
 compact-K uniforms the compiled chain already uses) + the census data piles. raw 0; build 27s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-378 (12bd6525): the flow-frame uniformization — THE PLATEAU LEG UNIFORMIZED
+
+`QIQTH/LegUniformization.lean` (2 decls std-3). THE SUPPLIER MAP: the plateau (P₀,P₁) is fully
+ALGEBRAIC in the compact-K uniforms — Md ← uniformFlowPullbackMetricInv_dev_uniform · Cc0 ←
+hCoeffU0_vanVleck · L0/L1 ← uniformFlowLaplaceBeltrami_w0_near_uniform (@u, @u') · Cc1 ←
+uniformCoeffLinear_bound · W0/W1 q-indep sups · hpt/hlap glue leg-agnostic. LANDED:
+`plat_residual_uniform_width43` (single (ρ,P₀,P₁) over K) + ★ `gatedHeatOp_plateau_uniform`
+(the hplat_uniform in the EXACT affineGateBound_of_legs binder shape). ANNULUS residue
+(J4-379): the τ-affine Kcof/Kder re-fold (mirror the B₀/B₁ step of
+cutoffResidualN1_uniformFlow_narrow_mixed_below_lin, CoeffU1Fix:589-626) + the width-5/4-QUAD
+hEnear (lift hwidth1, fold 1→5/4); then U4 (both legs + the _of_good choice shell +
+hEdom_vanVleck_of_hgate_affine) RETIRES hgate. raw 0; build ~2-3min. NOT a₁ = R/6 (CONDITIONAL).
