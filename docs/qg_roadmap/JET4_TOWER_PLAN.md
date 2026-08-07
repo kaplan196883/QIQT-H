@@ -3571,3 +3571,15 @@ scaledModelCoeff_summable). M2: the Weierstrass M-test. M3: the strip + ★ hBco
 (verbatim consumer shape). hBcontEvery reduced to {hmajor (banked), htermBoxEvery (residual =
 the per-rung W2 carries)}. THE C PILE (the continuity floor) CLOSES. J4-396 = the D pile (W2).
 raw 0. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-396 (1371be0f): the D pile — the W2 map + two fields discharged
+
+`QIQTH/W2Package.lean` (3 decls std-3). THE MAP: the census (ii) 8 binders = the
+witness_MemInterchange binders; the _majorant sibling discharges bound/hbdd/hbound
+INTERNALLY; live demand = {hQ1, hFmeas, hFint, hF'meas, hdiff}. DISCHARGED: w2_hFmeas +
+w2_hF'meas (InnerMeasFubini patterns at the field-derivative kernels) + w2_measPack (the
+absorption rule). THE FAMILY IDENTITY CONFIRMED: the per-rung Levi carries run on the same
+Fubini engine. Residue: hQ1/hFint/hdiff (named banked routes; τ≥εₘ on the truncated window
+helps hFint). J4-397 = finish D + fire the reduced-interface MemInterchange. raw 0; build 28s.
+NOT a₁ = R/6 (CONDITIONAL).
