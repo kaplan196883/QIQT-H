@@ -3384,3 +3384,13 @@ gate): (ii) hQ1/hFmeas/hFint/hF'meas/bnd/hbdd/hbound/hdiff (W2) · (iii) aa/haa/
 instantiation) · (ix) hDa/hLap/hLapZ/hEZ/hLapS/hES. Next: pile (v)+(iii) (J4-382 — the
 dominations from the derived hEdom bound + banked suppliers), then (ix) integrability follows.
 raw 0; build 25s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-382 (3d672268): census piles (iii) + (v)-heat discharged
+
+`QIQTH/CensusDominations.lean`: `timeWindow_facts` ((iii) — U=Ioo(T/2)T, aa=T/2) +
+`hAdomHeat_from_hEdom` ((v)-heat — wA=3/2, CA=(E₀+E₁T)·√(3/2)ⁿ from the derived hEdom at p=0;
+the same E₀/E₁ feed step (vii) and hAdomHeat). HONEST: hAdom2 CARRIED (the banked bound is the
+divergent-strip crude τ⁻¹ shape; route = the moment-aware WideSliverBoundary campaign) + the 4
+s-slice measurabilities CARRIED (supplied nowhere in-bank; J4-383 = the compositional supplier).
+raw 0; build 46s. NOT a₁ = R/6 (CONDITIONAL).
