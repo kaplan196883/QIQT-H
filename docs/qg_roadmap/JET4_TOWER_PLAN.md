@@ -3583,3 +3583,49 @@ absorption rule). THE FAMILY IDENTITY CONFIRMED: the per-rung Levi carries run o
 Fubini engine. Residue: hQ1/hFint/hdiff (named banked routes; τ≥εₘ on the truncated window
 helps hFint). J4-397 = finish D + fire the reduced-interface MemInterchange. raw 0; build 28s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-397 (baa3300f): THE D PILE FIRES — all 8 census-(ii) binders routed
+
+`QIQTH/W2Finish.lean` (4 decls std-3): w2_hFint (the capped template at the τ≥εₘ floor) +
+w2_hdiff (the innerZ re-export; bundled hInnerData) + w2_hQ1 (pd_heatConvFrozen_interchange;
+bundled hFrozenData) + ★ memInterchange_at_gate (the verbatim MemInterchange member fired
+through witness_MemInterchange). With J4-396: the (ii) block routes entirely to named honest
+carries. raw 0; build 29s. NOT a₁ = R/6 (CONDITIONAL).
+
+## ★ SOL CONSULT #17 (recorded 2026-08-07): THE FINAL WALLS + THE E→A→B PATH
+
+THE CRITICAL PATH: E (dataAmp) → A (hGpow) → B (hDa/hLap); F1 + G₁ parallelize; H waits on
+B/F/G₁. THE KEY VERDICT: **do NOT start a new second-order moment-cancellation development —
+the existing matched-sliver bank IS the hGpow mechanism** (the SliverBoundOnCollar B/√τ shape
+is analytically the same pairing after the chart identification; the cancellation ladder:
+raw ‖∂²G‖₁ = τ⁻¹ → center-subtraction Lipschitz = τ^{-1/2} → O(1) would need uniform-C² data
+that is unnecessary). The DaLimEasyTranche B√εₘ CANNOT be inverted to the pointwise hGpow —
+use SliverAssemblyMatched directly.
+
+A-BRICKS: A1 `leviSecondPairing_eq_matchedAssembly` (the target-identification bridge — an
+EQUALITY/rewriting brick, all slot conversions HERE, no estimates) → A2
+`leviSecondPairing_le_invSqrt` (instantiate SliverBoundOnCollar/TailMatched/OffCollarMatched/
+AssemblyMatched; ⚠ fixed collar constants; εₘ ≤ ε*; do NOT use τ≥εₘ — destroys m-uniformity)
+→ A3 the hGpow packaging + MemAdjHi + memLapFull closure (no new analysis).
+
+E-BRICKS: E1 the geometry bundle {hcenter + hjets + sliver-hgate} (banked C⁴ + expPullback_hpd2
++ kappa_eq_one_sixth (orient ONCE) + the J4-341..347 Gauss legs; wrappers not new coordinates;
+MEDIUM) → E2 {L_A_chart + hcubic-sat} (the genuinely-analytic brick: ONE fixed collar radius,
+ONE compact derivative bound, ONE Taylor remainder, r≤1 absorption; L_A_chart from the explicit
+A_chart formula NOT from hBcontEvery; HIGH) → E3 the AmplitudeDerivativeData assembly
+(factor-by-factor named identities; NO rewriting under integrals; MEDIUM-HIGH elaboration risk).
+
+B: TWO bricks (hDa_census_from_threaded then hLap_census_from_threaded — separate the
+debugging surfaces; exact census binder order). F: F1 hlin side-conditions (PARALLEL-SAFE now,
+from D+C) → F2 hD1 (HD1SliverRoute; may wait on E3) → F3 hfam_v2 + hfull_pd1 (keep hlin/hD1/
+hfull_pd1 as named exports). G₁/H TRAPS: radius-witness coherence (one gate witness across
+hpkgBound/hEmeas/hfam_v2 or explicit monotonicity bridges); the existential-constant order
+(Cpair BEFORE the m,s binders; no εₘ⁻¹ leakage); strict endpoints (hGpow only on (u−εₘ,u) —
+never manufacture τ=0); z-slot verification on every reused C theorem; NO early rcases
+(gate-local packages first, ONE rcases at the end); label elimination (no hidden uncapped
+hAdom2, no stale fixed-radius packages in context); per-brick audits on E3/A3/B2/F3/H.
+
+THE SEQUENCE: J4-398=E1 · 399=E2 · 400=E3 · 401=A1+A2 · 402=A3+closure · 403=B1 · 404=B2 ·
+405=F1 · 406=F2 · 407=F3 · 408=G₁+the one-rcases final assembly. The remaining analytic risk
+is CONCENTRATED in J4-399..401; everything after hGpow is interface/gate-discipline work.
