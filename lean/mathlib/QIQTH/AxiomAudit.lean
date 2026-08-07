@@ -20461,4 +20461,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CommonGateShell.affineGateBound_concrete
 #print axioms QIQTH.CommonGateShell.hEdom_from_geometry
 
+-- ## J4-381 (CensusGeometryThread): the geometry hEdom threaded into the census
+-- hDaLimLU_from_geometry_census — the ∃-style master: from GEOMETRY ONLY,
+-- ∃ (a,b,S) such that (the census (ii)-(ix) minus (vii) at that gate) ⟹
+-- DaLimLUGoal at the vanVleck witness. T1 verdict: NO circularity; the
+-- hEdom shapes match VERBATIM (incl. √(3/2)ⁿ and (E₀+E₁τ)); no census
+-- binder constrains (a,b,S). The hEdom step (vii) is GONE from the labelled
+-- surface. Remaining census carries (all at the geometry-chosen gate):
+-- (ii) the W2 family · (iii) the time floor (arithmetic) · (iv) dataLevi ·
+-- (v) the Gaussian dominations + 4 measurabilities · (vi) dataAmp
+-- (hD2Hexpand) · (viii) hPd2conv (→ the banked census corollary) · (ix) the
+-- E-combination. std-3. NOT a₁ = R/6.
+#print axioms QIQTH.CensusGeometryThread.hDaLimLU_from_geometry_census
+
 end QIQTH.AxiomAudit
