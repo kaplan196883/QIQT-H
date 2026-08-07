@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: "Anyone can claim they solved the measurement problem. Almost no one lets you check."
 eyebrow: The launch
-description: A Physical Review Letters paper derived the semiclassical Einstein equations from quantum relative entropy. I formalized that exact conditional chain in Lean, so you can re-run it — with every physical assumption printed in a claim card. The verification capsule, the single-world idea, the honest ledger, and an invitation to break it.
+description: QIQT-H builds an AdS/CFT-style holographic duality in flat spacetime — matter and gravity as one finite-capacity system, S = A/4G with the same G on both sides — from five quantum postulates, machine-verified in Lean 4. A Physical Review Letters result (semiclassical Einstein from quantum relative entropy) sits inside it as a formalized conditional chain, with every physical assumption printed in a claim card. The verification capsule, the honest ledger, and an invitation to break it.
 ---
 
 Physics foundations has a credibility problem, and it's not hard to see why. The field is a

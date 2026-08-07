@@ -15,7 +15,7 @@ from lean_track import browser, latex_tree, latexify, probe  # noqa: E402
 
 REPO = HERE.parent
 TRACKS = [
-    ("gr", "Target 3 — QIQT-H gives the Einstein field equations"),
+    ("gr", "Target 3 — QIQT-H's conditional, free-field Einstein-form equation"),
     ("born", "Target 1 — the Born rule: reductions and a no-go"),
     ("lorentz", "Target 2 — Lorentz covariance of the selection"),
 ]
@@ -36,6 +36,13 @@ spacetime points, indices $\\mu,\\nu$ over $\\{0,1,2,3\\}$, $v$ over tangent vec
 leads with the **author's explanation**, the **conclusion** follows in display math, the
 **load-bearing hypotheses are shown**, and routine conditions are summarized by count. To explore
 the full dependency network behind these results, see the [**theorem browser**](/browser).
+
+These three targets sit inside the program's central result — a flat-space holographic duality
+(`FlatSpaceRecordGravityCorrespondence`): one finite-capacity record system that is at once quantum
+matter and the gravity curving around it, $S = A/4G$ with the *same* $G$ on both sides. That
+correspondence is a **conditional theorem** (its finite evidence and continuum skeleton are
+machine-checked; the unconditional statement carries named inputs, not a proof) — so read every
+statement below **conditionally on its listed hypotheses**.
 
 """
 

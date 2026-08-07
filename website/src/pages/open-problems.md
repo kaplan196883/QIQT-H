@@ -5,9 +5,9 @@ eyebrow: The frontier
 description: The honest frontier — λ's law (the central problem), Born from typicality (reduced to one premise), the continuum (Type III₁), and Lorentz naturalness (does finite capacity survive radiative Lorentz violation?). What is closed, what is reduced, and what is a wall.
 ---
 
-QIQT-H is a coherent, *conditional* single-world interpretation. This page is current as of the **2026-06-15
-correction**, in which the program's original headline — that finite holographic capacity *forbids* two
-macroscopic records — was **retired as a category error** (see the note below). The remaining gaps are about
+QIQT-H is a coherent, *conditional* single-world interpretation. This page is current as of **2026-08-07**;
+it incorporates the **2026-06-15 correction**, in which the program's original headline — that finite
+holographic capacity *forbids* two macroscopic records — was **retired as a category error** (see the note below). The remaining gaps are about
 giving the actuality selector **λ** a precise law and reaching the continuum. The
 [formalization](/formalization) is now axiom-free and settles several pieces; the rest is named honestly.
 

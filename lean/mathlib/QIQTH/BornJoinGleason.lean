@@ -40,8 +40,10 @@ theorem ensemble_p_isBorn (E : ActualEnsemble m n) (M : EffectMeasure d)
 /-- **No-collapse Born representation with the single-trial law DERIVED (not assumed).**
     Given the prize ensemble PLUS non-contextuality of the single-trial statistics (the law `p`
     is the value of a non-contextual effect assignment `M` on a measurement `{Pₐ}`), there is a
-    density matrix `ρ` such that: (i) every world has a UNIQUE actual pointer-value history
-    (capacity + selector, no collapse); (ii) the single-trial law is the Born weight
+    density matrix `ρ` such that: (i) every world has a UNIQUE actual pointer-value history —
+    the selector λ picks exactly one decohered record per site (no collapse; single outcomes are
+    λ's doing, not the capacity bound's — the "capacity forbids multi-record" reading is retired);
+    (ii) the single-trial law is the Born weight
     `Re tr(ρ Pₐ)` — FORCED by effect-Gleason; (iii) the world-mass of each history is the Born
     PRODUCT law; (iv) atypical-frequency histories carry vanishing world-mass.  The Born weights
     are no longer a free parameter — only NON-CONTEXTUALITY + independence (+ the world measure)
