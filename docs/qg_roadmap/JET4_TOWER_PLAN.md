@@ -3512,3 +3512,18 @@ continuity (Θ,u∈C² + htransport promotion) → (5) leviIter continuity by in
 through the induction) → (6) the uniform tail + hBcontEvery (the M-test; identify the tsum
 ONCE). Then: the C-measurability package + the D package + the B wiring + E/F + 
 geometry_census_at_gate + the one-rcases final assembly.
+
+---
+## J4-391 (e1c4b05a): THE DECISIVE AUDIT — wall A REDUCED to {capped-Lo} ∪ {MemAdjHi}
+
+`QIQTH/CappedAdom2Audit.lean` (4 decls std-3). The Sol-#16 brick-1/2/3 verdict:
+- LO leg: τ ≥ εₘ ⟹ the capped route WORKS (`hII_lo_from_capped`; per-m constants = the good
+  quantifier order; MemAdjLo per-m).
+- HI leg: τ ∈ (0,εₘ) ⟹ capped FAILS; but MemAdjHi's ONLY role = the integrability
+  prerequisite for `integral_add_adjacent_intervals` (the Hi SIZE dies by the matched-sliver
+  √ε cancellation) ⟹ the residue's route = matched-sliver/moment-aware, NOT domination.
+- ★ `memLapFull_from_pairing_dominations`: the FULL MemLapFull binder with NO uncapped
+  hAdom2 anywhere — carrying only the labelled `hII_hi : MemAdjHi`. The intrinsically-false
+  global hAdom2 census field is retired from the interface. J4-392 = hII_hi_from_matchedSliver
+  (the [u−εₘ,u] s-profile integrability via cancellation/continuity, not τ⁻¹ domination).
+raw 0; build ~30s. NOT a₁ = R/6 (CONDITIONAL).
