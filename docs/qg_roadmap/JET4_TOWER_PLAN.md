@@ -3404,3 +3404,12 @@ census binders (hmeasLo/Hi + hmeas2Lo/Hi; the Hi τ→0 endpoint via Ioo_ae_eq_I
 measurability residue → TWO joint-continuity atoms (hHeatCont/hSecCont on Ioc 0 T ×ˢ univ;
 J4-384 lifts the banked box-continuity towers local-to-global) + the standing hBcont carry.
 raw 0; build ~30s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-384 (a027bb4c): the strip joint-continuity atoms via box lifting
+
+`QIQTH/JointContinuityAtoms.lean` (3 decls std-3): `stripContOn_of_boxes` (the unconditional
+local-to-global lift, pure topology, f opaque) + `hHeatCont_of_boxes`/`hSecCont_of_boxes`.
+Inventory: the banked box towers are conditional (gate-local identity + explicit-formula
+continuity) and slice the OPPOSITE slot — pile (v) residual = the box-family carry + hBcont.
+raw 0; build 25s. NOT a₁ = R/6 (CONDITIONAL).
