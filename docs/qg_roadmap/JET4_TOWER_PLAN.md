@@ -3677,3 +3677,16 @@ K₁τ^{-1/2}+K₀ bound (sliver_term1_full_matched — the banked center-subtra
 shape). Remaining (hGpow_bridge_handoff): the concrete-witness slot instantiation
 (hon/hoff/hcomp/hf2bound/hf3bound) + hKnonneg + the s=u endpoint. J4-402 = A3 closure.
 raw 0; build ~20s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★★ J4-402 (cfdf8487): SOL #17 A3 — WALL A CLOSED (modulo enumerated carries)
+
+`QIQTH/GpowClosure.lean` (8 decls). C1 the concrete slots (hon_concrete from
+sliverIntegrand_on_collar · hcomp_concrete · the per-(τ,s) inner bound at the witness) · C2
+K_nonneg + the m-uniform Cpair · C3 the Ioo→uIoc endpoint upgrade + ★★★
+`memLapFull_from_gpow_chain` — the FULL threading (le_invSqrt → hII_hi_from_sliver → MemAdjHi
+→ memLapFull_from_pairing_dominations ⟹ MemLapFull; NO uncapped domination anywhere). The
+surviving carries enumerated (per-s slots + hgate + hEndpoint + continuity — all satisfiable).
+**ALL THE SOL #16/#17 ANALYTIC WALLS ARE NOW BRIDGED/CLOSED.** The remaining surface = the slot
+discharges (J4-403) + B (hDa/hLap) + F (per-u census) + G₁ + H. raw 0; build ~50s.
+NOT a₁ = R/6 (CONDITIONAL).
