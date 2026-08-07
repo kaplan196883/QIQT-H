@@ -20200,4 +20200,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Pd2ConvPerU.hfrozen_pd1_from_hQ1
 #print axioms QIQTH.Pd2ConvPerU.hPd2conv_perU
 
+-- ## J4-366 (HgateCensusAssembly): the hPd2conv LABEL RETIRED from the assembly
+-- hDaLimLU_from_hgate_census = the verbatim ~40-binder hDaLimLU_from_hgate
+-- signature with the atomic per-u hPd2conv binder (viii) REPLACED by the
+-- 14-binder per-u sliver census + germ-link block of hPd2conv_perU; body =
+-- one application. The assembly's surviving labelled inputs: hgate (the M2
+-- derivation) · dataAmp.hD2Hexpand (→ the matched sliver carries) · the germ
+-- links hfull_pd1 (→ banked hfam_v2; its carries nb/hlin/hD1 not yet assembly
+-- binders) / hfrozen_pd1 (→ the assembly's OWN hQ1 binder — internal
+-- discharge next). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.HgateCensusAssembly.hDaLimLU_from_hgate_census
+
 end QIQTH.AxiomAudit
