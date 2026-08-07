@@ -3640,3 +3640,15 @@ census: the global ∀x first-jet + general-base hVP/hPsq/hVQ — base-0 banked;
 the J4-156-class residual). E2 HANDOFF: the collar wrappers confine supports;
 cubic_gaussian_moment_witness banked; ρ=1 fixes the L_A_chart base; hqLip consumes hdisp.
 raw 0; build 30s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-399 (9f295e78): SOL #17 E2 — THE HIGH-RISK BRICK CLEARED
+
+`QIQTH/AmpQuantBundle.lean` (10 decls). Q1 the shared derivative bound · Q2 ★ L_A_chart
+(chartAmp_base_lipschitzOn_ball = the named L_g) + Aamp_times_F_lipschitz (the EXACT hqLip
+shape) · Q3 ★ the quadratic Taylor remainder + r≤1 absorption + the banked moment re-export ·
+the honest censuses {hAmpC1,hLρ,hMA,hLevi} ∪ {hAmpC2,✓,✓}. NO HARD WALL — the one reduction:
+the base-varying Φ∘W_bv C¹/C² composition (E3's first job; W_bv C²-at-0 banked). E3 handoff:
+M_ρ≤collarK banked (rhoRatio_le_collarK); L_ρ = the K·C_r·c²/4 D2-gradient carry; the wiring
+into amplitudeDataOn_concrete → amplitudePackageOn_sliver_bound → hbnd_concrete_v2. raw 0.
+NOT a₁ = R/6 (CONDITIONAL).
