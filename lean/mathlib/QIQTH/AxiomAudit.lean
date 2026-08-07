@@ -20127,4 +20127,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HrawNearIsometryConcrete.rncRadialSq_abs_sub_le
 #print axioms QIQTH.HrawNearIsometryConcrete.nearIsometry_concrete
 
+-- ## J4-362 (HrawPreCollapse): THE hraw FINISH — THE QUADRATIC RECONCILIATION
+-- P1 THE GRADING VERDICT (the 5th interface-shape finding): the honest pre-collapse
+-- in-chart form is width-1 QUADRATIC ((r²/τ)² + r²/τ + 1)·G_τ (the T2 metric-
+-- deviation term is genuinely quadratic), NOT the idealized linear hraw shape —
+-- but the extra power is A WIDTH (quadPoly_to_linearPoly_width: one widening
+-- absorbs one power). hEdom_of_quadPoly_residual_width (the quadratic bridge,
+-- E₁=0) + chartTransfer_quad(_from_nearIsometry) (width 1 chart → 4/3 ambient,
+-- poly factor 25/16) + GlobalGatedRawBoundQuadWidth + the gate assembly + ★
+-- hEdom_concrete_final (the EXACT hEdom ∃-shape from the honest on-gate width-4/3
+-- quadratic carry hgate). THE RESIDUE: hgate (the per-base parametrix/amplitude
+-- glued bound — named, satisfiable) + the mechanical hEdom-accepting re-thread of
+-- the labelled assembly (the signature names the linear hraw). std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HrawPreCollapse.hEdom_of_quadPoly_residual_width
+#print axioms QIQTH.HrawPreCollapse.quadPoly_to_linearPoly_width
+#print axioms QIQTH.HrawPreCollapse.chartTransfer_quad
+#print axioms QIQTH.HrawPreCollapse.chartTransfer_quad_from_nearIsometry
+#print axioms QIQTH.HrawPreCollapse.gatedRawBoundQuadWidth_of_onGate
+#print axioms QIQTH.HrawPreCollapse.hEdom_of_gatedRawBoundQuadWidth
+#print axioms QIQTH.HrawPreCollapse.hEdom_concrete_final
+
 end QIQTH.AxiomAudit
