@@ -572,6 +572,7 @@ import QIQTH.AffineGateTransport
 import QIQTH.NearIsometry43Budget
 import QIQTH.Transfer43Quad
 import QIQTH.OnGateGlue
+import QIQTH.PullbackAffineBallLeg
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

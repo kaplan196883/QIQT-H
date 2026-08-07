@@ -20334,4 +20334,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OnGateGlue.heatOp_globalCutoffWitness_eq_pullbackResidual_onPlateau
 #print axioms QIQTH.OnGateGlue.gatedKernel_heatOp_eq_pullbackResidual_onPlateau
 
+-- ## J4-374 (PullbackAffineBallLeg): the pullback-metric affine BALL LEG
+-- P0 verdict: rawResidualN1_affine_graded_quadPoly_width1 is GENERIC in
+-- (g,gi) — direct instantiation; the four coefficient carries discharge from
+-- the banked flow-frame uniforms (hCoeffU0_vanVleck / uniformCoeffLinear_bound
+-- / uniformFlowLaplaceBeltrami_w0_near_uniform /
+-- uniformFlowPullbackMetricInv_dev_uniform); the transfer legs are
+-- metric-independent (reused verbatim). pullbackAffine_width1 +
+-- pullbackAffine_onBall (the pullback residual ≤ (P₀+P₁τ)·quadPoly·G_{4/3}(z)
+-- on the ball) + ★ gatedHeatOp_pullbackAffine_onBallPlateau (composed with the
+-- J4-373 glue: THE ON-GATE BALL LEG of AffineGateBound — the gated witness's
+-- heatOp bounded near-diagonal). Remaining: the annulus (2b) off-plateau leg +
+-- the ∃-capstone (carry discharge + radius intersection + ball⊕annulus glue);
+-- then the banked affine finishers complete the chain. std-3 all 3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.PullbackAffineBallLeg.pullbackAffine_width1
+#print axioms QIQTH.PullbackAffineBallLeg.pullbackAffine_onBall
+#print axioms QIQTH.PullbackAffineBallLeg.gatedHeatOp_pullbackAffine_onBallPlateau
+
 end QIQTH.AxiomAudit
