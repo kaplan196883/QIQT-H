@@ -3332,3 +3332,15 @@ uniformCoeffLinear_bound · W0/W1 q-indep sups · hpt/hlap glue leg-agnostic. LA
 cutoffResidualN1_uniformFlow_narrow_mixed_below_lin, CoeffU1Fix:589-626) + the width-5/4-QUAD
 hEnear (lift hwidth1, fold 1→5/4); then U4 (both legs + the _of_good choice shell +
 hEdom_vanVleck_of_hgate_affine) RETIRES hgate. raw 0; build ~2-3min. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-379 (51e20fcc): THE ANNULUS LEG UNIFORMIZED — both legs uniform over K
+
+`QIQTH/AnnulusUniformization.lean` (3 decls std-3): `width1_residual_uniform` (the hwidth1
+lift) + `hEnear_uniform` (1→5/4) + ★ `gatedHeatOp_annulus_uniform` (FULL: six suppliers once,
+the τ-affine B₀/B₁ re-fold by ring, the leg-agnostic glue reused — the exact hann binder shape).
+BOTH width-4/3 QUAD legs now uniform (plateau cp262 + annulus THIS). A3 blocked structurally:
+each leg ∃-chooses its own (a,b); the stitch needs ONE pair. J4-380 = the common-(a,b) shell:
+∀-(a,b) leg restatements + the ConstRadiusGateExport hgoodC bundle re-pointed ⟹ AffineGateBound
+concrete ⟹ hEdom from geometry ⟹ ★ hgate RETIRED (residual inputs then only smoothness/gauge/
+frame + banked hCoeffU0/hCoeffLin1). raw 0; build 37s. NOT a₁ = R/6 (CONDITIONAL).
