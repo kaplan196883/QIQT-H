@@ -3549,3 +3549,13 @@ witnessSecondXDeriv member) + N2 (the heatOp slice) + the CAP box families (exac
 shapes) + the STRIP compositions. Carries: Θ/u regularity (satisfiable) + the witness ∂_τ-slice
 + spatial partials. J4-394 = Sol brick 5 (the z-slot leviIter induction, base = N2).
 raw 0; build 46s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-394 (fb80a232): SOL brick 5 — the z-slot iterE box induction
+
+`QIQTH/LeviIterBoxInduction.lean` (4 decls std-3). I1: NOT slot-symmetric (different integrand
+argument positions) — the generic engine (heatConv_eq_smul_unitInterval + double
+continuousOn_of_dominated) allowed a mechanical rebuild. The z-slot outer step + the iterE
+step + the FIXED-box induction (base = J4-393 N2) + the ∀τ₀∀R∀k family for the brick-6 M-test.
+J4-395 = brick 6: the box-sup of iterKernelW (the genuine step) + the Weierstrass tsum
+continuity + the strip lift ⟹ hBcontEvery. raw 0; build 45s. NOT a₁ = R/6 (CONDITIONAL).
