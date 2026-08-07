@@ -3068,3 +3068,21 @@ from the M2 ingredients); (2) the mechanical hEdom-accepting re-thread of
 concrete instantiations (pd_germ_eq_of_family on the carried hfam_v2 / the banked frozen
 linewise); (5) the data piles (dataLevi, the dominations, the W2 family, §I/J/K); (6) the
 final composition. Est. ~1–3 days.
+
+---
+## J4-364 (dcfba0e9): THE hraw LABEL RETIRED — the assembly re-threaded onto the hgate carry
+
+`QIQTH/LabelledRethreadV2.lean` (ns `QIQTH.LabelledRethreadV2`) — the mechanical re-thread.
+- `hDaLimLU_from_labelled_v2` — the compiled-source copy of `hDaLimLU_from_labelled` with the
+  `{P, hP, hraw}` trio → ONE direct width-3/2 `hEdom` ∃-binder (the exact
+  `hEdom_of_globalRawBound` conclusion shape); step (vii) = plain `obtain`. Same `DaLimLUGoal`.
+- `hEdom_vanVleck_of_hgate` — the one-delta bridge (`simp only [vanVleckGatedWitness]` head
+  rewrite only; nothing touched `uniformInverseChart` internals) feeding
+  `HrawPreCollapse.hEdom_concrete_final`.
+- ★ `hDaLimLU_from_hgate` — the capstone: the un-dischargeable global width-1 LINEAR `hraw`
+  label REPLACED by the honest reachable on-gate width-4/3 QUADRATIC `hgate` carry.
+
+Surviving labelled inputs of the one-theorem assembly: `hgate` (M2-ingredient derivation) ·
+`dataAmp.hD2Hexpand` (→ the matched sliver carries, J4-356) · per-`u` `hPd2conv` (→ the census
+corollary J4-363; the per-`u` instantiation = J4-365). All 3 std-3; raw 0; build 27s.
+NOT a₁ = R/6 (CONDITIONAL). Next: the hPd2conv per-u census instantiation, then the hgate M2 glue.
