@@ -3370,3 +3370,17 @@ fixes (a,b); the geometry ∃-chooses them — restate ∃-style, J4-381) + the 
 sliver census incl. dataAmp.hD2Hexpand) + hfull_pd1 + the E-combination carries + the data
 piles (dataLevi, the dominations) + the final a₁ composition. raw 0; build 32s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-381 (8229507b): the geometry hEdom threaded into the census assembly
+
+`QIQTH/CensusGeometryThread.lean`: ★ `hDaLimLU_from_geometry_census` — from GEOMETRY ONLY,
+∃(a,b,S): (the census (ii)-(ix) minus (vii) at that gate) ⟹ DaLimLUGoal at the vanVleck
+witness. NO circularity; the hEdom shapes matched VERBATIM (zero glue); the hEdom step (vii)
+is GONE from the labelled surface. THE REMAINING CENSUS INVENTORY (all at the geometry-chosen
+gate): (ii) hQ1/hFmeas/hFint/hF'meas/bnd/hbdd/hbound/hdiff (W2) · (iii) aa/haa/hau/hUTle
+(arithmetic) · (iv) C/dataLevi · (v) wA/CA/wA2/CA2 + hAdomHeat/hAdom2 + 4 measurabilities ·
+(vi) τ₀/dataAmp (hD2Hexpand)/hεaa/hετ₀ · (viii) hPd2conv (banked corollary; per-u
+instantiation) · (ix) hDa/hLap/hLapZ/hEZ/hLapS/hES. Next: pile (v)+(iii) (J4-382 — the
+dominations from the derived hEdom bound + banked suppliers), then (ix) integrability follows.
+raw 0; build 25s. NOT a₁ = R/6 (CONDITIONAL).
