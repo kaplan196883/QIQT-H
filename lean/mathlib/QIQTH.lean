@@ -553,6 +553,7 @@ import QIQTH.HrepGermFactorization
 import QIQTH.AmplitudeDataOnCollar
 import QIQTH.SliverBoundOnCollar
 import QIQTH.SliverTailMatched
+import QIQTH.SliverOffCollarMatched
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

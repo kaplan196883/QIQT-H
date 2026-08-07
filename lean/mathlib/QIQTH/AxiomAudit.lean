@@ -19996,4 +19996,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverTailMatched.sliver_term1_on_collar_matched
 #print axioms QIQTH.SliverTailMatched.tailMoment_bound
 
+-- ## J4-355 (SliverOffCollarMatched): SOL-#13 BRICK 2 — THE OFF-COLLAR MATCHED
+-- O1 gaussDdim_chart_comparison (|G^chart − G| ≤ (Ln/4)(√C')ⁿ·(‖z‖³/τ)·G_{C'τ},
+-- C' = (1−Lr₀)⁻¹ — the width algebra exp_weight_gaussDdim' + |eˣ−1| ≤ |x|e^{|x|};
+-- the concrete corollary at the shrunk gate from the banked near-isometry).
+-- O2 the integrand difference decomposition + norm bound. O3 sliver_term1_off_
+-- collar_matched (‖∫_O Ichart − q0·T_τ‖ ≤ (Bcomp + L(15n/2))/√τ, B₁'=0 — the
+-- increment leg PROVEN; the comparison leg = the named satisfiable hcomp moment
+-- carry). O4 cubic_contact_gradient_bound + THE VERDICT: the gradient bound is
+-- NOT derivable from the banked C⁰ displacement alone — needs Db = O(‖z‖) (the
+-- derivative-level displacement carry, SHARED with brick 1's hqLip). std-3 all 10.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.SliverOffCollarMatched.abs_exp_sub_one_le
+#print axioms QIQTH.SliverOffCollarMatched.gaussDdim_ratio
+#print axioms QIQTH.SliverOffCollarMatched.exp_weight_gaussDdim'
+#print axioms QIQTH.SliverOffCollarMatched.gaussDdim_chart_comparison
+#print axioms QIQTH.SliverOffCollarMatched.chartGauss_comparison_concrete
+#print axioms QIQTH.SliverOffCollarMatched.chartNative_leading_sub_hess_norm_le
+#print axioms QIQTH.SliverOffCollarMatched.hessGaussIncrement_offCollar_norm_le
+#print axioms QIQTH.SliverOffCollarMatched.sliver_term1_off_collar_matched
+#print axioms QIQTH.SliverOffCollarMatched.cubic_contact_gradient_bound
+
 end QIQTH.AxiomAudit
