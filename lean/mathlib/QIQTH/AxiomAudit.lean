@@ -20567,4 +20567,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ESLegWidening.hES_all
 #print axioms QIQTH.ESLegWidening.hLapS_all
 
+-- ## J4-388 (EveryCeilingFamilies): the every-ceiling dominations constructed
+-- hAdomEvery_from_hEdom (each ceiling Tc via the J4-382 repackaging of the
+-- UNCAPPED affine hEdom — geometry) + hFdomEvery_from_dataLevi (the ∀t'
+-- hpkgBound serves EVERY ceiling — one carry, per-Tc dataLevi re-run) +
+-- ★ THE F3 UNLOCK: on the pairing interval τ = u−s ≥ εₘ > 0, so the crude
+-- C·τ⁻¹·G second-derivative bank becomes (C/εₘ)·G — pairing_
+-- intervalIntegrable_lowerCapped (the faithful lower-capped engine v2) +
+-- gaussDdim_crude_to_capped + hLapS_all_capped (the census hLapS end-to-end
+-- from the crude bank). hES_hypothesis_light: hES from geometry + {hEdom,
+-- the 2 dataLevi carries, hmeas}. Residual carries of the (ix) s-legs:
+-- hEdom (banked), hpkgBound/hEmeas (fixed-gate banked), the crude hAdom2
+-- bank, the ∀u hmeas slices (J4-389 — NOTE the J4-383 SliceMeasurability
+-- machinery may supply them per dont-undercredit). std-3 all 6.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.EveryCeilingFamilies.hAdomEvery_from_hEdom
+#print axioms QIQTH.EveryCeilingFamilies.hFdomEvery_from_dataLevi
+#print axioms QIQTH.EveryCeilingFamilies.hES_hypothesis_light
+#print axioms QIQTH.EveryCeilingFamilies.pairing_intervalIntegrable_lowerCapped
+#print axioms QIQTH.EveryCeilingFamilies.gaussDdim_crude_to_capped
+#print axioms QIQTH.EveryCeilingFamilies.hLapS_all_capped
+
 end QIQTH.AxiomAudit
