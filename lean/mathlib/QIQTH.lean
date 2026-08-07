@@ -565,6 +565,7 @@ import QIQTH.Pd2ConvDissolution
 import QIQTH.LabelledRethreadV2
 import QIQTH.Pd2ConvPerU
 import QIQTH.HgateCensusAssembly
+import QIQTH.FrozenGermInternal
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

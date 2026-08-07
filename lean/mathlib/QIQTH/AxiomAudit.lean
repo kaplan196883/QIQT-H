@@ -20211,4 +20211,17 @@ namespace QIQTH.AxiomAudit
 -- discharge next). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.HgateCensusAssembly.hDaLimLU_from_hgate_census
 
+-- ## J4-367 (FrozenGermInternal): hfrozen_pd1 DISCHARGED INTERNALLY (zero new labels)
+-- fbulkInt = hQ1's RHS truncated s-integral as a def (semireducible ⟹ hQ1's
+-- conclusion is definitionally the fbulkInt germ; no conversion needed) +
+-- hDaLimLU_from_hgate_census_v2 = the wrapper with fbulk SPECIALIZED to
+-- fbulkInt and hfrozen_pd1 REBUILT INTERNALLY from the assembly's own
+-- hQ1/V/hVopen/hV0 via hfrozen_pd1_from_hQ1. hbulkderiv/hbulk_tendsto now
+-- anchored to the concrete integral (same satisfiable sliver data). Assembly's
+-- surviving labels: hgate (M2) · dataAmp.hD2Hexpand · hfull_pd1 (needs
+-- hlin/hD1 pre-discharged first — lateral otherwise). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.FrozenGermInternal.fbulkInt
+#print axioms QIQTH.FrozenGermInternal.hDaLimLU_from_hgate_census_v2
+
 end QIQTH.AxiomAudit
