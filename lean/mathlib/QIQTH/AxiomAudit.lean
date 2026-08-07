@@ -20093,4 +20093,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HrawCampaignOne.gatedWitness_heatOp_eq_zero_offSupport
 #print axioms QIQTH.HrawCampaignOne.gatedRawBound_of_onGate
 
+-- ## J4-360 (HrawChartTransfer): THE WIDTH-1-WITH-POLY TRANSFER + THE BRIDGE
+-- T1 the two-sided near-isometry budgets (δ-general + the δ=1/4 landing:
+-- r²_z ≤ (4/3)r²_v ∧ r²_v ≤ (5/4)r²_z). T2 chartTransfer_width1_poly (+_from_
+-- nearIsometry): the width-1 chart form → the ambient width-4/3-with-poly (the
+-- (5/4)√(4/3)ⁿ constants explicit) + hEdom_of_gaussPoly_residual_width (the
+-- width-parametric bridge, w₀ ∈ (0,3/2)). T3 VERDICT: the width-1-with-poly
+-- in-chart pre-collapse form is NOT extractable from the bank as-is (the M2 chain
+-- collapses before naming it) — the honest hgate carry. T4 GlobalGatedRawBound-
+-- Width + gatedRawBoundWidth_of_onGate + hraw_variant_concrete (the capstone:
+-- the on-gate width-4/3 carry ⟹ the width-3/2 hEdom). REMAINING hraw: (1) the
+-- pre-collapse in-chart extraction · (2) the concrete two-sided near-isometry ·
+-- (3) the wiring. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HrawChartTransfer.nearIsometry_budgets_gen
+#print axioms QIQTH.HrawChartTransfer.nearIsometry_budgets
+#print axioms QIQTH.HrawChartTransfer.chartTransfer_width1_poly
+#print axioms QIQTH.HrawChartTransfer.chartTransfer_from_nearIsometry
+#print axioms QIQTH.HrawChartTransfer.hEdom_of_gaussPoly_residual_width
+#print axioms QIQTH.HrawChartTransfer.gatedRawBoundWidth_of_onGate
+#print axioms QIQTH.HrawChartTransfer.hEdom_of_gatedRawBoundWidth
+#print axioms QIQTH.HrawChartTransfer.hraw_variant_concrete
+
 end QIQTH.AxiomAudit

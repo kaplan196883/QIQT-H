@@ -558,6 +558,7 @@ import QIQTH.SliverAssemblyMatched
 import QIQTH.DisplacementDerivative
 import QIQTH.CensusSweepOne
 import QIQTH.HrawCampaignOne
+import QIQTH.HrawChartTransfer
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
