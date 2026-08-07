@@ -3394,3 +3394,13 @@ the same E₀/E₁ feed step (vii) and hAdomHeat). HONEST: hAdom2 CARRIED (the b
 divergent-strip crude τ⁻¹ shape; route = the moment-aware WideSliverBoundary campaign) + the 4
 s-slice measurabilities CARRIED (supplied nowhere in-bank; J4-383 = the compositional supplier).
 raw 0; build 46s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-383 (d58db818): all 4 census s-slice measurabilities supplied
+
+`QIQTH/SliceMeasurability.lean` (7 decls std-3): the route-(a) continuity discharge on the
+banked InnerMeasFubini stack — `sliceMeas_of_jointCont` (the reusable core) + the 4 exact
+census binders (hmeasLo/Hi + hmeas2Lo/Hi; the Hi τ→0 endpoint via Ioo_ae_eq_Ioc). Pile (v)'s
+measurability residue → TWO joint-continuity atoms (hHeatCont/hSecCont on Ioc 0 T ×ˢ univ;
+J4-384 lifts the banked box-continuity towers local-to-global) + the standing hBcont carry.
+raw 0; build ~30s. NOT a₁ = R/6 (CONDITIONAL).
