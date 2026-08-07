@@ -3652,3 +3652,16 @@ the base-varying Φ∘W_bv C¹/C² composition (E3's first job; W_bv C²-at-0 ba
 M_ρ≤collarK banked (rhoRatio_le_collarK); L_ρ = the K·C_r·c²/4 D2-gradient carry; the wiring
 into amplitudeDataOn_concrete → amplitudePackageOn_sliver_bound → hbnd_concrete_v2. raw 0.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-400 (8e202a99): SOL #17 E3 — the dataAmp assembly
+
+`QIQTH/DataAmpAssembly.lean` (11 decls). D1 the Φ∘W_bv BASE-slot composition (hAmpC1/hAmpC2
+UNCONDITIONAL at base 0; L_A landed) · D2 all three (M_ρ re-export · ★ L_ρ LANDED (exp of a C²
+exponent) · M_A local) · D3 ★ concrete_hqLip_of_carries (the EXACT hqLip field, Lq explicit) ·
+D4 the honest census {hMAcollar, hLevi, hiso, hjets, hmeas} + THE HONESTY NOTE: the
+unrestricted census-(vi) dataAmp is NOT constructible at the true chart (hV0 false off-flat,
+J4-351/356) — the assembleable object is the COLLAR-RESTRICTED AmplitudeDerivativeDataOn
+(hD2Hexpand via hD2HexpandOn_concrete; the assembly inverts the J4-356 reduction). A1 handoff:
+the concrete amplitudes + collar hD2Hexpand + hqLip feed amplitudePackageOn_sliver_bound;
+residual = compactness bookkeeping. raw 0; build 26s. NOT a₁ = R/6 (CONDITIONAL).
