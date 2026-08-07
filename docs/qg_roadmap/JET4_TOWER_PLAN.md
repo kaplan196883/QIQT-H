@@ -3423,3 +3423,14 @@ bound · summability · integrability · leviSeries termwise + envelope) + hEzer
 Surviving: hpkgBound (banked at the literal constGate, J4-316) + hEmeas (banked fixed-gate,
 tripleHEmeas_concrete_v4). hBcont does NOT fall out (honest). raw 0; build 25s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-386 (b5fc5dd8): census pile (ix) — the z-leg integrabilities discharged
+
+`QIQTH/ECombinationDischarge.lean` (3 decls std-3). VERDICTS: hDa/hLap NOT definitional (the
+census bodies = the banked W2 representation outputs hDa_threaded/hLap_threaded — honest
+carries with banked routes). LANDED: `integrable_of_two_gaussDom` (the two-Gaussian product
+workhorse via gaussDdim_pair_integrable) + `hEZ_windowed` (hAdomHeat × Levi envelope) +
+`hLapZ_from_dom` (the laplaceBeltrami-slice domination; the hAdom2 bridge open per D3).
+hES/hLapS = windowed-supplied; the ∀u widening = J4-387. raw 0; build 25s.
+NOT a₁ = R/6 (CONDITIONAL).
