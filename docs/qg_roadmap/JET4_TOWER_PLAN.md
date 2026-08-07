@@ -3306,3 +3306,15 @@ vanishing, to confirm in the capstone). J4-377 = the 3-region ∃-capstone: regi
 r₁-min + the carry discharges (hpt/hlap/hS/hEnear/hHann/hDHann/uniforms) + coefficient max ⟹
 AffineGateBound DERIVED ⟹ the banked finishers ⟹ ★ the hgate label RETIRED. raw 0; build 36s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-377 (499db5f8): the 3-region stitching of AffineGateBound
+
+`QIQTH/AffineGateCapstone.lean` (3 decls std-3): C1 `expPoint_of_mem_closure` (the _of_good
+hclos mirror) · C2 `gatedHeatOp_eq_zero_exterior` (the collar b<‖v‖≤c vanishing — NOT empty;
+cutoff-zero germ + heatOp locality) · ★ C3 `affineGateBound_of_legs` — given the two UNIFORM
+leg bounds, AffineGateBound follows with (max P₀, max P₁); consumes directly into the census_v2
+assembly step (vii). C4 honestly deferred: the banked legs are per-(q,v,τ); the residual gap to
+an unconditional hgate = THE FLOW-FRAME UNIFORMIZATION (J4-378 — the suppliers are the banked
+compact-K uniforms the compiled chain already uses) + the census data piles. raw 0; build 27s.
+NOT a₁ = R/6 (CONDITIONAL).
