@@ -2955,3 +2955,14 @@ VERDICT: needs Db = O(‖z‖) (the derivative-level displacement carry, SHARED 
 brick 1's hqLip; not banked). std-3 all 10, raw 0. NOT a₁=R/6. NEXT: J4-356 =
 brick 3 (the assembly: A₀T_τ cancels; the hcomp discharge; terms 2/3; ⟹ the
 unchanged hbnd ⟹ hD2Hexpand fully closed mod the enumerated carries).
+
+## J4-356 (2026-08-07, 2ba74ad8) — ★★ THE SOL-#13 MATCHED-PAIR CAMPAIGN COMPLETE ★★ [AF]
+Terms-2/3 verdict: only term 1 cancels; 2/3 absolute. A1 the term-1 assembly
+PROVEN (A₀T_τ cancels exactly). A2 the hcomp discharge machinery + the τ^{3/2}
+satisfiability witness. A4 the √ε conclusion (amplitudePackageOn_sliver_bound).
+A5 the COMPLETE 5-carry census: hcubic(sat) · hgate · hdisp (THE shared Db=O(‖z‖)
+displacement derivative — the one new geometric item) · hjets · hcenter. THE
+hD2Hexpand INPUT reduced to the five carries. std-3, raw 0. NOT a₁=R/6. NEXT:
+J4-357 = DisplacementDerivative (the hdisp campaign — likely NEARLY BANKED via
+the J4-273/274 terminal-velocity machinery: W z 0 = −T₀-form + TerminalVelC2 ⟹
+Db = id − DT₀ with DT₀(0)=id ⟹ the C²-modulus Lipschitz).
