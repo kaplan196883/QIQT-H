@@ -3173,3 +3173,41 @@ the consumer interface. Remaining per Sol #15: brick 2 (the raw affine pre-absor
 estimate deriving AffineGateBound from the M2 ingredients — the CoeffU1Fix map first) + brick 3
 (w₀→4/3 normalized comparison) + the combined ∃(a b C P₀ P₁ S) capstone. raw 0; build ~48s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-369 (18e99cae): SOL #15 BRICK 2 — the CoeffU1Fix MAP + the raw affine graded estimate
+
+`QIQTH/AffineRawResidual.lean` (ns `QIQTH.AffineRawResidual`), 4 decls std-3.
+
+### THE PHASE-1 MAP (the narrow-route cartography of the _lin chain)
+(i) RESIDUAL DECOMPOSITION: `parametrixResidual_N0_O1_isolated_C2` (ResidualN0FiniteReg:297) —
+    the three-term raw identity AT WIDTH 1: T1 = (1/τ)G·totalRadialO1_coeff → grade x;
+    T2 = (1/τ²)G·((−1/4)Σ(g̃⁻¹−δ)vv)·w₀ → grade x²; T3 = G·Δ_{g̃}w₀ → grade 1.
+    N=1: `parametrixResidual_one_split` (ResidualN1GaussianBound:145): R₁ = R₀[u]+H₀[u']+τR₀[u'].
+(ii) Δu₁ CARRY: the INDEPENDENT sup-on-compact black box
+    `uniformFlowLaplaceBeltrami_w0_near_uniform` (obtained CoeffU1Fix:374) — NOT derived from
+    |u₁|≤C₁r. The τ-LINEAR term = the O(r) shifted-profile coefficient's √τ gain
+    (CoeffU1Fix:538), not Δu₁.
+(iii) FIRST POISONING: the narrow route survives to width 3/2
+    (`cutoffResidualN1_uniformFlow_narrow_mixed_below_lin`, CoeffU1Fix:562, (B₀+B₁τ)·G_{3/2});
+    the first irreversible width-2 step = `gaussDdim_le_gaussDdim_chart (3/2→2)` at
+    CoeffU1Fix:871–874. Pre-871 reusable; the width-2 capstone poisoned.
+(iv) GATE FACTS: ∃S from `gatedWitnessN1_hEboundW_le_of_good` (applied CoeffU1Fix:792): radii
+    a<b<c<ρc, plateau germs (hchartGerm); off-gate vanishing =
+    `HrawCampaignOne.gatedWitness_heatOp_eq_zero_offSupport` (already consumed by the affine chain).
+
+### LANDED
+`rawResidualN0_graded_quadPoly_width1` (the promoted slice, 3 per-term graded bounds) ·
+`rawResidualN0_graded_quadPoly_width43` (normalized 1→4/3 fold) ·
+`tauResidualN0_Or_graded_quadPoly_width1` (the τ-branch: Cc(1+τ)√x·G via √τ≤1+τ, √x≤quadPoly) ·
+★ `rawResidualN1_affine_graded_quadPoly_width1` — ∃P₀P₁≥0: |parametrixResidualN 1| ≤
+(P₀+P₁τ)·quadPoly(r²/τ)·G_τ at width 1, P₁ = Cc1+n²MdW1/4+L1 ≠ 0 — the inner AffineGateBound
+shape. All hypotheses = pointwise instances of banked uniform bounds (no fake carries).
+
+### RESIDUE to AffineGateBound (3 bricks)
+(1) the trivial 1→4/3 affine fold; (2) HEAVY: the transport/cutoff promotion — the pre-871
+slice (heatOp(gatedKernel…) = radialCutoff·∂ₜH − Δ(radialCutoff·H) + annulus estimates)
+re-targeted to width 4/3 chart frame (⚠ 4/3 < 3/2: the 3/2 assembly can NOT be consumed
+directly — stop at width 1 and fold); (3) the chart displacement transfer v→(p−q). Then
+`hEdom_vanVleck_of_hgate_affine` consumes AffineGateBound directly. raw 0; builds 34–42s.
+NOT a₁ = R/6 (CONDITIONAL).
