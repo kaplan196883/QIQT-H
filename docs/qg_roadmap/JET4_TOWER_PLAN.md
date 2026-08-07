@@ -3629,3 +3629,14 @@ hAdom2, no stale fixed-radius packages in context); per-brick audits on E3/A3/B2
 THE SEQUENCE: J4-398=E1 · 399=E2 · 400=E3 · 401=A1+A2 · 402=A3+closure · 403=B1 · 404=B2 ·
 405=F1 · 406=F2 · 407=F3 · 408=G₁+the one-rcases final assembly. The remaining analytic risk
 is CONCENTRATED in J4-399..401; everything after hGpow is interface/gate-discipline work.
+
+---
+## J4-398 (6224b3dc): SOL #17 E1 — the amplitude geometry bundle
+
+`QIQTH/AmpGeometryBundle.lean` (7 decls). hcenter LANDED (rhoRatio_center ρ(τ,0)=1 + the
+qz0=qc0 anchor) · sliver-hgate LANDED (the collar⊆gate-ball wrappers incl.
+not_collarRegime_of_radius) · hjets SHAPED (HjetsShape + hjets_assemble + the honest residual
+census: the global ∀x first-jet + general-base hVP/hPsq/hVQ — base-0 banked; general-base =
+the J4-156-class residual). E2 HANDOFF: the collar wrappers confine supports;
+cubic_gaussian_moment_witness banked; ρ=1 fixes the L_A_chart base; hqLip consumes hdisp.
+raw 0; build 30s. NOT a₁ = R/6 (CONDITIONAL).
