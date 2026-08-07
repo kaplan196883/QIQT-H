@@ -3118,3 +3118,40 @@ Assembly's surviving labelled inputs: `hgate` (M2 derivation) · `dataAmp.hD2Hex
 matched sliver carries) · `hfull_pd1`/`hfrozen_pd1` (germ links: frozen → the assembly's OWN
 `hQ1` binder, internal discharge = J4-367; full → banked `hfam_v2`, carries not yet assembly
 binders, deferred as a lateral trade). std-3; raw 0; build 27s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-367 (7a037a3d): hfrozen_pd1 DISCHARGED INTERNALLY — zero new labels
+
+`QIQTH/FrozenGermInternal.lean`: `fbulkInt` (hQ1's RHS as a semireducible def — hQ1's conclusion
+IS the fbulkInt germ definitionally) + `hDaLimLU_from_hgate_census_v2` (fbulk specialized,
+hfrozen_pd1 rebuilt internally from the assembly's own hQ1/V/hVopen/hV0). Assembly's surviving
+labels: hgate · dataAmp.hD2Hexpand · hfull_pd1 (needs hlin/hD1 first — deferred). std-3; raw 0.
+
+## ★ SOL CONSULT #15 (hgate): THE SIXTH INTERFACE-SHAPE FINDING — hgate as banked is FALSE
+
+Q1 VERDICT: the τ-UNIFORM `hgate` binder (P with no τ-growth) is UNSATISFIABLE for the concrete
+N=1 witness — the residual term τ·(Δu₁)·G grows linearly in τ while Q(r²/τ)·G_{4/3} stays
+bounded per (p,q). The banked C(1+t) in the width-2 capstone was a GENUINE affine term, not
+slack. HONEST SHAPE: `∃ P₀ P₁ ≥ 0, |heatOp …| ≤ (P₀+P₁τ)·(quadPoly(r²/τ))·G_{(4/3)τ}` on-gate;
+threads through the width absorption UNCHANGED (E₀:=A·P₀, E₁:=A·P₁ — hEdom_of_quadPoly_
+residual_width already emits (E₀+E₁τ); only the E₁=0 hard-coding in the wrappers needs the
+affine variant).
+
+Q2 ROUTE (a)+(c-small), 4 bricks: (1) the pure quadratic grading helper grade₂(x)=1+√x+x+x√x+x²
+≤ 5·quadPoly(x) (via √x≤1+x, x√x≤x+x²); (2) the raw affine on-gate residual estimate at the
+pre-absorption width w₀<4/3 (reuse hCoeffU0_vanVleck + uniformCoeffLinear_bound + the N=1
+residual decomposition slice as black boxes; ⚠ |u₁|≤C₁r does NOT bound Δu₁ — reuse the _lin
+chain's internal uniform DERIVATIVE bounds; τ⁰ terms → A₀, the τ·Δu₁/cutoff terms → A₁; no τ²);
+(3) normalize grades + the NORMALIZED width comparison w₀→4/3 (dimension constant — no bare
+G₁≤G_{4/3}!); (4) the thin affine hEdom wrapper. DON'T clone the _lin chain with a width
+parameter (route b) — the first irreversible width-2 absorption step poisons everything after.
+
+Q3: publish a COMBINED ∃ (a b C P₀ P₁ S) capstone emitting BOTH the global width-2 arm AND the
+narrow on-gate affine arm for the SAME S (never obtain from two independent ∃-producers —
+S₁≠S₂). Internally: arbitrary-S narrow theorem under an explicit gate-facts package.
+
+TRAPS: closure≠membership (need closure(S q) ⊆ {χ=1} plateau); the width-algebra sign
+(1/(4/3)−1/(3/2)>0); type (4/3 : ℝ) explicitly; choose a,b,S ONCE (no repeated .choose).
+
+CONSEQUENCE: the assembly's hgate binder (hDaLimLU_from_hgate/_census/_census_v2) and
+hEdom_concrete_final's hgate need the AFFINE reshape — mechanical re-thread + the 4 new bricks.
