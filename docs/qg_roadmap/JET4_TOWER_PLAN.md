@@ -3559,3 +3559,15 @@ continuousOn_of_dominated) allowed a mechanical rebuild. The z-slot outer step +
 step + the FIXED-box induction (base = J4-393 N2) + the ∀τ₀∀R∀k family for the brick-6 M-test.
 J4-395 = brick 6: the box-sup of iterKernelW (the genuine step) + the Weierstrass tsum
 continuity + the strip lift ⟹ hBcontEvery. raw 0; build 45s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-395 (5ed8af17): SOL brick 6 — hBcontEvery ASSEMBLED; THE C PILE CLOSES
+
+`QIQTH/LeviMTest.lean` (7 decls std-3). M0: the consumers want the x-slot leviSeries p.1 p.2 0
+— the BANKED x-slot iterE family serves it (J4-394's z-slot = other consumers). M1 (the
+genuine step): the box-uniform majorant (modelCoeff time-monotone + the diagonal-peak/
+width-antitone Gaussian sup → the explicit gaussDdim τ₀ 0 prefactor; summable via the banked
+scaledModelCoeff_summable). M2: the Weierstrass M-test. M3: the strip + ★ hBcontEvery_of_carries
+(verbatim consumer shape). hBcontEvery reduced to {hmajor (banked), htermBoxEvery (residual =
+the per-rung W2 carries)}. THE C PILE (the continuity floor) CLOSES. J4-396 = the D pile (W2).
+raw 0. NOT a₁ = R/6 (CONDITIONAL).
