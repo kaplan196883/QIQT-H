@@ -3719,3 +3719,13 @@ the concrete pair; hProv = the 7 bundled satisfiable diff-under-∫ legs = the w
 shape on the diagonal window) · P2 the MemInterchange ∀u-tail (★ the degenerate leg
 UNCONDITIONAL — both sides collapse to 0 via Levi vanishing; memInterchange_widened).
 J4-406 = F2 (hD1 via HD1SliverRoute). raw 0; build 48s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-406 (51dd8e29): SOL #17 F2 — the concrete hD1 fired
+
+`QIQTH/HD1Concrete.lean` (5 decls std-3). The census map: sSet=univ + fbulk=fbulkInt (banked)
++ gcoef definitional + hb/hbulk_tendsto DISCHARGED (the primitive route; the hGint carry) +
+the 3 analytic carries (order-2 sliver shapes). ★ THE CORRESPONDENCE CONFIRMED: the hD1
+census IS the Pd2ConvPerU per-u census (identical family). ★ hD1_concrete FIRED from
+hD1_conditional. J4-407 = F3 (hfam_v2 + hfull_pd1 + the tuple). raw 0. NOT a₁ = R/6
+(CONDITIONAL).
