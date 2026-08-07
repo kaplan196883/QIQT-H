@@ -20734,4 +20734,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.W2Package.«w2_hF'meas»
 #print axioms QIQTH.W2Package.w2_measPack
 
+-- ## J4-397 (W2Finish): THE D PILE FIRES — all 8 census-(ii) binders routed
+-- w2_hFint (the truncated-window pairing integrability — the capped template
+-- at the τ≥εₘ floor) + w2_hdiff (the innerZ_line_hasDerivAt re-export; one
+-- bundled hInnerData carry) + w2_hQ1 (pd_heatConvFrozen_interchange threaded;
+-- one bundled hFrozenData carry) + ★ memInterchange_at_gate (the reduced-
+-- interface firing through witness_MemInterchange — the verbatim
+-- MemInterchange member; surviving carries = the honest joint legs + the
+-- bundled data + the bound triple). All 8 (ii) binders now route to named
+-- honest carries. Per SOL #17: the critical path = E (dataAmp jets) →
+-- A (hGpow via the matched-sliver bank — NO new cancellation needed) → B.
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.W2Finish.w2_hFint
+#print axioms QIQTH.W2Finish.w2_hdiff
+#print axioms QIQTH.W2Finish.w2_hQ1
+#print axioms QIQTH.W2Finish.memInterchange_at_gate
+
 end QIQTH.AxiomAudit

@@ -595,6 +595,7 @@ import QIQTH.NonLeviBoxContinuity
 import QIQTH.LeviIterBoxInduction
 import QIQTH.LeviMTest
 import QIQTH.W2Package
+import QIQTH.W2Finish
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
