@@ -576,6 +576,7 @@ import QIQTH.PullbackAffineBallLeg
 import QIQTH.AnnulusAffineLeg
 import QIQTH.AnnulusAmbientTransfer
 import QIQTH.AffineGateCapstone
+import QIQTH.LegUniformization
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

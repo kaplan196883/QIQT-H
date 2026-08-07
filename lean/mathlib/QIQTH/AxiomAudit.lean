@@ -20409,4 +20409,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AffineGateCapstone.gatedHeatOp_eq_zero_exterior
 #print axioms QIQTH.AffineGateCapstone.affineGateBound_of_legs
 
+-- ## J4-378 (LegUniformization): THE PLATEAU LEG UNIFORMIZED
+-- The supplier map: the plateau leg's (P₀,P₁) are fully ALGEBRAIC in the
+-- compact-K uniforms (Md ← uniformFlowPullbackMetricInv_dev_uniform · Cc0 ←
+-- hCoeffU0_vanVleck · L0/L1 ← uniformFlowLaplaceBeltrami_w0_near_uniform ·
+-- Cc1 ← uniformCoeffLinear_bound · W0/W1 q-indep sups; hpt/hlap glue leg-
+-- agnostic). plat_residual_uniform_width43 (a SINGLE (ρ,P₀,P₁) over K) +
+-- ★ gatedHeatOp_plateau_uniform (the hplat_uniform in the EXACT
+-- affineGateBound_of_legs binder shape at the concrete chart). Annulus
+-- residue: the τ-affine Kcof/Kder re-fold (the B₀/B₁ step of
+-- cutoffResidualN1_uniformFlow_narrow_mixed_below_lin :589-626) + the
+-- width-5/4-QUAD hEnear (fold the width-1 uniform 1→5/4) = J4-379; then U4
+-- retires hgate. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.LegUniformization.plat_residual_uniform_width43
+#print axioms QIQTH.LegUniformization.gatedHeatOp_plateau_uniform
+
 end QIQTH.AxiomAudit
