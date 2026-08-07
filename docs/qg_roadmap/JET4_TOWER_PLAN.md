@@ -2912,3 +2912,12 @@ chart jets + hVP/hPsq/hVQ only). B3 amplitudeDataOn_concrete (the FULL corrected
 bundle at the true chart; M_j = K·M_jchart). std-3 all, raw 0. NOT a₁=R/6. NEXT:
 J4-353 = SliverBoundOnCollar (Sol brick 2: the sliver-bound re-derivation with the
 hbnd conclusion unchanged; the off-collar tail handling).
+
+## J4-353 (2026-08-07, c49249cd) — SliverBoundOnCollar: THE ON-COLLAR LEGS + THE SPLIT VERDICT [AF]
+S1: sliver2_bound consumes GLOBALLY (the √ε gain = the full-space Hessian moment
+cancellation — fails on sub-domains; every exact-constant global-bundle route
+unsatisfiable). The on-collar legs banked (collar_to_regime + the 3-term identity +
+the bounds + the integrand identity, hV0-free). ★ THE CARRY TRANSFORMED: hD2Hexpand
+CLOSED on the collar; the residue = THE OFF-COLLAR SLIVER REMAINDER (the tail +
+the moment split). std-3 all 6, raw 0. NOT a₁=R/6. NEXT: Sol consult on the split
+design (the A(0)-moment full-space + Lipschitz-increment architecture), then J4-354.
