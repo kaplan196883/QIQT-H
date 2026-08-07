@@ -20921,4 +20921,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PerUProviders.memInterchange_body_deg
 #print axioms QIQTH.PerUProviders.memInterchange_widened
 
+-- ## J4-406 (HD1Concrete): SOL #17 F2 — the concrete hD1 fired
+-- THE CENSUS MAP: sSet=univ (discharged) · fbulk := fbulkInt (banked) ·
+-- gcoef = the Dmap coefficient (definitional) · hb DISCHARGED
+-- (sliver_bound_tendsto_zero ∘ tendsto_comp_epsSeq) · hbulk_tendsto
+-- DISCHARGED on the hGint carry (bulk_tendsto_of_primitive; fbulkInt IS
+-- definitionally the truncated primitive) · hbulkderiv/hsliver/hcont = the
+-- three analytic carries (the order-2 sliver bricks). THE CORRESPONDENCE
+-- CONFIRMED: the hD1 census IS the Pd2ConvPerU per-u census (identical
+-- family, not a mirror). ★ hD1_concrete: ContDiffAt ℝ 1 (Dmap …) 0 FIRED
+-- from hD1_conditional (6 members internal; 3 carries + hGint). std-3 all 5.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HD1Concrete.sSet_concrete_isOpen
+#print axioms QIQTH.HD1Concrete.sSet_concrete_mem_nhds
+#print axioms QIQTH.HD1Concrete.hb_concrete
+#print axioms QIQTH.HD1Concrete.hbulk_tendsto_concrete
+#print axioms QIQTH.HD1Concrete.hD1_concrete
+
 end QIQTH.AxiomAudit
