@@ -20820,4 +20820,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DataAmpAssembly.concrete_hqLip_of_carries
 #print axioms QIQTH.DataAmpAssembly.dataAmp_assembly_carries_intro
 
+-- ## J4-401 (GpowBridge): SOL #17 A1+A2 — the hGpow bridge
+-- A1 (equality, no estimates): leviPairing_integral_split3 +
+-- matchedTerm1_collar_split + ★ leviSecondPairing_eq_matchedAssembly (the
+-- full signed pairing = the matched term-1 collar/off-collar pair + the
+-- gradient + mass integrals; carries = the hon/hoff transport-slice
+-- identities + integrabilities). A2: ★★ leviSecondPairing_inner_bound (the
+-- per-τ K₁τ^{-1/2}+K₀ bound wiring sliver_term1_full_matched — the banked
+-- center-subtraction IS the τ⁻¹→τ^{-1/2} improvement, per SOL #17 no new
+-- moment development) + invSqrt_absorb (ONLY the upper endpoint τ≤ε* — never
+-- τ≥εₘ) + ★★★ leviSecondPairing_le_invSqrt (∃Cpair≥0 CHOSEN BEFORE the m,s
+-- binders — the EXACT m-uniform hGpow carry shape). Remaining (named in
+-- hGpow_bridge_handoff): the concrete-witness instantiation of
+-- hon/hoff/hcomp/hf2bound/hf3bound + hKnonneg + the s=u endpoint. J4-402 =
+-- A3 (the closure chain). std-3 all (the handoff intro axiom-free).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.GpowBridge.leviPairing_integral_split3
+#print axioms QIQTH.GpowBridge.matchedTerm1_collar_split
+#print axioms QIQTH.GpowBridge.leviSecondPairing_eq_matchedAssembly
+#print axioms QIQTH.GpowBridge.leviSecondPairing_inner_bound
+#print axioms QIQTH.GpowBridge.invSqrt_absorb
+#print axioms QIQTH.GpowBridge.window_tau_pos_lt
+#print axioms QIQTH.GpowBridge.leviSecondPairing_le_invSqrt
+#print axioms QIQTH.GpowBridge.hGpow_bridge_handoff_intro
+
 end QIQTH.AxiomAudit
