@@ -20538,4 +20538,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DataLeviDischarge.dataLevi_from_geometry
 #print axioms QIQTH.DataLeviDischarge.dataLevi_exists_from_geometry
 
+-- ## J4-386 (ECombinationDischarge): census pile (ix) — the z-legs discharged
+-- THE VERDICTS: hDa/hLap are NOT definitional — DaTrunc/LapTrunc are defined
+-- as the deriv/laplaceBeltrami of the frozen conv; the census bodies are the
+-- outputs of the banked W2 representations (hDa_threaded/hLap_threaded,
+-- InterchangeThreading T1a/T1b) — honest carries with banked reductions.
+-- LANDED: integrable_of_two_gaussDom (the workhorse: two gaussDdim-dominated
+-- a.e.-measurable factors ⟹ product integrable, via the banked
+-- gaussDdim_pair_integrable) + hEZ_windowed (the hEZ body reduced to
+-- hAdomHeat + the Levi envelope + 2 slice measurabilities) + hLapZ_from_dom
+-- (the hLapZ body from a laplaceBeltrami-slice domination — the hAdom2
+-- bridge stays open per the D3 verdict). hES/hLapS: windowed-supplied by
+-- integrability_from_dominations; the ∀u↔∀u∈U widening = J4-387. std-3 all 3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ECombinationDischarge.integrable_of_two_gaussDom
+#print axioms QIQTH.ECombinationDischarge.hEZ_windowed
+#print axioms QIQTH.ECombinationDischarge.hLapZ_from_dom
+
 end QIQTH.AxiomAudit
