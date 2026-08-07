@@ -20224,4 +20224,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenGermInternal.fbulkInt
 #print axioms QIQTH.FrozenGermInternal.hDaLimLU_from_hgate_census_v2
 
+-- ## J4-368 (HgateAffineRepair): THE 6TH INTERFACE FINDING REPAIRED (Sol #15)
+-- The τ-uniform hgate binder was FALSE for the concrete N=1 witness (the
+-- τ·Δu₁·G residual term). The honest AFFINE shape: AffineGateBound =
+-- (P₀+P₁τ)·quadPoly(r²/τ)·G_{4/3} on-gate — SATISFIABLE (P₁ captures the
+-- linear-in-τ term). quadPoly_width_absorb (the P-INDEPENDENT pointwise
+-- absorption extracted from the J4-362 chain) makes the affine bridge a clean
+-- mul_le_mul: E₀=P₀·Cabs, E₁=P₁·Cabs (genuinely E₁≠0). The grading helpers
+-- (grade₂ ≤ 5·quadPoly, weighted_grade_le — Sol #15 brick 1) feed the coming
+-- raw residual estimate. hDaLimLU_from_hgate_affine_census_v2 = the assembly
+-- recomposed over the affine carry (identical DaLimLUGoal). Remaining per Sol
+-- #15: brick 2 (the raw affine pre-absorption estimate deriving
+-- AffineGateBound from the M2 ingredients) + brick 3 + the combined
+-- ∃-capstone. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.HgateAffineRepair.grade_two_le_quadPoly
+#print axioms QIQTH.HgateAffineRepair.weighted_grade_le
+#print axioms QIQTH.HgateAffineRepair.quadPoly_width_absorb
+#print axioms QIQTH.HgateAffineRepair.AffineGateBound
+#print axioms QIQTH.HgateAffineRepair.gatedRawBoundQuadWidth_affine_of_onGate
+#print axioms QIQTH.HgateAffineRepair.hEdom_of_affine_quadPoly_residual_width
+#print axioms QIQTH.HgateAffineRepair.hEdom_concrete_final_affine
+#print axioms QIQTH.HgateAffineRepair.hEdom_vanVleck_of_hgate_affine
+#print axioms QIQTH.HgateAffineRepair.hDaLimLU_from_hgate_affine_census_v2
+
 end QIQTH.AxiomAudit
