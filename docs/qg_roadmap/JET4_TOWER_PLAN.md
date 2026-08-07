@@ -3413,3 +3413,13 @@ local-to-global lift, pure topology, f opaque) + `hHeatCont_of_boxes`/`hSecCont_
 Inventory: the banked box towers are conditional (gate-local identity + explicit-formula
 continuity) and slice the OPPOSITE slot — pile (v) residual = the box-family carry + hBcont.
 raw 0; build 25s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-385 (5b6d0850): census pile (iv) dataLevi REDUCED to two carries
+
+`QIQTH/DataLeviDischarge.lean` (2 decls std-3): all 9 LeviSeriesLocalData fields at the
+concrete vanVleck heatOp discharged via the banked builder (iterE measurability · iterConvW
+bound · summability · integrability · leviSeries termwise + envelope) + hEzero from geometry.
+Surviving: hpkgBound (banked at the literal constGate, J4-316) + hEmeas (banked fixed-gate,
+tripleHEmeas_concrete_v4). hBcont does NOT fall out (honest). raw 0; build 25s.
+NOT a₁ = R/6 (CONDITIONAL).
