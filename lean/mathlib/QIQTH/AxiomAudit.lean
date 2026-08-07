@@ -20750,4 +20750,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.W2Finish.w2_hQ1
 #print axioms QIQTH.W2Finish.memInterchange_at_gate
 
+-- ## J4-398 (AmpGeometryBundle): SOL #17 E1 — the geometry bundle 2/3 + hjets shaped
+-- hcenter LANDED (rhoRatio_center: ρ(τ,0)=1 via chartField_centerValue_base0
+-- + rncRadialSq_zero; chart_center_amp_match = the qz 0 = qc 0 anchor) ·
+-- sliver-hgate LANDED (collarRegime_mem_ball + radial_control +
+-- not_collarRegime_of_radius — the collar⊆gate-ball wrappers) · hjets:
+-- HjetsShape + hjets_assemble (the genuine conjunction assembler; no new
+-- coordinates) + the honest residual census (the global ∀x first-jet form +
+-- the general-base centre identities hVP/hPsq/hVQ — base-0 versions banked,
+-- general-base = the J4-156-class residual). E2 handoff: reuse the collar
+-- wrappers for support confinement; cubic_gaussian_moment_witness banked for
+-- hcubic; the ρ=1 centre fixes the L_A_chart base. std-3 all (the _intro
+-- axiom-free). NOT a₁ = R/6.
+#print axioms QIQTH.AmpGeometryBundle.rhoRatio_center
+#print axioms QIQTH.AmpGeometryBundle.chart_center_amp_match
+#print axioms QIQTH.AmpGeometryBundle.collarRegime_mem_ball
+#print axioms QIQTH.AmpGeometryBundle.collarRegime_radial_control
+#print axioms QIQTH.AmpGeometryBundle.not_collarRegime_of_radius
+#print axioms QIQTH.AmpGeometryBundle.hjets_assemble
+#print axioms QIQTH.AmpGeometryBundle.hjets_residual_carries_intro
+
 end QIQTH.AxiomAudit
