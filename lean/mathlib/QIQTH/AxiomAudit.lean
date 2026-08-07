@@ -20523,4 +20523,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JointContinuityAtoms.hHeatCont_of_boxes
 #print axioms QIQTH.JointContinuityAtoms.hSecCont_of_boxes
 
+-- ## J4-385 (DataLeviDischarge): census pile (iv) dataLevi REDUCED to 2 carries
+-- The 9-field LeviSeriesLocalData at the concrete vanVleck heatOp: ALL fields
+-- discharged via the banked builder leviSeriesLocalData_of_windowBound
+-- (iterE_joint_stronglyMeasurable · iterConvW_bound_le ·
+-- scaledIterKernelW_summable · iterConvIntegrableW · leviSeries termwise
+-- meas + dominatedW) + hEzero from geometry (hEzeroE_concrete). Surviving:
+-- hpkgBound (the ALL-t width-2 residual bound — banked at the literal
+-- constGate by constRadius_package_and_S1 J4-316; general-gate route =
+-- fixed-gate re-run of the vanVleck capstone) + hEmeas (tripleHEmeas — banked
+-- fixed-gate by GatedRepSFix.tripleHEmeas_concrete_v4). hBcont does NOT fall
+-- out (measurability only, no continuity) — honest. std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.DataLeviDischarge.dataLevi_from_geometry
+#print axioms QIQTH.DataLeviDischarge.dataLevi_exists_from_geometry
+
 end QIQTH.AxiomAudit
