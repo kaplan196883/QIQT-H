@@ -3710,3 +3710,12 @@ hpdpdH_slice = rfl (α-equal unfold); hInterchange discharged on U by memInterch
 hgi/hΓ from geometry; hpdpdZ/hII_lo → the banked dominations). (ix): hDa/hLap → engines ·
 hEZ/hLapZ banked · hES/hLapS windowed (∀u open). J4-405 = F1 + the widening. raw 0; build 26s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-405 (597e0021): SOL #17 F1 + the ∀u-tail widening
+
+`QIQTH/PerUProviders.lean` (5 decls std-3). P1 `hlin_field_concrete` (the facade hlin field at
+the concrete pair; hProv = the 7 bundled satisfiable diff-under-∫ legs = the w2_hQ1 hFrozenData
+shape on the diagonal window) · P2 the MemInterchange ∀u-tail (★ the degenerate leg
+UNCONDITIONAL — both sides collapse to 0 via Levi vanishing; memInterchange_widened).
+J4-406 = F2 (hD1 via HD1SliverRoute). raw 0; build 48s. NOT a₁ = R/6 (CONDITIONAL).
