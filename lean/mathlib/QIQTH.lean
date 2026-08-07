@@ -561,6 +561,7 @@ import QIQTH.HrawCampaignOne
 import QIQTH.HrawChartTransfer
 import QIQTH.HrawNearIsometryConcrete
 import QIQTH.HrawPreCollapse
+import QIQTH.Pd2ConvDissolution
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

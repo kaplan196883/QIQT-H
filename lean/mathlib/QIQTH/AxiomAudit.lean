@@ -20148,4 +20148,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HrawPreCollapse.hEdom_of_gatedRawBoundQuadWidth
 #print axioms QIQTH.HrawPreCollapse.hEdom_concrete_final
 
+-- ## J4-363 (Pd2ConvDissolution): ★★★ THE hPd2conv WALL DISSOLVED (SOL #14)
+-- The LAST deep wall of the four labelled a₁ inputs is a COROLLARY of the
+-- already-carried hD1 sliver census: the full-side second derivative =
+-- ∂ᵢ(the s-integral-represented Dmap coefficient gcoef i)(0) — the dominated
+-- FIRST interchange only, NO full-side second interchange (non-circular).
+-- pd_of_hasFDerivAt (B0a bookkeeping) + pd_germ_eq_of_family (B0b: the
+-- hfull_pd1/hfrozen_pd1 germ links from the carried hfam_v2 / banked frozen
+-- linewise) + ★ gcoef_hasFDerivAt_candidate (B0c: the candidate-identification
+-- hD1_bulk_sliver_reduction re-export at x₀=0 — pure API extraction) +
+-- pd2_at_zero_eq (B1/B2 both sides) + ★★★ hPd2conv_from_census (the EXACT
+-- hLapFull_of_pd2conv binder from the census only; hsliver+hb squeeze at 0
+-- IS the convergence). WITH THIS: hGauss DERIVED · hD2Hexpand → the sliver
+-- carries · hraw → the hgate carry · hPd2conv → the census corollary — ALL
+-- FOUR labelled inputs resolved/dissolved. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.Pd2ConvDissolution.pd_of_hasFDerivAt
+#print axioms QIQTH.Pd2ConvDissolution.pd_germ_eq_of_family
+#print axioms QIQTH.Pd2ConvDissolution.gcoef_hasFDerivAt_candidate
+#print axioms QIQTH.Pd2ConvDissolution.pd2_at_zero_eq
+#print axioms QIQTH.Pd2ConvDissolution.hPd2conv_from_census
+
 end QIQTH.AxiomAudit
