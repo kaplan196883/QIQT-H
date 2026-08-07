@@ -20488,4 +20488,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusDominations.timeWindow_facts
 #print axioms QIQTH.CensusDominations.hAdomHeat_from_hEdom
 
+-- ## J4-383 (SliceMeasurability): ALL 4 census s-slice measurabilities supplied
+-- Route (a) continuity, mirroring the banked InnerMeasFubini J4-245 stack:
+-- shiftFactor_jointAESM (the shifted first factor via ContinuousOn.comp) +
+-- factor_jointAESM_of_contOn (the Levi factor on sub-windows) +
+-- sliceMeas_of_jointCont (the reusable core: .mul + innerIntegral_aesm) ⟹
+-- hmeasLo/Hi_slice + hmeas2Lo/Hi_slice (the EXACT census binders; the Hi
+-- τ→0 endpoint via Ioo_ae_eq_Ioc null-set transfer). Pile (v)'s residue
+-- shrinks to TWO joint-continuity atoms (hHeatCont for heatOp∘W_vv,
+-- hSecCont for witnessSecondXDeriv, on Ioc 0 T ×ˢ univ — J4-384 discharges
+-- from the HeatOpWitnessContinuity towers) + the standing hBcont Levi carry.
+-- fun_prop only on the arithmetic shift, never .choose-heavy. std-3 all 7.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.SliceMeasurability.shiftFactor_jointAESM
+#print axioms QIQTH.SliceMeasurability.factor_jointAESM_of_contOn
+#print axioms QIQTH.SliceMeasurability.sliceMeas_of_jointCont
+#print axioms QIQTH.SliceMeasurability.hmeasLo_slice
+#print axioms QIQTH.SliceMeasurability.hmeasHi_slice
+#print axioms QIQTH.SliceMeasurability.hmeas2Lo_slice
+#print axioms QIQTH.SliceMeasurability.hmeas2Hi_slice
+
 end QIQTH.AxiomAudit
