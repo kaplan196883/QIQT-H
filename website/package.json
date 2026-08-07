@@ -6,7 +6,9 @@
   "description": "qiqt.org — the QIQT-H research program site",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/gen-llms.mjs",
+    "build:site": "astro build",
+    "llms": "node scripts/gen-llms.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },

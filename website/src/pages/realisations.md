@@ -49,6 +49,17 @@ Three composition checks confirm the program stays consistent under combination:
 That is as far as a *finite* realisation reaches: it carries the kinematic **and** the thermal boundary
 conditions — including $\delta S=\eta\,\delta A$ — but it yields **no Einstein equations**.
 
+<div class="note">
+
+<strong>From one mode to the free Standard Model.</strong> The single CAR mode is only the smallest case. In
+the Lean development (`FreeFieldCorner.lean`) the full <em>free</em> Standard-Model content — Dirac fermions,
+gauge bosons, and the Higgs — is <em>transported</em> into the same capacity-bounded corner $P=VV^\dagger$,
+with the graded (anti)commutation brackets preserved. This is <strong>transport, not construction</strong>:
+the interacting dynamics (the actual Standard-Model couplings) are a cited frontier, and everything stays
+<em>free / linearized / flat</em>-background — a substrate, not quantum gravity.
+
+</div>
+
 ## The minimal *gravitational* realisation — where GR appears
 
 `scripts/qiqth_gr_realisation.py` — the continuum object that *does* reach GR: **the free Klein–Gordon

@@ -19,8 +19,8 @@ kinematics, **(P3)** microcausality, **(P4)** finite holographic capacity: the i
 of any bounded spacetime region is finite, and **(P5)** quantum equilibrium of the typicality
 measure — of which P2–P3 are the standard quantum-relativistic arena, so the irreducible new
 physics is **P4 + P5, on the P1 ontology**. We machine-verify the entire development in
-Lean 4 / Mathlib: over **5,000 theorems across ~515 files**, zero axioms beyond Lean's standard
-three, every physical input an explicitly named hypothesis.
+Lean 4 / Mathlib: over **8,000 theorems across ~1,100 files** (≈1,400 `#print axioms` audit pins),
+zero axioms beyond Lean's standard three, every physical input an explicitly named hypothesis.
 
 The measurement problem dissolves without collapse: decoherence supplies the record structure,
 λ (P1) makes exactly one history actual, and the Born rule is **reduced** — provably underivable

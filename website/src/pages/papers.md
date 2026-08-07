@@ -2,7 +2,7 @@
 layout: ../layouts/Deep.astro
 title: Papers
 eyebrow: Read the work
-description: The QIQT-H foundations paper, the formalization companion in preparation, and the machine-checked Lean corpus.
+description: The QIQT-H foundations paper, the formalization companion in preparation, and the machine-checked Lean corpus — whose central result is a flat-space record–gravity correspondence, an AdS/CFT-style holographic duality for flat spacetime carried as a conditional theorem.
 ---
 
 ## Foundations paper
@@ -76,6 +76,14 @@ mixing. An honest reduction to a sharply-stated typicality postulate — not a d
 The machine-checked substrate lives in the project repository. Every theorem is audited with
 `#print axioms` and depends only on the standard classical foundations (`propext`, `Classical.choice`,
 `Quot.sound`); the development carries no `sorry`.
+
+Its central result is the **flat-space record–gravity correspondence** (`FlatSpaceRecordGravityCorrespondence`):
+an AdS/CFT-style holographic duality, but in flat spacetime and derived from the finite-capacity postulate
+rather than string theory — one finite-capacity record code that is at once free quantum matter and the
+gravity around it, sharing a single induced Newton constant. The finite evidence and the five continuum rungs
+are proven term by term, and the entailment (named physical inputs ⟹ correspondence) is machine-verified and
+non-vacuous; the *unconditional* statement remains a **conditional theorem** whose remaining inputs are
+explicitly named, not proven outright.
 
 - **Repository:** [github.com/kaplan196883/QIQT-H](https://github.com/kaplan196883/QIQT-H)
 - **Build:** `lake build QIQTH` · **Audit:** `lake build QIQTH.AxiomAudit`

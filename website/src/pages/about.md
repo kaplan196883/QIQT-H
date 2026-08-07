@@ -13,6 +13,16 @@ the holographic premise — that bounded regions hold only finite information �
 record *stage* on which this happens. (An earlier framing, that finite capacity itself *forces* a single
 outcome, has been [retired](/open-problems) as a category error; the single outcome is λ's.)
 
+The program's central technical result is a **flat-space record–gravity correspondence** — an
+AdS/CFT-style holographic duality, but in flat spacetime and built from the finite-capacity postulate
+(P4) rather than string theory: in the continuum limit, one finite-capacity information system (the
+region-by-region *record code* of Φ) is simultaneously free quantum matter *and* the gravity that curves
+around it, with the **same** Sakharov-induced Newton constant computing both sides — no calibration. Its
+finite evidence and its five continuum rungs are machine-checked term by term, and the entailment
+(named physical inputs ⟹ correspondence) is machine-verified and non-vacuous; the *unconditional*
+statement is **not** proven — it is a **conditional theorem** whose remaining inputs are named, in the
+same style as the rest of the program.
+
 The program is the work of **Pawel Kaplanski**. The mathematical substrate is developed and machine-checked
 in Lean&nbsp;4 / Mathlib.
 

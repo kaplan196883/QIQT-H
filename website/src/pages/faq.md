@@ -46,6 +46,25 @@ That's the point.
 - **Not** that the finite bound "forbids superpositions" or selects outcomes — that reading is
   **retired as a category error**; single outcomes are λ's doing.
 
+## "Is this AdS/CFT? Or string-theory holography?"
+
+No. The flagship result is a **flat-space** holographic duality
+(`FlatSpaceRecordGravityCorrespondence`): one finite-capacity information system — the region-by-region
+record of the wave function Φ — is provably *both* free quantum matter *and* the gravity around it, via
+a single equality
+
+> micro record entropy = one-loop conical entropy = Area / 4·*G*<sub>ind</sub>
+
+in which the **same** induced *G* computes both faces, with no calibration between them. That reaches
+the *shape* of AdS/CFT's holographic statement (one system, two descriptions, S = A/4*G* with a shared
+*G*) — but built **from the five postulates in flat spacetime, with no anti-de Sitter box and no
+strings**, and machine-checked. It does **not** reproduce AdS/CFT's full apparatus (no N=4 SYM, no
+brane/flux construction), and it is **not proven outright**: the finite evidence and the five continuum
+rungs are proven, and the entailment is machine-checked from *explicit* hypotheses (non-vacuously — the
+area-law step is derived, not assumed), but the unconditional statement is a **conditional theorem**
+whose remaining inputs (a₁ = R/6, same-regulator, cutoff identification, the continuum assembly) are
+named, not discharged.
+
 ## "Why should I trust a solo, unaffiliated researcher with no institution?"
 
 **You shouldn't — and you don't have to.** That's the entire design. The [verification
@@ -117,7 +136,9 @@ gets rejected by the kernel. The methodology is itself documented in a companion
 The [open problems](/open-problems) are listed without hedging: the canonicity of the P5
 typicality measure, the dynamical/Lorentz-covariant law of λ, the numerical value of *G* (the
 *relation* G = 1/(N Λ_s²) is a derived theorem; only the *number* is carried — pinned to a
-Seeley–DeWitt coefficient behind a Riemannian-heat-kernel gap), the continuum Type III₁
+Seeley–DeWitt coefficient that has since advanced to a machine-checked **conditional** a₁ = R/6,
+carrying the genuine Ricci scalar and reduced to four named geometric inputs, one being actively
+closed, but still short of an unconditional value), the continuum Type III₁
 limit, and interacting matter. Any of these could break, and the framework says so up front. The
 honest verdict — including two adversarial red-team reviews — is that this is a **single-world
 interpretation plus a holographic entropy bound and a conditional induced-gravity chain**, all

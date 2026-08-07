@@ -15,6 +15,12 @@ leads with the **author's explanation**, the **conclusion** follows in display m
 **load-bearing hypotheses are shown**, and routine conditions are summarized by count. To explore
 the full dependency network behind these results, see the [**theorem browser**](/browser).
 
+Together these three targets sit under the project's overarching result — the **flat-space
+record-code / gravity correspondence**, an AdS/CFT-style holographic duality built in flat spacetime
+from the postulates (P1–P5), with no string theory and no anti-de Sitter box. Its finite evidence is
+**proven** and its continuum form is a **conditional theorem** whose remaining inputs are named — so
+read every statement below in the conditional, honestly-scoped voice it is written in.
+
 
 ### [GR field equations](/statements/gr)
 

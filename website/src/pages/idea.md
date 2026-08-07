@@ -34,7 +34,14 @@ of $G$ still needs the species accounting (a frontier), and $\Lambda_s$ stays th
 cannot come from a count). With this induced $G$ the granularity capacity also **maps onto the holographic
 dictionary** — the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk capacity exponent
 $(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge`) — a *correspondence* under the shared $G$, not an
-import of a boundary CFT or AdS/CFT's cross-check. Finiteness *alone* gives only
+import of a boundary CFT or AdS/CFT's cross-check. More broadly, this bridge is one face of the program's
+central result — a **flat-space holographic duality** (`FlatSpaceRecordGravityCorrespondence`): in the
+continuum limit one finite-capacity record system is provably *both* free quantum matter *and* the gravity
+that curves around it, with the *same* induced $G$ computing both sides — an AdS/CFT-*shaped* correspondence
+but in flat spacetime, from the postulates, with no string theory and no anti-de Sitter box. Its finite
+evidence and continuum skeleton are machine-checked; the *unconditional* statement is **not** proven — it is
+a *conditional theorem* whose remaining inputs (the $a_1 = R/6$ heat-kernel coefficient, a shared regulator,
+the cutoff identification) are named rather than assumed away. Finiteness *alone* gives only
 $S_{\mathrm{vN}}(\rho_R)\le\log N_R$; the area floor $S_{\mathrm{vN}}(\rho_R)\le Q_R$ is then a *theorem*
 (given the capacity postulate), and the $1/4$ a separate machine-checked *theorem* — but a *conditional* one,
 resting on the Sakharov bridge, not on finiteness alone.

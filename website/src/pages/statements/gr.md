@@ -1,13 +1,15 @@
 ---
 layout: ../../layouts/Deep.astro
 title: "GR field equations"
-eyebrow: "Target 3 — QIQT-H gives the Einstein field equations"
+eyebrow: "Target 3 — QIQT-H's conditional, free-field Einstein-form equation"
 description: "GR field equations — QIQT-H headline statements machine-translated from Lean, each with the author's explanation, conclusion and load-bearing hypotheses."
 ---
 
 <small>[← all targets](/statements) · [Target 1 →](/statements/born)</small>
 
-*Target 3 — QIQT-H gives the Einstein field equations*
+*Target 3 — QIQT-H's conditional, free-field Einstein-form equation*
+
+**Honest scope.** These are *conditional*, *free-field* Einstein-**form** equations — Jacobson-style induced/entropic gravity, machine-checked — **not** full nonlinear GR, **not** interacting matter, and **not (yet) quantum gravity**. Finiteness of the regional information capacity (P4) yields the area **floor** as a derived theorem; the holographic area **form** (∝ Area and the factor 1/4) rides on the *conditional* Sakharov induced-gravity bridge. Newton's constant is delivered as a **relation** $G = 1/(N\,\Lambda_s^2)$ with its numerical value carried — blocked on the Seeley–DeWitt $a_1$ coefficient, for which there is now a machine-checked **conditional** $a_1 = R/6$ (the genuine Ricci scalar, reduced to four labelled geometric inputs), **not** an unconditional derivation. In the continuum this content is one face of the flat-space **record-code / gravity correspondence** — an AdS/CFT-style holographic duality built in flat spacetime from the postulates, whose finite evidence is proven and whose continuum form is itself a conditional theorem. Every theorem below states exactly which physical inputs remain labelled hypotheses; all are axiom-free (Lean's standard three only).
 
 ## Einstein field equations for the free field (all geometric inputs discharged)
 

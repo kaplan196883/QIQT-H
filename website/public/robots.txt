@@ -1,6 +1,37 @@
 # qiqt.org — QIQT-H
-# All crawlers welcome.
+# All crawlers welcome, including AI/LLM crawlers.
 User-agent: *
+Allow: /
+
+# LLM-readable content: every page has a Markdown twin (append .md to any URL),
+# indexed at /llms.txt (map) and /llms-full.txt (concatenated full text).
+
+# Explicitly welcome the major AI crawlers.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://qiqt.org/sitemap.xml

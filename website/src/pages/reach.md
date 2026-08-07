@@ -98,7 +98,15 @@ are <em>deferred</em> to exactly that undelivered micro-theory, not solved. So t
 not removed</strong>: from "quantize the metric" to "find the quantum degrees of freedom whose entanglement
 yields <em>S = A/4</em> and the localization flux" — and QIQT-H currently <em>carries</em> the area <em>form</em>
 and its coefficient (conditionally, via the Sakharov bridge) rather than <em>deriving</em> them from a
-microstate count. The honest slogan: <strong>QIQT-H can remove the need to quantize
+microstate count. Two fronts <em>have</em> moved, without closing the gap: the heat-kernel coefficient that
+would <em>fix</em> the <em>1/4</em> is now a machine-checked <em>conditional</em> <em>a<sub>1</sub> = R/6</em>
+(the genuine Ricci scalar in the short-time expansion, reduced to four named geometric inputs — <em>not</em> an
+unconditional derivation); and the matter-and-gravity identity itself is packaged as the program's
+<strong>flat-space holographic duality</strong> (<code>FlatSpaceRecordGravityCorrespondence</code>) — one
+finite-capacity record system being provably <em>both</em> the free quantum matter <em>and</em> the induced
+gravity under a single shared <em>G</em>, machine-checked in its finite evidence and continuum skeleton but
+still a <em>conditional theorem</em> (named inputs, not proven outright), not the delivered micro-theory. The
+honest slogan: <strong>QIQT-H can remove the need to quantize
 the metric as fundamental; it does not remove the need for a quantum statistical micro-theory of spacetime.</strong>
 
 </div>

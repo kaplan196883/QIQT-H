@@ -8,8 +8,8 @@ description: The QIQT-H deductive substrate is machine-verified in Lean 4 / Math
 The modular and relative-entropy *calculus* underlying the regional cost functional $\chi_R$ is
 machine-verified for the free-field coherent-state sector. The development carries no `sorry` and, as
 reported by `#print axioms`, depends only on the standard classical foundations of Lean/Mathlib
-(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **~515 files and over 5,000
-theorems** (over 5,700 declarations including definitions) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
+(`propext`, `Classical.choice`, `Quot.sound`). At present the corpus spans roughly **~1,100 files and over 8,000
+theorems** (theorem/lemma declarations) with a verified **axiom budget of 0** (every project-specific interface axiom has been discharged
 to a concrete proof or a typeclass instance; what remains is carried as explicit, clearly-labelled hypotheses,
 never as Lean axioms).
 
@@ -58,7 +58,7 @@ identification stays a *gravitational input*, not a theorem. (This concerns the 
 Bekenstein–Hawking $\mathbf{1/4}$ ratio **is** derived — as a machine-checked theorem — but through the separate
 **Sakharov / induced-gravity bridge**, `SakharovRatio.sakharov_ratio` (the **P4-MICRO** story) — a re-derivation
 of the standard induced-gravity ratio, not unique to finiteness (any local relativistic QFT with the same UV
-coefficient yields it); what *neither* derives is the numerical **value of $G$** — though that frontier has since **narrowed**: the induced-Newton $1/(12\pi)$ normalization's π-content is now *derived* (`HeatKernelDDim`: the $(4\pi t)^{-d/2}$ prefactor and the $d{=}4$ assembly to $1/(12\pi)$), and the a₁ Seeley–DeWitt $2t\cdot R$ contraction machinery is machine-checked (`HeatKernelA1`). The flat-space analysis is now **exhausted**; only the *curved-space* $\kappa=1/6$ coefficient stays cited — it needs the covariant heat-kernel expansion Mathlib lacks — so there is still **no numerical $G$**.) What **is**
+coefficient yields it); what *neither* derives is the numerical **value of $G$** — though that frontier has since **advanced**: the induced-Newton $1/(12\pi)$ normalization's π-content is *derived* (`HeatKernelDDim`: the $(4\pi t)^{-d/2}$ prefactor and the $d{=}4$ assembly to $1/(12\pi)$), and the curved-space $a_1$ Seeley–DeWitt coefficient now has a machine-checked **conditional** $a_1 = R/6$ (`A1R6FromLabelled.a1_R6_from_labelled`): the diagonal short-time heat expansion carrying the **genuine Ricci scalar** $(\sum_i \mathrm{Ric}_{ii})/6 = R/6$ in the $O(t)$ coefficient, at the constant-radius gate, reduced to **four labelled geometric inputs** (the normal-coordinate Gauss identity `hGauss`, plus `hraw`, `hD2Hexpand`, `hPd2conv`); the whole analytic tower that was the wall (van-Vleck parametrix, Levi/Duhamel convergence, delta-family, interchange, resolvent-Lipschitz) is discharged into this conditional, and the live front is deriving `hGauss` from the classical Gauss-lemma / Jacobi-field machinery. This is **not** an unconditional $a_1=R/6$ — the four labelled inputs remain open derivation campaigns and the true-kernel analytic Seeley–DeWitt identification stays a Mathlib-wide frontier — so there is still **no numerical $G$**.) What **is**
 machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
 entropy variation is controlled by the modular-energy variation, which under one-particle Bisognano–Wichmann
 $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$:
@@ -200,8 +200,10 @@ QIQT-H additionally <em>re-derives</em> the $1/4$ (<code>SakharovRatio</code>). 
 before QIQT-H's GR chain was formalized (mid-2026) — establishes this relative-entropy → modular-theory →
 Jacobson route in a peer-reviewed venue. QIQT-H claims <strong>no priority</strong>; it independently and
 subsequently machine-verifies the same chain, with every physical input in an explicit ledger. Both meet the <em>same</em> honest frontier: their closing caveat — higher-order corrections on a curved
-horizon, "<em>technically demanding, especially regarding the modular data</em>" — is precisely our cited
-curved-correction / Riemannian-heat-kernel (Seeley–DeWitt) frontier. See the
+horizon, "<em>technically demanding, especially regarding the modular data</em>" — is precisely our
+curved-correction / Riemannian-heat-kernel (Seeley–DeWitt) frontier, now advanced to a machine-checked
+<em>conditional</em> $a_1 = R/6$ (the genuine Ricci scalar, reduced to four labelled geometric inputs)
+rather than an unbroken wall. See the
 <a href="/prl-mapping">full equation-by-equation mapping</a> (PRL step → Lean theorem).
 
 </div>
@@ -785,12 +787,14 @@ wall crossed.
 
 </div>
 
-## The dynamics — the code's time evolution, the independent cross-check, and the conjecture (DY1–DY7)
+## The dynamics — the code's time evolution, the independent cross-check, and the conditional correspondence (DY1–DY7)
 
 The microscopic side gets what a definition of a theory requires — a time evolution — and the
 campaign closes with the QIQT-H analogue of the Brown–Henneaux = Cardy check in its honest finite
-form, plus the sharp continuum conjecture stated (never assumed) in Lean (`QIQTH/Dynamics.lean`,
-`CrossCheck.lean`, `Conjectures.lean`; axiom-free, std-3).
+form, plus the sharp continuum correspondence — its finite evidence and five continuum rungs proven,
+its entailment machine-checked as a non-vacuous conditional, the *unconditional* statement still open
+on three named inputs — in Lean (`QIQTH/Dynamics.lean`, `CrossCheck.lean`, `Conjectures.lean`,
+`CorrespondenceAssembly.lean`; axiom-free, std-3).
 
 - **DY1 — the diagonal dynamics** (`alpha`, the entry formula): H = Σ<sub>k</sub> ω<sub>k</sub>N<sub>k</sub>
   with its Heisenberg flow via explicit phase unitaries (no Stone theorem, no matrix exponential) —
@@ -815,22 +819,40 @@ form, plus the sharp continuum conjecture stated (never assumed) in Lean (`QIQTH
   G<sub>ind</sub> = 1/(N<sub>eff</sub>·Λ<sub>s</sub>²) only the species/cell matching remains
   input), and the proofs referencing NONE of the keystone calibration (grep-verified). Equality at
   saturation ONLY; the arbitrary-β equality is false and never claimed.
-- **DY7 — the conjecture** (`FlatSpaceRecordGravityCorrespondence`): **the flat-space
-  record-code/gravity correspondence, stated sharp** — in the continuum limit the capacity-bounded
-  record code with diagonal dynamics equals free QFT + linearized gravity: for every region, micro
-  record entropy = one-loop conical entropy = area/4G<sub>ind</sub>, with G<sub>ind</sub> the
-  Sakharov constant of the SAME field content (one microscopic system computing both the states
-  and G). The DY1–DY6 evidence is bundled and PROVEN (`finiteEvidence_holds`); the continuum claim
-  carries NO proof field, NO axiom, NO instance — stated, never assumed.
+- **DY7 — the correspondence, now a conditional theorem** (`FlatSpaceRecordGravityCorrespondence`):
+  **the flat-space record-code/gravity correspondence, stated sharp** — an AdS/CFT-style holographic
+  duality but in **flat spacetime**, built from the QIQT-H postulates with no string theory and no
+  anti-de Sitter box: in the continuum limit one capacity-bounded record code with diagonal dynamics is
+  simultaneously free QFT + linearized gravity, so for every region, micro record entropy = one-loop
+  conical (heat-kernel) entropy = area/4G<sub>ind</sub>, with G<sub>ind</sub> the Sakharov constant of
+  the SAME field content (one microscopic system computing both the states of matter AND the
+  gravitational coupling — no calibration). This is **not** an import of AdS/CFT's machinery; it is the
+  flat-space analogue of the holographic duality, reached from finite quantum information (P4) rather
+  than branes/flux. HONEST STATUS: the DY1–DY6 **finite evidence is PROVEN** (`finiteEvidence_holds`);
+  the **five continuum rungs are proven term by term** (continuum entropy $\pi^2/3\beta$; heat-kernel
+  form; exact conical coefficient + $c/6$ replica derivative; the Susskind–Uglum identity
+  $S_{\rm ent}=(A/4)\,\delta(1/G)$; the saturation bridge); and the **entailment is machine-checked
+  non-vacuously** (`flatSpaceCorrespondence_of_constructive`, `CorrespondenceAssembly.lean`): the
+  still-cited physical inputs, carried as EXPLICIT HYPOTHESES (never axioms), IMPLY the correspondence,
+  with the middle area-law equality DERIVED from the Susskind–Uglum `induced_product`, not assumed —
+  and two of its five inputs are themselves discharged as finite theorems (the Gaussian one-loop
+  determinant and the replica $n\to1$ continuation $S=-\partial_n\log Z_n|_1$ = von Neumann entropy).
+  **STILL OPEN:** the *unconditional* `Prop`. It is NOT proved outright — it is a **conditional
+  theorem** (the same shape as the gravity chain) whose remaining assumptions are three named inputs
+  ($a_1=R/6$, same-regulator, cutoff identification) plus the continuum-limit assembly.
 
 <div class="note">
 
 <strong>The DY7 checkpoint — the two honest sentences.</strong> HAVE: "a finite, axiom-free
-diagonal code dynamics, explicit Gibbs/KMS states, product-mode reductions, and a saturated
-conditional induced-gravity cross-check whose proof does not use the trace/wEnt area calibration."
-HAVE NOT: "a finite proof of a continuum one-loop heat-kernel area law or an equality between
-finite thermal entropy at arbitrary β and an induced geometric area; that remains the named
-continuum frontier/conjecture." NOT quantum gravity solved; no wall crossed.
+diagonal code dynamics, explicit Gibbs/KMS states, product-mode reductions, a saturated
+conditional induced-gravity cross-check whose proof does not use the trace/wEnt area calibration,
+the five continuum rungs proven term by term, and the correspondence itself machine-checked as a
+non-vacuous conditional entailment (inputs ⟹ correspondence)." HAVE NOT: "an *unconditional*
+finite proof of the continuum one-loop heat-kernel area law — the equality between finite thermal
+entropy at arbitrary β and an induced geometric area stays a conditional theorem whose remaining
+inputs are named ($a_1=R/6$, same-regulator, cutoff identification, and the continuum-limit
+assembly)." The correspondence is proven CONDITIONALLY, never outright; NOT quantum gravity solved;
+no wall crossed.
 
 </div>
 
@@ -1048,8 +1070,10 @@ Two tracks, one campaign (all axiom-free, std-3, budget 0).
   mixed-species consistency chain** — one shared species datum feeds both the entanglement
   entropy and the induced 1/G, with the mixed-content 1/4 and S = A/4G as theorems (the entire
   species sum cancelling), chained through the BTZ Cardy count. HAVE NOT: the numerical value of
-  G is not derived; the c<sub>i</sub> stay cited Seeley–DeWitt data — a consistency chain over
-  one shared cited datum, NOT an independent cross-check.
+  G is not derived; the higher c<sub>i</sub> stay cited Seeley–DeWitt data (the a<sub>1</sub>
+  coefficient now has a machine-checked *conditional* a<sub>1</sub> = R/6, reduced to four labelled
+  geometric inputs — still not unconditional) — a consistency chain over cited/conditional data,
+  NOT an independent cross-check.
 
 
 ## The generator: the self-adjoint Hamiltonian of the limit dynamics, computed

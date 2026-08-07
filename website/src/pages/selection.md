@@ -105,8 +105,9 @@ histories** — four pieces:
 The key move: **a covariant measure is not a covariant selector.** Just as the rotation group has an
 invariant measure on the sphere but no invariant point, the *law* $\mu_\Phi$ is Poincaré-covariant while a
 *sampled* $\lambda$ generally is not a fixed point of the symmetry — ordinary sample non-invariance, not a
-hidden preferred frame. So $\lambda$ need not be (and cannot be) an equivariant function of $\Phi$; it is a
-contingent draw.
+hidden preferred frame. So $\lambda$ need not be (and, by a **machine-checked no-go**, cannot be) an
+equivariant function of $\Phi$; it is a contingent draw. A covariant *measure* exists; a covariant *selector*
+provably does not.
 
 <div class="note">
 

@@ -44,7 +44,7 @@ entropy–area relation `S = δA/4` as an input; see the last two rows.
 |---|---|---|
 | Entropy–area relation `S = δA/4` | **bare-assumed** ("under the assumption of the Bekenstein–Hawking entropy-area formula") to fix `α = 8π` | `S = A/4G` **proved** for the induced-area construction (`calibrated_entanglement_cut_area_law`), reducing the input to **one calibration** `log D_e = wEnt_e`, with a machine-checked guard (`codeCap_unbounded_at_fixed_area`) showing that calibration is load-bearing |
 | The `1/4` coefficient | assumed (Bekenstein–Hawking) | **re-derived** as a theorem (`sakharov_ratio`, the conical-`4π` / Einstein–Hilbert-`16π` ratio) |
-| Numerical value of `G` | not addressed (out of scope) | a named frontier — the relation `G = 1/(N Λ_s²)` is derived, the *number* needs the curved-space Seeley–DeWitt `κ = 1/6` that Mathlib lacks |
+| Numerical value of `G` | not addressed (out of scope) | a named frontier — the relation `G = 1/(N Λ_s²)` is derived; the *number* needs the curved-space Seeley–DeWitt coefficient `a₁ = R/6`, now advanced to a **machine-checked *conditional*** result (`a1_R6_from_labelled`, carrying the genuine Ricci scalar `(∑ᵢ Ricᵢᵢ)/6 = R/6`) reduced to four labelled geometric inputs — one, the normal-coordinate Gauss identity, being actively closed via the Gauss-lemma / Jacobi-field machinery; the *unconditional* true-kernel Seeley–DeWitt identification stays a Mathlib-wide frontier |
 
 <div class="note">
 

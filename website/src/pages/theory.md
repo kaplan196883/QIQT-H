@@ -169,6 +169,18 @@ the modular flow is **not** the physical Hamiltonian evolution (they agree only 
 Bisognano–Wichmann cases), so this is modular-invariance, *not* a proof that real records never recohere under
 the actual dynamics.
 
+<div class="note">
+
+<strong>The boundary as an open quantum system.</strong> A complementary, machine-checked layer
+models the region's boundary as an open quantum system driven by a <em>record channel</em>: records provably
+<em>form</em> (a monotone obeying a second law, with a rigidity theorem), pointer-basis einselection is
+recovered at the <em>time-averaged</em> level, the equilibria are simultaneously stationary, stable, and
+Einstein-satisfying, and an exact Born-rule jump unraveling makes the Born weights <strong>forced by the
+channel</strong> rather than assumed ab initio. The residual input is the record basis the channel monitors —
+the same system–environment cut einselection requires. See the <a href="/formalization">theorem index</a>.
+
+</div>
+
 The **selection event** has an explicit constructor too (`SelectionEvent.lean`): an **inverse-CDF** selector
 from an "actuality seed" $s\in[0,1)$ picks **exactly one** record per seed (totality + uniqueness of a sampling
 map), and the *single-shot* seed measure of record $k$ equals its Born weight $p_k$. It adds no actualization
@@ -188,10 +200,13 @@ typicality: over the measure of microscopic initial conditions compatible with a
 realized single-record outcome has frequency $|c_k|^2$ for *typical* initial data. Substantial progress is now
 machine-checked (axiom-free): a Lorentz-covariant, σ-additive, decoherent-histories-*consistent* Born measure
 on the free-field record net **exists and is verified**, and Born is **reduced** to a single
-*state-supervenience* premise — via the Zurek envariance symmetry (proved) and an orthonormality bridge — with
+*state-supervenience* premise — the content of postulate **P5** (quantum equilibrium: a refinement-equivariant
+typicality measure) — via the Zurek envariance symmetry (proved) and an orthonormality bridge — with
 a [no-go](/born) showing some such premise is unavoidable (naturality alone is not enough; refinement-additivity
-is what fixes the square). What remains: justifying that premise as *forced* rather than merely motivated, and
-the continuum/interacting realization. Born is an honest *reduction*, not yet a derivation from nothing.
+is what fixes the square). The probabilistic content is thereby **isolated in P5**: the residual is P5's
+canonicity, not the Born rule itself. What remains: justifying that premise as *forced* rather than merely
+motivated, and the continuum/interacting realization. Born is an honest *reduction*, not yet a derivation from
+nothing.
 
 ---
 
@@ -200,6 +215,6 @@ theorem* from it (P4-MICRO, axiom-free) · **$\chi_R$ calculus** machine-verifie
 machine-checked from the derived floor + a labelled Bisognano–Wichmann thermal input (`gr_from_p4micro`; capacity
 alone ≠ GR) · **H2** *retired* (category error — capacity does not forbid records) · **single record** supplied by
 λ (selection postulate; covariance + contextuality + no-signaling machine-checked; dynamical-realization gap open) ·
-**Born** reduced (axiom-free) to a state-supervenience premise. The whole development is **axiom-free**. The
+**Born** reduced (axiom-free) to the single postulate P5 (quantum equilibrium). The whole development is **axiom-free**. The
 [formalization](/formalization) page documents exactly which pieces are checked; the
 [open problems](/open-problems) page lays out the remaining frontier (λ's law, the continuum).

@@ -179,8 +179,13 @@ have to be demonstrated. (b) For **λ specifically** the continuum target is the
 Connes cocycles — *not* the Type II crossed product, which the red-team retired as doing no work for selection.
 That is a more tractable continuum entry point than the abandoned crossed-product tower, though still a wall.
 
-**Difficulty.** Very hard — a multi-year Mathlib-grade wall (unbounded operator theory, Type III classification
-that Mathlib lacks). Not a blocker for the conditional interpretation; the honestly-cited frontier.
+**Difficulty.** Very hard — a multi-year Mathlib-grade wall. Three external walls, outside the program's own
+control, are cited honestly: the **Riemannian heat-kernel / Seeley–DeWitt** machinery (the $a_1=R/6$ front —
+now a *conditional* theorem, see Gap 4's Route-1 note); the **von Neumann type-III₁ classification API**
+(Mathlib has no factor/type invariant — only the operator-level III₁ *signature*, $\sigma((1+\Delta)^{-1})=[0,1]$
+with the tower limit a factor, is proven; the Connes $S$-invariant / type classification proper is *not*); and
+**general interacting matter** (scope stays free fields, linearized gravity, flat / asymptotically-flat). Not a
+blocker for the conditional interpretation; the honestly-cited frontier.
 
 ## Gap 4 — Lorentz naturalness: is finite capacity compatible with *exact* Lorentz invariance?
 
@@ -268,11 +273,36 @@ is derived). What *neither* route computes is the **numerical value of $G$** —
 positing a fundamental **record-granularity scale** $\Lambda_s$ in place of $\ell_P$ makes the *relation*
 $G = 1/(N\Lambda_s^2)$ a machine-checked theorem (`InducedNewtonConstant`), so $G$ moves from *carried* to
 *derived-from-$\Lambda_s$* (P4-MICRO's inputs collapse to one scale); the *value* still needs the species
-accounting, and $\Lambda_s$ becomes the one carried scale. With this induced $G$ the granularity capacity **maps
+accounting, and $\Lambda_s$ becomes the one carried scale. That species accounting turns on the curved-space
+**Seeley–DeWitt coefficient** $a_1 = R/6$ — and *that* has now advanced from *nobody-has-any-of-it* to a
+**machine-checked _conditional_ theorem** (`a1_R6_from_labelled`, `A1R6FromLabelled.lean`): the diagonal
+short-time heat expansion carrying the *genuine* Ricci scalar $(\sum_i \mathrm{Ric}_{ii})/6 = R/6$ in the
+$O(t)$ coefficient at the constant-radius gate, with the whole analytic tower that *was* the wall (van-Vleck
+parametrix, Levi/Duhamel convergence, delta-family, sliver cancellations, interchange, resolvent-Lipschitz)
+discharged into **four labelled geometric inputs** ($\mathtt{hGauss}$ the normal-coordinate Gauss identity,
+$\mathtt{hraw}$, $\mathtt{hD2Hexpand}$, $\mathtt{hPd2conv}$); the live front is deriving $\mathtt{hGauss}$ from
+the classical **Gauss-lemma / Jacobi-field** machinery (radial leg done, transverse leg done modulo one
+antisymmetry lemma). This is **not** unconditional $a_1=R/6$ — the four inputs remain open derivation
+campaigns, and the true-kernel analytic Seeley–DeWitt identification stays a Mathlib-wide frontier. With this
+induced $G$ the granularity capacity **maps
 onto the holographic dictionary**: the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk
 capacity exponent $(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge.btz_cardy_eq_qiqth_capacity`; the AdS
 radius cancels) — a *correspondence* showing the two holographic bookkeepings agree under the shared $G$, **not**
-an import of a boundary CFT, the Cardy formula, or AdS/CFT's cross-check. **What *is* now machine-checked**
+an import of a boundary CFT, the Cardy formula, or AdS/CFT's cross-check. Assembled, these rungs are the
+**flat-space record-code / gravity correspondence** (`FlatSpaceRecordGravityCorrespondence`, DY7) — a
+holographic duality *in flat spacetime*, from the postulates, with no string theory and no anti-de Sitter box:
+for every region, *micro record entropy $=$ one-loop conical (heat-kernel) entropy $=$ Area$/4G_{\rm ind}$*, the
+**same** induced $G$ on both faces (matter states *and* gravitational coupling — no calibration). Its honest
+status is the crux of the whole program. The **finite evidence is proven** (`finiteEvidence_holds`) and the
+**five continuum rungs are proven** term by term; the *entailment* is machine-checked
+(`flatSpaceCorrespondence_of_constructive`) — the still-cited physical inputs, carried as **explicit
+hypotheses, never axioms**, imply the correspondence **non-vacuously** (the middle area-law equality is
+*derived* from the Susskind–Uglum `induced_product`, not assumed), with two of its five inputs already
+discharged as finite theorems. But the **unconditional `Prop` is *not* proved**: it is a **conditional
+theorem** whose remaining assumptions are three named inputs ($a_1=R/6$ above, a same-regulator condition, a
+cutoff identification) plus the continuum-limit assembly. So the correct phrasing is a *machine-verified
+substrate $+$ a conditional-theorem duality with named remaining inputs* — never "the duality is proven."
+**What *is* now machine-checked**
 along the modular route is the honest, derivable content — the
 free-field **modular-energy bound**: the entropy variation is bounded by (and, at the reference, equals) the
 modular-energy variation, $\Delta S \le \Delta\langle K_\sigma\rangle$ and $\delta S = \delta\langle K_\sigma\rangle$,

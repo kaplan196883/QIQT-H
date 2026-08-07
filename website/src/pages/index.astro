@@ -10,17 +10,18 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <header class="hero"><div class="wrap">
     <div class="kicker">Quantized Information Quantum Theory — Holographic</div>
     <h1>One wave function, one world.</h1>
-    <p style="font-family:var(--serif);font-size:1.55rem;line-height:1.3;font-weight:600;color:var(--accent-ink);margin:.4rem 0 .8rem;max-width:44ch">No new physics. Take quantum mechanics and the <em style="font-style:italic">finiteness of information</em> seriously — and general relativity emerges, the measurement problem dissolves, and quantum gravity comes into reach.</p>
+    <p style="font-family:var(--serif);font-size:1.55rem;line-height:1.3;font-weight:600;color:var(--accent-ink);margin:.4rem 0 .8rem;max-width:44ch">A holographic duality in the pattern of AdS/CFT — but <em style="font-style:italic">in flat spacetime</em>, straight from the quantum postulates, and machine-checked. One finite-capacity information system that is at once quantum matter and the gravity curving around it: <strong>S = A/4G, the same G on both sides</strong>.</p>
     <p class="lede">The inputs are ones you already accept: the exactly-unitary wave function <strong>Φ</strong>,
       and that a bounded region holds only <em>finitely</em> much information (<strong>P4</strong> — a UV-finite
-      record structure). The holographic area law isn't assumed on top of that — <em>given</em> finiteness, the
-      area <strong>floor</strong> S<sub>vN</sub> ≤ Q<sub>R</sub> is a <strong>derived theorem</strong>
-      (<code>area_floor_vonNeumann</code>); its ∝A <em>form</em> and the 1/4 then come from the Sakharov
-      induced-gravity bridge (a re-derivation of induced gravity, not from finiteness alone). From there — with
-      <strong>no strings, no loop quantum gravity, no new forces</strong> — <strong>an Einstein-form equation
-      emerges</strong> for the free field, a single non-dynamical selector <strong>λ</strong> makes exactly one
-      of a region's finitely-many records actual (<strong>no collapse</strong>, one actual world), and the road
-      to <strong>quantum gravity</strong> opens. And every step is machine-checked in Lean&nbsp;4, so you can
+      record structure). <strong>No strings, no anti-de Sitter box, no new forces.</strong> From those, one
+      finite-capacity information system turns out to be two descriptions at once — free quantum matter, and the
+      gravity that curves around it — the flat-space analogue of a holographic duality, with the <em>same</em> G
+      computing both sides (<code>S = A/4G</code>). The deductive <strong>substrate is machine-checked in
+      Lean&nbsp;4</strong>; the flat-space correspondence <em>itself</em> is a <strong>conditional theorem</strong>
+      — its entailment kernel-checked, its remaining physical inputs named, never smuggled in as axioms (it is
+      <em>not</em> claimed proven outright). And the measurement problem dissolves along the way: a single
+      non-dynamical selector <strong>λ</strong> makes exactly one of a region's finitely-many records actual
+      (<strong>no collapse</strong>, one actual world). Every step is checkable, so you can
       <a href="#verify">verify it yourself</a>. <a href="#abstract" style="white-space:nowrap">Read the abstract ↓</a></p>
     <div class="cta">
       <a class="btn btn-primary" href="#verify">Verify it yourself</a>
@@ -67,7 +68,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         information content of any bounded spacetime region is finite, and <strong>(P5)</strong> quantum
         equilibrium of the typicality measure — of which P2–P3 are the standard quantum-relativistic arena,
         so the irreducible new physics is <strong>P4 + P5, on the P1 ontology</strong>. We machine-verify the
-        entire development in Lean&nbsp;4 / Mathlib: over <strong>5,000 theorems across ~515 files</strong>,
+        entire development in Lean&nbsp;4 / Mathlib: over <strong>8,000 theorems across ~1,100 files</strong>,
         zero axioms beyond Lean's standard three, every physical input an explicitly named hypothesis.</p>
       <p class="sub" style="max-width:none">The measurement problem dissolves without collapse: decoherence
         supplies the record structure, λ (P1) makes exactly one history actual, and the Born rule is
@@ -76,7 +77,12 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         (a covariant <em>measure</em> exists; a covariant <em>selector</em> cannot) and an axiom-free
         boost-invariant typicality measure on the continuum 1+1D free field.</p>
       <p class="sub" style="max-width:none">Gravity emerges holographically, in the pattern of AdS/CFT but
-        with no string theory — and it is Φ, never the actualized branch, that carries the holographic
+        with no string theory and no anti-de Sitter box — a <strong>flat-space record→gravity correspondence</strong>
+        (<code>FlatSpaceRecordGravityCorrespondence</code>) under which one finite-capacity record code is at once
+        free quantum matter and the induced gravity around it, with the <em>same</em> G on both sides; its
+        entailment is machine-checked (the named physical inputs, carried as explicit hypotheses, imply it
+        non-vacuously), while the <em>unconditional</em> statement stays a named, conditional theorem — not
+        claimed proven. And it is Φ, never the actualized branch, that carries the holographic
         entropy that geometry responds to. Given P4, the area <strong>floor</strong>
         S<sub>vN</sub> ≤ Q<sub>R</sub> is a <strong>derived theorem, not an added postulate</strong> (the
         holographic <em>area form</em> of Q<sub>R</sub> enters via the conditional induced-gravity bridge, a
@@ -102,8 +108,8 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
   <section class="section" style="padding-top:26px;padding-bottom:8px"><div class="wrap">
     <div class="note" style="border-left:4px solid var(--st-verified);padding:20px 24px">
       <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:baseline;margin-bottom:10px">
-        <span style="font-size:2rem;font-weight:800">41<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
-        <span style="font-size:2rem;font-weight:800">~5,000<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
+        <span style="font-size:2rem;font-weight:800">42<span style="font-size:1rem;font-weight:600">&nbsp;world-first formalizations</span></span>
+        <span style="font-size:2rem;font-weight:800">8,000+<span style="font-size:1rem;font-weight:600">&nbsp;machine-checked theorems</span></span>
         <span style="font-size:2rem;font-weight:800">0<span style="font-size:1rem;font-weight:600">&nbsp;axioms beyond Lean's standard three</span></span>
       </div>
       <p style="margin:.2rem 0 .4rem;font-size:1.05rem"><strong>Headlines:</strong> five results that did not exist in any proof assistant.</p>
@@ -152,16 +158,23 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
         explicit hypotheses, never axioms — <em>imply</em> the correspondence, non-vacuously (the area-law step is
         <em>derived</em> from the Susskind–Uglum identity, not assumed). So the conjecture has become a
         <strong>conditional theorem</strong> — the same shape as the gravity chain — whose only remaining
-        assumptions are three named inputs: one (the curved a₁ = R/6, whose algebraic form is proved) gated on
-        Mathlib's own Riemannian heat-kernel frontier, and two physical modeling stipulations. What stays
+        assumptions are three named inputs: the curved a₁ = R/6 (now a <em>machine-checked conditional</em>,
+        <code>a1_R6_from_labelled</code> — the diagonal short-time heat expansion carrying the genuine Ricci
+        scalar (∑ᵢ Ricᵢᵢ)/6 = R/6, reduced to four labelled geometric inputs, one being actively closed on the
+        Gauss-lemma / Jacobi-field front), and two physical modeling stipulations. What stays
         genuinely open is the <em>unconditional</em> statement (discharging those three inputs + the continuum
         assembly): the conjecture is <em>not</em> proved outright — but it is no longer a bare Prop, it is a
         conditional theorem with a short, named, mostly-external residue.
         <strong>One scaling law</strong> — that the count of active modes scales with <em>area</em>, not volume
         (finiteness alone gives a volume law; area is the genuine QG-core, correctly tiered).
         <strong>One coefficient</strong> — the (1/6−ξ) Seeley–DeWitt number that fixes the <em>numerical</em> value of
-        G, gated on a Riemannian heat-kernel result <em>no proof assistant yet has</em> (Mathlib's own frontier).
-        That un-verified remainder is exactly where quantum gravity lives — and it is now theorem-shaped, not vague.</p>
+        G. This wall has moved: there is now a <strong>machine-checked <em>conditional</em> a₁ = R/6</strong>
+        (<code>a1_R6_from_labelled</code>) carrying the genuine Ricci scalar, reduced to four labelled geometric
+        inputs (one being actively closed on the Gauss-lemma / Jacobi-field front) — so the status went from
+        "nobody has any of it" to "a conditional a₁ = R/6 with named residue." It is <em>not</em> yet
+        unconditional: the four labelled inputs remain open derivation campaigns, and the true-kernel analytic
+        Seeley–DeWitt identification stays a Mathlib-wide frontier. That un-verified remainder is exactly where
+        quantum gravity lives — and it is now theorem-shaped, not vague.</p>
       <p class="sub" style="max-width:none;margin-top:14px">Put another way: every <em>tractable</em> piece is now a theorem
         or a cleanly-labelled conditional (its hypothesis a named structure, never a Lean axiom), so the entire
         remaining residue is <strong>three external walls</strong> — <em>none of them QIQT-H-specific</em>: Mathlib's
@@ -485,6 +498,16 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           heat-kernel coefficient (1/√(4πt) from the Gaussian integral) and the mixed-species
           consistency chain (the 1/4 and S = A/4G as theorems over one shared cited datum — honestly
           labelled: not an independent cross-check; no numerical G).</li>
+        <li><strong>A machine-checked <em>conditional</em> a₁ = R/6 with the genuine Ricci scalar</strong> —
+          <code>a1_R6_from_labelled</code>: the diagonal short-time heat-kernel expansion carrying the true
+          curvature coefficient (∑ᵢ Ric<sub>ii</sub>)/6 = R/6 in its O(t) term, at the constant-radius gate,
+          with the whole analytic tower that was "the wall" (van-Vleck parametrix, Levi/Duhamel convergence,
+          delta-family, sliver cancellations, interchange, resolvent-Lipschitz) discharged into <em>four</em>
+          labelled geometric inputs (the normal-coordinate Gauss identity, actively being closed via the
+          classical Gauss-lemma / Jacobi-field machinery, and three algebraic expansion lemmas). <em>Honestly
+          scoped: NOT unconditional a₁ = R/6 — the four labelled inputs remain open derivation campaigns, and the
+          true-kernel analytic Seeley–DeWitt identification stays a Mathlib-wide frontier; this fixes the
+          <em>numerical</em> value of G once discharged.</em></li>
         <li><strong>A self-adjoint Stone generator of an inductive-limit modular flow, computed on an
           explicit commutator core</strong> — the transported flow's unbounded generator K = K† with
           the cyclic vector as zero-mode (KΩ = 0), acting as the commutator [diag(log w), ·] on every
@@ -592,7 +615,7 @@ const QRcap = katex.renderToString('Q_R = A(\\partial R)/4\\ell_P^2', { throwOnE
           the Gaussian-state / symplectic-spectrum tool behind mode-counting and the boundary area law, a general
           linear-algebra theorem absent from Mathlib and, to our knowledge, from every proof assistant.</li>
       </ol>
-      <p style="margin-top:.7rem"><strong>Scope, stated once for all forty-one.</strong> Free-field / linearized /
+      <p style="margin-top:.7rem"><strong>Scope, stated once for all forty-two.</strong> Free-field / linearized /
       conditional-on-carried-inputs where so labelled on the <a href="/formalization">formalization page</a>;
       none of these is a claim that quantum gravity is solved. "First to our knowledge" means: checked against
       Mathlib, PhysLean, and the published formalization literature as of mid-2026; we will gladly cede priority
