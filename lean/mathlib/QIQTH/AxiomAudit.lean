@@ -20770,4 +20770,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmpGeometryBundle.hjets_assemble
 #print axioms QIQTH.AmpGeometryBundle.hjets_residual_carries_intro
 
+-- ## J4-399 (AmpQuantBundle): SOL #17 E2 — THE HIGH-RISK BRICK CLEARED (Q1-Q4)
+-- Q1 the shared compact/local derivative bound (from ContDiffAt, not
+-- continuity abstractions) · Q2 ★ L_A_chart (the abstract collar MVT +
+-- chartAmp_base_lipschitzOn_ball — the exact named L_g constant of
+-- collar_product_lipschitz_increment; carry = the base-varying amplitude C¹)
+-- + the triple-product increment + ★ Aamp_times_F_lipschitz (the exact hqLip
+-- field shape) · Q3 ★ the quadratic Taylor remainder (C²-modulus + primed
+-- MVT) + the r≤1 absorption + the banked cubic moment re-export · the honest
+-- censuses {hAmpC1,hLρ,hMA,hLevi} ∪ {hAmpC2, hMoment✓, hAbsorb✓}. No hard
+-- wall: the one reduction = the base-varying Φ∘W_bv C¹/C² composition (the
+-- FIELD-slot analogue amp_contDiffAt_general is banked; the base-slot is the
+-- named carry). E3 = the assembly (J4-400). std-3 all (intros axiom-free).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.AmpQuantBundle.contDiffAt_one_fderiv_bounded_near_zero
+#print axioms QIQTH.AmpQuantBundle.contDiffAt_one_lipschitzOn_ball
+#print axioms QIQTH.AmpQuantBundle.chartAmp_base_lipschitzOn_ball
+#print axioms QIQTH.AmpQuantBundle.triple_product_lipschitz_increment
+#print axioms QIQTH.AmpQuantBundle.Aamp_times_F_lipschitz
+#print axioms QIQTH.AmpQuantBundle.contDiffAt_two_taylor1_remainder_bound
+#print axioms QIQTH.AmpQuantBundle.cube_le_sq_of_norm_le_one
+#print axioms QIQTH.AmpQuantBundle.cubic_gaussian_moment_reexport
+#print axioms QIQTH.AmpQuantBundle.L_A_chart_carries_intro
+#print axioms QIQTH.AmpQuantBundle.hcubic_carries_intro
+
 end QIQTH.AxiomAudit
