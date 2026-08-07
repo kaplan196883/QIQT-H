@@ -20508,4 +20508,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliceMeasurability.hmeas2Lo_slice
 #print axioms QIQTH.SliceMeasurability.hmeas2Hi_slice
 
+-- ## J4-384 (JointContinuityAtoms): the strip continuity atoms via box lifting
+-- stripContOn_of_boxes (the UNCONDITIONAL local-to-global lift: a positive-
+-- time-compact box family Icc(τ₀/2)T ×ˢ closedBall 0 R glues to ContinuousOn
+-- on Ioc 0 T ×ˢ univ — pure topology, the .choose-heavy f opaque) +
+-- hHeatCont_of_boxes + hSecCont_of_boxes (the J4-383 carries as one-line
+-- instantiations). The inventory verdict: every banked box lemma
+-- (heatOpWitness_jointContinuousOn_of_identity / ParametrixPartsContinuity)
+-- is itself conditional on the gate-local identity + explicit-formula
+-- continuity, and the banked slice is heatOp … p.1 p.2 0 (opposite slot) —
+-- pile (v)'s residual = the box family carry (satisfiable; discharge route
+-- documented) + the standing hBcont. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.JointContinuityAtoms.stripContOn_of_boxes
+#print axioms QIQTH.JointContinuityAtoms.hHeatCont_of_boxes
+#print axioms QIQTH.JointContinuityAtoms.hSecCont_of_boxes
+
 end QIQTH.AxiomAudit

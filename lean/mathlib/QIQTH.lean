@@ -582,6 +582,7 @@ import QIQTH.CommonGateShell
 import QIQTH.CensusGeometryThread
 import QIQTH.CensusDominations
 import QIQTH.SliceMeasurability
+import QIQTH.JointContinuityAtoms
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
