@@ -20247,4 +20247,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HgateAffineRepair.hEdom_vanVleck_of_hgate_affine
 #print axioms QIQTH.HgateAffineRepair.hDaLimLU_from_hgate_affine_census_v2
 
+-- ## J4-369 (AffineRawResidual): SOL #15 BRICK 2 — the raw affine graded estimate
+-- THE COEFFU1FIX MAP: the N=1 residual = the three-term raw identity
+-- (parametrixResidual_N0_O1_isolated_C2, width 1: T1→x, T2→x², T3→1) +
+-- parametrixResidual_one_split; Δu₁ is NOT derived from |u₁|≤C₁r — it's the
+-- independent sup-on-compact carry uniformFlowLaplaceBeltrami_w0_near_uniform;
+-- the τ-linear term comes from the O(r) shifted-profile coefficient (√τ gain);
+-- the narrow route survives to width 3/2 (cutoffResidualN1_…_below_lin); the
+-- FIRST POISONING step = the chart transfer to width 2 at CoeffU1Fix:871.
+-- LANDED: rawResidualN0_graded_quadPoly_width1 (the promoted slice, all three
+-- per-term graded bounds) + its width-4/3 normalized fold +
+-- tauResidualN0_Or_graded_quadPoly_width1 (the τ-branch, √x monomial) +
+-- ★ rawResidualN1_affine_graded_quadPoly_width1 (∃P₀P₁: |R₁| ≤
+-- (P₀+P₁τ)·quadPoly·G_τ at width 1, P₁≠0 — the inner AffineGateBound shape).
+-- Remaining to AffineGateBound: the 1→4/3 affine fold + the transport/cutoff
+-- promotion (pre-871 slice at width 4/3) + the chart displacement transfer.
+-- All hypotheses = pointwise instances of banked uniform bounds. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.AffineRawResidual.rawResidualN0_graded_quadPoly_width1
+#print axioms QIQTH.AffineRawResidual.rawResidualN0_graded_quadPoly_width43
+#print axioms QIQTH.AffineRawResidual.tauResidualN0_Or_graded_quadPoly_width1
+#print axioms QIQTH.AffineRawResidual.rawResidualN1_affine_graded_quadPoly_width1
+
 end QIQTH.AxiomAudit

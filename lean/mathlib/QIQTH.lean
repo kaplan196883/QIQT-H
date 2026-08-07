@@ -567,6 +567,7 @@ import QIQTH.Pd2ConvPerU
 import QIQTH.HgateCensusAssembly
 import QIQTH.FrozenGermInternal
 import QIQTH.HgateAffineRepair
+import QIQTH.AffineRawResidual
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
