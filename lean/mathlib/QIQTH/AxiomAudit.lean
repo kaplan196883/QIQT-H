@@ -20904,4 +20904,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDaHLapWiring.hDa_census_from_threaded
 #print axioms QIQTH.HDaHLapWiring.hLap_census_from_threaded
 
+-- ## J4-405 (PerUProviders): SOL #17 F1 + the ∀u-tail widening
+-- P1 hlin_field_concrete — the FACADE-shaped hlin field at the concrete
+-- witness pair via hlin_as_D; the carry hProv = the seven spatial-line
+-- diff-under-∫ legs bundled (the exact hFrozenData shape of w2_hQ1 on the
+-- diagonal window; each leg a satisfiable D-feeder output). P2 the
+-- MemInterchange ∀u-tail: frozenPairing_deg_zero + pd_zero +
+-- ★ memInterchange_body_deg (the degenerate leg UNCONDITIONAL — both sides
+-- collapse to 0 via Levi vanishing) + memInterchange_widened (U ∨ the
+-- degenerate window). P3 (the time-Leibniz bundle) deferred/named.
+-- J4-406 = F2 (hD1 via HD1SliverRoute — the last facade-v2 regularity
+-- carry). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.PerUProviders.hlin_field_concrete
+#print axioms QIQTH.PerUProviders.frozenPairing_deg_zero
+#print axioms QIQTH.PerUProviders.pd_zero
+#print axioms QIQTH.PerUProviders.memInterchange_body_deg
+#print axioms QIQTH.PerUProviders.memInterchange_widened
+
 end QIQTH.AxiomAudit
