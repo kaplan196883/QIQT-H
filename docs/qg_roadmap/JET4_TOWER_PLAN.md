@@ -3457,3 +3457,13 @@ becomes (C/εₘ)·G — the lower-capped engine v2 + `hLapS_all_capped` end-to-
 s-leg carries: hEdom/hpkgBound/hEmeas (banked) + the crude hAdom2 bank (now consumable) +
 the ∀u hmeas slices (J4-389 — check the J4-383 SliceMeasurability machinery first).
 raw 0; build 28s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-389 (f6279d3b): the ∀u hmeas slices discharged
+
+`QIQTH/AllUSliceMeas.lean` (3 decls std-3): the hmeas carries ARE J4-383 instances modulo the
+∀u dichotomy (degenerate window ⊆ {s≤0}, Levi vanishes, a.e.-0) + the ceiling Tc:=u +
+the full-laplaceBeltrami first factor. `pairingSlice_aesm` (generic) + both instantiations
+(exact carry shapes). Carries: hFzero (banked) + hHeatContEvery/hBcontEvery (banked box-glue) +
+hLapContEvery (the ONE new atom — J4-390 mirrors hSecCont_of_boxes). raw 0; build 46s.
+NOT a₁ = R/6 (CONDITIONAL).
