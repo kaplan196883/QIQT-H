@@ -552,6 +552,7 @@ import QIQTH.D2HExpandRecon
 import QIQTH.HrepGermFactorization
 import QIQTH.AmplitudeDataOnCollar
 import QIQTH.SliverBoundOnCollar
+import QIQTH.SliverTailMatched
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

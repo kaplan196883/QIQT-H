@@ -19978,4 +19978,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverBoundOnCollar.sliverA2ampBdd_on_collar
 #print axioms QIQTH.SliverBoundOnCollar.sliverIntegrand_on_collar
 
+-- ## J4-354 (SliverTailMatched): SOL-#13 BRICK 1 — THE ON-COLLAR TAIL-MATCHED
+-- T1: hessGaussFactor_integral_zero (the full-space moment, re-exported) +
+-- collarMoment_eq_neg_tail (∫_C H = −T_τ EXACT — the matched pairing, no
+-- estimate). T2: the increment machinery (the banked per-coordinate √τ-gain
+-- moment hk_coord_integral_le ⟹ ∫‖H·(q−q0)‖ ≤ L·(15n/2)/√τ). T3 ★
+-- sliver_term1_on_collar_matched: ‖∫_C H·q + q0·T_τ‖ ≤ L·(15n/2)/√τ (B₁=0;
+-- Sol's exact shape; the granularity matches sliver2_bound's term 1). T4 the
+-- tailMoment ≤ 1/τ sanity (documents the log-divergence that forced the match).
+-- The load-bearing carry: the collar Lipschitz hq (satisfiable per Sol's
+-- Lip(ρ·A_chart) analysis given the cubic-contact gradient). std-3 all 6.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.SliverTailMatched.hessGaussFactor_integral_zero
+#print axioms QIQTH.SliverTailMatched.collarMoment_eq_neg_tail
+#print axioms QIQTH.SliverTailMatched.hessGaussIncrement_norm_full_le
+#print axioms QIQTH.SliverTailMatched.hessGaussIncrement_collar_norm_le
+#print axioms QIQTH.SliverTailMatched.sliver_term1_on_collar_matched
+#print axioms QIQTH.SliverTailMatched.tailMoment_bound
+
 end QIQTH.AxiomAudit
