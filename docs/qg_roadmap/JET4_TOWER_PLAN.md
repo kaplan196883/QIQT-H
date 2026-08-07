@@ -3527,3 +3527,13 @@ geometry_census_at_gate + the one-rcases final assembly.
   global hAdom2 census field is retired from the interface. J4-392 = hII_hi_from_matchedSliver
   (the [u−εₘ,u] s-profile integrability via cancellation/continuity, not τ⁻¹ domination).
 raw 0; build ~30s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-392 (677f77f8): MemAdjHi REDUCED to the τ^{-1/2} moment carry
+
+`QIQTH/MemAdjHiSliver.lean` (3 decls std-3). The τ=0 endpoint is measure-zero (irrelevant).
+Route 2 landed: the moment cancellation (∫∂²G=0 ⟹ the signed z-pairing O(1) as τ→0) gives the
+τ^{-1/2} profile — integrable, unlike τ⁻¹. `hII_hi_from_sliver` = the full MemAdjHi from the
+BANKED hmeas2Hi_slice AESM + ONE satisfiable carry hGpow (m-uniform Cpair — the exact
+moment-aware WideSliverBoundary deliverable). Wall A = {capped-Lo (banked)} ∪ {hGpow}.
+raw 0; build 26s. NOT a₁ = R/6 (CONDITIONAL).
