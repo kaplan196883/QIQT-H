@@ -19959,4 +19959,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmplitudeDataOnCollar.hD2HexpandOn_concrete
 #print axioms QIQTH.AmplitudeDataOnCollar.amplitudeDataOn_concrete
 
+-- ## J4-353 (SliverBoundOnCollar): THE ON-COLLAR LEGS + THE HONEST SPLIT VERDICT
+-- S1 VERDICT: sliver2_bound consumes the bundle GLOBALLY (∀z: the identity, the
+-- bounds, hqLip; the √ε gain = the FULL-SPACE Hessian moment cancellation ∫(zᵢ²−2τ)G
+-- = 0 — fails on a collar sub-domain); every exact-constant global-bundle route is
+-- unsatisfiable (truncation breaks the identity+hqLip; ρ-amplitudes unbounded
+-- off-collar; ∀z-regime uncoverable). collar_to_regime + the on-collar legs
+-- (sliverExpand/AampBdd×3/Integrand _on_collar — the pointwise inputs supplied from
+-- the corrected bundle, hV0-free, K-absorbed). ★ THE CARRY TRANSFORMED: no longer
+-- hD2Hexpand (closed on the collar at the true chart) but THE OFF-COLLAR SLIVER
+-- REMAINDER (the width-Gaussian tail on ‖z‖>c√τ + the moment-cancellation split) —
+-- the full amplitudePackageOn_sliver_bound + hbnd_concrete_v2 blocked on it.
+-- std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.SliverBoundOnCollar.collar_to_regime
+#print axioms QIQTH.SliverBoundOnCollar.sliverExpand_on_collar
+#print axioms QIQTH.SliverBoundOnCollar.sliverAampBdd_on_collar
+#print axioms QIQTH.SliverBoundOnCollar.sliverA1ampBdd_on_collar
+#print axioms QIQTH.SliverBoundOnCollar.sliverA2ampBdd_on_collar
+#print axioms QIQTH.SliverBoundOnCollar.sliverIntegrand_on_collar
+
 end QIQTH.AxiomAudit
