@@ -3700,3 +3700,13 @@ the dominator mechanism, hcomp_concrete) · S2 ★ hinner_window_of_slotBound (T
 TRAP RESOLVED: the constants before m,s; hslot over all 0<τ≤τ₀, never over m; no εₘ in K₁/K₀)
 · S3 memLapFull_from_slotBound. THE RESIDUAL LIST (machine-checkable): {hslot, hcap
 (satisfiable), hEndpoint (measure-zero), hcensus}. raw 0; build 33s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-404 (739fee86): SOL B1+B2 — the (ix) hDa/hLap census wiring
+
+`QIQTH/HDaHLapWiring.lean` (2 decls std-3). B1 (hDa via T1a per-u; the 8 time-Leibniz carriers
+honest — the w2 bank is field-side; the maximal honest reduction) + B2 (hLap via T1b: ★
+hpdpdH_slice = rfl (α-equal unfold); hInterchange discharged on U by memInterchange_at_gate;
+hgi/hΓ from geometry; hpdpdZ/hII_lo → the banked dominations). (ix): hDa/hLap → engines ·
+hEZ/hLapZ banked · hES/hLapS windowed (∀u open). J4-405 = F1 + the widening. raw 0; build 26s.
+NOT a₁ = R/6 (CONDITIONAL).
