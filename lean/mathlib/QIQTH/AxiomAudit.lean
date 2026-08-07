@@ -20017,4 +20017,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverOffCollarMatched.sliver_term1_off_collar_matched
 #print axioms QIQTH.SliverOffCollarMatched.cubic_contact_gradient_bound
 
+-- ## J4-356 (SliverAssemblyMatched): SOL-#13 BRICK 3 — THE MATCHED-PAIR ASSEMBLY
+-- TERMS-2/3 VERDICT: only term 1 uses the cancellation; terms 2/3 are absolute
+-- (the crude moments) — off-collar via the chart-native gate-bounded route, no
+-- matching. A1 ★ sliver_term1_full_matched (bricks 1+2 added, A₀T_τ CANCELS
+-- exactly — fully proven). A2 comparison_leg_of_dom + cubic_gaussian_moment_
+-- witness (the τ^{3/2} scaling — hcomp satisfiable). A3 the absolute-reduction
+-- tool. A4 outer_sliver_bound + sliver_inner_matched_bound +
+-- amplitudePackageOn_sliver_bound (the √ε conclusion in the unchanged functional
+-- shape). A5 the COMPLETE 5-carry census (hcubic-satisfiable · hgate · the SHARED
+-- hdisp Db=O(‖z‖) displacement-derivative carry · hjets · hcenter ρ(τ,0)=1).
+-- THE hD2Hexpand INPUT: closed on-collar + assembled off-collar, reduced to the
+-- five enumerated satisfiable carries. std-3 (the intro projector axiom-FREE).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.SliverAssemblyMatched.sliver_term1_full_matched
+#print axioms QIQTH.SliverAssemblyMatched.comparison_leg_of_dom
+#print axioms QIQTH.SliverAssemblyMatched.abs_setIntegral_le_of_dom
+#print axioms QIQTH.SliverAssemblyMatched.cubic_gaussian_moment_witness
+#print axioms QIQTH.SliverAssemblyMatched.outer_sliver_bound
+#print axioms QIQTH.SliverAssemblyMatched.sliver_inner_matched_bound
+#print axioms QIQTH.SliverAssemblyMatched.amplitudePackageOn_sliver_bound
+
 end QIQTH.AxiomAudit
