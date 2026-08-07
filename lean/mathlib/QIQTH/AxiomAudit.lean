@@ -20075,4 +20075,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusSweepOne.census_interchange
 #print axioms QIQTH.CensusSweepOne.census_lapfull
 
+-- ## J4-359 (HrawCampaignOne): THE hraw OPENER — THE THREE VERDICTS + THE LEGS
+-- Q1 WIDTH: NO trivial collapse — the in-chart engine is width-EXACTLY-3/2
+-- polynomial-free in the CHART coordinate; the chart→ambient transfer inflates to
+-- width 2 (> 3/2, un-narrowable); the width-1-with-polynomial hraw remains the
+-- correct entry (its chart transfer lands at ambient 4/3 < 3/2 ✓). Q2 THE CONSTANT
+-- IS ALREADY UNIFORM over K (the ∃ B sits outside ∀q∈K — no cover extraction!).
+-- Q3 the support = the gate (the far region EMPTY). THE LEGS: gaussDdim_width_mono
+-- + hEdom_of_polyfree_width (any width-w₀≤3/2 polynomial-free bound ⟹ the exact
+-- hEdom shape, E₀ = P·√(3/2/w₀)ⁿ) + gatedWitness_heatOp_eq_zero_offSupport +
+-- gatedRawBound_of_onGate (the assembly reduction: on-gate near-diagonal ⟹ the
+-- full GlobalGatedRawBound). REMAINING: the width-1 in-chart pre-collapse form +
+-- the two-sided near-isometry transfer + the polynomial re-expression. std-3
+-- all 4. NOT a₁ = R/6.
+#print axioms QIQTH.HrawCampaignOne.gaussDdim_width_mono
+#print axioms QIQTH.HrawCampaignOne.hEdom_of_polyfree_width
+#print axioms QIQTH.HrawCampaignOne.gatedWitness_heatOp_eq_zero_offSupport
+#print axioms QIQTH.HrawCampaignOne.gatedRawBound_of_onGate
+
 end QIQTH.AxiomAudit
