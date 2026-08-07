@@ -20441,4 +20441,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AnnulusUniformization.hEnear_uniform
 #print axioms QIQTH.AnnulusUniformization.gatedHeatOp_annulus_uniform
 
+-- ## J4-380 (CommonGateShell): ★★★★ THE hgate LABEL RETIRED
+-- The common-(a,b) shell: gatedHeatOp_plateau_at + gatedHeatOp_annulus_at
+-- (the ∀-(a,b) leg restatements) + affineGateBound_concrete (one common
+-- (a,b)=(m/8,m/4), the constant-radius gate S = φ '' ball 0 (m/2), the six
+-- gate facts from the chart germ, affineGateBound_of_legs applied) +
+-- ★★★★ hEdom_from_geometry: the width-3/2 hEdom ∃-shape for the CONCRETE
+-- vanVleck gated witness from GEOMETRY ONLY — final input list: smoothness
+-- (hg/hC/hw) + gauge (hdg0/hg0) + frame (hframeK/hinvF/hgnd/hgsymm) +
+-- compactness (hK). hCoeffU0/hCoeffLin1 DISCHARGED INTERNALLY
+-- (hCoeffU0_vanVleck + uniformCoeffLinear_bound). The 6th-interface-finding
+-- repair arc (Sol #15, J4-368..380) COMPLETE: the on-gate hgate carry is
+-- DERIVED, not assumed. Remaining labelled surface of the census assembly:
+-- the (a,b)-threading of the ~40 census carries + hfull_pd1 + dataAmp/
+-- hD2Hexpand + hQ1/W2 + the E-combination + the data piles. std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CommonGateShell.gatedHeatOp_plateau_at
+#print axioms QIQTH.CommonGateShell.gatedHeatOp_annulus_at
+#print axioms QIQTH.CommonGateShell.affineGateBound_concrete
+#print axioms QIQTH.CommonGateShell.hEdom_from_geometry
+
 end QIQTH.AxiomAudit
