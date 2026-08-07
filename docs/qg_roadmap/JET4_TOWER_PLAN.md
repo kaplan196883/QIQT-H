@@ -3034,3 +3034,37 @@ locally; pd² = pd(gcoef) = gderiv(0) via the identification) · 2 the frozen-si
 (the proper-integral truncated version; hbulkderiv ⟹ pd²(frozen_m) = gderivₘ(0);
 finite bad m irrelevant atTop) · 3 the census convergence (hbulk_tendsto at 0 ⟹
 the Tendsto; the √ε sliver as backup). NO new domination needed.
+
+---
+## ★★★★ J4-363 (b8fe943b): THE hPd2conv WALL DISSOLVED — ALL FOUR LABELLED INPUTS RESOLVED/DISSOLVED
+
+`QIQTH/Pd2ConvDissolution.lean` (ns `QIQTH.Pd2ConvDissolution`) — the Sol-#14 execution. The last
+deep wall of `a1_R6_from_labelled` is a **corollary of the already-carried hD1 sliver census**:
+the full-side second derivative = ∂ᵢ(the s-integral-represented Dmap coefficient `gcoef i`)(0) —
+the `(t−s)^{−1/2}`-dominated FIRST interchange only, NO full-side second interchange (the
+J4-336 circularity broken).
+
+- `pd_of_hasFDerivAt` (B0a) — the HasFDerivAt→pd read-off.
+- `pd_germ_eq_of_family` (B0b) — the `hfull_pd1`/`hfrozen_pd1` germ links from an hfam_v2-shape family.
+- ★ `gcoef_hasFDerivAt_candidate` (B0c) — the candidate-identification the bare `hD1_from_data`
+  ContDiffAt forgets: `HD1SliverRoute.hD1_bulk_sliver_reduction` re-exported at x₀=0 (pure API
+  extraction — the inner uniform-limit-of-derivatives step ALREADY installs `gderiv 0`).
+- `pd2_at_zero_eq` (B1/B2) — the second-partial read-off, both sides (`pd_congr_of_eventuallyEq` + B0a).
+- ★★★ `hPd2conv_from_census` (B3) — the EXACT `hPd2conv` binder of
+  `FrozenLaplaceSliver.hLapFull_of_pd2conv` (verified verbatim) from the census only; the
+  `hsliver`+`hb` squeeze at 0 IS the frozen→full convergence; CLM-application continuity evaluates
+  at eᵢ. The census's `hcont` NOT needed (2-jet only).
+
+**THE FOUR LABELLED INPUTS NOW STAND**: hGauss DERIVED (J4-347) · hD2Hexpand → the sliver
+carries (J4-356) · hraw → the hgate carry (J4-362) · hPd2conv → the census corollary (THIS).
+
+All 5 std-3; budget raw 0; wired (QIQTH.lean + AxiomAudit pins). Build 39s agent / green my side.
+
+**HONEST DISTANCE**: a₁=R/6 remains CONDITIONAL. The remaining surface: (1) the hgate carry
+(the on-gate width-4/3 quadratic per-base parametrix bound — satisfiable, possibly derivable
+from the M2 ingredients); (2) the mechanical hEdom-accepting re-thread of
+`hDaLimLU_from_labelled` (the signature names the linear hraw); (3) the 4 sliver carries
+(hcubic-sat/hgate/hjets/hcenter) + the L_{A_chart} Lipschitz data; (4) the hfull_pd1/hfrozen_pd1
+concrete instantiations (pd_germ_eq_of_family on the carried hfam_v2 / the banked frozen
+linewise); (5) the data piles (dataLevi, the dominations, the W2 family, §I/J/K); (6) the
+final composition. Est. ~1–3 days.
