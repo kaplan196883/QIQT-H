@@ -3224,3 +3224,15 @@ OPEN to AffineGateBound: **(2b)** the annulus width-trade ≤4/3 (bank engine 3/
 tradeable — new lemma) · **(3)** the v→(p−q) ambient transfer (width-4/3 near-isometry budget;
 banked hdisp is the fixed 3/2→2 pairing — re-parametrize `uniformFlowExp_displacement_bound`,
 C_D→0 on small balls; = J4-371). std-3 both; raw 0; build 27s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-371 (a02b23a2): the width-4/3 near-isometry budget — the ball leg, fully DERIVED
+
+`QIQTH/NearIsometry43Budget.lean`: `uniformFlowExp_hdisp43_ball` ((5/4)·rncRadialSq(φ_q v−q) ≤
+(4/3)·rncRadialSq v on the ball; the 16/15 reserve; exact mirror of the banked 3/2→2 pairing) +
+`uniformFlowExp_gaussDdim_transfer_43` (G_{(5/4)τ}(v) ≤ √(16/15)ⁿ·G_{(4/3)τ}(p−q) via
+gaussDdim_le_gaussDdim_chart). NO carries — both derived from hC + IsCompact K. Direction
+verdict confirmed: the transfer needs w₀·rncRadialSq(p−q) ≤ (4/3)·rncRadialSq(v) — mirrored.
+Remaining to AffineGateBound: the quad transfer (poly leg, J4-372) · (2b) the annulus
+width-trade · the on-gate assembly · the combined ∃-capstone. std-3 both; raw 0; build 43s.
+NOT a₁ = R/6 (CONDITIONAL).
