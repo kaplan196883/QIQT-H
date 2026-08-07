@@ -3211,3 +3211,16 @@ re-targeted to width 4/3 chart frame (⚠ 4/3 < 3/2: the 3/2 assembly can NOT be
 directly — stop at width 1 and fold); (3) the chart displacement transfer v→(p−q). Then
 `hEdom_vanVleck_of_hgate_affine` consumes AffineGateBound directly. raw 0; builds 34–42s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-370 (fdbd0084): the 1→4/3 affine fold + the transport-identity promotion
+
+`QIQTH/AffineGateTransport.lean`: `rawResidualN1_affine_graded_quadPoly_width43` (the chart-frame
+inner AffineGateBound shape at 4/3; √(4/3)ⁿ into both affine coefficients) +
+`heatOp_globalCutoffWitness_transport` (the pre-871 htransport of CoeffU1Fix:853–868 standalone,
+over the honest carries hpt (:831) / hlap (:840–852), both discharged in-bank).
+
+OPEN to AffineGateBound: **(2b)** the annulus width-trade ≤4/3 (bank engine 3/2-only; r≥a>0 ⟹
+tradeable — new lemma) · **(3)** the v→(p−q) ambient transfer (width-4/3 near-isometry budget;
+banked hdisp is the fixed 3/2→2 pairing — re-parametrize `uniformFlowExp_displacement_bound`,
+C_D→0 on small balls; = J4-371). std-3 both; raw 0; build 27s. NOT a₁ = R/6 (CONDITIONAL).
