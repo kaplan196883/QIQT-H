@@ -19938,4 +19938,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HrepGermFactorization.chartImageGauss_center
 #print axioms QIQTH.HrepGermFactorization.hD2Hexpand_concrete
 
+-- ## J4-352 (AmplitudeDataOnCollar): SOL-#12 BRICKS 1+3 — hV0 ELIMINATED
+-- B1: collarRegime (predicate premise; the chart-domain conjuncts honest) +
+-- rhoRatio/collarK (ρ ≤ K = exp(Lnc³√τ₀/4) on the collar, from the banked
+-- near-isometry) + AmplitudeDerivativeDataOn (the corrected bundle: hD2Hexpand +
+-- the 3 amplitude bounds regime-conditional; the z-Gaussian conclusion EXACT;
+-- the rest unchanged). B2: witnessSecondXDeriv_expand_bridge_rho (hV0 → the
+-- unconditional hV0ρ ratio; the uniform gaussDdim(V 0) factor ⟹ one
+-- multiplication, no product-rule corrections) + hD2HexpandOn_concrete (the true
+-- chart; hV0 ELIMINATED; carries = the chart jets + hVP/hPsq/hVQ only). B3:
+-- amplitudeDataOn_concrete (the FULL corrected bundle at the true chart:
+-- amplitudes = ρ·chartAmps, M_j = K·M_jchart; honest enumerated carries).
+-- NEXT: the sliver-bound re-derivation (the hbnd conclusion unchanged). std-3
+-- all. NOT a₁ = R/6.
+#print axioms QIQTH.AmplitudeDataOnCollar.rncRadialSq_le_nsq
+#print axioms QIQTH.AmplitudeDataOnCollar.collarK_pos
+#print axioms QIQTH.AmplitudeDataOnCollar.gauss_ratio_rho
+#print axioms QIQTH.AmplitudeDataOnCollar.rhoRatio_le_collarK
+#print axioms QIQTH.AmplitudeDataOnCollar.witnessSecondXDeriv_expand_bridge_rho
+#print axioms QIQTH.AmplitudeDataOnCollar.hD2HexpandOn_concrete
+#print axioms QIQTH.AmplitudeDataOnCollar.amplitudeDataOn_concrete
+
 end QIQTH.AxiomAudit
