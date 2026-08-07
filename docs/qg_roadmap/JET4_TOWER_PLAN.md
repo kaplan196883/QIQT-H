@@ -3665,3 +3665,15 @@ J4-351/356) — the assembleable object is the COLLAR-RESTRICTED AmplitudeDeriva
 (hD2Hexpand via hD2HexpandOn_concrete; the assembly inverts the J4-356 reduction). A1 handoff:
 the concrete amplitudes + collar hD2Hexpand + hqLip feed amplitudePackageOn_sliver_bound;
 residual = compactness bookkeeping. raw 0; build 26s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-401 (b30b967a): SOL #17 A1+A2 — the hGpow bridge (the last wall BRIDGED)
+
+`QIQTH/GpowBridge.lean` (8 decls). A1 the equality bridge (the pairing = the matched term-1
+collar/off-collar pair + gradient + mass; carries hon/hoff + integrabilities) · A2 the per-τ
+K₁τ^{-1/2}+K₀ bound (sliver_term1_full_matched — the banked center-subtraction IS the
+τ⁻¹→τ^{-1/2} improvement; NO new moment development per SOL #17) + invSqrt_absorb (ONLY τ≤ε*)
++ ★★★ leviSecondPairing_le_invSqrt (∃Cpair before the m,s binders — the EXACT m-uniform hGpow
+shape). Remaining (hGpow_bridge_handoff): the concrete-witness slot instantiation
+(hon/hoff/hcomp/hf2bound/hf3bound) + hKnonneg + the s=u endpoint. J4-402 = A3 closure.
+raw 0; build ~20s. NOT a₁ = R/6 (CONDITIONAL).
