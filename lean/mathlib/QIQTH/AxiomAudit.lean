@@ -20474,4 +20474,18 @@ namespace QIQTH.AxiomAudit
 -- E-combination. std-3. NOT a₁ = R/6.
 #print axioms QIQTH.CensusGeometryThread.hDaLimLU_from_geometry_census
 
+-- ## J4-382 (CensusDominations): the piles (iii) + (v)-heat discharged
+-- timeWindow_facts (the concrete window U=Ioo(T/2)T, aa=T/2 — the exact (iii)
+-- shape) + hAdomHeat_from_hEdom (the (v) heat-kernel domination repackaged
+-- from the geometry-derived width-3/2 hEdom at p=0: wA=3/2,
+-- CA=(E₀+E₁T)·√(3/2)ⁿ — the same E₀/E₁ feed both step (vii) and hAdomHeat).
+-- HONEST D3/D4 verdicts: hAdom2 CARRIED (the only banked second-x-derivative
+-- bound is the crude C·τ⁻¹·G shape whose strip integral diverges — the real
+-- route is the moment-aware WideSliverBoundary campaign, not a repackaging);
+-- the 4 s-slice measurabilities CARRIED (consumed everywhere, supplied
+-- nowhere — the compositional supplier = J4-383). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CensusDominations.timeWindow_facts
+#print axioms QIQTH.CensusDominations.hAdomHeat_from_hEdom
+
 end QIQTH.AxiomAudit
