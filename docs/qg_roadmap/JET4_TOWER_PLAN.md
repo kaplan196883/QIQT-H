@@ -3467,3 +3467,48 @@ the full-laplaceBeltrami first factor. `pairingSlice_aesm` (generic) + both inst
 (exact carry shapes). Carries: hFzero (banked) + hHeatContEvery/hBcontEvery (banked box-glue) +
 hLapContEvery (the ONE new atom — J4-390 mirrors hSecCont_of_boxes). raw 0; build 46s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-390 (4fe6901f): the r2 continuity atom CLOSED
+
+`QIQTH/LapContBoxGlue.lean` (3 decls std-3): hLapCont_of_boxes + hLapContEvery_of_boxes (the
+exact AllUSliceMeas carry; one Tc-generic box family) + hmeasLapLevi_from_boxes (the hmeas
+resting on {box family, hFzero, hBcontEvery} only). Both continuity atoms → the SAME box shape.
+raw 0; build 43s. NOT a₁ = R/6 (CONDITIONAL).
+
+## ★ SOL CONSULT #16: THE ENDGAME ASSEMBLY ORDER (recorded 2026-08-07)
+
+Q1 THE DAG (no linear order): geometry → G₀(gate discipline: ONE rcases, all suppliers
+gate-generic then specialized; never transport literal-constGate facts through .choose) →
+C (the continuity floor: non-Levi boxes → Levi iterates → uniform tail → hBcontEvery) →
+D (the W2 package via SecondOrderInterchangeConcrete/witness_MemInterchange as aggregation
+points — never pass the 7 carrier fields independently) → B (the hDa/hLap assemblies = wiring
+after A/D) → census(ix); E (dataAmp = the matched-sliver wall, DIRECT coefficient path) and
+F (per-u hPd2conv: intro u FIRST then construct the census — quantifier trap) parallel;
+G₁ (per-gate census: re-run constRadius_package_and_S1 parametrically; derive hEmeas from C) →
+hDaLimLU_from_geometry_census → H (a1_R6_from_labelled — one rcases skeleton).
+CRITICAL PATH: C, D, E, F, G. A = only via the hDaLimLU branch (interface redesign candidate).
+ABSORB (don't expose): the old global hAdom2 field, the individual measurability/W2 fields,
+the fixed-gate lifts, the old hraw/hgate/hPd2conv labels.
+
+Q2 THE WALLS: A = GENUINE (the uncapped global hAdom2 shape is generally FALSE — τ⁻¹ at z=0
+is intrinsic; the capped (C/ε)·G form is the only valid consequence; the capped route works
+IFF every consumer uses τ≥εₘ AND the constant may depend on εₘ at that binder position AND
+no limit needs m-uniformity — THE QUANTIFIER TRAP: ∃CA2∀m vs ∀m∃CA2(εₘ); audit
+hAdom2→integrability_from_dominations→hII→memLapFull; if hII is whole-interval before the
+pairing split ⟹ either refactor memLapFull to assemble from pairing legs OR the moment-aware
+WideSliverBoundary campaign is unavoidable — ∫τ⁻¹dτ is not rescued by widening). C(i) standard
+C² analysis; C(ii) wiring (promote htransport; no global simp); C(iii) hBcontEvery = the
+Weierstrass/M-test route on hmajor/hmajorSum (uniform tail ∀δ∃N∀n≥N∀x∈K — NOT ∀x∃N; term
+continuity needed too). D genuine dominated-differentiation. E genuine (matched-sliver jets).
+F mixed (hPd2conv_perU banked; the CConv hlin/hD1/hfull_pd1 suppliers genuine).
+
+Q3 THE 6 BRICKS: (1) hAdom2_capped_of_crude ((C/ε)·G from the crude bank; width UNCHANGED) →
+(2) the exact hII pairing-leg adapters from the capped bound (THE DECISIVE AUDIT: if the target
+needs one constant ∀m, STOP) → (3) memLapFull_from_pairing_dominations (if it compiles without
+the full-time hAdom2 ⟹ wall A ELIMINATED by interface weakening; if it bottoms out on the
+uncapped whole-interval hII ⟹ the moment-aware campaign precedes D/B) → (4) the non-Levi box
+continuity (Θ,u∈C² + htransport promotion) → (5) leviIter continuity by induction (FIXED box
+through the induction) → (6) the uniform tail + hBcontEvery (the M-test; identify the tsum
+ONCE). Then: the C-measurability package + the D package + the B wiring + E/F + 
+geometry_census_at_gate + the one-rcases final assembly.
