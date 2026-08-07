@@ -20373,4 +20373,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AnnulusAffineLeg.parametrixCofactor_deriv_annulus43
 #print axioms QIQTH.AnnulusAffineLeg.cutoffResidual_annulus43_bound
 
+-- ## J4-376 (AnnulusAmbientTransfer): the annulus AMBIENT transfer
+-- The width bookkeeping resolved via d=5/4 clones (the J4-375 tower re-run at
+-- chart width 5/4; the proofs are width-agnostic, constants swap to
+-- (20/a²)^k·k! and √(5/4)ⁿ) → the 5/4→4/3 quad transfer
+-- (cutoffResidual_annulusAmbient43_bound, B=(25/16)√(16/15)ⁿ; annulus ⊂ ball
+-- via b<r₁) → ★ gatedHeatOp_affine_onAnnulus (the gate layer + transport
+-- identity at the pullback pair — shape-match DEFINITIONAL): the gated
+-- witness heatOp on the annulus ≤ (P₀+P₁τ)·quadPoly·G_{4/3}(ambient).
+-- With J4-374's ball leg + the off-support vanishing, all three regions of
+-- AffineGateBound are now covered; J4-377 = the 3-region ∃-capstone
+-- (region split + radius min + carry discharge + coefficient max). std-3
+-- all 7. NOT a₁ = R/6.
+#print axioms QIQTH.AnnulusAmbientTransfer.invTpow_gaussDdim_le_narrow54
+#print axioms QIQTH.AnnulusAmbientTransfer.gaussDdim_le_gaussDdim_narrow54
+#print axioms QIQTH.AnnulusAmbientTransfer.parametrixCofactor_value_annulus54
+#print axioms QIQTH.AnnulusAmbientTransfer.parametrixCofactor_deriv_annulus54
+#print axioms QIQTH.AnnulusAmbientTransfer.cutoffResidual_annulus54_bound
+#print axioms QIQTH.AnnulusAmbientTransfer.cutoffResidual_annulusAmbient43_bound
+#print axioms QIQTH.AnnulusAmbientTransfer.gatedHeatOp_affine_onAnnulus
+
 end QIQTH.AxiomAudit

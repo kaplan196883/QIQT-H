@@ -574,6 +574,7 @@ import QIQTH.Transfer43Quad
 import QIQTH.OnGateGlue
 import QIQTH.PullbackAffineBallLeg
 import QIQTH.AnnulusAffineLeg
+import QIQTH.AnnulusAmbientTransfer
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
