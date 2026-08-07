@@ -3729,3 +3729,44 @@ the 3 analytic carries (order-2 sliver shapes). ★ THE CORRESPONDENCE CONFIRMED
 census IS the Pd2ConvPerU per-u census (identical family). ★ hD1_concrete FIRED from
 hD1_conditional. J4-407 = F3 (hfam_v2 + hfull_pd1 + the tuple). raw 0. NOT a₁ = R/6
 (CONDITIONAL).
+
+---
+## J4-407 (c91825c9): SOL #17 F3 — THE F PILE CLOSES
+
+`QIQTH/PerUCensusTuple.lean` (3 decls std-3): hfam_v2_concrete (fired from hlin+hD1) +
+hfull_pd1_fired (the exact per-u germ) + ★ hPd2conv_perU_fired (the exact binder (viii);
+sSet=univ, hb/hbulk_tendsto discharged, fbulk=fbulkInt). The census plumbing MECHANICALLY
+CLOSED through F3. Residual carries: hProv(7) + hGint + hbulkderiv/hsliver/hcont (shared) +
+data fields + hfrozen_pd1 (via hQ1; route G₁ through census_v2). raw 0. NOT a₁=R/6 (COND).
+
+## ★ SOL CONSULT #18 (recorded 2026-08-08): THE FINAL ASSEMBLY ARCHITECTURE
+
+THE VERDICT: the capstone path = semantic data → the analytic carriers specialized AT THE
+LITERAL constGate → the seven v3 slots → `A1R6SlotAdapters.a1_R6_slots_AT_GATE` → the public
+two-jet AT THE LITERAL constGate. Do NOT route through the existential geometry gate; do NOT
+wrap a1_R6_from_labelled (its stale linear-hraw binder disqualifies it — callers would have to
+supply the old type; keep cp224 as a legacy/regression theorem). The conclusion stays the
+EXACT a1_R6_slots_AT_GATE codomain (no existential-gate public shape).
+
+Q2: RE-RUN at the literal constGate (constRadius_package_and_S1 + tripleHEmeas_concrete_v4 +
+the parametric census builders) — NEVER eliminate cp264/cp265's ∃ and try to identify the
+opaque witnesses with G₀ (transport = gate equalities + dependent-record rewrites = fragile).
+Local notation G₀; all coherence definitional.
+
+Q3 THE PUBLIC PACKAGES (the absorption rule): {GeometryFrameData (derives hGauss/G₀/hEdom/S1
+internally) · LeviDuhamelConvergenceData (the honest hDuhamel/trio conditional) ·
+CollarAmplitudeDataOn (the RESTRICTED object — never unrestricted AmplitudeDerivativeData) ·
+GpowSlotData (the A-side; or a derived MemLapFull directly) · TimeLeibnizData (the 8 T1a
+carriers + T1b leftovers) · W2FeederData (hProv/hGint/sliver carries; ONE owner per fact) ·
+RicciSourceData (temporary-but-honest until ricciSourceData_from_geometry is banked)}.
+FORBIDDEN in the final signature: hraw, hgate, a/b/S witnesses, unrestricted
+AmplitudeDerivativeData, raw hD2Hexpand/hPd2conv/hGauss, hcap/hEndpoint, gate equalities.
+
+Q4 THE CUT: J4-408 = ConstGateAssemblyData + constGate_assembly_data_from_data (the fixed-gate
+G₁/census bridge; copy the hEdom proof one layer earlier if only the ∃-form exists) · J4-409 =
+FinalA1SlotsAtConstGate + finalA1Slots_from_data (each field = one exact banked call) ·
+J4-410 = the one-line public a1_R6_from_data. TRAPS: the legacy-label audit (#print the
+signatures; no hraw/hgate/witness survival), the ∃-elim order (fix G₀ first, rcases once),
+restricted-vs-unrestricted amplitude (no silent typeclass/simpa regression), the m-uniform
+quantifier order preserved, the gate term syntactically identical everywhere, the final
+#print axioms audit.
