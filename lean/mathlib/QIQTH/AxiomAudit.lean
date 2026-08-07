@@ -20618,4 +20618,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LapContBoxGlue.hLapContEvery_of_boxes
 #print axioms QIQTH.LapContBoxGlue.hmeasLapLevi_from_boxes
 
+-- ## J4-391 (CappedAdom2Audit): THE DECISIVE AUDIT — WALL A REDUCED, NOT ELIMINATED
+-- Brick 1: hAdom2_capped_of_crude (+_family: the honest ∀m∃CA2(εₘ) side).
+-- THE AUDIT: hAdom2 consumed ONLY via integrability_from_dominations →
+-- hII_lo/hII_hi at τ=u−s. LO leg: τ≥εₘ ⟹ the capped route WORKS
+-- (hII_lo_from_capped landed; MemAdjLo per-m — the GOOD quantifier order).
+-- HI leg: τ∈(0,εₘ) unbounded below ⟹ the capped route FAILS there; BUT
+-- MemAdjHi's ONLY role = the integrability prerequisite for
+-- integral_add_adjacent_intervals (the Hi piece's SIZE is killed by the
+-- matched-sliver √ε cancellation) ⟹ the route = matched-sliver/moment-aware,
+-- NOT absolute domination. ★ memLapFull_from_pairing_dominations: the full
+-- MemLapFull binder from {capped-Lo + gauge + hInter + sliver + hPd2conv}
+-- PLUS the ONE labelled residual hII_hi : MemAdjHi — NO uncapped hAdom2
+-- anywhere. The false global carry → {capped-Lo} ∪ {MemAdjHi}. J4-392 =
+-- hII_hi_from_matchedSliver. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.CappedAdom2Audit.hAdom2_capped_of_crude
+#print axioms QIQTH.CappedAdom2Audit.hAdom2_capped_family_of_crude
+#print axioms QIQTH.CappedAdom2Audit.hII_lo_from_capped
+#print axioms QIQTH.CappedAdom2Audit.memLapFull_from_pairing_dominations
+
 end QIQTH.AxiomAudit

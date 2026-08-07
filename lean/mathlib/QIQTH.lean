@@ -589,6 +589,7 @@ import QIQTH.ESLegWidening
 import QIQTH.EveryCeilingFamilies
 import QIQTH.AllUSliceMeas
 import QIQTH.LapContBoxGlue
+import QIQTH.CappedAdom2Audit
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
