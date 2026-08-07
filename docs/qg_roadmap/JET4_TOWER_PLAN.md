@@ -3344,3 +3344,29 @@ each leg ∃-chooses its own (a,b); the stitch needs ONE pair. J4-380 = the comm
 ∀-(a,b) leg restatements + the ConstRadiusGateExport hgoodC bundle re-pointed ⟹ AffineGateBound
 concrete ⟹ hEdom from geometry ⟹ ★ hgate RETIRED (residual inputs then only smoothness/gauge/
 frame + banked hCoeffU0/hCoeffLin1). raw 0; build 37s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★★★ J4-380 (c0f9708b): THE hgate LABEL RETIRED — hEdom DERIVED FROM GEOMETRY
+
+`QIQTH/CommonGateShell.lean` (4 decls std-3): the ∀-(a,b) leg restatements + ★
+`affineGateBound_concrete` (one common (a,b)=(m/8,m/4), the constant-radius gate, the six gate
+facts from the chart germ, `affineGateBound_of_legs` applied) + ★★★★ `hEdom_from_geometry` —
+the width-3/2 hEdom ∃-shape for the CONCRETE vanVleck gated witness from GEOMETRY ONLY:
+smoothness (hg/hC/hw) + gauge (hdg0/hg0) + frame (hframeK/hinvF/hgnd/hgsymm) + compactness
+(hK). hCoeffU0/hCoeffLin1 discharged INTERNALLY. NO hgate carry.
+
+**THE SOL-#15 REPAIR ARC (J4-368..380) IS COMPLETE**: the false τ-uniform hgate binder (the 6th
+interface-shape finding) → the affine repair (368) → the raw affine graded estimate from the
+pre-absorption CoeffU1Fix slice (369) → the folds/transport (370) → the 4/3 near-isometry
+budget + quad transfer (371-372) → the on-gate glue + the pullback-metric finding (373-374) →
+the annulus at 4/3 (375-376) → the 3-region stitching (377) → the flow-frame uniformization
+(378-379) → the common-(a,b) shell + the geometry-only hEdom (THIS). The on-gate carry is
+DERIVED, not assumed.
+
+**HONEST DISTANCE**: a₁ = R/6 remains CONDITIONAL. The remaining labelled surface of the
+census assembly (hDaLimLU_from_hgate_affine_census_v2): the (a,b)-threading (the assembly
+fixes (a,b); the geometry ∃-chooses them — restate ∃-style, J4-381) + the ~40 census carries
+(the hQ1/W2 differentiation-under-∫ family, the integrability/measurability piles, the √ε
+sliver census incl. dataAmp.hD2Hexpand) + hfull_pd1 + the E-combination carries + the data
+piles (dataLevi, the dominations) + the final a₁ composition. raw 0; build 32s.
+NOT a₁ = R/6 (CONDITIONAL).
