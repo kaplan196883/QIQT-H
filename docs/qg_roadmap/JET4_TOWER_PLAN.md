@@ -2991,3 +2991,13 @@ support = the gate (the far region empty). Legs: the width mono + hEdom_of_
 polyfree_width + the off-support zero + gatedRawBound_of_onGate. REMAINING: the
 width-1 in-chart pre-collapse form + the two-sided transfer + the polynomial
 re-expression. std-3 all 4, raw 0. NOT a₁=R/6. NEXT: J4-360 = HrawChartTransfer.
+
+## J4-360 (2026-08-07, b107f0f1) — HrawChartTransfer: THE TRANSFER + THE BRIDGE [AF]
+T1 the two-sided budgets (δ=1/4: r²_z ≤ (4/3)r²_v ∧ r²_v ≤ (5/4)r²_z). T2 the
+width-1-with-poly chart→ambient transfer (→ 4/3) + the width-parametric bridge
+(w₀ ∈ (0,3/2)). T3: the pre-collapse in-chart form NOT bank-extractable — the
+honest hgate carry. T4 the width-parametric predicate + the gate assembly +
+hraw_variant_concrete (the capstone). hraw remaining: the pre-collapse extraction
++ the concrete near-isometry + the wiring. std-3 all, raw 0. NOT a₁=R/6. NEXT:
+J4-361 = HrawNearIsometryConcrete (the flow-displacement bound + the radial
+comparison + the (1/4)-budget on the shrunk gate).
