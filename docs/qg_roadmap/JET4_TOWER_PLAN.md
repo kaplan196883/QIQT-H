@@ -3445,3 +3445,15 @@ hAdomEvery/hLapDomEvery/hFdomEvery — the honest hglobal-style structure; the l
 slice fed directly). Pile (ix): z-legs (J4-386) + s-legs (THIS) + the hDa/hLap banked-route
 carries. J4-388 = the every-ceiling families (hAdomEvery = a thin wrapper over the T-uncapped
 hEdom; hFdomEvery = the ∀t hpkgBound re-run). raw 0; build 26s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-388 (6686a7d2): the every-ceiling families + THE F3 UNLOCK
+
+`QIQTH/EveryCeilingFamilies.lean` (6 decls std-3): hAdomEvery from geometry (the uncapped
+affine hEdom) · hFdomEvery from the ∀t' hpkgBound (ONE carry, every ceiling) · ★ THE F3
+UNLOCK: τ = u−s ≥ εₘ on the pairing interval ⟹ the crude C·τ⁻¹·G second-derivative bank
+becomes (C/εₘ)·G — the lower-capped engine v2 + `hLapS_all_capped` end-to-end · 
+`hES_hypothesis_light` (hES from geometry + {hEdom, 2 dataLevi carries, hmeas}). Residual
+s-leg carries: hEdom/hpkgBound/hEmeas (banked) + the crude hAdom2 bank (now consumable) +
+the ∀u hmeas slices (J4-389 — check the J4-383 SliceMeasurability machinery first).
+raw 0; build 28s. NOT a₁ = R/6 (CONDITIONAL).
