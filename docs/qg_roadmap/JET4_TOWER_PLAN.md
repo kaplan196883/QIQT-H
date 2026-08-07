@@ -3276,3 +3276,21 @@ the transfer legs metric-independent. `pullbackAffine_width1` → `pullbackAffin
 (P₀+P₁τ)·quadPoly·G_{(4/3)τ}(ambient) on ball ∩ plateau ∩ gate-interior. Remaining: the
 annulus (2b, J4-375) + the ∃-capstone; the banked affine finishers then complete hgate→hEdom.
 raw 0; build 29s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-375 (eda5d940): THE ANNULUS (2b) LEG at 4/3 — the 3/2 was NOT irreversible there
+
+`QIQTH/AnnulusAffineLeg.lean` (5 decls std-3). ★ MAP VERDICT: the engine
+(`cutoffResidual_narrow_tauUniform_engine`, WidthMarginEngine:529) is width-AGNOSTIC; the
+general-(c,d) tail-trade was ALREADY BANKED (`invTpow_gaussDdim_le_width_annulus`,
+WidthMarginEngine:142 — τ-free constant, exp(−a²/…τ) beats τ^{−k}); 3/2 is irreversible only
+on the plateau (handled by the J4-374 ball leg). LANDED: the 4/3 tail-trade (const (16/a²)^k·k!)
++ the free pure-Gaussian 1→4/3 + the promoted per-term annulus bounds (value/deriv) + ★
+`cutoffResidual_annulus43_bound` — the annulus leg in the exact AffineGateBound inner shape,
+chart frame, no (1+t) cap, P₁ = the honest near-leg affine carry. Banked per-term suppliers
+all in the pullback frame (parametrixCofactor_value/deriv_annulus_tauUniform,
+pd_radialCutoff_bound_on_annulus, laplaceBeltrami_radialCutoff…annulus,
+uniformFlowPullbackMetricInv_entry_uniform_bound_annulus). Remaining: the ambient v→z transfer
+(J4-376; ⚠ width bookkeeping — may need the 5/4 re-instantiation of the annulus bound before
+the 5/4→4/3 quad transfer) + the 3-region ∃-capstone (J4-377). raw 0; build 29s.
+NOT a₁ = R/6 (CONDITIONAL).
