@@ -3086,3 +3086,22 @@ Surviving labelled inputs of the one-theorem assembly: `hgate` (M2-ingredient de
 `dataAmp.hD2Hexpand` (→ the matched sliver carries, J4-356) · per-`u` `hPd2conv` (→ the census
 corollary J4-363; the per-`u` instantiation = J4-365). All 3 std-3; raw 0; build 27s.
 NOT a₁ = R/6 (CONDITIONAL). Next: the hPd2conv per-u census instantiation, then the hgate M2 glue.
+
+---
+## J4-365 (df27b410): the per-u hPd2conv census instantiation
+
+`QIQTH/Pd2ConvPerU.lean` (ns `QIQTH.Pd2ConvPerU`) — the layer between the J4-363 dissolution and
+the J4-364 hgate assembly.
+- `hfull_pd1_concrete` — the full-side germ from the banked `CConvV2Facade.hfam_v2` via
+  `pd_germ_eq_of_family`; census `gcoef` = the Dmap coefficient = the s-integral
+  (`Dmap_apply_single`). Bank sufficed (dont-undercredit paid off again).
+- `hfrozen_pd1_from_hQ1` — ★ U0 FINDING: no frozen ∃-`HasFDerivAt` family needed; the banked W2
+  `hQ1` pointwise formula on `V ∈ 𝓝 0` IS the germ (`filter_upwards`), `fbulk i m` = the
+  truncated s-integral.
+- ★ `hPd2conv_perU` — the EXACT per-u binder (viii) of `hDaLimLU_from_hgate`, ∀-intro plumbing
+  of `hPd2conv_from_census` over the u-indexed census family + the two germ links.
+
+Residue: U3 = the mechanical census-thread (`hDaLimLU_from_hgate_census`, J4-366) · then the
+germ-link carries (hfam_v2's hlin/hD1 + per-u hQ1 threading — hQ1 is ALREADY a binder of the
+assembly, so the frozen link may thread for free). All 3 std-3; raw 0; build 28s.
+NOT a₁ = R/6 (CONDITIONAL).
