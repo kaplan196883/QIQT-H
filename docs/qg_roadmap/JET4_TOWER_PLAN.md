@@ -3155,3 +3155,21 @@ TRAPS: closure≠membership (need closure(S q) ⊆ {χ=1} plateau); the width-al
 
 CONSEQUENCE: the assembly's hgate binder (hDaLimLU_from_hgate/_census/_census_v2) and
 hEdom_concrete_final's hgate need the AFFINE reshape — mechanical re-thread + the 4 new bricks.
+
+---
+## J4-368 (8b4b354b): THE 6TH INTERFACE FINDING REPAIRED — the affine hgate (Sol #15 executed, bricks 1+4)
+
+`QIQTH/HgateAffineRepair.lean` (ns `QIQTH.HgateAffineRepair`), 11 decls std-3:
+- Brick 1: `grade₂`/`grade_two_le_quadPoly` (≤ 5·quadPoly via √x ≤ 1+x)/`weighted_grade_le`.
+- `quadPoly_width_absorb` — the P-INDEPENDENT pointwise absorption extracted standalone from the
+  J4-362 chain (Cabs = √(3/2/w₀)ⁿ·(2k₁²+k₁+1)), enabling the clean mul_le_mul affine bridge.
+- `AffineGateBound` (the honest satisfiable predicate) → `hEdom_concrete_final_affine`
+  (E₀=P₀·Cabs, E₁=P₁·Cabs — genuinely E₁≠0) → `hEdom_vanVleck_of_hgate_affine` →
+  `hDaLimLU_from_hgate_affine_census_v2` (the assembly over the affine carry; identical
+  DaLimLUGoal; recomposed through the hEdom-accepting layer, not an L-stack copy).
+
+The false τ-uniform hgate chain (J4-362/364/366/367 binders) stays banked but is SUPERSEDED as
+the consumer interface. Remaining per Sol #15: brick 2 (the raw affine pre-absorption residual
+estimate deriving AffineGateBound from the M2 ingredients — the CoeffU1Fix map first) + brick 3
+(w₀→4/3 normalized comparison) + the combined ∃(a b C P₀ P₁ S) capstone. raw 0; build ~48s.
+NOT a₁ = R/6 (CONDITIONAL).
