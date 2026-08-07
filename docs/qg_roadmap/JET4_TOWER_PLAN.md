@@ -2902,3 +2902,13 @@ discharge (J4-350's expansion + the ratio rewrite + ρ≤K; β1/β2/gaussian_bea
 unchanged mod constants; NO product-rule corrections — ρ is x'-free). SAFETY: the
 restriction dies inside the sliver-bound proof; hbnd_concrete/hDaLimLU_from_
 labelled/a1_R6_from_labelled binder-UNCHANGED.
+
+## J4-352 (2026-08-07, a39246a7) — AmplitudeDataOnCollar: hV0 ELIMINATED (SOL-#12 1+3) [AF]
+B1 collarRegime + rhoRatio/collarK (ρ ≤ exp(Lnc³√τ₀/4) on the collar) +
+AmplitudeDerivativeDataOn (the regime-conditional corrected bundle, the z-Gaussian
+conclusion exact). B2 the ρ-bridge (hV0 → the unconditional ratio; no product-rule
+corrections) + hD2HexpandOn_concrete (the true chart; hV0 ELIMINATED; carries =
+chart jets + hVP/hPsq/hVQ only). B3 amplitudeDataOn_concrete (the FULL corrected
+bundle at the true chart; M_j = K·M_jchart). std-3 all, raw 0. NOT a₁=R/6. NEXT:
+J4-353 = SliverBoundOnCollar (Sol brick 2: the sliver-bound re-derivation with the
+hbnd conclusion unchanged; the off-collar tail handling).
