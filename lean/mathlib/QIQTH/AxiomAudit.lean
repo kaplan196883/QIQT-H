@@ -20603,4 +20603,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AllUSliceMeas.hmeasHeatLevi_allU
 #print axioms QIQTH.AllUSliceMeas.hmeasLapLevi_allU
 
+-- ## J4-390 (LapContBoxGlue): the r2 continuity atom CLOSED
+-- hLapCont_of_boxes (the laplaceBeltrami-slice strip fact via
+-- stripContOn_of_boxes — the hSecCont_of_boxes mirror) +
+-- hLapContEvery_of_boxes (the exact AllUSliceMeas every-ceiling carry; one
+-- Tc-generic box family serves all) + hmeasLapLevi_from_boxes (the
+-- consolidated ∀(m,u) hmeas resting on {box family, hFzero, hBcontEvery}
+-- only). BOTH heat and lap every-ceiling continuities now reduce to the
+-- SAME ParametrixPartsContinuity box shape — the box-family floor is ONE
+-- de-risked sub-target. (ix) remaining: r1 (crude hAdom2) + the hDa/hLap
+-- assemblies (banked T1a/T1b routes) + the box floor + hBcontEvery.
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.LapContBoxGlue.hLapCont_of_boxes
+#print axioms QIQTH.LapContBoxGlue.hLapContEvery_of_boxes
+#print axioms QIQTH.LapContBoxGlue.hmeasLapLevi_from_boxes
+
 end QIQTH.AxiomAudit

@@ -588,6 +588,7 @@ import QIQTH.ECombinationDischarge
 import QIQTH.ESLegWidening
 import QIQTH.EveryCeilingFamilies
 import QIQTH.AllUSliceMeas
+import QIQTH.LapContBoxGlue
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
