@@ -20696,4 +20696,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeviIterBoxInduction.iterE_z_continuousOn_box
 #print axioms QIQTH.LeviIterBoxInduction.iterE_z_continuousOn_box_family
 
+-- ## J4-395 (LeviMTest): SOL brick 6 — hBcontEvery ASSEMBLED (the C pile closes)
+-- M0 slot resolution: the consumers want the x-slot leviSeries p.1 p.2 0 —
+-- served by the BANKED x-slot iterE family (J4-394's z-slot serves other
+-- consumers). M1: the box-uniform majorant (iterKernelW20_factor + the
+-- modelCoeff time-monotonicity + the diagonal-peak/width-antitone Gaussian
+-- sup ⟹ the explicit gaussDdim τ₀ 0 prefactor; leviBoxMajorant_summable
+-- from the banked scaledModelCoeff_summable). M2: leviSeries_boxContOn (the
+-- banked M-test leviSlice_jointContinuousOn_of_termwise). M3:
+-- leviSeries_stripContOn + ★ hBcontEvery_of_carries (the VERBATIM consumer
+-- shape; Tc≤0 empty) + the LeviSeriesLocalData-facing variant. hBcontEvery
+-- is no longer an open carry — reduced to {hmajor (banked), htermBoxEvery
+-- (the wired x-slot family, residual = the per-rung W2 convolution
+-- carries)}. THE C PILE CLOSES at this level. J4-396 = the D pile (W2).
+-- std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.LeviMTest.iterKernelW20_factor
+#print axioms QIQTH.LeviMTest.modelCoeff_zero_mono_time
+#print axioms QIQTH.LeviMTest.leviBoxMajorant_summable
+#print axioms QIQTH.LeviMTest.leviSeries_boxContOn
+#print axioms QIQTH.LeviMTest.leviSeries_stripContOn
+#print axioms QIQTH.LeviMTest.hBcontEvery_of_carries
+#print axioms QIQTH.LeviMTest.leviSeries_stripContOn_of_data
+
 end QIQTH.AxiomAudit

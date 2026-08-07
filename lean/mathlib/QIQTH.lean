@@ -593,6 +593,7 @@ import QIQTH.CappedAdom2Audit
 import QIQTH.MemAdjHiSliver
 import QIQTH.NonLeviBoxContinuity
 import QIQTH.LeviIterBoxInduction
+import QIQTH.LeviMTest
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
