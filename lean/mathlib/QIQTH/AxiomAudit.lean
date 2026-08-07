@@ -20679,4 +20679,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.NonLeviBoxContinuity.hLapCont_strip_of_partials
 #print axioms QIQTH.NonLeviBoxContinuity.hHeatCont_strip_of_slice_parts
 
+-- ## J4-394 (LeviIterBoxInduction): SOL brick 5 — the z-slot iterE induction
+-- I1 verdict: NOT slot-symmetric (the varying coordinate sits in a different
+-- integrand slot: heatConv A B t x y varies A-first (banked) vs B-second
+-- (needed)) — the step machinery IS generic (heatConv_eq_smul_unitInterval +
+-- double continuousOn_of_dominated), so the z-slot step was rebuilt on it.
+-- heatConv_z_jointContinuousOn_of_dominated + iterE_z_succ_… (the outer
+-- engine, re-oriented) + iterE_z_continuousOn_box (the induction, box FIXED
+-- through it) + iterE_z_continuousOn_box_family (the ∀τ₀∀R∀k feed for the
+-- brick-6 M-test). Carries: hbase (= the J4-393 N2 heatOp slice) + the
+-- per-level hstep engine data (dischargeable by I1b). J4-395 = brick 6
+-- (the box-sup of iterKernelW = the genuine remaining step; termwise
+-- continuity now banked). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.LeviIterBoxInduction.heatConv_z_jointContinuousOn_of_dominated
+#print axioms QIQTH.LeviIterBoxInduction.iterE_z_succ_jointContinuousOn_of_dominated
+#print axioms QIQTH.LeviIterBoxInduction.iterE_z_continuousOn_box
+#print axioms QIQTH.LeviIterBoxInduction.iterE_z_continuousOn_box_family
+
 end QIQTH.AxiomAudit
