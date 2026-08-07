@@ -3294,3 +3294,15 @@ uniformFlowPullbackMetricInv_entry_uniform_bound_annulus). Remaining: the ambien
 (J4-376; ⚠ width bookkeeping — may need the 5/4 re-instantiation of the annulus bound before
 the 5/4→4/3 quad transfer) + the 3-region ∃-capstone (J4-377). raw 0; build 29s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-376 (cca9b5fc): the annulus AMBIENT transfer — all 3 AffineGateBound regions covered
+
+`QIQTH/AnnulusAmbientTransfer.lean` (7 decls std-3). The width bookkeeping resolved via d=5/4
+clones (width-agnostic proofs; constants (20/a²)^k·k!, √(5/4)ⁿ) → the 5/4→4/3 ambient transfer
+(annulus ⊂ ball via b<r₁) → ★ `gatedHeatOp_affine_onAnnulus` (the shape-match was DEFINITIONAL
+at the pullback pair). Regions now: plateau (J4-374) · annulus (THIS) · far (off-support
+vanishing, to confirm in the capstone). J4-377 = the 3-region ∃-capstone: region split +
+r₁-min + the carry discharges (hpt/hlap/hS/hEnear/hHann/hDHann/uniforms) + coefficient max ⟹
+AffineGateBound DERIVED ⟹ the banked finishers ⟹ ★ the hgate label RETIRED. raw 0; build 36s.
+NOT a₁ = R/6 (CONDITIONAL).
