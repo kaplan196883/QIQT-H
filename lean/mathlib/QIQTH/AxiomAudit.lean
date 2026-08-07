@@ -20311,4 +20311,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Transfer43Quad.chartTransfer43_quad_from_nearIsometry
 #print axioms QIQTH.Transfer43Quad.ambientAffine_onBall
 
+-- ## J4-373 (OnGateGlue): the on-gate glue (2c) + THE PULLBACK-METRIC FINDING
+-- G1 radialCutoff_eventuallyEq_one (the open plateau germ) +
+-- cutoffTransport_eq_parametrixResidual(_onPlateau) (on the plateau the
+-- transport RHS IS parametrixResidualN 1, ANY metric) · G2 the hpt/hlap
+-- discharges promoted standalone (uniformInverseChart_leftInverse_of_lt via
+-- the banked chart germ; laplaceBeltrami_globalCutoffWitness_naturality with
+-- honest carries all discharged in the compiled capstone) · G3
+-- heatOp_globalCutoffWitness_eq_pullbackResidual_onPlateau +
+-- gatedKernel_heatOp_eq_pullbackResidual_onPlateau (the gate layer via the
+-- banked gatedKernel_heatOp_eq_of_mem_nhds — no S-specific facts).
+-- ★ THE FINDING: the transport yields the PULLBACK-METRIC residual; the
+-- J4-372 ball leg bounds the ORIGINAL-metric residual — different objects.
+-- The composition was correctly NOT forced. Next: the pullback-metric affine
+-- ball leg (J4-374), then the annulus (2b), then the ∃-capstone. std-3 all 7.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.OnGateGlue.radialCutoff_eventuallyEq_one
+#print axioms QIQTH.OnGateGlue.cutoffTransport_eq_parametrixResidual
+#print axioms QIQTH.OnGateGlue.cutoffTransport_eq_parametrixResidual_onPlateau
+#print axioms QIQTH.OnGateGlue.uniformInverseChart_leftInverse_of_lt
+#print axioms QIQTH.OnGateGlue.laplaceBeltrami_globalCutoffWitness_naturality
+#print axioms QIQTH.OnGateGlue.heatOp_globalCutoffWitness_eq_pullbackResidual_onPlateau
+#print axioms QIQTH.OnGateGlue.gatedKernel_heatOp_eq_pullbackResidual_onPlateau
+
 end QIQTH.AxiomAudit
