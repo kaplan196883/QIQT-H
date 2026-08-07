@@ -20637,4 +20637,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CappedAdom2Audit.hII_lo_from_capped
 #print axioms QIQTH.CappedAdom2Audit.memLapFull_from_pairing_dominations
 
+-- ## J4-392 (MemAdjHiSliver): MemAdjHi REDUCED to the τ^{-1/2} moment carry
+-- The τ=0 endpoint is IRRELEVANT (measure-zero; the domination is a.e. on
+-- the open window). Route 2 landed: the moment cancellation (∫∂²G = 0 ⟹ the
+-- SIGNED z-pairing stays O(1) as τ→0) gives the moment-improved τ^{-1/2}
+-- profile — and (u−s)^{-1/2} IS interval-integrable (∫₀^ε τ^{-1/2} = 2√ε),
+-- unlike the τ⁻¹ that any pointwise domination is stuck with.
+-- intervalIntegrable_of_aesm_le + intervalIntegrable_invSqrt_sub + ★
+-- hII_hi_from_sliver (the full MemAdjHi from the BANKED hmeas2Hi_slice AESM
+-- + ONE named satisfiable carry hGpow (m-uniform Cpair) — the exact
+-- moment-aware WideSliverBoundary deliverable, strictly weaker than the
+-- false Gaussian bound). Wall A now = {capped-Lo (banked)} ∪ {hGpow}.
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.MemAdjHiSliver.intervalIntegrable_of_aesm_le
+#print axioms QIQTH.MemAdjHiSliver.intervalIntegrable_invSqrt_sub
+#print axioms QIQTH.MemAdjHiSliver.hII_hi_from_sliver
+
 end QIQTH.AxiomAudit
