@@ -3782,3 +3782,12 @@ hEdom_vanVleck_of_hgate_affine (explicit S,a,b); the constGate IS the census gat
 ConstGateAssemblyData: hEdom/hEz/hS1 REAL; hpkgBound/hmemS0/hopenS0 honest carries
 (satisfiable via constRadius_package_and_S1). J4-409 = the slots bundle. raw 0; build 27s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-409 (62f391b8): SOL #18 brick 2 — the slots bundle + the firing lemma
+
+`QIQTH/FinalA1Slots.lean` (2 decls std-3). FinalA1SlotsAtConstGate (the 3 verbatim slots + htr
+at the concrete Ricci) + finalA1Slots_from_data (the 3 slots ← the ONE A1R6GateSlots package;
+htr ← the single hGauss carry) + ★ .fire (the a₁ TWO-JET from {the J4-408 base + this bundle +
+base geometry}; the Ricci substitution by defeq). J4-410 = the one-line public capstone +
+the final audits. raw 0; build 27s. NOT a₁ = R/6 (CONDITIONAL).
