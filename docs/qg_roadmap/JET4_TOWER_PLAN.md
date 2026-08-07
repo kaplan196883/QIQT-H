@@ -3434,3 +3434,14 @@ workhorse via gaussDdim_pair_integrable) + `hEZ_windowed` (hAdomHeat × Levi env
 `hLapZ_from_dom` (the laplaceBeltrami-slice domination; the hAdom2 bridge open per D3).
 hES/hLapS = windowed-supplied; the ∀u widening = J4-387. raw 0; build 25s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-387 (bd8965c3): the (ix) s-legs widened to ∀u
+
+`QIQTH/ESLegWidening.lean` (3 decls std-3): `intervalIntegrable_of_deg` (the degenerate case
+closed UNCONDITIONALLY — reversed interval ⊆ {s≤0}, Levi vanishes) + `hES_all`/`hLapS_all`
+(the exact ∀(m,u) census binders; u>0 case at the ceiling Tc:=u via the every-ceiling carries
+hAdomEvery/hLapDomEvery/hFdomEvery — the honest hglobal-style structure; the laplaceBeltrami
+slice fed directly). Pile (ix): z-legs (J4-386) + s-legs (THIS) + the hDa/hLap banked-route
+carries. J4-388 = the every-ceiling families (hAdomEvery = a thin wrapper over the T-uncapped
+hEdom; hFdomEvery = the ∀t hpkgBound re-run). raw 0; build 26s. NOT a₁ = R/6 (CONDITIONAL).
