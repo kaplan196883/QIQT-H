@@ -3001,3 +3001,10 @@ hraw_variant_concrete (the capstone). hraw remaining: the pre-collapse extractio
 + the concrete near-isometry + the wiring. std-3 all, raw 0. NOT a₁=R/6. NEXT:
 J4-361 = HrawNearIsometryConcrete (the flow-displacement bound + the radial
 comparison + the (1/4)-budget on the shrunk gate).
+
+## J4-361 (2026-08-07, b98d8c3c) — HrawNearIsometryConcrete: THE NEAR-ISOMETRY CLOSED [AF]
+N1 banked (uniformFlowExp_displacement_bound re-exported). N2 the polarization
+(the honest n-cofactors). N3 ★ nearIsometry_concrete (the exact T1 shape, the
+explicit shrunk gate; the C_D‖v‖≤1/2 bootstrap). hraw remaining: the pre-collapse
+extraction + the wiring. std-3 all 3, raw 0. NOT a₁=R/6. NEXT: J4-362 =
+HrawPreCollapse (the extraction + the wiring ⟹ hEdom discharged ⟹ hraw CLOSED).
