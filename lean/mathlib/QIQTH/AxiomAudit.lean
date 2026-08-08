@@ -21058,4 +21058,21 @@ namespace QIQTH.AxiomAudit
 --  #print block; the public carrier below transitively contains it.)
 #print axioms QIQTH.DuhamelCoreThreaded.truncatedDuhamelCore_threaded
 
+-- ## J4-415 (TerminalCoverage): hdiff + hPd2conv BOTH COVERED (verbatim)
+-- V1: the core's hPd2conv binder = hPd2conv_perU_fired's conclusion (same
+-- witness/gate/source/window/binder order) — threaded; the fired census
+-- becomes the residue (the shared L2/wall-A family, one owner). V2: the
+-- core's hdiff binder = w2_hdiff's conclusion (the first-derivative-kernel
+-- family; hInnerData the residue) — threaded. truncatedDuhamelCore_
+-- threaded_v2 absorbs both. ★ THE FINAL TERMINAL LIST: the ONLY genuinely
+-- open analytic input = the moment wall hslot/hGpow (⚠ dont-undercredit for
+-- J4-416: GpowBridge.leviSecondPairing_le_invSqrt (the m-uniform ∃Cpair
+-- hGpow shape!) + leviSecondPairing_inner_bound_concrete (the K₁τ^{-1/2}
+-- hslot shape!) were banked J4-401/402 — the residue may be only the
+-- J4-402/403 concrete slot carries); everything else = satisfiable
+-- lower-level data. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.TerminalCoverage.hPd2conv_threaded
+#print axioms QIQTH.TerminalCoverage.hdiff_threaded
+#print axioms QIQTH.TerminalCoverage.truncatedDuhamelCore_threaded_v2
+
 end QIQTH.AxiomAudit
