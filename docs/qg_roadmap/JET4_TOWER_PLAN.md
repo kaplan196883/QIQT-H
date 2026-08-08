@@ -4176,3 +4176,42 @@ order-2), hsliver (the √ε tranche), hcont (order-2 continuity), hQ1 (W2 diff-
 U/hUpos, the nb-triple. **THREE OF THE FOUR TERMINAL GROUPS NOW AT THE ENUMERATED-CARRIES
 FLOOR.** raw 0; build 47s. NEXT: GROUP (4) the carried v2 census + the terminal cross-check
 (J4-429). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ★★★ J4-429 (7181fd77): ALL FOUR TERMINAL GROUPS AT THE ENUMERATED-CARRIES FLOOR
+# — THE TERMINAL CROSS-CHECK COMPILES
+
+`QIQTH/V2CensusInstantiation.lean` (3 decls std-3). THE GROUP-(4) BINDER MAP (blocks A-F:
+boundary/geometry · the wall-A interchange census · the √ε sliver family D0/D1/hbnd · the
+domination/mass constants · the F-pile + c-moving family · the Levi cross-Lipschitz).
+`hFzero` DISCHARGED internally (← DaLimEasyTranche.hFzero_concrete). **`v2Census_phase1`
+transcribes the ENTIRE truncatedDuhamelCore_threaded_v3 binder list verbatim and re-supplies
+every binder — IT COMPILES, machine-certifying the completeness of the enumeration: every
+binder lands in exactly one of groups (1)/(2)/(3)/(4)/(A)/internally-discharged. NO GAP.**
+`terminal_enumeration_check` = the certificate. THE BINDER-LEVEL REDUCTION IS EXHAUSTED.
+
+### SOL CONSULT #20 (gpt-5.6-sol) — THE CONVERGENCE-TRIO ATTACK PLAN (recorded):
+RANKED ORDER: 1. (iv) the sup/constant family (after the minimal (vi) bootstrap:
+hEdom_from_geometry ⟹ hgate + gate compactness) — pure compactness BUT ⚠ THE .CHOOSE TRAP:
+never sup over a pointwise-.choose derivative field; use explicit formulas + ContinuousOn,
+or canonical fderiv on an open nbhd, or finite-subcover → choose the CONSTANT not the germ.
+herr/hmin are NOT pure compactness (positive minimum needs the near-identity/annulus/affine
+3-region split). 2. (iii) THE SLIVER CORE EARLY = the risk gate: u⁻¹ × (√u-vanishing
+remainder) ≲ u^{-1/2}; ⚠ endpoint a.e. not forced values; m-uniformity mandatory.
+3. (i) diff-under-∫: hasDerivAt_integral_of_dominated_loc_of_lip is the right workhorse;
+⚠ THE M-UNIFORMITY RISK: ∀m ∃gₘ WITHOUT summability (∑∫‖gₘ‖ < ∞) is USELESS at the true
+kernel; nbhds must not collapse as m→∞; order-2 majorants must be summable. Order: hQ1 →
+hProv leg-by-leg → sum 7 dominators → order 2 → hbulkderiv on a bulk cutoff only.
+4. (ii) hGint CUTOFF-INDEXED ONLY (∀ε, IntervalIntegrable on [0, t−√ε]) — NEVER full [0,t]
+(the naive (t−s)⁻¹ dominator is not integrable; confirmed banked design); ⚠ Bochner
+convention: never use integral equality near the endpoint without the Integrable proof.
+5. (vi) geometry/gauge (3-region coercivity; positivity before minima). 6. (v) wall-A
+instantiation (banked suppliers + Fubini/DCT; ⚠ absolute not conditional integrability).
+★ THE SINGLE HIGHEST-RISK ITEM: D1/hbnd — the endpoint order-two cancellation at the true
+witness (the one place the route can GENUINELY FAIL if the structural cancellation is weaker
+than expected). MITIGATION MANDATE: BEFORE further plumbing, prove the standalone pointwise
+lemma extracting the singular leading term + its zero-moment cancellation + an explicit
+u^{-1/2} majorant with summable-in-m constants. If it lands, the rest is standard dominated
+analysis; if not, no API repairs the route.
+raw 0; build 52s. NEXT: J4-430 = the sliver-core risk-gate lemma (Sol's mitigation mandate).
+NOT a₁ = R/6 (CONDITIONAL — the floor closes nothing deeper).
