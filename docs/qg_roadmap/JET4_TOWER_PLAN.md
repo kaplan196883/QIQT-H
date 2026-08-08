@@ -4096,3 +4096,27 @@ banked bundle fields). **R3** DISCHARGED (re-export). **R2** `hform_at_witness` 
 (the jet supply = the standing carry). **R4** GENUINELY CARRIED — an off-gate near-isometry
 carry would be UNSATISFIABLE; the vacuity was deliberately avoided (the axiom-budget
 blind-spot discipline in action). raw 0; build 83s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-425 (2228298a): the S5b GLOBAL dominator — GROUP (1) = ENUMERATED
+## INPUT CARRIES ONLY (phase 8)
+
+`QIQTH/SlotInstantiationVIII.lean` (8 decls std-3). `hdom_comp2_ptwise` PROVED GLOBALLY
+(all z — no collar restriction, no exponent budget) via the exact identity `gauss_ratio_rho`
+(hessGaussFactor·(ρ−1)·qc = (z_i²−2τ)/(4τ²)·(G^chart−G_τ)·qc) + the banked
+`gaussDdim_replace_bound` (HeatResidualBound / GaussianMomentEnvelope.lean:389 —
+|G^chart−G_τ| ≤ (L'‖z‖³/4τ)·(√2)ⁿ·G_{2τ}, the phase-7 exp blow-up ELIMINATED).
+`comparisonDom2` (width-2τ) + the κ=2 moment: Bcomp2 = L'(√2)ⁿMqc·n(3328+√2)/4 — the extra
+(√2)ⁿ from the coercivity step is LEGITIMATE (n fixed at the witness; the 1/√τ scaling
+untouched). `hcomp_final2` = hcomp_collapsed at comparisonDom2 with hDint/hmom/hdom ALL
+discharged internally — the phase-6/7 hdom_comp a.e. carry is GONE. Forced honest carries:
+herr (ℓ² near-isometry cubic error, ∀z), hmin (coercivity ½r²_z ≤ r²_{Wz}, ∀z), hqcbdd.
+Phase 8 = pure assembly of banked machinery (dont-undercredit: the moment tower already
+carried the width parameter κ; no new tower needed).
+
+### THE GROUP-(1) FINAL RESIDUE — SIX ENUMERATED INPUT CARRIES (the milestone):
+I1 `herr` near-isometry cubic · I2 `hmin` coercivity · I3 the amplitude sups Mqc/M/Sconst ·
+I4 `hform` jet supply · I5 `hcompDiff_int` wiring · I6 the .choose measurabilities.
+NO open identity, τ-scaling, or domination remains in group (1).
+⚠ a₁ = R/6 stays CONDITIONAL (groups (2)/(3)/(4) + the convergence trio + I1-I6).
+raw 0; build 55s. NEXT: GROUP (2) hInnerData (J4-426).
