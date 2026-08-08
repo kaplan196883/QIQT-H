@@ -4362,3 +4362,22 @@ C₂/M₂chart/Sconst = GROUNDED-CONDITIONAL on hcont2 with the exact 2nd-order 
 (forward 2nd jet joint continuity + the 2nd-order IFT identity + the pd² identification).
 raw 0; build 50s. NEXT: J4-437 = the Sol-#20 (i) diff-under-∫ opener (hQ1 first); queued =
 the 2nd-order jet chain + hcubic + the small-ball provider. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-437 (2112f7a0): the diff-under-∫ opener — hQ1 PROVED in the census shape
+
+`QIQTH/InnerDiffFamily.lean` (3 decls std-3). THE MAP: the census demands hQ1 per-(u,i,m)
+(∃V∈𝓝 0, pd(frozen germ) i y = fbulkInt … y on V); the banked `W2Finish.w2_hQ1` produces the
+SAME equality at carrier level (shared V, from the 7-leg hFrozenData → the banked
+SecondOrderInterchange engine); fbulkInt is definitionally the truncated primitive — the RHS
+matches by delta-reduction (exact unifies). THE GENUINE NEW CONTENT = the shape bridge
+(`innerDiff_census_hQ1_of_carrier` / `_of_frozenData`) — that gap was real and unfilled.
+`innerDiff_phase1` = the per-u census Tendsto with hQ1 discharged internally.
+**THE M-UNIFORMITY VERDICT (Sol #20's trap checked): does NOT bite at hQ1** — V is supplied
+m-INDEPENDENT (no nbhd collapse, strictly stronger than demanded); the per-m s-dominators
+are admissible (hQ1 is a per-m equality, no series over m); the genuine m-summability burden
+lives ONLY in the order-2 sliver carries — and hsliver already meets it
+((C₀+C₁)·2√εₘ + C₂εₘ → 0, the J4-430 risk-gate constants). The 7 hFrozenData legs carried
+with named suppliers (Fubini engine for the measurabilities, w2_hFint capped-ceiling for the
+integrability). raw 0; build 47s. NEXT: J4-438 = FrozenProviderLegs (hFmeas/hF'meas via the
+Fubini engine, 7→5). NOT a₁ = R/6 (CONDITIONAL).
