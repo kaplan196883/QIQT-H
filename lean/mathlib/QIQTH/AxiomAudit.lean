@@ -21390,4 +21390,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverRiskGate.riskGate_bound_tendsto_zero
 #print axioms QIQTH.SliverRiskGate.sliverRiskGate_certificate
 
+-- ## J4-431 (SupConstantFamily): the sup family — C_L + the amplitude sup
+-- GROUNDED; the derivative sups on ONE shared wall
+-- THE SUP LEDGER: C_L GROUNDED (levi_C_L_grounded delegates verbatim to
+-- the banked leviSeries_gatedWitnessN1_dominated; conditional only on the
+-- standing hEmeas carry; the baseKernelW→gaussDdim bridge deferred).
+-- Mqc/M₀chart GROUNDED gate-restricted (chartAmp_center_sup_onCollar via
+-- the banked BaseSlotAmplitude.baseSlotAmp_bound — genuine compactness on
+-- [0,τ₀]×closedBall; the ∀τz global shape not reachable, mismatch named;
+-- the s-uniform product constant stays pointwise — F's Gaussian peak
+-- blows up as s→0, honest). C₁/C₂/M₁chart/M₂chart OBSTRUCTED — the
+-- SINGLE SHARED WALL: no banked joint-in-base continuous derivative
+-- field (banked bounds are per-fixed-base or germ-local); M/Sconst
+-- inherit it. THE .CHOOSE TRAP forced NOTHING — nothing fabricated;
+-- the obstruction is honestly recorded. Fix = ONE brick: the base-slot
+-- field-derivative continuity (BaseSlotAmpDeriv, J4-432).
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.SupConstantFamily.levi_C_L_grounded
+#print axioms QIQTH.SupConstantFamily.chartAmp_center_eq_chartFieldAmp
+#print axioms QIQTH.SupConstantFamily.chartAmp_center_sup_onCollar
+#print axioms QIQTH.SupConstantFamily.supConstant_phase1
+
 end QIQTH.AxiomAudit
