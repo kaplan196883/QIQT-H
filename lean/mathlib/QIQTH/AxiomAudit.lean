@@ -21118,4 +21118,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JointInstantiabilityAudit.audit_coreSlots_shape
 #print axioms QIQTH.JointInstantiabilityAudit.joint_instantiability_certificate
 
+-- ## J4-418 (AuditPromotions + SlotInstantiationI): findings 3/4 machine-checked
+-- + tranche-(a) phase 1
+-- A1 audit_perU_shape: the carrier's V1 per-u census binder group is
+-- VERBATIM hPd2conv_perU_fired's input (id-transport, compiles ⟹ shapes
+-- match). A2 audit_hGpow_quantifier_order: the ∃Cpair ∀(m,s) order (Cpair
+-- BEFORE m,s — the m-uniformity) extracted standalone from hGpow_covered.
+-- Phase 1 slot instantiation at the true ρ-scaled chart witness: qc supplied
+-- concretely (chartAmp·F); h0 centre-match FULLY (center_identity_concrete ←
+-- rhoRatio_center, 0 ∈ K); hgate radius conjunct FULLY (c·√τ < r₀), z ∈ K
+-- carried. NOT yet: Ichart/hoff, integrabilities, Lipschitz, Gaussian-moment
+-- dominators, the AmplitudeDerivativeDataOn structure (the honest phase-1
+-- ledger in-file). Genuinely new self-contained instances, not re-exports
+-- (dont-undercredit check run). std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.AuditPromotions.audit_perU_shape
+#print axioms QIQTH.AuditPromotions.audit_hGpow_quantifier_order
+#print axioms QIQTH.SlotInstantiationI.center_identity_concrete
+#print axioms QIQTH.SlotInstantiationI.hgate_concrete
+#print axioms QIQTH.SlotInstantiationI.slotInstantiation_phase1
+
 end QIQTH.AxiomAudit
