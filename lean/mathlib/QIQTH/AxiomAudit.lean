@@ -21266,4 +21266,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationVII.hform_at_witness
 #print axioms QIQTH.SlotInstantiationVII.slotInstantiation_phase7
 
+-- ## ★★ J4-425 (SlotInstantiationVIII): the S5b GLOBAL dominator —
+-- GROUP (1) = ENUMERATED INPUT CARRIES ONLY (phase 8)
+-- hdom_comp2_ptwise PROVED globally (all z — no collar, no exp budget) via
+-- the exact identity gauss_ratio_rho (hessGaussFactor·(ρ−1)·qc =
+-- (z_i²−2τ)/(4τ²)·(G^chart−G_τ)·qc) + the banked gaussDdim_replace_bound
+-- (|G^chart−G_τ| ≤ (L'‖z‖³/4τ)·(√2)ⁿ·G_{2τ}, HeatResidualBound).
+-- comparisonDom2 (width-2τ) with the κ=2 moment: Bcomp2 =
+-- L'(√2)ⁿMqc·n(3328+√2)/4 — n-dependent constant LEGITIMATE (n fixed at
+-- the witness; the τ-scaling 1/√τ untouched). hcomp_final2 discharges
+-- hDint/hmom/hdom ALL internally — the phase-6/7 hdom_comp carry is GONE.
+-- Forced carries (honest whole-space inputs, not vacuities): herr (ℓ²
+-- near-isometry cubic error), hmin (coercivity — the (√2)ⁿ source),
+-- hqcbdd (amplitude sup). THE GROUP-(1) FINAL RESIDUE = SIX ENUMERATED
+-- INPUT CARRIES: I1 herr · I2 hmin · I3 the amplitude sups Mqc/M/Sconst ·
+-- I4 hform jet supply · I5 hcompDiff_int wiring · I6 the .choose
+-- measurabilities. NO open identity/scaling/domination in group (1).
+-- Phase 8 = pure assembly of banked machinery. std-3 all. NOT a₁ = R/6 —
+-- CONDITIONAL on the convergence-trio + the enumerated inputs.
+#print axioms QIQTH.SlotInstantiationVIII.comparisonDom2_moment
+#print axioms QIQTH.SlotInstantiationVIII.comparisonDom2_integrable
+#print axioms QIQTH.SlotInstantiationVIII.hdom_comp2_ptwise
+#print axioms QIQTH.SlotInstantiationVIII.hcomp_final2
+#print axioms QIQTH.SlotInstantiationVIII.slotInstantiation_phase8
+
 end QIQTH.AxiomAudit
