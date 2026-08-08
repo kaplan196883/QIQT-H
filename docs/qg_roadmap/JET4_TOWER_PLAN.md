@@ -4519,3 +4519,18 @@ THE GROUP-(3) RESIDUE = enumerated input carries only (U/nb, the diagonal hProv,
 data, hbulkderiv, the √ε hsliver, hcont, hQ1-carrier, + the hGint suppliers).
 raw 0; build 51s. NEXT: J4-446 = ProfFacWitness (hProfFac from the banked envelope + moment).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-446: hProfFac + hProfMeas DISCHARGED — hGint AT THE CAMPAIGN FLOOR
+
+`QIQTH/ProfFacWitness.lean` (5 decls std-3). `profFac_of_innerRate` — the general m-free
+lever, the exact INVERSE of riskGate_powercount: the ∃C B rem factorisation from the single
+clean inner-rate carry hProfRate (|profile| ≤ Q·(u−s)^{-1/2}), canonical rem := √(u−s),
+(u−s)⁻¹·√(u−s) = (u−s)^{-1/2}, s≤0 by hFzero. `profMeas_at_witness` — the Fubini pattern
+window-general (the sliver is a first-class instance; carries = hWFDjoint/hLeviJoint).
+`hGint_grounded` + `perUCensus_phase4`. **THE hGint FINAL LEDGER: the sub-chain rests ONLY
+on the campaign's standing enumerated families + ONE substantive m-free carry hProfRate**
+(the coordinate-first-moment √τ gain — content banked in shape at hf2bound_at_witness).
+The J4-428 "NO banked supplier" flag FULLY ELIMINATED. raw 0; build 76s.
+NEXT: J4-447 = ProfRateTheorem (hProfRate → a theorem via the coordinate moment).
+NOT a₁ = R/6 (CONDITIONAL).
