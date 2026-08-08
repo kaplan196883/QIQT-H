@@ -4549,3 +4549,20 @@ hf2bound family. `hGint_theorem` + `perUCensus_phase5`: the hProfRate integral-r
 ELIMINATED; the hGint chain = the standing enumerated families + hProdMoment.
 raw 0; build 50s. NEXT: J4-448 = ProdMomentWitness (the un-crudified z_i/(2τ) envelope from
 the J4-443 chain rule — the parametrix pd HAS the slope structure). NOT a₁ = R/6.
+
+---
+## J4-448: the integrability leg DISCHARGED — hProdPtwise = the ONE irreducible atom
+
+`QIQTH/ProdMomentWitness.lean` (4 decls std-3). The bundled hProdMoment SPLIT into
+hProdPtwise + hProdMeas; the Integrable leg derived internally (`integrable_of_prodMoment` ←
+the banked power-1 coordinate-moment integrability + Integrable.mono').
+★ THE KEY MATHEMATICAL FINDING: the s-uniform POINTWISE collapse of the two-Gaussian product
+G_{wA(u−s)}·G_{wF·s} to a single G_{w(u−s)} is GENUINELY FALSE — the harmonic width
+σ_h = wA(u−s)·wF·s/(wA(u−s)+wF·s) yields a G_{σ_h} whose peak diverges relative to
+G_{w(u−s)} as s→0. The campaign's under-the-integral pairing design is FORCED (verified
+against the pairing infra); hProdPtwise is a LEGITIMATE floor atom at the exact
+hf2bound-carried-hdom honesty tier, not an oversight. `hGint_final` + `perUCensus_phase6`:
+the hGint chain = the standing enumerated families + hProdPtwise ONLY (the integrability
+degree of freedom GONE). raw 0; build 49s. NEXT: J4-449 = ProdPtwiseWitness (the refined
+dH envelope × a TRUE Levi CAP — WITH the satisfiability gate first per the falsity finding).
+NOT a₁ = R/6 (CONDITIONAL).
