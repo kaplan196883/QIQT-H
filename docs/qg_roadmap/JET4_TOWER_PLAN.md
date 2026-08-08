@@ -3964,3 +3964,21 @@ suppliers exist but nothing supplied these slots directly). NOT YET (the phase l
 Ichart/hoff (→ J4-419 via SliverAssemblyMatched's off-collar identity), the integrabilities,
 hqz/hqc Lipschitz, hcomp, hf2bound/hf3bound Gaussian dominators, AmplitudeDerivativeDataOn.
 raw 0; builds 26-48s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-419 (cf7c5b6d): Ichart + hoff DISCHARGED FULLY — phase 2
+
+`QIQTH/SlotInstantiationII.lean` (5 decls std-3). THE FINDING: the phase-1 recommended route
+(Ichart := hessCoeff·G^chart·qc + a banked off-collar identity) is NOT realizable — the one
+exact banked identity (`hD2Hexpand`) is conditioned ON the collar; no raw off-collar equality
+exists in the bank. THE ROUTE TAKEN: the design-intended residual (GpowBridge §A2:
+f₁ = Wpair − f₂ − f₃ "equals Ichart off the collar") — with `Ichart := IchartResidual` the
+`hoff` identity holds pointwise-everywhere by pure `ring`, verbatim the
+leviSecondPairing_inner_bound_concrete binder shape (`hoff_concrete` + the ∃-certificate
+`hoff_slot_inhabited`). BONUS: `hIchart_int_concrete` (off-collar integrability) reduced to
+the carried hWint/hf2/hf3. `slotInstantiation_phase2` = phase 1 ∧ the new fields.
+HONEST NOTE: the chart-native geometric content re-enters at `hcomp` (the comparison leg) —
+that is where the real content now sits, not in hoff. Dont-undercredit: the bank threads
+Ichart abstractly (bounds only) — genuinely new. REMAINING: hqz/hqc Lipschitz (→ J4-420 via
+data.hqLip + concrete_hqLip_of_carries), hcomp, hf2bound/hf3bound dominators, hWint/hf2/hf3.
+raw 0; build 46s. NOT a₁ = R/6 (CONDITIONAL).
