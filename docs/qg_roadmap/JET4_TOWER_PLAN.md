@@ -4160,3 +4160,19 @@ bound + THE HONEST INTEGRABILITY VERDICT (naive (t−s)⁻¹ dominator NOT inter
 the (t−s)^{-1/2} sliver route survives — the s-layer must use the √ε truncation); this brick
 adds the complementary z-level product dichotomy, abstracting C₂ over the coercive bound.
 raw 0; build 49s. NEXT: GROUP (3) the V1 per-u census (J4-428). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-428 (c8400b27): GROUP (3) = ENUMERATED INPUT CARRIES ONLY (phase 1)
+
+`QIQTH/PerUCensusInstantiation.lean` (2 decls std-3). THE BINDER MAP: sSet/hsOpen/hsnhds,
+gcoef, fbulk, bb, hb, hbulk_tendsto, hfull_pd1 — ALREADY FIRED internally by J4-405/406/407
+(dont-undercredit honored; nothing re-proved). `hfrozen_pd1` DISCHARGED THIS BRICK: traded
+for the lighter hQ1 via the banked `Pd2ConvPerU.hfrozen_pd1_from_hQ1` (J4-365) at
+fb := FrozenGermInternal.fbulkInt. `perUCensus_phase1` = the fired census tuple
+(= hPd2conv_perU_fired's conclusion) with the residue ENUMERATED: hProv (7-leg linewise
+diff-under-∫ — the J4-405 D-feeder legs), the data fields fderivBulk/gderiv/C₀₁₂, hGint
+(s-profile interval-integrability — NO banked supplier, grep-confirmed), hbulkderiv (bulk
+order-2), hsliver (the √ε tranche), hcont (order-2 continuity), hQ1 (W2 diff-under-∫),
+U/hUpos, the nb-triple. **THREE OF THE FOUR TERMINAL GROUPS NOW AT THE ENUMERATED-CARRIES
+FLOOR.** raw 0; build 47s. NEXT: GROUP (4) the carried v2 census + the terminal cross-check
+(J4-429). NOT a₁ = R/6 (CONDITIONAL).
