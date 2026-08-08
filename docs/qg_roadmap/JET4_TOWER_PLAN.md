@@ -4053,3 +4053,27 @@ GROUP-(1) RESIDUE = terminal geometric wiring only: the (ρ−1)=O(‖z‖³/τ)
 (→ J4-423 via the near-isometry budget + cubic_gaussian_moment_witness, τ-window REQUIRED
 here per Sol trap iii) + the hf2/hf3 per-point hfint/hdom + the jet supply hform + the
 factor/domination carries. raw 0; build 49s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-423 (86bd4ca6): the cubic carry DISCHARGED — group-(1) ALGEBRA CLOSED (phase 6)
+
+`QIQTH/SlotInstantiationVI.lean` (10 decls std-3). THE POWER COUNT (written as comment, then
+PROVED in `comparisonDom_moment`): ∫D = (CρMqc/4τ³)·[∫‖z‖⁵G_τ + 2τ∫‖z‖³G_τ] with the banked
+k=5/k=3 moments (`pow_norm_mul_gauss_integral`, `oneD_absMoment3/5`) ⟹ the τ^{5/2} moments ÷
+the τ³ prefactor = EXACTLY τ^{-1/2}; Bcomp = CρMqc·n(864√2+1)/2, τ-INDEPENDENT. `hcomp_final`
+wires hDint (`comparisonDom_integrable`) + hmom (`setIntegral_le_integral`, D≥0) into
+`hcomp_collapsed`. `hf2dom_at_witness`/`hf3dom_at_witness`: the a.e. dominations FULLY
+discharged. Sol trap (iii) resolved cleanly: the moment C/√τ is unconditional (closed-form
+Gaussian scaling); the τ-window burden sits in the POINTWISE ρ-deviation carry (R1), honestly
+carried not re-proved. Dont-undercredit: rhoRatio_le_collarK correctly NOT used (on-collar
+only); no banked |ρ−1| scalar bound exists (R1 genuinely open).
+
+### THE GROUP-(1) FINAL RESIDUE — factor/sup/jet-supply carries ONLY (a MILESTONE:
+### no slot identity or τ-scaling remains open in group (1))
+- R1 `hdom_comp`: pointwise |ρ−1| ≤ Cρ‖z‖³/τ (near-isometry, gate-confined) × Mqc.
+- R2 `hform`: the off-collar jet supply (chart jets + open gate at z ∈ K).
+- R3 `hcompDiff_int`: the off-collar residual-difference integrability.
+- R4 `hf2amp`/`hf3amp`: the amplitude·Levi sup bounds.
+- R5 `hf2int`/`hf3int`: the integrand measurability/integrability carries.
+⚠ a₁ = R/6 stays CONDITIONAL on the convergence-trio + geometric-wiring stack.
+raw 0; build 49s. NOT a₁ = R/6 (CONDITIONAL).
