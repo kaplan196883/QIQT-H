@@ -631,6 +631,7 @@ import QIQTH.PerUCensusInstantiation
 import QIQTH.V2CensusInstantiation
 import QIQTH.SliverRiskGate
 import QIQTH.SupConstantFamily
+import QIQTH.BaseSlotAmpDeriv
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

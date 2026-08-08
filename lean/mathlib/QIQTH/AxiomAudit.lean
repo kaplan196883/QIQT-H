@@ -21411,4 +21411,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SupConstantFamily.chartAmp_center_sup_onCollar
 #print axioms QIQTH.SupConstantFamily.supConstant_phase1
 
+-- ## J4-432 (BaseSlotAmpDeriv): the derivative fields IDENTIFIED — the sup
+-- wall reduced to ONE atomic carry
+-- The amplitude factors definitionally: chartFieldAmp τ z = manifoldAmp τ
+-- ∘ (W z). The chain rule + the banked field jet gives the EXPLICIT
+-- identification pd_chartFieldAmp_center_eq: pd (chartFieldAmp τ z) i 0 =
+-- fderiv(manifoldAmp τ)(Wz0) (fderiv(Wz)(0) eᵢ) — no .choose germ ever
+-- summed. manifoldAmp_contDiffAt: C² everywhere, geometry-only.
+-- baseSlotAmpDeriv1/2_sup_onCollar ground C₁/M₁chart and C₂/M₂chart by
+-- compactness CONDITIONAL on hcont1/hcont2 = the joint continuity of the
+-- identified field; M/Sconst follow. THE WALL REDUCED: from "no joint
+-- derivative field" to ONE atomic carry — ContinuousOn (fun z ↦
+-- fderiv (uniformInverseChart z) 0) = the chart field-slot Jacobian's
+-- joint-base continuity, THE RECOGNIZED J3 BLOCKER (FlowJointRegularity/
+-- BasepointFDeriv document it as carried, not missing-by-surprise; the CoV
+-- centre-value jet is a DIFFERENT jet, verified). std-3 all 6.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.BaseSlotAmpDeriv.manifoldAmp_contDiffAt
+#print axioms QIQTH.BaseSlotAmpDeriv.pd_chartFieldAmp_center_eq
+#print axioms QIQTH.BaseSlotAmpDeriv.pd_chartAmp_center_eq
+#print axioms QIQTH.BaseSlotAmpDeriv.baseSlotAmpDeriv1_sup_onCollar
+#print axioms QIQTH.BaseSlotAmpDeriv.baseSlotAmpDeriv2_sup_onCollar
+#print axioms QIQTH.BaseSlotAmpDeriv.supConstant_phase2
+
 end QIQTH.AxiomAudit
