@@ -4397,3 +4397,19 @@ at d := u−εₘ (m-independent); the window + remainder per-m is ADMISSIBLE (h
 equality). HONESTLY FLAGGED: the base-y joint carries are ENUMERATED INPUTS (the banked
 joint-aesm is field-point-0-only) — no fabrication. raw 0; build 54s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-439: the hdiff leg DISCHARGED — the provider 7→3 (base-general engines)
+
+`QIQTH/FrozenHdiffLeg.lean` (4 decls std-3). `frozenLeg_hdiff` fires the banked BASE-GENERAL
+engine `innerZ_line_hasDerivAt` per-(s,w) at running base; the innermost z-pointwise
+HasDerivAt family discharged internally via the banked base-general FIRST-order gate
+dichotomy `hWdiff_offGate/onGate` at `update y i w'` (update_idem/update_self — no new
+HasDerivAt engine needed). DONT-UNDERCREDIT CORRECTION recorded: both engines were
+base-general (the J4-438 note undersold them). Named carry: the per-(s,w) z-level reduced
+core, bundled under the SAME existential snb (window + line-nbhd coupled). THE REMAINDER =
+{snb, bound+hbdd+hbound}. THE DOMINATOR PLAN (ledger v2): mirror innerData_pointwise at
+base y (C·G_σ via envelope_integrable + a base-y witnessFieldDeriv gate envelope ×
+hFdomEvery), then the outer bound via the capped-ceiling ∫z route (already run in
+frozenLeg_hFint); the base-y envelope = the honest enumerated input. raw 0; build 77s.
+NEXT: J4-440 = FrozenDominatorLegs. NOT a₁ = R/6 (CONDITIONAL).
