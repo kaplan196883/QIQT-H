@@ -21728,4 +21728,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverSingularEngine.hGint_full_at_witness
 #print axioms QIQTH.SliverSingularEngine.perUCensus_phase3
 
+-- ## ★★ J4-446 (ProfFacWitness): hProfFac + hProfMeas DISCHARGED — hGint
+-- AT THE CAMPAIGN FLOOR (census phase 4)
+-- profFac_of_innerRate: the general m-free lever (the exact INVERSE of
+-- riskGate_powercount) — the ∃C B rem factorisation from the single clean
+-- inner-rate carry hProfRate (|profile| ≤ Q·(u−s)^{-1/2}), canonical
+-- witness rem := √(u−s); (u−s)⁻¹·√(u−s) = (u−s)^{-1/2}; s≤0 by hFzero.
+-- profMeas_at_witness: the Fubini pattern wires cleanly (innerIntegral_
+-- aesm is window-general — the sliver window is a first-class instance);
+-- carries = the joint hWFDjoint/hLeviJoint. hGint_grounded +
+-- perUCensus_phase4. THE hGint FINAL LEDGER: the sub-chain rests ONLY on
+-- the standing enumerated families + ONE substantive m-free carry
+-- hProfRate (the coordinate-first-moment √τ gain — the content banked in
+-- shape at hf2bound_at_witness; → J4-447 theorem). The J4-428 "NO banked
+-- supplier" flag FULLY ELIMINATED. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.ProfFacWitness.profFac_of_innerRate
+#print axioms QIQTH.ProfFacWitness.profFac_at_witness
+#print axioms QIQTH.ProfFacWitness.profMeas_at_witness
+#print axioms QIQTH.ProfFacWitness.hGint_grounded
+#print axioms QIQTH.ProfFacWitness.perUCensus_phase4
+
 end QIQTH.AxiomAudit
