@@ -21369,4 +21369,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.V2CensusInstantiation.v2Census_phase1
 #print axioms QIQTH.V2CensusInstantiation.terminal_enumeration_check
 
+-- ## ★★★ J4-430 (SliverRiskGate): THE RISK-GATE VERDICT = LANDED
+-- The Sol #20 mandate discharged: the single highest-risk item of the
+-- convergence-trio campaign (the D1/hbnd endpoint order-2 cancellation)
+-- is a PROVED standalone theorem. riskGate_powercount: |Q| ≤ C·u⁻¹·|rem|
+-- with |rem| ≤ B·√u forces |Q| ≤ (C·B)·u^{-1/2} — the exact point where
+-- the non-integrable τ⁻¹ order-2 dominator becomes the integrable sliver
+-- rate (the zero-moment/center-subtraction cancellation supplies the √u
+-- remainder, banked mechanism). M-SUMMABILITY: the constants are
+-- m-INDEPENDENT (stronger than ∑K_m < ∞) — D0/D1 bound BEFORE ∀m, the
+-- whole m-dependence in the vanishing 2√(epsSeq m); the wall-A quantifier
+-- discipline preserved. sliverRiskGate_hbnd = the BYTE-FOR-BYTE hbnd
+-- binder of the threaded core, wired via amplitudePackageOn_sliver_bound.
+-- Substantially EXTRACTION of banked machinery; the new content = the
+-- standalone structural lemma + the m-independence packaging. WHAT IT
+-- MEANS: the remaining sliver work is standard dominated analysis over
+-- the satisfiable hbnd_concrete_v2_carries. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.SliverRiskGate.riskGate_powercount
+#print axioms QIQTH.SliverRiskGate.sliverRiskGate_hbnd
+#print axioms QIQTH.SliverRiskGate.riskGate_bound_tendsto_zero
+#print axioms QIQTH.SliverRiskGate.sliverRiskGate_certificate
+
 end QIQTH.AxiomAudit

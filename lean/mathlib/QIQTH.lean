@@ -629,6 +629,7 @@ import QIQTH.InnerDataInstantiation
 import QIQTH.InnerDataEnvelope
 import QIQTH.PerUCensusInstantiation
 import QIQTH.V2CensusInstantiation
+import QIQTH.SliverRiskGate
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
