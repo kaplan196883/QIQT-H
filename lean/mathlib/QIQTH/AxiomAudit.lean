@@ -21311,4 +21311,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InnerDataInstantiation.innerData_pointwise
 #print axioms QIQTH.InnerDataInstantiation.innerData_phase1
 
+-- ## ★★ J4-427 (InnerDataEnvelope): the E2 envelope — GROUP (2) =
+-- ENUMERATED INPUT CARRIES ONLY (phase 2)
+-- witnessFieldDeriv2_gate_envelope PROVED (off-gate dHH = 0 banked;
+-- on-gate the C₂ sup × the Levi Gaussian C_L·G_σ) + the first-order
+-- sibling. conj-6 DISCHARGED (dominator (C₂·C_L)·gaussDdim σ — exactly
+-- the reduced-core shape); conj-3 DISCHARGED (Integrable.mono' + the
+-- first-order envelope + envelope_integrable); conj-1 DISCHARGED as the
+-- carried hznb (NOT univ — the on-gate sup is genuinely local; honest).
+-- GROUP (2) FINAL RESIDUE = 7 NAMED INPUT CARRIES: the z-slice
+-- measurabilities · σ>0 · C₁ · C₂ [NEW, joins the sup family] · C_L
+-- [groundable by leviSeries_gatedWitnessN1_dominated] · znb · the gate
+-- dichotomy. NO analytic hInnerData conjunct remains. Dont-undercredit:
+-- SecondDerivEnvelope (J4-198) had the E2 3-term bound + the HONEST
+-- integrability verdict (the naive (t−s)⁻¹ dominator NOT integrable; the
+-- (t−s)^{-1/2} sliver survives) — this brick adds the complementary
+-- z-level product dichotomy. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.InnerDataEnvelope.witnessFieldDeriv2_gate_envelope
+#print axioms QIQTH.InnerDataEnvelope.witnessFieldDeriv_gate_envelope_prod
+#print axioms QIQTH.InnerDataEnvelope.innerData_reducedCore_of_gateData
+#print axioms QIQTH.InnerDataEnvelope.innerData_phase2
+
 end QIQTH.AxiomAudit
