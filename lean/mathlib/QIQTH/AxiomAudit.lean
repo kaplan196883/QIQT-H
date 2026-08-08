@@ -21221,4 +21221,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationV.hcomp_collapsed
 #print axioms QIQTH.SlotInstantiationV.slotInstantiation_phase5
 
+-- ## ★ J4-423 (SlotInstantiationVI): the cubic carry DISCHARGED — the
+-- group-(1) slot-instantiation ALGEBRA CLOSED (phase 6)
+-- The explicit off-collar dominator comparisonDom = (Cρ·Mqc/(4τ³))·
+-- ((‖z‖⁵+2τ‖z‖³)·G_τ); THE POWER COUNT PROVED: the τ^{5/2} moments ÷ τ³
+-- prefactor = EXACTLY τ^{-1/2} (comparisonDom_moment, banked k=5/k=3
+-- moments via pow_norm_mul_gauss_integral; Bcomp τ-independent).
+-- hcomp_final discharges hDint + hmom into hcomp_collapsed. hf2/hf3 a.e.
+-- dominations FULLY discharged (hf2/hf3dom_at_witness). Sol trap (iii):
+-- the moment C/√τ is unconditional (closed-form Gaussian scaling); the
+-- τ-window sits in the POINTWISE ρ-deviation carry, honestly carried.
+-- THE GROUP-(1) FINAL RESIDUE (factor/sup/jet-supply carries ONLY, no open
+-- slot identity or τ-scaling): R1 |ρ−1| ≤ Cρ‖z‖³/τ (near-isometry sup),
+-- R2 hform (jet supply), R3 hcompDiff_int, R4 hf2amp/hf3amp sups,
+-- R5 hf2int/hf3int measurabilities. std-3 all. NOT a₁ = R/6 — CONDITIONAL
+-- on the convergence-trio + geometric-wiring stack.
+#print axioms QIQTH.SlotInstantiationVI.comparisonDom_moment
+#print axioms QIQTH.SlotInstantiationVI.comparisonDom_integrable
+#print axioms QIQTH.SlotInstantiationVI.hcomp_final
+#print axioms QIQTH.SlotInstantiationVI.hf2dom_at_witness
+#print axioms QIQTH.SlotInstantiationVI.hf3dom_at_witness
+#print axioms QIQTH.SlotInstantiationVI.slotInstantiation_phase6
+
 end QIQTH.AxiomAudit
