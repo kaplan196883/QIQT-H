@@ -3893,3 +3893,31 @@ genuinely open analytic input = the moment wall hslot/hGpow (+ the satisfiable d
 (leviSecondPairing_le_invSqrt / _inner_bound_concrete / hinner_window_of_slotBound) were
 banked J4-401..403 — the moment wall may reduce to the concrete slot-instantiation carries.
 raw 0; build 29s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ★★★★★ J4-416 (9933aec7): THE CLOSING SEQUENCE COMPLETE
+
+`QIQTH/MomentWallCoverage.lean` (3 decls std-3). M1: the Cpair/hCpair/hGpow trio COVERED —
+DERIVED from the core's own hslot/hcap/hEndpoint via the banked J4-401 capstone (the quantifier
+trap preserved) + the uIoc upgrade. M2: hslot COVERED verbatim (the J4-403 aggregation + the
+J4-402 per-(τ,s) supplier). `truncatedDuhamelCore_threaded_v3`: the trio removed, derived
+internally.
+
+## THE ABSOLUTE FINAL CONDITIONAL SURFACE (all satisfiable enumerated data)
+1. The slot-instantiation carries (gpow_closure_carries: qc/Ichart/hoff + the integrabilities +
+   the Lipschitz/center carries + the Gaussian-moment dominators; slot_discharge_residuals).
+2. hInnerData (the z-level diff-under-∫ inputs, ← w2_hdiff).
+3. The V1 per-u census (nbP/hProvP/the data fields/hGintP/hbulkderiv/hsliver/hcont/hfrozen_pd1).
+4. The carried v2 census (interchange/domination/continuity/gauge/Levi + the √ε sliver).
+NO genuinely-open analytic wall remains above the slot-instantiation level.
+
+## THE TWO-DAY ARC (J4-363..416, ~54 bricks, all std-3 raw 0)
+The labelled inputs resolved → the hgate retirement (Sol #15, 13 bricks) → the census campaign
+→ the walls (A by the moment route; C/D/E/F closed) → the Sol #18 capstone (a1_R6_from_data)
+→ the closing (hGauss absorbed · constRadius absorbed · the slots threaded · the Duhamel core
+threaded · the terminal coverage · the moment wall covered).
+
+## THE FUTURE TRANCHE (the user's menu)
+(a) the concrete slot instantiation at the true witness; (b) the joint-instantiability audit;
+(c) the convergence-trio content inside the carried census; (d) the v5 cosmetic bundle.
+⚠ a₁ = R/6 remains CONDITIONAL — fully enumerated, not zero. THE GRIND IS PAUSED FOR REVIEW.
