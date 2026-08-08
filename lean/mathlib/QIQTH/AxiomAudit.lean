@@ -21290,4 +21290,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationVIII.hcomp_final2
 #print axioms QIQTH.SlotInstantiationVIII.slotInstantiation_phase8
 
+-- ## J4-426 (InnerDataInstantiation): GROUP (2) hInnerData — 4/7 conjuncts
+-- DISCHARGED at the witness (phase 1)
+-- The binder map: hInnerData = a 7-conjunct ∃ znb bnd per (m,i,u), a.e.-s.
+-- DISCHARGED: conj-2/4 (the z-slice measurabilities of dH·Lev and dHH·Lev,
+-- compositional .mul); conj-5 (Integrable bnd via the banked
+-- envelope_integrable at bnd := C·G_σ); conj-7 (THE HasDerivAt FAMILY —
+-- the new 2nd-order off/on-gate line lemmas glued by the gate dichotomy,
+-- lifting the banked first-order WitnessMeasDeriv.hWdiff pattern one order
+-- up; .mul_const the Levi factor). innerData_phase1 trades the opaque
+-- hInnerData for a strictly-lighter reduced core. CARRIED (with plans):
+-- conj-1 znb (the collar/√ε line-nbhd), conj-3 (first-kernel base
+-- integrability ← a gate envelope one order below), conj-6 (the
+-- second-kernel Gaussian domination ← witnessFieldDeriv2_gate_envelope =
+-- the E2 bound, J4-427). Dont-undercredit: the w2_* family consumes
+-- hInnerData via innerZ_line_hasDerivAt — this brick supplies it one level
+-- deeper. std-3 all 6. NOT a₁ = R/6.
+#print axioms QIQTH.InnerDataInstantiation.witnessFieldDeriv_line_hasDerivAt_update
+#print axioms QIQTH.InnerDataInstantiation.innerZ_prod_hasDerivAt_witness
+#print axioms QIQTH.InnerDataInstantiation.innerData_pointwise
+#print axioms QIQTH.InnerDataInstantiation.innerData_phase1
+
 end QIQTH.AxiomAudit
