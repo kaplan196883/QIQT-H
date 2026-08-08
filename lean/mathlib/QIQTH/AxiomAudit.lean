@@ -21176,4 +21176,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationIII.hIchart_int_final
 #print axioms QIQTH.SlotInstantiationIII.slotInstantiation_phase3
 
+-- ## J4-421 (SlotInstantiationIV): hcomp SPLIT — leg (i) wiring, the
+-- geometric content isolated (phase 4)
+-- The comparison leg via the banked comparison_leg_of_dom, its four legs
+-- split honestly: leg (i) hcompDiff_int FULLY DISCHARGED (wiring:
+-- hIchart_int_final − hessGauss_qc_integrable; the bounded-qc carry inline
+-- from the phase-3 sup carries). Legs (ii)-(iv) hDint/hdom/hmom CARRIED —
+-- the genuine geometric content: the off-collar dominator D + integrability
+-- + a.e. domination + the ∫D ≤ Bcomp/√τ moment (satisfiable via
+-- cubic_gaussian_moment_witness). THE EXACT OBSTRUCTION (recorded for Sol):
+-- the OFF-collar chart-native identity IchartResidual = hessCoeff·G^chart·qc
+-- — the on-collar analogue is banked (sliverIntegrand_on_collar); the
+-- off-collar expansion of witnessSecondXDeriv is NOT banked = the true
+-- van-Vleck jet input. Dont-undercredit VERIFIED: the banked sliver bounds
+-- thread abstract Ichart / a different chart-native object — the difference
+-- bound at IchartResidual is genuinely absent. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.SlotInstantiationIV.hessGauss_qc_integrable
+#print axioms QIQTH.SlotInstantiationIV.hcompDiff_int_residual
+#print axioms QIQTH.SlotInstantiationIV.hcomp_residual_of_dom
+#print axioms QIQTH.SlotInstantiationIV.slotInstantiation_phase4
+
 end QIQTH.AxiomAudit

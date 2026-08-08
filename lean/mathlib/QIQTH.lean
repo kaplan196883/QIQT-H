@@ -620,6 +620,7 @@ import QIQTH.AuditPromotions
 import QIQTH.SlotInstantiationI
 import QIQTH.SlotInstantiationII
 import QIQTH.SlotInstantiationIII
+import QIQTH.SlotInstantiationIV
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
