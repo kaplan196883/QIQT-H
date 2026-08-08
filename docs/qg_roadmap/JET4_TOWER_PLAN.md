@@ -3946,3 +3946,21 @@ groups (2) hInnerData / (3) per-u analytic carries / (4) interchange-domination-
 need the real kernel — the convergence-trio content, never claimed closed.
 Recommended: J4-418 audit_perU_shape (id-transport) + J4-419 quantifier-order extraction.
 raw 0; build 84s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-418 (c188c308): findings 3/4 machine-checked + tranche-(a) PHASE 1
+
+`QIQTH/AuditPromotions.lean` (2 decls) + `QIQTH/SlotInstantiationI.lean` (4 decls), all std-3.
+**Part A (the audit promotions, both proved, no obstruction):** `audit_perU_shape` — the
+threaded core's V1 per-u census binder group is VERBATIM `hPd2conv_perU_fired`'s input
+(id-transport; compiles ⟹ shapes match; FINDING 3 machine-checked). `audit_hGpow_quantifier_
+order` — the ∃Cpair ∀(m,s) order (Cpair BEFORE m,s = the m-uniformity) extracted standalone
+from `hGpow_covered` (FINDING 4 machine-checked). The J4-417 audit is now fully machine-level.
+**Part B (phase 1 at the true ρ-scaled chart witness, S-generic):** DISCHARGED: `qc` concrete
+(`chartAmp·F`); `h0` centre-match FULL (`center_identity_concrete` ← rhoRatio_center, 0 ∈ K);
+`hgate` radius conjunct FULL (c·√τ < r₀; z ∈ K carried). Genuinely new self-contained
+instances (dont-undercredit check: the banked `amplitudeDataOn_concrete` + abstract slot
+suppliers exist but nothing supplied these slots directly). NOT YET (the phase ledger in-file):
+Ichart/hoff (→ J4-419 via SliverAssemblyMatched's off-collar identity), the integrabilities,
+hqz/hqc Lipschitz, hcomp, hf2bound/hf3bound Gaussian dominators, AmplitudeDerivativeDataOn.
+raw 0; builds 26-48s. NOT a₁ = R/6 (CONDITIONAL).
