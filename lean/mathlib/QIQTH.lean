@@ -649,6 +649,7 @@ import QIQTH.ProfFacWitness
 import QIQTH.ProfRateTheorem
 import QIQTH.ProdMomentWitness
 import QIQTH.ProdPtwiseWitness
+import QIQTH.LeviCapWitness
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

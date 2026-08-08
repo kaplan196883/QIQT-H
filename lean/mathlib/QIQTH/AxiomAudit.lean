@@ -21811,4 +21811,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ProdPtwiseWitness.hGint_prodPtwise
 #print axioms QIQTH.ProdPtwiseWitness.perUCensus_phase7
 
+-- ## ⚠⚠ J4-450 (LeviCapWitness): THE GATE VERDICT = UNSATISFIABLE —
+-- THE POINTWISE SPLIT RETRACTED (a soundness finding, the discipline
+-- working as designed)
+-- hLeviCap (the s,z-uniform CONSTANT Levi cap) is UNSATISFIABLE as
+-- stated for general n: the on-diagonal leviSeries s 0 0 ~ O(s^{N−n/2})
+-- (Minakshisundaram) with the fixed witness N=1 ⟹ DIVERGES for n≥3;
+-- the J4-449 gate's "O(t^N)-smooth → 0" reasoning OMITTED the
+-- (4πt)^{-n/2} normalization. hFzero + the s→0⁺ peak ⟹ a genuine
+-- discontinuity at (0,0) — no compactification route. CONSEQUENCE:
+-- hProdPtwise itself is NOT a sound s-uniform pointwise atom for n≥3
+-- (the two-Gaussian near-diagonal scaling s^{1−n/2} diverges) — the
+-- J4-447→449 POINTWISE grounding chain is RETRACTED for general n (its
+-- lemmas remain true conditionals; the atoms they consume are
+-- unsatisfiable at n≥3 — the vacuity the blind-spot discipline exists to
+-- catch). THE HONEST FALLBACK: hGint re-grounds at the J4-446
+-- INTEGRAL-level surface (hProfRate — the under-the-integral √τ gain —
+-- remains satisfiable; → Sol #21). Landed: leviCap_on_compactBox (the
+-- TRUE positive-time-compact cap; its constant diverges as δ→0 — the
+-- gate boundary made explicit). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.LeviCapWitness.leviCap_on_compactBox
+
 end QIQTH.AxiomAudit
