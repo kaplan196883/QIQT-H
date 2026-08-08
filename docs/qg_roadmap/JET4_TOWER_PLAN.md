@@ -4502,3 +4502,20 @@ a DIFFERENT provider from the frozen hQ1 provider closed by J4-437..443 — it s
 carry (ledger notes † ‡). raw 0; build 60s. NEXT: J4-445 = SliverSingularEngine (the
 (u−s)^{-1/2} integrable-singularity engine; sliver_rate_intervalIntegrable may BE it).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-445: hGint FULLY DISCHARGED — the sliver singular engine (census phase 3)
+
+`QIQTH/SliverSingularEngine.lean` (5 decls std-3). THE ENGINE EXISTED DISTRIBUTED across
+three banked files — wired, not re-proved: the sliver-window singular integrability =
+`HeatResidualBound.rpow_sub_intervalIntegrable` (SliverEstimates; NOT
+sliver_rate_intervalIntegrable, which is fixed-[0,t] — the dont-undercredit check caught the
+right engine); the power count = `SliverRiskGate.riskGate_powercount`; assembly =
+IntervalIntegrable.mono'. `hSliver_discharged` trades the binder for TWO strictly-lower
+satisfiable carries: hProfMeas + hProfFac (|profile| ≤ C·(u−s)⁻¹·|rem| ∧ |rem| ≤ B·√(u−s) —
+the 1/(2τ) slope × the coordinate first moment). Endpoint s=u a.e. (ae_ne_point).
+`hGint_full_at_witness`: the census hGint FULLY banked (bulk J4-444 ⊕ sliver this brick).
+THE GROUP-(3) RESIDUE = enumerated input carries only (U/nb, the diagonal hProv, the order-2
+data, hbulkderiv, the √ε hsliver, hcont, hQ1-carrier, + the hGint suppliers).
+raw 0; build 51s. NEXT: J4-446 = ProfFacWitness (hProfFac from the banked envelope + moment).
+NOT a₁ = R/6 (CONDITIONAL).
