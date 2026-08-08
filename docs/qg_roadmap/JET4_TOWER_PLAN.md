@@ -4413,3 +4413,22 @@ base y (C·G_σ via envelope_integrable + a base-y witnessFieldDeriv gate envelo
 hFdomEvery), then the outer bound via the capped-ceiling ∫z route (already run in
 frozenLeg_hFint); the base-y envelope = the honest enumerated input. raw 0; build 77s.
 NEXT: J4-440 = FrozenDominatorLegs. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-440: the hQ1 provider 7→1 — ONE hGateData carry (phase 4)
+
+`QIQTH/FrozenDominatorLegs.lean` (5 decls std-3). Legs (5)/(6) + the z-level reduced core
+DISCHARGED. DONT-UNDERCREDIT CORRECTION: the banked `witnessFieldDeriv_gate_envelope_prod`
+is ALREADY base-general (arbitrary field point — instantiated at update y i w'; the J4-439
+ledger undersold it; only its INPUTS are enumerated). The one genuinely new envelope:
+`witnessValue_gate_envelope_prod` (zeroth order, via the new base-general
+`vanVleckGatedWitness_offGate_eq_zero`). The core mirrors innerData_reducedCore one order
+down (bnd := (C₁·C_L)·gaussDdim σ); the outer bound := const M (the u-capped Gaussian peak)
+via the banked capped-ceiling pairing calc; s≤0 killed by hFzero.
+**THREAD CONVERGENCE: NOT achieved — the honest base mismatch** (the grounded C₁ lives at
+base 0/closedBall; the needed on-gate sup at update y i w'; no fabricated convergence).
+**THE PROVIDER LEDGER v3: the frozen hQ1 provider = ONE enumerated base-y gate/amp/envelope
+carry `hGateData` per (m,i,u,y)** (snb + the capped dH domination + the a.e.-s gate core:
+slice measurabilities, width, C₀/C₁/C_L sups, Levi domination, the gate dichotomy).
+raw 0; build 51s. NEXT: J4-441 = SupBaseGeneral (lift the grounded C₁/C₀ to general base —
+closing the sup↔diff thread convergence). NOT a₁ = R/6 (CONDITIONAL).
