@@ -21549,4 +21549,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InnerDiffFamily.innerDiff_census_hQ1_of_frozenData
 #print axioms QIQTH.InnerDiffFamily.innerDiff_phase1
 
+-- ## J4-438 (FrozenProviderLegs): the hQ1 provider shrunk 7→4
+-- hFmeas/hF'meas DISCHARGED (the banked innerIntegral_aesm Fubini engine
+-- on .mul of m-INDEPENDENT joint (s,z) carries — the base-y analogue of
+-- the banked base-0 hFmeas_concrete). hFint DISCHARGED (the banked
+-- pairing_intervalIntegrable_lowerCapped capped-ceiling engine at base y;
+-- degenerate case via intervalIntegrable_of_deg; hmeas supplied internally
+-- by the Fubini engine). hdiff (leg 7) NOT wired — honest shape mismatch:
+-- the J4-426 family is 2nd-order/z-pointwise/base-update-0; the frozen
+-- hdiff is 1st-order/∫z/base-y (→ J4-439 via innerZ_line_hasDerivAt).
+-- THE REMAINDER = {snb, bound+hbdd, hbound, hdiff} — the genuine
+-- domination + pointwise-HasDerivAt content. M-UNIFORMITY: the discharged
+-- legs use ∀d carries instantiated at d := u−εₘ — m-independent; only the
+-- window + the remainder are per-m (admissible: hQ1 is a per-m equality).
+-- HONESTLY FLAGGED: gatedWitnessShift_joint_aesm is field-point-0-only,
+-- so the base-y joint carries are ENUMERATED INPUTS (base-y analogues of
+-- banked base-0 facts), not banked-concrete — no fabrication.
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.FrozenProviderLegs.frozenLeg_hFmeas
+#print axioms QIQTH.FrozenProviderLegs.frozenLeg_hF'meas
+#print axioms QIQTH.FrozenProviderLegs.frozenLeg_hFint
+#print axioms QIQTH.FrozenProviderLegs.frozenData_of_remainder
+#print axioms QIQTH.FrozenProviderLegs.innerDiff_phase2
+
 end QIQTH.AxiomAudit
