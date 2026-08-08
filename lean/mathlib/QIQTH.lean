@@ -611,6 +611,7 @@ import QIQTH.FinalA1Slots
 import QIQTH.A1R6FromData
 import QIQTH.HGaussAbsorb
 import QIQTH.ConstRadiusAbsorb
+import QIQTH.SlotsThreading
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

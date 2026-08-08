@@ -21022,4 +21022,22 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6.
 #print axioms QIQTH.ConstRadiusAbsorb.a1_R6_from_data_v3
 
+-- ## J4-413 (SlotsThreading): the slots threaded (closing 3/4) + THE DUHAMEL MAP
+-- T1 THE MAP: the ~90-binder truncatedDuhamelCore_AT_GATE_FULL decomposes
+-- into 5 blocks — A (hBoundaryLim BANKED) · B (the W2 family BANKED via
+-- w2_*; hEdom BANKED via the affine layer; the E-combination banked;
+-- residues = hdiff + the second-order interchange MemLapFull/MemAdjLo/
+-- MemAdjHi/hbnd) · C (the F2 pile BANKED via F2FamilyDischarge) · D (the
+-- frozen/moving lists banked). NET: the Duhamel residual = TWO genuine
+-- carries, not 90 binders. ⚠ dont-undercredit note for J4-414: the wall-A
+-- campaign (memLapFull_from_slotBound / hII_lo_from_capped /
+-- hII_hi_from_sliver) may already cover the interchange legs — CHECK FIRST.
+-- T2 hCConvSlot_threaded (the L2 census threaded: hlin/hb/hbulk_tendsto/
+-- fbulk discharged by the F-pile firings) + a1R6GateSlots_threaded + T3
+-- a1_R6_from_data_v4 (slots → coreSlots + hDConvSlots + L2Slots(L2Residual);
+-- the surviving L2 residuals enumerated). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.SlotsThreading.hCConvSlot_threaded
+#print axioms QIQTH.SlotsThreading.a1R6GateSlots_threaded
+#print axioms QIQTH.SlotsThreading.a1_R6_from_data_v4
+
 end QIQTH.AxiomAudit
