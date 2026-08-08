@@ -21593,4 +21593,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenHdiffLeg.frozenLeg_hdiff
 #print axioms QIQTH.FrozenHdiffLeg.innerDiff_phase3
 
+-- ## ★★ J4-440 (FrozenDominatorLegs): the provider 7→1 — one hGateData
+-- carry (phase 4)
+-- Legs (5)/(6) + the z-level reduced core DISCHARGED. Dont-undercredit
+-- CORRECTION: the banked witnessFieldDeriv_gate_envelope_prod is ALREADY
+-- base-general (arbitrary field point — instantiate p := update y i w';
+-- the J4-439 ledger undersold it; only its INPUTS are enumerated). The
+-- one genuinely new envelope: witnessValue_gate_envelope_prod (zeroth
+-- order, via the new vanVleckGatedWitness_offGate_eq_zero — also
+-- base-general). The core mirrors innerData_reducedCore one order down;
+-- bnd := (C₁·C_L)·gaussDdim σ; the outer bound := const M (the u-capped
+-- Gaussian peak) via the capped-ceiling pairing calc; s≤0 by hFzero.
+-- THREAD CONVERGENCE: NOT achieved — HONEST BASE MISMATCH (the grounded
+-- C₁ is at base 0/closedBall; the needed sup at update y i w'; no
+-- fabricated convergence; → J4-441 base-general C₁ lift).
+-- THE PROVIDER LEDGER v3: hQ1 reducible to ONE enumerated base-y
+-- gate/amp/envelope carry hGateData per (m,i,u,y). std-3 all 5.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.FrozenDominatorLegs.witnessValue_gate_envelope_prod
+#print axioms QIQTH.FrozenDominatorLegs.innerDiffCore_of_gateData
+#print axioms QIQTH.FrozenDominatorLegs.intZ_dH_pairing_le
+#print axioms QIQTH.FrozenDominatorLegs.frozenLeg_dominator
+#print axioms QIQTH.FrozenDominatorLegs.innerDiff_phase4
+
 end QIQTH.AxiomAudit
