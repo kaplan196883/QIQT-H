@@ -3843,3 +3843,28 @@ parametric version would re-expose hpkgBound). THE HONESTY COST: the ∃-quantif
 + the ∀-over-gates carriers (strictly stronger supply). Added geometry-only:
 hgnd/hinvF/hframeK/hw/hu. J4-413 = the slots threading (slots → the 3 census sub-carriers).
 raw 0; build 28s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-413 (c9701e60): the slots threaded (closing 3/4) + ★ THE DUHAMEL CENSUS MAP
+
+`QIQTH/SlotsThreading.lean` (3 decls std-3).
+
+### THE T1 DUHAMEL MAP (the ~90-binder truncatedDuhamelCore_AT_GATE_FULL → 5 blocks)
+- **A** hBoundaryLim ← `EnvelopeWiringLocUnif.hBoundaryLim_DONE` (BANKED).
+- **B** the hDaLimLU census: the W2 family ← `w2_hQ1`/`w2_hFmeas`/`w2_hF'meas`/`w2_hFint`
+  (BANKED); hEdom ← the affine layer (BANKED); the E-combination banked; gauge/nbhds
+  geometry-satisfiable. RESIDUES: `hdiff` (the pointwise ∂_w-under-∫₀ᵗ∫ family) + the
+  2nd-order interchange `MemLapFull`/`MemAdjLo`/`MemAdjHi` + the sliver D0/D1/hbnd.
+- **C** the F2/hFII pile ← `F2FamilyDischarge.{hpar,htime,hR}_discharge` +
+  `heatConvInner_intervalIntegrable_H` (BANKED).
+- **D** the frozen/moving boundary lists ← `hbdryLU_CONCRETE`'s members (BANKED).
+
+**NET: the Duhamel residual = TWO genuine carries, not 90 binders.** ⚠ DONT-UNDERCREDIT
+(J4-414 checks first): the wall-A campaign (memLapFull_from_slotBound / hII_lo_from_capped /
+hII_hi_from_sliver) may already cover the interchange legs — then the terminal residue =
+{hdiff + the wall-A residual carries (hslot/hGpow-level) + D0/D1/hbnd}.
+
+### T2/T3
+`hCConvSlot_threaded` (the L2 census threaded; survivors in `L2Residual`) +
+`a1R6GateSlots_threaded` + `a1_R6_from_data_v4` (slots → coreSlots + hDConvSlots + L2Slots).
+raw 0; build 31s. NOT a₁ = R/6 (CONDITIONAL).
