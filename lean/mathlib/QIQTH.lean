@@ -614,6 +614,7 @@ import QIQTH.ConstRadiusAbsorb
 import QIQTH.SlotsThreading
 import QIQTH.DuhamelCoreThreaded
 import QIQTH.TerminalCoverage
+import QIQTH.MomentWallCoverage
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

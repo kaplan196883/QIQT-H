@@ -21075,4 +21075,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TerminalCoverage.hdiff_threaded
 #print axioms QIQTH.TerminalCoverage.truncatedDuhamelCore_threaded_v2
 
+-- ## ★★★★★ J4-416 (MomentWallCoverage): THE CLOSING SEQUENCE COMPLETE
+-- M1: the Cpair/hCpair/hGpow trio COVERED — leviSecondPairing_le_invSqrt
+-- (Cpair before the m,s binders — the trap preserved) + the uIoc endpoint
+-- upgrade; hGpow_covered DERIVES the trio from the v2 core's own
+-- hslot/hcap/hEndpoint — no new residue. M2: hslot COVERED verbatim
+-- (hinner_window_of_slotBound + leviSecondPairing_inner_bound_concrete).
+-- truncatedDuhamelCore_threaded_v3: the trio REMOVED, derived internally.
+-- ★ THE ABSOLUTE FINAL LIST: the entire terminal surface = SATISFIABLE
+-- ENUMERATED DATA (the slot carries gpow_closure_carries +
+-- slot_discharge_residuals · hInnerData · the V1 per-u census · the carried
+-- v2 census) — NO genuinely-open analytic wall above the slot-instantiation
+-- level. The future tranche: the concrete slot instantiation (qc/Ichart/
+-- hoff/the dominators) + the joint-instantiability question + the
+-- convergence trio inside the carried census. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.MomentWallCoverage.hslot_covered
+#print axioms QIQTH.MomentWallCoverage.hGpow_covered
+#print axioms QIQTH.MomentWallCoverage.truncatedDuhamelCore_threaded_v3
+
 end QIQTH.AxiomAudit
