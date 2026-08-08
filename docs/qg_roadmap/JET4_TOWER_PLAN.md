@@ -4485,3 +4485,20 @@ Dont-undercredit: pd_comp was base-general — the 8th brick running where a ban
 lemma turned out general. THE DIFF-UNDER-∫ FAMILY'S FIRST ITEM (hQ1 + its full provider) IS
 GROUNDED AT THE WITNESS. raw 0; build 54s. NEXT: J4-444 = hGint (Sol (ii); frozenLeg_hFint
 did the same shape at base y — may be near-verbatim). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-444: hGint DISCHARGED bulk⊕sliver (census phase 2)
+
+`QIQTH/HGintCutoff.lean` (3 decls std-3). THE FINDING: the census hGint demands the FULL
+[0,u] (not the anticipated capped tranche); the field-derivative envelope carries a 1/(2τ)
+slope ⟹ near s→u only the singular (u−s)^{-1/2} dominates — per SOL #20 NOT forced.
+THE SPLIT: bulk [0,u−εₘ] DISCHARGED (near-verbatim frozenLeg_hFint via
+pairing_intervalIntegrable_lowerCapped + gaussDdim_crude_to_capped — the J4-428 "no banked
+supplier" verdict was true only for the constant-dominator full route); the endpoint sliver
+[u−εₘ,u] CARRIED as hSliver (the irreducible (u−s)^{-1/2} content → J4-445); reassembled by
+IntervalIntegrable.trans. New named carries: hFzero/hWFDdomCapped/hFdomEvery/hGintMeas/
+hSliver. ⚠ DONT-UNDERCREDIT CONFIRMATION: the census hProv (the DIAGONAL 7-leg provider) is
+a DIFFERENT provider from the frozen hQ1 provider closed by J4-437..443 — it stays an honest
+carry (ledger notes † ‡). raw 0; build 60s. NEXT: J4-445 = SliverSingularEngine (the
+(u−s)^{-1/2} integrable-singularity engine; sliver_rate_intervalIntegrable may BE it).
+NOT a₁ = R/6 (CONDITIONAL).
