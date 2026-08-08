@@ -21040,4 +21040,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotsThreading.a1R6GateSlots_threaded
 #print axioms QIQTH.SlotsThreading.a1_R6_from_data_v4
 
+-- ## J4-414 (DuhamelCoreThreaded): the Duhamel core threaded (closing 4/4 move 1)
+-- ★ THE D1 VERDICT PROVED IN LEAN: all THREE interchange legs of the
+-- ~90-binder Duhamel core are COVERED by the wall-A campaign —
+-- block_interchange_threaded (MemLapFull ← memLapFull_from_slotBound ·
+-- MemAdjLo ← hII_lo_from_capped · MemAdjHi ← hII_hi_from_sliver; exact
+-- shapes, same witness/gate/source/window/pdpdH slot). truncatedDuhamelCore_
+-- threaded = the FULL core with the interchange binders removed (discharged
+-- internally) + the wall-A census appended; blocks A/C/D already at the
+-- honest residual level (carried verbatim). THE FINAL RESIDUAL: hdiff (the
+-- 2nd-order ∂_w-under-∫ — should fall to the dominated-derivative engine) +
+-- hslot/hGpow (the moment wall — Sol #19 warranted) + hPd2conv (⚠ check
+-- hPd2conv_perU_fired coverage) + the satisfiable census (W2/F2/boundary/
+-- sliver/gauge). D3 (v5, the ~105-carry bundle) honestly deferred as
+-- cosmetic re-plumbing. std-3 both. NOT a₁ = R/6.
+-- (block_interchange_threaded is private — verified std-3 in its own file's
+--  #print block; the public carrier below transitively contains it.)
+#print axioms QIQTH.DuhamelCoreThreaded.truncatedDuhamelCore_threaded
+
 end QIQTH.AxiomAudit

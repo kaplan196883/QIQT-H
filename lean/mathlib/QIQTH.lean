@@ -612,6 +612,7 @@ import QIQTH.A1R6FromData
 import QIQTH.HGaussAbsorb
 import QIQTH.ConstRadiusAbsorb
 import QIQTH.SlotsThreading
+import QIQTH.DuhamelCoreThreaded
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
