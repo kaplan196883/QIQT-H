@@ -4001,3 +4001,34 @@ hessGaussFactor·qc has the chart-native form + ∫_{collarᶜ}‖·‖ ≤ Bcom
 (the odd-moment √τ extraction ∫|z_i|/(2τ)·G_τ ≍ τ^{-1/2}; route hf2bound_slot_of_dom +
 abs_integral_le_of_dom + the cubic/mass Gaussian-moment family).
 raw 0; build 47s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-421 (d0d28ef0): hcomp SPLIT — the geometric content isolated (phase 4) + SOL #19
+
+`QIQTH/SlotInstantiationIV.lean` (4 decls std-3). The comparison leg via the banked
+`comparison_leg_of_dom`, four legs split honestly: leg (i) `hcompDiff_int` FULLY DISCHARGED
+(wiring: hIchart_int_final − `hessGauss_qc_integrable`; bounded-qc inline from phase-3 sup
+carries). Legs (ii)-(iv) hDint/hdom/hmom CARRIED = the genuine geometric content. THE EXACT
+OBSTRUCTION ISOLATED: the OFF-collar chart-native identity IchartResidual = hessCoeff·G^chart
+·qc — i.e. the off-collar expansion of witnessSecondXDeriv (a van-Vleck jet identity); the
+on-collar analogue is banked (sliverIntegrand_on_collar; hD2Hexpand is Regime-conditioned).
+Dont-undercredit VERIFIED: the banked sliver machinery threads abstract Ichart /
+chartNative_leading_sub_hess_norm_le bounds a DIFFERENT object.
+
+### SOL CONSULT #19 (gpt-5.6-sol, recorded verbatim-in-substance)
+RANKING: (A) FIRST — audit hD2Hexpand's Regime dependency: if Regime only selects the witness
+branch/supplies chart-true rewrites, extract the UNCONDITIONAL algebraic jet lemma
+Wpair = f₂ + f₃ + hessCoeff·G^chart·qc (ordinary chart/τ>0 hypotheses) and get the residual
+identity by ring; legs (ii)-(iv) then collapse to the banked chart-native moment bounds. If
+Regime proves cutoff constancy/domain membership/ρ-smallness/Taylor-remainder vanishing, the
+extension is INVALID and a new geometric lemma is genuinely required. TRAP: never transport
+the conditional on-collar equality off-collar because the formulas look algebraic; keep the
+ρ-scaled chartArg/normalization/τ≠0 aligned. (B) SECOND — triangle domination D = D_W+D₂+D₃+
+D_H; TRAP: the triangle inequality may destroy the cancellation improving τ⁻¹ → τ^{-1/2};
+a larger constant CANNOT absorb the wrong power as τ→0; needs uniform off-collar Gaussian
+tails in τ/ρ/dim. (C) THIRD — valid scheduling, removes nothing.
+hf2bound CONFIRMED: abs_integral_le_of_dom + the absolute coordinate-moment family is sound
+m-uniformly IF |z_i|/|z_i|³ moments (NEVER radial ‖z‖ moments — those cost √m or m); do NOT
+use odd-moment cancellation (post-|·| the moments are nonzero); the cubic → C/√τ needs the
+campaign's τ upper bound, integrability alone does not scale.
+raw 0; build 48s. NOT a₁ = R/6 (CONDITIONAL).
