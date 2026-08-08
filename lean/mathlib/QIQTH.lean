@@ -609,6 +609,7 @@ import QIQTH.PerUCensusTuple
 import QIQTH.ConstGateAssembly
 import QIQTH.FinalA1Slots
 import QIQTH.A1R6FromData
+import QIQTH.HGaussAbsorb
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -20995,4 +20995,16 @@ namespace QIQTH.AxiomAudit
 -- remains CONDITIONAL and was never claimed otherwise. std-3.
 #print axioms QIQTH.A1R6FromData.a1_R6_from_data
 
+-- ## J4-411 (HGaussAbsorb): the hGauss carry ABSORBED (the closing sequence 1/4)
+-- THE SHAPE VERDICT: the banked hGauss_pullback_concrete germ IS the labelled
+-- consumer form — no germ-vs-labelled conversion; the only gap = the metric
+-- IDENTITY (the supplier proves it at the literal expPullbackMetric; the
+-- capstone's g is abstract). hGauss_concrete (the instantiation bridge) +
+-- a1_R6_from_data_v2 (group (D) REMOVED; the named carry hgPull
+-- (g = expPullbackMetric … 0) + the base-geometry premises replace it —
+-- the architecturally-intended identification, honestly carried).
+-- std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.HGaussAbsorb.hGauss_concrete
+#print axioms QIQTH.HGaussAbsorb.a1_R6_from_data_v2
+
 end QIQTH.AxiomAudit
