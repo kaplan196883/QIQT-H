@@ -4077,3 +4077,22 @@ only); no banked |ρ−1| scalar bound exists (R1 genuinely open).
 - R5 `hf2int`/`hf3int`: the integrand measurability/integrability carries.
 ⚠ a₁ = R/6 stays CONDITIONAL on the convergence-trio + geometric-wiring stack.
 raw 0; build 49s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-424 (05e663c5): R1 PROVED confined + the off-collar S5b map — phase 7
+
+`QIQTH/SlotInstantiationVII.lean` (7 decls std-3). **R1** `rhoRatio_sub_one_bound`:
+|ρ−1| ≤ (L·n·collarK/4)·(‖z‖³/τ) on collarRegime — THE EXPONENT BUDGET: ρ = exp θ with
+|θ| ≤ L·n·‖z‖³/(4τ) (two-sided `chartW0_rncRadialSq_error` + `rncRadialSq_le_nsq`);
+e^{|θ|} ≤ collarK via the collar/window confinement (‖z‖³ ≤ c³τ√τ, √τ ≤ √τ₀); Cρ
+τ-INDEPENDENT. THE EXACT OFF-COLLAR FAILURE (recorded for the next brick, honest): at fixed
+‖z‖ = r₀ with τ→0 the factor e^{|θ|} DIVERGES — R1 alone cannot supply hcomp_final's
+hdom_comp on collarᶜ. THE S5B CLOSURE ROUTE: hessGaussFactor·(ρ−1)·qc =
+(z_i²−2τ)/(4τ²)·(G^chart−G_τ)·qc and `gaussDdim_replace_bound` gives
+|G^chart−G_τ| ≤ (L'‖z‖³/4τ)·(√2)ⁿ·G_{2τ} GLOBALLY (no exp blow-up) ⟹ comparisonDom2
+(width-2τ) + a κ=2 moment lemma → global hdom_comp2 (= J4-425).
+**R5** hf2int/hf3int DISCHARGED (Integrable.mono' + compositional measurability from the
+banked bundle fields). **R3** DISCHARGED (re-export). **R2** `hform_at_witness` pointwise
+(the jet supply = the standing carry). **R4** GENUINELY CARRIED — an off-gate near-isometry
+carry would be UNSATISFIABLE; the vacuity was deliberately avoided (the axiom-budget
+blind-spot discipline in action). raw 0; build 83s. NOT a₁ = R/6 (CONDITIONAL).
