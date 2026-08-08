@@ -3868,3 +3868,16 @@ hII_hi_from_sliver) may already cover the interchange legs — then the terminal
 `hCConvSlot_threaded` (the L2 census threaded; survivors in `L2Residual`) +
 `a1R6GateSlots_threaded` + `a1_R6_from_data_v4` (slots → coreSlots + hDConvSlots + L2Slots).
 raw 0; build 31s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-414 (9aa6586c): the Duhamel core threaded — the interchange COVERED by wall-A
+
+`QIQTH/DuhamelCoreThreaded.lean` (std-3). THE D1 VERDICT PROVED IN LEAN: all three interchange
+legs (MemLapFull/MemAdjLo/MemAdjHi) are covered by the wall-A campaign (memLapFull_from_
+slotBound / hII_lo_from_capped / hII_hi_from_sliver — exact shapes, same witness/gate/source/
+window/pdpdH). `truncatedDuhamelCore_threaded` = the FULL core with the interchange discharged
+internally + the wall-A census; A/C/D carried verbatim (already residual-level). THE TERMINAL
+RESIDUAL: hdiff (dominated-derivative candidate — check w2_hdiff coverage) + hslot/hGpow (the
+moment wall) + hPd2conv (check hPd2conv_perU_fired coverage) + the satisfiable census. v5
+deferred (cosmetic). ⚠ NEW TRAP: private lemmas are NOT pinnable from AxiomAudit (the first
+budget run failed on it; public pins only). raw 0; build 30s. NOT a₁ = R/6 (CONDITIONAL).
