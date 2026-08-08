@@ -638,6 +638,7 @@ import QIQTH.JacobiCLMExposure
 import QIQTH.SupFamilyFirstOrder
 import QIQTH.InnerDiffFamily
 import QIQTH.FrozenProviderLegs
+import QIQTH.FrozenHdiffLeg
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

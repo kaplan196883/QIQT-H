@@ -21572,4 +21572,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenProviderLegs.frozenData_of_remainder
 #print axioms QIQTH.FrozenProviderLegs.innerDiff_phase2
 
+-- ## J4-439 (FrozenHdiffLeg): the hdiff leg DISCHARGED — the provider 7→3
+-- frozenLeg_hdiff fires the banked BASE-GENERAL engine
+-- innerZ_line_hasDerivAt per-(s,w) at running base; the innermost
+-- z-pointwise HasDerivAt family discharged internally via the banked
+-- FIRST-order gate dichotomy hWdiff_offGate/onGate lifted to general base
+-- update y i w' (update_idem/update_self — no new engine needed).
+-- DONT-UNDERCREDIT CORRECTION: innerZ_line_hasDerivAt is base-general
+-- (the J4-438 note undersold it); hWdiff_* are base-general too.
+-- Named carry: the per-(s,w) z-level reduced core hRemainderDiff (bundled
+-- under the SAME existential snb — window and line-nbhd stay coupled).
+-- THE REMAINDER = {snb, the dominator triple bound+hbdd+hbound} + the
+-- z-level reduced core. The dominator plan (ledger v2): mirror
+-- innerData_pointwise at base y (C·G_σ via envelope_integrable + a base-y
+-- gate envelope × hFdomEvery) — the base-y envelope is the honest
+-- enumerated input (the banked phrasing is base-0). std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.FrozenHdiffLeg.witnessValue_line_hasDerivAt_update
+#print axioms QIQTH.FrozenHdiffLeg.innerZ_prod_hasDerivAt_witnessValue
+#print axioms QIQTH.FrozenHdiffLeg.frozenLeg_hdiff
+#print axioms QIQTH.FrozenHdiffLeg.innerDiff_phase3
+
 end QIQTH.AxiomAudit
