@@ -3881,3 +3881,15 @@ RESIDUAL: hdiff (dominated-derivative candidate — check w2_hdiff coverage) + h
 moment wall) + hPd2conv (check hPd2conv_perU_fired coverage) + the satisfiable census. v5
 deferred (cosmetic). ⚠ NEW TRAP: private lemmas are NOT pinnable from AxiomAudit (the first
 budget run failed on it; public pins only). raw 0; build 30s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-415 (79623afd): hdiff + hPd2conv BOTH COVERED — the terminal surface narrows
+
+`QIQTH/TerminalCoverage.lean` (3 decls std-3). V1: hPd2conv = hPd2conv_perU_fired VERBATIM
+(threaded). V2: hdiff = w2_hdiff VERBATIM (threaded; no dominated-derivative derivation
+needed). `truncatedDuhamelCore_threaded_v2` absorbs both. ★ THE FINAL TERMINAL LIST: the ONLY
+genuinely open analytic input = the moment wall hslot/hGpow (+ the satisfiable data censuses).
+⚠ dont-undercredit for J4-416: the GpowBridge/GpowClosure/SlotDischarges results
+(leviSecondPairing_le_invSqrt / _inner_bound_concrete / hinner_window_of_slotBound) were
+banked J4-401..403 — the moment wall may reduce to the concrete slot-instantiation carries.
+raw 0; build 29s. NOT a₁ = R/6 (CONDITIONAL).
