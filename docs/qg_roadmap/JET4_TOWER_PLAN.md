@@ -3824,3 +3824,12 @@ the Sol #18 three-brick final assembly → THE CAPSTONE. THE GRIND IS PAUSED FOR
 The natural next targets (user's choice): absorb hGauss into the capstone; the slot-census
 firings threaded end-to-end; the constRadius parametric re-run discharging hpkgBound/hmemS0/
 hopenS0; the deep Duhamel/convergence campaign.
+
+---
+## J4-411 (4ed8b4e6): the hGauss carry ABSORBED (the closing sequence 1/4)
+
+`QIQTH/HGaussAbsorb.lean` (2 decls std-3). THE VERDICT: the banked germ IS the labelled form —
+the only gap is the metric identity. `hGauss_concrete` (the instantiation bridge) +
+`a1_R6_from_data_v2` (group (D) removed; the one carry = hgPull, the pullback-metric
+identification). Next: (2) the constRadius absorption (J4-412) → (3) the slot threading →
+(4) the Duhamel campaign. raw 0; build 43s. NOT a₁ = R/6 (CONDITIONAL).
