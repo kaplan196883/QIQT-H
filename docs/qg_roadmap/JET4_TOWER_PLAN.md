@@ -3921,3 +3921,28 @@ threaded · the terminal coverage · the moment wall covered).
 (a) the concrete slot instantiation at the true witness; (b) the joint-instantiability audit;
 (c) the convergence-trio content inside the carried census; (d) the v5 cosmetic bundle.
 ⚠ a₁ = R/6 remains CONDITIONAL — fully enumerated, not zero. THE GRIND IS PAUSED FOR REVIEW.
+
+---
+## J4-417 (2554dbc9): the joint-instantiability AUDIT — the terminal surface CLEAN
+
+`QIQTH/JointInstantiabilityAudit.lean` (8 public decls; 6 pinned). THE TRANCHE-(b) BRICK
+(user directive "do it all in the loop" — sequence (b)→(a)→(c)→(d)). The blind spot
+(feedback_axiom_budget_blind_spot: budget catches axioms/sorry, NOT unsatisfiable packages)
+closed at the reachable level. THE FOUR FINDINGS, ALL CLEAN:
+1. **The moment-wall exponent** — hslot demands coeff·τ^(-1/2)+Sconst; the historical
+   τ-uniform LINEAR ≤C·τ trap is PROVABLY ABSENT (`audit_hslot_not_linear_trap` /
+   `audit_invsqrt_not_linear_trap` — depend on NO axioms at all); the demanded shape is
+   satisfiable at the true Levi singularity (`audit_hslot_form_satisfiable`).
+2. **The census projectors** — `gpow_closure_carries`/`slot_discharge_residuals` are genuine
+   5-/4-fold conjunctions (Iff.rfl): no `:= True` conjunct, no hidden strengthening.
+3. **Witness coherence** — `truncatedDuhamelCore_threaded_v3`'s codomain at the literal
+   constGate is DEFEQ to `a1_R6_from_data_v4`'s coreSlots binder (`audit_coreSlots_shape`):
+   same gate term, same van-Vleck witness, no radius/normalization drift.
+4. **The M1 quantifier order** — ∃Cpair ∀(m,s) confirmed by inspection (machine-check
+   promotion = J4-419 recommendation).
+`joint_instantiability_certificate`: a machine-checked SIMULTANEOUS model of the group-(1)
+shapes at one shared sign-correct parameter set. HONEST RESIDUE (not a soundness defect):
+groups (2) hInnerData / (3) per-u analytic carries / (4) interchange-domination-Levi carries
+need the real kernel — the convergence-trio content, never claimed closed.
+Recommended: J4-418 audit_perU_shape (id-transport) + J4-419 quantifier-order extraction.
+raw 0; build 84s. NOT a₁ = R/6 (CONDITIONAL).
