@@ -4256,3 +4256,24 @@ germ-local); M/Sconst inherit it. THE .CHOOSE TRAP FORCED NOTHING — nothing fa
 THE FIX = ONE BRICK: BaseSlotAmpDeriv (the baseSlotAmp_bound analogue one/two derivative
 orders up) grounds all four + M/Sconst by the same compactness route (= J4-432).
 raw 0; build 52s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-432 (3939e676): the derivative fields IDENTIFIED — the sup wall reduced
+## to the J3 atomic carry
+
+`QIQTH/BaseSlotAmpDeriv.lean` (6 decls std-3). The concrete amplitude factors
+DEFINITIONALLY: chartFieldAmp τ z = manifoldAmp τ ∘ (W z), W = uniformInverseChart. The
+chain rule (HasFDerivAt.comp_hasDerivAt + the banked GeneralBaseJets field jet) yields the
+EXPLICIT identification `pd_chartFieldAmp_center_eq`: pd (chartFieldAmp τ z) i 0 =
+fderiv(manifoldAmp τ)(Wz0)(fderiv(Wz)(0) eᵢ) — NO .choose germ ever summed (the Sol trap
+fully respected). `manifoldAmp_contDiffAt`: C² everywhere, geometry-only.
+`baseSlotAmpDeriv1/2_sup_onCollar` ground C₁/M₁chart + C₂/M₂chart by compactness
+CONDITIONAL on hcont1/hcont2; M/Sconst follow (banked F Gaussian + rhoRatio_le_collarK).
+### THE REDUCTION: the J4-431 wall ("no banked joint-in-base derivative field") is now ONE
+### ATOMIC CARRY — ContinuousOn (fun z ↦ fderiv ℝ (uniformInverseChart z) 0) = the chart
+### field-slot Jacobian's joint-base continuity = THE RECOGNIZED J3 BLOCKER
+(FlowJointRegularity/BasepointFDeriv document it as the carried joint-(q,v) regularity of
+uniformFlowExp — a known frontier, not a surprise; the CoV centre-value jet is a DIFFERENT
+jet, verified). raw 0; build 93s. NEXT: J4-433 = chartFieldJacobian_continuousOn (the J3
+attack — flow smooth-dependence or explicit route; Sol #21 if walled).
+NOT a₁ = R/6 (CONDITIONAL).
