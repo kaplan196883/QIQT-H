@@ -21457,4 +21457,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartFieldJacobian.chartFieldJacobian_facts_of_small
 #print axioms QIQTH.ChartFieldJacobian.chartFieldJacobian_continuousOn_of_forwardJointCont
 
+-- ## J4-434 (ForwardFlowJet): the hFwd atom — PARTIAL, ONE named carry
+-- Mirrors the banked value-level FlowJointContinuity triangle one
+-- derivative up for the operator jet D(q,w) = fderiv (uniformFlowExp q) w.
+-- TERM 2 (velocity-slot continuity) DERIVED unconditionally
+-- (contDiffAt2 + ContDiffAt.fderiv_right + continuousAt).
+-- TERM 1 = THE HONEST CARRY hbaseJ (the first-jet base modulus, the exact
+-- operator analogue of the banked uniformFlowExp_base_diff_bound). WHY
+-- CARRIED: the spec tower exposes only ∃L HasFDerivAt (L identified with
+-- nothing) — the velocity Jacobi endpoint operator V is an INTERNAL
+-- .choose of uniformFlowExp_hasFDerivAt, never re-exposed; the Grönwall
+-- engine that would discharge hbaseJ (jacobi_twopoint_diff_bound +
+-- hunif_of_lipschitz) is ALREADY BANKED and fits. The residue is
+-- spec-exposure, not analysis (→ J4-435: re-expose the endpoint Jacobi
+-- CLM as a spec lemma, then feed the banked Grönwall).
+-- forwardFlowJet_continuousOn_of_baseMod = the hFwd atom;
+-- chartFieldJacobian_continuousOn_of_baseMod = the J3 wiring. phase3 NOT
+-- forced (still rides on hbaseJ; hcont2 separate). std-3 all 4.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ForwardFlowJet.forwardFlowJet_velocityContinuousAt
+#print axioms QIQTH.ForwardFlowJet.forwardFlowJet_continuousWithinAt_of_baseMod
+#print axioms QIQTH.ForwardFlowJet.forwardFlowJet_continuousOn_of_baseMod
+#print axioms QIQTH.ForwardFlowJet.chartFieldJacobian_continuousOn_of_baseMod
+
 end QIQTH.AxiomAudit

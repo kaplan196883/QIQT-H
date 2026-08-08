@@ -633,6 +633,7 @@ import QIQTH.SliverRiskGate
 import QIQTH.SupConstantFamily
 import QIQTH.BaseSlotAmpDeriv
 import QIQTH.ChartFieldJacobian
+import QIQTH.ForwardFlowJet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
