@@ -4432,3 +4432,18 @@ carry `hGateData` per (m,i,u,y)** (snb + the capped dH domination + the a.e.-s g
 slice measurabilities, width, C₀/C₁/C_L sups, Levi domination, the gate dichotomy).
 raw 0; build 51s. NEXT: J4-441 = SupBaseGeneral (lift the grounded C₁/C₀ to general base —
 closing the sup↔diff thread convergence). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-441: THE THREAD CONVERGENCE CLOSED — the provider core = TWO named atoms
+
+`QIQTH/SupBaseGeneral.lean` (5 decls std-3). THE SIMPLIFICATION CHECK: the cheap local route
+REJECTED on the quantifier shape (C₁ is chosen BEFORE ∀ᵐz ∀w'∈znb — must be uniform over the
+compact gate; per-fixed-z local boundedness cannot supply it; honest). `supBaseGeneral_C0/C1`
+GROUNDED at general field point via the identical compactness route (Icc ×ˢ K; no .choose;
+`vanVleckGatedWitness_abs_le` turns the S-gate into a continuous dominator).
+`gateData_of_reduced` + `innerDiff_phase5`: the frozen hQ1 provider = ONE reduced carry whose
+IRREDUCIBLE CORE = TWO NAMED GEOMETRIC ATOMS — hcont0 (the general-field-point
+chartOrigin_continuousOn) + hcont1 (the general-field-point chartFieldJacobian_continuousOn).
+BOTH are general-base extensions of lemmas PROVED at the centre — not fresh walls; everything
+else is bookkeeping. raw 0; build 57s. NEXT: J4-442 = GeneralFieldContinuity (hcont0 first —
+CHECK chartP_continuousOn may already BE it). NOT a₁ = R/6 (CONDITIONAL).
