@@ -3982,3 +3982,22 @@ that is where the real content now sits, not in hoff. Dont-undercredit: the bank
 Ichart abstractly (bounds only) — genuinely new. REMAINING: hqz/hqc Lipschitz (→ J4-420 via
 data.hqLip + concrete_hqLip_of_carries), hcomp, hf2bound/hf3bound dominators, hWint/hf2/hf3.
 raw 0; build 46s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-420 (f36cbe65): hqz/hqc + the integrability reductions — phase 3
+
+`QIQTH/SlotInstantiationIII.lean` (9 decls std-3). hqz DISCHARGED-modulo (six factor carries)
+via the banked `concrete_hqLip_of_carries` — the exact supplier, verbatim. hqc DISCHARGED-
+modulo (four carries) via `collar_product_lipschitz_increment` (the two-factor core; the
+three-factor `Aamp_times_F_lipschitz` carries a spurious ρ absent from qc — honest new
+wiring). hqzmeas/hqcmeas via `aesm_of_lipBound` (Lipschitz ⟹ continuous ⟹ AESM; no tactics
+on .choose-heavy goals). hWint/hf2/hf3 REDUCED to the explicit two-Gaussian product-domination
+carries (the hAdom2cap/hFdom census shape) via `gaussDdim_pair_integrable` + `Integrable.mono'`
+— confirmed NO banked lemma proves these full-space integrabilities unconditionally.
+`hIchart_int_final` promotes the phase-2 off-collar integrability to the witness modulo the
+domination carries. `slotInstantiation_phase3` = phase 2 ∧ the new fields.
+GROUP-(1) RESIDUE: `hcomp` (THE LOCUS OF THE GEOMETRIC CONTENT → J4-421: IchartResidual −
+hessGaussFactor·qc has the chart-native form + ∫_{collarᶜ}‖·‖ ≤ Bcomp/√τ) + hf2bound/hf3bound
+(the odd-moment √τ extraction ∫|z_i|/(2τ)·G_τ ≍ τ^{-1/2}; route hf2bound_slot_of_dom +
+abs_integral_le_of_dom + the cubic/mass Gaussian-moment family).
+raw 0; build 47s. NOT a₁ = R/6 (CONDITIONAL).
