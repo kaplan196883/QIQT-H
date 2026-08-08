@@ -21196,4 +21196,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationIV.hcomp_residual_of_dom
 #print axioms QIQTH.SlotInstantiationIV.slotInstantiation_phase4
 
+-- ## ★ J4-422 (SlotInstantiationV): hf2bound/hf3bound + THE REGIME JACKPOT
+-- (phase 5)
+-- Part A: hf2bound DISCHARGED m-uniformly by COORDINATE moments (Sol #19
+-- traps respected: |z_i| never radial ‖z‖; no odd-moment cancellation) —
+-- the first moment ∫|z_i|·G ≤ (3/2)√τ gives Q = 3M/4 via the EXACT
+-- (√τ/τ) = 1/√τ conversion, NO τ-window needed. hf3bound τ-uniform via the
+-- zeroth moment. Residual carries: hfint/hdom (per-point satisfiable via
+-- the collar amplitude sup + gate confinement); Q/Sconst carry no ε_m.
+-- Part B: THE REGIME AUDIT VERDICT = (1) EXTENDS — hD2Hexpand consumes
+-- Regime at exactly three sites (0<τ, z∈K, the chart jets); the collar
+-- ‖z‖≤c√τ / r₀ / τ≤τ₀ conjuncts are NEVER referenced, and the underlying
+-- hD2HexpandOn_concrete takes no collar hypothesis. THE JET LEMMA PROVED:
+-- ichartResidual_offcollar_form (IchartResidual = hessGaussFactor·ρ·qc
+-- off-collar) + _sub_hess_form (the comparison integrand =
+-- hessGaussFactor·(ρ−1)·qc). hcomp COLLAPSE WIRED (hcomp_collapsed): the
+-- phase-4 legs (ii)-(iv) reduce from three abstract carries to ONE explicit
+-- (ρ−1) cubic-form carry + the off-collar jet supply. Group-(1) residue is
+-- now terminal geometric wiring only. std-3 all 12. NOT a₁ = R/6.
+#print axioms QIQTH.SlotInstantiationV.hf2bound_at_witness
+#print axioms QIQTH.SlotInstantiationV.hf3bound_at_witness
+#print axioms QIQTH.SlotInstantiationV.ichartResidual_offcollar_form
+#print axioms QIQTH.SlotInstantiationV.ichartResidual_sub_hess_form
+#print axioms QIQTH.SlotInstantiationV.hcomp_collapsed
+#print axioms QIQTH.SlotInstantiationV.slotInstantiation_phase5
+
 end QIQTH.AxiomAudit
