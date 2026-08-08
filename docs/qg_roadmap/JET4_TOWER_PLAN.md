@@ -4277,3 +4277,27 @@ uniformFlowExp — a known frontier, not a surprise; the CoV centre-value jet is
 jet, verified). raw 0; build 93s. NEXT: J4-433 = chartFieldJacobian_continuousOn (the J3
 attack — flow smooth-dependence or explicit route; Sol #21 if walled).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-433 (bcb891d0): the J3 attack — the Jacobian IDENTIFIED by IFT; the blocker
+## reduced to the forward-flow jet atom
+
+`QIQTH/ChartFieldJacobian.lean` (4 decls std-3). **THE DIAGNOSIS:** uniformInverseChart is
+.choose-built = the LOCAL INVERSE of the geodesic-flow endpoint map uniformFlowExp — route
+(c), the IFT. **PROVED:** `fderiv_localLeftInverse_eq_ringInverse` (the abstract IFT-Jacobian
+identity, pure Mathlib) + `chartFieldJacobian_eq_ringInverse` (fderiv(W z) 0 =
+Ring.inverse(fderiv φ_z (W z 0)), via the banked chartW0_rightInverse + the uniform
+nondegeneracy ball) + `chartFieldJacobian_facts_of_small` (the five per-z facts from banked
+lemmas). **THE REDUCTION** (`chartFieldJacobian_continuousOn_of_forwardJointCont`): the J3
+carry follows unconditionally (ring-inverse continuity at units + the banked
+chartOrigin_continuousOn) from ONE geometry-only atom:
+  hFwd : ContinuousOn ((z,v) ↦ fderiv ℝ (uniformFlowExp z) v) (U ×ˢ ball 0 δ₀)
+— joint smooth dependence of the flow Jacobian on initial data. Mathlib's ODE layer has
+Grönwall + Picard–Lindelöf existence but NOT this; the .choose tower exposes no joint fact
+(FlowJointRegularity §3) — the recognized J3 residue, honest. hcont2 needs the SECOND-order
+forward jet — not discharged, no forced phase3 (no fake net gain). RECOMMENDED DISCHARGE:
+the two-solution Grönwall on the Jacobi (first-variation) ODE over the compact confinement
+tube = the fderiv-analogue of the banked uniformFlowExp_base_diff_bound (= J4-434).
+Dont-undercredit: the decisive machinery (per-z IFT core, right-inverse, nondegeneracy,
+value-level base continuity) was all banked; the new content = lifting VALUE → JACOBIAN.
+raw 0; build 52s. NOT a₁ = R/6 (CONDITIONAL).
