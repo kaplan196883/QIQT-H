@@ -4585,3 +4585,37 @@ the atom to {hDHrefined, hLeviCap}; `hGint_prodPtwise` + `perUCensus_phase7`.
 hLeviCap (the parametrix-smoothness tier)** — both m-free, satisfiable, strictly lower.
 raw 0; build 47s. NEXT: J4-450 = LeviCapWitness (hLeviCap with its own gate: the s→0
 extension + compactness). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ⚠⚠ J4-450 (7fb383f4): THE GATE VERDICT = UNSATISFIABLE — THE POINTWISE SPLIT
+# RETRACTED (a soundness finding; the discipline working as designed) + SOL #21
+
+`QIQTH/LeviCapWitness.lean` (1 decl std-3). **THE FINDING:** hLeviCap (the s,z-uniform
+CONSTANT Levi cap) is UNSATISFIABLE for general n — the on-diagonal
+leviSeries s 0 0 ~ O(s^{N−n/2}) with the fixed witness N=1 (Minakshisundaram): divergent
+for n ≥ 3; the J4-449 gate's "O(t^N)-smooth → 0" reasoning OMITTED the (4πt)^{-n/2}
+normalization; hFzero + the s→0⁺ peak give a genuine discontinuity at (0,0) — no
+compactification. CONSEQUENCE: hProdPtwise itself is NOT a sound s-uniform pointwise atom
+at n ≥ 3 (near-diagonal two-Gaussian scaling s^{1−n/2}) — **the J4-447..449 POINTWISE
+grounding chain is RETRACTED for general n** (the lemmas remain true conditionals; their
+atoms flagged unsatisfiable — exactly the vacuity feedback_axiom_budget_blind_spot exists
+to catch). Landed: `leviCap_on_compactBox` (the TRUE positive-time-compact cap; the
+constant diverges as δ→0 — the gate boundary explicit). hGint reverts to the J4-446
+integral-level surface (hProfRate satisfiable).
+
+### SOL CONSULT #21 (gpt-5.6-sol) — THE INTEGRAL-LEVEL RE-GROUNDING (recorded):
+**CONFIRMED with one essential centering condition.** The weighted two-Gaussian pairing:
+G_a(z−x)G_b(z−y) = G_{a+b}(x−y)·G_h(z−c), h = ab/(a+b), c the weighted mean;
+∫|z_i−x_i|·G_a(z−x)G_b(z−y) ≤ G_{a+b}(x−y)·(κ√h + (a/(a+b))|y_i−x_i|), κ = 3/2 banked.
+a+b = wA(u−s)+2s ≥ u·min(wA,2) > 0 BOUNDED (the s→0 danger absorbed by the INTEGRATED
+pairing); √h ≤ √a = √(wA)·√τ ⟹ Q·τ^{-1/2} m-free. ⚠ THE CENTERING TRAP: the moment MUST be
+|z_i − x_i| RELATIVE TO the dH-Gaussian's center (or the chart recentred so x = 0) — a raw
+fixed-coordinate |z_i| with an off-center G_a gives O(τ^{-1}) as s↑u, NOT τ^{-1/2}; adding
+|x_i| ≤ diam does NOT close it. THE LEAN ROUTE: one reusable weighted-pairing helper
+(∫|(z−x)_i|·G_a(z−x)·G_b(z−y) ≤ G_{a+b}(x−y)·(κ√(ab/(a+b)) + (a/(a+b))·|(y−x)_i|)) via the
+product-to-single identity + the triangle around c + translation invariance +
+absCoord_gaussDdim_integral_le + gaussDdim_pairing_integral; then hProfRate = abs_integral
++ the two envelopes + the helper + arithmetic. THE ONE GATE TO AUDIT: the refined dH
+envelope must supply its moment relative to ITS OWN Gaussian center.
+raw 0; build 48s. NEXT: J4-451 = the weighted-pairing helper + the centered hProfRate.
+NOT a₁ = R/6 (CONDITIONAL).
