@@ -21789,4 +21789,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ProdMomentWitness.hGint_final
 #print axioms QIQTH.ProdMomentWitness.perUCensus_phase6
 
+-- ## J4-449 (ProdPtwiseWitness): THE GATE RAN — hProdPtwise SATISFIABLE
+-- AS STATED, split into two floor atoms (census phase 7)
+-- THE GATE VERDICT: factorization 1 (refined dH slope-moment × a CONSTANT
+-- Levi cap) yields the demanded single-Gaussian shape with w := wA,
+-- M := CA·C_L — the two-Gaussian collapse falsity structurally AVOIDED.
+-- ★ THE SOUNDNESS SUBTLETY CAUGHT BY THE GATE: the banked
+-- leviSeries_gatedWitnessN1_dominated gives a WIDTH-2s GAUSSIAN whose
+-- peak (8πs)^{-n/2} DIVERGES as s→0 — it canNOT source the constant cap;
+-- but the TRUE Levi factor is O(t^N)-smooth (→0 as s→0), so a genuine
+-- finite s,z-uniform cap EXISTS — carried as the distinct C⁰-regularity
+-- atom hLeviCap (correctly NOT re-derived from the crude Gaussian).
+-- Gate (ii): the refined dH envelope satisfiable (the J4-443 chain rule;
+-- {z_i=0} Lebesgue-null). The J4-447 lever fires UNCHANGED (the |z_i|
+-- moment + width from the dH factor). prodPtwise_at_witness grounds the
+-- atom to {hDHrefined, hLeviCap}; hGint_prodPtwise + perUCensus_phase7.
+-- hGint = the standing families + hDHrefined + hLeviCap (both m-free,
+-- satisfiable, strictly lower). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ProdPtwiseWitness.prodPtwise_of_refinedEnvelope_leviCap
+#print axioms QIQTH.ProdPtwiseWitness.prodPtwise_at_witness
+#print axioms QIQTH.ProdPtwiseWitness.hGint_prodPtwise
+#print axioms QIQTH.ProdPtwiseWitness.perUCensus_phase7
+
 end QIQTH.AxiomAudit

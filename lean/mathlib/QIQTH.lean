@@ -648,6 +648,7 @@ import QIQTH.SliverSingularEngine
 import QIQTH.ProfFacWitness
 import QIQTH.ProfRateTheorem
 import QIQTH.ProdMomentWitness
+import QIQTH.ProdPtwiseWitness
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
