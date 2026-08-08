@@ -21007,4 +21007,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HGaussAbsorb.hGauss_concrete
 #print axioms QIQTH.HGaussAbsorb.a1_R6_from_data_v2
 
+-- ## J4-412 (ConstRadiusAbsorb): the (b) package carries ABSORBED (closing 2/4)
+-- THE ROUTE VERDICT: (i) parametric is a non-starter — the ∃-chosen radii
+-- are LOAD-BEARING (the width-2 residual bound holds only at them; a
+-- parametric version would re-expose hpkgBound itself); (ii) the
+-- ∃-consuming capstone landed: a1_R6_from_data_v3 — hpkgBound/hmemS0/
+-- hopenS0 AND the caller-chosen (a,b,c,C) REMOVED, discharged by consuming
+-- constRadius_package_and_S1's ∃ (one obtain; the slots fed BY DEFEQ).
+-- THE HONESTY COST (documented): the conclusion is ∃-quantified over the
+-- geometry-produced gate; the (a,b,c)-dependent carriers (hgate/v4/slots)
+-- are supplied ∀-over-admissible-gates (strictly stronger than per-gate).
+-- ADDED geometry-only inputs: hgnd/hinvF/hframeK/hw/hu. J4-413 = thread
+-- a1_R6_slots_AT_GATE under the ∀ (the slots → the 3 census sub-carriers).
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.ConstRadiusAbsorb.a1_R6_from_data_v3
+
 end QIQTH.AxiomAudit
