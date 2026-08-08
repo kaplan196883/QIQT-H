@@ -275,15 +275,16 @@ $G = 1/(N\Lambda_s^2)$ a machine-checked theorem (`InducedNewtonConstant`), so $
 *derived-from-$\Lambda_s$* (P4-MICRO's inputs collapse to one scale); the *value* still needs the species
 accounting, and $\Lambda_s$ becomes the one carried scale. That species accounting turns on the curved-space
 **Seeley–DeWitt coefficient** $a_1 = R/6$ — and *that* has now advanced from *nobody-has-any-of-it* to a
-**machine-checked _conditional_ theorem** (`a1_R6_from_labelled`, `A1R6FromLabelled.lean`): the diagonal
-short-time heat expansion carrying the *genuine* Ricci scalar $(\sum_i \mathrm{Ric}_{ii})/6 = R/6$ in the
-$O(t)$ coefficient at the constant-radius gate, with the whole analytic tower that *was* the wall (van-Vleck
-parametrix, Levi/Duhamel convergence, delta-family, sliver cancellations, interchange, resolvent-Lipschitz)
-discharged into **four labelled geometric inputs** ($\mathtt{hGauss}$ the normal-coordinate Gauss identity,
-$\mathtt{hraw}$, $\mathtt{hD2Hexpand}$, $\mathtt{hPd2conv}$); the live front is deriving $\mathtt{hGauss}$ from
-the classical **Gauss-lemma / Jacobi-field** machinery (radial leg done, transverse leg done modulo one
-antisymmetry lemma). This is **not** unconditional $a_1=R/6$ — the four inputs remain open derivation
-campaigns, and the true-kernel analytic Seeley–DeWitt identification stays a Mathlib-wide frontier. With this
+**machine-checked _conditional_ theorem** (`a1_R6_from_data`, `A1R6FromData.lean` — the consolidated capstone
+of the ~48-brick J4-363…410 window): the diagonal short-time heat expansion carrying the *genuine* Ricci
+scalar $(\sum_i \mathrm{Ric}_{ii})/6 = R/6$ in the $O(t)$ coefficient at the constant-radius gate, with the
+whole analytic tower that *was* the wall (van-Vleck parametrix, Levi/Duhamel algebra, delta-family, sliver
+cancellations, interchange, resolvent-Lipschitz) discharged into **four semantic input groups** (base
+geometry/gauge, the assembly carries, one bundled slot-census package, and the single Gauss identity
+$\mathtt{hGauss}$); three of the four are now discharged, satisfiable, or derived in-bank, leaving one
+genuinely deep residue: the **Duhamel / convergence-trio** parabolic-PDE convergence wall. This is **not**
+unconditional $a_1=R/6$ — that deep residue and the true-kernel analytic Seeley–DeWitt identification stay a
+Mathlib-wide frontier. With this
 induced $G$ the granularity capacity **maps
 onto the holographic dictionary**: the boundary Cardy microstate count of a BTZ horizon *equals* QIQT-H's bulk
 capacity exponent $(A/4)N\Lambda_s^2$ (machine-checked, `HolographicBridge.btz_cardy_eq_qiqth_capacity`; the AdS

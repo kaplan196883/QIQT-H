@@ -602,3 +602,41 @@ vs. the capstone's `C·baseKernelW` — a trivial `t`-fixed constant reshape.
 `⊤`-`hsrc` carry, discharged the F1 factor axis and `hCH` from geometry, derived chart `C⁴`, and hardened
 the `hCConv` L1 facade; the two genuine research walls (Jacobi off-diagonal cancellation, W1/W2 flow
 regularity) are unchanged.
+
+---
+
+## Addendum (2026-08-07): the Sol #16/#17/#18 window — J4-363…410, the `a1_R6_from_data` CAPSTONE
+
+Roughly **48 further bricks** (J4-363…410, the "Sol #16/#17/#18 map") landed the consolidated public
+capstone and then **paused for review**. All `[AF]` std-3 (raw axiom 0), pushed through `89cb4df0`; the
+capstone is pinned ★★★★★ in `AxiomAudit.lean` (`#print axioms QIQTH.A1R6FromData.a1_R6_from_data`).
+
+**The capstone — `a1_R6_from_data` (`A1R6FromData.lean`).** One public one-line theorem delivering the
+on-diagonal two-jet at the literal `constGate` — heat-op vanishing **and**
+`trueHeatKernel t 0 0 = (heatKernel1D t 0)^n · (1 + ((∑ᵢ ricci g gi i i 0)/6)·t + t²·…)`, i.e. the
+**genuine Ricci scalar `R/6`** in the `O(t)` coefficient — from **four SEMANTIC input groups** (a strict
+consolidation of the J4-340 `a1_R6_from_labelled` four *labelled* inputs):
+
+- **(A) base geometry / gauge** — smoothness, the RNC gauge, frame, compactness, the explicit gate radii
+  `a<b<c`. By-design geometric givens.
+- **(B) the `ConstGateAssemblyData` carries** — the AFFINE on-gate `hgate` (the retired τ-uniform gate
+  shape is GONE; the honest affine carry replaced it via the 13-brick J4-368…380 arc) + the v4
+  measurability carriers + `hpkgBound`/`hmemS0`/`hopenS0`. **Derivable** via the banked arcs / satisfiable
+  via `constRadius_package_and_S1`.
+- **(C) the ONE `A1R6GateSlots` package** — the Duhamel (~90-binder) census, the W1-free census, and the
+  L2 sliver census, bundled. **Satisfiable**, largely fired by the F-pile bricks (binder-shaped).
+- **(D) the single `hGauss` gauge carry** — **derived in-bank** (`hGauss_pullback_concrete`), absorbable.
+
+**Audits clean:** no legacy `hraw`, no retired τ-uniform `hgate` shape, no floating existential gate
+witnesses, no unrestricted `AmplitudeDerivativeData`, no raw `hD2Hexpand`/`hPd2conv`. Walls **A/C/D/E/F**
+closed or bridged.
+
+**The re-localised residue.** After (A)–(D) are absorbed, the geometry, assembly, and gauge scaffolding is
+discharged or satisfiable — and the one genuinely deep residue that remains is **(d) the Duhamel /
+convergence-trio content** (the parabolic-PDE convergence wall) together with the still-open true-kernel
+analytic Seeley–DeWitt identification. So the residue is no longer a spread of labelled inputs; it is
+essentially **one deep analytic wall**.
+
+**⚠ `a₁ = R/6` remains CONDITIONAL** — this is the *maximally-unconditional* CONDITIONAL theorem, **NOT** an
+unconditional `a₁ = R/6`, and was never claimed otherwise. The four semantic groups are satisfiable /
+derivable / in-bank; the deep Duhamel/convergence-trio content is the genuine remaining wall.

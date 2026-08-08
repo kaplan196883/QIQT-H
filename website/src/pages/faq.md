@@ -136,9 +136,10 @@ gets rejected by the kernel. The methodology is itself documented in a companion
 The [open problems](/open-problems) are listed without hedging: the canonicity of the P5
 typicality measure, the dynamical/Lorentz-covariant law of λ, the numerical value of *G* (the
 *relation* G = 1/(N Λ_s²) is a derived theorem; only the *number* is carried — pinned to a
-Seeley–DeWitt coefficient that has since advanced to a machine-checked **conditional** a₁ = R/6,
-carrying the genuine Ricci scalar and reduced to four named geometric inputs, one being actively
-closed, but still short of an unconditional value), the continuum Type III₁
+Seeley–DeWitt coefficient that has since advanced to a machine-checked **conditional** a₁ = R/6
+(`a1_R6_from_data`), carrying the genuine Ricci scalar and reduced to four semantic input groups —
+three now discharged or derived in-bank, leaving one deep residue (the Duhamel/convergence-trio
+parabolic-PDE wall), but still short of an unconditional value), the continuum Type III₁
 limit, and interacting matter. Any of these could break, and the framework says so up front. The
 honest verdict — including two adversarial red-team reviews — is that this is a **single-world
 interpretation plus a holographic entropy bound and a conditional induced-gravity chain**, all

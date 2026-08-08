@@ -142,9 +142,10 @@ for an inductive-limit state, an **unbounded Stone theorem** and spectral machin
 Mathlib, and the **von Neumann double-commutant theorem** — plus the flat-space **record-code /
 gravity correspondence** (the flagship duality above) and the **semiclassical Einstein equations from
 a finite-entropy bound**, both conditional and free-field, end to end. Even the old coefficient wall
-has moved: there is now a machine-checked **conditional a₁ = R/6** — the genuine Ricci scalar in the
-short-time heat expansion, reduced to four named geometric inputs (one being actively closed), not yet
-an unconditional value. Over **8,000 theorems** across **~1,100 files**, with **no project-specific
+has moved: there is now a machine-checked **conditional a₁ = R/6** (`a1_R6_from_data`) — the genuine
+Ricci scalar in the short-time heat expansion, reduced to four semantic input groups (three now
+discharged or derived in-bank, leaving one deep Duhamel/convergence residue), not yet an
+unconditional value. Over **8,000 theorems** across **~1,100 files**, with **no project-specific
 axioms and no `sorry`** — the final theorems depend only on Lean's three standard classical axioms.
 
 ## The ask

@@ -58,7 +58,7 @@ identification stays a *gravitational input*, not a theorem. (This concerns the 
 Bekenstein–Hawking $\mathbf{1/4}$ ratio **is** derived — as a machine-checked theorem — but through the separate
 **Sakharov / induced-gravity bridge**, `SakharovRatio.sakharov_ratio` (the **P4-MICRO** story) — a re-derivation
 of the standard induced-gravity ratio, not unique to finiteness (any local relativistic QFT with the same UV
-coefficient yields it); what *neither* derives is the numerical **value of $G$** — though that frontier has since **advanced**: the induced-Newton $1/(12\pi)$ normalization's π-content is *derived* (`HeatKernelDDim`: the $(4\pi t)^{-d/2}$ prefactor and the $d{=}4$ assembly to $1/(12\pi)$), and the curved-space $a_1$ Seeley–DeWitt coefficient now has a machine-checked **conditional** $a_1 = R/6$ (`A1R6FromLabelled.a1_R6_from_labelled`): the diagonal short-time heat expansion carrying the **genuine Ricci scalar** $(\sum_i \mathrm{Ric}_{ii})/6 = R/6$ in the $O(t)$ coefficient, at the constant-radius gate, reduced to **four labelled geometric inputs** (the normal-coordinate Gauss identity `hGauss`, plus `hraw`, `hD2Hexpand`, `hPd2conv`); the whole analytic tower that was the wall (van-Vleck parametrix, Levi/Duhamel convergence, delta-family, interchange, resolvent-Lipschitz) is discharged into this conditional, and the live front is deriving `hGauss` from the classical Gauss-lemma / Jacobi-field machinery. This is **not** an unconditional $a_1=R/6$ — the four labelled inputs remain open derivation campaigns and the true-kernel analytic Seeley–DeWitt identification stays a Mathlib-wide frontier — so there is still **no numerical $G$**.) What **is**
+coefficient yields it); what *neither* derives is the numerical **value of $G$** — though that frontier has since **advanced**: the induced-Newton $1/(12\pi)$ normalization's π-content is *derived* (`HeatKernelDDim`: the $(4\pi t)^{-d/2}$ prefactor and the $d{=}4$ assembly to $1/(12\pi)$), and the curved-space $a_1$ Seeley–DeWitt coefficient now has a machine-checked **conditional** $a_1 = R/6$ (`A1R6FromData.a1_R6_from_data`, the consolidated capstone): the diagonal short-time heat expansion carrying the **genuine Ricci scalar** $(\sum_i \mathrm{Ric}_{ii})/6 = R/6$ in the $O(t)$ coefficient, at the constant-radius gate, reduced to **four semantic input groups** (base geometry/gauge, the assembly carries, one bundled slot-census package, and the Gauss identity `hGauss`); the whole analytic tower that was the wall (van-Vleck parametrix, Levi/Duhamel algebra, delta-family, interchange, resolvent-Lipschitz) is discharged into this conditional, and three of the four groups are now discharged, satisfiable, or derived in-bank — leaving one genuinely deep residue, the Duhamel / convergence-trio parabolic-PDE wall. This is **not** an unconditional $a_1=R/6$ — that deep residue and the true-kernel analytic Seeley–DeWitt identification stay a Mathlib-wide frontier — so there is still **no numerical $G$**.) What **is**
 machine-checked (`QIQTH/ModularEnergyBound.lean`) is that the
 entropy variation is controlled by the modular-energy variation, which under one-particle Bisognano–Wichmann
 $K_\sigma = 2\pi B_{\rm boost}$ is the Unruh bound $\Delta S \le 2\pi\,\Delta\langle B_{\rm boost}\rangle$:
@@ -202,8 +202,8 @@ Jacobson route in a peer-reviewed venue. QIQT-H claims <strong>no priority</stro
 subsequently machine-verifies the same chain, with every physical input in an explicit ledger. Both meet the <em>same</em> honest frontier: their closing caveat — higher-order corrections on a curved
 horizon, "<em>technically demanding, especially regarding the modular data</em>" — is precisely our
 curved-correction / Riemannian-heat-kernel (Seeley–DeWitt) frontier, now advanced to a machine-checked
-<em>conditional</em> $a_1 = R/6$ (the genuine Ricci scalar, reduced to four labelled geometric inputs)
-rather than an unbroken wall. See the
+<em>conditional</em> $a_1 = R/6$ (`a1_R6_from_data`; the genuine Ricci scalar, reduced to four semantic input
+groups, three now discharged or derived in-bank) rather than an unbroken wall. See the
 <a href="/prl-mapping">full equation-by-equation mapping</a> (PRL step → Lean theorem).
 
 </div>
@@ -1071,8 +1071,8 @@ Two tracks, one campaign (all axiom-free, std-3, budget 0).
   entropy and the induced 1/G, with the mixed-content 1/4 and S = A/4G as theorems (the entire
   species sum cancelling), chained through the BTZ Cardy count. HAVE NOT: the numerical value of
   G is not derived; the higher c<sub>i</sub> stay cited Seeley–DeWitt data (the a<sub>1</sub>
-  coefficient now has a machine-checked *conditional* a<sub>1</sub> = R/6, reduced to four labelled
-  geometric inputs — still not unconditional) — a consistency chain over cited/conditional data,
+  coefficient now has a machine-checked *conditional* a<sub>1</sub> = R/6 (`a1_R6_from_data`), reduced to four
+  semantic input groups (three discharged or derived in-bank; one deep Duhamel residue) — still not unconditional) — a consistency chain over cited/conditional data,
   NOT an independent cross-check.
 
 
