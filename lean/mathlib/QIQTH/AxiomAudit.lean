@@ -21768,4 +21768,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ProfRateTheorem.hGint_theorem
 #print axioms QIQTH.ProfRateTheorem.perUCensus_phase5
 
+-- ## J4-448 (ProdMomentWitness): the integrability leg DISCHARGED —
+-- hProdPtwise = the ONE irreducible analytic atom (census phase 6)
+-- The bundled hProdMoment SPLIT into hProdPtwise + hProdMeas; the
+-- Integrable leg derived internally (integrable_of_prodMoment ←
+-- coordAbsPow_gauss_integrable power-1 + Integrable.mono').
+-- ★ THE KEY MATHEMATICAL FINDING: the s-uniform POINTWISE collapse of the
+-- two-Gaussian product to a single G_{w(u−s)} is GENUINELY FALSE — the
+-- harmonic width σ_h = wA(u−s)·wF·s/(wA(u−s)+wF·s) gives a G_{σ_h} whose
+-- peak diverges relative to G_{w(u−s)} as s→0; the campaign's
+-- under-the-integral pairing design is FORCED, and hProdPtwise is a
+-- legitimate floor atom at the exact hf2bound carried-hdom honesty tier
+-- (not an oversight — verified against the pairing infra). No separate
+-- displacement or parametrix-pd atom emitted (folded/provenanced).
+-- hGint_final + perUCensus_phase6: the hGint chain = the standing
+-- families + hProdPtwise ONLY (the integrability degree of freedom GONE).
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ProdMomentWitness.integrable_of_prodMoment
+#print axioms QIQTH.ProdMomentWitness.prodMoment_at_witness
+#print axioms QIQTH.ProdMomentWitness.hGint_final
+#print axioms QIQTH.ProdMomentWitness.perUCensus_phase6
+
 end QIQTH.AxiomAudit
