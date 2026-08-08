@@ -4321,3 +4321,25 @@ never re-exposed — while the discharge engine (BasepointJetModulus.jacobi_twop
 hbaseJ; hcont2 = the separate 2nd-order carry). raw 0; build 50s.
 NEXT: J4-435 = JacobiCLMExposure (re-expose the endpoint Jacobi CLM as a public spec lemma →
 feed the banked Grönwall → hFwd + J3 + C₁/M₁chart unconditional). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-435 (2b8ad6e1): hbaseJ DISCHARGED — hFwd + J3 UNCONDITIONAL
+
+`QIQTH/JacobiCLMExposure.lean` (5 decls std-3). **THE EXPOSURE PROVED:**
+`uniformFlowExp_jacobi_spec` re-runs the compiled uniformFlowExp_hasFDerivAt construction
+to the full public triple — V δ 0 = (0,δ), the first-variation (Jacobi) ODE
+V' = DF(uniformFlowTube q v)·V on [0,1], fderiv = fun δ ↦ (V δ 1).1 — with the base geodesic
+exposed CONCRETELY as uniformFlowTube (directly usable by the tube-separation engine).
+**THE DISCHARGE:** `uniformFlowExp_fderiv_base_modulus` (strict interior ‖v‖<ρ_K) via
+`jacobi_twopoint_diff_bound` with Dcoef = M₂·exp(L_sep)·‖q−q'‖ (the C² field bound × the
+banked `uniformTube_twopoint_diff_bound`, J4-150/W2) and Jb = ‖δ‖·exp(K_f) from the ONE
+genuinely-new lemma `jacobi_growth_bound` (homogeneous Grönwall). **THE COLLAPSE:**
+`forwardFlowJet_continuousOn` (the hFwd atom) + `chartFieldJacobian_continuousOn` (the J3
+wiring) BOTH UNCONDITIONAL — the weld re-derived at strict-interior velocities (the boundary
+‖v‖ = ρ_K has no differentiability; the open-ball domain is correct, not a gap).
+DONT-UNDERCREDIT (the residue was SMALLER than the J4-434 diagnosis): `uniformFlowExp_fderiv_
+near_id_quant` had the exposure essentially inline (never extracted); the tube separation
+that FlowJointRegularity §1 flagged as "a genuine multi-brick chunk" was ALREADY BANKED.
+Net new analysis = one small Grönwall lemma + assembly.
+REMAINING: the hcont1 shape wiring (→ J4-436 SupFamilyFirstOrder) + hcont2/C₂ (2nd order).
+raw 0; build 76s. NOT a₁ = R/6 (CONDITIONAL).
