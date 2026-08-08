@@ -636,6 +636,7 @@ import QIQTH.ChartFieldJacobian
 import QIQTH.ForwardFlowJet
 import QIQTH.JacobiCLMExposure
 import QIQTH.SupFamilyFirstOrder
+import QIQTH.InnerDiffFamily
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

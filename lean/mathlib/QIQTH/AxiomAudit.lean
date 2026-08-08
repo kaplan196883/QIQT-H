@@ -21529,4 +21529,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SupFamilyFirstOrder.baseSlotAmpDeriv1_grounded
 #print axioms QIQTH.SupFamilyFirstOrder.supConstant_phase3
 
+-- ## J4-437 (InnerDiffFamily): the diff-under-∫ opener — hQ1 PROVED in
+-- the census shape (m-INDEPENDENT nbhd)
+-- The map: the census demands hQ1 per-(u,i,m) existential (∃V∈𝓝 0,
+-- pd(frozen germ) = fbulkInt); the banked W2Finish.w2_hQ1 produces the
+-- SAME equality carrier-level (shared V) from the 7-leg hFrozenData;
+-- fbulkInt matches by delta-reduction (exact unifies, no rewrite). THE
+-- GENUINE NEW CONTENT = the shape bridge (innerDiff_census_hQ1_of_carrier
+-- / _of_frozenData) — that gap was real and unfilled. innerDiff_phase1 =
+-- the per-u census Tendsto with hQ1 discharged internally.
+-- M-UNIFORMITY VERDICT: V is m-INDEPENDENT (no collapse — strictly
+-- stronger than needed); the per-m s-dominators are ADMISSIBLE at the
+-- hQ1 level (a per-m equality, no series); the genuine m-summability
+-- burden lives ONLY in the order-2 sliver carries — and hsliver already
+-- meets it ((C₀+C₁)·2√εₘ + C₂εₘ → 0). The Sol trap does NOT bite here.
+-- The 7 hFrozenData legs carried with named bank suppliers (→ J4-438:
+-- hFmeas/hF'meas via the Fubini engine). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.InnerDiffFamily.innerDiff_census_hQ1_of_carrier
+#print axioms QIQTH.InnerDiffFamily.innerDiff_census_hQ1_of_frozenData
+#print axioms QIQTH.InnerDiffFamily.innerDiff_phase1
+
 end QIQTH.AxiomAudit
