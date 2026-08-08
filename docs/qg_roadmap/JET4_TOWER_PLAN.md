@@ -4447,3 +4447,22 @@ chartOrigin_continuousOn) + hcont1 (the general-field-point chartFieldJacobian_c
 BOTH are general-base extensions of lemmas PROVED at the centre — not fresh walls; everything
 else is bookkeeping. raw 0; build 57s. NEXT: J4-442 = GeneralFieldContinuity (hcont0 first —
 CHECK chartP_continuousOn may already BE it). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-442: hcont0 DISCHARGED + the hcont1 SMOOTH CORE (phase 6)
+
+`QIQTH/GeneralFieldContinuity.lean` (5 decls std-3). **hcont0 PROVED**: the ungated witness
+value factors DEFEQ as profile ∘ (z ↦ W z (update y i w)); `hcont0_of_chartCont` composes the
+p-GENERAL `chartP_continuousOn` (dont-undercredit: already p-general — never a fresh wall)
+with `parametrixWitnessProfile_continuous` (global; residue = the folded-coefficient
+smoothness hw, bookkeeping). **hcont1 SMOOTH CORE BUILT**:
+`chartFieldJacobianP_joint_continuousOn` — the JOINT (w',z) continuity of
+fderiv(W z)(update y i w') on Icc ×ˢ K, the J4-433/435 chain replayed one field-order more
+general (the IFT identity was base-point-general; forwardFlowJet_continuousOn already joint
+and unconditional; Ring.inverse at units). NOT WALLED. The TWO remaining hcont1 atoms NAMED:
+(i) the general-field UNGATED chain-rule identity (witnessFieldDeriv ↔ the smooth Jacobian;
+LEAD: the banked ChartComposedHeatOp.chartComposed_pd_jointContinuousOn keyed at base 0 —
+the general-base lift = J4-443) + (ii) the S-gate transparency at the field point.
+`gateData_of_reduced2` + `innerDiff_phase6`: **the C₀ witness-value slot FULLY GROUNDED at
+the witness.** raw 0; build 78s. NEXT: J4-443 = UngatedChainRule (the last witness-level
+geometric atom). NOT a₁ = R/6 (CONDITIONAL).
