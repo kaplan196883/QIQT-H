@@ -642,6 +642,7 @@ import QIQTH.FrozenHdiffLeg
 import QIQTH.FrozenDominatorLegs
 import QIQTH.SupBaseGeneral
 import QIQTH.GeneralFieldContinuity
+import QIQTH.UngatedChainRule
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

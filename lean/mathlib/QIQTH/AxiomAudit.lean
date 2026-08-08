@@ -21665,4 +21665,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GeneralFieldContinuity.gateData_of_reduced2
 #print axioms QIQTH.GeneralFieldContinuity.innerDiff_phase6
 
+-- ## ★★★ J4-443 (UngatedChainRule): hcont1 DISCHARGED — THE FROZEN hQ1
+-- PROVIDER CLOSED AT THE WITNESS LEVEL
+-- (a) THE TRANSPARENCY PROVED: in-gate, the gated witness slice equals
+-- the ungated composite on a nbhd (gatedKernel_apply_of_mem germ +
+-- pd_congr_of_eventuallyEq). (b) THE CHAIN RULE PROVED: the composite
+-- factors DEFEQ through the C∞ manifold profile (radialCutoff·
+-- heatParametrix — smoothness FREE, no C¹ wall); the base-general banked
+-- pd_comp gives witnessFieldDeriv = ∑ pd prof · pd(W-component) in ONE
+-- call. (c) witnessFieldDeriv_jointContinuousOn = hcont1 EXACTLY (joint
+-- on Icc ×ˢ K; no boundary weld — the in-gate carry hGate keeps the
+-- domain in-gate; ContinuousOn.congr welds onto the smooth sum; the
+-- J4-442 smooth core consumed internally). THE PROVIDER RESIDUAL =
+-- enumerated bookkeeping + geometry/gate carries (hW0/hmaps/hunit/hIFT,
+-- per-point hWdiff, hGate, hw) — all satisfiable, none = a₁ = R/6.
+-- Dont-undercredit: pd_comp was base-general (8 bricks running).
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.UngatedChainRule.pd_component_eq
+#print axioms QIQTH.UngatedChainRule.witnessFieldDeriv_eq_ungatedComposite_of_gate
+#print axioms QIQTH.UngatedChainRule.witnessFieldDeriv_gateChain_eq
+#print axioms QIQTH.UngatedChainRule.chartFieldJacobianComponent_jointContinuousOn
+#print axioms QIQTH.UngatedChainRule.witnessFieldDeriv_jointContinuousOn
+
 end QIQTH.AxiomAudit
