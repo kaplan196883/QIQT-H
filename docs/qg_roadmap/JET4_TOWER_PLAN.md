@@ -4120,3 +4120,21 @@ I4 `hform` jet supply · I5 `hcompDiff_int` wiring · I6 the .choose measurabili
 NO open identity, τ-scaling, or domination remains in group (1).
 ⚠ a₁ = R/6 stays CONDITIONAL (groups (2)/(3)/(4) + the convergence trio + I1-I6).
 raw 0; build 55s. NEXT: GROUP (2) hInnerData (J4-426).
+
+---
+## J4-426 (f4339d12): GROUP (2) hInnerData — 4/7 conjuncts DISCHARGED (phase 1)
+
+`QIQTH/InnerDataInstantiation.lean` (6 decls std-3). THE GROUP-(2) BINDER MAP: hInnerData =
+a 7-conjunct ∃ znb bnd per (m,i,u), a.e.-s, ∀ w∈snb. DISCHARGED: conj-2/4 (z-slice
+measurabilities of dH·Lev / dHH·Lev — compositional .mul), conj-5 (Integrable bnd at
+bnd := C·G_σ via the banked `envelope_integrable`), conj-7 (★ THE HasDerivAt FAMILY — new
+2nd-order off/on-gate line lemmas glued by the gate dichotomy, lifting the banked first-order
+`WitnessMeasDeriv.hWdiff_offGate/onGate` pattern one order up; `.mul_const` the Levi factor;
+`innerZ_prod_hasDerivAt_witness` = the exact conj-7 shape). `innerData_phase1` trades the
+opaque hInnerData for a strictly-lighter reduced core (bare slice measurabilities, a gate
+dichotomy, a positive Gaussian width). CARRIED with plans: conj-1 znb (the collar/√ε
+line-nbhd), conj-3 (first-kernel base integrability ← gate envelope one order below),
+conj-6 (second-kernel Gaussian domination ← `witnessFieldDeriv2_gate_envelope` = E2, J4-427).
+Dont-undercredit: the w2_* family CONSUMES hInnerData via innerZ_line_hasDerivAt — this brick
+supplies it one level deeper; the first-order pattern was banked and lifted, not re-derived.
+raw 0; build 47s. NOT a₁ = R/6 (CONDITIONAL).
