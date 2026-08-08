@@ -618,6 +618,7 @@ import QIQTH.MomentWallCoverage
 import QIQTH.JointInstantiabilityAudit
 import QIQTH.AuditPromotions
 import QIQTH.SlotInstantiationI
+import QIQTH.SlotInstantiationII
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

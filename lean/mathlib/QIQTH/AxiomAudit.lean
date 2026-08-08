@@ -21137,4 +21137,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationI.hgate_concrete
 #print axioms QIQTH.SlotInstantiationI.slotInstantiation_phase1
 
+-- ## J4-419 (SlotInstantiationII): Ichart + hoff DISCHARGED FULLY (phase 2)
+-- The recommended route (Ichart := hessCoeff·G^chart·qc + a banked off-collar
+-- identity) is NOT realizable — the one exact banked identity (hD2Hexpand) is
+-- ON-collar only. The design-intended residual instead (GpowBridge §A2:
+-- f₁ = Wpair − f₂ − f₃ "equals Ichart off the collar"): with
+-- Ichart := IchartResidual the hoff identity holds pointwise-everywhere by
+-- ring — verbatim the leviSecondPairing_inner_bound_concrete binder shape.
+-- Bonus: hIchart_int reduced to the carried hWint/hf2/hf3 integrabilities;
+-- hoff_slot_inhabited = the ∃-satisfiability certificate. Dont-undercredit:
+-- the bank threads Ichart ABSTRACTLY (bounds only, never the raw equality) —
+-- genuinely new. Honest note: the geometric content re-enters at hcomp (the
+-- comparison leg), which remains carried. Remaining: hqz/hqc Lipschitz,
+-- hcomp, hf2bound/hf3bound dominators, hWint/hf2/hf3. std-3. NOT a₁ = R/6.
+#print axioms QIQTH.SlotInstantiationII.hoff_concrete
+#print axioms QIQTH.SlotInstantiationII.hoff_slot_inhabited
+#print axioms QIQTH.SlotInstantiationII.hIchart_int_concrete
+#print axioms QIQTH.SlotInstantiationII.slotInstantiation_phase2
+
 end QIQTH.AxiomAudit
