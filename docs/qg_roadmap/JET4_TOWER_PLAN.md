@@ -4343,3 +4343,22 @@ that FlowJointRegularity §1 flagged as "a genuine multi-brick chunk" was ALREAD
 Net new analysis = one small Grönwall lemma + assembly.
 REMAINING: the hcont1 shape wiring (→ J4-436 SupFamilyFirstOrder) + hcont2/C₂ (2nd order).
 raw 0; build 76s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-436 (c7a71793): hcont1 COMPOSED — C₁/M₁chart GROUNDED (phase 3)
+
+`QIQTH/SupFamilyFirstOrder.lean` (4 decls std-3, first-compile-clean). THE KEY INSIGHT:
+manifoldAmp τ = c₀ + τ·c₁ is AFFINE in τ ⟹ its w-Fréchet-derivative field is
+fderiv c₀ w + τ•fderiv c₁ w — jointly continuous UNCONDITIONALLY
+(`manifoldAmp_fderiv_continuous`; new — BaseSlotAmpDeriv had only per-fixed-τ).
+`supFamilyFirstOrder_hcont1`: the EXACT hcont1 shape via pd_chartAmp_center_eq + the CLM
+composition (chartOrigin section + the J4-435 unconditional Jacobian + clm_apply at eᵢ).
+THE DOMAIN MISMATCH HANDLED HONESTLY: rather than fabricate the U-vs-closedBall
+reconciliation, hcont1 takes THREE NAMED banked-reducible geometric facts (hreg/hW0/hJac on
+the ball) — the opaque analytic carry is GONE. `baseSlotAmpDeriv1_grounded` + 
+`supConstant_phase3`. THE SUP LEDGER v3: C_L ✓ · Mqc/M₀chart ✓ · **C₁/M₁chart ✓** · M
+factor-grounded (the s-uniform F peak ∝ s^{-d/2} honestly stays pointwise) ·
+C₂/M₂chart/Sconst = GROUNDED-CONDITIONAL on hcont2 with the exact 2nd-order spec stated
+(forward 2nd jet joint continuity + the 2nd-order IFT identity + the pd² identification).
+raw 0; build 50s. NEXT: J4-437 = the Sol-#20 (i) diff-under-∫ opener (hQ1 first); queued =
+the 2nd-order jet chain + hcubic + the small-ball provider. NOT a₁ = R/6 (CONDITIONAL).
