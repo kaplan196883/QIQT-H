@@ -21093,4 +21093,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MomentWallCoverage.hGpow_covered
 #print axioms QIQTH.MomentWallCoverage.truncatedDuhamelCore_threaded_v3
 
+-- ## J4-417 (JointInstantiabilityAudit): the terminal surface AUDITED — CLEAN
+-- The known blind spot (budget catches axioms/sorry, NOT unsatisfiable or
+-- mutually-contradictory hypothesis packages) closed at the reachable level:
+-- FINDING 1 the moment-wall exponent is the negative -1/2 (τ^{-1/2}), the
+-- historical τ-uniform linear ≤C·τ trap PROVABLY ABSENT
+-- (audit_hslot_not_linear_trap / audit_invsqrt_not_linear_trap — axiom-FREE,
+-- not even std-3); the demanded shape satisfiable at the true Levi
+-- singularity (audit_hslot_form_satisfiable). FINDING 2 the census
+-- projectors gpow_closure_carries / slot_discharge_residuals are genuine
+-- conjunctions (Iff.rfl) — no := True conjunct, no hidden strengthening.
+-- FINDING 3 witness coherence: threaded_v3's codomain at the literal
+-- constGate is DEFEQ to a1_R6_from_data_v4's coreSlots binder
+-- (audit_coreSlots_shape) — same gate, same van-Vleck witness, no radius/
+-- normalization drift. joint_instantiability_certificate = a machine-checked
+-- simultaneous model of the group-(1) shapes at one shared parameter set.
+-- NO BLOCKER, NO SHAPE-FIX. Honest residue: groups (2)/(3)/(4) need the
+-- real kernel (the convergence-trio content) — satisfiability argued, not
+-- jointly instantiated. std-3 (first two axiom-free). NOT a₁ = R/6.
+#print axioms QIQTH.JointInstantiabilityAudit.audit_hslot_not_linear_trap
+#print axioms QIQTH.JointInstantiabilityAudit.audit_invsqrt_not_linear_trap
+#print axioms QIQTH.JointInstantiabilityAudit.audit_hslot_form_satisfiable
+#print axioms QIQTH.JointInstantiabilityAudit.audit_gpow_closure_is_conjunction
+#print axioms QIQTH.JointInstantiabilityAudit.audit_coreSlots_shape
+#print axioms QIQTH.JointInstantiabilityAudit.joint_instantiability_certificate
+
 end QIQTH.AxiomAudit

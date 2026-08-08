@@ -615,6 +615,7 @@ import QIQTH.SlotsThreading
 import QIQTH.DuhamelCoreThreaded
 import QIQTH.TerminalCoverage
 import QIQTH.MomentWallCoverage
+import QIQTH.JointInstantiabilityAudit
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
