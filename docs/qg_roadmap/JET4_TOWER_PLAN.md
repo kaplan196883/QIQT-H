@@ -3833,3 +3833,13 @@ the only gap is the metric identity. `hGauss_concrete` (the instantiation bridge
 `a1_R6_from_data_v2` (group (D) removed; the one carry = hgPull, the pullback-metric
 identification). Next: (2) the constRadius absorption (J4-412) → (3) the slot threading →
 (4) the Duhamel campaign. raw 0; build 43s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-412 (7e4dc40f): the (b) package carries ABSORBED (closing 2/4)
+
+`QIQTH/ConstRadiusAbsorb.lean` (std-3). ROUTE (ii): a1_R6_from_data_v3 — hpkgBound/hmemS0/
+hopenS0 + the caller (a,b,c,C) REMOVED via the ∃-consumption (the radii are load-bearing; a
+parametric version would re-expose hpkgBound). THE HONESTY COST: the ∃-quantified conclusion
++ the ∀-over-gates carriers (strictly stronger supply). Added geometry-only:
+hgnd/hinvF/hframeK/hw/hu. J4-413 = the slots threading (slots → the 3 census sub-carriers).
+raw 0; build 28s. NOT a₁ = R/6 (CONDITIONAL).
