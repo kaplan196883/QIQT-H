@@ -627,6 +627,7 @@ import QIQTH.SlotInstantiationVII
 import QIQTH.SlotInstantiationVIII
 import QIQTH.InnerDataInstantiation
 import QIQTH.InnerDataEnvelope
+import QIQTH.PerUCensusInstantiation
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

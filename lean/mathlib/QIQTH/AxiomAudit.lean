@@ -21332,4 +21332,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InnerDataEnvelope.innerData_reducedCore_of_gateData
 #print axioms QIQTH.InnerDataEnvelope.innerData_phase2
 
+-- ## ★★ J4-428 (PerUCensusInstantiation): GROUP (3) = ENUMERATED INPUT
+-- CARRIES ONLY (phase 1)
+-- The V1 per-u census binder map: sSet/hsOpen/hsnhds, gcoef, fbulk, bb,
+-- hb, hbulk_tendsto, hfull_pd1 were ALREADY fired internally by
+-- J4-405/406/407 (dont-undercredit honored — nothing re-proved).
+-- hfrozen_pd1 DISCHARGED THIS BRICK: traded for the lighter hQ1
+-- (frozen pointwise-on-nbhd formula) via the banked
+-- Pd2ConvPerU.hfrozen_pd1_from_hQ1 (J4-365) at fb := FrozenGermInternal.
+-- fbulkInt. perUCensus_phase1 = the fired census tuple with the residue
+-- ENUMERATED: hProv (7-leg linewise diff-under-∫), the data fields
+-- fderivBulk/gderiv/C₀₁₂, hGint (s-profile interval-integrability — NO
+-- banked supplier, grep-confirmed), hbulkderiv, hsliver (√ε tranche),
+-- hcont, hQ1, U/hUpos, the nb-triple. Three of the four terminal groups
+-- now at enumerated-carries floor. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.PerUCensusInstantiation.hfrozen_pd1_perU_of_hQ1
+#print axioms QIQTH.PerUCensusInstantiation.perUCensus_phase1
+
 end QIQTH.AxiomAudit
