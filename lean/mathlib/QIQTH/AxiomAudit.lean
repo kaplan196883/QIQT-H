@@ -21155,4 +21155,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationII.hIchart_int_concrete
 #print axioms QIQTH.SlotInstantiationII.slotInstantiation_phase2
 
+-- ## J4-420 (SlotInstantiationIII): hqz/hqc + the integrabilities (phase 3)
+-- hqz DISCHARGED-modulo (six factor carries) via the banked
+-- concrete_hqLip_of_carries — the exact supplier, reused verbatim. hqc
+-- DISCHARGED-modulo (four carries) via collar_product_lipschitz_increment —
+-- the two-factor core (the three-factor Aamp_times_F_lipschitz carries a
+-- spurious ρ absent from qc; honest new wiring). hqzmeas/hqcmeas via
+-- aesm_of_lipBound (Lipschitz ⟹ continuous ⟹ AESM; no tactic on
+-- .choose-heavy goals). hWint/hf2/hf3 REDUCED to the explicit two-Gaussian
+-- product-domination carries (the hAdom2cap/hFdom census shape) via
+-- gaussDdim_pair_integrable + Integrable.mono' — no banked lemma proves
+-- these full-space integrabilities unconditionally; genuinely carried.
+-- hIchart_int_final: phase-2 off-collar integrability at the witness modulo
+-- the domination carries. RESIDUE of group (1): hcomp (THE LOCUS OF THE
+-- GEOMETRIC CONTENT) + hf2bound/hf3bound (the odd-moment √τ extraction).
+-- std-3 all 9. NOT a₁ = R/6.
+#print axioms QIQTH.SlotInstantiationIII.hqz_concrete
+#print axioms QIQTH.SlotInstantiationIII.hqc_concrete
+#print axioms QIQTH.SlotInstantiationIII.hf3_of_dom
+#print axioms QIQTH.SlotInstantiationIII.hIchart_int_final
+#print axioms QIQTH.SlotInstantiationIII.slotInstantiation_phase3
+
 end QIQTH.AxiomAudit
