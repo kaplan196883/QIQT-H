@@ -21616,4 +21616,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenDominatorLegs.frozenLeg_dominator
 #print axioms QIQTH.FrozenDominatorLegs.innerDiff_phase4
 
+-- ## ★★ J4-441 (SupBaseGeneral): THE THREAD CONVERGENCE CLOSED — the
+-- provider core = TWO named atoms
+-- The simplification check: the local route REJECTED on the quantifier
+-- shape (C₁ chosen BEFORE ∀ᵐz ∀w'∈znb — must be uniform over the compact
+-- gate; per-fixed-z local boundedness cannot supply it; honest).
+-- supBaseGeneral_C0/C1 GROUNDED at general field point via the identical
+-- compactness route (IsCompact.exists_bound_of_continuousOn on
+-- Icc ×ˢ K; no .choose sups; vanVleckGatedWitness_abs_le turns the S-gate
+-- into a continuous dominator). gateData_of_reduced + innerDiff_phase5:
+-- the frozen hQ1 provider remainder = ONE reduced carry whose irreducible
+-- core is EXACTLY TWO named geometric atoms: hcont0 (ungated-witness
+-- base-continuity at general field point — the general-field-point
+-- chartOrigin_continuousOn) + hcont1 (the witness first field-derivative
+-- joint continuity on Icc ×ˢ K — the general-field-point
+-- chartFieldJacobian_continuousOn). BOTH are general-base extensions of
+-- lemmas PROVED at the centre — not fresh analytic walls. Everything else
+-- = bookkeeping. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.SupBaseGeneral.vanVleckGatedWitness_abs_le
+#print axioms QIQTH.SupBaseGeneral.supBaseGeneral_C0
+#print axioms QIQTH.SupBaseGeneral.supBaseGeneral_C1
+#print axioms QIQTH.SupBaseGeneral.gateData_of_reduced
+#print axioms QIQTH.SupBaseGeneral.innerDiff_phase5
+
 end QIQTH.AxiomAudit

@@ -640,6 +640,7 @@ import QIQTH.InnerDiffFamily
 import QIQTH.FrozenProviderLegs
 import QIQTH.FrozenHdiffLeg
 import QIQTH.FrozenDominatorLegs
+import QIQTH.SupBaseGeneral
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
