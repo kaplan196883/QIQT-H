@@ -21243,4 +21243,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SlotInstantiationVI.hf3dom_at_witness
 #print axioms QIQTH.SlotInstantiationVI.slotInstantiation_phase6
 
+-- ## J4-424 (SlotInstantiationVII): R1 PROVED on the confined region;
+-- R3/R5 discharged; R2 pointwise; R4 honestly carried (phase 7)
+-- R1 rhoRatio_sub_one_bound: |ρ−1| ≤ (L·n·collarK/4)·(‖z‖³/τ) on
+-- collarRegime — THE EXPONENT BUDGET: ρ = exp θ, |θ| ≤ L·n·‖z‖³/(4τ)
+-- (two-sided chartW0_rncRadialSq_error), e^{|θ|} ≤ collarK via the
+-- collar/window confinement (‖z‖³ ≤ c³τ√τ, √τ ≤ √τ₀); Cρ τ-independent.
+-- THE EXACT OFF-COLLAR FAILURE RECORDED: at fixed ‖z‖ = r₀, τ→0 makes
+-- e^{|θ|} diverge — hdom_comp on collarᶜ needs the S5b Gaussian-difference
+-- route (|G^chart−G_τ| ≤ (L'‖z‖³/4τ)·(√2)ⁿ·G_{2τ} globally, no exp
+-- blow-up; → comparisonDom2 width-2τ + κ=2 moment = J4-425).
+-- R5 hf2int/hf3int DISCHARGED (Integrable.mono' + compositional
+-- measurability from the banked bundle fields; DEFEQ lesson respected).
+-- R3 DISCHARGED (re-export). R2 hform_at_witness pointwise (jet-supply
+-- standing carry). R4 GENUINELY CARRIED — an off-gate near-isometry carry
+-- would be UNSATISFIABLE (vacuity deliberately avoided per the
+-- axiom-budget blind-spot discipline). std-3 all 7. NOT a₁ = R/6.
+#print axioms QIQTH.SlotInstantiationVII.rhoRatio_sub_one_bound
+#print axioms QIQTH.SlotInstantiationVII.hf2int_at_witness
+#print axioms QIQTH.SlotInstantiationVII.hf3int_at_witness
+#print axioms QIQTH.SlotInstantiationVII.hcompDiff_int_at_witness
+#print axioms QIQTH.SlotInstantiationVII.hform_at_witness
+#print axioms QIQTH.SlotInstantiationVII.slotInstantiation_phase7
+
 end QIQTH.AxiomAudit
