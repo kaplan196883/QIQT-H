@@ -4534,3 +4534,18 @@ on the campaign's standing enumerated families + ONE substantive m-free carry hP
 The J4-428 "NO banked supplier" flag FULLY ELIMINATED. raw 0; build 76s.
 NEXT: J4-447 = ProfRateTheorem (hProfRate → a theorem via the coordinate moment).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-447: hProfRate PROVED — hGint rests on ONE product-moment atom (census phase 5)
+
+`QIQTH/ProfRateTheorem.lean` (4 decls std-3). `profRate_theorem` proves the exact hProfRate
+binder at Q := 3M√w/4 — the √τ gain FULLY INTERNAL (absCoord_gaussDdim_integral_le:
+∫|z_i|·G_{wτ} ≤ (3/2)√(wτ); √(wτ) = √w·√τ; inv_sqrt_eq_rpow; assembled through
+abs_integral_le_of_dom). THE HONEST DESIGN NOTE: `witnessFieldDeriv_gate_abs_le` genuinely
+CRUDIFIES the z_i/(2τ) slope into the constant Bs — recovering the un-crudified slope is
+real new jet analysis, NOT manufactured; instead `hProdMoment` (the pointwise product-moment
+domination, (w,M) s-uniform, m-free) is carried at the IDENTICAL honesty level as the banked
+hf2bound family. `hGint_theorem` + `perUCensus_phase5`: the hProfRate integral-rate carry
+ELIMINATED; the hGint chain = the standing enumerated families + hProdMoment.
+raw 0; build 50s. NEXT: J4-448 = ProdMomentWitness (the un-crudified z_i/(2τ) envelope from
+the J4-443 chain rule — the parametrix pd HAS the slope structure). NOT a₁ = R/6.
