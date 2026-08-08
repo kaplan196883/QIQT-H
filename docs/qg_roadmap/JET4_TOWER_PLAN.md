@@ -4301,3 +4301,23 @@ tube = the fderiv-analogue of the banked uniformFlowExp_base_diff_bound (= J4-43
 Dont-undercredit: the decisive machinery (per-z IFT core, right-inverse, nondegeneracy,
 value-level base continuity) was all banked; the new content = lifting VALUE → JACOBIAN.
 raw 0; build 52s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-434 (7988134e): the hFwd atom — TERM 2 derived; hbaseJ = the ONE
+## spec-exposure carry
+
+`QIQTH/ForwardFlowJet.lean` (4 decls std-3). The banked VALUE-level joint-continuity
+triangle (FlowJointContinuity, q₀-anchored: base modulus + velocity continuity) mirrored ONE
+DERIVATIVE UP for the operator jet D(q,w) = fderiv(uniformFlowExp q) w. **TERM 2 DERIVED
+unconditionally** (`forwardFlowJet_velocityContinuousAt` ← contDiffAt2 +
+ContDiffAt.fderiv_right + continuousAt). **TERM 1 = hbaseJ, THE HONEST CARRY** — the first-
+jet base modulus (the exact operator analogue of the banked uniformFlowExp_base_diff_bound).
+WHY IT CARRIES: the spec tower exposes only ∃L HasFDerivAt (L identified with nothing); the
+velocity-Jacobi endpoint operator V is an INTERNAL .choose of uniformFlowExp_hasFDerivAt,
+never re-exposed — while the discharge engine (BasepointJetModulus.jacobi_twopoint_diff_bound
++ hunif_of_lipschitz) is ALREADY BANKED and fits. THE RESIDUE IS SPEC-EXPOSURE, NOT ANALYSIS.
+`forwardFlowJet_continuousOn_of_baseMod` = the hFwd atom;
+`chartFieldJacobian_continuousOn_of_baseMod` = the J3 wiring. phase3 NOT forced (rides on
+hbaseJ; hcont2 = the separate 2nd-order carry). raw 0; build 50s.
+NEXT: J4-435 = JacobiCLMExposure (re-expose the endpoint Jacobi CLM as a public spec lemma →
+feed the banked Grönwall → hFwd + J3 + C₁/M₁chart unconditional). NOT a₁ = R/6 (CONDITIONAL).
