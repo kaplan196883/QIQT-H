@@ -4237,3 +4237,22 @@ CONSEQUENCE: the remaining sliver work = standard dominated analysis over the sa
 hbnd_concrete_v2_carries {hcubic, hgate, hdisp, hjets, hcenter}. raw 0; build 51s.
 NEXT: J4-431 = (iv) the sup/constant family (Sol #20 order); then the hcubic discharge.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-431 (95d6ff4f): the sup family — C_L + the amplitude sup GROUNDED;
+## the derivative sups on ONE shared wall
+
+`QIQTH/SupConstantFamily.lean` (4 decls std-3). THE SUP LEDGER: **C_L GROUNDED** —
+`levi_C_L_grounded` delegates verbatim to the banked `leviSeries_gatedWitnessN1_dominated`
+(conditional only on the standing hEmeas carry; the baseKernelW 2 0 = gaussDdim(2τ) bridge
+deferred, not an obstruction). **Mqc/M₀chart GROUNDED gate-restricted** —
+`chartAmp_center_sup_onCollar` via the banked `BaseSlotAmplitude.baseSlotAmp_bound` (genuine
+IsCompact compactness on [0,τ₀]×closedBall; the chartAmp = chartFieldAmp centre bridge by
+ring). HONEST MISMATCHES NAMED: the SlotIII ∀τz global shape not reachable from the
+compact-ball continuity; the s-uniform product constant stays pointwise (F's Gaussian peak
+blows up as s→0). **C₁/C₂/M₁chart/M₂chart OBSTRUCTED — THE SINGLE SHARED WALL:** no banked
+joint-in-base continuous derivative field (banked derivative bounds are per-fixed-base or
+germ-local); M/Sconst inherit it. THE .CHOOSE TRAP FORCED NOTHING — nothing fabricated.
+THE FIX = ONE BRICK: BaseSlotAmpDeriv (the baseSlotAmp_bound analogue one/two derivative
+orders up) grounds all four + M/Sconst by the same compactness route (= J4-432).
+raw 0; build 52s. NOT a₁ = R/6 (CONDITIONAL).
