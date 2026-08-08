@@ -4215,3 +4215,25 @@ u^{-1/2} majorant with summable-in-m constants. If it lands, the rest is standar
 analysis; if not, no API repairs the route.
 raw 0; build 52s. NEXT: J4-430 = the sliver-core risk-gate lemma (Sol's mitigation mandate).
 NOT a₁ = R/6 (CONDITIONAL — the floor closes nothing deeper).
+
+---
+# ★★★ J4-430 (cda615b1): THE RISK GATE LANDED — the trio campaign's highest-risk
+# item is a proved theorem
+
+`QIQTH/SliverRiskGate.lean` (4 decls std-3). THE SOL #20 MANDATE DISCHARGED. THE VERDICT:
+**LANDED — the route is sound.** `riskGate_powercount`: |Q| ≤ C·u⁻¹·|rem| with |rem| ≤ B·√u
+forces |Q| ≤ (C·B)·u^{-1/2} — the standalone structural lemma at the exact point where the
+non-integrable τ⁻¹ order-2 s-dominator becomes the integrable sliver rate; the zero-moment/
+center-subtraction cancellation (the banked matched-A₀·T_τ mechanism) supplies the √u
+remainder. M-SUMMABILITY: the constants are m-INDEPENDENT — D0/D1 : Fin n → ℝ bound BEFORE
+∀m; the entire m-dependence lives in the vanishing 2√(epsSeq m); the wall-A quantifier
+discipline (fixed endpoint epsSeq 0, never a per-m cutoff) preserved.
+`sliverRiskGate_hbnd` = the BYTE-FOR-BYTE hbnd binder of truncatedDuhamelCore_threaded,
+wired via amplitudePackageOn_sliver_bound at ε := epsSeq m. `riskGate_bound_tendsto_zero` +
+`sliverRiskGate_certificate` complete the package. Substantially EXTRACTION of banked
+machinery (SecondDerivEnvelope §C, SliverAssemblyMatched, GpowBridge.invSqrt_absorb); the
+genuinely new content = the isolated structural lemma + the m-independence packaging.
+CONSEQUENCE: the remaining sliver work = standard dominated analysis over the satisfiable
+hbnd_concrete_v2_carries {hcubic, hgate, hdisp, hjets, hcenter}. raw 0; build 51s.
+NEXT: J4-431 = (iv) the sup/constant family (Sol #20 order); then the hcubic discharge.
+NOT a₁ = R/6 (CONDITIONAL).
