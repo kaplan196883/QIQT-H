@@ -21748,4 +21748,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ProfFacWitness.hGint_grounded
 #print axioms QIQTH.ProfFacWitness.perUCensus_phase4
 
+-- ## J4-447 (ProfRateTheorem): hProfRate PROVED — hGint rests on ONE
+-- product-moment atom (census phase 5)
+-- profRate_theorem proves the exact hProfRate binder at Q := 3M√w/4; the
+-- √τ gain FULLY INTERNAL (absCoord_gaussDdim_integral_le ∫|z_i|G_{wτ} ≤
+-- (3/2)√(wτ) + inv_sqrt_eq_rpow, through abs_integral_le_of_dom).
+-- THE HONEST DESIGN NOTE: witnessFieldDeriv_gate_abs_le genuinely
+-- CRUDIFIES the z_i/(2τ) slope into the constant Bs — recovering the
+-- un-crudified slope is real new jet analysis, NOT manufactured here;
+-- instead the atom hProdMoment (the pointwise product-moment domination
+-- ‖dH·Lev‖ ≤ M/(2(u−s))·|z_i|·G, (w,M) s-uniform) is carried at the
+-- IDENTICAL honesty level as the banked hf2bound family. hGint_theorem +
+-- perUCensus_phase5: the hProfRate integral-rate carry ELIMINATED; the
+-- hGint chain rests on the standing families + hProdMoment (→ J4-448:
+-- the un-crudified envelope from the J4-443 chain rule).
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ProfRateTheorem.innerRate_of_ptwiseMoment
+#print axioms QIQTH.ProfRateTheorem.profRate_theorem
+#print axioms QIQTH.ProfRateTheorem.hGint_theorem
+#print axioms QIQTH.ProfRateTheorem.perUCensus_phase5
+
 end QIQTH.AxiomAudit

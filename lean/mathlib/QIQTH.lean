@@ -646,6 +646,7 @@ import QIQTH.UngatedChainRule
 import QIQTH.HGintCutoff
 import QIQTH.SliverSingularEngine
 import QIQTH.ProfFacWitness
+import QIQTH.ProfRateTheorem
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
