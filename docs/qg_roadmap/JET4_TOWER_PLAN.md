@@ -4138,3 +4138,25 @@ conj-6 (second-kernel Gaussian domination ← `witnessFieldDeriv2_gate_envelope`
 Dont-undercredit: the w2_* family CONSUMES hInnerData via innerZ_line_hasDerivAt — this brick
 supplies it one level deeper; the first-order pattern was banked and lifted, not re-derived.
 raw 0; build 47s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-427 (ba80b84a): the E2 envelope — GROUP (2) = ENUMERATED INPUT CARRIES ONLY
+
+`QIQTH/InnerDataEnvelope.lean` (4 decls std-3). `witnessFieldDeriv2_gate_envelope` PROVED
+(off-gate dHH = 0 banked `witnessFieldDeriv2_offGate_eq_zero`; on-gate the C₂ sup × the Levi
+Gaussian C_L·G_σ) + the first-order sibling `witnessFieldDeriv_gate_envelope_prod`.
+conj-6 DISCHARGED (dominator (C₂·C_L)·gaussDdim σ — the exact reduced-core shape);
+conj-3 DISCHARGED (Integrable.mono' + first-order envelope + envelope_integrable);
+conj-1 DISCHARGED as the carried hznb (NOT univ — the on-gate sup is genuinely local).
+`innerData_phase2` = the full hInnerData bundle from gate/amplitude/envelope data.
+
+### THE GROUP-(2) FINAL RESIDUE — 7 NAMED INPUT CARRIES (the milestone):
+(a) bare z-slice measurabilities · (b) width σ>0 · (c) C₁ first-order on-gate sup ·
+(d) C₂ second-order on-gate sup [NEW, joins the sup family] · (e) C_L Levi Gaussian
+domination [groundable by leviSeries_gatedWitnessN1_dominated] · (f) the nbhd znb ·
+(g) the per-z gate dichotomy. NO analytic hInnerData conjunct remains.
+Dont-undercredit: SecondDerivEnvelope (J4-198) had the E2 3-term bound + the coercive x-free
+bound + THE HONEST INTEGRABILITY VERDICT (naive (t−s)⁻¹ dominator NOT interval-integrable;
+the (t−s)^{-1/2} sliver route survives — the s-layer must use the √ε truncation); this brick
+adds the complementary z-level product dichotomy, abstracting C₂ over the coercive bound.
+raw 0; build 49s. NEXT: GROUP (3) the V1 per-u census (J4-428). NOT a₁ = R/6 (CONDITIONAL).
