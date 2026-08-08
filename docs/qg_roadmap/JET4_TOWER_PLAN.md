@@ -4032,3 +4032,24 @@ m-uniformly IF |z_i|/|z_i|³ moments (NEVER radial ‖z‖ moments — those cos
 use odd-moment cancellation (post-|·| the moments are nonzero); the cubic → C/√τ needs the
 campaign's τ upper bound, integrability alone does not scale.
 raw 0; build 48s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-422 (c8a84452): hf2bound/hf3bound + THE REGIME JACKPOT — phase 5
+
+`QIQTH/SlotInstantiationV.lean` (12 decls std-3). **Part A:** hf2bound DISCHARGED m-uniformly
+by COORDINATE moments (Sol #19 traps respected: |z_i| never radial ‖z‖; no odd-moment
+cancellation) — ∫|z_i|·G ≤ (3/2)√τ gives Q = 3M/4 via the EXACT (√τ/τ) = 1/√τ conversion,
+NO τ-window needed (the window is only for the Part-B cubic). hf3bound τ-uniform (zeroth
+moment). Residual: hfint/hdom per-point carries (satisfiable via hf2/hf3_ptwise_dom_of_
+ampBound). **Part B — THE REGIME AUDIT VERDICT = (1) EXTENDS:** hD2Hexpand consumes
+Regime = collarRegime at EXACTLY THREE sites (AmplitudeDataOnCollar.lean:426-430: 0<τ, z∈K,
+the chart jets); the collar ‖z‖≤c√τ / r₀ / τ≤τ₀ conjuncts are NEVER referenced; the
+underlying hD2HexpandOn_concrete (:258-287) takes no collar hypothesis. THE JET LEMMA PROVED:
+`ichartResidual_offcollar_form` (IchartResidual = hessGaussFactor·ρ·qc off-collar) +
+`ichartResidual_sub_hess_form` (comparison integrand = H·(ρ−1)·qc). THE COLLAPSE WIRED
+(`hcomp_collapsed`): the phase-4 legs (ii)-(iv) reduce from three abstract carries about an
+unknown IchartResidual to ONE explicit (ρ−1) cubic-form carry + the off-collar jet supply.
+GROUP-(1) RESIDUE = terminal geometric wiring only: the (ρ−1)=O(‖z‖³/τ) cubic carry
+(→ J4-423 via the near-isometry budget + cubic_gaussian_moment_witness, τ-window REQUIRED
+here per Sol trap iii) + the hf2/hf3 per-point hfint/hdom + the jet supply hform + the
+factor/domination carries. raw 0; build 49s. NOT a₁ = R/6 (CONDITIONAL).
