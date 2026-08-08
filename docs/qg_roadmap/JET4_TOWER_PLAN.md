@@ -4381,3 +4381,19 @@ lives ONLY in the order-2 sliver carries — and hsliver already meets it
 with named suppliers (Fubini engine for the measurabilities, w2_hFint capped-ceiling for the
 integrability). raw 0; build 47s. NEXT: J4-438 = FrozenProviderLegs (hFmeas/hF'meas via the
 Fubini engine, 7→5). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-438: the hQ1 provider shrunk 7→4 (the Fubini + capped-ceiling legs)
+
+`QIQTH/FrozenProviderLegs.lean` (5 decls std-3). hFmeas/hF'meas DISCHARGED (the banked
+`innerIntegral_aesm` Fubini engine on .mul of m-INDEPENDENT joint (s,z) carries — the base-y
+analogue of the banked base-0 route). hFint DISCHARGED (the banked
+`pairing_intervalIntegrable_lowerCapped` capped-ceiling engine at base y; the degenerate case
+via `intervalIntegrable_of_deg`). hdiff NOT wired — HONEST SHAPE MISMATCH (the J4-426 family
+is 2nd-order/z-pointwise/base-update-0; the frozen hdiff is 1st-order/∫z/base-y) → J4-439
+via `innerZ_line_hasDerivAt`. THE REMAINDER = {snb, bound+hbdd, hbound, hdiff} — the genuine
+domination + pointwise-HasDerivAt content. M-UNIFORMITY: the discharged legs use ∀d carries
+at d := u−εₘ (m-independent); the window + remainder per-m is ADMISSIBLE (hQ1 = per-m
+equality). HONESTLY FLAGGED: the base-y joint carries are ENUMERATED INPUTS (the banked
+joint-aesm is field-point-0-only) — no fabrication. raw 0; build 54s.
+NOT a₁ = R/6 (CONDITIONAL).
