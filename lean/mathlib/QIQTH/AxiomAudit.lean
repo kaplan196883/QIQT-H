@@ -21639,4 +21639,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SupBaseGeneral.gateData_of_reduced
 #print axioms QIQTH.SupBaseGeneral.innerDiff_phase5
 
+-- ## ★★ J4-442 (GeneralFieldContinuity): hcont0 DISCHARGED + the hcont1
+-- smooth core BUILT (phase 6)
+-- hcont0 PROVED: the ungated witness value factors DEFEQ as
+-- profile ∘ (z ↦ W z (update y i w)); hcont0_of_chartCont composes the
+-- p-GENERAL chartP_continuousOn (dont-undercredit: it was already
+-- p-general — hcont0 was never a fresh wall) with the banked global
+-- profile continuity (parametrixWitnessProfile_continuous; residue = the
+-- folded-coefficient smoothness hw, bookkeeping).
+-- hcont1: THE SMOOTH CORE BUILT — chartFieldJacobianP_joint_continuousOn
+-- proves the JOINT (w',z) continuity of fderiv(W z)(update y i w') on
+-- Icc ×ˢ K: the J4-433/435 chain replayed one field-order more general
+-- (the IFT identity was base-point-general; forwardFlowJet_continuousOn
+-- was already joint and unconditional; Ring.inverse at units). NOT
+-- walled. The TWO remaining honest atoms of hcont1 NAMED: (i) the
+-- general-field UNGATED chain-rule identity (witnessFieldDeriv ↔ the
+-- smooth Jacobian; lead: the banked chartComposed_pd_jointContinuousOn
+-- keyed at base 0 — the general-base lift = J4-443) + (ii) the S-gate
+-- transparency at the field point. gateData_of_reduced2 +
+-- innerDiff_phase6: the C₀ witness-value slot FULLY grounded.
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.GeneralFieldContinuity.parametrixWitnessProfile_continuous
+#print axioms QIQTH.GeneralFieldContinuity.hcont0_of_chartCont
+#print axioms QIQTH.GeneralFieldContinuity.chartFieldJacobianP_joint_continuousOn
+#print axioms QIQTH.GeneralFieldContinuity.gateData_of_reduced2
+#print axioms QIQTH.GeneralFieldContinuity.innerDiff_phase6
+
 end QIQTH.AxiomAudit
