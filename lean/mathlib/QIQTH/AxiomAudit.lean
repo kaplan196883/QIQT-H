@@ -21349,4 +21349,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PerUCensusInstantiation.hfrozen_pd1_perU_of_hQ1
 #print axioms QIQTH.PerUCensusInstantiation.perUCensus_phase1
 
+-- ## ★★★ J4-429 (V2CensusInstantiation): GROUP (4) + THE TERMINAL
+-- CROSS-CHECK — ALL FOUR TERMINAL GROUPS AT THE ENUMERATED-CARRIES FLOOR
+-- The group-(4) binder map (blocks A-F: boundary/geometry, the wall-A
+-- interchange census, the √ε sliver family, the domination/mass constants,
+-- the F-pile + c-moving family, the Levi cross-Lipschitz). hFzero
+-- DISCHARGED internally (the one strictly-lower trade at the core;
+-- ← DaLimEasyTranche.hFzero_concrete). v2Census_phase1 transcribes the
+-- ENTIRE v3-core binder list verbatim and re-supplies each one — it
+-- COMPILES, machine-certifying the completeness of the enumeration:
+-- every truncatedDuhamelCore_threaded_v3 binder lands in exactly one of
+-- groups (1)/(2)/(3)/(4)/(A)/internally-discharged. NO NAMED GAP.
+-- terminal_enumeration_check = the completeness certificate.
+-- THE BINDER-LEVEL REDUCTION IS EXHAUSTED — the remaining conditionality
+-- is INSIDE the carries: the convergence-trio / true-kernel content
+-- (hFdomW/hInter Levi-convergence leg first). std-3 all 3.
+-- NOT a₁ = R/6 — the floor closes nothing deeper; CONDITIONAL.
+#print axioms QIQTH.V2CensusInstantiation.v2_hFzero_at_witness
+#print axioms QIQTH.V2CensusInstantiation.v2Census_phase1
+#print axioms QIQTH.V2CensusInstantiation.terminal_enumeration_check
+
 end QIQTH.AxiomAudit
