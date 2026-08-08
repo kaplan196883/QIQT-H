@@ -21434,4 +21434,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotAmpDeriv.baseSlotAmpDeriv2_sup_onCollar
 #print axioms QIQTH.BaseSlotAmpDeriv.supConstant_phase2
 
+-- ## J4-433 (ChartFieldJacobian): the J3 attack — REDUCED to ONE
+-- geometry-only atom
+-- THE DIAGNOSIS: uniformInverseChart is .choose-built = the LOCAL INVERSE
+-- of the geodesic-flow endpoint map uniformFlowExp (route (c), IFT).
+-- PROVED: fderiv_localLeftInverse_eq_ringInverse (the abstract IFT-Jacobian
+-- identity, pure Mathlib) + chartFieldJacobian_eq_ringInverse (the concrete
+-- fderiv(W z) 0 = Ring.inverse(fderiv φ_z (W z 0)) via the banked
+-- right-inverse + nondegeneracy ball) + the five per-z regularity facts
+-- from banked lemmas. THE REDUCTION (chartFieldJacobian_continuousOn_of_
+-- forwardJointCont): the J3 carry follows unconditionally from ONE
+-- geometry-only carry hFwd = joint-in-base continuity of the FORWARD-flow
+-- first jet (z,v) ↦ fderiv(uniformFlowExp z) v — smooth ODE dependence on
+-- initial data, absent from Mathlib (Grönwall + P-L existence only, no
+-- joint-C¹ flow Jacobian); the recognized J3 residue, honest. hcont2
+-- needs the SECOND-order forward jet — NOT discharged, stated honestly;
+-- no forced phase3. Recommended discharge: two-solution Grönwall on the
+-- Jacobi (first-variation) ODE = the fderiv-analogue of the banked
+-- uniformFlowExp_base_diff_bound. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ChartFieldJacobian.fderiv_localLeftInverse_eq_ringInverse
+#print axioms QIQTH.ChartFieldJacobian.chartFieldJacobian_eq_ringInverse
+#print axioms QIQTH.ChartFieldJacobian.chartFieldJacobian_facts_of_small
+#print axioms QIQTH.ChartFieldJacobian.chartFieldJacobian_continuousOn_of_forwardJointCont
+
 end QIQTH.AxiomAudit
