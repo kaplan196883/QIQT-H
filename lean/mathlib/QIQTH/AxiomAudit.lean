@@ -21687,4 +21687,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.UngatedChainRule.chartFieldJacobianComponent_jointContinuousOn
 #print axioms QIQTH.UngatedChainRule.witnessFieldDeriv_jointContinuousOn
 
+-- ## J4-444 (HGintCutoff): hGint DISCHARGED bulk⊕sliver (census phase 2)
+-- THE FINDING: the census hGint is the FULL [0,u] (not the anticipated
+-- capped tranche); the field-derivative envelope carries a 1/(2τ) slope,
+-- so near s→u the profile is dominated only by the singular (u−s)^{-1/2}
+-- — per SOL #20 NOT forced. THE SPLIT: bulk [0,u−εₘ] DISCHARGED
+-- (near-verbatim frozenLeg_hFint via pairing_intervalIntegrable_
+-- lowerCapped + gaussDdim_crude_to_capped — the J4-428 "no banked
+-- supplier" flag was true only for the constant-dominator full route);
+-- the endpoint sliver [u−εₘ,u] CARRIED as hSliver (the irreducible
+-- (u−s)^{-1/2} content, integrable-singularity engine = J4-445);
+-- reassembled by IntervalIntegrable.trans. New named carries replacing
+-- the hGint binder: hFzero/hWFDdomCapped/hFdomEvery/hGintMeas/hSliver.
+-- ⚠ DONT-UNDERCREDIT CONFIRMATION: the census hProv (the DIAGONAL 7-leg
+-- provider) is a DIFFERENT provider from the frozen hQ1 provider closed
+-- by J4-437..443 — it stays an honest carry. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HGintCutoff.hGint_capped_at_witness
+#print axioms QIQTH.HGintCutoff.hGint_at_witness
+#print axioms QIQTH.HGintCutoff.perUCensus_phase2
+
 end QIQTH.AxiomAudit
