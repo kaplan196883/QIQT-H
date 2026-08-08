@@ -162,13 +162,14 @@ async function run() {
   // stable order: root first, then alphabetical
   pages.sort((a, b) => (a.url === '/' ? -1 : b.url === '/' ? 1 : a.url.localeCompare(b.url)));
 
-  // llms.txt — the curated index
+  // llms.txt — the curated index. Title + blurb are derived from the homepage's own
+  // <title>/<meta description> (the same source as every page), so this never drifts.
+  const home = pages.find(p => p.url === '/') || pages[0] || {};
   const idx = [
-    `# QIQT-H — One Wave Function, One World`,
+    `# ${home.title || 'QIQT-H'}`,
     ``,
-    `> A single-world (Φ,λ) formulation of quantum theory with an AdS/CFT-style holographic`,
-    `> duality for flat spacetime, derived from five postulates and machine-verified in Lean 4.`,
-    `> This file indexes LLM-readable Markdown twins of every page (append .md to any URL).`,
+    ...(home.desc ? [`> ${home.desc}`] : []),
+    `> This file indexes LLM-readable Markdown twins of every QIQT-H page (append .md to any URL).`,
     ``,
     `## Pages`,
     ...pages.map(p => `- [${p.title || p.url}](${SITE}${p.mdUrl})${p.desc ? ': ' + p.desc : ''}`),
