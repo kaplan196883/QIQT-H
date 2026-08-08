@@ -21480,4 +21480,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ForwardFlowJet.forwardFlowJet_continuousOn_of_baseMod
 #print axioms QIQTH.ForwardFlowJet.chartFieldJacobian_continuousOn_of_baseMod
 
+-- ## ★★ J4-435 (JacobiCLMExposure): hbaseJ DISCHARGED — hFwd + J3
+-- UNCONDITIONAL
+-- THE EXPOSURE PROVED: uniformFlowExp_jacobi_spec re-runs the compiled
+-- construction to the full triple (V δ 0 = (0,δ) · the first-variation
+-- ODE V' = DF(uniformFlowTube q v)·V on [0,1] · fderiv = fun δ ↦ (V δ 1).1)
+-- with the base geodesic exposed concretely as uniformFlowTube.
+-- THE DISCHARGE: uniformFlowExp_fderiv_base_modulus (strict interior
+-- ‖v‖<ρ_K) via jacobi_twopoint_diff_bound with Dcoef = M₂·exp(L_sep)·
+-- ‖q−q'‖ (C² field bound × the banked uniformTube_twopoint_diff_bound)
+-- and Jb = ‖δ‖·exp(K_f) (the ONE new lemma jacobi_growth_bound —
+-- homogeneous Grönwall). THE COLLAPSE: forwardFlowJet_continuousOn (the
+-- hFwd atom) + chartFieldJacobian_continuousOn (the J3 wiring) BOTH
+-- UNCONDITIONAL (the weld re-derived at strict-interior velocities — the
+-- boundary has no differentiability, correctly excluded by the open-ball
+-- domain). Dont-undercredit: the residue was SMALLER than diagnosed —
+-- uniformFlowExp_fderiv_near_id_quant had the exposure inline;
+-- uniformTube_twopoint_diff_bound (J4-150) had the separation; net new
+-- analysis = ONE small Grönwall lemma. Remaining: the hcont1 shape wiring
+-- (J4-436) + hcont2/C₂ (2nd order). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.JacobiCLMExposure.uniformFlowExp_jacobi_spec
+#print axioms QIQTH.JacobiCLMExposure.jacobi_growth_bound
+#print axioms QIQTH.JacobiCLMExposure.uniformFlowExp_fderiv_base_modulus
+#print axioms QIQTH.JacobiCLMExposure.forwardFlowJet_continuousOn
+#print axioms QIQTH.JacobiCLMExposure.chartFieldJacobian_continuousOn
+
 end QIQTH.AxiomAudit
