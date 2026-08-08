@@ -21505,4 +21505,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JacobiCLMExposure.forwardFlowJet_continuousOn
 #print axioms QIQTH.JacobiCLMExposure.chartFieldJacobian_continuousOn
 
+-- ## ★★ J4-436 (SupFamilyFirstOrder): hcont1 COMPOSED — C₁/M₁chart
+-- GROUNDED (phase 3)
+-- manifoldAmp_fderiv_continuous: the (τ,w) ↦ fderiv(manifoldAmp τ) w field
+-- JOINTLY continuous UNCONDITIONALLY — the key insight: manifoldAmp τ =
+-- c₀ + τ·c₁ is AFFINE in τ, so the w-derivative is fderiv c₀ w + τ•fderiv
+-- c₁ w (each c_k C²; not previously proved — BaseSlotAmpDeriv had only
+-- per-fixed-τ). supFamilyFirstOrder_hcont1: the EXACT hcont1 shape via
+-- pd_chartAmp_center_eq + the CLM composition (clm_apply against eᵢ +
+-- ContinuousOn.congr). THE DOMAIN MISMATCH HANDLED HONESTLY: the J4-435
+-- Jacobian continuity runs on U ⊆ K with smallness; the sup on closedBall
+-- 0 ρ — hcont1 takes THREE NAMED banked-reducible geometric facts
+-- (hreg/hW0/hJac on the ball) rather than a fabricated reconciliation;
+-- the opaque analytic carry is GONE, replaced by named facts.
+-- baseSlotAmpDeriv1_grounded: C₁/M₁chart from hcont1. supConstant_phase3:
+-- amplitude ✓ ∧ first-derivative ✓ ∧ second-derivative carrying hcont2.
+-- LEDGER v3: C_L ✓ · Mqc ✓ · C₁/M₁chart ✓ · M factor-grounded (the
+-- s-uniform F peak honestly pointwise) · C₂/M₂chart/Sconst = the exact
+-- 2nd-order spec (forward 2nd jet + 2nd-order IFT + pd² identification).
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.SupFamilyFirstOrder.manifoldAmp_fderiv_continuous
+#print axioms QIQTH.SupFamilyFirstOrder.supFamilyFirstOrder_hcont1
+#print axioms QIQTH.SupFamilyFirstOrder.baseSlotAmpDeriv1_grounded
+#print axioms QIQTH.SupFamilyFirstOrder.supConstant_phase3
+
 end QIQTH.AxiomAudit
