@@ -4566,3 +4566,22 @@ the hGint chain = the standing enumerated families + hProdPtwise ONLY (the integ
 degree of freedom GONE). raw 0; build 49s. NEXT: J4-449 = ProdPtwiseWitness (the refined
 dH envelope × a TRUE Levi CAP — WITH the satisfiability gate first per the falsity finding).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-449: THE GATE RAN — hProdPtwise SATISFIABLE, split into two floor atoms (phase 7)
+
+`QIQTH/ProdPtwiseWitness.lean` (4 decls std-3). **THE GATE VERDICT: SATISFIABLE AS STATED**
+via factorization 1 — the refined dH slope-moment envelope (|dH| ≤ CA/(2(u−s))·|z_i|·
+G_{wA(u−s)}) × a CONSTANT Levi cap yields EXACTLY the demanded single-Gaussian shape
+(w := wA, M := CA·C_L); no G·G product arises — the J4-448 falsity structurally AVOIDED.
+**★ THE SOUNDNESS SUBTLETY THE GATE CAUGHT:** the banked leviSeries_gatedWitnessN1_dominated
+RHS is a width-2s Gaussian whose peak (8πs)^{-n/2} DIVERGES as s→0 — it canNOT source the
+constant cap; but the TRUE Levi factor is O(t^N)-smooth (→0 as s→0), so a genuine finite
+s,z-uniform cap EXISTS — carried as the distinct C⁰-regularity atom hLeviCap (correctly NOT
+derived from the crude Gaussian). Gate (ii): the refined envelope satisfiable (the J4-443
+chain rule; {z_i=0} null). The J4-447 lever fires UNCHANGED. `prodPtwise_at_witness` grounds
+the atom to {hDHrefined, hLeviCap}; `hGint_prodPtwise` + `perUCensus_phase7`.
+**hGint FINAL: the standing enumerated families + hDHrefined (the sharpened envelope tier) +
+hLeviCap (the parametrix-smoothness tier)** — both m-free, satisfiable, strictly lower.
+raw 0; build 47s. NEXT: J4-450 = LeviCapWitness (hLeviCap with its own gate: the s→0
+extension + compactness). NOT a₁ = R/6 (CONDITIONAL).
