@@ -21706,4 +21706,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HGintCutoff.hGint_at_witness
 #print axioms QIQTH.HGintCutoff.perUCensus_phase2
 
+-- ## ★★ J4-445 (SliverSingularEngine): hGint FULLY DISCHARGED (bulk ⊕
+-- sliver, census phase 3)
+-- THE ENGINE EXISTED DISTRIBUTED across three banked files — wired, not
+-- re-proved: the sliver-window singular integrability =
+-- HeatResidualBound.rpow_sub_intervalIntegrable (NOT sliver_rate_
+-- intervalIntegrable, which is fixed-[0,t]); the power count =
+-- SliverRiskGate.riskGate_powercount (τ⁻¹·√τ = τ^{-1/2}); assembled via
+-- IntervalIntegrable.mono'. hSliver_discharged trades the binder for TWO
+-- strictly-lower satisfiable carries: hProfMeas (sliver ae-measurability)
+-- + hProfFac (the risk-gate factorisation: |profile| ≤ C·(u−s)⁻¹·|rem| ∧
+-- |rem| ≤ B·√(u−s) — the 1/(2τ) slope × the coordinate first moment).
+-- Endpoint s=u a.e. (ae_ne_point), never forced. hGint_full_at_witness:
+-- the census hGint FULLY banked. THE GROUP-(3) RESIDUE = enumerated input
+-- carries only (U/nb, the diagonal hProv, the order-2 data, hbulkderiv,
+-- the √ε hsliver, hcont, hQ1-carrier, + the hGint suppliers).
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.SliverSingularEngine.sliverProfile_dom
+#print axioms QIQTH.SliverSingularEngine.sliverProfile_intervalIntegrable
+#print axioms QIQTH.SliverSingularEngine.hSliver_discharged
+#print axioms QIQTH.SliverSingularEngine.hGint_full_at_witness
+#print axioms QIQTH.SliverSingularEngine.perUCensus_phase3
+
 end QIQTH.AxiomAudit

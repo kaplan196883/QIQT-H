@@ -644,6 +644,7 @@ import QIQTH.SupBaseGeneral
 import QIQTH.GeneralFieldContinuity
 import QIQTH.UngatedChainRule
 import QIQTH.HGintCutoff
+import QIQTH.SliverSingularEngine
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
