@@ -4466,3 +4466,22 @@ the general-base lift = J4-443) + (ii) the S-gate transparency at the field poin
 `gateData_of_reduced2` + `innerDiff_phase6`: **the C₀ witness-value slot FULLY GROUNDED at
 the witness.** raw 0; build 78s. NEXT: J4-443 = UngatedChainRule (the last witness-level
 geometric atom). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ★★★ J4-443: hcont1 DISCHARGED — THE FROZEN hQ1 PROVIDER CLOSED AT THE WITNESS LEVEL
+
+`QIQTH/UngatedChainRule.lean` (5 decls std-3). **(a) THE TRANSPARENCY PROVED**: in-gate the
+gated witness slice equals the ungated composite on a nbhd (`gatedKernel_apply_of_mem` germ +
+the banked `pd_congr_of_eventuallyEq`). **(b) THE CHAIN RULE PROVED**: the composite factors
+DEFEQ through the C∞ manifold profile (radialCutoff·heatParametrix — the profile-C¹ "wall"
+never existed, it is C∞ free); the base-general banked `pd_comp` gives
+witnessFieldDeriv = ∑_c pd prof c (W z p)·pd(W-component) in ONE call.
+**(c) `witnessFieldDeriv_jointContinuousOn` = hcont1 EXACTLY** (joint on Icc ×ˢ K; no
+boundary weld — the in-gate carry hGate keeps the whole domain in-gate; ContinuousOn.congr
+welds onto the smooth sum; the J4-442 smooth core consumed internally).
+**THE PROVIDER RESIDUAL** = enumerated bookkeeping + geometry/gate carries
+(hW0/hmaps/hunit/hIFT, per-point hWdiff, hGate, hw) — all satisfiable, none deep.
+Dont-undercredit: pd_comp was base-general — the 8th brick running where a banked base-0
+lemma turned out general. THE DIFF-UNDER-∫ FAMILY'S FIRST ITEM (hQ1 + its full provider) IS
+GROUNDED AT THE WITNESS. raw 0; build 54s. NEXT: J4-444 = hGint (Sol (ii); frozenLeg_hFint
+did the same shape at base y — may be near-verbatim). NOT a₁ = R/6 (CONDITIONAL).
