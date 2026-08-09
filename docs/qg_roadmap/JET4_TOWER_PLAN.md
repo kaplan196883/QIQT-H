@@ -4953,3 +4953,21 @@ elaborates in ~50-100 min (~125 GB WS) — REMOVED per the <5min rule, recorded 
 named carry; the restructured lightweight transport = J4-472. The reduced module builds in
 29s — the wrap-up discipline vindicated (the agent had burned ~3.5h on the monolith before
 the orchestrator nudge). raw 0. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-472: the phase14 transport at the CORRECT granularity — 26s; the phase
+## tower has ZERO downstream consumers
+
+`QIQTH/Phase14Transport.lean` (1 decl std-3). **THE COST ANATOMY (recorded for all future
+phase-threading):** phase14 ≟ phase13 in ONE of ~85 binders, but a standalone Core-producing
+phase14 must APPLY the phase13 body to all ~85 giant-typed args, whose dependent-binder
+substitution recursively defeq-unfolds vanVleckGatedWitness/leviSeries/AmplitudeDerivativeDataOn
+— the 50-100min/125GB blow-up is the APPLICATION itself, intrinsic, not removable by
+structure-packs. `hRemainderDiag_reconstruct` relocates the integration to the
+hRemainderDiag ∃/∧ shape (touches NO 85-binder Π): 26s. **★ THE STRUCTURAL FINDING:**
+v2Census_phase14 is referenced NOWHERE downstream — the a₁ capstone consumes the bundled
+A1R6GateSlots package and applies the census body EXACTLY ONCE; the phase tower is an
+audit/census surface. The deferred monolith is content-free (its correctness was witnessed
+by the J4-471 type-check); the right inlining point = the A1R6GateSlots assembly.
+raw 0; build 26s module. NEXT: J4-473 = the assembly-point inline (or the honest defer per
+the zero-consumer finding). NOT a₁ = R/6 (CONDITIONAL).
