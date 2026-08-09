@@ -22787,6 +22787,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliceBoundO1.hessGaussFactor_coordPair_abs_le
 #print axioms QIQTH.SliceBoundO1.hessGauss_signed_slice_O1
 
+-- J4-501 (VanVleckTwoJet): the van-Vleck amplitude 2-jet D²u₀(0)=+(1/6)Ric — the
+-- POWER-FLIP layer, reducing the amplitude-Hessian wall to the SINGLE carried
+-- metric 2-jet. ⚠ AUDIT CORRECTION: VanVleckRadial is NOT const-curvature-only
+-- (that git-log title is a different commit) — it proves the GENERAL
+-- arbitrary-metric √det g 2-jet sqrtdet_directional_hessian_ricci: ∑vᶜvᵈ∂_c∂_d
+-- √det g(0)=−(1/3)Ric(v,v) under carried hg/hg0/hdg0/htr; the repo has a deep
+-- componentwise Curvature (1412 lines) + RNCExpansion √det-g tower. Mathlib has
+-- NO Jacobi/RNC/√det-g infra (that's why the repo builds curvature in a chart).
+-- invSqrt_pd_pd: ∂_c∂_d(J^{−1/2})(x)=−(1/2)·∂_c∂_d J(x) for smooth J, J(x)=1,
+-- ∂J(x)=0 (THE POWER FLIP, f'(1)=−1/2, one negative). invSqrt_directional_hessian_ricci:
+-- ∑vᶜvᵈ ∂_c∂_d u₀(0)=+(1/6)Ric(v,v). invSqrt_trace_hessian_scal: ∑_i ∂_i² u₀(0)
+-- =(1/6)Scal. SIGN GATE (explicit): −(1/2)·(−(1/3)Ric)=+(1/6)Ric — did NOT bank
+-- −(1/3) (√det g alone) nor +(1/12) (the Taylor coeff = ½·Hessian; delivers the
+-- Hessian CONTRACTION +(1/6)). GENERIC/algebraic (abstract scalar J + bilinear
+-- Ric, no census Π). REDUCTION: amplitude 2-jet ⟵ (this file) ⟵ √det g 2-jet
+-- −(1/3)Ric ⟵ metric 2-jet htr (the irreducible geometric theorem, Mathlib-absent,
+-- still carried; discharged only from the falsifiable normal-gauge rnc_htr_of_gauge).
+-- std-3 all three. NOT a₁=R/6 (the metric 2-jet remains the genuinely open input).
+#print axioms QIQTH.VanVleckTwoJet.invSqrt_pd_pd
+#print axioms QIQTH.VanVleckTwoJet.invSqrt_directional_hessian_ricci
+#print axioms QIQTH.VanVleckTwoJet.invSqrt_trace_hessian_scal
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
