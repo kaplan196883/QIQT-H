@@ -4729,3 +4729,19 @@ S1 herrHmin_gate · S2 the gate-restricted jets · S3 the Mqc sup · S4 hff/Bff 
 fixed-quantity far-field bound, NOT a false universal — → J4-457 derived from the G_τ
 decay) · S5 wiring. Dont-undercredit: comparisonDom2 + the S5b machinery reused verbatim.
 raw 0; build 54s. NEXT: J4-457 = FarFieldDecay (Bff derived). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-457: Bff DERIVED (honest O(1/τ)) — the hff carry ELIMINATED (phase 10)
+
+`QIQTH/FarFieldDecay.lean` (5+ decls std-3). THE DOMAIN/TAIL GATE: the far field guarantees
+only ‖z‖ > c√τ — the radius SCALES with the Gaussian width (z = √τ·w maps to a
+τ-independent tail), so NO fixed-R tail suppression; the controllable structure is the
+off-K VANISHING of the witness term (`witnessSecondXDeriv_offGate_eq_zero`), reached via
+the satisfiable hKr : K ⊆ ball 0 r (K compact). `farField_decay_bound`: Bff := ∫ farFieldDom
+DERIVED — the honest count: gradient O(τ^{-1/2}), mass O(1), **Hessian O(τ⁻¹) DOMINANT** ⟹
+Bff = O(1/τ), honestly WORSE than the gate's O(1/√τ) (off K the Hessian stands alone with
+no (ρ−1) smallness) — recorded not hidden; hff was a free carry so any finite Bff
+discharges it; a downstream-quality concern, not a soundness gap (the absorption → queued).
+The far-field sups hA1F/hA2F honestly carried (the data-bundle sups are on-collar-only).
+`hcomp_final4` + `slotInstantiation_phase10`. raw 0; build 52s.
+NEXT: J4-458 = (v) WALL-A INSTANTIATION (the last Sol-#20 item). NOT a₁ = R/6 (CONDITIONAL).
