@@ -22022,4 +22022,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WallAThreading.v2Census_phase2
 #print axioms QIQTH.WallAThreading.wallAThreaded_core
 
+-- ## ★ J4-460 (HInterGrounding): hInter GROUNDED — hAdom2cap the SOLE
+-- remaining block-B genuine carry
+-- THE GATE: PASS — hInter (MemInterchange) is an abbrev unfolding to
+-- EXACTLY the conclusion of the banked witness_MemInterchange engine
+-- (J4-256); the m-uniformity trap CLEARED (a per-(m,i,u) EQUALITY, not a
+-- series — per-m dominators admissible); quantifier order + base-0
+-- centering preserved. hInter_grounded (the engine route) +
+-- hInter_grounded_majorant (the W2-majorant route — the dominator triple
+-- discharged internally from hOn+hF). v2Census_phase3 = phase2 with
+-- hInter DROPPED and only hdiff added (phase2 already carried the
+-- engine's whole diff-under-∫ family redundantly — dont-undercredit:
+-- hInter was NEVER a raw wall, the engine was banked).
+-- Block-B = hAdom2cap ONLY. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HInterGrounding.hInter_grounded
+#print axioms QIQTH.HInterGrounding.hInter_grounded_majorant
+#print axioms QIQTH.HInterGrounding.v2Census_phase3
+
 end QIQTH.AxiomAudit

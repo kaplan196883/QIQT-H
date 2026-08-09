@@ -659,6 +659,7 @@ import QIQTH.GateFarFieldSplit
 import QIQTH.FarFieldDecay
 import QIQTH.WallAInstantiation
 import QIQTH.WallAThreading
+import QIQTH.HInterGrounding
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
