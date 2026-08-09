@@ -4820,3 +4820,17 @@ than J4-439). `hdiff_grounded` + `hdiff_grounded_reduced` (one level deeper ← 
 innerData_phase1). Pure wiring — the J4-426 second-order tower + the J4-397 engine were all
 banked. raw 0; build 62s. NEXT: J4-463 = InnerDataCensusThread (hInnerData → the reduced
 core inside the census, v2Census_phase6). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-463: hInnerData → the named atomic core (census phase 6)
+
+`QIQTH/InnerDataCensusThread.lean` (1 decl std-3). THE GATE: EXACT VERBATIM MATCH —
+innerData_phase2's output = phase5's hInnerData binder (same prefix/conjuncts/indexing/
+truncation/centre/kernels). `v2Census_phase6` supplies the bundle internally; the carry =
+the strictly-lighter hGateCore (7 named atoms: z-slice measurabilities · σ>0 · C₁ · C₂ ·
+C_L · znb · the gate dichotomy). **NO opaque diff-under-∫ bundle survives in the census
+surface.** THE SUP CONVERGENCE: AUDITED, DEFERRED — the grounded C₁/C_L theorems live in
+the chartAmp/baseKernelW presentation vs the census's witnessFieldDeriv/gaussDdim slots
+(base-0 matches; the FUNCTIONAL presentation differs — the bridges = J4-464, honestly
+deferred not fabricated). Pure substitution — the surface was one exact-call away.
+raw 0; build 74s. NEXT: J4-464 = PresentationBridges. NOT a₁ = R/6 (CONDITIONAL).
