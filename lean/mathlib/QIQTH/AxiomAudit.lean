@@ -22008,4 +22008,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WallAInstantiation.wallA_phase1
 #print axioms QIQTH.WallAInstantiation.wallA_ledger
 
+-- ## J4-459 (WallAThreading): the block-B surface THREADED — 6 members →
+-- 2 genuine carries + 3 satisfiable inputs + 2 scaffolds
+-- v2Census_phase2 = the v3-core cross-check with the six block-B binders
+-- supplied INTERNALLY from wallA_phase1's smaller input set (delegating
+-- to the already-transcribed v2Census_phase1 — the minimal correct move;
+-- the one impedance mismatch: hFdomW's ∃CF output vs the free wF/CF
+-- binders, resolved by obtain + wF := 2). THE BLOCK-B FINAL LEDGER:
+-- hInter + hAdom2cap (the genuine carries) · data/hSecBoxes/hBBoxes (the
+-- satisfiable envelope/box inputs) · hUT/hεU (group-(A) scaffolds).
+-- hFdomW/hSecCont/hBcont/hmeas2Lo all internal. std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.WallAThreading.v2Census_phase2
+#print axioms QIQTH.WallAThreading.wallAThreaded_core
+
 end QIQTH.AxiomAudit

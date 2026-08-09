@@ -658,6 +658,7 @@ import QIQTH.HerrHminCoercivity
 import QIQTH.GateFarFieldSplit
 import QIQTH.FarFieldDecay
 import QIQTH.WallAInstantiation
+import QIQTH.WallAThreading
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
