@@ -21857,4 +21857,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WeightedPairingHelper.profRate_integral
 #print axioms QIQTH.WeightedPairingHelper.perUCensus_phase8
 
+-- ## J4-452 (DHrefinedWitness): THE GATE CAUGHT ANOTHER — the
+-- single-coordinate hDHrefined UNSATISFIABLE; corrected two-term shape,
+-- the rate SURVIVES (census phase 9)
+-- THE VERDICT: the actual witness slope is a FULL CONTRACTION
+-- ⟨W z p, ∂ᵢW⟩/(2τ) — Cauchy-Schwarz gives a full-norm ‖z‖ moment, NOT
+-- a single coordinate (‖z‖ ≤ |z_i| is false); the J4-451 single-
+-- coordinate hDHrefined is RETRACTED. THE CORRECTED SATISFIABLE SHAPE:
+-- hDHrefined₂ = (CA/(2τ)·‖z‖ + CB)·G_{wA·τ} (two terms, single width).
+-- THE MASS-TERM SCALING SETTLED — NO τ⁻¹ BLOW-UP: the mass carries NO
+-- 1/(2τ); it pairs to a bounded τ⁰ contribution = √τ·τ^{-1/2} ≤
+-- √u·τ^{-1/2}, absorbed. The moment term: ‖z‖ ≤ ∑|zⱼ| + the banked
+-- centered pairing_moment_zero per coordinate ⟹ n·G_{a+b}(0)·(3/2)√h
+-- (Q inflated by n — legitimate, n fixed). normPairing_moment +
+-- profRate_inner_bound₂ + profRate_integral₂ + hGint_regrounded₂ +
+-- perUCensus_phase9: hProfRate rests on {hDHrefined₂, hFdomEvery,
+-- hProdMeas}. Dont-undercredit: ALL the moment/pairing/count
+-- infrastructure was banked — the lever is a re-assembly.
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.DHrefinedWitness.normPairing_moment
+#print axioms QIQTH.DHrefinedWitness.profRate_inner_bound₂
+#print axioms QIQTH.DHrefinedWitness.profRate_integral₂
+#print axioms QIQTH.DHrefinedWitness.hGint_regrounded₂
+#print axioms QIQTH.DHrefinedWitness.perUCensus_phase9
+
 end QIQTH.AxiomAudit
