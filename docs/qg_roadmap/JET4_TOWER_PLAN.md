@@ -4907,3 +4907,16 @@ FULLY OFF THE CENSUS SURFACE** (J4-467/468); the residue = the slot-instantiatio
 the scalar hτc + the unchanged census. raw 0; build 51s.
 NEXT: J4-469 = the box census (hSecBoxes/hBBoxes ← the banked box facts).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-469: the box families OFF (phase 12)
+
+`QIQTH/BoxCensusGrounding.lean` (4 decls std-3 + axiom-free ledger). **hBBoxes (Levi):
+GENUINE WIRE** — the demanded box shape = EXACTLY leviSeries_boxContOn's conclusion, fed
+from the already-present phase-11 LeviSeriesLocalData; residue = the per-k termwise box
+carry htermBox (strictly lower). **hSecBoxes (witness): HONEST REDUCTION** —
+witnessSecondXDeriv is defeq the pd∘pd diagonal at the FIXED centre 0; the J4-442 pd-pd
+lead keys the VARYING base of the UNGATED composite (a genuine gate + base-keying mismatch,
+no transport) — reduced by defeq to the named atom hpd2diag, NOT discharged.
+`v2Census_phase12` = phase11 minus the box families plus {hpd2diag, htermBox}.
+raw 0; build 50s. NEXT: J4-470 = hProvP (the diagonal provider). NOT a₁ = R/6 (CONDITIONAL).
