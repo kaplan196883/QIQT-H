@@ -22893,6 +22893,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TransportEqZero.metricRadial_eq_radialDeriv_of_gaussLemma
 #print axioms QIQTH.TransportEqZero.radialInput_flat_witness
 
+-- J4-506 (TransportEqOne): the k=1 transport equation hT1 REDUCED to the scalar
+-- radial input hRad1 — the fast MECHANICAL MIRROR of J4-505 (crossGrad_eq_metricRadial
+-- is GENERIC in u, so C(u₁)=−(1/2t)·G·R_g(u₁) verbatim). hT1_of_radial1: hT1
+-- (t·(𝒢·u₁−2C(u₁))+G·(u₁−Δu₀)=0) discharged from hRad1 (t·(𝒢·u₁+(1/t)·G·R_g(u₁))+
+-- G·(u₁−Δu₀)=0) via `rw [transportOffDiag_eq_radial]`. The k=1 SOURCE G·(u₁−Δu₀)
+-- rides along UNTOUCHED — needs NO extra identity. residual_factorization_of_radial01:
+-- the residual factorization = −t·G·Δu₁ MODULO BOTH {hRad0, hRad1} (composes
+-- hT0_of_radial + hT1_of_radial1). radialInput1_flat_witness: hRad1 inhabited (flat
+-- u₀=1,u₁=0, ∀x ∀t>0). GATE: genuine ∀x off-diagonal (carries metricRadial gi u₁ x,
+-- the full double sum), NOT single-point. std-3 all three. ⚠ STRUCTURAL: the residual
+-- factorization is now a theorem MODULO exactly {hRad0, hRad1} — BOTH the same
+-- coordinate-Gauss-lemma family Σᵢgⁱʲxᵢ=xʲ (STRETCH-#4). NOT a₁=R/6 (isolates the
+-- gap to the ONE shared Gauss lemma + the volume identity; does NOT close them).
+#print axioms QIQTH.TransportEqOne.hT1_of_radial1
+#print axioms QIQTH.TransportEqOne.residual_factorization_of_radial01
+#print axioms QIQTH.TransportEqOne.radialInput1_flat_witness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

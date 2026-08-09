@@ -1510,3 +1510,7 @@ import QIQTH.ResidualFactorization
 -- via banked flat-Gaussian gradient calculus: cross-gradient `C(u)=−(1/2t)·G·R_g(u)`, `hT0` discharged
 -- from radial input `hRad`, Gauss-lemma input isolated. std-3, hRad CARRIED, a₁=R/6 CONDITIONAL.
 import QIQTH.TransportEqZero
+-- J4-506: REDUCTION of the k=1 van-Vleck transport eqn `hT1` (`(𝒯+1)u₁=Δu₀`) to a scalar radial
+-- equation `hRad1` via the SAME generic cross-gradient reduction; `hT1` discharged from `hRad1`,
+-- factorization now modulo BOTH {hRad0,hRad1} (same Gauss-lemma family). std-3, hRad1 CARRIED.
+import QIQTH.TransportEqOne
