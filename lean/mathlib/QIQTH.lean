@@ -692,6 +692,7 @@ import QIQTH.Hid2Germ
 import QIQTH.C2AggregatorPhase6
 import QIQTH.FarFieldMomentOrder
 import QIQTH.OnCollarMomentOrder
+import QIQTH.RemainderAssembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

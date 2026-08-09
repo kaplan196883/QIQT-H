@@ -22644,6 +22644,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OnCollarMomentOrder.onCollarDom_setIntegral_le
 #print axioms QIQTH.OnCollarMomentOrder.onCollarMoment_order
 
+-- J4-493 (RemainderAssembly): the REMAINDER-ASSEMBLY CAPSTONE — both τ-order
+-- legs combined via a `collar r₀ ⊔ (collar r₀)ᶜ` split into a SINGLE O(1/τ)
+-- bound on the full-space remainder integral. farFieldDom_setIntegral_le = the
+-- far-field mirror of onCollarDom_setIntegral_le (the bound over any measurable
+-- domain). remainderIntegral_order: for a generic integrand f dominated
+-- pointwise by onCollarDom on the collar AND by farFieldDom off it,
+-- |∫ f| ≤ (on-collar O(1/τ)) + (far-field O(1/τ)) — via integral_add_compl
+-- (exhaustive split, both pieces integrable) + norm_integral_le_integral_norm +
+-- integral_mono_ae + the two banked setIntegral bounds. ⚠ HONEST: this is the
+-- FAITHFUL PROXY (generic dominated f), NOT yet the concrete aggregator object
+-- IchartResidual − hessGaussFactor·qc (the two dominations live in separate
+-- files SliverBoundOnCollar / FarFieldDecay; hcomp_final4 already wires the far
+-- leg). The full heat-trace remainder is τ-order-controlled as one O(1/τ):
+-- on-collar by (I1) hReach, far field by the global Gaussian remainder. std-3
+-- both. NOT a₁ = R/6 (the leading O(1) coefficient + the R/6 identification are
+-- BEYOND any τ-order bound; still conditional on I1 + convergence trio + wiring).
+#print axioms QIQTH.RemainderAssembly.farFieldDom_setIntegral_le
+#print axioms QIQTH.RemainderAssembly.remainderIntegral_order
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
