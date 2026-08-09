@@ -4893,3 +4893,17 @@ the PRODUCER is J4-402 — which is what fires here. `hslot_grounded` + `v2Censu
 (hslot removed; the J4-402 per-(τ,s) slot carries + ampData/qcF/IchartF swapped in — the
 already-enumerated campaign surface). raw 0; build 77s.
 NEXT: J4-468 = hcap + hEndpoint (both banked-satisfiable). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-468: hcap + hEndpoint GROUNDED — the moment-wall triple FULLY OFF (phase 11)
+
+`QIQTH/HcapEndpointGrounding.lean` (3 decls std-3 + axiom-free projector). **hcap**: the
+per-(m,u,s) window cap COLLAPSES to ONE scalar hτc : epsSeq 0 ≤ τc (s > u−εₘ ⟹ u−s < εₘ ≤
+ε₀ via epsSeq_antitone; m-INDEPENDENT — the wall-A fixed-endpoint discipline). **hEndpoint**:
+ZERO new residue — from the ALREADY-PRESENT hAzero carry (the τ=0 witness vanishes
+identically ⟹ pd_zero_fun ⟹ the integrand is 0 pointwise — the Sol endpoint trap avoided,
+nothing forced). `v2Census_phase11`. **THE MOMENT-WALL TRIPLE hslot/hcap/hEndpoint IS NOW
+FULLY OFF THE CENSUS SURFACE** (J4-467/468); the residue = the slot-instantiation carries +
+the scalar hτc + the unchanged census. raw 0; build 51s.
+NEXT: J4-469 = the box census (hSecBoxes/hBBoxes ← the banked box facts).
+NOT a₁ = R/6 (CONDITIONAL).
