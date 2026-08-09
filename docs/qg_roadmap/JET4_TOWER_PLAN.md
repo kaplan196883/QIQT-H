@@ -4638,3 +4638,20 @@ hLeviJoint, hDHrefined, hProdMeas}. Dont-undercredit: the pairing INTEGRAL was b
 convolution semigroup); the new content = the POINTWISE identity carrying the moment.
 raw 0; build 75s. NEXT: J4-452 = DHrefinedWitness (the last substantive carry; its own gate:
 the θ-centered parametrix slope vs the 0-centered demanded shape). NOT a₁ = R/6.
+
+---
+## J4-452: THE GATE CAUGHT ANOTHER — the two-term hDHrefined₂, the rate SURVIVES (phase 9)
+
+`QIQTH/DHrefinedWitness.lean` (5 decls std-3). **THE VERDICT:** the actual witness slope is
+a FULL CONTRACTION ⟨W z p, ∂ᵢW⟩/(2τ) — Cauchy–Schwarz gives a full-norm ‖z‖ moment; the
+J4-451 single-coordinate hDHrefined is RETRACTED as unsatisfiable (‖z‖ ≤ |z_i| is false).
+**THE CORRECTED SHAPE:** hDHrefined₂ = (CA/(2τ)·‖z‖ + CB)·G_{wA·τ}. **THE MASS-TERM SCALING
+SETTLED — NO τ⁻¹:** the mass carries no 1/(2τ); it pairs (gaussDdim_pairing_integral +
+antitone) to a bounded τ⁰ = √τ·τ^{-1/2} ≤ √u·τ^{-1/2}, absorbed. The moment: ‖z‖ ≤ ∑|zⱼ| +
+the banked centered pairing per coordinate ⟹ n·G_{a+b}(0)·(3/2)√h (Q inflated by n — n
+fixed, legitimate). `normPairing_moment` + `profRate_inner_bound₂` + `profRate_integral₂` +
+`hGint_regrounded₂` + `perUCensus_phase9`: hProfRate = {hDHrefined₂, hFdomEvery, hProdMeas}.
+Dont-undercredit: ALL the moment/pairing/count infrastructure was banked — pure re-assembly.
+raw 0; build 57s. NEXT: J4-453 = hProdMeas discharge + the hDHrefined₂ witness derivation
+(the contraction-matched shape = the crude envelope's proof pattern one refinement up).
+NOT a₁ = R/6 (CONDITIONAL).
