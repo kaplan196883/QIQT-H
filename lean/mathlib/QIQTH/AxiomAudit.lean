@@ -23017,6 +23017,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DaLimCurvedGauge.confMetric_second_jet_ne_zero
 #print axioms QIQTH.DaLimCurvedGauge.curved_gauge_inhabited
 
+-- J4-514 (LayerAFactorization): the Layer-A ON-GATE FACTORIZATION gateway (toward
+-- the concrete CoV that discharges hcov for curved a₁). layerA_on_gate_factorization
+-- (re-export of the banked witness_zero_eq_gauss_mul_amp): vanVleckGatedWitness … τ 0 z
+-- = gaussDdim τ (uniformInverseChart g gi hC hK z 0)·chartFieldAmp … τ z 0 for z∈K,
+-- 0∈S z. chartFieldAmp_origin_value: chartFieldAmp … τ 0 0 = 1 + transportCoeff(…) 1 0·τ
+-- (needs 0∈K, 0<a<b, det(g 0)=1). chartFieldAmp_origin_tendsto_one: → 1 as τ→0⁺.
+-- layerA_witness_origin_factor: vanVleckGatedWitness … τ 0 0 = gaussDdim τ 0·(1+u₁(0)·τ).
+-- ⚠ ORIGIN-VALUE=1 needs ONLY det(g 0)=1 (curved-safe via vanVleck(0)=1=(√det g(0))⁻¹)
+-- + W₀ 0=0 + radialCutoff(0)=1 + u₀(0)=1 — NOT the CoV Jacobian, NOT hframeK. The
+-- Gaussian-phase check is Layer-B not Layer-A (at z=0, W₀ 0=0 ⟹ |W₀ 0|²=0=|0|²
+-- trivially; the banked chartW0_rncRadialSq_error is a TWO-SIDED near-isometry squeeze
+-- = the Layer-B domination input). GATE: hgdet0_curved_satisfiable exhibits a
+-- transvection det=1 but ≠1 (n≥2) ⟹ det-1 is strictly weaker than flat-at-origin;
+-- with chartFieldAmp_origin_value g-generic (no hframeK) the normalization is
+-- genuinely curved-inhabited. std-3 all six. NOT a₁=R/6 (a de-risking gateway;
+-- confirms the origin-normalization is NOT the obstruction + curved-safe; the
+-- Layer-B CoV bundle [M1–M4, J(0)=1, φ=radialCutoff/J, the phase domination] still
+-- stands between the banked hcov/φ-interface and a curved-satisfiable mass limit).
+#print axioms QIQTH.LayerAFactorization.chartFieldAmp_origin_value
+#print axioms QIQTH.LayerAFactorization.chartFieldAmp_origin_tendsto_one
+#print axioms QIQTH.LayerAFactorization.layerA_witness_origin_factor
+#print axioms QIQTH.LayerAFactorization.hgdet0_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

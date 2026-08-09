@@ -1545,3 +1545,9 @@ import QIQTH.MassChartBridge
 -- satisfies {hg0,hdg0,hinvF} yet has ∂²g₀₀(0)=2≠0, so the decoupled antecedent is curved-satisfiable
 -- (NOT vacuous, NOT secretly flat). NOT a₁=R/6. std-3.
 import QIQTH.DaLimCurvedGauge
+
+-- J4-514: Layer-A on-gate factorization — vanVleckGatedWitness τ 0 z factors as
+-- gaussDdim τ (W₀ z)·chartFieldAmp; the amplitude origin value normalizes to
+-- exactly 1 as τ→0⁺ (needs only det(g 0)=1, curved-safe). The de-risking gateway
+-- for the Layer-B change-of-variables. std-3.
+import QIQTH.LayerAFactorization
