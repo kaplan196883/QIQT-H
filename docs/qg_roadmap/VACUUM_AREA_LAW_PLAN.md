@@ -184,3 +184,34 @@ entropy. Nonminimal scalars, gauge fields, edge modes, contact terms need extra 
 This file plans; it claims nothing proven. The area-SCALING remains a CARRIED input until M-Θ (at
 least) lands. Nothing downstream may treat `S ∝ A_geom` as discharged. NOT QG; not a claim that the
 physical vacuum is holographic beyond the free-field leading-area result this campaign targets.
+
+---
+
+## 7. CAMPAIGN STATUS (2026-08-10) — VACAREA-1…5 landed; single-session bricks EXHAUSTED; area coefficient = the multi-session wall
+
+An autonomous loop ground the tractable rungs of Route 1, one green `[AF]` std-3 brick per iteration
+(all pushed, `#print axioms`-pinned std-3, no `sorry`, no new axiom), in
+`lean/mathlib/QIQTH/VacuumAreaLaw.lean` (`namespace QIQTH.VacuumAreaLaw`):
+
+| brick | commit | what landed |
+|---|---|---|
+| VACAREA-1 | `2c6cc6c9` | finite Gaussian foundation: regulated `K_ε=m²−Δ_ε`, positivity, vacuum covariances `X=½K^{−1/2}`,`P=½K^{1/2}`, pure-state CCR `X·P=¼`, reduced symplectic spectrum `= spec √(X_Ω P_Ω)`, `redEntropy = Σ gaussModeEntropy(ν_j)` |
+| VACAREA-2 | `e04102fd` | the reduced **Heisenberg floor** `½ ≤ ν_j` (`redSympEig_ge_half`) via twice-Schur `(X_Ω)⁻¹ ⪯ (X⁻¹)_Ω`; `redEntropy_nonneg'` unconditional |
+| VACAREA-3 | `e6efaebd` | the massive **gapped Loewner window** `m²·1 ⪯ K_ε ⪯ (m²+4/ε²)·1` (operator-norm-free cyclic-shift factorization); clean checkpoint at the CFC-sqrt-over-ℝ wall |
+| VACAREA-4 | `b54c6498` | the **real-Hermitian spectral-order layer**: `loewner_of_eigenvalues_ge/le`, `eigenvalues_sqrt` (`eig(√A)=√eig A`); restored `m_le_sqrtK`,`sqrtK_le` |
+| VACAREA-5 | `33e6e62e` | the **inverse Loewner bound** `loewner_inv_le` + the full cap chain → **`redEntropy_le`**: the volume-compatible upper bound `S(ρ_Ω) ≤ \|Ω\|·gaussModeEntropy(ν_max)` |
+
+**Net:** finite Gaussian foundation + the **physicality cap** `½ ≤ ν_j ≤ ν_max` + the
+**volume-compatible entropy upper bound**, all axiom-free. Reusable Mathlib-gap lemmas thrown off:
+real-Hermitian Loewner ↔ eigenvalue bounds (both directions), `eig(√A)=√eig A`, and the inverse
+Loewner bound over ℝ matrices.
+
+**⚠ NOT the area law.** `redEntropy_le` bounds entropy by the *volume* (site count); no area lower
+bound, no surface coefficient. `S ∝ A_geom` remains the carried input.
+
+**Remaining wall (single-session bricks exhausted):** the area coefficient — M-Θ (the `Θ(A/ε^{d−2})`
+two-sided bound) and M-σ (the surface density) — is the **multi-session wall** (Sol-confirmed):
+dimension-uniform quasi-local Green-function decay `|K^{±1/2}(x,y)| ≤ C e^{−c|x−y|}`, periodic-distance
+boundary summation, Schatten control of the symplectic defect, and planar surface-tension `σ₀(n)`
+finiteness / IR-integrability (§3-C/§3-D). Needs an explicit scoped multi-session commission (M-Θ
+upper bound first), not more single-session bricks. **Campaign checkpointed here.**
