@@ -5156,3 +5156,25 @@ two expRho reachability guards = the price of the C²-at-v bridge, reconciled in
 ⚠ NOTE: a sibling VACAREA-1 job now shares the working tree (its VacuumAreaLaw campaign);
 banking uses explicit paths only. raw 0; build 38s module.
 NEXT: J4-484 = Hfwd2Weld (THE WELD — the wall falls). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★★ J4-484 (c512a563): THE CONVERGENT WALL — a PROVED CHAIN gated by the ONE
+## (I1) reachability input
+
+`QIQTH/Hfwd2Weld.lean` (2 decls std-3). `uniformFlowExp_forward2_continuousOn_of_reach` =
+THE WELD: the z₀-anchored triangle (the J4-435 first-order weld one order up) —
+forward2_velocitySlot (velocity) + uniformFlowExp_fderiv2_base_modulus (base, Lipschitz in
+z), abel'd → hFwd2 on K ×ˢ ball 0 uniformFlowRadius; `chartSecondJet_continuousOn_of_reach`
+feeds it to chartSecondJet_continuousOn_of_forward2 ⟹ the chart-Hessian base continuity.
+**THE ENTIRE SECOND-JET ARCHITECTURE (velocity + base → hFwd2 → chart Hessian) IS NOW A
+PROVED CHAIN** — no second-variation ODE / regularity work remains; both the htermBox
+(hWc2cont) and the C₂ (hcont2) consumers are served (modulo the operator⇄pd bridge).
+**⚠ THE ONE REMAINING GATE (I1):** hReach = ∃ρ>0 ∀q∈K, ρ ≤ expRho q — NOT provable in-repo
+(expRho is an irreducible Classical.choose with no banked continuity/lsc/uniform lower
+bound; uniformFlowRadius is a separate .choose); this is the repo-WIDE
+uniform-injectivity-radius carry (hr_lt across CommonNondegRadius/UniformExpSecondJet/…,
+labelled "UNPROVABLE" in UniformFlowNondeg). Carried honestly at the hFwd2 boundary.
+Verified std-3 in isolation (lake build QIQTH.Hfwd2Weld green). ⚠ THE WHOLE-LIBRARY BUDGET
+SWEEP is transiently RED — blocked by the SIBLING VACAREA-1 job's uncommitted WIP
+(VacuumAreaLaw.lean:348 type error + sorries), NOT by this brick; re-run once the sibling's
+file goes green. NEXT: J4-485 = ExpRhoLSC (interrogate (I1)). NOT a₁ = R/6 (CONDITIONAL).
