@@ -4920,3 +4920,18 @@ lead keys the VARYING base of the UNGATED composite (a genuine gate + base-keyin
 no transport) — reduced by defeq to the named atom hpd2diag, NOT discharged.
 `v2Census_phase12` = phase11 minus the box families plus {hpd2diag, htermBox}.
 raw 0; build 50s. NEXT: J4-470 = hProvP (the diagonal provider). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-470: the diagonal provider 7 → 4 (phase 13)
+
+`QIQTH/HProvGrounding.lean` (4+ decls std-3 + axiom-free projector). THE LEG MAP: hProvP =
+the 7-leg first-order diff-under-∫ bundle at the DIAGONAL window [0,u] (heat-time u, no −εₘ
+cap). DISCHARGED: legs 2/4 (Fubini on the window-u joints) + leg 7 (the base-general
+innerZ_line_hasDerivAt + the reusable FrozenHdiffLeg family at moving base x). THE HONEST
+REMAINDER: snbx + **hFint (THE GENUINE CARRY — the diagonal window reaches the singular
+endpoint τ→0; the capped-ceiling engine needs a positive lower cap and does NOT apply)** +
+the dominator triple + the z-level core. M-uniformity VACUOUS (no m on the diagonal).
+THE J4-444 "diagonal ≠ frozen" claim now EXPLAINED: same engines, window/base-general — the
+only genuine obstruction is the singular endpoint blocking the integrability legs.
+`v2Census_phase13`. raw 0; build ~50s. NEXT: J4-471 = hFint via the bulk⊕sliver split (the
+J4-444/445 hGint pattern at the witness-value order). NOT a₁ = R/6 (CONDITIONAL).
