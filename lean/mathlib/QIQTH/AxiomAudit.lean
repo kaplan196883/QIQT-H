@@ -21832,4 +21832,29 @@ namespace QIQTH.AxiomAudit
 -- gate boundary made explicit). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.LeviCapWitness.leviCap_on_compactBox
 
+-- ## ★★ J4-451 (WeightedPairingHelper): THE SOL #21 RE-GROUNDING COMPLETE
+-- — the retracted atoms GONE (census phase 8)
+-- THE CENTERING GATE: VOID for this census — both the hDHrefined and the
+-- hFdomEvery Gaussians are centered at 0 (x = y = 0 ⟹ the weighted mean
+-- c = 0, the cross term vanishes); no corrected shape needed.
+-- LANDED IN FULL: heatKernel1D_prod_to_single (the 1-D completed square)
+-- + gaussDdim_prod_to_single (the n-D coordinate-wise lift: G_a(z−x)·
+-- G_b(z−y) = G_{a+b}(x−y)·G_h(z−c)) + weighted_pairing_helper (the Sol
+-- inequality, general centers) + profRate_integral (the EXACT census
+-- hProfRate re-grounded: a+b ≥ min(wA,wF)·u BOUNDED — the s→0 peak
+-- divergence ABSORBED UNDER THE INTEGRAL; √h ≤ √(wA·τ); τ⁻¹·√τ = τ^{-1/2};
+-- Q m-free) + hGint_regrounded + perUCensus_phase8.
+-- THE RE-GROUNDING LEDGER: hLeviCap/hProdPtwise/hProdMoment (the J4-450
+-- retracted atoms) are GONE; the hGint chain rests ONLY on the standing
+-- centered census families {hFzero, hWFDdomCapped, hFdomEvery, hGintMeas,
+-- hWFDjoint, hLeviJoint, hDHrefined, hProdMeas}. Dont-undercredit: the
+-- pairing INTEGRAL was banked (gaussDdim_pairing_integral ← the
+-- convolution semigroup); this brick adds the POINTWISE identity carrying
+-- the moment. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.WeightedPairingHelper.gaussDdim_prod_to_single
+#print axioms QIQTH.WeightedPairingHelper.weighted_pairing_helper
+#print axioms QIQTH.WeightedPairingHelper.profRate_inner_bound
+#print axioms QIQTH.WeightedPairingHelper.profRate_integral
+#print axioms QIQTH.WeightedPairingHelper.perUCensus_phase8
+
 end QIQTH.AxiomAudit

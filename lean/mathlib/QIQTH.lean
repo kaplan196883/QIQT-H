@@ -650,6 +650,7 @@ import QIQTH.ProfRateTheorem
 import QIQTH.ProdMomentWitness
 import QIQTH.ProdPtwiseWitness
 import QIQTH.LeviCapWitness
+import QIQTH.WeightedPairingHelper
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
