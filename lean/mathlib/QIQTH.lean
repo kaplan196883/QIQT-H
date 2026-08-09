@@ -660,6 +660,7 @@ import QIQTH.FarFieldDecay
 import QIQTH.WallAInstantiation
 import QIQTH.WallAThreading
 import QIQTH.HInterGrounding
+import QIQTH.HAdom2capGrounding
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

@@ -22039,4 +22039,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HInterGrounding.hInter_grounded_majorant
 #print axioms QIQTH.HInterGrounding.v2Census_phase3
 
+-- ## ★★ J4-461 (HAdom2capGrounding): BLOCK-B CLOSED TO ZERO GENUINE ATOMS
+-- THE GATE: the supplier is hAdom2_capped_family_of_crude — VERBATIM
+-- (same kernel, same Gaussian width wA2 with NO bridge, same lower-capped
+-- range, per-m constant CA2c := Ccrude·εₘ⁻¹; per-m ADMISSIBLE because
+-- hAdom2cap is per-m — the τ-uniform whole-time version is generally
+-- false). The coercive-E2 candidate REJECTED (wrong kernel, per-point jet
+-- data, width 2τ, 1/τ² inside the constants). The bridge input = the
+-- banked crude envelope (WideAmplitudePackage.hSecond + the all-z
+-- second_global_of_package lift). hAdom2cap_grounded + v2Census_phase4.
+-- ★ BOTH former block-B genuine carries grounded (hInter J4-460 +
+-- hAdom2cap here): THE WALL-A LEG RESTS ON SATISFIABLE ENVELOPE/BOX/
+-- SCAFFOLD INPUTS ONLY {hcrude, data, hSecBoxes, hBBoxes, hUT, hεU}.
+-- Closing block-B closes nothing deeper — the convergence-trio content
+-- lives outside it. Pure assembly. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HAdom2capGrounding.hAdom2cap_grounded
+#print axioms QIQTH.HAdom2capGrounding.v2Census_phase4
+#print axioms QIQTH.HAdom2capGrounding.hAdom2capGrounded_core
+
 end QIQTH.AxiomAudit
