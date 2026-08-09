@@ -4986,3 +4986,19 @@ the slot-orientation trap caught by reading the headers, not trusting the queue 
 LeviMTest's own M0 note documents the x-slot need). `box_atoms_residuals`: hIterBase +
 hIterStep replace htermBox; hPd2Full hosts hpd2diag. raw 0; build 47s.
 NEXT: J4-474 = the iterE rungs (hIterBase/hIterStep). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-474: the iterE rungs grounded — the htermBox chain closed to the x-slot
+## parts + the rung dominations
+
+`QIQTH/IterRungGrounding.lean` (4 decls; std-3 + axiom-free ledger). **THE GATES:**
+(hIterBase) the SLOT GATE — the census base is the x-slot with VARYING Laplacian base p.2;
+the banked N2 is the z-slot with the FIXED base 0 (what makes N3's metric factors constants)
+— no transport; the N2 ROUTE re-oriented honestly to hDerivX + hLapX. (hIterStep) a GENUINE
+WIRE — the banked outer engine produces the succ rung from the per-rung Ioc 0 1 domination
+(the IH not needed — a stronger step); hDom honestly carried per rung (the IterEContinuity
+R-dom residual, verified against the banked census dominations — different shape).
+`htermBox_chain_final`: the whole ∀k family from the deepest carries.
+`rung_residuals`: hDerivX · hLapX (VARYING-base — harder than N3) · hDom · hRestBox.
+raw 0; build 47s. NEXT: J4-475 = XSlotBaseParts (hDerivX/hLapX with the varying-p.2
+metric/Christoffel continuity N3 drops). NOT a₁ = R/6 (CONDITIONAL).
