@@ -22227,4 +22227,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFintDiagGrounding.pairing_intervalIntegrable_fullWindow
 #print axioms QIQTH.HFintDiagGrounding.hFint_diag_grounded
 
+-- ## ★ J4-472 (Phase14Transport): the transport at the CORRECT
+-- granularity — the phase14 content landed in 26s
+-- THE ANATOMY OF THE MONOLITH'S COST (recorded): phase14 differs from
+-- phase13 in ONE of ~85 binders; a standalone Core-producing phase14
+-- must apply the phase13 body to all ~85 giant-typed args, whose
+-- dependent-binder substitution recursively defeq-unfolds the witness/
+-- Levi/amplitude types — the 50-100min/125GB blow-up is the APPLICATION
+-- itself, intrinsic, not removable by structure-packs.
+-- hRemainderDiag_reconstruct relocates the integration to the
+-- hRemainderDiag ∃/∧ shape (touches NO 85-binder Π): splices
+-- hFint_diag_grounded as the second conjunct, everything else verbatim —
+-- 26s. ★ THE STRUCTURAL FINDING: v2Census_phase14 has ZERO downstream
+-- consumers — the a₁ capstone consumes the A1R6GateSlots package and
+-- applies the census body ONCE; the phase tower is an audit surface.
+-- The deferred monolith is content-free (its correctness was witnessed
+-- by the J4-471 type-check); the right inlining point = the
+-- A1R6GateSlots assembly (J4-473). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.Phase14Transport.hRemainderDiag_reconstruct
+
 end QIQTH.AxiomAudit
