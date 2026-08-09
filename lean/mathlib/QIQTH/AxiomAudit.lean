@@ -22487,6 +22487,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Hfwd2Weld.uniformFlowExp_forward2_continuousOn_of_reach
 #print axioms QIQTH.Hfwd2Weld.chartSecondJet_continuousOn_of_reach
 
+-- ## J4-485 (ExpRhoReachability): THE (I1) VERDICT = GENUINE GEOMETRIC INPUT
+-- The interrogation of hReach (∃ρ>0 ∀q∈K, ρ ≤ expRho q): expRho is
+-- Classical.choose of a downward-closed radius set — an ARBITRARY
+-- admissible radius, NOT the maximal/sup one — marked irreducible; the
+-- wall's hReach needs the swap ∀q∃ρ ↝ ∃ρ∀q over compact K = positive
+-- compact inf = lsc of expRho, which for an arbitrary non-maximal .choose
+-- GENUINELY FAILS (irreducible forbids recovering any property beyond
+-- expRho_pos). The geometric fact is TRUE-in-principle (injectivity
+-- radius of a smooth spray is lsc) but its discharge needs a maximal-
+-- radius RECAST + the injectivity-radius-lsc theorem (ABSENT from Mathlib)
+-- + domination of the separate opaque uniformFlowRadius — not a
+-- loop-brick. VERDICT: GENUINE INPUT — hReach joins the a₁ labelled
+-- geometric-input list (the option-(b) precedent), carried until an
+-- injectivity-radius-lsc campaign discharges it. LANDED: the order-swap
+-- diagnosis (pointwise reachability is FREE; only the swap is hard) + the
+-- standard-form interface chartSecondJet_continuousOn_of_uniform_
+-- injectivity_radius (naming the two sub-obstructions precisely).
+-- Dont-undercredit: the gap was repo-wide known (UniformFlowNondeg
+-- "UNPROVABLE", CommonNondegRadius "NOT ≤ expRho in general") — this
+-- brick audits it to a firm verdict, not a discovery. std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.ExpRhoReachability.expRho_reachability_pointwise
+#print axioms QIQTH.ExpRhoReachability.chartSecondJet_continuousOn_of_uniform_injectivity_radius
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
@@ -22497,5 +22521,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VacuumAreaLaw.couplingK_posDef
 #print axioms QIQTH.VacuumAreaLaw.Xcov_mul_Pcov
 #print axioms QIQTH.VacuumAreaLaw.redEntropy_nonneg
+
+-- VACAREA-2: the reduced Heisenberg floor `ν_j ≥ ½` is now DERIVED (Sol's
+-- twice-Schur route via `(X_Ω)⁻¹ ⪯ (X⁻¹)_Ω`), discharging the carried `hfloor`
+-- so the reduced entropy is UNCONDITIONALLY nonnegative. Still finite Gaussian
+-- INFRASTRUCTURE — NOT the area law. Expected std-3.
+#print axioms QIQTH.VacuumAreaLaw.redSympEig_ge_half
+#print axioms QIQTH.VacuumAreaLaw.redEntropy_nonneg'
 
 end QIQTH.AxiomAudit

@@ -56,6 +56,27 @@ namespace QIQTH.VacuumAreaLaw
 open Matrix
 open scoped MatrixOrder
 
+/-! ## §0 — eigenvalue lower bounds from the Loewner order (a small reusable lemma) -/
+
+/-- **A Loewner lower bound `c·1 ⪯ A` forces every eigenvalue of `A` above `c`.**  For a Hermitian
+    real matrix `A`, if `A − c·1` is positive-semidefinite then each eigenvalue is `≥ c`.  Proof:
+    test the PSD matrix `A − c·1` against a unit eigenvector `v` of `A` (eigenvalue `λ`), giving
+    `0 ≤ (λ − c)·‖v‖² = λ − c`. -/
+theorem eigenvalue_lb {ι : Type*} [Fintype ι] [DecidableEq ι] {A : Matrix ι ι ℝ}
+    (hA : A.IsHermitian) {c : ℝ} (h : (A - c • (1 : Matrix ι ι ℝ)).PosSemidef) (j : ι) :
+    c ≤ hA.eigenvalues j := by
+  have hmv : (A - c • (1 : Matrix ι ι ℝ)) *ᵥ (⇑(hA.eigenvectorBasis j))
+      = (hA.eigenvalues j - c) • (⇑(hA.eigenvectorBasis j)) := by
+    rw [Matrix.sub_mulVec, hA.mulVec_eigenvectorBasis j, Matrix.smul_mulVec,
+      Matrix.one_mulVec, sub_smul]
+  have hnn := h.dotProduct_mulVec_nonneg (⇑(hA.eigenvectorBasis j))
+  rw [hmv, dotProduct_smul, smul_eq_mul] at hnn
+  have hnorm : star (⇑(hA.eigenvectorBasis j) : ι → ℝ) ⬝ᵥ (⇑(hA.eigenvectorBasis j)) = 1 := by
+    rw [dotProduct_comm, ← EuclideanSpace.inner_eq_star_dotProduct,
+      real_inner_self_eq_norm_sq, hA.eigenvectorBasis.orthonormal.1 j, one_pow]
+  rw [hnorm, mul_one] at hnn
+  linarith
+
 /-! ## §3-A.1 — the regulated coupling `K_ε = m² − Δ_ε` on a periodic chain -/
 
 /-- The (periodic) forward-difference operator scaled by `ε⁻¹`:
@@ -147,6 +168,20 @@ theorem Pcov_mul_Xcov (ε m : ℝ) (n : ℕ) (hm : 0 < m) :
   simp only [Xcov, Pcov, Matrix.smul_mul, Matrix.mul_smul, smul_smul, hinv]
   norm_num
 
+/-- **The momentum covariance is `¼` of the inverse position covariance**, `P = ¼·X⁻¹`.  Immediate
+    from the saturated product `X·P = ¼·1` and invertibility of `X`.  This is the algebraic pivot for
+    the reduced Heisenberg floor: it recasts the reduced-state uncertainty as a statement purely about
+    principal submatrices of `X` and `X⁻¹`. -/
+theorem Pcov_eq (ε m : ℝ) (n : ℕ) (hm : 0 < m) :
+    Pcov ε m n = (1 / 4 : ℝ) • (Xcov ε m n)⁻¹ := by
+  have hdet : IsUnit (Xcov ε m n).det :=
+    (Matrix.isUnit_iff_isUnit_det _).mp (Xcov_posDef ε m n hm).isUnit
+  have h : (Xcov ε m n)⁻¹ * (Xcov ε m n * Pcov ε m n)
+      = (Xcov ε m n)⁻¹ * ((1 / 4 : ℝ) • (1 : Matrix (Fin n) (Fin n) ℝ)) := by
+    rw [Xcov_mul_Pcov ε m n hm]
+  rwa [← Matrix.mul_assoc, Matrix.nonsing_inv_mul _ hdet, Matrix.one_mul, Matrix.mul_smul,
+    Matrix.mul_one] at h
+
 /-! ## §3-A.3 — the reduced Gaussian state on a site subset and its symplectic spectrum
 
 For a region `s : Finset (Fin n)` (index type `{x // x ∈ s}`), the reduced covariances are the
@@ -216,6 +251,114 @@ theorem redEntropy_nonneg (hm : 0 < m) (hfloor : ∀ j, (1 : ℝ) / 2 ≤ redSym
     0 ≤ redEntropy ε m n s hm :=
   Finset.sum_nonneg fun j _ =>
     QIQTH.GaussianStateEntropy.gaussModeEntropy_nonneg (hfloor j)
+
+/-! ## §3-B — the reduced Heisenberg floor `ν_j ≥ ½` (VACAREA-2)
+
+The reduced covariance of a *pure* global Gaussian state is a *physical* (mixed) covariance, so its
+symplectic eigenvalues respect the pure-state floor `ν ≥ ½`.  We prove this by Sol's twice-Schur
+argument, which collapses the whole statement to the classic inequality
+`(X_Ω)⁻¹ ⪯ (X⁻¹)_Ω` (principal submatrix of the inverse dominates the inverse of the submatrix). -/
+
+/-- `P_Ω = ¼·(X⁻¹)_Ω`: the reduced momentum covariance is `¼` of the principal submatrix of the
+    inverse position covariance (from the global `P = ¼·X⁻¹`). -/
+theorem redP_eq (hm : 0 < m) :
+    redP ε m n s = (1 / 4 : ℝ) • ((Xcov ε m n)⁻¹).submatrix Subtype.val Subtype.val := by
+  unfold redP
+  rw [Pcov_eq ε m n hm]
+  rfl
+
+/-- **The reduced Heisenberg floor at the covariance level:** `√X_Ω · P_Ω · √X_Ω ⪰ ¼·1`.
+
+Sol's twice-Schur route.  The vacuum saturates `X·P = ¼·1`, so `P = ¼·X⁻¹` and the block matrix
+`[[X, 1],[1, X⁻¹]]` is positive-semidefinite (its Schur complement over `X` is `X⁻¹ − X⁻¹ = 0`).  A
+principal submatrix of a PSD matrix is PSD, so `[[X_Ω, 1],[1, (X⁻¹)_Ω]] ⪰ 0`, whose Schur complement
+over `X_Ω` is `(X⁻¹)_Ω − (X_Ω)⁻¹ ⪰ 0`, i.e. `(X_Ω)⁻¹ ⪯ (X⁻¹)_Ω`.  Since `P_Ω = ¼·(X⁻¹)_Ω` this gives
+`¼·(X_Ω)⁻¹ ⪯ P_Ω`; conjugating by the self-adjoint `√X_Ω` yields
+`¼·1 = √X_Ω·(¼·(X_Ω)⁻¹)·√X_Ω ⪯ √X_Ω·P_Ω·√X_Ω = redSymM`. -/
+theorem redSymM_ge_quarter (hm : 0 < m) :
+    ((1 / 4 : ℝ) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)) ≤ redSymM ε m n s := by
+  classical
+  have hX : (Xcov ε m n).PosDef := Xcov_posDef ε m n hm
+  have hRX : (redX ε m n s).PosDef := redX_posDef ε m n s hm
+  letI iX : Invertible (Xcov ε m n) :=
+    (Xcov ε m n).invertibleOfIsUnitDet ((Matrix.isUnit_iff_isUnit_det _).mp hX.isUnit)
+  letI iRX : Invertible (redX ε m n s) :=
+    (redX ε m n s).invertibleOfIsUnitDet ((Matrix.isUnit_iff_isUnit_det _).mp hRX.isUnit)
+  -- (1) the global PSD block matrix `[[X, 1],[1, X⁻¹]]`
+  have hblockG :
+      (Matrix.fromBlocks (Xcov ε m n) 1 (1 : Matrix (Fin n) (Fin n) ℝ)ᴴ (Xcov ε m n)⁻¹).PosSemidef := by
+    rw [hX.fromBlocks₁₁ 1 (Xcov ε m n)⁻¹]
+    simp only [Matrix.conjTranspose_one, Matrix.one_mul, Matrix.mul_one, sub_self]
+    exact Matrix.PosSemidef.zero
+  -- (2) restrict to the region and identify the reduced block matrix
+  have hEq :
+      (Matrix.fromBlocks (Xcov ε m n) 1 (1 : Matrix (Fin n) (Fin n) ℝ)ᴴ (Xcov ε m n)⁻¹).submatrix
+          (Sum.map Subtype.val Subtype.val) (Sum.map Subtype.val Subtype.val)
+        = Matrix.fromBlocks (redX ε m n s) (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)
+            (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)ᴴ
+            (((Xcov ε m n)⁻¹).submatrix Subtype.val Subtype.val) := by
+    ext a b
+    rcases a with a | a <;> rcases b with b | b <;>
+      simp [Matrix.submatrix_apply, redX, Matrix.fromBlocks_apply₁₁, Matrix.fromBlocks_apply₁₂,
+        Matrix.fromBlocks_apply₂₁, Matrix.fromBlocks_apply₂₂, Matrix.one_apply]
+  have hblockR :
+      (Matrix.fromBlocks (redX ε m n s) (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)
+          (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)ᴴ
+          (((Xcov ε m n)⁻¹).submatrix Subtype.val Subtype.val)).PosSemidef := by
+    rw [← hEq]; exact hblockG.submatrix _
+  -- (3) the Schur complement over `redX`: `(X⁻¹)_Ω − (redX)⁻¹ ⪰ 0`
+  have hstep :
+      (((Xcov ε m n)⁻¹).submatrix Subtype.val Subtype.val - (redX ε m n s)⁻¹).PosSemidef := by
+    have h := (hRX.fromBlocks₁₁ (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)
+      (((Xcov ε m n)⁻¹).submatrix Subtype.val Subtype.val)).1 hblockR
+    simpa only [Matrix.conjTranspose_one, Matrix.one_mul, Matrix.mul_one] using h
+  -- (4) `¼·(redX)⁻¹ ⪯ redP`
+  have hP_ge : ((1 / 4 : ℝ) • (redX ε m n s)⁻¹) ≤ redP ε m n s := by
+    rw [redP_eq ε m n s hm, Matrix.le_iff, ← smul_sub]
+    exact hstep.smul (by norm_num : (0 : ℝ) ≤ 1 / 4)
+  -- (5) conjugate by the self-adjoint `√redX`
+  have hRR : CFC.sqrt (redX ε m n s) * CFC.sqrt (redX ε m n s) = redX ε m n s :=
+    CFC.sqrt_mul_sqrt_self _ (redX_posDef ε m n s hm).posSemidef.nonneg
+  have hRunit : IsUnit (CFC.sqrt (redX ε m n s)).det := by
+    apply isUnit_of_mul_isUnit_left (y := (CFC.sqrt (redX ε m n s)).det)
+    rw [← Matrix.det_mul, hRR]
+    exact (Matrix.isUnit_iff_isUnit_det _).mp hRX.isUnit
+  have hinvR : (redX ε m n s)⁻¹
+      = (CFC.sqrt (redX ε m n s))⁻¹ * (CFC.sqrt (redX ε m n s))⁻¹ := by
+    rw [← Matrix.mul_inv_rev, hRR]
+  have h1 : CFC.sqrt (redX ε m n s) * (CFC.sqrt (redX ε m n s))⁻¹ = 1 :=
+    Matrix.mul_nonsing_inv _ hRunit
+  have h2 : (CFC.sqrt (redX ε m n s))⁻¹ * CFC.sqrt (redX ε m n s) = 1 :=
+    Matrix.nonsing_inv_mul _ hRunit
+  have hcancel : CFC.sqrt (redX ε m n s) * (redX ε m n s)⁻¹ * CFC.sqrt (redX ε m n s) = 1 := by
+    rw [hinvR, mul_assoc, mul_assoc, h2, mul_one, h1]
+  have hLHS :
+      CFC.sqrt (redX ε m n s) * ((1 / 4 : ℝ) • (redX ε m n s)⁻¹) * CFC.sqrt (redX ε m n s)
+        = (1 / 4 : ℝ) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by
+    rw [Matrix.mul_smul, Matrix.smul_mul, hcancel]
+  have hconj :=
+    (IsSelfAdjoint.of_nonneg (CFC.sqrt_nonneg (redX ε m n s))).conjugate_le_conjugate hP_ge
+  rw [hLHS] at hconj
+  exact hconj
+
+/-- **The reduced symplectic eigenvalues obey the Heisenberg floor `ν_j ≥ ½` (VACAREA-2).**  A
+    subsystem of a pure Gaussian state is a physical (mixed) Gaussian state, so every symplectic
+    eigenvalue of the reduced covariance sits at or above the pure-state floor.  This discharges the
+    `hfloor` hypothesis carried in `redEntropy_nonneg`. -/
+theorem redSympEig_ge_half (hm : 0 < m) (j : {x // x ∈ s}) :
+    (1 : ℝ) / 2 ≤ redSympEig ε m n s hm j := by
+  have heig : (1 / 4 : ℝ) ≤ (redSymM_isHermitian ε m n s hm).eigenvalues j :=
+    eigenvalue_lb (redSymM_isHermitian ε m n s hm)
+      (Matrix.le_iff.mp (redSymM_ge_quarter ε m n s hm)) j
+  rw [show (1 : ℝ) / 2 = Real.sqrt (1 / 4) by
+      rw [show (1 : ℝ) / 4 = (1 / 2) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]]
+  exact Real.sqrt_le_sqrt heig
+
+/-- **The reduced entanglement entropy is unconditionally nonnegative** — the carried `hfloor`
+    hypothesis of `redEntropy_nonneg` is now discharged by `redSympEig_ge_half`.  Entanglement is
+    never negative, for the *actual* reduced vacuum Gaussian state. -/
+theorem redEntropy_nonneg' (hm : 0 < m) : 0 ≤ redEntropy ε m n s hm :=
+  redEntropy_nonneg ε m n s hm (fun j => redSympEig_ge_half ε m n s hm j)
 
 end Region
 
