@@ -5241,3 +5241,20 @@ M₀ unconditional ∧ M₁ geometric ∧ M₂ on (I1) + bookkeeping. `pd_pd_sca
 coordinate gate. Dont-undercredit: every ingredient banked (the affine trick,
 pd_pd_comp_local, the J4-486 jet) — pure assembly. raw 0 (isolation; ⚠ the sibling was
 mid-editing VacuumAreaLaw at commit time). build 33s module. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-488 (6f5b1d1c): 6/7 C₂ carriers COLLAPSED — C₂ on (I1) + one germ residue
+
+`QIQTH/C2CarrierCollapse.lean` (2 decls std-3). `c2_carriers_discharged`: SIX of the seven
+supConstant_phase4 geometric carriers on a CONCRETE small ball, FROM THE BANK ALONE (none
+needed hReach — all K-uniform without expRho): hUK (K∈𝓝 0), horigin (chartW0_displacement),
+hunit (common_nondeg_radius), hreg (chartField_contDiffAt_reachable_uniform +
+chartW0_rightInverse), hW0 (chartOrigin_continuousOn), hJac (chartFieldJacobian_continuousOn
++ the ring-inverse identity). `supConstant_phase5`: the sup family from (I1) hReach + the
+SINGLE 2nd-order RESIDUE hid2 (the per-z 2nd-order IFT identity / right-inverse germ
+φ_z∘W_z = id near 0, a distinct germ sub-brick, J4-489). C₀ unconditional · C₁
+geometric-closed · C₂ on (I1)+hid2. The small-ball reconciliation = pure radius bookkeeping
+over banked uniform radii (SupFamilyFirstOrder's flagged residual, now discharged). raw 0
+(whole-library — the sibling VACAREA-3 committed a green VacuumAreaLaw, unblocking the
+sweep). build 32s module. NEXT: J4-489 = Hid2Germ (the right-inverse germ → C₂ on (I1) alone).
+NOT a₁ = R/6 (CONDITIONAL).
