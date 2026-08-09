@@ -21987,4 +21987,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FarFieldDecay.hcomp_final4
 #print axioms QIQTH.FarFieldDecay.slotInstantiation_phase10
 
+-- ## ★★ J4-458 (WallAInstantiation): wall-A instantiated — ALL SIX
+-- SOL-#20 ATTACK ITEMS ADDRESSED
+-- The block-B map: hSecCont VERBATIM (hSecCont_of_boxes, exact strip
+-- shape); hFdomW BRIDGED (hFdom_concrete, y:=0/wF:=2/sub_zero); hBcont
+-- BRIDGED (the generic stripContOn_of_boxes lift — DataLeviDischarge
+-- confirms LeviSeriesLocalData never gives continuity); hmeas2Lo BRIDGED
+-- (the banked hmeas2Lo_slice REDUCES it onto hSecCont/hBcont/hUT/hεU —
+-- the V2 map had it as a carry; dont-undercredit); hInter + hAdom2cap =
+-- the TWO genuine carries (the interchange bundle; the clean 2nd-deriv
+-- Gaussian cap — the banked bound is the crude τ⁻¹ envelope).
+-- wallA_phase1 produces all six members in the exact v3-core shapes.
+-- ★ (i) diff-under-∫ ✓ · (ii) hGint ✓ · (iii) sliver ✓ · (iv) sups ✓ ·
+-- (v) wall-A ✓ THIS BRICK · (vi) herr/hmin ✓-as-corrected. The carries
+-- are INPUTS not theorems; the deep convergence-trio content never
+-- claimed closed. std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.WallAInstantiation.wallA_hFdomW_bridge
+#print axioms QIQTH.WallAInstantiation.wallA_hSecCont_verbatim
+#print axioms QIQTH.WallAInstantiation.wallA_hBcont_bridge
+#print axioms QIQTH.WallAInstantiation.wallA_phase1
+#print axioms QIQTH.WallAInstantiation.wallA_ledger
+
 end QIQTH.AxiomAudit
