@@ -4834,3 +4834,18 @@ the chartAmp/baseKernelW presentation vs the census's witnessFieldDeriv/gaussDdi
 (base-0 matches; the FUNCTIONAL presentation differs — the bridges = J4-464, honestly
 deferred not fabricated). Pure substitution — the surface was one exact-call away.
 raw 0; build 74s. NEXT: J4-464 = PresentationBridges. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-464: the census C₁ slot GROUNDED FROM GEOMETRY (phase 7)
+
+`QIQTH/PresentationBridges.lean` (4 decls std-3). **BRIDGE 2 COMPOSED** via a cleaner
+DIRECT route: `witnessFieldDeriv_jointContinuousOn` (J4-443) already bounds the ACTUAL
+census object — the feared germ↔chartAmp conversion was UNNECESSARY; the w-slice
+restriction + IsCompact.exists_bound on K gives the exact census C₁ slot
+(`census_C1_grounded`). **BRIDGE 1**: baseKernelW 2 0 = gaussDdim(2τ) was ALREADY BANKED
+(baseKernelW_zero_apply); `census_C_L_grounded` grounds the SHAPE; the slot-wire honestly
+blocked — the grounded theorem existentially fixes its own gate S/radii, not injectable for
+the census-fixed S (→ J4-465, with the gate-coherence audit). `gateCore_reconstruct` +
+`v2Census_phase7` (hGateCore → the 6-conjunct hGateCoreR + the C₁-geometry bundle; C₁
+reconstructed internally). raw 0; build 49s. NEXT: J4-465 = CLSlotWire (the gate-coherence
+audit + the C_L wire). NOT a₁ = R/6 (CONDITIONAL).
