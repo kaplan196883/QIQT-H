@@ -681,6 +681,7 @@ import QIQTH.SmoothCarrierGrounding
 import QIQTH.ChartSecondJet
 import QIQTH.Flow3Regularity
 import QIQTH.SecondVariationModulus
+import QIQTH.HbaseJ2Gronwall
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

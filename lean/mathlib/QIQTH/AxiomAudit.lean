@@ -22419,4 +22419,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SecondVariationModulus.uniformFlowExp_secondVar_spec
 #print axioms QIQTH.SecondVariationModulus.secondVar_snd_hasDerivAt
 
+-- ## ★★ J4-482 (HbaseJ2Gronwall): THE GRÖNWALL LANDED — the wall-felling
+-- ODE step
+-- secondVar_snd_twopoint_diff_bound: the two-point bound on the
+-- .2-component ODE via linODE_twopoint_diff_bound with the source
+-- separation from clm2_apply_telescope (the pure-CLM trilinear
+-- telescope: coefficient + .1-slot + base-Jacobi parts) — the J4-481
+-- finding honoured (the .2-component carries the δ·b bilinearity; the
+-- full-norm route would lose the ∝‖b‖ factor). The M₃/D²F separation
+-- LANDED (geodesicField_fderiv2_diff_bound — the M₂ pattern one order
+-- up; contDiff_fderiv2_geodesicField was ALREADY BANKED in
+-- ExpMapContDiff2). Also: secondVar_fst_hasDerivAt (the .1 homogeneous
+-- ODE) + linODE_growth_bound (inhomogeneous zero-seed).
+-- THE WALL HAS NOT FALLEN YET: the concrete instantiation + the
+-- fderiv²=endpoint bridge + the double opNorm → hbaseJ2 (J4-483); the
+-- weld → hFwd2 (J4-484). Pre-banked: the doubled-field fderiv
+-- projections, the generic inhomogeneous engine, the Jacobi bounds.
+-- std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.HbaseJ2Gronwall.clm2_apply_telescope
+#print axioms QIQTH.HbaseJ2Gronwall.secondVar_fst_hasDerivAt
+#print axioms QIQTH.HbaseJ2Gronwall.geodesicField_fderiv2_diff_bound
+#print axioms QIQTH.HbaseJ2Gronwall.linODE_growth_bound
+#print axioms QIQTH.HbaseJ2Gronwall.secondVar_snd_twopoint_diff_bound
+
 end QIQTH.AxiomAudit
