@@ -5105,3 +5105,20 @@ STALE for the regularity half — the dont-undercredit pattern's ~10th strike th
 REMAINING for hFwd2: the base-slot 2nd-variation Grönwall (hbaseJ2) + the K-uniform
 reachability radius. raw 0; build 51s. NEXT: J4-481 = SecondVariationModulus (the exposure
 + the Grönwall + the weld — THE CONVERGENT WALL falls if it lands). NOT a₁ = R/6.
+
+---
+## ★ J4-481: the 2nd-variation EXPOSED + the component ODE — the hbaseJ2 groundwork
+
+`QIQTH/SecondVariationModulus.lean` (2 decls std-3). **THE EXPOSURE LANDED:**
+`uniformFlowExp_secondVar_spec` re-runs the compiled R2-a/b construction KEEPING the
+discarded endpoint identification — the full triple (the base Jacobi field Jf0, the DOUBLED
+second-variation field Vf along (tube, Jf0), the endpoint identity L₂ δ = (Vf δ 1).2.1) —
+the J4-435 exposure one order up; the residue was PURE SPEC-EXPOSURE (the operator was
+built in R2-a/J4-67; only _hLeq was discarded). **★ THE KEY NON-OBVIOUS FINDING:** the
+naive full-doubled-norm Grönwall FAILS hbaseJ2 — the full norm is dominated by the .1-slot
+(∝δ, b-independent), so it cannot deliver the ∝‖b‖ factor the double opNorm requires; the
+.2-COMPONENT ODE (the δ·b-bilinear curvature source) is the correct route —
+`secondVar_snd_hasDerivAt` LANDED (the inhomogeneous scalar-Jacobi ODE;
+linODE_twopoint_diff_bound already accepts inhomogeneous sources). THE WALL DOES NOT FALL
+YET: the two-point Grönwall + the double opNorm + the z₀-weld = J4-482. raw 0; build 59s.
+NOT a₁ = R/6 (CONDITIONAL).
