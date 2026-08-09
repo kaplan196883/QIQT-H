@@ -22464,6 +22464,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbaseJ2Assembly.secondVar_endpoint_seed_diff_bound
 #print axioms QIQTH.HbaseJ2Assembly.uniformFlowExp_fderiv2_base_modulus
 
+-- ## ★★★ J4-484 (Hfwd2Weld): THE CONVERGENT WALL — a PROVED CHAIN gated by
+-- ONE repo-wide input (the wall is felled modulo (I1) reachability)
+-- uniformFlowExp_forward2_continuousOn_of_reach = THE WELD: the
+-- z₀-anchored triangle (the J4-435 first-order weld one order up) —
+-- forward2_velocitySlot (velocity) + uniformFlowExp_fderiv2_base_modulus
+-- (base, Lipschitz in z) abel'd → hFwd2 on K ×ˢ ball 0 uniformFlowRadius;
+-- chartSecondJet_continuousOn_of_reach feeds it to
+-- chartSecondJet_continuousOn_of_forward2 ⟹ the chart-Hessian base
+-- continuity. THE ENTIRE second-jet architecture (velocity + base →
+-- hFwd2 → chart Hessian) is now a PROVED CHAIN — no second-variation
+-- ODE / regularity work remains; both the htermBox (hWc2cont) and the
+-- C₂ (hcont2) consumers are served (modulo the operator⇄pd bridge).
+-- ⚠ THE ONE REMAINING GATE (I1): hReach = ∃ρ>0 ∀q∈K, ρ ≤ expRho q —
+-- NOT provable in-repo (expRho is an irreducible Classical.choose with
+-- no banked continuity/lsc/uniform lower bound; uniformFlowRadius is a
+-- separate .choose); this is the repo-WIDE uniform-injectivity-radius
+-- carry (hr_lt across CommonNondegRadius/UniformExpSecondJet/…, labelled
+-- "UNPROVABLE" in UniformFlowNondeg). Carried honestly at the hFwd2
+-- boundary. J4-485 = attack (I1) via expRho lower-semicontinuity.
+-- std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.Hfwd2Weld.uniformFlowExp_forward2_continuousOn_of_reach
+#print axioms QIQTH.Hfwd2Weld.chartSecondJet_continuousOn_of_reach
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
