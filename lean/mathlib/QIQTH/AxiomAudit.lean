@@ -22703,6 +22703,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmpDiffGrounding.concreteIntegrand_on_collar_le_atz
 #print axioms QIQTH.AmpDiffGrounding.concreteRemainder_order_reach
 
+-- J4-496 (FormGateGrounding): hform_gate DISCHARGED — THE REMAINDER SUBSYSTEM
+-- FINISHED. concreteRemainder_order_reach_form = the same explicit O(1/τ) bound
+-- as concreteRemainder_order_reach but with the raw hform_gate carry replaced by
+-- hjets (a per-annulus-point chart JET SUPPLY). hform_gate_of_jetSupply: from
+-- hjets on EXACTLY the annulus (collar(c√τ))ᶜ ∩ K ∩ {‖z‖<r} (region-correct, NOT
+-- full space — the off-collar exp-blow-up trap avoided) derives the (ρ−1) form
+-- IchartResidual − hessGaussFactor·(chartAmp·F) = hessGaussFactor·((rhoRatio−1)·
+-- (chartAmp·F)). PURE WIRING: the (ρ−1) annulus form was ALREADY a proved banked
+-- lemma SlotInstantiationV.ichartResidual_sub_hess_form (off-collar unconditional
+-- per its regime audit); this is a one-line per-point wrapper. Remaining
+-- substantive external hyps are now ONLY genuine geometric inputs: hiso ((I1)),
+-- hgate ((ρ−1) annulus near-isometry: cubic-jet error + lower bound), hjets (the
+-- chart's actual off-collar jet supply) — NO raw analytic gate carry left. std-3
+-- both. NOT a₁ = R/6 (remainder subsystem done; the COEFFICIENT walls — q-audit
+-- ≥2, Gaussian moment extraction, the GENERAL van-Vleck 2-jet [VanVleckRadial is
+-- const-curvature-ONLY, needs its own generalization] — are all still BEYOND).
+#print axioms QIQTH.FormGateGrounding.hform_gate_of_jetSupply
+#print axioms QIQTH.FormGateGrounding.concreteRemainder_order_reach_form
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
