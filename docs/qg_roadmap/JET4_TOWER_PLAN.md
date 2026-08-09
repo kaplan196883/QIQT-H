@@ -4807,3 +4807,16 @@ hAdom2cap here): THE WALL-A LEG RESTS ON SATISFIABLE ENVELOPE/BOX/SCAFFOLD INPUT
 {hcrude, data, hSecBoxes, hBBoxes, hUT, hεU}. Closing block-B closes nothing deeper —
 the convergence-trio content lives outside it. Pure assembly. raw 0; build 49s.
 NEXT: J4-462 = hdiff (the phase3/4 carry). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-462: hdiff GROUNDED — ZERO net new carries (phase 5)
+
+`QIQTH/HdiffGrounding.lean` (3 decls std-3). THE GATE: this hdiff = the 2nd-order analogue
+(base 0, dH→dHH) of the J4-439 frozen leg — and the chain was PRE-BANKED and stronger:
+`W2Finish.w2_hdiff` (J4-397) produces it from hInnerData, which phase4 ALREADY carries
+(feeding the W2 route independently). THE DECISIVE OBSERVATION: hdiff collapses onto a
+pre-existing carry — `v2Census_phase5` = phase4 MINUS hdiff, NOTHING added (strictly better
+than J4-439). `hdiff_grounded` + `hdiff_grounded_reduced` (one level deeper ← hRedCore via
+innerData_phase1). Pure wiring — the J4-426 second-order tower + the J4-397 engine were all
+banked. raw 0; build 62s. NEXT: J4-463 = InnerDataCensusThread (hInnerData → the reduced
+core inside the census, v2Census_phase6). NOT a₁ = R/6 (CONDITIONAL).
