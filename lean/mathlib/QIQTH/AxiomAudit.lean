@@ -22765,6 +22765,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DuhamelAssembly.duhamel_simplex_quadratic_bound_pref
 #print axioms QIQTH.DuhamelAssembly.duhamel_simplex_quadratic_bound_sharp
 
+-- J4-500 (SliceBoundO1): the SIGNED SLICE bound O(1/a)→O(1) — the LOG-DIVERGENCE
+-- REMOVED (Sol step 1). hessGauss_signed_slice_O1: |∫_z hessGaussFactor_i·(c +
+-- Σb_j z_j + Σ H_jk z_j z_k)| ≤ (32√2+1)·Σ_jk|H_jk| — the SIGNED slice against a
+-- deg-≤2 amplitude is O(1) uniform as a→0⁺ (NO 1/a, NO 1/√a). Mechanism: the
+-- const part (whose ABSOLUTE bound is ∼c/a=O(1/a)) and the linear part
+-- (∼O(1/√a)) VANISH EXACTLY — 0th moment = banked hessGaussFactor_integral_zero,
+-- 1st moment = hessGaussFactor_first_moment_zero (proved here for THIS kernel via
+-- product factorization + the odd 1-D integral oneD_hessW_lin_zero); the surviving
+-- quadratic is bounded by the O(1) mixed second moment hessAbs_coordSq_le
+-- (∫|hessGaussFactor|·z_m² ≤ 32√2+1 — the 1/a of the Hessian weight cancels the a
+-- of the 2nd moment). SIGNED not absolute (∫|hessGaussFactor| genuinely IS O(1/a)).
+-- Fed into ∫₀^τ ds at a=τ−s: ∫₀^τ O(1) ds = O(τ) — a MARGINAL q=1 correction,
+-- NOT O(τ²). ⚠ HONEST: O(1/a)→O(1), NOT O(1/a)→O(a). The surviving O(1) = the
+-- amplitude Hessian = the TRANSPORT COEFFICIENT; its cancellation to O(τ²) is the
+-- SEPARATE IRREDUCIBLE van-Vleck 2-jet wall D²u₀(0)=(1/6)Ric (VanVleckRadial
+-- const-curv-only). std-3 all. NOT a₁=R/6 (removes the log-divergence; does NOT
+-- select the coefficient).
+#print axioms QIQTH.SliceBoundO1.hessGaussFactor_first_moment_zero
+#print axioms QIQTH.SliceBoundO1.hessAbs_coordSq_le
+#print axioms QIQTH.SliceBoundO1.hessGaussFactor_coordPair_abs_le
+#print axioms QIQTH.SliceBoundO1.hessGauss_signed_slice_O1
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
