@@ -22173,4 +22173,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HcapEndpointGrounding.hEndpoint_grounded
 #print axioms QIQTH.HcapEndpointGrounding.v2Census_phase11
 
+-- ## ★ J4-469 (BoxCensusGrounding): the box families OFF (phase 12)
+-- hBBoxes (the Levi side): GENUINE WIRE — the demanded box shape is
+-- EXACTLY leviSeries_boxContOn's conclusion, fed from the already-present
+-- phase-11 LeviSeriesLocalData; the residue = the per-k termwise box
+-- carry htermBox (strictly lower). hSecBoxes (the witness side): HONEST
+-- REDUCTION — witnessSecondXDeriv is defeq the pd∘pd diagonal at the
+-- FIXED centre 0; the J4-442 pd-pd lead keys the VARYING base of the
+-- UNGATED composite (a genuine gate + base-keying mismatch, no transport)
+-- — reduced by defeq to the named atom hpd2diag, NOT discharged.
+-- v2Census_phase12 = phase11 minus the box families plus {hpd2diag,
+-- htermBox}. std-3 (the ledger intro axiom-FREE). NOT a₁ = R/6.
+#print axioms QIQTH.BoxCensusGrounding.hBBoxes_grounded
+#print axioms QIQTH.BoxCensusGrounding.hSecBoxes_grounded
+#print axioms QIQTH.BoxCensusGrounding.v2Census_phase12
+#print axioms QIQTH.BoxCensusGrounding.box_census_grounding_residuals_intro
+
 end QIQTH.AxiomAudit

@@ -668,6 +668,7 @@ import QIQTH.CLSlotWire
 import QIQTH.Phase9Replumb
 import QIQTH.HslotGrounding
 import QIQTH.HcapEndpointGrounding
+import QIQTH.BoxCensusGrounding
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
