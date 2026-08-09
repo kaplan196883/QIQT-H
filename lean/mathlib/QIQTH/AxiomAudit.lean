@@ -22385,4 +22385,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartSecondJet.chartSecondJet_eq_of_forward2
 #print axioms QIQTH.ChartSecondJet.chartSecondJet_continuousOn_of_forward2
 
+-- ## ★ J4-480 (Flow3Regularity): C³ was ALREADY BANKED (the C⁴ overlap
+-- side-route) — the hFwd2 velocity slot DONE
+-- THE GATE VERDICT: the direct contDiffAt2 tower is bespoke and caps at
+-- C² — but the tower is NOT capped: ChartThirdJet.uniformFlowExp_
+-- contDiffAt_four (J4-192!) banks C⁴ via the ExpMap C⁴ tower + the
+-- ODE-uniqueness overlap bridge. contDiffAt3 = .of_le (3≤4), one line;
+-- the price = the reachability guard ‖v‖ < expRho z (the injectivity
+-- ball). forward2_velocitySlot = the TERM-2 pattern one order up
+-- (fderiv_right twice + continuousAt). THE J4-479 "only C² banked" claim
+-- was STALE for the regularity half — the dont-undercredit pattern's
+-- ~10th strike. REMAINING for hFwd2: the base-slot 2nd-variation
+-- Grönwall (hbaseJ2) + the K-uniform reachability radius.
+-- std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.Flow3Regularity.contDiffAt3_uniformFlowExp
+#print axioms QIQTH.Flow3Regularity.forward2_velocitySlot
+
 end QIQTH.AxiomAudit
