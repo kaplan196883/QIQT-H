@@ -5089,3 +5089,19 @@ pd-iterated over field points vs hcont2 joint over base) — the operator⇄pd b
 separate downstream work. raw 0; build 68s.
 NEXT: J4-480 = Flow3Regularity (the C³ velocity slot — phase 1 of the hFwd2 effort).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-480: C³ was ALREADY BANKED (the C⁴ overlap route) — the hFwd2 velocity
+## slot DONE
+
+`QIQTH/Flow3Regularity.lean` (2 decls std-3). THE GATE VERDICT: the direct contDiffAt2
+tower is bespoke (three explicit Fréchet layers) and structurally caps at C² — BUT the
+tower is NOT capped: `ChartThirdJet.uniformFlowExp_contDiffAt_four` (J4-192!) banks C⁴ via
+the unconditional ExpMap C⁴ tower + the ODE-uniqueness overlap bridge.
+`contDiffAt3_uniformFlowExp` = .of_le (3≤4), ONE LINE; the price = the reachability guard
+‖v‖ < expRho z (the injectivity ball). `forward2_velocitySlot` = the J4-434 TERM-2 pattern
+one order up (fderiv_right twice + continuousAt). The J4-479 "only C² banked" claim was
+STALE for the regularity half — the dont-undercredit pattern's ~10th strike this campaign.
+REMAINING for hFwd2: the base-slot 2nd-variation Grönwall (hbaseJ2) + the K-uniform
+reachability radius. raw 0; build 51s. NEXT: J4-481 = SecondVariationModulus (the exposure
++ the Grönwall + the weld — THE CONVERGENT WALL falls if it lands). NOT a₁ = R/6.
