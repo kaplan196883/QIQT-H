@@ -22363,4 +22363,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SmoothCarrierGrounding.hComposite2_grounded
 #print axioms QIQTH.SmoothCarrierGrounding.smoothCarriers_family
 
+-- ## ★★ J4-479 (ChartSecondJet): THE CONVERGENT WALL — the 2nd-order IFT
+-- DERIVED; the reduction to ONE forward-2nd-jet atom
+-- THE STAR: the 2nd-order IFT identity DERIVED first-try (pure algebra —
+-- differentiating the banked ring-inverse identity via the chain rule:
+-- fderiv(fderiv W) = (−mulLeftRight Iφ Iφ) ∘L (fderiv²φ ∘L Iφ), the germ
+-- transfer by congr_of_eventuallyEq; pure Mathlib, no .choose).
+-- chartSecondJet_continuousOn_of_forward2 = THE REDUCTION: the chart-
+-- Hessian base-continuity from ONE named atom hFwd2 (the forward SECOND
+-- jet joint continuity) + the BANKED-UNCONDITIONAL first-order layer
+-- (forwardFlowJet_continuousOn/chartFieldJacobian_continuousOn — J4-435
+-- made these unconditional, inherited for free). hFwd2 correctly NOT
+-- forced: needs C³ flow regularity (only C² banked) + the second-
+-- variation Grönwall — a genuine multi-brick ODE effort, deferred per
+-- the split rule. NOTED: the two consumers carry different shapes
+-- (hWc2cont pd-iterated over field points vs hcont2 joint over base) —
+-- the operator⇄pd bridge is separate downstream work.
+-- std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ChartSecondJet.hasFDerivAt_fderiv_localLeftInverse
+#print axioms QIQTH.ChartSecondJet.fderiv_fderiv_localLeftInverse_eq
+#print axioms QIQTH.ChartSecondJet.chartSecondJet_eq_of_forward2
+#print axioms QIQTH.ChartSecondJet.chartSecondJet_continuousOn_of_forward2
+
 end QIQTH.AxiomAudit

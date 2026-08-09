@@ -678,6 +678,7 @@ import QIQTH.XSlotBaseParts
 import QIQTH.WitnessSpatialPartialsX
 import QIQTH.LeafBoxSplice
 import QIQTH.SmoothCarrierGrounding
+import QIQTH.ChartSecondJet
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
