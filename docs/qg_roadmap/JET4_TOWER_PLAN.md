@@ -5069,3 +5069,23 @@ Dont-undercredit: the parametrix jets (value/first/second) + the cutoff jets wer
 banked; only the manifold product rules were new threading. raw 0; build 36s.
 NEXT: J4-479 = ChartSecondJet (THE CONVERGENT WALL — the 2nd-order IFT + the forward 2nd
 jet, the J4-433/435 chain one order up). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-479: THE CONVERGENT WALL — the 2nd-order IFT DERIVED; the reduction to
+## ONE forward-2nd-jet atom
+
+`QIQTH/ChartSecondJet.lean` (4 decls std-3). **THE STAR: the 2nd-order IFT identity DERIVED
+first-try** — pure algebra differentiating the banked ring-inverse identity by the chain
+rule (hasFDerivAt_ringInverse outer, fderiv²φ middle, Iφ inner): fderiv(fderiv W)(φ v₀) =
+(−mulLeftRight Iφ Iφ) ∘L (fderiv²φ ∘L Iφ); the germ transfer by congr_of_eventuallyEq;
+pure Mathlib, no chart internals, no .choose. **THE REDUCTION**
+(chartSecondJet_continuousOn_of_forward2): the chart-Hessian base-continuity from ONE named
+atom hFwd2 (the forward SECOND jet joint continuity) + the BANKED-UNCONDITIONAL first-order
+layer (J4-435 made forwardFlowJet_continuousOn/chartFieldJacobian_continuousOn
+unconditional — inherited for free). hFwd2 correctly NOT forced: needs C³ flow regularity
+(only C² banked) + the second-variation Grönwall — a genuine multi-brick ODE effort,
+deferred per the split rule. NOTED: the two consumers carry DIFFERENT shapes (hWc2cont
+pd-iterated over field points vs hcont2 joint over base) — the operator⇄pd bridge is
+separate downstream work. raw 0; build 68s.
+NEXT: J4-480 = Flow3Regularity (the C³ velocity slot — phase 1 of the hFwd2 effort).
+NOT a₁ = R/6 (CONDITIONAL).
