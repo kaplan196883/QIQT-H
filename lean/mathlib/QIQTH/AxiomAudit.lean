@@ -22625,6 +22625,25 @@ namespace QIQTH.AxiomAudit
 -- remainder, disjoint from the collar leg). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.FarFieldMomentOrder.farFieldDom_integral_le
 
+-- J4-492 (OnCollarMomentOrder): the ON-collar (near-diagonal) moment leg — the
+-- COMPLEMENT of J4-491's far-field piece, controlled by the (I1)-closed collar
+-- constants M₀/M₁/M₂ (NOT the global off-collar sups). onCollarDom = the
+-- near-diagonal Gaussian-moment envelope M₀·(1/4τ²)·((‖z‖²+2τ)G_τ) +
+-- M₁·(1/2τ)·(‖z‖ G_τ) + M₂·G_τ (Hessian↔M₀, gradient↔M₁, mass↔M₂), the SAME
+-- Gaussian-moment object as farFieldDom under the (M₁,M₂,M₀) reorder
+-- (onCollarDom_eq_farFieldDom, a `ring`). onCollarDom_integral_le (full space)
+-- ≤ M₁·3n/4/√τ + M₂ + M₀·(n+1)/(2τ). onCollarDom_setIntegral_le: the same
+-- bound over ANY measurable domain A (nonneg envelope ⟹ setIntegral_le_integral).
+-- onCollarMoment_order: the headline specialisation to collar(c√τ). τ-order
+-- O(1/τ) (dominant Hessian M₀·(n+1)/(2τ)), controlled ENTIRELY by the
+-- (I1)-closed constants — so the on-collar leg is (I1)-closed. Gate REACHABLE
+-- (centered at the diagonal 0, no centering trap). Combined with J4-491 the FULL
+-- heat-trace remainder (collar ⊔ far field) is τ-order-controlled. std-3 all six.
+-- NOT a₁ = R/6 (still conditional on I1 + convergence trio + geometric wiring).
+#print axioms QIQTH.OnCollarMomentOrder.onCollarDom_integral_le
+#print axioms QIQTH.OnCollarMomentOrder.onCollarDom_setIntegral_le
+#print axioms QIQTH.OnCollarMomentOrder.onCollarMoment_order
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
