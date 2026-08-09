@@ -22246,4 +22246,21 @@ namespace QIQTH.AxiomAudit
 -- A1R6GateSlots assembly (J4-473). std-3. NOT a₁ = R/6.
 #print axioms QIQTH.Phase14Transport.hRemainderDiag_reconstruct
 
+-- ## ★ J4-473 (BoxAtomsGrounding): htermBox WIRED + hpd2diag consolidated
+-- THE GATES: (hpd2diag) the transparency hypothesis REFUTED on two
+-- counts — the gate is τ-INDEPENDENT (a hard spatial gate; the J4-443
+-- τ-transparency pattern is a category error here) AND the ungated
+-- pd-pd supplier keys the VARYING base vs the demanded fixed centre —
+-- honest consolidation onto the canonical NonLeviBoxContinuity.hpd2
+-- (diagonal specialization j := i). (htermBox) a GENUINE WIRE — the
+-- census atom is the x-slot orientation, EXACTLY produced by the banked
+-- IterEContinuity.iterE_jointContinuousOn (NOT the J4-394 z-slot family
+-- — the slot-orientation trap caught by reading headers, not queue
+-- hints). box_atoms_residuals: hIterBase + hIterStep replace htermBox;
+-- hPd2Full hosts hpd2diag. std-3 (the ledger intro axiom-FREE).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.BoxAtomsGrounding.htermBox_grounded
+#print axioms QIQTH.BoxAtomsGrounding.hpd2diag_grounded
+#print axioms QIQTH.BoxAtomsGrounding.box_atoms_residuals_intro
+
 end QIQTH.AxiomAudit
