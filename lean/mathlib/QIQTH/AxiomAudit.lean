@@ -22722,6 +22722,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FormGateGrounding.hform_gate_of_jetSupply
 #print axioms QIQTH.FormGateGrounding.concreteRemainder_order_reach_form
 
+-- J4-498 (GaussianMomentExtraction): the reusable COEFFICIENT-EXTRACTION tool
+-- (Sol #22 step 4 exact-polynomial core) — turns the banked exact cancellation
+-- ∫hessGaussFactor=0 into the actual LEADING SOURCE (extract, NOT bound). The
+-- q-audit (J4-497) showed the O(1/τ) remainder is coefficient-INSUFFICIENT, so
+-- the coefficient must be EXTRACTED. gaussDdim_first_moment_zero (∫G_t·z_i=0,
+-- oddness) · gaussDdim_second_moment (∫G_t·z_i z_j = 2t·δ_ij, re-export of the
+-- banked gaussianMoment_diag) · quadForm_gauss_second_moment (∫G_t·Σ_jk H_jk z_j z_k
+-- = 2t·Σ_j H_jj = 2t·tr H) · poly2_gauss_extraction (∫G_t·(c + Σb_j z_j +
+-- Σ H_jk z_j z_k) = c + 2t·tr H — i.e. ∫G_t·B = B(0) + t·tr(D²B(0)) EXACTLY for
+-- deg-≤2 B; (∫G_t·B − B(0))/t = tr D²B(0) = ΔB(0), the Laplacian source). GENERIC
+-- (plain c/b/H, NOT census-tied). Centered at 0 (no centering trap); exact
+-- identity ∀t>0 (no vacuous limit). ⚠ DEFERRED: the τH₁ term + general-smooth-B
+-- delta-limit (needs the uniform 2nd-order Taylor remainder r=o(τ) = the E(τ)
+-- assembly, J4-499). std-3 all four. NOT a₁=R/6 (the reusable tool, not the value;
+-- the 1/6 is cited curved geometry, produced by neither this file nor its moments).
+#print axioms QIQTH.HeatResidualBound.gaussDdim_first_moment_zero
+#print axioms QIQTH.HeatResidualBound.gaussDdim_second_moment
+#print axioms QIQTH.HeatResidualBound.quadForm_gauss_second_moment
+#print axioms QIQTH.HeatResidualBound.poly2_gauss_extraction
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
