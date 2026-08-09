@@ -22610,6 +22610,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.C2AggregatorPhase6.collarRegime_mono
 #print axioms QIQTH.C2AggregatorPhase6.collarSupConstants_of_reach
 
+-- J4-491 (FarFieldMomentOrder): the far-field moment integral's τ-ORDER made
+-- EXPLICIT — the O(1/τ) far-field absorption computed to a closed form.
+-- farFieldDom_integral_le: ∫ farFieldDom τ M1F M2F Mqc z ≤
+--   M1F·n·3/4/√τ + M2F + Mqc·(n+1)/(2τ), i.e. gradient O(τ^{-1/2}) · mass O(1) ·
+-- Hessian O(1/τ) [dominant]. The far-field DOMINATION (‖∫_far f‖ ≤ ∫ farFieldDom,
+-- off-K witness-vanishing) was already banked (FarFieldDecay, J4-457); only the
+-- τ-order of ∫ farFieldDom was PROSE — this pins it to a theorem via linearity +
+-- the banked width-τ moment envelope (normPow_gauss_tau ← oneD_absMoment1/2) +
+-- gaussDdim_integral_eq_one + √τ·√τ=τ. The constants M1F/M2F/Mqc are the global
+-- (off-collar) amplitude sups of FarFieldDecay.farField_decay_bound — the far
+-- field is τ-order-CONTROLLED but by the GLOBAL sups, NOT reduced to the
+-- (I1)-closed on-collar M₀/M₁/M₂ (off K the witness vanishes ⟹ a pure Gaussian
+-- remainder, disjoint from the collar leg). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.FarFieldMomentOrder.farFieldDom_integral_le
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
