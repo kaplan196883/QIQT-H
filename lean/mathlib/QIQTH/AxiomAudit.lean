@@ -22442,6 +22442,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbaseJ2Gronwall.linODE_growth_bound
 #print axioms QIQTH.HbaseJ2Gronwall.secondVar_snd_twopoint_diff_bound
 
+-- ## ★★ J4-483 (HbaseJ2Assembly): hbaseJ2 DISCHARGED — the base-slot
+-- second-jet modulus on the reachable interior
+-- uniformFlowExp_fderiv2_base_modulus: ∃Λ₂≥0 uniform over K,
+-- ‖fderiv²(uniformFlowExp q)v − fderiv²(uniformFlowExp q')v‖ ≤ Λ₂‖q−q'‖
+-- for q,q'∈K, ‖v‖<expRho q/q'/ρ_K; Λ₂ = 3M₂²e^{Lsep}e^{4Kf} +
+-- M₃e^{Lsep}e^{3Kf}. The J4-482 Grönwall instantiated at the two
+-- exposures through secondVar_endpoint_seed_diff_bound (every hyp
+-- discharged: Kf/M₂ compactness maxima; Dc via the D¹F MVT × the tube
+-- separation; DD via M₃ × the tube separation; the .1-slot &
+-- base-Jacobi via jacobi_growth/twopoint; Xb via linODE_growth_bound);
+-- the endpoint bridge fderiv2_apply_eq_of_hasFDerivAt (the (apply b)∘
+-- fderiv chain rule + uniqueness; C²-at-v from contDiffAt3 under the
+-- reachability guards); the double opNorm2_le_bound closes the sup.
+-- Pure instantiate/discharge/bridge/opNorm — the J4-435 first-order
+-- template one order up. The two expRho guards = the price of the
+-- C²-at-v bridge — J4-484's weld reconciles them via the K-uniform
+-- radius. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.HbaseJ2Assembly.fderiv2_apply_eq_of_hasFDerivAt
+#print axioms QIQTH.HbaseJ2Assembly.opNorm2_le_bound
+#print axioms QIQTH.HbaseJ2Assembly.secondVar_endpoint_seed_diff_bound
+#print axioms QIQTH.HbaseJ2Assembly.uniformFlowExp_fderiv2_base_modulus
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
