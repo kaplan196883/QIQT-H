@@ -22263,4 +22263,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BoxAtomsGrounding.hpd2diag_grounded
 #print axioms QIQTH.BoxAtomsGrounding.box_atoms_residuals_intro
 
+-- ## ★ J4-474 (IterRungGrounding): the iterE rungs grounded — the
+-- htermBox chain closed to the x-slot parts + rung dominations
+-- THE GATES: (hIterBase) the SLOT GATE — the census base is the x-slot
+-- with VARYING Laplacian base p.2; the banked N2 is the z-slot with the
+-- FIXED base 0 (what makes N3's metric factors constants) — no
+-- transport; the N2 ROUTE re-oriented honestly to two x-slot part
+-- carries (hDerivX + hLapX). (hIterStep) a GENUINE WIRE — the banked
+-- outer engine produces the succ rung from the per-rung Ioc 0 1
+-- domination (the IH not needed — a stronger step); the banked census
+-- dominations are NOT in the heatConv-outer shape — hDom honestly
+-- carried per rung (the IterEContinuity R-dom residual, verified).
+-- htermBox_chain_final: the whole ∀k census family from the deepest
+-- carries. rung_residuals: hDerivX · hLapX (varying-base — harder than
+-- N3) · hDom · hRestBox. std-3 (the ledger intro axiom-FREE).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.IterRungGrounding.hIterBase_grounded
+#print axioms QIQTH.IterRungGrounding.hIterStep_grounded
+#print axioms QIQTH.IterRungGrounding.htermBox_chain_final
+#print axioms QIQTH.IterRungGrounding.rung_residuals_intro
+
 end QIQTH.AxiomAudit
