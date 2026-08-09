@@ -21966,4 +21966,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateFarFieldSplit.hcomp_final3
 #print axioms QIQTH.GateFarFieldSplit.slotInstantiation_phase9
 
+-- ## J4-457 (FarFieldDecay): Bff DERIVED (honest τ-form) — the hff carry
+-- ELIMINATED (phase 10)
+-- THE DOMAIN/TAIL GATE: the far field guarantees only ‖z‖ > c√τ — the
+-- radius SCALES with the width, so NO fixed-R tail suppression (z = √τ·w
+-- maps to a τ-independent tail); the controllable structure is the off-K
+-- VANISHING of the witness term instead, reached via the satisfiable
+-- hKr : K ⊆ ball 0 r (K compact) forcing far ⊆ Kᶜ. Bff := ∫ farFieldDom
+-- DERIVED — the honest count: gradient O(τ^{-1/2}), mass O(1), Hessian
+-- O(τ⁻¹) DOMINANT ⟹ Bff = O(1/τ), honestly WORSE than the gate's
+-- O(1/√τ) (off K the Hessian stands alone with no (ρ−1) smallness) —
+-- recorded not hidden; hff was a free carry so any finite Bff discharges
+-- it; the degradation is a downstream-quality concern, not a soundness
+-- gap (→ J4-458 absorption). The far-field amplitude sups hA1F/hA2F
+-- honestly carried (the data-bundle sups are on-collar-only).
+-- hcomp_final4 + slotInstantiation_phase10. std-3 all. NOT a₁ = R/6.
+#print axioms QIQTH.FarFieldDecay.farFieldDom_integrable
+#print axioms QIQTH.FarFieldDecay.farField_ptwise_bound
+#print axioms QIQTH.FarFieldDecay.farField_decay_bound
+#print axioms QIQTH.FarFieldDecay.hcomp_final4
+#print axioms QIQTH.FarFieldDecay.slotInstantiation_phase10
+
 end QIQTH.AxiomAudit

@@ -656,6 +656,7 @@ import QIQTH.ProdMeasAndEnvelope
 import QIQTH.DHrefinedFull
 import QIQTH.HerrHminCoercivity
 import QIQTH.GateFarFieldSplit
+import QIQTH.FarFieldDecay
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
