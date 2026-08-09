@@ -5002,3 +5002,19 @@ R-dom residual, verified against the banked census dominations — different sha
 `rung_residuals`: hDerivX · hLapX (VARYING-base — harder than N3) · hDom · hRestBox.
 raw 0; build 47s. NEXT: J4-475 = XSlotBaseParts (hDerivX/hLapX with the varying-p.2
 metric/Christoffel continuity N3 drops). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-475: hLapX DISCHARGED — the varying-base metric continuity was FREE
+
+`QIQTH/XSlotBaseParts.lean` (4 decls; std-3 + axiom-free ledger). **THE GATE RESOLUTION:**
+unlike N3 (fixed base 0 ⟹ the metric factors are CONSTANTS), the varying-base gi p.2 /
+christoffel p.2 vary — but a C² field's continuity is banked: hgiC (the exact
+AssemblyLadderR5 binder) + hChr's ContDiff ⊤ give both via .comp continuous_snd. hLapX
+demands NO new Laplacian carry — only the geometry inputs + hpd1X/hpd2X (the N3 partial
+atoms re-based to p.2). hDerivX = an irreducible ∂_τ LEAF (no metric content; the honest
+class N2 also kept). **THE X-SLOT LEDGER: the ENTIRE htermBox census family is grounded to
+{hgiC/hChr geometry + the witness-slice leaves hDerivX/hpd1X/hpd2X + hDom +
+hPd2Full/hRestBox}.** Honest caveat: NOT geometry-alone — the witness-slice leaves are
+genuine (their reduction = the J4-443 parametrix chain-rule machinery, a separate brick).
+raw 0; build 47s. NEXT: J4-476 = WitnessSpatialPartialsX (the leaves via the chain rule).
+NOT a₁ = R/6 (CONDITIONAL).
