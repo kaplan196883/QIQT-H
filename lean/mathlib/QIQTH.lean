@@ -666,6 +666,7 @@ import QIQTH.InnerDataCensusThread
 import QIQTH.PresentationBridges
 import QIQTH.CLSlotWire
 import QIQTH.Phase9Replumb
+import QIQTH.HslotGrounding
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

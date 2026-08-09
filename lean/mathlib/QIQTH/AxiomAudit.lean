@@ -22140,4 +22140,20 @@ namespace QIQTH.AxiomAudit
 -- re-plumb, closes nothing deeper. std-3. NOT a₁ = R/6.
 #print axioms QIQTH.Phase9Replumb.v2Census_phase9
 
+-- ## ★ J4-467 (HslotGrounding): hslot OFF THE CENSUS SURFACE (phase 10)
+-- THE GATE: COMPATIBLE, fires VERBATIM — the census hslot binder is
+-- EXACTLY the conclusion of the banked J4-402
+-- leviSecondPairing_inner_bound_concrete at F := leviSeries(heatOp …);
+-- the supplier is S-polymorphic so the ∃-consumed gate instantiates
+-- definitionally (exact closes it; the J4-465 kernels-defeq fact).
+-- M-UNIFORMITY: Lc/Bcomp/Q/Sconst bind BEFORE (i,τ,s) — no εₘ leak.
+-- DONT-UNDERCREDIT CLARIFICATION: J4-416's hslot_covered CONSUMES hslot;
+-- the PRODUCER is J4-402 — which is what fires here. hslot_grounded +
+-- v2Census_phase10 (hslot removed; the J4-402 per-(τ,s) slot carries +
+-- ampData/qcF/IchartF swapped in — already-enumerated campaign surface).
+-- std-3 (the residuals projector axiom-FREE). NOT a₁ = R/6.
+#print axioms QIQTH.HslotGrounding.hslot_grounded
+#print axioms QIQTH.HslotGrounding.v2Census_phase10
+#print axioms QIQTH.HslotGrounding.hslot_grounding_residuals_intro
+
 end QIQTH.AxiomAudit
