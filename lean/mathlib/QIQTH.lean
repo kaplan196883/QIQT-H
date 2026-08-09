@@ -1501,3 +1501,4 @@ import QIQTH.GaussianMomentExtraction
 
 import QIQTH.DuhamelSimplexAssembly
 import QIQTH.SliceBoundO1
+import QIQTH.CorrHigherReduction

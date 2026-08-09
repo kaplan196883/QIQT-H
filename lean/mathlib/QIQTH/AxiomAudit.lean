@@ -22827,6 +22827,28 @@ namespace QIQTH.AxiomAudit
 -- analytic carries (hInt/hE/hDuhamel/hInter/hHdiag/heatOp-regularity).
 #print axioms QIQTH.A1GaugeDischarge.trueKernel_diagonal_a1_eq_R6_gauged
 
+-- J4-503 (CorrHigherReduction): hCorrHigher HONESTLY reduced to the per-slice
+-- O(a+s) transport estimate — and a ⚠ COSMETIC-DISCHARGE CATCH. AUDIT: the
+-- capstone's hCorrHigher (heatConv H (leviSeries E) t 0 0 = (heatKernel1D t 0)^n·
+-- (t²·cRem) at a SINGLE fixed t) is TRIVIALLY satisfiable (cRem := X/(pref·t²)) —
+-- the existing TrueKernelA1Reduced.corrHigher_witness discharges it COSMETICALLY;
+-- the genuine O(t²) content (cRem BOUNDED as t→0⁺, so the fold does not shift a₁)
+-- is a ∀τ bound, NOT the single-t equality. corrHigher_bounded_of_slice: from the
+-- per-slice bound ∀s∈Ι 0 t, ‖∫_z H(t−s)0z·F s z 0‖ ≤ K·((t−s)+s) delivers the
+-- hCorrHigher shape WITH the genuine |cRem| ≤ K/|pref| — the honest bounded content
+-- the cosmetic discharge lacks (via the banked ds-lemma duhamel_simplex_quadratic_bound
+-- + the DEFINITIONAL heatConv=∫₀^t ds∫_z). slice_bound_inhabited + corrHigher_bounded_flat
+-- = satisfiability witnesses (flat F≡0, cRem=0). Sol: the per-slice O(a+s) is SOUND
+-- (honest order O(s), no τ²log τ loss); the exact missing estimate = the residual
+-- factorization E₁=t·G_t·q (bounded q) from the transport eqns 𝒯u₀=0, (𝒯+1)u₁=Δu₀
+-- ⟹ (∂_t−Δ)H₁=−t·G·Δu₁ (the extra t IS the whole cancellation) + a Levi-series
+-- Gaussian order-preservation lemma. ⚠ KEY: BOTH remaining analytic walls (hCorrHigher
+-- genuine O(t²) AND hEboundW) reduce to the SAME missing object E=O(a·G_a). std-3 all
+-- three. NOT a₁=R/6 (isolates the gap to the per-slice transport estimate, does NOT close it).
+#print axioms QIQTH.CorrHigherReduction.corrHigher_bounded_of_slice
+#print axioms QIQTH.CorrHigherReduction.slice_bound_inhabited
+#print axioms QIQTH.CorrHigherReduction.corrHigher_bounded_flat
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
