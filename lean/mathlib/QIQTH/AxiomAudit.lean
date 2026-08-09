@@ -22207,4 +22207,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HProvGrounding.diagLeg_hFmeas
 #print axioms QIQTH.HProvGrounding.v2Census_phase13
 
+-- ## ★ J4-471 (HFintDiagGrounding): the diagonal hFint DISCHARGED — the
+-- TRIVIAL route (no singular engine needed)
+-- THE GATE: the diagonal kernel is the witness VALUE (zeroth order, one
+-- derivative below the hGint kernel); its envelope carries NO 1/(2τ)
+-- slope ⟹ the two-Gaussian pairing peak is UNIFORM on (0,u) ⟹ the
+-- profile is BOUNDED a.e. ⟹ interval-integrable by Integrable.mono'
+-- against the constant. NO bulk⊕sliver split — the J4-444/445 machinery
+-- audited and correctly found UNNECESSARY at this order.
+-- pairing_intervalIntegrable_fullWindow (the uncapped engine) +
+-- hFint_diag_grounded (from {hFzero, hWitDomEvery, hFdomEvery,
+-- hFintMeas}). THE NAMED WALL (the split-rule enforcement in action):
+-- the monolithic ~330-hypothesis v2Census_phase14 threading type-checked
+-- but elaborates in ~50-100min (~125GB WS) — REMOVED per the <5min rule
+-- and recorded verbatim as a named carry; the restructured lightweight
+-- transport = J4-472. The reduced module builds in 29s (vs the hours the
+-- monolith cost — the wrap-up discipline vindicated). std-3 both.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HFintDiagGrounding.pairing_intervalIntegrable_fullWindow
+#print axioms QIQTH.HFintDiagGrounding.hFint_diag_grounded
+
 end QIQTH.AxiomAudit
