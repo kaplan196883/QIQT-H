@@ -23040,6 +23040,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LayerAFactorization.layerA_witness_origin_factor
 #print axioms QIQTH.LayerAFactorization.hgdet0_curved_satisfiable
 
+-- J4-515 (LayerBChangeVars): the Layer-B Gaussian-phase domination MAJORANT (the
+-- integrability/hbound side of the concrete hcov). gaussDdim_chartW0_le_wide ★:
+-- ∃ r>0, ∀ z∈K, ‖z‖<r → ∀ τ>0, gaussDdim τ (uniformInverseChart g gi hC hK z 0) ≤
+-- gaussDdimWide τ z — from chartW0_radialSq_half_lower (½·rncRadialSq z ≤
+-- rncRadialSq(W₀ z) on a small ball, via the banked TWO-SIDED chartW0_rncRadialSq_error)
+-- ⟹ exp(−rncRadialSq(W₀z)/4τ) ≤ exp(−rncRadialSq z/8τ), prefactors cancel (C=1),
+-- exactly the repo's gaussDdimWide. ⚠ WIDTH CHANGES 4τ→8τ (widened Gaussian): a
+-- VALID MAJORANT for integrability/hbound/tail/off-diagonal, but ∫gaussDdimWide=2^{n/2}≠1
+-- so it MUST NOT be used for the unit-mass computation (FIREWALLED — the exact mass
+-- comes from un-widened gaussDdim after the EXACT CoV; MassChartBridge's hcov is an
+-- exact integral EQUALITY, doesn't consume the domination directly). phase_domination_curved_satisfiable
+-- = the gate (non-isometric radial distortion W z=(4/5)z, c≠±1 ⟹ the bound doesn't
+-- force the isometric/flat W z=±z). g-generic, no hframeK, curved-inhabited. ⚠ M4
+-- |det DW₀(0)|=1 is BLOCKED (the base-point fderiv of W₀ is UNBANKED — InverseChartDisplacement
+-- firewall: the chart is .choose-built, no base-point flow regularity; chartW0_displacement
+-- is stated only for z∈K not a full nbhd). std-3 all three. NOT a₁=R/6 — this discharges
+-- ONLY the Gaussian/integrability SIDE CONDITION of hcov, NONE of the exact hcov equality;
+-- Layer-B still needs M1 injectivity / M2 left-inverse / M3 abs-Jacobian / M4 (blocked) /
+-- the exact CoV equality / the MassChartBridge assembly. CONDITIONAL + effectively flat-only.
+#print axioms QIQTH.LayerBChangeVars.chartW0_radialSq_half_lower
+#print axioms QIQTH.LayerBChangeVars.gaussDdim_chartW0_le_wide
+#print axioms QIQTH.LayerBChangeVars.phase_domination_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

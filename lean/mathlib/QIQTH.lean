@@ -1551,3 +1551,11 @@ import QIQTH.DaLimCurvedGauge
 -- exactly 1 as τ→0⁺ (needs only det(g 0)=1, curved-safe). The de-risking gateway
 -- for the Layer-B change-of-variables. std-3.
 import QIQTH.LayerAFactorization
+
+-- J4-515: Layer-B change-of-variables MAJORANT — the Gaussian-phase domination
+-- gaussDdim τ (W₀ z) ≤ gaussDdimWide τ z for the base-varying inverse chart W₀,
+-- from the banked two-sided near-isometry (half radial lower bound ½·r² ≤ r²(W₀z)).
+-- ⚠ WIDTH 4τ→8τ: a MAJORANT for integrability/hbound/tail control ONLY (wrong total
+-- mass 2^{n/2}), NOT the exact CoV/unit mass. Discharges the integrability side of the
+-- concrete hcov; M1–M4 + exact CoV equality + assembly remain. Curved-satisfiable. std-3.
+import QIQTH.LayerBChangeVars
