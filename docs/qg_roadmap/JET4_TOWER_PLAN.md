@@ -4879,3 +4879,17 @@ carries at the geometry-chosen gate (envelope/amplitude/boxes/scaffold/measurabi
 slot/boundary/gauge groups). HONESTY: ∃ over the geometry-chosen gate, not arbitrary S.
 raw 0; build 48s. NEXT: J4-467 = hslot (the banked K₁τ^{-1/2} shape may be verbatim).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-467: hslot OFF THE CENSUS SURFACE (phase 10)
+
+`QIQTH/HslotGrounding.lean` (3 decls; std-3 + one axiom-FREE projector). THE GATE:
+COMPATIBLE, fires VERBATIM — the census hslot binder = EXACTLY the conclusion of the banked
+J4-402 `leviSecondPairing_inner_bound_concrete` at F := leviSeries(heatOp …); the supplier
+is S-POLYMORPHIC so the ∃-consumed gate instantiates definitionally (exact closes it — the
+J4-465 kernels-defeq fact). M-UNIFORMITY: Lc/Bcomp/Q/Sconst bind BEFORE (i,τ,s) — no εₘ
+leak. DONT-UNDERCREDIT CLARIFICATION: J4-416's hslot_covered CONSUMES hslot (aggregates it);
+the PRODUCER is J4-402 — which is what fires here. `hslot_grounded` + `v2Census_phase10`
+(hslot removed; the J4-402 per-(τ,s) slot carries + ampData/qcF/IchartF swapped in — the
+already-enumerated campaign surface). raw 0; build 77s.
+NEXT: J4-468 = hcap + hEndpoint (both banked-satisfiable). NOT a₁ = R/6 (CONDITIONAL).
