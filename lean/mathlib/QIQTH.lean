@@ -687,6 +687,7 @@ import QIQTH.Hfwd2Weld
 import QIQTH.ExpRhoReachability
 import QIQTH.OperatorPdBridge
 import QIQTH.AmplitudeSecondJet
+import QIQTH.C2CarrierCollapse
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

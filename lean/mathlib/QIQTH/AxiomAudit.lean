@@ -22552,6 +22552,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmplitudeSecondJet.hcont2_of_reach
 #print axioms QIQTH.AmplitudeSecondJet.supConstant_phase4
 
+-- ## ★ J4-488 (C2CarrierCollapse): 6/7 C₂ carriers COLLAPSED — C₂ on
+-- (I1) + ONE isolated 2nd-order germ residue
+-- c2_carriers_discharged: SIX of the seven supConstant_phase4 geometric
+-- carriers on a CONCRETE small ball, FROM THE BANK ALONE (none needed
+-- hReach — the reachable-C²/nondeg/displacement/origin/field-Jacobian
+-- lemmas are all K-uniform without expRho): hUK (K∈𝓝 0), horigin
+-- (chartW0_displacement), hunit (common_nondeg_radius), hreg
+-- (chartField_contDiffAt_reachable_uniform + chartW0_rightInverse), hW0
+-- (chartOrigin_continuousOn), hJac (chartFieldJacobian_continuousOn +
+-- the ring-inverse identity). supConstant_phase5: the sup family from
+-- (I1) hReach + the single 2nd-order RESIDUE hid2 (the per-z 2nd-order
+-- IFT identity — the fderiv-germ/right-inverse germ φ_z∘W_z = id near 0,
+-- a distinct germ sub-brick, J4-489). C₀ unconditional · C₁
+-- geometric-closed · C₂ on (I1)+hid2. The small-ball reconciliation =
+-- pure radius bookkeeping over banked uniform radii (SupFamilyFirstOrder's
+-- flagged residual, discharged). std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.C2CarrierCollapse.c2_carriers_discharged
+#print axioms QIQTH.C2CarrierCollapse.supConstant_phase5
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
