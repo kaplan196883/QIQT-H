@@ -5208,3 +5208,20 @@ felled to a PROVED CHAIN: the 2nd-order IFT (J4-479) · C³ from the banked C⁴
 the hbaseJ2 assembly (J4-483) · THE WELD → hFwd2 → chartSecondJet (J4-484). The SINGLE
 residual gate = (I1) the uniform injectivity radius (J4-485 verdict: genuine geometric
 input, repo-wide, joins the a₁ labelled-input list). a₁=R/6 CONDITIONAL.
+
+---
+## ★ J4-486 (d0daa045): the operator⇄pd bridge — TWO HONEST FINDINGS on the consumers
+
+`QIQTH/OperatorPdBridge.lean` (3 decls std-3). `pd_pd_component_eq` (THE COORDINATE GATE,
+pure Mathlib — the PullbackMetric CLM-contraction pattern one order up) +
+`chartSecondJetComponent_continuousOn_of_reach` (the J4-484 operator result in pd-coordinate
+form, gated by hReach). **★ FINDING 1:** hWc2cont (SmoothCarrier) is a FALSE TWIN — the
+field-Hessian of the SINGLE base-0 chart at a varying FIELD point, NOT a base-varying jet —
+ALREADY discharged UNCONDITIONALLY by ChartJetFactsDischarge.hWc2cont_of_contDiffOn_ball
+(single-chart C²-on-ball, banked+wired); needs neither (I1) nor this bridge; the J4-478
+"convergence" claim OVERSTATED it (an honest correction). **★ FINDING 2:** hcont2
+(BaseSlotAmpDeriv C₂) IS genuinely base-varying — its raw-chart 2nd-jet coordinate pd²(W_z·a)
+0 is DELIVERED here on the ONE (I1) hReach input; the residue = the manifoldAmp 2nd-deriv +
+first-jet + chain-rule assembly (pure bookkeeping, J4-487). raw 0; build 31s module.
+NEXT: J4-487 = AmplitudeSecondJet (the 4-block chain-rule ⟹ C₂/M₂chart/Sconst modulo (I1)).
+NOT a₁ = R/6 (CONDITIONAL).
