@@ -5122,3 +5122,19 @@ naive full-doubled-norm Grönwall FAILS hbaseJ2 — the full norm is dominated b
 linODE_twopoint_diff_bound already accepts inhomogeneous sources). THE WALL DOES NOT FALL
 YET: the two-point Grönwall + the double opNorm + the z₀-weld = J4-482. raw 0; build 59s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-482: THE GRÖNWALL LANDED — the wall-felling ODE step
+
+`QIQTH/HbaseJ2Gronwall.lean` (5 decls std-3). **secondVar_snd_twopoint_diff_bound** — the
+two-point bound on the .2-component ODE via `linODE_twopoint_diff_bound` with the source
+separation from `clm2_apply_telescope` (the pure-CLM trilinear telescope: coefficient +
+.1-slot + base-Jacobi parts) — the J4-481 finding honoured. **THE M₃/D²F SEPARATION
+LANDED** (`geodesicField_fderiv2_diff_bound` — the M₂ exists_isMaxOn pattern one order up;
+dont-undercredit: `contDiff_fderiv2_geodesicField` was ALREADY BANKED in ExpMapContDiff2).
+Also: `secondVar_fst_hasDerivAt` (the .1 homogeneous ODE) + `linODE_growth_bound`.
+THE WALL HAS NOT FALLEN YET: the concrete instantiation at the two exposures + the
+fderiv² = endpoint bridge + the double opNorm → hbaseJ2 (J4-483); the z₀-weld → hFwd2
+(J4-484). Pre-banked: the doubled-field fderiv projections, the generic inhomogeneous
+engine, the Jacobi bounds — a telescope + Grönwall assembly, not an ODE-existence effort.
+raw 0; build 42s. NOT a₁ = R/6 (CONDITIONAL).
