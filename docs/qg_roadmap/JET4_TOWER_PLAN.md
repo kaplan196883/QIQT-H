@@ -4935,3 +4935,21 @@ THE J4-444 "diagonal ≠ frozen" claim now EXPLAINED: same engines, window/base-
 only genuine obstruction is the singular endpoint blocking the integrability legs.
 `v2Census_phase13`. raw 0; build ~50s. NEXT: J4-471 = hFint via the bulk⊕sliver split (the
 J4-444/445 hGint pattern at the witness-value order). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-471: the diagonal hFint DISCHARGED — the trivial route; the split rule
+## enforced on the monolithic threading
+
+`QIQTH/HFintDiagGrounding.lean` (2 decls std-3). **THE GATE:** the diagonal kernel is the
+witness VALUE (zeroth order, one derivative below the hGint kernel); its envelope
+(witnessValue_gate_envelope_prod) carries NO 1/(2τ) slope ⟹ the two-Gaussian pairing peak
+is UNIFORM on (0,u) ⟹ the profile is BOUNDED a.e. ⟹ interval-integrable via
+Integrable.mono' against the constant — **NO bulk⊕sliver split, no singular engine** (the
+J4-444/445 machinery audited and correctly found unnecessary at this order).
+`pairing_intervalIntegrable_fullWindow` (the uncapped engine) + `hFint_diag_grounded`
+(from {hFzero, hWitDomEvery, hFdomEvery, hFintMeas}). **THE NAMED WALL (the split rule in
+action):** the monolithic ~330-hypothesis v2Census_phase14 threading TYPE-CHECKED but
+elaborates in ~50-100 min (~125 GB WS) — REMOVED per the <5min rule, recorded verbatim as a
+named carry; the restructured lightweight transport = J4-472. The reduced module builds in
+29s — the wrap-up discipline vindicated (the agent had burned ~3.5h on the monolith before
+the orchestrator nudge). raw 0. NOT a₁ = R/6 (CONDITIONAL).
