@@ -22653,4 +22653,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VacuumAreaLaw.m_le_sqrtK
 #print axioms QIQTH.VacuumAreaLaw.sqrtK_le
 
+-- VACAREA-5: the inverse Loewner bound + the per-site (VOLUME) entropy cap (the tail VACAREA-4
+-- checkpointed). loewner_inv_le = `c·1 ⪯ A ⟹ A⁻¹ ⪯ c⁻¹·1` for PosDef real Hermitian A — proved
+-- DIRECTLY at the eigenvector level (bypassing the sorted eigenvalue identity `eig_j(A⁻¹)=(eig_j A)⁻¹`,
+-- which is FALSE at the reindexed level because x⁻¹ REVERSES the sorted order, unlike the monotone √).
+-- Xcov_le/Pcov_le/redX_le/redP_le/redSymM_le/redSympEig_le = the mechanical Loewner-algebra chain.
+-- redEntropy_le = the per-site VOLUME entropy UPPER bound `S(ρ_Ω) ≤ |Ω|·h(ν_max)`.
+-- ⚠ HONEST SCOPE: redEntropy_le is the VOLUME-compatible physicality cap (entropy ≤ number of sites),
+-- NOT the area law and NOT an area lower bound. The area coefficient `S ∝ A_geom` remains the flagged
+-- multi-session Mathlib wall (VACUUM_AREA_LAW_PLAN.md §3-C/D). std-3.
+#print axioms QIQTH.VacuumAreaLaw.loewner_inv_le
+#print axioms QIQTH.VacuumAreaLaw.Xcov_le
+#print axioms QIQTH.VacuumAreaLaw.Pcov_le
+#print axioms QIQTH.VacuumAreaLaw.redSymM_le
+#print axioms QIQTH.VacuumAreaLaw.redSympEig_le
+#print axioms QIQTH.VacuumAreaLaw.redEntropy_le
+
 end QIQTH.AxiomAudit

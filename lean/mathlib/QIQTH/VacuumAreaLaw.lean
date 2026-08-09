@@ -655,10 +655,10 @@ theorem eigenvalues_sqrt {ι : Type*} [Fintype ι] [DecidableEq ι]
 These are the first two lemmas of the symplectic-cap chain VACAREA-3 removed; they follow directly
 from the gapped spectral window (`couplingK_ge` / `couplingK_le`) via the eigenvalue converses and
 the square-root spectral identity.  (The remaining chain — `Xcov_le`, `Pcov_le`, `redX_le`,
-`redP_le`, `redSymM_le`, `redSympEig_le`, `redEntropy_le` — additionally needs the *inverse*
-antitonicity `m·1 ⪯ K^{1/2} ⟹ K^{−1/2} ⪯ m⁻¹·1` for the position covariance `X = ½K^{−1/2}`; the
-inverse-eigenvalue identity `eig_j(A⁻¹) = (eig_j A)⁻¹` is a further absent Mathlib fact, so that tail
-is CHECKPOINTED to VACAREA-5.  No area claim.) -/
+`redP_le`, `redSymM_le`, `redSympEig_le`, `redEntropy_le` — is landed in §3-C.3 (VACAREA-5) via the
+*inverse Loewner bound* `loewner_inv_le` (`m·1 ⪯ A ⟹ A⁻¹ ⪯ m⁻¹·1`, proved directly at the
+eigenvector level, bypassing the sorted inverse-eigenvalue identity which is false under the
+order-reversing `x⁻¹`).  No area claim.) -/
 
 /-- **The sqrt Loewner lower bound** `m·1 ⪯ K^{1/2}`.  From the mass gap `m²·1 ⪯ K_ε` via the
     real-Hermitian spectral-order layer: `eig_j(K^{1/2}) = √(eig_j K) ≥ √(m²) = m`. -/
@@ -688,5 +688,184 @@ theorem sqrtK_le {n : ℕ} (hn : 2 ≤ n) {ε : ℝ} (hε : ε ≠ 0) {m : ℝ} 
     rw [eigenvalues_sqrt hKpsd hsqrtH j]
     exact Real.sqrt_le_sqrt (eigenvalue_ub hKpsd.1 (Matrix.le_iff.mp (couplingK_le hn hε m)) j)
   exact loewner_of_eigenvalues_le hsqrtH hbound
+
+/-! ## §3-C.3 (VACAREA-5) — the inverse Loewner bound and the per-site (VOLUME) entropy cap
+
+The tail VACAREA-4 checkpointed.  The one genuinely new Mathlib-gap fill is the **inverse Loewner
+bound** `loewner_inv_le`: for PosDef real Hermitian `A`, `c·1 ⪯ A ⟹ A⁻¹ ⪯ c⁻¹·1`.  This is the
+inverse analogue of the sqrt bounds, but — because `x ↦ x⁻¹` is *antitone* (it REVERSES the sorted
+eigenvalue order that `eigenvalues₀` is defined by, unlike the monotone `√`) — the pointwise
+sorted-index identity `eig_j(A⁻¹) = (eig_j A)⁻¹` is FALSE at the reindexed `eigenvalues` level.  We
+therefore bypass the sorted identity entirely and prove the Loewner bound directly at the eigenvector
+level: for each eigenvector `v` of `A⁻¹` with eigenvalue `μ`, `A v = μ⁻¹ v`, and testing the PSD
+matrix `A − c·1` against `v` gives `c ≤ μ⁻¹`, i.e. `μ ≤ c⁻¹`; then `loewner_of_eigenvalues_le`.
+
+The rest of the chain is mechanical Loewner algebra on top of VACAREA-4's `m_le_sqrtK` / `sqrtK_le`:
+`Xcov_le` (via `loewner_inv_le`), `Pcov_le`, their submatrix restrictions `redX_le` / `redP_le`, the
+conjugated `redSymM_le` (`√X_Ω·redP·√X_Ω ⪯ P_max·redX ⪯ P_max·X_max·1`), the symplectic cap
+`redSympEig_le`, and finally the **per-site VOLUME entropy bound** `redEntropy_le`:
+`S(ρ_Ω) ≤ |Ω|·h(ν_max)`.
+
+**⚠ HONEST SCOPE.**  `redEntropy_le` is the VOLUME-compatible UPPER bound — it caps the entropy by
+the number of sites `|Ω| = s.card`.  It is **NOT** the area law and **NOT** an area lower bound.  The
+AREA coefficient (the `S ∝ A_geom` surface density) is the flagged multi-session wall (`VACUUM_AREA_
+LAW_PLAN.md` §3-C/D: dimension-uniform quasi-local Green-function decay, boundary summation, Schatten
+control — none packaged in Mathlib).  This brick closes the *physicality cap*, not the area scaling. -/
+
+/-- **The inverse Loewner bound** `c·1 ⪯ A ⟹ A⁻¹ ⪯ c⁻¹·1` for PosDef real Hermitian `A` (`c > 0`).
+    The inverse analogue of the sqrt Loewner bounds, but proved directly at the eigenvector level
+    (not via a sorted eigenvalue identity, which is false here because `x⁻¹` reverses the sorted
+    order): each eigenvector `v` of `A⁻¹` with eigenvalue `μ` satisfies `A v = μ⁻¹ v`, and testing
+    `A − c·1 ⪰ 0` against `v` gives `c ≤ μ⁻¹`, i.e. `μ ≤ c⁻¹`; conclude via `loewner_of_eigenvalues_le`. -/
+theorem loewner_inv_le {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {A : Matrix ι ι ℝ} (hA : A.PosDef) {c : ℝ} (hc : 0 < c)
+    (h : c • (1 : Matrix ι ι ℝ) ≤ A) : A⁻¹ ≤ c⁻¹ • (1 : Matrix ι ι ℝ) := by
+  have hAinv : (A⁻¹).PosDef := hA.inv
+  have hHerm : (A⁻¹).IsHermitian := hAinv.1
+  have hUnit : IsUnit A.det := (Matrix.isUnit_iff_isUnit_det _).mp hA.isUnit
+  have hPSD : (A - c • (1 : Matrix ι ι ℝ)).PosSemidef := Matrix.le_iff.mp h
+  refine loewner_of_eigenvalues_le hHerm (fun j => ?_)
+  have hμpos : 0 < hHerm.eigenvalues j := hAinv.eigenvalues_pos j
+  have hAv : A⁻¹ *ᵥ ⇑(hHerm.eigenvectorBasis j)
+      = hHerm.eigenvalues j • ⇑(hHerm.eigenvectorBasis j) := hHerm.mulVec_eigenvectorBasis j
+  have hAmul : A *ᵥ ⇑(hHerm.eigenvectorBasis j)
+      = (hHerm.eigenvalues j)⁻¹ • ⇑(hHerm.eigenvectorBasis j) := by
+    have h1 : A *ᵥ (A⁻¹ *ᵥ ⇑(hHerm.eigenvectorBasis j))
+        = hHerm.eigenvalues j • (A *ᵥ ⇑(hHerm.eigenvectorBasis j)) := by
+      rw [hAv, Matrix.mulVec_smul]
+    rw [Matrix.mulVec_mulVec, Matrix.mul_nonsing_inv A hUnit, Matrix.one_mulVec] at h1
+    have h2 : (hHerm.eigenvalues j)⁻¹ • ⇑(hHerm.eigenvectorBasis j)
+        = (hHerm.eigenvalues j)⁻¹ • (hHerm.eigenvalues j • (A *ᵥ ⇑(hHerm.eigenvectorBasis j))) :=
+      congrArg (fun w => (hHerm.eigenvalues j)⁻¹ • w) h1
+    rw [smul_smul, inv_mul_cancel₀ (ne_of_gt hμpos), one_smul] at h2
+    exact h2.symm
+  have hmv : (A - c • (1 : Matrix ι ι ℝ)) *ᵥ ⇑(hHerm.eigenvectorBasis j)
+      = ((hHerm.eigenvalues j)⁻¹ - c) • ⇑(hHerm.eigenvectorBasis j) := by
+    rw [Matrix.sub_mulVec, hAmul, Matrix.smul_mulVec, Matrix.one_mulVec, sub_smul]
+  have hnn := hPSD.dotProduct_mulVec_nonneg (⇑(hHerm.eigenvectorBasis j))
+  rw [hmv, dotProduct_smul, smul_eq_mul] at hnn
+  have hnorm : star (⇑(hHerm.eigenvectorBasis j) : ι → ℝ) ⬝ᵥ (⇑(hHerm.eigenvectorBasis j)) = 1 := by
+    rw [dotProduct_comm, ← EuclideanSpace.inner_eq_star_dotProduct,
+      real_inner_self_eq_norm_sq, hHerm.eigenvectorBasis.orthonormal.1 j, one_pow]
+  rw [hnorm, mul_one] at hnn
+  have hcle : c ≤ (hHerm.eigenvalues j)⁻¹ := by linarith
+  have hfin := inv_anti₀ hc hcle
+  rwa [inv_inv] at hfin
+
+/-- **The position covariance upper bound** `X = ½K^{−1/2} ⪯ (1/2·m⁻¹)·1`.  From the sqrt lower bound
+    `m·1 ⪯ K^{1/2}` (`m_le_sqrtK`) via the inverse Loewner bound `K^{−1/2} ⪯ m⁻¹·1`. -/
+theorem Xcov_le (ε : ℝ) {m : ℝ} {n : ℕ} (hm : 0 < m) :
+    Xcov ε m n ≤ (1 / 2 * m⁻¹) • (1 : Matrix (Fin n) (Fin n) ℝ) := by
+  have hinv : (sqrtK ε m n)⁻¹ ≤ m⁻¹ • (1 : Matrix (Fin n) (Fin n) ℝ) :=
+    loewner_inv_le (sqrtK_posDef ε m n hm) hm (m_le_sqrtK ε hm)
+  calc Xcov ε m n = (1 / 2 : ℝ) • (sqrtK ε m n)⁻¹ := rfl
+    _ ≤ (1 / 2 : ℝ) • (m⁻¹ • (1 : Matrix (Fin n) (Fin n) ℝ)) :=
+        smul_le_smul_left hinv (by norm_num)
+    _ = (1 / 2 * m⁻¹) • (1 : Matrix (Fin n) (Fin n) ℝ) := by rw [smul_smul]
+
+/-- **The momentum covariance upper bound** `P = ½K^{1/2} ⪯ (1/2·√(m²+4/ε²))·1`.  From the sqrt
+    upper bound `K^{1/2} ⪯ √(m²+4/ε²)·1` (`sqrtK_le`). -/
+theorem Pcov_le (ε : ℝ) {m : ℝ} {n : ℕ} (hn : 2 ≤ n) (hε : ε ≠ 0) (hm : 0 < m) :
+    Pcov ε m n ≤ (1 / 2 * Real.sqrt (bcap ε m)) • (1 : Matrix (Fin n) (Fin n) ℝ) := by
+  calc Pcov ε m n = (1 / 2 : ℝ) • sqrtK ε m n := rfl
+    _ ≤ (1 / 2 : ℝ) • (Real.sqrt (bcap ε m) • (1 : Matrix (Fin n) (Fin n) ℝ)) :=
+        smul_le_smul_left (sqrtK_le hn hε hm) (by norm_num)
+    _ = (1 / 2 * Real.sqrt (bcap ε m)) • (1 : Matrix (Fin n) (Fin n) ℝ) := by rw [smul_smul]
+
+/-- **The reduced position covariance upper bound** `X_Ω ⪯ (1/2·m⁻¹)·1` (principal submatrix of
+    `Xcov_le`). -/
+theorem redX_le (ε : ℝ) {m : ℝ} {n : ℕ} (s : Finset (Fin n)) (hm : 0 < m) :
+    redX ε m n s ≤ (1 / 2 * m⁻¹) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by
+  classical
+  have h := submatrix_le s (Xcov_le ε hm)
+  have hEq : ((1 / 2 * m⁻¹) • (1 : Matrix (Fin n) (Fin n) ℝ)).submatrix
+        (Subtype.val : {x // x ∈ s} → Fin n) Subtype.val
+      = (1 / 2 * m⁻¹) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by
+    ext i j
+    by_cases hij : i = j
+    · subst hij; simp [Matrix.submatrix_apply, Matrix.smul_apply, Matrix.one_apply_eq]
+    · have hv : (i : Fin n) ≠ (j : Fin n) := fun hh => hij (Subtype.ext hh)
+      simp [Matrix.submatrix_apply, Matrix.smul_apply, Matrix.one_apply_ne hij,
+        Matrix.one_apply_ne hv]
+  rw [hEq] at h
+  exact h
+
+/-- **The reduced momentum covariance upper bound** `P_Ω ⪯ (1/2·√(m²+4/ε²))·1` (principal submatrix
+    of `Pcov_le`). -/
+theorem redP_le (ε : ℝ) {m : ℝ} {n : ℕ} (s : Finset (Fin n))
+    (hn : 2 ≤ n) (hε : ε ≠ 0) (hm : 0 < m) :
+    redP ε m n s ≤ (1 / 2 * Real.sqrt (bcap ε m)) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by
+  classical
+  have h := submatrix_le s (Pcov_le ε hn hε hm)
+  have hEq : ((1 / 2 * Real.sqrt (bcap ε m)) • (1 : Matrix (Fin n) (Fin n) ℝ)).submatrix
+        (Subtype.val : {x // x ∈ s} → Fin n) Subtype.val
+      = (1 / 2 * Real.sqrt (bcap ε m)) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by
+    ext i j
+    by_cases hij : i = j
+    · subst hij; simp [Matrix.submatrix_apply, Matrix.smul_apply, Matrix.one_apply_eq]
+    · have hv : (i : Fin n) ≠ (j : Fin n) := fun hh => hij (Subtype.ext hh)
+      simp [Matrix.submatrix_apply, Matrix.smul_apply, Matrix.one_apply_ne hij,
+        Matrix.one_apply_ne hv]
+  rw [hEq] at h
+  exact h
+
+/-- **The symmetrized reduced product upper bound** `√X_Ω·P_Ω·√X_Ω ⪯ (P_max·X_max)·1`, with
+    `P_max = ½√(m²+4/ε²)`, `X_max = ½m⁻¹`.  Conjugate `redP_le` by the self-adjoint `√X_Ω`
+    (`√X_Ω·(P_max·1)·√X_Ω = P_max·X_Ω`), then dominate `X_Ω` by `redX_le`. -/
+theorem redSymM_le (ε : ℝ) {m : ℝ} {n : ℕ} (s : Finset (Fin n))
+    (hn : 2 ≤ n) (hε : ε ≠ 0) (hm : 0 < m) :
+    redSymM ε m n s
+      ≤ ((1 / 2 * Real.sqrt (bcap ε m)) * (1 / 2 * m⁻¹))
+          • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by
+  have hsa : IsSelfAdjoint (CFC.sqrt (redX ε m n s)) := IsSelfAdjoint.of_nonneg (CFC.sqrt_nonneg _)
+  have hconj := hsa.conjugate_le_conjugate (redP_le ε s hn hε hm)
+  have hRR : CFC.sqrt (redX ε m n s) * CFC.sqrt (redX ε m n s) = redX ε m n s :=
+    CFC.sqrt_mul_sqrt_self _ (redX_posDef ε m n s hm).posSemidef.nonneg
+  have hR1 : CFC.sqrt (redX ε m n s)
+      * ((1 / 2 * Real.sqrt (bcap ε m)) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ))
+      * CFC.sqrt (redX ε m n s) = (1 / 2 * Real.sqrt (bcap ε m)) • redX ε m n s := by
+    rw [Matrix.mul_smul, Matrix.mul_one, Matrix.smul_mul, hRR]
+  calc redSymM ε m n s
+      = CFC.sqrt (redX ε m n s) * redP ε m n s * CFC.sqrt (redX ε m n s) := rfl
+    _ ≤ (1 / 2 * Real.sqrt (bcap ε m)) • redX ε m n s := by rw [← hR1]; exact hconj
+    _ ≤ (1 / 2 * Real.sqrt (bcap ε m)) • ((1 / 2 * m⁻¹) • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ)) :=
+        smul_le_smul_left (redX_le ε s hm) (by positivity)
+    _ = ((1 / 2 * Real.sqrt (bcap ε m)) * (1 / 2 * m⁻¹))
+          • (1 : Matrix {x // x ∈ s} {x // x ∈ s} ℝ) := by rw [smul_smul]
+
+/-- The uniform symplectic-eigenvalue **cap** `ν_max = √(P_max·X_max) = √(½√(m²+4/ε²)·½m⁻¹)`. -/
+noncomputable def sympCap (ε m : ℝ) : ℝ :=
+  Real.sqrt ((1 / 2 * Real.sqrt (bcap ε m)) * (1 / 2 * m⁻¹))
+
+/-- **The reduced symplectic eigenvalues are capped** `ν_j ≤ ν_max` — the upper companion of the
+    Heisenberg floor `redSympEig_ge_half`.  Via `eigenvalue_ub` on `redSymM_le`, then `Real.sqrt`. -/
+theorem redSympEig_le (ε : ℝ) {m : ℝ} {n : ℕ} (s : Finset (Fin n))
+    (hn : 2 ≤ n) (hε : ε ≠ 0) (hm : 0 < m) (j : {x // x ∈ s}) :
+    redSympEig ε m n s hm j ≤ sympCap ε m := by
+  unfold redSympEig sympCap
+  exact Real.sqrt_le_sqrt
+    (eigenvalue_ub (redSymM_isHermitian ε m n s hm) (Matrix.le_iff.mp (redSymM_le ε s hn hε hm)) j)
+
+/-- **The per-site (VOLUME) entanglement-entropy upper bound** `S(ρ_Ω) ≤ |Ω|·h(ν_max)`.  Each mode
+    entropy `h(ν_j)` is squeezed between the floor `ν_j ≥ ½` (`redSympEig_ge_half`) and the cap
+    `ν_j ≤ ν_max` (`redSympEig_le`); `gaussModeEntropy` is monotone there (`gaussModeEntropy_mono`),
+    so `h(ν_j) ≤ h(ν_max)`, and summing over the `|Ω| = s.card` sites gives the bound.
+
+    **⚠ This is the VOLUME-compatible physicality cap, NOT the area law** — it caps entropy by the
+    NUMBER OF SITES, not the boundary area.  The area coefficient `S ∝ A_geom` is the flagged
+    multi-session Mathlib wall (`VACUUM_AREA_LAW_PLAN.md` §3-C/D). -/
+theorem redEntropy_le (ε : ℝ) {m : ℝ} {n : ℕ} (s : Finset (Fin n))
+    (hn : 2 ≤ n) (hε : ε ≠ 0) (hm : 0 < m) :
+    redEntropy ε m n s hm
+      ≤ (s.card : ℝ) * QIQTH.GaussianStateEntropy.gaussModeEntropy (sympCap ε m) := by
+  unfold redEntropy
+  calc ∑ j, QIQTH.GaussianStateEntropy.gaussModeEntropy (redSympEig ε m n s hm j)
+      ≤ ∑ _j : {x // x ∈ s}, QIQTH.GaussianStateEntropy.gaussModeEntropy (sympCap ε m) := by
+        apply Finset.sum_le_sum
+        intro j _
+        exact gaussModeEntropy_mono (redSympEig_ge_half ε m n s hm j)
+          (redSympEig_le ε s hn hε hm j)
+    _ = (s.card : ℝ) * QIQTH.GaussianStateEntropy.gaussModeEntropy (sympCap ε m) := by
+        rw [Finset.sum_const, Finset.card_univ, Fintype.card_coe, nsmul_eq_mul]
 
 end QIQTH.VacuumAreaLaw
