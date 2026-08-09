@@ -22571,6 +22571,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.C2CarrierCollapse.c2_carriers_discharged
 #print axioms QIQTH.C2CarrierCollapse.supConstant_phase5
 
+-- J4-489 (Hid2Germ): the last C₂ carrier hid2 discharged — THE SUP FAMILY
+-- CLOSED ON (I1) ALONE. chartRightInverse_germ = the right-inverse germ
+-- φ_z(W_z y)=y near 0, derived by re-running Mathlib's strict IFT on the
+-- nondegenerate φ_z (HasStrictFDerivAt from contDiffAt2_uniformFlowExp C² +
+-- uniformFlowExp_common_nondeg_radius unit — both already used by
+-- c2_carriers_discharged) then localInverse_unique ∘ eventually_right_inverse.
+-- AUDIT: a local diffeo has BOTH germs; the right germ is a THEOREM of the bank
+-- (a fresh strict-IFT invocation, NO NEW INPUT). chartFDerivInverse_germ = the
+-- per-y fderiv-germ fderiv W_z y = Ring.inverse(fderiv φ_z (W_z y)) via
+-- fderiv_localLeftInverse_eq_ringInverse. hid2_discharged = the per-z 2nd-order
+-- IFT identity (exactly the hid2 binder). supConstant_phase6 = the sup family
+-- supplying ALL SEVEN phase-4 carriers (the six geometric AS in J4-488 AND
+-- hid2) internally from the bank, leaving (I1) hReach as THE SINGLE carried
+-- input. C₀ unconditional · C₁ geometric-closed · C₂ on (I1) ALONE, matching
+-- the convergent wall. No second-order germ residue survives. std-3 all four.
+-- NOT a₁ = R/6 (still conditional on I1 + the banked convergence trio +
+-- geometric wiring).
+#print axioms QIQTH.Hid2Germ.chartRightInverse_germ
+#print axioms QIQTH.Hid2Germ.chartFDerivInverse_germ
+#print axioms QIQTH.Hid2Germ.hid2_discharged
+#print axioms QIQTH.Hid2Germ.supConstant_phase6
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
