@@ -4745,3 +4745,23 @@ discharges it; a downstream-quality concern, not a soundness gap (the absorption
 The far-field sups hA1F/hA2F honestly carried (the data-bundle sups are on-collar-only).
 `hcomp_final4` + `slotInstantiation_phase10`. raw 0; build 52s.
 NEXT: J4-458 = (v) WALL-A INSTANTIATION (the last Sol-#20 item). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ★★ J4-458: wall-A INSTANTIATED — ALL SIX SOL-#20 ATTACK ITEMS ADDRESSED
+
+`QIQTH/WallAInstantiation.lean` (5 decls std-3). THE BLOCK-B MAP: hSecCont VERBATIM
+(hSecCont_of_boxes — exact Ioc 0 T ×ˢ univ shape); hFdomW BRIDGED (hFdom_concrete,
+y:=0/wF:=2/sub_zero); hBcont BRIDGED (the generic stripContOn_of_boxes lift); hmeas2Lo
+BRIDGED (the banked hmeas2Lo_slice REDUCES it onto hSecCont/hBcont/hUT/hεU — the V2 map
+had it as a carry; dont-undercredit, again); THE TWO GENUINE CARRIES: hInter (the
+interchange bundle) + hAdom2cap (the clean 2nd-deriv Gaussian cap — the banked bound is
+the crude τ⁻¹ envelope). `wallA_phase1`/`wallA_ledger` produce all six members in the
+exact truncatedDuhamelCore_threaded_v3 shapes.
+### ★ THE SOL-#20 SCOREBOARD — ALL SIX ADDRESSED:
+(i) diff-under-∫ ✓ (hQ1 census-shape + the provider closed) · (ii) hGint ✓ (11 census
+phases, closed at the witness) · (iii) the √ε sliver ✓ (the risk gate + the singular
+engine) · (iv) sups ✓ (C_L/Mqc/C₁ grounded; C₂ the 2nd-order spec) · (v) wall-A ✓ (THIS
+BRICK) · (vi) herr/hmin ✓-as-corrected (the unsatisfiability certified; the gate/far-field
+repair in force). The carries are INPUTS not theorems. raw 0; build 81s.
+NEXT: J4-459 = WallAThreading (the v3-core call at the witness; block-B → hInter+hAdom2cap).
+NOT a₁ = R/6 (CONDITIONAL).
