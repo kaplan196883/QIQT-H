@@ -22742,6 +22742,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.quadForm_gauss_second_moment
 #print axioms QIQTH.HeatResidualBound.poly2_gauss_extraction
 
+-- J4-499 (DuhamelSimplexAssembly): the τ/s TIME-ROLE RESOLVED + the ds-assembly
+-- last link. RESOLUTION (from the code, HeatDuhamel.lean:55): heatConv A B t x y
+-- = ∫₀^t ds ∫_z A(t−s)x z·B s z y — so t=outer age, s=inner source-time∈[0,t],
+-- the parametrix factor at REMAINING age a=t−s. The concrete residual's Gaussian
+-- age must be instantiated at a=τ−s ⟹ the proven fixed-age C/a bound gives
+-- E_tr(τ)=∫₀^τ [∫_z f(τ−s,s,z)]ds with |·|≤∫₀^τ C/(τ−s)ds = +∞ LOG-DIVERGENT.
+-- This CONFIRMS+SHARPENS the q-audit: q=1 is genuinely NONintegrable along the
+-- Duhamel path (the absolute bound is lossy; the true a₁ is finite). A sharper
+-- slice estimate is REQUIRED. duhamel_simplex_quadratic_bound = the ds-assembly:
+-- (∀s∈[0,τ], ‖r(τ−s) s‖ ≤ K·((τ−s)+s)) → ‖∫₀^τ r(τ−s) s ds‖ ≤ K·τ² (via
+-- (τ−s)+s=τ CONSTANT on the simplex + norm_integral_le_of_norm_le_const). _pref
+-- = the pref·(τ²·cRem) shape matching the carried hCorrHigher. _sharp = the
+-- satisfiability witness (∫₀^τ((τ−s)+s)ds=τ², tight). This is the honest LAST
+-- link; it CONSUMES the still-open O(a+s) slice hyp (does NOT provide it, does
+-- NOT dress up the log-divergence). Sol: moment extraction only upgrades
+-- O(1/a)→O(1) NOT O(a); the surviving O(1) transport coeff must CANCEL (= the
+-- van-Vleck 2-jet D²u₀=(1/6)Ric) to reach O(a+s)→O(τ²). std-3 all three. NOT
+-- a₁=R/6 (CONDITIONAL on hCorrHigher/hEboundW/htr[=ud_1=R/6] in
+-- trueKernel_diagonal_a1_eq_R6; the van-Vleck 2-jet is the irreducible wall).
+#print axioms QIQTH.DuhamelAssembly.duhamel_simplex_quadratic_bound
+#print axioms QIQTH.DuhamelAssembly.duhamel_simplex_quadratic_bound_pref
+#print axioms QIQTH.DuhamelAssembly.duhamel_simplex_quadratic_bound_sharp
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -1496,3 +1496,5 @@ import QIQTH.ConcreteRemainderOrder
 import QIQTH.AmpDiffGrounding
 import QIQTH.FormGateGrounding
 import QIQTH.GaussianMomentExtraction
+
+import QIQTH.DuhamelSimplexAssembly
