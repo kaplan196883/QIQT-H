@@ -4849,3 +4849,16 @@ the census-fixed S (→ J4-465, with the gate-coherence audit). `gateCore_recons
 `v2Census_phase7` (hGateCore → the 6-conjunct hGateCoreR + the C₁-geometry bundle; C₁
 reconstructed internally). raw 0; build 49s. NEXT: J4-465 = CLSlotWire (the gate-coherence
 audit + the C_L wire). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-465: the census C_L slot WIRED — the gate ∃-consumed (phase 8)
+
+`QIQTH/CLSlotWire.lean` (3 decls std-3). THE AUDIT: ∃-CONSUMPTION, NO BLOCKER — the kernels
+(vanVleckGatedWitness = gatedKernel) are defeq GIVEN the same S,a,b; the mismatch was purely
+∃-S vs ∀-S (no germ/presentation gap). THE HONESTY COST RECORDED: v2Census_phase8's
+conclusion is ∃ a b S … (the census gate fixed to the grounded W3 geometry-chosen gate);
+the S-dependent slots migrate into the ∃-body — all satisfiable at that S
+(hUT/hεU/hEmeas/hGateCoreRR = the surviving labelled inputs). `census_C_L_wired` (σ := 2s)
++ `gateCoreRR_reconstruct` + `v2Census_phase8`. The s-bounds recovered from the existing
+hεU/hUT binders — no new carry. raw 0; build 47s. NEXT: J4-466 = Phase9Replumb (the full
+analytic stack at the ∃-consumed gate — mechanical). NOT a₁ = R/6 (CONDITIONAL).
