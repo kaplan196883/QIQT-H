@@ -5035,3 +5035,18 @@ irreducible carry at this granularity. The leaves ledger: hOffGate ✓ · hInGat
 hBoundary carried · hGeom verbatim. raw 0; build 49s.
 NEXT: J4-477 = LeafBoxSplice (the single-hBoundary box-family reduction).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-477: the leaf splice from ONE hBoundary — ⚠ the all-R census forces the
+## GLOBAL-CUTOFF regime (honest scoping)
+
+`QIQTH/LeafBoxSplice.lean` (3 decls; std-3 + axiom-free projector). THE MINIMAL hBoundary:
+the small-R/box-inside-gate route (closedBall 0 R ⊆ interior (S 0)) — no gate boundary
+crossed; the in-gate reductions apply uniformly via ContinuousOn.congr; hpd2X (NO banked
+in-gate lemma existed) assembled from hpd1X_ingate_eq + pd_congr_of_eventuallyEq — no new
+analytic wall. **⚠ THE ALL-R AUDIT:** hIterBase_xslot_grounded quantifies over ALL R, so
+the ∀R form forces interior (S 0) = univ — this route lands the GLOBAL/CONSTANT-CUTOFF
+regime; a genuinely bounded gate needs the strictly-heavier boundary-vanishing route
+(smooth piece → 0 at ∂(S 0)) — DEFERRED, documented. THE SPLICE LEDGER: the htermBox chain
+= {hGeom ∧ hSmooth (parametrix/composite box regularity) ∧ hBoundary ∧ hDom + hRestBox}.
+raw 0; build 49s. NEXT: J4-478 = SmoothCarrierGrounding. NOT a₁ = R/6 (CONDITIONAL).
