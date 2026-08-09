@@ -5050,3 +5050,22 @@ regime; a genuinely bounded gate needs the strictly-heavier boundary-vanishing r
 (smooth piece → 0 at ∂(S 0)) — DEFERRED, documented. THE SPLICE LEDGER: the htermBox chain
 = {hGeom ∧ hSmooth (parametrix/composite box regularity) ∧ hBoundary ∧ hDom + hRestBox}.
 raw 0; build 49s. NEXT: J4-478 = SmoothCarrierGrounding. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-478: the smooth carriers — hComposite2 → the chart Hessian; THE THREAD
+## CONVERGENCE CONFIRMED
+
+`QIQTH/SmoothCarrierGrounding.lean` (4+ decls; std-3 + axiom-free ledger). All three
+hSmooth carriers factor DEFEQ through the C∞ profile (radialCutoff·heatParametrix).
+**hParamDeriv FULLY GROUNDED** (the τ-independent cutoff pulls out; the banked
+chartComposed_dtau_jointContinuousOn verbatim). **hComposite1 FULLY GROUNDED** (pd_comp +
+profPd_composed — 4 banked factors). **hComposite2 honestly REDUCED**: pd_pd_comp_local +
+profPdPd_composed (8 banked factors) + the second block carrying hWc2cont = THE CHART
+HESSIAN. **★★ THE THREAD CONVERGENCE (audited, confirmed):** hWc2cont is the SAME 2nd-order
+chart-jet atom the queued C₂/hcont2 derivative-sup chain needs — the htermBox chain and the
+sup chain converge on ONE geometric wall: the second field-jet of the uniform inverse chart
+(the J3 2nd-order analogue; FlowJointRegularity/BasepointFDeriv territory). No fresh wall.
+Dont-undercredit: the parametrix jets (value/first/second) + the cutoff jets were ALL
+banked; only the manifold product rules were new threading. raw 0; build 36s.
+NEXT: J4-479 = ChartSecondJet (THE CONVERGENT WALL — the 2nd-order IFT + the forward 2nd
+jet, the J4-433/435 chain one order up). NOT a₁ = R/6 (CONDITIONAL).
