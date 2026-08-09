@@ -1502,3 +1502,7 @@ import QIQTH.GaussianMomentExtraction
 import QIQTH.DuhamelSimplexAssembly
 import QIQTH.SliceBoundO1
 import QIQTH.CorrHigherReduction
+-- J4-504: residual factorization `E₁ = t·G·q` for the two-term parametrix `G·(u₀+t·u₁)` —
+-- (a) reusable Leibniz engine `heatOpFun_mul`, (b) factorization `E = −t·G·Δu₁` MODULO two carried
+-- transport-cancellation equations, (c) flat-model witness (hyps inhabited, E=0). std-3, a₁=R/6 CONDITIONAL.
+import QIQTH.ResidualFactorization

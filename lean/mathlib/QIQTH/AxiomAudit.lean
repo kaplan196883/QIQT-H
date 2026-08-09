@@ -22849,6 +22849,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CorrHigherReduction.slice_bound_inhabited
 #print axioms QIQTH.CorrHigherReduction.corrHigher_bounded_flat
 
+-- J4-504 (ResidualFactorization): the residual factorization E₁=t·G·q — a THEOREM
+-- MODULO the two carried transport equations. THIS IS THE SINGLE MISSING OBJECT
+-- that (once hT0/hT1 close) discharges BOTH remaining analytic walls (hCorrHigher's
+-- genuine O(t²) AND hEboundW). heatOpFun_mul = the reusable Leibniz engine
+-- (∂_t−Δ_g)(G·P) = [(∂_t−Δ_g)G]·P + G·[(∂_t−Δ_g)P] − 2Σgⁱʲ∂ᵢG∂ⱼP (pure calculus).
+-- crossGrad_lin = cross-gradient linearity. residual_factorization: ★ (∂_t−Δ_g)
+-- (gaussDdim·(u₀+t·u₁)) = −t·gaussDdim·Δ_g u₁ = t·G·q (q=−Δ_g u₁) — MODULO the two
+-- carried POINTWISE equations hT0 (𝒢·u₀−2C(u₀)=0 = 𝒯u₀=0) and hT1 (t·(𝒢·u₁−2C(u₁))
+-- +G·(u₁−Δu₀)=0 = (𝒯+1)u₁=Δu₀). residual_factorization_flat_witness: the flat model
+-- (g=δ,u₀=1,u₁=0) discharges hT0/hT1 ⟹ E=0 = the SATISFIABILITY witness (the carried
+-- hyps jointly INHABITED). AUDIT: the 𝒯 operator IS banked (HeatTransportRecursion.
+-- transportOp); the transport eqns are carried DIAGONALLY (TransportRecursion.udiag_rec)
+-- — the OFF-diagonal radial ODE is checkpointed STRETCH-#4 (the geodesic-r∂_r wall,
+-- Mathlib-absent); u₀ IS the van-Vleck amplitude (invSqrt_trace_hessian_scal). GATE:
+-- the extra t is GENUINE (explicit in −t·G·Δu₁, from Δ_g(t·u₁)=t·Δ_g u₁, NOT cosmetic);
+-- ∀t>0 identity (not single-point); flat witness real. ⚠ WHAT REMAINS CARRIED: hT0/hT1
+-- for a CURVED metric (the off-diagonal transport ODEs, NOT banked). std-3 all four.
+-- NOT a₁=R/6 (isolates the gap as a theorem-against-the-transport-eqns; does NOT close it).
+#print axioms QIQTH.ResidualFactorization.heatOpFun_mul
+#print axioms QIQTH.ResidualFactorization.residual_factorization
+#print axioms QIQTH.ResidualFactorization.residual_factorization_flat_witness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
