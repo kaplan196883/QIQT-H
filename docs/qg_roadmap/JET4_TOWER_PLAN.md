@@ -5178,3 +5178,33 @@ Verified std-3 in isolation (lake build QIQTH.Hfwd2Weld green). ⚠ THE WHOLE-LI
 SWEEP is transiently RED — blocked by the SIBLING VACAREA-1 job's uncommitted WIP
 (VacuumAreaLaw.lean:348 type error + sorries), NOT by this brick; re-run once the sibling's
 file goes green. NEXT: J4-485 = ExpRhoLSC (interrogate (I1)). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-485 (b0c7de50): THE (I1) VERDICT = GENUINE GEOMETRIC INPUT
+
+`QIQTH/ExpRhoReachability.lean` (2 decls std-3). THE INTERROGATION of the wall's last gate
+hReach (∃ρ>0 ∀q∈K, ρ ≤ expRho q): expRho is Classical.choose of a downward-closed radius set
+— an ARBITRARY, non-maximal admissible radius, marked irreducible. The wall needs the swap
+∀q∃ρ ↝ ∃ρ∀q over compact K = positive compact inf = lsc of expRho, which GENUINELY FAILS for
+a non-maximal .choose (irreducible forbids recovering anything past expRho_pos). The
+geometric fact is TRUE-in-principle (injectivity radius of a smooth spray is lsc) but its
+discharge needs a maximal-radius RECAST + the injectivity-radius-lsc theorem (ABSENT from
+Mathlib) + domination of the separate opaque uniformFlowRadius — not a loop-brick.
+**VERDICT: GENUINE INPUT** — hReach joins the a₁ labelled geometric-input list (the
+option-(b) precedent), carried until an injectivity-radius-lsc campaign discharges it.
+LANDED: the order-swap diagnosis (pointwise reachability is FREE; only the swap is hard) +
+the standard-form interface `chartSecondJet_continuousOn_of_uniform_injectivity_radius`.
+Dont-undercredit: repo-wide known (UniformFlowNondeg "UNPROVABLE"; CommonNondegRadius "NOT
+≤ expRho in general") — this brick audits it to a firm verdict. raw 0 (isolation).
+NOTE: the sibling VACAREA job's git-add swept the J4-485 AxiomAudit pins + committed a green
+VacuumAreaLaw — the whole-library budget can now run. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★★ THE SECOND-JET / CONVERGENT-WALL ARC COMPLETE (J4-476..485)
+The htermBox witness-leaf chain and the C₂ derivative-sup chain were traced to ONE shared
+geometric wall (the 2nd field-jet of the uniform inverse chart, J4-478), which was then
+felled to a PROVED CHAIN: the 2nd-order IFT (J4-479) · C³ from the banked C⁴ route (J4-480)
+· the 2nd-variation exposure + component ODE (J4-481) · the two-point Grönwall (J4-482) ·
+the hbaseJ2 assembly (J4-483) · THE WELD → hFwd2 → chartSecondJet (J4-484). The SINGLE
+residual gate = (I1) the uniform injectivity radius (J4-485 verdict: genuine geometric
+input, repo-wide, joins the a₁ labelled-input list). a₁=R/6 CONDITIONAL.
