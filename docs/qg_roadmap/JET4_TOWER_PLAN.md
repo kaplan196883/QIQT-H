@@ -5225,3 +5225,19 @@ ALREADY discharged UNCONDITIONALLY by ChartJetFactsDischarge.hWc2cont_of_contDif
 first-jet + chain-rule assembly (pure bookkeeping, J4-487). raw 0; build 31s module.
 NEXT: J4-487 = AmplitudeSecondJet (the 4-block chain-rule ⟹ C₂/M₂chart/Sconst modulo (I1)).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-487 (4bb7857f): C₂ GROUNDED MODULO (I1) — the sup family's last slot closed
+
+`QIQTH/AmplitudeSecondJet.lean` (4 decls std-3). Gate (a): `manifoldAmp_fderiv2_continuous`
+— the J4-436 affine-in-τ trick ONE ORDER UP (manifoldAmp τ = c₀ + τ·c₁ ⟹ fderiv² =
+fderiv²c₀ + τ·fderiv²c₁, each C² ⟹ jointly continuous). Gate (b): the J4-478
+`pd_pd_comp_local` 4-block assembly on chartAmp = manifoldAmp ∘ W_z — Hessian/gradient/
+first-jet blocks from the amplitude Hessian + banked jets, and the raw-chart SECOND-jet
+block = the J4-486 `chartSecondJetComponent` delivery (lifted U → the product box).
+`hcont2_of_reach` = the EXACT supConstant_phase3 hcont2 slot (gated by (I1) hReach + the
+standing geometric carries); `supConstant_phase4` wires it: **C₂ GROUNDED MODULO (I1)** —
+M₀ unconditional ∧ M₁ geometric ∧ M₂ on (I1) + bookkeeping. `pd_pd_scalar_eq` = the scalar
+coordinate gate. Dont-undercredit: every ingredient banked (the affine trick,
+pd_pd_comp_local, the J4-486 jet) — pure assembly. raw 0 (isolation; ⚠ the sibling was
+mid-editing VacuumAreaLaw at commit time). build 33s module. NOT a₁ = R/6 (CONDITIONAL).
