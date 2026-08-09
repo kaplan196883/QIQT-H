@@ -4862,3 +4862,20 @@ the S-dependent slots migrate into the ∃-body — all satisfiable at that S
 + `gateCoreRR_reconstruct` + `v2Census_phase8`. The s-bounds recovered from the existing
 hεU/hUT binders — no new carry. raw 0; build 47s. NEXT: J4-466 = Phase9Replumb (the full
 analytic stack at the ∃-consumed gate — mechanical). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-466: THE CAPSTONE CONCLUDED at the ∃-consumed gate — the slot-grounding
+## chain (phases 2-9) COMPLETE
+
+`QIQTH/Phase9Replumb.lean` (1 decl std-3). `v2Census_phase9`: obtains (a,b,S) + the
+C_L-grounding closure from phase8, feeds the reconstructed hGateCoreR through the FULL
+phase-7 analytic stack at that gate ⟹ ∃ a b S, 0<a ∧ a<b ∧ (the stack →
+TruncatedDuhamelCore). The at-the-obtained-gate supply pattern (phase8's body dictates it);
+the S-independent geometry verbatim; the ~85 S-dependent carries in the ∃-body.
+**THE CHAIN: phase 2 (block-B enumerated) → 3 (hInter grounded) → 4 (hAdom2cap) → 5 (hdiff
+zero-net) → 6 (hInnerData → the atomic core) → 7 (C₁ grounded from geometry) → 8 (C_L wired,
+gate ∃-consumed) → 9 (THE CORE REACHED).** The final census surface = the named satisfiable
+carries at the geometry-chosen gate (envelope/amplitude/boxes/scaffold/measurability/gate/
+slot/boundary/gauge groups). HONESTY: ∃ over the geometry-chosen gate, not arbitrary S.
+raw 0; build 48s. NEXT: J4-467 = hslot (the banked K₁τ^{-1/2} shape may be verbatim).
+NOT a₁ = R/6 (CONDITIONAL).
