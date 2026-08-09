@@ -1506,3 +1506,7 @@ import QIQTH.CorrHigherReduction
 -- (a) reusable Leibniz engine `heatOpFun_mul`, (b) factorization `E = −t·G·Δu₁` MODULO two carried
 -- transport-cancellation equations, (c) flat-model witness (hyps inhabited, E=0). std-3, a₁=R/6 CONDITIONAL.
 import QIQTH.ResidualFactorization
+-- J4-505: REDUCTION of the k=0 van-Vleck transport eqn `hT0` (`𝒯u₀=0`) to a scalar radial equation
+-- via banked flat-Gaussian gradient calculus: cross-gradient `C(u)=−(1/2t)·G·R_g(u)`, `hT0` discharged
+-- from radial input `hRad`, Gauss-lemma input isolated. std-3, hRad CARRIED, a₁=R/6 CONDITIONAL.
+import QIQTH.TransportEqZero

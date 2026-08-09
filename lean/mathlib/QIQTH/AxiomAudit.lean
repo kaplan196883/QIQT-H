@@ -22871,6 +22871,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ResidualFactorization.residual_factorization
 #print axioms QIQTH.ResidualFactorization.residual_factorization_flat_witness
 
+-- J4-505 (TransportEqZero): the k=0 transport equation hT0 REDUCED to the scalar
+-- radial input hRad (via pure banked calculus). crossGrad_eq_metricRadial ★: using
+-- ONLY the banked flat-Gaussian gradient ∂ᵢG=−(xᵢ/2t)·G, C(u)=−(1/2t)·G·R_g(u)
+-- with R_g(u)=Σᵢⱼ gⁱʲ xᵢ ∂ⱼu (the metric radial field metricRadial). transportOffDiag_eq_radial:
+-- 𝒢·u−2C(u)=𝒢·u+(1/t)·G·R_g(u). hT0_of_radial ★★: hT0 DISCHARGED from the scalar
+-- radial input hRad (𝒢·u₀=−(1/t)·G·R_g(u₀)). residual_factorization_of_radial =
+-- the banked factorization with hT0 replaced by hRad. metricRadial_eq_radialDeriv_of_gaussLemma
+-- isolates the Gauss-lemma input Σᵢgⁱʲxᵢ=xʲ ⟹ R_g=radialDeriv. Sol CONFIRMED: the
+-- k=0 eqn is NOT derivable from finite RNC jets (vacuous at x=0 — genuinely
+-- uniform-in-v along radial geodesics); the smallest honest input is the coordinate
+-- GAUSS LEMMA Σᵢgⁱʲxᵢ=xʲ (the checkpointed STRETCH-#4 wall, Mathlib-absent). GATE:
+-- radialInput_flat_witness proves hRad for flat u₀=1 ∀x ∀t>0 (𝒢=0, R_δ(1)=0);
+-- metricRadial_flat_rncRadialSq shows R_δ(r²)(v)=2r²≠0 for v≠0 = the genuine OFF-center
+-- Euler content (NOT the already-banked x=0 diagonal). std-3 all 8. NOT a₁=R/6
+-- (hT0 REDUCED to hRad; closure = the Gauss lemma + volume identity Δ_g(½‖x‖²)=
+-- n+r∂_r log√det g; hT1 untouched).
+#print axioms QIQTH.TransportEqZero.crossGrad_eq_metricRadial
+#print axioms QIQTH.TransportEqZero.transportOffDiag_eq_radial
+#print axioms QIQTH.TransportEqZero.hT0_of_radial
+#print axioms QIQTH.TransportEqZero.metricRadial_eq_radialDeriv_of_gaussLemma
+#print axioms QIQTH.TransportEqZero.radialInput_flat_witness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
