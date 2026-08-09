@@ -22323,4 +22323,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessSpatialPartialsX.hDerivX_ingate_eq_param
 #print axioms QIQTH.WitnessSpatialPartialsX.witness_leaves_residuals_intro
 
+-- ## ★ J4-477 (LeafBoxSplice): the three leaves spliced from ONE
+-- hBoundary — ⚠ the all-R census forces the GLOBAL-CUTOFF regime
+-- THE MINIMAL hBoundary: the small-R/box-inside-gate route (closedBall
+-- 0 R ⊆ interior (S 0)) — no gate boundary crossed, the in-gate
+-- reductions apply uniformly via ContinuousOn.congr; hpd2X (which had
+-- NO banked in-gate lemma) assembled from hpd1X_ingate_eq +
+-- pd_congr_of_eventuallyEq — no new analytic wall.
+-- ⚠ THE ALL-R AUDIT (honest scoping): hIterBase_xslot_grounded
+-- quantifies over ALL R, so the ∀R form forces interior (S 0) = univ —
+-- this route lands the GLOBAL/CONSTANT-CUTOFF regime; a genuinely
+-- bounded gate needs the strictly-heavier boundary-vanishing route
+-- (deferred, documented). THE SPLICE LEDGER: the htermBox chain =
+-- {hGeom ∧ hSmooth (the parametrix/composite box regularity) ∧
+-- hBoundary ∧ hDom + hRestBox}. std-3 (the projector axiom-FREE).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.LeafBoxSplice.leafBox_of_boundary
+#print axioms QIQTH.LeafBoxSplice.hIterBase_final
+#print axioms QIQTH.LeafBoxSplice.splice_residuals_intro
+
 end QIQTH.AxiomAudit
