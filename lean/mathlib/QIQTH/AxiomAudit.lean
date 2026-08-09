@@ -21903,4 +21903,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ProdMeasAndEnvelope.prodMeas_at_witness
 #print axioms QIQTH.ProdMeasAndEnvelope.perUCensus_phase10
 
+-- ## ★★ J4-454 (DHrefinedFull): hDHrefined₂ A THEOREM — THE CENSUS hGint
+-- CLOSED AT THE WITNESS MODULO THE STANDING FAMILIES (census phase 11)
+-- The constant-selection gate: YES — wA the fixed width; CA = (sup Mp)·
+-- Lz·Ba·C₁, CB = Bd·C₁ (standing amplitude sups × the linear D₀=0
+-- near-isometry slope × the grounded sup family over the compact
+-- gate/x-range); no 1/(2τ) hidden in constants — all s-scaling explicit.
+-- hDHrefined₂_theorem: the FULL ∀ᵐz binder profRate_integral₂ consumes,
+-- via on-gate (the J4-453 lever × the sups) + off-gate (the banked
+-- witnessFieldDeriv_offGate_eq_zero + RHS ≥ 0) + the dichotomy.
+-- perUCensus_phase11: hDHrefined₂ no longer a raw carry. THE hGint
+-- SUB-CHAIN CLOSED at the witness modulo the standing Gaussian-envelope
+-- families (hOnGate, hFdomEvery) + the satisfiable measurabilities —
+-- every survivor strictly lower-level. Dont-undercredit: pure assembly;
+-- everything was banked. std-3 all 3. NOT a₁ = R/6 — conditional on the
+-- standing families + the other census items + groups (1)/(2)/(4).
+#print axioms QIQTH.DHrefinedFull.witnessFieldDeriv_refined_target_onGate
+#print axioms QIQTH.DHrefinedFull.hDHrefined₂_theorem
+#print axioms QIQTH.DHrefinedFull.perUCensus_phase11
+
 end QIQTH.AxiomAudit
