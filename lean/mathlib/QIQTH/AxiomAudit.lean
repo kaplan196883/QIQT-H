@@ -22511,6 +22511,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpRhoReachability.expRho_reachability_pointwise
 #print axioms QIQTH.ExpRhoReachability.chartSecondJet_continuousOn_of_uniform_injectivity_radius
 
+-- ## ★ J4-486 (OperatorPdBridge): the operator⇄pd coordinate bridge — TWO
+-- HONEST FINDINGS on the consumers
+-- pd_pd_component_eq (THE COORDINATE GATE, pure Mathlib): pd∘pd φ =
+-- fderiv²φ (eᵢ)(eⱼ) coordinate (the PullbackMetric CLM-contraction pattern
+-- one order up; not a new wall). chartSecondJetComponent_continuousOn_of_
+-- reach: the J4-484 operator result in pd-coordinate form (gated by
+-- hReach). ★ FINDING 1: hWc2cont (SmoothCarrier) is a FALSE TWIN — it is
+-- the field-Hessian of the SINGLE base-0 chart at a varying FIELD point,
+-- NOT a base-varying jet — ALREADY discharged UNCONDITIONALLY by
+-- ChartJetFactsDischarge.hWc2cont_of_contDiffOn_ball (single-chart C²-on-
+-- ball, banked+wired); needs neither (I1) nor this bridge; the J4-478
+-- "convergence" claim OVERSTATED it. ★ FINDING 2: hcont2 (BaseSlotAmpDeriv
+-- C₂) IS base-varying — its raw-chart 2nd-jet coordinate pd²(W_z·a) 0 is
+-- DELIVERED here on the ONE (I1) hReach input; the residue = the
+-- manifoldAmp 2nd-deriv + first-jet + chain-rule assembly (pure
+-- bookkeeping, J4-487). std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.OperatorPdBridge.pd_component_eq'
+#print axioms QIQTH.OperatorPdBridge.pd_pd_component_eq
+#print axioms QIQTH.OperatorPdBridge.chartSecondJetComponent_continuousOn_of_reach
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
