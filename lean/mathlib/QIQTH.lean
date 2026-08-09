@@ -683,6 +683,8 @@ import QIQTH.Flow3Regularity
 import QIQTH.SecondVariationModulus
 import QIQTH.HbaseJ2Gronwall
 import QIQTH.HbaseJ2Assembly
+import QIQTH.Hfwd2Weld
+import QIQTH.ExpRhoReachability
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
