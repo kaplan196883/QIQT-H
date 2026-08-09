@@ -4655,3 +4655,21 @@ Dont-undercredit: ALL the moment/pairing/count infrastructure was banked — pur
 raw 0; build 57s. NEXT: J4-453 = hProdMeas discharge + the hDHrefined₂ witness derivation
 (the contraction-matched shape = the crude envelope's proof pattern one refinement up).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-453: THE D₀ GATE RECONCILED — D₀ = 0; the refined envelope PROVED on-gate
+## (census phase 10)
+
+`QIQTH/ProdMeasAndEnvelope.lean` (4 decls std-3). **THE CRUX VERDICT: D₀ = 0 at the
+witness** — the banked `chartW0_displacement` gives W z 0 = −z + O(‖z‖²): the near-isometry
+is PURELY LINEAR, no additive constant; the slope contraction is a pure ‖z‖-moment with the
+1/(2τ) ONLY on the moment; the only mass is the amplitude-derivative CB (no 1/(2τ)); even
+the quadratic residual pairs as τ⁰. THE J4-452 COUNT STANDS.
+`witnessFieldDeriv_refined_gate_envelope`: the exact on-gate two-term bound
+(CA/(2τ)·‖z‖ + CB)·G_σ — one refinement up from the crude envelope, via
+`slopeContraction_holder` (the ℓ∞–ℓ¹ Hölder surrogate — Point n is Pi-SUP-normed, correctly
+NOT Euclidean Cauchy–Schwarz) + the centered near-isometry. Part A: hProdMeas DISCHARGED at
+the honest SLICE level (the joint→slice route only gives a.e.-s — caught and routed
+correctly). `perUCensus_phase10`. REMAINING: the full ∀z hDHrefined₂ (on-gate + the banked
+off-gate vanishing + uniform constant selection = J4-454). raw 0; build 49s.
+NOT a₁ = R/6 (CONDITIONAL).
