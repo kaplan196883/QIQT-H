@@ -5018,3 +5018,20 @@ hPd2Full/hRestBox}.** Honest caveat: NOT geometry-alone — the witness-slice le
 genuine (their reduction = the J4-443 parametrix chain-rule machinery, a separate brick).
 raw 0; build 47s. NEXT: J4-476 = WitnessSpatialPartialsX (the leaves via the chain rule).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-476: the witness-slice leaves — off-gate LANDED, in-gate REDUCED, the
+## boundary the honest carry
+
+`QIQTH/WitnessSpatialPartialsX.lean` (10 decls; std-3 + axiom-free projector). THE SLOT
+AUDIT: hpd1X is DEFEQ witnessFieldDeriv (an rfl bridge!) but the banked joint-continuity
+covers a DIFFERENT parameterization (τ fixed, field along update, z over K) — no transport;
+the reduction went through THE GATE DICHOTOMY: off-chart/off-gate ⟹ all three leaves are
+IDENTICALLY 0 (banked zeros — DISCHARGED); in-gate ⟹ the ungated C∞ composite (hpd1X, the
+J4-443 transparency at z=0) / the banked heatParametrix τ-derivative joint continuity
+(hDerivX). THE GATE-BOUNDARY ISSUE honest and real: the τ-independent SPATIAL set-gate at
+the varying base can fail on closedBall 0 R — the boundary gluing (hBoundary) = the
+irreducible carry at this granularity. The leaves ledger: hOffGate ✓ · hInGate reduced ·
+hBoundary carried · hGeom verbatim. raw 0; build 49s.
+NEXT: J4-477 = LeafBoxSplice (the single-hBoundary box-family reduction).
+NOT a₁ = R/6 (CONDITIONAL).
