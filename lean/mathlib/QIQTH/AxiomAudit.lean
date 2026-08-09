@@ -22124,4 +22124,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CLSlotWire.gateCoreRR_reconstruct
 #print axioms QIQTH.CLSlotWire.v2Census_phase8
 
+-- ## ★ J4-466 (Phase9Replumb): THE CAPSTONE CONCLUDED at the ∃-consumed
+-- gate (phase 9)
+-- v2Census_phase9: obtains (a,b,S) + the C_L-grounding closure from
+-- phase8, feeds the reconstructed hGateCoreR through the FULL phase-7
+-- analytic stack at that gate ⟹ ∃ a b S, 0<a ∧ a<b ∧ (the stack →
+-- TruncatedDuhamelCore). The at-the-obtained-gate supply pattern (what
+-- phase8's body dictates); the S-independent geometry passes verbatim;
+-- the ~85 S-dependent carries migrate into the ∃-body. THE SLOT-GROUNDING
+-- CHAIN phases 2-9 COMPLETE: C₁ grounded (bridge 2) + C_L grounded (the
+-- ∃-consumed gate) + the core reached. The final census surface = the
+-- named satisfiable carries at the geometry-chosen gate (envelope/
+-- amplitude/boxes/scaffold/measurability/gate/slot/boundary/gauge).
+-- HONESTY: ∃ a b S over the geometry-chosen gate, not arbitrary S; pure
+-- re-plumb, closes nothing deeper. std-3. NOT a₁ = R/6.
+#print axioms QIQTH.Phase9Replumb.v2Census_phase9
+
 end QIQTH.AxiomAudit
