@@ -21945,4 +21945,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HerrHminCoercivity.hmin_gate
 #print axioms QIQTH.HerrHminCoercivity.herrHmin_gate
 
+-- ## ★★ J4-456 (GateFarFieldSplit): THE REPAIR — hcomp_final3 satisfiable
+-- (phase 9); the vacuous phase-8 chain SUPERSEDED
+-- THE FAR-FIELD AUDIT: the RAW comparison integrand DECAYS off K (not
+-- zero, not blow-up): witnessSecondXDeriv = 0 off K (the gatedKernel
+-- if-else on the base), so f = −z_i/(2τ)·G_τ·A1amp·F − G_τ·A2amp·F there
+-- — every term carries G_τ = Gaussian-decaying; the J4-455 exp-blow-up
+-- was ONLY the ρ-FACTORED lens (its identity holds only on K).
+-- hcomp_final3: collarᶜ = (∩gate) ⊔ (\gate) via integral_inter_add_diff;
+-- the gate piece ≤ Bcomp2/√τ (comparison_gate_bound ← the satisfiable
+-- herrHmin_gate); the far field ≤ the finite carry Bff. slotInstantiation
+-- _phase9 = phase 7 ∧ hcomp_final3 — THE UNSATISFIABLE ∀z BINDERS GONE.
+-- THE REPAIR LEDGER: superseded {hdom_comp2_ptwise, hcomp_final2,
+-- phase8}; in force: the satisfiable carries S1 herrHmin_gate · S2 the
+-- gate-restricted jets · S3 the Mqc sup · S4 hff/Bff (a fixed-quantity
+-- far-field bound — NOT a false universal; → J4-457 derived from the
+-- G_τ decay) · S5 wiring. Pure assembly. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.GateFarFieldSplit.hdom_comp2_at
+#print axioms QIQTH.GateFarFieldSplit.comparison_gate_bound
+#print axioms QIQTH.GateFarFieldSplit.hcomp_final3
+#print axioms QIQTH.GateFarFieldSplit.slotInstantiation_phase9
+
 end QIQTH.AxiomAudit
