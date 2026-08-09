@@ -4673,3 +4673,22 @@ the honest SLICE level (the joint→slice route only gives a.e.-s — caught and
 correctly). `perUCensus_phase10`. REMAINING: the full ∀z hDHrefined₂ (on-gate + the banked
 off-gate vanishing + uniform constant selection = J4-454). raw 0; build 49s.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-454: hDHrefined₂ A THEOREM — THE CENSUS hGint CLOSED AT THE WITNESS
+## MODULO THE STANDING FAMILIES (census phase 11)
+
+`QIQTH/DHrefinedFull.lean` (3 decls std-3). The constant-selection gate: YES — wA the fixed
+width; CA = (sup Mp)·Lz·Ba·C₁, CB = Bd·C₁ (standing amplitude sups × the linear D₀=0
+near-isometry slope × the grounded sup family over the compact gate/x-range); no 1/(2τ)
+hidden in constants — all s-scaling explicit in the shape. `hDHrefined₂_theorem`: the FULL
+∀ᵐz binder consumed by profRate_integral₂ (on-gate = the J4-453 lever × the sups; off-gate =
+the banked vanishing + RHS ≥ 0; the dichotomy promotes). `perUCensus_phase11`.
+**THE hGint SUB-CHAIN — the J4-428 "NO banked supplier" item — IS CLOSED AT THE WITNESS
+modulo the standing Gaussian-envelope families (hOnGate, hFdomEvery) + the satisfiable
+measurabilities; every survivor strictly lower-level.** The full hGint arc: J4-444 bulk →
+J4-445 sliver engine → J4-446 factorisation → J4-447 rate lever → J4-448/450 the two
+retractions caught → J4-451 the Sol #21 re-grounding → J4-452 the two-term correction →
+J4-453 D₀=0 + the refined envelope → J4-454 the closure. Dont-undercredit: pure assembly.
+raw 0; build 48s. NEXT: J4-455 = Sol-#20 (vi) herr/hmin 3-region coercivity.
+NOT a₁ = R/6 (CONDITIONAL).
