@@ -4713,3 +4713,19 @@ the displacement machinery was banked. raw 0; build 50s. FOUR gate catches to da
 (J4-448/450/452/455) — the blind-spot discipline is the campaign's best tool.
 NEXT: J4-456 = GateFarFieldSplit (hcomp_final3 + slotInstantiation_phase9).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-456: THE REPAIR — hcomp_final3 satisfiable (phase 9); the far field DECAYS
+
+`QIQTH/GateFarFieldSplit.lean` (4 decls std-3). **THE FAR-FIELD AUDIT: DECAYS** — the RAW
+comparison integrand off K is f = −z_i/(2τ)·G_τ·A1amp·F − G_τ·A2amp·F (witnessSecondXDeriv
+= 0 off K by the gatedKernel base if-else): every term carries G_τ, Gaussian-decaying; the
+J4-455 exp-blow-up concern was ONLY the ρ-FACTORED lens (its identity holds only on K).
+`hcomp_final3`: collarᶜ = (∩ gate) ⊔ (\ gate) via integral_inter_add_diff; the gate piece
+≤ Bcomp2/√τ (`comparison_gate_bound` ← the satisfiable herrHmin_gate); the far field ≤ the
+finite carry Bff. `slotInstantiation_phase9` = phase 7 ∧ hcomp_final3 — **the unsatisfiable
+∀z binders are GONE; the vacuous phase-8 chain is SUPERSEDED.** The satisfiable carries:
+S1 herrHmin_gate · S2 the gate-restricted jets · S3 the Mqc sup · S4 hff/Bff (a
+fixed-quantity far-field bound, NOT a false universal — → J4-457 derived from the G_τ
+decay) · S5 wiring. Dont-undercredit: comparisonDom2 + the S5b machinery reused verbatim.
+raw 0; build 54s. NEXT: J4-457 = FarFieldDecay (Bff derived). NOT a₁ = R/6 (CONDITIONAL).
