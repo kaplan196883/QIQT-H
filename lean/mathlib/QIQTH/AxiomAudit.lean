@@ -22303,4 +22303,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.XSlotBaseParts.hIterBase_xslot_grounded
 #print axioms QIQTH.XSlotBaseParts.xslot_residuals_intro
 
+-- ## ★ J4-476 (WitnessSpatialPartialsX): the witness-slice leaves —
+-- off-gate LANDED, in-gate REDUCED, the boundary the honest carry
+-- THE SLOT AUDIT: hpd1X is DEFEQ witnessFieldDeriv (rfl bridge!) but the
+-- banked joint-continuity covers a DIFFERENT parameterization (τ fixed,
+-- field along update, z over K) — no transport; the reduction went
+-- through the gate dichotomy instead: off-chart/off-gate ⟹ all three
+-- leaves are IDENTICALLY 0 (banked zeros — DISCHARGED); in-gate ⟹ the
+-- ungated C∞ composite (hpd1X, via the J4-443 transparency at z=0) /
+-- the banked heatParametrix τ-derivative joint continuity (hDerivX).
+-- THE GATE-BOUNDARY ISSUE honest and real: the τ-independent SPATIAL
+-- set-gate at the varying base can fail on the box — the boundary
+-- gluing = the irreducible carry (hBoundary), not dischargeable at this
+-- granularity. The leaves ledger: hOffGate ✓ · hInGate reduced ·
+-- hBoundary carried · hGeom verbatim. std-3 (the projector axiom-FREE).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.WitnessSpatialPartialsX.hpd1X_eq_witnessFieldDeriv
+#print axioms QIQTH.WitnessSpatialPartialsX.hpd1X_ingate_eq
+#print axioms QIQTH.WitnessSpatialPartialsX.hDerivX_ingate_eq_param
+#print axioms QIQTH.WitnessSpatialPartialsX.witness_leaves_residuals_intro
+
 end QIQTH.AxiomAudit
