@@ -1535,3 +1535,13 @@ import QIQTH.CurvedParametrixMass
 -- (Θ=1+‖w‖²≢1, φ=(1+‖w‖²)⁻¹≢1) proves NOT flat-only. Concrete base-varying CoV bundle for W₀ still
 -- MISSING; hframeK also lives in hDaLimLU. std-3.
 import QIQTH.MassChartBridge
+-- J4-512: DECOUPLING `hframeK` (g=δ on a neighbourhood) from the Da-limit GAUGE members of
+-- `GlobalRawBoundFacade.hDaLimLU_from_labelled` (the SECOND flat-only channel after J4-510/511's
+-- `hmassone`). AUDIT: `hframeK` enters the capstone at exactly ONE place — `gauge_from_geometry` —
+-- and is used ONLY as `hframeK 0 hK0`, i.e. to extract the 0-jet VALUE `g(0)=δ`; the two gauge members
+-- `MemGaugeGi`/`MemGaugeGamma` are pointwise-at-0. `gauge_from_pointwise` rebuilds both from the
+-- pointwise RNC jet {hg0 (value), hdg0 (1-jet), hinvF} with `hframeK`/`hK0` REMOVED (role (c),
+-- value-reducible). CURVED GATE: `curved_gauge_inhabited` — a conformal witness (confMetric on Point 2)
+-- satisfies {hg0,hdg0,hinvF} yet has ∂²g₀₀(0)=2≠0, so the decoupled antecedent is curved-satisfiable
+-- (NOT vacuous, NOT secretly flat). NOT a₁=R/6. std-3.
+import QIQTH.DaLimCurvedGauge

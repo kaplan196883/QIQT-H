@@ -22988,6 +22988,35 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MassChartBridge.curvedPhi_ne_one
 #print axioms QIQTH.MassChartBridge.chartBridge_curved_certificate
 
+-- J4-512 (DaLimCurvedGauge): hframeK's OTHER fatal use (in hDaLimLU_from_labelled)
+-- DECOUPLED — BOTH identified fatal hframeK uses now logically addressed. AUDIT:
+-- inside hDaLimLU_from_labelled, hframeK (g=δ on the whole gate K) is consumed at
+-- EXACTLY ONE site (gauge_from_geometry, line 472), threaded nowhere else; its only
+-- role is `hg0_of_hframeK := hframeK 0 hK0` — i.e. it reads ONLY the 0-jet VALUE
+-- g(0)=δ. Verdict role (c) VALUE-reducible to the 0-jet. gauge_from_pointwise:
+-- the curved-compatible drop-in for gauge_from_geometry — produces MemGaugeGi gi ∧
+-- MemGaugeGamma g gi from the pointwise RNC jet {hg0 (g(0)=δ), hinvF, hdg0 (∂g(0)=0)}
+-- with hK0/hframeK REMOVED (via banked hgi_of_hg0_hinvF + memGaugeGamma_of_hdg0).
+-- hg0_of_hframeK_relax = soundness (old hframeK ⟹ new hg0, genuine relaxation).
+-- ⚠ CURVED GATE: curved_gauge_inhabited exhibits a genuine curved metric confMetric
+-- y a b=(1+(y₀)²)δ_ab on Point 2 satisfying all three weakened hyps {hg0,hdg0,hinvF}
+-- (⟹ both gauge members) WHILE ∂²g₀₀(0)=2≠0 (confMetric_second_jet_ne_zero) — the
+-- exact 2nd-jet datum hframeK destroys (hframeK⟹∂²g=0⟹Ric(0)=0). NOT secretly flat.
+-- Sol confirmed value-reducibility + curved-inhabitation; NO second obstruction in the
+-- hframeK channel. std-3 all 8. ⚠ BUT hframeK NOT yet LITERALLY removed from the
+-- mainline: hDaLimLU_from_labelled still carries hK0/hframeK in its ~180-binder
+-- signature (J4-513 mechanical rethread = re-elaborate the Π with the gauge line
+-- swapped). ⚠ SOL-FLAGGED remaining audit surface: the OTHER ~180 hDaLimLU hyps may
+-- have INDEPENDENT (non-hframeK) flatness (√det g Hessian, van-Vleck 2-jet, exact-
+-- Euclidean phase/convolution identities, o(1)/o(τ) rate demands) AND the upstream
+-- CONSTRUCTORS producing them (a hyp can be curved-compatible while its only proof
+-- assumes hframeK). NOT a₁=R/6 (CONDITIONAL + effectively flat-only until the rethread
+-- + that audit + a curved witness of the FULL antecedent land).
+#print axioms QIQTH.DaLimCurvedGauge.gauge_from_pointwise
+#print axioms QIQTH.DaLimCurvedGauge.hg0_of_hframeK_relax
+#print axioms QIQTH.DaLimCurvedGauge.confMetric_second_jet_ne_zero
+#print axioms QIQTH.DaLimCurvedGauge.curved_gauge_inhabited
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
