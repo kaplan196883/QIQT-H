@@ -22442,4 +22442,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbaseJ2Gronwall.linODE_growth_bound
 #print axioms QIQTH.HbaseJ2Gronwall.secondVar_snd_twopoint_diff_bound
 
+-- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
+-- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
+-- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
+-- vacuum pure); redEntropy_nonneg = the reduced Srednicki entropy Σ h(ν_j) ≥ 0
+-- (conditional on the Heisenberg floor). Finite Gaussian INFRASTRUCTURE — NOT
+-- the area law (no S∝A_geom claim). Expected std-3 (propext/Classical.choice/
+-- Quot.sound) all three.
+#print axioms QIQTH.VacuumAreaLaw.couplingK_posDef
+#print axioms QIQTH.VacuumAreaLaw.Xcov_mul_Pcov
+#print axioms QIQTH.VacuumAreaLaw.redEntropy_nonneg
+
 end QIQTH.AxiomAudit

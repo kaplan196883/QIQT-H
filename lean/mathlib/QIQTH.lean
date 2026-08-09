@@ -682,6 +682,7 @@ import QIQTH.ChartSecondJet
 import QIQTH.Flow3Regularity
 import QIQTH.SecondVariationModulus
 import QIQTH.HbaseJ2Gronwall
+import QIQTH.HbaseJ2Assembly
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
@@ -957,6 +958,10 @@ import QIQTH.GaussModeEntropyDerived
 -- assumption S∝A into a theorem; the volume-law guard (bulk L³ vs boundary 6L²) isolates the locality input.
 import QIQTH.BoundaryGaussianAreaLaw
 import QIQTH.WilliamsonNormalForm
+-- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic lattice + its vacuum Gaussian
+-- data (covariances X=½K^{−1/2}, P=½K^{1/2}; X·P=¼·1; reduced state on a subset; symplectic spectrum
+-- =spec√(X_Ω P_Ω); entropy Σ gaussModeEntropy(ν_j)). Finite Gaussian INFRASTRUCTURE — NOT the area law.
+import QIQTH.VacuumAreaLaw
 -- The Sakharov/induced-gravity 1/4 RATIO (circularity-clean algebraic core): S_ent/(A/G_ind)=1/4 with the
 -- matter coefficient + regulator cancelling; the geometric 4π/16π. Lean mirror of scripts/sakharov_kg.py.
 import QIQTH.SakharovRatio
