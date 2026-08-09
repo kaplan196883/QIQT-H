@@ -22073,4 +22073,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HdiffGrounding.hdiff_grounded_reduced
 #print axioms QIQTH.HdiffGrounding.v2Census_phase5
 
+-- ## ★ J4-463 (InnerDataCensusThread): hInnerData → the named atomic core
+-- (census phase 6)
+-- THE GATE: EXACT VERBATIM MATCH — innerData_phase2's output = phase5's
+-- hInnerData binder (same prefix/conjuncts/indexing/truncation/centre/
+-- kernels; only a bound-var name differs). v2Census_phase6 supplies the
+-- bundle internally; the carry = the strictly-lighter hGateCore (the 7
+-- named atoms: z-slice measurabilities · σ>0 · C₁ · C₂ · C_L · znb ·
+-- the gate dichotomy). NO opaque diff-under-∫ bundle survives in the
+-- census surface. THE SUP CONVERGENCE: AUDITED, DEFERRED — the grounded
+-- C₁/C_L theorems live in the chartAmp/baseKernelW presentation; the
+-- census slots demand the witnessFieldDeriv/gaussDdim presentation
+-- (base-0 matches; the FUNCTIONAL presentation differs — the germ↔
+-- chartAmp + baseKernelW↔gaussDdim bridges = J4-464, honestly deferred
+-- per the J4-440/441 lessons, not fabricated). Pure substitution.
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.InnerDataCensusThread.v2Census_phase6
+
 end QIQTH.AxiomAudit
