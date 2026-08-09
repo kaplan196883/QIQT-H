@@ -1526,3 +1526,12 @@ import QIQTH.GaussLemmaGauge
 -- Curved certificate (Θ=1+‖w‖², Θ≢1) proves NOT flat-only. Decouples hmassone's CONTENT from hframeK;
 -- full hmassone still needs Layer-A/B chart transfer + Jacobian. std-3.
 import QIQTH.CurvedParametrixMass
+-- J4-511: the `hmassone` CHART-BRIDGE (second fix piece decoupling hmassone from hframeK). Route B:
+-- `weightedParametrix_setMass_tendsto_one` (∫_Ω gaussDdim·(parametrixAmp·φ) → 1 for a fixed chart
+-- weight φ with φ(0)=1) → `chartMass_tendsto_one_of_weightedCovar` transports across an abstract
+-- eventual change-of-variables `hcov` to the z-variable ∫_z Wit τ 0 z → 1 on 𝓝[>]0 →
+-- `gatedKernel_mass_tendsto_one_of_localChart` = the exact atTop/epsSeq `hmassone` shape. φ(0)=1 (=
+-- first-order Jacobian J(0)=1) is the SOLE normalisation — NO hframeK/g=δ-on-nbhd. Curved certificate
+-- (Θ=1+‖w‖²≢1, φ=(1+‖w‖²)⁻¹≢1) proves NOT flat-only. Concrete base-varying CoV bundle for W₀ still
+-- MISSING; hframeK also lives in hDaLimLU. std-3.
+import QIQTH.MassChartBridge

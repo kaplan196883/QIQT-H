@@ -22960,6 +22960,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedParametrixMass.curvedTheta_ne_one
 #print axioms QIQTH.CurvedParametrixMass.heatParametrix_setMass_tendsto_one_curved_certificate
 
+-- J4-511 (MassChartBridge): the hmassone CHART-BRIDGE — hmassone DECOUPLED from
+-- hframeK at the abstract-bridge level. gatedKernel_mass_tendsto_one_of_localChart:
+-- the EXACT repo hmassone shape Tendsto (fun m => ∫ z, Wit (epsSeq m) 0 z) atTop
+-- (𝓝 1) from J4-510's curved parametrix content + an abstract J(0)=1 change of
+-- variables (hcov : ∫_z Wit =ᶠ[𝓝[>]0] ∫_{w∈Ω} gaussDdim·(parametrixAmp·φ)), NO
+-- hframeK. weightedParametrix_setMass_tendsto_one (the weighted moving-AI, hlocal
+-- proved 1·1=1) · chartMass_tendsto_one_of_weightedCovar (transport across hcov via
+-- Tendsto.congr'). ⚠ CURVED CERTIFICATE: chartBridge_curved_certificate instantiates
+-- a curved Θ=1+‖w‖² (≢1) AND a curved weight φ=curvedPhi=(1+‖w‖²)⁻¹ (curvedPhi_ne_one
+-- PROVED ≢1), both =1 only at origin, over Ω=univ ⟹ the bridge holds — genuinely
+-- curved, NO g=δ reintroduced (sole normalization = φ(0)=1 ∧ Θ(0)=1 ∧ u₀(0)=1, all
+-- first-order value-at-origin; φ(0)=1⟺J(0)=1 pointwise, compatible with curved RNC —
+-- Sol V(z)=2z shows J genuinely needed but pointwise J(0)=1 does NOT force flatness).
+-- DON'T-UNDERCREDIT: the full A∘B∘C composition chartImage_approx_identity_conditional
+-- was ALREADY banked + hframeK-free; new = the weighted moving-AI + the exact
+-- atTop/epsSeq shape + the curved-φ certificate. std-3 all five. ⚠ STILL OPEN: (i)
+-- the CONCRETE hcov for the base-varying chart W₀=uniformInverseChart…z 0 (the M1–M4
+-- CoV bundle: injectivity radius / left inverse / 0<|det f'| with |det f'(0)|=1) is
+-- the acknowledged MISSING brick (only the field-varying Wfv bundle is banked); (ii)
+-- hframeK is STILL consumed in GlobalRawBoundFacade.hDaLimLU_from_labelled (the Da-limit
+-- residual gauge) — NOT touched here, remains FATAL to curved-satisfiability. NOT a₁=R/6
+-- (CONDITIONAL + effectively flat-only until the concrete CoV bundle + the hDaLimLU
+-- hframeK-weakening + a curved geometric witness all land).
+#print axioms QIQTH.MassChartBridge.weightedParametrix_setMass_tendsto_one
+#print axioms QIQTH.MassChartBridge.gatedKernel_mass_tendsto_one_of_localChart
+#print axioms QIQTH.MassChartBridge.curvedPhi_ne_one
+#print axioms QIQTH.MassChartBridge.chartBridge_curved_certificate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
