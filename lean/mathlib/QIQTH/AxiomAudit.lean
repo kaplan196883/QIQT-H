@@ -22283,4 +22283,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.IterRungGrounding.htermBox_chain_final
 #print axioms QIQTH.IterRungGrounding.rung_residuals_intro
 
+-- ## ★ J4-475 (XSlotBaseParts): hLapX DISCHARGED — the varying-base
+-- metric/Christoffel continuity was FREE from the C² geometry inputs
+-- THE GATE RESOLUTION: unlike N3 (fixed base 0 ⟹ the metric factors are
+-- CONSTANTS), the varying-base factors gi p.2 / christoffel p.2 vary —
+-- but a C² field's continuity is banked: hgiC (the exact AssemblyLadderR5
+-- binder) + hChr's ContDiff ⊤ give both via .comp continuous_snd. So
+-- hLapX demands NO new Laplacian carry — only the geometry inputs + the
+-- two varying-base witness partials hpd1X/hpd2X (the N3 atoms re-based).
+-- hDerivX = an irreducible ∂_τ LEAF (no metric content; the same honest
+-- class N2 kept). THE X-SLOT LEDGER: the ENTIRE htermBox census family
+-- is now grounded to {hgiC/hChr geometry + the witness-slice leaves
+-- hDerivX/hpd1X/hpd2X + hDom + hPd2Full/hRestBox}. Honest caveat: NOT
+-- geometry-alone — the witness-slice leaves are genuine (their reduction
+-- = the J4-443 parametrix chain-rule machinery, a separate brick).
+-- std-3 (the ledger intro axiom-FREE). NOT a₁ = R/6.
+#print axioms QIQTH.XSlotBaseParts.hLapX_box_of_parts
+#print axioms QIQTH.XSlotBaseParts.hLapX_grounded
+#print axioms QIQTH.XSlotBaseParts.hIterBase_xslot_grounded
+#print axioms QIQTH.XSlotBaseParts.xslot_residuals_intro
+
 end QIQTH.AxiomAudit

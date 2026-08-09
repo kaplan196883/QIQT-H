@@ -674,6 +674,7 @@ import QIQTH.HFintDiagGrounding
 import QIQTH.Phase14Transport
 import QIQTH.BoxAtomsGrounding
 import QIQTH.IterRungGrounding
+import QIQTH.XSlotBaseParts
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
