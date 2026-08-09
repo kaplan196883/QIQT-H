@@ -4971,3 +4971,18 @@ audit/census surface. The deferred monolith is content-free (its correctness was
 by the J4-471 type-check); the right inlining point = the A1R6GateSlots assembly.
 raw 0; build 26s module. NEXT: J4-473 = the assembly-point inline (or the honest defer per
 the zero-consumer finding). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-473: htermBox WIRED + hpd2diag consolidated (the box atoms)
+
+`QIQTH/BoxAtomsGrounding.lean` (3 decls; std-3 + axiom-free ledger). **THE GATES:**
+(hpd2diag) the transparency hypothesis REFUTED on two independent counts — the gate is
+τ-INDEPENDENT (a hard spatial gate; the J4-443 τ-transparency pattern is a category error
+here) AND the ungated pd-pd supplier keys the VARYING base vs the demanded fixed centre 0 —
+honest consolidation onto the canonical NonLeviBoxContinuity.hpd2 (diagonal j := i).
+(htermBox) a GENUINE WIRE — the census atom is the x-slot orientation, EXACTLY produced by
+the banked IterEContinuity.iterE_jointContinuousOn per box (NOT the J4-394 z-slot family —
+the slot-orientation trap caught by reading the headers, not trusting the queue hint;
+LeviMTest's own M0 note documents the x-slot need). `box_atoms_residuals`: hIterBase +
+hIterStep replace htermBox; hPd2Full hosts hpd2diag. raw 0; build 47s.
+NEXT: J4-474 = the iterE rungs (hIterBase/hIterStep). NOT a₁ = R/6 (CONDITIONAL).
