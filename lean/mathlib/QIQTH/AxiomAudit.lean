@@ -22090,4 +22090,22 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁ = R/6.
 #print axioms QIQTH.InnerDataCensusThread.v2Census_phase6
 
+-- ## ★ J4-464 (PresentationBridges): the census C₁ slot GROUNDED FROM
+-- GEOMETRY (phase 7); the C_L shape grounded, the slot-wire honest
+-- BRIDGE 2 COMPOSED via a cleaner DIRECT route: the feared germ↔chartAmp
+-- conversion was UNNECESSARY — witnessFieldDeriv_jointContinuousOn
+-- (J4-443) already bounds the ACTUAL census object; w-slice restriction +
+-- compactness on K gives the exact C₁ slot (census_C1_grounded).
+-- BRIDGE 1: baseKernelW 2 0 = gaussDdim(2τ) was ALREADY BANKED
+-- (baseKernelW_zero_apply); census_C_L_grounded grounds the SHAPE; the
+-- slot-wire honestly blocked — levi_C_L_grounded existentially fixes its
+-- own gate S/radii, not injectable for the census-fixed S (→ J4-465:
+-- obtain S,a,b from the grounded theorem). gateCore_reconstruct +
+-- v2Census_phase7 (hGateCore → hGateCoreR (6 conjuncts) + the C₁-geometry
+-- bundle; C₁ reconstructed internally). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.PresentationBridges.census_C_L_grounded
+#print axioms QIQTH.PresentationBridges.census_C1_grounded
+#print axioms QIQTH.PresentationBridges.gateCore_reconstruct
+#print axioms QIQTH.PresentationBridges.v2Census_phase7
+
 end QIQTH.AxiomAudit
