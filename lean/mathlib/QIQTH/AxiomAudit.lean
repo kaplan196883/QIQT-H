@@ -22401,4 +22401,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Flow3Regularity.contDiffAt3_uniformFlowExp
 #print axioms QIQTH.Flow3Regularity.forward2_velocitySlot
 
+-- ## ★ J4-481 (SecondVariationModulus): the 2nd-variation EXPOSED + the
+-- component ODE — the groundwork for hbaseJ2
+-- THE EXPOSURE LANDED: uniformFlowExp_secondVar_spec re-runs the R2-a/b
+-- construction KEEPING the discarded endpoint identification — the full
+-- triple (the base Jacobi field, the DOUBLED second-variation field
+-- along (tube, Jf0), the endpoint identity L₂ δ = (Vf δ 1).2.1) — the
+-- J4-435 exposure one order up; the residue was pure spec-exposure
+-- (the operator was built in R2-a/J4-67, only _hLeq discarded).
+-- ★ THE KEY NON-OBVIOUS FINDING: the naive full-doubled-norm Grönwall
+-- FAILS hbaseJ2 — the full norm is dominated by the .1-slot (∝δ,
+-- b-independent) and cannot deliver the ∝‖b‖ factor the double opNorm
+-- requires; the .2-COMPONENT ODE (the δ·b-bilinear curvature source) is
+-- the correct route — secondVar_snd_hasDerivAt LANDED (the inhomogeneous
+-- scalar-Jacobi ODE). The wall does NOT fall yet: the two-point Grönwall
+-- + double opNorm + the weld = J4-482. std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.SecondVariationModulus.uniformFlowExp_secondVar_spec
+#print axioms QIQTH.SecondVariationModulus.secondVar_snd_hasDerivAt
+
 end QIQTH.AxiomAudit
