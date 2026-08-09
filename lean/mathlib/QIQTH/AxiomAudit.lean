@@ -22685,6 +22685,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ConcreteRemainderOrder.concreteIntegrand_on_collar_le
 #print axioms QIQTH.ConcreteRemainderOrder.concreteRemainder_order
 
+-- J4-495 (AmpDiffGrounding): the concrete remainder capstone with hAmpDiff
+-- DISCHARGED from (I1). concreteRemainder_order_reach = concreteRemainder_order
+-- but with M₀ := (collarK Liso c τ₀ + 1)·Mqc — NO raw full-space amp-diff sup.
+-- ⚠ GATE CATCH (genuine region-mismatch): the original hAmpDiff was stated
+-- full-space (∀ z) but CONSUMED only on-collar; for concrete data Aamp =
+-- rhoRatio·chartAmp₀ with rhoRatio ~ exp(‖z‖²/4τ) UNBOUNDED off-collar, the
+-- full-space sup is UNSATISFIABLE at any finite M₀ — so M₀ binds instead to the
+-- (I1)-reachable collar constant (collarK+1)·Mqc on the SAME collar region where
+-- it is used (rhoRatio_le_collarK + rhoRatio_pos + the banked hqcbdd), off-collar
+-- being handled by hcomp_final4 which never touches the amp-diff sup.
+-- concreteIntegrand_on_collar_le_atz = the per-point on-collar bound (triangle:
+-- Aamp·F − chartAmp·F = (rhoRatio−1)·chartAmp₀·F). Remaining substantive external
+-- hyps: hiso (the (I1) near-isometry lower bound) + hform_gate/hgate (the annulus
+-- gate carries, unchanged). std-3 both. NOT a₁ = R/6 (remainder-subsystem cleanup;
+-- the coefficient walls — q-audit ≥2 + the general van-Vleck 2-jet — are BEYOND).
+#print axioms QIQTH.AmpDiffGrounding.concreteIntegrand_on_collar_le_atz
+#print axioms QIQTH.AmpDiffGrounding.concreteRemainder_order_reach
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
