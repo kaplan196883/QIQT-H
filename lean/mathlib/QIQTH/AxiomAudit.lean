@@ -22189,4 +22189,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BoxCensusGrounding.v2Census_phase12
 #print axioms QIQTH.BoxCensusGrounding.box_census_grounding_residuals_intro
 
+-- ## ★ J4-470 (HProvGrounding): the diagonal provider 7 → 4 (phase 13)
+-- THE LEG MAP: hProvP = the 7-leg first-order diff-under-∫ bundle at the
+-- DIAGONAL window [0,u] (no −εₘ cap). DISCHARGED: legs 2/4 (Fubini on
+-- the window-u joints) + leg 7 (the base-general innerZ_line_hasDerivAt
+-- + the reusable FrozenHdiffLeg family at moving base x). REMAINDER:
+-- snbx + hFint (THE GENUINE CARRY — the diagonal window reaches the
+-- singular endpoint τ→0, the capped-ceiling engine needs a positive
+-- lower cap and does NOT apply) + the dominator triple + the z-level
+-- core. M-UNIFORMITY VACUOUS on the diagonal (no m). THE J4-444
+-- "diagonal ≠ frozen" claim now EXPLAINED: same engines, window/base-
+-- general — the only genuine obstruction is the singular endpoint
+-- blocking the integrability legs. v2Census_phase13.
+-- std-3 (the projector axiom-FREE). NOT a₁ = R/6.
+#print axioms QIQTH.HProvGrounding.hProvP_grounded
+#print axioms QIQTH.HProvGrounding.diagLeg_hdiff
+#print axioms QIQTH.HProvGrounding.diagLeg_hFmeas
+#print axioms QIQTH.HProvGrounding.v2Census_phase13
+
 end QIQTH.AxiomAudit
