@@ -1438,6 +1438,7 @@ import QIQTH.HeatResidualBound
 import QIQTH.VanVleckCancellation
 import QIQTH.VanVleckRadial
 import QIQTH.VanVleckTwoJet
+import QIQTH.A1GaugeDischarge
 import QIQTH.ResidueBound
 import QIQTH.HeatParametrixTrace
 import QIQTH.HeatParametrixTraceDerived

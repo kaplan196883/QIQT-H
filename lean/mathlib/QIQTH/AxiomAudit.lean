@@ -22809,6 +22809,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VanVleckTwoJet.invSqrt_directional_hessian_ricci
 #print axioms QIQTH.VanVleckTwoJet.invSqrt_trace_hessian_scal
 
+-- J4-502 (A1GaugeDischarge): htr DISCHARGED from the RNC normal-coordinate GAUGE
+-- in the a₁ capstone. trueKernel_diagonal_a1_eq_R6_gauged = the capstone
+-- trueKernel_diagonal_a1_eq_R6 with the raw metric-Hessian trace htr (∑_a ∂_c∂_d
+-- g_{aa}(0)=−(2/3)Ric) + the abstract Ric parameter REMOVED, replaced by the
+-- falsifiable normal-coordinate gauge hgauge (∀ i a b c, ∂_aΓ^i_{bc}(0)+
+-- ∂_bΓ^i_{ca}(0)+∂_cΓ^i_{ab}(0)=0) via rnc_htr_of_gauge (Ric:=ricci g gi · · 0).
+-- Conclusion unchanged: (∂_t−Δ)K(t,0,0)=0 ∧ K(t,0,0)=(4πt)^{−d/2}·(1 +
+-- (∑_i ricci g gi i i 0)/6·t + t²·rem) = the honest Scal/6. CLEAN SPLICE (capstone
+-- applied ONCE as a black box, 26s, no monolith blow-up). AUDIT: category (b)
+-- MORE-PRIMITIVE than htr → a REAL QUALITATIVE reduction (ad-hoc trace identity →
+-- recognized falsifiable RNC gauge; RNCExpansion certifies hgauge is load-bearing,
+-- drop it and −(2/3)Ric is FALSE) — NOT cosmetic, NOT full elimination (hgauge
+-- stays carried, Mathlib has no RNC/exp-chart to derive it). Gate: hgauge
+-- inhabited (flat Γ≡0 with Ric=0; curved RNC metrics with Ric≠0). std-3. NOT
+-- a₁=R/6. The a₁ capstone's carried set is now hCorrHigher/hEboundW/hgauge + the
+-- analytic carries (hInt/hE/hDuhamel/hInter/hHdiag/heatOp-regularity).
+#print axioms QIQTH.A1GaugeDischarge.trueKernel_diagonal_a1_eq_R6_gauged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
