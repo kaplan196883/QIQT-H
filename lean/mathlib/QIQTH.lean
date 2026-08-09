@@ -652,6 +652,7 @@ import QIQTH.ProdPtwiseWitness
 import QIQTH.LeviCapWitness
 import QIQTH.WeightedPairingHelper
 import QIQTH.DHrefinedWitness
+import QIQTH.ProdMeasAndEnvelope
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow

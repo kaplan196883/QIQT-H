@@ -21881,4 +21881,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DHrefinedWitness.hGint_regrounded₂
 #print axioms QIQTH.DHrefinedWitness.perUCensus_phase9
 
+-- ## ★★ J4-453 (ProdMeasAndEnvelope): THE D₀ GATE RECONCILED — D₀ = 0 at
+-- the witness; the refined envelope PROVED on-gate (census phase 10)
+-- THE CRUX VERDICT: the inverse chart is CENTERED at the witness field
+-- point — the banked chartW0_displacement gives W z 0 = −z + O(‖z‖²)
+-- (purely LINEAR near-isometry, NO additive D₀); the slope is a pure
+-- ‖z‖-moment with the 1/(2τ) ONLY on the moment; the only mass is the
+-- amplitude-derivative CB with NO 1/(2τ); even the quadratic residual
+-- pairs as τ⁰. THE J4-452 COUNT STANDS. witnessFieldDeriv_refined_gate_
+-- envelope: the exact on-gate two-term bound (CA/(2τ)·‖z‖ + CB)·G_σ —
+-- ONE refinement up from the crude envelope, via slopeContraction_holder
+-- (the ℓ∞–ℓ¹ Hölder surrogate — Point n is Pi-SUP-normed, NOT Euclidean;
+-- correctly not Cauchy-Schwarz) + the centered near-isometry.
+-- Part A: hProdMeas DISCHARGED — the census demands per-s SLICE
+-- measurability (the joint→slice route only gives a.e.-s; honest);
+-- AEStronglyMeasurable.mul on the slice carries. perUCensus_phase10.
+-- REMAINING: the full ∀z hDHrefined₂ (on-gate + off-gate vanishing +
+-- uniform constant selection = J4-454). std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.ProdMeasAndEnvelope.slopeContraction_holder
+#print axioms QIQTH.ProdMeasAndEnvelope.witnessFieldDeriv_refined_gate_envelope
+#print axioms QIQTH.ProdMeasAndEnvelope.prodMeas_at_witness
+#print axioms QIQTH.ProdMeasAndEnvelope.perUCensus_phase10
+
 end QIQTH.AxiomAudit
