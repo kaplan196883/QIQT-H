@@ -4765,3 +4765,15 @@ BRICK) · (vi) herr/hmin ✓-as-corrected (the unsatisfiability certified; the g
 repair in force). The carries are INPUTS not theorems. raw 0; build 81s.
 NEXT: J4-459 = WallAThreading (the v3-core call at the witness; block-B → hInter+hAdom2cap).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## J4-459: the block-B surface THREADED — 6 members → 2 genuine carries
+
+`QIQTH/WallAThreading.lean` (2 decls std-3). `v2Census_phase2` = the v3-core cross-check
+with the six block-B binders supplied INTERNALLY from wallA_phase1's inputs (delegating to
+the already-transcribed v2Census_phase1; the one mismatch — hFdomW's ∃CF vs the free wF/CF
+binders — resolved by obtain + wF := 2, defeq clean). THE BLOCK-B FINAL LEDGER: hInter +
+hAdom2cap (the genuine carries) · data/hSecBoxes/hBBoxes (satisfiable envelope/box inputs) ·
+hUT/hεU (group-(A) scaffolds); hFdomW/hSecCont/hBcont/hmeas2Lo all internal.
+raw 0; build 48s. NEXT: J4-460 = HInterGrounding (hInter — now the single most load-bearing
+block-B carry — via the F2/diff-under-∫ piles). NOT a₁ = R/6 (CONDITIONAL).
