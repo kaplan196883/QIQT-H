@@ -22342,4 +22342,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LeafBoxSplice.hIterBase_final
 #print axioms QIQTH.LeafBoxSplice.splice_residuals_intro
 
+-- ## ★★ J4-478 (SmoothCarrierGrounding): hParamDeriv + hComposite1 FULLY
+-- GROUNDED; hComposite2 → the chart Hessian = THE THREAD CONVERGENCE
+-- All three hSmooth carriers factor DEFEQ through the C∞ profile
+-- (radialCutoff·heatParametrix). hParamDeriv: the cutoff pulls out
+-- (τ-independent) ⟹ the banked chartComposed_dtau_jointContinuousOn
+-- verbatim. hComposite1: pd_comp + profPd_composed (4 banked factors).
+-- hComposite2: pd_pd_comp_local + profPdPd_composed (8 banked factors) +
+-- the second block carrying hWc2cont = THE CHART HESSIAN.
+-- ★★ THE THREAD CONVERGENCE (audited, confirmed): hWc2cont is the SAME
+-- 2nd-order chart-jet atom the queued C₂/hcont2 derivative-sup chain
+-- needs — the htermBox chain and the sup chain converge on ONE geometric
+-- wall: the second field-jet of the uniform inverse chart (the J3
+-- 2nd-order analogue). No fresh wall introduced. Dont-undercredit: the
+-- parametrix jets (value/first/second) + the cutoff jets were ALL
+-- banked; only the manifold product rules were new threading.
+-- std-3 (the ledger intro axiom-FREE). NOT a₁ = R/6.
+#print axioms QIQTH.SmoothCarrierGrounding.hParamDeriv_grounded
+#print axioms QIQTH.SmoothCarrierGrounding.hComposite1_grounded
+#print axioms QIQTH.SmoothCarrierGrounding.hComposite2_grounded
+#print axioms QIQTH.SmoothCarrierGrounding.smoothCarriers_family
+
 end QIQTH.AxiomAudit
