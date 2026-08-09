@@ -4692,3 +4692,24 @@ retractions caught → J4-451 the Sol #21 re-grounding → J4-452 the two-term c
 J4-453 D₀=0 + the refined envelope → J4-454 the closure. Dont-undercredit: pure assembly.
 raw 0; build 48s. NEXT: J4-455 = Sol-#20 (vi) herr/hmin 3-region coercivity.
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+# ⚠⚠ J4-455: THE FOURTH GATE CATCH — the whole-space herr/hmin UNSATISFIABLE
+# (machine-certified); the gate-restricted versions PROVED
+
+`QIQTH/HerrHminCoercivity.lean` (5 decls std-3). **THE VERDICT (a THEOREM, not just an
+audit):** `uniformInverseChart_off_K` — the chart defaults to 0 off K; hence
+`wholeSpace_coercivity_unsatisfiable` — the literal ∀z hmin (½r²_z ≤ r²_{Wz}) is
+DEFINITIVELY FALSE at any nonzero z ∉ K (K compact ⟹ such z exist; the ½ is fixed).
+herr fails in the small-‖z‖ gap off K. **⚠ CONSEQUENCE:** the group-(1) consumers
+hdom_comp2_ptwise/hcomp_final2/slotInstantiation_phase8 (literal ∀z binders) are only
+VACUOUSLY dischargeable — they need the gate-vs-far-field re-fire (J4-456): on
+collarᶜ ∩ (K∩ball) via comparisonDom2 ← herrHmin_gate; on the far field a decaying
+baseKernelW leg (off-gate W z = 0 makes the ρ-factored integrand the WRONG object — a
+split, not a scaling gap). **PROVED gate-restricted:** `herr_gate` (≤ L·n·‖z‖³ on K∩ball,
+from the banked chartW0_rncRadialSq_error; the sign resolved: W z ≈ −z, rncRadialSq even) +
+`hmin_gate` (radius shrunk so L‖z‖ ≤ ½) + `herrHmin_gate`. Dont-undercredit: assembly —
+the displacement machinery was banked. raw 0; build 50s. FOUR gate catches to date
+(J4-448/450/452/455) — the blind-spot discipline is the campaign's best tool.
+NEXT: J4-456 = GateFarFieldSplit (hcomp_final3 + slotInstantiation_phase9).
+NOT a₁ = R/6 (CONDITIONAL).
