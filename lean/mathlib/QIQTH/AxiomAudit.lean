@@ -22570,4 +22570,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VacuumAreaLaw.redSympEig_ge_half
 #print axioms QIQTH.VacuumAreaLaw.redEntropy_nonneg'
 
+-- VACAREA-3: the massive (m>0) gapped Loewner spectral WINDOW
+-- `m²·1 ⪯ K_ε ⪯ (m²+4/ε²)·1`. couplingK_ge = the mass gap (lower); couplingK_le
+-- = the operator-norm-free Laplacian upper bound via the cyclic-shift factorization
+-- `(4/ε²)·1 − (−Δ_ε) = (ε⁻¹(S+1))ᵀ(ε⁻¹(S+1)) ⪰ 0`. Dimension-uniform, finite-dim,
+-- gapped. NOT the area law; and the uniform symplectic CAP / per-site entropy bound
+-- were CHECKPOINTED (they need operator monotonicity of √· and inverse antitonicity,
+-- which Mathlib has only for COMPLEX C⋆-algebras — real matrices are excluded). std-3.
+#print axioms QIQTH.VacuumAreaLaw.couplingK_ge
+#print axioms QIQTH.VacuumAreaLaw.couplingK_le
+#print axioms QIQTH.VacuumAreaLaw.negLapε_upper
+
 end QIQTH.AxiomAudit

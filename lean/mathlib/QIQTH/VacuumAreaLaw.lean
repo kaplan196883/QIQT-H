@@ -362,4 +362,170 @@ theorem redEntropy_nonneg' (hm : 0 < m) : 0 ≤ redEntropy ε m n s hm :=
 
 end Region
 
+/-! ## §3-C (VACAREA-3) — the massive gapped Loewner spectral window `m²·1 ⪯ K_ε ⪯ (m²+4/ε²)·1`
+
+**Sol's verdict + a discovered Mathlib wall (this session).**  Sol (`gpt-5.6-sol`) confirmed the
+*area coefficient* is a multi-session Mathlib wall (dimension-uniform quasi-local Green-function
+decay `|K^{−1/2}(x,y)| ≤ C e^{−c|x−y|}`, periodic-distance boundary summation, Schatten control of
+the symplectic defect — none packaged in Mathlib).  Its recommended green single-session rung was the
+uniform symplectic CAP `½ ≤ ν_j ≤ ν_max(ε,m)` via the gapped window + covariance Loewner bounds.
+
+**Discovered wall (checkpoint here).**  The CAP needs *operator monotonicity of `CFC.sqrt`*
+(`√(m²·1) ⪯ √K`) and *operator inverse antitonicity* (`K^{1/2} ⪰ m·1 ⟹ K^{−1/2} ⪯ m⁻¹·1`).  In
+Mathlib both are proved only over **complex** C⋆-algebras: `NonUnitalCStarAlgebra`/`CStarAlgebra`
+*extend* `NormedSpace ℂ` (`Mathlib/Analysis/CStarAlgebra/Classes.lean`), so they do **not** apply to
+`Matrix (Fin n) (Fin n) ℝ` (a real algebra).  The eigenvalue-level fallback (`A` Hermitian with
+`∀j, c ≤ eig_j A ⟹ c·1 ⪯ A`, and `eig_j(√A) = √(eig_j A)`) is also absent from Mathlib and would
+require a spectral-theorem development — i.e. genuinely multi-session.  **The covariance bounds, the
+symplectic cap, and the per-site entropy bound are therefore CHECKPOINTED, not forced.**
+
+What lands here (all axiom-free, std-3, finite-dimensional, gapped `m>0`, `n≥2`; **no area claim**):
+* `eigenvalue_ub` — dual of `eigenvalue_lb`: `A ⪯ c·1 ⟹ eig_j(A) ≤ c`.
+* `smul_le_smul_left`, `submatrix_le` — reusable Loewner-order helpers (scaling; principal-submatrix
+  restriction), staged for the eventual cap sub-campaign.
+* `shiftMat` (the cyclic permutation matrix `= finRotate`), `shiftMat_transpose_mul` (`Sᵀ S = 1`),
+  `diffOp_eq_shift` (`D_ε = ε⁻¹(S − 1)` for `n ≥ 2`).
+* **`negLapε_upper`** — the operator-norm-free Laplacian upper bound
+  `(4/ε²)·1 − (−Δ_ε) = (ε⁻¹(S+1))ᵀ(ε⁻¹(S+1)) ⪰ 0` (spectrum of `−Δ_ε` in `[0, 4/ε²]`).
+* **`couplingK_ge` / `couplingK_le`** — the gapped spectral WINDOW `m²·1 ⪯ K_ε ⪯ (m²+4/ε²)·1`.
+* `gaussModeEntropy_mono` — the per-mode entropy is monotone on `[½,∞)` (reusable; the entropy input
+  the future volume/area bound will consume). -/
+
+/-- **Dual of `eigenvalue_lb`.**  A Loewner upper bound `A ⪯ c·1` forces every eigenvalue `≤ c`. -/
+theorem eigenvalue_ub {ι : Type*} [Fintype ι] [DecidableEq ι] {A : Matrix ι ι ℝ}
+    (hA : A.IsHermitian) {c : ℝ} (h : (c • (1 : Matrix ι ι ℝ) - A).PosSemidef) (j : ι) :
+    hA.eigenvalues j ≤ c := by
+  have hmv : (c • (1 : Matrix ι ι ℝ) - A) *ᵥ (⇑(hA.eigenvectorBasis j))
+      = (c - hA.eigenvalues j) • (⇑(hA.eigenvectorBasis j)) := by
+    rw [Matrix.sub_mulVec, Matrix.smul_mulVec, Matrix.one_mulVec, hA.mulVec_eigenvectorBasis j,
+      sub_smul]
+  have hnn := h.dotProduct_mulVec_nonneg (⇑(hA.eigenvectorBasis j))
+  rw [hmv, dotProduct_smul, smul_eq_mul] at hnn
+  have hnorm : star (⇑(hA.eigenvectorBasis j) : ι → ℝ) ⬝ᵥ (⇑(hA.eigenvectorBasis j)) = 1 := by
+    rw [dotProduct_comm, ← EuclideanSpace.inner_eq_star_dotProduct,
+      real_inner_self_eq_norm_sq, hA.eigenvectorBasis.orthonormal.1 j, one_pow]
+  rw [hnorm, mul_one] at hnn
+  linarith
+
+/-- Scaling a Loewner inequality by a nonnegative scalar. -/
+theorem smul_le_smul_left {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {A B : Matrix ι ι ℝ} (h : A ≤ B) {c : ℝ} (hc : 0 ≤ c) : c • A ≤ c • B := by
+  rw [Matrix.le_iff] at h ⊢
+  rw [← smul_sub]
+  exact h.smul hc
+
+/-- Restricting a Loewner inequality to a principal submatrix on a region `s`. -/
+theorem submatrix_le {n : ℕ} (s : Finset (Fin n)) {A B : Matrix (Fin n) (Fin n) ℝ} (h : A ≤ B) :
+    A.submatrix (Subtype.val : {x // x ∈ s} → Fin n) (Subtype.val : {x // x ∈ s} → Fin n)
+      ≤ B.submatrix (Subtype.val : {x // x ∈ s} → Fin n) (Subtype.val : {x // x ∈ s} → Fin n) := by
+  rw [Matrix.le_iff] at h ⊢
+  have key := h.submatrix (Subtype.val : {x // x ∈ s} → Fin n)
+  rwa [Matrix.submatrix_sub] at key
+
+/-! ### The cyclic shift matrix and the Laplacian upper bound -/
+
+/-- The cyclic **shift matrix** `S` (`= finRotate` as a permutation matrix): `S_{i j} = [j = i+1]`
+    with `i+1` taken cyclically.  As a permutation matrix it is orthogonal (`Sᵀ S = 1`). -/
+noncomputable def shiftMat (n : ℕ) : Matrix (Fin n) (Fin n) ℝ := (finRotate n).permMatrix ℝ
+
+theorem shiftMat_apply (n : ℕ) (i j : Fin n) :
+    shiftMat n i j = if j = finRotate n i then 1 else 0 := by
+  show (Equiv.toPEquiv (finRotate n)).toMatrix i j = _
+  rw [PEquiv.toMatrix_apply, Equiv.toPEquiv_apply]
+  simp only [Option.mem_some_iff]
+  exact if_congr eq_comm rfl rfl
+
+/-- `Sᵀ S = 1`: the shift matrix is orthogonal (it is a permutation matrix). -/
+theorem shiftMat_transpose_mul (n : ℕ) : (shiftMat n)ᵀ * shiftMat n = 1 := by
+  unfold shiftMat
+  rw [Matrix.transpose_permMatrix, ← Matrix.permMatrix_mul, mul_inv_cancel, Matrix.permMatrix_one]
+
+/-- `(finRotate n i).val = (i.val + 1) % n` for `n ≥ 2` (the cyclic successor). -/
+theorem finRotate_val {n : ℕ} (hn : 2 ≤ n) (i : Fin n) :
+    (finRotate n i).val = (i.val + 1) % n := by
+  haveI : NeZero n := ⟨by omega⟩
+  rw [finRotate_apply, Fin.val_add, Fin.val_one', Nat.mod_eq_of_lt (show 1 < n by omega)]
+
+/-- **`D_ε = ε⁻¹(S − 1)`** for `n ≥ 2`: the forward-difference operator is `ε⁻¹` times
+    (shift − identity).  (For `n ≥ 2` the `j = i+1` and `j = i` cases are disjoint.) -/
+theorem diffOp_eq_shift {n : ℕ} (hn : 2 ≤ n) (ε : ℝ) : diffOp ε n = ε⁻¹ • (shiftMat n - 1) := by
+  haveI : NeZero n := ⟨by omega⟩
+  ext i j
+  have hji : (j = finRotate n i) ↔ (j.val = (i.val + 1) % n) := by
+    rw [Fin.ext_iff, finRotate_val hn i]
+  have hne : (i.val + 1) % n ≠ i.val := by
+    rcases lt_or_ge (i.val + 1) n with h | h
+    · rw [Nat.mod_eq_of_lt h]; omega
+    · have h1 : i.val + 1 = n := le_antisymm (by omega) h
+      rw [h1, Nat.mod_self]; omega
+  simp only [diffOp, Matrix.of_apply, Matrix.smul_apply, Matrix.sub_apply, shiftMat_apply,
+    Matrix.one_apply, smul_eq_mul]
+  congr 1
+  by_cases h1 : j.val = (i.val + 1) % n
+  · have hj_ne_i : ¬ (i = j) := by
+      intro h; rw [← h] at h1; exact hne h1.symm
+    rw [if_pos h1, if_pos (hji.mpr h1), if_neg hj_ne_i]; ring
+  · rw [if_neg h1, if_neg (fun h => h1 (hji.mp h))]
+    by_cases h2 : j = i
+    · rw [if_pos h2, if_pos h2.symm]; ring
+    · rw [if_neg h2, if_neg (fun h => h2 h.symm)]; ring
+
+/-- **The Laplacian upper bound** `(4/ε²)·1 − (−Δ_ε) ⪰ 0`, i.e. `−Δ_ε ⪯ (4/ε²)·1`.  Proved by the
+    operator-norm-free factorization `(4/ε²)·1 − (−Δ_ε) = (ε⁻¹(S+1))ᵀ(ε⁻¹(S+1))` (using `Sᵀ S = 1`
+    and `−Δ_ε = (ε⁻¹(S−1))ᵀ(ε⁻¹(S−1))`).  The spectrum of `−Δ_ε` sits in `[0, 4/ε²]`. -/
+theorem negLapε_upper {n : ℕ} (hn : 2 ≤ n) {ε : ℝ} (_hε : ε ≠ 0) :
+    ((4 / ε ^ 2) • (1 : Matrix (Fin n) (Fin n) ℝ) - negLapε ε n).PosSemidef := by
+  have hSS : (shiftMat n)ᵀ * shiftMat n = 1 := shiftMat_transpose_mul n
+  have hE : (4 / ε ^ 2) • (1 : Matrix (Fin n) (Fin n) ℝ) - negLapε ε n
+      = (ε⁻¹ • (shiftMat n + 1))ᵀ * (ε⁻¹ • (shiftMat n + 1)) := by
+    unfold negLapε
+    rw [diffOp_eq_shift hn ε]
+    simp only [Matrix.transpose_smul, Matrix.transpose_sub, Matrix.transpose_add,
+      Matrix.transpose_one, Matrix.smul_mul, Matrix.mul_smul,
+      Matrix.sub_mul, Matrix.mul_sub, Matrix.add_mul, Matrix.mul_add,
+      Matrix.mul_one, Matrix.one_mul, hSS]
+    module
+  rw [hE]
+  have := Matrix.posSemidef_conjTranspose_mul_self (ε⁻¹ • (shiftMat n + 1))
+  rwa [Matrix.conjTranspose_eq_transpose_of_trivial] at this
+
+/-- **The gapped spectral window (lower):** `m²·1 ⪯ K_ε` (the mass gap). -/
+theorem couplingK_ge (ε m : ℝ) (n : ℕ) :
+    (m ^ 2) • (1 : Matrix (Fin n) (Fin n) ℝ) ≤ couplingK ε m n := by
+  rw [Matrix.le_iff]
+  have hcancel : couplingK ε m n - (m ^ 2) • (1 : Matrix (Fin n) (Fin n) ℝ) = negLapε ε n := by
+    unfold couplingK; abel
+  rw [hcancel]; exact negLapε_posSemidef ε n
+
+/-- The gapped upper cutoff `b_ε := m² + 4/ε²`. -/
+noncomputable def bcap (ε m : ℝ) : ℝ := m ^ 2 + 4 / ε ^ 2
+
+/-- **The gapped spectral window (upper):** `K_ε ⪯ (m²+4/ε²)·1`. -/
+theorem couplingK_le {n : ℕ} (hn : 2 ≤ n) {ε : ℝ} (hε : ε ≠ 0) (m : ℝ) :
+    couplingK ε m n ≤ (bcap ε m) • (1 : Matrix (Fin n) (Fin n) ℝ) := by
+  rw [Matrix.le_iff]
+  have hkey : (bcap ε m) • (1 : Matrix (Fin n) (Fin n) ℝ) - couplingK ε m n
+      = (4 / ε ^ 2) • (1 : Matrix (Fin n) (Fin n) ℝ) - negLapε ε n := by
+    unfold bcap couplingK; rw [add_smul]; abel
+  rw [hkey]; exact negLapε_upper hn hε
+
+/-- **`gaussModeEntropy` is monotone on `[½, ∞)`** (a reusable local lemma; the per-mode entropy is
+    increasing above the Heisenberg floor because its derivative `log((ν+½)/(ν−½)) > 0` there). -/
+theorem gaussModeEntropy_mono {a b : ℝ} (ha : 1 / 2 ≤ a) (hab : a ≤ b) :
+    QIQTH.GaussianStateEntropy.gaussModeEntropy a ≤ QIQTH.GaussianStateEntropy.gaussModeEntropy b := by
+  have hmono : MonotoneOn QIQTH.GaussianStateEntropy.gaussModeEntropy (Set.Icc (1 / 2) b) := by
+    have hdiff : DifferentiableOn ℝ QIQTH.GaussianStateEntropy.gaussModeEntropy
+        (interior (Set.Icc (1 / 2) b)) := by
+      intro x hx
+      rw [interior_Icc] at hx
+      exact (QIQTH.GaussianStateEntropy.gaussModeEntropy_hasDerivAt
+        hx.1).differentiableAt.differentiableWithinAt
+    apply monotoneOn_of_deriv_nonneg (convex_Icc _ _)
+      QIQTH.GaussianStateEntropy.gaussModeEntropy_continuous.continuousOn hdiff
+    intro x hx
+    rw [interior_Icc] at hx
+    rw [(QIQTH.GaussianStateEntropy.gaussModeEntropy_hasDerivAt hx.1).deriv]
+    exact (QIQTH.GaussianStateEntropy.gaussModeEntropy_deriv_pos hx.1).le
+  exact hmono ⟨ha, hab⟩ ⟨ha.trans hab, le_refl b⟩ hab
+
 end QIQTH.VacuumAreaLaw
