@@ -22910,6 +22910,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TransportEqOne.residual_factorization_of_radial01
 #print axioms QIQTH.TransportEqOne.radialInput1_flat_witness
 
+-- J4-507 (GaussLemmaGauge): the coordinate GAUSS LEMMA is THE IRREDUCIBLE GEODESIC
+-- FLOOR — both hRad0/hRad1 packaged onto ONE named geometric input. ⚠ VERDICT (c):
+-- the Gauss lemma (∀x, all-orders) is NOT derivable from the finite RNC gauge hgauge
+-- (Sol counterexample: g_ij=(1+ε‖x‖⁴)δ_ij shares the full 2-jet at 0 — satisfies
+-- hgauge, g(0)=δ, ∂g(0)=0 — yet ∑_j g_ij x^j=(1+ε‖x‖⁴)x^i≠x^i off-origin). CoordGaussGauge
+-- gi := ∀ x j, ∑_i gi x i j·x i = x j (the single ∀x named floor, inverse-metric form);
+-- MetricGaussGauge g := ∀ x i, ∑_j g x i j·x j = x i (dual). metricRadial_eq_radialDeriv_of_coordGaussGauge:
+-- R_g(u)=r∂_r u ∀u from the one gauge. residual_factorization_of_gauge ★★: the residual
+-- E=−t·G·Δ_g u₁ from the ONE named gauge + the two Euler-field radial eqns — BOTH carried
+-- radial inputs now rest on ONE recognized hypothesis. metricGaussGauge_imp_hGaussGerm:
+-- the ∀x metric gauge ⟹ the a₁-mainline germ hGauss (same geometric content the mainline
+-- A1R6FromLabelled.a1_R6_from_labelled carries). ⚠ DON'T-UNDERCREDIT: the repo has a FULL
+-- in-Lean exp-map/geodesic stack (ExpMap/Geodesic/GaussLemmaFirstVariation/Transverse/
+-- Homogeneity/Assembly/FlowData — Mathlib has NONE) reducing the Gauss germ to a single
+-- tube residue hgball (one level deeper than a bare axiom). GATE: coordGaussGauge_flat/
+-- metricGaussGauge_flat proved ∀x (not vacuous x=0); coordGaussGauge_flat_rncRadialSq
+-- R_δ(r²)(v)=2r²≠0 v≠0 = genuine off-diagonal. std-3 all 6. ⚠ THE CAMPAIGN IS AT THE
+-- GEOMETRIC FLOOR: a₁=R/6 rests on recognized geometric inputs Mathlib lacks the exp-map
+-- to derive (Gauss lemma/radial gauge [this], hgauge, the volume identity) + still-reducible
+-- analytic carries (hCorrHigher, hEboundW, hgball, census piles). NOT a₁=R/6 (the honest
+-- single-carried-geometric-input packaging, NOT a derivation).
+#print axioms QIQTH.GaussLemmaGauge.metricRadial_eq_radialDeriv_of_coordGaussGauge
+#print axioms QIQTH.GaussLemmaGauge.residual_factorization_of_gauge
+#print axioms QIQTH.GaussLemmaGauge.metricGaussGauge_imp_hGaussGerm
+#print axioms QIQTH.GaussLemmaGauge.coordGaussGauge_flat
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

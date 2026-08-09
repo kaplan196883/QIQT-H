@@ -1514,3 +1514,8 @@ import QIQTH.TransportEqZero
 -- equation `hRad1` via the SAME generic cross-gradient reduction; `hT1` discharged from `hRad1`,
 -- factorization now modulo BOTH {hRad0,hRad1} (same Gauss-lemma family). std-3, hRad1 CARRIED.
 import QIQTH.TransportEqOne
+-- J4-507: NAME the single geometric input closing BOTH hRad0/hRad1 — the coordinate GAUSS LEMMA
+-- `CoordGaussGauge : ∀x j, Σᵢ gⁱʲxᵢ = xʲ`; residual factorization from ONE named gauge + Euler eqns;
+-- ∀x flat witness; bridge to mainline `hGauss` germ. VERDICT (c): irreducible geodesic/exp-map floor
+-- (NOT derivable from finite `hgauge`). std-3, Gauss lemma CARRIED.
+import QIQTH.GaussLemmaGauge
