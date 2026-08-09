@@ -21922,4 +21922,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DHrefinedFull.hDHrefined₂_theorem
 #print axioms QIQTH.DHrefinedFull.perUCensus_phase11
 
+-- ## ⚠⚠ J4-455 (HerrHminCoercivity): THE FOURTH GATE CATCH — the
+-- whole-space herr/hmin UNSATISFIABLE; gate-restricted versions PROVED
+-- THE VERDICT (machine-certified): uniformInverseChart defaults to 0 off
+-- K (uniformInverseChart_off_K), so the literal ∀z hmin (½r²_z ≤ r²_{Wz})
+-- is DEFINITIVELY FALSE at any nonzero z ∉ K
+-- (wholeSpace_coercivity_unsatisfiable — the gate certificate is itself
+-- a THEOREM); herr fails in the small-‖z‖ gap off K.
+-- ⚠ CONSEQUENCE: the group-(1) consumers hdom_comp2_ptwise/hcomp_final2/
+-- slotInstantiation_phase8 (which take the literal ∀z shapes) are only
+-- VACUOUSLY dischargeable — they need the gate-vs-far-field re-fire
+-- (J4-456): on collarᶜ ∩ (K∩ball) use comparisonDom2 ← herrHmin_gate; on
+-- the far field the decaying baseKernelW leg (off-gate W z = 0 makes the
+-- ρ-factored integrand the WRONG object there — a split, not a scaling
+-- gap). PROVED gate-restricted: herr_gate (≤ L·n·‖z‖³ on K ∩ ball, from
+-- the banked chartW0_rncRadialSq_error — the sign resolved: W z ≈ −z,
+-- rncRadialSq even) + hmin_gate (½r²_z ≤ r²_{Wz}, radius shrunk to
+-- L‖z‖ ≤ ½) + herrHmin_gate (one r, both). std-3 all 5. NOT a₁ = R/6.
+#print axioms QIQTH.HerrHminCoercivity.uniformInverseChart_off_K
+#print axioms QIQTH.HerrHminCoercivity.wholeSpace_coercivity_unsatisfiable
+#print axioms QIQTH.HerrHminCoercivity.herr_gate
+#print axioms QIQTH.HerrHminCoercivity.hmin_gate
+#print axioms QIQTH.HerrHminCoercivity.herrHmin_gate
+
 end QIQTH.AxiomAudit

@@ -654,6 +654,7 @@ import QIQTH.WeightedPairingHelper
 import QIQTH.DHrefinedWitness
 import QIQTH.ProdMeasAndEnvelope
 import QIQTH.DHrefinedFull
+import QIQTH.HerrHminCoercivity
 import QIQTH.FrameDecompLogDet
 import QIQTH.ExpDiffVariation
 import QIQTH.ExpJacobianFlow
