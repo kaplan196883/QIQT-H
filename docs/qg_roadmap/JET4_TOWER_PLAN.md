@@ -4777,3 +4777,17 @@ hAdom2cap (the genuine carries) · data/hSecBoxes/hBBoxes (satisfiable envelope/
 hUT/hεU (group-(A) scaffolds); hFdomW/hSecCont/hBcont/hmeas2Lo all internal.
 raw 0; build 48s. NEXT: J4-460 = HInterGrounding (hInter — now the single most load-bearing
 block-B carry — via the F2/diff-under-∫ piles). NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★ J4-460: hInter GROUNDED — hAdom2cap the SOLE remaining block-B carry
+
+`QIQTH/HInterGrounding.lean` (3 decls std-3). THE GATE: PASS — hInter (MemInterchange) is
+an abbrev unfolding to EXACTLY the banked `witness_MemInterchange` conclusion (J4-256); the
+m-uniformity trap CLEARED (a per-(m,i,u) EQUALITY — per-m dominators admissible); quantifier
+order + base-0 centering preserved. `hInter_grounded` (the engine route) +
+`hInter_grounded_majorant` (the W2-majorant route — the dominator triple discharged
+internally from hOn+hF). `v2Census_phase3` = phase2 with hInter DROPPED and only hdiff
+added — phase2 already carried the engine's whole diff-under-∫ family redundantly
+(dont-undercredit: hInter was NEVER a raw wall). **BLOCK-B = hAdom2cap ONLY.**
+raw 0; build 49s. NEXT: J4-461 = hAdom2cap (the capped-vs-Gaussian shape gate).
+NOT a₁ = R/6 (CONDITIONAL).
