@@ -22593,6 +22593,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Hid2Germ.hid2_discharged
 #print axioms QIQTH.Hid2Germ.supConstant_phase6
 
+-- J4-490 (C2AggregatorPhase6): the (I1)-only C₂ sup family WIRED into the
+-- downstream a₁ carry shape — the FIRST application of the phase family into
+-- `amplitudeDataOn_concrete`'s `hM₀chart`/`hM₁chart`/`hM₂chart` collar carries.
+-- collarRegime_mono = the collar predicate is antitone in the chart radius
+-- (pure implication, from ‖z‖<r₀ in AmplitudeDataOnCollar — no analytic
+-- content). collarSupConstants_of_reach = the three collar sup-constants
+-- (|chartAmp| ≤ M₀, |−2·pd_i chartAmp| ≤ M₁, |pd_i pd_i chartAmp| ≤ M₂) on a
+-- COMMON radius r₀ = min ρ ρ₀ > 0, from (I1) hReach ALONE. supConstant_phase6
+-- applied ONCE and destructured (the ~85-binder phase4/vanVleckGatedWitness/
+-- leviSeries Π NOT re-applied — monolith trap avoided); the C₀-on-ρ₀ and
+-- C₁/C₂-on-ρ conjuncts reconciled onto min ρ ρ₀ via collarRegime_mono. hid2
+-- is fully removed from the downstream hypothesis list: the aggregator's C₂
+-- slot is now (I1)-conditional (was phase5 + a separate hid2-carry). std-3
+-- both. NOT a₁ = R/6 (still conditional on I1 + convergence trio + wiring).
+#print axioms QIQTH.C2AggregatorPhase6.collarRegime_mono
+#print axioms QIQTH.C2AggregatorPhase6.collarSupConstants_of_reach
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
