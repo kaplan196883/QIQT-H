@@ -22663,6 +22663,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RemainderAssembly.farFieldDom_setIntegral_le
 #print axioms QIQTH.RemainderAssembly.remainderIntegral_order
 
+-- J4-494 (ConcreteRemainderOrder): the CONCRETE-integrand promotion of the
+-- J4-493 proxy — the real heat-trace remainder integrand
+-- IchartResidual − hessGaussFactor·(chartAmp·F). concreteIntegrand_on_collar_le:
+-- on collar(c√τ), ‖f‖ ≤ onCollarDom τ M₀ 0 0 z (from the banked on-collar
+-- identity hon_concrete + |hessGaussFactor|≤(‖z‖²+2τ)/(4τ²)·G + the amplitude-
+-- diff sup |Aamp·F−chartAmp·F|≤M₀). concreteRemainder_order:
+-- |∫ f| ≤ M₀·(n+1)/(2τ) + (Bcomp₂/√τ + far-field O(1/τ)) — a single explicit
+-- O(1/τ), no generic dominated-f hypothesis left (only banked satisfiable gate/
+-- amplitude/integrability carries). ⚠ THE GATE CATCH (genuine): the proxy's
+-- pointwise far domination |f|≤farFieldDom holds only OFF K (witness=0), and the
+-- on-collar identity only on collar(c√τ); between them the ANNULUS
+-- {‖z‖>c√τ}∩K has the witness present — a two-way pointwise split at one r₀
+-- would force K=collar r₀ (UNSATISFIABLE). So the concrete off-collar leg goes
+-- through the banked integral-level gate hcomp_final4 (annulus via (ρ−1)+cubic
+-- jet, far via off-K Gaussian), carrying an honest Bcomp₂/√τ = O(1/√τ) annulus
+-- term (still O(1/τ)-dominated) — NOT a false pointwise farFieldDom bound. New
+-- brick = only the on-collar pure-Hessian pointwise bound; off-collar reused.
+-- std-3 both. NOT a₁ = R/6 (the leading O(1) coefficient + R/6 identification
+-- are BEYOND the remainder; still conditional on I1 + convergence trio + wiring).
+#print axioms QIQTH.ConcreteRemainderOrder.concreteIntegrand_on_collar_le
+#print axioms QIQTH.ConcreteRemainderOrder.concreteRemainder_order
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
