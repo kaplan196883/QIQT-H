@@ -4791,3 +4791,19 @@ added — phase2 already carried the engine's whole diff-under-∫ family redund
 (dont-undercredit: hInter was NEVER a raw wall). **BLOCK-B = hAdom2cap ONLY.**
 raw 0; build 49s. NEXT: J4-461 = hAdom2cap (the capped-vs-Gaussian shape gate).
 NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-461: BLOCK-B CLOSED TO ZERO GENUINE ATOMS
+
+`QIQTH/HAdom2capGrounding.lean` (3 decls std-3). THE GATE: the supplier
+`hAdom2_capped_family_of_crude` matches VERBATIM (same kernel witnessSecondXDeriv, same
+Gaussian width wA2 — NO bridge, same lower-capped range εₘ ≤ τ ≤ T, per-m CA2c :=
+Ccrude·εₘ⁻¹ — ADMISSIBLE because hAdom2cap is per-m; the τ-uniform whole-time version is
+generally false). The coercive-E2 candidate REJECTED (wrong kernel, per-point jet data,
+width 2τ, 1/τ² in the constants). The bridge input = the banked crude envelope
+(WideAmplitudePackage.hSecond + second_global_of_package). `hAdom2cap_grounded` +
+`v2Census_phase4`. **BOTH former block-B genuine carries grounded (hInter J4-460 +
+hAdom2cap here): THE WALL-A LEG RESTS ON SATISFIABLE ENVELOPE/BOX/SCAFFOLD INPUTS ONLY**
+{hcrude, data, hSecBoxes, hBBoxes, hUT, hεU}. Closing block-B closes nothing deeper —
+the convergence-trio content lives outside it. Pure assembly. raw 0; build 49s.
+NEXT: J4-462 = hdiff (the phase3/4 carry). NOT a₁ = R/6 (CONDITIONAL).
