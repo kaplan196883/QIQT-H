@@ -22108,4 +22108,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.PresentationBridges.gateCore_reconstruct
 #print axioms QIQTH.PresentationBridges.v2Census_phase7
 
+-- ## ★ J4-465 (CLSlotWire): the census C_L slot WIRED — the gate
+-- ∃-consumed (phase 8)
+-- THE AUDIT: ∃-CONSUMPTION, no blocker — the kernels are defeq GIVEN the
+-- same S,a,b (the mismatch is purely ∃-S vs ∀-S, no germ/presentation
+-- gap); the honesty cost recorded: v2Census_phase8's conclusion is
+-- ∃ a b S (the census gate fixed to the grounded W3 geometry-chosen
+-- gate); the S-dependent slots migrate into the ∃-body — all satisfiable
+-- at that S (hUT/hεU/hEmeas/hGateCoreRR = the surviving labelled inputs).
+-- census_C_L_wired (σ := 2s per-s conjunct from the grounded domination)
+-- + gateCoreRR_reconstruct (hGateCoreR rebuilt from the doubly-reduced
+-- core, C_L internal) + v2Census_phase8. The s-bounds recovered from the
+-- existing hεU/hUT binders — no new carry. std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.CLSlotWire.census_C_L_wired
+#print axioms QIQTH.CLSlotWire.gateCoreRR_reconstruct
+#print axioms QIQTH.CLSlotWire.v2Census_phase8
+
 end QIQTH.AxiomAudit
