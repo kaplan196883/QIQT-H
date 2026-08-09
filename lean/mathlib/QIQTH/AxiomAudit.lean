@@ -22531,6 +22531,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OperatorPdBridge.pd_pd_component_eq
 #print axioms QIQTH.OperatorPdBridge.chartSecondJetComponent_continuousOn_of_reach
 
+-- ## ★★ J4-487 (AmplitudeSecondJet): C₂ GROUNDED MODULO (I1) — the sup
+-- family's last derivative slot closed
+-- Gate (a): manifoldAmp_fderiv2_continuous — the J4-436 affine-in-τ trick
+-- ONE ORDER UP (manifoldAmp τ = c₀ + τ·c₁ ⟹ fderiv² = fderiv²c₀ +
+-- τ·fderiv²c₁, each C² ⟹ jointly continuous). Gate (b): the J4-478
+-- pd_pd_comp_local 4-block assembly on chartAmp = manifoldAmp ∘ W_z —
+-- the Hessian/gradient/first-jet blocks from the amplitude Hessian +
+-- banked jets, and ★ the raw-chart SECOND-jet block = the J4-486
+-- chartSecondJetComponent delivery (lifted U → the product box).
+-- hcont2_of_reach = the EXACT supConstant_phase3 hcont2 slot, gated by
+-- (I1) hReach + the standing geometric carries. supConstant_phase4 wires
+-- it: C₂ GROUNDED MODULO (I1) — M₀ unconditional ∧ M₁ geometric ∧ M₂ on
+-- (I1)+bookkeeping. pd_pd_scalar_eq = the scalar coordinate gate (the
+-- bridge pattern, scalar codomain). Dont-undercredit: every ingredient
+-- banked (the affine trick, pd_pd_comp_local, the J4-486 jet) — pure
+-- assembly. std-3 all 4. NOT a₁ = R/6.
+#print axioms QIQTH.AmplitudeSecondJet.pd_pd_scalar_eq
+#print axioms QIQTH.AmplitudeSecondJet.manifoldAmp_fderiv2_continuous
+#print axioms QIQTH.AmplitudeSecondJet.hcont2_of_reach
+#print axioms QIQTH.AmplitudeSecondJet.supConstant_phase4
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
