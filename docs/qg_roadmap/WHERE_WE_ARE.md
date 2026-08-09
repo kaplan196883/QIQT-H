@@ -148,14 +148,23 @@ precisely on the parametrix rather than on scalar `R`. The DY7 conjecture is unc
    field-level Bisognano–Wichmann are UNCONDITIONAL (`freeField_secondQuant_BW_unconditional` —
    second-quantized modular flow = geometric boost, no carried hypothesis; a Lean-first). The
    floor under GR is exactly: matter EOM + the capacity postulate + the localization map `hTkk`.
-2. **The area law DERIVED; G derived as a relation, down to its transcendental content.** S∝A
-   forced by refinement-naturality rigidity, proven for the boundary-local model with the
-   volume-law guard, S = A/4G a theorem in the constructed core; `G = 1/(N·Λ_s²)` with the
-   dimensionless content a theorem; the 12π normalization's π-content DERIVED
-   (`heatDensity_dDim`); the a₁ analysis-half DERIVED. The numerical value of G is blocked by
-   exactly ONE named object — the (1/6−ξ) Seeley–DeWitt coefficient — and the ecosystem audit
-   shows it is gated on Mathlib's OWN acknowledged Riemannian-geometry frontier: no proof
-   assistant has it.
+2. **The induced-gravity ENGINE for the area law DERIVED; the geometric area-SCALING carried
+   (known-but-unformalized); G a relation.** ⚠ CORRECTED (2026-08-09, GPT-5.6 consult + full Lean
+   survey): the earlier "the area law DERIVED / S∝A forced by rigidity" was an overstatement —
+   rigidity forces the WEIGHT, not the geometry. What is genuinely *derived*: the capacity WEIGHT is
+   uniquely `κ·log D` (`finiteCorner_valuation_rigidity`, counterexample-guarded); the **1/4** is a
+   regulator-independent ratio (`sakharov_ratio`); entanglement entropy IS the `1/G` counterterm with
+   `4·G_ind·S_ent = A` (Susskind–Uglum, `ConicalSakharov`); `G = 1/(N·Λ_s²)` with the dimensionless
+   content a theorem; the 12π π-content DERIVED (`heatDensity_dDim`). What is **NOT derived from
+   finiteness** — the one carried holographic input: that the capacity/entropy scales with the
+   geometric **boundary area** rather than volume (`S ∝ A_geom`). Finiteness alone gives only
+   `S ≤ log dim`, and the **volume-law guard** (`bulk_entropy_volume_law`) PROVES the same finite
+   modes give a *volume* law; `S ∝ A` is proven only for the explicit **boundary-local model**
+   (`BoundaryGaussianAreaLaw`). For the ACTUAL free-field vacuum, `S ∝ A_geom` is **known physics**
+   (Bombelli–Koul–Lee–Sorkin 1986 · Srednicki 1993 · Casini–Huerta) **not yet formalized** — a scoped
+   formalization campaign (`VACUUM_AREA_LAW_PLAN.md`), NOT an open physics problem. The numerical
+   value of G stays blocked on the (1/6−ξ) `a₁` Seeley–DeWitt coefficient (`a1_R6_from_data`,
+   conditional) — Mathlib's own Riemannian-geometry frontier.
 3. **An operator-algebra layer no other program has.** The first complete Tomita–Takesaki modular
    theory in any proof assistant (S̄ · Δ with Δ†=Δ via a from-scratch von Neumann S̄*S̄ theorem ·
    Δ^{it} = the physical flow · Tomita I · J · polar-on-core · Tomita II inclusion ·
