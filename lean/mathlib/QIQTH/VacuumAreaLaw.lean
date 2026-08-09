@@ -528,4 +528,165 @@ theorem gaussModeEntropy_mono {a b : ℝ} (ha : 1 / 2 ≤ a) (hab : a ≤ b) :
     exact (QIQTH.GaussianStateEntropy.gaussModeEntropy_deriv_pos hx.1).le
   exact hmono ⟨ha, hab⟩ ⟨ha.trans hab, le_refl b⟩ hab
 
+/-! ## §3-C.1 (VACAREA-4) — the real-Hermitian spectral-order layer
+
+The Mathlib-gap fill VACAREA-3 flagged: over `Matrix (Fin n) (Fin n) ℝ` (a *real* algebra), Mathlib's
+operator-monotonicity of `CFC.sqrt` is available only over complex C⋆-algebras.  We supply the
+eigenvalue-level bridge instead, via `Matrix.IsHermitian.spectral_theorem`:
+
+* **`loewner_of_eigenvalues_ge` / `loewner_of_eigenvalues_le`** — the *converses* of the existing
+  `eigenvalue_lb` / `eigenvalue_ub`: for a real Hermitian `A`, `(∀ j, c ≤ eig_j A) ↔ c·1 ⪯ A` and
+  dually `(∀ j, eig_j A ≤ C) ↔ A ⪯ C·1` (Loewner order ↔ eigenvalue bounds).  Proved by conjugating
+  the diagonal `diagonal (eig − c)` (PSD) by the eigenvector unitary of the spectral theorem.
+* **`eigenvalues_sqrt`** — the square-root spectral identity `eig_j (CFC.sqrt A) = √(eig_j A)` for
+  `A` PosSemidef, aligning the SORTED eigenvalue indices via the charpoly-root/`mergeSort` uniqueness
+  the library uses for `sort_roots_charpoly_eq_eigenvalues₀` (√ monotone preserves the antitone
+  order), then transferring `eigenvalues₀ → eigenvalues` through the shared reindexing. -/
+
+/-- **Converse of `eigenvalue_lb`.**  If every eigenvalue of a real Hermitian `A` is `≥ c`, then
+    `c·1 ⪯ A`.  Proof: `A − c·1 = U · diagonal(eig − c) · Uᴴ` by the spectral theorem, and
+    `diagonal(eig − c)` is PSD, so its unitary conjugate is PSD. -/
+theorem loewner_of_eigenvalues_ge {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {A : Matrix ι ι ℝ} (hA : A.IsHermitian) {c : ℝ} (h : ∀ j, c ≤ hA.eigenvalues j) :
+    c • (1 : Matrix ι ι ℝ) ≤ A := by
+  classical
+  rw [Matrix.le_iff]
+  have hspec : A = Unitary.conjStarAlgAut ℝ (Matrix ι ι ℝ) hA.eigenvectorUnitary
+      (diagonal hA.eigenvalues) := by
+    simpa only [RCLike.ofReal_real_eq_id, Function.id_comp] using hA.spectral_theorem
+  have hdiag : (diagonal (fun j => hA.eigenvalues j - c)).PosSemidef :=
+    Matrix.PosSemidef.diagonal (fun j => sub_nonneg.mpr (h j))
+  have hdd : diagonal (fun j => hA.eigenvalues j - c)
+      = diagonal hA.eigenvalues - c • (1 : Matrix ι ι ℝ) := by
+    ext i j
+    by_cases hij : i = j
+    · subst hij
+      simp [Matrix.diagonal_apply_eq, Matrix.sub_apply, Matrix.smul_apply, Matrix.one_apply_eq]
+    · simp [Matrix.diagonal_apply_ne _ hij, Matrix.sub_apply, Matrix.smul_apply,
+        Matrix.one_apply_ne hij]
+  have hEq : A - c • (1 : Matrix ι ι ℝ)
+      = Unitary.conjStarAlgAut ℝ (Matrix ι ι ℝ) hA.eigenvectorUnitary
+          (diagonal (fun j => hA.eigenvalues j - c)) := by
+    rw [hdd, map_sub, map_smul, map_one, ← hspec]
+  rw [hEq, Unitary.conjStarAlgAut_apply]
+  exact hdiag.mul_mul_conjTranspose_same _
+
+/-- **Converse of `eigenvalue_ub`.**  If every eigenvalue of a real Hermitian `A` is `≤ C`, then
+    `A ⪯ C·1`. -/
+theorem loewner_of_eigenvalues_le {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {A : Matrix ι ι ℝ} (hA : A.IsHermitian) {C : ℝ} (h : ∀ j, hA.eigenvalues j ≤ C) :
+    A ≤ C • (1 : Matrix ι ι ℝ) := by
+  classical
+  rw [Matrix.le_iff]
+  have hspec : A = Unitary.conjStarAlgAut ℝ (Matrix ι ι ℝ) hA.eigenvectorUnitary
+      (diagonal hA.eigenvalues) := by
+    simpa only [RCLike.ofReal_real_eq_id, Function.id_comp] using hA.spectral_theorem
+  have hdiag : (diagonal (fun j => C - hA.eigenvalues j)).PosSemidef :=
+    Matrix.PosSemidef.diagonal (fun j => sub_nonneg.mpr (h j))
+  have hdd : diagonal (fun j => C - hA.eigenvalues j)
+      = C • (1 : Matrix ι ι ℝ) - diagonal hA.eigenvalues := by
+    ext i j
+    by_cases hij : i = j
+    · subst hij
+      simp [Matrix.diagonal_apply_eq, Matrix.sub_apply, Matrix.smul_apply, Matrix.one_apply_eq]
+    · simp [Matrix.diagonal_apply_ne _ hij, Matrix.sub_apply, Matrix.smul_apply,
+        Matrix.one_apply_ne hij]
+  have hEq : C • (1 : Matrix ι ι ℝ) - A
+      = Unitary.conjStarAlgAut ℝ (Matrix ι ι ℝ) hA.eigenvectorUnitary
+          (diagonal (fun j => C - hA.eigenvalues j)) := by
+    rw [hdd, map_sub, map_smul, map_one, ← hspec]
+  rw [hEq, Unitary.conjStarAlgAut_apply]
+  exact hdiag.mul_mul_conjTranspose_same _
+
+open Polynomial in
+/-- **The square-root spectral identity** `eig_j (CFC.sqrt A) = √(eig_j A)` for `A` PosSemidef real
+    Hermitian.  The SORTED eigenvalue indices align because `Real.sqrt` is monotone, so it preserves
+    the antitone order that `Matrix.IsHermitian.eigenvalues₀` is defined by; we reuse the library's
+    charpoly-root `mergeSort` uniqueness (`sort_roots_charpoly_eq_eigenvalues₀`). -/
+theorem eigenvalues_sqrt {ι : Type*} [Fintype ι] [DecidableEq ι]
+    {A : Matrix ι ι ℝ} (hA : A.PosSemidef) (hSqrt : (CFC.sqrt A).IsHermitian) (j : ι) :
+    hSqrt.eigenvalues j = Real.sqrt (hA.1.eigenvalues j) := by
+  classical
+  have hmono : Monotone Real.sqrt := fun _ _ hxy => Real.sqrt_le_sqrt hxy
+  have hre : ∀ x : ℝ, RCLike.re x = x := fun x => RCLike.ofReal_re x
+  -- `CFC.sqrt A = cfc g A` with `g x = √(x.toNNReal)`, and its charpoly `= ∏ (X − C √eig_i)`.
+  have hcfc : CFC.sqrt A = _root_.cfc (fun x : ℝ => (NNReal.sqrt x.toNNReal : ℝ)) A := by
+    rw [CFC.sqrt_eq_cfc, cfc_nnreal_eq_real _ A hA.nonneg]
+  have hcp : (CFC.sqrt A).charpoly
+      = ∏ i, (X - C (Real.sqrt (hA.1.eigenvalues i) : ℝ)) := by
+    rw [hcfc, hA.1.charpoly_cfc_eq]
+    refine Finset.prod_congr rfl fun i _ => ?_
+    have hg : (NNReal.sqrt (hA.1.eigenvalues i).toNNReal : ℝ)
+        = Real.sqrt (hA.1.eigenvalues i) := by
+      rw [Real.coe_sqrt, Real.coe_toNNReal _ (hA.eigenvalues_nonneg i)]
+    simp only [hg, RCLike.ofReal_real_eq_id, id_eq]
+  -- Roots (real parts) of the two charpolys, as explicit multisets.
+  have hRA : A.charpoly.roots.map RCLike.re = Multiset.map hA.1.eigenvalues Finset.univ.val := by
+    rw [hA.1.roots_charpoly_eq_eigenvalues, Multiset.map_map]
+    exact Multiset.map_congr rfl (fun x _ => by simp [Function.comp, hre])
+  have hRS : (CFC.sqrt A).charpoly.roots.map RCLike.re
+      = Multiset.map (Real.sqrt ∘ hA.1.eigenvalues) Finset.univ.val := by
+    rw [hcp, Polynomial.roots_prod]
+    · simp only [Polynomial.roots_X_sub_C, Multiset.bind_singleton, Multiset.map_map]
+      exact Multiset.map_congr rfl (fun x _ => by simp [Function.comp, hre])
+    · simp [Finset.prod_ne_zero_iff, Polynomial.X_sub_C_ne_zero]
+  -- `A`'s eigenvalue multiset equals the sorted list `ofFn eigenvalues₀`.
+  have hMA : A.charpoly.roots.map RCLike.re = (↑(List.ofFn hA.1.eigenvalues₀) : Multiset ℝ) := by
+    rw [← hA.1.sort_roots_charpoly_eq_eigenvalues₀]
+    exact (Multiset.sort_eq _ _).symm
+  have hEO : Multiset.map hA.1.eigenvalues Finset.univ.val
+      = (↑(List.ofFn hA.1.eigenvalues₀) : Multiset ℝ) := by
+    rw [← hRA]; exact hMA
+  -- Reduce the goal to the antitone `eigenvalues₀` level; then to sorted-list uniqueness.
+  suffices h0 : hSqrt.eigenvalues₀ = Real.sqrt ∘ hA.1.eigenvalues₀ by
+    have hj := congrFun h0 ((Fintype.equivOfCardEq (Fintype.card_fin _)).symm j)
+    simpa only [Matrix.IsHermitian.eigenvalues, Function.comp_apply] using hj
+  rw [← List.ofFn_inj, ← hSqrt.sort_roots_charpoly_eq_eigenvalues₀, hRS,
+    show Multiset.map (Real.sqrt ∘ hA.1.eigenvalues) Finset.univ.val
+        = (↑(List.ofFn (Real.sqrt ∘ hA.1.eigenvalues₀)) : Multiset ℝ) by
+      rw [← Multiset.map_map, hEO, Multiset.map_coe, List.map_ofFn],
+    Multiset.coe_sort]
+  apply List.mergeSort_of_pairwise
+  simp_rw [decide_eq_true_eq, ← List.sortedGE_iff_pairwise]
+  exact (hmono.comp_antitone (Matrix.IsHermitian.eigenvalues₀_antitone hA.1)).sortedGE_ofFn
+
+/-! ## §3-C.2 (VACAREA-4) — the two sqrt Loewner bounds unblocked by the spectral-order layer
+
+These are the first two lemmas of the symplectic-cap chain VACAREA-3 removed; they follow directly
+from the gapped spectral window (`couplingK_ge` / `couplingK_le`) via the eigenvalue converses and
+the square-root spectral identity.  (The remaining chain — `Xcov_le`, `Pcov_le`, `redX_le`,
+`redP_le`, `redSymM_le`, `redSympEig_le`, `redEntropy_le` — additionally needs the *inverse*
+antitonicity `m·1 ⪯ K^{1/2} ⟹ K^{−1/2} ⪯ m⁻¹·1` for the position covariance `X = ½K^{−1/2}`; the
+inverse-eigenvalue identity `eig_j(A⁻¹) = (eig_j A)⁻¹` is a further absent Mathlib fact, so that tail
+is CHECKPOINTED to VACAREA-5.  No area claim.) -/
+
+/-- **The sqrt Loewner lower bound** `m·1 ⪯ K^{1/2}`.  From the mass gap `m²·1 ⪯ K_ε` via the
+    real-Hermitian spectral-order layer: `eig_j(K^{1/2}) = √(eig_j K) ≥ √(m²) = m`. -/
+theorem m_le_sqrtK (ε : ℝ) {m : ℝ} {n : ℕ} (hm : 0 < m) :
+    m • (1 : Matrix (Fin n) (Fin n) ℝ) ≤ sqrtK ε m n := by
+  have hKpsd : (couplingK ε m n).PosSemidef := (couplingK_posDef ε m n hm).posSemidef
+  have hsqrtH : (CFC.sqrt (couplingK ε m n)).IsHermitian :=
+    (Matrix.nonneg_iff_posSemidef.mp (CFC.sqrt_nonneg _)).1
+  have hbound : ∀ j, m ≤ hsqrtH.eigenvalues j := by
+    intro j
+    rw [eigenvalues_sqrt hKpsd hsqrtH j]
+    have hlb : m ^ 2 ≤ hKpsd.1.eigenvalues j :=
+      eigenvalue_lb hKpsd.1 (Matrix.le_iff.mp (couplingK_ge ε m n)) j
+    calc m = Real.sqrt (m ^ 2) := (Real.sqrt_sq hm.le).symm
+      _ ≤ Real.sqrt (hKpsd.1.eigenvalues j) := Real.sqrt_le_sqrt hlb
+  exact loewner_of_eigenvalues_ge hsqrtH hbound
+
+/-- **The sqrt Loewner upper bound** `K^{1/2} ⪯ √(m²+4/ε²)·1`.  From the gapped window
+    `K_ε ⪯ (m²+4/ε²)·1` via `eig_j(K^{1/2}) = √(eig_j K) ≤ √(m²+4/ε²)`. -/
+theorem sqrtK_le {n : ℕ} (hn : 2 ≤ n) {ε : ℝ} (hε : ε ≠ 0) {m : ℝ} (hm : 0 < m) :
+    sqrtK ε m n ≤ Real.sqrt (bcap ε m) • (1 : Matrix (Fin n) (Fin n) ℝ) := by
+  have hKpsd : (couplingK ε m n).PosSemidef := (couplingK_posDef ε m n hm).posSemidef
+  have hsqrtH : (CFC.sqrt (couplingK ε m n)).IsHermitian :=
+    (Matrix.nonneg_iff_posSemidef.mp (CFC.sqrt_nonneg _)).1
+  have hbound : ∀ j, hsqrtH.eigenvalues j ≤ Real.sqrt (bcap ε m) := by
+    intro j
+    rw [eigenvalues_sqrt hKpsd hsqrtH j]
+    exact Real.sqrt_le_sqrt (eigenvalue_ub hKpsd.1 (Matrix.le_iff.mp (couplingK_le hn hε m)) j)
+  exact loewner_of_eigenvalues_le hsqrtH hbound
+
 end QIQTH.VacuumAreaLaw

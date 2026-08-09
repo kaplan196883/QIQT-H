@@ -22600,4 +22600,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VacuumAreaLaw.couplingK_le
 #print axioms QIQTH.VacuumAreaLaw.negLapε_upper
 
+-- VACAREA-4: the real-Hermitian spectral-order layer (the Mathlib-gap fill VACAREA-3
+-- flagged). loewner_of_eigenvalues_ge/le = the CONVERSES of eigenvalue_lb/ub (Loewner
+-- order ↔ eigenvalue bounds, via conjugating diagonal(eig−c) by the eigenvector unitary
+-- of the spectral theorem). eigenvalues_sqrt = `eig_j(√A) = √(eig_j A)` for PosSemidef A
+-- (sorted-index alignment via the charpoly-root mergeSort uniqueness; √ monotone preserves
+-- the antitone order). m_le_sqrtK / sqrtK_le = the two sqrt Loewner bounds these unblock
+-- (first two lemmas of the removed cap chain). The tail (Xcov_le … redEntropy_le) needs the
+-- inverse-eigenvalue identity `eig_j(A⁻¹)=(eig_j A)⁻¹` — checkpointed to VACAREA-5. std-3.
+#print axioms QIQTH.VacuumAreaLaw.loewner_of_eigenvalues_ge
+#print axioms QIQTH.VacuumAreaLaw.loewner_of_eigenvalues_le
+#print axioms QIQTH.VacuumAreaLaw.eigenvalues_sqrt
+#print axioms QIQTH.VacuumAreaLaw.m_le_sqrtK
+#print axioms QIQTH.VacuumAreaLaw.sqrtK_le
+
 end QIQTH.AxiomAudit
