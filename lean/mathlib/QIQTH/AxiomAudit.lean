@@ -22936,6 +22936,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussLemmaGauge.metricGaussGauge_imp_hGaussGerm
 #print axioms QIQTH.GaussLemmaGauge.coordGaussGauge_flat
 
+-- J4-510 (CurvedParametrixMass): the curved-parametrix MASS→1 (approximate-identity)
+-- — PARTIALLY unblocks the J4-509 flat-only obstruction. heatParametrix_setMass_tendsto_one:
+-- Tendsto (fun τ => ∫_w∈Ω heatParametrix N Θ u τ w) (𝓝[>]0) (𝓝 1) for Ω∈𝓝 0, Θ(0)=1,
+-- u₀(0)=1, ContinuousAt Θ/u at 0, eventual AEmeas + uniform bound — the Gaussian
+-- approximate-identity mass→1, holding for CURVED Θ, INDEPENDENT of hframeK.
+-- parametrixAmp (A τ w=(Θ w)^{−1/2}·Σ_{k≤N}u_k(w)τ^k), parametrixAmp_zero_zero (A(0,0)=1,
+-- PROVED from vanVleck_zero/transportCoeff_zero — L=1 not assumed), parametrixAmp_continuousAt_zero,
+-- heatParametrix_eq_gauss_mul_amp. ⚠ CURVED CERTIFICATE (the gate): heatParametrix_setMass_tendsto_one_curved_certificate
+-- instantiates Θ=curvedTheta w=1+‖w‖² (Θ(0)=1, Θ≢1 via the PROVED curvedTheta_ne_one, Θ^{−1/2}≤1
+-- bounded) ⟹ mass→1 for a GENUINELY CURVED amplitude, NOT secretly flat. AUDIT: hmassone is a
+-- PURE CARRIED HYPOTHESIS in A1R6FromLabelled (threaded into truncatedDuhamelCore/hbdryLU, NOT
+-- proved anywhere; the constRadius certificate produces hpkgBound/hmemS0/… NOT hmassone) — so no
+-- current discharge touches hframeK. Sol: the gate DECOUPLES (a fixed-neighborhood chart gate ⟹
+-- {w|Z w∈gate} is a full neighborhood, NOT the measure-thin null cone hframeK smuggled). ⚠ HONEST
+-- SCOPE: this removes ONE of two independent uses of flatness (the 0th-order mass normalization);
+-- it does NOT make a1_R6_from_labelled curved-satisfiable — the repo's hmassone is in the z-variable
+-- (still needs the Layer-A/B chart-transfer + Jacobian J(0)=1), AND hframeK is independently fatal in
+-- hDaLimLU_from_labelled. std-3 all six. NOT a₁=R/6 (a₁ CONDITIONAL + still effectively flat-only
+-- until the hmassone chart-bridge AND the hframeK decoupling in hDaLimLU both land).
+#print axioms QIQTH.CurvedParametrixMass.parametrixAmp_zero_zero
+#print axioms QIQTH.CurvedParametrixMass.heatParametrix_setMass_tendsto_one
+#print axioms QIQTH.CurvedParametrixMass.curvedTheta_ne_one
+#print axioms QIQTH.CurvedParametrixMass.heatParametrix_setMass_tendsto_one_curved_certificate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

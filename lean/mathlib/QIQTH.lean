@@ -1519,3 +1519,10 @@ import QIQTH.TransportEqOne
 -- ∀x flat witness; bridge to mainline `hGauss` germ. VERDICT (c): irreducible geodesic/exp-map floor
 -- (NOT derivable from finite `hgauge`). std-3, Gauss lemma CARRIED.
 import QIQTH.GaussLemmaGauge
+-- J4-510: CURVED-parametrix heat-mass → 1 (approximate-identity sub-lemma vs the J4-509 flat-only
+-- obstruction). `heatParametrix_setMass_tendsto_one`: ∫_{w∈Ω} heatParametrix N Θ u τ w → 1 over a
+-- FIXED neighbourhood Ω, from Θ(0)=1 ∧ u₀(0)=1 + continuity + eventual a.e.-meas/uniform-bound; L=1
+-- PROVED (not assumed) via joint continuity. Reuses banked ChartImageApproxIdentity moving approx-id.
+-- Curved certificate (Θ=1+‖w‖², Θ≢1) proves NOT flat-only. Decouples hmassone's CONTENT from hframeK;
+-- full hmassone still needs Layer-A/B chart transfer + Jacobian. std-3.
+import QIQTH.CurvedParametrixMass
