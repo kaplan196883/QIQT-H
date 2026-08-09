@@ -5138,3 +5138,21 @@ fderiv² = endpoint bridge + the double opNorm → hbaseJ2 (J4-483); the z₀-we
 (J4-484). Pre-banked: the doubled-field fderiv projections, the generic inhomogeneous
 engine, the Jacobi bounds — a telescope + Grönwall assembly, not an ODE-existence effort.
 raw 0; build 42s. NOT a₁ = R/6 (CONDITIONAL).
+
+---
+## ★★ J4-483 (673c7b50): hbaseJ2 DISCHARGED — the base-slot second-jet modulus
+
+`QIQTH/HbaseJ2Assembly.lean` (4 decls std-3). `uniformFlowExp_fderiv2_base_modulus`: ∃Λ₂≥0
+uniform over K, ‖fderiv²(uniformFlowExp q)v − fderiv²(uniformFlowExp q')v‖ ≤ Λ₂‖q−q'‖ for
+q,q'∈K, ‖v‖<expRho q/q'/ρ_K; Λ₂ = 3M₂²e^{Lsep}e^{4Kf} + M₃e^{Lsep}e^{3Kf}. The J4-482
+Grönwall instantiated at the two second-variation exposures via
+`secondVar_endpoint_seed_diff_bound` — EVERY hypothesis discharged from banked material (the
+tube separation, the compactness maxima Kf/M₂, the D²F M₃ separation, the .1-slot &
+base-Jacobi bounds, the inhomogeneous growth). The endpoint bridge
+`fderiv2_apply_eq_of_hasFDerivAt` ((apply b)∘fderiv chain rule + uniqueness; C²-at-v from
+contDiffAt3 under the reachability guards); the double `opNorm2_le_bound` closes the sup.
+Pure instantiate/discharge/bridge/opNorm — the J4-435 first-order template one order up. The
+two expRho reachability guards = the price of the C²-at-v bridge, reconciled in the weld.
+⚠ NOTE: a sibling VACAREA-1 job now shares the working tree (its VacuumAreaLaw campaign);
+banking uses explicit paths only. raw 0; build 38s module.
+NEXT: J4-484 = Hfwd2Weld (THE WELD — the wall falls). NOT a₁ = R/6 (CONDITIONAL).
