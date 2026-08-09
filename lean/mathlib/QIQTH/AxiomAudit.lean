@@ -22156,4 +22156,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HslotGrounding.v2Census_phase10
 #print axioms QIQTH.HslotGrounding.hslot_grounding_residuals_intro
 
+-- ## ★ J4-468 (HcapEndpointGrounding): hcap + hEndpoint GROUNDED
+-- (phase 11)
+-- hcap: the per-(m,u,s) window cap COLLAPSES to ONE scalar hτc :
+-- epsSeq 0 ≤ τc (s > u−εₘ ⟹ u−s < εₘ ≤ ε₀ by epsSeq_antitone;
+-- m-INDEPENDENT — the wall-A fixed-endpoint discipline). hEndpoint:
+-- ZERO new residue — from the ALREADY-PRESENT hAzero carry (the τ=0
+-- witness vanishes identically ⟹ both pd's vanish (pd_zero_fun) ⟹ the
+-- integrand is 0 pointwise; the Sol endpoint trap avoided — nothing
+-- forced, the integrand is proven identically zero). v2Census_phase11.
+-- THE SURFACE: the moment-wall triple hslot/hcap/hEndpoint is now FULLY
+-- OFF (J4-467/468); the residue = the slot-instantiation carries + the
+-- scalar hτc + the unchanged census. std-3 (the projector axiom-FREE).
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HcapEndpointGrounding.hcap_grounded
+#print axioms QIQTH.HcapEndpointGrounding.hEndpoint_grounded
+#print axioms QIQTH.HcapEndpointGrounding.v2Census_phase11
+
 end QIQTH.AxiomAudit
