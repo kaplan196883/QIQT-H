@@ -22057,4 +22057,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HAdom2capGrounding.v2Census_phase4
 #print axioms QIQTH.HAdom2capGrounding.hAdom2capGrounded_core
 
+-- ## ★ J4-462 (HdiffGrounding): hdiff GROUNDED — ZERO net new carries
+-- THE GATE: this hdiff is the 2nd-order analogue (base 0, dH→dHH) of the
+-- J4-439 frozen leg — and the whole chain was PRE-BANKED and stronger:
+-- W2Finish.w2_hdiff (J4-397) produces it from hInnerData, which is
+-- ALREADY a carry in v2Census_phase4 (it feeds the W2 route
+-- independently). THE DECISIVE OBSERVATION: hdiff collapses onto a
+-- pre-existing carry — v2Census_phase5 = phase4 MINUS hdiff, NOTHING
+-- added (strictly better than J4-439, which added a residual core).
+-- hdiff_grounded (← hInnerData + hFeq) + hdiff_grounded_reduced (one
+-- level deeper, ← hRedCore via innerData_phase1). Pure wiring — the
+-- J4-426 second-order tower + the J4-397 engine were all banked.
+-- std-3 all 3. NOT a₁ = R/6.
+#print axioms QIQTH.HdiffGrounding.hdiff_grounded
+#print axioms QIQTH.HdiffGrounding.hdiff_grounded_reduced
+#print axioms QIQTH.HdiffGrounding.v2Census_phase5
+
 end QIQTH.AxiomAudit
