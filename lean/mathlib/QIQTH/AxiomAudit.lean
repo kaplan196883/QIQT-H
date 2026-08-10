@@ -23653,6 +23653,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedCenterIdentities.curved_centerIdentities_at_gate
 #print axioms QIQTH.CurvedCenterIdentities.curved_centerIdentities_discharge_residual
 
+-- J4-557 (CurvedChartJetsCollar): COLLAR-LOCALIZE the chart-jet residue's first-jet member. TRACE
+-- verdict: the ambient ∀x first jet (hGlobalJet) is FALSE GENERALITY — the terminal Leibniz consumer
+-- (gaussComp_amp_center_decomp → gaussComp_amp_pd_pd/gaussComp_pd_pd) uses ∀x ONLY in a funext step
+-- that the outer local pd=deriv germ actually reads as =ᶠ[𝓝 0]; the near-centre first jet is BANKED
+-- (chartField_firstJet_nhds_of_contDiffAt from ContDiffAt ℝ 2 (W z) 0). gaussComp_*_nhds re-prove the
+-- terminal consumer from the =ᶠ[𝓝 0] jet (funext→pd_congr_of_eventuallyEq, centre computation verbatim);
+-- witnessSecondXDeriv_expand_bridge_rho_nhds/hD2HexpandOn_concrete_nhds re-plumb the WHOLE D2 consumer
+-- onto the banked jet, DROPPING hGlobalJet; curved_collarFirstJet_banked = the banked near-centre jet
+-- for g^K (κ<0, Ric≠0); curved_hjets_residual_collar = refactored residue carrying hCollarJet (banked)
+-- in place of hGlobalJet. NOT a₁=R/6 (hsrc/hOffCollarTail/general-base centre identities/convergence
+-- trio/measurability remain). std-3 (pdiffAt/gaussComp/bridge/curved decls); the two ⟨⟩ projectors
+-- (curved_hjets_residual_collar_intro) are axiom-free.
+#print axioms QIQTH.HeatResidualBound.pdiffAt_of_eventuallyEq
+#print axioms QIQTH.HeatResidualBound.gaussComp_pd_pd_nhds
+#print axioms QIQTH.HeatResidualBound.gaussComp_amp_pd_pd_nhds
+#print axioms QIQTH.HeatResidualBound.gaussComp_amp_center_decomp_nhds
+#print axioms QIQTH.HeatResidualBound.witnessSecondXDeriv_expand_bridge_rho_nhds
+#print axioms QIQTH.HeatResidualBound.hD2HexpandOn_concrete_nhds
+#print axioms QIQTH.CurvedChartJets.curved_collarFirstJet_banked
+#print axioms QIQTH.CurvedChartJets.curved_hjets_residual_collar_intro
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

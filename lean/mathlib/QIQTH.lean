@@ -1706,3 +1706,5 @@ import QIQTH.CurvedA1AmplitudeData
 import QIQTH.CurvedChartJets
 
 import QIQTH.CurvedCenterIdentities
+
+import QIQTH.CurvedChartJetsCollar
