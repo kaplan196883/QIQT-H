@@ -5938,3 +5938,37 @@ hEdom/hFdom/hgate + hEbound/hInt Levi + Duhamel + extraction remain.
 J4-538 = hgate (curved gate/affine-repair binder, of_geometry machinery reusable, avoid
 hEdom/hFdom/hEbound) OR wire this crude envelope into the per-m capped hAdom2cap for g^K
 (the census route that actually consumes the 2nd-deriv bound; clean hAdom2 is a dead-end).
+
+## J4-538 — STRATEGIC ASSESSMENT (no brick): NO curved-satisfiable a₁ trace capstone currently exists
+★★ DECISIVE NEGATIVE FINDING (adversarial audit + Sol-confirmed). The a₁ two-jet is produced
+ONLY by the trace-capstone chain a1_R6_from_labelled{,_curved,_curved_gauge,_curved_boundary},
+which has TWO INDEPENDENT second-x-derivative-domination consumers:
+- LEG 1 (Da-limit leg) hDaLimLU_from_labelled / _v2_gauge → DaLimLUGoal: consumes the CLEAN
+  single-constant hAdom2 (|witnessSecondXDeriv …|≤CA2·gaussDdim(wA2·τ)(0−z), CA2/wA2 fixed over
+  all (0,T]) — A1R6FromLabelled.lean:391, A1R6FromLabelledCurvedGauge.lean:130/322/495.
+- LEG 2 (Duhamel-core leg) truncatedDuhamelCore_AT_GATE_FULL → TruncatedDuhamelCore: consumes
+  hLapFull : MemLapFull as an external binder.
+The a₁ capstone passes clean hAdom2 to LEG 1 AND hLapFull to LEG 2 as INDEPENDENT args
+(A1R6FromLabelledCurvedBoundary.lean:452,455).
+CAPPED CENSUS ROUTE (hAdom2cap, τ⁻¹-tolerant, lower-capped epsSeq m≤τ≤T; provable from a crude
+τ⁻¹ via CappedAdom2Audit.hAdom2_capped_family_of_crude, grounded HAdom2capGrounding.hAdom2cap_
+grounded; J4-537's curvedRNC_witnessSecondXDeriv_dom_crude supplies the crude form for g^K) →
+manufactures MemLapFull (leg 2's hLapFull) ONLY, via memLapFull_from_pairing_dominations. It
+tolerates τ⁻¹ for the LO adjacency leg (hII_lo_from_capped, τ∈[ε_m,u) bounded below) and CARRIES
+hII_hi:MemAdjHi as a labelled residual (HI leg [u−ε_m,u] has τ→0, ∫₀^ε τ⁻¹=+∞ un-dischargeable).
+⟹ LEG 1 has NO capped variant; it still takes the clean, genuinely-FALSE single-constant hAdom2
+(false at g^K for the SAME reason J4-537 documented: true envelope ~τ^(−1−n/2) at z=0 vs demanded
+τ^(−n/2)). Wiring J4-537's τ⁻¹ crude via the capped route buys NOTHING at the a₁-two-jet level —
+leg 1's independent clean-hAdom2 obligation survives. DECISIVE: there is NO curved-satisfiable a₁
+trace capstone at present. To make one: (i) re-plumb LEG 1 (hDaLimLU_from_labelled_v2_gauge's
+~45-180-binder census) to consume hAdom2cap + a carried MemAdjHi-style HI residual (structural
+analogue of J4-391's MemLapFull work — NEW, LARGE); (ii) leg 2 can accept an externally-supplied
+capped hLapFull (Sol: internal building not required). Only LEG 1 is the true blocker.
+HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — the clean-hAdom2 curved capstone is flat-only
+at hAdom2 in BOTH legs (J4-537 leg-2 clean binder; J4-538 leg-1 DaLim clean binder = the
+un-eliminated blocker). Capped census = genuine curved path for the MemLapFull leg ONLY. J4-530..537
+dominations are genuine reusable lemmas but the target capstone is NOT curved-satisfiable.
+J4-539 = SCOPING brick: grep/read hDaLimLU_from_labelled_v2_gauge's internal pairing structure to
+confirm its hAdom2 usage factors through the same pairing_intervalIntegrable LO/HI split (so the
+capped-LO + carried-HI pattern applies) — if NOT, another high-value negative finding; if YES, build
+hDaLimLU_from_labelled_capped (mirror memLapFull_from_pairing_dominations).
