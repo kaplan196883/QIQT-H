@@ -23933,6 +23933,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHdata.curved_hdata_nearIsometry_at_gate
 #print axioms QIQTH.CurvedA1FintHdata.curved_hdata_nearIsometry_at_gate_curved_satisfiable
 
+-- ★★ J4-576 (CurvedA1FintHdataUniform.lean): the UNIFORM amplitude value/derivative bounds
+-- (conjunct (3) of the hdata-family) for g^K=curvedRNCMetric κ (κ≤0), via compactness-uniformization.
+-- curved_hdata_amp_value_uniform_at_gate = conjunct (3a) FULLY DISCHARGED (no residual): ∃ρ>0 ∃Ba≥0,
+-- ∀i τ (0<τ≤T) ∀z∈K ‖z‖<ρ, |chartFieldAmp g^K … a b τ z 0|≤Ba — DIRECTLY from banked
+-- BaseSlotAmplitude.baseSlotAmp_bound (joint (τ,z)-cont on compact [0,T]×closedBall → extreme-value)
+-- + curved carries {curvedRNCMetric_contDiff, curvedRNCInv_contDiff (K≤0), curvedRNCMetric_hgpos (K≤0)}.
+-- τ-DOMAIN AUDIT: amp value AFFINE in τ (u₀+u₁τ, W/Θ τ-indep) ⟹ continuous down to τ=0, NO ε-floor,
+-- NO blow-up. curved_hdata_amp_deriv_uniform_at_gate_of_cont = conjunct (3b) THIN reduction (per fixed i):
+-- uniform |pd(chartFieldAmp …) i 0|≤Bd reduced to the ONE residual hcont = joint (τ,z)-cont of the
+-- first field-deriv section on the compact box (NOT banked — the field-deriv jet has no banked
+-- ContinuousOn), via IsCompact.exists_bound_of_continuousOn. curved_satisfiable = Ric≠0
+-- (curvedRNCMetric_ricci_trace_diag_ne), κ≠0∧n≥2 — not secretly flat. Conjuncts (1)/(2) (inverse-chart
+-- jet existence + |Pval|≤L) + (3b) pd-continuity still owed. NOT a₁=R/6. std-3.
+#print axioms QIQTH.CurvedA1FintHdataUniform.curved_hdata_amp_value_uniform_at_gate
+#print axioms QIQTH.CurvedA1FintHdataUniform.curved_hdata_amp_deriv_uniform_at_gate_of_cont
+#print axioms QIQTH.CurvedA1FintHdataUniform.curved_hdata_amp_uniform_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
