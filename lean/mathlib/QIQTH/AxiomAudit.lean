@@ -23257,6 +23257,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCWitnessMeasSC.curvedRNC_hWmeas_sc
 #print axioms QIQTH.CurvedRNCWitnessMeasSC.curvedRNC_hWslice_sc
 
+-- J4-529 (CurvedRNCChartReach): the LAST curved-witness MEASURABILITY carry hVmapK discharged from a SINGLE
+-- geometric REACHABILITY input, for g^K=curvedRNCMetric K (K<0). hVmapMeasK_zero_of_reach: for any (g,gi)
+-- a uniform radius ρ>0 s.t. the K-uniform origin reach (∀z∈K, ∃v, ‖v‖<ρ ∧ exp_z v=0) IMPLIES the
+-- volume.restrict K AE-measurability of z↦W z 0 — the three geometric side-conditions {hball,hnorm,hRI} of
+-- FoldedCoeffChartMeas.hVmapMeasK_zero_of_geom DERIVED internally from the reach via the banked LEFT-inverse
+-- germ (uniformInverseChart_huniformChart): W z 0 = W z (exp_z v) = v. The reach is a PURE GEOMETRIC input
+-- (NOT a measurability carry), = the K-uniform injectivity-radius reachability audited GENUINE-INPUT in
+-- ExpRhoReachability (expRho/uniformFlowRadius are arbitrary Classical.choose witnesses, no lsc, not bankable).
+-- curvedRNC_hWmeas_carryFree/hWslice_carryFree: the CARRY-FREE curved witness measurability capstone —
+-- curvedRNC_hWmeas_sc with its single hVmapK carry discharged from the reach; NO measurability carry remains
+-- (only the geometric reach + the c<δ₀ gate-radius gate). SATISFIABILITY: K<0, n≥2, Kset∋0 ⟹ Ric(0)≠0
+-- (curvedRNCMetric_ricci_trace_diag_ne); the reach holds ∀z∈Kset by Cartan–Hadamard globality (K<0 ⟹ exp a
+-- global diffeo, 0 reachable from every z, velocities uniformly bounded over compact Kset). Closing this does
+-- NOT derive the coefficient (curved heatOp/Levi Gaussian dominations remain the wall). NOT a₁=R/6
+-- (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCChartReach.hVmapMeasK_zero_of_reach
+#print axioms QIQTH.CurvedRNCChartReach.curvedRNC_hVmapK_of_reach
+#print axioms QIQTH.CurvedRNCChartReach.curvedRNC_hWmeas_carryFree
+#print axioms QIQTH.CurvedRNCChartReach.curvedRNC_hWslice_carryFree
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

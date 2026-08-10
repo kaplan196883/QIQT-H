@@ -1632,3 +1632,4 @@ import QIQTH.CurvedRNCPosDef
 -- hWmeas/hWslice reduced to two curvature-independent carries {hSm, hVmap}. NOT a₁=R/6 (CONDITIONAL, flat-only). std-3.
 import QIQTH.CurvedRNCWitnessMeas
 import QIQTH.CurvedRNCWitnessMeasSC
+import QIQTH.CurvedRNCChartReach
