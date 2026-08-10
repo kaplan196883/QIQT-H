@@ -6649,3 +6649,20 @@ hOffCollarTail (off-collar Gaussian tail)} geometric + {convergence trio, hFint/
 Gaussian DOMINATION), hInnerCont (curved bound)} analytic — NOT more thin measurability bookkeeping.
 a₁=R/6 CONDITIONAL. J4-568 PIVOT = hFint/hFint_d domination (reuse capped J4-530..537 lemmas) OR
 convergence trio OR hOffCollarTail/hsrc OR honest TERMINAL WRITEUP.
+
+## J4-568 (interval-integrability hFint + hFint_d for g^K via CAPPED Gaussian domination — analytic core PIVOT)
+CurvedA1ClassBFint.lean: `pairing_intervalIntegrable_capped` (geometry-generic ENGINE: s ↦ ∫z A(u−s) 0 z
+· F s z 0 IntervalIntegrable on [0,u−ε] from ε-FLOORED Gaussian domination of A + (0,Tc] domination of F
++ s-slice measurability; ε-capped variant of banked DaLimEasyTranche.pairing_intervalIntegrable via
+gaussDdim_pairing_integral → s-uniform const → Integrable.mono') + `curved_hFint_at_gate`
+(A=witnessFieldDeriv, matches capstone hFint) + `curved_hFint_d_at_gate` (A=raw vanVleckGatedWitness,
+matches hFint_d) + `_curved_satisfiable`. ★ DOMINATION TRUE FOR g^K: window [0,u−εₘ] samples A only at
+τ=u−s≥εₘ ⟹ engine needs only CAPPED per-m bound (εₘ≤τ≤T), genuinely true (τ^{−1/2}≤εₘ^{−1/2} into CA_m,
+hAdom2cap mechanism J4-530..537); clean whole-time witnessFieldDeriv bound FALSE (CappedAdom2Audit D3);
+raw witness no blow-up. Carries {hAdom capped, hFdom, hFzero, hmeas banked} — IntervalIntegrable engine
+DISCHARGED. Main verified: at-gate matches capstone verbatim; hAdom is εₘ-floored (not false clean hAdom2);
+engine proved (Integrable.mono'); satisfiable not vacuous; R/6 untouched. std-3, budget raw 0, 9844 jobs.
+Agent ~24min/61 tool-uses genuine work. RESIDUAL: hFint/hFint_d off the analytic list (modulo their capped
+hAdom carry to be banked). Remaining = {hsrc, hOffCollarTail} geometric + {convergence trio, hInnerCont} +
+the capped hAdom sources. a₁=R/6 CONDITIONAL. J4-569 = source capped hAdom (witnessFieldDeriv per-m Gaussian
+domination from WideSliverBoundary/witnessFieldDeriv_gate_envelope) OR hInnerCont OR convergence trio.
