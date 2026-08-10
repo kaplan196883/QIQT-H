@@ -6337,3 +6337,32 @@ owed. J4-553 = construct dataAmp from the chart-jet bundle via AmplitudeDataOnCo
 concrete (hD2HexpandOn from hjets) + the off-collar corrected tail (OffCollarTailMoment/collar_hGpow_
 residual.hOffCollarTail) ⟹ isolate hjets + hOffCollarTail as the two remaining geometric carries. OR
 the convergence trio.
+
+## J4-553 — curved collar amplitude data from chart-jets; HI-leg residual → hjets + off-collar tail (vacuity trap avoided) [ebc03bf1]
+CurvedA1AmplitudeData.lean (3 std-3, budget raw 0 / 9830 jobs; verified clean by rebuild reading
+#print axioms — no sorryAx; adversarial main-verified). Concretizes the HI-leg amplitude carry of the
+fully-wired curved a₁ capstone down to the irreducible chart-jet geometry, soundly routing AROUND a
+non-constructible whole-space bundle.
+★ SOUNDNESS CATCH: the whole-space AmplitudeDerivativeData is NON-CONSTRUCTIBLE for the curved witness
+(J4-544 PART B: off-collar ρ blows up ⟹ hAampBdd fails). A collar→whole-space bridge would carry a
+plausibly-UNSATISFIABLE (vacuous) hypothesis = the axiom-budget-blind-spot hole. This brick AVOIDS it,
+routing the HI-leg via collar bundle + hOffCollarTail into hGpow_from_innerWindow (NO fabricated
+whole-space data). Sol-confirmed sound route.
+- curved_amplitudeDataOn_at_gate: curved COLLAR AmplitudeDerivativeDataOn (collarRegime r₀ c τ₀) from
+  AmplitudeDataOnCollar.amplitudeDataOn_concrete ← hjets — discharges on-collar hD2HexpandOn.
+- curved_hII_hi_from_innerWindow: capstone hII_hi:MemAdjHi for g^K via the sound route
+  (hGpow_from_innerWindow ← hinner_window ← hOnCollar[banked←hjets] ⊕ hOffCollarTail; τ=0 discharged
+  internally; slice-AESM continuity carried).
+- curved_amplitudeData_residual(_intro): scoping ledger (no axioms).
+★ UPDATED HI-leg RESIDUAL: MemAdjHi ← {slice-AESM continuity} ∪ {hinner_window ← hOnCollar(BANKED←
+hjets) ⊕ hOffCollarTail}. OWED: hjets (chart-jet C⁴/Jacobian: 1st/2nd i-jets of uniformInverseChart,
+amplitude jets of chartAmp, + 3 center identities ∑V·P=zᵢ / ∑P²=1 / ∑V·Q=0) + hOffCollarTail
+(off-collar Gaussian-tail reconstitution). ELIMINATED: τ=0 endpoint + whole-space detour.
+ADVERSARIAL (main): non-vacuous g^K, R/6=n(n−1)κ/6≠0; hjets genuinely curved (over uniformInverseChart/
+chartAmp of curvedRNCMetric κ, not flat); hinner_window true satisfiable heat-kernel moment estimate.
+HONEST: a₁=R/6 CONDITIONAL — SHARPENS the residual (HI-leg amplitude → hjets + hOffCollarTail); NOT
+unconditional; hjets C⁴ + hOffCollarTail owed Seeley-DeWitt geometry.
+J4-554 = build the chart-jet bundle hjets for curvedRNCMetric κ (1st/2nd i-jets of uniformInverseChart
++ amplitude jets of chartAmp + 3 center identities, from the banked C⁴ tower expMap_contDiffOn_four /
+RNC jets / curvedRNCMetric_contDiff) ⟹ collapse hOnCollar to elementary, leaving hOffCollarTail as the
+last HI-leg geometric wall. OR attack hOffCollarTail directly. OR pivot to the convergence trio.
