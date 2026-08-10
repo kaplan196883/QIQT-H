@@ -23584,6 +23584,21 @@ namespace QIQTH.AxiomAudit
 -- measurabilities, hPd2conv. NOT a₁=R/6: still CONDITIONAL (J4-551 = assembly of both legs). std-3.
 #print axioms QIQTH.CurvedA1Leg2Core.curved_core_at_gate
 
+-- (J4-551) THE FULLY-WIRED curved a₁ two-jet capstone at g^K=curvedRNCMetric κ (κ<0). curved_a1_R6_geomWired
+-- = curved_a1_R6_assembled with ONLY the g/gi-geometry binders discharged (8-member gauge bundle via
+-- curvedRNC_geomGaugeBundle + hgpos via curvedRNCMetric_det_pos); hDa/core external. curved_a1_R6_fully_wired
+-- = the geomWired capstone with LEG 1 hDa FED by curved_hDa_at_gate (J4-549) + LEG 2 core FED by
+-- curved_core_at_gate (J4-550), the two legs' shared binders (MemAdjHi hII_hi, W2 diff-under-∫ family,
+-- hAdom2cap, hmeasLo/hmeasHi/hmeas2Lo, hPd2conv, wA/CA/wA2/CA2c, hK0/hframeK, aa/haa/hau) UNIFIED. Carries ONLY
+-- the analytic/physical residuals: MemAdjHi/MemAdjLo/MemInterchange/MemECombine census, the convergence trio
+-- (Levi envelope dataLevi / E-combination hDa_ec-hLap / atomic interchange hPd2conv), measurability/window +
+-- gate package (hpkgBound/hmemS0/hopenS0/hS1), SDW source hsrc, Section-G/H census. Curved-satisfiable: for
+-- g^K the coefficient (∑ᵢ ricci g^K gi^K i i 0)/6 = n(n−1)κ/6 ≠ 0 (curved_a1_R6_fully_wired_curved_satisfiable).
+-- NOT a₁=R/6: still CONDITIONAL on the carried residuals. std-3.
+#print axioms QIQTH.CurvedA1FullyWiredCapstone.curved_a1_R6_geomWired
+#print axioms QIQTH.CurvedA1FullyWiredCapstone.curved_a1_R6_fully_wired
+#print axioms QIQTH.CurvedA1FullyWiredCapstone.curved_a1_R6_fully_wired_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -1696,3 +1696,5 @@ import QIQTH.CurvedA1Assembled
 import QIQTH.CurvedA1FullyWired
 
 import QIQTH.CurvedA1Leg2Core
+
+import QIQTH.CurvedA1FullyWiredCapstone
