@@ -23277,6 +23277,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCChartReach.curvedRNC_hWmeas_carryFree
 #print axioms QIQTH.CurvedRNCChartReach.curvedRNC_hWslice_carryFree
 
+-- J4-530: the bounded van-Vleck amplitude factor for the curved witness g^K (base-witness
+-- domination). curvedRNCMetric_det = the EXACT van-Vleck determinant det g^K(w)=(1−(K/3)‖w‖²)^(n−1)
+-- (rank-one matrix-determinant lemma); curvedRNCMetric_det_ge_one/_det_le = two-sided det control for
+-- K≤0; curvedRNCMetric_vanVleck_pos/_le_one = the amplitude bound Θ=vanVleck g^K∈(0,1]. SATISFIABILITY:
+-- K<0 ⟹ det g^K=(1−(K/3)‖w‖²)^(n−1)≢1, genuinely curved (Ric(0)=(n−1)Kδ≠0). This is the van-Vleck
+-- factor of the base-witness Gaussian domination; the Gaussian-phase transfer remains an irreducible
+-- geometric reach input, and this is 1 of ~30–40 curved dominations. NOT a₁=R/6 (CONDITIONAL, flat-only). std-3.
+#print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_det
+#print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_det_ge_one
+#print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_det_le
+#print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_vanVleck_pos
+#print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_vanVleck_le_one
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
