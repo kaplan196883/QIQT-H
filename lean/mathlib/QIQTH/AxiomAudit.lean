@@ -23728,6 +23728,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBMeas3.curved_hmeas2Lo_at_gate
 #print axioms QIQTH.CurvedA1ClassBMeas3.curved_hmeasLo_at_gate_curved_satisfiable
 
+-- J4-563 (CurvedA1ClassBMeas4): the W2 (differentiation-under-∫) MEASURABILITY carriers
+-- hFmeas / hF'meas of curved_a1_R6_fully_wired at g^K=curvedRNCMetric κ. The s-slice
+-- ae-strong-measurability of the witnessFieldDeriv·leviSeries pairing at field slot
+-- (update 0 i w) (hFmeas) and of the witnessFieldDeriv2·leviSeries pairing at center 0
+-- (hF'meas), from the banked geometry-generic Fubini core SliceMeasurability.
+-- sliceMeas_of_jointCont, instantiated at the curved metric. CARRIES the four
+-- curvature-independent analytic carries {hUT, hεU, hFieldCont/hField2Cont, hBcont}
+-- (positive-time-strip joint continuities + window bounds) honestly. NOT a₁=R/6
+-- (hsrc/hOffCollarTail, the convergence trio, the interval-integrability hFint, the
+-- Section-G ∫z-slice family, the leviSeries joint slices, and hInnerCont all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas4.hFmeas_slice
+#print axioms QIQTH.CurvedA1ClassBMeas4.hFpmeas_slice
+#print axioms QIQTH.CurvedA1ClassBMeas4.curved_hFmeas_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas4.curved_hFpmeas_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas4.curved_hFmeas_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
