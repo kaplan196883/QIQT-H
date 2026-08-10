@@ -1690,3 +1690,5 @@ import QIQTH.HGpowFromCollar
 import QIQTH.OffCollarTailMoment
 
 import QIQTH.Leg2HLapFull
+
+import QIQTH.CurvedA1Assembled

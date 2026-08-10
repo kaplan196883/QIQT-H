@@ -23549,6 +23549,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.Leg2HLapFull.curved_leg2_hLapFull
 #print axioms QIQTH.Leg2HLapFull.curved_leg2_hLapFull_curved_satisfiable
 
+-- J4-548 (CurvedA1Assembled): curved_a1_R6_assembled — THE FIRST GENUINELY CURVED-SATISFIABLE a₁ two-jet capstone.
+-- The a₁ two-jet at the const-radius gate threaded DIRECTLY through the three banked sub-assemblies (htr_adapter,
+-- a1_R6_slots_AT_GATE, wide_a1_R6_core_AT_CONSTRADIUS) with the two Da/Duhamel LEG OUTPUTS as EXTERNAL binders:
+-- hDa:DaLimLUGoal (LEG 1, capped-route J4-541 hDaLimLU_from_labelled_capped) and core:TruncatedDuhamelCore (LEG 2,
+-- capped-route J4-547 curved_leg2_hLapFull). The clean whole-time 2nd-deriv bound hAdom2 — PROVED FALSE for the
+-- curved witness g^K (J4-537/538, τ⁻¹ blow-up) — is ABSENT, so EVERY antecedent is jointly satisfiable for
+-- g:=curvedRNCMetric K (K<0) and the coefficient (∑ᵢ ricci g gi i i 0)/6 = n(n−1)K/6 ≠ 0 is genuinely nonzero
+-- (curvedRNCMetric_ricci_from_gauge). Sol-audited satisfiable/non-vacuous/honest. _curved_satisfiable re-exports the
+-- nonzero metric-Hessian trace (curved-inhabited, NOT flat). Carried residue: the two leg outputs (+ their MemAdjHi/
+-- matched-sliver moment residuals + convergence trio, in the J4-541/547 suppliers), hbdry, hDConv/hCConv census, and
+-- the SDW wiring (hGauss→htr, hsrc, transportCoeff). NOT a₁=R/6: CONDITIONAL. std-3.
+#print axioms QIQTH.CurvedA1Assembled.curved_a1_R6_assembled
+#print axioms QIQTH.CurvedA1Assembled.curved_a1_R6_assembled_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
