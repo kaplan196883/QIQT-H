@@ -6120,3 +6120,34 @@ of_nonpos) into DaLimLUMemAdjHi/MemAdjHiSliver consumers (drop hAzero/hEndpoint 
 wire amplitudeDataOn_concrete (collar) into the hGpow pipeline via the collar-regime split,
 isolating hjets (chart-jet C⁴/Jacobian) as the single remaining curved geometric input. OR pivot to
 leg-2 hLapFull capped chain. OR convergence trio.
+
+## J4-545 — hGpow closure boundary exposed; collar route needs off-collar tail (not just hjets) [393474b1]
+HGpowFromCollar.lean (2 std-3, budget raw 0 / 9822 jobs; elaborated ~27s; verified clean by rebuild
+reading #print axioms — no sorryAx). Exposes the correct hGpow closure boundary + precisely scopes
+the collar-route gap — CORRECTS the cp428 assumption that the collar bundle reduces the leg-1 HI-leg
+to hjets alone.
+★ FINDING (Sol-confirmed): the collar route does NOT close hGpow with only hjets. hGpow_of_amplitude
+Data reaches hGpow in 2 stages: (I) per-slice open-window inner bound (K₁(u−s)^{-1/2}+K₀) from
+slice2_inner_bound, whose leading τ^{-1/2} gain is the EXACT FULL-SPACE Hessian moment ∫(z_i²−2τ)/
+(4τ²)·G_τ=0 over ALL z; (II) closure. The collar bundle supplies fields only on ‖z‖≤c√τ; off-collar
+the ρ-ratio blows up ⟹ collar-constant amplitude bounds LITERALLY FALSE, and truncating the Hessian
+moment to the τ-shrinking collar DESTROYS the cancellation. No thin collar composition closes it.
+(Machine-recorded: SliverBoundOnCollar.lean J4-353 case (b) — consumption over all Point n with the
+Gaussian envelope; surviving carry = off-collar Gaussian tail on ‖z‖>c√τ.)
+- hGpow_from_innerWindow: ROUTE-AGNOSTIC closure — from ANY per-slice open-window inner bound
+  (K₁(u−s)^{-1/2}+K₀ shape, all-z OR collar+split) + 1≤n → uIoc hGpow, τ=0 endpoint internal from
+  hEndpoint_discharged. Faithfully factors stage (II); the stable interface both routes hit. std-3.
+- collar_hGpow_residual(+_intro): scoping conjunction = hOnCollar (BANKED amplitudeDataOn_concrete,
+  input hjets satisfiable via residueJets_satisfiable J4-350) ∧ hOffCollarTail (corrected off-collar
+  Gaussian tail reconstituting the full-space moment). No axioms.
+Did NOT build a degenerate hGpow_of_amplitudeDataOn (Sol-warned: hSplitInner already implies hGpow →
+bundle not consumed). curved-not-flat (obstruction IS the curvature ρ=exp((r_z−r_{W0})/4τ)≠1).
+HONEST: a₁=R/6 CONDITIONAL + FLAT-ONLY — exposes closure boundary + scopes the gap; leg-1 HI-leg
+curved input = hjets (on-collar) PLUS hOffCollarTail (off-collar tail), NOT hjets alone; + capped
+leg-2 hLapFull + convergence trio + Seeley-DeWitt wiring remain.
+J4-546 = build collar_inner_on from AmplitudeDerivativeDataOn (integrate banked sliverIntegrand_on_
+collar 3-term identity over the collar) producing the collar-truncated inner integral with the
+moment defect EXPLICIT — isolate ∫_{collar}(z_i²−2τ)/(4τ²)G_τ=−∫_{‖z‖>c√τ}(…) as the precise
+hOffCollarTail obligation ⟹ turns hOffCollarTail into a concrete Gaussian-tail moment integral
+(gaussian_beats_power / exp(−c²/4) territory), the last step before hGpow_from_innerWindow. OR pivot
+to leg-2 hLapFull capped chain OR convergence trio.
