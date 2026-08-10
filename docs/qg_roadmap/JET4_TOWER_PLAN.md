@@ -5861,3 +5861,26 @@ convergence §L, genuine G1/G2/G3 local/width/two-point gap = heavy).
 J4-535 = recenter to base-point-varying hAdom (∀p q τ, |witness … τ p q|≤(A₀+A₁τ)√(3/2)ⁿ·
 gaussDdim(3/2 τ)(p−q) via banked recenter machinery) OR the heatOp defect-kernel hAdomHeat
 (witness Laplacian, one lower τ-power, reuse this collar Gaussian).
+
+## J4-535 — base-point-varying hAdom/hWDom recenter for g^K (discharges the capstone binder pair) [9c918610]
+CurvedRNCBaseWitnessDomAdom.lean (2 std-3, budget raw 0 / 9813 jobs; verified clean by rebuild
+reading #print axioms — no sorryAx). Lifts base-witness domination #1 to the base-point-varying
+form the capstone trace integral consumes, g^K=curvedRNCMetric K (K<0).
+curvedRNC_baseWitness_dom_adom: given hChr, hKset(compact), 0<a<b, τ0fr>0, carried amplitude-
+smoothness hw (∀k ContDiff ℝ ⊤ (foldedCoeff …)), produces ∃A₀ A₁≥0,∃c>0,∃CW lam, BOTH capstone
+hAdom (∀τ>0,∀p q, |vanVleckGatedWitness … (constGate … c) … τ p q|≤(A₀+A₁τ)·√(3/2)ⁿ·
+gaussDdim((3/2)τ)(p−q)) AND hWDom (∀τ∈(0,τ0fr],∀z, |… τ 0 z|≤CW·gaussDdim(lam·τ)z).
+- Banked recenter: ConcreteDominations.exists_D1_constants_of_gateSqControl. vanVleckGatedWitness
+  unfolds DEFINITIONALLY (ConvApproximants) to the gated cutoff parametrix ⟹ its D1 conclusion IS
+  the hAdom binder for g^K (uniform-flow machinery inherently base-point-varying, no p=0 recenter
+  needed). hWDom = frozen p=0 window slice (WidthAdapters.gaussDdim_neg).
+- GateSqControl fully discharged: gateSqControl_of_flowBall ← uniformFlowExp_hdisp_ball UNIFORM-
+  over-Kset near-isometry + uniformInverseChart_huniformChart chart-inverse germ; c=min r₁(δ₀/2)>0.
+- CARRIED (sole residual): amplitude smoothness hw = mainline-standard van-Vleck-coeff regularity
+  carried ∀k throughout the codebase (never derived for concrete coeffs), consistent NOT a new gap.
+curved-not-flat: c=4/5≠±1 radial contraction. GATE: K<0 (Ric≠0), c/lam=3/2/CW finite, gate
+nonempty, hw satisfiable (C^∞). HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — discharges
+one capstone binder pair (hAdom+hWDom); ≠ the coefficient; heatOp/Levi pile + Duhamel + extraction
+remain. J4-536 = heatOp defect-kernel hAdomHeat (|heatOp g^K witness τ 0 z|≤CA·gaussDdim(wA·τ)
+(0−z), witness Laplacian one lower τ-power) OR D2 Levi-series bound (|leviSeries (heatOp g gi H_G)
+τ p q|≤C_L(T)·baseKernelW 2 0 on (0,T], one-step input hEboundW_le landed) per J4-535 rec.
