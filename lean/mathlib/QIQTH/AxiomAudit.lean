@@ -23197,6 +23197,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussGaugeToHgauge.curvedRNCMetric_htr_from_gauge
 #print axioms QIQTH.GaussGaugeToHgauge.curvedRNCMetric_ricci_from_gauge
 
+-- J4-525 (CurvedRNCGaugeBundle): the g^K inverse-metric gauge bundle. The capstone antecedent binds
+-- the inverse metric gi as a FREE function paired with g via hinvF (∑_σ g_cσ gi_σd = δ ∀y); flat δ
+-- FAILS this off the origin (would force g=δ), so gi must be the true Sherman–Morrison inverse
+-- curvedRNCInv K x = (1/α)(δ − (K/3)x⊗x), α=1−(K/3)‖x‖². For K<0, α≥1>0 globally, so gi is smooth
+-- (curvedRNCInv_contDiff) and g^K·gi^K=δ EVERYWHERE (curvedRNCMetric_hinvF, via the exact radial Gauss
+-- lemma) — the first curved inhabitant of hinvF; gi^K(0)=δ (curvedRNCInv_zero); Γ[g^K,gi^K](0)=0
+-- (curvedRNCMetric_christoffel_zero, from ∂g(0)=0). curvedRNC_geomGaugeBundle packages the geometric+
+-- gauge HALF of the ~250-binder antecedent (banked hg/hgsymm/hg0/hdg0/hGauss + new hgi/hgiC/hinvF/hΓ),
+-- K<0 genuinely curved (Ric(0)=(n−1)Kδ≠0). The ANALYTIC piles (heat-kernel Gaussian dominations, Levi
+-- series, joint continuity) + hgpos REMAIN. NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNCInv_zero
+#print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNCInv_contDiff
+#print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNCMetric_hinvF
+#print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNCMetric_christoffel_zero
+#print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNC_geomGaugeBundle
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

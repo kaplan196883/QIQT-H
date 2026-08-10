@@ -1609,3 +1609,13 @@ import QIQTH.CurvedRNCGaussWitness
 -- geometric side of g^K is now self-contained. Remaining: MetricGaussGauge → GaussHessianCyclic
 -- (triple-diff), plus the ~250-binder ANALYTIC instantiation. NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.GaussGaugeToHgauge
+
+-- J4-525: the g^K inverse-metric gauge bundle. The capstone antecedent binds the inverse metric gi as
+-- a FREE function paired with g via hinvF (∑_σ g_cσ gi_σd = δ ∀y); flat δ FAILS this off the origin
+-- (would force g=δ), so gi must be the true Sherman–Morrison inverse curvedRNCInv K x = (1/α)(δ −
+-- (K/3)x⊗x), α=1−(K/3)‖x‖². For K<0, α≥1>0 globally ⟹ gi smooth (curvedRNCInv_contDiff) and
+-- g^K·gi^K=δ EVERYWHERE (curvedRNCMetric_hinvF, via the exact radial Gauss lemma) — first curved
+-- inhabitant of hinvF. curvedRNC_geomGaugeBundle packages the geometric+gauge HALF of the antecedent
+-- (banked hg/hgsymm/hg0/hdg0/hGauss + new hgi/hgiC/hinvF/hΓ), K<0 genuinely curved. The ANALYTIC piles
+-- (heat-kernel Gaussian dominations, Levi series) + hgpos REMAIN. NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.CurvedRNCGaugeBundle
