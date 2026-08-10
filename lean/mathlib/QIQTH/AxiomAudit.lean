@@ -23599,6 +23599,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FullyWiredCapstone.curved_a1_R6_fully_wired
 #print axioms QIQTH.CurvedA1FullyWiredCapstone.curved_a1_R6_fully_wired_curved_satisfiable
 
+-- J4-552: the capstone's central hII_hi:MemAdjHi residual for g^K (curvedRNCMetric κ, κ<0), discharged
+-- via the banked chain hGpow_of_amplitudeData_noEndpoint → hII_hi_from_sliver — the opaque MemAdjHi
+-- reduced to CONCRETE {amplitude-data bundle (chart-jet hD2Hexpand) + K₁/K₀ envelope + slice continuity}.
+-- NOT a₁=R/6: still CONDITIONAL (hjets + off-collar tail owed). std-3.
+#print axioms QIQTH.CurvedA1MemAdjHiWired.curved_hII_hi_at_gate
+-- and the capstone with the opaque hII_hi binder DROPPED (supplied internally from the chain). std-3.
+#print axioms QIQTH.CurvedA1MemAdjHiWired.curved_a1_R6_fully_wired_hII
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
