@@ -23775,6 +23775,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBMeas6.curved_hFpmeas_d_at_gate
 #print axioms QIQTH.CurvedA1ClassBMeas6.curved_hFpmeas_d_at_gate_curved_satisfiable
 
+-- J4-566 (CurvedA1ClassBMeas7): the leviSeries "frozen"/"moving" z-slice MEASURABILITY carriers
+-- hffro_meas / hfmov_meas of curved_a1_R6_fully_wired at g^K=curvedRNCMetric κ. Unlike the Section-G
+-- members these are POINTWISE-in-z AEStronglyMeasurable facts (NOT ∫z-integrals) over volume on
+-- Point n = Fin n → ℝ, at a single fixed time — the leviSeries analogue of the witness-slice carrier
+-- hWmeas (J4-559), NOT a sliceMeas_of_jointCont instance. hffro_meas : ∀ u, AEStronglyMeasurable
+-- (fun z => leviSeries (heatOp g^K gi^K W) u z 0) volume and hfmov_meas m u = hffro_meas (u−epsSeq m),
+-- both from the single supplier leviSlice_meas via the banked Mathlib reduction
+-- Continuous.aestronglyMeasurable. CARRIES one curvature-independent analytic carry hLcont (spatial
+-- continuity of the Levi-series slice at every time) honestly. NOT a₁=R/6 (hsrc/hOffCollarTail, the
+-- convergence trio, the interval-integrability members hFint/hFint_d, the remaining Section-G carrier
+-- hFmeas_d, and hInnerCont all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas7.leviSlice_meas
+#print axioms QIQTH.CurvedA1ClassBMeas7.curved_hffro_meas_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas7.curved_hfmov_meas_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas7.curved_hffro_meas_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
