@@ -5767,3 +5767,26 @@ dominations. GATE: K<0 genuinely curved (Ric(0)=(n−1)Kδ≠0), det≢1 — not
 Non-vacuous. a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — one amplitude factor ≠ the
 coefficient. J4-531 = the Gaussian-PHASE transfer (genuinely-geometric core of the
 base-witness domination — hard, may need reach input) OR next amplitude/moduli binder.
+
+## J4-531 — full base-witness Gaussian domination #1 for g^K (modulo carried phase+moduli) [8343d8cb]
+CurvedRNCBaseWitnessDom.lean (new, std-3, budget raw 0 / 9809 jobs; verified clean via
+independent rebuild reading #print axioms — no sorryAx). Assembles the FIRST base-witness
+domination |vanVleckGatedWitness g^K … τ 0 z| ≤ C_W·gaussDdim(λτ)z, g^K=curvedRNCMetric K
+(K≤0), every ELEMENTARY factor discharged, only 2 geometric factors carried.
+- sqrt_inv_rpow_half: ((√d)⁻¹)^(−1/2)=d^(1/4).
+- curvedRNCMetric_cutoff_amp_le: radialCutoff a b w·(vanVleck g^K w)^(−1/2) ≤
+  ((1−(K/3)b²)^(n−1))^(1/4) — amplitude (J4-530 det bounds) + cutoff∈[0,1].
+- curvedRNC_baseWitness_dom: the full domination, C_W=C_amp·C_u·C_φ.
+DISCHARGED: amplitude det^(1/4)≤C_amp, radial cutoff≤1. CARRIED (explicit satisfiable):
+hMod (|∑ₖuₖ(w)τᵏ|≤C_u; u₀≡1, u₁ smooth on compact gate) + hPhase (gaussDdim τ w ≤
+C_φ·gaussDdim(λτ)z, irreducible Gaussian-phase transfer = near-isometry ‖W z 0‖≈‖z‖).
+GATE: K<0 curved (Ric(0)=(n−1)Kδ≠0, det≢1), C_amp finite, hMod/hPhase satisfiable-not-
+contradictory (hPhase genuine near-isometry NOT vacuous ∀). Non-vacuous. Sol confirmed the
+rpow amplitude chain + that det bounds do NOT prove hMod/hPhase (correctly carried), no
+K<0 soundness trap. HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — domination #1
+modulo carried inputs ≠ the coefficient; 1 of ~30-40 heat-kernel dominations.
+J4-532 = discharge the MODULI carry hMod for g^K (u₀≡1 + u₁=radialTransportSolve bound on
+compact chart-image ⟹ leaves ONLY phase carried) OR begin the phase-transfer via banked
+chartW0_rncRadialSq_error near-isometry squeeze.
+⚠ J4-530 agent malfunctioned (reporting-loop); verify final on-disk file by clean rebuild
+reading #print axioms (sorryAx invisible to text-grep).
