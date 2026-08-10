@@ -6454,3 +6454,32 @@ consumes; if only collar/overlap, REDEFINE the residue to the collar/overlap fir
 chartField_firstJet_nhds_of_contDiffAt) dropping hGlobalJet as FALSE GENERALITY; else re-tag hGlobalJet
 as an explicit LABELLED geometric input (option-b, same honest carry as a₁=R/6). SECONDARY: thinnest
 class-B (gate-package hmemS0/hopenS0 for constGate, or hPd2conv if banked-instantiable).
+
+## J4-557 — hGlobalJet was FALSE GENERALITY: collar-localized (dropped); the hard chart-jet terminal removed [c0f43ead]
+CurvedChartJetsCollar.lean (8 std-3, budget raw 0 / 9833 jobs; verified clean rebuild reading #print
+axioms — no sorryAx; adversarial main-verified). MACHINE-VERIFIED (not argued) that the ambient ∀x
+first-jet hGlobalJet (J4-556's sole hard chart-jet substrate frontier) is FALSE GENERALITY — DROPPED.
+★ TRACE (machine-verified): hjets first-jet feeds AmplitudeDataOnCollar.hD2HexpandOn_concrete →
+witnessSecondXDeriv_expand_bridge_rho → ChartJetHessian.gaussComp_amp_center_decomp → gaussComp_pd_pd.
+The ambient ∀x jet hV1 is used at ambient generality in EXACTLY ONE place (the funext writing ∂ᵢ(gauss
+Ddim∘V) as a GLOBAL equality); but pd=deriv is a LOCAL germ operator so the outer partial only reads
+=ᶠ[𝓝 0] — funext strictly stronger than needed; every other hV1 use is at centre x₀=0. Ambient ∀x =
+proof-convenience over-reach, NOT genuine.
+- pdiffAt_of_eventuallyEq (germ transfer); gaussComp_pd_pd_nhds / gaussComp_amp_pd_pd_nhds /
+  gaussComp_amp_center_decomp_nhds (terminal Leibniz consumer from =ᶠ[𝓝 0], IDENTICAL conclusions to
+  the ∀x lemmas; funext → pd_congr_of_eventuallyEq); witnessSecondXDeriv_expand_bridge_rho_nhds /
+  hD2HexpandOn_concrete_nhds (whole collar D2 bridge re-plumbed, hGlobalJet dropped, conclusion
+  unchanged); curved_collarFirstJet_banked (near-centre jet for g^K BANKED via chartField_firstJet_
+  nhds_of_contDiffAt ← ContDiffAt ℝ 2 (W z) 0); curved_hjets_residual_collar(_intro) (refactored residue
+  carrying banked hCollarJet in place of hGlobalJet).
+★ SOUND (no vacuity): each consumer's _nhds counterpart has IDENTICAL conclusion from the strictly-
+weaker =ᶠ[𝓝 0] hyp ⟹ discharges the same goal from a banked hyp, not a silent weakening; ∀ᶠ x in 𝓝 0
+strictly weaker than ∀x (not a re-label). ADVERSARIAL: non-vacuous g^K (κ<0, Ric≠0, R/6≠0). HONEST:
+a₁=R/6 CONDITIONAL — removes ONE substrate terminal (hGlobalJet), machine-backed; updated chart-jet
+residue = banked collar first jet + 3 general-base centre identities (J4-555); NOT unconditional; hsrc,
+hOffCollarTail, convergence trio, measurability census remain.
+J4-558 = structural field-erasure: replace the ambient ∀x first-jet field in AmpGeometryBundle.HjetsShape
+(+ the hjets field of amplitudeDataOn_concrete / curved_amplitudeDataOn_from_hjetsShape) with the
+=ᶠ[𝓝 0] form, routing hD2Hexpand through hD2HexpandOn_concrete_nhds — erases hGlobalJet from the LIVE
+bundle structures (not just the residue ledger). OR thinnest class-B (gate-package hmemS0/hopenS0,
+hPd2conv) OR hOffCollarTail OR hsrc.
