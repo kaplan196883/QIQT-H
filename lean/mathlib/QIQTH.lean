@@ -1598,3 +1598,14 @@ import QIQTH.A1R6FromLabelledCurvedBoundary
 -- confMetric-lookalike (those fail hGauss). Inhabits the geometric slice only; the full ~280-binder
 -- capstone antecedent (analytic piles) is NOT thereby non-vacuous. NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.CurvedRNCGaussWitness
+
+-- J4-524: the GaussHessianCyclic → hgauge bridge. Collapses the christoffel-symmetrization
+-- normal-coordinate gauge hgauge (∂_{(a}Γ^i_{bc)}(0)=0, consumed by RNCExpansion.rnc_htr_of_gauge)
+-- to the pure metric-second-derivative identity GaussHessianCyclic (∂_q∂_p g_ir(0) cyclic sum = 0),
+-- the triple-differentiated shadow of the radial Gauss gauge. Pure jet algebra atop pd_christoffel_origin
+-- + Schwarz. The CURVED witness g^K then DISCHARGES hgauge concretely (curvedRNCMetric_hgauge, first
+-- curved inhabitant of the Christoffel gauge) and its htr = −(2/3)Ric is DERIVED from the gauge
+-- (curvedRNCMetric_htr_from_gauge), pinning Ric(0)=(n−1)Kδ (curvedRNCMetric_ricci_from_gauge). The
+-- geometric side of g^K is now self-contained. Remaining: MetricGaussGauge → GaussHessianCyclic
+-- (triple-diff), plus the ~250-binder ANALYTIC instantiation. NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.GaussGaugeToHgauge

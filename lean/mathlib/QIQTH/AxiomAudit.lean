@@ -23180,6 +23180,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCGaussWitness.curvedRNCMetric_ricci_trace
 #print axioms QIQTH.CurvedRNCGaussWitness.curvedRNCMetric_ricci_trace_diag_ne
 
+-- J4-524 (GaussGaugeToHgauge): the GaussHessianCyclic → hgauge bridge. hgauge_of_gaussHessianCyclic
+-- collapses the christoffel-symmetrization normal-coordinate gauge hgauge (∂_{(a}Γ^i_{bc)}(0)=0,
+-- consumed by rnc_htr_of_gauge to force the ⅙ measure coefficient) to the pure metric-second-derivative
+-- identity GaussHessianCyclic g (∂_q∂_p g_ir(0) cyclic sum = 0) — the once-more-differentiated shadow
+-- of the radial Gauss gauge — via pure jet algebra atop pd_christoffel_origin + Schwarz (pd_comm).
+-- The curved witness g^K discharges it concretely: curvedRNCMetric_gaussHessianCyclic (a direct ∂∂g^K(0)
+-- δ-computation), so curvedRNCMetric_hgauge is the FIRST curved (Ric≠0) inhabitant of the Christoffel
+-- gauge; curvedRNCMetric_htr_from_gauge DERIVES htr=−(2/3)Ric from that gauge (via rnc_htr_of_gauge,
+-- flat inverse δ), and curvedRNCMetric_ricci_from_gauge pins Ric(0)=(n−1)Kδ. g^K is now self-contained
+-- on the GEOMETRIC side. GATE: curved-generic (g^K, K≠0). Remaining: MetricGaussGauge→GaussHessianCyclic
+-- (triple-diff of the gauge) + the ~250-binder ANALYTIC instantiation. NOT a₁=R/6 (CONDITIONAL). std-3.
+#print axioms QIQTH.GaussGaugeToHgauge.hgauge_of_gaussHessianCyclic
+#print axioms QIQTH.GaussGaugeToHgauge.curvedRNCMetric_gaussHessianCyclic
+#print axioms QIQTH.GaussGaugeToHgauge.curvedRNCMetric_hgauge
+#print axioms QIQTH.GaussGaugeToHgauge.curvedRNCMetric_htr_from_gauge
+#print axioms QIQTH.GaussGaugeToHgauge.curvedRNCMetric_ricci_from_gauge
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
