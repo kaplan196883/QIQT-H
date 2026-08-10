@@ -1636,3 +1636,4 @@ import QIQTH.CurvedRNCChartReach
 import QIQTH.CurvedRNCVanVleckBound
 import QIQTH.CurvedRNCBaseWitnessDom
 import QIQTH.CurvedRNCModuliBound
+import QIQTH.CurvedRNCPhaseTransfer

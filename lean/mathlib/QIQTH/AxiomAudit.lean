@@ -23320,6 +23320,21 @@ namespace QIQTH.AxiomAudit
 -- effectively flat-only). std-3.
 #print axioms QIQTH.CurvedRNCModuliBound.curvedRNC_moduli_bound
 
+-- J4-533: curvedRNC_phase_transfer = the LAST carried geometric factor (hPhase) of base-witness
+-- domination #1, discharged for g^K=curvedRNCMetric K (K<0) with EXPLICIT constants Cφ=(√2)ⁿ, lam=2
+-- on the reachable collar z∈Kset, ‖z‖<r. Route: chartW0_radialSq_half_lower (banked two-sided
+-- near-isometry chartW0_rncRadialSq_error) gives the curved radial squeeze (1/2)·r²(z)≤r²(W₀z);
+-- gaussDdim_le_of_norm_ge converts it exp-free to the widened Gaussian with EXACT prefactor
+-- (√(1/2))⁻ⁿ=(√2)ⁿ — the Gaussian-phase trap closed by the EXACT squeeze, not hand-waved.
+-- SATISFIABILITY: K<0 genuinely curved (Ric(0)=(n−1)Kδ≠0); the squeeze TOLERATES a genuine radial
+-- contraction (curvedRNC_phase_transfer_satisfiable: W z=(4/5)z inhabits it) ⟹ NOT secretly flat;
+-- reach window ‖z‖<r (r>0) satisfiable-not-vacuous. RESIDUE: the reach collar ‖z‖<r vs the literal
+-- ∀z-unguarded hPhase binder — the honest smaller reachable input (J4-529/531 pattern). After this,
+-- base-witness domination #1 is discharged modulo ONLY the reach window. 1 of ~30–40 curved
+-- dominations. NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCPhaseTransfer.curvedRNC_phase_transfer
+#print axioms QIQTH.CurvedRNCPhaseTransfer.curvedRNC_phase_transfer_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
