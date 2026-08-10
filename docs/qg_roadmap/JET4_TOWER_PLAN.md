@@ -6260,3 +6260,27 @@ shared binder names D0/D1/hbnd/hII_hi/hFzero (reuse one per). Then J4-551 assemb
 fully_wired = curved_hDa_at_gate + curved_core_at_gate → curved_a1_R6_assembled + gauge bundle +
 curvedRNCMetric_hgauge + J4-536 hpkgBound, K:={0}. Largest remaining residual after = MemAdjHi/
 matched-sliver moment + convergence trio (both legs).
+
+## J4-550 — LEG-2 of the curved a₁ capstone wired at g^K (curved_core_at_gate) + shared-binder map [eb5a2900]
+CurvedA1Leg2Core.lean (2 std-3, budget raw 0 / 9827 jobs; ~28-51s elab; verified clean by rebuild
+reading #print axioms — no sorryAx; adversarial gate main-verified). Symmetric leg-2 adapter of J4-549.
+curved_core_at_gate: TruncatedDuhamelCore (curvedRNCMetric κ)(curvedRNCInv κ)(vanVleckGatedWitness …
+(constGate … c)a b) t = byte-for-byte the J4-548 capstone's `core` binder at g:=curvedRNCMetric κ.
+Body: discharge hinvF/hdg0; obtain ⟨hgi,hΓ⟩:=gauge_from_geometry; hLapFull:=J4-547 curved_leg2_
+hLapFull; exact truncatedDuhamelCore_AT_GATE_FULL (arg order verbatim from A1R6FromLabelledCurved).
+DISCHARGED: hgi/hΓ (gauge_from_geometry), hinvF/hdg0, hUpos, leg-2 hFzero, hLapFull (J4-547).
+★ SHARED-BINDER MAP (J4-551 assembly, bound once both legs consume): hII_hi:MemAdjHi, D0/D1/hbnd
+(√ε sliver), U/T/hUT, hK0, hframeK, hChr, hK, a/b/c, hAdomHeat, CAPPED hAdom2cap, hmeasLo/hmeasHi/
+hmeas2Lo, hPd2conv, wA/CA/wA2/CA2c, W2 diff-under-∫ census family, hQ1 — SAME types as J4-549 leg-1.
+★ ADVERSARIAL (main-verified): non-vacuous g^K; hgi/hΓ genuinely supplied (not conclusion); residuals
+satisfiable K<0 (hframeK→seed {0} RNC-normalization non-vacuous; hAdom2cap CAPPED true J4-537; hII_hi
+honest moment target not forcing Ric=0); Ric(0)=(n−1)Kδ≠0 preserved. No forced Ric=0/unsatisfiable.
+★★ BOTH LEGS now wired at g^K: leg 1 = J4-549 curved_hDa_at_gate, leg 2 = J4-550 curved_core_at_gate.
+HONEST: a₁=R/6 CONDITIONAL — removes hgi/hΓ/hinvF/hdg0 as binders; NOT unconditional; MemAdjHi/moment
++ convergence trio + measurability/window + SDW wiring (transportCoeff/htr) owed.
+J4-551 = ASSEMBLE curved_a1_R6_fully_wired: instantiate CurvedA1Assembled.curved_a1_R6_assembled at
+g:=curvedRNCMetric κ feeding hDa:=curved_hDa_at_gate (J4-549) + core:=curved_core_at_gate (J4-550),
+UNIFYING the shared binders (hII_hi/D0/D1/hbnd, W2 family, hK0/hframeK, numerics). Remaining capstone
+externals to supply: Section A/C params, hsrc, LABELLED hGauss (SDW), hpkgBound/hmemS0/hopenS0/hS1,
+hbdry, Sections G/H. Result = fully-wired curved-satisfiable a₁ two-jet with only physical/SDW/
+convergence residuals. ⚠ MONOLITH: SPLICE (feed the two leg terms), if >5min STOP+split.
