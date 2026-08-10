@@ -1566,3 +1566,9 @@ import QIQTH.LayerBChangeVars
 -- BLOCKED" note was stale); this file extracts the buried conjuncts as directly-consumable
 -- lemmas, reusing baseVaryingChart_hasFDerivAt_center. Dimension-only, curved-generic. std-3.
 import QIQTH.ChartW0Fderiv
+-- J4-519: CURVED-VALID hraw-channel rewire of the final facade a1_R6_from_labelled —
+-- a1_R6_from_labelled_curved swaps the step (vii) flat-only LINEAR hraw (GlobalGatedRawBound,
+-- curved-unsatisfiable) for the honest curved-VALID on-gate width-4/3 QUADRATIC hgate carry,
+-- routing hDa through the banked LabelledRethreadV2.hDaLimLU_from_hgate. Coefficient-neutral;
+-- removes ONE of the capstone's flat-only channels. NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.A1R6FromLabelledCurved

@@ -23086,6 +23086,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartW0Fderiv.chartW0_fderiv_zero
 #print axioms QIQTH.ChartW0Fderiv.chartW0_absdet_fderiv_zero
 
+-- J4-519 (A1R6FromLabelledCurved): the CURVED-VALID hraw-channel rewire of the a₁
+-- capstone — ONE of TWO flat-only binders REMOVED. a1_R6_from_labelled_curved =
+-- a verbatim copy of a1_R6_from_labelled with binder (vii) `hraw : GlobalGatedRawBound
+-- g gi H_G P` (LINEAR width-1, flat-only, curved-UNSATISFIABLE when T2≠0) SWAPPED for
+-- the curved-valid QUADRATIC on-gate carry hgate (|heatOp| ≤ P·(((r²/τ)²+r²/τ+1)·
+-- gaussDdim(4/3·τ))), routing hDa through LabelledRethreadV2.hDaLimLU_from_hgate instead
+-- of hDaLimLU_from_labelled. Same conclusion (the a₁ two-jet at the const-radius gate).
+-- ⚠ MONOLITH FEAR REFUTED: the ~280-binder capstone Π elaborates in 79s (existing) /
+-- 57.5s (curved variant) — NOT 50-100min; the capstone re-elaboration is CHEAP, so the
+-- other two swaps (hframeK, hBoundaryLim) are also tractable bricks. GATE: genuinely
+-- hraw-FREE (no GlobalGatedRawBound in the signature — the 4 grep hits are all prose);
+-- the swapped hgate carries the (r²/τ)² curvature term the true curved residual has,
+-- curved-inhabited (J4-362 satisfiable grading), coefficient-neutral (R/6 untouched in
+-- transportCoeff/htr). Don't-undercredit: the intermediate curved machinery
+-- (hDaLimLU_from_labelled_v2 / hEdom_vanVleck_of_hgate / hDaLimLU_from_hgate) was banked
+-- in J4-364; this is only the capstone-level wiring. std-3. ⚠ 1 of 3 removed (hraw);
+-- 2 remain (hframeK still carried verbatim — banked swap gauge_from_pointwise not yet
+-- threaded; hBoundaryLim). NOT a₁=R/6 (CONDITIONAL + effectively flat-only until hframeK
+-- + hBoundaryLim threaded + iterE continuity + htr/hGauss bridges + a genuine RNC witness).
+#print axioms QIQTH.A1R6FromLabelledCurved.a1_R6_from_labelled_curved
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
