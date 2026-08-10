@@ -1721,3 +1721,5 @@ import QIQTH.CurvedA1ClassBMeas6
 import QIQTH.CurvedA1ClassBMeas7
 import QIQTH.CurvedA1ClassBMeas8
 import QIQTH.CurvedA1ClassBFint
+
+import QIQTH.CurvedA1FintAdomSource

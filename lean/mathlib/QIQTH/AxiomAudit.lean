@@ -23829,6 +23829,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBFint.curved_hFint_d_at_gate
 #print axioms QIQTH.CurvedA1ClassBFint.curved_hFint_at_gate_curved_satisfiable
 
+-- J4-569 (CurvedA1FintAdomSource): SOURCE the last non-measurability carry of hFint — its per-m CAPPED
+-- first-derivative Gaussian domination hAdom — from a NAMED crude first-derivative envelope + banked
+-- ε-absorption arithmetic. sqrt_crude_to_capped = the τ^{-1/2} ε-absorption (first-derivative sibling of
+-- gaussDdim_crude_to_capped's τ^{-1}): whole-time Ccrude·(√τ)⁻¹·gaussDdim(wL·τ)(0−z) on (0,Tc] ⟶ capped
+-- (Ccrude·(√εₘ)⁻¹)·gaussDdim on [εₘ,Tc]. curved_hFint_hAdom_at_gate = the EXACT hAdom binder of
+-- curved_hFint_at_gate at g^K, CA m=Ccrude·(√(epsSeq m))⁻¹ (DEPENDS on m ≈ εₘ^{-1/2}; a single m-free CA
+-- = the FALSE clean bound, τ^{-1/2} blow-up at τ→0). curved_hFint_at_gate_via_crude = demonstrator: the
+-- hFint member re-derived with hAdom slot FILLED (binder plugs in verbatim). CARRIES {hcrude = the crude
+-- first-derivative geometric envelope, TRUE for g^K, banked-shape but no WideAmplitudeData.first_domination
+-- exists yet}. curved satisfiable (κ≠0∧n≥2 ⟹ Ric≠0). NOT a₁=R/6.
+#print axioms QIQTH.CurvedA1FintAdomSource.sqrt_crude_to_capped
+#print axioms QIQTH.CurvedA1FintAdomSource.curved_hFint_hAdom_at_gate
+#print axioms QIQTH.CurvedA1FintAdomSource.curved_hFint_at_gate_via_crude
+#print axioms QIQTH.CurvedA1FintAdomSource.curved_hFint_hAdom_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
