@@ -23681,6 +23681,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassB.curved_hmemS0_at_gate
 #print axioms QIQTH.CurvedA1ClassB.curved_hmemS0_at_gate_of_lt
 
+-- J4-559: the thinnest MEASURABILITY census member of curved_a1_R6_fully_wired at
+-- g^K=curvedRNCMetric κ (κ<0) — the frozen/moving witness-slice AEStronglyMeasurable
+-- hWmeas — discharged from the banked curved-witness supplier curvedRNC_hWmeas
+-- (via vanVleckGatedWitness_slice_aestronglyMeasurable). Carries the two lighter
+-- curvature-independent slots {hSm, hVmap}. NOT a₁=R/6 (hsrc/hOffCollarTail, the
+-- convergence trio, hmeasLo/hmeasHi/hmeas2Lo/hMeasFII/… all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas.curved_hWmeas_at_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

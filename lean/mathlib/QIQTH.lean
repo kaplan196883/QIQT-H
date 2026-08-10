@@ -1710,3 +1710,5 @@ import QIQTH.CurvedChartJets
 import QIQTH.CurvedCenterIdentities
 
 import QIQTH.CurvedChartJetsCollar
+
+import QIQTH.CurvedA1ClassBMeas
