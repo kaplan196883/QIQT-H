@@ -23889,6 +23889,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHFarSource.curved_hFint_hcrude_via_hFar_at_gate
 #print axioms QIQTH.CurvedA1FintHFarSource.curved_hFint_hFar_at_gate_curved_satisfiable
 
+-- J4-573 (CurvedA1FintHFirstEnvSource): SOURCING hcrude's ON-GATE chart-image first-jet two-term
+-- envelope hFirstEnv (the LAST analytic carrier on hcrude) for g^K. curved_hFint_hFirstEnv_at_gate =
+-- the EXACT hFirstEnv binder consumed by curved_hFint_hcrude_at_gate, SOURCED from the PROVED banked
+-- EXACT product-rule (Leibniz) decomposition CConvV2WitnessStar.witnessFieldDeriv_productRule + the
+-- Cauchy–Schwarz numerator bound CConvV2ChartComparison.numerator_le_radial_mul, with the honest
+-- Gaussian gradient factor √(rncRadialSq(W₀z)/τ) dominated by the integer two-term shape via √x≤1+x,
+-- and the UPPER near-isometry rncRadialSq(W₀z)≤2·rncRadialSq z bridging chart-image→base radius.
+-- A₀=√n·L·Ba/2+Bd·√T, A₁=√n·L·Ba. via_hFirstEnv_hFar = sourced hFirstEnv + J4-572-sourced hFar chained
+-- into curved_hFint_hcrude_at_gate ⟹ whole-space hcrude FULLY SOURCED modulo {hlam4, hdata-family}.
+-- Carried residual = hSopen/hgate0 (shared on-gate) + hdata (Jacobian L, amp Ba/Bd, UPPER near-isometry
+-- = sibling of J4-572's LOWER coercivity; two-sided ½·r≤r≤2·r; NOT provably false: z=0 both 0, flat
+-- W₀=id gives r≤2r). (√τ)⁻¹ kept VERBATIM (dropping/clean-constant = FALSE); _curved_satisfiable =
+-- Ric(0)≠0. a₁ CONDITIONAL: hlam4/hdata-family/hsrc/hOffCollarTail/convergence trio/hInnerCont remain. std-3.
+#print axioms QIQTH.CurvedA1FintHFirstEnvSource.curved_hFint_hFirstEnv_at_gate
+#print axioms QIQTH.CurvedA1FintHFirstEnvSource.curved_hFint_hcrude_via_hFirstEnv_hFar_at_gate
+#print axioms QIQTH.CurvedA1FintHFirstEnvSource.curved_hFint_hFirstEnv_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
