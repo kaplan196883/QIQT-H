@@ -6600,3 +6600,17 @@ needs τ-derivative-kernel joint-cont carry). + leviSeries hffro_meas/hfmov_meas
 curved bound); hFint/hFint_d (DEFER, IntervalIntegrable need domination). + trio + Class-A {hsrc,
 hOffCollarTail}. a₁=R/6 CONDITIONAL. J4-565 = hF'meas_d (deriv-first-factor supplier from
 sliceMeas_of_jointCont with Φ τ z := deriv (fun r => vanVleckGatedWitness … r 0 z) τ + joint-cont carry).
+
+## J4-565 (Section-G error-kernel-DERIVATIVE ∫z-slice measurability carrier hF'meas_d for g^K)
+CurvedA1ClassBMeas6.lean: `hFpmeas_d_slice` (geometry-generic supplier: ∀m,u∈U AESMeas
+(s ↦ ∫z deriv (fun r => vanVleckGatedWitness g gi … r 0 z) (u−s) · leviSeries … s z 0) on
+uIoc 0 (u−εₘ), via banked sliceMeas_of_jointCont with τ-derivative first factor, εₘ-floored Lo
+window) + `curved_hFpmeas_d_at_gate` (g^K instance = exact capstone hF'meas_d binder) +
+`_curved_satisfiable`. Carries {hUT,hεU,hFIIDerivCont,hBcont} — curvature-independent
+(τ-derivative-kernel joint continuity is the owed carry). std-3, budget raw 0, 9841 jobs.
+Adversarial gate verified by main (supplier PROVED via sliceMeas_of_jointCont not axiomatized;
+genuine AESMeas; R/6 untouched). MEASURABILITY CENSUS: 8 drained for g^K (hWmeas J4-559,
+hmeasLo/Hi/hmeas2Lo J4-562, hFmeas/hF'meas J4-563, hMeasFII J4-564, hF'meas_d J4-565). Remaining:
+hFmeas_d (raw-witness Section-G, unconstrained shift cc — harder), leviSeries hffro_meas/hfmov_meas.
++ DEFER hInnerCont (curved bound), hFint/hFint_d (IntervalIntegrable need domination). + trio +
+Class-A {hsrc, hOffCollarTail}. a₁=R/6 CONDITIONAL. J4-566 = hFmeas_d OR leviSeries hffro_meas/hfmov_meas.
