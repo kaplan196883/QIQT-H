@@ -6631,3 +6631,21 @@ full-window uIoc+Ioo_ae_eq_Ioc) remains open on the measurability side. + DEFER 
 bound), hFint/hFint_d (domination). + convergence trio + Class-A {hsrc, hOffCollarTail}. a₁=R/6
 CONDITIONAL. J4-567 = hFmeas_d (last measurability carrier) OR PIVOT to domination-integrabilities
 hFint/hFint_d (reuse capped J4-530..537 lemmas) OR convergence trio OR hOffCollarTail/hsrc.
+
+## J4-567 (LAST measurability carrier hFmeas_d free-anchor Section-G for g^K — CENSUS COMPLETE)
+CurvedA1ClassBMeas8.lean: `curved_hFmeas_d_at_gate` (∀m,u∈U,cc AESMeas (s ↦ ∫z vanVleckGatedWitness
+g^K … (cc−s) 0 z · leviSeries … s z 0) on uIoc 0 (u−εₘ) — matches capstone hFmeas_d binder VERBATIM,
+FREE anchor cc) + `_curved_satisfiable`. STRUCTURAL FINDING: sliceMeas_of_jointCont CANNOT serve
+(cc free ⟹ shift cc−s on positive-measure set with τ≤0; εₘ-floor/null-endpoint trick fails; a
+Continuous carry = vacuity trap, witness singular at (0,0)). Banked InnerMeasFubini.hFmeas_concrete
+(engine gatedWitnessShift_joint_aesm gated-INDICATOR joint (s,z) lever + leviJoint + Fubini) is the
+ONLY surviving route. Carries {hKm,hSm0,hInner,hLeviJoint} = genuine MEASURABILITY (measurable off
+null singular set ⟹ AESMeas — honest not continuity; Sol-confirmed). Main verified: at-gate matches
+capstone verbatim; hFmeas_concrete + gatedWitnessShift_joint_aesm PROVED theorems (0 axioms in
+InnerMeasFubini.lean); carries satisfiable not vacuous; R/6 untouched. std-3, budget raw 0, 9843 jobs.
+★★ MEASURABILITY CENSUS COMPLETE for g^K — 11 carriers all discharged (J4-536/558/559/560/561/562/
+563/564/565/566/567). RESIDUAL now = HARDER analytic/geometric core: {hsrc (SDW transportCoeff C^∞),
+hOffCollarTail (off-collar Gaussian tail)} geometric + {convergence trio, hFint/hFint_d (need genuine
+Gaussian DOMINATION), hInnerCont (curved bound)} analytic — NOT more thin measurability bookkeeping.
+a₁=R/6 CONDITIONAL. J4-568 PIVOT = hFint/hFint_d domination (reuse capped J4-530..537 lemmas) OR
+convergence trio OR hOffCollarTail/hsrc OR honest TERMINAL WRITEUP.
