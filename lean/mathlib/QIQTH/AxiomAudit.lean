@@ -23371,6 +23371,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCBaseWitnessDomAdom.curvedRNC_baseWitness_dom_adom
 #print axioms QIQTH.CurvedRNCBaseWitnessDomAdom.curvedRNC_baseWitness_dom_adom_curved_satisfiable
 
+-- J4-536 (CurvedRNCHeatOpDomPkg): the CONCRETE curved heatOp DEFECT-KERNEL width-2 Gaussian domination
+-- for g^K = curvedRNCMetric K (K<0, Ric(0)=(n−1)Kδ≠0) on the singleton gate seed Kset={0} (RNC centre,
+-- the only base point where g^K=δ = hframeK's demand). curvedRNC_heatOp_dom_pkg delivers BOTH capstone
+-- binders at ONE gate (a,b,c): hpkgBound (Section C, all-t': |heatOp g^K gi^K (vanVleckGatedWitness …
+-- (constGate … c) a b) τ p q| ≤ (C·(1+t'))·baseKernelW 2 0 τ p q) AND hAdomHeat (Section G, frozen p=0
+-- window: |heatOp … τ 0 z| ≤ (C·(1+T))·gaussDdim(2τ)(0−z)). ROUTE: banked ConstRadiusGateExport.
+-- gatedWitnessN1_hEboundW_le_lin_CONST (concrete constant-radius width-2 defect bound), coefficient
+-- inputs discharged as in the flat _vanVleck_final (hCoeffU0_vanVleck + uniformCoeffLinear_bound), hgnd
+-- via curvedRNCMetric_det_pos (det g^K>0, K≤0) + isUnit_matToCLM_iff, gauge members from the banked
+-- curvedRNC bundle; hAdomHeat = p=0/q=z/t'=T slice via baseKernelW_zero_apply (baseKernelW 2 0=gaussDdim(2τ)).
+-- SATISFIABILITY: K<0 genuinely curved (…_curved_satisfiable re-exports Ric(0)_cc≠0 for K≠0, n≥2 ⟹ NOT
+-- secretly flat); non-vacuous (hChr/hw inhabited; a,b,c>0 from CONST). CARRIED residuals = ONLY the
+-- mainline hChr + hw; coeff bounds/nondeg discharged internally. Does NOT touch the hEbound G1/G2/G3
+-- trichotomy gap (the coefficient route bypasses it). Full a₁ still needs the rest of the heatOp/Levi/
+-- error-kernel pile + Duhamel assembly + coeff extraction. NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCHeatOpDomPkg.curvedRNC_heatOp_dom_pkg
+#print axioms QIQTH.CurvedRNCHeatOpDomPkg.curvedRNC_heatOp_dom_pkg_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
