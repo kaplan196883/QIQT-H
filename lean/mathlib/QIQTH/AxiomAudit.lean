@@ -23404,6 +23404,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCHeatOpDom2.curvedRNC_witnessSecondXDeriv_dom_crude
 #print axioms QIQTH.CurvedRNCHeatOpDom2.curvedRNC_witnessSecondXDeriv_dom_crude_curved_satisfiable
 
+-- J4-539 (DaLimLUCapped): the LEG-1 (Da-limit) LO-CAPPED integrability sub-assembly =
+-- the mirror of leg-2's CappedAdom2Audit.memLapFull_from_pairing_dominations. SCOPE VERDICT
+-- (Sol-confirmed): leg-1's clean hAdom2 factors IDENTICALLY to leg-2 — consumed at exactly one
+-- site (integrability_from_dominations) threading into the SAME pairing_intervalIntegrable LO/HI
+-- adjacency split; LO leg [0,u−ε_m] (τ∈[ε_m,u) bounded below) is CAPPABLE, HI leg [u−ε_m,u]
+-- (τ→0, ∫₀^ε τ⁻¹=+∞) carried as MemAdjHi. integrability_from_dominations_capped: drop-in for
+-- GlobalRawBoundFacade.integrability_from_dominations producing the identical 4-tuple census, but
+-- MemAdjLo built INTERNALLY from the per-m capped hAdom2cap (hII_lo_from_capped) — NO uncapped
+-- whole-time hAdom2 — and MemAdjHi carried verbatim as hII_hi; strip legs stay on hAdomHeat (no
+-- blow-up). Establishes LEG-1 IS CAPPABLE. NOT a₁=R/6 (the ~45-180-binder capped capstone
+-- hDaLimLU_from_labelled_capped is deferred to J4-540); a₁ stays CONDITIONAL + effectively
+-- FLAT-ONLY until leg-1 rewiring lands. std-3.
+#print axioms QIQTH.DaLimLUCapped.integrability_from_dominations_capped
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

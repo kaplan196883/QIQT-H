@@ -1641,3 +1641,10 @@ import QIQTH.CurvedRNCBaseWitnessDomCollar
 import QIQTH.CurvedRNCBaseWitnessDomAdom
 import QIQTH.CurvedRNCHeatOpDomPkg
 import QIQTH.CurvedRNCHeatOpDom2
+-- J4-539 (DaLimLUCapped): the LEG-1 LO-CAPPED integrability sub-assembly
+-- integrability_from_dominations_capped — leg-1 mirror of leg-2's memLapFull_from_pairing_dominations.
+-- Replaces integrability_from_dominations' FALSE uncapped hAdom2 with {per-m capped hAdom2cap} (LO leg
+-- built via CappedAdom2Audit.hII_lo_from_capped) + {carried hII_hi : MemAdjHi residual}; strips stay on
+-- uncapped hAdomHeat (heat operator, no τ⁻¹ blow-up). Drop-in for the eventual capped capstone. Sol-
+-- confirmed leg-1 factors identically to leg-2 through the pairing LO/HI split. NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.DaLimLUCapped
