@@ -6094,3 +6094,29 @@ heatKernel1D 0 y=0) + (ii) construct a concrete AmplitudeDerivativeData term for
 witness (discharging hD2Hexpand = chart-Jacobian + C⁴ geometric input, the LAST genuine HI-leg
 geometry) — new file QIQTH/AmplitudeDerivativeDataConcrete.lean; OR wrapper hDaLimLU_from_
 amplitudeData removing DaLimLUMemAdjHi's Cpair/hCpair/hGpow binders; OR mirror capped chain on leg-2.
+
+## J4-544 — leg-1 HI-leg endpoint carries hEndpoint+hAzero discharged; hD2Hexpand scoped to banked collar route [2d8e619f]
+AmplitudeDerivativeDataConcrete.lean (6 std-3, budget raw 0 / 9821 jobs; elaborated ~26s; verified
+clean by rebuild reading #print axioms — no sorryAx). Discharges the cheap endpoint carries of the
+leg-1 HI-leg hGpow pipeline + precisely scopes the remaining curved geometric input.
+PART A (endpoint carries DISCHARGED, curvature-independent measure-zero): gatedWitnessN1_eq_zero_of_
+nonpos (gated N=1 cutoff witness ≡0 at τ≤0 via gaussDdim vanishing); vanVleckGatedWitness_eq_zero_of_
+nonpos (discharges abstract hAzero carry ~10 assembly files); witnessSecondXDeriv_endpoint_zero
+(witnessSecondXDeriv i 0 z=0, inner slot zero fn → both pd vanish); hEndpoint_discharged (exact
+hGpow_of_amplitudeData hEndpoint binder, UNCONDITIONAL only n≥1); hGpow_of_amplitudeData_noEndpoint
+(hEndpoint removed + supplied internally); amplitudeData_concrete_residual_intro (records surviving
+hD2Hexpand carry, depends on NO axioms).
+PART B (hD2Hexpand = GENUINE WALL, precisely scoped): for curved witness the near-isometry error
+ratio bounded ONLY on the collar (off-collar hAampBdd fails). NO banked flat/generic UNRESTRICTED
+constructor — but the banked COLLAR variant DOES exist: AmplitudeDataOnCollar.AmplitudeDerivative
+DataOn + amplitudeDataOn_concrete discharges hD2HexpandOn from a chart-jet bundle hjets ⟹ remaining
+curved geometric input isolates to hjets (chart-jet C⁴/Jacobian).
+GATE: PART A curvature-independent endpoint (holds curved g^K K<0 + flat) — NOT curvature-carrying;
+curved content entirely in scoped hD2Hexpand (not claimed closed). HONEST: a₁=R/6 CONDITIONAL +
+FLAT-ONLY — hEndpoint/hAzero ≠ the coefficient; curved hD2Hexpand (→collar hjets) + capped leg-2
+hLapFull + convergence trio + Seeley-DeWitt wiring remain.
+J4-545 = thread hGpow_of_amplitudeData_noEndpoint + hAzero discharge (vanVleckGatedWitness_eq_zero_
+of_nonpos) into DaLimLUMemAdjHi/MemAdjHiSliver consumers (drop hAzero/hEndpoint binders there) THEN
+wire amplitudeDataOn_concrete (collar) into the hGpow pipeline via the collar-regime split,
+isolating hjets (chart-jet C⁴/Jacobian) as the single remaining curved geometric input. OR pivot to
+leg-2 hLapFull capped chain. OR convergence trio.
