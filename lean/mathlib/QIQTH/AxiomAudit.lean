@@ -23164,6 +23164,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HfgRadiusSelection.exists_fgRadius_of_local_continuousOn
 #print axioms QIQTH.HfgRadiusSelection.witness_exists_fgRadius
 
+-- J4-523 (CurvedRNCGaussWitness): a genuinely CURVED RNC witness for the hGauss geometric floor.
+-- curvedRNCMetric K x i j = δ_ij − (K/3)(‖x‖²δ_ij − x_i x_j) satisfies MetricGaussGauge EXACTLY
+-- (∀x, all orders — the correction tensor annihilates xʲ), inhabiting the Gauss-lemma floor with
+-- genuine curvature for the FIRST time beyond the flat metric (refuting "only flat inhabits hGauss";
+-- confMetric/quartic lookalikes FAIL the ∀x identity). hGaussGerm_curvedRNC feeds the capstone's
+-- labelled hGauss. curvedRNCMetric_ricci_trace: the metric-Hessian trace ∑_a ∂c∂d g_aa(0) =
+-- −(2/3)(n−1)K δcd — EXACTLY the htr=−(2/3)Ric datum (rnc_htr_of_gauge) — with …_diag_ne proving it
+-- ≠0 for K≠0, n≥2, so Ric(0)=(n−1)Kδ≠0: the witness is NOT secretly flat. GATE: genuine RNC coords
+-- (radial Gauss exact), not confMetric. Inhabits the GEOMETRIC slice only — the full ~280-binder
+-- capstone antecedent (measurability/Levi/gate analytic piles) is NOT thereby non-vacuous. std-3.
+-- NOT a₁=R/6 (CONDITIONAL: the analytic antecedent + arbitrary-metric exp-map hGauss remain).
+#print axioms QIQTH.CurvedRNCGaussWitness.metricGaussGauge_curvedRNC
+#print axioms QIQTH.CurvedRNCGaussWitness.hGaussGerm_curvedRNC
+#print axioms QIQTH.CurvedRNCGaussWitness.curvedRNCMetric_ricci_trace
+#print axioms QIQTH.CurvedRNCGaussWitness.curvedRNCMetric_ricci_trace_diag_ne
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

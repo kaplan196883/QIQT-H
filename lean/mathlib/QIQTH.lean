@@ -1589,3 +1589,12 @@ import QIQTH.A1R6FromLabelledCurvedGauge
 -- resolved from the signature — 3 of 3. NOT a₁=R/6 (CONDITIONAL: iterE positive-time continuity,
 -- htr/hGauss bridges, full RNC curved witness remain). std-3.
 import QIQTH.A1R6FromLabelledCurvedBoundary
+
+-- J4-523: a genuinely CURVED RNC witness for the hGauss geometric floor. curvedRNCMetric K
+-- x i j = δ_ij − (K/3)(‖x‖²δ_ij − x_i x_j) satisfies MetricGaussGauge EXACTLY (∀x, all orders)
+-- — the first curved inhabitant of the Gauss-lemma floor beyond the flat metric — and feeds the
+-- capstone's labelled hGauss germ. Its metric-Hessian trace ∑_a ∂∂g_aa(0) = −(2/3)(n−1)K δ (the
+-- htr=−(2/3)Ric datum) is ≠0 for K≠0, n≥2: genuinely curved (Ric(0)=(n−1)Kδ≠0), NOT a
+-- confMetric-lookalike (those fail hGauss). Inhabits the geometric slice only; the full ~280-binder
+-- capstone antecedent (analytic piles) is NOT thereby non-vacuous. NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.CurvedRNCGaussWitness
