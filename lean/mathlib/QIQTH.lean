@@ -489,6 +489,7 @@ import QIQTH.IterEEngineWiring
 import QIQTH.InnerEngineRecursion
 import QIQTH.ZeroCollarLocalZero
 import QIQTH.FrozenBaseWChain
+import QIQTH.HfgRadiusSelection
 import QIQTH.GapACoverGapB
 import QIQTH.HcontAssembly
 import QIQTH.GapASdomInstantiation

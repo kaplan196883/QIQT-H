@@ -23149,6 +23149,21 @@ namespace QIQTH.AxiomAudit
 -- hBoundaryLim_DONE, the htr/hGauss geometric bridges, and a full RNC curved witness all remain).
 #print axioms QIQTH.A1R6FromLabelledCurvedBoundary.a1_R6_from_labelled_curved_boundary
 
+-- J4-522 (HfgRadiusSelection): the hfgBundle RADIUS-SELECTION wiring. The boundary-chain hfgBundle
+-- carry demands, per base w∈K, an existential Rg with 0<Rg ∧ ContinuousOn E(·,·,w) on Icc s₁ s₂ ×ˢ
+-- closedBall w Rg ∧ (geometry) ∧ b+C_Dw·b·b<Rg. The joint continuity itself is BANKED at radius R<ρc
+-- (FrozenBaseWChain.heatOpWitness_fixedBase_active_chartFree, J4-293); the only gap was SELECTING an Rg
+-- below the chart C²-radius ρc and above the geometric floor b+C_Dw·b·b. exists_fgRadius_of_local_-
+-- continuousOn does that at the midpoint Rg=(max 0(b+C_Dw·b·b)+ρc)/2, EXPOSING the honest margin
+-- b+C_Dw·b·b<ρc (near-diagonal cutoff fits inside the chart region) — never hidden. witness_exists_-
+-- fgRadius = the concrete Levi-residual restatement. GATE: positive-time domain PRESERVED (no t=0
+-- claim), curved-generic (no g=δ). Don't-undercredit: the local continuity (D5/L3/D6/chartFree/Frozen-
+-- BaseWChain) + the change-of-variables iterE STEP (IterEContinuity) are already banked; this is the
+-- radius-selection plumbing only. std-3. NOT a₁=R/6 (hbase's ∀R>0 tail R≥ρc + the (R-dom) convolution
+-- dominations feeding the iterE induction remain).
+#print axioms QIQTH.HfgRadiusSelection.exists_fgRadius_of_local_continuousOn
+#print axioms QIQTH.HfgRadiusSelection.witness_exists_fgRadius
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
