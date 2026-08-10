@@ -6067,3 +6067,30 @@ J4-543 = construct hGpow for the concrete convolved kernel (moment-cancellation 
 ·F|≤Cpair·(u−s)^{-1/2} from ∫z ∂²G=0 + first-moment Taylor bound on F) — removes the last
 substantive HI-leg carry; new file QIQTH/MemAdjHiMomentBound.lean. OR mirror the J4-542 wire on
 leg-2's matched-sliver MemAdjHi to cap that leg symmetrically.
+
+## J4-543 — hGpow moment-cancellation constructed from honest geometric amplitude bundle [146820a4]
+MemAdjHiMomentBound.lean (2 std-3, budget raw 0 / 9820 jobs; elaborated ~31s; verified clean by
+rebuild reading #print axioms — no sorryAx). Constructs the leg-1 hGpow carry (J4-542's last
+substantive HI-leg residual) from honest geometric amplitude data — replaces abstract carry with
+geometric one.
+- slice2_inner_bound: generic per-slice inner bound (exposed hinner core of sliver2_bound):
+  |∫z D2H(u−s)·F s z 0|≤(L·(15/2·n)+3/4·M₁·C_F)·(u−s)^(−1/2)+M₂·C_F on Ioo(u−ε)u. 3 terms: Hessian
+  cancellation / odd first moment / mass one.
+- hGpow_of_amplitudeData: from data:∀i AmplitudeDerivativeData …, K₁/K₀+comparisons, window floor,
+  hEndpoint → ∃Cpair≥0 with EXACT hGpow type of MemAdjHiSliver.hII_hi_from_sliver. Route:
+  slice2_inner_bound → leviSecondPairing_le_invSqrt → hGpow_uIoc_of_Ioo_zeroEndpoint.
+★ ADVERSARIAL FINDING (Sol-confirmed): ∫z ∂²_xG=0 does NOT hold outright for the curved witness —
+the exact 2nd-moment cancellation (gaussian_hessian_cancel + gaussian_hessian_moment_zero) hits
+only the LEADING flat-Gaussian Hessian; curvature is ABSORBED into the bounded amplitudes
+Aamp/A1amp/A2amp (van-Vleck×chart-image×cutoff), carried via the 3-term decomposition hD2Hexpand.
+No curvature term dropped — it lives in the carried bundle. Genuinely true, curved-not-flat (Aamp≢1
+off-flat), non-vacuous. CLOSED: abstract hGpow now constructible from the geometric bundle.
+CARRIED: AmplitudeDerivativeData bundle (esp. hD2Hexpand), K₁/K₀+comparisons, hEndpoint. Generic
+in (g,gi); applies K<0. HONEST: a₁=R/6 CONDITIONAL + FLAT-ONLY — REDUCES not closes the wall;
+carried hD2Hexpand (chart-Jacobian + C⁴ geometry) + hEndpoint + capped leg-2 hLapFull + convergence
+trio + Seeley-DeWitt wiring remain.
+J4-544 = (i) discharge hEndpoint by proving witnessSecondXDeriv i 0 z=0 (gaussDdim 0≡0 for n≥1,
+heatKernel1D 0 y=0) + (ii) construct a concrete AmplitudeDerivativeData term for the van-Vleck
+witness (discharging hD2Hexpand = chart-Jacobian + C⁴ geometric input, the LAST genuine HI-leg
+geometry) — new file QIQTH/AmplitudeDerivativeDataConcrete.lean; OR wrapper hDaLimLU_from_
+amplitudeData removing DaLimLUMemAdjHi's Cpair/hCpair/hGpow binders; OR mirror capped chain on leg-2.
