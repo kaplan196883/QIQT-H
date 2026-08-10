@@ -1624,3 +1624,10 @@ import QIQTH.CurvedRNCGaugeBundle
 -- curvedRNCMetric_hgpos), the exact ∀v,0<det(g v) capstone binder. K<0 genuinely curved (Ric≠0). Completes the
 -- geometric-gauge half; ANALYTIC heat-kernel Gaussian dominations REMAIN. NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.CurvedRNCPosDef
+-- J4-527 (CurvedRNCWitnessMeas): the type-(iii) hWmeas/hWslice binders of a1_R6_from_labelled_curved_boundary,
+-- INSTANTIATED for the genuinely curved witness g^K=curvedRNCMetric K (K<0). Inner order-1 parametrix slice
+-- discharged END-TO-END from the curved smoothness bundle (curvedRNCMetric_contDiff/curvedRNCInv_contDiff/
+-- curvedRNCMetric_hgpos) at ∞ via vanVleck_witnessInner_continuous_ofGeom (no ω), composed with the base chart;
+-- fed with compactGate_measurableSet through the generic vanVleckGatedWitness_slice_aestronglyMeasurable.
+-- hWmeas/hWslice reduced to two curvature-independent carries {hSm, hVmap}. NOT a₁=R/6 (CONDITIONAL, flat-only). std-3.
+import QIQTH.CurvedRNCWitnessMeas

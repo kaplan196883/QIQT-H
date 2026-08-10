@@ -23227,6 +23227,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_det_pos
 #print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_hgpos
 
+-- J4-527 (CurvedRNCWitnessMeas): the type-(iii) hWmeas/hWslice measurability binders of
+-- a1_R6_from_labelled_curved_boundary, INSTANTIATED for the genuinely curved witness g^K=curvedRNCMetric K (K<0,
+-- Ric(0)=(n−1)Kδ≠0, NOT secretly flat). curvedRNC_hIn_from_geometry: the inner order-1 parametrix slice
+-- z↦globalCutoffParametrixWitnessN 1 (vanVleck g^K)… is AEStronglyMeasurable, discharged end-to-end from the
+-- curved smoothness bundle {curvedRNCMetric_contDiff, curvedRNCInv_contDiff, curvedRNCMetric_hgpos} — the
+-- hu→hw→parametrix→continuity chain closed at ∞ (never ω) via vanVleck_witnessInner_continuous_ofGeom, composed
+-- with the base-chart pullback (Continuous.comp_aestronglyMeasurable), residual carry hVmap only.
+-- curvedRNC_hWmeas/curvedRNC_hWslice: the EXACT hWmeas/hWslice binders, via compactGate_measurableSet (bound
+-- compactness) + the generic vanVleckGatedWitness_slice_aestronglyMeasurable; reduced to two curvature-independent
+-- carries {hSm, hVmap}. Closing them does NOT derive the coefficient — the curved heatOp/Levi Gaussian
+-- dominations remain the wall. NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCWitnessMeas.curvedRNC_hIn_from_geometry
+#print axioms QIQTH.CurvedRNCWitnessMeas.curvedRNC_hWmeas
+#print axioms QIQTH.CurvedRNCWitnessMeas.curvedRNC_hWslice
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
