@@ -23290,6 +23290,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_vanVleck_pos
 #print axioms QIQTH.CurvedRNCVanVleckBound.curvedRNCMetric_vanVleck_le_one
 
+-- J4-531: the FIRST curved base-witness Gaussian domination (modulo the carried phase input).
+-- sqrt_inv_rpow_half = the amplitude algebra ((√d)⁻¹)^(−1/2)=d^(1/4); curvedRNCMetric_cutoff_amp_le =
+-- the DISCHARGED amplitude+cutoff factor radialCutoff·(vanVleck g^K)^(−1/2)≤((1−(K/3)b²)^(n−1))^(1/4)
+-- (near: J4-530 det upper bound det^(1/4); far: cutoff=0); curvedRNC_baseWitness_dom = ★ the FULL
+-- base-witness domination |vanVleckGatedWitness g^K …τ 0 z|≤(C_amp·C_u·C_φ)·gaussDdim(λτ)z, with the
+-- amplitude+cutoff factors DISCHARGED and ONLY the two genuinely-geometric factors carried: hMod (the
+-- transport-coefficient modulus |∑ₖ uₖ(w)τᵏ|≤C_u) and hPhase (the Gaussian-phase transfer
+-- gaussDdim τ w≤C_φ·gaussDdim(λτ)z). SATISFIABILITY: K<0 genuinely curved (Ric(0)=(n−1)Kδ≠0), C_amp
+-- finite, RHS genuinely dominates; hMod/hPhase satisfiable-not-contradictory (positive time window ⟹
+-- compactness/near-isometry). 1 of ~30–40 curved dominations, leans on a carried geometric reach input.
+-- NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCBaseWitnessDom.sqrt_inv_rpow_half
+#print axioms QIQTH.CurvedRNCBaseWitnessDom.curvedRNCMetric_cutoff_amp_le
+#print axioms QIQTH.CurvedRNCBaseWitnessDom.curvedRNC_baseWitness_dom
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
