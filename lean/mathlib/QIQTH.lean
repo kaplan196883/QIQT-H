@@ -1559,3 +1559,10 @@ import QIQTH.LayerAFactorization
 -- mass 2^{n/2}), NOT the exact CoV/unit mass. Discharges the integrability side of the
 -- concrete hcov; M1–M4 + exact CoV equality + assembly remain. Curved-satisfiable. std-3.
 import QIQTH.LayerBChangeVars
+
+-- J4-516: M4 (|det DW₀(0)| = 1) as STANDALONE pinnable lemmas — chartW0_hasFDerivAt_zero
+-- (fderiv W₀ 0 = -id) + chartW0_fderiv_zero + chartW0_absdet_fderiv_zero. DON'T-UNDERCREDIT:
+-- M4 was already banked inside BaseVaryingIFTPackage / EnrichedChartBundle (the J4-515 "M4
+-- BLOCKED" note was stale); this file extracts the buried conjuncts as directly-consumable
+-- lemmas, reusing baseVaryingChart_hasFDerivAt_center. Dimension-only, curved-generic. std-3.
+import QIQTH.ChartW0Fderiv

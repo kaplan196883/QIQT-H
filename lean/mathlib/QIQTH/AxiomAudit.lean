@@ -23063,6 +23063,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LayerBChangeVars.gaussDdim_chartW0_le_wide
 #print axioms QIQTH.LayerBChangeVars.phase_domination_curved_satisfiable
 
+-- J4-516 (ChartW0Fderiv): M4 |det DW₀(0)|=1 — standalone extraction; ⚠ M4 was
+-- NEVER BLOCKED (the J4-515 "unbanked base-point fderiv" premise was STALE).
+-- chartW0_hasFDerivAt_zero: HasFDerivAt (z↦uniformInverseChart g gi hC hK z 0)
+-- (−ContinuousLinearMap.id) 0 (given hK compact, h0Kmem: K∈𝓝 0) — the displacement
+-- bound chartW0_displacement (‖W₀ z+z‖≤C_W‖z‖² for z∈K, ‖z‖<r₁) upgraded to
+-- ∀ᶠ z in 𝓝 0 via filter_upwards h0Kmem ⟹ ‖W₀ z+z‖=o(‖z‖). chartW0_fderiv_zero:
+-- fderiv ℝ W₀ 0 = −id. chartW0_absdet_fderiv_zero: |det(fderiv ℝ W₀ 0)|=1 (=|(-1)ⁿ|).
+-- ⚠ DON'T-UNDERCREDIT: this was ALREADY banked — baseVaryingChart_hasFDerivAt_center
+-- (J4-272) proves HasFDerivAt W₀ (−id) 0 unconditionally (K∈𝓝 0), and |det|=1 is a
+-- proven conjunct in EnrichedChartBundle.enrichedChartBundle:123. The ENTIRE concrete
+-- CoV (M1 within-deriv field, M2 InjOn, M3 left-inverse V, M4 unit Jacobian, image-nbhd,
+-- ContinuousOn V, the assembled approximate-identity limit) is ALREADY COMPLETE on the
+-- mainline (chartImage_approx_identity_v3, J4-272→279 line), reducing the fixed-f carry
+-- list to just hGgate/hSupp (the ball/annulus gate split = obstruction (B)). The J4-515
+-- Layer-B Gaussian-phase majorant is a REDUNDANT/orphan branch that never checked this line.
+-- GATE: |det(−I)|=1 dimension-only, curved-generic (chartW0_displacement is g-generic, no
+-- hframeK); HasFDerivAt from a genuine nbhd (K∈𝓝 0), not compact-only-faked. std-3 all
+-- three. NOT a₁=R/6 (M4 was never the barrier; the real frontier = obstruction (B)
+-- hGgate/hSupp gate-annulus split; + the mechanical rethread + a curved witness). CONDITIONAL.
+#print axioms QIQTH.ChartW0Fderiv.chartW0_hasFDerivAt_zero
+#print axioms QIQTH.ChartW0Fderiv.chartW0_fderiv_zero
+#print axioms QIQTH.ChartW0Fderiv.chartW0_absdet_fderiv_zero
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
