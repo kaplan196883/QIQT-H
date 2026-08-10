@@ -1674,3 +1674,10 @@ import QIQTH.MemAdjHiMomentBound
 -- hGpow_of_amplitudeData_noEndpoint (hGpow_of_amplitudeData with hEndpoint supplied internally). PART B (hD2Hexpand
 -- curved carry) SCOPED not closed = amplitudeData_concrete_residual. NOT a₁=R/6 (still FLAT-ONLY/CONDITIONAL). std-3.
 import QIQTH.AmplitudeDerivativeDataConcrete
+-- J4-545: factor the hGpow closure into a ROUTE-AGNOSTIC boundary hGpow_from_innerWindow (from ANY per-slice
+-- open-window inner bound in the K₁(u−s)^{-1/2}+K₀ shape + 1≤n, produce the uIoc hGpow via leviSecondPairing_le_invSqrt
+-- ∘ hGpow_uIoc_of_Ioo_zeroEndpoint, τ=0 endpoint supplied internally from hEndpoint_discharged). Collar bundle CANNOT
+-- feed slice2_inner_bound (all-z full-space Hessian moment; collar shrinks with τ) — genuine gap SCOPED as
+-- collar_hGpow_residual (hOnCollar BANKED via amplitudeDataOn_concrete + hjets; hOffCollarTail = corrected off-collar
+-- tail, the surviving curved carry). NOT a₁=R/6 (still FLAT-ONLY/CONDITIONAL). std-3.
+import QIQTH.HGpowFromCollar

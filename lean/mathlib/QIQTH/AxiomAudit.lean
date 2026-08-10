@@ -23504,6 +23504,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmplitudeDerivativeDataConcrete.hGpow_of_amplitudeData_noEndpoint
 #print axioms QIQTH.AmplitudeDerivativeDataConcrete.amplitudeData_concrete_residual_intro
 
+-- J4-545: factor the hGpow closure into a ROUTE-AGNOSTIC boundary. hGpow_from_innerWindow = from ANY per-slice
+-- OPEN-window inner bound in the K₁(u−s)^{-1/2}+K₀ shape (all-z OR collar+split) + 1≤n, produce the uIoc hGpow via
+-- stage II: leviSecondPairing_le_invSqrt (m-uniform Cpair) ∘ hGpow_uIoc_of_Ioo_zeroEndpoint, with the τ=0 endpoint
+-- supplied INTERNALLY from hEndpoint_discharged (unconditional n≥1) — faithfully factors the 2nd half of
+-- hGpow_of_amplitudeData; the stable interface both routes must hit. The collar bundle AmplitudeDerivativeDataOn
+-- CANNOT feed slice2_inner_bound directly (consumption is all-z / full-space Hessian moment ∫(z_i²−2τ)/(4τ²)G=0,
+-- destroyed by the τ-shrinking collar truncation; collar-constant amp bounds FALSE off-collar) — a GENUINE analytic
+-- gap (Sol J4-545 confirmed), NOT a thin composition. collar_hGpow_residual SCOPES it (non-vacuous conjunction):
+-- hOnCollar (BANKED via amplitudeDataOn_concrete/sliverIntegrand_on_collar, input hjets) ∧ hOffCollarTail (the
+-- corrected off-collar Gaussian tail reconstituting the full-space moment = the SURVIVING curved HI-leg carry).
+-- NOT a₁=R/6: hOffCollarTail, hjets, capped leg-2 hLapFull, convergence trio, SDW wiring all remain; CONDITIONAL +
+-- FLAT-ONLY. std-3.
+#print axioms QIQTH.HGpowFromCollar.hGpow_from_innerWindow
+#print axioms QIQTH.HGpowFromCollar.collar_hGpow_residual_intro
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
