@@ -5673,3 +5673,24 @@ dominations (heatOp/Levi: hpkgBound/hAdomHeat/hAdom2/hDomB/dataLevi). Type-(iii)
 measurability (hWmeas/hWslice) curvature-independent, reduces via banked generic
 lemma vanVleckGatedWitness_slice_aestronglyMeasurable → heatParametrix_uncurry_
 measurable_from_geometry. J4-527 = instantiate hWmeas/hWslice for g^K.
+
+## J4-527 — hWmeas/hWslice for curved witness g^K (type-iii measurability) [e3f9f1e1]
+CurvedRNCWitnessMeas.lean (new, std-3, budget raw 0 / 9805 jobs). Instantiates the
+two curvature-INDEPENDENT measurability binders of the curved capstone for
+g^K = curvedRNCMetric K (K<0).
+- curvedRNC_hIn_from_geometry: inner order-1 parametrix slice, discharged from
+  {curvedRNCMetric_contDiff, curvedRNCInv_contDiff, curvedRNCMetric_hgpos} via
+  HuInftyRebase.vanVleck_witnessInner_continuous_ofGeom at C^∞ (never analytic hw)
+  + Continuous.comp_aestronglyMeasurable.
+- curvedRNC_hWmeas / curvedRNC_hWslice: EXACT hWmeas/hWslice binders (∀τ
+  AEStronglyMeasurable of vanVleckGatedWitness for g^K) via banked
+  WitnessMeasDeriv.vanVleckGatedWitness_slice_aestronglyMeasurable; MeasurableSet K
+  from compactGate_measurableSet.
+- Residual carries reduced to two strictly-lighter curvature-independent bookkeeping
+  facts: hSm (gate-set preimage measurable), hVmap (base-chart pullback z-ae-meas).
+- GATE: K=-1, n≥2 — Ric(0)=(n−1)Kδ≠0 genuinely curved, det g^K>0, non-vacuous.
+HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY. hWmeas/hWslice = type-(iii)
+curvature-independent bookkeeping; closing them ≠ deriving the coefficient. Remaining
+wall = ~30-40 curved heat-kernel Gaussian dominations (heatOp/Levi), untouched.
+J4-528 = discharge hSm + hVmap for g^K (curvature-independent) to make hWmeas
+self-contained, OR the FIRST genuine curved Gaussian domination (the crux wall).
