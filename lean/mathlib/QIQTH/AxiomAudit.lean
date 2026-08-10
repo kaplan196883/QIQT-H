@@ -23760,6 +23760,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBMeas5.curved_hMeasFII_at_gate
 #print axioms QIQTH.CurvedA1ClassBMeas5.curved_hMeasFII_at_gate_curved_satisfiable
 
+-- J4-565 (CurvedA1ClassBMeas6): the Section-G error-kernel-DERIVATIVE ∫z-slice MEASURABILITY carrier
+-- hF'meas_d of curved_a1_R6_fully_wired at g^K=curvedRNCMetric κ. The s-slice ae-strong-measurability
+-- of the error-kernel-DERIVATIVE·leviSeries pairing
+-- s ↦ ∫ z, deriv (fun r => vanVleckGatedWitness g^K gi^K … r 0 z) (u−s) · leviSeries … s z 0 on the
+-- Lo window uIoc 0 (u−εₘ) (τ-derivative of the raw gated witness as first factor; τ=u−s∈[εₘ,u)⊆(0,T]
+-- so the Fubini core applies directly, no null-endpoint transfer), from the banked geometry-generic
+-- Fubini core SliceMeasurability.sliceMeas_of_jointCont, instantiated at the curved metric. CARRIES
+-- the four curvature-independent analytic carries {hUT, hεU, hFIIDerivCont, hBcont} (positive-time-strip
+-- joint continuity of the τ-derivative kernel + Levi factor + window bounds) honestly. NOT a₁=R/6
+-- (hsrc/hOffCollarTail, the convergence trio, the interval-integrability members hFint/hFint_d, the
+-- remaining Section-G carrier hFmeas_d, the leviSeries joint slices, and hInnerCont all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas6.hFpmeas_d_slice
+#print axioms QIQTH.CurvedA1ClassBMeas6.curved_hFpmeas_d_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas6.curved_hFpmeas_d_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

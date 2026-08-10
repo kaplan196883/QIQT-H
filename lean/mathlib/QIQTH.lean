@@ -1717,3 +1717,4 @@ import QIQTH.CurvedA1GateS1
 import QIQTH.CurvedA1ClassBMeas3
 import QIQTH.CurvedA1ClassBMeas4
 import QIQTH.CurvedA1ClassBMeas5
+import QIQTH.CurvedA1ClassBMeas6
