@@ -6044,3 +6044,26 @@ J4-542 = attack the carried MemAdjHi residual: the moment-aware/matched-sliver d
 for witnessSecondXDeriv (honest HI-leg integrability target, mirror leg-2's matched-sliver campaign)
 OR pivot to the leg-2 hLapFull capped capstone so both legs reach the same MemAdjHi residual frontier
 before tackling the ∫₀^ε τ⁻¹ sliver.
+
+## J4-542 — leg-1 MemAdjHi HI-leg residual DISCHARGED via banked matched-sliver (moment-cancellation carry) [968c6093]
+DaLimLUMemAdjHi.lean (1 std-3, budget raw 0 / 9819 jobs; elaborated 28s; verified clean by rebuild
+reading #print axioms — no sorryAx). Discharges the opaque MemAdjHi residual of the capped leg-1
+capstone (J4-541) — a cheap wire (already banked), not a wall.
+GREP FINDING: MemAdjHi for witnessSecondXDeriv already discharged by MemAdjHiSliver.hII_hi_from_
+sliver (returns exactly the hII_hi_res type) — reduces via intervalIntegrable_of_aesm_le (banked
+slice-AESM hmeas2Hi_slice + τ^{-1/2} dominator intervalIntegrable_invSqrt_sub, ∫₀^ε τ^{-1/2}=2√ε<∞)
+against the moment-improved carry hGpow.
+hDaLimLU_from_labelled_capped_memAdjHi: DaLimLUGoal … — same sig as hDaLimLU_from_labelled_capped
+MINUS the opaque hII_hi_res:MemAdjHi binder, PLUS honest carries hSecCont/hBcont (continuity/AESM),
+Cpair/hCpair (0≤Cpair), hGpow (τ^{-1/2} signed-integral bound). hεU derived in-file.
+CLOSED: opaque MemAdjHi binder. CARRIED: hGpow = τ^{-1/2} bound on the SIGNED z-integral of the
+2nd-deriv pairing. Genuinely TRUE (∫z ∂²_xG·F=O(1) as τ→0: leading τ⁻¹ cancels vs ∫z ∂²G=0 moment
+cancellation; (u−s)^{-1/2}≥ε₀^{-1/2}, Cpair=(sup|∫z…|)·ε₀^{1/2}). STRICTLY WEAKER than the false
+τ-uniform pointwise Gaussian bound — NOT the flat hole, NOT vacuous; concrete-kernel constructor
+for hGpow OWED (J4-543). Non-vacuous, no carry=conclusion (Sol-confirmed). HONEST: a₁=R/6
+CONDITIONAL + FLAT-ONLY — ≠ the coefficient; hGpow constructor + capped leg-2 hLapFull + convergence
+trio + Seeley-DeWitt wiring remain.
+J4-543 = construct hGpow for the concrete convolved kernel (moment-cancellation lemma |∫z ∂²_xG(u−s)
+·F|≤Cpair·(u−s)^{-1/2} from ∫z ∂²G=0 + first-moment Taylor bound on F) — removes the last
+substantive HI-leg carry; new file QIQTH/MemAdjHiMomentBound.lean. OR mirror the J4-542 wire on
+leg-2's matched-sliver MemAdjHi to cap that leg symmetrically.
