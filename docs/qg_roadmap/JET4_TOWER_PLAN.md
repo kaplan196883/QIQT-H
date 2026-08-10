@@ -6200,3 +6200,33 @@ leg-1 hDa from J4-541 hDaLimLU_from_labelled_capped — the FIRST genuinely curv
 capstone modulo {both-leg MemAdjHi/moment residuals, convergence trio, SDW geometric wiring}. ⚠
 MONOLITH: the capstone is a large Π — SPLICE (feed the two legs as the specific binders), do NOT
 re-elaborate whole; >5min STOP+split. OR attack the convergence trio.
+
+## J4-548 — ★★ FIRST curved-satisfiable, non-vacuous a₁ two-jet capstone (clean hAdom2 removed) [75567286]
+CurvedA1Assembled.lean (2 std-3, budget raw 0 / 9825 jobs; elaborated 26s thin no monolith; verified
+clean by rebuild reading #print axioms — no sorryAx; ADVERSARIAL GATE verified independently by main).
+The first a₁ two-jet capstone that is NOT flat-only — removes the clean whole-time 2nd-derivative bound
+hAdom2 (the sole binder J4-537/538 proved FALSE for g^K=curvedRNCMetric K, K<0), routing BOTH legs
+through caller-supplied capped outputs.
+curved_a1_R6_assembled: a₁ two-jet at the const-radius gate, conclusion identical to a1_R6_from_
+labelled_curved, coefficient (∑ᵢ ricci g gi i i 0)/6. Assembly: htr_adapter (SDW htr from hGauss) +
+a1_R6_slots_AT_GATE (3 per-gate slots, feeding LEG 1 hDa + LEG 2 core as EXTERNAL binders) +
+wide_a1_R6_core_AT_CONSTRADIUS.
+★ ADVERSARIAL GATE (agent + Sol + MAIN read of the statement): GENUINELY CURVED-SATISFIABLE, NON-
+VACUOUS. (i) clean hAdom2 (2nd-deriv, false) appears ONLY in header prose, NOT a binder; the hAdom
+present is the amplitude-witness domination (TRUE, J4-535), not the 2nd-deriv. (ii) LEG 1 hDa:
+DaLimLUGoal ← J4-541; LEG 2 core:TruncatedDuhamelCore ← J4-547 — both inhabited for g^K WITHOUT forcing
+Ric=0. (iii) coefficient (∑ᵢ ricci)/6 = n(n−1)K/6 ≠ 0 for g^K; curved_a1_R6_assembled_curved_
+satisfiable proves pd(pd(∑ₐ g^K_aa)c)c 0 ≠ 0 (curvedRNCMetric_ricci_trace_diag_ne). (iv) no binder
+:=True/vacuous/=conclusion. Sol: SATISFIABLE (hGauss+gauge does NOT force Ric=0), NON-VACUOUS, HONEST.
+Binder→supplier: hDa←J4-541, core←J4-547, gauge←J4-525 curvedRNC_geomGaugeBundle, hGauss→htr←
+curvedRNCMetric_hgauge, Ric pin←curvedRNCMetric_ricci_from_gauge, hpkgBound←J4-536.
+★★ MILESTONE: converts J4-538's "NO curved-satisfiable a₁ capstone exists" into a genuinely curved-
+satisfiable, non-vacuous a₁ capstone SHAPE. HONEST: a₁=R/6 CONDITIONAL — the capstone SHAPE with the
+flat-forcing binder removed + proven-nonzero curved coefficient; NOT unconditional a₁=R/6. Still
+carried: MemAdjHi/matched-sliver moment residuals + convergence trio (inside J4-541/547 suppliers),
+SDW geometric wiring (hGauss→htr/hsrc/transportCoeff), hDConv/hCConv analytic census. The legs enter
+as BINDERS here; the fully-wired end-to-end curved instantiation (discharging them at g^K) is NEXT.
+J4-549 = wire J4-541 hDa + J4-547 core into curved_a1_R6_assembled at g:=curvedRNCMetric K behind a
+single curved_a1_R6_fully_wired, shrinking the residual surface to {MemAdjHi/matched-sliver moment,
+convergence trio, transportCoeff/SDW}. OR discharge hGauss for g^K (bank the exact RNC Gauss-lemma
+=ᶠ[𝓝 0] fact) so htr is supplied-for-curved. OR the convergence trio.
