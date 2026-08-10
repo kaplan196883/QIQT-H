@@ -5814,3 +5814,28 @@ domination #1 modulo only the phase transfer; 1 of ~30-40; ≠ deriving the coef
 J4-533 = the phase-transfer hPhase itself (gaussDdim τ w≤C_φ·gaussDdim(λτ)z for g^K, THE
 irreducible geometric reach crux + last carried factor, via banked chartW0_rncRadialSq_error
 two-sided near-isometry squeeze) OR domination #2.
+
+## J4-533 — Gaussian-phase transfer hPhase for g^K, base-witness domination #1 complete on reach collar [7bdc2a81]
+CurvedRNCPhaseTransfer.lean (2 std-3, budget raw 0 / 9811 jobs; verified clean by rebuild
+reading #print axioms — no sorryAx). Discharges the LAST carried factor hPhase of
+curvedRNC_baseWitness_dom for g^K=curvedRNCMetric K (K<0), on the reachable collar.
+curvedRNC_phase_transfer: ∃r>0,∃Cφ>0,∃lam>0, ∀z∈Kset, ‖z‖<r, ∀τ∈(0,τmax],
+gaussDdim τ(uniformInverseChart g^K gi^K hChr hKset z 0) ≤ Cφ·gaussDdim(lam·τ)z, EXPLICIT
+Cφ=(√2)ⁿ, lam=2 — binder byte-for-byte the hPhase binder.
+- PHASE TRAP handled by the EXACT banked squeeze (NOT DW(0)=I): two-sided near-isometry
+  chartW0_rncRadialSq_error → chartW0_radialSq_half_lower gives (1/2)rncRadialSq z ≤
+  rncRadialSq(W₀z), fed to exp-free gaussDdim_le_of_norm_ge (near-isometry ⟹ widened
+  Gaussian), prefactor bookkept exactly ((√(1/2))⁻ⁿ=(√2)ⁿ). Exp-free route chosen to avoid
+  brittle exp-arg matching.
+- curvedRNC_phase_transfer_satisfiable: curved-not-flat inhabitation (W z=(4/5)z, c=4/5≠±1)
+  — genuine radial contraction, NOT secretly flat W₀z=z.
+GATE: K<0 curved (Ric(0)=(n−1)Kδ≠0), residual reach window ‖z‖<r (r>0, Kset∋0) inhabited-
+not-vacuous, Cφ/lam finite. HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — completes
+base-witness domination #1 of ~30-40 (modulo reach collar); full a₁ needs the whole heatOp/
+Levi pile + Duhamel assembly; ≠ deriving the coefficient.
+★ ALL 4 factors of base-witness domination #1 now closed for g^K: amplitude (J4-530) +
+cutoff (J4-531) + moduli hMod (J4-532) + phase hPhase (J4-533). Domination #1 = COMPLETE on
+the gated reach collar.
+J4-534 = base-witness domination #2 (N=2 parametrix term, Finset.range 3) OR discharge the
+reach-collar residual (collar = the trace domain the heatOp assembly integrates over) OR
+begin the heatOp/Levi domination pile (per agent rec).
