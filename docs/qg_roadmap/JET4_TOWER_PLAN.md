@@ -6151,3 +6151,27 @@ moment defect EXPLICIT — isolate ∫_{collar}(z_i²−2τ)/(4τ²)G_τ=−∫_
 hOffCollarTail obligation ⟹ turns hOffCollarTail into a concrete Gaussian-tail moment integral
 (gaussian_beats_power / exp(−c²/4) territory), the last step before hGpow_from_innerWindow. OR pivot
 to leg-2 hLapFull capped chain OR convergence trio.
+
+## J4-546 — concrete exp-suppressed off-collar tail moment (operational closure = banked matched estimate) [07eb9cb8]
+OffCollarTailMoment.lean (3 std-3, budget raw 0 / 9823 jobs; ~30s elab; verified clean by rebuild
+reading #print axioms — no sorryAx). Sharpens the leg-1 HI-leg off-collar tail moment from crude τ⁻¹
+to a concrete exp-in-c² suppressed integral.
+- gaussDdim_tail_le_scaled: gaussDdim τ z ≤ √2^n·exp(−R²/(8τ))·gaussDdim(2τ)z on ‖z‖>R (width split).
+- tailMoment_expSuppressed_bound: |SliverTailMatched.tailMoment i τ R|≤√2^n·exp(−R²/(8τ))·(2n+1)/(2τ).
+- tailMoment_collar_expSuppressed: |tailMoment i τ (c√τ)|≤√2^n·exp(−c²/8)·(2n+1)/(2τ) (τ-indep e^{−c²/8}).
+★ HONEST VERDICT (Sol-confirmed): tail machinery largely BANKED (SliverTailMatched J4-354 = Sol#13
+matched-pair: tailMoment, collarMoment_eq_neg_tail ∫_collar H=−T_τ, O(τ^{-1/2}) closure sliver_term1_
+on_collar_matched); its tailMoment_bound had crude τ⁻¹ + deferred the sharp poly(c)e^{−κc²} — THIS
+fills it. BUT for FIXED c the tail is STILL O(τ⁻¹); exp-suppression operational only under growing
+collar c=c(τ). ⟹ the OPERATIONAL leg-1 HI-leg term-1 closure is the banked sliver_term1_on_collar_
+matched, NOT this bare bound — this brick = sharp-tail quantitative INFRASTRUCTURE not the closure.
+GATE: non-vacuous; curvature in the adjacent multiplier A₀=q(0)=Aamp·F(0) via the banked matched
+pairing (true corrected tail, Gaussian decay retained, not flat shortcut). HONEST: a₁=R/6 CONDITIONAL
++ FLAT-ONLY — ≠ the coefficient; on-collar hjets + capped leg-2 hLapFull + convergence trio +
+Seeley-DeWitt wiring remain.
+★ PIVOT DECISION: leg-1 HI-leg consumed J4-542..546 (5 bricks); it is now well-characterized (matched
+estimate sliver_term1_on_collar_matched IS the operational closure, banked). PIVOTING to broaden.
+J4-547 = mirror the leg-1 capped chain (J4-539..541 pattern) onto LEG-2 hLapFull: the a₁ capstone
+takes an EXTERNALLY-supplied capped hLapFull:MemLapFull (Sol J4-538); build/wire it for the curved
+witness via CappedAdom2Audit.memLapFull_from_pairing_dominations (the leg-2 capped template) + the
+landed curved dominations — the symmetric other leg. OR the convergence trio.
