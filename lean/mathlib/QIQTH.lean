@@ -1681,3 +1681,10 @@ import QIQTH.AmplitudeDerivativeDataConcrete
 -- collar_hGpow_residual (hOnCollar BANKED via amplitudeDataOn_concrete + hjets; hOffCollarTail = corrected off-collar
 -- tail, the surviving curved carry). NOT a₁=R/6 (still FLAT-ONLY/CONDITIONAL). std-3.
 import QIQTH.HGpowFromCollar
+-- J4-546: make the leg-1 HI-leg hOffCollarTail a CONCRETE exponentially-suppressed Gaussian-tail moment integral
+-- (the sharp poly·e^{−c²/8} refinement DEFERRED by SliverTailMatched.tailMoment_bound). gaussDdim_tail_le_scaled =
+-- pointwise G_τ(z) ≤ (√2)ⁿ·e^{−R²/8τ}·G_{2τ}(z) on ‖z‖>R (banked width-split gaussDdim_eq_wide_mul +
+-- gaussDdimWide_eq_scaled_gaussDdim + norm_sq_le_rncRadialSq). tailMoment_expSuppressed_bound = |tailMoment i τ R| ≤
+-- (√2)ⁿ·e^{−R²/8τ}·(2n+1)/(2τ); collar R=c√τ ⟹ tailMoment_collar_expSuppressed = (√2)ⁿ·e^{−c²/8}·(2n+1)/(2τ). Still
+-- O(τ⁻¹) for fixed c (matched-pair sliver_term1_on_collar_matched is the real O(τ^{−1/2}) closure); NOT a₁=R/6. std-3.
+import QIQTH.OffCollarTailMoment

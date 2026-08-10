@@ -23519,6 +23519,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HGpowFromCollar.hGpow_from_innerWindow
 #print axioms QIQTH.HGpowFromCollar.collar_hGpow_residual_intro
 
+-- J4-546: hOffCollarTail made CONCRETE = the exp-suppressed off-collar Gaussian-tail moment integral, sharpening the
+-- poly·e^{−c²/8} refinement DEFERRED by SliverTailMatched.tailMoment_bound (crude |T_τ|≤τ⁻¹). gaussDdim_tail_le_scaled:
+-- pointwise G_τ(z) ≤ (√2)ⁿ·e^{−R²/8τ}·G_{2τ}(z) on the tail ‖z‖>R, from the BANKED width-split gaussDdim_eq_wide_mul
+-- (G_τ=e^{−r²/8τ}·G_wide) ∘ gaussDdimWide_eq_scaled_gaussDdim (G_wide=(√2)ⁿG_{2τ}) + R²≤‖z‖²≤rncRadialSq z
+-- (norm_sq_le_rncRadialSq). tailMoment_expSuppressed_bound: |tailMoment i τ R| ≤ (√2)ⁿ·e^{−R²/8τ}·(2n+1)/(2τ) via the
+-- G_{2τ} second moment ∫‖z‖²G_{2τ}≤4nτ (normPow_gauss_tau/oneD_absMoment2) + mass one. Collar R=c√τ collapses the
+-- exponent → tailMoment_collar_expSuppressed = (√2)ⁿ·e^{−c²/8}·(2n+1)/(2τ). ⚠ Still O(τ⁻¹) for fixed c — the genuine
+-- O(τ^{−1/2}) term-1 closure is the MATCHED pair sliver_term1_on_collar_matched (T_τ paired via collarMoment_eq_neg_tail);
+-- this brick only SHARPENS the bare tail. NOT a₁=R/6: hjets, capped leg-2 hLapFull, convergence trio, SDW wiring remain;
+-- CONDITIONAL + FLAT-ONLY. std-3.
+#print axioms QIQTH.OffCollarTailMoment.gaussDdim_tail_le_scaled
+#print axioms QIQTH.OffCollarTailMoment.tailMoment_expSuppressed_bound
+#print axioms QIQTH.OffCollarTailMoment.tailMoment_collar_expSuppressed
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
