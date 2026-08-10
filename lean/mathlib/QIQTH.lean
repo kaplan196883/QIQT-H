@@ -1619,3 +1619,8 @@ import QIQTH.GaussGaugeToHgauge
 -- (banked hg/hgsymm/hg0/hdg0/hGauss + new hgi/hgiC/hinvF/hΓ), K<0 genuinely curved. The ANALYTIC piles
 -- (heat-kernel Gaussian dominations, Levi series) + hgpos REMAIN. NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.CurvedRNCGaugeBundle
+-- J4-526 (CurvedRNCPosDef): hgpos for g^K. wᵀg^K(x)w = ‖w‖²+(K/3)(⟨x,w⟩²−‖x‖²‖w‖²) (curvedRNCMetric_quadForm);
+-- for K≤0 Cauchy–Schwarz ⇒ ≥‖w‖²>0 ⇒ g^K PosDef (curvedRNCMetric_posDef) ⇒ det g^K>0 (curvedRNCMetric_det_pos =
+-- curvedRNCMetric_hgpos), the exact ∀v,0<det(g v) capstone binder. K<0 genuinely curved (Ric≠0). Completes the
+-- geometric-gauge half; ANALYTIC heat-kernel Gaussian dominations REMAIN. NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.CurvedRNCPosDef

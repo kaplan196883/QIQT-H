@@ -23213,6 +23213,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNCMetric_christoffel_zero
 #print axioms QIQTH.CurvedRNCGaugeBundle.curvedRNC_geomGaugeBundle
 
+-- J4-526 (CurvedRNCPosDef): the LAST geometric-gauge member hgpos for g^K. The capstone binds
+-- hgpos : ∀ v, 0 < Matrix.det (g v). curvedRNCMetric_quadForm computes the quadratic form
+-- wᵀg^K(x)w = ‖w‖² + (K/3)(⟨x,w⟩² − ‖x‖²‖w‖²); for K≤0, Cauchy–Schwarz (⟨x,w⟩²≤‖x‖²‖w‖²) and K/3≤0 give
+-- wᵀg^K w ≥ ‖w‖² > 0 for w≠0, so g^K is PosDef (curvedRNCMetric_posDef) and det g^K > 0 via
+-- Matrix.PosDef.det_pos (curvedRNCMetric_det_pos; ∀v packaged as curvedRNCMetric_hgpos) — the exact hgpos
+-- binder. K<0 is genuinely curved (Ric(0)=(n−1)Kδ≠0) and lies in K≤0, so NOT secretly flat. This COMPLETES
+-- the geometric+gauge half of the antecedent for g^K. The ~30–40-estimate curved heat-kernel Gaussian
+-- dominations of heatOp REMAIN the sole analytic wall. NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_quadForm
+#print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_isHermitian
+#print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_posDef
+#print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_det_pos
+#print axioms QIQTH.CurvedRNCPosDef.curvedRNCMetric_hgpos
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
