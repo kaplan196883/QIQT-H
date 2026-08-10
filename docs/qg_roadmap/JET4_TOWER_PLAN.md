@@ -6483,3 +6483,19 @@ J4-558 = structural field-erasure: replace the ambient ∀x first-jet field in A
 =ᶠ[𝓝 0] form, routing hD2Hexpand through hD2HexpandOn_concrete_nhds — erases hGlobalJet from the LIVE
 bundle structures (not just the residue ledger). OR thinnest class-B (gate-package hmemS0/hopenS0,
 hPd2conv) OR hOffCollarTail OR hsrc.
+
+## J4-558 — Class-B census member hmemS0 discharged for g^K (gate-centre membership) [ad115a43]
+CurvedA1ClassB.lean (2 std-3, budget raw 0 / 9834 jobs; 29s elab; verified clean rebuild #print axioms
+no sorryAx). curved_hmemS0_at_gate / _of_lt: (0∈K)→0∈constGate(curvedRNCMetric κ)(curvedRNCInv κ)hChr
+hK c 0, via banked ConcreteGateInstantiation.hS0_concrete (φ_0 0=0 via uniformFlowExp_zero; constGate…
+c 0 = uniformFlowExp… 0 '' ball 0 c by defeq, pure interface rethread). ★ SIBLINGS NOT THIN: hopenS0/
+hS1 need chart-reach smallness c<δ₀ (gatedWitnessN1_hEboundW_le_lin_CONST via uniformInverseChart_
+huniformChart) — the capstone binder does not assume c<δ₀, so smallness-gated (⟹ could be discharged by
+instantiating the capstone with small gate c<δ₀, a legit base-point choice — deferred). ADVERSARIAL:
+non-vacuous g^K (κ<0, Ric≠0), genuine membership fact from banked geometry supplier, R/6 unaffected.
+HONEST: a₁=R/6 CONDITIONAL — shrinks Class-B by one binder; hsrc + hOffCollarTail + convergence trio +
+hopenS0/hS1(smallness) + measurability census remain.
+J4-559 = a measurability census member (hmeasLo/hmeasHi/hmeas2Lo or W2 hFmeas/hWmeas family) via the
+banked J4-527/528 machinery (vanVleckGatedWitness_slice_aestronglyMeasurable / heatParametrix_uncurry_
+measurable_from_geometry, no smallness needed) OR begin hsrc (ContDiff ℝ ∞ transportCoeff SDW source,
+genuine geometric input).
