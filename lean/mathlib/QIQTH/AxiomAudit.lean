@@ -23809,6 +23809,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBMeas8.curved_hFmeas_d_at_gate
 #print axioms QIQTH.CurvedA1ClassBMeas8.curved_hFmeas_d_at_gate_curved_satisfiable
 
+-- ★★ J4-568 (CurvedA1ClassBFint.lean, ns CurvedA1ClassBFint): the INTERVAL-INTEGRABILITY census
+-- carriers hFint / hFint_d of curved_a1_R6_fully_wired DISCHARGED at g^K (κ<0) via a genuine
+-- ε-FLOORED (capped) Gaussian domination — NOT the FALSE clean whole-time bound. The banked engine
+-- DaLimEasyTranche.pairing_intervalIntegrable demands a whole-time |A τ 0 z| ≤ CA·gaussDdim(wA τ);
+-- for A=witnessFieldDeriv (first spatial derivative) that clean bound is FALSE at g^K (τ^{-1/2}
+-- blow-up as τ→0, same pathology as hAdom2/CappedAdom2Audit D3). The window [0,u−εₘ] samples A only
+-- at τ=u−s≥εₘ, so pairing_intervalIntegrable_capped (the whole engine content: Gaussian-product ⟶
+-- s-uniform constant M=CA·CF·gaussDdim(min wA wF·u)0 via abLowerW+gaussDdim_zero_antitone ⟶
+-- Integrable.mono') demands only the CAPPED per-m bound (ε≤τ≤T), genuinely true for g^K (the
+-- τ^{-1/2} ≤ εₘ^{-1/2} absorbed into CA_m, exactly the landed hAdom2cap mechanism). curved_hFint_at_gate
+-- (A=witnessFieldDeriv) + curved_hFint_d_at_gate (A=vanVleckGatedWitness, raw order-0, whole-time bound
+-- also true) match the capstone binders EXACTLY. CARRIES {capped hAdom, hFdom(=hFdomW), hFzero (Levi
+-- nonpos-vanishing), hmeas (banked J4-562..567)} — same KIND of Gaussian-domination carries the census
+-- already runs on; the integrability ENGINE is DISCHARGED. curved satisfiable (κ≠0∧n≥2 ⟹ Ric≠0). NOT
+-- a₁=R/6 (hsrc/hOffCollarTail, convergence trio, hInnerCont remain).
+#print axioms QIQTH.CurvedA1ClassBFint.pairing_intervalIntegrable_capped
+#print axioms QIQTH.CurvedA1ClassBFint.curved_hFint_at_gate
+#print axioms QIQTH.CurvedA1ClassBFint.curved_hFint_d_at_gate
+#print axioms QIQTH.CurvedA1ClassBFint.curved_hFint_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
