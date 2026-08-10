@@ -5884,3 +5884,28 @@ one capstone binder pair (hAdom+hWDom); ≠ the coefficient; heatOp/Levi pile + 
 remain. J4-536 = heatOp defect-kernel hAdomHeat (|heatOp g^K witness τ 0 z|≤CA·gaussDdim(wA·τ)
 (0−z), witness Laplacian one lower τ-power) OR D2 Levi-series bound (|leviSeries (heatOp g gi H_G)
 τ p q|≤C_L(T)·baseKernelW 2 0 on (0,T], one-step input hEboundW_le landed) per J4-535 rec.
+
+## J4-536 — heatOp defect-kernel dominations hpkgBound + hAdomHeat for g^K (bypasses Levi gap) [392f30bc]
+CurvedRNCHeatOpDomPkg.lean (2 std-3, budget raw 0 / 9814 jobs; verified clean by rebuild
+reading #print axioms — no sorryAx). Closes TWO capstone heatOp defect-kernel domination
+binders at one gate for g^K=curvedRNCMetric K (K<0), bypassing the hEbound G1/G2/G3 Levi
+gap.
+curvedRNC_heatOp_dom_pkg: ∃a b C c, 0<a∧a<b∧0≤C∧b<c ∧
+  (∀t' τ p q, 0<τ→τ≤t'→ |heatOp g^K gi^K (vanVleckGatedWitness … (constGate … c)a b)τ p q|
+    ≤ (C·(1+t'))·baseKernelW 2 0 τ p q)  [hpkgBound §C]
+  ∧ (∀τ, 0<τ→τ≤T→ ∀z, |heatOp … τ 0 z|≤(C·(1+T))·gaussDdim(2τ)(0−z))  [hAdomHeat §G].
+ROUTE: ConstRadiusGateExport.gatedWitnessN1_hEboundW_le_lin_CONST already gives the CONCRETE
+constGate width-2 defect bound in the hpkgBound shape (never instantiated for the curved
+metric via the coefficient route — flat _vanVleck_final used the ∃-gate _lin); coefficient
+inputs discharge as in _vanVleck_final; gives width-2 DIRECTLY, BYPASSING the hEbound G1/G2/G3
+trichotomy. hAdomHeat = p=0 slice for free. CLOSED: hgnd (curvedRNCMetric_det_pos+
+isUnit_matToCLM_iff), both amplitude-coeff bounds (hCoeffU0_vanVleck+uniformCoeffLinear_bound),
+all gauge/frame (banked curved bundle; hframeK on {0}), the width-2 defect. CARRIED: only
+mainline-standard hChr (C^∞) + hw (all-k folded smoothness). hEbound gap NOT touched. GATE:
+K<0 curved (Ric(0)=(n−1)Kδ≠0, n≥2), Kset={0} restricts only frame-δ base points (metric curved
+everywhere), K<0=global-inverse range α≥1. Non-vacuous. HONEST: a₁=R/6 CONDITIONAL + FLAT-ONLY
+— 2 heatOp dominations closed; ≠ the coefficient; hAdom2/hEdom/hFdom/hgate + hEbound/hInt Levi
+convergence + Duhamel + extraction remain. J4-537 = hAdom2 (2nd-spatial-deriv amplitude Gaussian
+|witnessSecondXDeriv … i τ z|≤CA2·gaussDdim(wA2·τ)(0−z), geometric-route sibling of hAdom J4-535,
+light). ⚠ AVOID hFdom/hEbound (G1/G2/G3 gap); hEdom width-3/2<2 is NOT a trivial re-slice of the
+width-2 hpkgBound (hard Gaussian-width direction).
