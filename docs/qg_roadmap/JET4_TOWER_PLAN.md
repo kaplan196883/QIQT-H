@@ -5744,3 +5744,26 @@ Gaussian dominations (heatOp/Levi), UNTOUCHED. ★ Witness-measurability track n
 (modulo geometric reach). J4-530 = the FIRST genuine curved Gaussian domination (THE
 CRUX WALL — e.g. |heatOp g^K τ p q|≤C·gaussDdim(cτ)(p−q), consumed by hEboundFull/
 hEdom/hBdom), OR bank a K<0 Cartan–Hadamard reachability lemma (multi-session).
+
+## J4-530 — bounded van-Vleck amplitude factor for curved witness g^K (PARTIAL) [b6a07b91]
+CurvedRNCVanVleckBound.lean (new, std-3, budget raw 0 / 9808 jobs). The AMPLITUDE FACTOR
+of the FIRST base-witness Gaussian domination, for g^K = curvedRNCMetric K (K≤0).
+⚠ AGENT MALFUNCTIONED (repeated non-report 'waiting for build' completions, stopped via
+TaskStop); the file's FINAL state (mtime 17:34) is CLEAN — an earlier snapshot showed
+sorryAx (mid-edit), but the definitive rebuild confirmed all 5 decls std-3, no sorryAx.
+Main verified + banked directly (agent had correctly wired import+pins before dying).
+- curvedRNCMetric_det: EXACT van-Vleck det g^K(w)=(1−(K/3)‖w‖²)^(n−1) via rank-one
+  Matrix.det_one_add_replicateCol_mul_replicateRow (g^K=α·(1+vecMulVec((K/3/α)w)w),
+  α=1−(K/3)‖w‖², α+(K/3)‖w‖²=1).
+- curvedRNCMetric_alpha_ge_one/_det_ge_one/_det_le: two-sided det control K≤0
+  (1≤det g^K(w)≤(1−(K/3)M)^(n−1) on ‖w‖²≤M) — raw material for Θ^{±1/2}=det^{1/4}.
+- curvedRNCMetric_vanVleck_pos/_vanVleck_le_one: bounded factor 0<vanVleck g^K(w)≤1
+  for K≤0 (Θ∈(0,1]) — the amplitude input the domination consumes.
+HONEST SCOPE: closes ONLY the van-Vleck AMPLITUDE factor Θ∈(0,1]; does NOT close the
+full base-witness domination — the Gaussian-PHASE transfer gaussDdim τ(Vmap z 0)≤
+C·gaussDdim(λτ)z is an IRREDUCIBLE geometric reach input (not from DV(0)=I, not
+cheatable on a compact gate). Only the FIRST of ~30-40 curved heat-kernel Gaussian
+dominations. GATE: K<0 genuinely curved (Ric(0)=(n−1)Kδ≠0), det≢1 — not flat kernel.
+Non-vacuous. a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — one amplitude factor ≠ the
+coefficient. J4-531 = the Gaussian-PHASE transfer (genuinely-geometric core of the
+base-witness domination — hard, may need reach input) OR next amplitude/moduli binder.
