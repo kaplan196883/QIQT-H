@@ -6284,3 +6284,32 @@ UNIFYING the shared binders (hII_hi/D0/D1/hbnd, W2 family, hK0/hframeK, numerics
 externals to supply: Section A/C params, hsrc, LABELLED hGauss (SDW), hpkgBound/hmemS0/hopenS0/hS1,
 hbdry, Sections G/H. Result = fully-wired curved-satisfiable a₁ two-jet with only physical/SDW/
 convergence residuals. ⚠ MONOLITH: SPLICE (feed the two leg terms), if >5min STOP+split.
+
+## J4-551 — ★★ fully-wired curved a₁ two-jet at g^K (both legs + geometry discharged) + FINAL RESIDUAL MAP [4fbbc1a5]
+CurvedA1FullyWiredCapstone.lean (3 std-3, budget raw 0 / 9828 jobs; verified clean by rebuild reading
+#print axioms — no sorryAx; ★ADVERSARIAL GATE main-verified independently). The first assembled,
+genuinely-curved, std-3, sorry-free a₁ two-jet capstone threading BOTH capped-route legs + geometry
+discharge into one theorem, at g^K=curvedRNCMetric κ (κ<0).
+- curved_a1_R6_geomWired: curved_a1_R6_assembled at g:=curvedRNCMetric κ with 9 g/gi-geometry binders
+  discharged (curvedRNC_geomGaugeBundle J4-525; curvedRNCMetric_det_pos hgpos); hDa/core external.
+- curved_a1_R6_fully_wired: + LEG 1 hDa:=curved_hDa_at_gate (J4-549) + LEG 2 core:=curved_core_at_gate
+  (J4-550), shared binders unified. Conclusion coefficient (∑ᵢ ricci g^K i i 0)/6.
+- curved_a1_R6_fully_wired_curved_satisfiable: Ric(0)≠0.
+★ ADVERSARIAL (MAIN-VERIFIED, J4-509-critical): NON-VACUOUS. Clean hAdom2 ABSENT (only capped
+hAdom2cap CA2c:ℕ→ℝ). ⚠⚠ hframeK ∧ hmassone do NOT force Ric=0 here (KEY difference from J4-509):
+hframeK (∀q∈K, g^K q=δ) → FRAME SEED K={0} (RNC normalization); hmassone (∫z vanVleckGatedWitness …
+(constGate … c) … (epsSeq m) 0 z → 1) = the CONSTGATE(c)-mass heat-kernel normalization, a DIFFERENT
+set (radius-c ball c>0) from the frame seed {0}. In J4-509 the mass was gated by the SAME K → K
+measure-zero forced mass 0≠1 → Ric=0; HERE decoupled → both hold independently → non-vacuous.
+Coefficient n(n−1)κ/6≠0. Sol concurs.
+★ FINAL RESIDUAL MAP: (MemAdjHi/moment) hII_hi:MemAdjHi + √ε sliver dataAmp/τ₀/D0/D1/hbnd;
+(convergence trio) dataLevi + E-comb hDa_ec/hLap/hLapZ/hEZ/hLapS/hES + E₀E₁/hEdom/hIlo/hIhi + hPd2conv
++ hII_lo/hInter/hEcomb + boundary hBoundaryLim/hbdry + frozen/moving (hmass/hmassone/hmod/hsup/hUsub);
+(measurability/window) hmeas* + W2 family + capped Gaussian hAdom2cap/hAdomHeat/hFdomW + Section-G F2
+census + Section-H hCConv census + gate pkg hpkgBound/hmemS0/hopenS0/hS1 + raw hraw/P + window; (SDW)
+ONLY hsrc (hGauss/htr DISCHARGED); (frame) hframeK(→{0})/hChr/hK/hK0.
+HONEST: a₁=R/6 CONDITIONAL — holds for g^K GIVEN the residuals above (owed analytic/physical inputs);
+coefficient NOT unconditional. J4-551 = honest precisely-scoped statement of exactly what's owed.
+J4-552 = attack the MemAdjHi matched-sliver moment residual hII_hi (single shared, most-central,
+deepest analytic wall feeding BOTH legs — the √ε adjacency-sliver moment the capped route can't supply
+pointwise). 2nd choice = convergence-trio E-combination (DaTrunc/LapTrunc + MemECombine).
