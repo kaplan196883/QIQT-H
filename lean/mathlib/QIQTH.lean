@@ -1719,3 +1719,4 @@ import QIQTH.CurvedA1ClassBMeas4
 import QIQTH.CurvedA1ClassBMeas5
 import QIQTH.CurvedA1ClassBMeas6
 import QIQTH.CurvedA1ClassBMeas7
+import QIQTH.CurvedA1ClassBMeas8

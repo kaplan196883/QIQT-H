@@ -23791,6 +23791,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBMeas7.curved_hfmov_meas_at_gate
 #print axioms QIQTH.CurvedA1ClassBMeas7.curved_hffro_meas_at_gate_curved_satisfiable
 
+-- J4-567 (CurvedA1ClassBMeas8): the LAST open Section-G ∫z-slice MEASURABILITY carrier hFmeas_d of
+-- curved_a1_R6_fully_wired at g^K=curvedRNCMetric κ. The s-slice ae-strong-measurability of the
+-- RAW-witness·leviSeries pairing WITH AN UNCONSTRAINED (free) shift anchor cc
+-- s ↦ ∫ z, vanVleckGatedWitness g^K gi^K … (cc−s) 0 z · leviSeries … s z 0 on the εₘ-floored Lo
+-- window uIoc 0 (u−εₘ). UNLIKE hMeasFII/hF'meas_d the anchor cc is universally quantified and FREE,
+-- so the shift cc−s can land on a positive-measure set where τ≤0: sliceMeas_of_jointCont is NOT usable
+-- (a per-cc MapsTo ∀ cc, 0<cc−s≤T would be an unsatisfiable vacuity trap), and global Continuity would
+-- also be a trap (the witness is singular at (τ,z)=(0,0)). Instead discharged from the banked
+-- GATED-INDICATOR JOINT (s,z) lever InnerMeasFubini.gatedWitnessShift_joint_aesm, wrapped by the
+-- geometry-generic free-anchor supplier InnerMeasFubini.hFmeas_concrete, instantiated at the curved
+-- metric. CARRIES four curvature-independent measurability sub-carries {hKm, hSm0, hInner, hLeviJoint}
+-- (base gate measurable, spatial set-gate measurable, ungated inner parametrix joint measurability at
+-- the free shift, Levi-series joint measurability — all measurable-off-a-null-set, satisfiable, none
+-- the conclusion) honestly. This CLOSES the g^K measurability census. NOT a₁=R/6 (hsrc/hOffCollarTail,
+-- the convergence trio, the interval-integrability members hFint/hFint_d, and hInnerCont all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas8.curved_hFmeas_d_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas8.curved_hFmeas_d_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
