@@ -23618,6 +23618,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1AmplitudeData.curved_hII_hi_from_innerWindow
 #print axioms QIQTH.CurvedA1AmplitudeData.curved_amplitudeData_residual_intro
 
+-- J4-554 (CurvedChartJets): construct the chart-jet bundle `hjets` for the CURVED witness
+-- g^K = curvedRNCMetric κ and WIRE it into the J4-553 collar amplitude bundle. (i)
+-- curved_hjetsShape_of_pieces = curved instantiation of AmpGeometryBundle.hjets_assemble (HjetsShape at
+-- g^K IS the genuine conjunction of its 7 satisfiable parts). (ii) curved_hjets_at_gate = the
+-- whole-bundle hjets for g^K from a per-(τ,z) HjetsShape supplier (definitional). (iii)
+-- curved_amplitudeDataOn_from_hjetsShape = REWIRE: curved_amplitudeDataOn_at_gate fed the HjetsShape
+-- supplier, collapsing the on-collar chart-jet carry to the sharp AmpGeometryBundle census. (iv) the
+-- curved chart-jet residue ledger (global ∀x first jet + 3 general-base center identities = the OWED
+-- remainder; gate open/centre + near-0 first jet + general-base second jet + amplitude PdiffAt jets =
+-- banked at general base for g^K). Center identities are the normal-coordinate GAUGE (curvature-
+-- compatible, Ric≠0, NOT flat). NOT a₁=R/6 (hOffCollarTail + convergence trio + measurability + hsrc
+-- remain). std-3 (intro axiom-free).
+#print axioms QIQTH.CurvedChartJets.curved_hjetsShape_of_pieces
+#print axioms QIQTH.CurvedChartJets.curved_hjets_at_gate
+#print axioms QIQTH.CurvedChartJets.curved_amplitudeDataOn_from_hjetsShape
+#print axioms QIQTH.CurvedChartJets.curved_hjets_residual_intro
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

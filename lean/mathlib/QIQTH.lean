@@ -1702,3 +1702,5 @@ import QIQTH.CurvedA1FullyWiredCapstone
 import QIQTH.CurvedA1MemAdjHiWired
 
 import QIQTH.CurvedA1AmplitudeData
+
+import QIQTH.CurvedChartJets
