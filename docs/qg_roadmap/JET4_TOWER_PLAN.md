@@ -6366,3 +6366,31 @@ J4-554 = build the chart-jet bundle hjets for curvedRNCMetric κ (1st/2nd i-jets
 + amplitude jets of chartAmp + 3 center identities, from the banked C⁴ tower expMap_contDiffOn_four /
 RNC jets / curvedRNCMetric_contDiff) ⟹ collapse hOnCollar to elementary, leaving hOffCollarTail as the
 last HI-leg geometric wall. OR attack hOffCollarTail directly. OR pivot to the convergence trio.
+
+## J4-554 — chart-jet bundle hjets for g^K; mostly banked, owed = global ∀x jet + 3 general-base center identities [ffcf7c41]
+CurvedChartJets.lean (4 std-3, budget raw 0 / 9831 jobs; 28s elab; verified clean rebuild reading
+#print axioms — no sorryAx; adversarial main-verified). Constructs hjets for g^K=curvedRNCMetric κ
+(κ<0) that the J4-553 collar amplitude data consumes, with per-field banked-vs-owed census + REWIRE.
+- curved_hjets_at_gate: whole hjets bundle at constGate … cg (exact shape) from per-(τ,z)
+  AmpGeometryBundle.HjetsShape supplier.
+- curved_hjetsShape_of_pieces: HjetsShape at g^K = ⟨…⟩ of 7 parts (AmpGeometryBundle.hjets_assemble).
+- curved_amplitudeDataOn_from_hjetsShape: ★ REWIRE — feeds curved_hjets_at_gate into J4-553's
+  curved_amplitudeDataOn_at_gate ⟹ hOnCollar chart-jet carry collapsed to the scoped census.
+- curved_hjets_residual(_intro): general-base residue ledger (no axioms).
+★ PER-FIELD (grep-confirmed vs AmpGeometryBundle census): BANKED = openness+centre-membership, first
+i-jet near 0 (chartField_firstJet_nhds_of_contDiffAt), second i-jet at 0 Q (GeneralBaseJets.chartField
+_secondJet_general), amplitude jets hA1/hA2 (OnGateJets.ampField_pdiffAt, curved chart C²+det>0),
+centre-value-1 (rhoRatio_center), the 3 centre identities ∑V·P=zᵢ/∑P²=1/∑V·Q=0 AT BASE 0. OWED = the
+global ∀x first jet (chart C² only near image points) + the 3 centre identities at GENERAL base z
+(base-0 banked, general lift owed) = AmpGeometryBundle.hjets_residual_carries curved-labelled.
+ADVERSARIAL (main): non-vacuous g^K; discharged fields genuine chart facts; the 3 centre identities
+CURVATURE-COMPATIBLE (normal-coordinate/geodesic radial GAUGE g^K satisfies WITH Ric≠0, normalization
+not flatness); R/6≠0; banked/owed matches the pre-existing census — NO new soundness surface. HONEST:
+a₁=R/6 CONDITIONAL — SHARPENS/wires on-collar chart-jet geometry (opaque hjets → 4-item census, most
+banked); NOT unconditional; global ∀x jet + 3 general-base centre identities + hOffCollarTail +
+convergence trio + measurability census + hsrc owed.
+J4-555 = lift the general-base centre identities hVP/hPsq/hVQ for curvedRNCMetric κ (banked base-0
+chartField_firstJet_center / chartField_centerJet_term_vanishes_base0 → general base z via the exact
+geodesic radial gauge ∑ⱼ g_ij(x)xʲ=xᵢ, curvedRNCMetric_hgauge/metricGaussGauge_curvedRNC J4-523/524/
+525) — highest-leverage remaining chart-jet piece; the global ∀x first jet is the harder C⁴ remainder.
+OR hOffCollarTail. OR the convergence trio.
