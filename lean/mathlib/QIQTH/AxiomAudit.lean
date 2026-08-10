@@ -23700,6 +23700,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ClassBMeas2.curved_hopenS0_at_gate_of_lt
 #print axioms QIQTH.CurvedA1ClassBMeas2.curved_hopenS0_at_gate_curved_satisfiable
 
+-- J4-561: the const-radius GATE-PACKAGE member hS1 (HEmeasBorelAudit.tripleHEmeas of
+-- the gated van-Vleck witness at the literal constant-radius flow-ball gate constGate =
+-- fun z => φ_z '' ball 0 c) of curved_a1_R6_fully_wired at g^K=curvedRNCMetric κ (κ<0),
+-- discharged from the banked geometry-only supplier
+-- ConstRadiusGateExport.tripleHEmeas_AT_CONSTRADIUS_GATE. g/gi-geometry inputs = banked
+-- curved members {curvedRNCMetric_contDiff, curvedRNCInv_contDiff, curvedRNCMetric_hgpos}
+-- + their .continuous.measurable shadows (κ<0 via hκ.le). CARRIES the transport-coeff
+-- smoothness hu (the genuine hsrc-family geometric input) as a labelled hypothesis + the
+-- gate-smallness c<δ₀ as the conclusion's antecedent. NOT a₁=R/6 (hu/hsrc/hOffCollarTail,
+-- the convergence trio, and the rest of the census all remain).
+#print axioms QIQTH.CurvedA1GateS1.curved_hS1_at_gate
+#print axioms QIQTH.CurvedA1GateS1.curved_hS1_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

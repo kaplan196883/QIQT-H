@@ -1713,3 +1713,4 @@ import QIQTH.CurvedChartJetsCollar
 
 import QIQTH.CurvedA1ClassBMeas
 import QIQTH.CurvedA1ClassBMeas2
+import QIQTH.CurvedA1GateS1
