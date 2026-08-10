@@ -23607,6 +23607,17 @@ namespace QIQTH.AxiomAudit
 -- and the capstone with the opaque hII_hi binder DROPPED (supplied internally from the chain). std-3.
 #print axioms QIQTH.CurvedA1MemAdjHiWired.curved_a1_R6_fully_wired_hII
 
+-- J4-553 (CurvedA1AmplitudeData): concretize the CURVED HI-leg amplitude carry to the chart-jet
+-- bundle `hjets` + off-collar tail. (i) `curved_amplitudeDataOn_at_gate` = the CURVED collar amplitude
+-- bundle from `amplitudeDataOn_concrete` (← hjets + elementary); (ii) `curved_hII_hi_from_innerWindow`
+-- = the SOUND curved capstone `MemAdjHi` HI-leg, from the all-z moment carry `hinner_window` (TRUE,
+-- satisfiable) via `hGpow_from_innerWindow` → `hII_hi_from_sliver`, DELIBERATELY avoiding the (per
+-- J4-544) non-constructible whole-space `AmplitudeDerivativeData` — so no vacuous hypothesis; (iii)
+-- the residue ledger. Residual = hjets (chart-jet C⁴) + hOffCollarTail. NOT a₁=R/6. std-3.
+#print axioms QIQTH.CurvedA1AmplitudeData.curved_amplitudeDataOn_at_gate
+#print axioms QIQTH.CurvedA1AmplitudeData.curved_hII_hi_from_innerWindow
+#print axioms QIQTH.CurvedA1AmplitudeData.curved_amplitudeData_residual_intro
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
