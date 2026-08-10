@@ -6614,3 +6614,20 @@ hmeasLo/Hi/hmeas2Lo J4-562, hFmeas/hF'meas J4-563, hMeasFII J4-564, hF'meas_d J4
 hFmeas_d (raw-witness Section-G, unconstrained shift cc — harder), leviSeries hffro_meas/hfmov_meas.
 + DEFER hInnerCont (curved bound), hFint/hFint_d (IntervalIntegrable need domination). + trio +
 Class-A {hsrc, hOffCollarTail}. a₁=R/6 CONDITIONAL. J4-566 = hFmeas_d OR leviSeries hffro_meas/hfmov_meas.
+
+## J4-566 (leviSeries "frozen"/"moving" z-slice measurability carriers hffro_meas/hfmov_meas for g^K)
+CurvedA1ClassBMeas7.lean: STRUCTURAL FINDING — hffro_meas/hfmov_meas are POINTWISE-in-z
+AEStronglyMeasurable at a fixed time (leviSeries analogue of hWmeas J4-559), NOT ∫z-slices; and
+hfmov_meas m u = hffro_meas (u−epsSeq m), so ONE supplier serves both. `leviSlice_meas`
+(geometry-generic: ∀u AESMeas (fun z => leviSeries (heatOp g gi W) u z 0) volume, via banked
+Continuous.aestronglyMeasurable) + `curved_hffro_meas_at_gate` + `curved_hfmov_meas_at_gate`
+(g^K instances = exact capstone binders) + `_curved_satisfiable`. Single carry hLcont (spatial
+continuity of Levi slice ∀ time) — curvature-independent, lighter than J4-565. std-3, budget raw 0,
+9842 jobs. Adversarial gate verified by main (supplier PROVED via (hLcont u).aestronglyMeasurable
+not axiomatized; genuine AESMeas; R/6 untouched). MEASURABILITY CENSUS: 10 drained for g^K (hWmeas
+J4-559, hmeasLo/Hi/hmeas2Lo J4-562, hFmeas/hF'meas J4-563, hMeasFII J4-564, hF'meas_d J4-565,
+hffro_meas/hfmov_meas J4-566). ONLY hFmeas_d (unconstrained shift cc — needs MapsTo-per-shift or
+full-window uIoc+Ioo_ae_eq_Ioc) remains open on the measurability side. + DEFER hInnerCont (curved
+bound), hFint/hFint_d (domination). + convergence trio + Class-A {hsrc, hOffCollarTail}. a₁=R/6
+CONDITIONAL. J4-567 = hFmeas_d (last measurability carrier) OR PIVOT to domination-integrabilities
+hFint/hFint_d (reuse capped J4-530..537 lemmas) OR convergence trio OR hOffCollarTail/hsrc.
