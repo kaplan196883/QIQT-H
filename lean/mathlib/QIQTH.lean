@@ -1638,3 +1638,4 @@ import QIQTH.CurvedRNCBaseWitnessDom
 import QIQTH.CurvedRNCModuliBound
 import QIQTH.CurvedRNCPhaseTransfer
 import QIQTH.CurvedRNCBaseWitnessDomCollar
+import QIQTH.CurvedRNCBaseWitnessDomAdom

@@ -23352,6 +23352,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCBaseWitnessDomCollar.curvedRNC_baseWitness_dom_collar
 #print axioms QIQTH.CurvedRNCBaseWitnessDomCollar.curvedRNC_baseWitness_dom_collar_curved_satisfiable
 
+-- J4-535: curvedRNC_baseWitness_dom_adom = the BASE-POINT-VARYING lift of the J4-534 frozen (p=0)
+-- collar domination to the EXACT capstone binders hAdom + hWDom, for g^K=curvedRNCMetric K (K<0) on
+-- the constant-radius flow-ball gate constGate g^K gi^K hChr hKset c. vanVleckGatedWitness unfolds
+-- (ConvApproximants) to gatedKernel Kset (constGate…) (globalCutoffParametrixWitnessN 1 (vanVleck g^K)
+-- (transportCoeff (transportOp (vanVleck g^K) g^K gi^K)) a b (uniformInverseChart g^K gi^K hChr hKset));
+-- hAdom = the banked GENERIC recenter-of-domination exists_D1_constants_of_gateSqControl (ConcreteDominations),
+-- fed by (i) amplitude smoothness hw = ∀k ContDiff ⊤ (foldedCoeff …k) [CARRIED, mainline-standard van-Vleck
+-- coeff regularity] and (ii) a FULLY-DISCHARGED base-point-varying GateSqControl via gateSqControl_of_flowBall
+-- from uniformFlowExp_hdisp_ball (UNIFORM-over-Kset near-isometry 3/2·rncRadialSq(φ_q v−q)≤2·rncRadialSq v,
+-- ‖v‖<r₁) + uniformInverseChart_huniformChart germ (W_q(φ_q v)=v, ‖v‖<δ₀); gate radius c=min r₁ (δ₀/2)>0.
+-- hWDom = the frozen p=0 window slice of hAdom (gaussDdim_neg evenness: gaussDdim(3/2τ)(0−z)=gaussDdim(3/2τ)z;
+-- A₀+A₁τ≤A₀+A₁τ0fr on τ≤τ0fr), CW=(A₀+A₁τ0fr)·√(3/2)ⁿ, lam=3/2. GateSqControl fully discharged (NO
+-- collar/frozen restriction on q); SOLE carried residual = the amplitude smoothness hw. SATISFIABILITY:
+-- K<0 genuinely curved (…_curved_satisfiable re-exports the c=4/5≠±1 radial contraction ⟹ NOT flat W z=±z);
+-- non-vacuous (hChr inhabited: g^K smooth; radii r₁,δ₀>0 ⟹ c>0). Full a₁ still needs the heatOp/Levi/error-kernel
+-- pile + Duhamel assembly + coeff extraction. NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCBaseWitnessDomAdom.curvedRNC_baseWitness_dom_adom
+#print axioms QIQTH.CurvedRNCBaseWitnessDomAdom.curvedRNC_baseWitness_dom_adom_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
