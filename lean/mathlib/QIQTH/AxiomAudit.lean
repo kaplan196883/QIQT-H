@@ -23563,6 +23563,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1Assembled.curved_a1_R6_assembled
 #print axioms QIQTH.CurvedA1Assembled.curved_a1_R6_assembled_curved_satisfiable
 
+-- J4-549: curved_hDa_at_gate = LEG 1 (DaLimLUGoal) of the a₁ two-jet capstone WIRED at the genuinely-
+-- curved witness g^K = curvedRNCMetric κ (κ<0), from DaLimLUCappedStep3.hDaLimLU_from_labelled_capped
+-- (J4-541) with the two GLOBAL gauge inputs discharged from the curved lemmas (hinvF ← curvedRNCMetric_hinvF,
+-- hdg0 ← curvedRNCMetric_pd_zero). Its conclusion IS the capstone's hDa binder at g:=curvedRNCMetric κ,
+-- gi:=curvedRNCInv κ, S:=constGate…. Carried (honest, curved-satisfiable): hframeK (collapses the compact
+-- seed to {0}), the CAPPED hAdom2cap (true for g^K per J4-537; uncapped hAdom2 is FALSE for g^K), the
+-- matched-sliver MemAdjHi moment residual, measurabilities, Levi source data, GlobalGatedRawBound, hPd2conv,
+-- E-combination carries. NOT a₁=R/6: still CONDITIONAL (leg-2+capstone deferred to J4-550). std-3.
+#print axioms QIQTH.CurvedA1FullyWired.curved_hDa_at_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
