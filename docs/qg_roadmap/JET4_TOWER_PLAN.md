@@ -5719,3 +5719,28 @@ the coefficient. Remaining wall = ~30-40 curved heat-kernel Gaussian dominations
 (heatOp/Levi), untouched. J4-529 = discharge hVmapK (curved origin-chart reach
 exp^{g^K}_z(W_z 0)=0 over Kset via Cartan–Hadamard K<0 globality) → fully carry-free
 witness measurability, OR the FIRST genuine curved Gaussian domination (crux wall).
+
+## J4-529 — hVmapK discharged, g^K witness measurability CARRY-FREE [70f467e3]
+CurvedRNCChartReach.lean (new, std-3, budget raw 0 / 9807 jobs). Closes the last
+measurability carry hVmapK for g^K = curvedRNCMetric K (K<0), leaving only an explicit
+geometric reach input.
+- hVmapMeasK_zero_of_reach: the three origin side-conditions {hball,hnorm,hRI} of
+  FoldedCoeffChartMeas.hVmapMeasK_zero_of_geom collapse to a SINGLE reach input
+  ∀z∈K, ∃v, ‖v‖<ρ ∧ exp_z v=0 (banked left-inverse germ uniformInverseChart_
+  huniformChart gives W z 0 = v; hRI/hnorm/hball follow, ρ = min of 3 radii).
+- curvedRNC_hVmapK_of_reach: the g^K instance = exactly the hVmapK carry.
+- curvedRNC_hWmeas_carryFree / curvedRNC_hWslice_carryFree: witness-measurability
+  capstone with ZERO measurability carries (∃ρ>0, (reach over Kset) → ∃δ₀>0,
+  ∀c∈(0,δ₀), ∀τ AEStronglyMeasurable of the g^K witness slice).
+- HONEST residual: the reach is the K-uniform injectivity-radius reachability that
+  ExpRhoReachability (J4-485) audited GENUINE-INPUT — substrate exp/expRho are
+  arbitrary Classical.choose witnesses (no LSC), so g^K Cartan–Hadamard globality
+  is NOT exposed; reach carried, not banked. A GEOMETRY input, not measurability.
+- GATE: K<0, n≥2, Kset∋0 — Ric(0)=(n−1)Kδ≠0 curved; reach ∀z∈Kset (uniform ρ over
+  compact Kset), no flat/single-point collapse. Non-vacuous.
+HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY. Last curved-geometry measurability
+carry closed; ≠ deriving the coefficient. Remaining wall = ~30-40 curved heat-kernel
+Gaussian dominations (heatOp/Levi), UNTOUCHED. ★ Witness-measurability track now DONE
+(modulo geometric reach). J4-530 = the FIRST genuine curved Gaussian domination (THE
+CRUX WALL — e.g. |heatOp g^K τ p q|≤C·gaussDdim(cτ)(p−q), consumed by hEboundFull/
+hEdom/hBdom), OR bank a K<0 Cartan–Hadamard reachability lemma (multi-session).
