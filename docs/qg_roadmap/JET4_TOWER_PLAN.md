@@ -5694,3 +5694,28 @@ curvature-independent bookkeeping; closing them ≠ deriving the coefficient. Re
 wall = ~30-40 curved heat-kernel Gaussian dominations (heatOp/Levi), untouched.
 J4-528 = discharge hSm + hVmap for g^K (curvature-independent) to make hWmeas
 self-contained, OR the FIRST genuine curved Gaussian domination (the crux wall).
+
+## J4-528 — self-contained hWmeas/hWslice for g^K (hSm+hw discharged, hVmap lightened) [97e9ca4d]
+CurvedRNCWitnessMeasSC.lean (new, std-3, budget raw 0 / 9806 jobs). Strict reduction
+of J4-527's carry surface {hSm(raw), hVmap(full,∀p)} → {hVmapK(restrict,p=0)} + reach
+c<δ₀, for g^K = curvedRNCMetric K (K<0).
+- gatedKernel_slice_aemeas_ofRestricted_Kguard: reusable K-guard lever — full-volume
+  gated slice = (K∩{0∈S}).indicator ⟹ only the K-RESTRICTED gate graph needed
+  (banked Lusin–Souslin), never raw off-K set.
+- curvedRNC_hWmeas_sc / curvedRNC_hWslice_sc: ∃δ₀>0, ∀c∈(0,δ₀), ∀τ,
+  AEStronglyMeasurable of the g^K witness slice — ZERO hSm carry, NO hw carry.
+  hSm via ConcreteGateInstantiation.hKSmeas_concrete → B2MeasurabilityDissolution.
+  hSmeasSet_Krestricted (p=0); hw via HuInftyRebase.vanVleck_witnessInner_continuous_
+  ofGeom fed the C^∞ curved bundle {contDiff g, contDiff gi, hgpos} (⊤/analytic
+  unavailable for g^K).
+- SOLE remaining carry = hVmapK (single-point p=0, volume.restrict Kset) = the genuine
+  curved geometric residue (origin-chart reach exp^{g^K}_z(W_z 0)=0 over Kset), NOT
+  bookkeeping. FoldedCoeffChartMeas.hVmapMeasK_zero_of_geom.
+- GATE: K<0, Kset∋0, 0<c<δ₀ — Ric(0)=(n−1)Kδ≠0 genuinely curved, det g^K>0, δ₀>0
+  range nonempty. Non-vacuous.
+HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY. hSm/hw/hVmap = type-(iii)
+curvature-independent (or single-point geometric) measurability bookkeeping; ≠ deriving
+the coefficient. Remaining wall = ~30-40 curved heat-kernel Gaussian dominations
+(heatOp/Levi), untouched. J4-529 = discharge hVmapK (curved origin-chart reach
+exp^{g^K}_z(W_z 0)=0 over Kset via Cartan–Hadamard K<0 globality) → fully carry-free
+witness measurability, OR the FIRST genuine curved Gaussian domination (crux wall).
