@@ -6021,3 +6021,26 @@ concrete (line 524) → DaLimLUGoal = hDaLimLU_from_labelled_capped (the ~45-180
 ⚠ SPLICE thin (capped eCombine/source sub-assembly then concrete-gate discharge), NOT whole; check
 if hDaLimLU_concrete accepts capped legs without dragging uncapped hAdom2 back in (else report
 obstruction).
+
+## J4-541 — capped leg-1 capstone hDaLimLU_from_labelled_capped: false uncapped hAdom2 PURGED from leg-1 [0bff283b]
+DaLimLUCappedStep3.lean (1 std-3, budget raw 0 / 9818 jobs; elaborated 34s no monolith blowup;
+verified clean by rebuild reading #print axioms — no sorryAx). ★ DECISIVE: hDaLimLU_concrete
+(line-524 consumer) needs ONLY the 4-tuple + MemLapFull + gauge/frame as PLAIN binders — NO hAdom2
+binder, does NOT re-drag uncapped domination. Full hAdom2 trace in hDaLimLU_from_labelled = EXACTLY
+ONE site (line 497, integrability_from_dominations); NO second clean-hAdom2 site in leg-1.
+hDaLimLU_from_labelled_capped: DaLimLUGoal g gi (vanVleckGatedWitness …)(leviSeries (heatOp …)) U
+— identical conclusion to uncapped. Uncapped body verbatim + single-seam swap: step (v) calls
+DaLimLUCapped.integrability_from_dominations_capped (J4-539) with per-m capped hAdom2cap + carried
+hII_hi_res:MemAdjHi; unused hmeas2Hi dropped; all else byte-identical. CLOSED: false uncapped
+whole-time hAdom2 PURGED from leg-1's Da-limit assembly. CARRIED: hII_hi_res:MemAdjHi (HI-leg
+matched-sliver, ∫₀^ε τ⁻¹=+∞). Non-vacuous (hAdom2cap true for g^K J4-537; MemAdjHi genuine
+target≠conclusion; strip-leg inputs genuine heat-op facts). Generic in (g,gi). ★★ MILESTONE: leg-1
+FULLY re-plumbed off uncapped hAdom2 END-TO-END (capped integrability J4-539 → capped MemLapFull
+J4-540 → capped capstone J4-541); the J4-538 blocker DISMANTLED; remaining leg-1 residual = carried
+MemAdjHi. HONEST: a₁=R/6 CONDITIONAL + FLAT-ONLY — purges false hAdom2 from leg-1; ≠ the coefficient;
+carried MemAdjHi residuals (both legs) + capped leg-2 hLapFull + convergence trio + Seeley-DeWitt
+wiring remain.
+J4-542 = attack the carried MemAdjHi residual: the moment-aware/matched-sliver discharge of MemAdjHi
+for witnessSecondXDeriv (honest HI-leg integrability target, mirror leg-2's matched-sliver campaign)
+OR pivot to the leg-2 hLapFull capped capstone so both legs reach the same MemAdjHi residual frontier
+before tackling the ∫₀^ε τ⁻¹ sliver.
