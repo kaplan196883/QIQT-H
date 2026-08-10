@@ -6394,3 +6394,30 @@ chartField_firstJet_center / chartField_centerJet_term_vanishes_base0 → genera
 geodesic radial gauge ∑ⱼ g_ij(x)xʲ=xᵢ, curvedRNCMetric_hgauge/metricGaussGauge_curvedRNC J4-523/524/
 525) — highest-leverage remaining chart-jet piece; the global ∀x first jet is the harder C⁴ remainder.
 OR hOffCollarTail. OR the convergence trio.
+
+## J4-555 — curved radial-gauge (metric+inverse) + general-base center identities reduced to the pullback bridge [f26f7de8]
+CurvedCenterIdentities.lean (6 std-3, budget raw 0 / 9832 jobs; 26s elab; verified clean rebuild
+reading #print axioms — no sorryAx; adversarial main+Sol). Closes the metric-side radial gauge for
+g^K UNCONDITIONALLY (incl. new inverse-gauge content) + reduces the 3 general-base center identities
+to the geodesic pullback bridge ⟹ hjets owed residue shrinks to just the global ∀x first jet.
+- curvedRNCMetric_radialGauge: ∑ⱼ g^K_{ij}(y)yʲ=yᵢ (re-export metricGaussGauge_curvedRNC).
+- ★ curvedRNCInv_radialGauge (κ≤0): ∑ⱼ gi^K_{ij}(y)yʲ=yᵢ — NEW content from exact Sherman–Morrison
+  inverse (per-term split + inv_mul_cancel₀, mirrors curvedRNCMetric_hinvF).
+- curved_radialGauge_bundle; curved_centerIdentities_of_gaussPullback (the LIFT: hVP via metric gauge,
+  hPsq via g^K(0)=δ, hVQ via metric−inverse gauge = sub_self); curved_centerIdentities_at_gate;
+  curved_centerIdentities_discharge_residual (the 3 CENTRE fields of curved_hjets_residual PROVED given
+  the bridge ⟹ residue → hGlobalJet).
+★ HONEST SCOPING: the 3 center identities did NOT close from radial gauge alone — the .choose-built
+uniformInverseChart W_z is controlled only near image points, so its jets P,Q at ambient 0 for GENERAL
+base z = unbanked base-point (z-slot) chart regularity = the C⁴ remainder (blocker J3). Lift CONDITIONAL
+on the geodesic normal-chart pullback bridge (hpullVP/hpullPsq/hpullVQ), which the radial gauge closes.
+ADVERSARIAL (main+Sol): non-vacuous g^K (κ<0, Ric≠0, R/6≠0); CURVATURE-COMPATIBLE — inverse gauge uses
+exact (κ/3) cancellation α=1−(κ/3)‖y‖², NOT Ricci-flatness, FAILS for gi:=δ off origin (no flat
+shortcut; both gauges consumed, hVQ uses both). HONEST: a₁=R/6 CONDITIONAL — discharges the metric-side
+radial gauge unconditionally + reduces center identities to the pullback bridge; NOT unconditional;
+global ∀x first jet + hOffCollarTail + convergence trio + measurability census + hsrc remain.
+J4-556 = the global ∀x first jet hGlobalJet (base-point z-slot chart regularity of the .choose-built
+uniformInverseChart W_z — underpins the pullback bridge; the C⁴/C² remainder, blocker J3) OR
+hOffCollarTail OR the convergence trio. ⚠ hGlobalJet = genuine .choose-witness base-point-regularity
+frontier (ExpRhoReachability-style GENUINE-INPUT); may be un-bankable from the substrate — scope
+honestly.
