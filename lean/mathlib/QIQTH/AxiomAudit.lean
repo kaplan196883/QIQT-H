@@ -23674,6 +23674,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedChartJets.curved_collarFirstJet_banked
 #print axioms QIQTH.CurvedChartJets.curved_hjets_residual_collar_intro
 
+-- J4-558: the thinnest Class-B census member of curved_a1_R6_fully_wired at
+-- g^K=curvedRNCMetric κ (κ<0) — the gate-centre membership hmemS0 — discharged
+-- from the banked geometry-only hS0_concrete (φ_0 0=0 via uniformFlowExp_zero).
+-- Interface rethread; NOT a₁=R/6 (hopenS0 still needs c<δ₀, hS1/hsrc/… remain).
+#print axioms QIQTH.CurvedA1ClassB.curved_hmemS0_at_gate
+#print axioms QIQTH.CurvedA1ClassB.curved_hmemS0_at_gate_of_lt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

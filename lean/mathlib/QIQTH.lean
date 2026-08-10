@@ -1699,6 +1699,8 @@ import QIQTH.CurvedA1Leg2Core
 
 import QIQTH.CurvedA1FullyWiredCapstone
 
+import QIQTH.CurvedA1ClassB
+
 import QIQTH.CurvedA1MemAdjHiWired
 
 import QIQTH.CurvedA1AmplitudeData
