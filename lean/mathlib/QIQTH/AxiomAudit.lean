@@ -23689,6 +23689,17 @@ namespace QIQTH.AxiomAudit
 -- convergence trio, hmeasLo/hmeasHi/hmeas2Lo/hMeasFII/… all remain).
 #print axioms QIQTH.CurvedA1ClassBMeas.curved_hWmeas_at_gate
 
+-- J4-560: the next thinnest Class-B census member of curved_a1_R6_fully_wired at
+-- g^K=curvedRNCMetric κ (κ<0) — the gate-centre OPENNESS hopenS0 — discharged from
+-- the banked geometry-only gate-radius floor CompactTubeLemma.flowBall_gateRadius_floor
+-- (= ConcreteGateAssembly.reachableGate_concrete), taking base z=0. Needs only hChr+hK;
+-- κ unconstrained. Carries the honest gate-smallness 0<c<c₀ (chart reach). NOT a₁=R/6
+-- (hsrc/hOffCollarTail, the convergence trio, hS1/hmeasLo/hmeasHi/hmeas2Lo/hMeasFII/…
+-- all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas2.curved_hopenS0_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas2.curved_hopenS0_at_gate_of_lt
+#print axioms QIQTH.CurvedA1ClassBMeas2.curved_hopenS0_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
