@@ -23844,6 +23844,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintAdomSource.curved_hFint_at_gate_via_crude
 #print axioms QIQTH.CurvedA1FintAdomSource.curved_hFint_hAdom_at_gate_curved_satisfiable
 
+-- J4-570 (CurvedA1FintDAdomSource): SOURCE the hAdom carry of the SECOND census member
+-- (curved_hFint_d_at_gate, A = the RAW order-0 vanVleckGatedWitness) from a PROVED banked bound — the
+-- CLEANER sibling of J4-569. curved_hFint_d_hAdom_at_gate = the EXACT per-m CAPPED order-0 hAdom binder
+-- at g^K, sourced (∃ banked gate radius c, wA=lam, C=CW) from CurvedRNCBaseWitnessDomAdom.
+-- curvedRNC_baseWitness_dom_adom's frozen-p=0 window conjunct hWDom (whole-time |vanVleckGatedWitness …
+-- τ 0 z| ≤ CW·gaussDdim(lam·τ) z on (0,T]); capped binder = trivial restriction to epsSeq m ≤ τ (⟹ 0<τ),
+-- gaussDdim(lam·τ) z = gaussDdim(lam·τ)(0−z) by evenness (gaussDdim_neg). CA m := C is m-INDEPENDENT —
+-- the honest choice HERE (order-0 raw witness has NO τ→0 blow-up, whole-time bound genuinely holds),
+-- UNLIKE the first-derivative hFint case where a single m-free constant is the FALSE clean bound.
+-- curved_hFint_d_at_gate_via_source = demonstrator: hFint_d's IntervalIntegrable conclusion re-derived
+-- with hAdom slot FILLED (banked gate radius c, F-carries hFdom/hFzero/hmeas forwarded verbatim).
+-- Sole carried input = hw (mainline amplitude smoothness); NO crude envelope carried (order-0 base
+-- domination is genuinely BANKED). curved satisfiable (κ≠0∧n≥2 ⟹ Ric≠0). NOT a₁=R/6.
+#print axioms QIQTH.CurvedA1FintDAdomSource.curved_hFint_d_hAdom_at_gate
+#print axioms QIQTH.CurvedA1FintDAdomSource.curved_hFint_d_at_gate_via_source
+#print axioms QIQTH.CurvedA1FintDAdomSource.curved_hFint_d_hAdom_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
