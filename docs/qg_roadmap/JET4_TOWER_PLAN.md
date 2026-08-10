@@ -6551,3 +6551,37 @@ J4-562 = drain the next measurability carrier (s-slice ∫z convolution hmeasLo/
 SliceMeasurability.hmeas*_slice, OR Section-G hMeasFII/hFmeas_d via heatParametrix_uncurry_measurable_
 from_geometry + Fubini) OR bundle the full gate package into curved_constRadius_package_at_gate (needs
 ~14 curved inputs from curvedRNC_geomGaugeBundle — non-thin) OR hOffCollarTail/hsrc/convergence trio.
+
+## J4-562 (1ef68070) — Class-B s-slice ∫z measurability family for g^K
+CurvedA1ClassBMeas3.lean: three measurability census binders of `curved_a1_R6_fully_wired`
+instantiated at g^K = curvedRNCMetric κ (κ<0), each a literal application of banked
+`SliceMeasurability.{hmeasLo_slice,hmeasHi_slice,hmeas2Lo_slice}` (J4-383):
+`curved_hmeasLo_at_gate` (heatOp·leviSeries s-slice AESMeas on uIoc 0 (u−εₘ)),
+`curved_hmeasHi_at_gate` (Hi window uIoc (u−εₘ) u), `curved_hmeas2Lo_at_gate`
+(witnessSecondXDeriv·leviSeries per-i on uIoc 0 (u−εₘ)) + `_curved_satisfiable`
+(Ric(0)≠0, κ≠0∧n≥2). Carries {hUT,hεU,hHeatCont/hSecCont,hBcont} — curvature-independent
+window + joint-continuity analytic carries (mirrors J4-559 {hSm,hVmap}). std-3, budget raw 0,
+9838 jobs. Adversarial gate verified by main (genuine AESMeas from banked supplier, not True,
+not a₁ conclusion; R/6 untouched). MEASURABILITY CENSUS: 4 of ~10-12 drained for g^K
+(hWmeas J4-559 + this family). Remaining ~7-8: W2 hFmeas/hFint/hF'meas; Section-G
+hMeasFII/hFmeas_d/hFint_d/hF'meas_d; leviSeries hffro_meas/hfmov_meas; hInnerCont (needs
+genuine curved bound — deferred). a₁=R/6 CONDITIONAL: residual {hsrc,hOffCollarTail} + Class-B
+backlog still owed. J4-563 = W2 diff-under-∫ hFmeas/hF'meas (hunt witnessFieldDeriv-slice supplier).
+
+## J4-563 (33d48c8f) — Class-B W2 diff-under-∫ measurability carriers for g^K
+CurvedA1ClassBMeas4.lean: the two W2 (differentiation-under-the-integral) measurability binders
+of `curved_a1_R6_fully_wired` at g^K=curvedRNCMetric κ (κ<0): `curved_hFmeas_at_gate`
+(witnessFieldDeriv·leviSeries s-slice AESMeas on uIoc 0 (u−εₘ), per m,i,u,w),
+`curved_hFpmeas_at_gate` (witnessFieldDeriv2·leviSeries, per m,i,u) — each a literal application
+of a banked geometry-generic supplier `hFmeas_slice`/`hFpmeas_slice` (proved via the J4-383
+Fubini core SliceMeasurability.sliceMeas_of_jointCont). + `_curved_satisfiable`
+(curvedRNCMetric_ricci_trace_diag_ne, κ≠0∧n≥2). Carries {hUT,hεU,hFieldCont/hField2Cont,hBcont}
+— curvature-independent window + strip joint-continuity (mirrors J4-562). std-3, budget raw 0,
+9839 jobs. Adversarial gate verified by main (genuine AESMeas from banked core, not True, not
+a₁ conclusion; R/6 untouched; suppliers proved via sliceMeas_of_jointCont). MEASURABILITY CENSUS:
+6 carriers drained for g^K (hWmeas J4-559, hmeasLo/hmeasHi/hmeas2Lo J4-562, hFmeas/hF'meas J4-563).
+hFint SCOPED OUT (IntervalIntegrable — needs Gaussian domination, not measurability-thin).
+Remaining ~5-6: Section-G hMeasFII/hFmeas_d/hFint_d/hF'meas_d; leviSeries hffro_meas/hfmov_meas;
+hInnerCont (DEFER, needs genuine curved bound). + convergence trio + Class-A {hsrc, hOffCollarTail}.
+a₁=R/6 CONDITIONAL. J4-564 = Section-G ∫z member hMeasFII/hFmeas_d via
+ErrorKernelJointMeas.heatParametrix_uncurry_measurable_from_geometry + Fubini.
