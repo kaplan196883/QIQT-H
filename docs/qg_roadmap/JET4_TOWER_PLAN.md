@@ -5997,3 +5997,27 @@ integrability_from_dominations → integrability_from_dominations_capped at line
 hAdom2cap + carries MemAdjHi; then the a₁ capstone accepts externally-supplied capped hLapFull
 (leg 2, via memLapFull_from_pairing_dominations) + this capped leg 1 ⟹ FIRST curved-satisfiable a₁
 capstone (modulo the carried MemAdjHi residuals + convergence trio + geometric wiring). LARGE.
+
+## J4-540 — leg-1 capped chain step 2: memLapFull_from_labelled_capped (MemLapFull from the capped family) [d987f75c]
+DaLimLUCappedStep2.lean (1 std-3, budget raw 0 / 9817 jobs; elaborated 27s — no monolith blowup;
+verified clean by rebuild reading #print axioms — no sorryAx). The next THIN SPLICE in the leg-1
+capped re-plumbing. Routes J4-539's integrability_from_dominations_capped into memLapFull_from_
+labelled → MemLapFull WITHOUT the false uncapped hAdom2.
+memLapFull_from_labelled_capped: from capped-family inputs (hAdom2cap, strip-leg hAdomHeat/hmeasLo/
+hmeasHi, hFdomW/hFzero/hmeas2Lo), carried hII_hi:MemAdjHi, + memLapFull inputs (hgi/hΓ/hInter/D0/D1/
+hbnd/hPd2conv) → MemLapFull. Body: obtain ⟨_hIlo,_hIhi,hII_lo,hII_hi'⟩:=integrability_from_
+dominations_capped …; exact memLapFull_from_labelled … hII_lo hII_hi' …. Leg-1 mirror of leg-2's
+memLapFull_from_pairing_dominations, wired THROUGH the J4-539 brick.
+DOWNSTREAM MAP (GlobalRawBoundFacade.hDaLimLU_from_labelled): integrability_from_dominations
+(line 496) → 4-tuple → memLapFull_from_labelled (512, MemLapFull) [THIS BRICK CAPS] + hDaLimLU_
+concrete (524, all four → DaLimLUGoal) [J4-541 target]. CLOSED: no uncapped hAdom2 on path. CARRIED:
+hII_hi:MemAdjHi. Non-vacuous (strip-leg inputs genuine heat-op facts not disguised MemLapFull, Sol-
+confirmed; hAdom2cap true for g^K via J4-537). Generic in (g,gi). HONEST: a₁=R/6 CONDITIONAL + FLAT-
+ONLY — discharges only the hLapFull sub-goal of leg-1 from the capped family; ≠ the coefficient;
+hDaLimLU_concrete still consumes false uncapped hAdom2, + capped leg-2 hLapFull + MemAdjHi residuals
++ convergence trio + Seeley-DeWitt wiring remain.
+J4-541 = thread the full capped 4-tuple + this MemLapFull into DaLimLUConcreteDischarge.hDaLimLU_
+concrete (line 524) → DaLimLUGoal = hDaLimLU_from_labelled_capped (the ~45-180-binder monolith) —
+⚠ SPLICE thin (capped eCombine/source sub-assembly then concrete-gate discharge), NOT whole; check
+if hDaLimLU_concrete accepts capped legs without dragging uncapped hAdom2 back in (else report
+obstruction).
