@@ -23242,6 +23242,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCWitnessMeas.curvedRNC_hWmeas
 #print axioms QIQTH.CurvedRNCWitnessMeas.curvedRNC_hWslice
 
+-- J4-528 (CurvedRNCWitnessMeasSC): the SELF-CONTAINED curved witness hWmeas/hWslice for g^K=curvedRNCMetric K
+-- (K<0). J4-527 left two carries {hSm (raw gate-set preimage), hVmap (full-volume ∀p chart pullback)};
+-- J4-528 DISCHARGES hSm internally (for gate radii c<δ₀ below the uniform reach) via the banked K-restricted
+-- Lusin–Souslin gate graph (ConcreteGateInstantiation.hKSmeas_concrete ⟹ B2MeasurabilityDissolution.
+-- hSmeasSet_Krestricted) — the gate always guards on z∈K, so the full-volume witness slice needs only
+-- MeasurableSet (K∩{z|0∈S z}), NOT the raw off-K set — routed through the new K-guard indicator lever
+-- gatedKernel_slice_aemeas_ofRestricted_Kguard + the ∞-continuity inner slice (vanVleck_witnessInner…_ofGeom,
+-- discharging hw internally). Remaining ONE carry hVmapK is STRICTLY LIGHTER: volume.restrict Kset AE-measurability
+-- of the origin (p=0) chart pullback (vs full-volume ∀p) — the honest injectivity-radius geometric residue, not
+-- bookkeeping. Closing these does NOT derive the coefficient (curved heatOp/Levi Gaussian dominations remain the
+-- wall). NOT a₁=R/6 (CONDITIONAL, effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCWitnessMeasSC.gatedKernel_slice_aemeas_ofRestricted_Kguard
+#print axioms QIQTH.CurvedRNCWitnessMeasSC.curvedRNC_hWmeas_sc
+#print axioms QIQTH.CurvedRNCWitnessMeasSC.curvedRNC_hWslice_sc
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

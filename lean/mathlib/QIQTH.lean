@@ -1631,3 +1631,4 @@ import QIQTH.CurvedRNCPosDef
 -- fed with compactGate_measurableSet through the generic vanVleckGatedWitness_slice_aestronglyMeasurable.
 -- hWmeas/hWslice reduced to two curvature-independent carries {hSm, hVmap}. NOT a₁=R/6 (CONDITIONAL, flat-only). std-3.
 import QIQTH.CurvedRNCWitnessMeas
+import QIQTH.CurvedRNCWitnessMeasSC
