@@ -5839,3 +5839,25 @@ the gated reach collar.
 J4-534 = base-witness domination #2 (N=2 parametrix term, Finset.range 3) OR discharge the
 reach-collar residual (collar = the trace domain the heatOp assembly integrates over) OR
 begin the heatOp/Levi domination pile (per agent rec).
+
+## J4-534 — base-witness domination #1 fully discharged on the reach collar (hDomB/hWDom shape) [547d768e]
+CurvedRNCBaseWitnessDomCollar.lean (2 std-3, budget raw 0 / 9812 jobs; verified clean by
+rebuild reading #print axioms — no sorryAx). Assembles domination #1 for g^K=curvedRNCMetric K
+(K<0) with ZERO abstract carried hypotheses — strictly lighter than J4-531 (carried hMod+hPhase).
+curvedRNC_baseWitness_dom_collar: ∃r>0,∃CW>0,∃lam>0, ∀z∈Kset, ‖z‖<r, ∀τ∈(0,τmax],
+|vanVleckGatedWitness g^K gi^K hChr hKset S a b τ 0 z| ≤ CW·gaussDdim(lam·τ)z,
+CW=((1−(K/3)b²)^(n−1))^(1/4)·Cu·Cφ = EXACTLY the hDomB/hWDom amplitude-witness binder shape.
+All 4 factors DISCHARGED inline (no carried analytic hyp): amplitude+cutoff (curvedRNCMetric_
+cutoff_amp_le), transport moduli (curvedRNC_moduli_bound over closedBall 0 ρ, chart image
+w=uniformInverseChart…z 0 PROVEN contained ‖w‖≤ρ=√(2n r²) from UPPER near-isometry
+chartW0_rncRadialSq_error rncRadialSq w≤2 rncRadialSq z), phase (curvedRNC_phase_transfer).
+SOLE residual = reach collar ‖z‖<r. curved-not-flat gate via c=4/5≠±1 witness. GATE: K<0
+curved (Ric≠0), CW>0 finite, collar inhabited. HONEST: a₁=R/6 CONDITIONAL + effectively
+FLAT-ONLY — domination #1 of ~30-40 fully discharged (only reach collar residual); full a₁
+needs heatOp/Levi/error pile + Duhamel assembly + coefficient extraction; ≠ the coefficient.
+SURVEY: capstone remaining domination binders = hpkgBound/hAdomHeat/hAdom2/hEdom/hFdom (heatOp/
+Levi §H), hAdom/hWDom/hDomB (amplitude §I/J/L — hDomB now DISCHARGED), hEbound/hInt (Levi-
+convergence §L, genuine G1/G2/G3 local/width/two-point gap = heavy).
+J4-535 = recenter to base-point-varying hAdom (∀p q τ, |witness … τ p q|≤(A₀+A₁τ)√(3/2)ⁿ·
+gaussDdim(3/2 τ)(p−q) via banked recenter machinery) OR the heatOp defect-kernel hAdomHeat
+(witness Laplacian, one lower τ-power, reuse this collar Gaussian).
