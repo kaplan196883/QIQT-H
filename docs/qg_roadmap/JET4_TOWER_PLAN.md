@@ -6715,3 +6715,22 @@ kept every branch (not false clean); off-gate BANKED; carried hFirstEnv+hFar sat
 hFint domination carries now addressed (hAdom order-0 FULL J4-570; hcrude first-deriv PARTIAL J4-571).
 a₁=R/6 CONDITIONAL. J4-572 = hFar (far-field annulus envelope, the precise blocker) OR hFirstEnv OR hInnerCont
 OR convergence trio.
+
+## J4-572 (source hFint hcrude's far-field annulus envelope hFar for g^K, modulo carried hlam4: 4≤lam)
+CurvedA1FintHFarSource.lean: `curved_hFint_hFar_at_gate` (EXACT hFar binder consumed by
+curved_hFint_hcrude_at_gate: ∃ Cfar≥0 ∀i τ z∈K ¬(‖z‖<r) |witnessFieldDeriv g^K…i τ 0 z|≤
+Cfar·(√τ)⁻¹·gaussDdim(lam·τ)z — on the annulus 0 STILL∈gate ⟹ banked ON-GATE
+CConvV2WitnessStar.witnessFieldDeriv_starWide_onGate [Cstar·(√τ)⁻¹·gaussDdim(4τ)z, GLOBAL near-isometry
+coercivity ½·rncRadialSq z≤rncRadialSq(W₀ z)] widened gaussDdim(4τ)≤√(lam/4)ⁿ·gaussDdim(lam·τ) via
+HeatResidualBound.gaussDdim_le_gaussDdim_chart; (√τ)⁻¹ kept) + `curved_hFint_hcrude_via_hFar_at_gate`
+(DEMONSTRATOR: chains hFar+carried hFirstEnv into curved_hFint_hcrude_at_gate → whole-space hcrude
+verbatim) + `_curved_satisfiable`. Main verified: conclusion MATCHES hFar binder; on-annulus on-gate
+argument sound (0∈gate); base starWide bound PROVED; (√τ)⁻¹ kept; demonstrator confirms chain; R/6
+untouched. ⚠ CARRIED hlam4:4≤(curvedGate).lam — NEW width-compat scalar; gate exposes only 1<lam
+(near-isometry ∃), 4≤lam OWED (not provable from interface, NOT provably false — larger lam relaxes
+1/lam<1-η ⟹ gate-widening admissible). + shared {hSopen,hgate0,hdata}. std-3, budget raw 0, 9848 jobs.
+★ hcrude now has ONLY hFirstEnv left on its analytic side (off-gate + on-gate width transfer proved
+inside; hFar sourced modulo hlam4). RESIDUAL: {hlam4, hFirstEnv (hcrude's last carrier), hsrc/hw,
+hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-573 = hFirstEnv (chart-image
+first-jet two-term envelope, sibling of banked witnessSecondXDeriv_chartImage_expand — makes hcrude
+fully sourced modulo hlam4) OR hInnerCont OR convergence trio.
