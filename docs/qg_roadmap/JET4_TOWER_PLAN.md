@@ -6499,3 +6499,19 @@ J4-559 = a measurability census member (hmeasLo/hmeasHi/hmeas2Lo or W2 hFmeas/hW
 banked J4-527/528 machinery (vanVleckGatedWitness_slice_aestronglyMeasurable / heatParametrix_uncurry_
 measurable_from_geometry, no smallness needed) OR begin hsrc (ContDiff ℝ ∞ transportCoeff SDW source,
 genuine geometric input).
+
+## J4-559 — Class-B measurability member hWmeas discharged for g^K (witness-slice AEStronglyMeasurable) [b4ce38e6]
+CurvedA1ClassBMeas.lean (1 std-3, budget raw 0 / 9835 jobs; verified clean rebuild #print axioms no
+sorryAx). curved_hWmeas_at_gate (hSm)(hVmap): ∀τ AEStronglyMeasurable (vanVleckGatedWitness (curved
+RNCMetric κ)(curvedRNCInv κ) hChr hK (constGate…c)a b τ 0) volume — EXACT capstone hWmeas binder, via
+banked CurvedRNCWitnessMeas.curvedRNC_hWmeas (J4-527/528, curved smoothness bundle → WitnessMeasDeriv.
+vanVleckGatedWitness_slice_aestronglyMeasurable). CARRIED: {hSm gate-set-preimage MeasurableSet, hVmap
+base-chart pullback AEStronglyMeasurable} — curvature-independent bookkeeping, NOT smallness. (carry-free
+variant produces ∃δ₀∀c<δ₀ smallness, does NOT match the fixed-c binder.) ADVERSARIAL: non-vacuous g^K
+(κ<0, Ric≠0), genuine AEStronglyMeasurable from banked supplier, R/6 unaffected. HONEST: a₁=R/6
+CONDITIONAL — shrinks Class-B measurability by one; hsrc + hOffCollarTail + convergence trio + remaining
+census (hmeasLo/hmeasHi/hmeas2Lo, W2 family, Section-G hMeasFII/hFmeas_d, smallness-gated hopenS0/hS1)
+remain.
+J4-560 = next measurability member hMeasFII/hFmeas_d (Section-G base-witness ∫z slice measurability, via
+ErrorKernelJointMeas.heatParametrix_uncurry_measurable_from_geometry + Fubini/Bochner) OR the convergence
+trio OR hOffCollarTail OR hsrc.
