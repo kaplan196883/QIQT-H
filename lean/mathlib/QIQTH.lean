@@ -1725,3 +1725,5 @@ import QIQTH.CurvedA1ClassBFint
 import QIQTH.CurvedA1FintAdomSource
 
 import QIQTH.CurvedA1FintDAdomSource
+
+import QIQTH.CurvedA1FintHcrudeSource

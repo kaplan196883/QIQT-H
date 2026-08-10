@@ -23861,6 +23861,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintDAdomSource.curved_hFint_d_at_gate_via_source
 #print axioms QIQTH.CurvedA1FintDAdomSource.curved_hFint_d_hAdom_at_gate_curved_satisfiable
 
+-- J4-571 (CurvedA1FintHcrudeSource): SOURCING hFint's crude first-derivative envelope hcrude for
+-- g^K. witnessFieldDeriv_wide_crude = the missing first_domination base-bound (honest sibling of
+-- WideAmplitudeData.second_domination, (√τ)⁻¹ not τ⁻¹, via poly_absorb 0/1). curved_hFint_hcrude_at_gate
+-- = the EXACT whole-space hcrude census binder, glued from {on-gate wide transfer} ⊕ {BANKED off-gate
+-- vanishing witnessFieldDeriv_offGate_eq_zero} ⊕ {CARRIED far-field annulus hFar = the precise residual}
+-- ⊕ {chart-image first-jet envelope hFirstEnv}. via_hcrude = plugs into curved_hFint_hAdom_at_gate
+-- VERBATIM. (√τ)⁻¹ prefactor kept (dropping it = FALSE clean bound); _curved_satisfiable = Ric(0)≠0.
+-- a₁ CONDITIONAL: hFar/hFirstEnv/hFint_d/hsrc/hOffCollarTail/convergence trio/hInnerCont remain. std-3.
+#print axioms QIQTH.CurvedA1FintHcrudeSource.witnessFieldDeriv_wide_crude
+#print axioms QIQTH.CurvedA1FintHcrudeSource.curved_hFint_hcrude_at_gate
+#print axioms QIQTH.CurvedA1FintHcrudeSource.curved_hFint_hAdom_via_hcrude_at_gate
+#print axioms QIQTH.CurvedA1FintHcrudeSource.curved_hFint_hcrude_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
