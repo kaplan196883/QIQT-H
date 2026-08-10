@@ -23923,6 +23923,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHlam4.curved_hFint_hFar_at_gate4
 #print axioms QIQTH.CurvedA1FintHlam4.curved_hFint_hlam4_curved_satisfiable
 
+-- J4-575 (CurvedA1FintHdata): the NEAR-ISOMETRY conjunct (4) of the hdata-family for g^K, on the
+-- honest near-0 gate ‖z‖<r. curved_hdata_nearIsometry_at_gate = BOTH sides ½·r²≤r²(W₀ z)≤2·r², thin
+-- from the banked two-sided error chartW0_rncRadialSq_error (L·‖z‖≤½ ⟹ (1∓½) slack), instantiated at
+-- curvedRNCMetric κ/curvedRNCInv κ. Domain+bounds MATCH hFirstEnv's hdata (near-0, upper); hFar needs
+-- the LOWER coercivity at far z (‖z‖≥r) which is the deep residual (whole-space ∀z form is FALSE,
+-- wholeSpace_coercivity_unsatisfiable). Conjuncts (1)/(2)/(3) still owed. curved_satisfiable = Ric≠0
+-- (curvedRNCMetric_ricci_trace_diag_ne), κ≠0∧n≥2 — not secretly flat. NOT a₁=R/6. std-3.
+#print axioms QIQTH.CurvedA1FintHdata.curved_hdata_nearIsometry_at_gate
+#print axioms QIQTH.CurvedA1FintHdata.curved_hdata_nearIsometry_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
