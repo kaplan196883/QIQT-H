@@ -6532,3 +6532,22 @@ J4-561 = hS1 (tripleHEmeas) for g^K via ConstRadiusGateExport.tripleHEmeas_AT_CO
 constRadius_package_and_S1 (the const-radius gate package bundling hpkgBound+hmemS0+hopenS0+hS1),
 carrying the same c<δ₀ smallness + the curved transport-coeff smoothness hu/hw (the genuine geometric
 residue) — pairs naturally with this hopenS0. OR a measurability member OR hOffCollarTail OR hsrc.
+
+## J4-561 — Class-B hS1 (tripleHEmeas) discharged for g^K; const-radius GATE PACKAGE COMPLETE [dc4983d0]
+CurvedA1GateS1.lean (2 std-3, budget raw 0 / 9837 jobs; main verified rebuild #print axioms no sorryAx).
+curved_hS1_at_gate: ∃δ₀>0, c<δ₀ → HEmeasBorelAudit.tripleHEmeas (curvedRNCMetric κ)(curvedRNCInv κ)
+(vanVleckGatedWitness … (constGate…c)a b) — EXACT capstone hS1 binder, via banked ConstRadiusGateExport.
+tripleHEmeas_AT_CONSTRADIUS_GATE (gate match definitional; g/gi geometry from curvedRNCMetric_contDiff/
+curvedRNCInv_contDiff/curvedRNCMetric_hgpos + .continuous.measurable shadows, κ<0 via hκ.le). CARRIED
+(labelled): (1) transport-coeff smoothness hu:∀k ContDiff ℝ ⊤ (transportCoeff …) = the hsrc-family
+geometric input; (2) gate-smallness c<δ₀. ★ CONST-RADIUS GATE PACKAGE COMPLETE for g^K: {hpkgBound
+(J4-536), hmemS0 (J4-558), hopenS0 (J4-560), hS1 (this)} all 4 individually discharged (each modulo
+honest gate-smallness). ADVERSARIAL: non-vacuous g^K (κ<0, Ric≠0), tripleHEmeas genuine from banked
+supplier, hu satisfiable (C^∞ van-Vleck transport recursion), R/6 untouched. HONEST: a₁=R/6 CONDITIONAL
+— gate package done; carried hsrc-family hu + hOffCollarTail + convergence trio + remaining measurability
+census (hmeasLo/hmeasHi/hmeas2Lo/hMeasFII/hFmeas_d/…) owed. CENSUS: gate package (4) done; measurability
+carriers ~10-12 remain.
+J4-562 = drain the next measurability carrier (s-slice ∫z convolution hmeasLo/hmeasHi/hmeas2Lo via
+SliceMeasurability.hmeas*_slice, OR Section-G hMeasFII/hFmeas_d via heatParametrix_uncurry_measurable_
+from_geometry + Fubini) OR bundle the full gate package into curved_constRadius_package_at_gate (needs
+~14 curved inputs from curvedRNC_geomGaugeBundle — non-thin) OR hOffCollarTail/hsrc/convergence trio.
