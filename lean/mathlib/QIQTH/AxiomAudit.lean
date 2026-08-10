@@ -23389,6 +23389,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCHeatOpDomPkg.curvedRNC_heatOp_dom_pkg
 #print axioms QIQTH.CurvedRNCHeatOpDomPkg.curvedRNC_heatOp_dom_pkg_curved_satisfiable
 
+-- J4-537: the CURVED second-x-derivative Gaussian envelope for g^K=curvedRNCMetric K (K<0) — the HONEST
+-- sibling of the FALSE clean hAdom2. The clean single-constant whole-time hAdom2 (CA2·gaussDdim(wA2·τ))
+-- is GENUINELY FALSE at the concrete van-Vleck witness (τ⁻¹ blow-up as τ→0; z=0 value ~τ^{-1-n/2} vs
+-- demanded τ^{-n/2}; see CensusDominations (D3)/CappedAdom2Audit), so it is NOT produced. Delivered
+-- instead: the TRUE crude envelope |witnessSecondXDeriv g^K … i τ z|≤C·τ⁻¹·gaussDdim(lam·τ)z on the gate
+-- ball, via WideAmplitudeData.second_domination with the FixedFlowGateData gate record DISCHARGED for g^K
+-- from hChr alone (of_geometry, mirroring J4-535's GateSqControl discharge). CARRIED residuals = ONLY the
+-- amplitude sup hAmp0 + chart-image second-jet envelope hSecondEnv (the genuine 2nd-jet geometry, a REAL
+-- carry beyond hChr+hw per CensusDominations (D3)). SATISFIABILITY: K<0 genuinely curved
+-- (…_curved_satisfiable re-exports the c=4/5≠±1 radial squeeze ⟹ NOT secretly flat). Because clean hAdom2
+-- is false, a₁ stays CONDITIONAL and effectively FLAT-ONLY; still needs the rest of the heatOp/Levi pile +
+-- Duhamel assembly + coeff extraction. NOT a₁=R/6. std-3.
+#print axioms QIQTH.CurvedRNCHeatOpDom2.curvedRNC_witnessSecondXDeriv_dom_crude
+#print axioms QIQTH.CurvedRNCHeatOpDom2.curvedRNC_witnessSecondXDeriv_dom_crude_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
