@@ -5653,3 +5653,23 @@ The remainder O(1/τ) control is now bookkeeping-complete; the genuine a₁ wall
 - **Build:** green; std-3 all; AxiomAudit green (collision-checked); import + 5 pins wired.
 - **⚠⚠ HONEST BOTTOM LINE:** the GEOMETRIC-GAUGE HALF is now essentially fully provable for g^K (the 9-member bundle std-3; the ~40–50 type-(i) trivial binders routine). ⚠ BUT a NON-VACUOUS DERIVED curved a₁ is NOT a bounded pile of cheap bricks — it is gated behind the GENUINE CURVED HEAT-KERNEL ESTIMATE WALL: ~30–40 type-(ii) surface binders (the Gaussian dominations of the actual curved heatOp + the Levi machinery + mass/moduli), each a real parametrix estimate, PLUS the non-uniform-ellipticity localization subtlety. One remaining geometric member `hgpos` (det g^K=α^{n−1}>0) is deferred (clean via Matrix.PosDef.det_pos + Cauchy–Schwarz wᵀg^K w≥‖w‖²). a₁=R/6 remains CONDITIONAL + effectively flat-only — the geometric-gauge half is charted+packaged; the coefficient is NOT derived; the curved heat-kernel Gaussian dominations are the real wall (NOT a short brick count).
 - **NEXT J4-526:** (a) close `hgpos` for g^K (finishes the geometric-gauge half completely, bounded ~1 file via PosDef/Cauchy–Schwarz) FIRST, then (b) attack the next-lightest genuine-analytic binder `hWslice`/`hWmeas` (base-witness AEStronglyMeasurable — concerns the EXPLICIT gated van-Vleck ansatz smooth×Gaussian×cutoff, NOT the solved kernel/Levi series, so it AVOIDS the parametrix wall). ⚠ hgate bounds the ACTUAL heatOp (a wall), NOT light — Sol's hgate nomination was wrong on lightness.
+
+## J4-526 — hgpos for curved witness g^K (geometric-gauge half COMPLETE) [9d11b74a]
+CurvedRNCPosDef.lean (new, std-3, budget raw 0 / 9804 jobs). Closes the LAST
+geometric-gauge binder hgpos of the curved capstone antecedent for g^K.
+- curvedRNCMetric_quadForm: wᵀg^K(x)w = ‖w‖²+(K/3)(⟨x,w⟩²−‖x‖²‖w‖²) exactly.
+- curvedRNCMetric_isHermitian; curvedRNCMetric_posDef (K≤0, via Cauchy–Schwarz
+  Finset.sum_mul_sq_le_sq_mul_sq + rncRadialSq_pos); curvedRNCMetric_det_pos
+  (PosDef.det_pos); curvedRNCMetric_hgpos : ∀v, 0<det(curvedRNCMetric K v).
+- Binder-exact for A1R6FromLabelledCurvedBoundary.a1_R6_from_labelled_curved_boundary
+  hgpos. det = α^{n−1}, α=1−(K/3)‖x‖²≥1.
+- Satisfiability GATE PASSED: K<0 satisfies hgpos(K≤0) ∧ geomGaugeBundle(K<0) ∧
+  Ric(0)=(n−1)Kδ≠0 — genuinely curved, not secretly flat.
+- Geometric-gauge half now COMPLETE for g^K: hg/hgsymm/hgiC/hgpos/hg0/hgi/hΓ/
+  hdg0/hGauss/hinvF all discharged.
+HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY. Completing the geometric half
+≠ deriving the coefficient. Remaining wall = ~30-40 curved heat-kernel Gaussian
+dominations (heatOp/Levi: hpkgBound/hAdomHeat/hAdom2/hDomB/dataLevi). Type-(iii)
+measurability (hWmeas/hWslice) curvature-independent, reduces via banked generic
+lemma vanVleckGatedWitness_slice_aestronglyMeasurable → heatParametrix_uncurry_
+measurable_from_geometry. J4-527 = instantiate hWmeas/hWslice for g^K.
