@@ -1653,3 +1653,10 @@ import QIQTH.DaLimLUCapped
 -- GlobalRawBoundFacade.memLapFull_from_labelled, producing MemLapFull with NO uncapped hAdom2 on the
 -- path (LO leg capped-built, HI leg MemAdjHi carried, strip legs discarded). NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.DaLimLUCappedStep2
+-- J4-541 (DaLimLUCappedStep3): leg-1 LO-CAPPED capstone hDaLimLU_from_labelled_capped — reproduces the
+-- whole DaLimLUGoal Da-limit assembly (GlobalRawBoundFacade.hDaLimLU_from_labelled) with the FALSE
+-- uncapped whole-time hAdom2 PURGED: step-(v) census swapped to integrability_from_dominations_capped
+-- (per-m hAdom2cap + carried MemAdjHi residual), hmeas2Hi dropped, every other binder + downstream
+-- discharge (incl. final hDaLimLU_concrete) identical. Confirms leg-1 has NO second clean-hAdom2 site.
+-- NOT a₁=R/6 (CONDITIONAL, effectively FLAT-ONLY). std-3.
+import QIQTH.DaLimLUCappedStep3

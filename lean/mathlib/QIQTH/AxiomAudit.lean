@@ -23434,6 +23434,25 @@ namespace QIQTH.AxiomAudit
 -- a₁ stays CONDITIONAL + effectively FLAT-ONLY. std-3.
 #print axioms QIQTH.DaLimLUCappedStep2.memLapFull_from_labelled_capped
 
+-- J4-541 (DaLimLUCappedStep3): the LEG-1 (Da-limit) LO-CAPPED CAPSTONE. hDaLimLU_from_labelled_capped
+-- reproduces the whole DaLimLUGoal Da-limit assembly of GlobalRawBoundFacade.hDaLimLU_from_labelled at
+-- the endgame gate H_G := vanVleckGatedWitness …, but with the FALSE uncapped whole-time
+-- second-derivative domination hAdom2 PURGED from the binder list. DECISIVE TRACE (direct read +
+-- Sol-confirmed): hDaLimLU_from_labelled consumes hAdom2 at EXACTLY ONE site — integrability_from_
+-- dominations (returns ⟨hIlo,hIhi,hII_lo,hII_hi⟩); the downstream memLapFull_from_labelled uses only
+-- hII_lo/hII_hi and the FINAL DaLimLUConcreteDischarge.hDaLimLU_concrete takes hIlo/hIhi/hII_lo/hII_hi +
+-- the MemLapFull binder as PLAIN hypotheses (never hAdom2). So the concrete-gate discharge is ALREADY
+-- capped-clean; there is NO second clean-hAdom2 site in leg-1. THE SPLICE: step (v) swaps to J4-539's
+-- DaLimLUCapped.integrability_from_dominations_capped (per-m capped hAdom2cap + carried hII_hi_res :
+-- MemAdjHi), drops the now-unused hmeas2Hi binder; steps (i)/(ii)/(iii)/(iv)/(vi)/(vii)/(viii)/(ix) and
+-- the final hDaLimLU_concrete discharge are byte-identical to the uncapped body. SATISFIABILITY:
+-- non-vacuous; hAdom2cap is TRUE for g=g^K (const curvature, J4-537) ⟹ not secretly flat; the carried
+-- MemAdjHi residual is the honest HI-leg target (∫₀^ε τ⁻¹=+∞), not the conclusion. NOT a₁=R/6: purges the
+-- false uncapped hAdom2 from leg-1's Da-limit assembly but does NOT derive the coefficient — carried
+-- MemAdjHi residuals (both legs), capped leg-2 hLapFull, convergence trio + Seeley–DeWitt geometric
+-- wiring all remain; a₁ stays CONDITIONAL + effectively FLAT-ONLY. std-3.
+#print axioms QIQTH.DaLimLUCappedStep3.hDaLimLU_from_labelled_capped
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
