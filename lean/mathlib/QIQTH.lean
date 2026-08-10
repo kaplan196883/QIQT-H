@@ -1663,3 +1663,7 @@ import QIQTH.DaLimLUCappedStep3
 -- J4-542: leg-1 LO-capped capstone with the carried MemAdjHi HI-leg residual DISCHARGED via the banked
 -- MemAdjHiSliver.hII_hi_from_sliver (moment-aware τ^{-1/2} carry). NOT a₁=R/6. std-3.
 import QIQTH.DaLimLUMemAdjHi
+
+-- J4-543: CONSTRUCTING the τ^{-1/2} moment-cancellation carry hGpow from the concrete amplitude data bundle
+-- (slice2_inner_bound = exposed per-slice hinner of sliver2_bound; hGpow_of_amplitudeData = the capstone). NOT a₁=R/6. std-3.
+import QIQTH.MemAdjHiMomentBound

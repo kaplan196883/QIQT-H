@@ -23467,6 +23467,25 @@ namespace QIQTH.AxiomAudit
 -- effectively FLAT-ONLY, and hGpow is honestly labelled (concrete-kernel construction still owed). std-3.
 #print axioms QIQTH.DaLimLUMemAdjHi.hDaLimLU_from_labelled_capped_memAdjHi
 
+-- J4-543 (MemAdjHiMomentBound): CONSTRUCTING the τ^{-1/2} moment-cancellation carry hGpow from the concrete
+-- amplitude data bundle (the DIRECT flat 3-term route), replacing the ABSTRACT hGpow of J4-542. slice2_inner_bound
+-- = the GENERIC per-slice inner bound (the exposed hinner core of SliverEstimates.sliver2_bound): for a 3-term-
+-- decomposed D2H and width-2-dominated F, |∫z D2H(u−s)·F| ≤ (L·(15/2·n)+3/4·M₁·C_F)·(u−s)^{-1/2}+M₂·C_F on the
+-- OPEN window (term1=Hessian cancellation gaussian_hessian_cancel, term2=crude odd moment, term3=mass one).
+-- hGpow_of_amplitudeData = the capstone: from data:∀i AmplitudeDerivativeData (F:=leviSeries(heatOp(vanVleckGated
+-- Witness))), uniform K₁/K₀ + per-i comparison hyps, and the τ=0 endpoint carry hEndpoint, produces ∃Cpair≥0 with
+-- the EXACT hGpow type of MemAdjHiSliver.hII_hi_from_sliver — via slice2_inner_bound → GpowBridge.leviSecondPairing
+-- _le_invSqrt (m-uniform upper-endpoint τ^{-1/2} absorption) → GpowClosure.hGpow_uIoc_of_Ioo_zeroEndpoint.
+-- ADVERSARIAL GATE: ∫z ∂²ₓH_G=0 does NOT hold OUTRIGHT for the curved gated van-Vleck witness (Sol #J4-543
+-- confirmed no standalone vanishing 2nd moment); the cancellation is UNAVOIDABLY routed through the carried 3-term
+-- hD2Hexpand where the exact ∫z ((z_i)²−2τ)/(4τ²)·G_τ=0 (gaussian_hessian_moment_zero) hits the LEADING flat-Gaussian
+-- Hessian and ALL curvature (van-Vleck, chart image, cutoff) sits in the BOUNDED Lipschitz amplitudes — honest and
+-- unavoidable carry, NOT a hidden hole, NOT "flat symmetry for free". Carries (all satisfiable, none the conclusion):
+-- the AmplitudeDerivativeData bundle, K₁/K₀+comparison, hEndpoint (τ=0 value, satisfiable: gaussDdim 0≡0 for n≥1).
+-- NOT a₁=R/6: capped leg-2 hLapFull, convergence trio, Seeley–DeWitt wiring remain; a₁ CONDITIONAL + FLAT-ONLY. std-3.
+#print axioms QIQTH.MemAdjHiMomentBound.slice2_inner_bound
+#print axioms QIQTH.MemAdjHiMomentBound.hGpow_of_amplitudeData
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
