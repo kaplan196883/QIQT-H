@@ -6230,3 +6230,33 @@ J4-549 = wire J4-541 hDa + J4-547 core into curved_a1_R6_assembled at g:=curvedR
 single curved_a1_R6_fully_wired, shrinking the residual surface to {MemAdjHi/matched-sliver moment,
 convergence trio, transportCoeff/SDW}. OR discharge hGauss for g^K (bank the exact RNC Gauss-lemma
 =ᶠ[𝓝 0] fact) so htr is supplied-for-curved. OR the convergence trio.
+
+## J4-549 — LEG-1 of the curved a₁ capstone wired at g^K (curved_hDa_at_gate) + residual map [a8d2bdce]
+CurvedA1FullyWired.lean (1 std-3, budget raw 0 / 9826 jobs; ~45s elab; verified clean by rebuild
+reading #print axioms — no sorryAx; adversarial gate main-verified). Wires LEG 1 of the J4-548
+curved-satisfiable a₁ capstone at g^K=curvedRNCMetric κ (κ<0). Honest fragment — full curved_a1_R6_
+fully_wired (capstone+both legs) deferred (monolith).
+curved_hDa_at_gate: DaLimLUGoal (curvedRNCMetric κ)(curvedRNCInv κ)(vanVleckGatedWitness … (constGate
+… c)a b)(leviSeries …) U = exactly the capstone's hDa binder under g/gi/S substitution. Body: J4-541
+hDaLimLU_from_labelled_capped at g:=curvedRNCMetric κ, hinvF←curvedRNCMetric_hinvF, hdg0←curvedRNC
+Metric_pd_zero discharged.
+★ RESIDUAL MAP (carried, classified): geometry/gauge (hChr, hK/hK0, hframeK); analytic-census F2/W2
+diff-under-∫ (V/hVopen/hV0/snb/hsnb/hQ1/hFmeas/hFint/hF'meas/bnd/hbdd/hbound/hdiff + window aa/haa/
+hau/hUTle); convergence-trio/Levi (C/dataLevi + positivity consts + hAdomHeat + CAPPED hAdom2cap +
+hmeasLo/hmeasHi/hmeas2Lo + hPd2conv + E-comb hDa(DaTrunc)/hLap/hLapZ/hEZ/hLapS/hES); MemAdjHi/moment
+(hII_hi_res:MemAdjHi); √ε sliver/raw (τ₀/dataAmp/hεaa/hετ₀, P/hP/hraw:GlobalGatedRawBound). No SDW in
+leg-1 (lives in capstone hGauss/htr/hsrc).
+★ ADVERSARIAL (main+Sol): non-vacuous for g^K. hinvF/hdg0 true-fact/non-circular; residuals jointly
+satisfiable, none forces Ric=0. ⚠ hframeK (g=δ on seed) holds for κ<0 only at rncRadialSq=0 ⟹
+COLLAPSES seed to K={0} (0∈K) ⟹ TRUE via curvedRNCMetric_zero; geometric-localization residual NOT
+unsatisfiable (the a₁ two-jet is a POINTWISE statement at 0). ⚠ CRUCIAL: the new curved capstone
+DROPPED the conflicting mass condition (hmassone) that made hframeK force Ric=0 in the OLD flat-only
+capstone (J4-509) — so K={0} is now consistent + non-vacuous. Coefficient (∑ᵢricci)/6=n(n−1)κ/6≠0
+genuine. HONEST: a₁=R/6 CONDITIONAL — leg-1 wired ≠ unconditional; CAPPED hAdom2cap + MemAdjHi moment
++ convergence trio + Levi/raw/measurability + (deferred capstone) SDW wiring + LEG 2 all owed.
+J4-550 = LEG-2 adapter curved_core_at_gate (curved TruncatedDuhamelCore via truncatedDuhamelCore_AT_
+GATE_FULL fed by J4-547 curved_leg2_hLapFull, discharge hgi/hΓ via gauge_from_geometry); ⚠ watch
+shared binder names D0/D1/hbnd/hII_hi/hFzero (reuse one per). Then J4-551 assembles curved_a1_R6_
+fully_wired = curved_hDa_at_gate + curved_core_at_gate → curved_a1_R6_assembled + gauge bundle +
+curvedRNCMetric_hgauge + J4-536 hpkgBound, K:={0}. Largest remaining residual after = MemAdjHi/
+matched-sliver moment + convergence trio (both legs).
