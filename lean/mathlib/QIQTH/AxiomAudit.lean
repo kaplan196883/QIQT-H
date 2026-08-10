@@ -23453,6 +23453,20 @@ namespace QIQTH.AxiomAudit
 -- wiring all remain; a₁ stays CONDITIONAL + effectively FLAT-ONLY. std-3.
 #print axioms QIQTH.DaLimLUCappedStep3.hDaLimLU_from_labelled_capped
 
+-- J4-542 (DaLimLUMemAdjHi): the leg-1 LO-capped capstone hDaLimLU_from_labelled_capped_memAdjHi — the
+-- J4-541 capstone with its ONE carried abstract MemAdjHi HI-leg residual hII_hi_res DISCHARGED via the
+-- banked MemAdjHiSliver.hII_hi_from_sliver. The opaque MemAdjHi binder is replaced by the honest,
+-- SATISFIABLE moment-aware carries it reduces to: joint-continuity/slice-AESM (hSecCont/hBcont) + the
+-- τ^{-1/2} SIGNED-integral moment-cancellation carry hGpow (Cpair≥0). hUT reuses hUTle; hεU is DERIVED
+-- from hau/hεaa/haa (epsSeq m < aa/2 ≤ aa ≤ u, aa>0). SATISFIABILITY: hGpow is genuinely TRUE for the
+-- real convolved kernel — the signed ∫z ∂²G·F stays O(1) as τ→0 (leading τ⁻¹ cancels vs ∫z ∂²G=0,
+-- standard heat-kernel moment cancellation) and (u−s)^{-1/2}≥ε₀^{-1/2} on every HI window — NOT the false
+-- τ-uniform Gaussian bound, NOT a hidden vacuous/false hole; none of the carries is the conclusion. NOT
+-- a₁=R/6: discharging this HI-leg residual does NOT derive the coefficient — capped leg-2 hLapFull, LO/other
+-- MemAdjHi targets, convergence trio + Seeley–DeWitt geometric wiring all remain; a₁ stays CONDITIONAL +
+-- effectively FLAT-ONLY, and hGpow is honestly labelled (concrete-kernel construction still owed). std-3.
+#print axioms QIQTH.DaLimLUMemAdjHi.hDaLimLU_from_labelled_capped_memAdjHi
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

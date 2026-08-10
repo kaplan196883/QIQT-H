@@ -1660,3 +1660,6 @@ import QIQTH.DaLimLUCappedStep2
 -- discharge (incl. final hDaLimLU_concrete) identical. Confirms leg-1 has NO second clean-hAdom2 site.
 -- NOT a₁=R/6 (CONDITIONAL, effectively FLAT-ONLY). std-3.
 import QIQTH.DaLimLUCappedStep3
+-- J4-542: leg-1 LO-capped capstone with the carried MemAdjHi HI-leg residual DISCHARGED via the banked
+-- MemAdjHiSliver.hII_hi_from_sliver (moment-aware τ^{-1/2} carry). NOT a₁=R/6. std-3.
+import QIQTH.DaLimLUMemAdjHi
