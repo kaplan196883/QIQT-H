@@ -1635,3 +1635,4 @@ import QIQTH.CurvedRNCWitnessMeasSC
 import QIQTH.CurvedRNCChartReach
 import QIQTH.CurvedRNCVanVleckBound
 import QIQTH.CurvedRNCBaseWitnessDom
+import QIQTH.CurvedRNCModuliBound

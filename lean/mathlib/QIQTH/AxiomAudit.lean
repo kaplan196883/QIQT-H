@@ -23305,6 +23305,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCBaseWitnessDom.curvedRNCMetric_cutoff_amp_le
 #print axioms QIQTH.CurvedRNCBaseWitnessDom.curvedRNC_baseWitness_dom
 
+-- J4-532: discharging the transport-coefficient moduli carry hMod for g^K (order-1 parametrix).
+-- curvedRNC_moduli_bound = ★ the order-1 transport modulus bound: for g^K=curvedRNCMetric K (K<0) and
+-- ANY compact base-point set Wset and cap τmax, ∃ C_u>0 with |∑_{k<2} uₖ(w)τᵏ|≤C_u for all w∈Wset,
+-- 0≤τ≤τmax. u₀≡1 (transportCoeff_zero, definitional); u₁=transportCoeff(transportOp(vanVleck g^K)g^K
+-- gi^K)1 is CONTINUOUS (its C^∞ source transportOp_preserves_contDiff, solved by the C¹ ray-integral
+-- radialTransportSolve_contDiff_one), so bounded |u₁|≤M on compact Wset (exists_bound_of_continuousOn);
+-- C_u:=1+|M|·|τmax|. Discharges the hMod carry of curvedRNC_baseWitness_dom POINTWISE for every z whose
+-- chart-image uniformInverseChart…z 0 lands in Wset (the chart's finite reach). SATISFIABILITY: K<0
+-- genuinely curved (Ric(0)=(n−1)Kδ≠0), C_u≥1>0 finite, Wset inhabited (any nonempty compact) ⟹ NOT
+-- vacuous. RESIDUE: the literal ∀z-unguarded hMod binder needs the far-reach range fact (uniformInverse
+-- Chart is a .choose, not globally compact-imaged) — same obstruction as GeomPTransportAssess Part A, NOT
+-- a new gap. After this, the base-witness domination is modulo ONLY hPhase. NOT a₁=R/6 (CONDITIONAL,
+-- effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCModuliBound.curvedRNC_moduli_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
