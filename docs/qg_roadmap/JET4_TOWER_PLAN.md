@@ -6666,3 +6666,21 @@ Agent ~24min/61 tool-uses genuine work. RESIDUAL: hFint/hFint_d off the analytic
 hAdom carry to be banked). Remaining = {hsrc, hOffCollarTail} geometric + {convergence trio, hInnerCont} +
 the capped hAdom sources. a₁=R/6 CONDITIONAL. J4-569 = source capped hAdom (witnessFieldDeriv per-m Gaussian
 domination from WideSliverBoundary/witnessFieldDeriv_gate_envelope) OR hInnerCont OR convergence trio.
+
+## J4-569 (source hFint's capped hAdom — bank ε-absorption, scope hcrude residual)
+CurvedA1FintAdomSource.lean: `sqrt_crude_to_capped` (PROVED τ^{−1/2} ε-absorption arithmetic;
+first-deriv sibling of banked EveryCeilingFamilies.gaussDdim_crude_to_capped: whole-time
+Ccrude·(√τ)⁻¹·gaussDdim on (0,Tc] ⟹ capped (Ccrude·(√εₘ)⁻¹)·gaussDdim on [εₘ,Tc] via inv_le_inv₀+
+Real.sqrt_le_sqrt) + `curved_hFint_hAdom_at_gate` (EXACT hAdom binder consumed by
+CurvedA1ClassBFint.curved_hFint_at_gate, sourced from crude envelope hcrude, CA m = Ccrude·(√(epsSeq m))⁻¹
+m-DEPENDENT) + `curved_hFint_at_gate_via_crude` (DEMONSTRATOR: full hFint IntervalIntegrable re-derived
+with hAdom slot FILLED — plugs in verbatim) + `_curved_satisfiable`. Main verified: CA m m-dependent
+(capped not false-clean); sqrt_crude_to_capped proved (inv_le_inv₀+sqrt_le_sqrt+mul_le_mul); demonstrator
+confirms binder match; hcrude satisfiable for g^K (genuine τ^{−1/2} crude bound, banked-shape). std-3,
+budget raw 0, 9845 jobs. ★ HONEST PARTIAL: ε-absorption arithmetic BANKED; hcrude (crude first-derivative
+envelope) remains CARRIED — no WideAmplitudeData.first_domination exists yet (only zeroth/second;
+curvedRNC_witnessSecondXDeriv_dom_crude is the τ^{−1} SECOND-deriv analog). RESIDUAL: {hcrude, hFint_d's
+hAdom} domination sources + {hsrc, hOffCollarTail} geometric + {convergence trio, hInnerCont} analytic.
+a₁=R/6 CONDITIONAL. J4-570 = source hcrude (build WideAmplitudeData.first_domination = τ^{−1/2}
+witnessFieldDeriv curved envelope via WitnessDerivDomination.witnessFieldDeriv_gate_envelope + near-isometry
+chart-Gaussian) OR hFint_d's raw-witness hAdom (from banked CurvedRNCBaseWitnessDomAdom, order-0 whole-time).
