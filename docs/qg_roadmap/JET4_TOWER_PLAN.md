@@ -5790,3 +5790,27 @@ compact chart-image ⟹ leaves ONLY phase carried) OR begin the phase-transfer v
 chartW0_rncRadialSq_error near-isometry squeeze.
 ⚠ J4-530 agent malfunctioned (reporting-loop); verify final on-disk file by clean rebuild
 reading #print axioms (sorryAx invisible to text-grep).
+
+## J4-532 — transport-coefficient moduli bound hMod for g^K (domination #1 modulo only phase) [4ab2c792]
+CurvedRNCModuliBound.lean (new, std-3, budget raw 0 / 9810 jobs; verified clean by rebuild
+reading #print axioms — no sorryAx). Discharges the moduli carry hMod of
+curvedRNC_baseWitness_dom for g^K=curvedRNCMetric K (K<0).
+curvedRNC_moduli_bound: ∃Cu>0, ∀w∈Wset(compact),∀τ∈[0,τmax], |∑_{k∈range 2}
+transportCoeff(transportOp(vanVleck g^K)g^K gi^K)k w·τ^k|≤Cu, Cu=1+|M|·|τmax|. Summand
+byte-for-byte the hMod body.
+- u₀≡1 via transportCoeff_zero (definitional).
+- |u₁|≤M: u₁=transportCoeff T 1 continuous — transportOp(vanVleck g^K)g^K gi^K(fun _↦1)
+  is C^∞ (TransportOpSmoothness.transportOp_preserves_contDiff ← curvedRNCMetric_contDiff/
+  curvedRNCInv_contDiff/hgpos), ray-integral solve C¹ (radialTransportSolve_contDiff_one)
+  ⟹ continuous; IsCompact.exists_bound_of_continuousOn gives M. triangle+mul_le_mul.
+HONEST SCOPE: discharges hMod POINTWISE for the reachable (gated) z whose chart-image lands
+in compact Wset = the vanVleckGatedWitness support ⟹ domination #1 modulo ONLY hPhase. Does
+NOT satisfy the literal unguarded ∀z binder (needs a global range bound on the .choose
+uniformInverseChart = pre-catalogued far-reach obstruction in GeomPTransportAssess Part A,
+NOT a new gap; agent correctly declined a vacuous ∀z∈Wset corollary — vacuity trap avoided).
+GATE: K<0 curved (Ric(0)=(n−1)Kδ≠0), Cu≥1>0 finite, Wset inhabited (closedBall 0 1∋0),
+non-vacuous. HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — hMod discharged leaves
+domination #1 modulo only the phase transfer; 1 of ~30-40; ≠ deriving the coefficient.
+J4-533 = the phase-transfer hPhase itself (gaussDdim τ w≤C_φ·gaussDdim(λτ)z for g^K, THE
+irreducible geometric reach crux + last carried factor, via banked chartW0_rncRadialSq_error
+two-sided near-isometry squeeze) OR domination #2.
