@@ -1572,3 +1572,11 @@ import QIQTH.ChartW0Fderiv
 -- routing hDa through the banked LabelledRethreadV2.hDaLimLU_from_hgate. Coefficient-neutral;
 -- removes ONE of the capstone's flat-only channels. NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.A1R6FromLabelledCurved
+
+-- J4-520: the CURVED-VALID hframeK-channel rewire of the a₁ capstone, built on J4-519 —
+-- a1_R6_from_labelled_curved_gauge removes the SECOND flat-only binder, the neighbourhood
+-- frame hframeK (∀ q∈K, g q=δ, which forces ∂²g=0⟹Ric(0)=0), routing hDa through
+-- hDaLimLU_from_hgate_gauge (gauge census rebuilt from the pointwise RNC jet {hg0,hinvF,hdg0}
+-- via DaLimCurvedGauge.gauge_from_pointwise). BOTH flat-only capstone binders now removed
+-- (2 of 3). Curved-satisfiable (J4-512 confMetric). NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.A1R6FromLabelledCurvedGauge

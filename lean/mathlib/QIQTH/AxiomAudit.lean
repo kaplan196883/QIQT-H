@@ -23107,6 +23107,27 @@ namespace QIQTH.AxiomAudit
 -- + hBoundaryLim threaded + iterE continuity + htr/hGauss bridges + a genuine RNC witness).
 #print axioms QIQTH.A1R6FromLabelledCurved.a1_R6_from_labelled_curved
 
+-- J4-520 (A1R6FromLabelledCurvedGauge): the SECOND flat-only binder REMOVED from the a₁
+-- capstone, built on J4-519. a1_R6_from_labelled_curved_gauge = a verbatim copy of
+-- a1_R6_from_labelled_curved with the neighbourhood frame hframeK (∀ q∈K, g q i j = δ_{ij},
+-- which forces ∂²g=0 on K ⟹ Riemann=0 ⟹ Ric(0)=0 — FLAT-ONLY) DROPPED; the capstone already
+-- carried the pointwise value gauge hg0 (g(0)=δ), so hDa routes through hDaLimLU_from_hgate_gauge
+-- instead of hDaLimLU_from_hgate. AUDIT: hframeK entered at EXACTLY ONE place inside R1
+-- (hDaLimLU_from_labelled_v2), the gauge sub-assembly `gauge_from_geometry g gi hK0 hframeK …`,
+-- used ONLY as `hframeK 0 hK0` to read the 0-jet value g(0)=δ; swapped for the banked
+-- DaLimCurvedGauge.gauge_from_pointwise (J4-512), which rebuilds BOTH gauge members
+-- (MemGaugeGi/MemGaugeGamma) from the pointwise RNC jet {hg0,hinvF,hdg0} — ∂²g(0) left free.
+-- GATE: genuinely hframeK-FREE (no ∀ q∈K,g q=δ binder — all grep hits are prose); carries the
+-- pointwise hg0/hinvF/hdg0; curved-inhabited (J4-512 confMetric on Point 2, ∂²g₀₀(0)=2≠0
+-- satisfies all three). Don't-undercredit: gauge_from_pointwise + R1/R3 census were already
+-- banked (J4-512/J4-364); this is capstone-level wiring + the two gauge-variant Da-limit bricks.
+-- Π elaboration 33s (cheap, monolith fear refuted again). std-3. ⚠ 2 of 3 removed (hraw+hframeK);
+-- hBoundaryLim + iterE continuity + htr/hGauss geometric bridges + a full RNC curved witness
+-- remain. NOT a₁=R/6 (CONDITIONAL + effectively flat-only until those close).
+#print axioms QIQTH.A1R6FromLabelledCurvedGauge.hDaLimLU_from_labelled_v2_gauge
+#print axioms QIQTH.A1R6FromLabelledCurvedGauge.hDaLimLU_from_hgate_gauge
+#print axioms QIQTH.A1R6FromLabelledCurvedGauge.a1_R6_from_labelled_curved_gauge
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
