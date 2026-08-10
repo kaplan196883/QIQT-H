@@ -6313,3 +6313,27 @@ coefficient NOT unconditional. J4-551 = honest precisely-scoped statement of exa
 J4-552 = attack the MemAdjHi matched-sliver moment residual hII_hi (single shared, most-central,
 deepest analytic wall feeding BOTH legs — the √ε adjacency-sliver moment the capped route can't supply
 pointwise). 2nd choice = convergence-trio E-combination (DaTrunc/LapTrunc + MemECombine).
+
+## J4-552 — discharge hII_hi:MemAdjHi in the curved a₁ capstone; opaque MemAdjHi binder dropped [a6d8943c]
+CurvedA1MemAdjHiWired.lean (2 std-3, budget raw 0 / 9829 jobs; 35s elab; verified clean by rebuild
+reading #print axioms — no sorryAx; adversarial main-verified). Discharges the most-central residual
+hII_hi:MemAdjHi of curved_a1_R6_fully_wired (J4-551) for g^K via the banked leg-1 HI-leg chain
+(J4-542–546), replacing opaque MemAdjHi with concrete inputs.
+- curved_hII_hi_at_gate: produces the capstone hII_hi:MemAdjHi by composing the chain (defeq the
+  capstone binder, confirmed by exact); no opaque MemAdjHi carried.
+- curved_a1_R6_fully_wired_hII: J4-551 capstone with hII_hi binder DROPPED, supplied internally.
+CHAIN: (1) hGpow_of_amplitudeData_noEndpoint (hGpow from data+K₁/K₀+window-floor, τ=0 shed via 1≤n);
+(2) MemAdjHiSliver.hII_hi_from_sliver (MemAdjHi from hGpow + slice-AESM hmeas2Hi_slice via
+intervalIntegrable_of_aesm_le + intervalIntegrable_invSqrt_sub); (3) compose at g^K; (4) feed into
+curved_a1_R6_fully_wired.
+★ UPDATED RESIDUAL: opaque hII_hi:MemAdjHi → concrete {data:∀i AmplitudeDerivativeData (ONE hard
+field hD2Hexpand = chart-jet Leibniz-Gaussian 3-term identity = owed hjets/off-collar geometry) +
+K₁/K₀/hK₁bound/hK₀bound + hSecCont/hBcont continuity + window-floor}. NET NEW carry vs J4-551 = ONLY
+{K₁/K₀ envelope + hSecCont/hBcont} (dataAmp/T/τ₀/aa/haa/hau/hεaa/hετ₀/hUT already capstone binders).
+ADVERSARIAL (main): non-vacuous g^K; conclusion verbatim → coefficient n(n−1)κ/6≠0 carries over;
+reduced inputs satisfiable none forcing Ric=0. HONEST: a₁=R/6 CONDITIONAL — SHARPENS the residual
+(opaque MemAdjHi → concrete chart-jet+tail+continuity); NOT unconditional; hjets C⁴ + off-collar tail
+owed. J4-553 = construct dataAmp from the chart-jet bundle via AmplitudeDataOnCollar.amplitudeDataOn_
+concrete (hD2HexpandOn from hjets) + the off-collar corrected tail (OffCollarTailMoment/collar_hGpow_
+residual.hOffCollarTail) ⟹ isolate hjets + hOffCollarTail as the two remaining geometric carries. OR
+the convergence trio.
