@@ -6421,3 +6421,36 @@ uniformInverseChart W_z — underpins the pullback bridge; the C⁴/C² remainde
 hOffCollarTail OR the convergence trio. ⚠ hGlobalJet = genuine .choose-witness base-point-regularity
 frontier (ExpRhoReachability-style GENUINE-INPUT); may be un-bankable from the substrate — scope
 honestly.
+
+## J4-556 — CONSOLIDATION + ASSESSMENT (no brick): hGlobalJet verdict + the honest distance-to-unconditional curved a₁
+Assessment-only (no file modified; baseline curved_a1_R6_fully_wired confirmed std-3 via existing pins).
+★ hGlobalJet VERDICT (Sol-concurred): GENUINE .choose-witness substrate frontier — CARRIED, NOT
+bankable from the jet-4 tower. hGlobalJet = the global ∀x first i-jet of uniformInverseChart
+(curvedRNCMetric κ), the SOLE surviving member of the chart-jet residue after J4-555 (the 3 centre
+identities discharged via the radial-gauge pullback bridge). Substrate chain all Classical.choose:
+uniformFlow_tube_exists.choose → uniformFlowExp (regularity exposed only C²/C³ = contDiffAt2/3) →
+uniformChart_exists (spec = eventual-left-inverse germ + ContDiffAt ℝ 2 W near image points ONLY) →
+uniformInverseChart := (…).choose. (a) UN-BANKABLE from the object as defined (spec frozen at
+C²-near-image-points; a pathological choose witness admissible off the collar, no uniform-in-z ambient
+∀x). (b) mathematically TRUE (canonical exp_z⁻¹ is C⁴ on the injectivity ball by IFT from the C⁴
+forward expMap_contDiffOn_four) but requires a SUBSTRATE REBUILD of uniformChart_exists to expose a
+global/higher-order (C⁴, uniform-in-z) spec — a rebuild, not a derivation. THE HONEST TERMINAL for the
+chart-jet thread.
+★★ CONSOLIDATED RESIDUAL CLASSIFICATION of curved_a1_R6_fully_wired (the honest distance):
+(A) IRREDUCIBLE-CARRIED geometric/substrate: hGlobalJet (substrate terminal, hard), hsrc (ContDiff ℝ ∞
+transportCoeff SDW source = legit geometric input), hOffCollarTail (off-collar Gaussian tail), setup/
+frame data (hframeK→{0}, hChr C∞, hK compact, hK0 0∈K = defining data not "owed").
+(B) ANALYTIC-CLOSABLE bookkeeping (mechanical wiring, no new physics): convergence trio (dataLevi/
+E-comb hDa_ec/hLap/…/hPd2conv/hInter/hII_lo/hEcomb), boundary (hBoundaryLim/hbdry/hmod/hsup/hmass/
+hmassone), measurability/window census (W2/Section-G/Section-H/gate-pkg hpkgBound/hmemS0/hopenS0/hS1/
+hmeas*/raw/window), capped Gaussian dominations (hAdom/hAdomHeat/hFdomW/hAdom2cap/hEdom/hFdom). [hII_hi
+MemAdjHi already discharged J4-552.]
+HONEST: a₁=R/6 for g^K CONDITIONAL on {A∪B}; Class B = large-but-mechanical backlog closable by wiring;
+Class A = the genuine residue, hGlobalJet the one substrate-limitation terminal. Coefficient
+n(n−1)κ/6≠0 unaffected.
+J4-557 = PRIMARY: collar-localization surgery on hGlobalJet — trace what the amplitude machinery
+(curved_amplitudeDataOn_from_hjetsShape → AmplitudeDataOnCollar → collar hD2HexpandOn) actually
+consumes; if only collar/overlap, REDEFINE the residue to the collar/overlap first-jet (BANKED via
+chartField_firstJet_nhds_of_contDiffAt) dropping hGlobalJet as FALSE GENERALITY; else re-tag hGlobalJet
+as an explicit LABELLED geometric input (option-b, same honest carry as a₁=R/6). SECONDARY: thinnest
+class-B (gate-package hmemS0/hopenS0 for constGate, or hPd2conv if banked-instantiable).
