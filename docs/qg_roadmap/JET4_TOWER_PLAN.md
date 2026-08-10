@@ -6515,3 +6515,20 @@ remain.
 J4-560 = next measurability member hMeasFII/hFmeas_d (Section-G base-witness ∫z slice measurability, via
 ErrorKernelJointMeas.heatParametrix_uncurry_measurable_from_geometry + Fubini/Bochner) OR the convergence
 trio OR hOffCollarTail OR hsrc.
+
+## J4-560 — Class-B census member hopenS0 discharged for g^K (gate-centre openness, modulo gate-smallness) [6786e6b4]
+CurvedA1ClassBMeas2.lean (3 std-3, budget raw 0 / 9836 jobs; 29s elab; main verified rebuild #print
+axioms no sorryAx). curved_hopenS0_at_gate: ∃c₀>0, ∀c∈(0,c₀), (0∈K → IsOpen (constGate (curvedRNCMetric
+κ)(curvedRNCInv κ) hChr hK c 0)), via banked CompactTubeLemma.flowBall_gateRadius_floor (=
+ConcreteGateAssembly.reachableGate_concrete). Needs ONLY hChr+hK (thinner than hS1). CARRIED (honest):
+gate-smallness 0<c<c₀ (chart reach c<δ₀) as the ∃c₀ antecedent — constrains the gate parameter (capstone
+binds c with only b<c, no upper bound), so closable only for small gate c∈(b,c₀), a legit base-point
+choice. ADVERSARIAL: non-vacuous g^K (κ<0, Ric≠0), genuine openness fact from banked supplier, R/6
+untouched. HONEST: a₁=R/6 CONDITIONAL. ★ CENSUS TALLY: 3 drained (hmemS0/hWmeas/hopenS0), ~12-15 remain
+(s-slice ∫z convolutions hmeasLo/hmeasHi/hmeas2Lo, W2 hFmeas/hFint/hF'meas, Section-G hMeasFII/hFmeas_d/
+hFint_d/hF'meas_d, leviSeries hffro_meas/hfmov_meas, hInnerCont, hS1, interval-integrabilities) — ~1/5
+drained; + hsrc/hOffCollarTail geometric + convergence trio.
+J4-561 = hS1 (tripleHEmeas) for g^K via ConstRadiusGateExport.tripleHEmeas_AT_CONSTRADIUS_GATE /
+constRadius_package_and_S1 (the const-radius gate package bundling hpkgBound+hmemS0+hopenS0+hS1),
+carrying the same c<δ₀ smallness + the curved transport-coeff smoothness hu/hw (the genuine geometric
+residue) — pairs naturally with this hopenS0. OR a measurability member OR hOffCollarTail OR hsrc.
