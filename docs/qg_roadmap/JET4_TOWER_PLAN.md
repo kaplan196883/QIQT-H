@@ -5909,3 +5909,32 @@ convergence + Duhamel + extraction remain. J4-537 = hAdom2 (2nd-spatial-deriv am
 |witnessSecondXDeriv … i τ z|≤CA2·gaussDdim(wA2·τ)(0−z), geometric-route sibling of hAdom J4-535,
 light). ⚠ AVOID hFdom/hEbound (G1/G2/G3 gap); hEdom width-3/2<2 is NOT a trivial re-slice of the
 width-2 hpkgBound (hard Gaussian-width direction).
+
+## J4-537 — honest τ⁻¹ 2nd-deriv envelope for g^K; ★ clean hAdom2 is FALSE for the curved witness [03a43aa6]
+CurvedRNCHeatOpDom2.lean (2 std-3, budget raw 0 / 9815 jobs; verified clean by rebuild
+reading #print axioms — no sorryAx). ★★ CRITICAL FINDING: the clean single-constant hAdom2
+binder consumed by a1_R6_from_labelled_curved_boundary (|witnessSecondXDeriv …|≤CA2·
+gaussDdim(wA2·τ)(0−z)) is GENUINELY FALSE at the concrete van-Vleck witness — the true
+envelope carries a τ⁻¹ prefactor blowing up as τ→0 (at z=0 ~τ^(−1−n/2) vs demanded ~τ^(−n/2));
+documented in the codebase's own CensusDominations D3 / CappedAdom2Audit; Sol confirmed.
+Building the clean binder would be UNSOUND ⟹ the curved-boundary capstone is only flat/
+degenerate-satisfiable AT hAdom2; the SOUND route uses the per-m capped hAdom2cap (census)
+which consumes the τ⁻¹ form.
+This brick delivers the HONEST τ⁻¹ envelope:
+- curvedGate: g^K FixedFlowGateData discharged from hChr via InverseChartNormalJets.
+  FixedFlowGateData.of_geometry.
+- curvedRNC_witnessSecondXDeriv_dom_crude: ∃C>0, ∀τ∈(0,τ₀],∀z∈Kset,‖z‖<r,
+  |witnessSecondXDeriv g^K … i τ z|≤C·τ⁻¹·gaussDdim(lam·τ)z, via banked
+  WideWitnessAmplitude.WideAmplitudeData.second_domination.
+- ..._curved_satisfiable: c=4/5≠±1.
+CLOSED: gate geometry (of_geometry from hChr+hKset). CARRIED: hAmp0 (amplitude sup) +
+hSecondEnv (chart-image two-term second-jet envelope). ⚠ hSecondEnv is a GENUINE ADDITIONAL
+2nd-jet geometric carry (moment-aware three-term normal form, CensusDominations D3) — NOT
+reducible to mainline hChr+hw (unlike J4-535's 1st-deriv); inherent to the 2nd derivative.
+GATE: K<0 curved (Ric≠0), c=4/5≠±1, carries satisfiable. HONEST: a₁=R/6 CONDITIONAL + FLAT-
+ONLY; AND the clean hAdom2 binder of the curved-boundary capstone is FALSE for the curved
+witness ⟹ that capstone flat-satisfiable at hAdom2, sound route = capped census hAdom2cap.
+hEdom/hFdom/hgate + hEbound/hInt Levi + Duhamel + extraction remain.
+J4-538 = hgate (curved gate/affine-repair binder, of_geometry machinery reusable, avoid
+hEdom/hFdom/hEbound) OR wire this crude envelope into the per-m capped hAdom2cap for g^K
+(the census route that actually consumes the 2nd-deriv bound; clean hAdom2 is a dead-end).
