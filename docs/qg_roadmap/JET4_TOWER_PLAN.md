@@ -6768,3 +6768,18 @@ curvedGate→curvedGate4 swap (identical geometry, only lam changes) = mechanica
 {hdata-family (2-sided near-isometry ½r≤r_chart≤2r + Jacobian L + amplitude Ba/Bd), hsrc/hw,
 hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-575 = hdata-family (near-isometry
 + jet bounds from RNC chart properties — sole hcrude/far-field residual) OR hInnerCont OR convergence trio.
+
+## J4-575 (source hdata-family near-isometry conjunct near 0 for g^K; depth-verdict on hFar/uniformization)
+CurvedA1FintHdata.lean: `curved_hdata_nearIsometry_at_gate` (∃r>0 ∀z∈K ‖z‖<r →
+½·rncRadialSq z≤rncRadialSq(W₀ z)≤2·rncRadialSq z — from banked HeatResidualBound.chartW0_rncRadialSq_error
+[two-sided |rncRadialSq(W₀ z)−rncRadialSq z|≤L·‖z‖·rncRadialSq z], r shrunk to min r₀ (1/(2(L+1))) ⟹ L‖z‖≤½;
+½/2 = genuine near-identity slack, true WITH Ric≠0) + `_curved_satisfiable`. Main verified: proved from banked
+error (not axiomatized); ½/2 genuinely true not false-flat bound; R/6 untouched. std-3, budget raw 0, 9851 jobs.
+★ DEPTH VERDICT: hFirstEnv near-isometry (upper ‖z‖<r) FULLY sourced (domain+bound match). hFar needs LOWER
+coercivity ∀z∈K incl annulus ‖z‖≥r — near-isometry is NEAR-0 ONLY (whole-z form provably FALSE off-K, agent
+verified, did NOT ship) = GENUINE new chart-jet geometry, the DEEP residual. Conjuncts (1)/(2) inverse-chart
+jet + (3) uniform Ba/Bd/L need compactness-uniformization (medium depth; PdiffAt center banked via
+AmplitudeFamilyDischarge.amp_pdiffAt_center). RESIDUAL: {hFar far-field coercivity (deep chart-jet),
+hdata(1)/(2)/(3) uniformization (medium), hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6
+CONDITIONAL. J4-576 = conjunct (3) uniform Ba/Bd/L via compactness (banked-thin, tractable) OR hInnerCont OR
+convergence trio; hFar far-field coercivity flagged as the geometric wall.
