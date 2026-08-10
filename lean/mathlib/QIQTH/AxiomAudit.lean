@@ -23713,6 +23713,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1GateS1.curved_hS1_at_gate
 #print axioms QIQTH.CurvedA1GateS1.curved_hS1_at_gate_curved_satisfiable
 
+-- J4-562: the s-slice ∫z-convolution MEASURABILITY family {hmeasLo, hmeasHi, hmeas2Lo}
+-- of curved_a1_R6_fully_wired at g^K=curvedRNCMetric κ (κ<0): s-slice ae-strong-
+-- measurability of the heatOp·leviSeries pairing on the Lo/Hi windows and of the
+-- witnessSecondXDeriv·leviSeries pairing on the Lo window. Discharged from the banked
+-- geometry-generic s-slice supplier SliceMeasurability.{hmeasLo_slice, hmeasHi_slice,
+-- hmeas2Lo_slice} (Fubini innerIntegral_aesm fed by joint continuities), instantiated at
+-- the curved metric. CARRIES the four curvature-independent analytic carries {hUT, hεU,
+-- hHeatCont/hSecCont, hBcont} (positive-time-strip joint continuities + window bounds)
+-- honestly. NOT a₁=R/6 (hsrc/hOffCollarTail, the convergence trio, and the rest of the
+-- census all remain).
+#print axioms QIQTH.CurvedA1ClassBMeas3.curved_hmeasLo_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas3.curved_hmeasHi_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas3.curved_hmeas2Lo_at_gate
+#print axioms QIQTH.CurvedA1ClassBMeas3.curved_hmeasLo_at_gate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
