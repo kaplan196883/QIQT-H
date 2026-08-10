@@ -6699,3 +6699,19 @@ hAdom removed from carry pile modulo hw. RESIDUAL: {hcrude (hFint's τ^{−1/2} 
 still carried), hsrc, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-571 =
 source hcrude (build WideAmplitudeData.first_domination τ^{−1/2} witnessFieldDeriv curved envelope) OR
 hInnerCont OR convergence trio.
+
+## J4-571 (source hFint's crude first-derivative envelope hcrude for g^K — width-transfer core + hFar residual)
+CurvedA1FintHcrudeSource.lean: `witnessFieldDeriv_wide_crude` (THE MISSING first_domination base-bound,
+honest sibling of banked WideAmplitudeData.second_domination one power weaker (√τ)⁻¹ not τ⁻¹, via banked
+FixedFlowGateData.poly_absorb 0/1) + `curved_hFint_hcrude_at_gate` (EXACT whole-space hcrude census binder
+for g^K, Ccrude·(√τ)⁻¹·gaussDdim(wA·τ)(0−z), glued over 3 z-regions: z∉K→BANKED witnessFieldDeriv_offGate_eq_zero;
+z∈K,‖z‖<r→proved §A + carried hFirstEnv; z∈K,‖z‖≥r→carried hFar; τ^{−1/2} prefactor kept) +
+`curved_hFint_hAdom_via_hcrude_at_gate` (DEMONSTRATOR: hcrude→J4-569 ε-absorption→per-m capped hAdom,
+plugs verbatim) + `_curved_satisfiable`. Main verified: conclusion MATCHES hcrude binder; τ^{−1/2} prefactor
+kept every branch (not false clean); off-gate BANKED; carried hFirstEnv+hFar satisfiable geometric envelopes
+(banked-shape, true for g^K); poly_absorb PROVED; demonstrator confirms chain. std-3, budget raw 0, 9847 jobs.
+★ HONEST PARTIAL: hcrude reduced from opaque carry to {proved width-transfer core + banked off-gate} ⊕
+{hFirstEnv (narrow chart-image first-jet) + hFar (far-field annulus — the PRECISE unbanked blocker)}. Both
+hFint domination carries now addressed (hAdom order-0 FULL J4-570; hcrude first-deriv PARTIAL J4-571).
+a₁=R/6 CONDITIONAL. J4-572 = hFar (far-field annulus envelope, the precise blocker) OR hFirstEnv OR hInnerCont
+OR convergence trio.
