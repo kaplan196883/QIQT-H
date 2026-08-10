@@ -23335,6 +23335,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCPhaseTransfer.curvedRNC_phase_transfer
 #print axioms QIQTH.CurvedRNCPhaseTransfer.curvedRNC_phase_transfer_satisfiable
 
+-- J4-534: curvedRNC_baseWitness_dom_collar = the FULLY-DISCHARGED curved base-witness Gaussian
+-- domination |vanVleckGatedWitness g^K … τ 0 z| ≤ (C_amp·C_u·C_φ)·gaussDdim(lam·τ) z for
+-- g^K=curvedRNCMetric K (K<0) on the reach collar z∈Kset, ‖z‖<r. ASSEMBLES base-witness domination
+-- #1 (J4-531): amplitude+cutoff via curvedRNCMetric_cutoff_amp_le, transport moduli via
+-- curvedRNC_moduli_bound (J4-532) on the compact chart-reach ball closedBall 0 ρ, phase via
+-- curvedRNC_phase_transfer (J4-533). Chart-image containment w∈closedBall 0 ρ from the UPPER
+-- near-isometry (banked two-sided chartW0_rncRadialSq_error: rncRadialSq(w)≤2·rncRadialSq z≤2n r²)
+-- squeezed by norm_sq_le_rncRadialSq/rncRadialSq_le_nsq to ‖w‖≤ρ=√(2n r²). STRICTLY LIGHTER than #1
+-- (which carried BOTH hMod and hPhase); this carries NEITHER — the only residual is the reach collar
+-- ‖z‖<r. SATISFIABILITY: K<0 genuinely curved (Ric(0)=(n−1)Kδ≠0), C_amp≥1>0, C_u>0, C_φ=(√2)ⁿ>0
+-- finite; underlying radial squeeze tolerates a real contraction (…_curved_satisfiable) ⟹ NOT
+-- secretly flat; collar ‖z‖<r (r>0) satisfiable-not-vacuous. 1 of ~30–40 curved dominations; full a₁
+-- still needs the heatOp/Levi/error-kernel pile + Duhamel assembly. NOT a₁=R/6 (CONDITIONAL,
+-- effectively flat-only). std-3.
+#print axioms QIQTH.CurvedRNCBaseWitnessDomCollar.curvedRNC_baseWitness_dom_collar
+#print axioms QIQTH.CurvedRNCBaseWitnessDomCollar.curvedRNC_baseWitness_dom_collar_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
