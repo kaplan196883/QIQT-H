@@ -23906,6 +23906,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHFirstEnvSource.curved_hFint_hcrude_via_hFirstEnv_hFar_at_gate
 #print axioms QIQTH.CurvedA1FintHFirstEnvSource.curved_hFint_hFirstEnv_at_gate_curved_satisfiable
 
+-- J4-574: DISCHARGE of the width-compatibility scalar hlam4:4≤lam owed by J4-572's far-field source.
+-- VERDICT = route (b): the gate lam is pinned by chart_width_gate to (η,lam)=(1−c,1/c+1), constrained
+-- ONLY by 1<lam ∧ 1/lam<1−η, BOTH relaxed by enlarging lam ⟹ lam freely re-choosable ≥4. 4≤curvedGate.lam
+-- is NOT true (lam can be <4 for large c) so shipping it for curvedGate = FALSE bound; instead curvedGate4
+-- = curvedGate with lam:=max 4 (curvedGate.lam), r/a/b/η + width-gate INHERITED verbatim (all constraints
+-- survive since enlarging lam relaxes them). curved_hlam4_at_gate4 = 4≤lam GENUINELY (le_max_left).
+-- curved_hFint_hFar_general = J4-572 far-field envelope over arbitrary (r,lam),4≤lam (verbatim starWide
+-- width-4τ + gaussDdim_le_gaussDdim_chart upgrade); curved_hFint_hFar_at_gate4 = same over curvedGate4 with
+-- hlam4 hypothesis REMOVED (discharged internally). _curved_satisfiable = Ric(0)≠0. a₁ CONDITIONAL:
+-- hdata-family/hFirstEnv/hsrc/hOffCollarTail/convergence trio/hInnerCont remain; mainline swap
+-- curvedGate→curvedGate4 is mechanical (r/a/b/η unchanged, lam only enlarges). std-3.
+#print axioms QIQTH.CurvedA1FintHlam4.curvedGate4
+#print axioms QIQTH.CurvedA1FintHlam4.curved_hlam4_at_gate4
+#print axioms QIQTH.CurvedA1FintHlam4.curved_hFint_hFar_general
+#print axioms QIQTH.CurvedA1FintHlam4.curved_hFint_hFar_at_gate4
+#print axioms QIQTH.CurvedA1FintHlam4.curved_hFint_hlam4_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
