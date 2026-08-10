@@ -23573,6 +23573,17 @@ namespace QIQTH.AxiomAudit
 -- E-combination carries. NOT a₁=R/6: still CONDITIONAL (leg-2+capstone deferred to J4-550). std-3.
 #print axioms QIQTH.CurvedA1FullyWired.curved_hDa_at_gate
 
+-- (J4-550) curved_core_at_gate — the symmetric LEG-2 adapter: the a₁ two-jet capstone's
+-- core:TruncatedDuhamelCore binder at g:=curvedRNCMetric κ, gi:=curvedRNCInv κ, S:=constGate… (κ<0),
+-- obtained by feeding J4-547's leg-2 MemLapFull (curved_leg2_hLapFull) into truncatedDuhamelCore_AT_GATE_FULL,
+-- with hgi/hΓ discharged via gauge_from_geometry and the two global inputs hinvF/hdg0 discharged from the
+-- curved lemmas (curvedRNCMetric_hinvF, curvedRNCMetric_pd_zero) — the mirror of leg-1's J4-549. Carried
+-- (honest, curved-satisfiable): hframeK (collapses the compact seed to {0}), the CAPPED hAdom2cap, the
+-- matched-sliver MemAdjHi moment residual (shared with leg-1), √ε sliver bundle D0/D1/hbnd (shared), the
+-- FULL-census residuals (hII_lo/hEdom/hFdom/hIlo/hIhi/hEcomb/F2 pile/frozen-moving lists/hBoundaryLim),
+-- measurabilities, hPd2conv. NOT a₁=R/6: still CONDITIONAL (J4-551 = assembly of both legs). std-3.
+#print axioms QIQTH.CurvedA1Leg2Core.curved_core_at_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
