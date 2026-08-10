@@ -23635,6 +23635,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedChartJets.curved_amplitudeDataOn_from_hjetsShape
 #print axioms QIQTH.CurvedChartJets.curved_hjets_residual_intro
 
+-- J4-555 (CurvedCenterIdentities): the GENERAL-base center-identity lift for g^K = curvedRNCMetric κ
+-- (κ ≤ 0, Ric ≠ 0) from the EXACT radial (geodesic) gauge. curvedRNCMetric_radialGauge = metric gauge
+-- ∑ⱼ g^K_ij(y)yʲ=yᵢ (re-export); curvedRNCInv_radialGauge = ★NEW inverse gauge ∑ⱼ gi^K_ij(y)yʲ=yᵢ (from
+-- the exact Sherman–Morrison inverse; (κ/3) correction cancels — NOT flat); curved_radialGauge_bundle
+-- packages both. curved_centerIdentities_of_gaussPullback = ★ the LIFT: hVP/hPsq/hVQ at GENERAL base
+-- from the geodesic normal-chart PULLBACK bridge (base-point chart-regularity remainder), radial gauge
+-- load-bearing (hVP=metric gauge, hPsq=g^K(0)=δ, hVQ=metric−inverse=zᵢ−zᵢ=0). curved_centerIdentities_
+-- at_gate = collar-quantified assembler; curved_centerIdentities_discharge_residual = WIRE, the 3 CENTRE
+-- fields of curved_hjets_residual discharged given the bridge (residue shrinks to the global ∀x jet).
+-- CONDITIONAL on the pullback bridge (abstract .choose chart controlled only near image points). NOT
+-- a₁=R/6 (global ∀x jet + hOffCollarTail + convergence trio + measurability + hsrc remain). std-3.
+#print axioms QIQTH.CurvedCenterIdentities.curvedRNCMetric_radialGauge
+#print axioms QIQTH.CurvedCenterIdentities.curvedRNCInv_radialGauge
+#print axioms QIQTH.CurvedCenterIdentities.curved_radialGauge_bundle
+#print axioms QIQTH.CurvedCenterIdentities.curved_centerIdentities_of_gaussPullback
+#print axioms QIQTH.CurvedCenterIdentities.curved_centerIdentities_at_gate
+#print axioms QIQTH.CurvedCenterIdentities.curved_centerIdentities_discharge_residual
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
