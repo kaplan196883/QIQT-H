@@ -1667,3 +1667,10 @@ import QIQTH.DaLimLUMemAdjHi
 -- J4-543: CONSTRUCTING the τ^{-1/2} moment-cancellation carry hGpow from the concrete amplitude data bundle
 -- (slice2_inner_bound = exposed per-slice hinner of sliver2_bound; hGpow_of_amplitudeData = the capstone). NOT a₁=R/6. std-3.
 import QIQTH.MemAdjHiMomentBound
+
+-- J4-544: DISCHARGE hEndpoint/hAzero for the concrete van-Vleck witness + wire the hGpow capstone with hEndpoint removed.
+-- vanVleckGatedWitness_eq_zero_of_nonpos (concrete witness =0 at τ≤0, discharges the abstract hAzero carry),
+-- witnessSecondXDeriv_endpoint_zero (standalone τ=0), hEndpoint_discharged (exact binder shape, unconditional n≥1),
+-- hGpow_of_amplitudeData_noEndpoint (hGpow_of_amplitudeData with hEndpoint supplied internally). PART B (hD2Hexpand
+-- curved carry) SCOPED not closed = amplitudeData_concrete_residual. NOT a₁=R/6 (still FLAT-ONLY/CONDITIONAL). std-3.
+import QIQTH.AmplitudeDerivativeDataConcrete

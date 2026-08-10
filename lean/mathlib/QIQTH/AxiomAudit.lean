@@ -23486,6 +23486,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MemAdjHiMomentBound.slice2_inner_bound
 #print axioms QIQTH.MemAdjHiMomentBound.hGpow_of_amplitudeData
 
+-- J4-544: DISCHARGE the hEndpoint/hAzero carries of the concrete van-Vleck witness + wire the hGpow capstone
+-- with hEndpoint removed. gatedWitnessN1_eq_zero_of_nonpos / vanVleckGatedWitness_eq_zero_of_nonpos = the concrete
+-- gated N=1 witness ≡0 at τ≤0 (gaussDdim_eq_zero_of_nonpos for n≥1 kills the parametrix Gaussian) — DISCHARGES the
+-- abstract hAzero carry (~10 assembly files) for the concrete witness. witnessSecondXDeriv_endpoint_zero = standalone
+-- τ=0: inner field slot is the ZERO function ⟹ both pd's vanish (pd_zero_fun); Sol endpoint trap AVOIDED (integrand
+-- identically 0, no forced value). hEndpoint_discharged = exact hGpow_of_amplitudeData hEndpoint binder shape,
+-- UNCONDITIONAL (n≥1). hGpow_of_amplitudeData_noEndpoint = hGpow_of_amplitudeData with hEndpoint supplied internally.
+-- PART B: the unrestricted AmplitudeDerivativeData hD2Hexpand for the CURVED witness is the off-collar-unbounded wall
+-- (banked resolution = collar AmplitudeDerivativeDataOn/amplitudeDataOn_concrete); amplitudeData_concrete_residual
+-- SCOPES it (non-vacuous conjunction projector), NOT closed. NOT a₁=R/6: hLapFull/convergence trio/SDW wiring +
+-- the hD2Hexpand curved amplitude carry all remain; a₁ CONDITIONAL + FLAT-ONLY. std-3.
+#print axioms QIQTH.AmplitudeDerivativeDataConcrete.gatedWitnessN1_eq_zero_of_nonpos
+#print axioms QIQTH.AmplitudeDerivativeDataConcrete.vanVleckGatedWitness_eq_zero_of_nonpos
+#print axioms QIQTH.AmplitudeDerivativeDataConcrete.witnessSecondXDeriv_endpoint_zero
+#print axioms QIQTH.AmplitudeDerivativeDataConcrete.hEndpoint_discharged
+#print axioms QIQTH.AmplitudeDerivativeDataConcrete.hGpow_of_amplitudeData_noEndpoint
+#print axioms QIQTH.AmplitudeDerivativeDataConcrete.amplitudeData_concrete_residual_intro
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
