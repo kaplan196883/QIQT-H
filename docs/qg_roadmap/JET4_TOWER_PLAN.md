@@ -6734,3 +6734,20 @@ inside; hFar sourced modulo hlam4). RESIDUAL: {hlam4, hFirstEnv (hcrude's last c
 hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-573 = hFirstEnv (chart-image
 first-jet two-term envelope, sibling of banked witnessSecondXDeriv_chartImage_expand — makes hcrude
 fully sourced modulo hlam4) OR hInnerCont OR convergence trio.
+
+## J4-573 (FULL-source hcrude's on-gate chart-image first-jet envelope hFirstEnv for g^K)
+CurvedA1FintHFirstEnvSource.lean: `curved_hFint_hFirstEnv_at_gate` (EXACT hFirstEnv binder consumed by
+curved_hFint_hcrude_at_gate: ∃A₀ A₁≥0, ∀i τ z∈K ‖z‖<r |witnessFieldDeriv g^K…i τ 0 z|≤
+(A₀+A₁·(rncRadialSq z/τ))·(√τ)⁻¹·gaussDdim τ (W₀ z) — from banked EXACT Leibniz
+CConvV2WitnessStar.witnessFieldDeriv_productRule + Cauchy–Schwarz CConvV2ChartComparison.numerator_le_radial_mul;
+Gaussian gradient √(r²_chart/τ) dominated via √x≤1+x; A₀:=√n·L·Ba/2+Bd·√T, A₁:=√n·L·Ba) +
+`curved_hFint_hcrude_via_hFirstEnv_hFar_at_gate` (DEMONSTRATOR: hFirstEnv + J4-572 hFar → hcrude verbatim)
++ `_curved_satisfiable`. ⚠ NEW scalar (hdata bundle): UPPER near-isometry rncRadialSq(W₀ z)≤2·rncRadialSq z
+— companion of J4-572's LOWER ½·rncRadialSq z≤rncRadialSq(W₀ z) (two-sided ½r≤r_chart≤2r); satisfiability
+audited NOT provably false (z=0→0≤0; flat→r≤2r; true for near-isometry RNC chart). Main verified: conclusion
+matches hFirstEnv; (√τ)⁻¹+A₁·(r²/τ) kept; base bounds PROVED (productRule+numerator); new scalar satisfiable;
+R/6 untouched. std-3, budget raw 0, 9849 jobs. ★ hcrude now FULLY SOURCED modulo {hlam4, hdata-family}:
+3 glued regions = off-gate vanishing (banked) + on-gate two-term hFirstEnv (J4-573) + far-field hFar (J4-572).
+RESIDUAL: {hlam4 (4≤lam), hdata-family (2-sided near-isometry + Jacobian/amplitude bounds), hsrc/hw,
+hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-574 = discharge hlam4 by gate-widening
+(chart_width_gate) OR hInnerCont OR convergence trio.
