@@ -5972,3 +5972,28 @@ J4-539 = SCOPING brick: grep/read hDaLimLU_from_labelled_v2_gauge's internal pai
 confirm its hAdom2 usage factors through the same pairing_intervalIntegrable LO/HI split (so the
 capped-LO + carried-HI pattern applies) — if NOT, another high-value negative finding; if YES, build
 hDaLimLU_from_labelled_capped (mirror memLapFull_from_pairing_dominations).
+
+## J4-539 — leg-1 (Da-limit) LO-capped integrability sub-assembly: LEG-1 IS CAPPABLE [6813c43a]
+DaLimLUCapped.lean (1 std-3, budget raw 0 / 9816 jobs; agent STALLED on stream watchdog after
+writing file+import before pin/report — main verified on-disk file builds clean std-3 no-sorryAx
++ wired the pin, per verify-don't-trust discipline). The leg-1 mirror of leg-2's
+CappedAdom2Audit.memLapFull_from_pairing_dominations. ★ SCOPE VERDICT (Sol-confirmed): leg-1's
+clean hAdom2 factors IDENTICALLY to leg-2 — hDaLimLU_from_labelled consumes uncapped hAdom2 at
+EXACTLY ONE site (GlobalRawBoundFacade.integrability_from_dominations), threading into the SAME
+DaLimEasyTranche.pairing_intervalIntegrable LO/HI split: LO leg [0,u−ε_m] (τ∈[ε_m,u) bounded below)
+CAPPABLE, HI leg [u−ε_m,u] (τ→0, ∫₀^ε τ⁻¹=+∞) carried as MemAdjHi; strip legs ride hAdomHeat (no
+blow-up). Past integrability_from_dominations hAdom2 never reappears (no pointwise limit/τ→0/non-
+integral estimate reaches the uniform bound).
+integrability_from_dominations_capped: drop-in for integrability_from_dominations producing the
+identical 4-tuple census (hIlo,hIhi,MemAdjLo,MemAdjHi), but MemAdjLo built INTERNALLY from the
+per-m CAPPED hAdom2cap via hII_lo_from_capped (NO uncapped hAdom2) + MemAdjHi carried as hII_hi.
+Proof = 4-tuple of banked lemmas. Non-vacuous (hAdom2cap true for curved witness via J4-537 crude→
+capped; hII_hi standard residual; no hyp=conclusion). Generic in (g,gi) = interface re-plumbing.
+HONEST: a₁=R/6 CONDITIONAL + effectively FLAT-ONLY — establishes leg-1 cappable + delivers the
+LO-capped sub-assembly; NOT a₁=R/6; the full capped capstone hDaLimLU_from_labelled_capped
+(~45-180-binder monolith) deferred to J4-540; convergence trio + Seeley-DeWitt wiring remain.
+J4-540 = build hDaLimLU_from_labelled_capped (the leg-1 capped capstone) swapping
+integrability_from_dominations → integrability_from_dominations_capped at line 495; consumes
+hAdom2cap + carries MemAdjHi; then the a₁ capstone accepts externally-supplied capped hLapFull
+(leg 2, via memLapFull_from_pairing_dominations) + this capped leg 1 ⟹ FIRST curved-satisfiable a₁
+capstone (modulo the carried MemAdjHi residuals + convergence trio + geometric wiring). LARGE.
