@@ -1648,3 +1648,8 @@ import QIQTH.CurvedRNCHeatOpDom2
 -- uncapped hAdomHeat (heat operator, no τ⁻¹ blow-up). Drop-in for the eventual capped capstone. Sol-
 -- confirmed leg-1 factors identically to leg-2 through the pairing LO/HI split. NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.DaLimLUCapped
+-- J4-540 (DaLimLUCappedStep2): leg-1 LO-CAPPED MemLapFull splice — routes J4-539's
+-- integrability_from_dominations_capped into its immediate downstream consumer
+-- GlobalRawBoundFacade.memLapFull_from_labelled, producing MemLapFull with NO uncapped hAdom2 on the
+-- path (LO leg capped-built, HI leg MemAdjHi carried, strip legs discarded). NOT a₁=R/6 (CONDITIONAL). std-3.
+import QIQTH.DaLimLUCappedStep2

@@ -23418,6 +23418,22 @@ namespace QIQTH.AxiomAudit
 -- FLAT-ONLY until leg-1 rewiring lands. std-3.
 #print axioms QIQTH.DaLimLUCapped.integrability_from_dominations_capped
 
+-- J4-540 (DaLimLUCappedStep2): the LEG-1 (Da-limit) LO-CAPPED MemLapFull splice — one step past
+-- J4-539. memLapFull_from_labelled_capped routes DaLimLUCapped.integrability_from_dominations_capped
+-- (J4-539's drop-in capped 4-tuple census) into its IMMEDIATE downstream consumer in the leg-1
+-- capstone body, GlobalRawBoundFacade.memLapFull_from_labelled, producing the MemLapFull census binder
+-- with NO uncapped whole-time hAdom2 anywhere on the path: the LO adjacency leg (hII_lo : MemAdjLo) is
+-- built INTERNALLY from the per-m capped family hAdom2cap; the HI adjacency leg (hII_hi : MemAdjHi) is
+-- CARRIED verbatim as the labelled matched-sliver residual (∫₀^ε τ⁻¹=+∞, undischargeable); the strip
+-- legs are produced from hAdomHeat and DISCARDED. Leg-1 mirror of leg-2's
+-- CappedAdom2Audit.memLapFull_from_pairing_dominations, wired THROUGH the J4-539 brick (Sol-confirmed
+-- thin splice). SATISFIABILITY: non-vacuous; strip-leg inputs are genuine heat-op Gaussian bounds, and
+-- hAdom2cap is TRUE for g=g^K (const curvature, J4-537) ⟹ NOT secretly flat. NOT a₁=R/6: this discharges
+-- only the hLapFull sub-goal of the leg-1 capstone from the capped family; the full capped capstone,
+-- leg-2 hLapFull, carried MemAdjHi residuals (both legs), convergence trio + geometric wiring all remain;
+-- a₁ stays CONDITIONAL + effectively FLAT-ONLY. std-3.
+#print axioms QIQTH.DaLimLUCappedStep2.memLapFull_from_labelled_capped
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
