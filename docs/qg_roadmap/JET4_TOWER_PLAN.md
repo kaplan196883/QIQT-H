@@ -6751,3 +6751,20 @@ R/6 untouched. std-3, budget raw 0, 9849 jobs. ★ hcrude now FULLY SOURCED modu
 RESIDUAL: {hlam4 (4≤lam), hdata-family (2-sided near-isometry + Jacobian/amplitude bounds), hsrc/hw,
 hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-574 = discharge hlam4 by gate-widening
 (chart_width_gate) OR hInnerCont OR convergence trio.
+
+## J4-574 (discharge hFar's hlam4 at an admissible widened gate curvedGate4 for g^K)
+CurvedA1FintHlam4.lean: VERDICT route (a) REJECTED (4≤curvedGate.lam FALSE — lam=1/c+1 can be <4, would
+be a false bound); route (b) widened admissible variant. `curvedGate4` (GENUINE FixedFlowGateData:
+inherits a,b,r,eta + PROVED hgate VERBATIM from curvedGate; lam:=max 4 (curvedGate).lam; hlam via
+le_max_left, hgap via one_div_le_one_div_of_le — enlarging lam RELAXES both constraints; lam = far-field
+Gaussian-domination WIDTH not geometric radius, so sound) + `curvedGate4_r`/`curvedGate4_lam` (@[simp]
+field ids) + `curved_hlam4_at_gate4`:4≤(curvedGate4).lam (THE DISCHARGE = 4≤max 4 …, le_max_left,
+unconditionally true) + `curved_hFint_hFar_general` (J4-572 far-field generalised to arbitrary (r,lam),
+4≤lam explicit hyp) + `curved_hFint_hFar_at_gate4` (far-field over curvedGate4, hlam4 REMOVED) +
+`_curved_satisfiable`. Main verified: curvedGate4 genuine (all field obligations discharged, no vacuity);
+hlam4 discharge genuinely true (not false claim about curvedGate.lam); machinery PROVED; R/6 untouched.
+std-3, budget raw 0, 9850 jobs. ★ hlam4 dischargeable at admissible widened gate; mainline
+curvedGate→curvedGate4 swap (identical geometry, only lam changes) = mechanical follow-on. RESIDUAL:
+{hdata-family (2-sided near-isometry ½r≤r_chart≤2r + Jacobian L + amplitude Ba/Bd), hsrc/hw,
+hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-575 = hdata-family (near-isometry
++ jet bounds from RNC chart properties — sole hcrude/far-field residual) OR hInnerCont OR convergence trio.
