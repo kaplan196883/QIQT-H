@@ -6175,3 +6175,28 @@ J4-547 = mirror the leg-1 capped chain (J4-539..541 pattern) onto LEG-2 hLapFull
 takes an EXTERNALLY-supplied capped hLapFull:MemLapFull (Sol J4-538); build/wire it for the curved
 witness via CappedAdom2Audit.memLapFull_from_pairing_dominations (the leg-2 capped template) + the
 landed curved dominations — the symmetric other leg. OR the convergence trio.
+
+## J4-547 — curved leg-2 hLapFull (cheap wire): BOTH a₁-capstone legs now capped-for-curved [58650593]
+Leg2HLapFull.lean (2 std-3, budget raw 0 / 9824 jobs; elaborated 26s; verified clean by rebuild
+reading #print axioms — no sorryAx). Supplies the curved leg-2 external MemLapFull binder the a₁
+capstone's Duhamel-core leg (truncatedDuhamelCore_AT_GATE_FULL) consumes.
+★ KEY: leg-2's hLapFull is the SAME MemLapFull object J4-540 (DaLimLUCappedStep2.memLapFull_from_
+labelled_capped) already builds — NOT a distinct instance. Capstone leg-2 binder = J4-540 output at
+S:=constGate g gi hChr hK c. Cheap wire.
+curved_leg2_hLapFull: exact leg-2 MemLapFull at S:=constGate, threading J4-540; gauge binders (hgi:
+MemGaugeGi, hΓ:MemGaugeGamma) discharged internally via gauge_from_geometry from hK0/hframeK/hinvF/
+hdg0 (banked curvedRNC_geomGaugeBundle at singleton seed). Carried verbatim from J4-540: hInter,
+hAdomHeat (J4-536), per-m CAPPED hAdom2cap (J4-537), hFdomW/hFzero, hmeasLo/hmeasHi/hmeas2Lo, hII_hi:
+MemAdjHi, √ε sliver D0/D1/hbnd, hPd2conv. curved_leg2_hLapFull_curved_satisfiable: Ric(0)=(n−1)Kδ≠0.
+★★ BOTH LEGS NOW CAPPED-FOR-CURVED: leg 1 = J4-541 hDaLimLU_from_labelled_capped, leg 2 = this brick
+via J4-540; both purge the FALSE uncapped whole-time hAdom2. GATE: K<0 curved (Ric≠0 n≥2); hAdom2cap
+TRUE off flat (J4-537); MemAdjHi/moment/√ε carries satisfiable, none=conclusion, no :=True. Sol:
+grounding only gauge while carrying dominations is sound; no seed hazard. HONEST: a₁=R/6 CONDITIONAL
++ FLAT-ONLY — both legs capped ≠ the coefficient; the capstone still carries MemAdjHi/moment residuals
+(both legs) + convergence trio + Seeley-DeWitt geometric wiring.
+J4-548 = ASSEMBLE the curved a₁ capstone from BOTH capped legs: instantiate A1R6FromLabelledCurved.
+a1_R6_from_labelled_curved at g:=curvedRNCMetric K feeding leg-2 hLapFull from curved_leg2_hLapFull +
+leg-1 hDa from J4-541 hDaLimLU_from_labelled_capped — the FIRST genuinely curved-satisfiable a₁
+capstone modulo {both-leg MemAdjHi/moment residuals, convergence trio, SDW geometric wiring}. ⚠
+MONOLITH: the capstone is a large Π — SPLICE (feed the two legs as the specific binders), do NOT
+re-elaborate whole; >5min STOP+split. OR attack the convergence trio.
