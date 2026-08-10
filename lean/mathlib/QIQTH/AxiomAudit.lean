@@ -23128,6 +23128,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.A1R6FromLabelledCurvedGauge.hDaLimLU_from_hgate_gauge
 #print axioms QIQTH.A1R6FromLabelledCurvedGauge.a1_R6_from_labelled_curved_gauge
 
+-- J4-521 (A1R6FromLabelledCurvedBoundary): the THIRD pending capstone item — the OPAQUE boundary
+-- limit member hBoundaryLim (Section H) — REMOVED from the a₁ capstone signature, built on J4-520.
+-- a1_R6_from_labelled_curved_boundary = a1_R6_from_labelled_curved_gauge with hBoundaryLim SUPPLIED
+-- INTERNALLY from the banked EnvelopeWiringLocUnif.hBoundaryLim_DONE at S:=constGate g gi hChr hK c,
+-- hC:=hChr (whose conclusion matches the capstone binder verbatim). AUDIT: the single opaque limit
+-- binder is replaced by concrete, curved-valid, individually-satisfiable data — the van-Vleck
+-- heat-envelope (hEbound/hInt/hEmeas/hbase), the summable Levi tail (env/hu/hbound), hf_meas, the
+-- RNC exp-chart GEOMETRY bundles hgeoBundle/hfgBundle (QUADRATIC remainder ‖exp v−q−v‖≤C‖v‖², C_Dw
+-- FREE ⟹ curved-valid, flat only forces C_Dw=0), gate activation (rS/hKball/hSact), hWslice, the
+-- amplitude Gaussian domination hDomB — plus the window floor ε₀ (satisfiable ε₀=1=epsSeq 0, t>1);
+-- the capstone's EXISTING dataLevi (LeviSeriesLocalData … CLevi T) is REUSED as hBoundaryLim_DONE's
+-- hLocal (hFenv→(E1) single window-uniform Cf, hFmeas→(E2) moving-slice meas); htT:=hUT t htU and
+-- hgdet0 (det g(0)=1) derived from hg0 internally. GATE: genuinely reduces the opaque boundary carry
+-- to curved-valid analytic+joint-continuity+geometry data (no flatness reintroduced, no relabel).
+-- Don't-undercredit: hBoundaryLim_DONE + (E1)/(E2)/(E3) + MovingCorrRecombination were already banked
+-- (J4-306/307/517); this is capstone-level supply wiring. Π elaboration ~52s (cheap). std-3. ⚠ ALL
+-- THREE flat-only/pending capstone items now resolved from the SIGNATURE (hraw+hframeK+hBoundaryLim,
+-- 3 of 3) — coefficient-neutral. NOT a₁=R/6 (still CONDITIONAL: iterE positive-time continuity feeding
+-- hBoundaryLim_DONE, the htr/hGauss geometric bridges, and a full RNC curved witness all remain).
+#print axioms QIQTH.A1R6FromLabelledCurvedBoundary.a1_R6_from_labelled_curved_boundary
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -1580,3 +1580,11 @@ import QIQTH.A1R6FromLabelledCurved
 -- via DaLimCurvedGauge.gauge_from_pointwise). BOTH flat-only capstone binders now removed
 -- (2 of 3). Curved-satisfiable (J4-512 confMetric). NOT a₁=R/6 (CONDITIONAL). std-3.
 import QIQTH.A1R6FromLabelledCurvedGauge
+
+-- J4-521: boundary-threaded curved-signature a₁ capstone. Supplies the opaque hBoundaryLim
+-- (Section H) from the banked EnvelopeWiringLocUnif.hBoundaryLim_DONE (dataLevi REUSED as its
+-- hLocal; htT/hgdet0 derived), replacing it with concrete curved-valid analytic + RNC-geometry +
+-- window-floor data. All three flat-only/pending capstone items (hraw, hframeK, hBoundaryLim) now
+-- resolved from the signature — 3 of 3. NOT a₁=R/6 (CONDITIONAL: iterE positive-time continuity,
+-- htr/hGauss bridges, full RNC curved witness remain). std-3.
+import QIQTH.A1R6FromLabelledCurvedBoundary
