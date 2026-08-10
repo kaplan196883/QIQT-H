@@ -6684,3 +6684,18 @@ hAdom} domination sources + {hsrc, hOffCollarTail} geometric + {convergence trio
 a₁=R/6 CONDITIONAL. J4-570 = source hcrude (build WideAmplitudeData.first_domination = τ^{−1/2}
 witnessFieldDeriv curved envelope via WitnessDerivDomination.witnessFieldDeriv_gate_envelope + near-isometry
 chart-Gaussian) OR hFint_d's raw-witness hAdom (from banked CurvedRNCBaseWitnessDomAdom, order-0 whole-time).
+
+## J4-570 (FULL-source hFint_d's order-0 hAdom for g^K from banked base-witness domination)
+CurvedA1FintDAdomSource.lean: `curved_hFint_d_hAdom_at_gate` (∃ c>0,wA>0,C≥0, ∀m τ epsSeq m≤τ→τ≤T→∀z
+|vanVleckGatedWitness g^K…(constGate…c)a b τ 0 z|≤C·gaussDdim(wA·τ)(0−z), obtained from banked
+CurvedRNCBaseWitnessDomAdom.curvedRNC_baseWitness_dom_adom frozen-p=0 window conjunct hWDom [CW const]
+via rw[zero_sub,gaussDdim_neg]; C=CW m-INDEPENDENT constant, honest for order-0 no blow-up) +
+`curved_hFint_d_at_gate_via_source` (DEMONSTRATOR: feeds sourced hAdom into curved_hFint_d_at_gate
+(CA:=fun _=>C), chains to full IntervalIntegrable — plugs verbatim) + `_curved_satisfiable`. Carries
+ONLY hw (amplitude C^∞ smoothness, hsrc-family). Main verified: ∃ values are the BANKED c/lam/CW (not
+vacuous); base bound PROVED; demonstrator confirms match; C m-independent honest (order-0). std-3,
+budget raw 0, 9846 jobs. ★ FULL close (cleaner than hFint J4-569 which left hcrude carried) — hFint_d's
+hAdom removed from carry pile modulo hw. RESIDUAL: {hcrude (hFint's τ^{−1/2} first-deriv envelope —
+still carried), hsrc, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-571 =
+source hcrude (build WideAmplitudeData.first_domination τ^{−1/2} witnessFieldDeriv curved envelope) OR
+hInnerCont OR convergence trio.
