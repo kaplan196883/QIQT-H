@@ -6783,3 +6783,19 @@ AmplitudeFamilyDischarge.amp_pdiffAt_center). RESIDUAL: {hFar far-field coercivi
 hdata(1)/(2)/(3) uniformization (medium), hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6
 CONDITIONAL. J4-576 = conjunct (3) uniform Ba/Bd/L via compactness (banked-thin, tractable) OR hInnerCont OR
 convergence trio; hFar far-field coercivity flagged as the geometric wall.
+
+## J4-576 (source hdata conjunct (3) uniform amplitude bounds for g^K via compactness)
+CurvedA1FintHdataUniform.lean: `curved_hdata_amp_value_uniform_at_gate` (3a FULLY DISCHARGED no residual:
+∃ρ>0 Ba≥0 ∀i τ z∈K ‖z‖<ρ |chartFieldAmp g^K…a b τ z 0|≤Ba — from banked BaseSlotAmplitude.baseSlotAmp_bound
+[joint cont on compact [0,T]×ˢclosedBall → IsCompact.exists_bound_of_continuousOn] + curved carries
+curvedRNCMetric_contDiff/curvedRNCInv_contDiff[κ≤0]/curvedRNCMetric_hgpos; τ affine, no ε-floor) +
+`curved_hdata_amp_deriv_uniform_at_gate_of_cont` (3b THIN: reduced to SINGLE carried hcont = joint (τ,z)-cont
+of pd(chartFieldAmp) i 0 on compact box, via IsCompact.exists_bound_of_continuousOn; hcont satisfiable
+ContinuousOn carry not yet banked; ∀i Bd = finite max) + `_curved_satisfiable`. Main verified: 3a from banked
+machinery no residual; 3b hcont genuine satisfiable carry not vacuous; τ→0 audited (affine, no blow-up);
+R/6 untouched. std-3, budget raw 0, 9852 jobs. ★ hdata DEPTH: (3a) amp value BANKED full; (3b) amp deriv →1
+continuity carry (medium); remaining (1) inverse-chart field-jet existence + (2) |Pval|≤L (deep), (3b) hcont.
+RESIDUAL: {hFar far-field coercivity (GEOMETRIC WALL), hdata (1)/(2) inverse-chart jet [deep] + (3b) hcont
+[continuity], hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-577 = (3b)
+hcont pd-continuity discharge (pd_chartAmp_center route in BaseSlotAmpDeriv, would complete conjunct 3) OR
+(1)/(2) inverse-chart field-jet OR hInnerCont OR convergence trio; hFar far-field coercivity = flagged wall.
