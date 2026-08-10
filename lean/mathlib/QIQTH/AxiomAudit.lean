@@ -23533,6 +23533,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OffCollarTailMoment.tailMoment_expSuppressed_bound
 #print axioms QIQTH.OffCollarTailMoment.tailMoment_collar_expSuppressed
 
+-- J4-547: curved_leg2_hLapFull = the CURVED LEG-2 external hLapFull producer the a₁ two-jet curved capstones
+-- (A1R6FromLabelledCurved{,Boundary}) consume. KEY ANSWER: leg-2's hLapFull is the SAME MemLapFull object
+-- J4-540 (DaLimLUCappedStep2.memLapFull_from_labelled_capped) already builds for a general gate S, taken at
+-- S:=constGate g gi hChr hK c — a CHEAP WIRE, NOT a distinct memLapFull_from_pairing_dominations instance. This
+-- brick reproduces that producer at S:=constGate…, with ONE reduction over J4-540: the two gauge binders
+-- (hgi/hΓ) are discharged INTERNALLY from the four geometric inputs (hK0/hframeK/hinvF/hdg0) via
+-- gauge_from_geometry — the same gauge move leg-1's J4-541 capstone makes. For g=g^K (curvedRNCMetric K, K<0)
+-- those inputs are the banked curvedRNC_geomGaugeBundle members at the singleton seed. ALL analytic
+-- dominations (hInter, hAdomHeat [curved: J4-536], per-m CAPPED hAdom2cap [curved: J4-537], hFdomW, hFzero,
+-- measurabilities, matched-sliver hII_hi:MemAdjHi, √ε sliver, hPd2conv) carried verbatim from J4-540; none is
+-- the conclusion, none vacuous. _curved_satisfiable re-exports Ric(0)≠0 (curved-inhabited, NOT flat). With this,
+-- BOTH legs of the a₁ capstone are capped-for-curved (leg1=J4-541, leg2=here) modulo the shared MemAdjHi/moment
+-- residuals + convergence trio + Seeley-DeWitt geometric wiring. NOT a₁=R/6: CONDITIONAL + FLAT-ONLY. std-3.
+#print axioms QIQTH.Leg2HLapFull.curved_leg2_hLapFull
+#print axioms QIQTH.Leg2HLapFull.curved_leg2_hLapFull_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

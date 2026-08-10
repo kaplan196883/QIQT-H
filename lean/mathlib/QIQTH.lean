@@ -1688,3 +1688,5 @@ import QIQTH.HGpowFromCollar
 -- (√2)ⁿ·e^{−R²/8τ}·(2n+1)/(2τ); collar R=c√τ ⟹ tailMoment_collar_expSuppressed = (√2)ⁿ·e^{−c²/8}·(2n+1)/(2τ). Still
 -- O(τ⁻¹) for fixed c (matched-pair sliver_term1_on_collar_matched is the real O(τ^{−1/2}) closure); NOT a₁=R/6. std-3.
 import QIQTH.OffCollarTailMoment
+
+import QIQTH.Leg2HLapFull
