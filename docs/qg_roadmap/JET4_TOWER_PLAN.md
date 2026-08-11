@@ -7550,3 +7550,16 @@ std-3, raw 0 (9897).
 hpkgBound failure as theorem pin); (2) whiteExp/whiteW definitions (uniformFlowExp ∘ E_q) +
 orthonormality + ∂ĝ_q(0)=0 + exact phase; (3) confinement/ApproximatesLinearOn adapters.
 J4-622 = whitened replay of the residual bank.
+
+### J4-621 [AF] — no-go PIN + whitened witness (both jets) + adapters (b5f63596)
+WhiteWitness.lean (19 decls). ★flatPhaseModel_heatOp_diag: EXACT diagonal identity
+heatOp(flat G) τ q q = ((tr gi(q)−n)/2τ)·(4πτ)^{−n/2}. ★flatPhase_hpkgBound_fails: the no-go
+THEOREM (repr-scoped, labelled gap = identification through gate/amplitude layers of the
+literal witness). ★whitePullbackMetric_zero (ĝ_q(0)=δ EVERY row) + _pd_zero (∂ĝ_q(0)=0 via
+weld germ + pd_comp_linearVel). E_0=δ automatic. ★quadForm_whiteVel exact phase transfer
+(ε₀/τ floor structurally gone). Frame bounds + confinement adapters.
+★white_vs_asBuilt_frame_gate (repair exercised where defect exhibited). std-3, raw 0 (9898).
+**J4-622**: whitened replay — (i) chart-level fderiv identification of whitePullbackMetric;
+(ii) replay the sole hframeK consumer (pullbackMetricInv dev) with the (δ,0) jets; (iii)
+whitened hpkgBound producer from whiteW (phase exactly flat in chart velocity), threading
+confinement + fat-ball nondegeneracy through chart-radius bookkeeping.
