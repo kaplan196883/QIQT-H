@@ -7533,3 +7533,20 @@ constant-curvature isometry equivariance (row-0 → all rows). Owed transport pi
 **J4-620**: the equivariance probe — formalize constant-curvature isometry equivariance of the
 witness (parametrix/cutoff/gate per-q intrinsic) to transfer banked row-0 analysis to all rows
 at fat K; fallback = per-q frozen-style replay for the transport amplitude.
+
+### J4-620 [AF] — probe verdict: per-q-uniform machinery; hpkgBound FALSE as-built; whitening = repair (76cfe4dc)
+EquivProbe.lean (9 decls). ★CORE READ: uniform* machinery IS PER-Q-UNIFORM (table w/ line refs:
+flow based at q, chart per-q, all residual engines ∀q∈K); hframeK enters through ONE lemma
+(pullbackMetricInv dev) because the chart is per-q BASED but coordinate-FRAMED (g̃_q(0)=g(q)≠δ) —
+hframeK compensated missing per-q whitening. ★DECISIVE (Sol-confirmed, reverses J4-619 β):
+as-built witness's flat phase carries (tr gi^κ(q)−n)/(2τ) un-cancellable floor at every q≠0 ⟹
+hpkgBound@fat-K assessed FALSE for the AS-BUILT witness (assessment; formal no-go = J4-621
+item 1). Equivariance (a)/(b) moot ⟹ route (c) per-q WHITENING. Landed: off-center trace
+defects formalized; uniformFlow_perq_chart_frame_defect obstruction pin; ★curvedRNC_whitening
+(closed-form E_q = aδ+b·qqᵀ, E g E = δ) + gates. Difficulty: SMALLER than full replay —
+witness change + adapters + whitened-profile coefficient bounds; amplitude layers clean.
+std-3, raw 0 (9897).
+**J4-621** (Sol plan): (1) formal diagonal no-go (τ·R_τ(q,q)/G_τ(0) → ½(tr g⁻¹−n)·A₀ ⟹
+hpkgBound failure as theorem pin); (2) whiteExp/whiteW definitions (uniformFlowExp ∘ E_q) +
+orthonormality + ∂ĝ_q(0)=0 + exact phase; (3) confinement/ApproximatesLinearOn adapters.
+J4-622 = whitened replay of the residual bank.
