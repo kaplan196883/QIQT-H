@@ -7663,3 +7663,13 @@ sup_{q∈K}‖matToCLM(curvedWhitening)‖ entry estimate (√(1+u)−1 ≤ u/2 
 closure argument at radius b·C_E < c ⟹ discharge hOffS AND pre-discharge hOffS2 ⟹ hP1
 unconditional + hP2 lands clean. Then S1-b (hP2, DQ one order up + second jets ∘ whiteUnvel),
 S1-c (E3d assembly → white_tripleHEmeas).
+
+### J4-630 [AF] — whitened collar DISCHARGED; hP1 fully unconditional (c622e4ee)
+WhiteCollar.lean (8 decls). Collar FREE from the banked contraction (no norm bound needed;
+brief's direction inverted — corrected + pinned white_collar_expansion_pin). hOffS + hOffS2
+discharged (exact binders); ★★white_hP1_unconditional (radius window b < c < δ₀). std-3,
+raw 0 (9907).
+**J4-631**: S1-b hP2 — WhiteS1P1's route one order up (second PdiffAt from chart C² + dq-engine
+second-derivative rep at whiteCutKernelGc + full-gate indicator; off-gate leg SERVED by
+white_hOffS2_discharged). Then S1-c = E3d assembly → white_tripleHEmeas → hEmeas residue
+discharged → white_tail_O_s unconditional mod hlam8.
