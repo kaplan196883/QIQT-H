@@ -7327,3 +7327,43 @@ Lipschitz defect τ^(-1/2)·G); (2) α-fork: α-generalize D2 consumer to -1/2 (
 (more natural for a₁ extraction); (3) producer re-assembly. std-3, raw 0 (9885).
 **J4-609**: frozen-SPD Gaussian layer steps 1-3 (define frozenGauss g q τ v; frozen cancellation;
 ellipticity comparison on the space-form ball — eigenvalue bounds in CurvedRNCPosDef territory).
+
+### SOL STRATEGIC CONSULT (2026-08-11, post-J4-608; gpt-5.6-sol/high) — α-fork + endgame ranking
+**α-FORK: branch (a) FIRST by a wide margin** (α-generalize D2 consumer to −1/2; Beta/Γ layer is
+NOT the obstruction — a=α+1=1/2>0, all Beta integrals converge, Mittag-Leffler series). THREE
+GO/NO-GO LEMMAS before broad implementation: (1) width-2 model is a CLOSED convolution fold
+(W₂*W₂ ≤ A·W₂ fixed width, NOT width-doubling per fold); (2) consumer has no hidden UNWEIGHTED
+supremum (sup |E|/W = ∞ at α=−1/2 — must use weighted sup t^{−α}|E|/W) and no continuity-at-t=0
+requirement; (3) FINAL-RATE AUDIT: trace every division-by-t in the a₁ extraction — α=−1/2 gives
+only O(√t) absolute remainder; if the coefficient step needs O(t), use the HYBRID: uniform
+α=−1/2 engine + CENTER-COLUMN (q=0) α=0 sharpening (center gauge has ∂g(0)=0, Γ(0)=0 ⟹ defect
+quadratic in p at q=0 ⟹ α=0 for the center source column; mixed convolution (t−s)^{−1/2}*s⁰ ~
+t^{1/2} keeps the seed improved). Old C(1+t′) interface → C·t^α(1+t)·W (absorb 1+t per fold on
+fixed horizon; audit every signature).
+**⚠ METRIC CORRECTION: curvedRNCMetric is NOT an exact space form** — tangential eigenvalue
+1+(κ/3)|y|² agrees with (S_κ(r)/r)² only to second order. Do NOT import sinh geodesics / exact
+van Vleck closed forms. Branch (b)-specialized loses its advantage; (b)-generic last resort.
+**NO hidden ε₀ floor at next order**: once the ENTIRE principal symbol is frozen exactly at q,
+the residual needs only finite uniform Lipschitz L_A (not small) + strict uniform ellipticity
+λI ≤ A ≤ ΛI (strict SPD MARGIN — choose r strictly inside) + uniform lower-order bounds + common
+Gaussian majorant + bounded measure comparison. Criterion: every coefficient of a second
+p-derivative must agree exactly with its frozen value on the diagonal.
+**PRIORITIES**: 1=branch (a) w/ go/no-go trio; 2=capstone co-instantiation SMOKE TEST NOW (cheap
+anti-vacuity: discover incompatible radii/measures/gates/quantifiers early — the {0} lesson);
+3=fat-K hEmeas/hAdom/hcont (hAdom must use the honest weighted singular bound); 4=hmassone pre-ρ;
+5=hjets (packageable as final named residual `CenterMassJetPackage` — mass/support +
+center-asymptotic jets ONLY, no geometry/radii inside); 6-7=branch (b).
+**RED FLAGS**: (A) closed-ball gate differentiated at boundary — gate only the SOURCE variable /
+restrict after heatOp / smooth cutoff strictly inside; (B) use NESTED radii 0<rS<rK<rdomain, NOT
+rS:=r (equality destroys cutoff/derivative margin); (C) ONE dependent structure for all
+K/measure/radii/gates (independent ∃-witnesses = the co-instantiability trap); (D) hcont must be
+continuity on t>0 / local-uniform on [δ,T] — never a closed interval containing 0 (α=−1/2 defect
+unbounded at 0); (E) mass normalization: frozen Gaussian vs WHICH measure (Lebesgue vs
+Riemannian volume) — PDE cancellation ≠ correct delta mass; q-dependent density factor needed
+through hmassone; (F) genuine-curvature gates need n≥2 AND explicit R(0)≠0 (κ≠0 alone
+insufficient in dim 1); (G) center gauge proves center jets only — check no downstream "global
+first jet" secretly needs a global flat frame; conversely WEAKEN global-jet hypotheses to
+center jets + uniform C^k on K where possible; (H) final-rate loss (see go/no-go 3).
+**MILESTONE SEQUENCE**: FatBallGeometry (strict margins) → FrozenDefectNegHalf → generalized
+consumer → optional FrozenDefectCenterZero → FatFrozenLeviPackage (meas/dom/cont) → capstone w/
+only CenterMassJetPackage residual → discharge mass/support → jets.
