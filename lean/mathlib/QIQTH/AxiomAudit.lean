@@ -24077,6 +24077,31 @@ namespace QIQTH.AxiomAudit
 -- rethread. std-3 all. NOT a₁ = R/6 (still FLAT-only until the full rethread through the curved capstone).
 #print axioms QIQTH.Leg2HLapFullCenter.curved_leg2_hLapFull_center
 
+-- J4-587: THE CULMINATING curved-capstone rethread — the CENTER-GAUGE variant chain threading the
+-- center gauge UP to a NON-VACUOUS curved a₁=R/6 capstone. J4-582 proved the shipped
+-- CurvedA1FullyWiredCapstone.curved_a1_R6_fully_wired VACUOUS at the curved witness (hframeK+hK0 force
+-- K={0} ⟹ hmassone unsatisfiable). This brick weakens hframeK → the center-only value gauge
+-- hg0:∀ i j, g^K 0 i j=δ (satisfied by curvedRNCMetric via curvedRNCMetric_zero, no K collapse) and
+-- threads it through the leg chain: curved_hDa_at_gate_center (LEG 1, calls J4-585
+-- hDaLimLU_from_labelled_capped_center), curved_core_at_gate_center (LEG 2, both gauge sites swapped —
+-- gauge_from_geometry→gauge_from_pointwise AND curved_leg2_hLapFull→J4-586 _center), and the FULL
+-- capstone curved_a1_R6_fully_wired_center (hframeK→hg0, hK0 KEPT since curved_a1_R6_geomWired needs it
+-- and it is harmless/satisfiable; geomWired REUSED UNCHANGED — it never consumed hframeK). Every variant
+-- CONCLUSION = the original a₁ two-jet R/6 identity (coefficient n(n−1)κ/6 ≠ 0), not weakened.
+-- curved_a1_R6_center_nonvacuous = THE VACUITY GUARD (anti-J4-582 for the REAL capstone): the weakened
+-- capstone's antecedent bundle {hg0, 0∈K, ∃q≠0∈K, MemGaugeGi∧MemGaugeGamma, Ric(0)≠0, ¬(∀q∈K,g^K q=δ)}
+-- is JOINTLY SATISFIABLE at a genuinely-curved witness (κ<0, n≥2) on a GENUINE compact K (closed unit
+-- ball, contains a nonzero point — NOT the J4-582 collapsed {0}), reusing J4-584
+-- curved_center_antecedents_nonvacuous + hg0=curvedRNCMetric_zero. ⚠ HONEST: hmassone (the ∫z→1 base-
+-- mass limit) remains a CARRIED analytic input even in the weakened capstone — the guard shows the
+-- STRUCTURAL K={0} obstruction is GONE (K genuine, so hmassone no longer forced to ∫=0≠1), NOT that
+-- hmassone is proven. a₁=R/6 was previously non-vacuous only for the FLAT tower; this makes the CURVED
+-- capstone non-vacuous too, MODULO hmassone. std-3 all four. NOT a₁=R/6 (still CONDITIONAL).
+#print axioms QIQTH.CurvedA1FullyWiredCenter.curved_hDa_at_gate_center
+#print axioms QIQTH.CurvedA1FullyWiredCenter.curved_core_at_gate_center
+#print axioms QIQTH.CurvedA1FullyWiredCenter.curved_a1_R6_fully_wired_center
+#print axioms QIQTH.CurvedA1FullyWiredCenter.curved_a1_R6_center_nonvacuous
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

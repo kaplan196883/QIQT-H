@@ -1770,3 +1770,16 @@ import QIQTH.DaLimLUCappedStep3Center
 -- body is a thin assembly (like leg-1) — a proof copy with the ONE gauge-line swap, no census re-elaboration.
 -- Step 2 of the certified center-only-gauge rethread. NOT a₁=R/6 (still FLAT-ONLY until capstone lands). std-3.
 import QIQTH.Leg2HLapFullCenter
+
+-- J4-587 (CurvedA1FullyWiredCenter): THE CULMINATING curved-capstone rethread — the CENTER-GAUGE variant
+-- chain up to curved_a1_R6_fully_wired_center, making the curved a₁=R/6 capstone NON-VACUOUS. Threads the
+-- center gauge UP: curved_hDa_at_gate_center (LEG 1), curved_core_at_gate_center (LEG 2, both gauge sites
+-- swapped gauge_from_geometry→gauge_from_pointwise + curved_leg2_hLapFull→_center), and the full capstone
+-- curved_a1_R6_fully_wired_center (hframeK→hg0, hK0 KEPT for geomWired, reusing curved_a1_R6_geomWired
+-- UNCHANGED). curved_a1_R6_center_nonvacuous = THE VACUITY GUARD: the weakened capstone's antecedent bundle
+-- {hg0, 0∈K, ∃q≠0∈K, gauge members, Ric(0)≠0, ¬hframeK} is JOINTLY SATISFIABLE at a genuinely-curved
+-- witness on a GENUINE K (closed unit ball, not the J4-582 {0}) — anti-J4-582 for the REAL capstone.
+-- Every variant conclusion = the original a₁ R/6 two-jet; hg0 discharged by curvedRNCMetric_zero; no
+-- hframeK/K={0} collapse. ⚠ hmassone STILL a carried analytic input — the guard removes the STRUCTURAL
+-- obstruction, not hmassone. std-3 all. NOT a₁=R/6 (conditional on the carried residuals incl. hmassone).
+import QIQTH.CurvedA1FullyWiredCenter
