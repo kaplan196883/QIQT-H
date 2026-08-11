@@ -1844,3 +1844,14 @@ import QIQTH.CurvedA1Hsrc
 -- pullback bridge}. curved_hjets_bundle_satisfiable = NON-FLAT (both radial gauges hold ∧ g^K≠δ off-diagonal, κ<0).
 -- All std-3. NOT a₁=R/6 (capstone still owes census/domination/convergence-trio/hmassone-pre-ρ/hContDom).
 import QIQTH.CurvedA1Hjets
+-- J4-596 (CurvedA1HContDom): drains the hContDom carrier that J4-592's hInnerCont reduction carries, for the
+-- center-gauge curved a₁=R/6 capstone at g^K. hContDom = per-interior-point dominated-continuity datum for the
+-- space-time slice W(u−s)0z·L s z 0. KEY: banked generic builder ContDomWindow.hContDom_discharged produces the
+-- EXACT hContDom shape from {hAdom (D1 witness dom, width 3/2), hBdom (width-2 Levi dom), hmeas, hcont},
+-- CONSTRUCTING the analytic conjuncts (integrable dominator + window norm bound) internally. curved_hContDom_at_gate
+-- = EXACT hContDom binder specialized to g^K (analytic half discharged → {hAdom,hBdom,hmeas,hcont}).
+-- curved_hInnerCont_of_dominations = composed reduction into J4-592 (removes opaque ContinuousOn AND hContDom
+-- existential). curved_hContDom_satisfiable = NON-FLAT (κ<0,n≥2). RESIDUAL: hAdom banked only frozen-p=0/windowed
+-- (curvedRNC_baseWitness_dom), hBdom = D2/convergence-trio frontier → hContDom NOT fully closed. std-3.
+-- NOT a₁=R/6 (capstone still owes {hAdom,hBdom,hmeas,hcont} + census/domination/convergence-trio/hmassone-pre-ρ/hjets).
+import QIQTH.CurvedA1HContDom

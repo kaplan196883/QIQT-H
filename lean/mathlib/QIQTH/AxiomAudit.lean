@@ -24242,6 +24242,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1Hjets.curved_hjets_bundle_residual_intro
 #print axioms QIQTH.CurvedA1Hjets.curved_hjets_bundle_satisfiable
 
+-- J4-596 (CurvedA1HContDom): drains the hContDom carrier that J4-592's hInnerCont reduction carries, for
+-- the center-gauge curved a₁=R/6 capstone at g^K=curvedRNCMetric κ. hContDom = the per-interior-point
+-- dominated-continuity datum (∃ integrable dominator ∧ eventual AEStronglyMeasurable ∧ eventual a.e. norm
+-- bound ∧ a.e.-z time ContinuousAt) for the space-time slice W(u−s)0z·L s z 0. KEY: the banked generic
+-- ABSTRACT BUILDER ContDomWindow.hContDom_discharged produces the EXACT hContDom shape from the four
+-- granular inputs {hAdom (D1 witness Gaussian domination, all p q, width 3/2), hBdom (width-2 Levi
+-- domination), hmeas (interior z-slice measurability), hcont (a.e.-z time ContinuousAt)}, CONSTRUCTING the
+-- two genuinely-analytic conjuncts (integrable Gaussian×Gaussian dominator + uniform window norm bound)
+-- INTERNALLY. curved_hContDom_at_gate = the EXACT hContDom binder of curved_hInnerCont_at_gate, specialized
+-- to g^K (analytic half discharged, reduced to {hAdom,hBdom,hmeas,hcont}). curved_hInnerCont_of_dominations
+-- = composed reduction chaining into J4-592, removing BOTH the opaque ContinuousOn AND the hContDom
+-- existential, leaving only the four raw carries. curved_hContDom_satisfiable = NON-FLATNESS (κ<0,n≥2:
+-- ∃w,1<det g^K w). HONEST RESIDUAL: hAdom banked only in FROZEN-p=0/windowed collar form
+-- (curvedRNC_baseWitness_dom), hBdom = D2/convergence-trio frontier (ConcreteDominations: "NOT attempted:
+-- (D2) the Levi-series domination"), so hContDom NOT fully closed / hInnerCont NOT unconditional for g^K.
+-- All std-3. NOT a₁=R/6 (capstone still owes {hAdom,hBdom,hmeas,hcont} + census/measurability/domination,
+-- convergence trio, hmassone pre-ρ, hjets residual).
+#print axioms QIQTH.CurvedA1HContDom.curved_hContDom_at_gate
+#print axioms QIQTH.CurvedA1HContDom.curved_hInnerCont_of_dominations
+#print axioms QIQTH.CurvedA1HContDom.curved_hContDom_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
