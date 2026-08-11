@@ -24008,6 +24008,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHFarCoercivity.curved_hFar_coercivity_frameK_at_gate
 #print axioms QIQTH.CurvedA1FintHFarCoercivity.curved_hFar_coercivity_curved_satisfiable
 
+-- J4-582: SOUNDNESS PIN on the J4-581 hFar discharge. hframeK + hK0 force K={0} at the curved
+-- witness (κ≠0, n≥2); this collapses the gated witness SOURCE support to the Lebesgue-null {0}, so
+-- every base integral ∫z H τ 0 z = 0 (witness_baseIntegral_zero) — hence the capstone's own
+-- normalization hmassone (∫z→1) is UNSATISFIABLE (hmassone_unsatisfiable): {hframeK,hK0,hmassone}
+-- jointly unsatisfiable ⟹ curved_a1_R6_fully_wired is VACUOUS at the curved witness. std-3 all.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.CurvedA1FarConsumeCheck.frameK_forces_singleton
+#print axioms QIQTH.CurvedA1FarConsumeCheck.witness_baseIntegral_zero
+#print axioms QIQTH.CurvedA1FarConsumeCheck.hmassone_unsatisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
