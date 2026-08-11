@@ -1741,3 +1741,5 @@ import QIQTH.CurvedA1FintHdataUniform
 import QIQTH.CurvedA1FintHdataDerivCont
 
 import QIQTH.CurvedA1FintHdataReg
+
+import QIQTH.CurvedA1FintHdataJet
