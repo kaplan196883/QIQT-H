@@ -7684,3 +7684,15 @@ hP1, hP2) + coefficients UNCONDITIONAL at concrete gates. std-3, raw 0 (9908).
 at the collar window; finite-min over index pairs via exists_forall_radius) + close ∀k/∀ij
 binders + triple_hEmeas_of_borel_deriv_fields ⟹ ★white_tripleHEmeas ⟹ the J4-627 hEmeas
 residue DISCHARGED ⟹ white_tail_O_s unconditional mod hlam8. Precedent tripleHEmeas_Gc_concrete.
+
+### J4-632 [AF] — S1-c FULL: hEmeas DISCHARGED, tail UNCONDITIONAL, bridge mod hlam8 (0c756b84)
+WhiteS1C.lean (17 decls). Real wall = the co-instantiation trap (spurious quantifier ordering
+— every supplier's δ₀ was (a,b,k,ij)-free at source); resolved by (a,b,c)-uniform re-derivations.
+★white_tripleHEmeas (all five antecedents discharged, collar window reconciliation) +
+white_hpkgBound_at_radius (radius-parametric pkg mirror) ⟹ ★★white_tail_O_s_unconditional
+(NO antecedent; co-instantiated gate) + ★white_transport_bridge_hEmeas_discharged (bridge
+feeder mod hlam8 ONLY). Honest: hn carried; width opaque whiteLam. std-3, raw 0 (9909).
+THE WHITENED S1 CAMPAIGN IS CLOSED (5 bricks, J4-628→632).
+**J4-633** (per agent — spurious-pin-removal pattern first): hlam8 route (i) — check whether
+the FROZEN-side G_{8s} landing pin in the bridge triangle is a genuine constant or another
+spurious pin; width-parametrize it ⟹ DELETE hlam8 rather than prove it. Else K1TransportBudget.
