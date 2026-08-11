@@ -7122,3 +7122,22 @@ the D2 frontier. All std-3, budget raw 0 (9872 jobs).
 engine `HeatResidualBound.leviSeries_summableW`/`iterConvW_bound` (convergence-trio
 deliverable); OR lift hAdom frozen-p=0→global all-(p,q) clean form; OR the lighter
 hmeas/hcont side-thread.
+
+### J4-597 [AF] — hBdom (width-2 Levi domination, D2) discharged for g^K modulo hEmeas (2264bc2d)
+CurvedA1HBdom.lean: `curved_hBdom_at_gate` = the EXACT hBdom binder of the J4-596 reduction,
+CLEAN width 2 (uncapped — no capped-vs-clean laundering, no width lie): route
+curvedRNC_heatOp_dom_pkg (J4-536 clean all-t' width-2 defect bound) →
+iterConvIntegrableW_of_locally_bound_baseMeas (hEzero via heatOp_gatedWitnessN1_eq_zero_of_nonpos,
+needs 1≤n) → leviSeries_dominatedW_le (J4-114 D2 engine). Width bookkeeping: iterKernelW 2 0 k
+factors as modelCoeff 0 τ k · gaussDdim(2τ) — width stays EXACTLY 2 at every Duhamel iterate
+(k-growth absorbed into the factorially-decaying scalar; C_L = Σ' C^(k+1)·modelCoeff 0 T (k+1));
+no widening lemma needed. Sole conditionality = hEmeas (joint StronglyMeasurable of the defect
+kernel — the M1 wall), carried EXPLICITLY as a hypothesis. `curved_hInnerCont_of_pkg` = PROVED
+consumption certificate: fills the hBdom slot of curved_hInnerCont_of_dominations at the ∃ gate
+params (benign — builder's a b c T are free); capstone hInnerCont now owes {hEmeas, hAdom-global,
+hmeas, hcont}. `curved_hBdom_satisfiable` genuine-curvature cert. std-3, budget raw 0 (9873 jobs).
+**J4-598 recommendation**: hEmeas for g^K at the constGate — instantiate
+GatedRepSFix.tripleHEmeas_concrete_v4's measurable-supplier blocks (hcarTau/hcarField/hcarField2,
+hKSmeas) at the curved witness (makes hBdom fully unconditional AND feeds the assembly ladder's
+shared hEmeas slot). Alternative: hAdom lift (frozen-p=0 curvedRNC_baseWitness_dom → global
+all-p,q width-3/2).
