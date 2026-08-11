@@ -24102,6 +24102,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FullyWiredCenter.curved_a1_R6_fully_wired_center
 #print axioms QIQTH.CurvedA1FullyWiredCenter.curved_a1_R6_center_nonvacuous
 
+-- J4-588: hmassone (the ∫z→1 base-mass limit carried by the NON-VACUOUS center-gauge curved capstone
+-- curved_a1_R6_fully_wired_center) ASSESSED + REDUCED. VERDICT: hmassone is a DEEP-CARRIED analytic input
+-- (on par with hsrc), admitting a THIN reduction — NOT a thin banked Gaussian mass fact. It is EXACTLY the
+-- f≡1 case of the banked conditional W1 capstone ChartImageAIConcrete.chartImage_approx_identity_conditional
+-- (∫z Wit·f→f(0)): at f≡1, f(0)=1 and ∫ Wit·1=∫ Wit, so it delivers ∫z Wit τ 0 z→1 on 𝓝[>]0; composing
+-- with epsSeq→𝓝[>]0 gives the EXACT atTop hmassone shape. curved_hmassone_at_gate reduces the curved
+-- capstone's hmassone to the SAME named residuals (all UNBANKED): the base-varying CoV bundle M1–M4 for
+-- Wbv:z↦uniformInverseChart g^K … z 0 (the acknowledged MISSING brick per the ORIENTATION VERDICT) + the
+-- Layer-C moving-integrand facts (amplitude joint limit A(τ,z)→1, A₀(0)=cutoff(0)·vanVleck(g^K)(0)^{−½}·
+-- u₀(0)=1) + gate/support/chart-image nhds. The banked ∫gaussDdim=1 only evaluates the flat leading term.
+-- curved_hmassone_gate_forces_nontrivial_K = the NON-VACUITY guard (anti-J4-582): for ρ>0, n≥1 the gate
+-- hGgate (ball 0 ρ⊆K) forces a nonzero point in K, so K≠{0} — the reduction's gate is consistent only with
+-- a GENUINE K, exactly the center capstone's regime; the J4-582 K={0} collapse cannot recur. std-3 both.
+-- ⚠ hmassone NOT proven (deep residuals owed). NOT a₁=R/6 (still CONDITIONAL on the carried residuals).
+#print axioms QIQTH.CurvedA1Hmassone.curved_hmassone_at_gate
+#print axioms QIQTH.CurvedA1Hmassone.curved_hmassone_gate_forces_nontrivial_K
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

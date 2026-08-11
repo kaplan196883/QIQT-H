@@ -1783,3 +1783,11 @@ import QIQTH.Leg2HLapFullCenter
 -- hframeK/K={0} collapse. ⚠ hmassone STILL a carried analytic input — the guard removes the STRUCTURAL
 -- obstruction, not hmassone. std-3 all. NOT a₁=R/6 (conditional on the carried residuals incl. hmassone).
 import QIQTH.CurvedA1FullyWiredCenter
+-- J4-588: hmassone (curved base-mass ∫z→1) ASSESSED + REDUCED — the first genuinely-analytic wall on the
+-- curved a₁=R/6 side. VERDICT: DEEP-CARRIED analytic input (like hsrc) with a THIN reduction, NOT a banked
+-- Gaussian mass fact. curved_hmassone_at_gate = the f≡1 case of the banked conditional W1 capstone
+-- chartImage_approx_identity_conditional + epsSeq→𝓝[>]0, producing the EXACT curved capstone hmassone shape
+-- MODULO the UNBANKED base-varying CoV bundle (M1–M4 for Wbv, the MISSING brick) + Layer-C moving facts.
+-- curved_hmassone_gate_forces_nontrivial_K = non-vacuity guard (ρ>0 ⟹ K≠{0}, anti-J4-582). std-3 both.
+-- NOT a₁=R/6 (still CONDITIONAL on the carried residuals incl. hmassone).
+import QIQTH.CurvedA1Hmassone
