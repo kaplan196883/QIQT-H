@@ -6982,3 +6982,20 @@ a₁=R/6 CONDITIONAL on carried residuals (census/measurability/domination/SDW +
 Curved now ON PAR with flat: non-vacuous, conditional. J4-588 = (1) headline satisfiability capstone bundling
 nonvacuous+R6-conclusion OR (2) attack hmassone (∫z H(εₘ) 0 z→1 on genuine K — now source support nontrivial, the
 first genuinely-analytic remaining wall) OR (3) hInnerCont/convergence trio (now non-vacuous residual members).
+
+## J4-588 (hmassone VERDICT — deep-carried analytic input, thin-reduced to f≡1 W1 capstone + base-varying CoV bundle)
+CurvedA1Hmassone.lean: VERDICT hmassone (∫z→1 base-mass) = DEEP-CARRIED analytic input (like hsrc), NOT thin
+banked; THIN REDUCTION (Sol-confirmed). `curved_hmassone_at_gate` (EXACT capstone hmassone shape Tendsto
+(fun m => ∫z vanVleckGatedWitness g^K…(epsSeq m)0 z) atTop (𝓝 1) as f≡1 case of banked
+ChartImageAIConcrete.chartImage_approx_identity_conditional [Tendsto (∫z Wit τ 0 z·f z)(𝓝[>]0)(𝓝 (f 0)), f≡1
+⟹ f 0=1, ∫Wit·1=∫Wit] ∘ epsSeq→𝓝[>]0; leading term flat Gaussian ∫gaussDdim=1 banked, curved correction via
+A₀(0)=1 van-Vleck diagonal; CARRIES base-varying CoV bundle M1–M4 for Wbv:z↦uniformInverseChart g^K z 0
+[HasFDerivWithinAt/InjOn/inverse V/|det|>0/gate/support/meas/nbhd] + Layer-C moving-integrand — NONE banked,
+field-varying Wfv banked but Wbv≠Wfv ORIENTATION VERDICT) + `curved_hmassone_gate_forces_nontrivial_K` (non-vacuity
+guard: ρ>0+ball⊆K ⟹ K≠{0}, genuine K, J4-582 collapse can't recur; does NOT prove hmassone). Main verified:
+conclusion=capstone hmassone; from PROVED chartImage_approx_identity_conditional; carried residuals genuine
+satisfiable not vacuous; guard genuine K; not false limit; R/6 untouched. std-3, budget raw 0, 9864 jobs.
+★ hmassone now NAMED/precisely-scoped curved analytic input (reduced to base-varying CoV M1–M4 + Layer-C),
+joining hsrc/hOffCollarTail. a₁=R/6 CONDITIONAL (flat+curved). J4-589 = (i) build base-varying CoV bundle M1–M4
+for Wbv (base-slot regularity of the .choose uniform exp chart, |det DWbv(0)|=1 — genuine harder IFT, mass-side
+endgame) OR (ii) next carried member hInnerCont/convergence trio OR (iii) headline consolidation object.
