@@ -24311,6 +24311,31 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HEmeas.curved_hInnerCont_of_reach
 #print axioms QIQTH.CurvedA1HEmeas.curved_hEmeas_satisfiable
 
+-- J4-599 (ReachRequant + CurvedA1ReachAlign): THE REACH ALIGNMENT — the J4-598 arithmetic residual c<δ₀
+-- CLOSED. Part 1 (ReachRequant): the S1/tripleHEmeas jet reach δ₀ REQUANTIFIED BEFORE the cutoff params
+-- (a,b) — the honest ∃∀-swap, provable because the δ₀-provenance audit shows EVERY supplier radius in the
+-- chain (ampGc agreement, hKSmeas, chart C² reach, chart germ/openness, per-direction flow jets) comes from
+-- (a,b)-FREE geometry lemmas; (a,b) enter only the per-c bodies. 13 hoisted replays, capstone
+-- tripleHEmeas_flowball_requant: ∃δ₀>0, ∀ a b, 0<a<b → ∀ c∈(b,δ₀), tripleHEmeas at the flow-ball gate.
+-- Part 2 (CurvedA1ReachAlign): gatedWitnessN1_hEboundW_le_lin_CONST_prescribed = the J4-316 CONST producer
+-- replayed with a PRESCRIBED extra ceiling ε (ρc:=min(min(min rN δ₀_chart) r₁) ε ⟹ c=(b+ρc)/2<ε; shrinking
+-- preserves every step); curvedRNC_heatOp_dom_pkg_prescribed = the J4-536 curved pkg with c<ε. Choosing
+-- ε:=δ₀(jet) aligns the two ∃-chains: curved_hBdom_unconditional = for κ<0, 1≤n, T>0, given only the
+-- mainline-standard {hChr,hw,hu}, ∃ 0<a<b<c and C_L≥0 with the EXACT width-2 hBdom binder on (0,T] — NO
+-- reach antecedent, NO hEmeas antecedent (both internally discharged). curved_hInnerCont_of_meas = the
+-- ladder consumption: capstone hInnerCont reduced to the THREE remaining raw carries {hAdom,hmeas,hcont}
+-- ONLY. Gate genuinely inhabited (c small but 0<a<b<c; downstream consumes a b c free).
+-- curved_reachAlign_satisfiable = witness genuinely curved (κ<0, n≥2, Ric≠0). std-3 all 18. NOT a₁=R/6
+-- (still owes hAdom global + hmeas + hcont + census/domination piles, convergence trio, hmassone pre-ρ,
+-- hjets residual).
+#print axioms QIQTH.ReachRequant.tripleHEmeas_requant
+#print axioms QIQTH.ReachRequant.tripleHEmeas_flowball_requant
+#print axioms QIQTH.CurvedA1ReachAlign.gatedWitnessN1_hEboundW_le_lin_CONST_prescribed
+#print axioms QIQTH.CurvedA1ReachAlign.curvedRNC_heatOp_dom_pkg_prescribed
+#print axioms QIQTH.CurvedA1ReachAlign.curved_hBdom_unconditional
+#print axioms QIQTH.CurvedA1ReachAlign.curved_hInnerCont_of_meas
+#print axioms QIQTH.CurvedA1ReachAlign.curved_reachAlign_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

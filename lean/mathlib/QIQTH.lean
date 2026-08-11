@@ -1875,3 +1875,13 @@ import QIQTH.CurvedA1HBdom
 -- = witness genuinely curved. std-3. NOT a1=R/6 (owes reach alignment + hAdom + hmeas/hcont + piles/trio/
 -- hmassone-pre-rho/hjets).
 import QIQTH.CurvedA1HEmeas
+-- J4-599 (ReachRequant + CurvedA1ReachAlign): THE REACH ALIGNMENT. Part 1: the S1/tripleHEmeas jet reach
+-- delta0 REQUANTIFIED BEFORE (a,b) (honest exists-forall swap; audited: every supplier radius is (a,b)-free
+-- geometry; 13 hoisted replays, capstone tripleHEmeas_flowball_requant). Part 2: the J4-316 CONST producer +
+-- J4-536 curved pkg replayed with a PRESCRIBED radius ceiling eps (c=(b+rhoc)/2<eps); eps:=delta0(jet) aligns
+-- the two exists-chains ==> curved_hBdom_unconditional (NO reach antecedent, NO hEmeas antecedent; only
+-- mainline {hChr,hw,hu} carried) + curved_hInnerCont_of_meas (capstone hInnerCont reduced to {hAdom,hmeas,
+-- hcont} ONLY). Gate genuinely inhabited; witness genuinely curved. std-3. NOT a1=R/6 (owes hAdom global +
+-- hmeas + hcont + piles/trio/hmassone-pre-rho/hjets).
+import QIQTH.ReachRequant
+import QIQTH.CurvedA1ReachAlign
