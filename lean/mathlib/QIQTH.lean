@@ -2163,3 +2163,14 @@ import QIQTH.WhiteAmbient
 -- capstone slot NOT served at λ>2. NOT a1=R/6 (R1 certificates+annulus, R2 λ≤8, hEbound/hInt,
 -- K1TransportBudget, fat-K carriers, capstone co-instantiation + prior piles still owed).
 import QIQTH.WhiteGated
+-- J4-626 (WhiteAnnulus): ★ white_hann_bound — leg (iv) of the J4-625 package DISCHARGED
+-- chart-side (cut-kernel weld transfer + C² Leibniz split + Δ_ĝχ bound + the exponential
+-- annulus absorption (1/τ)G_τ≤√2ⁿ(8/a²)G_{2τ} + displacement widening to λ=whiteLam=2(nC₀²+1));
+-- gate legs (i)-(iii) at the concrete fat flow-ball gate whiteFlowGate (W1 openness/closure,
+-- whitening-inverse chart certificate, frontier via whitening expansion into the b<c collar);
+-- ★★ white_hpkgBound_discharged = the FULL ∀(p,q) capstone-hpkgBound SHAPE at the whitened
+-- gated witness UNCONDITIONAL at a fat open gate (q∈S q ∀q∈K), width whiteLam (⚠ NOT the
+-- literal 2 — J4-625 R2 stands); witness gate: discharged package + diagonal positivity at
+-- n=2 κ=−1. NOT a1=R/6 (hEbound/hInt at the whitened kernel, K1TransportBudget, fat-K
+-- carriers, capstone co-instantiation at the whitened witness, R2 width + prior piles owed).
+import QIQTH.WhiteAnnulus

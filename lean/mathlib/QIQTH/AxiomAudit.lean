@@ -25051,6 +25051,46 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteOffDiag.whiteChart_heatOp_offdiag_bound_amp
 #print axioms QIQTH.WhiteOffDiag.whiteOffDiag_witness_gate
 
+-- ── J4-626 (WhiteAnnulus): the HANN annulus bound at the whitened kernel (leg (iv) of the
+-- J4-625 package) + the gate legs (i)-(iii) at the concrete fat flow-ball gate + ★★ the
+-- DISCHARGED package. white_hann_bound: on the gate annulus a²≤rncRadialSq w,
+-- |heatOp g^κ gi^κ (whiteCutKernel a b) τ (whiteExp_q w) q| ≤ C·G_{λτ}(whiteExp_q w−q),
+-- λ=whiteLam=2(nC₀²+1) — via whiteCut_heatOp_eq (the J4-624 weld extended to the CUT kernel:
+-- χ is C∞, chart C² at gate points), the C² Leibniz split laplaceBeltrami_mul_C2
+-- (heatOp(χW)=χ·heatOp W − W·Δ_ĝχ − 2Σĝ⁻¹∂χ∂W), the banked J4-623 amplitude bound (χ-slot),
+-- whiteChart_lapChi_bound (Δ_ĝχ ≤ K₂: dev+Christoffel-linear+compactness ∂χ/∂∂χ), and THE
+-- EXPONENTIAL ANNULUS ABSORPTION (1/τ)G_τ ≤ √2ⁿ(8/a²)G_{2τ} (invTpow_gaussDdim_le_width_annulus
+-- — the e^{−a²/·τ} tail trade, the flat cutoffResidualN1 mechanism), then the displacement
+-- widening white_disp_gauss_le (tube confinement + whitening contraction). Gate legs at
+-- whiteFlowGate c q = exp_q''B(0,c): openness+closure from the banked W1 uniform-chart layer;
+-- chart certificate via the explicit whitening inverse E_q⁻¹ (norm bound whiteUnvel_norm_le =
+-- compactness metric-entry bound); frontier = closure containment + whitening EXPANSION
+-- rncRadialSq(E_q⁻¹v) ≥ rncRadialSq(v) (contraction whiteVel_radialSq_le at E(E⁻¹v)=v) ⟹
+-- frontier points in the b<c cutoff zero collar. ★★ white_hpkgBound_discharged: for EVERY
+-- compact K ⊆ B̄(0,R) there ARE S (OPEN, q∈S q ∀q∈K — fat, no S=∅ degeneracy), 0<a<b, C≥0,
+-- lam≥2 with the FULL unconstrained ∀(p,q) capstone-hpkgBound SHAPE at whiteGatedWitness S a b —
+-- UNCONDITIONAL (J4-625 legs (i)-(iv) all discharged). ⚠ HONEST WIDTH: lam=whiteLam=2(nC₀²+1),
+-- NOT the literal 2 — the J4-625 R2 width-alignment residue STANDS. Non-vacuity:
+-- white_discharged_witness_gate (n=2 κ=−1 K=closedBall 0 2: the SAME discharged S a b gated
+-- witness is >0 on the origin diagonal ∀τ>0; ambient flat pin fails, re-export). NOT a1=R/6
+-- (hEbound/hInt at the whitened kernel + K1TransportBudget + fat-K carriers + capstone
+-- co-instantiation at the whitened witness + R2 width alignment + prior piles still owed).
+-- expected: standard 3
+#print axioms QIQTH.WhiteAnnulus.whitePullbackMetric_symm
+#print axioms QIQTH.WhiteAnnulus.whitePullbackMetricInv_symm_global
+#print axioms QIQTH.WhiteAnnulus.whiteVel_whiteUnvel
+#print axioms QIQTH.WhiteAnnulus.whiteUnvel_norm_le
+#print axioms QIQTH.WhiteAnnulus.whiteInv_entry_bound
+#print axioms QIQTH.WhiteAnnulus.whiteChart_lapChi_bound
+#print axioms QIQTH.WhiteAnnulus.whiteCut_heatOp_eq
+#print axioms QIQTH.WhiteAnnulus.whiteCut_heatOp_annulus_chart
+#print axioms QIQTH.WhiteAnnulus.whiteLam_ge_two
+#print axioms QIQTH.WhiteAnnulus.white_disp_gauss_le
+#print axioms QIQTH.WhiteAnnulus.white_hann_bound
+#print axioms QIQTH.WhiteAnnulus.white_ambient_bound_displacement_lam
+#print axioms QIQTH.WhiteAnnulus.white_hpkgBound_discharged
+#print axioms QIQTH.WhiteAnnulus.white_discharged_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
