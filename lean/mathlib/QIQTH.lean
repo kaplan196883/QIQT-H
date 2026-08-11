@@ -1806,3 +1806,9 @@ import QIQTH.CurvedA1WbvCoV
 -- curvedRNCMetric_det_center (det g^K 0 = 1) + curved_hmassoneBound_satisfiable (κ<0 non-vacuity: gauge holds
 -- while ∃w, 1<det g^K w). std-3 all. NOT a₁=R/6 (hmassone still carried MODULO hGgate/hSupp; capstone CONDITIONAL).
 import QIQTH.CurvedA1HmassoneBound
+-- J4-591: sheds hmassone's LAST ρ-gate carriers hGgate/hSupp via the banked GateAnnulusSplit.chartImage_approx_
+-- identity_final. curved_hmassone_final_at_gate = the curved hmassone (exact capstone shape) with hGgate/hSupp
+-- DISCHARGED (f≡1 case ∘ epsSeq→𝓝[>]0); the two ρ-DEPENDENT carriers removed, replaced by the satisfiable pre-ρ
+-- carriers {rS,hKball,hSact,hWslice,hDom}. curved_hmassone_final_curved_satisfiable = κ<0 non-vacuity. std-3.
+-- NOT a₁=R/6 (hmassone now unconditional-in-ρ MODULO the four satisfiable pre-ρ carriers; capstone CONDITIONAL).
+import QIQTH.CurvedA1HmassoneFinal

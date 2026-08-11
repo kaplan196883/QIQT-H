@@ -24155,6 +24155,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HmassoneBound.curved_hmassone_via_bundle_at_gate
 #print axioms QIQTH.CurvedA1HmassoneBound.curved_hmassoneBound_satisfiable
 
+-- J4-591 (CurvedA1HmassoneFinal): sheds hmassone's LAST ρ-gate carriers hGgate/hSupp via the banked
+-- gate-support split. curved_hmassone_final_at_gate = the curved hmassone (EXACT capstone shape) with
+-- hGgate/hSupp DISCHARGED — the f≡1 case of GateAnnulusSplit.chartImage_approx_identity_final (caps the
+-- enriched bundle at min ρA rS; discharges hGgate on the produced ball via hGgate_of_gate_activation from
+-- the PRE-ρ gate-activation triple {rS, hKball, hSact}; discharges hSupp by the Gaussian-tail annulus
+-- split offBall_integral_tendsto_zero fed by the zeroth wide domination hDom + witness-slice hWslice) ∘
+-- epsSeq→𝓝[>]0. Metric carries {hg,hgi,hgpos} + gauge det g^K 0=1 discharged internally. STRICTLY improves
+-- curved_hmassone_via_bundle_at_gate: the two ρ-DEPENDENT carriers (hGgate/hSupp) are REMOVED from the
+-- conclusion; residual = the satisfiable PRE-ρ carriers {rS,hKball,hSact,hWslice,hDom}. curved_hmassone_
+-- final_curved_satisfiable = NON-VACUITY (κ<0, n≥2): gauge det g^K 0=1 while g^K genuinely curved (∃w,
+-- 1<det g^K w) — NOT flat, NOT K={0} collapse. std-3 both. NOT a₁=R/6 (hmassone now unconditional-in-ρ
+-- MODULO the four satisfiable pre-ρ carriers; the curved capstone stays CONDITIONAL).
+#print axioms QIQTH.CurvedA1HmassoneFinal.curved_hmassone_final_at_gate
+#print axioms QIQTH.CurvedA1HmassoneFinal.curved_hmassone_final_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
