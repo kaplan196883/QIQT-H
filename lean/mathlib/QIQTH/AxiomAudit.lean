@@ -25225,6 +25225,43 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteS1P2.white_secondJet_iLine_satisfiable
 #print axioms QIQTH.WhiteS1P2.white_hP2_offS2_satisfiable_empty
 
+-- ── J4-632 (WhiteS1C): S1-c — THE E3d ASSEMBLY AT THE WHITENED WITNESS + the
+-- UNCONDITIONAL bridge feed. (a,b,c)-UNIFORM mirrors of the S1 suppliers (each supplier's
+-- δ₀ is (a,b,k,ij)-free at source — quantifiers reordered, same proofs; ∀k/∀ij closures
+-- free, no finite-min reconciliation needed): white_hDtau_uniform, collar/hOffS/hOffS2
+-- uniform, pdRep/hP1 uniform, pd2Rep/hP2 uniform. ★★ white_tripleHEmeas_uniform = S1-c:
+-- triple_hEmeas_of_borel_deriv_fields at G := whiteGatedWitness, concrete flow-ball gates,
+-- radii 0<a<b<c<δ₀, ALL five antecedents (hDτ/hP1∀k/hP2∀ij/hgi/hchr) discharged — the
+-- whitened tripleHEmeas is a THEOREM (+ supplier-shaped white_tripleHEmeas, window b<c<δ₀).
+-- ★ white_hpkgBound_at_radius = the J4-626 pkg bound radius-PARAMETRIC (gate radius exposed;
+-- the banked version hides it in an opaque ∃ — the co-instantiation enabler; (CE+1)c<r₀
+-- folded into δp). ★★ white_tail_O_s_unconditional = THE PAYOFF: ∀κ≤0, compact K⊆B̄(0,R),
+-- n>0: ∃ fat gate + radii + lam=whiteLam≥2 with the whitened k≥2 tail ≤ C_os·s·G_{lam·s} on
+-- (0,1] — NO tripleHEmeas antecedent left (J4-627 hEmeas residue DISCHARGED at the
+-- co-instantiated gate c=min(δp,δS1)/2, a=c/4, b=c/2). ★ white_transport_bridge_hEmeas_
+-- discharged: the bridge Prop feeder now carried modulo lam≤8 (hlam8) ONLY. Gates:
+-- assembled tripleHEmeas INHABITED at the curved fat witness (n=2, κ=−1, K=B̄(0,2),
+-- 0<a<b<c exhibited), object nonzero, unconditional feeder inhabited, radius window.
+-- Expected std-3 all 17. NOT a1=R/6 (hlam8, K1TransportBudget, fat-K carriers, capstone
+-- co-instantiation at the whitened witness + prior piles still owed).
+#print axioms QIQTH.WhiteS1C.white_hDtau_uniform
+#print axioms QIQTH.WhiteS1C.whiteCut_locally_zero_offGate_uniform
+#print axioms QIQTH.WhiteS1C.white_hOffS_uniform
+#print axioms QIQTH.WhiteS1C.white_hOffS2_uniform
+#print axioms QIQTH.WhiteS1C.white_pdRep_uniform
+#print axioms QIQTH.WhiteS1C.white_hP1_uniform
+#print axioms QIQTH.WhiteS1C.white_pd2Rep_uniform
+#print axioms QIQTH.WhiteS1C.white_hP2_uniform
+#print axioms QIQTH.WhiteS1C.white_tripleHEmeas_uniform
+#print axioms QIQTH.WhiteS1C.white_tripleHEmeas
+#print axioms QIQTH.WhiteS1C.white_hpkgBound_at_radius
+#print axioms QIQTH.WhiteS1C.white_tail_O_s_unconditional
+#print axioms QIQTH.WhiteS1C.white_transport_bridge_hEmeas_discharged
+#print axioms QIQTH.WhiteS1C.white_tripleHEmeas_witness
+#print axioms QIQTH.WhiteS1C.white_S1c_underlying_nonzero
+#print axioms QIQTH.WhiteS1C.white_unconditional_feed_witness_gate
+#print axioms QIQTH.WhiteS1C.white_S1c_radii_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

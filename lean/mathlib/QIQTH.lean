@@ -2219,3 +2219,13 @@ import QIQTH.WhiteCollar
 -- normal form (Field2NbhdReshape engine). NOT a1=R/6 (S1-c assembly, hlam8,
 -- K1TransportBudget, fat-K carriers, capstone co-instantiation + prior piles still owed).
 import QIQTH.WhiteS1P2
+-- J4-632 (WhiteS1C): S1-c — the E3d assembly at the whitened witness: (a,b,c)-UNIFORM
+-- mirrors of the S1 suppliers (the per-slot radii are (a,b,k,ij)-free at source, so the
+-- binder closures come free), **white_tripleHEmeas** (tripleHEmeas g^k gi^k
+-- (whiteGatedWitness S a b) a THEOREM at concrete flow-ball gates, 0<a<b<c<delta0), the
+-- radius-PARAMETRIC J4-626 pkg mirror white_hpkgBound_at_radius, and the PAYOFF
+-- **white_tail_O_s_unconditional**: the whitened k>=2 tail <= C_os*s*G_{lam*s} on (0,1]
+-- with NO tripleHEmeas antecedent (co-instantiated gate c = min(dp,dS1)/2); bridge Prop
+-- feeder now modulo lam<=8 (hlam8) ONLY. NOT a1=R/6 (hlam8, K1TransportBudget, fat-K
+-- carriers, capstone co-instantiation + prior piles still owed).
+import QIQTH.WhiteS1C
