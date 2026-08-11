@@ -1791,3 +1791,12 @@ import QIQTH.CurvedA1FullyWiredCenter
 -- curved_hmassone_gate_forces_nontrivial_K = non-vacuity guard (ρ>0 ⟹ K≠{0}, anti-J4-582). std-3 both.
 -- NOT a₁=R/6 (still CONDITIONAL on the carried residuals incl. hmassone).
 import QIQTH.CurvedA1Hmassone
+-- J4-589: the mass-side endgame — base-varying CoV bundle M1–M4 for the curved Wbv + reduced hmassone.
+-- ⚠ DON'T-UNDERCREDIT: J4-588's "MISSING brick" (the Wbv M1–M4 bundle) was ALREADY built UNCONDITIONALLY +
+-- metric-generic (J4-274 baseVaryingIFTPackage_unconditional; J3 base-slot blocker via terminal-velocity).
+-- curved_Wbv_CoV_bundle_at_gate = the FULL M1–M4 bundle for g^K (instantiation, UNCONDITIONAL given K∈𝓝0).
+-- curved_Wbv_hasFDeriv_center_at_gate = near-identity anchor (DWbv(0)=-id, non-vacuous).
+-- curved_hmassone_via_v2_at_gate = curved hmassone with M1–M4+hΩmeas+hΩnhds+hmeas discharged (f≡1 case of
+-- chartImage_approx_identity_v2 ∘ epsSeq→𝓝[>]0); carried surface 12→4 (hGgate/hSupp/hbound/hlocal). std-3 all.
+-- NOT a₁=R/6 (hmassone still carried MODULO the FOUR residuals; hbound/hlocal need enriched bundle).
+import QIQTH.CurvedA1WbvCoV

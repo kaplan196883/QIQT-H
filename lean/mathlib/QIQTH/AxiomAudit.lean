@@ -24119,6 +24119,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1Hmassone.curved_hmassone_at_gate
 #print axioms QIQTH.CurvedA1Hmassone.curved_hmassone_gate_forces_nontrivial_K
 
+-- J4-589: the mass-side endgame — the base-varying CoV bundle M1–M4 for the curved chart Wbv, and the
+-- REDUCED curved hmassone. ⚠ DON'T-UNDERCREDIT correction to J4-588's residual list: the base-varying
+-- M1–M4 CoV bundle for Wbv:z↦uniformInverseChart g^K … z 0 is NOT the "MISSING brick" — it was made
+-- UNCONDITIONAL and metric-GENERIC in J4-274 (TerminalVelC2.baseVaryingIFTPackage_unconditional), the
+-- .choose/joint-base J3 base-slot blocker discharged through the geodesic-reversal / terminal-velocity
+-- C² route. ORIENTATION FIREWALL: J4-577/578's hreg is FIELD-slot C² (Wfv: uniformInverseChart g^K … z at
+-- FIXED base z), NOT the BASE-slot C² (Wbv, base VARYING, field fixed 0) the bundle needs — Wbv≠Wfv.
+-- curved_Wbv_CoV_bundle_at_gate = the FULL M1–M4 bundle (+ MeasurableSet ball + image∈𝓝0) for g^K,
+-- UNCONDITIONAL given K∈𝓝0, a direct instantiation of baseVaryingIFTPackage_unconditional — DISCHARGES
+-- the base-varying CoV carriers of curved_hmassone_at_gate. curved_Wbv_hasFDeriv_center_at_gate = the
+-- near-identity anchor (HasFDerivAt Wbv (-id) 0, |det|=1>0 — bundle NON-VACUOUS). curved_hmassone_via_v2_at_gate
+-- = the curved hmassone with M1–M4 + hΩmeas + hΩnhds + hmeas ALL discharged (f≡1 case of
+-- FixedFTrioDischarge.chartImage_approx_identity_v2 ∘ epsSeq→𝓝[>]0): carried surface shrinks from J4-588's
+-- TWELVE to FOUR (hGgate/hSupp/hbound/hlocal), a STRICT improvement of curved_hmassone_at_gate. Metric
+-- carries {curvedRNCMetric_contDiff, curvedRNCInv_contDiff (κ≤0), curvedRNCMetric_hgpos (κ≤0)}. std-3 all
+-- three. ⚠ hbound/hlocal remain (need the enriched partial-homeomorph bundle). NOT a₁=R/6 (hmassone still
+-- carried MODULO the FOUR residuals; the curved capstone stays CONDITIONAL).
+#print axioms QIQTH.CurvedA1WbvCoV.curved_Wbv_CoV_bundle_at_gate
+#print axioms QIQTH.CurvedA1WbvCoV.curved_Wbv_hasFDeriv_center_at_gate
+#print axioms QIQTH.CurvedA1WbvCoV.curved_hmassone_via_v2_at_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
