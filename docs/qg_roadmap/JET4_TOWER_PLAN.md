@@ -7458,3 +7458,16 @@ tail_corr_bound (diagonal mass G_{2t}(0) EXPLICIT). std-3, raw 0 (9891).
 **J4-615**: route-(a) brick (ii) = the affine-difference supplier (zero constant term, r-gate
 pointwise) — sole missing supplier before the refined E∗E ≤ C·s·G_{Ms} (J4-616) restoring
 bounded-cRem O(t²). Alternative: capstone co-instantiation smoke test (Sol prio 2, pending).
+
+### J4-615 [AF] — zero-constant affine-difference supplier: GLOBAL, L=2|K|/3 (fb5fc47d)
+AffineDiff.lean (7 decls). curvedRNCInv = closed Sherman-Morrison form, denominator ≥ 1
+globally (K≤0); the E-factor of curvedRNCInv_sub_eq obeys |δ−(K/3)wwᵀ| ≤ α(w) — EXACTLY eaten
+by the denominator (entry-sup question moot). ★curvedRNCInv_diff_structured: |gⁱʲ(z)−gⁱʲ(w)| ≤
+(2(−K)/3)·‖z−w‖·(‖z‖+‖w‖) GLOBAL ungated, same constant as the metric; (q,v) Levi corollary
+(q=0 ⟹ purely quadratic ‖v‖²); summed n²L form; non-vacuity gate. Shape-match with J4-616
+moment levers CONFIRMED (each norm factor = one moment_half payment). std-3, raw 0 (9892).
+**J4-616** (all suppliers now banked): refined E∗E ≤ C·s·G_{Ms} center-column — (1) inner
+factor at (σ,w,0): supplier gives ‖w‖² purely quadratic × Hessian ⟹ two moment_half_self
+payments eat the full σ; (2) outer factor: ‖z−w‖ pays √(s−σ), ‖w‖ pays √σ; (3) time integral
+B(3/2,1/2)-type = O(s); (4) Chapman-Kolmogorov width composition (banked semigroup). Then
+restore bounded-cRem O(t²) API.
