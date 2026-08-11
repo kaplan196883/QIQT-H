@@ -2028,3 +2028,16 @@ import QIQTH.CurvedA1CenterN1
 -- bound + alpha-fork + per-q producer re-assembly + fat-K hEmeas/hAdom/hcont + capstone
 -- co-instantiation + piles/trio/hmassone-pre-rho/hjets).
 import QIQTH.FrozenGauss
+-- J4-610 (FrozenDefect): the tau^{-1/2} LEVI DEFECT BOUND — FrozenDefectBound n K r C 2
+-- INHABITED (frozenDefectBound_spaceForm: for K<=0, r>=0, explicit C>0 with
+-- |sum_ij (gi(q+v)-gi(q))*dd_ij Gamma_q| <= (C/sqrt tau)*G_{2tau}(v), 0<tau<=1, q in ball, ALL v).
+-- Ingredients: curvedRNCInv_diff_bound (honest affine-in-(|v|,|v|^2) coefficient modulus from the
+-- closed rational form, denominator >=1 for K<=0); entry/row/det bounds (det <= n!*M^n via
+-- Matrix.det_le, M=1+(-K/3)r^2) + frozenGauss_pd_pd_abs_le; defect_scalar_fold (the tau^{-1/2}
+-- bookkeeping, s*sqrt(tau) <= tau+s^2) + banked gaussDdim_absorb_zero/one/two at width lam=2.
+-- NON-VACUITY: frozenDefect_witness_ne_zero (K<0, n>=2: defect sum >0 at q=0, v=unit vector).
+-- GO/NO-GO certificates: width2_closed_fold (D2 width-2 CLOSED fold, G_{2t}*G_{2s}=G_{2(t+s)});
+-- betaTime_negHalf_integral (alpha=-1/2 per-step Beta integral = pi; SERIES summability still
+-- 0<=alpha — reported gap). std-3 all. NOT a1=R/6 (curved re-base still owes the alpha-fork
+-- consumer generalization + per-q producer re-assembly + fat-K piles + capstone co-instantiation).
+import QIQTH.FrozenDefect

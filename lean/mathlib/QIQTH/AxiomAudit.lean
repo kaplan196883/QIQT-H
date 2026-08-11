@@ -24640,6 +24640,33 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenGauss.frozenGauss_frozen_heat_spaceForm
 #print axioms QIQTH.FrozenGauss.frozenGauss_matrix_ne_delta
 
+-- J4-610 (FrozenDefect): the tau^{-1/2} LEVI DEFECT BOUND — the J4-609 target Prop
+-- FrozenDefectBound n K r C 2 INHABITED (frozenDefectBound_spaceForm): for K<=0, r>=0 there is an
+-- explicit C>0 with |sum_ij (gi^K(q+v)-gi^K(q)) * dd_ij Gamma_q(tau,v)| <= (C/sqrt tau)*G_{2tau}(v)
+-- uniformly over 0<tau<=1, q in the ball, ALL v (exponent EXACTLY tau^{-1/2}, width EXACTLY 2tau).
+-- Chain: exact rational-difference identity curvedRNCInv_sub_eq + honest coefficient modulus
+-- curvedRNCInv_diff_bound (affine in (|v|,|v|^2) — NOT pure Lipschitz, v unrestricted); entry/row
+-- bounds + Leibniz det<=n!*M^n (Matrix.det_le) + frozenGauss_pd_pd_abs_le; defect_scalar_fold
+-- (s*sqrt(tau)<=tau+s^2 AM-GM bookkeeping) + banked width-2 absorption gaussDdim_absorb_0/1/2.
+-- NON-VACUITY: frozenDefect_witness_ne_zero — K<0, n>=2: the bounded defect sum is >0 at the
+-- in-range witness q=0, v=e_0 (value (n-1)(1-1/(1-K/3))Gamma/(2tau)). GO/NO-GO certificates:
+-- width2_closed_fold (D2 engine width-2 CLOSED fold, exact semigroup G_{2t}*G_{2s}=G_{2(t+s)});
+-- betaTime_negHalf_integral (alpha=-1/2 per-step Beta time integral = pi, -1<alpha engine OK;
+-- SERIES summability gamma_ratio/modelCoeff still 0<=alpha — REPORTED gap, not certified).
+-- Expected std-3 all. NOT a1=R/6 (CONDITIONAL: alpha-fork consumer generalization + per-q
+-- producer re-assembly + fat-K hEmeas/hAdom/hcont piles + capstone co-instantiation remain).
+#print axioms QIQTH.FrozenDefect.curvedRNCInv_sub_eq
+#print axioms QIQTH.FrozenDefect.curvedRNCInv_diff_bound
+#print axioms QIQTH.FrozenDefect.curvedRNCMetric_entry_abs_le
+#print axioms QIQTH.FrozenDefect.curvedRNCMetric_row_abs_le
+#print axioms QIQTH.FrozenDefect.frozenGauss_pd_pd_abs_le
+#print axioms QIQTH.FrozenDefect.frozenGauss_le_detBound_mul_gauss
+#print axioms QIQTH.FrozenDefect.defect_scalar_fold
+#print axioms QIQTH.FrozenDefect.frozenDefectBound_spaceForm
+#print axioms QIQTH.FrozenDefect.frozenDefect_witness_ne_zero
+#print axioms QIQTH.FrozenDefect.width2_closed_fold
+#print axioms QIQTH.FrozenDefect.betaTime_negHalf_integral
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
