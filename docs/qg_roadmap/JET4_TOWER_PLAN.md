@@ -7471,3 +7471,18 @@ factor at (σ,w,0): supplier gives ‖w‖² purely quadratic × Hessian ⟹ two
 payments eat the full σ; (2) outer factor: ‖z−w‖ pays √(s−σ), ‖w‖ pays √σ; (3) time integral
 B(3/2,1/2)-type = O(s); (4) Chapman-Kolmogorov width composition (banked semigroup). Then
 restore bounded-cRem O(t²) API.
+
+### J4-616 [AF] — refined E∗E FULL LAND: k=2 O(s); bounded-cRem O(t²) RESTORED (76b5b2af)
+FrozenK2Sharp.lean (10 decls). ★frozenK2_sharp: |iterE E 2 (s,z,0)| ≤ C·s·G_{8s}(z) ALL s>0.
+Outer sharp bound routes growth onto the inner variable (triangle split — feared free-‖z‖
+never arises). Honest ledger: ‖v‖² exact fold / ‖v‖ half-cubic (τ^{−1/2}) / reserved ‖w‖ pays
+√(2σ) vs inner; C-K exact; ONE widening to G_{8s} (2ⁿ explicit); Beta ≤ 2s; C explicit, M=8.
+★frozenColumn_tail_O_s (k≥2 tail O(s)); ★frozenK2_tail_slice_O_s (linear budget met);
+★corrHigher_O_t2_restored (capstone-verbatim equality + BOUNDED cRem ≤ K_t/|pref|; C_H before
+t; normalization honest 8^{−n/2}). Sol GO all items. std-3, raw 0 (9893). THE k=2 WALL IS
+CLOSED — the J4-614 o(t) fallback is now belt-and-braces.
+**J4-617** (Sol rank 1): capstone co-instantiation smoke test — wire corrHigher_O_t2_restored
+into TrueKernelA1.trueKernel_diagonal_a1_eq_R6's hCorrHigher with H = the actual parametrix
+(validates signature, endpoint-zero, prefactor normalization, quantifier order). Then rank 2 =
+k=1 SliceBoundO1/transport-cancellation thread (the −E term, next substantive blocker); defer
+per-q producer re-assembly.
