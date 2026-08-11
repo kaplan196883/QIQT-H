@@ -24219,6 +24219,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1Hsrc.curved_hsrc_at_gate
 #print axioms QIQTH.CurvedA1Hsrc.curved_hsrc_satisfiable
 
+-- J4-595 (CurvedA1Hjets): discharges/assesses the ON-COLLAR hjets chart-jet bundle
+-- (AmpGeometryBundle.HjetsShape, isolated at a single (τ,z)) for g^K = curvedRNCMetric κ — the genuine
+-- curved input the capstone's amplitude carriers (hOffCollarTail/hInnerCont) transitively lean on.
+-- curved_hjets_bundle_of_pullback = ★ THE ASSEMBLER: HjetsShape from the jet data (P,Q) + the geodesic
+-- normal-chart PULLBACK BRIDGE (hpullVP/hpullPsq/hpullVQ), i.e. the three abstract centre-identity
+-- hypotheses of curved_hjetsShape_of_pieces (J4-554) REPLACED by the base-point pullback bridge, discharged
+-- through curved_centerIdentities_of_gaussPullback (J4-555) — the two EXACT radial gauges close all three.
+-- curved_hjets_secondJet_banked = ★ the SECOND-jet Q/hP1 field (for P = fderiv-column) BANKED from the
+-- honest centre-C² carry hreg via GeneralBaseJets.chartField_secondJet_of_contDiffAt (hreg itself PROVED at
+-- z∈K∩ball by chartField_contDiffAt_center_general). curved_hjets_bundle_from_banked_secondJet = ★★ the FULL
+-- HjetsShape with the second jet discharged INTERNALLY, leaving EXACTLY the residual {global ∀x first jet,
+-- global amp PdiffAt, amp pd-pd@0, pullback bridge}; gate open/centre + hreg are banked locators.
+-- curved_hjets_bundle_residual/_intro = the SHARP residual ledger. curved_hjets_bundle_satisfiable = ★
+-- NON-VACUITY/NON-FLATNESS (κ<0,n≥2): BOTH radial gauges (metric + EXACT inverse) HOLD for g^K AND g^K is
+-- genuinely non-flat (curvedRNCMetric κ (y≡1) i j = κ/3 ≠ 0 = δᵢⱼ, i≠j) — the centre identities close for a
+-- genuinely CURVED metric, NOT forcing flatness (J4-509/582 lesson). std-3 all (residual_intro axiom-free).
+-- NOT a₁=R/6 (capstone still owes census/measurability/domination, convergence trio, hmassone pre-ρ, hContDom).
+#print axioms QIQTH.CurvedA1Hjets.curved_hjets_bundle_of_pullback
+#print axioms QIQTH.CurvedA1Hjets.curved_hjets_secondJet_banked
+#print axioms QIQTH.CurvedA1Hjets.curved_hjets_bundle_from_banked_secondJet
+#print axioms QIQTH.CurvedA1Hjets.curved_hjets_bundle_residual_intro
+#print axioms QIQTH.CurvedA1Hjets.curved_hjets_bundle_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

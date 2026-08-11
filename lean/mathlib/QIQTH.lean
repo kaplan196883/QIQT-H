@@ -1835,3 +1835,12 @@ import QIQTH.CurvedA1HOffCollarTail
 -- curvedRNCInv_contDiff (κ≤0), curvedRNCMetric_hgpos (κ≤0)}, at ⊤ then .of_le le_top to ∞. std-3.
 -- NOT a₁=R/6 (capstone still owes census/domination/convergence-trio/hmassone-pre-ρ/hContDom/on-collar hjets).
 import QIQTH.CurvedA1Hsrc
+-- J4-595 (CurvedA1Hjets): discharges/assesses the ON-COLLAR hjets chart-jet bundle (AmpGeometryBundle.HjetsShape)
+-- for g^K — the genuine curved input the capstone's amplitude carriers (hOffCollarTail/hInnerCont) lean on.
+-- Assembler curved_hjets_bundle_of_pullback = HjetsShape from jets + geodesic pullback bridge (J4-554 ⊕ J4-555,
+-- three centre identities discharged via the two EXACT radial gauges); curved_hjets_secondJet_banked = the Q/hP1
+-- field banked from centre-C² (chartField_secondJet_of_contDiffAt); curved_hjets_bundle_from_banked_secondJet =
+-- FULL bundle with second jet discharged internally, residual = {global ∀x first jet, global amp C¹, amp pd-pd@0,
+-- pullback bridge}. curved_hjets_bundle_satisfiable = NON-FLAT (both radial gauges hold ∧ g^K≠δ off-diagonal, κ<0).
+-- All std-3. NOT a₁=R/6 (capstone still owes census/domination/convergence-trio/hmassone-pre-ρ/hContDom).
+import QIQTH.CurvedA1Hjets
