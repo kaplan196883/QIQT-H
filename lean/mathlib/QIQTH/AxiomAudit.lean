@@ -24350,6 +24350,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HAdom.curved_hInnerCont_of_two
 #print axioms QIQTH.CurvedA1HAdom.curved_hAdom_satisfiable
 
+-- J4-601 (CurvedA1Hmeas): the LAST TWO hInnerCont carries {hmeas, hcont} BOTH discharged CARRY-FREE and
+-- hInnerCont CLOSED (curved_hInnerCont_closed: only mainline {hChr,hw,hu} + window data remain) — TOGETHER
+-- WITH the adversarial DEGENERACY PIN curved_innerPairing_zero: the J4-592→600 chain hard-codes
+-- hK := isCompact_singleton {0}; gatedKernel kills every source z ∉ K, so the z-slice integrand
+-- W(u−s)·L is supported in the Lebesgue-null {0} (n≥1) ⟹ a.e. 0 ⟹ hmeas (AESM of an a.e.-constant,
+-- ∀ᶠ trivial by Eventually.of_forall) and hcont (the a.e.-z time path is IDENTICALLY 0) are both true
+-- carry-free, at FREE gate params (∀ a b c — param-compat with the consumer's ∃ by quantifier shape).
+-- BUT the same mechanism makes the inner pairing ∫z W·L IDENTICALLY ZERO (curved_innerPairing_zero):
+-- the closed hInnerCont is continuity of the constant-0 function — TRUE and ANALYTICALLY EMPTY at this
+-- witness. Same K={0} source-collapse family as cp466 (CurvedA1FarConsumeCheck): there hframeK FORCED
+-- K={0}; here the singleton is pinned in the statement. Genuine hInnerCont analytic content (Levi z-slice
+-- measurability + dominated time continuity) lives only at a NON-collapsed base compact — the honest
+-- re-basing frontier. curved_hmeas_satisfiable = metric genuinely curved (κ<0, n≥2); the degeneracy is in
+-- the GATE SUPPORT, not the metric. std-3 all 7. NOT a₁=R/6 (owes census/domination piles, convergence
+-- trio, hmassone pre-ρ, hjets residual + {hChr,hw,hu} — and now, honestly, a non-degenerate re-base).
+#print axioms QIQTH.CurvedA1Hmeas.curved_gatedWitness_offOrigin_zero
+#print axioms QIQTH.CurvedA1Hmeas.curved_hmeas_at_gate
+#print axioms QIQTH.CurvedA1Hmeas.curved_hcont_at_gate
+#print axioms QIQTH.CurvedA1Hmeas.curved_hInnerCont_of_cont
+#print axioms QIQTH.CurvedA1Hmeas.curved_hInnerCont_closed
+#print axioms QIQTH.CurvedA1Hmeas.curved_innerPairing_zero
+#print axioms QIQTH.CurvedA1Hmeas.curved_hmeas_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

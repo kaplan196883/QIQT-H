@@ -1894,3 +1894,10 @@ import QIQTH.CurvedA1ReachAlign
 -- reduced to {hmeas, hcont} ONLY (hAdom/hBdom/hEmeas slots ALL internally discharged). Witness genuinely
 -- curved. std-3. NOT a1=R/6 (owes hmeas + hcont + piles/trio/hmassone-pre-rho/hjets + {hChr,hw,hu}).
 import QIQTH.CurvedA1HAdom
+-- J4-601 (CurvedA1Hmeas): hmeas AND hcont both discharged CARRY-FREE, hInnerCont CLOSED
+-- (curved_hInnerCont_closed) — PLUS the adversarial DEGENERACY PIN curved_innerPairing_zero: the J4-592+
+-- chain hard-codes hK := isCompact_singleton {0}, the gate kills every source z ≠ 0, so the z-integrand is
+-- a.e. 0 and the inner pairing is IDENTICALLY 0 — the closed hInnerCont is continuity of the constant-0
+-- function (same K={0} source-collapse family as cp466 / CurvedA1FarConsumeCheck). Genuine analytic
+-- hInnerCont content lives only at a NON-collapsed base compact. std-3 all 7. NOT a1=R/6.
+import QIQTH.CurvedA1Hmeas
