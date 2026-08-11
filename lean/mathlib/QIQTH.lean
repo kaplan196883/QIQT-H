@@ -1975,3 +1975,19 @@ import QIQTH.CurvedA1CenterChr
 -- C_eps*eps0 term enters the T1 slot as a (1/tau)-weighted constant coefficient — layer 4 must track
 -- it, not drop it), producer re-assembly; plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation.
 import QIQTH.CurvedA1CenterCoeff
+-- J4-607 (CurvedA1CenterResid): FOURTH layer of the (hbound-fat) wall — center-gauge tau-narrow
+-- N=0 residual engines. FINDING: hframeK entered the banked engines at TWO sites — (T1) via the
+-- explicit hCoeffU/hCoeffLin hypothesis AND (T2) DIRECTLY via uniformFlowPullbackMetricInv_dev_uniform
+-- feeding the quadratic term; the center substitution pays eps0 TWICE. Honest output:
+-- |R0| <= (C0 + Ceu*eps0*(1/tau))*G_{3/2} (O(r^2)) resp. (C0 + C1*(sqrt(tau)/tau) + Ceu*eps0*(1/tau))*G
+-- (O(r)), Ceu = sqrt(3/2)^n*(C_eps + 3n^2*M*W); constants before eps0; the eps0/tau term is
+-- irreducible (a constant coefficient cannot be width-folded: at v=0 all Gaussians are 1, 1/tau
+-- diverges). Landed: residualQuadratic_pointwise_narrow_center, the two _center engines, fat-K curved
+-- instantiations curvedRNC_resid(Linear)_bound_center (eps0=(|k|/3)*n*r^2, coeff antecedent
+-- DISCHARGED from layer 3), gate curvedRNC_resid_center_satisfiable. Layer-5 tension SCOPED: the
+-- tau*R0[u'] branch folds eps0/tau benignly (tau*(1/tau)=1) but the R0[u] branch keeps raw eps0/tau
+-- => N=1 shape (B0+B1*tau+Be*eps0/tau)*G; integral of 1/tau diverges at fixed eps0, so layer 5 needs
+-- an eps0-dependent tau-threshold OR the eps0->0 (shrink r) limit BEFORE tau-integration. std-3 all
+-- 6. NOT a1=R/6: curved re-base still owes layer 5 (producer re-assembly) + fat-K hEmeas/hAdom/hcont
+-- + capstone co-instantiation + piles/trio/hmassone-pre-rho/hjets.
+import QIQTH.CurvedA1CenterResid

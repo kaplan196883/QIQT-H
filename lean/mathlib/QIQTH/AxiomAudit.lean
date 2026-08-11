@@ -24529,6 +24529,40 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterCoeff.curvedRNC_coeffLinear_bound_center
 #print axioms QIQTH.CurvedA1CenterCoeff.curvedRNC_coeff_center_satisfiable
 
+-- J4-607 (CurvedA1CenterResid): FOURTH layer of the (hbound-fat) wall — center-gauge variants of the
+-- τ-narrow N=0 residual engines uniformResidual_gaussian_bound_tau_narrow (M2) /
+-- uniformResidualLinear_gaussian_bound_tau_narrow (L3a). ★ USE-SITE FINDING: hframeK entered the
+-- banked engines at TWO INDEPENDENT sites — (T1) indirectly via the explicit hCoeffU/hCoeffLin
+-- hypothesis, AND (T2) DIRECTLY via the inner call uniformFlowPullbackMetricInv_dev_uniform feeding
+-- the quadratic residual term (residualQuadratic_pointwise_narrow); T3 (Laplace–Beltrami) never took
+-- it. Center substitution (layer 1 at BOTH sites) ⟹ the ε₀ debt surfaces TWICE. HONEST OUTPUT (no
+-- silent absorption): |R₀| ≤ (C₀ + Cεu·ε₀·(1/τ))·G_{3/2} (O(r²)) resp.
+-- (C₀ + C₁·(√τ/τ) + Cεu·ε₀·(1/τ))·G_{3/2} (O(r)), with C₀/C₁ LITERALLY the banked constants at
+-- ε₀=0 and Cεu = √(3/2)ⁿ·(C_ε + 3n²MW) — C_ε share from T1 (a CONSTANT coefficient pays the raw 1/τ:
+-- no width fold can eat a v-independent coefficient, since at v=0 every Gaussian width is 1 while
+-- 1/τ→∞), 3n²MW share from T2's ε₀·r² cross term (m=1 absorption eats ONE of the two 1/τ powers;
+-- 12/4=3). ρ_u/C₀/C₁/Cεu all produced BEFORE ε₀ (no ε₀-inflation). ε₀-vs-τ TENSION SCOPED for layer
+-- 5: in the N=1 split the τ·R₀[u'] (Linear) branch folds τ·(Cεu·ε₀/τ)=Cεu·ε₀ (BENIGN additive
+-- constant), but the R₀[u] (O(r²)) branch keeps the raw ε₀/τ ⟹ honest N=1 shape
+-- (B₀+B₁·τ+Bε·ε₀/τ)·G; ∫₀ᵗ(1/τ)dτ diverges at fixed ε₀, so layer 5 needs either an ε₀-dependent
+-- τ≥τ₀ threshold or the ε₀→0 (shrink r) limit BEFORE τ-integration — order of limits is the layer-5
+-- crux. Landed: residualQuadratic_pointwise_narrow_center (T2 with center deviation),
+-- uniformResidual_gaussian_bound_tau_narrow_center (THE BRICK),
+-- uniformResidualLinear_gaussian_bound_tau_narrow_center (shifted-profile branch),
+-- curvedRNC_resid_bound_center / curvedRNC_residLinear_bound_center (fat-K curved instantiations,
+-- κ≤0, every r, explicit ε₀=(|κ|/3)·n·r², coeff antecedent DISCHARGED from layer 3).
+-- NON-VACUITY (cp466): curvedRNC_resid_center_satisfiable = fat K nonzero point + heat-side
+-- antecedents INHABITED (Θ=1,u=1) + coefficient-bound antecedent exhibited DISCHARGED (not merely
+-- assumed) + hdevK holds at the curved witness with the explicit ε₀. std-3 all 6. NOT a1=R/6 (flat
+-- tower only; curved re-base still owes layer 5 = producer re-assembly with the ε₀/τ bookkeeping,
+-- plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation + piles/trio/hmassone-pre-ρ/hjets).
+#print axioms QIQTH.CurvedA1CenterResid.residualQuadratic_pointwise_narrow_center
+#print axioms QIQTH.CurvedA1CenterResid.uniformResidual_gaussian_bound_tau_narrow_center
+#print axioms QIQTH.CurvedA1CenterResid.uniformResidualLinear_gaussian_bound_tau_narrow_center
+#print axioms QIQTH.CurvedA1CenterResid.curvedRNC_resid_bound_center
+#print axioms QIQTH.CurvedA1CenterResid.curvedRNC_residLinear_bound_center
+#print axioms QIQTH.CurvedA1CenterResid.curvedRNC_resid_center_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
