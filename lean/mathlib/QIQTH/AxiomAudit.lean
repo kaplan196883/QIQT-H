@@ -24140,6 +24140,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1WbvCoV.curved_Wbv_hasFDeriv_center_at_gate
 #print axioms QIQTH.CurvedA1WbvCoV.curved_hmassone_via_v2_at_gate
 
+-- J4-590 (CurvedA1HmassoneBound): sheds hmassone's hbound/hlocal carriers via the EnrichedChartBundle.
+-- curved_hmassone_via_bundle_at_gate = the curved hmassone with the base-varying CoV bundle M1–M4, the
+-- chart-image + Layer-C measurability, AND hbound/hlocal ALL discharged — obtained as the f≡1 case of
+-- EnrichedChartBundle.chartImage_approx_identity_v3 (enriched partial-homeomorph: ContinuousOn V, IsOpen Ω,
+-- V 0=0, f'=fderiv Wbv, 1/2<|det f'|, |det f'(V·)|→1; hbound from baseSlotAmp_bound, hlocal from
+-- baseSlotAmp_joint_limit + baseChartAmp_centre_eq_one) ∘ epsSeq→𝓝[>]0. Carried surface shrinks from
+-- J4-589's FOUR to TWO (only hGgate/hSupp; the gate/support split, a separate GateAnnulusSplit thread).
+-- curvedRNCMetric_det_center = the curved gauge det g^K(0)=1 (van-Vleck det collapses to 1^(n-1) at 0).
+-- curved_hmassoneBound_satisfiable = NON-VACUITY (κ<0, n≥2): gauge det g^K(0)=1 holds WHILE g^K genuinely
+-- curved (∃w, 1<det g^K w since det=(1−(K/3)‖w‖²)^(n−1)>1). std-3 all three. NOT a₁=R/6 (hmassone still
+-- carried MODULO hGgate/hSupp; the curved capstone stays CONDITIONAL).
+#print axioms QIQTH.CurvedA1HmassoneBound.curvedRNCMetric_det_center
+#print axioms QIQTH.CurvedA1HmassoneBound.curved_hmassone_via_bundle_at_gate
+#print axioms QIQTH.CurvedA1HmassoneBound.curved_hmassoneBound_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -1800,3 +1800,9 @@ import QIQTH.CurvedA1Hmassone
 -- chartImage_approx_identity_v2 ∘ epsSeq→𝓝[>]0); carried surface 12→4 (hGgate/hSupp/hbound/hlocal). std-3 all.
 -- NOT a₁=R/6 (hmassone still carried MODULO the FOUR residuals; hbound/hlocal need enriched bundle).
 import QIQTH.CurvedA1WbvCoV
+-- J4-590: sheds hmassone's hbound/hlocal carriers via the EnrichedChartBundle. curved_hmassone_via_bundle_at_gate
+-- = the curved hmassone as the f≡1 case of EnrichedChartBundle.chartImage_approx_identity_v3 (M1–M4 + hΩmeas +
+-- hΩnhds + hmeas + hbound + hlocal ALL discharged) ∘ epsSeq→𝓝[>]0; carried surface 4→2 (only hGgate/hSupp).
+-- curvedRNCMetric_det_center (det g^K 0 = 1) + curved_hmassoneBound_satisfiable (κ<0 non-vacuity: gauge holds
+-- while ∃w, 1<det g^K w). std-3 all. NOT a₁=R/6 (hmassone still carried MODULO hGgate/hSupp; capstone CONDITIONAL).
+import QIQTH.CurvedA1HmassoneBound
