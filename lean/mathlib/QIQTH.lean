@@ -1812,3 +1812,11 @@ import QIQTH.CurvedA1HmassoneBound
 -- carriers {rS,hKball,hSact,hWslice,hDom}. curved_hmassone_final_curved_satisfiable = κ<0 non-vacuity. std-3.
 -- NOT a₁=R/6 (hmassone now unconditional-in-ρ MODULO the four satisfiable pre-ρ carriers; capstone CONDITIONAL).
 import QIQTH.CurvedA1HmassoneFinal
+-- J4-592: drains the hInnerCont carrier of the curved capstone. curved_hInnerCont_at_gate = the EXACT
+-- hInnerCont binder (interior-time ContinuousOn of the inner W·L pairing on Ioo 0 u) at g^K, as the g:=g^K
+-- specialization of the banked std-3 engine InnerMeasFubini.hInnerCont_concrete — reducing hInnerCont to the
+-- honest per-interior-point dominated-continuity datum hContDom for g^K (local Gaussian dominator + local
+-- ae-strong-meas + local ae-domination + ae-z time ContinuousAt), genuinely TRUE on the OPEN Ioo 0 u (both s
+-- and u−s strictly positive ⟹ no τ→0 degeneracy). curved_hInnerCont_satisfiable = κ<0,n≥2 non-vacuity
+-- (∃w,1<det g^K w: NOT flat). std-3 both. NOT a₁=R/6 (capstone still owes hContDom + the other residuals).
+import QIQTH.CurvedA1HInnerCont

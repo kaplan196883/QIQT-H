@@ -24170,6 +24170,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HmassoneFinal.curved_hmassone_final_at_gate
 #print axioms QIQTH.CurvedA1HmassoneFinal.curved_hmassone_final_curved_satisfiable
 
+-- J4-592 (CurvedA1HInnerCont): drains the hInnerCont carrier of the curved a₁=R/6 capstone.
+-- curved_hInnerCont_at_gate = the EXACT hInnerCont binder of curved_a1_R6_fully_wired_center at the
+-- genuinely-curved g^K (interior-time ContinuousOn of s ↦ ∫z, W(u−s)0z·L s z0 on Set.Ioo 0 u), obtained as the
+-- g:=curvedRNCMetric κ / gi:=curvedRNCInv κ / S:=constGate … c specialization of the banked std-3 engine
+-- InnerMeasFubini.hInnerCont_concrete (= innerIntegral_continuousOn_of_dominated applied per interior point).
+-- Drains hInnerCont from an opaque carried ContinuousOn to the honest per-interior-point dominated-continuity
+-- datum hContDom for g^K {local integrable Gaussian dominator + local ae-strong meas + local ae-domination +
+-- ae-z time ContinuousAt}, GENUINELY TRUE on the OPEN Ioo 0 u (both s and u−s strictly positive ⟹ no τ→0
+-- Gaussian degeneracy; the DataPileWitnessAudit "DS none" flag was against the Continuous-on-all-of-ℝ engine,
+-- which the ContinuousOn engine correctly avoids). curved_hInnerCont_satisfiable = κ<0,n≥2 non-vacuity (∃w,
+-- 1<det g^K w: NOT the flat kernel). std-3 both. NOT a₁=R/6 (capstone still owes hContDom + hsrc/hOffCollarTail/
+-- census/convergence-trio/hmassone-pre-ρ; CONDITIONAL).
+#print axioms QIQTH.CurvedA1HInnerCont.curved_hInnerCont_at_gate
+#print axioms QIQTH.CurvedA1HInnerCont.curved_hInnerCont_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
