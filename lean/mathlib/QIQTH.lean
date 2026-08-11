@@ -1827,3 +1827,11 @@ import QIQTH.CurvedA1HInnerCont
 -- (tailMoment_collar_expSuppressed, J4-546). Satisfiable at κ<0,1≤n with a non-constant 1-Lipschitz
 -- amplitude. std-3. NOT a₁=R/6 (capstone still owes the other residuals; curved input = ON-collar hjets).
 import QIQTH.CurvedA1HOffCollarTail
+-- J4-594 (CurvedA1Hsrc): drains the hsrc carrier (Seeley–DeWitt transport-source C^∞ smoothness) of the
+-- center-gauge curved a₁=R/6 capstone. hsrc = ContDiff ℝ ∞ (transportOp Θ g^K gi^K (transportCoeff T 0)).
+-- KEY: transportCoeff T 0 = (fun _ => 1) (u₀≡1), so hsrc is ONE transport-source application to the CONSTANT
+-- base coefficient — no ray-integral solve, hence NO analytic wall. Discharged via banked
+-- transportOp_preserves_contDiff (J4-174 Part A) + curved carries {curvedRNCMetric_contDiff,
+-- curvedRNCInv_contDiff (κ≤0), curvedRNCMetric_hgpos (κ≤0)}, at ⊤ then .of_le le_top to ∞. std-3.
+-- NOT a₁=R/6 (capstone still owes census/domination/convergence-trio/hmassone-pre-ρ/hContDom/on-collar hjets).
+import QIQTH.CurvedA1Hsrc

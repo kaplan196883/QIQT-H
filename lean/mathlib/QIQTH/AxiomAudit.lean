@@ -24203,6 +24203,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HOffCollarTail.curved_hOffCollarTail_at_gate
 #print axioms QIQTH.CurvedA1HOffCollarTail.curved_hOffCollarTail_satisfiable
 
+-- J4-594 (CurvedA1Hsrc): drains the hsrc carrier of the center-gauge curved a₁=R/6 capstone. hsrc =
+-- ContDiff ℝ (∞:WithTop ℕ∞) (transportOp (vanVleck g^K) g^K gi^K (transportCoeff (transportOp …) 0)) = the
+-- Seeley–DeWitt transport-source C^∞ smoothness. KEY FINDING: transportCoeff T 0 = (fun _ => 1) DEFINITIONALLY
+-- (ParametrixFunction.transportCoeff_zero — u₀≡1), so hsrc is a SINGLE transport-source application to the
+-- CONSTANT base coefficient — NO ray-integral radialTransportSolve, hence the TransportOpSmoothness analytic
+-- wall (ω-level hSolve gap) does NOT apply. Discharged by composition: contDiff_const (u₀ C^∞) then the banked
+-- transportOp_preserves_contDiff (J4-174 Part A: Θ^{±½} C^∞ where det g>0, Δ_g maps C^∞→C^∞) instantiated at
+-- the curved carries {curvedRNCMetric_contDiff, curvedRNCInv_contDiff (κ≤0), curvedRNCMetric_hgpos (κ≤0)},
+-- delivered at the analytic level ⊤ and lowered to the requested ∞ by ContDiff.of_le le_top. curved_hsrc_at_gate
+-- = the EXACT capstone binder shape for g^K. curved_hsrc_satisfiable = κ<0,n≥2 non-vacuity: hsrc holds WHILE
+-- g^K genuinely curved (∃w,1<det g^K w) — not the flat degenerate case. std-3 both. NOT a₁=R/6 (capstone still
+-- owes census/measurability/domination, convergence trio, hmassone pre-ρ hGgate/hSupp, hInnerCont hContDom,
+-- on-collar hjets).
+#print axioms QIQTH.CurvedA1Hsrc.curved_hsrc_at_gate
+#print axioms QIQTH.CurvedA1Hsrc.curved_hsrc_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
