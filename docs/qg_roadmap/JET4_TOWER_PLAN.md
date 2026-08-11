@@ -7284,3 +7284,15 @@ std-3, budget raw 0 (9882 jobs).
 paying M·ε₀ in (A1) trace + (TC) coeffDevF) and Christoffel (→ this brick, free). Honest
 expected form |totalRadialO1_coeff| ≤ C_c·rncRadialSq v + C_ε·ε₀ with eps_arbitrarily_small
 supplying smallness. Then uniformCoeffLinear_bound analogue.
+
+### J4-606 [AF] — (hbound-fat) wall layer 3 CLOSED: center-gauge coeff bounds, honest ε₀ floor (9ee7fb86)
+CurvedA1CenterCoeff.lean (5 decls). hframeK sites in uniformCoeff(Linear)_bound = TWO: pullbackInv
+dev (consumed at (A1) diagonal trace + EVERY (TC) coeffDevF entry → layer-1 _center pays
+Md·(rncRadialSq v + ε₀) at both — ε₀ debt surfaces here) + Christoffel decay (→ layer-2, free).
+Honest form |coeff| ≤ C_c·rncRadialSq v + C_ε·ε₀ (real 0th-order floor, not suppressed; constants
+before ε₀; ε₀=0 recovers banked shape). Both variants + fat-K instantiations (ε₀=(|κ|/3)·n·r²) +
+satisfiability gate (antecedent inhabitance: heat-side Θ=1/u=1 exhibited). Layer-4 consumability
+checked: C_ε·ε₀ → T1 as (1/τ)-weighted constant, must be carried (flagged). std-3, raw 0 (9883).
+**J4-607**: layer 4 = center-gauge uniformResidual(Linear)_gaussian_bound_tau_narrow: push C_ε·ε₀
+through T1; expected (C₀ + C₁·√τ/τ + C_ε·ε₀/τ)·G_{3/2}; the ε₀-vs-τ tension is where layer 5
+lives. Then layer 5 = producer re-assembly.
