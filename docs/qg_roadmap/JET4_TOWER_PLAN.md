@@ -7575,3 +7575,16 @@ Owed (J4-623): off-diag O(1)·G domination + chart→ambient transfer (hinge = t
 **J4-623**: whitened hpkgBound off-diagonal layer — (1) general-row chart defect ≤ O(1)·G_{2τ}
 (dev bounds + Christoffel analogue through E_q + J4-615/616 moment suppliers ∘ E_q);
 (2) chart→ambient naturality weld; (3) √det bounds on the fat ball.
+
+### J4-623 [AF] — whitened off-diagonal bound FULL; CenterZero GLOBALIZED (bde78a54)
+WhiteOffDiag.lean (11 decls). ★whiteChart_heatOp_offdiag_bound: |heatOp ĝ ĝ⁻¹ (flat G) τ x 0|
+≤ C·G_{2τ}(x), EVERY q∈K, EVERY τ>0, ‖x‖<r₀ — the exact hpkgBound shape the as-built witness
+provably lacks. Ledger: banked exact normal form (flatCurvatureResidue_leading) + frame-free
+quadratic dev eats 1/τ + NEW whitened Christoffel decay chain + absorb levers. ★_amp variant
+(√det·G) with explicit det bounds. Naturality: general engine EXISTS
+(laplaceBeltrami_pullback_naturality_local); whiteExp_fderiv opener landed; weld scoped w/ 3
+banked ingredients. Witness gate: whitened bound + as-built no-go at the SAME witness.
+std-3, raw 0 (9900).
+**J4-624**: the naturality weld (engine at whiteExp: IsUnit fderiv via chain + nondeg radius +
+E_q invertibility; identification banked; Neumann two-sided inverse banked) ⟹ transport the ★
+bound to ambient heatOp g^κ gi^κ on the whitened kernel ⟹ whitened hpkgBound producer COMPLETE.
