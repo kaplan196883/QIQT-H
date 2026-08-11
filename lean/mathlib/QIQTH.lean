@@ -1761,3 +1761,12 @@ import QIQTH.CurvedA1CenterGauge
 -- hg0 curved-satisfiable via curvedRNCMetric_zero (no K={0} collapse), so J4-582 vacuity removed.
 -- Step 1 of the certified center-only-gauge rethread. NOT a₁=R/6 (still FLAT-ONLY until capstone lands). std-3.
 import QIQTH.DaLimLUCappedStep3Center
+
+-- J4-586 (Leg2HLapFullCenter): CENTER-GAUGE VARIANT of the curved leg-2 external hLapFull producer
+-- Leg2HLapFull.curved_leg2_hLapFull — the two geometry binders {hK0, hframeK} REPLACED by the single
+-- center-only value gauge hg0 : g(0)=δ, gauge line routed through DaLimCurvedGauge.gauge_from_pointwise
+-- (curved-compatible drop-in) instead of gauge_from_geometry. SAME MemLapFull conclusion (not weakened);
+-- hg0 curved-satisfiable via curvedRNCMetric_zero (no K={0} collapse), so J4-582 vacuity removed. Leg-2
+-- body is a thin assembly (like leg-1) — a proof copy with the ONE gauge-line swap, no census re-elaboration.
+-- Step 2 of the certified center-only-gauge rethread. NOT a₁=R/6 (still FLAT-ONLY until capstone lands). std-3.
+import QIQTH.Leg2HLapFullCenter
