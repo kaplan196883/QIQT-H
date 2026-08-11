@@ -7639,3 +7639,15 @@ white_transport_bridge/corrHigher carry hlam8 (second labelled input). std-3, ra
 of whiteInvChart (Gc-representative trick template) then the τ-deriv/pd carriers of
 whiteCutKernel (closed-form Gaussian × cutoff — likely EASIER than vanVleck's transport
 amplitude), landing tripleHEmeas(whiteGatedWitness).
+
+### J4-628 [AF] — whitened S1 slices 1-3; strictly easier confirmed (19be6e12)
+WhiteS1.lean (14 decls). Verdict verified in code: only .choose = SHARED uniformInverseChart
+(banked reps instantiated VERBATIM); whitening layer closed-form Borel; amplitude q-only ⟹
+amplitude-pd layer ABSENT. Slices 1-3 done incl. ★★whiteChart_rep_concrete +
+★★white_witness_value_concrete + ★★white_hDtau_concrete (∂_τ carrier FULLY closed,
+unconditional). Remaining: (S1-a) hP1 first field-pd, (S1-b) hP2 second field-pd (largest),
+(S1-c) E3d assembly → white_tripleHEmeas. std-3, raw 0 (9905).
+**J4-629**: S1-a — mirror gatedDerivRepProdS at whiteCutKernel: chart jets
+(flowInverseJet_measurable_component at g^κ) ∘ linear whiteUnvel (one matToCLM composition) +
+Gaussian/cutoff 1-jet algebra + off-S radialCutoff-support vanishing. Then J4-630 = S1-b,
+J4-631 = assembly + rethread into white_tail_O_s_discharged.
