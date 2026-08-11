@@ -24373,6 +24373,40 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1Hmeas.curved_innerPairing_zero
 #print axioms QIQTH.CurvedA1Hmeas.curved_hmeas_satisfiable
 
+-- J4-602 (CurvedA1ReBase): the K={0} degeneracy AUDIT proved + the RE-BASE started. (A) AUDIT: at the
+-- singleton pin the gate kills every source q≠0 at EVERY p (singleton_gatedKernel_offOrigin_zero), the
+-- defect kernel E = heatOp W inherits it (heatOp inert in q), any Duhamel convolution with that E on the
+-- left is IDENTICALLY 0 (inner z-integral of an a.e.-0 integrand, n≥1), hence ALL Levi iterates >= 2
+-- vanish and leviSeries E = -E POINTWISE (singleton_leviSeries_eq_negE) — the J4-597/599 hBdom at K={0}
+-- bounds a SINGLE first-order defect term on the y=0 slice (constant 0 off it), NOT a Neumann series.
+-- Chain classification: J4-592 (hInnerCont reduction) + J4-596 (ContDomWindow builder) = GENERAL-K
+-- engines, retain value; J4-597/598/599/600/601 = {0}-PINNED degenerate instantiations (partial content:
+-- q=0/y=0 slices + the generic ReachRequant/prescribed-ceiling architecture). LOAD-BEARING VERDICT: the
+-- capstone curved_a1_R6_fully_wired_center is GENERAL-K (hK0 : 0 ∈ K only — NOT pinned); J4-592
+-- instantiated its hInnerCont binder degenerately; the {0} choice is INCONSISTENT with the J4-591 mass
+-- side (hKball : ball 0 rS ⊆ K, rS>0 — no single K serves both), so the re-base is the real work, not a
+-- capstone repair. (B) RE-BASE at K := Metric.closedBall 0 r (r>0): rebased_ball_subset +
+-- rebased_base_pos_measure (co-instantiation with hKball at rS := r; positive-measure source support kills
+-- the collapse mechanism), rebased_gate_source_open (q-gate OPEN on the whole ball),
+-- rebased_hmeas_at_gate = FIRST re-based hInnerCont carrier: hmeas z-slice AESM of the pairing at the fat
+-- K from curvedRNC_hWmeas_carryFree (ρ → reach → δ₀ → ∀ 0<c<δ₀; J4-599/600 production shape) ×
+-- leviSlice_meas (labelled hLcont carry) via AEStronglyMeasurable.mul — conditional on {reach, hLcont},
+-- both genuine. std-3 all 12. NOT a₁=R/6 — the honest residual EXPANDS: re-based hcont + hAdom/hBdom
+-- (now GENUINE Gaussian dominations with fat source support = the real analytic wall) + hContDom assembly
+-- + the co-instantiated capstone application remain OWED.
+#print axioms QIQTH.CurvedA1ReBase.singleton_gatedKernel_offOrigin_zero
+#print axioms QIQTH.CurvedA1ReBase.singleton_heatOp_offOrigin_zero
+#print axioms QIQTH.CurvedA1ReBase.singleton_heatConvK_zero
+#print axioms QIQTH.CurvedA1ReBase.singleton_iterE_ge_two_zero
+#print axioms QIQTH.CurvedA1ReBase.singleton_leviSeries_eq_negE
+#print axioms QIQTH.CurvedA1ReBase.singleton_leviSeries_offSlice_zero
+#print axioms QIQTH.CurvedA1ReBase.curved_singleton_defect_offOrigin_zero
+#print axioms QIQTH.CurvedA1ReBase.rebased_ball_subset
+#print axioms QIQTH.CurvedA1ReBase.rebased_base_pos_measure
+#print axioms QIQTH.CurvedA1ReBase.rebased_gate_source_open
+#print axioms QIQTH.CurvedA1ReBase.rebased_hmeas_at_gate
+#print axioms QIQTH.CurvedA1ReBase.rebased_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -1901,3 +1901,15 @@ import QIQTH.CurvedA1HAdom
 -- function (same K={0} source-collapse family as cp466 / CurvedA1FarConsumeCheck). Genuine analytic
 -- hInnerCont content lives only at a NON-collapsed base compact. std-3 all 7. NOT a1=R/6.
 import QIQTH.CurvedA1Hmeas
+-- J4-602 (CurvedA1ReBase): (A) the K={0} DEGENERACY AUDIT sharpened to PROVED collapse lemmas — at the
+-- singleton pin the defect kernel E dies at every source q≠0, ALL Levi iterates >=2 vanish, and
+-- leviSeries = -E LITERALLY (singleton_leviSeries_eq_negE): the J4-597/599 hBdom bounds ONE first-order
+-- defect term (y=0 slice; constant-0 off it), NOT a series. Capstone binder verdict: the capstone is
+-- GENERAL-K (hK0 only); J4-592/596 engines are general-K; the {0} pin enters at J4-597 and makes
+-- J4-597..601 degenerate INSTANTIATIONS, inconsistent with J4-591's mass-side hKball (ball 0 rS ⊆ K).
+-- (B) RE-BASE START at K := Metric.closedBall 0 r (r>0): co-instantiation certificates (ball ⊆ K,
+-- positive measure), gate-open-on-ball, and rebased_hmeas_at_gate = the FIRST re-based hInnerCont
+-- carrier (witness-slice reach supplier × Levi-slice supplier, prescribed-ceiling production shape),
+-- conditional on {geometric reach, hLcont}. std-3 all 12. NOT a1=R/6 — the honest residual EXPANDS:
+-- re-based hcont/hAdom/hBdom/hContDom + co-instantiated capstone application are OWED.
+import QIQTH.CurvedA1ReBase
