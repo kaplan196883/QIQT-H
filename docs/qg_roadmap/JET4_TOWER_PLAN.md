@@ -7193,3 +7193,22 @@ from ONLY {hmeas, hcont}. `curved_hAdom_satisfiable`. std-3, budget raw 0 (9877 
 z ↦ W(u−s)0z·L(s)z0; W factor sliceable from tripleHEmeas/S1 joint SM; L factor z-measurability
 at fixed s>0 from hEmeas SM via iterConv/tsum measurability (grep leviSeries.*measurable,
 iterConvW.*measurable — likely partially banked in D2 engine). Then hcont (harder second brick).
+
+### J4-601 [AF] — hmeas+hcont closed at singleton witness; ⚠⚠ DEGENERACY PINNED (7674ca1e)
+CurvedA1Hmeas.lean (7 decls): hmeas AND hcont both discharged — but by DEGENERACY, honestly
+pinned: the J4-592→600 hInnerCont chain hard-codes hK := isCompact_singleton {0};
+gatedKernel's q∈K test ⟹ W τ 0 z = 0 ∀z≠0 (curved_gatedWitness_offOrigin_zero) ⟹ the z-slice
+is a.e. constant-0 ⟹ AESM/ContinuousAt trivial; curved_hInnerCont_closed = hInnerCont with no
+hmeas/hcont carry. ⚠⚠ curved_innerPairing_zero (std-3 PIN): ∫z W(u−s)0z·L s z 0 ≡ 0 — the
+closed hInnerCont is continuity of the constant-0 function: ANALYTICALLY EMPTY at this witness.
+Same K={0} source-support collapse family as cp466/J4-582 (there hframeK FORCED K={0}; here the
+singleton is pinned in the statement). DO NOT record "hInnerCont analytically closed" — record
+"closed at singleton-collapsed witness + degeneracy pinned". Genuine analytic wall re-opens at
+any non-collapsed base compact: W-slice via curvedRNC_hWmeas_carryFree (c<δ₀ ⟹ joint production
+needed), L-slice via CurvedA1ClassBMeas7.leviSlice_meas / leviSource_zslice_aesm. NOTE: the
+ENGINES built J4-596→600 (ContDomWindow builder, hBdom unconditional/D2, hoisted reach requant,
+joint hAdom production) are witness-independent machinery and retain value; what is empty is
+the K={0} INSTANTIATION of the pairing. std-3, budget raw 0 (9878 jobs).
+**J4-602**: (1) FIRST audit which other J4-59x-chain conclusions are degenerate under the
+singleton pin; (2) re-base the hInnerCont carrier at K := closedBall 0 r, r>0 (non-collapsed),
+where the discharge becomes real.
