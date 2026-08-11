@@ -2124,3 +2124,10 @@ import QIQTH.EquivProbe
 -- the adapters (two-sided E_q bounds, √n confinement, exact phase transfer Q_g(E_q w)=‖w‖²).
 -- NOT a1=R/6 (whitened replay J4-622 + whitened hpkgBound + downstream piles still owed).
 import QIQTH.WhiteWitness
+-- J4-622 WhiteReplay: the whitened replay — (i) chart-level identification ĝ_q = fderiv-pullback
+-- of whiteExp (chain rule through E_q), (ii) ★ whitePullbackMetricInv_dev_uniform = the sole
+-- hframeK consumer REPLAYED for the whitened family with NO hframeK/hdevK/ε₀ (value jet exactly δ),
+-- (iii) whitened hpkgBound START: whiteChart_heatOp_diag_clean (the 1/τ diagonal floor VANISHES
+-- for the whitened chart pair; tr ĝ⁻¹(0)=n by construction) + genuine-curvature gates (det=5/3≠1).
+-- NOT a1=R/6 (off-diagonal Gaussian domination + hEbound/hInt + downstream piles still owed).
+import QIQTH.WhiteReplay

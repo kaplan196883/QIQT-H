@@ -24985,6 +24985,43 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteWitness.white_vs_asBuilt_frame_gate
 #print axioms QIQTH.WhiteWitness.flatPhase_hpkgBound_fails_witness
 
+-- J4-622 WhiteReplay: the WHITENED REPLAY. (i) ★ whitePullbackMetric_eq_fderiv_pullback — the
+-- J4-621 transport-formula ĝ_q = E_qᵀ·g̃_q(E_q·)·E_q IS the honest fderiv-pullback of
+-- whiteExp = uniformFlowExp∘E_q (chain rule D(F∘E)=(DF∘E)·E + pure Finset sum swap
+-- congr_double_sum_swap + E_q symmetry), radius-gated corollary on ‖w‖<R/(√n+1).
+-- (ii) ★★ whitePullbackMetricInv_dev_uniform — THE SOLE hframeK CONSUMER
+-- (uniformFlowPullbackMetricInv_dev_uniform, UniformFlowJetZero:462) REPLAYED for the whitened
+-- family: |ĝ⁻¹_q(w)−δ| ≤ M·rncRadialSq w uniform over q∈K with NO hframeK, NO hdevK, NO ε₀
+-- (contrast the J4-604 center replay's +ε₀): value jet exactly δ (banked whitePullbackMetric_zero)
+-- + frame-free toBase Taylor bound (uniformFlowPullbackMetric_dev_uniform_toBase: value jet
+-- zero_center + pd-jet pd_zero_center + frame-free C² packet + decay_order_two) + sandwich
+-- ĝ(w)−δ = E_qᵀ(g̃(E_qw)−g(q))E_q (all-q whitening identity) + entry contraction |E_q|≤1 +
+-- √n confinement + self-contained Neumann (‖1−Â‖ ≤ nM‖w‖² ≤ 1/2 ⟹ unit, ‖Â⁻¹‖≤2, geometric
+-- series) + banked push Â⁻¹−1=Â⁻¹(1−Â). The LAST frame obstacle of the per-q-uniform machinery
+-- discharged for the whitened witness. (iii) whitened hpkgBound START:
+-- ★ whiteChart_heatOp_diag_clean — heatOp ĝ_q ĝ⁻¹_q (flat phase) τ 0 0 = 0 EXACTLY (the J4-621
+-- diagonal identity at the whitened pair; tr ĝ⁻¹_q(0)=n BY CONSTRUCTION,
+-- whitePullbackMetricInv_zero) — the 1/τ diagonal floor that broke the as-built hpkgBound
+-- VANISHES; off-diagonal Gaussian domination = labelled J4-623+ residue. Non-vacuity:
+-- curvedRNC_det_probe (det g^κ(probeQ)=5/3≠1) ⟹ whiteW_genuinely_curved (amplitude √(5/3)≠1);
+-- whiteReplay_witness_gate co-instantiates ★dev + clean-diagonal + ambient-nonzero-defect +
+-- genuine frame change at n=2, κ=−1, fat K=closedBall 0 2. NOT a1=R/6 (whitened hpkgBound
+-- completion + hEbound/hInt + K1TransportBudget + fat-K carriers + capstone co-instantiation
+-- still owed). std-3.
+#print axioms QIQTH.WhiteReplay.curvedWhitening_entry_abs_le_one
+#print axioms QIQTH.WhiteReplay.uniformFlowPullbackMetric_dev_uniform_toBase
+#print axioms QIQTH.WhiteReplay.whitePullbackMetric_dev_uniform
+#print axioms QIQTH.WhiteReplay.whitePullbackMetric_neumann
+#print axioms QIQTH.WhiteReplay.whitePullbackMetricInv_dev_uniform
+#print axioms QIQTH.WhiteReplay.whitePullbackMetricInv_zero
+#print axioms QIQTH.WhiteReplay.whiteChart_heatOp_diag_clean
+#print axioms QIQTH.WhiteReplay.curvedRNC_det_probe
+#print axioms QIQTH.WhiteReplay.whiteW_genuinely_curved
+#print axioms QIQTH.WhiteReplay.whiteReplay_witness_gate
+#print axioms QIQTH.WhiteReplay.congr_double_sum_swap
+#print axioms QIQTH.WhiteReplay.whitePullbackMetric_eq_fderiv_pullback
+#print axioms QIQTH.WhiteReplay.whitePullbackMetric_eq_fderiv_pullback_ball
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
