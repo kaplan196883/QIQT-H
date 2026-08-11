@@ -7160,3 +7160,21 @@ std-3, budget raw 0 (9874 jobs).
 replicating gatedWitnessN1_hEboundW_le_lin_CONST (ConstRadiusGateExport.lean:226–397, mechanical)
 with ρc := min(min(min rN δ₀_chart) r₁) ε for prescribed ε ⟹ c=(b+ρc)/2<ε, then b<δ₀(a,b)
 compatibility ⟹ real curved_hBdom_unconditional. Alternative: hAdom-global lift.
+
+### J4-599 [AF] — reach alignment CLOSED: curved_hBdom_unconditional (1b2cacb2)
+ReachRequant.lean (13 decls): the S1/hEmeas jet reach is (a,b)-INDEPENDENT in substance —
+audited to the leaves (hWG_gate_concrete ρ, hKSmeas_concrete δm, chartField reach δr,
+uniformInverseChart δo, flow-jet radii): all (a,b)-free; but no existing statement exposes it,
+so proved by HOISTED REPLAY; capstone tripleHEmeas_flowball_requant (∃δ₀>0 BEFORE ∀ a b c).
+CurvedA1ReachAlign.lean (5 decls): gatedWitnessN1_hEboundW_le_lin_CONST_prescribed (J4-316
+producer replayed with ρc:=min(min(min rN δ₀_chart) r₁) ε, prescribed ε, extra conclusion c<ε —
+gates only shrink), curvedRNC_heatOp_dom_pkg_prescribed, ★curved_hBdom_unconditional (κ<0, 1≤n,
+T>0, given only {hChr,hw,hu}: ∃ 0<a<b<c, ∃ C_L≥0, EXACT width-2 hBdom binder on (0,T] — NO
+reach antecedent, NO hEmeas antecedent; ε:=δ₀_jet forces c<δ₀_jet by construction),
+★curved_hInnerCont_of_meas (capstone hInnerCont reduced to EXACTLY {hAdom, hmeas, hcont}),
+curved_reachAlign_satisfiable. Gate genuinely inhabited at small c (nothing downstream needs c
+large; builder params free). std-3, budget raw 0 (9876 jobs).
+**J4-600 recommendation**: hAdom-global lift — all-p,q witness Gaussian domination
+(A₀+A₁τ)·√(3/2)ⁿ·gaussDdim(3/2·τ)(p−q) for the gated van-Vleck witness at aligned params, from
+banked amplitude bounds (hCoeffU0/Lin1 on-gate; witness ≡0 off-gate). Then hmeas/hcont likely
+follow from unconditional hBdom + tripleHEmeas via dominated-convergence bricks.
