@@ -7212,3 +7212,26 @@ the K={0} INSTANTIATION of the pairing. std-3, budget raw 0 (9878 jobs).
 **J4-602**: (1) FIRST audit which other J4-59x-chain conclusions are degenerate under the
 singleton pin; (2) re-base the hInnerCont carrier at K := closedBall 0 r, r>0 (non-collapsed),
 where the discharge becomes real.
+
+### J4-602 [AF] — degeneracy AUDIT + re-base start at K=closedBall (1c37e3e3)
+AUDIT TABLE (proved std-3 in CurvedA1ReBase.lean): at K={0} the collapse is TOTAL —
+singleton_leviSeries_eq_negE: leviSeries E = −E pointwise (all iterates ≥2 vanish; heatOp inert
+in source q; left-Duhamel convolutions ≡0). Reclassification: J4-592 curved_hInnerCont_at_gate +
+J4-596 hContDom builder = GENERIC ENGINES (general-K binders, retain full value); J4-597/599
+hBdom = {0}-PINNED (bounds ONE defect term on y=0 slice, NO series content); J4-598 hEmeas =
+{0}-pinned weak (ReachRequant architecture generic); J4-600 hAdom = {0}-pinned partial (content
+only on q=0 slice = gated parametrix); J4-601 = degenerate (self-pinned).
+★ LOAD-BEARING: capstone curved_a1_R6_fully_wired_center is GENERAL-K (hK0 : 0∈K only,
+FullyWiredCenter:462-469) — the {0} pin entered via the drain chain at J4-597, NOT the capstone;
+AND J4-591 hmassone needs hKball : ball 0 rS ⊆ K (fat; unsatisfiable at {0} per J4-582) ⟹ the
+{0}-instantiated hInnerCont chain and the mass side were NEVER co-instantiable at one K.
+RE-BASE (K := closedBall 0 r): co-instantiation certificate (rebased_ball_subset +
+rebased_base_pos_measure: hKball satisfiable at rS:=r for the SAME K; positive measure kills the
+a.e.-source-kill mechanism), rebased_gate_source_open, ★rebased_hmeas_at_gate (first re-based
+carrier: fat-K z-slice AESM = curvedRNC_hWmeas_carryFree × CurvedA1ClassBMeas7.leviSlice_meas;
+conditional on {origin reach c<δ₀ (joint-production shape), hLcont} — genuine, non-vacuous).
+OWED (expanded honest residual): re-based hcont, re-based hAdom/hBdom (now the REAL analytic
+wall — fat-support Gaussian dominations, Neumann-tail machinery never yet exercised), hContDom
+assembly at fat K, co-instantiated capstone application. std-3, budget raw 0 (9879 jobs).
+**J4-603**: re-based hcont (Levi-slice time continuity via D2 positive-strip engines, joint
+c<δ₀ production) OR re-based hBdom (fat-K width-2 domination — the genuine Neumann-tail wall).
