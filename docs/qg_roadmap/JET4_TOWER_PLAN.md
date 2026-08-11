@@ -7031,3 +7031,17 @@ from PROVED v3; hgdet0 genuine; non-vacuous genuine curvature; R/6 untouched. st
 gate-support split via GateAnnulusSplit.chartImage_approx_identity_final (eliminates hGgate via gate-activation
 {rS,hKball,hSact} + hSupp via Gaussian-tail annulus zeroth_domination_global) → curved_hmassone_final_at_gate
 (hmassone unconditional in ρ, only satisfiable gate/domination carries) OR next residual (hInnerCont/convergence trio).
+
+## J4-591 (close hmassone ρ-gate carriers hGgate/hSupp via banked GateAnnulusSplit final — ρ-unconditional)
+CurvedA1HmassoneFinal.lean: DON'T-UNDERCREDIT — gate/annulus split banked as
+GateAnnulusSplit.chartImage_approx_identity_final (hGgate←{rS,hKball,hSact}; hSupp←offBall_integral_tendsto_zero
++ zeroth_domination_global hDom + hWslice). `curved_hmassone_final_at_gate` (κ≤0,0<a<b: hGgate/hSupp DISCHARGED,
+∃ρ>0 Tendsto (fun m => ∫z vanVleckGatedWitness g^K…(epsSeq m)0 z) atTop (𝓝 1) = exact capstone hmassone,
+ρ-unconditional, modulo 4 satisfiable PRE-ρ carriers {rS/hKball, hSact, hWslice, hDom}; f≡1 case of
+chartImage_approx_identity_final ∘ epsSeq→𝓝[>]0) + `curved_hmassone_final_curved_satisfiable` (non-vacuity).
+Main verified: conclusion=capstone hmassone no hGgate/hSupp; pre-ρ carriers genuine satisfiable; NO K={0}
+collapse (hKball ball 0 rS⊆K rS>0 ⟹ K∋nonzero, constGate c>0 ≠ frame seed); from PROVED
+chartImage_approx_identity_final; genuine curvature; R/6 untouched. std-3, budget raw 0, 9867 jobs. ★ hmassone
+DRAIN COMPLETE (ρ-side): 12→4→2→ρ-unconditional (4 satisfiable pre-ρ carriers). a₁=R/6 CONDITIONAL. J4-592 =
+next carried residual — hInnerCont (self-contained regularity) OR hDom radius-reconciliation (fully bank mass
+side via WideAmplitudeData at capstone a,b) OR convergence trio OR hsrc/hOffCollarTail (heavier walls).
