@@ -25167,6 +25167,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteS1P1.white_hP1_offS_satisfiable_empty
 #print axioms QIQTH.WhiteS1P1.white_hP1_underlying_nonzero
 
+-- ── J4-630 (WhiteCollar): THE WHITENED COLLAR — hOffS DISCHARGED at the concrete flow-ball
+-- gates. Mechanism: FREE from the banked κ≤0 radial contraction (whiteVel_radialSq_le at
+-- E_q(E_q⁻¹v)=v) — NO whitening-frame norm bound needed; support-closure argument line-for-line
+-- the J4-235 template with one extra whitening step. whiteCut_locally_zero_offGate (gated witness
+-- ≡0 near every off-gate point, radii 0<a<b<c<δ₀); ★ white_hOffS_discharged (exact hP1 hOffS
+-- binder shape); ★ white_hOffS2_discharged (mixed-second-pd analogue, pre-shaped for hP2/S1-b);
+-- ★★ white_hP1_unconditional = J4-629's hP1 slot with NO carried measurability-side input.
+-- Gates: radius-window satisfiable ∀δ₀>0, expansion-direction pin, nonzero object + inhabited
+-- gate re-exports. NOT a1=R/6 (S1-b hP2, S1-c assembly, hlam8, K1TransportBudget, fat-K
+-- carriers, capstone co-instantiation + prior piles still owed).
+#print axioms QIQTH.WhiteCollar.whiteCut_locally_zero_offGate
+#print axioms QIQTH.WhiteCollar.white_hOffS_discharged
+#print axioms QIQTH.WhiteCollar.white_hOffS2_discharged
+#print axioms QIQTH.WhiteCollar.white_hP1_unconditional
+#print axioms QIQTH.WhiteCollar.white_collar_radii_satisfiable
+#print axioms QIQTH.WhiteCollar.white_collar_expansion_pin
+#print axioms QIQTH.WhiteCollar.white_collar_underlying_nonzero
+#print axioms QIQTH.WhiteCollar.white_collar_gate_nonempty
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

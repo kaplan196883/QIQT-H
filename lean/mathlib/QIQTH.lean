@@ -2202,3 +2202,11 @@ import QIQTH.WhiteS1
 -- (S1-b hP2, S1-c assembly, hOffS collar, hlam8, K1TransportBudget, fat-K carriers, capstone
 -- co-instantiation + prior piles still owed).
 import QIQTH.WhiteS1P1
+-- J4-630 (WhiteCollar): THE WHITENED COLLAR — hOffS DISCHARGED at concrete flow-ball gates;
+-- mechanism FREE from the banked κ≤0 contraction (whiteVel_radialSq_le at E_q(E_q⁻¹v)=v; NO
+-- frame norm bound needed): whiteCut_locally_zero_offGate (gated witness ≡0 near off-gate
+-- points, 0<a<b<c<δ₀), ★ white_hOffS_discharged + ★ white_hOffS2_discharged (hP2-shaped),
+-- ★★ white_hP1_unconditional (J4-629 hP1 slot, no carried measurability-side input). NOT
+-- a1=R/6 (S1-b hP2, S1-c assembly, hlam8, K1TransportBudget, fat-K carriers, capstone
+-- co-instantiation + prior piles still owed).
+import QIQTH.WhiteCollar
