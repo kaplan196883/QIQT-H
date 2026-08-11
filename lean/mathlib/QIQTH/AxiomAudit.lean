@@ -24593,6 +24593,53 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterN1.centerShape_no_width2_kernel_majorant
 #print axioms QIQTH.CurvedA1CenterN1.curvedRNC_residN1_center_satisfiable
 
+-- J4-609 (FrozenGauss): SIXTH layer of the (hbound-fat) wall — the per-q FROZEN-SPD GAUSSIAN
+-- (Sol's forward-route steps 1-3 from the J4-608 route decision). frozenGauss A tau v =
+-- (sqrt(4*pi*tau))^-n * sqrt(det A) * exp(-Q_A(v)/(4*tau)): exponent carries the frozen METRIC
+-- A=g(q), the operator carries the frozen INVERSE B=g^-1(q); det^{+1/2} makes Gamma_delta =
+-- gaussDdim (frozenGauss_delta / frozenGauss_curvedRNC_center) and classically mass 1 (NOTED,
+-- not proved — no lemma claims the integral). frozenGauss_frozen_heat (THE BRICK) = the EXACT
+-- frozen heat cancellation d_tau Gamma_A = sum_ij B^ij pd_i(pd_j Gamma_A), tau>0, ALL v — from
+-- the pd calculus (frozenGauss_pd/_pd_pd: slice-polynomial decomposition quadForm_update) +
+-- trace/quad reductions sum_BA_trace/sum_BA_quad. frozenGauss_heatOp_zero = the convention PIN:
+-- the same cancellation through the repo's OWN heatOp/laplaceBeltrami with frozen coefficient
+-- fields (christoffel_const = frozen metric has zero Christoffel) — no sign/index/normalization
+-- mismatch against heatOp's actual derivative form survives. Two-sided ellipticity comparison
+-- frozenGauss_le_gauss / gauss_le_frozenGauss: m|v|^2<=Q_A<=M|v|^2 gives sqrt(det A)*(sqrt M)^-n
+-- *G_{tau/M} <= Gamma_A <= sqrt(det A)*(sqrt m)^-n*G_{tau/m}, prefactors EXACT (inequality lives
+-- in the exponent alone). Space form g^K=curvedRNCMetric K (K<=0): quadForm_curvedRNC_lower/
+-- _upper = eigenvalue bounds |v|^2 <= Q <= (1+(-K/3)r^2)|v|^2 on |q|^2<=r^2 (repo sign
+-- convention g^K = delta - (K/3)(|q|^2 delta - qq^T) makes g^K >= delta GLOBALLY for K<=0 — NO
+-- smallness condition (|K|/3)r^2<1 needed on this branch); frozenGauss_comparison_spaceForm =
+-- assembled two-sided comparison; frozenGauss_frozen_heat_spaceForm = the cancellation at the
+-- curved witness with B := curvedRNCInv K q (left inverse curvedRNCInv_mul_metric discharged
+-- from the banked exact curvedRNCMetric_hinvF + symmetry). NON-VACUITY (cp466 discipline):
+-- frozenGauss_matrix_ne_delta — K/=0, n>=2, q/=0 => some diagonal of g^K(q) /= 1, so the
+-- space-form layer is exercised at a genuinely non-flat frozen matrix; frozenGauss_pos =
+-- strict positivity. FrozenDefectBound = the O(tau^-1/2) Levi/Lipschitz-defect J4-610 TARGET
+-- as a Prop ONLY — deliberately NOT proved (no fake inhabitant). std-3 all 18. NOT a1=R/6:
+-- flat tower only; curved re-base still owes the defect bound (J4-610) + the alpha-fork
+-- (alpha=-1/2 D2 consumer or per-q first-jet cancellation) + per-q producer re-assembly +
+-- fat-K hEmeas/hAdom/hcont + capstone co-instantiation + piles/trio/hmassone-pre-rho/hjets.
+#print axioms QIQTH.FrozenGauss.frozenGauss_delta
+#print axioms QIQTH.FrozenGauss.frozenGauss_curvedRNC_center
+#print axioms QIQTH.FrozenGauss.frozenGauss_pos
+#print axioms QIQTH.FrozenGauss.frozenGauss_pd
+#print axioms QIQTH.FrozenGauss.frozenGauss_pd_pd
+#print axioms QIQTH.FrozenGauss.hasDerivAt_frozenGauss_tau
+#print axioms QIQTH.FrozenGauss.frozenGauss_frozen_heat
+#print axioms QIQTH.FrozenGauss.christoffel_const
+#print axioms QIQTH.FrozenGauss.frozenGauss_heatOp_zero
+#print axioms QIQTH.FrozenGauss.frozenGauss_le_gauss
+#print axioms QIQTH.FrozenGauss.gauss_le_frozenGauss
+#print axioms QIQTH.FrozenGauss.quadForm_curvedRNC
+#print axioms QIQTH.FrozenGauss.quadForm_curvedRNC_lower
+#print axioms QIQTH.FrozenGauss.quadForm_curvedRNC_upper
+#print axioms QIQTH.FrozenGauss.frozenGauss_comparison_spaceForm
+#print axioms QIQTH.FrozenGauss.curvedRNCInv_mul_metric
+#print axioms QIQTH.FrozenGauss.frozenGauss_frozen_heat_spaceForm
+#print axioms QIQTH.FrozenGauss.frozenGauss_matrix_ne_delta
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

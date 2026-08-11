@@ -2008,3 +2008,23 @@ import QIQTH.CurvedA1CenterResid
 -- only; curved re-base still owes the per-q re-based producer + fat-K hEmeas/hAdom/hcont +
 -- capstone co-instantiation + piles/trio/hmassone-pre-rho/hjets).
 import QIQTH.CurvedA1CenterN1
+-- J4-609 (FrozenGauss): SIXTH layer of the (hbound-fat) wall — the per-q FROZEN-SPD GAUSSIAN
+-- (Sol's forward-route steps 1-3). frozenGauss A tau v = (sqrt(4*pi*tau))^-n * sqrt(det A) *
+-- exp(-Q_A(v)/(4*tau)) (exponent carries the frozen METRIC A=g(q), operator carries the frozen
+-- INVERSE B=g^-1(q); det to the PLUS 1/2 => Gamma_delta = gaussDdim and classical mass 1 — mass
+-- NOTED not proved). frozenGauss_frozen_heat (THE BRICK) = the EXACT frozen heat cancellation
+-- d_tau Gamma = sum_ij B^ij pd_i pd_j Gamma (all tau>0, all v; symmetric A, componentwise left
+-- inverse B) — kills the J4-608 eps0/tau floor at order 0. frozenGauss_heatOp_zero = the SAME
+-- cancellation through the repo's OWN heatOp/laplaceBeltrami (christoffel_const: frozen metric
+-- => zero Christoffel) — the convention pin. frozenGauss_le_gauss / gauss_le_frozenGauss = the
+-- two-sided ellipticity comparison with EXPLICIT constants (prefactors match EXACTLY; the
+-- inequality lives in the exponent alone). Space form g^K (K<=0): eigenvalue bounds
+-- |v|^2 <= Q <= (1+(-K/3)r^2)|v|^2 on |q|<=r (repo sign => g^K >= delta globally, NO smallness
+-- condition on r), assembled comparison frozenGauss_comparison_spaceForm, cancellation at the
+-- curved witness frozenGauss_frozen_heat_spaceForm (inverse discharged from banked hinvF).
+-- NON-VACUITY: frozenGauss_matrix_ne_delta (K/=0, n>=2, q/=0 => frozen matrix NOT delta).
+-- FrozenDefectBound = the O(tau^-1/2) Levi/Lipschitz defect J4-610 TARGET, a Prop ONLY (NOT
+-- proved). std-3 all 18. NOT a1=R/6 (flat tower only; curved re-base still owes the defect
+-- bound + alpha-fork + per-q producer re-assembly + fat-K hEmeas/hAdom/hcont + capstone
+-- co-instantiation + piles/trio/hmassone-pre-rho/hjets).
+import QIQTH.FrozenGauss
