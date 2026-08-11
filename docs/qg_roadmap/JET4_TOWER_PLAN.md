@@ -7016,3 +7016,18 @@ carriers strictly weaker; Wbv near-identity diffeo (DWbv(0)=-id); std-3. budget 
 J4-590 = hbound/hlocal via EnrichedChartBundle (ContDiffAt.toOpenPartialHomeomorph V-continuity+sub-ball open images
 ⟹ uniform amplitude sup-bound + |det f'|≥c>0 + V w→0, |det f'(V w)|→1; + banked baseSlotAmp_bound/joint_limit/
 baseChartAmp_centre_eq_one=1) ⟹ shed hbound/hlocal, leaving hGgate/hSupp gate-annulus split OR next residual.
+
+## J4-590 (shed hmassone hbound+hlocal via banked EnrichedChartBundle v3 — carriers 4→2)
+CurvedA1HmassoneBound.lean: DON'T-UNDERCREDIT — hbound/hlocal already banked as
+EnrichedChartBundle.chartImage_approx_identity_v3 (J4-278; re-runs ContDiffAt.toOpenPartialHomeomorph,
+discharges hbound←baseSlotAmp_bound + hlocal←baseSlotAmp_joint_limit+baseChartAmp_centre_eq_one via
+bundleV_tendsto_zero/bundleDet_tendsto_one). `curved_hmassone_via_bundle_at_gate` (κ≤0,0<a<b: curved hmassone
+= exact capstone shape modulo ONLY hGgate/hSupp, from f≡1 case of v3 ∘ epsSeq→𝓝[>]0; carriers 4→2) +
+`curvedRNCMetric_det_center` (det g^K 0=1 gauge from curvedRNCMetric_det+rncRadialSq_zero) +
+`curved_hmassoneBound_satisfiable` (κ<0,n≥2: det g^K(0)=1 ∧ ∃w 1<det g^K(w)=(1−(K/3)‖w‖²)^(n−1) — gauge holds
+while genuinely curved, not flat kernel). Main verified: conclusion=capstone hmassone; only hGgate/hSupp carriers;
+from PROVED v3; hgdet0 genuine; non-vacuous genuine curvature; R/6 untouched. std-3, budget raw 0, 9866 jobs.
+★ hmassone now hGgate/hSupp ONLY (+ satisfiable standing carries). a₁=R/6 CONDITIONAL. J4-591 = hGgate/hSupp
+gate-support split via GateAnnulusSplit.chartImage_approx_identity_final (eliminates hGgate via gate-activation
+{rS,hKball,hSact} + hSupp via Gaussian-tail annulus zeroth_domination_global) → curved_hmassone_final_at_gate
+(hmassone unconditional in ρ, only satisfiable gate/domination carries) OR next residual (hInnerCont/convergence trio).
