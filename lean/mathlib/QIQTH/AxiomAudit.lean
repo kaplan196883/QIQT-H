@@ -24759,6 +24759,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenColumn.sqrt_exceeds_linear_budget
 #print axioms QIQTH.FrozenColumn.integral_sqrt_le_linear
 
+-- J4-614 (FrozenK2): the k=2 budget bridge, ROUTE (b) landed in full — the sqrt-tolerant
+-- Duhamel assembly (K*((t-s)+s)+K'*sqrt(s) slice budget => K*t^2+K'*t^{3/2}), the o(t)-budget
+-- consumer variant corrHigher_bounded_of_slice_sqrt (hCorrHigher equality shape + honest
+-- family bound; cRem = O(t^{-1/2}) NOT bounded), the o(t)-sufficiency Tendsto certificates
+-- (correction/t -> 0 as t->0+, so a1 is not shifted; capstone consumes the fixed-t equality
+-- verbatim), the ROUTE-(a) half-moment lever (gaussDdim_absorb_half/_cubic + moment_half:
+-- |v|*G_tau <= C*sqrt(tau)*G_{lam*tau} — the k=2 bridge's moment mechanism), the frozen
+-- wiring (k>=2 column tail fits the K'*sqrt(s) budget; assembled O(t^{3/2}) RELATIVE to the
+-- explicit diagonal mass G_{2t}(0)), and the nonzero-slice witness. Sol verdict: the genuine
+-- E*E O(s) upgrade is TRUE (affine-difference supplier + refined center-column theorem) but
+-- multi-brick — deferred. Expected std-3 all. NOT a1=R/6 (k=1 transport + E*E O(s) + piles).
+#print axioms QIQTH.FrozenK2.duhamel_simplex_sqrt_bound
+#print axioms QIQTH.FrozenK2.duhamel_simplex_sqrt_bound_ae
+#print axioms QIQTH.FrozenK2.corrHigher_bounded_of_slice_sqrt
+#print axioms QIQTH.FrozenK2.sqrt_remainder_o_t
+#print axioms QIQTH.FrozenK2.corrHigher_sqrt_o_t
+#print axioms QIQTH.FrozenK2.gaussDdim_absorb_half
+#print axioms QIQTH.FrozenK2.gaussDdim_absorb_half_cubic
+#print axioms QIQTH.FrozenK2.gaussDdim_moment_half
+#print axioms QIQTH.FrozenK2.gaussDdim_moment_half_self
+#print axioms QIQTH.FrozenK2.frozenK2_tail_slice_sqrt
+#print axioms QIQTH.FrozenK2.frozenK2_tail_corr_bound
+#print axioms QIQTH.FrozenK2.duhamel_sqrt_witness_pos
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

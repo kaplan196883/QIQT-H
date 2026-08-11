@@ -2064,3 +2064,13 @@ import QIQTH.FrozenWire
 -- certificates (sqrt exceeds the linear slice budget; tail integrates to t^{3/2} = o(t)).
 -- NOT a1=R/6 (consumer wiring across the sqrt(s)-vs-s gap + transport-cancellation remain).
 import QIQTH.FrozenColumn
+-- J4-614 (FrozenK2): the k=2 budget bridge, route (b) landed in full — sqrt-tolerant Duhamel
+-- assembly (mixed K*((t-s)+s)+K'*sqrt(s) slice budget => K*t^2+K'*t^{3/2}), the o(t)-budget
+-- consumer corrHigher_bounded_of_slice_sqrt (hCorrHigher equality shape kept; cRem=O(t^{-1/2})
+-- NOT bounded) + the o(t)-sufficiency Tendsto certificates (correction/t -> 0: a1 unshifted),
+-- the route-(a) half-moment absorb lever (|v|*G_tau <= C*sqrt(tau)*G_{lam*tau} + cubic), and
+-- the frozen wiring: the k>=2 column tail fits the sqrt(s) budget and assembles to O(t^{3/2})
+-- relative to the EXPLICIT diagonal mass G_{2t}(0). Sol: genuine E*E O(s) upgrade TRUE but
+-- multi-brick (affine-difference supplier + refined center-column) — deferred. std-3 all.
+-- NOT a1=R/6 (k=1 transport budget + E*E O(s) restoration + producer/capstone piles remain).
+import QIQTH.FrozenK2
