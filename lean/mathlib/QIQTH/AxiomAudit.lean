@@ -24047,6 +24047,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterGauge.curved_center_antecedents_nonvacuous
 #print axioms QIQTH.CurvedA1CenterGauge.curved_center_gate
 
+-- J4-585: the CENTER-GAUGE VARIANT of the leg-1 LO-CAPPED capstone. The original
+-- DaLimLUCappedStep3.hDaLimLU_from_labelled_capped carries {hK0, hframeK}, consumed at EXACTLY ONE site
+-- (gauge_from_geometry g gi hK0 hframeK hinvF hdg0), whose only products are the two gauge census members
+-- MemGaugeGi gi ∧ MemGaugeGamma g gi. hframeK is a neighbourhood frame that for a curved metric forces
+-- K={0} ⟹ mass-one gate unsatisfiable ⟹ J4-582 vacuity. This variant REPLACES {hK0, hframeK} by the
+-- single center-only value gauge hg0 : ∀ i j, g 0 i j = δ, routing the gauge line through the banked
+-- curved-compatible DaLimCurvedGauge.gauge_from_pointwise g gi hg0 hinvF hdg0 (identical MemGaugeGi/
+-- MemGaugeGamma output, ∂²g(0) free). Same DaLimLUGoal conclusion, not weakened; hg0 satisfied by
+-- curvedRNCMetric via curvedRNCMetric_zero (no K={0} collapse), so the antecedent is curved-satisfiable.
+-- Census body is a SEPARATE assembly (memLapFull_from_labelled + hDaLimLU_concrete take hgi/hΓ as plain
+-- args) — the variant is a proof copy with the ONE gauge-line swap, NO census re-elaboration (built 30s).
+-- Step 1 of the certified center-only-gauge rethread. std-3 all. NOT a₁ = R/6 (still FLAT-only until the
+-- full rethread through the curved capstone lands).
+#print axioms QIQTH.DaLimLUCappedStep3Center.hDaLimLU_from_labelled_capped_center
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

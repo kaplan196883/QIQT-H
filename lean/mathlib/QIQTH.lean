@@ -1753,3 +1753,11 @@ import QIQTH.CurvedA1FarConsumeCheck
 import QIQTH.CurvedA1FrameAudit
 
 import QIQTH.CurvedA1CenterGauge
+
+-- J4-585 (DaLimLUCappedStep3Center): CENTER-GAUGE VARIANT of the leg-1 LO-CAPPED capstone
+-- hDaLimLU_from_labelled_capped — the two geometry binders {hK0, hframeK} REPLACED by the single
+-- center-only value gauge hg0 : g(0)=δ, gauge line routed through DaLimCurvedGauge.gauge_from_pointwise
+-- (curved-compatible drop-in) instead of gauge_from_geometry. SAME DaLimLUGoal conclusion (not weakened);
+-- hg0 curved-satisfiable via curvedRNCMetric_zero (no K={0} collapse), so J4-582 vacuity removed.
+-- Step 1 of the certified center-only-gauge rethread. NOT a₁=R/6 (still FLAT-ONLY until capstone lands). std-3.
+import QIQTH.DaLimLUCappedStep3Center
