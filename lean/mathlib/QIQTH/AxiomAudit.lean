@@ -24799,6 +24799,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AffineDiff.curvedRNCInv_diff_structured_sum
 #print axioms QIQTH.AffineDiff.curvedRNCInv_diff_structured_nonvacuous
 
+-- J4-616 (FrozenK2Sharp): the refined E*E center-column composition — O(sqrt(s)) -> O(s).
+-- The sharpened two-term outer bound (structured coefficient + triangle split; quadratic part
+-- clean, linear part pays a^{-1/2} with |w| reserved) composes with the center-column bound:
+-- the reserved |w| pays sqrt(sigma) vs the inner Gaussian (moment lever), Beta(1/2,3/2) time
+-- integral <= 2s ==> frozenK2_sharp |iterE E_frozen 2 (s,z,0)| <= C*s*G_{8s}(z-0), ALL s>0.
+-- frozenColumn_tail_O_s: FULL k>=2 tail O(s) on (0,1]. frozenK2_tail_slice_O_s: the tail
+-- feeds the LINEAR slice budget (diagonal mass G_{8t}(0) explicit). corrHigher_O_t2_restored:
+-- the hCorrHigher equality + |heatConv| <= K*t^2 + |cRem| <= K/|pref| — BOUNDED cRem, the
+-- O(t^2) API restored for the k>=2 tail (G_{8t}(0)/pref = 8^{-n/2} relative normalization).
+-- Non-vacuity: nonzero Gaussian slice-kernel witness; subject via frozenColumn_witness_ne_zero.
+-- Expected std-3 all. NOT a1=R/6 (k=1 transport + producer/capstone piles remain).
+#print axioms QIQTH.FrozenK2Sharp.sharp_fold_A
+#print axioms QIQTH.FrozenK2Sharp.sharp_fold_B
+#print axioms QIQTH.FrozenK2Sharp.gaussDdim_widen_le
+#print axioms QIQTH.FrozenK2Sharp.frozenDefect_outer_sharp
+#print axioms QIQTH.FrozenK2Sharp.betaHalf_integral_le
+#print axioms QIQTH.FrozenK2Sharp.frozenK2_sharp
+#print axioms QIQTH.FrozenK2Sharp.frozenColumn_tail_O_s
+#print axioms QIQTH.FrozenK2Sharp.frozenK2_tail_slice_O_s
+#print axioms QIQTH.FrozenK2Sharp.corrHigher_O_t2_restored
+#print axioms QIQTH.FrozenK2Sharp.frozenK2Sharp_H_witness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

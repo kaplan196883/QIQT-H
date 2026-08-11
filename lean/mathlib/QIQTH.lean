@@ -2082,3 +2082,14 @@ import QIQTH.FrozenK2
 -- the exact gaussDdim_moment_half shape the J4-616 refined E*E O(s) composition consumes.
 -- NOT a1=R/6 (J4-616 E*E composition + k=1 transport + producer/capstone piles remain).
 import QIQTH.AffineDiff
+-- J4-616 (FrozenK2Sharp): the refined E*E center-column composition — the O(sqrt(s)) -> O(s)
+-- UPGRADE. Sharpened two-term outer bound |E(a,z,w)| <= C_A*G_{2a} + C_B*|w|*a^{-1/2}*G_{2a}
+-- (J4-615 structured coefficient, triangle-split |z| <= |v|+|w| so no free |z| survives;
+-- quadratic part folds with NO time cost, linear part pays a^{-1/2} keeping |w| in reserve),
+-- composed with the J4-612 center-column bound: the reserved |w| pays sqrt(sigma) against the
+-- inner Gaussian (moment lever), Beta(1/2,3/2) time integral <= 2s ==> |E*E(s,z,0)| <=
+-- C*s*G_{8s}(z), ALL s>0. Full k>=2 tail O(s) (with banked k>=3), linear slice budget
+-- K*((t-s)+s) met, and corrHigher_O_t2_restored: BOUNDED cRem O(t^2) API restored (K carries
+-- the diagonal mass G_{8t}(0) explicitly; G_{8t}(0)/pref = 8^{-n/2}, a genuine constant).
+-- NOT a1=R/6 (k=1 transport-cancellation + producer re-assembly + capstone piles remain).
+import QIQTH.FrozenK2Sharp
