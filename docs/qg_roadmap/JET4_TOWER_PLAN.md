@@ -7444,3 +7444,17 @@ std-3, raw 0 (9890).
 both end columns of E∗E at 0; quadratic-form center bound + moment absorption |x|^m·G_τ ≲
 τ^{m/2}·G_{cτ}) toward the O(s) slice budget; fallback/parallel = (b)-route consumer variant
 (per-slice K·(t+√s·√t) ⟹ pref·t^{3/2}) + capstone-side syntactic o(t) check.
+
+### J4-614 [AF] — k=2 bridge: route (b) o(t) consumer + route-(a) moment lever (3ac97311)
+FrozenK2.lean (12 decls). Sol: route (a) full E∗E O(s) upgrade TRUE (pointwise C·s·G_{Ms};
+banked O(√s) = artifact of generic outer bound) but 2-4 bricks: (i) half-moment package, (ii)
+affine-difference supplier |gⁱʲ(z)−gⁱʲ(w)| ≤ L‖z−w‖(‖z‖+‖w‖) ZERO constant term, (iii) refined
+B(3/2,1/2) composition ⟹ B now + (i) down payment. LANDED: corrHigher_bounded_of_slice_sqrt
+(o(t) consumer; cRem explicitly O(t^{−1/2}) not bounded) + corrHigher_sqrt_o_t (correction/t→0
+actual limit); ★CAPSTONE CONSUMES VERBATIM (TrueKernelA1 hCorrHigher = fixed-t equality via
+rw+ring — O(t²) API syntactically unchanged; boundedness layer honestly replaced); moment
+levers gaussDdim_absorb_half(_cubic)/moment_half(_self); frozen wiring tail_slice_sqrt +
+tail_corr_bound (diagonal mass G_{2t}(0) EXPLICIT). std-3, raw 0 (9891).
+**J4-615**: route-(a) brick (ii) = the affine-difference supplier (zero constant term, r-gate
+pointwise) — sole missing supplier before the refined E∗E ≤ C·s·G_{Ms} (J4-616) restoring
+bounded-cRem O(t²). Alternative: capstone co-instantiation smoke test (Sol prio 2, pending).
