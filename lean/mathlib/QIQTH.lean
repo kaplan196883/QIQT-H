@@ -1865,3 +1865,13 @@ import QIQTH.CurvedA1HContDom
 -- hInnerCont now owes {hEmeas, hAdom, hmeas, hcont}. curved_hBdom_satisfiable = NON-FLAT (κ<0,n≥2). std-3.
 -- NOT a₁=R/6 (still owes hEmeas M1 wall + hAdom global + hmeas/hcont + piles/trio/hmassone-pre-ρ/hjets).
 import QIQTH.CurvedA1HBdom
+-- J4-598 (CurvedA1HEmeas): the hEmeas M1-wall carry of J4-597 ASSESSED + measurability content CLOSED for
+-- g^K (kappa<0): curved_hEmeas_at_gate = the EXACT joint StronglyMeasurable hEmeas binder at ANY gate params
+-- 0<a<b<c, modulo the jet reach c<delta0 (from banked curved_hS1_at_gate J4-561; tripleHEmeas defeq binder;
+-- Route B continuity-free, measurable ACROSS the tau<=0 gate boundary, no strip caveat). curved_hBdom_of_reach /
+-- curved_hInnerCont_of_reach = J4-597's hBdom / ladder consumption with the M1 measurability carry REPLACED by
+-- the pure ARITHMETIC reach residual c<delta0 (FLAGGED OPEN at the pkg's own existential c: the pkg's c=(b+rhoc)/2
+-- and the Gc jet reach delta0(a,b) are independent exists-chains, alignment not banked). curved_hEmeas_satisfiable
+-- = witness genuinely curved. std-3. NOT a1=R/6 (owes reach alignment + hAdom + hmeas/hcont + piles/trio/
+-- hmassone-pre-rho/hjets).
+import QIQTH.CurvedA1HEmeas
