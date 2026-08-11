@@ -23992,6 +23992,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHdataJet.curved_hdata_jet_gate_satisfiable
 #print axioms QIQTH.CurvedA1FintHdataJet.curved_hdata_jet_curved_satisfiable
 
+-- J4-580: ρ-reconciled full `hdata` bundle + radius-generic hFirstEnv port + hFirstEnv with
+-- `hdata` DISCHARGED (on the reconciled ρ*-ball) for g^K (curvedRNCMetric κ).
+#print axioms QIQTH.CurvedA1FintHdataBundle.curved_hdata_bundle_at_gate
+#print axioms QIQTH.CurvedA1FintHdataBundle.curved_hFint_hFirstEnv_on_ball
+#print axioms QIQTH.CurvedA1FintHdataBundle.curved_hFint_hFirstEnv_hdata_discharged_at_gate
+#print axioms QIQTH.CurvedA1FintHdataBundle.curved_hdata_bundle_gate_satisfiable
+#print axioms QIQTH.CurvedA1FintHdataBundle.curved_hdata_bundle_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
