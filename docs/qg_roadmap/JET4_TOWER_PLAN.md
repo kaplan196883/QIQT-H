@@ -7045,3 +7045,17 @@ chartImage_approx_identity_final; genuine curvature; R/6 untouched. std-3, budge
 DRAIN COMPLETE (ρ-side): 12→4→2→ρ-unconditional (4 satisfiable pre-ρ carriers). a₁=R/6 CONDITIONAL. J4-592 =
 next carried residual — hInnerCont (self-contained regularity) OR hDom radius-reconciliation (fully bank mass
 side via WideAmplitudeData at capstone a,b) OR convergence trio OR hsrc/hOffCollarTail (heavier walls).
+
+## J4-592 (reduce hInnerCont carrier to the interior dominated-continuity datum hContDom for g^K)
+CurvedA1HInnerCont.lean: `curved_hInnerCont_at_gate` (EXACT hInnerCont binder ∀u∈U ContinuousOn (fun s => ∫z
+vanVleckGatedWitness g^K…(u−s)0z·leviSeries…s z 0) (Ioo 0 u), thin specialization of banked std-3
+InnerMeasFubini.hInnerCont_concrete [innerIntegral_continuousOn_of_dominated]; reduces to per-interior-point
+dominated-continuity datum hContDom {integrable Gaussian bound + integrability + local AEStronglyMeasurable +
+local a.e. domination + a.e.-z time ContinuousAt}) + `curved_hInnerCont_satisfiable` (∃w 1<det g^K w). ★ The
+ContinuousOn(Ioo 0 u) engine needs ONLY the local interior datum, EXCLUDING the τ→0 Gaussian blow-up (prior
+"DS none" flag was against the wrong full-line-Continuous engine). Main verified: conclusion=exact hInnerCont
+(open Ioo 0 u); hContDom genuine on open interval (Sol-confirmed); from PROVED InnerMeasFubini; non-vacuous
+curvature; R/6 untouched. std-3, budget raw 0, 9868 jobs. a₁=R/6 CONDITIONAL. hInnerCont reduced to hContDom
+(assembling hContDom = separate thread). J4-593 = hOffCollarTail OR hsrc (self-contained boundary/source
+regularities, likely bankable) OR hContDom-assembly (Gaussian domination + witness/Levi positive-strip
+time-continuity) OR convergence trio (largest genuine wall — defer).
