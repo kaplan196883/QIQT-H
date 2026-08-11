@@ -6847,3 +6847,19 @@ RESIDUAL: {hFar far-field LOWER coercivity (GEOMETRIC WALL — the last genuinel
 hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont} + [hdata bundle ρ-reconciliation bookkeeping].
 a₁=R/6 CONDITIONAL. J4-580 = hFar far-field lower coercivity (highest-leverage geometric wall) OR the hdata
 bundle ρ-reconciliation (mechanical, closes the leg visibly) OR hInnerCont OR convergence trio.
+
+## J4-580 (assemble hdata bundle + discharge hFirstEnv's hdata on reconciled ρ* ball for g^K)
+CurvedA1FintHdataBundle.lean: `curved_hdata_bundle_at_gate` (FULL six-conjunct hdata bundle for g^K κ≤0 on
+ONE ball ‖z‖<ρ*=min ρ1(min ρ2(min ρc r4)), single (L,Ba,Bd); combines curved_hdata_jet_at_gate (1/2) +
+curved_hdata_amp_value_uniform_at_gate (κ≤0) + curved_hdata_amp_deriv_uniform_at_gate (shared carrier ball) +
+curved_hdata_nearIsometry_at_gate (upper); conjunct (3) PdiffAt via manifoldAmp_contDiffAt∘hreg AVOIDS the
+analytic ⊤/ω transport-coeff wall; Bd:=∑ⱼBdⱼ ∀i-uniform) + `curved_hFint_hFirstEnv_on_ball` (radius-GENERIC
+port, original never uses (curvedGate).r beyond hdata) + `curved_hFint_hFirstEnv_hdata_discharged_at_gate`
+(hFirstEnv hdata REMOVED on reconciled ρ* ball) + satisfiability lemmas. Main verified: bundle on HONEST ρ*
+ball (proof via min_le); domain NOT over-claimed as full gate ball (doc: no proof ρ*≥(curvedGate).r); from
+PROVED siblings + banked manifoldAmp_contDiffAt; R/6 untouched. std-3, budget raw 0, 9856 jobs. ★ hcrude's
+on-gate hFirstEnv leg now hdata-FREE for g^K (‖z‖<ρ*, modulo gate-radius alignment + hSopen/hgate0). RESIDUAL:
+{hFar far-field LOWER coercivity (GEOMETRIC WALL, hardest), hsrc/hw, hOffCollarTail, hSopen/hgate0, ρ*-vs-gate
+alignment} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-581 = (i) gate-radius alignment (prove
+ρ*≥(curvedGate).r or shrink gate to ρ* → full-gate-ball hFirstEnv-hdata-discharged) OR (ii) hFar far-field
+coercivity geometric wall OR hInnerCont OR convergence trio.
