@@ -1749,3 +1749,5 @@ import QIQTH.CurvedA1FintHdataBundle
 import QIQTH.CurvedA1FintHFarCoercivity
 
 import QIQTH.CurvedA1FarConsumeCheck
+
+import QIQTH.CurvedA1FrameAudit

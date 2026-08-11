@@ -24018,6 +24018,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FarConsumeCheck.witness_baseIntegral_zero
 #print axioms QIQTH.CurvedA1FarConsumeCheck.hmassone_unsatisfiable
 
+-- J4-583: SALVAGEABILITY VERDICT pin for the curved a₁=R/6 capstone. Trace found: in EVERY curved
+-- consumer hframeK feeds ONLY `gauge_from_geometry g gi hK0 hframeK hinvF hdg0`, consumed ONLY as
+-- `hframeK 0 hK0` (memGaugeGi_of_geometry→hgi_of_geometry→hg0_of_hframeK) to read the 0-jet VALUE
+-- g(0)=δ — NEVER a rw/subst of curvedRNCMetric→δ on the integration region. The J4-582 vacuity is a
+-- removable over-strong-hframeK artefact (neighbourhood flatness forces K={0}), NOT intrinsic flatness
+-- of the R/6 derivation (R/6 flows from Ric(0), a CENTER fact — curvedRNCMetric_ricci_trace_diag_ne≠0).
+-- VERDICT: SALVAGEABLE. curved_gauge_from_center produces BOTH gauge members for the genuinely-curved
+-- curvedRNCMetric κ (κ<0) via the center-only gauge_from_pointwise, WITHOUT hframeK/hK0; the certificate
+-- pairs this with Ric(0)≠0. J4-584 fix = weaken hframeK→center-only hg0 + rethread the 2 gauge sites
+-- gauge_from_geometry→gauge_from_pointwise. std-3 all. NOT a₁ = R/6 (this pins the FIXABILITY only).
+#print axioms QIQTH.CurvedA1FrameAudit.curved_gauge_from_center
+#print axioms QIQTH.CurvedA1FrameAudit.curved_frame_salvage_certificate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
