@@ -7255,3 +7255,18 @@ uniformFlowChristoffel_linear_decay. std-3, budget raw 0 (9880 jobs).
 **J4-604**: first wall layer = center-only-gauge variant of uniformFlowPullbackMetricInv_dev_uniform
 on closedBall 0 r (quantitative frame deviation replacing hframeK; O(r²) constant absorbed into
 C_c0); if it moves, uniformFlowChristoffel_linear_decay next.
+
+### J4-604 [AF] — (hbound-fat) wall layer 1 CLOSED: center-gauge pullback-inverse deviation (00d56d72)
+CurvedA1CenterAmp.lean (11 decls). hframeK enters uniformFlowPullbackMetricInv_dev_uniform at the
+flow-time-0 VALUE JET ONLY (g̃(0)=g(q)) — NOT Grönwall-threaded (pd-jet RNC-radial frame-free; C²
+packet + Neumann inverse frame-free) ⟹ full modest replay: curvedRNC_frame_dev_pointwise
+(honest constants from closed form), hdevK instance at fat K (ε₀=(|κ|/3)·n·r²),
+★uniformFlowPullbackMetricInv_dev_uniform_center (hframeK→hdevK; M before ε₀, no inflation),
+★curvedRNC_pullbackInv_dev_uniform_center (fat-K curved instantiation, all carries banked, κ≤0),
+non-vacuity gates (fat K + hdevK holds + ε₀ arbitrarily small with K fat). Remaining
+(hbound-fat) stack: (1) center-gauge uniformFlowChristoffel_linear_decay ← NEXT, (2)
+uniformCoeff_bound, (3) uniformResidual*_tau_narrow, (4) producer re-assembly
+(cutoffResidualN1 → CONST → fat-K pkg) with ε₀ tracked through width-2 bookkeeping.
+std-3, budget raw 0 (9881 jobs).
+**J4-605**: center-gauge uniformFlowChristoffel_linear_decay (map hframeK use-sites; if
+jet-value-only again, replay with hdevK + additive C·ε₀).
