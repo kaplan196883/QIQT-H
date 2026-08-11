@@ -24000,6 +24000,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHdataBundle.curved_hdata_bundle_gate_satisfiable
 #print axioms QIQTH.CurvedA1FintHdataBundle.curved_hdata_bundle_curved_satisfiable
 
+-- J4-581: hFar far-field LOWER coercivity residual resolved (route a). The RNC frame condition
+-- forces the mainline chart base set K ⊆ {0} at the curved witness, so the far-field annulus
+-- {z∈K : ‖z‖≥r} is EMPTY and the hdata coercivity conjunct is discharged for g^K (curvedRNCMetric κ).
+#print axioms QIQTH.CurvedA1FintHFarCoercivity.curvedRNCMetric_frame_forces_origin
+#print axioms QIQTH.CurvedA1FintHFarCoercivity.curved_hFar_coercivity_smallK_at_gate
+#print axioms QIQTH.CurvedA1FintHFarCoercivity.curved_hFar_coercivity_frameK_at_gate
+#print axioms QIQTH.CurvedA1FintHFarCoercivity.curved_hFar_coercivity_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
