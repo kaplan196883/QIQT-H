@@ -7502,3 +7502,20 @@ K1TransportBudget (owed). std-3, raw 0 (9894).
 gate at N=1 (Gaussian-dominated w/ extra √τ or ‖p−q‖ factor, from shared center Gaussian +
 witness pd-calculus), then iterate through iterE 2 w/ J4-616 fold levers. Alt: K1TransportBudget
 first (smaller, owed either way).
+
+### J4-618 [AF] — bridge REDUCED to a domination-supplier pile (979690e8)
+BridgeDefect.lean (9 decls). ★ACCOUNTING CERTIFIED: leviSeries E + E = pure k≥2 signed tail
+(m=0 term is −E) ⟹ the bridge compares ONLY tails; k=1 cancels; triangle from two separate
+O(s) bounds (frozen banked). ★MECHANISM: uniform O(1) all-rows width-2 domination ⟹ k=2 O(s)
+FREE ((0,0) Beta + exact C-K; J4-616's structured machinery unneeded — it existed for the
+frozen kernel's irreducible τ^{−1/2} column); k≥3 via banked generic ladder. Landed: generic
+K2/tail lemmas + frozenTransportBridge_of_dominations + transport_corrHigher_of_dominations
+(pinned at capstoneDefect, chained through J4-617 sufficiency) + PROVED bridge witness
+instance. ★HONEST: hEuni strictly STRONGER than carried row-0 hAdomHeat — new labelled pile.
+Bridge residual = {hEuni (all-rows), hEbound (α=−1/2), hInt (→ measurability)} at the
+transport kernel. std-3, raw 0 (9895).
+**J4-619**: (i) width-generalize bridgeGeneric_tail_O_s (width 2 → general w; Beta/C-K engine
+already generic; only mixedCol integrability + widening arithmetic pinned) to consume the
+exact hAdomHeat width shape; (ii) start the hEuni supplier: |heatOp(gatedWitness)(τ,p,q)| ≤
+C·G_{wτ}(p−q) on the gate — flat-tower residual machinery (ResidualN1GaussianBound/
+CutoffResidualGlobalBound) computed this family; curved fat-K version = the genuine analysis.
