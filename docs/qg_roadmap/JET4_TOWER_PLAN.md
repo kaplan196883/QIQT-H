@@ -7673,3 +7673,14 @@ raw 0 (9907).
 second-derivative rep at whiteCutKernelGc + full-gate indicator; off-gate leg SERVED by
 white_hOffS2_discharged). Then S1-c = E3d assembly → white_tripleHEmeas → hEmeas residue
 discharged → white_tail_O_s unconditional mod hlam8.
+
+### J4-631 [AF] — whitened hP2 FULL; all three S1 slots unconditional (b8f256a8)
+WhiteS1P2.lean (19 decls). Order-2 route first-try green: raw dichotomy + whiteP2Rep +
+white_hP2_stronglyMeasurable (exact conjunct shape); whiteCut_contDiffAt_of_chartC2 (no
+τ-split); second DQ at the J4-629 witness; ★★white_hP2_unconditional (hOffS2 from J4-630,
+collar window). Order-2 jet layer honestly labelled documentation. ALL THREE S1 SLOTS (hDτ,
+hP1, hP2) + coefficients UNCONDITIONAL at concrete gates. std-3, raw 0 (9908).
+**J4-632**: S1-c plumbing — radius reconciliation (hP1 at 0<c<δ₀ vs hP2 at b<c<δ₀ — reconcile
+at the collar window; finite-min over index pairs via exists_forall_radius) + close ∀k/∀ij
+binders + triple_hEmeas_of_borel_deriv_fields ⟹ ★white_tripleHEmeas ⟹ the J4-627 hEmeas
+residue DISCHARGED ⟹ white_tail_O_s unconditional mod hlam8. Precedent tripleHEmeas_Gc_concrete.
