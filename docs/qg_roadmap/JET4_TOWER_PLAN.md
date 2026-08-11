@@ -6916,3 +6916,22 @@ gauge_from_pointwise. ⚠ curved capstone STILL VACUOUS AS WRITTEN (J4-582); thi
 a₁=R/6 CONDITIONAL. J4-584 = the rethread (weaken hframeK→hg0 in curved_a1_R6_fully_wired + curved_hDa_at_gate
 + curved_core_at_gate + curved_leg2_hLapFull binders; discharge hg0 via curvedRNCMetric_zero; rethread gauge
 sites via curved_gauge_from_center; re-run J4-582 vacuity check to confirm now jointly satisfiable at curved).
+
+## J4-584 (anti-J4-582 NON-VACUITY CERTIFICATE — center-only gauge defeats the curved-capstone vacuity)
+CurvedA1CenterGauge.lean: certifies the J4-583 salvage is sound + inhabited by a genuinely-curved metric;
+J4-582 structural vacuity mechanism REMOVED. NO in-place capstone/monolith edits (agent correctly declined —
+leg-1 hframeK terminates in census monolith DaLimLUCappedStep3:215 gauge site). `half_axis_mem_ball` (½·e₀∈
+closedBall 0 1 ∧≠0) + `curved_center_antecedents_nonvacuous` (κ<0,n≥2: ∃K IsCompact∧0∈K∧(∃q∈K q≠0)∧
+(MemGaugeGi∧MemGaugeGamma)∧Ric(0)≠0∧¬(∀q∈K g^K q=δ); K=closedBall 0 1; gauge from PROVED curved_gauge_from_center;
+¬hframeK via curvedRNCMetric_frame_forces_origin) + `curved_center_gate` (antecedent-inhabitance gate,
+contrast coefficient-only gate J4-582 exploited). Main verified: certificate genuine (non-singleton K,
+gauge from banked center-only facts, Ric≠0, ¬hframeK); DEFEATS J4-582 (vacuity needed K⊆{0} for source
+collapse; here ∃z≠0∈K ⟹ collapse gone ⟹ hmassone obstruction structurally removed). std-3, budget raw 0,
+9860 jobs. ⚠ HONEST LIMITS: (1) hmassone NOT in the satisfiable bundle — structural obstruction removed but
+hmassone(∫z→1) still carried analytic input; (2) in-place binder rethread STILL OWED (J4-585, touches monolith
+gauge site). Shipped curved a₁=R/6 still vacuous-as-written; this certifies fix sound, doesn't apply it. a₁=R/6
+CONDITIONAL, non-vacuous only for FLAT tower. J4-585 = in-place rethread: (1) center-gauge VARIANT
+hDaLimLU_from_labelled_capped_center in DaLimLUCappedStep3 (rethread the single gauge_from_geometry L215→
+gauge_from_pointwise, SPLICE-only census body untouched); (2) mirror Leg2HLapFull.curved_leg2_hLapFull L151
+(shallow gauge site); (3) thread hg0:=curvedRNCMetric_zero up through curved_hDa_at_gate/core/capstone dropping
+hframeK; (4) re-run curved_center_antecedents_nonvacuous as the weakened-capstone vacuity guard.
