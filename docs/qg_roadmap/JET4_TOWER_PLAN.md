@@ -7296,3 +7296,17 @@ checked: C_ε·ε₀ → T1 as (1/τ)-weighted constant, must be carried (flagge
 **J4-607**: layer 4 = center-gauge uniformResidual(Linear)_gaussian_bound_tau_narrow: push C_ε·ε₀
 through T1; expected (C₀ + C₁·√τ/τ + C_ε·ε₀/τ)·G_{3/2}; the ε₀-vs-τ tension is where layer 5
 lives. Then layer 5 = producer re-assembly.
+
+### J4-607 [AF] — (hbound-fat) wall layer 4 CLOSED: center τ-narrow residual engines (4242c98b)
+CurvedA1CenterResid.lean (6 decls). hframeK at TWO sites in all three banked residual lemmas
+(T1 coeff hypothesis + T2 DIRECT pullbackInv-dev via residualQuadratic; T3 LB frame-free) ⟹ ε₀
+paid twice. Honest proved forms: |R₀| ≤ (C₀ [+C₁√τ/τ] + Cεu·ε₀·(1/τ))·gaussDdim(3/2·τ)v with
+Cεu = √(3/2)ⁿ·(C_ε + 3n²MW) — T1 pays RAW 1/τ (v-independent coefficient cannot be width-folded);
+T2 cross term has one 1/τ eaten by m=1 absorption. Constants before ε₀; ε₀=0 recovers banked.
+Fat-K instantiations (layer-3 antecedent DISCHARGED) + gate. ★LAYER-5 CRUX SCOPED: N=1 Linear
+branch benign (τ·(ε₀/τ)→B₀) but R₀[u] branch keeps raw ε₀/τ; ∫₀ᵗ(1/τ)dτ log-diverges at fixed ε₀
+⟹ layer 5 must choose τ≥τ₀(ε₀) threshold OR ε₀→0-before-τ-integration (ORDER OF LIMITS = the
+crux; Sol consult recommended there). std-3, raw 0 (9884).
+**J4-608**: layer 5 first increment = center N=1 mixed engine uniformResidualN1_narrow_mixed_lin_center
+(consume engines 2+3, prove Linear-branch benign fold, land (B₀+B₁τ+Bε·ε₀/τ)·G_{3/2} N=1 shape),
+then confront order-of-limits at cutoffResidualN1_..._below_lin re-assembly.
