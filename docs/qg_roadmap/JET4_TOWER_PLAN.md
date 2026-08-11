@@ -7563,3 +7563,15 @@ weld germ + pd_comp_linearVel). E_0=δ automatic. ★quadForm_whiteVel exact pha
 (ii) replay the sole hframeK consumer (pullbackMetricInv dev) with the (δ,0) jets; (iii)
 whitened hpkgBound producer from whiteW (phase exactly flat in chart velocity), threading
 confinement + fat-ball nondegeneracy through chart-radius bookkeeping.
+
+### J4-622 [AF] — whitened replay COMPLETE: sole hframeK consumer discharged, no ε₀ (f45dba58)
+WhiteReplay.lean (13 decls). (i) chart identification PROVED (fderiv-pullback = transport
+formula, radius-gated). (ii) ★★whitePullbackMetricInv_dev_uniform — NO hframeK/hdevK/ε₀
+(value jet exactly δ; C² packet + pd-jet were frame-free; sandwich through E_q; self-contained
+Neumann). THE LAST FRAME OBSTACLE IS GONE. (iii) producer start: ĝ⁻¹(0)=δ ⟹
+★whiteChart_heatOp_diag_clean (heatOp = 0 EXACTLY at chart diagonal — the 1/τ floor vanishes).
+Owed (J4-623): off-diag O(1)·G domination + chart→ambient transfer (hinge = the identification)
++ √det amplitude bookkeeping. Non-vacuity: det=5/3 probe + witness gate. std-3, raw 0 (9899).
+**J4-623**: whitened hpkgBound off-diagonal layer — (1) general-row chart defect ≤ O(1)·G_{2τ}
+(dev bounds + Christoffel analogue through E_q + J4-615/616 moment suppliers ∘ E_q);
+(2) chart→ambient naturality weld; (3) √det bounds on the fat ball.
