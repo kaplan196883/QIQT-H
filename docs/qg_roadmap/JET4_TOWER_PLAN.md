@@ -7651,3 +7651,15 @@ unconditional). Remaining: (S1-a) hP1 first field-pd, (S1-b) hP2 second field-pd
 (flowInverseJet_measurable_component at g^κ) ∘ linear whiteUnvel (one matToCLM composition) +
 Gaussian/cutoff 1-jet algebra + off-S radialCutoff-support vanishing. Then J4-630 = S1-b,
 J4-631 = assembly + rethread into white_tail_O_s_discharged.
+
+### J4-629 [AF] — whitened hP1 FULL modulo one labelled hOffS (5062948a)
+WhiteS1P1.lean (15 decls). Banked DQ-engine route (no unbanked cutoff gradients); off-closure
+vanishing proved; ★white_hP1_stronglyMeasurable = exact hP1 antecedent shape; chain-rule layer
+for S1-b (whiteFlowJet_concrete + whiteCut_pd_gate_eq, cutoff-pd symbolic); ★★white_hP1_concrete
+at flow-ball gates modulo hOffS (whitened collar: uniform E_q frame norm bound + frontier —
+mirrors the as-built GatedRepSFix→OffSVanishing history). std-3, raw 0 (9906).
+**J4-630** (per agent, collar-first preferred): the whitened collar brick — uniform
+sup_{q∈K}‖matToCLM(curvedWhitening)‖ entry estimate (√(1+u)−1 ≤ u/2 for κ≤0) + OffSVanishing
+closure argument at radius b·C_E < c ⟹ discharge hOffS AND pre-discharge hOffS2 ⟹ hP1
+unconditional + hP2 lands clean. Then S1-b (hP2, DQ one order up + second jets ∘ whiteUnvel),
+S1-c (E3d assembly → white_tripleHEmeas).
