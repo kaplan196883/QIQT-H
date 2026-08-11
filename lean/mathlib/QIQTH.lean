@@ -2074,3 +2074,11 @@ import QIQTH.FrozenColumn
 -- multi-brick (affine-difference supplier + refined center-column) — deferred. std-3 all.
 -- NOT a1=R/6 (k=1 transport budget + E*E O(s) restoration + producer/capstone piles remain).
 import QIQTH.FrozenK2
+-- J4-615 (AffineDiff): the zero-constant-term affine-difference supplier — route-(a) brick (ii).
+-- GLOBAL UNGATED structured bound |gi^K(z)-gi^K(w)| <= (2(-K)/3)*||z-w||*(||z||+||w||) for the
+-- closed Sherman-Morrison inverse (K<=0; alpha>=1 everywhere + E-factor/alpha(w) cancellation),
+-- same honest constant as the polynomial metric; + (q,v)-shape Levi corollary, summed n^2
+-- compatibility form, nonzero witness (K<0, n>=2). Norm factors are sqrt(rncRadialSq .) —
+-- the exact gaussDdim_moment_half shape the J4-616 refined E*E O(s) composition consumes.
+-- NOT a1=R/6 (J4-616 E*E composition + k=1 transport + producer/capstone piles remain).
+import QIQTH.AffineDiff

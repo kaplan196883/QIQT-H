@@ -24783,6 +24783,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenK2.frozenK2_tail_corr_bound
 #print axioms QIQTH.FrozenK2.duhamel_sqrt_witness_pos
 
+-- J4-615 (AffineDiff): the ZERO-CONSTANT-TERM affine-difference supplier for the curved
+-- inverse metric — route-(a) brick (ii). curvedRNCInv is the CLOSED Sherman-Morrison form
+-- (delta-(K/3)x⊗x)/alpha, alpha>=1 for K<=0, so the exact rational-difference identity
+-- (curvedRNCInv_sub_eq at q:=w, v:=z-w) + the E-factor cancellation |delta-(K/3)ww^T|<=alpha(w)
+-- give the GLOBAL UNGATED structured bound |gi(z)-gi(w)| <= (2(-K)/3)*|z-w|*(|z|+|w|)
+-- (|.| = sqrt(rncRadialSq .), matching the gaussDdim_moment_half moment-lever shape), with
+-- the SAME honest constant L = 2(-K)/3 as the polynomial metric; + the (q,v)-shape Levi
+-- corollary, the summed n^2 compatibility form, and the nonzero witness (gi(e0)-gi(0) at
+-- i=j=1 equals (K/3)/(1-K/3) < 0 for K<0, n>=2). Expected std-3 all. NOT a1=R/6 (J4-616
+-- refined E*E O(s) composition + k=1 transport + producer/capstone piles remain).
+#print axioms QIQTH.AffineDiff.curvedRNCMetric_diff_structured
+#print axioms QIQTH.AffineDiff.curvedRNCInv_diff_structured
+#print axioms QIQTH.AffineDiff.curvedRNCInv_diff_structured'
+#print axioms QIQTH.AffineDiff.curvedRNCInv_diff_structured_sum
+#print axioms QIQTH.AffineDiff.curvedRNCInv_diff_structured_nonvacuous
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
