@@ -2131,3 +2131,11 @@ import QIQTH.WhiteWitness
 -- for the whitened chart pair; tr ĝ⁻¹(0)=n by construction) + genuine-curvature gates (det=5/3≠1).
 -- NOT a1=R/6 (off-diagonal Gaussian domination + hEbound/hInt + downstream piles still owed).
 import QIQTH.WhiteReplay
+-- J4-623 WhiteOffDiag: the whitened hpkgBound OFF-DIAGONAL layer — ★ whiteChart_heatOp_offdiag_bound:
+-- |heatOp ĝ_q ĝ⁻¹_q (flat G) τ x 0| ≤ C·G_{2τ}(x) on the gate, ALL τ>0, uniform q∈K (the bound the
+-- as-built witness provably lacks; CenterZero globalized: quadratic dev × Hessian + NEW whitened
+-- Christoffel linear decay × gradient + banked width levers), + √det amplitude bookkeeping
+-- (det bounds on the fat ball, whiteW two-sidedly flat-comparable, amp-carrying bound) +
+-- whiteExp_fderiv (Jacobian chain, naturality weld opener). Chart→ambient naturality = J4-624.
+-- NOT a1=R/6 (naturality transfer + hEbound/hInt + downstream piles still owed).
+import QIQTH.WhiteOffDiag

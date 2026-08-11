@@ -25022,6 +25022,35 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteReplay.whitePullbackMetric_eq_fderiv_pullback
 #print axioms QIQTH.WhiteReplay.whitePullbackMetric_eq_fderiv_pullback_ball
 
+-- J4-623 WhiteOffDiag: the whitened hpkgBound OFF-DIAGONAL layer.
+-- ★ whiteChart_heatOp_offdiag_bound: |heatOp ĝ_q ĝ⁻¹_q (flat phase G) τ x 0| ≤ C·G_{2τ}(x) on the
+-- gate ‖x‖<r₀, ALL τ>0, uniform q∈K — the (hpkgBound)-shape bound the as-built witness provably
+-- LACKS (flatPhase_hpkgBound_fails) and the whitened chart family HAS: the CenterZero mechanism
+-- globalized to every row. Ledger: exact normal form (flatCurvatureResidue_leading) exposes the
+-- (1/τ)+(1/τ²) orders; whitened quadratic dev (J4-622, frame-free) × Hessian eats both floors;
+-- NEW whitened Christoffel linear decay (whitePullbackMetric_pd_linear_uniform = banked ∂ĝ(0)=0
+-- first jet + uniform C² packet, mean-value fderiv_decay composed through E_q with |E_q|≤1 entry
+-- contraction + √n confinement → whiteChart_christoffel_linear_uniform) × gradient; widths PAID by
+-- the banked levers gaussDdim_absorb_one/_two (τ→2τ). + amp version (√det paid on the fat ball),
+-- det/√det two-sided bounds (curvedRNC_det_bounds_on_ball from the banked rank-one det), whiteW
+-- flat-comparability, whiteExp_fderiv (Jacobian chain = naturality-weld opener; the full
+-- chart→ambient laplaceBeltrami naturality at whiteExp is the labelled J4-624 residue).
+-- Witness gate: bound INSTANTIATED at n=2, κ=−1, K=closedBall 0 2 where the ambient pin fails and
+-- the frame is genuinely non-identity. NOT a1=R/6 (naturality transfer + hEbound/hInt +
+-- K1TransportBudget + fat-K carriers + capstone co-instantiation + prior piles still owed).
+-- expected: standard 3
+#print axioms QIQTH.WhiteOffDiag.normalform_abs_bound
+#print axioms QIQTH.WhiteOffDiag.uniformFlow_fderiv_linear_uniform
+#print axioms QIQTH.WhiteOffDiag.whitePullbackMetric_pd_linear_uniform
+#print axioms QIQTH.WhiteOffDiag.whiteChart_christoffel_linear_uniform
+#print axioms QIQTH.WhiteOffDiag.whiteChart_heatOp_offdiag_bound
+#print axioms QIQTH.WhiteOffDiag.whiteExp_fderiv
+#print axioms QIQTH.WhiteOffDiag.curvedRNC_det_bounds_on_ball
+#print axioms QIQTH.WhiteOffDiag.curvedRNC_sqrtDet_bounds_on_ball
+#print axioms QIQTH.WhiteOffDiag.whiteW_flat_comparable_on_ball
+#print axioms QIQTH.WhiteOffDiag.whiteChart_heatOp_offdiag_bound_amp
+#print axioms QIQTH.WhiteOffDiag.whiteOffDiag_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
