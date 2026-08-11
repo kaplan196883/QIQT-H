@@ -1820,3 +1820,10 @@ import QIQTH.CurvedA1HmassoneFinal
 -- and u−s strictly positive ⟹ no τ→0 degeneracy). curved_hInnerCont_satisfiable = κ<0,n≥2 non-vacuity
 -- (∃w,1<det g^K w: NOT flat). std-3 both. NOT a₁=R/6 (capstone still owes hContDom + the other residuals).
 import QIQTH.CurvedA1HInnerCont
+-- J4-593: hOffCollarTail carrier of the curved a₁=R/6 capstone DISCHARGED (generic in the amplitude).
+-- KEY: the off-collar tail's leading integrand hessGaussFactor is the FLAT heat-kernel Hessian —
+-- metric-independent — so the reconstitution is banked & generic in the Lipschitz amplitude q. Delivers
+-- the matched √τ-gain reconstitution (sliver_term1_on_collar_matched) + exp-suppressed bare tail
+-- (tailMoment_collar_expSuppressed, J4-546). Satisfiable at κ<0,1≤n with a non-constant 1-Lipschitz
+-- amplitude. std-3. NOT a₁=R/6 (capstone still owes the other residuals; curved input = ON-collar hjets).
+import QIQTH.CurvedA1HOffCollarTail

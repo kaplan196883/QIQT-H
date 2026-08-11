@@ -24185,6 +24185,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HInnerCont.curved_hInnerCont_at_gate
 #print axioms QIQTH.CurvedA1HInnerCont.curved_hInnerCont_satisfiable
 
+-- J4-593: the hOffCollarTail carrier of the NON-VACUOUS curved a₁=R/6 capstone, DISCHARGED (generic in
+-- the amplitude). hOffCollarTail is the abstract Prop slot in the residue ledgers collar_hGpow_residual /
+-- curved_amplitudeData_residual: the off-collar Gaussian-tail remainder on ‖z‖>c√τ that reconstitutes the
+-- full-space Hessian moment ∫(z_i²−2τ)/(4τ²)·G_τ=0. KEY FINDING: the leading integrand hessGaussFactor
+-- H_{τ,i}(z)=(z_i²−2τ)/(4τ²)·G_τ(z) is the FLAT heat-kernel Hessian — metric-INDEPENDENT — so the whole
+-- off-collar reconstitution is banked & generic in the (Lipschitz) amplitude q (=Aamp^K·F^K at the call
+-- site). curved_hOffCollarTail_at_gate delivers BOTH the matched √τ-gain reconstitution
+-- ‖(∫_{C_{c√τ}}H·q)+q(0)·T_{c√τ}‖≤L·(15/2·n)/√τ (banked SliverTailMatched.sliver_term1_on_collar_matched:
+-- the q(0)·T off-collar term cancels EXACTLY vs the on-collar leading moment via collarMoment_eq_neg_tail)
+-- AND the exp-suppressed bare tail |T_{c√τ}|≤(√2)ⁿ·exp(−c²/8)·(2n+1)/(2τ) (banked
+-- OffCollarTailMoment.tailMoment_collar_expSuppressed, J4-546). κ,hκ carried only as gate locators (est.
+-- metric-independent). curved_hOffCollarTail_satisfiable = κ<0,1≤n non-vacuity with a NON-CONSTANT
+-- 1-Lipschitz coordinate-projection amplitude (rules out vacuous L=0). std-3 both. The genuine curved
+-- input hOffCollarTail CONSUMES is the amplitude Lipschitz regularity = the ON-collar hjets carry, NOT the
+-- tail. NOT a₁=R/6 (capstone still owes hsrc/census/domination/convergence-trio/hmassone-pre-ρ/hContDom).
+#print axioms QIQTH.CurvedA1HOffCollarTail.curved_hOffCollarTail_at_gate
+#print axioms QIQTH.CurvedA1HOffCollarTail.curved_hOffCollarTail_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
