@@ -2210,3 +2210,12 @@ import QIQTH.WhiteS1P1
 -- a1=R/6 (S1-b hP2, S1-c assembly, hlam8, K1TransportBudget, fat-K carriers, capstone
 -- co-instantiation + prior piles still owed).
 import QIQTH.WhiteCollar
+-- J4-631 (WhiteS1P2): S1-b at the whitened witness — the hP2 SECOND field-pd measurable-
+-- representative slot: whiteFieldDeriv2 + everywhere dichotomy (off-base/τ≤0/off-closure/
+-- gate-germ order 2), SECOND difference quotient on the J4-629 first-pd witness (PdiffAt of
+-- pd_j from whiteCut C² at chart-C² points — NO τ-split, gaussDdim_contDiff ∀τ),
+-- ★★ white_hP2_concrete + ★★ white_hP2_unconditional (hOffS2 discharged by J4-630, radii
+-- 0<a<b<c<δ₀); order-2 jet layer whiteFlowSecondJet_concrete + whitened mixed Gaussian
+-- normal form (Field2NbhdReshape engine). NOT a1=R/6 (S1-c assembly, hlam8,
+-- K1TransportBudget, fat-K carriers, capstone co-instantiation + prior piles still owed).
+import QIQTH.WhiteS1P2

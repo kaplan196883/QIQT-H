@@ -25186,6 +25186,45 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteCollar.white_collar_underlying_nonzero
 #print axioms QIQTH.WhiteCollar.white_collar_gate_nonempty
 
+-- ── J4-631 (WhiteS1P2): S1-b at the whitened witness — the hP2 SECOND field-pd measurable-
+-- representative slot. Route = WhiteS1P1 one order up (as-built precedent ampFieldSecondPd_
+-- measurable): raw whiteFieldDeriv2 = pd_i(pd_j(gated witness)); everywhere dichotomy
+-- (off-base / τ≤0 / off-closure nested-germ / on-gate germ congruence order 2); the on-gate
+-- measurable rep via a SECOND difference quotient (measurable_dq_witness in direction i at
+-- fld = pd_j(whiteCutKernel), AG = the J4-629 first-pd witness Af) — the order-2 bookkeeping
+-- is PdiffAt_pd_of_contDiffAt at whiteCut_contDiffAt_of_chartC2 (cutoff C∞ ∘ linear whitening
+-- ∘ chart-C², Gaussian C∞ ∀τ — NO τ-case-split). ★★ white_hP2_concrete (hOffS2 carried);
+-- ★★ white_hP2_unconditional (hOffS2 DISCHARGED by J4-630's white_hOffS2_discharged; radii
+-- 0<a<b<c<δ₀ collar window) = the exact hP2 antecedent of triple_hEmeas_of_borel_deriv_fields
+-- at G := whiteGatedWitness, fixed (i,j), NO carried measurability-side input. Order-2 jet
+-- layer (documentation, not needed by the measurable route): whiteFlowSecondJet_concrete
+-- (chart second jet flowInverseSecondJet_measurable_component pushed through the linear
+-- whitening, both jet levels) + whiteGauss_pd_pd_gate_eq/_concrete (whitened mixed Leibniz–
+-- Gaussian normal form via Field2NbhdReshape.gaussComp_pd_pd_mixed_nbhd; Gaussian factor
+-- ONLY — full cutoff×amp second Leibniz NOT claimed). Gates: inhabited gate, radius window,
+-- nonzero object, i-line jet satisfiable, hOffS2-at-∅ coherence. Expected std-3 all 19.
+-- NOT a1=R/6 (S1-c assembly, hlam8, K1TransportBudget, fat-K carriers, capstone
+-- co-instantiation + prior piles still owed).
+#print axioms QIQTH.WhiteS1P2.whiteFieldDeriv2_offBase_eq_zero
+#print axioms QIQTH.WhiteS1P2.whiteFieldDeriv2_eq_zero_of_nonpos
+#print axioms QIQTH.WhiteS1P2.whiteFieldDeriv2_gate_congr
+#print axioms QIQTH.WhiteS1P2.whiteFieldDeriv2_eq_zero_off_closure
+#print axioms QIQTH.WhiteS1P2.whiteP2Rep_measurable
+#print axioms QIQTH.WhiteS1P2.whiteFieldDeriv2_eq_whiteP2Rep
+#print axioms QIQTH.WhiteS1P2.white_hP2_stronglyMeasurable
+#print axioms QIQTH.WhiteS1P2.whiteCut_contDiffAt_of_chartC2
+#print axioms QIQTH.WhiteS1P2.white_pd2Rep_concrete
+#print axioms QIQTH.WhiteS1P2.white_hP2_concrete
+#print axioms QIQTH.WhiteS1P2.white_hP2_unconditional
+#print axioms QIQTH.WhiteS1P2.whiteFlowSecondJet_concrete
+#print axioms QIQTH.WhiteS1P2.whiteGauss_pd_pd_gate_eq
+#print axioms QIQTH.WhiteS1P2.whiteGauss_pd_pd_gate_concrete
+#print axioms QIQTH.WhiteS1P2.white_hP2_gate_nonempty
+#print axioms QIQTH.WhiteS1P2.white_hP2_radii_satisfiable
+#print axioms QIQTH.WhiteS1P2.white_hP2_underlying_nonzero
+#print axioms QIQTH.WhiteS1P2.white_secondJet_iLine_satisfiable
+#print axioms QIQTH.WhiteS1P2.white_hP2_offS2_satisfiable_empty
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
