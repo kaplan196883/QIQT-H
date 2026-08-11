@@ -24946,6 +24946,45 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.EquivProbe.equivProbe_offcenter_inhabited
 #print axioms QIQTH.EquivProbe.curvedRNC_whitening_nondegenerate
 
+-- J4-621 WhiteWitness: the formal diagonal NO-GO pin + the whitened witness definitions/jets +
+-- adapters. ITEM 1 (pin): flatPhaseModel_heatOp_diag = the EXACT diagonal defect identity
+-- heatOp g gi (gaussDdim τ (x−y)) τ q q = ((tr gi(q)−n)/(2τ))·(4πτ)^{−n/2} (any metric pair, τ>0);
+-- ★ flatPhase_hpkgBound_fails = NO constant C bounds |heatOp g^κ gi^κ M| ≤ C·G_{2τ}(p−q) on
+-- τ∈(0,1] for κ<0, n≥2 — the J4-620 "hpkgBound@fat-K FALSE as-built" ASSESSMENT upgraded to a
+-- THEOREM for the flat-phase representative kernel (= the witness's principal on-gate form,
+-- flatPhaseModel_eq_trivialParametrix; ⚠ LABELLED: gate/amplitude/chart identification with the
+-- literal vanVleckGatedWitness not formalized). ITEM 2 (whitened defs+jets): whiteVel/whiteExp/
+-- whiteW/whitePullbackMetric via the banked E_q (curvedWhitening_zero: E_0=δ automatic, no
+-- piecewise; curvedRNC_whitening_all: EᵀgE=δ at EVERY q); ★ whitePullbackMetric_zero = ĝ_q(0)=δ
+-- at every q∈K (THE point of whitening) + ★ whitePullbackMetric_pd_zero = ∂ĝ_q(0)=0 (frame-free
+-- pd-jet survives linear pre-composition, chain rule pd_comp_linearVel); adversarial contrast
+-- gate white_vs_asBuilt_frame_gate: at the SAME curved off-center witness whitened trace = n while
+-- as-built trace ≠ n. ITEM 3 (adapters): two-sided frame bounds ‖E_q w‖²≤‖w‖² (contraction) and
+-- ≥‖w‖²/(1+(−κ/3)r²) (fat-ball-uniform nondegeneracy); sup-norm confinement ‖E_q w‖≤√n‖w‖
+-- (whiteVel_within_radius = tube admissibility); ★ quadForm_whiteVel = EXACT phase transfer
+-- Q_{g^κ(q)}(E_q w)=‖w‖² hence whiteW = √det g^κ(q)·gaussDdim τ w (the whitened phase IS flat).
+-- NOT a1=R/6 (whitened replay J4-622 + whitened hpkgBound + hEbound/hInt + K1TransportBudget +
+-- fat-K carriers + capstone co-instantiation still owed). std-3.
+#print axioms QIQTH.WhiteWitness.flatPhaseModel_heatOp_diag
+#print axioms QIQTH.WhiteWitness.flatPhaseModel_heatOp_diag_ne_zero
+#print axioms QIQTH.WhiteWitness.flatPhase_hpkgBound_fails
+#print axioms QIQTH.WhiteWitness.flatPhaseModel_eq_trivialParametrix
+#print axioms QIQTH.WhiteWitness.curvedWhitening_zero
+#print axioms QIQTH.WhiteWitness.curvedRNC_whitening_all
+#print axioms QIQTH.WhiteWitness.whitePullbackMetric_zero
+#print axioms QIQTH.WhiteWitness.pd_comp_linearVel
+#print axioms QIQTH.WhiteWitness.whitePullbackMetric_pd_zero
+#print axioms QIQTH.WhiteWitness.whiteVel_radialSq_le
+#print axioms QIQTH.WhiteWitness.whiteVel_radialSq_ge
+#print axioms QIQTH.WhiteWitness.whiteVel_radialSq_ge_uniform
+#print axioms QIQTH.WhiteWitness.whiteVel_norm_le
+#print axioms QIQTH.WhiteWitness.quadForm_whiteVel
+#print axioms QIQTH.WhiteWitness.whiteW_eq_det_mul_gaussDdim
+#print axioms QIQTH.WhiteWitness.whiteW_center
+#print axioms QIQTH.WhiteWitness.whiteVel_nondegenerate
+#print axioms QIQTH.WhiteWitness.white_vs_asBuilt_frame_gate
+#print axioms QIQTH.WhiteWitness.flatPhase_hpkgBound_fails_witness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

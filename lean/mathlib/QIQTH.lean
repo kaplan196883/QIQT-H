@@ -2116,3 +2116,11 @@ import QIQTH.BridgeWidth
 -- proved (curvedRNC_whitening). NOT a1=R/6 (hpkgBound@fat-K still owed; as-built flat-phase witness
 -- plausibly FAILS it — whitened witness variant is the forward route).
 import QIQTH.EquivProbe
+-- J4-621 WhiteWitness: the formal diagonal NO-GO pin (flatPhase_hpkgBound_fails: no C bounds the
+-- flat-phase kernel's heat defect by C·G_2τ on (0,1] at κ<0 — the J4-620 assessment now a THEOREM
+-- for the on-gate representative; exact diagonal identity heatOp M = (tr gi−n)/(2τ)·(4πτ)^{-n/2}),
+-- the whitened witness (whiteVel/whiteExp/whiteW/whitePullbackMetric via banked E_q; ĝ_q(0)=δ and
+-- ∂ĝ_q(0)=0 at EVERY row — the hframeK δ-frame requirement now HOLDS for the whitened chart), and
+-- the adapters (two-sided E_q bounds, √n confinement, exact phase transfer Q_g(E_q w)=‖w‖²).
+-- NOT a1=R/6 (whitened replay J4-622 + whitened hpkgBound + downstream piles still owed).
+import QIQTH.WhiteWitness
