@@ -7413,3 +7413,18 @@ J4-610 defect shape ⟹ D2 engine OPEN to the frozen defect. Downstream scoped h
 (T=1 vs T via min) + discharge IterConvIntegrableW E 2 (−1/2) C for the frozen defect (check
 iterConvIntegrableW_of_locally_bound_baseMeas α-agnosticity) + final-rate audit co-brick (who
 ingests the weighted series bound; hContDom window compatibility).
+
+### J4-612 [AF] — wire + IterConv + rate audit + center-zero (308b3fc9)
+FrozenWire.lean (11 decls). WIRE: frozenDefectKernel (gated two-point kernel; gate = hEzero;
+full-∀τ bound ⟹ engine at T=1); ★frozenWire_leviSeries_dominated — J4-611 _negHalf instantiated
+with IterConvIntegrableW DISCHARGED: |leviSeries E_frozen| ≤ (C_L/√τ)·G_{2τ} on (0,1].
+ITERCONV: α-agnosticism confirmed; rpow_mul_rpow_intervalIntegrable (a,b>−1) + _alpha replays;
+kernel StronglyMeasurable (measurable only — honest). ★RATE-AUDIT VERDICT (ii): hCorrHigher
+needs per-slice O((t−s)+s) (CorrHigherReduction); α=−1/2 k≥2 tail = O(1)/slice (would shift a₁);
+α=0 = O(s) exact budget ⟹ hybrid MANDATORY — and PROVED: frozenDefectCenterZero_spaceForm
+(q=0 column ≤ C·G_{2τ} all τ>0; linear term drops at q=0, quadratic cancels 1/τ). Honest
+residue: k=1 O(a+s) upgrade = the banked SliceBoundO1/transport-cancellation thread (separate).
+std-3, raw 0 (9889). Sol milestones wire✓ + FrozenDefectCenterZero✓ (audit-mandated).
+**J4-613**: center-column α=0 series splice — column-mixed domination (outer α=−1/2, innermost
+column α=0, Beta(1/2,1) per step) ⟹ |leviSeries E_frozen (s,·,0)| ≤ C·G_{2s} ⟹ O(s) k≥2 tail
+slice estimate toward CorrHigherReduction's per-slice carry.
