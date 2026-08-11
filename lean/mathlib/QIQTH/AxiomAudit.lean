@@ -25152,4 +25152,45 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteAmbient.white_hpkgBound_gateShaped
 #print axioms QIQTH.WhiteAmbient.whiteAmbient_witness_gate
 
+-- ── J4-625 (WhiteGated): R1 gating lift + R2 width alignment of the whitened hpkgBound.
+-- whiteCutKernel = χ_{a,b}(whiteInvChart_q p)·whiteAmbientKernel (the as-built constructor's
+-- cutoff shape at the whitened chart+amplitude); whiteGatedWitness = gatedKernel Kset S
+-- whiteCutKernel (the BANKED J4-97 constructor, parametric in the inverse chart per J4-624).
+-- R1 UNCONDITIONAL: off-gate vanishing (G2b + kernel-locally-zero collar), DEEP on-gate
+-- agreement (hard gate + cutoff plateau ⟹ heatOp gated = heatOp ambient via heatOp_congr_nhds —
+-- NO commutator terms on the plateau; commutator confined to the annulus a²≤rncRadialSq(V_q p)),
+-- width-parametric 3-leg cover engine gatedKernel_hpkg_of_cover_w (width-generic replay of the
+-- banked width-2 T4). ★ white_hpkgBound = FULL unconstrained ∀(p,q) capstone-hpkgBound shape
+-- (∀t' τ p q, 0<τ→τ≤t' → |heatOp (whiteGatedWitness)| ≤ C(1+t')·baseKernelW λ 0) at the banked
+-- (r₀,C,λ=2(nC₀²+1)), CONDITIONAL on the labelled package: (i) gate openness (ii) gate-point
+-- chart certificate (iii) frontier/collar containment (iv) the annulus/commutator bound — (iv)
+-- = THE honest analytic residue (whitened cutoffResidual replay, J4-626+); (i)-(iii) = whitened
+-- hgood/chart-certificate residue. R2: C₀=uniformFlowConst is an OPAQUE .choose (NO numeric
+-- value) ⟹ route (i) dead; whiteLam_le_eight_iff records λ≤8 ⟺ nC₀²≤3 (unproved); PROVED:
+-- hpkgBound_widen8 (2≤λ≤8 ⟹ literal width-8 hpkgBound, cost 2ⁿ, single gaussDdim_widen_le) +
+-- hEuni_of_hpkgBound_w (width-λ hpkgBound → τ-capped width-λ hEuni, C_U=2C — feeds the
+-- BridgeWidth tail engine at w=λ; G8-landing iff λ∈[2,8]); the capstone's LITERAL width-2
+-- baseKernelW-2 slot is NOT served at λ>2 (widening only increases width) — width-parametric
+-- capstone re-thread or sharpened C₀ owed. Non-vacuity: whiteGatedWitness_diag_eval/
+-- whiteGated_witness_gate (n=2 κ=−1 K=closedBall 0 2, gate ball 0 1, a=1<b=2: diagonal value
+-- = gaussDdim τ 0 > 0 — constructor layers non-degenerate; ambient flat pin fails, re-export);
+-- white_gatePackage_satisfiable_empty = antecedent inhabitance at S=∅ ONLY (cp466: certifies
+-- non-contradictoriness, NOT a non-degenerate curved instantiation — fat-S discharge owed).
+-- NOT a1=R/6 (R1 (i)-(iv) + R2 λ-alignment + hEbound/hInt at the whitened kernel +
+-- K1TransportBudget + fat-K carriers + capstone co-instantiation + prior piles still owed).
+-- expected: standard 3
+#print axioms QIQTH.WhiteGated.whiteGated_heatOp_zero_offGate
+#print axioms QIQTH.WhiteGated.whiteGated_heatOp_zero_farCutoff
+#print axioms QIQTH.WhiteGated.whiteGated_heatOp_eq_deep
+#print axioms QIQTH.WhiteGated.gatedKernel_hpkg_of_cover_w
+#print axioms QIQTH.WhiteGated.white_hpkgBound_of_gatePackage
+#print axioms QIQTH.WhiteGated.white_hpkgBound
+#print axioms QIQTH.WhiteGated.hpkgBound_widen8
+#print axioms QIQTH.WhiteGated.hEuni_of_hpkgBound_w
+#print axioms QIQTH.WhiteGated.whiteLam_le_eight_iff
+#print axioms QIQTH.WhiteGated.whiteGatedWitness_diag_eval
+#print axioms QIQTH.WhiteGated.whiteGated_witness_gate
+#print axioms QIQTH.WhiteGated.white_gatePackage_satisfiable_empty
+
+
 end QIQTH.AxiomAudit

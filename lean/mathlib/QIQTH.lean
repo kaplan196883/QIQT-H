@@ -2152,3 +2152,14 @@ import QIQTH.WhiteOffDiag
 -- NOT a1=R/6 (R1–R3 + hEbound/hInt + K1TransportBudget + fat-K carriers + capstone
 -- co-instantiation + prior piles still owed).
 import QIQTH.WhiteAmbient
+-- J4-625: WhiteGated — R1 gating lift + R2 width alignment of the whitened hpkgBound.
+-- whiteCutKernel/whiteGatedWitness = whitened kernel through the banked radialCutoff +
+-- gatedKernel constructor (vanVleckGatedWitness's structure at the whitened chart+amplitude).
+-- Off-gate vanishing + cutoff collar + DEEP on-gate agreement (no commutator on the plateau);
+-- width-parametric cover engine; ★ white_hpkgBound = FULL ∀(p,q) capstone-hpkgBound shape at
+-- width λ=2(nC₀²+1), conditional on labelled gate-certificate legs (i)-(iii) + annulus/commutator
+-- bound (iv) — THE honest analytic residue. R2: C₀ opaque (no numeric λ≤8); widen8 (λ∈[2,8]→
+-- literal width 8, 2ⁿ cost); hEuni_of_hpkgBound_w feeds BridgeWidth at w=λ; literal width-2
+-- capstone slot NOT served at λ>2. NOT a1=R/6 (R1 certificates+annulus, R2 λ≤8, hEbound/hInt,
+-- K1TransportBudget, fat-K carriers, capstone co-instantiation + prior piles still owed).
+import QIQTH.WhiteGated
