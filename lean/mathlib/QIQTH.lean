@@ -1885,3 +1885,12 @@ import QIQTH.CurvedA1HEmeas
 -- hmeas + hcont + piles/trio/hmassone-pre-rho/hjets).
 import QIQTH.ReachRequant
 import QIQTH.CurvedA1ReachAlign
+-- J4-600 (CurvedA1HAdom): hAdom DISCHARGED — the global all-(p,q) D1 witness Gaussian domination for
+-- g^K=curvedRNCMetric kappa (kappa<0), produced JOINTLY with hBdom at ONE gate-parameter set:
+-- curved_hAdom_hBdom_at_gate = prescribe the J4-599 pkg ceiling eps := min deltajet (min r1 (delta0/2)) so
+-- the pkg's own radius c clears BOTH the hEmeas jet reach (==> hBdom, verbatim J4-599 assembly) AND the
+-- GateSqControl radii (==> hAdom via banked gateSqControl_of_flowBall + exists_D1_constants_of_gateSqControl
+-- at the pkg's own (a,b)). curved_hInnerCont_of_two = the consumption certificate: capstone hInnerCont
+-- reduced to {hmeas, hcont} ONLY (hAdom/hBdom/hEmeas slots ALL internally discharged). Witness genuinely
+-- curved. std-3. NOT a1=R/6 (owes hmeas + hcont + piles/trio/hmassone-pre-rho/hjets + {hChr,hw,hu}).
+import QIQTH.CurvedA1HAdom

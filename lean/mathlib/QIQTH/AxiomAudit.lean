@@ -24336,6 +24336,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ReachAlign.curved_hInnerCont_of_meas
 #print axioms QIQTH.CurvedA1ReachAlign.curved_reachAlign_satisfiable
 
+-- J4-600 (CurvedA1HAdom): hAdom DISCHARGED — the global all-(p,q) D1 witness Gaussian domination
+-- |W τ p q| ≤ (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim((3/2)τ)(p−q) for g^K=curvedRNCMetric κ (κ<0), produced JOINTLY
+-- with hBdom at ONE gate-parameter set. curved_hAdom_hBdom_at_gate: prescribe the J4-599 pkg ceiling
+-- ε := min δjet (min r₁ (δ₀/2)) so the pkg's own c clears BOTH the hEmeas jet reach (⟹ hBdom, verbatim
+-- J4-599 assembly) AND the GateSqControl radii c<r₁, c<δ₀ (⟹ hAdom via banked gateSqControl_of_flowBall +
+-- exists_D1_constants_of_gateSqControl at the pkg's own (a,b); the √(3/2)ⁿ/width-(3/2)τ bookkeeping is the
+-- PROVED J4-113 D1 recentring, not re-derived). curved_hInnerCont_of_two = the consumption certificate:
+-- capstone hInnerCont reduced to {hmeas, hcont} ONLY (hAdom/hBdom/hEmeas slots ALL internally discharged).
+-- curved_hAdom_satisfiable = witness genuinely curved (κ<0, n≥2, Ric≠0). std-3 all 3. NOT a₁=R/6 (owes
+-- hmeas + hcont + census/domination piles, convergence trio, hmassone pre-ρ, hjets residual + {hChr,hw,hu}).
+#print axioms QIQTH.CurvedA1HAdom.curved_hAdom_hBdom_at_gate
+#print axioms QIQTH.CurvedA1HAdom.curved_hInnerCont_of_two
+#print axioms QIQTH.CurvedA1HAdom.curved_hAdom_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
