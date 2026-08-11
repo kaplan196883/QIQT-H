@@ -7235,3 +7235,23 @@ wall — fat-support Gaussian dominations, Neumann-tail machinery never yet exer
 assembly at fat K, co-instantiated capstone application. std-3, budget raw 0 (9879 jobs).
 **J4-603**: re-based hcont (Levi-slice time continuity via D2 positive-strip engines, joint
 c<δ₀ production) OR re-based hBdom (fat-K width-2 domination — the genuine Neumann-tail wall).
+
+### J4-603 [AF] — fat-K hBdom: hframeK unsat proved; engine factored general-K; wall scoped (bf8ca4ba)
+CurvedA1ReBaseHBdom.lean (9 decls). ★rebased_hframeK_unsat: the banked CONST producer chain is
+K-parametric in form but hframeK (g≡δ on K) is load-bearing PER-q through the amplitude chain;
+for curvedRNCMetric κ (κ≠0,n≥2) it forces K⊆{0} ⟹ at K=closedBall 0 r the producer's antecedent
+provably FAILS — naive fat-K reuse would be vacuous (cp466 blind spot, checked).
+★gated_hBdom_of_defect_bound: J4-597's whole Neumann-tail route factored GENERIC in (g,gi,K,S)
+(clean uncapped, width exactly 2). ★rebased_hBdom_of_defect_bound: fat-K instantiation in the
+exact general-K J4-596 hBdom shape, conditional on TWO labelled inputs {fat-K hEmeas,
+(hbound-fat) = all-t' width-2 defect bound at fat base = THE WALL}. Non-collapse certs
+(rebased_no_offOrigin_kill: {0}-kill structurally unavailable; positive measure).
+rebased_hInnerCont_of_dominations: full fat-K assembly given {hAdom,hmeas,hcont}. Radius
+interplay: availability radii already uniform over K; r enters via K itself; prescribed-ceiling
+pattern carries over; hKball co-instantiated at rS:=r. WALL = center-only-gauge rework of the
+amplitude chain: hframeK → hg0/hdg0 + per-q frame correction using ‖g(q)−δ‖ ≤ (|κ|/3)|q|²
+(explicit from curvedRNCMetric closed form) through uniformFlowPullbackMetricInv_dev_uniform /
+uniformFlowChristoffel_linear_decay. std-3, budget raw 0 (9880 jobs).
+**J4-604**: first wall layer = center-only-gauge variant of uniformFlowPullbackMetricInv_dev_uniform
+on closedBall 0 r (quantitative frame deviation replacing hframeK; O(r²) constant absorbed into
+C_c0); if it moves, uniformFlowChristoffel_linear_decay next.
