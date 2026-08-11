@@ -24925,6 +24925,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BridgeWidth.bridgeWidth_witness_w2
 #print axioms QIQTH.BridgeWidth.bridgeWitnessKernel_uni_w4
 
+-- J4-620 EquivProbe: the equivariance probe. CORE READ: uniform* machinery per-q-uniform (charts
+-- based at q, ∀q∈K binders, K-uniform constants); hframeK consumed at EXACTLY ONE residual-chain
+-- lemma (uniformFlowPullbackMetricInv_dev_uniform's zeroth jet g̃_q(0)=g(q)) — a FRAME defect, not
+-- base-point pinning. Landed: closed traces of g^κ/gi^κ; trace defects ≠ n at every off-center q
+-- (curvedRNCInv_trace_defect_ne = the J4-608 diagonal-witness coefficient row-general);
+-- uniformFlow_perq_chart_frame_defect = the obstruction pin on the machinery's own pullback object;
+-- curvedRNC_whitening = route-(c) first lemma, closed-form per-q frame E_q^T g^κ(q) E_q = δ
+-- (E_q = a·δ + b·qqᵀ, symmetric); non-vacuity gates at κ=−1, n=2, q=(1,1) (genuinely curved,
+-- genuinely off-center, whitening ≠ identity). Equivariance route (exact-space-form conjugation)
+-- assessed NOT viable for the as-built coordinate-framed witness; forward route = whitened witness
+-- family. std-3.
+#print axioms QIQTH.EquivProbe.curvedRNCMetric_trace
+#print axioms QIQTH.EquivProbe.curvedRNCMetric_trace_defect_ne
+#print axioms QIQTH.EquivProbe.curvedRNCInv_trace
+#print axioms QIQTH.EquivProbe.curvedRNCInv_trace_defect_ne
+#print axioms QIQTH.EquivProbe.uniformFlow_perq_chart_frame_defect
+#print axioms QIQTH.EquivProbe.curvedRNC_whitening
+#print axioms QIQTH.EquivProbe.curvedRNC_whitening_exists
+#print axioms QIQTH.EquivProbe.equivProbe_offcenter_inhabited
+#print axioms QIQTH.EquivProbe.curvedRNC_whitening_nondegenerate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

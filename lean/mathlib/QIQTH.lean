@@ -2108,3 +2108,11 @@ import QIQTH.BridgeDefect
 -- banked (J4-536) but DEGENERATE (tail identically 0); CONST route to fat K obstructed
 -- (hframeK forces K={0}); fat-K supplier = (hbound-fat)-class per-q transport analysis.
 import QIQTH.BridgeWidth
+-- J4-620 EquivProbe: the equivariance probe CORE READ verdict — uniform* machinery IS per-q-uniform
+-- (charts based at q); hframeK enters ONLY via the dev bound's zeroth jet g̃_q(0)=g(q)≠δ (FRAME, not
+-- base point); obstruction pin: tr g̃_q(0)≠n at every off-center row of the curved witness (+ the
+-- row-q J4-608 diagonal-witness coefficient tr gi^κ(q)≠n formalized); equivariance route collapses
+-- onto J4-608 route (c) = per-q whitening, whose closed-form first lemma E_q^T g^κ(q) E_q = δ is
+-- proved (curvedRNC_whitening). NOT a1=R/6 (hpkgBound@fat-K still owed; as-built flat-phase witness
+-- plausibly FAILS it — whitened witness variant is the forward route).
+import QIQTH.EquivProbe
