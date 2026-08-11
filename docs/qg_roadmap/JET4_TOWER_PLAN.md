@@ -6831,3 +6831,19 @@ hreg/hW0/hJac carried. RESIDUAL: {hFar far-field coercivity (GEOMETRIC WALL), hd
 jet [C2CarrierCollapse hid2 second-order IFT residue = sole non-collapsing carrier], hsrc/hw, hOffCollarTail}
 + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-579 = conjuncts (1)/(2) inverse-chart jet (hid2
 second-order IFT residue) OR hInnerCont OR convergence trio; hFar coercivity = standing wall.
+
+## J4-579 (prove hdata conjuncts (1)/(2) inverse-chart first-jet + |Pval|≤L for g^K)
+CurvedA1FintHdataJet.lean: DON'T-UNDERCREDIT — IFT jet already banked. `curved_hdata_jet_at_gate`
+(∃ρ>0 ∃L≥0 ∀i τ z∈K ‖z‖<ρ → ∃Pval, (∀k HasDerivAt(fun r=>uniformInverseChart g^K… z (update 0 i r) k)(Pval k)(0 i))
+∧(∀k |Pval k|≤L) — the (1)∧(2) bundle; (1) from banked HeatResidualBound.chartField_firstJet_of_contDiffAt
+[Pval k:=fderiv(uniformInverseChart… z)0 (Pi.single i 1) k, fed by hreg J4-578]; (2) from hJac J4-578 +
+IsCompact.exists_bound_of_continuousOn → uniform L, |DW e k|≤‖DW e‖≤‖DW‖·‖e‖=‖DW‖≤L) +
+`curved_hdata_jet_gate_satisfiable` (∃K compact∧K∈𝓝 0=closedBall 0 1) + `_curved_satisfiable`. hid2 NOT
+needed (first-order). Main verified: (1)/(2) from PROVED chartField_firstJet_of_contDiffAt+c2_carriers;
+only new hyp K∈𝓝 0 satisfiable not vacuous; jet exists+bound true; R/6 untouched. std-3, budget raw 0, 9855
+jobs. ★ ALL FOUR hdata conjuncts now hold individually (small-ρ gates): (1)/(2) J4-579, (3) J4-576/577/578,
+(4) J4-575. Bundle-level removal awaits ρ/gate reconciliation (assembly bookkeeping) OR hFar needs K small.
+RESIDUAL: {hFar far-field LOWER coercivity (GEOMETRIC WALL — the last genuinely-analytic far-field piece),
+hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont} + [hdata bundle ρ-reconciliation bookkeeping].
+a₁=R/6 CONDITIONAL. J4-580 = hFar far-field lower coercivity (highest-leverage geometric wall) OR the hdata
+bundle ρ-reconciliation (mechanical, closes the leg visibly) OR hInnerCont OR convergence trio.
