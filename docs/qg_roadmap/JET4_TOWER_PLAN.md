@@ -7588,3 +7588,16 @@ std-3, raw 0 (9900).
 **J4-624**: the naturality weld (engine at whiteExp: IsUnit fderiv via chain + nondeg radius +
 E_q invertibility; identification banked; Neumann two-sided inverse banked) ⟹ transport the ★
 bound to ambient heatOp g^κ gi^κ on the whitened kernel ⟹ whitened hpkgBound producer COMPLETE.
+
+### J4-624 [AF] — naturality weld FULL + ambient transfer EXACT (e9199325)
+WhiteAmbient.lean (18 decls). Weld full (one uniform gate, all q∈K, all f; KEY: explicit
+two-sided whitening inverse whiteUnvel = g·E from re-associating EᵀgE = δ). ★Ambient producer
+FULL: whiteInvChart mirrors the as-built constructor; white_ambient_heatOp_eq = EXACT equality
+transfer; bounds in chart velocity AND ambient displacement (width EXPLICITLY λ = 2(nC₀²+1),
+honestly not 2). white_hpkgBound_gateShaped = capstone antecedent shape on-gate; residues
+R1 (gate/cutoff constructor lift), R2 (width-λ vs width-2), R3 (⊆ R1). Witness gate: producer
+holds where the flat-phase pin fails. std-3, raw 0 (9901).
+**J4-625**: R1 — whitened gated witness through the banked gatedKernel/cutoff constructor at
+whiteInvChart (parametric), off-gate heatOp vanishing, lift gateShaped to unconstrained ∀(p,q);
+then R2 (width-parametric capstone thread via BridgeWidth's width-w engine [2,8] range or
+sharpened displacement constant).
