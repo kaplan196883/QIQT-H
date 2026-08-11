@@ -7614,3 +7614,15 @@ w/ EXPLICIT degeneracy caveat (cp466). std-3, raw 0 (9902).
 **J4-626**: hann at the whitened kernel — the annulus fight CHART-SIDE (naturality weld holds
 for any C² section; whiteChart_heatOp_offdiag_bound_amp machinery lives there); secondary =
 gate-certificate legs (i)-(iii) from whiteInvChart_pack + whitened openness replay.
+
+### J4-626 [AF] — ★★ MILESTONE: white_hpkgBound_discharged UNCONDITIONAL (9f4d250c)
+WhiteAnnulus.lean (14 thms + 2 defs). hann FULL (cut-kernel weld + banked Leibniz χ-expansion;
+1/τ paid by the genuine exponential annulus trade; explicit ledger); gate legs FULL at concrete
+whiteFlowGate (collar FREE from whitening expansion). ★★white_hpkgBound_discharged: ∀κ≤0,
+compact K — the FULL ∀(p,q) capstone-hpkgBound shape at whiteGatedWitness, UNCONDITIONAL,
+non-degenerate gate (fatness in the conclusion). ⚠ width = whiteLam = 2(nC₀²+1) (R2 stands).
+Witness gate: same discharged witness positive on diagonal + flat-phase failure pin. std-3,
+raw 0 (9903). THE WHITENED hpkgBound PRODUCER IS LIVE END-TO-END.
+**J4-627**: feed the discharged width-whiteLam bound into the bridge chain —
+hEuni_of_hpkgBound_w (w := whiteLam) → bridgeGeneric_tail_O_s_w (any w>0) → whitened
+hEbound/hInt toward transport_corrHigher; alternatively R2 width-parametric capstone re-thread.
