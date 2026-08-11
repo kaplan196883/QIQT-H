@@ -25110,4 +25110,46 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VacuumAreaLaw.redSympEig_le
 #print axioms QIQTH.VacuumAreaLaw.redEntropy_le
 
+
+-- ── J4-624 (WhiteAmbient): chart→ambient naturality weld + ambient transfer = whitened hpkgBound
+-- producer (on-gate). (1) laplaceBeltrami_whiteExp_naturality: Δ_{ĝ_q}(f∘whiteExp_q)=(Δ_{g^κ}f)∘
+-- whiteExp_q on ONE uniform gate ∀q∈K ∀f C²-at-far-point — the banked local engine
+-- laplaceBeltrami_pullback_naturality_local at φ=whiteExp with ALL side conditions discharged:
+-- IsUnit(DwhiteExp) = banked common-nondeg-radius × NEW explicit whitening inverse (whiteUnvel =
+-- matToCLM(g^κ(q)·E_q), two-sided via EᵀgE=δ re-association + L=L(ER)=(LE)R=R cancellation, NO
+-- abstract finite-dim step); pullbackMet=ĝ bridge (pd↔fderiv + J4-622 identification); entrywise
+-- ĝ⁻¹ĝ=δ (Neumann + sum_invMat_mul); hGGi/hGiG banked; φ-regularity = contDiffAt2_uniformFlowExp∘E.
+-- (2) whiteInvChart := E⁻¹∘uniformInverseChart (mirrors as-built witness), whiteAmbientKernel :=
+-- √det g^κ(q)·G_τ(whiteInvChart_q p); white_ambient_heatOp_eq = EXACT transfer (time slice
+-- definitional through inverse-chart germ; space slice = weld + germ collapse pulled back along
+-- continuous E); ★ white_ambient_heatOp_bound: |heatOp g^κ gi^κ W_white τ (whiteExp_q w) q| ≤
+-- C·G_{2τ}(w) ∀q∈K ∀τ>0 ‖w‖<r₀ (chart-velocity Gaussian, honest); _displacement version:
+-- ≤ C′·G_{λτ}(p−q) with EXPLICIT width λ=2(nC₀²+1) (tube confinement + whiteVel radialSq
+-- contraction → gaussDdim_le_gaussDdim_chart; width honestly NOT 2). (3) white_hpkgBound_gateShaped
+-- = capstone hpkgBound SHAPE (∀t' τ, C(1+t')·baseKernelW λ 0) ON-GATE; labelled residues R1
+-- (off-gate/cutoff gatedKernel layer = J4-625), R2 (width-2 alignment), R3 (row/column roles).
+-- Witness gate: n=2 κ=−1 K=closedBall 0 2 — producer holds where the ambient flat-phase pin
+-- provably fails; amplitude √(5/3)≠1 (genuinely curved); gate inhabited (r₀>0).
+-- NOT a1=R/6 (R1–R3 + hEbound/hInt + K1TransportBudget + fat-K carriers + capstone
+-- co-instantiation + prior piles still owed).
+-- expected: standard 3
+#print axioms QIQTH.WhiteAmbient.flatPhaseModel_zero_right
+#print axioms QIQTH.WhiteAmbient.whitening_left_inverse
+#print axioms QIQTH.WhiteAmbient.whitening_right_inverse
+#print axioms QIQTH.WhiteAmbient.whiteVel_mul_whiteUnvel
+#print axioms QIQTH.WhiteAmbient.whiteUnvel_mul_whiteVel
+#print axioms QIQTH.WhiteAmbient.curvedWhitening_isUnit
+#print axioms QIQTH.WhiteAmbient.whiteUnvel_whiteVel
+#print axioms QIQTH.WhiteAmbient.whiteExp_contDiffAt2_whole
+#print axioms QIQTH.WhiteAmbient.whiteExp_contDiffAt2
+#print axioms QIQTH.WhiteAmbient.pullbackMet_eq_whitePullbackMetric
+#print axioms QIQTH.WhiteAmbient.laplaceBeltrami_whiteExp_naturality
+#print axioms QIQTH.WhiteAmbient.whiteInvChart_pack
+#print axioms QIQTH.WhiteAmbient.white_ambient_heatOp_eq
+#print axioms QIQTH.WhiteAmbient.white_ambient_heatOp_bound
+#print axioms QIQTH.WhiteAmbient.whiteExp_displacement
+#print axioms QIQTH.WhiteAmbient.white_ambient_heatOp_bound_displacement
+#print axioms QIQTH.WhiteAmbient.white_hpkgBound_gateShaped
+#print axioms QIQTH.WhiteAmbient.whiteAmbient_witness_gate
+
 end QIQTH.AxiomAudit

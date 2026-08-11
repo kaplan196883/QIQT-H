@@ -2139,3 +2139,16 @@ import QIQTH.WhiteReplay
 -- whiteExp_fderiv (Jacobian chain, naturality weld opener). Chart→ambient naturality = J4-624.
 -- NOT a1=R/6 (naturality transfer + hEbound/hInt + downstream piles still owed).
 import QIQTH.WhiteOffDiag
+-- J4-624 (WhiteAmbient): the chart→ambient naturality WELD at whiteExp + the AMBIENT transfer of
+-- the banked whitened off-diagonal bound. laplaceBeltrami_whiteExp_naturality (the general local
+-- engine at φ=whiteExp: Jacobian unit = banked nondeg radius × NEW explicit two-sided whitening
+-- inverse E⁻¹=g^κ(q)·E from the banked EᵀgE=δ; pullbackMet=ĝ bridge; Neumann entrywise inverse);
+-- whiteInvChart/whiteAmbientKernel (√det·G_τ∘E⁻¹∘uniformInverseChart, mirrors the as-built
+-- witness's inverse-chart evaluation); white_ambient_heatOp_eq (EXACT transfer via germ collapse)
+-- → ★ white_ambient_heatOp_bound (|heatOp g^κ gi^κ W_white| ≤ C·G_{2τ}(w), chart velocity) +
+-- _displacement (ambient Gaussian, honest width λ=2(nC₀²+1)) + white_hpkgBound_gateShaped
+-- (capstone hpkgBound SHAPE on-gate; labelled residues R1 off-gate/cutoff, R2 width-2, R3 roles).
+-- Witness gate: n=2, κ=−1, K=closedBall 0 2 (ambient pin fails; amplitude √(5/3)≠1 curved).
+-- NOT a1=R/6 (R1–R3 + hEbound/hInt + K1TransportBudget + fat-K carriers + capstone
+-- co-instantiation + prior piles still owed).
+import QIQTH.WhiteAmbient
