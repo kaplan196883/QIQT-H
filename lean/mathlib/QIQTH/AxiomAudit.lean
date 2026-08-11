@@ -24563,6 +24563,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterResid.curvedRNC_residLinear_bound_center
 #print axioms QIQTH.CurvedA1CenterResid.curvedRNC_resid_center_satisfiable
 
+-- J4-608 (CurvedA1CenterN1): FIFTH-layer FIRST INCREMENT of the (hbound-fat) wall — the
+-- center-gauge N=1 mixed residual engine + THE ORDER-OF-LIMITS ROUTE DECISION.
+-- uniformResidualN1_narrow_mixed_lin_center (THE BRICK): the J4-103 split fed by the layer-4
+-- center engines, honest shape |R1| <= (B0 + B1*tau + (Bc + Bdelta*(1/tau))*eps0)*G_{3/2}; the
+-- tau*R0[u'] branch folds eps0/tau BENIGNLY to the tau-free Bc*eps0 (kept explicit, NOT hidden in
+-- B0); the raw 1/tau survives only through R0[u]. curvedRNC_residN1_bound_center = fat-K curved
+-- instantiation (kappa<=0, every r, eps0=(|k|/3)*n*r^2, BOTH coeff antecedents DISCHARGED from
+-- layer 3, shifted profile via the definitional foldedCoeff_shift). ROUTE DECISION (Sol-confirmed
+-- 2026-08-11): routes (a) tau-threshold [iterE's time convolutions integrate down to 0 even at
+-- interior evaluation times — the J4-596 window restricts only the OUTER Duhamel variable] and
+-- (b) eps0->0-first [sup over (0,T] of eps0/tau = infinity at EVERY fixed fat radius] BOTH FAIL;
+-- formal gates centerShape_no_uniform_majorant + centerShape_no_width2_kernel_majorant (at v=0
+-- all widths share the tau^(-n/2) diagonal scaling — no width absorption). The forward route is
+-- (c): per-q re-based (frozen-metric/vielbein) Gaussian killing the eps0 floor at leading order
+-- (linear normalization -> tau^(-1/2) Levi defect, alpha=-1/2-integrable; full alpha=0 needs
+-- per-q first-jet cancellation or an alpha-generalized D2 consumer).
+-- curvedRNC_residN1_bound_center_thresholded = the route-(a) artifact with the FULL threshold
+-- constant exposed, honestly labelled as NOT feeding the D2 Volterra engine. NON-VACUITY (cp466):
+-- curvedRNC_residN1_center_satisfiable = fat-K nonzero point + all-k heat-side antecedents
+-- INHABITED (Theta=1,u=1) + BOTH coefficient antecedents exhibited DISCHARGED + hdevK holds.
+-- std-3 all 6. NOT a1=R/6 (flat tower only; curved re-base still owes the rest of layer 5 = the
+-- per-q re-based producer, plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation +
+-- piles/trio/hmassone-pre-rho/hjets).
+#print axioms QIQTH.CurvedA1CenterN1.uniformResidualN1_narrow_mixed_lin_center
+#print axioms QIQTH.CurvedA1CenterN1.curvedRNC_residN1_bound_center
+#print axioms QIQTH.CurvedA1CenterN1.curvedRNC_residN1_bound_center_thresholded
+#print axioms QIQTH.CurvedA1CenterN1.centerShape_no_uniform_majorant
+#print axioms QIQTH.CurvedA1CenterN1.centerShape_no_width2_kernel_majorant
+#print axioms QIQTH.CurvedA1CenterN1.curvedRNC_residN1_center_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

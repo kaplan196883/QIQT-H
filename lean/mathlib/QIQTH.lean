@@ -1991,3 +1991,20 @@ import QIQTH.CurvedA1CenterCoeff
 -- 6. NOT a1=R/6: curved re-base still owes layer 5 (producer re-assembly) + fat-K hEmeas/hAdom/hcont
 -- + capstone co-instantiation + piles/trio/hmassone-pre-rho/hjets.
 import QIQTH.CurvedA1CenterResid
+-- J4-608 (CurvedA1CenterN1): FIFTH-layer FIRST INCREMENT of the (hbound-fat) wall — the
+-- center-gauge N=1 mixed residual engine + THE ORDER-OF-LIMITS ROUTE DECISION (Sol-confirmed).
+-- uniformResidualN1_narrow_mixed_lin_center: honest N=1 shape
+-- (B0 + B1*tau + (Bc + Bdelta*(1/tau))*eps0)*G_{3/2} — the tau*R0[u'] branch folds eps0/tau
+-- BENIGNLY (kept explicit as Bc*eps0), the raw 1/tau survives only through R0[u].
+-- curvedRNC_residN1_bound_center = fat-K curved instantiation, BOTH coeff antecedents discharged
+-- from layer 3. ROUTE DECISION: (a) tau-threshold FAILS (iterE convolutions integrate down to 0
+-- even at interior times; the J4-596 window restricts only the outer Duhamel variable) and
+-- (b) eps0->0-first FAILS (sup eps0/tau = infinity at every fixed fat radius) — formal gates
+-- centerShape_no_uniform_majorant / centerShape_no_width2_kernel_majorant; the forward route is
+-- (c) per-q frozen-metric/vielbein Gaussian (kills the eps0 floor; linear normalization gives the
+-- classical tau^(-1/2) Levi defect = alpha=-1/2-integrable; full alpha=0 needs per-q first-jet
+-- cancellation or an alpha-generalized D2 consumer). Thresholded artifact recorded transparently;
+-- non-vacuity gate curvedRNC_residN1_center_satisfiable. std-3 all 6. NOT a1=R/6 (flat tower
+-- only; curved re-base still owes the per-q re-based producer + fat-K hEmeas/hAdom/hcont +
+-- capstone co-instantiation + piles/trio/hmassone-pre-rho/hjets).
+import QIQTH.CurvedA1CenterN1
