@@ -7626,3 +7626,16 @@ raw 0 (9903). THE WHITENED hpkgBound PRODUCER IS LIVE END-TO-END.
 **J4-627**: feed the discharged width-whiteLam bound into the bridge chain —
 hEuni_of_hpkgBound_w (w := whiteLam) → bridgeGeneric_tail_O_s_w (any w>0) → whitened
 hEbound/hInt toward transport_corrHigher; alternatively R2 width-parametric capstone re-thread.
+
+### J4-627 [AF] — bridge feed threaded; residues exactly {S1, lam≤8} (7067da53)
+WhiteBridge.lean (19 decls). white_hEuni + hEbound (a fortiori, τ-gate dissolves affine
+obstruction); whiteDefectKernel + NEW width-AND-α-parametric hInt producer; ★S1 verdict: the
+as-built joint-measurability chain is witness-pinned — mirroring = a campaign; white_hInt
+carries ONE labelled hEmeas (mainline S1 slot shape); ★white_tail_O_s (width-parametric, no
+lam≤8) + ★★white_tail_O_s_discharged (tripleHEmeas → tail O(s), all else unconditional);
+width reconciliation: bridge landing needs lam∈[2,8], lam≤8 unprovable (opaque C₀) ⟹
+white_transport_bridge/corrHigher carry hlam8 (second labelled input). std-3, raw 0 (9904).
+**J4-628**: S1 at the whitened witness — Route-B mirror first slice: joint (q,p)-measurability
+of whiteInvChart (Gc-representative trick template) then the τ-deriv/pd carriers of
+whiteCutKernel (closed-form Gaussian × cutoff — likely EASIER than vanVleck's transport
+amplitude), landing tripleHEmeas(whiteGatedWitness).
