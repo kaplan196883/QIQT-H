@@ -24729,6 +24729,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenWire.frozenDefectKernel_witness_ne_zero
 #print axioms QIQTH.FrozenWire.frozenDefectCenterZero_spaceForm
 
+-- J4-613 (FrozenColumn): the center-column alpha=0 SERIES SPLICE. The mixed ladder
+-- iterE_column_bound: |iterE E (m+1) (s,.,0)| <= D_{m+1}*s^{m/2}*G_2s (inner column stays 0 =
+-- clean alpha=0 seed; ONE outer alpha=-1/2 factor per level; per-step width-2 Beta identity),
+-- D_{m+1} = C0*(C*Gamma(1/2))^m / Gamma(m/2+1), summable (colC_summable: even = exp series,
+-- odd Gamma-dominated). leviSeries_column_bound = THE CLEAN column series bound <= (sum D)*G_2s
+-- on (0,1] (NO s^{-1/2}); leviSeries_column_tail_bound = the HONEST k>=2 tail:
+-- |leviSeries + E| <= C_tail*sqrt(s)*G_2s — O(sqrt s), NOT O(s) (the J4-612 audit's O(s) shape
+-- assumed all-alpha=0 factors; the mixed chain's outer column is generic). Frozen instantiation
+-- frozenColumn_leviSeries_bound (all suppliers PROVED); column-specific non-vacuity
+-- frozenColumn_witness_ne_zero (the r=0 witness base is FORCED to the center q=0).
+-- BUDGET VERDICT vs corrHigher_bounded_of_slice: sqrt_exceeds_linear_budget (no t-uniform K
+-- absorbs sqrt into the linear slice budget => bounded-cRem O(t^2) NOT reached);
+-- integral_sqrt_le_linear (tail integrates to t^{3/2} = o(t): a1's t^1 coefficient not shifted).
+-- NOT a1=R/6 (consumer wiring across the sqrt(s)-vs-s gap + k=1 transport-cancellation +
+-- per-q re-assembly + fat-K piles + capstone remain).
+#print axioms QIQTH.FrozenColumn.colC_summable
+#print axioms QIQTH.FrozenColumn.heatConv_le_of_abs_le_pos_right
+#print axioms QIQTH.FrozenColumn.mixedColZ_integrable
+#print axioms QIQTH.FrozenColumn.mixedColS_intervalIntegrable
+#print axioms QIQTH.FrozenColumn.iterE_column_bound
+#print axioms QIQTH.FrozenColumn.leviSeries_column_bound
+#print axioms QIQTH.FrozenColumn.leviSeries_column_tail_bound
+#print axioms QIQTH.FrozenColumn.leviSeries_column_k3_bound
+#print axioms QIQTH.FrozenColumn.frozenColumnKernel_bound
+#print axioms QIQTH.FrozenColumn.frozenColumn_k2_isolation
+#print axioms QIQTH.FrozenColumn.frozenColumn_leviSeries_bound
+#print axioms QIQTH.FrozenColumn.frozenColumn_witness_ne_zero
+#print axioms QIQTH.FrozenColumn.sqrt_exceeds_linear_budget
+#print axioms QIQTH.FrozenColumn.integral_sqrt_le_linear
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

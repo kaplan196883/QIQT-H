@@ -2057,3 +2057,10 @@ import QIQTH.AlphaLevi
 -- sharpening — PROVED (frozenDefectCenterZero_spaceForm, clean C*G_2tau, all tau>0). std-3.
 -- NOT a1=R/6 (per-q producer re-assembly + center-column splice + fat-K piles + capstone remain).
 import QIQTH.FrozenWire
+-- J4-613 (FrozenColumn): the center-column alpha=0 series splice — the mixed ladder
+-- |iterE E (m+1) (s,.,0)| <= D_{m+1}*s^{m/2}*G_2s (clean alpha=0 inner seed, one alpha=-1/2
+-- outer factor per level), the CLEAN column series bound <= C*G_2s on (0,1], and the HONEST
+-- k>=2 tail = O(sqrt s)*G (NOT O(s)); frozen instantiation + column non-vacuity + budget
+-- certificates (sqrt exceeds the linear slice budget; tail integrates to t^{3/2} = o(t)).
+-- NOT a1=R/6 (consumer wiring across the sqrt(s)-vs-s gap + transport-cancellation remain).
+import QIQTH.FrozenColumn
