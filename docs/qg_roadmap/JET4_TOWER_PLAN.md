@@ -6964,3 +6964,21 @@ Leg2HLapFull.lean/CurvedA1Leg2Core.lean UNTOUCHED; std-3. hg0 curved-satisfiable
 (→hDaLimLU_from_labelled_capped_center) + curved_core_at_gate (→curved_leg2_hLapFull_center) + curved_a1_R6_fully_wired
 dropping {hK0,hframeK} → curved_a1_R6_fully_wired_center + weakened-capstone vacuity guard (watch for higher core
 sites where hframeK flows into a census monolith — add _of_gauge abstraction if so).
+
+## ★★★ J4-587 (SALVAGE COMPLETE structural — curved a₁=R/6 capstone RE-ESTABLISHED NON-VACUOUSLY)
+CurvedA1FullyWiredCenter.lean: the culminating rethread, ALL variant-only (existing capstone/census untouched,
+20-37s no census re-elab). `curved_hDa_at_gate_center` (leg-1, same DaLimLUGoal, {hK0,hframeK}→hg0) +
+`curved_core_at_gate_center` (leg-2, same TruncatedDuhamelCore, both gauge sites→gauge_from_pointwise/
+curved_leg2_hLapFull_center) + `curved_a1_R6_fully_wired_center` (THE CAPSTONE: SAME a₁ two-jet R/6 identity
+coeff (∑ricci)/6=n(n−1)κ/6, hframeK DROPPED→hg0:∀i j g^K 0 i j=δ [curvedRNCMetric_zero], hK0 KEPT non-collapsing;
+reuses curved_a1_R6_geomWired UNCHANGED [never consumed hframeK] + two _center legs) + `curved_a1_R6_center_nonvacuous`
+(VACUITY GUARD: geometry antecedents {hg0,hK0,∃q∈K q≠0,MemGaugeGi∧MemGaugeGamma,Ric(0)≠0,¬(∀q∈K g^K q=δ)} JOINTLY
+SATISFIABLE at genuinely-curved κ<0 on GENUINE K=closedBall 0 1, NOT J4-582's {0}). Main verified: same R/6 conclusion;
+hframeK dropped hg0 curved-satisfiable; hK0 non-collapsing; hmassone STILL carried binder (honest); guard genuine
+curved K + ¬hframeK; curved_a1_R6_geomWired reused unchanged; std-3; existing files untouched. budget raw 0, 9863 jobs.
+★★ THE J4-582 VACUITY REMOVED — curved a₁=R/6 now NON-VACUOUS, SAME conditional status as flat tower. ⚠ HONEST:
+hmassone (∫z→1) remains CARRIED analytic input (guard removes STRUCTURAL K={0} obstruction, does NOT prove hmassone);
+a₁=R/6 CONDITIONAL on carried residuals (census/measurability/domination/SDW + hmassone) = same family flat carries.
+Curved now ON PAR with flat: non-vacuous, conditional. J4-588 = (1) headline satisfiability capstone bundling
+nonvacuous+R6-conclusion OR (2) attack hmassone (∫z H(εₘ) 0 z→1 on genuine K — now source support nontrivial, the
+first genuinely-analytic remaining wall) OR (3) hInnerCont/convergence trio (now non-vacuous residual members).
