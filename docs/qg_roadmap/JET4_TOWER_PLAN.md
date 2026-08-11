@@ -7382,3 +7382,19 @@ claimed; FrozenDefectBound = Prop only (no fake proof). std-3, raw 0 (9886).
 (ii) |∂ᵢ∂ⱼΓ_q| ≤ (1/τ)(1+Q/τ)·√det·G_τ from frozenGauss_pd_pd + comparison; (iii) width-fold
 ‖v‖(1+‖v‖²/τ)/τ·G_τ ≤ (C/√τ)·G_{λτ} via GaussianWidthTransfer levers. Fold in Sol go/no-go:
 width-2 closed-fold check + consumer weighted-sup audit alongside.
+
+### J4-610 [AF] — FrozenDefectBound INHABITED + go/no-go recon (faca0cec)
+FrozenDefect.lean (11 decls). ★frozenDefectBound_spaceForm: (C/√τ)·G_{2τ} defect bound, exponent
+EXACTLY τ^(-1/2), width λ=2 exact, C explicit (crude n! det factor + affine-not-Lipschitz
+coefficient modulus both DISCLOSED); non-vacuity witness (exact expression > 0 at q=0, v=e₀,
+K<0, n≥2). Sol milestone FrozenDefectNegHalf DONE. ★GO/NO-GO 1 = GO (D2 width-2 is a CLOSED
+fold — gaussDdim_conv_scaled semigroup, certified width2_closed_fold). ★GO/NO-GO 2 = MIXED:
+interface weights + gates fine; per-step engine supports α=−1/2 UNCHANGED (certified
+betaTime_negHalf_integral = π); BLOCKERS = series summability (gamma_ratio_tendsto_zero
+hard-limited to β≥1) + leviSeries_dominatedW_le hard-codes κ=2,α=0. α-FORK NOW = ONE Γ-ratio
+lemma + one α-parametrization. std-3, raw 0 (9887).
+**J4-611**: α-generalization first slice — gamma_ratio_tendsto_zero at 0<β (Gautschi
+Γ(x+s)/Γ(x) ≤ x^s from Bohr–Mollerup log-convexity in Mathlib) → modelCoeff/scaledIterKernelW
+summable at α=−1/2 → α-parametrized leviSeries_dominatedW_le → instantiate. Per-step engine
+zero changes. Alongside/next: final-rate audit + capstone co-instantiation smoke test (Sol
+priorities).
