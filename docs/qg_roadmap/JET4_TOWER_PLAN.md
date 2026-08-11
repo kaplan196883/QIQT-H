@@ -6999,3 +6999,20 @@ satisfiable not vacuous; guard genuine K; not false limit; R/6 untouched. std-3,
 joining hsrc/hOffCollarTail. a₁=R/6 CONDITIONAL (flat+curved). J4-589 = (i) build base-varying CoV bundle M1–M4
 for Wbv (base-slot regularity of the .choose uniform exp chart, |det DWbv(0)|=1 — genuine harder IFT, mass-side
 endgame) OR (ii) next carried member hInnerCont/convergence trio OR (iii) headline consolidation object.
+
+## J4-589 (base-varying CoV bundle M1-M4 for Wbv banked-unconditional — hmassone carriers 12→4)
+CurvedA1WbvCoV.lean: DON'T-UNDERCREDIT — base-varying CoV bundle M1–M4 for Wbv already banked unconditional
+J4-274 (TerminalVelC2.baseVaryingIFTPackage_unconditional). `curved_Wbv_CoV_bundle_at_gate` (h0Kmem:K∈𝓝 0:
+∃ρ>0 V f', MeasurableSet(ball)∧M1 HasFDerivWithinAt∧M2 InjOn∧M3 V-left-inv∧M4 |det|>0∧Wbv''ball∈𝓝 0, from
+baseVaryingIFTPackage_unconditional via ContDiffAt.toOpenPartialHomeomorph near-identity Wbv; UNCONDITIONAL) +
+`curved_Wbv_hasFDeriv_center_at_gate` (near-identity anchor HasFDerivAt Wbv (-id) 0, |det|=1) +
+`curved_hmassone_via_v2_at_gate` (κ≤0: SHARPENED hmassone = exact capstone shape with ONLY 4 carriers
+hGgate/hSupp/hbound/hlocal, from f≡1 case of banked FixedFTrioDischarge.chartImage_approx_identity_v2 [CoV bundle
++hΩmeas+hmeas discharged internally] ∘ epsSeq→𝓝[>]0; carried surface 12→4). ⚠ ORIENTATION FIREWALL respected:
+hreg is FIELD-slot (Wfv), bundle needs BASE-slot (Wbv), Wbv≠Wfv, base-slot from terminal-velocity route NOT hreg.
+Main verified: conclusion=capstone hmassone; from PROVED chartImage_approx_identity_v2+baseVaryingIFTPackage; 4
+carriers strictly weaker; Wbv near-identity diffeo (DWbv(0)=-id); std-3. budget raw 0, 9865 jobs. ★ hmassone now
+4 amplitude/gate carriers (hGgate/hSupp gate-support split, hbound/hlocal ← EnrichedChartBundle). a₁=R/6 CONDITIONAL.
+J4-590 = hbound/hlocal via EnrichedChartBundle (ContDiffAt.toOpenPartialHomeomorph V-continuity+sub-ball open images
+⟹ uniform amplitude sup-bound + |det f'|≥c>0 + V w→0, |det f'(V w)|→1; + banked baseSlotAmp_bound/joint_limit/
+baseChartAmp_centre_eq_one=1) ⟹ shed hbound/hlocal, leaving hGgate/hSupp gate-annulus split OR next residual.
