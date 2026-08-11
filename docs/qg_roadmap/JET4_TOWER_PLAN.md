@@ -7270,3 +7270,17 @@ uniformCoeff_bound, (3) uniformResidual*_tau_narrow, (4) producer re-assembly
 std-3, budget raw 0 (9881 jobs).
 **J4-605**: center-gauge uniformFlowChristoffel_linear_decay (map hframeK use-sites; if
 jet-value-only again, replay with hdevK + additive C·ε₀).
+
+### J4-605 [AF] — (hbound-fat) wall layer 2 CLOSED: Christoffel decay frame-FREE (d5c69e8f)
+CurvedA1CenterChr.lean (5 decls). hframeK enters the banked Christoffel decay through ONE call
+(R1 pd-linear-decay) which discards the value jet — only the frame-free pd-jet ∂g̃(0)=0 is
+consumed; g̃⁻¹ needs boundedness only ⟹ hframeK DELETED (not weakened): |Γ̃(v)| ≤ KdΓ·‖v‖
+verbatim, same constants, ε₀ NOWHERE in this layer (layer-1 ε₀ debt → layer 3 coeffAF trace).
+★uniformFlowChristoffel_linear_decay_center + curvedRNC_Chr_linear_decay_center (fat-K, all
+carries banked, NO frame antecedent left) + Γ̃(0)=0 frame-free (feeds layer 3) + non-vacuity.
+std-3, budget raw 0 (9882 jobs).
+**J4-606**: wall layer 3 = center-gauge uniformCoeff_bound/uniformCoeffLinear_bound
+(UniformCoeffBound.lean R3): hframeK sites expected at pullbackInv dev (→ layer-1 _center,
+paying M·ε₀ in (A1) trace + (TC) coeffDevF) and Christoffel (→ this brick, free). Honest
+expected form |totalRadialO1_coeff| ≤ C_c·rncRadialSq v + C_ε·ε₀ with eps_arbitrarily_small
+supplying smallness. Then uniformCoeffLinear_bound analogue.
