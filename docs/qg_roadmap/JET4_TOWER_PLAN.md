@@ -7519,3 +7519,17 @@ already generic; only mixedCol integrability + widening arithmetic pinned) to co
 exact hAdomHeat width shape; (ii) start the hEuni supplier: |heatOp(gatedWitness)(τ,p,q)| ≤
 C·G_{wτ}(p−q) on the gate — flat-tower residual machinery (ResidualN1GaussianBound/
 CutoffResidualGlobalBound) computed this family; curved fat-K version = the genuine analysis.
+
+### J4-619 [AF] — width-general engine + hEuni landscape: hEuni = capstone's own hpkgBound (ff3ad0fc)
+BridgeWidth.lean (21 decls). Width-w tail engine (any w>0; G8 shape at honest w∈[2,8];
+τ-capped steps consume T-gated carried dominations; width-w producer NOT built — disclosed).
+★DECISIVE: capstone's Section-C hpkgBound IS all-rows width-2 O(1) (hEuni_of_hpkgBound; J4-618
+"strictly stronger" caveat RETIRED) ⟹ transport_corrHigher_of_pkgBound: bridge + bounded-cRem
+from {hpkgBound, hEbound, hInt} = capstone's OWN binders. {0}-degeneracy pinned (tail ≡ 0,
+bridge content-free); fat-K CONST route re-pinned (hframeK ⟹ singleton). Sol: witness IS per-q
+recentered (fixed-phase would be FALSE at fat K) ⟹ hpkgBound@fat-K plausibly TRUE; shortcut =
+constant-curvature isometry equivariance (row-0 → all rows). Owed transport pile =
+{hpkgBound@fat-K, hEbound@transport, hInt, K1TransportBudget}. std-3, raw 0 (9896).
+**J4-620**: the equivariance probe — formalize constant-curvature isometry equivariance of the
+witness (parametrix/cutoff/gate per-q intrinsic) to transfer banked row-0 analysis to all rows
+at fat K; fallback = per-q frozen-style replay for the transport amplitude.
