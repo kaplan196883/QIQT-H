@@ -6899,3 +6899,20 @@ Only frame-escape regime (n=1/κ=0) has Ric=0 ⟹ coeff 0 (flat). ROOT CAUSE: hf
 non-vacuously establish it at a curved witness. J4-583 = re-architect hframeK to a center-only normal-coordinate
 gauge (the substantive fix enabling a non-degenerate curved witness) OR add a joint-inhabitance obligation to
 the satisfiability gate; this is now THE crux, ahead of hInnerCont/convergence-trio.
+
+## J4-583 (VERDICT SALVAGEABLE — J4-582 curved vacuity is a removable hframeK-too-strong artefact)
+CurvedA1FrameAudit.lean: hframeK-consumer trace (CurvedA1FullyWired/Leg2Core/Leg2HLapFull/Capstone) —
+EVERY hframeK consumption is gauge_from_geometry → hg0_of_hframeK:=hframeK 0 hK0 (reads ONLY 0-jet value
+g(0)=δ). MAIN independently grep-confirmed: no rw[hframeK], no hframeK q at q≠0, no metric→δ substitution
+in the R/6 derivation (AxiomAudit:22995 documents hg0_of_hframeK role). R/6 coeff from Ric(0) of CURVED
+metric = center fact. ⟹ J4-582 vacuity caused SOLELY by hframeK neighbourhood strength (∀q∈K⟹K={0}), NOT
+flattening. `curved_gauge_from_center` (κ<0: MemGaugeGi∧MemGaugeGamma via banked
+DaLimCurvedGauge.gauge_from_pointwise fed by center-only curvedRNCMetric_zero/hinvF/pd_zero — NO
+hframeK/hK0) + `curved_frame_salvage_certificate` (gauge members ∧ Ric(0)≠0 = center gauge inhabited by
+genuinely curved metric). std-3, budget raw 0, 9859 jobs. ★ VERDICT: curved a₁=R/6 is FIXABLE not
+flat-only. SALVAGE PATH J4-584: weaken capstone binder hframeK(∀q∈K g^K q=δ)→hg0(∀i j g^K 0 i j=δ)
+[curvedRNCMetric satisfies, doesn't force K={0}, hmassone satisfiable] + rethread 2 gauge_from_geometry→
+gauge_from_pointwise. ⚠ curved capstone STILL VACUOUS AS WRITTEN (J4-582); this certifies FIXABILITY only.
+a₁=R/6 CONDITIONAL. J4-584 = the rethread (weaken hframeK→hg0 in curved_a1_R6_fully_wired + curved_hDa_at_gate
++ curved_core_at_gate + curved_leg2_hLapFull binders; discharge hg0 via curvedRNCMetric_zero; rethread gauge
+sites via curved_gauge_from_center; re-run J4-582 vacuity check to confirm now jointly satisfiable at curved).
