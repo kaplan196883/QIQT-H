@@ -7398,3 +7398,18 @@ lemma + one α-parametrization. std-3, raw 0 (9887).
 summable at α=−1/2 → α-parametrized leviSeries_dominatedW_le → instantiate. Per-step engine
 zero changes. Alongside/next: final-rate audit + capstone co-instantiation smoke test (Sol
 priorities).
+
+### J4-611 [AF] — α-fork branch (a) series slice LANDED (141a2cda)
+AlphaLevi.lean (14 decls, engine files unmodified). Γ-ratio generalized to ALL β>0 (corrected
+log-convexity direction: interpolate Γ(x+1) between Γ(x+β), Γ(x+β+1); telescoped Gautschi-type
+x·Γ(x) ≤ Γ(x+β)(x+β)^{1−β} ⟹ ratio ≤ 2^{1−β}x^{−β} → 0). All-α>−1 summability
+(modelCoeff/scaledIterKernelW _general; per-step engine unchanged). leviSeries_dominatedW_le_alpha
+(honest exponent split; conclusion C_L·baseKernelW 2 α τ — series INHERITS τ^{−1/2} weight,
+irreducibility certified negHalf_weight_unbounded). leviSeries_dominatedW_le_negHalf in the exact
+J4-610 defect shape ⟹ D2 engine OPEN to the frozen defect. Downstream scoped honestly:
+τ-integrating consumers survive; τ-uniform-sup consumers can't ingest unrewritten. std-3, raw 0
+(9888). Sol milestone "generalized α consumer" DONE.
+**J4-612**: wire frozenDefectBound_spaceForm into leviSeries_dominatedW_le_negHalf's hEbound
+(T=1 vs T via min) + discharge IterConvIntegrableW E 2 (−1/2) C for the frozen defect (check
+iterConvIntegrableW_of_locally_bound_baseMeas α-agnosticity) + final-rate audit co-brick (who
+ingests the weighted series bound; hContDom window compatibility).
