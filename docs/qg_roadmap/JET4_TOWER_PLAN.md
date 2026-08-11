@@ -7059,3 +7059,18 @@ curvature; R/6 untouched. std-3, budget raw 0, 9868 jobs. a₁=R/6 CONDITIONAL. 
 (assembling hContDom = separate thread). J4-593 = hOffCollarTail OR hsrc (self-contained boundary/source
 regularities, likely bankable) OR hContDom-assembly (Gaussian domination + witness/Levi positive-strip
 time-continuity) OR convergence trio (largest genuine wall — defer).
+
+## J4-593 (discharge hOffCollarTail via banked collar tail + correct over-credit — it is FLAT-Gaussian)
+CurvedA1HOffCollarTail.lean: `curved_hOffCollarTail_at_gate` (κ<0: (i) matched √τ-gain reconstitution ≤
+L·(15/2·n)/√τ from banked SliverTailMatched.sliver_term1_on_collar_matched [J4-354, q(0)·T off-collar cancels
+on-collar leading moment via collarMoment_eq_neg_tail] + (ii) exp-suppressed bare tail |T_{c√τ}|≤(√2)ⁿ·
+exp(−c²/8)·(2n+1)/(2τ) from OffCollarTailMoment.tailMoment_collar_expSuppressed [J4-546]; crude clean |T|≤1/τ
+NOT used — capped/collar version, J4-537 minefield respected) + `curved_hOffCollarTail_satisfiable` (non-constant
+1-Lipschitz amp). Main verified: proof = direct exact of the two banked engines (lines 104/107); std-3;
+non-vacuous. ★ HONEST OVER-CREDIT CORRECTION: leading integrand hessGaussFactor=(z_i²−2τ)/(4τ²)·G_τ is the FLAT
+heat-kernel Hessian = METRIC-INDEPENDENT ⟹ hOffCollarTail is a flat-Gaussian tail fact generic in the amplitude,
+NOT "the genuine surviving curved geometric input" (over-credit in the ledgers; κ/hκ are gate locators only).
+The real curved input it consumes = amplitude q=Aamp^K·F^K Lipschitz = ON-collar hjets carry. budget raw 0, 9869
+jobs. a₁=R/6 CONDITIONAL. J4-594 = hsrc (ContDiff ℝ ∞ transportOp/vanVleck source, from banked christoffel/vanVleck
+smoothness) OR the on-collar hjets chart-jet bundle (the genuine curved input hOffCollarTail consumes) OR
+census/domination OR convergence trio.
