@@ -7074,3 +7074,17 @@ The real curved input it consumes = amplitude q=Aamp^K·F^K Lipschitz = ON-colla
 jobs. a₁=R/6 CONDITIONAL. J4-594 = hsrc (ContDiff ℝ ∞ transportOp/vanVleck source, from banked christoffel/vanVleck
 smoothness) OR the on-collar hjets chart-jet bundle (the genuine curved input hOffCollarTail consumes) OR
 census/domination OR convergence trio.
+
+## J4-594 (discharge hsrc transport-source C^∞ for g^K — sidesteps TransportOpSmoothness ω-wall)
+CurvedA1Hsrc.lean: `curved_hsrc_at_gate` (κ≤0: EXACT hsrc binder ContDiff ℝ ∞ (transportOp (vanVleck g^K) g^K
+gi^K (transportCoeff (transportOp…) 0)); ★ KEY transportCoeff T 0=(fun _=>1) DEFINITIONALLY via
+ParametrixFunction.transportCoeff_zero [u₀≡1] ⟹ hsrc = single transport-source app to CONSTANT base coeff, NO
+ray-integral radialTransportSolve ⟹ TransportOpSmoothness ω-wall IRRELEVANT; proof rw[transportCoeff_zero];
+exact contDiff_const, then TransportOpSmoothness.transportOp_preserves_contDiff [J4-174] at ⊤ lowered ∞ via
+ContDiff.of_le le_top; curved carries curvedRNCMetric_contDiff/curvedRNCInv_contDiff[κ≤0]/hgpos[κ≤0]) +
+`curved_hsrc_satisfiable` (hsrc ∧ ∃w 1<det g^K w). Main verified: proof=rw transportCoeff_zero+contDiff_const+
+transportOp_preserves_contDiff+of_le; sidesteps ω-wall (u₀≡1 constant); from PROVED machinery; non-vacuous; R/6
+untouched; std-3. budget raw 0, 9870 jobs. ★ hsrc DISCHARGED (self-contained composition, not deep input).
+a₁=R/6 CONDITIONAL. J4-595 = on-collar hjets chart-jet bundle (genuine curved input that hOffCollarTail+hInnerCont
+transitively lean on — drains multiple carriers) OR census/measurability/domination cluster (generic-engine-shaped)
+OR convergence trio (deepest wall).
