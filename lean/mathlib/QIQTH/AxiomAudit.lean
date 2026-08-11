@@ -24407,6 +24407,39 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ReBase.rebased_hmeas_at_gate
 #print axioms QIQTH.CurvedA1ReBase.rebased_satisfiable
 
+-- J4-603 (CurvedA1ReBaseHBdom): the re-based hBdom at the fat base compact K = closedBall 0 r — the
+-- K-genericity VERDICT of the CONST defect-bound producer chain, PROVED: the chain
+-- (gatedWitnessN1_hEboundW_le_lin_CONST → curvedRNC_heatOp_dom_pkg) is K-parametric in FORM but its
+-- hframeK (δ-frame at EVERY q ∈ K — load-bearing per-q through uniformCoeff_bound /
+-- uniformFlowPullbackMetricInv_dev_uniform / uniformFlowChristoffel_linear_decay) PROVABLY FAILS at the
+-- curved witness on the fat ball (rebased_hframeK_unsat, via curvedRNCMetric_frame_forces_origin at the
+-- nonzero axis point (r/2)·e₀) — so the J4-597 hBdom does NOT re-instantiate at fat K; the missing
+-- (hbound-fat) all-t' width-2 defect bound at the fat base = the scoped OPEN wall (center-only-gauge
+-- amplitude rework). LANDED: gated_hBdom_of_defect_bound = the WHOLE J4-597 Neumann-tail route factored
+-- GENERAL-(g,gi,K,S) (hEzero → iterConvIntegrableW_of_locally_bound_baseMeas → leviSeries_dominatedW_le
+-- D2 engine → baseKernelW_zero_apply; clean uncapped width-2), antecedent bundle INHABITED at the banked
+-- {0} pkg (gated_hBdom_engine_inhabited_at_center — honesty: inhabitance is at the degenerate base, it
+-- certifies the LEMMA's non-vacuity, NOT fat-K satisfiability); rebased_hBdom_of_defect_bound = the
+-- fat-K curved instantiation in the EXACT J4-596 hBdom binder shape, conditional on the TWO labelled
+-- inputs {hEmeas (M1 fat-K), hbound-fat}; rebased_hInnerCont_of_dominations = the fat-K CONSUMPTION
+-- certificate into the general-K builder curved_hInnerCont_of_dominations (given also hAdom/hmeas/hcont
+-- fat-K, the capstone's hInnerCont ContinuousOn holds at the fat base). NON-COLLAPSE:
+-- rebased_no_offOrigin_kill (a NONZERO source q ∈ K with the gate fully OPEN — the J4-602
+-- singleton-kill mechanism is structurally unavailable) + rebased_hBdom_noncollapse (positive base
+-- measure + nonzero point) — the dominated series at fat K is NOT −E by any structural mechanism
+-- (analytic vanishing not excluded, honestly). std-3 all 9. NOT a₁=R/6: the (hbound-fat) PRODUCER,
+-- fat-K hEmeas/hAdom/hcont, hContDom/capstone co-instantiation, census/domination piles, convergence
+-- trio, hmassone pre-ρ, hjets all remain OWED.
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_axis_point
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hframeK_unsat
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_no_offOrigin_kill
+#print axioms QIQTH.CurvedA1ReBaseHBdom.gated_hBdom_of_defect_bound
+#print axioms QIQTH.CurvedA1ReBaseHBdom.gated_hBdom_engine_inhabited_at_center
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hBdom_of_defect_bound
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hInnerCont_of_dominations
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hBdom_noncollapse
+#print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hBdom_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -1913,3 +1913,17 @@ import QIQTH.CurvedA1Hmeas
 -- conditional on {geometric reach, hLcont}. std-3 all 12. NOT a1=R/6 — the honest residual EXPANDS:
 -- re-based hcont/hAdom/hBdom/hContDom + co-instantiated capstone application are OWED.
 import QIQTH.CurvedA1ReBase
+-- J4-603 (CurvedA1ReBaseHBdom): the re-based hBdom at the fat base compact K=closedBall 0 r — VERDICT +
+-- engine + scoping. VERDICT (rebased_hframeK_unsat, PROVED): the banked CONST defect-bound producer chain
+-- (gatedWitnessN1_hEboundW_le_lin_CONST -> curvedRNC_heatOp_dom_pkg) is K-parametric in FORM but its
+-- hframeK (delta-frame at EVERY q in K, load-bearing through the amplitude chain) PROVABLY FAILS at the
+-- curved witness on the fat ball — the J4-597 route does NOT re-instantiate; the missing (hbound-fat)
+-- producer = center-only-gauge amplitude rework, scoped OPEN. LANDED: gated_hBdom_of_defect_bound = the
+-- FULL J4-597 Neumann-tail route factored GENERAL-(g,K,S) (hEzero -> hInt -> D2 engine -> width-2 clean,
+-- antecedent inhabited at the banked {0} pkg); rebased_hBdom_of_defect_bound = its fat-K curved
+-- instantiation (EXACT J4-596 hBdom binder shape, conditional on {hEmeas, hbound-fat});
+-- rebased_hInnerCont_of_dominations = fat-K consumption certificate into the general-K builder;
+-- rebased_no_offOrigin_kill + rebased_hBdom_noncollapse = structural non-collapse (nonzero source with
+-- OPEN gate + positive base measure: the series is NOT -E by the J4-602 mechanism). std-3 all 9.
+-- NOT a1=R/6: (hbound-fat) producer, fat-K hEmeas/hAdom/hcont, capstone co-instantiation remain OWED.
+import QIQTH.CurvedA1ReBaseHBdom
