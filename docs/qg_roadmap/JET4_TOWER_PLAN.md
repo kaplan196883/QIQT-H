@@ -6799,3 +6799,19 @@ RESIDUAL: {hFar far-field coercivity (GEOMETRIC WALL), hdata (1)/(2) inverse-cha
 [continuity], hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-577 = (3b)
 hcont pd-continuity discharge (pd_chartAmp_center route in BaseSlotAmpDeriv, would complete conjunct 3) OR
 (1)/(2) inverse-chart field-jet OR hInnerCont OR convergence trio; hFar far-field coercivity = flagged wall.
+
+## J4-577 (discharge hdata (3b)'s hcont pd-continuity for g^K — conjunct (3) analytic core complete)
+CurvedA1FintHdataDerivCont.lean: `curved_hdata_amp_deriv_cont_at_gate` (ContinuousOn (pd(chartFieldAmp g^K
+… p.1 p.2) i 0) (Icc 0 T ×ˢ closedBall 0 ρ) = exactly J4-576 hcont; DON'T-UNDERCREDIT — joint cont already
+banked general-metric via SupFamilyFirstOrder.supFamilyFirstOrder_hcont1 [pd_chartAmp_center_eq +
+manifoldAmp_fderiv_continuous + ContinuousOn.clm_apply; old J3 base-point blocker discharged by
+JacobiCLMExposure.chartFieldJacobian_continuousOn ← banked forwardFlowJet_continuousOn]; instantiated at
+curved carries, chartAmp→chartFieldAmp via chartAmp_eq_chartFieldAmp_fun) + `curved_hdata_amp_deriv_uniform_at_gate`
+(the (3b) ∃Bd bound, hcont DISCHARGED, feeds proved cont into J4-576 of_cont; depends only on hreg/hW0/hJac) +
+`_curved_satisfiable`. Main verified: conclusion=exact hcont; from PROVED banked supFamilyFirstOrder_hcont1;
+carried hreg/hW0/hJac genuine satisfiable inverse-chart regularity (C²+continuous), analytic cont REDUCED to
+geometric substrate not lateral; R/6 untouched. std-3, budget raw 0, 9853 jobs. ★ hdata conjunct (3)
+analytically COMPLETE (3a banked J4-576, 3b hcont discharged J4-577), rests on hreg/hW0/hJac. RESIDUAL:
+{hFar far-field coercivity (GEOMETRIC WALL), hdata (1)/(2) inverse-chart jet + hreg/hW0/hJac reachability-gate
+geometric, hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-578 = discharge
+hreg/hW0/hJac on small-ρ reachability gate (chartFieldJacobian_continuousOn side-conditions + chartField_contDiffAt_reachable_uniform) OR (1)/(2) inverse-chart jet OR hInnerCont OR convergence trio; hFar coercivity = standing wall.
