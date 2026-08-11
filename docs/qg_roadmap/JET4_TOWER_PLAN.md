@@ -6951,3 +6951,16 @@ force K={0} ⟹ J4-582 vacuity removed on leg-1. budget raw 0, 9861 jobs. a₁=R
 J4-586 = mirror leg-2 (CurvedA1Leg2Core.lean L262 gauge_from_geometry in curved_leg2_hLapFull/MemLapFull → center
 variant via gauge_from_pointwise); then J4-587 thread hg0:=curvedRNCMetric_zero up through curved_hDa_at_gate/
 curved_core_at_gate/curved_a1_R6_fully_wired dropping hframeK + weakened-capstone vacuity guard.
+
+## J4-586 (leg-2 center-gauge VARIANT curved_leg2_hLapFull_center — rethread step 2)
+Leg2HLapFullCenter.lean: `curved_leg2_hLapFull_center` — center-only variant of Leg2HLapFull.curved_leg2_hLapFull
+(mirrors leg-1 J4-585). Sig IDENTICAL EXCEPT {hK0,hframeK}→hg0:∀i j g 0 i j=δ (K/hK retained). Conclusion=SAME
+MemLapFull (not weakened). Proof THIN (2 lines): obtain ⟨hgi,hΓ⟩:=gauge_from_pointwise g gi hg0 hinvF hdg0;
+exact memLapFull_from_labelled_capped…hgi hΓ… (J4-540 takes gauge members explicit ⟹ NO census re-elab, 27s).
+Gauge swap gauge_from_geometry→gauge_from_pointwise. Main verified: hg0 no hframeK/hK0; conclusion=MemLapFull;
+Leg2HLapFull.lean/CurvedA1Leg2Core.lean UNTOUCHED; std-3. hg0 curved-satisfiable via curvedRNCMetric_zero,
+∂²g(0) free ⟹ no K={0} ⟹ J4-582 vacuity removed leg-2. budget raw 0, 9862 jobs. ★ BOTH LEGS have center variants
+(leg-1 J4-585, leg-2 J4-586). a₁=R/6 non-vacuous only FLAT tower. J4-587 = thread hg0 up through curved_hDa_at_gate
+(→hDaLimLU_from_labelled_capped_center) + curved_core_at_gate (→curved_leg2_hLapFull_center) + curved_a1_R6_fully_wired
+dropping {hK0,hframeK} → curved_a1_R6_fully_wired_center + weakened-capstone vacuity guard (watch for higher core
+sites where hframeK flows into a census monolith — add _of_gauge abstraction if so).
