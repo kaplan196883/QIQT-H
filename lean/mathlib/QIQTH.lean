@@ -2174,3 +2174,14 @@ import QIQTH.WhiteGated
 -- n=2 κ=−1. NOT a1=R/6 (hEbound/hInt at the whitened kernel, K1TransportBudget, fat-K
 -- carriers, capstone co-instantiation at the whitened witness, R2 width + prior piles owed).
 import QIQTH.WhiteAnnulus
+-- J4-627 (WhiteBridge): the BRIDGE FEED — J4-626's whitened hpkgBound threaded into the bridge
+-- consumer chain. whiteDefectKernel = τ-gated ((0,1]) heatOp defect of the whitened gated
+-- witness (gate dissolves the affine C(1+t') obstruction → fixed-constant full-∀τ α=−1/2 bound);
+-- width-κ α-PARAMETRIC hInt producer (FrozenWire un-pinned from width 2); ★ white_tail_O_s_
+-- discharged: ∀ κ≤0, compact K⊆B̄(0,R), ∃ fat gate + lam≥2 with the k≥2 tail O(s)·G_{lam·s}
+-- MODULO exactly one labelled input (S1 tripleHEmeas of the WHITENED witness); ★ white_
+-- transport_bridge/white_corrHigher = bridge + bounded-cRem API carrying additionally
+-- hlam8: lam≤8 (⟺ nC₀²≤3, opaque C₀ — the R2 width reconciliation). NOT a1=R/6 (S1 hEmeas at
+-- the whitened witness, R2 lam≤8, K1TransportBudget, fat-K carriers, capstone co-instantiation
+-- at the whitened witness + prior piles still owed).
+import QIQTH.WhiteBridge

@@ -25091,6 +25091,40 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteAnnulus.white_hpkgBound_discharged
 #print axioms QIQTH.WhiteAnnulus.white_discharged_witness_gate
 
+-- ── J4-627 (WhiteBridge): the BRIDGE FEED — the J4-626 whitened hpkgBound threaded into the
+-- bridge consumer chain.  whiteDefectKernel = τ-GATED ((0,1]) heatOp defect of the whitened
+-- gated witness (gate dissolves the affine C(1+t') obstruction → fixed 2C full-∀τ bound);
+-- white_hEuni (τ-capped O(1)) + white_hEbound_negHalf (α=−1/2 a fortiori, full ∀τ);
+-- iterConvIntegrableW_of_bound_baseMeas_alpha_w = the WIDTH-κ α-PARAMETRIC hInt producer
+-- (FrozenWire α-producer un-pinned from width 2); ★ white_tail_O_s(_discharged): for every
+-- κ≤0, compact K⊆B̄(0,R), ∃ fat gate + lam≥2 with the k≥2 tail O(s)·G_{lam·s} MODULO exactly
+-- ONE labelled input = S1 tripleHEmeas of the WHITENED witness (not banked; the vanVleck S1
+-- campaign is the precedent, not a corollary); ★ white_transport_bridge/white_corrHigher =
+-- the bridge + bounded-cRem API, carrying ADDITIONALLY hlam8 : lam ≤ 8 (whiteLam≤8 ⟺ nC₀²≤3,
+-- opaque C₀ — the R2 width reconciliation, re-exported as white_bridge_width_condition).
+-- NOT a1=R/6 (S1 hEmeas at the whitened witness, R2 lam≤8, K1TransportBudget, fat-K carriers,
+-- capstone co-instantiation at the whitened witness + prior piles still owed).
+-- expected: standard 3
+#print axioms QIQTH.WhiteBridge.hEbound_negHalf_of_hEuni
+#print axioms QIQTH.WhiteBridge.modelZ_integrableW_alpha_w
+#print axioms QIQTH.WhiteBridge.modelS_intervalIntegrableW_alpha_w
+#print axioms QIQTH.WhiteBridge.iterConvIntegrableW_model_alpha_w
+#print axioms QIQTH.WhiteBridge.iterConvIntegrableW_of_bound_baseMeas_alpha_w
+#print axioms QIQTH.WhiteBridge.whiteDefectKernel_eq
+#print axioms QIQTH.WhiteBridge.whiteDefectKernel_zero_nonpos
+#print axioms QIQTH.WhiteBridge.whiteDefectKernel_zero_gt_one
+#print axioms QIQTH.WhiteBridge.whiteDefectKernel_stronglyMeasurable
+#print axioms QIQTH.WhiteBridge.white_hEuni
+#print axioms QIQTH.WhiteBridge.white_hEbound_negHalf
+#print axioms QIQTH.WhiteBridge.white_hInt
+#print axioms QIQTH.WhiteBridge.white_tail_O_s
+#print axioms QIQTH.WhiteBridge.white_tail_O_s_discharged
+#print axioms QIQTH.WhiteBridge.white_transport_bridge
+#print axioms QIQTH.WhiteBridge.white_corrHigher
+#print axioms QIQTH.WhiteBridge.white_bridge_feed_witness_gate
+#print axioms QIQTH.WhiteBridge.producer_antecedent_satisfiable_w
+#print axioms QIQTH.WhiteBridge.white_bridge_width_condition
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
