@@ -1855,3 +1855,13 @@ import QIQTH.CurvedA1Hjets
 -- (curvedRNC_baseWitness_dom), hBdom = D2/convergence-trio frontier → hContDom NOT fully closed. std-3.
 -- NOT a₁=R/6 (capstone still owes {hAdom,hBdom,hmeas,hcont} + census/domination/convergence-trio/hmassone-pre-ρ/hjets).
 import QIQTH.CurvedA1HContDom
+-- J4-597 (CurvedA1HBdom): discharges (modulo the SINGLE M1 carry hEmeas) hBdom — the width-2 Levi-series
+-- Gaussian domination for g^K (κ<0), the D2/convergence-trio frontier flagged "NOT attempted" by
+-- ConcreteDominations. Route (banked, at the pkg's ∃ gate params): curvedRNC_heatOp_dom_pkg (clean uncapped
+-- width-2 defect bound) → iterConvIntegrableW_of_locally_bound_baseMeas (hEzero banked, 1≤n) →
+-- leviSeries_dominatedW_le (width stays EXACTLY 2 at every iterate; C_L = Σ' C^(k+1)·modelCoeff finite) →
+-- baseKernelW_zero_apply ⟹ EXACT hBdom binder |leviSeries(heatOp g^K gi^K W)| ≤ C_L·gaussDdim(2s)(z−y) on
+-- (0,T]. curved_hInnerCont_of_pkg = consumption certificate: hBdom slot of the J4-596 builder CLOSED —
+-- hInnerCont now owes {hEmeas, hAdom, hmeas, hcont}. curved_hBdom_satisfiable = NON-FLAT (κ<0,n≥2). std-3.
+-- NOT a₁=R/6 (still owes hEmeas M1 wall + hAdom global + hmeas/hcont + piles/trio/hmassone-pre-ρ/hjets).
+import QIQTH.CurvedA1HBdom

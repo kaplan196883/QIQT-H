@@ -24263,6 +24263,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HContDom.curved_hInnerCont_of_dominations
 #print axioms QIQTH.CurvedA1HContDom.curved_hContDom_satisfiable
 
+-- J4-597 (CurvedA1HBdom): discharges (modulo the SINGLE M1 measurability carry hEmeas) hBdom — the
+-- width-2 Levi-series Gaussian domination for g^K = curvedRNCMetric κ (κ<0), the exposed bottleneck of
+-- the J4-596 hContDom/hInnerCont reduction and the D2/convergence-trio frontier (ConcreteDominations:
+-- "NOT attempted: (D2)"). ROUTE (all banked, composed at the pkg's own ∃ gate parameters 0<a<b<c):
+-- curvedRNC_heatOp_dom_pkg (J4-536, CLEAN uncapped all-t' width-2 defect bound |heatOp g^K gi^K W| ≤
+-- C(1+t')·baseKernelW 2 0) → iterConvIntegrableW_of_locally_bound_baseMeas (hInt; hEzero banked via
+-- heatOp_gatedWitnessN1_eq_zero_of_nonpos, needs 1≤n) → leviSeries_dominatedW_le (J4-114 D2 engine;
+-- WIDTH BOOKKEEPING: iterKernelW 2 0 k factors as modelCoeff·gaussDdim(2τ) — width stays EXACTLY 2 at
+-- every Duhamel iterate, k-growth absorbed into the factorially-decaying modelCoeff scalars; C_L =
+-- Σ' C^(k+1)·modelCoeff 0 T (k+1) finite) → baseKernelW_zero_apply ⟹ the EXACT hBdom binder
+-- |leviSeries (heatOp g^K gi^K W) s z y| ≤ C_L·gaussDdim(2s)(z−y) on (0,T]. CLEAN bound (no min-cap),
+-- CLEAN width 2 (no widening). curved_hBdom_at_gate = ∃ a b c gate params, hEmeas → ∃ C_L ≥ 0, hBdom.
+-- curved_hInnerCont_of_pkg = CONSUMPTION certificate: the produced hBdom genuinely fills the J4-596
+-- builder slot — given hEmeas + {hAdom,hmeas,hcont} at the same gate params, the capstone's hInnerCont
+-- ContinuousOn conclusion HOLDS for g^K (via curved_hInnerCont_of_dominations). hBdom slot CLOSED;
+-- hInnerCont now owes {hEmeas, hAdom, hmeas, hcont}. curved_hBdom_satisfiable = NON-FLATNESS (κ<0,n≥2:
+-- ∃w,1<det g^K w). HONEST RESIDUAL: hEmeas (joint StronglyMeasurable of the curved defect kernel — the
+-- M1 wall; banked suppliers tripleHEmeas_concrete/_v4 still carry their measurable-supplier data
+-- blocks, NOT free) + hAdom global form + hmeas + hcont; gate params are the pkg's ∃, not universal
+-- (fine — the builder's a b c T are free, as the consumption certificate PROVES). All std-3. NOT
+-- a₁=R/6 (capstone still owes the above + census/domination piles, convergence trio, hmassone pre-ρ,
+-- hjets residual).
+#print axioms QIQTH.CurvedA1HBdom.curved_hBdom_at_gate
+#print axioms QIQTH.CurvedA1HBdom.curved_hInnerCont_of_pkg
+#print axioms QIQTH.CurvedA1HBdom.curved_hBdom_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
