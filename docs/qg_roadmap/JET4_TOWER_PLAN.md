@@ -7141,3 +7141,22 @@ GatedRepSFix.tripleHEmeas_concrete_v4's measurable-supplier blocks (hcarTau/hcar
 hKSmeas) at the curved witness (makes hBdom fully unconditional AND feeds the assembly ladder's
 shared hEmeas slot). Alternative: hAdom lift (frozen-p=0 curvedRNC_baseWitness_dom → global
 all-p,q width-3/2).
+
+### J4-598 [AF] — hEmeas measurability content CLOSED for g^K; M1 carry → arithmetic reach residual (a05b98ec)
+CurvedA1HEmeas.lean: `curved_hEmeas_at_gate` = the literal J4-597 hEmeas binder — joint
+StronglyMeasurable of the defect kernel on ALL of ℝ×Pⁿ×Pⁿ (Route B, continuity-free:
+measurable Gc/indicator representatives + Lusin–Souslin gate graph; boundary-honest across
+τ≤0, no ite caveat). One hop from banked J4-561 census chain (tripleHEmeas_AT_CONSTRADIUS_GATE
+← tripleHEmeas_flowball_geometry ← JetsGcUnification.tripleHEmeas_Gc_concrete;
+HEmeasBorelAudit.tripleHEmeas definitionally the binder — constGate unfolds to flow-ball gate).
+The recommended v4 supplier-block route was NOT needed (DON'T-UNDERCREDIT win).
+`curved_hBdom_of_reach` = J4-597 hBdom with M1 measurability REPLACED by pure arithmetic
+residual c<δ₀(a,b) — ⚠ HONEST OPEN: alignment at the pkg's own c=(b+ρc)/2 unproved
+(quantifier order of the three Gc suppliers verified: δ₀ ∃-bound AFTER a,b; pkg's c produced
+independently). `curved_hInnerCont_of_reach` = ladder consumption with hEmeas slot discharged.
+hInnerCont carries now {c<δ₀ reach-alignment, hAdom-global, hmeas, hcont} (+hu labelled).
+std-3, budget raw 0 (9874 jobs).
+**J4-599 recommendation**: reach-alignment closure — `curvedRNC_heatOp_dom_pkg_small` variant
+replicating gatedWitnessN1_hEboundW_le_lin_CONST (ConstRadiusGateExport.lean:226–397, mechanical)
+with ρc := min(min(min rN δ₀_chart) r₁) ε for prescribed ε ⟹ c=(b+ρc)/2<ε, then b<δ₀(a,b)
+compatibility ⟹ real curved_hBdom_unconditional. Alternative: hAdom-global lift.
