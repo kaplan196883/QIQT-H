@@ -6935,3 +6935,19 @@ hDaLimLU_from_labelled_capped_center in DaLimLUCappedStep3 (rethread the single 
 gauge_from_pointwise, SPLICE-only census body untouched); (2) mirror Leg2HLapFull.curved_leg2_hLapFull L151
 (shallow gauge site); (3) thread hg0:=curvedRNCMetric_zero up through curved_hDa_at_gate/core/capstone dropping
 hframeK; (4) re-run curved_center_antecedents_nonvacuous as the weakened-capstone vacuity guard.
+
+## J4-585 (leg-1 center-gauge VARIANT of the DaLimLU monolith site — rethread step 1)
+DaLimLUCappedStep3Center.lean: `hDaLimLU_from_labelled_capped_center` — center-only-gauge variant of
+DaLimLUCappedStep3.hDaLimLU_from_labelled_capped. Sig IDENTICAL EXCEPT {hK0,hframeK}→hg0:∀i j g 0 i j=δ
+(K/hK retained — gated witness uses pervasively; only hK0/hframeK dropped, fed gauge site alone). Conclusion=
+SAME DaLimLUGoal (not weakened). Proof=original VERBATIM except ONE gauge line (215): gauge_from_geometry g gi
+hK0 hframeK hinvF hdg0 → DaLimCurvedGauge.gauge_from_pointwise g gi hg0 hinvF hdg0 (identical gauge-member
+output). ★ Census body is a SEPARATE assembly of already-compiled lemmas (witness_MemInterchange/source_from_leviData/
+integrability_from_dominations_capped/memLapFull_from_labelled/eCombine_from_data/hDaLimLU_concrete) taking gauge
+members as explicit args — NO inlined census, NO _of_gauge abstraction needed, NO 85-binder re-elaboration
+(30s build). Main verified: hg0 binder no hframeK/hK0; gauge site swapped (L190 gauge_from_pointwise); conclusion=
+DaLimLUGoal; DaLimLUCappedStep3.lean UNTOUCHED; std-3. hg0 curved-satisfiable via curvedRNCMetric_zero, doesn't
+force K={0} ⟹ J4-582 vacuity removed on leg-1. budget raw 0, 9861 jobs. a₁=R/6 non-vacuous only for FLAT tower.
+J4-586 = mirror leg-2 (CurvedA1Leg2Core.lean L262 gauge_from_geometry in curved_leg2_hLapFull/MemLapFull → center
+variant via gauge_from_pointwise); then J4-587 thread hg0:=curvedRNCMetric_zero up through curved_hDa_at_gate/
+curved_core_at_gate/curved_a1_R6_fully_wired dropping hframeK + weakened-capstone vacuity guard.
