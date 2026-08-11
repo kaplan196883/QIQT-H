@@ -1959,3 +1959,19 @@ import QIQTH.CurvedA1CenterAmp
 -- layer 1 WILL surface there), tau-narrow residuals, producer re-assembly; plus fat-K
 -- hEmeas/hAdom/hcont + capstone co-instantiation.
 import QIQTH.CurvedA1CenterChr
+-- J4-606 (CurvedA1CenterCoeff): THIRD layer of the (hbound-fat) wall — center-gauge uniformCoeff_bound /
+-- uniformCoeffLinear_bound. hframeK's two use-sites: hdev (layer-1 center, pays Md*(rncRadialSq+eps0) at
+-- the (A1) trace AND the (TC) coeffDevF entries) and hChb (layer-2 center, FREE); the entry bound (Kg)
+-- and heat-side EVT blocks never took hframeK. Honest degraded form
+-- |totalRadialO1_coeff| <= C_c*rncRadialSq v + C_eps*eps0 (Linear: *rncRadial v) with a REAL 0th-order
+-- floor C_eps*eps0 (does NOT vanish as v->0); C_c literally the banked constant; rho_c/C_c/C_eps all
+-- produced BEFORE eps0 (no eps0-inflation). Landed: uniformCoeff_bound_center (THE BRICK),
+-- uniformCoeffLinear_bound_center (no-flatness branch for the shifted van-Vleck profile),
+-- curvedRNC_coeff_bound_center / curvedRNC_coeffLinear_bound_center (fat-K curved instantiations,
+-- k<=0, explicit eps0=(|k|/3)*n*r^2, supplier curvedRNC_frame_dev_on_ball),
+-- curvedRNC_coeff_center_satisfiable (non-vacuity: fat K nonzero point + heat-side antecedents
+-- INHABITED (Theta=1,u=1 => foldedCoeff=1, smooth+center-flat) + hdevK holds at the curved witness).
+-- std-3 all 5. NOT a1=R/6: remaining (hbound-fat) layers = center-gauge tau-narrow residuals (the
+-- C_eps*eps0 term enters the T1 slot as a (1/tau)-weighted constant coefficient — layer 4 must track
+-- it, not drop it), producer re-assembly; plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation.
+import QIQTH.CurvedA1CenterCoeff

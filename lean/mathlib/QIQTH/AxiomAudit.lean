@@ -24499,6 +24499,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterChr.curvedRNC_Chr_linear_decay_center
 #print axioms QIQTH.CurvedA1CenterChr.curvedRNC_Chr_center_satisfiable
 
+-- J4-606 (CurvedA1CenterCoeff): THIRD layer of the (hbound-fat) wall — the center-gauge variant of the
+-- uniform coefficient bounds uniformCoeff_bound (O(r²), J4-87 R3) / uniformCoeffLinear_bound (O(r),
+-- J4-108 L2). USE-SITE MAP: hframeK entered both banked bounds through EXACTLY TWO inner calls —
+-- (i) uniformFlowPullbackMetricInv_dev_uniform (hdev), consumed at TWO algebra sites: the (A1)
+-- diagonal trace ½Σ(g̃⁻¹ᵢᵢ−1) in coeffAF AND every coeffDevF entry (TC); (ii)
+-- uniformFlowChristoffel_linear_decay (hChb) at the (A2) contraction. The entry bound (Kg) and the
+-- heat-side EVT blocks (W, Kw) never took hframeK. Substitution: (i) → layer 1 center deviation
+-- (Md·(rncRadialSq v + ε₀) — THE ε₀ DEBT SURFACES at both sites); (ii) → layer 2 center decay (FREE).
+-- HONEST DEGRADED FORM (no suppression): |totalRadialO1_coeff| ≤ C_c·rncRadialSq v + C_ε·ε₀ (resp.
+-- ·rncRadial v), with a REAL 0th-order term C_ε·ε₀ that does not vanish as v→0; C_c is LITERALLY the
+-- banked constant, and ρ_c/C_c/C_ε are all produced BEFORE ε₀ (no ε₀-inflation; only the additive
+-- floor moves). C_ε = ½n·Md·W + n²·Md·Kw₂·ρ_c² (Linear: + n²·Md·Kw·Rmax slot). Landed:
+-- uniformCoeff_bound_center (THE BRICK), uniformCoeffLinear_bound_center (no-flatness branch for the
+-- shifted van-Vleck profile), curvedRNC_coeff_bound_center / curvedRNC_coeffLinear_bound_center
+-- (fat-K curved instantiations, κ≤0, every r, explicit ε₀=(|κ|/3)·n·r², all geometric carries from
+-- banked curved lemmas + supplier curvedRNC_frame_dev_on_ball). NON-VACUITY (cp466):
+-- curvedRNC_coeff_center_satisfiable = fat K contains a NONZERO point AND the heat-side antecedents
+-- (hw0smooth/hw0flat) are INHABITED (Θ=1, u=1 ⟹ foldedCoeff=1) AND hdevK holds at the curved witness
+-- with the explicit ε₀ — every antecedent of the center theorems exhibited satisfiable at fat K.
+-- CONSUMABILITY: layer-4 engines take hCoeffU/hCoeffLin as explicit hypotheses of shape ≤C_c·r²(r);
+-- the center shape adds +C_ε·ε₀, which enters layer 4's T1 slot as a (1/τ)-weighted constant
+-- coefficient — must be tracked, not dropped. std-3 all 5. NOT a1=R/6 (flat tower only; curved
+-- re-base still owes layers 4-5 = center-gauge τ-narrow residuals → producer re-assembly, plus fat-K
+-- hEmeas/hAdom/hcont + capstone co-instantiation + piles/trio/hmassone-pre-ρ/hjets).
+#print axioms QIQTH.CurvedA1CenterCoeff.uniformCoeff_bound_center
+#print axioms QIQTH.CurvedA1CenterCoeff.uniformCoeffLinear_bound_center
+#print axioms QIQTH.CurvedA1CenterCoeff.curvedRNC_coeff_bound_center
+#print axioms QIQTH.CurvedA1CenterCoeff.curvedRNC_coeffLinear_bound_center
+#print axioms QIQTH.CurvedA1CenterCoeff.curvedRNC_coeff_center_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
