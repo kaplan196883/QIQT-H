@@ -24850,6 +24850,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CoInstSmoke.smoke_corrHigher_wired_vanVleck
 #print axioms QIQTH.CoInstSmoke.smoke_coinstantiation
 
+-- J4-618 (BridgeDefect): the FrozenTransportBridge REDUCTION. ACCOUNTING VERDICT: the bridge
+-- Prop compares ONLY the two k>=2 tails (leviSeries E + E kills the k=1 term -E exactly), so
+-- NO frozen-vs-transport difference estimate is needed: triangle from two SEPARATE O(s) tail
+-- bounds. Frozen side banked (frozenColumn_tail_O_s, J4-616); transport side derived
+-- GENERICALLY: bridgeGenericK2_O_s = k=2 is O(s) under a UNIFORM O(1) Gaussian domination
+-- |E| <= C_U*G_{2tau} at ALL rows (the (0,0) Beta step: int_0^s dsigma = s, exact C-K
+-- G_{2(s-sigma)}*G_{2sigma}=G_{2s} — the s comes FREE from the time integral, no J4-616
+-- structured-coefficient machinery); k>=3 by the banked GENERIC J4-613 ladder;
+-- bridgeGeneric_tail_O_s glues (+one widening G_{2s}<=2^n G_{8s}).
+-- frozenTransportBridge_of_dominations: the bridge holds under {alpha=-1/2 bound, uniform
+-- O(1) bound, per-step integrability} — REDUCED from a Levi-comparison wall to a
+-- domination-supplier pile. transport_bridge_of_dominations/_corrHigher_: pinned at the
+-- capstone's OWN capstoneDefect (heatOp of vanVleckGatedWitness), chained through
+-- smoke_bridge_verdict => full bounded-cRem O(t^2) API for the transport tail under carried
+-- labelled dominations (hEuni = hAdomHeat's shape at all rows/width 2 — STRICTLY STRONGER,
+-- honest carry). NON-VACUITY: bridgeWitnessKernel (time-gated flat Gaussian, nonzero)
+-- satisfies ALL THREE dominations with PROOFS (C=C_U=1) => frozenTransportBridge_witness =
+-- an unconditionally PROVED bridge instance at curved frozen data kappa=-1, r=1/2. std-3
+-- all. NOT a1=R/6 (transport dominations owed + k=1 K1TransportBudget + producer
+-- re-assembly + fat-K piles + full capstone co-instantiation remain).
+#print axioms QIQTH.BridgeDefect.bridgeGenericK2_O_s
+#print axioms QIQTH.BridgeDefect.bridgeGeneric_tail_O_s
+#print axioms QIQTH.BridgeDefect.frozenTransportBridge_of_tail_O_s
+#print axioms QIQTH.BridgeDefect.frozenTransportBridge_of_dominations
+#print axioms QIQTH.BridgeDefect.transport_bridge_of_dominations
+#print axioms QIQTH.BridgeDefect.transport_corrHigher_of_dominations
+#print axioms QIQTH.BridgeDefect.bridgeWitnessKernel_iterConvIntegrable
+#print axioms QIQTH.BridgeDefect.bridgeWitnessKernel_ne_zero
+#print axioms QIQTH.BridgeDefect.frozenTransportBridge_witness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

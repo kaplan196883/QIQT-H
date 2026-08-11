@@ -2094,3 +2094,11 @@ import QIQTH.AffineDiff
 -- NOT a1=R/6 (k=1 transport-cancellation + producer re-assembly + capstone piles remain).
 import QIQTH.FrozenK2Sharp
 import QIQTH.CoInstSmoke
+-- J4-618 (BridgeDefect): FrozenTransportBridge REDUCED — the bridge compares only the two
+-- k>=2 tails (k=1 cancels), so triangle from separate O(s) tail bounds suffices; frozen side
+-- banked (J4-616), transport side GENERIC under a uniform O(1) Gaussian domination (the (0,0)
+-- Beta step gives the s for free) + banked k>=3 ladder. Bridge + bounded-cRem O(t^2) API now
+-- hold at the capstone's own capstoneDefect under carried labelled hAdom-family dominations;
+-- non-vacuity: a proved bridge instance at a nonzero gated-Gaussian witness (kappa=-1,r=1/2).
+-- NOT a1=R/6 (transport dominations owed + K1TransportBudget + fat-K piles remain).
+import QIQTH.BridgeDefect
