@@ -1751,3 +1751,5 @@ import QIQTH.CurvedA1FintHFarCoercivity
 import QIQTH.CurvedA1FarConsumeCheck
 
 import QIQTH.CurvedA1FrameAudit
+
+import QIQTH.CurvedA1CenterGauge

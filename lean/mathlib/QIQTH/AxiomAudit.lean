@@ -24031,6 +24031,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FrameAudit.curved_gauge_from_center
 #print axioms QIQTH.CurvedA1FrameAudit.curved_frame_salvage_certificate
 
+-- J4-584: CURVED-CAPSTONE SALVAGE non-vacuity CERTIFICATE (the anti-J4-582). Re-establishes the curved
+-- a₁ two-jet capstone's antecedents as NON-VACUOUS after the J4-583 center-only gauge weakening.
+-- curved_center_antecedents_nonvacuous: at every κ<0, n≥2 there is a GENUINE compact base set
+-- K=closedBall 0 1 (contains a nonzero pt — NOT the J4-582 collapsed {0}) on which (i) 0∈K, (ii) K has a
+-- nonzero point, (iii) BOTH center-only gauge members hold WITHOUT hframeK/hK0 (curved_gauge_from_center),
+-- (iv) the metric is GENUINELY CURVED (Ric(0)-proxy ≠ 0), (v) the flat frame hframeK PROVABLY FAILS on K.
+-- So the WEAKENED (center-only) antecedent bundle is JOINTLY SATISFIABLE at the curved witness — the
+-- J4-582 K={0} collapse (which killed hmassone) is GONE: the gated SOURCE support ∃z≠0,z∈K is non-trivial.
+-- curved_center_gate = the antecedent-INHABITANCE gate (contrast the coefficient-only _curved_satisfiable
+-- gate that J4-582 exploited). This CERTIFIES the fix is sound+non-vacuous; it does NOT perform the full
+-- in-place binder rethread (leg-1 hframeK flows into the census monolith hDaLimLU_from_labelled_capped —
+-- deferred to J4-585). std-3 all. NOT a₁ = R/6 (the curved capstone binders are not yet weakened).
+#print axioms QIQTH.CurvedA1CenterGauge.half_axis_mem_ball
+#print axioms QIQTH.CurvedA1CenterGauge.curved_center_antecedents_nonvacuous
+#print axioms QIQTH.CurvedA1CenterGauge.curved_center_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
