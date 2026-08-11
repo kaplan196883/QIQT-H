@@ -24440,6 +24440,40 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hBdom_noncollapse
 #print axioms QIQTH.CurvedA1ReBaseHBdom.rebased_hBdom_curved_satisfiable
 
+-- J4-604 (CurvedA1CenterAmp): FIRST layer of the (hbound-fat) wall — the center-only-gauge variant of
+-- the uniform-flow pullback inverse-metric deviation bound. USE-SITE VERDICT: in the banked
+-- uniformFlowPullbackMetricInv_dev_uniform, hframeK is INITIAL-CONDITION-ONLY — its sole entry is the
+-- flow-time-0 value jet g̃(0)=g(q) (expPullbackMetric_at_zero through the weld); the pd-jet
+-- (pd_expPullbackMetric_at_zero), the uniform C² packet (uniformFlowPullbackMetric_c2_uniform_full) and
+-- the uniform inverse bound (uniformInverseMetric_bound) are all FRAME-FREE. So the center-gauge replay
+-- replaces hframeK by hdevK: ∀q∈K, |g(q)−δ| ≤ ε₀ and pays exactly +ε₀: forward
+-- |g̃(v)−δ| ≤ M‖v‖²+ε₀ (Taylor recentred at the true value g̃(0)=g(q)), inverse
+-- |g̃⁻¹(v)−δ| ≤ M(rncRadialSq v+ε₀) (Neumann push unchanged), with r₀/M produced BEFORE ε₀ — M
+-- INDEPENDENT of ε₀. Supplier: curvedRNC_frame_dev_pointwise/_on_ball = the honest explicit deviation
+-- |g^κ(q)−δ| ≤ (|κ|/3)·rncRadialSq q ≤ (|κ|/3)·n·r² on closedBall 0 r (diagonal ‖q‖²−qᵢ², off-diagonal
+-- AM–GM |qᵢqⱼ| ≤ (qᵢ²+qⱼ²)/2 ≤ rncRadialSq — no false constant). FAT-K CURVED INSTANTIATION:
+-- curvedRNC_pullbackInv_dev_uniform_center (κ≤0, every r; all carries discharged from banked curved
+-- lemmas: curvedRNCMetric_contDiff / hgnd_of_hgpos∘curvedRNCMetric_hgpos / curvedRNCMetric_symm /
+-- curvedRNCMetric_hinvF / curvedRNC_hChr=christoffel_contDiff). NON-VACUITY (cp466 discipline):
+-- curvedRNC_center_gauge_satisfiable = fat K contains a NONZERO point AND hdevK holds with the explicit
+-- ε₀ (no K⊆{0} collapse, contrast rebased_hframeK_unsat); curvedRNC_center_eps_arbitrarily_small = ε₀
+-- achievable < any ε>0 by shrinking r with K staying fat. REMAINING (hbound-fat) LAYERS (in order):
+-- center-gauge uniformFlowChristoffel_linear_decay → uniformCoeff(Linear)_bound →
+-- uniformResidual*_tau_narrow → producer re-assembly (cutoffResidualN1… → …_CONST → fat-K dom pkg).
+-- std-3 all 11. NOT a1=R/6 (flat tower only; curved re-base still owes (hbound-fat) + fat-K
+-- hEmeas/hAdom/hcont + capstone co-instantiation + piles/trio/hmassone-pre-ρ/hjets).
+#print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_frame_dev_pointwise
+#print axioms QIQTH.CurvedA1CenterAmp.rncRadialSq_le_of_mem_closedBall
+#print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_frame_dev_on_ball
+#print axioms QIQTH.CurvedA1CenterAmp.uniformFlowPullbackMetric_zero_center
+#print axioms QIQTH.CurvedA1CenterAmp.uniformFlowPullbackMetric_pd_zero_center
+#print axioms QIQTH.CurvedA1CenterAmp.uniformFlowPullbackMetric_dev_uniform_center
+#print axioms QIQTH.CurvedA1CenterAmp.uniformFlowPullbackMetricInv_dev_uniform_center
+#print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_hChr
+#print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_pullbackInv_dev_uniform_center
+#print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_center_gauge_satisfiable
+#print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_center_eps_arbitrarily_small
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

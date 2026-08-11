@@ -1927,3 +1927,19 @@ import QIQTH.CurvedA1ReBase
 -- OPEN gate + positive base measure: the series is NOT -E by the J4-602 mechanism). std-3 all 9.
 -- NOT a1=R/6: (hbound-fat) producer, fat-K hEmeas/hAdom/hcont, capstone co-instantiation remain OWED.
 import QIQTH.CurvedA1ReBaseHBdom
+-- J4-604 (CurvedA1CenterAmp): FIRST layer of the (hbound-fat) wall — center-only-gauge variant of the
+-- uniform-flow pullback-metric deviation bound. USE-SITE VERDICT (by construction): in the banked
+-- uniformFlowPullbackMetricInv_dev_uniform, hframeK is INITIAL-CONDITION-ONLY (sole entry = value jet
+-- g~(0)=g(q) via expPullbackMetric_at_zero; the pd-jet, the uniform C2 packet, and the uniform inverse
+-- bound are all frame-free). Center-gauge replay replaces hframeK by hdevK (|g(q)-delta| <= eps0 on K)
+-- and pays EXACTLY +eps0: forward |g~(v)-delta| <= M*|v|^2+eps0, inverse |g~inv(v)-delta| <=
+-- M*(rncRadialSq v+eps0), with r0/M produced BEFORE eps0 (M independent of eps0). Supplier:
+-- curvedRNC_frame_dev_pointwise/_on_ball = |g^k(q)-delta| <= (|k|/3)*rncRadialSq q <= (|k|/3)*n*r^2 on
+-- closedBall 0 r (honest, entrywise from the closed form). FAT-K CURVED INSTANTIATION:
+-- curvedRNC_pullbackInv_dev_uniform_center (k<=0, all carries discharged: curvedRNCMetric_contDiff /
+-- hgnd_of_hgpos+curvedRNCMetric_hgpos / curvedRNCMetric_symm / curvedRNCMetric_hinvF / curvedRNC_hChr).
+-- NON-VACUITY: curvedRNC_center_gauge_satisfiable (fat K has nonzero point AND hdevK holds) +
+-- curvedRNC_center_eps_arbitrarily_small (eps0 -> 0 with r). std-3 all 10. NOT a1=R/6: remaining
+-- (hbound-fat) layers = center-gauge Christoffel decay, uniformCoeff bounds, tau-narrow residuals,
+-- producer re-assembly; plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation.
+import QIQTH.CurvedA1CenterAmp
