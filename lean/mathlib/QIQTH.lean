@@ -2102,3 +2102,9 @@ import QIQTH.CoInstSmoke
 -- non-vacuity: a proved bridge instance at a nonzero gated-Gaussian witness (kappa=-1,r=1/2).
 -- NOT a1=R/6 (transport dominations owed + K1TransportBudget + fat-K piles remain).
 import QIQTH.BridgeDefect
+-- J4-619 BridgeWidth: width-general (w in [2,8], tau-capped) bridge tail engine consuming the
+-- capstone's own carried domination shapes; hEuni landscape: hEuni RIDES ON the capstone's own
+-- hpkgBound carry (t'=1 slice, C_U=2C) — retired as a separate pile member; {0}-gate supply
+-- banked (J4-536) but DEGENERATE (tail identically 0); CONST route to fat K obstructed
+-- (hframeK forces K={0}); fat-K supplier = (hbound-fat)-class per-q transport analysis.
+import QIQTH.BridgeWidth

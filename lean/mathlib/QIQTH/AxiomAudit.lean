@@ -24880,6 +24880,51 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BridgeDefect.bridgeWitnessKernel_ne_zero
 #print axioms QIQTH.BridgeDefect.frozenTransportBridge_witness
 
+-- J4-619 BridgeWidth: (i) WIDTH-GENERAL tail engine — the J4-618 width-2 all-tau engine replayed
+-- at general width w with tau-CAPPED one-step bounds (the capstone's carried-domination gate
+-- shape): mixedColZW/mixedColSW (width-w mixed model pair via gaussDdim_conv_scaled),
+-- heatConv_le_of_abs_le_pos_right_capped (bounds demanded only on (0,t)), iterE_column_bound_w +
+-- leviSeries_column_k3_bound_w (width-w ladder, s in (0,1]), bridgeGenericK2_O_s_w (k=2 O(s) at
+-- any w>0), bridgeGeneric_tail_O_s_w (full k>=2 tail O(s)*G_{ws}, any w>0), _G8 (one widening
+-- G_{ws}<=2^n G_{8s}, HONEST single-step range w in [2,8]), frozenTransportBridge_of_dominations_w
+-- + capstone-pinned transport_bridge_of_dominations_w. (ii) THE hEuni LANDSCAPE:
+-- hEuni_of_hpkgBound — the capstone's OWN Section-C hpkgBound carry (all-rows width-2 O(1+t'))
+-- yields the engine's tau-capped hEuni at t'=1 with C_U=2C => transport_bridge_of_pkgBound /
+-- transport_corrHigher_of_pkgBound: bridge + bounded-cRem O(t^2) API from {hpkgBound carry,
+-- hEbound, hInt} — hEuni ELIMINATED as separate pile member (J4-618's "strictly stronger" caveat
+-- retired). {0}-gate: transport_hEuni_singleton_banked (J4-536 dom pkg = a TRUE banked hEuni at
+-- seed {0}) BUT capstoneDefect_singleton_offOrigin_zero + transport_tail_singleton_zero (k>=2
+-- tail IDENTICALLY 0 at {0}) + frozenTransportBridge_singleton_degenerate (bridge holds OUTRIGHT,
+-- content-free) — the DEGENERACY PIN. Fat-K obstruction: const_route_frame_forces_singleton
+-- (hframeK at kappa/=0,n>=2 forces K={0} — J4-582 re-pin) + const_route_fatK_tail_collapse (any
+-- CONST-route feed collapses the tail) => fat-K hEuni/hpkgBound supplier needs per-q TRANSPORT-
+-- amplitude analysis ((hbound-fat)-class; center gauge blocked by the genuine eps0/tau floor,
+-- J4-608). NON-VACUITY: bridgeWidth_witness_w2 (joint inhabitation at w=2, nonzero kernel,
+-- curved frozen data kappa=-1,r=1/2); bridgeWitnessKernel_uni_w4 (w=4 slot inhabited; width-w
+-- hInt producer honestly NOT built). std-3 all. NOT a1=R/6 (fat-K transport dominations +
+-- K1TransportBudget + fat-K carrier piles + capstone co-instantiation remain).
+#print axioms QIQTH.BridgeWidth.mixedColZW_integrable
+#print axioms QIQTH.BridgeWidth.mixedColSW_intervalIntegrable
+#print axioms QIQTH.BridgeWidth.heatConv_le_of_abs_le_pos_right_capped
+#print axioms QIQTH.BridgeWidth.iterE_column_bound_w
+#print axioms QIQTH.BridgeWidth.leviSeries_column_k3_bound_w
+#print axioms QIQTH.BridgeWidth.bridgeGenericK2_O_s_w
+#print axioms QIQTH.BridgeWidth.bridgeGeneric_tail_O_s_w
+#print axioms QIQTH.BridgeWidth.bridgeGeneric_tail_O_s_w_G8
+#print axioms QIQTH.BridgeWidth.frozenTransportBridge_of_dominations_w
+#print axioms QIQTH.BridgeWidth.transport_bridge_of_dominations_w
+#print axioms QIQTH.BridgeWidth.hEuni_of_hpkgBound
+#print axioms QIQTH.BridgeWidth.transport_bridge_of_pkgBound
+#print axioms QIQTH.BridgeWidth.transport_corrHigher_of_pkgBound
+#print axioms QIQTH.BridgeWidth.capstoneDefect_singleton_offOrigin_zero
+#print axioms QIQTH.BridgeWidth.transport_tail_singleton_zero
+#print axioms QIQTH.BridgeWidth.frozenTransportBridge_singleton_degenerate
+#print axioms QIQTH.BridgeWidth.transport_hEuni_singleton_banked
+#print axioms QIQTH.BridgeWidth.const_route_frame_forces_singleton
+#print axioms QIQTH.BridgeWidth.const_route_fatK_tail_collapse
+#print axioms QIQTH.BridgeWidth.bridgeWidth_witness_w2
+#print axioms QIQTH.BridgeWidth.bridgeWitnessKernel_uni_w4
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
