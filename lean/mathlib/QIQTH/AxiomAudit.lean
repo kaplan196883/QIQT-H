@@ -24821,6 +24821,35 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenK2Sharp.corrHigher_O_t2_restored
 #print axioms QIQTH.FrozenK2Sharp.frozenK2Sharp_H_witness
 
+-- J4-617 (CoInstSmoke): the capstone co-instantiation SMOKE TEST. FatFrozenPackage = ONE
+-- dependent record (curved kappa<0, n>=2, NESTED radii 0<rS<rK<rdomain, compact base with
+-- 0 in K, center gauge hg0, n(n-1)kappa/6 != 0 gate, J4-616 slice budget, frozen-defect
+-- nonzero witness) — fatFrozenPackage_inhabited instantiates ALL fields JOINTLY at kappa=-1,
+-- rS=1/2<rK=1<rdomain=2 (single constructor, NOT independent exists — the anti-{0}-collapse
+-- gate). BRIDGE VERDICT certified: the capstone hCorrHigher slot is general-F in SHAPE but
+-- its E is the TRANSPORT defect (heatOp of vanVleckGatedWitness), NOT frozenDefectKernel;
+-- feeding J4-609→616 into the capstone needs FrozenTransportBridge (the two k>=2 tails
+-- differ by O(s)*G_{8s} on the center column — stated, OWED) + K1TransportBudget (the k=1
+-- -E term of leviSeries_split — stated, OWED). smoke_bridge_verdict = the CERTIFIED
+-- transfer: bridge => bounded-cRem O(t^2) API for the transport tail, via the generic
+-- tail_slice_of_pointwise (banked slice proof abstracted over the pointwise tail bound) +
+-- bridged_tail_pointwise (triangle). gatedWitness_time_zero DISCHARGES the H(0,0,.)=0
+-- endpoint binder for the capstone's ACTUAL H; its Gaussian domination stays CARRIED
+-- labelled (hAdom-family pile) in smoke_corrHigher_wired_vanVleck. smoke_corrHigher_wired /
+-- smoke_coinstantiation = the frozen O(t^2) API fully fired at the capstone prefactor
+-- (heatKernel1D t 0)^n (pref>0 proved) from the single record — NO incompatibility found at
+-- the frozen-tail level. std-3 all. NOT a1=R/6 (bridge + k=1 + producer re-assembly +
+-- fat-K piles + full capstone co-instantiation remain).
+#print axioms QIQTH.CoInstSmoke.fatFrozenPackage_inhabited
+#print axioms QIQTH.CoInstSmoke.gatedWitness_time_zero
+#print axioms QIQTH.CoInstSmoke.leviSeries_split
+#print axioms QIQTH.CoInstSmoke.tail_slice_of_pointwise
+#print axioms QIQTH.CoInstSmoke.bridged_tail_pointwise
+#print axioms QIQTH.CoInstSmoke.smoke_bridge_verdict
+#print axioms QIQTH.CoInstSmoke.smoke_corrHigher_wired
+#print axioms QIQTH.CoInstSmoke.smoke_corrHigher_wired_vanVleck
+#print axioms QIQTH.CoInstSmoke.smoke_coinstantiation
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

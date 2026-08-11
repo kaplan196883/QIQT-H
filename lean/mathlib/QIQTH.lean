@@ -2093,3 +2093,4 @@ import QIQTH.AffineDiff
 -- the diagonal mass G_{8t}(0) explicitly; G_{8t}(0)/pref = 8^{-n/2}, a genuine constant).
 -- NOT a1=R/6 (k=1 transport-cancellation + producer re-assembly + capstone piles remain).
 import QIQTH.FrozenK2Sharp
+import QIQTH.CoInstSmoke
