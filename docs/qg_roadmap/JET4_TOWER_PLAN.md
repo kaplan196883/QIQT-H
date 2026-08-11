@@ -7428,3 +7428,19 @@ std-3, raw 0 (9889). Sol milestones wire✓ + FrozenDefectCenterZero✓ (audit-m
 **J4-613**: center-column α=0 series splice — column-mixed domination (outer α=−1/2, innermost
 column α=0, Beta(1/2,1) per step) ⟹ |leviSeries E_frozen (s,·,0)| ≤ C·G_{2s} ⟹ O(s) k≥2 tail
 slice estimate toward CorrHigherReduction's per-slice carry.
+
+### J4-613 [AF] — column-mixed series splice; tail honestly O(√s); k=2 isolated (c1a1e595)
+FrozenColumn.lean (14 decls). Mixed ladder L_k=(k−1)/2 (outer fresh E at −1/2, inner iterate
+keeps column 0 at α=0). ★DISCREPANCY RESOLVED (Sol-confirmed): J4-612 audit's O(s) assumed
+all-α=0; honest mixed tail = O(√s)·G (k=2 term; sharp for bounds (A)+(B)).
+★leviSeries_column_bound CLEAN ≤ C·G_{2s} (no s^{−1/2}); ★k≥3 sub-tail ALREADY O(s)
+(leviSeries_column_k3_bound); ★frozenColumn_k2_isolation: E∗E = SOLE obstruction. Frozen
+instantiations fully discharged. ★BUDGET VERDICT: √s ∉ t-uniform K·((t−s)+s) (certified);
+integrated O(t^{3/2}) = o(t) not O(t²); Sol: o(t) SUFFICES for a₁. Fix routes: (b) o(t)
+consumer variant (shortest, sufficient) OR k=2 Gaussian-bridge moment estimate (both end
+columns 0; gaussDdim_absorb_* family) to keep O(t²) API. Non-vacuity: r=0 forces q=0 witness.
+std-3, raw 0 (9890).
+**J4-614**: the k=2 bridge estimate (slice integrates z against H(t−s) 0 z centered at 0 —
+both end columns of E∗E at 0; quadratic-form center bound + moment absorption |x|^m·G_τ ≲
+τ^{m/2}·G_{cτ}) toward the O(s) slice budget; fallback/parallel = (b)-route consumer variant
+(per-slice K·(t+√s·√t) ⟹ pref·t^{3/2}) + capstone-side syntactic o(t) check.
