@@ -7601,3 +7601,16 @@ holds where the flat-phase pin fails. std-3, raw 0 (9901).
 whiteInvChart (parametric), off-gate heatOp vanishing, lift gateShaped to unconstrained ∀(p,q);
 then R2 (width-parametric capstone thread via BridgeWidth's width-w engine [2,8] range or
 sharpened displacement constant).
+
+### J4-625 [AF] — gating lift (capstone shape, labelled package) + width trichotomy (35df77d5)
+WhiteGated.lean (12 decls). ARCHITECTURAL FIND: flat tower = hard set-gate + in-kernel cutoff +
+3-leg cover (NO smooth-gate commutator); plateau ⟹ gated heatOp = ungated
+(whiteGated_heatOp_eq_deep unconditional); transition cost = single labelled hann annulus input.
+★white_hpkgBound: FULL ∀ t' τ p q capstone shape at honest width λ, conditional on labelled
+4-part package {gate openness, chart certificate, collar, hann}. R2 trichotomy PROVED: bridge
+consumes ANY width; G8-landing iff λ∈[2,8] (cost 2ⁿ); literal width-2 slot unreachable from λ>2
+(C₀ opaque choose — numeric route dead; λ≤8 ⟺ nC₀²≤3 unproved). Package S=∅ satisfiability
+w/ EXPLICIT degeneracy caveat (cp466). std-3, raw 0 (9902).
+**J4-626**: hann at the whitened kernel — the annulus fight CHART-SIDE (naturality weld holds
+for any C² section; whiteChart_heatOp_offdiag_bound_amp machinery lives there); secondary =
+gate-certificate legs (i)-(iii) from whiteInvChart_pack + whitened openness replay.
