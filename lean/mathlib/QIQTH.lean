@@ -2185,3 +2185,10 @@ import QIQTH.WhiteAnnulus
 -- the whitened witness, R2 lam≤8, K1TransportBudget, fat-K carriers, capstone co-instantiation
 -- at the whitened witness + prior piles still owed).
 import QIQTH.WhiteBridge
+-- J4-628 (WhiteS1): S1 at the whitened witness, FIRST SLICES — Route-B measurable-representative
+-- mirror: whitened chart Gc rep (banked hWG_gate_concrete consumed verbatim + closed-form
+-- whitening layer), whiteCutKernel Gc rep, witness VALUE triple strongly measurable, and the
+-- ∂_τ E3d slot CLOSED (white_hDtau_concrete, unconditional at concrete flow-ball gates) +
+-- hgi/hchr coefficient slots. Residue: hP1/hP2 field-pd slots + E3d assembly (= the remaining
+-- hEmeas). NOT a1=R/6.
+import QIQTH.WhiteS1

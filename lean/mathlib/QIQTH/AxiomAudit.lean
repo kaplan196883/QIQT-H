@@ -25125,6 +25125,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteBridge.producer_antecedent_satisfiable_w
 #print axioms QIQTH.WhiteBridge.white_bridge_width_condition
 
+-- ── J4-628 (WhiteS1): S1 at the whitened witness, first slices — the Route-B measurable-
+-- representative mirror: whitened chart/cutoff-kernel Gc representatives (banked
+-- hWG_gate_concrete + hKSmeas_concrete consumed verbatim at g^κ), witness VALUE triple
+-- strongly measurable, ∂_τ E3d slot CLOSED unconditionally at concrete flow-ball gates
+-- (white_hDtau_concrete), hgi/hchr coefficient slots; non-vacuity gates (gate inhabited,
+-- object nonzero). Residue toward white_tripleHEmeas: hP1/hP2 field-pd slots + E3d assembly.
+-- NOT a1=R/6.
+#print axioms QIQTH.WhiteS1.curvedWhitening_entry_measurable
+#print axioms QIQTH.WhiteS1.whiteGcChart_measurable
+#print axioms QIQTH.WhiteS1.whiteChart_rep_concrete
+#print axioms QIQTH.WhiteS1.whiteCutKernelGc_measurable
+#print axioms QIQTH.WhiteS1.whiteGatedWitness_value_stronglyMeasurable
+#print axioms QIQTH.WhiteS1.white_witness_value_concrete
+#print axioms QIQTH.WhiteS1.whiteTauDerivRep_measurable
+#print axioms QIQTH.WhiteS1.whiteWitness_tauDeriv_eq_rep
+#print axioms QIQTH.WhiteS1.white_hDtau_stronglyMeasurable
+#print axioms QIQTH.WhiteS1.white_hDtau_concrete
+#print axioms QIQTH.WhiteS1.curvedRNCInv_entry_measurable
+#print axioms QIQTH.WhiteS1.curvedRNC_christoffel_measurable
+#print axioms QIQTH.WhiteS1.white_flowball_gate_nonempty
+#print axioms QIQTH.WhiteS1.white_S1_object_nonzero_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
