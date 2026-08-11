@@ -6815,3 +6815,19 @@ analytically COMPLETE (3a banked J4-576, 3b hcont discharged J4-577), rests on h
 {hFar far-field coercivity (GEOMETRIC WALL), hdata (1)/(2) inverse-chart jet + hreg/hW0/hJac reachability-gate
 geometric, hsrc/hw, hOffCollarTail} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-578 = discharge
 hreg/hW0/hJac on small-ρ reachability gate (chartFieldJacobian_continuousOn side-conditions + chartField_contDiffAt_reachable_uniform) OR (1)/(2) inverse-chart jet OR hInnerCont OR convergence trio; hFar coercivity = standing wall.
+
+## J4-578 (discharge hreg/hW0/hJac inverse-chart regularity — hdata conjunct (3) fully unconditional for g^K)
+CurvedA1FintHdataReg.lean: DON'T-UNDERCREDIT — three regularity carries already banked general-metric via
+C2CarrierCollapse.c2_carriers_discharged (chartField_contDiffAt_reachable_uniform[hreg] +
+chartOrigin_continuousOn[hW0] + chartFieldJacobian_continuousOn+chartFieldJacobian_eq_ringInverse IFT[hJac];
+no metric-positivity). `curved_carriers_at_gate` (∃ρ>0 hreg∧hW0∧hJac exact J4-577 shapes) +
+`curved_hreg/hW0/hJac_at_gate` (individually) + `curved_hdata_amp_deriv_uniform_unconditional_at_gate`
+(the (3b) Bd bound, hreg/hW0/hJac ALL discharged, feeds J4-577's curved_hdata_amp_deriv_uniform_at_gate;
+rests only on hκ:κ≤0 + h0Kmem:K∈𝓝 0) + `curved_carriers_gate_satisfiable` (∃K compact∧K∈𝓝 0 = closedBall 0 1)
++ `_reg_curved_satisfiable`. Main verified: all carries from PROVED c2_carriers_discharged; only new hyp =
+reachability gate K∈𝓝 0 (geometric, strictly-weaker, SATISFIABLE not vacuous); R/6 untouched. std-3, budget
+raw 0, 9854 jobs. ★ hdata conjunct (3) FULLY UNCONDITIONAL for g^K (modulo satisfiable K∈𝓝 0 gate) — no
+hreg/hW0/hJac carried. RESIDUAL: {hFar far-field coercivity (GEOMETRIC WALL), hdata (1)/(2) inverse-chart
+jet [C2CarrierCollapse hid2 second-order IFT residue = sole non-collapsing carrier], hsrc/hw, hOffCollarTail}
++ {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-579 = conjuncts (1)/(2) inverse-chart jet (hid2
+second-order IFT residue) OR hInnerCont OR convergence trio; hFar coercivity = standing wall.
