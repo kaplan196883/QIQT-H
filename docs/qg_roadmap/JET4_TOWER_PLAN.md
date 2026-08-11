@@ -7367,3 +7367,18 @@ center jets + uniform C^k on K where possible; (H) final-rate loss (see go/no-go
 **MILESTONE SEQUENCE**: FatBallGeometry (strict margins) → FrozenDefectNegHalf → generalized
 consumer → optional FrozenDefectCenterZero → FatFrozenLeviPackage (meas/dom/cont) → capstone w/
 only CenterMassJetPackage residual → discharge mass/support → jets.
+
+### J4-609 [AF] — frozen-SPD Gaussian foundation (fe79a594)
+FrozenGauss.lean (18 decls, ~640 lines). General SPD (componentwise left inverse B), space form
+= instantiation. Convention: Γ_A = (√(4πτ))⁻ⁿ·√det A·exp(−Q_A/4τ) (exponent = frozen metric,
+operator = frozen inverse); exact ∑Bⁱʲ∂ᵢ∂ⱼΓ = ∂_τΓ. ★CONVENTION PIN frozenGauss_heatOp_zero:
+cancellation through the repo's OWN heatOp/laplaceBeltrami (christoffel_const). Two-sided flat
+comparison w/ exact prefactor matching. ⚠ SIGN CORRECTION: repo g^K = δ−(K/3)(...), K≤0 ⟹
+g^K ≥ δ globally (eigenvalues 1, 1+(−K/3)‖q‖²) — NO smallness condition needed; widening-free
+upper comparison. Antecedent-inhabitance gate (matrix ≠ δ at K≠0,n≥2,q≠0). Mass=1 noted NOT
+claimed; FrozenDefectBound = Prop only (no fake proof). std-3, raw 0 (9886).
+**J4-610** (= Sol milestone FrozenDefectNegHalf + go/no-go elements): inhabit FrozenDefectBound —
+(i) curvedRNCInv Lipschitz L(K,r) on ball (rational closed form, denominator ≥1 for K≤0);
+(ii) |∂ᵢ∂ⱼΓ_q| ≤ (1/τ)(1+Q/τ)·√det·G_τ from frozenGauss_pd_pd + comparison; (iii) width-fold
+‖v‖(1+‖v‖²/τ)/τ·G_τ ≤ (C/√τ)·G_{λτ} via GaussianWidthTransfer levers. Fold in Sol go/no-go:
+width-2 closed-fold check + consumer weighted-sup audit alongside.
