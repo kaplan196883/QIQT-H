@@ -6863,3 +6863,21 @@ on-gate hFirstEnv leg now hdata-FREE for g^K (‖z‖<ρ*, modulo gate-radius al
 alignment} + {convergence trio, hInnerCont}. a₁=R/6 CONDITIONAL. J4-581 = (i) gate-radius alignment (prove
 ρ*≥(curvedGate).r or shrink gate to ρ* → full-gate-ball hFirstEnv-hdata-discharged) OR (ii) hFar far-field
 coercivity geometric wall OR hInnerCont OR convergence trio.
+
+## J4-581 (hFar far-field coercivity DISCHARGED from the capstone's own hframeK — K⊆{0}, far-field empty)
+CurvedA1FintHFarCoercivity.lean: VERDICT route (a) — mainline frame seed K forced to {0}, far-field annulus
+never fires (NOT irreducible wall, NOT false whole-z ½). `curvedRNCMetric_frame_forces_origin` (g^K z=δ ⟹ z=0
+for κ≠0,n≥2: curvedRNCMetric κ z=δ−(κ/3)(‖z‖²δ−z⊗z) =δ only at origin) + `curved_hFar_coercivity_smallK_at_gate`
+(route a general: ∃ρ>0 (K⊆ball) → coercivity, from banked hmin_gate J4-575) + `curved_hFar_coercivity_frameK_at_gate`
+(THE discharge: ∀z∈K coercivity from capstone's OWN hframeK ⟹ K⊆{0} ⟹ z=0 ⟹ 0≤nonneg = exactly the
+curved_hFint_hFar_general hdata coercivity conjunct) + `_curved_satisfiable`. ★ HONEST: discharge FROM hframeK,
+NOT general far-field coercivity (whole-z ½ FALSE = wholeSpace_coercivity_unsatisfiable; uniformInverseChart
+compactly-supported, doesn't realize global Cartan–Hadamard inverse). Frame seed K={0} = established RNC-norm
+structure; capstone non-vacuity cleared J4-551 (R/6 coeff n(n−1)κ/6≠0; hframeK/hmassone decoupled, hframeK does
+NOT force Ric=0 unlike retracted J4-509). Far-field domination trivial on mainline K; on-gate content (z=0) carries
+a₁. Main verified: frame_forces_origin geometry correct; discharge sound; no false far-field ½; R/6 untouched. std-3,
+budget raw 0, 9857 jobs. ★ THE DEEPEST GEOMETRIC WALL IS NOT AN IRREDUCIBLE ANALYTIC OBSTRUCTION — it's
+discharged by the capstone's own frame normalization. RESIDUAL: {hsrc/hw, hOffCollarTail, hSopen/hgate0,
+gate-radius/K-alignment wiring} geometric + {convergence trio, hInnerCont} analytic. a₁=R/6 CONDITIONAL. J4-582 =
+curvedGate4→mainline substitution to consume discharged hFar into curved_a1_R6_fully_wired OR hInnerCont OR
+convergence trio.
