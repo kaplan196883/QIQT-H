@@ -24703,6 +24703,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AlphaLevi.negHalf_weight_exceeds_one
 #print axioms QIQTH.AlphaLevi.negHalf_weight_unbounded
 
+-- J4-612 (FrozenWire): the frozen defect WIRED into the alpha=-1/2 Neumann engine.
+-- frozenDefectKernel = the J4-610 defect as an actual gated two-point kernel (0<tau<=1, q-ball;
+-- closed frozenGauss_pd_pd form, jointly strongly measurable, tau<=0 gate = hEzero);
+-- frozenDefectKernel_bound = FULL-forall-tau (C/sqrt tau)*G_2tau bound (no time-cap needed);
+-- rpow_mul_rpow_intervalIntegrable = the Beta-integrand interval integrability (a,b>-1);
+-- iterConvIntegrableW_model_alpha + iterConvIntegrableW_of_bound_baseMeas_alpha = the alpha>-1
+-- per-step-integrability producer (alpha-agnostic replay CONFIRMED); frozenWire_leviSeries_dominated
+-- = THE WIRE (|leviSeries E_frozen| <= (C_L/sqrt tau)*G_2tau on (0,1], hInt DISCHARGED);
+-- NON-VACUITY frozenDefectKernel_witness_ne_zero (kernel nonzero at curved data inside the gate).
+-- FINAL-RATE AUDIT verdict (ii): integrated consumers admit alpha=-1/2, but the diagonal
+-- hCorrHigher per-slice O((t-s)+s) consumer needs the CENTER-COLUMN alpha=0 sharpening —
+-- PROVED here: frozenDefectCenterZero_spaceForm (|center defect| <= C*G_2tau, all tau>0,
+-- quadratic coefficient cancels 1/tau exactly). NOT a1=R/6 (per-q producer re-assembly,
+-- center-column series re-run + diagonal splice, fat-K piles, capstone co-instantiation remain).
+#print axioms QIQTH.FrozenWire.frozenDefectKernel_eq_pd
+#print axioms QIQTH.FrozenWire.frozenDefectKernel_bound
+#print axioms QIQTH.FrozenWire.frozenDefectKernel_stronglyMeasurable
+#print axioms QIQTH.FrozenWire.rpow_mul_rpow_intervalIntegrable
+#print axioms QIQTH.FrozenWire.modelZ_integrableW_alpha
+#print axioms QIQTH.FrozenWire.modelS_intervalIntegrableW_alpha
+#print axioms QIQTH.FrozenWire.iterConvIntegrableW_model_alpha
+#print axioms QIQTH.FrozenWire.iterConvIntegrableW_of_bound_baseMeas_alpha
+#print axioms QIQTH.FrozenWire.frozenWire_leviSeries_dominated
+#print axioms QIQTH.FrozenWire.frozenDefectKernel_witness_ne_zero
+#print axioms QIQTH.FrozenWire.frozenDefectCenterZero_spaceForm
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

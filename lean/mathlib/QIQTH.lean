@@ -2048,3 +2048,12 @@ import QIQTH.FrozenDefect
 -- (C/sqrt(tau))*G_2tau. Series bound INHERITS tau^(-1/2) — no clean const*G claim. std-3.
 -- NOT a1=R/6 (downstream consumer of the weighted series bound + producer re-assembly remain).
 import QIQTH.AlphaLevi
+-- J4-612 (FrozenWire): the frozen defect WIRED into the alpha=-1/2 Neumann engine —
+-- frozenDefectKernel (gated two-point kernel, jointly measurable) + FULL-forall-tau
+-- (C/sqrt tau)*G_2tau bound + the alpha>-1 per-step-integrability producer (Beta interval
+-- integrability + alpha-agnostic replay of the alpha=0 producer, hInt DISCHARGED) +
+-- frozenWire_leviSeries_dominated (the wired series bound on (0,1]) + witness non-vacuity.
+-- FINAL-RATE AUDIT verdict (ii): diagonal hCorrHigher consumer needs the center-column alpha=0
+-- sharpening — PROVED (frozenDefectCenterZero_spaceForm, clean C*G_2tau, all tau>0). std-3.
+-- NOT a1=R/6 (per-q producer re-assembly + center-column splice + fat-K piles + capstone remain).
+import QIQTH.FrozenWire
