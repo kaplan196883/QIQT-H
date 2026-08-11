@@ -7088,3 +7088,17 @@ untouched; std-3. budget raw 0, 9870 jobs. ★ hsrc DISCHARGED (self-contained c
 a₁=R/6 CONDITIONAL. J4-595 = on-collar hjets chart-jet bundle (genuine curved input that hOffCollarTail+hInnerCont
 transitively lean on — drains multiple carriers) OR census/measurability/domination cluster (generic-engine-shaped)
 OR convergence trio (deepest wall).
+
+## J4-595 (assemble+sharpen on-collar hjets chart-jet bundle for g^K — 2nd jet + 3 center identities internal)
+CurvedA1Hjets.lean: `curved_hjets_bundle_of_pullback` (κ≤0: ASSEMBLER, produces AmpGeometryBundle.HjetsShape g^K
+from jet data (P,Q)+pullback bridge, composes J4-554 curved_hjetsShape_of_pieces + J4-555
+curved_centerIdentities_of_gaussPullback — replaces 3 abstract center-identity hyps by pullback bridge, closed
+via EXACT radial gauges) + `curved_hjets_secondJet_banked` (2nd-jet from hreg:ContDiffAt ℝ 2 via
+GeneralBaseJets.chartField_secondJet_of_contDiffAt) + `curved_hjets_bundle_from_banked_secondJet` (FULL HjetsShape,
+2nd jet internal) + `curved_hjets_bundle_residual/_intro` + `curved_hjets_bundle_satisfiable` (κ<0,n≥2: radial
+gauges ∧ curvedRNCMetric κ (y≡1) i j=κ/3≠0=δᵢⱼ i≠j — center identities close for GENUINELY CURVED metric NOT
+forcing flatness, J4-509/582 respected). Main verified: AmpGeometryBundle untouched; satisfiability genuinely
+non-flat (κ/3≠0 off-diag); from banked J4-554/555; std-3. budget raw 0, 9871 jobs. ★ hjets residual now {global
+∀x first jet [J4-557 false-generality], global amp C¹, amp pd-pd@0, pullback bridge} = genuine chart-regularity
+remainders. a₁=R/6 CONDITIONAL. J4-596 = hInnerCont's hContDom (inner-cont domination follow-on, metric-independent-
+shaped like hOffCollarTail/hsrc) OR census/measurability/domination pile OR convergence trio (heaviest wall).
