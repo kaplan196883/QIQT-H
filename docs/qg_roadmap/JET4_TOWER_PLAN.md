@@ -6881,3 +6881,21 @@ discharged by the capstone's own frame normalization. RESIDUAL: {hsrc/hw, hOffCo
 gate-radius/K-alignment wiring} geometric + {convergence trio, hInnerCont} analytic. a₁=R/6 CONDITIONAL. J4-582 =
 curvedGate4→mainline substitution to consume discharged hFar into curved_a1_R6_fully_wired OR hInnerCont OR
 convergence trio.
+
+## ⚠⚠ J4-582 (VACUITY FINDING — curved_a1_R6_fully_wired is VACUOUS at the genuinely-curved witness)
+CurvedA1FarConsumeCheck.lean: adversarial soundness audit (Sol-confirmed gpt-5.6-sol high) of the J4-581
+hFar-coercivity-from-hframeK discharge. VERDICT: the fully-wired curved a₁ capstone is VACUOUS at κ≠0,n≥2 —
+antecedent bundle {hK0, hframeK, hmassone} JOINTLY UNSATISFIABLE. `frameK_forces_singleton` (hK0+hframeK ⟹
+K={0}, since curvedRNCMetric κ=δ only at origin — hframeK≡δ-on-K is FLATNESS) + `witness_baseIntegral_zero`
+(∫z vanVleckGatedWitness g^K…(constGate…c)a b τ 0 z=0 ∀τ — K={0} collapses gated-kernel SOURCE slot q∈K to
+null singleton) + `hmassone_unsatisfiable` (THE PIN: capstone's OWN hmassone [line 399-400, verified identical:
+Tendsto (fun m => ∫z vanVleckGatedWitness…(epsSeq m)0 z) atTop (𝓝 1)] is FALSE — const-0 seq ≠→1). Main
+verified: hmassone shape MATCHES capstone binder EXACTLY; hK0/hframeK are capstone binders (lines 79/221/222);
+math airtight (source-slot gating). std-3, budget raw 0, 9858 jobs. ★ CORRECTION: J4-548/551 "curved-satisfiable
+non-vacuous" was WRONG — `_curved_satisfiable` gate checks only CONCLUSION coeff (Ric≠0), never antecedent
+inhabitance = axiom-budget blind spot; "hframeK/hmassone decoupled" was false (hmassone ∫z over K-gated source).
+Only frame-escape regime (n=1/κ=0) has Ric=0 ⟹ coeff 0 (flat). ROOT CAUSE: hframeK="g≡δ on ALL K" is FLATNESS
+(wrong RNC gauge); should be CENTER-ONLY (g(0)=δ + ∂g(0)=0). ⚠ a₁=R/6 CONDITIONAL — capstone does NOT
+non-vacuously establish it at a curved witness. J4-583 = re-architect hframeK to a center-only normal-coordinate
+gauge (the substantive fix enabling a non-degenerate curved witness) OR add a joint-inhabitance obligation to
+the satisfiability gate; this is now THE crux, ahead of hInnerCont/convergence-trio.
