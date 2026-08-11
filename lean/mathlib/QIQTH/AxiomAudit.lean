@@ -23950,6 +23950,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHdataUniform.curved_hdata_amp_deriv_uniform_at_gate_of_cont
 #print axioms QIQTH.CurvedA1FintHdataUniform.curved_hdata_amp_uniform_at_gate_curved_satisfiable
 
+-- J4-577: DISCHARGE conjunct (3b)'s carried hcont for g^K = curvedRNCMetric κ (κ≤0). The joint
+-- (τ,z)-continuity of the chart FIELD-DERIVATIVE section is now a PROVED theorem, not a carried
+-- hypothesis: curved_hdata_amp_deriv_cont_at_gate instantiates the general-metric
+-- SupFamilyFirstOrder.supFamilyFirstOrder_hcont1 (banked pd_chartAmp_center_eq identification +
+-- manifoldAmp_fderiv_continuous + the now-banked chart field-Jacobian JacobiCLMExposure.
+-- chartFieldJacobian_continuousOn / forwardFlowJet_continuousOn — the OLD J3 blocker discharged) at
+-- the curved carries (curvedRNCMetric_contDiff / curvedRNCInv_contDiff / curvedRNCMetric_hgpos) and
+-- transfers chartAmp→chartFieldAmp (chartAmp_eq_chartFieldAmp_fun). curved_hdata_amp_deriv_uniform_
+-- at_gate then feeds the proved hcont into J4-576's _of_cont, making the (3b) Bd bound depend only on
+-- the three GEOMETRIC carries hreg/hW0/hJac (+ hρ), NO opaque analytic continuity carry. curved_
+-- satisfiable = Ric≠0 (κ≠0∧n≥2) — not secretly flat. hFar coercivity, conjuncts (1)/(2), the
+-- geometric hreg/hW0/hJac discharge for g^K, hsrc, hOffCollarTail, convergence trio, hInnerCont still
+-- owed. NOT a₁=R/6. std-3.
+#print axioms QIQTH.CurvedA1FintHdataDerivCont.curved_hdata_amp_deriv_cont_at_gate
+#print axioms QIQTH.CurvedA1FintHdataDerivCont.curved_hdata_amp_deriv_uniform_at_gate
+#print axioms QIQTH.CurvedA1FintHdataDerivCont.curved_hdata_amp_deriv_cont_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
