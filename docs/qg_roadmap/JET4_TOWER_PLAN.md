@@ -7178,3 +7178,18 @@ large; builder params free). std-3, budget raw 0 (9876 jobs).
 (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim(3/2·τ)(p−q) for the gated van-Vleck witness at aligned params, from
 banked amplitude bounds (hCoeffU0/Lin1 on-gate; witness ≡0 off-gate). Then hmeas/hcont likely
 follow from unconditional hBdom + tripleHEmeas via dominated-convergence bricks.
+
+### J4-600 [AF] — hAdom discharged JOINTLY with hBdom; hInnerCont owes exactly {hmeas, hcont} (6710f6ae)
+CurvedA1HAdom.lean: `curved_hAdom_hBdom_at_gate` (κ<0, 1≤n, T>0, only {hChr,hw,hu}): ∃ ONE
+param set 0<a<b<c carrying BOTH the exact hAdom binder (all-τ>0, all-p,q witness Gaussian
+domination, prefactor √(3/2)ⁿ / width (3/2)τ = the PROVED constants of the banked D1 recentring
+theorem exists_D1_constants_of_gateSqControl — GateSqControl square inequality from the
+near-isometry budget; normalization-honest, nothing invented) AND the exact width-2 hBdom.
+Param-compatibility: joint production REQUIRED (consumer curved_hInnerCont_of_meas demands hAdom
+at ITS ∃ params) — fix = prescribed pkg ceiling ε := min δjet (min r₁ (δ₀/2)) clears hEmeas jet
+reach + GateSqControl radii simultaneously. `curved_hInnerCont_of_two` = capstone hInnerCont
+from ONLY {hmeas, hcont}. `curved_hAdom_satisfiable`. std-3, budget raw 0 (9877 jobs).
+**J4-601 recommendation**: hmeas — interior z-slice eventual AEStronglyMeasurable of
+z ↦ W(u−s)0z·L(s)z0; W factor sliceable from tripleHEmeas/S1 joint SM; L factor z-measurability
+at fixed s>0 from hEmeas SM via iterConv/tsum measurability (grep leviSeries.*measurable,
+iterConvW.*measurable — likely partially banked in D2 engine). Then hcont (harder second brick).
