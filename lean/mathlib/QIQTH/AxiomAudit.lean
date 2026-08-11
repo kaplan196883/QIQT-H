@@ -24474,6 +24474,31 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_center_gauge_satisfiable
 #print axioms QIQTH.CurvedA1CenterAmp.curvedRNC_center_eps_arbitrarily_small
 
+-- J4-605 (CurvedA1CenterChr): SECOND layer of the (hbound-fat) wall — the center-gauge variant of the
+-- load-bearing Christoffel linear decay uniformFlowChristoffel_linear_decay. USE-SITE VERDICT: hframeK
+-- entered the banked R2 through EXACTLY ONE inner call — R1 (uniformFlowPullbackMetric_pd_linear_decay),
+-- which consumes ONLY the pd-jet component of uniformFlowPullbackMetric_jet_zero (the value jet is
+-- discarded via ⟨_, hjetpd⟩); the other pillar (uniformFlowPullbackMetricInv_entry_uniform_bound) never
+-- takes hframeK. The pd-jet is FRAME-FREE (J4-604's uniformFlowPullbackMetric_pd_zero_center — RNC
+-- radiality kills ∂g̃(0) at every base point), so the center-gauge decay survives with the form
+-- UNCHANGED and NO ε₀ term at all: |Γ̃^k_ij(v)| ≤ KdΓ·‖v‖, KdΓ = ½·n·Kg·(3·Kpd) — hframeK REMOVED,
+-- not weakened (the g̃⁻¹ factor needs only boundedness Kg, not proximity to δ; contrast layer 1 where
+-- the VALUE jet forces +ε₀). Landed: _pd_linear_decay_center (R1 frame-free replay),
+-- uniformFlowChristoffel_zero_at_zero_center (Γ̃(0)=0 frame-free, feeds layer 3),
+-- uniformFlowChristoffel_linear_decay_center (THE BRICK), curvedRNC_Chr_linear_decay_center (fat-K
+-- curved instantiation, κ≤0, every r; carries: curvedRNCMetric_contDiff / hgnd_of_hgpos∘
+-- curvedRNCMetric_hgpos / curvedRNCMetric_symm / curvedRNCMetric_hinvF / curvedRNC_hChr).
+-- NON-VACUITY (cp466): curvedRNC_Chr_center_satisfiable = fat K contains a NONZERO point AND the decay
+-- conclusion inhabited there; no hdevK/ε₀/frame antecedent remains to gate — only K-collapse, excluded.
+-- std-3 all 5. NOT a1=R/6 (flat tower only; curved re-base still owes layers 3-5 = center-gauge
+-- uniformCoeff bounds (layer-1 ε₀ WILL surface there) → τ-narrow residuals → producer re-assembly,
+-- plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation + piles/trio/hmassone-pre-ρ/hjets).
+#print axioms QIQTH.CurvedA1CenterChr.uniformFlowPullbackMetric_pd_linear_decay_center
+#print axioms QIQTH.CurvedA1CenterChr.uniformFlowChristoffel_zero_at_zero_center
+#print axioms QIQTH.CurvedA1CenterChr.uniformFlowChristoffel_linear_decay_center
+#print axioms QIQTH.CurvedA1CenterChr.curvedRNC_Chr_linear_decay_center
+#print axioms QIQTH.CurvedA1CenterChr.curvedRNC_Chr_center_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

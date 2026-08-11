@@ -1943,3 +1943,19 @@ import QIQTH.CurvedA1ReBaseHBdom
 -- (hbound-fat) layers = center-gauge Christoffel decay, uniformCoeff bounds, tau-narrow residuals,
 -- producer re-assembly; plus fat-K hEmeas/hAdom/hcont + capstone co-instantiation.
 import QIQTH.CurvedA1CenterAmp
+-- J4-605 (CurvedA1CenterChr): SECOND layer of the (hbound-fat) wall — center-gauge variant of the
+-- load-bearing Christoffel linear decay. USE-SITE VERDICT (by construction): in the banked
+-- uniformFlowChristoffel_linear_decay, hframeK enters through EXACTLY ONE inner call — the R1 pd-decay
+-- layer, which consumes only the pd-jet component of uniformFlowPullbackMetric_jet_zero (value jet
+-- discarded); the inverse entry bound never takes hframeK. Since the pd-jet is frame-free (J4-604's
+-- uniformFlowPullbackMetric_pd_zero_center, RNC radiality), the center-gauge decay survives with the
+-- form UNCHANGED and NO eps0 term at all: |Chr(v)| <= KdG*|v|, KdG = (1/2)*n*Kg*3*Kpd — hframeK is
+-- REMOVED, not weakened. Landed: uniformFlowPullbackMetric_pd_linear_decay_center (R1 frame-free),
+-- uniformFlowChristoffel_zero_at_zero_center (Chr(0)=0 frame-free, feeds layer 3),
+-- uniformFlowChristoffel_linear_decay_center (THE BRICK), curvedRNC_Chr_linear_decay_center (fat-K
+-- curved instantiation, k<=0, all carries from banked curved lemmas), curvedRNC_Chr_center_satisfiable
+-- (non-vacuity: fat K nonzero point + conclusion inhabited; no hdevK/eps0 antecedent remains to gate).
+-- std-3 all 5. NOT a1=R/6: remaining (hbound-fat) layers = center-gauge uniformCoeff bounds (eps0 from
+-- layer 1 WILL surface there), tau-narrow residuals, producer re-assembly; plus fat-K
+-- hEmeas/hAdom/hcont + capstone co-instantiation.
+import QIQTH.CurvedA1CenterChr
