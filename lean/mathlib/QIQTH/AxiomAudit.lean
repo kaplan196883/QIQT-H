@@ -24667,6 +24667,42 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FrozenDefect.width2_closed_fold
 #print axioms QIQTH.FrozenDefect.betaTime_negHalf_integral
 
+-- J4-611 (AlphaLevi): the ALPHA-GENERALIZATION SLICE — Levi-series summability extended from
+-- alpha>=0 to alpha>-1 (the single localized blocker) + alpha-parametrized top consumer +
+-- alpha=-1/2 instantiation consuming the J4-610 frozen-defect shape. BLOCKER 1 discharged:
+-- gamma_ratio_tendsto_zero_general (all beta>0) — for beta<=1 via LOG-CONVEXITY of Gamma
+-- (Real.convexOn_log_Gamma, Bohr–Mollerup): x+1 interpolated between x+beta and x+beta+1 gives
+-- the Gautschi-type bound x*Gamma(x) <= Gamma(x+beta)*(x+beta)^(1-beta), so ratio <=
+-- 2^(1-beta)*x^(-beta) -> 0 (tendsto_rpow_neg_atTop); beta>=1 reuses the banked monotonicity
+-- proof. Then modelCoeff_summable_general / scaledModelCoeff_summable_general /
+-- scaledIterKernelW_summable_general at alpha>-1 (per-step engine iterKernelW_eq unchanged).
+-- BLOCKER 2 discharged: leviSeries_dominatedW_le_alpha — honest exponent split
+-- tau^((k+1)(a+1)-1) = tau^a * tau^(k(a+1)) sends ONLY the nonneg part tau->T; conclusion keeps
+-- the one-step shape C_L*baseKernelW 2 alpha (C_L = T^(-a)*Sum C^(k+1)*modelCoeff a T (k+1)).
+-- alpha=-1/2: leviSeries_dominatedW_le_negHalf in the FrozenDefectBound shape (C/sqrt(tau))*G_2tau
+-- on BOTH sides (baseKernelW_negHalf_apply bridge). HONEST WEIGHT: series bound INHERITS
+-- tau^(-1/2) — NOT <= const*G as tau->0 (negHalf_weight_exceeds_one/_unbounded certify).
+-- NON-VACUITY: negHalf_model_sum_pos (positive summable series); antecedent bundle INHABITED
+-- (negHalf_consumer_antecedent_satisfiable, E=0/C=0 — mere satisfiability; genuine nonzero
+-- consumer = J4-610 defect E whose IterConvIntegrableW is a carried pile). Engine files
+-- UNMODIFIED (splice discipline: _general variants in new file). Expected std-3 all. NOT a1=R/6
+-- (CONDITIONAL: downstream consumer of the tau^(-1/2)-weighted series bound + per-q producer
+-- re-assembly + fat-K piles + capstone co-instantiation remain).
+#print axioms QIQTH.AlphaLevi.gamma_mul_le_gamma_add_rpow
+#print axioms QIQTH.AlphaLevi.gamma_ratio_le_rpow
+#print axioms QIQTH.AlphaLevi.gamma_ratio_tendsto_zero_general
+#print axioms QIQTH.AlphaLevi.modelCoeff_summable_general
+#print axioms QIQTH.AlphaLevi.scaledModelCoeff_summable_general
+#print axioms QIQTH.AlphaLevi.scaledIterKernelW_summable_general
+#print axioms QIQTH.AlphaLevi.modelCoeff_le_weight
+#print axioms QIQTH.AlphaLevi.leviSeries_dominatedW_le_alpha
+#print axioms QIQTH.AlphaLevi.baseKernelW_negHalf_apply
+#print axioms QIQTH.AlphaLevi.leviSeries_dominatedW_le_negHalf
+#print axioms QIQTH.AlphaLevi.negHalf_model_sum_pos
+#print axioms QIQTH.AlphaLevi.negHalf_consumer_antecedent_satisfiable
+#print axioms QIQTH.AlphaLevi.negHalf_weight_exceeds_one
+#print axioms QIQTH.AlphaLevi.negHalf_weight_unbounded
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

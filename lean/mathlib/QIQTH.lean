@@ -2041,3 +2041,10 @@ import QIQTH.FrozenGauss
 -- 0<=alpha — reported gap). std-3 all. NOT a1=R/6 (curved re-base still owes the alpha-fork
 -- consumer generalization + per-q producer re-assembly + fat-K piles + capstone co-instantiation).
 import QIQTH.FrozenDefect
+-- J4-611 (AlphaLevi): alpha-generalization slice — Levi-series summability extended to alpha>-1
+-- (gamma_ratio_tendsto_zero_general via Gamma log-convexity/Gautschi for beta<=1) + the
+-- alpha-parametrized D2 consumer leviSeries_dominatedW_le_alpha (honest tau^alpha weight kept) +
+-- alpha=-1/2 instantiation leviSeries_dominatedW_le_negHalf in the J4-610 frozen-defect shape
+-- (C/sqrt(tau))*G_2tau. Series bound INHERITS tau^(-1/2) — no clean const*G claim. std-3.
+-- NOT a1=R/6 (downstream consumer of the weighted series bound + producer re-assembly remain).
+import QIQTH.AlphaLevi
