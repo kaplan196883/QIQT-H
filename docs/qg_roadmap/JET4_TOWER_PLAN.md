@@ -7310,3 +7310,20 @@ crux; Sol consult recommended there). std-3, raw 0 (9884).
 **J4-608**: layer 5 first increment = center N=1 mixed engine uniformResidualN1_narrow_mixed_lin_center
 (consume engines 2+3, prove Linear-branch benign fold, land (B₀+B₁τ+Bε·ε₀/τ)·G_{3/2} N=1 shape),
 then confront order-of-limits at cutoffResidualN1_..._below_lin re-assembly.
+
+### J4-608 [AF] — ORDER-OF-LIMITS DECIDED: easy routes gated impossible; forward = per-q frozen Gaussian (0fcd7ec2)
+CurvedA1CenterN1.lean (6 decls). Route (a) τ₀-threshold FAILS (D2 hEbound ∀τ∈(0,T] structural —
+Volterra increments reach 0 at interior outer time); route (b) ε₀→0-first FAILS (singular limit;
+ε₀=0 ⟹ K={0} vacuity); no width absorption (shared τ^(-n/2) scaling). BOTH FORMALLY GATED
+(centerShape_no_uniform_majorant + no_width2_kernel_majorant, honestly scoped to bound shape).
+Landed: N=1 center engine (honest (B₀+B₁τ+(Bc+Bδ/τ)ε₀)·G_{3/2τ}, benign fold explicit), fat-K
+instantiation (both layer-3 antecedents DISCHARGED), thresholded corollary (labelled
+non-consumable + why), gate. Sol confirmed + corrections adopted: ε₀/τ defect GENUINE (diagonal
+witness tr g⁻¹(q)−n ≠ 0 at parabolic scale, prose); linear vielbein ⟹ τ^(-1/2) (α=-1/2
+integrable), NOT α=0. ★FORWARD (layer 6): (1) frozen-SPD Gaussian Γ_q (exact frozen cancellation
+∂_τΓ_q = g^{ij}(q)∂_ijΓ_q + two-sided ellipticity comparison c·G_{λ₁τ} ≤ Γ_q ≤ C·G_{λ₂τ} +
+Lipschitz defect τ^(-1/2)·G); (2) α-fork: α-generalize D2 consumer to -1/2 (modelCoeff supports
+α>-1) OR per-q first-jet cancellation (q-normal coords + van Vleck transport) for literal α=0
+(more natural for a₁ extraction); (3) producer re-assembly. std-3, raw 0 (9885).
+**J4-609**: frozen-SPD Gaussian layer steps 1-3 (define frozenGauss g q τ v; frozen cancellation;
+ellipticity comparison on the space-form ball — eigenvalue bounds in CurvedRNCPosDef territory).
