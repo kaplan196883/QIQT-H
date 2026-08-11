@@ -7102,3 +7102,23 @@ non-flat (κ/3≠0 off-diag); from banked J4-554/555; std-3. budget raw 0, 9871 
 ∀x first jet [J4-557 false-generality], global amp C¹, amp pd-pd@0, pullback bridge} = genuine chart-regularity
 remainders. a₁=R/6 CONDITIONAL. J4-596 = hInnerCont's hContDom (inner-cont domination follow-on, metric-independent-
 shaped like hOffCollarTail/hsrc) OR census/measurability/domination pile OR convergence trio (heaviest wall).
+
+### J4-596 [AF] — hContDom analytic half discharged for g^K (bddea6d2)
+CurvedA1HContDom.lean: `curved_hContDom_at_gate` = the EXACT hContDom datum carried by
+J4-592's `curved_hInnerCont_at_gate`, specialized to g^K, via the banked generic builder
+`ContDomWindow.hContDom_discharged` — the two genuinely-analytic conjuncts (integrable
+Gaussian×Gaussian dominator existence + uniform-over-window norm bound) are constructed
+INTERNALLY (gaussDdim_window_le + gaussDdim_mul_integrable; window Ioo(s0−δ,s0+δ),
+δ=min s0 (u−s0)/2 keeps both s and u−s strictly positive ⟹ no τ→0 degeneracy).
+`curved_hInnerCont_of_dominations` = composed reduction: capstone hInnerCont ALL THE WAY
+down to the four raw carries {hAdom (D1 witness Gaussian domination, all p,q, width 3/2),
+hBdom (width-2 Levi domination on (0,T] — the D2/convergence-trio frontier), hmeas
+(interior z-slice eventual AEStronglyMeasurable), hcont (a.e.-z time ContinuousAt)}.
+`curved_hContDom_satisfiable` genuine-curvature certificate (∃w, 1 < det g^K w, κ<0).
+NOT closed: hAdom banked only frozen-p=0/windowed (curvedRNC_baseWitness_dom); hBdom is
+the D2 frontier. All std-3, budget raw 0 (9872 jobs).
+**J4-597 recommendation**: attack hBdom = width-2 Levi domination for g^K from banked
+`CurvedRNCHeatOpDomPkg.curvedRNC_heatOp_dom_pkg` (hpkgBound) through the banked Levi
+engine `HeatResidualBound.leviSeries_summableW`/`iterConvW_bound` (convergence-trio
+deliverable); OR lift hAdom frozen-p=0→global all-(p,q) clean form; OR the lighter
+hmeas/hcont side-thread.
