@@ -25147,6 +25147,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteS1.white_flowball_gate_nonempty
 #print axioms QIQTH.WhiteS1.white_S1_object_nonzero_gate
 
+-- ── J4-629 (WhiteS1P1): S1-a at the whitened witness — the hP1 first field-pd measurable-
+-- representative slot (full-gate indicator rep + everywhere identity + dq-engine on-gate rep +
+-- whitened field-jet + chain-rule identity); white_hP1_concrete carries EXACTLY one labelled
+-- input hOffS (whitened-collar/W2 frontier vanishing; off-closure exterior proved). NOT a1=R/6.
+#print axioms QIQTH.WhiteS1P1.whiteFieldDeriv_offBase_eq_zero
+#print axioms QIQTH.WhiteS1P1.whiteFieldDeriv_eq_zero_of_nonpos
+#print axioms QIQTH.WhiteS1P1.whiteFieldDeriv_gate_congr
+#print axioms QIQTH.WhiteS1P1.whiteFieldDeriv_eq_zero_off_closure
+#print axioms QIQTH.WhiteS1P1.whiteP1Rep_measurable
+#print axioms QIQTH.WhiteS1P1.whiteFieldDeriv_eq_whiteP1Rep
+#print axioms QIQTH.WhiteS1P1.white_hP1_stronglyMeasurable
+#print axioms QIQTH.WhiteS1P1.whiteCut_pdiffAt_of_contDiffAt
+#print axioms QIQTH.WhiteS1P1.whiteFlowJet_concrete
+#print axioms QIQTH.WhiteS1P1.whiteCut_pd_gate_eq
+#print axioms QIQTH.WhiteS1P1.white_pdRep_concrete
+#print axioms QIQTH.WhiteS1P1.white_hP1_concrete
+#print axioms QIQTH.WhiteS1P1.white_hP1_gate_nonempty
+#print axioms QIQTH.WhiteS1P1.white_hP1_offS_satisfiable_empty
+#print axioms QIQTH.WhiteS1P1.white_hP1_underlying_nonzero
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

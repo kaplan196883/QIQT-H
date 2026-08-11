@@ -2192,3 +2192,13 @@ import QIQTH.WhiteBridge
 -- hgi/hchr coefficient slots. Residue: hP1/hP2 field-pd slots + E3d assembly (= the remaining
 -- hEmeas). NOT a1=R/6.
 import QIQTH.WhiteS1
+-- J4-629 (WhiteS1P1): S1-a at the whitened witness — the hP1 FIRST field-pd measurable-
+-- representative slot: raw kernel whiteFieldDeriv; off-base/nonpos/off-CLOSURE vanishing proved;
+-- full-gate indicator rep whiteP1Rep + EVERYWHERE identity; on-gate PdiffAt from chart-C2 +
+-- whitened first field-jet (banked chart jet through one matToCLM) + on-gate chain-rule identity
+-- (cutoff-pd symbolic); measurable on-gate pd rep via the abstract dq engine at whiteCutKernelGc;
+-- ★★ white_hP1_concrete = the exact hP1 slot at concrete flow-ball gates MODULO exactly one
+-- labelled input hOffS (the whitened-collar/W2 frontier vanishing; exterior proved). NOT a1=R/6
+-- (S1-b hP2, S1-c assembly, hOffS collar, hlam8, K1TransportBudget, fat-K carriers, capstone
+-- co-instantiation + prior piles still owed).
+import QIQTH.WhiteS1P1
