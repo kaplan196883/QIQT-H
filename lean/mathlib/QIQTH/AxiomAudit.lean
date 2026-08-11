@@ -23967,6 +23967,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1FintHdataDerivCont.curved_hdata_amp_deriv_uniform_at_gate
 #print axioms QIQTH.CurvedA1FintHdataDerivCont.curved_hdata_amp_deriv_cont_curved_satisfiable
 
+-- J4-578: DISCHARGE of the three inverse-chart regularity carries hreg/hW0/hJac of hdata conjunct (3b)
+-- for g^K=curvedRNCMetric κ. curved_carriers_at_gate extracts hreg∧hW0∧hJac on ONE concrete small ball
+-- from C2CarrierCollapse.c2_carriers_discharged (banked chart-regularity: chartField_contDiffAt_
+-- reachable_uniform + chartOrigin_continuousOn + chartFieldJacobian_continuousOn + IFT identity),
+-- needing NO metric-positivity — only the reachability gate h0Kmem : K∈𝓝 0. curved_hreg/hW0/hJac_at_
+-- gate = the three individually. curved_hdata_amp_deriv_uniform_unconditional_at_gate feeds them into
+-- J4-577's curved_hdata_amp_deriv_uniform_at_gate, discharging hreg/hW0/hJac fully: the (3b) Bd bound
+-- now rests only on hκ≤0 + the SATISFIABLE gate (curved_carriers_gate_satisfiable: closedBall 0 1 is a
+-- compact 𝓝 0 in the proper space Fin n→ℝ). curved..._reg_curved_satisfiable = Ric≠0 (κ≠0∧n≥2) — not
+-- secretly flat. hdata conjunct (3) now FULLY unconditional for g^K up to the reachability gate. hFar
+-- coercivity, conjuncts (1)/(2) inverse-chart jet, hsrc, hOffCollarTail, convergence trio, hInnerCont
+-- still owed. NOT a₁=R/6. std-3.
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_carriers_at_gate
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_hreg_at_gate
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_hW0_at_gate
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_hJac_at_gate
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_hdata_amp_deriv_uniform_unconditional_at_gate
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_carriers_gate_satisfiable
+#print axioms QIQTH.CurvedA1FintHdataReg.curved_hdata_amp_deriv_reg_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
