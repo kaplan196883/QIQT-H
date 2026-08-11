@@ -7486,3 +7486,19 @@ into TrueKernelA1.trueKernel_diagonal_a1_eq_R6's hCorrHigher with H = the actual
 (validates signature, endpoint-zero, prefactor normalization, quantifier order). Then rank 2 =
 k=1 SliceBoundO1/transport-cancellation thread (the −E term, next substantive blocker); defer
 per-q producer re-assembly.
+
+### J4-617 [AF] — co-instantiation SMOKE TEST: bridge NEEDED + sufficiency certified; no incompatibility (c813894a)
+CoInstSmoke.lean (9 decls + FatFrozenPackage structure). ★BRIDGE VERDICT: capstone slots are
+transport-pinned (flat: hE/hHdiag pin to heatOp of transport parametrix; curved: F
+definitionally leviSeries(heatOp(gatedWitness))) ⟹ frozen series does NOT feed directly.
+FrozenTransportBridge Prop stated precisely (|tail difference| ≤ C_B·s·G_{8s}); difficulty
+bounded (shared center Gaussian; J4-612→616-sized, not a new wall). ★SUFFICIENCY CERTIFIED:
+bridge ⟹ full bounded-cRem capstone API (tail_slice_of_pointwise abstraction).
+★FatFrozenPackage: ONE joint constructor, nested radii, curved data — NO incompatibility.
+Wires: witness-H fully discharged; vanVleck-H endpoint-zero DISCHARGED unconditionally,
+Gaussian domination carried-labelled (hAdom family). leviSeries_split: F = −E + tail; k=1 =
+K1TransportBudget (owed). std-3, raw 0 (9894).
+**J4-618**: bridge first brick — frozenDefect vs heatOp(gatedWitness) DEFECT difference on the
+gate at N=1 (Gaussian-dominated w/ extra √τ or ‖p−q‖ factor, from shared center Gaussian +
+witness pd-calculus), then iterate through iterE 2 w/ J4-616 fold levers. Alt: K1TransportBudget
+first (smaller, owed either way).
