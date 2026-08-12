@@ -2344,3 +2344,16 @@ import QIQTH.WhiteW1
 -- Curved h0 gate pair discriminates the direction; flat ∃-inhabitance of the K₁ antecedent set.
 -- NOT a1=R/6 (F1 re-instantiation + Jacobi bridge + Jet-5 + Duhamel + fat-K + piles owed).
 import QIQTH.WhiteTransport
+-- J4-643 WhiteF1: the F1 RE-INSTANTIATION. ★ Jacobi bridge r∂_r log det g = ρ (radialLogDetSym)
+-- LANDED (banked adjugate Jacobi formula + hasDerivAt_pi slice assembly; honest generality:
+-- entrywise PdiffAt + pointwise right inverse + gi-symmetry at the point) ⟹ hamp DISCHARGED
+-- (radialDeriv_correctedFold: r∂_r (det g)^{−1/4} = −¼ρ·(det g)^{−1/4}); corrected order-1
+-- whitened witness whiteChartKernel1' at Θ̂' := (whiteTheta)⁻¹ (fold = (det ĝ)^{−1/4}, SAME banked
+-- û coefficients — transportOp_inv_inv ⟹ R/6 supplier preserved, diagonal carrier intact);
+-- h0/h1/htr THEOREMS at the corrected witness (white_h0/h1_corrected); re-derived K1 budget
+-- white_K1BudgetW_corrected with h0/h1/hamp/htr GONE — residue = whitened-Gauss geometric legs
+-- {hsymI,hgsym,hdGauss(→hdGauss_of_metric_gauss),hinv,hdet} + regularity legs {hwsm,hd,hu1d,hsm,hΔ}
+-- (Jet-5; corrected-fold re-instantiation of J4-640/641 dischargers owed). Gates: Jacobi bridge
+-- fires at curved data (ρ = 2, two independent routes agree); machinery-route K₀ = 0 end-to-end.
+-- NOT a1=R/6 (post-F1 K1 residue + Jet-5 + Duhamel + fat-K + co-instantiation + piles owed).
+import QIQTH.WhiteF1

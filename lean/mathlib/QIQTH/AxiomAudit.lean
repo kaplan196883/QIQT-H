@@ -25619,6 +25619,55 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteTransport.gate_corrected_h0_vanishes
 #print axioms QIQTH.WhiteTransport.gate_K1_identification_inhabited_flat
 
+-- J4-643 WhiteF1: the F1 RE-INSTANTIATION — ★ THE JACOBI BRIDGE r∂_r log det g = ρ
+-- (radialLogDetSym) LANDED at honest generality (entrywise PdiffAt at the point + pointwise
+-- right inverse + gi-symmetry; route: banked adjugate hasDerivAt_matrix_det/-log_det_matrix on
+-- the coordinate slice via hasDerivAt_pi, trace re-indexed through gi-symmetry — Mathlib has NO
+-- det-derivative lemma; the repo JacobiFormula bank supplies it) ⟹ the J4-642 labelled hamp
+-- chain rule DISCHARGED: radialDeriv_correctedFold gives r∂_r((vanVleck g)⁻¹)^{−1/2}
+-- = −¼ρ·fold via radialDeriv_rpow at p = −1/4.  CORRECTED WITNESS: whiteChartKernel1' = the
+-- order-1 whitened witness at the INVERTED weight Θ̂' := (whiteTheta)⁻¹ (fold = (det ĝ)^{−1/4},
+-- the classical Minakshisundaram amplitude per the J4-642 verdict) with UNCHANGED banked
+-- coefficients — whiteThetaC_matched_op/whiteCoeffsC_matched pin transportOp((Θ̂')⁻¹) =
+-- whiteTransportOp (transportOp_inv_inv) ⟹ the R/6 diagonal supplier preserved; diagonal
+-- carrier whiteChartKernel1'_diagonal_a1 (R/6 still a LABELLED value, not derived); nonzero at
+-- curved κ=−1 data.  h0/h1/htr are THEOREMS at the corrected witness (white_h0_corrected /
+-- white_h1_corrected via the banked §4 cancellations + the bridge + the banked ODE;
+-- htr_of_inv_symm).  RE-DERIVED BUDGET white_K1BudgetW_corrected: h0/h1/hamp/htr GONE from the
+-- K1 input list; residue = whitened-Gauss geometric legs {hsymI, hgsym, hGauss (banked fold-free
+-- supplier whiteGauss_discharged — provenance pin white_hGauss_supplier_foldfree), hdGauss
+-- (derivable: hdGauss_of_metric_gauss from the banked pointwise Gauss), hinv, hdet} +
+-- regularity legs {hwsm, hd, hu1d, hsm, hΔ} (Jet-5; the J4-640/641 old-fold dischargers are
+-- sign-agnostic in mechanism but stated at whiteTheta — corrected-fold re-instantiation owed).
+-- Gates: Jacobi bridge FIRES at the curved exponential witness (ρ = 2 ≠ 0, bridge route =
+-- direct route); machinery-route K₀ = 0 end-to-end (gate_corrected_h0_jacobi_route, no explicit
+-- exp computation — cross-checks the banked explicit gate).  NOT a1=R/6 (post-F1 K1 residue +
+-- Jet-5 chart rung + Duhamel carry + fat-K carriers + capstone co-instantiation at the
+-- corrected witness + prior piles owed).  Expected std-3 all.
+#print axioms QIQTH.WhiteF1.metric_slice_hasDerivAt
+#print axioms QIQTH.WhiteF1.det_slice_hasDerivAt
+#print axioms QIQTH.WhiteF1.pd_logDet_eq
+#print axioms QIQTH.WhiteF1.radial_logDet_eq_rho
+#print axioms QIQTH.WhiteF1.correctedFold_eq_det_rpow
+#print axioms QIQTH.WhiteF1.radialDeriv_correctedFold
+#print axioms QIQTH.WhiteF1.htr_of_inv_symm
+#print axioms QIQTH.WhiteF1.hdGauss_of_metric_gauss
+#print axioms QIQTH.WhiteF1.whiteThetaC_matched_op
+#print axioms QIQTH.WhiteF1.whiteCoeffsC_matched
+#print axioms QIQTH.WhiteF1.whiteChartKernel1'_apply
+#print axioms QIQTH.WhiteF1.whiteChartKernel1'_diagonal_a1
+#print axioms QIQTH.WhiteF1.whiteChartKernel1'_ne_zero_gate
+#print axioms QIQTH.WhiteF1.white_h0_corrected
+#print axioms QIQTH.WhiteF1.white_h1_corrected
+#print axioms QIQTH.WhiteF1.whiteDefect1'_linear_gain
+#print axioms QIQTH.WhiteF1.white_K1BudgetW_corrected
+#print axioms QIQTH.WhiteF1.white_K1BudgetW_corrected_concreteH
+#print axioms QIQTH.WhiteF1.white_hGauss_supplier_foldfree
+#print axioms QIQTH.WhiteF1.gate_logDet_direct
+#print axioms QIQTH.WhiteF1.gate_jacobi_bridge
+#print axioms QIQTH.WhiteF1.gate_jacobi_bridge_value
+#print axioms QIQTH.WhiteF1.gate_corrected_h0_jacobi_route
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
