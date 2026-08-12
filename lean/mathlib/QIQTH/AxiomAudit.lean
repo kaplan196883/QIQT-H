@@ -25805,6 +25805,33 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5Fund_value_bound_gate
 #print axioms QIQTH.ExpMap.expJet5ValG_norm_le_gate
 
+-- J4-648 (JET-5 PHASE 4 = the J5-3 crux, STAGED) — ExpJet5Phase4.lean:
+-- ★ (i) expJet4Val_v_two_pt_Icc_const — the [0,1]-UNIFORM fourth-variation two-point Lipschitz
+-- bound ‖R⁴_v(t)−R⁴_w(t)‖ ≤ expJet4VtpConst·‖v−w‖·‖h‖‖k‖‖l‖‖m‖ ∀t∈[0,1]: the IDENTICAL
+-- 51-sub-term ρ₄-telescope of the banked expJet4Val_v_two_pt_diff (ExpJet4ValFull.lean,
+-- hypothesis list VERBATIM — non-vacuity inherited from the mainline ExpJet4DFull consumption
+-- chain), with the t=1 gronwall_vec_residual replaced by gronwall_vec_residual_Icc (exactly the
+-- expJet3Val_v_two_pt_diff ↦ expJet3Val_v_two_pt_Icc_const move one Fréchet order up). THE
+-- lower-jet feeder the jet-5 (4+1) ρ₅-telescope blocks consume (differenced Q^{····}_v−Q^{····}_w).
+-- ★ (ii) expJet5_v_residual_hasDerivWithinAt — the Jet₅ R_v−R_w parameter-residual ODE identity
+-- D'(t)=DF(Y_v)(D)+([DF(Y_v)−DF(Y_w)](R_w)+(Θ₅_v−Θ₅_w)) with the 51-term source difference
+-- (mirror of expJet4_v_residual_hasDerivWithinAt). ★ (iii-a) expJet5Val_v_two_pt_diff_gronwall —
+-- the residual-Grönwall application: carrying the GENUINE ρ₅-residual bound hrbound as an
+-- explicit hypothesis, ‖R⁵_v(1)−R⁵_w(1)‖ ≤ ρ₅·e^{Kstar} (= the full expJet5Val_v_two_pt_diff
+-- MINUS the 202-sub-term telescope). Non-vacuity gate (cp466 discipline):
+-- expJet5Val_v_two_pt_diff_gronwall_gate = ALL antecedents jointly discharged at the GENUINELY
+-- CURVED witness g^κ=curvedRNCMetric(−1) (the expJet5Fund witness in both slots, v=w=0 ⟹
+-- source difference ≡ 0 ⟹ ρ₅=0 genuine). ⚠ NOT closed (J5-3 residue = stage (iii-b)): the
+-- concrete 202-sub-term ρ₅-telescope (1 [DF]R_w + 6-peel D⁵F + 10×5-peel D⁴F + 25×4-peel D³F
+-- + 15×3-peel D²F) discharging hrbound with the assembled expJet5VtpConst ⟹ the full
+-- expJet5Val_v_two_pt_diff; then (J5-4/5/6). NOT a₁=R/6 (flat non-vacuous; curved owes Jet-5
+-- completion + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet4Val_v_two_pt_Icc_const
+#print axioms QIQTH.ExpMap.expJet5_v_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff_gronwall
+#print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff_gronwall_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

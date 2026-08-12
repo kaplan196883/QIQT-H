@@ -2388,3 +2388,11 @@ import QIQTH.ExpJet5Phase2
 -- + the uniform 5-linear bound expJet5ValG_norm_le + curved-witness non-vacuity gates.
 -- J5-3 crux…J5-6 NOT closed; a₁=R/6 remains conditional (curved).
 import QIQTH.ExpJet5Phase3
+-- J4-648: ExpJet5Phase4 — JET-5 phase 4 (the J5-3 crux, STAGED): (i) the [0,1]-uniform
+-- fourth-variation two-point bound expJet4Val_v_two_pt_Icc_const (51-sub-term ρ₄-telescope
+-- re-run with gronwall_vec_residual_Icc — the jet-5 (4+1) telescope feeder), (ii) the Jet₅
+-- residual ODE identity expJet5_v_residual_hasDerivWithinAt (51-term source difference),
+-- (iii-a) expJet5Val_v_two_pt_diff_gronwall (carried genuine ρ₅-residual bound) + curved
+-- non-vacuity gate. Stage (iii-b) 202-sub-term ρ₅-telescope + J5-4/5/6 NOT closed;
+-- a₁=R/6 remains conditional (curved).
+import QIQTH.ExpJet5Phase4
