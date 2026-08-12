@@ -25739,6 +25739,38 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5Fund_unique
 #print axioms QIQTH.ExpMap.expJet5FundSol_unique
 
+-- ============================================================
+-- J4-646 (JET-5 PHASE 2 = J5-2: the D5 well-posedness layer) — ExpJet5Phase2.lean:
+-- clmApply5_norm_le (generic quintilinear CLM norm bound, one order above clmApply4) +
+-- ★ expJet5Rhs_norm_le — the UNIFORM [0,1] norm bound of the 51-term source Θ₅^{hklmr}
+-- (script-generated enumeration in EXACT expJet5Rhs term order — no-false-bound discipline;
+-- tube bounds Kstar5/4/3/2 + Cphi + 25 Q-bounds, term-wise clmApply5/4/3/2 + triangle) +
+-- the order-5 compactness clones expJet_fderiv5_tube_bddAbove_unif (single Kstar5 for ALL
+-- admissible v, compact confined tube ball) + expJet_fderiv5_lipschitzOnWith (C¹ on compact
+-- convex ⟹ Lipschitz; the hLipD5F datum of the J5-3 crux) + ★ expJet5Fund — the [0,1] GLOBAL
+-- D5 fundamental solution (verbatim one-order-up glue mirror of expJet4FundGlobal:
+-- Field_continuousOn → _shifted (Picard–Lindelöf at arbitrary IC) → _shifted_integral (FTC-2)
+-- → _glue (N ≥ 2(KdF+1) endpoint-matching concatenation) → capstone: global integral equation
+-- + inhomogeneous derivative law) + expJet5FundSol_exists (IsExpJet5FundSol INHABITED — the
+-- phase-1 deferred obligation). Non-vacuity gates (cp466: antecedent inhabitance):
+-- expJet5Fund_gate_curved = existence fires at the GENUINELY CURVED witness g^κ=curvedRNCMetric
+-- (−1) (hC = curvedRNC_hChr, p=v=0, hv from expRho_pos, all antecedents DISCHARGED);
+-- expJet5Rhs_norm_le_gate = the 51-term bound runs end-to-end at the same witness with tube
+-- bounds from the four _unif lemmas. ⚠ NOT closed (Jet-5 residue): (J5-3) the order-5 two-point
+-- Grönwall crux expJet5Val_v_two_pt_diff (hLipD5F/Kstar5 tube data), (J5-4) quintilinear CLM
+-- packaging expJetD5(_two_pt_diff), (J5-5) expMap_fderiv4_hasFDerivAt + assembly (⟹
+-- expMap_contDiffOn_five UNCONDITIONAL), (J5-6) chart weld = hch5. NOT a₁=R/6 (flat
+-- non-vacuous; curved owes Jet-5 completion + Duhamel carry + fat-K carriers + capstone
+-- co-instantiation + prior piles). expected: standard 3
+#print axioms QIQTH.ExpMap.clmApply5_norm_le
+#print axioms QIQTH.ExpMap.expJet5Rhs_norm_le
+#print axioms QIQTH.ExpMap.expJet_fderiv5_tube_bddAbove_unif
+#print axioms QIQTH.ExpMap.expJet_fderiv5_lipschitzOnWith
+#print axioms QIQTH.ExpMap.expJet5Fund
+#print axioms QIQTH.ExpMap.expJet5FundSol_exists
+#print axioms QIQTH.ExpMap.expJet5Fund_gate_curved
+#print axioms QIQTH.ExpMap.expJet5Rhs_norm_le_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -2376,3 +2376,8 @@ import QIQTH.WhiteF1Reg
 -- STATEMENT layer (expJet5Rhs = 51-term fifth-variation source, continuity, IsExpJet5FundSol
 -- shape, source-independent Grönwall uniqueness). hfd4 NOT discharged; hch5 NOT claimed.
 import QIQTH.ExpJet5Phase1
+-- J4-646: ExpJet5Phase2 — JET-5 phase 2 (J5-2): clmApply5_norm_le + the 51-term uniform [0,1]
+-- norm bound expJet5Rhs_norm_le + the order-5 compactness clones (D⁵F unif tube bound +
+-- Lipschitz) + the [0,1] GLOBAL fundamental-solution existence expJet5Fund (glue mirror) +
+-- IsExpJet5FundSol inhabited + curved-witness non-vacuity gates. J5-3…J5-6 NOT closed.
+import QIQTH.ExpJet5Phase2
