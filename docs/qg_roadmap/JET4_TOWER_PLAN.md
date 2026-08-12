@@ -7817,3 +7817,18 @@ FAILS + VANISHES at the same witness. std-3, raw 0 (9919).
 banked radialDeriv_rpow) ⟹ hamp discharged; (2) the CORRECTED order-1 whitened witness
 (whiteChartKernel1' w/ Θ := (whiteTheta)⁻¹) + re-derived budget — h0/h1 discharge via §4 ⟹
 K1 list = {Gauss-at-whitened (banked suppliers), Jacobi, regularity/Jet-5}.
+
+### J4-643 [AF] — F1 re-instantiation: {h0, h1, hamp, htr} now THEOREMS (a4754128)
+WhiteF1.lean (23 decls). ★Jacobi bridge landed (honest generality; repo's JacobiFormula bank —
+Mathlib has no det derivative; two independent routes agree at the curved witness ρ=2).
+★Corrected witness whiteThetaC = √det ĝ (classical Minakshisundaram fold) on heatParametrix
+(heatParametrixFn hardwires the old fold — flagged). ★K₀ = 0 AND K₁ = 0 ARE THEOREMS
+(white_h0/h1_corrected); hamp + htr also gone. ★white_K1BudgetW_corrected. Fold-agnosticism:
+core layers generic (reused verbatim); J4-640/641 regularity dischargers stated at the OLD
+fold — corrected re-instantiation owed (carried honestly). R/6 carrier preserved (û₁ untouched,
+Θ̂'(0)=1). std-3, raw 0 (9920).
+**J4-644**: corrected-fold re-instantiation of the regularity dischargers (w₀' = Θ̂^{1/2} same
+rpow chain — trivial; whiteDelta local; w₁ chart-C⁵ conditional) + assemble the corrected
+h0h1-free budget ⟹ K1 residue ≈ {chart-C⁵ (Jet-5), hinv/hdet instantiation (Neumann/pos-def
+bank)}. Then Jet-5, Duhamel carry, fat-K carriers, capstone co-instantiation at the CORRECTED
+witness.
