@@ -7760,3 +7760,13 @@ K1 INPUTS NOW {hwsm, h0, h1, hΔ}. std-3, raw 0 (9914).
 **J4-638** (per agent): hΔ next (cheapest — WhiteAnnulus shape + banked amplitude-derivative
 piles for second derivatives of fold₁ = Θ̂·û₁); then h0/h1 = the rep-bridge walls (genuinely
 hard per the Sol audit; h1 first step = conjugation audit).
+
+### J4-638 [AF] — hDelta DISCHARGED; K1 inputs = {hwsm, h0, h1} (4a658d01)
+WhiteDelta.lean (6 decls). Operator decomposition + compact-gate jet bounds; ray-integral wall
+routed into hwsm (honest). ★★whiteDelta_discharged (exact binder, C_Δ constructed) +
+★★white_K1BudgetW_of_transport_deltaGaussFree ({hwsm,h0,h1} only). Scope honest (per-row C_Δ).
+std-3, raw 0 (9915).
+**J4-639**: hwsm — chain substantially banked (transportOp_preserves_contDiff C^∞ +
+radialTransportSolve_contDiff_one C¹); ⚠ wall: C¹ vs the ⊤ binder — consumers need only C² ⟹
+fallback = C²-weakened budget variant (new file; WhiteOrder1 read-only). Then h0/h1 = the
+rep-bridge transport walls (h1 + conjugation audit) — the genuinely hard last rungs of K1.
