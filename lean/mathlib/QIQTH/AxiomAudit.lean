@@ -25668,6 +25668,49 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteF1.gate_jacobi_bridge_value
 #print axioms QIQTH.WhiteF1.gate_corrected_h0_jacobi_route
 
+-- J4-644 WhiteF1Reg: corrected-fold regularity re-instantiation + FINAL ASSEMBLY.
+-- Local transport ODE (radialTransportSolve_transport_eq_C1 = J3 rebased at C¹;
+-- _of_ball = cutoff/star-shaped localization — the GLOBAL hsm leg of white_h1_corrected is
+-- GONE); GLOBAL det ĝ ≥ 0 (white_metric_det_nonneg via ĝ = E·(Jᵀ·g·J)·E congruence — honest
+-- hdet0, no false global strict positivity); corrected-fold dischargers re-instantiated:
+-- white_w0C_contDiffAt2_gate (w₀' = Θ̂'^{−1/2} C², WhiteW0 replay through one inv),
+-- whiteDeltaC_discharged_C2_local (hΔ at w₁', fold-generic WhiteW1 mechanism verbatim),
+-- white_w1C_contDiffAt2_of_chartC5 (banked û₁ chart-C⁵ leg + corrected fold); geometric legs
+-- white_hinvC_discharged (Neumann unit, sum_mul_invMat) + white_hdetC_discharged (pos-def IVT
+-- gate); totalRadialO1_coeff_level1_corrected_vanishes_nonneg = the h1 engine at NONNEG-global
+-- + strict-at-point weight (true unconditionally for Θ̂' = √det ĝ; hΘpos was consumed globally
+-- only through .le); white_ODE_of_chartC5 + white_h1C_local = h1 from LOCAL data only.
+-- ★★★ white_K1BudgetW_final = the corrected h0h1-free K1 t² budget, ALL legs internal:
+-- THE POST-J4-644 K1 INPUT LIST = {hch5 (chart-C⁵/Jet-5 rung, inhabitance NOT claimed)}
+-- (+ generic H-side data, discharged at the banked concrete Gaussian witness in _concreteH).
+-- Gates: white_h0_final_witness_gate = K₀ = 0 at the genuinely curved whitened witness
+-- (n=2, κ=−1, fat K, q=(1,1)) at a NONZERO gate point, UNCONDITIONAL (full supplier assembly,
+-- no hch5, no {0}-collapse); white_final_R6_carrier_repin = diagonal R/6 CARRIER intact at the
+-- corrected witness (labelled hu1, NOT derived — carrier ≠ proof);
+-- white_ODE_of_global_smooth = no-silent-strengthening (old global hsm ⟹ new pointwise ODE).
+-- NOT a1=R/6 (Jet-5 rung + Duhamel carry + fat-K carriers + capstone co-instantiation at the
+-- corrected witness + prior piles owed). expected: standard 3
+#print axioms QIQTH.WhiteF1Reg.radialDeriv_congr_nhds
+#print axioms QIQTH.WhiteF1Reg.radialTransportSolve_transport_eq_C1
+#print axioms QIQTH.WhiteF1Reg.radialTransportSolve_transport_eq_of_ball
+#print axioms QIQTH.WhiteF1Reg.uniformFlowPullbackMetric_det_nonneg
+#print axioms QIQTH.WhiteF1Reg.white_metric_det_nonneg
+#print axioms QIQTH.WhiteF1Reg.whiteThetaC_nonneg
+#print axioms QIQTH.WhiteF1Reg.white_w0C_pack
+#print axioms QIQTH.WhiteF1Reg.white_w0C_contDiffAt2_gate
+#print axioms QIQTH.WhiteF1Reg.whiteDeltaC_discharged_C2_local
+#print axioms QIQTH.WhiteF1Reg.white_w1C_contDiffAt2_of_chartC5
+#print axioms QIQTH.WhiteF1Reg.white_hinvC_discharged
+#print axioms QIQTH.WhiteF1Reg.white_hdetC_discharged
+#print axioms QIQTH.WhiteF1Reg.totalRadialO1_coeff_level1_corrected_vanishes_nonneg
+#print axioms QIQTH.WhiteF1Reg.white_ODE_of_chartC5
+#print axioms QIQTH.WhiteF1Reg.white_h1C_local
+#print axioms QIQTH.WhiteF1Reg.white_K1BudgetW_final
+#print axioms QIQTH.WhiteF1Reg.white_K1BudgetW_final_concreteH
+#print axioms QIQTH.WhiteF1Reg.white_h0_final_witness_gate
+#print axioms QIQTH.WhiteF1Reg.white_final_R6_carrier_repin
+#print axioms QIQTH.WhiteF1Reg.white_ODE_of_global_smooth
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -2357,3 +2357,17 @@ import QIQTH.WhiteTransport
 -- fires at curved data (ρ = 2, two independent routes agree); machinery-route K₀ = 0 end-to-end.
 -- NOT a1=R/6 (post-F1 K1 residue + Jet-5 + Duhamel + fat-K + co-instantiation + piles owed).
 import QIQTH.WhiteF1
+-- J4-644 WhiteF1Reg: the corrected-fold REGULARITY re-instantiation + FINAL ASSEMBLY. ★ Local
+-- transport ODE (J3 Leibniz/IBP rebased at C¹ + cutoff/ball localization — the global hsm leg
+-- is GONE); ★ GLOBAL det ĝ ≥ 0 (congruence factorization ĝ = E·(Jᵀ·g·J)·E — the honest hdet0;
+-- global det > 0 is false territory); corrected dischargers: w₀' = Θ̂'^{−1/2} C² gate (WhiteW0
+-- replay through one inv), hΔ at w₁' (fold-generic WhiteW1 mechanism, verbatim), w₁' chart-C⁵
+-- C² (banked û₁ leg + corrected fold); hinv from the Neumann unit (sum_mul_invMat); level1
+-- engine replayed at NONNEG-global + strict-at-point weight (true unconditionally for
+-- Θ̂' = √det ĝ). ★★★ white_K1BudgetW_final: the corrected h0h1-free K1 t² budget with ALL
+-- legs internal — THE K1 INPUT LIST IS NOW {hch5 (chart-C⁵/Jet-5 rung)} (+ generic H-side,
+-- discharged at the concrete Gaussian witness in _concreteH). Gates: K₀ = 0 at the genuinely
+-- curved whitened witness UNCONDITIONAL at a nonzero gate point; R/6 carrier re-pin (labelled
+-- hu1, NOT derived); ODE no-silent-strengthening record.
+-- NOT a1=R/6 (Jet-5 rung + Duhamel carry + fat-K carriers + capstone co-instantiation owed).
+import QIQTH.WhiteF1Reg
