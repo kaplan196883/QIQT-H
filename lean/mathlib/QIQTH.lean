@@ -2371,3 +2371,8 @@ import QIQTH.WhiteF1
 -- hu1, NOT derived); ODE no-silent-strengthening record.
 -- NOT a1=R/6 (Jet-5 rung + Duhamel carry + fat-K carriers + capstone co-instantiation owed).
 import QIQTH.WhiteF1Reg
+-- J4-645: ExpJet5Phase1 — JET-5 phase 1: the PROVEN Rung-5 reduction (C⁵ ⟸ C¹ of fderiv⁴, mirror
+-- of the Rung-4 reduction, bootstrapped off unconditional expMap_contDiffOn_four) + the D5
+-- STATEMENT layer (expJet5Rhs = 51-term fifth-variation source, continuity, IsExpJet5FundSol
+-- shape, source-independent Grönwall uniqueness). hfd4 NOT discharged; hch5 NOT claimed.
+import QIQTH.ExpJet5Phase1

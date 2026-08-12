@@ -25711,6 +25711,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteF1Reg.white_final_R6_carrier_repin
 #print axioms QIQTH.WhiteF1Reg.white_ODE_of_global_smooth
 
+-- ============================================================
+-- J4-645 (JET-5 PHASE 1: the Rung-5 reduction mirror + the D5 statement layer) — ExpJet5Phase1.lean:
+-- contDiff_fderiv5_geodesicField (D⁵F ∈ C^∞, one .fderiv_right above Rung-4) +
+-- ★ expMap_contDiffOn_five_of_fderiv4_contDiffOn_one — the PROVEN Rung-5 reduction (C⁵ of exp_p ⟸
+-- hfd4 = C¹ of fderiv⁴ exp_p on the exp-ball; bootstraps off the UNCONDITIONAL
+-- expMap_contDiffOn_four, chains contDiffOn_succ_of_fderivWithin FOUR times on the open ball —
+-- the mechanical mirror of the Rung-4 reduction; hfd4 carried EXPLICIT + genuinely consumed) +
+-- the D5 STATEMENT layer: expJet5Rhs = the 51-term fifth-variation inhomogeneity (one term per
+-- partition of {h,k,l,m,r} except the full block, Bell(5)−1 = 51: 1×D⁵F + 10×D⁴F + 25×D³F +
+-- 15×D²F; 25 abstract Q-inputs: 10 pair + 10 triple + 5 quadruple), _apply, _continuousOn
+-- (well-posedness datum for the phase-2 glue), IsExpJet5FundSol (the fundamental-solution SHAPE,
+-- inhabitance NOT claimed), expJet5Fund_unique + expJet5FundSol_unique (source-independent
+-- Grönwall: difference solves the HOMOGENEOUS Jacobi ODE, gronwall_vec_residual_Icc at ρ=0).
+-- ⚠ NOT closed (the Jet-5 residue, phases J5-2…J5-6): expJet5Rhs_norm_le → expJet5Fund existence
+-- (glue mirror) → the order-5 two-point Grönwall crux expJet5Val_v_two_pt_diff (hLipD5F/Kstar5
+-- tube data) → quintilinear CLM packaging expJetD5(_two_pt_diff) → expMap_fderiv4_hasFDerivAt +
+-- assembly (⟹ expMap_contDiffOn_five UNCONDITIONAL) → chart weld uniformFlowExp_contDiffAt_five
+-- = hch5. Tower is METRIC-GENERIC (sole metric input hC = C^∞ Christoffels — the polynomial
+-- witness g^κ supplies it free at EVERY order): the Jet-5 wall is PURE smooth-dependence-on-IC
+-- ODE machinery, zero metric-regularity residue. NOT a₁=R/6 (flat non-vacuous; curved owes the
+-- Jet-5 completion + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.contDiff_fderiv5_geodesicField
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_five_of_fderiv4_contDiffOn_one
+#print axioms QIQTH.ExpMap.expJet5Rhs_continuousOn
+#print axioms QIQTH.ExpMap.expJet5Fund_unique
+#print axioms QIQTH.ExpMap.expJet5FundSol_unique
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
