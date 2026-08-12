@@ -7782,3 +7782,14 @@ flat witness unconditionally. std-3, raw 0 (9916).
 whitePullbackMetric to gate-local ContDiffOn 2 (C2CarrierCollapse pattern through the linear
 whitening), then vanVleck + rpow on the positive gate; scope the w₁ leg's local
 rayIntegral_contDiff_nat variant in the same brick. Then h0/h1 = the transport walls.
+
+### J4-640 [AF] — hw0C2 DISCHARGED gate-locally; K1 = {hw1C2, h0, h1} (2e28a8a1)
+WhiteW0.lean (10 decls). Full collapse chain: C⁴ chart + fderiv_right ⟹ g̃ entries ContDiffAt 2
+(per-q gate, NO hReach) → ĝ C² through the whitening CLM → det C² (banked generic-point lemma)
+→ det > 0 (Neumann unit + segment IVT from det(0)=1) → Θ̂ C² > 0 → w₀ = Θ̂^{−1/2} C² (rpow).
+★★white_K1BudgetW_C2_w0Free. w₁ scope: star-shaped ray-solve locality LANDED + extension-shaped
+gate-local C²; missing lemma isolated: (L-a) ContDiffOn ray interchange OR (L-b) gate-local C²
+of T̂û₀ (C⁴ chart saturates the order budget). Witness gate unconditional. std-3, raw 0 (9917).
+**J4-641**: close the w₁ leg (L-b first: T̂û₀ = Θ̂^{−1/2}Δ_ĝ(Θ̂^{1/2}) gate-local C² — this
+brick's machinery one derivative deeper; + L-a interchange) + weaken whiteDelta's global binder
+to closed-ball-local ⟹ K1 = {h0, h1} on regularity-free footing. Then the transport walls.
