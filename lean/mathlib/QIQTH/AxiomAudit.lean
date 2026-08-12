@@ -25378,6 +25378,39 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteK1.white_k1_ceiling_gate
 #print axioms QIQTH.WhiteK1.whiteChart_invtau_witness_gate
 
+-- J4-636 (WhiteOrder1.lean): the ORDER-1 whitened witness + the linear-gain cancellation +
+-- the conditional K1 budget. The banked N1 amplitude read: heatParametrixFn 1 G T =
+-- G_tau·Theta^{-1/2}·(u0+tau·u1), u1 = transportCoeff T 1 (p-dependent transported). ★
+-- parametrixResidual_N1_layers = the exact N=1 t-layer regrouping of the banked
+-- parametrixResidual_offdiag_O1_total (new level-1 coefficient totalRadialO1_coeff_level1);
+-- ★★ parametrixResidual_N1_linear_gain = the CANCELLATION: {hGauss: Sum_j (g^{ij}-delta)v^j=0
+-- (kills the whole 1/t^2 layer), h0: totalRadialO1_coeff=0 (k=0 off-diag transport eq,
+-- CHECKPOINTED in ParametrixResidualO1Total), h1: level1=0 (k=1 eq; per Sol NOT derivable from
+-- the banked ODE without the conjugation-direction identification)} ==> Res1 = -t·G·Lap(w1) —
+-- the linear gain, exact. whiteChartKernel1/whiteAmbientKernel1 = the order-1 whitened witness
+-- (heatParametrixFn 1 at whitePullbackMetric data, row amplitude sqrt(det g^k(q)));
+-- whiteDefect1 = window×residual gated defect; ★ whiteDefect1_linear_gain = |E1(s,p,0)| <=
+-- (sqrt w)^n·C_Delta·s·G_ws(p) = the EXACT antecedent of the proved rung; ★
+-- white_K1BudgetW_of_transport (+_concreteH, H-side discharged via frozenK2Sharp_H_witness) =
+-- K1TransportBudgetW conditional ONLY on the labelled {hwsm,hGauss,h0,h1,hDelta}. Gates:
+-- flat_order1_hyps_inhabited (cp466 ANTECEDENT INHABITANCE — jointly satisfiable at flat data;
+-- consistency, NOT curved applicability), flat_N1_residual_vanishes (cancellation fires
+-- end-to-end), whiteChartKernel1_ne_zero_gate (genuinely nonzero at kappa=-1),
+-- whiteChartKernel1_diagonal_a1 (the a1 CARRIER: u1(0)=R/6 as labelled input — NOT derived).
+-- NOT a1=R/6. Expected std-3 all twelve.
+#print axioms QIQTH.WhiteOrder1.parametrixResidual_N1_layers
+#print axioms QIQTH.WhiteOrder1.parametrixResidual_N1_linear_gain
+#print axioms QIQTH.WhiteOrder1.whiteChartKernel1_apply
+#print axioms QIQTH.WhiteOrder1.whiteMetric_det_center
+#print axioms QIQTH.WhiteOrder1.whiteChartKernel1_diagonal_a1
+#print axioms QIQTH.WhiteOrder1.whiteDefect1_eq_defect
+#print axioms QIQTH.WhiteOrder1.whiteDefect1_linear_gain
+#print axioms QIQTH.WhiteOrder1.white_K1BudgetW_of_transport
+#print axioms QIQTH.WhiteOrder1.white_K1BudgetW_concreteH
+#print axioms QIQTH.WhiteOrder1.flat_order1_hyps_inhabited
+#print axioms QIQTH.WhiteOrder1.flat_N1_residual_vanishes
+#print axioms QIQTH.WhiteOrder1.whiteChartKernel1_ne_zero_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

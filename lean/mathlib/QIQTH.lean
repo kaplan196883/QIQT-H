@@ -2265,3 +2265,19 @@ import QIQTH.WhiteCapstoneWire
 -- witness with linear-gain defect = J4-636. NOT a1=R/6 (order-1 witness + split integrability +
 -- fat-K carriers + co-instantiation + prior piles owed).
 import QIQTH.WhiteK1
+-- J4-636 (WhiteOrder1): the ORDER-1 whitened witness — the u0+tau*u1 TRANSPORTED amplitude
+-- (whiteChartKernel1/whiteAmbientKernel1 = heatParametrixFn 1 at the whitened chart data; the
+-- p-dependent transportCoeff u1, NOT a q-only 1+tau*c1). N=1 layer normal form
+-- (parametrixResidual_N1_layers: Res1 = (1/t^2) G B w0 + (1/t) G (K0 + B w1) + G K1 - t G Lap w1)
+-- + ★ THE CANCELLATION (parametrixResidual_N1_linear_gain): hGauss (radial compat, kills B) +
+-- h0 (k=0 transport eq, the CHECKPOINTED identity) + h1 (k=1 eq, level1 coeff NEW) ==> Res1 =
+-- -t G Lap(w1) — THE LINEAR GAIN, exact. Gated defect whiteDefect1 (window x residual) obeys
+-- |E1(s,p,0)| <= (sqrt w)^n C_Delta s G_ws(p) — the EXACT rung antecedent ==> ★
+-- white_K1BudgetW_of_transport: the k=1 t^2 budget K1TransportBudgetW, conditional ONLY on the
+-- labelled transport inputs {hwsm,hGauss,h0,h1,hDelta} (+concrete-H version, H-side discharged).
+-- Gates: flat antecedent INHABITANCE (cp466: {hw,hGauss,h0,h1} jointly satisfiable, consistency
+-- not curved applicability) + cancellation fires (flat residual = 0 THROUGH the theorem) +
+-- curved kernel nonzero (kappa=-1) + diagonal a1 CARRIER (u1(0)=R/6 labelled, NOT derived).
+-- NOT a1=R/6 (discharge of {hGauss,h0,h1,hDelta,hwsm} at whitened data + Duhamel-split carry +
+-- fat-K carriers + co-instantiation + prior piles owed).
+import QIQTH.WhiteOrder1
