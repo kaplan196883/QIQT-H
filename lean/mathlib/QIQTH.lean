@@ -2458,3 +2458,12 @@ import QIQTH.ExpJet5RemHelpers
 -- still owed. NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5RemBlkTop
 import QIQTH.ExpJet5RemBlkCross
+-- J4-656: FdB abstract ASSEMBLY CORE — ExpJet5RemainderA (remMaster_identity: the 81-term
+-- abstract master reassembly (dw−dv)qw + (Θ₄w−Θ₄v−Θ₅v) = Σ 15 block-LHS over opaque CLM
+-- atoms, 18 symmetry reconciliations, numeric residual 1.8e-14) + ExpJet5RemainderB
+-- (remAssembly: the full abstract quadratic bound ‖head‖ ≤ Cfull·nr² chaining the 15
+-- banked block bounds). The CONCRETE expJet5_remainder_quadratic_bound instantiation hit
+-- an elaboration-cost wall (21-atom set cascade, >25.6M hb) — per-family split owed.
+-- NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5RemainderA
+import QIQTH.ExpJet5RemainderB

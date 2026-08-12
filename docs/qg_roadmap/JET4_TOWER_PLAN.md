@@ -8009,3 +8009,18 @@ value bound on the other (never nr³/nr⁴).
 t)`, discharge the carried symmetry hyps via `fderiv5/4/3/2_geodesicField_symm_*`
 (ExpJet5Prereq), feed the tube Taylor/accuracy/Lipschitz/value bounds, then sum the 15
 block bounds into `expJet5_remainder_quadratic_bound`. a₁=R/6 CONDITIONAL throughout.
+
+### J4-656 [AF/partial] — FdB ABSTRACT assembly core banked; concrete instantiation = elaboration wall
+ExpJet5RemainderA (89 lines, 75s): remMaster_identity — the 81-term abstract master
+reassembly (dw−dv)qw + (Θ₄w−Θ₄v−Θ₅v) = Σ 15 block-LHS (18 symmetry reconciliations;
+numeric residual 1.8e-14). ExpJet5RemainderB (261 lines, ~3min): remAssembly — the full
+abstract quadratic bound chaining all 15 block bounds ⟹ ‖head‖ ≤ Cfull·nr². Both std-3
+(verified twice). raw 0 (9945). NOT BANKED: ExpJet5Remainder.lean (622-line concrete
+seed, sorry-free but 21-atom set cascade >25.6M hb; 128M-hb run killed ~50min) — left
+uncommitted on disk.
+**J4-657**: concrete per-family split — per-family top-level lemmas (Block0/Top/6×B211/
+3×B22/4×B31), each taking the geometric setup as explicit hypotheses + calling its own
+remBlk* (small goals, ≤12.8M hb); thin no-set concrete master-rw (remMaster_identity at
+full-expression atoms + 18 symmetry facts); chaining lemma ⟹ expJet5_remainder_quadratic_bound;
+then _P/_unif + gate; then (b) SecondVar, (d) fderiv4_hasFDerivAt, (e) contDiffOn_five.
+a₁=R/6 CONDITIONAL throughout.

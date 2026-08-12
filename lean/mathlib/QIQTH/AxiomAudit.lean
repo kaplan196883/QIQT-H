@@ -25948,6 +25948,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.remBlk22_bound
 #print axioms QIQTH.ExpMap.remBlk31_bound
 
+-- J4-656: FdB abstract assembly core (ExpJet5RemainderA/B) — remMaster_identity: the
+-- 81-term abstract master reassembly (dw−dv)qw + (Θ₄w − Θ₄v − Θ₅v) = Σ(15 block-LHS)
+-- over opaque CLM atoms (simp sub_apply + 18 symmetry rw + abel; decomposition
+-- numerically validated, residual 1.8e-14), and remAssembly: the full abstract
+-- quadratic-remainder bound ‖head‖ ≤ Cfull·nr² via remMaster_identity + the 15 banked
+-- block bounds (Blk0/Top/6×211/3×22/4×31) + triangle chain, all analytic inputs as
+-- hypotheses. The CONCRETE expJet5_remainder_quadratic_bound (geometric instantiation)
+-- is NOT yet landed — pure elaboration-cost wall (21-atom set cascade >25.6M hb);
+-- per-family concrete split owed. NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.remMaster_identity
+#print axioms QIQTH.ExpMap.remAssembly
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
