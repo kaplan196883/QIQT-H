@@ -8024,3 +8024,16 @@ remBlk* (small goals, ≤12.8M hb); thin no-set concrete master-rw (remMaster_id
 full-expression atoms + 18 symmetry facts); chaining lemma ⟹ expJet5_remainder_quadratic_bound;
 then _P/_unif + gate; then (b) SecondVar, (d) fderiv4_hasFDerivAt, (e) contDiffOn_five.
 a₁=R/6 CONDITIONAL throughout.
+
+### J4-657 [AF] — the CONCRETE FdB quadratic remainder LANDED (expJet5_remainder_quadratic_bound)
+ExpJet5Remainder.lean (50KB, single theorem, builds ~10min after the per-family
+restructure): the geometric instantiation of remMaster_identity + remAssembly at
+fderivⁿ(geodesicField) along the tube — 15 blocks instantiated, 18 symmetry hyps via
+fderiv-symm cluster, Taylor/Lipschitz/value feeders supplied ⟹ the O(‖r‖²) bound.
+Convergence: 3 iterations (binder scoping Qhm/Qkl/Qkm → add_le_add_right shape +
+maxRecDepth@583 → green), with me building verdicts + feeding precise errors. std-3
+verified (my chk-file). raw 0 (9946).
+**J4-658**: _P + _unif packaging (mirror ExpJet4RemainderP/Unif — the l-uniform Icc
+constant form ExpMapFDeriv3 consumed) + curved gate at curvedRNCMetric(−1). Then (b)
+expJet4SecondVar_residual_Icc_unif, (d) expMap_fderiv4_hasFDerivAt, (e) contDiffOn_five,
+J5-6 weld ⟹ hch5 ⟹ K1. a₁=R/6 CONDITIONAL throughout.

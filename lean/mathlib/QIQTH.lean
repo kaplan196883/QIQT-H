@@ -2467,3 +2467,10 @@ import QIQTH.ExpJet5RemBlkCross
 -- NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5RemainderA
 import QIQTH.ExpJet5RemainderB
+-- J4-657: the CONCRETE Jet₅ Faà-di-Bruno quadratic remainder LANDED —
+-- expJet5_remainder_quadratic_bound (ExpJet5Remainder): the geometric instantiation of
+-- remMaster_identity + remAssembly at fderivⁿ(geodesicField) along the tube, with the 15
+-- block bounds fed by ExpJet5Prereq Taylor/S₅ symmetry + Lipschitz/value feeders.
+-- _P/_unif packaging + curved gate owed; then (b) SecondVar, (d) fderiv4_hasFDerivAt,
+-- (e) contDiffOn_five. NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5Remainder

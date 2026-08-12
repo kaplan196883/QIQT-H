@@ -25961,6 +25961,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.remMaster_identity
 #print axioms QIQTH.ExpMap.remAssembly
 
+-- J4-657: the CONCRETE Jet₅ Faà-di-Bruno quadratic remainder —
+-- expJet5_remainder_quadratic_bound (ExpJet5Remainder.lean): the geometric instantiation
+-- of the abstract core (remMaster_identity + remAssembly) at the concrete
+-- fderivⁿ(geodesicField) atoms along the tube: the 15 census blocks instantiated, the 18
+-- symmetry hypotheses discharged via fderiv5/4/3/2_geodesicField_symm_*, Taylor
+-- (geodesicField_D4F_second_order_taylor + lower), Lipschitz and value feeders supplied
+-- ⟹ ‖(dw−dv)Qw + (Θ₄w−Θ₄v−Θ₅v)‖ ≤ C·(products)·‖r‖² on the tube. The l-uniform _P/_unif
+-- packaging + curved gate are NOT yet landed; then (b) expJet4SecondVar_residual_Icc_unif,
+-- (d) expMap_fderiv4_hasFDerivAt, (e) contDiffOn_five. NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6
+-- (flat non-vacuous; curved owes the rest of J5-5 + J5-6 + Duhamel carry + fat-K carriers
+-- + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet5_remainder_quadratic_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
