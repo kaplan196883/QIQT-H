@@ -25262,6 +25262,44 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteS1C.white_unconditional_feed_witness_gate
 #print axioms QIQTH.WhiteS1C.white_S1c_radii_satisfiable
 
+-- J4-633 (WidthFree): THE hlam8 AUDIT + DELETION. Verdict: the G_{8s} landing of the bridge
+-- triangle was a SPURIOUS pin. (1) gaussDdim_le_of_width_le = the CLEAN widening c≤d ⟹
+-- G_{cτ} ≤ √(d/c)ⁿ·G_{dτ} (chart comparison at w=v; NO upper-ratio restriction; direction
+-- narrow≤const·wide only); the banked gaussDdim_widen_le's d≤4c was itself spurious
+-- (gaussDdim_widen_le_ratio recovers any ratio ρ at cost √ρⁿ). (2) FrozenTransportBridgeW w =
+-- the width-parametric bridge Prop (defeq to the banked Prop at w=8:
+-- frozenTransportBridgeW_eight_iff; monotone in w). (3) The sufficiency chain has NO genuine
+-- 8-pin: tail_slice_of_pointwise_w (C–K composition G_{2(t−s)}∗G_{ws}=G_{2t+(w−2)s} exact,
+-- widening to G_{wt} at ratio ≤ w/2 for w≥2, H-side width 2 = model side, w-independent) +
+-- bridged_tail_pointwise_w (frozen tail widens 8→w for w≥8) + smoke_bridge_verdict_w (the
+-- certified J4-616 transfer at any w≥8, landing G_{wt}). (4) frozenTransportBridgeW_of_tails:
+-- BOTH tails widen into G_{(max 8 lam)s} — whitened by lam≤max, frozen by 8≤max — triangle.
+-- ★★ white_transport_bridge_unconditional: ∀κ≤0, compact K⊆B̄(0,R), n>0, frozen (K₀,r):
+-- ∃ fat gate + radii + lam=whiteLam≥2 with FrozenTransportBridgeW (max 8 lam) holding
+-- OUTRIGHT — hEmeas discharged (J4-632) AND hlam8 DELETED (no width antecedent). ★★
+-- white_corrHigher_unconditional: the capstone-shaped bounded-cRem O(t²) API at the whitened
+-- defect, landing G_{(max 8 lam)t}, no width/measurability residue. Gates: bridgeW inhabited
+-- at w=8 (banked nonzero witness, curved frozen data) + w=12 (the w>8 regime) + the
+-- unconditional feeder FIRES at n=2, κ=−1, K=B̄(0,2), frozen (−1,1/2) (fat gate exhibited).
+-- Expected std-3 all 15. NOT a1=R/6 (K1TransportBudget, fat-K carriers, capstone
+-- co-instantiation at the whitened witness + width-(max 8 lam) capstone-side re-thread +
+-- prior piles still owed).
+#print axioms QIQTH.WidthFree.gaussDdim_le_of_width_le
+#print axioms QIQTH.WidthFree.gaussDdim_le_of_width_le'
+#print axioms QIQTH.WidthFree.gaussDdim_widen_le_ratio
+#print axioms QIQTH.WidthFree.frozenTransportBridgeW_eight_iff
+#print axioms QIQTH.WidthFree.frozenTransportBridgeW_mono
+#print axioms QIQTH.WidthFree.frozenTransportBridgeW_of_tails
+#print axioms QIQTH.WidthFree.tail_slice_of_pointwise_w
+#print axioms QIQTH.WidthFree.bridged_tail_pointwise_w
+#print axioms QIQTH.WidthFree.smoke_bridge_verdict_w
+#print axioms QIQTH.WidthFree.white_transport_bridgeW
+#print axioms QIQTH.WidthFree.white_transport_bridge_unconditional
+#print axioms QIQTH.WidthFree.white_corrHigher_unconditional
+#print axioms QIQTH.WidthFree.bridgeW_witness_w8
+#print axioms QIQTH.WidthFree.bridgeW_witness_wide
+#print axioms QIQTH.WidthFree.white_bridgeW_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

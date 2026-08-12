@@ -2229,3 +2229,15 @@ import QIQTH.WhiteS1P2
 -- feeder now modulo lam<=8 (hlam8) ONLY. NOT a1=R/6 (hlam8, K1TransportBudget, fat-K
 -- carriers, capstone co-instantiation + prior piles still owed).
 import QIQTH.WhiteS1C
+-- J4-633 (WidthFree): THE hlam8 AUDIT + DELETION — the frozen-side G_{8s} landing pin of the
+-- FrozenTransportBridge triangle was SPURIOUS: clean widening gaussDdim_le_of_width_le
+-- (c<=d => G_c <= sqrt(d/c)^n G_d, NO ratio-4 restriction — the banked gaussDdim_widen_le's
+-- d<=4c was itself spurious, recovered at any ratio by gaussDdim_widen_le_ratio);
+-- width-parametric bridge Prop FrozenTransportBridgeW w (= banked Prop at w=8, defeq gate) +
+-- width-general sufficiency (tail_slice_of_pointwise_w / smoke_bridge_verdict_w: C-K exact at
+-- any width, widening ratio <= w/2, H-side width 2 is the model side — NO genuine 8-pin);
+-- ★★ white_transport_bridge_unconditional / white_corrHigher_unconditional: the whitened
+-- bridge + corrHigher API at landing width max 8 lam with hEmeas discharged AND hlam8 DELETED.
+-- NOT a1=R/6 (K1TransportBudget, fat-K carriers, capstone co-instantiation at the whitened
+-- witness + width-(max 8 lam) capstone-side re-thread + prior piles still owed).
+import QIQTH.WidthFree
