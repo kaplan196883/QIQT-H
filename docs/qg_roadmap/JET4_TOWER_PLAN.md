@@ -7750,3 +7750,13 @@ whiteChartKernel1_diagonal_a1 = the a₁ CARRIER (carries R/6, does not derive).
 **J4-637** (per agent): hGauss at the whitened chart — pure banked-jet algebra (ĝ(w)w = w from
 the flow-chart radial identity + EᵀgE = δ, then invert; the ONLY input with no rep bridge).
 h0/h1 = the checkpointed transport-equation wall (h1 first step = the conjugation audit).
+
+### J4-637 [AF] — hGauss DISCHARGED: the whitened chart IS a true-Gauss-lemma chart (b610b885)
+WhiteGauss.lean (6 decls). Raw radial identity BANKED end-to-end (J4-347 campaign at general
+base row; exact form g̃(v)·v = g(q)·v — NOT = v); whitening closes it: ĝ(w)·w = w EXACTLY
+(the eikonal/1/τ² layer vanishes identically — Sol's J4-635 note confirmed).
+★★whiteGauss_discharged (exact binder, unconditional) + white_K1BudgetW_of_transport_gaussFree.
+K1 INPUTS NOW {hwsm, h0, h1, hΔ}. std-3, raw 0 (9914).
+**J4-638** (per agent): hΔ next (cheapest — WhiteAnnulus shape + banked amplitude-derivative
+piles for second derivatives of fold₁ = Θ̂·û₁); then h0/h1 = the rep-bridge walls (genuinely
+hard per the Sol audit; h1 first step = conjugation audit).
