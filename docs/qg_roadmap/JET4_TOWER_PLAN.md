@@ -7905,3 +7905,20 @@ across Phase5a/b/c, each file <80KB, per-lemma maxHeartbeats ≤ 1.6M) + thin as
 (regroup 51 block lemmas + leading Lipschitz ⟹ hrbound ⟹ (iii-a) Grönwall ⟹
 expJet5Val_v_two_pt_diff). a₁=R/6 remains CONDITIONAL (flat non-vacuous; curved owes Jet-5
 completion + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).
+
+### J4-650 [AF] — ★ J5-3 CLOSED: expJet5Val_v_two_pt_diff via per-block split architecture
+Agent authored+iterated (4 assembly attempts); I diagnosed the whnf wall + banked.
+The 202-sub-term ρ₅-telescope discharged: ExpJet5BlkA/B/C (13 head-threaded chunk lemmas
+≤4-5 terms each over the TeleA peels — 15×D²F / 25×D³F / D⁵F+10×D⁴F difference blocks;
+fully generic normed-space form after a silent auto-bound-implicit failure), ExpJet5RhoEq
+(the isolated pure-ℝ closing ring identity, eq-hypothesis form), ExpJet5Phase5 (thin
+assembly 126KB, 325s — replaces the 217KB monolith that ate 25.6M heartbeats; two tactic
+bombs removed: hρ50 positivity → t=0 instance of hrbound; unfold+ring → RhoEq), and
+ExpJet5Phase5Gate (curved non-vacuity satisfiability gate at curvedRNCMetric(−1), genuine
+expJet⋆Fund witness tower). Both crux + gate verified std-3 by me (chk-file read). raw 0
+(9932). Generator gen_jet5_p5split.py (numeric NO-FALSE-BOUND self-check rel-err 0.0).
+**J4-651**: J5-4 — quintilinear CLM packaging expJetD5 + its _two_pt_diff consumer form
+(25 Q-slots from the banked lower-jet curves; mirror the order-4 pattern). Then J5-5
+(hfd4 ⟹ expMap_contDiffOn_five), J5-6 (chart weld = hch5) ⟹ K1 LANDS. a₁=R/6 remains
+CONDITIONAL (flat non-vacuous; curved owes J5-4/5/6 + Duhamel carry + fat-K carriers +
+capstone co-instantiation + prior piles).

@@ -2403,3 +2403,16 @@ import QIQTH.ExpJet5Phase4
 -- timeout and is NOT banked; per-block split (J4-650) is the live fix.
 -- a₁=R/6 remains conditional (curved).
 import QIQTH.ExpJet5TeleA
+-- J4-650: the J5-3 crux CLOSED — per-block split architecture replacing the timed-out
+-- monolith: ExpJet5BlkA/B/C (13 head-threaded chunk lemmas over the TeleA peels: 15xD2F /
+-- 25xD3F / D5F+10xD4F difference blocks, fully generic normed-space form), ExpJet5RhoEq
+-- (the isolated pure-R closing ring identity), ExpJet5Phase5 (thin assembly ⟹
+-- ★ expJet5Val_v_two_pt_diff, the order-5 two-point Lipschitz bound), ExpJet5Phase5Gate
+-- (curved non-vacuity satisfiability gate at curvedRNCMetric (-1), genuine witness tower).
+-- J5-4/5/6 NOT closed; NOT exp∈C⁵; a₁=R/6 remains conditional (curved).
+import QIQTH.ExpJet5BlkA
+import QIQTH.ExpJet5BlkB
+import QIQTH.ExpJet5BlkC
+import QIQTH.ExpJet5RhoEq
+import QIQTH.ExpJet5Phase5
+import QIQTH.ExpJet5Phase5Gate

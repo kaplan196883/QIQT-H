@@ -25847,6 +25847,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5TelePeel5
 #print axioms QIQTH.ExpMap.expJet5VtpConst_nonneg
 
+-- J4-650: the J5-3 crux CLOSED — ★ expJet5Val_v_two_pt_diff (the order-5 two-point
+-- Lipschitz bound ‖Rv 1 − Rw 1‖ ≤ expJet5VtpConst·‖v−w‖·‖h‖‖k‖‖l‖‖m‖‖r‖): the 202-sub-term
+-- ρ₅-telescope discharged via the per-block split architecture (ExpJet5BlkA/B/C 13 chunk
+-- lemmas + ExpJet5RhoEq pure-ℝ ring identity + thin assembly), replacing the
+-- 25.6M-heartbeat-timeout monolith. Plus the curved non-vacuity satisfiability gate at
+-- curvedRNCMetric (−1) with the genuine expJet⋆Fund witness tower. J5-4 (quintilinear CLM)
+-- / J5-5 (hfd4) / J5-6 (chart weld = hch5) NOT closed; NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6
+-- (flat non-vacuous; curved owes Jet-5 completion + Duhamel carry + fat-K carriers +
+-- capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff
+#print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff_gate
+#print axioms QIQTH.ExpMap.expJet5RhoConst_eq
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
