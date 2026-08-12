@@ -7793,3 +7793,13 @@ of T̂û₀ (C⁴ chart saturates the order budget). Witness gate unconditional.
 **J4-641**: close the w₁ leg (L-b first: T̂û₀ = Θ̂^{−1/2}Δ_ĝ(Θ̂^{1/2}) gate-local C² — this
 brick's machinery one derivative deeper; + L-a interchange) + weaken whiteDelta's global binder
 to closed-ball-local ⟹ K1 = {h0, h1} on regularity-free footing. Then the transport walls.
+
+### J4-641 [AF] — w₁ leg: (L-a) CLOSED; (L-b) = exactly chart-C⁵; K1 = {h0,h1} + [Jet-5] (e86e4772)
+WhiteW1.lean (26 decls). ORDER LEDGER certified: banked chart = C⁴ only (each order its own
+Grönwall rung); T̂û₀ ∈ C² ⟸ chart C⁵ exactly. (L-a) interchange CLOSED unconditionally
+(C^N-source ray tower + ContDiffBump extension — ball-local C² source ⟹ ball-local C² solve).
+(L-b) conditional chain through hch5 (entries C⁴ → Θ̂ C⁴ → source C² → w₁ C²). whiteDelta
+LOCALIZED. ★★★white_K1BudgetW_h0h1_of_chartC5: K1 = {h0, h1} given hch5. hch5 = the Jet-5 rung
+(labelled, multi-brick campaign; label-faithfulness pinned). std-3, raw 0 (9918).
+**J4-642**: h0/h1 transport walls (h1 conjugation audit first — the only non-chart K1 inputs)
+OR the Jet-5 rung phase 1 (expMap_contDiffOn_five reduction mirror + D5 Grönwall scope).
