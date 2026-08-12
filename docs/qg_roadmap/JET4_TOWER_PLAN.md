@@ -7877,3 +7877,14 @@ assembly + VtpConst. std-3, raw 0 (9924).
 **J4-648**: J5-3 staged — (i) expJet4CurveG_v_two_pt_Icc_const (the lower-jet Lipschitz feeder;
 valid honest partial alone), (ii) the order-5 residual-derivative identity, (iii)
 expJet5Val_v_two_pt_diff_gronwall → the crux + expJet5VtpConst.
+
+### J4-648 [AF] — J5-3 staged: feeder + identity + Grönwall landed; 202-term telescope = residue (e31510aa)
+ExpJet5Phase4.lean (4 pins, 573s). (i) order-4 two-point Icc const FULL (correct Icc-uniformity
+architecture — full telescope re-run); (ii) the Jet₅ difference-ODE identity FULL; (iii-a) the
+Grönwall assembly + curved gate LANDED (ρ₅ carried honestly). (iii-b) the 202-sub-term ρ₅
+telescope NOT landed — monolith-wall data (est. 30-45min single-file); split architecture
+recommended (per-block-family generated files + thin assembly). std-3, raw 0 (9925).
+**J4-649**: (iii-b) split — generator emits per-family bound lemma files (D⁵F/D⁴F/D³F/D²F
+families over the set atoms, each <10min) + thin assembly (expJet5VtpConst +
+expJet5Val_v_two_pt_diff via regroup + (iii-a)); fallback = one generated theorem w/
+maxHeartbeats 25600000 in its own file.
