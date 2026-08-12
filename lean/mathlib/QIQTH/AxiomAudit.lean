@@ -25990,6 +25990,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.remBlk22_bound_dir
 #print axioms QIQTH.ExpMap.remBlk31_bound_dir
 
+-- J4-659 (partial): remAssembly_dir (ExpJet5RemAssemblyDir) — the DIRECTIONAL abstract
+-- quadratic-remainder assembly: over opaque multilinear atoms, head ≤ (Σ of the 15
+-- per-direction block constants)·nr², with ~62 directional scale parameters; blocks =
+-- remBlk0_bound + remBlkTop_bound_dir + 6×remBlk211_bound_dir + 3×remBlk22_bound_dir +
+-- 4×remBlk31_bound_dir; the ~130-term distribute ring isolated in the private pure-ℝ
+-- distrib15_nr (single rw — no large ring/whnf in the assembly; first-try green at
+-- 6.4M hb). The concrete directional _P wrapper is NOT yet landed (owes the factor_hklm
+-- ~130-monomial factoring identity + ~600-line mirror); then (b) SecondVar + directional
+-- uniform feeders + _unif + gate. NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.remAssembly_dir
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

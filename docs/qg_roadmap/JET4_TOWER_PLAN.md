@@ -8052,3 +8052,30 @@ reuse hs1..hs18 symmetry verbatim); (3) brick (b) expJet4SecondVar_residual_Icc_
 (expJet4Val_v_two_pt_Icc_unif etc); (5) _unif (mirror ExpJet4RemainderUnif — what
 brick (d) consumes); (6) gate (after _P).** a₁=R/6 CONDITIONAL throughout.
 **J4-659**: steps (1)+(2) — remAssembly_dir + expJet5_remainder_quadratic_bound_P.
+
+### J4-659 [AF/partial] — DIRECTIONAL abstract assembly LANDED (remAssembly_dir); _P scoped
+ExpJet5RemAssemblyDir.lean (331 lines, 29KB, build 41s): `remAssembly_dir` — the DIRECTIONAL
+variant of `remAssembly`. Over abstract normed `E` with opaque multilinear atoms, the order-5
+residual head `(dw−dv)qw + (Θ₄w−Θ₄v−Θ₅v)` is bounded by `(Σ 15 per-direction block constants)·nr²`,
+every value/two-point/first→second/second→third/Lipschitz bound carried with its OWN per-direction
+scale (~62 scalar scale params: Vh Vk Vl Vm / Dh.. / Fh.. / Vhk..Vlm / Lhk.. / FQhk.. / VQ3.. / Ccr..
+/ VFq.. / Vklm.. / L3.. / FQ3..). Same opaque master `remMaster_identity` reassembly; blocks =
+`remBlk0_bound` + `remBlkTop_bound_dir` + `remBlk211_bound_dir`×6 + `remBlk22_bound_dir`×3 +
+`remBlk31_bound_dir`×4; triangle chain verbatim from `remAssembly`. The ≈130-term distribute-ring
+ISOLATED into a pure-ℝ 16-atom helper `distrib15_nr` (trivial `ring`) — so the assembly proof runs no
+large ring/whnf. std-3 verified (`#print axioms remAssembly_dir` = [propext, Classical.choice,
+Quot.sound]). NO sorry, NO new axioms. Standalone module (QIQTH.lean untouched per firewall).
+**FINDING on step (2) `_P`:** the concrete directional wrapper is a ~600-line mirror of
+`ExpJet5Remainder.lean` (directional feeders — SIMPLER, drop the Bdir upper-bound step) BUT with one
+genuinely-new killer: the non-directional wrapper closes with NO final ring (its shared-`V` block
+constants are literally identical → fold to 6·CB211+3·CB22+4·CB31 by `set`/defeq and `exact
+remAssembly`). The directional block constants are DISTINCT per direction, so `_P` needs a real
+`≈130-monomial` factoring identity `BigDirConst = C·‖h‖‖k‖‖l‖‖m‖` (each block const, after
+Vh:=eKs‖h‖ / Vhk:=Cq2‖h‖‖k‖ / Dh:=C3‖h‖ / Fh:=Cd‖h‖ substitution, = coeff·‖h‖‖k‖‖l‖‖m‖). That
+factoring must be isolated into its own pure-ℝ ring lemma (write BigDirConst and C·‖h‖‖k‖‖l‖‖m‖ once
+each, `ring` at ≥6.4M hb) to keep the main proof ring-free. Deferred: high build cost (~10min/attempt)
++ no iterative feedback make a one-shot 600-line _P high-risk; step (1) banked as sanctioned partial.
+**J4-660**: `expJet5_remainder_quadratic_bound_P` — concrete directional wrapper (mirror
+ExpJet5Remainder setup + directional feeders + isolated `factor_hklm` ring closing remAssembly_dir);
+then gate at curvedRNCMetric(−1). Then (b) SecondVar + directional uniform feeders + _unif.
+a₁=R/6 CONDITIONAL throughout.

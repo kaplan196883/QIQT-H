@@ -2482,3 +2482,10 @@ import QIQTH.ExpJet5Remainder
 -- SecondVar + directional uniform feeders + _unif + gate owed. NOT exp∈C⁵; a₁=R/6 cond.
 import QIQTH.ExpJet5RemDirTop
 import QIQTH.ExpJet5RemDirCross
+-- J4-659 (partial): remAssembly_dir (ExpJet5RemAssemblyDir) — the DIRECTIONAL abstract
+-- assembly: head ≤ (Σ 15 per-direction block constants)·nr² over ~62 directional scale
+-- params, via remMaster_identity + Blk0 + the 4 _dir blocks; the ~130-term distribute
+-- ring isolated in the pure-ℝ helper distrib15_nr (J4-650 pattern, first-try green).
+-- _P wrapper owed (needs the factor_hklm ~130-monomial ring identity); then (b) SecondVar
+-- + feeders + _unif + gate. NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5RemAssemblyDir
