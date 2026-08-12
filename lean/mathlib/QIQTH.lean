@@ -2416,3 +2416,16 @@ import QIQTH.ExpJet5BlkC
 import QIQTH.ExpJet5RhoEq
 import QIQTH.ExpJet5Phase5
 import QIQTH.ExpJet5Phase5Gate
+-- J4-651: J5-4 CLOSED — the quintilinear CLM packaging: ExpJet5D5CurveAbstract/CurveG
+-- (order-4 curve multilinearity feeders), ExpJet5D5Rhs (source-term multilinearity +
+-- 25-slot congruence), ExpJet5D5Val/ValG (matched-Q and genuine 5-linearity via
+-- expJet5Fund_unique), ExpJet5D5 (★ expJetD5 5-fold nested CLM via mkContinuous from
+-- expJet5ValG_norm_le + ★ expJetD5_two_pt_diff v-Lipschitz operator bound from the J5-3
+-- crux + curved gate at curvedRNCMetric (-1)). J5-5/6 NOT closed; NOT exp∈C⁵;
+-- a₁=R/6 remains conditional (curved).
+import QIQTH.ExpJet5D5CurveAbstract
+import QIQTH.ExpJet5D5CurveG
+import QIQTH.ExpJet5D5Rhs
+import QIQTH.ExpJet5D5Val
+import QIQTH.ExpJet5D5ValG
+import QIQTH.ExpJet5D5

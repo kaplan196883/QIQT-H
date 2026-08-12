@@ -7922,3 +7922,20 @@ expJet⋆Fund witness tower). Both crux + gate verified std-3 by me (chk-file re
 (hfd4 ⟹ expMap_contDiffOn_five), J5-6 (chart weld = hch5) ⟹ K1 LANDS. a₁=R/6 remains
 CONDITIONAL (flat non-vacuous; curved owes J5-4/5/6 + Duhamel carry + fat-K carriers +
 capstone co-instantiation + prior piles).
+
+### J4-651 [AF] — J5-4 CLOSED: expJetD5 quintilinear CLM packaging (6 files, split discipline)
+Agent authored (Opus, 6 generators in scratchpad: gen_abstract/curveg/rhs_congr/val/valg/d5
++ genlib); I verified + banked. ExpJet5D5CurveAbstract (order-4 curve multilinearity
+mirror), D5CurveG (genuine quadruple-feeder), D5Rhs (expJet5Rhs add/smul ×10 + 25-slot
+expJet5Val_congr), D5Val (matched-Q 5-linearity via expJet5Fund_unique), D5ValG (genuine
+5-linearity bridge, 2089 lines), D5 (★ expJetD5 = 5-fold nested mkContinuous CLM from
+expJet5ValG_norm_le; expJetD5_apply; ★ expJetD5_two_pt_diff — the v-Lipschitz operator
+bound from the J5-3 crux via 5× opNorm_le_bound, exact mirror of expJetD4_two_pt_diff;
+curved gate at curvedRNCMetric(−1)). All builds foreground green 29-168s/file; std-3
+verified by me (chk-file). raw 0 (9938). Limits scaled one Fréchet order (synth 2M,
+recDepth 8000, hb 6.4-12M).
+**J4-652**: J5-5 — the hfd4 assembly: expMap_fderiv4_hasFDerivAt (consumes expJetD5 +
+expJetD5_apply + expJetD5_two_pt_diff exactly as hfd3 consumed expJetD4_two_pt_diff) ⟹
+discharge hfd4 ⟹ unconditional expMap_contDiffOn_five. Then J5-6 chart weld (hch5) ⟹
+K1 LANDS. a₁=R/6 remains CONDITIONAL (flat non-vacuous; curved owes J5-5/6 + Duhamel
+carry + fat-K carriers + capstone co-instantiation + prior piles).

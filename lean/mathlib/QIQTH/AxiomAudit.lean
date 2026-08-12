@@ -25861,6 +25861,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff_gate
 #print axioms QIQTH.ExpMap.expJet5RhoConst_eq
 
+-- J4-651: J5-4 CLOSED — the quintilinear CLM packaging: ★ expJetD5 (the packaged 5th
+-- Fréchet-derivative candidate, Point n →L … →L Point n, 5-fold nested mkContinuous from
+-- the genuine 5-linearity expJet5ValG_add/smul_* [fed by the order-4 curve multilinearity
+-- + expJet5Fund_unique] and the uniform bound expJet5ValG_norm_le), its simp-normal
+-- expJetD5_apply, ★ expJetD5_two_pt_diff (the v-Lipschitz operator-norm two-point bound
+-- consumed by the J5-5 hfd4 assembly — exact one-order-up mirror of expJetD4_two_pt_diff),
+-- and the curved non-vacuity gate at curvedRNCMetric (−1). J5-5 (hfd4 ⟹ exp∈C⁵) / J5-6
+-- (chart weld = hch5) NOT closed; NOT κ=1/6; NOT a₁=R/6 (flat non-vacuous; curved owes
+-- J5-5/6 + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJetD5_apply
+#print axioms QIQTH.ExpMap.expJetD5_two_pt_diff
+#print axioms QIQTH.ExpMap.expJetD5_two_pt_diff_gate
+#print axioms QIQTH.ExpMap.expJet5ValG_add_h
+#print axioms QIQTH.ExpMap.expJet5ValG_smul_r
+#print axioms QIQTH.ExpMap.expJet5Val_congr
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
