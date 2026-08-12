@@ -25342,6 +25342,42 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteCapstoneWire.white_capstone_wire_gate
 #print axioms QIQTH.WhiteCapstoneWire.width8_fold_value
 
+-- J4-635 (WhiteK1.lean): the k=1 WALL — the SHAPE VERDICT + the honest ceiling (Sol-confirmed,
+-- gpt-5.5-pro high). The J4-634 quadratic-coefficient interface (|E_white(s,p,0)| <= C_E r^2
+-- G_ws) is the WRONG SHAPE for the order-0-amplitude whitened witness: (1) the TRUE
+-- near-diagonal column shape is INVERSE-LINEAR — whiteChart_heatOp_invtau_bound proves
+-- |heatOp ghat ghat^-1 (flat phase) tau x 0| <= cA (r^2/tau) G_tau + cB (r^2/tau)^2 G_tau at
+-- every row q in K on a uniform gate (un-absorbed normal form + banked quadratic dev + linear
+-- Christoffel; whiteChart_invtau_implies_offdiag re-derives the banked absorbed J4-623 shape —
+-- consistency); (2) the interface gap is PINNED adversarially: invtauProbe_not_quadratic_coeff
+-- — a kernel realizing the inverse-linear shape with C_E=1 satisfies the quadratic-coefficient
+-- bound for NO constant (the 1/s is real; Gaussians cancel exactly); (3) the far O(1) G bound
+-- is SUBSUMED by inverse-linear on r>=a, s<=1 (far_O1_le_invtau) — inverse-linear is the honest
+-- GLOBAL column interface; (4) what it delivers: k1CeilingW_of_invtau_shape — the O(t) CEILING
+-- |heatConv H E t 0 0| <= C1 G_wt(0) t on (0,1] (absorption levers + banked C-K pairing
+-- int G_a G_b = G_{a+b}(0) + antitone peak; the slice is s-UNIFORMLY O(1), not O(s)) — ONE
+-- power of t short of K1TransportBudgetW. The t^2 budget is OUT OF REACH for the order-0
+-- witness (not merely unproved): the k=1 Duhamel term on the diagonal is where the a1 t pref
+-- mass lives; the consuming capstone pins H's diagonal to heatParametrixFn N with N>=1 (the
+-- amplitude already carries tau u1, u1(0)=R/6). K1 RE-SCOPED: the honest resolution is the
+-- ORDER-ONE (p-dependent transported tau u1) whitened witness whose defect has the J4-634
+-- RUNG-1 linear gain (q-only 1+tau c1(q) does NOT suffice — keeps the 1/tau layer) = J4-636.
+-- Non-vacuity: white_k1_ceiling_gate (n=2 w=8: ceiling fires at nonzero probe column x banked
+-- nonzero Gaussian H witness AND the same probe pins the gap); whiteChart_invtau_witness_gate
+-- (n=2 kappa=-1 K=closedBall 0 2). NOT a1=R/6 (order-1 whitened witness + Duhamel-split
+-- integrability carry + fat-K carriers + capstone co-instantiation + prior piles still owed).
+-- expected: standard 3
+#print axioms QIQTH.WhiteK1.normalform_abs_bound_raw
+#print axioms QIQTH.WhiteK1.whiteChart_heatOp_invtau_bound
+#print axioms QIQTH.WhiteK1.whiteChart_invtau_implies_offdiag
+#print axioms QIQTH.WhiteK1.k1CeilingW_of_invtau_shape
+#print axioms QIQTH.WhiteK1.invtauProbe_shape
+#print axioms QIQTH.WhiteK1.invtauProbe_ne_zero
+#print axioms QIQTH.WhiteK1.invtauProbe_not_quadratic_coeff
+#print axioms QIQTH.WhiteK1.far_O1_le_invtau
+#print axioms QIQTH.WhiteK1.white_k1_ceiling_gate
+#print axioms QIQTH.WhiteK1.whiteChart_invtau_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

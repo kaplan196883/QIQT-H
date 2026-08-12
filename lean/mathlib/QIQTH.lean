@@ -2251,3 +2251,17 @@ import QIQTH.WidthFree
 -- budget falls from the quadratic-coefficient column bound on E_white (J4-635 target).
 -- NOT a1=R/6 (quad-coeff bound + split integrability + fat-K carriers + co-instantiation owed).
 import QIQTH.WhiteCapstoneWire
+-- J4-635 (WhiteK1): the k=1 WALL — SHAPE VERDICT (Sol-confirmed). The J4-634 quadratic-coeff
+-- interface |E|<=C r^2 G is the WRONG shape for the ORDER-0-amplitude whitened witness: the TRUE
+-- near-diagonal column shape is INVERSE-LINEAR |E| <= cA (r^2/tau) G + cB (r^2/tau)^2 G, proved
+-- at the actual whitened chart data (whiteChart_heatOp_invtau_bound, un-absorbed normal form;
+-- banked absorbed O(1) G_2tau shape re-derives from it). Interface gap PINNED
+-- (invtauProbe_not_quadratic_coeff: the 1/s is real — no C_E serves); far O(1) G bound SUBSUMED
+-- by inverse-linear on r>=a (far_O1_le_invtau) => inverse-linear = the honest GLOBAL interface.
+-- What it delivers: K1LinearCeilingW — |heatConv H E| <= C1 G_wt(0) t (O(t) CEILING via
+-- absorption + C-K pairing + antitone peak), ONE power short of the t^2 budget; the budget is
+-- OUT OF REACH for the order-0 witness (the k=1 term carries the a1 t pref mass; capstone pins
+-- heatParametrixFn N>=1). K1 re-scoped: ORDER-ONE (tau u1 transported amplitude) whitened
+-- witness with linear-gain defect = J4-636. NOT a1=R/6 (order-1 witness + split integrability +
+-- fat-K carriers + co-instantiation + prior piles owed).
+import QIQTH.WhiteK1
