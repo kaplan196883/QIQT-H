@@ -25459,6 +25459,58 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteDelta.whiteDelta_supplier_gate
 #print axioms QIQTH.WhiteDelta.whiteDelta_witness_gate
 
+-- ★★ J4-639 (WhiteSmooth.lean, ns QIQTH.WhiteSmooth): the hwsm rung — the C¹-vs-⊤ binder wall
+-- READ + the sanctioned C²-WEAKENED K1 budget variant. ★ ORDER READ: the WhiteOrder1 hwsm binder
+-- demands ∀k ContDiff ℝ ⊤ GLOBAL with ⊤ = ω (analytic level, J4-174 structural finding) —
+-- UNREACHABLE: the ray-integral solve radialTransportSolve reaches every finite order and ∞
+-- (HuInftyRebase) but NOT ω, and at the whitened chart even the METRIC smoothness antecedent is
+-- unbanked (flow chart = per-point ContDiffAt-4 / pullback metric = IsC2At two-Fréchet-layers
+-- only; no global ContDiff of whitePullbackMetric at ANY order). CONSUMER AUDIT: the K1 chain
+-- uses only C² of {w₀,w₁} (k≤1) — pointwise for the cancellation, global for the hΔ jets.
+-- BUILT: §0 pd/Δ_g/r∂_r linearity of f+h·t at ContDiffAt ℝ 2 (eventual-congr localization);
+-- §1 the FULL N=1 residual chain at C²-at-the-point (decomp→absorbed→O1-total→4-layer regroup→
+-- ★ linear-gain cancellation parametrixResidual_N1_linear_gain_C2) — the R1/R3b finite-regularity
+-- pattern extended to N=1, hypotheses ContDiffAt ℝ 2 of w₀,w₁ AT v (down from ∀k ⊤ global);
+-- §2 whiteDefect1_linear_gain_C2 + white_K1BudgetW_of_transport_C2 (the J4-636 budget with hwsm
+-- REPLACED by the gate-local C² pair); §3 finite-order pd calculus (contDiff_pd_one /
+-- continuous_pd_of_contDiff_one via ContDiff.fderiv_right) + smooth_jet_bounds_on_closedBall_C2 +
+-- whiteDelta_discharged_C2 (the J4-638 hΔ discharge re-based ⊤→C²); §4 ★★
+-- white_K1BudgetW_C2_gaussDeltaFree — hGauss + hΔ discharged, K1 INPUT LIST NOW
+-- {hw0C2, hw1C2, h0, h1} (global C² of w₀,w₁ — strictly weaker than the previous
+-- {hwsm(∀k,global,ω), h0, h1}); §5 supplier white_foldedCoeff_contDiff_infty_of_metric_smooth
+-- (∞-smoothness of ALL folded whitened coefficients GIVEN whitened-metric ω-smoothness +
+-- det>0, via banked hu_infty_closed + hw_discharged_infty) + downcast + ★
+-- white_K1BudgetW_of_metric_smooth (K1 from {metric-ω, h0, h1}; the metric antecedent at the
+-- whitened chart = the cited frontier, NOT discharged). Gates (cp466):
+-- flat_N1_residual_vanishes_C2 (UNCONDITIONAL — the NEW C² chain fires end-to-end at the flat
+-- witness through the C² cancellation), hwsm_top_implies_pair_C2 (monotonicity record: old ⊤
+-- binder ⟹ new C² pair — no silent strengthening), whiteSmooth_witness_gate (C² hΔ at the
+-- genuinely curved witness n=2,κ=−1,q=(1,1), nonzero gate point, GIVEN only the C² pair).
+-- NOT a1=R/6 (the C² pair {hw0C2,hw1C2} + h0 + h1 + Duhamel-split carry + fat-K carriers +
+-- capstone co-instantiation + prior piles owed). Expected std-3 all.
+#print axioms QIQTH.WhiteSmooth.pd_add_mul_const_C1
+#print axioms QIQTH.WhiteSmooth.pd_pd_add_mul_const_C2
+#print axioms QIQTH.WhiteSmooth.laplaceBeltrami_add_mul_const_C2
+#print axioms QIQTH.WhiteSmooth.radialDeriv_add_mul_const_C1
+#print axioms QIQTH.WhiteSmooth.parametrixResidual_offdiag_decomp_N1_C2
+#print axioms QIQTH.WhiteSmooth.parametrixResidual_offdiag_absorbed_N1_C2
+#print axioms QIQTH.WhiteSmooth.parametrixResidual_offdiag_O1_total_N1_C2
+#print axioms QIQTH.WhiteSmooth.parametrixResidual_N1_layers_C2
+#print axioms QIQTH.WhiteSmooth.parametrixResidual_N1_linear_gain_C2
+#print axioms QIQTH.WhiteSmooth.whiteDefect1_linear_gain_C2
+#print axioms QIQTH.WhiteSmooth.white_K1BudgetW_of_transport_C2
+#print axioms QIQTH.WhiteSmooth.contDiff_pd_one
+#print axioms QIQTH.WhiteSmooth.continuous_pd_of_contDiff_one
+#print axioms QIQTH.WhiteSmooth.smooth_jet_bounds_on_closedBall_C2
+#print axioms QIQTH.WhiteSmooth.whiteDelta_discharged_C2
+#print axioms QIQTH.WhiteSmooth.white_K1BudgetW_C2_gaussDeltaFree
+#print axioms QIQTH.WhiteSmooth.white_foldedCoeff_contDiff_infty_of_metric_smooth
+#print axioms QIQTH.WhiteSmooth.white_hwsm2_of_metric_smooth
+#print axioms QIQTH.WhiteSmooth.white_K1BudgetW_of_metric_smooth
+#print axioms QIQTH.WhiteSmooth.hwsm_top_implies_pair_C2
+#print axioms QIQTH.WhiteSmooth.flat_N1_residual_vanishes_C2
+#print axioms QIQTH.WhiteSmooth.whiteSmooth_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

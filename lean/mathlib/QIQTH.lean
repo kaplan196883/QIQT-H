@@ -2301,3 +2301,16 @@ import QIQTH.WhiteGauss
 -- witness (nonzero gate point). NOT a1=R/6 (remaining three K1 inputs + Duhamel-split carry +
 -- fat-K carriers + co-instantiation + prior piles owed).
 import QIQTH.WhiteDelta
+-- J4-639 (WhiteSmooth): the hwsm rung — ★ ORDER READ: the hwsm binder's ⊤ = ω (analytic) is
+-- unreachable (ray-integral solve reaches ∞ not ω; whitened metric banked only IsC2At/ContDiffAt-4
+-- per point) ⟹ the sanctioned C²-weakened variant BUILT: the full N=1 residual chain
+-- (decomp/absorbed/O1-total/4-layer regroup/linear-gain cancellation) replayed at ContDiffAt ℝ 2
+-- of {w₀,w₁} AT the point (R1/R3b pattern extended to N=1); whiteDefect1_linear_gain_C2 +
+-- white_K1BudgetW_of_transport_C2 (budget consuming the gate-local C² pair, k≤1 only);
+-- hΔ discharge re-based at GLOBAL C² (whiteDelta_discharged_C2 via finite-order pd calculus);
+-- ★★ white_K1BudgetW_C2_gaussDeltaFree: K1 INPUT LIST NOW {hw0C2, hw1C2, h0, h1} (was
+-- {hwsm(∀k,global,ω), h0, h1}); supplier white_K1BudgetW_of_metric_smooth reduces the C² pair to
+-- whitened-metric ω-smoothness via the banked HuInftyRebase ∞ tower (metric antecedent = frontier).
+-- Gates: flat C² chain fires end-to-end (unconditional), ⊤⟹C² monotonicity (no strengthening),
+-- curved witness gate. NOT a1=R/6 (C² pair + h0 + h1 + Duhamel carry + fat-K + co-instantiation owed).
+import QIQTH.WhiteSmooth
