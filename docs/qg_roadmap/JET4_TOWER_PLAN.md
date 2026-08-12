@@ -7770,3 +7770,15 @@ std-3, raw 0 (9915).
 radialTransportSolve_contDiff_one C¹); ⚠ wall: C¹ vs the ⊤ binder — consumers need only C² ⟹
 fallback = C²-weakened budget variant (new file; WhiteOrder1 read-only). Then h0/h1 = the
 rep-bridge transport walls (h1 + conjugation audit) — the genuinely hard last rungs of K1.
+
+### J4-639 [AF] — hwsm rung: C² fallback FULLY BUILT; K1 = {hw0C2, hw1C2, h0, h1} (b32c4df4)
+WhiteSmooth.lean (22 decls). ⊤=ω binder unreachable (solve reaches ∞ not ω; whitened metric
+banked per-point only); consumers need C² only ⟹ full C² replay: the N=1 cancellation at
+POINTWISE C² + budget + hΔ re-base + hGauss/hΔ-free assembly + the ∞-supplier reduction
+(metric-ω ⟹ all coefficients ∞). K1 inputs now {hw0C2, hw1C2, h0, h1} (ω REPLACED by global
+C² of w₀, w₁; monotonicity record — no silent strengthening). C² chain fires end-to-end at the
+flat witness unconditionally. std-3, raw 0 (9916).
+**J4-640**: hw0C2 (cheapest C² leg) — upgrade the per-point IsC2At flow regularity of
+whitePullbackMetric to gate-local ContDiffOn 2 (C2CarrierCollapse pattern through the linear
+whitening), then vanVleck + rpow on the positive gate; scope the w₁ leg's local
+rayIntegral_contDiff_nat variant in the same brick. Then h0/h1 = the transport walls.
