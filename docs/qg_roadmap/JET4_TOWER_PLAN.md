@@ -7696,3 +7696,16 @@ THE WHITENED S1 CAMPAIGN IS CLOSED (5 bricks, J4-628→632).
 **J4-633** (per agent — spurious-pin-removal pattern first): hlam8 route (i) — check whether
 the FROZEN-side G_{8s} landing pin in the bridge triangle is a genuine constant or another
 spurious pin; width-parametrize it ⟹ DELETE hlam8 rather than prove it. Else K1TransportBudget.
+
+### J4-633 [AF] — hlam8 DELETED (spurious pin); bridge + corrHigher UNCONDITIONAL (167cc7aa)
+WidthFree.lean (15 decls). gaussDdim_le_of_width_le TRUE no-ratio-restriction (2-line
+instantiation of banked chart lemma); the ratio-4 restriction was itself spurious; NO genuine
+8-pin in the sufficiency chain (the old 8t ≤ 4(2t+6s) was a lemma artifact). FrozenTransportBridgeW
+(defeq at w=8) + both-tails-widen + smoke_bridge_verdict_w ⟹ ★★white_transport_bridge_unconditional
++ ★★white_corrHigher_unconditional (capstone-shaped bounded-cRem at G_{(max 8 lam)t}, NO
+width/measurability residue). w=12 regime inhabited; feeder fires at curved witness. std-3,
+raw 0 (9910). THE WHITENED BRIDGE THREAD IS CLOSED (modulo K1TransportBudget + capstone-side
+width re-thread).
+**J4-634**: capstone-side width re-thread (hCorrHigher slot's fixed-width landing — cRem ratio
+G_{wt}(0)/pref = w^{−n/2} constant ⟹ mechanical, same spurious-pin pattern one level up);
+then K1TransportBudget = the sole bridge-thread residue.
