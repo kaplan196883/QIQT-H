@@ -25434,6 +25434,31 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteGauss.white_K1BudgetW_of_transport_gaussFree
 #print axioms QIQTH.WhiteGauss.whiteGauss_witness_gate
 
+-- ── J4-638 (WhiteDelta): hΔ AT THE WHITENED CHART — DISCHARGED (conditional ONLY on hwsm).
+-- The K1 remainder-amplitude bound |Δ_ĝ w₁| ≤ C_Δ (w₁ = foldedCoeff Θ̂ û 1 = Θ̂^{−1/2}û₁, the
+-- order-1 folded transported coefficient) as an EXISTENCE statement, given hwsm at k=1.
+-- CHAIN: laplaceBeltrami_abs_le_of_entry_bounds (operator decomposition |Δ_g f| ≤ Gb·Σ|∂∂f| +
+-- Gb·CΓ·n²·Σ|∂f| — pure Finset/abs algebra) + smooth_jet_bounds_on_closedBall (contDiff_pd twice
+-- + IsCompact.exists_bound_of_continuousOn on the compact gate ball: the ray-integral regularity
+-- of û₁=radialTransportSolve enters ONLY through hwsm) → ★★ whiteDelta_discharged (suppliers:
+-- whiteInv_entry_bound |ĝ⁻¹|≤Gb (WhiteAnnulus J4-622) + whiteChart_christoffel_linear_uniform
+-- |Γ̂|≤CΓ‖x‖ (WhiteOffDiag J4-623); gate rΔ=min r₁ rΓ, C_Δ=Gb·M₂+Gb·(CΓ·rΔ)·n²·M₁ — the EXACT
+-- WhiteOrder1 hΔ binder; C_Δ PER-ROW q, gate-uniform in x). ★★
+-- white_K1BudgetW_of_transport_deltaGaussFree = the K1 t² budget REWIRED with BOTH hGauss
+-- (J4-637) and hΔ GONE: conditional on {hwsm,h0,h1} only, every gate radius r₀ ≤ min rG rΔ.
+-- Gates: whiteDelta_supplier_gate (UNCONDITIONAL: supplier layer exercised at the genuinely
+-- curved witness n=2,κ=−1,q=(1,1) at a NONZERO gate point — no {0}-collapse, hwsm-independent) +
+-- whiteDelta_witness_gate (full hΔ at the witness GIVEN hwsm 1 — the honest antecedent record:
+-- ONLY hwsm blocks unconditional instantiation). K1 input list after this brick: {hwsm, h0, h1}.
+-- NOT a1=R/6 (remaining three K1 inputs + Duhamel-split carry + fat-K carriers + capstone
+-- co-instantiation + prior piles owed). Expected std-3 all six.
+#print axioms QIQTH.WhiteDelta.laplaceBeltrami_abs_le_of_entry_bounds
+#print axioms QIQTH.WhiteDelta.smooth_jet_bounds_on_closedBall
+#print axioms QIQTH.WhiteDelta.whiteDelta_discharged
+#print axioms QIQTH.WhiteDelta.white_K1BudgetW_of_transport_deltaGaussFree
+#print axioms QIQTH.WhiteDelta.whiteDelta_supplier_gate
+#print axioms QIQTH.WhiteDelta.whiteDelta_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

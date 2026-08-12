@@ -2290,3 +2290,14 @@ import QIQTH.WhiteOrder1
 -- hΔ} only, hGauss GONE). Curved-witness gate at nonzero gate point. NOT a1=R/6 (remaining four
 -- K1 inputs + Duhamel-split carry + fat-K carriers + co-instantiation + prior piles owed).
 import QIQTH.WhiteGauss
+-- J4-638 (WhiteDelta): hΔ at the whitened chart DISCHARGED (conditional ONLY on hwsm, std-3).
+-- Operator decomposition |Δ_g f| ≤ Gb·Σ|∂∂f| + Gb·CΓ·n²·Σ|∂f| (laplaceBeltrami_abs_le_of_entry_
+-- bounds) + compact-gate jet bounds (smooth_jet_bounds_on_closedBall: contDiff_pd twice +
+-- exists_bound_of_continuousOn; û₁'s ray-integral regularity enters ONLY through hwsm) fed by the
+-- banked whitened suppliers whiteInv_entry_bound + whiteChart_christoffel_linear_uniform →
+-- whiteDelta_discharged (the EXACT WhiteOrder1 hΔ binder, ∃ rΔ>0 ∃ C_Δ≥0, per-row q) →
+-- white_K1BudgetW_of_transport_deltaGaussFree (K1 budget conditional on {hwsm,h0,h1} only —
+-- hGauss AND hΔ gone). Unconditional supplier gate + hwsm-conditional witness gate at the curved
+-- witness (nonzero gate point). NOT a1=R/6 (remaining three K1 inputs + Duhamel-split carry +
+-- fat-K carriers + co-instantiation + prior piles owed).
+import QIQTH.WhiteDelta
