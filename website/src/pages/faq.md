@@ -30,9 +30,10 @@ That's the point.
 
 - The *mathematics* is correct and rests on **no hidden axiom** (only Lean's standard three) —
   machine-verified, `sorry`-free, independently auditable.
-- A coherent **single-world** interpretation: one exactly-unitary, ontic wave function Φ, plus a
-  non-dynamical selector λ that marks one branch *occupied* (the actual world), the others present in
-  Φ but *empty* — a **Bohm-style** single world. No collapse, no many-worlds.
+- A coherent **single-world (single-history)** interpretation: one exactly-unitary, ontic wave function Φ,
+  plus a non-dynamical **primitive-actuality** selector λ that actualizes one record *history*, the other
+  components present in Φ but *unactualized* — a **primitive-actuality, single-history modal** reading
+  (Bohm-inspired empty waves). No collapse, no many-worlds.
 - The Born rule is **reduced** to a single equilibrium postulate (P5), with machine-checked
   no-go theorems showing some such premise is unavoidable.
 - A **conditional** chain from a finite-entropy bound to an **Einstein-form equation** for the
@@ -88,10 +89,10 @@ that it **separates the two, in public**: what's *proven* (a conditional entailm
 
 Partly, and that's stated honestly. The 1/4 coefficient and the Einstein-equation-of-state step
 are **re-derivations** of Sakharov induced gravity and Jacobson's argument; the single-world
-picture sits in the modal / relationalist family, with a **Bohm-style empty-wave ontology** — one
-*occupied* branch (the actual world), the rest present in Φ but *empty* — where λ plays Bohm's
-actuality role but is non-dynamical (no guidance law; it marks a record, not a configuration). What
-is genuinely new:
+picture is a **primitive-actuality, single-history modal** interpretation (Kochen–Dieks / Bub family) —
+one *actualized* record history, the other components present in Φ but *unactualized*, with a
+Bohm-*inspired* empty-wave picture, where λ plays Bohm's actuality role but is non-dynamical (no
+guidance law; it marks a record-history, not a configuration). What is genuinely new:
 
 - the **machine-verified substrate** — including formalization firsts like the first
   Tomita–Takesaki modular theory in any proof assistant;

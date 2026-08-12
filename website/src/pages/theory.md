@@ -130,15 +130,18 @@ outcome is supplied by $\lambda$ — the next section.
 
 After decoherence has stabilized and proliferated the macroscopic records (making them non-interfering and
 redundantly objective), the content the region *realizes* is one definite macroscopic world — while $\Phi$
-keeps all branches and evolves exactly unitarily, with no collapse term. **The single record is supplied by
-the non-dynamical selector $\lambda$**, a **Bohm-style** selection among the unitarily-evolved alternatives:
-$\lambda$ marks exactly one branch as *occupied* (the actual world), the others staying present in the (ontic)
-$\Phi$ but *empty* — unrealized, no actual observers — exactly Bohm's empty waves ($\lambda$ is Bohm-*style*
-but non-dynamical: no guidance law, and it marks a record rather than a configuration). Because $\lambda$ has
-no back-reaction and the Born weights are assumed, the scheme is **operationally equivalent to standard
-(Everettian) quantum mechanics** — $\lambda$ is unobservable; its content is interpretive (a single actual
-world), not a new prediction. The honest cost, owned: keeping all of $\Phi$ real makes the unrealized branches
-present-but-empty structure — the same "extravagance" charge critics press on Bohm's empty waves.
+keeps all branches and evolves exactly unitarily, with no collapse term. **The single actual record history is
+supplied by the non-dynamical primitive-actuality selector $\lambda$**, a **modal single-history** selection
+among the unitarily-evolved alternatives: $\lambda$ *actualizes* exactly one globally-consistent record
+*history*, the other components staying present in the (ontic) $\Phi$ as real wave structure but
+*unactualized* — not actual events or observers (a *Bohm-inspired* empty-wave picture, though $\lambda$ is
+non-dynamical: no guidance law, and it marks a record-history rather than a configuration). Because $\lambda$
+has no back-reaction and the Born weights are the nomological measure over possible history-selectors, the
+scheme is **operationally equivalent to standard (Everettian) quantum mechanics** — $\lambda$ is unobservable;
+its content is interpretive (a single actualized history), not a new prediction. The honest cost, owned:
+keeping all of $\Phi$ real makes the unactualized components present-but-empty wave structure — the same
+"extravagance" charge critics press on Bohm's empty waves — and $\lambda$, a nonsupervenient actuality fact,
+is itself part of the ontology (substance monism + primitive actuality, not "$\Phi$ alone").
 
 <div class="note">
 
