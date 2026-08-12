@@ -131,10 +131,14 @@ outcome is supplied by $\lambda$ — the next section.
 After decoherence has stabilized and proliferated the macroscopic records (making them non-interfering and
 redundantly objective), the content the region *realizes* is one definite macroscopic world — while $\Phi$
 keeps all branches and evolves exactly unitarily, with no collapse term. **The single record is supplied by
-the non-dynamical selector $\lambda$**, an Everett-like selection among the unitarily-evolved alternatives.
-Because $\lambda$ has no back-reaction and the Born weights are assumed, the scheme is **operationally
-equivalent to standard (Everettian) quantum mechanics** — $\lambda$ is unobservable; its content is
-interpretive (a single actual world), not a new prediction.
+the non-dynamical selector $\lambda$**, a **Bohm-style** selection among the unitarily-evolved alternatives:
+$\lambda$ marks exactly one branch as *occupied* (the actual world), the others staying present in the (ontic)
+$\Phi$ but *empty* — unrealized, no actual observers — exactly Bohm's empty waves ($\lambda$ is Bohm-*style*
+but non-dynamical: no guidance law, and it marks a record rather than a configuration). Because $\lambda$ has
+no back-reaction and the Born weights are assumed, the scheme is **operationally equivalent to standard
+(Everettian) quantum mechanics** — $\lambda$ is unobservable; its content is interpretive (a single actual
+world), not a new prediction. The honest cost, owned: keeping all of $\Phi$ real makes the unrealized branches
+present-but-empty structure — the same "extravagance" charge critics press on Bohm's empty waves.
 
 <div class="note">
 

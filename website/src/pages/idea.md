@@ -52,9 +52,11 @@ the same finite-dimensional space, costing no more room than either record alone
 exactly unitarily, keeping every branch. So $Q_{\max}$ is **not** a constraint on the wave function — but
 (a correction we make honestly, 2026) it does **not force a single outcome either**. Decoherence makes the
 macroscopic records non-interfering and redundantly objective, yet that removes *interference*; it does not
-make one record *actual*. The single actual record is supplied by a non-dynamical selector $\lambda$ — an
-Everett-like selection in which $\Phi$ keeps every branch and $\lambda$ marks exactly one as the actual
-world. $Q_{\max}$'s honest role is the finite record **stage**: it bounds how *many* distinguishable records
+make one record *actual*. The single actual record is supplied by a non-dynamical selector $\lambda$ — a
+**Bohm-style** selection in which $\Phi$ keeps every branch and $\lambda$ marks exactly one as *occupied*
+(the actual world), the others staying present in $\Phi$ but *empty* (unrealized — no actual observers,
+nothing actually happens in them); $\lambda$ is Bohm-*style* but non-dynamical, marking a record rather than
+a guided configuration. $Q_{\max}$'s honest role is the finite record **stage**: it bounds how *many* distinguishable records
 a region can hold ($\le e^{Q_R}$), not whether two of them can be actual.
 
 <div class="note">

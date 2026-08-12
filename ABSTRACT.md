@@ -57,8 +57,10 @@ auditable — not a completed theory.
 ## The five postulates (as in the paper/website — the abstract must track these)
 
 - **(P1) The (Φ,λ) ontology.** The universal wave function Φ is the complete ontology (no external
-  observer, no fundamental probability); a non-dynamical selector λ makes exactly one decoherent
-  record actual per run — no collapse term, no branching.
+  observer, no fundamental probability), ontic and exactly unitary; a non-dynamical selector λ marks
+  exactly one decoherent branch *occupied* (the actual world) per run, the others present in Φ but
+  *empty* (unrealized) — a **Bohm-style single world** (λ is Bohm-*style* but non-dynamical: it marks
+  a record, not a guided configuration). No collapse term, no branching.
 - **(P2) Quantum kinematics.** The complex-Hilbert-space / operator-algebraic arena; the Born
   squared modulus is this arena's inner-product geometry, not a separate postulate.
 - **(P3) Microcausality.** Spacelike-separated regional algebras commute (the Lorentz-covariance
