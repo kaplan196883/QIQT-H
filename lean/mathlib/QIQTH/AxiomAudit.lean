@@ -25878,6 +25878,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5ValG_smul_r
 #print axioms QIQTH.ExpMap.expJet5Val_congr
 
+-- J4-652: J5-5 prerequisite layer (ExpJet5Prereq). ⚠ SCOPING FINDING: J5-5 is a
+-- multi-brick order-5 REMAINDER tower (mirror of J4-5a..f): expMap_fderiv3_hasFDerivAt
+-- consumed the remainder chain (expJet4_remainder_quadratic_bound_unif +
+-- expJet4_residual_bound), NOT expJetD4_two_pt_diff (which only fed continuity in the
+-- contDiffOn_four capstone). This brick = the faithful ExpJet4Prereq mirror:
+-- geodesicField_D4F_second_order_taylor (first-order Taylor remainder of D⁴F ≤ L·‖y−x‖²
+-- given a D⁵F-Lipschitz input), the full S₅ argument-permutation symmetry of D⁵F
+-- (_ab via isSymmSndFDerivAt of D³F; _bc/_cd/_de lift order-4 symmetries through the
+-- outer fderiv by flipₗᵢ/compL; _de = twice-nested compL, genuinely new; _cyc composite),
+-- and the curved gate at curvedRNCMetric (−1). Remaining J5-5: order-5 residual Grönwall
+-- + SecondVar residual + Faà-di-Bruno O(‖m‖²) remainder + fderiv4_hasFDerivAt +
+-- contDiffOn_five. NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6 (flat non-vacuous; curved owes
+-- J5-5/6 + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.geodesicField_D4F_second_order_taylor
+#print axioms QIQTH.ExpMap.fderiv5_geodesicField_symm_ab
+#print axioms QIQTH.ExpMap.fderiv5_geodesicField_symm_bc
+#print axioms QIQTH.ExpMap.fderiv5_geodesicField_symm_cd
+#print axioms QIQTH.ExpMap.fderiv5_geodesicField_symm_de
+#print axioms QIQTH.ExpMap.fderiv5_geodesicField_symm_cyc
+#print axioms QIQTH.ExpMap.geodesicField_D4F_second_order_taylor_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

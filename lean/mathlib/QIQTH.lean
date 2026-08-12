@@ -2429,3 +2429,11 @@ import QIQTH.ExpJet5D5Rhs
 import QIQTH.ExpJet5D5Val
 import QIQTH.ExpJet5D5ValG
 import QIQTH.ExpJet5D5
+-- J4-652: J5-5 prerequisite layer (⚠ SCOPING: J5-5 = a multi-brick order-5 REMAINDER
+-- tower mirroring J4-5a..f, NOT one brick — expMap_fderiv3_hasFDerivAt consumed the
+-- remainder chain, not expJetD4_two_pt_diff): ExpJet5Prereq — D⁴F second-order Taylor
+-- (given D⁵F-Lipschitz), full S₅ argument symmetry of D⁵F (four adjacent transpositions,
+-- _de = twice-nested compL lift, genuinely new), curved gate. Remaining J5-5: order-5
+-- residual + 3rd→4th SecondVar residual + Faà-di-Bruno O(m²) remainder (~2500-line
+-- mirror) + fderiv4_hasFDerivAt + contDiffOn_five. NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5Prereq

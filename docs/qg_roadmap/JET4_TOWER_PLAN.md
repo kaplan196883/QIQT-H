@@ -7939,3 +7939,24 @@ expJetD5_apply + expJetD5_two_pt_diff exactly as hfd3 consumed expJetD4_two_pt_d
 discharge hfd4 ⟹ unconditional expMap_contDiffOn_five. Then J5-6 chart weld (hch5) ⟹
 K1 LANDS. a₁=R/6 remains CONDITIONAL (flat non-vacuous; curved owes J5-5/6 + Duhamel
 carry + fat-K carriers + capstone co-instantiation + prior piles).
+
+### J4-652 [AF] — J5-5 SCOPED + prereq brick banked (ExpJet5Prereq)
+⚠ SCOPING CORRECTION (agent verified vs mainline): J5-5 is a MULTI-BRICK order-5
+remainder tower mirroring J4-5a..f — expMap_fderiv3_hasFDerivAt consumed the REMAINDER
+chain (expJet4_remainder_quadratic_bound_unif + expJet4_residual_bound), NOT
+expJetD4_two_pt_diff (that fed only the continuity half of contDiffOn_four). Banked
+brick = ExpJet5Prereq.lean (320 lines, 87s): geodesicField_D4F_second_order_taylor
+(D⁴F Taylor remainder ≤ L‖y−x‖² given D⁵F-Lipschitz), full S₅ symmetry of D⁵F
+(4 adjacent transpositions; _de twice-nested compL = genuinely new; _cyc), curved gate.
+std-3 verified (7 decls). raw 0 (9939).
+**J5-5 REMAINING (in order): (a) expJet5_residual (S=Qw−Qv−R remainder-route residual
+ODE + Grönwall endpoint, mirror ExpJet4Residual — DISTINCT from the banked v↔w
+two-point residual); (b) expJet4SecondVar_residual_Icc_unif (mirror
+ExpJet3SecondVarResidual = J4-5d1); (c) expJet5_remainder_quadratic_bound + _P + _unif
+(the Faà-di-Bruno O(‖m‖²) cancellation, ~2500-line mirror of ExpJet4Remainder* —
+generator-driven per-block split, the killer sub-campaign); (d)
+expMap_fderiv4_hasFDerivAt (little-o assembly, mirror ExpMapFDeriv3); (e)
+expMap_contDiffOn_five via the banked reduction (ExpJet5Phase1.lean:112) with hfd4
+from (d)+expJetD5_two_pt_diff (mirror ExpMapContDiffFour).** Then J5-6 weld (hch5) ⟹
+K1. a₁=R/6 CONDITIONAL throughout.
+**J4-653**: brick (a) expJet5_residual.
