@@ -7832,3 +7832,16 @@ rpow chain — trivial; whiteDelta local; w₁ chart-C⁵ conditional) + assembl
 h0h1-free budget ⟹ K1 residue ≈ {chart-C⁵ (Jet-5), hinv/hdet instantiation (Neumann/pos-def
 bank)}. Then Jet-5, Duhamel carry, fat-K carriers, capstone co-instantiation at the CORRECTED
 witness.
+
+### J4-644 [AF] — ★★ THE K1 RESIDUE = {hch5} (1165b502)
+WhiteF1Reg.lean (20 decls). Re-instantiations near-verbatim; THREE new mechanisms: the LOCAL
+transport ODE (eliminates the global hsm leg — the banked ODE needed global C^∞ which chart-C⁵
+can never supply), global det ĝ ≥ 0 (congruence factorization; strict global positivity =
+false territory, never assumed), h1 at weakened positivity. ★★white_K1BudgetW_final: given
+hch5 ONLY, the full K1 t² budget at the corrected witness — 15 legs discharged internally.
+Witness gate: K₀ = 0 at the curved witness UNCONDITIONALLY. R/6 carrier re-pinned (labelled).
+std-3, raw 0 (9921).
+**J4-645**: (1) the Jet-5 rung itself (expMap_contDiffOn_five — ExpJet5 fundamental-solution +
+Grönwall one order up; multi-brick campaign, the ONLY remaining K1 input) OR (2) capstone
+re-thread at the corrected witness (thread white_K1BudgetW_final/whiteDefect1' into the
+Duhamel/co-instantiation pile so the corrected budget feeds downstream).
