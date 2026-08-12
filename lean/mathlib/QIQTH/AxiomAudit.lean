@@ -25771,6 +25771,40 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5Fund_gate_curved
 #print axioms QIQTH.ExpMap.expJet5Rhs_norm_le_gate
 
+-- ============================================================
+-- J4-647 (JET-5 PHASE 3: the value-bounds bridge) — ExpJet5Phase3.lean:
+-- ★ expJet5Fund_value_bound / _Icc — the Grönwall a-priori value bounds for the [0,1] D5
+-- fundamental solution: the 51-term source bound (expJet5Rhs_norm_le) fed as the residual ρ₅
+-- into gronwall_vec_residual(_Icc) ⟹ ‖R(t)‖ ≤ ρ₅·e^{Kstar} (mirror of
+-- expJet4Fund_value_bound(_Icc), 14 → 51 terms; polynomial SCRIPT-GENERATED in exact
+-- expJet5Rhs_norm_le term order — no-false-bound discipline) + the order-4 curve mirrors
+-- expJet4Curve (expJet4Fund witness as a WHOLE curve; t=1 value = expJet4Val, rfl) and
+-- expJet4CurveG (six pair slots := expJet2Curve, four triple slots := expJet3CurveG; t=1 value
+-- = expJet4ValG, rfl) with continuousOn + ★ expJet5Val (the D5 witness at t=1, 25 abstract
+-- Q-slots) + ★ expJet5ValG (the 25 slots instantiated by the ACTUAL lower-jet curves: ten
+-- expJet2Curve + ten expJet3CurveG + five expJet4CurveG) + expJet5ValG_norm_le (uniform
+-- 5-linear bound M·‖h‖‖k‖‖l‖‖m‖‖r‖ via pair/triple/quadruple curve bounds
+-- expJet2/3/4Fund_value_bound_Icc fed into the 51-term expJet5Fund_value_bound). Non-vacuity
+-- gates (cp466: antecedent inhabitance at the GENUINELY CURVED witness g^κ=curvedRNCMetric(−1)):
+-- expJet5Fund_value_bound_gate = the value bound runs end-to-end on the actual curved D5
+-- fundamental solution (‖R t‖ ≤ 0 at zero variations — consistent, R ≡ 0);
+-- expJet5ValG_norm_le_gate = the genuine value layer fires at curved data. ⚠ NOT closed (Jet-5
+-- residue): (J5-3) the order-5 two-point Grönwall crux expJet5Val_v_two_pt_diff
+-- (hLipD5F/Kstar5 tube data), (J5-4) matched-Q multilinearity + quintilinear CLM packaging
+-- expJetD5(_two_pt_diff), (J5-5) expMap_fderiv4_hasFDerivAt + assembly (⟹
+-- expMap_contDiffOn_five UNCONDITIONAL), (J5-6) chart weld = hch5. NOT a₁=R/6 (flat
+-- non-vacuous; curved owes Jet-5 completion + Duhamel carry + fat-K carriers + capstone
+-- co-instantiation + prior piles). expected: standard 3
+#print axioms QIQTH.ExpMap.expJet5Fund_value_bound
+#print axioms QIQTH.ExpMap.expJet5Fund_value_bound_Icc
+#print axioms QIQTH.ExpMap.expJet4Curve_one
+#print axioms QIQTH.ExpMap.expJet4Curve_continuousOn
+#print axioms QIQTH.ExpMap.expJet4CurveG_one
+#print axioms QIQTH.ExpMap.expJet4CurveG_continuousOn
+#print axioms QIQTH.ExpMap.expJet5ValG_norm_le
+#print axioms QIQTH.ExpMap.expJet5Fund_value_bound_gate
+#print axioms QIQTH.ExpMap.expJet5ValG_norm_le_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

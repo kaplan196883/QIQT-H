@@ -2381,3 +2381,10 @@ import QIQTH.ExpJet5Phase1
 -- Lipschitz) + the [0,1] GLOBAL fundamental-solution existence expJet5Fund (glue mirror) +
 -- IsExpJet5FundSol inhabited + curved-witness non-vacuity gates. J5-3…J5-6 NOT closed.
 import QIQTH.ExpJet5Phase2
+-- J4-647: ExpJet5Phase3 — JET-5 phase 3 (value-bounds bridge): the D5 Grönwall a-priori value
+-- bounds expJet5Fund_value_bound(_Icc) (51-term ρ₅ residual), the order-4 curve mirrors
+-- expJet4Curve/expJet4CurveG (t=1 values = expJet4Val/expJet4ValG), the fifth-variation values
+-- expJet5Val/expJet5ValG (25 Q-slots instantiated by expJet2Curve/expJet3CurveG/expJet4CurveG)
+-- + the uniform 5-linear bound expJet5ValG_norm_le + curved-witness non-vacuity gates.
+-- J5-3 crux…J5-6 NOT closed; a₁=R/6 remains conditional (curved).
+import QIQTH.ExpJet5Phase3
