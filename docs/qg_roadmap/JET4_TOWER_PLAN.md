@@ -7866,3 +7866,14 @@ D5 fundamental solution (glue mirror) + IsExpJet5FundSol INHABITED. Both gates f
 **J4-647**: the value-bounds bridge to J5-3 — expJet5Fund_value_bound (Grönwall a-priori from
 the norm bound) + expJet5Val/expJet5ValG (25 Q-slots instantiated with lower-jet curves) +
 expJet4CurveG — the direct prerequisites of the two-point crux expJet5Val_v_two_pt_diff.
+
+### J4-647 [AF] — Jet-5 value-bounds bridge FULL; all D5-crux inputs banked (5b856904)
+ExpJet5Phase3.lean (9 pins). Grönwall a-priori value bounds (ρ₅ defeq-forced to the Phase-2
+conclusion; generator term-order bug caught pre-build); order-4 curve mirrors w/ rfl-pins;
+expJet5Val/ValG (25 slots ← actual lower-jet curves, order checked); uniform 5-linear bound
+(Bell counts verified); gates anchor the ACTUAL curved witness. ALL J5-3 CRUX INPUTS BANKED.
+Crux owes: order-4 two-point Icc constant + order-5 residual-derivative identity + Grönwall
+assembly + VtpConst. std-3, raw 0 (9924).
+**J4-648**: J5-3 staged — (i) expJet4CurveG_v_two_pt_Icc_const (the lower-jet Lipschitz feeder;
+valid honest partial alone), (ii) the order-5 residual-derivative identity, (iii)
+expJet5Val_v_two_pt_diff_gronwall → the crux + expJet5VtpConst.
