@@ -7803,3 +7803,17 @@ LOCALIZED. ★★★white_K1BudgetW_h0h1_of_chartC5: K1 = {h0, h1} given hch5. h
 (labelled, multi-brick campaign; label-faithfulness pinned). std-3, raw 0 (9918).
 **J4-642**: h0/h1 transport walls (h1 conjugation audit first — the only non-chart K1 inputs)
 OR the Jet-5 rung phase 1 (expMap_contDiffOn_five reduction mirror + D5 Grönwall scope).
+
+### J4-642 [AF] — transport audit: h0 FALSE as-folded; corrected direction PROVED (929a1ea6)
+WhiteTransport.lean (16 decls). ★Gauss-lemma collapse (unconditional algebra): K₀ = ¼ρw₀ +
+r∂_r w₀; the banked fold w₀ = Θ^{−1/2} = (det g̃)^{+1/4} ⟹ K₀ = ½ρw₀ ≠ 0 — h0 FALSE at curved
+Gauss data (counterexample: exponential metric, ρ=2, K₀=1; classical amplitude = (det g̃)^{−1/4}
+= Θ^{+1/2}, H³ cross-check). cp466 catch BEFORE consumption. ★h1 identification LANDED for the
+corrected direction (near-definitional from the banked ODE). ★h0 bridge COLLAPSES at Gauss
+charts: remaining = ONE Jacobi lemma (r∂_r log det g = ρ). Sol: diagnosis correct, F1 necessary
+for the R/6 jet; wrong fold ⟹ K₁ = R/3 (regression signature). R/6-supplier preserved. Gates:
+FAILS + VANISHES at the same witness. std-3, raw 0 (9919).
+**J4-643**: (1) the Jacobi bridge (r∂_r log det g = ρ — Mathlib adjugate det-derivative +
+banked radialDeriv_rpow) ⟹ hamp discharged; (2) the CORRECTED order-1 whitened witness
+(whiteChartKernel1' w/ Θ := (whiteTheta)⁻¹) + re-derived budget — h0/h1 discharge via §4 ⟹
+K1 list = {Gauss-at-whitened (banked suppliers), Jacobi, regularity/Jet-5}.
