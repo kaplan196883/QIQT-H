@@ -2323,3 +2323,14 @@ import QIQTH.WhiteSmooth
 -- curved witness (n=2, κ=−1, q=(1,1), nonzero gate point) + global⟹gate monotonicity.
 -- NOT a1=R/6 ({hw1C2, h0, h1} + Duhamel carry + fat-K + co-instantiation + prior piles owed).
 import QIQTH.WhiteW0
+-- J4-641 WhiteW1: the w₁ leg. ★ ORDER LEDGER: chart C^{k+1} ⟹ ĝ entries C^k; T̂û₀ ∈ C² needs
+-- Θ̂ ∈ C⁴ ⟹ chart C⁵ — the banked C⁴ chart does NOT close it (gives C¹ only); the ONE missing
+-- order = the Jet-5 rung, carried as labelled hch5. LANDED: (L-a) CLOSED unconditionally —
+-- finite-order ray tower (C^N source ⟹ C^N solve) + ContDiffBump cutoff extension + ★ local
+-- interchange radialTransportSolve_contDiffAt_two_of_ball (ball-C² source ⟹ ball-C² solve);
+-- (L-b) conditional on hch5 — entries C⁴ ⟹ det/Θ̂ C⁴ ⟹ ĝ⁻¹ C² (Ring.inverse at Neumann unit)
+-- ⟹ ★ T̂û₀ C² ⟹ ★★ gate-local hw1C2; whiteDelta binder LOCALIZED (hΔ from ball-local C² of
+-- w₁); ★★ budget with gate-local w₁ binder; ★★★ white_K1BudgetW_h0h1_of_chartC5:
+-- K1 INPUT LIST = {h0, h1} GIVEN the chart-C⁵ residue. hch5 inhabitance NOT claimed (cp466).
+-- NOT a1=R/6 ({h0,h1}+hch5 + Duhamel carry + fat-K + co-instantiation + prior piles owed).
+import QIQTH.WhiteW1

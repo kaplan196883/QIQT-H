@@ -25537,6 +25537,54 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteW0.hw0C2_global_implies_gate
 #print axioms QIQTH.WhiteW0.white_w0_witness_gate
 
+-- J4-641 WhiteW1: the w₁ leg — local interchange (L-a) CLOSED + chart-C⁵-conditional source C²
+-- (L-b) + whiteDelta binder localization. ★ ORDER LEDGER (the brick's finding): the banked C⁴
+-- chart does NOT close C² of T̂û₀ = Θ̂^{−1/2}Δ_ĝ(Θ̂^{1/2}) (two derivatives of Θ̂^{1/2} ⟹ Θ̂∈C⁴ ⟹
+-- ĝ∈C⁴ ⟹ chart∈C⁵); the missing order = the Jet-5 rung (expMap_contDiffOn_five, a genuine tower
+-- campaign), carried as the labelled hch5 (faithfulness gate chartC5_implies_banked_chartC4;
+-- inhabitance NOT claimed, cp466). LANDED [AF]: rayIntegral_hasFDerivAt_C1 +
+-- rayIntegral_contDiff_nat_of_contDiff_nat (HuInftyRebase tower rebased C^∞→C^N sources) →
+-- radialTransportSolve_contDiff_two → contDiff_two_cutoff_extension_of_ball (J4-640 Whitney
+-- residue discharged at C² via ContDiffBump) → ★ radialTransportSolve_contDiffAt_two_of_ball
+-- (THE LOCAL INTERCHANGE: ball-C² source ⟹ ball-C² solve; star-shaped congr + extension +
+-- finite tower). pd extractors C⁴→C³→C²→C¹→C⁰. Conditional (hch5): entries C⁴
+-- (white_metric_entry_contDiffAt4_of_chartC5) → det/√det/Θ̂ C⁴ + ĝ⁻¹ C² (Ring.inverse at the
+-- Neumann unit) + Christoffels C² → ★ white_transport_source_contDiffAt2_of_chartC5 (T̂û₀ C²) →
+-- ★★ white_w1_contDiffAt2_of_chartC5 (gate-local hw1C2). Localization:
+-- jet_bounds_on_closedBall_of_ballC2 + ★ whiteDelta_discharged_C2_local (hΔ from BALL-LOCAL C²
+-- of w₁) → ★★ white_K1BudgetW_C2_w0Free_localW1 (budget with gate-local w₁ binder) →
+-- ★★★ white_K1BudgetW_h0h1_of_chartC5: K1 INPUT LIST = {h0, h1} GIVEN hch5. Gates:
+-- hw1C2_global_implies_ball (no strengthening), rayLocal_interchange_witness_gate
+-- (UNCONDITIONAL nonzero witness, ball-local-only source shape), whiteDelta_local_witness_gate
+-- (curved witness n=2, κ=−1, q=(1,1)). NOT a1=R/6 ({h0,h1} + hch5/Jet-5 + Duhamel carry +
+-- fat-K carriers + co-instantiation + prior piles owed). Expected std-3 all.
+#print axioms QIQTH.WhiteW1.rayIntegral_hasFDerivAt_C1
+#print axioms QIQTH.WhiteW1.rayIntegral_contDiff_nat_of_contDiff_nat
+#print axioms QIQTH.WhiteW1.radialTransportSolve_contDiff_two
+#print axioms QIQTH.WhiteW1.contDiff_two_cutoff_extension_of_ball
+#print axioms QIQTH.WhiteW1.radialTransportSolve_contDiffAt_two_of_ball
+#print axioms QIQTH.WhiteW1.contDiffAt_pd_of_contDiffAt_four
+#print axioms QIQTH.WhiteW1.contDiffAt_pd_of_contDiffAt_three
+#print axioms QIQTH.WhiteW1.contDiffAt_pd_of_contDiffAt_two
+#print axioms QIQTH.WhiteW1.continuousAt_pd_of_contDiffAt_one
+#print axioms QIQTH.WhiteW1.uniformFlowPullbackMetric_entry_contDiffAt4_of_chartC5
+#print axioms QIQTH.WhiteW1.white_metric_entry_contDiffAt4_of_chartC5
+#print axioms QIQTH.WhiteW1.contDiffAt_prod_four
+#print axioms QIQTH.WhiteW1.det_contDiffAt_four
+#print axioms QIQTH.WhiteW1.whiteMetricInv_entry_contDiffAt_two
+#print axioms QIQTH.WhiteW1.laplaceBeltrami_contDiffAt_two_of_data
+#print axioms QIQTH.WhiteW1.white_transport_source_contDiffAt2_of_chartC5
+#print axioms QIQTH.WhiteW1.white_u1_contDiffAt2_of_chartC5
+#print axioms QIQTH.WhiteW1.white_w1_contDiffAt2_of_chartC5
+#print axioms QIQTH.WhiteW1.jet_bounds_on_closedBall_of_ballC2
+#print axioms QIQTH.WhiteW1.whiteDelta_discharged_C2_local
+#print axioms QIQTH.WhiteW1.white_K1BudgetW_C2_w0Free_localW1
+#print axioms QIQTH.WhiteW1.white_K1BudgetW_h0h1_of_chartC5
+#print axioms QIQTH.WhiteW1.hw1C2_global_implies_ball
+#print axioms QIQTH.WhiteW1.chartC5_implies_banked_chartC4
+#print axioms QIQTH.WhiteW1.rayLocal_interchange_witness_gate
+#print axioms QIQTH.WhiteW1.whiteDelta_local_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
