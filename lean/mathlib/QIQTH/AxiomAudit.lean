@@ -25975,6 +25975,21 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.ExpMap.expJet5_remainder_quadratic_bound
 
+-- J4-658 (partial): the DIRECTIONAL FdB block layer (ExpJet5RemDirTop/DirCross) —
+-- remBlkTop_bound_dir (22-term telescope with per-direction scales Vh/Vk/Vl/Vm,
+-- Dh/Dk/Dl/Dm, Fh/Fk/Fl/Fm) + remBlk211/22/31_bound_dir. ARCHITECTURAL FINDING: the
+-- banked non-directional concrete bound folds directions into shared scales, but _P/_unif
+-- (and the fderiv4 opNorm peel) need ‖h‖‖k‖‖l‖‖m‖-FACTORED bounds ⟹ directional block
+-- variants are the missing foundation (each carries exactly the ‖h‖‖k‖‖l‖‖m‖ weight at
+-- the 15 concrete instantiations, hand-verified). Owed: remAssembly_dir + _P + brick (b)
+-- expJet4SecondVar_residual_Icc_unif + directional uniform feeders + _unif + gate.
+-- NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.remBlkTop_bound_dir
+#print axioms QIQTH.ExpMap.remBlk211_bound_dir
+#print axioms QIQTH.ExpMap.remBlk22_bound_dir
+#print axioms QIQTH.ExpMap.remBlk31_bound_dir
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

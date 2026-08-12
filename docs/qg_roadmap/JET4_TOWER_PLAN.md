@@ -8037,3 +8037,18 @@ verified (my chk-file). raw 0 (9946).
 constant form ExpMapFDeriv3 consumed) + curved gate at curvedRNCMetric(−1). Then (b)
 expJet4SecondVar_residual_Icc_unif, (d) expMap_fderiv4_hasFDerivAt, (e) contDiffOn_five,
 J5-6 weld ⟹ hch5 ⟹ K1. a₁=R/6 CONDITIONAL throughout.
+
+### J4-658 [AF/partial] — DIRECTIONAL FdB block layer (the missing _P/_unif foundation)
+ExpJet5RemDirTop (~250 lines, 72-95s) + ExpJet5RemDirCross (~320 lines, 69s):
+remBlkTop/211/22/31_bound_dir with per-direction scales. FINDING: the banked
+non-directional concrete bound cannot yield the ‖h‖‖k‖‖l‖‖m‖-factored form that _P/_unif
+and the fderiv4 opNorm peel require — directional block variants were the genuinely
+missing layer (weights hand-verified at all 15 instantiations; remBlk0 already
+directional-capable). std-3 ×4 verified. raw 0 (9948).
+**REMAINING SEQUENCE to _unif (recorded from agent analysis): (1) remAssembly_dir (own
+file, isolated ~130-term ring @6.4M hb); (2) _P concrete wrapper (directional hypotheses,
+reuse hs1..hs18 symmetry verbatim); (3) brick (b) expJet4SecondVar_residual_Icc_unif
+(mirror ExpJet3SecondVarResidual — hard prerequisite); (4) directional uniform feeders
+(expJet4Val_v_two_pt_Icc_unif etc); (5) _unif (mirror ExpJet4RemainderUnif — what
+brick (d) consumes); (6) gate (after _P).** a₁=R/6 CONDITIONAL throughout.
+**J4-659**: steps (1)+(2) — remAssembly_dir + expJet5_remainder_quadratic_bound_P.

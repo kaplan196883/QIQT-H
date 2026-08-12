@@ -2474,3 +2474,11 @@ import QIQTH.ExpJet5RemainderB
 -- _P/_unif packaging + curved gate owed; then (b) SecondVar, (d) fderiv4_hasFDerivAt,
 -- (e) contDiffOn_five. NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5Remainder
+-- J4-658 (partial): DIRECTIONAL FdB block layer — remBlkTop/211/22/31_bound_dir
+-- (ExpJet5RemDirTop/Cross): per-direction scale variants of the abstract block bounds
+-- (Vh/Vk/Vl/Vm, Dh…, Fh…), required because the _P/_unif remainder forms (and the future
+-- fderiv4 opNorm peel) need ‖h‖‖k‖‖l‖‖m‖-factored bounds the non-directional blocks
+-- conflate. remBlk0_bound already directional-capable. remAssembly_dir + _P + (b)
+-- SecondVar + directional uniform feeders + _unif + gate owed. NOT exp∈C⁵; a₁=R/6 cond.
+import QIQTH.ExpJet5RemDirTop
+import QIQTH.ExpJet5RemDirCross
