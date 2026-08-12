@@ -2314,3 +2314,12 @@ import QIQTH.WhiteDelta
 -- Gates: flat C² chain fires end-to-end (unconditional), ⊤⟹C² monotonicity (no strengthening),
 -- curved witness gate. NOT a1=R/6 (C² pair + h0 + h1 + Duhamel carry + fat-K + co-instantiation owed).
 import QIQTH.WhiteSmooth
+-- J4-640 WhiteW0: hw0C2 discharged GATE-LOCALLY — w₀ = Θ̂^{−1/2} is ContDiffAt ℝ 2 on a per-q gate:
+-- C⁴ flow chart (expRho gate, no hReach) ⟹ C² g̃ entries ⟹ (linear whitening) C² ĝ entries ⟹
+-- det C² + det>0 (Neumann unit + segment IVT from det ĝ(0)=1) ⟹ Θ̂ C²,>0 ⟹ w₀ C² (rpow).
+-- ★★ white_K1BudgetW_C2_w0Free: K1 INPUT LIST NOW {hw1C2, h0, h1}. w₁ leg scoped:
+-- star-shaped solve locality + gate C² of û₁/w₁ given a global-C^∞ source extension (labelled
+-- Whitney/cutoff residue; J4-641 = local interchange OR gate C² of T̂û₀). Gates: unconditional
+-- curved witness (n=2, κ=−1, q=(1,1), nonzero gate point) + global⟹gate monotonicity.
+-- NOT a1=R/6 ({hw1C2, h0, h1} + Duhamel carry + fat-K + co-instantiation + prior piles owed).
+import QIQTH.WhiteW0

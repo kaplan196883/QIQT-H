@@ -25511,6 +25511,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteSmooth.flat_N1_residual_vanishes_C2
 #print axioms QIQTH.WhiteSmooth.whiteSmooth_witness_gate
 
+-- J4-640 WhiteW0: the hw0C2 rung — gate-local C² of w₀ = Θ̂^{−1/2} at the whitened chart.
+-- uniformFlowPullbackMetric_entry_contDiffAt2 (C⁴ chart ⟹ C² g̃ entries via fderiv_right;
+-- per-q expRho gate, NO hReach) → ★ white_w0_pack (ĝ entries C² through the linear whitening
+-- E_q; det C² via banked det_contDiffAt_two; det>0 via Neumann unit + segment IVT from
+-- det ĝ(0)=1; Θ̂=(√det)⁻¹ C²+pos; w₀=Θ̂^{−1/2} C² via rpow_const_of_ne) → ★
+-- white_w0_contDiffAt2_gate = the EXACT first hwsm2 component of white_K1BudgetW_of_transport_C2
+-- → ★★ white_K1BudgetW_C2_w0Free: K1 INPUT LIST NOW {hw1C2, h0, h1} (was {hw0C2,hw1C2,h0,h1}).
+-- w₁ leg SCOPED: radialTransportSolve_congrOn_ball (star-shaped locality of the ray solve) +
+-- white_u1/w1_contDiffAt2_of_smooth_extension (gate C² of û₁/w₁ GIVEN a global-C^∞ extension of
+-- the transport source on a ball — the labelled Whitney/cutoff residue; missing lemma = local
+-- interchange OR gate C² of T̂û₀, the J4-641 target) + white_w1_extension_of_global
+-- (no-strengthening). Gates: hw0C2_global_implies_gate (monotonicity), white_w0_witness_gate
+-- (UNCONDITIONAL curved witness n=2,κ=−1,q=(1,1), nonzero gate point, w₀ C² + Θ̂>0).
+-- NOT a1=R/6 ({hw1C2,h0,h1} + Duhamel carry + fat-K carriers + co-instantiation + prior piles
+-- owed). Expected std-3 all.
+#print axioms QIQTH.WhiteW0.uniformFlowPullbackMetric_entry_contDiffAt2
+#print axioms QIQTH.WhiteW0.white_w0_pack
+#print axioms QIQTH.WhiteW0.white_w0_contDiffAt2_gate
+#print axioms QIQTH.WhiteW0.white_K1BudgetW_C2_w0Free
+#print axioms QIQTH.WhiteW0.radialTransportSolve_congrOn_ball
+#print axioms QIQTH.WhiteW0.white_u1_contDiffAt2_of_smooth_extension
+#print axioms QIQTH.WhiteW0.white_w1_contDiffAt2_of_smooth_extension
+#print axioms QIQTH.WhiteW0.white_w1_extension_of_global
+#print axioms QIQTH.WhiteW0.hw0C2_global_implies_gate
+#print axioms QIQTH.WhiteW0.white_w0_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
