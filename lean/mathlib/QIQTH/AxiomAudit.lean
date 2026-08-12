@@ -25585,6 +25585,40 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteW1.rayLocal_interchange_witness_gate
 #print axioms QIQTH.WhiteW1.whiteDelta_local_witness_gate
 
+-- J4-642 WhiteTransport: the h0/h1 transport-wall AUDIT — ★★ CONJUGATION-DIRECTION VERDICT
+-- (Sol-confirmed): under the Gauss set {gi-symm, hGauss, differentiated g-Gauss, tr(gi·g)=n}
+-- the coefficients collapse EXACTLY (pure finite-sum algebra): K₀ = ¼ρ·w₀ + r∂_r w₀ and
+-- K₁ = ¼ρ·w₁ + w₁ + r∂_r w₁ − Δ_g w₀, ρ = radialLogDetSym (Jacobi form of r∂_r log det g);
+-- the deviation layer kills for EVERY field; Γ-contraction = (tr gi − n) − ½ρ.  ★ VERDICT:
+-- the banked fold w₀ = Θ^{−1/2} = (det g̃)^{+1/4} (Θ = vanVleck) has r∂_r w₀ = +¼ρw₀ ⟹
+-- K₀ = ½ρ·w₀ ≠ 0 at curved Gauss data — h0 AS BOUND IS FALSE off-centre (gate: exponential
+-- diag(1,e^{2(y₀−1)}) witness, ρ=2, K₀=1≠0 with actual vanVleck/transportCoeff suppliers);
+-- F1 FIX: ansatz at Θ := (vanVleck G)⁻¹ (fold = classical (det g̃)^{−1/4}; transportOp's
+-- conjugator already matches) ⟹ K₀ = 0 (corrected_vanishes, modulo labelled Jacobi chain
+-- rule hamp) AND K₁ = 0 near-definitionally from the banked ODE (level1_corrected_vanishes +
+-- transportCoeff instantiation; transportOp_inv_inv preserves the R/6 supplier).  Gates:
+-- curved h0 pair DISCRIMINATES direction (current=1≠0 vs corrected=0, same witness); flat
+-- ∃-inhabitance of the FULL K₁-identification antecedent set (consistency only, cp466).
+-- NOT a1=R/6 (owed: F1 re-instantiation of the whitened witness + Jacobi bridge
+-- r∂_r log det g = ρ + Jet-5 residue + Duhamel carry + fat-K + co-instantiation + piles).
+-- Expected std-3 all.
+#print axioms QIQTH.WhiteTransport.deviation_term_vanishes
+#print axioms QIQTH.WhiteTransport.gamma_contraction_gauss
+#print axioms QIQTH.WhiteTransport.totalRadialO1_coeff_gauss_reduction
+#print axioms QIQTH.WhiteTransport.totalRadialO1_coeff_level1_gauss_reduction
+#print axioms QIQTH.WhiteTransport.totalRadialO1_coeff_current_direction
+#print axioms QIQTH.WhiteTransport.h0_fails_current_direction
+#print axioms QIQTH.WhiteTransport.totalRadialO1_coeff_corrected_vanishes
+#print axioms QIQTH.WhiteTransport.transportOp_inv_inv
+#print axioms QIQTH.WhiteTransport.totalRadialO1_coeff_level1_corrected_vanishes
+#print axioms QIQTH.WhiteTransport.totalRadialO1_coeff_level1_transportCoeff_vanishes
+#print axioms QIQTH.WhiteTransport.gate_gauss_hyps
+#print axioms QIQTH.WhiteTransport.gate_rho_eq_two
+#print axioms QIQTH.WhiteTransport.gate_current_h0_value
+#print axioms QIQTH.WhiteTransport.gate_current_h0_fails
+#print axioms QIQTH.WhiteTransport.gate_corrected_h0_vanishes
+#print axioms QIQTH.WhiteTransport.gate_K1_identification_inhabited_flat
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

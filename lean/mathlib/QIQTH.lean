@@ -2334,3 +2334,13 @@ import QIQTH.WhiteW0
 -- K1 INPUT LIST = {h0, h1} GIVEN the chart-C⁵ residue. hch5 inhabitance NOT claimed (cp466).
 -- NOT a1=R/6 ({h0,h1}+hch5 + Duhamel carry + fat-K + co-instantiation + prior piles owed).
 import QIQTH.WhiteW1
+-- J4-642 WhiteTransport: the h0/h1 transport-wall AUDIT — ★★ conjugation-direction verdict:
+-- Gauss reduction K₀ = ¼ρw₀ + r∂_r w₀, K₁ = ¼ρw₁ + w₁ + r∂_r w₁ − Δ_g w₀ (ρ = radialLogDetSym,
+-- deviation layer killed, pure algebra); banked fold Θ^{−1/2} = (det g̃)^{+1/4} has WRONG exponent
+-- sign ⟹ K₀ = ½ρw₀ ≠ 0 at curved Gauss data (h0-as-bound FALSE; explicit exponential-metric
+-- counterexample gate K₀ = 1 with actual vanVleck/transportCoeff suppliers); F1 fix Θ := vanVleck⁻¹
+-- ⟹ K₀ = 0 (mod labelled Jacobi chain rule) AND K₁ = 0 near-definitionally from the banked ODE
+-- (the Sol-flagged identification, landed; transportOp_inv_inv preserves the R/6 supplier).
+-- Curved h0 gate pair discriminates the direction; flat ∃-inhabitance of the K₁ antecedent set.
+-- NOT a1=R/6 (F1 re-instantiation + Jacobi bridge + Jet-5 + Duhamel + fat-K + piles owed).
+import QIQTH.WhiteTransport
