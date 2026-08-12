@@ -25900,6 +25900,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.fderiv5_geodesicField_symm_cyc
 #print axioms QIQTH.ExpMap.geodesicField_D4F_second_order_taylor_gate
 
+-- J4-653: J5-5 brick (a) — ExpJet5Residual: the order-5 remainder-route residual
+-- S(t) = Qw − Qv − R (Qv/Qw = order-4 expJet4Rhs solutions, R = order-5 expJet5Rhs
+-- solution): expJet5_residual_hasDerivWithinAt (S' = DF(Y_v)(S) + ρ₅-source, the
+-- byte-for-byte order-4 mirror), expJet5_residual_bound (endpoint ≤ ρ·e^Kstar via
+-- gronwall_vec_residual, ρ carried honestly explicit), and the curved gate at
+-- curvedRNCMetric (−1) (ρ=0 collapse pinned through helper zero-facts). Distinct from
+-- the banked v↔w two-point residual. Next owed feeder: the Faà-di-Bruno quadratic
+-- cancellation expJet5_remainder_quadratic_bound(_unif). NOT exp∈C⁵; NOT κ=1/6;
+-- NOT a₁=R/6 (flat non-vacuous; curved owes the rest of J5-5 + J5-6 + Duhamel carry +
+-- fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet5_residual_hasDerivWithinAt
+#print axioms QIQTH.ExpMap.expJet5_residual_bound
+#print axioms QIQTH.ExpMap.expJet5_residual_bound_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

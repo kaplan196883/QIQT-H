@@ -2437,3 +2437,9 @@ import QIQTH.ExpJet5D5
 -- residual + 3rd→4th SecondVar residual + Faà-di-Bruno O(m²) remainder (~2500-line
 -- mirror) + fderiv4_hasFDerivAt + contDiffOn_five. NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5Prereq
+-- J4-653: J5-5 brick (a) — ExpJet5Residual: the order-5 remainder-route residual
+-- S = Qw − Qv − R (Q = order-4 solutions, R = order-5 solution): the residual ODE
+-- identity + the Grönwall endpoint bound (honest explicit ρ) + curved gate at
+-- curvedRNCMetric (-1). Next feeder owed: expJet5_remainder_quadratic_bound(_unif)
+-- (the Faà-di-Bruno quadratic cancellation). NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5Residual

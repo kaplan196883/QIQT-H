@@ -7960,3 +7960,14 @@ expMap_contDiffOn_five via the banked reduction (ExpJet5Phase1.lean:112) with hf
 from (d)+expJetD5_two_pt_diff (mirror ExpMapContDiffFour).** Then J5-6 weld (hch5) ⟹
 K1. a₁=R/6 CONDITIONAL throughout.
 **J4-653**: brick (a) expJet5_residual.
+
+### J4-653 [AF] — J5-5 brick (a): ExpJet5Residual (order-5 remainder-route residual)
+ExpJet5Residual.lean (208 lines, ~48s): expJet5_residual_hasDerivWithinAt (S=Qw−Qv−R
+ODE identity, byte-for-byte order-4 tactic mirror), expJet5_residual_bound (endpoint
+≤ ρ·e^Kstar via gronwall_vec_residual, honest explicit ρ), curved gate (ρ=0 collapse
+via expJet4Rhs/expJet5Rhs zero-facts). std-3 ×3 verified. raw 0 (9940).
+**J4-654**: the killer feeder — expJet5_remainder_quadratic_bound (+_P +_unif): the
+Jet₅ Faà-di-Bruno O(‖r‖²) cancellation (~2500-line mirror of ExpJet4Remainder/P/Unif),
+consuming ExpJet5Prereq (D⁴F Taylor + S₅ symmetry) + expJet_fderiv5_lipschitzOnWith;
+generator-driven per-block split MANDATORY (J4-650 lessons). Then brick (b)
+expJet4SecondVar_residual_Icc_unif, then (d)/(e). a₁=R/6 CONDITIONAL throughout.
