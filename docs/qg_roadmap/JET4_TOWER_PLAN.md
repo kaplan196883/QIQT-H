@@ -7722,3 +7722,18 @@ t²-bounded; fallback = weaken remainder binder to t^{1+γ}. std-3, raw 0 (9911)
 vanishing (banked diag-clean + O(‖p‖²) jet dev), (2) chart→ambient transfer, (3) far-field via
 r²-domination of the O(1)·G pkg bound (r² ≥ a² off the gate ball). Pivot to t^{1+γ} binder if
 (1) stalls at s^{1/2}.
+
+### J4-635 [AF] — k=1 shape verdict: quadratic interface KILLED; K1 re-scoped to order-1 witness (f5b42918)
+WhiteK1.lean (10 decls). TRUE near-diagonal shape = INVERSE-LINEAR ((r²/τ)+(r²/τ)² layers,
+proved from un-absorbed normal form + banked dev/Christoffel); the J4-634 quadratic-coefficient
+antecedent is UNSATISFIABLE by the true structure (adversarial pin: Gaussians cancel, 1/s ≤ C_E
+refuted); O(t) CEILING proved (slice s-uniformly O(1)); Sol: the t² budget is generically FALSE
+for the order-0 witness — the k=1 diagonal term is exactly where the a₁·t·pref mass lives
+(consistent with the capstone pinning H to the N≥1 parametrix carrying τ·u₁, u₁(0)=R/6).
+★RE-SCOPE: the K1 wall = the ORDER-1 whitened witness (u₀+τ·u₁, p-dependent transported u₁ via
+banked transportOp, diagonal R/6) whose defect carries the LINEAR GAIN |E₁| ≤ C·s·G — the exact
+antecedent of the PROVED k1BudgetW_of_pointwise_linear_gain. std-3, raw 0 (9912).
+**J4-636**: the order-1 whitened witness — whiteAmbientKernel1 def (banked transport machinery)
++ chart-level normal form of the (u₀+τu₁)·G defect (parametrix-style identity banked at general
+N) + the transport-equation cancellation of the 1/τ and τ⁰ layers ⟹ the linear-gain column
+bound ⟹ K1 budget lands.
