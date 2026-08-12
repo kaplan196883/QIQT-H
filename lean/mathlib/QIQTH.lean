@@ -2443,3 +2443,10 @@ import QIQTH.ExpJet5Prereq
 -- curvedRNCMetric (-1). Next feeder owed: expJet5_remainder_quadratic_bound(_unif)
 -- (the Faà-di-Bruno quadratic cancellation). NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5Residual
+-- J4-654: J5-5 FdB feeder PREFIX — ExpJet5RemHelpers: generic multilinear CLM-application
+-- norm bounds (clmApply1-4; 5 re-exported from Phase2) + the abstract Block-0 telescoping
+-- bound remBlk0_bound (numerically self-checked 1.8e-15) + the VALIDATED 15-block census
+-- of the 51-term Θ₅ remainder (1 top + 6×(2+1+1) + 3×(2+2) + 4×(3+1) + Block0; totals
+-- reproduce 51). Remaining: top/cross block lemmas + assembly + _P/_unif + gate.
+-- NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5RemHelpers

@@ -7971,3 +7971,16 @@ Jet₅ Faà-di-Bruno O(‖r‖²) cancellation (~2500-line mirror of ExpJet4Rema
 consuming ExpJet5Prereq (D⁴F Taylor + S₅ symmetry) + expJet_fderiv5_lipschitzOnWith;
 generator-driven per-block split MANDATORY (J4-650 lessons). Then brick (b)
 expJet4SecondVar_residual_Icc_unif, then (d)/(e). a₁=R/6 CONDITIONAL throughout.
+
+### J4-654 [AF/prefix] — FdB feeder prefix: helpers + abstract Block-0 + validated census
+ExpJet5RemHelpers.lean (151 lines, ~50s): clmApply1-4_norm_le (public) + remBlk0_bound
+(abstract Block-0 telescope, numeric self-check 1.8e-15). CENSUS VALIDATED: the 51-term
+Θ₅ remainder = 15 blocks — Block0 (d2v·Pr·Q_hklm, 1) + Top (D⁵F+4×D⁴F r-pairs, 5) +
+6×(2+1+1) D³F-headed (24) + 3×(2+2) (9) + 4×(3+1) (12); totals reproduce 51 by partition
+type. Build lessons: quintuple-nested CLM needs maxSynthPendingDepth 6; positivity fails
+on abstract products (supply mul_nonneg/sq_nonneg explicitly). std-3 ×5. raw 0 (9941).
+**J4-655**: the block-lemma body — abstract TOP block (D⁴F/D⁵F, ~20 telescope terms,
+numeric-derive first) + the 3 abstract cross-block SHAPES ((2+1+1) w/ two first-var
+slots, (2+2), (3+1)) as remBlkTop/remBlk211/remBlk22/remBlk31_bound in the
+ExpJet5RemHelpers style (hypotheses-only, no fderiv atoms). Then assembly + _P/_unif +
+gate. a₁=R/6 CONDITIONAL throughout.

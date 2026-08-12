@@ -25915,6 +25915,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5_residual_bound
 #print axioms QIQTH.ExpMap.expJet5_residual_bound_gate
 
+-- J4-654: J5-5 Faà-di-Bruno feeder PREFIX (ExpJet5RemHelpers): the generic multilinear
+-- CLM-application norm bounds clmApply/2/3/4_norm_le (quintilinear re-exported from
+-- Phase2) + remBlk0_bound — the ABSTRACT Block-0 telescoping bound
+-- ‖(dw−dv)qw − D²·Pr·qv‖ ≤ (L2·eKf²·M4 + Kstar2·C2·M4 + Kstar2·eKs·Ce)·nr², stated over
+-- an abstract normed space with Taylor/accuracy/Lipschitz/value bounds as hypotheses
+-- (numeric telescoping self-check residual 1.8e-15). The 15-block census of the 51-term
+-- Θ₅ remainder is combinatorially validated (1+5+24+9+12 = 51 by partition type). The
+-- full expJet5_remainder_quadratic_bound(+_P+_unif) is NOT yet proved — multi-brick body
+-- remains (top block, 6×(2+1+1), 3×(2+2), 4×(3+1), assembly, packaging, gate).
+-- NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.clmApply_norm_le
+#print axioms QIQTH.ExpMap.clmApply2_norm_le
+#print axioms QIQTH.ExpMap.clmApply3_norm_le
+#print axioms QIQTH.ExpMap.clmApply4_norm_le
+#print axioms QIQTH.ExpMap.remBlk0_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
