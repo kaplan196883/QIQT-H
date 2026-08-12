@@ -7737,3 +7737,16 @@ antecedent of the PROVED k1BudgetW_of_pointwise_linear_gain. std-3, raw 0 (9912)
 + chart-level normal form of the (u₀+τu₁)·G defect (parametrix-style identity banked at general
 N) + the transport-equation cancellation of the 1/τ and τ⁰ layers ⟹ the linear-gain column
 bound ⟹ K1 budget lands.
+
+### J4-636 [AF] — order-1 whitened witness: EXACT cancellation to the linear gain (110bdb76)
+WhiteOrder1.lean (12 decls). Definitional read: banked heatParametrixFn 1 IS the order-1
+transport family (u₀+τu₁, u₁ = radialTransportSolve (T u₀)). ★parametrixResidual_N1_layers
+(exact normal form) + ★★parametrixResidual_N1_linear_gain ({hGauss,h0,h1} ⟹ Res₁ = −t·G·Δ_g w₁
+— EXACT identity, not estimate). Order-1 whitened defs + whiteDefect1_linear_gain (exact rung
+antecedent) + ★white_K1BudgetW_of_transport conditional on {hwsm, hGauss, h0, h1, hΔ}. Sol
+caught: h1 needs the conjugation-direction audit (genuine hypothesis, not ODE-derivable).
+whiteChartKernel1_diagonal_a1 = the a₁ CARRIER (carries R/6, does not derive). std-3, raw 0
+(9913).
+**J4-637** (per agent): hGauss at the whitened chart — pure banked-jet algebra (ĝ(w)w = w from
+the flow-chart radial identity + EᵀgE = δ, then invert; the ONLY input with no rep bridge).
+h0/h1 = the checkpointed transport-equation wall (h1 first step = the conjugation audit).
