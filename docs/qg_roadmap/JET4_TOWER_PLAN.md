@@ -7845,3 +7845,15 @@ std-3, raw 0 (9921).
 Grönwall one order up; multi-brick campaign, the ONLY remaining K1 input) OR (2) capstone
 re-thread at the corrected witness (thread white_K1BudgetW_final/whiteDefect1' into the
 Duhamel/co-instantiation pile so the corrected budget feeds downstream).
+
+### J4-645 [AF] — Jet-5 phase 1: Rung-5 reduction PROVED; D5 layer stated (0a391066)
+ExpJet5Phase1.lean (5 pinned decls). Metric-genericity CONFIRMED (tower's sole metric input =
+C^∞ Christoffels — polynomial witness free at every order; Jet-5 = pure ODE machinery).
+★Rung-5 reduction PROVED (hfd4 ⟹ C⁵; bootstraps the unconditional Rung-4). 51-term D5 source
+(script-generated, Bell(5)−1 partitions) + continuity + fundamental-solution shape (inhabitance
+not claimed). D5 IVP UNIQUENESS proved (source-independent Grönwall engine). Remaining: J5-2
+norm+glue existence; J5-3 the two-point Grönwall crux; J5-4 quintilinear CLM (25 Q-slots =
+volume driver); J5-5 assembly; J5-6 chart weld = hch5. std-3, raw 0 (9922).
+**J4-646**: J5-2a (51-term norm bound via clmApply5 helper + the one-order-up tube/Lipschitz
+compactness clones) — unlocks glue existence (J5-2b) — OR parallel: the capstone re-thread at
+the corrected witness.
