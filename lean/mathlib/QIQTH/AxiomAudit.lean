@@ -25411,6 +25411,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteOrder1.flat_N1_residual_vanishes
 #print axioms QIQTH.WhiteOrder1.whiteChartKernel1_ne_zero_gate
 
+-- ── J4-637 (WhiteGauss): hGAUSS AT THE WHITENED CHART — DISCHARGED (unconditional).
+-- ASSESS: the raw radial identity IS banked end-to-end — hgball_concrete (J4-347 first-variation
+-- Gauss identity, GENERAL base row, ordinary geometry hyps only) + gauss_coordinate_contraction
+-- (∑g̃(v)ij·vj = ∑g_p(i,j)vj) + the weld uniformFlowPullbackMetric_eq_expPullbackMetric_eventually.
+-- CHAIN: uniformFlow_gauss_radial (raw: g̃_q(v)·v = g^κ(q)·v on a per-q ball) →
+-- whitePullbackMetric_gauss (ĝ(w)·w = w EXACTLY: raw Gauss at v=E_q·w confined by whiteVel_norm_le
+-- + curvedRNC_whitening_all E^T·g^κ(q)·E=δ — the whitened chart IS a true-Gauss-lemma chart, the
+-- J4-635 eikonal layer vanishes identically) → ★★ whiteGauss_discharged (ĝ⁻¹(x)·x = x on the joint
+-- gate via the banked Neumann unit package whitePullbackMetric_neumann + sum_invMat_mul) — the
+-- EXACT WhiteOrder1 hGauss binder, NO labelled input. ★★ white_K1BudgetW_of_transport_gaussFree =
+-- the J4-636 K1 t² budget REWIRED with hGauss GONE: conditional on {hwsm,h0,h1,hΔ} only, every
+-- gate radius r₀ ≤ rG (per-q Gauss gate). Gate: whiteGauss_witness_gate — exercised at the
+-- genuinely curved witness (n=2, κ=−1, q=(1,1) in the fat ball) at a NONZERO gate point (no
+-- {0}-collapse). K1 input list after this brick: {hwsm, h0, h1, hΔ}.
+-- NOT a1=R/6 (the four remaining K1 inputs + Duhamel-split carry + fat-K carriers + capstone
+-- co-instantiation + prior piles owed). Expected std-3 all six.
+#print axioms QIQTH.WhiteGauss.contract_swap
+#print axioms QIQTH.WhiteGauss.uniformFlow_gauss_radial
+#print axioms QIQTH.WhiteGauss.whitePullbackMetric_gauss
+#print axioms QIQTH.WhiteGauss.whiteGauss_discharged
+#print axioms QIQTH.WhiteGauss.white_K1BudgetW_of_transport_gaussFree
+#print axioms QIQTH.WhiteGauss.whiteGauss_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

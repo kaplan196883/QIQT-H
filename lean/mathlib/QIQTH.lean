@@ -2281,3 +2281,12 @@ import QIQTH.WhiteK1
 -- NOT a1=R/6 (discharge of {hGauss,h0,h1,hDelta,hwsm} at whitened data + Duhamel-split carry +
 -- fat-K carriers + co-instantiation + prior piles owed).
 import QIQTH.WhiteOrder1
+-- J4-637 (WhiteGauss): hGauss at the whitened chart DISCHARGED (unconditional, std-3). The raw
+-- radial identity was BANKED (hgball_concrete general-base first-variation Gauss + coordinate
+-- contraction + flow weld); uniformFlow_gauss_radial (g̃_q(v)v = g^κ(q)v per-q ball) →
+-- whitePullbackMetric_gauss (ĝ(w)w = w exactly — the whitened chart is a TRUE-Gauss-lemma chart)
+-- → whiteGauss_discharged (ĝ⁻¹(x)x = x via Neumann unit + sum_invMat_mul = the EXACT WhiteOrder1
+-- hGauss binder) → white_K1BudgetW_of_transport_gaussFree (K1 budget conditional on {hwsm,h0,h1,
+-- hΔ} only, hGauss GONE). Curved-witness gate at nonzero gate point. NOT a1=R/6 (remaining four
+-- K1 inputs + Duhamel-split carry + fat-K carriers + co-instantiation + prior piles owed).
+import QIQTH.WhiteGauss
