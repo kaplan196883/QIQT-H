@@ -7709,3 +7709,16 @@ width re-thread).
 **J4-634**: capstone-side width re-thread (hCorrHigher slot's fixed-width landing — cRem ratio
 G_{wt}(0)/pref = w^{−n/2} constant ⟹ mechanical, same spurious-pin pattern one level up);
 then K1TransportBudget = the sole bridge-thread residue.
+
+### J4-634 [AF] — capstone wire + K1 REDUCED to the quadratic-coefficient bound (7d031f10)
+WhiteCapstoneWire.lean (17 decls). Capstone hCorrHigher = width-agnostic fixed-t equality;
+G_{wt}(0)/pref = (√w)⁻ⁿ exact t-free ⟹ ★white_corrHigher_capstone_shaped (exact binder +
+t-uniform cRem bound) from {K1TransportBudgetW (max 8 lam), Duhamel split integrability carry}.
+★K1 two rungs PROVED: linear-time-gain ⟹ budget (generic slice engine); r²·G_τ ≤ 8τ√2ⁿ·G_{2τ}
+⟹ quadratic-spatial-coefficient ⟹ K1 at width 2w. The k=1 wall = EXACTLY |E_white(s,p,0)| ≤
+C_E·r(p)²·G_{ws}(p) on (0,1]. ⚠ Caveat: s^{1/2}-only gain ⟹ O(t^{3/2}) — a₁-safe but not
+t²-bounded; fallback = weaken remainder binder to t^{1+γ}. std-3, raw 0 (9911).
+**J4-635**: the quadratic-coefficient column bound — (1) near-origin chart-side quadratic
+vanishing (banked diag-clean + O(‖p‖²) jet dev), (2) chart→ambient transfer, (3) far-field via
+r²-domination of the O(1)·G pkg bound (r² ≥ a² off the gate ball). Pivot to t^{1+γ} binder if
+(1) stalls at s^{1/2}.
