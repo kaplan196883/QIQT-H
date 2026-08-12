@@ -7984,3 +7984,28 @@ numeric-derive first) + the 3 abstract cross-block SHAPES ((2+1+1) w/ two first-
 slots, (2+2), (3+1)) as remBlkTop/remBlk211/remBlk22/remBlk31_bound in the
 ExpJet5RemHelpers style (hypotheses-only, no fderiv atoms). Then assembly + _P/_unif +
 gate. a₁=R/6 CONDITIONAL throughout.
+
+### J4-655 [AF] — the four abstract block-shape bodies (Top + 3 cross shapes)
+ExpJet5RemBlkTop.lean (237 lines, 15.4KB, build 71s): `remBlkTop_bound` — the abstract
+TOP block, one-Fréchet-order-up mirror of order-4 Block-1 (`ExpJet4Remainder.lean:679`).
+22-term telescope (Taylor + acc + 4× d5v-Pr slot-diff + 16 d4v cross), numeric residual
+3.3e-16; symmetry carried as 4 applied-equality hyps (hcyc5 + 3 d4v reorderings). Needs
+`maxHeartbeats 6400000` (the quintuple-nested `simp;rw;abel` blows the 200000 default) and
+`maxSynthPendingDepth 6`.
+ExpJet5RemBlkCross.lean (351 lines, 21.9KB, build 41s): the 3 cross SHAPES —
+`remBlk211_bound` ((2+1+1), 14-term, mirror of order-4 Block-2 + extra first-var slot, 1
+symmetry hyp hcyc4, resid 0.0), `remBlk22_bound` ((2+2), 10-term, NO symmetry needed,
+resid 2.2e-16), `remBlk31_bound` ((3+1), 8-term, order-4-Block-2 mirror w/ Q promoted to
+3rd-variation, 1 symmetry hyp hsA, resid 2.2e-16). All four abstract normed-space,
+hypotheses-only (analytic bounds + argument-symmetry equalities carried), no fderiv atoms;
+uniform value/δ/F/Lipschitz params. std-3 ×4 (propext, Classical.choice, Quot.sound),
+verified. NO sorry, NO new axioms.
+**Lesson:** the (2+2)/(3+1) telescopes need a THIRD-variation coupling `Q··r` that is
+O(nr) small — so each such vector carries BOTH a smallness bound (`Qcr·nr`) and a value
+bound (const); F·δ and F·F cross terms are killed by putting the nr² on one factor and the
+value bound on the other (never nr³/nr⁴).
+**Assembly brick needs next:** instantiate the 15 blocks (Block0 + Top + 6×(2+1+1) +
+3×(2+2) + 4×(3+1)) with the concrete `d5v/d4v/d3v/d2v := fderivⁿ (geodesicField g gi) (Y_v
+t)`, discharge the carried symmetry hyps via `fderiv5/4/3/2_geodesicField_symm_*`
+(ExpJet5Prereq), feed the tube Taylor/accuracy/Lipschitz/value bounds, then sum the 15
+block bounds into `expJet5_remainder_quadratic_bound`. a₁=R/6 CONDITIONAL throughout.

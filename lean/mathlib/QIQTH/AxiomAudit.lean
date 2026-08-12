@@ -25932,6 +25932,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.clmApply4_norm_le
 #print axioms QIQTH.ExpMap.remBlk0_bound
 
+-- J4-655: FdB block-shape BODY (ExpJet5RemBlkTop + ExpJet5RemBlkCross) — the four
+-- abstract telescope bounds in the remBlk0 style (abstract normed space, all analytic
+-- bounds + argument-permutation symmetries carried as hypotheses, shapes matched to
+-- ExpJet5Prereq's fderiv-symm lemmas for direct instantiation): remBlkTop_bound (22-term
+-- pure Faà-di-Bruno D⁴F/D⁵F telescope), remBlk211_bound (14-term, TWO first-variation
+-- slots), remBlk22_bound (10-term, genuinely new at order 5), remBlk31_bound (8-term,
+-- Q-slot promoted to third-variation). All numeric-derived pre-Lean (residuals ≤3.3e-16,
+-- no-false-bound checked). The assembled expJet5_remainder_quadratic_bound(+_P+_unif)
+-- is NOT yet proved (15-block instantiation + Σ owed). NOT exp∈C⁵; NOT κ=1/6;
+-- NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.remBlkTop_bound
+#print axioms QIQTH.ExpMap.remBlk211_bound
+#print axioms QIQTH.ExpMap.remBlk22_bound
+#print axioms QIQTH.ExpMap.remBlk31_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

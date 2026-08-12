@@ -2450,3 +2450,11 @@ import QIQTH.ExpJet5Residual
 -- reproduce 51). Remaining: top/cross block lemmas + assembly + _P/_unif + gate.
 -- NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5RemHelpers
+-- J4-655: FdB block-shape BODY — the four abstract telescope bounds (remBlk0 style,
+-- hypotheses-only, no fderiv atoms): remBlkTop_bound (22-term D⁴F/D⁵F pure FdB, 4
+-- symmetry hyps), remBlk211_bound (14-term, two first-var slots), remBlk22_bound
+-- (10-term, new at order 5), remBlk31_bound (8-term); all numeric-derived (residuals
+-- ≤3.3e-16). Assembly (15-block instantiation + Σ ⟹ expJet5_remainder_quadratic_bound)
+-- still owed. NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5RemBlkTop
+import QIQTH.ExpJet5RemBlkCross
