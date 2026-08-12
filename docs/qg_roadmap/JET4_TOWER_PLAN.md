@@ -7888,3 +7888,20 @@ recommended (per-block-family generated files + thin assembly). std-3, raw 0 (99
 families over the set atoms, each <10min) + thin assembly (expJet5VtpConst +
 expJet5Val_v_two_pt_diff via regroup + (iii-a)); fallback = one generated theorem w/
 maxHeartbeats 25600000 in its own file.
+
+### J4-649 [AF/partial] — TeleA peel family BANKED; assembly monolith = confirmed heartbeat wall
+Agent authored ExpJet5TeleA.lean + ExpJet5Phase5.lean; I (main loop) verified + banked.
+BANKED: ExpJet5TeleA.lean (5 pins) — the four generic multilinear peel bounds
+expJet5TelePeel2/3/4/5 (arity-r peel = r+1 sub-terms; pure normed-space combinatorics,
+sub-term count 1·6+10·5+25·4+15·3=201 +1 leading Lipschitz = 202) + expJet5VtpConst
+(+ nonneg). std-3, raw 0 (9926).
+NOT BANKED: ExpJet5Phase5.lean — a SINGLE 217KB theorem (expJet5Val_v_two_pt_diff);
+deterministic elaborator timeout at 25.6M heartbeats (3146s, line 907 set-cascade +
+whnf timeout), even with maxRecDepth 65536. The monolith wall is structural: ~100+ `set`
+atoms in one proof context. ExpJet5Phase5Gate.lean also left uncommitted (depends on Phase5).
+**J4-650**: per-BLOCK split — regenerate so each of the 51 source-difference blocks is its
+OWN top-level lemma (explicit binder list, no shared set-context; families D²F/D³F/D⁴F/D⁵F
+across Phase5a/b/c, each file <80KB, per-lemma maxHeartbeats ≤ 1.6M) + thin assembly file
+(regroup 51 block lemmas + leading Lipschitz ⟹ hrbound ⟹ (iii-a) Grönwall ⟹
+expJet5Val_v_two_pt_diff). a₁=R/6 remains CONDITIONAL (flat non-vacuous; curved owes Jet-5
+completion + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).

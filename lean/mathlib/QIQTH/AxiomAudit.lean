@@ -25832,6 +25832,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff_gronwall
 #print axioms QIQTH.ExpMap.expJet5Val_v_two_pt_diff_gronwall_gate
 
+-- J4-649 (partial): JET-5 telescope family file A (ExpJet5TeleA) — the four generic
+-- multilinear "peel" bounds feeding the 202-sub-term ρ₅-telescope (arity 2/3/4/5:
+-- 3/4/5/6 sub-terms per peel; pure normed-space combinatorics, no geometry) + the
+-- assembled aggregate order-5 two-point Lipschitz constant expJet5VtpConst with
+-- nonnegativity. The single-theorem 217KB assembly monolith (expJet5Val_v_two_pt_diff)
+-- hit a deterministic 25.6M-heartbeat elaborator timeout and is NOT banked here; the
+-- per-block split is J4-650. NOT a₁=R/6 (flat non-vacuous; curved owes Jet-5 completion
+-- + Duhamel carry + fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet5TelePeel2
+#print axioms QIQTH.ExpMap.expJet5TelePeel3
+#print axioms QIQTH.ExpMap.expJet5TelePeel4
+#print axioms QIQTH.ExpMap.expJet5TelePeel5
+#print axioms QIQTH.ExpMap.expJet5VtpConst_nonneg
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

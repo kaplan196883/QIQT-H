@@ -2396,3 +2396,10 @@ import QIQTH.ExpJet5Phase3
 -- non-vacuity gate. Stage (iii-b) 202-sub-term ρ₅-telescope + J5-4/5/6 NOT closed;
 -- a₁=R/6 remains conditional (curved).
 import QIQTH.ExpJet5Phase4
+-- J4-649 (partial): ExpJet5TeleA — JET-5 telescope family file A: the four generic
+-- multilinear peel bounds (expJet5TelePeel2/3/4/5, pure normed-space combinatorics) + the
+-- assembled aggregate two-point constant expJet5VtpConst (+ nonneg). The 202-sub-term
+-- assembly monolith (single-theorem, 217KB) hit a deterministic 25.6M-heartbeat elaborator
+-- timeout and is NOT banked; per-block split (J4-650) is the live fix.
+-- a₁=R/6 remains conditional (curved).
+import QIQTH.ExpJet5TeleA
