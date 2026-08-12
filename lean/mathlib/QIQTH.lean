@@ -2241,3 +2241,13 @@ import QIQTH.WhiteS1C
 -- NOT a1=R/6 (K1TransportBudget, fat-K carriers, capstone co-instantiation at the whitened
 -- witness + width-(max 8 lam) capstone-side re-thread + prior piles still owed).
 import QIQTH.WidthFree
+-- J4-634 (WhiteCapstoneWire): capstone-side width re-thread + K1 scope. gaussDdim_zero_scale:
+-- G_{wt}(0)/pref = (sqrt w)^-n t-FREE => the width re-thread is mechanical. **
+-- white_corrHigher_capstone_shaped: the FULL leviSeries E_white slot in the EXACT capstone
+-- hCorrHigher binder shape (equality at cRem := heatConv/(pref t^2)) + t-uniform |cRem| <=
+-- (C_H C_t + C1)(sqrt(max 8 lam))^-n, from (i) K1TransportBudgetW (max 8 lam) (sole bridge
+-- residue) + (ii) the Duhamel split carry (derived: heatConv_leviSeries_split). K1 REDUCED:
+-- linear-gain rung + Gaussian moment absorption (r^2 G_tau <= 8 tau sqrt2^n G_2tau) => k=1
+-- budget falls from the quadratic-coefficient column bound on E_white (J4-635 target).
+-- NOT a1=R/6 (quad-coeff bound + split integrability + fat-K carriers + co-instantiation owed).
+import QIQTH.WhiteCapstoneWire

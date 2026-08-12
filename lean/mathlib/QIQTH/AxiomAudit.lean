@@ -25300,6 +25300,48 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WidthFree.bridgeW_witness_wide
 #print axioms QIQTH.WidthFree.white_bridgeW_witness_gate
 
+-- J4-634 (WhiteCapstoneWire.lean): the CAPSTONE-SIDE WIDTH RE-THREAD + the K1 scope. (1) The
+-- capstone hCorrHigher binder is the PURE fixed-t equality (rw+ring consumer, width-agnostic);
+-- the boundedness layer is t-uniformity of cRem. The normalization ratio is CONSTANT:
+-- gaussDdim_zero_scale: G_{wt}(0) = (√w)⁻ⁿ·(heatKernel1D t 0)ⁿ — t-free, so the width
+-- re-thread is MECHANICAL (spurious-pin pattern one level up, as predicted). ★★
+-- white_corrHigher_capstone_shaped: the FULL leviSeries E_white slot in the EXACT capstone
+-- binder shape (equality at cRem := heatConv/(pref·t²)) WITH the t-uniform bound
+-- |cRem| ≤ (C_H·C_t + C₁)·(√(max 8 lam))⁻ⁿ, from TWO owed inputs on the whitened data:
+-- (i) K1TransportBudgetW (max 8 lam) (the sole bridge-thread residue) + (ii) the Duhamel
+-- split carry (derived from natural integrability: heatConv_leviSeries_split via
+-- heatConv_add_right + heatConv_neg_right). (2) THE K1 SCOPE — two reduction rungs PROVED:
+-- k1BudgetW_of_pointwise_linear_gain (linear time gain |E| ≤ C·s·G_{ws} ⟹ K1 budget, same
+-- slice+simplex engine as the k≥2 tail) + gaussDdim_quadratic_absorb (Gaussian moment
+-- absorption r²·G_τ ≤ 8τ·√2ⁿ·G_{2τ} from u·e^{−u} ≤ 1) ⟹ k1BudgetW_of_quadratic_coeff /
+-- white_k1_of_quadratic_coeff: the k=1 wall REDUCES to the quadratic-coefficient column bound
+-- |E_white(s,p,0)| ≤ C_E·r(p)²·G_{ws}(p) — the J4-635 target Prop (motivated by
+-- whiteChart_heatOp_diag_clean + whitePullbackMetricInv_dev_uniform; NOT proved — the
+-- far/off-diagonal part is the genuinely owed analytic content). Gates: RUNG 1 fires at
+-- nonzero probe column + nonzero Gaussian witness H (n=2, w=8); absorption input genuinely
+-- positive; capstone wire fires end-to-end at curved fat data (H=0 degenerate — honest
+-- label: joint satisfiability, not nonzero-H discharge); fold constant = 1/8 at w=8, n=2.
+-- Expected std-3 all 17. NOT a1=R/6 (K1 quadratic-coefficient bound + split integrability
+-- carry + fat-K carriers + capstone co-instantiation at the whitened witness + prior piles
+-- still owed).
+#print axioms QIQTH.WhiteCapstoneWire.heatKernel1D_zero_scale
+#print axioms QIQTH.WhiteCapstoneWire.gaussDdim_zero_scale
+#print axioms QIQTH.WhiteCapstoneWire.heatConv_neg_right
+#print axioms QIQTH.WhiteCapstoneWire.heatConv_leviSeries_split
+#print axioms QIQTH.WhiteCapstoneWire.k1TransportBudgetW_eight_iff
+#print axioms QIQTH.WhiteCapstoneWire.k1TransportBudgetW_mono
+#print axioms QIQTH.WhiteCapstoneWire.white_corrHigher_capstone_shaped
+#print axioms QIQTH.WhiteCapstoneWire.k1BudgetW_of_pointwise_linear_gain
+#print axioms QIQTH.WhiteCapstoneWire.gaussDdim_quadratic_absorb
+#print axioms QIQTH.WhiteCapstoneWire.k1BudgetW_of_quadratic_coeff
+#print axioms QIQTH.WhiteCapstoneWire.white_k1_of_quadratic_coeff
+#print axioms QIQTH.WhiteCapstoneWire.k1Probe_linear_gain
+#print axioms QIQTH.WhiteCapstoneWire.k1Probe_ne_zero
+#print axioms QIQTH.WhiteCapstoneWire.white_k1_reduction_gate
+#print axioms QIQTH.WhiteCapstoneWire.absorb_gate
+#print axioms QIQTH.WhiteCapstoneWire.white_capstone_wire_gate
+#print axioms QIQTH.WhiteCapstoneWire.width8_fold_value
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
