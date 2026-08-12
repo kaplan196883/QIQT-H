@@ -7857,3 +7857,12 @@ volume driver); J5-5 assembly; J5-6 chart weld = hch5. std-3, raw 0 (9922).
 **J4-646**: J5-2a (51-term norm bound via clmApply5 helper + the one-order-up tube/Lipschitz
 compactness clones) — unlocks glue existence (J5-2b) — OR parallel: the capstone re-thread at
 the corrected witness.
+
+### J4-646 [AF] — Jet-5 phase 2 FULL: norm bound + clones + expJet5Fund EXISTENCE (76965268)
+ExpJet5Phase2.lean (1318 lines, 8 pins). 51-term bound (script-regenerated exact order; flat
+triangle chain, 78s no monolith); compactness clones (fderiv6 not needed); ★expJet5Fund global
+D5 fundamental solution (glue mirror) + IsExpJet5FundSol INHABITED. Both gates fire at curved
+κ=−1 with zero undischarged antecedents. std-3, raw 0 (9923).
+**J4-647**: the value-bounds bridge to J5-3 — expJet5Fund_value_bound (Grönwall a-priori from
+the norm bound) + expJet5Val/expJet5ValG (25 Q-slots instantiated with lower-jet curves) +
+expJet4CurveG — the direct prerequisites of the two-point crux expJet5Val_v_two_pt_diff.
