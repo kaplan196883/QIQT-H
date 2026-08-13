@@ -2917,3 +2917,14 @@ import QIQTH.WhiteHBaseExtend
 -- geometry certificate + the a.e.-w assembly; Gap-B (iterE time-continuity) and
 -- S-dom still open. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHJetContW
+-- J4-703: Gap-A a.e.-w ASSEMBLY (WhiteHcontEAssembly). white_hcontE_ae_of_baseGeom
+-- produces EXACTLY the hcontE slot of innerStep_cont_ae at the whitened kernel:
+-- a.e.-u drops the null endpoint u=1 (0<u<1); the inner leg holds for EVERY w by
+-- Kset case split — in-gate via the J4-702 reparam fibre (geometry from hgeom),
+-- off-gate unconditional (kernel ≡ 0). ⚠ UNIFORM-GEOMETRY VERDICT: uniform base-q
+-- geometry over Kset FAILS (closedBall 0 R is 0-centered; the gate S q is a small
+-- q-centered flow-ball — containment can't hold for q far from 0) ⟹ the ∀-q∈Kset
+-- geometry certificate hgeom {IsOpen (S q), closedBall 0 R ⊆ S q, base-q germ,
+-- 0-centered reach} is the honest labelled carry (satisfiable in the small-R
+-- regime at fat K). hcont still owes S-dom + Gap-B. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHcontEAssembly

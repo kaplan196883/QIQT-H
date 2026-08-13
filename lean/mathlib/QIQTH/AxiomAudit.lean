@@ -26715,6 +26715,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHJetContW.whiteDefectKernel_reparam_jointContinuousOn_of_flowBall_at
 #print axioms QIQTH.WhiteHJetContW.whiteDefectKernel_jointContinuousOn_at_offBase
 
+-- J4-703: the Gap-A a.e.-w assembly — white_hcontE_ae_of_baseGeom fills the exact
+-- hcontE slot of innerStep_cont_ae (a.e.-u null endpoint + every-w Kset case split);
+-- uniform base-q geometry over Kset proved-unavailable (0-centered ball vs q-centered
+-- flow-ball) ⟹ honest labelled ∀-q∈Kset hgeom certificate. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHcontEAssembly.white_hcontE_ae_of_baseGeom
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
