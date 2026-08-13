@@ -8595,3 +8595,9 @@ raw 0 (9991). hJoint residue: {hEmeas, hLcont, hstep} + the hVcont packaging.
 germ over closedBall 0 R ⊆ S 0); (ii) hLcont scope-and-start (the Δ_z laplaceBeltrami
 term — order-2 chart jets, the S1-b analog; the C⁵ machinery gives the chart jets!).**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+## J4-697 (348a02fb) — hVcont DISCHARGED + hLcont REDUCED [AF]
+- WhiteHVcont.lean: `whiteInvChart_continuousAt_flowBall` (pointwise germ), `whiteInvChart_continuousOn_flowBall` (★★ the hVcont packaging — ContinuousOn (whiteInvChart 0 ·) (closedBall 0 R) from the WhiteS1C flow-ball C² germ uniformInverseChart_huniformChart ∘ continuous CLM whiteUnvel), `_banked` (δ₀ internal), `white_hRepCont_flowBall` (★★★ hRepCont with hVcont fully discharged from flow-ball gate geometry: 0∈Kset, closedBall 0 R ⊆ flow-ball(c), c<δ₀).
+- WhiteHLcont.lean: `white_hLterm_continuousOn_of_jets` (★★ the Δ_z laplaceBeltrami term's ContinuousOn; inverse-metric curvedRNCInv_contDiff + Christoffel curvedRNC_hChr coefficient continuity DISCHARGED internally; residue = the two named chart-jet joint continuities {hHessCont, hGradCont} — the one-derivative-up analog of J4-696's hVcont), `whiteDefectKernel_jointContinuousOn_modulo_jets` (★★★ composed whitened hbase: hVcont discharged, hLcont → jets).
+- hJoint residue: {hEmeas, hstep, hHessCont, hGradCont}. All 6 decls std-3 (my chk-file); AxiomAudit 9993 jobs; budget raw 0. NOT a₁=R/6 (R/6 = labelled carrier).
+- NEXT J4-698: hHessCont/hGradCont — the whitened field's first/second spatial-jet joint (τ,z) continuities in-gate closed form; the exportable second-jet continuity from uniformFlowExp_contDiffAt_five (C⁵ tower). Then hstep (parametric Gaussian-convolution envelope), hEmeas (banked-conditional threading).
