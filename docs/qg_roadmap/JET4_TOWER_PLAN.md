@@ -8350,3 +8350,18 @@ their own gate radius (no shared gate as-is). Arrows remain hDuhamel/hDConv/hCCo
 if re-run; check whether each supplier's proof accepts an arbitrary sufficiently-small
 c or fixes it structurally). If tractable ⟹ removes W-width/gate; W-census stays the
 honest labelled residue.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-680 [AF] — ★★ THE WIDTH GATE-UNIFICATION LANDED
+CurvedUnifiedGateBounds.lean (560 lines, 65s): curvedRNC_unified_gate_bounds — one gate
+(a,b,c)/one witness cW with all four capstone binders (width-2 all-t' hpkgBound ∧
+width-3/2 hEdom ∧ width-3/2 hAdom ∧ frozen hWDom). Verdict: threshold-monotone, no hard
+radius fix; pkg = width-widening of hEdom (gaussDdim_le_gaussDdim_chart @(3/2,2) +
+affine→(1+t')); hAdom = GateSqControl at glue's native gate (1/4 near-isometry ⟹ 3/2≤2
+displacement, no r₁). cp466 clean (K={0}, Ric≠0). std-3 ×4. raw 0 (9974). The J4-679
+W-width/gate obstruction is REMOVED; the unified hpkgBound is definitionally the
+constGate shape wide_a1_R6_core_AT_CONSTRADIUS consumes.
+**J4-681: the capstone re-composition on the unified gate (re-run the J4-668/669/670
+instantiation chain — hInt/hEboundW_le/hInter/hCH — from curvedRNC_unified_gate_bounds
+so the fed slots AND the width-3/2 certificates live on ONE cW; then the honest residue
+is purely the W-census + hDuhamel/hDConv/hCConv arrow analytics + labelled inputs).**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

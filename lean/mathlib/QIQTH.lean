@@ -2671,3 +2671,13 @@ import QIQTH.HDConvFromBoundaryLim
 -- suppliers each ∃-pick their own gate radius — unification owed.
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedHDConvSlotThreading
+-- J4-680: ★★ THE WIDTH GATE-UNIFICATION LANDED (CurvedUnifiedGateBounds) —
+-- curvedRNC_unified_gate_bounds: ONE gate (a,b,c) / one witness cW carrying all four
+-- capstone binders: width-2 all-t' hpkgBound ∧ width-3/2 hEdom ∧ width-3/2 hAdom ∧
+-- frozen hWDom. Verdict: all suppliers threshold-monotone, no hard radius fix; pkg =
+-- width-widening of hEdom (gaussDdim_le_gaussDdim_chart @(3/2,2) + affine→(1+t'));
+-- hAdom via GateSqControl at glue's NATIVE gate from the (1/4) near-isometry. The
+-- J4-679 W-width/gate obstruction is REMOVED; the unified hpkgBound is literally the
+-- constGate shape the CONSTRADIUS core consumes. cp466 clean (K={0}, Ric≠0).
+-- Full capstone re-composition on top = next. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedUnifiedGateBounds

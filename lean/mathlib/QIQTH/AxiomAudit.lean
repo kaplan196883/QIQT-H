@@ -26322,6 +26322,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedHDConvSlotThreading.curvedHDConv_fed_slots_at_constGate
 #print axioms QIQTH.CurvedHDConvSlotThreading.curvedHDConv_fed_slots_at_constGate_curved_satisfiable
 
+-- J4-680: ★★ THE WIDTH GATE-UNIFICATION (CurvedUnifiedGateBounds).
+-- curvedRNC_unified_gate_bounds — ONE gate (a,b,c), one witness cW, all four capstone
+-- binders simultaneously: the width-2 all-t' hpkgBound (≤ C(1+t')·baseKernelW 2 0) ∧
+-- the width-3/2 hEdom ∧ the width-3/2 hAdom ∧ the frozen hWDom. MONOTONICITY VERDICT
+-- (quoted in ledger): every supplier picks c inside an open threshold interval — no
+-- hard radius fix; and structurally (1) the width-2 pkg bound is a pure WIDTH-WIDENING
+-- of the width-3/2 hEdom at the same gate (gaussDdim_le_gaussDdim_chart at (3/2,2) +
+-- the affine→(1+t') rescale), (2) hAdom needs no separate gate: the glue's (1/4)
+-- two-sided near-isometry yields the GateSqControl displacement budget at its NATIVE
+-- gate. The J4-679 W-width/gate obstruction is REMOVED; the unified hpkgBound is
+-- definitionally the constGate shape wide_a1_R6_core_AT_CONSTRADIUS consumes.
+-- cp466: K={0} seed (hframeK via curvedRNCMetric_zero, no collision) + Ric≠0.
+-- Remaining: the full capstone re-composition on the unified gate + the ~40-member
+-- W-census + hDuhamel/hDConv arrows + labelled inputs. NOT a₁=R/6 (R/6 = carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedUnifiedGateBounds.hgate_and_gateSq_flowball
+#print axioms QIQTH.CurvedUnifiedGateBounds.curvedRNC_gate_bundle
+#print axioms QIQTH.CurvedUnifiedGateBounds.curvedRNC_unified_gate_bounds
+#print axioms QIQTH.CurvedUnifiedGateBounds.curvedRNC_unified_gate_bounds_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
