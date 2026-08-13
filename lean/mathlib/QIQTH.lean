@@ -2570,3 +2570,11 @@ import QIQTH.ResidualAssemblyTrunc
 -- and the five inner Duhamel arrows (hDuhamel/hInter/hDConv/hCH/hCConv). Genuinely
 -- curved (Ric(0)=(n−1)κδ≠0). NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedCapstoneGateUnify
+-- J4-669: arrow hCH DISCHARGED (CurvedCapstoneHCHFed) —
+-- ★ curved_wide_a1_R6_trunc_hIntCHFed: the curved trunc capstone with hEboundW_le +
+-- hInt + hCH all fed from geometry (hCH via hCH_discharge_from_geometry with all-banked
+-- curved suppliers; openness reach folded: single antecedent c < min δ₀ c₀). Remaining
+-- arrows: hDuhamel (delta-family wiring), hInter (BLOCKED at all-τ fixed-C vs affine —
+-- the truncated-interchange variant owed), hDConv (delta-family), hCConv (facade C¹ vs
+-- slot C² — the open L2/hD1 gap). + labelled hw/hu/hsrc. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedCapstoneHCHFed

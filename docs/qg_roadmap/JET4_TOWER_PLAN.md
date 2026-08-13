@@ -8201,3 +8201,15 @@ the five inner arrows (the Levi/Duhamel interface assembly cluster), c<δ₀, hw
 labelled inputs, gaps (ii)-(v). J4-669: scope + attack the five arrows (grep
 A1_R6_RESIDUE_STATUS §5 for their status — some may have banked suppliers).**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-669 [AF] — arrow hCH discharged; five-arrow scoping recorded
+CurvedCapstoneHCHFed.lean (236 lines, 29s): ★ curved_wide_a1_R6_trunc_hIntCHFed —
+hEboundW_le + hInt + hCH all from geometry; openness reach folded into c < min δ₀ c₀
+(one antecedent axis). std-3 ×2. raw 0 (9962). SCOPING TABLE (recorded): hInter BLOCKED
+(banked interchange needs all-τ fixed-C; curved provider affine ⟹ TRUNCATED-INTERCHANGE
+variant owed — same story as hInt); hCConv = the documented L2/hD1 C¹→C² facade gap;
+hDuhamel/hDConv = delta-family limit wiring, no curved suppliers.
+**J4-670**: the truncated-interchange brick (heatConv_leviSeries_interchange_trunc
+accepting the affine bound on (0,T₀], mirroring the hInt truncation) ⟹ discharge hInter.
+Then hCConv (C² facade upgrade) / hDuhamel+hDConv (delta-family wiring).
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

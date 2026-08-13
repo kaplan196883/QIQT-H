@@ -26149,6 +26149,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedCapstoneGateUnify.curved_wide_a1_R6_trunc_hIntFed
 #print axioms QIQTH.CurvedCapstoneGateUnify.curved_wide_a1_R6_trunc_hIntFed_curved_satisfiable
 
+-- J4-669: arrow hCH DISCHARGED (CurvedCapstoneHCHFed). Five-arrow scoping (recorded):
+-- hCH = highest tractability (hCH_discharge_from_geometry produces the exact
+-- ContDiffAt 2 shape; all curved inputs banked: metric/inv contDiff, posdef, zero-jet,
+-- hS0 via the same J4-668 supplier, flow-ball openness floor; the openness reach c₀
+-- folded into ONE antecedent c < min δ₀ c₀ — no new axis). hInter BLOCKED: the banked
+-- interchange needs an all-τ fixed-C bound but the curved provider is affine C·(1+τ) —
+-- the truncated-interchange variant is the owed repair. hCConv: facade yields C¹ but
+-- the slot needs C² (the documented L2/hD1 gap). hDuhamel/hDConv: delta-family limit
+-- wiring, no curved suppliers yet. ★ curved_wide_a1_R6_trunc_hIntCHFed: arrows now
+-- hDuhamel → hInter → hDConv → hCConv (hCH removed). + curved_satisfiable (Ric≠0).
+-- NOT a₁=R/6 (labelled hw/hu/hsrc + gaps (ii)-(v) remain; R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedCapstoneHCHFed.curved_wide_a1_R6_trunc_hIntCHFed
+#print axioms QIQTH.CurvedCapstoneHCHFed.curved_wide_a1_R6_trunc_hIntCHFed_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
