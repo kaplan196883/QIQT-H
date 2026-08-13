@@ -2526,3 +2526,13 @@ import QIQTH.ExpJet5RemainderUnif
 -- exp∈C⁵: NOT κ=1/6, NOT the parametrix, NOT a₁=R/6 (conditional).
 import QIQTH.ExpMapFDeriv4
 import QIQTH.ExpMapContDiffFive
+-- J4-664: ★★★ J5-6 CLOSED — K1 LANDS (WhiteChartC5): uniformFlowExp_contDiffAt_five
+-- (the C⁵ chart weld — expMap_contDiffOn_five transferred through the banked overlap
+-- bridge, one-order-up mirror of the C⁴ weld; no boundary gap), white_chartC5_discharged
+-- (= hch5 exactly), white_K1BudgetW_unconditional (hch5 discharged inline), and
+-- ★ white_K1BudgetW_unconditional_curvedWitness — the ANTECEDENT-FREE k=1 t²-budget at
+-- n=2, κ=−1, fat K=closedBall 0 2, off-centre q=(1,1), concrete Gaussian H-witness.
+-- The ENTIRE Jet-5 campaign (J5-1…J5-6) is closed. a₁=R/6 still owes: Duhamel-split
+-- integrability carry, fat-K carrier piles, capstone co-instantiation at the corrected
+-- witness, prior labelled piles; R/6 remains a labelled CARRIER (whiteU1(0)=R/6).
+import QIQTH.WhiteChartC5

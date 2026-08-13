@@ -26065,6 +26065,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expMap_fderiv4_hasFDerivAt
 #print axioms QIQTH.ExpMap.expMap_contDiffOn_five
 
+-- J4-664: ★★★ J5-6 CLOSED — K1 LANDS (WhiteChartC5). uniformFlowExp_contDiffAt_five:
+-- the C⁵ chart weld (ball-local expMap_contDiffOn_five + the banked overlap bridge
+-- expMap_eq_uniformFlowExp_on_overlap via ContDiffAt.congr_of_eventuallyEq — the exact
+-- one-order-up mirror of the C⁴ weld; no boundary/uniformity gap arose).
+-- white_chartC5_discharged: produces the hch5 Prop binder of white_K1BudgetW_final
+-- EXACTLY, at (curvedRNCMetric κ, …, q ∈ Kset). white_K1BudgetW_unconditional: the k=1
+-- t²-budget with hch5 discharged inline. ★ white_K1BudgetW_unconditional_curvedWitness:
+-- the ANTECEDENT-FREE k=1 curved t²-budget at n=2, κ=−1, fat K=closedBall 0 2,
+-- off-centre q=(1,1), concrete Gaussian H-witness — ZERO remaining hypotheses. No cp466
+-- trap: white_K1BudgetW_final carried no hframeK/hmassone antecedents (sole residue was
+-- hch5, now a theorem); K₀=0 independently gated at a nonzero point of the same witness.
+-- a₁=R/6 STILL owes: Duhamel-split integrability carry, fat-K carrier piles, capstone
+-- co-instantiation at the corrected witness, prior labelled piles; the diagonal R/6 is a
+-- labelled CARRIER (whiteU1(0)=R/6, white_final_R6_carrier_repin), NOT derived.
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.uniformFlowExp_contDiffAt_five
+#print axioms QIQTH.WhiteChartC5.white_chartC5_discharged
+#print axioms QIQTH.WhiteChartC5.white_K1BudgetW_unconditional
+#print axioms QIQTH.WhiteChartC5.white_K1BudgetW_unconditional_curvedWitness
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

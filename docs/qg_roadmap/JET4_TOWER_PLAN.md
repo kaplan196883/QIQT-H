@@ -8133,3 +8133,19 @@ expMap_contDiffOn_five through the uniform-flow chart; grep WhiteF1Reg /
 white_K1BudgetW_final for the exact hch5 interface). When discharged ⟹ ★★★ K1 LANDS
 (the K1 t²-budget becomes unconditional). Then: Duhamel carry, fat-K carriers, capstone
 co-instantiation at the corrected witness. a₁=R/6 CONDITIONAL until those close.
+
+### J4-664 [AF] — ★★★ J5-6 CLOSED, K1 LANDS (WhiteChartC5)
+WhiteChartC5.lean (144 lines, ~72s): uniformFlowExp_contDiffAt_five (the C⁵ weld —
+ball-local exp∈C⁵ + the banked overlap bridge, mirror of the C⁴ weld, NO boundary gap),
+white_chartC5_discharged (= hch5 exactly), white_K1BudgetW_unconditional, and
+★ white_K1BudgetW_unconditional_curvedWitness — the ANTECEDENT-FREE k=1 curved t²-budget
+(n=2, κ=−1, fat K=closedBall 0 2, off-centre q=(1,1), concrete Gaussian H). std-3 ×4
+(agent + my chk). raw 0 (9957). No cp466 trap (no frame/mass antecedents; K₀=0
+independently gated nonzero). THE ENTIRE JET-5 CAMPAIGN (J5-1…J5-6, 15 ings over
+J4-645…J4-664) IS CLOSED; the chart-C⁵ wall that began as the K1 residue is GONE.
+**a₁=R/6 remaining gap list (verbatim from the honest firewall): (i) the Duhamel-split
+integrability carry; (ii) the fat-K carrier piles; (iii) the capstone co-instantiation
+at the CORRECTED whitened witness (capstone binder pinned to vanVleckGatedWitness —
+witness-slot question); (iv) prior labelled analytic piles; (v) R/6 itself = labelled
+CARRIER (whiteU1(0)=R/6), not derived.** J4-665: attack (i) Duhamel carry (grep
+HEAT_KERNEL_GAP_PLAN + WHERE_WE_ARE for its precise statement).
