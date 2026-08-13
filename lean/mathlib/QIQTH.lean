@@ -3056,3 +3056,19 @@ import QIQTH.WhiteHJetContWSet
 -- interface. Downstream = wire into the level induction ⟹ _k_cover ⟹ rethread.
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHtermBoxWGlue
+-- J4-712: GLUE WIRED INTO THE LEVEL INDUCTION (WhiteHtermBoxWCover +
+-- WhiteHInnerContGeomCover). KEY STRUCTURAL FINDING: the pointwise glue ELIMINATES
+-- the recursion carrier — each level k+1 is a genuine convolution whose continuity
+-- comes from {dominated data, hnull, hInterior} with NO inductive hypothesis;
+-- only k=0 (the raw kernel, no ∫w to average the frontier) is a genuine seed.
+-- white_htermBox_unconditional_k_cover: the per-level tie — reach wall + group-8
+-- hEoffFirst/hcover GONE, hjoint GONE (succ = white_hSdom dominated data +
+-- convStepIntegrand measurability + the null-frontier glue + the wired engine).
+-- white_hInnerCont_closed_cover: the rethread — htermBox discharged via the glue
+-- tie, STEPS 1–3 verbatim; FINAL certs = A-group (co-instantiable) + glue certs
+-- {hnull (PROVED at the ball gate, n=2 — white_htermBox_cover_hnull_ballGate),
+-- hInterior (labelled: the base-w iterate time-slice = the residual brick),
+-- hbase (the k=0 raw-kernel seed — honest boundary, no ∫w)} + window.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHtermBoxWCover
+import QIQTH.WhiteHInnerContGeomCover

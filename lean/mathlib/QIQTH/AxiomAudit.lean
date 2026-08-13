@@ -26810,6 +26810,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHtermBoxWGlue.whiteDefectKernel_continuousWithinAt_offFrontier
 #print axioms QIQTH.WhiteHtermBoxWGlue.whiteConvStep_contOn_of_null_frontier
 
+-- J4-712: the glue wired into the level induction — the pointwise route ELIMINATES
+-- the recursion carrier (each level independent; only k=0 a genuine seed).
+-- white_htermBox_unconditional_k_cover (reach wall + group-8 GONE, hjoint GONE) +
+-- white_hInnerCont_closed_cover (htermBox discharged; certs = A-group + {hnull
+-- [PROVED at ball gate], hInterior [labelled], hbase seed} + window). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHtermBoxWCover.white_htermBox_unconditional_k_cover
+#print axioms QIQTH.WhiteHtermBoxWCover.white_htermBox_cover_hnull_ballGate
+#print axioms QIQTH.WhiteHInnerContGeomCover.white_hInnerCont_closed_cover
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
