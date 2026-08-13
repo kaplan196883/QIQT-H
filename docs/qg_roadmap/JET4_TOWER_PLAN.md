@@ -8223,3 +8223,22 @@ geometry; arrows left hDuhamel → hDConv → hCConv. std-3 ×3. raw 0 (9964).
 **J4-671**: next arrows — hCConv (the L2/hD1 C¹→C² facade upgrade) and/or
 hDuhamel+hDConv (delta-family limit wiring; no curved suppliers yet) — scope-first.
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-671 [scoping verdict, no brick — honest] — hDuhamel/hDConv/hCConv are research-grade
+Conclusive scoping (recorded in full in the agent report): cW IS a vanVleckGatedWitness
+so the flat suppliers port verbatim — portability is NOT the obstruction. The ONLY
+geometry-derivable input (the gauge triple hg0/hinvF/hdg0) is ALREADY banked in exact
+supplier shape and already fed to the capstone; everything else the reduced suppliers
+need is the standing ~50-binder labelled analytic census (Levi source envelope,
+WIDTH-3/2 near-diagonal Gaussian dominations [width-2 does NOT imply width-3/2],
+differentiation-under-∫ families, √ε sliver amplitude bundle, E-combination carries,
+the loc-unif limits hDelta/hDaLimLU themselves) — carried as labelled satisfiable data
+EVEN IN THE FLAT TOWER. hCConv additionally walled at the C¹→C² step (hEgrad third-jet
+/ gaussComp_pd_pd_pd — explicitly deferred). Ranking: hDConv nearest (one limit +
+census), hDuhamel (census + hAnear), hCConv (walled). No brick manufactured (a gauge
+brick would be vacuous padding — cp466 discipline).
+**RECOMMENDED next real increment: the curved WIDTH-3/2 near-diagonal domination for
+the curved heatOp from CurvedParametrixMass/CurvedA1AmplitudeData, feeding
+hgate/hAdomHeat/hAdom2 — the shared hardest labelled input under both hDConv and
+hDaLimLU suppliers. Multi-brick. J4-672 = brick 1 of that.**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
