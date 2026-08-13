@@ -8164,3 +8164,14 @@ the curved Borel surface; brick 4 = thread into the curved capstone Duhamel slot
 Then gaps (ii)-(v). ⚠ gap (iii) note: curved_a1_R6_fully_wired binder pinned to
 vanVleckGatedWitness and its _curved_satisfiable gate is VACUOUS at κ≠0 (cp466) — the
 witness-slot repair is a separate endeavor. J4-666: bricks 2+3.
+
+### J4-666 [AF] — gap-(i) bricks 2+3: hAff + tripleHEmeas from geometry at the shared gate
+TruncHIntCarries.lean (154 lines, ~57s): both carries discharged at the SAME curved
+constGate (seed K={0}, honest gauge): hAff from the dom-pkg hpkgBound at t':=τ (truncated
+form), hEmeas from curved_hS1_at_gate ⟹ curved_hIntOn_from_geometry_closed (+Ric≠0
+non-vacuity). std-3 ×2. raw 0 (9959). GAP-(i) HONEST RESIDUE: c<δ₀ (arithmetic
+jet-reach) + hw/hu (genuine C^∞ inputs) + brick 4 = the ~130-binder capstone rethread
+(leviSeries_summableW_le → _trunc inside wide_a1_R6_of_residue_inf_hEboundW_discharged;
+TruncatedHIntRethread proved the drop-in pieces already).
+**J4-667**: brick 4 — the capstone rethread (mechanical but multi-binder; the capstone
+then consumes IterConvIntegrableWOn). Then gaps (ii)/(iii). a₁=R/6 CONDITIONAL.

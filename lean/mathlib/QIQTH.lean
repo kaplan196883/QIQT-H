@@ -2544,3 +2544,12 @@ import QIQTH.WhiteChartC5
 -- the satisfiable affine one-step bound + tripleHEmeas at the curved witness, then the
 -- capstone Duhamel-slot threading. NOT a₁=R/6 (conditional; R/6 = carrier).
 import QIQTH.TruncHIntFromGeometry
+-- J4-666: gap-(i) bricks 2+3 — TruncHIntCarries: hAff (the truncated affine one-step
+-- bound, from the banked curved dom-pkg hpkgBound at t':=τ) and tripleHEmeas (from
+-- curved_hS1_at_gate) BOTH discharged from geometry at the SHARED curved constGate
+-- (seed K={0}, the honest curved gauge) ⟹ curved_hIntOn_from_geometry_closed: the
+-- truncated Duhamel integrability family with hEzero+hAff+hEmeas all supplied; honest
+-- residue = c<δ₀ (arithmetic jet-reach) + hw/hu (genuine C^∞ inputs). +non-vacuity
+-- (Ric(0)≠0). Brick 4 owed: the ~130-binder capstone rethread (leviSeries_summableW_le
+-- → _trunc inside the wide capstone). NOT a₁=R/6 (conditional; R/6 = carrier).
+import QIQTH.TruncHIntCarries

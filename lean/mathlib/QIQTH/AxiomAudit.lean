@@ -26102,6 +26102,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TruncHIntFromGeometry.hIntOn_affine_from_geometry
 #print axioms QIQTH.TruncHIntFromGeometry.curved_hIntOn_affine_from_geometry
 
+-- J4-666: gap-(i) bricks 2+3 (TruncHIntCarries). KEY FINDING: both carries had
+-- geometry-only curved suppliers at the SAME literal constGate (curvedRNCMetric κ, seed
+-- K={0} — the honest curved gauge; fat K would be hframeK-unsatisfiable per cp466):
+-- hAff from curvedRNC_heatOp_dom_pkg's hpkgBound at t':=τ (the satisfiable TRUNCATED
+-- affine form C·(1+τ)·baseKernelW 2 0; the all-τ form is firewalled), tripleHEmeas from
+-- curved_hS1_at_gate at the pkg's own (a,b,c). curved_hIntOn_from_geometry_closed: the
+-- truncated IterConvIntegrableWOn family at the curved heat operator with hEzero + hAff
+-- + hEmeas ALL supplied from geometry (hChr internal). HONEST RESIDUE of gap (i):
+-- c < δ₀ (the known arithmetic jet-reach compatibility) + hw/hu (genuine C^∞ labelled
+-- inputs) + brick 4 (the ~130-binder capstone rethread: leviSeries_summableW_le →
+-- _trunc inside wide_a1_R6_of_residue_inf_hEboundW_discharged). Non-vacuity: Ric(0)≠0
+-- at κ≠0, n≥2. NOT a₁=R/6 (gaps (ii)-(v) remain; R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.TruncHIntCarries.curved_hIntOn_from_geometry_closed
+#print axioms QIQTH.TruncHIntCarries.curved_hIntOn_from_geometry_closed_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
