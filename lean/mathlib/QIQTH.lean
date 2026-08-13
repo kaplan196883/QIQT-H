@@ -2741,3 +2741,15 @@ import QIQTH.WhiteHBdomReconcile
 -- dominations pinned at vanVleck/width-2); (b) the S1 tripleHEmeas carry; (c) prior
 -- piles. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHBdomAllRows
+-- J4-688: the builder-side re-base (CurvedA1HContDomGen + WhiteHInnerCont) — verdict:
+-- the hContDom→hInnerCont chain is WITNESS-GENERIC (the DCT engine was already
+-- abstract-F; the domination builder abstract-A,B) and only WIDTH-hardcoded ⟹ pure
+-- abstraction replay: hContDom_of_gaussDom_gen + hInnerCont_of_dominations_generic
+-- (any positive widths wA/wB, prefactor Cpre) subsume the pinned vanVleck builder;
+-- white_hInnerCont_of_dominations = the whitened instantiation (B-slot discharged
+-- internally from white_hBdom_discharged given S1; width lam, no lam≤8) modulo
+-- {S1 tripleHEmeas, the whitened VALUE domination hWdom (not banked in any shape —
+-- future brick from the whitened cutoff structure), hmeas, hcont}. +cp466 gate.
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedA1HContDomGen
+import QIQTH.WhiteHInnerCont

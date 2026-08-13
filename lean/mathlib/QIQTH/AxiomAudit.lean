@@ -26464,6 +26464,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBdomAllRows.white_hBdom_discharged
 #print axioms QIQTH.WhiteHBdomAllRows.white_hBdom_allrows_witness_gate
 
+-- J4-688: the builder-side re-base (CurvedA1HContDomGen + WhiteHInnerCont).
+-- WITNESS-GENERICITY VERDICT (quoted in ledger): the hContDom→hInnerCont chain is
+-- witness-generic — the DCT/continuity engine (innerIntegral_continuousOn_of_dominated)
+-- is stated at an abstract integrand F and the witness identity never enters; the
+-- domination builder (hContDom_of_gaussDom) is already at abstract kernels A,B and only
+-- WIDTH-hardcoded (3/2, 2, √(3/2)ⁿ used only as positive constants). Landed:
+-- hContDom_of_gaussDom_gen (any wA,wB>0, prefactor Cpre, affine amplitude) +
+-- hInnerCont_of_dominations_generic (the composed width/witness-generic reduction;
+-- vanVleck = the wA=3/2,wB=2 instance) + white_hInnerCont_of_dominations (the whitened
+-- instantiation: B-slot discharged INTERNALLY from white_hBdom_discharged given the S1
+-- input; width lam = whiteLam, NO lam≤8) modulo {S1 tripleHEmeas, hWdom (the whitened
+-- VALUE domination — not banked in any shape; future brick from the whitened cutoff),
+-- hmeas, hcont} + cp466 gate (n=2, κ=−1, fat K). NOT a₁=R/6 (R/6 = labelled carrier;
+-- flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.CurvedA1HContDomGen.hContDom_of_gaussDom_gen
+#print axioms QIQTH.CurvedA1HContDomGen.hInnerCont_of_dominations_generic
+#print axioms QIQTH.WhiteHInnerCont.white_hInnerCont_of_dominations
+#print axioms QIQTH.WhiteHInnerCont.white_hInnerCont_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

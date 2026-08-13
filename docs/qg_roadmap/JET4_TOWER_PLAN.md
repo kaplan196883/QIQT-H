@@ -8482,3 +8482,15 @@ ladder + leviSeries_full_row_of_tail (★ width-w FULL-ROW engine) +
 vanVleckGatedWitness/width-2) onto whiteGatedWitness/width-lam; then (b) the S1
 tripleHEmeas at the whitened defect; (c) the K1TransportBudget/capstone piles.**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-688 [AF] — the builder-side re-base (width/witness-generic hInnerCont)
+CurvedA1HContDomGen (228 lines, 36s) + WhiteHInnerCont (132 lines, 27s):
+hContDom_of_gaussDom_gen + hInnerCont_of_dominations_generic (the chain was
+witness-generic, only width-hardcoded — pure abstraction replay; vanVleck = the
+3/2,2 instance) + white_hInnerCont_of_dominations (whitened; B-slot internal from
+white_hBdom_discharged; no lam≤8) modulo {S1 tripleHEmeas, hWdom (whitened VALUE
+domination — NOT banked in any shape), hmeas, hcont} + cp466 gate. std-3 ×4.
+raw 0 (9982). **J4-689: (b′) hWdom — the whitened value-kernel Gaussian domination
+(from the whitened cutoff/ambient structure; the pkg bounds only cover the DEFECT);
+then (b) S1 + (b″) hmeas/hcont; then (c) K1TransportBudget/capstone piles.**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
