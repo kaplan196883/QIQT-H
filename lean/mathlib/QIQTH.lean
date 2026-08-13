@@ -3072,3 +3072,18 @@ import QIQTH.WhiteHtermBoxWGlue
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHtermBoxWCover
 import QIQTH.WhiteHInnerContGeomCover
+-- J4-713: hInterior CLOSED (WhiteHtermBoxWClosed + WhiteHInnerContGeomClosed).
+-- Node convention VERIFIED MATCH; recursion STRICT non-circular
+-- (box(m) → hInterior_m → box(m+1)). iterE_timeSlice_continuousWithinAt_of_box:
+-- leg (b) = fixed-spatial-point time slice of the level-m box (compose with
+-- p ↦ (p.1·u, w)). white_htermBox_unconditional_k_closed: the hInterior-FREE
+-- genuine Nat.rec tie — hInterior derived per level as legA.mul legB (leg (a) =
+-- labelled hlegA reparam-factor family from the _at_set substrate; leg (b) = the
+-- time-slice of the IH), fed to the null-frontier glue + the wired engine;
+-- k=0 seed labelled. white_hInnerCont_closed_final: the rethread — FINAL certs
+-- {hnull (PROVED at ball gate), hlegA, hbase seed, hpkg, hEmeas, A-group, window}.
+-- Uniform-reach wall + group-8 + hjoint + hInterior ALL GONE. Downstream = the
+-- hlegA neighborhood-transfer discharge (would leave {hnull, hbase, hpkg, hEmeas}).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHtermBoxWClosed
+import QIQTH.WhiteHInnerContGeomClosed
