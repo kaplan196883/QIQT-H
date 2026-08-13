@@ -26735,6 +26735,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteGapBAssembly.white_innerStep_hcont
 #print axioms QIQTH.WhiteHtermBoxGeom.white_htermBox_of_geometry
 
+-- J4-705: the hjoint induction tie CLOSED — white_htermBox_unconditional_k
+-- (recursion carrier discharged by genuine Nat.rec; window downward-closed;
+-- ∀-radius geometry proved the vacuity trap — bounded reach + off-gate vanishing
+-- all-radii lift via contOn_prod_extend_of_zeroOn); satisfiability witness banked.
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHtermBoxUncond.contOn_prod_extend_of_zeroOn
+#print axioms QIQTH.WhiteHtermBoxUncond.white_htermBox_unconditional_k
+#print axioms QIQTH.WhiteHtermBoxUncond.white_htermBox_uncond_vanishing_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

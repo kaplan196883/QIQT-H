@@ -2946,3 +2946,19 @@ import QIQTH.WhiteHcontEAssembly
 import QIQTH.WhiteSdomInner
 import QIQTH.WhiteGapBAssembly
 import QIQTH.WhiteHtermBoxGeom
+-- J4-705: THE hjoint INDUCTION TIE CLOSED (WhiteHtermBoxUncond).
+-- white_htermBox_unconditional_k: ∀k ∀ positive sub-window [s₁,s₂]⊆(0,1] ∀R',
+-- joint continuity of iterE (whiteDefectKernel …) (k+1) — NO hjoint hypothesis;
+-- discharged by a GENUINE Nat.rec (base = iterE_one flow-ball germ extended to all
+-- radii; step = IH ⟹ white_innerStep_hcont ⟹ off-gate extend ⟹ wired engine).
+-- Window verdict: downward-closed (certificates τ-independent; the rescaled Gap-B
+-- window [s₁u,s₂u] is again a positive sub-window, IH usable for ALL u).
+-- Radius verdict: ∀-radius GEOMETRY is unsatisfiable (bounded gate — the cp466
+-- vacuity trap avoided); resolution = single bounded-reach R + all-radii lift via
+-- the off-gate first-argument vanishing (contOn_prod_extend_of_zeroOn, generic
+-- open-cover extension); satisfiability witness banked. Surviving inputs = labelled
+-- certificates only: off-gate vanishing {U,hUopen,hEoffFirst,hcover} + bounded-reach
+-- flow-ball + Gap-A geometry + hpkg + hEmeas + hagree. Downstream = gate-threading
+-- white_hInnerCont_of_geometry (re-emit internal-S certs; no conflict).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHtermBoxUncond
