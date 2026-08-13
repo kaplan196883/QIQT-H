@@ -26118,6 +26118,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TruncHIntCarries.curved_hIntOn_from_geometry_closed
 #print axioms QIQTH.TruncHIntCarries.curved_hIntOn_from_geometry_closed_curved_satisfiable
 
+-- J4-667: gap-(i) brick 4 (ResidualAssemblyTrunc) — the capstone Duhamel-slot rethread:
+-- wide_a1_R6_of_residue_inf_hEboundW_discharged_trunc — the hEboundW-discharged
+-- gate-existentialized wide a₁ capstone with its hInt arrow retyped to the TRUNCATED
+-- IterConvIntegrableWOn (window = the outer time t), via the single final-call swap to
+-- the banked wide_a1_R6_of_residue_inf_trunc (J4-263) — no 130-binder body
+-- reconstruction was needed. All other binders/conclusion identical; hEboundW stays
+-- internalized from geometry. NOT directly fed by the curved closure yet: the capstone's
+-- provider gate is existential while the curved closure lives at constGate — the
+-- GATE-UNIFICATION brick is the remaining gap-(i) plumbing, plus c<δ₀ + hw/hu.
+-- NOT a₁=R/6 (gaps (ii)-(v) remain; R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.ResidualAssemblyTrunc.wide_a1_R6_of_residue_inf_hEboundW_discharged_trunc
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

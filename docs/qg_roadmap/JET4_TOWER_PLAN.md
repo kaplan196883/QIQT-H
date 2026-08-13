@@ -8175,3 +8175,14 @@ jet-reach) + hw/hu (genuine C^∞ inputs) + brick 4 = the ~130-binder capstone r
 TruncatedHIntRethread proved the drop-in pieces already).
 **J4-667**: brick 4 — the capstone rethread (mechanical but multi-binder; the capstone
 then consumes IterConvIntegrableWOn). Then gaps (ii)/(iii). a₁=R/6 CONDITIONAL.
+
+### J4-667 [AF] — gap-(i) brick 4: the capstone Duhamel-slot rethread
+ResidualAssemblyTrunc.lean (158 lines, ~60s):
+wide_a1_R6_of_residue_inf_hEboundW_discharged_trunc — hInt retyped to
+IterConvIntegrableWOn (window = outer t) via the banked one-level-down trunc mirror
+(J4-263 wide_a1_R6_of_residue_inf_trunc): single call swap, no body reconstruction.
+std-3. raw 0 (9960). GAP-(i) RESIDUE: the GATE-UNIFICATION brick (the capstone's
+provider gate is existential — hEboundW_wide_from_geometry's own choice — while the
+curved closure lives at constGate; align them for the direct curved feed) + c<δ₀ +
+hw/hu. **J4-668**: the gate-unification brick; then gaps (ii)/(iii).
+a₁=R/6 CONDITIONAL.

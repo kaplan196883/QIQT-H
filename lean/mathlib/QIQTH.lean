@@ -2553,3 +2553,10 @@ import QIQTH.TruncHIntFromGeometry
 -- (Ric(0)≠0). Brick 4 owed: the ~130-binder capstone rethread (leviSeries_summableW_le
 -- → _trunc inside the wide capstone). NOT a₁=R/6 (conditional; R/6 = carrier).
 import QIQTH.TruncHIntCarries
+-- J4-667: gap-(i) brick 4 — ResidualAssemblyTrunc: the capstone Duhamel-slot rethread —
+-- wide_a1_R6_of_residue_inf_hEboundW_discharged_trunc: hInt retyped to the TRUNCATED
+-- IterConvIntegrableWOn (window = outer t) via the banked one-level-down trunc mirror
+-- (single call swap; no body reconstruction). Gap-(i) residue: the gate-unification
+-- brick (align the capstone's existential provider gate with the curved constGate) +
+-- c<δ₀ + hw/hu. NOT a₁=R/6 (conditional; R/6 = carrier).
+import QIQTH.ResidualAssemblyTrunc
