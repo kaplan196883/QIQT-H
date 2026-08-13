@@ -8558,3 +8558,15 @@ std-3 ×5. raw 0 (9987).
 / HeatOpWitnessContinuity — scope whether the banked one-step whitened kernel joint
 continuity + the DCT majorants make the induction an extraction) + the width-generic
 LeviMTest replay. Else the K1TransportBudget/capstone piles.** a₁=R/6 CONDITIONAL.
+
+### J4-694 [AF] — the width-generic Levi M-test replay
+WhiteLeviMTestWidth.lean (234 lines, 53s): the banked M-test chain freed from the
+width-2 hardcode to any lam>0 (6 thms); ★ leviJoint_window_of_carries_width emits the
+exact hJoint shape from {hmajor (width-lam per-term domination), htermBox (whitened
+iterE termwise box-continuity)}. Width-mismatch REMOVED. std-3 ×6 (3 pinned).
+raw 0 (9988). VERDICTS: hbase (whitened hDcont/hLcont derivative continuity) + hstep
+(the convolution integral envelope) NOT extractable from S1 (measurability-only) —
+the two genuine open bricks under hJoint.
+**J4-695: hmajor (the width-lam per-term wire from white_hBdom/iterConvW_bound —
+likely mechanical) + then hbase/hstep (the genuine bricks) / else the
+K1TransportBudget+capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

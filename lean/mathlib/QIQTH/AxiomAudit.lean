@@ -26584,6 +26584,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHcontWitnessFactor.white_hInnerCont_leviJoint
 #print axioms QIQTH.WhiteHcontWitnessFactor.white_hInnerCont_leviJoint_witness_gate
 
+-- J4-694: the width-generic Levi M-test replay (WhiteLeviMTestWidth). The banked
+-- LeviMTest chain (hBcontEvery_of_carries + box/strip continuity) was width-2
+-- HARDCODED but width-parametric-in-form (width entered only via iterKernelW20_factor
+-- + the diagonal-peak majorant; the modelCoeff α=0 decay/summability and time
+-- monotonicity are width-free) — replayed at any lam > 0: iterKernelW_width0_factor,
+-- leviBoxMajorant_width_summable, leviSeries_box/stripContOn_width,
+-- hBcontEvery_of_carries_width, and ★ leviJoint_window_of_carries_width — emitting the
+-- EXACT hJoint shape (∀ u∈U, ContinuousOn (leviSeries E slice) (Ioc 0 u ×ˢ univ)) from
+-- {hmajor: the width-lam per-term domination; htermBox: the whitened iterE termwise
+-- joint box-continuity}. The width-2/whiteLam mismatch obstruction is REMOVED.
+-- EXTRACTION VERDICTS (honest): hbase (the whitened heatOp-defect joint continuity,
+-- reduced to hDcont/hLcont) and hstep (the parametric Gaussian-convolution integral
+-- envelope) are NOT extractable — the S1 machinery is measurability-only (0 continuity
+-- occurrences) — they remain the two genuine open bricks. NOT a₁=R/6 (R/6 = labelled
+-- carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteLeviMTestWidth.iterKernelW_width0_factor
+#print axioms QIQTH.WhiteLeviMTestWidth.hBcontEvery_of_carries_width
+#print axioms QIQTH.WhiteLeviMTestWidth.leviJoint_window_of_carries_width
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

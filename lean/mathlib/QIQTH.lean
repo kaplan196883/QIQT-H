@@ -2802,3 +2802,13 @@ import QIQTH.WhiteLeviConvergenceTrio
 -- both witnesses; needs a width-generic LeviMTest replay: the pinned one is width-2).
 -- +cp466 gate. NOT a₁=R/6 (R/6 = carrier; flat tower only).
 import QIQTH.WhiteHcontWitnessFactor
+-- J4-694: the width-generic Levi M-test replay (WhiteLeviMTestWidth) — the banked
+-- M-test chain freed from the iterKernelW-2 hardcode to any lam>0 (the width entered
+-- only via the factorization + diagonal-peak majorant; modelCoeff decay width-free):
+-- ★ leviJoint_window_of_carries_width emits the EXACT hJoint shape from {hmajor
+-- (width-lam domination), htermBox (whitened iterE termwise box-continuity)}. The
+-- width-mismatch obstruction is REMOVED. Verdicts: hbase (whitened hDcont/hLcont
+-- derivative continuity) and hstep (the convolution integral envelope) confirmed NOT
+-- extractable from S1 (measurability-only) — the two genuine open bricks.
+-- NOT a₁=R/6 (R/6 = carrier; flat tower only).
+import QIQTH.WhiteLeviMTestWidth
