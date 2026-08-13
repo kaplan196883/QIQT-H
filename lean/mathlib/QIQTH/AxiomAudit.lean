@@ -26131,6 +26131,24 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.ResidualAssemblyTrunc.wide_a1_R6_of_residue_inf_hEboundW_discharged_trunc
 
+-- J4-668: gap-(i) GATE UNIFICATION (CurvedCapstoneGateUnify).
+-- ★ curved_wide_a1_R6_trunc_hIntFed — the truncated a₁ capstone instantiated at the
+-- genuinely curved witness (curvedRNCMetric κ<0) with the Duhamel integrability slot
+-- hInt AND the residual bound hEboundW_le BOTH discharged from geometry at the SAME
+-- explicit constGate, fed by the one curved provider curvedRNC_heatOp_dom_pkg (hInt via
+-- the affine slice + S1 surface; hEboundW_le at cutoff t':=T₀). Route note: the
+-- ∃-gate capstone is GENUINELY BLOCKED (provider gate = varying-radius flow-ball ≠
+-- constGate; integrability does not transport across gates — different gated witnesses
+-- ⟹ different heat operators) — resolved at the explicit-gate capstone
+-- (wide_a1_R6_of_residue_inf_trunc) by CHOOSING S := constGate. Discharged internally:
+-- hInt, hEboundW_le, hg/hg0/hgi/hΓ/hdg0/htr, hS0, hK0, hChr. CARRIED (honest):
+-- c<δ₀ (jet-reach), labelled hw/hu/hsrc (genuine C^∞/regularity inputs), and the five
+-- inner Duhamel arrows hDuhamel/hInter/hDConv/hCH/hCConv. + curved_satisfiable
+-- (Ric(0)=(n−1)κδ≠0). NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedCapstoneGateUnify.curved_wide_a1_R6_trunc_hIntFed
+#print axioms QIQTH.CurvedCapstoneGateUnify.curved_wide_a1_R6_trunc_hIntFed_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

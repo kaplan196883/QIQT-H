@@ -8186,3 +8186,18 @@ provider gate is existential — hEboundW_wide_from_geometry's own choice — wh
 curved closure lives at constGate; align them for the direct curved feed) + c<δ₀ +
 hw/hu. **J4-668**: the gate-unification brick; then gaps (ii)/(iii).
 a₁=R/6 CONDITIONAL.
+
+### J4-668 [AF] — gap-(i) GATE UNIFICATION: the curved trunc capstone with hInt fed
+CurvedCapstoneGateUnify.lean (238 lines, ~75s): ★ curved_wide_a1_R6_trunc_hIntFed —
+the trunc a₁ capstone at curvedRNCMetric κ<0 with hInt AND hEboundW_le both from
+geometry at the SAME explicit constGate (one provider: curvedRNC_heatOp_dom_pkg).
+BLOCKER RECORDED: the ∃-gate capstone route is genuinely dead (varying-radius flow-ball
+gate ≠ constGate; no cross-gate integrability transport) — resolved by choosing S at
+the explicit-gate capstone. Internally discharged: hInt, hEboundW_le, all gauge binders,
+hChr, hS0, hK0. CARRIED: c<δ₀ + labelled hw/hu/hsrc + the FIVE inner Duhamel arrows
+(hDuhamel/hInter/hDConv/hCH/hCConv). +curved_satisfiable. std-3 ×2. raw 0 (9961).
+**GAP LEDGER after J4-668: gap (i) hInt = CLOSED into the curved capstone. Remaining:
+the five inner arrows (the Levi/Duhamel interface assembly cluster), c<δ₀, hw/hu/hsrc
+labelled inputs, gaps (ii)-(v). J4-669: scope + attack the five arrows (grep
+A1_R6_RESIDUE_STATUS §5 for their status — some may have banked suppliers).**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

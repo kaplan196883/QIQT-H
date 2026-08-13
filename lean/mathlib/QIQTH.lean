@@ -2560,3 +2560,13 @@ import QIQTH.TruncHIntCarries
 -- brick (align the capstone's existential provider gate with the curved constGate) +
 -- c<δ₀ + hw/hu. NOT a₁=R/6 (conditional; R/6 = carrier).
 import QIQTH.ResidualAssemblyTrunc
+-- J4-668: gap-(i) gate unification (CurvedCapstoneGateUnify) —
+-- ★ curved_wide_a1_R6_trunc_hIntFed: the trunc a₁ capstone INSTANTIATED at the curved
+-- witness with hInt AND hEboundW_le both fed from the ONE curved provider
+-- (curvedRNC_heatOp_dom_pkg) at the explicit constGate (route A at the explicit-gate
+-- capstone; the ∃-gate capstone is genuinely blocked: varying-radius flow-ball ≠
+-- constGate, and integrability does not transport across gates). Discharged internally:
+-- hInt, hEboundW_le, all geometry/gauge binders, hChr. Carried: c<δ₀, labelled hw/hu/hsrc,
+-- and the five inner Duhamel arrows (hDuhamel/hInter/hDConv/hCH/hCConv). Genuinely
+-- curved (Ric(0)=(n−1)κδ≠0). NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedCapstoneGateUnify
