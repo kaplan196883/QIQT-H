@@ -26524,6 +26524,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteGatePackageCombined.white_hInnerCont_combined
 #print axioms QIQTH.WhiteGatePackageCombined.white_gate_package_combined_witness_gate
 
+-- J4-691: S1 DISCHARGED (WhiteHInnerContFinal). The whitened-defect tripleHEmeas was
+-- ALREADY BANKED unconditionally (WhiteS1C.white_tripleHEmeas_uniform — Route-B/E3d:
+-- ∂_τ + P1 + P2 + gauge; the vanVleck curved_hS1_at_gate is witness-specific and was
+-- NOT the source); the only obstruction was radius-matching, solved by THREE-WAY gate
+-- co-instantiation at the shared c = min(δp, δS, δV)/2: the defect package (B-slot via
+-- white_leviSeries_full_row) + the S1 + white_witness_value_dom_at_radius (the value
+-- domination made radius-PARAMETRIC — c-free constants). ★ white_hInnerCont_final:
+-- the whitened inner-pairing continuity carrying exactly {hmeas, hcont} — both GENUINE
+-- WALLS confirmed on both witnesses: hmeas = the Levi z-slice AESM, requiring the
+-- a.e.-pointwise summability (the LeviSeriesLocalData/hFsum convergence trio); hcont =
+-- the Levi time-continuity. + cp466 gate (n=2, κ=−1, fat K). Remaining: those two walls
+-- + the K1TransportBudget/capstone piles. NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.WhiteHInnerContFinal.white_witness_value_dom_at_radius
+#print axioms QIQTH.WhiteHInnerContFinal.white_hInnerCont_final
+#print axioms QIQTH.WhiteHInnerContFinal.white_hInnerCont_final_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

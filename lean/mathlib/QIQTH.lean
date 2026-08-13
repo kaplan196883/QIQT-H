@@ -2772,3 +2772,13 @@ import QIQTH.WhiteWitnessValueDom
 -- those three carries + the K1TransportBudget/capstone piles. NOT a₁=R/6
 -- (R/6 = carrier; flat tower only).
 import QIQTH.WhiteGatePackageCombined
+-- J4-691: S1 DISCHARGED (WhiteHInnerContFinal) — the whitened tripleHEmeas was already
+-- banked unconditionally (white_tripleHEmeas_uniform, Route-B/E3d — the vanVleck
+-- analogue was witness-specific and NOT the source); the obstruction was radius-matching,
+-- solved by THREE-WAY co-instantiation (defect pkg + S1 + the radius-parametric value
+-- domination white_witness_value_dom_at_radius) at c = min(δp,δS,δV)/2.
+-- ★ white_hInnerCont_final: carries exactly {hmeas, hcont} — both GENUINE WALLS
+-- (hmeas = the Levi z-slice a.e.-summability/convergence trio LeviSeriesLocalData/hFsum;
+-- hcont = Levi time-continuity; open on the vanVleck side too). +cp466 gate.
+-- NOT a₁=R/6 (R/6 = carrier; flat tower only).
+import QIQTH.WhiteHInnerContFinal

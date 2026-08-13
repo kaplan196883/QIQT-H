@@ -8517,3 +8517,17 @@ hmeas, hcont} + cp466 gate. std-3 ×4. raw 0 (9984).
 of a product of explicit smooth/measurable pieces — likely tractable from the witness
 structure) + hmeas/hcont (interior-integral regularity slots); then the
 K1TransportBudget/capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-691 [AF] — S1 DISCHARGED; whitened hInnerCont carries = {hmeas, hcont}
+WhiteHInnerContFinal.lean (~15KB, 47s): the whitened tripleHEmeas was ALREADY BANKED
+(white_tripleHEmeas_uniform — don't-undercredit catch); radius-matching solved by
+THREE-WAY co-instantiation at c = min(δp,δS,δV)/2 (+ the radius-parametric value dom
+white_witness_value_dom_at_radius). ★ white_hInnerCont_final carries exactly
+{hmeas, hcont} — both GENUINE WALLS on both witnesses: hmeas = the Levi z-slice AESM
+via the a.e. summability (LeviSeriesLocalData/hFsum convergence trio); hcont = Levi
+time-continuity. +cp466 gate. std-3 ×3. raw 0 (9985).
+**J4-692: scope + attack the convergence trio (LeviSeriesLocalData/hFsum — the shared
+wall under hmeas AND parts of the arrow census: does the co-emitted all-τ package's
+iterated-convolution machinery give the a.e. summability? the leviSeries termwise
+bounds ARE banked — the trio may be extraction like J4-676) / else the
+K1TransportBudget+capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
