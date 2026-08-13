@@ -8337,3 +8337,16 @@ hypothesis set, feed the geometry-closed slots (the new hEdom/width machinery, h
 upstream discharge), and compose toward discharging the hDConv ARROW of
 curved_wide_a1_R6_trunc_hIntCHInterFed. hBoundary stays only on the value-level census.**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-679 [AF] — the W1-free hDConv slot certificate + honest arrow verdict
+CurvedHDConvSlotThreading.lean (144 lines, 56s): curvedHDConv_fed_slots_at_constGate —
+gauge pair + width-3/2 hEdom + width-3/2 hAdom/hWDom certified at the curved witness
+from only hChr+hw (+Ric≠0). std-3 ×2. raw 0 (9973). VERDICT: the hDConv arrow does NOT
+drop — (W-census) ~40 analytic members without curved suppliers (arrow discharge would
+LENGTHEN the carries); (W-width/gate) width-2 pkg vs width-3/2 suppliers each ∃-pick
+their own gate radius (no shared gate as-is). Arrows remain hDuhamel/hDConv/hCConv.
+**J4-680: the GATE-UNIFICATION brick — both width suppliers at ONE shared small radius
+(the constructions should be monotone-in-radius: a bound on gate c holds on any c'<c
+if re-run; check whether each supplier's proof accepts an arbitrary sufficiently-small
+c or fixes it structurally). If tractable ⟹ removes W-width/gate; W-census stays the
+honest labelled residue.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

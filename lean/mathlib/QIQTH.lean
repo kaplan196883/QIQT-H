@@ -2662,3 +2662,12 @@ import QIQTH.CurvedHgateGlue
 -- boundary value) — the load-bearing path bypasses hBoundary entirely.
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.HDConvFromBoundaryLim
+-- J4-679: the W1-free hDConv slot certificate (CurvedHDConvSlotThreading) —
+-- curvedHDConv_fed_slots_at_constGate: the three geometry-closable slots of
+-- hDConv_AT_GATE certified at the curved witness from only hChr+hw (gauge pair,
+-- width-3/2 hEdom, width-3/2 hAdom+hWDom) + Ric≠0 gate. HONEST VERDICT: the arrow does
+-- NOT drop — residue = (W-census) ~40 analytic members with no curved supplier
+-- (feeding would LENGTHEN the carry list) + (W-width/gate) the width-2 vs width-3/2
+-- suppliers each ∃-pick their own gate radius — unification owed.
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedHDConvSlotThreading

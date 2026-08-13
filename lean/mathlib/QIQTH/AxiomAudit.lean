@@ -26306,6 +26306,22 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.hDConv_gatedWitnessN1_from_daLim_boundary
 
+-- J4-679: the W1-free hDConv slot certificate (CurvedHDConvSlotThreading).
+-- curvedHDConv_fed_slots_at_constGate — the three geometry-closable slots of
+-- hDConv_AT_GATE certified at the curved witness (curvedRNCMetric κ<0, seed K={0},
+-- the capstone's constGate gauge) from only hChr+hw: (A) the gauge pair
+-- MemGaugeGi ∧ MemGaugeGamma, (B) the width-3/2 hEdom on the curved heatOp,
+-- (C) the width-3/2 hAdom on the witness (+hWDom). + Ric≠0 satisfiability.
+-- HONEST VERDICT (recorded): the hDConv ARROW does NOT drop by this route —
+-- (W-census) ~40 analytic census members of hDConv_AT_GATE have no curved supplier
+-- (feeding the arrow would REPLACE one DifferentiableAt with a LONGER labelled bundle);
+-- (W-width/gate) the width-2 pkg suppliers and the width-3/2 suppliers each ∃-produce
+-- their OWN flow-ball radius — no shared gate as-is; unification owed. The capstone's
+-- inner arrows remain hDuhamel/hDConv/hCConv. NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedHDConvSlotThreading.curvedHDConv_fed_slots_at_constGate
+#print axioms QIQTH.CurvedHDConvSlotThreading.curvedHDConv_fed_slots_at_constGate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
