@@ -2792,3 +2792,13 @@ import QIQTH.WhiteHInnerContFinal
 -- — the last carry; the Weierstrass route needs iterE_k time-continuity, not banked
 -- composably). +cp466 gate. NOT a₁=R/6 (R/6 = carrier; flat tower only).
 import QIQTH.WhiteLeviConvergenceTrio
+-- J4-693: the hcont witness factor DISCHARGED (WhiteHcontWitnessFactor) —
+-- whiteWitness_time_continuousAt: the witness factor s ↦ whiteGatedWitness(u−s) 0 z is
+-- continuous for EVERY z (gated kernel = 0 or cutoff·√det·gaussDdim(u−s); only the
+-- Gaussian is s-dependent) + leviTimeCont_of_jointStrip (extraction from the banked
+-- joint strip shape) ⟹ ★ white_hInnerCont_leviJoint: the carry morphs {hcont} →
+-- {hJoint = the Levi-slice JOINT continuity (hBcontEvery_of_carries shape)}, whose
+-- residual = the whitened iterE termwise joint continuity (the M-test wall — open on
+-- both witnesses; needs a width-generic LeviMTest replay: the pinned one is width-2).
+-- +cp466 gate. NOT a₁=R/6 (R/6 = carrier; flat tower only).
+import QIQTH.WhiteHcontWitnessFactor

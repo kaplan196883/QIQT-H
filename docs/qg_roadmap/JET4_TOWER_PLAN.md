@@ -8545,3 +8545,16 @@ scope whether iterE_k time-continuity extracts from the banked convolution machi
 is smooth in s>0 — continuity under the integral via the same dominations?) + the
 uniform-on-compacts convergence (colC geometric) ⟹ M-test. Else the piles.**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-693 [AF] — the hcont witness factor discharged; carry morphs to hJoint
+WhiteHcontWitnessFactor.lean (238 lines, 56s): whiteWitness_time_continuousAt (EVERY z
+— structural: gated kernel = 0 or cutoff·√det·Gaussian(u−s), only the Gaussian
+s-dependent) + leviTimeCont_of_jointStrip ⟹ ★ white_hInnerCont_leviJoint: carries
+{hcont} → {hJoint = the Levi-slice joint continuity, hBcontEvery_of_carries shape};
+residual = the whitened iterE TERMWISE JOINT continuity (M-test wall, open both
+witnesses; + a width-generic LeviMTest replay owed — pinned at width 2). +cp466 gate.
+std-3 ×5. raw 0 (9987).
+**J4-694: the iterE termwise joint continuity (htermBox/hbase+hstep in IterEContinuity
+/ HeatOpWitnessContinuity — scope whether the banked one-step whitened kernel joint
+continuity + the DCT majorants make the induction an extraction) + the width-generic
+LeviMTest replay. Else the K1TransportBudget/capstone piles.** a₁=R/6 CONDITIONAL.

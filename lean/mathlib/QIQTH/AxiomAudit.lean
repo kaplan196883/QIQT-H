@@ -26562,6 +26562,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteLeviConvergenceTrio.white_hInnerCont_hmeas
 #print axioms QIQTH.WhiteLeviConvergenceTrio.white_hInnerCont_hmeas_witness_gate
 
+-- J4-693: the hcont WITNESS FACTOR discharged (WhiteHcontWitnessFactor).
+-- whiteWitness_time_continuousAt — the witness factor s ↦ whiteGatedWitness … (u−s) 0 z
+-- is ContinuousAt for EVERY z (structural: the gated kernel at fixed z is either
+-- constant 0 or cutoff·√det·gaussDdim(u−s)(chart-image), with ONLY the Gaussian
+-- s-dependent; from the banked joint (τ,x)-continuity of gaussDdim on {0<τ}).
+-- leviTimeCont_of_jointStrip — the Levi factor's time-continuity extracted from the
+-- banked JOINT strip shape (hBcontEvery_of_carries). ★ white_hInnerCont_leviJoint —
+-- the composed whitened inner-pairing continuity; carries morph {hcont} → {hJoint}:
+-- ∀ u ∈ U, ContinuousOn (leviSeries (whiteDefectKernel …) slice) (Ioc 0 u ×ˢ univ) —
+-- whose honest residual is the whitened iterE TERMWISE JOINT continuity (the
+-- parametric-continuity-of-convolution / M-test wall, htermBox/hbase+hstep in
+-- IterEContinuity — open on the vanVleck side too; also needs a width-GENERIC LeviMTest
+-- replay, the pinned one being width-2). + cp466 gate (n=2, κ=−1, fat K).
+-- Remaining: hJoint + the K1TransportBudget/capstone piles. NOT a₁=R/6
+-- (R/6 = labelled carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteHcontWitnessFactor.gaussDdim_time_continuousAt
+#print axioms QIQTH.WhiteHcontWitnessFactor.whiteWitness_time_continuousAt
+#print axioms QIQTH.WhiteHcontWitnessFactor.leviTimeCont_of_jointStrip
+#print axioms QIQTH.WhiteHcontWitnessFactor.white_hInnerCont_leviJoint
+#print axioms QIQTH.WhiteHcontWitnessFactor.white_hInnerCont_leviJoint_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
