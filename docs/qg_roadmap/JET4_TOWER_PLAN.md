@@ -8708,3 +8708,11 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - FINAL certs: {hnull (PROVED at ball gate), hlegA (_at_set family), hbase (k=0 seed), hpkg, hEmeas, A-group, window}. Reach wall + group-8 + hjoint + hInterior ALL GONE.
 - All 4 std-3 (my chk-file); AxiomAudit 10013 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-714: the hlegA discharge — neighborhood-transfer (ContinuousWithinAt.mono_of_mem from the small in-gate/in-reach ball to the box point) from the _at_set substrate ⟹ residual {hnull, hbase, hpkg, hEmeas}; then the ∃-rewrap + the piles + the joint cp466 audit.
+
+## J4-714 (see commit) — THE hlegA DISCHARGE [AF]
+- SCOPING VERDICTS: S is generic at this level (not defeq flow-ball) ⟹ carry hSreach : S w ⊆ flowBall_w; at the CONCRETE gate S w = flowBall_w exactly (hSreach = subset_rfl). Uniform germ CONFIRMED banked (uniformInverseChart_huniformChart: ∃δ₀>0 ∀q∈Kset germ+open). u=1 endpoint: reparam time 0 off-window ⟹ factor constant 0 (closes the substrate's u<1 gap).
+- WhiteHlegADischarge.lean (292L): `white_hlegA_of_reach` (★★★ the full leg-(a) family from _at_set + reach cert: small in-gate∩in-reach ball → substrate → continuousWithinAt → mono_of_mem_nhdsWithin), `white_hlegA_flowBallGate` (concrete-gate: openness/reach/germ/agreement ALL banked), `white_hlegA_cert_package_satisfiable` (cp466).
+- WhiteHInnerContLegADischarged.lean (122L): `white_hInnerCont_closed_final2` (★★★ hlegA GONE).
+- FINAL surviving per-gate certs: {hnull (proved at ball gate), hbase (k=0 seed)} + dominated {hpkg, hEmeas} + A-group + window. hbase SCOPED: all J4-701 pieces banked (extend stitch + off-gate vanishing + cover satisfiable) — assembly = cheap next brick.
+- All 4 std-3 (my chk-file); AxiomAudit 10015 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-715: the hbase producer (assemble from WhiteHBaseExtend pieces) ⟹ residue {hnull} + dominated; then the ∃-rewrap at the concrete gate (co-instantiation) + the joint cp466 audit; then the piles.
