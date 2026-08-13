@@ -26441,6 +26441,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBdomReconcile.white_hBdom_col_width_verdict
 #print axioms QIQTH.WhiteHBdomReconcile.white_hBdom_col_feed_witness_gate
 
+-- J4-687: the ALL-ROWS whitened hBdom (WhiteHBdomAllRows). ROW-GENERALIZABILITY
+-- VERDICT: the column restriction was COSMETIC — the tail engine's helpers
+-- (gaussDdim_conv, the width-tolerant convolutions, the mixed integrabilities, the
+-- capped right-domination) are all stated at general endpoints, and the whitened
+-- one-step supply (white_hEuni/white_hEbound_negHalf/white_hInt) is FULL-MATRIX ∀p q —
+-- no per-row re-whitening needed. Landed: the row-generalized tail ladder
+-- (iterE_row_bound_w → bridgeGeneric_tail_O_s_w_row) + leviSeries_full_row_of_tail
+-- (★ the reusable width-w FULL-ROW engine) + white_tail_O_s_row +
+-- white_leviSeries_full_row + ★★ white_hBdom_discharged: ∀ z y,
+-- |leviSeries(whiteDefectKernel) s z y| ≤ C_L·G_{lam·s}(z−y) on (0,1] at fat compact K,
+-- modulo the single S1 measurability input; width lam = whiteLam, NO lam≤8.
+-- + cp466 gate (n=2, κ=−1, K=closedBall 0 2). Downstream: (a) the builder-side
+-- witness+width re-base of curved_hInnerCont_of_dominations (pinned vanVleck/width-2);
+-- (b) the S1 tripleHEmeas at the whitened defect; (c) K1TransportBudget/capstone piles.
+-- NOT a₁=R/6 (R/6 = labelled carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBdomAllRows.iterE_row_bound_w
+#print axioms QIQTH.WhiteHBdomAllRows.bridgeGeneric_tail_O_s_w_row
+#print axioms QIQTH.WhiteHBdomAllRows.leviSeries_full_row_of_tail
+#print axioms QIQTH.WhiteHBdomAllRows.white_leviSeries_full_row
+#print axioms QIQTH.WhiteHBdomAllRows.white_hBdom_discharged
+#print axioms QIQTH.WhiteHBdomAllRows.white_hBdom_allrows_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

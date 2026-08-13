@@ -2731,3 +2731,13 @@ import QIQTH.CurvedA1ReBaseHBdomW2
 -- (i) whitened re-base of the hInnerCont builder / all-rows engine; (ii) the S1
 -- tripleHEmeas carry; (iii) prior piles. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHBdomReconcile
+-- J4-687: the ALL-ROWS whitened hBdom (WhiteHBdomAllRows) — verdict: the column
+-- restriction was COSMETIC (every helper already general-endpoint; the whitened
+-- one-step supply is full-matrix, no per-row re-whitening). Landed: the row-generalized
+-- tail ladder + leviSeries_full_row_of_tail (★ the width-w FULL-ROW engine) +
+-- ★ white_hBdom_discharged: ∀ z y, |leviSeries(whiteDefectKernel)| ≤ C_L·G_{lam·s}(z−y)
+-- at fat K, modulo the single S1 input, NO lam≤8. +cp466 gate (n=2, κ=−1, fat K).
+-- Downstream: (a) the builder-side witness+width re-base (curved_hInnerCont_of_
+-- dominations pinned at vanVleck/width-2); (b) the S1 tripleHEmeas carry; (c) prior
+-- piles. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHBdomAllRows

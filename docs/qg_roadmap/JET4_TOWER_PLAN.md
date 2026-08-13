@@ -8471,3 +8471,14 @@ std-3 ×5. raw 0 (9979). **J4-687: downstream (i) — the whitened re-base of th
 hInnerCont all-rows builder (curved_hInnerCont_of_dominations is pinned at
 vanVleckGatedWitness, full ∀(z,y)) or an all-rows tail engine; then (ii) the S1
 tripleHEmeas carry at the whitened defect; (iii) prior piles.** a₁=R/6 CONDITIONAL.
+
+### J4-687 [AF] — the ALL-ROWS whitened hBdom
+WhiteHBdomAllRows.lean (507 lines, 53s): the column restriction was COSMETIC (helpers
+general-endpoint; whitened one-step supply full-matrix) — the row-generalized tail
+ladder + leviSeries_full_row_of_tail (★ width-w FULL-ROW engine) +
+★★ white_hBdom_discharged (∀ z y at fat K, modulo the single S1 input, NO lam≤8)
++ cp466 gate. std-3 ×9 (6 pinned). raw 0 (9980).
+**J4-688: (a) the builder-side re-base — curved_hInnerCont_of_dominations (pinned at
+vanVleckGatedWitness/width-2) onto whiteGatedWitness/width-lam; then (b) the S1
+tripleHEmeas at the whitened defect; (c) the K1TransportBudget/capstone piles.**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
