@@ -8106,3 +8106,17 @@ uniform lemmas, consume _P).
 **J4-662**: expJet5_remainder_quadratic_bound_unif (the brick-(d) consumer form) [+ gate
 after]. Then (d) expMap_fderiv4_hasFDerivAt → (e) contDiffOn_five → J5-6 weld (hch5) ⟹
 K1. a₁=R/6 CONDITIONAL throughout.
+
+### J4-662 [AF] — ★ _unif LANDED: expJet5_remainder_quadratic_bound_unif
+ExpJet5RemainderUnif.lean (860 lines, ~540s module): ONE C₀ ≥ 0 chosen before r bounds
+the Jet₅ residual head by C₀·‖h‖‖k‖‖l‖‖m‖·‖r‖² at the GENUINE variation curves.
+Correction of the plan: _P is NOT black-box consumable (internal Kstar := max Kvb Kwb is
+r-dependent) — body mirrored w/ uniform Kstar + constants hoisted before intro r + 57
+feeders from uniform lemmas + Cq3 absorption. std-3 (agent + my chk both). raw 0 (9954).
+Gate deferred (cp466 discipline). THE ENTIRE ORDER-5 REMAINDER FEEDER IS NOW COMPLETE.
+**J4-663**: brick (d) — expMap_fderiv4_hasFDerivAt (mirror ExpMapFDeriv3 one order up:
+obtain C₀ from _unif, Mc := C₀·exp Kstar, little-o assembly; consumes expJet5_residual_bound
++ expMap_fderiv3_hasFDerivAt + expJetD5 + the genuine curve .choose_specs — all exist).
+Then (e) contDiffOn_five (hfd4 = (d) differentiability + expJetD5_two_pt_diff continuity,
+via the banked ExpJet5Phase1 reduction) → J5-6 weld (hch5) ⟹ K1.
+a₁=R/6 CONDITIONAL throughout.

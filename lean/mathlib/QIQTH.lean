@@ -2508,3 +2508,12 @@ import QIQTH.ExpJet5RemainderP
 -- dischargeable — _unif is pure assembly. NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet4SecondVarResidual
 import QIQTH.ExpJet5UnifFeeders
+-- J4-662: ★ the _unif layer LANDED — expJet5_remainder_quadratic_bound_unif
+-- (ExpJet5RemainderUnif, 860 lines): the r-UNIFORM directional order-5 quadratic
+-- remainder — ONE C₀ ≥ 0 chosen before r bounds the Jet₅ residual head by
+-- C₀·‖h‖‖k‖‖l‖‖m‖·‖r‖² at the GENUINE expJet{2,3,4}Curve variations (uniform Kstar via
+-- expJet_fderiv_tube_bddAbove_unif; constants hoisted before intro r; 57 feeders from
+-- the uniform lemmas; _P's symmetry+remAssembly_dir+factor_hklm tail verbatim). The
+-- brick-(d) consumer form. Gate deferred (cp466). Owed: (d) expMap_fderiv4_hasFDerivAt →
+-- (e) contDiffOn_five → J5-6 weld. NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5RemainderUnif

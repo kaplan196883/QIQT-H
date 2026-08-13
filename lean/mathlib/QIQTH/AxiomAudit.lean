@@ -26033,6 +26033,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.expJet4SecondVar_residual_Icc_unif
 #print axioms QIQTH.ExpMap.expJet4Val_v_two_pt_Icc_unif
 
+-- J4-662: ★ the _unif layer — expJet5_remainder_quadratic_bound_unif
+-- (ExpJet5RemainderUnif): the r-UNIFORM directional order-5 quadratic remainder: a single
+-- C₀ ≥ 0, chosen BEFORE r, bounds the Jet₅ residual head by C₀·‖h‖‖k‖‖l‖‖m‖·‖r‖² for
+-- every small r / v+r-propagator / probes, at the GENUINE expJet{2,3,4}Curve variation
+-- curves. NOT a black-box consumption of _P (whose internal Kstar := max Kvb Kwb is
+-- r-dependent): the body is mirrored with a uniform Kstar (expJet_fderiv_tube_bddAbove_unif),
+-- constants hoisted before intro r, the 57 feeders discharged from the uniform lemmas,
+-- and the Cq3 := Ccr·(1+2·expRho) absorption for the shared triple constant. This is the
+-- exact source-level datum the brick-(d) little-o assembly consumes (mirror of what
+-- ExpMapFDeriv3 consumed at order 4). Gate deferred (cp466 discipline). Owed: (d)
+-- expMap_fderiv4_hasFDerivAt → (e) contDiffOn_five → J5-6 weld (hch5). NOT exp∈C⁵;
+-- NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet5_remainder_quadratic_bound_unif
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
