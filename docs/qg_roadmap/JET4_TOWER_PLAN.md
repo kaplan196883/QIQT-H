@@ -8092,3 +8092,17 @@ Gate deliberately deferred (cp466 antecedent-inhabitance discipline).
 — the hard _unif prerequisite) + the directional uniform feeders
 (expJet4Val_v_two_pt_Icc_unif etc). Then _unif → gate → (d) fderiv4_hasFDerivAt →
 (e) contDiffOn_five → J5-6 weld (hch5) ⟹ K1. a₁=R/6 CONDITIONAL throughout.
+
+### J4-661 [AF] — brick (b) + last feeder: all 57 _P feeders now uniformly dischargeable
+ExpJet4SecondVarResidual (633 lines, 31s): expJet4SecondVar_residual_Icc_unif — the
+m-uniform 3rd→4th residual ≤ C₀·‖h‖‖k‖‖l‖·‖m‖² (Grönwall + residual ODE + m-uniform
+order-4 remainder source; S0=0 init via curve-def unfolding). ExpJet5UnifFeeders
+(670 lines, 37s): expJet4Val_v_two_pt_Icc_unif — the r-uniform 4th-var two-point bound.
+std-3 ×2 verified. raw 0 (9953). FEEDER AUDIT (agent, hypothesis-by-hypothesis): every
+one of _P's 57 directional feeders now has its uniform discharger (table in agent
+report) — the _unif brick is PURE ASSEMBLY (~600-line single theorem, mirror of
+ExpJet4RemainderUnif: constants up front from m/r-independent data, 57 feeders from
+uniform lemmas, consume _P).
+**J4-662**: expJet5_remainder_quadratic_bound_unif (the brick-(d) consumer form) [+ gate
+after]. Then (d) expMap_fderiv4_hasFDerivAt → (e) contDiffOn_five → J5-6 weld (hch5) ⟹
+K1. a₁=R/6 CONDITIONAL throughout.

@@ -2500,3 +2500,11 @@ import QIQTH.ExpJet5RemAssemblyDir
 -- NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5RemFactor
 import QIQTH.ExpJet5RemainderP
+-- J4-661: brick (b) + the last missing uniform feeder — ExpJet4SecondVarResidual
+-- (expJet4SecondVar_residual_Icc_unif: the m-uniform 3rd→4th-variation residual ≤
+-- C₀·‖h‖‖k‖‖l‖·‖m‖², Grönwall + the m-uniform order-4 remainder source) +
+-- ExpJet5UnifFeeders (expJet4Val_v_two_pt_Icc_unif: the r-uniform 4th-variation
+-- two-point bound ≤ Ce·‖h‖‖k‖‖l‖‖m‖·‖r‖). AUDIT: all 57 _P feeders now uniformly
+-- dischargeable — _unif is pure assembly. NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet4SecondVarResidual
+import QIQTH.ExpJet5UnifFeeders

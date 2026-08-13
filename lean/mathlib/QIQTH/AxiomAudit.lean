@@ -26018,6 +26018,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.factor_hklm
 #print axioms QIQTH.ExpMap.expJet5_remainder_quadratic_bound_P
 
+-- J4-661: brick (b) + the last missing uniform feeder. ExpJet4SecondVarResidual:
+-- expJet4SecondVar_residual_Icc_unif — the m-uniform 3rd→4th-variation residual
+-- ‖R^{hkl}_{v+m} − R^{hkl}_v − S^{hklm}_v‖ ≤ C₀·‖h‖‖k‖‖l‖·‖m‖² (mirror of the order-3
+-- brick J4-5d1: gronwall_vec_residual_Icc + the residual ODE + the banked m-uniform
+-- order-4 remainder source; S0=0 init needed curve-def unfolding to .choose).
+-- ExpJet5UnifFeeders: expJet4Val_v_two_pt_Icc_unif — the r-uniform 4th-variation
+-- two-point bound ≤ expJet4VtpConst-uniform · ‖h‖‖k‖‖l‖‖m‖·‖r‖ (discharges the banked
+-- _const with r-independent tube/Lipschitz data). FEEDER AUDIT COMPLETE: all 57
+-- directional hypotheses of expJet5_remainder_quadratic_bound_P are now uniformly
+-- dischargeable — the _unif brick is PURE ASSEMBLY (no missing lemmas). NOT exp∈C⁵;
+-- NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expJet4SecondVar_residual_Icc_unif
+#print axioms QIQTH.ExpMap.expJet4Val_v_two_pt_Icc_unif
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
