@@ -8631,3 +8631,9 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - Residue: labelled base-q flow-ball geometry certificate {q∈Kset, IsOpen (S q), gate-ON at R, base-q reach, c<δ₀, germ} + the a.e.-w assembly (uniform-across-bases reach over fat Kset) threading innerStep_cont_ae. Gap-B (iterE time-continuity, general 1st arg) + S-dom untouched.
 - All 11 std-3 (my chk-file); AxiomAudit 9998 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-703: the a.e.-w assembly (uniform reach certificate over the fat K — the flow-chart geometry should be uniform on the compact Kset) + Gap-B per-level induction + S-dom; then hcont assembles ⟹ htermBox CLOSED.
+
+## J4-703 (see commit) — Gap-A a.e.-w ASSEMBLY [AF]
+- WhiteHcontEAssembly.lean (144L): `white_hcontE_ae_of_baseGeom` — the EXACT hcontE slot of innerStep_cont_ae at the whitened kernel: ∀ᵐu∈Ioc 0 1 (null endpoint u=1 dropped), ∀ᵐw (proved for EVERY w): Kset case split — in-gate via J4-702's reparam fibre fed by hgeom; off-gate unconditional (kernel ≡ 0).
+- ⚠ UNIFORM-GEOMETRY VERDICT: uniform base-q geometry over Kset FAILS — closedBall 0 R is 0-centered while S q is a small q-centered flow-ball; containment impossible for q far from 0. Honest carry = the ∀-q∈Kset labelled certificate hgeom {IsOpen (S q), closedBall 0 R ⊆ S q, base-q germ, 0-centered reach} (satisfiable in the small-R regime).
+- hcont still owes: S-dom (hbnd_int/hbound — material spread across ~40 files, no single banked slot) + Gap-B (hcontIter; the induction EXISTS in iterE_jointContinuousOn_wired — only the slots are owed). std-3 (my chk-file); AxiomAudit 9999 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-704: S-dom producer (consolidate the domination material into the hbnd_int/hbound slots) + Gap-B (hcontIter) ⟹ innerStep_cont_ae assembles per-level hcont ⟹ iterE_jointContinuousOn_wired ⟹ htermBox ⟹ white_hInnerCont_of_geometry.
