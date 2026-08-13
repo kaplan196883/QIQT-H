@@ -26882,6 +26882,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBaseGateCollarDischarge.white_hgateCollar_numeric_satisfiable
 #print axioms QIQTH.WhiteHBaseGateCollarDischarge.white_hInnerCont_closed_final6
 
+-- J4-719: hnull reduced — the codim-1 null-image core PROVED (dimH(sphere) < n
+-- built from hyperplane covers; Lipschitz sphere-image volume-null); final7
+-- replaces raw hnull by the transparent Lipschitz-solver cert hsolveFlow (the
+-- base-varying solver — base-0 banked data insufficient, honest new residue).
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHnullFlowReduction.dimH_sphere_lt
+#print axioms QIQTH.WhiteHnullFlowReduction.lipschitzOn_sphere_image_null
+#print axioms QIQTH.WhiteHnullFlowReduction.hnull_of_lipschitzSolver
+#print axioms QIQTH.WhiteHnullFlowReduction.white_hInnerCont_closed_final7
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

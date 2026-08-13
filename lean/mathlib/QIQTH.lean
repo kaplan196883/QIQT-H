@@ -3158,3 +3158,16 @@ import QIQTH.WhiteHBaseGateCollar
 -- whitened hInnerCont campaign: {hnull} (flow-gate null-frontier) + the standard
 -- co-instantiated carries. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHBaseGateCollarDischarge
+-- J4-719: hnull REDUCED — the codim-1 null-image CORE PROVED (WhiteHnullFlowReduction).
+-- dimH_hyperplane (coordinate hyperplane ≤ n−1) + sphere_subset_hyperplanes
+-- (sup-norm sphere ⊆ ⋃ 2n hyperplanes) ⟹ dimH_sphere_lt (dimH(sphere 0 c) < n —
+-- NOT in Mathlib, built here) ⟹ lipschitzOn_sphere_image_null (★ Lipschitz image
+-- of the sphere is volume-null via dimH_image_le + measure_zero_of_dimH_lt +
+-- hausdorffMeasure_pi_real). hnull_of_lipschitzSolver (★★ per-z₀ Lipschitz solver
+-- into the sphere image ⟹ raw hnull) ⟹ white_hInnerCont_closed_final7 (★★★ raw
+-- hnull REPLACED by the transparent Lipschitz-solvability certificate hsolveFlow;
+-- hnull discharged internally). VERDICT: the base-varying solver (w ↦ flowExp_w v
+-- invertibility/Lipschitz) is NOT derivable from base-0 banked data — hsolveFlow =
+-- the sole surviving analytic input; candidate discharge from the repo's
+-- BaseVaryingIFTPackage/BasepointJetLipschitz thread. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHnullFlowReduction
