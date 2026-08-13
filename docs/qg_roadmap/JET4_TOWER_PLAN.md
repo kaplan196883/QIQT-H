@@ -8584,3 +8584,14 @@ convolution integral envelope)}.
 **J4-696: hRepCont (nearest — the indicator collapse + chart continuity composition);
 then hLcont/hstep; then wire the two capstones into the hcont chain; then the
 K1TransportBudget/capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-696 [AF] — hRepCont DISCHARGED
+WhiteHRepCont.lean (11.5KB, 72s): white_hRepCont (indicator collapse + closed-form
+composition; sub-input hVcont = the in-gate chart continuity, held pointwise in the
+banked gate proofs but never exported standalone) ⟹
+whiteDefectKernel_jointContinuousOn_modulo_L (hbase modulo {hLcont}). std-3 ×2.
+raw 0 (9991). hJoint residue: {hEmeas, hLcont, hstep} + the hVcont packaging.
+**J4-697: (i) hVcont export (mechanical — package the WhiteS1C flow-ball ContinuousAt
+germ over closedBall 0 R ⊆ S 0); (ii) hLcont scope-and-start (the Δ_z laplaceBeltrami
+term — order-2 chart jets, the S1-b analog; the C⁵ machinery gives the chart jets!).**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

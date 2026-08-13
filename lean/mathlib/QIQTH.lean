@@ -2824,3 +2824,12 @@ import QIQTH.WhiteLeviMTestWidth
 -- jets), hstep (the convolution integral envelope)}. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteLeviMajorWire
 import QIQTH.WhiteHBaseReduction
+-- J4-696: hRepCont DISCHARGED (WhiteHRepCont) — white_hRepCont: the whiteTauDerivRep
+-- joint (τ,z)-continuity on the in-window in-gate box (indicator collapse via
+-- Set.indicator_of_mem + ContinuousOn.congr onto the closed form: Gaussian × cutoff ×
+-- const √det × τ-power prefactor; composed from hVcont + banked continuity pieces) ⟹
+-- whiteDefectKernel_jointContinuousOn_modulo_L: the whitened hbase modulo {hLcont}.
+-- hRepCont's honest sub-input: hVcont — the in-gate chart continuity z ↦ whiteInvChart
+-- 0 z (exists pointwise in the banked gate proofs; standalone export = next mechanical
+-- brick). hJoint residue now {hEmeas, hLcont, hstep}. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHRepCont

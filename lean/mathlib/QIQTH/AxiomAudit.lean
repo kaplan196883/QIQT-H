@@ -26627,6 +26627,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBaseReduction.white_hDterm_jointContinuousOn_of_repCont
 #print axioms QIQTH.WhiteHBaseReduction.whiteDefectKernel_jointContinuousOn_modulo_rep_and_L
 
+-- J4-696: hRepCont DISCHARGED (WhiteHRepCont). white_hRepCont — the joint (τ,z)
+-- continuity of whiteTauDerivRep on the in-window in-gate box: the gate indicator
+-- freezes ON via Set.indicator_of_mem (0∈Kset, closedBall 0 R ⊆ S 0, τ>0), then
+-- ContinuousOn.congr onto the closed form radialCutoff(Wg)·√det g(0)·((Σv²/4τ² −
+-- 1/2τ)·gaussDdim τ v), composed from hVcont (the in-gate chart continuity — carried:
+-- the banked flow-ball proofs hold it pointwise but no standalone export exists) +
+-- gaussDdim_continuousOn_pos + radialCutoff_contDiff + positivity denominators.
+-- whiteDefectKernel_jointContinuousOn_modulo_L — the composed whitened hbase with the
+-- hRepCont slot discharged; sole surviving continuity residue = hLcont. hJoint residue
+-- now {hEmeas, hLcont, hstep} (+ the hVcont sub-input packaging). NOT a₁=R/6
+-- (R/6 = labelled carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteHRepCont.white_hRepCont
+#print axioms QIQTH.WhiteHRepCont.whiteDefectKernel_jointContinuousOn_modulo_L
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
