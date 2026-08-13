@@ -3129,3 +3129,19 @@ import QIQTH.WhiteHBaseProducer
 -- near-isometry — banked bounds are local-only; the honest labelled input) +
 -- flow-gate hnull. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHBaseCollar
+-- J4-717: COMBINED-ROUTE width-wall discharge (WhiteHBaseGateCollar).
+-- JUNK VERDICT GROUNDED: whiteUnvel_center_apply (whiteUnvel κ 0 = id) +
+-- whiteInvChart_center_eq (the center chart = the GENUINE uniform inverse chart
+-- E.symm — unconstrained junk OUTSIDE the reach image ⟹ the all-beyond-R hcollar
+-- is genuinely undecidable at the concrete chart, neither easy nor false).
+-- THE REROUTE: vanish on the UNION — off-gate leg (closure(S 0))ᶜ kills the
+-- junk far-field for FREE (the gate indicator, not the cutoff); the only residual
+-- is ON-GATE p ∈ closure(S 0) ∧ R ≤ ‖p‖, where V₀ is the genuine chart.
+-- gateCollar_of_collar (strictly weaker), white_hbase_cover_gateCollar +
+-- white_hbase_producer_gateCollar (the all-R' combined producer),
+-- white_gateCollar_hballS_no_gap (compatibility), white_hInnerCont_closed_final5
+-- (★ the terminal feed — width wall discharged to on-gate hgateCollar).
+-- hnull scoped honest: flow-gate = base-dependent codim-1 sphere-image (no
+-- translation symmetry; C¹-image-of-null on the w-slice = the labelled wall).
+-- Surviving analytic residuals: {hgateCollar, hnull}. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHBaseGateCollar

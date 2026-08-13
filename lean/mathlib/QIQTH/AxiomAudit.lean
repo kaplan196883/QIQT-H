@@ -26862,6 +26862,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBaseCollar.white_hInnerCont_closed_final4
 #print axioms QIQTH.WhiteHBaseCollar.white_collar_hballS_no_gap
 
+-- J4-717: combined-route width-wall discharge — junk verdict grounded
+-- (whiteInvChart_center_eq: the center chart = E.symm, junk off reach); the
+-- off-gate∪far-cutoff reroute shrinks the residual to ON-GATE-only hgateCollar
+-- (strictly weaker); white_hInnerCont_closed_final5 = the terminal feed.
+-- Surviving analytic residuals {hgateCollar, hnull}. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBaseGateCollar.whiteInvChart_center_eq
+#print axioms QIQTH.WhiteHBaseGateCollar.gateCollar_of_collar
+#print axioms QIQTH.WhiteHBaseGateCollar.white_hbase_producer_gateCollar
+#print axioms QIQTH.WhiteHBaseGateCollar.white_hInnerCont_closed_final5
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
