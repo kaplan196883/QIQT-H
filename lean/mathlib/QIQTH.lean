@@ -2652,3 +2652,13 @@ import QIQTH.WidthOneQuadResidual
 -- E-combination integrabilities. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.Width1QuadCutoff
 import QIQTH.CurvedHgateGlue
+-- J4-678: hDelta scoped + the W1-agnostic hDConv reduction (HDConvFromBoundaryLim) —
+-- hDConv_gatedWitnessN1_from_daLim_boundary: the concrete DifferentiableAt with the
+-- singular hDelta slot internalised and reduced to {hDaLim, hBoundary} + the regular
+-- families; introduces NO hAnear (the base-point Gaussian factorization is FALSE at the
+-- concrete gate — the W1 chart-image wall: the witness Gaussian peaks at W₀z ≠ z).
+-- KEY INTEL: hDConv_AT_GATE (HDConvGateThreading) is already W1-FREE for the
+-- DifferentiableAt conclusion (only the loc-unif derivative limit needed, never the
+-- boundary value) — the load-bearing path bypasses hBoundary entirely.
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.HDConvFromBoundaryLim

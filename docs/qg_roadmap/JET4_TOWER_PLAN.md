@@ -8323,3 +8323,17 @@ slot is geometry-fed. **Census still owed for the arrows: hDelta (delta-family l
 the diff-under-∫ families (hQ1/hFmeas/hFint/hdiff/hbound), hPd2conv, dataLevi, dataAmp,
 E-combination integrabilities. J4-678: scope + attack hDelta (hDConv's single limit —
 ranked nearest since J4-671).** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-678 [AF] — hDelta scoped + the W1-agnostic hDConv reduction
+HDConvFromBoundaryLim.lean (147 lines, 55s): hDConv_gatedWitnessN1_from_daLim_boundary —
+the concrete DifferentiableAt with the singular hDelta slot internalised, reduced to
+{hDaLim (upstream-dischargeable, J4-148), hBoundary} + the regular families; NO hAnear
+(the base-point Gaussian factorization is FALSE at the concrete gate — the W1 chart-image
+wall; carrying it = vacuity). std-3. raw 0 (9972). LOAD-BEARING INTEL: for the
+DifferentiableAt conclusion the boundary VALUE is not needed — hDConv_AT_GATE
+(HDConvGateThreading) is already W1-FREE (only the loc-unif derivative limit).
+**J4-679: thread the W1-free hDConv_AT_GATE path at the CURVED witness — inventory its
+hypothesis set, feed the geometry-closed slots (the new hEdom/width machinery, hDaLim
+upstream discharge), and compose toward discharging the hDConv ARROW of
+curved_wide_a1_R6_trunc_hIntCHInterFed. hBoundary stays only on the value-level census.**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

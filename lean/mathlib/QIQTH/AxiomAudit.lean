@@ -26290,6 +26290,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedHgateGlue.curvedRNC_hEdom_width32_from_geometry
 #print axioms QIQTH.CurvedHgateGlue.curvedRNC_hgate_width43_curved_satisfiable
 
+-- J4-678: hDelta scoped + the W1-agnostic hDConv reduction (HDConvFromBoundaryLim).
+-- hDelta (the sole singular carry of the hDConv supplier) = the loc-unif limit of
+-- Da(ε_m) + ∫ Wit(ε_m)·leviSeries(u−ε_m); banked machinery reduces it to hDaLim +
+-- hBoundary (B3c-conc). ⚠ The task's proposed hAnear route is the documented W1 WALL:
+-- the base-point factorization Wit τ 0 z = gaussDdim τ z·(u₀+τu₁) is FALSE at the
+-- concrete gate (witness Gaussian peaks at the chart image W₀z ≠ z; ratio diverges) —
+-- carrying hAnear would be firewall-forbidden vacuity. Landed:
+-- hDConv_gatedWitnessN1_from_daLim_boundary — the concrete DifferentiableAt with hDelta
+-- internalised, reduced to {hDaLim, hBoundary} + the regular F1/F2 families; no hAnear;
+-- satisfiable at the concrete/curved gate. LOAD-BEARING INTEL: hDConv_AT_GATE
+-- (HDConvGateThreading) is already W1-FREE for the DifferentiableAt conclusion — the
+-- boundary VALUE is only needed for the value-level supplier, not the capstone path.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.hDConv_gatedWitnessN1_from_daLim_boundary
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
