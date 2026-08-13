@@ -8120,3 +8120,16 @@ obtain C₀ from _unif, Mc := C₀·exp Kstar, little-o assembly; consumes expJe
 Then (e) contDiffOn_five (hfd4 = (d) differentiability + expJetD5_two_pt_diff continuity,
 via the banked ExpJet5Phase1 reduction) → J5-6 weld (hch5) ⟹ K1.
 a₁=R/6 CONDITIONAL throughout.
+
+### J4-663 [AF] — ★★ J5-5 CLOSED: expMap_fderiv4_hasFDerivAt + expMap_contDiffOn_five
+ExpMapFDeriv4 (353 lines, 82s): the little-o assembly — r-uniform Jet₅ source through
+the order-5 Grönwall + π, opNorm-peeled ⟹ ‖A_r‖ ≤ Mc·‖r‖² = o(‖r‖), derivative =
+expJetD5. ExpMapContDiffFive (132 lines, 62s): ★★ exp_p ∈ C⁵ on the injectivity ball,
+NO side hypotheses ((d) + expJetD5_two_pt_diff via contDiffOn_succ_of_fderivWithin +
+the banked reduction). std-3 ×2 (agent + my chk). raw 0 (9956). THE ENTIRE J5-5 TOWER
+(scoped at J4-652 as a-b-c-d-e) IS NOW CLOSED in 11 bricks.
+**J4-664**: ★ J5-6 — the chart weld uniformFlowExp_contDiffAt_five = hch5 (wire
+expMap_contDiffOn_five through the uniform-flow chart; grep WhiteF1Reg /
+white_K1BudgetW_final for the exact hch5 interface). When discharged ⟹ ★★★ K1 LANDS
+(the K1 t²-budget becomes unconditional). Then: Duhamel carry, fat-K carriers, capstone
+co-instantiation at the corrected witness. a₁=R/6 CONDITIONAL until those close.

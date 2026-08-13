@@ -26048,6 +26048,23 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.ExpMap.expJet5_remainder_quadratic_bound_unif
 
+-- J4-663: ★★ J5-5 CLOSED — bricks (d) + (e). ExpMapFDeriv4:
+-- expMap_fderiv4_hasFDerivAt — the little-o assembly (the r-uniform Jet₅ source bound
+-- expJet5_remainder_quadratic_bound_unif fed through the order-5 Grönwall
+-- expJet5_residual_bound + π, peeled by 2×opNorm_le_bound + opNorm_le_bound₂ ⟹
+-- ‖A_r‖ ≤ Mc·‖r‖² = o(‖r‖); fderiv⁴ identities from expMap_fderiv3_hasFDerivAt.fderiv;
+-- genuine 4th/5th-variation curves from the Fund .choose_specs; derivative = expJetD5).
+-- ExpMapContDiffFive: ★★ expMap_contDiffOn_five — exp_p ∈ C⁵ on the injectivity ball
+-- with NO side hypotheses ((d) differentiability + expJetD5_two_pt_diff Lipschitz
+-- continuity, assembled by contDiffOn_succ_of_fderivWithin and the banked
+-- expMap_contDiffOn_five_of_fderiv4_contDiffOn_one reduction). Remaining: J5-6 chart
+-- weld (uniformFlowExp_contDiffAt_five = hch5) ⟹ K1 lands. Even with exp∈C⁵ this is
+-- NOT κ=1/6, NOT the heat-kernel parametrix, NOT a₁=R/6 (curved owes J5-6 + Duhamel
+-- carry + fat-K carriers + capstone co-instantiation + prior piles).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.expMap_fderiv4_hasFDerivAt
+#print axioms QIQTH.ExpMap.expMap_contDiffOn_five
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

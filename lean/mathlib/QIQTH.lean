@@ -2517,3 +2517,12 @@ import QIQTH.ExpJet5UnifFeeders
 -- brick-(d) consumer form. Gate deferred (cp466). Owed: (d) expMap_fderiv4_hasFDerivAt →
 -- (e) contDiffOn_five → J5-6 weld. NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5RemainderUnif
+-- J4-663: ★★ J5-5 CLOSED — bricks (d)+(e): ExpMapFDeriv4 (expMap_fderiv4_hasFDerivAt —
+-- the little-o assembly: the r-uniform Jet₅ source bound through the order-5 Grönwall,
+-- peeled by opNorm bounds ⟹ ‖A_r‖ ≤ Mc·‖r‖² = o(‖r‖); derivative = expJetD5) and
+-- ExpMapContDiffFive (★★ expMap_contDiffOn_five: exp_p ∈ C⁵ on the injectivity ball,
+-- NO side hypotheses — (d) differentiability + expJetD5_two_pt_diff continuity via the
+-- banked ExpJet5Phase1 reduction). Remaining: J5-6 chart weld (hch5) ⟹ K1. Even with
+-- exp∈C⁵: NOT κ=1/6, NOT the parametrix, NOT a₁=R/6 (conditional).
+import QIQTH.ExpMapFDeriv4
+import QIQTH.ExpMapContDiffFive
