@@ -8506,3 +8506,14 @@ one remaining wire.
 **J4-690: the co-emitting discharger (white_gate_package_combined: ∃ one gate S with
 hpkgBound/hBdom-feed AND the value domination) ⟹ white_hInnerCont carries drop to
 {S1, hmeas, hcont}.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-690 [AF] — ★★ THE CO-EMITTING GATE DISCHARGER
+WhiteGatePackageCombined.lean (490 lines, first-try green): both constructions
+radius-monotone ⟹ co-emit at c* = min(δ₀,Rf,r₀/(CE+1))/2. white_gate_package_combined
+(ONE gate: all-τ defect package [lam] ∧ value domination [wA]) + white_hBdom_combined
++ ★ white_hInnerCont_combined — hWdom DISCHARGED, carries exactly {S1 tripleHEmeas,
+hmeas, hcont} + cp466 gate. std-3 ×4. raw 0 (9984).
+**J4-691: the three carries — S1 (the whitened-defect tripleHEmeas: joint measurability
+of a product of explicit smooth/measurable pieces — likely tractable from the witness
+structure) + hmeas/hcont (interior-integral regularity slots); then the
+K1TransportBudget/capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

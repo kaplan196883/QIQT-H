@@ -2762,3 +2762,13 @@ import QIQTH.WhiteHInnerCont
 -- CO-EMITTING discharger (one shared gate emitting both slots) is the one remaining
 -- wire. Carries otherwise unchanged {S1, hmeas, hcont}. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteWitnessValueDom
+-- J4-690: ★★ THE CO-EMITTING GATE DISCHARGER (WhiteGatePackageCombined) — verdict:
+-- both banked constructions are radius-monotone flow-ball builds ⟹ co-emit at the
+-- shared c* = min(δ₀, Rf, r₀/(CE+1))/2. white_gate_package_combined (ONE gate: the
+-- all-τ defect package [width lam=whiteLam] ∧ the value domination [width wA=nC₀²+1])
+-- + white_hBdom_combined (the re-threaded all-rows Levi hBdom at that gate) +
+-- ★ white_hInnerCont_combined — hWdom DISCHARGED; carries now exactly
+-- {S1 tripleHEmeas, hmeas, hcont}. +cp466 gate (n=2, κ=−1, fat K). Remaining:
+-- those three carries + the K1TransportBudget/capstone piles. NOT a₁=R/6
+-- (R/6 = carrier; flat tower only).
+import QIQTH.WhiteGatePackageCombined

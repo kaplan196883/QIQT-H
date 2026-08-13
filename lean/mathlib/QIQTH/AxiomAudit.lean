@@ -26502,6 +26502,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteWitnessValueDom.white_witness_value_dom
 #print axioms QIQTH.WhiteWitnessValueDom.white_witness_value_dom_witness_gate
 
+-- J4-690: ★★ THE CO-EMITTING GATE DISCHARGER (WhiteGatePackageCombined).
+-- MONOTONICITY VERDICT: both white_hpkgBound_discharged (needs c<δ₀ ∧ CE·c<r₀) and
+-- white_witness_value_dom (needs c≤δ₀ ∧ c≤Rf) are radius-MONOTONE flow-ball
+-- constructions with no radius-specific analysis ⟹ they co-emit at the one shared
+-- c* = min(δ₀, Rf, r₀/(CE+1))/2 (a=c*/4, b=c*/2); the leg-assembler and the full-row
+-- Levi engine are gate-parametric, so this is re-instantiation, not new analysis.
+-- white_gate_package_combined — ONE gate emitting BOTH the all-τ defect package
+-- (width lam=whiteLam=2(nC₀²+1)) AND the value domination (width wA=nC₀²+1; the
+-- builder consumes them on separate slots, widths honest and distinct).
+-- white_hBdom_combined — the all-rows Levi hBdom re-threaded at that gate.
+-- ★ white_hInnerCont_combined — the composed inner-pairing continuity with hWdom
+-- DISCHARGED: final carry list exactly {hEmeas (the single labelled whitened-defect
+-- S1 tripleHEmeas), hmeas (interior slice AESM), hcont (a.e.-z interior ContinuousAt)}.
+-- + cp466 gate (n=2, κ=−1, K=closedBall 0 2). Remaining: those three carries + the
+-- K1TransportBudget/capstone co-instantiation piles. NOT a₁=R/6 (R/6 = labelled
+-- carrier; established non-vacuously only for the FLAT tower).
+-- expected: standard 3
+#print axioms QIQTH.WhiteGatePackageCombined.white_gate_package_combined
+#print axioms QIQTH.WhiteGatePackageCombined.white_hBdom_combined
+#print axioms QIQTH.WhiteGatePackageCombined.white_hInnerCont_combined
+#print axioms QIQTH.WhiteGatePackageCombined.white_gate_package_combined_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
