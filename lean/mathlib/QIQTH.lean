@@ -3087,3 +3087,17 @@ import QIQTH.WhiteHInnerContGeomCover
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHtermBoxWClosed
 import QIQTH.WhiteHInnerContGeomClosed
+-- J4-714: THE hlegA DISCHARGE (WhiteHlegADischarge + WhiteHInnerContLegADischarged).
+-- white_hlegA_of_reach: the full leg-(a) family from the J4-710 _at_set substrate +
+-- a reach certificate hSreach : S w ⊆ flowBall_w (needed because S is generic here;
+-- at the CONCRETE gate S w = flowBall_w exactly ⟹ hSreach = subset_rfl) — route:
+-- small in-gate∩in-reach ball → _at_set → continuousWithinAt → nbhd transfer;
+-- u=1 endpoint closed separately (reparam time 0 off-window ⟹ constant 0).
+-- white_hlegA_flowBallGate: concrete-gate corollary — openness/reach/germ/agreement
+-- ALL BANKED (whiteChart_rep_concrete + uniformInverseChart_huniformChart).
+-- white_hInnerCont_closed_final2: the rethread with hlegA GONE. Genuine surviving
+-- per-gate certs = {hnull (PROVED at ball gate), hbase (k=0 seed — scoped: all
+-- J4-701 pieces banked, assembly = cheap next brick)} + dominated {hpkg, hEmeas}
+-- + A-group + window. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHlegADischarge
+import QIQTH.WhiteHInnerContLegADischarged
