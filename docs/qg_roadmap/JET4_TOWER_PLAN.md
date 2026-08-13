@@ -8213,3 +8213,13 @@ hDuhamel/hDConv = delta-family limit wiring, no curved suppliers.
 accepting the affine bound on (0,T₀], mirroring the hInt truncation) ⟹ discharge hInter.
 Then hCConv (C² facade upgrade) / hDuhamel+hDConv (delta-family wiring).
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-670 [AF] — arrow hInter discharged via the truncated interchange
+LeviInterchangeTrunc.lean (299 lines, 53s): heatConv_leviSeries_interchange_trunc —
+the (0,T₀]-window Neumann interchange; port MECHANICAL (all touched times < t ≤ T₀;
+affine fixes on the window; no new carry). CurvedCapstoneHCHInterFed.lean (240 lines,
+29s): ★ curved_wide_a1_R6_trunc_hIntCHInterFed — hEboundW_le+hInt+hCH+hInter all from
+geometry; arrows left hDuhamel → hDConv → hCConv. std-3 ×3. raw 0 (9964).
+**J4-671**: next arrows — hCConv (the L2/hD1 C¹→C² facade upgrade) and/or
+hDuhamel+hDConv (delta-family limit wiring; no curved suppliers yet) — scope-first.
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

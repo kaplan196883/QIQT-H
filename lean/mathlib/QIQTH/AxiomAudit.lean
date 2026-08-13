@@ -26164,6 +26164,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedCapstoneHCHFed.curved_wide_a1_R6_trunc_hIntCHFed
 #print axioms QIQTH.CurvedCapstoneHCHFed.curved_wide_a1_R6_trunc_hIntCHFed_curved_satisfiable
 
+-- J4-670: arrow hInter DISCHARGED (LeviInterchangeTrunc + CurvedCapstoneHCHInterFed).
+-- heatConv_leviSeries_interchange_trunc — the (0,T₀]-window tsum/heatConv Neumann
+-- interchange: the port was MECHANICAL, not a rewrite (the banked interchange lives at
+-- one outer time t with all touched times < t ≤ T₀, and consumes hInt only at t — so
+-- the affine bound fixes to C·(1+T₀) on the window; IterConvIntegrableW → WOn +
+-- iterConvW_bound → _le_trunc + τ≤T₀ threading). No new carry: consumes exactly the
+-- three data the curved closure supplies (hEboundW_le, hEzeroE_concrete, tripleHEmeas).
+-- ★ curved_wide_a1_R6_trunc_hIntCHInterFed: hEboundW_le + hInt + hCH + hInter all fed
+-- from geometry; inner arrows now hDuhamel → hDConv → hCConv. + curved_satisfiable.
+-- NOT a₁=R/6 (labelled hw/hu/hsrc + c<min δ₀ c₀ + gaps remain; R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.LeviInterchangeTrunc.heatConv_leviSeries_interchange_trunc
+#print axioms QIQTH.CurvedCapstoneHCHInterFed.curved_wide_a1_R6_trunc_hIntCHInterFed
+#print axioms QIQTH.CurvedCapstoneHCHInterFed.curved_wide_a1_R6_trunc_hIntCHInterFed_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

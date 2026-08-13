@@ -2578,3 +2578,11 @@ import QIQTH.CurvedCapstoneGateUnify
 -- the truncated-interchange variant owed), hDConv (delta-family), hCConv (facade C¹ vs
 -- slot C² — the open L2/hD1 gap). + labelled hw/hu/hsrc. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedCapstoneHCHFed
+-- J4-670: arrow hInter DISCHARGED (LeviInterchangeTrunc + CurvedCapstoneHCHInterFed) —
+-- heatConv_leviSeries_interchange_trunc: the (0,T₀]-window Neumann interchange (the
+-- port was MECHANICAL: every touched time < t ≤ T₀, so the affine bound fixes on the
+-- window; consumes exactly the three data the curved closure already supplies).
+-- ★ curved_wide_a1_R6_trunc_hIntCHInterFed: hEboundW_le+hInt+hCH+hInter all fed;
+-- arrows left: hDuhamel → hDConv → hCConv. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.LeviInterchangeTrunc
+import QIQTH.CurvedCapstoneHCHInterFed
