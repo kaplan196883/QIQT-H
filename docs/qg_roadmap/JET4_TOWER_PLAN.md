@@ -8700,3 +8700,11 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - FINAL certs: A-group (co-instantiable) + glue certs {hnull (proved at ball gate / labelled at flow gate), hInterior (labelled — the base-w iterate TIME-SLICE is the residual brick: leg (b) time continuity of iterE at fixed base w ≠ the induction's own base-0 output), hbase (k=0 seed — honest boundary)} + window.
 - All 4 std-3 (my chk-file); AxiomAudit 10011 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-713: hInterior — the base-w iterate time-slice brick (time continuity of iterE E (m+1) (τu) w 0 in τ at fixed w: scope whether the banked per-level box continuity at base 0 + a translation/base-change or the Gap-B composition gives the w-slice; else the ∃-rewrap (mechanical) + the piles.
+
+## J4-713 (see commit) — hInterior CLOSED [AF]
+- VERDICTS: node convention MATCHES (leg (b) = fixed-spatial time slice of the banked box, same right-node-0 shape); recursion STRICT non-circular (box(m) → hInterior_m → box(m+1)) — the J4-712 degenerate cases split restored to a genuine Nat.rec whose IH is exactly what leg (b) consumes.
+- WhiteHtermBoxWClosed.lean (267L): `iterE_timeSlice_continuousWithinAt_of_box` (kernel-generic restriction via ContinuousOn.comp with p ↦ (p.1·u, w)), `white_htermBox_unconditional_k_closed` (★★★ the hInterior-FREE per-level tie: induction with hInterior_m DERIVED as legA.mul legB per level; hlegA = the labelled leg-(a) reparam-factor family from the J4-710 _at_set substrate), `white_htermBox_closed_legA_satisfiable` (cp466).
+- WhiteHInnerContGeomClosed.lean (196L): `white_hInnerCont_closed_final` (★★★ rethread; STEPS 1–3 verbatim).
+- FINAL certs: {hnull (PROVED at ball gate), hlegA (_at_set family), hbase (k=0 seed), hpkg, hEmeas, A-group, window}. Reach wall + group-8 + hjoint + hInterior ALL GONE.
+- All 4 std-3 (my chk-file); AxiomAudit 10013 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-714: the hlegA discharge — neighborhood-transfer (ContinuousWithinAt.mono_of_mem from the small in-gate/in-reach ball to the box point) from the _at_set substrate ⟹ residual {hnull, hbase, hpkg, hEmeas}; then the ∃-rewrap + the piles + the joint cp466 audit.
