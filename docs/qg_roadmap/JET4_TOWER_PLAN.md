@@ -8494,3 +8494,15 @@ raw 0 (9982). **J4-689: (b′) hWdom — the whitened value-kernel Gaussian domi
 (from the whitened cutoff/ambient structure; the pkg bounds only cover the DEFECT);
 then (b) S1 + (b″) hmeas/hcont; then (c) K1TransportBudget/capstone piles.**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-689 [AF] — hWdom PROVED (the whitened value-kernel domination)
+WhiteWitnessValueDom.lean (255 lines, ~80s): white_witness_value_dom — the whitened
+VALUE domination at the concrete whiteFlowGate (wA = nC₀²+1; cutoff clamp + det control
++ near-isometry width transfer) + cp466 gate. std-3 ×2. raw 0 (9983). The (b′) carry is
+now a proved lemma. RESIDUAL WIRE: white_hBdom_discharged's gate is ∃-OPAQUE and the
+value bound is genuinely false at arbitrary gates ⟹ a CO-EMITTING discharger (both
+slots at ONE shared gate; new file reproducing the WhiteAnnulus gate package) is the
+one remaining wire.
+**J4-690: the co-emitting discharger (white_gate_package_combined: ∃ one gate S with
+hpkgBound/hBdom-feed AND the value domination) ⟹ white_hInnerCont carries drop to
+{S1, hmeas, hcont}.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

@@ -26484,6 +26484,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHInnerCont.white_hInnerCont_of_dominations
 #print axioms QIQTH.WhiteHInnerCont.white_hInnerCont_witness_gate
 
+-- J4-689: hWdom PROVED (WhiteWitnessValueDom). white_witness_value_dom — the whitened
+-- VALUE-kernel Gaussian domination at the concrete whiteFlowGate: ∀ κ≤0, compact
+-- Kset ⊆ B̄(0,R), ∃ c>0, 0<a<b, wA = nC₀²+1 > 0, Cpre ≥ 0:
+-- |whiteGatedWitness … τ p q| ≤ (1+0·τ)·Cpre·gaussDdim(wA·τ)(p−q) ∀τ>0 p q — from the
+-- witness structure (gatedKernel of radialCutoff × √det g × Gaussian at the whitened
+-- chart), closed by the banked cutoff clamp + determinant control + near-isometry width
+-- transfer (rncRadialSq(p−q) ≤ nC₀²·rncRadialSq w + gaussDdim_le_gaussDdim_chart).
+-- + cp466 gate (n=2, κ=−1, fat K). The (b′) carry is now a PROVED LEMMA; the residual
+-- is the GATE-HANDLE WIRE: white_hBdom_discharged's gate is ∃-opaque and the value
+-- bound is genuinely FALSE at an arbitrary fat-open gate (needs the near-isometry
+-- radius control) ⟹ the one remaining wire is a CO-EMITTING discharger producing both
+-- slots at ONE shared gate (~150-line reproduction of the WhiteAnnulus gate package —
+-- new file, since editing the banked files is firewalled). NOT a₁=R/6
+-- (R/6 = labelled carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteWitnessValueDom.white_witness_value_dom
+#print axioms QIQTH.WhiteWitnessValueDom.white_witness_value_dom_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

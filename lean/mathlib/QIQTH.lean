@@ -2753,3 +2753,12 @@ import QIQTH.WhiteHBdomAllRows
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedA1HContDomGen
 import QIQTH.WhiteHInnerCont
+-- J4-689: hWdom PROVED (WhiteWitnessValueDom) — white_witness_value_dom: the whitened
+-- VALUE-kernel Gaussian domination |whiteGatedWitness| ≤ Cpre·gaussDdim(wA·τ)(p−q) at
+-- the concrete whiteFlowGate (wA = nC₀²+1; cutoff clamp + determinant control + the
+-- banked near-isometry width transfer) + cp466 gate (n=2, κ=−1, fat K). The (b′) carry
+-- is now a proved lemma; residual = the GATE-HANDLE wire: white_hBdom_discharged returns
+-- its gate ∃-opaquely and the value bound is genuinely FALSE at an arbitrary gate ⟹ a
+-- CO-EMITTING discharger (one shared gate emitting both slots) is the one remaining
+-- wire. Carries otherwise unchanged {S1, hmeas, hcont}. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteWitnessValueDom
