@@ -26774,6 +26774,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHtermBoxW0.whiteDefectKernel_leftNode_offGate_zero
 #print axioms QIQTH.WhiteHtermBoxW0.whiteDefect_w0_reach_satisfiable
 
+-- J4-709: three-route verdict — (γ) consumer tolerance DEAD (box radius ‖p.2‖+1
+-- over univ, proved from the use site); (α) per-level all-radii stitch BUILT from
+-- satisfiable support certs + per-k reach; the wall pinned:
+-- uniform_reach_bound_unsat (∀k M+k·ρ < R unsat at bounded reach). (β) base-q
+-- finite covers = the remaining route. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHtermBoxReach.contOn_allRadii_of_supportRadius
+#print axioms QIQTH.WhiteHtermBoxReach.iterConvStep_leftNode_offGate_zero
+#print axioms QIQTH.WhiteHtermBoxReach.white_htermBox_perlevel_allRadii_of_reach
+#print axioms QIQTH.WhiteHtermBoxReach.white_htermBox_perlevel_satisfiable
+#print axioms QIQTH.WhiteHtermBoxReach.uniform_reach_bound_unsat
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

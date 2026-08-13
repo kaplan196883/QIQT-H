@@ -3010,3 +3010,17 @@ import QIQTH.WhiteHInnerContClosed
 -- only to reach R; group 8 needs reach extension or a downstream all-radii rework.
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHtermBoxW0
+-- J4-709: THREE-ROUTE VERDICT + the per-level stitch (WhiteHtermBoxReach).
+-- (γ) consumer tolerance DEAD — stripContOn_of_boxes instantiates the box radius at
+-- ‖p.2‖+1 for EVERY p.2 ∈ univ (leviTimeCont_of_jointStrip needs a.e. z over ALL of
+-- Point n): no fixed R₀, the ∀R' demand is real. (α) per-level BUILT:
+-- contOn_allRadii_of_supportRadius (generic bounded-support all-radii stitch),
+-- iterConvStep_leftNode_offGate_zero (succ-branch Duhamel integrand vanishing —
+-- the SATISFIABLE replacement for the unsat all-w group-8),
+-- white_htermBox_perlevel_allRadii_of_reach (★ fixed-k all-radii box continuity
+-- from satisfiable support certs {S 0 ⊆ B̄(0,M), ∀z S z ⊆ B̄(z,ρ)} + per-k reach
+-- M+k·ρ < R) + per-k inhabitance witness. ★ THE WALL PINNED IN ONE LINE:
+-- uniform_reach_bound_unsat — ∀k, M+k·ρ < R is UNSATISFIABLE for ρ>0 at bounded
+-- reach (support growth overruns). (β) reach extension via base-q finite covers =
+-- the genuine remaining route (multi-brick). NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHtermBoxReach
