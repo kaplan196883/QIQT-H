@@ -2874,3 +2874,17 @@ import QIQTH.WhiteHJetCont
 -- non-vacuity at n=2, κ=−1, K=closedBall 0 2 (0 ∈ S 0 open, 0<a<b, lam≥2).
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHInnerContTermBox
+-- J4-700: htermBox measurability + bound carries DISCHARGED (WhiteHTermBoxWire).
+-- white_htermBox_of_hbase_hcont: the whitened iterE termwise box continuity reduced
+-- to exactly {hbase, hcont} — hEbound (white_hEbound_zero), hInt (white_hInt_zero),
+-- and hmeas (convStepIntegral_u_aestronglyMeasurable_wired from the single S1 hEmeas)
+-- were ALL already banked-supplied. white_htermBox_of_flowBall_hcont: hbase further
+-- discharged via the J4-698 flow-ball theorem; SOLE analytic carry = hcont (the
+-- recursive inner convolution-step joint continuity: Gap-A general-w base continuity
+-- + Gap-B iterE time-continuity + S-dom Gaussian dominator), reach-restricted.
+-- REACH-ALIGNMENT verdict: GENUINE obstruction — the all-R' consumer
+-- (white_leviJoint_window_modulo_termBox needs Ioc 0 u ×ˢ univ) vs the reach-limited
+-- flow-ball hbase; the R'>reach regime needs the gate-vanishing extension
+-- (whiteDefectKernel = 0 outside S 0 ⟹ trivial continuity + stitch), not yet built.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHTermBoxWire

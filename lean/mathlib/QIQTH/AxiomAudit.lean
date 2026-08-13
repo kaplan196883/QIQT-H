@@ -26680,6 +26680,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHInnerContTermBox.white_hInnerCont_modulo_termBox
 #print axioms QIQTH.WhiteHInnerContTermBox.white_hInnerCont_modulo_termBox_witness_gate
 
+-- J4-700: htermBox measurability + bound carries discharged. white_htermBox_of_
+-- hbase_hcont = the whitened iterE termwise box continuity at {hbase, hcont} only
+-- (hEbound/hInt/hmeas banked-supplied); white_htermBox_of_flowBall_hcont = hbase
+-- discharged via the J4-698 flow-ball theorem, sole analytic carry hcont
+-- (reach-restricted; the R'>reach gate-vanishing extension = named residual).
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHTermBoxWire.white_htermBox_of_hbase_hcont
+#print axioms QIQTH.WhiteHTermBoxWire.white_htermBox_of_flowBall_hcont
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
