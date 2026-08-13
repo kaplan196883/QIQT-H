@@ -2489,3 +2489,14 @@ import QIQTH.ExpJet5RemDirCross
 -- _P wrapper owed (needs the factor_hklm ~130-monomial ring identity); then (b) SecondVar
 -- + feeders + _unif + gate. NOT exp∈C⁵; a₁=R/6 conditional.
 import QIQTH.ExpJet5RemAssemblyDir
+-- J4-660: the _P layer LANDED — ExpJet5RemFactor (factor_hklm: the pure-ℝ identity
+-- folding the 15 per-direction block constants into a collected 29-term C·‖h‖‖k‖‖l‖‖m‖,
+-- sympy-generated, numeric residual exactly 0) + ExpJet5RemainderP
+-- (★ expJet5_remainder_quadratic_bound_P: the concrete DIRECTIONAL wrapper — 57
+-- directional feeders, 18 symmetry facts verbatim, closes via remAssembly_dir (62 scale
+-- + 74 nonneg + 86 analytic + 32 symmetry args) + factor_hklm ⟹
+-- ∃C≥0, ‖head‖ ≤ C·‖h‖‖k‖‖l‖‖m‖·‖r‖² on Icc). Gate deliberately deferred (cp466 vacuity
+-- discipline). Owed: (b) SecondVar + directional uniform feeders + _unif + gate.
+-- NOT exp∈C⁵; a₁=R/6 conditional.
+import QIQTH.ExpJet5RemFactor
+import QIQTH.ExpJet5RemainderP

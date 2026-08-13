@@ -8079,3 +8079,16 @@ each, `ring` at ≥6.4M hb) to keep the main proof ring-free. Deferred: high bui
 ExpJet5Remainder setup + directional feeders + isolated `factor_hklm` ring closing remAssembly_dir);
 then gate at curvedRNCMetric(−1). Then (b) SecondVar + directional uniform feeders + _unif.
 a₁=R/6 CONDITIONAL throughout.
+
+### J4-660 [AF] — the _P layer LANDED (factor_hklm + expJet5_remainder_quadratic_bound_P)
+ExpJet5RemFactor (12.8KB, 19s): the ~130-monomial → 29-term collected factoring identity,
+sympy-generated, numeric residual EXACTLY 0. ExpJet5RemainderP (57KB single theorem,
+274s, GREEN FIRST ATTEMPT): the concrete directional wrapper — 57 directional feeders,
+18 symmetry facts verbatim, qw value bound recomputed directionally and folded to
+Mc·‖h‖‖k‖‖l‖‖m‖, closes via remAssembly_dir (62+74+86+32 machine-generated args) +
+factor_hklm ⟹ ∃C≥0, ‖head‖ ≤ C·‖h‖‖k‖‖l‖‖m‖·‖r‖². std-3 ×2 verified. raw 0 (9951).
+Gate deliberately deferred (cp466 antecedent-inhabitance discipline).
+**J4-661**: brick (b) expJet4SecondVar_residual_Icc_unif (mirror ExpJet3SecondVarResidual
+— the hard _unif prerequisite) + the directional uniform feeders
+(expJet4Val_v_two_pt_Icc_unif etc). Then _unif → gate → (d) fderiv4_hasFDerivAt →
+(e) contDiffOn_five → J5-6 weld (hch5) ⟹ K1. a₁=R/6 CONDITIONAL throughout.

@@ -26002,6 +26002,22 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.ExpMap.remAssembly_dir
 
+-- J4-660: the _P layer — factor_hklm (ExpJet5RemFactor: the pure-ℝ ring identity folding
+-- the 15 per-direction block constants of remAssembly_dir into the collected 29-term
+-- C·nh·nk·nl·nm; sympy-generated, numeric self-check EXACT 0 residual) and
+-- ★ expJet5_remainder_quadratic_bound_P (ExpJet5RemainderP, single theorem, 274s):
+-- the concrete DIRECTIONAL quadratic remainder — geometric setup + 18 symmetry facts
+-- verbatim from the non-directional wrapper, 57 directional feeder hypotheses, closes
+-- through remAssembly_dir (62 scale + 74 explicit mul_nonneg + 86 analytic + 32 symmetry
+-- args) + factor_hklm ⟹ ∃ C ≥ 0, ‖head‖ ≤ C·‖h‖‖k‖‖l‖‖m‖·‖r‖² on Icc — the order-5
+-- mirror of expJet4_remainder_quadratic_bound'. Curved gate DEFERRED deliberately
+-- (cp466 antecedent-inhabitance discipline — no one-shot gates). Owed: (b)
+-- expJet4SecondVar_residual_Icc_unif + directional uniform feeders + _unif (the brick-(d)
+-- consumer form) + gate. NOT exp∈C⁵; NOT κ=1/6; NOT a₁=R/6 (conditional).
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.factor_hklm
+#print axioms QIQTH.ExpMap.expJet5_remainder_quadratic_bound_P
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
