@@ -2861,3 +2861,16 @@ import QIQTH.WhiteHLcont
 -- {h0K,hSopen,hballS,hcδ,hspec,hballC}. hJoint residue now {hEmeas, hstep}.
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHJetCont
+-- J4-699: hEmeas + hmajor DISCHARGED — whitened hInnerCont collapsed to ONE carry
+-- (WhiteHInnerContTermBox). white_hInnerCont_modulo_termBox: co-instantiates
+-- {hpkg, hEmeas (white_tripleHEmeas_uniform — already a THEOREM at the flow gate),
+-- hval, hWmeas} at the shared flow gate S = flowExp '' ball c, c = min(δp,δS,δV,δW)/2;
+-- hJoint from htermBox via white_leviJoint_window_modulo_termBox; hcont from
+-- whiteWitness_time_continuousAt ∘ leviTimeCont_of_jointStrip; assembled through
+-- hInnerCont_of_dominations_generic. Residue = EXACTLY htermBox (the whitened iterE
+-- termwise box continuity; its banked reduction iterE_jointContinuousOn_wired leaves
+-- {hmeas, hcont} + the R'-vs-c reach-alignment obstruction — honest single residue,
+-- NOT forced). white_hInnerCont_modulo_termBox_witness_gate = cp466 fat-gate
+-- non-vacuity at n=2, κ=−1, K=closedBall 0 2 (0 ∈ S 0 open, 0<a<b, lam≥2).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHInnerContTermBox
