@@ -2962,3 +2962,18 @@ import QIQTH.WhiteHtermBoxGeom
 -- white_hInnerCont_of_geometry (re-emit internal-S certs; no conflict).
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHtermBoxUncond
+-- J4-706: THE GATE-THREADING (WhiteHInnerContGeom). white_hInnerCont_of_geometry:
+-- the whitened inner-pairing interior-time continuity with htermBox DISCHARGED —
+-- gate-parametric refactor-light of the modulo_termBox proof (its ∃-bound gate is
+-- too opaque for pure export): the co-instantiated shared-gate data
+-- {C,hpkg,hEmeas,hWmeas,wA,Cpre,A₀,A₁,hval} taken as hypotheses at abstract {S,a,b};
+-- htermBox derived INLINE from white_htermBox_unconditional_k fed the SAME
+-- {hpkg,hEmeas} + labelled geometry; STEP 1–3 reproduced. Certificate list:
+-- (A) co-instantiated gate data, (B) labelled geometry/vanishing certs {Wg,hagree;
+-- R,c,δ₀…; Uoff,hUopen,hEoffFirst,hcover; h0K,hSopen,hballS,hcδ,hspec,hballC;
+-- hcδA,hgeom}, (C) window. white_hEoffFirst_of_gateSubset: hEoffFirst SHARPENED at
+-- NONEMPTY U = (closedBall 0 M)ᶜ from uniform gate-containment S w ⊆ closedBall 0 M
+-- — the small-gate satisfiable direction (contra J4-701's fat-gate unsat).
+-- Downstream residue = the ∃-shape wrapper (supplier co-instantiation at internal c
+-- + geometry re-emission at the flow-exp gate). NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHInnerContGeom
