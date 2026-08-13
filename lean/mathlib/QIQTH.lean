@@ -2711,3 +2711,13 @@ import QIQTH.CurvedCensusShrinkJ4682
 -- consumer. Layer 5 owed: producer re-assembly (route (c) per-q frozen-Gaussian
 -- re-basing per J4-608). NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedA1CenterResidW2
+-- J4-685: layer-5 sub-brick + the ε₀/τ OBSTRUCTION VERDICT (CurvedA1ReBaseHBdomW2) —
+-- PROVED: the ε₀/τ term of the width-2 center residual has NO uniform majorant on
+-- (0,t'] (scalar + kernel forms; fires non-vacuously at fat curved K, ε₀=(|κ|/3)nr²>0)
+-- ⟹ the all-τ width-2 bound at the vanVleck consumer is genuinely obstructed — NOT an
+-- absorbable term. The banked all-τ resolution is the WHITENING route (J4-620…626,
+-- white_hpkgBound_discharged) at the whitened witness + widened width whiteLam.
+-- +honest τ-windowed partial + ε₀=0 shape-compat (interface real; ε₀ = sole obstruction).
+-- Downstream fork: widen the D2 consumer to width-w (BridgeWidth [2,8]; whiteLam≤8 ⟺
+-- nC₀²≤3 unproved) OR re-base gated_hBdom onto whiteGatedWitness. NOT a₁=R/6.
+import QIQTH.CurvedA1ReBaseHBdomW2

@@ -8426,3 +8426,36 @@ baseKernelW-2/hBdom consumer. std-3 ×6 (4 pinned). raw 0 (9977).
 **J4-685: layer 5 — the producer re-assembly via route (c) per-q frozen-Gaussian
 re-basing (J4-608: routes (a)/(b) fail) → the fat-K dom-pkg feeding
 gated_hBdom_of_defect_bound, consuming the ε₀/τ term.** a₁=R/6 CONDITIONAL.
+
+### J4-685 [AF] — layer 5 FIRST SUB-BRICK: width-2 producer VERDICT at the consumer envelope
+CurvedA1ReBaseHBdomW2.lean (6 decls, ~56s, first-try green mod 2 open/rw fixes). ★★ THE
+ε₀/τ RESOLUTION (the honest finding, NO unsound absorption): the J4-684 width-2 center
+residual |R₀| ≤ (C₀ + Cεu·ε₀·(1/τ))·gaussDdim(2τ) is confronted against the EXACT hbound
+antecedent of the fat-K dom-pkg consumer gated_hBdom_of_defect_bound (J4-603),
+(C·(1+t'))·baseKernelW 2 0 τ p q with baseKernelW 2 0 τ p q = gaussDdim(2τ)(p−q). For
+FIXED t' the RHS coeff C·(1+t') is τ-INDEPENDENT, but Cεu·ε₀·(1/τ) has NO uniform majorant
+on (0,t'] for ε₀>0 (diverges as τ→0). This is J4-608's centerShape_no_uniform_majorant
+re-pinned at the width-2 consumer envelope: routes (a)[τ₀-threshold]/(b)[ε₀→0-first] cannot
+feed this consumer (D2 engine needs the bound on ALL of (0,T]). The ACTUAL all-τ, ε₀-free
+resolution is route (c)=WHITENING (WhiteWitness→white_hpkgBound_discharged, J4-620..626):
+whitening removes the trace floor (tr g⁻¹(q)−n)/(2τ) STRUCTURALLY — BUT at the *whitened*
+gated witness and *widened* width whiteLam=2(nC₀²+1), so it feeds the width-w BridgeWidth
+engine, NOT this literal width-2 vanVleck consumer. ⟹ for THE VANVLECK CONSUMER the ε₀/τ
+term genuinely OBSTRUCTS the all-τ width-2 bound at fat K (a REAL obstruction, verdict below).
+Landed: (1) width2CenterEnvelope_no_uniform_majorant (scalar verdict, ⟵ J4-608 gate);
+(2) width2CenterEnvelope_no_kernel_majorant (kernel verdict at baseKernelW 2 diagonal — both
+sides width-2, positive diagonal Gaussian cancels directly); (3)
+curvedRNC_resid_width2_bound_center_windowed (route-(a) τ-windowed positive PARTIAL, honest
+non-consumable, const↑∞ as τ₀→0 — width-2 mirror of J4-608's thresholded); (4)
+width2Center_epsZero_envelope_embed + (5) _feeds_envelope (ε₀=0 SHAPE-COMPAT: the ε₀=0
+coeff C₀·gaussDdim(2τ) DOES embed in (C₀·(1+t'))·baseKernelW 2 — interface REAL, ε₀ SOLE
+obstruction); (6) width2CenterEnvelope_obstruction_genuine (verdict FIRES non-vacuously at
+fat curved K: ε₀=(|κ|/3)nr²>0 at κ<0,r>0,n≥1). std-3 ×6, raw 0 (9978). Downstream OPEN
+(unchanged, refined): reconcile the whitened all-τ bound / widened width with the literal
+width-2 vanVleck dom-pkg (or re-base the dom-pkg onto the whitened witness), then fat-K
+hEmeas/hAdom/hcont/hContDom, mass pre-ρ, joint cp466 audit, capstone co-instantiation.
+**J4-686: the whitened↔vanVleck dom-pkg reconciliation — either widen the D2 consumer to
+width-w (BridgeWidth already has the width-w engine [2,8]; whiteLam≤8 ⟺ nC₀²≤3 unproved,
+J4-625 R2) so white_hpkgBound_discharged feeds it directly, OR re-base
+gated_hBdom_of_defect_bound onto whiteGatedWitness. Consult Sol on the width-w-vs-literal-2
+fork before broad implementation.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

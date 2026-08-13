@@ -26399,6 +26399,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1CenterResidW2.curvedRNC_resid_width2_bound_center
 #print axioms QIQTH.CurvedA1CenterResidW2.curvedRNC_resid_width2_center_satisfiable
 
+-- J4-685: layer-5 sub-brick + the ε₀/τ OBSTRUCTION VERDICT (CurvedA1ReBaseHBdomW2).
+-- PROVED (not conjectured): width2CenterEnvelope_no_uniform_majorant + _no_kernel_majorant
+-- — the Cεu·ε₀·(1/τ) term of the J4-684 width-2 center residual admits NO τ-uniform
+-- majorant on (0,t'] for ε₀>0 (kernel form at the baseKernelW-2 diagonal: the positive
+-- Gaussian cancels, leaving the scalar divergence), and the verdict FIRES non-vacuously
+-- at the fat curved witness (ε₀=(|κ|/3)nr²>0) — so the all-τ width-2 (hbound-fat) bound
+-- at the vanVleck consumer is a GENUINE obstruction, consistent with the J4-608 gate
+-- (routes (a)/(b) formally failed). The banked all-τ resolution is the WHITENING route
+-- (white_hpkgBound_discharged, J4-626) at the whitened witness/widened width whiteLam =
+-- 2(nC₀²+1) — a different witness/width than the literal width-2 vanVleck consumer.
+-- + the honest τ-windowed partial (const↑∞ as τ₀→0) + the ε₀=0 shape-compat pair
+-- (interface real; ε₀ is the SOLE obstruction). DOWNSTREAM FORK: widen the D2 consumer
+-- to width-w (BridgeWidth [2,8] engine; whiteLam≤8 ⟺ nC₀²≤3 unproved, J4-625 R2) OR
+-- re-base gated_hBdom_of_defect_bound onto whiteGatedWitness. NOT a₁=R/6
+-- (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedA1ReBaseHBdomW2.width2CenterEnvelope_no_uniform_majorant
+#print axioms QIQTH.CurvedA1ReBaseHBdomW2.width2CenterEnvelope_no_kernel_majorant
+#print axioms QIQTH.CurvedA1ReBaseHBdomW2.curvedRNC_resid_width2_bound_center_windowed
+#print axioms QIQTH.CurvedA1ReBaseHBdomW2.width2CenterEnvelope_obstruction_genuine
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
