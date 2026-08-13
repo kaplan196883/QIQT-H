@@ -8149,3 +8149,18 @@ at the CORRECTED whitened witness (capstone binder pinned to vanVleckGatedWitnes
 witness-slot question); (iv) prior labelled analytic piles; (v) R/6 itself = labelled
 CARRIER (whiteU1(0)=R/6), not derived.** J4-665: attack (i) Duhamel carry (grep
 HEAT_KERNEL_GAP_PLAN + WHERE_WE_ARE for its precise statement).
+
+### J4-665 [AF] — gap-(i) brick 1: hEzero discharged from geometry on the truncated Duhamel route
+SCOPING (mainline-verified): gap (i) = the IterConvIntegrableW interface carry, already
+deeply reduced — abstract engine proven; honest route = TRUNCATED (IterConvIntegrableWOn;
+wide route firewalled: all-τ fixed-C affine bound UNSATISFIABLE). The one genuine seam:
+hEzero still carried on the truncated route. TruncHIntFromGeometry.lean (152 lines, 60s):
+hIntOn_affine_from_geometry (hEzero from hEzeroE_concrete, only 1≤n; carries only the
+satisfiable affine τ≤T₀ bound + tripleHEmeas) + curved_hIntOn_affine_from_geometry
+(curvedRNCMetric κ<0, Christoffels supplied). std-3 ×2. raw 0 (9958).
+**Gap-(i) remaining: brick 2 = hAff from geometry at the curved witness (via
+EboundWiringHD1.hEboundW_from_geometry gate-existential); brick 3 = tripleHEmeas from
+the curved Borel surface; brick 4 = thread into the curved capstone Duhamel slot.**
+Then gaps (ii)-(v). ⚠ gap (iii) note: curved_a1_R6_fully_wired binder pinned to
+vanVleckGatedWitness and its _curved_satisfiable gate is VACUOUS at κ≠0 (cp466) — the
+witness-slot repair is a separate endeavor. J4-666: bricks 2+3.

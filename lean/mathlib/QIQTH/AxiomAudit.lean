@@ -26085,6 +26085,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteChartC5.white_K1BudgetW_unconditional
 #print axioms QIQTH.WhiteChartC5.white_K1BudgetW_unconditional_curvedWitness
 
+-- J4-665: gap-(i) brick 1 (TruncHIntFromGeometry) — the Duhamel-split integrability
+-- carry, SCOPED (mainline-verified): gap (i) = the IterConvIntegrableW family
+-- (ParametrixHEboundWiring), already deeply reduced — the abstract engine is proven and
+-- the honest route is the TRUNCATED family (the non-truncated wide route is firewalled:
+-- the all-τ fixed-C affine bound is UNSATISFIABLE, WideHIntDischarge). The one genuine
+-- seam was hEzero (nonpositive-time vanishing) still carried on the truncated route.
+-- hIntOn_affine_from_geometry: IterConvIntegrableWOn at the heat operator with hEzero
+-- discharged from geometry (hEzeroE_concrete, needs only 1≤n), carrying only the
+-- satisfiable τ≤T₀ affine one-step bound + tripleHEmeas.
+-- curved_hIntOn_affine_from_geometry: the genuinely-curved specialization
+-- (curvedRNCMetric κ<0, Ric≠0, Christoffel smoothness SUPPLIED by curvedRNC_hChr).
+-- Remaining in gap (i): hAff + tripleHEmeas at the curved witness, capstone threading.
+-- NOT a₁=R/6 (conditional; gaps (ii)-(v) untouched; R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.TruncHIntFromGeometry.hIntOn_affine_from_geometry
+#print axioms QIQTH.TruncHIntFromGeometry.curved_hIntOn_affine_from_geometry
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

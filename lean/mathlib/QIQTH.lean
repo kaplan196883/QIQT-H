@@ -2536,3 +2536,11 @@ import QIQTH.ExpMapContDiffFive
 -- integrability carry, fat-K carrier piles, capstone co-instantiation at the corrected
 -- witness, prior labelled piles; R/6 remains a labelled CARRIER (whiteU1(0)=R/6).
 import QIQTH.WhiteChartC5
+-- J4-665: gap-(i) brick 1 — TruncHIntFromGeometry: the truncated Duhamel-split
+-- integrability family with hEzero DISCHARGED FROM GEOMETRY (hEzeroE_concrete, 1≤n) on
+-- the honest truncated route (IterConvIntegrableWOn; the non-truncated wide route is
+-- firewalled by the affine obstruction), incl. the genuinely-curved specialization at
+-- curvedRNCMetric κ<0 with Christoffel smoothness supplied. Remaining gap-(i) carries:
+-- the satisfiable affine one-step bound + tripleHEmeas at the curved witness, then the
+-- capstone Duhamel-slot threading. NOT a₁=R/6 (conditional; R/6 = carrier).
+import QIQTH.TruncHIntFromGeometry
