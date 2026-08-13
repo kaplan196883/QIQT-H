@@ -8253,3 +8253,18 @@ pure-Gaussian); the 4/3-quadratic→3/2-pure bridge already banked. std-3 ×2. r
 gatedWitnessN1_hEboundW_le_of_good_CONST (target width w = 3/2·D) + (b) the (1+δ)
 shrunk-radius displacement (uniformFlowExp_hdisp_ball gives ≤4/3 by shrinking; need
 arbitrary (1+δ)) ⟹ brick 3: ambient constGate width-3/2 hEdom.** a₁=R/6 CONDITIONAL.
+
+### J4-673 [AF] — width brick 2: the parametric primitives; brick (c) blocked; width tension
+WidthParametricGoodGate.lean (341 lines, 47s): uniformFlowExp_hdisp_ball_delta ((1+δ)
+displacement, modulus-of-continuity; gate inhabited) + gatedWitnessN1_hEboundW_le_of_good_W
+(width-parametric transfer, W_a exposed) + κ-parametric tower copies. std-3 ×5 (2 pinned).
+raw 0 (9966). BRICK (c) BLOCKED: the census tower is WIDTH-2-LOCKED (332 baseKernelW-2
+uses, zero 3/2 consumers; pure-Gaussian composite (3/2)(1+δ) > 3/2 strictly).
+⚠ TENSION vs J4-671 ("suppliers need width-3/2 hAdomHeat/hAdom2/hgate" — possibly
+gaussDdim(3/2·τ) shapes the baseKernelW sweep missed).
+**J4-674: RESOLVE THE WIDTH QUESTION FIRST — read the actual hAdom/hgate binder shapes
+in ConvCarriesDischarge (hDConv supplier) + DuhamelLimitWiring/A1R6FromLabelledCurvedGauge
+(hDaLimLU supplier): what EXACT Gaussian shapes do hDelta/hDaLimLU need; is width-2
+sufficient for them (⟹ the width campaign was a false trail and the census attack
+reroutes); or do they need gaussDdim(3/2τ) near-diagonal (⟹ the tower rewrite is real).
+Then attack accordingly.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

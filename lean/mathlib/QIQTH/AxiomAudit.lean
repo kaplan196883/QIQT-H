@@ -26197,6 +26197,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedIntrinsicWidth32.curvedRNC_intrinsic_width32_defect
 #print axioms QIQTH.CurvedIntrinsicWidth32.curvedRNC_intrinsic_width32_defect_curved_satisfiable
 
+-- J4-673: width campaign brick 2 (WidthParametricGoodGate) — the reusable primitives:
+-- uniformFlowExp_hdisp_ball_delta (∀ δ>0 ∃ r>0: rncRadialSq(φ_q v − q) ≤ (1+δ)·
+-- rncRadialSq v on ball r — the 4/3 was the δ=1/3 instance of the correction bracket
+-- 2nC_D r + nC_D²r² ≤ D·r →0; radius stays >0, gate inhabited) and
+-- gatedWitnessN1_hEboundW_le_of_good_W (the width-parametric chart-transfer merge with
+-- ambient width W_a exposed; CONST pins W_a=2) + κ-parametric tower copies. BRICK (c)
+-- BLOCKED (recorded): the a₁ census tower is WIDTH-2-LOCKED end to end (sweep: 332
+-- baseKernelW-2 uses, zero 3/2 consumers), and the pure-Gaussian composite (3/2)(1+δ)
+-- cannot reach 3/2 exactly. ⚠ TENSION vs the J4-671 scoping (delta/Duhamel suppliers
+-- "need width-3/2", possibly as gaussDdim(3/2·τ) shapes the baseKernelW sweep missed)
+-- — to be resolved before further width bricks. NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.WidthParametricGoodGate.uniformFlowExp_hdisp_ball_delta
+#print axioms QIQTH.WidthParametricGoodGate.gatedWitnessN1_hEboundW_le_of_good_W
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

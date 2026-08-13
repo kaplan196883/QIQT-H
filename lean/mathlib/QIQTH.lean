@@ -2595,3 +2595,13 @@ import QIQTH.CurvedCapstoneHCHInterFed
 -- transfer + (1+δ) shrunk-radius displacement ⟹ ambient constGate width-3/2 hEdom.
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedIntrinsicWidth32
+-- J4-673: width campaign brick 2 (WidthParametricGoodGate) — the two reusable
+-- primitives: uniformFlowExp_hdisp_ball_delta (∀δ>0 ∃r>0: displacement ≤ (1+δ) —
+-- modulus-of-continuity generalization of the 4/3 instance; gate stays inhabited) +
+-- gatedWitnessN1_hEboundW_le_of_good_W (the width-parametric chart transfer, ambient
+-- W_a exposed) + κ-parametric tower copies. ⚠ SCOPING TENSION recorded: J4-673 sweep
+-- says the census tower is width-2-locked (no baseKernelW 3/2 consumer; pure-Gaussian
+-- composite (3/2)(1+δ) > 3/2), vs J4-671's claim the delta/Duhamel suppliers need
+-- width-3/2 (possibly as gaussDdim(3/2·τ) shapes the sweep missed) — RESOLVE FIRST.
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WidthParametricGoodGate
