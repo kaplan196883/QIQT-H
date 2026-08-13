@@ -3171,3 +3171,17 @@ import QIQTH.WhiteHBaseGateCollarDischarge
 -- the sole surviving analytic input; candidate discharge from the repo's
 -- BaseVaryingIFTPackage/BasepointJetLipschitz thread. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHnullFlowReduction
+-- J4-720: THE hsolveFlow SOLVER (WhiteHsolveFlowContraction).
+-- hsolveFlow_of_contractionData (★★ FULLY PROVEN: Banach fixed point — H v :=
+-- ContractingWith.fixedPoint (fun w => z₀ − Ψ w v + w); fixed-point equation
+-- solves Ψ (H v) v = z₀; fixedPoint_lipschitz_in_map ⟹ H Lipschitz Cv/(1−Kc);
+-- uniqueness lands each bad base in H '' sphere) ⟹ white_hInnerCont_closed_final8
+-- (★★★ final7 with hsolveFlow discharged internally). W-REGULARITY VERDICT: the
+-- uniform-over-w contraction bound is NOT banked (all base-varying facts are
+-- pointwise-at-centre first-order: baseVaryingChart_hasFDerivAt_center,
+-- geodesicBasepoint_endpoint_hasFDerivAt_exists; BaseVaryingIFTPackage conditional
+-- on the un-banked hbaseC2 — the recognized J3 blocker) ⟹ the SOLE analytic input
+-- of the whitened hInnerCont chain = hflowData (uniform contraction-in-w +
+-- uniform Lipschitz-in-v + frontier→sphere-image), the J3 blocker restated in
+-- fixed-point form. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHsolveFlowContraction
