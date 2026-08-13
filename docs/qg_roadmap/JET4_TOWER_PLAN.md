@@ -8396,3 +8396,22 @@ hIlo/hIhi, hFdom, hCross, hpardiff, dataLevi, dataAmp, hPd2conv). Net owed ≈31
 needs the CENTER-ONLY gauge (g(0)=δ, ∂g(0)=0 — banked as curved_gauge_from_center)
 carried WITHOUT the hframeK δ-on-K constraint at a FAT K. Deep design question —
 consult Sol if the Lean inventory is ambiguous.** a₁=R/6 CONDITIONAL; R/6 = carrier.
+
+### J4-683 [scoping verdict, no brick — honest + don't-undercredit correction]
+THE FAT-K CENTER-ONLY REFORMULATION IS ALREADY BUILT (through J4-606): center capstone
+curved_a1_R6_fully_wired_center (J4-587, generic K, non-vacuous at closedBall); gauge
+rethread complete (curved_gauge_from_center — hframeK Family A = 0-jet-only, 5 call
+sites refactored); mass-one reduced to satisfiable pre-ρ carriers {rS,hKball,hSact,
+hWslice,hDom} (curved_hmassone_final_at_gate J4-591; A₀(0)=1 banked; CoV bundle J4-589
+unconditional); domination center coeff bounds w/ honest ε₀ debt (J4-604/605/606);
+co-instantiation primitives at one shared K=closedBall 0 r. The J4-682 singleton pincer
+applies ONLY to the width/unified-gate branch (J4-679-682) — the CENTER branch is off
+the singleton. hframeK Family B (domination) = genuinely per-q δ-on-K
+(rebased_hframeK_unsat) ⟹ needs the center-gauge amplitude REWORK.
+**THE SINGLE REMAINING WALL: the (hbound-fat) width-2 Gaussian defect bound at
+K=closedBall 0 r — layers 4-5 (center-gauge uniformResidual threading the C_ε·ε₀
+0th-order term through the T1 slot as a (C_ε·ε₀/τ)-weighted Gaussian; per-q
+vielbein/Gram correction w/ ‖g(q)−δ‖=O(|q|²) — deviation input banked), then producer
+re-assembly → fat-K dom-pkg. Downstream (fat hAdom/hBdom/hcont/hContDom, mass pre-ρ
+discharge, joint cp466 audit, capstone co-instantiation) all consume it.
+J4-684 = (hbound-fat) layer 4.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
