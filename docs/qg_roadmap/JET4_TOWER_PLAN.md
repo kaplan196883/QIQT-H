@@ -8612,3 +8612,10 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - HONEST WALL: zero-carry closure NOT achievable at this layer — htermBox's banked reduction (iterE_jointContinuousOn_wired) discharges hbase (flow-ball theorem J4-698) but leaves {hmeas (convolution-step u-measurability), hcont (recursive inner spatial-integral joint continuity)} + the R'-vs-c REACH-ALIGNMENT obstruction (htermBox quantifies over ALL radii R'; flow-ball hbase covers only chart reach — 1b2cacb2).
 - Both decls std-3 (my chk-file); AxiomAudit 9995 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-700: htermBox = {hmeas, hcont} + reach alignment; and/or the K1TransportBudget+capstone co-instantiation piles.
+
+## J4-700 (2c4ecf85) — htermBox measurability + bound carries DISCHARGED [AF]
+- WhiteHTermBoxWire.lean (12.6KB): `white_htermBox_of_hbase_hcont` (★★ core reduction — the whitened iterE termwise box continuity at exactly {hbase, hcont}; hEbound = white_hEbound_zero, hInt = white_hInt_zero, hmeas = convStepIntegral_u_aestronglyMeasurable_wired from the single S1 hEmeas — ALL already banked-supplied, the don't-undercredit sweep found them); `white_htermBox_of_flowBall_hcont` (★★ hbase discharged via the J4-698 flow-ball theorem; SOLE analytic carry = hcont, reach-restricted).
+- hcont factorization (InnerEngineRecursion): (S-dom) uniform Gaussian dominator + (Gap-A) whiteDefectKernel continuity at general 2nd spatial arg w + (Gap-B) iterE time-continuity at general 1st arg w — the banked base is (·,·,0)-slice/ball-anchored; genuine analytic carries.
+- REACH-ALIGNMENT verdict: GENUINE — the consumer white_leviJoint_window_modulo_termBox needs Ioc 0 u ×ˢ univ (all R'); flow-ball hbase covers R' ≤ chart reach; fix = the gate-vanishing extension (whiteDefectKernel = 0 outside S 0 ⟹ trivial continuity beyond reach + stitch), NOT yet built.
+- Both decls std-3 (my chk-file); AxiomAudit 9996 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-701: the gate-vanishing extension (likely the cheapest — kernel vanishes outside the gate, stitch open-cover) and/or Gap-A/Gap-B parameterized re-runs; else the K1TransportBudget+capstone piles.
