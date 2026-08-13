@@ -3101,3 +3101,17 @@ import QIQTH.WhiteHInnerContGeomClosed
 -- + A-group + window. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHlegADischarge
 import QIQTH.WhiteHInnerContLegADischarged
+-- J4-715: THE hbase PRODUCER + FEED + WIDTH-WALL certificate (WhiteHBaseProducer).
+-- white_hbase_producer_upto (★ non-vacuous: all R' ≤ R from flow-ball geometry) +
+-- white_hbase_producer (★★ all-R' via the J4-701 stitch, conditional on the
+-- labelled cover) + white_hInnerCont_closed_final3 (★★★ final2 fed — htermBox/
+-- hInterior/hlegA/hbase ALL discharged into the terminal cert list). ⚠ PROVED GAP:
+-- white_hbase_cover_gap — the all-R' off-gate cover is JOINTLY UNSATISFIABLE with
+-- the in-gate reach hballS (a sup-norm-R point sits in S 0 ⊆ closure(S 0) yet the
+-- cover forces it off) — honest gap certificate, NOT a vacuous capstone. TERMINAL
+-- per-gate cert list: A-group + hnull (proved at ball gate; flow-gate = labelled)
+-- + the hlegA discharge cert (banked at the concrete gate) + {R,h0K,hballS,hballC}
+-- + hcover (⚠ the WIDTH-WALL labelled input — genuine residual = the in-gate
+-- CUTOFF-COLLAR annulus continuity via farCutoff beyond the round reach) + window.
+-- NOT a₁=R/6 (R/6 = labelled carrier; continuity tower only).
+import QIQTH.WhiteHBaseProducer

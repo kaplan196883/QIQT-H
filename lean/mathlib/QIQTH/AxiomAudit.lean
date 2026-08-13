@@ -26839,6 +26839,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHlegADischarge.white_hlegA_flowBallGate
 #print axioms QIQTH.WhiteHInnerContLegADischarged.white_hInnerCont_closed_final2
 
+-- J4-715: the hbase producer + feed + width-wall certificate. Producer_upto
+-- non-vacuous (R' ≤ R); all-R' producer conditional on the labelled cover;
+-- white_hbase_cover_gap = the PROVED gap (all-R' off-gate cover ⊥ in-gate reach);
+-- white_hInnerCont_closed_final3 = the terminal feed. Residual = the in-gate
+-- cutoff-collar annulus continuity + flow-gate hnull. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBaseProducer.white_hbase_producer_upto
+#print axioms QIQTH.WhiteHBaseProducer.white_hbase_producer
+#print axioms QIQTH.WhiteHBaseProducer.white_hbase_cover_gap
+#print axioms QIQTH.WhiteHBaseProducer.white_hInnerCont_closed_final3
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
