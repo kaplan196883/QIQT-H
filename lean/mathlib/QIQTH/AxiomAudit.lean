@@ -26754,6 +26754,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHInnerContGeom.white_hInnerCont_of_geometry
 #print axioms QIQTH.WhiteHInnerContGeom.white_hEoffFirst_of_gateSubset
 
+-- J4-707: the ∃-shape wrapper — white_hInnerCont_closed (A-group discharged via
+-- the replayed obtain-chain at shared radius c; residual = labelled B-group only)
+-- + witness_gate (cp466 non-vacuity at n=2, κ=−1, fat K). cp466 finding: all-w
+-- hEoffFirst jointly-unsat with hcover at the flow gate (consumer needs w=0 only
+-- — the satisfiable sharpening is the next brick). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHInnerContClosed.white_hInnerCont_closed
+#print axioms QIQTH.WhiteHInnerContClosed.white_hInnerCont_closed_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

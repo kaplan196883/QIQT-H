@@ -2977,3 +2977,18 @@ import QIQTH.WhiteHtermBoxUncond
 -- Downstream residue = the ∃-shape wrapper (supplier co-instantiation at internal c
 -- + geometry re-emission at the flow-exp gate). NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHInnerContGeom
+-- J4-707: THE ∃-SHAPE WRAPPER (WhiteHInnerContClosed). white_hInnerCont_closed:
+-- ∃ S a b (fat gate, 0<a<b) — the whitened inner-pairing continuity with the ENTIRE
+-- A-group {C,hC0,hpkg,hEmeas,hWmeas,wA,Cpre,A₀,A₁,hval} DISCHARGED internally by
+-- replaying the modulo_termBox obtain-chain at the shared radius c, threaded through
+-- white_hInnerCont_of_geometry. Remaining antecedent = the labelled B-group only:
+-- {Wg,hagree}, reach radii, off-gate cover {Uoff,hUopen,hEoffFirst,hcover},
+-- base-0 flow-ball {h0K,hSopen,hballS,hcδ,hspec,hballC}, Gap-A {hcδA,hgeom}.
+-- ⚠ cp466 FINDING: the all-w hEoffFirst is JOINTLY UNSATISFIABLE with hcover at the
+-- flow gate (⋃_w S w unbounded — proven-by-conflict, not forced); the consumer
+-- (white_htermBox_unconditional_k) invokes hEoffFirst ONLY at w=0, where it IS
+-- satisfiable (S 0 bounded; white_hEoffFirst_of_gateSubset discharges) ⟹ full
+-- closure blocked on a w=0-restricted binder sharpening (next brick).
+-- white_hInnerCont_closed_witness_gate = cp466 non-vacuity (n=2, κ=−1, fat K).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHInnerContClosed
