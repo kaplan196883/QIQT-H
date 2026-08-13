@@ -2888,3 +2888,18 @@ import QIQTH.WhiteHInnerContTermBox
 -- (whiteDefectKernel = 0 outside S 0 ⟹ trivial continuity + stitch), not yet built.
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHTermBoxWire
+-- J4-701: GATE-VANISHING EXTENSION — reach-alignment residual KILLED
+-- (WhiteHBaseExtend). The kernel's two vanishing mechanisms lifted to the
+-- whiteDefectKernel base slice (eq_zero_offGate / eq_zero_farCutoff, window-uniform;
+-- concrete open region (closure (S 0))ᶜ). whiteDefectKernel_jointContinuousOn_extend:
+-- flow-ball continuity at R ⊕ open vanishing region U ⊕ cover
+-- closedBall 0 R' ⊆ ball 0 R ∪ U ⟹ base continuity at ANY R' (open-cover stitch).
+-- white_htermBox_of_flowBall_extend_hcont: the ALL-R' whitened iterE termwise joint
+-- continuity — reach-unrestricted. CRITICAL cp466 finding: hardwiring U through the
+-- off-gate complement is UNSATISFIABLE at a fat gate (forces S 0 = closedBall 0 R,
+-- contradicting openness); the satisfiable route is the cutoff collar
+-- (support ⊆ reach), so U stays a labelled cover certificate {U,hUopen,hUzero,hcover}
+-- with both concrete vanishing suppliers pluggable; extend_cover_satisfiable = the
+-- antecedent-inhabitance gate (U=∅, R'<R). Remaining htermBox carry = hcont
+-- (Gap-A general-w + Gap-B) + the collar certificate. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHBaseExtend

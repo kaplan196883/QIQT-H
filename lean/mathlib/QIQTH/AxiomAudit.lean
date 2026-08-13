@@ -26690,6 +26690,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHTermBoxWire.white_htermBox_of_hbase_hcont
 #print axioms QIQTH.WhiteHTermBoxWire.white_htermBox_of_flowBall_hcont
 
+-- J4-701: the gate-vanishing extension — reach-alignment killed. Base-slice vanishing
+-- lifted (offGate/farCutoff); whiteDefectKernel_jointContinuousOn_extend = the
+-- open-cover stitch to ANY R'; white_htermBox_of_flowBall_extend_hcont = the ALL-R'
+-- termwise continuity (reach-unrestricted); extend_cover_satisfiable = the cp466
+-- antecedent-inhabitance gate (off-gate hardwiring proved unsatisfiable at a fat
+-- gate — U stays a labelled collar certificate). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBaseExtend.whiteDefectKernel_eq_zero_offGate
+#print axioms QIQTH.WhiteHBaseExtend.whiteDefectKernel_eq_zero_farCutoff
+#print axioms QIQTH.WhiteHBaseExtend.whiteDefectKernel_jointContinuousOn_extend
+#print axioms QIQTH.WhiteHBaseExtend.white_htermBox_of_flowBall_extend_hcont
+#print axioms QIQTH.WhiteHBaseExtend.whiteDefectKernel_extend_cover_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
