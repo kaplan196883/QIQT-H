@@ -8692,3 +8692,11 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - Residue: hnull (labelled at the flow gate = codim-1 sphere image; proved at the ball gate), hInterior (per-(w,z₀) local flow-ball geometry via J4-710), banked dominated data. GROUP 8 + uniform-reach BOTH GONE from the interface.
 - All 6 std-3 (my chk-file); AxiomAudit 10009 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-712: wire the glue into the level induction — replace innerStep_cont_ae's box-uniform hcontE feed by the pointwise-assembled box continuity ⟹ `white_htermBox_unconditional_k_cover` (Nat.rec replay, no reach bound) ⟹ rethread J4-706/707 ⟹ `white_hInnerCont_closed_cover`; discharge/label hInterior from _at_set.
+
+## J4-712 (see commit) — GLUE WIRED INTO THE LEVEL INDUCTION [AF]
+- KEY STRUCTURAL FINDING: the pointwise glue ELIMINATES the recursion carrier — each level k+1 is an independent convolution (continuity from {dominated data, hnull, hInterior}, NO IH); only k=0 (raw kernel, no ∫w frontier-averaging) is a genuine seed.
+- WhiteHtermBoxWCover.lean (240L): `white_htermBox_unconditional_k_cover` (★★★ reach wall + group-8 hEoffFirst/hcover GONE, hjoint GONE; succ = white_hSdom dominated data at field-point-independent bnd + convStepIntegrand measurability from hEmeas + the null-frontier glue + iterE_succ_jointContinuousOn_wired), `white_htermBox_cover_certificates_satisfiable`, `white_htermBox_cover_hnull_ballGate` (★ hnull PROVED at the genuine ball gate, n=2).
+- WhiteHInnerContGeomCover.lean (201L): `white_hInnerCont_closed_cover` (★★★ the rethread — htermBox discharged via the glue tie; STEPS 1–3 verbatim).
+- FINAL certs: A-group (co-instantiable) + glue certs {hnull (proved at ball gate / labelled at flow gate), hInterior (labelled — the base-w iterate TIME-SLICE is the residual brick: leg (b) time continuity of iterE at fixed base w ≠ the induction's own base-0 output), hbase (k=0 seed — honest boundary)} + window.
+- All 4 std-3 (my chk-file); AxiomAudit 10011 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-713: hInterior — the base-w iterate time-slice brick (time continuity of iterE E (m+1) (τu) w 0 in τ at fixed w: scope whether the banked per-level box continuity at base 0 + a translation/base-change or the Gap-B composition gives the w-slice; else the ∃-rewrap (mechanical) + the piles.
