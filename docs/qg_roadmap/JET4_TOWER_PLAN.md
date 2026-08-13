@@ -8415,3 +8415,14 @@ vielbein/Gram correction w/ ‖g(q)−δ‖=O(|q|²) — deviation input banked)
 re-assembly → fat-K dom-pkg. Downstream (fat hAdom/hBdom/hcont/hContDom, mass pre-ρ
 discharge, joint cp466 audit, capstone co-instantiation) all consume it.
 J4-684 = (hbound-fat) layer 4.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-684 [AF] — (hbound-fat) layer 4, WIDTH-2 face
+CurvedA1CenterResidW2.lean (~600 lines, first-try green): the center-gauge width-2
+τ-residual engines — |R₀| ≤ (C₀ + Cεu·ε₀/τ)·gaussDdim(2τ) (+O(r) companion), ε₀ paid
+twice (T1 constant via layer-3 coeff; T2 cross via the center deviation replacing the
+hframeK-fed dev bound; T3 verified frame-free), fat-K instantiations at closedBall 0 r
+(ε₀=(|κ|/3)nr² explicit) + cp466 gate. Closes the 3/2→2 width gap to the
+baseKernelW-2/hBdom consumer. std-3 ×6 (4 pinned). raw 0 (9977).
+**J4-685: layer 5 — the producer re-assembly via route (c) per-q frozen-Gaussian
+re-basing (J4-608: routes (a)/(b) fail) → the fat-K dom-pkg feeding
+gated_hBdom_of_defect_bound, consuming the ε₀/τ term.** a₁=R/6 CONDITIONAL.

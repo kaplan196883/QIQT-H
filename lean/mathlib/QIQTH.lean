@@ -2702,3 +2702,12 @@ import QIQTH.CurvedCapstoneUnifiedGate
 -- dataLevi/dataAmp/hPd2conv). Net owed ≈31, of which ≈11 are one chart-IFT
 -- strip-continuity interface away (but degenerate at K={0}). NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedCensusShrinkJ4682
+-- J4-684: (hbound-fat) layer 4 WIDTH-2 face (CurvedA1CenterResidW2) — the center-gauge
+-- width-2 τ-residual engines: uniformResidual(_Linear)_gaussian_bound_tau_width2_center
+-- (|R₀| ≤ (C₀ + Cεu·ε₀/τ)·gaussDdim(2τ); ε₀ paid twice — T1 constant + T2 cross via the
+-- per-q center deviation replacing hframeK; T3 verified frame-free) + fat-K curved
+-- instantiations at K=closedBall 0 r (explicit ε₀=(|κ|/3)nr², coeff from layer 3) +
+-- satisfiability. Closes the width-3/2→2 gap between banked J4-607 and the baseKernelW-2
+-- consumer. Layer 5 owed: producer re-assembly (route (c) per-q frozen-Gaussian
+-- re-basing per J4-608). NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedA1CenterResidW2

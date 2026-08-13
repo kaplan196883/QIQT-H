@@ -26379,6 +26379,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedCensusShrinkJ4682.curved_census_hmassone_blocked_at_singleton
 #print axioms QIQTH.CurvedCensusShrinkJ4682.curved_census_closed_bundle_curved_satisfiable
 
+-- J4-684: (hbound-fat) layer 4, WIDTH-2 face (CurvedA1CenterResidW2). Scoping
+-- reconciliation: the narrow (3/2) center residual was banked at J4-607; the actual
+-- gap was the WIDTH-2 face (the leviSeries/hBdom consumer concludes at gaussDdim(2s)).
+-- T2/T3 hframeK verification (as demanded): T2 IS hframeK-fed (the |S| ≤ n²Mr⁴ dev
+-- bound) — replaced by the center variant, degrading to n²M·(r²+ε₀)·r² (the second ε₀
+-- share); T1 rides the layer-3 center coeff (C_c·r² + C_ε·ε₀ — the constant pays 1/τ
+-- at m=0); T3 verified frame-free. Landed: the width-2 (c,d)=(1,2) absorption
+-- specializations + ★ uniformResidual_gaussian_bound_tau_width2_center
+-- (|R₀| ≤ (C₀ + Cεu·ε₀·(1/τ))·gaussDdim(2τ), C₀ = √2ⁿ(8C_c+32n²MW+L)) + the O(r)
+-- companion + the fat-K curved instantiations at K=closedBall 0 r (ε₀=(|κ|/3)nr²
+-- explicit; coeff antecedent from layer 3) + cp466 gate. The honest ε₀/τ term stays
+-- EXPLICIT. Layer 5 owed: producer re-assembly via route (c) per-q frozen-Gaussian
+-- re-basing (J4-608 verdict: order-of-limits routes (a)/(b) fail). NOT a₁=R/6
+-- (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedA1CenterResidW2.uniformResidual_gaussian_bound_tau_width2_center
+#print axioms QIQTH.CurvedA1CenterResidW2.uniformResidualLinear_gaussian_bound_tau_width2_center
+#print axioms QIQTH.CurvedA1CenterResidW2.curvedRNC_resid_width2_bound_center
+#print axioms QIQTH.CurvedA1CenterResidW2.curvedRNC_resid_width2_center_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
