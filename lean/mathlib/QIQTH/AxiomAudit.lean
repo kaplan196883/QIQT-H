@@ -26656,6 +26656,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHLcont.white_hLterm_continuousOn_of_jets
 #print axioms QIQTH.WhiteHLcont.whiteDefectKernel_jointContinuousOn_modulo_jets
 
+-- J4-698: the two jets landed — hbase Δ_z side FULLY discharged. pd_snd/
+-- pd_pd_snd_jointContinuousOn = the general engine (spatial 1st + mixed-2nd jets of
+-- any jointly-C² field jointly continuous); gaussDdim_contDiffAt_pos = joint C^⊤ of
+-- the flat Gaussian at τ>0; white_hGradCont/white_hHessCont fill J4-697's jet slots;
+-- whiteDefectKernel_jointContinuousOn_of_flowBall = the capstone carrying only the
+-- labelled flow-ball germ geometry {h0K,hSopen,hballS,hcδ,hspec,hballC}.
+-- hJoint residue now {hEmeas, hstep}. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHJetCont.pd_snd_jointContinuousOn
+#print axioms QIQTH.WhiteHJetCont.pd_pd_snd_jointContinuousOn
+#print axioms QIQTH.WhiteHJetCont.gaussDdim_contDiffAt_pos
+#print axioms QIQTH.WhiteHJetCont.white_hGradCont
+#print axioms QIQTH.WhiteHJetCont.white_hHessCont
+#print axioms QIQTH.WhiteHJetCont.whiteDefectKernel_jointContinuousOn_of_flowBall
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

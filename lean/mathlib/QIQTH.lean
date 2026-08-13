@@ -2847,3 +2847,17 @@ import QIQTH.WhiteHRepCont
 -- {hEmeas, hstep, hHessCont, hGradCont}. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHVcont
 import QIQTH.WhiteHLcont
+-- J4-698: THE TWO JETS LANDED — hbase Δ_z side FULLY DISCHARGED (WhiteHJetCont).
+-- General pd↔fderiv engine (pd_snd/pd_pd_snd_jointContinuousOn: first + mixed-second
+-- spatial jets of any jointly-C² field are jointly continuous, no open-set hypothesis —
+-- ContDiffAt.eventually supplies the local slice-differentiability) + the crux joint
+-- flat-analytic content gaussDdim_contDiffAt_pos ((τ,x) ↦ gaussDdim jointly C^⊤ at
+-- τ>0) + whiteCutKernel_contDiffAt_joint (jointly C² from τ>0 + chart C² germ) ⟹
+-- white_hGradCont + white_hHessCont (the exact ContinuousOn slots of J4-697's
+-- white_hLterm_continuousOn_of_jets, via the gate congruences on open S 0).
+-- Capstone whiteDefectKernel_jointContinuousOn_of_flowBall: the whitened one-step
+-- Levi residual's joint ContinuousOn with {hGradCont,hHessCont,hLcont,hVcont} ALL
+-- discharged — carrying only the labelled flow-ball germ geometry
+-- {h0K,hSopen,hballS,hcδ,hspec,hballC}. hJoint residue now {hEmeas, hstep}.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHJetCont
