@@ -8570,3 +8570,17 @@ the two genuine open bricks under hJoint.
 **J4-695: hmajor (the width-lam per-term wire from white_hBdom/iterConvW_bound —
 likely mechanical) + then hbase/hstep (the genuine bricks) / else the
 K1TransportBudget+capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-695 [AF] — hmajor DISCHARGED (τ-gate affine dissolution) + hbase split
+WhiteLeviMajorWire.lean (209 lines) + WhiteHBaseReduction.lean (176 lines):
+white_hmajor (iterConvW_bound wire; the affine C(1+t') obstruction dissolved by the
+τ-gate — fixed 2C works since the defect vanishes for τ>1) ⟹
+★ white_leviJoint_window_modulo_termBox (hJoint down to htermBox only). hbase split
+(∂_τ − Δ_z defeq) + the ∂_τ side reduced to the explicit whiteTauDerivRep continuity ⟹
+hbase modulo {hRepCont, hLcont}. std-3 ×8 (6 pinned). raw 0 (9990).
+WHITENED hJoint RESIDUE: {hEmeas (S1 banked-conditional), hRepCont (in-gate chart
+continuity — C⁵ available), hLcont (order-2 chart jets — the S1-b analog), hstep (the
+convolution integral envelope)}.
+**J4-696: hRepCont (nearest — the indicator collapse + chart continuity composition);
+then hLcont/hstep; then wire the two capstones into the hcont chain; then the
+K1TransportBudget/capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

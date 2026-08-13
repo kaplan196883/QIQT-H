@@ -2812,3 +2812,15 @@ import QIQTH.WhiteHcontWitnessFactor
 -- extractable from S1 (measurability-only) — the two genuine open bricks.
 -- NOT a₁=R/6 (R/6 = carrier; flat tower only).
 import QIQTH.WhiteLeviMTestWidth
+-- J4-695: hmajor DISCHARGED + hbase SPLIT (WhiteLeviMajorWire + WhiteHBaseReduction) —
+-- white_hmajor (the width-lam per-term domination via iterConvW_bound; the pkg's
+-- affine C(1+t') obstruction DISSOLVED by the τ-gate: whiteDefectKernel = 0 for τ>1
+-- ⟹ fixed constant 2C works — white_hEbound_zero) ⟹
+-- ★ white_leviJoint_window_modulo_termBox: the hJoint carry down to htermBox ONLY.
+-- hbase: whiteDefectKernel_jointContinuousOn_of_parts (the ∂_τ − Δ_z split) +
+-- white_hDterm_jointContinuousOn_of_repCont (∂_τ side reduced to the explicit
+-- whiteTauDerivRep continuity) ⟹ hbase modulo {hRepCont, hLcont}. WHITENED hJoint
+-- RESIDUE: {hEmeas(S1), hRepCont (in-gate chart continuity), hLcont (order-2 chart
+-- jets), hstep (the convolution integral envelope)}. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteLeviMajorWire
+import QIQTH.WhiteHBaseReduction

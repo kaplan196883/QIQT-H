@@ -26604,6 +26604,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteLeviMTestWidth.hBcontEvery_of_carries_width
 #print axioms QIQTH.WhiteLeviMTestWidth.leviJoint_window_of_carries_width
 
+-- J4-695: hmajor DISCHARGED + hbase SPLIT (WhiteLeviMajorWire + WhiteHBaseReduction).
+-- hmajor: the width-lam per-term slot is EXACTLY iterConvW_bound at k+1; the pkg's
+-- affine C(1+t') factor (unusable by the global-constant bound) DISSOLVES via the
+-- τ-gate — whiteDefectKernel = 0 for τ>1, so the fixed constant 2C works on all τ
+-- (white_hEbound_zero, the α=0 mirror). white_hInt_zero (per-step integrability,
+-- carries the one S1 hEmeas) ⟹ white_hmajor ⟹ ★ white_leviJoint_window_modulo_termBox:
+-- the whitened hJoint carry reduced to htermBox ONLY. hbase:
+-- whiteDefectKernel_jointContinuousOn_of_parts (heatOp defeq-splits ∂_τ − Δ_z on the
+-- in-window box; ContinuousOn.sub) + white_hDterm_jointContinuousOn_of_repCont (the
+-- ∂_τ term ≡ the explicit whiteTauDerivRep via the banked pointwise closed form) ⟹
+-- whiteDefectKernel_jointContinuousOn_modulo_rep_and_L: hbase modulo {hRepCont
+-- (box-inside-gate indicator collapse + in-gate chart continuity — the C⁵ machinery),
+-- hLcont (the Δ_z term: chart SECOND field-jets, the S1-b order-2 territory)}.
+-- WHITENED hJoint RESIDUE: {hEmeas, hRepCont, hLcont, hstep}. NOT a₁=R/6
+-- (R/6 = labelled carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteLeviMajorWire.white_hEbound_zero
+#print axioms QIQTH.WhiteLeviMajorWire.white_hmajor
+#print axioms QIQTH.WhiteLeviMajorWire.white_leviJoint_window_modulo_termBox
+#print axioms QIQTH.WhiteHBaseReduction.whiteDefectKernel_jointContinuousOn_of_parts
+#print axioms QIQTH.WhiteHBaseReduction.white_hDterm_jointContinuousOn_of_repCont
+#print axioms QIQTH.WhiteHBaseReduction.whiteDefectKernel_jointContinuousOn_modulo_rep_and_L
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
