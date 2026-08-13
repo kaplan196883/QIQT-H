@@ -26229,6 +26229,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WidthCompose32.hAdom_width32_of_baseKernelW_global
 #print axioms QIQTH.WidthCompose32.hAdom_width32_of_baseKernelW_horizon
 
+-- J4-675: ROUTE VERDICT (β) + the curved 4/3-quad bridge (CurvedWidth43QuadBridge).
+-- (α) pure-Gaussian (1+δ) ambient transfer = DEAD END with proof: the banked absorption
+-- (rncRadialSq^m·gaussDdim(cτ) ≤ …·gaussDdim(dτ)) requires c < d (narrow→wide only);
+-- descending gaussDdim((3/2)(1+δ)τ) → gaussDdim(3/2·τ) needs wide≤C·narrow whose ratio
+-- diverges — old walls 1+2 RETIRED as dead ends. (β) REAL: hEdom_of_quadPoly_residual_width
+-- takes width-w₀<3/2 QUADRATIC-prefactor bounds and produces the width-3/2 pure hEdom
+-- via the m=0,1,2 absorptions at c:=w₀<d:=3/2 (4/3 instance = hEdom_concrete_final);
+-- machinery metric-agnostic. Landed: curvedRNC_hEdom_of_width43_quad — the bridge at
+-- curvedRNCMetric κ: curved on-gate width-4/3 quadratic hgate ⟹ curved width-3/2 hEdom
+-- (the EXACT hardcoded supplier shape). + Ric≠0 satisfiability. SINGLE SURVIVING WALL:
+-- the curved on-gate width-4/3 quadratic carry (deepest = the curved width-1 in-chart
+-- quadratic parametrix residual; labelled in the FLAT tower too — the flat producer
+-- collapses to 3/2-pure in-chart, the finer quadratic form was always carried).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedWidth43QuadBridge.curvedRNC_hEdom_of_width43_quad
+#print axioms QIQTH.CurvedWidth43QuadBridge.curvedRNC_width43_quad_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

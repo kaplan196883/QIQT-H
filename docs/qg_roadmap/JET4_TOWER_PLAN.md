@@ -8281,3 +8281,17 @@ single input; the labelled "hAdom global" wall); (2) the (1+δ) ambient transfer
 intrinsic 3/2 floor (GateSqControl fixed-3/2 displacement inflates to 2); (3) the
 width-4/3 QUADRATIC hgate producer; (4) hDelta + diff-under-∫ families. J4-675 = wall (2)
 (the (1+δ) transfer — both primitives banked, this is the compose).** a₁=R/6 CONDITIONAL.
+
+### J4-675 [AF] — route (β) verdict + the curved 4/3-quad→3/2 bridge
+CurvedWidth43QuadBridge.lean (125 lines, 57s): curvedRNC_hEdom_of_width43_quad — the
+metric-agnostic quadratic bridge at curvedRNCMetric κ: curved on-gate width-4/3
+QUADRATIC hgate ⟹ the width-3/2 pure hEdom (the exact hardcoded supplier shape);
++Ric≠0 gate. std-3 ×2. raw 0 (9968). ROUTE (α) — the (1+δ) pure-Gaussian ambient
+transfer — PROVEN DEAD (absorption is narrow→wide only; wide→narrow ratio diverges);
+old walls 1+2 retired. **SINGLE SURVIVING WIDTH WALL: the curved on-gate width-4/3
+quadratic carry hgate. Sub-route (all downstream banked): curved width-1 in-chart
+quadratic parametrix residual (the deepest remaining estimate — curved analogue of the
+flat WidthMarginEngine T1+T2−T3 grading; NOTE the finer quadratic form is labelled even
+in the FLAT tower) → chartTransfer_quad_from_nearIsometry (1→4/3) →
+curvedRNC_hEdom_of_width43_quad (→3/2). J4-676 = scope+attack the curved width-1
+in-chart quadratic residual.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

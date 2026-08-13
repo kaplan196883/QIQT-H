@@ -2617,3 +2617,13 @@ import QIQTH.WidthParametricGoodGate
 -- width-4/3 quadratic hgate producer; (4) hDelta + diff-under-∫ families.
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WidthCompose32
+-- J4-675: route verdict + the curved 4/3-quad bridge (CurvedWidth43QuadBridge).
+-- VERDICT (β): the pure-Gaussian (1+δ) ambient route is a DEAD END (absorption lemma
+-- only widens narrow→wide; the (3/2)(1+δ) composite cannot descend to 3/2) — old walls
+-- 1+2 RETIRED. The real route: width-4/3 QUADRATIC hgate ⟹ (banked m=0,1,2 absorptions,
+-- 4/3<3/2) ⟹ width-3/2 pure hEdom. Landed: curvedRNC_hEdom_of_width43_quad — the
+-- metric-agnostic bridge instantiated at curvedRNCMetric κ (+Ric≠0 gate), isolating the
+-- SINGLE surviving wall = the curved on-gate width-4/3 quadratic carry hgate (deepest:
+-- the curved width-1 in-chart quadratic parametrix residual → chartTransfer → bridge).
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedWidth43QuadBridge
