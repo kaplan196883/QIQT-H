@@ -2681,3 +2681,12 @@ import QIQTH.CurvedHDConvSlotThreading
 -- constGate shape the CONSTRADIUS core consumes. cp466 clean (K={0}, Ric≠0).
 -- Full capstone re-composition on top = next. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedUnifiedGateBounds
+-- J4-681: ★★ THE UNIFIED-GATE CAPSTONE (CurvedCapstoneUnifiedGate) —
+-- curved_wide_a1_R6_trunc_unifiedGate: the curved trunc a₁ capstone re-composed onto
+-- the width-unified gate — fed slots (hInt/hEboundW_le/hCH/hInter) AND the width-3/2
+-- hEdom/hAdom certificates all on ONE witness cW (defeq bridge: constGate unfolds to
+-- the unified gate's flow-ball literally). Standing antecedents: κ<0, 1≤n, labelled
+-- hw/hu/hsrc, T₀>0; inner: c<min δ₀ c₀ + the three arrows hDuhamel/hDConv/hCConv.
+-- +Ric≠0 gate. HONEST RESIDUE now purely: three arrows + W-census + labelled inputs;
+-- R/6 = labelled CARRIER. NOT a₁=R/6.
+import QIQTH.CurvedCapstoneUnifiedGate

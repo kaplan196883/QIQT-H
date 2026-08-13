@@ -8365,3 +8365,17 @@ instantiation chain — hInt/hEboundW_le/hInter/hCH — from curvedRNC_unified_g
 so the fed slots AND the width-3/2 certificates live on ONE cW; then the honest residue
 is purely the W-census + hDuhamel/hDConv/hCConv arrow analytics + labelled inputs).**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-681 [AF] — ★★★ THE CAPSTONE RE-COMPOSED ON THE UNIFIED GATE
+CurvedCapstoneUnifiedGate.lean (266 lines, 19254 bytes, 59s): curved_wide_a1_R6_trunc_unifiedGate
+— the J4-670 curved trunc a₁ capstone re-run against curvedRNC_unified_gate_bounds (in place of
+curvedRNC_heatOp_dom_pkg). ONE gate (a,b,c); geometry-fed slots hInt/hEboundW_le/hInter/hCH ALL
+sourced from the UNIFIED hpkgBound (affine slice τ:=τ + cutoff t':=T₀); AND the width-3/2 hEdom
+(heatOp) + hAdom (witness) certificates exposed as conjuncts (∃ E₀ E₁ A₀ A₁ ≥0) on the SAME cW.
+cW κ hκneg a b c is DEFINITIONALLY the unified witness (constGate…c = flow-ball gate, same
+hChr := curvedRNC_hChr κ hκneg.le) ⟹ hEdom/hAdom transfer by `exact` (defeq), fed chain reproduced
+verbatim from HCHInterFed. cp466 clean (K={0}, Ric≠0). std-3 ×2 (propext, Classical.choice,
+Quot.sound; NO sorryAx). Fed slots + width-3/2 certs no longer split across disjoint gates.
+HONEST RESIDUE (unchanged, this is PLUMBING — NOT a₁=R/6): jet-reach c<min δ₀ c₀; labelled
+hw/hu/hsrc; the three arrows hDuhamel/hDConv/hCConv (inner hyps); W-census pile; R/6 = labelled
+carrier. a₁=R/6 CONDITIONAL.

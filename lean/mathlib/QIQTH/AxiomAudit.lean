@@ -26342,6 +26342,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedUnifiedGateBounds.curvedRNC_unified_gate_bounds
 #print axioms QIQTH.CurvedUnifiedGateBounds.curvedRNC_unified_gate_bounds_curved_satisfiable
 
+-- J4-681: ★★ THE UNIFIED-GATE CAPSTONE (CurvedCapstoneUnifiedGate).
+-- curved_wide_a1_R6_trunc_unifiedGate — the curved trunc a₁ capstone re-composed onto
+-- the width-unified gate: (a,b,C,c,hpkgBound) sourced from curvedRNC_unified_gate_bounds
+-- (not the old disjoint pkg gate); the DEFEQ BRIDGE — cW = vanVleckGatedWitness at
+-- constGate, and constGate unfolds to the unified gate's flow-ball literally, so
+-- hEdom/hAdom transfer by bare exact — puts the fed slots (hInt via the affine slice,
+-- hEboundW_le at t':=T₀, hEzero, hInter via the truncated interchange, hCH) AND the
+-- width-3/2 certificates on ONE witness. Conclusion: ∃ a b C c …, (hEdom ∧ hAdom on cW)
+-- ∧ (∃ δ₀>0, c<δ₀ → hDuhamel → hDConv → hCConv → the a₁ two-jet pair). Standing:
+-- κ<0, 1≤n, labelled hw/hu/hsrc, T₀>0. + Ric≠0 satisfiability (K={0}, cp466 clean).
+-- HONEST RESIDUE (stable): the three arrows + the ~40-member W-census + jet-reach +
+-- labelled hChr/hw/hu/hsrc; R/6 = labelled carrier. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.CurvedCapstoneUnifiedGate.curved_wide_a1_R6_trunc_unifiedGate
+#print axioms QIQTH.CurvedCapstoneUnifiedGate.curved_wide_a1_R6_trunc_unifiedGate_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
