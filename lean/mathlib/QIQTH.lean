@@ -2833,3 +2833,17 @@ import QIQTH.WhiteHBaseReduction
 -- 0 z (exists pointwise in the banked gate proofs; standalone export = next mechanical
 -- brick). hJoint residue now {hEmeas, hLcont, hstep}. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHRepCont
+-- J4-697: hVcont DISCHARGED + hLcont REDUCED (WhiteHVcont + WhiteHLcont).
+-- (i) whiteInvChart_continuousOn_flowBall — the hVcont sub-input of hRepCont packaged
+-- as ContinuousOn (whiteInvChart 0 ·) (closedBall 0 R) from the banked WhiteS1C
+-- flow-ball C² germ (uniformInverseChart_huniformChart) composed with the continuous
+-- CLM whiteUnvel; white_hRepCont_flowBall = hRepCont with hVcont fully discharged
+-- from flow-ball gate geometry. (ii) white_hLterm_continuousOn_of_jets — the Δ_z
+-- laplaceBeltrami term's ContinuousOn with the inverse-metric + Christoffel coefficient
+-- continuity discharged internally, residue = the two named chart-jet joint continuities
+-- {hHessCont, hGradCont} (the one-derivative-up analog of J4-696's hVcont). Composed:
+-- whiteDefectKernel_jointContinuousOn_modulo_jets — the whitened hbase with hVcont
+-- discharged and hLcont replaced by {hHessCont, hGradCont}. hJoint residue now
+-- {hEmeas, hstep, hHessCont, hGradCont}. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHVcont
+import QIQTH.WhiteHLcont

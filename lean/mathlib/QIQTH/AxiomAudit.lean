@@ -26642,6 +26642,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHRepCont.white_hRepCont
 #print axioms QIQTH.WhiteHRepCont.whiteDefectKernel_jointContinuousOn_modulo_L
 
+-- J4-697: hVcont DISCHARGED + hLcont REDUCED. whiteInvChart_continuousOn_flowBall =
+-- the hVcont packaging (ContinuousOn over closedBall 0 R from the WhiteS1C flow-ball
+-- C² germ ∘ whiteUnvel CLM); white_hRepCont_flowBall = hRepCont with hVcont fully
+-- discharged from flow-ball gate geometry. white_hLterm_continuousOn_of_jets = the
+-- Δ_z laplaceBeltrami term reduced to the chart-jet joint continuities
+-- {hHessCont, hGradCont} (metric/Christoffel coefficient continuity discharged).
+-- whiteDefectKernel_jointContinuousOn_modulo_jets = the composed whitened hbase;
+-- hJoint residue now {hEmeas, hstep, hHessCont, hGradCont}. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHVcont.whiteInvChart_continuousOn_flowBall
+#print axioms QIQTH.WhiteHVcont.white_hRepCont_flowBall
+#print axioms QIQTH.WhiteHLcont.white_hLterm_continuousOn_of_jets
+#print axioms QIQTH.WhiteHLcont.whiteDefectKernel_jointContinuousOn_modulo_jets
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
