@@ -26703,6 +26703,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBaseExtend.white_htermBox_of_flowBall_extend_hcont
 #print axioms QIQTH.WhiteHBaseExtend.whiteDefectKernel_extend_cover_satisfiable
 
+-- J4-702: Gap-A discharged — the base-w whitened kernel continuity tower
+-- (0→q re-instantiation; wrappers were the only 0-anchored layer). Capstone
+-- whiteDefectKernel_jointContinuousOn_of_flowBall_at + the exact hcontE reparam
+-- factor + the unconditional q∉Kset leg. Residue = labelled base-q flow-ball
+-- geometry + a.e.-w assembly; Gap-B/S-dom open. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHJetContW.white_hGradCont_at
+#print axioms QIQTH.WhiteHJetContW.white_hHessCont_at
+#print axioms QIQTH.WhiteHJetContW.whiteDefectKernel_jointContinuousOn_of_flowBall_at
+#print axioms QIQTH.WhiteHJetContW.whiteDefectKernel_reparam_jointContinuousOn_of_flowBall_at
+#print axioms QIQTH.WhiteHJetContW.whiteDefectKernel_jointContinuousOn_at_offBase
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

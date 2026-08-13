@@ -2903,3 +2903,17 @@ import QIQTH.WhiteHTermBoxWire
 -- antecedent-inhabitance gate (U=∅, R'<R). Remaining htermBox carry = hcont
 -- (Gap-A general-w + Gap-B) + the collar certificate. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHBaseExtend
+-- J4-702: Gap-A DISCHARGED — base-w whitened kernel continuity (WhiteHJetContW).
+-- The entire base-0 continuity tower was literal-0-anchored only in its WRAPPERS;
+-- every load-bearing primitive was already base-general — so Gap-A = a mechanical
+-- 0→q re-instantiation: whiteCutKernel_contDiffAt_joint_at, white_hGradCont_at/
+-- white_hHessCont_at, white_hLterm_continuousOn_of_jets_at, white_hRepCont_at,
+-- whiteInvChart_continuousOn_flowBall_at ⟹ the base-q capstone
+-- whiteDefectKernel_jointContinuousOn_of_flowBall_at ((τ,z) ↦ kernel τ z q jointly
+-- ContinuousOn from base-q flow-ball geometry) + the EXACT hcontE integrand factor
+-- whiteDefectKernel_reparam_jointContinuousOn_of_flowBall_at (reparam τ↦τ(1−u),
+-- 0<u<1) + the unconditional q∉Kset leg whiteDefectKernel_jointContinuousOn_at_offBase
+-- (kernel ≡ 0 off the fat K ⟹ trivial). Residue = the labelled base-q flow-ball
+-- geometry certificate + the a.e.-w assembly; Gap-B (iterE time-continuity) and
+-- S-dom still open. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHJetContW
