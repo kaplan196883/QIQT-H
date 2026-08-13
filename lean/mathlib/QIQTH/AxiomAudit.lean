@@ -26797,6 +26797,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHJetContWSet.whiteDefectKernel_reparam_jointContinuousOn_of_flowBall_at_set
 #print axioms QIQTH.WhiteHJetContWSet.whiteDefectKernel_jointContinuousOn_of_flowBall_at_set_satisfiable
 
+-- J4-711: the vanishing-leg glue — the pointwise dominated-continuity interface
+-- breaks the box-uniform reach wall (box-uniform a.e.-w slot proved UNSAT for
+-- large K — positive-measure bad-w at the hard gate frontier; pointwise slot SAT
+-- — fixed z₀ ⟹ null sphere). whiteConvStep_contOn_of_null_frontier = box
+-- ContinuousOn on arbitrarily-large K (exterior/off-base legs PROVED; hnull +
+-- hInterior labelled; hnull proved at the ball gate). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHtermBoxWGlue.contOn_integral_of_ae_continuousWithinAt
+#print axioms QIQTH.WhiteHtermBoxWGlue.ae_continuousWithinAt_of_null_frontier
+#print axioms QIQTH.WhiteHtermBoxWGlue.null_frontier_ball_satisfiable
+#print axioms QIQTH.WhiteHtermBoxWGlue.whiteDefectKernel_continuousWithinAt_offFrontier
+#print axioms QIQTH.WhiteHtermBoxWGlue.whiteConvStep_contOn_of_null_frontier
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -3037,3 +3037,22 @@ import QIQTH.WhiteHtermBoxReach
 -- The wall-breaker = the per-base VANISHING leg (S w ⊆ flowBall_w + kernel ≡ 0
 -- off S w) glued to this reach leg — next brick. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHJetContWSet
+-- J4-711: THE VANISHING-LEG GLUE — the reach wall BYPASSED at the interface
+-- (WhiteHtermBoxWGlue). CRUX VERDICT: the box-uniform a.e.-w continuity slot of
+-- innerStep_cont_ae is genuinely UNSAT for large K (the hard gate indicator makes
+-- p ↦ kernel discontinuous at every frontier point; for K ⊇ gate frontiers the
+-- bad-w set has POSITIVE measure — quantifier order fixed-w-then-all-p; the null-
+-- boundary fact cannot repair it). THE FIX: the POINTWISE interface
+-- (continuousWithinAt_of_dominated — continuity only AT the evaluation point, a.e. w):
+-- with z₀ fixed, the bad set {w | z₀ ∈ frontier(S w)} IS null; off it the trichotomy
+-- closes (interior → J4-710 _at_set; exterior → off-gate vanishing PROVED).
+-- contOn_integral_of_ae_continuousWithinAt (★ the kernel-generic pointwise glue
+-- engine) + ae_continuousWithinAt_of_null_frontier + the concrete per-w trichotomy
+-- ⟹ whiteConvStep_contOn_of_null_frontier (★★★ box ContinuousOn of the whitened
+-- convolution step on Icc × K, K ARBITRARILY LARGE — no M+k·ρ<R). Certificates:
+-- hnull (null frontier — PROVED at the ball gate via addHaar_sphere, LABELLED at
+-- the flow gate = codim-1 sphere image) + hInterior (in-gate CWA, J4-710 substrate)
+-- + the banked dominated data. Group 8 AND the uniform-reach bound GONE from the
+-- interface. Downstream = wire into the level induction ⟹ _k_cover ⟹ rethread.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHtermBoxWGlue
