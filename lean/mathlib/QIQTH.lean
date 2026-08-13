@@ -3185,3 +3185,19 @@ import QIQTH.WhiteHnullFlowReduction
 -- uniform Lipschitz-in-v + frontier→sphere-image), the J3 blocker restated in
 -- fixed-point form. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHsolveFlowContraction
+-- J4-721: THE cp466 JOINT INHABITATION AUDIT of final8 (WhiteFinal8JointWitness).
+-- white_final8_joint_witness: at the concrete genuinely-curved config (n=2, κ=−1,
+-- Kset=closedBall 0 2, flow gate, a=c/4, b=c/2, shared radius c) the FULL A-group
+-- + 6/8 B-group members CO-INSTANTIATE from banked suppliers (no conflict); the
+-- witness carries exactly TWO honest residues: hflowData (the J3 blocker) + the
+-- reach triple {R, hballS, hballC, hbR} (no banked producer). Conclusion content
+-- verified non-vacuous (nonempty window). ★ white_final8_forcedCollar_reach_gt:
+-- the cp466 COUPLING finding — the value supplier hardcodes b=c/2, so hbR forces
+-- R > c/2, while the crude banked reach (approximatesLinearOn surjOn) gives only
+-- R ≤ (1−c_lin)c/2 < c/2 — NOT a contradiction (sharp reach R ≈ c(1−C_D c) > c/2
+-- is geometrically true for small c) but an UN-BANKED sharp-reach requirement;
+-- missing brick = a c-shrinking-constant reach lemma from
+-- displacement_deriv_bound + surjOn. Piles 2/3 assessed non-cheap (mass pre-ρ =
+-- different gate family; K1TransportBudget = the k=1 shape-verdict wall, fix =
+-- p-dependent transported u₁ J4-636). NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteFinal8JointWitness

@@ -26901,6 +26901,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHsolveFlowContraction.hsolveFlow_of_contractionData
 #print axioms QIQTH.WhiteHsolveFlowContraction.white_hInnerCont_closed_final8
 
+-- J4-721: the cp466 joint inhabitation audit — white_final8_joint_witness (full
+-- A-group + 6/8 B-group co-instantiate at the concrete curved config; carries
+-- only {hflowData, reach triple}); forcedCollar_reach_gt = the coupling finding
+-- (b=c/2 hardcoded ⟹ R > c/2 needed; crude banked reach < c/2 — un-banked
+-- sharp-reach requirement, NOT a contradiction). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteFinal8JointWitness.white_final8_joint_witness
+#print axioms QIQTH.WhiteFinal8JointWitness.white_final8_forcedCollar_reach_gt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
