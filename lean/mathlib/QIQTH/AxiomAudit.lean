@@ -26786,6 +26786,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHtermBoxReach.white_htermBox_perlevel_satisfiable
 #print axioms QIQTH.WhiteHtermBoxReach.uniform_reach_bound_unsat
 
+-- J4-710: route (β) brick 1 — the set-generic locality hbase. The 0-centred
+-- closedBall was a wrapper artifact (jet engine set-generic, germ pointwise);
+-- whole base-q chain replayed at arbitrary K ⊆ S q ∩ flowBall_q. Capstone
+-- whiteDefectKernel_jointContinuousOn_of_flowBall_at_set + reparam set variant +
+-- cp466 witness. Honest limit: fixed third argument — the iterate uniform-reach
+-- wall unchanged; the per-base vanishing-leg glue is next. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHJetContWSet.whiteDefectKernel_jointContinuousOn_of_flowBall_at_set
+#print axioms QIQTH.WhiteHJetContWSet.whiteDefectKernel_reparam_jointContinuousOn_of_flowBall_at_set
+#print axioms QIQTH.WhiteHJetContWSet.whiteDefectKernel_jointContinuousOn_of_flowBall_at_set_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

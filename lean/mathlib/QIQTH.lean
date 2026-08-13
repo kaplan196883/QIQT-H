@@ -3024,3 +3024,16 @@ import QIQTH.WhiteHtermBoxW0
 -- reach (support growth overruns). (β) reach extension via base-q finite covers =
 -- the genuine remaining route (multi-brick). NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHtermBoxReach
+-- J4-710: route (β) brick 1 — the SET-GENERIC locality hbase (WhiteHJetContWSet).
+-- LOCALITY VERDICT: the closedBall 0 R in the J4-702 base-q tower was a WRAPPER
+-- ARTIFACT — the jet engine (pd_snd/pd_pd_snd) is set-generic, the chart germ is
+-- pointwise ⟹ NO finite-cover machinery needed: the whole chain replayed with
+-- arbitrary K ⊆ S q ∩ flowBall_q. Capstone
+-- whiteDefectKernel_jointContinuousOn_of_flowBall_at_set (joint (τ,z) continuity
+-- on Icc × K for ANY K) + the reparam/hcontE set variant + cp466 witness at the
+-- genuine non-0-centred carrier K = S q ∩ flowBall_q. HONEST LIMIT: base q is the
+-- FIXED third argument — different-base continuities don't glue for one function;
+-- the uniform-reach wall (uniform_reach_bound_unsat, on the ITERATE) is unchanged.
+-- The wall-breaker = the per-base VANISHING leg (S w ⊆ flowBall_w + kernel ≡ 0
+-- off S w) glued to this reach leg — next brick. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHJetContWSet
