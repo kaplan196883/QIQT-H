@@ -2627,3 +2627,12 @@ import QIQTH.WidthCompose32
 -- the curved width-1 in-chart quadratic parametrix residual → chartTransfer → bridge).
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.CurvedWidth43QuadBridge
+-- J4-676: ★ THE WIDTH WALL EXTRACTED (WidthOneQuadResidual) — VERDICT: extraction, not
+-- re-derivation (the engine's pre-absorption T1/T2/T3 sub-bounds ARE the width-1
+-- polynomial forms; the wall was the final absorption collapsing them).
+-- uniformResidual_quadPoly_bound_tau_width1: |parametrixResidualN 0| ≤
+-- C·((r²/τ)²+r²/τ+1)·gaussDdim(τ) — the EXACT hchart shape chartTransfer_quad consumes;
+-- METRIC-AGNOSTIC (extends the flat frontier too — the quadratic form was labelled
+-- everywhere). Remaining: the gluing brick (curved uniformFlow instantiation + chart
+-- transfer ⟹ the on-gate width-4/3 quadratic hgate). NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WidthOneQuadResidual

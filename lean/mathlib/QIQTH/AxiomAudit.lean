@@ -26247,6 +26247,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedWidth43QuadBridge.curvedRNC_hEdom_of_width43_quad
 #print axioms QIQTH.CurvedWidth43QuadBridge.curvedRNC_width43_quad_curved_satisfiable
 
+-- J4-676: ★ THE WIDTH WALL EXTRACTED (WidthOneQuadResidual). VERDICT: extraction —
+-- the banked engine's own pre-absorption sub-bounds are the width-1 polynomial forms
+-- (|T1| ≤ C_c·(r²/τ)·G_τ linear via hCoeffU; |T2| ≤ (n²MW/4)·(r²/τ)²·G_τ quadratic via
+-- |S|≤n²Mr⁴; |T3| ≤ L·G_τ constant via hLapU); the wall was only the final m=0,1,2
+-- narrow absorption collapsing them to 3/2-pure. Landed:
+-- uniformResidual_quadPoly_bound_tau_width1 — |parametrixResidualN 0| ≤
+-- C·(((r²/τ)²+(r²/τ)+1)·gaussDdim(τ)), C = C_c + n²MW/4 + L, uniform τ>0 — the EXACT
+-- hchart input of chartTransfer_quad(_from_nearIsometry), METRIC-AGNOSTIC (extends the
+-- flat frontier: the quadratic form was a labelled carry everywhere; grep-confirmed
+-- never separately banked). cp466: identical hypothesis set to the non-vacuous engine,
+-- NO hframeK-mass coupling; inhabited at the flat witness. Remaining: the GLUING brick
+-- (curved uniformFlow instantiation + chart transfer ⟹ the on-gate width-4/3 quadratic
+-- hgate of hEdom_concrete_final). NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.residualQuadratic_pointwise_width1
+#print axioms QIQTH.HeatResidualBound.uniformResidual_quadPoly_bound_tau_width1
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

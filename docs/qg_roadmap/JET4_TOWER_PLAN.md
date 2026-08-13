@@ -8295,3 +8295,15 @@ flat WidthMarginEngine T1+T2−T3 grading; NOTE the finer quadratic form is labe
 in the FLAT tower) → chartTransfer_quad_from_nearIsometry (1→4/3) →
 curvedRNC_hEdom_of_width43_quad (→3/2). J4-676 = scope+attack the curved width-1
 in-chart quadratic residual.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-676 [AF] — ★ THE WIDTH WALL EXTRACTED (WidthOneQuadResidual)
+Verdict: EXTRACTION not re-derivation — the engine's pre-absorption T1/T2/T3 sub-bounds
+are the width-1 polynomial forms; only the final narrow absorption collapsed them.
+uniformResidual_quadPoly_bound_tau_width1: |parametrixResidualN 0| ≤
+C·((r²/τ)²+r²/τ+1)·gaussDdim(τ) — the exact hchart input of chartTransfer_quad;
+METRIC-AGNOSTIC (extends the flat frontier — the quadratic form was labelled everywhere).
+cp466 clean (no hframeK-mass coupling; flat-witness inhabited). std-3 ×2. raw 0 (9969).
+**J4-677: the GLUING brick — instantiate at the curved uniformFlow metric + glue through
+chartTransfer_quad_from_nearIsometry (1→4/3) into the on-gate width-4/3 quadratic hgate
+of hEdom_concrete_final ⟹ then curvedRNC_hEdom_of_width43_quad delivers the curved
+width-3/2 hEdom (the hDConv/hDuhamel hAdom feed).** a₁=R/6 CONDITIONAL; R/6 = carrier.
