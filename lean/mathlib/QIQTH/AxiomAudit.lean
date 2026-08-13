@@ -26763,6 +26763,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHInnerContClosed.white_hInnerCont_closed
 #print axioms QIQTH.WhiteHInnerContClosed.white_hInnerCont_closed_witness_gate
 
+-- J4-708: ⚠ cp466 correction (J4-707's "hEoffFirst only at w=0" was WRONG — succ
+-- branch uses general w; no thin wrapper). The honest support brick:
+-- iterE_leftNode_offGate_zero (disjoint-supports Nat.rec — base radius M + gate
+-- reach ρ ⟹ iterate vanishes beyond M+k·ρ) + whitened instantiation from the
+-- SATISFIABLE {S 0 bound, uniform reach} pair + inhabitance witness. Remaining
+-- wall: continuity-reach R vs support-growth M+k·ρ mismatch. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHtermBoxW0.iterE_leftNode_offGate_zero
+#print axioms QIQTH.WhiteHtermBoxW0.whiteDefectKernel_leftNode_offGate_zero
+#print axioms QIQTH.WhiteHtermBoxW0.whiteDefect_w0_reach_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

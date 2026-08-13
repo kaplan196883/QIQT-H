@@ -2992,3 +2992,21 @@ import QIQTH.WhiteHInnerContGeom
 -- white_hInnerCont_closed_witness_gate = cp466 non-vacuity (n=2, κ=−1, fat K).
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHInnerContClosed
+-- J4-708: ⚠ cp466 CORRECTION + the honest SUPPORT BRICK (WhiteHtermBoxW0).
+-- CORRECTION: J4-707's "consumer invokes hEoffFirst only at w=0" was WRONG — the
+-- succ branch of white_htermBox_unconditional_k uses hEoffFirst at the GENERAL
+-- integration variable w (line 256), so the "w=0 thin wrapper" does not exist and
+-- the all-w/hcover unsat verdict stands against a literal binder restriction.
+-- THE REAL MECHANISM (proved): the succ integrand vanishes off-gate by DISJOINT
+-- SUPPORTS — the kernel needs z ∈ S w (w far) while the iterate's LEFT node
+-- support propagates from 0 by ≤ gate-reach per step. iterE_leftNode_offGate_zero:
+-- base support radius M (E τ z 0 = 0 for ‖z‖>M) + uniform gate reach ρ
+-- (E τ p z = 0 for ‖p‖>‖z‖+ρ) ⟹ iterE E (k+1) τ p 0 = 0 for ‖p‖ > M+k·ρ (pure
+-- Nat.rec, no integrability side conditions). whiteDefectKernel_leftNode_offGate_zero
+-- instantiates from the SATISFIABLE pair {S 0 ⊆ closedBall 0 M, ∀z S z ⊆
+-- closedBall z ρ} (whiteDefect_w0_reach_satisfiable = the inhabitance witness).
+-- HONEST REMAINING WALL: continuity-reach R vs support-growth M+k·ρ mismatch —
+-- in the annulus R<‖p‖≤M+k·ρ the iterate is nonzero but continuity is supplied
+-- only to reach R; group 8 needs reach extension or a downstream all-radii rework.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHtermBoxW0
