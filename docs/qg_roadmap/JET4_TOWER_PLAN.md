@@ -8459,3 +8459,15 @@ width-w (BridgeWidth already has the width-w engine [2,8]; whiteLam≤8 ⟺ nC�
 J4-625 R2) so white_hpkgBound_discharged feeds it directly, OR re-base
 gated_hBdom_of_defect_bound onto whiteGatedWitness. Consult Sol on the width-w-vs-literal-2
 fork before broad implementation.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-686 [AF] — the whitened↔vanVleck reconciliation, route (β)
+WhiteHBdomReconcile.lean (227 lines, 56s): leviSeries_full_col_of_tail (★ the reusable
+width-w full-series column engine — the width-2 leviSeries_dominatedW_le was the pin) +
+white_leviSeries_full_col + ★ white_hBdom_col_discharged (whitened column hBdom at fat
+K, NO lam≤8) + width verdict + cp466 gate (n=2, κ=−1, K=closedBall 0 2). FINDINGS:
+R2 DISSOLVES for the hBdom (lam≤8 = frozen-G₈ comparison artifact only); nC₀²≤3 =
+opaque-C₀-UNDECIDED (not a dimensional theorem; a sharpened C₀ bound is owed to decide).
+std-3 ×5. raw 0 (9979). **J4-687: downstream (i) — the whitened re-base of the
+hInnerCont all-rows builder (curved_hInnerCont_of_dominations is pinned at
+vanVleckGatedWitness, full ∀(z,y)) or an all-rows tail engine; then (ii) the S1
+tripleHEmeas carry at the whitened defect; (iii) prior piles.** a₁=R/6 CONDITIONAL.

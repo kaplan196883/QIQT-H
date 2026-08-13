@@ -26420,6 +26420,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1ReBaseHBdomW2.curvedRNC_resid_width2_bound_center_windowed
 #print axioms QIQTH.CurvedA1ReBaseHBdomW2.width2CenterEnvelope_obstruction_genuine
 
+-- J4-686: the whitened↔vanVleck reconciliation (WhiteHBdomReconcile), route (β).
+-- leviSeries_full_col_of_tail — ★ the reusable WIDTH-W full-series column engine
+-- (leviSeries = (leviSeries + E) − E: tail + k=1 split; from {k≥2 tail bound, O(1)
+-- column bound} ⟹ |leviSeries E s p 0| ≤ (C_os+C_U)·G_{ws} on (0,1]; width/witness
+-- generic — the width-2 leviSeries_dominatedW_le was the only prior engine and was
+-- PINNED). white_leviSeries_full_col (whitened instantiation via white_tail_O_s +
+-- white_hEuni) + ★ white_hBdom_col_discharged: ∀ κ≤0, compact K ⊆ B̄(0,R), ∃ fat open
+-- gate + lam ≥ 2: modulo the single S1 input, |leviSeries(whiteDefectKernel) s p 0| ≤
+-- C_L·G_{lam·s} — NO lam ≤ 8. FINDINGS: R2 (whiteLam≤8 ⟺ nC₀²≤3) DISSOLVES for the
+-- hBdom (needed only by the frozen-side G₈ comparison); nC₀²≤3 is NEITHER provable NOR
+-- refutable in-repo (C₀ = opaque .choose, only C₀≥0 banked) — an open width-alignment
+-- condition, NOT a dimensional theorem. + cp466 gate (n=2, κ=−1, fat K). Downstream:
+-- whitened re-base of the hInnerCont all-rows builder; the S1 tripleHEmeas carry;
+-- prior piles. NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBdomReconcile.leviSeries_full_col_of_tail
+#print axioms QIQTH.WhiteHBdomReconcile.white_leviSeries_full_col
+#print axioms QIQTH.WhiteHBdomReconcile.white_hBdom_col_discharged
+#print axioms QIQTH.WhiteHBdomReconcile.white_hBdom_col_width_verdict
+#print axioms QIQTH.WhiteHBdomReconcile.white_hBdom_col_feed_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

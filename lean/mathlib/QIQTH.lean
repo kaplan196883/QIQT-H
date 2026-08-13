@@ -2721,3 +2721,13 @@ import QIQTH.CurvedA1CenterResidW2
 -- Downstream fork: widen the D2 consumer to width-w (BridgeWidth [2,8]; whiteLam≤8 ⟺
 -- nC₀²≤3 unproved) OR re-base gated_hBdom onto whiteGatedWitness. NOT a₁=R/6.
 import QIQTH.CurvedA1ReBaseHBdomW2
+-- J4-686: the whitened↔vanVleck reconciliation (WhiteHBdomReconcile) — route (β):
+-- leviSeries_full_col_of_tail (★ the reusable WIDTH-W full-series column engine —
+-- leviSeries = (tail) − E split; the width-2 leviSeries_dominatedW_le was the pin) +
+-- white_leviSeries_full_col + ★ white_hBdom_col_discharged (the whitened column hBdom
+-- at fat K, NO lam≤8 — R2 DISSOLVES for the hBdom, surviving only as the frozen-G₈
+-- comparison artifact; nC₀²≤3 is opaque-C₀-UNDECIDED in-repo, not a dimensional
+-- theorem) + width verdict + cp466 gate (n=2, κ=−1, K=closedBall 0 2). Downstream:
+-- (i) whitened re-base of the hInnerCont builder / all-rows engine; (ii) the S1
+-- tripleHEmeas carry; (iii) prior piles. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteHBdomReconcile
