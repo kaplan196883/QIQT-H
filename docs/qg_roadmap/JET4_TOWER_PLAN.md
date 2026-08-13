@@ -8307,3 +8307,19 @@ cp466 clean (no hframeK-mass coupling; flat-witness inhabited). std-3 ×2. raw 0
 chartTransfer_quad_from_nearIsometry (1→4/3) into the on-gate width-4/3 quadratic hgate
 of hEdom_concrete_final ⟹ then curvedRNC_hEdom_of_width43_quad delivers the curved
 width-3/2 hEdom (the hDConv/hDuhamel hAdom feed).** a₁=R/6 CONDITIONAL; R/6 = carrier.
+
+### J4-677 [AF] — ★★★ THE CURVED WIDTH-3/2 hEdom CLOSED FROM GEOMETRY
+Width1QuadCutoff.lean (767 lines) + CurvedHgateGlue.lean (443 lines, ~68s glue):
+honest route deviation — the N=0 star cannot reach hgate (N=1 CUTOFF witness; τ-free
+gate constant unsatisfiable at N=1 per Sol #15) ⟹ built the width-1 quadratic AFFINE
+cutoff N=1 residual (M2 envelope engine + annulus deposit), glued via the banked
+TWO-SIDED (1/4) near-isometry into the AFFINE bridge:
+curvedRNC_hgate_width43_quad_affine (hgate PRODUCED — was a labelled carry even in the
+flat tower) ⟹ curvedRNC_hEdom_width32_from_geometry ((E₀+E₁τ)·√(3/2)ⁿ·gaussDdim(3/2τ),
+(a,b,c,S) ∃-produced). SURVIVING CARRIES: only hChr + hw. cp466: κ=−1,n=2 example
+elaborated; K={0} no collision. std-3 ×11 (5 pinned). raw 0 (9971).
+THE WIDTH CAMPAIGN IS CLOSED (J4-672…677, 6 bricks): the hDConv/hDuhamel hEdom/hAdom
+slot is geometry-fed. **Census still owed for the arrows: hDelta (delta-family limit),
+the diff-under-∫ families (hQ1/hFmeas/hFint/hdiff/hbound), hPd2conv, dataLevi, dataAmp,
+E-combination integrabilities. J4-678: scope + attack hDelta (hDConv's single limit —
+ranked nearest since J4-671).** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

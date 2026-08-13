@@ -26264,6 +26264,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.residualQuadratic_pointwise_width1
 #print axioms QIQTH.HeatResidualBound.uniformResidual_quadPoly_bound_tau_width1
 
+-- J4-677: ★★★ THE CURVED WIDTH-3/2 hEdom CLOSED FROM GEOMETRY (Width1QuadCutoff +
+-- CurvedHgateGlue). Honest route deviation: the witness is the N=1 CUTOFF parametrix
+-- and the τ-free gate constant is unsatisfiable at N=1 (Sol #15/HgateAffineRepair) —
+-- so the supply is the width-1 quadratic AFFINE cutoff N=1 residual
+-- (cutoffResidualN1_uniformFlow_width1_quad_affine: (B₀+B₁τ)·quadEnv·gaussDdim(τ),
+-- via the M2 envelope engine + the annulus 1/τ ≤ X/a² deposit), glued through the
+-- banked TWO-SIDED (1/4) near-isometry (nearIsometry_concrete — the one-sided 3/2
+-- displacement is the wrong shape) into the banked AFFINE bridge
+-- (hEdom_vanVleck_of_hgate_affine): hgate_width43_quad_affine_flowball (metric-
+-- agnostic; frontier leg vanishes via the c>b cutoff collar) ⟹
+-- curvedRNC_hgate_width43_quad_affine (the curved on-gate width-4/3 quadratic hgate
+-- PRODUCED from geometry — previously a labelled carry even in the FLAT tower) ⟹
+-- curvedRNC_hEdom_width32_from_geometry: ∃ a<b<c, ∃ E₀ E₁ ≥ 0, ∀τ>0 ∀p q,
+-- |heatOp g^K gi^K H_G τ p q| ≤ (E₀+E₁τ)·√(3/2)ⁿ·gaussDdim(3/2·τ)(p−q). Surviving
+-- carries: ONLY hChr + hw (the standing curved-tower pair). cp466: Ric≠0 gate
+-- instantiated at κ=−1, n=2 (example elaborated green); K={0} seed — no J4-548
+-- antecedent collision. The hDConv/hDuhamel hEdom/hAdom width slot is CLOSED; still
+-- owed: hDelta, the diff-under-∫ families, hPd2conv, dataLevi, dataAmp, E-combination
+-- integrabilities. NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.cutoffResidualN1_uniformFlow_width1_quad_affine
+#print axioms QIQTH.CurvedHgateGlue.hgate_width43_quad_affine_flowball
+#print axioms QIQTH.CurvedHgateGlue.curvedRNC_hgate_width43_quad_affine
+#print axioms QIQTH.CurvedHgateGlue.curvedRNC_hEdom_width32_from_geometry
+#print axioms QIQTH.CurvedHgateGlue.curvedRNC_hgate_width43_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

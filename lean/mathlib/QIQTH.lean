@@ -2636,3 +2636,19 @@ import QIQTH.CurvedWidth43QuadBridge
 -- everywhere). Remaining: the gluing brick (curved uniformFlow instantiation + chart
 -- transfer ⟹ the on-gate width-4/3 quadratic hgate). NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WidthOneQuadResidual
+-- J4-677: ★★★ THE CURVED WIDTH-3/2 hEdom CLOSED FROM GEOMETRY (Width1QuadCutoff +
+-- CurvedHgateGlue). Route deviation (honest): the N=0 star route cannot reach hgate
+-- (the witness is the N=1 CUTOFF parametrix; the τ-free gate constant is unsatisfiable
+-- for N=1 per Sol #15) — built the width-1 quadratic AFFINE cutoff N=1 residual
+-- (cutoffResidualN1_uniformFlow_width1_quad_affine) and glued via the banked two-sided
+-- (1/4) near-isometry into the AFFINE bridge: hgate_width43_quad_affine_flowball
+-- (metric-agnostic, frontier leg zero via the c>b collar) ⟹
+-- ★ curvedRNC_hgate_width43_quad_affine (the on-gate hgate PRODUCED, not carried) ⟹
+-- ★ curvedRNC_hEdom_width32_from_geometry: |heatOp g^K| ≤ (E₀+E₁τ)·√(3/2)ⁿ·
+-- gaussDdim(3/2·τ) with (a,b,c,S) ∃-produced. Carries: only hChr + hw (the standing
+-- curved-tower pair). cp466: κ=−1,n=2,c=0 example elaborated; K={0} no frame collision.
+-- Census: the hEdom/hAdom width slot for hDConv/hDuhamel is CLOSED (mod hChr/hw);
+-- still owed: hDelta, diff-under-∫ families, hPd2conv, dataLevi, dataAmp,
+-- E-combination integrabilities. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.Width1QuadCutoff
+import QIQTH.CurvedHgateGlue
