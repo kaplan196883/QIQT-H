@@ -8379,3 +8379,20 @@ Quot.sound; NO sorryAx). Fed slots + width-3/2 certs no longer split across disj
 HONEST RESIDUE (unchanged, this is PLUMBING — NOT a₁=R/6): jet-reach c<min δ₀ c₀; labelled
 hw/hu/hsrc; the three arrows hDuhamel/hDConv/hCConv (inner hyps); W-census pile; R/6 = labelled
 carrier. a₁=R/6 CONDITIONAL.
+
+### J4-682 [AF] — census-shrink certificate + the K={0} degeneracy verdict
+CurvedCensusShrinkJ4682.lean (13KB, ~2min): curved_census_closed_bundle — 7 members
+certified from {hChr,hw,hu} at the unified gate (gauge×2 + hEdom + hAdom + hWDom +
+hInnerCont + hFzero). ⚠ DECISIVE (proved): the K={0} seed DEGENERATES the measurability
+tier (witness z-slice a.e. 0 off origin — T-REDUCED closes emptily) AND the same null
+support blocks hmassone (curved_census_hmassone_blocked_at_singleton derives False;
+∫W(ε)→0≠1). hmassone/hmass reclassified: cp466-BLOCKED (reformulation, not analysis).
+std-3 ×4. raw 0 (9976). TRUE CENSUS WALL: (a) the nontrivial-K/center-only mass-one
+reformulation (the old hframeK-vs-fat-K tension resurfacing at the mass level);
+(b) the T-NOSUPPLIER analytic core (hQ1, DCT triple, MemLapFull/AdjLo/ECombine,
+hIlo/hIhi, hFdom, hCross, hpardiff, dataLevi, dataAmp, hPd2conv). Net owed ≈31.
+**J4-683: scope the nontrivial-K reformulation — the fat-K route was hframeK-blocked
+(cp466 J4-548) and the K={0} route is mass-blocked (this brick): the reformulation
+needs the CENTER-ONLY gauge (g(0)=δ, ∂g(0)=0 — banked as curved_gauge_from_center)
+carried WITHOUT the hframeK δ-on-K constraint at a FAT K. Deep design question —
+consult Sol if the Lean inventory is ambiguous.** a₁=R/6 CONDITIONAL; R/6 = carrier.

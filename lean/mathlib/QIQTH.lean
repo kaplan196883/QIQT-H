@@ -2690,3 +2690,15 @@ import QIQTH.CurvedUnifiedGateBounds
 -- +Ric≠0 gate. HONEST RESIDUE now purely: three arrows + W-census + labelled inputs;
 -- R/6 = labelled CARRIER. NOT a₁=R/6.
 import QIQTH.CurvedCapstoneUnifiedGate
+-- J4-682: the census-shrink certificate (CurvedCensusShrinkJ4682) —
+-- curved_census_closed_bundle: 7 census members certified from {hChr,hw,hu} at the
+-- unified gate (gauge×2, hEdom, hAdom, hWDom, hInnerCont, hFzero). ⚠ STRUCTURAL
+-- FINDING: the K={0} seed DEGENERATES the measurability tier (witness z-slice a.e. 0
+-- off origin — the T-REDUCED members close cheaply but emptily) and the SAME null
+-- support PROVABLY blocks hmassone (curved_census_hmassone_blocked_at_singleton
+-- derives False from gate-activation at K={0}). TRUE CENSUS WALL: (a) the mass-one /
+-- nontrivial-K reformulation (center-only gauge without the singleton degeneracy);
+-- (b) the T-NOSUPPLIER analytic core (hQ1, DCT triple, MemLapFull/AdjLo/ECombine,
+-- dataLevi/dataAmp/hPd2conv). Net owed ≈31, of which ≈11 are one chart-IFT
+-- strip-continuity interface away (but degenerate at K={0}). NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedCensusShrinkJ4682

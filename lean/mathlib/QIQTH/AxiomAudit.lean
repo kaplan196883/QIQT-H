@@ -26358,6 +26358,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedCapstoneUnifiedGate.curved_wide_a1_R6_trunc_unifiedGate
 #print axioms QIQTH.CurvedCapstoneUnifiedGate.curved_wide_a1_R6_trunc_unifiedGate_curved_satisfiable
 
+-- J4-682: the census-shrink certificate (CurvedCensusShrinkJ4682).
+-- curved_census_closed_bundle — 7 W-census members certified from the standing carries
+-- {hChr, hw, hu} at the unified gate: the gauge pair, hEdom, hAdom, hWDom, hInnerCont,
+-- hFzero. ⚠ DECISIVE STRUCTURAL FINDING (proved, not conjectured): the K={0} seed gate
+-- DEGENERATES the measurability tier — curved_gatedWitness_offOrigin_zero makes the
+-- witness z-slice a.e. 0 off the origin, so the T-REDUCED members (hFmeas/hMeasFII/
+-- hWmeas/…) close cheaply but EMPTILY — and the SAME null support provably blocks
+-- hmassone: curved_census_hmassone_blocked_at_singleton derives False from
+-- gate-activation at K={0} (∫ W(εₘ) → 0 ≠ 1). hmassone/hmass reclassified from "owed
+-- analytic" to PROVED cp466-BLOCKED (needs the nontrivial-K / center-only mass
+-- reformulation, not analysis). TRUE CENSUS WALL: (a) that reformulation; (b) the
+-- T-NOSUPPLIER analytic core (hQ1, the DCT triple hbdd/hbound/hdiff, MemLapFull/
+-- MemAdjLo/MemECombine, hIlo/hIhi, hFdom, hCross, hpardiff, dataLevi, dataAmp,
+-- hPd2conv). Net owed ≈31 (≈11 one chart-IFT interface away, but degenerate at K={0}).
+-- + curved_satisfiable (Ric≠0). NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedCensusShrinkJ4682.curved_census_closed_bundle
+#print axioms QIQTH.CurvedCensusShrinkJ4682.curved_census_hmassone_blocked
+#print axioms QIQTH.CurvedCensusShrinkJ4682.curved_census_hmassone_blocked_at_singleton
+#print axioms QIQTH.CurvedCensusShrinkJ4682.curved_census_closed_bundle_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
