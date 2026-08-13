@@ -3145,3 +3145,16 @@ import QIQTH.WhiteHBaseCollar
 -- translation symmetry; C¹-image-of-null on the w-slice = the labelled wall).
 -- Surviving analytic residuals: {hgateCollar, hnull}. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHBaseGateCollar
+-- J4-718: ON-GATE COLLAR DISCHARGED (WhiteHBaseGateCollarDischarge).
+-- white_gate_reach_bundle (left-inverse + continuity of the genuine center chart
+-- on the reach, from hspec 0 + c < δ₀) + closure_gate_subset_image_closedBall +
+-- white_hgateCollar_of_reach (★★ the flow-reach near-isometry: p = flowExp₀ v ⟹
+-- V₀ p = v; displacement bound uniformFlowExp_displacement_bound + reverse
+-- triangle ⟹ ‖v‖(1+C_D·c) ≥ ‖p‖ ≥ R; with the SATISFIABLE radii inequality
+-- b(1+C_D·c) < R: b < ‖v‖ ⟹ b² < ‖v‖² ≤ rncRadialSq v — strict, upgraded to 𝓝
+-- via continuity; window nonempty since b < c and R ≤ c(1+C_D·c)) +
+-- white_hgateCollar_numeric_satisfiable (cp466) ⟹ white_hInnerCont_closed_final6
+-- (★★★ hgateCollar built in-line). SOLE surviving analytic residual of the
+-- whitened hInnerCont campaign: {hnull} (flow-gate null-frontier) + the standard
+-- co-instantiated carries. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHBaseGateCollarDischarge

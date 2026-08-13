@@ -26873,6 +26873,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBaseGateCollar.white_hbase_producer_gateCollar
 #print axioms QIQTH.WhiteHBaseGateCollar.white_hInnerCont_closed_final5
 
+-- J4-718: the on-gate collar discharged — white_hgateCollar_of_reach (flow-reach
+-- near-isometry + genuine left-inverse; strict b² < rncRadialSq upgraded to 𝓝
+-- via continuity; radii inequality satisfiable) ⟹ white_hInnerCont_closed_final6
+-- (hgateCollar in-line). Sole analytic residual: {hnull}. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBaseGateCollarDischarge.white_hgateCollar_of_reach
+#print axioms QIQTH.WhiteHBaseGateCollarDischarge.white_hgateCollar_numeric_satisfiable
+#print axioms QIQTH.WhiteHBaseGateCollarDischarge.white_hInnerCont_closed_final6
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
