@@ -26850,6 +26850,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHBaseProducer.white_hbase_cover_gap
 #print axioms QIQTH.WhiteHBaseProducer.white_hInnerCont_closed_final3
 
+-- J4-716: the cutoff-collar discharge — width wall CLOSED modulo the compatible
+-- hcollar (interior-collar open vanishing UNCONDITIONAL; cover from hcollar;
+-- near-iso bridge; the stitch; final4 = the TERMINAL whitened hInnerCont;
+-- no_gap = collar ∧ hballS compatible — the off-gate impossibility dissolved).
+-- Residual: concrete-chart hcollar (large-‖p‖ near-isometry) + flow-gate hnull.
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHBaseCollar.whiteDefectKernel_collar_vanishing_open
+#print axioms QIQTH.WhiteHBaseCollar.white_hbase_producer_collar
+#print axioms QIQTH.WhiteHBaseCollar.white_hInnerCont_closed_final4
+#print axioms QIQTH.WhiteHBaseCollar.white_collar_hballS_no_gap
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

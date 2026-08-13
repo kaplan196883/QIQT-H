@@ -3115,3 +3115,17 @@ import QIQTH.WhiteHInnerContLegADischarged
 -- CUTOFF-COLLAR annulus continuity via farCutoff beyond the round reach) + window.
 -- NOT a₁=R/6 (R/6 = labelled carrier; continuity tower only).
 import QIQTH.WhiteHBaseProducer
+-- J4-716: THE CUTOFF-COLLAR DISCHARGE — width wall CLOSED modulo the COMPATIBLE
+-- geometric input (WhiteHBaseCollar). whiteDefectKernel_collar_vanishing_open
+-- (UNCONDITIONAL open interior-collar U = interior {b² ≤ rncRadialSq(V₀ ·)} with
+-- kernel ≡ 0 via farCutoff — interior avoids needing global chart continuity,
+-- which whiteInvChart does NOT have) + white_hbase_cover_collar (all-R' cover from
+-- the labelled hcollar) + white_collar_of_globalQuarterIso (hcollar from the global
+-- (1/4)-near-isometry + 2b<R) + white_hbase_producer_collar (the stitch) ⟹
+-- white_hInnerCont_closed_final4 = THE TERMINAL whitened hInnerCont.
+-- ★ white_collar_hballS_no_gap: the collar input is COMPATIBLE with hballS (they
+-- constrain disjoint radial regimes) — the off-gate impossibility genuinely
+-- dissolved, not smuggled. Residual: hcollar for the concrete chart (large-‖p‖
+-- near-isometry — banked bounds are local-only; the honest labelled input) +
+-- flow-gate hnull. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHBaseCollar
