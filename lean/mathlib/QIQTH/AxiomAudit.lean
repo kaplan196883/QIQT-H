@@ -26179,6 +26179,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedCapstoneHCHInterFed.curved_wide_a1_R6_trunc_hIntCHInterFed
 #print axioms QIQTH.CurvedCapstoneHCHInterFed.curved_wide_a1_R6_trunc_hIntCHInterFed_curved_satisfiable
 
+-- J4-672: width-3/2 campaign brick 1 (CurvedIntrinsicWidth32). WIDTH-PARAMETRICITY
+-- VERDICT (recorded): the banked curved width-2 bound is a CHART-TRANSFER artifact —
+-- the deepest producer (cutoffResidualN1_uniformFlow_narrow_mixed_below_lin) is
+-- literally width-3/2 in the pullback frame; ambient 2 = intrinsic 3/2 × displacement
+-- 4/3 (uniformFlowExp_hdisp_ball, →1 as radius →0). Width-4/3 is NOT pure-Gaussian
+-- reachable (gaussDdim(3/2τ) = (8/9)^{n/2}·e^{r²/48τ}·gaussDdim(4/3τ) — exp beats
+-- polynomial): the flat hgate's 4/3 comes from the QUADRATIC prefactor, i.e. the
+-- parametrix polynomial-Gaussian estimate; the 4/3-quadratic → 3/2-pure bridge is
+-- already banked. Landed: curvedRNC_intrinsic_width32_defect — the curved intrinsic
+-- width-3/2 per-q defect bound |χ∂_τP − Δ_{g_q}(χP)| ≤ (B₀+B₁τ)·gaussDdim(3/2·τ) at
+-- curvedRNCMetric κ<0 (banked-bundle discharge; no radius shrink here so no
+-- gate-emptying risk) + Ric≠0 non-vacuity. Brick 2 owed: width-parametric transfer
+-- rewrite of gatedWitnessN1_hEboundW_le_of_good_CONST + the (1+δ) displacement.
+-- NOT a₁=R/6 (conditional; R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.CurvedIntrinsicWidth32.curvedRNC_intrinsic_width32_defect
+#print axioms QIQTH.CurvedIntrinsicWidth32.curvedRNC_intrinsic_width32_defect_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

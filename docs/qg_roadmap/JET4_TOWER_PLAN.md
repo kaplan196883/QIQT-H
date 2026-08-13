@@ -8242,3 +8242,14 @@ the curved heatOp from CurvedParametrixMass/CurvedA1AmplitudeData, feeding
 hgate/hAdomHeat/hAdom2 — the shared hardest labelled input under both hDConv and
 hDaLimLU suppliers. Multi-brick. J4-672 = brick 1 of that.**
 a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-672 [AF] — width-3/2 brick 1: the curved intrinsic width-3/2 floor + transfer-artifact verdict
+CurvedIntrinsicWidth32.lean (176 lines, 30s): curvedRNC_intrinsic_width32_defect — the
+curved intrinsic (pullback-frame) width-3/2 per-q defect domination at curvedRNCMetric
+κ<0 (+Ric≠0 gate). VERDICT: ambient width-2 = chart-transfer artifact (intrinsic 3/2 ×
+displacement 4/3); width-4/3 needs the quadratic-prefactor parametrix estimate (not
+pure-Gaussian); the 4/3-quadratic→3/2-pure bridge already banked. std-3 ×2. raw 0 (9965).
+**Brick 2 (J4-673): (a) width-parametric rewrite of the transfer lemma
+gatedWitnessN1_hEboundW_le_of_good_CONST (target width w = 3/2·D) + (b) the (1+δ)
+shrunk-radius displacement (uniformFlowExp_hdisp_ball gives ≤4/3 by shrinking; need
+arbitrary (1+δ)) ⟹ brick 3: ambient constGate width-3/2 hEdom.** a₁=R/6 CONDITIONAL.

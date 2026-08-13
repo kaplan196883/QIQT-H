@@ -2586,3 +2586,12 @@ import QIQTH.CurvedCapstoneHCHFed
 -- arrows left: hDuhamel → hDConv → hCConv. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.LeviInterchangeTrunc
 import QIQTH.CurvedCapstoneHCHInterFed
+-- J4-672: width-3/2 campaign brick 1 (CurvedIntrinsicWidth32) — VERDICT: the banked
+-- width-2 curved bound is a CHART-TRANSFER ARTIFACT (intrinsic 3/2 × displacement 4/3
+-- = ambient 2); width-4/3 is NOT pure-Gaussian-reachable (below the 3/2 floor — needs
+-- the quadratic-prefactor parametrix estimate). Landed: curvedRNC_intrinsic_width32_defect
+-- — the curved intrinsic (pullback-frame) width-3/2 per-q defect domination at
+-- curvedRNCMetric κ<0, K={0} (+Ric≠0 non-vacuity). Brick 2 owed: width-parametric
+-- transfer + (1+δ) shrunk-radius displacement ⟹ ambient constGate width-3/2 hEdom.
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.CurvedIntrinsicWidth32
