@@ -2928,3 +2928,21 @@ import QIQTH.WhiteHJetContW
 -- 0-centered reach} is the honest labelled carry (satisfiable in the small-R
 -- regime at fat K). hcont still owes S-dom + Gap-B. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteHcontEAssembly
+-- J4-704: S-dom CLOSED + Gap-B CLOSED (wiring) + per-level hcont ASSEMBLED +
+-- htermBox-from-geometry capstone (WhiteSdomInner + WhiteGapBAssembly +
+-- WhiteHtermBoxGeom). white_hSdom: the S-dom slots (∃ bnd, integrable ∧ dominating)
+-- at the whitened kernel — dominator M(u)·𝟙_Kset from the banked const-2C envelope
+-- + whiteDefectKernel_baseNotMem_eq_zero (K-gate zero). Gap-B verdict CONFIRMED:
+-- hcontIter is wiring not analysis (integrand sees p only via p.1·u ⟹ compose the
+-- previous-level joint continuity) — white_hcontIter_ae from the recursion carrier.
+-- white_innerStep_hcont: per-level hcont via innerStep_cont_ae from S-dom ⊕ Gap-A
+-- (white_hcontE_ae_of_baseGeom) ⊕ Gap-B. white_htermBox_of_geometry: the whitened
+-- htermBox (∀k, reach-unrestricted) mapping per-level hcont over all rungs into
+-- white_htermBox_of_flowBall_extend_hcont. HONEST RESIDUAL: the recursion carrier
+-- hjoint (same-shape fixpoint vs this capstone — the Nat-induction tie NOT fabricated,
+-- deliberately left as the single structural input) + 6 labelled geometry certs
+-- {hgeom, base-0 flow-ball, vanishing cover, hpkg, hEmeas, hagree}.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteSdomInner
+import QIQTH.WhiteGapBAssembly
+import QIQTH.WhiteHtermBoxGeom
