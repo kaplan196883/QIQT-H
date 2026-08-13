@@ -26212,6 +26212,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WidthParametricGoodGate.uniformFlowExp_hdisp_ball_delta
 #print axioms QIQTH.WidthParametricGoodGate.gatedWitnessN1_hEboundW_le_of_good_W
 
+-- J4-674: WIDTH VERDICT RESOLVED (quoted-evidence) + the compose adapter
+-- (WidthCompose32). Verdict (B): the hDConv/hDuhamel suppliers' hAdom binder is
+-- HARDCODED width-3/2 — (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim(3/2·τ) (ConvCarriesDischarge:293,
+-- DuhamelLimitWiring:301) — and the gauge hgate is HARDCODED width-4/3 with the
+-- QUADRATIC radial-ratio prefactor (A1R6FromLabelledCurvedGauge:318-350), while
+-- hAdomHeat/hAdom2 are width-parametric. J4-673's "width-2-locked" sweep was a textual
+-- FALSE NEGATIVE (shapes spelled gaussDdim(3/2·τ), not baseKernelW 3/2). The J4-672
+-- intrinsic floor + J4-673 parametric transfer are the vindicated producers
+-- (baseKernelW κ 0 τ p q = gaussDdim(κτ)(p−q)). Landed:
+-- hAdom_width32_of_baseKernelW_global/_horizon — adapters turning a baseKernelW(3/2)
+-- domination into the EXACT hardcoded hAdom binder (√(3/2)ⁿ absorbed). The residual
+-- obstruction for the hAdom feed = ONE honest input (the width-3/2 witness-kernel
+-- domination, the labelled "hAdom global" wall). NOT a₁=R/6 (R/6 = labelled carrier).
+-- expected: standard 3
+#print axioms QIQTH.WidthCompose32.hAdom_width32_of_baseKernelW_global
+#print axioms QIQTH.WidthCompose32.hAdom_width32_of_baseKernelW_horizon
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

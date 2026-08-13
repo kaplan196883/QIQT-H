@@ -2605,3 +2605,15 @@ import QIQTH.CurvedIntrinsicWidth32
 -- width-3/2 (possibly as gaussDdim(3/2·τ) shapes the sweep missed) — RESOLVE FIRST.
 -- NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WidthParametricGoodGate
+-- J4-674: WIDTH VERDICT RESOLVED + compose adapter (WidthCompose32). Verdict (B):
+-- J4-671 was RIGHT — hDConv/hDuhamel hAdom is HARDCODED width-3/2
+-- ((A₀+A₁τ)·√(3/2)ⁿ·gaussDdim(3/2·τ)), the gauge hgate is HARDCODED width-4/3
+-- QUADRATIC, gauge hAdomHeat/hAdom2 parametric; J4-673's "width-2-locked" was a
+-- textual false negative (shapes spelled gaussDdim not baseKernelW). J4-672/673
+-- producers vindicated. Landed: hAdom_width32_of_baseKernelW_global/_horizon — the
+-- baseKernelW(3/2) → exact-hAdom-binder adapters; residual obstruction isolated to the
+-- single input: a baseKernelW(3/2) domination of the witness kernel. Ranked next walls:
+-- (1) hAdom-global width-3/2 witness domination; (2) (1+δ) ambient transfer; (3) the
+-- width-4/3 quadratic hgate producer; (4) hDelta + diff-under-∫ families.
+-- NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WidthCompose32

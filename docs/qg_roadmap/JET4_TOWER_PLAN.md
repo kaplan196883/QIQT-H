@@ -8268,3 +8268,16 @@ in ConvCarriesDischarge (hDConv supplier) + DuhamelLimitWiring/A1R6FromLabelledC
 sufficient for them (⟹ the width campaign was a false trail and the census attack
 reroutes); or do they need gaussDdim(3/2τ) near-diagonal (⟹ the tower rewrite is real).
 Then attack accordingly.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-674 [AF] — width verdict RESOLVED (quoted evidence) + the compose adapter
+Verdict (B): J4-671 RIGHT, J4-673 sweep = textual false negative. hDConv/hDuhamel hAdom
+= HARDCODED (A₀+A₁τ)·√(3/2)ⁿ·gaussDdim(3/2·τ); gauge hgate = HARDCODED width-4/3
+QUADRATIC; hAdomHeat/hAdom2 parametric. baseKernelW κ 0 = gaussDdim(κτ) so the J4-672/673
+producers are exactly right. WidthCompose32.lean (100 lines, 29s):
+hAdom_width32_of_baseKernelW_global/_horizon — baseKernelW(3/2) → the exact hAdom binder
+(√(3/2)ⁿ absorbed; horizon form matches the good-gate envelope). std-3 ×2. raw 0 (9967).
+**RANKED WALLS: (1) the hAdom-global width-3/2 witness-kernel domination (= the adapters'
+single input; the labelled "hAdom global" wall); (2) the (1+δ) ambient transfer of the
+intrinsic 3/2 floor (GateSqControl fixed-3/2 displacement inflates to 2); (3) the
+width-4/3 QUADRATIC hgate producer; (4) hDelta + diff-under-∫ families. J4-675 = wall (2)
+(the (1+δ) transfer — both primitives banked, this is the compose).** a₁=R/6 CONDITIONAL.
