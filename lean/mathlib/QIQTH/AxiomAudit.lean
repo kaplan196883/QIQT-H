@@ -26541,6 +26541,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHInnerContFinal.white_hInnerCont_final
 #print axioms QIQTH.WhiteHInnerContFinal.white_hInnerCont_final_witness_gate
 
+-- J4-692: THE CONVERGENCE TRIO (WhiteLeviConvergenceTrio) — extraction CONFIRMED
+-- (the J4-676 pattern): the pointwise a.e. summability of the signed Levi series at
+-- the whitened witness is dominated EVERYWHERE by the banked summable colC scalar
+-- series (iterE_row_bound_w, s^(k/2) ≤ 1 on the window), and the termwise z-slice
+-- measurability propagates from whiteDefectKernel_stronglyMeasurable —
+-- white_leviSeries_zmeas lands the whitened Levi z-slice AESM via
+-- leviSeries_stronglyMeasurable_of_termwise. white_witness_value_concrete_uniform:
+-- the witness joint measurability made radius-uniform (a,b inside the a,b-independent
+-- threshold). ★ white_hInnerCont_hmeas: hmeas DISCHARGED — the four-way shared radius
+-- c = min(δp, δS, δV, δW)/2; hmeas = (witness slice).mul (Levi z-slice) eventually in
+-- s. FINAL CARRY LIST: {hcont} ONLY (the whitened Levi TIME-continuity; the
+-- Weierstrass-M-test route checked — iterE_k time-continuity is not banked in a
+-- composable form; left as the honest single residual). + cp466 gate (n=2, κ=−1,
+-- fat K). Remaining: hcont + the K1TransportBudget/capstone piles. NOT a₁=R/6
+-- (R/6 = labelled carrier; flat tower only).
+-- expected: standard 3
+#print axioms QIQTH.WhiteLeviConvergenceTrio.white_witness_value_concrete_uniform
+#print axioms QIQTH.WhiteLeviConvergenceTrio.white_leviSeries_zmeas
+#print axioms QIQTH.WhiteLeviConvergenceTrio.white_hInnerCont_hmeas
+#print axioms QIQTH.WhiteLeviConvergenceTrio.white_hInnerCont_hmeas_witness_gate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

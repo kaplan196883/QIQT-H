@@ -8531,3 +8531,17 @@ wall under hmeas AND parts of the arrow census: does the co-emitted all-τ packa
 iterated-convolution machinery give the a.e. summability? the leviSeries termwise
 bounds ARE banked — the trio may be extraction like J4-676) / else the
 K1TransportBudget+capstone piles.** a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
+
+### J4-692 [AF] — THE CONVERGENCE TRIO LANDED (extraction confirmed)
+WhiteLeviConvergenceTrio.lean (325 lines, 59s): white_leviSeries_zmeas (the whitened
+Levi z-slice AESM — termwise measurability + everywhere-domination by the banked colC
+summable series) + white_witness_value_concrete_uniform ⟹ ★ white_hInnerCont_hmeas:
+hmeas DISCHARGED at the four-way shared radius min(δp,δS,δV,δW)/2. FINAL CARRY: {hcont}
+ONLY (Levi time-continuity; Weierstrass route needs iterE_k time-continuity, not banked
+composably). +cp466 gate. std-3 ×4. raw 0 (9986).
+**J4-693: hcont — the whitened Levi TIME-continuity (the last hInnerCont carry):
+scope whether iterE_k time-continuity extracts from the banked convolution machinery
+(the iterates are time-convolutions of continuous-in-time kernels; the Gaussian factor
+is smooth in s>0 — continuity under the integral via the same dominations?) + the
+uniform-on-compacts convergence (colC geometric) ⟹ M-test. Else the piles.**
+a₁=R/6 CONDITIONAL; R/6 = labelled carrier.

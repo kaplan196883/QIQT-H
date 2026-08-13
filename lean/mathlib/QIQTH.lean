@@ -2782,3 +2782,13 @@ import QIQTH.WhiteGatePackageCombined
 -- hcont = Levi time-continuity; open on the vanVleck side too). +cp466 gate.
 -- NOT a₁=R/6 (R/6 = carrier; flat tower only).
 import QIQTH.WhiteHInnerContFinal
+-- J4-692: THE CONVERGENCE TRIO LANDED (WhiteLeviConvergenceTrio) — extraction verdict
+-- CONFIRMED: white_leviSeries_zmeas (the whitened Levi z-slice AESM: termwise iterE
+-- measurability + pointwise summability dominated everywhere by the banked colC series
+-- via iterE_row_bound_w ⟹ leviSeries_stronglyMeasurable_of_termwise) +
+-- white_witness_value_concrete_uniform (the radius-uniform witness measurability) ⟹
+-- ★ white_hInnerCont_hmeas: hmeas DISCHARGED (four-way shared radius
+-- c = min(δp,δS,δV,δW)/2); carries now {hcont} ONLY (the whitened Levi time-continuity
+-- — the last carry; the Weierstrass route needs iterE_k time-continuity, not banked
+-- composably). +cp466 gate. NOT a₁=R/6 (R/6 = carrier; flat tower only).
+import QIQTH.WhiteLeviConvergenceTrio
