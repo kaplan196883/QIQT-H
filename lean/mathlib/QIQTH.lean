@@ -3518,3 +3518,27 @@ import QIQTH.HgateOpenFlowballAbsorb
 -- (convergence-trio, genuinely open), base geometry (A)}. NOT a₁=R/6 —
 -- CONDITIONAL.
 import QIQTH.FlatBaseAbsorb
+-- J4-748: THE GATED htriple-SEAM RE-PLUMB (A1R6FromDataGated). Trace: a1_R6_
+-- from_data's body is a ONE-LINE FinalA1SlotsAtConstGate.fire application — the
+-- raw-chart wall lives inside the bundle it's fed, at constGate_hS1 →
+-- GatedRepSFix.tripleHEmeas_concrete_v4 (each hcar carrier's Measurable(raw
+-- uniformInverseChart) conjunct — J4-746's "no supplier at any radius" wall).
+-- SHAPE MATCH POSITIVE: GatedChartMeasAudit.tripleHEmeas_concrete_v3 produces
+-- the IDENTICAL tripleHEmeas conclusion at S := constGate ... c — a drop-in
+-- for hS1, replacing the raw chart conjunct with {MeasurableSet K, Gc, Measurable
+-- Gc, guarded on-support agreement uniformInverseChart = Gc}. Rebuilt the
+-- BUNDLE BUILDER (not the capstone body, no proof-body surgery needed):
+-- constGate_assembly_data_from_data_gated (the swap) ⟹
+-- a1_R6_from_data_gated (★★★ SAME geometric conclusion (∑ᵢ ricci g gi i i 0)/6,
+-- SAME free-c constGate gate — the raw-chart .choose-opacity wall ELIMINATED
+-- from all three hcar carriers, replaced by a concrete SATISFIABLE Gc-
+-- measurability hypothesis). FULL geometry-elimination (via the geometry-only
+-- tripleHEmeas_Gc_concrete) SCOPED OUT honestly — needs an existential-c gate,
+-- cascading into re-discharging hgate/hpkgBound/hmemS0/hopenS0/slots at that
+-- SAME constructed c — a much larger non-local surgery, not attempted. Remaining
+-- on a1_R6_from_data_gated: {hgate, hpkgBound, hmemS0, hopenS0 (free-c, still
+-- carried at this SEPARATE capstone — not yet merged with the v4e absorption
+-- chain), hGauss, the reshaped-not-eliminated hcar* (now Gc-measurability, not
+-- the raw wall), slots (convergence-trio, genuinely open), base geometry}.
+-- NOT a₁=R/6 (R/6 = labelled carrier via the still-open slots census).
+import QIQTH.A1R6FromDataGated
