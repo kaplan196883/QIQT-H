@@ -8783,3 +8783,10 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - UNLOCKS: hbound2 in geodesicVariation_hNb_discharge/_exists_uncond derivable from IsCompact alone ⟹ the second-order base-jet ⟹ the hflowData small-window MVI. Remaining J3 carries in _exists_uncond: {hLip (SAME compactness engine — next micro-brick), tube containment hmem, Jacobi hKb}.
 - All 4 std-3 (my chk-file); AxiomAudit 10025 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-725: J3 brick 3 — hLip by the same engine + the hbound2 consumer wire (geodesicVariation_exists_uncond with compact-hypothesis-only constants); then the tube containment + Jacobi bound assessment; then the base-jet → contraction MVI.
+
+## J4-725 (see commit) — J3 brick 3: the compact-hypothesis CONSUMER WIRE [AF]
+- GeodesicVariationCompact.lean (4 decls): `geodesicField_fst_fderiv_bddOn_compact` (first-deriv engine), `geodesicField_lipschitzOnWith_compact` (★ Lipschitz of F ITSELF — the genuinely missing variant; banked patterns were for DF), `geodesicVariation_exists_uncond_compact` (★★ THE WIRE: {hbound2, hLip, hKb, hK0} ALL compactness-produced; hKb DISCHARGED beyond expectation — hmem 0 puts the base trajectory in S), `_closedBall` (cp466).
+- Honest carries: {hconv, hcomp, hYode, hVode, hV0, hIC} = the SUPPLIED ODE/Jacobi structural data + hmem (flow tube containment — short-time Grönwall a-priori, NOT banked; CompactTubeLemma = point-set open tubes only).
+- NEXT-BRICK SCOPING (recorded): quadratic base-jet ‖Y s t − Y 0 t − s·V t‖ ≤ Cn·s²·e^K₀ via expJet_linVariation_residual_deriv (ρ' = DF(Y 0)ρ + N) + geodesicVariation_hNb_discharge (Cn now fully compactness-produced) + inhomogeneous Grönwall; then the small-window MVI ⟹ the hflowData contraction.
+- All 4 std-3 (my chk-file); AxiomAudit 10026 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-726: J3 brick 4 — the quadratic base-jet (the Grönwall integration) and/or hmem (the short-time tube containment — a-priori bound from the field Lipschitz + Grönwall, same machinery).
