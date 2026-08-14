@@ -26958,6 +26958,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.jacobiEndpoint_base_near_id_confined
 #print axioms QIQTH.ExpMap.baseFlow_endpoint_fderiv_near_id
 
+-- J4-728: J3 brick 6 part (1) — the windowed Lipschitz: per-base near-id (window-
+-- uniform constants, q-parametric) ⟹ u ↦ F u − u LipschitzOnWith (Dc·e^K) on the
+-- convex window by MVI. Bricks 2–4 (clamp/ContractingWith/agreement) downstream.
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.BaseFlowLipTrunc.baseDisplacement_lipschitzOnWith_window
+#print axioms QIQTH.BaseFlowLipTrunc.baseDisplacement_lipschitzOnWith_window_nearId
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

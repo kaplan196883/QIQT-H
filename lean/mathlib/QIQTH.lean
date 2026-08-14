@@ -3269,3 +3269,15 @@ import QIQTH.GeodesicQuadraticBaseJet
 -- (base-truncation of Ψ off the window + Kc<1 numeric) + legs (ii)/(iii) +
 -- {hVode, hmem} structural carriers. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.BaseFlowNearId
+-- J4-728: J3 BRICK 6 part (1) — the windowed global Lipschitz
+-- (BaseFlowLipschitzTruncation). PER-W UNIFORMITY VERDICT: the J4-727 near-id
+-- constants (M₂, K, Dc) are window-uniform (compactness-supplied), so the bound
+-- holds at EVERY base u in the convex window by q-parametric re-instantiation.
+-- baseDisplacement_lipschitzOnWith_window (★ the MVI upgrade: per-base near-id
+-- package ⟹ u ↦ F u − u LipschitzOnWith M on the convex window, via
+-- Convex.lipschitzOnWith_of_nnnorm_hasFDerivWithin_le) + the Dc·e^K-phrased
+-- corollary matching BaseFlowNearId verbatim. Downstream (bricks 2–4): the
+-- 1-Lipschitz closed-ball clamp → ContractingWith (global) → truncated-solver
+-- self-consistency + true-flow agreement → hflowData (i); then legs (ii)/(iii).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.BaseFlowLipschitzTruncation
