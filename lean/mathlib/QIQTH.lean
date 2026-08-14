@@ -3201,3 +3201,17 @@ import QIQTH.WhiteHsolveFlowContraction
 -- different gate family; K1TransportBudget = the k=1 shape-verdict wall, fix =
 -- p-dependent transported u₁ J4-636). NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteFinal8JointWitness
+-- J4-722: THE SHARP REACH LEMMA (WhiteSharpReach + WhiteFinal8SharpWitness).
+-- uniformFlowExp_approximatesLinearOn_sharp (★★ c-SHRINKING-constant AL from the
+-- radius-parametric near-id Jacobian uniformFlowExp_fderiv_near_id_quant + MVI —
+-- unlike the crude fixed-constant banked AL whose reach capped below c/2) +
+-- uniformFlowExp_sharp_reach (★★ closedBall (φ_q 0) ((1−C_L c)(3c/4)) ⊆
+-- φ_q '' ball 0 c via surjOn_closedBall, ε = 3c/4) + sharp_reach_window_arith
+-- (2C_D c + 3C_L c < 1 ⟹ (c/2)(1+C_D c) < (1−C_L c)(3c/4); sympy-checked
+-- rhs−lhs = (c/4)(1−2C_D c−3C_L c) — honest correction: TWO distinct constants).
+-- white_final8_joint_witness_sharp (★★★ the reach triple {R,hballS,hballC,hbR}
+-- DISCHARGED internally at R = (1−C_L c)(3c/4); small-c window folded into the
+-- shared min via ρwin = 1/(2C_D+3C_L+2)) ⟹ THE JOINT WITNESS CARRIES ONLY
+-- hflowData (the J3 base-varying contraction blocker). NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.WhiteSharpReach
+import QIQTH.WhiteFinal8SharpWitness

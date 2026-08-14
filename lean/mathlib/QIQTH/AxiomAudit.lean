@@ -26910,6 +26910,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteFinal8JointWitness.white_final8_joint_witness
 #print axioms QIQTH.WhiteFinal8JointWitness.white_final8_forcedCollar_reach_gt
 
+-- J4-722: the sharp reach lemma — c-shrinking ApproximatesLinearOn constant +
+-- surjOn reach (1−C_L c)(3c/4) > c/2 for small c (sympy-checked window arith) ⟹
+-- white_final8_joint_witness_sharp: the reach triple discharged internally; the
+-- joint witness carries ONLY hflowData (the J3 blocker). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteSharpReach.uniformFlowExp_approximatesLinearOn_sharp
+#print axioms QIQTH.WhiteSharpReach.uniformFlowExp_sharp_reach
+#print axioms QIQTH.WhiteSharpReach.sharp_reach_window_arith
+#print axioms QIQTH.WhiteFinal8SharpWitness.white_final8_joint_witness_sharp
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
