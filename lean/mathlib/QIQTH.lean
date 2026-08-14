@@ -3244,3 +3244,16 @@ import QIQTH.GeodesicTaylorCompact
 -- compactness-produced) hNb bound + inhomogeneous Grönwall ⟹ ‖ρ s t‖ ≤ Cn s² e^K₀.
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.GeodesicVariationCompact
+-- J4-726: J3 BRICK 4 — THE QUADRATIC BASE-JET EXPOSED (GeodesicQuadraticBaseJet).
+-- Scoping: the Grönwall was fully assembled in-repo (geodesicVariation_residual_
+-- bound runs Mathlib's inhomogeneous Grönwall); the EXACT quadratic bound existed
+-- as a throwaway intermediate (hbnd inside geodesicVariation_exists) — this brick
+-- is an EXPOSURE + τ-generalization + compactness wiring, not a new Grönwall.
+-- geodesicVariation_quadratic_baseJet_raw (∀s ∀τ∈[0,1], ‖Y s τ − Y 0 τ − s·V τ‖
+-- ≤ Cn·s²·e^K) + _compact (★ ∃ C ≥ 0 compactness-internal — absorbs the J4-724/725
+-- engines' M₂/K₀/K) + _closedBall (cp466). hmem VERDICT: stays carried — the
+-- escape-time a-priori is not derivable from the fixed-[0,1] hYode (needs a
+-- re-parametrized short window [0,T], separate brick). MVI-BRICK INTERFACE
+-- recorded: v-parametrized base-jet + sphere-uniform Jacobi bound ‖V‖ ≤ e^K ⟹
+-- ∃ Kc ∀v ∀sphere-w, ‖∂_w(φ_w v − w)‖ ≤ Kc. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.GeodesicQuadraticBaseJet
