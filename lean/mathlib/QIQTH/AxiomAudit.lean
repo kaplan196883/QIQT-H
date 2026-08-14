@@ -26996,6 +26996,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.baseFlow_hder_family
 #print axioms QIQTH.ExpMap.baseDisplacement_windowed_lipschitz_concrete
 
+-- J4-732: the truncated z₀-dependent solver keystone — final8's global-contraction
+-- demand identified as THE wall (unprovable off-K); the truncated Banach solver
+-- (clamp = id on the bad set ⟹ true-flow agreement) ⟹ final9 = the honest
+-- terminal feed from SATISFIABLE truncated data. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHsolveFlowTruncated.hsolveFlow_of_truncatedContractionData
+#print axioms QIQTH.WhiteHsolveFlowTruncated.white_hInnerCont_closed_final9
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

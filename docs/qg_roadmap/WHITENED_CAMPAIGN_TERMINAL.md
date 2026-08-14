@@ -311,3 +311,76 @@ the cheapest route is the two-step lift above.
 
 *Ledger: J4-723 (this writeup).  std-3 throughout; budget raw 0; nothing committed here; nothing
 wired into `QIQTH.lean`/`AxiomAudit`.*
+
+---
+
+## 7. `hflowData` DISCHARGED via the truncated solver (J4-724 … J4-732)
+
+> ⚠ Same firewall as §0: this is **NOT** `a₁ = R/6`.  `R/6` stays a labelled carrier.  What follows
+> discharges the **single** `hflowData` analytic input of §6 down to the concrete, *satisfiable*
+> truncated contraction data, by building the missing Banach keystone.
+
+### 7.1 The interface verdict (why `final8` was the wrong target)
+
+`white_hInnerCont_closed_final8` fed the **z₀-independent** abstract solver
+`WhiteHsolveFlowContraction.hsolveFlow_of_contractionData` with `Ψ = uniformFlowExp`.  Its `hflowData`
+clause (i) therefore demanded a **GLOBAL** `ContractingWith Kc` of the *un-truncated* true flow
+`w ↦ z₀ − uniformFlowExp w v + w` on **all** of `Point n`.  That is **unprovable**: the base-displacement
+Lipschitz bank supplies contraction only on a **window**, and off the compact base set `K` the flow has
+no small-constant control.  `final8`'s `hflowData` is thus a *satisfiability wall*, not a discharge
+target.
+
+### 7.2 The J3 truncation bricks (J4-729 … J4-731, banked)
+
+The bricks were built to *avoid* the global demand, replacing the true flow with the **z₀-dependent
+truncated map** `Ψtrunc z₀ w v := φ (coordClamp z₀ r w) v − coordClamp z₀ r w + w` (sup-ball
+coordinate-clamp centred at `z₀`):
+
+- `BaseFlowGlobalContraction` — `coordClamp` (sup-ball metric projection), `LipschitzWith 1`,
+  `truncatedSolverMap_contractingWith_solverShape` (global `ContractingWith M` from a window-Lipschitz
+  displacement with `M < 1`).
+- `BaseFlowTruncationWindow` — `coordClamp_eq_self_of_mem_closedBall` (clamp = id on the window),
+  `badSet_subset_closedBall` (frontier bad set localizes into `closedBall z₀ r` via the gate reach
+  `S w ⊆ closedBall w ρ`, `ρ ≤ r`), `truncated_agrees_on_badSet`, `uniformFlowExp_vLipschitz_uniform`
+  (uniform-in-base v-slot Lipschitz), `baseDisplacement_norm_bound`.
+- `BaseFlowHderFamily` — the σ-windowed base-slot Fréchet near-identity family and
+  `baseDisplacement_windowed_lipschitz_concrete` (`LipschitzOnWith (Dc·e^{Kc}).toNNReal` for
+  `u ↦ φ_u v − u` on the window).
+
+But these produce contraction for the **clamp-centred, z₀-dependent** map — which the
+z₀-independent-`Ψ` solver cannot express.  The keystone was missing.
+
+### 7.3 The keystone (J4-732, `WhiteHsolveFlowTruncated.lean`, std-3)
+
+- `hsolveFlow_of_truncatedContractionData` — ★★ **the z₀-dependent truncated Banach solver.**  From
+  the gate reach (`∀ w, S w ⊆ closedBall w ρ`, `ρ ≤ r`) and per-`z₀` truncated data (clamp-centred
+  `ContractingWith Kc`, uniform v-Lipschitz of `v ↦ φ (coordClamp z₀ r w) v`, and the **true-flow**
+  frontier→sphere containment), it produces exactly `final7`'s `hsolveFlow`.  Proof: the bad-set
+  localization forces `coordClamp z₀ r w = w` on the frontier bad set, so the truncated map *equals*
+  the true flow precisely where the containment leg lives; the Banach fixed point of the globally
+  contracting truncated map, plus `fixedPoint_lipschitz_in_map` and `fixedPoint_unique`, lands the bad
+  base inside a Lipschitz image of the sphere.
+- `white_hInnerCont_closed_final9` — ★★★ **the correct terminal feed.**  `final7` with `hsolveFlow`
+  replaced by the *satisfiable* truncated contraction data `hflowTrunc` + the gate reach.  This is what
+  the walled `final8` could not be: it carries only the window-local, truncation-clamped contraction the
+  J3 bricks actually supply.
+
+Both std-3 (`propext`, `Classical.choice`, `Quot.sound`), no `sorry`, no new axioms, no `:= True`, no
+vacuous hypothesis, no existing file edited, nothing committed, nothing wired into
+`QIQTH.lean`/`AxiomAudit`.
+
+### 7.4 What remains (honest)
+
+`hflowTrunc` is **satisfiable** (unlike `final8`'s `hflowData`), and every clause is supplied by a
+banked brick: (i) `truncatedSolverMap_contractingWith_solverShape` ∘
+`baseDisplacement_windowed_lipschitz_concrete` under the smallness numeric `Dc·e^{Kc} < 1` (c small,
+folded into `ρwin`) with window `closedBall z₀ r`; (ii) `uniformFlowExp_vLipschitz_uniform` (needs
+`coordClamp z₀ r w ∈ K`, i.e. the window in the σ-interior of the enlarged base set); (iii) the gate's
+per-base frontier→sphere-image containment (a geometric property of `S`).  The **residual assembly**
+is the z₀-localization plumbing: for `z₀` far from `Kset` the frontier bad set is empty (containment is
+`∅ ⊆ …`, trivial), and for `z₀` near `Kset` the window sits in the σ-interior — the same off-base/base
+case-split pattern as J4-703.  This is mechanical family-assembly, not a new analytic input; the
+Banach keystone that made it *possible* is now banked.
+
+*Ledger: J4-732 (`WhiteHsolveFlowTruncated.lean`, 2 decls, std-3, ~62 s build).  Nothing committed;
+nothing wired into `QIQTH.lean`/`AxiomAudit`.  ⚠ NOT `a₁ = R/6`.*

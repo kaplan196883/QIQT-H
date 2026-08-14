@@ -3327,3 +3327,19 @@ import QIQTH.BaseFlowTruncationWindow
 -- smuggled). Downstream = instantiate at the curved gate + the global truncated
 -- contraction fold + the hflowData record ⟹ feed final8. NOT a₁=R/6.
 import QIQTH.BaseFlowHderFamily
+-- J4-732: THE TRUNCATED z₀-DEPENDENT SOLVER KEYSTONE (WhiteHsolveFlowTruncated).
+-- ⚠ WALL VERDICT: final8's hflowData demanded GLOBAL ContractingWith of the
+-- UN-truncated flow on all of Point n — unprovable (no off-K control); the whole
+-- J4-729/730/731 bank produces the z₀-DEPENDENT TRUNCATED contraction (clamp
+-- centred at z₀), which the z₀-independent solver cannot express — the missing
+-- keystone was the solver itself. hsolveFlow_of_truncatedContractionData (★★★
+-- the truncated Banach solver: gate reach + per-z₀ clamp-centred ContractingWith
+-- + uniform v-Lipschitz + true-flow frontier containment ⟹ final7's hsolveFlow;
+-- the localization forces clamp = id on the bad set ⟹ truncated = true flow
+-- exactly where the containment leg lives) ⟹ white_hInnerCont_closed_final9
+-- (★★★ final7 fed from SATISFIABLE truncated data hflowTrunc + gate reach —
+-- the honest terminal feed final8 could not be; final8 remains as the
+-- global-demand variant). z₀-localization = mechanical (far z₀ ⟹ empty bad set;
+-- near z₀ ⟹ σ-interior window — the J4-703 case-split pattern). Doc §7 appended.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHsolveFlowTruncated
