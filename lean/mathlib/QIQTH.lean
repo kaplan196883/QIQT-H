@@ -3468,3 +3468,22 @@ import QIQTH.CurvedA1HmassoneMassUnified
 -- group (D′) base-metric pullback + F4 residues, all base geometry}.
 -- NOT a₁=R/6 — CONDITIONAL.
 import QIQTH.HgateFlowballAbsorb
+-- J4-744: FLOWBALL DOUBLE-ABSORPTION (HgatePkgFlowballAbsorb). a1_R6_from_data_v4c
+-- = v4b MINUS hpkgBoundG. RADIUS-OPACITY WALL DISSOLVED (unlike hKSmeas/hcar*):
+-- the width-2 pkg bound is NOT an independent supplier's ∃-radius object — it's a
+-- WIDTH-WIDENING CONSEQUENCE of hgate itself, at hgate's OWN gate: hgate (width-
+-- 4/3 quad-affine) → hEdom (width-3/2 Gaussian, HgateAffineRepair.hEdom_vanVleck_
+-- of_hgate_affine) → hpkgBound (width-2, gaussDdim_le_gaussDdim_chart (3/2,2) +
+-- affine→(1+t') rescale) — no second opaque existential to align. All three of
+-- hgate, hpkgBound, hmemS0 discharged at ONE flow-ball gate — strict improvement
+-- over both v3 (carries hgate) and v4b (carries hpkgBoundG). Option B (the
+-- convergence-trio) SCOPED BLOCKED: A1R6GateSlots bundles {hDuhamel,hDConv,hCConv}
+-- shallow; the core-threading theorems (DuhamelCoreThreaded/TerminalCoverage/
+-- MomentWallCoverage) REPACKAGE not discharge — still carry hBoundaryLim (Levi/
+-- true-kernel convergence), hmassone (Seeley-DeWitt delta-mass→1), hCross, hInter
+-- as explicit hyps; WhiteLeviConvergenceTrio proves only census LEAVES
+-- (measurability/value/inner-continuity), not the trio itself. Matches the prior
+-- deep-research verdict: genuinely open, standard-textbook-not-yet-formalized.
+-- Remaining v4c carries: {hKSmeas, hcarTau/hcarField/hcarField2, hopenS0, slots
+-- (convergence-trio), group D′ pullback+F4}. NOT a₁=R/6 — CONDITIONAL.
+import QIQTH.HgatePkgFlowballAbsorb

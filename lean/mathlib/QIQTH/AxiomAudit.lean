@@ -27069,6 +27069,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HgateFlowballAbsorb.a1_R6_from_data_v4b
 
+-- J4-744: flowball DOUBLE-absorption — a1_R6_from_data_v4c drops hpkgBoundG too
+-- (width-2 pkg = width-widening consequence of hgate at ITS OWN gate, no second
+-- opaque existential — the radius-opacity wall dissolved here, unlike hKSmeas/
+-- hcar*). Convergence-trio SCOPED BLOCKED (genuinely open, matches prior
+-- deep-research verdict). NOT a₁=R/6 — CONDITIONAL.
+-- expected: standard 3
+#print axioms QIQTH.HgatePkgFlowballAbsorb.a1_R6_from_data_v4c
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
