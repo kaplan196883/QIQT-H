@@ -8883,3 +8883,10 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - J4-639's "genuinely open" framing is CONFIRMED not stale — if anything understated (analytic, not just "global C^∞").
 - `whiteU1=R/6` REMAINS conditional on {hgTop, hgiTop, hsrc}. Other capstone debt {h0,h1,hΔ,Duhamel,fat-K,co-instantiation} unchanged, orthogonal to this question.
 - NEXT J4-738: PIVOT off the R/6-smoothness thread (genuinely walled, not a near-term target) — the mass pre-ρ carriers {rS,hKball,hSact,hWslice,hDom} (center-branch hmassone, richer base now) or the K1TransportBudget k=1 shape wall (J4-636 transported u₁ direction); reassess grep-first for either.
+
+## J4-738 (68eae3dd) — mass pre-ρ carrier UNIFICATION; Option B stale [AF]
+- Option B (K1TransportBudgetW order-1 t² shape wall) SCOPED and found ALREADY CLOSED: `white_K1BudgetW_unconditional_curvedWitness` (J4-664) already implements the exact "order-1 witness" fix — no live wall there; not pursued.
+- Option A: CurvedA1HmassoneReach.lean (153L, 3 decls): `constGate_zero_mem_iff_reach` (gate-activation ↔ origin-reach, pure unfold) ⟹ ★★★ `curved_hmassone_final_from_reach` (reproduces curved_hmassone_final_at_gate's hmassone limit with {hSact, hWslice} BOTH discharged from ONE origin-reach input — hSact = constGate membership definitionally = reach; hWslice via the banked carry-free `curvedRNC_hWslice_carryFree`) + `curved_hmassone_reach_satisfiable` (cp466, fat curved base).
+- Remaining pre-ρ carriers: {origin-reach (one satisfiable K-uniform injectivity-radius input), hDom (reducible to phase-transfer via curvedRNC_baseWitness_dom/CurvedRNCPhaseTransfer — follow-on), rS/hKball (trivially fat)}.
+- All 3 std-3 (my chk-file); AxiomAudit 10040 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-739: fold hDom into the origin-reach unification too (via curvedRNC_baseWitness_dom + CurvedRNCPhaseTransfer) ⟹ the WHOLE mass pre-ρ pile down to one geometric input; or the joint cp466 audit combining this with the whitened-tower certs; or a TERMINAL WRITEUP refresh consolidating tonight's full arc.
