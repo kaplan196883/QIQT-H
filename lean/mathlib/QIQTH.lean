@@ -3487,3 +3487,17 @@ import QIQTH.HgateFlowballAbsorb
 -- Remaining v4c carries: {hKSmeas, hcarTau/hcarField/hcarField2, hopenS0, slots
 -- (convergence-trio), group D′ pullback+F4}. NOT a₁=R/6 — CONDITIONAL.
 import QIQTH.HgatePkgFlowballAbsorb
+-- J4-745: hopenS0 + hKSmeas DOUBLE-ABSORBED (HgateOpenFlowballAbsorb).
+-- hgate_flowball_width43_open: the augmented producer — runs the SAME width-4/3
+-- construction and additionally EXPORTS ∀ q∈K, IsOpen (flow-ball image) AND the
+-- joint gate-graph MeasurableSet at its OWN produced c (no second opaque
+-- existential — the radius-opacity wall that blocked hKSmeas_concrete's
+-- independent δm is DISSOLVED by folding δm INTO the producer's gate-radius
+-- min: ρc := min(min(min rN δ₀) rI) δm — shrinking c is monotone-safe for the
+-- width-4/3 bound). a1_R6_from_data_v4d = v4c MINUS {hopenS0, hKSmeas}. FIVE
+-- binders now discharged at one flow-ball gate: {hgate, hpkgBound, hmemS0,
+-- hopenS0, hKSmeas}. Remaining: {hcarTau/hcarField/hcarField2 (∀-over-gates
+-- jet suppliers), slots (the convergence-trio — genuinely blocked, no
+-- geometry-only supplier), group D′ (hgPull pullback + F4 residues), base
+-- geometry}. NOT a₁=R/6 — CONDITIONAL.
+import QIQTH.HgateOpenFlowballAbsorb

@@ -27077,6 +27077,15 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HgatePkgFlowballAbsorb.a1_R6_from_data_v4c
 
+-- J4-745: hopenS0 + hKSmeas DOUBLE-absorbed — the augmented producer
+-- hgate_flowball_width43_open dissolves the radius-opacity wall by folding
+-- hKSmeas_concrete's δm into the producer's own gate-radius min. a1_R6_from_
+-- data_v4d = v4c minus {hopenS0, hKSmeas}. FIVE binders now discharged at one
+-- flow-ball gate. NOT a₁=R/6 — CONDITIONAL.
+-- expected: standard 3
+#print axioms QIQTH.HgateOpenFlowballAbsorb.hgate_flowball_width43_open
+#print axioms QIQTH.HgateOpenFlowballAbsorb.a1_R6_from_data_v4d
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
