@@ -26976,6 +26976,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseFlowGlobalContraction.truncatedSolverMap_contractingWith
 #print axioms QIQTH.BaseFlowGlobalContraction.truncatedSolverMap_contractingWith_solverShape
 
+-- J4-730: J3 brick 6 (4a)+(4b) + clause (c) — window self-consistency, bad-set
+-- localization/agreement (clamp inert on the bad set ⟹ true-flow transfer),
+-- uniform v-Lipschitz (Cv = 1 + C_L·c, ∀-base). ODE existence verdict: geodesic
+-- + Jacobi both banked AND proved ⟹ the ∀-base hder family = mechanical
+-- plumbing, no missing input. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.BaseFlowTruncationWindow.truncated_fixedPoint_in_window
+#print axioms QIQTH.BaseFlowTruncationWindow.badSet_subset_closedBall
+#print axioms QIQTH.BaseFlowTruncationWindow.truncated_agrees_on_badSet
+#print axioms QIQTH.BaseFlowTruncationWindow.uniformFlowExp_vLipschitz_uniform
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

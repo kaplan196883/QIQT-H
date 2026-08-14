@@ -3296,3 +3296,19 @@ import QIQTH.BaseFlowLipschitzTruncation
 -- J3 base-varying link. Clauses (a) numeric, (c) Lipschitz-in-v, (d) frontier +
 -- brick (4) self-consistency/agreement remain. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.BaseFlowGlobalContraction
+-- J4-730: J3 BRICK 6 (4a)+(4b) + CLAUSE (c) (BaseFlowTruncationWindow).
+-- VERDICTS: displacement bound ∀-BASE uniform C_D (NearIsometryBudget); the sharp
+-- AL ∀-BASE with identity linear part (WhiteSharpReach); ODE existence BANKED +
+-- PROVED (geodesic: uniformFlowTube_spec_ode via the a-priori confinement;
+-- Jacobi: geodesicJacobi_exists — a genuine Picard one-step + gluing, NOT an
+-- axiom) ⟹ the ∀-base hder family is CONSTRUCTIBLE, no missing existence input —
+-- the residual is mechanical re-anchoring plumbing. LANDED:
+-- coordClamp_eq_self_of_mem_closedBall (the pivot) +
+-- truncated_fixedPoint_in_window (★ 4a self-consistency) +
+-- baseDisplacement_norm_bound (the B supplier) + badSet_subset_closedBall +
+-- truncated_agrees_on_badSet (★ 4b localization/agreement — clamp inert on the
+-- bad set ⟹ Ψtrunc = the true flow there, the (iii) transfer) +
+-- uniformFlowExp_vLipschitz_uniform (★ clause (c): Cv = 1 + C_L·c, ∀-base).
+-- hflowData state: (b) contraction supplied + (4a/4b) + (c) done; remaining =
+-- the ∀-base hder plumbing + the full record assembly. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.BaseFlowTruncationWindow
