@@ -3215,3 +3215,18 @@ import QIQTH.WhiteFinal8JointWitness
 -- hflowData (the J3 base-varying contraction blocker). NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.WhiteSharpReach
 import QIQTH.WhiteFinal8SharpWitness
+-- J4-724: J3 BRICK 1+2 — the uniform 2nd-order Taylor remainder with the constant
+-- OBTAINED BY COMPACTNESS (GeodesicTaylorCompact). Scoping: GeodesicSmoothDep's
+-- header checkpoint was partially stale — the C² remainder was banked but CARRIED
+-- hbound2 (the ∂²F sup) as an explicit hypothesis; this brick produces it.
+-- geodesicField_snd_fderiv_bddOn_compact (the compactness engine — via
+-- iteratedFDeriv 2 to route around the nested-CLM topology diamond, transported
+-- by norm_iteratedFDeriv_fderiv) + geodesicField_fderiv_lipschitzOnWith (DF
+-- Lipschitz on convex compact) ⟹ geodesicField_taylor_remainder_uniform (★ the
+-- flagged lemma: ∃ M ≥ 0, ‖F a − F b − DF(b)(a−b)‖ ≤ M‖a−b‖² on convex compact,
+-- NO carried constant) + the closedBall cp466 witness. UNLOCKS: hbound2 in
+-- geodesicVariation_hNb_discharge/_exists_uncond derivable from IsCompact alone —
+-- the second-order base-jet feeding the hflowData small-window MVI contraction.
+-- Remaining J3 carries there: {hLip (same engine — next micro-brick), tube
+-- containment hmem, Jacobi hKb}. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.GeodesicTaylorCompact

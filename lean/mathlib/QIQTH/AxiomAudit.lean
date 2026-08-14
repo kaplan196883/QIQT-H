@@ -26920,6 +26920,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteSharpReach.sharp_reach_window_arith
 #print axioms QIQTH.WhiteFinal8SharpWitness.white_final8_joint_witness_sharp
 
+-- J4-724: J3 brick 1+2 — the uniform 2nd-order Taylor remainder of the geodesic
+-- field on convex compact with the constant OBTAINED BY COMPACTNESS (removes the
+-- carried hbound2; iteratedFDeriv-2 route around the nested-CLM topology diamond)
+-- + the Lipschitz-DF brick + closedBall satisfiability witness. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_lipschitzOnWith
+#print axioms QIQTH.ExpMap.geodesicField_taylor_remainder_uniform
+#print axioms QIQTH.ExpMap.geodesicField_taylor_remainder_uniform_closedBall
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
