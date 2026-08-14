@@ -8890,3 +8890,11 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - Remaining pre-ρ carriers: {origin-reach (one satisfiable K-uniform injectivity-radius input), hDom (reducible to phase-transfer via curvedRNC_baseWitness_dom/CurvedRNCPhaseTransfer — follow-on), rS/hKball (trivially fat)}.
 - All 3 std-3 (my chk-file); AxiomAudit 10040 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-739: fold hDom into the origin-reach unification too (via curvedRNC_baseWitness_dom + CurvedRNCPhaseTransfer) ⟹ the WHOLE mass pre-ρ pile down to one geometric input; or the joint cp466 audit combining this with the whitened-tower certs; or a TERMINAL WRITEUP refresh consolidating tonight's full arc.
+
+## J4-739 (96ec59cd) — hDom FOLDED into two banked reach-family facts [AF]
+- `curvedRNC_baseWitness_dom` (J4-531) discharges the assembled-witness domination shape internally (amplitude det^{1/4}, radial cutoff), carrying exactly {hMod, hPhase}.
+- CurvedA1HmassoneMassUnified.lean (199L, 4 decls): ★★ `curved_hmassone_mass_unified` (the exact hmassone limit with hDom REPLACED by {hMod, hPhase}) + `_hMod_banked` (re-export `curvedRNC_moduli_bound` J4-532, compact chart-reach) + `_hPhase_banked` (re-export `curvedRNC_phase_transfer` J4-533, near-isometry collar) + `_curved_satisfiable`.
+- ORIGIN-REACH NOT SHARED with J4-738: hDom rests on the chart-image reach of `uniformInverseChart` (a DISTINCT-but-also-banked reach-family object), not the flow-exp origin-reach — the mass pile collapses to TWO distinct banked reach-family inputs, not one shared input.
+- FINAL carrier list of the fully-unified mass side: {origin-reach (2 radii, J4-738), rS/hKball (trivial), hMod (BANKED), hPhase (BANKED), κ<0 fat base}. hDom is GONE.
+- All 4 std-3 (my chk-file); AxiomAudit 10041 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-740: TERMINAL WRITEUP CONSOLIDATION — the ledger has grown to ~55 entries since J4-686; synthesize a top-level summary (whitened tower terminal + audited; R/6 pivot discharged to a genuine analytic-order frontier; mass pile down to two banked reach-family inputs; honest full remaining map) into a new or refreshed doc, cross-linked from WHITENED_CAMPAIGN_TERMINAL.md and WHERE_WE_ARE.md.
