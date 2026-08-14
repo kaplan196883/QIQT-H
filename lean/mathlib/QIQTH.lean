@@ -3396,3 +3396,28 @@ import QIQTH.WhiteFlowTruncNearClauses
 import QIQTH.ImageAnnulusFrontier
 import QIQTH.BaseFlowHderFamilyFixedRadius
 import QIQTH.WhiteHflowTruncConditional
+-- J4-736: THE PIVOT — whiteU1(0)=R/6 DISCHARGED to the whitened-smoothness
+-- frontier (WhiteU1R6Conditional). SCOPING: htr_adapter is NOT the u₁ identity
+-- itself — the actual flat identity is VanVleckCancellation.
+-- transportCoeff_vanVleck_one_diag / OmegaHsrcC4cAudit._infty. whiteGauss_
+-- discharged supplies the INVERSE-metric radial identity (proven); the FORWARD
+-- germ htr_from_hGauss needs comes instead from the sibling
+-- whitePullbackMetric_gauss (also proven) via a one-line ball→eventually step.
+-- whiteMetric/whiteMetricInv/whiteTheta/whiteTransportOp/whiteU1 unfold
+-- DEFINITIONALLY to the exact LHS of transportCoeff_vanVleck_one_diag_infty at
+-- g:=whiteMetric, gi:=whiteMetricInv. Of 7 gauge/2-jet hypotheses, SIX are
+-- banked (hg0/hgi0/hdg0/hgsymm ← whitePullbackMetric_{zero,symm,pd_zero};
+-- htr/hGauss ← htr_from_hGauss + whitePullbackMetric_gauss; hΓ derived from
+-- hdg0). whiteU1_eq_ricci6_of_smooth: hu1 reduced to EXACTLY the three global
+-- smoothness antecedents {hgTop : ContDiff ⊤ whiteMetric, hgiTop : ContDiff ⊤
+-- whiteMetricInv, hsrc : ContDiff ∞ transport source} — matching the repo's OWN
+-- already-cited J4-639 frontier ("no global ContDiff of whitePullbackMetric at
+-- ANY order" — currently only ContDiffAt-4/IsC2At local facts banked), NOT new
+-- debt. whiteChartKernel1_diagonal_a1_discharged: the diagonal-a1 theorem with
+-- hu1 supplied (no free hu1). Value proven = (∑ᵢ ricci ĝ_q ĝ⁻¹_q i i 0)/6 = the
+-- whitened metric's Ricci-trace at chart centre = R (since ĝ_q(0)=δ). cp466:
+-- antecedent shape ⊆ the known-inhabited flat census (curvedRNCMetric satisfies
+-- it; κ=0 trivially). ⚠ NOT a₁=R/6 UNCONDITIONAL — hu1 is discharged but a₁=R/6
+-- still owes: the whitened-smoothness frontier itself + {h0,h1,hΔ} + Duhamel-
+-- split integrability + fat-K piles + capstone co-instantiation.
+import QIQTH.WhiteU1R6Conditional
