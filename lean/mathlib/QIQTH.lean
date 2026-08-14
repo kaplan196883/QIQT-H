@@ -3421,3 +3421,20 @@ import QIQTH.WhiteHflowTruncConditional
 -- still owes: the whitened-smoothness frontier itself + {h0,h1,hΔ} + Duhamel-
 -- split integrability + fat-K piles + capstone co-instantiation.
 import QIQTH.WhiteU1R6Conditional
+-- J4-738: THE MASS PRE-ρ CARRIER UNIFICATION (CurvedA1HmassoneReach). Option B
+-- (K1TransportBudgetW order-1 t² shape wall) CONFIRMED already closed — the
+-- suggested fix (order-1 witness) is the very content of the banked
+-- white_K1BudgetW_unconditional_curvedWitness (J4-664, K1 UNCONDITIONAL at a
+-- genuinely curved witness); no live wall there. Pivoted to Option A:
+-- constGate_zero_mem_iff_reach (the gate-activation ↔ origin-reach bridge, pure
+-- unfold) ⟹ curved_hmassone_final_from_reach (★★★ reproduces
+-- curved_hmassone_final_at_gate's hmassone limit with {hSact, hWslice} BOTH
+-- discharged from a SINGLE origin-reach input: hSact = constGate origin-
+-- membership = reach definitionally; hWslice via the banked carry-free
+-- curvedRNC_hWslice_carryFree at the produced radius — zero measurability
+-- residual) + curved_hmassone_reach_satisfiable (cp466 non-vacuity, fat curved
+-- base). Remaining pre-ρ carriers: {origin-reach (one satisfiable geometric
+-- input, K-uniform injectivity radius), hDom (reducible to phase-transfer via
+-- curvedRNC_baseWitness_dom/CurvedRNCPhaseTransfer — follow-on), rS/hKball
+-- (trivially fat)}. NOT a₁=R/6 (R/6 = labelled carrier; carrier bookkeeping only).
+import QIQTH.CurvedA1HmassoneReach

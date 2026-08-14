@@ -27043,6 +27043,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteU1R6Conditional.whiteU1_eq_ricci6_of_smooth
 #print axioms QIQTH.WhiteU1R6Conditional.whiteChartKernel1_diagonal_a1_discharged
 
+-- J4-738: mass pre-ρ carrier unification — Option B (K1 order-1 shape wall)
+-- CONFIRMED already closed (white_K1BudgetW_unconditional_curvedWitness,
+-- J4-664); pivoted to Option A: curved_hmassone_final_from_reach reduces
+-- {hSact, hWslice} of curved_hmassone_final_at_gate to ONE origin-reach input
+-- (via the banked constGate identity + carry-free hWslice). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.CurvedA1HmassoneReach.constGate_zero_mem_iff_reach
+#print axioms QIQTH.CurvedA1HmassoneReach.curved_hmassone_final_from_reach
+#print axioms QIQTH.CurvedA1HmassoneReach.curved_hmassone_reach_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
