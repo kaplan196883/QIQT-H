@@ -27061,6 +27061,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HmassoneMassUnified.curved_hmassone_mass_unified
 #print axioms QIQTH.CurvedA1HmassoneMassUnified.curved_hmassone_mass_unified_curved_satisfiable
 
+-- J4-741: flowball hgate absorbed — a1_R6_from_data_v4b (hgate + hmemS0
+-- discharged via hgate_width43_quad_affine_flowball + uniformFlowExp_zero at the
+-- flow-ball gate). hKSmeas co-absorption BLOCKED by a genuine radius-opacity
+-- mismatch between the two producers — honestly reported, not forced. NOT
+-- a₁=R/6 — CONDITIONAL.
+-- expected: standard 3
+#print axioms QIQTH.HgateFlowballAbsorb.a1_R6_from_data_v4b
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

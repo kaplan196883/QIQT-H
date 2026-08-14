@@ -3452,3 +3452,19 @@ import QIQTH.CurvedA1HmassoneReach
 -- list: {origin-reach (2 radii), rS/hKball (trivial), hMod (banked), hPhase
 -- (banked), κ<0 fat base}. hDom is GONE. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.CurvedA1HmassoneMassUnified
+-- J4-741: FLOWBALL hgate ABSORBED (HgateFlowballAbsorb). a1_R6_from_data_v4b —
+-- a v2-descended ∃-capstone (complementary reduction branch to v3, NOT strictly
+-- stronger — the two producers commit to different gates): hgate (the width-4/3
+-- quadratic-affine on-gate domination) + hmemS0 (origin gate membership) BOTH
+-- discharged from geometry via hgate_width43_quad_affine_flowball (J4-677) +
+-- uniformFlowExp_zero. The explicit P₀,P₁,a,b,c,C binders no longer appear on
+-- the public surface (now internal ∃-produced). hKSmeas co-absorption
+-- ATTEMPTED and CORRECTLY BLOCKED: hKSmeas_concrete's δ₀-bounded ∀c shape and
+-- the flowball producer's opaque-∃ c cannot be reconciled — a genuine radius-
+-- alignment wall (the WhiteGated co-instantiation machinery / J4-707 territory),
+-- not a mechanical wire — reported honestly, not forced. Remaining carries:
+-- {hKSmeas, hpkgBoundG (width-2), hopenS0, hcarTau/hcarField/hcarField2, slots
+-- (A1R6GateSlots — the convergence-trio lives here, NEVER claimed closed),
+-- group (D′) base-metric pullback + F4 residues, all base geometry}.
+-- NOT a₁=R/6 — CONDITIONAL.
+import QIQTH.HgateFlowballAbsorb
