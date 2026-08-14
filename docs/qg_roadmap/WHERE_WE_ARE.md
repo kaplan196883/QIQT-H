@@ -252,3 +252,5 @@ verified half; the un-verified half is exactly where quantum gravity lives.
 ⚠ Scope firewall: this is a status document; it changes no result's labels; every HAVE above
 carries its original conditions (capacity postulate, hTkk, Clausius floor, carried BW/CHM/IW where
 applicable, finite corners where stated); NOT QG.
+
+> **J4-723 (whitened `hInnerCont` campaign, terminal).** The whitened inner-pairing interior-time continuity is fully audited at the concrete curved witness (`white_hInnerCont_closed_final8` + `white_final8_joint_witness_sharp`), carrying exactly ONE analytic input `hflowData` (the J3 base-varying-flow uniform contraction); ~35 bricks took the carry list ~40 → 1, with 8+ proved impossibility/vacuity certificates. ⚠ NOT `a₁=R/6` — R/6 stays a labelled carrier, curved capstone CONDITIONAL. Full writeup + `hflowData`/J3 scoping: `docs/qg_roadmap/WHITENED_CAMPAIGN_TERMINAL.md`.
