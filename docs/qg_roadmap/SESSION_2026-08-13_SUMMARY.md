@@ -218,7 +218,39 @@ stated precisely and without inflation:
 
 ---
 
-*Ledger: J4-740 (this writeup). Docs only; no Lean; nothing committed; nothing wired into
-`QIQTH.lean`/`AxiomAudit`. Sources: `JET4_TOWER_PLAN.md` J4-686…J4-739,
-`WHITENED_CAMPAIGN_TERMINAL.md` §1–8, `A1_R6_RESIDUE_STATUS.md`, `WHERE_WE_ARE.md`.
+## 5. Addendum — the "finish it" cycle on the FLAT chain (J4-741 … J4-748)
+
+Following user direction to keep grinding, this cycle targeted a *different* capstone from Arcs A–C
+above: `A1R6FromData`'s strongest instance, `HGaussAbsorb.a1_R6_from_data_v2` (which had already
+absorbed `hGauss` before this session). This is the **flat/RNC-center** chain referenced in §3f and
+the firewall above — not the whitened/curved chain of Arcs A–C. Nine consecutive hypothesis-binder
+audits were run, each checked by TYPE not name (a recurring trap in this ~350-file repo) before any
+Lean was written.
+
+**Seven real reductions landed, one reusable technique discovered, two correct negative results:**
+
+| Item | Outcome | Decl / file |
+|---|---|---|
+| `hgate` (on-gate domination) | ABSORBED from geometry | `a1_R6_from_data_v4b`, `HgateFlowballAbsorb.lean` |
+| `hpkgBound` (width-2 package) | ABSORBED — derived as a width-widening consequence of `hgate` at its own gate, not an independent supplier | `a1_R6_from_data_v4c`, `HgatePkgFlowballAbsorb.lean` |
+| `hmemS0` | ABSORBED (trivial, `uniformFlowExp_zero`) | same, `v4b` |
+| `hopenS0`, `hKSmeas` | BOTH ABSORBED — the *reusable pattern*: fold an independent supplier's opaque-∃ radius into the flow-ball producer's own gate-radius `min(...)`, re-derive at the unified (smaller) radius | `a1_R6_from_data_v4d`, `HgateOpenFlowballAbsorb.lean` |
+| Group D′ (base-metric pullback + 4 smoothness/gauge residues) | SHRUNK 8 items → 1 (`hgPull` only) — instantiated at the flat base `gb = gib = δ`, where all five smoothness/symmetry/gauge facts are already-banked triv­ialities | `a1_R6_from_data_v4e`, `FlatBaseAbsorb.lean` |
+| `hcarTau`/`hcarField`/`hcarField2` (jet/measurability carriers) | first attempt: **non-fit** (the "fold the radius" pattern does not apply — the blocker is a *definitional* `.choose`-opacity wall with no supplier at any radius, not a radius mismatch) | scoped only, `J4-746` |
+| Same carriers, second attempt | **ELIMINATED** the wall by swapping the internal `hS1` measurability source for an equivalent gated route (`GatedChartMeasAudit.tripleHEmeas_concrete_v3`) — same conclusion, same gate, wall replaced by a concrete satisfiable hypothesis | `a1_R6_from_data_gated`, `A1R6FromDataGated.lean` (a *separate* capstone from the `v4e` line — not yet unified) |
+| Alternate capstone `RightInverseGeneral.a1_R6_assembled_v2'`/`v6` | REJECTED as a shortcut — its conclusion is *weaker* (abstract `Ric` tied only by a hypothesis, not the geometric Ricci tensor; a free/assumed gate, not the constructed one; the convergence-trio *unpacked inline*, not resolved) | scoped only, `J4-747` |
+| `slots : A1R6GateSlots` (the convergence-trio: true-kernel existence, Levi-series convergence, Seeley–DeWitt identification) | CONFIRMED genuinely open — no geometry-only supplier exists anywhere in the repo; every "core-threading" theorem repackages the same hypotheses rather than discharging them | scoped only, `J4-744`, matches the independent deep-research verdict from earlier this session |
+
+**What's left, precisely.** Two genuinely separate items, both honest:
+1. **Unification debt (mechanical, not mathematical):** the wall-free `hcar*` route (`a1_R6_from_data_gated`) and the other five absorptions (`v4e`) live in two different theorems. Merging them into one maximal capstone is real but bounded future work — no new ideas needed.
+2. **The convergence-trio (`slots`):** the one item in this entire session, across both the whitened chain (Arcs A–C) and this flat chain, that is not formalization debt. It is standard textbook heat-kernel technique (Levi 1907, Gilkey, Berline–Getzler–Vergne) that has not yet been formalized in Lean, bottoming out on the same classical-but-Mathlib-absent dependency flagged in §4: smooth (`C^k`) dependence of ODE solutions on initial conditions beyond first order.
+
+No hypothesis anywhere in this cycle was forced, hidden, or declared closed without a build-verified `std-3` witness. Every negative result (`hKSmeas` vs. `hgate`'s radius; `hcar*`'s first attempt; the alternate-capstone rejection) is recorded with its precise structural reason, not glossed over.
+
+---
+
+*Ledger: J4-740 (Arcs 1–4 writeup), J4-741…748 (Arc 5, this addendum). Docs only; no `QIQTH.lean`/
+`AxiomAudit` wiring changes beyond the individual bricks' own imports (each independently `std-3`
+verified). Sources: `JET4_TOWER_PLAN.md` J4-686…J4-748, `WHITENED_CAMPAIGN_TERMINAL.md` §1–8,
+`A1_R6_RESIDUE_STATUS.md`, `WHERE_WE_ARE.md`.
 ⚠ NOT `a₁ = R/6`.*
