@@ -3438,3 +3438,17 @@ import QIQTH.WhiteU1R6Conditional
 -- curvedRNC_baseWitness_dom/CurvedRNCPhaseTransfer — follow-on), rS/hKball
 -- (trivially fat)}. NOT a₁=R/6 (R/6 = labelled carrier; carrier bookkeeping only).
 import QIQTH.CurvedA1HmassoneReach
+-- J4-739: hDom FOLDED into two elementary banked reach-family facts
+-- (CurvedA1HmassoneMassUnified). curvedRNC_baseWitness_dom (J4-531) discharges
+-- the assembled-witness domination shape internally (amplitude det^{1/4}, radial
+-- cutoff), carrying exactly {hMod (order-1 transport-coeff modulus, BANKED —
+-- curvedRNC_moduli_bound J4-532, compact chart-reach), hPhase (Gaussian-phase
+-- transfer, BANKED — curvedRNC_phase_transfer J4-533, near-isometry collar)}.
+-- curved_hmassone_mass_unified: the exact hmassone limit of the J4-738 reach-
+-- unified version with hDom REPLACED by {hMod, hPhase}. ORIGIN-REACH NOT SHARED:
+-- hDom rests on a DISTINCT reach-family object (the chart-image reach of
+-- uniformInverseChart, not the flow-exp origin-reach) — the mass pile collapses
+-- to TWO distinct-but-both-banked reach-family inputs, not one. FINAL carrier
+-- list: {origin-reach (2 radii), rS/hKball (trivial), hMod (banked), hPhase
+-- (banked), κ<0 fat base}. hDom is GONE. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.CurvedA1HmassoneMassUnified

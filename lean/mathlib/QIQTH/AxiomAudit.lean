@@ -27053,6 +27053,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedA1HmassoneReach.curved_hmassone_final_from_reach
 #print axioms QIQTH.CurvedA1HmassoneReach.curved_hmassone_reach_satisfiable
 
+-- J4-739: hDom folded into {hMod, hPhase} — both BANKED (curvedRNC_moduli_bound,
+-- curvedRNC_phase_transfer), on the chart-image reach (a distinct-but-banked
+-- reach-family object from the origin-reach). curved_hmassone_mass_unified: the
+-- hmassone limit with hDom gone. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.CurvedA1HmassoneMassUnified.curved_hmassone_mass_unified
+#print axioms QIQTH.CurvedA1HmassoneMassUnified.curved_hmassone_mass_unified_curved_satisfiable
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
