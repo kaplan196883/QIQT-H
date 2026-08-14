@@ -3257,3 +3257,15 @@ import QIQTH.GeodesicVariationCompact
 -- recorded: v-parametrized base-jet + sphere-uniform Jacobi bound ‖V‖ ≤ e^K ⟹
 -- ∃ Kc ∀v ∀sphere-w, ‖∂_w(φ_w v − w)‖ ≤ Kc. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.GeodesicQuadraticBaseJet
+-- J4-727: J3 BRICK 5 — the base-slot NEAR-IDENTITY core (BaseFlowNearId).
+-- geodesicField_fderiv_center_pos_zero (DF((q,0))·(δ,0) = 0 — the RNC-centre
+-- vanishing kills the position seed) + jacobiEndpoint_base_near_id_bound (★
+-- ‖(V 1).1 − δ‖ ≤ Dc·‖δ‖·e^K via the banked two-point Jacobi modulus vs the
+-- constant flat field) + _confined (★ Dc = M₂·β via MVI; β = O(‖v‖) = O(c) ⟹
+-- Dc·e^K SMALL) + baseFlow_endpoint_fderiv_near_id (★ ‖L − id‖ ≤ Dc·e^K where
+-- L = the genuine base-slot endpoint CLM from the banked geodesicBasepoint
+-- capstone — the base-slot analogue of uniformFlowExp_fderiv_near_id_quant).
+-- The analytic core of hflowData (i) DERIVED; residue = the GLOBAL Lipschitz
+-- (base-truncation of Ψ off the window + Kc<1 numeric) + legs (ii)/(iii) +
+-- {hVode, hmem} structural carriers. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.BaseFlowNearId

@@ -26948,6 +26948,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicVariation_quadratic_baseJet_compact
 #print axioms QIQTH.ExpMap.geodesicVariation_quadratic_baseJet_closedBall
 
+-- J4-727: J3 brick 5 — the base-slot near-identity core: RNC-centre vanishing
+-- (DF((q,0))·(δ,0) = 0) + Jacobi endpoint near-id (‖(V 1).1 − δ‖ ≤ Dc‖δ‖e^K,
+-- Dc = M₂β = O(c)) + the base-slot endpoint CLM bound ‖L − id‖ ≤ Dc·e^K —
+-- the analytic core of hflowData (i); residue = global Lipschitz truncation +
+-- Kc<1 numeric + legs (ii)/(iii) + structural carriers. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.geodesicField_fderiv_center_pos_zero
+#print axioms QIQTH.ExpMap.jacobiEndpoint_base_near_id_confined
+#print axioms QIQTH.ExpMap.baseFlow_endpoint_fderiv_near_id
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
