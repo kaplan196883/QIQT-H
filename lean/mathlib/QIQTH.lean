@@ -3501,3 +3501,20 @@ import QIQTH.HgatePkgFlowballAbsorb
 -- geometry-only supplier), group D′ (hgPull pullback + F4 residues), base
 -- geometry}. NOT a₁=R/6 — CONDITIONAL.
 import QIQTH.HgateOpenFlowballAbsorb
+-- J4-747: dual scoping — Option A REJECTED (htriple/RightInverseGeneral.a1_R6_
+-- assembled_v2'/v6: WEAKER conclusion — abstract Ric tied only by htr, not
+-- geometric ricci g gi; free gate not the flow-ball ∃-constructed one; slots is
+-- UNPACKED not resolved [the convergence-trio fully present, just inline]; group
+-- D′ sidestepped only by directly ASSUMING flat-RNC — trades the raw-chart wall
+-- for a degraded conclusion. Not a drop-in improvement; flagged for a future
+-- genuine re-plumb, not executed). Option B EXECUTED (FlatBaseAbsorb):
+-- flatBase := δ; christoffel_contDiff (QIQTH.Curvature) discharges hCb from
+-- metric/inverse smoothness ⟹ ALL FIVE gb-side F4 residues trivial at flat base.
+-- a1_R6_from_data_v4e = v4d specialized to gb:=gib:=flatBase — group D′ SHRUNK
+-- 8 items → 1 (only hgPull, the defining equation, remains; satisfiable/non-
+-- vacuous per cp466). Same conclusion as v4d (geometric ricci g gi, ∃ a b c).
+-- Remaining v4e carries: {hgPull, hcarTau/hcarField/hcarField2 (raw-chart
+-- .choose wall, no supplier at any radius, confirmed genuinely blocked), slots
+-- (convergence-trio, genuinely open), base geometry (A)}. NOT a₁=R/6 —
+-- CONDITIONAL.
+import QIQTH.FlatBaseAbsorb

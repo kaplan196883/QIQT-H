@@ -27086,6 +27086,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HgateOpenFlowballAbsorb.hgate_flowball_width43_open
 #print axioms QIQTH.HgateOpenFlowballAbsorb.a1_R6_from_data_v4d
 
+-- J4-747: group D′ SHRUNK 8 items → 1 — a1_R6_from_data_v4e specializes v4d to
+-- the flat base gb=gib=δ, discharging all five F4 residues via banked
+-- christoffel_contDiff; only hgPull (the defining equation) remains. Option A
+-- (htriple/v2' re-plumb) REJECTED — weaker conclusion (abstract Ric, unpacked
+-- slots, assumed flatness). NOT a₁=R/6 — CONDITIONAL.
+-- expected: standard 3
+#print axioms QIQTH.FlatBaseAbsorb.flatBase_christoffel_contDiff
+#print axioms QIQTH.FlatBaseAbsorb.a1_R6_from_data_v4e
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
