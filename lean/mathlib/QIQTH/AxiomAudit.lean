@@ -27021,6 +27021,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteFlowTruncNearClauses.white_flowTruncNear_vLip_clause
 #print axioms QIQTH.WhiteFlowTruncNearClauses.white_flowTruncNear_contr_clause_of_windowLip
 
+-- J4-735: the last hflowData-thread increment (bounded sprint) — the annulus
+-- lemma (no injectivity needed) + fixed-radius v-independent smallness (Dc =
+-- O(‖v‖) exposed) + the honest conditional restatement (hflowTruncNear unbundled
+-- into 3 explicit hypotheses {hcontrLip, hvLip, hfrontImg}); abstract-theorem
+-- verdict = existence-only, not the magnitude bound. STOPPING POINT reached.
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.ImageAnnulusFrontier.frontier_image_ball_subset_image_sphere
+#print axioms QIQTH.ExpMap.baseFlow_hder_family_fixedRadius
+#print axioms QIQTH.ExpMap.baseDisplacement_windowed_lipschitz_fixedRadius
+#print axioms QIQTH.WhiteHflowTruncConditional.white_hInnerCont_final10_conditional
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

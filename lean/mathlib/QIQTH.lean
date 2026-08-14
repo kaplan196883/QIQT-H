@@ -3374,3 +3374,25 @@ import QIQTH.WhiteHflowTruncConcrete
 -- the abstract S has no data. final10 stays the terminal with hflowTruncNear
 -- decomposed. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteFlowTruncNearClauses
+-- J4-735: THE LAST hflowData-THREAD INCREMENT (bounded sprint per gpt-5.6-sol
+-- strategic review). ImageAnnulusFrontier (the routine clause-(iii) annulus
+-- lemma — NO injectivity needed, verified) + BaseFlowHderFamilyFixedRadius
+-- (the fixed-radius v-INDEPENDENT smallness — mirrors UniformFlowJacobianBound's
+-- phase-ball trick; Dc = M₂fix·C₀·‖v‖ EXPOSED as O(‖v‖) at the type level,
+-- constants quantified outside ∀v) + WhiteHflowTruncConditional
+-- (white_hInnerCont_final10_conditional — the opaque hflowTruncNear UNBUNDLED
+-- into three explicit, individually-tractable geometric hypotheses:
+-- {hcontrLip = fixed-radius contraction smallness M<1, hvLip = the genuine WIDTH
+-- WALL v-slot Lipschitz modulus, hfrontImg = frontier→sphere-image via the
+-- banked annulus lemma}). ABSTRACT-THEOREM VERDICT (from the escalated redirect):
+-- autonomousFlow_endpoint_hasFDerivAt_window_exists gives only first-jet
+-- EXISTENCE, not the near-identity MAGNITUDE bound — the field-specific Grönwall
+-- step is still needed; the banked baseFlow_endpoint_fderiv_near_id_window
+-- already bundles both, correctly reused. STOPPING POINT: the whitened tower is
+-- now a transparent conditional entailment on 3 named hypotheses, not an opaque
+-- bundle — further hflowData grinding is DEPRIORITIZED per strategic direction;
+-- next effort → mass pre-ρ / K1TransportBudget / whiteU1(0)=R/6 discharge.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.ImageAnnulusFrontier
+import QIQTH.BaseFlowHderFamilyFixedRadius
+import QIQTH.WhiteHflowTruncConditional

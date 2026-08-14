@@ -384,3 +384,95 @@ Banach keystone that made it *possible* is now banked.
 
 *Ledger: J4-732 (`WhiteHsolveFlowTruncated.lean`, 2 decls, std-3, ~62 s build).  Nothing committed;
 nothing wired into `QIQTH.lean`/`AxiomAudit`.  ⚠ NOT `a₁ = R/6`.*
+
+---
+
+## 8. J4-735 — the honest terminal restatement + the `hflowData`-thread STOPPING POINT
+
+This section records the **bounded sprint** J4-735 (external strategic review, gpt-5.6-sol): unbundle
+the opaque `hflowTruncNear` into explicit named geometric hypotheses, land the cheap supporting bricks,
+and **stop** the `hflowData` thread here.  Four deliverables, all std-3 (`propext`, `Classical.choice`,
+`Quot.sound`), no `sorry`, no new axioms, no `:= True`, no vacuous hypothesis, no existing file edited,
+nothing committed, nothing wired into `QIQTH.lean`/`AxiomAudit`.
+
+### 8.1 (A) the elementary image-annulus lemma — `QIQTH/ImageAnnulusFrontier.lean`
+
+- `image_closedBall_diff_image_ball_subset_image_sphere` — for ANY `f : α → β` (no injectivity needed
+  for this direction), `f '' closedBall c r \ f '' ball c r ⊆ f '' sphere c r`.
+- `frontier_image_ball_subset_image_sphere` — the clause-(iii) corollary: if `f '' ball c r` is open and
+  `closure (f '' ball) ⊆ f '' closedBall`, then `frontier (f '' ball c r) ⊆ f '' sphere c r`.
+- `closedBall_diff_ball_eq_sphere` — the metric annulus identity.
+
+The missing elementary lemma of J4-734 (the frontier→sphere-image leg's set-theoretic core), now
+supplied.  Verified: **injectivity is NOT needed** for the direction clause (iii) consumes.
+
+### 8.2 (B) the fixed-radius smallness re-derivation — `QIQTH/BaseFlowHderFamilyFixedRadius.lean`
+
+- `baseFlow_hder_family_fixedRadius` — ★★★ the v-INDEPENDENT `hder` family.  Mirroring the banked
+  fixed-radius phase-ball technique of `UniformFlowJacobianBound.uniformFlowExp_fderiv_uniform_bound`
+  (a single compact `S = closedBall (c₀,0) (C₀·ρ_K + Rwin + σ)` sized from `K`/`ρ_K`/`C₀` alone, BEFORE
+  picking `v`, using `‖v‖ ≤ ρ_K` for confinement), the second-jet field bound `M₂fix` and field constant
+  `Kc` are SINGLE constants quantified OUTSIDE the `∀ v`, and the near-identity bound is the MANIFESTLY
+  linear-in-`‖v‖` shape `‖L − id‖ ≤ (M₂fix·C₀·‖v‖)·e^{Kc}`.  The once-buried `Dc = M₂·C₀·‖v‖` `O(‖v‖)`
+  smallness is now EXPOSED at the type level.
+- `baseDisplacement_windowed_lipschitz_fixedRadius` — the corollary: for every `‖v‖ ≤ ρ_K`,
+  `u ↦ φ_u v − u` is `LipschitzOnWith ((M₂fix·C₀·‖v‖)·e^{Kc}).toNNReal` with the SAME v-independent
+  `M₂fix, Kc`.  As `‖v‖ → 0` the Lipschitz constant `→ 0` linearly, at a fixed rate.
+
+**Abstract-theorem verdict (per coordinator escalation).**  `UniformFlowSecondFDeriv`'s field-agnostic
+`autonomousFlow_endpoint_hasFDerivAt_window_exists` produces only the first-jet EXISTENCE
+(`∃ L, HasFDerivAt (fun δ => W δ t) L 0`); it does **not** produce the near-identity MAGNITUDE bound
+`‖L − id‖ ≤ Dc·e^K` that the contraction smallness needs (that bound comes from the field-specific
+Grönwall step `jacobiEndpoint_base_near_id_bound`, driven by the coefficient-deviation `hAd`).  The
+banked brick `BaseFlowHderFamily.baseFlow_endpoint_fderiv_near_id_window` already BUNDLES both (it calls
+the first-jet CLM construction internally AND the near-identity bound).  So the fixed-radius mirror
+correctly reuses that bundled brick; the abstract theorem would only collapse the first-jet-existence
+sub-step, not the near-identity bound — nothing further to collapse for THIS sprint's deliverable.
+
+### 8.3 (C) the honest terminal restatement — `QIQTH/WhiteHflowTruncConditional.lean`
+
+- `white_hInnerCont_final10_conditional` — ★★★ `white_hInnerCont_closed_final10` with the opaque bundled
+  `hflowTruncNear` REPLACED by three transparent, individually-satisfiable geometric hypotheses (each
+  quantified over the inhabited frontier bad set only):
+  - **`hcontrLip` (the fixed-radius SMALLNESS leg)** — an explicit contraction modulus `M < 1` with
+    `u ↦ φ_u v − u` `LipschitzOnWith M` on `closedBall z₀ r` for every `v ∈ sphere 0 c`.  This is the
+    once-buried `Dc` smallness, now a named `M < 1` hypothesis (dischargeable from (B)'s
+    `baseDisplacement_windowed_lipschitz_fixedRadius` whenever `M₂fix·C₀·c·e^{Kc} < 1`).
+  - **`hvLip` (the WIDTH leg)** — the uniform v-slot Lipschitz modulus `Cv` of the clamp-based flow
+    (dischargeable from `white_flowTruncNear_vLip_clause` given `closedBall z₀ r ⊆ Kset` + reach bump).
+  - **`hfrontImg` (the FRONTIER/INJECTIVITY leg)** — the null-frontier→sphere-image containment (fed by
+    (A)'s `frontier_image_ball_subset_image_sphere` when `S w = φ_w '' ball 0 c`).
+
+  Internally the bundle is reconstructed: `hcontrLip` → the clamp-centred `ContractingWith` clause via
+  `white_flowTruncNear_contr_clause_of_windowLip`; `hvLip`/`hfrontImg` supply clauses (ii)/(iii)
+  verbatim; then `final10` is applied.
+
+### 8.4 (D) THE STOPPING POINT — honest conditional status of the whitened tower
+
+The whitened inner-pairing interior-time continuity tower is now, at its concrete curved witness, a
+**conditional entailment** on **three explicit geometric hypotheses** — NOT an opaque bundle of
+"base-varying-flow contraction data":
+
+> **`white_hInnerCont_final10_conditional`**: *given* {`hcontrLip` (fixed-radius contraction smallness
+> `M < 1` on the truncation window), `hvLip` (uniform v-slot Lipschitz width modulus), `hfrontImg`
+> (null-frontier → sphere-image containment)}, the whitened continuity holds.
+
+Of these: `hvLip` is a **width** input (genuine σ-interior-of-`Kset` geometry — J4-676's WIDTH WALL, an
+honest un-removable geometric fact); `hcontrLip` is the **fixed-radius smallness** input, now with its
+`O(‖v‖)` linear rate EXPOSED by (B) rather than buried in an existential; `hfrontImg` is the **frontier**
+input, whose set-theoretic core is now the banked elementary lemma (A).
+
+**Per the strategic review, this is the STOPPING POINT for the `hflowData` thread.**  The tower's
+terminal residue is now three named, individually satisfiable geometric hypotheses (width · fixed-radius
+smallness · frontier), each with its banked discharge tool identified.  Further effort should go to the
+**other** walls of the curved capstone (mass-pre-`ρ`, `K1TransportBudget`, the arrow census) or to
+writeup — **not** to deeper `hflowData` grinding.  This section is the last `hflowData`-thread increment.
+
+⚠ **NONE of this is `a₁ = R/6`.**  `R/6` remains a labelled carrier (`whiteU1(0) = R/6`), untouched; the
+whitened-continuity campaign is one discharged analytic input of the CONDITIONAL curved capstone, not an
+`R/6` proof.
+
+*Ledger: J4-735 (bounded sprint) — `ImageAnnulusFrontier.lean` (3 decls, ~72 s), `BaseFlowHderFamilyFixedRadius.lean`
+(2 decls, ~61 s), `WhiteHflowTruncConditional.lean` (1 decl, ~65 s), all std-3; `WHITENED_CAMPAIGN_TERMINAL.md`
+§8 appended.  Nothing committed; nothing wired into `QIQTH.lean`/`AxiomAudit`.  ⚠ NOT `a₁ = R/6`.  LAST
+`hflowData`-thread increment per strategic direction.*
