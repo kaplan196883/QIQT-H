@@ -8790,3 +8790,11 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - NEXT-BRICK SCOPING (recorded): quadratic base-jet ‖Y s t − Y 0 t − s·V t‖ ≤ Cn·s²·e^K₀ via expJet_linVariation_residual_deriv (ρ' = DF(Y 0)ρ + N) + geodesicVariation_hNb_discharge (Cn now fully compactness-produced) + inhomogeneous Grönwall; then the small-window MVI ⟹ the hflowData contraction.
 - All 4 std-3 (my chk-file); AxiomAudit 10026 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-726: J3 brick 4 — the quadratic base-jet (the Grönwall integration) and/or hmem (the short-time tube containment — a-priori bound from the field Lipschitz + Grönwall, same machinery).
+
+## J4-726 (see commit) — J3 brick 4: THE QUADRATIC BASE-JET [AF]
+- SCOPING WIN: the Grönwall was fully in-repo (geodesicVariation_residual_bound = Mathlib norm_le_gronwallBound_of_norm_deriv_right_le on ρ' = DF(Y₁)ρ + N); the EXACT quadratic bound existed as the throwaway hbnd inside geodesicVariation_exists — brick = exposure + τ-generalization + compactness wiring.
+- GeodesicQuadraticBaseJet.lean (3 decls): `_raw` (∀s ∀τ∈[0,1], ‖Y s τ − Y 0 τ − s·V τ‖ ≤ Cn·s²·e^K), ★ `_compact` (∃ C ≥ 0 compactness-internal, absorbing M₂/K₀/K from the J4-724/725 engines; carries = the J4-725 wire's structural data {hconv,hcomp,hYode,hVode,hV0,hIC,hmem}), `_closedBall` (cp466).
+- hmem VERDICT: stays carried — escape-time a-priori not derivable from fixed-[0,1] hYode (needs re-parametrized [0,T], T compactness-chosen — separate geometric brick).
+- MVI INTERFACE (recorded): ∃ Kc, ∀ v ∈ compact region, ∀ w ∈ sphere: ‖∂_w(φ_w v − w)‖ ≤ Kc — consumes (1) this brick's uniform-in-τ C·s² seed (⟹ ∂_w = the Jacobi value V) + (2) the sphere-uniform Jacobi bound ‖V^{v,w} τ‖ ≤ e^K; Kc = the compactness sup of (1)×(2).
+- All 3 std-3 (my chk-file); AxiomAudit 10027 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-727: J3 brick 5 — the v-parametrized + sphere-uniform assembly ⟹ the MVI/contraction ‖∂_w(φ_w v − w)‖ ≤ Kc < 1 (small window) — feeding hflowData (i); and/or the hmem short-window brick; and/or the Jacobi Φ_v construction (hVode supplier).
