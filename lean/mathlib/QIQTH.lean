@@ -3312,3 +3312,18 @@ import QIQTH.BaseFlowGlobalContraction
 -- hflowData state: (b) contraction supplied + (4a/4b) + (c) done; remaining =
 -- the ∀-base hder plumbing + the full record assembly. NOT a₁=R/6 (R/6 = carrier).
 import QIQTH.BaseFlowTruncationWindow
+-- J4-731: THE ∀-BASE hder FAMILY (BaseFlowHderFamily). INTERFACE VERDICT: the
+-- base-slot Fréchet cores were GLOBAL-δ only (no real confined tube can satisfy
+-- them — base u+δ leaves K for large δ), while the velocity slot had σ-windowed
+-- versions. RESOLUTION: the σ-windowed base-slot adapters BUILT (core/exists/
+-- position/near-id — mirror of the velocity window, position seed (δ,0)) — the
+-- gap CLOSED, not named. baseFlow_hder_family (★ ∀ u ∈ closedBall c₀ Rwin in the
+-- σ-INTERIOR of K: ∃ L, HasFDerivAt (φ_· v) L u ∧ ‖L − id‖ ≤ Dc·e^{Kc}, with
+-- window-uniform Dc = M₂·C₀‖v‖ = O(c); built from uniformFlowTube_spec_* +
+-- geodesicJacobi_narrowpad + one convex phase ball) +
+-- baseDisplacement_windowed_lipschitz_concrete (★ the windowed Lipschitz of
+-- u ↦ φ_u v − u — the contraction's magnitude input, fully supplied). NEW honest
+-- geometric input: hKσ (the window sits in the σ-interior of K — genuine, not
+-- smuggled). Downstream = instantiate at the curved gate + the global truncated
+-- contraction fold + the hflowData record ⟹ feed final8. NOT a₁=R/6.
+import QIQTH.BaseFlowHderFamily

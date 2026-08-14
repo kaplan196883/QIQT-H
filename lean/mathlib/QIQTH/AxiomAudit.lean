@@ -26987,6 +26987,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseFlowTruncationWindow.truncated_agrees_on_badSet
 #print axioms QIQTH.BaseFlowTruncationWindow.uniformFlowExp_vLipschitz_uniform
 
+-- J4-731: the ∀-base hder family — σ-windowed base-slot Fréchet adapters (the
+-- global-δ ↔ windowed interface gap CLOSED); baseFlow_hder_family (window-uniform
+-- near-id at every base in the σ-interior window) + the concrete windowed
+-- Lipschitz. New honest input: hKσ (σ-interior window). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.baseFlow_endpoint_fderiv_near_id_window
+#print axioms QIQTH.ExpMap.baseFlow_hder_family
+#print axioms QIQTH.ExpMap.baseDisplacement_windowed_lipschitz_concrete
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
