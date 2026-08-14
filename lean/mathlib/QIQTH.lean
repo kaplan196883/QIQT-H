@@ -3358,3 +3358,19 @@ import QIQTH.WhiteHsolveFlowTruncated
 -- (ii) radius bump c<c'≤ρ₀, (iii) the J4-717/718 homeo pieces).
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHflowTruncConcrete
+-- J4-734: hflowTruncNear CONCRETE — partial + three honest verdicts
+-- (WhiteFlowTruncNearClauses). ⚠ ENLARGED-K REFUTED: the flow is Skolem-pinned
+-- to its compact argument (uniformFlowExp's value = choice at hK) — instantiating
+-- at an enlarged compact yields a DIFFERENT function than final10's; the
+-- σ-interior window support is an irreducible gate-support-in-Kset input (the
+-- width wall, J4-676 lineage). white_flowTruncNear_vLip_clause (★ clause (ii)
+-- BANKED: modulus 1+C_L·c' via the radius bump c<c'≤ρ₀ + window support
+-- hwinK : closedBall z₀ r ⊆ Kset). white_flowTruncNear_contr_clause_of_windowLip
+-- (★ clause (i) ASSEMBLED: the ContractingWith shape matches definitionally;
+-- residue = the width-wall support + THE SMALLNESS GAP — the concrete supplier
+-- hides Dc = M₂·C₀·‖v‖ inside ∃, so the ‖v‖→0 vanishing is not exposed; a
+-- sharper Dc ≤ K·‖v‖ supplier is the named missing brick). Clause (iii) walled:
+-- no InjOn image-decomposition lemma banked + the bad set reaches w ∉ Kset where
+-- the abstract S has no data. final10 stays the terminal with hflowTruncNear
+-- decomposed. NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteFlowTruncNearClauses
