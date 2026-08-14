@@ -3230,3 +3230,17 @@ import QIQTH.WhiteFinal8SharpWitness
 -- Remaining J3 carries there: {hLip (same engine — next micro-brick), tube
 -- containment hmem, Jacobi hKb}. NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.GeodesicTaylorCompact
+-- J4-725: J3 BRICK 3 — the compact-hypothesis CONSUMER WIRE
+-- (GeodesicVariationCompact). geodesicField_fst_fderiv_bddOn_compact (first-deriv
+-- compactness engine) + geodesicField_lipschitzOnWith_compact (★ Lipschitz of F
+-- ITSELF — the genuinely missing variant; the banked patterns were for DF) ⟹
+-- geodesicVariation_exists_uncond_compact (★★ the wire: hbound2 + hLip + hKb +
+-- hK0 ALL compactness-produced — hKb DISCHARGED beyond expectation via hmem 0
+-- putting the base trajectory in S) + the closedBall cp466 witness. Honest
+-- carries: {hconv, hcomp, hYode, hVode, hV0, hIC (the SUPPLIED ODE/Jacobi data),
+-- hmem (the flow tube containment — short-time Grönwall a-priori, NOT banked:
+-- CompactTubeLemma has only point-set open tubes)}. NEXT-BRICK SCOPING recorded:
+-- the quadratic base-jet via expJet_linVariation_residual_deriv + the (now
+-- compactness-produced) hNb bound + inhomogeneous Grönwall ⟹ ‖ρ s t‖ ≤ Cn s² e^K₀.
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.GeodesicVariationCompact
