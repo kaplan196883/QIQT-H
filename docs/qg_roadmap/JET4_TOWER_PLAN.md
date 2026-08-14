@@ -8843,3 +8843,10 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - z₀-LOCALIZATION: mechanical — far z₀ ⟹ bad set empty; near z₀ ⟹ σ-interior window (the J4-703 case-split). Doc §7 "hflowData DISCHARGED via the truncated solver (J4-724…732)" appended to WHITENED_CAMPAIGN_TERMINAL.md.
 - FINAL9 carry list: hflowTrunc (satisfiable, per-clause banked) + gate reach + the standard final7 A-group/geometry certs. Both std-3 (my chk-file); AxiomAudit 10033 jobs; budget raw 0. NOT a₁=R/6.
 - NEXT J4-733: the concrete-witness hflowTrunc ASSEMBLY (smallness numeric Dc·e^{Kc}<1 + window-in-σ-interior + per-base frontier containment — the mechanical case-split plumbing) ⟹ the _unconditional witness extending witness_sharp ⟹ final9 into the joint cp466 witness; then the mass pre-ρ + K1 walls / TERMINAL refresh.
+
+## J4-733 (see commit) — the hflowTrunc CASE-SPLIT; final10 [AF]
+- ⚠ cp466 VERDICT: final9's hflowTrunc demanded clauses (i)/(ii) ∀ z₀ — but the suppliers are σ-interior-gated (far z₀ windows leave K) ⟹ the ∀-z₀ demand was ITSELF the vacuity trap; final9 not honestly witnessable.
+- RESOLUTION at the hsolveFlow ∃-H level (WhiteHflowTruncConcrete.lean, ~245L): `white_hsolveFlow_of_truncNear` (★★★ far z₀ ⟹ bad set EMPTY ⟹ degenerate constant H with Lipschitz 0 — no contraction data consumed; near z₀ ⟹ the clamp-centred Banach fixed point verbatim) + `white_hInnerCont_closed_final10` (★★★ final7 with hsolveFlow discharged via NEAR-ONLY satisfiable hflowTruncNear + gate reach).
+- FINAL10 carry list: standard A-group/geometry certs + gate reach {hreach, hρr} + hflowTruncNear (the three truncated clauses ONLY where frontier(S w) ∋ z₀ — non-vacuous, satisfiable at 0 ∈ K).
+- Both std-3 (my chk-file); AxiomAudit 10034 jobs; budget raw 0. NOT a₁=R/6.
+- NEXT J4-734: instantiate hflowTruncNear at the concrete gate — (i) contraction via truncatedSolverMap ∘ windowed-Lipschitz + smallness Dc·e^{Kc} = M₂C₀c·e^{Kf} < 1 (ρwin fold, sympy); (ii) v-Lipschitz with the radius bump c<c'≤ρ₀ + clamp-in-K from σ-interior; (iii) frontier ⊆ sphere-image from the J4-717/718 homeo-on-reach pieces; then final10 into the joint witness / TERMINAL doc refresh.
