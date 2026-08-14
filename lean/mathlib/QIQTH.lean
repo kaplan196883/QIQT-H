@@ -3281,3 +3281,18 @@ import QIQTH.BaseFlowNearId
 -- self-consistency + true-flow agreement → hflowData (i); then legs (ii)/(iii).
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.BaseFlowLipschitzTruncation
+-- J4-729: J3 BRICK 6 (2)+(3) — the global contraction (BaseFlowGlobalContraction).
+-- NORM VERDICT: Point n = sup norm — the radial clamp is NOT 1-Lipschitz there;
+-- the sup-ball metric projection IS the COORDINATE clamp (componentwise [−r,r]).
+-- coordClamp_lipschitzWith_one (★ 1-Lipschitz in sup norm, componentwise via
+-- dist_pi_le_iff) + coordClamp_mem_closedBall/mapsTo + truncatedSolverMap_
+-- contractingWith (★ ContractingWith M for w ↦ z₀ − g(coordClamp w) from
+-- LipschitzOnWith M g on the window, M < 1) + _solverShape (the EXACT
+-- fun w => z₀ − Ψtrunc w v + w shape the Banach solver consumes; Ψtrunc w v =
+-- g(coordClamp w) + w). hflowData clause (b) SUPPLIED modulo the small-c numeric
+-- + the windowed-Lipschitz input. HONEST CHAIN ASSESSMENT: the ∀-base-in-window
+-- near-id supplier (the hder family) is banked at ONE anchor q (parametric),
+-- not ∀-base — the per-base perturbation-family assembly = the genuine remaining
+-- J3 base-varying link. Clauses (a) numeric, (c) Lipschitz-in-v, (d) frontier +
+-- brick (4) self-consistency/agreement remain. NOT a₁=R/6 (R/6 = carrier).
+import QIQTH.BaseFlowGlobalContraction

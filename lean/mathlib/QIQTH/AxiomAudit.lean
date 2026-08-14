@@ -26966,6 +26966,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseFlowLipTrunc.baseDisplacement_lipschitzOnWith_window
 #print axioms QIQTH.BaseFlowLipTrunc.baseDisplacement_lipschitzOnWith_window_nearId
 
+-- J4-729: J3 brick 6 (2)+(3) — the coordinate clamp (sup-ball metric projection,
+-- 1-Lipschitz; radial clamp rejected for sup norm) + the global solver-shaped
+-- ContractingWith (hflowData clause (b) supplied modulo small-c numeric + the
+-- windowed-Lipschitz input; ∀-base near-id supplier = the remaining J3 link).
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.BaseFlowGlobalContraction.coordClamp_lipschitzWith_one
+#print axioms QIQTH.BaseFlowGlobalContraction.truncatedSolverMap_contractingWith
+#print axioms QIQTH.BaseFlowGlobalContraction.truncatedSolverMap_contractingWith_solverShape
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
