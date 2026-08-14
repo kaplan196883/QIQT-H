@@ -3343,3 +3343,18 @@ import QIQTH.BaseFlowHderFamily
 -- near z₀ ⟹ σ-interior window — the J4-703 case-split pattern). Doc §7 appended.
 -- NOT a₁=R/6 (R/6 = labelled carrier).
 import QIQTH.WhiteHsolveFlowTruncated
+-- J4-733: THE hflowTrunc CASE-SPLIT (WhiteHflowTruncConcrete). ⚠ cp466 VERDICT:
+-- final9's hflowTrunc demanded clauses (i)/(ii) for EVERY z₀ — but the suppliers
+-- are σ-interior-gated, unsatisfiable for far z₀ ⟹ the ∀-z₀ demand was itself
+-- the vacuity trap; final9 is NOT honestly witnessable. RESOLUTION at the
+-- hsolveFlow ∃-H level: white_hsolveFlow_of_truncNear (★★★ far z₀ ⟹ bad set
+-- EMPTY ⟹ degenerate constant H, Lipschitz 0, containment trivial — no
+-- contraction data used; near z₀ ⟹ the clamp-centred Banach fixed point on the
+-- NON-VACUOUS near-only data) ⟹ white_hInnerCont_closed_final10 (★★★ final7 with
+-- hsolveFlow discharged via near-only satisfiable hflowTruncNear + gate reach).
+-- Carry list: standard A-group/geometry + gate reach + hflowTruncNear (three
+-- truncated clauses required ONLY where the bad set is inhabited). Downstream =
+-- instantiate hflowTruncNear at the concrete gate (clause (i) smallness fold,
+-- (ii) radius bump c<c'≤ρ₀, (iii) the J4-717/718 homeo pieces).
+-- NOT a₁=R/6 (R/6 = labelled carrier).
+import QIQTH.WhiteHflowTruncConcrete

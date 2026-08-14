@@ -27004,6 +27004,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteHsolveFlowTruncated.hsolveFlow_of_truncatedContractionData
 #print axioms QIQTH.WhiteHsolveFlowTruncated.white_hInnerCont_closed_final9
 
+-- J4-733: the case-split — final9's ∀-z₀ hflowTrunc proved the vacuity trap
+-- (suppliers σ-interior-gated, far z₀ unsatisfiable); resolution at the ∃-H
+-- level: far ⟹ empty bad set ⟹ degenerate H; near ⟹ clamp Banach. final10 =
+-- final7 with hsolveFlow discharged via NEAR-ONLY satisfiable data. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteHflowTruncConcrete.white_hsolveFlow_of_truncNear
+#print axioms QIQTH.WhiteHflowTruncConcrete.white_hInnerCont_closed_final10
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
