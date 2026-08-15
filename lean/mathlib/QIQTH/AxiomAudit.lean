@@ -27116,6 +27116,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.A1R6FromDataUnified.a1_R6_from_data_v5
 
+-- J4-736: the hvLip WIDTH WALL discharged — clause (i) contraction WIRED at
+-- the concrete curved gate from the σ-interior support hKσ alone, via the sharp
+-- fixed-radius supplier (exposes B=M₂fix·C₀·e^{Kc}, v-independent): window-Lip
+-- unconditional (residue a), contraction under transparent B·c<1 (residue b).
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WhiteFlowTruncNearWired.white_flowTruncNear_contr_clause_wired
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

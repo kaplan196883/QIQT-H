@@ -3561,3 +3561,12 @@ import QIQTH.A1R6FromDataGated
 -- hframeK/hw + hgiMeas/hchrMeas + hGauss)}. NOT a₁=R/6 — CONDITIONAL (slots
 -- remains the sole genuine mathematical frontier of this entire capstone line).
 import QIQTH.A1R6FromDataUnified
+-- J4-736: THE hvLip WIDTH WALL DISCHARGED. WhiteFlowTruncNearWired wires the
+-- sharp σ-interior supplier (baseDisplacement_windowed_lipschitz_fixedRadius)
+-- into the banked clause-(i) assembly: from the σ-interior window support hKσ
+-- alone it EXPOSES the uniform contraction budget B=M₂fix·C₀·e^{Kc} (v-indep) so
+-- that (a) the window-Lipschitz hg is supplied unconditionally on sphere 0 c
+-- [width wall closed by threading hKσ] and (b) the clamp-centred truncated solver
+-- is ContractingWith (B·c).toNNReal under the TRANSPARENT smallness B·c<1
+-- [smallness closed by the exposed linear-in-‖v‖ constant]. NOT a₁=R/6.
+import QIQTH.WhiteFlowTruncNearWired
