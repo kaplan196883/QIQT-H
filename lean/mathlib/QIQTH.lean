@@ -3542,3 +3542,22 @@ import QIQTH.FlatBaseAbsorb
 -- the raw wall), slots (convergence-trio, genuinely open), base geometry}.
 -- NOT a₁=R/6 (R/6 = labelled carrier via the still-open slots census).
 import QIQTH.A1R6FromDataGated
+-- J4-749: THE UNIFIED CAPSTONE (A1R6FromDataUnified). Composition of J4-745's
+-- flowball absorption INTO J4-748's gated Gc+guarded-agreement S1 seam — the
+-- fold-pattern's design target: radius consistency holds by DEFEQ (constGate
+-- ... c = fun z => uniformFlowExp ... z '' ball 0 c, the producer's hgate/
+-- openness over the flow-ball IS definitionally the builder's hgate/hopenS0
+-- over constGate — no second opaque existential). MeasurableSet K derived
+-- trivially from hK.isClosed.measurableSet. ★ BONUS FINDING (corrects the
+-- brief's premise): group D′ is ABSENT BY CONSTRUCTION on the gated route
+-- (fires via FinalA1SlotsAtConstGate.fire, never touching the base-metric
+-- pullback block) — strictly better than J4-747's 8→1 shrink; NO flat-base
+-- instantiation needed, no hgPull at all. a1_R6_from_data_v5 (★★★★ THE MAXIMAL
+-- CAPSTONE OF THE SESSION): {hgate, hpkgBound, hmemS0, hopenS0, MeasurableSet K,
+-- group D′/hgPull, the raw-chart wall} ALL GONE. Residue: {hcarTau/hcarField/
+-- hcarField2 in the WALL-FREE gated shape (Gc + guarded agreement) + Gc/hGmeas,
+-- slots (the convergence-trio — genuinely open, unchanged), base geometry/gauge
+-- (hg,hgsymm,hgiC,hgpos,hg0,hgi,hΓ,hdg0,hsrc + producer inputs hgnd/hinvF/
+-- hframeK/hw + hgiMeas/hchrMeas + hGauss)}. NOT a₁=R/6 — CONDITIONAL (slots
+-- remains the sole genuine mathematical frontier of this entire capstone line).
+import QIQTH.A1R6FromDataUnified
