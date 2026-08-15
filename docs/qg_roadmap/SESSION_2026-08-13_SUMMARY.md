@@ -279,10 +279,49 @@ Seeley–DeWitt identification; standard in the literature, unformalized in Lean
 classical ODE smooth-dependence-on-initial-conditions theory beyond what Mathlib has). Nothing in
 this cycle touched that item, and nothing claims to.
 
+### 5.2 The final decomposition (J4-750) — four named walls, exhaustively pinned
+
+One more pass was made *into* `slots` itself, reading `A1R6GateSlots`'s definition from primary
+source rather than relying on the earlier summary characterization. This caught a real mistake before
+it produced bad Lean: a proposed shortcut ("shrink `hDConv` to just the off-diagonal residual bound")
+turned out to be a category conflation — Levi-series convergence is not one of the three slot fields
+at all, it is the well-definedness of the series `F` itself, which is a *separate*, already-`std-3`
+piece of banked machinery (`LeviSeries.leviSeries_summable`), reduced down to a single named primitive
+elsewhere in the repo.
+
+With that corrected, the three actual slot fields (`hDuhamel`, `hDConv`, `hCConv` — each a monolithic
+proposition, not a bundle) were traced to their own already-discharged producer arrows, each of which
+bottoms out on exactly one further named input. Combined with the Levi-convergence leg, the honest
+terminal state is **four irreducible walls**, no two of which can be merged or shortcut:
+
+1. **C4c** — the global off-diagonal parametrix (Gaussian residual) bound for a genuinely curved
+   metric. (The flat/near-diagonal part of this same bound is *already proven*, `std-3` — consistent
+   with the flat chain's `a₁ = R/6` result elsewhere in the repo. Only the fully-curved far-field case
+   is open.)
+2. **F1 (`hEmeas`)** — joint base-point measurability of the flow, i.e. the same ODE
+   smooth-dependence-on-initial-conditions gap, applied to measurability rather than differentiability.
+3. **`hvLip`** — the width wall inside the whitened continuity tower's `hInnerCont` (the same width
+   obstruction tracked since early in this session under the "J4-676" lineage).
+4. **`hEgrad`** — a third-order jet development the spatial-C² requirement needs, one order beyond
+   what the currently-banked chart regularity delivers.
+
+All four are, structurally, the *same* phenomenon at different points in the construction: the
+machinery consistently delivers first-order regularity of the flow map at a point, and each remaining
+slot needs one order higher, or uniformly over a set, or both. This is not four independent problems —
+it is one missing theorem (higher-order smooth/measurable dependence of ODE flows on their initial
+data) showing up in four places.
+
+**No further reduction was attempted or found.** Every candidate move at this depth was either
+redundant with banked work, an expansion of the hypothesis surface rather than a shrink, or would have
+required assuming what needed to be proved. This is the honest floor of what formalization-engineering
+alone can do here — the remaining work is filling in one real piece of classical analysis that Mathlib
+does not yet contain.
+
 ---
 
-*Ledger: J4-740 (Arcs 1–4 writeup), J4-741…749 (Arc 5, this addendum, incl. the J4-749 unification).
+*Ledger: J4-740 (Arcs 1–4 writeup), J4-741…750 (Arc 5, incl. the J4-749 unification and the J4-750
+final decomposition, audit-only, no Lean built).
 Docs only; no `QIQTH.lean`/`AxiomAudit` wiring changes beyond the individual bricks' own imports (each
-independently `std-3` verified). Sources: `JET4_TOWER_PLAN.md` J4-686…J4-749,
+independently `std-3` verified). Sources: `JET4_TOWER_PLAN.md` J4-686…J4-750,
 `WHITENED_CAMPAIGN_TERMINAL.md` §1–8, `A1_R6_RESIDUE_STATUS.md`, `WHERE_WE_ARE.md`.
 ⚠ NOT `a₁ = R/6`.*
