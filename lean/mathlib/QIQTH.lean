@@ -3584,3 +3584,10 @@ import QIQTH.UniformFlowThirdJetClose2
 -- of_symm_diag_bound = W3 assembled CONDITIONAL on carried diagonal cubic bound + symmetry (mirrors
 -- R3's hessian opNorm bound). NOT a₁=R/6.
 import QIQTH.UniformFlowThirdJetCLM
+-- J4-679: uniformFlowExp_thirdJet_opNorm_le_uncond = W3 UNCONDITIONAL in CLM form. Discharges the
+-- three carried inputs of the banked conditional CLM theorem (P1 hdiag via X1's comparison-field
+-- diagonal cubic bound uniformFlowExp_thirdDeriv_diag_cubic_bound; P2 hs12/hs23 via the banked
+-- Clairaut/flip symmetries), giving ‖B₃(q,v)‖ ≤ M' uniformly from only hC + IsCompact K. The
+-- exponential-Grönwall wall was route-specific (naive quadruple-field bound); the surviving
+-- comparison-field/ODE-uniqueness route never incurs it. NOT a₁=R/6.
+import QIQTH.UniformFlowThirdJetCLMUncond
