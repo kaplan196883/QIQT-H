@@ -3576,3 +3576,11 @@ import QIQTH.WhiteFlowTruncNearWired
 -- spec's Vf, and W2 (uniformFlowExp_thirdJet_apply_hasFDerivAt) = per-seed 3rd jet exists.
 -- NOT a₁=R/6.
 import QIQTH.UniformFlowThirdJetClose2
+-- J4-678: CLM-VALUED third jet of uniformFlowExp (the operator-norm assembly upgrade of W2) +
+-- conditional W3 opNorm bound. uniformFlowExp_thirdJet_hasFDerivAt lifts the per-seed scalar third
+-- jets (W2) to a genuine Fréchet derivative B₃ : Point n →L Point n →L Point n →L Point n via a
+-- DOUBLE ContinuousLinearEquiv.piRing + differentiableAt_pi + the apply-post-composition commute
+-- (mirrors R2's uniformFlowExp_fderiv_hasFDerivAt one order up). uniformFlowExp_thirdJet_opNorm_le_
+-- of_symm_diag_bound = W3 assembled CONDITIONAL on carried diagonal cubic bound + symmetry (mirrors
+-- R3's hessian opNorm bound). NOT a₁=R/6.
+import QIQTH.UniformFlowThirdJetCLM

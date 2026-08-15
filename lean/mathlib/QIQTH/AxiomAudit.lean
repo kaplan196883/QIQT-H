@@ -27138,6 +27138,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_secondJet_apply_eq_quadEndpoint
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_apply_hasFDerivAt
 
+-- J4-678 (UniformFlowThirdJetCLM): the CLM-VALUED third jet + conditional W3 opNorm bound.
+-- uniformFlowExp_thirdJet_hasFDerivAt = the operator-norm assembly upgrade of W2: the
+-- CLM-valued second-jet map w↦fderiv(fun u=>fderiv(uniformFlowExp q) u) w has a genuine
+-- Fréchet derivative B₃ : Point n →L Point n →L Point n →L Point n at v (little-o in
+-- operator norm, not just per-seed). DOUBLE ContinuousLinearEquiv.piRing + differentiableAt_pi
+-- reduce it to each scalar coordinate w↦(F₂ w)(eᵢ)(eⱼ), = W2's per-seed jet via the
+-- apply-post-composition commute on the ball. Mirrors R2's uniformFlowExp_fderiv_hasFDerivAt
+-- one order up. uniformFlowExp_thirdJet_opNorm_le_of_symm_diag_bound = W3 assembled CONDITIONAL
+-- on a carried diagonal cubic bound + full symmetry (mirrors R3's hessian opNorm bound), via
+-- trilinear_opNorm_le_of_symm_diag_bound giving M'=(9/2)M. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_opNorm_le_of_symm_diag_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
