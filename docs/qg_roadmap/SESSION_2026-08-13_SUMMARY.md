@@ -247,10 +247,42 @@ Lean was written.
 
 No hypothesis anywhere in this cycle was forced, hidden, or declared closed without a build-verified `std-3` witness. Every negative result (`hKSmeas` vs. `hgate`'s radius; `hcar*`'s first attempt; the alternate-capstone rejection) is recorded with its precise structural reason, not glossed over.
 
+### 5.1 The unification (J4-749) — the session's maximal capstone
+
+The two surviving reduction lines — `a1_R6_from_data_v4e` (5 absorptions + shrunk group D′) and
+`a1_R6_from_data_gated` (wall-free `hcar*`) — were combined into one theorem,
+`A1R6FromDataUnified.a1_R6_from_data_v5`. The composition landed cleanly: the flow-ball producer's
+radius and the gated builder's gate are the *same* object by definitional unfolding
+(`constGate … c = uniformFlowExp … '' ball 0 c`), so there was no second opaque existential to
+reconcile — exactly the situation the fold-radius-into-producer technique was built for.
+
+A bonus fell out during the build: group D′ (the base-metric pullback block) turns out to be **absent
+by construction** on the gated route — it fires through `FinalA1SlotsAtConstGate.fire`, which never
+touches that block at all, so `a1_R6_from_data_v5` carries no base-metric binder whatsoever (not even
+the single `hgPull` that J4-747 needed).
+
+**The result: every hypothesis absorbed this cycle (`hgate`, `hpkgBound`, `hmemS0`, `hopenS0`,
+`hKSmeas`/`MeasurableSet K`, the raw-chart wall, and all of group D′) is now gone from one single
+theorem.** What `a1_R6_from_data_v5` still carries is exactly:
+
+- the wall-free `hcarTau`/`hcarField`/`hcarField2` (Gc-measurability + guarded agreement — a concrete,
+  satisfiable hypothesis, not a `.choose`-opacity wall),
+- `slots : A1R6GateSlots` — the convergence-trio, and
+- ordinary base geometry/gauge (`hg`, `hgsymm`, `hgiC`, `hgpos`, `hg0`, `hgi`, `hΓ`, `hdg0`, `hsrc`,
+  the flow-ball producer's own geometric inputs, and `hGauss`).
+
+That is the honest terminal state of this cycle: **the strongest a₁=R/6 capstone in the repository now
+reduces to "geometry plus the convergence-trio."** `slots` is the *only* item left that is not
+formalization debt — it is the same genuinely-open mathematics identified by the independent
+deep-research pass earlier in this session (true-kernel existence, Levi-series convergence,
+Seeley–DeWitt identification; standard in the literature, unformalized in Lean, bottoming out on
+classical ODE smooth-dependence-on-initial-conditions theory beyond what Mathlib has). Nothing in
+this cycle touched that item, and nothing claims to.
+
 ---
 
-*Ledger: J4-740 (Arcs 1–4 writeup), J4-741…748 (Arc 5, this addendum). Docs only; no `QIQTH.lean`/
-`AxiomAudit` wiring changes beyond the individual bricks' own imports (each independently `std-3`
-verified). Sources: `JET4_TOWER_PLAN.md` J4-686…J4-748, `WHITENED_CAMPAIGN_TERMINAL.md` §1–8,
-`A1_R6_RESIDUE_STATUS.md`, `WHERE_WE_ARE.md`.
+*Ledger: J4-740 (Arcs 1–4 writeup), J4-741…749 (Arc 5, this addendum, incl. the J4-749 unification).
+Docs only; no `QIQTH.lean`/`AxiomAudit` wiring changes beyond the individual bricks' own imports (each
+independently `std-3` verified). Sources: `JET4_TOWER_PLAN.md` J4-686…J4-749,
+`WHITENED_CAMPAIGN_TERMINAL.md` §1–8, `A1_R6_RESIDUE_STATUS.md`, `WHERE_WE_ARE.md`.
 ⚠ NOT `a₁ = R/6`.*
