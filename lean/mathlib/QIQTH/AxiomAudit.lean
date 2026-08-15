@@ -27124,6 +27124,20 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.WhiteFlowTruncNearWired.white_flowTruncNear_contr_clause_wired
 
+-- J4-677 (UniformFlowThirdJetClose2): the W2 CLOSE of the C³ exp-map-jet climb.
+-- linODE_unique = the field-agnostic linear-ODE uniqueness (arbitrary Banach space,
+-- X'=A(τ)X on [0,1], same seed + bounded coeff ⟹ equal), the generic tool the doubled
+-- family-matching needed (only geodesic-specialized jacobiSol_unique existed before).
+-- uniformFlow_secondJet_apply_eq_quadEndpoint = Y4 value-id: the quad-supply doubled
+-- endpoint (Uf 1).2.1 IS fderiv(fun u=>fderiv(uniformFlowExp q) u b) w a (matched to
+-- secondVar_spec's Vf via two linODE_unique applications). uniformFlowExp_thirdJet_apply_hasFDerivAt
+-- = W2: the per-seed THIRD jet exists (Y3′ ⊕ Y4 ⊕ recentre, exactly R2-b one order up).
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.ExpMap.linODE_unique
+#print axioms QIQTH.ExpMap.uniformFlow_secondJet_apply_eq_quadEndpoint
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_apply_hasFDerivAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

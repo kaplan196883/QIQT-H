@@ -3570,3 +3570,9 @@ import QIQTH.A1R6FromDataUnified
 -- is ContractingWith (B·c).toNNReal under the TRANSPARENT smallness B·c<1
 -- [smallness closed by the exposed linear-in-‖v‖ constant]. NOT a₁=R/6.
 import QIQTH.WhiteFlowTruncNearWired
+-- J4-677 (UniformFlowThirdJetClose2): W2 CLOSE of the C³ exp-jet climb. linODE_unique
+-- (field-agnostic linear-ODE uniqueness, the missing generic tool), Y4 value-id
+-- (uniformFlow_secondJet_apply_eq_quadEndpoint) matching the quad-supply Uf with secondVar
+-- spec's Vf, and W2 (uniformFlowExp_thirdJet_apply_hasFDerivAt) = per-seed 3rd jet exists.
+-- NOT a₁=R/6.
+import QIQTH.UniformFlowThirdJetClose2
