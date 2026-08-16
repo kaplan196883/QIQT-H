@@ -3893,3 +3893,10 @@ import QIQTH.MixedSliverGateAmpLipschitz
 -- per-point field-point Q ball bound (J4-801) through the J4-799 gating layer to the mixed sliver's global
 -- ∀z hJ3Q carry, in FIELD-point form. std-3. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.MixedSliverFieldQGlobal
+-- MixedSliverIntegrands (J4-803): item (d)'s per-integrand wiring. The SEVEN integrability hypotheses of
+-- witness_sliver2_xuniform_mixed (hIntE1/hIntPlain/hIntRem/hInt0/hInt1i/hInt1j/hInt2) discharged through
+-- the J4-800 gate-compact-support engine integrable_of_finiteSupport_bounded. Each integrand carries the
+-- gated amplitude (A0/A1i/A1j/A2) as a literal factor, so it VANISHES off the finite-measure gate S where
+-- the amplitude is 0 (proved per-integrand by unfolding mTerm0/mTerm1/sTerm2 + ring); the sup-bound is
+-- reduced to an ON-GATE bound (global_bound_of_onGate), AE-measurability carried. std-3. NOT a₁=R/6.
+import QIQTH.MixedSliverIntegrands
