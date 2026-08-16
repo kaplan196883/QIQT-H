@@ -27579,6 +27579,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverGateAmpLipschitz.gateAmp_lipschitz_of_vanishing
 #print axioms QIQTH.MixedSliverGateAmpLipschitz.mixedSliver_hqLip_triple_via_gateAmp
 
+-- MixedSliverFieldQGlobal (J4-803): item (c)'s "lift to global ∀z". The mixed sliver carries the
+-- FIELD-POINT second-jet hJ3Q : ∀ z, ‖Q z‖ ≤ C_Q globally, but J4-801 supplied only the per-point BALL
+-- bound (chartField_secondJet_contract_ball) on ball 0 r. gatedFieldSecondJet is the CONCRETE gated Q
+-- (true field-point chart-Hessian contraction on the ball, 0 off it); gatedFieldSecondJet_global_bound
+-- lifts the ball bound through the J4-799 gating layer (gateQ_bound_global) to the global ∀z form —
+-- the exact hJ3Q carry witness_sliver2_xuniform_mixed consumes, in FIELD-point form. std-3.
+-- The Qfield↔fderiv∘fderiv component identity is a SEPARATE certificate, not claimed here.
+-- NOT a₁=R/6 (stays CONDITIONAL).
+#print axioms QIQTH.HeatResidualBound.gatedFieldSecondJet_global_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

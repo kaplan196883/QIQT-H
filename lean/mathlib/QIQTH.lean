@@ -3889,3 +3889,7 @@ import QIQTH.MixedSliverFieldQBound
 -- output) into MixedSliverQLipInt.hqLip_triple_of_bounded_lipschitz, yielding the exact mixed-sliver
 -- hqLip triple. std-3, no new wall. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.MixedSliverGateAmpLipschitz
+-- MixedSliverFieldQGlobal (J4-803): item (c)'s lift-to-global. gatedFieldSecondJet_global_bound lifts the
+-- per-point field-point Q ball bound (J4-801) through the J4-799 gating layer to the mixed sliver's global
+-- ∀z hJ3Q carry, in FIELD-point form. std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.MixedSliverFieldQGlobal
