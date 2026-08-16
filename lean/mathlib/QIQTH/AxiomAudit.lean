@@ -27330,6 +27330,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FderivBulkConcrete.fderivBulkInt_hasFDerivAt
 #print axioms QIQTH.FderivBulkConcrete.gderiv_sub_fderivBulk_eq_sliver
 
+-- J4-779: GderivContinuity — the concrete `hcont` census member (order-2 derivative-field continuity
+-- ContinuousOn (gderivInt … i) univ) for the L2 sliver census, via a Banach-valued nested
+-- dominated-continuity engine fed the per-slice continuity/domination census. std-3. NOT a₁=R/6.
+#print axioms QIQTH.GderivContinuity.continuousAt_doubleIntegral_of_dominated_banach
+#print axioms QIQTH.GderivContinuity.gderivInt_continuousAt
+#print axioms QIQTH.GderivContinuity.gderivInt_hcont
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

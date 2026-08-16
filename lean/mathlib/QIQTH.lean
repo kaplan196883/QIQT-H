@@ -3698,3 +3698,10 @@ import QIQTH.GatedGlobalWitnessN1CapstoneReachAligned
 -- concrete sliver identity gderiv−fderivBulk = ∫_{t−εₘ}^t ∫z kPrime — the bridge that makes the
 -- previously-unstatable hsliver census member concretely statable. std-3. NOT a₁=R/6.
 import QIQTH.FderivBulkConcrete
+-- J4-779: GderivContinuity — the concrete `hcont` census member for the L2 sliver census. Discharges
+-- ContinuousOn (gderivInt … i) univ (the order-2 derivative-field continuity `HD1Concrete.hD1_concrete`
+-- binds abstractly) at the concrete order-1 gated van-Vleck derivative field gderivInt (J4-778b), via a
+-- Banach-valued generalisation of the GcoefContinuity nested dominated-continuity engine (both Mathlib
+-- legs already Banach-general), fed the per-slice continuity/domination census. gderivInt_hcont is the
+-- ∀i, ContinuousOn … univ shape verbatim. std-3. NOT a₁=R/6.
+import QIQTH.GderivContinuity
