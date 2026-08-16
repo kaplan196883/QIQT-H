@@ -9440,3 +9440,35 @@ first/second-order inverse-function-theorem chain rule.
 - Sole remaining wall for these five: the GLOBAL `∀z` gating layer (off-gate redefinition `V=−id,Pi=eᵢ,Q=0` where the raw `.choose` chart is junk off the injectivity ball) — explicitly characterized as "a bookkeeping/redefinition task, NOT a differential-geometry frontier."
 - a₁=R/6 (chart-surface geometry is orthogonal to it) remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
 - ★★★★★★ SESSION-WIDE PATTERN NOTE: this is now confirmed as the pattern holding EVEN across sessions — a wall documented and left open in an EARLIER session (J4-556/557) was closeable using material from a DIFFERENT earlier session (J4-70, J4-489) that was simply never cross-referenced. The "don't under-credit the repo" lesson applies not just within a single session's own work but across the repo's entire multi-month history.
+
+## J4-799 + J4-800 — the three MISSING SUPPLIERS of the chart-surface residue BUILT: global gating layer + hqLip Lipschitz + integrability engine [AF]
+Two new std-3 files (budget raw 0, vacuum guard clean), attacking the three concrete residues J4-795/797
+left as the mixed-sliver chart-surface wall.
+- **J4-799 (commit `f6bd1657`, `QIQTH/MixedSliverGatedEstimates.lean`)** — the GLOBAL `∀z` GATING LAYER
+  (the "bookkeeping/redefinition task" named at J4-797). `gateDisp`/`gateJet`/`gateQ` redefine `V/Pi/Pj/Q`
+  as the raw chart value on a gate set `G`, the trivial placeholder (`−z` / `eᵢ` / `0`) off `G`.
+  `gated_five_estimates_global` proves ALL FIVE global `∀z` geometric carries of
+  `witness_sliver2_xuniform_mixed` (`hco/hVdisp/hJ3i/hJ3j/hJ3Q`) from their per-point on-gate (ball) forms:
+  on-gate inherited from J4-796/797/798, off-gate the placeholder satisfies each estimate trivially
+  (`rncRadialSq(−z)=rncRadialSq z ≥ ½·`; `‖−z+z‖=0`; `‖eᵢ−eᵢ‖=0`; `‖0‖=0`). Non-vacuous (`G=univ` recovers
+  raw estimates, `G=∅` the placeholders). This RETIRES the global-gating wall in general form.
+- **J4-800 (commit `d12c3103`, `QIQTH/MixedSliverQLipInt.lean`)** — the two remaining named suppliers.
+  (i) `product_bounded_lipschitz_bound`: the product-Lipschitz rule `|fg(x)−fg(y)| ≤ (Mf·Lg+Mg·Lf)·dist`
+  for bounded Lipschitz factors — EXACTLY the hqLip Lipschitz sub-part J4-795 called "genuine new content
+  with no supplier"; `hqLip_triple_of_bounded_lipschitz` packages it with the sup-bound `Mf·Mg` into the
+  full hqLip triple. (ii) `integrable_of_finiteSupport_bounded`: the gate-compact-support integrability
+  engine (vanish off finite-measure `S` + AE-measurable + bounded ⟹ Integrable, dominated by `M·1_S`) —
+  the route J4-795 named for the seven integrabilities, reducing each to {support, AE-meas, boundedness}.
+- **HONEST STATE — full closure of `witness_sliver2_xuniform_mixed` NOT reached.** The three ENGINES are
+  now built, but the concrete INSTANTIATION remains real work: (a) matching the gated `V/Pi/Pj/Q` to the
+  gated-amplitude normal form (consistent — off-gate `D2H=0` and gated `A→0` make both mTerm sides vanish —
+  but the exact wiring is unwritten); (b) supplying the concrete per-slice Lipschitz constants of
+  `leviSeries`/`gateAmp` as inputs to the hqLip triple; (c) identifying the concrete VECTOR `Q` for the
+  sliver (the second-jet ball form `chartW0_secondJet_bound` is an OPERATOR-norm bound on the Hessian, one
+  contraction away from the sliver's `Q : Point n → Point n`); (d) instantiating the {support, AE-meas,
+  bounded} inputs of the integrability engine at each of the 7 concrete integrands. hDuhamel/hDConv
+  auto-supply (J4-776 conjecture) remains UNtested. a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+- ★★★ NET: the campaign's chart-surface residue is now reduced from "five estimates + hqLip + 7
+  integrabilities, several with NO supplier" to "three abstract engines built; concrete per-object
+  instantiation remaining." Every genuinely-new analytic ingredient J4-795 flagged as unsupplied is now
+  supplied. NOT `a₁ = R/6`.
