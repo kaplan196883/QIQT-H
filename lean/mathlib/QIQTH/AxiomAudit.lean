@@ -27537,6 +27537,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InverseChartSecondJet.secondJet_opNorm_le
 #print axioms QIQTH.HeatResidualBound.chartW0_secondJet_bound
 
+-- J4-799: the GLOBAL ∀z GATING LAYER for the five RNC chart-surface estimates — the "bookkeeping/
+-- redefinition" wall J4-797 named. gateDisp/gateJet/gateQ redefine V/Pi/Pj/Q as the raw chart value on a
+-- gate set G, the trivial placeholder (−z / eᵢ / 0) off it. gated_five_estimates_global proves ALL FIVE
+-- global ∀z geometric carries of witness_sliver2_xuniform_mixed (hco/hVdisp/hJ3i/hJ3j/hJ3Q) hold from the
+-- per-point on-gate (ball) forms: on-gate inherited, off-gate the placeholder satisfies each estimate
+-- trivially (rncRadialSq(−z)=rncRadialSq z≥½·; ‖0‖=0). std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedSliverGatedEstimates.gated_five_estimates_global
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

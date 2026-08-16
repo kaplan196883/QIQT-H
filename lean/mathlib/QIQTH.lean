@@ -3855,3 +3855,10 @@ import QIQTH.InverseChartFirstJet
 -- estimates (hco/hVdisp/hJ3i/hJ3j/hJ3Q) are closed; only the global ∀z gating layer remains. std-3.
 -- NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.InverseChartSecondJet
+-- J4-799: the GLOBAL ∀z GATING LAYER for the five RNC chart-surface estimates. gateDisp/gateJet/gateQ
+-- redefine V/Pi/Pj/Q to be the raw chart value on a gate set G and the trivial placeholder (−z / eᵢ / 0)
+-- off it; gated_five_estimates_global proves ALL FIVE mixed-sliver geometric carries (hco/hVdisp/hJ3i/
+-- hJ3j/hJ3Q) hold GLOBALLY from their per-point on-gate (ball-form) versions (J4-796/797/798). This is the
+-- "bookkeeping/redefinition" global-gating wall J4-797 named — discharged in general form. std-3.
+-- NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.MixedSliverGatedEstimates
