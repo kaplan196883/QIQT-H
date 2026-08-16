@@ -3809,3 +3809,18 @@ import QIQTH.MixedSliverAmpBounds
 -- (generic) + leviSeries_hFdom_gated (at heatOp∘vanVleckGatedWitness, the J4-788 wiring's F). std-3.
 -- NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 import QIQTH.MixedSliverFdom
+-- J4-795 (TASK A): the DIAGONAL (∂ᵢ∂ᵢ) sTerm-form ON-GATE match — diagonal analogue of the mixed
+-- J4-790 witnessMixed_gate_eq_mTerm. witnessDiag_gate_eq_sTerm rewrites the on-gate diagonal second
+-- field partial of the concrete gated van-Vleck witness (via the banked witnessFieldDeriv2_gate_eq)
+-- into the exact sTerm0+sTerm1+sTerm2 shape of witness_sliver2_xuniform's hNormalForm (∑P² vs ∑P·P
+-- reconciliation only; strictly simpler than the mixed case). std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.DiagNormalFormOnGate
+-- J4-795 (TASK B): discharge of the off-gate witness germ hOffNhd (sole residue of J4-792
+-- witnessMixed_hNormalForm_full) from PURE CUTOFF-SUPPORT geometry. witness_offGate_eventuallyZero
+-- reduces hOffNhd to the parametrix-free germ "radialCutoff a b (chart z₀ w)=0 on on-gate w near ζ"
+-- (on-gate: vanVleckGatedWitness_gate_apply has radialCutoff as an outright factor → zero_mul; off-gate:
+-- gatedKernel_apply_of_notMem). cutoffGerm_of_notMem_closure discharges the far/open-exterior case for
+-- free (nbhd off-gate ⟹ antecedent impossible), confining the residue to the frontier collar (banked
+-- pointwise, margin b<c). witnessMixed_hNormalForm_full_geom repackages the full ∀ζ normal form carrying
+-- the clean cutoff germ instead of hOffNhd. std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.OffGateCutoffDischarge

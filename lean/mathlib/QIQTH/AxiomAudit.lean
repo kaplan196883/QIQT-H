@@ -27494,6 +27494,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverFdom.leviSeries_hFdom
 #print axioms QIQTH.MixedSliverFdom.leviSeries_hFdom_gated
 
+-- J4-795 (TASK A): the DIAGONAL sTerm-form on-gate match — diagonal analogue of the mixed J4-790
+-- witnessMixed_gate_eq_mTerm. On the open gate the concrete ∂ᵢ∂ᵢ second field partial of the gated
+-- van-Vleck witness equals sTerm0+sTerm1+sTerm2 in the EXACT hNormalForm shape of
+-- witness_sliver2_xuniform (via banked witnessFieldDeriv2_gate_eq + ∑P²=∑P·P reconciliation). std-3.
+-- NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.DiagNormalFormOnGate.witnessDiag_gate_eq_sTerm
+
+-- J4-795 (TASK B): discharge of the off-gate witness germ hOffNhd (sole residue of J4-792
+-- witnessMixed_hNormalForm_full) from PURE CUTOFF-SUPPORT geometry. witness_offGate_eventuallyZero
+-- reduces hOffNhd to the parametrix-free radial-cutoff germ; cutoffGerm_of_notMem_closure discharges the
+-- far/open-exterior case for free (confining the residue to the frontier collar, banked pointwise via
+-- margin b<c); witnessMixed_hNormalForm_full_geom repackages the full ∀ζ normal form carrying the clean
+-- cutoff germ instead of hOffNhd. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.OffGateCutoffDischarge.witness_offGate_eventuallyZero
+#print axioms QIQTH.OffGateCutoffDischarge.cutoffGerm_of_notMem_closure
+#print axioms QIQTH.OffGateCutoffDischarge.witnessMixed_hNormalForm_full_geom
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
