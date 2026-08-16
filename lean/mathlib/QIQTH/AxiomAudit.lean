@@ -27337,6 +27337,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GderivContinuity.gderivInt_continuousAt
 #print axioms QIQTH.GderivContinuity.gderivInt_hcont
 
+-- J4-779: KPrimeOpNormSliver — the CLM OPERATOR-NORM discharge of the concrete `kPrime` sliver
+-- `hsliver`. opNorm_le_sum_apply_single = the pure sup-norm⇒ℓ¹ reduction ‖L‖≤Σⱼ|L eⱼ| on Fin n→ℝ;
+-- kPrime_apply_single_sliver = the component pushthrough (gderivInt−fderivBulkInt)(eⱼ)=∫∫(kPrime eⱼ);
+-- kPrime_opNorm_sliver_bound = dist(fderivBulkInt,gderivInt) ≤ Σⱼ bb j given the scalar per-component
+-- sliver rates (each the banked witness_sliver2_xuniform at direction pair (i,j)). Reduces the CLM
+-- operator-norm hsliver to a finite sum of scalar slivers. No vacuous hyps, none the conclusion.
+-- std-3. NOT a₁=R/6.
+#print axioms QIQTH.KPrimeOpNormSliver.opNorm_le_sum_apply_single
+#print axioms QIQTH.KPrimeOpNormSliver.kPrime_apply_single_sliver
+#print axioms QIQTH.KPrimeOpNormSliver.kPrime_opNorm_sliver_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

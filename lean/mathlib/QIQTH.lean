@@ -3705,3 +3705,11 @@ import QIQTH.FderivBulkConcrete
 -- legs already Banach-general), fed the per-slice continuity/domination census. gderivInt_hcont is the
 -- ∀i, ContinuousOn … univ shape verbatim. std-3. NOT a₁=R/6.
 import QIQTH.GderivContinuity
+-- J4-779: KPrimeOpNormSliver — the CLM OPERATOR-NORM discharge of the concrete `kPrime` sliver hole
+-- flagged by J4-778b. On Point n = Fin n → ℝ (sup norm) a functional's operator norm is bounded by the
+-- ℓ¹ sum of its basis components (opNorm_le_sum_apply_single), so the CLM sliver ‖∫∫ kPrime‖_op reduces
+-- to the FINITE SUM over j of the scalar component slivers ∫∫(kPrime eⱼ) (kPrime_apply_single_sliver
+-- pushes the eval through the double-integral). kPrime_opNorm_sliver_bound = the hsliver dist-form
+-- discharge dist(fderivBulkInt,gderivInt) ≤ Σⱼ bb j given the scalar per-component rates (banked
+-- witness_sliver2_xuniform at each (i,j)). std-3. NOT a₁=R/6.
+import QIQTH.KPrimeOpNormSliver
