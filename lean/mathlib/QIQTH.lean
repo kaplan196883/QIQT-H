@@ -3802,3 +3802,10 @@ import QIQTH.MixedNormalFormFull
 -- gated amplitude is 0, so the sliver's GLOBAL sup bound reduces to an ON-GATE base bound
 -- (gateAmp_abs_le_onGate). std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 import QIQTH.MixedSliverAmpBounds
+-- J4-794: concrete discharge of the hFdom Gaussian-domination hypothesis of witness_sliver2_xuniform_mixed
+-- at the concrete Levi-series source F := leviSeries E. Finding: the banked width-2 Levi envelope
+-- LeviSeriesLocalData.hFenv is EXACTLY hFdom's shape at order α=0 (no 1/√s singularity — factorial/Γ
+-- constant C_L alone); baseKernelW_zero_apply rewrites baseKernelW 2 0 τ = gaussDdim(2τ). leviSeries_hFdom
+-- (generic) + leviSeries_hFdom_gated (at heatOp∘vanVleckGatedWitness, the J4-788 wiring's F). std-3.
+-- NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+import QIQTH.MixedSliverFdom

@@ -27489,6 +27489,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverAmpBounds.gateAmp_abs_le_onGate
 #print axioms QIQTH.MixedSliverAmpBounds.witnessMixed_amplitude_sup_bounds
 
+-- J4-794: the hFdom Gaussian-domination sliver hypothesis discharged at the concrete Levi source
+-- leviSeries E (banked width-2 envelope hFenv IS hFdom's α=0 shape). NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverFdom.leviSeries_hFdom
+#print axioms QIQTH.MixedSliverFdom.leviSeries_hFdom_gated
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
