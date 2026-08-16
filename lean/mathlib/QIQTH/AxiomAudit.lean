@@ -27284,6 +27284,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged
 
+-- hCH-discharged rebase: the ORDER-1 capstone with BOTH hEboundW (J4-774) AND hCH genuinely discharged,
+-- on the LIVE TrueKernelA1Reduced/restricted lineage. Rebases J4-774 onto the C²-weakened restricted
+-- capstone trueKernel_diagonal_a1_eq_R6_residual_restricted_C2 (D4 verdict: the ⊤ hCH/hCConv carries are
+-- OVERKILL and unsatisfiable for the only-C² chart; ContDiffAt ℝ 2 … 0 suffices AND is true by gate-
+-- interiority). hCH discharged internally via hCH_discharge_from_geometry (live witness defeq to
+-- vanVleckGatedWitness) using the package's exported 0∈S 0 / IsOpen(S 0) + new inputs hgiC/hgpos.
+-- Surviving carries hEmeas/hDuhamel/hDConv/hCConv(C²-at-0) — one fewer open hyp than J4-774, hCConv
+-- weakened from unsatisfiable ⊤ to satisfiable C²-at-0. NO smooth-cutoff redesign needed. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hCH_discharged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

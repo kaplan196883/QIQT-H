@@ -3661,3 +3661,14 @@ import QIQTH.GatedGlobalWitnessN1ThreeSlots
 -- J4-767: hEboundW AND hS0 discharged; surviving carries hEmeas/hDuhamel/hDConv/hCH/hCConv (one fewer
 -- open hypothesis on the live order-1 chain). std-3. NOT a₁=R/6.
 import QIQTH.GatedGlobalWitnessN1CapstoneEbdDischarged
+-- hCH-discharged rebase: the ORDER-1 capstone with BOTH hEboundW (J4-774) AND hCH genuinely
+-- discharged, on the LIVE TrueKernelA1Reduced/restricted lineage. Rebases J4-774's
+-- trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged onto the C²-weakened restricted
+-- capstone trueKernel_diagonal_a1_eq_R6_residual_restricted_C2 (D4 verdict: the ⊤ hCH/hCConv carries
+-- are OVERKILL and unsatisfiable for the only-C² chart; ContDiffAt ℝ 2 … 0 suffices AND is true by
+-- gate-interiority). hCH discharged internally via hCH_discharge_from_geometry (the live witness being
+-- defeq to vanVleckGatedWitness), using the package's exported 0∈S 0 / IsOpen(S 0) + new geometric
+-- inputs hgiC/hgpos. Surviving carries drop to hEmeas/hDuhamel/hDConv/hCConv(C²-at-0) — one fewer open
+-- hypothesis than J4-774, and hCConv weakened from unsatisfiable ⊤ to satisfiable C²-at-0. NO smooth-
+-- cutoff redesign needed. std-3. NOT a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1CapstoneHCHDischarged
