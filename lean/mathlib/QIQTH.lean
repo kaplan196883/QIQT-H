@@ -3824,3 +3824,12 @@ import QIQTH.DiagNormalFormOnGate
 -- pointwise, margin b<c). witnessMixed_hNormalForm_full_geom repackages the full ∀ζ normal form carrying
 -- the clean cutoff germ instead of hOffNhd. std-3. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.OffGateCutoffDischarge
+
+-- J4-796: the ABSTRACT POINTWISE near-isometry primitive hco ⟸ hVdisp of the mixed-sliver chart-surface
+-- residue (J4-795). nearIsometry_lower_of_quadraticDisplacement: for ANY displacement map V, the sliver
+-- hypothesis ‖V z + z‖ ≤ C_W·‖z‖² (hVdisp shape) with n·C_W·‖z‖ ≤ 1/4 gives (1/2)·rncRadialSq z ≤
+-- rncRadialSq (V z) (hco shape), via a direct coordinatewise ∑-expansion. chartW0_hco_ball routes it
+-- through the banked chartW0_displacement to discharge the sliver hco for the concrete van-Vleck chart
+-- V = uniformInverseChart … z 0 per-point on an explicit ball. Discharges the hco↔hVdisp reduction only;
+-- global ∀z (gating layer) + hJ3i/hJ3j/hJ3Q (substrate-rebuild wall) stay open. std-3. NOT a₁=R/6.
+import QIQTH.RNCNearIsometryPointwise

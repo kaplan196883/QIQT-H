@@ -27511,6 +27511,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.OffGateCutoffDischarge.cutoffGerm_of_notMem_closure
 #print axioms QIQTH.OffGateCutoffDischarge.witnessMixed_hNormalForm_full_geom
 
+-- J4-796: the abstract pointwise near-isometry primitive hco ⟸ hVdisp of the mixed-sliver chart-surface
+-- residue. nearIsometry_lower_of_quadraticDisplacement derives the sliver hco shape (1/2)·rncRadialSq z ≤
+-- rncRadialSq (V z) from the sliver hVdisp shape ‖V z + z‖ ≤ C_W·‖z‖² for ANY V, on n·C_W·‖z‖ ≤ 1/4, via
+-- coordinatewise ∑-expansion. chartW0_hco_ball routes it through banked chartW0_displacement to discharge
+-- the concrete van-Vleck chart hco per-point on a ball. Global ∀z + hJ3i/hJ3j/hJ3Q stay open. std-3.
+-- NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.RNCNearIsometryPointwise.nearIsometry_lower_of_quadraticDisplacement
+#print axioms QIQTH.RNCNearIsometryPointwise.chartW0_hco_ball
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
