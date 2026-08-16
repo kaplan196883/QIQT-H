@@ -3870,3 +3870,14 @@ import QIQTH.MixedSliverGatedEstimates
 -- AE-measurable and bounded, is integrable (dominated by M·1_S) — the gate-compact-support integrability
 -- engine for the 7 carries. std-3. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.MixedSliverQLipInt
+
+-- MixedSliverFieldQBound: the CONCRETE per-point (ball) supplier for the mixed sliver's hJ3Q at the
+-- van-Vleck inverse chart, via the FIELD-POINT (not base-point) second-jet Hessian contraction.
+-- hessianContract_bounded_on_ball (pure): for φ ∈ ContDiffAt ℝ 2 at x₀ and any u v, the contracted
+-- second fderiv z ↦ (fderiv(fderiv φ) z) u v is bounded on a ball around x₀ (via CLM-eval continuity).
+-- chartField_secondJet_contract_ball: the concrete van-Vleck field-point discharge — the Point n vector
+-- whose k-component is Qfield 0 z k = ∂ᵢ∂ⱼ(chart)_k(z), bounded on a ball (from the base-0 chart's C²
+-- at 0). CORRECTS J4-800(c): the sliver's Q is the field-varying (not base-varying/origin) Hessian, so
+-- chartW0_secondJet_bound is NOT the right object; this supplies the field-point ball form. std-3.
+-- NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.MixedSliverFieldQBound

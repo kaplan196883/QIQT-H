@@ -27555,6 +27555,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverQLipInt.hqLip_triple_of_bounded_lipschitz
 #print axioms QIQTH.MixedSliverQLipInt.integrable_of_finiteSupport_bounded
 
+-- MixedSliverFieldQBound: the CONCRETE per-point (ball) supplier for the mixed sliver's hJ3Q at the
+-- van-Vleck inverse chart, via the FIELD-POINT (not base-point) second-jet Hessian contraction.
+-- hessianContract_bounded_on_ball (pure): φ ∈ ContDiffAt ℝ 2 at x₀ ⟹ z ↦ (fderiv(fderiv φ) z) u v is
+-- bounded on a ball around x₀ (fderiv(fderiv φ) continuous + CLM-eval continuity + norm-bound on a nbhd).
+-- chartField_secondJet_contract_ball: the concrete van-Vleck field-point discharge — the Point n vector
+-- whose k-component is Qfield 0 z k = ∂ᵢ∂ⱼ(chart)_k(z), bounded on a ball (from the base-0 chart's C² at
+-- 0 via chartField_contDiffAt_basePoint_viaIFT). CORRECTS J4-800(c): the sliver's Q is the FIELD-varying
+-- (not base-varying/origin) Hessian, so chartW0_secondJet_bound is not the right object. std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverFieldQBound.hessianContract_bounded_on_ball
+#print axioms QIQTH.HeatResidualBound.chartField_secondJet_contract_ball
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
