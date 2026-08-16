@@ -27545,6 +27545,16 @@ namespace QIQTH.AxiomAudit
 -- trivially (rncRadialSq(−z)=rncRadialSq z≥½·; ‖0‖=0). std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.MixedSliverGatedEstimates.gated_five_estimates_global
 
+-- J4-800: the two ABSTRACT SUPPLIERS for the mixed sliver's hqLip Lipschitz sub-part + 7 integrabilities.
+-- product_bounded_lipschitz_bound = the product-Lipschitz rule |fg(x)−fg(y)| ≤ (Mf·Lg+Mg·Lf)·dist (the
+-- "genuine new content with no supplier" J4-795 flagged for hqLip's product A0·F), packaged with sup-bound
+-- Mf·Mg into hqLip_triple_of_bounded_lipschitz (the full hqLip conjunction). integrable_of_finiteSupport_
+-- bounded = the gate-compact-support integrability engine (vanish off finite-measure S + AE-meas + bounded
+-- ⟹ Integrable, dominated by M·1_S), the route for the 7 integrabilities. std-3. NOT a₁=R/6 (CONDITIONAL).
+#print axioms QIQTH.MixedSliverQLipInt.product_bounded_lipschitz_bound
+#print axioms QIQTH.MixedSliverQLipInt.hqLip_triple_of_bounded_lipschitz
+#print axioms QIQTH.MixedSliverQLipInt.integrable_of_finiteSupport_bounded
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

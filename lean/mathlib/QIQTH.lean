@@ -3862,3 +3862,11 @@ import QIQTH.InverseChartSecondJet
 -- "bookkeeping/redefinition" global-gating wall J4-797 named — discharged in general form. std-3.
 -- NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.MixedSliverGatedEstimates
+-- J4-800: the two ABSTRACT SUPPLIERS for the mixed sliver's hqLip Lipschitz sub-part (J4-795's flagged
+-- "genuine new content with no supplier") and its seven integrabilities. product_bounded_lipschitz_bound:
+-- |fg(x)−fg(y)| ≤ (Mf·Lg+Mg·Lf)·dist for bounded (Mf/Mg) Lipschitz (Lf/Lg) factors — the product-Lipschitz
+-- rule. hqLip_triple_of_bounded_lipschitz packages it with the sup-bound Mf·Mg + carried measurability into
+-- the full hqLip triple. integrable_of_finiteSupport_bounded: a function vanishing off a finite-measure set,
+-- AE-measurable and bounded, is integrable (dominated by M·1_S) — the gate-compact-support integrability
+-- engine for the 7 carries. std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.MixedSliverQLipInt
