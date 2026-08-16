@@ -27473,6 +27473,17 @@ namespace QIQTH.AxiomAudit
 -- estimates. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.KPrimeDiagPdBridge.kPrime_apply_single_eq_diagPd
 
+-- J4-792 (MixedNormalFormFull): the FULL ∀ζ mixed hNormalForm for the concrete gated van-Vleck witness,
+-- assembling the on-gate mTerm-form match (J4-790, witnessMixed_gate_eq_mTerm) with the off-gate
+-- reconciliation. The sliver rate witness_sliver2_xuniform_mixed consumes hNormalForm POINTWISE at every
+-- field point ζ (unconditional ∀τ∈Ioo,∀ζ); the on-gate match alone covers only ζ∈S z₀. This closes the
+-- ∀ζ gap by using the S-GATED amplitude fields (gateAmp): on-gate the indicator is transparent (equals
+-- the J4-790 match); off-gate all four amplitudes vanish and the witness partial vanishes (derived from
+-- the off-gate value germ hOffNhd via two germ-congruences, pd_pd_mixed_eq_zero_of_eventuallyZero), so
+-- both sides are 0. Carries the geometric off-gate germ hOffNhd (chart-surface residue) + per-point
+-- chart/amplitude jets — all satisfiable, none the conclusion. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedNormalFormFull.witnessMixed_hNormalForm_full
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

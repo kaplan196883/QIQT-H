@@ -3790,3 +3790,9 @@ import QIQTH.MixedNormalFormOnGate
 -- link kPrime_apply_single_eq_mixedPd carries no i≠j hypothesis, this is exactly its j:=i instance,
 -- built directly here as a diagonally-labelled API object. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 import QIQTH.KPrimeDiagPdBridge
+-- J4-792: the FULL ∀ζ mixed hNormalForm for the concrete gated van-Vleck witness. Assembles the on-gate
+-- mTerm-form match (J4-790) with the off-gate reconciliation via S-GATED amplitude fields: on-gate the
+-- indicator is transparent (= the on-gate match); off-gate both the gated amplitudes and the witness
+-- partial vanish (the latter derived from the off-gate value germ hOffNhd). Supplies the EXACT
+-- unconditional hNormalForm shape witness_sliver2_xuniform_mixed consumes. std-3. NOT a₁=R/6 (CONDITIONAL).
+import QIQTH.MixedNormalFormFull
