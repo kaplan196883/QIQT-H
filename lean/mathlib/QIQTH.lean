@@ -3796,3 +3796,9 @@ import QIQTH.KPrimeDiagPdBridge
 -- partial vanish (the latter derived from the off-gate value germ hOffNhd). Supplies the EXACT
 -- unconditional hNormalForm shape witness_sliver2_xuniform_mixed consumes. std-3. NOT a₁=R/6 (CONDITIONAL).
 import QIQTH.MixedNormalFormFull
+-- J4-793: concrete discharge of the FOUR amplitude sup-bound hypotheses (hA0bdd/hA1ibdd/hA1jbdd/hA2bdd)
+-- of witness_sliver2_xuniform_mixed at the CONCRETE gated chart amplitudes (gateAmp of chartFieldAmp and
+-- its field partials) fed into witnessMixed_hNormalForm_full. Key: the gate localizes — off-gate the
+-- gated amplitude is 0, so the sliver's GLOBAL sup bound reduces to an ON-GATE base bound
+-- (gateAmp_abs_le_onGate). std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+import QIQTH.MixedSliverAmpBounds

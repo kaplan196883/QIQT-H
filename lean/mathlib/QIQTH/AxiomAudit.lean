@@ -27484,6 +27484,11 @@ namespace QIQTH.AxiomAudit
 -- chart/amplitude jets — all satisfiable, none the conclusion. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.MixedNormalFormFull.witnessMixed_hNormalForm_full
 
+-- J4-793: the FOUR amplitude sup-bound sliver hypotheses discharged at the concrete gated chart
+-- amplitudes (gate-localization: off-gate = 0 ⟹ global bound reduces to on-gate base bound). NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverAmpBounds.gateAmp_abs_le_onGate
+#print axioms QIQTH.MixedSliverAmpBounds.witnessMixed_amplitude_sup_bounds
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
