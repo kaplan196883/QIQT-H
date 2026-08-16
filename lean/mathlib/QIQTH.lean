@@ -3770,3 +3770,7 @@ import QIQTH.MixedGradientSlice
 -- delivers the SAME sliverRateConst via the diagonal moment tower verbatim. mixedHessianSlice_chart_bound
 -- combines E1 + plain half into the exact hInner0-shaped chart-Gaussian bound. std-3. NOT a₁=R/6.
 import QIQTH.MixedGaussReplaceSlice
+-- J4-787: the CLOSED x-uniform MIXED sliver rate theorem — pure wiring gluing the four mixed
+-- inner-bound discharges (J4-784→786) through witness_sliver2_assembly_mixed into a single √ε
+-- sliver rate with NO carried inner-bound hypotheses (mixed twin of witness_sliver2_xuniform). std-3.
+import QIQTH.MixedSliverXUniform

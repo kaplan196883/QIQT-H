@@ -27441,6 +27441,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedGaussReplaceSlice.tE1_slice_abstract_mixed
 #print axioms QIQTH.MixedGaussReplaceSlice.mixedHessianSlice_chart_bound
 
+-- J4-787: the CLOSED x-uniform MIXED sliver rate — the pure wiring step gluing the four
+-- already-proven mixed inner-bound discharges (J4-784→786) through witness_sliver2_assembly_mixed
+-- into a single √ε sliver rate with NO carried inner-bound hypotheses (the four hInner* slots are
+-- discharged internally from the geometric/amplitude/domination data). Mixed twin of the diagonal
+-- witness_sliver2_xuniform. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedSliverXUniform.witness_sliver2_xuniform_mixed
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
