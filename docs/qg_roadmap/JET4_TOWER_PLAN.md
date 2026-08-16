@@ -9526,3 +9526,11 @@ left as the mixed-sliver chart-surface wall.
   abstract witness). No single fully-instantiated capstone call to `witness_sliver2_xuniform_mixed` exists
   yet, so this does NOT chain through to hCConv.
 - a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+## J4-805 — item (a) normal-form matching CLOSED — only measurability/bound carries remain before full closure [AF]
+- New file `QIQTH/MixedNormalFormGatedMatch.lean` (commit `6d7dd3c0`), 2 theorems, std-3, budget raw 0, first-compile.
+- `mixed_normalForm_gate_geometry` (general) + `witnessMixed_hNormalForm_gated` (concrete corollary) — the EXACT `hNormalForm` shape `witness_sliver2_xuniform_mixed` needs, at the gated van-Vleck witness with gated geometry.
+- One real subtlety pinned down: J4-792's normal form uses RAW geometry+gated amplitudes; the sliver's 5 geometric carries need GATED geometry (for the global ∀z form). On-gate: gated=raw definitionally. Off-gate: gated amplitude=0 kills both sides regardless of geometry. Sole honest residue: `hSG: S z₀⊆G` (radial support inside injectivity ball, reflexive/satisfiable), needed to transfer off-S vanishing to off-G.
+- **VERIFIED (not overclaimed) full-closure status**: `witness_sliver2_xuniform_mixed` is NOT fully discharged. Supplied so far: hNormalForm (this), 4 amplitude bounds (J4-793), hFdom (J4-794), 5 geometric carries (J4-796/797/798/799), 7 integrand SUPPORT legs (J4-804). STILL OPEN: 7 integrands' AE-measurability+on-gate-bound legs (portable but unwired) + hqLip's remaining concrete carries (J4-802's "modulo carries").
+- Item (a) is genuinely off the list. Remaining before full closure: item (c)'s bridge identity + item (d)'s meas/bound legs + hqLip's carries — all now small, tractable, concrete-instantiation items, no more "genuine new content" gaps anywhere.
+- a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
