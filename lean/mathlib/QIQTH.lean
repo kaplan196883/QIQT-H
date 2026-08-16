@@ -3653,3 +3653,11 @@ import QIQTH.WidthSecondEnvelopeUniform
 -- WideA1AssemblyTrunc.wide_a1_R6_both_slots_internal. Surviving inner antecedents: hS0/hDuhamel/hDConv/
 -- hCH/hCConv. std-3. NOT a₁=R/6.
 import QIQTH.GatedGlobalWitnessN1ThreeSlots
+-- J4-774: the ORDER-1 capstone with hEboundW GENUINELY DISCHARGED (wiring adapter for the
+-- TrueKernelA1Reduced lineage). trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged: sources
+-- a,b,C,S + the (0,t]-affine bound + origin gate membership 0∈S 0 from gatedWitnessN1_package_open,
+-- feeds the affine bound into the LOCAL-form consumers (iterConvIntegrableW_of_locally_bound_baseMeas
+-- for hInt, hInter_from_local_data for hInter), and closes with the (0,t]-restricted capstone. vs
+-- J4-767: hEboundW AND hS0 discharged; surviving carries hEmeas/hDuhamel/hDConv/hCH/hCConv (one fewer
+-- open hypothesis on the live order-1 chain). std-3. NOT a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1CapstoneEbdDischarged

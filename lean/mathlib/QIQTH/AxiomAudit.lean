@@ -27271,6 +27271,19 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.n1_vanVleck_three_slots_internal
 
+-- GatedGlobalWitnessN1CapstoneEbdDischarged (J4-774): the wiring adapter for the OTHER order-1 lineage
+-- — trueKernel_diagonal_a1_eq_R6_residual_N1_discharged (J4-767, TrueKernelA1Reduced), which CARRIED
+-- the pure all-τ hEboundW. Here hEboundW is DISCHARGED from geometry: a,b,C,S + the (0,t]-affine bound
+-- (C·(1+t))·baseKernelW 2 0 + origin gate membership 0∈S 0 are sourced from gatedWitnessN1_package_open;
+-- hInt via iterConvIntegrableW_of_locally_bound_baseMeas (J4-109 timeCap producer) and hInter via
+-- hInter_from_local_data (J4-206), then closed by trueKernel_diagonal_a1_eq_R6_residual_restricted
+-- (J4-104, whose summability runs through neumann_summable_alpha0_width2_le — pure hEboundW never appears).
+-- vs J4-767: hEboundW AND hS0 discharged; surviving carries hEmeas/hDuhamel/hDConv/hCH/hCConv (one fewer
+-- open hypothesis). Extra geometric inputs hgnd/hgsymm/hinvF/hframeK/hw (standard metric facts). No
+-- vacuous hyps, none the conclusion. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
