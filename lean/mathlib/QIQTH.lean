@@ -3645,3 +3645,11 @@ import QIQTH.WidthSecondEnvelope
 -- management plumbing over the pointwise J4-770 core; jet sup constants carried (C²/.choose-opacity wall).
 -- NOT a₁=R/6.
 import QIQTH.WidthSecondEnvelopeUniform
+-- GatedGlobalWitnessN1ThreeSlots (J4-773): wiring adapter routing the van-Vleck order-1 residual bound
+-- (CoeffU1Fix.gatedWitnessN1_hEboundW_le_vanVleck_final, via EboundWiringHD1.hEboundW_from_geometry)
+-- through the (0,t]-TRUNCATED consumer chain to discharge hEboundW+hInt+hInter INTERNALLY at the live
+-- N1 gated van-Vleck witness. n1_vanVleck_three_slots_internal: the order-1 capstone with all THREE
+-- residual carries supplied from geometry; one fewer implication antecedent (hInter) than
+-- WideA1AssemblyTrunc.wide_a1_R6_both_slots_internal. Surviving inner antecedents: hS0/hDuhamel/hDConv/
+-- hCH/hCConv. std-3. NOT a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1ThreeSlots

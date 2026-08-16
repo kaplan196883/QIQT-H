@@ -27260,6 +27260,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WidthSecondEnvelopeUniform.witnessSecondXDeriv_hSecondEnv_uniform
 #print axioms QIQTH.WidthSecondEnvelopeUniform.hSecondEnv_uniform_forGate
 
+-- GatedGlobalWitnessN1ThreeSlots (J4-773): the order-1 gated van-Vleck capstone with hEboundW, hInt
+-- AND hInter all discharged INTERNALLY from geometry. Wiring adapter: the van-Vleck residual bound
+-- (gatedWitnessN1_hEboundW_le_vanVleck_final, repackaged as the fixed-C' τ≤t width-2 form by
+-- hEboundW_from_geometry) is fed through the (0,t]-truncated producer (iterConvIntegrableWOn_of_bound_
+-- baseMeas_trunc → hInt) and the truncated interchange (heatConv_leviSeries_interchange_trunc → hInter),
+-- then assembled by wide_a1_R6_of_residue_inf_trunc (κ=2). One fewer inner antecedent (hInter gone) than
+-- wide_a1_R6_both_slots_internal. Carries: RNC/gauge geometry + ∀-gate tripleHEmeas + 1≤n; inner
+-- antecedents hS0/hDuhamel/hDConv/hCH/hCConv. No vacuous hyps, none the conclusion. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.n1_vanVleck_three_slots_internal
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
