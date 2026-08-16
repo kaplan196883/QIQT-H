@@ -3881,3 +3881,11 @@ import QIQTH.MixedSliverQLipInt
 -- chartW0_secondJet_bound is NOT the right object; this supplies the field-point ball form. std-3.
 -- NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.MixedSliverFieldQBound
+-- J4-802: gateAmp CONCRETE Lipschitz constant + wiring into the hqLip triple (item (b) of J4-800/801).
+-- gateAmp = Set.indicator-gated amplitude; under off-gate vanishing (radialCutoff-supported) the
+-- indicator is redundant (gateAmp = A τ), so gateAmp inherits verbatim the raw amplitude's Lipschitz
+-- constant L_A and sup-bound M_A. mixedSliver_hqLip_triple_via_gateAmp feeds that DERIVED gateAmp
+-- constant + the CARRIED leviSeries-kernel constant L_F = L_E+K·2√s (resolvent_lipschitz_pointwise
+-- output) into MixedSliverQLipInt.hqLip_triple_of_bounded_lipschitz, yielding the exact mixed-sliver
+-- hqLip triple. std-3, no new wall. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.MixedSliverGateAmpLipschitz

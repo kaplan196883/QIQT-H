@@ -27566,6 +27566,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverFieldQBound.hessianContract_bounded_on_ball
 #print axioms QIQTH.HeatResidualBound.chartField_secondJet_contract_ball
 
+-- MixedSliverGateAmpLipschitz (J4-802): the CONCRETE gateAmp Lipschitz constant + wiring into the hqLip
+-- triple (item (b) of J4-800/801). gateAmp = Set.indicator-gated amplitude; under off-gate vanishing
+-- (radialCutoff-supported, radialCutoff_zero_on_frontier_collar) the indicator is REDUNDANT
+-- (gateAmp = A τ pointwise, gateAmp_eq_of_vanishing_off), so gateAmp inherits verbatim the raw
+-- amplitude's Lipschitz constant L_A (gateAmp_lipschitz_of_vanishing) and sup-bound M_A.
+-- mixedSliver_hqLip_triple_via_gateAmp feeds that DERIVED gateAmp constant + the CARRIED leviSeries
+-- kernel constant L_F = L_E+K·2√s (resolvent_lipschitz_pointwise output) into
+-- MixedSliverQLipInt.hqLip_triple_of_bounded_lipschitz, yielding the exact mixed-sliver hqLip triple.
+-- std-3, no new wall. NOT a₁=R/6 (stays CONDITIONAL).
+#print axioms QIQTH.MixedSliverGateAmpLipschitz.gateAmp_eq_of_vanishing_off
+#print axioms QIQTH.MixedSliverGateAmpLipschitz.gateAmp_lipschitz_of_vanishing
+#print axioms QIQTH.MixedSliverGateAmpLipschitz.mixedSliver_hqLip_triple_via_gateAmp
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
