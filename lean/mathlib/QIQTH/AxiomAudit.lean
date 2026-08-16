@@ -27168,6 +27168,17 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_hEboundW_discharged
 
+-- J4-761: hDH (the diagonal t-differentiability carry) DISCHARGED for the concrete J4-100 gated
+-- cutoff-parametrix witness. gatedGlobalWitness_diag_hDH proves DifferentiableAt (τ↦H τ 0 0) t for
+-- t>0 gate-generically: τ-independent hard gate ⟹ case split to const-0 (off gate) or
+-- radialCutoff·heatParametrix 0 (on gate, via uniformInverseChart_zero + heatParametrix_differentiableAt_t).
+-- trueKernel_diagonal_a1_eq_R6_residual_hDH_discharged removes hDH from the hEboundW-discharged
+-- capstone: surviving Levi/Duhamel census SEVEN→SIX (hHdiag/hInt/hDuhamel/hInter/hDConv/hCH/hCConv).
+-- STILL CONDITIONAL; NOT unconditional a₁=R/6 (hHdiag still cannot hold at this order-0 witness).
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.gatedGlobalWitness_diag_hDH
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_hDH_discharged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -3600,3 +3600,8 @@ import QIQTH.UniformFlowThirdJetCLMUncond
 -- the Levi/Duhamel census hInt/hDuhamel/hInter/hDH/hDConv/hCH/hCConv/hHdiag). C4c wall discharged;
 -- STILL CONDITIONAL, NOT unconditional a₁=R/6.
 import QIQTH.TrueKernelA1EboundWired
+-- J4-761: hDH (diagonal t-differentiability) DISCHARGED for the concrete J4-100 gated cutoff-parametrix
+-- witness (gatedGlobalWitness_diag_hDH), and removed from the hEboundW-discharged capstone
+-- (trueKernel_diagonal_a1_eq_R6_residual_hDH_discharged): surviving Levi/Duhamel census SEVEN→SIX
+-- (hHdiag/hInt/hDuhamel/hInter/hDConv/hCH/hCConv). STILL CONDITIONAL, NOT unconditional a₁=R/6.
+import QIQTH.GatedGlobalWitnessDiagDH
