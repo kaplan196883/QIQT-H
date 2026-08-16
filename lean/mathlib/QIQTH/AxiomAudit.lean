@@ -27193,6 +27193,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gatedGlobalWitness_residual_hEzero
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_hInt_hInter_hDH_discharged
 
+-- J4-763: hDaLimLU_order0 = the loc-unif Da-limit (DaLimLUGoal, the sole hard residue of BOTH order-0
+-- hDuhamel AND hDConv) PORTED to the concrete order-0 gated cutoff-parametrix witness H := gatedKernel
+-- K S (globalCutoffParametrixWitness Θ uu a b Vmap) actually consumed by the live capstone, for a
+-- GENERIC source F (instantiable at leviSeries (heatOp g gi H)). Instantiates the ABSTRACT-in-H,F
+-- reduction ETailRateBound.hDaLimLU_from_data at the order-0 witness, discharging ONE member (hEzero,
+-- residual vanishing at τ≤0) INTERNALLY from geometry via gatedGlobalWitness_residual_hEzero (needs
+-- 1≤n) — the same order-0 vanishing used for hInt/hInter in J4-762. Remaining hyps are exactly the
+-- ETailRateBound data census about the order-0 H / source F (gauge, pdpdH, hInterchange, hLapFull,
+-- adjacency+strip integrabilities, √ε sliver amplitudes, hEdom, hFdom/hFzero, hEcomb) — none vacuous,
+-- none the conclusion, hAnear(W1)-free. FIRST wiring of the hDaLimLU reduction to the order-0
+-- globalCutoffParametrixWitness chain. STILL CONDITIONAL; NOT a₁=R/6. expected: standard 3
+#print axioms QIQTH.DaLimLUOrder0Discharge.hDaLimLU_order0
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -3611,3 +3611,9 @@ import QIQTH.GatedGlobalWitnessDiagDH
 -- calling hInter a Levi WALL. Surviving carries: hHdiag/hDuhamel/hDConv/hCH/hCConv + single hEmeas.
 -- STILL CONDITIONAL, NOT unconditional a₁=R/6.
 import QIQTH.GatedGlobalWitnessLeviIntInter
+-- J4-763: hDaLimLU (DaLimLUGoal loc-unif Da-limit, sole hard residue of order-0 hDuhamel+hDConv)
+-- PORTED to the concrete order-0 gated cutoff-parametrix witness gatedKernel K S (globalCutoff-
+-- ParametrixWitness ...) via ETailRateBound.hDaLimLU_from_data (abstract in H,F), with the residual
+-- hEzero member discharged internally from geometry (gatedGlobalWitness_residual_hEzero, needs 1≤n).
+-- Remaining = the ETailRateBound data census (hAnear/W1-free). STILL CONDITIONAL, NOT a₁=R/6.
+import QIQTH.DaLimLUOrder0Discharge
