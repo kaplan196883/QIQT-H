@@ -46,16 +46,40 @@ Note the concrete local `hco`/`hVdisp` already existed (base-0, over an active s
 `chartW0_nearIsometry` / `chartW0_displacement`. The new brick adds the **reusable per-point primitive**
 in the sliver's `∀ z` hypothesis shape — the object a per-point discharge / future gating layer calls.
 
+## Update (J4-797 / J4-798) — `hJ3i`/`hJ3j`/`hJ3Q` per-point BALL forms DISCHARGED.
+
+The J4-556 "substrate-rebuild wall" for the jet gaps turned out to be a **don't-under-credit** case: the
+`uniformChart_exists` spec did NOT need rebuilding. Both jet gaps transfer from ALREADY-BANKED forward-flow
+regularity through the inverse-function-theorem chain rule, per-point on the injectivity ball.
+
+**`hJ3i` / `hJ3j` — FIRST-jet gap (J4-797).** `QIQTH/InverseChartFirstJet.lean` (std-3):
+- `clm_inverse_sub_one_le` — operator-inverse Neumann perturbation: `‖T−1‖ ≤ ρ ≤ 1/2 ⟹ IsUnit T ∧
+  ‖T⁻¹−1‖ ≤ 2ρ`.
+- `firstJet_gap_of_leftInverse` — chart-agnostic transfer: forward Jacobian `T` with `‖T−1‖ ≤ ρ`, ANY left
+  inverse `P` (from the germ `W∘φ=id`) ⟹ `‖P e − e‖ ≤ 2ρ` for `‖e‖ ≤ 1`.
+- `chartW0_firstJet_gap` — concrete: `‖fderiv(W_z) 0 (unitVec i) − unitVec i‖ ≤ 4·C_D·‖z‖` for `z ∈ K`,
+  `‖z‖ < r`. Uses the banked forward gap `uniformFlowExp_fderiv_near_id_quant` (← `geodesicField_taylor_
+  remainder_uniform`).
+
+**`hJ3Q` — SECOND-jet (Hessian) bound (J4-798).** `QIQTH/InverseChartSecondJet.lean` (std-3):
+- `secondJet_opNorm_le` — reusable operator-norm primitive: `I, D2` with `‖I‖ ≤ 2`, `‖D2‖ ≤ M` ⟹
+  `‖(−mulLeftRight ℝ _ I I) ∘L (D2 ∘L I)‖ ≤ 8·M` (via `‖mulLeftRight I I‖ ≤ ‖I‖²` + `opNorm_comp_le`).
+- `chartW0_secondJet_bound` — concrete: `‖fderiv(fun y => fderiv(W_z) y) 0‖ ≤ 8·M'` for `z ∈ K`, `‖z‖ < r`.
+  Wires the per-`z` 2nd-order IFT identity `Q z = (−mulLeftRight I I) ∘L (D²φ_z(W_z 0) ∘L I)`
+  (`Hid2Germ.hid2_discharged`) with `‖I‖ ≤ 2` (forward Jacobian gap + `clm_inverse_sub_one_le`) and the
+  UNIFORM forward-Hessian bound R3 `uniformFlowExp_hessian_opNorm_le` (J4-70, already banked).
+  This is exactly the "forward second Taylor's transfer to a uniform inverse Hessian is not plumbed here"
+  step the earlier note flagged — now plumbed.
+
+Together with `chartW0_hco_ball` (`hco`) and `chartW0_displacement` (`hVdisp`), the **per-point BALL forms of
+ALL FIVE** RNC chart-surface estimates are now discharged.
+
 **What remains open (precisely).**
-1. **Global `∀ z`.** The sliver's `hco`/`hVdisp` are literally global over all `Point n`. For the concrete
-   `V = W₀` the displacement bound holds only on the injectivity ball (off it the `.choose`-built chart is
-   junk). The global form needs the **gating layer** (concrete instantiation setting `V = −id`, `Pi = eᵢ`,
-   `Q = 0` off the gate), which is not built.
-2. **`hJ3i` / `hJ3j` / `hJ3Q` (jet gaps).** One Fréchet order above `hVdisp`. The linear-in-`‖z‖` decay of
-   the Jacobian gap needs a **uniform-in-`z` Jacobian Lipschitz / second-order Taylor** bound of the inverse
-   chart, which the frozen `uniformChart_exists` spec (ApproximatesLinearOn = first-order + pointwise
-   `ContDiffAt 2`) does **not** expose — the J4-556 substrate-rebuild wall. The forward geodesic Taylor
-   machinery exists (`GeodesicTaylorCompact.geodesicField_taylor_remainder_uniform`) but is not plumbed into
-   the inverse chart's spec. This is genuine multi-session substrate work, not a port.
+1. **Global `∀ z` (the ONLY remaining wall).** The sliver's five estimates are literally global over all
+   `Point n`. For the concrete `V = W₀` every bound holds only on the injectivity ball (off it the
+   `.choose`-built chart is junk). The global form needs the **gating layer** (concrete instantiation setting
+   `V = −id`, `Pi = eᵢ`, `Q = 0` off the gate), which is not built. The substrate-rebuild wall (a
+   higher-order `uniformChart_exists` spec) is NO LONGER needed for the jet bounds — only this off-gate
+   redefinition is.
 
 a₁ = R/6 remains CONDITIONAL.

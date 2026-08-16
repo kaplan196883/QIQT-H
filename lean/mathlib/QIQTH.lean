@@ -3833,3 +3833,25 @@ import QIQTH.OffGateCutoffDischarge
 -- V = uniformInverseChart … z 0 per-point on an explicit ball. Discharges the hco↔hVdisp reduction only;
 -- global ∀z (gating layer) + hJ3i/hJ3j/hJ3Q (substrate-rebuild wall) stay open. std-3. NOT a₁=R/6.
 import QIQTH.RNCNearIsometryPointwise
+
+-- J4-797 (FIRST-JET HALF of the J4-556 substrate wall): the mixed-sliver hJ3i/hJ3j chart-surface residue,
+-- DERIVED by transferring the FORWARD-flow Jacobian gap through the inverse-function-theorem chain rule.
+-- clm_inverse_sub_one_le (operator-inverse Neumann perturbation: ‖T-1‖≤ρ≤1/2 ⟹ IsUnit T ∧ ‖T⁻¹-1‖≤2ρ) +
+-- firstJet_gap_of_leftInverse (chart-agnostic: forward Jacobian T with ‖T-1‖≤ρ, any left inverse P ⟹
+-- ‖P e - e‖≤2ρ for ‖e‖≤1) + chartW0_firstJet_gap (concrete van-Vleck discharge, per-point on a ball:
+-- ‖fderiv(uniformInverseChart z) 0 (unitVec i) - unitVec i‖ ≤ 4·C_D·‖z‖). Uses the already-banked forward
+-- gap uniformFlowExp_fderiv_near_id_quant (← geodesicField_taylor_remainder_uniform). std-3. NOT a₁=R/6.
+import QIQTH.InverseChartFirstJet
+
+-- J4-798 (SECOND-JET HALF of the J4-556 substrate wall): the mixed-sliver hJ3Q chart-surface residue
+-- (the inverse-chart Hessian bound), DERIVED by transferring the UNIFORM forward-flow Hessian bound (R3,
+-- uniformFlowExp_hessian_opNorm_le, J4-70) through the SECOND-order inverse-function-theorem chain rule.
+-- secondJet_opNorm_le (reusable operator-norm primitive: I,D2 with ‖I‖≤2,‖D2‖≤M ⟹ ‖(-mulLeftRight I I)∘L
+-- (D2∘L I)‖ ≤ 8M) + chartW0_secondJet_bound (concrete van-Vleck discharge, per-point on a ball:
+-- ‖fderiv(fun y=>fderiv(uniformInverseChart z) y) 0‖ ≤ 8·M'). Wires the per-z 2nd-order IFT identity
+-- (Hid2Germ.hid2_discharged) with ‖I‖≤2 (forward Jacobian gap + clm_inverse_sub_one_le) and R3. This is
+-- the transfer J4-796's doc flagged as "not plumbed" — now plumbed. Together with chartW0_firstJet_gap +
+-- chartW0_hco_ball + chartW0_displacement, the per-point BALL forms of ALL FIVE RNC chart-surface
+-- estimates (hco/hVdisp/hJ3i/hJ3j/hJ3Q) are closed; only the global ∀z gating layer remains. std-3.
+-- NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.InverseChartSecondJet

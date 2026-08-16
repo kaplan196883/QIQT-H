@@ -9394,3 +9394,39 @@ a₁=R/6 CONDITIONAL; R/6 = labelled carrier.
 - The global `∀z` forms of `hco`/`hVdisp` also need an UNBUILT gating layer (set `V=−id,Pi=eᵢ,Q=0` off-gate — the raw chart is junk off the injectivity ball).
 - ★★★★★ HONEST SESSION-TERMINAL FLOOR: after 60 J4-numbered increments (J4-736→796) across an extraordinarily long grind, the campaign has reduced a₁=R/6 to a precisely-named, genuinely-hard substrate gap (J4-556, chart second-order regularity) that predates tonight's session and needs dedicated multi-session differential-geometry infrastructure work — connecting the existing forward geodesic Taylor machinery to the inverse chart's specification. This is NOT this session's "already exists" pattern; it is a confirmed, real, well-scoped research/engineering frontier.
 - a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+## J4-797 + J4-798 — the J4-556 jet-gap "substrate wall" was a DON'T-UNDER-CREDIT case: hJ3i/hJ3j/hJ3Q per-point BALL forms DISCHARGED (no substrate rebuild) [AF]
+Two new std-3 files, budget raw 0, vacuum guard clean. CORRECTION to J4-796's "genuine multi-session
+substrate work / spec rebuild needed": the frozen `uniformChart_exists` spec did NOT need rebuilding. The
+FORWARD-flow regularity the campaign already banked transfers to the inverse chart's jets through the
+first/second-order inverse-function-theorem chain rule.
+- **J4-797 (FIRST jet, `hJ3i`/`hJ3j`)** — `QIQTH/InverseChartFirstJet.lean`: `clm_inverse_sub_one_le`
+  (operator-inverse Neumann: `‖T−1‖≤ρ≤1/2 ⟹ IsUnit T ∧ ‖T⁻¹−1‖≤2ρ`) + `firstJet_gap_of_leftInverse`
+  (chart-agnostic: forward `T` with `‖T−1‖≤ρ`, any left inverse `P` ⟹ `‖P e−e‖≤2ρ` for `‖e‖≤1`) +
+  `chartW0_firstJet_gap` (concrete van-Vleck, per-point on a ball: `‖fderiv(W_z) 0 (unitVec i)−unitVec i‖
+  ≤ 4·C_D·‖z‖`). Rides the banked forward Jacobian gap `uniformFlowExp_fderiv_near_id_quant`
+  (← `geodesicField_taylor_remainder_uniform`).
+- **J4-798 (SECOND jet, `hJ3Q`)** — `QIQTH/InverseChartSecondJet.lean`: `secondJet_opNorm_le` (reusable
+  operator-norm primitive: `I,D2` with `‖I‖≤2,‖D2‖≤M ⟹ ‖(−mulLeftRight ℝ _ I I)∘L(D2∘L I)‖≤8M`, via
+  `‖mulLeftRight I I‖≤‖I‖²` + `opNorm_comp_le`) + `chartW0_secondJet_bound` (concrete van-Vleck, per-point
+  on a ball: `‖fderiv(fun y=>fderiv(W_z) y) 0‖ ≤ 8·M'`). ★ KEY: the two ingredients ALREADY EXISTED in the
+  repo and only needed wiring — (i) the per-`z` 2nd-order IFT identity `Q z = (−mulLeftRight I I)∘L(D²φ_z(W_z
+  0)∘L I)`, `I=Ring.inverse(Dφ_z(W_z 0))` (`Hid2Germ.hid2_discharged`, banked J4-489), and (ii) the UNIFORM
+  forward-flow Hessian opNorm bound R3 `uniformFlowExp_hessian_opNorm_le` (banked J4-70). With `‖I‖≤2` from
+  the forward Jacobian gap + `clm_inverse_sub_one_le`, `‖Q z‖ ≤ ‖I‖³·‖D²φ‖ ≤ 8·M'`. This is EXACTLY the
+  transfer J4-796 flagged as "the forward second Taylor's transfer to a uniform inverse Hessian is not
+  plumbed here" — now plumbed.
+- ★★ HONEST NET STATE: together with `chartW0_hco_ball` (`hco`, J4-796) and `chartW0_displacement`
+  (`hVdisp`), the per-point BALL forms of ALL FIVE RNC chart-surface estimates
+  (`hco`/`hVdisp`/`hJ3i`/`hJ3j`/`hJ3Q`) are now DISCHARGED. The J4-556 chart-second-order substrate wall is
+  RETIRED for the jet bounds (the higher-order `uniformChart_exists` rebuild is NOT needed). The SOLE
+  remaining wall for these five estimates is the GLOBAL `∀z` gating layer (set `V=−id,Pi=eᵢ,Q=0` off the
+  injectivity ball — the raw `.choose` chart is junk off-gate), a bookkeeping/redefinition task, not a
+  differential-geometry frontier.
+- ADVERSARIAL / non-vacuity: every hypothesis satisfiable and non-vacuous; none equals its conclusion;
+  `secondJet_opNorm_le` is a genuine operator-norm bound; the subsingleton (n=0) branch handled separately
+  (`Q z = 0`). std-3 confirmed via throwaway `#print axioms` (propext, Classical.choice, Quot.sound — no
+  sorryAx, no custom axioms). Sympy artifact `docs/qg_roadmap/rnc_sympy/inv_jacobian_transfer.py` verifies
+  the IFT error-transfer exponents/constants from scratch (operator-inverse `2×` doubling + RNC geometric
+  `Dg(y)−I` leading `−Γ(y,·)`).
+- a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (unaffected — this is chart-surface geometry).

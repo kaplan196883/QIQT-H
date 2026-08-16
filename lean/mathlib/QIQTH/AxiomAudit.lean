@@ -27520,6 +27520,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.RNCNearIsometryPointwise.nearIsometry_lower_of_quadraticDisplacement
 #print axioms QIQTH.RNCNearIsometryPointwise.chartW0_hco_ball
 
+-- J4-797/798: the FIRST-JET (hJ3i/hJ3j) and SECOND-JET (hJ3Q) halves of the J4-556 substrate wall — the
+-- last two of the FIVE RNC chart-surface estimates the mixed sliver carries — DERIVED by transferring the
+-- forward-flow Jacobian gap (first jet) and the UNIFORM forward-flow Hessian bound R3 (second jet) through
+-- the first/second-order inverse-function-theorem chain rule. firstJet_gap_of_leftInverse /
+-- chartW0_firstJet_gap: ‖fderiv(uniformInverseChart z) 0 (unitVec i) − unitVec i‖ ≤ 4·C_D·‖z‖ on a ball.
+-- secondJet_opNorm_le (I,D2 with ‖I‖≤2,‖D2‖≤M ⟹ ‖(−mulLeftRight I I)∘L(D2∘L I)‖≤8M) / chartW0_secondJet_
+-- bound: ‖fderiv(fun y=>fderiv(uniformInverseChart z) y) 0‖ ≤ 8·M' on a ball. Both wire ALREADY-BANKED
+-- ingredients (uniformFlowExp_fderiv_near_id_quant, Hid2Germ.hid2_discharged, uniformFlowExp_hessian_
+-- opNorm_le); the J4-796 doc's "forward Taylor not plumbed into the inverse chart" is now plumbed. With
+-- chartW0_hco_ball + chartW0_displacement, the per-point BALL forms of ALL FIVE estimates are closed;
+-- only the global ∀z gating layer remains. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.InverseChartFirstJet.clm_inverse_sub_one_le
+#print axioms QIQTH.InverseChartFirstJet.firstJet_gap_of_leftInverse
+#print axioms QIQTH.HeatResidualBound.chartW0_firstJet_gap
+#print axioms QIQTH.InverseChartSecondJet.secondJet_opNorm_le
+#print axioms QIQTH.HeatResidualBound.chartW0_secondJet_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
