@@ -3720,3 +3720,9 @@ import QIQTH.KPrimeOpNormSliver
 -- of the kPrime hsliver census to the diagonal sTerm shape (does NOT supply the mixed √ε bound —
 -- polarized dirs are not coordinate-aligned). std-3. NOT a₁=R/6.
 import QIQTH.MixedSliverPolarization
+-- J4-781: OFF-DIAGONAL parity companion of the banked diagonal gaussian_hessian_cancel. The mixed
+-- second partial ∂ᵢ∂ⱼG_t=(zᵢzⱼ)/(4t²)·G_t vanishes to leading order BY PARITY (∫(zᵢzⱼ)/(4t²)·G_t=0 for
+-- i≠j); gaussian_hessian_cancel_mixed gives |∫(zᵢzⱼ)/(4t²)·G_t·q|≤L·n/√t (q Lipschitz) — the mixed
+-- leading-term √ε rate the sliver wall needed, working the aligned jets directly (no polarized dirs).
+-- std-3. NOT a₁=R/6 (a reusable analytic brick; a₁=R/6 stays CONDITIONAL).
+import QIQTH.GaussianHessianCancelMixed

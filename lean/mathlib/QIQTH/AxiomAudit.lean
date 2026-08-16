@@ -27359,6 +27359,17 @@ namespace QIQTH.AxiomAudit
 -- none the conclusion. std-3. NOT a₁=R/6.
 #print axioms QIQTH.MixedSliverPolarization.gaussComp_amp_pd_pd_mixed_polarized
 
+-- J4-781 (GaussianHessianCancelMixed): the OFF-DIAGONAL (mixed-index ∂ᵢ∂ⱼ, i≠j) parity companion of the
+-- banked diagonal gaussian_hessian_cancel. The mixed second partial of the product Gaussian is
+-- ∂ᵢ∂ⱼG_t=(zᵢzⱼ)/(4t²)·G_t, whose leading moment VANISHES BY PARITY (gaussian_hessian_moment_zero_mixed:
+-- ∫(zᵢzⱼ)/(4t²)·G_t=0 for i≠j, from gaussianMoment_diag's 2t·δᵢⱼ) — the cleaner cancellation the mixed
+-- √ε sliver needs. gaussian_hessian_cancel_mixed: |∫(zᵢzⱼ)/(4t²)·G_t·q| ≤ L·n/√t for q Lipschitz — the
+-- exact off-diagonal analogue supplying the mixed leading-term √ε rate (subleading remainders go through
+-- the existing magnitude bricks with the coordinate-aligned hJ3). i≠j load-bearing (i=j gives 2t≠0, the
+-- diagonal Hermite case). No vacuous hyps, none the conclusion. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_moment_zero_mixed
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_mixed
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
