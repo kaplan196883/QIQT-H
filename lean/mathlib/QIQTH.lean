@@ -3900,3 +3900,10 @@ import QIQTH.MixedSliverFieldQGlobal
 -- the amplitude is 0 (proved per-integrand by unfolding mTerm0/mTerm1/sTerm2 + ring); the sup-bound is
 -- reduced to an ON-GATE bound (global_bound_of_onGate), AE-measurability carried. std-3. NOT a₁=R/6.
 import QIQTH.MixedSliverIntegrands
+-- J4-805 (item (a), normal-form matching): the geometry-swap letting J4-792's concrete van-Vleck normal
+-- form (raw geometry uniformInverseChart/Pi/Pj/Q + gated amplitudes) be consumed by
+-- witness_sliver2_xuniform_mixed under the SAME gated geometry gateDisp/gateJet/gateQ (J4-799) that the
+-- five global geometric estimates use. Each mTerm/sTerm is pointwise at z: ON-gate gated=raw (if_pos),
+-- OFF-gate the gated amplitude is 0 (S z₀ ⊆ G) killing both sides. mixed_normalForm_gate_geometry
+-- (general) + witnessMixed_hNormalForm_gated (concrete). std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.MixedNormalFormGatedMatch

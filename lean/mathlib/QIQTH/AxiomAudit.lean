@@ -27602,6 +27602,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverIntegrands.integrable_hInt1j
 #print axioms QIQTH.MixedSliverIntegrands.integrable_hInt2
 
+-- J4-805 (item (a), normal-form matching): geometry-swap so J4-792's concrete van-Vleck normal form is
+-- consumed by witness_sliver2_xuniform_mixed under the gated geometry gateDisp/gateJet/gateQ. Pointwise
+-- per mTerm/sTerm: on-gate gated=raw, off-gate gated amplitude=0 (S z₀ ⊆ G). std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedNormalFormGatedMatch.mixed_normalForm_gate_geometry
+#print axioms QIQTH.MixedNormalFormGatedMatch.witnessMixed_hNormalForm_gated
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

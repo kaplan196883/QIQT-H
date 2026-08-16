@@ -9505,3 +9505,24 @@ left as the mixed-sliver chart-surface wall.
 - ★★★★★ Item (d) is now FULLY STRUCTURALLY CLOSED — only satisfiable measurability/boundedness carries remain, no more "genuine new content" gaps.
 - Items (a) normal-form matching + (c)'s bridge identity + the AE-meas/bound carries of (d) are the sole remaining pieces before `witness_sliver2_xuniform_mixed` is fully concretely instantiated.
 - a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+## J4-805 — item (a) normal-form matching CLOSED: the geometry-swap [AF]
+- New file `QIQTH/MixedNormalFormGatedMatch.lean` (std-3, budget raw 0, vacuum guard clean). Closes the
+  item (a) "normal-form matching" named at J4-801/804 — the FINAL geometry-swap letting J4-792's concrete
+  van-Vleck normal form (`witnessMixed_hNormalForm_full`, RAW geometry uniformInverseChart/Pi/Pj/Q + gated
+  amplitudes) be consumed by `MixedSliverXUniform.witness_sliver2_xuniform_mixed` under the SAME gated
+  geometry `gateDisp/gateJet/gateQ` (J4-799) that `gated_five_estimates_global` supplies for the five
+  global geometric carries. KEY: every `mTerm0/mTerm1/sTerm2` is POINTWISE at the field point `z`, so
+  ON-gate (`z ∈ G`) gated=raw by `if_pos` and OFF-gate the gated amplitude is `0` (via `S z₀ ⊆ G` +
+  `gateAmp_of_notMem`), collapsing BOTH the raw and gated term to `… · 0 = 0`. Two lemmas:
+  `mixed_normalForm_gate_geometry` (GENERAL geometry-swap, decoupled from the witness) +
+  `witnessMixed_hNormalForm_gated` (CONCRETE corollary in the exact sliver `hNormalForm` shape, carrying
+  only the satisfiable residue `hSG : S z₀ ⊆ G`, reflexive at `G = S z₀`). Built first-compile, std-3.
+- **NOT full closure of `witness_sliver2_xuniform_mixed`.** Re-verified the sliver's exact hypothesis list:
+  hNormalForm is NOW suppliable (this commit) alongside hA0/1i/1j/2bdd (J4-793), hFdom (J4-794), the five
+  geometric carries (gated_five_estimates_global from J4-796/797/798 ball forms), and the 7 integrabilities'
+  SUPPORT legs (J4-804) — but the 7 integrabilities' AE-strong-measurability + on-gate sup-bound legs and
+  hqLip's concrete instantiation carries remain OPEN (tractable at the concrete chart jets, not from the
+  abstract witness). No single fully-instantiated capstone call to `witness_sliver2_xuniform_mixed` exists
+  yet, so this does NOT chain through to hCConv.
+- a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
