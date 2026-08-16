@@ -27462,6 +27462,17 @@ namespace QIQTH.AxiomAudit
 -- ring); sympy-cross-checked target. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.MixedNormalFormOnGate.witnessMixed_gate_eq_mTerm
 
+-- KPrimeDiagPdBridge: the DIAGONAL (same-index j=i) twin of J4-788's kPrime→normal-form link —
+-- identifies the i-th (same-index) basis component of the abstract CLM derivative kernel kPrime with
+-- the field-independent Levi factor times the concrete DIAGONAL second field partial ∂ᵢ∂ᵢ of the gated
+-- van-Vleck witness (via pd_eq_fderiv on the carried field-differentiability). This is the kPrime-level
+-- link the DIAGONAL leg of kPrime_opNorm_sliver_bound's hcomp (j=i component) is a sliver of, the
+-- counterpart to the mixed link for the off-diagonal components. Since kPrime_apply_single_eq_mixedPd
+-- carries no i≠j hypothesis, this is exactly its j:=i instance (built directly here as a diagonally-
+-- labelled API object). On the gate this ∂ᵢ∂ᵢ = the diagonal 3-term normal form witness_sliver2_xuniform
+-- estimates. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.KPrimeDiagPdBridge.kPrime_apply_single_eq_diagPd
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -3783,3 +3783,10 @@ import QIQTH.KPrimeMixedPdBridge
 -- mTerm0+mTerm1+mTerm1+sTerm2 hNormalForm shape of witness_sliver2_xuniform_mixed (link 2 of J4-788's
 -- chain to hCConv). sympy-cross-checked target. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 import QIQTH.MixedNormalFormOnGate
+-- KPrimeDiagPdBridge: the DIAGONAL (same-index j=i) twin of J4-788's kPrime→normal-form link —
+-- identifies kPrime's i-th (same-index) CLM component with the Levi factor times the concrete DIAGONAL
+-- second field partial ∂ᵢ∂ᵢ of the gated van-Vleck witness (via pd_eq_fderiv). The kPrime-level link
+-- the DIAGONAL leg of kPrime_opNorm_sliver_bound's hcomp (j=i component) is a sliver of; since the mixed
+-- link kPrime_apply_single_eq_mixedPd carries no i≠j hypothesis, this is exactly its j:=i instance,
+-- built directly here as a diagonally-labelled API object. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+import QIQTH.KPrimeDiagPdBridge
