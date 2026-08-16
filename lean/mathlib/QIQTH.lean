@@ -3672,3 +3672,11 @@ import QIQTH.GatedGlobalWitnessN1CapstoneEbdDischarged
 -- hypothesis than J4-774, and hCConv weakened from unsatisfiable ⊤ to satisfiable C²-at-0. NO smooth-
 -- cutoff redesign needed. std-3. NOT a₁=R/6.
 import QIQTH.GatedGlobalWitnessN1CapstoneHCHDischarged
+-- hEmeas-discharged rebase: the ORDER-1 capstone with hEboundW (J4-774), hCH (J4-775), AND hEmeas
+-- genuinely discharged, on the LIVE TrueKernelA1Reduced/restricted lineage. Rebases the J4-775 chain
+-- onto the CONCRETE constant-radius flow-ball gate S z := uniformFlowExp g gi hChr hK z '' ball 0 c
+-- (ConstRadiusGateExport.constRadius_package_and_S1), whose tripleHEmeas (hEmeas) is discharged FROM
+-- GEOMETRY ALONE at that gate (S1TripleHEmeasGate.tripleHEmeas_flowball_geometry), modulo the single
+-- carried real inequality c < δ₀. Surviving carries drop to hDuhamel/hDConv/hCConv(C²-at-0) plus the
+-- outer real-number antecedent c < δ₀. std-3. STILL CONDITIONAL; NOT a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1CapstoneHEmeasDischarged

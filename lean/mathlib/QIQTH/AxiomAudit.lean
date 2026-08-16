@@ -27295,6 +27295,18 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hCH_discharged
 
+-- hEmeas-discharged rebase: the ORDER-1 capstone with hEboundW (J4-774), hCH (J4-775), AND hEmeas
+-- genuinely discharged, on the LIVE TrueKernelA1Reduced/restricted lineage. Rebases the J4-775 chain
+-- onto the CONCRETE constant-radius flow-ball gate S z := uniformFlowExp g gi hChr hK z '' ball 0 c
+-- (ConstRadiusGateExport.constRadius_package_and_S1), whose tripleHEmeas (hEmeas) is discharged FROM
+-- GEOMETRY ALONE at that gate (S1TripleHEmeasGate.tripleHEmeas_flowball_geometry), modulo the single
+-- carried real inequality c < δ₀ (an honest outer real-number antecedent, satisfiable, never assumed
+-- false nor asserted true). Surviving carries drop to hDuhamel/hDConv/hCConv(C²-at-0) plus c < δ₀. The
+-- gate-generic hEboundW/hCH transfer verbatim from J4-774/J4-775. No vacuous hyps, none the conclusion.
+-- STILL CONDITIONAL; NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEmeas_discharged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
