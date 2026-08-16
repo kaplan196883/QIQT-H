@@ -3638,3 +3638,10 @@ import QIQTH.DaLimLUN1Discharge
 -- witnessSecondXDeriv_chartImage_envelope (tied to the concrete witness, EXACT hSecondEnv RHS at a
 -- single (i,τ,z)). Uniform-over-box version needs the CompactJetBounds uniformisation. NOT a₁=R/6.
 import QIQTH.WidthSecondEnvelope
+-- WidthSecondEnvelopeUniform: J4-771 UNIFORMISATION of the pointwise hSecondEnv envelope (J4-770) into
+-- the fixed-B₀,B₁-over-the-compact-gate-box hSecondEnv FIELD shape. witnessSecondXDeriv_hSecondEnv_uniform
+-- (fixed constants + uniform per-(τ,z) jet/amplitude data bundle ⟹ the exact WideAmplitudeData.hSecondEnv
+-- statement) + hSecondEnv_uniform_forGate (FixedFlowGateData-keyed literal-field restatement). Quantifier-
+-- management plumbing over the pointwise J4-770 core; jet sup constants carried (C²/.choose-opacity wall).
+-- NOT a₁=R/6.
+import QIQTH.WidthSecondEnvelopeUniform

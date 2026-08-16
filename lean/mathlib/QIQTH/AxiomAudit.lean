@@ -27247,6 +27247,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WidthSecondEnvelope.chartImage_second_envelope_abstract
 #print axioms QIQTH.WidthSecondEnvelope.witnessSecondXDeriv_chartImage_envelope
 
+-- WidthSecondEnvelopeUniform (J4-771): the UNIFORMISATION of the pointwise J4-770 envelope into the
+-- fixed-B₀,B₁-over-the-compact-gate-box hSecondEnv FIELD shape. witnessSecondXDeriv_hSecondEnv_uniform
+-- takes FIXED constants (cW,CP,CS,CPQ,M₀,M₁,M₂,τ₀) + a uniform per-(τ,z) data bundle (jet HasDerivAt
+-- shapes + amplitude PdiffAt + open-gate + upper near-isometry + jet/amplitude sup bounds against the
+-- SAME fixed constants) and delivers the two-term Gaussian envelope with a SINGLE B₀,B₁ pair for all
+-- (τ,z) — EXACTLY WideAmplitudeData.hSecondEnv. hSecondEnv_uniform_forGate = FixedFlowGateData-keyed
+-- literal-field restatement. Quantifier-management plumbing over the pointwise core; jet sup constants
+-- carried (raw uniformInverseChart's C²/.choose-opacity wall blocks their geometric discharge). None of
+-- hData's conjuncts equals the envelope conclusion. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WidthSecondEnvelopeUniform.witnessSecondXDeriv_hSecondEnv_uniform
+#print axioms QIQTH.WidthSecondEnvelopeUniform.hSecondEnv_uniform_forGate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
