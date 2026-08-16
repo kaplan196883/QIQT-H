@@ -27160,6 +27160,14 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_opNorm_le_uncond
 
+-- J4-759: hEboundW (the single C4c off-diagonal parametrix wall) DISCHARGED into the reduced
+-- Seeley-DeWitt capstone by wiring the fully-unconditional gatedWitness_hEboundW_unconditional
+-- (J4-100) at the concrete gated witness. trueKernel_diagonal_a1_eq_R6_residual_hEboundW_discharged
+-- reduces the capstone carry count from EIGHT to SEVEN (surviving = Levi/Duhamel census). Shapes
+-- matched verbatim, no adapter. STILL CONDITIONAL; NOT unconditional a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_hEboundW_discharged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

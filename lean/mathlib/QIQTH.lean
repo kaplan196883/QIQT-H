@@ -3591,3 +3591,12 @@ import QIQTH.UniformFlowThirdJetCLM
 -- exponential-Grönwall wall was route-specific (naive quadruple-field bound); the surviving
 -- comparison-field/ODE-uniqueness route never incurs it. NOT a₁=R/6.
 import QIQTH.UniformFlowThirdJetCLMUncond
+-- J4-759: WIRE the fully-unconditional width-2 residual bound gatedWitness_hEboundW_unconditional
+-- (J4-100) into the reduced Seeley-DeWitt capstone trueKernel_diagonal_a1_eq_R6_residual, DISCHARGING
+-- the single C4c off-diagonal primitive hEboundW. trueKernel_diagonal_a1_eq_R6_residual_hEboundW_
+-- discharged: for the CONCRETE gated witness H = gatedKernel K S (globalCutoffParametrixWitness ...
+-- uniformInverseChart), the two shapes coincide verbatim (no adapter), so hEboundW is supplied
+-- internally and vanishes. Reduces the capstone carry count from EIGHT to SEVEN (surviving carries =
+-- the Levi/Duhamel census hInt/hDuhamel/hInter/hDH/hDConv/hCH/hCConv/hHdiag). C4c wall discharged;
+-- STILL CONDITIONAL, NOT unconditional a₁=R/6.
+import QIQTH.TrueKernelA1EboundWired
