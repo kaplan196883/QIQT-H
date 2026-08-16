@@ -3688,3 +3688,13 @@ import QIQTH.GatedGlobalWitnessN1CapstoneHEmeasDischarged
 -- strengthening of J4-777: surviving carries drop to hDuhamel/hDConv/hCConv(C²-at-0) ONLY, no c < δ₀.
 -- std-3. STILL CONDITIONAL; NOT a₁=R/6.
 import QIQTH.GatedGlobalWitnessN1CapstoneReachAligned
+-- J4-778: the CONCRETE fderivBulk/gderiv fields the L2 sliver census (CConvV2Facade/FrozenGermInternal/
+-- HD1Concrete) had only ever carried as opaque ∀-bound hypotheses (J4-776: "don't exist as DEFS
+-- anywhere in the repo"). fderivBulkInt/gderivInt now DEFINE them for the live order-1 gated van-Vleck
+-- witness (truncated / full ∫∫ of the CLM kernel kPrime = leviSeries • fderiv(witnessFieldDeriv)), and
+-- fderivBulkInt_hasFDerivAt DISCHARGES the hbulkderiv census member (HasFDerivAt (fbulkInt) (fderivBulkInt))
+-- via the banked double-integral engine (EboundWiringHD1) fed the honest order-2 dominator C·(t−s)⁻¹
+-- (dominator_intervalIntegrable, sharpened to any 0<t,0<ε). gderiv_sub_fderivBulk_eq_sliver gives the
+-- concrete sliver identity gderiv−fderivBulk = ∫_{t−εₘ}^t ∫z kPrime — the bridge that makes the
+-- previously-unstatable hsliver census member concretely statable. std-3. NOT a₁=R/6.
+import QIQTH.FderivBulkConcrete

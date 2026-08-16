@@ -27317,6 +27317,19 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned
 
+-- J4-778: the CONCRETE fderivBulk/gderiv fields of the L2 sliver census, previously carried only as
+-- opaque ∀-bound hypotheses (J4-776 flagged: no such DEFS existed anywhere in the repo). Now DEFINED
+-- for the live order-1 gated van-Vleck witness (fderivBulkInt/gderivInt = truncated/full ∫∫ of the CLM
+-- kernel kPrime), with the hbulkderiv census member (HasFDerivAt (fbulkInt) (fderivBulkInt)) DISCHARGED
+-- via the banked double-integral engine + the honest order-2 dominator, and the concrete sliver
+-- identity gderiv−fderivBulk = ∫_{t−εₘ}^t ∫z kPrime proven. Makes the previously-unstatable hsliver
+-- concretely statable. No vacuous hyps, none the conclusion. NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.FderivBulkConcrete.dominator_intervalIntegrable
+#print axioms QIQTH.FderivBulkConcrete.kPrime_hasFDerivAt
+#print axioms QIQTH.FderivBulkConcrete.fderivBulkInt_hasFDerivAt
+#print axioms QIQTH.FderivBulkConcrete.gderiv_sub_fderivBulk_eq_sliver
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
