@@ -27455,6 +27455,13 @@ namespace QIQTH.AxiomAudit
 -- estimates. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.KPrimeMixedPdBridge.kPrime_apply_single_eq_mixedPd
 
+-- J4-790: the on-gate mTerm-form match — the concrete on-gate mixed ∂ⱼ∂ᵢ second field partial of the
+-- gated van-Vleck witness (witnessMixed_gate_eq, i/j swapped for the kPrime orientation) equals the
+-- exact four-term mTerm0 V Pi Pj Q A0 + mTerm1 V Pj (∂ᵢA) + mTerm1 V Pi (∂ⱼA) + sTerm2 V (∂ⱼ∂ᵢA) —
+-- the hNormalForm shape of witness_sliver2_xuniform_mixed. Pure relabeling (unfold + ∑Pi·Pj=∑Pj·Pi +
+-- ring); sympy-cross-checked target. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedNormalFormOnGate.witnessMixed_gate_eq_mTerm
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

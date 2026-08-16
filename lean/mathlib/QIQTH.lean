@@ -3778,3 +3778,8 @@ import QIQTH.MixedSliverXUniform
 -- identifies (kPrime i t s x z)(eⱼ) with the Levi factor times the mixed second field partial ∂ⱼ∂ᵢ of
 -- the van-Vleck witness (via pd_eq_fderiv). Feeds kPrime_opNorm_sliver_bound's hcomp slot. std-3.
 import QIQTH.KPrimeMixedPdBridge
+-- J4-790: the on-gate mTerm-form match — witnessMixed_gate_eq_mTerm reshapes the concrete on-gate mixed
+-- ∂ⱼ∂ᵢ second field partial of the van-Vleck witness (witnessMixed_gate_eq) into the exact four-term
+-- mTerm0+mTerm1+mTerm1+sTerm2 hNormalForm shape of witness_sliver2_xuniform_mixed (link 2 of J4-788's
+-- chain to hCConv). sympy-cross-checked target. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+import QIQTH.MixedNormalFormOnGate
