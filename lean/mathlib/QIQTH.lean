@@ -3605,3 +3605,9 @@ import QIQTH.TrueKernelA1EboundWired
 -- (trueKernel_diagonal_a1_eq_R6_residual_hDH_discharged): surviving Levi/Duhamel census SEVEN→SIX
 -- (hHdiag/hInt/hDuhamel/hInter/hDConv/hCH/hCConv). STILL CONDITIONAL, NOT unconditional a₁=R/6.
 import QIQTH.GatedGlobalWitnessDiagDH
+-- hInt AND hInter (+hDH) DISCHARGED for the order-0 gated cutoff-parametrix capstone: both reduce to
+-- {hEbound(internal, J4-759), hEzero(gatedGlobalWitness_residual_hEzero, needs 1≤n), hEmeas} via
+-- iterConvIntegrableW_of_bound_baseMeas / heatConv_leviSeries_interchange. Corrects the stale census
+-- calling hInter a Levi WALL. Surviving carries: hHdiag/hDuhamel/hDConv/hCH/hCConv + single hEmeas.
+-- STILL CONDITIONAL, NOT unconditional a₁=R/6.
+import QIQTH.GatedGlobalWitnessLeviIntInter

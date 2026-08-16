@@ -27179,6 +27179,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gatedGlobalWitness_diag_hDH
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_hDH_discharged
 
+-- hInt + hInter (+hDH) DISCHARGED for the order-0 gated cutoff-parametrix capstone. Both Levi/Duhamel
+-- carries reduce to {hEbound (internal, gatedWitness_hEboundW_unconditional), hEzero, hEmeas}:
+--   hInt   ← iterConvIntegrableW_of_bound_baseMeas;
+--   hInter ← heatConv_leviSeries_interchange (conclusion VERBATIM the capstone hInter shape).
+-- gatedGlobalWitness_residual_hEzero = order-0 residual vanishing at τ≤0 (needs 1≤n; near-verbatim
+-- port of CoeffBoundsN1.heatOp_gatedWitnessN1_eq_zero_of_nonpos). CORRECTS the stale CapstoneWiring
+-- census that called hInter a [hDuhamel/Levi WALL] — it is a dominated-convergence corollary of the
+-- SAME {hEbound,hEzero,hEmeas} family as hInt. trueKernel_diagonal_a1_eq_R6_residual_hInt_hInter_hDH_
+-- discharged: surviving census drops to hHdiag/hDuhamel/hDConv/hCH/hCConv + single hEmeas carry.
+-- STILL CONDITIONAL; NOT unconditional a₁=R/6 (hHdiag cannot hold at order-0; hDuhamel/hDConv rest on
+-- hDaLimLU, hCConv on hD1). expected: standard 3
+#print axioms QIQTH.HeatResidualBound.gatedGlobalWitness_residual_hEzero
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_hInt_hInter_hDH_discharged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
