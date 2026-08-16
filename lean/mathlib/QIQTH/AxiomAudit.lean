@@ -27411,6 +27411,19 @@ namespace QIQTH.AxiomAudit
 -- Hessian discharge still needs a mixed E1 replacement — a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.MixedSliverAssembly.witness_sliver2_assembly_mixed
 
+-- J4-785: MixedGradientSlice.mTerm1_slice_xuniform — the x-UNIFORM mixed gradient per-slice bound,
+-- discharging the two carried gradient inner bounds (hInner1i/hInner1j) of witness_sliver2_assembly_mixed.
+-- The diagonal x-uniform gradient slice hInner1_xuniform is ALREADY generic in the displacement field V
+-- (Gaussian arg + first pairing slot) and the amplitude-direction P (near unitVec i, second slot): the
+-- pairing ⟨V,P⟩ is bounded by Cauchy–Schwarz then ‖V‖/‖P‖ separately, nothing exploits the two matching.
+-- The mixed asymmetric case mTerm1 V Pj ∂ᵢA is thus a pure instantiation (Y:=V, P:=Pj, i:=j), and the
+-- SOLE structural gap is the leading factor 2 (sTerm1 = 2·mTerm1), so the mixed constant = (1/2)·diagonal.
+-- Discharges BOTH gradient slices (hInner1i via P:=Pj/∂ᵢA/j; hInner1j via P:=Pi/∂ⱼA/i). std-3. NOT a₁=R/6
+-- (this closes only the two gradient inner bounds of the 4-term mixed assembly; the mixed Hessian bound
+-- still needs the mixed E1 replacement — a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedGradientSlice.mTerm1_slice_xuniform
+#print axioms QIQTH.MixedGradientSlice.mTerm1RateConst_nonneg
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -3753,3 +3753,13 @@ import QIQTH.MixedTE2Slice
 -- (the four inner bounds are CARRIED; discharging the chart-Gaussian Hessian bound still needs a mixed E1
 -- replacement — a₁=R/6 stays CONDITIONAL).
 import QIQTH.MixedSliverAssembly
+-- J4-785: MixedGradientSlice — the x-UNIFORM mixed gradient per-slice bound, discharging the two carried
+-- gradient inner bounds (hInner1i/hInner1j) of MixedSliverAssembly.witness_sliver2_assembly_mixed. The
+-- diagonal x-uniform gradient slice XUniformSliverFull.hInner1_xuniform is ALREADY generic in the
+-- displacement V (Gaussian arg + first pairing slot) vs the amplitude-direction P (near unitVec i, second
+-- slot) — the pairing ⟨V,P⟩ is bounded by Cauchy–Schwarz then ‖V‖/‖P‖ separately; nothing needs the two
+-- aligned. So the mixed asymmetric mTerm1 V Pj ∂ᵢA is a pure instantiation (Y:=V, P:=Pj, i:=j); the only
+-- structural gap is the factor 2 (sTerm1 = 2·mTerm1), so mTerm1RateConst = (1/2)·diagonal-constant.
+-- mTerm1_slice_xuniform discharges BOTH gradient slices (one lemma, two instantiations). std-3. NOT a₁=R/6
+-- (closes only the two gradient inner bounds; the mixed Hessian bound still needs the mixed E1 replacement).
+import QIQTH.MixedGradientSlice
