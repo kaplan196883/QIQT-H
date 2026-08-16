@@ -27608,6 +27608,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedNormalFormGatedMatch.mixed_normalForm_gate_geometry
 #print axioms QIQTH.MixedNormalFormGatedMatch.witnessMixed_hNormalForm_gated
 
+-- J4-806 (item (d) measurability leg): the MEASURABILITY twin of J4-804's global_bound_of_onGate.
+-- aesm_global_of_onGate reduces the seven integrands' AE-strong-measurability from GLOBAL volume (opaque
+-- chart wall, no supplier) to ON-GATE volume.restrict S (chart-reach continuity supplies it);
+-- integrable_of_onGate consolidates support+bound+meas into a purely on-gate engine; the seven
+-- integrable_*_onGate restate the exact witness integrand shapes. std-3. NOT a₁=R/6 (stays CONDITIONAL).
+#print axioms QIQTH.MixedSliverIntegrandMeas.aesm_global_of_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_of_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hIntE1_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hIntPlain_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hIntRem_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hInt0_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hInt1i_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hInt1j_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hInt2_onGate
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

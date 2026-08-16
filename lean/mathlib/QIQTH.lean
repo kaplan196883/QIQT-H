@@ -3907,3 +3907,11 @@ import QIQTH.MixedSliverIntegrands
 -- OFF-gate the gated amplitude is 0 (S z₀ ⊆ G) killing both sides. mixed_normalForm_gate_geometry
 -- (general) + witnessMixed_hNormalForm_gated (concrete). std-3. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.MixedNormalFormGatedMatch
+-- MixedSliverIntegrandMeas (J4-806): the MEASURABILITY twin of J4-804's global_bound_of_onGate. The seven
+-- mixed-sliver integrabilities' AE-strong-measurability leg is reduced from a GLOBAL volume carry (the
+-- unsupplied opaque-chart wall) to an ON-GATE volume.restrict S carry (supplied from geometry via the
+-- chart-reach continuity route hVmapMeasK_at_p_of_geom). aesm_global_of_onGate + consolidated
+-- integrable_of_onGate + the seven integrable_*_onGate in the exact witness shapes. std-3. NOT a₁=R/6
+-- (stays CONDITIONAL — the on-gate measurability of the concrete chart integrands + leviSeries-F factor
+-- and hqLip's hmeas carry remain; no capstone-level closure reached).
+import QIQTH.MixedSliverIntegrandMeas
