@@ -3680,3 +3680,11 @@ import QIQTH.GatedGlobalWitnessN1CapstoneHCHDischarged
 -- carried real inequality c < δ₀. Surviving carries drop to hDuhamel/hDConv/hCConv(C²-at-0) plus the
 -- outer real-number antecedent c < δ₀. std-3. STILL CONDITIONAL; NOT a₁=R/6.
 import QIQTH.GatedGlobalWitnessN1CapstoneHEmeasDischarged
+-- reach-aligned rebase: the ORDER-1 capstone with hEboundW/hCH/hEmeas discharged AND the outer real
+-- inequality c < δ₀ CLOSED at the root. Feeds the (a,b)-free jet reach δ₀ of
+-- ReachRequant.tripleHEmeas_flowball_requant as the prescribed ceiling ε to
+-- CurvedA1ReachAlign.gatedWitnessN1_hEboundW_le_lin_CONST_prescribed, so the package's own gate radius
+-- c = (b+ρc)/2 satisfies c < δ₀ unconditionally and the requant S1 fires with NO antecedent. Strict
+-- strengthening of J4-777: surviving carries drop to hDuhamel/hDConv/hCConv(C²-at-0) ONLY, no c < δ₀.
+-- std-3. STILL CONDITIONAL; NOT a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1CapstoneReachAligned

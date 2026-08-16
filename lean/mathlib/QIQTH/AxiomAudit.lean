@@ -27307,6 +27307,16 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEmeas_discharged
 
+-- reach-aligned strengthening of J4-777: the ORDER-1 capstone with hEboundW/hCH/hEmeas discharged AND
+-- the outer real inequality c < δ₀ CLOSED. The (a,b)-free jet reach δ₀ (ReachRequant.
+-- tripleHEmeas_flowball_requant) is fed as the prescribed ceiling ε to the constant-radius producer
+-- (CurvedA1ReachAlign.gatedWitnessN1_hEboundW_le_lin_CONST_prescribed), so the package's gate radius
+-- c = (b+ρc)/2 satisfies c < δ₀ unconditionally, discharging the requant S1 with NO antecedent.
+-- Surviving carries drop to hDuhamel/hDConv/hCConv(C²-at-0) ONLY. No vacuous hyps, none the conclusion.
+-- STILL CONDITIONAL; NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
