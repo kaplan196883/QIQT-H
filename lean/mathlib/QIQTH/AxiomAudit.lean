@@ -27384,6 +27384,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.innerPiPj_offdiag_bound
 #print axioms QIQTH.HeatResidualBound.mixedBracket_abs_bound
 
+-- J4-783 (MixedTE2Slice): the STEP-1 mechanical port (scoped by J4-782). tE2_slice_abstract_mixed
+-- moment-integrates mixedBracket_abs_bound into the mixed E2 per-slice bound — a VERBATIM port of the
+-- diagonal tE2_slice_abstract, the sole change being the pointwise-domination step (swap tE2_bracket_poly
+-- for mixedBracket_abs_bound fed the individual coordinate-aligned jets: innerYP_add_zi_bound for Pi/Pj,
+-- innerPiPj_offdiag_bound, innerYQ_bound). Since the mixed RHS is SYNTACTICALLY the diagonal factored
+-- polynomial, the whole moment tower (6 τ-coefs, normPow_gauss_tau, w=√τ fold) transfers and delivers the
+-- SAME explicit tE2RateConst. mixedHessianSlice_plain_bound combines it with the banked parity term
+-- gaussian_hessian_cancel_mixed (add-and-subtract split of the mixed Hessian slice) into the full mixed
+-- PLAIN-Gaussian Hessian slice ≤ (tE2RateConst+L·n)·τ^{−1/2}. i≠j load-bearing; hyps satisfiable/non-vacuous
+-- (model Y=−id,Pi=eᵢ,Pj=eⱼ,Q=0), none the conclusion. std-3. NOT a₁=R/6 (the mixed normal form is a 4-term
+-- chart-Gaussian form; witness_sliver2_xuniform_mixed still needs a mixed E1 replacement + a NEW 4-term
+-- assembly — a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedTE2Slice.tE2_slice_abstract_mixed
+#print axioms QIQTH.MixedTE2Slice.mixedHessianSlice_plain_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

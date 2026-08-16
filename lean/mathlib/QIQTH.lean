@@ -3734,3 +3734,13 @@ import QIQTH.GaussianHessianCancelMixed
 -- tower transfers to the mixed E2 remainder. Coordinate-aligned hJ3 for Pi/Pj individually (no polarization
 -- wall). std-3. NOT a₁=R/6 (pointwise brick; moment-integration + kPrime wiring stay CONDITIONAL).
 import QIQTH.MixedHessianBracketBound
+-- J4-783 (MixedTE2Slice): the STEP-1 mechanical port scoped by J4-782. tE2_slice_abstract_mixed
+-- moment-integrates mixedBracket_abs_bound into the mixed E2 per-slice bound — a VERBATIM port of the
+-- diagonal tE2_slice_abstract (only the pointwise-domination step swaps tE2_bracket_poly for
+-- mixedBracket_abs_bound; because the mixed RHS is syntactically the diagonal factored polynomial the whole
+-- moment tower transfers), delivering the SAME explicit tE2RateConst. mixedHessianSlice_plain_bound then
+-- combines it with the banked parity term gaussian_hessian_cancel_mixed via the add-and-subtract split into
+-- the full mixed PLAIN-Gaussian Hessian slice ≤ (tE2RateConst+L·n)·τ^{−1/2}. std-3. NOT a₁=R/6 (the mixed
+-- normal form is a 4-term chart-Gaussian form; a full witness_sliver2_xuniform_mixed still needs a mixed E1
+-- replacement + a NEW 4-term assembly — a₁=R/6 stays CONDITIONAL).
+import QIQTH.MixedTE2Slice
