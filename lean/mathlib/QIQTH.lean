@@ -3763,3 +3763,10 @@ import QIQTH.MixedSliverAssembly
 -- mTerm1_slice_xuniform discharges BOTH gradient slices (one lemma, two instantiations). std-3. NOT a₁=R/6
 -- (closes only the two gradient inner bounds; the mixed Hessian bound still needs the mixed E1 replacement).
 import QIQTH.MixedGradientSlice
+-- J4-786 (MixedGaussReplaceSlice): the mixed E1 Gaussian-replacement port G_τ(Vz)→G_τ(z), discharging the
+-- mixed Hessian inner bound (hInner0) of witness_sliver2_assembly_mixed. gaussReplace_E1_bound is GENERIC
+-- in the coefficient, so the only coefficient-specific link is the bracket cap; polyChartMixed_abs_bound
+-- caps the mixed bracket by the SYNTACTICALLY IDENTICAL RHS as the diagonal, so tE1_slice_abstract_mixed
+-- delivers the SAME sliverRateConst via the diagonal moment tower verbatim. mixedHessianSlice_chart_bound
+-- combines E1 + plain half into the exact hInner0-shaped chart-Gaussian bound. std-3. NOT a₁=R/6.
+import QIQTH.MixedGaussReplaceSlice

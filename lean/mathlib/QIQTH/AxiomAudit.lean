@@ -27424,6 +27424,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedGradientSlice.mTerm1_slice_xuniform
 #print axioms QIQTH.MixedGradientSlice.mTerm1RateConst_nonneg
 
+-- J4-786: MixedGaussReplaceSlice — the mixed E1 Gaussian-replacement port (G_τ(Vz)→G_τ(z)) discharging
+-- the mixed Hessian inner bound (hInner0) of witness_sliver2_assembly_mixed. The Gaussian-difference
+-- factor |G_τ(Vz)−G_τ(z)| ≤ (poly)/(4τ)·(√2)ⁿ·G_{2τ}(z) (gaussReplace_E1_bound) is GENERIC in the
+-- coefficient (depends only on V's coercivity+quadratic displacement, NOT which Hessian bracket multiplies
+-- it), so the ONLY coefficient-specific link is the bracket cap — and polyChartMixed_abs_bound caps the
+-- mixed bracket by the SYNTACTICALLY IDENTICAL polynomial RHS as the diagonal polyChart_abs_bound (product
+-- ⟨V,Pi⟩·⟨V,Pj⟩ of two identical factors = diagonal square; ⟨Pi,Pj⟩ like ⟨P,P⟩; i≠j NOT needed on the E1
+-- leg). Hence tE1_slice_abstract_mixed delivers the SAME sliverRateConst via the diagonal moment tower
+-- verbatim; mixedHessianSlice_chart_bound combines it with the plain half (mixedHessianSlice_plain_bound)
+-- via the add-subtract split G_τ(Vz)·brk = (G_τ(Vz)−G_τ(z))·brk + G_τ(z)·brk into the exact hInner0-shaped
+-- chart-Gaussian bound ≤ (sliverRateConst+(tE2RateConst+L·n))·τ^{−1/2}. Hyps satisfiable/non-vacuous
+-- (V=−id/Pi=eᵢ/Pj=eⱼ/Q=0/width-2 model: E1 difference ≡ 0), none the conclusion. std-3. NOT a₁=R/6 (closes
+-- the mixed Hessian inner bound; the two gradient inner bounds land via J4-785; a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedGaussReplaceSlice.polyChartMixed_abs_bound
+#print axioms QIQTH.MixedGaussReplaceSlice.tE1_slice_abstract_mixed
+#print axioms QIQTH.MixedGaussReplaceSlice.mixedHessianSlice_chart_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
