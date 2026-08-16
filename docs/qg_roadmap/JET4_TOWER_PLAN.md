@@ -9482,3 +9482,12 @@ left as the mixed-sliver chart-surface wall.
 - Technical note for future work: found and routed around a genuine Mathlib instance diamond (CLM-of-CLM has two defeq-but-distinct PseudoMetricSpace instances, breaking norm/Metric lemma unification) — solved via routing through the F'-valued CLM evaluation instead of the raw operator norm. Reusable pattern.
 - a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
 - ★★★★★ HONEST SESSION-TERMINAL ASSESSMENT (after 66 J4-numbered increments, J4-736→801, an extraordinarily long and deep grind): the mixed-sliver campaign has proven every piece of abstract mathematics needed and built every reusable engine required. What remains — (a) normal-form matching, (b) Lipschitz constants, (c)'s bridge identity, (d) integrand instantiation — is genuine, substantial, multi-piece concrete wiring work. This is the honest floor: not vague, not overclaimed, precisely enumerated, ready for direct continuation in a future session.
+
+## J4-802 — item (b) Lipschitz constants CLOSED (modulo carries) — leviSeries constant already existed, gateAmp constant built [AF]
+- New file `QIQTH/MixedSliverGateAmpLipschitz.lean` (commit `3ee221cd`), 4 theorems std-3, budget raw 0.
+- **leviSeries half**: ALREADY EXISTS. `LeviLipschitz.resolvent_lipschitz_pointwise` (J4-144, pre-existing) supplies the Levi kernel's spatial Lipschitz constant `L_F = L_E+K·2√s` (O(√s)), derived via the resolvent/Volterra identity `F=−E−E∗F`. Sympy-confirmed the √s scaling matches `heatConv_diff_bound`. No new wall — the constant is an OUTPUT of existing machinery.
+- **gateAmp half**: genuinely built. `gateAmp_eq_of_vanishing_off`/`gateAmp_lipschitz_of_vanishing`/`gateAmp_bound_of_vanishing` — under the off-gate-vanishing condition (radialCutoff leading factor + `radialCutoff_zero_on_frontier_collar`), the indicator is REDUNDANT (gateAmp=A pointwise), so gateAmp inherits the raw amplitude's Lipschitz/bound constants verbatim.
+- `mixedSliver_hqLip_triple_via_gateAmp` — the capstone wiring both into the full mixed-sliver hqLip triple.
+- **Item (b) is CLOSED modulo satisfiable carries**: `hoff` (off-gate-vanishing, satisfiable/vacuous at S=univ) + `hFLip`/`hFbnd` (outputs of the pre-existing resolvent machinery, resting on already-deferred Gaussian carries `hE1`/`hSlice`).
+- Remaining unchanged: (a) normal-form matching (large), (c) Qfield bridge+lift (scoped small), (d) 7 integrand instantiations (mechanical, unwired).
+- a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
