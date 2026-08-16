@@ -27206,6 +27206,30 @@ namespace QIQTH.AxiomAudit
 -- globalCutoffParametrixWitness chain. STILL CONDITIONAL; NOT a₁=R/6. expected: standard 3
 #print axioms QIQTH.DaLimLUOrder0Discharge.hDaLimLU_order0
 
+-- J4-766: the ORDER-N=1 witness re-plumb, DIAGONAL layer, for the order-1 gated cutoff-parametrix
+-- witness gatedKernel K S (globalCutoffParametrixWitnessN 1 ...). gatedGlobalWitnessN1_diag_hHdiag is
+-- the capstone's hHdiag AT N=1, now GENUINELY TRUE (heatParametrixFn 1 carries u₁(0)=R/6, which the
+-- order-0 gauss·u₀-only witness structurally COULD NOT supply — J4-761's structural-falseness, now
+-- removed). Plus the order-1 siblings of hDH (diagonal τ-differentiability) and hEzero (residual
+-- vanishing at τ≤0, needs 1≤n). NOT a₁=R/6 (identifies witness with ansatz; does not evaluate u₁(0)).
+-- expected: standard 3
+#print axioms QIQTH.HeatResidualBound.gatedGlobalWitnessN1_diag_hHdiag
+#print axioms QIQTH.HeatResidualBound.gatedGlobalWitnessN1_diag_hDH
+#print axioms QIQTH.HeatResidualBound.gatedGlobalWitnessN1_residual_hEzero
+-- J4-767: the ORDER-N=1 partial Seeley–DeWitt capstone — FIRST wiring of the abstract residual
+-- capstone trueKernel_diagonal_a1_eq_R6_residual to the order-1 gated van-Vleck witness, discharging
+-- INTERNALLY hHdiag (★ the order-0 dead-end obstruction, now true), hDH, hInt, hInter (+hEzero).
+-- Surviving CARRIES: {hEboundW (order-1 ≈150-site re-plumb), hEmeas, hDuhamel, hDConv, hCH, hCConv} +
+-- RNC/gauge + gate memberships 0∈K, 0∈S 0. STILL CONDITIONAL; NOT a₁=R/6. expected: standard 3
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_discharged
+-- J4-768: hDaLimLU (DaLimLUGoal loc-unif Da-limit, sole hard residue of hDuhamel+hDConv) PORTED to
+-- the LIVE order-1 witness gatedKernel K S (globalCutoffParametrixWitnessN 1 ...) via the abstract
+-- ETailRateBound.hDaLimLU_from_data, with hEzero discharged internally (gatedGlobalWitnessN1_residual_
+-- hEzero, needs 1≤n). Order-1 sibling of hDaLimLU_order0; confirms the reduction technique ports to
+-- the non-dead-end N=1 chain. Remaining = ETailRateBound data census (hAnear/W1-free). NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.DaLimLUN1Discharge.hDaLimLU_N1
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

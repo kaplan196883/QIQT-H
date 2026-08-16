@@ -3617,3 +3617,18 @@ import QIQTH.GatedGlobalWitnessLeviIntInter
 -- hEzero member discharged internally from geometry (gatedGlobalWitness_residual_hEzero, needs 1≤n).
 -- Remaining = the ETailRateBound data census (hAnear/W1-free). STILL CONDITIONAL, NOT a₁=R/6.
 import QIQTH.DaLimLUOrder0Discharge
+-- J4-766: the ORDER-N=1 witness re-plumb, DIAGONAL layer. For the order-1 gated cutoff-parametrix
+-- witness gatedKernel K S (globalCutoffParametrixWitnessN 1 ...): gatedGlobalWitnessN1_diag_hHdiag is
+-- the capstone's hHdiag AT N=1, GENUINELY TRUE (heatParametrixFn 1 carries u₁(0)=R/6 — removing the
+-- J4-761 structural-falseness the order-0 witness could not satisfy); + order-1 hDH and hEzero
+-- siblings. NOT a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1Diag
+-- J4-767: the ORDER-N=1 partial Seeley–DeWitt capstone — FIRST wiring of the abstract residual capstone
+-- to the order-1 gated van-Vleck witness, discharging hHdiag (★ the order-0 dead-end obstruction),
+-- hDH, hInt, hInter (+hEzero) internally. Carries {hEboundW(order-1 re-plumb), hEmeas, hDuhamel,
+-- hDConv, hCH, hCConv} + RNC/gate data. STILL CONDITIONAL, NOT unconditional a₁=R/6.
+import QIQTH.GatedGlobalWitnessN1Capstone
+-- J4-768: hDaLimLU (DaLimLUGoal, sole hard residue of hDuhamel+hDConv) PORTED to the LIVE order-1
+-- witness via ETailRateBound.hDaLimLU_from_data, hEzero discharged internally (needs 1≤n). Order-1
+-- sibling of hDaLimLU_order0. STILL CONDITIONAL, NOT a₁=R/6.
+import QIQTH.DaLimLUN1Discharge
