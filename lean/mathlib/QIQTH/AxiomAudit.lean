@@ -27348,6 +27348,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KPrimeOpNormSliver.kPrime_apply_single_sliver
 #print axioms QIQTH.KPrimeOpNormSliver.kPrime_opNorm_sliver_bound
 
+-- MixedSliverPolarization — the POLARIZATION of the mixed-index (∂ᵢ∂ⱼ, i≠j) Leibniz–Gaussian normal
+-- form into the diagonal-shape sliver terms sTerm0/sTerm1/sTerm2. gaussComp_amp_pd_pd_mixed_polarized:
+-- the banked mixed normal form ChartJetHessianMixed.gaussComp_amp_pd_pd_mixed (whose Hessian coeff is a
+-- PRODUCT ⟨V,Pi⟩⟨V,Pj⟩, not a square, with two distinct gradient terms) equals EXACTLY
+-- ¼sTerm0(Pi+Pj,2Q)−¼sTerm0(Pi−Pj,−2Q)+½sTerm1(Pj,∂ᵢA)+½sTerm1(Pi,∂ⱼA)+sTerm2(∂ᵢ∂ⱼA) via the
+-- polarization a·b=¼[(a+b)²−(a−b)²] + a finite-sum ring. Pure algebra bridging the off-diagonal
+-- component sliver (hcomp of kPrime_opNorm_sliver_bound) to the diagonal sTerm forms. Does NOT supply
+-- the mixed-direction √ε bound (polarized dirs Pi±Pj are not coordinate-aligned). No vacuous hyps,
+-- none the conclusion. std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverPolarization.gaussComp_amp_pd_pd_mixed_polarized
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

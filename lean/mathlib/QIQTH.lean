@@ -3713,3 +3713,10 @@ import QIQTH.GderivContinuity
 -- discharge dist(fderivBulkInt,gderivInt) ≤ Σⱼ bb j given the scalar per-component rates (banked
 -- witness_sliver2_xuniform at each (i,j)). std-3. NOT a₁=R/6.
 import QIQTH.KPrimeOpNormSliver
+-- MixedSliverPolarization — polarizes the mixed-index (∂ᵢ∂ⱼ, i≠j) Leibniz–Gaussian normal form
+-- (ChartJetHessianMixed.gaussComp_amp_pd_pd_mixed) into the diagonal sliver terms sTerm0/sTerm1/sTerm2:
+-- the Hessian PRODUCT ⟨V,Pi⟩⟨V,Pj⟩ becomes ¼[(Pi+Pj)²−(Pi−Pj)² Hermite squares], the two gradient
+-- terms two sTerm1's, mass term sTerm2. Pure polarization+ring. Bridges the off-diagonal component
+-- of the kPrime hsliver census to the diagonal sTerm shape (does NOT supply the mixed √ε bound —
+-- polarized dirs are not coordinate-aligned). std-3. NOT a₁=R/6.
+import QIQTH.MixedSliverPolarization
