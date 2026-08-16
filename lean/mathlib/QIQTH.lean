@@ -3726,3 +3726,11 @@ import QIQTH.MixedSliverPolarization
 -- leading-term √ε rate the sliver wall needed, working the aligned jets directly (no polarized dirs).
 -- std-3. NOT a₁=R/6 (a reusable analytic brick; a₁=R/6 stays CONDITIONAL).
 import QIQTH.GaussianHessianCancelMixed
+-- J4-782 (MixedHessianBracketBound): the OFF-DIAGONAL (i≠j) analogue of the diagonal chart-jet remainder
+-- bound (polyChartDiff_abs_bound/tE2_bracket_poly) — the POINTWISE polynomial bound on the mixed Hessian
+-- bracket minus its parity-cancellable leading term zᵢzⱼ/(4τ²). innerYP_mul_sub_zizj_bound (mixed product
+-- bridge, same Δ(Δ+2‖z‖) shape as the diagonal square) + innerPiPj_offdiag_bound (|⟨Pi,Pj⟩|≤nγ²+2γ, same
+-- envelope as |⟨P,P⟩−1|) ⟹ mixedBracket_abs_bound has IDENTICAL RHS to the diagonal, so the diagonal moment
+-- tower transfers to the mixed E2 remainder. Coordinate-aligned hJ3 for Pi/Pj individually (no polarization
+-- wall). std-3. NOT a₁=R/6 (pointwise brick; moment-integration + kPrime wiring stay CONDITIONAL).
+import QIQTH.MixedHessianBracketBound

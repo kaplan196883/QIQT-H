@@ -27370,6 +27370,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_moment_zero_mixed
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_mixed
 
+-- J4-782 (MixedHessianBracketBound): the OFF-DIAGONAL (i≠j) analogue of the diagonal chart-jet remainder
+-- bound polyChartDiff_abs_bound/tE2_bracket_poly — the POINTWISE polynomial bound on the mixed Hessian
+-- bracket MINUS its parity-cancellable leading term zᵢzⱼ/(4τ²) (the term gaussian_hessian_cancel_mixed
+-- handles). Structural reuse: innerYP_mul_sub_zizj_bound (|⟨Y,Pi⟩⟨Y,Pj⟩−zᵢzⱼ|≤Δ(Δ+2‖z‖), same shape as
+-- the diagonal square bridge) + innerPiPj_offdiag_bound (|⟨Pi,Pj⟩|≤nγ²+2γ for i≠j, same envelope as the
+-- diagonal |⟨P,P⟩−1|) ⟹ mixedBracket_abs_bound has the IDENTICAL polynomial RHS as the diagonal, so the
+-- diagonal moment tower transfers to the mixed E2 remainder. Uses the coordinate-aligned hJ3 for Pi and Pj
+-- INDIVIDUALLY (the J4-780 polarization wall does NOT arise on this direct route). Jet-gap hyps
+-- load-bearing (bound fails without them); i≠j load-bearing. No vacuous hyps, none the conclusion. std-3.
+-- NOT a₁=R/6 (pointwise integrand brick; moment-integration + Gaussian-replacement + kPrime wiring remain).
+#print axioms QIQTH.HeatResidualBound.innerYP_mul_sub_zizj_bound
+#print axioms QIQTH.HeatResidualBound.innerPiPj_offdiag_bound
+#print axioms QIQTH.HeatResidualBound.mixedBracket_abs_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
