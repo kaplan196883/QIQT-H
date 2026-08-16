@@ -27399,6 +27399,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedTE2Slice.tE2_slice_abstract_mixed
 #print axioms QIQTH.MixedTE2Slice.mixedHessianSlice_plain_bound
 
+-- J4-784: MixedSliverAssembly.witness_sliver2_assembly_mixed — the FOUR-TERM off-diagonal (i≠j) sliver
+-- assembly, the mixed analogue of the diagonal 3-term witness_sliver2_assembly. The mixed normal form
+-- (gaussComp_amp_pd_pd_mixed) is D2H = mTerm0 + mTerm1(V,Pj,∂ᵢA) + mTerm1(V,Pi,∂ⱼA) + sTerm2(V,∂ᵢ∂ⱼA):
+-- Hessian (product ⟨V,Pi⟩⟨V,Pj⟩, not a square) + TWO distinct gradient terms (one mTerm1 shape, two
+-- instantiations) + mass (= diagonal sTerm2 verbatim). The theorem glues the four carried per-slice inner
+-- bounds (Hessian C₀·(u−s)^{−1/2}, two gradients C₁/C₁'·(u−s)^{−1/2}, mass C₂) via a 4-fold integral_add
+-- split + banked sliver_rpow_sub into |∫ s in (u−ε)..u, ∫ z, D2H(u−s)z·F s z 0| ≤ (C₀+C₁+C₁')·2√ε + C₂·ε.
+-- i≠j load-bearing (two distinct gradients); hyps satisfiable/non-vacuous (D2H≡0/width-2 Gaussian model),
+-- none the conclusion. std-3. NOT a₁=R/6 (the four inner bounds are CARRIED hypotheses; the chart-Gaussian
+-- Hessian discharge still needs a mixed E1 replacement — a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.MixedSliverAssembly.witness_sliver2_assembly_mixed
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

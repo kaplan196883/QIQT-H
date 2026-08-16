@@ -3744,3 +3744,12 @@ import QIQTH.MixedHessianBracketBound
 -- normal form is a 4-term chart-Gaussian form; a full witness_sliver2_xuniform_mixed still needs a mixed E1
 -- replacement + a NEW 4-term assembly — a₁=R/6 stays CONDITIONAL).
 import QIQTH.MixedTE2Slice
+-- J4-784: MixedSliverAssembly — the FOUR-TERM off-diagonal (i≠j) sliver assembly, the mixed analogue of
+-- SliverAssembly.witness_sliver2_assembly. Defines mTerm0 (mixed Hessian, product ⟨V,Pi⟩⟨V,Pj⟩) and the
+-- single mTerm1 gradient shape (both mixed gradient terms = one instantiation each: mTerm1 V Pj ∂ᵢA and
+-- mTerm1 V Pi ∂ⱼA); the mass term reuses the diagonal sTerm2 verbatim. witness_sliver2_assembly_mixed glues
+-- the four carried per-slice inner bounds (Hessian C₀, two gradients C₁/C₁', mass C₂) via the 4-term
+-- integral_add split + banked sliver_rpow_sub into |∫∫ D2H·F| ≤ (C₀+C₁+C₁')·2√ε + C₂·ε. std-3. NOT a₁=R/6
+-- (the four inner bounds are CARRIED; discharging the chart-Gaussian Hessian bound still needs a mixed E1
+-- replacement — a₁=R/6 stays CONDITIONAL).
+import QIQTH.MixedSliverAssembly
