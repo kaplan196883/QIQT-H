@@ -3774,3 +3774,7 @@ import QIQTH.MixedGaussReplaceSlice
 -- inner-bound discharges (J4-784→786) through witness_sliver2_assembly_mixed into a single √ε
 -- sliver rate with NO carried inner-bound hypotheses (mixed twin of witness_sliver2_xuniform). std-3.
 import QIQTH.MixedSliverXUniform
+-- J4-788: the concrete first link of the kPrime→normal-form bridge — kPrime_apply_single_eq_mixedPd
+-- identifies (kPrime i t s x z)(eⱼ) with the Levi factor times the mixed second field partial ∂ⱼ∂ᵢ of
+-- the van-Vleck witness (via pd_eq_fderiv). Feeds kPrime_opNorm_sliver_bound's hcomp slot. std-3.
+import QIQTH.KPrimeMixedPdBridge

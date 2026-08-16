@@ -27448,6 +27448,13 @@ namespace QIQTH.AxiomAudit
 -- witness_sliver2_xuniform. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
 #print axioms QIQTH.MixedSliverXUniform.witness_sliver2_xuniform_mixed
 
+-- J4-788: the concrete first link of the kPrime→normal-form bridge — identifies the j-th basis
+-- component of the abstract CLM derivative kernel kPrime with the field-independent Levi factor times
+-- the concrete MIXED second field partial ∂ⱼ∂ᵢ of the gated van-Vleck witness (via pd_eq_fderiv on the
+-- carried field-differentiability). On the gate this ∂ⱼ∂ᵢ = the normal form witness_sliver2_xuniform_mixed
+-- estimates. std-3. NOT a₁=R/6 (a₁=R/6 stays CONDITIONAL).
+#print axioms QIQTH.KPrimeMixedPdBridge.kPrime_apply_single_eq_mixedPd
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
