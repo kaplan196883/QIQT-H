@@ -3632,3 +3632,9 @@ import QIQTH.GatedGlobalWitnessN1Capstone
 -- witness via ETailRateBound.hDaLimLU_from_data, hEzero discharged internally (needs 1≤n). Order-1
 -- sibling of hDaLimLU_order0. STILL CONDITIONAL, NOT a₁=R/6.
 import QIQTH.DaLimLUN1Discharge
+-- J4-770: the pointwise `hSecondEnv` two-term Gaussian envelope, ASSEMBLED from the banked chart-image
+-- expansion + elementary sup bounds + the upper near-isometry (never built before; ledger flagged it a
+-- "CompactJetBounds + near-isometry follow-on" and carried it verbatim). Abstract τ-power core +
+-- witnessSecondXDeriv_chartImage_envelope (tied to the concrete witness, EXACT hSecondEnv RHS at a
+-- single (i,τ,z)). Uniform-over-box version needs the CompactJetBounds uniformisation. NOT a₁=R/6.
+import QIQTH.WidthSecondEnvelope

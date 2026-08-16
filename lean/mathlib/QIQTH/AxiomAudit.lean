@@ -27230,6 +27230,23 @@ namespace QIQTH.AxiomAudit
 -- expected: standard 3
 #print axioms QIQTH.DaLimLUN1Discharge.hDaLimLU_N1
 
+-- J4-770 (WidthSecondEnvelope.lean): the pointwise `hSecondEnv` two-term Gaussian envelope, ASSEMBLED
+-- (never built before — the ledger J4-251/J4-537 flagged it as a "CompactJetBounds lever + upper
+-- near-isometry follow-on" and carried it verbatim). chartImage_second_envelope_abstract = the pure
+-- τ-power core (the quadratic P²/(4τ²) term → B₁·(r²/τ)·τ⁻¹ via the upper near-isometry P²≤cW·r²; the
+-- bare 2nd-jet M₂ → B₀·τ⁻¹ via τ≤τ₀ — the exact reason the clean single-constant hAdom2 is FALSE).
+-- witnessSecondXDeriv_chartImage_envelope = TIED to the concrete witness via the banked chart-image
+-- expand (SliverCConvBatch.witnessSecondXDeriv_chartImage_expand), delivering the EXACT hSecondEnv RHS
+-- at a single (i,τ,z) from elementary sup bounds + upper near-isometry (none = the conclusion). The
+-- UNIFORM-over-compact-box hSecondEnv (fixed B₀,B₁) needs the CompactJetBounds uniformisation — a
+-- further layer. NOTE (verdict): hSecondEnv is NOT the same Lean object as the J4-672→676 width wall
+-- (which bounds the heat RESIDUAL parametrixResidualN 0); it is the witnessSecondXDeriv second field
+-- x-derivative — STRUCTURALLY analogous (same near-isometry + quadratic-in-r²/τ blocker) but distinct.
+-- NOT a₁=R/6.
+-- expected: standard 3
+#print axioms QIQTH.WidthSecondEnvelope.chartImage_second_envelope_abstract
+#print axioms QIQTH.WidthSecondEnvelope.witnessSecondXDeriv_chartImage_envelope
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
