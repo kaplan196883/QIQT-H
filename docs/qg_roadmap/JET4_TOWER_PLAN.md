@@ -9472,3 +9472,13 @@ left as the mixed-sliver chart-surface wall.
   integrabilities, several with NO supplier" to "three abstract engines built; concrete per-object
   instantiation remaining." Every genuinely-new analytic ingredient J4-795 flagged as unsupplied is now
   supplied. NOT `a₁ = R/6`.
+
+## J4-801 — field-point Q ball form supplied; CORRECTS misidentification of "one contraction away" claim; full closure NOT reached [AF]
+- New file `QIQTH/MixedSliverFieldQBound.lean` (commit `6ad0a442`), 2 theorems std-3, budget raw 0.
+- `hessianContract_bounded_on_ball` (general, pure) + `chartField_secondJet_contract_ball` (concrete van-Vleck discharge): supplies a genuine field-point ball bound for the chart's second field partial.
+- **IMPORTANT CORRECTION**: the prior scoping ("chartW0_secondJet_bound is one contraction away from the sliver's Q") was WRONG. The sliver's `Q z` is the mixed 2nd partial of the FIXED base-0 chart at the VARYING field point `z` (the integration variable); `chartW0_secondJet_bound` (J4-798) is the OPPOSITE object (base-varying, evaluated at origin field point). No contraction connects them — a genuinely different bound was needed and has now been supplied.
+- **State of (a)-(d)**: (a) normal-form matching NOT closed (large, needs threading `hOffNhd`/`hCut` residues); (b) concrete Lipschitz constants of `leviSeries`/`gateAmp` NOT closed (genuine remaining analytic content, no quick brick); (c) field-point Q ball form SUPPLIED (this commit) — but the `Qfield↔fderiv∘fderiv` bridge identity + lift to global ∀z still unwritten; (d) 7 integrabilities NOT closed (engine exists, concrete instantiation per-integrand unwired).
+- **hCConv/hDuhamel/hDConv NOT reached.** VERIFIED (not just assumed): live capstone's exact hypothesis list re-read directly from source, unchanged, nothing weakened.
+- Technical note for future work: found and routed around a genuine Mathlib instance diamond (CLM-of-CLM has two defeq-but-distinct PseudoMetricSpace instances, breaking norm/Metric lemma unification) — solved via routing through the F'-valued CLM evaluation instead of the raw operator norm. Reusable pattern.
+- a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+- ★★★★★ HONEST SESSION-TERMINAL ASSESSMENT (after 66 J4-numbered increments, J4-736→801, an extraordinarily long and deep grind): the mixed-sliver campaign has proven every piece of abstract mathematics needed and built every reusable engine required. What remains — (a) normal-form matching, (b) Lipschitz constants, (c)'s bridge identity, (d) integrand instantiation — is genuine, substantial, multi-piece concrete wiring work. This is the honest floor: not vague, not overclaimed, precisely enumerated, ready for direct continuation in a future session.
