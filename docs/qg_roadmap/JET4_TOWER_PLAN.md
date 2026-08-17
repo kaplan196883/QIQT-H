@@ -9603,3 +9603,29 @@ So the sliver-rate layer is closed to primitive on-gate data, but wiring it into
 - **THE ONE GENUINE REMAINING WALL, precisely named**: a FIELD↔SOURCE TRANSPOSITION. The kPrime/gderivInt bridge differentiates at a FIXED field point x, integrates over SOURCE z: `∂²H(τ; field=x; source=z)`. The closed J4-817 sliver bounds differentiate at the INTEGRATION variable z, FIXED source z₀: `∂²H(τ; field=z; source=z₀)`. These are TRANSPOSED — even at the center x=0=z₀, need `∂²_firstslot H(τ,0,z)` vs `∂²_firstslot H(τ,z,0)` reconciled. NO supplier exists for this witness source↔field symmetry — confirmed via grep, and NOT automatically free (gating/chart may not preserve exact symmetry).
 - ★★★★★ RECOMMENDED NEXT STEP: prove a CENTER-ANCHORED source-field symmetry of `vanVleckGatedWitness` (exploiting the leading Gaussian/van-Vleck kernel's inherent symmetry + the gate being centered), OR re-derive the sliver bound directly in the kPrime orientation. Once closed, the FULL chain (SliverGatedFullyCombined → bridge → kPrime_opNorm_sliver_bound.hcomp → HD1SliverRoute → SpatialC2.hCConv_reduction → live capstone) closes hCConv, and per J4-776's conjecture likely hDuhamel/hDConv too.
 - a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` — but the distance is now literally ONE symmetry lemma away from closing hCConv.
+
+## J4-819 — the source↔field transposition MECHANISM proved abstractly; obstruction pinned to the ∇R-cubic amplitude [AF]
+- New file `QIQTH/WitnessSourceFieldTransposition.lean` (std-3, budget raw 0). Attacks the ONE genuine
+  J4-818 wall (field↔source transposition of `∂²_firstslot vanVleckGatedWitness`).
+- **★ STRUCTURAL FACT (from grinding the definition).** The ENTIRE `(p,q)`-dependence of the live
+  witness factors through ONE chart vector `V(q,p) = uniformInverseChart g gi hC hK q p`:
+  `H(τ,p,q) = radialCutoff a b V · gaussDdim τ V · vanVleck g V^{−1/2} · (u₀ V + u₁ V·τ)`. In the
+  LEADING (flat) chart `V = p−q`, `H` is a DISPLACEMENT kernel `F(p−q)`.
+- **★★ MECHANISM (proved).** `displacement_secondPartial_transposition_center`: for a displacement
+  kernel `H p q = F(p−q)` with `F` EVEN, the transposition is EXACT —
+  `∂ⱼ∂ᵢ[x'↦F(x'−z)]|₀ = ∂ⱼ∂ᵢ[x'↦F(x'−0)]|_z`, because both sides equal `(∂ⱼ∂ᵢF)(∓z)` and the second
+  partial of an even function is even. Supporting `pd` shift/reflection algebra
+  (`pd_comp_sub_const_pt`, `pd_comp_neg_pt`, `pd_odd_of_even`, `pd_even_of_odd`,
+  `secondPartial_even_of_even`) all std-3.
+- **★★ OBSTRUCTION CONFINED (sympy `docs/qg_roadmap/j4_819_transposition_sympy.py` + Lean).** The
+  transposition difference `(GA)''(−z) − (GA)''(z)` is carried ENTIRELY by the ODD part of the
+  amplitude `A = vanVleck^{−1/2}(u₀+u₁τ)`: linear (`a₁`) + cubic (`a₃`). In RNC the linear term is 0
+  (`∂g(0)=0`, `Γ(0)=0`), so the SOLE residual obstruction is the cubic `a₃ = ∇R` term (subleading,
+  `O(z³)` before differentiation, absorbable under the √ε sliver). The two even factors are proved
+  exactly even in Lean: `gaussDdim_even`, `radialCutoff_even`.
+- ⚠ NOT `a₁=R/6`; does NOT by itself close `hCConv`. The live chart `V(q,p)` is the CURVED RNC log map
+  (not `p−q`) and the amplitude is not exactly even, so wiring the mechanism into the live capstone
+  still needs (i) the curved-chart displacement reduction and (ii) control of the ∇R-cubic residual
+  under the √ε sliver (or a direct re-derivation of the sliver bound in the kPrime orientation). The
+  mechanism + obstruction-confinement are now BANKED; the wall is reduced from "unknown symmetry" to
+  "control the ∇R-cubic amplitude residual on the curved chart".

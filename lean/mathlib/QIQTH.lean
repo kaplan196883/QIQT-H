@@ -3999,3 +3999,13 @@ import QIQTH.SliverGatedFullyCombined
 -- vanVleckGatedWitness goal (live_hCConv_goal_eq, rfl) — so a C²-at-0 supply at vanVleckGatedWitness
 -- discharges the capstone slot with no kernel-family bridge. std-3. NOT a₁=R/6.
 import QIQTH.LiveHVanVleckDefeq
+
+-- WitnessSourceFieldTransposition (J4-819): the ABSTRACT source↔field transposition mechanism for the
+-- second field-partial of a DISPLACEMENT kernel, isolating EXACTLY the J4-818 hCConv wall. For an
+-- even-displacement kernel H p q = F(p−q) with F even, the center-anchored transposition is EXACT:
+-- displacement_secondPartial_transposition_center: ∂ⱼ∂ᵢ[x'↦F(x'−z)]|₀ = ∂ⱼ∂ᵢ[x'↦F(x'−0)]|_z (both
+-- equal (∂ⱼ∂ᵢF)(∓z); second partial of even is even). pd shift/reflection algebra
+-- (pd_comp_sub_const_pt, pd_comp_neg_pt, pd_odd_of_even, pd_even_of_odd, secondPartial_even_of_even) +
+-- the concrete even factors of the live witness (gaussDdim_even, radialCutoff_even) confirming the
+-- obstruction is confined to the ODD (∇R-cubic) amplitude part. std-3. NOT a₁=R/6; does NOT close hCConv.
+import QIQTH.WitnessSourceFieldTransposition

@@ -27704,6 +27704,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.live_H_eq_vanVleckGatedWitness
 #print axioms QIQTH.HeatResidualBound.live_hCConv_goal_eq
 
+-- WitnessSourceFieldTransposition (J4-819): the ABSTRACT source↔field transposition mechanism the
+-- J4-818 hCConv wall requires. For a displacement kernel H p q = F(p−q) with F even, the center-anchored
+-- transposition ∂ⱼ∂ᵢ[x'↦F(x'−z)]|₀ = ∂ⱼ∂ᵢ[x'↦F(x'−0)]|_z is EXACT (both = (∂ⱼ∂ᵢF)(∓z); second partial
+-- of even is even). gaussDdim_even/radialCutoff_even prove the witness's two Gaussian/cutoff factors are
+-- exactly even, confining the obstruction to the ODD (∇R-cubic) amplitude part. std-3. NOT a₁=R/6;
+-- does NOT close hCConv on its own (the live chart is the curved RNC log map, not p−q).
+#print axioms QIQTH.HeatResidualBound.displacement_secondPartial_transposition_center
+#print axioms QIQTH.HeatResidualBound.secondPartial_even_of_even
+#print axioms QIQTH.HeatResidualBound.gaussDdim_even
+#print axioms QIQTH.HeatResidualBound.radialCutoff_even
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
