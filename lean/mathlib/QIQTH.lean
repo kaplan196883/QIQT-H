@@ -4087,3 +4087,10 @@ import QIQTH.GeodesicBasepointFrechet
 -- witnessField_contDiffAt3_center (SpatialC2.hCH_discharge one order up = exactly what Φ∈C¹ needs).
 -- std-3 ×4. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.InverseChartFieldC3
+-- Sub-brick 3b (mixed third jet base derivative): ∂_q ∂²_p V = the BASE-POINT derivative of the
+-- chart's SECOND field-jet Q, built as ONE MORE LAYER of the linear-ODE idiom. linODE_basepoint_
+-- residual_bound / _hasDerivAt (abstract engine, reuses linODE_twopoint_diff_bound with equal
+-- coefficients so the first-order coefficient variation is absorbed into the variation field R) +
+-- secondFieldJet_basepoint_hasDerivAt (geodesic specialisation, A = D(geodesicField)(Y s)). std-3 ×3.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.ChartMixedThirdJetBasepoint

@@ -27813,6 +27813,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.chartField_contDiffAt3_reachable
 #print axioms QIQTH.HeatResidualBound.witnessField_contDiffAt3_center
 
+-- Sub-brick 3b: ∂_q ∂²_p V — base-point derivative of the chart's SECOND field-jet, via the
+-- parametrized-linear-ODE base-derivative engine (one more layer of the linear-ODE idiom).
+-- std-3 ×3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.linODE_basepoint_residual_bound
+#print axioms QIQTH.ExpMap.linODE_basepoint_hasDerivAt
+#print axioms QIQTH.ExpMap.secondFieldJet_basepoint_hasDerivAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
