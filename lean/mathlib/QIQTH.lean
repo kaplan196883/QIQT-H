@@ -4175,3 +4175,9 @@ import QIQTH.UniformFlowOctupleField
 -- first-jet engine; NO expRho. The mechanical SUPPLY half of the fourth jet; the value-identification
 -- (⟹ per-seed fourth jet ⟹ D³φ continuity ⟹ C³) is CARRIED. std-3. NOT a₁=R/6.
 import QIQTH.UniformFlowOctupleSupply
+-- Plan v6 Task I (C³ climb, brick 3): quadrupledField_variation_exists_uncond — directional (scalar-s)
+-- smooth dependence of the QUADRUPLED flow on its base IC, one order up from
+-- doubledField_variation_exists_uncond (field-agnostic engine at Φ := quadrupledField). The
+-- directional-derivative engine the fourth-jet value-identity (Z1-analogue) consumes; NO expRho.
+-- std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowQuadrupleVariation

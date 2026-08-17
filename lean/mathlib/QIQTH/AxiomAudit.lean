@@ -27934,6 +27934,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_octupleEndpoint_baseVelocity_hasFDerivAt
 #print axioms QIQTH.ExpMap.uniformFlow_octupleEndpoint_component_hasFDerivAt
 
+-- Plan v6 Task I (C³ climb, brick 3): quadrupledField_variation_exists_uncond — directional (scalar-s)
+-- smooth dependence of the quadrupled flow on its base IC (field-agnostic engine at Φ := quadrupledField),
+-- one order up from doubledField_variation_exists_uncond. The directional-derivative engine feeding the
+-- fourth-jet value-identity (Z1-analogue: octuple deep component = D³φ value). std-3. NOT a₁=R/6.
+#print axioms QIQTH.ExpMap.quadrupledField_variation_exists_uncond
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
