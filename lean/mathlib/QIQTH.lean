@@ -3943,6 +3943,13 @@ import QIQTH.DiagNormalFormFull
 -- (off-gate the gated amplitude is 0, so a GLOBAL bound reduces to an ON-GATE base bound).
 -- witnessDiag_amplitude_sup_bounds. std-3. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.DiagSliverAmpBounds
+-- J4-812: the FIVE diagonal-sliver integrand integrabilities in ON-GATE measurability form — the
+-- diagonal (i=j) analogue of MixedSliverIntegrandMeas.integrable_*_onGate (J4-806) at the EXACT integrand
+-- shapes carried by XUniformSliverFull.witness_sliver2_xuniform (hIntT1/hIntT2/hIntT3/hInt1/hInt2). Each
+-- carries the amplitude A0/A1/A2 as a literal factor → vanishes off the finite gate S (hsupp by ring), so
+-- the shape-agnostic gate-compact-support engine integrable_of_onGate closes it from on-gate measurability
+-- + on-gate sup-bound. integrable_hIntT1/hIntT2/hIntT3/hInt1/hInt2_onGate. std-3. NOT a₁=R/6 (CONDITIONAL).
+import QIQTH.DiagSliverIntegrands
 -- MixedSliverGatedCoInstantiation.witness_sliver2_xuniform_mixed_gated (J4-811): the SINGLE shared-witness
 -- co-instantiation of witness_sliver2_xuniform_mixed at the concrete gated van-Vleck tuple (V=gateDisp of
 -- inverse chart, gated jets Pi/Pj/Q, gated chart amplitudes, F=leviSeries of the gated van-Vleck source).

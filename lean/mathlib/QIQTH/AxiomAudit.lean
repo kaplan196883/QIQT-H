@@ -27655,6 +27655,14 @@ namespace QIQTH.AxiomAudit
 -- banked suppliers (J4-793/794/799/805); carries hqLip + 7 integrabilities as the honest terminal
 -- interface. NOT full closure of the mixed sliver; NOT a₁=R/6. std-3.
 #print axioms QIQTH.MixedSliverGatedCoInstantiation.witness_sliver2_xuniform_mixed_gated
+-- J4-812: the FIVE diagonal-sliver integrand integrabilities in ON-GATE measurability form — the diagonal
+-- (i=j) analogue of J4-806 at the exact hIntT1/hIntT2/hIntT3/hInt1/hInt2 shapes of witness_sliver2_xuniform,
+-- via the shape-agnostic gate-compact-support engine integrable_of_onGate. std-3. NOT a₁=R/6.
+#print axioms QIQTH.DiagSliverIntegrands.integrable_hIntT1_onGate
+#print axioms QIQTH.DiagSliverIntegrands.integrable_hIntT2_onGate
+#print axioms QIQTH.DiagSliverIntegrands.integrable_hIntT3_onGate
+#print axioms QIQTH.DiagSliverIntegrands.integrable_hInt1_onGate
+#print axioms QIQTH.DiagSliverIntegrands.integrable_hInt2_onGate
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
