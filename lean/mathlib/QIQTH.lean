@@ -4019,3 +4019,10 @@ import QIQTH.WitnessSourceFieldTransposition
 -- is ≤ L·√ε — matching the closed J4-817 sliver rate. std-3. NOT a₁=R/6; does NOT close hCConv (still
 -- needs the curved-RNC-chart displacement reduction + discharging hodd at the concrete amplitude).
 import QIQTH.WitnessTranspositionResidualBound
+-- J4-821: WitnessTranspositionLipschitzResidual — the transposition residual's sliver bound from PLAIN
+-- LOCAL LIPSCHITZ regularity of the kernel's second partial. hodd_of_lipschitzOnWith discharges J4-820's
+-- abstract hodd interface from LipschitzOnWith L of G=∂ⱼ∂ᵢF on a set containing ±z (|G(−z)−G(z)|≤2L‖z‖
+-- via dist_neg_self: dist(−z,z)=2‖z‖); residual_sliver_bound_of_lipschitzOnWith ⟹ |residual|≤2L·√ε on
+-- ‖z‖≤√ε — no even/odd cancellation needed, pure C³ regularity. std-3. NOT a₁=R/6; does NOT close hCConv
+-- (still needs the curved-RNC-chart 2nd partial exhibited as LipschitzOnWith on an origin-ball).
+import QIQTH.WitnessTranspositionLipschitzResidual

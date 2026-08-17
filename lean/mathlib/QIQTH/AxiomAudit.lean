@@ -27729,6 +27729,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.residual_abs_le_two_sup
 #print axioms QIQTH.HeatResidualBound.residual_sliver_bound
 
+-- WitnessTranspositionLipschitzResidual (J4-821): the transposition residual's sliver bound from PLAIN
+-- local Lipschitz continuity of the kernel's second partial G=∂ⱼ∂ᵢF. dist_neg_self: dist(−z,z)=2‖z‖;
+-- hodd_of_lipschitzOnWith discharges J4-820's hodd from LipschitzOnWith L of G on a set containing ±z
+-- (|G(−z)−G(z)|≤2L‖z‖); residual_sliver_bound_of_lipschitzOnWith ⟹ |residual|≤2L·√ε on ‖z‖≤√ε — no
+-- even/odd cancellation, pure C³ regularity. std-3. NOT a₁=R/6; does NOT close hCConv (needs the
+-- curved-RNC-chart 2nd partial exhibited as LipschitzOnWith on an origin-ball).
+#print axioms QIQTH.HeatResidualBound.dist_neg_self
+#print axioms QIQTH.HeatResidualBound.hodd_of_lipschitzOnWith
+#print axioms QIQTH.HeatResidualBound.residual_sliver_bound_of_lipschitzOnWith
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
