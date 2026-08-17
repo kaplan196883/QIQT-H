@@ -27623,6 +27623,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hInt1j_onGate
 #print axioms QIQTH.MixedSliverIntegrandMeas.integrable_hInt2_onGate
 
+-- J4-807: the seven on-gate AE-strong-measurability suppliers (gaussDdim_cont + chart-jet vector
+-- on-gate measurability + N1-hEmeas Levi field), composing to the exact witness integrand shapes.
+-- helpers aesm_gate_component/gaussComp/innerSum/divConst; hmeas_*_onGate ×7. std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.aesm_gate_innerSum
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hIntE1_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hIntPlain_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hIntRem_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hInt0_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hInt1i_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hInt1j_onGate
+#print axioms QIQTH.MixedSliverIntegrandMeasSupply.hmeas_hInt2_onGate
+-- J4-808: the seven integrabilities from primitive on-gate data (806∘807). std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hIntE1_full
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hIntPlain_full
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hIntRem_full
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt0_full
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt1i_full
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt1j_full
+#print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt2_full
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

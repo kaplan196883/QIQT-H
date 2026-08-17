@@ -3915,3 +3915,14 @@ import QIQTH.MixedNormalFormGatedMatch
 -- (stays CONDITIONAL — the on-gate measurability of the concrete chart integrands + leviSeries-F factor
 -- and hqLip's hmeas carry remain; no capstone-level closure reached).
 import QIQTH.MixedSliverIntegrandMeas
+-- J4-807: the concrete SUPPLIER of the seven on-gate AE-strong-measurability legs that
+-- MixedSliverIntegrandMeas (J4-806) left abstract — composition of gaussDdim_cont (continuity),
+-- chart-jet vector on-gate measurability (chart-reach continuity route), and the N1-hEmeas Levi
+-- field measurability. hmeas_*_onGate ×7 in the exact witness integrand shapes. std-3. NOT a₁=R/6.
+import QIQTH.MixedSliverIntegrandMeasSupply
+-- J4-808: the seven mixed-sliver integrabilities from PURELY PRIMITIVE on-gate data — composition of
+-- the J4-806 on-gate engines with the J4-807 measurability suppliers. integrable_*_full ×7. Typecheck
+-- confirms byte-for-byte shape match with witness_sliver2_xuniform_mixed's hInt* slots. std-3. NOT a₁=R/6
+-- (stays CONDITIONAL — no single capstone instantiation; the OTHER suppliers' co-instantiation at one
+-- shared witness tuple + the J4-803 Qfield-identity residue remain).
+import QIQTH.MixedSliverIntegrandFull
