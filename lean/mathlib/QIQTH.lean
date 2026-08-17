@@ -3980,3 +3980,8 @@ import QIQTH.DiagSliverGatedCoInstantiation
 -- (witness_sliver2_xuniform_mixed) and diagonal (witness_sliver2_xuniform) sliver rate theorems consume;
 -- closes the per-x-not-co-instantiated residue of J4-811/J4-814. std-3. NOT a₁=R/6.
 import QIQTH.SliverIntegrandXUniform
+-- J4-816: the UNIFORM-in-(x,s) hqLip triple + its wiring DISCHARGING the hqLip residue of BOTH the mixed
+-- (J4-811) and diagonal (J4-814) gated co-instantiations. Lifts the banked supplier's field-point-0
+-- restriction to a general field point x and TAMES its s-dependent Levi constant L_E+K·2√s to the single
+-- uniform L=M_A·(L_E+K·2√u)+M_F·L_A via √s≤√u (bounded-slice sup). std-3. NOT a₁=R/6.
+import QIQTH.MixedSliverHqLipUniform

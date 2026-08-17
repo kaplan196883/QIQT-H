@@ -27679,6 +27679,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverIntegrandXUniform.uniform_hInt2_mixed
 #print axioms QIQTH.SliverIntegrandXUniform.uniform_hIntT1_diag
 #print axioms QIQTH.SliverIntegrandXUniform.uniform_hInt2_diag
+-- J4-816: the UNIFORM-in-(x,s) hqLip triple + its wiring discharging the hqLip residue of BOTH the mixed
+-- (J4-811) and diagonal (J4-814) gated co-instantiations. hqLip_uniform_product = the √s≤√u bounded-slice
+-- sup manufacturing one uniform Lipschitz constant from the s-dependent general-x Levi slot;
+-- gateAmpLevi_hqLip_uniform = the exact hqLip binder shape; the two _hqLipUniform capstones = the mixed and
+-- diagonal co-instantiations with hqLip no longer carried. std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedSliverHqLipUniform.hqLip_uniform_product
+#print axioms QIQTH.MixedSliverHqLipUniform.gateAmpLevi_hqLip_uniform
+#print axioms QIQTH.MixedSliverHqLipUniform.witness_sliver2_xuniform_mixed_gated_hqLipUniform
+#print axioms QIQTH.MixedSliverHqLipUniform.witness_sliver2_xuniform_diag_gated_hqLipUniform
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
