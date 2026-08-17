@@ -9843,3 +9843,64 @@ Commit `b19a94e3`. New std-3 file `QIQTH/UniformFlowExpBasepointJacobiExplicit.l
 - Even a `hReach`-conditional close is not this-pass mechanical: `CConvConcreteThreading.a1_R6_of_residue_inf_v5` discharges hCConv from facade bundles but STILL carries `hD1` open — the assembly from `chartSecondJet_continuousOn_of_reach` to `gderiv_continuousAt`'s integrand-continuity slot (+ the sliver route's `hNormalForm`/`hco`/`hYdisp`/`hJ3`/`hJ3Q`/amplitude-sup/`hFdom`/`hqLip`/per-slice-integrability carries) is a multi-brick body, unbuilt.
 - Per zero-forcing protocol: NO Lean written, NO commits, repo state unchanged (the banked pieces already exist). Capstone character-checked UNCHANGED — carries `{hDuhamel, hDConv, hCConv}` + standard geometric/gauge premises only, std-3, budget 0.
 - a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. SEVENTH independent confirmation of the wall, now maximally re-located: first-order hFwd DONE; the sole residual is the (I1) uniform-injectivity-radius `hReach` = lsc of `expRho` over `K`.
+
+## J4-777/778/779 — Plan v6 Task I: ELIMINATE expRho by climbing the uniform-tube velocity-jet tower one order (toward C³-unconditional) [AF]
+
+**The reframing (plan v6).** `ChartThirdJet.uniformFlowExp_contDiffAt_four` (the C⁴ forward map feeding
+the whole downstream `hCConv` chain) borrows its regularity from `ExpMap.expMap_contDiffOn_four` via the
+overlap bridge `expMap_eq_uniformFlowExp_on_overlap`, valid only on `‖v‖ < min(expRho z, uniformFlowRadius)`.
+This is why the opaque `.choose`-fixed per-base radius `expRho` (no continuity, no relation to
+`uniformFlowRadius`; `hReach : uniformFlowRadius ≤ expRho q` is the unprovable wall) infects everything.
+Fix: re-derive the regularity DIRECTLY on the uniform tube. Two Explore passes confirmed the ExpMap C⁴
+tower uses `expTube`/`expRho` ONLY as "some radius + tube satisfying ODE+IC+confinement" (no structural
+dependency), AND that the uniform tube ALREADY has a bespoke, unconditional variational (`genericDoubled`
+doubling) tower climbing one velocity-order per doubling:
+  `geodesicField`→D¹,  `doubledField`→D²,  `quadrupledField`→D³ (banked: `hessianMap_differentiableAt`),
+giving `contDiffAt2_uniformFlowExp` = **C² unconditional** (the highest order already closed).
+Key fact: on the open ball, φ ∈ C^{n} ⟺ g₁…g_{n} exist AND g_n continuous; the three differentiabilities
+g₁,g₂,g₃-existence are banked, so **C³ ⟺ g₃-map (CLM-valued third jet) continuous ⟸ g₄-existence** = the
+FOURTH velocity jet. C⁴ needs g₄ AND g₅ (fifth jet).
+
+**J4-777 (commit 0c101c28) — the C² target-shape floor, UNCONDITIONAL.**
+`UniformFlowExpContDiffTwoUniform.uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K,
+  ContDiffOn ℝ 2 (uniformFlowExp g gi hC hK q) (ball 0 uniformFlowRadius)` — NO expRho. Packages the
+banked per-point `contDiffAt2_uniformFlowExp` into ContDiffOn on the open ball. std-3, budget 0.
+
+**J4-778 (commit 8bec5998) — the FOURTH-JET SUPPLY (mechanical half), UNCONDITIONAL.**
+- `UniformFlowOctupleField`: `genericDoubled_fderiv_snd_apply` (★ FIELD-AGNOSTIC block formula for
+  D(genericDoubled Φ)'s 2nd component — mirror of `doubledField_fderiv_snd_apply` generalised to any C^∞
+  Φ, reusable at every doubling depth) + `contDiff_octupledField` + `octupledField_fderiv{,2}_bddOn_compact`
+  (the 8-fold field `genericDoubled(genericDoubled(doubledField))` regularity).
+- `UniformFlowOctupleSupply`: `uniformFlow_octupleEndpoint_baseVelocity_hasFDerivAt` — base-velocity
+  Fréchet derivative of the octupled-flow endpoint `δ ↦ ((((tube(v+δ)1,Jf δ 1),Uf δ 1),Tf δ 1))`, a
+  GENUINE confined 8-fold integral-curve family (Jacobi ⊗ doubled- ⊗ quadrupled-linearized factors,
+  triple-nested `genericDoubled_prod_hasDerivAt`, Grönwall-confined at each level, fed to the abstract
+  first-jet engine `autonomousFlow_endpoint_hasFDerivAt_window_exists` at Φ:=octupledField). One order up
+  from the banked QuadrupleFlowSupply. `_component_hasFDerivAt` projects the deep slot `(Tf δ 1).2.2.1`.
+  (Needed `abbrev St2/St4/St8` + `synthInstance.maxHeartbeats 1000000` for the 8-fold product elaboration.)
+
+**J4-779 (commit 3a837806) — the value-id ENGINE, UNCONDITIONAL.**
+`UniformFlowQuadrupleVariation.quadrupledField_variation_exists_uncond` — directional (scalar-s) smooth
+dependence of the quadruple flow on its base IC (`HasDerivAt (fun s => Y s t) (V t) 0`), a one-order-up
+instance of `autonomousField_variation_exists_uncond` at Φ:=quadrupledField. Mirror of
+`doubledField_variation_exists_uncond`; the directional engine the fourth-jet value-id consumes.
+
+**PRECISE REMAINING GAP to C³-unconditional (one brick + a ~130-line wrapper).** The FOURTH-JET
+VALUE-IDENTITY (`Z1↑`, the genuine new content, mirror of `uniformFlowExp_hessian_value_id`/Z1, 282 lines,
+one order up): for genuine J (Jacobi, seed (0,b)), U (doubled-linearized, seed ((0,a),0)), T
+(quadrupled-linearized, seed (((0,c),0),0)) along the fixed base ((tube(v),J),U),
+  `(fderiv (fun w => fderiv (fun u => fderiv (uniformFlowExp q) u) w) v) c a b = (T 1).2.2.1`.
+Proof route (fully scoped): (1) build the scalar-s quadruple supply Q(s)=((tube(v+s•c),Jˢ),Uˢ)
+(mirror Z1's keyJ + a new keyU); (2) quadrupled variation Vf via `linODE_exists_narrowpad_continuousOn`;
+(3) `quadrupledField_variation_exists_uncond` [J4-779] ⟹ `HasDerivAt (fun s => Q(s) 1) (Vf 1) 0`;
+(4) Z1 [banked] identifies `(Q(s) 1).2.2.1 = (Uˢ 1).2.1 = D²φ_{v+s•c}(a,b)` on the window ⟹
+`HasDerivAt (fun s => D²φ_{v+s•c}(a,b)) ((Vf 1).2.2.1) 0`; (5) `hessianMap_differentiableAt` [banked] +
+directional + eval-CLM ⟹ same LHS derivative `= (fderiv f2 v) c a b`; (6) `HasDerivAt.unique`;
+(7) glue Vf≡T via `jacobiSol_unique` (J) + `autonomousLinODE_unique` ×2 (U, then T). Then the wrapper:
+`W2↑` (per-seed fourth jet, mirror `uniformFlow_thirdJet_hasFDerivAt`: octuple-supply derivative +
+congr across Z1↑ + recentre, ~50 lines) → `thirdJetMap_differentiableAt` (triple-piRing lift, mirror
+`hessianMap_differentiableAt`, ~50 lines) → C³ assembly (mirror `contDiffAt2_uniformFlowExp` +1 layer,
+~30 lines) ⟹ `uniformFlowExp_contDiffOn_three_uniform` UNCONDITIONAL. C⁴ then needs the SAME climb once
+more (fifth jet: hexadecuple supply + Z1↑↑). All std-3, budget 0. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL
+on {hDuhamel, hDConv, hCConv}. expRho is now eliminated up to order 2 with the order-3/4 supply +
+directional engine banked; the sole residual is the Z1↑ value-id.
