@@ -27863,6 +27863,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InverseChartSecondJetODEBridge.ift_secondJet_applied_hasDerivAt
 #print axioms QIQTH.InverseChartSecondJetODEBridge.ift_secondJet_base_ode_hasDerivAt
 
+-- Task D (plan v3): packages the banked witness field-C³ (witnessField_contDiffAt3_center) into an
+-- EXPLICIT local sup bound on the THIRD field Fréchet derivative of the q=0 witness slice —
+-- ‖iteratedFDeriv ℝ 3 (p ↦ vanVleckGatedWitness … t p 0) p‖ ≤ M on ‖p‖ < r — via ContDiffAt ⟹
+-- ContinuousAt(iteratedFDeriv) ⟹ locally bounded. The p-block third-partial bound of the
+-- transposition-chain joint-Lipschitz assembly (p-segment at chart base q=0); no arbitrary-q-uniform
+-- constant claimed (blocked by .choose-incoherence). std-3. NOT a₁=R/6; CONDITIONAL {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.witnessThirdPartial_localBound_center
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

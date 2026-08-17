@@ -4124,3 +4124,12 @@ import QIQTH.UniformFlowExpBasepointJacobiExplicit
 -- the `.choose`-free route side-stepping J4-833's τ-fiber Jacobi-ODE wall. sympy-verified (residual 0).
 -- std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.InverseChartSecondJetODEBridge
+-- WitnessThirdPartialUniformBound (Task D, plan v3): packages the banked witness field-C³
+-- (InverseChartFieldC3.witnessField_contDiffAt3_center) into an EXPLICIT local sup bound on the
+-- THIRD field Fréchet derivative ‖iteratedFDeriv ℝ 3 (p ↦ vanVleckGatedWitness … t p 0) p‖ ≤ M on a
+-- ball ‖p‖ < r, via the standard ContDiffAt ⟹ ContinuousAt(iteratedFDeriv) ⟹ locally-bounded step.
+-- This is the p-block third-partial bound of the transposition-chain joint-Lipschitz assembly, at the
+-- chart base q=0 (exactly the p-segment input for the origin-chained Φ(0,z)−Φ(z,0) estimate; an
+-- arbitrary-q-uniform constant is NOT claimed — blocked by .choose-incoherence, see file header).
+-- std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.WitnessThirdPartialUniformBound
