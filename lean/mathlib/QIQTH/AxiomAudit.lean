@@ -27871,6 +27871,20 @@ namespace QIQTH.AxiomAudit
 -- constant claimed (blocked by .choose-incoherence). std-3. NOT a₁=R/6; CONDITIONAL {hDuhamel,hDConv,hCConv}.
 #print axioms QIQTH.HeatResidualBound.witnessThirdPartial_localBound_center
 
+-- Task E (plan v3): the q-block UNIFORM bound over a CONVEX neighbourhood of q=0, combining Task A
+-- (per-q base-slot Jacobi field + endpoint id) and Task B (second-jet base ODE). Part 1
+-- (uniformFlowExp_base_deriv_uniform_bound): ∃M≥0, ∀ ‖q‖≤r₀, ∃L, HasFDerivAt(uniformFlowExp ·v) L q ∧
+-- ‖L‖≤M, with M=exp(Kf) the uniform field-generator bound on a FIXED phase ball S₀ containing every tube
+-- for ‖q‖≤r₀ — uniform Grönwall (norm_le_gronwallBound_of_norm_deriv_right_le), a BOUNDEDNESS not
+-- smoothness argument (no continuity/coherence in q; .choose-incoherence does not block). UNCONDITIONAL.
+-- Part 2 (ift_secondJet_base_ode_uniform_bound): ∃M₂≥0, ∀q∈N ∀ unit a,b, ∃d, HasDerivAt(secondjet_q) d 0
+-- ∧ ‖d‖≤M₂, from the explicit CLM-submultiplicative polynomial bound ift_secondJet_base_ode_deriv_norm_le
+-- on Task B's derivative value, CONDITIONAL on uniform forward-jet bounds {cI,cA,cH,cH'} (wiring A=Dφ,
+-- H=D²φ to concrete uniformFlowExp = named-open BaseFlowHderFamily 2nd-order tower). All std-3.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlowExp_base_deriv_uniform_bound
+#print axioms QIQTH.ExpMap.ift_secondJet_base_ode_uniform_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

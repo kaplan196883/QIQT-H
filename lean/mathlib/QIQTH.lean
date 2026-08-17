@@ -4133,3 +4133,12 @@ import QIQTH.InverseChartSecondJetODEBridge
 -- arbitrary-q-uniform constant is NOT claimed — blocked by .choose-incoherence, see file header).
 -- std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.WitnessThirdPartialUniformBound
+-- Task E (plan v3): the q-block UNIFORM base-slot bound over a CONVEX neighbourhood of q=0. Part 1
+-- (uniformFlowExp_base_deriv_uniform_bound) is the UNCONDITIONAL uniform bound on the base-slot Fréchet
+-- derivative of the flow endpoint over ‖q‖≤r₀, via Task A's per-q Jacobi field + a uniform Grönwall on a
+-- FIXED phase ball (a boundedness, not smoothness, argument — .choose-incoherence does not block it).
+-- Part 2 (ift_secondJet_base_ode_uniform_bound) packages Task B's second-jet base-ODE derivative into a
+-- uniform ∂_q∂²_p H bound over the neighbourhood, CONDITIONAL on uniform forward-jet bounds (the
+-- BaseFlowHderFamily second-order wiring is named-open, not done here). std-3. NOT a₁=R/6; a₁=R/6 remains
+-- CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.WitnessMixedPartialUniformBound
