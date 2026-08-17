@@ -27840,6 +27840,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.source_hbrem_discharge
 #print axioms QIQTH.ExpMap.secondFieldJet_basepoint_hasDerivAt_remaindersDischarged
 
+-- Task A (plan v2): the EXPLICIT base-point Jacobi field of the concrete uniform flow, wiring the
+-- generic Jacobi engine geodesicJacobi_narrowpad_hasDerivAt_Icc at the BASE slot (seed (u,0)) along
+-- uniformFlowTube q v — verbatim base-slot mirror of the velocity-slot uniformFlowExp_hasFDerivAt —
+-- and identifying its endpoint (J 1).1 with ∂_q uniformFlowExp via the σ-windowed base-slot capstone.
+-- Plus the seed-GENERALISED (arbitrary ξ, incl. base (u,0)) copies of the
+-- ChartMixedThirdJetBasepointRemainder theorems (seed enters only via h0 : Y s 0 = X2 0). std-3 ×4.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlowExp_basepoint_jacobi_explicit
+#print axioms QIQTH.ExpMap.geodesicFlow_secondOrder_base_remainder_gen
+#print axioms QIQTH.ExpMap.secondFieldJet_harem_discharge_gen
+#print axioms QIQTH.ExpMap.secondFieldJet_basepoint_hasDerivAt_remaindersDischarged_gen
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

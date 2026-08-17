@@ -4108,3 +4108,12 @@ import QIQTH.SecondFieldPartialContDiff
 -- geodesic flow's C² base dependence, geodesicVariation_hNb_discharge one order up). std-3.
 -- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.ChartMixedThirdJetBasepointRemainder
+-- Task A (plan v2): the EXPLICIT base-point Jacobi field of the concrete uniform flow —
+-- uniformFlowExp_basepoint_jacobi_explicit wires the generic Jacobi engine
+-- geodesicJacobi_narrowpad_hasDerivAt_Icc at the BASE slot (seed (u,0)) along uniformFlowTube q v
+-- (verbatim base-slot mirror of the velocity-slot uniformFlowExp_hasFDerivAt), giving the explicit
+-- field J with ODE + seed + sup bound, plus L u = (J 1).1 identifying its endpoint with the
+-- base-slot Fréchet derivative ∂_q uniformFlowExp. Also the seed-GENERALISED (arbitrary ξ) copies of
+-- the ChartMixedThirdJetBasepointRemainder theorems. std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL
+-- on {hDuhamel, hDConv, hCConv}.
+import QIQTH.UniformFlowExpBasepointJacobiExplicit
