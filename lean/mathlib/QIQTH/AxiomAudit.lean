@@ -27642,6 +27642,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt1i_full
 #print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt1j_full
 #print axioms QIQTH.MixedSliverIntegrandFull.integrable_hInt2_full
+-- J4-809: the FULL ∀ζ DIAGONAL hNormalForm for the concrete gated van-Vleck witness — the diagonal twin
+-- of J4-792 witnessMixed_hNormalForm_full. Extends DiagNormalFormOnGate.witnessDiag_gate_eq_sTerm (J4-795
+-- TASK A) to the unconditional ∀ζ shape witness_sliver2_xuniform's hNormalForm consumes, via the SAME
+-- off-gate reconciliation (gateAmp + pd_pd_mixed_eq_zero_of_eventuallyZero at j:=i). std-3. NOT a₁=R/6.
+#print axioms QIQTH.DiagNormalFormFull.witnessDiag_hNormalForm_full
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the

@@ -3926,3 +3926,12 @@ import QIQTH.MixedSliverIntegrandMeasSupply
 -- (stays CONDITIONAL — no single capstone instantiation; the OTHER suppliers' co-instantiation at one
 -- shared witness tuple + the J4-803 Qfield-identity residue remain).
 import QIQTH.MixedSliverIntegrandFull
+-- J4-809: the FULL ∀ζ DIAGONAL hNormalForm for the concrete gated van-Vleck witness — the diagonal twin
+-- of MixedNormalFormFull.witnessMixed_hNormalForm_full (J4-792). Extends the on-gate 3-term sTerm match
+-- DiagNormalFormOnGate.witnessDiag_gate_eq_sTerm (J4-795 TASK A) to the unconditional ∀ζ shape that
+-- XUniformSliverFull.witness_sliver2_xuniform's hNormalForm slot consumes, via the SAME off-gate
+-- reconciliation as the mixed case (gateAmp S-gating + pd_pd_mixed_eq_zero_of_eventuallyZero at j:=i).
+-- witnessDiag_hNormalForm_full. Strictly simpler than the mixed case (3 terms, one gradient, one index).
+-- std-3. NOT a₁=R/6 (stays CONDITIONAL — the diagonal leg's other suppliers reuse the mixed campaign's
+-- dischargers at i=j; co-instantiation at one shared witness tuple is the follow-up).
+import QIQTH.DiagNormalFormFull
