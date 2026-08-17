@@ -27745,6 +27745,17 @@ namespace QIQTH.AxiomAudit
 -- met by the C^∞ witness; no even/odd cancellation. std-3. NOT a₁=R/6; does NOT close hCConv.
 #print axioms QIQTH.HeatResidualBound.residual_sliver_bound_of_contDiffAt
 
+-- WitnessTranspositionGeneralBound (J4-823): the FULLY GENERAL two-variable transposition bound, closing
+-- the curved-chart sub-gap without any displacement idealization. dist_swap_pair: dist((0,z),(z,0))=‖z‖;
+-- general_transposition_diff_of_lipschitzOnWith: |Φ(0,z)−Φ(z,0)|≤K‖z‖ for jointly-Lipschitz Φ;
+-- …sliver…: ≤K√ε on ‖z‖≤√ε; ★ general_transposition_sliver_of_contDiffAt: from ContDiffAt ℝ 1 Φ (0,0)
+-- ⟹ ∃K r>0, …≤K√ε. No displacement/even-odd/chart-specific analysis. std-3. NOT a₁=R/6; does NOT close
+-- hCConv (needs the witness's concrete Φ + feeding kPrime_opNorm_sliver_bound).
+#print axioms QIQTH.HeatResidualBound.dist_swap_pair
+#print axioms QIQTH.HeatResidualBound.general_transposition_diff_of_lipschitzOnWith
+#print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_lipschitzOnWith
+#print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_contDiffAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

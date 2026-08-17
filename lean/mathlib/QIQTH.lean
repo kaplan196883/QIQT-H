@@ -4032,3 +4032,12 @@ import QIQTH.WitnessTranspositionLipschitzResidual
 -- J4-821). Hypothesis UNCONDITIONALLY met by the C^∞ witness; no even/odd (∇R-cubic) cancellation needed.
 -- std-3. NOT a₁=R/6; does NOT close hCConv (still needs transport through the curved-chart V(q,p)).
 import QIQTH.WitnessTranspositionSmoothResidual
+-- J4-823: WitnessTranspositionGeneralBound — the FULLY GENERAL two-variable transposition bound. Closes
+-- the curved-chart sub-gap by dispensing with the displacement idealization: the difference Φ(0,z)−Φ(z,0)
+-- of the two-variable second-field-partial at the swapped points (0,z),(z,0) — whose product-metric
+-- distance is EXACTLY ‖z‖ (dist_swap_pair) — is bounded by K·‖z‖ for ANY jointly-Lipschitz Φ
+-- (general_transposition_diff_of_lipschitzOnWith), ≤K·√ε under ‖z‖≤√ε (…sliver…), and ★ from PURE joint
+-- smoothness ContDiffAt ℝ 1 Φ (0,0) ⟹ ∃K r>0 …≤K·√ε (general_transposition_sliver_of_contDiffAt). No
+-- displacement structure, no even/odd cancellation, no chart-specific analysis. std-3. NOT a₁=R/6;
+-- does NOT close hCConv (needs identifying the witness's concrete Φ + feeding kPrime_opNorm_sliver_bound).
+import QIQTH.WitnessTranspositionGeneralBound
