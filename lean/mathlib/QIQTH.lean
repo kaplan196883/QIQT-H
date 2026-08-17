@@ -3991,3 +3991,11 @@ import QIQTH.MixedSliverHqLipUniform
 -- NEITHER an hqLip NOR any Integrable hypothesis; residue = primitive on-gate geometric/gauge/
 -- measurability/boundedness data only. std-3. NOT a₁=R/6.
 import QIQTH.SliverGatedFullyCombined
+
+-- LiveHVanVleckDefeq: dissolves J4-817 "wall #3" (kernel-family mismatch). The live order-1
+-- reach-aligned capstone's left kernel H = gatedKernel K S (globalCutoffParametrixWitnessN 1 …) is
+-- DEFINITIONALLY vanVleckGatedWitness (the kernel the whole J4-780→817 sliver campaign was built on):
+-- live_H_eq_vanVleckGatedWitness (rfl), and the capstone's hCConv/heatConv GOAL equals the
+-- vanVleckGatedWitness goal (live_hCConv_goal_eq, rfl) — so a C²-at-0 supply at vanVleckGatedWitness
+-- discharges the capstone slot with no kernel-family bridge. std-3. NOT a₁=R/6.
+import QIQTH.LiveHVanVleckDefeq

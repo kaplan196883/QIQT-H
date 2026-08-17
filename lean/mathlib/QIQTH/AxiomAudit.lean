@@ -27696,6 +27696,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverGatedFullyCombined.witness_sliver2_xuniform_mixed_gated_fullyCombined
 #print axioms QIQTH.SliverGatedFullyCombined.witness_sliver2_xuniform_diag_gated_fullyCombined
 
+-- LiveHVanVleckDefeq: dissolves J4-817 "wall #3" (kernel-family mismatch). live_H_eq_vanVleckGatedWitness
+-- = the live order-1 reach-aligned capstone's left kernel H is DEFINITIONALLY vanVleckGatedWitness
+-- (rfl); live_hCConv_goal_eq = the capstone's hCConv/heatConv goal equals the vanVleckGatedWitness goal
+-- (rfl), so a C²-at-0 supply at vanVleckGatedWitness discharges the capstone slot with no kernel-family
+-- bridge. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HeatResidualBound.live_H_eq_vanVleckGatedWitness
+#print axioms QIQTH.HeatResidualBound.live_hCConv_goal_eq
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
