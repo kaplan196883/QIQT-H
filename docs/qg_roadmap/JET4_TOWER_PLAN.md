@@ -9629,3 +9629,13 @@ So the sliver-rate layer is closed to primitive on-gate data, but wiring it into
   under the √ε sliver (or a direct re-derivation of the sliver bound in the kPrime orientation). The
   mechanism + obstruction-confinement are now BANKED; the wall is reduced from "unknown symmetry" to
   "control the ∇R-cubic amplitude residual on the curved chart".
+
+## J4-819 — field-source transposition mechanism proven; wall pinned EXACTLY to the ∇R-cubic amplitude residual [AF]
+- New file `QIQTH/WitnessSourceFieldTransposition.lean` (commit `2f263884`), 6 theorems std-3, budget raw 0.
+- **Exact formula extracted**: `H(τ,p,q) = radialCutoff(a,b,V)·gaussDdim(τ,V)·vanVleck(g,V)^{-1/2}·(u₀(V)+u₁(V)τ)` where `V=V(q,p)=uniformInverseChart(...)` — the entire (p,q)-dependence factors through ONE chart vector.
+- **Transposition mechanism PROVEN abstractly**: in the leading flat chart `V(q,p)=p-q`, the field-source symmetry needed is EXACTLY "∂²F is EVEN" ⟺ "F is even" (`displacement_secondPartial_transposition_center` + full pd shift/reflection algebra: `pd_comp_sub_const_pt`/`pd_comp_neg_pt`/`pd_odd_of_even`/`pd_even_of_odd`/`secondPartial_even_of_even`).
+- **Sympy pinpointed the EXACT obstruction** (`docs/qg_roadmap/j4_819_transposition_sympy.py`): the transposition difference is carried ENTIRELY by odd amplitude coefficients `a₁`(linear)/`a₃`(cubic). In RNC the linear term `a₁` vanishes IDENTICALLY (via `hdg0`/`hΓ` — already-standard capstone hypotheses!), leaving ONLY `a₃=∇R`. Proven in Lean that `gaussDdim`/`radialCutoff` are exactly even — the obstruction lives ENTIRELY in `vanVleck^{-1/2}·(u₀+u₁τ)`, specifically its cubic-in-∇R piece.
+- **Two residual sub-gaps to full closure** (both precisely named, not vague): (1) curved-chart correction — the live V(q,p) is the curved RNC log map not p-q; the flat-displacement reduction is leading-order only, chain rule picks up DF·∂²V + asymmetric ∂V⊗∂V terms; (2) bounding the ∇R-cubic residual UNDER THE √ε SLIVER, uniformly in x near 0 (kPrime's x enters ∂²H directly; sliver's x enters only the Levi third slot — a genuine uniformity gap).
+- Did NOT close hCConv this cycle (correctly, honestly reported — capstone signature untouched).
+- ★★★★★ THE WALL IS NOW MAXIMALLY PRECISE: not "field-source symmetry, unknown" but "bound the specific ∇R-cubic term's contribution to the second-derivative transposition difference, on the curved chart, uniformly under the √ε sliver window." This is a concrete, scoped analytic estimate — the SAME kind of work (Gaussian-moment / Taylor-remainder bounding) this campaign has repeatedly closed tonight.
+- a₁=R/6 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
