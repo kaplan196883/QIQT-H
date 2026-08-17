@@ -9904,3 +9904,47 @@ congr across Z1↑ + recentre, ~50 lines) → `thirdJetMap_differentiableAt` (tr
 more (fifth jet: hexadecuple supply + Z1↑↑). All std-3, budget 0. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL
 on {hDuhamel, hDConv, hCConv}. expRho is now eliminated up to order 2 with the order-3/4 supply +
 directional engine banked; the sole residual is the Z1↑ value-id.
+
+## J4-780/781 — Plan v6 Task I C³-UNCONDITIONAL CLOSED: Z1↑ value-id + W2↑ + triple-piRing lift + assembly [AF]
+
+**J4-780 (commit d7853e15) — Z1↑, the FOURTH-JET VALUE-IDENTITY (the genuine new content).**
+`QIQTH/UniformFlowExpFourthJetValueId.lean`, `uniformFlowExp_thirdJet_value_id`: for `q ∈ K`,
+`‖v‖ < ρ_K`, seeds `a b c`, and genuine linearized fields J (Jacobi, seed (0,b), along tube(v)),
+U (doubledField-linearized, seed ((0,a),(0,0)), along (tube(v),J)), T (quadrupledField-linearized, seed
+(((0,c),(0,0)),((0,0),(0,0))), along ((tube(v),J),U)):
+  `(fderiv (fun w => fderiv (fun u => fderiv (uniformFlowExp q) u) w) v) c a b = (T 1).2.2.1`.
+DERIVED exactly per the scoped route, mirroring Z1 one order up: (1) scalar-s quadruple supply
+`Q s = ((tube(v+s•c),Jˢ),Uˢ)` confined in a compact convex product ball (Z1's keyJ + new keyU, both via
+Grönwall along the tube); (2) quadrupledField-linearized variation Vf along Q 0 (seed Tseed) via
+`linODE_exists_narrowpad_continuousOn`; (3) `quadrupledField_variation_exists_uncond` [J4-779] ⟹
+`HasDerivAt (fun s => Q s 1) (Vf 1) 0`; (4) Z1 [banked] at velocity v+s•c ⟹
+`(Q s 1).2.2.1 = (Uˢ 1).2.1 = (fderiv f₂ (v+s•c)) a b` eventually ⟹ (project via CLM +
+`congr_of_eventuallyEq`) `HasDerivAt (fun s => (fderiv f₂ (v+s•c)) a b) ((Vf 1).2.2.1) 0`;
+(5) `uniformFlowExp_hessianMap_differentiableAt` [banked] + directional/eval-CLM ⟹ same map has
+derivative `B₃ c a b`; (6) `HasDerivAt.unique`; (7) glue Vf ≡ T via `jacobiSol_unique` (Jˢ|₀≡J) +
+`autonomousLinODE_unique` ×2 (Uˢ|₀≡U, then Vf≡T). The value id is Z1 (compiled), NOT assumed. std-3.
+
+**J4-781 (commit aff8021a) — C³-UNCONDITIONAL.** `QIQTH/UniformFlowExpContDiffThreeUniform.lean`:
+  * `uniformFlow_fourthJet_hasFDerivAt` (W2↑) — per-seed fourth jet, transfers the octuple deep component
+    (Tf δ 1).2.2.1 [J4-778] across Z1↑ [J4-780] on the open window + recentre (exact W2 template up one).
+  * `uniformFlowExp_thirdJetMap_differentiableAt` (D1↑) — TRIPLE `ContinuousLinearEquiv.piRing` +
+    `differentiableAt_pi` lift of W2↑ (the double-piRing hessianMap lift one order up). ⚠ slot order:
+    W2↑ applies `c a b` (derivative direction first), so the lift passes basis args permuted
+    `(single j, single k, single i)` to hit the `(i,j,k)` order.
+  * `contDiffAt3_uniformFlowExp` — four Fréchet layers through `contDiffAt_succ_iff_hasFDerivAt` ×3 +
+    `contDiffAt_zero`. Order-3 mirror of `contDiffAt2_uniformFlowExp`.
+  * `uniformFlowExp_contDiffOn_three_uniform` (★) — ∀ q ∈ K, `ContDiffOn ℝ 3 (uniformFlowExp g gi hC hK q)
+    (ball 0 uniformFlowRadius)`, UNCONDITIONAL, NO expRho.
+
+Banking (both): `lake build` 0 errors, `QIQTH.AxiomAudit` clean, `#print axioms` = std-3
+(propext/Classical.choice/Quot.sound) for all 5 new theorems (no sorryAx, no custom axioms),
+`axiom_budget_check.sh` raw 0, vacuum guard clean, wired into `QIQTH.lean` + `AxiomAudit.lean`,
+new-files-only.
+
+**expRho now eliminated up to order 3.** NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on
+{hDuhamel, hDConv, hCConv}. C⁴ (the order feeding `ChartThirdJet.uniformFlowExp_contDiffAt_four`) needs
+the SAME climb ONCE MORE — the fifth velocity jet: a hexadecuple supply (16-fold `genericDoubled`
+integral-curve family, one more doubling of the octuple supply) + Z1↑↑ (the fifth-jet value-id, one
+order up from Z1↑, mirroring this brick). The octuple field's `genericDoubled_fderiv_snd_apply` engine
+[J4-778] is field-agnostic and reusable at that depth. All infrastructure (variational engines,
+uniqueness lemmas, piRing lift pattern) generalises verbatim.
