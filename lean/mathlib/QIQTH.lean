@@ -4026,3 +4026,9 @@ import QIQTH.WitnessTranspositionResidualBound
 -- ‖z‖≤√ε — no even/odd cancellation needed, pure C³ regularity. std-3. NOT a₁=R/6; does NOT close hCConv
 -- (still needs the curved-RNC-chart 2nd partial exhibited as LipschitzOnWith on an origin-ball).
 import QIQTH.WitnessTranspositionLipschitzResidual
+-- J4-822: WitnessTranspositionSmoothResidual — the TERMINAL interface. residual_sliver_bound_of_contDiffAt
+-- reduces the whole transposition wall to PURE SMOOTHNESS: if G=∂ⱼ∂ᵢF is ContDiffAt ℝ 1 at 0 (F is C³ at
+-- 0), then ∃ K r>0, ∀‖z‖<r inside ‖z‖≤√ε, |residual|≤2K·√ε (via ContDiffAt.exists_lipschitzOnWith +
+-- J4-821). Hypothesis UNCONDITIONALLY met by the C^∞ witness; no even/odd (∇R-cubic) cancellation needed.
+-- std-3. NOT a₁=R/6; does NOT close hCConv (still needs transport through the curved-chart V(q,p)).
+import QIQTH.WitnessTranspositionSmoothResidual

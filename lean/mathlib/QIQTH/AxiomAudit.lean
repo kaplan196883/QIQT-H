@@ -27739,6 +27739,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hodd_of_lipschitzOnWith
 #print axioms QIQTH.HeatResidualBound.residual_sliver_bound_of_lipschitzOnWith
 
+-- WitnessTranspositionSmoothResidual (J4-822): the TERMINAL interface. residual_sliver_bound_of_contDiffAt
+-- reduces the transposition wall to PURE SMOOTHNESS — G=∂ⱼ∂ᵢF ContDiffAt ℝ 1 at 0 (F C³ at 0) ⟹ ∃ K r>0,
+-- ∀‖z‖<r ∧ ‖z‖≤√ε, |residual|≤2K·√ε (via ContDiffAt.exists_lipschitzOnWith). Hypothesis unconditionally
+-- met by the C^∞ witness; no even/odd cancellation. std-3. NOT a₁=R/6; does NOT close hCConv.
+#print axioms QIQTH.HeatResidualBound.residual_sliver_bound_of_contDiffAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
