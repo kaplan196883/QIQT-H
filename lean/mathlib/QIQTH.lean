@@ -4117,3 +4117,10 @@ import QIQTH.ChartMixedThirdJetBasepointRemainder
 -- the ChartMixedThirdJetBasepointRemainder theorems. std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL
 -- on {hDuhamel, hDConv, hCConv}.
 import QIQTH.UniformFlowExpBasepointJacobiExplicit
+-- InverseChartSecondJetODEBridge (J4-834, plan v2 Task B): the base-parameter LINEAR-ODE shape of the
+-- van-Vleck inverse chart's SECOND field-jet, DERIVED by differentiating the IFT algebraic closed form
+-- `Q z = (−mulLeftRight I I)∘L(D²φ∘L I)` along the base parameter. Gives `HasDerivAt q ((−(I₀·A'))(q s₀)
+-- + bsrc) s₀` with coefficient M=−I·A' and explicit source bsrc, purely from FORWARD jets (I,H,A',H') —
+-- the `.choose`-free route side-stepping J4-833's τ-fiber Jacobi-ODE wall. sympy-verified (residual 0).
+-- std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.InverseChartSecondJetODEBridge

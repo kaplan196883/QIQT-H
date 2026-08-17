@@ -27852,6 +27852,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.secondFieldJet_harem_discharge_gen
 #print axioms QIQTH.ExpMap.secondFieldJet_basepoint_hasDerivAt_remaindersDischarged_gen
 
+-- J4-834 (plan v2 Task B): the base-parameter LINEAR-ODE shape of the inverse chart's SECOND field-jet,
+-- DERIVED by differentiating the IFT closed form `Q z = (−mulLeftRight I I)∘L(D²φ∘L I)` along the base
+-- parameter s. ift_secondJet_comp_apply ties the composed-CLM object of chartW0_secondJet_bound to the
+-- applied form −(I(D2(Ia)(Ib))); ift_secondJet_applied_hasDerivAt is the raw product-rule base derivative;
+-- ift_secondJet_base_ode_hasDerivAt repackages it as `HasDerivAt q ((−(I₀·A'))(q s₀)+bsrc) s₀`, coeff
+-- M=−I·A', explicit source bsrc, all FORWARD jets — the `.choose`-free route (J4-833 wall side-step).
+-- sympy-verified residual 0. std-3 ×3. NOT a₁=R/6; a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.InverseChartSecondJetODEBridge.ift_secondJet_comp_apply
+#print axioms QIQTH.InverseChartSecondJetODEBridge.ift_secondJet_applied_hasDerivAt
+#print axioms QIQTH.InverseChartSecondJetODEBridge.ift_secondJet_base_ode_hasDerivAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
