@@ -4054,3 +4054,27 @@ import QIQTH.WitnessTranspositionGeneralBound
 -- NOT wired to the concrete .choose-built uniformFlowExp; it does NOT close hCConv (which needs
 -- ContDiffAt ℝ 1 of the concrete witness). a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.GeodesicSmoothDepDir
+-- Brick 2 (base-slot-C¹ plan): UniformFlowExpBasepointFrechet — the CONCRETE base-point (position-slot)
+-- Fréchet derivative of the .choose-built uniformFlowExp at an INTERIOR base point. The concrete tube
+-- data supply Brick 2 targeted was already banked (J4-731 baseFlow_hder_family, fed from
+-- uniformFlowTube_spec_*); this packages it into the minimal interior-point capstone
+-- uniformFlowExp_basepoint_hasFDerivAt (∃ L, HasFDerivAt (fun q => uniformFlowExp .. q v) L u for
+-- u ∈ interior K, ‖v‖ ≤ ρ_K) + DifferentiableAt corollary. Already stronger than J4-825's directional
+-- (Gâteaux) result; Brick 1's abstract Fréchet upgrade is NOT on the critical path for the concrete
+-- object. std-3. HONEST: base-point FIRST-order Fréchet only — NOT a second base derivative, NOT the
+-- witness Φ second-partial threading, NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.UniformFlowExpBasepointFrechet
+-- Brick 1 (base-slot-C¹ plan, direction-general JOINT variant): GeodesicBasepointFrechet — the JOINT
+-- (base+velocity) FULL-PHASE-SPACE first Fréchet derivative of the geodesic flow, the Fréchet upgrade of
+-- GeodesicSmoothDepDir's DIRECTION-GENERAL (arbitrary ξ:Point n×Point n) Gâteaux derivative (J4-825).
+-- The base-only (BasepointFDeriv/BaseFlowHderFamily) and velocity-only (UniformFlowFDeriv) first Fréchet
+-- cores were already banked; both restrict the perturbed-tube data to a coordinate subspace ((δ,0) resp.
+-- (0,δ)). This file delivers the joint core geodesicFlow_joint_hasFDerivAt(_exists) — the endpoint
+-- fun ξ => W ξ t has HasFDerivAt L 0 with L:(Point n×Point n)→L Point n×Point n the CONSTRUCTED endpoint
+-- Jacobi CLM (additive+homogeneous via banked jacobiSol_unique, finite-dim promotion) — plus the endpoint-
+-- position projection and geodesicFlow_basepoint_hasFDerivAt_ofJoint recovering the base slot as the
+-- restriction L∘inl. Carries only the SAME genuine geometric regularity the base/velocity cores carry.
+-- std-3 ×4. HONEST: joint FIRST-order Fréchet only — NOT wired to the concrete uniformFlowExp (Brick 2,
+-- banked for the base slot), NOT a second-order jet, NOT the witness Φ second-partial threading, NOT
+-- hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.GeodesicBasepointFrechet

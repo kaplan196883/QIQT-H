@@ -27768,6 +27768,36 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicVariation_basepoint_exists_uncond
 #print axioms QIQTH.ExpMap.geodesicVariation_basepoint_endpoint_exists_uncond
 
+-- UniformFlowExpBasepointFrechet (Brick 2): the CONCRETE base-point (position-slot) Fréchet derivative
+-- of the .choose-built uniformFlowExp, at an INTERIOR base point. The concrete-data supply Brick 2
+-- targeted was already banked (J4-731 baseFlow_hder_family: HasFDerivAt (fun q => uniformFlowExp .. q v)
+-- L u on a σ-window, fed from uniformFlowTube_spec_ode/ic/conf) — already STRONGER than J4-825's
+-- directional result. This packages it into the minimal interior-point capstone (∃ L, HasFDerivAt) +
+-- DifferentiableAt corollary, consuming baseFlow_hder_family at the singleton window closedBall u 0
+-- (interior ⟹ σ-ball u+δ∈K). std-3 ×2. Carries only u∈interior K + ‖v‖≤ρ_K (both non-trivially
+-- satisfiable — no vacuity trap). HONEST: base-point FIRST-order Fréchet only; NOT a second base
+-- derivative, NOT the witness Φ threading, NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlowExp_basepoint_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_basepoint_differentiableAt
+
+-- GeodesicBasepointFrechet (Brick 1, direction-general JOINT variant): the JOINT (base+velocity) FULL-
+-- PHASE-SPACE first Fréchet derivative of the geodesic flow — the Fréchet upgrade of GeodesicSmoothDepDir's
+-- DIRECTION-GENERAL (arbitrary ξ:Point n×Point n) Gâteaux derivative (J4-825). Both banked first-Fréchet
+-- cores restrict perturbed-tube data to a coordinate subspace: base-only (BasepointFDeriv/BaseFlowHderFamily,
+-- seed (δ,0)) and velocity-only (UniformFlowFDeriv, seed (0,δ)). This delivers the joint core: the endpoint
+-- fun ξ => W ξ t has HasFDerivAt L 0 with L:(Point n×Point n)→L Point n×Point n the CONSTRUCTED endpoint
+-- Jacobi CLM (additive+homogeneous via banked jacobiSol_unique + finite-dim promotion), via the direction-
+-- general residual-Grönwall quadratic remainder ‖W ξ t−W 0 t−V ξ t‖≤Ctot‖ξ‖² = o(‖ξ‖). Plus the endpoint-
+-- position projection and geodesicFlow_basepoint_hasFDerivAt_ofJoint (base slot = restriction L∘inl). std-3
+-- ×4. Carries only the SAME genuine geometric regularity the base/velocity cores carry (S convex, field
+-- C²+Lipschitz on S, Jacobi-coeff bound, tube containment, supplied Jacobi solutions). HONEST: joint FIRST-
+-- order Fréchet only; NOT wired to the concrete uniformFlowExp, NOT a second-order jet, NOT the witness Φ
+-- threading, NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.geodesicFlow_joint_hasFDerivAt
+#print axioms QIQTH.ExpMap.geodesicFlow_joint_hasFDerivAt_exists
+#print axioms QIQTH.ExpMap.geodesicFlow_joint_endpoint_position_hasFDerivAt_exists
+#print axioms QIQTH.ExpMap.geodesicFlow_basepoint_hasFDerivAt_ofJoint
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
