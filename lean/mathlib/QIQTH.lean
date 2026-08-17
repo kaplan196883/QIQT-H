@@ -4009,3 +4009,13 @@ import QIQTH.LiveHVanVleckDefeq
 -- the concrete even factors of the live witness (gaussDdim_even, radialCutoff_even) confirming the
 -- obstruction is confined to the ODD (∇R-cubic) amplitude part. std-3. NOT a₁=R/6; does NOT close hCConv.
 import QIQTH.WitnessSourceFieldTransposition
+-- J4-820: WitnessTranspositionResidualBound — the QUANTITATIVE source↔field transposition residual.
+-- Generalizes J4-819 (even⟹exact) to an ARBITRARY displacement kernel: the transposition difference
+-- equals EXACTLY G(−z)−G(z) = −2·oddPart(∂ⱼ∂ᵢF)(z) (secondPartial_transposition_residual_eq,
+-- residual_eq_neg_two_oddPart), recovers J4-819 when F even (residual_zero_of_even), crude uniform
+-- bound |residual|≤2·sup (residual_abs_le_two_sup), and ★ the SLIVER-BUDGET REDUCTION
+-- (residual_sliver_bound): under the satisfiable interface hodd (odd part of 2nd partial is O(‖z‖),
+-- justified by the cubic ∇R sympy census j4_820_cubic_residual_scaling.py) + window ‖z‖≤√ε, the residual
+-- is ≤ L·√ε — matching the closed J4-817 sliver rate. std-3. NOT a₁=R/6; does NOT close hCConv (still
+-- needs the curved-RNC-chart displacement reduction + discharging hodd at the concrete amplitude).
+import QIQTH.WitnessTranspositionResidualBound

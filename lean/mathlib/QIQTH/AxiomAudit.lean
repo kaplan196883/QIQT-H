@@ -27715,6 +27715,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.gaussDdim_even
 #print axioms QIQTH.HeatResidualBound.radialCutoff_even
 
+-- WitnessTranspositionResidualBound (J4-820): the QUANTITATIVE transposition residual, generalizing
+-- J4-819 from the even case to an ARBITRARY displacement kernel. secondPartial_transposition_residual_eq
+-- = the EXACT residual formula (transposition difference = G(−z)−G(z), G=∂ⱼ∂ᵢF);
+-- residual_eq_neg_two_oddPart = residual = −2·oddPart(G)(z) (confined to the ODD/∇R-cubic part);
+-- residual_zero_of_even recovers J4-819; residual_abs_le_two_sup = crude |residual|≤2·sup;
+-- residual_sliver_bound = ★ under hodd (odd 2nd-partial O(‖z‖), the satisfiable cubic-∇R interface) +
+-- window ‖z‖≤√ε, |residual|≤L·√ε — matches the closed J4-817 sliver rate. std-3. NOT a₁=R/6; does NOT
+-- close hCConv (needs curved-RNC-chart reduction + discharging hodd at the concrete amplitude).
+#print axioms QIQTH.HeatResidualBound.secondPartial_transposition_residual_eq
+#print axioms QIQTH.HeatResidualBound.residual_eq_neg_two_oddPart
+#print axioms QIQTH.HeatResidualBound.residual_zero_of_even
+#print axioms QIQTH.HeatResidualBound.residual_abs_le_two_sup
+#print axioms QIQTH.HeatResidualBound.residual_sliver_bound
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
