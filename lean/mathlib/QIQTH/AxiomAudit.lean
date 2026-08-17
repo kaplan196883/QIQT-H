@@ -27647,6 +27647,9 @@ namespace QIQTH.AxiomAudit
 -- TASK A) to the unconditional ∀ζ shape witness_sliver2_xuniform's hNormalForm consumes, via the SAME
 -- off-gate reconciliation (gateAmp + pd_pd_mixed_eq_zero_of_eventuallyZero at j:=i). std-3. NOT a₁=R/6.
 #print axioms QIQTH.DiagNormalFormFull.witnessDiag_hNormalForm_full
+-- J4-810: the THREE DIAGONAL amplitude sup bounds (hA0bdd/hA1bdd/hA2bdd) of witness_sliver2_xuniform at
+-- the concrete gated chart amplitudes — the j:=i specialisation of J4-793. std-3. NOT a₁=R/6.
+#print axioms QIQTH.DiagSliverAmpBounds.witnessDiag_amplitude_sup_bounds
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the

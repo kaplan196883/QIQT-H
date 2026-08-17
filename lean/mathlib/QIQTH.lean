@@ -3935,3 +3935,11 @@ import QIQTH.MixedSliverIntegrandFull
 -- std-3. NOT a₁=R/6 (stays CONDITIONAL — the diagonal leg's other suppliers reuse the mixed campaign's
 -- dischargers at i=j; co-instantiation at one shared witness tuple is the follow-up).
 import QIQTH.DiagNormalFormFull
+-- J4-810: concrete discharge of the THREE amplitude sup-bound hypotheses (hA0bdd/hA1bdd/hA2bdd) of
+-- XUniformSliverFull.witness_sliver2_xuniform at the CONCRETE gated chart amplitudes fed into
+-- DiagNormalFormFull.witnessDiag_hNormalForm_full (J4-809). The diagonal (j:=i) specialisation of
+-- MixedSliverAmpBounds.witnessMixed_amplitude_sup_bounds (J4-793): the mixed A2=∂ⱼ∂ᵢ collapses to the
+-- diagonal ∂ᵢ∂ᵢ, A1i to the diagonal A1. Reuses the index-free gateAmp_abs_le_onGate verbatim
+-- (off-gate the gated amplitude is 0, so a GLOBAL bound reduces to an ON-GATE base bound).
+-- witnessDiag_amplitude_sup_bounds. std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.DiagSliverAmpBounds
