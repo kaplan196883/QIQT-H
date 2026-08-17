@@ -27913,6 +27913,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledFlow_endpoint_joint_snd_hasFDerivAt_exists
 #print axioms QIQTH.ExpMap.doubledFlow_endpoint_baseVelocity_ofJoint
 
+-- Plan v6 Task I (floor): UNCONDITIONAL `expRho`-free target SHAPE at order 2. Packages the banked
+-- per-point unconditional `contDiffAt2_uniformFlowExp` (uniform-tube Fréchet layers, NO `expRho`) into
+-- `ContDiffOn ℝ 2 (uniformFlowExp g gi hC hK q) (ball 0 uniformFlowRadius)` for every q ∈ K. The order-2
+-- realisation of the Plan-v6 target eliminating `expRho`/`hReach` from the C⁴ chain feeding hCConv;
+-- C³/C⁴ need the fourth/fifth uniform-tube jet (separate climb). std-3. NOT a₁=R/6.
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_contDiffOn_two_uniform
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -4156,3 +4156,10 @@ import QIQTH.WitnessTranspositionSliceLipschitz
 -- mirroring the velocity-only doubling climb on the combined base+velocity space. Abstract joint
 -- second-order object; does NOT wire to the concrete .choose flow nor close hCConv. std-3.
 import QIQTH.GeodesicJointSecondFDeriv
+-- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
+-- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
+-- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`
+-- (built from the uniform-tube Fréchet layers, NO `expRho`) into `ContDiffOn` on the open ball. The
+-- order-2 realisation of the Plan-v6 target that eliminates `expRho`/`hReach` from the C⁴ chain; C³/C⁴
+-- need the fourth/fifth uniform-tube jet. std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowExpContDiffTwoUniform
