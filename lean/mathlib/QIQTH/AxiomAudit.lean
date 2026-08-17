@@ -27798,6 +27798,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicFlow_joint_endpoint_position_hasFDerivAt_exists
 #print axioms QIQTH.ExpMap.geodesicFlow_basepoint_hasFDerivAt_ofJoint
 
+-- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
+-- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
+-- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
+-- field-slot C⁴ (chartField_contDiffAt_four_basePoint/_reachable), built by feeding the forward C⁴ map
+-- (uniformFlowExp_contDiffAt_four) into the N-generic IFT identification core
+-- (ChartFieldC2General.chartField_contDiffAt_of_leftInverse_germ). So field-C³ is a one-line
+-- `.of_le (3≤4)` downgrade — NO new ODE/inverse-function work. Exposes the chart field-C³ at
+-- center/basePoint/reachable AND witnessField_contDiffAt3_center = SpatialC2.hCH_discharge one order up
+-- (the concrete gated van-Vleck witness's field-C³ = exactly the input Φ∈C¹ needs, Φ a second field-
+-- partial). std-3 ×4. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.HeatResidualBound.chartField_contDiffAt3_center
+#print axioms QIQTH.HeatResidualBound.chartField_contDiffAt3_basePoint
+#print axioms QIQTH.HeatResidualBound.chartField_contDiffAt3_reachable
+#print axioms QIQTH.HeatResidualBound.witnessField_contDiffAt3_center
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

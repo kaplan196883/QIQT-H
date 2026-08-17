@@ -4078,3 +4078,12 @@ import QIQTH.UniformFlowExpBasepointFrechet
 -- banked for the base slot), NOT a second-order jet, NOT the witness Φ second-partial threading, NOT
 -- hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.GeodesicBasepointFrechet
+-- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3 — the inverse chart
+-- uniformInverseChart's FIELD-SLOT C³. STALE-PREMISE CORRECTION: the "C² ceiling"
+-- (chartField_contDiffAt_center) was stale — ChartThirdJet (J4-192) already banked the inverse chart's
+-- field-slot C⁴ (chartField_contDiffAt_four_basePoint/_reachable) via the forward C⁴ map through the
+-- N-generic IFT identification core. So field-C³ is a one-line `.of_le (3≤4)` downgrade (no new ODE/IFT
+-- work). Exposes chartField_contDiffAt3_center/_basePoint/_reachable AND the witness field-C³
+-- witnessField_contDiffAt3_center (SpatialC2.hCH_discharge one order up = exactly what Φ∈C¹ needs).
+-- std-3 ×4. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.InverseChartFieldC3
