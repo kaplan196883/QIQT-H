@@ -4102,3 +4102,9 @@ import QIQTH.ChartMixedThirdJetBasepoint
 -- via 3a; mixed base half = 3b concrete weld) + wiring into kPrime_opNorm_sliver_bound.hcomp. std-3 ×2.
 -- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.SecondFieldPartialContDiff
+-- J4-831 (sub-brick 3b concrete weld): the quadratic-in-s remainder bounds harem/hbrem for the
+-- base-perturbed geodesic family, discharging the two carried hypotheses of
+-- secondFieldJet_basepoint_hasDerivAt. Core new fact = geodesicFlow_secondOrder_base_remainder (the
+-- geodesic flow's C² base dependence, geodesicVariation_hNb_discharge one order up). std-3.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.ChartMixedThirdJetBasepointRemainder

@@ -27827,6 +27827,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.secondFieldPartial_contDiffAt_one
 #print axioms QIQTH.HeatResidualBound.secondFieldPartial_transposition_sliver
 
+-- J4-831 (sub-brick 3b): the CONCRETE quadratic-in-s remainder bounds harem/hbrem for the
+-- base-perturbed geodesic family. geodesicFlow_secondOrder_base_remainder = the geodesic flow's
+-- C² base dependence (‖Y s τ − Y 0 τ − s•J τ‖ ≤ (M₂·L²·expK)·s²), by linODE_twopoint_diff_bound
+-- (Y s vs Y 0 + s•J, source diff = field C² Taylor remainder) — geodesicVariation_hNb_discharge one
+-- order up. secondFieldJet_harem_discharge / source_hbrem_discharge = the harem/hbrem binders of
+-- secondFieldJet_basepoint_hasDerivAt discharged concretely (Φ = fderiv geodesicField / a C² source).
+-- secondFieldJet_basepoint_hasDerivAt_remaindersDischarged = ∂_q∂²_p V wired with harem/hbrem REPLACED
+-- by standard geometric/ODE data. std-3 ×5. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.geodesicFlow_secondOrder_base_remainder
+#print axioms QIQTH.ExpMap.secondFieldJet_harem_discharge
+#print axioms QIQTH.ExpMap.source_hbrem_discharge
+#print axioms QIQTH.ExpMap.secondFieldJet_basepoint_hasDerivAt_remaindersDischarged
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
