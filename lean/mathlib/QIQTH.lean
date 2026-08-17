@@ -3975,3 +3975,8 @@ import QIQTH.DiagNormalFormGatedMatch
 -- witness_sliver2_xuniform_diag_gated. std-3. NOT a₁=R/6 (stays CONDITIONAL on {hqLip, integrabilities,
 -- downstream CLM-opNorm sliver + hCConv}).
 import QIQTH.DiagSliverGatedCoInstantiation
+-- J4-815: x-uniform CO-INSTANTIATION of the sliver-integrand integrabilities — packages on-gate input
+-- data quantified over (x,s) into the exact ∀x,∀s∈Ioo Integrable conclusions BOTH the mixed
+-- (witness_sliver2_xuniform_mixed) and diagonal (witness_sliver2_xuniform) sliver rate theorems consume;
+-- closes the per-x-not-co-instantiated residue of J4-811/J4-814. std-3. NOT a₁=R/6.
+import QIQTH.SliverIntegrandXUniform

@@ -27671,6 +27671,14 @@ namespace QIQTH.AxiomAudit
 -- at the concrete gated van-Vleck tuple — diagonal (i=j) twin of J4-811, at PARITY. Discharges 9 slots
 -- from banked suppliers (J4-794/799/810/813); carries hqLip + 5 integrabilities. std-3. NOT a₁=R/6.
 #print axioms QIQTH.DiagSliverGatedCoInstantiation.witness_sliver2_xuniform_diag_gated
+-- J4-815: the x-UNIFORM CO-INSTANTIATION of the sliver-integrand integrabilities — packages the on-gate
+-- input data quantified over (x,s) and produces the exact ∀x,∀s∈Ioo Integrable conclusions both the mixed
+-- (witness_sliver2_xuniform_mixed) and diagonal (witness_sliver2_xuniform) sliver rate theorems consume,
+-- closing the J4-811/J4-814 "per-x integrabilities not yet co-instantiated" residue. std-3. NOT a₁=R/6.
+#print axioms QIQTH.SliverIntegrandXUniform.uniform_hIntE1_mixed
+#print axioms QIQTH.SliverIntegrandXUniform.uniform_hInt2_mixed
+#print axioms QIQTH.SliverIntegrandXUniform.uniform_hIntT1_diag
+#print axioms QIQTH.SliverIntegrandXUniform.uniform_hInt2_diag
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
