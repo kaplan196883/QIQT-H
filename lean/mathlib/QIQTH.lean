@@ -4142,3 +4142,12 @@ import QIQTH.WitnessThirdPartialUniformBound
 -- BaseFlowHderFamily second-order wiring is named-open, not done here). std-3. NOT a₁=R/6; a₁=R/6 remains
 -- CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.WitnessMixedPartialUniformBound
+
+-- WitnessTranspositionSliceLipschitz (Task F, plan v3): the ORIGIN-CHAIN assembly of the two-variable
+-- transposition bound |Φ(0,z)−Φ(z,0)| ≤ (Kp+Kq)‖z‖ from PER-SLICE (axis-aligned) Lipschitz / C¹ of Φ —
+-- p-slice p↦Φ(p,0) and q-slice q↦Φ(0,q) SEPARATELY, never the joint two-variable map. Strictly weakens
+-- WitnessTranspositionGeneralBound/SecondFieldPartialContDiff's joint hypothesis (blocked by .choose
+-- incoherence) to per-slice. p-slice is UNCONDITIONAL (field-C³, Task D); q-slice = the mixed base-slot
+-- ∂_q∂²_p regularity of the .choose chart = the SINGLE remaining isolated input (Task E Part 2). std-3.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.WitnessTranspositionSliceLipschitz

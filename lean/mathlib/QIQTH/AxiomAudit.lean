@@ -27885,6 +27885,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlowExp_base_deriv_uniform_bound
 #print axioms QIQTH.ExpMap.ift_secondJet_base_ode_uniform_bound
 
+-- Task F (plan v3): the ORIGIN-CHAIN assembly. From PER-SLICE Lipschitz/C¹ of Φ (p-slice p↦Φ(p,0) and
+-- q-slice q↦Φ(0,q) SEPARATELY), the origin decomposition Φ(0,z)−Φ(z,0)=[Φ(0,z)−Φ(0,0)]+[Φ(0,0)−Φ(z,0)]
+-- + triangle gives |Φ(0,z)−Φ(z,0)| ≤ (Kp+Kq)‖z‖ (diff), ≤(Kp+Kq)√ε under ‖z‖≤√ε (sliver), and the
+-- terminal ∃K r>0 form from two per-slice ContDiffAt ℝ 1 (via ContDiffAt.exists_lipschitzOnWith). Strictly
+-- weakens the joint-C¹ hypothesis of general_transposition_sliver_of_contDiffAt / secondFieldPartial to
+-- per-slice — the register the .choose-incoherence firewall blocks only on the q-slice. p-slice
+-- UNCONDITIONAL (field-C³ Task D); q-slice = mixed base-slot ∂_q∂²_p regularity (Task E Part 2) = the
+-- single isolated remaining input. Does NOT close hCConv (q-slice open; transposition→hcomp weld also
+-- unbuilt). All std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.HeatResidualBound.general_transposition_diff_of_slice_lipschitzOnWith
+#print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_slice_lipschitzOnWith
+#print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_slice_contDiffAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
