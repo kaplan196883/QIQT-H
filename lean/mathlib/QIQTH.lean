@@ -4094,3 +4094,11 @@ import QIQTH.InverseChartFieldC3
 -- secondFieldJet_basepoint_hasDerivAt (geodesic specialisation, A = D(geodesicField)(Y s)). std-3 ×3.
 -- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.ChartMixedThirdJetBasepoint
+-- Step-2→3 bridge of the hCConv transposition route: the concrete second field-partial
+-- Φ = ∂ᵤ∂ᵥ[field] H of a two-variable kernel is ContDiffAt ℝ 1 at (0,0) as soon as H is JOINTLY
+-- ContDiffAt ℝ 3 there (two ContDiffAt.fderiv_right + clm_apply), discharging J4-823's Φ∈C¹
+-- hypothesis from joint C³ of the kernel; composed with general_transposition_sliver_of_contDiffAt
+-- to yield the √ε transposition bound. Residual = joint C³ of the CONCRETE witness (field half done
+-- via 3a; mixed base half = 3b concrete weld) + wiring into kPrime_opNorm_sliver_bound.hcomp. std-3 ×2.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.SecondFieldPartialContDiff

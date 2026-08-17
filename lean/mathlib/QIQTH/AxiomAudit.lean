@@ -27820,6 +27820,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.linODE_basepoint_hasDerivAt
 #print axioms QIQTH.ExpMap.secondFieldJet_basepoint_hasDerivAt
 
+-- Step-2→3 bridge: secondFieldPartial_contDiffAt_one = joint ContDiffAt ℝ 3 H (0,0) ⟹ ContDiffAt ℝ 1
+-- of the second field-partial Φ = ∂ᵤ∂ᵥ[field] H (discharges J4-823's Φ∈C¹ hypothesis from joint C³);
+-- secondFieldPartial_transposition_sliver = composed with general_transposition_sliver_of_contDiffAt.
+-- std-3 ×2. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.HeatResidualBound.secondFieldPartial_contDiffAt_one
+#print axioms QIQTH.HeatResidualBound.secondFieldPartial_transposition_sliver
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
