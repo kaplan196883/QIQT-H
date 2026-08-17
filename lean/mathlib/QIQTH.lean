@@ -4163,3 +4163,15 @@ import QIQTH.GeodesicJointSecondFDeriv
 -- order-2 realisation of the Plan-v6 target that eliminates `expRho`/`hReach` from the C⁴ chain; C³/C⁴
 -- need the fourth/fifth uniform-tube jet. std-3. NOT a₁=R/6.
 import QIQTH.UniformFlowExpContDiffTwoUniform
+-- Plan v6 Task I (C³ climb, brick 1): the FIELD-AGNOSTIC block formula genericDoubled_fderiv_snd_apply
+-- (mirror of doubledField_fderiv_snd_apply generalised to any C^∞ field Φ) + the octupled field
+-- `genericDoubled (genericDoubled (doubledField g gi))` regularity supply (C^∞ + compact fderiv/fderiv2
+-- bounds). Infrastructure for the fourth uniform-tube velocity jet (⟹ C³). std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowOctupleField
+-- Plan v6 Task I (C³ climb, brick 2): the OCTUPLE-flow SUPPLY — base-velocity Fréchet derivative of the
+-- octupled-flow endpoint (uniformFlow_octupleEndpoint_baseVelocity_hasFDerivAt + component), one order
+-- up from QuadrupleFlowSupply. A genuine confined octupled-integral-curve family (Jacobi ⊗ doubled- ⊗
+-- quadrupled-linearized factors, triple-nested genericDoubled_prod_hasDerivAt), fed to the abstract
+-- first-jet engine; NO expRho. The mechanical SUPPLY half of the fourth jet; the value-identification
+-- (⟹ per-seed fourth jet ⟹ D³φ continuity ⟹ C³) is CARRIED. std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowOctupleSupply

@@ -27920,6 +27920,20 @@ namespace QIQTH.AxiomAudit
 -- C³/C⁴ need the fourth/fifth uniform-tube jet (separate climb). std-3. NOT a₁=R/6.
 #print axioms QIQTH.HeatResidualBound.uniformFlowExp_contDiffOn_two_uniform
 
+-- Plan v6 Task I (C³ climb, bricks 1+2): the fourth uniform-tube velocity-jet climb toward C³-unconditional.
+-- genericDoubled_fderiv_snd_apply = field-agnostic block formula for D(genericDoubled Φ)'s 2nd component
+-- (mirror of doubledField_fderiv_snd_apply, one abstraction up — reusable at every doubling depth).
+-- octupledField regularity = C^∞ + compact bounds for genericDoubled(genericDoubled(doubledField)).
+-- uniformFlow_octupleEndpoint_baseVelocity_hasFDerivAt = the base-velocity Fréchet derivative of the
+-- octupled-flow endpoint (genuine confined 8-fold integral-curve supply; NO expRho), one order up from
+-- the banked quadruple supply; the MECHANICAL half of the fourth jet. The value-identification
+-- (octuple deep component = third-jet value) ⟹ per-seed fourth jet ⟹ D³φ continuity ⟹ C³ is CARRIED
+-- (separate brick). All std-3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.genericDoubled_fderiv_snd_apply
+#print axioms QIQTH.ExpMap.contDiff_octupledField
+#print axioms QIQTH.ExpMap.uniformFlow_octupleEndpoint_baseVelocity_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlow_octupleEndpoint_component_hasFDerivAt
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
