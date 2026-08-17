@@ -27940,6 +27940,14 @@ namespace QIQTH.AxiomAudit
 -- fourth-jet value-identity (Z1-analogue: octuple deep component = D³φ value). std-3. NOT a₁=R/6.
 #print axioms QIQTH.ExpMap.quadrupledField_variation_exists_uncond
 
+-- Plan v6 Task I (C³ climb, brick 4): uniformFlowExp_thirdJet_value_id (Z1↑) — the FOURTH-JET
+-- VALUE-IDENTITY, one order up from Z1. For genuine Jacobi J / doubled-linearized U /
+-- quadrupled-linearized T along the fixed base ((tube(v),J),U),
+--   (fderiv (fun w => fderiv (fun u => fderiv (uniformFlowExp q) u) w) v) c a b = (T 1).2.2.1.
+-- Scalar-s quadruple supply + quadrupledField_variation_exists_uncond + Z1 + hessianMap_differentiableAt
+-- + ODE-uniqueness gluing. NO expRho. std-3. NOT a₁=R/6.
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_value_id
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

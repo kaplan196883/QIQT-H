@@ -4181,3 +4181,12 @@ import QIQTH.UniformFlowOctupleSupply
 -- directional-derivative engine the fourth-jet value-identity (Z1-analogue) consumes; NO expRho.
 -- std-3. NOT a₁=R/6.
 import QIQTH.UniformFlowQuadrupleVariation
+-- Plan v6 Task I (C³ climb, brick 4): uniformFlowExp_thirdJet_value_id (Z1↑) — the FOURTH-JET
+-- VALUE-IDENTITY, one order up from Z1 (uniformFlowExp_hessian_value_id). For genuine Jacobi J,
+-- doubled-linearized U, quadrupled-linearized T along the fixed base ((tube(v),J),U),
+--   (fderiv (fun w => fderiv (fun u => fderiv (uniformFlowExp q) u) w) v) c a b = (T 1).2.2.1.
+-- DERIVED via the scalar-s quadruple supply + quadrupledField_variation_exists_uncond [J4-779] +
+-- Z1 [banked] + hessianMap_differentiableAt [banked] + jacobiSol_unique/autonomousLinODE_unique
+-- gluing. This is the genuine new content the octuple deep component (Tf δ 1).2.2.1 rewrites to.
+-- NO expRho. std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowExpFourthJetValueId
