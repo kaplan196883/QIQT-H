@@ -27948,6 +27948,16 @@ namespace QIQTH.AxiomAudit
 -- + ODE-uniqueness gluing. NO expRho. std-3. NOT a₁=R/6.
 #print axioms QIQTH.ExpMap.uniformFlowExp_thirdJet_value_id
 
+-- Plan v6 Task I (C³ climb, capstone): the per-seed FOURTH jet (W2↑), the triple-piRing lift (D1↑),
+-- and the UNCONDITIONAL ContDiffOn ℝ 3 target shape. W2↑ transfers the octuple deep component
+-- (Tf δ 1).2.2.1 across Z1↑ then recentres; D1↑ is the triple-piRing/differentiableAt_pi lift; the C³
+-- per-point assembly feeds four Fréchet layers through contDiffAt_succ_iff_hasFDerivAt. NO expRho.
+-- std-3. NOT a₁=R/6.
+#print axioms QIQTH.ExpMap.uniformFlow_fourthJet_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_thirdJetMap_differentiableAt
+#print axioms QIQTH.ExpMap.contDiffAt3_uniformFlowExp
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_contDiffOn_three_uniform
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -4190,3 +4190,10 @@ import QIQTH.UniformFlowQuadrupleVariation
 -- gluing. This is the genuine new content the octuple deep component (Tf δ 1).2.2.1 rewrites to.
 -- NO expRho. std-3. NOT a₁=R/6.
 import QIQTH.UniformFlowExpFourthJetValueId
+-- Plan v6 Task I (C³ climb, capstone): uniformFlowExp_contDiffOn_three_uniform — UNCONDITIONAL
+-- ContDiffOn ℝ 3 of uniformFlowExp on ball 0 uniformFlowRadius, NO expRho. Built from the per-seed
+-- FOURTH jet uniformFlow_fourthJet_hasFDerivAt (W2↑: octuple supply [J4-778] + Z1↑ [J4-780] + recentre),
+-- the triple-piRing lift uniformFlowExp_thirdJetMap_differentiableAt (D1↑), and the four-layer per-point
+-- contDiffAt3_uniformFlowExp. The order-3 realisation of the Plan-v6 expRho-free target shape.
+-- std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowExpContDiffThreeUniform
