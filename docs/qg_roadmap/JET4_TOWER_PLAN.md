@@ -9575,3 +9575,22 @@ Two new std-3 files (budget raw 0, vacuum-guard clean, both #print-axioms = prop
 - **J4-815** (commit `d3fcc97a`, `QIQTH/SliverIntegrandXUniform.lean`): the per-(x,s) integrand engines (J4-808 mixed, J4-812 diagonal) were already generic in (x,s); the missing piece was purely CO-INSTANTIATION (packaging on-gate data quantified over (x,s), then `intro x s hs` + apply engine) — not a re-proof. 12 theorems (7 mixed + 5 diagonal) matching both sliver theorems' integrability slots byte-for-byte.
 - ★★★★★★ **BOTH residue classes named in J4-809-814 are now discharged, for BOTH legs, in ONE parallel round.** This means `witness_sliver2_xuniform_mixed_gated` and `witness_sliver2_xuniform_diag_gated` may now be FULLY CLOSEABLE by combining J4-811+J4-814 (base co-instantiations) with J4-815 (integrabilities) + J4-816 (hqLip) — the next immediate step is assembling these four files' outputs into single hypothesis-free calls.
 - a₁=R/6 remains CONDITIONAL — not yet touched, but the mixed/diagonal sliver closure (feeding hCConv/hDuhamel/hDConv) may be imminent.
+
+---
+
+### J4-817 (commit `b333767b`, `QIQTH/SliverGatedFullyCombined.lean`) — FULLY-COMBINED sliver co-instantiations: BOTH residue classes discharged, both legs, in ONE call.
+
+The four-file assembly named at J4-816 is DONE. Two new std-3 theorems (raw axiom count 0):
+- `witness_sliver2_xuniform_mixed_gated_fullyCombined`
+- `witness_sliver2_xuniform_diag_gated_fullyCombined`
+
+Each composes J4-816 (`..._hqLipUniform`, discharging `hqLip` via the `√s`-sup uniform Lipschitz constant `M₀·(L_E+K_F·2√u)+M_F·L_A`) with J4-815 (`SliverIntegrandXUniform.uniform_*`, discharging the 7 mixed / 5 diagonal integrand integrabilities from primitive on-gate data). Since `..._hqLipUniform` was built independently of `SliverIntegrandXUniform`, it still carried the `Integrable` slots; this file feeds the `uniform_*` outputs into exactly those slots. The `hAsupp` off-gate amplitude-vanishing slots are proved INTERNALLY via `gateAmp_of_notMem` (not carried).
+
+RESULT: the mixed/diagonal gated sliver rates now carry NEITHER an `hqLip` NOR any `Integrable` hypothesis. Residue = standard on-gate geometric/gauge/measurability/boundedness data only. This is the honest terminal interface of the sliver-rate layer.
+
+⚠ NOT `a₁=R/6`, and does NOT reach the live capstone `trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned`. The downstream chain (steps 4-8) is blocked by THREE separate gaps these files do not bridge:
+1. `KPrimeOpNormSliver.kPrime_opNorm_sliver_bound`'s `hcomp` is stated over `kPrime g gi hC hK S a b i t s x z (Pi.single j 1)` — a DIFFERENT object than the witness sliver integrand `(pd (pd vanVleckGatedWitness i) j)·leviSeries`; no identity connecting them is present (the `kPrime ↔ witness` bridge is absent).
+2. `HD1SliverRoute.hD1_bulk_sliver_reduction` delivers `ContDiffAt ℝ 1`, but the capstone `hCConv` needs `ContDiffAt ℝ 2` (C¹→C² gap).
+3. The capstone `hCConv` is about `heatConv H (leviSeries (heatOp g gi H))` with `H = gatedKernel K S (globalCutoffParametrixWitnessN 1 (vanVleck g) …)` — a DIFFERENT kernel than `vanVleckGatedWitness g gi hC hK S a b`.
+
+So the sliver-rate layer is closed to primitive on-gate data, but wiring it into the capstone requires (a) the `kPrime ↔ witness` component identity, (b) a C¹→C² upgrade of the sliver route, and (c) reconciling the two kernel families. These are the precise remaining walls for `hCConv`; `hDuhamel`/`hDConv` untested (they concern the same `heatConv H (leviSeries (heatOp g gi H))` object).
