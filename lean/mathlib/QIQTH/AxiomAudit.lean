@@ -27898,6 +27898,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_slice_lipschitzOnWith
 #print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_slice_contDiffAt
 
+-- Task G (plan v4, J4-839): the JOINT SECOND-order Fréchet derivative of the geodesic flow, via ONE MORE
+-- `genericDoubled` doubling applied to the JOINT phase-space flow (field `doubledField g gi =
+-- genericDoubled geodesicField`), full doubled phase space `(P×P)×(P×P)` as the perturbation index +
+-- seed=id (NOT the velocity-only seed of doubledFlow_endpoint_baseVelocity_hasFDerivAt_exists). Mirrors
+-- the velocity-only C¹→C²→C³ doubling climb one order up on the COMBINED phase space (Rosenberg §2.5
+-- single-ODE-on-TM route). Field-regularity inputs discharged from hC (contDiff_doubledField +
+-- doubledField_fderiv{,2}_bddOn_compact); carries only the doubled-flow ODE/IC/confinement supply +
+-- supplied doubled-Jacobi solutions. Does NOT wire to the concrete .choose-built uniformFlowExp /
+-- uniformInverseChart (concrete SECOND-order joint supply firewalled), does NOT produce fderiv(flow) as a
+-- FUNCTION of the base point (.choose-incoherence wall), does NOT close hCConv. All std-3. NOT a₁=R/6;
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.doubledFlow_endpoint_joint_hasFDerivAt_exists
+#print axioms QIQTH.ExpMap.doubledFlow_endpoint_joint_snd_hasFDerivAt_exists
+#print axioms QIQTH.ExpMap.doubledFlow_endpoint_baseVelocity_ofJoint
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

@@ -4151,3 +4151,8 @@ import QIQTH.WitnessMixedPartialUniformBound
 -- ∂_q∂²_p regularity of the .choose chart = the SINGLE remaining isolated input (Task E Part 2). std-3.
 -- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.WitnessTranspositionSliceLipschitz
+-- Task G (plan v4, J4-839): JOINT SECOND-order Fréchet derivative of the geodesic flow — one more
+-- `genericDoubled` doubling of the JOINT phase-space flow (seed=id on the full doubled phase space),
+-- mirroring the velocity-only doubling climb on the combined base+velocity space. Abstract joint
+-- second-order object; does NOT wire to the concrete .choose flow nor close hCConv. std-3.
+import QIQTH.GeodesicJointSecondFDeriv
