@@ -3985,3 +3985,9 @@ import QIQTH.SliverIntegrandXUniform
 -- restriction to a general field point x and TAMES its s-dependent Levi constant L_E+K·2√s to the single
 -- uniform L=M_A·(L_E+K·2√u)+M_F·L_A via √s≤√u (bounded-slice sup). std-3. NOT a₁=R/6.
 import QIQTH.MixedSliverHqLipUniform
+-- J4-817: the FULLY-COMBINED gated sliver co-instantiations (mixed + diagonal), with BOTH residue
+-- classes discharged in a single call: hqLip (J4-816 MixedSliverHqLipUniform) AND the 7/5 integrand
+-- integrabilities (J4-815 SliverIntegrandXUniform). The resulting mixed/diagonal sliver rates carry
+-- NEITHER an hqLip NOR any Integrable hypothesis; residue = primitive on-gate geometric/gauge/
+-- measurability/boundedness data only. std-3. NOT a₁=R/6.
+import QIQTH.SliverGatedFullyCombined
