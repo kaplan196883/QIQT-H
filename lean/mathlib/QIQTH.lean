@@ -3943,3 +3943,13 @@ import QIQTH.DiagNormalFormFull
 -- (off-gate the gated amplitude is 0, so a GLOBAL bound reduces to an ON-GATE base bound).
 -- witnessDiag_amplitude_sup_bounds. std-3. NOT a₁=R/6 (stays CONDITIONAL).
 import QIQTH.DiagSliverAmpBounds
+-- MixedSliverGatedCoInstantiation.witness_sliver2_xuniform_mixed_gated (J4-811): the SINGLE shared-witness
+-- co-instantiation of witness_sliver2_xuniform_mixed at the concrete gated van-Vleck tuple (V=gateDisp of
+-- inverse chart, gated jets Pi/Pj/Q, gated chart amplitudes, F=leviSeries of the gated van-Vleck source).
+-- Discharges the 11 geometric/amplitude/domination/normal-form slots from the banked suppliers
+-- (J4-793/794/799/805); carries hqLip (uniform-L, general field point — supplier gives only field-point-0,
+-- s-dependent L) and the 7 integrand integrabilities (per-x, dischargeable from on-gate data via J4-808).
+-- Q-slot uses the SAME HasDerivAt jet as the normal form, sidestepping the open J4-803 Qfield↔fderiv∘fderiv
+-- bridge via the on-gate hJ3Q_on carry. std-3. NOT a₁=R/6 (stays CONDITIONAL on {hqLip, integrabilities,
+-- and downstream hDuhamel/hDConv/hCConv}).
+import QIQTH.MixedSliverGatedCoInstantiation

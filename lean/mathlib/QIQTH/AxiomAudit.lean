@@ -27650,6 +27650,11 @@ namespace QIQTH.AxiomAudit
 -- J4-810: the THREE DIAGONAL amplitude sup bounds (hA0bdd/hA1bdd/hA2bdd) of witness_sliver2_xuniform at
 -- the concrete gated chart amplitudes — the j:=i specialisation of J4-793. std-3. NOT a₁=R/6.
 #print axioms QIQTH.DiagSliverAmpBounds.witnessDiag_amplitude_sup_bounds
+-- J4-811: the SINGLE shared-witness co-instantiation of witness_sliver2_xuniform_mixed at the concrete
+-- gated van-Vleck tuple — discharges the 11 geometric/amplitude/domination/normal-form slots from the
+-- banked suppliers (J4-793/794/799/805); carries hqLip + 7 integrabilities as the honest terminal
+-- interface. NOT full closure of the mixed sliver; NOT a₁=R/6. std-3.
+#print axioms QIQTH.MixedSliverGatedCoInstantiation.witness_sliver2_xuniform_mixed_gated
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
