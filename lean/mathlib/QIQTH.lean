@@ -4041,3 +4041,16 @@ import QIQTH.WitnessTranspositionSmoothResidual
 -- displacement structure, no even/odd cancellation, no chart-specific analysis. std-3. NOT a₁=R/6;
 -- does NOT close hCConv (needs identifying the witness's concrete Φ + feeding kPrime_opNorm_sliver_bound).
 import QIQTH.WitnessTranspositionGeneralBound
+-- J4-825: GeodesicSmoothDepDir — direction-general IC-derivative of the geodesic flow, and the FIRST
+-- BASE-POINT (position-slot) directional derivative in the repo. GeodesicSmoothDep proved IC-derivative
+-- existence only for the VELOCITY direction (0,w) hardcoded; every firewall (FlowJointRegularity§3,
+-- BaseSlotAmpDeriv) records "regularity only in the velocity slot at fixed q, no base-point diff". The
+-- proof never uses that ξ's first component is 0, so generalizing (0,w)→arbitrary ξ, then specializing
+-- ξ=(u,0), yields geodesicVariation_basepoint_exists_uncond / _endpoint_exists_uncond: the geodesic
+-- flow's base-point directional (Gâteaux) derivative EXISTS (= Jacobi field V t / (V t).1), carrying
+-- only genuine geometric regularity (S convex, field C²+Lipschitz on S, Jacobi-coeff bound, tube
+-- containment, supplied Jacobi solution). std-3 ×4. A genuine BRICK toward base-slot C¹ — the slot
+-- previously velocity-only. HONEST: this is a DIRECTIONAL derivative, NOT total/Fréchet ContDiffAt, and
+-- NOT wired to the concrete .choose-built uniformFlowExp; it does NOT close hCConv (which needs
+-- ContDiffAt ℝ 1 of the concrete witness). a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.GeodesicSmoothDepDir

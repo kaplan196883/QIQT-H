@@ -27756,6 +27756,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_lipschitzOnWith
 #print axioms QIQTH.HeatResidualBound.general_transposition_sliver_of_contDiffAt
 
+-- GeodesicSmoothDepDir (J4-825): direction-general IC-derivative of the geodesic flow + the FIRST
+-- base-point (position-slot) directional derivative in the repo. GeodesicSmoothDep hardcoded the
+-- perturbation direction to velocity (0,w); the proof never uses first-component=0, so ξ→arbitrary and
+-- ξ=(u,0) gives the base-point directional (Gâteaux) derivative of the flow (= Jacobi field), carrying
+-- only genuine geometric regularity. std-3 ×4. A brick toward base-slot C¹ (the slot previously
+-- velocity-only per FlowJointRegularity§3). HONEST: DIRECTIONAL not ContDiffAt, NOT wired to the
+-- concrete uniformFlowExp; does NOT close hCConv. a₁=R/6 remains CONDITIONAL.
+#print axioms QIQTH.ExpMap.geodesicVariation_exists_dir
+#print axioms QIQTH.ExpMap.geodesicVariation_exists_dir_uncond
+#print axioms QIQTH.ExpMap.geodesicVariation_basepoint_exists_uncond
+#print axioms QIQTH.ExpMap.geodesicVariation_basepoint_endpoint_exists_uncond
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
