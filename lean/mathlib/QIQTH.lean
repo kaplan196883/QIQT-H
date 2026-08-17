@@ -3960,3 +3960,18 @@ import QIQTH.DiagSliverIntegrands
 -- bridge via the on-gate hJ3Q_on carry. std-3. NOT a₁=R/6 (stays CONDITIONAL on {hqLip, integrabilities,
 -- and downstream hDuhamel/hDConv/hCConv}).
 import QIQTH.MixedSliverGatedCoInstantiation
+-- J4-813: the DIAGONAL NORMAL-FORM ↔ GATED-GEOMETRY match — diagonal (i=j) twin of J4-805. Swaps the raw
+-- chart geometry of J4-809's full ∀ζ diagonal normal form for the gated gateDisp/gateJet/gateQ geometry
+-- (the SAME maps gated_five_estimates_global supplies), valid pointwise (on-gate gated=raw via if_pos;
+-- off-gate the gated amplitude is 0 → both sTerm collapse). diag_normalForm_gate_geometry (general) +
+-- witnessDiag_hNormalForm_gated (concrete). std-3. NOT a₁=R/6 (stays CONDITIONAL).
+import QIQTH.DiagNormalFormGatedMatch
+-- J4-814: THE SINGLE SHARED-WITNESS CO-INSTANTIATION of the DIAGONAL sliver rate witness_sliver2_xuniform
+-- at the concrete gated van-Vleck tuple — the diagonal (i=j) twin of J4-811, at PARITY. Discharges the 9
+-- geometric/amplitude/domination/normal-form slots from the banked diagonal suppliers (J4-794 hFdom,
+-- J4-799 gated geometry, J4-810 amplitude bounds, J4-813 gated normal form); carries hqLip (uniform-L,
+-- general field point) and the 5 integrand integrabilities (per-x, dischargeable from on-gate data via
+-- J4-812). Q-slot uses the SAME HasDerivAt jet as the normal form, on-gate hJ3Q_on carry.
+-- witness_sliver2_xuniform_diag_gated. std-3. NOT a₁=R/6 (stays CONDITIONAL on {hqLip, integrabilities,
+-- downstream CLM-opNorm sliver + hCConv}).
+import QIQTH.DiagSliverGatedCoInstantiation

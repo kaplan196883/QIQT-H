@@ -27663,6 +27663,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DiagSliverIntegrands.integrable_hIntT3_onGate
 #print axioms QIQTH.DiagSliverIntegrands.integrable_hInt1_onGate
 #print axioms QIQTH.DiagSliverIntegrands.integrable_hInt2_onGate
+-- J4-813: the diagonal NORMAL-FORM ↔ GATED-GEOMETRY match (diagonal twin of J4-805) — swaps the raw chart
+-- geometry of J4-809 for the gated gateDisp/gateJet/gateQ geometry the global estimates use. std-3.
+#print axioms QIQTH.DiagNormalFormGatedMatch.diag_normalForm_gate_geometry
+#print axioms QIQTH.DiagNormalFormGatedMatch.witnessDiag_hNormalForm_gated
+-- J4-814: THE SINGLE shared-witness co-instantiation of the DIAGONAL sliver rate witness_sliver2_xuniform
+-- at the concrete gated van-Vleck tuple — diagonal (i=j) twin of J4-811, at PARITY. Discharges 9 slots
+-- from banked suppliers (J4-794/799/810/813); carries hqLip + 5 integrabilities. std-3. NOT a₁=R/6.
+#print axioms QIQTH.DiagSliverGatedCoInstantiation.witness_sliver2_xuniform_diag_gated
 
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
