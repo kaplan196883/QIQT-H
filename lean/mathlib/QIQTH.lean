@@ -4261,3 +4261,13 @@ import QIQTH.JointRNCRegularityInterface
 --    hCConv's open facade census from {hlin,hbulkderiv,hbulk_tendsto,hsliver,hcont} to
 --    {hlin,hsliver,hcont} + per-slice integrability/measurability carries. NOT a₁=R/6; hCConv NOT closed.
 import QIQTH.HCConvTractableCarriesClosed
+
+-- JointRNCRegularityMixedInterface: Step 3 of the hCConv carry-audit — the MIXED (off-diagonal
+--    direction pair i≠j) analog of J4-792's diagonal geometric interface. Names the bilinear (i,j)
+--    second-order RNC chart-regularity bundle JointSecondOrderRNCRegularityMixed (with the CROSS second
+--    jet Q=∂ⱼ∂ᵢchart + second-direction jet Pj=∂ⱼchart — the GENUINELY NEW geometric content the diagonal
+--    interface does not bundle) and reduces the banked mixed sliver rate
+--    SliverGatedFullyCombined.witness_sliver2_xuniform_mixed_gated_fullyCombined to it, giving that rate
+--    its first honest consumer. Together with J4-792 (diagonal), geometrically isolates ALL n components
+--    of hsliver's Σⱼ operator-norm decomposition (R1) onto two named standard hypotheses. NOT a₁=R/6.
+import QIQTH.JointRNCRegularityMixedInterface

@@ -28165,4 +28165,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCConvTractableCarriesClosed.hCConvSlot_bulkTendstoClosed
 #print axioms QIQTH.HCConvTractableCarriesClosed.hCConvSlot_bulkderivClosed
 
+-- JointRNCRegularityMixedInterface: Step 3 of the hCConv carry-audit. The MIXED (i≠j) analog of J4-792:
+-- the named bilinear (i,j) second-order RNC chart-regularity bundle JointSecondOrderRNCRegularityMixed
+-- (adds the second-direction jet Pj=∂ⱼchart and the CROSS second jet Q=∂ⱼ∂ᵢchart — the genuinely NEW
+-- geometric content the diagonal interface lacks) + the reduction
+-- witness_sliver2_mixed_of_jointRNCRegularityMixed giving the banked mixed sliver rate
+-- (SliverGatedFullyCombined.witness_sliver2_xuniform_mixed_gated_fullyCombined) its first honest consumer.
+-- std-3. NOT a₁=R/6; hCConv NOT closed.
+#print axioms QIQTH.JointRNCRegularityMixedInterface.witness_sliver2_mixed_of_jointRNCRegularityMixed
+
 end QIQTH.AxiomAudit

@@ -10177,3 +10177,45 @@ Banking: `lake build QIQTH.HCConvTractableCarriesClosed`/`QIQTH.AxiomAudit` 0 er
 `#print axioms` std-3 (propext/Classical.choice/Quot.sound) for both theorems; wired QIQTH.lean +
 AxiomAudit.lean; `axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom regression; vacuum guard
 clean; new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}; hCConv NOT closed.
+
+## J4-794 — Step 3: MIXED (i≠j) geometric interface + first honest consumer of the closed mixed sliver rate [AF]
+
+Per external gpt-5.6-sol Step 3 (generalize J4-792's diagonal bridge to the off-diagonal direction
+pair). DECISIVE HONEST FINDING (direct read of `XUniformSliverFull.witness_sliver2_xuniform`, lines
+792-909, and `SliverGatedFullyCombined.witness_sliver2_xuniform_mixed_gated_fullyCombined`, lines
+70-274): the mixed case does NOT generalize for free. The underlying x-uniform sliver theorem is
+STRUCTURALLY DIAGONAL (single index i, diagonal Hermite `(z i)^2 − 2τ`, one jet family P/Q both in
+direction i). A separate MIXED sliver rate `witness_sliver2_xuniform_mixed_gated_fullyCombined`
+(mixed Hermite `z i · z j`, no −2τ) is already BANKED — but its geometric carry list needs, BEYOND the
+diagonal `JointSecondOrderRNCRegularity`: (a) `hJ3j_on`/`hJetPj` — a SECOND-direction first jet
+`Pj = ∂ⱼchart`; (b) `hJetQ` — the CROSS second jet `Q = ∂ⱼPi = ∂ⱼ∂ᵢchart` (the diagonal interface's Q
+is the SAME-direction `∂ᵢ∂ᵢchart`), with bound `hJ3Q_on`. The cross second jet `∂ᵢ∂ⱼchart` is
+GENUINELY NEW geometric content, absent from both the diagonal interface and Mathlib/this repo.
+
+New file `QIQTH/JointRNCRegularityMixedInterface.lean` (std-3; no `sorry`; no new axioms; NOT a₁=R/6;
+imports — does NOT edit — J4-792's `JointRNCRegularityInterface.lean`):
+
+- `JointSecondOrderRNCRegularityMixed g gi hC hK z₀ i j G C_W C_P C_Q Pi Pj Q` — the MIXED analog Prop
+  bundle: eight geometric fields (`hco_on`, `hVdisp_on` shared with diagonal; `hJ3i_on`/`hJetPi`;
+  `hJ3j_on`/`hJetPj`; `hJ3Q_on`/`hJetQ` = the CROSS jet), expressed on the concrete
+  `uniformInverseChart`. NEW content isolated: `Pj = ∂ⱼchart` + `Q = ∂ⱼPi = ∂ⱼ∂ᵢchart`.
+
+- `witness_sliver2_mixed_of_jointRNCRegularityMixed` — THE REDUCTION (a `def` by PARTIAL APPLICATION
+  through the five contiguous surface estimates `reg.hco_on/hVdisp_on/hJ3i_on/hJ3j_on/hJ3Q_on`; the
+  amplitude/Levi/jet/measurability residue — incl. `reg.hJetPi`/`reg.hJetPj`/`reg.hJetQ` — is the
+  inferred residual Π-type; mirrors J4-792's diagonal `def` exactly). Gives the previously-consumerless
+  banked mixed sliver rate its FIRST honest consumer through the named interface.
+
+NET: combined with J4-792 (diagonal, j=i) + `KPrimeOpNormSliver.kPrime_opNorm_sliver_bound`'s `Σⱼ bb j`
+operator-norm decomposition (R1), ALL n scalar components of the `hsliver` slot are now geometrically
+isolated onto TWO named, standard, plausibly-true differential-geometry bundles
+(`JointSecondOrderRNCRegularity` diagonal + `JointSecondOrderRNCRegularityMixed` off-diagonal). The
+mixed one carries the genuinely-new cross second jet `∂ᵢ∂ⱼchart` as a precisely-named field. Reaching
+hCConv STILL requires the R1 component-identity wiring (`kPrime`(eⱼ) = `∂ᵢ∂ⱼ vanVleck·leviSeries`,
+`KPrimeOpNormSliver.hcomp`, incl. x=0-vs-z₀ base matching) + the facade's remaining
+singular-convolution carries.
+
+Banking: `lake build QIQTH.JointRNCRegularityMixedInterface`/`QIQTH.AxiomAudit` 0 errors (10142 jobs);
+`#print axioms` std-3 (propext/Classical.choice/Quot.sound); wired QIQTH.lean + AxiomAudit.lean;
+`axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom regression; vacuum guard clean;
+new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}; hCConv NOT closed.
