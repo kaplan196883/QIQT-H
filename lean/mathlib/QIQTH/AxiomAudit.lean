@@ -28217,4 +28217,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KPrimeMagnitudeScaffolding.hG'bound_of_envelope
 #print axioms QIQTH.KPrimeMagnitudeScaffolding.kPrime_R2prime_magnitude
 
+-- MixedDirectionsFieldHessianEnvelope (J4-843): the FOURTH named hypothesis of the hCConv reduction —
+-- the x-uniform MIXED-directions field-Hessian operator-norm envelope BF that the two kPrime MAGNITUDE
+-- legs reduce to. Bundle + wiring to kPrime_R2prime_magnitude. std-3. NOT a₁=R/6; hCConv NOT closed.
+#print axioms QIQTH.MixedDirFieldHessianEnvelope.magnitude_legs_of_mixedEnvelope
+
+-- A1R6CapstoneConditionalOnRNC (J4-844, SESSION-ARC CAPSTONE): discharges the hCConv (spatial-C²-at-0)
+-- antecedent of the live capstone through CConvV2Facade.hCConvSlot_AT_GATE_v2, GENUINELY threading
+-- VanVleckGatedSpatialSymmetry (→ hsliver) + MixedDirectionsFieldHessianEnvelope (→ magnitude legs →
+-- hbulkderiv). Conditional on the FOUR named hypotheses + hDuhamel/hDConv + honest facade
+-- side-conditions (HCConvFacadeSideData). Original capstone consumed VERBATIM. std-3. NOT a₁=R/6.
+#print axioms QIQTH.A1R6CapstoneConditionalOnRNC.hCConv_of_named_hypotheses
+#print axioms QIQTH.A1R6CapstoneConditionalOnRNC.trueKernel_diagonal_a1_eq_R6_residual_N1_conditionalRNC
+
 end QIQTH.AxiomAudit

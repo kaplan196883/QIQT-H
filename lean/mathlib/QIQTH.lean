@@ -4303,3 +4303,16 @@ import QIQTH.KPrimeMeasurabilityScaffolding
 --    the three named RNC/VV geometric structures (which produce the ε-window sliver RATE, not pointwise
 --    domination); the residue BF is a MIXED-directions SecondDerivEnvelope-class input. NOT a₁ = R/6.
 import QIQTH.KPrimeMagnitudeScaffolding
+-- MixedDirectionsFieldHessianEnvelope: the FOURTH named hypothesis of the hCConv reduction — the
+--    x-uniform MIXED-directions field-Hessian operator-norm envelope BF (+ Levi magnitude bound, z-mass
+--    bound, z-integrabilities) that the two kPrime MAGNITUDE legs hK'bound/hG'bound reduce to (J4-842
+--    finding). Bundled as a satisfiable Prop structure + wired to kPrime_R2prime_magnitude. NOT a₁=R/6.
+import QIQTH.MixedDirectionsFieldHessianEnvelope
+-- A1R6CapstoneConditionalOnRNC: SESSION-ARC CAPSTONE. Discharges the hCConv (spatial-C²-at-0) antecedent
+--    of the live trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned capstone through the concrete
+--    facade route CConvV2Facade.hCConvSlot_AT_GATE_v2, GENUINELY threading VanVleckGatedSpatialSymmetry
+--    (→ hsliver) and MixedDirectionsFieldHessianEnvelope (→ magnitude legs → hbulkderiv), leaving the
+--    result conditional on {JointSecondOrderRNCRegularity, JointSecondOrderRNCRegularityMixed,
+--    VanVleckGatedSpatialSymmetry, MixedDirectionsFieldHessianEnvelope} + hDuhamel/hDConv + honest
+--    facade side-conditions. Original capstone consumed VERBATIM as a black box. NOT a₁=R/6.
+import QIQTH.A1R6CapstoneConditionalOnRNC
