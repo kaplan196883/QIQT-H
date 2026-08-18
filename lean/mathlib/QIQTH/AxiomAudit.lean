@@ -28154,4 +28154,15 @@ namespace QIQTH.AxiomAudit
 -- SliverGatedFullyCombined.witness_sliver2_xuniform_diag_gated_fullyCombined. std-3. NOT a₁=R/6.
 #print axioms QIQTH.JointRNCRegularityInterface.witness_sliver2_diag_of_jointRNCRegularity
 
+-- HCConvTractableCarriesClosed: Step 1 of the hCConv carry-audit. hCConvSlot_bulkTendstoClosed banks
+-- the elimination of the facade carries hbulk_tendsto/hb/sSet (via HD1Concrete.hD1_concrete, the
+-- bulk_tendsto_of_primitive engine) at the C² capstone-antecedent level; hCConvSlot_bulkderivClosed
+-- additionally instantiates the abstract fderivBulk/gderiv data at the concrete
+-- FderivBulkConcrete.fderivBulkInt/gderivInt and discharges hbulkderiv from the banked Leibniz engine
+-- fderivBulkInt_hasFDerivAt, exposing only its per-slice integrability/measurability/domination/
+-- first-order-differentiability census. Net: hCConv's open facade census shrinks to {hlin,hsliver,hcont}
+-- + per-slice carries. std-3. NOT a₁=R/6; hCConv NOT closed.
+#print axioms QIQTH.HCConvTractableCarriesClosed.hCConvSlot_bulkTendstoClosed
+#print axioms QIQTH.HCConvTractableCarriesClosed.hCConvSlot_bulkderivClosed
+
 end QIQTH.AxiomAudit

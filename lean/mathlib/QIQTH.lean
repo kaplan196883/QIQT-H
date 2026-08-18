@@ -4251,3 +4251,13 @@ import QIQTH.Hfwd2WeldUniform
 --    (SliverGatedFullyCombined) its first honest consumer through the named interface. Residue to hCConv
 --    (kPrime↔pd∘pd component identity + facade non-chart carries) named precisely. NOT a₁=R/6.
 import QIQTH.JointRNCRegularityInterface
+
+-- HCConvTractableCarriesClosed: Step 1 of the hCConv carry-audit — BANKS the two TRACTABLE facade
+--    carries of CConvV2Facade.hCConvSlot_AT_GATE_v2. hCConvSlot_bulkTendstoClosed eliminates
+--    hbulk_tendsto/hb/sSet (via HD1Concrete.hD1_concrete = bulk_tendsto_of_primitive engine);
+--    hCConvSlot_bulkderivClosed additionally instantiates the abstract data at the concrete
+--    FderivBulkConcrete.fderivBulkInt/gderivInt and discharges hbulkderiv from the banked Leibniz
+--    engine fderivBulkInt_hasFDerivAt, exposing only its per-slice (non-geometric) census. Reduces
+--    hCConv's open facade census from {hlin,hbulkderiv,hbulk_tendsto,hsliver,hcont} to
+--    {hlin,hsliver,hcont} + per-slice integrability/measurability carries. NOT a₁=R/6; hCConv NOT closed.
+import QIQTH.HCConvTractableCarriesClosed

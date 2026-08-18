@@ -10088,3 +10088,92 @@ geodesic-flow / chart-regularity effort.
 Banking: `lake build QIQTH.Flow3RegularityUniform`/`QIQTH.Hfwd2WeldUniform`/`QIQTH.AxiomAudit` 0 errors;
 throwaway chk = std-3 for all 4 (no sorryAx, no custom axioms); wired QIQTH.lean + AxiomAudit.lean;
 axiom_budget_check.sh raw 0; vacuum guard clean; new-files-only; committed 73a96f75, pushed.
+
+## J4-792 — JointSecondOrderRNCRegularity: named geometric interface + first honest consumer of the closed diagonal sliver rate [AF]
+
+Per external (gpt-5.6-sol) recommendation after cp681→696's 8+ independent confirmations that joint
+second-order regularity of the `Classical.choose`-built geodesic normal-coordinate inverse chart is
+genuinely absent from Mathlib and this repo: STOP re-attempting the construction; close the geometric
+carry HONESTLY CONDITIONAL on ONE precisely-named, standard-differential-geometry hypothesis bundle.
+
+New file `QIQTH/JointRNCRegularityInterface.lean` (std-3; no `sorry`; no new axioms; NOT a₁=R/6):
+
+- `JointSecondOrderRNCRegularity g gi hC hK z₀ i G C_W C_P C_Q P Q` — a `Prop` bundle (P,Q as
+  PARAMETERS, not fields, to keep the downstream signature cheap) capturing EXACTLY the six geometric
+  carries the closed diagonal sliver rate consumes on the concrete `uniformInverseChart g gi hC hK z₀`:
+  `hco_on` (coercivity ½|z|²≤|chart z|²), `hVdisp_on` (‖chart z + z‖≤C_W‖z‖² = identity to O(‖z‖²)),
+  `hJ3_on` (‖P z − eᵢ‖≤C_P‖z‖), `hJ3Q_on` (‖Q z‖≤C_Q), `hJetV`/`hJetQ` (P=∂ᵢchart, Q=∂ᵢP). This IS the
+  standard "geodesic exp / inverse chart is jointly C² near the diagonal" fact in QUANTITATIVE
+  bounded-Taylor-data form, expressed on this repo's actual chart object.
+
+- `witness_sliver2_diag_of_jointRNCRegularity` — THE REDUCTION (a `def` by PARTIAL APPLICATION through
+  the four hard surface estimates `reg.hco_on`/`reg.hVdisp_on`/`reg.hJ3_on`/`reg.hJ3Q_on`; the
+  amplitude/Levi/jet/measurability residue is the inferred residual Π-type = `..._fullyCombined`'s
+  tail). From a `JointSecondOrderRNCRegularity` instance the CLOSED order-2 √ε sliver rate
+  `SliverGatedFullyCombined.witness_sliver2_xuniform_diag_gated_fullyCombined` (J4-817) FOLLOWS — giving
+  that previously-ZERO-consumer closed theorem its FIRST honest consumer through the named geometric
+  interface. (Stated as `def`+partial-application because restating `..._fullyCombined`'s 40-hypothesis
+  mega-signature as a `theorem` binders+conclusion elaborates in >30 min — an engineering limit of the
+  giant signature, not a math gap; the partial-application `def` compiles in normal time.)
+
+HONEST DISTANCE TO hCConv — the interface discharges ONLY the geometric class of the sliver rate.
+Reaching the capstone `hCConv` STILL requires, as a SEPARATE precisely-named residue (NOT touched here,
+NOT chart-regularity):
+  (R1) the component-identity / kernel-family bridge `(FderivBulkConcrete.kPrime …)(eⱼ) =
+       (∂ᵢ∂ⱼ vanVleckGatedWitness)·leviSeries` (`KPrimeOpNormSliver.kPrime_opNorm_sliver_bound`'s
+       `hcomp`), incl. the base-point/centre matching (x=0 vs z₀) — cp680 "kernel family mismatch";
+  (R2) the facade's remaining non-chart carries in `CConvV2Facade.hCConvSlot_AT_GATE_v2` (`hlin`,
+       `hbulkderiv`/`hbulk_tendsto`, `hcont`, and the diff-under-∫ measurability census) — the
+       singular-convolution branch.
+NET: `hCConv` ⟸ `{JointSecondOrderRNCRegularity, R1, R2}`, with the new interface isolating EXACTLY the
+differential-geometry frontier as one clean, standard, plausibly-true named hypothesis.
+
+Non-vacuity (prose, not a Lean theorem — a machine-checked witness would itself require the named
+chart-differentiability): the bundle is EXACTLY the six geometric hypotheses of the banked
+`..._fullyCombined`, no stronger; satisfiable on any gate bounded away from the base point with large
+constants for any genuine coercive differentiable chart.
+
+Banking: `lake build QIQTH.JointRNCRegularityInterface`/`QIQTH.AxiomAudit` 0 errors (10140 jobs);
+`#print axioms witness_sliver2_diag_of_jointRNCRegularity` = std-3 (propext/Classical.choice/Quot.sound);
+wired QIQTH.lean + AxiomAudit.lean; `axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom
+regression; vacuum guard clean; new-file-only; committed 8beec8a1, pushed. a₁=R/6 remains CONDITIONAL
+on {hDuhamel, hDConv, hCConv}; hCConv NOT closed.
+
+## J4-793 — Step 1: the two TRACTABLE hCConv facade carries (hbulk_tendsto + hbulkderiv) BANKED CLOSED [AF]
+
+Per external gpt-5.6-sol sequencing (fresh audit of `CConvV2Facade.hCConvSlot_AT_GATE_v2`, lines
+214-237): of the live facade census `{hlin, hbulkderiv, hbulk_tendsto, hsliver, hcont}`, TWO carries
+are already essentially closed by BANKED engines. New file `QIQTH/HCConvTractableCarriesClosed.lean`
+(std-3; no `sorry`; no new axioms; NOT a₁=R/6; hCConv NOT closed):
+
+- `hCConvSlot_bulkTendstoClosed` — the EXACT `C²` capstone antecedent
+  `ContDiffAt ℝ 2 (fun p ↦ heatConv (vanVleck…) (leviSeries…) t p 0) 0`, with `hbulk_tendsto`, `hb`,
+  and the whole `{sSet, hsOpen, hsnhds}` neighbourhood block ELIMINATED: the `hD1` slot is fired by
+  the banked `HD1Concrete.hD1_concrete` (which discharges those internally — `hbulk_tendsto` via
+  `HD1ConcreteWiring.bulk_tendsto_of_primitive` ∘ `MovingFBoundaryLim.tendsto_comp_epsSeq` on the
+  per-slice integrability `hGint`, `hb` via `sliver_bound_tendsto_zero`, `sSet := univ`), then lifted
+  to `C²` by the facade L1 bridge `CConvV2Facade.hfam_v2` + `SpatialC2.hCConv_reduction`. In exchange:
+  the per-slice `hGint` (interval-integrability of the gcoef `s`-profile — a universally-carried,
+  non-geometric analytic fact) and the sliver-rate data constants `C₀ C₁ C₂`.
+
+- `hCConvSlot_bulkderivClosed` — additionally INSTANTIATES the abstract data fields `fderivBulk`/
+  `gderiv` at the CONCRETE `FderivBulkConcrete.fderivBulkInt`/`gderivInt`, and DISCHARGES `hbulkderiv`
+  per slice from the banked double-integral Leibniz engine
+  `FderivBulkConcrete.fderivBulkInt_hasFDerivAt` (J4-197/J4-778). The engine's OWN per-slice census —
+  integrability (`hKint`), measurability (`hKmeas`/`hK'meas`/`hGmeas`/`hG'meas`), domination
+  (`hK'bound`/`hboundz_int`/`hG'bound`), endpoint integrability (`hGint'` on `0..(t−εₘ)`), and the
+  PER-POINT first-order differentiability `hd` — is exposed as two grouped carries `bulkCensusSlice`
+  (the x-uniform members) + `bulkCensusAtx` (the base-point members). NONE is the joint-second-order
+  geometric frontier; `hd` is a per-point, first-order fact.
+
+NET: hCConv's open facade census shrinks from `{hlin, hbulkderiv, hbulk_tendsto, hsliver, hcont}` to
+`{hlin, hsliver, hcont}` — now stated of the CONCRETE `fderivBulkInt`/`gderivInt` (so
+`FderivBulkConcrete.gderiv_sub_fderivBulk_eq_sliver` connects `hsliver` to the ε-window integral the
+geometric sliver interface controls) — plus the per-slice satisfiable, non-geometric carries
+(`hGintFull`, `bulkCensusSlice`, `bulkCensusAtx`). This confirms `hbulk_tendsto`/`hbulkderiv` are NOT
+the geometric wall.
+
+Banking: `lake build QIQTH.HCConvTractableCarriesClosed`/`QIQTH.AxiomAudit` 0 errors (10141 jobs);
+`#print axioms` std-3 (propext/Classical.choice/Quot.sound) for both theorems; wired QIQTH.lean +
+AxiomAudit.lean; `axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom regression; vacuum guard
+clean; new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}; hCConv NOT closed.
