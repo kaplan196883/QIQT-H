@@ -10219,3 +10219,119 @@ Banking: `lake build QIQTH.JointRNCRegularityMixedInterface`/`QIQTH.AxiomAudit` 
 `#print axioms` std-3 (propext/Classical.choice/Quot.sound); wired QIQTH.lean + AxiomAudit.lean;
 `axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom regression; vacuum guard clean;
 new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}; hCConv NOT closed.
+
+## J4-795 — R1-swap (base↔eval interchange) NAMED precisely + WIRED; naive VV spatial symmetry proven FALSE for the gated construction [AF]
+
+Per the hCConv carry-audit (following J4-792/793/794): the last geometric wall between the banked
+op-norm sliver reduction and hCConv is R1 — the base↔eval role-swap of the two spatial slots of the
+concrete field-Hessian kernel `kPrime`. This session traced the EXACT construction of
+`vanVleckGatedWitness` (ConvApproximants.lean:161) end-to-end:
+  `VV τ p q = gatedKernel K S (globalCutoffParametrixWitnessN 1 (vanVleck g) (transportCoeff …) a b
+              (uniformInverseChart g gi hC hK)) τ p q`,
+which on the gate (q∈K, p∈S q) equals
+  `radialCutoff a b (W q p) · heatParametrix 1 (vanVleck g) … τ (W q p)`,
+with `W q := uniformInverseChart g gi hC hK q` the `Classical.choose` inverse chart CENTRED AT THE
+BASE SLOT `q`. So base = q (2nd slot), eval = p (1st slot); the hard gate `if q∈K then if p∈S q` is
+centred on the base q.
+
+DECISIVE FINDING (case c for exact symmetry). The naive two-slot spatial symmetry
+`VV τ p q = VV τ q p` is LITERALLY FALSE for this gated construction: a one-sided gate (p∈S q, p∉K)
+gives `LHS ≠ 0 = RHS`, and off the gate `W q p` (normal coords of p in the chart at q) vs `W p q`
+(normal coords of q in the DIFFERENT chart at p) are two distinct `Classical.choose` charts. The
+textbook van Vleck–Morette Δ(x,y)=Δ(y,x) (confirmed genuinely symmetric by gpt-5.6-sol) transfers only
+APPROXIMATELY — to the O(√ε) order the sliver rate lives at — and establishing THAT is genuine
+chart-incoherence content (two distinct charts at swapped base points, the wall this campaign has hit
+8+ times). NOT tractable to prove now; landed as a named carry with a forward wiring.
+
+New file `QIQTH/VanVleckGatedSpatialSymmetry.lean` (ns `QIQTH.VVGatedSym`; std-3; no `sorry`; no new
+axioms; NOT a₁=R/6; imports — does NOT edit — KPrimeOpNormSliver/ConvApproximants/etc.):
+
+- `vanVleckGatedWitness_apply_on_gate` — ★ MACHINE-CHECKS the base=q/eval=p on-gate chart structure
+  (the structural reason the base↔eval swap is not definitional): a `p↔q` swap replaces `W q p` by
+  `W p q` and flips the hard gate `q∈K ∧ p∈S q` to `p∈K ∧ q∈S p`.
+
+- `VanVleckGatedSpatialSymmetry` — ★★ the PRECISE minimal R1 carry (a `Prop` structure): the two
+  interval integrabilities (`hIab`/`hIbc`), the a.e.-`s` inner integrability (`hzInt`), and the
+  per-direction √ε base↔eval sliver bound `hcomp`
+    `|∫ s in (t−εₘ)..t, ∫ z, (kPrime … i t s x z)(eⱼ)| ≤ bb j`
+  stated at EXACTLY the level `KPrimeOpNormSliver.kPrime_opNorm_sliver_bound` (J4-779) consumes it.
+  `hcomp` is what the base↔eval swap would DISCHARGE from the banked rate `witness_sliver2_xuniform`
+  (whose chart jets `Y z, P z, Q z` live at the base `z`, with the field point `x` only in the weight
+  `F s z x`; kPrime instead reads the Hessian at field point `x`, base `z` — the mismatch R1 bridges).
+
+- `hsliver_of_vanVleckGatedSpatialSymmetry` — ★★★ THE WIRING: the named carry yields the CLM dist
+  bound `dist (fderivBulkInt … i m x) (gderivInt … i x) ≤ Σⱼ bb j` the `hsliver` census member of
+  `HD1SliverRoute.hD1_bulk_sliver_reduction` consumes, via the banked op-norm reduction.
+
+NET (with J4-792/793/794): `hCConv ⟸` the precisely-named minimal list
+  `{ JointSecondOrderRNCRegularity (diagonal chart interface, J4-792),
+     JointSecondOrderRNCRegularityMixed (off-diagonal chart interface, J4-794),
+     VanVleckGatedSpatialSymmetry (R1 base↔eval interchange, THIS file),
+     R2 (non-geometric facade carries: hlin, hcont, per-slice integrability/measurability census) }`.
+The geometric frontier is the two RNC bundles; R1 is the base↔eval chart-symmetry bridge; R2 is the
+singular-convolution/measurability residue.
+
+Non-vacuity: `VanVleckGatedSpatialSymmetry` is satisfiable by the width-2 Gaussian model of the sliver
+census; the honest UNCERTAINTY is whether `hcomp` holds for the genuinely-curved `uniformInverseChart`
+at O(√ε) — the approximate base↔eval symmetry (plausibly true, textbook-motivated, NOT proved here).
+
+Banking: `lake build QIQTH.VanVleckGatedSpatialSymmetry`/`QIQTH.AxiomAudit` 0 errors (10143 jobs);
+`#print axioms` std-3 (propext/Classical.choice/Quot.sound) for both theorems; wired QIQTH.lean +
+AxiomAudit.lean; `axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom regression; vacuum guard
+clean; new-file-only; committed 3846ad62, pushed. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv,
+hCConv}; hCConv NOT closed.
+
+## J4-796 — R2 carry-audit: the `hGintFull` member DISCHARGED onto a banked supplier; the `kPrime` residue named precisely [AF]
+
+Per external gpt-5.6-sol's R2-first sequencing (close the bounded, mechanical, non-geometric facade
+remainder so `hCConv` depends on EXACTLY the three named geometric hypotheses plus nothing else),
+audited R2 = `{hGintFull, bulkCensusSlice, bulkCensusAtx, hlin's first-order census}` against the
+banked supplier landscape (`HGintCutoff`, `WitnessDerivMeasurability`, `WitnessDerivDomination`,
+`HcontAssembly`, `ProdPtwiseWitness`, `CConvV2WitnessStar`, `FderivBulkConcrete`).
+
+DISCHARGED THIS BRICK. New file `QIQTH/HCConvR2GintSupplied.lean` (ns `QIQTH.HCConvR2GintSupplied`;
+std-3; no `sorry`; no new axioms; NOT a₁=R/6; imports — does NOT edit — `HGintCutoff`):
+
+- `hGintFull_supplied` — ★ the EXACT `hGintFull` R2 carry of
+  `HCConvTractableCarriesClosed.hCConvSlot_bulkderivClosed` (interval-integrability on `[0,t]` of the
+  field-derivative pairing `s`-profile `s ↦ ∫ z, witnessFieldDeriv … i (t−s) x z · leviSeries … s z 0`,
+  per `i`, `x`) DISCHARGED from the banked `HGintCutoff.hGint_at_witness` (J4-444) specialised at
+  `U := {t}`. `hGint_at_witness` splits `[0,t] = [0,t−εₘ] ⊕ [t−εₘ,t]`: the non-singular bulk is
+  discharged by the banked capped-ceiling engine, the singular endpoint stays the honest carry
+  `hSliver`, re-assembled by `IntervalIntegrable.trans`. So `hGintFull` reduces to the five named,
+  strictly-lower-level per-slice carries `{hFzero, hWFDdomCapped, hFdomEvery, hGintMeas, hSliver}`.
+
+DECISIVE HONEST FINDING (why R2 does NOT collapse to the 3 named geometric hypotheses alone).
+Direct read of `FderivBulkConcrete.fderivBulkInt_hasFDerivAt`'s ten-hypothesis census + a grep sweep
+of every banked measurability/integrability supplier established:
+  (1) The `witnessFieldDeriv·leviSeries` PAIRING legs (`hGintFull` here, plus `bulkCensusSlice`'s
+      `hKint`/`hKmeas` and `bulkCensusAtx`'s `hGmeas`/`hGint'`, and `hlin`'s `hFmeas`/`hF'meas`/`hFint`/
+      `hbound`/`hdiff`) ARE banked-reducible — to joint kernel continuity (`HcontAssembly.
+      iterE_jointContinuousOn_strong` for `leviSeries`; `WitnessDerivMeasurability`), the FIRST-jet
+      Gaussian envelope of `witnessFieldDeriv` (`CConvV2WitnessStar.hStarWide_concrete`'s `hdata`, the
+      coercivity + first-jet SUBSET of `JointSecondOrderRNCRegularity`), the `leviSeries` Gaussian
+      envelope, and per-point first-order differentiability. NO SECOND jet needed for the pairing legs.
+  (2) The `kPrime` legs (`bulkCensusSlice`'s `hK'meas`/`hK'bound`/`hboundz_int`/`hG'bound`,
+      `bulkCensusAtx`'s `hG'meas`) are GENUINELY UNBANKED — `kPrime = leviSeries · fderiv(witnessFieldDeriv)`
+      (the SECOND field derivative) has NO measurability/z-integrability/singular-bound supplier anywhere
+      in the repo (confirmed via grep: `kPrime` measurability is only ever a carried hypothesis). The
+      singular member `hG'bound` (‖∫z kPrime‖ ≤ C·(t−s)⁻¹) is order-2 Hermite-cancellation content
+      routing to `JointSecondOrderRNCRegularity`'s SECOND jet `Q = ∂ᵢ∂ⱼchart` — the SAME differential-
+      geometry frontier already named in J4-792/794, NOT a new hypothesis; but its measurability/
+      domination scaffolding for `kPrime` remains genuinely unbuilt.
+
+NET (refines J4-795's R2 line, does NOT change the geometric frontier): after this brick
+  `hCConv ⟸ { JointSecondOrderRNCRegularity (diagonal, J4-792),
+              JointSecondOrderRNCRegularityMixed (off-diagonal cross-jet, J4-794),
+              VanVleckGatedSpatialSymmetry (R1 base↔eval, J4-795),
+              R2′ = the `kPrime`-analysis residue (unbanked measurability/z-integrability + the singular
+                    (t−s)⁻¹ bound, the last routing to JointSecondOrderRNCRegularity's second jet) }`.
+The `hGintFull` member of R2 is CLOSED onto banked machinery + five named lower-level per-slice carries.
+The honest correction to the mission's ideal: R2 does NOT reduce to the three geometric hypotheses
+alone — the `kPrime` (second-field-derivative) measurability/integrability scaffolding is genuinely
+absent from the repo and is the precise remaining non-geometric R2 residue. NOT forced.
+
+Banking: `lake build QIQTH.HCConvR2GintSupplied`/`QIQTH.AxiomAudit` 0 errors (10144 jobs);
+`#print axioms hGintFull_supplied` std-3 (propext/Classical.choice/Quot.sound); wired QIQTH.lean +
+AxiomAudit.lean; `axiom_budget_check.sh` raw 0, no sorryAx, no deleted-axiom regression; vacuum guard
+clean; new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}; hCConv NOT closed.

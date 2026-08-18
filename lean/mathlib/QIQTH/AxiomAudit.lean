@@ -28182,4 +28182,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.VVGatedSym.vanVleckGatedWitness_apply_on_gate
 #print axioms QIQTH.VVGatedSym.hsliver_of_vanVleckGatedSpatialSymmetry
 
+-- R2 carry-audit follow-on: HCConvR2GintSupplied discharges the `hGintFull` member of the hCConv
+-- facade's R2 (non-geometric per-slice) residue onto the banked HGintCutoff.hGint_at_witness (U := {t}),
+-- reducing it to the named per-slice carries {hFzero, hWFDdomCapped (witnessFieldDeriv first-jet Gaussian
+-- envelope), hFdomEvery (leviSeries Gaussian envelope), hGintMeas (s-profile measurability), hSliver
+-- (integrable endpoint singularity)}. std-3. NOT a₁=R/6; hCConv NOT closed.
+#print axioms QIQTH.HCConvR2GintSupplied.hGintFull_supplied
+
 end QIQTH.AxiomAudit

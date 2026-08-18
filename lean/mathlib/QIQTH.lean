@@ -4283,3 +4283,7 @@ import QIQTH.JointRNCRegularityMixedInterface
 --    {JointSecondOrderRNCRegularity, JointSecondOrderRNCRegularityMixed, VanVleckGatedSpatialSymmetry, R2}.
 --    std-3. NOT a₁=R/6; hCConv NOT closed.
 import QIQTH.VanVleckGatedSpatialSymmetry
+-- HCConvR2GintSupplied: R2 carry-audit follow-on — discharges the `hGintFull` member of the hCConv
+--    facade's R2 (non-geometric per-slice) residue onto the banked `HGintCutoff.hGint_at_witness`
+--    (U := {t}), reducing it to {hFzero, hWFDdomCapped, hFdomEvery, hGintMeas, hSliver}.  NOT a₁ = R/6.
+import QIQTH.HCConvR2GintSupplied
