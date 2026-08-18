@@ -4233,3 +4233,13 @@ import QIQTH.UniformFlowHexadecupleField
 import QIQTH.UniformFlowHexadecupleSupply
 import QIQTH.UniformFlowExpFifthJetValueId
 import QIQTH.UniformFlowExpContDiffFourUniform
+-- Plan v6/v7 Task N: the expRho-FREE / hReach-FREE second-jet slots + weld, re-anchored on the
+--    UNCONDITIONAL C⁴ (uniformFlowExp_contDiffOn_four_uniform). forward2_velocitySlot' +
+--    uniformFlowExp_fderiv2_base_modulus' (Flow3RegularityUniform); the weld
+--    uniformFlowExp_forward2_continuousOn + chartSecondJet_continuousOn UNCONDITIONAL, NO hReach, NO
+--    expRho (Hfwd2WeldUniform). ⚠ This closes hReach on the CHART-SECOND-JET branch only; verified (fresh
+--    Explore, direct read of CConvV2Facade.hCConvSlot_AT_GATE_v2) that this branch is ORTHOGONAL to the
+--    capstone hCConv, which remains gated by the DISJOINT still-open singular-convolution carries
+--    (hsliver x-uniform, hcont/hsbound cancellation, hbulkderiv/hlin). NOT a₁=R/6; hCConv NOT closed.
+import QIQTH.Flow3RegularityUniform
+import QIQTH.Hfwd2WeldUniform
