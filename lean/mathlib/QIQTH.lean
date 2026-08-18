@@ -4197,3 +4197,17 @@ import QIQTH.UniformFlowExpFourthJetValueId
 -- contDiffAt3_uniformFlowExp. The order-3 realisation of the Plan-v6 expRho-free target shape.
 -- std-3. NOT a₁=R/6.
 import QIQTH.UniformFlowExpContDiffThreeUniform
+-- Plan v6 Task I (C⁴ climb, brick 3): octupledField_variation_exists_uncond — directional
+-- (scalar-s) smooth dependence of the OCTUPLED flow on its base initial condition, one order up
+-- from quadrupledField_variation_exists_uncond [J4-779]. For a family Y of octupledField-integral
+-- curves with base IC perturbed linearly and V an octupledField-linearized field along the base
+-- curve with V 0 = p, HasDerivAt (fun s => Y s t) (V t) 0. Specialises the field-agnostic
+-- autonomousField_variation_exists_uncond at Φ := octupledField; all regularity from
+-- contDiff_octupledField. This is the directional-derivative engine the FIFTH-jet value-identity
+-- (Z1↑↑, one order up from Z1↑) would consume. NO expRho. std-3. NOT a₁=R/6.
+-- HONEST NOTE: the C⁴ climb's remaining bricks (hexadecuple field/supply, Z1↑↑, W2↑↑) hit a
+-- genuine Lean elaboration performance wall (16-fold NormedAddCommGroup/Norm instance synthesis
+-- + whnf checking on St16 time out even at 60M maxHeartbeats / 8M synthInstance.maxHeartbeats) —
+-- NOT landed this pass. C⁴-unconditional remains open; C³-unconditional (above) is the current
+-- ceiling.
+import QIQTH.UniformFlowOctupleVariation

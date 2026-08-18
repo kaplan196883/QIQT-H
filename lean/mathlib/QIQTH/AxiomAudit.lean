@@ -27958,6 +27958,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.contDiffAt3_uniformFlowExp
 #print axioms QIQTH.HeatResidualBound.uniformFlowExp_contDiffOn_three_uniform
 
+-- Plan v6 Task I (C⁴ climb, brick 3): octupledField_variation_exists_uncond — directional
+-- smooth dependence of the OCTUPLED flow on its base IC, one order up from
+-- quadrupledField_variation_exists_uncond. The engine the (unbuilt) FIFTH-jet value-identity
+-- would consume. NO expRho. std-3. NOT a₁=R/6. C⁴-unconditional NOT reached this pass — see
+-- commit message / ledger for the precise elaboration-performance wall (16-fold St16 instance
+-- synthesis).
+#print axioms QIQTH.ExpMap.octupledField_variation_exists_uncond
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global
