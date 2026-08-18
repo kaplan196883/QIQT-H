@@ -9989,3 +9989,51 @@ uniqueness lemmas, piRing lift pattern) generalises verbatim.
   wired into `QIQTH.lean` + `AxiomAudit.lean`; `axiom_budget_check.sh` raw 0; vacuum guard clean;
   new-file-only. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. This is Task L
   (pure infrastructure) COMPLETE — the C⁴ climb (Task M) is now UNBLOCKED at the elaboration level.
+
+## J4-790 — Plan v7 Task M: C⁴-UNCONDITIONAL CLOSED on the def-based St16'/St8' types [AF]
+
+**The elaboration-wall fix (Task L) genuinely works for the FULL C⁴ construction**, not just the isolated
+`#synth` check. The C⁴ climb — one `genericDoubled` doubling above the C³-unconditional tower (J4-780/781)
+— is now BANKED, mirroring the octuple→hexadecuple structure one order up, with the 16-fold phase space
+typed as the `def`-based `St16'`/`St8'` (`NestedPhaseSpaceDef`) throughout the heavy instance-synthesis
+sites.
+
+**Four new files (all std-3 = propext/Classical.choice/Quot.sound; no sorryAx; NO expRho; NOT a₁=R/6):**
+- `UniformFlowHexadecupleField` (commit below) — the 16-fold field regularity. KEY typing move:
+  `‖fderiv ℝ (raw 3-fold genericDoubled) z‖` re-triggers the wall (Norm synthesis on the raw 32-leaf CLM,
+  infeasible even at 8M) even with `z : St16'`; fixed by re-typing the octupled field as
+  `octField8' : St8' → St8'` (defeq to the banked raw field) so `genericDoubled (octField8' g gi)` lands
+  on the SHALLOW registered `St8' × St8' = St16'` product. `contDiff_hexField'` +
+  `hexField_fderiv{,2}_bddOn_compact`.
+- `UniformFlowHexadecupleSupply` — `uniformFlow_hexadecupleEndpoint_baseVelocity_hasFDerivAt`: the
+  base-velocity Fréchet derivative of the HEXADECUPLED-flow endpoint `δ ↦ ((((tube(v+δ)1,Jf 1),Uf 1),
+  Tf 1),Sf 1) : St16'`, a genuine confined 16-fold `genericDoubled(octField8')` integral-curve family
+  (Jf/Uf/Tf/Sf = Jacobi ⊗ doubled- ⊗ quadrupled- ⊗ OCTUPLED-linearized factors, quadruple-nested
+  `genericDoubled_prod_hasDerivAt`, Grönwall-confined at each level, fed to
+  `autonomousFlow_endpoint_hasFDerivAt_window_exists` at Φ := hexadecupleField). `_component`
+  projects `.2.2.2.1` of Sf. ONE ORDER UP from the octuple supply (J4-778).
+- `UniformFlowExpFifthJetValueId` — **Z1↑↑** (`uniformFlowExp_fourthJet_value_id`), the genuine new
+  content: `(fderiv (D³-map) v) d c a b = (S 1).2.2.2.1` for the octupled-linearized field S. DERIVED
+  exactly per Z1↑'s route one order up (scalar-s OCTUPLE supply +
+  `octupledField_variation_exists_uncond` [654969f6] + Z1↑ [J4-780] + directional/eval-CLM +
+  `HasDerivAt.unique` + `jacobiSol_unique`/`autonomousLinODE_unique` ×3 gluing).
+- `UniformFlowExpContDiffFourUniform` — **W2↑↑** (`uniformFlow_fifthJet_hasFDerivAt`, hexadecuple
+  supply across Z1↑↑ + recentre) + **D1↑↑** (`uniformFlowExp_fourthJetMap_differentiableAt`, QUADRUPLE
+  `piRing`+`differentiableAt_pi` lift) + `contDiffAt4_uniformFlowExp` (FIVE Fréchet layers) ⟹
+  **★ `uniformFlowExp_contDiffOn_four_uniform`** : ∀ q∈K, `ContDiffOn ℝ 4 (uniformFlowExp g gi hC hK q)
+  (ball 0 uniformFlowRadius)`, UNCONDITIONAL, NO expRho.
+
+**EMPIRICAL fix-verification (the Task-L point).** The abbrev `St16` FAILED to synthesize
+`NormedAddCommGroup` even at 8M synthInstance heartbeats; on the def types the FULL supply compiles with
+`synthInstance.maxHeartbeats 1000000` and the isolated instance checks pass at the DEFAULT 20k — the
+def-scheme SUCCEEDS where the abbrev scheme provably could not. (The supply's *general* elaboration budget
+is `maxHeartbeats 40000000` — 4× the banked octuple supply's 10M — reflecting the inherent ~4× cost of the
+extra doubling level + 4th linearized field on the 32-leaf tree, NOT an instance-synthesis blowup: the
+blowup that Task L fixed was strictly synthInstance, and that is resolved.)
+
+Banking: `lake build` of each file 0 errors; `#print axioms` std-3 for all 10 pinned theorems (no
+sorryAx, no custom axioms); wired into `QIQTH.lean` + `AxiomAudit.lean`; `QIQTH.AxiomAudit` builds;
+`axiom_budget_check.sh` raw 0; vacuum guard clean; new-files-only. **NOT a₁=R/6; a₁=R/6 remains
+CONDITIONAL on {hDuhamel, hDConv, hCConv}.** This closes the entire plan-v6/v7 Task I/M `expRho`-free
+regularity target: `uniformFlowExp` is now C⁴ UNCONDITIONALLY on the uniform tube — the order feeding
+`ChartThirdJet.uniformFlowExp_contDiffAt_four`, previously borrowed from the expRho tower.

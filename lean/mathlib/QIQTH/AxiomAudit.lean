@@ -27979,6 +27979,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.st16'_convex_closedBall
 #print axioms QIQTH.ExpMap.st16'_isCompact_prod_closedBall
 
+-- Plan v7 Task M: C⁴-UNCONDITIONAL climb of uniformFlowExp (NO expRho), over the def-based St16'/St8'.
+-- contDiff_hexField' / hexField_fderiv{,2}_bddOn_compact = 16-fold field regularity; the hexadecuple
+-- SUPPLY (base-velocity Fréchet derivative of the 16-fold endpoint + its deep-component projection);
+-- Z1↑↑ (uniformFlowExp_fourthJet_value_id, the fifth-jet value-identity, the genuine new content);
+-- W2↑↑ (uniformFlow_fifthJet_hasFDerivAt) + D1↑↑ (uniformFlowExp_fourthJetMap_differentiableAt) +
+-- contDiffAt4_uniformFlowExp ⟹ ★ uniformFlowExp_contDiffOn_four_uniform. All std-3. NOT a₁=R/6.
+#print axioms QIQTH.ExpMap.contDiff_hexField'
+#print axioms QIQTH.ExpMap.hexField_fderiv_bddOn_compact
+#print axioms QIQTH.ExpMap.hexField_fderiv2_bddOn_compact
+#print axioms QIQTH.ExpMap.uniformFlow_hexadecupleEndpoint_baseVelocity_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlow_hexadecupleEndpoint_component_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_fourthJet_value_id
+#print axioms QIQTH.ExpMap.uniformFlow_fifthJet_hasFDerivAt
+#print axioms QIQTH.ExpMap.uniformFlowExp_fourthJetMap_differentiableAt
+#print axioms QIQTH.ExpMap.contDiffAt4_uniformFlowExp
+#print axioms QIQTH.HeatResidualBound.uniformFlowExp_contDiffOn_four_uniform
+
 -- VACAREA-1: the regulated finite harmonic chain K_ε=m²−Δ_ε on a periodic
 -- lattice + its vacuum Gaussian data. couplingK_posDef = positivity of the
 -- regulated coupling for m>0; Xcov_mul_Pcov = the CCR product X·P=¼·1 (global

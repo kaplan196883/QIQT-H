@@ -4218,3 +4218,18 @@ import QIQTH.UniformFlowOctupleVariation
 -- abbrev family (St8'_eq_St8 etc., rfl), so existing C²/C³ results transport without re-proof. NOT
 -- a₁=R/6; pure infrastructure enabling Task M.
 import QIQTH.NestedPhaseSpaceDef
+-- Plan v7 Task M: the C⁴-UNCONDITIONAL climb of the geodesic flow-exponential, using the def-based
+-- St16'/St8' types (NestedPhaseSpaceDef) to keep the 16-fold instance synthesis cheap.
+--  • UniformFlowHexadecupleField — the 16-fold field regularity (C^∞ + compact ‖DΦ‖/‖D²Φ‖ bounds),
+--    stated over St16' via the retyped octuple field `octField8' : St8' → St8'`.
+--  • UniformFlowHexadecupleSupply — the base-velocity Fréchet derivative of the HEXADECUPLED-flow
+--    endpoint (16-fold genuine confined integral-curve family; genericDoubled(octField8')), NO expRho.
+--  • UniformFlowExpFifthJetValueId — Z1↑↑, the fifth-jet value-identity (octupled-linearized deep
+--    component = applied fourth Fréchet jet), DERIVED via octupledField_variation_exists_uncond + Z1↑.
+--  • UniformFlowExpContDiffFourUniform — W2↑↑ + the quadruple-piRing fourth-jet-map lift + C⁴ assembly ⟹
+--    uniformFlowExp_contDiffOn_four_uniform (∀ q∈K, ContDiffOn ℝ 4 (uniformFlowExp q) (ball 0 ρ_K)),
+--    UNCONDITIONAL, NO expRho. NOT a₁=R/6.
+import QIQTH.UniformFlowHexadecupleField
+import QIQTH.UniformFlowHexadecupleSupply
+import QIQTH.UniformFlowExpFifthJetValueId
+import QIQTH.UniformFlowExpContDiffFourUniform
