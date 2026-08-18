@@ -10037,3 +10037,54 @@ sorryAx, no custom axioms); wired into `QIQTH.lean` + `AxiomAudit.lean`; `QIQTH.
 CONDITIONAL on {hDuhamel, hDConv, hCConv}.** This closes the entire plan-v6/v7 Task I/M `expRho`-free
 regularity target: `uniformFlowExp` is now C⁴ UNCONDITIONALLY on the uniform tube — the order feeding
 `ChartThirdJet.uniformFlowExp_contDiffAt_four`, previously borrowed from the expRho tower.
+
+## J4-791 — Plan v7 Task N: chart second jet UNCONDITIONAL (hReach eliminated); hCConv ORTHOGONALITY finding [AF]
+
+**Task N executed. The two downstream expRho-guarded second-jet slots + the weld are re-anchored on
+the Task-M UNCONDITIONAL C⁴ (`uniformFlowExp_contDiffOn_four_uniform`, 626570a7), dropping expRho and
+hReach entirely. Commit 73a96f75.**
+
+New (all std-3 = propext/Classical.choice/Quot.sound; no sorryAx; NO expRho; NO hReach; NOT a₁=R/6):
+- `Flow3RegularityUniform.forward2_velocitySlot'` — velocity slot, expRho-free (`.of_le (3≤4)` of
+  `ExpMap.contDiffAt4_uniformFlowExp`, needing only `‖v‖<uniformFlowRadius`).
+- `Flow3RegularityUniform.uniformFlowExp_fderiv2_base_modulus'` — base-slot second-jet modulus,
+  expRho-free: LINE-FOR-LINE mirror of `HbaseJ2Assembly.uniformFlowExp_fderiv2_base_modulus`, with ONLY
+  the two forward-map C²-differentiability facts (hf2q/hf2q') re-anchored on `contDiffAt4_uniformFlowExp`
+  (the sole expRho uses in the whole 150-line Grönwall/bridge/opNorm assembly).
+- `Hfwd2WeldUniform.uniformFlowExp_forward2_continuousOn` — the joint hFwd2 weld, UNCONDITIONAL.
+- `Hfwd2WeldUniform.chartSecondJet_continuousOn` — chart SECOND field-jet base-continuity on U,
+  UNCONDITIONAL. Strict strengthening of `Hfwd2Weld.chartSecondJet_continuousOn_of_reach`: the
+  hReach / (I1) uniform-injectivity-radius input is GONE (sidestepped, not proven — the expRho guard
+  never appears because the C⁴ is re-derived directly on the uniform tube). Only the standing geometric
+  carries hW0/horigin/hunit/hid2 remain.
+
+**⚠ DECISIVE HONEST FINDING (fresh Explore + direct read of `CConvV2Facade.hCConvSlot_AT_GATE_v2` and
+every `A1R6FromLabelled*`/`CConvV2*` hsliver site). The plan v5/v6/v7 premise — that the chart second
+jet feeds the capstone `hCConv` — is INCORRECT for the LIVE formalization.** The chart second jet flows
+EXCLUSIVELY into the amplitude sup-constant / Levi-convergence (Sconst) branch: `chartSecondJet_
+continuousOn_of_reach` → `OperatorPdBridge.chartSecondJetComponent_continuousOn_of_reach` →
+`AmplitudeSecondJet.hcont2_of_reach`/`supConstant_phase4` → `C2AggregatorPhase6.collarSupConstants_of_
+reach` → `AmplitudeDataOnCollar` (M₀/M₁/M₂ collar sup-bounds). That terminus is a BOUND FAMILY, never a
+`ContDiffAt`; there is NO arrow from it to `hCConv`/`hD1`/the convolution slot. The capstone `hCConv`
+(`ContDiffAt ℝ 2 (fun p => heatConv H (leviSeries …) t p 0) 0`) is closed (if at all) by the DISJOINT
+singular-convolution chain `hCConvSlot_AT_GATE_v2 → hD1_v2 → HD1SliverRoute/GcoefContinuity`, whose
+carries — `hsliver` (the x-uniform / CENTRE→x-uniform sliver bound), `hcont`/`hsbound` (the singular
+cancellation domination `‖∫z K'‖≤C(t−s)^{−1/2}`), `hbulkderiv`/`hlin` (bulk-derivative existence under
+∫∫) — reference NEITHER the chart second jet NOR expRho/hReach, and are UNIVERSALLY CARRIED, never
+discharged, across all A1R6FromLabelled*/CConvV2* files. Verified: the live capstone
+`trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned` `intro`s hCConv as a bare surviving antecedent
+and has ZERO references to supConstant/collarSupConstants/chartAmp — the chart-second-jet branch is not
+even on its current proof path.
+
+**NET.** Closing hReach (this task, banked) is a genuine advance on the chart-second-jet/Sconst branch,
+but it is NOT sufficient — nor even relevant — to close hCConv. hCConv/hDuhamel/hDConv remain the three
+genuine open analytic carries on the capstone. The J4-776 hDuhamel/hDConv auto-supply conjecture was NOT
+reached (it was gated on hCConv closing first, which did not occur). a₁=R/6 remains CONDITIONAL on
+{hDuhamel, hDConv, hCConv}. The precise remaining gap for hCConv is now named at maximum resolution: the
+x-uniform sliver bound + singular-cancellation domination + bulk-derivative-under-∫∫, on the
+convolution branch — a distinct, still-open singular-convolution effort, NOT the (now-closed)
+geodesic-flow / chart-regularity effort.
+
+Banking: `lake build QIQTH.Flow3RegularityUniform`/`QIQTH.Hfwd2WeldUniform`/`QIQTH.AxiomAudit` 0 errors;
+throwaway chk = std-3 for all 4 (no sorryAx, no custom axioms); wired QIQTH.lean + AxiomAudit.lean;
+axiom_budget_check.sh raw 0; vacuum guard clean; new-files-only; committed 73a96f75, pushed.
