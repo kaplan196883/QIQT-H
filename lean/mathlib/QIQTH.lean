@@ -4211,3 +4211,10 @@ import QIQTH.UniformFlowExpContDiffThreeUniform
 -- NOT landed this pass. C⁴-unconditional remains open; C³-unconditional (above) is the current
 -- ceiling.
 import QIQTH.UniformFlowOctupleVariation
+-- Plan v7 Task L: NestedPhaseSpaceDef — the `def`-based (non-reducible) parallel phase-space tower
+-- St2'/St4'/St8'/St16' with bottom-up registered instances, FIXING the C⁴-climb elaboration wall
+-- above. Empirically: NormedAddCommGroup (St16 abbrev) fails to synthesize at 8M synthInstance
+-- heartbeats; (St16' def) succeeds at the default 20k. Plus the defeq/`≃L[ℝ]` bridge to the banked
+-- abbrev family (St8'_eq_St8 etc., rfl), so existing C²/C³ results transport without re-proof. NOT
+-- a₁=R/6; pure infrastructure enabling Task M.
+import QIQTH.NestedPhaseSpaceDef

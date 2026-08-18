@@ -9948,3 +9948,44 @@ integral-curve family, one more doubling of the octuple supply) + Z1↑↑ (the 
 order up from Z1↑, mirroring this brick). The octuple field's `genericDoubled_fderiv_snd_apply` engine
 [J4-778] is field-agnostic and reusable at that depth. All infrastructure (variational engines,
 uniqueness lemmas, piRing lift pattern) generalises verbatim.
+
+## J4-789 — Plan v7 Task L: the C⁴-climb ELABORATION WALL is FIXED (abbrev→def+instances), empirically verified [AF]
+- **The wall (J4-782 / QIQTH.lean tail).** The banked nested phase spaces `St2/St4/St8`
+  (`UniformFlowOctupleSupply.lean:62-64`) are `abbrev` (`@[reducible] def`). Reducible ⟹ typeclass
+  instance search + `whnf` fully UNFOLD each to its raw nested-`Prod` tree of `Point n` on every use
+  (`St8` = 16-leaf depth-4 tree; the C⁴-climb `St16` = 32-leaf depth-5 tree). Instance synthesis
+  re-derives across the FULL expanded tree each time, blowing up per doubling level.
+- **EMPIRICAL VERIFICATION (isolated `#synth` files, this session — the decisive evidence).**
+  * ABBREV `NormedAddCommGroup (St16 n)`: **FAILS TO SYNTHESIZE at `synthInstance.maxHeartbeats 8000000`**
+    (8M — search never terminates within budget). This is the wall verbatim.
+  * DEF `NormedAddCommGroup (St16' n)`: **SUCCEEDS at the DEFAULT `synthInstance.maxHeartbeats 20000`**
+    (20k). Likewise `NormedSpace ℝ (St16' n)`, `ProperSpace (St16' n)`, and all St8' instances succeed
+    at 20k. A ≥400× collapse, and — decisively — the def scheme SUCCEEDS where the abbrev scheme
+    provably does NOT. (Abbrev `NormedAddCommGroup (St8 n)` itself is cheap, ≤20k; the super-linear
+    blowup appears specifically at the St16 level, confirming full-tree re-unfolding, not linear cost.)
+- **THE FIX (verified sound by external Lean-expert consult; now empirically confirmed).** New file
+  `QIQTH/NestedPhaseSpaceDef.lean` (namespace `QIQTH.ExpMap`, alongside the abbrevs): declare the tower
+  as `def` (NOT reducible) — `St2' → St4' → St8' → St16'` — and register each level's
+  `NormedAddCommGroup`/`NormedSpace ℝ`/`ProperSpace` via `inferInstanceAs`, STRICTLY BOTTOM-UP (St2'
+  first with its own instances, then St4' referencing St2''s registered instances, etc.). Because `def`
+  is opaque to instance search, each level touches exactly ONE `Prod` application (finding the
+  already-registered child by its opaque head), never re-triggering the unfold.
+- **THE BRIDGE (Task L point 3-4 — thin cast suffices, NO C²/C³ rebuild).** The def and abbrev families
+  bottom out at the SAME raw `Prod` tree, so they are DEFINITIONALLY EQUAL: `St2'_eq_St2`/`St4'_eq_St4`/
+  `St8'_eq_St8` all close by `rfl`, and `instNACGSt8'_eq` shows the norm instances agree definitionally
+  (not merely isomorphic — the SAME normed space). Hence `stEquiv2/4/8 : St_k n ≃L[ℝ] St_k' n`
+  (`ContinuousLinearEquiv.refl`, a genuine linear isometry) and `hasFDerivAt_stEquiv8` (derivative
+  transport across it) let existing banked octuple-supply results (stated over abbrev `St8`) feed
+  def-typed hexadecuple constructions with a thin cast. **The C² and C³ tower does NOT need rebuilding
+  against the def types**: its conclusions (`uniformFlowExp_contDiffOn_{two,three}_uniform`) are
+  St-free (`ContDiffOn ℝ k (uniformFlowExp …) (ball 0 ρ)`); the def types only appear in Task M's NEW
+  St16-level supply declarations, whose instance synthesis is now cheap.
+- **NON-VACUOUS instance-usage lemmas** (`st16'_isCompact_closedBall`, `st16'_convex_closedBall`,
+  `st16'_isCompact_prod_closedBall`): the exact `ProperSpace`/`NormedSpace` facts (compact + convex
+  closed balls, and the `IsCompact.prod` confinement set) the Task-M 16-fold construction consumes,
+  proven over `St16'` — certifying the registered instances genuinely fire.
+- Banking: `lake build QIQTH.NestedPhaseSpaceDef` 0 errors; `#print axioms` = std-3
+  (propext/Classical.choice/Quot.sound) for all 7 pinned theorems (no sorryAx, no custom axioms);
+  wired into `QIQTH.lean` + `AxiomAudit.lean`; `axiom_budget_check.sh` raw 0; vacuum guard clean;
+  new-file-only. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. This is Task L
+  (pure infrastructure) COMPLETE — the C⁴ climb (Task M) is now UNBLOCKED at the elaboration level.
