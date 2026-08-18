@@ -10365,7 +10365,7 @@ clean; new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}
 
 ## J4-843 — the FOURTH named hCConv hypothesis: MixedDirectionsFieldHessianEnvelope (mixed-directions field-Hessian operator-norm envelope)
 
-- Commit (see J4-844), new file `QIQTH/MixedDirectionsFieldHessianEnvelope.lean` (ns `QIQTH.MixedDirFieldHessianEnvelope`; std-3; new-file-only; imports NOT edits `KPrimeMagnitudeScaffolding`; NOT a₁=R/6).
+- Commit `c0d5a124`, new file `QIQTH/MixedDirectionsFieldHessianEnvelope.lean` (ns `QIQTH.MixedDirFieldHessianEnvelope`; std-3; new-file-only; imports NOT edits `KPrimeMagnitudeScaffolding`; NOT a₁=R/6).
 - **PURPOSE:** name — as a single precise satisfiable non-vacuous Prop bundle — the fourth input the J4-842 finding identified: the MIXED-directions field-Hessian operator-norm envelope the two `kPrime` MAGNITUDE legs `hK'bound`/`hG'bound` reduce to (NOT a field of the three named RNC/VV structures, which produce the sliver RATE).
 - **LANDED:**
   - `MixedDirectionsFieldHessianEnvelope` — Prop bundle: `hLevi` (Levi magnitude bound `|leviSeries|≤BL`), `hFd` (the x-UNIFORM mixed-directions field-Hessian op-norm envelope `‖fderiv(y↦witnessFieldDeriv…i(t−s)y z)x‖≤BF`, all x), `hkint` (per-slice z-integrability of `kPrime`), `hbint` (z-integrability of `BL·BF`), `hzmass` (the honest z-mass bound `∫z BL·BF ≤ C·(t−s)⁻¹`) — EXACTLY the data `KPrimeMagnitudeScaffolding.kPrime_R2prime_magnitude` consumes.
@@ -10374,7 +10374,7 @@ clean; new-file-only. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}
 
 ## J4-844 — SESSION-ARC CAPSTONE: hCConv DISCHARGED through the facade from the four named hypotheses (conditional capstone)
 
-- Commit `<this>`, new file `QIQTH/A1R6CapstoneConditionalOnRNC.lean` (ns `QIQTH.A1R6CapstoneConditionalOnRNC`; std-3; budget raw 0 / no sorryAx / no deleted-axiom regression; new-file-only; imports NOT edits `GatedGlobalWitnessN1CapstoneReachAligned`/`CConvV2Facade`/`VanVleckGatedSpatialSymmetry`/`MixedDirectionsFieldHessianEnvelope`/`HD1Concrete`/the two RNC interfaces; NOT a₁=R/6).
+- Commit `c0d5a124`, new file `QIQTH/A1R6CapstoneConditionalOnRNC.lean` (ns `QIQTH.A1R6CapstoneConditionalOnRNC`; std-3; budget raw 0 / no sorryAx / no deleted-axiom regression; new-file-only; imports NOT edits `GatedGlobalWitnessN1CapstoneReachAligned`/`CConvV2Facade`/`VanVleckGatedSpatialSymmetry`/`MixedDirectionsFieldHessianEnvelope`/`HD1Concrete`/the two RNC interfaces; NOT a₁=R/6).
 - **THE DELIVERABLE (culmination of the J4-792…843 hCConv-reduction arc):** wire the four named hypotheses through the CONCRETE facade route `CConvV2Facade.hCConvSlot_AT_GATE_v2` to DISCHARGE the `hCConv` (spatial-C²-at-0) antecedent of the LIVE capstone `trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned`, which is consumed VERBATIM as a black box.
 - **LANDED:**
   - `HCConvFacadeSideData` — the honest facade side-condition Prop bundle: the non-named, non-magnitude `fderivBulkInt_hasFDerivAt` census legs (`hKint`/`hKmeas`/`hK'meas`/`hd`/`hGmeasB`/`hGintB`/`hG'measB`), the FULL-interval `hGintFull` (for `hbulk_tendsto`), the vanishing rate `hb`, and the order-2 continuity `hcont`.
