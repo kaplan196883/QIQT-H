@@ -28189,4 +28189,19 @@ namespace QIQTH.AxiomAudit
 -- (integrable endpoint singularity)}. std-3. NOT a₁=R/6; hCConv NOT closed.
 #print axioms QIQTH.HCConvR2GintSupplied.hGintFull_supplied
 
+-- R2′ mechanical scaffolding: KPrimeMeasurabilityScaffolding supplies the three MECHANICAL
+-- (measurability / z-integrability) legs of the kPrime census in
+-- FderivBulkConcrete.fderivBulkInt_hasFDerivAt — hK'meas / hboundz_int / hG'meas — by mirroring, one
+-- order up, the first-derivative scaffolding WitnessDerivMeasurability. hK'meas via
+-- AEStronglyMeasurable.smul from {banked Levi z-measurability, honest bare 2nd-field-deriv
+-- z-measurability = exact 2nd-order analog of WitnessDerivMeasurability's carried hKmeas}; hboundz_int
+-- via envelope_integrable; hG'meas via integral_prod_right'. NO joint (x,z) chart 2nd-jet regularity is
+-- needed for measurability — only the MAGNITUDE legs hK'bound/hG'bound route to
+-- JointSecondOrderRNCRegularity's 2nd jet (already named). std-3. NOT a₁=R/6; hCConv NOT closed.
+#print axioms QIQTH.KPrimeMeasurabilityScaffolding.kPrime_aesm
+#print axioms QIQTH.KPrimeMeasurabilityScaffolding.hK'meas_witness
+#print axioms QIQTH.KPrimeMeasurabilityScaffolding.hboundz_gaussian_int
+#print axioms QIQTH.KPrimeMeasurabilityScaffolding.hG'meas_witness
+#print axioms QIQTH.KPrimeMeasurabilityScaffolding.kPrime_R2prime_mechanical
+
 end QIQTH.AxiomAudit

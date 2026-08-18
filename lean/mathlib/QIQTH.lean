@@ -4287,3 +4287,11 @@ import QIQTH.VanVleckGatedSpatialSymmetry
 --    facade's R2 (non-geometric per-slice) residue onto the banked `HGintCutoff.hGint_at_witness`
 --    (U := {t}), reducing it to {hFzero, hWFDdomCapped, hFdomEvery, hGintMeas, hSliver}.  NOT a₁ = R/6.
 import QIQTH.HCConvR2GintSupplied
+-- J4-797: the MECHANICAL (measurability / z-integrability) legs of the `kPrime` census in
+--    FderivBulkConcrete.fderivBulkInt_hasFDerivAt — the "R2′" residue named at cp702 — supplied by
+--    mirroring, one order up, the first-derivative scaffolding WitnessDerivMeasurability: hK'meas via
+--    AEStronglyMeasurable.smul from banked Levi + honest bare 2nd-deriv measurability, hboundz_int via
+--    envelope_integrable, hG'meas via integral_prod_right'.  NO joint (x,z) chart 2nd-jet regularity
+--    needed for measurability; only the MAGNITUDE legs hK'bound/hG'bound route to Joint…'s 2nd jet.
+--    NOT a₁ = R/6.
+import QIQTH.KPrimeMeasurabilityScaffolding
