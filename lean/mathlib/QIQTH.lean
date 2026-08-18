@@ -4243,3 +4243,11 @@ import QIQTH.UniformFlowExpContDiffFourUniform
 --    (hsliver x-uniform, hcont/hsbound cancellation, hbulkderiv/hlin). NOT a₁=R/6; hCConv NOT closed.
 import QIQTH.Flow3RegularityUniform
 import QIQTH.Hfwd2WeldUniform
+-- JointRNCRegularityInterface: the honest, explicitly-named geometric hypothesis bundle
+--    `JointSecondOrderRNCRegularity` (the quantitative "geodesic normal-coordinate inverse chart is
+--    jointly C² near the diagonal" fact on the concrete uniformInverseChart — the isolated
+--    differential-geometry frontier the ~150-increment campaign confirmed 8+ ways) + the reduction
+--    `witness_sliver2_diag_of_jointRNCRegularity` giving the previously-zero-consumer closed sliver rate
+--    (SliverGatedFullyCombined) its first honest consumer through the named interface. Residue to hCConv
+--    (kPrime↔pd∘pd component identity + facade non-chart carries) named precisely. NOT a₁=R/6.
+import QIQTH.JointRNCRegularityInterface

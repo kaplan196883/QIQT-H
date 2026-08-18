@@ -28148,5 +28148,10 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WhiteGated.whiteGated_witness_gate
 #print axioms QIQTH.WhiteGated.white_gatePackage_satisfiable_empty
 
+-- JointRNCRegularityInterface: the reduction of the closed diagonal sliver rate to the named geometric
+-- interface JointSecondOrderRNCRegularity (quantitative joint-C² of the concrete uniformInverseChart) +
+-- the explicitly-named amplitude/Levi/measurability residue. First honest consumer of
+-- SliverGatedFullyCombined.witness_sliver2_xuniform_diag_gated_fullyCombined. std-3. NOT a₁=R/6.
+#print axioms QIQTH.JointRNCRegularityInterface.witness_sliver2_diag_of_jointRNCRegularity
 
 end QIQTH.AxiomAudit
