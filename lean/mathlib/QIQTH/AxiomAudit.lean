@@ -28204,4 +28204,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.KPrimeMeasurabilityScaffolding.hG'meas_witness
 #print axioms QIQTH.KPrimeMeasurabilityScaffolding.kPrime_R2prime_mechanical
 
+-- R2′ magnitude scaffolding: KPrimeMagnitudeScaffolding supplies the MAGNITUDE (domination) half of
+-- the kPrime census in FderivBulkConcrete.fderivBulkInt_hasFDerivAt — the two legs hK'bound / hG'bound —
+-- by factorizing ‖kPrime‖ = |leviSeries|·‖fderiv(witnessFieldDeriv)‖ (norm_smul) and reducing to named
+-- envelope carries. DECISIVE FINDING (this session): these magnitude legs do NOT reduce to the three
+-- named RNC/VV geometric structures — those produce the ε-window SLIVER RATE (hsliver), whereas
+-- hK'bound/hG'bound are pointwise/per-s Leibniz-DOMINATION bounds routing to a MIXED-directions
+-- SecondDerivEnvelope-class field-Hessian envelope BF (‖kPrime‖_op needs ALL mixed ∂ⱼ∂ᵢ H, but
+-- SecondDerivEnvelope.witnessFieldDeriv2 = pd_i(pd_i H) is DIAGONAL only). std-3. NOT a₁=R/6; hCConv NOT closed.
+#print axioms QIQTH.KPrimeMagnitudeScaffolding.kPrime_norm_factor
+#print axioms QIQTH.KPrimeMagnitudeScaffolding.hK'bound_of_envelope
+#print axioms QIQTH.KPrimeMagnitudeScaffolding.hG'bound_of_envelope
+#print axioms QIQTH.KPrimeMagnitudeScaffolding.kPrime_R2prime_magnitude
+
 end QIQTH.AxiomAudit

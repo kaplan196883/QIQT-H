@@ -4295,3 +4295,11 @@ import QIQTH.HCConvR2GintSupplied
 --    needed for measurability; only the MAGNITUDE legs hK'bound/hG'bound route to Joint…'s 2nd jet.
 --    NOT a₁ = R/6.
 import QIQTH.KPrimeMeasurabilityScaffolding
+-- KPrimeMagnitudeScaffolding: the MAGNITUDE (domination) half of the kPrime census in
+--    FderivBulkConcrete.fderivBulkInt_hasFDerivAt — the two legs hK'bound (pointwise operator-norm
+--    envelope on the 2nd field derivative) and hG'bound (singular ‖∫z kPrime‖ ≤ C·(t−s)⁻¹) — reduced
+--    via a norm_smul factorization to named envelope carries {Levi magnitude bound, field-Hessian
+--    operator-norm envelope BF, z-mass bound}. DECISIVE FINDING: these magnitude legs do NOT reduce to
+--    the three named RNC/VV geometric structures (which produce the ε-window sliver RATE, not pointwise
+--    domination); the residue BF is a MIXED-directions SecondDerivEnvelope-class input. NOT a₁ = R/6.
+import QIQTH.KPrimeMagnitudeScaffolding
