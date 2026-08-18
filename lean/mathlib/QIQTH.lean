@@ -4271,3 +4271,15 @@ import QIQTH.HCConvTractableCarriesClosed
 --    its first honest consumer. Together with J4-792 (diagonal), geometrically isolates ALL n components
 --    of hsliver's Σⱼ operator-norm decomposition (R1) onto two named standard hypotheses. NOT a₁=R/6.
 import QIQTH.JointRNCRegularityMixedInterface
+
+-- J4-795: VanVleckGatedSpatialSymmetry — the R1-swap (base↔eval interchange) named precisely and
+--    wired into the banked op-norm sliver reduction. Machine-checks the base=q/eval=p chart structure
+--    of the gated van-Vleck witness on the gate (vanVleckGatedWitness_apply_on_gate — the chart is
+--    Classical.choose-centred at the BASE slot q, so the naive pointwise symmetry VV τ p q = VV τ q p
+--    is FALSE as stated: gate + two distinct charts), then NAMES the minimal R1 carry
+--    VanVleckGatedSpatialSymmetry (the per-component √ε base↔eval sliver bound at exactly the level
+--    kPrime_opNorm_sliver_bound consumes) and WIRES it forward to the hsliver CLM dist bound
+--    (hsliver_of_vanVleckGatedSpatialSymmetry). Reduces hCConv to the minimal named list
+--    {JointSecondOrderRNCRegularity, JointSecondOrderRNCRegularityMixed, VanVleckGatedSpatialSymmetry, R2}.
+--    std-3. NOT a₁=R/6; hCConv NOT closed.
+import QIQTH.VanVleckGatedSpatialSymmetry

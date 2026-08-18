@@ -28174,4 +28174,12 @@ namespace QIQTH.AxiomAudit
 -- std-3. NOT a₁=R/6; hCConv NOT closed.
 #print axioms QIQTH.JointRNCRegularityMixedInterface.witness_sliver2_mixed_of_jointRNCRegularityMixed
 
+-- J4-795: VanVleckGatedSpatialSymmetry — the R1-swap (base↔eval interchange). Machine-checks the
+-- base=q/eval=p chart structure of the gated witness on the gate (vanVleckGatedWitness_apply_on_gate:
+-- Classical.choose chart centred at the BASE slot q, so naive VV τ p q = VV τ q p is FALSE as stated),
+-- names the minimal R1 carry VanVleckGatedSpatialSymmetry (per-component √ε base↔eval sliver bound) and
+-- wires it to the hsliver CLM dist bound via the banked op-norm reduction. std-3. NOT a₁=R/6.
+#print axioms QIQTH.VVGatedSym.vanVleckGatedWitness_apply_on_gate
+#print axioms QIQTH.VVGatedSym.hsliver_of_vanVleckGatedSpatialSymmetry
+
 end QIQTH.AxiomAudit
