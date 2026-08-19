@@ -4233,6 +4233,13 @@ import QIQTH.GeodesicJointSecondFDerivAtPointLocal
 -- zero-reference-seed construction dodges the pad-continuity export gap). Second-order analogue of the
 -- J4-848 non-vacuity certificate; std-3. NOT ContDiffOn 2 assembly, NOT hCConv.
 import QIQTH.UniformFlowJointSecondFDerivConcrete
+-- Task D follow-on (plan v8, J4-851): UniformFlowJointSecondFDerivNonzeroSeed — the NONZERO-seed version
+-- of the joint SECOND-order Fréchet derivative witness. Closes the "pad-export gap RETURNS one level up"
+-- wall (cp711) by the CHEAPEST fix: geodesicJacobi_narrowpad_continuousOn ALREADY exports Jacobi
+-- ContinuousOn on the pad [-1/2,3/2] ⊃ [0,1] for ANY seed, so a nonzero-seed reference doubled curve is
+-- pad-continuous and V is constructible. Base state ((q₀,0),(a₀,b₀)) with ARBITRARY seed; std-3. This is
+-- the derivative-at-nonzero-seed datum the finite-basis transfer to ContDiffOn ℝ 2 needs. NOT hCConv.
+import QIQTH.UniformFlowJointSecondFDerivNonzeroSeed
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`

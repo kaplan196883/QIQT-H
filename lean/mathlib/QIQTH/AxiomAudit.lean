@@ -27926,6 +27926,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledFlow_endpoint_joint_snd_hasFDerivAt_exists_atPoint
 #print axioms QIQTH.ExpMap.uniformFlow_joint_secondFDeriv_witness
 
+-- Task D follow-on (plan v8, J4-851): UniformFlowJointSecondFDerivNonzeroSeed. NONZERO-seed version of
+-- the joint SECOND-order Fréchet derivative witness. uniformFlow_joint_secondFDeriv_witness_nonzeroSeed:
+-- ★ with K:=closedBall q₀ 1 and base state Ξ₀:=((q₀,0),(a₀,b₀)) for ARBITRARY (in particular NONZERO)
+-- Jacobi seed (a₀,b₀), the joint SECOND Fréchet derivative of the concrete confined uniform doubled flow
+-- EXISTS with NO carried domain hyp for EVERY curved metric. Closes the "pad-export gap RETURNS one level
+-- up" wall (cp711) via the CHEAPEST fix — geodesicJacobi_narrowpad_continuousOn (D1b, J4-47) ALREADY
+-- exports Jacobi ContinuousOn on the pad [-1/2,3/2] ⊃ [0,1] for ANY seed, so the "extend from open to
+-- closed endpoint" export is not needed at all ([0,1] sits in the pad's interior). The reference doubled
+-- curve W Ξ₀=(tube q₀ 0, Jsel(q₀,0)(a₀,b₀)) is pad-continuous with a GENUINE nonzero Jacobi slot, so V
+-- solves the linearized doubled ODE along it. std-3. This is the derivative-at-nonzero-seed datum the
+-- finite-basis transfer to ContDiffOn ℝ 2 needs and the J4-850 zero-seed witness did NOT supply. HONEST:
+-- pointwise windowed second-derivative EXISTENCE at nonzero seed; NOT doubled ContDiffOn ℝ 1, NOT the
+-- finite-basis transfer to ContDiffOn ℝ 2, NOT IFT, NOT RNC, NOT hCConv. a₁=R/6 CONDITIONAL on
+-- {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlow_joint_secondFDeriv_witness_nonzeroSeed
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
