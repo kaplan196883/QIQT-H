@@ -4471,3 +4471,12 @@ import QIQTH.GeodesicReversalRouteAtPoint
 --   SYMMETRIC Hessian (Clairaut). One order up from J4-857 (three mean-value passes on C³). This is the
 --   near-identity cubic shape the hcomp-reversal sympy gate requires for the O(√ε) cancellation. NOT a₁=R/6.
 import QIQTH.TerminalVelAtCubicRemainder
+-- HCompNearFarSplit (J4-860, Plan v9 Task B STEP 4b): the NEAR/FAR split of hcomp's ∫z at a FIXED
+--   radius ρ, with the FAR half DISCHARGED (exponentially suppressed). `expNegInv_div_le`
+--   (exp(−a/τ)/τ ≤ 1/(e·a) from x·e^{−x}≤e^{−1}); `tailMoment_sliver_uniform_bound` (the off-collar
+--   tail moment ≤ const·exp(−(R²/16)/ε), uniform over τ∈(0,ε]); `tailMoment_sliver_integral_le` (the
+--   far sliver integral ≤ that const·ε, via norm_integral_le_of_norm_le_const_ae — O(ε·exp(−c/ε)),
+--   superpolynomially below O(√ε)); `kPrime_sliver_near_far` (the near/far reduction for hcomp's
+--   per-direction integral: |∫s∫z kPrime(eⱼ)| ≤ nb+fb). CORRECTS the sympy far model (fixed ρ, not √ε).
+--   Near half (nb) + concrete kPrime→envelope far domination remain STEP-4c. NOT a₁=R/6.
+import QIQTH.HCompNearFarSplit

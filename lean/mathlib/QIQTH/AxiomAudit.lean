@@ -28509,4 +28509,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.TerminalVelAtCubicRemainder.terminalVelAt_fderiv_id
 #print axioms QIQTH.TerminalVelAtCubicRemainder.terminalVelAt_cubic_remainder
 
+-- HCompNearFarSplit (J4-860, Plan v9 Task B STEP 4b): the NEAR/FAR split of hcomp's ∫z at a FIXED
+--   radius ρ, FAR half DISCHARGED (exp-suppressed). expNegInv_div_le (exp(−a/τ)/τ ≤ 1/(e·a));
+--   tailMoment_sliver_uniform_bound (off-collar tail moment ≤ const·exp(−(R²/16)/ε), uniform over
+--   τ∈(0,ε]); tailMoment_sliver_integral_le (far sliver integral ≤ const·ε = O(ε·exp(−c/ε)), below
+--   O(√ε)); kPrime_sliver_near_far (near/far reduction for hcomp's per-direction integral). CORRECTS
+--   the sympy far model (fixed ρ, not √ε). Near half + concrete kPrime→envelope far domination = STEP 4c. NOT a₁=R/6.
+#print axioms QIQTH.HCompNearFarSplit.expNegInv_div_le
+#print axioms QIQTH.HCompNearFarSplit.tailMoment_sliver_uniform_bound
+#print axioms QIQTH.HCompNearFarSplit.tailMoment_sliver_integral_le
+#print axioms QIQTH.HCompNearFarSplit.kPrime_sliver_near_far
+
 end QIQTH.AxiomAudit
