@@ -27813,6 +27813,26 @@ namespace QIQTH.AxiomAudit
 -- a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 #print axioms QIQTH.ExpMap.geodesicFlow_joint_hasFDerivAt_exists_atPoint
 
+-- Task B (plan tranquil-stargazing-fox): GeodesicJointFDerivLipschitz. Operator-norm Lipschitz-in-base-point
+-- of the Task-A joint geodesic-flow Fréchet derivative map ξ₀ ↦ L(ξ₀). The two-level Grönwall combination the
+-- plan sketched, from banked engines: (L₁-L₂) ξ = V₁ ξ t - V₂ ξ t is the two-point difference of two Jacobi
+-- fields with the SAME seed ξ along two different reference geodesics Y₁=W ξ₀, Y₂=W ξ₀'; the coefficient-field
+-- separation ‖DF(Y₁ τ)-DF(Y₂ τ)‖ ≤ Lg·e^{Kg}·dist(Y₁ 0,Y₂ 0) comes from the banked
+-- fderiv_geodesicField_twopoint_dist_bound (base-curve Grönwall geodesic_twopoint_gronwall + mean-value
+-- Lipschitz of fderiv(geodesicField)); fed into jacobi_twopoint_diff_bound with the single-field growth bound
+-- jacobi_field_norm_bound (‖V₂ ξ τ‖≤‖ξ‖·e^{Kbd}, homogeneous linear Grönwall) it gives per-seed
+-- ‖V₁ ξ t-V₂ ξ t‖ ≤ Lg·e^{Kg}·e^{Kbd}·e^{Kbd}·dist·‖ξ‖, then opNorm_le_bound concludes. jacobi_field_norm_bound:
+-- single-field homogeneous Grönwall growth. geodesicFlow_joint_fderiv_lipschitz_in_basepoint: abstract op-norm
+-- Lipschitz bound. _compact: discharges Kg/Lg/Kbd from IsCompact S + Convex ℝ S (via the two Lipschitz
+-- producers + geodesicField_fderiv_bddOn_compact), delivering ∃C≥0, ‖L₁-L₂‖≤C·dist(Y₁ 0,Y₂ 0). std-3. HONEST:
+-- operator-norm Lipschitz continuity of the FIRST-order derivative map in ξ₀ — the missing Task-C ContDiffOn-1
+-- ingredient; Y₁/Y₂/V₁/V₂/L₁/L₂ are supplied hypotheses (Task A's data at two nearby base points), NOT yet
+-- wired to uniformFlowExp, NOT ContDiffOn/ContDiffAt, NOT a second-order jet, NOT hCConv. a₁=R/6 remains
+-- CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.jacobi_field_norm_bound
+#print axioms QIQTH.ExpMap.geodesicFlow_joint_fderiv_lipschitz_in_basepoint
+#print axioms QIQTH.ExpMap.geodesicFlow_joint_fderiv_lipschitz_in_basepoint_compact
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's

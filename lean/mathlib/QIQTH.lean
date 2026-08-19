@@ -4088,6 +4088,16 @@ import QIQTH.GeodesicBasepointFrechet
 -- data/coeff-bound/tube-containment are SUPPLIED hypotheses; NOT ContDiffAt/On, NOT wired to uniformFlowExp,
 -- NOT a second-order jet, NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.GeodesicJointFDerivAtPoint
+-- Task B (plan tranquil-stargazing-fox): GeodesicJointFDerivLipschitz — operator-norm Lipschitz-in-base-point
+-- of the Task-A joint geodesic-flow Fréchet derivative map ξ₀ ↦ L(ξ₀). Two-level Grönwall combination of
+-- banked engines: fderiv_geodesicField_twopoint_dist_bound (coefficient-field separation Lg·e^{Kg}·dist via
+-- base-curve Grönwall + mean-value Lipschitz) fed into jacobi_twopoint_diff_bound, plus jacobi_field_norm_bound
+-- (single-field homogeneous growth ‖V₂ ξ τ‖≤‖ξ‖·e^{Kbd}), then opNorm_le_bound. Delivers
+-- geodesicFlow_joint_fderiv_lipschitz_in_basepoint (abstract) + _compact (Kg/Lg/Kbd discharged from
+-- IsCompact+Convex). std-3. HONEST: operator-norm Lipschitz continuity of the FIRST-order derivative map in
+-- ξ₀ — the missing Task-C ContDiffOn-1 ingredient; Y₁/Y₂/V₁/V₂/L₁/L₂ supplied hypotheses (Task A's data at two
+-- base points), NOT yet wired to uniformFlowExp, NOT ContDiffOn, NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.GeodesicJointFDerivLipschitz
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3 — the inverse chart
 -- uniformInverseChart's FIELD-SLOT C³. STALE-PREMISE CORRECTION: the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale — ChartThirdJet (J4-192) already banked the inverse chart's
