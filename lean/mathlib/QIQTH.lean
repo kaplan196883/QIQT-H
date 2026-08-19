@@ -4464,3 +4464,4 @@ import QIQTH.MixedDirectionsFieldHessianEnvelope
 --    VanVleckGatedSpatialSymmetry, MixedDirectionsFieldHessianEnvelope} + hDuhamel/hDConv + honest
 --    facade side-conditions. Original capstone consumed VERBATIM as a black box. NOT a₁=R/6.
 import QIQTH.A1R6CapstoneConditionalOnRNC
+import QIQTH.GeodesicReversalRouteAtPoint

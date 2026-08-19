@@ -28480,4 +28480,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.A1R6CapstoneConditionalOnRNC.hCConv_of_named_hypotheses
 #print axioms QIQTH.A1R6CapstoneConditionalOnRNC.trueKernel_diagonal_a1_eq_R6_residual_N1_conditionalRNC
 
+-- GeodesicReversalRouteAtPoint (J4-858, Plan v9 Task B STEP 1–3 + capstone): the GENERIC-BASE-POINT
+-- x₀ generalization of the geodesic-reversal route. Re-derives, at an ARBITRARY fixed base x₀ ∈ K
+-- (not just the hard-coded centre 0), the base↔eval reversal identity
+--   U z x₀ =ᶠ[𝓝 x₀] − T_{x₀} (U x₀ z)   (baseSlot_eventuallyEq_neg_terminalVel_at),
+-- with T_{x₀} the base-x₀ terminal velocity (terminalVelAt), its C² at 0 discharged UNCONDITIONALLY
+-- via the SAME homogeneity route (terminalVelAt_contDiffAt_two, from the base-generic C⁴ position
+-- endpoint), the base-x₀ chart right inverse (chartAt_rightInverse), and the capstone base-slot C²
+-- at the generic base (baseSlot_contDiffAt_two_at). std-3. NOT a₁=R/6; new reusable infrastructure.
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.terminalVelAt_norm_le
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.uniformFlow_scale_position_at
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.terminalVelAt_apply_eq_fderiv_diag
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.terminalVelAt_contDiffAt_two
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.chartAt_rightInverse
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.chartField_centerValue_at
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.baseSlot_eventuallyEq_neg_terminalVel_at
+#print axioms QIQTH.GeodesicReversalRouteAtPoint.baseSlot_contDiffAt_two_at
+
 end QIQTH.AxiomAudit
