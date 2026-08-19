@@ -28598,4 +28598,35 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetXUniformBound.witnessFieldHessian_hFd_ciSup_of_compactGate
 #print axioms QIQTH.ChartJetXUniformBound.xuniform_of_compactGate_nonvacuous
 
+-- J4-866: ChartJetXUniformBoundClosed — the WEAKEST-FORM hdom reduction for hFd. bddAbove_range_of_
+-- bddAbove_image_offClosure: ≤0 off closure + BddAbove image ⟹ BddAbove range (the le_ciSup shape).
+-- bddAbove_fieldHessian_of_{continuousOn_compact,continuous_dominator}: BddAbove image from ContinuousOn
+-- on the compact closure / from a J4-865 continuous dominator (so the minimal input ⟸ both standard
+-- forms). witnessFieldHessian_hFd_ciSup_of_bddAbove: ★★★ the EXACT hFd field (BF:=⨆x‖fderiv‖) reduced
+-- a.e. to the SINGLE minimal input — a.e. z BddAbove of the field-Hessian norm on the compact gate
+-- closure. _of_compactGate_continuousOn: same hFd from {compact gate, ContinuousOn field-Hessian norm}.
+-- PART-1 VERDICT: HARD indicator gate ⟹ case (b) (gated field-Hessian NOT globally continuous; boundary
+-- is the residual, now the minimal BddAbove input). std-3. NOT a₁=R/6.
+#print axioms QIQTH.ChartJetXUniformBoundClosed.bddAbove_range_of_bddAbove_image_offClosure
+#print axioms QIQTH.ChartJetXUniformBoundClosed.bddAbove_fieldHessian_of_continuousOn_compact
+#print axioms QIQTH.ChartJetXUniformBoundClosed.bddAbove_fieldHessian_of_continuous_dominator
+#print axioms QIQTH.ChartJetXUniformBoundClosed.witnessFieldHessian_hFd_ciSup_of_bddAbove
+#print axioms QIQTH.ChartJetXUniformBoundClosed.witnessFieldHessian_hFd_ciSup_of_compactGate_continuousOn
+#print axioms QIQTH.ChartJetXUniformBoundClosed.hFd_bddAbove_nonvacuous
+
+-- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
+-- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
+-- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT
+-- BF=⨆x‖fderiv‖ is 0 off K. productEnvelope_support_subset_K: ∫z BL·BF has COMPACT support in K.
+-- hzmass_of_gaussian_product_envelope: ★ hzmass ∫z BL·BF≤C(t−s)⁻¹ REDUCES via gaussDdim_mass_one to a
+-- pointwise Gaussian-in-z product envelope BL·BF≤C(t−s)⁻¹·gaussDdim(t−s). PART-2 VERDICT: the explicit BF
+-- gives compact support + the clean mass-one target, but the pointwise Gaussian envelope on ⨆x‖fderiv‖
+-- itself remains the open estimate (same difficulty class). std-3. NOT a₁=R/6.
+#print axioms QIQTH.HZMassIntegrabilityAttempt.witnessFieldDeriv_eqZero_of_base_notMem_K
+#print axioms QIQTH.HZMassIntegrabilityAttempt.witnessFieldHessian_fderiv_eqZero_of_base_notMem_K
+#print axioms QIQTH.HZMassIntegrabilityAttempt.BF_ciSup_eqZero_of_base_notMem_K
+#print axioms QIQTH.HZMassIntegrabilityAttempt.productEnvelope_support_subset_K
+#print axioms QIQTH.HZMassIntegrabilityAttempt.hzmass_of_gaussian_product_envelope
+#print axioms QIQTH.HZMassIntegrabilityAttempt.hzmass_gaussian_reduction_nonvacuous
+
 end QIQTH.AxiomAudit

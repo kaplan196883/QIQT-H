@@ -4517,3 +4517,21 @@ import QIQTH.WitnessFieldHessianXUniform
 -- reduced a.e. to {compact gate, a.e. continuous-dominated field-Hessian on the gate} — a MUCH weaker
 -- input than J4-864's Gaussian×poly x-moment estimate. std-3. NOT a₁=R/6.
 import QIQTH.ChartJetXUniformBound
+
+-- ChartJetXUniformBoundClosed: J4-866 — the WEAKEST-FORM hdom reduction for hFd. Refines J4-865's
+-- continuous-dominator hdom to its minimal honest form: a.e. z, BddAbove of the field-Hessian norm on
+-- the compact gate closure. witnessFieldHessian_hFd_ciSup_of_bddAbove = the EXACT hFd field (BF:=⨆x
+-- ‖fderiv‖) from just BddAbove(image); _of_compactGate_continuousOn = same from {compact, ContinuousOn}.
+-- PART-1 VERDICT: gate is a HARD indicator gate, so case (b) — gated field-Hessian is NOT globally
+-- continuous (equals ungated only on the OPEN interior); boundary continuity is the honest residual,
+-- now phrased as the minimal BddAbove input (no dominator to guess). std-3. NOT a₁=R/6.
+import QIQTH.ChartJetXUniformBoundClosed
+
+-- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
+-- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
+-- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;
+-- (2) hzmass_of_gaussian_product_envelope — hzmass ∫z BL·BF≤C(t−s)⁻¹ REDUCES via gaussDdim_mass_one to
+-- a pointwise Gaussian-in-z product envelope BL·BF≤C(t−s)⁻¹·gaussDdim(t−s). HONEST RESIDUAL: the
+-- pointwise Gaussian envelope on ⨆x‖fderiv‖ itself is NOT simplified (same difficulty class). std-3.
+-- NOT a₁=R/6.
+import QIQTH.HZMassIntegrabilityAttempt
