@@ -17511,6 +17511,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetHessianMixed.secondFieldPd_prod_stronglyMeasurable
 #print axioms QIQTH.ChartJetHessianMixed.tripleHEmeas_concrete
 
+-- ★★ J4-862 (WitnessMixedHessianMagnitudeBound.lean, ns QIQTH.WitnessMixedHessianMagnitudeBound;
+-- (b1) of the MixedDirectionsFieldHessianEnvelope decomposition — indep build-verified): the
+-- MIXED-INDEX (∂ᵢ∂ⱼ, i≠j) pointwise GATE ENVELOPE — the off-diagonal companion of the diagonal
+-- SecondDerivEnvelope.witnessFieldDeriv2_gate_abs_le. Pure triangle inequality on the banked mixed
+-- value formula ChartJetHessianMixed.witnessMixed_gate_eq (4 terms — the diagonal 2·(G·gr)·∂ᵢA splits
+-- into (G·grⱼ)·∂ᵢA + (G·grᵢ)·∂ⱼA): from |hsMixed|≤Bs2, |grⱼ|≤Bsj, |grᵢ|≤Bsi, |A|≤Ba, |∂ᵢA|≤Bdi,
+-- |∂ⱼA|≤Bdj, |∂ᵢ∂ⱼA|≤Bdd ⟹ |∂ᵢ∂ⱼH| ≤ G_τ(Wzp)·(Bs2·Ba + Bsj·Bdi + Bsi·Bdj + Bdd). The 1/τ²/1/τ
+-- singular powers sit INSIDE the carried scalar bounds. _tight = the non-vacuity witness (tightest
+-- abs-value constants, side-conditions le_refl). Feeds the (b2) CLM operator-norm combinator. std-3
+-- both. NOT a₁ = R/6 — still conditional.
+#print axioms QIQTH.WitnessMixedHessianMagnitudeBound.witnessMixed_gate_abs_le
+#print axioms QIQTH.WitnessMixedHessianMagnitudeBound.witnessMixed_gate_abs_le_tight
+
 -- ★★★ J4-219 (HD1CLMLift.lean, ns QIQTH.HD1CLMLift; the hD1 CLM lift; indep
 -- build-verified): ★ THE hD1 CLM-LIFT WALL IS CLOSED ★. The honest diagnosis: NOT a
 -- wrong scalar fact — hD1_from_data at gfull := gcoef i gives exactly the per-coordinate

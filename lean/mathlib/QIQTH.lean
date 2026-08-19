@@ -414,6 +414,7 @@ import QIQTH.HEmeasBorelAudit
 import QIQTH.GatedDerivRepProduct
 import QIQTH.GatedTauDerivRep
 import QIQTH.ChartJetHessianMixed
+import QIQTH.WitnessMixedHessianMagnitudeBound
 import QIQTH.HD1CLMLift
 import QIQTH.DaLimLUWallRecon
 import QIQTH.ETailRateBound
