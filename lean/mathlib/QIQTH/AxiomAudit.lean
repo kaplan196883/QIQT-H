@@ -28629,4 +28629,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HZMassIntegrabilityAttempt.hzmass_of_gaussian_product_envelope
 #print axioms QIQTH.HZMassIntegrabilityAttempt.hzmass_gaussian_reduction_nonvacuous
 
+-- J4-868: BFGaussianEnvelopeClosed — the GAUSSIAN-PEAK verdict for BF + the uniform-in-z NO-GO.
+-- gaussDdim_peak_ratio: gaussDdim t 0=exp((∑(v k)²)/(4t))·gaussDdim t v (exact peak/point ratio).
+-- fieldHessian_peak_dominator_of_chart_dominator: the PEAK step (chart Gaussian→z-uniform peak, Poly≥0).
+-- witnessFieldHessian_hFd_of_peak_dominator: ★ the hFd ⨆-reduction via J4-866 with the z-uniform-PEAK
+-- dominator. bf_no_uniform_gaussian_decay: ★ ∀C ∃z, C·gaussDdim t z<gaussDdim t 0 — the z-decaying
+-- uniform envelope BF≤C·gaussDdim(t−s) z is UNAVAILABLE (vacuity trap avoided). std-3 ×6. NOT a₁=R/6.
+#print axioms QIQTH.BFGaussianEnvelopeClosed.gaussDdim_peak_ratio
+#print axioms QIQTH.BFGaussianEnvelopeClosed.fieldHessian_peak_dominator_of_chart_dominator
+#print axioms QIQTH.BFGaussianEnvelopeClosed.witnessFieldHessian_hFd_of_peak_dominator
+#print axioms QIQTH.BFGaussianEnvelopeClosed.bf_no_uniform_gaussian_decay
+#print axioms QIQTH.BFGaussianEnvelopeClosed.gaussDdim_peak_ratio_at_zero
+#print axioms QIQTH.BFGaussianEnvelopeClosed.hFd_peak_nonvacuous
+
 end QIQTH.AxiomAudit

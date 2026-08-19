@@ -4535,3 +4535,16 @@ import QIQTH.ChartJetXUniformBoundClosed
 -- pointwise Gaussian envelope on ⨆x‖fderiv‖ itself is NOT simplified (same difficulty class). std-3.
 -- NOT a₁=R/6.
 import QIQTH.HZMassIntegrabilityAttempt
+
+-- BFGaussianEnvelopeClosed: J4-868 — the GAUSSIAN-PEAK verdict for BF, closing the compact-gate-sup loop
+-- of hFd AND resolving the uniform-in-z subtlety of the step-4 target BF≤C·gaussDdim(t−s) z. The gate
+-- confines the chart coord uniformInverseChart z p to a z-INDEPENDENT ball, so the only z-uniform bound
+-- on the entrywise Gaussian factor gaussDdim τ(Wzp) is its PEAK gaussDdim τ 0 (NO z-decay).
+-- gaussDdim_peak_ratio: gaussDdim t 0 = exp((∑(v k)²)/(4t))·gaussDdim t v (exact ratio); the prefactor
+-- →∞ as ‖v‖→∞. bf_no_uniform_gaussian_decay: ∀C ∃z, C·gaussDdim t z<gaussDdim t 0 — the z-decaying
+-- uniform envelope is UNAVAILABLE (asserting it = unsatisfiable vacuity trap at large z). POSITIVE:
+-- fieldHessian_peak_dominator_of_chart_dominator (peak step) + witnessFieldHessian_hFd_of_peak_dominator
+-- (hFd ⨆-reduction via J4-866 with the z-uniform-PEAK dominator — hbdd needs NO z-decay). CONSEQUENCE:
+-- hzmass must route through the COMPACT BASE SUPPORT of BL·BF (J4-867), not a z-envelope. std-3 ×6.
+-- NOT a₁=R/6.
+import QIQTH.BFGaussianEnvelopeClosed
