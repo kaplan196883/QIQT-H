@@ -28497,4 +28497,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GeodesicReversalRouteAtPoint.baseSlot_eventuallyEq_neg_terminalVel_at
 #print axioms QIQTH.GeodesicReversalRouteAtPoint.baseSlot_contDiffAt_two_at
 
+-- TerminalVelAtCubicRemainder (J4-859, Plan v9 Task B STEP 4a): the near-identity CUBIC-REMAINDER
+--   (third-order Taylor) structure of the base-`x₀` terminal-velocity map — one order up from J4-857.
+--   `terminalVelAt x₀ v = v + (1/2)·B(v,v) + R(v)`, `‖R(v)‖ ≤ C‖v‖³` windowed `‖v‖<r`, `T(0)=0`,
+--   `DT(0)=Id`, `B` symmetric (Clairaut). The exact `T_x=id+O(‖v‖³)`-up-to-quadratic near-identity
+--   shape the hcomp-reversal feasibility gate needs (the quadratic `(1/2)B(v,v)` is homogeneous
+--   degree two, so its z-moment is an odd form that vanishes; the surviving even part is degree four,
+--   sympy-reconfirmed alpha=1/2 ⟹ O(ε^{3/2}) ≤ O(√ε)). NOT a₁=R/6.
+#print axioms QIQTH.TerminalVelAtCubicRemainder.terminalVelAt_contDiffAt_three
+#print axioms QIQTH.TerminalVelAtCubicRemainder.terminalVelAt_value_zero
+#print axioms QIQTH.TerminalVelAtCubicRemainder.terminalVelAt_fderiv_id
+#print axioms QIQTH.TerminalVelAtCubicRemainder.terminalVelAt_cubic_remainder
+
 end QIQTH.AxiomAudit

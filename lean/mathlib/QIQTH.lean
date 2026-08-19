@@ -4465,3 +4465,9 @@ import QIQTH.MixedDirectionsFieldHessianEnvelope
 --    facade side-conditions. Original capstone consumed VERBATIM as a black box. NOT a₁=R/6.
 import QIQTH.A1R6CapstoneConditionalOnRNC
 import QIQTH.GeodesicReversalRouteAtPoint
+-- TerminalVelAtCubicRemainder (J4-859, Plan v9 Task B STEP 4a): the GENUINE quantitative CUBIC-REMAINDER
+--   (third-order Taylor) bound on the base-`x₀` terminal-velocity map — `terminalVelAt x₀ v = v +
+--   (1/2)·B(v,v) + R(v)`, `‖R(v)‖ ≤ C‖v‖³` (windowed `‖v‖<r`), with `T(0)=0`, `DT(0)=Id`, `B` the
+--   SYMMETRIC Hessian (Clairaut). One order up from J4-857 (three mean-value passes on C³). This is the
+--   near-identity cubic shape the hcomp-reversal sympy gate requires for the O(√ε) cancellation. NOT a₁=R/6.
+import QIQTH.TerminalVelAtCubicRemainder
