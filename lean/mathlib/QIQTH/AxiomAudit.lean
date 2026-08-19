@@ -28542,4 +28542,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryAssembly.chartReplace_sliver_uniform_bound
 #print axioms QIQTH.HCompNearCarryAssembly.chartReplace_sliver_integral_le
 
+-- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM operator-norm combinator for the field-Hessian
+-- CLM fderiv(∂ᵢH) (the object FderivBulkConcrete.kPrime carries), assembling the banked per-index scalar
+-- Hessian bounds into the operator-norm bound MixedDirectionsFieldHessianEnvelope.hFd needs.
+-- opNorm_fderiv_le_sum_pd = generic sup-norm⇒ℓ¹ fderiv bound from pd bounds (banked opNorm_le_sum_apply_
+-- single + pd_eq_fderiv). witnessFieldHessian_opNorm_le_sum = specialised per-x combinator.
+-- component_diag_eq/offdiag_eq = the two rfl bridge identities routing each bbⱼ to the banked diagonal
+-- (witnessFieldDeriv2_gate_abs_le) / mixed (witnessMixed_gate_abs_le, index roles (i,j)↦(j,i)) envelope.
+-- opNorm_le_piecewise = THE assembly (one diagonal + n−1 off-diagonal ⟹ ‖fderiv(∂ᵢH)‖ ≤ Σⱼ...).
+-- opNorm_xuniform = the x-uniform hFd shape ∀x,‖fderiv(∂ᵢH) x‖≤Σⱼ bb j (BF s z:=Σⱼ bb j, τ:=t−s).
+-- opNorm_le_sum_tight = non-vacuity witness (tightest bounds need only differentiability). std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.opNorm_fderiv_le_sum_pd
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_opNorm_le_sum
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_component_diag_eq
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_component_offdiag_eq
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_component_offdiag_le
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_opNorm_le_piecewise
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_opNorm_xuniform
+#print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_opNorm_le_sum_tight
+
 end QIQTH.AxiomAudit

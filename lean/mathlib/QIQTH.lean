@@ -4489,3 +4489,11 @@ import QIQTH.HCompNearFarSplit
 --   O(ε^{(k+3)/2}); k=0 ⟹ O(ε^{3/2}), below O(√ε); via norm_integral_le_of_norm_le_const_ae).
 --   The near ANALYTIC rate; concrete kPrime→cancellation identification remains STEP 4c. NOT a₁=R/6.
 import QIQTH.HCompNearCarryAssembly
+-- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM OPERATOR-NORM combinator assembling the
+-- per-index (diagonal + off-diagonal) scalar Hessian bounds into an operator-norm bound on the field-
+-- Hessian CLM fderiv(∂ᵢH) that kPrime carries — the exact object MixedDirectionsFieldHessianEnvelope.hFd
+-- (J4-843) needs. On Point n=Fin n→ℝ (SUP norm) the operator norm is the ℓ¹ sum (opNorm_fderiv_le_sum_pd,
+-- via banked opNorm_le_sum_apply_single + pd_eq_fderiv bridge); witnessFieldHessian_opNorm_le_piecewise
+-- combines one diagonal (witnessFieldDeriv2_gate_abs_le) + n−1 off-diagonal (witnessMixed_gate_abs_le,
+-- J4-862) bounds; witnessFieldHessian_opNorm_xuniform = the x-uniform hFd shape. std-3. NOT a₁=R/6.
+import QIQTH.MixedFieldHessianOpNormCombinator
