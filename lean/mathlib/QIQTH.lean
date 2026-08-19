@@ -4111,6 +4111,27 @@ import QIQTH.GeodesicJointFDerivLipschitz
 -- Jacobi-endpoint CLM; NOT tied to uniformFlowExp's own fderiv (Task A's blocked content), NOT ContDiffOn,
 -- NOT a second-order jet, NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 import QIQTH.UniformFlowJointFDerivLipschitzConcrete
+-- Task A LOCAL (plan v8-redirect, J4-848): GeodesicJointFDerivAtPointLocal — the vacuity-free replacement
+-- for the global Task A. The global geodesicFlow_joint_hasFDerivAt_exists_atPoint (and its origin core in
+-- GeodesicBasepointFrechet) was VACUOUS for curved fields (J4-847): ∀ξ-quantified hmem+hIC force S=univ, on
+-- which the quadratic-in-velocity geodesicField is NOT Lipschitz. FIX: restrict hWode/hIC/hmem to
+-- ξ∈Metric.ball ξ₀ r (r>0), keeping the Jacobi data hVode/hV0 global; then S need only contain the bounded
+-- ball ball(W ξ₀ 0, r), genuinely satisfiable for curved geodesicField on a compact S. Exposes
+-- geodesicFlow_joint_hasFDerivAt(_exists)(_atPoint)_local: ∃L,(∀ξ,Lξ=Vξt)∧HasFDerivAt(fun ξ=>W ξ t)L ξ₀.
+-- Still POINTWISE HasFDerivAt (not ContDiffAt); non-vacuity verified concretely below. Not hCConv.
+import QIQTH.GeodesicJointFDerivAtPointLocal
+-- Task A LOCAL CONCRETE (plan v8-redirect, J4-848): UniformFlowJointFDerivAtPointConcrete — instantiates the
+-- LOCAL Task A for the actual curved uniformFlowTube, discharging EVERY local hypothesis from confinement.
+-- uniformFlow_joint_hasFDerivAt_atBasepoint: for W ξ:=uniformFlowTube g gi hC hK ξ.1 ξ.2, base point ξ₀,
+-- radius r>0 with the two domain side-conditions (ball ξ₀ r ⊆ K×ball(0,ρ_K)), builds Jacobi family V + CLM L
+-- and HasFDerivAt(fun ξ=>uniformFlowTube … ξ.1 ξ.2 t)L ξ₀; S=closedBall((ξ₀.1,0),C₀ρ_K+r) CONSTRUCTED.
+-- uniformFlow_joint_expEndpoint_hasFDerivAt_atBasepoint: position projection at t=1 = HasFDerivAt(fun ξ=>
+-- uniformFlowExp g gi hC hK ξ.1 ξ.2)L ξ₀ — L IS uniformFlowExp's OWN fderiv (the Task-A-blocked piece).
+-- uniformFlow_joint_hasFDerivAt_witness: ★ DECISIVE NON-VACUITY — K:=closedBall q₀ 1, ξ₀:=(q₀,0), r:=min 1 ρ_K
+-- discharges the domain conditions internally, so the concrete curved joint fderiv exists with NO carried
+-- domain hypothesis, for EVERY (curved) g,gi. Certifies the local Task A is satisfiable at a real curved field.
+-- NOT yet ContDiffOn ℝ 1, NOT a second-order jet, NOT hCConv. a₁=R/6 remains CONDITIONAL.
+import QIQTH.UniformFlowJointFDerivAtPointConcrete
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3 — the inverse chart
 -- uniformInverseChart's FIELD-SLOT C³. STALE-PREMISE CORRECTION: the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale — ChartThirdJet (J4-192) already banked the inverse chart's
