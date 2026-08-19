@@ -27887,6 +27887,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_joint_expEndpoint_hasFDerivAt_atBasepoint
 #print axioms QIQTH.ExpMap.uniformFlow_joint_hasFDerivAt_witness
 
+-- Task C JOINT C¹ (plan v8-redirect, J4-849): UniformFlowJointContDiffOneConcrete. The plan's ORIGINAL Task C goal,
+-- now REACHED in the curved-admissible case: the concrete confined flow endpoint fun ξ=>uniformFlowTube g gi hC hK
+-- ξ.1 ξ.2 t is jointly ContDiffOn ℝ 1 on Metric.ball ξ₀ r — the first NEIGHBORHOOD-quality (not merely pointwise)
+-- joint C¹ regularity of the constructive geodesic flow. METHOD (pointwise derivative + Lipschitz continuity of it,
+-- over a FIXED control set): the single S:=closedBall((ξ₀.1,0),C₀ρ_K+r) contains every confined tube whose base
+-- lies in ball ξ₀ r (confinement+triangle), so the Lipschitz moduli Kg/Lg/Kbd of geodesicField and its derivative
+-- on S are FIXED, making the Task-B bound ‖L(x)−L(y)‖≤C·dist(x,y) UNIFORM. Then: DifferentiableOn from the LOCAL
+-- Task A pointwise derivative at each base point (sub-ball ball x (r−dist x ξ₀)); ContinuousOn(fderiv f) since
+-- fderiv f x=L(x) (HasFDerivAt.fderiv) and x↦L(x) is C-Lipschitz by geodesicFlow_joint_fderiv_lipschitz_in_basepoint
+-- fed the per-base Jacobi families V_x/V_y along the two reference tubes; assemble via contDiffOn_succ_iff_fderiv_of_
+-- isOpen(isOpen_ball)+contDiffOn_zero. uniformFlow_joint_contDiffOn_one_witness: ★ K:=closedBall q₀ 1, ξ₀:=(q₀,0),
+-- r:=min 1 ρ_K discharges the domain conditions INTERNALLY, so joint C¹ holds on a genuine nbhd of (q₀,0) with NO
+-- carried domain hypothesis, for EVERY curved g,gi. std-3. HONEST: joint C¹ (neighborhood-quality) of the concrete
+-- flow endpoint; NOT a 2nd-order jet (Task D), NOT the IFT inverse (E/F), NOT the RNC hypotheses (G), NOT hCConv.
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_one
+#print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_one_witness
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's

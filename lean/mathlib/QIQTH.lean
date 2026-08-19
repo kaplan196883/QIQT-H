@@ -4132,6 +4132,17 @@ import QIQTH.GeodesicJointFDerivAtPointLocal
 -- domain hypothesis, for EVERY (curved) g,gi. Certifies the local Task A is satisfiable at a real curved field.
 -- NOT yet ContDiffOn ℝ 1, NOT a second-order jet, NOT hCConv. a₁=R/6 remains CONDITIONAL.
 import QIQTH.UniformFlowJointFDerivAtPointConcrete
+-- Task C JOINT C¹ (plan v8-redirect, J4-849): UniformFlowJointContDiffOneConcrete — the plan's ORIGINAL Task C
+-- goal, now REACHED (curved-admissible): the concrete flow endpoint fun ξ=>uniformFlowTube g gi hC hK ξ.1 ξ.2 t
+-- is jointly ContDiffOn ℝ 1 on Metric.ball ξ₀ r. METHOD: pointwise Fréchet derivative at each base point (LOCAL
+-- Task A on the sub-ball) + Lipschitz continuity of the derivative map ξ↦fderiv f ξ=L(ξ) via Task B abstract
+-- (geodesicFlow_joint_fderiv_lipschitz_in_basepoint) over a FIXED control set S=closedBall((ξ₀.1,0),C₀ρ_K+r)
+-- containing every confined tube with base in ball ξ₀ r — so the moduli Kg/Lg/Kbd are UNIFORM, giving a uniform
+-- Lipschitz constant C=Lg·e^Kg·e^{2Kbd}; then contDiffOn_succ_iff_fderiv_of_isOpen (isOpen_ball)+contDiffOn_zero.
+-- uniformFlow_joint_contDiffOn_one_witness: ★ K:=closedBall q₀ 1, ξ₀:=(q₀,0), r:=min 1 ρ_K discharges the domain
+-- conditions internally — joint C¹ on a genuine nbhd of (q₀,0) for EVERY curved g,gi. NOT a 2nd-order jet (Task D),
+-- NOT the IFT inverse (E/F), NOT the RNC hypotheses (G), NOT hCConv. a₁=R/6 remains CONDITIONAL.
+import QIQTH.UniformFlowJointContDiffOneConcrete
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3 — the inverse chart
 -- uniformInverseChart's FIELD-SLOT C³. STALE-PREMISE CORRECTION: the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale — ChartThirdJet (J4-192) already banked the inverse chart's
