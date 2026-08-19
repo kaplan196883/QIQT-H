@@ -28001,6 +28001,23 @@ namespace QIQTH.AxiomAudit
 -- reconcile (Task F), NOT RNC discharge (Task G), NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 #print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_two_witness
 
+-- Task E TARGET (plan v8, J4-855): UniformFlowCoherentJointChart. The genuinely COHERENT jointly-ContDiffAt ℝ 2
+-- geodesic exp INVERSE chart, built ONCE via Mathlib's IFT (ContDiffAt.to_localInverse) on the augmented map
+-- G(q,v)=(q, uniformFlowExp g gi hC hK q v). uniformFlow_coherent_joint_chart: ★ ∃ chartCoherent : Point n →
+-- Point n → Point n, (fun ξ => chartCoherent ξ.1 ξ.2) ContDiffAt ℝ 2 at (q₀,q₀) ∧ chartCoherent q₀ q₀ = 0 ∧
+-- (∀ᶠ ξ in 𝓝 (q₀,q₀), uniformFlowExp q (chartCoherent q p) = p) — the coherent inverse-chart property near
+-- the diagonal, NO per-point Classical.choose. METHOD: invertibility datum D G_(q₀,0)(h,w)=(h,h+w) — at zero
+-- velocity the reference geodesic is CONSTANT (uniformFlowExp_zero), so both partials are the identity:
+-- D_v exp(q₀,0)=id (uniformFlowExp_fderiv_near_id_quant's C_D·‖v‖ bound EXACT at v=0), D_q exp(·,0)(q₀)=id
+-- (q↦exp q 0 = q near q₀). The joint L (uniformFlow_joint_expEndpoint_hasFDerivAt_atBasepoint) is identified
+-- with (h,w)↦h+w by restricting to each slot via inclusions + HasFDerivAt.unique; G'=(h,w)↦(h,h+w) is a
+-- ContinuousLinearEquiv (inverse (a,b)↦(a,b-a), equivOfInverse); Task-D's joint ContDiffOn ℝ 2 upgrades to
+-- ContDiffAt ℝ 2 G (q₀,0); ContDiffAt.to_localInverse delivers the coherent jointly-ContDiffAt ℝ 2 inverse at
+-- G(q₀,0)=(q₀,q₀); the inverse-chart identity + q-slot block structure from the local homeomorphism's eventual
+-- right inverse. std-3. NOT uniformInverseChart reconcile (Task F), NOT RNC discharge (Task G), NOT hCConv.
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlow_coherent_joint_chart
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's

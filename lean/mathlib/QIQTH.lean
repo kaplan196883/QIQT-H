@@ -4274,6 +4274,15 @@ import QIQTH.UniformFlowDoubledJointContDiffOneConcrete
 -- std-3. CLOSES Task D (the plan's single hardest task). NOT IFT (Task E), NOT uniformInverseChart reconcile
 -- (Task F), NOT RNC discharge (Task G), NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.UniformFlowJointContDiffTwoConcrete
+-- Task E TARGET (plan v8, J4-855): UniformFlowCoherentJointChart — the genuinely COHERENT jointly-ContDiffAt
+-- ℝ 2 geodesic exp INVERSE chart, built ONCE from Mathlib's IFT (ContDiffAt.to_localInverse) applied to the
+-- augmented map G(q,v)=(q, uniformFlowExp g gi hC hK q v). uniformFlow_coherent_joint_chart: ★ ∃ chartCoherent,
+-- (fun ξ => chartCoherent ξ.1 ξ.2) is ContDiffAt ℝ 2 at (q₀,q₀), chartCoherent q₀ q₀ = 0, and eventually
+-- uniformFlowExp q (chartCoherent q p) = p near (q₀,q₀) — the coherent inverse-chart property, NO per-point
+-- Classical.choose. Invertibility datum D G_(q₀,0)(h,w)=(h,h+w) from the two identity partials (D_v exp=id via
+-- uniformFlowExp_fderiv_near_id_quant exact at v=0; D_q exp(·,0)=id via uniformFlowExp_zero). std-3. NOT
+-- uniformInverseChart reconcile (Task F), NOT RNC discharge (Task G), NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.UniformFlowCoherentJointChart
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`
