@@ -27905,6 +27905,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_one
 #print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_one_witness
 
+-- Task D (plan v8, J4-850): the JOINT SECOND-order Fréchet derivative — one order up from Task C.
+-- GeodesicJointSecondFDerivAtPointLocal: the base-point-Ξ₀ version of the doubled second-order core
+-- (doubledFlow_endpoint_joint_hasFDerivAt_exists), hyps quantified over the BOUNDED window ‖Ξ-Ξ₀‖≤σ,
+-- delivering ∃L,(∀Ξ,LΞ=VΞt)∧HasFDerivAt(fun Ξ=>W Ξ t)L Ξ₀. ⚠CORRECTS cp708: the doubled second-order
+-- theorem is ALREADY ‖Ξ‖≤σ-windowed (NOT ∀Ξ), so it does NOT inherit the base-level J4-847 global-∀ξ
+-- vacuity — it IS satisfiable at curved fields. Abstract translation of the base-0 windowed core (shifted
+-- family W̃ η:=W(η+Ξ₀) + translation composition), mirroring geodesicFlow_joint_hasFDerivAt_exists_atPoint_
+-- local one order up. UniformFlowJointSecondFDerivConcrete.uniformFlow_joint_secondFDeriv_witness: ★ the
+-- DECISIVE non-vacuity WITNESS — with K:=closedBall q₀ 1, base state Ξ₀:=((q₀,0),(0,0)), the joint SECOND
+-- Fréchet derivative of the concrete confined uniform doubled flow EXISTS with NO carried domain hyp for
+-- EVERY curved metric. The ZERO-REFERENCE-SEED construction (reference Jacobi slot = literal 0 field,
+-- genuinely the seed-0 Jacobi, pad-continuous) dodges the pad-continuity EXPORT gap that blocks a nonzero
+-- reference seed; the perturbed family W Ξ=(tube Ξ.1, Jbar Ξ.1 Ξ.2) still perturbs the FULL doubled IC, so
+-- L is a genuine full CLM. Second-order analogue of the J4-848/cp709 non-vacuity certificate. std-3 ×3.
+-- HONEST: derivative EXISTENCE at the zero-seed base state; NOT joint ContDiffOn ℝ 1 of the doubled flow,
+-- NOT the finite-basis transfer to ContDiffOn ℝ 2, NOT the IFT inverse, NOT the RNC discharge, NOT hCConv.
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.doubledFlow_endpoint_joint_hasFDerivAt_exists_atPoint
+#print axioms QIQTH.ExpMap.doubledFlow_endpoint_joint_snd_hasFDerivAt_exists_atPoint
+#print axioms QIQTH.ExpMap.uniformFlow_joint_secondFDeriv_witness
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's

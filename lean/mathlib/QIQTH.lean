@@ -4221,6 +4221,18 @@ import QIQTH.WitnessTranspositionSliceLipschitz
 -- mirroring the velocity-only doubling climb on the combined base+velocity space. Abstract joint
 -- second-order object; does NOT wire to the concrete .choose flow nor close hCConv. std-3.
 import QIQTH.GeodesicJointSecondFDeriv
+-- Task D (plan v8, J4-850): GeodesicJointSecondFDerivAtPointLocal — the JOINT SECOND-order Fréchet
+-- derivative of the geodesic flow at an ARBITRARY doubled base point Ξ₀, BOUNDED-WINDOW `‖Ξ-Ξ₀‖≤σ` scope
+-- (base-point generalization of the doubled second-order core). Also CORRECTS the cp708 worry: the doubled
+-- second-order theorem is already `‖Ξ‖≤σ`-windowed, so it does NOT inherit the base-level global-∀ξ vacuity.
+-- Abstract translation; std-3. NOT ContDiffOn, NOT hCConv.
+import QIQTH.GeodesicJointSecondFDerivAtPointLocal
+-- Task D concrete non-vacuity (plan v8, J4-850): UniformFlowJointSecondFDerivConcrete — the DECISIVE
+-- non-vacuity WITNESS: the joint SECOND-order Fréchet derivative of the concrete confined uniform doubled
+-- flow genuinely EXISTS at the zero-Jacobi-seed base state ((q₀,0),(0,0)) for EVERY curved metric (the
+-- zero-reference-seed construction dodges the pad-continuity export gap). Second-order analogue of the
+-- J4-848 non-vacuity certificate; std-3. NOT ContDiffOn 2 assembly, NOT hCConv.
+import QIQTH.UniformFlowJointSecondFDerivConcrete
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`
