@@ -4240,6 +4240,14 @@ import QIQTH.UniformFlowJointSecondFDerivConcrete
 -- pad-continuous and V is constructible. Base state ((q₀,0),(a₀,b₀)) with ARBITRARY seed; std-3. This is
 -- the derivative-at-nonzero-seed datum the finite-basis transfer to ContDiffOn ℝ 2 needs. NOT hCConv.
 import QIQTH.UniformFlowJointSecondFDerivNonzeroSeed
+-- Task D step (a) (plan v8, J4-852): GeodesicJointSecondFDerivLipschitz — the "doubled Task B":
+-- operator-norm Lipschitz-in-base-point of the JOINT SECOND-order geodesic-flow Fréchet derivative map
+-- `Ξ₀ ↦ L(Ξ₀)` on the doubled phase space. `doubledFlow_joint_fderiv_lipschitz_in_basepoint`(`_compact`)
+-- mirror the first-order `geodesicFlow_joint_fderiv_lipschitz_in_basepoint`(`_compact`) exactly, one
+-- order up: FIELD-AGNOSTIC reuse of jacobi_field_norm_bound + linODE_twopoint_diff_bound, plus the new
+-- doubled coefficient-Lipschitz lemmas (fderiv_doubledField_twopoint_dist_bound via the ABSTRACT
+-- autonomous_twopoint_gronwall + doubledField_fderiv{,2}_bddOn_compact). std-3. NOT hCConv, NOT a₁=R/6.
+import QIQTH.GeodesicJointSecondFDerivLipschitz
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`

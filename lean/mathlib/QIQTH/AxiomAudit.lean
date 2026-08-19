@@ -27942,6 +27942,28 @@ namespace QIQTH.AxiomAudit
 -- {hDuhamel, hDConv, hCConv}.
 #print axioms QIQTH.ExpMap.uniformFlow_joint_secondFDeriv_witness_nonzeroSeed
 
+-- Task D step (a) (plan v8, J4-852): GeodesicJointSecondFDerivLipschitz. The "doubled Task B" —
+-- operator-norm Lipschitz-in-base-point of the JOINT SECOND-order geodesic-flow Fréchet derivative map
+-- Ξ₀↦L(Ξ₀) on the doubled phase space. doubledFlow_joint_fderiv_lipschitz_in_basepoint: ‖L₁-L₂‖ ≤
+-- Lg·e^Kg·e^Kbd·e^Kbd·dist(Y₁0,Y₂0) for the two J4-850/851 doubled second-order derivative CLMs based at
+-- two reference doubled geodesics Y₁,Y₂ (doubled Jacobi families V₁,V₂ seeded at Ξ). _compact discharges
+-- Kg,Lg,Kbd from IsCompact/Convex S + hC, delivering ∃C≥0,‖L₁-L₂‖≤C·dist. EXACT order-up mirror of
+-- geodesicFlow_joint_fderiv_lipschitz_in_basepoint(_compact). Step-3 finding: MOSTLY field-agnostic reuse
+-- — jacobi_field_norm_bound + linODE_twopoint_diff_bound applied VERBATIM on the doubled space (no doubled
+-- wrapper); only the coefficient-Lipschitz plumbing is new-but-mechanical (doubledField_lipschitzOnWith_of_
+-- isCompact_convex, fderiv_doubledField_lipschitzOnWith_of_isCompact_convex, fderiv_doubledField_twopoint_
+-- dist_bound via the ABSTRACT autonomous_twopoint_gronwall + doubledField_fderiv{,2}_bddOn_compact), NO new
+-- coefficient-separation content specific to the nested fderiv(doubledField) structure. std-3 ×5. NON-VACUOUS:
+-- hyps are the two-base-point instance of the J4-851 concrete-witnessed curved doubled second-order data.
+-- HONEST: operator-norm Lipschitz dependence of the doubled second-order derivative map on the base point;
+-- NOT doubled ContDiffOn ℝ 1, NOT the finite-basis transfer to ContDiffOn ℝ 2, NOT IFT, NOT RNC, NOT hCConv.
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.doubledField_lipschitzOnWith_of_isCompact_convex
+#print axioms QIQTH.ExpMap.fderiv_doubledField_lipschitzOnWith_of_isCompact_convex
+#print axioms QIQTH.ExpMap.fderiv_doubledField_twopoint_dist_bound
+#print axioms QIQTH.ExpMap.doubledFlow_joint_fderiv_lipschitz_in_basepoint
+#print axioms QIQTH.ExpMap.doubledFlow_joint_fderiv_lipschitz_in_basepoint_compact
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
