@@ -4497,3 +4497,11 @@ import QIQTH.HCompNearCarryAssembly
 -- combines one diagonal (witnessFieldDeriv2_gate_abs_le) + n−1 off-diagonal (witnessMixed_gate_abs_le,
 -- J4-862) bounds; witnessFieldHessian_opNorm_xuniform = the x-uniform hFd shape. std-3. NOT a₁=R/6.
 import QIQTH.MixedFieldHessianOpNormCombinator
+-- WitnessFieldHessianXUniform: J4-864 — the x-UNIFORMISATION of the field-Hessian operator-norm envelope,
+-- reducing MixedDirectionsFieldHessianEnvelope.hFd (J4-843) DOWN TO an x-uniform per-index entrywise
+-- bound. heatKernel1D_sq_moment_le_xfree / gaussDdim_coord_sq_moment_le_xfree = reusable x-free
+-- Gaussian-moment atoms (gaussian_poly_absorb + Gaussian peak) — the mechanism turning a
+-- Gaussian×polynomial into a single x-free constant. witnessFieldHessian_hFd_of_xuniform_entrywise =
+-- the a.e.-lifted CLM combinator delivering the exact hFd field (BF s z:=Σⱼ bb s z j) from x-uniform
+-- per-index bounds. Residual = the entrywise Gaussian×poly x-sup (SAME class as z-mass). std-3. NOT a₁=R/6.
+import QIQTH.WitnessFieldHessianXUniform

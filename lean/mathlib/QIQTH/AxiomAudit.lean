@@ -28561,4 +28561,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_opNorm_xuniform
 #print axioms QIQTH.MixedFieldHessianOpNormCombinator.witnessFieldHessian_opNorm_le_sum_tight
 
+-- J4-864: WitnessFieldHessianXUniform — the x-UNIFORMISATION reducing MixedDirectionsFieldHessianEnvelope.
+-- hFd DOWN TO an x-uniform per-index entrywise bound. The banked entrywise envelopes' constants (Bs2,Ba,…)
+-- are symbolically x-free; the genuine x-dependence blocking a single BF is the Gaussian prefactor
+-- gaussDdim τ (W z x) times x-GROWING scalars — bounded only by Gaussian decay (a moment fact).
+-- heatKernel1D_sq_moment_le_xfree: x²·G_t(x) ≤ 8t·G_t(0) (gaussian_poly_absorb m=1 + widened-exp peak) —
+-- the x-free Gaussian-quadratic ATOM. gaussDdim_coord_sq_moment_le_xfree: (vⱼ)²·gaussDdim τ v ≤
+-- 8τ·gaussDdim τ 0 (1-D atom on factor j + heatKernel1D_le_diagonal peak on the rest). hFd_of_xuniform_
+-- entrywise: a.e.-lifted CLM combinator ⟹ exact hFd field (BF s z:=Σⱼ bb s z j) from x-uniform per-index
+-- bounds. hFd_nonvacuous: antecedents inhabited at K=∅ (witness ≡ 0 ⟹ bb≡0). WitnessMixedPartialUniform-
+-- Bound (base-point q uniformity) is a DIFFERENT axis, NOT applicable. std-3. NOT a₁=R/6.
+#print axioms QIQTH.WitnessFieldHessianXUniform.heatKernel1D_sq_moment_le_xfree
+#print axioms QIQTH.WitnessFieldHessianXUniform.gaussDdim_coord_sq_moment_le_xfree
+#print axioms QIQTH.WitnessFieldHessianXUniform.witnessFieldHessian_hFd_of_xuniform_entrywise
+#print axioms QIQTH.WitnessFieldHessianXUniform.witnessFieldHessian_hFd_nonvacuous
+
 end QIQTH.AxiomAudit
