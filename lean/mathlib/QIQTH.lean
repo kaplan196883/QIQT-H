@@ -4098,6 +4098,19 @@ import QIQTH.GeodesicJointFDerivAtPoint
 -- ξ₀ — the missing Task-C ContDiffOn-1 ingredient; Y₁/Y₂/V₁/V₂/L₁/L₂ supplied hypotheses (Task A's data at two
 -- base points), NOT yet wired to uniformFlowExp, NOT ContDiffOn, NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.GeodesicJointFDerivLipschitz
+-- Task C (plan tranquil-stargazing-fox): UniformFlowJointFDerivLipschitzConcrete — CONCRETE instantiation of
+-- the Task-B joint first-derivative Lipschitz-in-base-point bound for the actual uniformFlowTube flow.
+-- uniformFlow_joint_jacobiCLM_lipschitz_in_basepoint: for two phase points (q₁,v₁),(q₂,v₂) with qᵢ∈K,
+-- ‖vᵢ‖≤ρ_K, builds genuine Jacobi families V₁/V₂ along the concrete tubes (narrow-pad engine) + endpoint
+-- CLMs L₁/L₂ (linearity via jacobiSol_unique), with the compact convex control set CONSTRUCTED from
+-- confinement (closedBall, no expRho, no carried geometric hyp), delivering ‖L₁-L₂‖≤C·dist((q₁,v₁),(q₂,v₂)).
+-- ⚠ DECISIVE FINDING: Task A (geodesicFlow_joint_hasFDerivAt_exists_atPoint) is VACUOUS at the curved concrete
+-- witness — hmem ∀ξ + hIC force S=univ, but geodesicField(x,v)=(v,−Γ(x)(v,v)) is quadratic in v hence NOT
+-- globally Lipschitz for curved Γ, so hLip on univ fails; only Task B (needs just the 2 reference curves in S)
+-- instantiates concretely. HONEST: concrete first-derivative Lipschitz (neighborhood-quality) of the joint
+-- Jacobi-endpoint CLM; NOT tied to uniformFlowExp's own fderiv (Task A's blocked content), NOT ContDiffOn,
+-- NOT a second-order jet, NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+import QIQTH.UniformFlowJointFDerivLipschitzConcrete
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3 — the inverse chart
 -- uniformInverseChart's FIELD-SLOT C³. STALE-PREMISE CORRECTION: the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale — ChartThirdJet (J4-192) already banked the inverse chart's

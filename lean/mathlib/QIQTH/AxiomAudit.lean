@@ -27833,6 +27833,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicFlow_joint_fderiv_lipschitz_in_basepoint
 #print axioms QIQTH.ExpMap.geodesicFlow_joint_fderiv_lipschitz_in_basepoint_compact
 
+-- Task C (plan tranquil-stargazing-fox): UniformFlowJointFDerivLipschitzConcrete. CONCRETE instantiation of
+-- the Task-B joint first-derivative Lipschitz-in-base-point bound for the actual uniformFlowTube geodesic flow.
+-- For two phase points (q₁,v₁),(q₂,v₂) (qᵢ∈K, ‖vᵢ‖≤ρ_K) builds genuine Jacobi families V₁/V₂ along the concrete
+-- confined tubes via geodesicJacobi_narrowpad_hasDerivAt_Icc (only Icc(-1/2,3/2) continuity, from the tube's
+-- Ioo(-2,2) ODE), promotes the endpoint maps to CLMs L₁/L₂ via jacobiSol_unique linearity, and CONSTRUCTS the
+-- compact convex control set S=closedBall((q₁,0), C₀·ρ_K+dist) from uniformFlowTube_spec_conf confinement (no
+-- expRho, no carried geometric hypothesis), then feeds all into geodesicFlow_joint_fderiv_lipschitz_in_basepoint_compact
+-- to deliver ‖L₁-L₂‖≤C·dist((q₁,v₁),(q₂,v₂)). std-3. ⚠ DECISIVE OBSTRUCTION: the plan's Task A theorem
+-- geodesicFlow_joint_hasFDerivAt_exists_atPoint is VACUOUS at the curved concrete witness — its hmem (∀ξ, W ξ τ∈S)
+-- with hIC (W ξ 0 an affine bijection of the phase space) forces S=univ, but geodesicField(x,v)=(v,−Γ(x)(v,v)) is
+-- QUADRATIC in v hence NOT globally Lipschitz for curved Γ, so hLip on univ fails ⟹ Task A jointly unsatisfiable
+-- (satisfiable only for a globally-Lipschitz/flat field). Task B's COMPACT corollary escapes: it needs only the two
+-- REFERENCE geodesics in the compact S (the ∀ξ Jacobi families may leave S), which confinement supplies. HONEST:
+-- concrete NEIGHBORHOOD-quality first-derivative Lipschitz of the joint Jacobi-endpoint CLM; NOT identified with
+-- uniformFlowExp's own fderiv (Task A's blocked content), hence NOT the joint ContDiffOn ℝ 1, NOT a 2nd-order jet,
+-- NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlow_joint_jacobiCLM_lipschitz_in_basepoint
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
