@@ -4248,6 +4248,18 @@ import QIQTH.UniformFlowJointSecondFDerivNonzeroSeed
 -- doubled coefficient-Lipschitz lemmas (fderiv_doubledField_twopoint_dist_bound via the ABSTRACT
 -- autonomous_twopoint_gronwall + doubledField_fderiv{,2}_bddOn_compact). std-3. NOT hCConv, NOT a₁=R/6.
 import QIQTH.GeodesicJointSecondFDerivLipschitz
+-- Task D step (b) (plan v8, J4-853): UniformFlowDoubledJointContDiffOneConcrete — the doubled analogue
+-- of J4-849's first-order ContDiffOn ℝ 1 milestone, one order up. uniformFlow_doubled_joint_contDiffOn_
+-- one_witness: with K:=closedBall q₀ 1 and base state Ξ₀:=((q₀,0),(a₀,b₀)) (ARBITRARY seed), the concrete
+-- confined uniform DOUBLED flow's endpoint fun Ξ => W Ξ 1 is jointly ContDiffOn ℝ 1 on ball Ξ₀ r for EVERY
+-- curved metric, NO carried domain hyp. Equivalently: the doubled flow's FIRST derivative (= the base
+-- geodesic flow's SECOND derivative) is itself C¹ on a neighborhood — the NEIGHBORHOOD-quality (not merely
+-- pointwise, J4-850/851) second-order regularity. Method = exact order-up mirror of uniformFlow_joint_
+-- contDiffOn_one: fixed control set S=S₁×ˢS₂, per-point second-order Fréchet derivative (J4-850) +
+-- doubled Task-B Lipschitz (J4-852) with FIXED uniform moduli, assembled via contDiffOn_succ_iff_fderiv_
+-- of_isOpen. std-3. NOT the finite-basis transfer to ContDiffOn ℝ 2 of uniformFlowExp (step c), NOT the
+-- final ContDiffOn ℝ 2 (step d), NOT IFT, NOT RNC, NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.UniformFlowDoubledJointContDiffOneConcrete
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`

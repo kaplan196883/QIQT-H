@@ -27964,6 +27964,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.doubledFlow_joint_fderiv_lipschitz_in_basepoint
 #print axioms QIQTH.ExpMap.doubledFlow_joint_fderiv_lipschitz_in_basepoint_compact
 
+-- Task D step (b) (plan v8, J4-853): UniformFlowDoubledJointContDiffOneConcrete. The doubled analogue of
+-- J4-849's first-order ContDiffOn ℝ 1 milestone, one order up. uniformFlow_doubled_joint_contDiffOn_one_
+-- witness: ★ with K:=closedBall q₀ 1 and base state Ξ₀:=((q₀,0),(a₀,b₀)) (ARBITRARY, in particular NONZERO
+-- seed), the concrete confined uniform DOUBLED flow W Ξ τ=(uniformFlowTube ξ.1.1 ξ.1.2 τ, Jsel Ξ.1 Ξ.2 τ)
+-- has its endpoint fun Ξ => W Ξ 1 jointly ContDiffOn ℝ 1 on ball Ξ₀ r for EVERY curved metric, NO carried
+-- domain hyp. Equivalently: the doubled flow's FIRST derivative (= the base geodesic flow's SECOND
+-- derivative) is itself C¹ on a neighborhood — NEIGHBORHOOD-quality (not merely pointwise, J4-850/851)
+-- second-order regularity. Method = exact order-up mirror of uniformFlow_joint_contDiffOn_one: single fixed
+-- control set S=S₁×ˢS₂ (base ball × Jacobi ball, via confinement + homogeneous Jacobi growth), per-point
+-- second-order Fréchet derivative (doubledFlow_endpoint_joint_hasFDerivAt_exists_atPoint, J4-850, windowed
+-- ‖Ξ-x‖≤σ) + doubled Task-B Lipschitz (doubledFlow_joint_fderiv_lipschitz_in_basepoint, J4-852) with FIXED
+-- uniform moduli Kg,Lg,Kbd from S, assembled via contDiffOn_succ_iff_fderiv_of_isOpen. std-3. NON-VACUOUS:
+-- the concrete confined uniform doubled flow, pad-continuous nonzero-seed Jsel (geodesicJacobi_narrowpad_
+-- continuousOn). HONEST: doubled ContDiffOn ℝ 1 = Task-D step (b); NOT the finite-basis transfer to
+-- ContDiffOn ℝ 2 of uniformFlowExp (step c), NOT the final ContDiffOn ℝ 2 (step d), NOT IFT, NOT RNC, NOT
+-- hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlow_doubled_joint_contDiffOn_one_witness
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
