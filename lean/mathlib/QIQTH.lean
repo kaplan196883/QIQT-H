@@ -4283,6 +4283,15 @@ import QIQTH.UniformFlowJointContDiffTwoConcrete
 -- uniformFlowExp_fderiv_near_id_quant exact at v=0; D_q exp(·,0)=id via uniformFlowExp_zero). std-3. NOT
 -- uniformInverseChart reconcile (Task F), NOT RNC discharge (Task G), NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.UniformFlowCoherentJointChart
+-- Task F (plan v8, J4-856): UniformFlowCoherentChartReconciliation — reconcile the COHERENT chart
+-- chartCoherent (J4-855) with the Classical.choose-built uniformInverseChart via local-inverse
+-- uniqueness. uniformInverseChart_eq_coherent_near_diag: the two charts AGREE jointly (in base point AND
+-- charted point) eventually near the diagonal (q₀,q₀). uniformInverseChart_jointContDiffAt_diag: ★★ the
+-- PRIZE — the concrete uniformInverseChart is itself JOINTLY ContDiffAt ℝ 2 at (q₀,q₀), the exact joint
+-- base-point-dependent 2nd-order regularity the ~150-increment campaign found ABSENT (via
+-- ContDiffAt.congr_of_eventuallyEq across the equality). std-3. Does NOT discharge the LITERAL RNC
+-- structures (their jet fields are ∀y GLOBAL — no local chart can meet them). a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.UniformFlowCoherentChartReconciliation
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`

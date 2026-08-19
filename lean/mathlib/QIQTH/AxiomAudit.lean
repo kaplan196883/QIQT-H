@@ -28018,6 +28018,21 @@ namespace QIQTH.AxiomAudit
 -- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 #print axioms QIQTH.ExpMap.uniformFlow_coherent_joint_chart
 
+-- Task F (plan v8, J4-856): UniformFlowCoherentChartReconciliation. Reconcile the COHERENT jointly-
+-- ContDiffAt ℝ 2 chart chartCoherent (J4-855) with the Classical.choose-built uniformInverseChart via
+-- local-inverse uniqueness: chartCoherent is a RIGHT inverse (exp_q(chartCoherent q p)=p, J4-855) and
+-- uniformInverseChart a LEFT-inverse germ (uniformInverseChart q (exp_q z)=z near small z,
+-- uniformInverseChart_huniformChart) of the SAME forward map uniformFlowExp. For ξ near (q₀,q₀): ξ.1∈K,
+-- and joint continuity + chartCoherent q₀ q₀=0 put v:=chartCoherent ξ.1 ξ.2 inside the uniform germ
+-- radius δ₀, so uniformInverseChart ξ.1 ξ.2 = uniformInverseChart ξ.1 (exp_{ξ.1} v) = v. Yields the joint
+-- local equality, then uniformInverseChart_jointContDiffAt_diag transports chartCoherent's joint
+-- ContDiffAt ℝ 2 across it (ContDiffAt.congr_of_eventuallyEq) → the concrete uniformInverseChart is
+-- itself JOINTLY ContDiffAt ℝ 2 at (q₀,q₀). std-3. Does NOT discharge the LITERAL
+-- JointSecondOrderRNCRegularity/…Mixed (their jet fields ∀y GLOBAL — no local chart can meet them).
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.uniformInverseChart_eq_coherent_near_diag
+#print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffAt_diag
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
