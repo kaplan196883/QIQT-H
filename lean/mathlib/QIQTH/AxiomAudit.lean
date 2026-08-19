@@ -27798,6 +27798,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.geodesicFlow_joint_endpoint_position_hasFDerivAt_exists
 #print axioms QIQTH.ExpMap.geodesicFlow_basepoint_hasFDerivAt_ofJoint
 
+-- Task A (plan tranquil-stargazing-fox, base-point generalization of Brick 1): GeodesicJointFDerivAtPoint.
+-- The JOINT (base+velocity) FULL-PHASE-SPACE first Fréchet derivative of the geodesic flow at an ARBITRARY
+-- base point ξ₀, generalizing geodesicFlow_joint_hasFDerivAt_exists (the ξ₀=0 case). Coordinate-translation
+-- reduction (NOT re-derivation): the origin theorem is abstract in W/V/S, so re-instantiate it on the shifted
+-- family W̃ η := W (η+ξ₀) (reference W̃ 0 = W ξ₀; Jacobi fields V supplied along W ξ₀, exactly as the origin
+-- theorem supplies those along W 0 — the geodesic ODE's non-translation-invariance is a NON-ISSUE since the
+-- fields are hypotheses, not translated), yielding HasFDerivAt (fun η => W (η+ξ₀) t) L 0, then compose with
+-- the translation ξ ↦ ξ-ξ₀ (Fréchet derivative id, sending ξ₀ ↦ 0) via HasFDerivAt.comp to land
+-- HasFDerivAt (fun ξ => W ξ t) L ξ₀. Delivers geodesicFlow_joint_hasFDerivAt_exists_atPoint. std-3. HONEST:
+-- joint FIRST-order Fréchet at ξ₀ only; ξ₀ arbitrary at the abstract level because the validity data are
+-- SUPPLIED hypotheses (a later nbhd/compactness restriction appears only when discharged for uniformFlowExp,
+-- plan Tasks B/C). NOT ContDiffAt/On, NOT wired to uniformFlowExp, NOT a second-order jet, NOT hCConv.
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+#print axioms QIQTH.ExpMap.geodesicFlow_joint_hasFDerivAt_exists_atPoint
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
