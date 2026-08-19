@@ -4292,6 +4292,18 @@ import QIQTH.UniformFlowCoherentJointChart
 -- ContDiffAt.congr_of_eventuallyEq across the equality). std-3. Does NOT discharge the LITERAL RNC
 -- structures (their jet fields are ∀y GLOBAL — no local chart can meet them). a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.UniformFlowCoherentChartReconciliation
+-- Plan v8 CULMINATION (J4-857): JointRNCRegularityInterfaceLocal — the FIRST genuinely NON-VACUOUS,
+-- machine-checked joint 2nd-order RNC-chart regularity fact of the whole a₁=R/6 chart-regularity
+-- campaign, extracted MECHANICALLY from J4-856's proved uniformInverseChart_jointContDiffAt_diag. Defines
+-- the neighbourhood-gated, CORRECTLY-NORMALIZED (positive-identity) structure
+-- JointSecondOrderRNCRegularityLocal and PROVES it INHABITED (jointRNCRegularityLocal_of_diag): ∃ r>0,
+-- C_W,C_P,C_Q≥0 s.t. the fixed-base slice V=uniformInverseChart …q₀ satisfies, on ball q₀ r, the 2nd-order
+-- displacement ‖V z−(z−q₀)‖≤C_W‖z−q₀‖², first-jet modulus ‖∂ᵢV−eᵢ‖≤C_P‖z−q₀‖, and bounded 2nd jet
+-- ‖D²V‖≤C_Q — via two mean-value passes on the C² Taylor data. Also banks the general-base value/regularity
+-- facts uniformInverseChart_slice_{contDiffAt,value,fderiv_id}_diag (V q₀=0, DV q₀=Id). Does NOT discharge
+-- the LITERAL global-∀y/reflected-sign structures (structurally blocked at the interface boundary, not a
+-- regularity gap). std-3. NOT a₁=R/6; capstone CONDITIONAL unchanged.
+import QIQTH.JointRNCRegularityInterfaceLocal
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`

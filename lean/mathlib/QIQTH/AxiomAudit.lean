@@ -28033,6 +28033,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformInverseChart_eq_coherent_near_diag
 #print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffAt_diag
 
+-- Plan v8 CULMINATION (J4-857): JointRNCRegularityInterfaceLocal. The FIRST genuinely NON-VACUOUS,
+-- machine-checked joint 2nd-order RNC-chart regularity fact of the campaign, extracted from J4-856's
+-- uniformInverseChart_jointContDiffAt_diag. slice_contDiffAt_diag: the fixed-base slice V=uniformInverseChart
+-- …q₀ is ContDiffAt ℝ 2 at q₀ (joint result ∘ z↦(q₀,z)). slice_value_diag: V q₀=0. slice_fderiv_id_diag:
+-- DV(q₀)=Id (POSITIVE identity — confirms V z≈z−q₀, not reflected −z). jointRNCRegularityLocal_of_diag: ★★★
+-- the neighbourhood-gated, correctly-normalized structure JointSecondOrderRNCRegularityLocal is INHABITED
+-- (∃ r,C_W,C_P,C_Q; 2nd-order displacement + first-jet modulus + bounded 2nd jet on ball q₀ r), via two
+-- mean-value passes (Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le) on the C² Taylor data. Does NOT
+-- discharge the LITERAL global-∀y/reflected-sign JointSecondOrderRNCRegularity (blocked at the interface
+-- boundary, not a regularity gap). std-3. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv} unchanged.
+#print axioms QIQTH.JointRNCRegularityLocal.uniformInverseChart_slice_contDiffAt_diag
+#print axioms QIQTH.JointRNCRegularityLocal.uniformInverseChart_slice_value_diag
+#print axioms QIQTH.JointRNCRegularityLocal.uniformInverseChart_slice_fderiv_id_diag
+#print axioms QIQTH.JointRNCRegularityLocal.jointRNCRegularityLocal_of_diag
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's
