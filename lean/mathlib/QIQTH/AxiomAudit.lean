@@ -27982,6 +27982,25 @@ namespace QIQTH.AxiomAudit
 -- hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 #print axioms QIQTH.ExpMap.uniformFlow_doubled_joint_contDiffOn_one_witness
 
+-- Task D TARGET (plan v8, J4-854): UniformFlowJointContDiffTwoConcrete. The JOINT ContDiffOn ℝ 2 of the
+-- concrete curved uniform geodesic EXP map fun ξ => uniformFlowExp g gi hC hK ξ.1 ξ.2 on a neighborhood of
+-- (q₀,0) in the FULL initial phase point ξ=(q,v) — CLOSES Task D (the plan's single hardest task).
+-- uniformFlow_joint_contDiffOn_two_witness: ★ for K:=closedBall q₀ 1, ∃ open U ∋ (q₀,0), ContDiffOn ℝ 2 of
+-- the joint exp map on U, for EVERY curved metric. Steps (c)+(d): Fbase ξ:=uniformFlowTube ξ.1 ξ.2 1
+-- (uniformFlowExp = fst∘Fbase); by contDiffOn_succ_iff_fderiv it suffices Fbase differentiable + ContDiffOn
+-- ℝ 1 (fderiv Fbase). (c₁) joint FIRST derivative fderiv Fbase ξ w = Jsel ξ w 1 via geodesicFlow_joint_
+-- hasFDerivAt_exists_atPoint_local FED the SAME Jsel used to build the doubled flow (NO ODE-uniqueness lemma
+-- — the derivative CLM IS the endpoint Jacobi map by construction); (c₂) the doubled ContDiffOn ℝ 1 (J4-853,
+-- re-derived INLINE for MY Jsel because J4-853's W is existentially hidden, centered at each basis seed e_j)
+-- ⟹ ξ↦Jsel ξ e_j 1 = (W(ξ,e_j)1).2 is ContDiffOn ℝ 1 (fixed affine embedding ξ↦(ξ,e_j) + snd projection);
+-- (c₃) FINITE-BASIS TRANSFER: fderiv Fbase ξ = e.constrL (fun j => Jsel ξ (e j) 1) (two CLMs agreeing on a
+-- basis, Module.Basis.ext) and f↦e.constrL f a fixed continuous-linear reconstruction ⟹ ContDiffOn ℝ 1
+-- (fderiv Fbase); (d) contDiffOn_succ_iff_fderiv_of_isOpen (2=1+1) assembles ContDiffOn ℝ 2 Fbase, fst∘
+-- gives the exp map. std-3. NON-VACUOUS: the concrete confined uniform flow at a curved metric. HONEST: this
+-- reaches JOINT ContDiffOn ℝ 2 of the constructive exp map (Task D). NOT IFT (Task E), NOT uniformInverseChart
+-- reconcile (Task F), NOT RNC discharge (Task G), NOT hCConv. a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_two_witness
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's

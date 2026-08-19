@@ -4260,6 +4260,20 @@ import QIQTH.GeodesicJointSecondFDerivLipschitz
 -- of_isOpen. std-3. NOT the finite-basis transfer to ContDiffOn ℝ 2 of uniformFlowExp (step c), NOT the
 -- final ContDiffOn ℝ 2 (step d), NOT IFT, NOT RNC, NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.UniformFlowDoubledJointContDiffOneConcrete
+-- Task D TARGET (plan v8, J4-854): UniformFlowJointContDiffTwoConcrete — the JOINT ContDiffOn ℝ 2 of the
+-- concrete curved uniform geodesic EXP map fun ξ => uniformFlowExp g gi hC hK ξ.1 ξ.2 on a neighborhood of
+-- (q₀,0) in the FULL initial phase point ξ=(q,v). uniformFlow_joint_contDiffOn_two_witness: ★ for
+-- K:=closedBall q₀ 1, ∃ open U ∋ (q₀,0), ContDiffOn ℝ 2 of the joint exp map on U, for EVERY curved metric.
+-- Steps (c)+(d): Fbase ξ:=uniformFlowTube ξ.1 ξ.2 1 (uniformFlowExp = fst∘Fbase); by
+-- contDiffOn_succ_iff_fderiv it suffices Fbase differentiable + ContDiffOn ℝ 1 (fderiv Fbase). (c₁) joint
+-- FIRST derivative fderiv Fbase ξ w = Jsel ξ w 1 via geodesicFlow_joint_hasFDerivAt_exists_atPoint_local
+-- FED the SAME Jsel (no ODE-uniqueness lemma); (c₂) doubled ContDiffOn ℝ 1 (J4-853, re-derived inline for
+-- MY Jsel, centered at each basis seed) ⟹ ξ↦Jsel ξ e_j 1=(W(ξ,e_j)1).2 is C¹ (embed+snd); (c₃) finite-basis
+-- transfer: fderiv Fbase ξ = e.constrL (fun j => Jsel ξ (e j) 1) (Module.Basis.ext) + f↦e.constrL f a fixed
+-- continuous-linear reconstruction ⟹ ContDiffOn ℝ 1 (fderiv Fbase); (d) contDiffOn_succ (2=1+1) + fst∘.
+-- std-3. CLOSES Task D (the plan's single hardest task). NOT IFT (Task E), NOT uniformInverseChart reconcile
+-- (Task F), NOT RNC discharge (Task G), NOT hCConv. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.UniformFlowJointContDiffTwoConcrete
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`
