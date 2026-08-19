@@ -4480,3 +4480,11 @@ import QIQTH.TerminalVelAtCubicRemainder
 --   per-direction integral: |∫s∫z kPrime(eⱼ)| ≤ nb+fb). CORRECTS the sympy far model (fixed ρ, not √ε).
 --   Near half (nb) + concrete kPrime→envelope far domination remain STEP-4c. NOT a₁=R/6.
 import QIQTH.HCompNearFarSplit
+-- HCompNearCarryAssembly (J4-861, Plan v9 Task B STEP 4c part (i)): the SLIVER-INTEGRATED
+--   chart-replacement CANCELLATION bound — the NEAR analogue of J4-860's discharged FAR half.
+--   `chartReplace_sliver_uniform_bound` (∫_{ball 0 R} ‖z‖^k·|G_τ(Wz)−G_τ(z)| ≤ Cshape·(√ε)^{k+1},
+--   uniform over the sliver τ∈(0,ε], via weighted_chart_replace_bound + √τ≤√ε monotonicity);
+--   `chartReplace_sliver_integral_le` (the near sliver integral ‖∫s∫_{ball}‖ ≤ Cshape·(√ε)^{k+3} =
+--   O(ε^{(k+3)/2}); k=0 ⟹ O(ε^{3/2}), below O(√ε); via norm_integral_le_of_norm_le_const_ae).
+--   The near ANALYTIC rate; concrete kPrime→cancellation identification remains STEP 4c. NOT a₁=R/6.
+import QIQTH.HCompNearCarryAssembly

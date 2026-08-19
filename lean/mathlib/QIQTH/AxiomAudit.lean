@@ -28520,4 +28520,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearFarSplit.tailMoment_sliver_integral_le
 #print axioms QIQTH.HCompNearFarSplit.kPrime_sliver_near_far
 
+-- HCompNearCarryAssembly (J4-861, Plan v9 Task B STEP 4c part (i)): the SLIVER-INTEGRATED
+--   chart-replacement CANCELLATION bound — the NEAR analogue of J4-860's FAR half.
+--   chartReplace_sliver_uniform_bound (∫_{ball}‖z‖^k·|G_τ(Wz)−G_τ(z)| ≤ Cshape·(√ε)^{k+1}, uniform
+--   over τ∈(0,ε]); chartReplace_sliver_integral_le (near sliver integral ≤ Cshape·(√ε)^{k+3} =
+--   O(ε^{(k+3)/2}); k=0 ⟹ O(ε^{3/2}), below O(√ε)). Near analytic rate; concrete kPrime→cancellation
+--   identification remains STEP 4c. NOT a₁=R/6.
+#print axioms QIQTH.HCompNearCarryAssembly.chartReplace_sliver_uniform_bound
+#print axioms QIQTH.HCompNearCarryAssembly.chartReplace_sliver_integral_le
+
 end QIQTH.AxiomAudit
