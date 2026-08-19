@@ -4505,3 +4505,15 @@ import QIQTH.MixedFieldHessianOpNormCombinator
 -- the a.e.-lifted CLM combinator delivering the exact hFd field (BF s z:=Σⱼ bb s z j) from x-uniform
 -- per-index bounds. Residual = the entrywise Gaussian×poly x-sup (SAME class as z-mass). std-3. NOT a₁=R/6.
 import QIQTH.WitnessFieldHessianXUniform
+
+-- ChartJetXUniformBound: J4-865 — the x-UNIFORM field-Hessian bound for hFd via GATE COMPACTNESS.
+-- DECISIVE FINDING: witnessFieldDeriv is the field-pd of the GATED witness, which VANISHES off
+-- closure(S z) (witnessFieldDeriv_eqZero_of_notMem_closure ⟹ fderiv=0), and the CONCRETE gate
+-- S z=uniformFlowExp z''ball 0 c has COMPACT closure (concreteGate_closure_isCompact, ⊆ image of the
+-- compact closedBall under joint flow continuity). So hFd's "uniform over all x" COLLAPSES to "uniform
+-- over a compact set": a continuous dominator on closure(S z) attains a max (IsCompact.bddAbove_image),
+-- off it the Hessian is 0. witnessFieldHessian_opNorm_xuniform_of_compactGate = ∃M≥0, ∀x ‖fderiv‖≤M.
+-- witnessFieldHessian_hFd_ciSup_of_compactGate = the EXACT hFd field with EXPLICIT BF s z:=⨆x‖fderiv‖,
+-- reduced a.e. to {compact gate, a.e. continuous-dominated field-Hessian on the gate} — a MUCH weaker
+-- input than J4-864's Gaussian×poly x-moment estimate. std-3. NOT a₁=R/6.
+import QIQTH.ChartJetXUniformBound

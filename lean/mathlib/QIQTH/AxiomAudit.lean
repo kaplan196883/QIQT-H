@@ -28576,4 +28576,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessFieldHessianXUniform.witnessFieldHessian_hFd_of_xuniform_entrywise
 #print axioms QIQTH.WitnessFieldHessianXUniform.witnessFieldHessian_hFd_nonvacuous
 
+-- J4-865: ChartJetXUniformBound — the x-UNIFORM field-Hessian bound for hFd via GATE COMPACTNESS.
+-- DECISIVE FINDING (the fact-finding result the mission asked): witnessFieldDeriv is the field-pd of the
+-- GATED witness H_G=gatedKernel K S H, so it VANISHES off closure(S z), and the CONCRETE gate
+-- S z=uniformFlowExp z''ball 0 c has COMPACT closure — so "uniform over ALL x" collapses to "uniform over
+-- a compact set". witnessFieldDeriv_eqZero_of_notMem_closure: field-pd=0 for y∉closure(S z) (gated kernel
+-- 0 on the open (closure S z)ᶜ; coordinate line stays in it). witnessFieldHessian_fderiv_eqZero_of_notMem_
+-- closure: field-Hessian CLM fderiv=0 there (EventuallyEq.fderiv_eq) — the hzero leg. concreteGate_closure_
+-- isCompact: ★ closure(uniformFlowExp z''ball 0 c) COMPACT (⊆ image closedBall via uniformFlowExp_joint_
+-- continuousOn; closed⊆compact). xuniform_of_{bddAbove_offClosure,compact_dominated} + bddAbove_{image,
+-- range}_of_isCompact_dominated: the abstract compactness engine (continuous dominator on compact ⟹
+-- global bound). witnessFieldHessian_opNorm_xuniform_of_compactGate: ★★ ∃M≥0,∀x ‖fderiv‖≤M from {compact
+-- gate, continuous dominator}. witnessFieldHessian_hFd_ciSup_of_compactGate: ★★★ the EXACT hFd field with
+-- EXPLICIT BF s z:=⨆x‖fderiv‖, reduced a.e. to {compact gate, a.e. continuous-dominated field-Hessian on
+-- the gate} — far weaker than J4-864's Gaussian×poly x-moment. xuniform_of_compactGate_nonvacuous: K=∅/S=∅
+-- witness (concreteGate is the stronger non-empty non-vacuity). std-3. NOT a₁=R/6.
+#print axioms QIQTH.ChartJetXUniformBound.witnessFieldDeriv_eqZero_of_notMem_closure
+#print axioms QIQTH.ChartJetXUniformBound.witnessFieldHessian_fderiv_eqZero_of_notMem_closure
+#print axioms QIQTH.ChartJetXUniformBound.concreteGate_closure_isCompact
+#print axioms QIQTH.ChartJetXUniformBound.witnessFieldHessian_opNorm_xuniform_of_compactGate
+#print axioms QIQTH.ChartJetXUniformBound.witnessFieldHessian_hFd_ciSup_of_compactGate
+#print axioms QIQTH.ChartJetXUniformBound.xuniform_of_compactGate_nonvacuous
+
 end QIQTH.AxiomAudit
