@@ -10932,6 +10932,20 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-902 — `hFzero` + `hAzero` census binders DISCHARGED to PURE geometry for the LIVE order-1 `hDuhamel` capstone (commit `41e8a528`)
+
+**File** `QIQTH/HDuhamelCensusVanishingDischarged.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** Continuing the find-and-wire vein of J4-896/897/898/899, this entry discharges TWO more free census binders of `HDuhamelLiveGateWired.hDuhamel_live_gate_wired` — the nonpositive-time VANISHING pair — from an un-cross-referenced older generic-in-`g` brick each, reducing them to PURE geometry (`g, gi, hChr, hK, S, a, b` + `1 ≤ n`) with NO analytic carry whatsoever:
+- ★ `hFzero_live` — the `hFzero` binder (`:157`): the Levi source `F := leviSeries (heatOp g gi H_G)` vanishes at nonpositive time. ← `DaLimEasyTranche.hFzero_concrete` (which routes `DataPileWitnessAudit.hEzeroE_concrete → DaLimEasyTranche.leviSeries_eq_zero_of_nonpos`).
+- ★ `hAzero_live` — the `hAzero` binder (`:172`): the concrete gated van-Vleck amplitude `H_G := vanVleckGatedWitness g gi hChr hK S a b` vanishes at nonpositive time. ← `AmplitudeDerivativeDataConcrete.vanVleckGatedWitness_eq_zero_of_nonpos`.
+
+**OBJECT IDENTITY.** Verified two ways: (a) the `exact` proof bodies compile (producer conclusion defeq the stated shape); (b) a throwaway defeq chk (`ZZChkVanish`, deleted) reproduced the census binder propositions VERBATIM — using the exact `leviSeries (heatOp g gi (vanVleckGatedWitness …))` / `vanVleckGatedWitness …` shapes of `hDuhamel_live_gate_wired` — and closed each by the new lemma. Both discharges consume only `1 ≤ n` (itself the census binder `hn`) beyond raw geometry ⟹ ZERO-NEW-CARRY.
+
+**WHAT THIS DOES / DOES NOT DO.** Removes `hFzero`/`hAzero` from the honest free census (they are now geometry theorems, unlike the J4-896..899 discharges which trade one binder for named satisfiable carries). Does NOT touch the deeper convergence content; `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10210 jobs); `#print axioms` ×2 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `41e8a528`, pushed.
+
 ## J4-901 — residual `hw` amplitude-smoothness carry DISCHARGED (⊤/ω-vs-∞ rebase of the D1 chain) (commit `628a91ac`)
 
 **File** `QIQTH/HAdomHWDomHwDischargedInfty.lean` (new; NO existing banked file edited).
