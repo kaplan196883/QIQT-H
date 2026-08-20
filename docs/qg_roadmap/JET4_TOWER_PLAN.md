@@ -12143,3 +12143,67 @@ sharp operator theorem and is the cleanest Lean path, ABSENT from Mathlib) compo
 (propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `a44b9511`,
 pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+
+## J4-926 — the DOUBLE-DIFFERENCE DECOMPOSITION of the live `hCross` census binder — commit `e2f62c3f` (`HCrossMixedSecondDiffReduction.lean`, new file)
+
+**Task.** ASSEMBLE the chart-CoV moment-cancellation chain (J4-919..J4-925) into a genuine closing (or
+maximal honest reduction) of `hCross`'s ACTUAL census binder shape (`HDuhamelLiveGateWired`, line ~199):
+`|Δ²ₕₖ heatConvFrozen W F …| ≤ L m u·(|h|·|k|)`, the mixed second-difference bilinear Lipschitz wall
+shared by hDuhamel/hDConv. Determine what carries J4-924's single-difference `two_term_census_bound`
+to the actual MIXED 2nd difference; build `det∘V`-Lipschitz if still needed; build the maximal honest
+reduction as new file(s); consult gpt-5.6-sol for a go/no-go on the double-difference decomposition.
+
+**★ THE DECISIVE STRUCTURAL FINDING (verified against the live def, not memory).** `heatConvFrozen A B c
+d x y = ∫ s in 0..d, (∫ z, A(c−s) x z · B s z y)` — `c` is the FIRST time arg (τ-shift direction), `d`
+the second (upper integration LIMIT). Writing `Φ(c,s) := ∫ z, A(c−s) x z · B s z y`, so `K(c,d) = ∫ s in
+0..d, Φ(c,s)`, the mixed second difference COLLAPSES by **oriented interval additivity in the d-direction
+(NOT a derivative — pure `integral_add_adjacent_intervals`)**:
+`Δ² = K(a+h,b+k) − K(a+h,b) − K(a,b+k) + K(a,b) = ∫ s in b..(b+k), (Φ(a+h,s) − Φ(a,s))`.
+So the hCross bilinear 2nd-difference reduces to a SINGLE sliver integral of the FIRST-order τ-shift
+difference of the inner convolution. The `k`-direction (an integration-LIMIT displacement, NOT an argument
+shift) is **genuinely FREE** — its `|k|` factor is pure interval length, no differentiability/continuity
+in `d` required (only measurability/integrability in `s`). So J4-924's `two_term_census_bound` (a
+single-difference τ⁻¹ᐟ² MOMENT object) is NOT what carries here — it serves the hGpow/hOn per-coordinate
+consumer; the hCross mixed 2nd difference needs the FTC-collapse + a τ-shift single-difference Lipschitz.
+
+**gpt-5.6-sol (high) GO** — decomposition CORRECT (signs, oriented additivity, `|(b+k)−b|=|k|`, negative
+`k` handled by uIoc/oriented integral); genuine NON-CIRCULAR reduction. ★ CRITICAL HONESTY CORRECTION
+(banked verbatim): `hdiff` is **NOT logically weaker** than `hCross` — a POINTWISE bound `|Φ(a+h,s)−Φ(a,s)|
+≤ L·|h|` implies the integrated one, not conversely, so it is a STRONGER POINTWISE SUFFICIENT condition.
+It IS a strictly lower-ORDER, single-DIRECTION object (first difference in ONE variable vs. the integrated
+bilinear second difference) — a cleaner analytic subgoal, not a weaker assumption. Also flagged: since
+hCross quantifies `∀ k`, the sliver `uIoc b (b+k)` ranges over all `s`, so a consumer supplying hdiff for
+every (h,k) needs global-in-`s` uniformity (honest). Non-vacuity witness (cos·Gaussian) confirmed
+teeth-bearing.
+
+**Landed — NEW FILE `QIQTH/HCrossMixedSecondDiffReduction.lean` (ns `QIQTH.HeatResidualBound`, no banked file edited). std-3 ×2.**
+- `mixed_second_diff_frozen_reduction` — ★★ THE REDUCTION. For ANY `A,B`, base point `x y`, base times
+  `a b`, shifts `h k`, `L≥0`, GIVEN (i) `Φ(c,·)` IntervalIntegrable on `0..b` and `b..(b+k)` for `c=a+h`
+  AND `c=a` (four hyps), and (ii) `hdiff : ∀ s ∈ uIoc b (b+k), |Φ(a+h,s)−Φ(a,s)| ≤ L·|h|`, the MIXED
+  SECOND DIFFERENCE of `heatConvFrozen A B` is `≤ L·(|h|·|k|)` — EXACTLY the live hCross binder. Route:
+  `simp only [heatConvFrozen]`; `integral_add_adjacent_intervals` collapses both d-differences to slivers;
+  `integral_sub` merges; `norm_integral_le_of_norm_le_const` closes with `|(b+k)−b|=|k|`.
+- `mixed_second_diff_frozen_reduction_hyp_satisfiable` — non-vacuity with TEETH: `A τ x z:=cos τ·e^{−‖z‖²}`,
+  `B s z y:=e^{−‖z‖²}`, giving `Φ(c,s)=cos(c−s)·C` (`C=∫e^{−2‖z‖²}`, via `integral_const_mul`); the
+  single-difference bound via cos 1-Lipschitz (`Real.lipschitzWith_cos`); the four interval integrabilities
+  via continuity of `s↦cos(c−s)·C`. The cos-Lipschitz mechanism is genuinely exercised (NOT `0≤0`).
+
+**How far it gets / honest status.** hCross's ACTUAL binder is now REDUCED (abstractly, for any A,B, hence
+instantiable at W=vanVleckGatedWitness, F=field, a=u, b=u−ε_m) to the single first-order obligation `hdiff`
+(the τ-shift Lipschitz of `c ↦ ∫ z W(c−s)0z·F s z 0`, uniform over the sliver) + four interval
+integrabilities of the inner convolution. This is the maximal honest reduction: the mixed BILINEAR 2nd
+difference is genuinely dissolved into a LINEAR 1st-difference τ-shift bound. It does NOT close hCross —
+`hdiff` for the concrete curved witness is unbuilt (it is the integrated τ-shift Lipschitz that J4-917's
+`witnessTimeDeriv_domination` addresses pointwise at rate τ⁻¹ but has not been assembled into a uniform
+sliver bound; here the required rate is only Lipschitz-in-`c`, integrable over the k-sliver — no τ⁻¹ᐟ²
+needed, but the τ⁻¹ time-derivative near `s≈b` still needs a uniform-over-sliver constant `L m u`, which
+may absorb the ε_m singularity via the m-dependence of `L`). `hDuhamel`/`hDConv` remain carried on
+`{hCross (now ⟸ hdiff), hGpow, …}`; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.HCrossMixedSecondDiffReduction` 0 errors (8478 jobs); `lake build
+QIQTH.AxiomAudit` 0 errors (10233 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `e2f62c3f`, pushed. `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
