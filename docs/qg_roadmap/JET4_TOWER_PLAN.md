@@ -11183,6 +11183,23 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10196 jobs); `#print axioms` ×3 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `2cbc7a4f`, pushed. NOT `a₁ = R/6`.
 
+## J4-905 — `hBFint` interior-continuity carry DISCHARGED to the interior joint `(z,x)`-continuity residual (commit `ad754cf6`)
+
+**File** `QIQTH/HbintInteriorContinuityRoute.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** J4-904's measurability route (`hbint_of_interiorContinuous_nullFrontier`) reduced the `hbint` field of `MixedDirectionsFieldHessianEnvelope` to four carries, the SOLE non-trivial one being `hBFint`: `ContinuousOn (BF s) (interior K)` for the CONCRETE envelope `BF s z := ⨆ x, ‖fderiv (y ↦ witnessFieldDeriv … y z) x‖` on the OPEN interior — precisely the domain the J4-892 boundary no-go LEAVES available. This brick discharges that `hBFint`'s Berge/supremum-localization scaffolding, the exact INTERIOR analogue of what J4-877 did for the boundary-BLOCKED full-`K` route.
+
+**⭐ WHAT LANDS (all character-checked against source).**
+- `BF_interiorContinuousOn_of_jointContinuousOn` — ★★ `ContinuousOn (BF s) (interior K)` from {off-`Kx` vanishing for `z ∈ interior K`, joint `(z,x)`-continuity on `interior K ×ˢ Kx`}. A DIRECT instantiation of J4-877's abstract Berge engine `FieldHessianJointContinuity.continuousOn_ciSup_of_jointContinuousOn` at base `P := interior K` — the engine is FULLY GENERAL in `P`, so the `univ`-sup localization + off-`Kx` reduction transport verbatim to the interior.
+- `fieldHessianNorm_interiorJointContinuous_of_jointC1` — ★ the interior joint continuity from a joint `ContDiffOn ℝ 1` carry of the kernel on an OPEN `U ⊇ interior K ×ˢ Kx` (reuses J4-878's `partialFDeriv_norm_jointContinuousOn`, `.mono`'d).
+- `hBFint_concrete_of_jointInteriorContinuous` — ★★★ the EXACT `hBFint` carry REDUCED a.e. to the interior joint `(z,x)`-continuity residual on `interior K ×ˢ concreteKx`; off-`concreteKx` vanishing (`fieldHessian_vanish_off_concreteKx`, `z ∈ K ⊇ interior K`) + `concreteKx` compactness/nonemptiness DISCHARGED from banked infra.
+- `hbint_concrete_via_interior_route` — ★★★ feeds it into J4-904 (with the banked off-`K` `BF` vanishing `BF_ciSup_eqZero_of_base_notMem_K` J4-867, and the elementary `BL`-continuity / compact-`K` bound / null-frontier carries) ⟹ the FULL `hbint` field. So the J4-904 route CLOSES the `hBFint` sup scaffolding.
+- `BF_interior_residual_nonvacuous` — the interior joint-continuity residual is inhabited (empty gate ⟹ field-Hessian norm ≡ 0); no J4-548/847 unsatisfiable-antecedent trap.
+
+**⚠ HONEST VERDICT — hbint REDUCED not closed.** The `hBFint` carry is now converted from "interior-continuity of the concrete `⨆`-envelope" to "interior joint `(z,x)`-continuity of the field-Hessian norm on `interior K ×ˢ concreteKx`" — an OPEN×compact product WITHOUT the boundary diagonal, exactly the interior-only coherent-chart regularity (J4-884/887/889/890/891) the no-go leaves available. Threads through to J4-904's `hbint` field: hbint ⟸ {interior joint `(z,x)`-continuity, off-`K` BF vanishing [banked], `BL`-continuity, compact-`K` bound, `volume (frontier K)=0` [discharged for the live ball]}. This does NOT close `hbint`: the interior joint `(z,x)`-continuity (its joint-`C¹` chart carry over the WHOLE `interior K ×ˢ concreteKx` — off-gate/off-diagonal points included, per J4-887's residual (a)/(b)/(c)) remains open, as does `hzmass` and hCConv's other legs. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10213 jobs); `#print axioms` ×5 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `ad754cf6`, pushed. NOT `a₁ = R/6`.
+
 ## J4-904 — `hbint` MEASURABILITY route: dodges the PROVED boundary no-go (commit `d3eba2fb`)
 
 **File** `QIQTH/HbintMeasurabilityNullFrontier.lean` (new; NO existing banked file edited).
