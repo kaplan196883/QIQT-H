@@ -4938,3 +4938,18 @@ import QIQTH.HDuhamelCensusVanishingDischarged
 -- LEAVES available), off-K vanishing (banked), BL-continuity, compact-K product bound}. std-3 ×6,
 -- non-vacuous at the live ball K. Sol-confirmed. NOT a₁=R/6.
 import QIQTH.HbintMeasurabilityNullFrontier
+
+-- HbintInteriorContinuityRoute — J4-905: discharges the ONE task the J4-904 measurability route left open
+-- — the interior-continuity carry `hBFint` (ContinuousOn (BF s) (interior K)) for the CONCRETE envelope
+-- BF s z:=⨆x‖fderiv(y↦witnessFieldDeriv…y z)x‖ — down to its true residual, JOINT (z,x)-continuity of the
+-- field-Hessian norm on the OPEN interior K ×ˢ concreteKx (the domain the boundary no-go LEAVES available).
+-- The interior analogue of J4-877: BF_interiorContinuousOn_of_jointContinuousOn reuses the abstract Berge
+-- engine continuousOn_ciSup_of_jointContinuousOn at base P:=interior K (fully general in P) — discharging
+-- the univ-sup localization + off-concreteKx vanishing (banked). fieldHessianNorm_interiorJointContinuous
+-- _of_jointC1 supplies the residual from a joint ContDiffOn ℝ 1 carry on an OPEN U⊇interior K×concreteKx
+-- (J4-878 partialFDeriv engine, .mono'd). hBFint_concrete_of_jointInteriorContinuous = the exact hBFint
+-- carry REDUCED a.e. to that interior joint continuity. hbint_concrete_via_interior_route: feeds it into
+-- J4-904 (with banked off-K BF vanishing + elementary BL-cont/compact-K bound/null frontier) ⟹ the full
+-- hbint field — the J4-904 route CLOSES the hBFint Berge/sup scaffolding; residual = interior joint
+-- (z,x)-continuity + elementary carries. hbint REDUCED not closed. std-3 ×5. NOT a₁=R/6.
+import QIQTH.HbintInteriorContinuityRoute

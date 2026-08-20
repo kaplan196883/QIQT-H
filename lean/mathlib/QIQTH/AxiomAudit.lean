@@ -22,6 +22,7 @@
 
 import QIQTH
 import QIQTH.HbintMeasurabilityNullFrontier
+import QIQTH.HbintInteriorContinuityRoute
 
 namespace QIQTH.AxiomAudit
 
@@ -29108,5 +29109,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbintMeasurabilityNullFrontier.aestronglyMeasurable_of_interiorContinuous_nullFrontier
 #print axioms QIQTH.HbintMeasurabilityNullFrontier.hbint_of_interiorContinuous_nullFrontier
 #print axioms QIQTH.HbintMeasurabilityNullFrontier.hbint_reduction_nonvacuous
+
+-- HbintInteriorContinuityRoute — J4-905: the interior-continuity carry hBFint of the J4-904 measurability
+-- route, discharged for the concrete BF:=⨆x‖fderiv‖ down to JOINT (z,x)-continuity of the field-Hessian
+-- norm on the OPEN interior K×concreteKx (the no-go-surviving asset). Interior analogue of J4-877 (reuses
+-- the abstract Berge engine at base P:=interior K). hbint_concrete_via_interior_route feeds it into J4-904
+-- for the full hbint field. std-3 ×5. hbint REDUCED not closed. NOT a₁=R/6.
+#print axioms QIQTH.HbintInteriorContinuityRoute.BF_interiorContinuousOn_of_jointContinuousOn
+#print axioms QIQTH.HbintInteriorContinuityRoute.fieldHessianNorm_interiorJointContinuous_of_jointC1
+#print axioms QIQTH.HbintInteriorContinuityRoute.hBFint_concrete_of_jointInteriorContinuous
+#print axioms QIQTH.HbintInteriorContinuityRoute.hbint_concrete_via_interior_route
+#print axioms QIQTH.HbintInteriorContinuityRoute.BF_interior_residual_nonvacuous
 
 end QIQTH.AxiomAudit
