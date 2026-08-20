@@ -28,6 +28,7 @@ import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
+import QIQTH.GaussTauDerivCancellation
 import QIQTH.MixedEnvelopeAssembly
 
 namespace QIQTH.AxiomAudit
@@ -29274,5 +29275,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessBoundDHpardiffWired.witnessBoundD_wired
 #print axioms QIQTH.WitnessBoundDHpardiffWired.witnessHpardiff_wired
 #print axioms QIQTH.WitnessBoundDHpardiffWired.witnessHpardiff_wired_hyp_satisfiable
+
+-- GaussTauDerivCancellation — J4-919: the first genuinely-new analytic brick of the hCross sub-campaign
+-- (J4-910 route, piece (2)). DtauG τ z = (z²/4τ² − 1/2τ)·heatKernel1D τ z (= ∂_τ G). THE CANCELLATION
+-- CORE integral_DtauG_eq_zero: ∫_z DtauG = 0 (mass conservation via banked gaussianSecondMoment_oneD=2τ +
+-- gaussianZerothMoment_oneD=1) — the analytic heart J4-910 named unbanked. THE PAYOFF
+-- integral_DtauG_mul_lipschitz: for a β=1 spatial-Lipschitz weight (|f z − f 0| ≤ L|z|), the f 0 part
+-- cancels and the remainder is majorised by L·(|z|³/4τ² + |z|/2τ)·G, integrated by banked absolute moments
+-- oneD_absMoment3 (≤(64√2+1)(√τ)³) + oneD_absMoment1 (≤(3/2)√τ) ⟹ |∫ DtauG·f| ≤ L·(16√2+1)/√τ (the
+-- τ^{−1/2} integrable-singularity rate, α=1/2<1). β=1 (Lipschitz) SUFFICES (sympy-confirmed); F's spatial
+-- Lipschitz already banked (LeviLipschitz.resolvent_lipschitz_pointwise). Decoupled from H/F/census/global
+-- ∀h,k (Sol-mandated cut). Non-vacuity EXHIBITED (f:=id, L:=1). std-3 ×6. NOT a₁=R/6 (leaf brick; wiring
+-- into the ∂_x g bound + three-regime split + census hCross binder is downstream). hCross remains open;
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.DtauG
+#print axioms QIQTH.HeatResidualBound.integral_DtauG_eq_zero
+#print axioms QIQTH.HeatResidualBound.DtauG_integrable
+#print axioms QIQTH.HeatResidualBound.abs_DtauG_le
+#print axioms QIQTH.HeatResidualBound.integral_DtauG_mul_lipschitz
+#print axioms QIQTH.HeatResidualBound.integral_DtauG_mul_lipschitz_hyp_satisfiable
 
 end QIQTH.AxiomAudit

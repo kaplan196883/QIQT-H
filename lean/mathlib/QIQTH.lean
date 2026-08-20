@@ -5072,3 +5072,14 @@ import QIQTH.WitnessTimeDerivEnvelope
 -- meas/base-int piles {hAmeas,hDmeas,hbase}. Non-vacuity EXHIBITED at singleton gate K={0}. std-3 ×4.
 -- NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}; hard residual = hCross, untouched).
 import QIQTH.WitnessBoundDHpardiffWired
+
+-- GaussTauDerivCancellation — J4-919: the first genuinely-new analytic brick of the hCross sub-campaign
+-- (J4-910 route, piece (2)): the standalone 1-D Gaussian ∂_τ-multiplier MOMENT-CANCELLATION core,
+-- DtauG τ z := (z²/4τ² − 1/2τ)·heatKernel1D τ z (= ∂_τ G by the flat heat eq). integral_DtauG_eq_zero:
+-- ∫_z DtauG = 0 (mass conservation, from banked 2nd/0th moments) — the cancellation heart J4-910 named
+-- unbanked. integral_DtauG_mul_lipschitz: for a spatially-Lipschitz weight (|f z − f 0| ≤ L|z|, β=1),
+-- |∫ DtauG·f| ≤ L·(16√2+1)/√τ (the τ^{−1/2} integrable-singularity rate, α=1/2<1), via the f 0 part
+-- cancelling + banked absolute moments oneD_absMoment3/oneD_absMoment1. Decoupled from H/F/census/global
+-- ∀h,k (Sol-mandated cut). Non-vacuity EXHIBITED (f:=id, L:=1). std-3 ×6. NOT a₁=R/6 (leaf brick;
+-- wiring into ∂_x g bound + three-regime split + hCross is downstream). hCross remains open.
+import QIQTH.GaussTauDerivCancellation
