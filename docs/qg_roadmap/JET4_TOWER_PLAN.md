@@ -10932,6 +10932,27 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-893 — hDConv center-identity wall NAMED + reduced: `RadialNormalCoordinateGauge` interface + `HjetsShape` reduction (commit `dfa82b2b`)
+
+**Files** `QIQTH/RadialGaugeInterface.lean` + `QIQTH/HDConvReducedToRadialGauge.lean` (both new; NO existing banked file edited).
+
+**THE ADVANCE.** cp765 found `hDConv`'s discharge chain (`HDConvGateThreading.hDConvSlot_AT_GATE` ← `hbnd_concrete` ← `AmplitudeDerivativeData.hD2Hexpand` ← `AmpGeometryBundle.HjetsShape`'s center identities `hVP`/`hPsq`/`hVQ`) bottoms out on a radial/Sherman-Morrison gauge property with no abstract-`g` discharge (and un-borrowable from `curvedRNCMetric κ` without the `hframeK` vacuity trap). Per the campaign's established pattern (name the opaque wall as ONE clean geometric hypothesis, then prove the reduction — as done for `hCConv` via `JointSecondOrderRNCRegularity`/`VanVleckGatedSpatialSymmetry`/`MixedDirectionsFieldHessianEnvelope`), this brick NAMES and REDUCES it.
+
+**Deliverables — `RadialGaugeInterface.lean` (std-3 ×4):**
+  - `RadialNormalCoordinateGauge g gi` — the clean named structure: metric radial (Gauss) gauge `∑ⱼ g_{ij}(y)yʲ=yᵢ` + inverse radial gauge `∑ⱼ gi_{ij}(y)yʲ=yᵢ` + centre `g(0)=δ` diagonal. The standard textbook facts of Riemannian normal coordinates (Gauss's lemma).
+  - `radialNormalCoordinateGauge_flat` — trivial satisfiability (flat `δ`).
+  - ★ `radialNormalCoordinateGauge_curved` — NON-VACUITY GATE: `curvedRNCMetric κ` / `curvedRNCInv κ` (`κ≤0`, `Ric(0)=(n-1)κδ≠0`, `R/6≠0`) satisfy it WITH curvature (inverse gauge genuinely uses the `(κ/3)` Sherman-Morrison correction; fails for `gi:=δ` off origin). Curvature-compatible, NO collapse — cp466/cp753/cp765 vacuity-trap check PASSED.
+  - `abstract_centerIdentities_of_gaussPullback` — abstract analog of `curved_centerIdentities_of_gaussPullback`: center identities `hVP`/`hPsq`/`hVQ` from the geodesic pullback bridge + the gauge (metric gauge closes `hVP`, `g(0)=δ` closes `hPsq`, metric−inverse gauge closes `hVQ`).
+  - `abstract_centerIdentities_at_gate` — collar-quantified.
+
+**Deliverables — `HDConvReducedToRadialGauge.lean` (std-3 ×2):**
+  - ★ `HjetsShape_of_radialGauge` — `AmpGeometryBundle.HjetsShape ⟸ RadialNormalCoordinateGauge + geodesic pullback bridge (hpullVP/hpullPsq/hpullVQ) + banked mechanical jets (hSopen/h0/hV1/hP1/hA1/hA2)`, assembled via `hjets_assemble`. Replaces `hDConv`'s opaque center-identity carry with one clean standard-geometry hypothesis.
+  - `HjetsShape_of_radialGauge_at_gate` — the `∀τz collarRegime→HjetsShape` closure.
+
+**⚠ HONEST VERDICT — how far this reaches.** The `HjetsShape` center identities are the DEEPEST leg of `hDConv` (the one with no abstract-`g` discharge); it is now CONDITIONAL on the single clean named `RadialNormalCoordinateGauge` (satisfiable by genuinely-curved metrics) + the base-point pullback bridge, NOT on any opaque unnamed wall. A capstone-level variant swapping `hDConv` for `RadialNormalCoordinateGauge` would additionally require reproducing the intervening `amplitudeDataOn_concrete` constructor census AND the full `hDConvSlot_AT_GATE` ~130-binder census (which `HDConvGateThreading` itself declines to restate) — that heavy intermediate is NOT materialised here.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10201 jobs); `#print axioms` ×6 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `dfa82b2b`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
+
 ## J4-892 — b-tube compactness-assembly (piece iv) audit: the DECISIVE boundary obstruction PROVED — J4-889's cover route is boundary-unsatisfiable (commit `8bf5bed8`)
 
 **File** `QIQTH/BTubeCompactnessAssembly.lean` (new; no existing banked file edited). The piece-(iv) compactness assembly that would union J4-890/J4-891's per-point general-centre joint-`C²` inverse charts into the single open, in-gate, chart-`C²` cover `W` of the compact core-graph demanded by `onCoreGraphContinuity_of_chartC2_gate_cover` / `hbint_reduced_to_chartC2_gate_cover` (J4-889). **KEY FINDING — the cover route is JOINTLY UNSATISFIABLE at boundary base points; the assembly cannot be built for any `K` with a boundary.**
