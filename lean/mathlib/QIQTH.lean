@@ -5023,3 +5023,16 @@ import QIQTH.HpardiffZTimeDerivReduction
 -- iterE_zero_eq_zero; fderiv≡0 via J4-eqZero). CLOSES NONE of the named carries — proves they SUFFICE
 -- jointly to build the term. std-3 ×3. NOT a₁=R/6.
 import QIQTH.MixedEnvelopeAssembly
+-- WitnessTimeHasDerivAt — J4-915: DISCHARGES the z-POINTWISE TIME HasDerivAt carry that J4-912 left as
+-- the sole DIFFERENTIABILITY residue inside hZ (the differentiability sibling of J4-911's bound hAcrude).
+-- FINDING: the "carried amplitude HasDerivAt" GatedTauDerivRep.witnessTauDeriv_eq_gatedTauRepProd needs
+-- (hgate) is in fact BANKED and UNCONDITIONAL — OnGateJets.chartFieldAmp_hasDerivAt_tau (amplitude affine
+-- in τ) — and the Gaussian time-deriv is banked (heatKernel1D_hasDerivAt_t). witnessTime_differentiableAt:
+-- the concrete gated witness is DifferentiableAt in TIME at every τ>0, UNCONDITIONALLY (gate by_cases:
+-- on-gate = gaussDdim·chartFieldAmp product via vanVleckGatedWitness_gate_apply; off-gate = const 0). No
+-- gate carry — only τ>0 (avoids the on-gate τ=0 diagonal singularity). zTime_hasDerivAt_of_differentiableAt:
+-- generic (A,F) bridge DifferentiableAt ⟹ the census integrand HasDerivAt (affine-shift comp + mul_const).
+-- witnessZTime_hasDerivAt: J4-912's hZ differentiability conjunct DISCHARGED for the concrete witness at
+-- EVERY z (stronger than ∀ᵐ z), given only that V avoids τ≤0. Remaining hZ residue (z-integrable dominator
+-- Dz + z-slice measurabilities) unchanged. std-3 ×4, non-vacuity exhibited. NOT a₁=R/6.
+import QIQTH.WitnessTimeHasDerivAt

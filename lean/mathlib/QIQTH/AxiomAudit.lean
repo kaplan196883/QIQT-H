@@ -29219,4 +29219,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.MixedEnvelopeAssembly.mixedEnvelope_of_named_carries
 #print axioms QIQTH.MixedEnvelopeAssembly.mixedEnvelope_assembly_nonvacuous
 
+-- WitnessTimeHasDerivAt — J4-915: DISCHARGES the z-POINTWISE TIME HasDerivAt carry J4-912 left as the sole
+-- DIFFERENTIABILITY residue inside hZ (the differentiability sibling of J4-911's bound hAcrude). Finding:
+-- the amplitude HasDerivAt that GatedTauDerivRep's hgate needs is BANKED+UNCONDITIONAL (OnGateJets.
+-- chartFieldAmp_hasDerivAt_tau, affine in τ), Gaussian time-deriv banked (heatKernel1D_hasDerivAt_t).
+-- witnessTime_differentiableAt: concrete witness DifferentiableAt in TIME at every τ>0 UNCONDITIONALLY
+-- (gate by_cases; on-gate = gaussDdim·chartFieldAmp product; off-gate = const 0). No gate carry — only τ>0.
+-- zTime_hasDerivAt_of_differentiableAt: generic (A,F) bridge DifferentiableAt ⟹ census integrand HasDerivAt.
+-- witnessZTime_hasDerivAt: hZ differentiability conjunct DISCHARGED for the concrete witness at EVERY z,
+-- given only V avoids τ≤0. Remaining hZ residue (Dz + z-slice meas) unchanged. std-3 ×4. NOT a₁=R/6.
+#print axioms QIQTH.WitnessTimeDeriv.witnessTime_differentiableAt
+#print axioms QIQTH.WitnessTimeDeriv.zTime_hasDerivAt_of_differentiableAt
+#print axioms QIQTH.WitnessTimeDeriv.witnessZTime_hasDerivAt
+#print axioms QIQTH.WitnessTimeDeriv.witnessZTime_hasDerivAt_window_nonempty
+
 end QIQTH.AxiomAudit
