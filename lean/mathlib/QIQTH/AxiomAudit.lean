@@ -28965,4 +28965,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BTubeCompactnessAssembly.consumer_cover_boundary_obstruction
 #print axioms QIQTH.BTubeCompactnessAssembly.boundary_base_point_exists
 
+-- RadialGaugeInterface — the clean NAMED geometric hypothesis for the hDConv center-identity wall.
+-- RadialNormalCoordinateGauge = metric radial (Gauss) gauge ∑ⱼ g_{ij}(y)yʲ=yᵢ + inverse radial gauge
+-- ∑ⱼ gi_{ij}(y)yʲ=yᵢ + centre g(0)=δ diagonal. radialNormalCoordinateGauge_flat (trivial); ★
+-- radialNormalCoordinateGauge_curved (κ≤0: curvedRNCMetric/curvedRNCInv satisfy it WITH Ric≠0 — genuinely
+-- curved, NO collapse, cp466/cp753/cp765 vacuity-trap check passed). abstract_centerIdentities_of_
+-- gaussPullback: center identities hVP/hPsq/hVQ from pullback bridge + gauge (abstract analog of the
+-- curved lift). abstract_centerIdentities_at_gate: collar-quantified. std-3 ×4. NOT a₁=R/6.
+#print axioms QIQTH.RadialGaugeInterface.radialNormalCoordinateGauge_flat
+#print axioms QIQTH.RadialGaugeInterface.radialNormalCoordinateGauge_curved
+#print axioms QIQTH.RadialGaugeInterface.abstract_centerIdentities_of_gaussPullback
+#print axioms QIQTH.RadialGaugeInterface.abstract_centerIdentities_at_gate
+
+-- HDConvReducedToRadialGauge — REDUCTION of AmpGeometryBundle.HjetsShape's center-identity wall (the
+-- deepest leg of hDConv: HjetsShape ← hD2Hexpand ← hbnd_concrete ← hDConvSlot_AT_GATE) to the named
+-- RadialNormalCoordinateGauge. HjetsShape_of_radialGauge: HjetsShape ⟸ gauge + geodesic pullback bridge
+-- (hpullVP/hpullPsq/hpullVQ) + banked mechanical jets (hSopen/h0/hV1/hP1/hA1/hA2), assembled via
+-- hjets_assemble. HjetsShape_of_radialGauge_at_gate: the ∀τz collarRegime→HjetsShape closure. Replaces
+-- hDConv's opaque center-identity carry with one clean standard-geometry hypothesis. std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.HDConvReducedToRadialGauge.HjetsShape_of_radialGauge
+#print axioms QIQTH.HDConvReducedToRadialGauge.HjetsShape_of_radialGauge_at_gate
+
 end QIQTH.AxiomAudit

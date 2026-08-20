@@ -4821,3 +4821,14 @@ import QIQTH.GeneralCenterCoherentInverseChart
 -- for compact K⊆ℝⁿ); boundary is the precise/only residual; hbint NOT closed by the cover route. std-3 ×5.
 -- NOT a₁=R/6.
 import QIQTH.BTubeCompactnessAssembly
+-- RadialGaugeInterface — the clean NAMED geometric hypothesis for the hDConv center-identity wall.
+-- RadialNormalCoordinateGauge (metric + inverse radial/Gauss gauge + g(0)=δ), the standard RNC fact.
+-- radialNormalCoordinateGauge_flat (trivial) + radialNormalCoordinateGauge_curved (★ κ≤0, Ric≠0:
+-- genuinely CURVED, no vacuity/collapse). abstract_centerIdentities_of_gaussPullback: abstract analog
+-- of the curved lift — center identities hVP/hPsq/hVQ from pullback bridge + gauge. std-3 ×4. NOT a₁=R/6.
+import QIQTH.RadialGaugeInterface
+-- HDConvReducedToRadialGauge — the REDUCTION of AmpGeometryBundle.HjetsShape's center-identity wall to
+-- the named RadialNormalCoordinateGauge. HjetsShape_of_radialGauge: HjetsShape ⟸ gauge + pullback bridge
+-- + banked mechanical jets (via hjets_assemble). Collar-quantified form. Replaces hDConv's opaque
+-- center-identity carry with one clean standard-geometry hypothesis. std-3 ×2. NOT a₁=R/6.
+import QIQTH.HDConvReducedToRadialGauge
