@@ -5048,3 +5048,15 @@ import QIQTH.WitnessTimeHasDerivAt
 -- to the SAME named J4-911-class carries {hAcrude, hFdom, meas, base-int}; differentiability discharged.
 -- std-3 ×4, non-vacuity exhibited. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HZDataFromCrudeEnv
+
+-- WitnessTimeDerivEnvelope — DISCHARGES the geometric CORE of the crude TIME-derivative Gaussian envelope
+-- hAcrude (the doubly-load-bearing carry of DerivDomLowerCapped/boundD (J4-911) AND HZDataFromCrudeEnv/hZ
+-- (J4-916)) DIRECTLY from the banked EXACT ∂_τ closed form (witnessTauDeriv_eq_gatedTauRepProd, revealed
+-- explicit+unconditional by J4-915): ∂_τWit = (∑ᵢ(vᵢ²/4τ²−1/2τ))·G_τ(v)·A + G_τ(v)·Cfield, v=W₀z. Triangle
+-- + THREE absorptions (chart-image radial |v|²/τ SELF-absorbed via gaussDdim_poly_absorb gap (1/2,4) w:=z:=v,
+-- then base-transferred via D.poly_absorb 0 → width 4·lam·τ; the n/2τ and Cfield pieces via D.poly_absorb 0 +
+-- gaussDdim_width_mono). Worst rate τ⁻¹ (=2nd-spatial-deriv rate ∂_τG=ΔG); sympy+gpt-5.6-sol confirm NO hidden
+-- log/rate blowup. REDUCES hAcrude to zeroth amp sup-bounds {|A|≤M,|Cfield|≤M'} = the accepted
+-- WideAmplitudeData.hAmp0 class (no hTimeEnv 2nd-jet carry). _global for ∀z; non-vacuity EXHIBITED at nonempty
+-- singleton gate K={0}. std-3 ×4. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.WitnessTimeDerivEnvelope

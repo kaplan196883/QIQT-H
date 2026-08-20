@@ -27,6 +27,7 @@ import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
+import QIQTH.WitnessTimeDerivEnvelope
 import QIQTH.MixedEnvelopeAssembly
 
 namespace QIQTH.AxiomAudit
@@ -29243,5 +29244,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HZDataFromCrudeEnv.hZslice_of_crudeEnv
 #print axioms QIQTH.HZDataFromCrudeEnv.hZslice_of_crudeEnv_hyp_satisfiable
 #print axioms QIQTH.HZDataFromCrudeEnv.witnessHZslice_of_crudeEnv
+
+-- WitnessTimeDerivEnvelope — DISCHARGES the geometric CORE of the crude TIME-derivative Gaussian envelope
+-- hAcrude (the doubly-load-bearing carry of DerivDomLowerCapped/boundD (J4-911) AND HZDataFromCrudeEnv/hZ
+-- (J4-916)) DIRECTLY from the banked EXACT ∂_τ closed form (witnessTauDeriv_eq_gatedTauRepProd, revealed
+-- explicit+unconditional by J4-915): ∂_τWit = (∑ᵢ(vᵢ²/4τ²−1/2τ))·G_τ(v)·A + G_τ(v)·Cfield, v=W₀z. Triangle
+-- + THREE absorptions: chart-image radial |v|²/τ self-absorbed (gaussDdim_poly_absorb at gap (1/2,4),
+-- w:=z:=v) then base-transferred (D.poly_absorb 0) → width 4·lam·τ; the n/2τ and Cfield pieces via
+-- D.poly_absorb 0 + gaussDdim_width_mono. Worst rate τ⁻¹ (= 2nd-spatial-deriv rate, ∂_τG=ΔG); sympy +
+-- gpt-5.6-sol verified NO hidden log/rate blowup. REDUCES hAcrude to zeroth amp sup-bounds {|A|≤M,|Cfield|≤M'}
+-- = the SAME accepted WideAmplitudeData.hAmp0 class (no hTimeEnv 2nd-jet carry needed). _global for ∀z;
+-- non-vacuity EXHIBITED at nonempty singleton gate K={0} (affine-in-τ amp bound). std-3 ×4. NOT a₁=R/6
+-- (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+#print axioms QIQTH.WitnessTimeDerivEnvelope.tauCoeff_abs_bound
+#print axioms QIQTH.WitnessTimeDerivEnvelope.witnessTimeDeriv_domination
+#print axioms QIQTH.WitnessTimeDerivEnvelope.witnessTimeDeriv_domination_global
+#print axioms QIQTH.WitnessTimeDerivEnvelope.witnessTimeDeriv_domination_hyp_satisfiable
 
 end QIQTH.AxiomAudit
