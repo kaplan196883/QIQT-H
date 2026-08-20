@@ -28767,4 +28767,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FieldHessianJointContinuity.hbint_concrete_of_jointContinuousOn
 #print axioms QIQTH.FieldHessianJointContinuity.BF_residual_nonvacuous
 
+-- J4-878: FieldHessianJointContinuityClosed — the JOINT (z,x)-continuity residual of hbint (J4-877)
+-- REDUCED to a clean JOINT ContDiffOn ℝ 1 carry (the "climb one derivative up" step). The general engine
+-- partialFDeriv_norm_jointContinuousOn: ContDiffOn ℝ 1 Ψ on open U ⟹ (z,y)↦‖fderiv(fun y'=>Ψ(z,y')) y‖
+-- ContinuousOn U (continuousOn_fderiv_of_isOpen + inr chain rule + clm_comp + norm). Concrete
+-- fieldHessian_norm_jointContinuousOn_of_jointC1 restricts to K×concreteKx; hbint_concrete_reduced_to_jointC1
+-- feeds hbint_concrete_of_jointContinuousOn ⟹ hbint ⟸ {BL-continuity, joint C¹ of the field-derivative
+-- kernel}. jointC1_carry_nonvacuous: empty gate ⟹ kernel≡0 ⟹ ContDiffOn const (fires, no trap). The joint
+-- C¹ carry = joint C² of uniformInverseChart near the diagonal = the single named irreducible wall
+-- (JointSecondOrderRNCRegularity); hbint is NOT a new wall. std-3 ×4. NOT a₁=R/6.
+#print axioms QIQTH.FieldHessianJointContinuityClosed.partialFDeriv_norm_jointContinuousOn
+#print axioms QIQTH.FieldHessianJointContinuityClosed.fieldHessian_norm_jointContinuousOn_of_jointC1
+#print axioms QIQTH.FieldHessianJointContinuityClosed.hbint_concrete_reduced_to_jointC1
+#print axioms QIQTH.FieldHessianJointContinuityClosed.jointC1_carry_nonvacuous
+
 end QIQTH.AxiomAudit

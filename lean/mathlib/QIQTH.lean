@@ -4648,3 +4648,14 @@ import QIQTH.BFGaussianEnvelopeClosed
 -- on K ×ˢ concreteKx (one derivative above the banked FIRST-derivative slice joint continuity, OPEN) +
 -- BL-continuity. hbint REDUCED not closed. std-3 ×11. NOT a₁=R/6.
 import QIQTH.FieldHessianJointContinuity
+
+-- FieldHessianJointContinuityClosed: J4-878 — the JOINT (z,x)-continuity residual of hbint (J4-877)
+-- REDUCED to a clean JOINT ContDiffOn ℝ 1 carry of the joint field-derivative kernel (z,y)↦
+-- witnessFieldDeriv…y z, i.e. the "climb one derivative up" step, discharged to the SAME single named
+-- geometric wall (JointSecondOrderRNCRegularity: chart jointly C² near diagonal), NOT a new object.
+-- partialFDeriv_norm_jointContinuousOn: general engine — ContDiffOn ℝ 1 Ψ on open U ⟹ partial-in-y
+-- fderiv norm ContinuousOn U (continuousOn_fderiv_of_isOpen + inr chain rule + clm_comp). Concrete
+-- fieldHessian_norm_jointContinuousOn_of_jointC1 feeds hbint_concrete_of_jointContinuousOn ⟹
+-- hbint_concrete_reduced_to_jointC1: hbint ⟸ {BL-continuity, joint C¹ of the kernel}. hbint REDUCED
+-- (Berge+support+climb scaffolding ALL discharged), residual = joint-C² chart frontier. std-3 ×4. NOT a₁=R/6.
+import QIQTH.FieldHessianJointContinuityClosed
