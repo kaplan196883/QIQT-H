@@ -11979,3 +11979,59 @@ census-dischargeable (Sol).
 (propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `400269cc`,
 pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+
+## J4-923 — residue (ii): the CENTER-LOCALIZED (inner-ball-only Lipschitz) ∂_τ-TRACE moment-cancellation bound — commit `d4337c13` (`GaussTauTraceCancellationInnerBall.lean`, new file)
+
+**Task.** Build residue (ii) of the chart-CoV route J4-922 named: RELAX the GLOBAL-Lipschitz
+hypothesis of J4-922's `gaussian_hessian_cancel_trace_on_superset` to a CENTER-Lipschitz bound on an
+INNER BALL only, so a transformed chart weight `q(w)=A(Vw)/|det f'(Vw)|` — Lipschitz only near the
+chart centre — can feed. Sympy-verify the new integral rate; consult gpt-5.6-sol on the plateau-gate /
+τ-uniform-Lipschitz refinements it flagged; thread through to check the actual hGpow/hCross effect.
+
+**gpt-5.6-sol (high) consult.** Confirmed the abstract brick statement + proof plan SOUND and
+non-vacuous (localize the assumptions: global boundedness/measurability + center-Lipschitz on
+`ball 0 r` only; the split `Ω = ball 0 r ⊍ (Ω∖ball 0 r)` has no analytic pitfall; the constant part
+must be bounded WITHOUT double-counting `M`; the inner-moment factorization rates are correct,
+`O(n²τ^{−1/2})`). ★ CRITICAL composability finding (checked, not assumed): after the CoV the CORRECT
+paired weight for the cancellation term is `q₁(w)=A(Vw)·F(s,·)(Vw)/|det|`, NOT `A(Vw)/|det|`; and the
+concrete `∂_τ` rep has a SECOND, zeroth-order term `q₂(w)=Cfield(Vw)·F/|det|` that is `O(1)` in `τ`
+(bounded Gaussian mass) — harmless on a bounded horizon `0<u−s≤T` (`O(1)≤√T·(u−s)^{−1/2}`) but a
+SEPARATE obligation. So residue (ii) removes the global-Lipschitz obstruction FOR THE HESSIAN TERM but
+does NOT by itself discharge `hGpow`/`hCross`.
+
+**Found a cleaner inner-moment route (NO coordinate factorization).** Instead of factorizing the
+product Gaussian, dominate `|zᵢ| ≤ ‖z‖` (sup norm) so `|∑ᵢ((zᵢ)²−2τ)/(4τ²)| ≤ n(‖z‖²+2τ)/(4τ²)`, giving
+the integrand `≤ n/(4τ²)·‖z‖³·G + n/(2τ)·‖z‖·G`; the banked `normPow_gauss_tau` (fed `oneD_absMoment3`
+`= (64√2+1)(√τ)³`, `oneD_absMoment1 = (3/2)√τ`) collapses the τ-powers to `τ^{−1/2}` with constant
+`n²·(16√2+1)` (matching the 1-D J4-919 constant). Sympy + Monte-Carlo numeric CONFIRMED the bound holds
+and the τ^{−1/2} rate (`docs/qg_roadmap/rnc_sympy` numeric check, LHS ≤ bound at all t,n; LHS ~√10 per
+decade in t).
+
+**Landed — NEW FILE `QIQTH/GaussTauTraceCancellationInnerBall.lean` (ns `QIQTH.HeatResidualBound`, no banked file edited). std-3 ×3.**
+- `hessTrace_abs_mul_norm_integral_le` — ★ THE NEW MOMENT:
+  `∫_{z:Point n} |∑ᵢ((zᵢ)²/4τ²−1/2τ)|·gaussDdim τ z·‖z‖ ≤ n²·(16√2+1)/√τ` (`τ>0`).
+- `gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz` — ★★ THE CENTER-LOCALIZED BOUND:
+  for `τ>0`, `r>0`, `q` measurable + globally bounded (`|q|≤M`) + CENTER-Lipschitz on `ball 0 r`
+  (`∀ w∈ball 0 r, |q w − q 0| ≤ L·‖w‖`), and ANY measurable `Ω ⊇ ball 0 r`,
+  `|∫_{z∈Ω}(∑ᵢ((zᵢ)²/4τ²−1/2τ))·gaussDdim τ z·q z| ≤ L·(n²(16√2+1))/√τ + 3·n·M·(√2)ⁿe^{−r²/8τ}(2n+1)/(2τ)`.
+  Route (Sol's recipe): `q=(q−q 0)+q 0`; constant part via J4-922's superset theorem at the CONSTANT
+  weight (`L=0`) → `n·M·tail`; centred part split `Ω = ball 0 r ⊍ (Ω∖ball 0 r)` — inner ball gives
+  `L·(inner moment)`, outer (`⊆{‖z‖≥r}`) gives `2·n·M·tail` via the `2M`-cap + `hessCoord_abs_weighted_tail_le`.
+- `..._hyp_satisfiable` — non-vacuity at `q z := sin(‖z‖²)` (bounded `|q|≤1`; center-Lipschitz `L=1` on
+  `ball 0 1` since `|sin‖z‖²|≤‖z‖²≤‖z‖`; but NOT globally Lipschitz — so J4-922's global-Lipschitz
+  theorem does NOT apply: the relaxation has TEETH), on the PROPER superset `Ω = ball 0 5 ⊋ ball 0 1`.
+
+**Threaded through (honest, NOT assumed).** Composes with the banked chart CoV
+`ChartIFTPackage.chart_gaussian_change_variables_concrete` (J4-270) + J4-922 to give the localized
+Hessian-cancellation estimate the FIRST transformed derivative term needs. Does NOT close `hGpow`/`hCross`:
+the concrete wiring STILL requires (a) an inner-ball τ-UNIFORM Lipschitz estimate for the FULL paired
+weight `A·F/|det|` (V Lipschitz ∘ A affine-in-τ ∘ 1/|det| bounded-below-and-Lipschitz), and (b) bounded
+control of the zeroth-order `Cfield·F/|det|` `O(1)` term (absorbed into the bounded-horizon time-singular
+envelope). These are the downstream assembly, unbuilt.
+
+**Banking.** `lake build QIQTH.GaussTauTraceCancellationInnerBall` 0 errors; `lake build QIQTH.AxiomAudit`
+0 errors (10230 jobs); `#print axioms` std-3 ×3 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `d4337c13`, pushed. Sympy/numeric-rate gate PASSED (τ^{−1/2},
+constant valid upper bound). `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
