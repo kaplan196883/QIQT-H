@@ -4963,3 +4963,18 @@ import QIQTH.HbintInteriorContinuityRoute
 -- MovingCorrAssembly.leviSlice_jointContinuousOn_of_termwise (→ {termwise iterE cont, summable, envelope}).
 -- hUfloor (:176) ← the trivial sibling-redundant ⟨aT,haT,hUlb⟩ (audit D). std-3 ×5. NOT a₁=R/6.
 import QIQTH.HDuhamelBoundaryModulusUniform
+
+-- HbintInteriorTubeCoverRoute — J4-907: REDUCES the interior joint (z,x)-continuity residual left open by
+-- J4-905 (continuity of the field-Hessian norm on interior K×ˢconcreteKx) to the SINGLE geometric carry
+-- b<r₀ (r₀ = the banked Neumann/ContDiffAt threshold radius), via an OPEN V∪Z support cover. Z:=(jointCore)ᶜ
+-- open, field-Hessian≡0 off the core-graph (J4-888) ⟹ ContinuousOn Z. V:=T∩interior(in-gate region) open:
+-- T=the general-center chart-C² locus (generalCenter_chartC2_tube — the J4-891 ContDiffAts assembled into a
+-- ContDiffOn on an open tube via the ContDiffAt-locus-open trick, r₀ uniform over interior K); the interior
+-- b-core sits in interior(in-gate) via core_mem_interior_inGate (the eventual-right-inverse conjunct of
+-- generalCenter_coherent_joint_chart — no new IFT/open-map export). On V the chart is C² + every pt in-gate
+-- (gate exp q '' ball 0 c is OPEN, uniformInverseChart_huniformChart) ⟹ kernel jointly C¹ (J4-887) ⟹
+-- field-Hessian norm ContinuousOn V (J4-878). interiorFieldHessianNorm_continuousOn glues V∪Z; hbint_interior
+-- _via_tube_cover_of_bLtR0 feeds it (per a.e. s) into J4-905 hbint_concrete_via_interior_route ⟹ the full
+-- hbint field GIVEN b<r₀ (r₀:=min rTube (min ρ₀ (1/(C_D+1)))>0). b<r₀ carried OPEN, not established. std-3 ×5.
+-- hbint REDUCED to b<r₀ + elementary carries, NOT closed. NOT a₁=R/6.
+import QIQTH.HbintInteriorTubeCoverRoute

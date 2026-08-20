@@ -24,6 +24,7 @@ import QIQTH
 import QIQTH.HbintMeasurabilityNullFrontier
 import QIQTH.HbintInteriorContinuityRoute
 import QIQTH.HDuhamelBoundaryModulusUniform
+import QIQTH.HbintInteriorTubeCoverRoute
 
 namespace QIQTH.AxiomAudit
 
@@ -29134,5 +29135,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDuhamelBoundaryModulusUniform.hsup_census_of_sliceContinuity
 #print axioms QIQTH.HDuhamelBoundaryModulusUniform.hUfloor_of_windowFloor
 #print axioms QIQTH.HDuhamelBoundaryModulusUniform.hmod_hsup_at_witness
+
+-- HbintInteriorTubeCoverRoute — J4-907: REDUCES the interior joint (z,x)-continuity residual (J4-905) to
+-- the single geometric carry b<r₀ via an OPEN V∪Z support cover. generalCenter_chartC2_tube (item 1): the
+-- J4-891 general-center ContDiffAts assembled into a ContDiffOn ℝ 2 on an OPEN tube (ContDiffAt-locus-open),
+-- r₀ uniform over interior K. core_mem_interior_inGate (item 2 bridge): interior-core local-openness of the
+-- in-gate region from the eventual-right-inverse of generalCenter_coherent_joint_chart. interiorFieldHessian
+-- Norm_continuousOn: V∪Z gluing (Z=(jointCore)ᶜ field-Hessian≡0 J4-888; V=T∩interior(in-gate) chart-C²+in-gate
+-- ⟹ kernel C¹ J4-887 ⟹ norm cont J4-878). hbint_interior_via_tube_cover_of_bLtR0: the FULL hbint field via
+-- J4-905 hbint_concrete_via_interior_route, GIVEN b<r₀. std-3 ×5. hbint REDUCED to b<r₀, NOT closed. NOT a₁=R/6.
+#print axioms QIQTH.HbintInteriorTubeCoverRoute.generalCenter_chartC2_tube
+#print axioms QIQTH.HbintInteriorTubeCoverRoute.core_mem_interior_inGate
+#print axioms QIQTH.HbintInteriorTubeCoverRoute.interiorFieldHessianNorm_continuousOn
+#print axioms QIQTH.HbintInteriorTubeCoverRoute.hbint_interior_via_tube_cover_of_bLtR0
+#print axioms QIQTH.HbintInteriorTubeCoverRoute.interior_residual_of_bLtR0_nonvacuous
 
 end QIQTH.AxiomAudit
