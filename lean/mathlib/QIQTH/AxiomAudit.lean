@@ -21,6 +21,7 @@
 -/
 
 import QIQTH
+import QIQTH.HbintMeasurabilityNullFrontier
 
 namespace QIQTH.AxiomAudit
 
@@ -29096,5 +29097,16 @@ namespace QIQTH.AxiomAudit
 -- AmplitudeDerivativeDataConcrete.vanVleckGatedWitness_eq_zero_of_nonpos. std-3 ×2. NOT a₁=R/6.
 #print axioms QIQTH.HDuhamelCensusVanishingDischarged.hFzero_live
 #print axioms QIQTH.HDuhamelCensusVanishingDischarged.hAzero_live
+
+-- HbintMeasurabilityNullFrontier — MEASURABILITY route to hbint, dodging the boundary no-go (J4-892):
+-- hbint needs Integrable(BL·BF)=AEStronglyMeasurable+dominator, NOT continuity; AESM tolerates the null
+-- ∂K (sphere, null) that continuity cannot. Reduces hbint to {volume(frontier K)=0, interior-continuity
+-- of BF, off-K vanishing, BL-continuity, compact-K bound}. std-3 ×6, non-vacuous at live ball K. NOT a₁=R/6.
+#print axioms QIQTH.HbintMeasurabilityNullFrontier.aestronglyMeasurable_of_continuousOn_compl_null
+#print axioms QIQTH.HbintMeasurabilityNullFrontier.integrable_of_bounded_compactSupport
+#print axioms QIQTH.HbintMeasurabilityNullFrontier.volume_frontier_closedBall_eq_zero
+#print axioms QIQTH.HbintMeasurabilityNullFrontier.aestronglyMeasurable_of_interiorContinuous_nullFrontier
+#print axioms QIQTH.HbintMeasurabilityNullFrontier.hbint_of_interiorContinuous_nullFrontier
+#print axioms QIQTH.HbintMeasurabilityNullFrontier.hbint_reduction_nonvacuous
 
 end QIQTH.AxiomAudit

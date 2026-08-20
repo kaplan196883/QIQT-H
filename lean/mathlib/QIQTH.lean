@@ -4928,3 +4928,13 @@ import QIQTH.HAdomHWDomHwDischargedInfty
 -- leviSeries_eq_zero_of_nonpos); hAzero_live ← AmplitudeDerivativeDataConcrete.vanVleckGatedWitness_eq_zero_of_nonpos.
 -- Verbatim census-binder shapes (defeq-checked). std-3 ×2. NOT a₁=R/6.
 import QIQTH.HDuhamelCensusVanishingDischarged
+
+-- HbintMeasurabilityNullFrontier — the MEASURABILITY (not continuity) route to the `hbint` field of
+-- MixedDirFieldHessianEnvelope, DODGING the proved boundary no-go (BTubeCompactnessAssembly J4-892).
+-- hbint only needs Integrable(BL·BF) = AEStronglyMeasurable + integrable dominator, NOT continuity;
+-- AEStronglyMeasurable TOLERATES the null discontinuity locus ∂K (a sphere for the live ball K, null by
+-- addHaar_sphere) that continuity does not. Reduces hbint to {volume(frontier K)=0 (discharged for the
+-- live ball), interior-continuity of BF (fed by the interior joint-chart regularity — the asset the no-go
+-- LEAVES available), off-K vanishing (banked), BL-continuity, compact-K product bound}. std-3 ×6,
+-- non-vacuous at the live ball K. Sol-confirmed. NOT a₁=R/6.
+import QIQTH.HbintMeasurabilityNullFrontier
