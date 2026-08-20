@@ -5103,6 +5103,17 @@ import QIQTH.GaussTauTraceCancellation
 -- cancellation from Ω = W₀''(ball 0 ρ) into the flat cancellation on ℝⁿ. std-3 ×3. NOT a₁=R/6.
 import QIQTH.GaussTauTraceCancellationLocalized
 
+-- GaussTauTraceCancellationInnerBall — J4-923: residue (ii) — the CENTER-LOCALIZED (inner-ball-only
+-- Lipschitz) ∂_τ-TRACE moment-cancellation bound. RELAXES the global-Lipschitz hypothesis of J4-922 to a
+-- center-Lipschitz bound on ball 0 r only (|q w − q 0| ≤ L·‖w‖), keeping global boundedness/measurability.
+-- New moment hessTrace_abs_mul_norm_integral_le (∫|∑ᵢ((zᵢ)²/4τ²−1/2τ)|·gaussDdim τ z·‖z‖ ≤ n²(16√2+1)/√τ,
+-- sup-norm domination + normPow_gauss_tau, NO coord factorization) +
+-- gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz (|∫_{z∈Ω}(...)·q z| ≤ L·(n²(16√2+1))/√τ
+-- + 3·n·M·(√2)ⁿe^{−r²/8τ}(2n+1)/(2τ)). Non-vacuity at q z:=sin‖z‖² (bounded, center-Lipschitz but NOT
+-- globally Lipschitz). Feeds the chart weight A(Vw)/|det f'(Vw)|; does NOT itself discharge hGpow/hCross
+-- (paired weight A·F/|det| Lipschitz + Cfield·F/|det| O(1) term remain). std-3 ×3. NOT a₁=R/6.
+import QIQTH.GaussTauTraceCancellationInnerBall
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

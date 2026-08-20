@@ -31,6 +31,7 @@ import QIQTH.WitnessTimeDerivEnvelope
 import QIQTH.GaussTauDerivCancellation
 import QIQTH.GaussTauTraceCancellation
 import QIQTH.GaussTauTraceCancellationLocalized
+import QIQTH.GaussTauTraceCancellationInnerBall
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29356,5 +29357,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hessCoord_abs_weighted_tail_le
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset_hyp_satisfiable
+
+-- ## J4-923 (GaussTauTraceCancellationInnerBall): residue (ii) — the CENTER-LOCALIZED (inner-ball-only
+-- Lipschitz) ∂_τ-TRACE moment-cancellation bound. RELAXES the GLOBAL-Lipschitz hypothesis of J4-922's
+-- gaussian_hessian_cancel_trace_on_superset to a CENTER-Lipschitz bound on ball 0 r only
+-- (∀ w∈ball 0 r, |q w − q 0| ≤ L·‖w‖), keeping only global boundedness/measurability (cheap junk
+-- extension) — exactly what lets a chart weight controlled only near the centre feed. NEW MOMENT
+-- hessTrace_abs_mul_norm_integral_le: ∫|∑ᵢ((zᵢ)²/4τ²−1/2τ)|·gaussDdim τ z·‖z‖ ≤ n²(16√2+1)/√τ (via
+-- sup-norm domination |zᵢ|≤‖z‖ collapsing to n(‖z‖²+2τ)/(4τ²), then banked normPow_gauss_tau fed
+-- oneD_absMoment3/1 — NO coordinate factorization; τ^{−1/2} rate matches the 1-D J4-919 constant, sympy
+-- + numeric verified). gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz: for such q + ANY
+-- measurable Ω⊇ball 0 r, |∫_{z∈Ω}(∑ᵢ((zᵢ)²/4τ²−1/2τ))·gaussDdim τ z·q z| ≤ L·(n²(16√2+1))/√τ + 3·n·M·
+-- (√2)ⁿe^{−r²/8τ}(2n+1)/(2τ) (Sol recipe q=(q−q 0)+q 0: constant part via J4-922 superset at L=0 →
+-- n·M·tail; centred part split ball⊍(Ω∖ball) → inner L·moment + outer 2·n·M·tail). Non-vacuity at
+-- q z:=sin‖z‖² (bounded |q|≤1, center-Lipschitz L=1 on ball 0 1 since |sin‖z‖²|≤‖z‖²≤‖z‖, but NOT
+-- globally Lipschitz — so the J4-922 theorem does NOT apply: relaxation has TEETH). COMPOSES with the
+-- banked chart CoV; does NOT itself discharge hGpow/hCross (the paired weight A·F/|det| inner-ball
+-- Lipschitz τ-uniform + the zeroth-order Cfield·F/|det| O(1) term remain, per gpt-5.6-sol audit).
+-- std-3 ×3. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.hessTrace_abs_mul_norm_integral_le
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz_hyp_satisfiable
 
 end QIQTH.AxiomAudit
