@@ -11809,3 +11809,57 @@ CORE, not the full discharge. Downstream (still unbanked): wiring `DtauG` + `res
 into the `∂_x g(x,s)` derivative bound; the three-regime split (`|h|≥δ/4` bounded-G, small-h/small-k
 off-diagonal, small-h/large-k integrated W5-core) closing to `O(|h||k|)`; the `hCross` census binder itself.
 `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
+
+## J4-920 — the n-D ∂_τ-TRACE moment-cancellation Lipschitz bound: hCross sub-campaign flat-coordinate piece (i) — commit `3e93c2d2`
+
+**Task.** Advance piece (i) of the `hCross` route (J4-919 named it: "wire `DtauG` +
+`resolvent_lipschitz_pointwise` into `|∂_x g(x,s)| ≲ (x−s)^{−1/2}`"). J4-919's cancellation core was 1-D;
+determine whether the census needs an n-D generalization, whether that generalization is already banked,
+build the well-bounded brick, consult gpt-5.6-sol on the 1-D vs n-D dimensionality question and go/no-go.
+
+**Findings (from reading the LIVE census).**
+ • **z is genuinely n-DIMENSIONAL.** The census `hCross` is a mixed 2nd-difference of
+   `K(τ₀,t) = heatConvFrozen H F τ₀ t 0 0 = ∫₀ᵗ (∫_z H(τ₀−s) 0 z·F s z 0) ds` (`HeatDuhamel.lean:135`),
+   with `z : Point n` (= `Fin n → ℝ`), NOT 1-D. So J4-919's 1-D `DtauG` core does NOT apply as-is.
+ • **The n-D cancellation is ALREADY BANKED.** `gaussian_hessian_cancel` (J4-124,
+   `GaussianHessianCancel.lean`): for `t>0`, `i:Fin n`, `q` Lipschitz (const `L≥0`, bounded, measurable),
+   `|∫_{z:Point n} ((zᵢ)²−2t)/(4t²)·gaussDdim t z·q(z)| ≤ L·(15/2·n)/√t` — the PER-COORDINATE spatial-Hessian
+   `∂ᵢ²` version. By the flat heat equation `∂_τG = ΔG = ∑ᵢ∂ᵢ²G` (`gaussDdim_heat_eqn`), the full `∂_τ`-TRACE
+   version is the sum over `i`. No trace-sum version was banked (only per-coordinate).
+ • **The concrete witness `∂_τ` rep is CHART-COMPOSED.** `gatedTauRepProd`
+   (`GatedTauDerivRep.lean:76`) = `indicator_{q∈K}·[(∑ᵢ((vᵢ)²/4τ² − 1/2τ))·gaussDdim τ v·chartFieldAmp +
+   gaussDdim τ v·Cfield]`, `v = uniformInverseChart(...) q p` a NONLINEAR chart map of the field point `p`
+   (= integration var `z`). The multiplier `∑ᵢ((vᵢ)²/4τ² − 1/2τ)` matches the `gaussian_hessian_cancel`
+   summand form EXACTLY.
+
+**Sol (gpt-5.6-sol, high) go/no-go.** (A) GO on banking the thin n-D `∂_τ`-trace assembly exposing the
+syntactically exact multiplier `∑ᵢ(zᵢ²/4τ² − 1/2τ)` (legitimate flat-coordinate API leaf; removes repeated
+finite-sum/integrability plumbing). (B) The concrete-`G` bridge is BLOCKED with the current bank: after
+`v=W(z)` the cancellation needs the transformed weight `q̃(v)=1_{gate}·|det DW⁻¹|·(amp·F)(W⁻¹v)` proven
+bounded/measurable/globally Lipschitz — the Jacobian + inverse-chart composition + chart-boundary indicator
+do NOT follow from `resolvent_lipschitz_pointwise` alone; needs a boundary cutoff or a separate
+Jacobian-remainder estimate. Build (A), report the chart-CoV wall precisely, do NOT force a partial bridge.
+
+**Landed — NEW FILE `QIQTH/GaussTauTraceCancellation.lean` (ns `QIQTH.HeatResidualBound`, no banked file edited). std-3 ×3.**
+ • `gaussian_hessian_cancel_trace` — ★★★ for `τ>0`, `q` Lipschitz (const `L≥0`, bounded, measurable),
+   `|∫_{z:Point n} (∑ᵢ((zᵢ)²/4τ² − 1/2τ))·gaussDdim τ z·q(z)| ≤ L·(15/2·n²)/√τ`. Route: the trace multiplier
+   factors the integrand into `∑ᵢ ((zᵢ)²−2τ)/(4τ²)·G·q`; `integral_finsetSum` + `abs_sum_le_sum_abs` +
+   `gaussian_hessian_cancel` per coordinate (each `≤ L·(15/2·n)/√τ`) over `n` coordinates ⟹ `L·(15/2·n²)/√τ`
+   (τ^{−1/2} integrable-singularity rate). Stated in the EXACT multiplier shape of `gatedTauRepProd`.
+ • `hess_coord_gaussDdim_q_integrable` — per-coordinate summand integrability (reconstructed exactly as
+   inside `gaussian_hessian_cancel`, via `coordSq_gaussDdim_integrable`/`gaussDdim_integrable'`/`mul_bdd`).
+ • `gaussian_hessian_cancel_trace_hyp_satisfiable` — NON-VACUITY EXHIBITED at a genuine NONCONSTANT bounded
+   Lipschitz weight `q z := cos(dist z 0)` (`Real.abs_cos_sub_cos_le`+`abs_dist_sub_le` ⟹ 1-Lipschitz,
+   `|q|≤1`, continuous). Not the empty/constant witness.
+
+**Honest standing / still open.** This is the FLAT/CHART-coordinate form of piece (i). The CONCRETE-census
+bridge (`|∂_x g(x,s)| ≲ (x−s)^{−1/2}` for the chart-composed Gaussian `gaussDdim τ (W z)` against the
+resolvent weight `F s z 0`) remains the open downstream wall: exact `∫∂_τG=0` holds in the Gaussian's own
+coordinate `v=W(z)`, but the census integrates `dz` with `W` nonlinear ⟹ Jacobian `|det DW|` breaks it
+unless `W` affine (RNC center-only gauge — same class as the cp466 curved-capstone vacuity). The
+three-regime split and the `hCross` census binder are also downstream, unbanked.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10227 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `3e93c2d2`,
+pushed. `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
