@@ -29012,4 +29012,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmplitudeDataOnFromRadialGauge.radialGauge_discharges_hjets_carry
 #print axioms QIQTH.AmplitudeDataOnFromRadialGauge.hbnd_v2_census_of_radialGauge
 
+-- HmassoneFromGateAnnulusSplit — J4-896: the ABSTRACT-g `hmassone` census-binder discharge for the LIVE
+-- order-1 capstone. hmassone_from_gate_annulus_split: the exact frozen/moving census binder
+-- `Tendsto (fun m => ∫ z, vanVleckGatedWitness g gi hChr hK S a b (epsSeq m) 0 z) atTop (𝓝 1)` (abstract
+-- g gi S) as the f≡1 case of GateAnnulusSplit.chartImage_approx_identity_final ∘ epsSeq→𝓝[>]0 — the
+-- abstract-g generalization of the curved-only curved_hmassone_final_at_gate. hmassone_at_constGate: the
+-- same at S:=constGate (the live gate). std-3 both. NOT a₁=R/6.
+#print axioms QIQTH.HmassoneFromGateAnnulusSplit.hmassone_from_gate_annulus_split
+#print axioms QIQTH.HmassoneFromGateAnnulusSplit.hmassone_at_constGate
+
 end QIQTH.AxiomAudit

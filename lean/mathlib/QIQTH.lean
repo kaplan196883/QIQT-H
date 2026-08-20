@@ -4841,3 +4841,16 @@ import QIQTH.HDConvReducedToRadialGauge
 -- AmplitudeDerivativeData is NOT constructible for the curved witness (rhoRatio bounded only on collar);
 -- the collar bundle is the real target. std-3 ×3. NOT a₁=R/6.
 import QIQTH.AmplitudeDataOnFromRadialGauge
+-- HmassoneFromGateAnnulusSplit — J4-896: the ABSTRACT-`g` `hmassone` discharge for the LIVE order-1
+-- capstone's shared frozen/moving census (the `hmassone` binder of hDuhamel_live_gate_wired:217-218 and
+-- HDerivConvComposition.hbdryLU_CONCRETE:133). hmassone_from_gate_annulus_split: the exact census-binder
+-- shape `Tendsto (fun m => ∫ z, vanVleckGatedWitness g gi hChr hK S a b (epsSeq m) 0 z) atTop (𝓝 1)`,
+-- for ABSTRACT g gi S, as the f≡1 case of the banked GateAnnulusSplit.chartImage_approx_identity_final
+-- composed with epsSeq→𝓝[>]0. This is the ABSTRACT-g generalization of the curved-only
+-- CurvedA1HmassoneFinal.curved_hmassone_final_at_gate (J4-591) — the abstract-g version the LIVE capstone
+-- (over abstract g, cp765) actually needs, avoiding the cp466 curvedRNCMetric κ⟹K={0} vacuity trap; the
+-- vacuous ∃ρ wrapper is DROPPED so the conclusion is EXACTLY the census binder. constGate_eq_liveGate:
+-- rfl defeq check that constGate = the live capstone's gate. hmassone_at_constGate: the discharge at the
+-- live gate. Carried surface = base geometry/gauge (present in capstone) + pre-ρ gate triple
+-- {rS,hKball,hSact} + hWslice (= census hWmeas) + hDom (= census hWDom). std-3 all. NOT a₁=R/6.
+import QIQTH.HmassoneFromGateAnnulusSplit
