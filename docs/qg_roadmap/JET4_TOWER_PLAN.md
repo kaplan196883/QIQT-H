@@ -12090,3 +12090,56 @@ carries `hD2Hexpand`; the chart-CoV route's remaining wall is the geometric `1/|
 `axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `0072220a`, pushed. `a₁ = R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+## J4-925 — the DETERMINANT-FACTOR reduction bricks for the chart-CoV route — commit `a44b9511` (`GaussTauTraceChartDetFactor.lean`, new file)
+
+**Task.** Attempt the geometric per-factor obligation J4-924 flagged as the remaining chart-CoV wall: the
+reciprocal Jacobian weight `1/|det f'|∘V` bounded + Lipschitz. Read the banked near-identity Jacobian /
+det bank (`chartW0_firstJet_gap`, `uniformFlowExp_fderiv_near_id_quant`, `clm_inverse_sub_one_le`,
+`chartW0_absdet_fderiv_zero`, `baseVaryingIFTPackage`/`chartIFTPackage`), determine whether Mathlib has
+quantitative determinant-Lipschitz, thread `W₀∘V=id` + `MeasurableSet Ω` + the heat-equation bridge, bank
+whatever genuinely closes.
+
+**Findings (verbatim-verified against the LIVE code, not memory).**
+- `AmplitudeDerivativeDataConcrete.hGpow_of_amplitudeData_noEndpoint` is ALREADY a PROVED theorem (delegates
+  to `MemAdjHiMomentBound.hGpow_of_amplitudeData`, `hEndpoint` supplied internally). It CONSUMES
+  `data : ∀ i, AmplitudeDerivativeData …`. So `hGpow` is NOT open at the abstract level — the real open
+  frontier is CONSTRUCTING that `AmplitudeDerivativeData` instance for the concrete curved witness. Its hard
+  fields: `hD2Hexpand` (the PER-COORDINATE `i` 3-term Leibniz–Gaussian identity `witnessSecondXDeriv i τ z =
+  (z i²−2τ)/(4τ²)·G·Aamp + z i/(2τ)·G·A1amp + G·A2amp`) and `hqLip` (PAIRWISE Lipschitz of the paired weight
+  `Aamp·F`: `|Aamp τ z·F s z 0 − Aamp τ w·F s w 0| ≤ L·dist z w`). `hGpow`'s cancellation is PER-COORDINATE
+  (matches banked `gaussian_hessian_cancel`, J4-124), NOT the ∂_τ-trace `∑ᵢ` (that trace route J4-920/923/924
+  serves the hCross/hDConv consumer, a different one). `hDHexpand` does NOT exist anywhere (only `hD2Hexpand`).
+- **gpt-5.6-sol (high) CORRECTION** of the J4-924 report: `hqLip` is PAIRWISE Lipschitz, NOT center-Lipschitz.
+  A center-Lipschitz bound does NOT imply pairwise (triangle only gives `L(‖z‖+‖w‖)`). So the reciprocal glue
+  for the det factor must be PAIRWISE. Sol also flagged: `W₀∘V=id` on the image is Mathlib
+  `Set.LeftInvOn.rightInvOn_image` (no brick); after CoV the transported domain is the ball itself so
+  `MeasurableSet Ω` is `measurableSet_ball` (trivial); the `1/|det|∘V` variable must be `fderiv W₀ (V w)`
+  (not `fderiv W₀ w`).
+- Mathlib has `ContinuousLinearMap.continuous_det` (continuity ONLY). NO quantitative operator-determinant
+  Lipschitz/differentiability lemma (grepped: no `hasFDerivAt_det`, `differentiable_det`, `LipschitzOnWith det`).
+
+**Landed — NEW FILE `QIQTH/GaussTauTraceChartDetFactor.lean` (ns `QIQTH.HeatResidualBound`). std-3 ×4.**
+- `reciprocal_abs_lipschitzOn` — ★★ PAIRWISE reciprocal glue (the `hqLip` shape). For `D : Point n → ℝ`
+  bounded below (`c ≤ |D x|` on `S`, `c>0`) + pairwise-Lipschitz (`|D x − D y| ≤ L_D·dist x y` on `S`),
+  `w↦1/|D w|` is bounded `1/c` + pairwise-Lipschitz `L_D/c²` on `S` (via `||a|−|b|| ≤ |a−b|`).
+- `ratio_abs_lipschitzOn` — ★★ consumer-facing `A·F/|det|` per-factor. For `P` bounded(`M_P`)+Lip(`L_P`),
+  `D` bnd-below(`c`)+Lip(`L_D`) on `S`: `P/|D|` bounded `M_P/c` + pairwise-Lipschitz `L_P/c + M_P·L_D/c²`
+  (`P:=A·F` feeds `hqLip`).
+- `reciprocal_abs_center_lipschitz` — ★ center-at-0 corollary (`y:=0`, `dist z 0=‖z‖`) — the
+  `two_term_census_bound_uniform` `hcl` shape.
+- `reciprocal_abs_lipschitzOn_hyp_satisfiable` — non-vacuity with TEETH: `D z:=2+‖z‖` (`|D|≥2`,
+  pairwise-Lip `1` via `|‖x‖−‖y‖|≤‖x−y‖`, `L_D=1≠0`), `P z:=1`.
+
+**Threaded through (honest).** REDUCES `1/|det f'|∘V` Lipschitz+bounded to exactly TWO geometric obligations
+it does NOT prove: (A) `det∘V` bounded BELOW by `c>0` (EXTRACTABLE — IFT pkgs prove `1/2<det` internally
+from `chartW0_absdet_fderiv_zero=1` + det-continuity); (B) `det∘V` pairwise LIPSCHITZ (the SLOPE = GENUINE
+remaining wall — needs quantitative operator-det Lipschitz `|det A−det B|≤C(n,‖·‖)·‖A−B‖` (Sol: the
+coordinate-polynomial `Matrix.det` permutation-sum route with a coarse constant `n!·n·max(1,M)^n` avoids the
+sharp operator theorem and is the cleanest Lean path, ABSENT from Mathlib) composed with Jacobian-Lipschitz
+`‖f'(x)−f'(y)‖≤L_J·dist x y` (chart C² Hessian) and `V`'s own Lipschitz `L_V`). Does NOT close `hqLip`/`hGpow`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10232 jobs); `#print axioms` std-3 ×4
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `a44b9511`,
+pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
