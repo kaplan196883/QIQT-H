@@ -4527,6 +4527,16 @@ import QIQTH.ChartJetXUniformBound
 -- now phrased as the minimal BddAbove input (no dominator to guess). std-3. NOT a₁=R/6.
 import QIQTH.ChartJetXUniformBoundClosed
 
+-- ChartJetHFdBoundaryClosed: J4-869 — FRONTIER LOCALISATION of the hFd boundary residual. Refutes both
+-- hoped-for shortcuts precisely: (a) off-gate=0 does NOT close hbdd (it bounds the field-Hessian OUTSIDE
+-- closure, not on it); (b) upper-semicontinuity FAILS (gated field discontinuous at ∂(S z) ⟹ fderiv=0
+-- there ⟹ DOWNWARD jump, limsup>value). Correct advance: closure T ⊆ T ∪ frontier T splits hbdd into
+-- {bounded on the gate S z (smooth interior)} + {field-Hessian VANISHES on ∂(S z) (generic — the (b)
+-- jump)}. witnessFieldHessian_hFd_ciSup_of_gateBdd_frontierZero = the EXACT hFd field (BF:=⨆x‖fderiv‖)
+-- reduced a.e. to that sharpened pair, strictly refining J4-866's single BddAbove-on-closure. std-3.
+-- NOT a₁=R/6.
+import QIQTH.ChartJetHFdBoundaryClosed
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;

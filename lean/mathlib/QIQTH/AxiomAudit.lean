@@ -28614,6 +28614,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetXUniformBoundClosed.witnessFieldHessian_hFd_ciSup_of_compactGate_continuousOn
 #print axioms QIQTH.ChartJetXUniformBoundClosed.hFd_bddAbove_nonvacuous
 
+-- J4-869: ChartJetHFdBoundaryClosed — FRONTIER LOCALISATION of the hFd boundary residual. closure_subset_
+-- self_union_frontier: closure T ⊆ T ∪ frontier T. bddAbove_image_closure_of_gate_frontier: BddAbove on
+-- closure from gate + frontier bounds. bddAbove_image_frontier_of_fderiv_zero: frontier field-Hessian
+-- image bounded when fderiv=0 on ∂(S z). frontier_fderiv_eqZero_of_not_differentiable: the generic (b)
+-- mechanism — non-differentiable ⟹ fderiv=0. witnessFieldHessian_hFd_ciSup_of_gateBdd_frontierZero: ★★ the
+-- EXACT hFd field (BF:=⨆x‖fderiv‖) reduced a.e. to {bounded on gate S z, field-Hessian vanishes on ∂(S z)},
+-- strictly refining J4-866's single BddAbove-on-closure. std-3. NOT a₁=R/6.
+#print axioms QIQTH.ChartJetHFdBoundaryClosed.closure_subset_self_union_frontier
+#print axioms QIQTH.ChartJetHFdBoundaryClosed.bddAbove_image_closure_of_gate_frontier
+#print axioms QIQTH.ChartJetHFdBoundaryClosed.bddAbove_image_frontier_of_fderiv_zero
+#print axioms QIQTH.ChartJetHFdBoundaryClosed.frontier_fderiv_eqZero_of_not_differentiable
+#print axioms QIQTH.ChartJetHFdBoundaryClosed.witnessFieldHessian_hFd_ciSup_of_gateBdd_frontierZero
+#print axioms QIQTH.ChartJetHFdBoundaryClosed.hFd_frontierLocalised_nonvacuous
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT
