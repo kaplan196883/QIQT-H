@@ -11357,3 +11357,53 @@ std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom) + the `rfl` defeq
 `axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `14ab146f`, pushed. NO O(√ε) rate (pure wiring) ⟹ sympy-rate gate
 N/A. `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
+
+## J4-911 — C3ε parameter-derivative dominator (`boundD`) SUPPLIED via lower-capped Gaussian pairing — the DATA-still residue reduced to a named crude time-derivative envelope (commit `dd1df76f`)
+
+**Task.** Investigate the `boundD`/`hbdd_d`/`hbound_d` "C3ε dominator" — one of the two remaining
+genuine open items in the shared `hDuhamel`/`hDConv` census (the other being `hCross`, left per J4-908
+as a genuine W5 analytic wall). Determine whether it is find-and-wire, trivially constructible (like
+`hUfloor` in J4-906), or a genuine sub-wall.
+
+**Finding (scope, Sol-confirmed at gpt-5.6-sol high).** `boundD` is the dominating function for
+differentiation-under-the-∫ (Leibniz in the parameter `c`) of the frozen convolution:
+`‖∫ z, deriv (fun r => Wit r 0 z) (c−s) · F s z 0‖ ≤ boundD m u s`, integrable in `s` on `[0,u−εₘ]`,
+uniform over `c ∈ nb m u`. It is NOT trivial data-packaging and NOT the open-ended `hCross` wall — it is
+a **small bounded (3–4 lemma) sub-campaign**: the analytic route is sound with NO cancellation. The
+machinery to convert a crude-capped first-factor Gaussian bound into the integrability + pointwise
+dominator IS banked (`EveryCeilingFamilies.pairing_intervalIntegrable_lowerCapped` +
+`gaussDdim_crude_to_capped`); the EXACT `∂_τ` closed form of the witness IS banked
+(`GatedTauDerivRep.gatedTauRepProd`); and the polynomial×Gaussian absorption bank
+(`GaussianWidthTransfer.gaussDdim_absorb_mixed`, `FrozenK2`, `GaussianGradAbsorption`) is banked. The
+ONLY missing input is a crude time-derivative envelope `|deriv(fun r=>Wit r 0 z)τ| ≤ C·τ⁻¹·gaussDdim`,
+the SAME class as the accepted `WideAmplitudeData.second_domination` (which itself bottoms out at carried
+`hAmp0`/`hSecondEnv` geometric inputs — so the time-deriv sibling stays a named geometric carry, not a
+fully-discharged result).
+
+**Landed (this dispatch).** NEW FILE `QIQTH/DerivDomLowerCapped.lean` (no banked file edited):
+`derivDom_boundD_of_crude` SUPPLIES the census `boundD`/`hbdd_d`/`hbound_d` triple as a CONSTANT
+dominator, reduced to the single named crude time-derivative envelope `hAcrude` + the width-2 Levi bound
+(banked via `EveryCeilingFamilies.hFdomEvery_from_dataLevi`) + `hFzero` (banked). Route: on the pairing
+interval `s∈(0,u−εₘ]` with `c ∈ derivDomNb m u := ball u (εₘ/2)`, the derivative time `τ=c−s ∈ (εₘ/2,
+u+εₘ)` and `0<s≤u+εₘ`, so the crude `τ⁻¹` envelope lower-caps (`τ⁻¹ ≤ (εₘ/2)⁻¹`) to a genuine Gaussian,
+paired against the width-2 Levi bound and integrated in `z` (`gaussDdim_pairing_integral`); since
+`wL·τ+wF·s ≥ (min wL wF)·c ≥ (min wL wF)·(u−εₘ/2) > 0`, centred-Gaussian peak antitonicity
+(`gaussDdim_zero_antitone`) bounds it by the `s,c`-UNIFORM CONSTANT `M m u`. `hbound_d` proved
+DETERMINISTICALLY over `s` and `c` (the `s≤0` branch zero by `hFzero`) then `∀ᵐ`-wrapped — sidesteps
+the illegal `∀c ∀ᵐs` order Sol flagged; `hbdd_d = intervalIntegrable_const`; `derivDomNb_mem_nhds`
+supplies `hnb` at the CONCRETE shared neighborhood (so the same `nb` feeds the companion `hpardiff`
+later, no existential mismatch).
+
+**Still open in the shared census** (unchanged, honest): `hCross` (mixed 2nd-difference bilinear
+Lipschitz, W5, no provider — left per J4-908); `hAcrude` (the crude time-derivative envelope — now the
+SOLE residue of the `boundD` group, a named geometric carry of the `second_domination` class, satisfiable
+via the `GatedTauDerivRep` closed form + absorption bank); and `hpardiff` (the companion parametric
+`HasDerivAt`, which additionally needs differentiation-under-the-`z`-integral — the natural NEXT
+increment, consuming exactly the `boundD`/`hbound_d` supplied here).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 err (10218 jobs); `#print axioms` std-3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom) — throwaway chk confirmed;
+`axiom_budget_check.sh` raw 0/exit 0; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `dd1df76f`, pushed. Sympy-rate gate N/A (constant dominator, no
+O(√ε) integral-rate claim — the pairing bound is an exact Gaussian-product identity + peak antitonicity).
+`a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
