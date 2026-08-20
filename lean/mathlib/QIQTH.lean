@@ -509,6 +509,7 @@ import QIQTH.LocUnifDerivConv
 import QIQTH.TUniformFrozenAI
 import QIQTH.HDerivConvComposition
 import QIQTH.HDuhamelExportRethread
+import QIQTH.HDuhamelLiveGateWired
 import QIQTH.HDConvGateThreading
 import QIQTH.CConvFacadeGate
 import QIQTH.S1TripleHEmeasGate

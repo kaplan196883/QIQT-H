@@ -19194,6 +19194,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDuhamelExportRethread.hDuhamelSlot_AT_GATE
 #print axioms QIQTH.HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL
 
+-- ## HDuhamelLiveGateWired: ★★ THE LIVE CAPSTONE hDuhamel IS NOW A NAMED-CENSUS THEOREM ★★
+-- Step 1 (pure opaque→named): the LIVE order-1 capstone (GatedGlobalWitnessN1Capstone-
+-- ReachAligned.trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned) carries hDuhamel as
+-- an OPAQUE heat-operator identity at its self-chosen H = gatedKernel K S (globalCutoff-
+-- ParametrixWitnessN 1 …). That H is DEFEQ (rfl, verified in-file) to vanVleckGatedWitness
+-- g gi hChr hK S a b — the exact kernel HDuhamelExportRethread is built against. So
+-- hDuhamel_live_gate_wired instantiates truncatedDuhamelCore_AT_GATE_FULL at the capstone's
+-- OWN g,gi,hChr,hK,S,a,b,t (no adapter, no gate mismatch) and feeds it through
+-- hDuhamelSlot_AT_GATE: the LIVE capstone's hDuhamel antecedent is now a THEOREM conditional
+-- on the ~60-binder _FULL census. NO hAnear (W1-free). std-3. NOT a₁ = R/6.
+#print axioms QIQTH.HDuhamelLiveGateWired.hDuhamel_live_gate_wired
+
 -- ## J4-312 (HDConvGateThreading): ★★ THE CAPSTONE hDConv SLOT IS A THEOREM ★★
 -- KEY FINDING: HDConvThreading.hDConv_from_banked is W1-POISONED (its route runs
 -- through hDelta_gatedWitnessN1_final → the hAnear boundary provider) — NOT usable
