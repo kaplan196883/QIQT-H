@@ -4784,3 +4784,15 @@ import QIQTH.HbintCollarMatchedCutoffClosed
 -- needs uniform-K flow radius + general-center joint C² + boundary transport + compactness (multi-lemma).
 -- std-3 ×3. NOT a₁=R/6.
 import QIQTH.QuantifiedCoherentChartTube
+
+-- GeneralCenterJointC2Flow: J4-890 — pieces (i)+(ii) of J4-889's b-tube joint-C² frontier. The
+-- velocity-0 centering of J4-884's Task D was a CONVENIENCE (every abstract engine takes an arbitrary
+-- base point / reference tube / Jacobi seed; only the admissibility bookkeeping used velocity 0), so
+-- Task D re-runs verbatim at a nonzero-velocity centre. admissibleBall_of_normVelLt (piece i): for
+-- z₀∈interior K, ‖v₀‖<ρ:=uniformFlowRadius, an ε-ball around (z₀,v₀) is fully admissible — the EXISTING
+-- K-uniform confinement radius already suffices (no refinement). uniformFlow_joint_contDiffOn_two_witness
+-- _generalCenter (piece ii): general-K, interior z₀, ‖v₀‖<ρ ⟹ joint ContDiffOn ℝ 2 of exp on a nbhd of
+-- (z₀,v₀) — one direct construction (NO reference-ball transport; covers general-K base direction too).
+-- The per-point local engine a compactness argument (piece iv) would cover the compact b-tube with.
+-- std-3 ×2. NOT a₁=R/6.
+import QIQTH.GeneralCenterJointC2Flow

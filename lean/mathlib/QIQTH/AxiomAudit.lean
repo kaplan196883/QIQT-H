@@ -28929,4 +28929,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.QuantifiedCoherentChartTube.hbint_reduced_to_chartC2_gate_cover
 #print axioms QIQTH.QuantifiedCoherentChartTube.chartC2_gate_cover_nonvacuous
 
+-- J4-890: GeneralCenterJointC2Flow — pieces (i)+(ii) of J4-889's b-tube joint-C² frontier. J4-884's Task D
+-- velocity-0 centering was a CONVENIENCE, not a wall: every abstract engine takes an arbitrary base point /
+-- reference tube / Jacobi seed, only the admissibility bookkeeping used velocity 0. admissibleBall_of_norm
+-- VelLt (piece i): z₀∈interior K, ‖v₀‖<ρ ⟹ an ε-ball around (z₀,v₀) fully admissible (existing K-uniform
+-- confinement radius suffices, no refinement). uniformFlow_joint_contDiffOn_two_witness_generalCenter
+-- (piece ii): general-K, interior z₀, ‖v₀‖<ρ ⟹ joint ContDiffOn ℝ 2 of exp near (z₀,v₀), one direct
+-- construction (no reference-ball transport). std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.ExpMap.admissibleBall_of_normVelLt
+#print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_two_witness_generalCenter
+
 end QIQTH.AxiomAudit
