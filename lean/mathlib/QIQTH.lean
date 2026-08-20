@@ -4489,6 +4489,15 @@ import QIQTH.HCompNearFarSplit
 --   O(ε^{(k+3)/2}); k=0 ⟹ O(ε^{3/2}), below O(√ε); via norm_integral_le_of_norm_le_const_ae).
 --   The near ANALYTIC rate; concrete kPrime→cancellation identification remains STEP 4c. NOT a₁=R/6.
 import QIQTH.HCompNearCarryAssembly
+-- HCompNearCarryConcreteDischarge (J4-879, Plan v9 Task B STEP 4c part (ii)): the CONCRETE
+--   identification of J4-861's abstract near-region chart map W with the actual REVERSAL-derived
+--   near-isometry T_{x₀}=terminalVelAt (J4-858), with the template's herr/hmin DISCHARGED from J4-859's
+--   cubic remainder. terminalVelAt_nearIsometry_data (T_{x₀} satisfies |r²_{Tz}−r²_z|≤L'‖z‖³ AND
+--   (1/2)r²_z≤r²_{Tz} on ball 0 R, via near-IDENTITY displacement primitives off ‖Tv−v‖≤C_W‖v‖²);
+--   terminalVelAt_chartReplace_sliver_bound (feeds them into chartReplace_sliver_integral_le → the
+--   matched near rate O(ε^{(k+3)/2}) for the CONCRETE reversal near-isometry). Full nb still needs the
+--   mixed-normal-form connection (∂ⱼ∂ᵢH_G ↔ this shape). NOT a₁=R/6.
+import QIQTH.HCompNearCarryConcreteDischarge
 -- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM OPERATOR-NORM combinator assembling the
 -- per-index (diagonal + off-diagonal) scalar Hessian bounds into an operator-norm bound on the field-
 -- Hessian CLM fderiv(∂ᵢH) that kPrime carries — the exact object MixedDirectionsFieldHessianEnvelope.hFd

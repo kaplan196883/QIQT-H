@@ -28542,6 +28542,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryAssembly.chartReplace_sliver_uniform_bound
 #print axioms QIQTH.HCompNearCarryAssembly.chartReplace_sliver_integral_le
 
+-- HCompNearCarryConcreteDischarge (J4-879, Plan v9 Task B STEP 4c part (ii)): the CONCRETE
+--   W-identification. terminalVelAt (J4-858 reversal near-isometry) satisfies J4-861's template
+--   herr/hmin (|r²_{Tz}−r²_z|≤L'‖z‖³ + (1/2)r²_z≤r²_{Tz}), discharged from J4-859's cubic remainder via
+--   near-IDENTITY displacement primitives; fed into chartReplace_sliver_integral_le → matched near rate
+--   for the concrete reversal near-isometry. Full nb still needs the mixed-normal-form connection.
+--   NOT a₁=R/6.
+#print axioms QIQTH.HCompNearCarryConcreteDischarge.rncRadialSq_error_of_displacementId
+#print axioms QIQTH.HCompNearCarryConcreteDischarge.nearIsometry_lower_of_displacementId
+#print axioms QIQTH.HCompNearCarryConcreteDischarge.terminalVelAt_displacementId_quadratic
+#print axioms QIQTH.HCompNearCarryConcreteDischarge.terminalVelAt_nearIsometry_data
+#print axioms QIQTH.HCompNearCarryConcreteDischarge.terminalVelAt_chartReplace_sliver_bound
+
 -- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM operator-norm combinator for the field-Hessian
 -- CLM fderiv(∂ᵢH) (the object FderivBulkConcrete.kPrime carries), assembling the banked per-index scalar
 -- Hessian bounds into the operator-norm bound MixedDirectionsFieldHessianEnvelope.hFd needs.
