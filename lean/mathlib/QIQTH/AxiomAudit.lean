@@ -28628,6 +28628,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetHFdBoundaryClosed.witnessFieldHessian_hFd_ciSup_of_gateBdd_frontierZero
 #print axioms QIQTH.ChartJetHFdBoundaryClosed.hFd_frontierLocalised_nonvacuous
 
+-- J4-870: ChartJetHFdFrontierClosed — the CASE-A/CASE-B split of the hFd frontier residual hfz.
+-- dirDeriv_eq_zero_of_eventually_zero_nhdsGT: one-sided line-derivative ⟹ directional deriv 0.
+-- fderiv_eq_zero_of_spanning_dirs: spanning exterior directions ⟹ full fderiv=0. GateFatExterior: the
+-- Case-B fat-exterior-cone gate predicate. frontier_fderiv_eqZero_of_fatExterior: Case A (non-diff ⟹
+-- fderiv=0) + Case B ⟹ field-Hessian vanishes on the whole frontier. gateFatExterior_zero: the predicate
+-- is genuinely inhabited (holds for EVERY gate via f≡0). witnessFieldHessian_hFd_ciSup_of_gateBdd_
+-- fatExterior: ★★ the EXACT hFd field reduced a.e. to {bounded on gate S z, GateFatExterior}, DISCHARGING
+-- J4-869's opaque hfz. std-3. NOT a₁=R/6.
+#print axioms QIQTH.ChartJetHFdFrontierClosed.dirDeriv_eq_zero_of_eventually_zero_nhdsGT
+#print axioms QIQTH.ChartJetHFdFrontierClosed.fderiv_eq_zero_of_spanning_dirs
+#print axioms QIQTH.ChartJetHFdFrontierClosed.frontier_fderiv_eqZero_of_fatExterior
+#print axioms QIQTH.ChartJetHFdFrontierClosed.gateFatExterior_zero
+#print axioms QIQTH.ChartJetHFdFrontierClosed.gateFatExterior_empty
+#print axioms QIQTH.ChartJetHFdFrontierClosed.witnessFieldHessian_hFd_ciSup_of_gateBdd_fatExterior
+#print axioms QIQTH.ChartJetHFdFrontierClosed.hFd_fatExterior_nonvacuous
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT

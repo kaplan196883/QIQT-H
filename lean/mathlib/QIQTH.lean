@@ -4537,6 +4537,16 @@ import QIQTH.ChartJetXUniformBoundClosed
 -- NOT a₁=R/6.
 import QIQTH.ChartJetHFdBoundaryClosed
 
+-- ChartJetHFdFrontierClosed: J4-870 — the CASE-A/CASE-B split of the hFd frontier residual hfz. Case A
+-- (fully general): non-differentiable frontier points ⟹ fderiv=0 (Mathlib convention). Case B: at the
+-- non-generic DIFFERENTIABLE frontier points, a one-sided line-derivative argument forces fderiv=0 when f
+-- vanishes along a SPANNING set of exterior directions (dirDeriv_eq_zero_of_eventually_zero_nhdsGT +
+-- fderiv_eq_zero_of_spanning_dirs). GateFatExterior packages the Case-B geometry; hfz is DISCHARGED from it
+-- via frontier_fderiv_eqZero_of_fatExterior. witnessFieldHessian_hFd_ciSup_of_gateBdd_fatExterior = the ★★
+-- hFd field reduced a.e. to {bounded on gate, GateFatExterior}, refining J4-869. Non-vacuous
+-- (gateFatExterior_zero holds for EVERY gate). std-3. NOT a₁=R/6.
+import QIQTH.ChartJetHFdFrontierClosed
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;
