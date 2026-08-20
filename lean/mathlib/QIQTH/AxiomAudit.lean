@@ -29079,6 +29079,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InterchangeBundlesFromExisting.memLapFull_live
 #print axioms QIQTH.InterchangeBundlesFromExisting.memECombine_live
 
+-- InterchangeBundlesDeeperWired — J4-914: deeper find-and-wire on top of J4-898. `memAdjLo_live_crude` +
+-- `memLapFull_live_crude` reduce the MemAdjLo/MemLapFull underlying hyps to primitive carries: hAdom2cap ←
+-- hAdom2_capped_family_of_crude (crude τ⁻¹ env, canonical CA2c m := Ccrude·(epsSeq m)⁻¹) · hFzero ←
+-- hFzero_concrete (1≤n) · hΓ ← memGaugeGamma_of_hdg0 (RNC ∂g(0)=0). hgi NOT wired (flat-on-K vacuity
+-- landmine); hgi/hInter/hII_hi/hbnd/hPd2conv honest carries. std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.InterchangeBundlesDeeperWired.memAdjLo_live_crude
+#print axioms QIQTH.InterchangeBundlesDeeperWired.memLapFull_live_crude
+
 -- HAdomHWDomFromConcreteDominations — the ABSTRACT-g `hAdom` + `hWDom` discharge for the LIVE order-1
 -- capstone (truncatedDuhamelCore_AT_GATE_FULL:320-322 hAdom, :365-366 hWDom, shared by hDuhamel AND
 -- hDConv). Threads GENERIC ConcreteDominations.exists_D1_constants_of_gateSqControl through the rfl defeq

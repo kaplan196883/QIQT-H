@@ -4888,6 +4888,14 @@ import QIQTH.HEdomFromHrawPreCollapse
 -- (F = leviSeries (heatOp g gi (vanVleckGatedWitness …)), rfl-satisfiable). std-3 ×4. NOT a₁=R/6.
 import QIQTH.InterchangeBundlesFromExisting
 
+-- InterchangeBundlesDeeperWired — J4-914: DEEPER find-and-wire on top of J4-898. Produces `memAdjLo_live_crude`
+-- + `memLapFull_live_crude`, reducing the MemAdjLo/MemLapFull underlying hyps of J4-898 to STRICTLY MORE
+-- PRIMITIVE carries: hAdom2cap ← CappedAdom2Audit.hAdom2_capped_family_of_crude (crude τ⁻¹ envelope, canonical
+-- CA2c m := Ccrude·(epsSeq m)⁻¹) · hFzero ← DaLimEasyTranche.hFzero_concrete (needs only 1≤n) · hΓ ←
+-- DaLimCensusRecon.memGaugeGamma_of_hdg0 (RNC gauge ∂g(0)=0). DELIBERATELY NOT wiring hgi←memGaugeGi_of_geometry
+-- (flat-on-K vacuity landmine) — hgi/hInter/hII_hi/hbnd/hPd2conv kept as honest carries. std-3 ×2. NOT a₁=R/6.
+import QIQTH.InterchangeBundlesDeeperWired
+
 -- HAdomHWDomFromConcreteDominations — the ABSTRACT-`g` `hAdom` + `hWDom` discharge for the LIVE order-1
 -- capstone (HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:320-322 `hAdom`, :365-366 `hWDom`,
 -- shared by hDuhamel AND hDConv). Threads the GENERIC recenter-of-domination
