@@ -11457,3 +11457,53 @@ Lipschitz, W5, no provider); `hAcrude` (crude time-derivative envelope, J4-911);
 `axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `8e7eda06`, pushed. `a₁ = R/6` remains CONDITIONAL on
 {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
+
+## J4-913 — FIRST full CONSTRUCTION of a `MixedDirectionsFieldHessianEnvelope` term: the five hCConv-fourth-hypothesis field reductions RECONCILE at one consistent `(BL,BF,C)` (commit `830f6b69`)
+
+**File** `QIQTH/MixedEnvelopeAssembly.lean` (new; NO existing banked file edited).
+
+**Task.** Investigate the still-open fields `hLevi`/`hFd`(=`hBF`)/`hzmass` of the fourth `hCConv`
+hypothesis `MixedDirectionsFieldHessianEnvelope` (J4-843); check specifically whether the J4-886 banked
+`hzmass` composes with the LIVE bundle's exact `hzmass` field, and discharge/wire whatever composes.
+
+**THE COMPOSITION FINDING.** Prior bricks REDUCED each of the five structure fields to named carries in
+ISOLATION, but NO term of the structure had ever been built — leaving open whether the reductions use a
+MUTUALLY CONSISTENT `(BL,BF,C)`. **They do.** The consistent triple is
+  `BL s z := CB s · gaussDdim (2·s) z`  (width-`2s` Levi envelope shape, J4-883 §A),
+  `BF s z := ⨆ x', ‖fderiv (y ↦ witnessFieldDeriv … (t−s) y z) x'‖`  (concrete sup, J4-868),
+  `C      := M · t`  (capped-window constant, J4-886).
+- **`hzmass` composes EXACTLY.** `HZMassCappedWindowClosed.hzmass_capped_window_closed`'s conclusion
+  `(∫ z, BL·BF) ≤ (M·t)·(t−s)⁻¹` is DEFEQ to the structure's `hzmass` field `(∫ z, BL·BF) ≤ C·(t−s)⁻¹`
+  with `C := M·t` (verified by the exact term construction — the field type checks against the provider's
+  conclusion up to beta). Conditional on `{hbint, hBFpeak, hBLnn, hBLgauss, hPpknn, hPCbound, hMnn, hepspos}`
+  — NOT "already closed" unconditionally: two carries (`hbint`, `hBFpeak`) are genuine content.
+- **`hFd` discharges** via `BFGaussianEnvelopeClosed.witnessFieldHessian_hFd_of_peak_dominator` (J4-868)
+  at `BF := ⨆ x' …`, from `{hcpt (gate-closure compact), hpeak (peak dominator)}`.
+- **`hkint` discharges** via `HkintReducedToHbint.hkint_reduces_to_hbint_concrete` (J4-875), generic in
+  `BL,BF`, from `{hbint, hmeas, hLevi, hFd}`.
+- **`hLevi`** — the concrete width-`2s` Levi envelope is banked (`HZMassLeviBaseEnvelope.leviBase_gaussDdim2s_envelope`,
+  J4-883 §A) but EXISTENTIALLY picks `(a,b,S)` and carries `hEmeas`; here threaded as the exact structure-field
+  input at the consistent `BL`.
+
+**DELIVERABLES (std-3 ×3):**
+- `mixedEnvelope_of_named_carries` — ★★★ the assembly. Reduces the whole fourth hypothesis to the FLAT
+  carry list `{hMnn, hepspos, hCBnn, hPpknn, hPCbound, hLevi (⟸hEmeas), hcpt/hpeak (J4-868 gate-geom),
+  hbint (⟸b<r₀, J4-907), hmeas (J4-841), hBFpeak (J4-868 peak)}` — deriving `hFd`/`hkint`/`hzmass` internally,
+  threading `hLevi`/`hbint`. `hBLnn`/`hBLgauss` built internally from `hCBnn` (`gaussDdim≥0`, `le_refl`).
+- `leviSeries_emptyGate_eq_zero` — the empty-gate witness ≡ 0 (`p∈∅` false) ⟹ `heatOp ≡ 0` (`deriv 0=0`,
+  `laplaceBeltrami 0=0` via `OffSVanishing.pd_zero_fun`) ⟹ `leviSeries ≡ 0` via `AlphaLevi.iterE_zero_eq_zero`.
+- `mixedEnvelope_assembly_nonvacuous` — NON-VACUITY: the carry list is JOINTLY INHABITED at the empty gate
+  `S:=∅` (`CB=Ppk=M=0`; `fderiv≡0` via J4 `witnessFieldHessian_fderiv_eqZero_of_notMem_closure`, sup=0 via
+  `ciSup_const`), so the assembly FIRES, producing a genuine (degenerate) structure term — no J4-548/847
+  unsatisfiable-antecedent trap.
+
+**⚠ HONEST VERDICT.** This CLOSES NONE of the named carries `{hEmeas (feeds hLevi), b<r₀ (feeds hbint),
+gate compactness/peak-dominator geometry (feeds hFd/hBFpeak), kPrime measurability}` — it proves they
+SUFFICE, jointly, to build the structure at a consistent `(BL,BF,C)`, resolving the standing composition
+question affirmatively-and-constructively. `hCConv`'s fourth hypothesis is thus reduced to this flat list;
+the honest walls are unchanged. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10220 jobs); `#print axioms` ×3 std-3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `830f6b69`,
+pushed. NOT `a₁ = R/6`.
