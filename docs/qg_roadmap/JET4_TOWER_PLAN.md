@@ -11863,3 +11863,119 @@ three-regime split and the `hCross` census binder are also downstream, unbanked.
 (propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `3e93c2d2`,
 pushed. `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
+
+
+## J4-921 — the √ε matched-sliver amplitude `hbnd` REDUCED to the moment-aware τ⁻¹ᐟ² pairing `hGpow`: two named `memLapFull_live_crude` residuals collapse onto one (commit `2b299b87`)
+
+**File** `QIQTH/SliverAmplitudeFromHGpow.lean` (new; NO existing banked file edited).
+
+**Task.** J4-914 `memLapFull_live_crude` left FOUR genuinely-hard residuals visible as honest carries;
+two of them — `hGpow` (moment-aware τ⁻¹ᐟ² pairing `|∫_z W''(u−s)z·F s z 0| ≤ Cpair·(u−s)^{−1/2}`, the
+WideSliverBoundary target) and `hbnd` (√ε matched-sliver amplitude `|∫_{s=u−ε_m}^{u}∫_z W''(u−s)z·F s z 0|
+≤ D0_i·2√ε_m + D1_i·ε_m`) — sit side by side. Determine whether the NEW J4-917/919/920 infra discharges
+any of {`hGpow`,`hbnd`,`hPd2conv`,`hInter`, E-comb reps} via genuine find-and-wire, or reduces the
+frontier.
+
+**RE-VERIFIED signatures (from source).** `hGpow` ⟵ `MemAdjHiSliver.hII_hi_from_sliver`
+(`|∫_z …| ≤ Cpair·(u−s)^{−1/2}` on `uIoc(u−ε_m,u)`); `hbnd`/`hPd2conv` from
+`InterchangeBundlesDeeperWired.memLapFull_live_crude` verbatim; `hInter` = `MemInterchange` abbrev
+(`DaLimLUWallRecon`, the 2nd-order Leibniz-under-∫ equality); E-comb reps `{hDa,hLap,hLapZ,hEZ,hLapS,hES}`
+⟵ `DaLimCensusRecon.memECombine_of_data` (Fubini/representation + fibrewise/interval integrability of
+∂_rH·F, Δ_gH·F, heatOp H·F).
+
+**FINDINGS on the NEW infra (composability checked, not assumed).**
+- **`hGpow` — GENUINELY OPEN.** J4-917 `witnessTimeDeriv_domination` bounds the TIME derivative pointwise
+  at rate τ⁻¹; integrated against F that gives τ⁻¹ (non-integrable), NOT the τ⁻¹ᐟ² `hGpow` needs. The
+  τ⁻¹ᐟ² improvement is precisely the ∫_z MOMENT CANCELLATION (J4-919/920), but `gaussian_hessian_cancel_trace`
+  applies only to the pure Gaussian `gaussDdim τ z` in ITS OWN coordinate; the concrete `witnessSecondXDeriv`
+  is chart-composed (`v = uniformInverseChart z 0` nonlinear), and Sol flagged (J4-920) the Jacobian
+  change-of-variables as BLOCKING. No banked closed-form rep for `witnessSecondXDeriv` (only the time
+  derivative has one). hGpow stays open on the chart-CoV wall.
+- **`hbnd` — REDUCED to `hGpow` (this brick).** Integrating the pointwise τ⁻¹ᐟ² `hGpow` bound over the
+  matched sliver gives EXACTLY the 2√ε_m amplitude: `∫_{u−ε}^{u}(u−s)^{−1/2}ds = 2√ε`. So `hbnd ⟸ hGpow`.
+- **`hInter` — already GROUNDED (J4-460 `hInter_grounded`/`_majorant`), onto {`hOn` (witnessFieldDeriv2
+  τ⁻¹ Gaussian domination), `hF`, `hQ1`, meas triple, `hdiff`}. `hOn`'s τ⁻¹-scaled second-FIELD-derivative
+  domination is NOT banked (only the uniform-C₂ gate envelope `witnessFieldDeriv2_gate_envelope` is, which
+  cannot carry the τ→0 blow-up); J4-917's technique is TIME-derivative-only. So hInter's sub-carries stay open.
+- **`hPd2conv` / E-comb reps — GENUINELY OPEN.** hPd2conv is a frozen→full pd∘pd Tendsto (limit/continuity),
+  no moment-cancellation object. E-comb reps are 2nd-order differentiation-under-∫ (hDa/hLap via `hDa_trunc`)
+  + Gaussian integrability; no J4-917/919/920 provider.
+
+**LANDED (std-3 ×3).** `integral_invSqrt_sub_sliver` (`∫_{u−ε}^{u}(u−s)^{−1/2} = 2√ε`, `integral_comp_sub_left`
++ `integral_rpow`); `sliver_amplitude_from_hGpow` (from hGpow + the SAME sliver carries hUT/hεU/hSecCont/hBcont
+that `hII_hi_from_sliver` consumes: `|∫∫| ≤ Cpair·2√ε_m`, via `abs_integral_le_integral_abs` +
+`integral_mono_on_of_le_Ioo` + the exact evaluation; inner interval integrability = the MemAdjHi component
+`hII_hi_from_sliver m i u hu`); `hbnd_from_hGpow` (cast into the EXACT `hbnd` census shape, D0:=const Cpair,
+D1:=const 0). The two independent named residuals `hGpow`/`hbnd` COLLAPSE onto the single `hGpow`. **gpt-5.6-sol
+(high) GO** — genuine non-circular reduction (hbnd never feeds hGpow's context; both were raw carries),
+D1:=0 honest (pure τ⁻¹ᐟ² pays no ε_m term), non-vacuity legitimately inherited from hGpow's documented
+satisfiability (antecedent set identical to the banked non-vacuous `hII_hi_from_sliver`). NOT a discharge of
+hGpow itself.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10228 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `2b299b87`,
+pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+---
+
+## J4-922 — the SET-RESTRICTED (localized-domain) ∂_τ-TRACE moment-cancellation bound (audit + build; `GaussTauTraceCancellationLocalized.lean`, new file)
+
+**Dispatch type.** Comprehensive HONEST audit of the live capstone's remaining hypothesis surface
+(`{hDuhamel, hDConv, hCConv}`) + the recurring "chart change-of-variables Jacobian wall", with one
+well-scoped construction where a genuine new angle emerged. gpt-5.6-sol (high) strategic consult.
+
+**★ THE DECISIVE AUDIT FINDING (reframes the recurring wall).** The "chart-CoV Jacobian wall" that
+J4-919/920 (and the `hGpow`/`hCross`/`hOn` carries) all bottom out on is **NOT a fundamental
+obstruction**. The EXACT change of variables for the concrete van-Vleck inverse chart
+`W₀ = uniformInverseChart g gi hC hK 0` is **ALREADY BANKED**, std-3:
+`ChartIFTPackage.chart_gaussian_change_variables_concrete` (J4-270) —
+`∫_{z∈ball 0 ρ} gaussDdim τ (W₀z)·B(z) = ∫_{w∈W₀''(ball 0 ρ)} gaussDdim τ w·(B(Vw)/|det f'(Vw)|)` —
+with its M1–M4 IFT bundle (`chartIFTPackage`: `HasFDerivWithinAt`, `InjOn`, left inverse `V=Φ.symm`,
+and crucially `1/2 < det f'` on the ball, so `1/|det f'| ≤ 2` is BOUNDED) and `W₀''(ball 0 ρ) ∈ 𝓝 0`.
+Taking `B(z) := (∑ᵢ((W₀z)ᵢ²/4τ²−1/2τ))·A(z)`, the CoV COLLAPSES the chart-composed multiplier to the
+CLEAN FLAT multiplier `∑ᵢ(wᵢ²/4τ²−1/2τ)` (since `W₀(Vw)=w`), turning the census integrand into exactly
+the shape `gaussian_hessian_cancel_trace` (J4-920) consumes — EXCEPT for two tractable residues: (i)
+the domain is `Ω=W₀''(ball 0 ρ)`, not all ℝⁿ; (ii) the transformed weight `q(w)=A(Vw)/|det f'(Vw)|` is
+Lipschitz only on an inner ball / defined only on `Ω`. gpt-5.6-sol confirmed the reframing (with the
+audit refinements: gate-plateau-near-0, τ-uniform Lipschitz, shrink-to-inner-ball for uniform det
+control, `Ω` measurability) and named the localized cancellation theorem as the single
+highest-leverage next brick.
+
+**What lands (this file discharges residue (i)), std-3 ×3.**
+- `hessCoord_abs_weighted_tail_le` — per-coordinate ABSOLUTE weighted Gaussian tail moment
+  `∫_{z∈T} |((zᵢ)²−2τ)/(4τ²)·gaussDdim τ z·q z| ≤ M·(√2)ⁿ·e^{−r²/8τ}·(2n+1)/(2τ)` for ANY measurable
+  `T ⊆ {r ≤ ‖z‖}` and measurable `q` bounded by `M`. Reuses the `OffCollarTailMoment` dominator `G`
+  (doubled-time Gaussian pair) with the strict `<` in `gaussDdim_tail_le_scaled` relaxed to `≤`
+  (identical `nlinarith` core).
+- `gaussian_hessian_cancel_trace_on_superset` — ★★ for `q` `L`-Lipschitz + bounded (`|q|≤M`) +
+  measurable and ANY measurable `Ω ⊇ ball 0 r`,
+  `|∫_{z∈Ω} (∑ᵢ((zᵢ)²/4τ²−1/2τ))·gaussDdim τ z·q z| ≤ L·(15/2·n²)/√τ + n·M·(√2)ⁿ·e^{−r²/8τ}·(2n+1)/(2τ)`.
+  Route: `∫_ℝⁿ = ∫_Ω + ∫_{Ωᶜ}` (`integral_add_compl`); main term = `gaussian_hessian_cancel_trace`;
+  tail = per-coord lemma summed at `T = Ωᶜ ⊆ {r ≤ ‖z‖}`. The tail is `o(τ^{−1/2})` (super-polynomially
+  small in `1/τ`), so the `τ^{−1/2}` cancellation SURVIVES restriction to `Ω`.
+- `gaussian_hessian_cancel_trace_on_superset_hyp_satisfiable` — non-vacuity EXHIBITED at the genuine
+  NONCONSTANT weight `q z := cos(dist z 0)` (`L=M=1`) on a PROPER superset `Ω = ball 0 5 ⊋ ball 0 1`.
+
+**Residue (ii)** (inner-ball-only Lipschitz, dropping the GLOBAL-Lipschitz hypothesis so `q(w)=
+A(Vw)/|det f'(Vw)|` defined only on `Ω` feeds without a global extension) is the explicit follow-on;
+sol's split-into-inner-ball-`(q−q(0))` + tail argument is the recipe, needs the inner weighted moment
+`∫_ℝⁿ |hessCoord|·‖w‖` extracted. The concrete chart wiring (transformed-weight bounded + inner-ball
+Lipschitz from the banked near-identity Jacobian `chartW0_firstJet_gap` + resolvent Lipschitz) is the
+downstream assembly.
+
+**Audit classification of the live carries** (from the enumeration sweep): genuinely-hard analytic
+wall with NO provider of any kind = **`hCross`** (mixed 2nd-difference bilinear Lipschitz, W5), shared
+by hDConv/hDuhamel — now REFRAMED as tractable via this CoV route. Secondary: `hGpow` (provider exists
+but conditional on the `hD2Hexpand` curvature amplitude wall) and the hCConv kPrime magnitude legs
+`hK'bound`/`hG'bound` (blocked on an unbuilt MIXED-directions 2nd-derivative envelope). Everything else
+is either a banked mechanical discharge (`boundD`, `hpardiff`, `hAcrude`, `hInter`, `hLapFull`,
+`hPd2conv`, `hII_hi/lo`, `hGintFull`) or a mild accepted geometric/measurability carry (`hOn`, the three
+RNC/VV interfaces, the F2 pile, `hgi/hdg0`, Gaussian width/meas bounds, `RadialNormalCoordinateGauge`).
+hDuhamel is an EQUATION (Volterra/Duhamel identity) — a distinct integral-representation workstream, not
+census-dischargeable (Sol).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10229 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `400269cc`,
+pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
