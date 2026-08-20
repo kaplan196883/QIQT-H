@@ -11563,3 +11563,52 @@ crude-envelope/RNC-gauge/`1≤n`), NOT a new analytic result and NOT a logical w
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `754771a7`,
 pushed. No `O(√ε)` rate (domination/gauge/structural wiring) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains
 CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched). NOT `a₁ = R/6`.
+
+## J4-915 — DISCHARGE the z-pointwise TIME HasDerivAt carry of hpardiff (differentiability sibling of hAcrude) — commit 9c94d578
+
+**File** `QIQTH/WitnessTimeHasDerivAt.lean` (new; NO existing banked file edited).
+
+**Task.** Investigate the remaining genuine residue of J4-912's `hpardiff` reduction: the `z`-POINTWISE
+TIME `HasDerivAt` of the integrand (the DIFFERENTIABILITY sibling of J4-911's crude-envelope BOUND
+`hAcrude`). J4-912 flagged that `GatedTauDerivRep.witnessTauDeriv_eq_gatedTauRepProd` banks only the
+deriv-EQUALITY representative, CONDITIONAL on a carried amplitude `HasDerivAt hgate` — leaving the
+differentiability itself carried, not discharged.
+
+**★ THE FINDING (find-and-wire, then discharge).** The "carried amplitude `HasDerivAt`" `hgate` is in
+fact **BANKED and UNCONDITIONAL**: `OnGateJets.chartFieldAmp_hasDerivAt_tau` proves `HasDerivAt (fun u
+=> chartFieldAmp … u q p) (…) τ` for ALL `τ` because the amplitude is AFFINE in `τ` (`= cutoff·Θ^{−1/2}·
+(u₀+u₁·τ)`). The Gaussian's time-derivative is banked too (`heatKernel1D_hasDerivAt_t`, product via
+`HasDerivAt.fun_finsetProd`). So the witness time-differentiability that `witnessTauDeriv_eq_
+gatedTauRepProd` only carried is GENUINELY CONSTRUCTIBLE — this brick extracts it as a standalone
+discharge rather than a conditional deriv-equality.
+
+**LANDED (std-3 ×4).**
+- `witnessTime_differentiableAt` — ★ the concrete gated van-Vleck witness is `DifferentiableAt` in its
+  TIME argument at every `τ > 0`, UNCONDITIONALLY. Gate `by_cases`: ON gate (`q∈K ∧ p∈S q`) the
+  `τ`-independent gate factorises the witness (`vanVleckGatedWitness_gate_apply`) as `gaussDdim u (W q p)
+  · chartFieldAmp … u q p`, a product of two differentiables (Gaussian at `τ>0`; amplitude
+  unconditional); OFF gate (`q∉K ∨ p∉S q`) the witness is `≡ 0` (`gatedKernel_apply_of_notMem`). NO gate
+  carry — only `τ>0` (avoids the on-gate `τ=0` diagonal singularity where the witness is genuinely
+  non-differentiable, per GatedTauDerivRep's honest firewall).
+- `zTime_hasDerivAt_of_differentiableAt` — the GENERIC `(A,F)` bridge: `DifferentiableAt` of the base-`0`
+  time slice `r ↦ A r 0 z` at `c'−s` ⟹ the EXACT census integrand `HasDerivAt (c' ↦ A (c'−s) 0 z · F s z
+  0) (deriv (fun r => A r 0 z) (c'−s) · F s z 0) c'`. Route: `DifferentiableAt.hasDerivAt` ∘ affine shift
+  `c'↦c'−s` (deriv `1`), then `.mul_const (F s z 0)` (constant in `c'`).
+- `witnessZTime_hasDerivAt` — ★★★ J4-912's `hZ` DIFFERENTIABILITY conjunct DISCHARGED for the concrete
+  witness at **EVERY** `z` (stronger than the `∀ᵐ z` the census asks), given ONLY that the differentiation
+  neighbourhood `V` avoids `τ≤0` (`∀ c'∈V, 0<c'−s`). Composition of the two above at field point `0`,
+  base `z`, time `c'−s`. Because differentiability holds off the on-gate `τ=0` line for EVERY `z`, no
+  a.e.-gate carry is needed.
+- `witnessZTime_hasDerivAt_window_nonempty` — non-vacuity: `hV` is satisfiable on `V := Ioi s`.
+
+**Honest residue (unchanged).** The OTHER `hZ` conjuncts — the `z`-integrable dominator `Dz` and the
+`z`-slice measurabilities (the F2-pile / `gaussDdim_pair_integrable` analogues) — remain DATA-still
+carries. `hpardiff` is thus REDUCED further: opaque census binder (J4-912) → named `hZ` family whose
+DIFFERENTIABILITY conjunct is now DISCHARGED (this brick), leaving only the dominator + measurability
+data. `hCross`/`hAcrude` in the shared `hDuhamel`/`hDConv` census unchanged.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 err (10222 jobs); `#print axioms` ×4 std-3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK; `git status
+--porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `9c94d578`, pushed. No
+`O(√ε)` rate (differentiation wiring) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
