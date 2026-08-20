@@ -10932,6 +10932,26 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-898 — ABSTRACT-`g` INTERCHANGE-BUNDLE census binders DISCHARGED for the LIVE order-1 capstone (commit `d941d5ab`)
+
+**File** `QIQTH/InterchangeBundlesFromExisting.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** Continues the J4-896/897 find-and-wire pattern for the FOUR interchange-bundle census binders the LIVE order-1 capstone `HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL` carries as RAW hypotheses (source `:293-317`), shared by `hDuhamel` AND `hDConv` via the `hDaLimLU` data: `hLapFull : MemLapFull`, `hII_lo : MemAdjLo`, `hII_hi : MemAdjHi`, `hEcomb : MemECombine`. EXHAUSTIVE search found each ALREADY has a generic-in-abstract-`g` discharge banked in an earlier session, producing the EXACT census output type — but NONE was ever wired to the abstract-`F` live-capstone binder shape (the only gap being the `hFeq` reconciliation `F = leviSeries (heatOp g gi (vanVleckGatedWitness …))`, which is `rfl`-satisfiable by the capstone's own `hFeq`). This is a 3rd-in-a-row "un-cross-referenced repo" win — and the widest, hitting four binders at once.
+
+**⭐ THE FOUR EXISTING BRICKS (character-checked at source; output `pdpdH` is the verbatim `fun i τ z => witnessSecondXDeriv g gi hChr hK S a b i τ z`, `F` the concrete `leviSeries (heatOp g gi (vanVleckGatedWitness …))`).**
+* `MemAdjHi` ⟵ `MemAdjHiSliver.hII_hi_from_sliver` (J4-392) — carries the s-slice AESM inputs + the moment-improved `τ^{-1/2}` pairing bound `hGpow` (single `m`-uniform `Cpair ≥ 0`). The Hi leg is genuinely NOT dischargeable from any pointwise 2nd-derivative Gaussian domination (`∫₀^{εₘ} τ⁻¹ = +∞`); the moment carry is the honest content.
+* `MemAdjLo` ⟵ `CappedAdom2Audit.hII_lo_from_capped` — carries the PER-`m` CAPPED family `hAdom2cap` (NO uncapped whole-time `hAdom2`, which is FALSE), Levi source `hFdom`/`hFzero`, slice measurability.
+* `MemLapFull` ⟵ `CappedAdom2Audit.memLapFull_from_pairing_dominations` (wall-A assembly) — carries gauge, the frozen-side `hInter : MemInterchange`, capped family, sliver bundle `D0`/`D1`/`hbnd`, the atomic pd∘pd convergence carrier `hPd2conv`, and the labelled residual `hII_hi : MemAdjHi`. NO uncapped `hAdom2` anywhere.
+* `MemECombine` ⟵ `DaLimCensusRecon.memECombine_of_data` — carries the six per-`(m,u)` representation/integrability sub-facts (two `Da`/`Lap` reps, two fibrewise `Integrable`s, two `IntervalIntegrable`s).
+
+**Object match.** Each deliverable `subst hFeq` then applies the brick verbatim; the substituted goal is LITERALLY the brick's conclusion (verified by compilation, not trusted from citation). No `hAnear`, no uncapped `hAdom2`.
+
+**DELIVERABLE (std-3 ×4).** `memAdjHi_live`, `memAdjLo_live`, `memLapFull_live`, `memECombine_live` — the four abstract-`F` (+`hFeq`) live-capstone census binders, each reduced to its brick's OWN named satisfiable carries.
+
+**WHAT THIS DOES / DOES NOT DO.** REDUCES all four interchange-bundle census members from opaque raw binders to named satisfiable carries via already-banked generic bricks; benefits BOTH `hDuhamel` and `hDConv` (shared census). Like J4-896/897 these are reductions-to-satisfiable-carries, NOT zero-carry closures. The bricks' underlying carries (moment `hGpow`, capped `hAdom2cap`, sliver `hbnd`, `hPd2conv`, `hInter`, the six E-combination reps) remain the honest analytic residue — none newly closed here. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10206 jobs); `#print axioms` ×4 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `d941d5ab`, pushed. NOT `a₁ = R/6`.
+
 ## J4-897 — ABSTRACT-`g` `hEdom` census-binder DISCHARGED for the LIVE order-1 capstone (commit `abfda0a2`)
 
 **File** `QIQTH/HEdomFromHrawPreCollapse.lean` (new; NO existing banked file edited).
