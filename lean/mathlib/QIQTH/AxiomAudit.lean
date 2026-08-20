@@ -28662,6 +28662,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateFatExteriorConcreteDischarge.hfat_concrete
 #print axioms QIQTH.GateFatExteriorConcreteDischarge.hFd_concrete_ciSup_reduces_to_gateBdd
 
+-- J4-873: HGateBoundedConcreteDischarge — the sole hgate residual of hFd REDUCED to field-Hessian
+-- CONTINUITY on the strictly-interior COMPACT CORE closure(φ_z '' ball 0 b), via the RADIAL-CUTOFF COLLAR
+-- at the derivative level. witness_zero_offCore/fieldHessian_zero_offCore: field & Hessian vanish off the
+-- core (collar computation; ALL off-core points, incl the collar b<‖·‖<c INSIDE S z). hgate_concrete_of_
+-- coreContinuousOn: hgate (BddAbove on OPEN gate) ⟸ core continuity (compactness engine + off-core
+-- vanishing; z∉K: field-Hessian≡0). hFd_concrete_ciSup_of_coreContinuousOn: chains J4-872 ⟹ hFd ⟸ core
+-- continuity (STRICTLY WEAKER than J4-865/866 whole-closure continuity per core_continuousOn_of_closure
+-- ContinuousOn). collar+compactness DISCHARGED; residual = core field-Hessian regularity. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HGateBoundedConcreteDischarge.witness_zero_offCore
+#print axioms QIQTH.HGateBoundedConcreteDischarge.fieldHessian_zero_offCore
+#print axioms QIQTH.HGateBoundedConcreteDischarge.hgate_concrete_of_coreContinuousOn
+#print axioms QIQTH.HGateBoundedConcreteDischarge.hFd_concrete_ciSup_of_coreContinuousOn
+#print axioms QIQTH.HGateBoundedConcreteDischarge.core_continuousOn_of_closureContinuousOn
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT

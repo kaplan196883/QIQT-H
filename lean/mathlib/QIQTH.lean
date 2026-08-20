@@ -4566,6 +4566,18 @@ import QIQTH.UniformFlowExpGlobalInjectivity
 -- ciSup_reduces_to_gateBdd reduces hFd's ⨆-bound to the sole hgate input. std-3. NOT a₁=R/6.
 import QIQTH.GateFatExteriorConcreteDischarge
 
+-- HGateBoundedConcreteDischarge: J4-873 — the sole hgate residual of hFd (J4-872) REDUCED to field-Hessian
+-- CONTINUITY on the strictly-interior COMPACT CORE closure(φ_z '' ball 0 b), via the RADIAL-CUTOFF COLLAR
+-- at the derivative level. witness_zero_offCore / fieldHessian_zero_offCore: the field & its Hessian vanish
+-- off the core (collar computation, germ left-inverse + radialCutoff_eq_zero; ∀ off-core, incl the collar
+-- b<‖·‖<c INSIDE S z). hgate_concrete_of_coreContinuousOn: hgate (BddAbove on the OPEN gate) ⟸ core
+-- continuity, via IsCompact.bddAbove_image + J4-865's xuniform_of_bddAbove_offClosure (z∉K: field-Hessian≡0).
+-- hFd_concrete_ciSup_of_coreContinuousOn: chains through J4-872 ⟹ hFd ⟸ core continuity (STRICTLY WEAKER
+-- than J4-865/866's whole-gate-closure continuity, per core_continuousOn_of_closureContinuousOn). collar +
+-- compactness scaffolding of hgate DISCHARGED; residual = field-Hessian regularity on the compact support
+-- core (metric-C² data, same residual class J4-865 carried, now localised to the core). std-3. NOT a₁=R/6.
+import QIQTH.HGateBoundedConcreteDischarge
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;
