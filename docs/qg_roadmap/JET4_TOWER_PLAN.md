@@ -10932,6 +10932,23 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-900 — `hgate : GateSqControl` GENUINELY DISCHARGED for the live flow-ball gate (commit `20827b4a`)
+
+**File** `QIQTH/GateSqControlFromFlowBall.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** The near-immediate follow-on flagged by J4-899's own report: J4-899 reduced the `hAdom`/`hWDom` census binders to two named carries — `hgate : GateSqControl K S (uniformInverseChart g gi hChr hK)` and the amplitude smoothness `hw` — and noted `hgate` "is itself dischargeable for the concrete flow-ball gate by `gateSqControl_of_flowBall`". This entry DISCHARGES that `hgate` carry from GEOMETRY ALONE at the LIVE capstone's OWN concrete gate `S = constGate g gi hChr hK c` (= `fun z => uniformFlowExp g gi hChr hK z '' Metric.ball 0 c`).
+
+**⭐ KEY FINDINGS (character-checked against source).**
+* **`gateSqControl_of_flowBall` DIRECTLY discharges `hgate` at the concrete gate — verified via `exact` (defeq, no adapter).** The abstract producer `ConcreteDominations.gateSqControl_of_flowBall` (`QIQTH.HeatResidualBound`, `:458-469`) yields `GateSqControl K (fun q => φ q '' Metric.ball 0 c) W`; at `φ:=uniformFlowExp g gi hChr hK`, `W:=uniformInverseChart g gi hChr hK` this is DEFINITIONALLY `GateSqControl K (constGate g gi hChr hK c) (uniformInverseChart …)` (constGate is a plain `def` = the flow-ball gate), so `exact` closes the goal with no `show`/adapter.
+* **Its two geometry inputs are banked concrete lemmas.** `hinv` (chart-inverse germ `W_q (φ_q v) = v` on a `δ₀`-ball over `K`) = `OnGateGlue.uniformInverseChart_leftInverse_of_lt`; `hdisp` (uniform near-isometry `(3/2)·rncRadialSq (φ_q v − q) ≤ 2·rncRadialSq v` on an `r₁`-ball over `K`) = `NearIsometryBudget.uniformFlowExp_hdisp_ball` (J4-96). Intersecting the two windows (`c ≤ min δ₀ r₁`) gives `gateSqControl_constGate`: for EVERY positive gate radius `c ≤ c₀` the certificate holds — NON-VACUOUS (`0 < min δ₀ r₁`).
+* **`hw` is NOT an immediate follow-on discharge (finding).** The carry is stated at the `⊤` (analytic) ContDiff level; the generic supplier chain `HuInftyRebase.hu_infty_closed` + `hw_discharged_infty` (from `hg`/`hgi`/`hgpos`) delivers only the `∞` (smooth) level. Empirically verified `↑⊤` (=∞) ≠ `⊤` (=ω) are NON-defeq (type-mismatch error), so `hw` stays the standard threaded carry — no analytic-level van-Vleck/transport supplier is banked.
+
+**DELIVERABLES (std-3 ×2):** `gateSqControl_constGate` (∃ `c₀>0`, ∀ `0<c≤c₀`, `GateSqControl K (constGate …) (uniformInverseChart …)` from geometry, no `hgate`); `hAdom_hWDom_from_gateSqControl_constGate` (feeds it into the banked abstract-`S` `HAdomHWDomFromConcreteDominations.hAdom_hWDom_from_gateSqControl` at `S:=constGate`, REMOVING the `hgate` carry — the `hAdom`/`hWDom` binders now hold for the live flow-ball gate from geometry + the SINGLE remaining mainline `hw` carry).
+
+**WHAT THIS DOES / DOES NOT DO.** Closes the `hgate` leg of J4-899's two-carry reduction at the live capstone's concrete gate. The `hAdom`/`hWDom` census binders now carry EXACTLY ONE residual (`hw`, mainline-standard, analytic-level). Does NOT touch the deeper convergence content; `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10208 jobs); `#print axioms` ×2 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `20827b4a`, pushed. NOT `a₁ = R/6`.
+
 ## J4-899 — ABSTRACT-`g` `hAdom` + `hWDom` census binders DISCHARGED for the LIVE order-1 capstone (commit `7dfdd0cd`)
 
 **File** `QIQTH/HAdomHWDomFromConcreteDominations.lean` (new; NO existing banked file edited).
