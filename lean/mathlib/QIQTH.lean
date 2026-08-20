@@ -4900,3 +4900,14 @@ import QIQTH.HAdomHWDomFromConcreteDominations
 -- mainline amplitude-smoothness carry hw (⊤-level, distinct from the ∞-level generic supplier). std-3 ×2.
 -- NOT a₁=R/6.
 import QIQTH.GateSqControlFromFlowBall
+
+-- HAdomHWDomHwDischargedInfty — J4-901: DISCHARGE the residual amplitude-smoothness carry `hw` of the
+-- ABSTRACT-g hAdom/hWDom bundle. In Mathlib's WithTop ℕ∞ the banked chain states hw at ⊤ (= ω =
+-- real-ANALYTIC), STRICTLY stronger than ∞ (= C^∞) and unreachable (parametric analyticity of the ray
+-- integral is a Mathlib gap). But the D1 chain's ONLY genuine use of hw is exists_cutoff_foldedCoeff_bound's
+-- `hwk.continuous` (C⁰). This rebases the D1 chain off a bare CONTINUITY carry (…_ofCont) and feeds it the
+-- ∞-level folded-coeff smoothness from HuInftyRebase.hw_discharged_infty ∘ hu_infty_closed (from
+-- {hg,hgi,hgpos}), downcast .continuous. Result hAdom_hWDom_from_gateSqControl_hwDischarged = the exact
+-- HAdomHWDomFromConcreteDominations.hAdom_hWDom_from_gateSqControl bundle with hw ELIMINATED; sole carry =
+-- satisfiable GateSqControl. std-3 ×3. NOT a₁=R/6.
+import QIQTH.HAdomHWDomHwDischargedInfty

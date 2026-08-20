@@ -29061,4 +29061,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GateSqControlFromFlowBall.gateSqControl_constGate
 #print axioms QIQTH.GateSqControlFromFlowBall.hAdom_hWDom_from_gateSqControl_constGate
 
+-- HAdomHWDomHwDischargedInfty — J4-901: DISCHARGE the residual `hw` carry of the ABSTRACT-g hAdom/hWDom
+-- bundle. Mathlib's WithTop ℕ∞ has ⊤=ω=real-ANALYTIC (FTaylorSeries.lean:117) STRICTLY > ∞=C^∞
+-- (:119); the banked chain states hw at ⊤ but its SOLE genuine use is exists_cutoff_foldedCoeff_bound's
+-- `hwk.continuous` (C⁰, ConcreteDominations.lean:345). This rebases the D1 chain off a bare CONTINUITY
+-- carry (…_ofCont) and supplies it the ∞-level folded-coeff smoothness from
+-- HuInftyRebase.hw_discharged_infty ∘ hu_infty_closed ({hg,hgi,hgpos}) downcast .continuous ⟹ hw ELIMINATED
+-- from the exact hAdom/hWDom bundle; sole surviving carry = satisfiable GateSqControl. std-3 ×3. NOT a₁=R/6.
+#print axioms QIQTH.HwDischargedInfty.exists_cutoff_foldedCoeff_bound_ofCont
+#print axioms QIQTH.HwDischargedInfty.exists_D1_constants_of_gateSqControl_ofCont
+#print axioms QIQTH.HwDischargedInfty.hAdom_hWDom_from_gateSqControl_hwDischarged
+
 end QIQTH.AxiomAudit
