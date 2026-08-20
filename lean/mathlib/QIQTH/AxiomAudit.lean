@@ -28554,6 +28554,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryConcreteDischarge.terminalVelAt_nearIsometry_data
 #print axioms QIQTH.HCompNearCarryConcreteDischarge.terminalVelAt_chartReplace_sliver_bound
 
+-- HCompNearCarryFullyClosed (J4-880, Plan v9 Task B STEP 4c part (ii)): items (iii)+(iv) of hcomp's NEAR
+--   carry nb. (iii) EVENNESS LINK: gaussDdim_neg + reversal identity ⟹ gaussDdim_reversal_link. (iv)
+--   GENERALIZED PREFACTOR SLIVER: sliver_power_dominated_integral_le (improper-power bound, valid for
+--   negative q = the singular marginal terms) + terminalVelAt_prefactor_sliver_bound (matched rate
+--   ε^{(k+3)/2−p} for all 5 mixed-normal-form terms incl. the 2 MARGINAL ε^{1/2} terms, honest constants).
+--   NOT a₁=R/6.
+#print axioms QIQTH.HCompNearCarryFullyClosed.heatKernel1D_neg
+#print axioms QIQTH.HCompNearCarryFullyClosed.gaussDdim_neg
+#print axioms QIQTH.HCompNearCarryFullyClosed.gaussDdim_reversal_link
+#print axioms QIQTH.HCompNearCarryFullyClosed.sliver_power_dominated_integral_le
+#print axioms QIQTH.HCompNearCarryFullyClosed.sqrt_pow_mul_rpow_neg
+#print axioms QIQTH.HCompNearCarryFullyClosed.terminalVelAt_prefactor_sliver_bound
+
 -- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM operator-norm combinator for the field-Hessian
 -- CLM fderiv(∂ᵢH) (the object FderivBulkConcrete.kPrime carries), assembling the banked per-index scalar
 -- Hessian bounds into the operator-norm bound MixedDirectionsFieldHessianEnvelope.hFd needs.

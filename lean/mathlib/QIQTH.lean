@@ -4498,6 +4498,18 @@ import QIQTH.HCompNearCarryAssembly
 --   matched near rate O(ε^{(k+3)/2}) for the CONCRETE reversal near-isometry). Full nb still needs the
 --   mixed-normal-form connection (∂ⱼ∂ᵢH_G ↔ this shape). NOT a₁=R/6.
 import QIQTH.HCompNearCarryConcreteDischarge
+-- HCompNearCarryFullyClosed (J4-880, Plan v9 Task B STEP 4c part (ii)): the two genuinely-new analytic
+--   bricks the NEAR carry nb needs beyond J4-879. ITEM (iii) EVENNESS LINK: gaussDdim_neg (G_τ(−v)=G_τ(v),
+--   heatKernel1D even in x²) composed with the banked reversal identity (J4-858) ⟹ gaussDdim_reversal_link
+--   (G_τ(U z x₀) =ᶠ[𝓝 x₀] G_τ(T_{x₀}(U x₀ z))). ITEM (iv) GENERALIZED PREFACTOR SLIVER ESTIMATE:
+--   sliver_power_dominated_integral_le — the improper-power sliver bound ‖∫ f‖≤C·ε^{q+1}/(q+1) for ‖f s‖≤
+--   C·(t−s)^q, q>−1 (VALID for NEGATIVE q, the singular τ^{-1/2} marginal terms, unreachable by J4-861's
+--   constant-bound route), via integral_rpow + comp_sub_left; terminalVelAt_prefactor_sliver_bound folds
+--   J4-879's cubic cancellation + its herr/hmin into it ⟹ matched rate ε^{(k+3)/2−p} for all 5 mixed-
+--   normal-form terms (incl. the 2 MARGINAL ε^{1/2} terms) with HONEST tracked constants Cpre·Cshape.
+--   NOT a₁=R/6 (nb full closure still needs items (i)/(ii) chart-surface wiring; hcomp also blocked by the
+--   far carry's open hzmass wall).
+import QIQTH.HCompNearCarryFullyClosed
 -- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM OPERATOR-NORM combinator assembling the
 -- per-index (diagonal + off-diagonal) scalar Hessian bounds into an operator-norm bound on the field-
 -- Hessian CLM fderiv(∂ᵢH) that kPrime carries — the exact object MixedDirectionsFieldHessianEnvelope.hFd
