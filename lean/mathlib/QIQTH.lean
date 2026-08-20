@@ -4985,3 +4985,10 @@ import QIQTH.HbintInteriorTubeCoverRoute
 -- its named F2 carries {hΘc/hΘne/huc, hVmap0, hKSmeas, hcar, hLeviJoint, hBcont, hUpos/hUT, hAdom(=census),
 -- hBdom(=census hFdom), hmeas, hcont}. Route: subst hFeq → single exact. std-3. NOT a₁=R/6.
 import QIQTH.HDuhamelF2LiveWired
+-- DerivDomLowerCapped — J4-911: SUPPLIES the previously-DATA-still C3ε parameter-derivative dominator
+-- (boundD/hbdd_d/hbound_d) — the differentiation-under-∫ dominator for the frozen convolution's parameter
+-- derivative, shared by the hDuhamel + hDConv legs — as a CONSTANT dominator, reduced (via the banked
+-- lower-capped Gaussian pairing) to a single named crude time-derivative Gaussian envelope hAcrude
+-- (|A τ 0 z| ≤ C·τ⁻¹·gaussDdim(wL·τ)(0−z), SAME class as WideAmplitudeData.second_domination) + width-2
+-- Levi + hFzero. Concrete shared nb := ball u (εₘ/2). std-3. NOT a₁=R/6.
+import QIQTH.DerivDomLowerCapped

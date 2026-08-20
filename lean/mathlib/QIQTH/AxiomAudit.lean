@@ -26,6 +26,7 @@ import QIQTH.HbintInteriorContinuityRoute
 import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HDuhamelF2LiveWired
+import QIQTH.DerivDomLowerCapped
 
 namespace QIQTH.AxiomAudit
 
@@ -29171,5 +29172,15 @@ namespace QIQTH.AxiomAudit
 -- subst hFeq matches f2Pack_concrete_v3's conclusion EXACTLY; single exact. Of the carries, hAdom/hFdom(=hBdom)
 -- /hUT are ALREADY LIVE census binders; only {hcar,hmeas,hcont} genuinely-new residual. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HDuhamelF2LiveWired.hDuhamel_F2_live_wired
+
+-- DerivDomLowerCapped — J4-911: the DATA-still C3ε parameter-derivative dominator (boundD/hbdd_d/hbound_d),
+-- shared by the LIVE hDuhamel + hDConv legs, SUPPLIED as a CONSTANT dominator via the banked lower-capped
+-- Gaussian pairing. derivDom_boundD_of_crude reduces the census triple to a single named crude
+-- time-derivative Gaussian envelope hAcrude (|A τ 0 z| ≤ C·τ⁻¹·gaussDdim(wL·τ)(0−z), SAME class as the
+-- accepted WideAmplitudeData.second_domination) + width-2 Levi + hFzero, at the CONCRETE shared
+-- neighborhood derivDomNb := ball u (εₘ/2). hbound_d proved DETERMINISTICALLY over s,c then ∀ᵐ-wrapped
+-- (sidesteps the illegal ∀c ∀ᵐs order); hbdd_d = intervalIntegrable_const. std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.DerivDomLowerCapped.derivDomNb_mem_nhds
+#print axioms QIQTH.DerivDomLowerCapped.derivDom_boundD_of_crude
 
 end QIQTH.AxiomAudit
