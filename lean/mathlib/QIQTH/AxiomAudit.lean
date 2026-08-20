@@ -29183,4 +29183,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.DerivDomLowerCapped.derivDomNb_mem_nhds
 #print axioms QIQTH.DerivDomLowerCapped.derivDom_boundD_of_crude
 
+-- HpardiffZTimeDerivReduction — J4-912: the census `hpardiff` binder (companion parametric HasDerivAt in
+-- the frozen convolution's TIME parameter c) is a SIBLING (NOT a consumer) of the J4-911 boundD/hbound_d
+-- outer s-dominator (both are hypotheses of ONE downstream outer-Leibniz application; boundD=bound,
+-- hpardiff=h_diff). hpardiff_of_zTimeDeriv REDUCES it to the named INNER z-level differentiation family via
+-- the banked engine HeatResidualBound.heatConvInner_hasDerivAt (.2 of the Mathlib dominated
+-- differentiation-under-∫), fired per (s,c) at A:=Wit, dAu τ x z:=deriv(fun r=>Wit r x z)τ, B:=F, x=y=0,
+-- u₀:=c. Carried z-level family = {global z-slice meas, per-(s,c) local nb V∋c + z-integrable dominator
+-- (constructible from hAcrude/hFdom) + base/deriv z-slice meas/int + z-pointwise dominator + the genuine
+-- z-POINTWISE TIME HasDerivAt of the integrand — the differentiability sibling of the bound hAcrude, a
+-- carried geometric residue NOT discharged (GatedTauDerivRep banks only the deriv-EQUALITY representative)}.
+-- AE quantifier innermost (∀ᵐ z, ∀ c'∈V). Non-vacuity EXHIBITED (A≡0,F≡0). std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.HpardiffZTimeDeriv.hpardiff_of_zTimeDeriv
+#print axioms QIQTH.HpardiffZTimeDeriv.hpardiff_of_zTimeDeriv_hyp_satisfiable
+
 end QIQTH.AxiomAudit

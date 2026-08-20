@@ -4992,3 +4992,13 @@ import QIQTH.HDuhamelF2LiveWired
 -- (|A τ 0 z| ≤ C·τ⁻¹·gaussDdim(wL·τ)(0−z), SAME class as WideAmplitudeData.second_domination) + width-2
 -- Levi + hFzero. Concrete shared nb := ball u (εₘ/2). std-3. NOT a₁=R/6.
 import QIQTH.DerivDomLowerCapped
+-- HpardiffZTimeDerivReduction — J4-912: the census `hpardiff` binder (the companion parametric HasDerivAt
+-- in the frozen convolution's TIME parameter c) — sibling (NOT consumer) of the J4-911 boundD/hbound_d
+-- outer s-dominator — REDUCED to the named INNER z-level differentiation family via the banked engine
+-- HeatResidualBound.heatConvInner_hasDerivAt (.2 of hasDerivAt_integral_of_dominated_loc_of_deriv_le).
+-- hpardiff_of_zTimeDeriv: census binder ⟸ {global z-slice meas hAmeas, per-(s,c) local nb V∋c with a
+-- z-integrable dominator Dz [constructible from hAcrude/hFdom like J4-911's Dz], base/deriv z-slice
+-- meas/integrability, z-pointwise dominator, and the genuine z-POINTWISE TIME HasDerivAt of the integrand
+-- (the differentiability sibling of the bound hAcrude — carried, NOT discharged)}. AE quantifier innermost.
+-- Non-vacuity EXHIBITED (A≡0,F≡0). std-3 ×2. NOT a₁=R/6.
+import QIQTH.HpardiffZTimeDerivReduction
