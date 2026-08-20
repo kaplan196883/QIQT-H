@@ -10932,6 +10932,27 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-896 — ABSTRACT-`g` `hmassone` census-binder DISCHARGED for the LIVE order-1 capstone (commit `4d38d93e`)
+
+**File** `QIQTH/HmassoneFromGateAnnulusSplit.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** J4-895's Step-1 audit flagged the `GateAnnulusSplit` `hmassone` lead as a natural next dispatch. A fresh audit found `GateAnnulusSplit.chartImage_approx_identity_final` (the FIXED-`f` FINAL) is ALREADY stated GENERICALLY in the abstract metric `g gi` (NOT specialized to `curvedRNCMetric κ`), taking the metric carries `{hg,hgi,hgpos}`, gauge `det g 0 = 1`, the PRE-`ρ` gate-activation triple `{rS,hKball,hSact}`, witness-slice measurability `hWslice`, and zeroth Gaussian domination `hDom` as HYPOTHESES, and concluding at `f≡1` the `∫ z, vanVleckGatedWitness … τ 0 z → 1` approximate identity. This brick threads it into a genuine abstract-`g` `hmassone` discharge.
+
+**⭐ KEY FINDINGS (all character-checked against source, not trusted from citation).**
+* **Exact census-binder shape.** The `hmassone` member consumed by the shared frozen/moving census is, verbatim (`HDuhamelLiveGateWired.lean:217-218` for the `hDuhamel` side, `HDerivConvComposition.lean:133` for the `hDConv`/`hbdryLU_CONCRETE` side): `Tendsto (fun m => ∫ z, vanVleckGatedWitness g gi hChr hK S a b (epsSeq m) 0 z) atTop (𝓝 1)`, over ABSTRACT `g gi S`.
+* **Defeq `constGate`/live-`S` confirmed by `rfl`.** `constGate g gi hChr hK c` (`A1R6CoreAtGate.lean:101-104`) `= fun z => uniformFlowExp g gi hChr hK z '' Metric.ball 0 c`, which is the LIVE capstone's own `S` (`HDuhamelLiveGateWired.lean:21`). Verified in-file by `example … := rfl` — mirroring J4-895's `H`/`vanVleckGatedWitness` check.
+* **Hypothesis supply audit.** `hWslice` = the census member `hWmeas` (already carried); `hDom` = the census member `hWDom` (already carried); the metric carries `{hg,hgi,hgpos}` + gauge `det g 0 = 1` come from the capstone's own geometry (`hg0`/`htr` ⟹ `det g 0 = 1`). The ONLY genuinely-new inputs are the PRE-`ρ` gate-activation triple `{rS,hKball,hSact}` — satisfiable geometric facts (a ball in `K` from `K∈𝓝0`; origin-reachability of the flow-exp gate), none the conclusion.
+* **ABSTRACT-`g` is the point.** `CurvedA1HmassoneFinal.curved_hmassone_final_at_gate` (J4-591) already performed this exact composition but SPECIALIZED to `g:=curvedRNCMetric κ`, which does NOT serve the live capstone (over abstract `g`, cp765) and re-entering `g:=curvedRNCMetric κ` re-triggers the cp466 `hframeK ⟹ K={0}` vacuity family. The abstract-`g` generalization is the version the live capstone actually needs; the vacuous `∃ρ` wrapper of the curved brick is DROPPED so the conclusion is EXACTLY the census binder.
+
+**DELIVERABLE (std-3).**
+* `hmassone_from_gate_annulus_split` — the ABSTRACT-`g` `hmassone` binder shape, proved as the `f≡1` case of `chartImage_approx_identity_final` composed with `epsSeq→𝓝[>]0`. Plugs directly into the abstract-`S` census binder with no adapter.
+* `constGate_eq_liveGate` (`example … := rfl`) — the defeq check.
+* `hmassone_at_constGate` — the same discharge instantiated at `S:=constGate g gi hChr hK c` (the live gate).
+
+**WHAT THIS DOES / DOES NOT DO.** CLOSES the `hmassone` member of the shared `hDuhamel`/`hDConv` frozen/moving census: opaque carried unit-mass limit ⟹ theorem conditional only on satisfiable PRE-`ρ` inputs (all others already carried elsewhere in the census). Does NOT touch the OTHER census members (RadialNormalCoordinateGauge centre-identity leg, the Gaussian dominations `hEdom`/`hAdom`, the interchange bundles `MemLapFull`/`MemAdj*`/`MemECombine`, the sliver carries). `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10204 jobs); `#print axioms` std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `4d38d93e`, pushed. NOT `a₁ = R/6`.
+
 ## J4-895 — LIVE capstone `hDuhamel` reduced OPAQUE→NAMED census (Step 1 wiring) (commit `87fa18c5`)
 
 **File** `QIQTH/HDuhamelLiveGateWired.lean` (new; NO existing banked file edited).
