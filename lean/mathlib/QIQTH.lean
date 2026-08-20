@@ -5127,6 +5127,18 @@ import QIQTH.GaussTauTraceCancellationInnerBall
 -- (TEETH via sin‖z‖²). std-3 ×6. NOT a₁=R/6.
 import QIQTH.GaussTauTraceChartTransported
 
+-- GaussTauTraceChartDetFactor — J4-925: the DETERMINANT-FACTOR reduction bricks for the chart-CoV route.
+-- reciprocal_abs_lipschitzOn (PAIRWISE: D bounded-below c>0 + pairwise-Lipschitz L_D on S ⟹ 1/|D| bounded
+-- 1/c + pairwise-Lipschitz L_D/c² — the hqLip shape, per Sol's correction that AmplitudeDerivativeData.hqLip
+-- is pairwise not center) + ratio_abs_lipschitzOn (consumer-facing: P bounded M_P + Lip L_P, D bnd-below c
+-- + Lip L_D ⟹ P/|D| bounded M_P/c + Lipschitz L_P/c+M_P·L_D/c² — the A·F/|det| per-factor shape feeding
+-- hqLip) + reciprocal_abs_center_lipschitz (center-at-0 corollary, the two_term_census hcl shape). REDUCES
+-- 1/|det f'|∘V Lipschitz+bounded to {det∘V bounded-below (extractable from IFT pkgs), det∘V Lipschitz
+-- (the SLOPE = genuine wall: Mathlib lacks quantitative operator-det Lipschitz)}. W₀∘V=id on image is
+-- Mathlib's Set.LeftInvOn.rightInvOn_image (no brick). Non-vacuous (TEETH via D z=2+‖z‖, L_D=1≠0). std-3 ×4.
+-- Does NOT close hqLip/hGpow. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.GaussTauTraceChartDetFactor
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

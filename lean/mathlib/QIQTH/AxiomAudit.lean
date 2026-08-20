@@ -33,6 +33,7 @@ import QIQTH.GaussTauTraceCancellation
 import QIQTH.GaussTauTraceCancellationLocalized
 import QIQTH.GaussTauTraceCancellationInnerBall
 import QIQTH.GaussTauTraceChartTransported
+import QIQTH.GaussTauTraceChartDetFactor
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29404,5 +29405,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.two_term_census_bound_uniform_combined
 #print axioms QIQTH.HeatResidualBound.product_center_lipschitz_hyp_satisfiable
 #print axioms QIQTH.HeatResidualBound.two_term_census_bound_uniform_hyp_satisfiable
+
+-- ## J4-925 (GaussTauTraceChartDetFactor): the DETERMINANT-FACTOR reduction bricks for the chart-CoV
+-- route. gpt-5.6-sol (high) CORRECTION on the J4-924 report: AmplitudeDerivativeData.hqLip is PAIRWISE
+-- Lipschitz (|q z − q w| ≤ L·dist z w), NOT center-Lipschitz — so the reciprocal glue must be pairwise.
+-- reciprocal_abs_lipschitzOn: for D bounded-below (c ≤ |D x|, c>0) + pairwise-Lipschitz (|D x−D y|≤L_D·
+-- dist x y) on S, w↦1/|D w| is bounded 1/c + pairwise-Lipschitz L_D/c² on S (via ||a|−|b||≤|a−b|).
+-- ratio_abs_lipschitzOn: for P bounded(M_P)+Lip(L_P), D bnd-below(c)+Lip(L_D) on S, P/|D| bounded M_P/c +
+-- pairwise-Lipschitz L_P/c+M_P·L_D/c² — the A·F/|det| per-factor shape feeding hqLip (P:=A·F).
+-- reciprocal_abs_center_lipschitz: center-at-0 corollary (y:=0, dist z 0=‖z‖) — the two_term_census hcl
+-- shape. REDUCES 1/|det f'|∘V Lipschitz+bounded to {det∘V bounded-below (EXTRACTABLE — IFT pkgs prove
+-- 1/2<det internally from chartW0_absdet_fderiv_zero=1 + det-continuity), det∘V pairwise-Lipschitz (the
+-- SLOPE = genuine wall: Mathlib lacks quantitative operator-det Lipschitz — no hasFDerivAt_det/
+-- differentiable_det/LipschitzOnWith det)}. W₀∘V=id on the image = Mathlib Set.LeftInvOn.rightInvOn_image
+-- on the banked left inverse V(W₀ z)=z (no brick needed). Non-vacuity EXHIBITED with TEETH: D z:=2+‖z‖
+-- (|D|≥2, pairwise-Lip 1 via |‖x‖−‖y‖|≤‖x−y‖, L_D=1≠0), P z:=1. Does NOT close hqLip/hGpow. std-3 ×4.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.reciprocal_abs_lipschitzOn
+#print axioms QIQTH.HeatResidualBound.ratio_abs_lipschitzOn
+#print axioms QIQTH.HeatResidualBound.reciprocal_abs_center_lipschitz
+#print axioms QIQTH.HeatResidualBound.reciprocal_abs_lipschitzOn_hyp_satisfiable
 
 end QIQTH.AxiomAudit
