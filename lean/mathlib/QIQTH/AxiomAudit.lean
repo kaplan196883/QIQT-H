@@ -34,6 +34,7 @@ import QIQTH.GaussTauTraceCancellationLocalized
 import QIQTH.GaussTauTraceCancellationInnerBall
 import QIQTH.GaussTauTraceChartTransported
 import QIQTH.GaussTauTraceChartDetFactor
+import QIQTH.HCrossMixedSecondDiffReduction
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29425,5 +29426,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.ratio_abs_lipschitzOn
 #print axioms QIQTH.HeatResidualBound.reciprocal_abs_center_lipschitz
 #print axioms QIQTH.HeatResidualBound.reciprocal_abs_lipschitzOn_hyp_satisfiable
+
+-- ## J4-926 (HCrossMixedSecondDiffReduction): the DOUBLE-DIFFERENCE DECOMPOSITION of the live hCross
+-- census binder (HDuhamelLiveGateWired.hDuhamel_live_gate_wired, the mixed 2nd-difference bilinear
+-- Lipschitz wall shared by hDuhamel/hDConv). mixed_second_diff_frozen_reduction: for ANY A,B, base point
+-- x y, base times a b, shifts h k, and L≥0, GIVEN (i) Φ(c,·):=∫z A(c−·)xz·B·zy IntervalIntegrable on 0..b
+-- and b..(b+k) for c=a+h AND c=a, and (ii) the single-difference τ-shift bound |Φ(a+h,s)−Φ(a,s)|≤L·|h| for
+-- s∈uIoc b (b+k), the MIXED SECOND DIFFERENCE of heatConvFrozen A B is ≤ L·(|h|·|k|) — EXACTLY the hCross
+-- binder. Route: oriented interval additivity (integral_add_adjacent_intervals) collapses the d-direction to
+-- ∫ b..(b+k) (Φ(a+h,·)−Φ(a,·)); norm_integral_le_of_norm_le_const closes with |(b+k)−b|=|k|. gpt-5.6-sol
+-- (high) GO: genuine NON-CIRCULAR reduction of the mixed bilinear 2nd-difference to the LOWER-ORDER
+-- single-direction hdiff (the τ-shift Lipschitz of the inner convolution, pointwise in s). ⚠ hdiff is NOT
+-- logically weaker than hCross — it is a STRONGER POINTWISE SUFFICIENT condition (a pointwise bound implies
+-- the integrated one, not conversely); it IS strictly lower-ORDER + single-DIRECTION. The k-direction (an
+-- integration-LIMIT displacement, NOT an argument shift) is genuinely FREE (pure interval length, no
+-- differentiability in d). hdiff IS the honest remaining wall. Non-vacuity EXHIBITED with TEETH: A τ x z:=
+-- cos τ·e^{−‖z‖²}, B s z y:=e^{−‖z‖²}, Φ(c,s)=cos(c−s)·C (C=∫e^{−2‖z‖²}), the single-difference bound via
+-- cos 1-Lipschitz (Real.lipschitzWith_cos), the four integrabilities via continuity of s↦cos(c−s)·C. Does
+-- NOT close hCross — REDUCES it to hdiff (unbuilt for the concrete curved witness). std-3 ×2.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.mixed_second_diff_frozen_reduction
+#print axioms QIQTH.HeatResidualBound.mixed_second_diff_frozen_reduction_hyp_satisfiable
 
 end QIQTH.AxiomAudit

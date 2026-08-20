@@ -5139,6 +5139,22 @@ import QIQTH.GaussTauTraceChartTransported
 -- Does NOT close hqLip/hGpow. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.GaussTauTraceChartDetFactor
 
+-- HCrossMixedSecondDiffReduction — J4-926: the DOUBLE-DIFFERENCE DECOMPOSITION of the live hCross binder.
+-- mixed_second_diff_frozen_reduction: for ANY A,B and constant L≥0, GIVEN (i) the inner convolution
+-- Φ(c,·):=∫z A(c−·)xz·B·zy IntervalIntegrable on 0..b and b..(b+k) for c=a+h AND c=a (four hyps), and
+-- (ii) the SINGLE-DIFFERENCE τ-shift bound |Φ(a+h,s)−Φ(a,s)|≤L·|h| for s∈uIoc b (b+k), the MIXED SECOND
+-- DIFFERENCE of heatConvFrozen A B is ≤ L·(|h|·|k|) — EXACTLY the live hCross binder shape
+-- (HDuhamelLiveGateWired). Route: oriented interval additivity (integral_add_adjacent_intervals) collapses
+-- the d-direction to ∫ b..(b+k) (Φ(a+h,·)−Φ(a,·)); norm_integral_le_of_norm_le_const closes with
+-- |(b+k)−b|=|k|. Genuine NON-CIRCULAR reduction (gpt-5.6-sol GO) of the mixed bilinear 2nd-difference to
+-- the LOWER-ORDER single-direction hdiff (the τ-shift Lipschitz of the inner convolution). ⚠ hdiff is NOT
+-- logically weaker — it is a STRONGER POINTWISE SUFFICIENT condition (Sol correction); it IS strictly
+-- lower-ORDER + single-DIRECTION. The k-direction (integration-LIMIT displacement) is genuinely FREE (pure
+-- interval length). Non-vacuous with TEETH (A τ x z:=cos τ·e^{−‖z‖²}, B:=e^{−‖z‖²}, Φ=cos(c−s)·C, cos
+-- 1-Lipschitz). Does NOT close hCross — REDUCES it to hdiff (unbuilt for the concrete curved witness).
+-- NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HCrossMixedSecondDiffReduction
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
