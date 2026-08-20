@@ -35,6 +35,7 @@ import QIQTH.GaussTauTraceCancellationInnerBall
 import QIQTH.GaussTauTraceChartTransported
 import QIQTH.GaussTauTraceChartDetFactor
 import QIQTH.HCrossMixedSecondDiffReduction
+import QIQTH.HCrossIntegratedSplit
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29447,5 +29448,32 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 #print axioms QIQTH.HeatResidualBound.mixed_second_diff_frozen_reduction
 #print axioms QIQTH.HeatResidualBound.mixed_second_diff_frozen_reduction_hyp_satisfiable
+
+-- ## J4-927 (HCrossIntegratedSplit): the INTEGRATED (diagonal-split) reduction of the live hCross binder,
+-- replacing J4-926's FALSE pointwise hdiff with a TRUE integrated one. cp794 proved (numerically + Sol)
+-- that hdiff is GENUINELY FALSE: the sliver reaches the causal diagonal s=u (when k≥ε) where Φ(u,u)=0 but
+-- Φ(u+h,u)→F(u,0,0)≠0, so |Φ(u+h,u)−Φ(u,u)|/h ~ 1/h diverges; and the naive τ⁻¹-envelope integrated
+-- salvage LOSES A LOG (h·∫dτ/τ=h·log(ε/h)). THE FIX (sympy + gpt-5.6-sol high GO): split the sliver
+-- integral of D(s):=Φ(u+h,s)−Φ(u,s) at the diagonals s=u and s=u+h into {H_far (s<u): |D|≤C_far·h·(u−s)
+-- ^{−1/2} the F-Lipschitz CANCELLATION envelope whose τ^{−1/2} rate KILLS the log; H_near (u≤s≤u+h):
+-- |D|≤2M boundedness on the O(h)-width strip; H_zero (s>u+h): D=0 finite propagation}, assembling to
+-- |Δ²|≤(2C_far/√ε+2M/ε)·(|h|·|k|) with NO LOG. integrated_split_sliver_bound (abstract core, 3-case split
+-- k≤ε / ε<k≤ε+h / ε+h<k; far via far_part_bound+far_sqrt_bound reflected-sliver 2(√ε−√δ)≤2k/√ε, near via
+-- norm_integral_le_of_norm_le_const, zero vanishes). mixed_second_diff_frozen_reduction_integrated (the
+-- J4-926 oriented-additivity collapse but bounded by an ARBITRARY integrated Bnd, not the false pointwise
+-- hdiff). hcross_mixed_second_diff_split_bound (CAPSTONE: the exact live hCross binder shape from the
+-- split). Non-vacuous with TEETH: continuous finite-support D:=max0(u+h−s)−max0(u−s) (u=0,ε=h=1,k=3 case
+-- ε+h<k), the (u−s)^{−1/2} envelope machinery genuinely exercised. Covers only h,k>0 (Sol: neg-k is a
+-- mirror, neg-h moves the diagonal to u+h and needs a separate route). REPLACES J4-926's impossible
+-- pointwise reduction with a TRUE integrated one; does NOT close hCross (the concrete H_far cancellation
+-- envelope for the chart-composed witness = still-open chart-CoV τ^{−1/2} moment wall, J4-919/920 core).
+-- std-3 ×7. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.far_sqrt_bound
+#print axioms QIQTH.HeatResidualBound.reflected_sliver_partial
+#print axioms QIQTH.HeatResidualBound.far_part_bound
+#print axioms QIQTH.HeatResidualBound.integrated_split_sliver_bound
+#print axioms QIQTH.HeatResidualBound.mixed_second_diff_frozen_reduction_integrated
+#print axioms QIQTH.HeatResidualBound.hcross_mixed_second_diff_split_bound
+#print axioms QIQTH.HeatResidualBound.integrated_split_sliver_bound_hyp_satisfiable
 
 end QIQTH.AxiomAudit

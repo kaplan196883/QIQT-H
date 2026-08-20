@@ -5154,6 +5154,20 @@ import QIQTH.GaussTauTraceChartDetFactor
 -- 1-Lipschitz). Does NOT close hCross — REDUCES it to hdiff (unbuilt for the concrete curved witness).
 -- NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossMixedSecondDiffReduction
+-- HCrossIntegratedSplit — J4-927: the INTEGRATED (diagonal-split) reduction of the live hCross binder,
+-- replacing J4-926's FALSE pointwise hdiff premise with a TRUE integrated one. cp794 found hdiff FALSE
+-- (diverges 1/h across the causal diagonal s=u); the naive τ⁻¹-envelope salvage loses a LOG. This file
+-- splits the sliver integral of D(s):=Φ(u+h,s)−Φ(u,s) at the diagonals s=u and s=u+h into {H_far (the
+-- F-Lipschitz CANCELLATION envelope |D|≤C_far·h·(u−s)^{−1/2}, τ^{−1/2} kills the log), H_near (|D|≤2M
+-- boundedness on the O(h) strip), H_zero (D=0 past u+h, finite propagation)} and assembles to the exact
+-- hCross binder |Δ²|≤(2C_far/√ε+2M/ε)·(|h|·|k|) with NO LOG (sympy + gpt-5.6-sol GO). integrated_split_
+-- sliver_bound (abstract core, 3-case split), mixed_second_diff_frozen_reduction_integrated (collapse
+-- wrapper taking the integrated bound), hcross_mixed_second_diff_split_bound (capstone, exact hCross shape).
+-- Non-vacuous with TEETH (finite-support D:=max0(u+h−s)−max0(u−s), envelope machinery exercised). Covers
+-- only h,k>0 (Sol: neg-k mirror, neg-h moves the diagonal). REPLACES the FALSE pointwise reduction with a
+-- TRUE integrated one; does NOT close hCross (concrete H_far cancellation envelope = still-open chart-CoV
+-- τ^{−1/2} wall). NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HCrossIntegratedSplit
 
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
