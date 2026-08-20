@@ -4757,3 +4757,18 @@ import QIQTH.FieldHessianJointContinuityClosed
 -- ⚠ does NOT discharge hbint (needs U⊇K×concreteKx incl. off-gate; tube-covers-b-support + gate transparency +
 -- matched-cutoff remain). std-3 ×6. NOT a₁=R/6.
 import QIQTH.WitnessFieldDerivJointC1FromTube
+
+-- HbintCollarMatchedCutoffClosed: J4-888 — the COLLAR / matched-cutoff architecture of J4-872/873 LIFTED
+-- to the JOINT (z,x) setting, applied to hbint's joint field-Hessian CONTINUITY residual (J4-877/878).
+-- jointCore = compact joint core-graph (fun (z,v)=>(z,φ_z v))''(K×closedBall 0 b), keeps the base (unlike
+-- concreteKx). fieldHessian_fderiv_eqZero_off_jointGraph: the collar's off-core vanishing LIFTED to a
+-- JOINT-OPEN statement — field-Hessian = 0 off the compact jointCore (z∈K via fieldHessian_zero_offCore
+-- J4-873; z∉K via base-notMem branch) — DISSOLVES residual (b) of J4-887. matched-cutoff PASTING
+-- fieldHessian_norm_jointContinuousOn_of_coreGraphContinuous: field-Hessian norm ContinuousOn K×concreteKx
+-- from {on-core-graph continuity + matched-cutoff seam-vanishing} via ContinuousOn.union_of_isClosed
+-- (dead-zone closure(D\Γ)∩D carries f≡0). hbint_reduced_to_coreGraphContinuity: chains through J4-877 ⟹
+-- hbint ⟸ {BL-cont, ON-CORE-GRAPH continuity, matched-cutoff seam}. ⚠ does NOT close hbint: on-core-graph
+-- continuity = residual (a) (joint chart-C²-on-closed-b-tube; J4-884 tube unquantified + interior-K-only;
+-- Lebesgue gives uniform ρ but no ρ≥b, no ∂K coverage). Collar gives BOUNDEDNESS cheaply (why J4-873's
+-- hgate closed) but hbint needs CONTINUITY (seam entangles with (a)). std-3 ×7. NOT a₁=R/6.
+import QIQTH.HbintCollarMatchedCutoffClosed

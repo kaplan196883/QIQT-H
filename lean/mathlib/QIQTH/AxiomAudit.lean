@@ -28902,4 +28902,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessFieldDerivJointC1FromTube.witnessFieldDeriv_smoothForm_jointContDiffOn_tube
 #print axioms QIQTH.WitnessFieldDerivJointC1FromTube.partialFDeriv_engine_nonvacuous
 
+-- J4-888: HbintCollarMatchedCutoffClosed — the COLLAR / matched-cutoff architecture of J4-872/873 LIFTED
+-- to the JOINT (z,x) setting, applied to hbint's joint field-Hessian CONTINUITY residual (J4-877/878).
+-- fieldHessian_fderiv_eqZero_off_jointGraph: collar off-core vanishing LIFTED to a JOINT-OPEN statement
+-- (field-Hessian = 0 off the compact jointCore) — dissolves residual (b). matched-cutoff PASTING
+-- fieldHessian_norm_jointContinuousOn_of_coreGraphContinuous: field-Hessian norm ContinuousOn K×concreteKx
+-- from {on-core-graph continuity + matched-cutoff seam} via ContinuousOn.union_of_isClosed.
+-- hbint_reduced_to_coreGraphContinuity: hbint ⟸ {BL-cont, ON-CORE-GRAPH continuity, matched-cutoff seam}.
+-- ⚠ does NOT close hbint: on-core-graph continuity = residual (a) (joint chart-C²-on-closed-b-tube;
+-- J4-884 tube unquantified + interior-K-only). std-3 ×7. NOT a₁=R/6.
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.jointCore_isCompact
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.jointCore_isClosed
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.closedBall_image_isClosed
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.fieldHessian_fderiv_eqZero_off_jointGraph
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.fieldHessian_norm_jointContinuousOn_of_coreGraphContinuous
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.hbint_reduced_to_coreGraphContinuity
+#print axioms QIQTH.HbintCollarMatchedCutoffClosed.coreGraphContinuity_nonvacuous
+
 end QIQTH.AxiomAudit
