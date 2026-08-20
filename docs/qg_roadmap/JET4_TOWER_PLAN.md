@@ -11182,3 +11182,44 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 **⚠ HONEST VERDICT — hbint NOT closed; the frontier is now NAMED, not crossed.** The chart-C²+in-gate open cover `W` of the WHOLE `b`-tube over ALL of `K` (∂K included) IS the `JointSecondOrderRNCRegularity` frontier restated geometrically. Building it uniformly over `K` needs a multi-lemma sub-campaign: (i) a uniform-over-`K` lower bound on the flow / near-identity radius; (ii) joint `C²` of exp at NONZERO velocities up to `b` — an extension of J4-884's near-`(z₀,0)` Task D (`uniformFlow_joint_contDiffOn_two_witness`, which is centred at velocity 0); (iii) boundary-`K` coverage via a reference-ball transport (K₂:=closedBall z₀ 1 makes ∂K-point z₀ interior; `uniformFlowExp_eq_of_admissible` transports); (iv) a compactness assembly over the compact core-graph `K ×ˢ closedBall 0 b`. **KEY TRACE FINDING (task step 1).** J4-884's tube radius is NOT extractable: `uniformInverseChart_jointContDiffOn_tube ← uniformInverseChart_jointContDiffAt_diag_generalK ← chartCoherent ← hGCDAt.localInverse hG' hn2 ← ContDiffAt.to_localInverse`, and `to_localInverse` is a purely QUALITATIVE germ (no radius). The `ApproximatesLinearOn`-based explicit-δ₀ route (as in `uniformFlowExp_approximatesLinearOn`/`uniformChartRadius`) DOES give an explicit radius but only for the SEPARATE per-`q` chart (`uniformInverseChart_huniformChart`, already K-uniform incl. ∂K, but x-regularity only, NOT joint); the JOINT analogue would need a joint `ApproximatesLinearOn` of `G(z,v)=(z,φ_z v)` against `f₁=DG(z₀,0)=[[I,0],[I,I]]`, which additionally requires a base-direction near-identity Jacobian bound `‖∂_z φ_z(v) − I‖ ≤ C‖v‖` (the base analogue of `uniformFlowExp_fderiv_near_id_quant`) — currently ABSENT. Neither `hCConv`'s `JointSecondOrderRNCRegularity` consumption nor `nb`'s change-of-variables is unblocked (both rest on the SAME b-tube joint-C²/diffeomorphism frontier; this brick supplies the crisp reduction + two-engine composition, not the frontier object). `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10196 jobs); `#print axioms` ×3 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `2cbc7a4f`, pushed. NOT `a₁ = R/6`.
+
+## J4-904 — `hbint` MEASURABILITY route: dodges the PROVED boundary no-go (commit `d3eba2fb`)
+
+**File** `QIQTH/HbintMeasurabilityNullFrontier.lean` (new; NO existing banked file edited).
+
+**THE ANGLE.** `hbint` (a leg of `hCConv`, the `z`-integrability of the product dominator `BL·BF`,
+`BF s z := ⨆ x ‖fieldHessian(z,x)‖`) had TWO exhausted CONTINUITY routes (`FieldHessianJointContinuityClosed`
+J4-878 open-`U` joint-`C¹`; `QuantifiedCoherentChartTube` J4-889 in-gate chart-`C²` cover), BOTH PROVED
+boundary-unsatisfiable by `BTubeCompactnessAssembly` (J4-892): the concrete `uniformFlowExp K` is
+DEGENERATE off `K` (`= q` for `q ∉ K`), so `(z,x) ↦ fieldHessian` is genuinely discontinuous across `∂K`,
+and an open in-gate cover of the core-graph forces its base projection `⊆ interior K` — impossible at the
+boundary diagonal points. **KEY:** `hbint` needs only INTEGRABILITY = `AEStronglyMeasurable(BL·BF)` +
+integrable dominator, NOT continuity; and `AEStronglyMeasurable` TOLERATES the null discontinuity locus
+`∂K` that continuity cannot. For the live confinement set `K = Metric.closedBall 0 r`, `∂K` is a sphere,
+Lebesgue-null (`Measure.addHaar_sphere`). On the co-null open set `interior K ∪ Kᶜ`, `BF` is continuous
+(interior: the INTERIOR joint-chart regularity `GeneralCenterCoherentInverseChart`/abstract-`K` tower
+J4-891 — the asset the no-go LEAVES available; exterior: `BF ≡ 0`). So `BF` and the product are
+a.e.-strongly-measurable, hence integrable with the compact-`K` bound.
+
+**Deliverables (std-3 ×6):** `aestronglyMeasurable_of_continuousOn_compl_null` (general: continuous on
+open co-null `U` ⟹ AESM, via `Measure.restrict_eq_self_of_ae_mem`); `integrable_of_bounded_compactSupport`
+(general: AESM + off-`K` vanishing + `K`-bound + compact ⟹ Integrable, dominator `|C|·1_K`);
+`volume_frontier_closedBall_eq_zero` (★ discharges the gating null-frontier hyp for the live ball — the
+condition gpt-5.6-sol flagged as NOT free from `IsCompact` alone); ★★★
+`hbint_of_interiorContinuous_nullFrontier` (THE reduction — the EXACT `MixedDirFieldHessianEnvelope.hbint`
+field shape, from `{volume(frontier K)=0, ContinuousOn (BF s) (interior K), off-K vanishing,
+ContinuousOn (BL s) K, compact-K product bound}`); `hbint_reduction_nonvacuous` (fires at the live ball
+`K` with `BF=BL=0` — no J4-548 unsatisfiable-antecedent trap).
+
+**Verdict on the task's question.** The flagged NEW infrastructure does NOT rescue the CONTINUITY route
+(J4-892's no-go is a genuine topological obstruction, independent of interior-chart improvements). BUT it
+DOES change the picture via a DIFFERENT route: the interior chart regularity is EXACTLY enough for the
+MEASURABILITY route, which the no-go does not block. This moves the `hbint` wall from "continuity on ALL
+of `K` (FALSE at `∂K`)" to "continuity on `interior K` (reachable via J4-891) + elementary null-frontier".
+No `O(√ε)` rate is involved (measurability+boundedness, not a cancellation), so the sympy-rate gate is N/A.
+`WitnessTranspositionGeneralBound` (J4-823) is for the ORTHOGONAL `hcomp` base↔eval leg, untouched here.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10212 jobs); `#print axioms` ×6 std-3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK; `grep -i
+vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `d3eba2fb`, pushed. `a₁ = R/6` remains
+CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
