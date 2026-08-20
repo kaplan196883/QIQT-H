@@ -30,6 +30,7 @@ import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
 import QIQTH.GaussTauDerivCancellation
 import QIQTH.GaussTauTraceCancellation
+import QIQTH.GaussTauTraceCancellationLocalized
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29333,5 +29334,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.SliverAmplitudeFromHGpow.integral_invSqrt_sub_sliver
 #print axioms QIQTH.SliverAmplitudeFromHGpow.sliver_amplitude_from_hGpow
 #print axioms QIQTH.SliverAmplitudeFromHGpow.hbnd_from_hGpow
+
+-- ## J4-922 (GaussTauTraceCancellationLocalized): the SET-RESTRICTED (localized-domain) ∂_τ-TRACE
+-- moment-cancellation bound — the gpt-5.6-sol-identified "domain-bridge" that makes the recurring
+-- chart change-of-variables wall of hCross/hGpow/hOn tractable. AUDIT FINDING: the EXACT chart CoV is
+-- ALREADY banked (ChartIFTPackage.chart_gaussian_change_variables_concrete, J4-270, std-3), so after
+-- it flattens the census integrand ∫_{z∈ball 0 ρ}(∑ᵢ((W₀z)ᵢ²/4τ²−1/2τ))·gaussDdim τ(W₀z)·A(z) into
+-- ∫_{w∈Ω}(∑ᵢ(wᵢ²/4τ²−1/2τ))·gaussDdim τ w·q(w) (Ω=W₀''(ball 0 ρ)∈𝓝 0), the ONLY residue is (i) the
+-- domain Ω≠ℝⁿ and (ii) inner-ball-only Lipschitz. hessCoord_abs_weighted_tail_le: per-coordinate
+-- ABSOLUTE weighted Gaussian tail moment ∫_{z∈T}|((zᵢ)²−2τ)/(4τ²)·gaussDdim τ z·q z| ≤
+-- M·(√2)ⁿ·e^{−r²/8τ}·(2n+1)/(2τ) for any measurable T⊆{r≤‖z‖} (OffCollarTailMoment dominator, strict <
+-- relaxed to ≤). gaussian_hessian_cancel_trace_on_superset: DISCHARGES residue (i) — for q L-Lipschitz
+-- bounded (|q|≤M) measurable and ANY measurable Ω⊇ball 0 r, |∫_{z∈Ω}(∑ᵢ((zᵢ)²/4τ²−1/2τ))·gaussDdim τ
+-- z·q z| ≤ L·(15/2·n²)/√τ + n·M·(√2)ⁿ·e^{−r²/8τ}·(2n+1)/(2τ) (∫_ℝⁿ=∫_Ω+∫_{Ωᶜ} via integral_add_compl;
+-- main term = gaussian_hessian_cancel_trace; tail via the per-coord lemma at T=Ωᶜ⊆{r≤‖z‖}). The tail is
+-- o(τ^{−1/2}) (super-polynomially small in 1/τ), so the τ^{−1/2} cancellation SURVIVES restriction to Ω.
+-- Non-vacuity EXHIBITED (q z:=cos(dist z 0), L=M=1, on the PROPER superset ball 0 5⊋ball 0 1). Residue
+-- (ii) (inner-ball-only Lipschitz, so the chart weight q(w)=A(Vw)/|det f'(Vw)| defined only on Ω can be
+-- fed without a global extension) left as explicit follow-on. std-3 ×3. NOT a₁=R/6; a₁=R/6 remains
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.hessCoord_abs_weighted_tail_le
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset_hyp_satisfiable
 
 end QIQTH.AxiomAudit

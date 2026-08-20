@@ -5094,6 +5094,15 @@ import QIQTH.GaussTauDerivCancellation
 -- remaining wall. Non-vacuity EXHIBITED (q z := cos(dist z 0), L:=1). std-3 ×3. NOT a₁=R/6 (leaf brick).
 import QIQTH.GaussTauTraceCancellation
 
+-- GaussTauTraceCancellationLocalized — J4-922: the SET-RESTRICTED (localized-domain) ∂_τ-TRACE
+-- moment-cancellation bound. Transports gaussian_hessian_cancel_trace (full ℝⁿ) to any measurable
+-- superset Ω ⊇ ball 0 r at the cost of an exponentially-suppressed Gaussian tail: |∫_{z∈Ω} (∑ᵢ((zᵢ)²/4τ²
+-- − 1/2τ))·gaussDdim τ z·q z| ≤ L·(15/2·n²)/√τ + n·M·(√2)ⁿ·e^{−r²/8τ}·(2n+1)/(2τ). This is the
+-- "domain-bridge" companion (gpt-5.6-sol high) that lets the banked EXACT chart change-of-variables
+-- (ChartIFTPackage.chart_gaussian_change_variables_concrete, J4-270) carry the τ^{−1/2} moment
+-- cancellation from Ω = W₀''(ball 0 ρ) into the flat cancellation on ℝⁿ. std-3 ×3. NOT a₁=R/6.
+import QIQTH.GaussTauTraceCancellationLocalized
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
