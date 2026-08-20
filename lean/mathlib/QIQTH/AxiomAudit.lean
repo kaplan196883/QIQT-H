@@ -32,6 +32,7 @@ import QIQTH.GaussTauDerivCancellation
 import QIQTH.GaussTauTraceCancellation
 import QIQTH.GaussTauTraceCancellationLocalized
 import QIQTH.GaussTauTraceCancellationInnerBall
+import QIQTH.GaussTauTraceChartTransported
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29378,5 +29379,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hessTrace_abs_mul_norm_integral_le
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz_hyp_satisfiable
+
+-- ## J4-924 (GaussTauTraceChartTransported): the ABSTRACT composition of residues (a)+(b) of the
+-- chart-CoV cancellation route — the UNIFORM (bounded-horizon) FLAT TWO-TERM Gaussian census bound.
+-- (a) product_center_lipschitz / product3_center_lipschitz: a PRODUCT of globally bounded + center-
+-- Lipschitz-at-0-on-ball 0 r factors is bounded (M_f·M_h) + center-Lipschitz-at-0 (M_f·L_h+M_h·L_f) —
+-- τ-uniform iff the factors are (they carry no τ); the exact A·F·(1/|det|) shape via chaining.
+-- (a)+(b) two_term_census_bound_uniform: for 0<τ≤T, q₁ meas+bounded(|q₁|≤M₁)+center-Lipschitz(L) on
+-- ball 0 r, q₂ meas+bounded(|q₂|≤M₂), and ANY measurable Ω⊇ball 0 r:
+-- |∫_{z∈Ω}(∑ᵢ((zᵢ)²/4τ²−1/2τ))·gaussDdim τ z·q₁ z + ∫_{z∈Ω} gaussDdim τ z·q₂ z| ≤ L·(n²(16√2+1))/√τ +
+-- (3n·M₁·√2ⁿ·(4(2n+1)/r²)+M₂)·(√T/√τ). Term1 = J4-923's superset-center-Lipschitz bound with the
+-- super-poly tail 3n·M₁·√2ⁿ·e^{−r²/8τ}(2n+1)/(2τ) ABSORBED via e^{−a/τ}/τ≤1/a (Real.add_one_le_exp).
+-- Term2 (b) = the O(1) Gaussian-mass bound |∫_Ω G·q₂|≤M₂ (∫_Ω G≤∫G=1) promoted to M₂·√T/√τ by 1≤√T/√τ
+-- (τ≤T). _combined folds to the single Cpair/√τ shape (Cpair τ-independent) hGpow consumes. gpt-5.6-sol
+-- (high) VERDICT: sound + Lean-actionable; REDUCES hGpow to the geometric per-factor facts {A∘V center-
+-- Lip, F∘V center-Lip, 1/|det f'|∘V center-Lip+bounded, W₀∘V=id on Ω (recoverable from banked left
+-- inverse), MeasurableSet Ω, uniform constants}; does NOT close hGpow/hCross (likely bottleneck =
+-- 1/|det|∘V center-Lipschitz). Non-vacuity EXHIBITED with TEETH (q₁:=sin‖z‖² center-Lip-but-NOT-globally-
+-- Lip, q₂:=cos‖z‖) on PROPER superset ball 0 5⊋ball 0 1. std-3 ×6. NOT a₁=R/6; a₁=R/6 remains
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.product_center_lipschitz
+#print axioms QIQTH.HeatResidualBound.product3_center_lipschitz
+#print axioms QIQTH.HeatResidualBound.two_term_census_bound_uniform
+#print axioms QIQTH.HeatResidualBound.two_term_census_bound_uniform_combined
+#print axioms QIQTH.HeatResidualBound.product_center_lipschitz_hyp_satisfiable
+#print axioms QIQTH.HeatResidualBound.two_term_census_bound_uniform_hyp_satisfiable
 
 end QIQTH.AxiomAudit

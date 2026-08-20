@@ -5114,6 +5114,19 @@ import QIQTH.GaussTauTraceCancellationLocalized
 -- (paired weight A·F/|det| Lipschitz + Cfield·F/|det| O(1) term remain). std-3 ×3. NOT a₁=R/6.
 import QIQTH.GaussTauTraceCancellationInnerBall
 
+-- GaussTauTraceChartTransported — J4-924: the ABSTRACT composition of residues (a)+(b) of the chart-CoV
+-- cancellation route — the UNIFORM (bounded-horizon) FLAT TWO-TERM Gaussian census bound.
+-- product_center_lipschitz / product3_center_lipschitz (a product of bounded + center-Lipschitz-at-0
+-- factors is bounded + center-Lipschitz-at-0, constant M_f·L_h+M_h·L_f — τ-uniform iff inputs are, the
+-- exact A·F·(1/|det|) shape) + two_term_census_bound_uniform (for 0<τ≤T, q₁ meas+bounded(M₁)+center-Lip(L)
+-- on ball 0 r, q₂ meas+bounded(M₂), meas Ω⊇ball 0 r: |∫_Ω(∑ᵢ((zᵢ)²/4τ²−1/2τ))·G·q₁ + ∫_Ω G·q₂| ≤
+-- L·(n²(16√2+1))/√τ + (3n·M₁·√2ⁿ·(4(2n+1)/r²)+M₂)·(√T/√τ); J4-923 term1 + tail absorption e^{−a/τ}/τ≤1/a
+-- via add_one_le_exp + Gaussian-mass O(1) term2 promoted by 1≤√T/√τ) + _combined (Cpair/√τ shape for
+-- hGpow). REDUCES hGpow to the geometric per-factor facts {A∘V, F∘V, 1/|det|∘V center-Lip, W₀∘V=id on Ω,
+-- MeasurableSet Ω}; does NOT close it (Sol: likely bottleneck = 1/|det|∘V center-Lip). Non-vacuous
+-- (TEETH via sin‖z‖²). std-3 ×6. NOT a₁=R/6.
+import QIQTH.GaussTauTraceChartTransported
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
