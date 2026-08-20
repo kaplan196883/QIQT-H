@@ -28771,6 +28771,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HZMassPeakGaussianSplit.hzmass_of_peak_BF_gaussian_BL
 #print axioms QIQTH.HZMassPeakGaussianSplit.hzmass_peak_gaussian_split_nonvacuous
 
+-- J4-882: HZMassLeviBaseEnvelope — the CONCRETE Levi-base Gaussian envelope for BL + the WIDTH-2s split
+-- companion. leviBase_gaussDdim2s_envelope: the banked J4-114 Levi domination gives |leviSeries E s z 0|≤
+-- C_L·gaussDdim(2s) z (base-z Gaussian, WIDTH 2s not t−s; conditional on the same M1 hEmeas).
+-- hzmass_of_peak_BF_gaussian2s_BL: the width-2s companion of J4-881's split (width irrelevant to (t−s)⁻¹
+-- via mass-one). FINDING C (prose): matched power Ppk·CB≤C(t−s)⁻¹ FAILS for n≥3 with constant CB and the
+-- J4-868 peak Ppk≍(t−s)^{−n/2} — hzmass does NOT close via peak route for physical n=4. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HZMassLeviBaseEnvelope.leviBase_gaussDdim2s_envelope
+#print axioms QIQTH.HZMassLeviBaseEnvelope.hzmass_of_peak_BF_gaussian2s_BL
+#print axioms QIQTH.HZMassLeviBaseEnvelope.hzmass_gaussian2s_split_nonvacuous
+
 -- J4-868: BFGaussianEnvelopeClosed — the GAUSSIAN-PEAK verdict for BF + the uniform-in-z NO-GO.
 -- gaussDdim_peak_ratio: gaussDdim t 0=exp((∑(v k)²)/(4t))·gaussDdim t v (exact peak/point ratio).
 -- fieldHessian_peak_dominator_of_chart_dominator: the PEAK step (chart Gaussian→z-uniform peak, Poly≥0).

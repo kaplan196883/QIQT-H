@@ -4662,6 +4662,19 @@ import QIQTH.HZMassIntegrabilityAttempt
 -- NOT a₁=R/6.
 import QIQTH.HZMassPeakGaussianSplit
 
+-- HZMassLeviBaseEnvelope: J4-882 — the CONCRETE Levi-base Gaussian envelope for BL, and the WIDTH-2s
+-- companion of the J4-881 split. FINDING A (leviBase_gaussDdim2s_envelope): the banked J4-114 whole-gate
+-- Levi domination, specialized to (τ,p,q):=(s,z,0) and rewritten via baseKernelW_zero_apply, DOES supply a
+-- base-z Gaussian envelope |leviSeries E s z 0|≤C_L·gaussDdim(2s) z — but at WIDTH 2s, not t−s (so it does
+-- NOT feed the J4-881 split's gaussDdim(t−s) slot directly). FINDING B (hzmass_of_peak_BF_gaussian2s_BL):
+-- the width is IRRELEVANT to the (t−s)⁻¹ target (mass-one holds for any width), so the split closes at
+-- width 2s given the SAME residual triple {peak BF, matched power Ppk·CB≤C(t−s)⁻¹, integrability}. FINDING
+-- C (rigorous prose): with the whole-gate CONSTANT Levi coeff CB=C_L and the J4-868 peak Ppk≍(t−s)^{−n/2},
+-- the matched power fails for n≥3 ((t−s)^{1−n/2}→∞ as s→t) — hzmass does NOT close through the peak route
+-- for physical n=4; needs a SHARP field-Hessian peak bound Ppk≤C(t−s)^{n/2−1}·(t−s)⁻¹ (not banked). std-3.
+-- NOT a₁=R/6.
+import QIQTH.HZMassLeviBaseEnvelope
+
 -- BFGaussianEnvelopeClosed: J4-868 — the GAUSSIAN-PEAK verdict for BF, closing the compact-gate-sup loop
 -- of hFd AND resolving the uniform-in-z subtlety of the step-4 target BF≤C·gaussDdim(t−s) z. The gate
 -- confines the chart coord uniformInverseChart z p to a z-INDEPENDENT ball, so the only z-uniform bound
