@@ -11183,6 +11183,23 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10196 jobs); `#print axioms` ×3 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `2cbc7a4f`, pushed. NOT `a₁ = R/6`.
 
+## J4-906 — `hmod` + `hsup` + `hUfloor` census binders of the LIVE `hDuhamel` capstone DISCHARGED via Heine–Cantor Levi-slice continuity (commit `60328b24`)
+
+**File** `QIQTH/HDuhamelBoundaryModulusUniform.lean` (new; no existing banked file edited). Find-and-wire discharge of THREE census binders of `HDuhamelLiveGateWired.hDuhamel_live_gate_wired` (the shared frozen/moving boundary-locally-uniform pile), continuing the J4-896..902 pattern.
+
+**Deliverables (std-3 ×5).**
+- ★★ `heine_spatialModulus_at_zero` — NEW general Heine–Cantor spatial-modulus lemma: from joint continuity of the `0`-slice `p ↦ F p.1 p.2 0` on the compact strip `Icc t₁ t₂ ×ˢ closedBall 0 R` (with `[ta,tb] ⊆ [t₁,t₂]`, `0<R`), produces `∀ε>0, ∃δ>0, ∀u∈[ta,tb], ∀z∈ball 0 δ, |F u z 0 − F u 0 0| < ε` (the exact `hmod` shape). Mirrors the banked time-shift proof (`hs.uniformContinuousOn_of_continuous` → `u`-free modulus; `dist((u,z),(u,0))=‖z‖` `u`-free; `min δ R`).
+- ★★ `hmod_census_of_sliceContinuity` — the EXACT `hmod` census binder (`HDuhamelLiveGateWired:219-221`, abstract `F`) reduced to the single `0`-slice continuity carrier via the above.
+- ★★ `hsup_census_of_sliceContinuity` — the EXACT `hsup` census binder (`:222-224`, abstract `F`) obtained DIRECTLY from the banked `EnvelopeWiringLocUnif.heine_timeShift_sup_tendsto_tUniform` applied to `fun s z => F s z 0`, fed the SAME carrier.
+- ★★★ `hmod_hsup_at_witness` — BOTH binders at the concrete Levi source `leviSeries E` reduced to the banked `MovingCorrAssembly.leviSlice_jointContinuousOn_of_termwise` ingredients `{termwise iterE joint continuity, summable envelope, envelope bound}` — the exact carriers the moving-correction/boundary assembly already stands on.
+- `hUfloor_of_windowFloor` — the EXACT `hUfloor` binder (`:176`, `∃c>0, ∀u∈U, c≤u`) is the trivial sibling-redundant `⟨aT, haT, hUlb⟩` already carried by the same theorem (`aT>0`, `∀u∈U, aT≤u`, `:151-152`); audit `D` "trivial window fact" (`DataPileWitnessAudit:47`).
+
+**KEY FINDING (task).** Both `hmod` and `hsup` collapse onto ONE named satisfiable carrier — Levi-`0`-slice joint continuity on the compact strip — which is BANKED (`leviSlice_jointContinuousOn_of_termwise`, from termwise+envelope). `hsup` even had a ready provider (`heine_timeShift_sup_tendsto_tUniform`); only `hmod` needed the new (elementary) spatial-modulus lemma. So the earlier "genuinely open" pass-through scan was too pessimistic for `hmod`/`hsup`.
+
+**⚠ REMAIN GENUINELY OPEN (real investigation, not force-fit).** `hCross` — the mixed second-difference bilinear bound `|Δ²ₕₖ heatConvFrozen| ≤ L·|h||k|` — is audit `DS none` "Genuine analytic input" (`DataPileWitnessAudit:51`), part of wall W5; NO provider in the repo (only ever consumed by `F2FamilyDischarge`). `hBoundaryLim` DOES have a named provider (`EnvelopeWiringLocUnif.hBoundaryLim_DONE`), but its input list includes the per-point `hgeoBundle`/`hfgBundle` regularity — wiring it trades one binder for the b-tube-adjacent frontier surface (relocation, not a net discharge), so NOT wired here.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10214 jobs); `#print axioms` ×5 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` OK (raw 0); `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `60328b24`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched). NOT `a₁ = R/6`.
+
 ## J4-905 — `hBFint` interior-continuity carry DISCHARGED to the interior joint `(z,x)`-continuity residual (commit `ad754cf6`)
 
 **File** `QIQTH/HbintInteriorContinuityRoute.lean` (new; NO existing banked file edited).
