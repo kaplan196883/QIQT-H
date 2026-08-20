@@ -29012,6 +29012,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.AmplitudeDataOnFromRadialGauge.radialGauge_discharges_hjets_carry
 #print axioms QIQTH.AmplitudeDataOnFromRadialGauge.hbnd_v2_census_of_radialGauge
 
+-- RadialGaugeIsNamedFloor — J4-903: the J4-893 RadialNormalCoordinateGauge interface (the hDConv
+-- centre-identity wall, live-capstone gauge leg) IS the pre-existing J4-507 named geodesic FLOOR
+-- MetricGaussGauge. radialNormalCoordinateGauge_of_namedFloor + the two reverse extractions record the
+-- definitional identity RadialNormalCoordinateGauge g gi ⟺ MetricGaussGauge g ∧ MetricGaussGauge gi ∧
+-- centre-δ. radialGauge_imp_mainline_hGaussGerm: the interface implies the a₁ mainline hGauss germ —
+-- hDConv's gauge leg and the mainline gauge input are ONE shared floor, not two walls. VERDICT: for the
+-- LIVE capstone's free g/gi (only hChr/hK) this is an HONEST IRREDUCIBLE geometric carry (same status as
+-- hChr); J4-507 adversarially refuted derivability from finite-jet data (Sol counterexample), and Mathlib
+-- lacks the exp-map to discharge it against a construction. Non-vacuity through the floor: flat +
+-- genuinely-curved g^K (Ric≠0). std-3 ×6. NOT a₁=R/6.
+#print axioms QIQTH.RadialGaugeIsNamedFloor.radialNormalCoordinateGauge_of_namedFloor
+#print axioms QIQTH.RadialGaugeIsNamedFloor.metricGaussGauge_g_of_radialGauge
+#print axioms QIQTH.RadialGaugeIsNamedFloor.metricGaussGauge_gi_of_radialGauge
+#print axioms QIQTH.RadialGaugeIsNamedFloor.radialGauge_imp_mainline_hGaussGerm
+#print axioms QIQTH.RadialGaugeIsNamedFloor.radialNormalCoordinateGauge_flat_via_floor
+#print axioms QIQTH.RadialGaugeIsNamedFloor.radialNormalCoordinateGauge_curved_via_floor
+
 -- HmassoneFromGateAnnulusSplit — J4-896: the ABSTRACT-g `hmassone` census-binder discharge for the LIVE
 -- order-1 capstone. hmassone_from_gate_annulus_split: the exact frozen/moving census binder
 -- `Tendsto (fun m => ∫ z, vanVleckGatedWitness g gi hChr hK S a b (epsSeq m) 0 z) atTop (𝓝 1)` (abstract

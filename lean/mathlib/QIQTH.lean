@@ -4841,6 +4841,15 @@ import QIQTH.HDConvReducedToRadialGauge
 -- AmplitudeDerivativeData is NOT constructible for the curved witness (rhoRatio bounded only on collar);
 -- the collar bundle is the real target. std-3 ×3. NOT a₁=R/6.
 import QIQTH.AmplitudeDataOnFromRadialGauge
+-- RadialGaugeIsNamedFloor — J4-903: the J4-893 RadialNormalCoordinateGauge interface (the hDConv
+-- centre-identity wall) IS the pre-existing J4-507 named geodesic floor MetricGaussGauge. Its three
+-- fields are DEFINITIONALLY MetricGaussGauge g (metricGauge) ∧ MetricGaussGauge gi (invGauge) ∧
+-- centre-δ. So for the LIVE capstone's free g/gi it is an HONEST IRREDUCIBLE geometric carry (same
+-- status as hChr): J4-507 adversarially proved MetricGaussGauge is NOT derivable from the finite RNC
+-- 2-jet (Sol counterexample g=(1+ε‖x‖⁴)δ), a fortiori not from hChr/hK. radialGauge_imp_mainline_hGaussGerm:
+-- the interface implies the a₁ mainline hGauss carry — the hDConv gauge leg and the mainline gauge input
+-- are ONE shared floor. Non-vacuity through the floor at flat AND genuinely-curved g^K. std-3 ×6. NOT a₁=R/6.
+import QIQTH.RadialGaugeIsNamedFloor
 -- HmassoneFromGateAnnulusSplit — J4-896: the ABSTRACT-`g` `hmassone` discharge for the LIVE order-1
 -- capstone's shared frozen/moving census (the `hmassone` binder of hDuhamel_live_gate_wired:217-218 and
 -- HDerivConvComposition.hbdryLU_CONCRETE:133). hmassone_from_gate_annulus_split: the exact census-binder
