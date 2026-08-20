@@ -4854,3 +4854,16 @@ import QIQTH.AmplitudeDataOnFromRadialGauge
 -- live gate. Carried surface = base geometry/gauge (present in capstone) + pre-ρ gate triple
 -- {rS,hKball,hSact} + hWslice (= census hWmeas) + hDom (= census hWDom). std-3 all. NOT a₁=R/6.
 import QIQTH.HmassoneFromGateAnnulusSplit
+
+-- HEdomFromHrawPreCollapse — the ABSTRACT-`g` `hEdom` discharge for the LIVE order-1 capstone's shared
+-- `hDaLimLU` census (the `hEdom` binder of HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:304-306
+-- carried by HDuhamelLiveGateWired:153, and DaLimLUConcreteDischarge.hDaLimLU_concrete:166 — feeding both
+-- hDuhamel and hDConv via the shared hDaLimLU data). hEdom_from_hrawPreCollapse: the exact census-binder
+-- ∃-shape `∃ E₀ E₁, 0≤E₀ ∧ 0≤E₁ ∧ ∀τ>0 ∀pq, |heatOp g gi (vanVleckGatedWitness …) τ p q| ≤
+-- (E₀+E₁τ)·√(3/2)ⁿ·gaussDdim (3/2 τ)(p−q)`, for ABSTRACT g gi K S, obtained by threading the banked GENERIC
+-- HrawPreCollapse.hEdom_concrete_final through the DEFINITIONAL equality vanVleckGatedWitness_eq_gatedKernel
+-- (rfl: vanVleckGatedWitness g gi hChr hK S a b = gatedKernel K S (globalCutoffParametrixWitnessN 1 …)). The
+-- surviving carry is the NAMED SATISFIABLE on-gate width-4/3 QUADRATIC parametrix bound `hgate` (the exact
+-- carry hEdom_concrete_final reduces to; also carried as the honest labelled input in HgateCensusAssembly:154)
+-- — NOT the conclusion. Mirrors J4-896's hmassone wiring on the same shared census. std-3 both. NOT a₁=R/6.
+import QIQTH.HEdomFromHrawPreCollapse

@@ -29021,4 +29021,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HmassoneFromGateAnnulusSplit.hmassone_from_gate_annulus_split
 #print axioms QIQTH.HmassoneFromGateAnnulusSplit.hmassone_at_constGate
 
+-- HEdomFromHrawPreCollapse — the ABSTRACT-g `hEdom` discharge for the LIVE order-1 capstone's shared
+-- hDaLimLU census (the hEdom binder of truncatedDuhamelCore_AT_GATE_FULL carried by HDuhamelLiveGateWired:153
+-- and hDaLimLU_concrete:166 — shared by hDuhamel and hDConv). hEdom_from_hrawPreCollapse: the exact census
+-- ∃-shape, abstract g gi K S, by threading the GENERIC HrawPreCollapse.hEdom_concrete_final through the defeq
+-- vanVleckGatedWitness_eq_gatedKernel (rfl). Surviving carry = the named satisfiable on-gate width-4/3
+-- QUADRATIC `hgate` (the exact carry hEdom_concrete_final reduces to). Mirrors J4-896. std-3 both. NOT a₁=R/6.
+#print axioms QIQTH.HEdomFromHrawPreCollapse.vanVleckGatedWitness_eq_gatedKernel
+#print axioms QIQTH.HEdomFromHrawPreCollapse.hEdom_from_hrawPreCollapse
+
 end QIQTH.AxiomAudit
