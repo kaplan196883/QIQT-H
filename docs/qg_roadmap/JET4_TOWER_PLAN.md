@@ -10932,6 +10932,25 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-897 — ABSTRACT-`g` `hEdom` census-binder DISCHARGED for the LIVE order-1 capstone (commit `abfda0a2`)
+
+**File** `QIQTH/HEdomFromHrawPreCollapse.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** Mirrors the EXACT J4-896 pattern for the `hEdom` census binder. cp768 recorded that `HrawPreCollapse.hEdom_concrete_final` already derives the width-3/2 `hEdom` ∃-shape from an honest on-gate width-4/3 QUADRATIC carry `hgate`, but it had NEVER been wired into the LIVE capstone's shared `hDaLimLU` census. This brick threads it through, discharging the live `hEdom` binder to the named `hgate` carry, for ABSTRACT `g gi K S`.
+
+**⭐ KEY FINDINGS (all character-checked against source, not trusted from citation).**
+* **Object match confirmed by `rfl`.** `HrawPreCollapse.hEdom_concrete_final` is stated GENERICALLY in the kernel `gatedKernel K S H`. The live census kernel `vanVleckGatedWitness g gi hChr hK S a b` is DEFINITIONALLY `gatedKernel K S H` at `H = globalCutoffParametrixWitnessN 1 (vanVleck g) (transportCoeff (transportOp (vanVleck g) g gi)) a b (uniformInverseChart g gi hChr hK)` (the `def` body, `ConvApproximants.lean:161-166`). Verified in-file by `vanVleckGatedWitness_eq_gatedKernel := rfl` — mirroring J4-896's `constGate_eq_liveGate` discipline. So `hEdom_concrete_final` at that `H` yields the live census binder shape with NO adapter.
+* **Exact census-binder shape.** The `hEdom` member is, verbatim, the `hEdom` binder of `HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:304-306` (carried by `HDuhamelLiveGateWired:153`) and `DaLimLUConcreteDischarge.hDaLimLU_concrete:166` — shared by `hDuhamel` and `hDConv` via the `hDaLimLU` data: `|heatOp g gi (vanVleckGatedWitness …) τ p q| ≤ (E₀+E₁τ)·√(3/2)ⁿ·gaussDdim (3/2 τ)(p−q)` at some `E₀ E₁ ≥ 0`. The brick produces the `∃ E₀ E₁, 0≤E₀ ∧ 0≤E₁ ∧ …` form the consumer `obtain`s (constants proved, not free).
+* **`hgate` is the genuine surviving carry, not discharged elsewhere.** The surviving carry is the on-gate width-4/3 QUADRATIC parametrix bound `hgate` — the exact carry `hEdom_concrete_final` reduces to. It is ALSO carried as the honest labelled input in the parallel `HgateCensusAssembly.hDaLimLU_from_hgate_census:154-159` (identical shape, "★ THE HONEST on-gate width-4/3 QUADRATIC carry"), confirming `hgate` is the campaign's honest surviving carry (per-base M2 parametrix/amplitude sup-bound data glued along the gate), NOT the conclusion, NOT satisfied by some other census member.
+
+**DELIVERABLE (std-3).**
+* `hEdom_from_hrawPreCollapse` — the ABSTRACT-`g` `hEdom` ∃-shape, proved by threading `hEdom_concrete_final` through `vanVleckGatedWitness_eq_gatedKernel`. Reduces the live `hEdom` slot to the named satisfiable `hgate`.
+* `vanVleckGatedWitness_eq_gatedKernel` (`rfl`) — the defeq object-match check.
+
+**WHAT THIS DOES / DOES NOT DO.** CLOSES the `hEdom` member of the shared `hDuhamel`/`hDConv` `hDaLimLU` census: the opaque carried width-3/2 domination ⟹ theorem conditional only on the satisfiable on-gate width-4/3 QUADRATIC `hgate`. Benefits BOTH `hDuhamel` and `hDConv` (shared `hDaLimLU` data), per J4-896's precedent on the same census. Does NOT touch the OTHER census members (the `hmassone` done at J4-896, RadialNormalCoordinateGauge centre-identity leg, `hAdom`, interchange bundles, sliver carries). `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10205 jobs); `#print axioms` ×2 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `abfda0a2`, pushed. NOT `a₁ = R/6`.
+
 ## J4-896 — ABSTRACT-`g` `hmassone` census-binder DISCHARGED for the LIVE order-1 capstone (commit `4d38d93e`)
 
 **File** `QIQTH/HmassoneFromGateAnnulusSplit.lean` (new; NO existing banked file edited).
