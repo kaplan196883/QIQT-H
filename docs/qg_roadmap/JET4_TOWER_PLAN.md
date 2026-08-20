@@ -11759,3 +11759,53 @@ census-status update, not a new capstone theorem.
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `653f58a3`,
 pushed. No `O(√ε)` rate (differentiation/domination wiring) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains
 CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+## J4-919 — the 1-D Gaussian `∂_τ`-multiplier MOMENT-CANCELLATION core: first genuinely-new analytic brick of the `hCross` sub-campaign (J4-910 route, piece (2)) — commit `332fdb5a`
+
+**Task.** Scope the FIRST tractable piece of the `hCross` sub-campaign. J4-910 proved the naive bounded-`F`
+route provably impossible (log-divergence when `k` reaches the singular region `s → x`, `τ = x−s → 0`),
+and identified the real route: from `F`'s spatial Hölder/Lipschitz modulus, produce the integrable-singularity
+derivative bound `|∂_x g(x,s)| ≲ (x−s)^{−1+β/2}` via the CANCELLATION of `∂_τH` before `|·|` (mass
+conservation `∫_z ∂_τ G = 0`) + Gaussian moments, then a three-regime split. Determine whether `F`'s
+spatial regularity is already banked, sympy-verify the β=1 rate, consult Sol at go/no-go, build only the
+first clean brick.
+
+**Findings.**
+ • **β=1 (plain LIPSCHITZ) SUFFICES — genuine sub-1 Hölder is NOT needed.** Sympy: with `|f(z)−f(0)| ≤ L|z|`,
+   the majorant `∫(z²/4τ²+1/2τ)·G(τ)(z)·|z| dz = 3/(√π·√τ) = O(τ^{−1/2})`, exponent exactly `β/2−1 = −1/2`;
+   `α = 1−β/2 = 1/2 < 1` ⟹ `∫_0^T r^{−1/2}dr = 2√T` finite. (β=1/2 cross-check gave −3/4, matching `β/2−1`.)
+ • **FIND-DON'T-BUILD (under-crediting caught): `F`'s spatial LIPSCHITZ modulus is ALREADY A BANKED THEOREM.**
+   `LeviLipschitz.resolvent_lipschitz_pointwise` (J4-144): `|F s z 0 − F s z' 0| ≤ (L_E + K·2√s)·dist z z'`,
+   from the Volterra identity `F = −E − E∗F` (`leviSeries_volterra`, proved), carrying the labelled analytic
+   carries `hE1`/`hSlice`/integrabilities. It is even WIRED downstream (`MixedSliverHqLipUniform`,
+   `ResidueThreading`, `hqLip_discharge`). So the "first tractable piece = `F`'s spatial regularity" the
+   campaign flagged is DONE/banked, β=1. Building a new file for it would duplicate banked content.
+
+**Sol (gpt-5.6-sol, high) go/no-go — GO on piece (2), the standalone Gaussian moment-cancellation core.**
+Not (a) a redundant concrete-wiring specialization, not (c) stop. The correct cut = a pure 1-D lemma with
+an abstract Lipschitz weight, using the EXPLICIT multiplier (not derivative-under-∫ APIs) and NOT `H`;
+decoupled from the census, from `H`'s amplitude, and from the global `∀h,k` range.
+
+**Landed — NEW FILE `QIQTH/GaussTauDerivCancellation.lean` (no banked file edited), ns `QIQTH.HeatResidualBound`.**
+`DtauG τ z := (z²/(4τ²) − 1/(2τ))·heatKernel1D τ z` (= `∂_τ G` by the flat heat eq `heatKernel1D_deriv2_x`,
+used as an explicit multiplier). std-3 ×6:
+ • `integral_DtauG_eq_zero` — **THE CANCELLATION CORE** `∫_z DtauG τ z = 0` (mass conservation): from the
+   banked `gaussianSecondMoment_oneD` (`∫ G·z² = 2τ`) + `gaussianZerothMoment_oneD` (`∫ G = 1`),
+   `1/(4τ²)·2τ − 1/(2τ)·1 = 0`. This is the analytic heart J4-910 named as unbanked.
+ • `integral_DtauG_mul_lipschitz` — **THE PAYOFF `τ^{−1/2}` BOUND**: for `τ>0`, `L≥0`, measurable `f` with
+   `|f z − f 0| ≤ L·|z|`, `|∫_z DtauG τ z · f z| ≤ L·(16√2+1)/√τ`. The `f 0` part cancels; the remainder is
+   majorised by `L·(|z|³/4τ² + |z|/2τ)·G` and integrated by the banked absolute moments `oneD_absMoment3`
+   (`≤ (64√2+1)(√τ)³`) + `oneD_absMoment1` (`≤ (3/2)√τ`), collapsing the `τ`-powers to `τ^{−1/2}`.
+ • supporting: `DtauG_integrable`, `abs_DtauG_le` (triangle majorant), and
+   `integral_DtauG_mul_lipschitz_hyp_satisfiable` (non-vacuity EXHIBITED at `f := id`, `L := 1`).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10226 jobs); `#print axioms` std-3 ×6
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `332fdb5a`,
+pushed. Sympy-rate gate PASSED (β=1 → τ^{−1/2}, α=1/2<1).
+
+**Still open in the shared census (honest).** `hCross` remains open: this brick banks the moment-cancellation
+CORE, not the full discharge. Downstream (still unbanked): wiring `DtauG` + `resolvent_lipschitz_pointwise`
+into the `∂_x g(x,s)` derivative bound; the three-regime split (`|h|≥δ/4` bounded-G, small-h/small-k
+off-diagonal, small-h/large-k integrated W5-core) closing to `O(|h||k|)`; the `hCross` census binder itself.
+`a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
