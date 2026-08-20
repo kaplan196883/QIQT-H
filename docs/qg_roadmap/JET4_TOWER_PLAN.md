@@ -11612,3 +11612,57 @@ data. `hCross`/`hAcrude` in the shared `hDuhamel`/`hDConv` census unchanged.
 --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `9c94d578`, pushed. No
 `O(√ε)` rate (differentiation wiring) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+## J4-916 — the four DATA conjuncts (i)-(iv) of J4-912's inner hZ family SUPPLIED from a crude time-derivative envelope: hpardiff reduced to the SAME named J4-911-class carries (commit 8c3aebdf)
+
+**Task.** Discharge whatever remains of J4-912's `hpardiff` reduction after J4-915. J4-915 discharged the
+sole DIFFERENTIABILITY conjunct (v) of the inner `z`-level family `hZ` unconditionally for the concrete
+witness. The residue: the four DATA conjuncts (i) `z`-integrable dominator `Dz`, (ii) base-slice
+`z`-integrability, (iii) derivative-slice `z`-measurability, (iv) the UNIFORM-over-`V` `z`-pointwise
+dominator bound. Determine whether `hAcrude`/`GatedTauDerivRep` compose to supply `Dz`, and whether the
+measurability is find-and-wire.
+
+**Finding (gpt-5.6-sol high, GO with two explicit conditions).** The concrete discharge of `hAcrude`
+(the crude TIME-derivative envelope `|deriv(fun r=>Wit r 0 z)τ| ≤ Ccr·τ⁻¹·gaussDdim(wL·τ)`) is the SAME
+genuine analytic wall J4-911 (`derivDom_boundD_of_crude`) explicitly LEFT OPEN — it is satisfiable via the
+`GatedTauDerivRep` exact ∂_τ closed form + absorption bank, but NOT discharged. So (i)-(iv) bottom out at
+`hAcrude` + measurability carries, exactly like J4-911's `boundD`. The honest increment is therefore a
+REDUCTION brick (opaque `hZ` data ⟹ named J4-911-class carries), NOT a discharge of `hAcrude`.
+
+**The UNIFORM-over-neighborhood subtlety (the genuine new content vs J4-911).** J4-911's OUTER `s`-level
+`boundD` is a scalar constant (uniform in `c` via peak antitonicity). The INNER `hZ` dominator `Dz` must
+bound `‖deriv(…)(c'−s)·F s z 0‖` POINTWISE in `z` and UNIFORMLY over `c'` in a neighborhood `V ∋ c` — and
+as `c'` ranges the Gaussian width `wL·(c'−s)` VARIES, so no single Gaussian dominates cleanly. Sol-confirmed
+FIX: `V := Metric.ball c δ`, `δ := min(c−s−τ₀, τ₁−(c−s)) > 0`, so every `c' ∈ V` has `c'−s ∈ [τ₀,τ₁]`
+(hence `> 0`, feeding J4-915's (v)); the new WIDTH-INTERVAL DOMINATION helper pins the varying-width family
+to the single widest Gaussian.
+
+**Landed.** NEW FILE `QIQTH/HZDataFromCrudeEnv.lean` (no banked file edited), std-3 ×4:
+- `gaussDdim_width_interval_dom` — `gaussDdim(wL·t) z ≤ √(τ₁/τ₀)ⁿ·gaussDdim(wL·τ₁) z` for `t ∈ [τ₀,τ₁]`,
+  `0<τ₀`, `0<wL`. Route: rewrite `wL·t = (t/τ₁)·(wL·τ₁)`, apply banked `HrawCampaignOne.gaussDdim_width_mono`
+  (widths `t/τ₁ ≤ 1`), coefficient `√(τ₁/t)ⁿ ≤ √(τ₁/τ₀)ⁿ` (`div_le_div_of_nonneg_left`, `pow_le_pow_left₀`).
+- `hZslice_of_crudeEnv` — ★★★ generic `(A,F)`: the EXACT per-`(s,c)` inner existential of `hZ`
+  (`∃ V ∈ 𝓝 c, ∃ Dz, (i)∧(ii)∧(iii)∧(iv)∧(v)`) from carries {`hAcrude` on `[τ₀,τ₁]`, `hFdom`, deriv-slice
+  meas, base-slice integrable, `hDiff` = (v) for any `c'` with `0<c'−s`}. `Dz := (Ccr·τ₀⁻¹·√(τ₁/τ₀)ⁿ·CF)·
+  gaussDdim(wL·τ₁)·gaussDdim(wF·s)` — a Gaussian PAIR, integrable via banked `gaussDdim_pair_integrable`;
+  (iv) via τ⁻¹ lower-cap (`one_div_le_one_div_of_le`) + `gaussDdim_width_interval_dom`, proved ∀z (stronger
+  than ∀ᵐ z) then `ae_of_all`.
+- `hZslice_of_crudeEnv_hyp_satisfiable` — non-vacuity (`A ≡ 0`, `F ≡ 0`, scalars `τ₀=1,τ₁=3,s=1,c=3`).
+- `witnessHZslice_of_crudeEnv` — ★★★ concrete van-Vleck wrapper; conjunct (v) DISCHARGED via J4-915
+  `witnessZTime_hasDerivAt` at `V := Set.Ioi s`, so only `{hAcrude, hFdom, meas, base-int}` remain carried.
+
+**Effect.** `hZ` (and hence `hpardiff`) is REDUCED to exactly the named J4-911-class carries
+`{hAcrude (crude time-deriv envelope), hFdom, deriv-slice meas, base-slice integrable}`, with the
+differentiability conjunct discharged. The only remaining gap to a full family-level `hZ` is the mechanical
+`∀m,u,∀ᵐs,∀c` quantifier threading of those carries — packaging, not analytic content.
+
+**Still genuinely open in the shared census** (honest, unchanged): `hCross` (mixed 2nd-difference bilinear
+Lipschitz, W5, no provider); `hAcrude` (the crude time-derivative envelope — the SAME residue J4-911 left,
+now shared by `boundD` AND `hZ`'s `Dz`); the measurability/base-integrability piles.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10223 jobs); `#print axioms` std-3 ×4
+(propext/Classical.choice/Quot.sound, no sorryAx/custom) — throwaway/in-audit confirmed;
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `8c3aebdf`, pushed. Sympy-rate gate N/A (Gaussian-pair identity +
+width-interval domination, no `O(√ε)` integral-rate claim). `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
