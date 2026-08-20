@@ -4772,3 +4772,15 @@ import QIQTH.WitnessFieldDerivJointC1FromTube
 -- Lebesgue gives uniform ρ but no ρ≥b, no ∂K coverage). Collar gives BOUNDEDNESS cheaply (why J4-873's
 -- hgate closed) but hbint needs CONTINUITY (seam entangles with (a)). std-3 ×7. NOT a₁=R/6.
 import QIQTH.HbintCollarMatchedCutoffClosed
+
+-- QuantifiedCoherentChartTube: J4-889 — J4-888's surviving ON-CORE-GRAPH continuity residual (a) REDUCED
+-- to a single crisp GEOMETRIC input (an open chart-C² + in-gate cover of the compact core-graph) by
+-- composing J4-887's on-gate joint-C¹ engine (witnessFieldDeriv_jointContDiffOn_onGate) with J4-878's
+-- partial-Fréchet-derivative continuity engine (partialFDeriv_norm_jointContinuousOn) then .mono to the
+-- core-graph. onCoreGraphContinuity_of_chartC2_gate_cover: field-Hessian norm ContinuousOn the core-graph
+-- from {W open, W⊇core-graph, all-in-gate on W, chart C² on W}. hbint_reduced_to_chartC2_gate_cover:
+-- hbint ⟸ {BL-cont, chart-C²+in-gate cover of core-graph (per a.e. s), matched-cutoff seam}. ⚠ does NOT
+-- close hbint: the chart-C²+in-gate cover of the WHOLE b-tube over K (∂K incl.) IS the RNC frontier —
+-- needs uniform-K flow radius + general-center joint C² + boundary transport + compactness (multi-lemma).
+-- std-3 ×3. NOT a₁=R/6.
+import QIQTH.QuantifiedCoherentChartTube

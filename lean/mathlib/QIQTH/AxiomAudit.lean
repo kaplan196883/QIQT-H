@@ -28919,4 +28919,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbintCollarMatchedCutoffClosed.hbint_reduced_to_coreGraphContinuity
 #print axioms QIQTH.HbintCollarMatchedCutoffClosed.coreGraphContinuity_nonvacuous
 
+-- J4-889: QuantifiedCoherentChartTube — J4-888's surviving ON-CORE-GRAPH continuity residual (a) REDUCED
+-- to a single crisp GEOMETRIC input (an open chart-C² + in-gate cover of the compact core-graph), by
+-- composing J4-887's on-gate joint-C¹ engine with J4-878's partial-Fréchet-derivative continuity engine
+-- then .mono to the core-graph. hbint_reduced_to_chartC2_gate_cover: hbint ⟸ {BL-cont, chart-C²+in-gate
+-- cover of core-graph, matched-cutoff seam}. ⚠ does NOT close hbint: the cover of the WHOLE b-tube over K
+-- (∂K incl.) IS the RNC frontier. std-3 ×3. NOT a₁=R/6.
+#print axioms QIQTH.QuantifiedCoherentChartTube.onCoreGraphContinuity_of_chartC2_gate_cover
+#print axioms QIQTH.QuantifiedCoherentChartTube.hbint_reduced_to_chartC2_gate_cover
+#print axioms QIQTH.QuantifiedCoherentChartTube.chartC2_gate_cover_nonvacuous
+
 end QIQTH.AxiomAudit
