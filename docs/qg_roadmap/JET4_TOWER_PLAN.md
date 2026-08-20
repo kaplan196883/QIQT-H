@@ -11705,3 +11705,57 @@ strictly stronger than `second_domination`, which carries `hSecondEnv`). `witnes
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `91d917b5`,
 pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. Wiring into the LIVE `boundD`/`hZ`
 census consumers (global-z + τ-cap alignment) is a downstream step, not done here. NOT `a₁ = R/6`.
+
+## J4-918 — WIRE the J4-917 crude time-derivative envelope into the LIVE census consumers boundD/hpardiff: boundD FULLY closed, hpardiff at its final named-carry state (commit 653f58a3)
+
+**File** `QIQTH/WitnessBoundDHpardiffWired.lean` (new; NO existing banked file edited).
+
+**Task.** J4-917 discharged the crude TIME-derivative envelope `hAcrude`
+(`|deriv (fun r => Wit r 0 z) τ| ≤ C·τ⁻¹·gaussDdim(wL·τ) z`) to the mild zeroth-amplitude sups
+`{hAmp0, hCfield}`, delivering `witnessTimeDeriv_domination_global` (∀z), but explicitly LEFT the
+MECHANICAL wiring into the generic census consumers (`boundD` J4-911, `hpardiff` J4-912/916) undone —
+τ-cap alignment + 0−z/z centring. This increment performs that wiring for the CONCRETE gated van-Vleck
+witness.
+
+**★ THE τ-CAP ALIGNMENT (the one genuine subtlety).** The LIVE census `U` is bounded above by `T`
+(`hUT : ∀ u ∈ U, u ≤ T`) and each per-`(m,u)` derivative-time cap is `u + epsSeq m`. Since
+`epsSeq m ≤ epsSeq 0 = 1` (`epsSeq_antitone`) and `u ≤ T`, EVERY cap `u + epsSeq m ≤ T + 1`. So ONE call
+to `witnessTimeDeriv_domination_global` at the GLOBAL cap `T + 1` yields a single constant `Cwit` and
+width `4·D.lam` valid on all `(0, T+1]` — covering every window with NO per-window existential choice
+(`Ccr := fun _ _ => Cwit`, `wL := fun _ _ => 4·D.lam`, constants). The witness envelope is centred
+`gaussDdim(w) z`; the consumers use `gaussDdim(w)(0−z)`; converted by `← gaussDdim_zero_sub` (evenness).
+
+**LANDED (std-3 ×4).**
+- `epsSeq_le_one` — `epsSeq m ≤ 1` (antitone below `epsSeq 0 = 1`).
+- `witnessBoundD_wired` — ★★★ the C3ε parameter-derivative dominator `boundD`/`hbdd_d`/`hbound_d` triple
+  at the LIVE census neighborhood `derivDomNb`, via `derivDom_boundD_of_crude` fed `hAcrude` from the
+  global witness domination (`A := deriv-field`, `Ccr := Cwit`, `wL := 4·D.lam`, `CF := C_L`, `wF := 2`;
+  Levi cap widened `T ↦ T+1` to satisfy the engine's `s ≤ u+εₘ` signature). **`boundD` FULLY CLOSED.**
+- `witnessHpardiff_wired` — ★★★ the parametric `hpardiff` binder, via `witnessHZslice_of_crudeEnv`
+  (J4-916; differentiability conjunct (v) discharged by J4-915) → `hpardiff_of_zTimeDeriv` (J4-912).
+  The inner `hZ` family is built per-slice: `s ≤ 0` slices vanish (`hFzero`, trivial `Dz≡0` existential);
+  `s > 0` window `[εₘ/2, u+εₘ]` strictly contains `c−s` (`c ∈ ball u (εₘ/2)`, `0 < s ≤ u−εₘ`), fed the
+  SAME `Cwit`/`4·D.lam` envelope. `A := Wit` here (base), vs `A := deriv-field` in `boundD` — the two
+  engines take the two roles. Shared `nb := derivDomNb` so both bind the same neighborhood.
+- `witnessHpardiff_wired_hyp_satisfiable` — NON-VACUITY: the FULL bundle (subsuming `witnessBoundD_wired`'s)
+  is jointly satisfiable at the nonempty singleton gate `K={0}` (`S=univ`, `F≡0`, `C_L=0`, `U=Icc 0 1`,
+  `T=1`, affine-in-τ amp bound to cap `2`, `Cfield` = the `chartFieldAmp_hasDerivAt_tau` slope).
+
+**Remaining named carries** (honest). Beyond `{hAmp0, hCfield}` (the mild zeroth-amplitude sups): the
+census Levi envelope `{hFdom (widened T↦T+1), hFzero}` (already in the live census) and the `z`-slice
+measurability / base-integrability piles `{hAmeas, hDmeas, hbase}` (the F2-pile `z`-analogues). This
+brick REDUCES `boundD`/`hpardiff` to them; it does NOT discharge them.
+
+**Live census status of hDuhamel/hDConv (updated).** The `boundD` group (`boundD`/`hbdd_d`/`hbound_d`)
+and `hpardiff` (with `nb := derivDomNb`, `hnb := derivDomNb_mem_nhds`) are now CONSTRUCTIBLE for the
+concrete witness from `{hAmp0, hCfield}` + the census Levi carries + the meas/base-int piles. The one
+genuinely-hard residual wall unchanged in the shared `hDuhamel`/`hDConv` census is **`hCross`** (mixed
+2nd-difference bilinear Lipschitz, W5 — no provider). NOTE: NOT threaded into the full
+`hDuhamel_live_gate_wired` call (that needs all ~50 other census binders too); this is the analytic
+census-status update, not a new capstone theorem.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10225 jobs); `#print axioms` std-3 ×4
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `653f58a3`,
+pushed. No `O(√ε)` rate (differentiation/domination wiring) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
