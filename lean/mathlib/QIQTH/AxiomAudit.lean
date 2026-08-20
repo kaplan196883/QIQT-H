@@ -28046,6 +28046,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.uniformInverseChart_eq_coherent_near_diag
 #print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffAt_diag
 
+-- GENERAL-K generalization (this session): UniformFlowCoherentJointChartGeneralK +
+-- UniformFlowCoherentChartReconciliationGeneralK. Lift J4-855/856 from the FIXED K:=closedBall q₀ 1 to an
+-- ARBITRARY compact K + interior base point z₀∈interior K. uniformFlowExp_eq_of_admissible: cross-K
+-- agreement of the flow-exp endpoint (both tubes solve the SAME geodesic ODE with the SAME IC (q,w),
+-- confined to a common compact ball where geodesicField is Lipschitz; two-trajectory comparison at δ=0
+-- forces equality; project t=1). uniformFlow_joint_contDiffOn_two_witness_generalK: general-K Task D —
+-- the fixed-radius closed-ball Task D at z₀ transported to general K via ContDiffOn.congr across the
+-- agreement, on a nbhd of (z₀,0). uniformFlow_coherent_joint_chart_generalK: verbatim J4-855 IFT with
+-- abstract K. uniformInverseChart_eq_coherent_near_diag_generalK / _jointContDiffAt_diag_generalK: general-K
+-- Task F + the joint ContDiffAt ℝ 2 of the concrete uniformInverseChart at each interior-diagonal point,
+-- for the capstone's abstract {K}(hK:IsCompact K). uniformInverseChart_jointContDiffOn_tube: an OPEN set T
+-- containing the whole interior diagonal {(z,z):z∈interior K} with joint ContDiffOn ℝ 2 (ContDiffAt is an
+-- open condition; assemble the per-point C²-nbhds). std-3 ×6. Closes the abstract-K REGULARITY half; the
+-- LITERAL JointSecondOrderRNCRegularity remains blocked by its ∀y/∀ζ GLOBAL jet fields (hJetV/hJetQ) — an
+-- interface over-quantification, NOT a regularity gap. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.ExpMap.uniformFlowExp_eq_of_admissible
+#print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_two_witness_generalK
+#print axioms QIQTH.ExpMap.uniformFlow_coherent_joint_chart_generalK
+#print axioms QIQTH.ExpMap.uniformInverseChart_eq_coherent_near_diag_generalK
+#print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffAt_diag_generalK
+#print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffOn_tube
+
 -- Plan v8 CULMINATION (J4-857): JointRNCRegularityInterfaceLocal. The FIRST genuinely NON-VACUOUS,
 -- machine-checked joint 2nd-order RNC-chart regularity fact of the campaign, extracted from J4-856's
 -- uniformInverseChart_jointContDiffAt_diag. slice_contDiffAt_diag: the fixed-base slice V=uniformInverseChart

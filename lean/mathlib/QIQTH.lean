@@ -4293,6 +4293,18 @@ import QIQTH.UniformFlowCoherentJointChart
 -- ContDiffAt.congr_of_eventuallyEq across the equality). std-3. Does NOT discharge the LITERAL RNC
 -- structures (their jet fields are ∀y GLOBAL — no local chart can meet them). a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.UniformFlowCoherentChartReconciliation
+-- GENERAL-K generalization (this session): UniformFlowCoherentJointChartGeneralK +
+-- UniformFlowCoherentChartReconciliationGeneralK — lift J4-855/856 from the FIXED K:=closedBall q₀ 1
+-- to an ARBITRARY compact K + interior base point z₀∈interior K. Cross-K agreement of the flow-exp
+-- endpoint (uniformFlowExp_eq_of_admissible, ODE uniqueness, δ=0) transports the fixed-radius Task D
+-- to general K (uniformFlow_joint_contDiffOn_two_witness_generalK), then verbatim J4-855 IFT gives the
+-- general-K coherent chart, and J4-856 local-inverse uniqueness gives general-K joint ContDiffAt ℝ 2 of
+-- uniformInverseChart at each interior-diagonal point + an OPEN diagonal-TUBE joint ContDiffOn ℝ 2
+-- (uniformInverseChart_jointContDiffOn_tube). std-3. Closes the REGULARITY half for abstract K; the
+-- LITERAL JointSecondOrderRNCRegularity remains blocked by its ∀y GLOBAL jet fields (interface, not
+-- regularity). a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.UniformFlowCoherentJointChartGeneralK
+import QIQTH.UniformFlowCoherentChartReconciliationGeneralK
 -- Plan v8 CULMINATION (J4-857): JointRNCRegularityInterfaceLocal — the FIRST genuinely NON-VACUOUS,
 -- machine-checked joint 2nd-order RNC-chart regularity fact of the whole a₁=R/6 chart-regularity
 -- campaign, extracted MECHANICALLY from J4-856's proved uniformInverseChart_jointContDiffAt_diag. Defines
