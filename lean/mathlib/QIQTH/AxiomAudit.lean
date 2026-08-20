@@ -28083,6 +28083,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.JointRNCRegularityLocal.uniformInverseChart_slice_fderiv_id_diag
 #print axioms QIQTH.JointRNCRegularityLocal.jointRNCRegularityLocal_of_diag
 
+-- J4-885: JointRNCRegularityInterfaceLocalGeneralK — GENERALIZES J4-857 to an ARBITRARY compact K +
+-- interior base z₀∈interior K, feeding J4-884's abstract-K uniformInverseChart_jointContDiffAt_diag_generalK
+-- in place of the fixed-K J4-856 input. slice_{contDiffAt,value,fderiv_id}_diag_generalK: the fixed-base
+-- slice V=uniformInverseChart g gi hC hK z₀ is ContDiffAt ℝ 2 at z₀, V z₀=0, DV(z₀)=Id (positive identity),
+-- for arbitrary compact K at any interior z₀. jointRNCRegularityLocalGeneralK_of_diag: ★★★ the
+-- neighbourhood-gated, correctly-normalized structure JointSecondOrderRNCRegularityLocalGeneralK is
+-- INHABITED (∃ r,C_W,C_P,C_Q; 2nd-order displacement + first-jet modulus + bounded 2nd jet on ball z₀ r) —
+-- for the abstract {K}(hK:IsCompact K) the a₁=R/6 capstone actually quantifies over, via the SAME two
+-- mean-value passes as J4-857. Does NOT discharge the LITERAL global-∀y/reflected-sign
+-- JointSecondOrderRNCRegularity (which is decorative in the capstone anyway — consumed only as
+-- `have _hRNC := hRNC`) NOR any of the three consumers (nb/hbint/hCConv). std-3. a₁=R/6 CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv} unchanged.
+#print axioms QIQTH.JointRNCRegularityLocalGeneralK.uniformInverseChart_slice_contDiffAt_diag_generalK
+#print axioms QIQTH.JointRNCRegularityLocalGeneralK.uniformInverseChart_slice_value_diag_generalK
+#print axioms QIQTH.JointRNCRegularityLocalGeneralK.uniformInverseChart_slice_fderiv_id_diag_generalK
+#print axioms QIQTH.JointRNCRegularityLocalGeneralK.jointRNCRegularityLocalGeneralK_of_diag
+
 -- Sub-brick 3a (field C²→C³, Brick 3 scoping J4-826): InverseChartFieldC3. The inverse chart
 -- uniformInverseChart FIELD-SLOT C³. STALE-PREMISE CORRECTION — the "C² ceiling"
 -- (chartField_contDiffAt_center) was stale: ChartThirdJet (J4-192) already banked the inverse chart's

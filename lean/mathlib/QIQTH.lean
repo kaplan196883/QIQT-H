@@ -4317,6 +4317,14 @@ import QIQTH.UniformFlowCoherentChartReconciliationGeneralK
 -- the LITERAL global-∀y/reflected-sign structures (structurally blocked at the interface boundary, not a
 -- regularity gap). std-3. NOT a₁=R/6; capstone CONDITIONAL unchanged.
 import QIQTH.JointRNCRegularityInterfaceLocal
+-- J4-885: JointRNCRegularityInterfaceLocalGeneralK — GENERALIZES J4-857 from the FIXED
+-- K:=closedBall q₀ 1 to an ARBITRARY compact K + interior base z₀∈interior K, feeding J4-884's
+-- abstract-K uniformInverseChart_jointContDiffAt_diag_generalK. Defines
+-- JointSecondOrderRNCRegularityLocalGeneralK and PROVES it INHABITED
+-- (jointRNCRegularityLocalGeneralK_of_diag) for the abstract K the a₁=R/6 capstone quantifies over.
+-- std-3. Does NOT discharge the LITERAL global-∀y/reflected-sign JointSecondOrderRNCRegularity nor
+-- any of the three consumers (nb/hbint/hCConv); a₁=R/6 CONDITIONAL unchanged.
+import QIQTH.JointRNCRegularityInterfaceLocalGeneralK
 -- Plan v6 Task I (floor): the UNCONDITIONAL `expRho`-free target SHAPE at order 2 —
 -- `uniformFlowExp_contDiffOn_two_uniform : ∀ q ∈ K, ContDiffOn ℝ 2 (uniformFlowExp …)
 -- (ball 0 uniformFlowRadius)`. Packages the banked per-point unconditional `contDiffAt2_uniformFlowExp`
