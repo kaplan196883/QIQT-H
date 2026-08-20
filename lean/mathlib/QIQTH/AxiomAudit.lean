@@ -29,6 +29,7 @@ import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
 import QIQTH.GaussTauDerivCancellation
+import QIQTH.GaussTauTraceCancellation
 import QIQTH.MixedEnvelopeAssembly
 
 namespace QIQTH.AxiomAudit
@@ -29294,5 +29295,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.abs_DtauG_le
 #print axioms QIQTH.HeatResidualBound.integral_DtauG_mul_lipschitz
 #print axioms QIQTH.HeatResidualBound.integral_DtauG_mul_lipschitz_hyp_satisfiable
+
+-- GaussTauTraceCancellation — J4-920: the n-D ∂_τ-TRACE moment-cancellation Lipschitz bound (hCross
+-- sub-campaign, flat-coordinate piece (i)). FINDING (from reading the live census): the census
+-- integration variable z is genuinely n-DIMENSIONAL (Point n), NOT 1-D; the concrete witness ∂_τ rep
+-- (banked gatedTauRepProd) carries the multiplier ∑ᵢ((vᵢ)²/4τ² − 1/2τ) against gaussDdim τ v (v = chart
+-- image of z). By the flat heat eq ∂_τG = ΔG = ∑ᵢ∂ᵢ²G (gaussDdim_heat_eqn) this multiplier is the TRACE
+-- of the per-coordinate Hessian factors ((zᵢ)²−2τ)/(4τ²), whose Lipschitz cancellation is ALREADY banked
+-- n-D (J4-124 gaussian_hessian_cancel, ≤ L·(15/2·n)/√τ). gaussian_hessian_cancel_trace assembles the sum:
+-- for q Lipschitz (const L≥0, bounded, measurable), |∫_{z:Point n} (∑ᵢ((zᵢ)²/4τ² − 1/2τ))·gaussDdim τ z·
+-- q(z)| ≤ L·(15/2·n²)/√τ (integral_finsetSum + triangle + per-coord cancel; τ^{−1/2} rate over n coords),
+-- stated in the EXACT multiplier shape of gatedTauRepProd. Non-vacuity EXHIBITED (q z := cos(dist z 0),
+-- |q|≤1, L:=1, nonconstant). std-3 ×3. NOT a₁=R/6: the CONCRETE-census bridge (|∂_x g(x,s)| ≲ (x−s)^{−1/2}
+-- for the chart-COMPOSED Gaussian gaussDdim τ (W z) against the resolvent weight F s z 0) remains OPEN —
+-- the exact cancellation ∫∂_τG=0 holds in v-coordinates, but the census integrates dz with v=W(z) NONLINEAR,
+-- so the Jacobian |det DW| breaks it unless W affine (RNC center-only gauge); the transformed-weight
+-- Lipschitz/Jacobian change-of-variables is the remaining wall. hCross remains open; a₁=R/6 remains
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.hess_coord_gaussDdim_q_integrable
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace
+#print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_hyp_satisfiable
 
 end QIQTH.AxiomAudit

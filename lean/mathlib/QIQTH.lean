@@ -5083,3 +5083,13 @@ import QIQTH.WitnessBoundDHpardiffWired
 -- ∀h,k (Sol-mandated cut). Non-vacuity EXHIBITED (f:=id, L:=1). std-3 ×6. NOT a₁=R/6 (leaf brick;
 -- wiring into ∂_x g bound + three-regime split + hCross is downstream). hCross remains open.
 import QIQTH.GaussTauDerivCancellation
+-- GaussTauTraceCancellation — J4-920: the n-D ∂_τ-TRACE moment-cancellation Lipschitz bound (hCross
+-- sub-campaign, flat-coordinate piece (i)). Assembles the banked per-coordinate Hessian cancellation
+-- (J4-124 gaussian_hessian_cancel, |∫ ((zᵢ)²−2τ)/(4τ²)·G·q| ≤ L·(15/2·n)/√τ) into the EXACT multiplier
+-- form ∑ᵢ((zᵢ)²/4τ² − 1/2τ) of the concrete witness ∂_τ rep (gatedTauRepProd): gaussian_hessian_cancel_trace
+-- gives |∫_{z:Point n} (∑ᵢ((zᵢ)²/4τ² − 1/2τ))·gaussDdim τ z·q(z)| ≤ L·(15/2·n²)/√τ (τ^{−1/2} rate, n
+-- coordinates), the n-D analogue of the 1-D J4-919 core. FINDING: z is genuinely n-D (Point n) and the
+-- census Gaussian is chart-COMPOSED gaussDdim τ (W z); the exact cancellation survives only in the
+-- Gaussian's own coordinate, so the concrete-G bridge (nonlinear-W change-of-variables / Jacobian) is the
+-- remaining wall. Non-vacuity EXHIBITED (q z := cos(dist z 0), L:=1). std-3 ×3. NOT a₁=R/6 (leaf brick).
+import QIQTH.GaussTauTraceCancellation
