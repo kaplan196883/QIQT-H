@@ -11407,3 +11407,53 @@ increment, consuming exactly the `boundD`/`hbound_d` supplied here).
 `QIQTH.lean`+`AxiomAudit.lean`; commit `dd1df76f`, pushed. Sympy-rate gate N/A (constant dominator, no
 O(√ε) integral-rate claim — the pairing bound is an exact Gaussian-product identity + peak antitonicity).
 `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
+
+## J4-912 — census `hpardiff` binder REDUCED to the inner z-level differentiation family via `heatConvInner_hasDerivAt` (SIBLING of J4-911 boundD, NOT consumer) — commit 8e7eda06
+
+**Task.** Discharge `hpardiff` — the companion parametric `HasDerivAt` in the frozen convolution's
+TIME parameter `c` — flagged by the J4-911 report as the natural next increment "consuming exactly
+the `boundD`/`hbound_d` supplied by J4-911."
+
+**★★ STRUCTURAL CORRECTION (gpt-5.6-sol high, confirmed vs source).** The J4-911 premise is
+IMPRECISE. `hpardiff` is a **SIBLING** of the J4-911 `boundD`/`hbound_d` triple, **NOT a consumer**.
+All six binders `{hFmeas_d, hFint_d, hF'meas_d, boundD/hbdd_d/hbound_d, hpardiff}` are the hypotheses
+of ONE downstream application of `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le`
+on the OUTER `s`-integral (parameter `c=u`): there `boundD/hbdd_d/hbound_d` play the outer `s`-level
+dominator (`bound`/`bound_integrable`/`h_bound`) and `hpardiff` plays the `h_diff` slot (the
+pointwise-in-`s` inner `HasDerivAt` in `c`). A bound on `‖∫ z, …‖` cannot justify differentiating that
+`z`-integral; so `hpardiff` must be proved from a strictly LOWER-level (inner `z`-integral)
+differentiation engine. (Corroborated by `DataPileWitnessAudit:38`: `hpardiff` verdict `D`, provider
+`heatConvInner_hasDerivAt` "abstract engine; z-level diff family".)
+
+**Engine (banked).** `HeatResidualBound.heatConvInner_hasDerivAt` (`HeatConvRegularity.lean`) = `.2`
+of `MeasureTheory.hasDerivAt_integral_of_dominated_loc_of_deriv_le`, the `t`-differentiation under the
+`z`-integral. Fired per `(s,c)` at `A := Wit`, `dAu τ x z := deriv (fun r => Wit r x z) τ`, `B := F`,
+`x = y = 0`, `u₀ := c`, it yields EXACTLY the `hpardiff` per-`(s,c)` instance.
+
+**Landed.** NEW FILE `QIQTH/HpardiffZTimeDerivReduction.lean` (no banked file edited), std-3 ×2:
+`hpardiff_of_zTimeDeriv` reduces the exact generic-`(A,F)` `hpardiff` census binder to the named INNER
+`z`-level differentiation family `hZ` = {global `z`-slice measurability `hAmeas`; per-`(m,u,s,c)` local
+neighborhood `V ∋ c` + a `z`-integrable dominator `Dz` (constructible from the SAME `hAcrude`/`hFdom`
+envelopes as J4-911's `Dz`, `gaussDdim_pair_integrable`) + base/derivative `z`-slice
+measurability/integrability + `z`-pointwise dominator + the genuine `z`-POINTWISE TIME `HasDerivAt` of
+the integrand}. Sol-recommended local-existential form (`∃ V ∈ 𝓝 c`) with the AE quantifier INNERMOST
+(`∀ᵐ z, ∀ c' ∈ V`, never the illegal `∀ c', ∀ᵐ z`). Non-vacuity EXHIBITED
+(`hpardiff_of_zTimeDeriv_hyp_satisfiable`, `A ≡ 0`/`F ≡ 0`/`U = univ`/`nb = univ`).
+
+**Honest residue (NOT discharged).** The `z`-pointwise TIME `HasDerivAt` family inside `hZ` is the
+genuine geometric input — the DIFFERENTIABILITY sibling of the J4-911 crude-envelope BOUND `hAcrude`.
+`GatedTauDerivRep` banks only the deriv-EQUALITY representative (conditional on a carried amplitude
+`HasDerivAt hgate`), NOT the differentiability itself. So `hpardiff` is REDUCED (opaque → named engine
++ `z`-level carries), NOT unconditionally discharged — Sol verdict: NO-GO for unconditional discharge
+from banked `boundD`/`hbound_d` alone, GO for this conditional reduction.
+
+**Still open in the shared census** (honest, unchanged): `hCross` (mixed 2nd-difference bilinear
+Lipschitz, W5, no provider); `hAcrude` (crude time-derivative envelope, J4-911); and now the
+`z`-pointwise time-`HasDerivAt` carry inside `hZ` (the differentiability sibling). Sympy-rate gate N/A
+(differentiation-under-∫ wiring, no `O(√ε)` rate).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10219 jobs); `#print axioms` std-3 ×2
+(propext/Classical.choice/Quot.sound, no sorryAx/custom) — throwaway chk confirmed;
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `8e7eda06`, pushed. `a₁ = R/6` remains CONDITIONAL on
+{hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
