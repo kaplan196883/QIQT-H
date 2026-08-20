@@ -4877,3 +4877,13 @@ import QIQTH.HEdomFromHrawPreCollapse
 -- never previously wired to the abstract-F live-capstone binder shape. Object match by `subst hFeq`
 -- (F = leviSeries (heatOp g gi (vanVleckGatedWitness …)), rfl-satisfiable). std-3 ×4. NOT a₁=R/6.
 import QIQTH.InterchangeBundlesFromExisting
+
+-- HAdomHWDomFromConcreteDominations — the ABSTRACT-`g` `hAdom` + `hWDom` discharge for the LIVE order-1
+-- capstone (HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:320-322 `hAdom`, :365-366 `hWDom`,
+-- shared by hDuhamel AND hDConv). Threads the GENERIC recenter-of-domination
+-- ConcreteDominations.exists_D1_constants_of_gateSqControl (abstract in Θ,u,a,b,W,K,S) through the `rfl`
+-- defeq vanVleckGatedWitness = gatedKernel K S (globalCutoffParametrixWitnessN 1 (vanVleck g) …) to
+-- produce hAdom; hWDom is the frozen p=0 window slice (gaussDdim_neg). Generalizes J4-535's curved
+-- CurvedRNCBaseWitnessDomAdom composition from g:=curvedRNCMetric K to ABSTRACT g, with GateSqControl
+-- supplied as the reduced satisfiable carry (+ amplitude smoothness hw). std-3 ×3. NOT a₁=R/6.
+import QIQTH.HAdomHWDomFromConcreteDominations

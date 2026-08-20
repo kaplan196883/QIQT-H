@@ -29041,4 +29041,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.InterchangeBundlesFromExisting.memLapFull_live
 #print axioms QIQTH.InterchangeBundlesFromExisting.memECombine_live
 
+-- HAdomHWDomFromConcreteDominations — the ABSTRACT-g `hAdom` + `hWDom` discharge for the LIVE order-1
+-- capstone (truncatedDuhamelCore_AT_GATE_FULL:320-322 hAdom, :365-366 hWDom, shared by hDuhamel AND
+-- hDConv). Threads GENERIC ConcreteDominations.exists_D1_constants_of_gateSqControl through the rfl defeq
+-- vanVleckGatedWitness = gatedKernel K S (globalCutoffParametrixWitnessN 1 (vanVleck g) …); hWDom = p=0
+-- window slice. Generalizes J4-535's curved composition to ABSTRACT g with GateSqControl + hw as reduced
+-- satisfiable carries. std-3 ×3. NOT a₁=R/6.
+#print axioms QIQTH.HAdomHWDomFromConcreteDominations.vanVleckGatedWitness_eq_gatedKernel
+#print axioms QIQTH.HAdomHWDomFromConcreteDominations.hAdom_from_gateSqControl
+#print axioms QIQTH.HAdomHWDomFromConcreteDominations.hAdom_hWDom_from_gateSqControl
+
 end QIQTH.AxiomAudit
