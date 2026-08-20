@@ -29233,4 +29233,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessTimeDeriv.witnessZTime_hasDerivAt
 #print axioms QIQTH.WitnessTimeDeriv.witnessZTime_hasDerivAt_window_nonempty
 
+-- HZDataFromCrudeEnv — J4-916: SUPPLIES the four remaining DATA conjuncts (i)-(iv) of J4-912's inner
+-- z-level family hZ from a crude TIME-derivative Gaussian envelope + width-2 Levi bound + measurability
+-- carries. gaussDdim_width_interval_dom pins the varying Gaussian width to the widest over a neighborhood
+-- V=ball c δ (from banked gaussDdim_width_mono); Dz is a Gaussian PAIR (gaussDdim_pair_integrable). The
+-- concrete wrapper threads conjunct (v) via J4-915. REDUCES hZ (hence hpardiff) to the SAME named
+-- J4-911-class carries {hAcrude, hFdom, meas, base-int}; differentiability discharged. std-3 ×4. NOT a₁=R/6.
+#print axioms QIQTH.HZDataFromCrudeEnv.gaussDdim_width_interval_dom
+#print axioms QIQTH.HZDataFromCrudeEnv.hZslice_of_crudeEnv
+#print axioms QIQTH.HZDataFromCrudeEnv.hZslice_of_crudeEnv_hyp_satisfiable
+#print axioms QIQTH.HZDataFromCrudeEnv.witnessHZslice_of_crudeEnv
+
 end QIQTH.AxiomAudit

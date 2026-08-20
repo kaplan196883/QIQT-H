@@ -5036,3 +5036,15 @@ import QIQTH.MixedEnvelopeAssembly
 -- EVERY z (stronger than ∀ᵐ z), given only that V avoids τ≤0. Remaining hZ residue (z-integrable dominator
 -- Dz + z-slice measurabilities) unchanged. std-3 ×4, non-vacuity exhibited. NOT a₁=R/6.
 import QIQTH.WitnessTimeHasDerivAt
+
+-- HZDataFromCrudeEnv — J4-916: SUPPLIES the four remaining DATA conjuncts (i)-(iv) of J4-912's inner
+-- z-level family hZ (z-integrable dominator Dz, base-slice integrability, deriv-slice measurability, the
+-- UNIFORM-over-V z-pointwise dominator) from a crude TIME-derivative Gaussian envelope hAcrude (the SAME
+-- carried input J4-911 left open) + width-2 Levi bound + measurability carries. Key subtlety (Sol-GO): the
+-- INNER dominator must be uniform over c' in a neighborhood V∋c, so the varying Gaussian width wL·(c'-s) is
+-- pinned to the widest via gaussDdim_width_interval_dom (from banked gaussDdim_width_mono) on V=ball c δ,
+-- δ=min(c-s-τ₀,τ₁-(c-s)); Dz is a Gaussian PAIR, integrable via gaussDdim_pair_integrable. The concrete
+-- wrapper witnessHZslice_of_crudeEnv threads conjunct (v) via J4-915. This REDUCES hZ (and hence hpardiff)
+-- to the SAME named J4-911-class carries {hAcrude, hFdom, meas, base-int}; differentiability discharged.
+-- std-3 ×4, non-vacuity exhibited. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HZDataFromCrudeEnv
