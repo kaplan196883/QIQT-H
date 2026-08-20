@@ -30,6 +30,7 @@ import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
 import QIQTH.GaussTauDerivCancellation
 import QIQTH.GaussTauTraceCancellation
+import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
 namespace QIQTH.AxiomAudit
@@ -29315,5 +29316,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hess_coord_gaussDdim_q_integrable
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace
 #print axioms QIQTH.HeatResidualBound.gaussian_hessian_cancel_trace_hyp_satisfiable
+
+-- ## J4-921 (SliverAmplitudeFromHGpow): the sqrt(eps) matched-sliver amplitude carry `hbnd` of
+-- memLapFull_live_crude (J4-914) REDUCED to the moment-aware tau^{-1/2} pairing carry `hGpow` (the
+-- WideSliverBoundary target). integral_invSqrt_sub_sliver: int_{u-eps}^{u}(u-s)^{-1/2}ds = 2.sqrt(eps)
+-- (integral_comp_sub_left + integral_rpow). sliver_amplitude_from_hGpow: from hGpow + the SAME
+-- sliver-continuity carries hUT/heU/hSecCont/hBcont that the banked hII_hi_from_sliver consumes,
+-- |int_{s=u-eps_m}^{u} int_z W''(u-s)z.F s z 0 ds| <= Cpair.(2.sqrt(eps_m)), via
+-- abs_integral_le_integral_abs + integral_mono_on_of_le_Ioo (pointwise hGpow) + the exact evaluation;
+-- inner interval integrability = the MemAdjHi component (hII_hi_from_sliver m i u hu). hbnd_from_hGpow:
+-- the same cast into the EXACT hbnd census shape (D0:=const Cpair, D1:=const 0). So the two independent
+-- named residuals hGpow/hbnd COLLAPSE onto the single hGpow; D1:=0 honest (pure tau^{-1/2} pays no
+-- eps_m term). Non-vacuity INHERITED from hGpow's documented satisfiability (identical antecedent set
+-- to the banked non-vacuous hII_hi_from_sliver); this is a dependency-frontier reduction, NOT a
+-- discharge of hGpow (still OPEN on the chart change-of-variables wall). std-3 x3. NOT a1=R/6.
+#print axioms QIQTH.SliverAmplitudeFromHGpow.integral_invSqrt_sub_sliver
+#print axioms QIQTH.SliverAmplitudeFromHGpow.sliver_amplitude_from_hGpow
+#print axioms QIQTH.SliverAmplitudeFromHGpow.hbnd_from_hGpow
 
 end QIQTH.AxiomAudit

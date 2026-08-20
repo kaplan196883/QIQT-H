@@ -5093,3 +5093,15 @@ import QIQTH.GaussTauDerivCancellation
 -- Gaussian's own coordinate, so the concrete-G bridge (nonlinear-W change-of-variables / Jacobian) is the
 -- remaining wall. Non-vacuity EXHIBITED (q z := cos(dist z 0), L:=1). std-3 ×3. NOT a₁=R/6 (leaf brick).
 import QIQTH.GaussTauTraceCancellation
+
+-- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
+-- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
+-- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
+-- [u-eps_m,u] yields EXACTLY the 2.sqrt(eps_m) amplitude (int_{u-eps}^{u}(u-s)^{-1/2}ds = 2.sqrt(eps)),
+-- via the integral triangle inequality + integral_mono_on_of_le_Ioo + the exact rpow evaluation; inner
+-- interval integrability supplied INTERNALLY from the SAME sliver carries via the banked
+-- hII_hi_from_sliver (MemAdjHi). So the two named residuals hGpow/hbnd COLLAPSE onto the single hGpow
+-- (D0:=const Cpair, D1:=const 0 -- the pure tau^{-1/2} profile pays no eps_m term); hbnd_from_hGpow is
+-- a drop-in for memLapFull_live_crude's hbnd. Dependency-frontier reduction (J4-914 style), NOT a
+-- discharge of hGpow (still OPEN on the chart change-of-variables wall). std-3 x3. NOT a1=R/6.
+import QIQTH.SliverAmplitudeFromHGpow
