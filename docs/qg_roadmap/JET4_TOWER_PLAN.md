@@ -11274,3 +11274,43 @@ No `O(√ε)` rate is involved (measurability+boundedness, not a cancellation), 
 (propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK; `grep -i
 vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `d3eba2fb`, pushed. `a₁ = R/6` remains
 CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
+
+---
+
+## J4-908 — FOUR F2 inner-`s`-measurability/continuity census binders of the LIVE `hDuhamel` capstone DISCHARGED to named F2 carries (commit `d7a8bedc`)
+
+**Task.** Investigate the still-open F2/W5 pile of `HDuhamelLiveGateWired.hDuhamel_live_gate_wired`
+flagged in the J4-906 report: `hMeasFII`/`hFmeas`/`hF'meas` inner-`s`-measurability, `hInnerCont`,
+`boundD`/`hbdd`/`hbound`, and `hCross` — determine which are genuine hard walls vs find-and-wire.
+
+**Finding (under-crediting caught).** The J4-244 `DataPileWitnessAudit` classified `hMeasFII`,
+`hFmeas`, `hF'meas`, `hInnerCont` as `DS` "no provider anywhere" (wall W5). That audit PREDATES J4-245
+`InnerMeasFubini`, which built exactly those providers, and its downstream stack
+`F2CarryDischarge2.f2Pack_concrete_v2` → `ContDomWindow.f2Pack_concrete_v3` progressively internalized
+the carries. `f2Pack_concrete_v3`'s conclusion is EXACTLY the conjunction of the four LIVE census binders
+(with `leviSeries (heatOp g gi (vanVleckGatedWitness g gi hChr hK S a b))` in place of `F`).
+
+**Landed.** NEW FILE `QIQTH/HDuhamelF2LiveWired.lean` (no banked file edited), `hDuhamel_F2_live_wired`:
+reproduces the four LIVE census binders VERBATIM at `F` with the capstone's own
+`hFeq : F = leviSeries (heatOp g gi (vanVleckGatedWitness …))`, and discharges them via `subst hFeq`
+(rewriting `F` to the concrete Levi series ⟹ goal matches `f2Pack_concrete_v3` in order a/b/c/d) + a
+single `exact`. Named carries: `{hΘc, hΘne, huc, hVmap0, hKSmeas, hcar, hLeviJoint, hBcont, hUpos, hUT,
+hAdom, hBdom, hmeas, hcont}`. Of these, `hAdom` / `hFdom (= hBdom)` / `hUT` are ALREADY LIVE census
+binders (free); `hΘc/hΘne/huc/hVmap0/hKSmeas/hUpos` are standard geometric/measurability facts;
+`hLeviJoint`/`hBcont` are standard recurring named carries; only `{hcar, hmeas, hcont}` are
+genuinely-new residual — a NET DISCHARGE (opaque assembled-∫-measurability ⟹ primitive
+continuity/measurability/domination), NOT a `hBoundaryLim`-style relocation. gpt-5.6-sol(high) consulted
+at the go/no-go: crisp GO with the more-internalized v3.
+
+**Still genuinely open** after real investigation (not forced): `hCross` (mixed second-difference
+bilinear Lipschitz bound `|Δ²ₕₖ heatConvFrozen| ≤ L·|h||k|`) = audit W5 "Genuine analytic input", NO
+provider anywhere, only CONSUMED by `F2FamilyDischarge` — a true un-banked mixed-difference smoothness
+estimate; `boundD`/`hbdd`/`hbound` (the C3ε dominator + integrability + pointwise domination for the
+`∂_c` witness slice) remain named DATA-still carries. These are the honest analytic residue.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10216 jobs); `#print axioms
+hDuhamel_F2_live_wired` std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom) — throwaway
+chk confirmed; `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `d7a8bedc`, pushed. NO O(√ε) rate (measurability/continuity
+reduction) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
+NOT `a₁ = R/6`.
