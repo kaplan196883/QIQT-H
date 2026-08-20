@@ -4796,3 +4796,15 @@ import QIQTH.QuantifiedCoherentChartTube
 -- The per-point local engine a compactness argument (piece iv) would cover the compact b-tube with.
 -- std-3 ×2. NOT a₁=R/6.
 import QIQTH.GeneralCenterJointC2Flow
+
+-- GeneralCenterCoherentInverseChart: J4-891 — the general-centre (nonzero-velocity) Task-E/Task-F
+-- analogue. The NEW content is invertibility of the joint derivative of G(q,v)=(q,exp q v) AWAY from
+-- v=0: at v₀≠0 the reference geodesic is a genuine curve, so DG(h,w)=(h,A h+B w) with B:=fderiv (exp
+-- z₀) v₀ (a Jacobi-endpoint map, NOT id). Invertible ⟺ B invertible (inverse (a,b)↦(a,B⁻¹(b-A a))).
+-- B is inverted QUANTITATIVELY via the banked near-id bound ‖B-id‖≤C_D‖v₀‖ + Neumann series
+-- (Units.oneSub) for ‖v₀‖ small. generalCenter_coherent_joint_chart: given ‖B-id‖<1, a coherent joint
+-- ContDiffAt ℝ 2 inverse chart at (z₀,exp z₀ v₀) with value v₀ + inverse-chart identity. uniformInverse
+-- Chart_jointContDiffAt_generalCenter: ∃ r₀>0, ∀ interior z₀, ‖v₀‖<r₀ ⟹ concrete uniformInverseChart is
+-- jointly ContDiffAt ℝ 2 at (z₀,exp z₀ v₀) — invertibility DERIVED (r₀ folds flow/germ radii + 1/(C_D+1)
+-- Neumann threshold), reconciled via germ uniqueness. r₀>0 so NON-VACUOUS. std-3 ×2. NOT a₁=R/6.
+import QIQTH.GeneralCenterCoherentInverseChart

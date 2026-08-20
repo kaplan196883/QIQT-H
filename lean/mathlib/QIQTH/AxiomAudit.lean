@@ -28939,4 +28939,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.admissibleBall_of_normVelLt
 #print axioms QIQTH.ExpMap.uniformFlow_joint_contDiffOn_two_witness_generalCenter
 
+-- J4-891: GeneralCenterCoherentInverseChart — general-centre (nonzero-velocity) Task-E/Task-F analogue.
+-- NEW content: invertibility of DG(h,w)=(h,A h+B w) of G(q,v)=(q,exp q v) AWAY from v=0, where B:=fderiv
+-- (exp z₀) v₀ is a genuine Jacobi-endpoint map (not id). Inverted via near-id bound ‖B-id‖≤C_D‖v₀‖ +
+-- Neumann series (Units.oneSub) for small v₀. generalCenter_coherent_joint_chart: given ‖B-id‖<1, coherent
+-- joint ContDiffAt ℝ 2 inverse chart at (z₀,exp z₀ v₀), value v₀, inverse-chart identity. uniformInverse
+-- Chart_jointContDiffAt_generalCenter: ∃ r₀>0 ∀ interior z₀ ‖v₀‖<r₀ ⟹ concrete uniformInverseChart jointly
+-- ContDiffAt ℝ 2 at (z₀,exp z₀ v₀); invertibility DERIVED (r₀ folds flow/germ radii + 1/(C_D+1)). r₀>0 so
+-- NON-VACUOUS. Per-point IFT engine for the b-tube; does NOT run piece (iv) cover, does NOT close hbint.
+-- std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.ExpMap.generalCenter_coherent_joint_chart
+#print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffAt_generalCenter
+
 end QIQTH.AxiomAudit
