@@ -4555,6 +4555,17 @@ import QIQTH.ChartJetHFdFrontierClosed
 -- std-3. NOT a₁=R/6.
 import QIQTH.UniformFlowExpGlobalInjectivity
 
+-- GateFatExteriorConcreteDischarge: J4-872 — the GateFatExterior predicate GENUINELY DISCHARGED for the
+-- CONCRETE flow-ball gate S z = uniformFlowExp z '' ball 0 c, closing the hfat residual J4-870 isolated
+-- from MixedDirectionsFieldHessianEnvelope.hFd. COLLAR ROUTE (no invariance-of-domain / open-map /
+-- half-space geometry): the gate has a radial margin b<c, so its topological frontier lies in the OPEN
+-- dead collar (closure (φ_z '' ball 0 b))ᶜ on which the witness ≡ 0 (OffSVanishing.witness_eventuallyEq_
+-- zero_offGate, since S z is OPEN ⟹ frontier point off-gate). Hence f = pd witness i ≡ 0 near every
+-- frontier point ⟹ fat-exterior is FULL (whole standard basis spans, all directions vanish one-sided),
+-- not a mere half-space. gateFatExterior_concrete / hfat_concrete discharge hfat ∀z,i,τ; hFd_concrete_
+-- ciSup_reduces_to_gateBdd reduces hFd's ⨆-bound to the sole hgate input. std-3. NOT a₁=R/6.
+import QIQTH.GateFatExteriorConcreteDischarge
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;

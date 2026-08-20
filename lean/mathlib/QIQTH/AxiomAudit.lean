@@ -28651,6 +28651,17 @@ namespace QIQTH.AxiomAudit
 -- the prerequisite for the concrete flow-ball gate's fat-exterior geometry. std-3. NOT a₁=R/6.
 #print axioms QIQTH.UniformFlowExpGlobalInjectivity.uniformFlowExp_injOn
 
+-- J4-872: GateFatExteriorConcreteDischarge — GateFatExterior DISCHARGED for the concrete flow-ball gate.
+-- COLLAR ROUTE: the gate's radial margin b<c puts its frontier in the dead collar where the witness ≡ 0
+-- (OffSVanishing collar lemma + gate openness), so the field-derivative f = pd witness i ≡ 0 near every
+-- frontier point ⟹ fat-exterior is FULL (whole standard basis, not a half-space). No invariance-of-domain
+-- / open-map / boundary-cone construction needed. gateFatExterior_concrete / hfat_concrete: ∀z,i,τ.
+-- hFd_concrete_ciSup_reduces_to_gateBdd: hFd's ⨆-bound now reduces to the SOLE hgate residual. std-3. NOT a₁=R/6.
+#print axioms QIQTH.GateFatExteriorConcreteDischarge.witness_eventuallyEq_zero_frontier
+#print axioms QIQTH.GateFatExteriorConcreteDischarge.gateFatExterior_concrete
+#print axioms QIQTH.GateFatExteriorConcreteDischarge.hfat_concrete
+#print axioms QIQTH.GateFatExteriorConcreteDischarge.hFd_concrete_ciSup_reduces_to_gateBdd
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT
