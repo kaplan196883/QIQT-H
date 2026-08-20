@@ -4547,6 +4547,14 @@ import QIQTH.ChartJetHFdBoundaryClosed
 -- (gateFatExterior_zero holds for EVERY gate). std-3. NOT a₁=R/6.
 import QIQTH.ChartJetHFdFrontierClosed
 
+-- UniformFlowExpGlobalInjectivity: J4-871 — GLOBAL Set.InjOn of the recentring chart uniformFlowExp q on
+-- the uniform source ball ball 0 δ₀, K-uniformly. From the banked near-identity contraction
+-- ApproximatesLinearOn (uniformFlowExp q) id (ball 0 δ₀) c (c<1) via Mathlib's ApproximatesLinearOn.injOn
+-- (threshold ‖id⁻¹‖⁻¹=1). This is the missing GLOBAL injectivity fact J4-870 flagged as the prerequisite
+-- for the concrete flow-ball gate's fat-exterior geometry (NOT among the banked LOCAL-inverse germs).
+-- std-3. NOT a₁=R/6.
+import QIQTH.UniformFlowExpGlobalInjectivity
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;

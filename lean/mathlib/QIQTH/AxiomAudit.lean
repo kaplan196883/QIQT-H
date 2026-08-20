@@ -28644,6 +28644,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartJetHFdFrontierClosed.witnessFieldHessian_hFd_ciSup_of_gateBdd_fatExterior
 #print axioms QIQTH.ChartJetHFdFrontierClosed.hFd_fatExterior_nonvacuous
 
+-- J4-871: UniformFlowExpGlobalInjectivity — GLOBAL Set.InjOn of the recentring chart. uniformFlowExp_injOn:
+-- a single uniform radius δ₀>0 on which uniformFlowExp q is INJECTIVE on ball 0 δ₀ for every q∈K. From the
+-- banked near-identity ApproximatesLinearOn (uniformFlowExp q) id (ball 0 δ₀) c (c<1) via Mathlib's
+-- ApproximatesLinearOn.injOn (injectivity threshold ‖id⁻¹‖⁻¹=1). The GLOBAL injectivity J4-870 flagged as
+-- the prerequisite for the concrete flow-ball gate's fat-exterior geometry. std-3. NOT a₁=R/6.
+#print axioms QIQTH.UniformFlowExpGlobalInjectivity.uniformFlowExp_injOn
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT
