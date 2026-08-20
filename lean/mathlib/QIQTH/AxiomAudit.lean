@@ -19227,6 +19227,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDConvGateThreading.hDConv_AT_GATE
 #print axioms QIQTH.HDConvGateThreading.hDConvSlot_AT_GATE
 
+-- ## HDConvLiveGateWired: ★★ THE LIVE CAPSTONE hDConv SLOT IS NOW A NAMED-CENSUS THEOREM ★★
+-- The hDConv analog of HDuhamelLiveGateWired (J4-895): the pure opaque→named LIVE wiring.
+-- The LIVE order-1 capstone (trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned) carries
+-- hDConv as an OPAQUE DifferentiableAt in the RAW gatedKernel/globalCutoffParametrixWitnessN
+-- form at its self-chosen H. That H is DEFEQ (rfl, verified in-file) to vanVleckGatedWitness
+-- g gi hChr hK S a b — the exact kernel hDConvSlot_AT_GATE (J4-312) concludes at. So
+-- hDConv_live_gate_wired states the conclusion in the capstone's OWN raw form (guarding the
+-- defeq) and proves it by `exact hDConvSlot_AT_GATE …`, closing the missing opaque→named step
+-- for hDConv on the LIVE capstone. Census = the ~130-binder union, propositionally IDENTICAL
+-- to hDuhamel_live_gate_wired's MINUS hBoundaryLim (unneeded for DifferentiableAt); so the
+-- J4-896..908 standalone discharges apply verbatim to this census. NO hAnear (W1-free). std-3.
+-- NOT a₁ = R/6.
+#print axioms QIQTH.HDConvLiveGateWired.hDConv_live_gate_wired
+
 -- ## J4-313 (CConvFacadeGate): ★★ THE CAPSTONE hCConv SLOT IS A THEOREM ★★
 -- ★ ALL THREE inner capstone arrows now have AT_GATE slot theorems (J4-311/312/313).
 -- Z0 RECON: the hCConv slot = the spatial-C² ContDiffAt ℝ 2 of the diagonal heatConv;

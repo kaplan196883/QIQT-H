@@ -511,6 +511,7 @@ import QIQTH.HDerivConvComposition
 import QIQTH.HDuhamelExportRethread
 import QIQTH.HDuhamelLiveGateWired
 import QIQTH.HDConvGateThreading
+import QIQTH.HDConvLiveGateWired
 import QIQTH.CConvFacadeGate
 import QIQTH.S1TripleHEmeasGate
 import QIQTH.VaryingRadiusS1Provider
