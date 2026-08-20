@@ -11666,3 +11666,42 @@ now shared by `boundD` AND `hZ`'s `Dz`); the measurability/base-integrability pi
 `QIQTH.lean`+`AxiomAudit.lean`; commit `8c3aebdf`, pushed. Sympy-rate gate N/A (Gaussian-pair identity +
 width-interval domination, no `O(√ε)` integral-rate claim). `a₁ = R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+## J4-917 — the crude TIME-derivative envelope `hAcrude` DISCHARGED from the EXACT `∂_τ` closed form: `boundD`/`hZ`'s doubly-load-bearing carry reduced to zeroth amplitude sup-bounds (commit 91d917b5)
+
+**What.** New file `QIQTH/WitnessTimeDerivEnvelope.lean`. `hAcrude`
+(`|deriv (fun r => vanVleckGatedWitness … r 0 z) τ| ≤ C·τ⁻¹·gaussDdim (wL·τ) z`) was the SOLE remaining
+residue SHARED by `DerivDomLowerCapped.derivDom_boundD_of_crude` (J4-911, `boundD`) AND
+`HZDataFromCrudeEnv.hZslice_of_crudeEnv` (J4-916, `hZ`'s `Dz`). J4-915 had just revealed the witness `∂_τ`
+has an EXPLICIT banked closed form (`GatedTauDerivRep.witnessTauDeriv_eq_gatedTauRepProd`):
+`∂_τWit = (∑ᵢ(vᵢ²/4τ²−1/2τ))·gaussDdim τ(v)·A + gaussDdim τ(v)·Cfield`, `v=uniformInverseChart z 0`,
+`A=chartFieldAmp` affine in `τ`, `Cfield=∂_τA` constant. This file bounds it DIRECTLY.
+
+**Route (all banked).** Triangle on the coefficient (`tauCoeff_abs_bound`:
+`|∑ᵢ(vᵢ²/4τ²−1/2τ)| ≤ rncRadialSq v/4τ² + n/2τ`) → THREE absorptions:
+(1) the CHART-IMAGE radial `|v|²/τ` SELF-absorbed into a wider chart-image Gaussian via
+`GaussianWidthTransfer.gaussDdim_poly_absorb` at FIXED gap `(η,lam)=(1/2,4)` with `w:=z:=v` (side gate
+`(1−1/2)·rncRadialSq v ≤ rncRadialSq v` trivial since `1/2 ≤ 1` — the key move, needs NO upper near-isometry),
+then base-transferred by `FixedFlowGateData.poly_absorb 0` at width `4τ`; (2)/(3) the `n/2τ`·G·A and G·Cfield
+pieces via `poly_absorb 0` + `HrawCampaignOne.gaussDdim_width_mono` (`lam·τ↦4·lam·τ`), the `τ⁰` Cfield term
+lifted to `τ⁻¹` via `1 ≤ τ₀·τ⁻¹`. All land at common width `4·D.lam·τ` ⟹ `wL = 4·D.lam`. Worst rate `τ⁻¹`
+= the 2nd-spatial-derivative rate (`∂_τG=ΔG`), EXACTLY the accepted `WideAmplitudeData.second_domination` class.
+
+**Sympy + gpt-5.6-sol (high) FIRST.** Both confirmed: genuine `τ⁻¹`, NO hidden log/rate blowup (unlike the
+`hCross` trap); `x·e^{−cx}` bounded ⟹ one clean `τ⁻¹`; the self-application `poly_absorb(z:=w:=v)` is valid
+under the verified lemma signature (free `w,z`, no hidden gate); width unification introduces only a constant.
+Sol's caveat — `τ⁻¹` is the critically-non-integrable rate at `τ→0` — is inert here: the consumers LOWER-CAP
+`τ⁻¹` (τ bounded below on the pairing interval), same as `second_domination`.
+
+**Honest standing.** REDUCES `hAcrude` to the SAME zeroth amplitude sup-bounds `{|chartFieldAmp|≤M,
+|Cfield|≤M'}` already carried as `WideAmplitudeData.hAmp0` — the mildest accepted class — with NO separate
+`hTimeEnv` second-jet carry (that geometric content is now COMPUTED inline from the explicit closed form,
+strictly stronger than `second_domination`, which carries `hSecondEnv`). `witnessTimeDeriv_domination`
+(on gate ball) + `_global` (∀z, off-gate witness≡0) + non-vacuity EXHIBITED at nonempty singleton gate
+`K={0}` (`S=univ`, affine-in-τ amp bound at the single point).
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10224 jobs); `#print axioms` std-3 ×4
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `91d917b5`,
+pushed. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. Wiring into the LIVE `boundD`/`hZ`
+census consumers (global-z + τ-cap alignment) is a downstream step, not done here. NOT `a₁ = R/6`.
