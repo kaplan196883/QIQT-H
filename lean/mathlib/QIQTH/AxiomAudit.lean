@@ -29030,4 +29030,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HEdomFromHrawPreCollapse.vanVleckGatedWitness_eq_gatedKernel
 #print axioms QIQTH.HEdomFromHrawPreCollapse.hEdom_from_hrawPreCollapse
 
+-- InterchangeBundlesFromExisting — J4-898: the four INTERCHANGE-BUNDLE census binders of the LIVE order-1
+-- capstone (truncatedDuhamelCore_AT_GATE_FULL:293-317, shared by hDuhamel AND hDConv) discharged to named
+-- satisfiable carries of existing generic-in-abstract-g bricks (find-and-wire, mirroring J4-896/897), threaded
+-- to the abstract-F live-capstone binder shape via `subst hFeq`. MemAdjHi ← MemAdjHiSliver.hII_hi_from_sliver ·
+-- MemAdjLo ← CappedAdom2Audit.hII_lo_from_capped · MemLapFull ← CappedAdom2Audit.memLapFull_from_pairing_dominations ·
+-- MemECombine ← DaLimCensusRecon.memECombine_of_data. std-3 ×4. NOT a₁=R/6.
+#print axioms QIQTH.InterchangeBundlesFromExisting.memAdjHi_live
+#print axioms QIQTH.InterchangeBundlesFromExisting.memAdjLo_live
+#print axioms QIQTH.InterchangeBundlesFromExisting.memLapFull_live
+#print axioms QIQTH.InterchangeBundlesFromExisting.memECombine_live
+
 end QIQTH.AxiomAudit

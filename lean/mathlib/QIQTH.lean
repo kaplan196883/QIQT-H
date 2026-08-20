@@ -4867,3 +4867,13 @@ import QIQTH.HmassoneFromGateAnnulusSplit
 -- carry hEdom_concrete_final reduces to; also carried as the honest labelled input in HgateCensusAssembly:154)
 -- — NOT the conclusion. Mirrors J4-896's hmassone wiring on the same shared census. std-3 both. NOT a₁=R/6.
 import QIQTH.HEdomFromHrawPreCollapse
+
+-- InterchangeBundlesFromExisting — J4-898: the four INTERCHANGE-BUNDLE census binders of the LIVE order-1
+-- capstone (HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:293-317, shared by hDuhamel AND hDConv
+-- via the hDaLimLU data) — `hLapFull : MemLapFull`, `hII_lo : MemAdjLo`, `hII_hi : MemAdjHi`,
+-- `hEcomb : MemECombine` — each DISCHARGED (find-and-wire, mirroring J4-896/897) to the named satisfiable
+-- carries of an EXISTING generic-in-abstract-g brick (MemAdjHiSliver.hII_hi_from_sliver ·
+-- CappedAdom2Audit.hII_lo_from_capped / .memLapFull_from_pairing_dominations · DaLimCensusRecon.memECombine_of_data),
+-- never previously wired to the abstract-F live-capstone binder shape. Object match by `subst hFeq`
+-- (F = leviSeries (heatOp g gi (vanVleckGatedWitness …)), rfl-satisfiable). std-3 ×4. NOT a₁=R/6.
+import QIQTH.InterchangeBundlesFromExisting
