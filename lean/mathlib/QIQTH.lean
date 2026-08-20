@@ -4589,6 +4589,16 @@ import QIQTH.HGateBoundedConcreteDischarge
 -- ⟹ hFd fully closed (no chart-C²/openness/boundedness carry). std-3. NOT a₁=R/6.
 import QIQTH.HFdCoreContinuityClosed
 
+-- HkintReducedToHbint: J4-875 — with the now-CONCRETE BF (J4-874), the hkint field of
+-- MixedDirectionsFieldHessianEnvelope (per-slice z-integrability of kPrime) REDUCES to hbint.
+-- kPrime = leviSeries • fderiv, so ‖kPrime x z‖ = |leviSeries|·‖fderiv x‖ ≤ BL·BF (norm_smul +
+-- hLevi magnitude + J4-874 field-Hessian bound). kPrime_norm_le_product: the pointwise bound.
+-- kPrime_integrable_of_product: Integrable kPrime ⟸ {hbint, measurability, product bound} via
+-- Integrable.mono'. hkint_reduces_to_hbint_concrete: the a.e. hkint field ⟸ {hbint, kPrime
+-- measurability, hLevi, hFd}. So hkint is DOWNSTREAM of hbint — not an independent wall; the genuine
+-- remaining envelope content is hbint+hzmass (shared Gaussian BL·BF dominator). std-3. NOT a₁=R/6.
+import QIQTH.HkintReducedToHbint
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;

@@ -28692,6 +28692,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFdCoreContinuityClosed.hcore_concrete_discharged
 #print axioms QIQTH.HFdCoreContinuityClosed.hFd_concrete_ciSup_fully_closed
 
+-- J4-875: HkintReducedToHbint — with the now-CONCRETE BF (J4-874), the hkint field of
+-- MixedDirectionsFieldHessianEnvelope REDUCES to hbint. kPrime=leviSeries•fderiv ⟹ ‖kPrime x z‖=
+-- |leviSeries|·‖fderiv x‖ ≤ BL·BF (norm_smul + hLevi + J4-874 bound). kPrime_norm_le_product: pointwise
+-- bound. kPrime_integrable_of_product: Integrable kPrime ⟸ {hbint, measurability, bound} (Integrable.
+-- mono'). hkint_reduces_to_hbint_concrete: a.e. hkint field ⟸ {hbint, kPrime measurability, hLevi, hFd}.
+-- So hkint is DOWNSTREAM of hbint — genuine remaining content is hbint+hzmass. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HkintReducedToHbint.kPrime_norm_le_product
+#print axioms QIQTH.HkintReducedToHbint.kPrime_integrable_of_product
+#print axioms QIQTH.HkintReducedToHbint.hkint_reduces_to_hbint_concrete
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT
