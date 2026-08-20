@@ -28986,4 +28986,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDConvReducedToRadialGauge.HjetsShape_of_radialGauge
 #print axioms QIQTH.HDConvReducedToRadialGauge.HjetsShape_of_radialGauge_at_gate
 
+-- AmplitudeDataOnFromRadialGauge — threads the J4-893 named RadialNormalCoordinateGauge into the ACTUAL
+-- constructible collar route. amplitudeDataOn_from_radialGauge: the collar bundle
+-- AmplitudeDerivativeDataOn built via amplitudeDataOn_concrete with its center-identity-bearing hjets
+-- field supplied by HjetsShape_of_radialGauge_at_gate (gauge + mechanical jets + pullback bridge).
+-- radialGauge_discharges_hjets_carry: the hjets carry (item 4) of the named collar-sliver census
+-- SliverAssemblyMatched.hbnd_concrete_v2_carries is discharged by the gauge. hbnd_v2_census_of_radialGauge:
+-- the full 5-carry sliver census with its hjets slot radial-gauge-filled, given the other 4 carries.
+-- ARCHITECTURAL CORRECTION: the UNRESTRICTED AmplitudeDerivativeData is NOT constructible for the
+-- curved witness (rhoRatio bounded only on the collar); the collar bundle is the real target. std-3 ×3.
+-- NOT a₁=R/6.
+#print axioms QIQTH.AmplitudeDataOnFromRadialGauge.amplitudeDataOn_from_radialGauge
+#print axioms QIQTH.AmplitudeDataOnFromRadialGauge.radialGauge_discharges_hjets_carry
+#print axioms QIQTH.AmplitudeDataOnFromRadialGauge.hbnd_v2_census_of_radialGauge
+
 end QIQTH.AxiomAudit

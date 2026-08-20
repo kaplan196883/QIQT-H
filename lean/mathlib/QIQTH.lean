@@ -4832,3 +4832,11 @@ import QIQTH.RadialGaugeInterface
 -- + banked mechanical jets (via hjets_assemble). Collar-quantified form. Replaces hDConv's opaque
 -- center-identity carry with one clean standard-geometry hypothesis. std-3 ×2. NOT a₁=R/6.
 import QIQTH.HDConvReducedToRadialGauge
+-- AmplitudeDataOnFromRadialGauge — threads the named RadialNormalCoordinateGauge into the ACTUAL
+-- constructible collar amplitude bundle (amplitudeDataOn_from_radialGauge: AmplitudeDerivativeDataOn
+-- with its hjets center-identity field supplied by HjetsShape_of_radialGauge_at_gate) and into the
+-- named collar-sliver census (radialGauge_discharges_hjets_carry / hbnd_v2_census_of_radialGauge fill
+-- the hjets slot of hbnd_concrete_v2_carries). Corrects the memory chain: the UNRESTRICTED
+-- AmplitudeDerivativeData is NOT constructible for the curved witness (rhoRatio bounded only on collar);
+-- the collar bundle is the real target. std-3 ×3. NOT a₁=R/6.
+import QIQTH.AmplitudeDataOnFromRadialGauge
