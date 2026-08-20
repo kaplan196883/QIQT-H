@@ -23,6 +23,7 @@
 import QIQTH
 import QIQTH.HbintMeasurabilityNullFrontier
 import QIQTH.HbintInteriorContinuityRoute
+import QIQTH.HDuhamelBoundaryModulusUniform
 
 namespace QIQTH.AxiomAudit
 
@@ -29120,5 +29121,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbintInteriorContinuityRoute.hBFint_concrete_of_jointInteriorContinuous
 #print axioms QIQTH.HbintInteriorContinuityRoute.hbint_concrete_via_interior_route
 #print axioms QIQTH.HbintInteriorContinuityRoute.BF_interior_residual_nonvacuous
+
+-- HDuhamelBoundaryModulusUniform — find-and-wire discharge of THREE census binders (hmod/hsup/hUfloor) of
+-- the LIVE order-1 hDuhamel capstone. heine_spatialModulus_at_zero: NEW general Heine–Cantor spatial
+-- modulus at z=0 from compact-strip 0-slice continuity. hmod_census_of_sliceContinuity / hsup_census_of_
+-- sliceContinuity: the EXACT census-binder shapes (abstract F) reduced to that single continuity carrier
+-- (hsup via banked heine_timeShift_sup_tendsto_tUniform). hUfloor_of_windowFloor: trivial ⟨aT,haT,hUlb⟩.
+-- hmod_hsup_at_witness: BOTH at the concrete Levi source, reduced to the banked termwise carrier
+-- {hterm,hu,hbound}. hCross remains DS-none (genuine analytic input, wall W5). std-3 ×5. NOT a₁=R/6.
+#print axioms QIQTH.HDuhamelBoundaryModulusUniform.heine_spatialModulus_at_zero
+#print axioms QIQTH.HDuhamelBoundaryModulusUniform.hmod_census_of_sliceContinuity
+#print axioms QIQTH.HDuhamelBoundaryModulusUniform.hsup_census_of_sliceContinuity
+#print axioms QIQTH.HDuhamelBoundaryModulusUniform.hUfloor_of_windowFloor
+#print axioms QIQTH.HDuhamelBoundaryModulusUniform.hmod_hsup_at_witness
 
 end QIQTH.AxiomAudit

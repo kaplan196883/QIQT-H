@@ -4953,3 +4953,13 @@ import QIQTH.HbintMeasurabilityNullFrontier
 -- hbint field — the J4-904 route CLOSES the hBFint Berge/sup scaffolding; residual = interior joint
 -- (z,x)-continuity + elementary carries. hbint REDUCED not closed. std-3 ×5. NOT a₁=R/6.
 import QIQTH.HbintInteriorContinuityRoute
+
+-- HDuhamelBoundaryModulusUniform — find-and-wire discharge of THREE census binders of the LIVE order-1
+-- `hDuhamel` capstone `hDuhamel_live_gate_wired` (shared frozen/moving boundary-locally-uniform pile):
+-- hsup (:222-224, joint-(u,z) time-shift uniform convergence) ← the banked Heine–Cantor provider
+-- EnvelopeWiringLocUnif.heine_timeShift_sup_tendsto_tUniform; hmod (:219-221, spatial modulus at z=0) ←
+-- the NEW general Heine–Cantor spatial-modulus lemma heine_spatialModulus_at_zero; BOTH reduce to ONE
+-- named carrier — Levi-0-slice joint continuity on the compact strip — which at the witness IS the banked
+-- MovingCorrAssembly.leviSlice_jointContinuousOn_of_termwise (→ {termwise iterE cont, summable, envelope}).
+-- hUfloor (:176) ← the trivial sibling-redundant ⟨aT,haT,hUlb⟩ (audit D). std-3 ×5. NOT a₁=R/6.
+import QIQTH.HDuhamelBoundaryModulusUniform
