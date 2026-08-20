@@ -28567,6 +28567,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryFullyClosed.sqrt_pow_mul_rpow_neg
 #print axioms QIQTH.HCompNearCarryFullyClosed.terminalVelAt_prefactor_sliver_bound
 
+-- HCompNearCarryChartSurfaceWired (J4-881): ITEM (i) of hcomp's NEAR carry nb — the concrete kPrime
+--   component wired through the MIXED normal form on the gate (J4-788 CLM-component identity ∘ J4-218
+--   on-gate mixed normal form, index roles swapped). Pure equality composition. NOT a₁=R/6.
+#print axioms QIQTH.HCompNearCarryChartSurfaceWired.kPrime_apply_single_on_gate_eq_mixedNormalForm
+
 -- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM operator-norm combinator for the field-Hessian
 -- CLM fderiv(∂ᵢH) (the object FderivBulkConcrete.kPrime carries), assembling the banked per-index scalar
 -- Hessian bounds into the operator-norm bound MixedDirectionsFieldHessianEnvelope.hFd needs.
@@ -28756,6 +28761,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HZMassIntegrabilityAttempt.productEnvelope_support_subset_K
 #print axioms QIQTH.HZMassIntegrabilityAttempt.hzmass_of_gaussian_product_envelope
 #print axioms QIQTH.HZMassIntegrabilityAttempt.hzmass_gaussian_reduction_nonvacuous
+
+-- J4-881: HZMassPeakGaussianSplit — STRATEGIC REDIRECT of the deep hzmass z-mass wall. FINDING 1: the
+-- J4-879/880 near-isometry CANCELLATION route is inapplicable to hzmass (magnitude-product mass over the
+-- global BASE variable vs difference-of-Gaussians over a near-diagonal FIELD ball + time sliver) — distinct
+-- from J4-868 and also inapplicable. FINDING 2 (hzmass_of_peak_BF_gaussian_BL): the productive route keeps
+-- BF's z-uniform PEAK and puts the z-Gaussian ENTIRELY on the Levi base factor BL — hzmass ⟸ {BF≤Ppk,
+-- BL≤CB·gaussDdim, Ppk·CB≤C(t−s)⁻¹} via the J4-867 mass-one reduction. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HZMassPeakGaussianSplit.hzmass_of_peak_BF_gaussian_BL
+#print axioms QIQTH.HZMassPeakGaussianSplit.hzmass_peak_gaussian_split_nonvacuous
 
 -- J4-868: BFGaussianEnvelopeClosed — the GAUSSIAN-PEAK verdict for BF + the uniform-in-z NO-GO.
 -- gaussDdim_peak_ratio: gaussDdim t 0=exp((∑(v k)²)/(4t))·gaussDdim t v (exact peak/point ratio).

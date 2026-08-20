@@ -4510,6 +4510,16 @@ import QIQTH.HCompNearCarryConcreteDischarge
 --   NOT a₁=R/6 (nb full closure still needs items (i)/(ii) chart-surface wiring; hcomp also blocked by the
 --   far carry's open hzmass wall).
 import QIQTH.HCompNearCarryFullyClosed
+-- HCompNearCarryChartSurfaceWired (J4-881): ITEM (i) of hcomp's NEAR carry nb — the CONCRETE kPrime
+--   component wired through the MIXED Leibniz–Gaussian normal form, on the gate. Composes J4-788
+--   (KPrimeMixedPdBridge.kPrime_apply_single_eq_mixedPd: (kPrime … i t s x z)(eⱼ)=Levi·∂ⱼ∂ᵢH_G) with
+--   J4-218 (ChartJetHessianMixed.witnessMixed_gate_eq, index roles i/j swapped) ⟹ on the gate
+--   (z∈K, x∈S z, 0<t−s), (kPrime … i t s x z)(eⱼ) = Levi(s,z)·[G_τ(U z x)·hsMixed·A + gradients + G·∂∂A],
+--   the chart-replacement-ready normal form whose base-slot Gaussian G_τ(U z x) the J4-880 evenness link
+--   + J4-879/880 prefactor sliver estimate consume. Pure equality composition. Does NOT close nb: residual
+--   = (ii) base↔field change of variables v=uniformInverseChart x z (the joint-C²-chart wall shared by
+--   hbint/hCConv) + the antisymmetrization producing the G_τ(T_x v)−G_τ(v) difference. NOT a₁=R/6.
+import QIQTH.HCompNearCarryChartSurfaceWired
 -- J4-863: MixedFieldHessianOpNormCombinator — the b2 CLM OPERATOR-NORM combinator assembling the
 -- per-index (diagonal + off-diagonal) scalar Hessian bounds into an operator-norm bound on the field-
 -- Hessian CLM fderiv(∂ᵢH) that kPrime carries — the exact object MixedDirectionsFieldHessianEnvelope.hFd
@@ -4641,6 +4651,16 @@ import QIQTH.HbintReducedToZContinuity
 -- pointwise Gaussian envelope on ⨆x‖fderiv‖ itself is NOT simplified (same difficulty class). std-3.
 -- NOT a₁=R/6.
 import QIQTH.HZMassIntegrabilityAttempt
+
+-- HZMassPeakGaussianSplit: J4-881 — STRATEGIC REDIRECT of the deep hzmass z-mass wall. FINDING 1: the
+-- J4-879/880 near-isometry CANCELLATION route is INAPPLICABLE to hzmass (magnitude product BL·BF over the
+-- global BASE variable at fixed time, vs a difference-of-Gaussians over a small near-diagonal FIELD ball +
+-- time sliver; germ =ᶠ[𝓝 x₀] cannot control a global base integral) — genuinely distinct from J4-868, and
+-- also inapplicable, for INDEPENDENT reasons. FINDING 2 (hzmass_of_peak_BF_gaussian_BL): the PRODUCTIVE
+-- route keeps BF's z-uniform PEAK (all J4-868 allows) and puts the z-Gaussian ENTIRELY on the Levi base
+-- factor BL — hzmass ⟸ {BF≤Ppk, BL≤CB·gaussDdim, Ppk·CB≤C(t−s)⁻¹} via the J4-867 mass-one reduction. std-3.
+-- NOT a₁=R/6.
+import QIQTH.HZMassPeakGaussianSplit
 
 -- BFGaussianEnvelopeClosed: J4-868 — the GAUSSIAN-PEAK verdict for BF, closing the compact-gate-sup loop
 -- of hFd AND resolving the uniform-in-z subtlety of the step-4 target BF≤C·gaussDdim(t−s) z. The gate
