@@ -28676,6 +28676,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HGateBoundedConcreteDischarge.hFd_concrete_ciSup_of_coreContinuousOn
 #print axioms QIQTH.HGateBoundedConcreteDischarge.core_continuousOn_of_closureContinuousOn
 
+-- J4-874: HFdCoreContinuityClosed — the CORE-CONTINUITY residual of J4-873 DISCHARGED unconditionally
+-- (mod standard metric premises hg/hgpos/hu), CLOSING hFd of MixedDirectionsFieldHessianEnvelope on the
+-- concrete gate. pd_contDiffAt_one_of_two: pd of a C² field is C¹. fderiv_pd_norm_continuousAt: ⟹
+-- ‖fderiv(pd F i)‖ ContinuousAt. core_subset_gate: closure(φ_z''ball b)⊆φ_z''ball c (compact-image closed).
+-- coreContinuousOn_pointwise: ∀z, field-Hessian norm ContinuousOn the core (on-K reachableGate chart-C² +
+-- gatedWitness_contDiffAt_field; off-K vanishing Hessian). hcore_concrete_discharged: the a.e. core
+-- continuity (Eventually.of_forall, holds ∀z). hFd_concrete_ciSup_fully_closed: composes with J4-873 ⟹
+-- hFd FULLY CLOSED (no chart-C²/openness/boundedness carry). std-3. NOT a₁=R/6.
+#print axioms QIQTH.HFdCoreContinuityClosed.pd_contDiffAt_one_of_two
+#print axioms QIQTH.HFdCoreContinuityClosed.fderiv_pd_norm_continuousAt
+#print axioms QIQTH.HFdCoreContinuityClosed.gate_closedBall_isCompact
+#print axioms QIQTH.HFdCoreContinuityClosed.core_subset_gate
+#print axioms QIQTH.HFdCoreContinuityClosed.coreContinuousOn_pointwise
+#print axioms QIQTH.HFdCoreContinuityClosed.hcore_concrete_discharged
+#print axioms QIQTH.HFdCoreContinuityClosed.hFd_concrete_ciSup_fully_closed
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT

@@ -4578,6 +4578,17 @@ import QIQTH.GateFatExteriorConcreteDischarge
 -- core (metric-C² data, same residual class J4-865 carried, now localised to the core). std-3. NOT a₁=R/6.
 import QIQTH.HGateBoundedConcreteDischarge
 
+-- HFdCoreContinuityClosed: J4-874 — the CORE-CONTINUITY residual of J4-873 DISCHARGED unconditionally
+-- (mod standard metric premises hg/hgpos/hu), CLOSING hFd of MixedDirectionsFieldHessianEnvelope on the
+-- concrete gate. pd_contDiffAt_one_of_two: pd of a C² field is C¹ (pd=fderiv·(eᵢ) near x; fderiv_right;
+-- clm_apply; congr). fderiv_pd_norm_continuousAt: ⟹ ‖fderiv(pd F i)‖ ContinuousAt (continuousAt_fderiv+
+-- norm). core_subset_gate: closure(φ_z''ball b)⊆φ_z''ball c (image of compact closedBall is closed).
+-- coreContinuousOn_pointwise: ∀z, field-Hessian norm ContinuousOn the core — on-K via reachableGate chart-
+-- C² + gatedWitness_contDiffAt_field, off-K via vanishing Hessian. hcore_concrete_discharged: the a.e.
+-- core continuity, Eventually.of_forall (holds ∀z). hFd_concrete_ciSup_fully_closed: composes with J4-873
+-- ⟹ hFd fully closed (no chart-C²/openness/boundedness carry). std-3. NOT a₁=R/6.
+import QIQTH.HFdCoreContinuityClosed
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;
