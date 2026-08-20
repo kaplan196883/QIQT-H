@@ -12207,3 +12207,61 @@ QIQTH.AxiomAudit` 0 errors (10233 jobs); `#print axioms` std-3 ×2 (propext/Clas
 sorryAx/custom); `axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `e2f62c3f`, pushed. `a₁ = R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+
+## J4-927 — the INTEGRATED (diagonal-split) reduction of the live `hCross` census binder — commit `d72e5090` (`HCrossIntegratedSplit.lean`, new file)
+
+**Task.** Build the NEW integrated reduction the cp794 next-session menu named: replace J4-926's FALSE
+pointwise `hdiff` premise (proved impossible across the causal diagonal `s=u`, and the naive τ⁻¹-envelope
+salvage LOSES A LOG) with a TRUE integrated split — split the sliver at the diagonals `s=u`/`s=u+h`,
+threading `F`'s banked spatial Lipschitz (`LeviLipschitz.resolvent_lipschitz_pointwise`, J4-144) to cancel
+the log. Sympy-verify the FULL split FIRST (given the prior trap), consult gpt-5.6-sol at go/no-go, build
+as new file(s), thread through, report whether `hCross`'s census binder is closed.
+
+**Sympy/numerical verification — PASS (no hidden divergence).** 1-D `W=heat kernel`, `F=e^{−z²}(1+0.3 sin(0.6 s))`
+(genuinely `s`-varying). (1) `|D(s)|·(u−s)^{1/2}/h ≤ 0.44` bounded (decreasing toward the diagonal) while
+`·(u−s)^{1.0}/h → 0` — the F-Lipschitz cancellation genuinely gives the INTEGRABLE `τ^{−1/2}` envelope,
+killing the log. (2) The provable split upper bound `U` dominates `|I|` in EVERY regime (`k=0.5ε,ε,2ε,5ε`),
+and `U/(hk)` is EXACTLY h-independent (e.g. `30.497, 30.497, 30.497` across `h=1e-2,1e-3,1e-4`) — no log
+growth; worst ~30 at `ε=0.05` consistent with `L~C/ε`. Closed-form `L = 2·C_far/√ε + 2·M/ε` is a valid
+over-estimate.
+
+**gpt-5.6-sol (high) GO** (for `h>0,k>0`). Decomposition + closed-form `L` correct, no residual log or
+endpoint divergence. Sharper primary form `|∫| ≤ 2C_far·h·(√ε−√((ε−k)₊)) + B·min(h,(k−ε)₊)` → `≤ (2C_far/√ε
++B/ε)hk`, `B=2M`. ⚠ Scope: negative `k` is a mirror (same `L`); negative `h` genuinely NOT covered (the
+diagonal moves to `u+h`) — do not claim signed-`h` hCross. Lean cautions (all heeded): endpoint `s=u`
+pitfall (`1/√0=0` in Lean ⟹ use a.e. domination excluding `{u}`), add explicit integrability hyp, prove
+the `∫(u−s)^{−1/2}` helper, case-split `k≤ε / ε<k≤ε+h / ε+h<k`.
+
+**Landed — NEW FILE `QIQTH/HCrossIntegratedSplit.lean` (ns `QIQTH.HeatResidualBound`, no banked file edited). std-3 ×7.**
+- `far_sqrt_bound` — `2√ε−2√δ ≤ (2/√ε)k` for `0≤δ≤ε`, `ε−δ≤k` (the `k`-linear reflected-sliver converter).
+- `reflected_sliver_partial` — `∫ s in (u−ε)..c, (u−s)^{−1/2} = 2√ε − 2√(u−c)` (oriented additivity of the
+  banked `sliver_rpow_sub`).
+- `far_part_bound` — `|∫_{(u−ε)}^c D| ≤ C_far·h·(2√ε−2√(u−c))` (a.e. domination excluding the singular
+  endpoint via `ae_ne_point`, majorant integrability from `rpow_sub_intervalIntegrable`).
+- `integrated_split_sliver_bound` — ★★ THE ANALYTIC CORE: for any `D`, `0<ε,h,k`, `IntervalIntegrable D`,
+  and `{H_far (Ioo (u−ε) u): |D|≤C_far·h·(u−s)^{−1/2}, H_near (Icc u (u+h)): |D|≤2M, H_zero (Ioi (u+h)):
+  D=0}`, `|∫ s in (u−ε)..(u−ε+k), D| ≤ (2C_far/√ε + 2M/ε)·(h·k)`. 3-case split; far via far_part_bound+
+  far_sqrt_bound, near via `norm_integral_le_of_norm_le_const`, zero vanishes.
+- `mixed_second_diff_frozen_reduction_integrated` — ★ the J4-926 oriented-additivity collapse, but bounded
+  by an ARBITRARY integrated `Bnd` instead of the false pointwise `hdiff`.
+- `hcross_mixed_second_diff_split_bound` — ★★★ CAPSTONE: the exact live hCross binder shape
+  `|Δ² heatConvFrozen| ≤ (2C_far/√ε+2M/ε)·(|h|·|k|)` from the four interval-integrabilities + `{H_far,
+  H_near, H_zero}` on the inner τ-shift difference (composes core+wrapper; `|h||k|=hk` for `h,k>0`).
+- `integrated_split_sliver_bound_hyp_satisfiable` — non-vacuity with TEETH: continuous finite-support
+  `D:=max0(u+h−s)−max0(u−s)` (`u=0,ε=h=1,k=3`, case `ε+h<k`); the `(u−s)^{−1/2}` envelope machinery
+  genuinely exercised (`1 ≤ (−s)^{−1/2}` since `√(−s)≤1`), NOT `0≤0`.
+
+**How far it gets / honest status.** REPLACES J4-926's impossible pointwise `hdiff` with a TRUE integrated
+split — the correct reduction the cp794 menu asked for. `hCross` (for `h,k>0`) is now REDUCED to exactly
+`{H_far, H_near, H_zero}` on the concrete inner τ-shift difference: `H_near` (boundedness `|Φ|≤CW·Cf`) and
+`H_zero` (finite propagation `W(≤0)=0`) are cheap and true for the concrete witness; `H_far` (the
+F-Lipschitz `τ^{−1/2}` cancellation envelope for the CHART-COMPOSED concrete witness) remains the OPEN
+chart-CoV moment wall (J4-919/920 core, not yet assembled). Does NOT close hCross, and (per Sol) covers only
+the `h,k>0` quadrant. `hDuhamel`/`hDConv` remain carried on `{hCross (now ⟸ {H_far,H_near,H_zero}), hGpow,…}`;
+`hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.HCrossIntegratedSplit` 0 errors (8683 jobs); `lake build QIQTH.AxiomAudit`
+0 errors (10234 jobs); `#print axioms` std-3 ×7 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `d72e5090`, pushed. NOT `a₁ = R/6`.
