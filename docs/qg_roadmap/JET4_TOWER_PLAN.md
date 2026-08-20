@@ -10932,6 +10932,21 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-892 — b-tube compactness-assembly (piece iv) audit: the DECISIVE boundary obstruction PROVED — J4-889's cover route is boundary-unsatisfiable (commit `8bf5bed8`)
+
+**File** `QIQTH/BTubeCompactnessAssembly.lean` (new; no existing banked file edited). The piece-(iv) compactness assembly that would union J4-890/J4-891's per-point general-centre joint-`C²` inverse charts into the single open, in-gate, chart-`C²` cover `W` of the compact core-graph demanded by `onCoreGraphContinuity_of_chartC2_gate_cover` / `hbint_reduced_to_chartC2_gate_cover` (J4-889). **KEY FINDING — the cover route is JOINTLY UNSATISFIABLE at boundary base points; the assembly cannot be built for any `K` with a boundary.**
+
+**Deliverables.**
+- `proj_subset_interior_of_open_ingate` — purely topological: an OPEN `W` with `p.1∈K` for every `p∈W` has base projection `Prod.fst''W ⊆ interior K` (`isOpenMap_fst` + `interior_maximal`). So an OPEN in-gate `W` can only live over `interior K`.
+- `coreGraph_mem_diag` — for EVERY base `z₀∈K` (`0≤b`), the diagonal point `(z₀,z₀)` is a core-graph point, via the zero-velocity image `uniformFlowExp z₀ 0 = z₀` (`uniformFlowExp_zero`) with `(z₀,0)∈K×ˢclosedBall 0 b`. So the core-graph's base projection is ALL of `K`, boundary included.
+- ★★★ `chartC2_gate_cover_boundary_obstruction` — THE NO-GO: if `z₀∈K` but `z₀∉interior K` (a boundary base point), then there is NO open in-gate `W` covering the core-graph — covering `(z₀,z₀)` forces `z₀∈Prod.fst''W ⊆ interior K`. Uses ONLY clause (ii)'s `p.1∈K` conjunct (does not even need the `S`-gate or chart-`C²`).
+- `consumer_cover_boundary_obstruction` — a fortiori for the EXACT J4-889 bundle (adding the chart-`ContDiffOn ℝ 2` clause).
+- `boundary_base_point_exists` — NON-VACUITY: `closedBall 0 1 ⊆ Point(n+1)` is compact with the genuine boundary base point `Pi.single 0 1` (`interior(closedBall 0 1)=ball 0 1`, `‖Pi.single 0 1‖=1≮1`). So the obstruction bites on a REAL set.
+
+**⚠ HONEST VERDICT — hbint NOT closed by the cover route; boundary is the precise/only residual.** J4-889's `hcover` hypothesis is satisfiable ONLY when the core-graph lies over `interior K` (equivalently `K` open, hence for compact `K⊆ℝⁿ` with `n≥1`, `K=∅`). For every genuine (nonempty) confinement set the cover route is unsatisfiable at the boundary, so it does NOT discharge `hbint`. The INTERIOR part DOES assemble (J4-890/891 per-point charts + this file's projection lemma give a valid open in-gate joint-`C²` cover of the interior core-graph via a union — no finite subcover needed, since `ContDiffOn` on an open union follows from per-point `ContDiffAt`). The boundary is therefore the PRECISE and ONLY residual: the on-core-graph continuity at boundary base points must be reached by a route that does NOT require joint chart `C²` on an ambient OPEN neighbourhood of boundary points — e.g. the banked FIBERWISE `C²` (`flowBall_gateRadius_floor` / `reachableGate_concrete`, which holds over ALL of `K`) combined with joint continuity of `exp`. This is a near-miss caught: the "looks complete" cover assembly is structurally impossible as stated.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10199 jobs); `#print axioms` ×5 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `8bf5bed8`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
+
 ## J4-891 — general-center (nonzero-velocity) COHERENT inverse chart: invertibility of the joint exp derivative AWAY from v=0 (Task-E/F analogue) (commit `8e20030b`)
 
 **File** `QIQTH/GeneralCenterCoherentInverseChart.lean` (new; NS `QIQTH.ExpMap`; NO existing banked file edited).
