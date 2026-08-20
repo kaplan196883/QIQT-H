@@ -11314,3 +11314,46 @@ chk confirmed; `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `d7a8bedc`, pushed. NO O(√ε) rate (measurability/continuity
 reduction) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}.
 NOT `a₁ = R/6`.
+
+## J4-909 — LIVE capstone hDConv slot reduced OPAQUE→NAMED census (opaque→named wiring, parallel to J4-895) — commit `14ab146f`
+
+The `hDConv` analog of `HDuhamelLiveGateWired` (J4-895): the pure opaque→named LIVE wiring for the THIRD
+capstone carry. The LIVE order-1 capstone `trueKernel_diagonal_a1_eq_R6_residual_N1_reachAligned` carries
+`hDConv` as an OPAQUE `DifferentiableAt ℝ (fun w => heatConv H (leviSeries (heatOp g gi H)) w 0 0) t` in
+the RAW `gatedKernel`/`globalCutoffParametrixWitnessN` form. That `H` is DEFEQ (`rfl`, verified in-file
+via `gateForm_eq_vanVleckGatedWitness`) to `vanVleckGatedWitness g gi hChr hK S a b` — the exact kernel
+`HDConvGateThreading.hDConvSlot_AT_GATE` (J4-312) concludes at.
+
+**Sol (gpt-5.6-sol, high) consulted at go/no-go.** Confirmed: (a) build the opaque→named wiring exactly
+parallel to J4-895, stated in the capstone's OWN raw form (guarding the defeq), proved by
+`exact hDConvSlot_AT_GATE …`; (b) non-vacuous, worth banking as a wiring/API-alignment theorem (certifies
+exact elaboration against the LIVE capstone slot, freezes the interface, guards the raw-gated/witness
+defeq) — NOT a discharge of hDConv; (c) STOP after the wiring brick; the shared census binders are
+already discharged by J4-896..908 standalone theorems — compose later, not now. Also corrected the STALE
+characterization: the "four sliver carries hcubic/hgate/hdisp/hcenter" belong to the hCConv/MixedSliver
+line, NOT hDConv's residue.
+
+**What this lands.** NEW FILE `QIQTH/HDConvLiveGateWired.lean` (no banked file edited):
+`hDConv_live_gate_wired` states the conclusion in the capstone's OWN raw `gatedKernel` form and proves it
+by `exact hDConvSlot_AT_GATE …`, closing the previously-MISSING opaque→named step for hDConv on the LIVE
+capstone. Census = the ~130-binder union, propositionally IDENTICAL to `hDuhamel_live_gate_wired`'s MINUS
+the `hBoundaryLim` slot (unneeded for `DifferentiableAt` — the pointwise boundary limit is required only
+for hDuhamel's heat-operator identity). ⟹ the standalone J4-896..908 discharges (`hmassone`, `hEdom`, the
+`MemLapFull`/`MemAdjLo`/`MemAdjHi`/`MemECombine` interchange bundles, `hAdom`, `hWDom`, `hFzero`,
+`hAzero`, `hmod`, `hsup`, `hUfloor`, the four F2 inner-`s` measurability/continuity binders) apply VERBATIM
+to this census. Center-identity sub-leg bottoms out at the named geometry floor
+`RadialGaugeInterface.RadialNormalCoordinateGauge` + the base-point geodesic pullback bridge (J4-903), a
+recognized irreducible carry.
+
+**Honest residue of hDConv (re-verified from source this session).** {the ~130-binder shared census —
+its shared members ALREADY discharged by the banked J4-896..908 standalone theorems (same kernel, same
+propositions), not yet COMPOSED into this wrapper; its center-identity sub-leg reduced (J4-903) to the
+named floor `RadialNormalCoordinateGauge` + base-point pullback bridge}. Still genuinely open in the
+shared census: `hCross` (mixed second-difference bilinear Lipschitz, W5, no provider) and
+`boundD`/`hbdd`/`hbound` (C3ε dominator, DATA-still) — the SAME analytic residue flagged for hDuhamel.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10217 jobs); `#print axioms hDConv_live_gate_wired`
+std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom) + the `rfl` defeq `example` compiled;
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `14ab146f`, pushed. NO O(√ε) rate (pure wiring) ⟹ sympy-rate gate
+N/A. `a₁ = R/6` remains CONDITIONAL on {hDuhamel, hDConv, hCConv}. NOT `a₁ = R/6`.
