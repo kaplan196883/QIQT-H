@@ -28567,7 +28567,7 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryFullyClosed.sqrt_pow_mul_rpow_neg
 #print axioms QIQTH.HCompNearCarryFullyClosed.terminalVelAt_prefactor_sliver_bound
 
--- HCompNearCarryChartSurfaceWired (J4-881): ITEM (i) of hcomp's NEAR carry nb — the concrete kPrime
+-- HCompNearCarryChartSurfaceWired (J4-882): ITEM (i) of hcomp's NEAR carry nb — the concrete kPrime
 --   component wired through the MIXED normal form on the gate (J4-788 CLM-component identity ∘ J4-218
 --   on-gate mixed normal form, index roles swapped). Pure equality composition. NOT a₁=R/6.
 #print axioms QIQTH.HCompNearCarryChartSurfaceWired.kPrime_apply_single_on_gate_eq_mixedNormalForm

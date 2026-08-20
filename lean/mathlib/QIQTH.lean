@@ -4510,7 +4510,7 @@ import QIQTH.HCompNearCarryConcreteDischarge
 --   NOT a₁=R/6 (nb full closure still needs items (i)/(ii) chart-surface wiring; hcomp also blocked by the
 --   far carry's open hzmass wall).
 import QIQTH.HCompNearCarryFullyClosed
--- HCompNearCarryChartSurfaceWired (J4-881): ITEM (i) of hcomp's NEAR carry nb — the CONCRETE kPrime
+-- HCompNearCarryChartSurfaceWired (J4-882): ITEM (i) of hcomp's NEAR carry nb — the CONCRETE kPrime
 --   component wired through the MIXED Leibniz–Gaussian normal form, on the gate. Composes J4-788
 --   (KPrimeMixedPdBridge.kPrime_apply_single_eq_mixedPd: (kPrime … i t s x z)(eⱼ)=Levi·∂ⱼ∂ᵢH_G) with
 --   J4-218 (ChartJetHessianMixed.witnessMixed_gate_eq, index roles i/j swapped) ⟹ on the gate
