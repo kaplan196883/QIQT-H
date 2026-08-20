@@ -10932,6 +10932,22 @@ New file `QIQTH/HCompNearCarryChartSurfaceWired.lean` (std-3 ×1, no sorryAx, ra
 
 **Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10195 jobs); `#print axioms` ×7 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `f22f6308`, pushed. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched).
 
+## J4-899 — ABSTRACT-`g` `hAdom` + `hWDom` census binders DISCHARGED for the LIVE order-1 capstone (commit `7dfdd0cd`)
+
+**File** `QIQTH/HAdomHWDomFromConcreteDominations.lean` (new; NO existing banked file edited).
+
+**THE ADVANCE.** Continues the J4-896/897/898 find-and-wire pattern for the two Gaussian-domination binders the LIVE order-1 capstone `HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL` carries as RAW hypotheses — `hAdom` (the base-point-varying amplitude domination, source `:320-322`) and `hWDom` (the frozen `p=0` window slice, source `:365-366`) — both shared by `hDuhamel` AND `hDConv` (the `hDaLimLU` / frozen-moving census). A bounded scan flagged that the banked GENERIC recenter-of-domination `ConcreteDominations.exists_D1_constants_of_gateSqControl` (`:438-449`, abstract in `Θ,u,a,b,W,K,S`) + its gate lemma `gateSqControl_of_flowBall` (`:458-469`) had only EVER been instantiated at `g:=curvedRNCMetric K` (`CurvedRNCBaseWitnessDomAdom.curvedRNC_baseWitness_dom_adom`, J4-535), never abstractly — despite producing the EXACT abstract-`g` census `hAdom` shape.
+
+**⭐ KEY FINDINGS (character-checked against source, not trusted from the scan).**
+* **Defeq object match confirmed by `rfl`.** `exists_D1_constants_of_gateSqControl` concludes at `gatedKernel K S (globalCutoffParametrixWitnessN 1 Θ u a b W)`. The live census kernel `vanVleckGatedWitness g gi hChr hK S a b` is DEFINITIONALLY that (`ConvApproximants.lean:165-166`) at `Θ:=vanVleck g`, `u:=transportCoeff (transportOp (vanVleck g) g gi)`, `W:=uniformInverseChart g gi hChr hK`. Verified in-file by `vanVleckGatedWitness_eq_gatedKernel := rfl` — mirroring J4-897's `rfl` discipline. So the D1 conclusion at those data yields the census `hAdom` binder with NO adapter (only a quantifier reorder `∀ τ p q, 0<τ` → `∀ τ, 0<τ, ∀ p q`).
+* **`hWDom` = the `p=0` window slice.** At `p=0`, `gaussDdim (3/2·τ) (0−z) = gaussDdim (3/2·τ) z` (`WidthAdapters.gaussDdim_neg` evenness) and the affine amplitude `A₀+A₁τ ≤ A₀+A₁τ₀` on `(0,τ₀]`, giving the exact `hWDom` binder at `CW:=(A₀+A₁τ₀)·√(3/2)ⁿ`, `lam:=3/2`. The ABSTRACT-`g` version of `CurvedRNCBaseWitnessDomAdom.lean:156-169`; introduces NO further carry.
+
+**DELIVERABLES (std-3 ×3):** `vanVleckGatedWitness_eq_gatedKernel` (the `rfl` defeq check); `hAdom_from_gateSqControl` (the abstract-`g` `hAdom` ∃-shape, D1 conclusion reordered into census form); `hAdom_hWDom_from_gateSqControl` (the bundled `hAdom` ∧ `hWDom` ∃-shape, generalizing the curved J4-535 composition to abstract `g`).
+
+**WHAT THIS DOES / DOES NOT DO.** REDUCES both Gaussian-domination census binders from opaque raw hypotheses to named SATISFIABLE carries: `hgate : GateSqControl K S (uniformInverseChart g gi hChr hK)` (the gate square-comparison, discharged for the concrete flow-ball gate by `gateSqControl_of_flowBall`) + the mainline-standard amplitude smoothness `hw`. Like J4-896/897/898 these are reductions-to-satisfiable-carries, NOT zero-carry closures; neither carry is the conclusion. Benefits BOTH `hDuhamel` and `hDConv` (shared census). `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10207 jobs); `#print axioms` ×3 std-3 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK; `grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `7dfdd0cd`, pushed. NOT `a₁ = R/6`.
+
 ## J4-898 — ABSTRACT-`g` INTERCHANGE-BUNDLE census binders DISCHARGED for the LIVE order-1 capstone (commit `d941d5ab`)
 
 **File** `QIQTH/InterchangeBundlesFromExisting.lean` (new; NO existing banked file edited).
