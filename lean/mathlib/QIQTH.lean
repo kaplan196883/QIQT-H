@@ -4808,3 +4808,16 @@ import QIQTH.GeneralCenterJointC2Flow
 -- jointly ContDiffAt ℝ 2 at (z₀,exp z₀ v₀) — invertibility DERIVED (r₀ folds flow/germ radii + 1/(C_D+1)
 -- Neumann threshold), reconciled via germ uniqueness. r₀>0 so NON-VACUOUS. std-3 ×2. NOT a₁=R/6.
 import QIQTH.GeneralCenterCoherentInverseChart
+
+-- BTubeCompactnessAssembly: J4-892 — the compactness-assembly (piece iv) audit of J4-889's b-tube cover
+-- route, with the DECISIVE boundary obstruction PROVED. proj_subset_interior_of_open_ingate: an OPEN
+-- in-gate W (∀p∈W, p.1∈K) has Prod.fst''W ⊆ interior K (isOpenMap_fst + interior_maximal).
+-- coreGraph_mem_diag: every base z₀∈K gives a core-graph diagonal point (z₀,z₀) (via exp z₀ 0 = z₀), so
+-- the core-graph's base projection is ALL of K. chartC2_gate_cover_boundary_obstruction (★★★ NO-GO): a
+-- boundary base point z₀∈K\interior K makes the J4-889 open in-gate cover of the core-graph IMPOSSIBLE
+-- (covering (z₀,z₀) forces z₀∈interior K). consumer_cover_boundary_obstruction: a fortiori for the full
+-- bundle with chart-C². boundary_base_point_exists: NON-VACUITY — closedBall 0 1 ⊆ Point(n+1) has the
+-- boundary base point Pi.single 0 1. VERDICT: J4-889's cover is satisfiable ONLY over interior K (⟹ K=∅
+-- for compact K⊆ℝⁿ); boundary is the precise/only residual; hbint NOT closed by the cover route. std-3 ×5.
+-- NOT a₁=R/6.
+import QIQTH.BTubeCompactnessAssembly

@@ -28951,4 +28951,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.generalCenter_coherent_joint_chart
 #print axioms QIQTH.ExpMap.uniformInverseChart_jointContDiffAt_generalCenter
 
+-- J4-892: BTubeCompactnessAssembly — compactness-assembly (piece iv) audit of J4-889's b-tube cover, with
+-- the DECISIVE boundary obstruction PROVED. proj_subset_interior_of_open_ingate: OPEN in-gate W has
+-- Prod.fst''W ⊆ interior K. coreGraph_mem_diag: every base z₀∈K gives core-graph point (z₀,z₀) via
+-- exp z₀ 0 = z₀. chartC2_gate_cover_boundary_obstruction (★★★ NO-GO): boundary base z₀∈K\interior K ⟹ NO
+-- open in-gate cover of the core-graph (covering (z₀,z₀) forces z₀∈interior K). consumer_cover_boundary_
+-- obstruction: a fortiori for the full chart-C² bundle. boundary_base_point_exists: NON-VACUITY via
+-- closedBall 0 1 ⊆ Point(n+1) boundary point Pi.single 0 1. J4-889 cover satisfiable ONLY over interior K;
+-- hbint NOT closed by cover route; interior assembles, boundary is the precise residual. std-3 ×5. NOT a₁=R/6.
+#print axioms QIQTH.BTubeCompactnessAssembly.proj_subset_interior_of_open_ingate
+#print axioms QIQTH.BTubeCompactnessAssembly.coreGraph_mem_diag
+#print axioms QIQTH.BTubeCompactnessAssembly.chartC2_gate_cover_boundary_obstruction
+#print axioms QIQTH.BTubeCompactnessAssembly.consumer_cover_boundary_obstruction
+#print axioms QIQTH.BTubeCompactnessAssembly.boundary_base_point_exists
+
 end QIQTH.AxiomAudit
