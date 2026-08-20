@@ -25,6 +25,7 @@ import QIQTH.HbintMeasurabilityNullFrontier
 import QIQTH.HbintInteriorContinuityRoute
 import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
+import QIQTH.HDuhamelF2LiveWired
 
 namespace QIQTH.AxiomAudit
 
@@ -29149,5 +29150,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbintInteriorTubeCoverRoute.interiorFieldHessianNorm_continuousOn
 #print axioms QIQTH.HbintInteriorTubeCoverRoute.hbint_interior_via_tube_cover_of_bLtR0
 #print axioms QIQTH.HbintInteriorTubeCoverRoute.interior_residual_of_bLtR0_nonvacuous
+
+-- HDuhamelF2LiveWired — J4-908: the FOUR F2 inner-s-measurability/continuity census binders of the LIVE
+-- hDuhamel capstone (hMeasFII/hInnerCont/hFmeas_d/hF'meas_d at F = leviSeries(heatOp g gi W)) DISCHARGED to
+-- ContDomWindow.f2Pack_concrete_v3 (J4-245/F2CarryDischarge2/ContDomWindow stack) and its named carries.
+-- subst hFeq matches f2Pack_concrete_v3's conclusion EXACTLY; single exact. Of the carries, hAdom/hFdom(=hBdom)
+-- /hUT are ALREADY LIVE census binders; only {hcar,hmeas,hcont} genuinely-new residual. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HDuhamelF2LiveWired.hDuhamel_F2_live_wired
 
 end QIQTH.AxiomAudit

@@ -4978,3 +4978,9 @@ import QIQTH.HDuhamelBoundaryModulusUniform
 -- hbint field GIVEN b<r₀ (r₀:=min rTube (min ρ₀ (1/(C_D+1)))>0). b<r₀ carried OPEN, not established. std-3 ×5.
 -- hbint REDUCED to b<r₀ + elementary carries, NOT closed. NOT a₁=R/6.
 import QIQTH.HbintInteriorTubeCoverRoute
+-- HDuhamelF2LiveWired — J4-908: DISCHARGES the FOUR F2 inner-s-measurability/continuity census binders of
+-- the LIVE hDuhamel capstone (hMeasFII/hInnerCont/hFmeas_d/hF'meas_d, at F = leviSeries(heatOp g gi W))
+-- from opaque assembled-∫-measurability to the ALREADY-BANKED std-3 ContDomWindow.f2Pack_concrete_v3 and
+-- its named F2 carries {hΘc/hΘne/huc, hVmap0, hKSmeas, hcar, hLeviJoint, hBcont, hUpos/hUT, hAdom(=census),
+-- hBdom(=census hFdom), hmeas, hcont}. Route: subst hFeq → single exact. std-3. NOT a₁=R/6.
+import QIQTH.HDuhamelF2LiveWired
