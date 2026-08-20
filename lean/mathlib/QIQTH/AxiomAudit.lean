@@ -28820,6 +28820,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HZMassLeviBaseEnvelope.hzmass_of_peak_BF_gaussian2s_BL
 #print axioms QIQTH.HZMassLeviBaseEnvelope.hzmass_gaussian2s_split_nonvacuous
 
+-- J4-886: HZMassCappedWindowClosed — the ELEMENTARY closure of the hzmass matched-power slot on the CAPPED
+-- window, discharging the FINDING-C (t−s)⁻¹-rate wall (J4-883). CORRECTIVE FINDING: hzmass is quantified over
+-- s∈uIoc 0 (t−epsSeq m), εₘ=1/(m+1)>0, so t−s≥εₘ>0 on the WHOLE window — the divergent s→t limit FINDING C
+-- feared is OUT OF SCOPE. hpow_capped: a UNIFORM bound Ppk·CB≤M discharges the matched power at C:=M·t
+-- (t·(t−s)⁻¹≥1, monotone reciprocal). hzmass_capped_window_closed: feeds hpow_capped into the J4-882 width-2s
+-- split, FULLY closing hzmass at C:=M·t given only a uniform window bound. hzmass_capped_window_gaussPeak: the
+-- CONCRETE FINDING-C shape Ppk=gaussDdim(t−s)0·P, CB=C_L closes with explicit m-dep M=gaussDdim εₘ 0·P·C_L
+-- (peak capped at εₘ via gaussDdimPeak_antitone_width). std-3. NOT a₁=R/6.
+#print axioms QIQTH.HZMassCappedWindowClosed.hpow_capped
+#print axioms QIQTH.HZMassCappedWindowClosed.hzmass_capped_window_closed
+#print axioms QIQTH.HZMassCappedWindowClosed.gaussDdimPeak_antitone_width
+#print axioms QIQTH.HZMassCappedWindowClosed.hzmass_capped_window_gaussPeak
+#print axioms QIQTH.HZMassCappedWindowClosed.hzmass_capped_window_nonvacuous
+
 -- J4-868: BFGaussianEnvelopeClosed — the GAUSSIAN-PEAK verdict for BF + the uniform-in-z NO-GO.
 -- gaussDdim_peak_ratio: gaussDdim t 0=exp((∑(v k)²)/(4t))·gaussDdim t v (exact peak/point ratio).
 -- fieldHessian_peak_dominator_of_chart_dominator: the PEAK step (chart Gaussian→z-uniform peak, Poly≥0).

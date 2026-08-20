@@ -4695,6 +4695,17 @@ import QIQTH.HZMassPeakGaussianSplit
 -- NOT a₁=R/6.
 import QIQTH.HZMassLeviBaseEnvelope
 
+-- HZMassCappedWindowClosed: J4-886 — the ELEMENTARY closure of the hzmass matched-power slot on the CAPPED
+-- window, discharging the FINDING-C (t−s)⁻¹-rate wall (J4-883). CORRECTIVE FINDING: FINDING C examined the
+-- WRONG LIMIT — hzmass is quantified over s∈uIoc 0 (t−epsSeq m) with epsSeq m=1/(m+1)>0, so t−s≥εₘ>0 on the
+-- WHOLE window; the divergent s→t limit is OUT OF SCOPE. hpow_capped: on the capped window a UNIFORM bound
+-- Ppk·CB≤M discharges the matched power at C:=M·t (M≤(M·t)(t−s)⁻¹ since t·(t−s)⁻¹≥1, monotone reciprocal).
+-- hzmass_capped_window_closed: feeds hpow_capped into the J4-882 width-2s split, FULLY closing hzmass at
+-- C:=M·t given only a uniform window bound Ppk·CB≤M. gaussDdimPeak_antitone_width: gaussDdim w 0 antitone in
+-- w. hzmass_capped_window_gaussPeak: the CONCRETE FINDING-C shape Ppk=gaussDdim(t−s)0·P, CB=C_L closes with
+-- explicit m-dep M=gaussDdim εₘ 0·P·C_L (peak capped at εₘ). std-3. NOT a₁=R/6.
+import QIQTH.HZMassCappedWindowClosed
+
 -- BFGaussianEnvelopeClosed: J4-868 — the GAUSSIAN-PEAK verdict for BF, closing the compact-gate-sup loop
 -- of hFd AND resolving the uniform-in-z subtlety of the step-4 target BF≤C·gaussDdim(t−s) z. The gate
 -- confines the chart coord uniformInverseChart z p to a z-INDEPENDENT ball, so the only z-uniform bound
