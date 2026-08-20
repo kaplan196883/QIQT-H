@@ -11507,3 +11507,59 @@ the honest walls are unchanged. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hD
 (propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK;
 `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `830f6b69`,
 pushed. NOT `a₁ = R/6`.
+
+## J4-914 — DEEPER wire of the J4-898 interchange bundles: MemAdjLo/MemLapFull underlying hyps reduced to primitive crude-envelope + RNC-gauge + `1≤n` carries (commit `754771a7`)
+
+**File** `QIQTH/InterchangeBundlesDeeperWired.lean` (new; NO existing banked file edited).
+
+**Task.** Trace each of J4-898 `InterchangeBundlesFromExisting`'s four provider citations
+(`MemAdjHiSliver.hII_hi_from_sliver`, `CappedAdom2Audit.hII_lo_from_capped` /
+`.memLapFull_from_pairing_dominations`, `DaLimCensusRecon.memECombine_of_data`) back to source, re-verify
+the EXACT underlying hypothesis lists, cross-reference against this session's discharges, and find-and-wire
+whatever composes.
+
+**RE-VERIFIED underlying hyp lists (from source; provider signatures match the `_live` wrappers EXACTLY —
+no hidden hyps).**
+- §1 `memAdjHi` ← `hII_hi_from_sliver`: `{hUT, hεU, hSecCont, hBcont, Cpair/hCpair, hGpow (τ⁻¹ᐟ² pairing bound)}`.
+- §2 `memAdjLo` ← `hII_lo_from_capped`: `{hwA2/hCA2c/hwF/hCF/hUpos/hUT, hAdom2cap (per-m capped 2nd-deriv
+  Gaussian env), hFdom (Levi width-wF dom), hFzero, hmeas (slice AESM)}`.
+- §3 `memLapFull` ← `memLapFull_from_pairing_dominations`: §2's + `{hgi (MemGaugeGi), hΓ (MemGaugeGamma),
+  hInter (MemInterchange), hmeas2Lo, hII_hi (MemAdjHi = §1 output), D0/D1/hbnd (√ε sliver amplitude),
+  hPd2conv (atomic pd∘pd Tendsto)}`.
+- §4 `memECombine` ← `memECombine_of_data`: `{hDa/hLap (DaTrunc/LapTrunc ∫∫ representations), hLapZ/hEZ
+  (fibrewise Integrable), hLapS/hES (IntervalIntegrable)}`.
+
+**FIND (banked providers located for the ASSEMBLED underlying hyps).**
+- `hAdom2cap` ← `CappedAdom2Audit.hAdom2_capped_family_of_crude` from the crude `τ⁻¹·gaussDdim` envelope
+  `hcrude` (second_domination class; canonical constant `CA2c m := Ccrude·(epsSeq m)⁻¹`).
+- `hFzero` ← `DaLimEasyTranche.hFzero_concrete` (structural Levi vanishing; needs only `1 ≤ n`).
+- `hΓ` ← `DaLimCensusRecon.memGaugeGamma_of_hdg0` (from the RNC first-derivative gauge `∂g(0)=0`).
+- `hgi` ← `DaLimCensusRecon.memGaugeGi_of_geometry` — **DELIBERATELY NOT WIRED**: its `hframeK`
+  (flat-metric-on-`K`) is the known flat-on-`K` vacuity landmine (memory `qiqth_jet4_tower_complete`)
+  once `hmassone` re-enters downstream. `hgi` kept as honest carry (gpt-5.6-sol high go/no-go this session).
+- `hFdom` ← `EveryCeilingFamilies.hFdomEvery_from_dataLevi` exists but yields an EXISTENTIAL `∃wF CF` per
+  `Tc` + needs `tripleHEmeas`/`hpkgBound` — more plumbing; left as an honest carry this increment.
+- `hBcont` (§1): `MovingCorrAssembly.leviSlice_jointContinuousOn_of_termwise` gives continuity on
+  `Icc×closedBall` (COMPACT) but §1 needs `Ioc 0 T×univ` — domain MISMATCH, NOT a direct provider.
+
+**LANDED (std-3 ×2).** `memAdjLo_live_crude`, `memLapFull_live_crude` — the §2/§3 census binders threaded
+through J4-898's `memAdjLo_live`/`memLapFull_live` with `{hAdom2cap, hFzero, hΓ}` replaced by their strictly
+more primitive antecedents `{hcrude, 1≤n, hdg0}`. Sol-mandated CA2c handling: `CA2c` instantiated internally
+to the canonical `fun m => Ccrude·(epsSeq m)⁻¹` (NOT retained as an arbitrary `ℕ→ℝ` — nonneg alone can't
+imply domination), nonnegativity from `epsSeq_pos`. `hII_hi` kept as honest carry (NOT recursed into
+`memAdjHi_live`, so §1's `hGpow`/`hSecCont` are not dragged in).
+
+**Cross-reference verdict.** Of the interchange-bundle underlying hyps: `hFzero` (⟵ `1≤n`), `hAdom2cap`
+(⟵ crude env), `hΓ` (⟵ RNC gauge), `hgi` (provider exists, avoided for vacuity) are the reducible/provided
+ones; the GENUINELY-HARD residuals with NO clean provider stay VISIBLE as honest carries: `hGpow`
+(moment-aware `τ⁻¹ᐟ²` pairing — the WideSliverBoundary target), `hbnd` (√ε matched-sliver amplitude),
+`hPd2conv` (atomic pd∘pd convergence), `hInter` (MemInterchange), `hFdom`/`hmeas` (kept), and the §4 E-comb
+representation/integrability facts `{hDa,hLap,hLapZ,hEZ,hLapS,hES}` (Fubini/pairing; no provider located).
+This is a dependency-frontier reduction (opaque assembled Gaussian-domination/gauge packages → primitive
+crude-envelope/RNC-gauge/`1≤n`), NOT a new analytic result and NOT a logical weakening.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10221 jobs); `#print axioms` ×2 std-3
+(propext/Classical.choice/Quot.sound, no sorryAx/custom, no `sorry`); `axiom_budget_check.sh` raw 0/OK;
+`git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `754771a7`,
+pushed. No `O(√ε)` rate (domination/gauge/structural wiring) ⟹ sympy-rate gate N/A. `a₁ = R/6` remains
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}` (untouched). NOT `a₁ = R/6`.
