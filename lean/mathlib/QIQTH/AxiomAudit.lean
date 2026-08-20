@@ -29261,4 +29261,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.WitnessTimeDerivEnvelope.witnessTimeDeriv_domination_global
 #print axioms QIQTH.WitnessTimeDerivEnvelope.witnessTimeDeriv_domination_hyp_satisfiable
 
+-- WitnessBoundDHpardiffWired — J4-918: WIRES the J4-917 crude time-derivative envelope discharge into the
+-- LIVE census consumers boundD (J4-911, derivDom_boundD_of_crude) and hpardiff (J4-912/916,
+-- witnessHZslice_of_crudeEnv → hpardiff_of_zTimeDeriv) for the CONCRETE gated van-Vleck witness. τ-cap
+-- alignment: U bounded by T ⟹ every per-(m,u) cap u+εₘ ≤ T+1 (epsSeq_antitone), so ONE witness domination
+-- at global cap T+1 (Cwit, wL=4·D.lam) covers all windows; gaussDdim_zero_sub converts z↔0−z. boundD FULLY
+-- closed; hpardiff's inner hZ built per-slice (s≤0 vanish by hFzero; s>0 window [εₘ/2,u+εₘ]). Remaining
+-- named carries: {hAmp0,hCfield} + census Levi {hFdom,hFzero} + meas/base-int piles {hAmeas,hDmeas,hbase}.
+-- Non-vacuity EXHIBITED at singleton gate K={0}. std-3 ×4. NOT a₁=R/6 (CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}; hard residual = hCross).
+#print axioms QIQTH.WitnessBoundDHpardiffWired.epsSeq_le_one
+#print axioms QIQTH.WitnessBoundDHpardiffWired.witnessBoundD_wired
+#print axioms QIQTH.WitnessBoundDHpardiffWired.witnessHpardiff_wired
+#print axioms QIQTH.WitnessBoundDHpardiffWired.witnessHpardiff_wired_hyp_satisfiable
+
 end QIQTH.AxiomAudit

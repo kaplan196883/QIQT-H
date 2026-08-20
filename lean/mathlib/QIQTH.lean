@@ -5060,3 +5060,15 @@ import QIQTH.HZDataFromCrudeEnv
 -- WideAmplitudeData.hAmp0 class (no hTimeEnv 2nd-jet carry). _global for ∀z; non-vacuity EXHIBITED at nonempty
 -- singleton gate K={0}. std-3 ×4. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.WitnessTimeDerivEnvelope
+
+-- WitnessBoundDHpardiffWired — J4-918: WIRES the J4-917 crude time-derivative envelope discharge
+-- (witnessTimeDeriv_domination_global) into the LIVE census consumers boundD (J4-911) and hpardiff
+-- (J4-912/916) for the CONCRETE gated van-Vleck witness. τ-cap alignment: U bounded by T (hUT), every
+-- per-(m,u) cap u+εₘ ≤ T+1 (epsSeq_antitone, εₘ≤ε₀=1), so ONE witness domination at the global cap T+1
+-- (Cwit, wL=4·D.lam) covers all windows; centring converted via gaussDdim_zero_sub (evenness). boundD
+-- FULLY closed via derivDom_boundD_of_crude (Ccr:=Cwit, wL:=4·lam, CF:=C_L, wF:=2); hpardiff via
+-- witnessHZslice_of_crudeEnv → hpardiff_of_zTimeDeriv (s≤0 slices vanish by hFzero, s>0 window [εₘ/2,u+εₘ]).
+-- Remaining named carries: {hAmp0, hCfield} (mild zeroth-amp sups) + census Levi {hFdom,hFzero} + z-slice
+-- meas/base-int piles {hAmeas,hDmeas,hbase}. Non-vacuity EXHIBITED at singleton gate K={0}. std-3 ×4.
+-- NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}; hard residual = hCross, untouched).
+import QIQTH.WitnessBoundDHpardiffWired
