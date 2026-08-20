@@ -5168,6 +5168,18 @@ import QIQTH.HCrossMixedSecondDiffReduction
 -- TRUE integrated one; does NOT close hCross (concrete H_far cancellation envelope = still-open chart-CoV
 -- τ^{−1/2} wall). NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossIntegratedSplit
+-- HCrossFarDerivBridge — the mean-value (FTC) bridge reducing J4-927's OPEN H_far carry to the GENERATOR
+-- IDENTITY. gpt-5.6-sol (high) verified: J4-924's two_term_census_bound_uniform is the correct RHS
+-- envelope (∂_τ gaussDdim = the census weight, bounded by Cpair·τ^{−1/2}) but does NOT compose to supply
+-- H_far directly — it lacks the h factor and the generator identity ∂_aΦ=census (chart CoV = opaque wall).
+-- This file discharges the ROUTINE finite-difference step: abs_sub_le_mul_of_hasDerivAt (a uniform
+-- derivative bound K on [u,u+h] gives |f(u+h)−f u|≤K·h, via Mathlib's convex MVT), hfar_of_hasDerivAt
+-- (reduces the EXACT H_far shape to {hderiv: generator identity, hgbound: per-shift census bound}, using
+-- (a−s)^{−1/2}≤(u−s)^{−1/2}), hcross_split_bound_of_hderiv (J4-927's capstone with H_far replaced by the
+-- generator identity). Non-vacuous with TEETH (genuine HasDerivAt of sin, and of the cos·Gaussian
+-- convolution Φ(a,s)=C·cos(a−s) with ∂_aΦ=−C·sin(a−s)). Localizes the hCross wall (h,k>0) to hderiv;
+-- does NOT close hCross. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HCrossFarDerivBridge
 
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating

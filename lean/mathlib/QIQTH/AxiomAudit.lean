@@ -36,6 +36,7 @@ import QIQTH.GaussTauTraceChartTransported
 import QIQTH.GaussTauTraceChartDetFactor
 import QIQTH.HCrossMixedSecondDiffReduction
 import QIQTH.HCrossIntegratedSplit
+import QIQTH.HCrossFarDerivBridge
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 
@@ -29475,5 +29476,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.mixed_second_diff_frozen_reduction_integrated
 #print axioms QIQTH.HeatResidualBound.hcross_mixed_second_diff_split_bound
 #print axioms QIQTH.HeatResidualBound.integrated_split_sliver_bound_hyp_satisfiable
+
+-- ## J4-928 (HCrossFarDerivBridge): the mean-value (FTC) bridge reducing J4-927's OPEN H_far carry to the
+-- GENERATOR IDENTITY ∂_aΦ=g. gpt-5.6-sol (high) go/no-go: J4-924's two_term_census_bound_uniform IS the
+-- correct RHS envelope (its weight ∑ᵢ(zᵢ²/4τ²−1/2τ)·gaussDdim = ∂_τ gaussDdim EXACTLY, so it bounds the
+-- τ-derivative census integral by Cpair·τ^{−1/2}) but does NOT compose to supply H_far directly: it lacks
+-- the h factor (needs the finite-difference step Φ(u+h,s)−Φ(u,s)=∫_u^{u+h}∂_aΦ da) AND the generator
+-- identity ∂_aΦ=census (differentiation-under-∫ + chart CoV = the opaque chart wall). This file discharges
+-- the ROUTINE finite-difference step and threads it: abs_sub_le_mul_of_hasDerivAt (uniform derivative
+-- bound K on [u,u+h] ⟹ |f(u+h)−f u|≤K·h, via Convex.norm_image_sub_le_of_norm_hasDerivWithin_le),
+-- hfar_of_hasDerivAt (the EXACT H_far shape from {hderiv, hgbound}, envelope monotone via (a−s)^{−1/2}≤
+-- (u−s)^{−1/2} for a≥u), hcross_split_bound_of_hderiv (J4-927's capstone with H_far REPLACED by hderiv).
+-- Non-vacuous with TEETH: HasDerivAt sin cos (K=1 on [0,π]); the cos·Gaussian convolution
+-- Φ(a,s)=C·cos(a−s), C:=∫exp(−‖z‖²) extracted by unconditional integral_const_mul, ∂_aΦ=−C·sin(a−s),
+-- census bound |sin|·|C|≤|C|·(−s)^{−1/2}. Localizes the whole hCross wall (h,k>0) to the generator
+-- identity hderiv; does NOT close hCross (hderiv = chart CoV + diff-under-∫ still unbuilt). std-3 ×5.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.abs_sub_le_mul_of_hasDerivAt
+#print axioms QIQTH.HeatResidualBound.hfar_of_hasDerivAt
+#print axioms QIQTH.HeatResidualBound.hcross_split_bound_of_hderiv
+#print axioms QIQTH.HeatResidualBound.abs_sub_le_mul_of_hasDerivAt_hyp_satisfiable
+#print axioms QIQTH.HeatResidualBound.hfar_of_hasDerivAt_hyp_satisfiable
 
 end QIQTH.AxiomAudit
