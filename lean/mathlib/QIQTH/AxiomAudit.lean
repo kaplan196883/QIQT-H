@@ -27,6 +27,7 @@ import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
+import QIQTH.MixedEnvelopeAssembly
 
 namespace QIQTH.AxiomAudit
 
@@ -29196,5 +29197,18 @@ namespace QIQTH.AxiomAudit
 -- AE quantifier innermost (∀ᵐ z, ∀ c'∈V). Non-vacuity EXHIBITED (A≡0,F≡0). std-3 ×2. NOT a₁=R/6.
 #print axioms QIQTH.HpardiffZTimeDeriv.hpardiff_of_zTimeDeriv
 #print axioms QIQTH.HpardiffZTimeDeriv.hpardiff_of_zTimeDeriv_hyp_satisfiable
+
+-- MixedEnvelopeAssembly — J4-913: the FIRST full CONSTRUCTION of a MixedDirectionsFieldHessianEnvelope
+-- term (J4-843, the FOURTH hCConv hypothesis). mixedEnvelope_of_named_carries composes the banked per-field
+-- reductions hFd (J4-868 witnessFieldHessian_hFd_of_peak_dominator), hkint (J4-875), hzmass (J4-886, at
+-- C=M·t) into the ACTUAL structure, proving the five field reductions RECONCILE at ONE consistent pair
+-- BL s z:=CB s·gaussDdim(2s) z, BF s z:=⨆x'‖fderiv(∂ᵢH)‖, C:=M·t. Reduces the whole fourth hypothesis to
+-- the flat carry list {hMnn,hepspos,hCBnn,hPpknn,hPCbound, hLevi(⟸hEmeas), hcpt/hpeak, hbint(⟸b<r₀),
+-- hmeas, hBFpeak} (hBLnn/hBLgauss built internally from hCBnn). NON-VACUITY: mixedEnvelope_assembly_
+-- nonvacuous builds the term at the empty gate (leviSeries_emptyGate_eq_zero: witness≡0⟹heatOp≡0⟹leviSeries
+-- ≡0 via iterE_zero_eq_zero; fderiv≡0). CLOSES NONE of the named carries. std-3 ×3. NOT a₁=R/6.
+#print axioms QIQTH.MixedEnvelopeAssembly.leviSeries_emptyGate_eq_zero
+#print axioms QIQTH.MixedEnvelopeAssembly.mixedEnvelope_of_named_carries
+#print axioms QIQTH.MixedEnvelopeAssembly.mixedEnvelope_assembly_nonvacuous
 
 end QIQTH.AxiomAudit

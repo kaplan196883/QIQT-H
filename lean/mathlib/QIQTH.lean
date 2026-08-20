@@ -5002,3 +5002,16 @@ import QIQTH.DerivDomLowerCapped
 -- (the differentiability sibling of the bound hAcrude — carried, NOT discharged)}. AE quantifier innermost.
 -- Non-vacuity EXHIBITED (A≡0,F≡0). std-3 ×2. NOT a₁=R/6.
 import QIQTH.HpardiffZTimeDerivReduction
+-- MixedEnvelopeAssembly — J4-913: the FIRST full CONSTRUCTION of a MixedDirectionsFieldHessianEnvelope
+-- term (J4-843, the FOURTH hCConv hypothesis). Composes the banked per-field reductions — hFd (J4-868
+-- witnessFieldHessian_hFd_of_peak_dominator), hkint (J4-875 hkint_reduces_to_hbint_concrete), hzmass
+-- (J4-886 hzmass_capped_window_closed at C=M·t) — into the ACTUAL structure, proving the five field
+-- reductions RECONCILE at ONE consistent pair: BL s z := CB s·gaussDdim(2s) z, BF s z := ⨆x'‖fderiv(∂ᵢH)‖,
+-- C := M·t. mixedEnvelope_of_named_carries reduces the whole fourth hypothesis to the FLAT carry list
+-- {hMnn,hepspos,hCBnn,hPpknn,hPCbound, hLevi(⟸hEmeas,J4-883§A), hcpt/hpeak(J4-868 gate-geom), hbint(⟸b<r₀,
+-- J4-907), hmeas(J4-841), hBFpeak(J4-868 peak)} — deriving hFd/hkint/hzmass, threading hLevi/hbint. hBLnn/
+-- hBLgauss built internally from hCBnn. NON-VACUITY: mixedEnvelope_assembly_nonvacuous constructs the
+-- structure at the empty gate S:=∅ (leviSeries_emptyGate_eq_zero: witness≡0⟹heatOp≡0⟹leviSeries≡0 via
+-- iterE_zero_eq_zero; fderiv≡0 via J4-eqZero). CLOSES NONE of the named carries — proves they SUFFICE
+-- jointly to build the term. std-3 ×3. NOT a₁=R/6.
+import QIQTH.MixedEnvelopeAssembly
