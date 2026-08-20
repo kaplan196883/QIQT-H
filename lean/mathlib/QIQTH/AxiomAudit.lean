@@ -28883,4 +28883,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FieldHessianJointContinuityClosed.hbint_concrete_reduced_to_jointC1
 #print axioms QIQTH.FieldHessianJointContinuityClosed.jointC1_carry_nonvacuous
 
+-- J4-887: WitnessFieldDerivJointC1FromTube — the CLIMB-ONE-DERIVATIVE-UP bridge from J4-884's abstract-K
+-- joint C² of uniformInverseChart near the diagonal to the JOINT C¹ of the field-derivative kernel
+-- witnessFieldDeriv (the object hbint, J4-878, reduced to). partialFDeriv_jointContDiffOn: the general
+-- engine (C¹ analog of J4-878's C⁰ partialFDeriv_norm) — ContDiffOn ℝ 2 Ψ on open U ⟹ partial-in-y fderiv
+-- ContDiffOn ℝ 1. chartFieldJacobianComponent_jointContDiffOn: chart field-jet joint C¹ from joint chart C².
+-- witnessFieldDeriv_smoothForm_jointContDiffOn: the on-gate gate-chain SMOOTH FORM (= on-gate
+-- witnessFieldDeriv, via witnessFieldDeriv_gateChain_eq) jointly C¹ from joint chart C². TUBE CAPSTONE
+-- witnessFieldDeriv_smoothForm_jointContDiffOn_tube: feeds uniformInverseChart_jointContDiffOn_tube (J4-884)
+-- ⟹ CONCRETE joint C¹ on an open tube around the interior diagonal for abstract K. onGate variant = the
+-- honest conditional reduction of hbint's residual. partialFDeriv_engine_nonvacuous: engine fires on Prod.snd.
+-- ⚠ does NOT discharge hbint (needs U⊇K×concreteKx incl. off-gate points; tube-covers-b-support + gate
+-- transparency + matched-cutoff gluing remain). std-3 ×6. NOT a₁=R/6.
+#print axioms QIQTH.WitnessFieldDerivJointC1FromTube.partialFDeriv_jointContDiffOn
+#print axioms QIQTH.WitnessFieldDerivJointC1FromTube.chartFieldJacobianComponent_jointContDiffOn
+#print axioms QIQTH.WitnessFieldDerivJointC1FromTube.witnessFieldDeriv_smoothForm_jointContDiffOn
+#print axioms QIQTH.WitnessFieldDerivJointC1FromTube.witnessFieldDeriv_jointContDiffOn_onGate
+#print axioms QIQTH.WitnessFieldDerivJointC1FromTube.witnessFieldDeriv_smoothForm_jointContDiffOn_tube
+#print axioms QIQTH.WitnessFieldDerivJointC1FromTube.partialFDeriv_engine_nonvacuous
+
 end QIQTH.AxiomAudit

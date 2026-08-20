@@ -4744,3 +4744,16 @@ import QIQTH.FieldHessianJointContinuity
 -- hbint_concrete_reduced_to_jointC1: hbint ⟸ {BL-continuity, joint C¹ of the kernel}. hbint REDUCED
 -- (Berge+support+climb scaffolding ALL discharged), residual = joint-C² chart frontier. std-3 ×4. NOT a₁=R/6.
 import QIQTH.FieldHessianJointContinuityClosed
+
+-- WitnessFieldDerivJointC1FromTube: J4-887 — the CLIMB-ONE-DERIVATIVE-UP bridge from J4-884's abstract-K
+-- joint C² of uniformInverseChart near the diagonal to the JOINT C¹ of the field-derivative kernel
+-- witnessFieldDeriv (the object hbint, J4-878, reduced to). partialFDeriv_jointContDiffOn: general engine
+-- (C¹ analog of J4-878's C⁰ one) — ContDiffOn ℝ 2 Ψ on open U ⟹ (z,y)↦fderiv(fun y'=>Ψ(z,y')) y ContDiffOn ℝ 1
+-- (fderiv_of_isOpen + inr chain rule + clm_comp). chartFieldJacobianComponent_jointContDiffOn: chart field-jet
+-- joint C¹ from joint chart C² (clm_apply + proj + pd_component_eq). witnessFieldDeriv_smoothForm_jointContDiffOn:
+-- the on-gate gate-chain SMOOTH FORM (= on-gate witnessFieldDeriv) is jointly C¹ from joint chart C². TUBE
+-- CAPSTONE witnessFieldDeriv_smoothForm_jointContDiffOn_tube: feeds J4-884's tube ⟹ CONCRETE joint C¹ on an
+-- open tube around the interior diagonal for abstract K. onGate variant = the honest conditional reduction.
+-- ⚠ does NOT discharge hbint (needs U⊇K×concreteKx incl. off-gate; tube-covers-b-support + gate transparency +
+-- matched-cutoff remain). std-3 ×6. NOT a₁=R/6.
+import QIQTH.WitnessFieldDerivJointC1FromTube
