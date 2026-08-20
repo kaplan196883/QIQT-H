@@ -12035,3 +12035,58 @@ envelope). These are the downstream assembly, unbuilt.
 `axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `d4337c13`, pushed. Sympy/numeric-rate gate PASSED (τ^{−1/2},
 constant valid upper bound). `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+
+## J4-924 — the ABSTRACT composition of chart-CoV residues (a)+(b): the uniform flat two-term Gaussian census bound — commit `0072220a` (`GaussTauTraceChartTransported.lean`, new file)
+
+**Task.** Build residues (a)+(b) that J4-923's honest report flagged before the chart-CoV cancellation
+route can discharge `hGpow`/`hCross`: (a) an inner-ball τ-UNIFORM Lipschitz estimate for the FULL PAIRED
+weight `q₁(w) = A(Vw)·F(s,·)(Vw)/|det DW₀(w)|`, and (b) bounded control of the zeroth-order term
+`q₂(w) = Cfield(Vw)·F/|det|` (`O(1)` in τ, harmless on `0 < u−s ≤ T`). Determine whether they compose,
+build as a new file, thread through to check whether `hGpow`/`hCross`'s census binder is now closeable.
+
+**gpt-5.6-sol (high) consult.** Confirmed the CoV/cancellation plan mathematically correct and
+Lean-actionable. Key findings (verbatim honest): (1) the supposed RIGHT-inverse gap (`W₀∘V=id` on `Ω`)
+is NOT a real obstruction — it is recoverable in three lines from the banked LEFT inverse `V(W₀z)=z`
+since `Ω = W₀''(ball 0 ρ)` is exactly the range; (2) τ-uniformity is sound on a bounded horizon
+`0<τ≤T` (A affine ⟹ `L_A(τ) ≤ L_{A0}+T·L_{A1}`), BUT one must bound `s` too (not only `τ=u−s`), since
+`L_F(s)=L_E+2K√s` — the heat-simplex `0≤s≤u≤T` suffices; and `V`'s own center-Lipschitz constant `L_V`
+composes into `L_{A∘V}`, `L_{F∘V}`; (3) the tail `e^{−a/τ}/τ ≤ 1/a` (`a=r²/8`) gives an explicit
+bounded-horizon constant, easier than a super-polynomial asymptotic; (4) J4-923 needs GLOBAL bounds +
+`MeasurableSet Ω` — localize the chart weight to `Ω.indicator q₁` in the application; (5) BLUNT verdict:
+this **reduces** `hGpow`, does NOT close it; the likely remaining geometric bottleneck is proving
+`1/|det f'|∘V` center-Lipschitz. Recommended the abstract flat two-term census lemma (with tail
+absorption + localization) as the single highest-leverage non-vacuous brick — NOT a wrapper that assumes
+the transported-integral equality.
+
+**Landed — NEW FILE `QIQTH/GaussTauTraceChartTransported.lean` (ns `QIQTH.HeatResidualBound`, no banked file edited). std-3 ×6.**
+- `product_center_lipschitz` — ★ (a) two-factor: for `f,h` globally bounded (`|f|≤M_f`,`|h|≤M_h`) and
+  center-Lipschitz at `0` on `ball 0 r`, the product `f·h` is bounded by `M_f·M_h` and center-Lipschitz
+  at `0` with constant `M_f·L_h + M_h·L_f`. τ-uniform iff the factors are (they carry no τ).
+- `product3_center_lipschitz` — ★ (a) three-factor (the exact `A·F·(1/|det|)` shape), by chaining twice.
+- `two_term_census_bound_uniform` — ★★ (a)+(b) COMPOSED: for `0<τ≤T`, `q₁` meas+bounded(`M₁`)+center-
+  Lipschitz(`L`) on `ball 0 r`, `q₂` meas+bounded(`M₂`), and ANY measurable `Ω⊇ball 0 r`:
+  `|∫_{z∈Ω}(∑ᵢ((zᵢ)²/4τ²−1/2τ))·G·q₁ + ∫_{z∈Ω} G·q₂| ≤ L·(n²(16√2+1))/√τ + (3n·M₁·√2ⁿ·(4(2n+1)/r²)+M₂)·(√T/√τ)`.
+  Term1 = J4-923's superset-center-Lipschitz bound with the tail `3n·M₁·√2ⁿ·e^{−r²/8τ}(2n+1)/(2τ)`
+  ABSORBED via `e^{−a/τ}/τ ≤ 1/a` (`Real.add_one_le_exp`); term2 (b) = the `O(1)` Gaussian-mass bound
+  `|∫_Ω G·q₂|≤M₂` (`∫_Ω G ≤ ∫G = 1`) promoted to `M₂·√T/√τ` by `1≤√T/√τ`. Both `O(τ^{−1/2})`,
+  constant τ-INDEPENDENT.
+- `two_term_census_bound_uniform_combined` — folds to the single `Cpair/√τ` shape (`Cpair` τ-independent)
+  that `hGpow`'s `∃Cpair≥0, |·|≤Cpair·(u−s)^{−1/2}` consumes.
+- `product_center_lipschitz_hyp_satisfiable` / `two_term_census_bound_uniform_hyp_satisfiable` —
+  non-vacuity EXHIBITED with TEETH: `q₁ z := sin(‖z‖²)` (bounded, center-Lipschitz `L=1` on `ball 0 1`
+  but NOT globally Lipschitz — so J4-922's global-Lipschitz theorem does NOT apply), `q₂ z := cos‖z‖`,
+  on the PROPER superset `Ω = ball 0 5 ⊋ ball 0 1`, with `0 < τ = 1 ≤ T = 1`.
+
+**Threaded through (honest, NOT assumed).** This isolates residues (a)+(b) as REUSABLE analytic lemmas
+and REDUCES `hGpow` to exactly the GEOMETRIC per-factor facts it does NOT prove: `A∘V` center-Lipschitz,
+`F∘V` center-Lipschitz, `1/|det f'|∘V` center-Lipschitz + bounded, `W₀∘V = id` on `Ω` (recoverable),
+`MeasurableSet Ω`, and the uniform per-factor constants. It does NOT close `hGpow`/`hCross` — the
+concrete hGpow census binder (`AmplitudeDerivativeDataConcrete.hGpow_of_amplitudeData_noEndpoint`) still
+carries `hD2Hexpand`; the chart-CoV route's remaining wall is the geometric `1/|det|∘V` center-Lipschitz.
+
+**Banking.** `lake build QIQTH.GaussTauTraceChartTransported` 0 errors; `lake build QIQTH.AxiomAudit`
+0 errors (10231 jobs); `#print axioms` std-3 ×6 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `0072220a`, pushed. `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
