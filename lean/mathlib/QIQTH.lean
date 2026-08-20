@@ -4599,6 +4599,19 @@ import QIQTH.HFdCoreContinuityClosed
 -- remaining envelope content is hbint+hzmass (shared Gaussian BL·BF dominator). std-3. NOT a₁=R/6.
 import QIQTH.HkintReducedToHbint
 
+-- HbintReducedToZContinuity: J4-876 — the hbint field of MixedDirectionsFieldHessianEnvelope (per-slice
+-- z-integrability of BL·BF at the CONCRETE BF:=⨆x‖fderiv‖) REDUCED to its true residual, the z-CONTINUITY
+-- of the product envelope on the compact base support K. HONEST FINDING: hbint does NOT close via the
+-- hFd continuous-on-compact pattern — hFd was continuity in the FIELD variable x (fixed z); hbint needs
+-- z-MEASURABILITY of the x-supremum BF and a UNIFORM-in-z bound over K (a Berge/joint-(x,z) object).
+-- What transfers is the compact-support half: BF vanishes off K (J4-867), so ContinuousOn(z↦BL·BF) K +
+-- K compact ⟹ Integrable (integrableOn_compact + support⊆K via indicator). Engines
+-- integrable_of_continuousOn_support_subset / integrable_of_bounded_measurable_support_subset;
+-- hbint_of_zContinuousOn_K / hbint_of_zBoundedMeasurable_K reduce the a.e. hbint field to the z-continuity
+-- (resp. z-measurable+bounded-on-K) residual. hbint REDUCED not closed; hzmass wall + this z-continuity
+-- residual remain. std-3. NOT a₁=R/6.
+import QIQTH.HbintReducedToZContinuity
+
 -- HZMassIntegrabilityAttempt: J4-867 — the z-mass wall under the EXPLICIT BF. TWO genuine payoffs of
 -- BF:=⨆x‖fderiv‖: (1) COMPACT BASE SUPPORT — for z∉K the base gate kills the whole kernel, so
 -- BF_ciSup_eqZero_of_base_notMem_K and productEnvelope_support_subset_K: ∫z BL·BF lives on compact K;

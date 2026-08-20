@@ -28702,6 +28702,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HkintReducedToHbint.kPrime_integrable_of_product
 #print axioms QIQTH.HkintReducedToHbint.hkint_reduces_to_hbint_concrete
 
+-- J4-876: HbintReducedToZContinuity — the hbint field of MixedDirectionsFieldHessianEnvelope (per-slice
+-- z-integrability of BL·BF at the CONCRETE BF:=⨆x‖fderiv‖) REDUCED to its true residual, z-CONTINUITY of
+-- the product envelope on the compact K. HONEST FINDING: hbint does NOT close via the hFd continuous-on-
+-- compact pattern — hFd = continuity in FIELD x (fixed z); hbint needs z-MEASURABILITY of the x-sup BF +
+-- a UNIFORM-in-z bound over K (Berge/joint-(x,z)). Compact-support half transfers: BF vanishes off K
+-- (J4-867) ⟹ ContinuousOn(z↦BL·BF)K + K compact ⟹ Integrable. integrable_of_continuousOn_support_subset
+-- / integrable_of_bounded_measurable_support_subset engines; hbint_of_zContinuousOn_K /
+-- hbint_of_zBoundedMeasurable_K reduce the a.e. hbint field to z-continuity (resp. measurable+bounded-on-K).
+-- hbint REDUCED not closed; hzmass + this z-continuity residual remain. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HbintReducedToZContinuity.integrable_of_continuousOn_support_subset
+#print axioms QIQTH.HbintReducedToZContinuity.integrable_of_bounded_measurable_support_subset
+#print axioms QIQTH.HbintReducedToZContinuity.hbint_of_zContinuousOn_K
+#print axioms QIQTH.HbintReducedToZContinuity.hbint_of_zBoundedMeasurable_K
+#print axioms QIQTH.HbintReducedToZContinuity.hbint_residual_nonvacuous
+
 -- J4-867: HZMassIntegrabilityAttempt — the z-mass wall under the EXPLICIT BF. witnessFieldDeriv_eqZero_
 -- of_base_notMem_K / witnessFieldHessian_fderiv_eqZero_of_base_notMem_K: for z∉K the base gate kills the
 -- whole kernel, so the field-pd and field-Hessian vanish. BF_ciSup_eqZero_of_base_notMem_K: the EXPLICIT
