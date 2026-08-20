@@ -12265,3 +12265,64 @@ the `h,k>0` quadrant. `hDuhamel`/`hDConv` remain carried on `{hCross (now ⟸ {H
 0 errors (10234 jobs); `#print axioms` std-3 ×7 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `d72e5090`, pushed. NOT `a₁ = R/6`.
+
+
+## J4-928 — the mean-value (FTC) bridge reducing J4-927's OPEN `H_far` carry to the GENERATOR IDENTITY — commit `5abe7c77` (`HCrossFarDerivBridge.lean`, new file)
+
+**Task.** Determine whether J4-924's `two_term_census_bound_uniform` (or a straightforward corollary/
+instantiation) IS J4-927's `H_far` — the culmination the whole J4-919..925 infrastructure chain was built
+for — and, if it composes, close the loop on `hCross`'s actual census binder (concrete witness, `h,k>0`);
+else characterize precisely what remains. Consult gpt-5.6-sol at the go/no-go, and verify any full-closure
+claim extremely carefully before reporting it.
+
+**★ THE COMPOSITION VERDICT (my structural read + gpt-5.6-sol high go/no-go, CONFIRMED — no full closure).**
+J4-924 does **NOT** compose to supply `H_far` directly. Precise shapes:
+- `H_far` (J4-927 carry): `|Φ(u+h,s) − Φ(u,s)| ≤ C_far·h·(u−s)^{−1/2}` on `s ∈ Ioo (u−ε) u`, where
+  `Φ(a,s) := ∫ z, A(a−s) x z · B s z y` — a FINITE DIFFERENCE in the FIRST time argument over shift `h`.
+- J4-924: `|∫_Ω (∑ᵢ(zᵢ²/4τ² − 1/2τ))·gaussDdim τ z·q₁ + ∫_Ω gaussDdim τ z·q₂| ≤ Cpair/√τ`.
+The weight `∑ᵢ(zᵢ²/4τ² − n/2τ)·gaussDdim = ∂_τ gaussDdim` EXACTLY, so J4-924 bounds the τ-DERIVATIVE census
+integral by `Cpair·τ^{−1/2}` — the CORRECT RHS ENVELOPE (same `(u−s)^{−1/2}` shape, `τ = u−s`). But TWO
+genuine implications remain, BOTH = the opaque chart wall:
+  (1) J4-924 has **no factor of `h`** — supplying it needs the FINITE-DIFFERENCE/FTC step
+      `Φ(u+h,s) − Φ(u,s) = ∫_u^{u+h} ∂_a Φ(a,s) da`, then `|∫| ≤ h·sup|∂_aΦ| ≤ h·Cpair·(u−s)^{−1/2}` (using
+      `(a−s)^{−1/2} ≤ (u−s)^{−1/2}` for `a ≥ u`). ROUTINE 1-D calculus.
+  (2) the GENERATOR IDENTITY `∂_a Φ(a,s) = (census integral J4-924 bounds)` needs differentiation under the
+      integral + the CHART change-of-variables turning the CURVED `∫_z A(a−s) x z · B s z y` derivative into
+      J4-924's FLAT `∫_Ω(∑…)G·q₁ + ∫_Ω G·q₂` shape. THE SUBSTANTIVE WALL (= hDConv/hDuhamel content).
+
+**gpt-5.6-sol (high) verdict (verbatim).** (A) "`two_term_census_bound_uniform` does **not** directly supply
+`H_far`" — confirmed both missing implications, and confirmed the uniform-over-`a∈[u,u+h]` instantiation with
+`(a−s)^{−1/2}≤(u−s)^{−1/2}` gives the desired bound ONCE the generator identity holds; flagged the chart
+result must expose the WHOLE combined two-term expression (bounding the two terms separately can destroy the
+`τ^{−1/2}` cancellation), and for a genuinely curved kernel chart CoV alone may need a parametrix/remainder
+absorbed into `hderiv`. (B) "BUILD the bridge" — a genuine non-vacuous reduction brick; implement as a
+mean-value inequality (no integrability obligation on `g` needed once a uniform derivative bound is available).
+
+**Landed — NEW FILE `QIQTH/HCrossFarDerivBridge.lean` (ns `QIQTH.HeatResidualBound`, no banked file edited). std-3 ×5.**
+- `abs_sub_le_mul_of_hasDerivAt` — ★ the generic mean-value bridge: a uniform derivative bound `K` on
+  `[u,u+h]` (`h≥0`) gives `|f(u+h) − f u| ≤ K·h`. Route: Mathlib `Convex.norm_image_sub_le_of_norm_hasDerivWithin_le`
+  on `Icc u (u+h)` (`convex_Icc`, `left/right_mem_Icc`, `hasDerivAt.hasDerivWithinAt`).
+- `hfar_of_hasDerivAt` — ★★ the EXACT live `H_far` shape from `{hderiv, hgbound}` per `s`: `hderiv` = the
+  GENERATOR IDENTITY (`∀ a∈[u,u+h]`, `a' ↦ Φ(a',s)` has derivative `g s a`), `hgbound` = the per-shift census
+  bound `|g s a| ≤ C_far·(u−s)^{−1/2}` (J4-924's envelope). `K·h = C_far·(u−s)^{−1/2}·h = C_far·h·(u−s)^{−1/2}`.
+- `hcross_split_bound_of_hderiv` — ★★★ J4-927's `hcross_mixed_second_diff_split_bound` with the `H_far` carry
+  REPLACED by `{hderiv, hgbound}` — the whole live `hCross` binder `|Δ²| ≤ (2C_far/√ε + 2M/ε)·(|h|·|k|)` (for
+  `h,k>0`) now reduces to the generator identity + the cheap `H_near`/`H_zero` + the four interval-integrabilities.
+- `abs_sub_le_mul_of_hasDerivAt_hyp_satisfiable` — non-vacuity TEETH: `f=sin, g=cos, K=1` on `[0,π]`, a genuine
+  non-affine `HasDerivAt` (`Real.hasDerivAt_sin`) with `0 < K·h = π`.
+- `hfar_of_hasDerivAt_hyp_satisfiable` — non-vacuity TEETH: the genuine convolution `A τ x z := cos τ·exp(−‖z‖²)`,
+  `B := 1`, so `Φ(a,s) = C·cos(a−s)` (`C := ∫ exp(−‖z‖²)`, extracted by the UNCONDITIONAL `integral_const_mul`),
+  `∂_a Φ = −C·sin(a−s)` (via `Real.hasDerivAt_cos ∘ (id − const)` then `.mul_const C`), census bound
+  `|sin(a−s)|·|C| ≤ |C|·(−s)^{−1/2}` on `Ioo (−1,0)` (`inv_sqrt_eq_rpow` + `one_le_inv₀`, `√(−s)<1`).
+
+**How far it gets / honest status.** Discharges the ROUTINE finite-difference step (1) and threads it,
+LOCALIZING the whole `hCross` wall (`h,k>0`) to the single generator identity `hderiv`. Does NOT close
+`hCross` — `hderiv` (chart CoV + differentiation under the integral, exposing the whole combined census
+expression) remains UNBUILT = the opaque chart wall, now cleanly localized to one named object.
+`hDuhamel`/`hDConv` remain carried on `{hCross (⟸ {hderiv,hgbound,H_near,H_zero}), hGpow, …}`; `hCConv`
+unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
+
+**Banking.** `lake build QIQTH.HCrossFarDerivBridge` 0 errors (8684 jobs); `lake build QIQTH.AxiomAudit`
+0 errors (10235 jobs); `#print axioms` std-3 ×5 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `5abe7c77`, pushed. NOT `a₁ = R/6`.
