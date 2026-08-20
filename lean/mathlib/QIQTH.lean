@@ -4633,3 +4633,18 @@ import QIQTH.HZMassIntegrabilityAttempt
 -- hzmass must route through the COMPACT BASE SUPPORT of BL·BF (J4-867), not a z-envelope. std-3 ×6.
 -- NOT a₁=R/6.
 import QIQTH.BFGaussianEnvelopeClosed
+
+-- FieldHessianJointContinuity: J4-877 — the z-CONTINUITY (Berge parametrised-supremum) residual of hbint
+-- (J4-876) REDUCED to a single clean JOINT (z,x)-continuity residual of the field-Hessian norm on a fixed
+-- compact K ×ˢ Kx. Supplies the missing ContinuousOn-BERGE engine (Mathlib has only the GLOBAL
+-- IsCompact.continuous_sSup, whose Continuous ↿f is FALSE across ∂K — a vacuity trap):
+-- continuousOn_sSup_image_of_continuousOn transports it to the compact SUBTYPE ↥Kx (CompactSpace).
+-- ciSup_eq_sSup_image_of_vanishing localizes the univ-sup BF=⨆x‖fderiv‖ to sSup(‖·‖''Kx) via nonneg +
+-- off-Kx vanishing. continuousOn_ciSup_of_jointContinuousOn (abstract engine) chains them;
+-- BF_zContinuousOn_of_jointContinuousOn instantiates at the field-Hessian norm. The off-Kx vanishing +
+-- support scaffolding is DISCHARGED for the concrete flow-ball gate (concreteKx:=φ''(K×closedBall 0 b) ⊇
+-- every core(z); fieldHessian_vanish_off_concreteKx via J4-873), so hbint_concrete_of_jointContinuousOn
+-- reduces the hbint field to the SOLE genuine residual — JOINT (z,x)-continuity of the field-Hessian norm
+-- on K ×ˢ concreteKx (one derivative above the banked FIRST-derivative slice joint continuity, OPEN) +
+-- BL-continuity. hbint REDUCED not closed. std-3 ×11. NOT a₁=R/6.
+import QIQTH.FieldHessianJointContinuity

@@ -28745,4 +28745,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BFGaussianEnvelopeClosed.gaussDdim_peak_ratio_at_zero
 #print axioms QIQTH.BFGaussianEnvelopeClosed.hFd_peak_nonvacuous
 
+-- J4-877: FieldHessianJointContinuity — the z-continuity (Berge parametrised-supremum) residual of hbint
+-- (J4-876) REDUCED to a single JOINT (z,x)-continuity residual of the field-Hessian norm on a fixed
+-- compact K ×ˢ Kx. continuousOn_sSup_image_of_continuousOn: the ContinuousOn-BERGE engine (transports
+-- Mathlib's GLOBAL IsCompact.continuous_sSup to the compact subtype ↥Kx, NO Continuous ↿f across ∂K).
+-- ciSup_eq_sSup_image_of_vanishing: univ-sup localization (nonneg + off-Kx vanishing). The abstract
+-- continuousOn_ciSup_of_jointContinuousOn chains them; BF_zContinuousOn_of_jointContinuousOn instantiates
+-- at the field-Hessian norm. concreteKx:=φ''(K×closedBall 0 b) ⊇ every core(z); the off-Kx vanishing is
+-- DISCHARGED (fieldHessian_vanish_off_concreteKx via J4-873), so hbint_concrete_of_jointContinuousOn
+-- reduces the hbint field to the SOLE genuine residual — JOINT (z,x)-continuity on K ×ˢ concreteKx (OPEN)
+-- + BL-continuity. hbint REDUCED not closed. std-3 ×11. NOT a₁=R/6.
+#print axioms QIQTH.FieldHessianJointContinuity.continuousOn_sSup_image_of_continuousOn
+#print axioms QIQTH.FieldHessianJointContinuity.ciSup_eq_sSup_image_of_vanishing
+#print axioms QIQTH.FieldHessianJointContinuity.continuousOn_ciSup_of_jointContinuousOn
+#print axioms QIQTH.FieldHessianJointContinuity.BF_zContinuousOn_of_jointContinuousOn
+#print axioms QIQTH.FieldHessianJointContinuity.hbint_of_jointContinuousOn
+#print axioms QIQTH.FieldHessianJointContinuity.concreteKx_isCompact
+#print axioms QIQTH.FieldHessianJointContinuity.concreteKx_nonempty
+#print axioms QIQTH.FieldHessianJointContinuity.core_subset_concreteKx
+#print axioms QIQTH.FieldHessianJointContinuity.fieldHessian_vanish_off_concreteKx
+#print axioms QIQTH.FieldHessianJointContinuity.hbint_concrete_of_jointContinuousOn
+#print axioms QIQTH.FieldHessianJointContinuity.BF_residual_nonvacuous
+
 end QIQTH.AxiomAudit
