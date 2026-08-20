@@ -29072,4 +29072,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HwDischargedInfty.exists_D1_constants_of_gateSqControl_ofCont
 #print axioms QIQTH.HwDischargedInfty.hAdom_hWDom_from_gateSqControl_hwDischarged
 
+-- HDuhamelCensusVanishingDischarged — find-and-wire discharge of TWO nonpositive-time VANISHING census
+-- binders of the LIVE order-1 `hDuhamel` capstone `hDuhamel_live_gate_wired`: source vanishing `hFzero`
+-- (:157) and amplitude vanishing `hAzero` (:172), both to PURE geometry (g,gi,hChr,hK,S,a,b + 1≤n), NO
+-- analytic carry. hFzero_live ← DaLimEasyTranche.hFzero_concrete; hAzero_live ←
+-- AmplitudeDerivativeDataConcrete.vanVleckGatedWitness_eq_zero_of_nonpos. std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.HDuhamelCensusVanishingDischarged.hFzero_live
+#print axioms QIQTH.HDuhamelCensusVanishingDischarged.hAzero_live
+
 end QIQTH.AxiomAudit

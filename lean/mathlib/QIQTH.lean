@@ -4911,3 +4911,11 @@ import QIQTH.GateSqControlFromFlowBall
 -- HAdomHWDomFromConcreteDominations.hAdom_hWDom_from_gateSqControl bundle with hw ELIMINATED; sole carry =
 -- satisfiable GateSqControl. std-3 ×3. NOT a₁=R/6.
 import QIQTH.HAdomHWDomHwDischargedInfty
+
+-- HDuhamelCensusVanishingDischarged — find-and-wire discharge of TWO nonpositive-time VANISHING census
+-- binders of the LIVE order-1 `hDuhamel` capstone `hDuhamel_live_gate_wired`: the source vanishing
+-- `hFzero` (:157) and the amplitude vanishing `hAzero` (:172), both to PURE geometry (g,gi,hChr,hK,S,a,b
+-- + 1≤n) with NO analytic carry. hFzero_live ← DaLimEasyTranche.hFzero_concrete (→ hEzeroE_concrete →
+-- leviSeries_eq_zero_of_nonpos); hAzero_live ← AmplitudeDerivativeDataConcrete.vanVleckGatedWitness_eq_zero_of_nonpos.
+-- Verbatim census-binder shapes (defeq-checked). std-3 ×2. NOT a₁=R/6.
+import QIQTH.HDuhamelCensusVanishingDischarged
