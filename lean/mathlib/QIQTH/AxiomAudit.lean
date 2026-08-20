@@ -29051,4 +29051,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HAdomHWDomFromConcreteDominations.hAdom_from_gateSqControl
 #print axioms QIQTH.HAdomHWDomFromConcreteDominations.hAdom_hWDom_from_gateSqControl
 
+-- GateSqControlFromFlowBall — J4-900: DISCHARGE the surviving hgate : GateSqControl carry of
+-- HAdomHWDomFromConcreteDominations for the LIVE capstone's CONCRETE flow-ball gate constGate g gi hChr
+-- hK c. Instantiates abstract gateSqControl_of_flowBall at φ=uniformFlowExp / W=uniformInverseChart via
+-- uniformInverseChart_leftInverse_of_lt (hinv, δ₀) + uniformFlowExp_hdisp_ball (hdisp, r₁); c≤min δ₀ r₁ ⟹
+-- gateSqControl_constGate (GateSqControl from geometry, no hgate). Feeds into abstract-S
+-- hAdom_hWDom_from_gateSqControl at S:=constGate ⟹ hgate carry REMOVED; hAdom/hWDom hold from geometry +
+-- single mainline hw carry. std-3 ×2. NOT a₁=R/6.
+#print axioms QIQTH.GateSqControlFromFlowBall.gateSqControl_constGate
+#print axioms QIQTH.GateSqControlFromFlowBall.hAdom_hWDom_from_gateSqControl_constGate
+
 end QIQTH.AxiomAudit

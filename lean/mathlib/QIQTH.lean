@@ -4887,3 +4887,16 @@ import QIQTH.InterchangeBundlesFromExisting
 -- CurvedRNCBaseWitnessDomAdom composition from g:=curvedRNCMetric K to ABSTRACT g, with GateSqControl
 -- supplied as the reduced satisfiable carry (+ amplitude smoothness hw). std-3 ×3. NOT a₁=R/6.
 import QIQTH.HAdomHWDomFromConcreteDominations
+
+-- GateSqControlFromFlowBall — J4-900: DISCHARGE the surviving `hgate : GateSqControl` carry of
+-- HAdomHWDomFromConcreteDominations for the LIVE capstone's CONCRETE flow-ball gate
+-- constGate g gi hChr hK c (= fun z => uniformFlowExp … z '' ball 0 c). Instantiates the abstract
+-- ConcreteDominations.gateSqControl_of_flowBall at the tower flow φ=uniformFlowExp / chart
+-- W=uniformInverseChart, using OnGateGlue.uniformInverseChart_leftInverse_of_lt (hinv, window δ₀) +
+-- NearIsometryBudget.uniformFlowExp_hdisp_ball (hdisp, window r₁, J4-96); intersected c≤min δ₀ r₁ ⟹
+-- gateSqControl_constGate produces GateSqControl from geometry alone (no hgate). Then feeds it into the
+-- banked abstract-S hAdom_hWDom_from_gateSqControl at S:=constGate, removing the hgate carry: the
+-- hAdom/hWDom census binders hold for the live flow-ball gate from geometry + the SINGLE surviving
+-- mainline amplitude-smoothness carry hw (⊤-level, distinct from the ∞-level generic supplier). std-3 ×2.
+-- NOT a₁=R/6.
+import QIQTH.GateSqControlFromFlowBall
