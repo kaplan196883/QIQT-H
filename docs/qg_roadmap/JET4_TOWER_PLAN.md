@@ -13637,3 +13637,58 @@ LANDS std-3 ×2 (propext, Classical.choice, Quot.sound; no sorryAx, no custom): 
 radius-choreography + two-term application} wiring on top of this uniform brick). Proves NONE of
 `{hballrate, hDuhamel, hDConv, hCConv}`. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains
 CONDITIONAL on `{hDuhamel,hDConv,hCConv}` (with `hballrate`/`hCross` an OPEN downstream carry), UNCHANGED. NOT `a₁=R/6`.
+
+### J4-960 (commit 5334d6f1) — FULL modulo-G2 hballrate (C1) closure: D-parameterized transported weights + CoV two-term assembly (gpt-5.6-sol high FINAL adversarial audit 2026-08-21: SOUND)
+
+Picks up J4-959's report naming the FIVE remaining wiring items for the modulo-G2 `hballrate` (C1) closure, and
+CLOSES them across TWO NEW files (no banked file edited). gpt-5.6-sol (high) design-consult identified the TWO
+sharpest blockers; both discharged, then the full assembly landed; a FINAL gpt-5.6-sol high adversarial audit ruled
+the closure SOUND.
+
+**`CensusTransportedWeightsForData.lean` — STEP 0 (coherence + measurability bridge).** Two blockers Sol flagged as
+the sharpest walls to ANY assembly: (COH) J4-959's `census_transported_weights_uniform` HIDES its internal
+common-witness `D` (`obtain ⟨D⟩ := baseVaryingIFTData_nonempty`), so its returned `V=D.V` cannot be identified with
+the `D.V` that `commonWitness_cov_subball`/`commonWitness_image_*` use in the CoV chain — an ∃-elim coherence wall.
+FIX: `census_transported_weights_forData` (★★★) reproves the J4-959 body PARAMETERIZED by an EXTERNAL
+`D : BaseVaryingIFTData`. (MEAS) the two-term core needs GLOBAL `AEStronglyMeasurable q₁,q₂`, but J4-959 exposes only
+a BOUND on the slope weight `q₂` (its proof computes `q₂`'s pairwise-Lipschitz via `ratio_abs_lipschitzOn` then
+DISCARDS it, `⟨hq2b,_⟩`); a bounded fn need not be measurable. FIX: KEEP `q₂`'s Lipschitz — then BOTH `q₁,q₂` are
+pairwise-Lipschitz on `ball 0 σ`, so `aesm_indicator_of_ball_lipschitz` (★★, `lipschitzOnWith_iff_dist_le_mul` →
+`LipschitzOnWith.continuousOn` → `ContinuousOn.aestronglyMeasurable` → `aestronglyMeasurable_indicator_iff`) gives the
+indicator-truncated weights global measurability for FREE — no chartFieldAmp continuity lemma, no extra hgi/hgpos
+carriers. + `_Fcarry_satisfiable` (TEETH: F≡0). std-3 ×3.
+
+**`CensusHballrateModuloG2.lean` — STEPS 1-5, `hballrate_moduloG2` (★★★, THE CLOSURE).** Fix the ONE common witness
+`D` (`baseVaryingIFTData_nonempty`); get the forData weights (σ, M₁, M₂, Lq₁, Lq₂) on `ball 0 σ`; joint-gate ball
+`r_j` (`jointGate_innerBall_of_nhds_and_gateBall`, from `h0Kmem`+G2); upper image containment δ₀
+(`commonWitness_image_subball D h0Kmem σ`); shrink `ρ:=δ=min δ₀ r_j` so `ball 0 δ ⊆ jointGate ∧ Wbv''(ball 0 δ) ⊆
+ball 0 σ`; inner ball `r` (`commonWitness_innerBall_of_subdomain D δ`, works ∀δ>0 — no re-derivation wall);
+`Ω:=Wbv''(ball 0 δ)` measurable (`commonWitness_image_measurable`). Per `(s,a)` (τ=a-s∈(0,τ₀], from ε+h≤τ₀):
+(a) truncate `qt=indicator(ball 0 σ)q`, global bounds M₁/M₂, measurability via `aesm_indicator_of_ball_lipschitz`,
+center-Lip of qt₁ on ball 0 r; (STEP A) `setIntegral_congr` on `ball 0 δ ⊆ jointGate` rewrites `deriv·F =
+gaussDdim τ(Wbv z)·B z` (`censusTauDeriv_eq_onGate_on_jointGate_ball` + `ring`); (STEP B) `commonWitness_cov_subball
+D δ (δ≤D.ρ) τ B`; (c/STEP C) `setIntegral_congr` on Ω folds via `commonWitness_weightMatch` (`Wbv(D.V w)=w`) + `ring`
+→ `poly(w)·gauss·qt₁ + gauss·qt₂` (using qt=q on Ω⊆ball 0 σ); (b/STEP D) `integral_add` split — `hInt2` =
+`integrableOn_gauss_mul_bddOn_ball` on ball 0 σ `.mono_set` to Ω; `hInt1` same with `f=poly·qt₁` bounded `Cpoly·M₁`
+where `|poly|≤Cpoly=n(σ²/(4τ²)+1/(2τ))` (`Finset.abs_sum_le_sum_abs` + `|wᵢ|≤‖w‖<σ`); (e/STEP E)
+`two_term_census_bound_uniform_combined τ r τ₀ … Ω hΩmeas (ball 0 r ⊆ Ω)` ⟹ `≤ Cpair/√τ = Cpair·(a-s)^(-1/2)`
+(`Real.sqrt_eq_rpow` + `Real.rpow_neg`), `Cpair := Lq₁·(n²(16√2+1))+(3n·M₁·√2ⁿ·(4(2n+1)/r²)+M₂)·√τ₀`. + `_carries_
+satisfiable` (TEETH: non-univ gate `S z:=ball z 1`, F≡0). std-3 ×2.
+
+**VERIFICATION.** Literal build 0 errors (via QIQTH.AxiomAudit, 10269 jobs); `#print axioms` std-3 ×5 (propext,
+Classical.choice, Quot.sound; NO sorryAx, NO custom); `axiom_budget_check` raw axiom count 0 (budget 0); vacuum-grep
+clean; slot-match VERIFIED by a throwaway `example` whose conclusion is the `hballrate` predicate COPIED VERBATIM from
+J4-954's `censusBound_of_geometry_gate_supp_F_ballRate_anyS_existRho`, proved by `exact` from `hballrate_moduloG2`'s
+output (typechecked). `git show 5334d6f1 --stat` = 4 files (+771).
+
+**HONEST STATUS (gpt-5.6-sol high FINAL adversarial audit: SOUND).** Type/predicate match, internal-vs-capstone `D`
+handling (witness INDEPENDENT of the capstone's FixedFlowGateData), the `−1/2` half-power, and the /|det| division
+(unconditional field distributivity — no nonzero-denominator needed) all confirmed correct. `hballrate_moduloG2`
+PRODUCES `ρ>0, Cpair≥0` inhabiting EXACTLY the `hballrate` existential predicate MODULO the single G2 gate carry `hS`
+— the `hballrate` ARGUMENT SLOT is closed modulo G2. It does NOT provide an INTEGRATED capstone application (the
+sibling premises `hF(ρ)/hΦint(ρ)/hSupp` at the SAME ρ remain the caller's), does NOT close `hCensusBound`/`hCross`
+(also need the J4-929 differentiation carries + G2 discharged from the concrete gate), and discharges NONE of
+`{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. Non-vacuity is RELATIVE to the standing geometry
+carriers (inhabited by any Riemannian metric). `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6`
+remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}` (with `hCross`/`hCensusBound` an OPEN downstream carry — this brick
+removes the `hballrate` sub-obstruction MODULO G2), UNCHANGED. NOT `a₁=R/6`.
