@@ -5675,3 +5675,15 @@ import QIQTH.CensusIntegratedModuloG2
 -- genuine rS>0. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 remains CONDITIONAL on those three, UNCHANGED,
 -- but G2 is now GROUNDED for the concrete gate (no longer an ungrounded census-side carry). std-3 ×2. NOT a₁=R/6.
 import QIQTH.G2ConstGateGrounded
+-- HsuppConstGateGrounded — GROUNDS the census-side hSupp SMALL-GATE UPPER containment carry for the LIVE concrete
+-- gate constGate. hSupp = ∀ z∈K, 0∈S z → ‖z‖<D.r (the OPPOSITE containment to G2's lower ball⊆gate). For S:=constGate,
+-- 0∈S z ⟺ ∃ w∈ball 0 c, uniformFlowExp z w=0; the banked forward quadratic displacement bound
+-- uniformFlowExp_displacement_bound (∃ρ₀>0,∃C_D≥0, ‖uniformFlowExp z v − z − v‖≤C_D‖v‖² for ‖v‖<ρ₀,z∈K) gives
+-- ‖z+w‖≤C_D‖w‖², whence ‖z‖≤‖w‖+C_D‖w‖²<c(1+C_D c); so under the radius COUPLING c(1+C_D c)≤D.r, every origin-reaching
+-- z has ‖z‖<D.r = hSupp. hsupp_for_constGate exposes the flow constants ρ₀,C_D existentially (mirroring g2's rS) and
+-- fills the EXACT hSupp slot of censusBound_integrated_moduloG2 (slot match typechecked). Coupling satisfiable for any
+-- D.r>0 (hsupp_constGate_coupling_satisfiable: choose c:=min ρ₀(min 1 (D.r/(1+C_D)))). gpt-5.6-sol high audit: SOUND,
+-- non-vacuous; G2 and hSupp jointly satisfiable on a non-empty c-window (opposite coupling directions). Non-vacuity at
+-- the flat metric (hsupp_for_constGate_satisfiable). Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on
+-- those three, UNCHANGED, but hSupp now GROUNDED for the concrete gate modulo the explicit c–D.r coupling. std-3 ×3. NOT a₁=R/6.
+import QIQTH.HsuppConstGateGrounded

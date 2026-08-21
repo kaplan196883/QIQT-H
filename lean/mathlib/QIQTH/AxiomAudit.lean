@@ -50,6 +50,7 @@ import QIQTH.CensusTransportedWeightsForData
 import QIQTH.CensusHballrateModuloG2
 import QIQTH.CensusIntegratedModuloG2
 import QIQTH.G2ConstGateGrounded
+import QIQTH.HsuppConstGateGrounded
 
 namespace QIQTH.AxiomAudit
 
@@ -30075,5 +30076,8 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusIntegratedModuloG2.censusBound_integrated_moduloG2_carries_satisfiable
 #print axioms QIQTH.G2ConstGateGrounded.g2_for_constGate
 #print axioms QIQTH.G2ConstGateGrounded.g2_for_constGate_satisfiable
+#print axioms QIQTH.HsuppConstGateGrounded.hsupp_for_constGate
+#print axioms QIQTH.HsuppConstGateGrounded.hsupp_constGate_coupling_satisfiable
+#print axioms QIQTH.HsuppConstGateGrounded.hsupp_for_constGate_satisfiable
 
 end QIQTH.AxiomAudit
