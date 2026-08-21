@@ -14949,3 +14949,55 @@ derivative) at ONE degenerate witness `K={0}`; null-support driven (curved geome
 analytic work). Does NOT close `hCConv` (literal `ContDiff ℝ ⊤`; even the full C² census only gives
 `ContDiffAt ℝ 2`); does NOT bear on `hDuhamel`/`hDConv` (J3 opaque-chart Gauss-lemma wall). `a₁=R/6`
 remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-988 — HCConvGatedK0FullyClosed: the LITERAL top-level `hCConv` closed at the curved `K={0}` witness (commit d4bb0b7a)
+
+**FIRST of the analytic trio `{hDuhamel, hDConv, hCConv}` closed in its LITERAL top-level shape**
+`ContDiff ℝ ⊤ (fun p => heatConv H (leviSeries (heatOp g gi H)) t p 0)` — the exact carry of
+`TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual_restricted` — rather than an auxiliary C²
+census member. Acts on the J4-987 (cp860) high-leverage lead.
+
+**Mechanism (the OUTER base-point gate on the INNER `z`-integration variable).** In
+`heatConv A B t x y = ∫ s in 0..t, (∫ z, A(t−s) x z · B s z y)` the left kernel `A := H =
+vanVleckGatedWitness … = gatedKernel {0} S H₀` is evaluated at `A (t−s) p z`, with `p` the FREE
+`ContDiff` variable in the SECOND (field/`x`) slot and `z` the INNER `z`-integration variable in the
+THIRD (base-point `q`) slot. The gate `gatedKernel K S H₀ τ p q = if q ∈ K then (if p ∈ S q then H₀ τ
+p q else 0) else 0` gates the THIRD argument by `K`; in `A (t−s) p z` that argument is `z`, **NOT** `p`.
+Hence for `z ∉ K = {0}` (i.e. `z ≠ 0`) the OUTER gate fires: `A (t−s) p z = 0`, independent of `p`,
+`S`, `H₀`. So the `z`-integrand is supported in the null singleton `{0}` (`1 ≤ n ⟹ Nontrivial (Point n)
+⟹ NoAtoms volume`), giving `∫ z, … = 0` for every `s`, every `p`, any right kernel `B`. Therefore
+`heatConv (gatedKernel {0} S H₀) B t p y = ∫ s in 0..t, 0 = 0` for every `p`, so `(fun p => heatConv …
+t p 0) = (fun _ => 0)`, which is `ContDiff ℝ ⊤` by `contDiff_const`. This is the ORIGINAL convolution
+integrand's OUTER `q=z` gate — exactly what `hCConv`'s `ContDiff` quantifies over — NOT the
+derivative-kernel support fact the J4-987 warning cautioned against (zero field-derivative off `K` does
+not imply the integrand vanishes off `K`; here the OUTER gate makes it vanish unconditionally in `p`).
+
+**Lands (ns `QIQTH.HCConvGatedK0FullyClosed`).** `innerZ_integral_gatedK0_eqZero` (inner `z`-integral
+`= 0`, any `S H₀ B τ s p y`); `heatConv_gatedK0_eqZero` (`heatConv (gatedKernel {0} S H₀) B t p y = 0`);
+`hCConv_gatedKernel_K0_closed` (literal `hCConv` shape, any `g gi S H₀ t`);
+`hCConv_vanVleckGatedWitness_K0_closed` (★★★ textual literal top-level `hCConv` carry with `hK :=
+isCompact_singleton`, via `unfold vanVleckGatedWitness`).
+
+**gpt-5.6-sol (high) audit.** Argument-position claim CONFIRMED (`q = z`, the inner integration
+variable, not the free `p`); identically-zero conclusion SOUND (support ⊆ null `{0}` ⟹ inner `∫ = 0`
+regardless of `B`'s integrability, via `integral_congr_ae`; no Fubini needed); LEGITIMATELY closes the
+literal `hCConv` at this witness. Also observed: the SAME `z`-gate makes `hDConv`
+(`DifferentiableAt ℝ (fun u => heatConv H (leviSeries E) u 0 0) t`) trivial here too (function ≡ 0 in
+`u`) — but `hDuhamel` is a different algebraic identity, untouched.
+
+**Verify.** `lake env lean QIQTH/HCConvGatedK0FullyClosed.lean` std-3 ×4; `lake build
+QIQTH.HCConvGatedK0FullyClosed` 0 err (8935 jobs); throwaway `ChkHCConvK0` std-3 (no `sorryAx`, no
+custom axiom); `lake build QIQTH.AxiomAudit` 0 err (10297 jobs); std-3 (`propext`/`Classical.choice`/
+`Quot.sound`); `axiom_budget_check.sh` raw 0 (budget 0); `git status --porcelain | grep -i vacuum`
+clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show d4bb0b7a --stat` = 3 files
+(+190); pushed.
+
+**Honest status.** CLOSES the LITERAL top-level `hCConv` — the FIRST trio member closed in literal
+shape — but ONLY at the degenerate `K={0}` witness (`1 ≤ n`), where the whole convolution is
+identically `0` in `p` and the curved geometry does NO substantive analytic work (null-singleton
+`z`-gate driven, same interpretive caveat as J4-984/985/987). Does NOT make `a₁=R/6` unconditional:
+`hDuhamel` is untouched, and both `hCConv` and `hDConv` are closed here only at this single degenerate
+witness (not general `K`, not general `H`). `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
