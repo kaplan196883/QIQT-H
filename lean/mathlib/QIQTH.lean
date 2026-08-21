@@ -5648,3 +5648,17 @@ import QIQTH.CensusTransportedWeightsForData
 -- of {hballrate,hDuhamel,hDConv,hCConv} as a τ-carry. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv} (hCross OPEN
 -- downstream), UNCHANGED. std-3 ×2. NOT a₁=R/6.
 import QIQTH.CensusHballrateModuloG2
+
+-- CensusIntegratedModuloG2 — the FULL INTEGRATION of the modulo-G2 hballrate (C1, J4-960) with its three SIBLING
+-- census premises hF/hΦint/hSupp. censusBound_integrated_moduloG2: compose the reshaped capstone (J4-954) — discharging
+-- hballrate via hballrate_moduloG2 (picks ρ:=δ internally), hF(ρ) via hF_of_leviWidth2Dom (ρ-independent: off-ball
+-- slack unused, all-z bound), hΦint via censusPhi_integrable_of_amplitudeCarries (ρ-free: ∫ over all ℝⁿ) — leaving the
+-- ρ-FREE hCensusBound (∫ over ℝⁿ, C_far existential) MODULO the single G2 gate carry hS + standard geometry/F-data
+-- {hFdom,hFb,hFl}/measurability {hKSmeas,hcar,hFmeas} carriers + benign positive-time window ε<u + per-D small-gate
+-- hSupp. hcross_integrated_moduloG2: thread that through hcross_of_censusIntegral_bound (J4-929) to close the FULL live
+-- hCross mixed-second-difference binder (h,k>0) modulo the same carriers + the J4-929 differentiation carries. All
+-- THREE sibling premises align at hballrate_moduloG2's internal ρ (no quantifier-order obstruction). Non-vacuity
+-- carries_satisfiable (TEETH: non-univ gate S z:=ball z 1, F≡0). Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}
+-- as a τ-carry (the F-data carriers ARE the {hDuhamel,hDConv,hCConv}-family Levi objects; G2 an ungrounded gate carry).
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv} (+ G2 census-side gate carry), UNCHANGED. std-3 ×3. NOT a₁=R/6.
+import QIQTH.CensusIntegratedModuloG2

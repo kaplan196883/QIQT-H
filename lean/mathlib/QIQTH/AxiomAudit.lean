@@ -48,6 +48,7 @@ import QIQTH.BaseVaryingIFTCommonWitness
 import QIQTH.CensusTransportedWeightsUniform
 import QIQTH.CensusTransportedWeightsForData
 import QIQTH.CensusHballrateModuloG2
+import QIQTH.CensusIntegratedModuloG2
 
 namespace QIQTH.AxiomAudit
 
@@ -30055,5 +30056,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusTransportedWeightsForData.census_transported_weights_forData_Fcarry_satisfiable
 #print axioms QIQTH.CensusHballrateModuloG2.hballrate_moduloG2
 #print axioms QIQTH.CensusHballrateModuloG2.hballrate_moduloG2_carries_satisfiable
+
+-- ## CensusIntegratedModuloG2: the FULL INTEGRATION of the modulo-G2 hballrate (C1) with its three SIBLING census
+-- premises hF/hΦint/hSupp — closing the reshaped far-rate capstone (J4-954) into the ρ-FREE hCensusBound MODULO G2,
+-- and threading through to the live hCross binder. censusBound_integrated_moduloG2 composes: hballrate_moduloG2 (J4-960,
+-- picks ρ:=δ internally) + hF_of_leviWidth2Dom (J4-952, ρ-independent all-z bound; off-ball slack unused) + censusPhi_
+-- integrable_of_amplitudeCarries (J4-953, ρ-free ∫ over all ℝⁿ) into censusBound_of_geometry_gate_supp_F_ballRate_anyS_
+-- existRho — all three siblings align at the internal ρ (no quantifier-order obstruction), leaving hCensusBound MODULO
+-- {G2 hS; width-2 Levi hFdom; s-uniform on-ball F-regularity hFb/hFl; F2 measurability hKSmeas/hcar/hFmeas; positive-
+-- time window ε<u; per-D small-gate hSupp}. hcross_integrated_moduloG2 threads through hcross_of_censusIntegral_bound
+-- (J4-929) ⟹ FULL live hCross mixed-second-difference binder (h,k>0) modulo the same carriers + J4-929 differentiation
+-- carries. Non-vacuity carries_satisfiable (TEETH: non-univ gate S z:=ball z 1, F≡0). Discharges NONE of {hballrate,
+-- hDuhamel,hDConv,hCConv} as a τ-carry: the F-data carriers ARE the {hDuhamel,hDConv,hCConv}-family Levi objects, G2 an
+-- ungrounded gate carry. a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv} (+ G2 census-side), UNCHANGED. std-3 ×3.
+#print axioms QIQTH.CensusIntegratedModuloG2.censusBound_integrated_moduloG2
+#print axioms QIQTH.CensusIntegratedModuloG2.hcross_integrated_moduloG2
+#print axioms QIQTH.CensusIntegratedModuloG2.censusBound_integrated_moduloG2_carries_satisfiable
 
 end QIQTH.AxiomAudit
