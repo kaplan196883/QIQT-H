@@ -5578,3 +5578,22 @@ import QIQTH.CensusTwoTermSuperset
 -- bound (geometric). Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}. hballrate/C1 remains an OPEN carry.
 -- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusCovSubballMeasurable
+
+-- CensusLeviFactorSUniform — the s-UNIFORM lift of J4-942's per-s on-ball F-factor bounded+Lipschitz bundle
+-- (CensusLeviFactorDischarge.levi_Ffactor_ball_regularity), supplying EXACTLY the "uniform-in-s ON-ball
+-- bounded+Lipschitz F-regularity" that the J4-955/956 audit flagged as the DECISIVE missing capstone input for
+-- the modulo-G2 hballrate (C1) closure. UNDER-CREDITING CORRECTION: J4-942 ALREADY built the ON-ball
+-- bounded+Lipschitz F bundle, but only at a FIXED s with s-dependent constants (M_F=C_L·gaussDdim(2s)0,
+-- L_F=L_E+K·2√s), banked BEFORE the s-uniformity requirement was identified. This brick lifts it s-UNIFORMLY by a
+-- window floor/ceiling argument: boundedness via banked B_le_MB at floor a:=2(u-ε) gives the s-uniform
+-- M_on:=C_L·gaussDdim(2(u-ε))0 (peak+width-antitone; SAME mechanism as J4-952's off-ball hF); Lipschitz via
+-- resolvent_lipschitz_pointwise ceilinged by √s≤√u gives L_on:=L_E+K·2√u. The "missing input" is DISCHARGED to the
+-- s-UNIFORM LeviLipschitz carries (hFdom width-2 domination, hVol, hE1, hIz, hSlice) over the window — the SAME
+-- {hDuhamel,hDConv,hCConv}-family objects J4-942/952 reduce F to; the "local norm of F" Sol demanded IS that data
+-- (C_L,L_E,K), NOT a genuinely-new hypothesis. levi_Ffactor_ball_regularity_sUniform (★★★, ‖z‖<ρ form) +
+-- levi_Ffactor_ball_regularity_sUniform_ball (★★★, Metric.ball form) + _satisfiable (TEETH: E=F≡0, C_L=Kc=L_E=0,
+-- ε=1<u=2≤T=2). std-3 ×3. Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}; residual glue-(3) items (CoV
+-- two-term fold, q₁/q₂ truncation-measurability, τ↓0-uniform chartFieldAmp Lipschitz, uniform |det| lower bound,
+-- G2-threading) UNTOUCHED. hballrate/C1 remains an OPEN carry. NOT a₁=R/6; CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusLeviFactorSUniform

@@ -29981,4 +29981,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusCovSubballMeasurable.commonWitness_cov_subball_of_geometry
 #print axioms QIQTH.CensusCovSubballMeasurable.commonWitness_image_measurable_of_geometry
 
+-- ## CensusLeviFactorSUniform: the s-UNIFORM lift of J4-942's per-s on-ball F-factor bounded+Lipschitz bundle
+-- (levi_Ffactor_ball_regularity), supplying EXACTLY the "uniform-in-s ON-ball bounded+Lipschitz F-regularity" the
+-- J4-955/956 audit flagged as the DECISIVE missing capstone input for the modulo-G2 hballrate (C1) closure.
+-- J4-942 already built the ON-ball bundle but only at a FIXED s (M_F=C_L·gaussDdim(2s)0, L_F=L_E+K·2√s), banked
+-- before the s-uniformity need was known. This brick lifts it s-UNIFORMLY over the window s∈Ioo(u-ε)u: boundedness
+-- via banked B_le_MB at floor a:=2(u-ε) gives s-uniform M_on:=C_L·gaussDdim(2(u-ε))0; Lipschitz via
+-- resolvent_lipschitz_pointwise ceilinged by √s≤√u gives L_on:=L_E+K·2√u. Discharges the "missing input" to the
+-- s-UNIFORM LeviLipschitz carries (hFdom,hVol,hE1,hIz,hSlice) = the {hDuhamel,hDConv,hCConv}-family. std-3 ×3.
+-- Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}; hballrate/C1 remains OPEN (glue-(3) chartFieldAmp Lipschitz /
+-- |det| lower bound / CoV-fold untouched). NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusLeviFactorSUniform.levi_Ffactor_ball_regularity_sUniform
+#print axioms QIQTH.CensusLeviFactorSUniform.levi_Ffactor_ball_regularity_sUniform_ball
+#print axioms QIQTH.CensusLeviFactorSUniform.levi_Ffactor_ball_regularity_sUniform_satisfiable
+
 end QIQTH.AxiomAudit
