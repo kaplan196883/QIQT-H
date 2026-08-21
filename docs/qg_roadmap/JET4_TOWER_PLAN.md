@@ -12688,3 +12688,51 @@ carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hD
 **Banking.** `lake env lean QIQTH/GaussianProductCollapse.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
 errors (10243 jobs); `#print axioms` std-3 ×4; `axiom_budget_check.sh` raw 0 / OK; vacuum-grep clean; no
 existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `21c4b021`, pushed. NOT `a₁ = R/6`.
+
+## J4-937 — the CENSUS-SLICE `∂_τ` EVERYWHERE IDENTITY with the ON-GATE/OFF-GATE split: junction piece (1) [the J4-217 `hgate` carry] of J4-933's `hCensusBound` re-audit — commit `5281e9ed` (`CensusTauDerivGateSplit.lean`, new file)
+
+**Context.** J4-933's gpt-5.6-sol high re-audit flagged SIX junction pieces required for the literal
+`hCensusBound` assembly beyond {base-slot CoV, det/ratio, V-transport, tail}; J4-934/935/936 closed pieces
+(2)[left-inverse weight matching], (4)[IFT open-map superset], (5)[product→single Gaussian collapse]. This
+increment targets piece **(1)** — the J4-217 `hgate` carry — for the exact CENSUS SLICE the census
+integrates over.
+
+**★ THE EXACT `hgate` REQUIREMENT + THE OFF-GATE SPLIT RESOLUTION.** The census
+(`hcross_of_censusIntegral_bound`, `HCrossDerivEngineWired`) integrates
+`deriv (fun r ↦ vanVleckGatedWitness g gi hC hK S a b r 0 z)(a−s) · F s z 0` over the base `z` — the FIELD
+point is FIXED at `0`, the BASE ranges over `z`. To rewrite the `∂_τ` kernel into the CoV-transportable
+BASE-slot closed form via `witnessTauDeriv_eq_gatedTauRepProd` (J4-217) one must supply `hgate`, whose two
+conjuncts at `w = (τ, 0, z)` are: (a) the GATE MEMBERSHIP `0 ∈ S z` (∀ `z ∈ K`, `τ > 0`); (b) the on-gate
+`HasDerivAt (fun u ↦ chartFieldAmp … u z 0) (Cfield z 0) τ`.
+  • **The analytic half (b) is BANKED + UNCONDITIONAL.** `chartFieldAmp = radialCutoff(W)·Θ(W)^{−1/2}·
+    (u₀(W)+u₁(W)·τ)` is AFFINE in `τ`, so its `∂_τ` HasDerivAt holds for EVERY `z, τ` with explicit slope
+    `censusAmpTauDeriv` = `OnGateJets.chartFieldAmp_hasDerivAt_tau` (already banked, no regularity of `W`).
+  • **The membership half (a) is discharged by an OFF-GATE SPLIT — NOT forced to `S = univ`.** Rather than
+    demand `0 ∈ S z` for ALL `z ∈ K` (over-strong; would force `S = univ`), prove the EVERYWHERE identity
+    whose RHS is the CoV closed form ON the joint gate (`z ∈ K ∧ 0 ∈ S z`) and `0` OFF it. OFF the gate
+    (`z ∉ K` OR `0 ∉ S z`) the gated kernel is identically `0` (`gatedKernel_apply_of_notMem`, `p = 0`), so
+    the `u`-function is `≡ 0` and its `deriv` is `0` — the gated representative is `0` too (the `if` is
+    `False`). This mirrors the "off-gate the kernel is `0`" pattern of
+    `fieldHessian_fderiv_eqZero_off_jointGraph` (J4-887/888): off the joint gate the census integrand
+    VANISHES, so the census reduces to the on-gate ball (the J4-930 CoV domain / J4-933 domain bridge).
+
+**What lands** (std-3 ×2, non-vacuous, no banked file edited, no `sorry`/new axioms, ANY `S`):
+- `censusAmpTauDeriv` — the affine `∂_τ` slope of the census amplitude at the fixed field point `0`.
+- `censusTauDeriv_eqZero_offGate` (★): off the joint gate (`z ∉ K ∨ 0 ∉ S z`) the `∂_τ` kernel VANISHES —
+  the census analogue of `fieldHessian_fderiv_eqZero_off_jointGraph`; NO gate hypothesis.
+- `censusTauDeriv_gateSplit` (★★): the census-slice `∂_τ` EVERYWHERE IDENTITY — ON the gate the CoV closed
+  form `(∑ᵢ((W z 0)ᵢ²/(4τ²)−1/(2τ)))·G_τ(W z 0)·A(τ) + G_τ(W z 0)·(∂_τA)`, OFF the gate `0`. NO `hgate`
+  carry (membership via off-gate split, analytic via banked `chartFieldAmp_hasDerivAt_tau`), ANY `S`; the
+  shared `G_τ(W z 0)` factor kills the on-gate value at `τ ≤ 0` too (matching the vanishing `deriv`).
+
+**Honest status.** Junction piece (1) of J4-933's re-audit is DISCHARGED (banked-analytic + off-gate split,
+non-vacuous, ANY `S` — NOT forced to `S = univ`). REMAINING junction pieces: (3) concrete `amp·F`/`Cfield·F`
+global bounded+Lipschitz inputs to J4-931/932; (6) `Bball + tail ≤ C_far·(u−s)^{−1/2}` uniform rate
+absorption; plus per-summand integrabilities and uniformity in `s,a`. 4 of 6 flagged pieces now CLOSED
+(1,2,4,5); `hCensusBound`/`hCross`/`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁ = R/6`
+remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/CensusTauDerivGateSplit.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
+errors (10244 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked file
+edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `5281e9ed`, pushed. NOT `a₁ = R/6`.
