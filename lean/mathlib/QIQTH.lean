@@ -5387,3 +5387,17 @@ import QIQTH.CensusLeviFactorDischarge
 -- G1 only; G2 (S-gate carry) and G3 (F-factor Levi carries {hDuhamel,hDConv,hCConv}) UNTOUCHED. NOT a₁=R/6;
 -- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.BaseVaryingIFTCommonWitness
+-- CensusTwoTermBallLocal — the BALL-LOCAL adapter for the flat two-term Gaussian census bound, resolving the
+-- newly-surfaced GLOBAL-vs-BALL boundedness mismatch (N1) at the CoV⟶two-term junction of the hCensusBound
+-- (hCross) assembly. The full-assembly attempt (G1 fixed, G2/G3 carried) reaches two_term_census_bound_uniform,
+-- which demands q₁,q₂ GLOBALLY bounded (∀z), but common-witness transport + Levi F-factor deliver boundedness
+-- only on an image ball — a genuine NEW interface obstruction (N1), not a gap in G1/G2/G3. FIX: truncate the
+-- weights to Set.indicator (ball 0 r) q (globally bounded, center value preserved since 0∈ball, center-Lipschitz
+-- unchanged on the ball), apply two_term_census_bound_uniform_combined with Ω:=ball 0 r, restore the un-truncated
+-- integrand via setIntegral_congr_fun. two_term_census_bound_ballLocal ★★ + TEETH non-vacuity (q₁=‖z‖², q₂=‖z‖
+-- locally-bounded-but-GLOBALLY-UNBOUNDED, exercising the actual N1 point). std-3 ×2. gpt-5.6-sol high audited:
+-- N1 genuine + resolved ball-locally ONLY; N2 was MISDIAGNOSED (two_term accepts any measurable Ω⊇ball, so the
+-- real residual is the image\ball localization cost of truncation); N3 (weight-match flat-trace rewrite) is
+-- ROUTINE plumbing not a structural gap. Does NOT close hCensusBound/hCross. NOT a₁=R/6; a₁=R/6 remains
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusTwoTermBallLocal

@@ -29791,4 +29791,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_CfieldF_transport
 #print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_transport_slot_satisfiable
 
+-- ## CensusTwoTermBallLocal: the BALL-LOCAL adapter for the flat two-term Gaussian census bound, resolving
+-- the newly-surfaced GLOBAL-vs-BALL boundedness mismatch (N1) at the CoV⟶two-term junction of the hCensusBound
+-- (hCross) assembly. two_term_census_bound_uniform demands q₁,q₂ GLOBALLY bounded, but common-witness transport
+-- + Levi F-factor deliver boundedness only on an image ball. FIX: truncate to Set.indicator (ball 0 r) q,
+-- Ω:=ball 0 r, restore via setIntegral_congr_fun. std-3 ×2; TEETH non-vacuity q₁=‖z‖²,q₂=‖z‖ (globally
+-- unbounded). gpt-5.6-sol high: N1 genuine + resolved ball-locally ONLY (image\ball residue remains); N2
+-- misdiagnosed; N3 routine plumbing. Does NOT close hCensusBound/hCross. NOT a₁=R/6; CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusTwoTermBallLocal.two_term_census_bound_ballLocal
+#print axioms QIQTH.CensusTwoTermBallLocal.two_term_census_bound_ballLocal_hyp_satisfiable
+
 end QIQTH.AxiomAudit
