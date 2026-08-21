@@ -13890,3 +13890,58 @@ seam (memAdjHi→memLapFull) and 4 deduplicated carriers. The other 11 discharge
 and shown NOT to further coalesce (distinct primitives, ~15/40 coverage) — the measured NEGATIVE finding, gpt-5.6-sol
 high confirmed. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains
 CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-965 (commit e39a4007) — HCrossNegativeQuadrants: the THREE negative-sign quadrants of the integrated hCross estimate, completing J4-927's h,k>0-only construction to all four sign quadrants (gpt-5.6-sol high scope check: both constructions SOUND)
+
+Picks up the standing hCross state: the live `hCross` mixed-second-difference binder was proved by J4-927
+(`hcross_mixed_second_diff_split_bound`) ONLY for the `h>0, k>0` quadrant; the three negative-sign
+quadrants `(h>0,k<0)`, `(h<0,k>0)`, `(h<0,k<0)` had NO banked lemma even stating them (the `h=0`/`k=0`
+axes are trivial `subst;simp`). Prior dispatches flagged this as "not a clean increment" since it would
+not change the top-level conditional status. This increment completes it anyway as a genuine mathematical
+completion of the estimate's own infrastructure. **NEW FILE `QIQTH/HCrossNegativeQuadrants.lean`** (ns
+`QIQTH.HeatResidualBound`, no banked file edited). std-3 ×5.
+
+**gpt-5.6-sol (high) scope check — both constructions SOUND**, difficulty asymmetry confirmed: k<0 is
+genuinely EASY (pure orientation + far-only, no cancellation); h<0 reduces to J4-927 by an EXACT
+antisymmetry relabel with NO new analysis (contra the naive "diagonal moves to u+h, no simple reflection"
+worry). The residual uncovered regime is exactly `|h| ≥ ε` (moved diagonal at/left of the lower anchor).
+
+**THE k<0 CONSTRUCTION (far-only).** For `k<0` the sliver interval `[u−ε+k, u−ε]` sits ENTIRELY LEFT of
+`u−ε`, i.e. every `s ≤ u−ε < u`, so `u−s ≥ ε > 0`: NO diagonal singularity. Reverse orientation
+(`intervalIntegral.integral_symm`) and majorize `(u−s)^{−1/2} ≤ ε^{−1/2}` (`Real.rpow_le_rpow_of_nonpos`,
+base `u−s ≥ ε`, exponent `≤ 0`) by a CONSTANT `C_far·h·ε^{−1/2}`, then
+`norm_integral_le_of_norm_le_const`: `|∫| ≤ (C_far/√ε)·(h·|k|) ≤ (2C_far/√ε + 2M/ε)·(h·|k|)`. Needs ONLY
+the FAR envelope on the leftward-extended domain `Ioo (u−ε+k) u` — no near/zero pieces, no sqrt-sliver
+integration. → `far_only_sliver_bound`.
+
+**THE h<0 CONSTRUCTION (antisymmetry relabel).** The mixed second difference is ANTISYMMETRIC under
+swapping the two h-points: `|Δ²(u,ε,h,k)| = |Δ²(u+h,ε+h,−h,k)|` (checked exactly: with `u'=u+h, ε'=ε+h,
+h'=−h`, one has `u'+h'=u`, `u'−ε'=u−ε`, `u'−ε'+k=u−ε+k`, `u'=u+h`, so BASE at the primed params has LHS
+`= −Δ²(u,ε,h,k)`). For `−ε<h<0` (⟺ `u+h > u−ε`, the moved diagonal `u+h` stays right of the lower anchor
+`u−ε`; equality `h=−ε` excluded since `ε'>0` fails), the `h<0` sliver IS J4-927's `h>0` core
+`integrated_split_sliver_bound` re-centred at `ũ := u+h` (`ε̃ := ε+h > 0`, `h̃ := −h > 0`), with the far
+envelope re-anchored at `u+h` (`(u+h−s)^{−1/2}`), the near strip `[u+h,u]`, and the zero region `(u,∞)`.
+NO new estimate; degraded constant `√(ε+h) < √ε`. The four integrabilities map by a permutation of the
+two frozen points; the collapse uses the sign-agnostic `mixed_second_diff_frozen_reduction_integrated`
+(J4-927; NO positivity on `h,k`) with the neg trick `∫(Φ(u+h,·)−Φ(u,·)) = −∫D'`.
+
+**WHAT LANDS (std-3 ×5).**
+- `far_only_sliver_bound` — ★★ the abstract-`D` k<0 sliver bound (constant majorant).
+- `far_only_sliver_bound_hyp_satisfiable` — non-vacuity with TEETH: constant witness `D ≡ 2^{−1/2}`
+  (`u=0, ε=h=1, k=−1, C_far=1, M=1/2`), the envelope `(0−s)^{−1/2}` genuinely DOMINATES the nonzero
+  constant (`2^{−1/2} ≤ (0−s)^{−1/2}` since `0−s ≤ 2`), NOT `0 ≤ 0`.
+- `hcross_split_bound_hpos_kneg` — ★★★ the live hCross binder for `h>0, k<0` (far-only, no near/zero).
+- `hcross_split_bound_hneg_kpos` — ★★★ the live hCross binder for `−ε<h<0, k>0` (antisymmetry relabel).
+- `hcross_split_bound_hneg_kneg` — ★★★ the live hCross binder for `−ε<h<0, k<0` (both combined).
+
+**VERIFICATION.** `lake build QIQTH.HCrossNegativeQuadrants` 0 errors; `lake build QIQTH.AxiomAudit`
+0 errors; `#print axioms` std-3 ×5 (propext/Classical.choice/Quot.sound, NO sorryAx, NO custom);
+`axiom_budget_check.sh` raw axiom count 0 (budget 0) / OK; `git status --porcelain | grep -i vacuum`
+clean; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show e39a4007 --stat` = 3 files (+322); pushed.
+
+**HONEST STATUS.** Completes hCross's sign-quadrant coverage (all four quadrants now have a banked live
+binder; residual = the degenerate `|h| ≥ ε` regime). Each negative quadrant is carrier-conditional on the
+SAME per-`s` far/near/zero data as the `h,k>0` branch (whose concrete `H_far` cancellation envelope stays
+the OPEN chart wall) — this closes real gaps in the campaign's own hCross infrastructure without
+discharging any top-level τ-carry. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}`. `a₁=R/6`
+remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
