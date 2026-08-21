@@ -13180,3 +13180,53 @@ COERCIVITY `‖W z 0‖≥c‖z‖−b` (bi-Lipschitz is SUFFICIENT not necessar
 amplitude/F-factor control, UNIFORM as `τ↓0`; NOT reducible to {G2,G3}. So `hCensusBound` is assembled modulo
 {C1,C2,C3}, NOT modulo {G2,G3} alone. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains
 CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+### J4-948 (commit 1f30153a) — CensusOnGateFixedGaussEnvelope + CensusOnGateEnvelopeThreaded: DISCHARGE C3's uniform-in-τ single-fixed-Gaussian domination (the τ-CAP collapse)
+
+**Task.** Attempt carry **C3** of `censusBound_of_onGate_and_ballRate` (J4-947): the on-gate off-ball
+`honGate` domination `|deriv(fun r↦vanVleckGatedWitness … r 0 z)(a−s)·F s z 0| ≤ Cenv·gaussDdim lam z`, with
+`Cenv,lam` UNIFORM as `τ:=a−s↓0`.
+
+**Key finding (the mechanism).** The banked crude time-derivative envelope
+`witnessTimeDeriv_domination_global` already delivers a Gaussian in the BASE coordinate `z` (so the chart
+coercivity `‖Wz‖≳‖z‖` worry is ALREADY discharged upstream via `FixedFlowGateData.poly_absorb`), BUT with a
+τ-DEPENDENT WIDTH and a `τ⁻¹` prefactor: `|deriv(τ)| ≤ C·τ⁻¹·gaussDdim(4·D.lam·τ)z`. C3 needs a
+τ-INDEPENDENT FIXED width. **SUBTLETY (sympy+numeric verified; gpt-5.6-sol high audited SOUND):** `sup_{τ>0}
+τ⁻¹·gaussDdim(wτ)z` decays only POLYNOMIALLY `~‖z‖^{−(n+2)}` (interior maximiser `τ*=r²/(2w(n+2))`), so a
+fixed-width Gaussian would FAIL globally in `z` WITHOUT a τ-cap. The cap `τ≤τ₀` (`τ=a−s∈(0,ε+h]`) rescues it:
+`τ*>τ₀` beyond a FIXED radius ⟹ the τ-sup reverts to boundary Gaussian decay. So the genuine remaining
+analytic content of C3 was NOT chart coercivity (banked) but the τ-cap fixed-width COLLAPSE.
+
+**CensusOnGateFixedGaussEnvelope.lean (std-3 ×5).** `pow_mul_exp_negSq_le` (`yᵏ·e^{−by²}≤1+k!/bᵏ`, `b>0`,
+from the banked `pow_mul_exp_neg_le_factorial_div` + `y²≥y` on `y≥1` / `yᵏ≤1` on `y≤1`); **★★★
+`tauInv_gaussWidth_le_fixedGauss`** (`∀lam≥2wτ₀`, explicit `Cenv>0`: `τ⁻¹·gaussDdim(wτ)z ≤ Cenv·gaussDdim(lam)z`
+for `0<τ≤τ₀`, `ρ≤‖z‖`; route: `exp(−r²/4wτ)=exp(−r²/8wτ)²`, τ-cap half `≤` fixed `exp(−r²/4lam)`, other half
+absorbs `τ⁻¹·τ^{−n/2}=((√τ)⁻¹)^{n+2}` via `pow_mul_exp_negSq_le`, `b=ρ²/8w`; `ρ²≤‖z‖²≤rncRadialSq z` via
+`norm_sq_le_rncRadialSq`); **★★ `onGate_gauss_of_crude_and_bound`** (the honGate C3 SHAPE from a crude envelope
+× uniform F-bound); + `tauInv…_teeth` / `onGate…_teeth` (nonzero integrand `gaussDdim 1`, domination genuinely used).
+
+**CensusOnGateEnvelopeThreaded.lean (std-3 ×4).** **★★★ `census_honGate_of_crude_and_Fbound`** (the LITERAL
+`honGate` binder `∀s∈Ioo(u−ε)u,∀a∈Icc u(u+h),∀z,(z∈K∧0∈S z)→ρ≤‖z‖→…` with single uniform `Cenv=C·MF·Ce`,
+`a−s∈(0,ε+h]⊆(0,τ₀]`); **★★★ `censusBound_of_crude_Fbound_ballRate`** (the FULL J4-947 `hCensusBound` far-rate
+from FOUR carries {crude envelope, F-bound, ball-rate C1, integrability C2}); **★★★
+`censusBound_of_amplitudeCarries_Fbound_ballRate`** (DISCHARGES the crude envelope to the banked amplitude
+carries via `witnessTimeDeriv_domination_global`, `w=4·D.lam`); `censusBound_of_amplitudeCarries_satisfiable`
+(TEETH: singleton gate `K={0}`, genuinely nonempty census gate `S=univ`, `Cfield`=affine slope, `hSupp` trivial
+at `0`, `F≡0`).
+
+**gpt-5.6-sol (high) go/no-go audit.** SOUND, no soundness bug; the τ-cap collapse correct, `yᵏe^{−by²}≤1+k!/bᵏ`
+valid, the uncapped polynomial-tail diagnosis correct; all 6 flagged checks (time-horizon `ε+h≤τ₀` — required
+directly not via min; `w=4D.lam>0` from `D.hlam`; norm/radius compatibility; `lam` as existential choice matching
+the consumer; uniform F-bound as explicit carry; `Cenv≥0` suffices) are met in the Lean. Conservative status
+characterization endorsed as non-overclaimed.
+
+**HONEST STATUS.** C3's uniform-in-τ single-fixed-Gaussian domination is DISCHARGED. `hCensusBound` is now
+assembled modulo {C1 ball-rate (⟸G2/G3), C2 integrability, the crude-envelope amplitude sup-bounds
+(`WideAmplitudeData` class — a genuinely separate carry, NOT derived from {G2,G3}), the uniform F-factor bound
+(G3-type but a separate formal carry)} — **NOT** modulo {G2,G3} alone. `hDuhamel`/`hDConv` remain carried;
+`hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+`lake build QIQTH.AxiomAudit` 0 errors (10256 jobs); `#print axioms` std-3 ×9; `axiom_budget_check` raw 0/OK;
+vacuum-grep clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show 1f30153a --stat` = 4
+files (+630).
