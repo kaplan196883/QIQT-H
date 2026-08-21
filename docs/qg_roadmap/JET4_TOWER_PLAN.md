@@ -15114,3 +15114,51 @@ pushed. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added
 2. (BLOCKED at J3) The bridge `J(1) = d(uniformFlowExp)_v(w)`, `γ'(1) = d(uniformFlowExp)_v(v)` —
    requires C¹-in-initial-condition/parameter dependence of the opaque Skolemized flow, the campaign
    wall (Mathlib has no C¹-in-IC PL-flow theorem). This is where the Jacobi route re-hits J3.
+
+## J4-991 — `JacobiConservation`: curvature skew-adjointness + Jacobi conservation corollary (Gauss-lemma radial orthogonality) — commit `907ded97`
+
+**Executes the J4-990 scope-map item 1** (the NEXT tractable step) — the Jacobi conservation
+corollary — plus its keystone, curvature skew-adjointness. gpt-5.6-sol (high, 2026-08-22) verdict:
+**BUILD IT** — index placement correct, double-Leibniz application sound and non-circular, genuine
+reusable radial-orthogonality core (does NOT solve J3 / identify `J(1)=d(exp)_v(w)`).
+
+**Key banked dependency found.** Curvature skew-adjointness needs the FIRST-pair antisymmetry of the
+lowered Riemann tensor `R_{ρσμν} = −R_{σρμν}`, and it is ALREADY banked (curved, axiom-free):
+`QIQTH.Curvature.lowered_riemann_antisymm` (Curvature.lean:1041), proved from `lowered_riemann_eq`
++ `metric_compat` + Schwarz (`pd_comm`). No new symmetry infrastructure needed.
+
+**Built (NEW file `JacobiConservation.lean`, no banked file edited).**
+- `curvature_velocity_pairing_zero` — curvature skew-adjointness `⟨v, R(w,v)v⟩_g = 0`, i.e.
+  `∑ₐᵦ g_{ab} v^a (∑_{σμν} R^b_{σμν} v^σ w^μ v^ν) = 0`. Under this file's sign convention the curvature
+  endomorphism `R(X,Y)Z` has components `R^ρ_{σμν} Z^σ X^μ Y^ν`, so `(R(w,v)v)^b = ∑ R^b_{σμν} v^σ w^μ v^ν`
+  with the two `v`-factors in slots `σ` (first lower) and `ν` (last). Reorganize to
+  `∑_{a,σ,μ,ν} (∑_b g_{ab} R^b_{σμν}) v^a v^σ w^μ v^ν`; the lowered `∑_b g_{ab} R^b_{σμν}` is antisymmetric
+  in `(a,σ)` (`lowered_riemann_antisymm`), contracted against the SYMMETRIC `v^a v^σ` ⟹ `T = −T` ⟹ 0.
+- `jacobi_radial_pairing_linear` — the conservation corollary. For a geodesic velocity `γ'` and a Jacobi
+  field `J` with covariant derivative `A = ∇_t J` obeying the CARRIED Jacobi equation `∇_t A = −R(J,γ')γ'`,
+  the radial pairing is LINEAR in `τ`: `⟨γ'(τ),J(τ)⟩_g = τ·⟨γ'(0),(∇_t J)(0)⟩_g` (using `J(0)=0`). Two
+  applications of the banked `metricPair_velocity_field_leibniz_at` (J4-990): `d/dτ⟨γ',J⟩ = ⟨γ',A⟩`, then
+  `d/dτ⟨γ',A⟩ = ⟨γ',∇_t A⟩ = −⟨γ',R(J,γ')γ'⟩ = 0` (skew-adjointness) ⟹ `⟨γ',A⟩` constant `= ⟨v,w⟩` ⟹
+  integrate via `is_const_of_deriv_eq_zero` (twice: once for `⟨γ',A⟩`, once for `⟨γ',J⟩ − τ⟨v,w⟩`).
+
+**Honest scope / non-vacuity.** Genuine chart-independent radial-orthogonality algebra. HONEST FIREWALL:
+the Jacobi field `J`, its covariant derivative `A`, and the Jacobi equation `∇_t A = −R(J,γ')γ'` are all
+CARRIED as hypotheses (not constructed from `d(exp)` of a variation). NO identification `J(1)=d(exp)_v(w)`
+— that is the opaque-Skolemized-chart C¹-in-initial-condition wall J3 (Mathlib has no C¹-in-IC PL-flow
+theorem) which the Jacobi route RELOCATES not removes. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.JacobiConservation` 0 err (8483 jobs, first try); throwaway
+`ChkJacobiCons` std-3 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom;
+`QIQTH.AxiomAudit` 0 err (10300 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean;
+wired `QIQTH.lean` + `AxiomAudit.lean` (b3b-i''); `git show 907ded97 --stat` = 3 files (+211); pushed.
+Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Updated scope map for the Gauss-lemma sub-campaign.**
+1. (DONE, J4-990) metric Leibniz engine `d/dτ⟨γ',J⟩ = ⟨γ',∇_t J⟩`.
+2. (DONE, J4-991) curvature skew-adjointness `⟨γ',R(J,γ')γ'⟩ = 0` + Jacobi conservation
+   `⟨γ'(τ),J(τ)⟩ = τ·⟨v,w⟩` (all fields carried as hypotheses).
+3. (BLOCKED at J3) The bridge `J(1) = d(uniformFlowExp)_v(w)`, `γ'(1) = d(uniformFlowExp)_v(v)` —
+   requires C¹-in-initial-condition/parameter dependence of the opaque Skolemized flow, the campaign
+   wall (Mathlib has no C¹-in-IC PL-flow theorem). This is where the Jacobi route re-hits J3. The
+   entire linearized Gauss-lemma content is now banked EXCEPT this single sensitivity bridge.
