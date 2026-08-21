@@ -29626,4 +29626,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotInverseWeightMatch.baseVaryingIFT_weightMatch
 #print axioms QIQTH.BaseSlotInverseWeightMatch.baseVaryingIFT_rightInvOn
 
+-- ## J4-935 (BaseSlotIFTOpenSuperset): the IFT OPEN-MAP SUPERSET Wbv''(ball 0 ρ) ⊇ ball 0 r — junction piece
+-- (4) flagged by gpt-5.6-sol's J4-933 re-audit as required for the literal hCensusBound assembly. Consumes
+-- baseVaryingIFT_weightMatch (J4-934) verbatim; its banked image-neighbourhood himg : Wbv''(ball 0 ρ) ∈ 𝓝 0
+-- (proved in J4-272 from OpenPartialHomeomorph.isOpen_image_of_subset_source + Wbv 0 = 0) is turned into a
+-- concrete ball superset by Metric.mem_nhds_iff (s ∈ 𝓝 0 ↔ ∃ r>0, ball 0 r ⊆ s): obtain ⟨r,hr,hrsub⟩. The
+-- superset is EXACT — no new IFT, no fresh open-map export, no extra regularity. It is what the J4-922/923
+-- flat trace-cancellation machinery (gaussian_hessian_cancel_trace_on_superset, fires on ANY measurable
+-- Ω ⊇ ball 0 r) needs the transported census image to contain. baseVaryingIFT_openSuperset (★★, full M1–M4
+-- bundle + weight-match identity + superset); baseVaryingIFT_imageBallSubset (★, superset alone). std-3 ×2.
+-- Non-vacuous: himg ∈ 𝓝 0 genuinely furnishes r>0 with 0 ∈ ball 0 r inhabited. CONDITIONAL only on hbaseC2
+-- (inherited J4-272/934, NO new assumption). NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.BaseSlotIFTOpenSuperset.baseVaryingIFT_openSuperset
+#print axioms QIQTH.BaseSlotIFTOpenSuperset.baseVaryingIFT_imageBallSubset
+
 end QIQTH.AxiomAudit

@@ -5264,6 +5264,16 @@ import QIQTH.CensusDomainBridge
 -- J4-272, no new assumption). NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.BaseSlotInverseWeightMatch
 
+-- BaseSlotIFTOpenSuperset — J4-935: the IFT OPEN-MAP SUPERSET Wbv''(ball 0 ρ) ⊇ ball 0 r, junction piece
+-- (4) of J4-933's hCensusBound re-audit. Consumes baseVaryingIFT_weightMatch (J4-934) verbatim; from its
+-- banked image-neighbourhood himg : Wbv''(ball 0 ρ) ∈ 𝓝 0, Metric.mem_nhds_iff extracts a positive radius
+-- r>0 with ball 0 r ⊆ Wbv''(ball 0 ρ) — the superset the J4-922/923 flat-cancellation machinery (fires on
+-- any measurable Ω ⊇ ball 0 r) needs the transported census image to satisfy. NO new IFT / open-map export.
+-- baseVaryingIFT_openSuperset (★★, full M1–M4 bundle + weight-match + superset); baseVaryingIFT_imageBallSubset
+-- (★, superset alone). std-3 ×2. CONDITIONAL only on hbaseC2 (inherited J4-272/934, no new assumption). NOT
+-- a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.BaseSlotIFTOpenSuperset
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
