@@ -13331,3 +13331,30 @@ CONFIRMED = { geometry {hg,hg0,hu,h0Kmem}, small-radius gate D (D.r≤rAmp), hSu
 bound hF, C1 on-ball trace rate hballrate, C2 integrability hΦint } — NO S=univ/hgate/Cfield carry. hCross (W5) UNTOUCHED;
 `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
 UNCHANGED. NOT `a₁=R/6`.
+
+### J4-952 (commit f4575ba2) — CensusFFactorSupDischarge: DISCHARGE the off-ball F-factor sup carry hF of the any-S census capstone to the width-2 Levi domination
+J4-951's most-discharged any-S census capstone `censusBound_of_geometry_gate_supp_F_ballRate_anyS` took the off-ball
+F-factor sup bound `hF : ∀ s∈Ioo(u-ε)u, ∀ z, ρ≤‖z‖ → |F s z 0| ≤ MF` (MF≥0, s-uniform) as a STANDALONE carry among its
+six live dependencies {geometry {hg,hg0,hu,h0Kmem}, small-radius gate D (D.r≤rAmp), hSupp, hF, C1 hballrate, C2 hΦint}.
+J4-952 ELIMINATES hF. New file `CensusFFactorSupDischarge.lean` (edits NO banked file). ★MECHANISM (banked `B_le_MB`):
+for ANY F with the width-2 Levi Gaussian domination `hFdom : ∀ s, 0<s→s≤T→∀ z y, |F s z y| ≤ C_L·gaussDdim(2s)(z-y)` on
+(0,T], and benign time-window side conditions ε<u (so 0<u-ε) and u≤T, the banked `HeatResidualBound.B_le_MB` (peak-bound
+`gaussDdim(2s)z ≤ gaussDdim(2s)0` + width-antitone `gaussDdim(2s)0 ≤ gaussDdim a 0` for a≤2s) at the time floor
+a:=2(u-ε) gives the s-UNIFORM constant `MF := C_L·gaussDdim(2(u-ε))0` for EVERY z on the window — so the off-ball ρ≤‖z‖
+restriction is FREE slack (we prove a strictly stronger global-on-strip bound). hFdom is the SAME object the
+CensusLeviFactorDischarge chain reduces the F-factor to (intended {hDuhamel,hDConv,hCConv}-family). LANDS std-3 ×2:
+`hF_of_leviWidth2Dom` ★★★ (produces exactly (MF, hMF, hF), reducing hF to {hFdom, ε<u, u≤T}); `hF_of_leviWidth2Dom_
+satisfiable` (TEETH: F≡0, C_L=0, ε<u≤T — bundle jointly satisfiable, not vacuously quantified). Wired QIQTH.lean +
+AxiomAudit.lean; build via QIQTH.AxiomAudit OK (10260 jobs); std-3 ×2 (propext, Classical.choice, Quot.sound; no sorryAx,
+no custom); axiom_budget_check raw 0/OK; vacuum-grep clean; `git show f4575ba2 --stat` = 3 files (+129).
+★gpt-5.6-sol high adversarial audit: (1) hF discharge SOUND — 0<s from ε<u, s≤T from u≤T; ignoring ρ≤‖z‖ harmless (prove
+stronger, restrict); hF no longer a standalone caller carry. (2) C1 hballrate = GENUINE analytic carry (two-term on-gate
+CoV trace core needing G2 ball⊆{0∈S z} — NOT implied by hSupp, opposite direction — plus a Gaussian-moment/trace
+integration to produce the (a-s)^{-1/2} rate and Cpair; not routine domination glue). (3) C2 hΦint = EASY iff banked
+measurability applies to the exact arbitrary-S deriv-witness integrand (domination by product of two Gaussians is
+routine once measurable), else CARRIED — currently a formal carry (no exact hΦint discharge theorem banked; arbitrary-S
+gate branching can threaten measurability). (4) AUTHORITATIVE minimal carry list for hCross's census far-rate after hF's
+elimination = { hSupp, hΦint (C2), hballrate (C1), hDuhamel, hDConv, hCConv } (hF/MF/hMF removed; hFdom not listed
+separately = expected output of {hDuhamel,hDConv,hCConv}; G2 is an upstream obligation folded into hballrate). `a₁=R/6`
+remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED — this brick converts their width-2 Levi output into the
+former hF binder and proves none of the three. NOT `a₁=R/6`.
