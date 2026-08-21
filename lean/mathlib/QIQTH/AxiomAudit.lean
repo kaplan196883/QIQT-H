@@ -13665,6 +13665,19 @@ namespace QIQTH.AxiomAudit
 -- neighborhood via is_const_of_deriv_eq_zero.  ⚠ HONEST FIREWALL: the pointwise metric-preservation only — it does NOT build the
 -- orthonormal FRAME (next: localized preservation + n-vector assembly), NOT discharge the van-Vleck frame data, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.ParallelTransport.parallel_metricInner_const_at
+-- (b3b-i') GENERAL COVARIANT METRIC LEIBNIZ (a₁=R/6 endgame / Jacobi first-variation Gauss-lemma sub-campaign, J4) —
+-- CovariantMetricLeibniz.lean: metricPair_covariant_leibniz_at — the GENERALIZATION of parallel_metricInner_const_at to NONZERO
+-- covariant derivatives: writing the raw component derivatives as e'ᵢ = Eᵢ − ∑ⱼₖ Γⁱⱼₖ(γτ)γ'ⱼeₖ and f'ᵢ = Fᵢ − ∑ⱼₖ Γⁱⱼₖ(γτ)γ'ⱼfₖ
+-- (so E = ∇_t e, F = ∇_t f are the COVARIANT derivatives along γ), the metric pairing s ↦ ∑ₐᵦ g_{ab}(γs)eₐ(s)f_b(s) has derivative
+-- ⟨∇_t e,f⟩_g + ⟨e,∇_t f⟩_g at τ — i.e. the metric Leibniz rule d/dτ⟨e,f⟩ = ⟨∇_t e,f⟩ + ⟨e,∇_t f⟩.  Same pairwise connection-term
+-- cancellation (sum4_swap14/24) as the parallel proof (those cancellations involve e,f only, not E,F); E=F=0 recovers
+-- parallel_metricInner_const_at.  Plus metricPair_velocity_field_leibniz_at: geodesic-velocity specialization e=γ' (∇_t γ'=0) giving
+-- d/dτ⟨γ',J⟩_g = ⟨γ',∇_t J⟩_g — the FIRST step of the standard first-variation Gauss-lemma computation.  ⚠ HONEST FIREWALL: the
+-- metric-compatibility ENGINE only — the Jacobi field J and its covariant derivative are CARRIED as hypotheses (like the parallel
+-- fields), NOT constructed; no identification of J with d(exp) of a variation (that is the C¹-in-IC opaque-chart wall J3, which the
+-- Jacobi approach RELOCATES not removes — gpt-5.6-sol high 2026-08-22), no Jacobi equation, no Gauss lemma, NOT a₁=R/6.  [AF] std-3.
+#print axioms QIQTH.CovariantLeibniz.metricPair_covariant_leibniz_at
+#print axioms QIQTH.CovariantLeibniz.metricPair_velocity_field_leibniz_at
 -- (b3b-ii) INTERVAL ORTHONORMALITY (a₁=R/6 endgame / duality wall #1, step b) — ParallelInnerInterval.lean:
 -- parallelPair_metricInner_eq_on_Ioo — the g-inner product ⟨e,f⟩_g of two parallel-transported vectors is CONSTANT on the transport
 -- interval Ioo a b (parallel_metricInner_const_at gives deriv 0 at each point; IsOpen.is_const_of_deriv_eq_zero on the open
