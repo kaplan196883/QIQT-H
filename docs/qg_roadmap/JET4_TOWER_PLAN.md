@@ -13230,3 +13230,78 @@ assembled modulo {C1 ball-rate (⟸G2/G3), C2 integrability, the crude-envelope 
 `lake build QIQTH.AxiomAudit` 0 errors (10256 jobs); `#print axioms` std-3 ×9; `axiom_budget_check` raw 0/OK;
 vacuum-grep clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show 1f30153a --stat` = 4
 files (+630).
+
+---
+
+## J4-949 (commit e6d4bab9, `CensusAmplitudeSupDischarge.lean`, NEW FILE, Opus/Fable): DISCHARGE the amplitude sup-bound carries **hAmp0/hCfield** of `censusBound_of_amplitudeCarries_Fbound_ballRate` (J4-948) from banked base-point continuity via the AFFINE-in-τ structure.
+
+Follows J4-948, which discharged carry C3 (the τ-cap fixed-Gaussian collapse) leaving `hCensusBound` assembled
+modulo {C1 ball-rate, C2 integrability, the crude-envelope amplitude carries (`hgate`/`hAmp0`/`hCfield` — the
+`WideAmplitudeData` class), the uniform F-factor bound}. ★TASK: attempt the amplitude sup-bounds.
+
+★THE MECHANISM. The concrete census field amplitude `chartFieldAmp cutA cutB τ z 0` is AFFINE in `τ`:
+`= chartFieldAmp cutA cutB 0 z 0 + censusAmpTauDeriv … z · τ` (pure `ring` on the def), and `censusAmpTauDeriv … z`
+is DEFINITIONALLY the slope `Cfield z 0` delivered by the banked UNCONDITIONAL `chartFieldAmp_hasDerivAt_tau`.
+The banked std-3 base-point regularity `chartFieldAmp_base_regularity_center` (per fixed τ) and
+`censusAmpTauDeriv_base_regularity_center` each give sup-bounds on a base ball `ball 0 r` from the STANDARD
+geometry carries {hg metric smooth, hg0 g(0)=I, hu transport smooth, h0Kmem K∈𝓝 0}. Bounding `chartFieldAmp` at
+`τ=0` (constant M₀) and the slope (constant M'), the affine form gives a SINGLE τ-UNIFORM `M := M₀ + M'·τ₀` on
+`(0,τ₀]` — no per-τ dependence. So `hAmp0`/`hCfield` are discharged to the standard geometry carries alone,
+MODULO the benign radius compatibility `D.r ≤ rAmp` (choose the gate record small).
+
+★hgate FINDING (gpt-5.6-sol high adversarially confirmed genuine). `hgate` has TWO halves: (a) the HasDerivAt half
+`HasDerivAt (chartFieldAmp … u z p) (Cfield z p) τ` — BANKED UNCONDITIONAL (`chartFieldAmp_hasDerivAt_tau`),
+supplied internally; (b) the GATE half `∀ w, w.2.2∈K → 0<w.1 → w.2.1∈S w.2.2`. Because the field point `w.2.1` is
+UNIVERSALLY quantified, (b) FORCES `S z = univ` on `K` — GENUINELY STRONGER than the downstream census gate which
+needs only `0∈S z` (field point fixed at 0). This arises because the banked τ-derivative closed form
+(`witnessTauDeriv_eq_gatedTauRepProd`) is an EVERYWHERE-in-field-point identity, while the census evaluates only at
+field point 0. Sol residual caveat: with `S=univ`, `hSupp` (`∀z∈K, 0∈S z → ‖z‖<D.r`) then requires `∀z∈K, ‖z‖<D.r`,
+i.e. `K⊆ball 0 D.r` — a tension with choosing `D.r` small. So hgateS is a real (not trivial) carry.
+
+LANDS std-3 ×4 (propext/Classical.choice/Quot.sound, no sorryAx/custom): `chartFieldAmp_affine_slope` (affine
+identity); `census_amplitude_supBounds` ★★★ (τ-UNIFORM amplitude sup package `∃rAmp>0 M M', 0≤M∧0≤M'∧(∀τ 0<τ≤τ₀ ∀z
+‖z‖<rAmp → |chartFieldAmp τ z 0|≤M)∧(∀z ‖z‖<rAmp → |censusAmpTauDeriv z|≤M')` — the DISCHARGE);
+`censusBound_of_geometry_gate_supp_F_ballRate` ★★★ (the FULL `hCensusBound` far-rate `∃rAmp>0, ∀D:FixedFlowGateData,
+D.r≤rAmp → hgateS → hSupp → hΦint → hballrate → far-rate`, with `hAmp0`/`hCfield` DISCHARGED internally, `Cfield` and
+the HasDerivAt half reconstructed internally); `shrinkGate` + `census_smallRadius_gate_exists` ★★ (NON-VACUITY:
+`shrinkGate` shrinks any valid record to any smaller positive radius, and via `FixedFlowGateData.of_geometry` a valid
+record with radius `≤ any target > 0` ALWAYS exists — refuting Sol's point-C `∀D`-binder vacuity concern).
+
+gpt-5.6-sol (high) go/no-go: QUALIFIED GO. (A) hAmp0/hCfield GENUINELY discharged, no hidden τ-uniformity gap
+(the affine `M₀+M'·τ₀` is sound & uniform). (B) hgateS confirmed strictly stronger than `0∈S z` — real obstruction
+for a prescribed nontrivial flow-ball gate; `S=univ` harmless only if hSupp then survives (needs K⊆ball D.r).
+(C) the `∃rAmp,∀D,D.r≤rAmp→…` form is honest, and `census_smallRadius_gate_exists` supplies the missing existence.
+(D) legitimately ELIMINATES hAmp0/hCfield as external carries; firewall-only infrastructure, a₁=R/6 unchanged.
+
+BUILT `lake build QIQTH.AxiomAudit` 0 errors (10257 jobs); `#print axioms` std-3 ×4; `axiom_budget_check` raw 0/OK;
+vacuum-grep clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show e6d4bab9 --stat` = 3 files
+(+291). ★HONEST STATUS: `hAmp0`/`hCfield` DISCHARGED (from banked base-point continuity, modulo benign `D.r≤rAmp`
+compat with valid small records shown to exist). `hCensusBound` now assembled modulo {`hgateS` (the S-gate half of
+hgate — STRONGER: forces S=univ on K), `hSupp`, the F-factor bound, C1 ball-rate ⟸G2/G3, C2 integrability} — NOT
+`{G2,G3}` alone. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-950 (CensusTauDerivAnySEnvelope): ELIMINATE the S=univ requirement (J4-949 concern) for the crude ∂_τ
+DOMINATION envelope — NOT a cp466-style vacuity trap. Commit 14262d19 (std-3 ×3, +265). J4-949 flagged that
+`hgateS` (the S-gate half of `witnessTimeDeriv_domination`'s over-strong `hgate`: `∀ w, w.2.2∈K → 0<w.1 →
+w.2.1∈S w.2.2 …`) forces `S q=univ` on K, in tension with `hSupp` (K⊆ball). VERDICT (gpt-5.6-sol high adversarial
+audit + repo audit): this is a BENIGN plumbing over-statement of ONE lemma's hypothesis (the field point `w.2.1` is
+lazily universally-quantified), NOT a cp466 collapse. DECISIVE FACTS: (1) the census evaluates the τ-derivative ONLY
+at field point 0 (`deriv(fun r↦Wit r 0 z)`), so the genuine need is the census gate `0∈S z`, satisfiable by a PROPER
+S; (2) the field-point-0 everywhere identity with NO hgate + ANY S ALREADY EXISTS banked
+(`CensusTauDerivGateSplit.censusTauDeriv_gateSplit`, J4: `deriv = if (z∈K ∧ 0∈S z) then <S-independent closed form>
+else 0`, off-gate split discharges membership, never S=univ) — the same quantifier-order fix already applied to the
+MEASURABILITY surface at J4-231/232 (`HgateSatAudit`/`GatedRepSFix` v4). UNLIKE cp466: there `hframeK`
+(flat-metric-on-K) was MATHEMATICALLY incompatible with curvature κ≠0, forcing K={0}; here `0∈S z` imposes NO
+geometric constraint. LANDS: `witnessTimeDeriv_domination_anyS` ★★★ (on-ball crude ∂_τ envelope
+|deriv(fun r↦Wit r 0 z)τ|≤C·τ⁻¹·gaussDdim(4·D.lam·τ)z, NO S-gate hyp, ANY S); `witnessTimeDeriv_domination_global_anyS`
+★★★ (∀z extension, over-strong hgate REMOVED entirely — only the honest `hSupp` remains; a strictly-more-general
+drop-in for the banked `witnessTimeDeriv_domination_global`). Route: apply banked `witnessTimeDeriv_domination` at
+S:=univ (over-strong hgate TRIVIAL for univ: `Set.mem_univ` + banked unconditional `chartFieldAmp_hasDerivAt_tau`),
+transfer to arbitrary S via `censusTauDeriv_gateSplit` (on gate both derivs = same S-independent closed form; off gate
+deriv=0, RHS≥0). `census_anyS_env_satisfiable_properGate` ★★ NON-VACUITY at a PROPER gate S:=ball 0 1 (S 0≠univ via
+far point 2, n>0; yet 0∈S z) — directly refutes cp466. Wired QIQTH.lean + AxiomAudit.lean; axiom_budget_check raw 0.
+Re-threading the LIVE census consumers (`CensusOnGateEnvelopeThreaded`, `WitnessBoundDHpardiffWired`,
+`CensusAmplitudeSupDischarge`) onto the any-S envelope is a mechanical supplier substitution (opaque-hypothesis),
+deferred. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
