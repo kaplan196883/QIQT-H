@@ -5180,6 +5180,18 @@ import QIQTH.HCrossIntegratedSplit
 -- convolution Φ(a,s)=C·cos(a−s) with ∂_aΦ=−C·sin(a−s)). Localizes the hCross wall (h,k>0) to hderiv;
 -- does NOT close hCross. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossFarDerivBridge
+-- HCrossDerivEngineWired — J4-929: WIRE the banked differentiation-under-integral engine into J4-928's
+-- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
+-- gpt-5.6-sol (high) go/no-go: NO-GO for full closure (the residual bound = the chart CoV + J4-924 wall,
+-- with a GENUINE base-vs-field slot mismatch, ℝⁿ-vs-ball tail, unverified concrete weight regularity) —
+-- BUT the differentiation content of hderiv is ALREADY BANKED: heatConvInner_hasDerivAt (Mathlib dominated
+-- differentiation) + witnessZTime_hasDerivAt (J4-915, per-z HasDerivAt) + witnessHZslice_of_crudeEnv
+-- (J4-916, explicit Gaussian-pair dominator). censusDeriv_hasDerivAt wires them, FORCING g s a = ∫z ∂_τ
+-- witness·F; hEnv_of_witnessCrudeEnv is the J4-916 provider (non-vacuity); hcross_of_censusIntegral_bound
+-- (★★★) gives the full hCross binder (h,k>0) from a PURE scalar census inequality hCensusBound (NO
+-- HasDerivAt content left). Localizes the wall; does NOT close hCross. NOT a₁=R/6 (CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}).
+import QIQTH.HCrossDerivEngineWired
 
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating

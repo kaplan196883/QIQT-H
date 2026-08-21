@@ -29498,4 +29498,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.abs_sub_le_mul_of_hasDerivAt_hyp_satisfiable
 #print axioms QIQTH.HeatResidualBound.hfar_of_hasDerivAt_hyp_satisfiable
 
+-- ## J4-929 (HCrossDerivEngineWired): WIRE the banked differentiation-under-integral engine into J4-928's
+-- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
+-- gpt-5.6-sol (high) go/no-go: NO-GO for full closure — the residual bound IS the opaque chart wall (chart
+-- CoV + J4-924), with (i) a GENUINE base-slot (uniformInverseChart z 0) vs banked field-slot CoV
+-- (uniformInverseChart 0 z) mismatch, (ii) ℝⁿ-vs-ball tail, (iii) unverified concrete weight regularity.
+-- BUT hderiv's DIFFERENTIATION content is already banked: heatConvInner_hasDerivAt (Mathlib dominated
+-- differentiation) + witnessZTime_hasDerivAt (J4-915) + witnessHZslice_of_crudeEnv (J4-916, explicit
+-- Gaussian-pair dominator Dz). censusDeriv_hasDerivAt wires them, FORCING g s a = ∫z deriv(witness r 0 z)
+-- (a−s)·F; hEnv_of_witnessCrudeEnv is the J4-916 PROVIDER of the engine-carry bundle (non-vacuity by
+-- construction); hcross_of_censusIntegral_bound (★★★) gives the full live hCross binder |Δ²|≤(2C_far/√ε+
+-- 2M/ε)(|h||k|) for h,k>0 from a PURE scalar census inequality hCensusBound (NO HasDerivAt content left).
+-- Localizes the wall (differentiation eliminated); does NOT close hCross. std-3 ×3. NOT a₁=R/6; a₁=R/6
+-- remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.HeatResidualBound.censusDeriv_hasDerivAt
+#print axioms QIQTH.HeatResidualBound.hEnv_of_witnessCrudeEnv
+#print axioms QIQTH.HeatResidualBound.hcross_of_censusIntegral_bound
+
 end QIQTH.AxiomAudit
