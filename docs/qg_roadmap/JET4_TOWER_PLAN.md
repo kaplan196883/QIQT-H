@@ -13358,3 +13358,42 @@ elimination = { hSupp, hΦint (C2), hballrate (C1), hDuhamel, hDConv, hCConv } (
 separately = expected output of {hDuhamel,hDConv,hCConv}; G2 is an upstream obligation folded into hballrate). `a₁=R/6`
 remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED — this brick converts their width-2 Levi output into the
 former hF binder and proves none of the three. NOT `a₁=R/6`.
+
+### J4-953 (commit a782f7fa) — CensusPhiIntegrabilityDischarge: DISCHARGE the C2 integrability carry hΦint of the any-S census capstone (CONDITIONAL, on the standard {hKSmeas,hcar} chart carriers)
+J4-952 left hCensusBound's authoritative minimal dependency list (Sol) = {hSupp, hΦint(C2), hballrate(C1),
+hDuhamel, hDConv, hCConv}, with hΦint = "EASY iff banked measurability applies to the exact arbitrary-S
+deriv-witness integrand; otherwise CARRIED". J4-953 executes that discharge. hΦint is
+`∀ s∈Ioo(u-ε)u, ∀ a∈Icc u(u+h), Integrable(fun z ↦ deriv(fun r↦vanVleckGatedWitness … r 0 z)(a-s)·F s z 0)`.
+New file CensusPhiIntegrabilityDischarge.lean (edits NO banked file), THREE layers.
+★LAYER 1 `censusPhi_integrable_of_measAndDom` (PROVEN OUTRIGHT — the domination half): pointwise
+`|deriv|·|F| ≤ (C·τ⁻¹·gaussDdim(4·D.lam·τ)z)·(C_L·gaussDdim(2s)z) = (C·τ⁻¹·C_L)·(gaussDdim(4·D.lam·τ)z·gaussDdim(2s)z)`
+— a PRODUCT OF TWO GAUSSIANS, integrable via banked `gaussDdim_pair_integrable` + `Integrable.mono'`; τ=a-s∈(0,τ₀]
+(from ε+h≤τ₀), s∈(0,T] (from ε<u≤T). ★LAYER 2 `derivSlice_stronglyMeasurable_of_gateCarriers`: the deriv-witness
+z-slice StronglyMeasurable from the STANDARD F2 carriers {hKSmeas, hcar} via banked
+`HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4` (full joint (τ,p,q) strong-meas of the ∂τ witness kernel)
+composed with the measurable section z↦(τ,0,z) — arbitrary S handled by CARRYING hKSmeas/hcar (gate-branching
+measurability supplied by hKSmeas, on-gate derivative data by hcar), NOT by assuming S nice. ★LAYER 3
+`censusPhi_integrable_of_gateCarriers` / `censusPhi_integrable_of_amplitudeCarries`: the COMBINED interface
+producing the capstone's EXACT hΦint binder — hDmeas built from layer 2 × hFmeas, crude ∂τ envelope discharged
+INTERNALLY from amplitude sups hAmp0/hCfield/hSupp via `witnessTimeDeriv_domination_global_anyS` (J4-950).
+★gpt-5.6-sol high adversarial audit: (A) v4 + measurable-section composition SOUND for the exact integrand
+(field 0, base z); v4 returns actual StronglyMeasurable (not merely AE), so the measure-zero-section worry is moot;
+arbitrary-S branching correctly handled by carrying hKSmeas/hcar. (B) frame as CONDITIONAL DISCHARGE: hDmeas
+GENUINELY eliminated (layer 2), but hcar packages the chart-Borel measurability with a KNOWN DEFINITIONAL WALL
+(`ChartJointBorel.chartJoint_measurable_of_rep`: uniformInverseChart via Classical.choose, measurable only via a
+global representative on K) — a STANDING upstream carrier (threaded through tauDeriv_prod_stronglyMeasurable_v4,
+hWitDeriv_discharged, f2Pack_concrete_v3, constGate_hS1), NOT discharged/introduced here. (C) non-vacuity: layer 1
+concretely non-vacuous; hKSmeas realizable at a PROPER gate; make NO standalone non-vacuity claim for hcar/the full
+combined antecedent (a Classical.choose function need not be measurable merely because a measurable representative
+exists — the wall may be semantic). So hΦint discharges to {hKSmeas, hcar (standard chart carrier, upstream),
+hFmeas, amplitude sups producing crude, hFdom width-2 Levi = {hDuhamel,hDConv,hCConv}-family}. LANDS std-3 ×6:
+the four discharge lemmas + `censusPhi_integrable_of_measAndDom_satisfiable` (TEETH: F≡0, self-contained crude
+envelope from the banked anyS supplier at K={0}/S=univ, no chart wall, nonempty window Ioo 1 2 / Icc 2 2) +
+`censusPhi_jointGate_measurable_satisfiable` (hKSmeas at PROPER measurable gate S=ball 0 1, K=closedBall).
+Wired QIQTH.lean + AxiomAudit.lean; build via QIQTH.AxiomAudit OK (10261 jobs); std-3 ×6 (propext, Classical.choice,
+Quot.sound); axiom_budget_check raw 0/OK; vacuum-grep clean; `git show a782f7fa --stat` = 3 files (+394). HONEST
+STATUS: hCensusBound far-rate residual analytic carry after hΦint's discharge = {hSupp, hballrate(C1), hDuhamel,
+hDConv, hCConv} (hΦint replaced by the standard measurability carriers hKSmeas/hcar + the domination objects
+already present — crude from amplitude sups, hFdom width-2 = {hDuhamel,hDConv,hCConv}-family). C1 hballrate remains
+the GENUINE not-further-reducible analytic carry (two-term on-gate CoV trace core needing G2). `hDuhamel`/`hDConv`
+remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
