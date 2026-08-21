@@ -5941,3 +5941,13 @@ import QIQTH.HbulkderivFullyClosedCurved
 -- Degenerate-K caveat (curved geometry does NO analytic work). Closes hCConv ONLY at this witness;
 -- hDuhamel untouched. std-3. NOT a₁=R/6.
 import QIQTH.HCConvGatedK0FullyClosed
+
+-- HDConvGatedK0FullyClosed — ★★★ the LITERAL top-level hDConv closure at the curved K={0} witness.
+-- SECOND of the analytic trio {hDuhamel,hDConv,hCConv} closed in its literal shape (DifferentiableAt ℝ
+-- (fun u => heatConv H (leviSeries (heatOp g gi H)) u 0 0) t), by the SAME null-singleton z-gate as
+-- hCConv (J4-988): the base-point (q) gate sits on the INNER z-integration variable, NOT the free TIME
+-- variable u, so heatConv≡0 in u ⟹ DifferentiableAt via differentiableAt_const. ⚠ hDuhamel does NOT
+-- close here: the same collapse gates away the approximate-identity boundary term, so hDuhamel reduces
+-- to heatOp g gi H t 0 0 = 0 (the generically-NONZERO diagonal parametrix residual carrying a₁=R/6);
+-- the trio is NOT jointly closable at K={0} ⟹ NO complete a₁=R/6 instance here. std-3. NOT a₁=R/6.
+import QIQTH.HDConvGatedK0FullyClosed

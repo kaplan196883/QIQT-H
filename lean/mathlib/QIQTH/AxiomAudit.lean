@@ -29,6 +29,7 @@ import QIQTH.HbintRequant
 import QIQTH.HbintFullyClosedCurved
 import QIQTH.HZMassFullyClosedCurved
 import QIQTH.HCConvGatedK0FullyClosed
+import QIQTH.HDConvGatedK0FullyClosed
 import QIQTH.HFdRequant
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
@@ -30394,5 +30395,11 @@ namespace QIQTH.AxiomAudit
 -- degenerate witness; hDuhamel untouched. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HCConvGatedK0FullyClosed.hCConv_gatedKernel_K0_closed
 #print axioms QIQTH.HCConvGatedK0FullyClosed.hCConv_vanVleckGatedWitness_K0_closed
+-- HDConvGatedK0FullyClosed: ★★★ the LITERAL top-level hDConv closure at the curved K={0} witness.
+-- Same null-singleton z-gate as hCConv, applied in the TIME slot: heatConv≡0 in u ⟹ DifferentiableAt
+-- via differentiableAt_const. ⚠ hDuhamel does NOT close at K={0} (reduces to heatOp g gi H t 0 0 = 0,
+-- the generically-nonzero diagonal residual), so NO complete a₁=R/6 instance here. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HDConvGatedK0FullyClosed.hDConv_gatedKernel_K0_closed
+#print axioms QIQTH.HDConvGatedK0FullyClosed.hDConv_vanVleckGatedWitness_K0_closed
 
 end QIQTH.AxiomAudit
