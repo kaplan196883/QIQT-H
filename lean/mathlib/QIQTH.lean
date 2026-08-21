@@ -5889,3 +5889,11 @@ import QIQTH.HDuhamelHQ1Discharged
 -- Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three, UNCHANGED. std-3 ×8.
 -- NOT a₁=R/6.
 import QIQTH.HbintRequant
+
+-- HbintFullyClosedCurved — the FULL discharge of the interior tube-cover hbint integrability leg at the
+-- genuinely-curved witness: the two elementary residual carries of J4-983 (BL-continuity + compact-K
+-- sup-bound) are discharged UNCONDITIONALLY because K={0} is a singleton (continuousOn_singleton;
+-- bound by the value at 0), turning hbint_bLtR0_closed_curved's gated conclusion into an UNCONDITIONAL
+-- integrability at concrete gate params 0<a<b<c. Discharges NONE of {hDuhamel,hDConv,hCConv};
+-- a₁=R/6 CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
+import QIQTH.HbintFullyClosedCurved

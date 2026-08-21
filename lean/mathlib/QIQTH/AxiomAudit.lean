@@ -26,6 +26,7 @@ import QIQTH.HbintInteriorContinuityRoute
 import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HbintRequant
+import QIQTH.HbintFullyClosedCurved
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
@@ -30355,5 +30356,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HbintRequant.hbint_concrete_via_interior_route_requant
 #print axioms QIQTH.HbintRequant.hbint_interior_via_tube_cover_requant
 #print axioms QIQTH.HbintRequant.hbint_bLtR0_closed_curved
+
+-- HbintFullyClosedCurved — the FULL discharge of the interior tube-cover hbint integrability leg at
+-- the genuinely-curved witness: the two elementary residual carries of J4-983 (BL-continuity +
+-- compact-K sup-bound) discharged UNCONDITIONALLY on the singleton K={0} (continuousOn_singleton;
+-- bound by value at 0), yielding UNCONDITIONAL integrability at concrete gate params 0<a<b<c.
+-- Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HbintFullyClosedCurved.singleton_exists_bound
+#print axioms QIQTH.HbintFullyClosedCurved.hbint_fully_closed_curved
 
 end QIQTH.AxiomAudit
