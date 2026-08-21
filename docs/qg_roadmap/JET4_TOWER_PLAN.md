@@ -12788,3 +12788,53 @@ carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hD
 errors (10245 jobs); `#print axioms` std-3 ×9 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked file
 edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `acfb34db`, pushed. NOT `a₁ = R/6`.
+
+## J4-939 — the BALL-LOCAL `∘V` transport closing the AMPLITUDE half of junction piece (3)'s `∘V` transport for `hCensusBound` — commit `57145f4a` (`BaseSlotTransportBallLocal.lean`, new file)
+
+**Context.** J4-938 discharged the AMPLITUDE half of junction piece (3) [concrete `amp·F`/`Cfield·F`
+bounded+Lipschitz inputs], but found J4-932's `transported_ratio_regularity` demands a GLOBALLY bounded +
+Lipschitz weight `P` (`∀ z, |P z| ≤ M_P`; `∀ x y, |P x − P y| ≤ L_P·dist`), whereas the concrete `amp·F`
+is only BALL-LOCALLY bounded+Lipschitz (on `ball 0 ρ`).  A ball-local `∘V` transport variant is needed to
+compose them.  This increment supplies it.
+
+**★ THE BALL-LOCAL RELAXATION IS FREE FROM J4-932's OWN RADIUS BOOKKEEPING.**  J4-932's `hmaps` step
+(`σ = min σ0 (rQ/(L_V+1))`, `‖V w‖ ≤ L_V‖w‖ < rQ`) was already chosen precisely so `V` maps the image
+ball `ball 0 σ` INTO the base ball `ball 0 rQ`.  Nothing in that argument used GLOBAL validity of the
+weight — only validity ON `ball 0 rQ` (where `V`'s image lands).  So relaxing J4-932's global `P`-bounds
+to ball-local (`∀ z ∈ ball 0 rQ …`) is a verbatim adaptation: `hmaps` unchanged; the bound / Lipschitz
+steps evaluate the weight only at `V w ∈ ball 0 rQ`.  (gpt-5.6-sol high VERIFIED: pairwise-Lipschitz is a
+TWO-POINT condition — since `V x, V y ∈ ball 0 rQ` both, `|Q(V x)−Q(V y)| ≤ L_Q·dist(V x)(V y) ≤ L_Q·L_V·
+dist x y` needs NO larger-set / convex-hull control; the straight-line worry applies only when DERIVING
+Lipschitz from derivative bounds, not here.)
+
+**What lands** (std-3 ×5, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `transport_ballLocal_regularity` (★★): the GENERIC ball-local `∘V` transport — for ANY `Q` bounded
+  (`M_Q`) + pairwise-Lipschitz (`L_Q`) ONLY on `ball 0 rQ`, `w ↦ Q(V w)` is bounded (`M_Q`) +
+  pairwise-Lipschitz (`L_Q·L_V`) on an image ball `ball 0 σ`, with `V 0 = 0` and `V` mapping `ball 0 σ`
+  into `ball 0 rQ`.
+- `transported_ratio_regularity_ballLocal` (★★): the BALL-LOCAL drop-in for J4-932 — for ANY ball-local
+  (on `ball 0 rP`) bounded+Lipschitz `P`, `w ↦ P(V w)/|det(fderiv Wbv (V w))|` bounded `2 M_P` +
+  pairwise-Lipschitz (via `det_fderiv_regularity_bundle` + `ratio_abs_lipschitzOn` on `ball 0 (min rP rD)`
+  + the generic transport).  CONDITIONAL on `hbaseC2`.
+- `census_ampF_transported_ratio_regularity` / `census_CfieldF_transported_ratio_regularity` (★★): compose
+  J4-938's concrete base-ball `q₁=(amp·F)/|det|` / `q₂=(Cfield·F)/|det|` with the generic transport — the
+  TRANSPORTED census integrands `w ↦ (chartFieldAmp … τ (V w) 0 · F0 (V w))/|det(fderiv Wbv (V w))|`
+  bounded + pairwise-Lipschitz on an image ball.  Amplitude concrete, only `F0` carried.  This CLOSES the
+  AMPLITUDE half of piece (3)'s `∘V` transport.
+- `transport_ballLocal_slot_satisfiable` — non-vacuity of the ball-local weight slot (TEETH: `cos‖·‖`,
+  bounded but genuinely varying, Lipschitz `1`, on `ball 0 1`).
+
+**Honest status.** The AMPLITUDE half of junction piece (3)'s `∘V` transport is now CLOSED (the ball-local
+variant J4-932 lacked, composed with J4-938's concrete `amp·F`/`Cfield·F` ratio), modulo `hbaseC2`.  The
+SOLE remaining piece-(3) obligation is the F-factor's own ball-local bounded+Lipschitz regularity (the
+`leviSeries` carry, downstream of Ebound/heatConv — the `{hDuhamel,hDConv,hCConv}`-family input, NOT
+attempted here).  REMAINING `hCensusBound` obligations overall: (3-F) the F-factor regularity; `hbaseC2`;
+(6) `Bball+tail ≤ C_far·(u−s)^{−1/2}` rate absorption; + per-summand integrabilities, uniformity in `s,a`.
+`hCensusBound`/`hCross`/`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected.  `a₁ = R/6` remains
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.  NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/BaseSlotTransportBallLocal.lean` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10246 jobs); `#print axioms` std-3 ×5 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no
+existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) sanity-checked the
+ball-local relaxation sound; commit `57145f4a`, pushed. NOT `a₁ = R/6`.
