@@ -5662,3 +5662,16 @@ import QIQTH.CensusHballrateModuloG2
 -- as a τ-carry (the F-data carriers ARE the {hDuhamel,hDConv,hCConv}-family Levi objects; G2 an ungrounded gate carry).
 -- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv} (+ G2 census-side gate carry), UNCHANGED. std-3 ×3. NOT a₁=R/6.
 import QIQTH.CensusIntegratedModuloG2
+-- G2ConstGateGrounded — GROUNDS the modulo-G2 census gate carry hS for the LIVE concrete gate. The top-level
+-- wide_a1_R6_core_AT_CONSTRADIUS chain runs every per-gate slot at the ONE shared syntactic gate
+-- constGate g gi hChr hK c := fun z => uniformFlowExp g gi hChr hK z '' ball 0 c (J4-316 constant-radius flow-ball).
+-- For THIS gate, 0 ∈ constGate…c z unfolds to ∃ w∈ball 0 c, uniformFlowExp z w = 0 — the flow at base z reaches the
+-- origin from a velocity of norm <c. g2_for_constGate supplies exactly such a witness w := uniformInverseChart g gi hC hK z 0
+-- from the banked inverse-chart facts: chartW0_rightInverse (uniformFlowExp z (W₀ z)=0) + chartW0_displacement
+-- (‖W₀ z + z‖≤C_W‖z‖², whence ‖W₀ z‖≤(1+C_W)‖z‖), on the ball rS := min(min εK r₁)(min rRI(min 1 (c/(1+C_W)))). It fills
+-- the EXACT hS slot of CensusHballrateModuloG2/CensusIntegratedModuloG2 with S := the live constGate (slot match
+-- typechecked against hcross_integrated_moduloG2). Non-vacuity: g2_for_constGate_satisfiable inhabits the whole
+-- {hC,hK,K∈𝓝0,0<c} bundle at the flat metric (christoffel_const ⟹ hC=const; closedBall compact ∈𝓝0) and PRODUCES a
+-- genuine rS>0. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 remains CONDITIONAL on those three, UNCHANGED,
+-- but G2 is now GROUNDED for the concrete gate (no longer an ungrounded census-side carry). std-3 ×2. NOT a₁=R/6.
+import QIQTH.G2ConstGateGrounded
