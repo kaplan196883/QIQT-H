@@ -13559,3 +13559,34 @@ residual now = {τ↓0-uniform chartFieldAmp Lipschitz (amplitude, MISSING theor
 (geometric) + CoV two-term fold + q₁/q₂ truncation-measurability + G2-threading}; the DECISIVE F-regularity blocker
 is REMOVED. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-958 (commit 20626faa) — CensusAmplitudeLipDischarge: τ↓0-UNIFORM `chartFieldAmp` SPATIAL LIPSCHITZ discharged via the affine-in-τ shortcut (glue-3 amplitude sub-piece; the J4-957-flagged "MISSING amplitude theorem")
+
+TARGET: the glue-item-3 sub-piece flagged UNTOUCHED at J4-957 as "`τ↓0`-uniform `chartFieldAmp` Lipschitz (SEPARATE
+missing AMPLITUDE theorem)". New file `CensusAmplitudeLipDischarge.lean` lands `census_amplitude_lipBounds` (★★★): a
+base ball `rAmp>0` and constants `L,L'≥0` with, on `ball 0 rAmp`, `|chartFieldAmp … cutA cutB τ z 0 − chartFieldAmp
+… cutA cutB τ w 0| ≤ L·dist z w` UNIFORMLY over `0<τ≤τ₀` (plus the slope `L'`-Lipschitz). Companion to J4-949's
+`census_amplitude_supBounds` (τ-uniform VALUE bound); this is the τ-uniform Lipschitz INCREMENT.
+
+MECHANISM (affine-in-τ; NO compactness at τ=0 — refuting the earlier "not compact at 0" pessimism): the banked
+`chartFieldAmp_affine_slope` (J4-949) gives `chartFieldAmp τ = chartFieldAmp 0 + censusAmpTauDeriv·τ`, so the spatial
+increment splits as `(base_z−base_w)+(slope_z−slope_w)·τ`, whence `|Δ| ≤ L₀·dist + τ·L'·dist ≤ (L₀+τ₀·L')·dist` — a
+SINGLE τ-uniform constant `L₀+τ₀·L'` (the τ-scaled slope term `τ·L'→0` as `τ↓0`, bounded by `τ₀·L'` throughout
+`(0,τ₀]`). `L₀` = τ=0 base Lipschitz (`chartFieldAmp_base_regularity_center … 0 …`); `L'` = slope Lipschitz
+(`censusAmpTauDeriv_base_regularity_center`); BOTH banked UNCONDITIONALLY from the standard geometry carries
+`{hg,hg0,hu,h0Kmem}`. gpt-5.6-sol (reasoning high) audited 2026-08-21 and CONFIRMED the affine argument valid+complete
+(`F_τ=F₀+τG`, `‖F_τ(z)−F_τ(w)‖ ≤ (L₀+τ₀L')d(z,w)`; noncompactness irrelevant; only routine domain-overlap `r≤r'`).
+
+COMPANION FINDING: the sibling glue-3 sub-piece "uniform `|det(fderiv Wbv)|` lower bound (geometric)" was found
+ALREADY BANKED at J4-931 — `BaseSlotDetRegularity.absdet_fderiv_boundedBelow_ball` (`|det|≥1/2` on a base ball from
+`chartW0_absdet_fderiv_zero=1` + det-continuity) and `det_fderiv_regularity_bundle` — no new brick needed; find-and-wire
+when C1 is assembled.
+
+LANDS std-3 (propext, Classical.choice, Quot.sound; no sorryAx, no custom): `census_amplitude_lipBounds` ★★★. Build via
+QIQTH.AxiomAudit OK (10266 jobs); axiom_budget_check raw axiom count 0 (budget 0); vacuum-grep clean; no banked file
+edited; wired QIQTH.lean+AxiomAudit.lean; `git show 20626faa --stat` = 3 files (+159). HONEST STATUS: the AMPLITUDE-side
+τ↓0-uniform Lipschitz input of C1 is now SUPPLIED; the geometric `|det|` lower bound was already banked. Proves NONE of
+`{hballrate, hDuhamel, hDConv, hCConv}`. hballrate/C1 remains an OPEN carry — glue-(3) residual now = {CoV two-term fold
++ `q₁/q₂` truncation-measurability + G2-threading} (the amplitude-Lipschitz AND |det|-lower-bound sub-pieces both now
+resolved). `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
