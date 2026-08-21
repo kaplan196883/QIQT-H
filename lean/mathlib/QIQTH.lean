@@ -5931,3 +5931,13 @@ import QIQTH.MixedEnvelopeFullyInhabitedCurved
 -- (bulk integrand AND kPrime vanish off {0}), boundz:=0, C:=0. Degenerate-K caveat (null-support driven).
 -- First-order only; does NOT close hCConv (=ContDiff ⊤, infinite differentiability). std-3. NOT a₁=R/6.
 import QIQTH.HbulkderivFullyClosedCurved
+
+-- HCConvGatedK0FullyClosed — ★★★ the LITERAL top-level hCConv closure at the curved K={0} witness.
+-- FIRST of the analytic trio {hDuhamel,hDConv,hCConv} closed in its literal shape (ContDiff ℝ ⊤
+-- (fun p => heatConv H (leviSeries (heatOp g gi H)) t p 0)), not an auxiliary census member. The
+-- gatedKernel {0} S H₀ base-point (q) gate sits on the INNER z-integration variable, NOT the free
+-- ContDiff variable p, so for z≠0 the left kernel is 0 (independent of p, S, H₀); z-integrand supported
+-- in null singleton {0} (1≤n) ⟹ inner ∫=0 ⟹ heatConv≡0 in p ⟹ ContDiff ⊤ via contDiff_const.
+-- Degenerate-K caveat (curved geometry does NO analytic work). Closes hCConv ONLY at this witness;
+-- hDuhamel untouched. std-3. NOT a₁=R/6.
+import QIQTH.HCConvGatedK0FullyClosed

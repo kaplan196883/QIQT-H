@@ -28,6 +28,7 @@ import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HbintRequant
 import QIQTH.HbintFullyClosedCurved
 import QIQTH.HZMassFullyClosedCurved
+import QIQTH.HCConvGatedK0FullyClosed
 import QIQTH.HFdRequant
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
@@ -30387,5 +30388,11 @@ namespace QIQTH.AxiomAudit
 -- derivative of fbulkInt) at the curved K={0} witness, all ten carries null-support driven. First-order
 -- only; does NOT close hCConv (=ContDiff ⊤). std-3. NOT a₁=R/6.
 #print axioms QIQTH.HbulkderivFullyClosedCurved.hbulkderiv_fully_closed_K0
+-- HCConvGatedK0FullyClosed: ★★★ the LITERAL top-level hCConv closure at the curved K={0} witness.
+-- The gatedKernel {0} base-point (q) gate sits on the INNER z-integration variable, so heatConv≡0 in
+-- the free ContDiff variable p ⟹ ContDiff ℝ ⊤ trivially (contDiff_const). Closes hCConv ONLY at this
+-- degenerate witness; hDuhamel untouched. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HCConvGatedK0FullyClosed.hCConv_gatedKernel_K0_closed
+#print axioms QIQTH.HCConvGatedK0FullyClosed.hCConv_vanVleckGatedWitness_K0_closed
 
 end QIQTH.AxiomAudit
