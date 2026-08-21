@@ -14390,3 +14390,49 @@ chart-CoV census inequality, `hDuhamel`, `hDConv`, `hCConv`, or the coefficient 
 Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains
 STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}` plus the chart-CoV wall inside `hrate`, UNCHANGED.
 NOT `a₁=R/6`.
+
+## J4-975 — CensusHrateFullConcrete: DISCHARGE the abstract full-domain rate `hrate` of J4-974's live `H_far` as a concrete std-3 term — the H_far/hCross rate branch is NOT gated by `{hDuhamel,hDConv,hCConv}` (commit c6e831c9)
+
+**Object.** `HFarFullyWired.hfar_concrete_fully_wired` (J4-974) carried, as its LAST abstract analytic
+premise, the FULL-DOMAIN derivative-product rate
+`hrate : ∀ s∈Ioo(u−ε)u, ∀ c∈Icc u(u+h), |∫ z, deriv(fun r↦vanVleckGatedWitness…r 0 z)(c−s)·F s z 0| ≤ Cpair·(c−s)^{−1/2}`.
+The cp842 audit named this `hrate` "the dominant unknown, still importing the chart-CoV census
+assumptions `{hDuhamel,hDConv,hCConv}`". This increment REFUTES that provenance: the full-domain `hrate`
+is derivable from three already-banked std-3 estimates whose interfaces contain NONE of those three.
+
+**`hrate_full_concrete` (★★★).** Composes, pointwise in `(c,s)` (τ:=c−s, 0<τ≤h+ε),
+`far_rate_of_ball_and_gaussEnv` (J4-968) fed by: (on-ball) `hballrate_moduloG2` (J4-960) producing
+`ρ=δ>0`, `Cball≥0` with `|∫_{ball 0 δ} deriv(witness)(c−s)·F| ≤ Cball·(c−s)^{−1/2}` — from geometry +
+numeric window + local F-regularity `{hFb,hFl}` + G2 gate `hS`; (off-ball) `offBall_env_of_derivEnv_Fbound`
+(J4-969) fed by the census time-derivative envelope `witnessTimeDeriv_domination_global_anyS` (J4-950,
+from amplitude data `{hAmp0,hCfield,hSupp}`) + a GLOBAL F-bound `hFglob`, absorbed by
+`invTau_gaussDdim_offBall_absorb` at `q=4·D.lam↦q'=8·D.lam`, radius `ρ=δ` (uniform `Cenv:=Ccen·MF·Kabs`;
+Gaussian scale `8·D.lam·(c−s)` applied pointwise); (integrability) the honest F-side carry `hgint`.
+Yields the exact full-domain `hrate` with `Cfull = Cball + (Ccen·MF·Kabs)·(√2)ⁿ·√(h+ε)`.
+
+**`hfar_concrete_rate_discharged` (★★★).** Feeds it into `hfar_concrete_fully_wired` (τ₀ horizon reused
+from `τ₀cap`, `ε+h ≤ τ₀cap` from `2(h+ε) ≤ τ₀cap`, `h+ε>0`) ⟹ the live `H_far` far-envelope with the
+abstract `hrate` REMOVED. The declaration carries no `hrate`/`hFTC`/`hDuhamel`/`hDConv`/`hCConv`; all
+remaining assumptions are explicit: geometry + numeric window, G2 gate `hS`, local `{hFb,hFl}`, GLOBAL
+`hFglob`, amplitude `{hAmp0,hCfield,hSupp}`, `hFdom`, `{hmeas,hbase,hFslice,hgint}`, witness-side
+`{hKm,hSm0,hIn}`.
+
+**gpt-5.6-sol high GO (2026-08-22).** Acceptance checks met: `ρ` from the ball theorem reused VERBATIM
+off-ball; `Cenv` uniform in `(s,c)` (Kabs/Ccen fixed); the EXACT derivative-product integrand is
+`Integrable` (via `hgint`); GLOBAL F-bound `hFglob` distinguished from LOCAL `hFb`; `hfar_concrete_fully_wired`
+instantiated at the GENERATED `Cfull`, not an arbitrary caller-fixed constant; resulting declaration
+free of `hrate`/`hFTC`/`hDuhamel`/`hDConv`/`hCConv`. Sol NO-GO on any claim that "the entire a₁=R/6
+capstone is thereafter conditional only on `hCConv`" — the post-`hCross` Duhamel/convergence/convolution/
+coefficient-identification surface is NOT audited here and any such use remains load-bearing.
+
+**Verification.** `lake build QIQTH.AxiomAudit` 0 err (10284 jobs); `#print axioms` std-3 ×2 (propext,
+Classical.choice, Quot.sound; NO sorryAx, NO custom); `axiom_budget_check.sh` exit 0 (raw count 0,
+budget 0, no sorryAx, no deleted-axiom regressions); vacuum-grep clean; no banked file edited; wired
+`QIQTH.lean` + `AxiomAudit.lean`; `git show c6e831c9 --stat` = 3 files (+253); pushed.
+
+**Honest status.** Joint realizability of the merged carrier bundle at a genuine curved (`n≥2`, non-flat)
+witness is NOT claimed (component teeth do not compose; posture follows `HFarFullyWired`). Discharges
+NONE of `{hballrate (as a top-level τ-carry), hDuhamel, hDConv, hCConv}`. `a₁=R/6` remains CONDITIONAL
+on `{hDuhamel,hDConv,hCConv}`, UNCHANGED — with the correction that those three do NOT gate the
+`H_far`/`hCross` rate branch (they, if load-bearing, live in post-`hCross` Duhamel/convolution content
+unaudited here). NOT `a₁=R/6`.
