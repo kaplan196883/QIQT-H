@@ -15060,3 +15060,57 @@ new, decisive negative finding: `hDuhamel` CANNOT be closed at `K={0}` (it reduc
 generically-false `E t 0 0 = 0`), so `{hDConv, hCConv}` both close here but the trio does not, and there
 is NO complete `a₁=R/6` instance at this witness. `a₁=R/6` remains STRICTLY CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-990 — `CovariantMetricLeibniz`: general covariant metric Leibniz rule (Jacobi first-variation Gauss-lemma sub-campaign START) — commit `8bc2e21f`
+
+**Pivot.** The `K={0}` degenerate-witness route is EXHAUSTED (J4-989/cp862: the trio
+`{hDuhamel, hDConv, hCConv}` is provably NOT jointly closable at `K={0}` — the null-singleton
+z-gate that trivialises `hDConv`/`hCConv` forces `hDuhamel ⟺ E t 0 0 = 0`, generically FALSE at a
+nonflat witness). This increment OPENS a new sub-campaign attacking the genuine final wall J3
+(the n-component Gauss lemma through the opaque Skolemized geodesic-flow chart) via the standard
+first-variation / Jacobi-field technique.
+
+**gpt-5.6-sol (high, 2026-08-22) scope verdict.** The Jacobi/first-variation approach does NOT
+circumvent the opaque-chart C¹-in-initial-condition wall — it RELOCATES it into "the Jacobi field
+`J(1) = d(exp)_v(w)` is the derivative of the flow", which is exactly the missing sensitivity
+theorem. But the metric-compatibility ENGINE it needs is chart-INDEPENDENT and bankable now: the
+general covariant Leibniz rule generalizing `parallel_metricInner_const_at` to nonzero covariant
+derivatives (the "carry the hard object as a hypothesis" pattern).
+
+**Built (NEW file `CovariantMetricLeibniz.lean`, no banked file edited).**
+- `metricPair_covariant_leibniz_at` — writing the raw component derivatives as
+  `e'ᵢ = Eᵢ − ∑ⱼₖ Γⁱⱼₖ(γτ)γ'ⱼeₖ`, `f'ᵢ = Fᵢ − ∑ⱼₖ Γⁱⱼₖ(γτ)γ'ⱼfₖ` (so `E = ∇_t e`, `F = ∇_t f`),
+  the metric pairing `s ↦ ∑ₐᵦ g_{ab}(γs)eₐ(s)f_b(s)` has derivative
+  `⟨∇_t e,f⟩_g + ⟨e,∇_t f⟩_g` at `τ` — the metric Leibniz rule
+  `d/dτ⟨e,f⟩ = ⟨∇_t e,f⟩ + ⟨e,∇_t f⟩`. Proof reuses the SAME pairwise connection-term cancellation
+  (`sum4_swap14`/`sum4_swap24`, metric compatibility) as the parallel proof — those cancellations
+  involve `e,f` only, not `E,F` — so the only surviving pieces are the two covariant-derivative
+  pairings. Specializing `E=F=0` recovers `parallel_metricInner_const_at`.
+- `metricPair_velocity_field_leibniz_at` — geodesic-velocity specialization `e = γ'` (`∇_t γ'=0`
+  via the geodesic equation) giving `d/dτ⟨γ',J⟩_g = ⟨γ',∇_t J⟩_g` — the FIRST step of the standard
+  first-variation Gauss-lemma computation (radial vector = geodesic velocity; its connection term
+  drops because `γ` is a geodesic).
+
+**Honest scope / non-vacuity.** Genuine, non-vacuous differential-geometry infrastructure: the
+Jacobi field `J` and its covariant derivative `A = ∇_t J` are CARRIED as hypotheses (mirroring how
+`parallel_metricInner_const_at` carries the parallel fields), NOT constructed. Does NOT identify `J`
+with `d(exp)` of a variation (the C¹-in-IC opaque-chart wall J3, which the Jacobi approach relocates
+not removes), no Jacobi equation `∇²_t J = −R(J,γ')γ'`, no Gauss lemma. `a₁=R/6` remains STRICTLY
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.CovariantMetricLeibniz` 0 err (8482 jobs); throwaway `ChkCovLeibniz`
+std-3 no sorryAx no custom axiom; `QIQTH.AxiomAudit` 0 err (10299 jobs); std-3
+(propext/Classical.choice/Quot.sound); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean;
+wired `QIQTH.lean` + `AxiomAudit.lean` (b3b-i'); `git show 8bc2e21f --stat` = 3 files (+246);
+pushed. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Scope map for continuing the Gauss-lemma sub-campaign (future dispatches).**
+1. (NEXT, tractable) The Jacobi conservation corollary: from `metricPair_velocity_field_leibniz_at`
+   plus `∇_t A = ∇²_t J = −R(J,γ')γ'` (Jacobi eq, CARRIED) and the curvature orthogonality
+   `⟨γ', R(J,γ')γ'⟩ = 0`, derive `d/dτ⟨γ',J⟩ = ⟨γ',∇_t J⟩` is itself constant, hence
+   `⟨γ'(t),J(t)⟩ = t·⟨v,w⟩` on an interval via `is_const_of_deriv_eq_zero` / affineness. Needs a
+   curvature skew-adjointness lemma `⟨T,R(J,T)T⟩_g = 0` (Levi-Civita, provable in coordinates from
+   `riemann` + `metric_compat` — chart-independent).
+2. (BLOCKED at J3) The bridge `J(1) = d(uniformFlowExp)_v(w)`, `γ'(1) = d(uniformFlowExp)_v(v)` —
+   requires C¹-in-initial-condition/parameter dependence of the opaque Skolemized flow, the campaign
+   wall (Mathlib has no C¹-in-IC PL-flow theorem). This is where the Jacobi route re-hits J3.
