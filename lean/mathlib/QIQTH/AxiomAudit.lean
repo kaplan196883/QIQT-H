@@ -53,6 +53,7 @@ import QIQTH.G2ConstGateGrounded
 import QIQTH.HsuppConstGateGrounded
 import QIQTH.HCrossNegativeQuadrants
 import QIQTH.HCrossLargeShiftRegime
+import QIQTH.HFarFromBallrate
 
 namespace QIQTH.AxiomAudit
 
@@ -30117,5 +30118,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.uniform_sliver_bound
 #print axioms QIQTH.HeatResidualBound.uniform_sliver_bound_hyp_satisfiable
 #print axioms QIQTH.HeatResidualBound.hcross_split_bound_habs_ge_eps
+
+-- ## J4-967 (HFarFromBallrate): the FINAL formal ADAPTER characterizing the OPEN hCross far-envelope
+-- H_far as REDUCIBLE (not equivalent) to the on-ball trace-rate hballrate. hfar_of_ballrate_ftc proves
+-- the exact live H_far shape |Φ(u+h,s)−Φ(u,s)|≤Cpair·h·(u−s)^{−1/2} from (i) a hballrate-shaped
+-- pointwise-in-c rate hrate (|R c s|≤Cpair(c−s)^{−1/2} on c∈Icc u (u+h)) + (ii) an FTC-in-c bridge hFTC
+-- (Φ(u+h,s)−Φ(u,s)=∫ c in u..(u+h), R c s), via a CONSTANT majorant Cpair(u−s)^{−1/2}
+-- (rpow_le_rpow_of_nonpos: (c−s)^{−1/2}≤(u−s)^{−1/2} for c≥u>s) whose c-integral over [u,u+h] is
+-- Cpair(u−s)^{−1/2}·h (norm_integral_le_of_norm_le_const, no integrability of R needed). _conv = the exact
+-- live H_far arg shape the capstone consumes. gpt-5.6-sol high audit 2026-08-22: reduction SOUND (implication
+-- NOT equivalence — cancellation can shrink the increment while R is large); H_far ≠ same content as on-ball
+-- hballrate ALONE — the full-domain FTC bridge AND an OFF-BALL spatial estimate (Φ over all z vs ball 0 ρ ⟹
+-- ∂_cΦ=R_ball+R_off, generically C_far=Cpair+C_off) are SUBSTANTIVE obligations, not bookkeeping. So H_far is
+-- NOT separately-open BEYOND {hballrate + full-domain FTC/differentiation + off-ball}. TEETH: R c s:=(c−s)^{−1/2},
+-- Φ c s:=∫_0^c(cc−s)^{−1/2}, u=0,ε=h=Cpair=1; FTC holds (Φ(0,s)=∫_0^0=0); rate bound EQUALITY (envelope active);
+-- R(u+h,s)=(1−s)^{−1/2}≠0. std-3 ×3. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL,
+-- UNCHANGED).
+#print axioms QIQTH.HFarFromBallrate.hfar_of_ballrate_ftc
+#print axioms QIQTH.HFarFromBallrate.hfar_of_ballrate_ftc_conv
+#print axioms QIQTH.HFarFromBallrate.hfar_of_ballrate_ftc_hyp_satisfiable
 
 end QIQTH.AxiomAudit

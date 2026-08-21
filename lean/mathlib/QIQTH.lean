@@ -5198,6 +5198,19 @@ import QIQTH.HCrossNegativeQuadrants
 -- ({|h|≥ε}∪{h>0}∪{−ε<h<0}∪{h=0} exhaustive, gpt-5.6-sol high). Carrier-conditional on the SAME sup-bound
 -- |Φ|≤M; does NOT change conditional status. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossLargeShiftRegime
+-- HFarFromBallrate — J4-967: the FINAL formal ADAPTER characterizing the OPEN hCross far-envelope H_far
+-- as REDUCIBLE (not equivalent) to the on-ball trace-rate hballrate. hfar_of_ballrate_ftc proves the exact
+-- live H_far shape |Φ(u+h,s)−Φ(u,s)|≤Cpair·h·(u−s)^{−1/2} from a hballrate-shaped pointwise-in-c rate hrate
+-- (|R c s|≤Cpair(c−s)^{−1/2} on c∈[u,u+h]) + an FTC-in-c bridge hFTC (Φ(u+h,s)−Φ(u,s)=∫_u^{u+h}R c s), via a
+-- CONSTANT majorant Cpair(u−s)^{−1/2} (rpow_le_rpow_of_nonpos: (c−s)^{−1/2}≤(u−s)^{−1/2} for c≥u>s) whose
+-- c-integral over [u,u+h] is Cpair(u−s)^{−1/2}·h. hfar_of_ballrate_ftc_conv = the exact live H_far arg shape.
+-- gpt-5.6-sol high audit 2026-08-22: the reduction is SOUND (implication, not equivalence — cancellation can
+-- shrink the increment while R is large), but H_far ≠ same content as on-ball hballrate ALONE: the full-domain
+-- FTC bridge AND an OFF-BALL spatial estimate (Φ over all z vs hballrate over ball 0 ρ ⟹ ∂_cΦ=R_ball+R_off,
+-- generically C_far=Cpair+C_off) are SUBSTANTIVE obligations, not bookkeeping. So H_far is not separately-open
+-- BEYOND {hballrate + full-domain FTC/differentiation + off-ball}. Does NOT change conditional status.
+-- NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HFarFromBallrate
 -- HCrossDerivEngineWired — J4-929: WIRE the banked differentiation-under-integral engine into J4-928's
 -- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
 -- gpt-5.6-sol (high) go/no-go: NO-GO for full closure (the residual bound = the chart CoV + J4-924 wall,
