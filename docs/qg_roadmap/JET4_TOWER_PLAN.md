@@ -13741,3 +13741,49 @@ carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDCon
 census-side gate carry). Build via QIQTH.AxiomAudit OK (10270 jobs); `axiom_budget_check` raw axiom count
 0 (budget 0); vacuum-grep clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean; `git show
 33361870 --stat` = 3 files (+343). NOT `a₁=R/6`.
+
+### J4-962 (commit 27f8f943) — G2ConstGateGrounded: the census-side G2 gate carry GROUNDED for the LIVE concrete gate (constGate flow-ball) — hCross's G2 is no longer an ungrounded carry (gpt-5.6-sol high adversarial audit: genuine discharge, no vacuity)
+
+Picks up J4-961, which closed the live `hCross` census binder MODULO `{G2, hDuhamel, hDConv, hCConv}` but flagged
+**G2** (`hS : ∃ rS>0, ball 0 rS ⊆ {z | 0 ∈ S z}`) as a genuinely NEW ungrounded carry FOR THE CONCRETE GATE — the
+J4-961 teeth theorem proved only CONSISTENCY at a test gate (`S z := ball z 1`), NOT the live instance for the
+campaign's ACTUAL gate. This brick GROUNDS G2 for the live gate in a NEW file (no banked file edited).
+
+**THE LIVE CONCRETE GATE (source-verified).** `A1R6CoreAtGate.constGate` — the top-level
+`wide_a1_R6_core_AT_CONSTRADIUS` chain runs every per-gate slot at the ONE shared syntactic gate
+`constGate g gi hChr hK c := fun z => uniformFlowExp g gi hChr hK z '' Metric.ball 0 c` (J4-316 constant-radius
+flow-ball). `uniformFlowExp` is the GENUINE geodesic-ODE tube endpoint (`UniformFlowNondeg`, solves
+`HasDerivAt … geodesicField`), `uniformInverseChart` its ApproximatesLinearOn inverse (`UniformChartRadius`) — no
+census/hCross circularity.
+
+**THE DISCHARGE.** For this gate, `0 ∈ constGate…c z` unfolds to `∃ w∈ball 0 c, uniformFlowExp z w = 0` — the flow
+at base `z` reaches the ORIGIN from a velocity of norm `<c`. `g2_for_constGate` (★★★) supplies exactly such a
+witness `w := uniformInverseChart g gi hC hK z 0` from the banked inverse-chart facts:
+`chartW0_rightInverse` (`uniformFlowExp z (W₀ z) = 0`, `‖z‖<rRI`, `z∈K`) + `chartW0_displacement`
+(`‖W₀ z + z‖ ≤ C_W·‖z‖²`, whence `‖W₀ z‖ ≤ (1+C_W)‖z‖` for `‖z‖≤1`). On
+`rS := min(min εK r₁)(min rRI (min 1 (c/(1+C_W))))` (`εK` a `𝓝 0` ball radius `⊆ K`), every `z∈ball 0 rS` has
+`z∈K`, `‖W₀ z‖<c` (so `W₀ z∈ball 0 c`), and `uniformFlowExp z (W₀ z)=0` — hence `0 ∈ constGate…c z`. The same
+`hzfacts` computation banked in `C2CarrierCollapse.c2_carriers_discharged`, specialized to the origin-reaching
+witness.
+
+**SLOT MATCH (verified).** `g2_for_constGate` fills the EXACT `hS` slot of `CensusHballrateModuloG2` /
+`CensusIntegratedModuloG2` with `S := constGate g gi hC hK c`: the named-arg partial application
+`hcross_integrated_moduloG2 hn g gi hC hK (constGate g gi hC hK c) cutA cutB h0Kmem
+(hS := g2_for_constGate g gi hC hK h0Kmem hc)` typechecks (throwaway example).
+
+**NON-VACUITY (Sol-requested).** `g2_for_constGate_satisfiable` (★★) inhabits the whole
+`{hC, hK compact, K∈𝓝 0, 0<c}` bundle at a GENUINE metric — flat `g=gi=Id`, `K=closedBall 0 1`, `c=1`
+(`FrozenGauss.christoffel_const` ⟹ `hC = contDiff_const`; `closedBall` compact `∈ 𝓝 0`) — and PRODUCES a
+strictly-positive `rS`. So the discharge is not vacuous through impossible antecedents.
+
+**VERIFICATION.** Literal build 0 errors (via QIQTH.AxiomAudit, 10271 jobs); `#print axioms` std-3 ×2 (propext,
+Classical.choice, Quot.sound; NO sorryAx, NO custom); `axiom_budget_check` raw axiom count 0 (budget 0); vacuum-grep
+clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean; `git show 27f8f943 --stat` = 3 files (+167).
+
+**HONEST STATUS (gpt-5.6-sol high adversarial audit).** G2 is now GROUNDED for the concrete gate: hCross's live
+census binder no longer carries an INDEPENDENT ungrounded `hS` — for the live `S := constGate`, `hS` is DERIVED from
+`{hC, hK, K∈𝓝 0, 0<c}`. This does NOT reduce the top-level analytic obstruction: `{hDuhamel, hDConv, hCConv}` are
+UNCHANGED, and the modulo-G2 census binder still carries its standing geometry/measurability/support/F-regularity
+carriers (`hSupp`, `hFdom`/`hFb`/`hFl`, `hKSmeas`/`hcar`/`hFmeas`, `ε<u`). Discharges NONE of
+`{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED — but the census-side G2 gate is no longer an open carry. NOT `a₁=R/6`.
