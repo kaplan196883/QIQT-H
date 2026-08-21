@@ -13517,3 +13517,45 @@ sorryAx; vacuum-grep clean; no banked file edited; wired QIQTH.lean + AxiomAudit
 NONE of `{hballrate, hDuhamel, hDConv, hCConv}`. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected.
 `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}` with `hballrate`/C1 an explicitly-listed SEPARATE open
 census carry — UNCHANGED. NOT `a₁=R/6`.
+
+### J4-957 (commit 7d733995) — CensusLeviFactorSUniform: SUPPLY the s-UNIFORM on-ball F-regularity flagged by J4-955/956 as the DECISIVE missing modulo-G2 hballrate input — via the s-uniform LIFT of J4-942's per-s F-factor bundle (UNDER-CREDITING correction)
+J4-955/956 (gpt-5.6-sol high) identified the decisive missing capstone input for the modulo-G2 hballrate (C1)
+closure: **uniform-in-s ON-ball bounded+Lipschitz F-regularity** (`|F s z 0|≤M_on` AND `|F s z 0 − F s w 0|≤
+L_on·dist z w`, for `‖z‖,‖w‖<ρ`, UNIFORM over `s∈Ioo(u-ε)u`). The census `hSupp`/`hF` supply only an OFF-ball bound
+(`ρ≤‖z‖`, J4-952), giving NO info inside the ball; and by linearity in F a geometry-only `Cpair` CANNOT be uniform
+over F unless a LOCAL NORM of F is part of the data. ★UNDER-CREDITING CORRECTION (the campaign's recurring
+earlier-result-vs-later-need cross-reference miss): J4-942 (`CensusLeviFactorDischarge.levi_Ffactor_ball_regularity`)
+ALREADY built the ON-ball bounded+Lipschitz F bundle — but only at a FIXED `s`, with `s`-DEPENDENT constants
+`M_F=C_L·gaussDdim(2s)0`, `L_F=L_E+K·2√s`, banked BEFORE the s-uniformity requirement was identified (so its
+s-uniformity was never checked). J4-957 LIFTS it s-UNIFORMLY over the window by a floor/ceiling argument on those two
+s-dependent constants (NEW FILE `CensusLeviFactorSUniform.lean`, edits NO banked file):
+• BOUNDEDNESS: peak `C_L·gaussDdim(2s)0` blows up as `s↓0`, controlled by the window FLOOR `s≥u-ε>0` via banked
+  `HeatResidualBound.B_le_MB` (peak-at-0 + width-antitone) at time floor `a:=2(u-ε)`, giving the s-uniform constant
+  `M_on := C_L·gaussDdim(2(u-ε))0` for EVERY `s` and EVERY `z` (on-ball is free slack) — the SAME mechanism J4-952
+  used for the OFF-ball `hF`.
+• LIPSCHITZ: resolvent `L_E+K·2√s` grows in `s`, controlled by the window CEILING `s≤u` via `√s≤√u`, giving the
+  s-uniform constant `L_on := L_E+K·2√u`.
+The "missing input" is DISCHARGED to the s-UNIFORM `LeviLipschitz` carries (`hFdom` width-2 domination on (0,T],
+`hVol` Volterra, `hE1` E-slice Lipschitz, `hIz` integrability, `hSlice` inner-ζ slice difference) over the window —
+the SAME `{hDuhamel,hDConv,hCConv}`-family objects J4-942/952 already reduce F to; the "local norm of F" Sol demanded
+IS exactly the Levi constants `(C_L,L_E,K)`, NOT a genuinely-new hypothesis. ★gpt-5.6-sol high ADVERSARIAL audit:
+GENUINE INCREMENT, not a red herring — (1) the F-side local regularity obstruction is removed; the effective local
+norm is the pair `(M_on,L_on)`, derived from `(C_L,L_E,K)`+time floor/ceiling, and these constants cannot be erased
+from the dependency audit (the decisive test = the brick is invocable at the hballrate call site with no NEW
+external hypothesis, since C_L/L_E/K are already the Levi package fields). (2) s-uniformization SOUND — open interval
+fine (explicit monotonicity, not attained sup; neither endpoint need be in the window); `ε<u`⟹`u-ε>0` suffices for
+the bounds; NONEMPTY-window caveat: consumer supplies `0<ε` (witness `ε=1<u=2` satisfies it). (3) residual glue-(3)
+UNTOUCHED and ORTHOGONAL: `τ↓0`-uniform `chartFieldAmp` Lipschitz (SEPARATE missing AMPLITUDE theorem, analytically
+independent of this F brick), uniform `|det(fderiv Wbv)|` lower bound (geometric), CoV two-term fold + `q₁/q₂`
+truncation-measurability, G2-threading; and if `u-ε→0` asymptotically the G2 dependency must be re-checked. LANDS
+std-3 ×3 (propext, Classical.choice, Quot.sound; no sorryAx, no custom): `levi_Ffactor_ball_regularity_sUniform`
+★★★ (`‖z‖<ρ` form); `levi_Ffactor_ball_regularity_sUniform_ball` ★★★ (`Metric.ball` form); `levi_Ffactor_ball_
+regularity_sUniform_satisfiable` (TEETH: `E=F≡0`, `C_L=Kc=L_E=0`, `ε=1<u=2≤T=2`, nonempty window `Ioo 1 2`). Build
+via QIQTH.AxiomAudit OK (10265 jobs); axiom_budget_check raw axiom count 0 (budget 0); vacuum-grep clean; no banked
+file edited; wired QIQTH.lean+AxiomAudit.lean; `git show 7d733995 --stat` = 3 files (+242). HONEST STATUS: the F-side
+ON-ball uniform regularity input of the modulo-G2 hballrate closure is now SUPPLIED (discharged to the s-uniform Levi
+carries). Proves NONE of `{hballrate, hDuhamel, hDConv, hCConv}`. hballrate/C1 remains an OPEN carry — glue-(3)
+residual now = {τ↓0-uniform chartFieldAmp Lipschitz (amplitude, MISSING theorem) + uniform |det| lower bound
+(geometric) + CoV two-term fold + q₁/q₂ truncation-measurability + G2-threading}; the DECISIVE F-regularity blocker
+is REMOVED. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
