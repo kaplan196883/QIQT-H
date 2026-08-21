@@ -14631,3 +14631,42 @@ the shared `hpull` wall; the remaining `hDuhamel` census content (the `RadialNor
 centre-identity leg + `hpull` opaque-chart wall, Gaussian dominations, the W1-free `hBoundaryLim` slot)
 is UNTOUCHED, and the top-level abstract-`H` capstone `TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual`
 is UNCHANGED. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-981 — `HDuhamelSliverDischarged`: eliminate the √ε matched-sliver amplitude carry `{D0,D1,hD0,hD1,hbnd}` from the live `hDuhamel` slot (commit f80316f8)
+
+**What.** Compose the banked √ε-sliver-amplitude reducer
+`SliverAmplitudeFromHGpow.hbnd_from_hGpow` (J4-921) INTO the live order-1 `hDuhamel` slot
+`HDuhamelDataCensusDischarged.hDuhamelSlot_datacensus_discharged` (J4-980), ELIMINATING the five
+sliver binders `D0 D1 : Fin n → ℝ`, `hD0`/`hD1` (nonnegativity) and the √ε matched-sliver amplitude
+bound `hbnd : ∀ i m, ∀ u ∈ U, |∫ s in (u−ε_m)..u, ∫ z, W''(u−s) z · F s z 0| ≤ D0 i·(2√ε_m) + D1 i·ε_m`
+from the `hDuhamel` antecedent surface. The sliver `hbnd` (with canonical constants
+`D0 := fun _ => Cpair`, `D1 := fun _ => 0` — the `D1·ε_m` slot is genuinely absent, the pure τ⁻¹ᐟ²
+profile pays no `ε_m` term) is DERIVED internally from the moment-aware τ⁻¹ᐟ² pairing carry
+`hGpow : |∫ z, W''(u−s) z · F s z 0| ≤ Cpair·(u−s)^{-1/2}` ALREADY present on the slot surface, via the
+matched-sliver time integral `∫ s in (u−ε_m)..u, (u−s)^{-1/2} ds = 2√ε_m`, reusing the SAME
+sliver-continuity carries `hUT`/`hεU`/`hSecCont`/`hBcont`/`hCpair` the slot already carries. The
+`hDuhamel`-slot analogue of J4-921's `hbnd_from_hGpow` reduction, now WIRED into the live slot identity
+(two named amplitude carries collapse onto the single τ⁻¹ᐟ² carry already present).
+
+**Landed.** `HDuhamelSliverDischarged.hDuhamelSlot_sliver_discharged` — the EXACT `hDuhamel` slot
+identity of the live order-1 capstone at the concrete van-Vleck gate
+(`heatOp g gi (H*L) t 0 0 = L t 0 0 + heatConv (heatOp g gi H) L t 0 0`,
+`L := leviSeries (heatOp g gi H)`), whose antecedent surface NO LONGER carries the √ε sliver amplitude
+carry `{D0,D1,hD0,hD1,hbnd}` (nor `hmassone`, gone J4-979; nor the four bundled interchange census
+binders, gone J4-980). Pure composition; `subst hFeq` then feed `hbnd_from_hGpow` output into the
+J4-980 slot with `D0:=fun _ => Cpair`, `D1:=fun _ => 0`, every other binder verbatim.
+
+**Verify.** `lake build QIQTH.HDuhamelSliverDischarged` 0 err (8883 jobs, first try); throwaway
+`ChkSliver` std-3; `lake build QIQTH.AxiomAudit` 0 err (10289 jobs); std-3
+(`propext`/`Classical.choice`/`Quot.sound`; NO `sorryAx`/custom); `axiom_budget_check.sh` raw 0
+(budget 0); `git status --porcelain | grep -i vacuum` clean; no banked file edited; wired
+`QIQTH.lean`+`AxiomAudit.lean`; `git show f80316f8 --stat` = 3 files (+313); pushed.
+
+**Honest status.** Pure dependency normalization of the `hDuhamel` concrete-gate surface — the √ε
+matched-sliver amplitude carry traded for the τ⁻¹ᐟ² pairing carry `hGpow` already present. NOT progress
+past the shared `hpull` wall; the remaining `hDuhamel` census content (the `RadialNormalCoordinateGauge`
+centre-identity leg + `hpull` opaque-chart wall, the Gaussian dominations
+`hEdom`/`hFdom`/`hAdom`/`hWDom`/`hAdom2cap`, the τ⁻¹ᐟ² pairing carry `hGpow` itself, and the W1-free
+`hBoundaryLim` slot) is UNTOUCHED, and the top-level abstract-`H` capstone
+`TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual` is UNCHANGED. `a₁=R/6` remains STRICTLY
+CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
