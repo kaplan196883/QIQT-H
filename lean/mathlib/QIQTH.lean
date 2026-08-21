@@ -5248,6 +5248,18 @@ import QIQTH.HFarOffBallEnvFromCensus
 -- {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossDerivEngineWired
 
+-- HFarFTCBridgeFromEngine — J4-970: DISCHARGES the FTC-in-c bridge hFTC of J4-967's H_far reduction for the
+-- CONCRETE census convolution, from the ALREADY-BANKED census-integral time-HasDerivAt (censusDeriv_hasDerivAt,
+-- J4-929, engine-wired) + Mathlib FTC-2. hFTC_of_hasDerivAt (★★): abstract FTC-in-c wrapper (per-c HasDerivAt
+-- on uIcc + IntervalIntegrable ⟹ finite diff = ∫ of rate). censusFTC_bridge (★★★): the concrete hFTC — feeds
+-- censusDeriv_hasDerivAt (hFmeasG + the SAME hEnv bundle hcross_of_censusIntegral_bound consumes, inhabited by
+-- hEnv_of_witnessCrudeEnv J4-916) into FTC-2 (0≤h ⟹ uIcc u (u+h)=Icc). hfar_concrete_of_engine (★★★): composes
+-- with hfar_of_ballrate_ftc_conv (J4-967) ⟹ the live H_far envelope for the concrete convolution, FTC bridge
+-- NO LONGER carried — modulo ONLY {hEnv engine bundle, hRint integrability, hrate (on-ball hballrate mod-G2 +
+-- off-ball envelope J4-969)}. TEETH: satisfiable at non-affine Φ=sin,R=cos (cos(3/2)>0). std-3 ×4. Discharges
+-- the ABSTRACT FTC carrier but NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
+import QIQTH.HFarFTCBridgeFromEngine
+
 -- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
 -- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
 -- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT

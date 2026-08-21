@@ -56,6 +56,7 @@ import QIQTH.HCrossLargeShiftRegime
 import QIQTH.HFarFromBallrate
 import QIQTH.HFarOffBallDischarge
 import QIQTH.HFarOffBallEnvFromCensus
+import QIQTH.HFarFTCBridgeFromEngine
 
 namespace QIQTH.AxiomAudit
 
@@ -30183,5 +30184,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFarOffBallEnvFromCensus.hfar_offBall_concrete_of_data
 #print axioms QIQTH.HFarOffBallEnvFromCensus.invTau_gaussDdim_offBall_absorb_teeth
 #print axioms QIQTH.HFarOffBallEnvFromCensus.offBall_env_of_derivEnv_Fbound_satisfiable
+
+-- ## J4-970 (HFarFTCBridgeFromEngine): DISCHARGES the FTC-in-c bridge hFTC of J4-967's H_far reduction for the
+-- CONCRETE census convolution, from the ALREADY-BANKED census-integral time-HasDerivAt (censusDeriv_hasDerivAt,
+-- J4-929, engine-wired) + Mathlib FTC-2 (intervalIntegral.integral_eq_sub_of_hasDerivAt). hFTC_of_hasDerivAt (★★):
+-- abstract FTC-in-c wrapper (per-c HasDerivAt on uIcc + IntervalIntegrable ⟹ finite diff = ∫ of rate).
+-- censusFTC_bridge (★★★): the concrete hFTC — feeds censusDeriv_hasDerivAt (needs hFmeasG + the SAME engine bundle
+-- hEnv that hcross_of_censusIntegral_bound consumes, inhabited by hEnv_of_witnessCrudeEnv J4-916) into FTC-2,
+-- since 0≤h ⟹ uIcc u (u+h)=Icc u (u+h). hfar_concrete_of_engine (★★★): composes with hfar_of_ballrate_ftc_conv
+-- (J4-967) ⟹ the exact live H_far envelope for the concrete convolution, FTC bridge NO LONGER carried — modulo
+-- ONLY {hEnv engine bundle (banked, mod census amplitude data + G3 F-bound), hRint integrability, hrate
+-- (= on-ball hballrate mod-G2 J4-960 + off-ball envelope J4-969)}. TEETH: hFTC bridge satisfiable at genuinely
+-- non-affine Φ=sin, R=cos with derivative genuinely ACTIVE (cos(3/2)>0). std-3 ×4. Discharges the ABSTRACT FTC
+-- carrier but NONE of {hballrate,hDuhamel,hDConv,hCConv} as a top-level τ-carry. NOT a₁=R/6 (CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HFarFTCBridgeFromEngine.hFTC_of_hasDerivAt
+#print axioms QIQTH.HFarFTCBridgeFromEngine.censusFTC_bridge
+#print axioms QIQTH.HFarFTCBridgeFromEngine.hfar_concrete_of_engine
+#print axioms QIQTH.HFarFTCBridgeFromEngine.hFTC_of_hasDerivAt_hyp_satisfiable
 
 end QIQTH.AxiomAudit
