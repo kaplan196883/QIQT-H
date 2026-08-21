@@ -13433,3 +13433,49 @@ fixing D, a positive δ(D), the width-2 Levi hF at δ(D), and the trace rate on 
 brick removes the STRUCTURAL O1 obstacle to that discharge, proving NONE of {hballrate, hDuhamel, hDConv, hCConv}.
 `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
 UNCHANGED. NOT `a₁=R/6`.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+J4-955 (commit 41d2fab0, CensusTwoTermSuperset.lean, NEW FILE, Opus/Fable) — the MEASURABLE-SUPERSET two-term
+Gaussian census bound: fills the "image is not a ball" CoV→two-term glue gap that gpt-5.6-sol (high) flagged in
+the J4-95x closure re-audit. CONTEXT: attempting the FULL literal discharge of the C1 carry hballrate at the
+geometry-determined radius δ(D) (the reshaped O1-fixed capstone J4-954), via CoV (commonWitness_cov J4-943) + the
+two-term ball-local core (two_term_census_bound_ballLocal J4-944) + image sandwich (J4-945). The gate-split
+(censusTauDeriv_gateSplit) makes the hballrate integrand `1_{z∈K ∧ 0∈S z}·[polyGauss·amp·F + Gauss·slope·F]`.
+After CoV the polynomial folds flat (Wbv(V w)=w, the "O2 fold") into transported weights q₁,q₂ over the CoV IMAGE
+Wbv''(ball 0 δ) — which is NOT a ball. two_term_census_bound_ballLocal only handles a BALL; the image needs a bound
+over the measurable superset Ω ⊇ ball 0 r (sandwich: ball 0 r ⊆ image ⊆ ball 0 σ'). THIS BRICK provides exactly that:
+two_term_census_bound_superset bounds |∫_Ω polyGauss·q₁ + ∫_Ω Gauss·q₂| ≤ Cpair/√τ for ANY measurable Ω ⊇ ball 0 r,
+q₁ globally-bounded+center-Lipschitz-on-ball-0-r, q₂ globally-bounded — via the banked SUPERSET center-Lipschitz
+trace cancellation (gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz), whose outer Gaussian tail
+e^{−r²/8τ}·(2n+1)/(2τ) collapses to the CONSTANT (2n+1)/2·(1+128/r⁴) via pow_mul_exp_negSq_le (k=2,y=1/√τ,b=r²/8),
+plus the Gaussian-mass bound |∫_Ω Gauss·q₂|≤M₂·∫gaussDdim=M₂ (gaussDdim_integral_eq_one); both constants ride
+1≤√T/√τ into the SAME Cpair/√τ shape as J4-944. LANDS std-3 ×2: two_term_census_bound_superset ★★ + _hyp_satisfiable
+(TEETH: a GENUINELY non-ball measurable superset ball 0 1 ∪ {far point}, with a witness point outside ball 0 1).
+
+★ DECISIVE FINDING (gpt-5.6-sol high adversarial audit, the highest-stakes verification point of the dispatch).
+UNCONDITIONAL arbitrary-S hballrate is a genuine NO-GO. Source-level structural analysis (censusTauDeriv_gateSplit
++ commonWitness_cov + two_term_census_bound_ballLocal): the gate INDICATOR 1_{z∈K∧0∈S z}(V w) rides into the
+transported weight q₁; an indicator is NOT center-Lipschitz (it jumps), and the two-term cancellation that yields the
+(a−s)^{−1/2} rate (rather than the naive 1/τ) REQUIRES the clean center-Lipschitz weight over a full ball — dropping
+the indicator by triangle inequality destroys the cancellation. Legitimately removing the indicator requires
+ball ⊆ {z | z∈K ∧ 0∈S z} = G2, which is NOT implied by hSupp (opposite containment) and FAILS for arbitrary S. Sol
+confirmed (constructing a fixed measurable-annuli counterexample giving O(1/τ)), adding the only escape hatch would be
+a transported-centre-vanishing q₁(0)=0 or O(√τ)-decay identity — matching cp820's classification. So hballrate is
+NOT unconditionally dischargeable; a G2-type carry is genuinely required.
+
+★ MODULO-G2 STATUS (repo re-credit — the chain is FURTHER along than the "5 lemmas" the initial Sol query assumed).
+The indicator-drop on an inner ball is ALREADY banked modulo G2: censusTauDeriv_eq_onGate_on_jointGate_ball /
+censusTauDeriv_onGate_innerBall_of_geometry (CensusJointGateInnerBall) — with the "z∈K half" FREE from standing
+K∈𝓝0, so concern (b) = G2 alone. The center-Lipschitz superset trace cancellation (this file's dependency) already
+bakes in the outer-image tail. So the modulo-G2 hballrate closure is ANALYTICALLY within reach of banked infra + this
+brick, but is NOT yet a single banked theorem — Sol's residual glue: (1) a restricted CoV over ball 0 δ
+(commonWitness_cov is hardcoded at D.ρ); (2) measurability of the CoV image set Ω=Wbv''(ball 0 δ); (3) threading the
+G2 carry + uniform transported constants in s,τ. NONE of that in this file.
+
+HONEST STATUS: this brick fills ONE glue gap (the "image is not a ball" two-term SHAPE). It proves NONE of
+{hballrate, hDuhamel, hDConv, hCConv}. hballrate/C1 remains an OPEN carry, now RIGOROUSLY characterized: unconditional
+arbitrary-S = NO-GO (G2-type carry required); modulo-G2 = analytically within reach but NOT yet assembled (residual
+glue {restricted-CoV-over-δ, image-measurability, G2-threading, s,τ-uniformity}). Build via QIQTH.AxiomAudit OK
+(10263 jobs); #print axioms std-3 ×2; axiom_budget_check exit 0; vacuum-grep clean; no banked file edited; wired
+QIQTH.lean + AxiomAudit.lean; git show 41d2fab0 --stat = 3 files (+302). `hDuhamel`/`hDConv` remain carried; `hCConv`
+unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
