@@ -13994,3 +13994,60 @@ OPEN chart wall), this `|h|≥ε` regime on the cheap sup-bound `|Φ|≤M`. So t
 gap in the campaign's own hCross infrastructure without discharging any top-level τ-carry. Discharges NONE
 of `{hballrate, hDuhamel, hDConv, hCConv}`. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`,
 UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-967 — HFarFromBallrate: the FINAL formal ADAPTER — `H_far` REDUCIBLE (not equivalent) to the on-ball trace-rate `hballrate` (commit bc03ec60)
+
+**FILE (NEW).** `QIQTH/HFarFromBallrate.lean` (ns `QIQTH.HFarFromBallrate`, no banked file edited).
+std-3 ×3. Picks up the standing hCross state: J4-965/966 gave the live `hCross` binder COMPLETE
+coverage across all four sign quadrants + the `|h|≥ε` regime, each carrier-conditional on the SAME
+per-`s` `H_far` far-envelope. The remaining genuine open analytic content is the concrete `H_far`
+cancellation envelope. This increment characterizes EXACTLY the relationship between `H_far` and the
+already-closed-modulo-G2 on-ball rate `hballrate` (J4-960 `hballrate_moduloG2`).
+
+**THE TWO OBJECTS.**
+  - `H_far` (OPEN far envelope consumed by `hcross_mixed_second_diff_split_bound`, J4-927) — the
+    FINITE DIFFERENCE in the OUTPUT time `c`: `∀ s∈Ioo(u−ε)u, |Φ(u+h,s)−Φ(u,s)| ≤ C_far·h·(u−s)^{−1/2}`,
+    `Φ(c,s):=∫ z, A(c−s) x z·B s z y`.
+  - `hballrate` (closed MODULO G2) — the interior on-BALL trace RATE, POINTWISE-in-`c` (`c=a`) derivative
+    bound uniform over `a∈Icc u (u+h)`: `∃ρ Cpair, ∀s∈Ioo(u−ε)u,∀a∈Icc u(u+h), |∫_{ball 0 ρ}∂_τ(kernel)(a−s)·F| ≤ Cpair·(a−s)^{−1/2}`.
+
+**THE ADAPTER (this file).** Writing `R(c,s)` for the ball-rate integrand (so `hballrate ⟺ |R(c,s)| ≤
+Cpair(c−s)^{−1/2}` on `c∈Icc u(u+h)`) and GIVEN the FTC-in-`c` bridge `Φ(u+h,s)−Φ(u,s)=∫ c in u..(u+h), R c s`,
+`|Φ(u+h,s)−Φ(u,s)| = |∫_u^{u+h} R| ≤ ∫_u^{u+h} Cpair(c−s)^{−1/2} ≤ ∫_u^{u+h} Cpair(u−s)^{−1/2} = Cpair·h·(u−s)^{−1/2}`,
+using the CONSTANT majorant `Cpair(u−s)^{−1/2}` via `(c−s)^{−1/2}≤(u−s)^{−1/2}` for `c≥u>s`
+(`Real.rpow_le_rpow_of_nonpos`) + `intervalIntegral.norm_integral_le_of_norm_le_const` (NO integrability
+of `R` needed — Mathlib's totalized integral). So the adapter yields `H_far` with `C_far := Cpair`.
+
+**gpt-5.6-sol high adversarial audit 2026-08-22 (GO on banking; NO-GO on "same content"/"complete").**
+The reduction is mathematically SOUND but "H_far = same content as hballrate" is an OVERCLAIM: (A) it is
+an IMPLICATION not an equivalence (`hballrate` pointwise-in-`c`; `H_far` one integrated increment —
+cancellation can make the increment small while `R` is large); (B) the DECISIVE issue is the DOMAIN
+mismatch — `hballrate` integrates over `ball 0 ρ`, `Φ` over ALL `z`, so generically `∂_cΦ = R_ball + R_off`
+and the displayed `hFTC` with only the ball `R` ADDITIONALLY asserts the off-ball contribution
+vanishes/cancels — a SEPARATE analytic obligation, typically `C_far = Cpair + C_off` NOT the exact
+`Cpair`. So `hballrate` ALONE does NOT close `H_far`; the FTC identification and ESPECIALLY the off-ball
+estimate are substantive obligations, not carrier bookkeeping. HONEST verdict: `H_far` is reducible to
+`hballrate` PLUS full-convolution FTC/differentiation PLUS the off-ball contribution — NOT separately-open
+BEYOND those pieces, but not "essentially complete" now.
+
+**WHAT LANDS (std-3 ×3).**
+  - `hfar_of_ballrate_ftc` (★★★) — the abstract adapter: `H_far` shape from `hrate` (hballrate-shaped) + `hFTC`.
+  - `hfar_of_ballrate_ftc_conv` (★★★) — specialization to `Φ c s := ∫ z, A(c−s) x z·B s z y`, the EXACT
+    live `H_far` argument shape the capstone consumes.
+  - `hfar_of_ballrate_ftc_hyp_satisfiable` (★★) — TEETH: `R c s:=(c−s)^{−1/2}`, `Φ c s:=∫_0^c(cc−s)^{−1/2}`,
+    `u=0,ε=h=Cpair=1`; FTC holds (`Φ(0,s)=∫_0^0=0`); rate bound EQUALITY (τ^{−1/2} envelope genuinely ACTIVE,
+    NOT `0≤0`); `R(u+h,s)=(1−s)^{−1/2}≠0`.
+
+**VERIFICATION.** `lake build QIQTH.AxiomAudit` 0 errors (10276 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound, NO sorryAx, NO custom); `axiom_budget_check.sh` raw axiom count 0
+(budget 0) OK; `git status --porcelain | grep -i vacuum` clean; no banked file edited; wired
+`QIQTH.lean`+`AxiomAudit.lean`; `git show bc03ec60 --stat` = 3 files (+200). One benign `unused variable hε`
+warning (kept for interface parity with `H_far`'s `0<ε`, satisfiable).
+
+**HONEST STATUS.** Characterizes and formally reduces the OPEN `H_far` far-envelope to `hballrate` +
+full-domain FTC + off-ball — establishing `H_far` is NOT a genuinely separate wall BEYOND those pieces,
+while (per Sol) NOT collapsing it to `hballrate` alone (the off-ball estimate is a genuine remaining
+obligation). Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6`
+remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
