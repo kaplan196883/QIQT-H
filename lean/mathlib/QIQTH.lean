@@ -5401,3 +5401,19 @@ import QIQTH.BaseVaryingIFTCommonWitness
 -- ROUTINE plumbing not a structural gap. Does NOT close hCensusBound/hCross. NOT a₁=R/6; a₁=R/6 remains
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusTwoTermBallLocal
+-- CensusImageSubballBridge — the IMAGE\BALL RESIDUE bridge (concern "a") for the CoV⟶two-term junction of the
+-- hCensusBound (hCross) assembly, on top of the common-witness monolith (J4-943) + ball-local two-term adapter
+-- (J4-944). THE RESIDUE (concern a): after the CoV the census is over the IMAGE Wbv''(ball 0 D.ρ), but the
+-- transported-weight regularity is only known on an image ball ball 0 σ'; since D.ρ (CoV domain) and σ' (transport
+-- radius=min(D.σ,rQ/(L_V+1))) are INDEPENDENT (σ'=min governs only V's domain-ball→base-ball containment, NOT the
+-- image fitting inside ball 0 σ'), the residue Wbv''(ball 0 D.ρ)\ball 0 σ' is GENUINE (NOT auto-resolved by radius
+-- bookkeeping; gpt-5.6-sol high confirmed). FIX (domain restriction, NOT a hard w-space tail): restrict the CoV to
+-- a sub-domain ball 0 δ⊆ball 0 D.ρ (via ContinuousAt Wbv 0 + Wbv 0=0) so Wbv''(ball 0 δ)⊆ball 0 σ'; the leftover
+-- z-space residue (ball 0 δ)ᶜ is the already-handled CensusDomainBridge far tail (J4-933). Inner ball recovered
+-- from the LOCAL INVERSE (D.hVlip/D.hV0 + weight-match + superset), not "larger image is a nbhd". LANDS:
+-- commonWitness_image_subball ★ (upper), commonWitness_innerBall_of_subdomain ★ (lower), commonWitness_image_sandwich
+-- ★★ (ball 0 r⊆Wbv''(ball 0 δ)⊆ball 0 σ'), commonWitness_image_sandwich_of_geometry ★★ (UNCONDITIONAL: sandwich
+-- from geometry alone via baseVaryingIFTData_nonempty). std-3 ×4. Resolves concern (a). Does NOT close
+-- hCensusBound/hCross; residual (b) gate-split, (c) off-ball envelope at δ, (d) rate absorption, +G2/G3 remain.
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusImageSubballBridge

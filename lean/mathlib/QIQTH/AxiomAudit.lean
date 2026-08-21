@@ -29802,4 +29802,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusTwoTermBallLocal.two_term_census_bound_ballLocal
 #print axioms QIQTH.CensusTwoTermBallLocal.two_term_census_bound_ballLocal_hyp_satisfiable
 
+-- ## CensusImageSubballBridge: the IMAGE\BALL RESIDUE bridge (concern "a") for the CoV⟶two-term junction of the
+-- hCensusBound (hCross) assembly. RESIDUE: census in w-space is over the CoV image Wbv''(ball 0 D.ρ) but transported
+-- regularity holds only on ball 0 σ'; D.ρ and σ'=min(D.σ,rQ/(L_V+1)) are INDEPENDENT ⟹ image\ball residue is GENUINE
+-- (gpt-5.6-sol high confirmed, NOT auto-resolved by radius bookkeeping). FIX: restrict CoV to a sub-domain ball 0 δ
+-- (ContinuousAt Wbv 0 + Wbv 0=0) so Wbv''(ball 0 δ)⊆ball 0 σ'; residue → z-space far tail (CensusDomainBridge J4-933).
+-- Inner ball from local inverse (D.hVlip/D.hV0 + weight-match + superset). std-3 ×4. Resolves concern (a). Does NOT
+-- close hCensusBound/hCross. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusImageSubballBridge.commonWitness_image_subball
+#print axioms QIQTH.CensusImageSubballBridge.commonWitness_innerBall_of_subdomain
+#print axioms QIQTH.CensusImageSubballBridge.commonWitness_image_sandwich
+#print axioms QIQTH.CensusImageSubballBridge.commonWitness_image_sandwich_of_geometry
+
 end QIQTH.AxiomAudit
