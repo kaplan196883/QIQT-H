@@ -13787,3 +13787,50 @@ UNCHANGED, and the modulo-G2 census binder still carries its standing geometry/m
 carriers (`hSupp`, `hFdom`/`hFb`/`hFl`, `hKSmeas`/`hcar`/`hFmeas`, `ε<u`). Discharges NONE of
 `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED — but the census-side G2 gate is no longer an open carry. NOT `a₁=R/6`.
+
+### J4-963 (commit 39fca8d1) — HsuppConstGateGrounded: the census-side hSupp small-gate UPPER containment carry GROUNDED for the LIVE concrete gate (constGate flow-ball) via the banked forward displacement bound; hCross's hSupp reduced to an explicit c–D.r radius coupling (gpt-5.6-sol high adversarial audit: SOUND, non-vacuous, jointly satisfiable with G2)
+
+Picks up J4-962 (G2 grounded for the live gate) and grounds the remaining standing per-`D` `hSupp` carry
+`∀ z∈K, 0∈S z → ‖z‖ < D.r` for the live `S := constGate g gi hC hK c` — the OPPOSITE (UPPER) containment to
+G2's lower `ball 0 rS ⊆ {z|0∈S z}`. NEW file `HsuppConstGateGrounded.lean` (edits NO banked file).
+
+**THE DISCHARGE.** For `S = constGate`, `0 ∈ S z` unfolds to `∃ w∈ball 0 c, uniformFlowExp z w = 0` — the flow
+at base `z` reaches the origin from velocity `‖w‖<c`. The banked forward quadratic displacement bound
+`ExpMap.uniformFlowExp_displacement_bound` (`∃ρ₀>0,∃C_D≥0, ‖uniformFlowExp q v − q − v‖ ≤ C_D‖v‖² ∀q∈K,‖v‖<ρ₀`)
+pins `z`: with `c≤ρ₀` (so `‖w‖<ρ₀`) and `uniformFlowExp z w=0`, `‖z+w‖ = ‖uniformFlowExp z w − z − w‖ ≤ C_D‖w‖²`,
+whence `‖z‖ ≤ ‖z+w‖+‖w‖ ≤ ‖w‖+C_D‖w‖² < c(1+C_D·c)`. So under the radius COUPLING `c(1+C_D·c) ≤ D.r`, every
+origin-reaching base point has `‖z‖<D.r = hSupp`. Converts the abstract per-`D` carry into a CONCRETE geometric
+consequence modulo a single explicit radius inequality between the gate radius `c` and `D.r`, flow constants
+`ρ₀,C_D` exposed existentially (exactly as `g2_for_constGate` exposed `rS`).
+
+**LANDS (std-3 ×3: propext, Classical.choice, Quot.sound; no sorryAx, no custom).**
+  • `hsupp_for_constGate` (★★★) — hSupp GROUNDED for the live gate modulo the `c–D.r` coupling; fills the EXACT
+    `hSupp` slot of `censusBound_integrated_moduloG2` (slot match typechecked via throwaway `have slot := hbnd D …`).
+  • `hsupp_constGate_coupling_satisfiable` (★★) — the coupling is satisfiable for ANY `D.r>0`
+    (`c := min ρ₀ (min 1 (D.r/(1+C_D)))`).
+  • `hsupp_for_constGate_satisfiable` (★★) — NON-VACUITY at the flat metric `g=gi=Id`, `K=closedBall 0 1`
+    (`FrozenGauss.christoffel_const ⟹ hC=const`), producing a positive coupling-satisfying `c` for every `D` (`D.r>0`
+    from the structure invariants `0<a<b<r`).
+
+**gpt-5.6-sol (high) adversarial audit: SOUND and non-vacuous.** The open ball is essential (gives `‖w‖<c` strict,
+hence the strict `‖z‖<D.r`). The coupling direction is OPPOSITE to G2's (G2 needs `c` LARGE relative to a lower
+ball `(1+C_W)·rS ≤ c`; hSupp needs `c` SMALL relative to `D.r`), and the two are JOINTLY satisfiable on a non-empty
+`c`-window `(1+C_W)·rS ≤ c ≤ min ρ₀ U` (`U = (√(1+4C_D·D.r)−1)/(2C_D)` for `C_D>0`, `=D.r` for `C_D=0`) — expected,
+not contradictory.
+
+**VERIFICATION.** Build via QIQTH.AxiomAudit OK (10272 jobs); `#print axioms` std-3 ×3; `axiom_budget_check` raw
+axiom count 0 (budget 0); vacuum-grep clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean; slot-match
+throwaway typechecks clean; `git show 39fca8d1 --stat` = 3 files (+183).
+
+**HONEST STATUS.** hSupp is now GROUNDED for the concrete gate: hCross's live census binder no longer carries an
+INDEPENDENT abstract `hSupp` — for the live `S := constGate`, hSupp is DERIVED from the standing flow geometry
+modulo the explicit `c–D.r` coupling (a numeric radius side-condition, satisfiable). Together with J4-962 (G2), the
+two GATE-shaped census carriers `{hS (G2), hSupp}` are both grounded for the live gate. This does NOT reduce the
+top-level analytic obstruction: `{hDuhamel, hDConv, hCConv}` are UNCHANGED. Remaining modulo-G2 census carriers
+after this brick: the F-regularity Levi family `{hFdom, hFb, hFl}` (the `{hDuhamel,hDConv,hCConv}`-family Levi
+objects — NO formal `hDuhamel→hFdom` bridge exists in the repo; still campaign bookkeeping, a genuine missing bridge
+lemma); the F2 measurability carriers `{hKSmeas, hcar, hFmeas}` (hcar = the KNOWN `Classical.choose` chart-Borel
+definitional wall, `ChartJointBorel.chartJoint_measurable_of_rep` — Sol verdict: keep CARRIED, an
+infrastructure/refactor project not a routine downstream proof); and the benign window side `ε<u` (a free parameter
+side-condition, satisfiable — nothing to discharge). Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a
+top-level τ-carry. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
