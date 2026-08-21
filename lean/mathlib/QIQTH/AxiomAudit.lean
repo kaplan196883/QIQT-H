@@ -57,6 +57,7 @@ import QIQTH.HFarFromBallrate
 import QIQTH.HFarOffBallDischarge
 import QIQTH.HFarOffBallEnvFromCensus
 import QIQTH.HFarFTCBridgeFromEngine
+import QIQTH.HRintFromEngine
 
 namespace QIQTH.AxiomAudit
 
@@ -30222,5 +30223,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFarEnvFromAmplitude.hEnv_window_of_amplitudeAndFdom
 #print axioms QIQTH.HFarEnvFromAmplitude.hfar_concrete_from_amplitude
 #print axioms QIQTH.HFarEnvFromAmplitude.hEnv_window_of_amplitudeAndFdom_hyp_satisfiable
+
+-- ## J4-972 (HRintFromEngine): DISCHARGES the c-integrability carrier hRint of J4-970/971's censusFTC_bridge
+-- / hfar_concrete_of_engine — the third of the three FTC-bridge carriers {hFmeasG, hEnv, hRint} — from the
+-- SAME window engine bundle hEnv (+ global slice measurability hFmeasG), flagged at J4-971 as "probably
+-- derivable via measurable_deriv + compactness". ROUTE: for fixed s, R c := ∫z ∂_τ(witness)(c−s)·F equals
+-- deriv Φ c EXACTLY (pointwise, no null-set gap) at every c∈Icc via the engine censusDeriv_hasDerivAt
+-- (J4-929) — so (1) MEASURABILITY: R agrees with deriv Φ on the interval ⟹ stronglyMeasurable_deriv Φ
+-- gives AEStronglyMeasurable R on volume.restrict (Ι u (u+h)); (2) UNIFORM BOUND: the local hEnv dominators
+-- (one integrable Dz per point of the compact window) are patched by IsCompact.elim_nhds_subcover into a
+-- single integrable Dstar := ∑_{c₀∈t} |D c₀|, whence ‖R c‖ ≤ ∫Dstar =: B (norm_integral_le_of_norm_le);
+-- (3) bounded+measurable on a bounded interval ⟹ IntervalIntegrable (mono_fun' vs intervalIntegrable_const).
+-- intervalIntegrable_paramDeriv_of_localDom (★★): the abstract measurability+compactness route over any
+-- measure space. hRint_of_hEnv (★★★): the concrete hRint from hEnv+hFmeasG — so hRint is NO LONGER a free
+-- carrier, reducing the FTC-bridge carriers {hFmeasG,hEnv,hRint}→{hFmeasG,hEnv}. TEETH: abstract lemma
+-- jointly satisfiable at a genuinely non-affine Dirac-measure family (fp c z := cos(c−z₀), R 1 = cos 1 ≠ 0
+-- — derivative genuinely ACTIVE, not 0=0). std-3 ×3. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}
+-- as a top-level τ-carry. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HRintFromEngine.intervalIntegrable_paramDeriv_of_localDom
+#print axioms QIQTH.HRintFromEngine.hRint_of_hEnv
+#print axioms QIQTH.HRintFromEngine.intervalIntegrable_paramDeriv_of_localDom_hyp_satisfiable
 
 end QIQTH.AxiomAudit

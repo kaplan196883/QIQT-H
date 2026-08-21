@@ -5273,6 +5273,16 @@ import QIQTH.HFarFTCBridgeFromEngine
 -- hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFarEnvFromAmplitude
 
+-- HRintFromEngine — J4-972: DISCHARGES the c-integrability carrier hRint of J4-970/971's censusFTC_bridge /
+-- hfar_concrete_of_engine from the SAME window engine bundle hEnv (+ hFmeasG) — via measurable_deriv
+-- (rate = deriv Φ pointwise on the window ⟹ stronglyMeasurable_deriv) + IsCompact.elim_nhds_subcover
+-- domination-patching (local hEnv dominators → single integrable Dstar := ∑|D c₀| ⟹ ‖R c‖ ≤ ∫Dstar).
+-- intervalIntegrable_paramDeriv_of_localDom (★★): the abstract route; hRint_of_hEnv (★★★): the concrete
+-- hRint from hEnv+hFmeasG. Reduces the FTC-bridge carriers {hFmeasG,hEnv,hRint}→{hFmeasG,hEnv}. TEETH:
+-- abstract lemma satisfiable at a genuinely non-affine Dirac-measure family (R 1 = cos 1 ≠ 0, deriv ACTIVE).
+-- std-3 ×3. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
+import QIQTH.HRintFromEngine
+
 -- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
 -- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
 -- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT
