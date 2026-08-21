@@ -14151,3 +14151,48 @@ no longer open on the off-ball spatial estimate. Remaining `H_far` carries: the 
 Sol: closes ONLY the envelope premise, NOT `H_far`/`hCross` outright. Discharges NONE of
 `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-970 — HFarFTCBridgeFromEngine: the FTC-in-`c` bridge `hFTC` DISCHARGED for the concrete convolution from the banked engine `HasDerivAt` + Mathlib FTC-2 (commit `9405ae00`)
+
+**FILE (NEW).** `QIQTH/HFarFTCBridgeFromEngine.lean` (ns `QIQTH.HFarFTCBridgeFromEngine`, no banked file
+edited). std-3 ×4. Target = the ONE remaining genuinely-analytic carrier of J4-967's `H_far` reduction
+flagged `{hDuhamel, hDConv}`: the FTC-in-`c` bridge `hFTC : Φ(u+h,s) − Φ(u,s) = ∫ c in u..(u+h), R c s`
+for the concrete census convolution `Φ(c,s):=∫ z, witness(c−s) 0 z·F s z 0`, `R c s := ∫ z,
+deriv(fun r↦witness r 0 z)(c−s)·F s z 0`.
+
+**THE COMPOSITION (routine but genuine; gpt-5.6-sol high 2026-08-22 verdict: SOUND).** J4-929's
+`censusDeriv_hasDerivAt` (engine-wired: Mathlib dominated differentiation `heatConvInner_hasDerivAt` +
+J4-915 per-`z` `HasDerivAt` + J4-916 explicit Gaussian dominator) ALREADY gives, per `(s,a)`:
+`HasDerivAt (fun a'↦Φ(a',s)) (R a s) a`. Feeding this at each `c` into Mathlib FTC-2
+`intervalIntegral.integral_eq_sub_of_hasDerivAt` (needs `HasDerivAt` on `uIcc u (u+h)` + `IntervalIntegrable`
+of the rate) yields `∫ c in u..(u+h), R c s = Φ(u+h,s) − Φ(u,s)`, whence `hFTC` by `.symm`. `0≤h ⟹
+uIcc u (u+h) = Icc u (u+h)` matches the engine bundle `hEnv`'s domain. No `deriv`-value mismatch (Sol
+confirmed): the FTC theorem consumes the SUPPLIED derivative `R c s` from J4-929's conclusion.
+
+**WHAT LANDS (std-3 ×4, non-vacuous, no banked file edited, no `sorry`/new axioms).**
+- `hFTC_of_hasDerivAt` (★★) — abstract FTC-in-`c` wrapper: per-`c` `HasDerivAt` on `uIcc` + interval-
+  integrability ⟹ finite difference `=` `c`-integral of the rate. Pure `.symm` of FTC-2.
+- `censusFTC_bridge` (★★★) — the concrete `hFTC`: feeds `censusDeriv_hasDerivAt` (via `hFmeasG` + the SAME
+  engine bundle `hEnv` that `hcross_of_censusIntegral_bound` consumes, inhabited by
+  `hEnv_of_witnessCrudeEnv` J4-916) into `hFTC_of_hasDerivAt`. EXACTLY the `hFTC` premise J4-967 consumes.
+- `hfar_concrete_of_engine` (★★★) — composes `censusFTC_bridge` with `hfar_of_ballrate_ftc_conv` (J4-967)
+  ⟹ the live `H_far` envelope for the concrete convolution, FTC bridge NO LONGER an abstract premise —
+  from `{hFmeasG, hEnv, hRint (IntervalIntegrable R), hrate}`.
+- `hFTC_of_hasDerivAt_hyp_satisfiable` (★★) — TEETH: `Φ=sin, R=cos`, `u=0,ε=h=1`; genuinely non-affine
+  `HasDerivAt`, interval-integrable rate, FTC identity holds, rate genuinely ACTIVE (`cos(3/2)>0≠0`).
+
+**VERIFICATION.** `lake build QIQTH.AxiomAudit` 0 errors (10279 jobs); `#print axioms` std-3 ×4
+(propext/Classical.choice/Quot.sound, NO sorryAx, NO custom); `axiom_budget_check.sh` raw 0 (budget 0) /
+OK; `git status --porcelain | grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean` +
+`AxiomAudit.lean`; commit `9405ae00`, pushed.
+
+**HONEST STATUS (blunt; Sol-audited, NO overclaim).** Legitimately removes the FTC-in-`c` bridge as an
+INDEPENDENT/abstract carrier of `H_far` FOR THE CONCRETE CONVOLUTION — it is now PROVED from the banked
+differentiation engine + FTC + `c`-integrability, NOT assumed. But this does NOT close `H_far`, does NOT
+close `hCross`, and does NOT establish `a₁=R/6`. Per Sol: it REPLACES the opaque `hDuhamel`/`hDConv` FTC
+content with its lower-level substantive data `{hEnv engine bundle (banked mod census amplitude data + G3
+F-bound), hRint (`c`-integrability of `R`), hFmeasG}`; the analytic content has not disappeared. Remaining
+`H_far` carries: on-ball `hballrate` (mod-G2, J4-960), off-ball envelope (discharged J4-969, mod G3
+F-bound + amplitude data), `hRint` integrability, `hEnv` engine bundle. `hCConv` UNTOUCHED. Discharges
+NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
