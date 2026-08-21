@@ -5260,6 +5260,19 @@ import QIQTH.HCrossDerivEngineWired
 -- the ABSTRACT FTC carrier but NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
 import QIQTH.HFarFTCBridgeFromEngine
 
+-- HFarEnvFromAmplitude — J4-971: NET-DISCHARGES the crude time-derivative envelope hAcrude inside the
+-- window-level engine bundle hEnv that J4-970's hfar_concrete_of_engine consumes, by wiring the banked
+-- any-S ∂_τ domination envelope witnessTimeDeriv_domination_global_anyS (J4-950) into the per-(s,a)
+-- provider hEnv_of_witnessCrudeEnv (J4-916), PER POINT of the far window (a−s > 0 pointwise ⟹ legal
+-- per-point interval selection τ₀:=(a−s)/2, τ₁:=2(a−s); cap covers τ₁ since 2(a−s)<2(h+ε)≤τ₀cap).
+-- hEnv_window_of_amplitudeAndFdom (★★★): the window hEnv from {amplitude sups hAmp0/hCfield/hSupp, G3
+-- F-bound hFdom, hmeas, hbase}. hfar_concrete_from_amplitude (★★★): composes with hfar_concrete_of_engine
+-- (J4-970) ⟹ the live H_far envelope with hEnv NO LONGER carried — remaining {hFmeasG, hRint, hrate}.
+-- TEETH: full carrier bundle satisfiable at a PROPER gate S≠univ (reuses census_anyS_env_satisfiable_
+-- properGate J4-950 + F≡0). std-3 ×3. Discharges hAcrude→amplitude sups but NONE of {hballrate,hDuhamel,
+-- hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFarEnvFromAmplitude
+
 -- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
 -- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
 -- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT

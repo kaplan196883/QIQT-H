@@ -30203,4 +30203,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFarFTCBridgeFromEngine.hfar_concrete_of_engine
 #print axioms QIQTH.HFarFTCBridgeFromEngine.hFTC_of_hasDerivAt_hyp_satisfiable
 
+-- ## J4-971 (HFarEnvFromAmplitude): NET-DISCHARGES the crude time-derivative envelope hAcrude inside the
+-- window-level engine bundle hEnv that J4-970's hfar_concrete_of_engine consumes, by wiring the banked
+-- any-S ∂_τ domination envelope witnessTimeDeriv_domination_global_anyS (J4-950) into the per-(s,a)
+-- provider hEnv_of_witnessCrudeEnv (J4-916) PER POINT of the far window. In the window a−s ≥ u−s > 0
+-- (strictly positive pointwise), so per-(s,a) interval selection τ₀:=(a−s)/2, τ₁:=2(a−s) is legal (∃ is
+-- per point); the FIXED cap covers τ₁ since 2(a−s)<2(h+ε)≤τ₀cap, and gaussDdim_zero_sub (origin evenness)
+-- matches gaussDdim(4·D.lam·τ)(0−z)=…(z). hEnv_window_of_amplitudeAndFdom (★★★): the window hEnv from
+-- {amplitude sups hAmp0/hCfield/hSupp (mildest accepted class), G3 F-bound hFdom, hmeas, hbase} — hAcrude
+-- REPLACED, no separate crude-envelope carry. hfar_concrete_from_amplitude (★★★): composes with
+-- hfar_concrete_of_engine (J4-970) ⟹ live H_far envelope for the concrete convolution with hEnv reduced to
+-- amplitude+F carries — remaining {hFmeasG, hRint, hrate}. TEETH: full carrier bundle jointly satisfiable
+-- at a PROPER gate S≠univ (reuses census_anyS_env_satisfiable_properGate J4-950, F≡0 trivializes F-carries,
+-- u:=ε:=h:=τ₀gate/8 gives 2(h+ε)≤τ₀gate and 0≤u−ε) — no unsatisfiable-antecedent / cp466 vacuity trap.
+-- std-3 ×3. For arbitrary free F the remaining {hFmeasG,hFdom,hmeas,hbase,hRint} are genuine (irreducible)
+-- F-side regularity carries, NOT new analytic walls. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}
+-- as a top-level τ-carry. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HFarEnvFromAmplitude.hEnv_window_of_amplitudeAndFdom
+#print axioms QIQTH.HFarEnvFromAmplitude.hfar_concrete_from_amplitude
+#print axioms QIQTH.HFarEnvFromAmplitude.hEnv_window_of_amplitudeAndFdom_hyp_satisfiable
+
 end QIQTH.AxiomAudit
