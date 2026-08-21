@@ -5897,3 +5897,12 @@ import QIQTH.HbintRequant
 -- integrability at concrete gate params 0<a<b<c. Discharges NONE of {hDuhamel,hDConv,hCConv};
 -- a₁=R/6 CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
 import QIQTH.HbintFullyClosedCurved
+
+-- HZMassFullyClosedCurved — the FULL discharge of the hzmass z-mass bound (∫z BL·BF ≤ C·(t−s)⁻¹) of
+-- MixedDirectionsFieldHessianEnvelope at the genuinely-curved witness (κ<0, 1≤n, K={0}), via the SAME
+-- null-support/singleton shortcut J4-984 used for hbint: the field-Hessian vanishes off K={0}
+-- (BF_ciSup_eqZero_of_base_notMem_K), so the integrand is supported in the null singleton {0}
+-- (productEnvelope_support_subset_K), so ∫z BL·BF = 0 ≤ C·(t−s)⁻¹. UNCONDITIONAL, for any BL and any
+-- C≥0 on the capped window. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those
+-- three, UNCHANGED. std-3. NOT a₁=R/6.
+import QIQTH.HZMassFullyClosedCurved

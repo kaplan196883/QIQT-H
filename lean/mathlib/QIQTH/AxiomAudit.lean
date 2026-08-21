@@ -27,6 +27,7 @@ import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HbintRequant
 import QIQTH.HbintFullyClosedCurved
+import QIQTH.HZMassFullyClosedCurved
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
@@ -30364,5 +30365,15 @@ namespace QIQTH.AxiomAudit
 -- Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HbintFullyClosedCurved.singleton_exists_bound
 #print axioms QIQTH.HbintFullyClosedCurved.hbint_fully_closed_curved
+
+-- HZMassFullyClosedCurved — the FULL discharge of the hzmass z-mass bound (∫z BL·BF ≤ C·(t−s)⁻¹) of
+-- MixedDirectionsFieldHessianEnvelope at the genuinely-curved witness (κ<0, 1≤n, K={0}), via the SAME
+-- null-support/singleton shortcut J4-984 used for hbint: BF (=⨆x‖fderiv witnessFieldDeriv‖) vanishes
+-- off K={0} (BF_ciSup_eqZero_of_base_notMem_K), so the integrand is supported in the null singleton {0}
+-- (productEnvelope_support_subset_K), so ∫z BL·BF=0 ≤ C·(t−s)⁻¹ (C≥0, t−s≥εₘ>0). UNCONDITIONAL for
+-- any BL, any C≥0 on the capped window. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6
+-- CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HZMassFullyClosedCurved.integral_eq_zero_of_support_subset_singleton
+#print axioms QIQTH.HZMassFullyClosedCurved.hzmass_fully_closed_curved
 
 end QIQTH.AxiomAudit
