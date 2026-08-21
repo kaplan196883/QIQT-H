@@ -14810,3 +14810,45 @@ sup-bound) is now discharged, so the leg is UNCONDITIONAL integrability at concr
 closes ONE `hCConv` sub-leg (the tube-cover `hbint` route); it does NOT touch `hzmass` or the other
 `hCConv` legs, and does NOT bear on `hDuhamel`/`hDConv`. `a₁=R/6` remains STRICTLY CONDITIONAL on
 `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-985 — `HZMassFullyClosedCurved`: FULL discharge of the `hzmass` `z`-mass bound at the curved witness — commit `fe9160a1`, ledger `<this>`
+
+**What.** Closes the `hzmass` field (`∫z BL·BF ≤ C·(t−s)⁻¹`) of `MixedDirectionsFieldHessianEnvelope`
+UNCONDITIONALLY at the genuinely-curved witness (κ<0, 1≤n, `K={0}`), via the SAME null-support /
+singleton shortcut J4-984 used for `hbint`. With the explicit J4-865/J4-984 field-Hessian envelope
+`BF s z := ⨆x ‖fderiv (y↦witnessFieldDeriv … (t−s) y z) x‖`, the field-Hessian VANISHES off `K={0}`
+(`HZMassIntegrabilityAttempt.BF_ciSup_eqZero_of_base_notMem_K`), so the product integrand
+`z ↦ BL s z·BF s z` is supported in the null singleton `{0}`
+(`HZMassIntegrabilityAttempt.productEnvelope_support_subset_K`), hence `∫z BL·BF = 0 ≤ C·(t−s)⁻¹`
+(`C≥0`, `t−s≥εₘ>0` on the capped window). Holds for ANY `BL`, ANY gate scalars `a b c`, ANY `C≥0`.
+
+**The result (new file, no banked file edited).**
+- `integral_eq_zero_of_support_subset_singleton` — measure-theoretic core: a real function supported in a
+  singleton `{p}` integrates to `0` under any `NoAtoms` measure (`measure_singleton` ⟹ a.e. `0` ⟹ `∫=0`).
+- **CAP** `hzmass_fully_closed_curved` — `refine ae_of_all …`; `window_gap` (J4-886) gives `0<t−s`;
+  `productEnvelope_support_subset_K` gives support ⊆ `{0}`; `integral_eq_zero_of_support_subset_singleton`
+  kills the integral; `mul_nonneg hC (inv_pos …)` closes `0 ≤ C·(t−s)⁻¹`. NON-VACUOUS: `hC:0≤C`,
+  `hepspos:0<t−εₘ` are ordinary satisfiable data; conclusion is a genuine integral bound.
+
+**Verify.** `lake build QIQTH.HZMassFullyClosedCurved` 0 err (8934 jobs); throwaway `ChkHZMassFull` std-3
+(no `sorryAx`, no custom axiom); `lake build QIQTH.AxiomAudit` 0 err (10293 jobs); std-3
+(`propext`/`Classical.choice`/`Quot.sound`) ×2; `axiom_budget_check.sh` raw 0 (budget 0);
+`git status --porcelain | grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean`+
+`AxiomAudit.lean`; `git show fe9160a1 --stat` = 3 files (+168); pushed.
+
+**Honest status.** Closes the `hzmass` `z`-mass leg at the genuinely-curved `K={0}` witness (the "deepest
+wall" of J4-886, now UNCONDITIONAL at this witness via null support). Sol (gpt-5.6-sol, high) confirmed
+the closure is FORMALLY LEGITIMATE but ANALYTICALLY DEGENERATE — at `K={0}` the field-Hessian is a.e.
+zero, so this is a specialized census closure where curved geometry does no substantive work (same honest
+caveat as J4-984). CENSUS UPSHOT (Sol-audited): with `BF:=⨆‖fderiv‖`, all FIVE envelope fields close
+individually at `K={0}` — `hFd` (J4-874, unconditional, real content), `hbint` (J4-984, null support),
+`hzmass` (this, null support), `hkint` (J4-875 ⟸ `{hbint,hmeas,hLevi,hFd}`, `hmeas`/kPrime also null via
+`‖kPrime‖≤BL·BF=0` off `K`), `hLevi` (tautological `BL:=|leviSeries|`). BUT the FULL-envelope ASSEMBLY is
+BLOCKED on a genuine common-gate QUANTIFIER-ORDER obstruction (Sol-flagged, code-confirmed): the base
+producer `gatedWitnessN1_hEboundW_le_lin_CONST_prescribed` returns `∃ a b C c` (choosing `a,b` itself,
+`c<ε`), while `hFd`'s `δ₀` DEPENDS on the returned `a,b` — so `ε:=δ₀(a,b)` is circular. NO-GO for the full
+envelope until the gate producer is strengthened (accept a post-`a,b` ceiling, or a `c`-shrink transport
+sharing `S`). Not forced. Touches ONLY the 4th sub-hypothesis of `hCConv` at ONE degenerate witness; does
+NOT close `hCConv` (other legs remain) and does NOT bear on `hDuhamel`/`hDConv` (still bottlenecked at the
+J3 opaque-chart Gauss-lemma wall). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
