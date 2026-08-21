@@ -29814,4 +29814,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusImageSubballBridge.commonWitness_image_sandwich
 #print axioms QIQTH.CensusImageSubballBridge.commonWitness_image_sandwich_of_geometry
 
+-- ## CensusJointGateInnerBall: the JOINT-GATE INNER-BALL bridge closing concern (b) of the hCensusBound (hCross)
+-- CoV-junction re-audit. The census gate at slice (0,z) is JOINT z∈K ∧ 0∈S z; J4-937 gives deriv=if (z∈K∧0∈S z) then
+-- [CoV form] else 0. Identifying the integrand on the two-term inner ball ball 0 r with the CoV form needs
+-- ball 0 r⊆{z|z∈K∧0∈S z} = ball 0 r⊆K (z∈K half) ∧ G2 ball 0 r⊆{z|0∈S z}. RESOLUTION (gpt-5.6-sol high): the z∈K half
+-- follows FOR FREE from standing h0Kmem:K∈𝓝 0 via Metric.mem_nhds_iff; r=min rK rS. Asymmetry: K a nbhd of 0 (given),
+-- S abstract (S≡∅ ⟹ {z|0∈S z}=∅) ⟹ G2 genuinely carried, z∈K FREE. std-3 ×4. Resolves concern (b) modulo G2. Does
+-- NOT close hCensusBound/hCross; residual (c) off-ball envelope, (d) rate absorption, +G2/G3 remain. NOT a₁=R/6;
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusJointGateInnerBall.jointGate_innerBall_of_nhds_and_gateBall
+#print axioms QIQTH.CensusJointGateInnerBall.censusTauDeriv_eq_onGate_on_jointGate_ball
+#print axioms QIQTH.CensusJointGateInnerBall.censusTauDeriv_onGate_innerBall_of_geometry
+#print axioms QIQTH.CensusJointGateInnerBall.jointGate_innerBall_satisfiable
+
 end QIQTH.AxiomAudit

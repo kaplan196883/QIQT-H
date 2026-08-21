@@ -5417,3 +5417,17 @@ import QIQTH.CensusTwoTermBallLocal
 -- hCensusBound/hCross; residual (b) gate-split, (c) off-ball envelope at δ, (d) rate absorption, +G2/G3 remain.
 -- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusImageSubballBridge
+-- CensusJointGateInnerBall — the JOINT-GATE INNER-BALL bridge closing concern (b) of the hCensusBound (hCross)
+-- CoV-junction re-audit: the "z∈K half" of the gate-split integral restriction is FREE from standing geometry
+-- K∈𝓝 0, so concern (b) reduces to G2 ALONE. The census gate at slice (0,z) is JOINT z∈K ∧ 0∈S z; J4-937's
+-- censusTauDeriv_gateSplit gives deriv=if (z∈K∧0∈S z) then [CoV form] else 0. To identify the integrand on the
+-- two-term inner ball ball 0 r with the CoV form needs ball 0 r⊆{z|z∈K∧0∈S z}, splitting as ball 0 r⊆K (z∈K half)
+-- AND G2 ball 0 r⊆{z|0∈S z}. RESOLUTION (gpt-5.6-sol high confirmed): z∈K half follows FOR FREE from standing
+-- h0Kmem:K∈𝓝 0 via Metric.mem_nhds_iff (∃rK>0,ball 0 rK⊆K); r=min rK rS. Asymmetry: K is a nbhd of 0 (given), S
+-- abstract (S≡∅ ⟹ {z|0∈S z}=∅), so G2 genuinely carried but z∈K FREE. LANDS: jointGate_innerBall_of_nhds_and_gateBall
+-- ★★ (K∈𝓝 0 + G2 ⟹ ∃r>0, ball 0 r⊆joint gate), censusTauDeriv_eq_onGate_on_jointGate_ball ★★ (on such a ball the
+-- gate-split if_pos fires = on-gate CoV form ∀z∀τ), censusTauDeriv_onGate_innerBall_of_geometry ★★ (COMBINED, from
+-- geometry+G2 alone), jointGate_innerBall_satisfiable (TEETH: non-univ gate S z=ball z 1, compact nbhd K=closedBall 0 1).
+-- std-3 ×4. Resolves concern (b) modulo G2 (z∈K is a non-issue). Does NOT close hCensusBound/hCross; residual (c)
+-- off-ball envelope, (d) rate absorption, +G2/G3 remain. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusJointGateInnerBall
