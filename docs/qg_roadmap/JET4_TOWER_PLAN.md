@@ -14720,3 +14720,57 @@ wall; the remaining `hDuhamel` census content (the `RadialNormalCoordinateGauge`
 `hBoundaryLim` slot) is UNTOUCHED, and the top-level abstract-`H` capstone
 `TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual` is UNCHANGED. `a₁=R/6` remains STRICTLY
 CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-983 — `HbintRequant`: the `b < r₀` OPACITY discharge (interior tube-cover `hbint` route) — commit `7e986910`, ledger `<this>`
+
+**What.** The J4-907 `HbintInteriorTubeCoverRoute.hbint_interior_via_tube_cover_of_bLtR0` delivers the
+FULL `hbint` integrability at a concrete flow-ball gate GIVEN a single geometric carry `b < r₀`, but
+`r₀ := min rTube (min ρ₀ (1/(C_D+1)))` AND the c-window ceiling `δ₀ := min (min δgate δoff) δroute` are
+both produced AFTER the theorem's explicit `(a,b)` parameters — so no prescribed-gate producer could
+supply `b < r₀`. This brick REQUANTIFIES both radii BEFORE `(a,b)` and CLOSES the `b < r₀` obstruction
+at the genuinely-curved witness. (The exact `ReachRequant`/`CurvedA1ReachAlign` J4-599 pattern, for the
+analogous `b < r₀` problem instead of the jet-reach `c < δ₀`.)
+
+**Provenance audit (verified by reading the Lean).** `r₀`'s pieces are `(a,b)`-free (`rTube` from
+`generalCenter_chartC2_tube`; `ρ₀`,`C_D` from `uniformFlowExp_fderiv_near_id_quant`; neither takes
+`(a,b)`). The ENTIRE c-window ceiling bottoms out UNIFORMLY at the SINGLE `(a,b)`-free chart-germ radius
+of `HeatResidualBound.uniformInverseChart_huniformChart`: `δgate` directly; `δoff` via
+`fieldHessian_fderiv_eqZero_off_jointGraph` → `fieldHessian_zero_offCore` → `witness_zero_offCore` → the
+germ; `δroute` via `hbint_concrete_via_interior_route` → `hBFint_concrete_of_jointInteriorContinuous` →
+`fieldHessian_vanish_off_concreteKx` → `fieldHessian_zero_offCore` → the germ. The `a b ha hab hbρ` enter
+ONLY per-point bodies, never the radius production.
+
+**The tower (new file, no banked file edited).**
+- **R1** `witness_zero_offCore_requant` — genuine replay, germ radius before `(a,b)`.
+- **R2** `fieldHessian_zero_offCore_requant` — off R1.
+- **R2b** `fieldHessian_fderiv_eqZero_off_jointGraph_requant` — off R2 (`hbρ` under `∀ a b`).
+- **R3** `fieldHessian_vanish_off_concreteKx_requant` — off R2.
+- **R4** `hBFint_concrete_of_jointInteriorContinuous_requant` — off R3.
+- **R5** `hbint_concrete_via_interior_route_requant` — off R4.
+- **R6** `hbint_interior_via_tube_cover_requant` — `r₀` AND `δ₀` BOTH before `(a,b)`; interior tube-cover
+  mechanics IDENTICAL to J4-907, only the quantifier order honestly swapped.
+- **CAP** `hbint_bLtR0_closed_curved` — at the genuinely-curved witness (`κ<0`, `1≤n`, `K={0}`): hoist
+  `r₀`,`δ₀` (R6); obtain flow radius `ρ`; prescribe `ε := min r₀ (min δ₀ ρ)` into the banked constant-
+  radius producer `gatedWitnessN1_hEboundW_le_lin_CONST_prescribed` (which uses the RAW flow-ball gate,
+  NOT `constGate`), yielding `0 < a < b < c` with `c < ε`; then `b<c<ε≤r₀ ⟹ b<r₀`, `c<ε≤δ₀ ⟹ c<δ₀`,
+  `b<c<ε≤ρ ⟹ b<ρ` — every R6 antecedent fires, CLOSING `hbint`'s `b<r₀` obstruction. The producer's own
+  defect-bound conclusion is NOT consumed (only the gate ordering is harvested), so there is NO
+  `constGate`/flow-ball object mismatch. Residual = the ELEMENTARY `BL`-continuity / compact-`K`
+  sup-bound / null-frontier carries only.
+
+**Verify.** `lake build QIQTH.HbintRequant` 0 err (8930 jobs); `lake build QIQTH.AxiomAudit` 0 err
+(10291 jobs); std-3 (`propext`/`Classical.choice`/`Quot.sound`; NO `sorryAx`/custom) ×8;
+`axiom_budget_check.sh` raw 0 (budget 0); `git status --porcelain | grep -i vacuum` clean; no banked
+file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show 7e986910 --stat` = 3 files (+561); pushed.
+gpt-5.6-sol high consulted at go/no-go (GO for R1–R6, conditional GO for CAP; the CAP's `constGate`
+mismatch risk was retired by calling the BASE producer directly on the raw flow-ball gate, and the
+`b<ρ` cap was added to `ε`).
+
+**Honest status.** Closes the `b < r₀` geometric carry of ONE `hCConv` sub-leg (the J4-907 interior
+tube-cover `hbint` route) — a genuine reduction, the `b<r₀` obstruction is GONE at the curved witness,
+leaving only elementary carries. This does NOT close `hbint` unconditionally (the elementary
+`BL`/compact/null carries remain), does NOT touch `hzmass` or the other `hCConv` legs, and does NOT bear
+on `hDuhamel`/`hDConv`. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED.
+NOT `a₁=R/6`.
