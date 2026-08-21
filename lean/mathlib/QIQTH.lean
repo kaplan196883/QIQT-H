@@ -5238,6 +5238,21 @@ import QIQTH.BaseSlotDetRegularity
 -- {hDuhamel,hDConv,hCConv}).
 import QIQTH.BaseSlotInverseChartLipschitz
 
+-- CensusDomainBridge — J4-933: the DOMAIN-MISMATCH bridge for obstruction (ii) of J4-929's hCensusBound
+-- wall. The banked base-slot CoV (J4-930) transports the census over ball 0 ρ, but the LIVE hCensusBound
+-- integrates over ALL of ℝⁿ (∫ z, …); the off-ball residue is an EXPONENTIALLY-suppressed Gaussian tail
+-- (e^{−ρ²/8λ}). integral_le_ball_add_offBall_dominator (★, pure measure-theory bridge: Φ integrable + D
+-- integrable dominating |Φ| off ball + ball bound Bball ⟹ |∫_ℝⁿ Φ| ≤ Bball + ∫_ballᶜ D); offBall_gauss_
+-- tail_mass_le (★, ∫_ballᶜ Cenv·gaussDdim λ ≤ Cenv·√2ⁿ·e^{−ρ²/8λ}, via the ρ≤‖z‖ variant of gaussDdim_
+-- tail_le_scaled + ∫gaussDdim=1); census_full_of_ball_bound_and_gaussEnv (★★ HEADLINE: Φ integrable +
+-- off-ball single-Gaussian envelope + ball bound ⟹ |∫_ℝⁿ Φ| ≤ Bball + Cenv·√2ⁿ·e^{−ρ²/8λ}); +non-vacuity
+-- witness Φ=gaussDdim 1. std-3 ×4. gpt-5.6-sol high: legitimate non-vacuous discharge of obstruction (ii)
+-- at the INTERFACE level; hCensusBound NOT assembled modulo only hbaseC2 (residual carries: J4-217 hgate,
+-- CoV left-inverse weight matching uic(V w)0=w, amp·F/Cfield·F bounded+Lipschitz, IFT open-map superset,
+-- product→single Gaussian envelope collapse, Bball+tail≤C_far·(u−s)^{−1/2} rate absorption). NOT a₁=R/6
+-- (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.CensusDomainBridge
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

@@ -34,6 +34,7 @@ import QIQTH.GaussTauTraceCancellationLocalized
 import QIQTH.GaussTauTraceCancellationInnerBall
 import QIQTH.GaussTauTraceChartTransported
 import QIQTH.GaussTauTraceChartDetFactor
+import QIQTH.CensusDomainBridge
 import QIQTH.HCrossMixedSecondDiffReduction
 import QIQTH.HCrossIntegratedSplit
 import QIQTH.HCrossFarDerivBridge
@@ -29588,5 +29589,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotInverseChartLipschitz.transported_ratio_regularity
 #print axioms QIQTH.BaseSlotInverseChartLipschitz.transported_ratio_center_lipschitz
 #print axioms QIQTH.BaseSlotInverseChartLipschitz.localInverse_nonvacuous
+
+-- ## J4-933 (CensusDomainBridge): the DOMAIN-MISMATCH bridge for obstruction (ii) of J4-929's hCensusBound
+-- wall — the ball-0-ρ (banked base-slot CoV, J4-930) vs ℝⁿ (live census) domain gap. The off-ball residue
+-- is an EXPONENTIALLY-suppressed Gaussian tail e^{−ρ²/8λ}, negligible relative to the τ^{−1/2} rate.
+-- integral_le_ball_add_offBall_dominator (★, PURE measure-theory bridge: Φ integrable + D integrable
+-- dominating |Φ| off ball 0 ρ + ball bound |∫_ball Φ|≤Bball ⟹ |∫_ℝⁿ Φ|≤Bball+∫_ballᶜ D, via integral_add_
+-- compl + triangle + setIntegral_mono_on); offBall_gauss_tail_mass_le (★, ∫_ballᶜ Cenv·gaussDdim λ ≤
+-- Cenv·√2ⁿ·e^{−ρ²/8λ}, via the ρ≤‖z‖ variant of gaussDdim_tail_le_scaled + ∫gaussDdim(2λ)=1); census_full_
+-- of_ball_bound_and_gaussEnv (★★ HEADLINE, obstruction (ii): Φ integrable + off-ball single-Gaussian
+-- envelope |Φ z|≤Cenv·gaussDdim λ z (ρ≤‖z‖) + ball bound ⟹ |∫_ℝⁿ Φ|≤Bball+Cenv·√2ⁿ·e^{−ρ²/8λ}); +non-
+-- vacuity witness Φ=gaussDdim 1. std-3 ×4. gpt-5.6-sol high VERIFIED: legitimate non-vacuous discharge of
+-- obstruction (ii) at the INTERFACE level; hCensusBound NOT assembled modulo only hbaseC2 (residual carries
+-- NOT among {CoV,det/ratio,V-transport,tail}: J4-217 hgate; CoV left-inverse weight matching uic(V w)0=w;
+-- amp·F/Cfield·F bounded+Lipschitz; IFT open-map superset Wbv''(ball)⊇ball 0 r; product→single Gaussian
+-- envelope collapse; Bball+tail≤C_far·(u−s)^{−1/2} rate absorption). NOT a₁=R/6; a₁=R/6 remains CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusDomainBridge.integral_le_ball_add_offBall_dominator
+#print axioms QIQTH.CensusDomainBridge.offBall_gauss_tail_mass_le
+#print axioms QIQTH.CensusDomainBridge.census_full_of_ball_bound_and_gaussEnv
+#print axioms QIQTH.CensusDomainBridge.census_full_of_ball_bound_and_gaussEnv_hyp_satisfiable
 
 end QIQTH.AxiomAudit
