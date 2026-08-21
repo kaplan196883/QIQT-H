@@ -5283,6 +5283,16 @@ import QIQTH.HFarEnvFromAmplitude
 -- std-3 ×3. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
 import QIQTH.HRintFromEngine
 
+-- HFmeasGFromFieldSlice — J4-973: REDUCES the F-slice product-measurability carrier hFmeasG of J4-970/971/972's
+-- FTC-in-c bridge from the ENTANGLED product witness(u'−s) 0 z·F s z 0 to the PURE F-side slice measurability
+-- hFslice : ∀ s, AEStronglyMeasurable (fun z ↦ F s z 0), by peeling the WITNESS factor onto the banked
+-- vanVleckGatedWitness_slice_aestronglyMeasurable ({hKm,hSm0,hIn}) via AEStronglyMeasurable.mul.
+-- aesm_mul_of_slices (★): abstract product splitter; hFmeasG_of_field_slice (★★★): the concrete reduction.
+-- Since F is UNCONSTRAINED, hFslice cannot be eliminated (carrier REDUCTION, not full discharge). TEETH:
+-- splitter satisfiable at a Dirac family with product genuinely ACTIVE (=1≠0). std-3 ×3. Discharges NONE of
+-- {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFmeasGFromFieldSlice
+
 -- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
 -- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
 -- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT

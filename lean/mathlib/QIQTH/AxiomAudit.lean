@@ -58,6 +58,7 @@ import QIQTH.HFarOffBallDischarge
 import QIQTH.HFarOffBallEnvFromCensus
 import QIQTH.HFarFTCBridgeFromEngine
 import QIQTH.HRintFromEngine
+import QIQTH.HFmeasGFromFieldSlice
 
 namespace QIQTH.AxiomAudit
 
@@ -30243,5 +30244,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HRintFromEngine.intervalIntegrable_paramDeriv_of_localDom
 #print axioms QIQTH.HRintFromEngine.hRint_of_hEnv
 #print axioms QIQTH.HRintFromEngine.intervalIntegrable_paramDeriv_of_localDom_hyp_satisfiable
+
+-- ## J4-973 (HFmeasGFromFieldSlice): REDUCES the F-slice product-measurability carrier hFmeasG of J4-970/971/
+-- 972's FTC-in-c bridge (censusFTC_bridge / hfar_concrete_of_engine / hRint_of_hEnv) from the ENTANGLED product
+-- witness(u'−s) 0 z·F s z 0 to the PURE F-side slice measurability hFslice : ∀ s, AEStronglyMeasurable
+-- (fun z ↦ F s z 0). ROUTE: AEStronglyMeasurable (W·F) = AEStronglyMeasurable W · AEStronglyMeasurable F
+-- (.mul); the witness slice z ↦ vanVleckGatedWitness … (u'−s) 0 z is AEStronglyMeasurable by the banked
+-- vanVleckGatedWitness_slice_aestronglyMeasurable from {hKm (K measurable), hSm0 (gate preimage at 0
+-- measurable), hIn (order-1 global-cutoff parametrix slice z-ae-measurable)}; the field slice z ↦ F s z 0 is
+-- the honest F-side carry hFslice. aesm_mul_of_slices (★): abstract product splitter. hFmeasG_of_field_slice
+-- (★★★): the concrete reduction, peeling the witness factor onto banked witness-side measurability infra ⟹
+-- hFmeasG's only new residue is the pure F-slice measurability hFslice (joins the honest F-side data family
+-- {hFdom,hmeas,hbase} inside hEnv). Since F is UNCONSTRAINED, hFslice CANNOT be eliminated — carrier
+-- REDUCTION, not full discharge. TEETH: splitter jointly satisfiable at a Dirac family with the product
+-- genuinely ACTIVE ((W·Fp)()=1≠0, not 0=0). std-3 ×3. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}
+-- as a top-level τ-carry. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HFmeasGFromFieldSlice.aesm_mul_of_slices
+#print axioms QIQTH.HFmeasGFromFieldSlice.hFmeasG_of_field_slice
+#print axioms QIQTH.HFmeasGFromFieldSlice.aesm_mul_of_slices_hyp_satisfiable
 
 end QIQTH.AxiomAudit
