@@ -13305,3 +13305,29 @@ Re-threading the LIVE census consumers (`CensusOnGateEnvelopeThreaded`, `Witness
 `CensusAmplitudeSupDischarge`) onto the any-S envelope is a mechanical supplier substitution (opaque-hypothesis),
 deferred. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-951 (commit dc4ef7c5) — CensusAnySEnvelopeRethread: RE-THREAD the live census consumers onto the any-S envelope (J4-950), ELIMINATING the S=univ carry from the full hCensusBound chain
+J4-950 built `witnessTimeDeriv_domination_global_anyS` — a strictly-more-general drop-in for the banked crude-envelope
+supplier `witnessTimeDeriv_domination_global`, proving the IDENTICAL conclusion but with the OVER-STRONG hgate (whose
+first conjunct universally-quantifies the FIELD point, forcing S q=univ ∀q∈K) and the free `Cfield` field REMOVED, for
+ANY S — carrying only {hAmp0, hCfield-on-`censusAmpTauDeriv`, hSupp}. J4-951 THREADS this all the way through the live
+census consumers, which had been DEFERRED at J4-950 as "a mechanical opaque-hypothesis supplier substitution". New file
+`CensusAnySEnvelopeRethread.lean` (edits NO banked file); each landed theorem is a STRICT WEAKENING of an already-banked
+consumer — same byte-identical conclusion, hgate/Cfield DROPPED, hCfield rephrased onto the banked `censusAmpTauDeriv`
+slope — obtained by swapping the `obtain … := witnessTimeDeriv_domination_global …` line for the `_anyS` supplier
+(downstream assemblers `censusBound_of_crude_Fbound_ballRate`/`derivDom_boundD_of_crude`/`hpardiff_of_zTimeDeriv`/
+`witnessHZslice_of_crudeEnv` consume the crude envelope as an OPAQUE ∀τ hypothesis and are UNCHANGED). LANDS:
+`censusBound_of_amplitudeCarries_Fbound_ballRate_anyS` ★★★ (J4-948 far-rate, no hgate); `censusBound_of_geometry_gate_
+supp_F_ballRate_anyS` ★★★ (the MOST-DISCHARGED capstone / J4-949, with the over-strong gate half
+`(∀ w, w.2.2∈K→0<w.1→w.2.1∈S w.2.2)` ENTIRELY REMOVED from the binder — the concrete elimination of the S=univ carry at
+the census-assembly boundary); `witnessBoundD_wired_anyS` / `witnessHpardiff_wired_anyS` ★★★ (J4-918 boundD/hpardiff).
+NON-VACUITY EXHIBITED: `…_anyS_satisfiable` for the far-rate + hpardiff bundles (K={0}, S=univ, F≡0, affine-in-τ amp
+sups) and `census_anyS_smallRadius_gate_exists` for the capstone's ∀D binder. Wired QIQTH.lean + AxiomAudit.lean; build
+via QIQTH.AxiomAudit OK (10259 jobs); std-3 ×7 (propext, Classical.choice, Quot.sound); axiom_budget_check raw 0; no
+vacuum. gpt-5.6-sol high adversarial audit: swap LOGICALLY VALID (hgate/Cfield were load-bearing ONLY to produce the
+crude-envelope proposition, never referenced by consumers); the old supplier survives merely as an INTERNAL proof
+dependency of J4-950 at S:=univ, imposing nothing on the any-S theorem; honest live dependency of the capstone far-rate
+CONFIRMED = { geometry {hg,hg0,hu,h0Kmem}, small-radius gate D (D.r≤rAmp), hSupp (0∈S z⟹‖z‖<D.r), off-ball F-factor
+bound hF, C1 on-ball trace rate hballrate, C2 integrability hΦint } — NO S=univ/hgate/Cfield carry. hCross (W5) UNTOUCHED;
+`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
