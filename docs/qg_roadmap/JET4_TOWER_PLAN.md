@@ -15001,3 +15001,62 @@ identically `0` in `p` and the curved geometry does NO substantive analytic work
 `hDuhamel` is untouched, and both `hCConv` and `hDConv` are closed here only at this single degenerate
 witness (not general `K`, not general `H`). `a₁=R/6` remains STRICTLY CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+### J4-989 — `HDConvGatedK0FullyClosed`: LITERAL top-level `hDConv` closed at the curved `K={0}` witness (SECOND trio member); `hDuhamel` proven NOT closable there (commit `8f9286ab`, ledger below)
+
+**What.** Closes the SECOND of the analytic trio `{hDuhamel, hDConv, hCConv}` carried by the reduced
+`a₁=R/6` capstone (`TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual_restricted`) in its
+LITERAL top-level shape:
+`DifferentiableAt ℝ (fun u => heatConv H (leviSeries (heatOp g gi H)) u 0 0) t`, at the
+genuinely-curved `K={0}` witness (`1 ≤ n`), by the SAME null-singleton `z`-gate mechanism as `hCConv`
+(J4-988) applied in the TIME slot. In `heatConv A B u 0 0 = ∫ s in 0..u, ∫ z, A (u−s) 0 z · B s z 0`
+the left kernel `A := H = vanVleckGatedWitness … = gatedKernel {0} S H₀` has its THIRD (base-point `q`)
+gate on the INNER `z`-integration variable, NOT the free TIME variable `u`. For `z ≠ 0` the outer gate
+fires ⟹ `A (u−s) 0 z = 0` (independent of `u`, `s`, `S`, `H₀`) ⟹ `z`-integrand supported in the null
+singleton `{0}` ⟹ inner `∫ z = 0` ⟹ `heatConv H (leviSeries E) u 0 0 = 0` for EVERY `u` ⟹ the function
+is `≡ 0` ⟹ `DifferentiableAt` via `differentiableAt_const`. Reuses the banked
+`HCConvGatedK0FullyClosed.heatConv_gatedK0_eqZero` (stated for any time arg / field pt / final pt) at
+`(u, 0, 0)`.
+
+**Lands (ns `QIQTH.HDConvGatedK0FullyClosed`).** `hDConv_gatedKernel_K0_closed` (literal `hDConv`
+shape, any `g gi S H₀ t`); `hDConv_vanVleckGatedWitness_K0_closed` (★★★ textual literal top-level
+`hDConv` carry with `hK := isCompact_singleton`, via `unfold vanVleckGatedWitness`).
+
+**★ THE `hDuhamel` OBSTRUCTION (verified, gpt-5.6-sol high audited — NO complete instance at `K={0}`).**
+Following up the J4-988 Sol observation that `hDConv` is "likewise trivial here", this session ALSO
+verified `hDuhamel` at `K={0}` — and found it does **NOT** close, provably. `hDuhamel` is
+`heatOp g gi (fun u p q => heatConv H L u p q) t 0 0 = leviSeries E t 0 0 + heatConv E L t 0 0` with
+`E := heatOp g gi H`, `L := leviSeries E`. (a) LHS: `heatConv H L ≡ 0` (banked) ⟹ `heatOp g gi (0
+kernel) = deriv(0) − laplaceBeltrami(0) = 0`. (b) `E` INHERITS the `q`-gate: for `q ≠ 0`,
+`H(τ,p,q) ≡ 0` in both `τ` and `p`, so `deriv_τ = 0` and `laplaceBeltrami_p = 0` (the Laplacian touches
+only the `p`-slot, never the base-point `q`), hence `E τ p q = 0` for `q ≠ 0`. (c) So
+`heatConv E L t 0 0 = 0` (left kernel `E` gated on the `z`-integration variable) and every
+`iterE E (k+2) t 0 0 = 0`, leaving only `iterE E 1 = E`, so `leviSeries E t 0 0 = −E t 0 0`. (d) Hence
+RHS `= −E t 0 0 + 0 = −E t 0 0`, while LHS `= 0`, so `hDuhamel ⟺ E t 0 0 = 0`. (e) `E t 0 0 =
+heatOp g gi H t 0 0` is the DIAGONAL parametrix residual (at `q = 0 ∈ {0}` the gate does NOT fire, so
+`H` there equals the base parametrix) — generically NONZERO for a nonflat witness; its short-time
+coefficient is precisely `a₁ = R/6`. So `hDuhamel` is generically FALSE at `K={0}`; the SAME collapse
+that trivialises `hDConv`/`hCConv` gates away the approximate-identity boundary term `hDuhamel` needs.
+gpt-5.6-sol (high) CONFIRMED steps (a)–(d) and the equivalence `hDuhamel ⟺ E t 0 0 = 0`, with the
+precise qualification that the support argument does not by itself PROVE `E t 0 0 ≠ 0` (a null-singleton
+function may be nonzero at its point); but for the intended nonzero-curvature van-Vleck witness
+(`R_g(0) ≠ 0`, locally inactive `S`-gate) the diagonal residual IS nonzero, so `hDuhamel` FAILS. A
+degenerate flat / scalar-zero case with `E t 0 0 = 0` would satisfy `hDuhamel` but is not the intended
+witness (and re-introduces the J4-548-style vacuity). **Verdict: the trio is NOT jointly closable at
+`K={0}`; there is NO complete non-vacuous instance of `a₁=R/6` at this witness.**
+
+**Verify.** `lake build QIQTH.HDConvGatedK0FullyClosed` 0 err (8936 jobs); throwaway `ChkHDConvK0`
+std-3 (no `sorryAx`, no custom axiom); `lake build QIQTH.AxiomAudit` 0 err (10298 jobs); std-3
+(`propext`/`Classical.choice`/`Quot.sound`); `axiom_budget_check.sh` raw 0 (budget 0);
+`git status --porcelain | grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean`+
+`AxiomAudit.lean`; `git show 8f9286ab --stat` = 3 files (+150); pushed.
+
+**Honest status.** CLOSES the LITERAL top-level `hDConv` (the SECOND trio member closed in literal
+shape, after `hCConv` J4-988) but ONLY at the degenerate `K={0}` witness, where the whole convolution
+is `≡ 0` and curved geometry does NO substantive analytic work (null-singleton `z`-gate driven). The
+new, decisive negative finding: `hDuhamel` CANNOT be closed at `K={0}` (it reduces to the
+generically-false `E t 0 0 = 0`), so `{hDConv, hCConv}` both close here but the trio does not, and there
+is NO complete `a₁=R/6` instance at this witness. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
