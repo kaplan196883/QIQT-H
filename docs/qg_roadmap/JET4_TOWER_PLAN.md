@@ -12577,3 +12577,47 @@ interface). `hCensusBound` remains unproved beyond `hbaseC2`; `hCross`/`hDuhamel
 QIQTH.AxiomAudit` 0 errors (10240 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no
 sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no
 existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `3f0e570f`, pushed. NOT `a₁ = R/6`.
+
+## J4-934 — the CoV LEFT-INVERSE WEIGHT-MATCHING identity `uic (V w) 0 = w` (EXACTLY): junction piece (2) of J4-933's `hCensusBound` re-audit — commit `56703698` (`BaseSlotInverseWeightMatch.lean`, new file)
+
+**Context.** J4-933's gpt-5.6-sol high re-audit found that `hCensusBound` is NOT assembled modulo only
+`hbaseC2`: the literal composition needs residual carries NOT among {base-slot CoV, det/ratio, V-transport,
+tail}. The most concrete was **(2)** the CoV left-inverse weight-matching identity `uic (V w) 0 = w` — needed
+so the transported base-slot trace factor `∑ᵢ((uic(Vw) 0)ᵢ²/4τ²−1/2τ)` collapses to the FLAT
+`∑ᵢ(wᵢ²/4τ²−1/2τ)` the J4-922/923 cancellation consumes. Sol flagged: "if `Wbv` is only first-order
+equivalent to `uic·0`, cancellation gains a coordinate-error term" — the identity must hold EXACTLY.
+
+**★ THE IDENTITY HOLDS EXACTLY (not first-order) — free from the banked M3.** `V` in
+`BaseVaryingIFTPackage.baseVaryingIFTPackage` (J4-272) is literally `Φ.symm`, the genuine topological local
+inverse from `ContDiffAt.toOpenPartialHomeomorph` — NOT an approximate/linearized/Taylor inverse. The census
+image variable ranges over `w ∈ Wbv''(ball 0 ρ)` (it IS the CoV image), so for `w = Wbv z` with `z ∈ ball 0 ρ`,
+the banked M3 left inverse (`V (Wbv z) = z`) gives `uic (V w) 0 = Wbv (V (Wbv z)) = Wbv z = w` EXACTLY. Proof:
+`rintro w ⟨z,hz,rfl⟩; rw [hM3 z hz]`. No `Φ.right_inv` incantation even needed; the left inverse alone,
+evaluated on the image set, is the right-inverse-on-image identity. The earlier Sol coordinate-error worry
+DISSOLVES because `V = Φ.symm` is exact.
+
+**gpt-5.6-sol (high) sanity check.** VERIFIED: (1) exact via M3 (equivalently `Φ.right_inv` on `Φ.target ⊇
+Wbv''(ball 0 ρ)`), NOT merely first-order; (2) no subtlety — the census `w` always lies in `Wbv''(ball 0 ρ)`,
+automatically in `Φ.target`; a residual would arise only if the CoV were reformulated over a larger ambient set
+without retaining image membership (it is not); (3) the coordinate-error worry dissolves since `V` is the exact
+topological inverse.
+
+**What lands** (std-3 ×2, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `baseVaryingIFT_weightMatch` (★★): re-exports the FULL M1–M4 bundle of `baseVaryingIFTPackage` AND the extra
+  identity `∀ w ∈ Wbv''(ball 0 ρ), uic (V w) 0 = w`. Consumes J4-272 verbatim (same `hbaseC2`, NO new input).
+- `baseVaryingIFT_rightInvOn` (★): the identity in `Set.RightInvOn V Wbv (Wbv''(ball 0 ρ))` form + the image
+  neighbourhood `∈ 𝓝 0`.
+
+**Honest status.** Junction piece (2) of J4-933's re-audit is DISCHARGED (exact, banked, non-vacuous). The
+image set is a nbhd of `0` (banked `himg`), so the `∀` domain is inhabited — non-vacuous. Everything remains
+CONDITIONAL only on `hbaseC2` (inherited from J4-272, no new assumption). REMAINING junction pieces for the
+literal `hCensusBound` assembly: (1) J4-217 `hgate` carry; (3) concrete `amp·F`/`Cfield·F` global bounded+
+Lipschitz inputs to J4-931/932; (4) IFT open-map superset `Wbv''(ball 0 ρ) ⊇ ball 0 r`; (5) product→single
+Gaussian envelope collapse; (6) `Bball + tail ≤ C_far·(u−s)^{−1/2}` uniform rate absorption; plus per-summand
+integrabilities and uniformity in `s,a`. `hCensusBound`/`hCross`/`hDuhamel`/`hDConv` remain carried; `hCConv`
+unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/BaseSlotInverseWeightMatch.lean` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10241 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no
+existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `56703698`, pushed. NOT `a₁ = R/6`.
