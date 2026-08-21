@@ -5374,3 +5374,16 @@ import QIQTH.CensusHbaseC2Discharge
 -- Lean-proven equality). NO literal hCensusBound theorem assembled; hCross NOT formally closed. NOT a₁=R/6;
 -- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.CensusLeviFactorDischarge
+-- BaseVaryingIFTCommonWitness — J4-943: the COMMON-WITNESS MONOLITH resolving structural gap G1 ("common-
+-- witness incoherence") of the J4-930..942 hCross chain. The four consumer lemmas each independently obtained
+-- from baseVaryingIFTPackage / inverseChart_lipschitz_package, yielding INDEPENDENT existential witnesses
+-- V,f',ρ,σ,r Lean could not identify across separate ∃-eliminations (same term only definitionally). FIX
+-- (construct once, eliminate once): structure BaseVaryingIFTData bundles the shared ρ,V,σ,L_V + primitive IFT
+-- facts (M1–M4 with CANONICAL fderiv ℝ Wbv — no abstract f', dissolving the f'/fderiv mismatch), constructed
+-- ONCE by baseVaryingIFTData_nonempty_of_hbaseC2 (inlining Φ from baseVaryingIFTPackage + V-Lipschitz from
+-- inverseChart_lipschitz_package). commonWitness_cov/weightMatch/superset/mapsTo/transport/ampF_transport/
+-- CfieldF_transport all PARAMETERIZED by the SAME D, so CoV + transported regularity share EXACTLY D.V.
+-- baseVaryingIFTData_nonempty = UNCONDITIONAL inhabitance (via wbv_contDiffAt_two J4-941). std-3 ×10. CLOSES
+-- G1 only; G2 (S-gate carry) and G3 (F-factor Levi carries {hDuhamel,hDConv,hCConv}) UNTOUCHED. NOT a₁=R/6;
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.BaseVaryingIFTCommonWitness

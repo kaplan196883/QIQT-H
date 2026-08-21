@@ -43,6 +43,7 @@ import QIQTH.MixedEnvelopeAssembly
 import QIQTH.CensusFarRateAbsorb
 import QIQTH.CensusHbaseC2Discharge
 import QIQTH.CensusLeviFactorDischarge
+import QIQTH.BaseVaryingIFTCommonWitness
 
 namespace QIQTH.AxiomAudit
 
@@ -29770,5 +29771,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusLeviFactorDischarge.census_ampF_leviF_transported_ratio_regularity
 #print axioms QIQTH.CensusLeviFactorDischarge.census_CfieldF_leviF_transported_ratio_regularity
 #print axioms QIQTH.CensusLeviFactorDischarge.levi_Ffactor_slot_satisfiable
+
+-- ## J4-943 (BaseVaryingIFTCommonWitness): the COMMON-WITNESS MONOLITH resolving structural gap G1 of the
+-- J4-930..942 hCross chain (common-witness incoherence: four consumers obtained INDEPENDENT existential
+-- witnesses V,f',ρ,σ,r Lean could not identify across separate ∃-eliminations). FIX: structure
+-- BaseVaryingIFTData constructed ONCE (Φ inlined from baseVaryingIFTPackage + V-Lipschitz from
+-- inverseChart_lipschitz_package), every downstream fact PARAMETERIZED by the SAME D; derivative/CoV facts
+-- stated with the CANONICAL fderiv ℝ Wbv (no abstract f' — dissolves the f'/fderiv mismatch).
+-- baseVaryingIFTData_nonempty = UNCONDITIONAL inhabitance (wbv_contDiffAt_two, J4-941). std-3 ×10. CLOSES G1
+-- only; G2/G3 untouched; hCross NOT closed. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.baseVaryingIFTData_nonempty_of_hbaseC2
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.baseVaryingIFTData_nonempty
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_cov
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_weightMatch
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_superset
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_mapsTo
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_transport
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_ampF_transport
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_CfieldF_transport
+#print axioms QIQTH.BaseVaryingIFTCommonWitness.commonWitness_transport_slot_satisfiable
 
 end QIQTH.AxiomAudit
