@@ -14051,3 +14051,52 @@ full-domain FTC + off-ball — establishing `H_far` is NOT a genuinely separate 
 while (per Sol) NOT collapsing it to `hballrate` alone (the off-ball estimate is a genuine remaining
 obligation). Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6`
 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-968 — HFarOffBallDischarge: the OFF-BALL spatial estimate for `H_far` DISCHARGED as a reusable adapter (commit `74209bce`)
+
+**Target.** The last genuinely-open analytic step of J4-967's `hfar_of_ballrate_ftc` reduction: the
+OFF-BALL spatial estimate. `hfar_of_ballrate_ftc` produces `H_far` from an FTC-in-`c` bridge `hFTC` and a
+FULL-domain rate `hrate : |R c s| ≤ Cpair·(c−s)^{−1/2}` where `R c s = ∫ z, g c s z` (over ALL `z`).
+On-ball `hballrate` (closed mod-G2, J4-960) only bounds `∫_{ball 0 ρ} g c s z`; the off-ball
+`∫_{(ball 0 ρ)ᶜ} g c s z` had to be controlled by the same `(c−s)^{−1/2}` rate.
+
+**★ THE TRANSFER (J4-933's technique composes).** `census_full_of_ball_bound_and_gaussEnv` (J4-933) gives
+`|∫_{ℝⁿ} Φ| ≤ Bball + Cenv·(√2)ⁿ·e^{−ρ²/(8λ)}` from an off-ball single-Gaussian envelope
+`|Φ z| ≤ Cenv·gaussDdim λ z` (`ρ ≤ ‖z‖`) and a ball bound `Bball`. Applying it pointwise-in-`(c,s)` with
+`Bball := Cpair·(c−s)^{−1/2}`, the Gaussian tail absorbs into the SAME `(c−s)^{−1/2}` rate WITHOUT the
+exponential decay: `e^{−ρ²/(8λ)} ≤ 1` and (since `c ≤ u+h`, `s > u−ε` ⟹ `0 < c−s ≤ h+ε`)
+`1 ≤ √(h+ε)·(c−s)^{−1/2}`. Hence `|R c s| ≤ (Cpair + Cenv·(√2)ⁿ·√(h+ε))·(c−s)^{−1/2}` — exactly the
+`hrate` shape. gpt-5.6-sol (high) 2026-08-22: absorption SOUND (Cpair/Cenv uniform, only `lam` positivity
+needed, ball radii match, ball-bound direction correct). **Distinct from J4-940** (`census_far_rate…`,
+`(u−s)`-collapse for `hCensusBound`): `(u−s)^{−1/2} ≥ (c−s)^{−1/2}` is the WRONG direction to serve the
+`(c−s)`-form `hrate` slot — a genuinely new composition was required (Sol confirmed).
+
+**What lands** (std-3 ×5, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `one_le_sqrt_mul_rpow` — `1 ≤ √M·τ^{−1/2}` for `0<τ≤M` (rpow antitone + `√M·M^{−1/2}=1`).
+- `tail_absorb` (★): pure algebra — `Bball≤Cpair·τ^{−1/2}`, `L≤Bball+Cenv·(√2ⁿ·e)`, `0≤e≤1`, `0<τ≤M`
+  ⟹ `L≤(Cpair+Cenv·√2ⁿ·√M)·τ^{−1/2}`. Integrand-free, reusable.
+- `far_rate_of_ball_and_gaussEnv` (★★): composes `census_full_of_ball_bound_and_gaussEnv` (J4-933)
+  through `tail_absorb` ⟹ the FULL-domain `(c−s)`-form rate.
+- `hfar_of_ballrate_offBallEnv_ftc` (★★★): threads it through `hfar_of_ballrate_ftc` (J4-967) ⟹ `H_far`
+  with `C_far = Cpair + Cenv·√2ⁿ·√(h+ε)`, from {FTC bridge, on-ball `hballrate` rate, off-ball Gaussian
+  envelope on `g`, integrability}.
+- `hfar_of_ballrate_offBallEnv_ftc_hyp_satisfiable`: non-vacuity EXHIBITED at `g=gaussDdim 1`, `Φ c s:=c`
+  (`u=0,ε=h=ρ=Cenv=1,Cpair=√2`; envelope EQUALITY genuinely active, finite difference `=1≠0`).
+
+**HONEST STATUS (blunt; Sol-audited).** The off-ball spatial-estimate STEP is discharged as a reusable
+ADAPTER: given an off-ball Gaussian envelope on the concrete rate integrand `g`, the off-ball contribution
+is controlled by the `(c−s)^{−1/2}` rate. So `H_far` is NOT open BEYOND {FTC-in-`c` bridge, on-ball
+`hballrate` (mod-G2), the off-ball Gaussian ENVELOPE on the concrete `g = ∂_c(kernel)·F`, integrability,
+routine positivity/range}. It does **NOT** prove the concrete-kernel off-ball envelope (the
+`hAcrude`/`leviSeries` crude-environment carry, downstream of the differentiation identity `R = ∂_c Φ`)
+nor the FTC bridge itself (`{hDuhamel, hDConv}`). Per Sol: the concrete envelope is a GENUINELY SEPARATE
+carried hypothesis (a cancellation-prone ball bound does not imply an off-ball pointwise envelope; an
+FTC/convolution identity does not either). **NO-GO on any "H_far fully closed" phrasing.** Discharges NONE
+of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake env lean QIQTH/HFarOffBallDischarge.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
+errors (10277 jobs); `#print axioms` std-3 ×5 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
+file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) GO on banking; commit `74209bce`,
+pushed. NOT `a₁ = R/6`.
