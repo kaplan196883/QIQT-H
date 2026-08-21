@@ -5860,3 +5860,12 @@ import QIQTH.FlatChartBridgeAudit
 -- new constant; the √ε sliver is a single carry feeding both consumers. Discharges NONE of
 -- {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
 import QIQTH.HDuhamelDataCensusDischarged
+-- HDuhamelSliverDischarged — eliminate the √ε matched-sliver amplitude carry {D0,D1,hD0,hD1,hbnd} from
+-- the live order-1 hDuhamel slot (J4-980 hDuhamelSlot_datacensus_discharged), in favour of the
+-- moment-aware τ⁻¹ᐟ² pairing carry hGpow ALREADY present on that surface. The sliver hbnd (with canonical
+-- constants D0:=fun _ => Cpair, D1:=fun _ => 0) is DERIVED internally from J4-921
+-- SliverAmplitudeFromHGpow.hbnd_from_hGpow (∫ s in (u−ε)..u, (u−s)^{-1/2} = 2√ε), fed the hGpow carry.
+-- The hDuhamel-slot analogue of J4-921's hbnd_from_hGpow reduction, now WIRED into the live slot
+-- identity. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three, UNCHANGED.
+-- std-3. NOT a₁=R/6.
+import QIQTH.HDuhamelSliverDischarged

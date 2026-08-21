@@ -30330,4 +30330,10 @@ namespace QIQTH.AxiomAudit
 -- hEcomb from the hDuhamel surface. Discharges NONE of {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HDuhamelDataCensusDischarged.hDuhamelSlot_datacensus_discharged
 
+-- HDuhamelSliverDischarged — eliminate the √ε matched-sliver amplitude carry {D0,D1,hD0,hD1,hbnd} from
+-- the live hDuhamel slot (J4-980), in favour of the moment-aware τ⁻¹ᐟ² pairing carry hGpow already
+-- present; hbnd derived internally from J4-921 hbnd_from_hGpow. Discharges NONE of
+-- {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HDuhamelSliverDischarged.hDuhamelSlot_sliver_discharged
+
 end QIQTH.AxiomAudit
