@@ -5431,3 +5431,20 @@ import QIQTH.CensusImageSubballBridge
 -- std-3 ×4. Resolves concern (b) modulo G2 (z∈K is a non-issue). Does NOT close hCensusBound/hCross; residual (c)
 -- off-ball envelope, (d) rate absorption, +G2/G3 remain. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusJointGateInnerBall
+-- CensusOffBallEnvelope — J4-947: OFF-BALL ENVELOPE REDUCTION + full far-rate threading for the concrete gated
+-- census integrand, closing the STRUCTURAL half of concern (c) and threading J4-940's rate absorption into a
+-- single per-binder far-rate bound with EXACTLY the hcross_of_censusIntegral_bound (J4-929) shape. Integrand
+-- Φ s a z = deriv(fun r↦vanVleckGatedWitness … r 0 z)(a−s)·F s z 0. TASK DETERMINATION: both flagged annuli
+-- (ball 0 D.ρ\ball 0 δ, J4-945; jointGate\ball 0 r, J4-946) are a SINGLE off-ball region — both ⊆ (ball 0 ρ)ᶜ for
+-- ρ≤δ,ρ≤r (offBall_annuli_subsumed), exactly what census_full_of_ball_bound_and_gaussEnv (J4-933) handles in one
+-- shot; NOT distinct regions. GATE-OFF HALF FREE: off the census gate the ∂_τ kernel VANISHES
+-- (censusTauDeriv_eqZero_offGate, J4-937) so Φ=0≤Cenv·gauss FOR FREE, reducing the off-ball envelope to the ON-GATE
+-- envelope alone (censusIntegrand_offBall_envelope_of_onGate). LANDS std-3 ×6: censusIntegrand_eqZero_offGate ★,
+-- offBall_annuli_subsumed ★, censusIntegrand_offBall_envelope_of_onGate ★★, censusIntegrand_far_rate_of_onGate ★★
+-- (threads J4-933⟶J4-940), censusBound_of_onGate_and_ballRate ★★★ (FULL hCensusBound binder ∀s∈Ioo∀a∈Icc with
+-- C_far=Cpair+Cenv·√2ⁿ·√ε, from 3 uniform carries {ball-rate C1, integrability C2, on-gate Gaussian domination C3}),
+-- censusBound_of_onGate_and_ballRate_hyp_satisfiable (TEETH: genuine gate S z=ball z 1, K=closedBall 0 1, F≡0,
+-- both gate branches exercised). HONEST: discharges STRUCTURAL half of (c) + threads (d); does NOT close hCensusBound
+-- — the residual analytic core is C3 (on-gate two-term Gaussian domination: chart bi-Lipschitz + poly×Gauss + F-bound),
+-- plus C1 (two-term/trace, dep G2/G3). NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusOffBallEnvelope

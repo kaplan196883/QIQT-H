@@ -29827,4 +29827,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusJointGateInnerBall.censusTauDeriv_onGate_innerBall_of_geometry
 #print axioms QIQTH.CensusJointGateInnerBall.jointGate_innerBall_satisfiable
 
+-- ## CensusOffBallEnvelope (J4-947): OFF-BALL ENVELOPE REDUCTION + full far-rate threading for the concrete gated
+-- census integrand Φ s a z = deriv(fun r↦vanVleckGatedWitness … r 0 z)(a−s)·F s z 0. TASK DETERMINATION: both
+-- flagged annuli (ball 0 D.ρ\ball 0 δ, J4-945; jointGate\ball 0 r, J4-946) are ONE off-ball region — both ⊆ (ball 0 ρ)ᶜ
+-- (offBall_annuli_subsumed), handled in one shot by census_full_of_ball_bound_and_gaussEnv (J4-933). Off the census
+-- gate the ∂_τ kernel VANISHES (J4-937) so the off-ball envelope reduces to the ON-GATE envelope alone. std-3 ×6.
+-- HONEST: discharges the STRUCTURAL half of concern (c) + threads J4-940's rate absorption into the FULL hCensusBound
+-- binder shape (C_far=Cpair+Cenv·√2ⁿ·√ε) from 3 carries {ball-rate C1, integrability C2, on-gate Gaussian domination
+-- C3}; does NOT close hCensusBound (residual = C3 analytic core + C1 two-term/trace). NOT a₁=R/6; CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusOffBallEnvelope.censusIntegrand_eqZero_offGate
+#print axioms QIQTH.CensusOffBallEnvelope.offBall_annuli_subsumed
+#print axioms QIQTH.CensusOffBallEnvelope.censusIntegrand_offBall_envelope_of_onGate
+#print axioms QIQTH.CensusOffBallEnvelope.censusIntegrand_far_rate_of_onGate
+#print axioms QIQTH.CensusOffBallEnvelope.censusBound_of_onGate_and_ballRate
+#print axioms QIQTH.CensusOffBallEnvelope.censusBound_of_onGate_and_ballRate_hyp_satisfiable
+
 end QIQTH.AxiomAudit
