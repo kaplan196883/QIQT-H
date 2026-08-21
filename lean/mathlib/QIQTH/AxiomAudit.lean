@@ -29927,4 +29927,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusFFactorSupDischarge.hF_of_leviWidth2Dom
 #print axioms QIQTH.CensusFFactorSupDischarge.hF_of_leviWidth2Dom_satisfiable
 
+-- ## CensusPhiIntegrabilityDischarge: DISCHARGE the C2 integrability carry hΦint of the most-discharged
+-- any-S census capstone censusBound_of_geometry_gate_supp_F_ballRate_anyS (J4-951). hΦint is Integrable of
+-- deriv(fun r↦vanVleckGatedWitness … r 0 z)(a-s)·F s z 0 over z. Layer 1 (censusPhi_integrable_of_measAndDom,
+-- PROVEN): |deriv|·|F| ≤ (C·τ⁻¹·C_L)·(gaussDdim(4·D.lam·τ)z · gaussDdim(2s)z) = PRODUCT OF TWO GAUSSIANS,
+-- integrable via banked gaussDdim_pair_integrable + Integrable.mono'; τ=a-s∈(0,τ₀] (from ε+h≤τ₀), s∈(0,T]
+-- (from ε<u≤T). Layer 2 (derivSlice_stronglyMeasurable_of_gateCarriers): deriv-witness z-slice
+-- StronglyMeasurable from STANDARD F2 carriers {hKSmeas, hcar} via banked tauDeriv_prod_stronglyMeasurable_v4
+-- + measurable section z↦(τ,0,z) — arbitrary S handled by CARRYING hKSmeas/hcar, not assuming S nice.
+-- Layer 3 (censusPhi_integrable_of_gateCarriers / _amplitudeCarries): the capstone's EXACT hΦint binder from
+-- {hKSmeas, hcar, hFmeas, amplitude sups producing crude envelope, hFdom width-2 Levi}. CONDITIONAL discharge
+-- (gpt-5.6-sol high audited): hDmeas GENUINELY eliminated (layer 2), but hcar packages the chart-Borel
+-- measurability with a KNOWN definitional wall (chartJoint_measurable_of_rep: uniformInverseChart via
+-- Classical.choose) — a STANDING upstream carrier, NOT discharged here. TEETH: _measAndDom_satisfiable (the
+-- DOMINATION content concretely non-vacuous: F≡0, self-contained crude envelope, no chart wall, nonempty
+-- window) + _jointGate_measurable_satisfiable (hKSmeas realizable at a PROPER measurable gate S=ball 0 1,
+-- K=closedBall). NO standalone non-vacuity claim for hcar/the combined antecedent. std-3 ×6.
+-- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_integrable_of_measAndDom
+#print axioms QIQTH.CensusPhiIntegrabilityDischarge.derivSlice_stronglyMeasurable_of_gateCarriers
+#print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_integrable_of_gateCarriers
+#print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_integrable_of_amplitudeCarries
+#print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_integrable_of_measAndDom_satisfiable
+#print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_jointGate_measurable_satisfiable
+
 end QIQTH.AxiomAudit

@@ -5509,3 +5509,21 @@ import QIQTH.CensusAnySEnvelopeRethread
 -- slack). hF_of_leviWidth2Dom (★★★) + hF_of_leviWidth2Dom_satisfiable (TEETH: F≡0, C_L=0, ε<u≤T). std-3 ×2.
 -- ELIMINATES hF as a standalone carry. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusFFactorSupDischarge
+
+-- CensusPhiIntegrabilityDischarge: DISCHARGE the C2 integrability carry hΦint of the most-discharged any-S
+-- census capstone censusBound_of_geometry_gate_supp_F_ballRate_anyS (J4-951). hΦint is Integrable of the
+-- concrete gated census integrand deriv(fun r↦vanVleckGatedWitness … r 0 z)(a-s)·F s z 0. Integrability =
+-- measurability + dominating envelope. Layer 1 (censusPhi_integrable_of_measAndDom, PROVEN): the pointwise
+-- product |deriv|·|F| ≤ (C·τ⁻¹·C_L)·(gaussDdim(4·D.lam·τ)z · gaussDdim(2s)z), a PRODUCT OF TWO GAUSSIANS
+-- integrable via banked gaussDdim_pair_integrable + Integrable.mono' (τ=a-s∈(0,τ₀], s∈(0,T]). Layer 2
+-- (derivSlice_stronglyMeasurable_of_gateCarriers): the deriv-witness z-slice StronglyMeasurable from the
+-- STANDARD F2 carriers {hKSmeas, hcar} via banked tauDeriv_prod_stronglyMeasurable_v4 + measurable section
+-- z↦(τ,0,z) — arbitrary S handled by CARRYING hKSmeas/hcar, not by assuming S nice. Layer 3
+-- (censusPhi_integrable_of_gateCarriers / _amplitudeCarries): the capstone's EXACT hΦint binder, crude
+-- envelope discharged internally from amplitude sups via witnessTimeDeriv_domination_global_anyS. CONDITIONAL
+-- discharge: hDmeas genuinely eliminated (layer 2); hcar packages the chart-Borel measurability (KNOWN
+-- definitional wall, chartJoint_measurable_of_rep — Classical.choose), a STANDING upstream carrier, NOT
+-- discharged/introduced here. TEETH: _measAndDom_satisfiable (domination content concretely non-vacuous, F≡0,
+-- self-contained crude envelope, no chart wall) + _jointGate_measurable_satisfiable (proper gate S=ball 0 1).
+-- std-3 ×6. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusPhiIntegrabilityDischarge
