@@ -12916,3 +12916,49 @@ obligations therefore reduce to obligation (a) ALONE.  `hCensusBound`/`hCross` r
 0 errors (10248 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
 file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `c5673ac6`, pushed. NOT `a₁ = R/6`.
+
+## J4-942 — CensusLeviFactorDischarge: the F-FACTOR half of junction piece (3) of the `hCensusBound` (`hCross`) re-audit — the SOLE remaining piece-(3) obligation (a) — commit `8026026c` (`CensusLeviFactorDischarge.lean`, new file)
+
+**Context.** Across J4-930..941 the literal `hCensusBound` (the `hCross` wall, a sub-carry feeding
+`hDuhamel`/`hDConv`) was reduced to EXACTLY ONE remaining obligation: (a) the F-factor's ball-local
+bounded+Lipschitz regularity — J4-941's `census_ampF_transported_ratio_regularity_unconditional`
+takes an ABSTRACT `F0 : Point n → ℝ` with the bundle `(rF, M_F, L_F, hFb, hFl)` and produces the
+transported census-integrand regularity `(chartFieldAmp·F0)/|det|`. (Obligation (b), `hbaseC2`, was
+discharged unconditionally at J4-941.)
+
+**★ THE F-FACTOR BUNDLE IS SUPPLIED FROM BANKED LeviLipschitz — BOTH HALVES ALREADY GLOBAL.** The
+banked `LeviLipschitz` file contains both halves of the F-factor regularity GLOBALLY (⟹ ball-local
+trivially): **boundedness** `abs_F_le_diagonal` (from width-2 domination `hFdom`, `|F s z 0| ≤
+C_L·gaussDdim (2s) 0` for every `z`, Gaussian peak-at-`0`); **Lipschitz**
+`resolvent_lipschitz_pointwise` (J4-144; from Volterra `hVol` + `E`-slice diff `hE1` + integrability
+`hIz` + inner-`ζ`-integral slice diff `hSlice`, `|F s z 0 − F s z' 0| ≤ (L_E+K·2√s)·dist z z'` for
+every `z,z'`). Packaging `M_F = C_L·gaussDdim (2s) 0`, `L_F = L_E+K·2√s` gives the exact J4-941
+`F0`-bundle for `F0 z := leviSeries E s z 0`.
+
+**What lands** (std-3 ×4, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `levi_Ffactor_ball_regularity` (★★): the F-factor bundle from the Levi carries — `F0 z := F s z 0`
+  bounded + pairwise-Lipschitz on ANY ball `rF>0`, via `abs_F_le_diagonal` +
+  `resolvent_lipschitz_pointwise` (both GLOBAL).
+- `census_ampF_leviF_transported_ratio_regularity` / `census_CfieldF_leviF_transported_ratio_regularity`
+  (★★): compose the bundle (for `F := leviSeries E`) with J4-941 — the transported census integrands
+  `w ↦ (chartFieldAmp … τ (V w) 0 · leviSeries E s (V w) 0)/|det(fderiv Wbv (V w))|` (and the `q₂`
+  slope analogue) bounded + pairwise-Lipschitz on an image ball, amplitude concrete, F = `leviSeries E`
+  concrete — carrying ONLY the Levi analytic carries.
+- `levi_Ffactor_slot_satisfiable`: consistency witness for the 5-carry bundle (the degenerate zero
+  resolvent `E = F = 0`, positive constants). Confirms not-unsatisfiable (no vacuity trap).
+
+**Honest status (gpt-5.6-sol high adversarially audited).** The F-factor obligation (a) is REDUCED to
+the banked Levi analytic carries `hFdom`/`hE1`/`hIz`/`hSlice` (with `hVol` supplied elsewhere from the
+Levi domination family). Those carries are INTENDED to come from the `Ebound`/`heatConv` family =
+`{hDuhamel, hDConv, hCConv}`, but that identification is CAMPAIGN BOOKKEEPING, NOT a Lean-proven
+equality here — this file does NOT prove those carries follow from `{hDuhamel, hDConv, hCConv}`. ⚠ NO
+literal single `hCensusBound`/`hCross` theorem is assembled (the 6-piece assembly was never
+monolithized); `hCross` is NOT formally closed/subsumed. Only the LAST flagged regularity INTERFACE
+obligation (a) is conditionally solved. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected.
+`a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/CensusLeviFactorDischarge.lean` 0 errors; `lake build QIQTH.AxiomAudit`
+0 errors (10249 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
+file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) adversarially audited the
+honest-status framing; commit `8026026c`, pushed. NOT `a₁ = R/6`.
