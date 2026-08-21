@@ -60,6 +60,7 @@ import QIQTH.HFarFTCBridgeFromEngine
 import QIQTH.HRintFromEngine
 import QIQTH.HFmeasGFromFieldSlice
 import QIQTH.HFarFullyWired
+import QIQTH.CensusHrateFullConcrete
 
 namespace QIQTH.AxiomAudit
 
@@ -30275,5 +30276,17 @@ namespace QIQTH.AxiomAudit
 -- Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv} as a top-level τ-carry. NOT a₁=R/6 (CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 #print axioms QIQTH.HFarFullyWired.hfar_concrete_fully_wired
+
+-- CensusHrateFullConcrete — J4-975: DISCHARGES the abstract full-domain rate `hrate` of J4-974's
+-- hfar_concrete_fully_wired as a concrete std-3 term. hrate_full_concrete (★★★): full-domain
+-- |∫z,deriv(witness)(c−s)·F|≤Cfull·(c−s)^{−1/2} via far_rate_of_ball_and_gaussEnv (J4-968) ∘ on-ball
+-- hballrate_moduloG2 (J4-960) ∘ off-ball offBall_env_of_derivEnv_Fbound (J4-969) ∘ integrability hgint;
+-- NO {hDuhamel,hDConv,hCConv}. hfar_concrete_rate_discharged (★★★): the live H_far with the abstract
+-- hrate REMOVED (no hrate/hFTC/hDuhamel/hDConv/hCConv); carriers ALL explicit geometry/gate/F-side/
+-- amplitude/witness-infra. Corrects the cp842 provenance flag on hrate. Joint curved realizability NOT
+-- claimed. Does NOT establish a₁=R/6 conditional only on hCConv (post-hCross Duhamel/convolution content
+-- unaudited). std-3 ×2. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.CensusHrateFullConcrete.hrate_full_concrete
+#print axioms QIQTH.CensusHrateFullConcrete.hfar_concrete_rate_discharged
 
 end QIQTH.AxiomAudit

@@ -5303,6 +5303,19 @@ import QIQTH.HFmeasGFromFieldSlice
 -- on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFarFullyWired
 
+-- CensusHrateFullConcrete — J4-975: DISCHARGES the abstract full-domain rate `hrate` that J4-974's
+-- hfar_concrete_fully_wired carried, as a concrete std-3 term. hrate_full_concrete (★★★): the full-domain
+-- derivative-product rate |∫z,deriv(witness)(c−s)·F|≤Cfull·(c−s)^{−1/2}, composed pointwise via
+-- far_rate_of_ball_and_gaussEnv (J4-968) from on-ball hballrate_moduloG2 (J4-960) + off-ball envelope
+-- offBall_env_of_derivEnv_Fbound (J4-969) + integrability hgint. hfar_concrete_rate_discharged (★★★):
+-- feeds it into hfar_concrete_fully_wired ⟹ live H_far with NO abstract hrate/hFTC/hDuhamel/hDConv/hCConv;
+-- carriers ALL explicit {geometry, G2 hS, local {hFb,hFl}, global hFglob, amplitude {hAmp0,hCfield,hSupp},
+-- hFdom, {hmeas,hbase,hFslice,hgint}, witness-side {hKm,hSm0,hIn}}. CORRECTS the cp842 provenance flag:
+-- hrate does NOT import {hDuhamel,hDConv,hCConv}. std-3 ×2. Joint curved realizability NOT claimed
+-- (component teeth do not compose). Does NOT establish a₁=R/6 conditional only on hCConv (post-hCross
+-- Duhamel/convolution content unaudited here). NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.CensusHrateFullConcrete
+
 -- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
 -- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
 -- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT
