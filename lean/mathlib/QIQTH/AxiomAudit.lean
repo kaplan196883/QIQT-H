@@ -40,6 +40,7 @@ import QIQTH.HCrossIntegratedSplit
 import QIQTH.HCrossFarDerivBridge
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
+import QIQTH.CensusFarRateAbsorb
 
 namespace QIQTH.AxiomAudit
 
@@ -29721,5 +29722,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotTransportBallLocal.census_ampF_transported_ratio_regularity
 #print axioms QIQTH.BaseSlotTransportBallLocal.census_CfieldF_transported_ratio_regularity
 #print axioms QIQTH.BaseSlotTransportBallLocal.transport_ballLocal_slot_satisfiable
+
+-- ## J4-940 (CensusFarRateAbsorb): piece (6) of J4-929's hCensusBound re-audit — the Bball+tail ≤
+-- C_far·(u−s)^{−1/2} UNIFORM RATE ABSORPTION. Absorbs J4-933's domain-bridge output |∫_ℝⁿ Φ| ≤
+-- Bball+Cenv·√2ⁿ·e^{−ρ²/8λ} into the SINGLE C_far·(u−s)^{−1/2} rate that hcross_of_censusIntegral_bound
+-- consumes, uniformly over s∈Ioo(u−ε)u, a∈Icc u(u+h) (τ:=a−s ≥ σ:=u−s ∈ (0,ε]). rate_absorb (★★ PURE
+-- ALGEBRA: 0<σ≤τ, σ≤ε, Bball≤Cpair·τ^{−1/2}, L≤Bball+Cenv·(√2ⁿ·e^{−ρ²/8λ}) ⟹ L≤(Cpair+Cenv·√2ⁿ·√ε)·σ^{−1/2},
+-- via e^{…}≤1 + rpow_le_rpow_of_nonpos twice (σ≤τ, σ≤ε) + √ε·ε^{−1/2}=1 — the tail's exp SMALLNESS is not
+-- even needed, mere e≤1 plus σ≤ε suffices for the single s-independent C_far); census_far_rate_of_ball_and_
+-- gaussEnv (★★ composes census_full_of_ball_bound_and_gaussEnv through rate_absorb: |∫ Φ|≤(Cpair+Cenv·√2ⁿ·
+-- √ε)·(u−s)^{−1/2}, EXACTLY hCensusBound's RHS shape). +non-vacuity ×2 (L>0; Φ=gaussDdim 1, u=1,s=1/2,a=3/2).
+-- std-3 ×4. Piece (6) CLOSED with explicit C_far=Cpair+Cenv·√2ⁿ·√ε; hCensusBound's remaining obligations
+-- reduce to exactly {F-factor ball-local regularity (leviSeries carry, {hDuhamel,hDConv,hCConv}-family),
+-- hbaseC2}. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusFarRateAbsorb.rate_absorb
+#print axioms QIQTH.CensusFarRateAbsorb.census_far_rate_of_ball_and_gaussEnv
+#print axioms QIQTH.CensusFarRateAbsorb.rate_absorb_hyp_satisfiable
+#print axioms QIQTH.CensusFarRateAbsorb.census_far_rate_hyp_satisfiable
 
 end QIQTH.AxiomAudit

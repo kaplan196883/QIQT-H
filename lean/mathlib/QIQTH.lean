@@ -5333,3 +5333,16 @@ import QIQTH.BaseSlotTransportBallLocal
 -- a drop-in for memLapFull_live_crude's hbnd. Dependency-frontier reduction (J4-914 style), NOT a
 -- discharge of hGpow (still OPEN on the chart change-of-variables wall). std-3 x3. NOT a1=R/6.
 import QIQTH.SliverAmplitudeFromHGpow
+
+-- CensusFarRateAbsorb — J4-940: piece (6) of J4-929's hCensusBound re-audit — the Bball+tail ≤
+-- C_far·(u−s)^{−1/2} UNIFORM RATE ABSORPTION. Absorbs J4-933's domain-bridge output |∫_ℝⁿ Φ| ≤
+-- Bball + Cenv·√2ⁿ·e^{−ρ²/8λ} into the SINGLE C_far·(u−s)^{−1/2} rate J4-929's hcross_of_censusIntegral_
+-- bound consumes, uniformly over s∈Ioo(u−ε)u, a∈Icc u(u+h). rate_absorb (★★ pure algebra: 0<σ≤τ, σ≤ε,
+-- Bball≤Cpair·τ^{−1/2}, L≤Bball+Cenv·√2ⁿ·e ⟹ L≤(Cpair+Cenv·√2ⁿ·√ε)·σ^{−1/2}, via e^{…}≤1 + two x↦x^{−1/2}
+-- monotonicities + √ε·ε^{−1/2}=1); census_far_rate_of_ball_and_gaussEnv (★★ composes census_full_of_ball_
+-- bound_and_gaussEnv through rate_absorb: |∫ Φ|≤(Cpair+Cenv·√2ⁿ·√ε)·(u−s)^{−1/2}, EXACTLY hCensusBound's
+-- RHS shape, single explicit C_far); +non-vacuity ×2 (L>0; Φ=gaussDdim 1 at genuine Ioo/Icc positions).
+-- std-3 ×4. Piece (6) CLOSED; hCensusBound's remaining obligations reduce to exactly {F-factor ball-local
+-- regularity (leviSeries carry, {hDuhamel,hDConv,hCConv}-family), hbaseC2}. NOT a₁=R/6; a₁=R/6 CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv}.
+import QIQTH.CensusFarRateAbsorb
