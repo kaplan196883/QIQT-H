@@ -13397,3 +13397,39 @@ hDConv, hCConv} (hΦint replaced by the standard measurability carriers hKSmeas/
 already present — crude from amplitude sups, hFdom width-2 = {hDuhamel,hDConv,hCConv}-family). C1 hballrate remains
 the GENUINE not-further-reducible analytic carry (two-term on-gate CoV trace core needing G2). `hDuhamel`/`hDConv`
 remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-954 (commit 4be599b9) — CensusExistRhoRethread: RESHAPE the census far-rate capstone so the trace-split radius ρ is chosen PER-D (resolves the ρ-prescription mismatch O1), and CERTIFY the downstream hCross consumer accepts an existentially-chosen ρ
+J4-953 left hCensusBound's residual analytic carry = {hSupp, hballrate(C1), hDuhamel, hDConv, hCConv}, with C1
+hballrate the GENUINE not-further-reducible core (two-term on-gate CoV trace core needing G2). The prior dispatch found
+a decisive NO-GO on discharging hballrate via the existing common-witness chain due to a **ρ-prescription mismatch**
+(O1): the banked capstone `censusBound_of_geometry_gate_supp_F_ballRate_anyS` (J4-951) fixes the trace-split radius `ρ`
+at TOP LEVEL (before `∀ D`) and consumes hballrate on `ball 0 ρ` at that PRESCRIBED ρ — but the common-witness/CoV chain
+can only bound the on-ball trace on a GEOMETRY-DETERMINED radius `δ=min(gate radius, D.ρ chart-injectivity, σ' transport)`
+chosen AFTER D. J4-954 resolves O1. ★KEY FINDING (source-verified against `hcross_of_censusIntegral_bound`, J4-929): the
+DOWNSTREAM consumer is entirely **ρ-AGNOSTIC** — its `hCensusBound` binder is `∀s∈Ioo(u-ε)u, ∀a∈Icc u(u+h), |∫ z,
+deriv(…)(a-s)·F s z 0| ≤ C_far·(u-s)^(-1/2)`, the integral over ALL of ℝⁿ (NO `Metric.ball`), `C_far` a FREE scalar
+param. So ρ is purely an INTERNAL splitting radius; it never appears in the consumer's binder. Hence a binder-REORDER
+(ρ,MF,Cpair,hF,hballrate moved INSIDE `∀ D`) suffices — NO re-derivation of the hcross composition needed. ★gpt-5.6-sol
+high adversarial audit (8-step skeleton + go/no-go): the internal assembler chain (`censusBound_of_crude_Fbound_ballRate`,
+`census_honGate_of_crude_and_Fbound`, `censusBound_of_onGate_and_ballRate`, `tauInv_gaussWidth_le_fixedGauss`) constrains
+ρ ONLY by `0<ρ` (or `0≤ρ`) — NO `D.r≤ρ`, NO `ρ≤ρmax`, NO `τ₀≤c·ρ²` coupling; `Cenv` depends on ρ but is EXISTENTIAL in
+the conclusion; `lam` depends only on `w=4·D.lam,τ₀`; `rAmp` from the ρ/MF/Cpair-INDEPENDENT `census_amplitude_supBounds`.
+So the reorder (a genuine STRENGTHENING: one rAmp uniform over all later ρ) is proved by the SAME body. Sol verdict:
+BOUNDED-scope interface brick, NOT an hDuhamel/hDConv redesign; residual O1 obligations (positive δ(D), hF at δ(D) — free
+from the width-2 Levi hF which holds ∀z, uniformity over s,a, C3 valid at every fixed positive ρ) are the CoV chain's job,
+not this brick's. LANDS std-3 ×4 (propext, Classical.choice, Quot.sound; no sorryAx, no custom): `censusBound_of_geometry_
+gate_supp_F_ballRate_anyS_existRho` ★★★ (the RESHAPED capstone, ρ/MF/Cpair/hF/hballrate bound inside `∀D` — O1 fix at the
+assembly boundary; same ρ-FREE conclusion); `hcross_of_geometry_gate_supp_existRho` ★★★ (CONSUMER ACCEPTANCE: the full
+live hCross mixed-second-difference binder h,k>0 from the reshaped-capstone carries + the J4-929 differentiation carries
+{hFmeasG, four interval-integrabilities, hEnv, H_near, H_zero} via `hcross_of_censusIntegral_bound` at `C_far=Cpair+
+Cenv·√2ⁿ·√ε` — certifies END-TO-END that the ultimate hCross consumer accepts a geometry-determined ρ, no hcross
+re-derivation); `existRho_innerBundle_satisfiable` (non-vacuity of the moved-inside bundle, K={0},S=univ,F≡0,ρ=1/4, both
+gate branches/all moved binders exercised); `census_existRho_smallRadius_gate_exists` (∀D binder non-vacuous, re-export of
+banked `census_smallRadius_gate_exists`). Build via QIQTH.AxiomAudit OK (10262 jobs); axiom_budget_check raw 0/OK;
+vacuum-grep clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean; `git show 4be599b9 --stat` = 3 files (+353).
+HONEST STATUS: O1 quantifier mismatch RESOLVED at the assembly boundary AND the downstream hCross consumer CERTIFIED to
+accept the geometry-determined ρ. Does NOT close hballrate (C1): the CoV/common-witness chain must still supply, after
+fixing D, a positive δ(D), the width-2 Levi hF at δ(D), and the trace rate on `ball 0 δ(D)` uniformly over s,a — this
+brick removes the STRUCTURAL O1 obstacle to that discharge, proving NONE of {hballrate, hDuhamel, hDConv, hCConv}.
+`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
