@@ -13834,3 +13834,59 @@ definitional wall, `ChartJointBorel.chartJoint_measurable_of_rep` — Sol verdic
 infrastructure/refactor project not a routine downstream proof); and the benign window side `ε<u` (a free parameter
 side-condition, satisfiable — nothing to discharge). Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a
 top-level τ-carry. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-964 (commit acfa2b99) — InterchangeBundlesJointFromRoots: FULL JOINT COMPOSITION of the four interchange-bundle census dischargers at ONE shared base (genuine memAdjHi→memLapFull seam + deduplicated dominations) — POSITIVE sufficiency certificate + MEASURED non-collapse (gpt-5.6-sol high GO/NO-GO: 5-wall collapse hypothesis FALSE)
+
+Picks up the dispatch to attempt the FULL JOINT COMPOSITION of the ~15 hDConv/hDuhamel census dischargers at a
+shared instantiation, testing whether the combined hypothesis list collapses to the minimal wall set
+`{hCross, hcar, RadialNormalCoordinateGauge, hAmp0, hCfield}`. Read the 5 named discharger files IN FULL plus the
+live consumer `HDConvLiveGateWired.hDConv_live_gate_wired` (the ~40/67-binder live census surface).
+
+**CENTRAL FINDING (gpt-5.6-sol high adversarial GO/NO-GO audit 2026-08-21: CONFIRMED).** The dispatch's collapse
+hypothesis is **FALSE** for the 15-discharger set. (1) The claimed "shared primitive set"
+`{D:FixedFlowGateData, M, M', Cfield, hgate, hAmp0, hCfield, hSupp, hFzero, hFdom, hAmeas, hDmeas, hbase}` is EXACTLY
+the signature of ONE discharger only (`WitnessBoundDHpardiffWired.{witnessBoundD_wired, witnessHpardiff_wired}`).
+The OTHER dischargers do NOT take `FixedFlowGateData`; they are parameterized by raw `g gi hChr hK S a b` + DISTINCT
+reduced carriers: `hmassone_from_gate_annulus_split` → {ContDiff-g/gi, hgpos, hgdet0, gate-activation rS/hKball/
+hSact, hWslice, hDom}; `hEdom_from_hrawPreCollapse` → {P, hgate:width-4/3 quadratic parametrix}; `hAdom_hWDom_from_
+gateSqControl` → {hw, hgate:GateSqControl}; the four interchange bundles → {MemGaugeGi/Γ, hInter:MemInterchange,
+hAdom2cap, hFdom/hFzero, hmeas, sliver D0/D1/hbnd, hPd2conv, hSecCont/hBcont, Cpair/hGpow, hDa/hLap/hLapZ/hEZ/hLapS/
+hES}. (2) The 15 dischargers cover only ~15 of the ~40 direct census binders — hQ1, hFmeas/hFint/hF'meas, bnd/hbdd/
+hbound/hdiff, D0/D1/hbnd, hIlo/hIhi, hMeasFII, hInnerCont, hFmeas_d/hFint_d/hF'meas_d, L/hLnn, hCross, hWmeas, the
+hffro/hfmov F-modulus piles, hmass, hUsub remain UNCOVERED direct carries. (3) `hcar` and `RadialNormalCoordinate-
+Gauge` are NOT even direct binders of `hDConv_live_gate_wired` — they are where deeper SUB-legs of
+`hDConvSlot_AT_GATE` bottom out, not exposed at this API level. Collapse to a "few-wall" set would require MANY
+further bridge lemmas (deriving hDom/hAdom2cap/GateSqControl/hInter/hGpow/hPd2conv/hDa..hES/hAmeas.. down to
+hAmp0/hCfield+geometry) that are NOT among the 15.
+
+**WHAT WAS BANKED (the honest positive increment).** `InterchangeBundlesJointFromRoots.interchange_bundles_joint`
+(★★★, NEW FILE, no banked file edited) — the FULL JOINT COMPOSITION of the four interchange-bundle dischargers
+`InterchangeBundlesFromExisting.{memAdjHi_live, memAdjLo_live, memLapFull_live, memECombine_live}` (J4-898) at ONE
+shared `(g, gi, hChr, hK, S, a, b, U)` and the concrete Levi source `F := leviSeries (heatOp g gi (vanVleck-
+GatedWitness…))`, PRODUCING the four census binders `hLapFull ∧ hII_lo ∧ hII_hi ∧ hEcomb` SIMULTANEOUSLY. This is
+the sub-chain where coalescence is GENUINE: (SEAM) `memAdjHi_live`'s output `MemAdjHi (leviSeries…) U (…)` is fed
+INTERNALLY as `memLapFull_live`'s `hII_hi` argument — so `hII_hi` is DERIVED from `{hSecCont, hBcont, Cpair, hGpow,
+hUT, hεU}`, NOT a root of the joint bundle; (DEDUP) the pairwise-identical `hFdom`/`hFzero`/`hAdom2cap`/`hmeas`
+(= `memLapFull`'s `hmeas2Lo`, the SAME proposition) are each passed to BOTH consumers from a SINGLE carry. So the
+joint residual root set is STRICTLY SMALLER than the disjoint union of the four individual signatures (hII_hi
+eliminated; four domination/measurability carriers halved) — a POSITIVE SUFFICIENCY CERTIFICATE for the four-
+interchange sub-census. Even so, the measured residual union does NOT collapse: {base geom, window U/T/hUpos/hUT/
+hεU, gauge hgi/hΓ, hAdom2cap+wA2/CA2c, hFdom/hFzero+wF/CF, hmeas, hInter, sliver, hPd2conv, hSecCont/hBcont,
+Cpair/hGpow, hDa/hLap/hLapZ/hEZ/hLapS/hES} — genuinely distinct primitives that do not further coalesce.
+
+**NON-VACUITY.** RELATIVE, identical in status to the four banked dischargers composed (whose own non-vacuity is
+relative to the standing genuine census carriers — the Levi/interchange objects of the real heat-kernel analysis).
+The joint bundle introduces NO new primitive beyond the union of the four and REMOVES `hII_hi`; it therefore cannot
+be more vacuous than its parts. No hypothesis is `:= True`, self-referential to the conclusion, or forces a
+degenerate geometry (unlike the retired cp466 `hframeK ⟹ K = {0}` family — none of these carriers pins K or S).
+
+**VERIFICATION.** Literal build 0 errors (via QIQTH.AxiomAudit, 10273 jobs); `#print axioms
+interchange_bundles_joint` std-3 (propext, Classical.choice, Quot.sound; NO sorryAx, NO custom); `axiom_budget_check`
+raw axiom count 0 (budget 0); vacuum-grep clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean;
+`git show acfa2b99 --stat` = 3 files (+220).
+
+**HONEST STATUS.** Composed 4 of the ~15 dischargers into ONE joint bundle at a shared base with 1 genuine internal
+seam (memAdjHi→memLapFull) and 4 deduplicated carriers. The other 11 dischargers were AUDITED (full signatures read)
+and shown NOT to further coalesce (distinct primitives, ~15/40 coverage) — the measured NEGATIVE finding, gpt-5.6-sol
+high confirmed. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
