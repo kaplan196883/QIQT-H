@@ -19276,6 +19276,16 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁ = R/6.
 #print axioms QIQTH.HDConvLiveGateWired.hDConv_live_gate_wired
 
+-- ## HDConvLiveHmassoneDischarged: compose the banked J4-896 hmassone discharge INTO the live hDConv,
+-- ELIMINATING the analytic approximate-identity limit hmassone from the live hDConv antecedent surface.
+-- hDConv_live_gate_hmassone_discharged: the live hDConv proposition (raw gatedKernel form) with the
+-- hmassone binder REMOVED, derived internally from hmassone_from_gate_annulus_split (reusing the census's
+-- OWN hWmeas/hWDom + satisfiable geometry/gate carriers {hgCD,hgiCD,hgpos,h0Kmem,hgdet0,ha,hab,rS,hrS,
+-- hKball,hSact}, all capstone-geometry-supplied). Trades one OPAQUE analytic limit for elementary
+-- satisfiable geometry inputs — pure dependency normalization (Sol-endorsed). std-3. NOT a₁ = R/6
+-- (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+#print axioms QIQTH.HDConvLiveHmassoneDischarged.hDConv_live_gate_hmassone_discharged
+
 -- ## J4-313 (CConvFacadeGate): ★★ THE CAPSTONE hCConv SLOT IS A THEOREM ★★
 -- ★ ALL THREE inner capstone arrows now have AT_GATE slot theorems (J4-311/312/313).
 -- Z0 RECON: the hCConv slot = the spatial-C² ContDiffAt ℝ 2 of the diagonal heatConv;

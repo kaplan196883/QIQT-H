@@ -4864,6 +4864,14 @@ import QIQTH.RadialGaugeIsNamedFloor
 -- live gate. Carried surface = base geometry/gauge (present in capstone) + pre-ρ gate triple
 -- {rS,hKball,hSact} + hWslice (= census hWmeas) + hDom (= census hWDom). std-3 all. NOT a₁=R/6.
 import QIQTH.HmassoneFromGateAnnulusSplit
+-- HDConvLiveHmassoneDischarged — compose the banked J4-896 hmassone discharge INTO the live hDConv
+-- (HDConvLiveGateWired.hDConv_live_gate_wired), ELIMINATING the analytic approximate-identity limit
+-- hmassone from the live hDConv antecedent surface. hDConv_live_gate_hmassone_discharged: the live
+-- hDConv proposition (raw gatedKernel form) with hmassone REMOVED and derived internally from
+-- hmassone_from_gate_annulus_split (reusing the census's own hWmeas/hWDom + satisfiable geometry/gate
+-- carriers {hgCD,hgiCD,hgpos,h0Kmem,hgdet0,ha,hab,rS,hrS,hKball,hSact}). Pure dependency-normalization
+-- composition; std-3. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HDConvLiveHmassoneDischarged
 
 -- HEdomFromHrawPreCollapse — the ABSTRACT-`g` `hEdom` discharge for the LIVE order-1 capstone's shared
 -- `hDaLimLU` census (the `hEdom` binder of HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:304-306
