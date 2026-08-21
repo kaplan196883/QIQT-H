@@ -5300,6 +5300,17 @@ import QIQTH.GaussianProductCollapse
 -- NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.CensusTauDerivGateSplit
 
+-- CensusAmpConcreteRegularity — the CONCRETE amplitude half of junction piece (3) of J4-933's hCensusBound
+-- re-audit. J4-931/932 (paired_ratio_center_lipschitz / transported_ratio_regularity) take an ABSTRACT
+-- bounded+Lipschitz weight P (= amp·F); this file pins the AMPLITUDE factor to the concrete chart amplitude
+-- chartFieldAmp … τ z 0 and its ∂_τ-slope censusAmpTauDeriv, proving both bounded+pairwise-Lipschitz on a base
+-- ball UNCONDITIONALLY at base 0 (only standard g/gi carries hg/hg0/hu), via the value bridge chartFieldAmp=
+-- chartAmp (mul_assoc) + banked DataAmpAssembly regularity. Composes with an abstract ball-local F (the honest
+-- Levi carry) to give the concrete q₁=(amp·F)/|det| and q₂=(Cfield·F)/|det| bounded+Lipschitz on a base ball
+-- (via det_fderiv_regularity_bundle + ratio_abs_lipschitzOn; CONDITIONAL on hbaseC2). The AMPLITUDE half of
+-- piece (3) is CLOSED concretely; the F factor remains an explicit abstract carry. std-3 ×9. NOT a₁=R/6.
+import QIQTH.CensusAmpConcreteRegularity
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

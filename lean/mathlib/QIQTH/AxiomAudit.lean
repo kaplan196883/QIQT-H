@@ -29678,4 +29678,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusTauDerivGateSplit.censusTauDeriv_eqZero_offGate
 #print axioms QIQTH.CensusTauDerivGateSplit.censusTauDeriv_gateSplit
 
+-- ## (CensusAmpConcreteRegularity): the CONCRETE amplitude half of junction piece (3) of J4-933's hCensusBound
+-- re-audit. J4-931/932 (paired_ratio_center_lipschitz / transported_ratio_regularity) leave the census weight
+-- P = amp·F ABSTRACT (any bounded+Lipschitz P). This file pins the AMPLITUDE factor to the concrete chart
+-- amplitude chartFieldAmp … τ z 0 and its ∂_τ-slope censusAmpTauDeriv, discharging their base-ball
+-- bounded+pairwise-Lipschitz regularity UNCONDITIONALLY at base 0 (only standard g/gi carries hg/hg0/hu), via the
+-- value bridge chartFieldAmp=chartAmp (mul_assoc) + the banked DataAmpAssembly regularity of chartAmp
+-- (chartAmp_base_bounded_near_zero / chartAmp_base_lipschitz_center). censusAmpTauDeriv = chartFieldAmp(τ=1) −
+-- chartFieldAmp(τ=0) makes the slope a difference of two bounded+Lipschitz amplitudes. Composing with an ABSTRACT
+-- ball-local F0 (the honest Levi carry, e.g. leviSeries … s z 0 — downstream of Ebound/heatConv, NOT proved here)
+-- via collar_product_lipschitz_increment gives the concrete amp·F / Cfield·F weights (the abstract-P input of
+-- J4-931), and via det_fderiv_regularity_bundle + ratio_abs_lipschitzOn the concrete q₁=(amp·F)/|det| and
+-- q₂=(Cfield·F)/|det| bounded+Lipschitz on a base ball (CONDITIONAL on hbaseC2). The AMPLITUDE half of piece (3)
+-- is CLOSED concretely; F remains an explicit abstract carry. std-3 ×9 (non-vacuous: census_abstractF_slot_
+-- satisfiable exhibits the F0 slot with TEETH via cos‖·‖). NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusAmpConcreteRegularity.chartFieldAmp_apply_eq_chartAmp
+#print axioms QIQTH.CensusAmpConcreteRegularity.chartFieldAmp_base_regularity_center
+#print axioms QIQTH.CensusAmpConcreteRegularity.censusAmpTauDeriv_eq_amp_diff
+#print axioms QIQTH.CensusAmpConcreteRegularity.censusAmpTauDeriv_base_regularity_center
+#print axioms QIQTH.CensusAmpConcreteRegularity.census_ampF_weight_regularity
+#print axioms QIQTH.CensusAmpConcreteRegularity.census_CfieldF_weight_regularity
+#print axioms QIQTH.CensusAmpConcreteRegularity.census_ampF_ratio_regularity
+#print axioms QIQTH.CensusAmpConcreteRegularity.census_CfieldF_ratio_regularity
+#print axioms QIQTH.CensusAmpConcreteRegularity.census_abstractF_slot_satisfiable
+
 end QIQTH.AxiomAudit
