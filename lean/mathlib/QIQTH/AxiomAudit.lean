@@ -52,6 +52,7 @@ import QIQTH.CensusIntegratedModuloG2
 import QIQTH.G2ConstGateGrounded
 import QIQTH.HsuppConstGateGrounded
 import QIQTH.HCrossNegativeQuadrants
+import QIQTH.HCrossLargeShiftRegime
 
 namespace QIQTH.AxiomAudit
 
@@ -30101,5 +30102,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hcross_split_bound_hpos_kneg
 #print axioms QIQTH.HeatResidualBound.hcross_split_bound_hneg_kpos
 #print axioms QIQTH.HeatResidualBound.hcross_split_bound_hneg_kneg
+
+-- ## J4-966 (HCrossLargeShiftRegime): the degenerate |h|≥ε regime uncovered by J4-965's four sign
+-- quadrants (all of which need −ε<h). gpt-5.6-sol high scope check 2026-08-21: SOUND; case split
+-- {|h|≥ε}∪{h>0}∪{−ε<h<0}∪{h=0} exhaustive ⟹ FULL h∈ℝ coverage of the live binder's h-quantifier. For
+-- ε≤|h| the sliver needs NO far/near/zero split: the sign/magnitude-agnostic collapse
+-- mixed_second_diff_frozen_reduction_integrated reduces Δ² to ∫ s in (u−ε)..(u−ε+k), D with
+-- D=Φ(u+h,·)−Φ(u,·) UNIFORMLY bounded (|Φ|≤M ⟹ |D|≤2M — the diagonal singularity lived ONLY in the
+-- DIVIDED difference D/h~1/h, not in D itself), so |∫|≤2M·|k| (norm_integral_le_of_norm_le_const) and
+-- ε≤|h| absorbs the 1/ε: 2M·|k|≤(2M/ε)(|h||k|)≤(2C_far/√ε+2M/ε)(|h||k|), the EXACT same constant L.
+-- uniform_sliver_bound (+TEETH: const D≡2^{−1/2}≈0.707≤1=2M, nonzero strictly below bound NOT 0≤0),
+-- hcross_split_bound_habs_ge_eps. Carrier-conditional on the SAME sup-bound |Φ|≤M (H_near-style, whole
+-- sliver); discharges NONE of {hDuhamel,hDConv,hCConv}. std-3 ×3. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
+#print axioms QIQTH.HeatResidualBound.uniform_sliver_bound
+#print axioms QIQTH.HeatResidualBound.uniform_sliver_bound_hyp_satisfiable
+#print axioms QIQTH.HeatResidualBound.hcross_split_bound_habs_ge_eps
 
 end QIQTH.AxiomAudit

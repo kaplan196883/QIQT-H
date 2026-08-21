@@ -5189,6 +5189,15 @@ import QIQTH.HCrossFarDerivBridge
 -- carrier-conditional on the SAME far/near/zero data as h,k>0; does NOT change conditional status.
 -- gpt-5.6-sol high scope check: both constructions SOUND. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossNegativeQuadrants
+-- HCrossLargeShiftRegime — J4-966: the degenerate |h|≥ε regime uncovered by J4-965's four sign quadrants
+-- (all of which need −ε<h). For ε≤|h| the sliver needs NO far/near/zero split: the sign/magnitude-agnostic
+-- collapse reduces Δ² to ∫ D with D=Φ(u+h,·)−Φ(u,·) UNIFORMLY bounded (|Φ|≤M ⟹ |D|≤2M, no diagonal
+-- division — the singularity lived only in the DIVIDED difference), so |∫|≤2M·|k| and ε≤|h| absorbs the
+-- 1/ε: 2M·|k|≤(2M/ε)(|h||k|)≤(2C_far/√ε+2M/ε)(|h||k|), the EXACT same constant L. uniform_sliver_bound
+-- (+TEETH), hcross_split_bound_habs_ge_eps. This closes the live binder's h-quantifier for EVERY h∈ℝ
+-- ({|h|≥ε}∪{h>0}∪{−ε<h<0}∪{h=0} exhaustive, gpt-5.6-sol high). Carrier-conditional on the SAME sup-bound
+-- |Φ|≤M; does NOT change conditional status. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HCrossLargeShiftRegime
 -- HCrossDerivEngineWired — J4-929: WIRE the banked differentiation-under-integral engine into J4-928's
 -- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
 -- gpt-5.6-sol (high) go/no-go: NO-GO for full closure (the residual bound = the chart CoV + J4-924 wall,
