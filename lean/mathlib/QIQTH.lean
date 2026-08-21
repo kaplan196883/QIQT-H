@@ -5545,3 +5545,22 @@ import QIQTH.CensusPhiIntegrabilityDischarge
 -- census_existRho_smallRadius_gate_exists (∀D non-vacuous). Resolves O1 STRUCTURALLY; proves NONE of
 -- {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusExistRhoRethread
+-- CensusTwoTermSuperset — J4-955: the MEASURABLE-SUPERSET analogue of the flat two-term Gaussian census bound
+-- (two_term_census_bound_superset), filling the "image is not a ball" glue obligation at the CoV⟶two-term
+-- junction that gpt-5.6-sol high flagged in the J4-95x closure re-audit ("the two-term theorem J4-944 only
+-- handles the inner BALL; the outer-image tail must be proved"). After the common-witness CoV (J4-943), the
+-- census is integrated over the CoV IMAGE Wbv''(ball 0 δ) — NOT a ball; the sandwich (J4-945) confines it to
+-- ball 0 r ⊆ image ⊆ ball 0 σ'. This brick bounds the two-term integral over ANY measurable Ω ⊇ ball 0 r
+-- (the exact shape the image occupies): polynomial term via the banked superset center-Lipschitz trace
+-- cancellation (gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz) whose outer Gaussian tail
+-- e^{−r²/8τ}·(2n+1)/(2τ) collapses to the constant (2n+1)/2·(1+128/r⁴) via pow_mul_exp_negSq_le (k=2,y=1/√τ,
+-- b=r²/8); mass term via |∫_Ω gaussDdim·q₂|≤M₂·∫gaussDdim=M₂ (gaussDdim_integral_eq_one); both ride 1≤√T/√τ
+-- into the SAME Cpair/√τ shape as J4-944. LANDS std-3 ×2: two_term_census_bound_superset + _hyp_satisfiable
+-- (TEETH: a GENUINELY non-ball measurable superset ball 0 1 ∪ {far point}). HONEST: fills ONE glue gap only;
+-- does NOT close hCensusBound/hballrate — Sol-audited the FULL modulo-G2 hballrate ALSO needs {restricted CoV
+-- over ball 0 δ, image measurability, the banked indicator-drop censusTauDeriv_eq_onGate_on_jointGate_ball
+-- MODULO the G2 carry ball⊆{z|0∈S z}, uniform transported constants}, and UNCONDITIONAL arbitrary-S hballrate
+-- is a genuine NO-GO (gate indicator rides into q₁ destroying center-Lipschitz ⟹ G2-type hypothesis genuinely
+-- required). Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,
+-- hCConv}, UNCHANGED.
+import QIQTH.CensusTwoTermSuperset

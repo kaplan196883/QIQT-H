@@ -29962,4 +29962,13 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusExistRhoRethread.existRho_innerBundle_satisfiable
 #print axioms QIQTH.CensusExistRhoRethread.census_existRho_smallRadius_gate_exists
 
+-- ## CensusTwoTermSuperset (J4-955): the MEASURABLE-SUPERSET analogue of the flat two-term Gaussian census
+-- bound (two_term_census_bound_superset), filling the "image is not a ball" CoV⟶two-term glue gap (Sol-flagged:
+-- J4-944 only handles the inner BALL; the CoV image Wbv''(ball 0 δ) is NOT a ball). Bounds the two-term integral
+-- over ANY measurable Ω ⊇ ball 0 r via the banked superset center-Lipschitz trace cancellation + Gaussian
+-- outer-tail collapse (pow_mul_exp_negSq_le) + gaussDdim mass, into the SAME Cpair/√τ shape. std-3 ×2. HONEST:
+-- fills ONE glue gap; does NOT close hballrate (UNCONDITIONAL arbitrary-S = NO-GO, G2-type carry required).
+#print axioms QIQTH.CensusTwoTermSuperset.two_term_census_bound_superset
+#print axioms QIQTH.CensusTwoTermSuperset.two_term_census_bound_superset_hyp_satisfiable
+
 end QIQTH.AxiomAudit
