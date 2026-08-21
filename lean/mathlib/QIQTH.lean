@@ -5469,3 +5469,13 @@ import QIQTH.CensusOnGateFixedGaussEnvelope
 -- modulo {C1 ball-rate ⟸G2/G3, C2 integrability, crude-envelope amplitude carries (WideAmplitudeData class), uniform
 -- F-factor bound}, NOT {G2,G3} alone. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusOnGateEnvelopeThreaded
+-- CensusAmplitudeSupDischarge — J4-949: DISCHARGES the amplitude sup-bound carries hAmp0/hCfield of
+-- censusBound_of_amplitudeCarries_Fbound_ballRate (J4-948) from banked base-point continuity via the
+-- affine-in-τ structure (chartFieldAmp τ = chartFieldAmp 0 + censusAmpTauDeriv·τ). LANDS std-3:
+-- census_amplitude_supBounds ★★★ (τ-UNIFORM amp sup package M=M₀+M'·τ₀ from geometry carries),
+-- censusBound_of_geometry_gate_supp_F_ballRate ★★★ (full far-rate with hAmp0/hCfield DISCHARGED internal;
+-- carries left = {hgateS S-gate half, hSupp, F-bound, C1 ball-rate, C2 integ}), shrinkGate + census_smallRadius_gate_exists
+-- (non-vacuity: valid small-radius gate records always exist, refuting the ∀D binder vacuity). ⚠ hgateS is STRONGER
+-- than the census 0∈S z gate — it forces S=univ on K (banked τ-deriv closed form is everywhere-in-field-point).
+-- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusAmplitudeSupDischarge

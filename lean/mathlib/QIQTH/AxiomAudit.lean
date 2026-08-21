@@ -29864,4 +29864,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusOnGateEnvelopeThreaded.censusBound_of_amplitudeCarries_Fbound_ballRate
 #print axioms QIQTH.CensusOnGateEnvelopeThreaded.censusBound_of_amplitudeCarries_satisfiable
 
+-- ## CensusAmplitudeSupDischarge (J4-949): DISCHARGES the amplitude sup-bound carries hAmp0/hCfield of J4-948 from
+-- banked base-point continuity via the affine-in-τ structure. HONEST: hAmp0/hCfield DISCHARGED (modulo D.r ≤ rAmp,
+-- a benign radius compat with valid small-radius records shown to exist); hCensusBound now modulo {hgateS S-gate half,
+-- hSupp, F-factor bound, C1 ball-rate, C2 integrability}. ⚠ hgateS forces S=univ on K (stronger than census 0∈S z).
+-- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED. std-3.
+#print axioms QIQTH.CensusAmplitudeSupDischarge.chartFieldAmp_affine_slope
+#print axioms QIQTH.CensusAmplitudeSupDischarge.census_amplitude_supBounds
+#print axioms QIQTH.CensusAmplitudeSupDischarge.censusBound_of_geometry_gate_supp_F_ballRate
+#print axioms QIQTH.CensusAmplitudeSupDischarge.census_smallRadius_gate_exists
+
 end QIQTH.AxiomAudit
