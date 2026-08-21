@@ -13019,3 +13019,37 @@ QIQTH.AxiomAudit` 0 errors (10250 jobs); `#print axioms` std-3 ×10 (propext/Cla
 no sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean;
 no existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) endorsed the
 monolith design; commit `d2201c8c`, pushed. NOT `a₁ = R/6`.
+
+### J4-944 (CensusTwoTermBallLocal — resolve newly-surfaced N1 at the CoV→two-term junction of the hCensusBound assembly; commit `6c687fa1`)
+FULL-ASSEMBLY attempt of `hCensusBound` (J4-929 `hcross_of_censusIntegral_bound`) using the G1-fixed
+common-witness package (J4-943 `BaseVaryingIFTData`), carrying G2 (`ball 0 r ⊆ {z: 0∈S z}`) and G3
+(Levi F-factor carries) EXPLICITLY. **RESULT: hCensusBound does NOT monolithize this session** — threading
+the pieces surfaces a genuine NEW interface obstruction beyond G1/G2/G3. ★THE NEW MISMATCH (N1): the flat
+trace-cancellation core `two_term_census_bound_uniform`/`_combined` (`GaussTauTraceChartTransported`)
+demands the transported weights `q₁,q₂` be **globally** bounded (`hq₁bnd : ∀ z, |q₁ z|≤M₁`; verified live
+against `GaussTauTraceCancellationInnerBall.gaussian_hessian_cancel_trace_on_superset_of_center_lipschitz`
+`hM : ∀ z, |q z|≤M`), but the common-witness transport (`commonWitness_ampF_transport`/`_CfieldF_transport`)
+and the Levi F-factor (`census_ampF_leviF_transported_ratio_regularity`) deliver boundedness ONLY on an image
+ball `ball 0 σ'`. ★THE FIX (this file, `two_term_census_bound_ballLocal` ★★): the census is ultimately over a
+ball, so truncate the weights to `Set.indicator (ball 0 r) q` (globally bounded — on-ball `≤M`, off-ball
+`=0≤M`; center value `q 0` preserved since `0∈ball 0 r`; center-Lipschitz unchanged on the ball), apply
+`two_term_census_bound_uniform_combined` with `Ω:=ball 0 r`, restore the un-truncated integrand via
+`setIntegral_congr_fun`. Delivers the exact `Cpair/√τ` shape from purely BALL-LOCAL weight regularity. TEETH
+non-vacuity `q₁=‖z‖², q₂=‖z‖` (locally bounded on `ball 0 1` but GLOBALLY UNBOUNDED — exercising the actual
+N1 point; `sin/cos` would NOT, per Sol). std-3 ×2 (propext/Classical.choice/Quot.sound, no sorryAx/custom).
+★HONEST STATUS (gpt-5.6-sol high ADVERSARIALLY audited, caught two overclaims): removes N1 ONLY, and ONLY for
+the ball-local subproblem (same-ball integration). Does NOT close `hCensusBound`/`hCross`, and does NOT repair
+the CoV integral over the whole image. Sol corrections to the initial triple-mismatch framing: **N2 was
+MISDIAGNOSED** — `two_term_census_bound_uniform` accepts ANY measurable `Ω ⊇ ball 0 r`, so the non-ball shape
+of the CoV image `Wbv''(ball 0 ρ)` is NOT itself an obstruction; the REAL residual is the **image\ball
+localization** cost incurred by truncating to a ball (on `image \ ball 0 r` the truncated coefficient is 0
+but the transported one is not). **N3 is NOT a structural mismatch** — the base-slot→flat weight-match rewrite
+`Wbv(V w)=w` inside the trace coefficient is ROUTINE `simp_rw`/`congr`/`setIntegral_congr` plumbing on the
+banked G1 weight-match. Also: the gate predicate is `z∈K ∧ 0∈S z`; G2 supplies only the `0∈S z` conjunct, so
+the `z∈K` half (from `K∈𝓝 0`) must also be threaded. Residual CoV-junction obligations: the image-residue
+localization, the gate-split integral restriction (G2 + `z∈K`), the off-ball Gaussian envelope + integrability
+for the domain bridge (`census_full_of_ball_bound_and_gaussEnv`), and the final rate absorption
+(`census_far_rate_of_ball_and_gaussEnv`). BUILT `lake build QIQTH.AxiomAudit` 0 errors (10251 jobs);
+`axiom_budget_check.sh` raw 0/OK; vacuum-grep clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`.
+`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁ = R/6`.
