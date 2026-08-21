@@ -12425,3 +12425,52 @@ REMAIN, so `hCensusBound` / `hCross` are NOT closed. `hDuhamel`/`hDConv` remain 
 QIQTH.AxiomAudit` 0 errors (10237 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no
 sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `5c9dcf57`, pushed. NOT `a₁ = R/6`.
+
+## J4-931 — the DETERMINANT-FACTOR regularity brick for obstruction (iii) of J4-929's `hCensusBound` wall: `det∘fderiv` is `C¹`, so `1/|det|` + `P/|det|` are bounded + center-Lipschitz on the base ball — commit `97ce141c` (`BaseSlotDetRegularity.lean`, new file)
+
+**Context.** J4-930 banked the base-slot CoV whose transformed weight is `B(V w)/|det(f'(V w))|` (with
+`f' z = fderiv ℝ Wbv z` on `ball 0 ρ`), discharging obstruction (i). gpt-5.6-sol's NO-GO audit left
+obstruction (iii): the concrete transformed weights `(amp·F)/|det|` bounded + center-Lipschitz (flagged
+likely bottleneck: `1/|det|`). This increment targets obstruction (iii) via the ContDiffAt→Lipschitz route.
+
+**★ KEY FINDING — the piece J4-925 flagged ABSENT is supplied by COMPOSITION.** J4-925's header named
+obstruction (B) (`det(f'∘V)` pairwise Lipschitz) as the "GENUINE remaining wall … needs a quantitative
+operator-determinant Lipschitz bound `|det A − det B| ≤ C(n,‖·‖)·‖A−B‖`, ABSENT from Mathlib". That manual
+bound is NOT needed: `A ↦ A.det` on `Point n →L[ℝ] Point n` is `C^∞` (`det_clm_contDiff`), so
+`z ↦ (fderiv Wbv z).det = det ∘ fderiv Wbv` is `ContDiffAt ℝ 1`, and the banked convex-MVT technique gives
+local Lipschitz DIRECTLY. `det_clm_contDiff` is the Mathlib `ContinuousLinearMap.continuous_det` pattern
+UPGRADED from `Continuous` to `ContDiff`: `A.det = Matrix.det (Ψ A)`, `Ψ = toContinuousLinearMap(toMatrix'.
+toLinearMap ∘ₗ coeLM ℝ)` the CLM→matrix continuous-linear bridge (finite-dim), + `JacobiFormula.matrix_det_
+contDiff` (already banked). gpt-5.6-sol (high) verified the composition sound and the base-ball result a
+genuine advance (not a dodge) — the `ContDiffAt.fderiv_right` order `1+1≤2` is clean, `ContinuousLinearMap.det`
+is defeq `LinearMap.det (·:→ₗ)` so `show`/`rfl` bridge works.
+
+**What lands** (std-3 ×8, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `det_clm_contDiff` (★): `A ↦ A.det` is `ContDiff ℝ 1` on `Point n →L[ℝ] Point n`.
+- `det_fderiv_contDiffAt` (★): `z ↦ (fderiv ℝ Wbv z).det` is `ContDiffAt ℝ 1` at `0`, given `hbaseC2`.
+- `det_fderiv_lipschitzOn_ball` (★): the signed determinant is pairwise Lipschitz on a base ball
+  (`AmpQuantBundle.contDiffAt_one_lipschitzOn_ball`, the `chartAmp_base_lipschitzOn_ball` technique).
+- `absdet_fderiv_boundedBelow_ball` (★): `|det| ≥ 1/2` on a base ball (det continuity +
+  `ChartW0Fderiv.chartW0_absdet_fderiv_zero`: `|det(fderiv Wbv 0)| = 1`).
+- `det_fderiv_regularity_bundle` (★★ MAIN): `∃ r>0 ∃ L_D≥0`, `|det| ≥ 1/2` ∧ `det` pairwise-Lipschitz on
+  `ball 0 r` — the exact `D`-side input J4-925's glue consumes.
+- `recip_absdet_center_lipschitz` (★★): `1/|det(fderiv Wbv)|` bounded by `2` + center-Lipschitz on the base
+  ball (feeds `reciprocal_abs_center_lipschitz`; the `two_term_census` `hcl` shape).
+- `paired_ratio_center_lipschitz` (★★): for ANY bounded (`M_P`) + Lipschitz (`L_P`) weight `P` (e.g. `amp·F`),
+  `P/|det|` bounded by `2M_P` + pairwise-Lipschitz on the base ball (feeds `ratio_abs_lipschitzOn`) — the
+  FULL obstruction-(iii) shape on the base ball.
+- `det_clm_contDiff_nonvacuous` (teeth): `(2•id).det = 2^n ≠ 0`.
+
+**Honest status.** Discharges the DETERMINANT/RATIO half of obstruction (iii) — but on the BASE (pre-image)
+ball, with `D z := det(fderiv Wbv z)`. The CoV weight is on the IMAGE variable, `w ↦ q(V w)` with
+`q z := B z/|det(fderiv Wbv z)|`: boundedness transports by range containment, but CENTER-Lipschitz of `q∘V`
+genuinely needs the inverse `V` locally (center-)Lipschitz — the ∘V transport, NOT built here (per gpt-5.6-sol
+the true remaining bottleneck; extractable from the IFT OpenPartialHomeomorph's `C¹` inverse but a separate
+brick). Obstruction (ii) (`ball 0 ρ` vs `ℝⁿ` tail) also REMAINS. So `hCensusBound`/`hCross` are NOT closed.
+`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/BaseSlotDetRegularity.lean` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10238 jobs); `#print axioms` std-3 ×8 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `97ce141c`, pushed. NOT `a₁ = R/6`.
