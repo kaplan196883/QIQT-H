@@ -5828,3 +5828,13 @@ import QIQTH.HsuppConstGateGrounded
 -- Cpair/hGpow, hDa..hES} that do not further coalesce. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6
 -- CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
 import QIQTH.InterchangeBundlesJointFromRoots
+-- FlatChartBridgeAudit — J4-978: a machine-checked STATEMENT-SHAPE audit of the geodesic-pullback bridge
+-- `hpull` (carried by RadialGaugeInterface/CurvedCenterIdentities center-identity lifts). Concrete flat
+-- affine model Wf z := (·-z) with GROUNDED jets (flatFirstJet from fderiv=id, flatSecondJet from 2nd
+-- fderiv=0). current_hpullVP_fails (★): the CURRENT hpullVP shape ∑ₖ(W z 0)ₖ·Pₖ=∑ⱼg_ij(z)zʲ is REFUTED
+-- for the actual affine jets at n=1,z=(1),i=0 (LHS=−1≠+1=RHS) — mis-signed, not merely unproven.
+-- flat_corrected_bridge + flat_center_identities (★): the r-corrected shape (RHS at r:=W z 0, VP concl
+-- =(W z 0)ᵢ) PASSES the flat-affine consistency test ∀n z i with genuine derivatives. Firewall: does NOT
+-- identify Wf with uniformInverseChart (=blocker J3), does NOT solve the Gauss lemma, does NOT validate
+-- the curved correction. std-3 ×7. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.FlatChartBridgeAudit

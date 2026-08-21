@@ -30299,4 +30299,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusHrateFullConcrete.hrate_full_concrete
 #print axioms QIQTH.CensusHrateFullConcrete.hfar_concrete_rate_discharged
 
+-- FlatChartBridgeAudit — J4-978: machine-checked STATEMENT-SHAPE audit (countermodel/regression) of the
+-- geodesic-pullback bridge `hpull`. In the concrete flat affine model Wf z := (·−z) with jets GROUNDED as
+-- actual fderivs: current_hpullVP_fails (★) REFUTES the current hpullVP shape (∑ₖ(W z 0)ₖ·Pₖ=∑ⱼg_ij(z)zʲ)
+-- for the genuine affine jets at n=1,z=(1),i=0 — LHS=−1≠+1=RHS, so it is MIS-SIGNED (holds only where
+-- zᵢ=0), not merely unproven; the natural RHS is the radial vector (W z 0)ᵢ=−zᵢ (flat_VP_lhs). The
+-- r-corrected shape (metric contracted at r:=W z 0, VP conclusion =(W z 0)ᵢ) PASSES the flat consistency
+-- test ∀n z i with real derivatives (flat_corrected_bridge, flat_center_identities) — non-vacuous.
+-- Firewall: does NOT identify Wf with the opaque uniformInverseChart (=blocker J3), does NOT solve the
+-- Gauss lemma, does NOT validate the curved correction. Discharges NONE of {hDuhamel,hDConv,hCConv}.
+-- std-3 ×7. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.FlatChartBridgeAudit.flat_VP_lhs
+#print axioms QIQTH.FlatChartBridgeAudit.current_hpullVP_fails
+#print axioms QIQTH.FlatChartBridgeAudit.flat_corrected_bridge
+#print axioms QIQTH.FlatChartBridgeAudit.flat_center_identities
+
 end QIQTH.AxiomAudit
