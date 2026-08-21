@@ -28,6 +28,7 @@ import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
+import QIQTH.CensusTauDerivAnySEnvelope
 import QIQTH.GaussTauDerivCancellation
 import QIQTH.GaussTauTraceCancellation
 import QIQTH.GaussTauTraceCancellationLocalized
@@ -29873,5 +29874,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusAmplitudeSupDischarge.census_amplitude_supBounds
 #print axioms QIQTH.CensusAmplitudeSupDischarge.censusBound_of_geometry_gate_supp_F_ballRate
 #print axioms QIQTH.CensusAmplitudeSupDischarge.census_smallRadius_gate_exists
+
+-- ## CensusTauDerivAnySEnvelope (J4-950): ELIMINATES the S=univ requirement flagged at J4-949 for the crude ∂_τ
+-- DOMINATION envelope. The census evaluates the τ-derivative ONLY at field point 0, so the genuine need is the
+-- census gate 0∈S z (satisfiable by a PROPER S), NOT S=univ. The over-strong hgate/S=univ carry arose only from
+-- lazily universally-quantifying the field point in witnessTimeDeriv_domination's hgate; the field-point-0 identity
+-- with NO hgate + ANY S already exists (banked CensusTauDerivGateSplit.censusTauDeriv_gateSplit). This file builds
+-- the any-S DOMINATION envelope: witnessTimeDeriv_domination_anyS (on-ball |deriv(fun r=>Wit r 0 z)τ|≤C·τ⁻¹·gaussDdim,
+-- NO S-gate hyp) + witnessTimeDeriv_domination_global_anyS (∀z, only honest hSupp, NO hgate — strictly-more-general
+-- drop-in for the banked _global). Route: apply banked witnessTimeDeriv_domination at S:=univ (over-strong hgate
+-- trivial for univ via Set.mem_univ + banked chartFieldAmp_hasDerivAt_tau), transfer to arbitrary S via
+-- censusTauDeriv_gateSplit (on gate both derivs = same S-independent closed form; off gate deriv=0, RHS≥0).
+-- census_anyS_env_satisfiable_properGate: NON-VACUITY at a PROPER gate S:=ball 0 1 (S 0≠univ via far point 2, n>0;
+-- yet 0∈S z) — DIRECTLY refutes the cp466 analogy (cp466's hframeK was geometrically INCOMPATIBLE forcing K={0};
+-- here 0∈S z imposes NO geometric constraint). gpt-5.6-sol high adversarial audit: NOT a cp466-style intrinsic
+-- collapse; transfer logically valid. std-3 ×3. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusTauDerivAnySEnvelope.witnessTimeDeriv_domination_anyS
+#print axioms QIQTH.CensusTauDerivAnySEnvelope.witnessTimeDeriv_domination_global_anyS
+#print axioms QIQTH.CensusTauDerivAnySEnvelope.census_anyS_env_satisfiable_properGate
 
 end QIQTH.AxiomAudit

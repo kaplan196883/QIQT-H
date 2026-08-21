@@ -5479,3 +5479,13 @@ import QIQTH.CensusOnGateEnvelopeThreaded
 -- than the census 0∈S z gate — it forces S=univ on K (banked τ-deriv closed form is everywhere-in-field-point).
 -- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusAmplitudeSupDischarge
+
+-- CensusTauDerivAnySEnvelope — J4-950: ELIMINATES the S=univ requirement (J4-949) for the crude ∂_τ
+-- DOMINATION envelope. The census evaluates the τ-derivative only at field point 0, so the genuine need
+-- is the census gate 0∈S z (satisfiable by a PROPER S), NOT S=univ. Builds the any-S envelope
+-- witnessTimeDeriv_domination_anyS / _global_anyS (NO S-membership hgate; only the honest hSupp), by
+-- reducing the banked witnessTimeDeriv_domination at S:=univ and transferring via the banked
+-- censusTauDeriv_gateSplit. census_anyS_env_satisfiable_properGate: non-vacuity at a PROPER gate ball 0 1
+-- (≠univ, yet 0∈S z) — refutes the cp466 analogy. std-3 ×3. gpt-5.6-sol high audit: NOT cp466-style collapse.
+-- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusTauDerivAnySEnvelope
