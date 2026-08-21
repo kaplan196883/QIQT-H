@@ -4873,6 +4873,18 @@ import QIQTH.HmassoneFromGateAnnulusSplit
 -- composition; std-3. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HDConvLiveHmassoneDischarged
 
+-- HDuhamelLiveHmassoneDischarged — the hDuhamel analogue of J4-977: compose the banked J4-896 hmassone
+-- discharge INTO the live hDuhamel slot (via HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL +
+-- hDuhamelSlot_AT_GATE), ELIMINATING the analytic approximate-identity limit hmassone from the live
+-- hDuhamel antecedent surface. hDuhamelSlot_hmassone_discharged: the EXACT hDuhamel capstone-slot
+-- identity heatOp g gi (H*L) = L + heatConv (heatOp g gi H) L at the concrete van-Vleck gate, with the
+-- hmassone binder REMOVED and derived internally from hmassone_from_gate_annulus_split (reusing the
+-- census's own hWmeas/hWDom + satisfiable geometry/gate carriers {hgCD,hgiCD,hgpos,h0Kmem,hgdet0,ha,hab,
+-- rS,hrS,hKball,hSact}). J4-977 did this move on hDConv only; the hDuhamel Core assembly was left carrying
+-- hmassone. Pure dependency-normalization composition; std-3. NOT a₁=R/6 (remains CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}).
+import QIQTH.HDuhamelLiveHmassoneDischarged
+
 -- HEdomFromHrawPreCollapse — the ABSTRACT-`g` `hEdom` discharge for the LIVE order-1 capstone's shared
 -- `hDaLimLU` census (the `hEdom` binder of HDuhamelExportRethread.truncatedDuhamelCore_AT_GATE_FULL:304-306
 -- carried by HDuhamelLiveGateWired:153, and DaLimLUConcreteDischarge.hDaLimLU_concrete:166 — feeding both
