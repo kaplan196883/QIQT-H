@@ -12524,3 +12524,56 @@ QIQTH.AxiomAudit` 0 errors (10239 jobs); throwaway chk-file `#print axioms` std-
 Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum`
 clean; no existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `a0febf74`, pushed. NOT
 `a₁ = R/6`.
+
+## J4-933 — the DOMAIN-MISMATCH bridge for obstruction (ii) of J4-929's `hCensusBound` wall: the CoV-covered `ball 0 ρ` vs the live census `∫ z` over `ℝⁿ` gap, closed at the INTERFACE level via an exponentially-suppressed Gaussian tail — commit `3f0e570f` (`CensusDomainBridge.lean`, new file)
+
+**Context.** J4-930/931/932 closed obstructions (i) [base-slot CoV] and (iii) [transported-weight
+bounded+Lipschitz] of J4-929's `hCensusBound` wall, modulo `hbaseC2`. The `STATE` handed in named the two
+remaining obstructions as **(ii)** the domain mismatch — the banked base-slot CoV
+(`base_slot_gaussian_change_variables_of_hbaseC2`) transports `∫ z in ball 0 ρ, gaussDdim τ (uic z 0)·B z`,
+but the live `hCensusBound` integrates `∫ z, deriv(fun r↦witness r 0 z)(a−s)·F s z 0` over ALL of `ℝⁿ` — and
+**`hbaseC2`** itself. This increment targets **(ii)**.
+
+**The decisive re-audit — the derivative-representation identification IS banked.** J4-217
+(`witnessTauDeriv_eq_gatedTauRepProd`) already gives, on the gate,
+`deriv(fun r↦witness r 0 z)(τ) = (∑ᵢ((uic z 0)ᵢ²/(4τ²)−1/(2τ)))·gaussDdim τ (uic z 0)·chartFieldAmp +
+gaussDdim τ (uic z 0)·Cfield`, the BASE-slot trace structure the J4-930 CoV transports and the J4-922/923
+flat-cancellation machinery consumes. So the chain to `hCensusBound` is real; obstruction (ii) is genuinely
+the `ball 0 ρ`→`ℝⁿ` domain gap, exactly the shape J4-922's `gaussian_hessian_cancel_trace_on_superset`
+addressed (superset Ω⊇ball) but in the OTHER direction (ball up to ℝⁿ) and for the census integrand.
+
+**What lands** (std-3 ×4, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `integral_le_ball_add_offBall_dominator` (★): the PURE measure-theory bridge — `Φ` integrable + `D`
+  integrable dominating `|Φ|` off `ball 0 ρ` + ball bound `|∫_ball Φ| ≤ Bball` ⟹
+  `|∫_ℝⁿ Φ| ≤ Bball + ∫_ballᶜ D` (`integral_add_compl` + triangle + `setIntegral_mono_on`).
+- `offBall_gauss_tail_mass_le` (★): `∫_ballᶜ Cenv·gaussDdim λ z ≤ Cenv·(√2)ⁿ·e^{−ρ²/(8λ)}` (`λ>0`), via
+  the `ρ ≤ ‖z‖` variant of `gaussDdim_tail_le_scaled` (J4-546) + `∫ gaussDdim(2λ) = 1`.
+- `census_full_of_ball_bound_and_gaussEnv` (★★ HEADLINE, obstruction (ii)): `Φ` integrable + off-ball
+  single-Gaussian envelope `|Φ z| ≤ Cenv·gaussDdim λ z` (`ρ ≤ ‖z‖`) + ball bound `Bball` ⟹
+  `|∫_ℝⁿ Φ| ≤ Bball + Cenv·(√2)ⁿ·e^{−ρ²/(8λ)}` — the full-`ℝⁿ` census = CoV-covered ball census plus an
+  exp-suppressed Gaussian tail (with `λ = wL·τ`, `e^{−ρ²/(8wLτ)}` is super-polynomially small in `1/τ`).
+- `census_full_of_ball_bound_and_gaussEnv_hyp_satisfiable`: non-vacuity at `Φ = gaussDdim 1`.
+
+**gpt-5.6-sol (high) go/no-go — GO as abstract bridge, NO as completed application (verbatim heeded).**
+(A) Legitimate, correctly-scoped, non-vacuous discharge of obstruction (ii) at the INTERFACE level; no
+circularity (`Integrable Φ` is independent of the census bound); the product-Gaussian envelope
+`gaussDdim(wLτ)(−z)·gaussDdim(wFs)(z)` collapses exactly to a single Gaussian (evenness + heat-kernel
+normalization) but that collapse must still be formalized. (B) **`hCensusBound` is NOT assembled modulo only
+`hbaseC2`.** The literal composition still needs residual carries NOT among {base-slot CoV, det/ratio,
+V-transport, tail}: (1) the J4-217 `hgate` carry; (2) the CoV left-inverse weight matching `uic (V w) 0 = w`
+(so the transported trace factor `∑ᵢ((uic(Vw) 0)ᵢ²…)` becomes the FLAT `∑ᵢ(wᵢ²/4τ²−1/2τ)` — Sol flags this
+exact pointwise identity as the check that must hold, else a coordinate-error term appears); (3) concrete
+`amp·F` / `Cfield·F` global bounded+Lipschitz inputs to J4-931/932; (4) IFT open-map superset
+`Wbv''(ball 0 ρ) ⊇ ball 0 r`; (5) product→single Gaussian envelope collapse for `henv`; (6) final
+`Bball + tail ≤ C_far·(u−s)^{−1/2}` uniform rate absorption; plus per-summand integrabilities, `integral_add`/
+`integral_congr` rewrites, and uniformity in `s,a`. Trace-shape check: J4-217's `∑ᵢ(wᵢ²/4τ²−1/2τ)` matches
+the flat-cancellation factor exactly — no normalization mismatch — PROVIDED the exact inverse identity holds.
+
+**Honest status.** J4-933 is a valid CONDITIONAL ball→`ℝⁿ` bridge (obstruction (ii) discharged at the
+interface). `hCensusBound` remains unproved beyond `hbaseC2`; `hCross`/`hDuhamel`/`hDConv` remain carried;
+`hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/CensusDomainBridge.lean` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10240 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no
+existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `3f0e570f`, pushed. NOT `a₁ = R/6`.
