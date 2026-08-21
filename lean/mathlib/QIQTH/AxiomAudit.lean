@@ -29640,4 +29640,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotIFTOpenSuperset.baseVaryingIFT_openSuperset
 #print axioms QIQTH.BaseSlotIFTOpenSuperset.baseVaryingIFT_imageBallSubset
 
+-- ## J4-936 (GaussianProductCollapse): the PRODUCT→SINGLE Gaussian envelope collapse — junction piece (5)
+-- flagged by gpt-5.6-sol's J4-933 re-audit as required for the literal hCensusBound assembly. J4-933's
+-- census_full_of_ball_bound_and_gaussEnv needs a SINGLE-Gaussian off-ball envelope |Φ z| ≤ Cenv·gaussDdim λ z,
+-- but the concrete census integrand (hEnv_of_witnessCrudeEnv, J4-929) is dominated by a PRODUCT of two
+-- same-variable Gaussians (Ccr·τ⁻¹·gaussDdim(wLτ)(0−z))·(CF·gaussDdim(wFs)(z)), τ=a−s. The heat-kernel
+-- semigroup identity heatKernel1D a x·heatKernel1D b x = heatKernel1D (a+b) 0·heatKernel1D (ab/(a+b)) x
+-- (exp sum = reduced-width exp: −x²/4a−x²/4b=−x²/(4·ab/(a+b)); norms combine: √(4πa)√(4πb)=√(4π(a+b))·
+-- √(4π·ab/(a+b)), both square to 16π²ab), taken over the n coords, gives gaussDdim a x·gaussDdim b x =
+-- (heatKernel1D (a+b) 0)ⁿ·gaussDdim (ab/(a+b)) x EXACTLY. With gaussDdim evenness (0−z=−z), the product
+-- bound becomes the single-Gaussian envelope Cenv·gaussDdim λ z, Cenv=A·B·(heatKernel1D(α+β)0)ⁿ≥0 (kernel>0),
+-- λ=αβ/(α+β)>0 — the exact henv hypothesis (α=wLτ,β=wFs,A=Ccr·τ⁻¹,B=CF). heatKernel1D_mul_collapse (1-D);
+-- gaussDdim_mul_collapse (★ d-dim); gaussProduct_single_gaussEnv (★★ census-shaped envelope);
+-- gaussProduct_single_gaussEnv_hyp_satisfiable (non-vacuity at genuine positive widths). std-3 ×4. No new
+-- assumption (pure Gaussian-semigroup identities). NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.GaussianProductCollapse.heatKernel1D_mul_collapse
+#print axioms QIQTH.GaussianProductCollapse.gaussDdim_mul_collapse
+#print axioms QIQTH.GaussianProductCollapse.gaussProduct_single_gaussEnv
+#print axioms QIQTH.GaussianProductCollapse.gaussProduct_single_gaussEnv_hyp_satisfiable
+
 end QIQTH.AxiomAudit

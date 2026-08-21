@@ -5274,6 +5274,18 @@ import QIQTH.BaseSlotInverseWeightMatch
 -- a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.BaseSlotIFTOpenSuperset
 
+-- GaussianProductCollapse — J4-936: the PRODUCT→SINGLE Gaussian envelope collapse, junction piece (5) of
+-- J4-933's hCensusBound re-audit. The concrete census integrand (hEnv_of_witnessCrudeEnv, J4-929) is
+-- dominated by a PRODUCT of two same-variable Gaussians (Ccr·τ⁻¹·gaussDdim(wLτ)(0−z))·(CF·gaussDdim(wFs)(z)),
+-- but J4-933's census_full_of_ball_bound_and_gaussEnv needs a SINGLE-Gaussian envelope Cenv·gaussDdim λ z.
+-- The heat-kernel semigroup identity heatKernel1D a x·heatKernel1D b x = heatKernel1D (a+b) 0·heatKernel1D
+-- (ab/(a+b)) x (exp: −x²/4a−x²/4b = −x²/(4·ab/(a+b)); norm: √(4πa)√(4πb)=√(4π(a+b))√(4π·ab/(a+b))) gives,
+-- over n coords, gaussDdim a x·gaussDdim b x = (heatKernel1D (a+b) 0)ⁿ·gaussDdim (ab/(a+b)) x EXACTLY.
+-- heatKernel1D_mul_collapse (1-D); gaussDdim_mul_collapse (★ d-dim); gaussProduct_single_gaussEnv (★★
+-- census-shaped: Cenv=A·B·(heatKernel1D(α+β)0)ⁿ≥0, λ=αβ/(α+β)>0, the exact henv shape). std-3 ×4.
+-- CONDITIONAL on nothing new (pure Gaussian identities). NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.GaussianProductCollapse
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
