@@ -5924,3 +5924,10 @@ import QIQTH.HFdRequant
 -- witness; does NOT close hCConv, does NOT bear on hDuhamel/hDConv. a₁=R/6 CONDITIONAL on the trio,
 -- UNCHANGED. std-3. NOT a₁=R/6.
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
+
+-- HbulkderivFullyClosedCurved — FULL discharge of the hbulkderiv census member
+-- (FderivBulkConcrete.fderivBulkInt_hasFDerivAt, first-order Fréchet derivative of fbulkInt) at the
+-- curved K={0} witness: all TEN per-slice carries supplied from the null-singleton support facts
+-- (bulk integrand AND kPrime vanish off {0}), boundz:=0, C:=0. Degenerate-K caveat (null-support driven).
+-- First-order only; does NOT close hCConv (=ContDiff ⊤, infinite differentiability). std-3. NOT a₁=R/6.
+import QIQTH.HbulkderivFullyClosedCurved

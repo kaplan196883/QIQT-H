@@ -30383,5 +30383,9 @@ namespace QIQTH.AxiomAudit
 -- MixedEnvelopeFullyInhabitedCurved: the FULL joint inhabitation of the fourth hCConv hypothesis at
 -- the curved K={0} witness with the width-2 domination. std-3. NOT a₁=R/6.
 #print axioms QIQTH.MixedEnvelopeFullyInhabitedCurved.mixedEnvelope_fully_inhabited_curved
+-- HbulkderivFullyClosedCurved: FULL discharge of the hbulkderiv census member (first-order Fréchet
+-- derivative of fbulkInt) at the curved K={0} witness, all ten carries null-support driven. First-order
+-- only; does NOT close hCConv (=ContDiff ⊤). std-3. NOT a₁=R/6.
+#print axioms QIQTH.HbulkderivFullyClosedCurved.hbulkderiv_fully_closed_K0
 
 end QIQTH.AxiomAudit
