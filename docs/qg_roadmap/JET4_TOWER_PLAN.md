@@ -14670,3 +14670,53 @@ centre-identity leg + `hpull` opaque-chart wall, the Gaussian dominations
 `hBoundaryLim` slot) is UNTOUCHED, and the top-level abstract-`H` capstone
 `TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual` is UNCHANGED. `a₁=R/6` remains STRICTLY
 CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-982 — `HDuhamelHQ1Discharged`: eliminate the frozen first-order interchange EQUALITY carry `hQ1` from the live `hDuhamel` slot, via J4-378 `W2Finish.w2_hQ1` (commit bd9a1762).
+
+**Target.** The `hQ1` binder of the live order-1 `hDuhamel` slot
+`HDuhamelSliverDischarged.hDuhamelSlot_sliver_discharged` (J4-981): the frozen first-order
+differentiation-under-the-integral EQUALITY, in the SHARED-`V` shape
+`∀ m i, ∀ u∈U, ∀ y∈V, pd (fun x => heatConvFrozen W F u (u−εₘ) x 0) i y
+   = ∫ s in (0)..(u−εₘ), ∫ z, witnessFieldDeriv … i (u−s) y z · F s z 0`,
+where `V` is a single top-level parameter (one fixed nbhd shared across all `m,i,u`).
+
+**The "m-uniformity gap" — misidentified.** The dispatch premise claimed the slot's shared-`V` `hQ1`
+could only be supplied by the per-`(u,i,m)` EXISTENTIAL `∃ V∈𝓝 0` provider
+`InnerDiffFamily.innerDiff_census_hQ1_of_frozenData`, which cannot yield a single uniform `V`
+(infinite intersection over `m→∞` shrinks to nothing). FINDING (code-verified + gpt-5.6-sol high
+audited): that existential provider is a DELIBERATE WEAKENING of `W2Finish.w2_hQ1` built for a
+DIFFERENT consumer (the per-`u` census `PerUCensusInstantiation`, which only needs the existential).
+The slot's own provider is `W2Finish.w2_hQ1` (J4-378, F3), whose CONCLUSION is EXACTLY the slot's
+shared-`V` `hQ1` shape and whose INPUT `hFrozenData` is on the SAME single shared `V`. `w2_hQ1` just
+fires the pointwise `pd_heatConvFrozen_interchange` engine per `(m,i,u,y)` — the `V`-quantifier stays
+on the OUTSIDE, shared; only the per-`(m,i,u,y)` `snb`/`bound` vary; the `m`-dependence lives entirely
+in the per-`m` window `uIoc 0 (u−εₘ)` and per-`m` dominator, both fine for a per-`m` equality with no
+series over `m`. There is NO infinite intersection and NO uniformity gap for THIS slot.
+
+**Landed.** `HDuhamelHQ1Discharged.hDuhamelSlot_hQ1_discharged` — the EXACT `hDuhamel` slot identity of
+the live order-1 capstone at the concrete van-Vleck gate, whose antecedent surface NO LONGER carries
+the frozen first-order interchange EQUALITY `hQ1` (nor `hmassone`, gone J4-979; nor the four bundled
+interchange census binders, gone J4-980; nor the √ε sliver amplitude carry, gone J4-981). Pure
+composition; `subst hFeq` then `have hQ1 := W2Finish.w2_hQ1 g gi hChr hK S a b U V hFrozenData` and feed
+into the J4-981 slot, every other binder verbatim. The `hQ1` equality is traded 1-for-1 for the
+seven-leg frozen diff-under-∫ provider `hFrozenData` (the raw measurability / interval-integrability /
+dominator / `HasDerivAt` inputs) from which it is formally derived.
+
+**Verify.** `lake build QIQTH.HDuhamelHQ1Discharged` 0 err (8886 jobs, first try); throwaway `ChkHQ1`
+std-3; `lake build QIQTH.AxiomAudit` 0 err (10290 jobs); std-3
+(`propext`/`Classical.choice`/`Quot.sound`; NO `sorryAx`/custom); `axiom_budget_check.sh` raw 0
+(budget 0); `git status --porcelain | grep -i vacuum` clean; no banked file edited; wired
+`QIQTH.lean`+`AxiomAudit.lean`; `git show bd9a1762 --stat` = 3 files (+342); pushed.
+
+**Honest status (gpt-5.6-sol high audited).** A genuine dependency-frontier NORMALIZATION/decomposition
+of the `hDuhamel` concrete-gate surface — the cooked interchange-equality binder `hQ1` replaced by the
+sufficient raw diff-under-∫ data `hFrozenData` from which it is formally derived (`hFrozenData ⟹ hQ1`,
+not conversely — so this is NOT a logical weakening; it relocates the proof frontier closer to
+primitive analytic obligations, same category as J4-979/980/981). NOT progress past the shared `hpull`
+wall; the remaining `hDuhamel` census content (the `RadialNormalCoordinateGauge` centre-identity leg +
+`hpull` opaque-chart wall, the Gaussian dominations, the τ⁻¹ᐟ² pairing carry `hGpow`, and the W1-free
+`hBoundaryLim` slot) is UNTOUCHED, and the top-level abstract-`H` capstone
+`TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual` is UNCHANGED. `a₁=R/6` remains STRICTLY
+CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
