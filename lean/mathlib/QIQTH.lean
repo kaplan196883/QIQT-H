@@ -5286,6 +5286,20 @@ import QIQTH.BaseSlotIFTOpenSuperset
 -- CONDITIONAL on nothing new (pure Gaussian identities). NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.GaussianProductCollapse
 
+-- CensusTauDerivGateSplit — J4: the CENSUS-SLICE ∂_τ EVERYWHERE IDENTITY with the on-gate/off-gate split
+-- baked in — junction piece (1) [the J4-217 hgate carry] of J4-933's hCensusBound re-audit. The census
+-- integrates deriv(fun r↦witness r 0 z)(a−s)·F over the base z (field point FIXED at 0). To rewrite the
+-- ∂_τ kernel into the CoV-transportable base-slot closed form (witnessTauDeriv_eq_gatedTauRepProd) one must
+-- supply hgate = (0∈S z gate membership) ∧ (on-gate HasDerivAt of chartFieldAmp). The ANALYTIC half is
+-- banked+unconditional (OnGateJets.chartFieldAmp_hasDerivAt_tau — chartFieldAmp is affine in τ); the
+-- MEMBERSHIP half is discharged by an OFF-GATE SPLIT (not forced to S=univ): off-gate the gated kernel is
+-- identically 0 (gatedKernel_apply_of_notMem), so both the deriv and the gated representative vanish —
+-- mirroring fieldHessian_fderiv_eqZero_off_jointGraph (J4-887/888). Hence censusTauDeriv_gateSplit needs NO
+-- hgate and works for ANY S — piece (1) DISCHARGED, not merely carried. censusTauDeriv_eqZero_offGate (★
+-- off-gate vanishing); censusTauDeriv_gateSplit (★★ everywhere identity). std-3 ×2. No new assumption.
+-- NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.CensusTauDerivGateSplit
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

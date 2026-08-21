@@ -29659,4 +29659,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussianProductCollapse.gaussProduct_single_gaussEnv
 #print axioms QIQTH.GaussianProductCollapse.gaussProduct_single_gaussEnv_hyp_satisfiable
 
+-- ## J4 (CensusTauDerivGateSplit): the CENSUS-SLICE ∂_τ EVERYWHERE IDENTITY with the on-gate/off-gate split
+-- — junction piece (1) [the J4-217 hgate carry] flagged by gpt-5.6-sol's J4-933 re-audit as required for the
+-- literal hCensusBound assembly. The census (hcross_of_censusIntegral_bound) integrates
+-- deriv(fun r↦vanVleckGatedWitness … r 0 z)(a−s)·F s z 0 over the base z (FIELD point FIXED at 0). Applying
+-- witnessTauDeriv_eq_gatedTauRepProd (J4-217) needs hgate at w=(τ,0,z): the GATE MEMBERSHIP 0∈S z (∀ z∈K, τ>0)
+-- AND the on-gate HasDerivAt (fun u↦chartFieldAmp … u z 0) (Cfield z 0) τ. The ANALYTIC half is BANKED and
+-- UNCONDITIONAL (OnGateJets.chartFieldAmp_hasDerivAt_tau — chartFieldAmp = radialCutoff(W)·Θ(W)^{−½}·(u₀+u₁τ)
+-- is AFFINE in τ, slope censusAmpTauDeriv). The MEMBERSHIP half is discharged by an OFF-GATE SPLIT (NOT forced
+-- to S=univ): off the joint gate (z∉K ∨ 0∉S z) the gated kernel is identically 0 (gatedKernel_apply_of_notMem),
+-- so the u-function is ≡0 and its deriv is 0 — matching the gated representative (the if is False). This mirrors
+-- the "off-gate the kernel is 0" pattern of fieldHessian_fderiv_eqZero_off_jointGraph (J4-887/888); off the gate
+-- the census integrand VANISHES, so the census reduces to the on-gate ball (the J4-930 CoV domain / J4-933 bridge).
+-- censusTauDeriv_eqZero_offGate (★ off-gate vanishing, ANY S, no gate hyp); censusTauDeriv_gateSplit (★★ the
+-- everywhere identity: on-gate the CoV closed form (∑ᵢ(Wᵢ²/4τ²−1/2τ))·Gτ(W)·A + Gτ(W)·(∂τA), off-gate 0; NO
+-- hgate carry, ANY S). std-3 ×2. No new assumption (banked chartFieldAmp_hasDerivAt_tau + off-gate split).
+-- NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusTauDerivGateSplit.censusTauDeriv_eqZero_offGate
+#print axioms QIQTH.CensusTauDerivGateSplit.censusTauDeriv_gateSplit
+
 end QIQTH.AxiomAudit
