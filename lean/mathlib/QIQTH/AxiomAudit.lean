@@ -55,6 +55,7 @@ import QIQTH.HCrossNegativeQuadrants
 import QIQTH.HCrossLargeShiftRegime
 import QIQTH.HFarFromBallrate
 import QIQTH.HFarOffBallDischarge
+import QIQTH.HFarOffBallEnvFromCensus
 
 namespace QIQTH.AxiomAudit
 
@@ -30159,5 +30160,28 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFarOffBallDischarge.far_rate_of_ball_and_gaussEnv
 #print axioms QIQTH.HFarOffBallDischarge.hfar_of_ballrate_offBallEnv_ftc
 #print axioms QIQTH.HFarOffBallDischarge.hfar_of_ballrate_offBallEnv_ftc_hyp_satisfiable
+
+-- ## J4-969 (HFarOffBallEnvFromCensus): DISCHARGES the concrete off-ball Gaussian envelope henv that J4-968
+-- CARRIED, from the banked concrete witness time-derivative envelope (witnessTimeDeriv_domination_global_anyS,
+-- J4-950) via a genuinely-new OFF-BALL τ⁻¹-ABSORPTION. The census env gives |deriv(Wit)τ|≤Ccen·τ⁻¹·gaussDdim(4Dλτ)z
+-- (∀z); henv needs a FIXED Cenv, impossible at equal widths (Ccen·(c−s)⁻¹ blows up as c−s↓0). sq_norm_le_rncRadialSq:
+-- ‖z‖²≤r²(z) (sup≤Euclidean). invTau_exp_neg_le: τ⁻¹·exp(−b/τ)≤(b·e)⁻¹ (from x·e^{−x}≤e^{−1}, Real.add_one_le_exp).
+-- invTau_gaussDdim_offBall_absorb (★★): WIDEN q↦q'; off-ball ρ≤‖z‖ ⟹ τ⁻¹·gaussDdim(qτ)z≤K·gaussDdim(q'τ)z, FIXED
+-- K=(√(q'/q))ⁿ·(dρ²e)⁻¹, d=(1/q−1/q')/4>0, via gaussDdim_width_ratio_le + invTau_exp_neg_le; ρ>0 REQUIRED.
+-- offBall_env_of_derivEnv_Fbound (★★): census env × uniform F-bound × absorption ⟹ henv shape for g c s z :=
+-- Dfun(c−s)z·Ffun s z. hfar_offBall_concrete_of_data (★★★): wires J4-950 → adapter → hfar_of_ballrate_offBallEnv_ftc
+-- (J4-968) ⟹ H_far for the concrete convolution with the off-ball envelope SUPPLIED (not carried), modulo {hFTC,
+-- hballrate, hgint, G3 F-bound, amplitude data, h+ε≤τ₀}. TEETH: absorption fires with both sides >0; adapter
+-- satisfiable with genuine nonzero data (Dfun=τ⁻¹·gaussDdim, Ffun=1). gpt-5.6-sol high 2026-08-22: object match
+-- NOT defeq (τ⁻¹+F-factor genuine gaps), absorption sound, ρ>0 required, closes ONLY envelope premise NOT H_far
+-- outright. std-3 ×8. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
+#print axioms QIQTH.HFarOffBallEnvFromCensus.norm_le_rncRadial
+#print axioms QIQTH.HFarOffBallEnvFromCensus.sq_norm_le_rncRadialSq
+#print axioms QIQTH.HFarOffBallEnvFromCensus.invTau_exp_neg_le
+#print axioms QIQTH.HFarOffBallEnvFromCensus.invTau_gaussDdim_offBall_absorb
+#print axioms QIQTH.HFarOffBallEnvFromCensus.offBall_env_of_derivEnv_Fbound
+#print axioms QIQTH.HFarOffBallEnvFromCensus.hfar_offBall_concrete_of_data
+#print axioms QIQTH.HFarOffBallEnvFromCensus.invTau_gaussDdim_offBall_absorb_teeth
+#print axioms QIQTH.HFarOffBallEnvFromCensus.offBall_env_of_derivEnv_Fbound_satisfiable
 
 end QIQTH.AxiomAudit

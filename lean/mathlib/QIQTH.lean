@@ -5222,6 +5222,19 @@ import QIQTH.HFarFromBallrate
 -- left. Does NOT prove the concrete-kernel off-ball envelope (hAcrude/leviSeries carry) nor the FTC bridge
 -- (hDuhamel/hDConv). Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
 import QIQTH.HFarOffBallDischarge
+-- HFarOffBallEnvFromCensus — J4-969: DISCHARGES the concrete off-ball Gaussian envelope henv that J4-968 CARRIED,
+-- from the banked concrete witness time-derivative envelope (witnessTimeDeriv_domination_global_anyS, J4-950) via
+-- a genuinely-new OFF-BALL τ⁻¹-ABSORPTION. The census env gives |deriv(Wit)τ|≤Ccen·τ⁻¹·gaussDdim(4Dλτ)z (∀z);
+-- henv needs a FIXED Cenv — impossible at equal widths (Ccen·(c−s)⁻¹ blows up). invTau_gaussDdim_offBall_absorb
+-- (★★): WIDEN q↦q'; off-ball ρ≤‖z‖ gives τ⁻¹·gaussDdim(qτ)z≤K·gaussDdim(q'τ)z with FIXED K=(√(q'/q))ⁿ·(dρ²e)⁻¹,
+-- d=(1/q−1/q')/4>0, via width-ratio gaussDdim_width_ratio_le + scalar τ⁻¹·e^{−b/τ}≤(be)⁻¹ (Real.add_one_le_exp);
+-- ρ>0 GENUINELY required. offBall_env_of_derivEnv_Fbound (★★): census env × F-bound × absorption ⟹ henv shape.
+-- hfar_offBall_concrete_of_data (★★★): wires J4-950 → adapter → hfar_of_ballrate_offBallEnv_ftc (J4-968) ⟹ H_far
+-- for the concrete convolution with the off-ball envelope SUPPLIED (not carried), modulo {hFTC, hballrate, hgint,
+-- G3 F-bound, amplitude data, h+ε≤τ₀}. gpt-5.6-sol high 2026-08-22: object match NOT defeq (τ⁻¹+F-factor genuine
+-- gaps); absorption sound, ρ>0 required; closes ONLY the envelope premise, NOT H_far outright. std-3 ×8.
+-- Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HFarOffBallEnvFromCensus
 -- HCrossDerivEngineWired — J4-929: WIRE the banked differentiation-under-integral engine into J4-928's
 -- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
 -- gpt-5.6-sol (high) go/no-go: NO-GO for full closure (the residual bound = the chart CoV + J4-924 wall,
