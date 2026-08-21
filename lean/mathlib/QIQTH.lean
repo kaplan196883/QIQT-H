@@ -5360,3 +5360,17 @@ import QIQTH.CensusFarRateAbsorb
 -- transport regularity now depends ONLY on the abstract F-factor F0 (obligation (a), {hDuhamel,hDConv,
 -- hCConv}-family, NOT touched). NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
 import QIQTH.CensusHbaseC2Discharge
+
+-- CensusLeviFactorDischarge — J4-942: the F-FACTOR half of junction piece (3) of the hCensusBound (hCross)
+-- re-audit — the SOLE remaining piece-(3) obligation (a) flagged since J4-939/940/941. Supplies the abstract
+-- F0 bundle of census_ampF_transported_ratio_regularity_unconditional (J4-941) for F0 z := leviSeries E s z 0
+-- from BANKED LeviLipschitz results: abs_F_le_diagonal (GLOBAL boundedness from width-2 domination hFdom) +
+-- resolvent_lipschitz_pointwise (GLOBAL Lipschitz from Volterra hVol + hE1 + hIz + hSlice). levi_Ffactor_
+-- ball_regularity (★★ the F-factor bundle, M_F=C_L·gaussDdim(2s)0, L_F=L_E+K·2√s, on any ball); census_ampF_
+-- leviF_transported_ratio_regularity / census_CfieldF_leviF_transported_ratio_regularity (★★ concrete q₁/q₂
+-- with F=leviSeries E, composing the bundle with J4-941); levi_Ffactor_slot_satisfiable (consistency witness,
+-- zero resolvent E=F=0). std-3 ×4. The F-factor obligation (a) is REDUCED to the Levi analytic carries hFdom/
+-- hE1/hIz/hSlice (INTENDED = {hDuhamel,hDConv,hCConv} family; identification is campaign bookkeeping, NOT a
+-- Lean-proven equality). NO literal hCensusBound theorem assembled; hCross NOT formally closed. NOT a₁=R/6;
+-- a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.CensusLeviFactorDischarge
