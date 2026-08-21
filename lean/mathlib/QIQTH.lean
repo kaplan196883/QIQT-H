@@ -5253,6 +5253,17 @@ import QIQTH.BaseSlotInverseChartLipschitz
 -- (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.CensusDomainBridge
 
+-- BaseSlotInverseWeightMatch — J4-934: the CoV LEFT-INVERSE WEIGHT-MATCHING identity uic(V w) 0 = w
+-- (EXACTLY), junction piece (2) of J4-933's hCensusBound re-audit. Consumes baseVaryingIFTPackage (J4-272)
+-- verbatim; from its banked M3 (V (Wbv z) = z) the identity follows on the CoV image w ∈ Wbv''(ball 0 ρ):
+-- uic (V w) 0 = Wbv (V (Wbv z)) = Wbv z = w. EXACT (V is the genuine topological inverse Φ.symm, not a
+-- Taylor inverse) — so the transported base trace ∑ᵢ((uic(Vw)0)ᵢ²/4τ²−1/2τ) collapses to the FLAT
+-- ∑ᵢ(wᵢ²/4τ²−1/2τ) with NO coordinate-error residual. baseVaryingIFT_weightMatch (★★, full M1–M4 bundle +
+-- identity); baseVaryingIFT_rightInvOn (★, Set.RightInvOn form). std-3 ×2. gpt-5.6-sol high VERIFIED exact
+-- (not first-order); the Sol coordinate-error worry dissolves. CONDITIONAL only on hbaseC2 (inherited from
+-- J4-272, no new assumption). NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.BaseSlotInverseWeightMatch
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

@@ -29610,4 +29610,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusDomainBridge.census_full_of_ball_bound_and_gaussEnv
 #print axioms QIQTH.CensusDomainBridge.census_full_of_ball_bound_and_gaussEnv_hyp_satisfiable
 
+-- ## J4-934 (BaseSlotInverseWeightMatch): the CoV LEFT-INVERSE WEIGHT-MATCHING identity uic(V w) 0 = w
+-- (EXACTLY) — junction piece (2) flagged by gpt-5.6-sol's J4-933 re-audit as required beyond {base-slot CoV,
+-- det/ratio, V-transport, tail} for the literal hCensusBound assembly. Consumes baseVaryingIFTPackage (J4-272)
+-- verbatim; from its banked M3 (V (Wbv z) = z, Wbv z = uic z 0) the identity follows on the CoV image
+-- w ∈ Wbv''(ball 0 ρ): rintro w ⟨z,hz,rfl⟩; rw[hM3 z hz]. EXACT, NOT first-order — V is the genuine
+-- topological local inverse Φ.symm (from ContDiffAt.toOpenPartialHomeomorph), not an approximate/linearized
+-- inverse — so the transported base-slot trace factor ∑ᵢ((uic(Vw)0)ᵢ²/4τ²−1/2τ) collapses EXACTLY to the flat
+-- ∑ᵢ(wᵢ²/4τ²−1/2τ), no coordinate-error term. baseVaryingIFT_weightMatch (★★, full M1–M4 bundle + identity);
+-- baseVaryingIFT_rightInvOn (★, Set.RightInvOn form). std-3 ×2. gpt-5.6-sol high VERIFIED: exact (not first-
+-- order); no subtlety since the census w always lies in Wbv''(ball 0 ρ) = the CoV image; the earlier Sol
+-- coordinate-error worry dissolves because V = Φ.symm is the exact inverse. Non-vacuous: image set ∈ 𝓝 0
+-- (banked himg), so the ∀ domain is inhabited. CONDITIONAL only on hbaseC2 (inherited J4-272, NO new
+-- assumption). NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.BaseSlotInverseWeightMatch.baseVaryingIFT_weightMatch
+#print axioms QIQTH.BaseSlotInverseWeightMatch.baseVaryingIFT_rightInvOn
+
 end QIQTH.AxiomAudit
