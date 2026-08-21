@@ -29515,4 +29515,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatResidualBound.hEnv_of_witnessCrudeEnv
 #print axioms QIQTH.HeatResidualBound.hcross_of_censusIntegral_bound
 
+-- ## J4-930 (BaseSlotChangeVariables): the BASE-slot Gaussian change-of-variables, discharging
+-- obstruction (i) of J4-929's hCensusBound wall — the base-slot (uniformInverseChart z 0) vs banked
+-- field-slot (uniformInverseChart 0 z) CoV mismatch. NO clean literal symmetry exists: the base↔field
+-- swap is U z 0 = -T₀(U 0 z) (geodesic reversal + terminal velocity, GeodesicReversalRoute, NOT -U 0 z).
+-- The honest route is the base-varying IFT already banked: baseVaryingIFTPackage (J4-272) supplies the
+-- exact M1–M4 CoV bundle for Wbv = fun z => uniformInverseChart g gi hC hK z 0, CONDITIONAL on the single
+-- honest input hbaseC2 : ContDiffAt ℝ 2 Wbv 0 (centre-derivative invertibility fderiv Wbv 0 = -id is
+-- UNCONDITIONAL from the banked displacement bound). Feeding that bundle into the abstract
+-- ChartGaussianChangeVar.chart_gaussian_change_variables yields the base-slot CoV — a DIRECT MIRROR of
+-- J4-270's field-slot chart_gaussian_change_variables_concrete. base_slot_gaussian_change_variables_of_
+-- hbaseC2 (★★, conditional on hbaseC2); base_slot_gaussian_change_variables_of_terminalVel (★, reduced to
+-- the more fundamental residual hT0 via GeodesicReversalRoute.hbaseC2_of_terminalVel_contDiffAt). std-3 ×2.
+-- Discharges obstruction (i) ONLY, modulo the honest residual hbaseC2/hT0; obstructions (ii) ℝⁿ-vs-ball
+-- tail + (iii) concrete transformed weights bounded+center-Lipschitz REMAIN, so hCensusBound/hCross NOT
+-- closed. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.BaseSlotChangeVariables.base_slot_gaussian_change_variables_of_hbaseC2
+#print axioms QIQTH.BaseSlotChangeVariables.base_slot_gaussian_change_variables_of_terminalVel
+
 end QIQTH.AxiomAudit

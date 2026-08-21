@@ -5193,6 +5193,18 @@ import QIQTH.HCrossFarDerivBridge
 -- {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossDerivEngineWired
 
+-- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
+-- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
+-- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT
+-- baseVaryingIFTPackage (J4-272), whose M1–M4 bundle (centre-derivative invertibility fderiv Wbv 0 = -id
+-- UNCONDITIONAL from the displacement bound) feeds the abstract chart_gaussian_change_variables — a direct
+-- mirror of J4-270's field-slot chart_gaussian_change_variables_concrete. base_slot_gaussian_change_
+-- variables_of_hbaseC2 (★★, conditional on hbaseC2) + base_slot_gaussian_change_variables_of_terminalVel
+-- (★, reduced to hT0 via GeodesicReversalRoute). Discharges obstruction (i) ONLY, modulo the honest
+-- residual hbaseC2/hT0; obstructions (ii) ℝⁿ-vs-ball tail + (iii) concrete weight regularity REMAIN, so
+-- hCross NOT closed. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.BaseSlotChangeVariables
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
