@@ -14302,3 +14302,45 @@ closed; the substantive frontier remains the chart-CoV/census inequality togethe
 `QIQTH.lean`+`AxiomAudit.lean`; commit `705ec4a1` (3 files, +268), pushed. Discharges NONE of
 `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-973 — HFmeasGFromFieldSlice: REDUCE the F-slice product-measurability carrier `hFmeasG` of J4-970/971/972's FTC-in-`c` bridge from the entangled `witness·F` product to a PURE F-side slice measurability, peeling the witness factor onto banked witness-side infra (commit `6ca2cf9c`)
+
+**File** `QIQTH/HFmeasGFromFieldSlice.lean` (new; NO existing banked file edited).
+
+**What.** After J4-972 the FTC-in-`c` bridge's three carriers `{hFmeasG, hEnv, hRint}` had reduced to
+`{hFmeasG, hEnv}`. The remaining `hFmeasG : ∀ s u', AEStronglyMeasurable (fun z ↦ vanVleckGatedWitness …
+(u'−s) 0 z · F s z 0) volume` is a PRODUCT measurability entangling the witness factor and the free field
+`F`. This file REDUCES it to the pure F-side slice measurability `hFslice : ∀ s, AEStronglyMeasurable
+(fun z ↦ F s z 0) volume` by peeling the witness factor onto the banked witness-side measurability infra.
+
+**Route.** `AEStronglyMeasurable(W·F) = AEStronglyMeasurable(W)·AEStronglyMeasurable(F)` (`.mul`). The
+witness slice `z ↦ vanVleckGatedWitness g gi hC hK S cutA cutB (u'−s) 0 z` is `AEStronglyMeasurable` by the
+BANKED `vanVleckGatedWitness_slice_aestronglyMeasurable` (WitnessMeasDeriv) from the witness-side carries
+`{hKm (MeasurableSet K), hSm0 (MeasurableSet {z | 0 ∈ S z}), hIn (order-1 global-cutoff parametrix slice
+z-ae-measurable at every τ, field pt 0)}` — the gate-indicator measurability lever, already established in
+the tower. The field slice `z ↦ F s z 0` is the honest F-side carry `hFslice`.
+
+**Theorems.** `aesm_mul_of_slices` (★): the abstract product splitter over any measure space `(α, ν)`
+(pure `AEStronglyMeasurable.mul`). `hFmeasG_of_field_slice` (★★★): the concrete reduction — `hFmeasG` from
+`{hKm, hSm0, hIn, hFslice}`. So `hFmeasG` (product) reduces → witness-side `{hKm,hSm0,hIn}` (banked ambient
+measurability infra) + pure F-side `hFslice`.
+
+**gpt-5.6-sol (high) adversarial audit (after build).** Genuine modular carrier reduction, NOT bundle-
+shuffling. `hFslice` is genuinely irreducible for unconstrained `F` (a non-measurable `F` masked on the
+witness zero set is the obstruction — `witness·F` measurable does NOT imply `F` measurable), so `hFmeasG`
+CANNOT be fully discharged, only reduced. NON-REDUNDANT: `hFmeasG` ranges over ALL `u'` while `hEnv`'s
+base-integrability only covers the window `a∈Icc u (u+h)`, so `hbase` does not subsume `hFslice`. Active
+H_far carrier set after J4-973 (treating `{hKm,hSm0,hIn}` as banked ambient infra): **`{hEnv, hFslice,
+hrate}`** — with `hRint` and the witness half of `hFmeasG` now gone. `a₁=R/6` unchanged.
+
+**TEETH.** `aesm_mul_of_slices_hyp_satisfiable` — the splitter's two slice-measurability hypotheses are
+jointly satisfiable at a Dirac family (`ν = Measure.dirac ()`, `W = Fp = fun _ ↦ 1`) with the product
+genuinely ACTIVE (`(W·Fp)() = 1 ≠ 0`), not a `0=0` collapse.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10282 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound; no sorryAx, no custom) — throwaway `lake env lean` confirmed;
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `6ca2cf9c` (3 files, +164), pushed. No O(√ε) rate (carrier
+reduction) ⟹ sympy-rate gate N/A. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a
+top-level τ-carry. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` plus the chart-CoV wall
+inside `hrate`, UNCHANGED. NOT `a₁=R/6`.
