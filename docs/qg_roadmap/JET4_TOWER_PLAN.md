@@ -14774,3 +14774,39 @@ leaving only elementary carries. This does NOT close `hbint` unconditionally (th
 `BL`/compact/null carries remain), does NOT touch `hzmass` or the other `hCConv` legs, and does NOT bear
 on `hDuhamel`/`hDConv`. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED.
 NOT `a₁=R/6`.
+
+---
+
+## J4-984 — `HbintFullyClosedCurved`: FULL discharge of the interior tube-cover `hbint` integrability leg at the curved witness — commit `39bb4959`, ledger `<this>`
+
+**What.** J4-983 `HbintRequant.hbint_bLtR0_closed_curved` (κ<0, 1≤n, `K={0}`) already discharges the
+`b < r₀` opacity obstruction AND the null-frontier carry (`K={0}` ⟹ `volume (frontier K)=0`), leaving
+its implication conclusion gated on exactly TWO elementary carries over the singleton `K={0}`:
+`hBLK` = `∀ᵐ s, s∈uIoc → ContinuousOn (BL s) {0}` (BL-continuity) and
+`hbnd` = `∀ᵐ s, s∈uIoc → ∃ C, ∀ z∈{0}, ‖BL s z·(⨆…)‖ ≤ C` (compact-`K` sup-bound). Both are
+UNCONDITIONALLY TRUE on a singleton — continuity on `{0}` is automatic (`continuousOn_singleton`); a
+function is bounded on `{0}` by its value there (`singleton_exists_bound`, `C := ‖BL s 0·(⨆…)‖`). This
+brick discharges both, turning the gated conclusion into the FULLY UNCONDITIONAL integrability of the
+interior tube-cover leg at concrete gate parameters `0 < a < b < c`.
+
+**The result (new file, no banked file edited).**
+- `singleton_exists_bound` — a real-valued function is bounded on a singleton by its value there.
+- **CAP** `hbint_fully_closed_curved` — off `hbint_bLtR0_closed_curved`: `refine hcond ?hBLK ?hbnd`;
+  `hBLK` via `ae_of_all volume (fun s _ => continuousOn_singleton (BL s) 0)`; `hbnd` via
+  `ae_of_all volume (fun s _ => singleton_exists_bound _ 0)` (the sup-bound function unifies from the
+  goal, so no verbose `ciSup` term is retyped). NON-VACUOUS: inherits the satisfiable curved bundle of
+  `hbint_bLtR0_closed_curved`; the two discharged carries are theorems of singleton topology, adding no
+  hypotheses.
+
+**Verify.** `lake build QIQTH.HbintFullyClosedCurved` 0 err (8931 jobs); throwaway `ChkHbintFull` std-3
+(no `sorryAx`); `lake build QIQTH.AxiomAudit` 0 err (10292 jobs); std-3
+(`propext`/`Classical.choice`/`Quot.sound`) ×2; `axiom_budget_check.sh` raw 0 (budget 0);
+`git status --porcelain | grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean`+
+`AxiomAudit.lean`; `git show 39bb4959 --stat` = 3 files (+113); pushed.
+
+**Honest status.** FULLY CLOSES the J4-907 interior tube-cover `hbint` integrability route at the
+genuinely-curved witness — every residual carry (`b<r₀`, null-frontier, `BL`-continuity, compact-`K`
+sup-bound) is now discharged, so the leg is UNCONDITIONAL integrability at concrete gate params. This
+closes ONE `hCConv` sub-leg (the tube-cover `hbint` route); it does NOT touch `hzmass` or the other
+`hCConv` legs, and does NOT bear on `hDuhamel`/`hDConv`. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
