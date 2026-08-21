@@ -25,6 +25,7 @@ import QIQTH.HbintMeasurabilityNullFrontier
 import QIQTH.HbintInteriorContinuityRoute
 import QIQTH.HDuhamelBoundaryModulusUniform
 import QIQTH.HbintInteriorTubeCoverRoute
+import QIQTH.HbintRequant
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
@@ -30341,5 +30342,18 @@ namespace QIQTH.AxiomAudit
 -- that proves it; hQ1 derived internally from J4-378 W2Finish.w2_hQ1 in the slot's exact shared-V
 -- shape (no m-uniformity gap). Discharges NONE of {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HDuhamelHQ1Discharged.hDuhamelSlot_hQ1_discharged
+
+-- HbintRequant — the b<r₀ OPACITY discharge: r₀ (tube/Neumann) AND the chart-germ c-window ceiling δ₀
+-- of the J4-907 interior tube-cover hbint route, REQUANTIFIED before (a,b) (bottom-up replay R1..R6),
+-- then CLOSED at the genuinely-curved witness (K={0}) via the prescribed-ceiling gate producer at
+-- ε:=min r₀ (min δ₀ ρ). Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HbintRequant.witness_zero_offCore_requant
+#print axioms QIQTH.HbintRequant.fieldHessian_zero_offCore_requant
+#print axioms QIQTH.HbintRequant.fieldHessian_fderiv_eqZero_off_jointGraph_requant
+#print axioms QIQTH.HbintRequant.fieldHessian_vanish_off_concreteKx_requant
+#print axioms QIQTH.HbintRequant.hBFint_concrete_of_jointInteriorContinuous_requant
+#print axioms QIQTH.HbintRequant.hbint_concrete_via_interior_route_requant
+#print axioms QIQTH.HbintRequant.hbint_interior_via_tube_cover_requant
+#print axioms QIQTH.HbintRequant.hbint_bLtR0_closed_curved
 
 end QIQTH.AxiomAudit

@@ -5878,3 +5878,14 @@ import QIQTH.HDuhamelSliverDischarged
 -- live slot identity. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three,
 -- UNCHANGED. std-3. NOT a₁=R/6.
 import QIQTH.HDuhamelHQ1Discharged
+-- HbintRequant — the b<r₀ OPACITY discharge: the J4-907 tube/Neumann radius r₀ AND the chart-germ
+-- c-window ceiling δ₀ of the interior tube-cover hbint route, REQUANTIFIED BEFORE the cutoff params
+-- (a,b) (every supplier radius audited (a,b)-free; the whole c-window bottoms out at the single
+-- (a,b)-free chart germ of uniformInverseChart_huniformChart). Bottom-up replay R1..R6 ending at
+-- hbint_interior_via_tube_cover_requant (r₀,δ₀ both before a,b). CAP hbint_bLtR0_closed_curved: at the
+-- genuinely-curved witness (κ<0, K={0}) the prescribed-ceiling producer
+-- gatedWitnessN1_hEboundW_le_lin_CONST_prescribed at ε:=min r₀ (min δ₀ ρ) yields 0<a<b<c<ε ⟹ b<r₀ ∧
+-- c<δ₀ ∧ b<ρ, CLOSING hbint's b<r₀ obstruction (residual = elementary BL/compact/null carries only).
+-- Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three, UNCHANGED. std-3 ×8.
+-- NOT a₁=R/6.
+import QIQTH.HbintRequant
