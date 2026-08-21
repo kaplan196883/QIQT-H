@@ -14537,3 +14537,97 @@ self-consistent in the flat model. It discharges NONE of `{hDuhamel, hDConv, hCC
 J3 or the Gauss lemma. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED;
 the center-identity implication lemmas additionally retain their `hpull` hypothesis, which this audit shows
 must first be REPAIRED (`z → radial-vector`) before any geometry could discharge it. NOT `a₁=R/6`.
+
+---
+
+## J4-979 — HDuhamelLiveHmassoneDischarged: the `hDuhamel` analogue of J4-977 — compose the banked J4-896 `hmassone` discharge INTO the live `hDuhamel` slot, ELIMINATING the analytic approximate-identity limit `hmassone` from the live `hDuhamel` antecedent surface. Commit `b65fadb1`.
+
+**Context.** J4-976 (Sol-audited) established the residual genuine content of the whole trio
+`{hDuhamel,hDConv,hCConv}` converges on the SINGLE opaque-chart `hpull` wall (the geodesic-pullback
+bridge inside the `RadialNormalCoordinateGauge` centre-identity leg). Sol's J4-976 Q2 note: `hDuhamel`
+is "structurally broader," but the concrete-gate lineage
+(`HDuhamelExportRethread.hDuhamelSlot_AT_GATE` ← `truncatedDuhamelCore_AT_GATE_FULL`) already reduces
+`hDuhamel` W1-free to ~90 satisfiable-data binders + the single W1-free `hBoundaryLim` slot. One of
+those binders is the OPAQUE analytic approximate-identity limit
+`hmassone : Tendsto (fun m => ∫ z, H (epsSeq m) 0 z) atTop (𝓝 1)`. J4-977 composed the banked J4-896
+`hmassone` discharge into the live `hDConv` surface — but LEFT the `hDuhamel` Core assembly carrying
+`hmassone`. This increment performs the exact `hDuhamel` analogue (a NEW surface J4-977 never touched).
+
+**`hDuhamelSlot_hmassone_discharged` (★★★).** A new standalone file `QIQTH/HDuhamelLiveHmassoneDischarged.lean`
+restating `truncatedDuhamelCore_AT_GATE_FULL` with the `hmassone` binder REMOVED and DERIVED internally
+from `HmassoneFromGateAnnulusSplit.hmassone_from_gate_annulus_split` (J4-896), reusing the census's OWN
+`hWmeas` (= `hWslice`) / `hWDom` (= `hDom`) + the 11 satisfiable, capstone-geometry-supplied carriers
+`{hgCD,hgiCD,hgpos,h0Kmem,hgdet0,ha,hab,rS,hrS,hKball,hSact}`; the resulting Core is bridged through
+`hDuhamelSlot_AT_GATE` (`TruncatedDuhamelData.hDuhamel_of_truncatedData`) to the EXACT `hDuhamel`
+capstone-slot identity at the concrete van-Vleck gate:
+`heatOp g gi (H*L) t 0 0 = L t 0 0 + heatConv (heatOp g gi H) L t 0 0`
+(`L := leviSeries (heatOp g gi H)`, `H := vanVleckGatedWitness …`). Net: an opaque mass-normalization /
+boundary-trace analytic LIMIT is traded for elementary satisfiable geometry + gate-activation inputs —
+pure dependency normalization; no file imported `HmassoneFromGateAnnulusSplit` into the `hDuhamel` Core
+assembly before.
+
+**gpt-5.6-sol high audit (2026-08-22).** Q1: GENUINE, non-vacuous, non-alias increment — specializes
+the INDEPENDENT `hDuhamel` gate assembly (not the `hDConv` lineage of J4-977); the exported antecedent
+set strictly shrinks (`hmassone` gone, no replacement assumption added, proof materially supplied by
+J4-896 from carriers already in the census) = real specialization. Q2: on the supplied census there is
+NO further independent `hDuhamel`-specific analytic obstruction to attack — `hDuhamel` is effectively
+"done modulo the shared `hpull`/RNC-centre wall + routine producer discharge"; the only legitimate next
+`hDuhamel` increment is to build/compose concrete producers for the remaining satisfiable data-census
+binders (`MemLapFull`, sliver `D0/D1/hbnd`, `MemAdjLo/Hi`, …), progressively removing them from the
+interface — merely restating this theorem under another name would be interface churn. Q3: `a₁=R/6`
+STAYS strictly conditional on all three literals `{hDuhamel,hDConv,hCConv}`; NO-GO on any claim of
+unconditional `a₁=R/6`, of fewer analytic hypotheses on the live capstone, of a globally-discharged
+`hDuhamel` for arbitrary abstract `H`, or of "trio reduced." Accurate framing: one opaque analytic
+binder genuinely eliminated from the concrete-gate `hDuhamel` provider; the top-level theorem unchanged
+and conditional.
+
+**Verification.** `lake build QIQTH.HDuhamelLiveHmassoneDischarged` 0 err (built first try, 8857 jobs);
+`lake build QIQTH.AxiomAudit` 0 err (10287 jobs); `#print axioms hDuhamelSlot_hmassone_discharged` std-3
+(propext, Classical.choice, Quot.sound; NO sorryAx, NO custom); `axiom_budget_check.sh` raw count 0
+(budget 0), no regressions; vacuum-grep clean; no banked file edited; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show b65fadb1 --stat` = 3 files (+272); pushed.
+
+**Honest status.** Pure dependency normalization of the `hDuhamel` concrete-gate surface — the `hDuhamel`
+analogue of J4-977's `hDConv` normalization. NOT progress past the shared `hpull` wall; the remaining
+`hDuhamel` census content (the `RadialNormalCoordinateGauge` centre-identity leg + `hpull` opaque-chart
+wall, Gaussian dominations, interchange bundles, sliver carries, the W1-free `hBoundaryLim` slot) is
+UNTOUCHED. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-980 — `HDuhamelDataCensusDischarged`: eliminate the four bundled interchange census binders from the live `hDuhamel` slot (commit d709b3a0)
+
+**What.** Compose the banked JOINT interchange-bundle producer
+`InterchangeBundlesJointFromRoots.interchange_bundles_joint` (J4-964) INTO the live order-1
+`hDuhamel` slot `HDuhamelLiveHmassoneDischarged.hDuhamelSlot_hmassone_discharged` (J4-979),
+ELIMINATING the four OPAQUE bundled interchange census binders
+`hLapFull : MemLapFull`, `hII_lo : MemAdjLo`, `hII_hi : MemAdjHi`, `hEcomb : MemECombine`
+from the `hDuhamel` antecedent surface, in favour of the elementary satisfiable analytic ROOTS
+from which J4-964 derives them (dominations, slice-measurability, frozen-side `hInter`, the √ε sliver,
+pd∘pd convergence `hPd2conv`, the moment-pairing `MemAdjHi` inputs, and the `MemECombine`
+representation/integrability sextet). The `hDuhamel`-slot analogue of J4-964's joint consolidation,
+now actually WIRED into the live slot identity — exactly the "compose concrete producers into the live
+slot" step Sol flagged at cp851 as the next legit `hDuhamel` increment.
+
+**Composition (verified by genuine defeq, not shape-similarity).** J4-964's four census outputs are at
+the concrete `F := leviSeries (heatOp g gi (vanVleckGatedWitness …))`; J4-979's four census binders are
+abstract-`F` + `hFeq : F = leviSeries …`. After `subst hFeq` the two match EXACTLY (verified by the file
+compiling first try). The joint's Levi-source domination `hFdom`/`hFzero` is instantiated to the slot's
+OWN `(2, C_L)` Levi domination at fibre `y = 0` (so NO new domination constant is introduced), `hUpos`
+is derived from the slot's window floor `hUfloor`, and the √ε sliver `{D0,D1,hD0,hD1,hbnd}` is a SINGLE
+carry feeding BOTH the joint (to build `MemLapFull`) and the slot (its own sliver carrier). J4-898/964's
+already-banked discharges apply DIRECTLY to `hDuhamel`'s chain — confirming the J4-909 near-identical
+census finding (hDuhamel needs NO separate instantiation distinct from hDConv's).
+
+**Verification.** `lake build QIQTH.HDuhamelDataCensusDischarged` 0 err (built first try, 8881 jobs);
+`lake build QIQTH.AxiomAudit` 0 err (10288 jobs); `#print axioms hDuhamelSlot_datacensus_discharged`
+std-3 (propext, Classical.choice, Quot.sound; NO sorryAx, NO custom); `axiom_budget_check.sh` raw count 0
+(budget 0), no regressions; vacuum-grep clean; no banked file edited; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show d709b3a0 --stat` = 3 files (+331); pushed.
+
+**Honest status.** Pure dependency normalization of the `hDuhamel` concrete-gate surface — four opaque
+bundled interchange census binders traded for elementary satisfiable analytic roots. NOT progress past
+the shared `hpull` wall; the remaining `hDuhamel` census content (the `RadialNormalCoordinateGauge`
+centre-identity leg + `hpull` opaque-chart wall, Gaussian dominations, the W1-free `hBoundaryLim` slot)
+is UNTOUCHED, and the top-level abstract-`H` capstone `TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual`
+is UNCHANGED. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
