@@ -14254,3 +14254,51 @@ together with `hDuhamel`/`hDConv`/`hCConv`". (4) `a₁=R/6` MUST remain conditio
 `QIQTH.lean`+`AxiomAudit.lean`; commit `be10d454` (3 files, +272), pushed. NO O(√ε) rate (carrier
 reduction) ⟹ sympy-rate gate N/A. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a
 top-level τ-carry. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-972 — HRintFromEngine: DISCHARGE the c-integrability carrier `hRint` of J4-970/971's FTC-in-`c` bridge from the SAME window engine bundle `hEnv`, via `measurable_deriv` + compactness domination (commit `705ec4a1`)
+
+**What.** Discharges `hRint` — the third and last of the three FTC-bridge carriers `{hFmeasG, hEnv, hRint}`
+that J4-970's `censusFTC_bridge` / `hfar_concrete_of_engine` and J4-971's `hEnv_window_of_amplitudeAndFdom`
+consume — from the SAME window engine bundle `hEnv` (+ global slice measurability `hFmeasG`). This closes
+the exact `hRint_of_hEnv` target flagged at J4-971 ("probably derivable from the full window `hEnv` via
+`measurable_deriv` + a compactness/away-from-zero uniform bound"). New file `QIQTH/HRintFromEngine.lean`,
+no banked file edited. gpt-5.6-sol (high) sanity-checked the measurability route before construction.
+
+**Route.** For fixed far-window `s`, the integrated rate `R c := ∫ z, ∂_τ(witness)(c−s)·F s z 0` equals
+`deriv Φ c` EXACTLY (pointwise, no null-set gap) at every `c ∈ Icc u (u+h)` via the engine
+`censusDeriv_hasDerivAt` (J4-929) — `HasDerivAt` at every point ⟹ `.deriv` gives exact equality. Hence:
+(1) MEASURABILITY — `R` agrees with `deriv Φ` on the interval, so `stronglyMeasurable_deriv Φ` gives
+`AEStronglyMeasurable R (volume.restrict (Ι u (u+h)))` via `.congr` on `Ι u (u+h) = Ioc u (u+h) ⊆ Icc`;
+(2) UNIFORM BOUND — the local `hEnv` dominators (one integrable `Dz` per point of the compact window
+`Icc u (u+h)`) are patched by `IsCompact.elim_nhds_subcover` into a single integrable
+`Dstar := ∑_{c₀∈t} |D c₀|` (via `integrable_finsetSum` + `.abs`, `Filter.eventually_all_finset` for the
+finite a.e. conjunction), whence `‖R c‖ ≤ ∫ Dstar =: B` for every `c` in the window
+(`norm_integral_le_of_norm_le`); (3) FINISH — bounded + measurable on a bounded interval ⟹
+`IntervalIntegrable` (`IntervalIntegrable.mono_fun'` against `intervalIntegrable_const`).
+
+**Theorems.** `intervalIntegrable_paramDeriv_of_localDom` (★★): the abstract measurability+compactness
+route over any measure space `(α, μ)` — inputs `hderiv` (pointwise `HasDerivAt Φ (∫ z, fp c z) c` on the
+window) and `hloc` (local integrable domination of the integrand). `hRint_of_hEnv` (★★★): the concrete
+`hRint` for the census convolution from `hEnv` + `hFmeasG` (`hderiv` from `censusDeriv_hasDerivAt`, `hloc`
+from the engine domination clause of `hEnv`). So `hRint` is NO LONGER a free carrier: the three FTC-bridge
+carriers reduce `{hFmeasG, hEnv, hRint} → {hFmeasG, hEnv}`.
+
+**TEETH.** `intervalIntegrable_paramDeriv_of_localDom_hyp_satisfiable` — the abstract lemma's `hderiv`/`hloc`
+are jointly satisfiable at a GENUINELY non-affine Dirac-measure family (`μ = Measure.dirac ()`,
+`fp c z := cos(c−0)`, `Φ a := sin(a−0)`, `u=0, h=1`) with `R 1 = ∫ cos(1−0) dδ = cos 1 ≠ 0` — the
+derivative is genuinely ACTIVE, not a `0=0` vacuity. Confirms non-vacuous conditioning.
+
+**Honest scope.** `hRint_of_hEnv` reduces `hRint` to the already-carried `hEnv`+`hFmeasG`; it does NOT
+discharge `hrate`, `hFmeasG`, the G3 F-bound, nor touch the chart-CoV/census scalar inequality (the opaque
+chart wall inside `hrate`). Composed with J4-971's `hEnv_window_of_amplitudeAndFdom`, the concrete `H_far`
+far-envelope's remaining carriers drop to the honest F-side data `{hFmeasG, hmeas, hbase, hFdom}` + amplitude
+sups `{hAmp0, hCfield, hSupp}` + the rate `hrate` — with NO separate `hRint`. `H_far`/`hCross` are NOT fully
+closed; the substantive frontier remains the chart-CoV/census inequality together with
+`hDuhamel`/`hDConv`/`hCConv`.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10281 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound; no sorryAx, no custom) — throwaway `lake env lean` confirmed;
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `705ec4a1` (3 files, +268), pushed. Discharges NONE of
+`{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
