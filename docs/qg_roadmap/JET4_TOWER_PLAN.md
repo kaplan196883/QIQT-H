@@ -14488,3 +14488,52 @@ regressions; vacuum-grep clean; no banked file edited; wired `QIQTH.lean` + `Axi
 The remaining `hDConv` census content (the `RadialNormalCoordinateGauge` centre-identity leg + geodesic-
 pullback bridge `hpull` = the opaque-chart wall, Gaussian dominations, interchange bundles, sliver carries)
 is UNTOUCHED. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-978 — FlatChartBridgeAudit: machine-checked STATEMENT-SHAPE audit of the `hpull` bridge (current `hpullVP` is MIS-SIGNED; the r-corrected shape passes the flat-affine consistency test). Commit `d30b11c7`.
+
+**What landed.** A new standalone file `QIQTH/FlatChartBridgeAudit.lean` converting the prior session's
+sympy sign-finding (cp846) into a machine-checked Lean **countermodel / regression audit** of the
+geodesic-pullback bridge `hpull` — the single opaque-chart wall carried by
+`RadialGaugeInterface.abstract_centerIdentities_of_gaussPullback` and
+`CurvedCenterIdentities.curved_centerIdentities_of_gaussPullback`. It does **not** touch the opaque
+`uniformInverseChart`.
+
+Concrete flat model `Wf z := (· − z)` (the flat geodesic inverse chart, since flat geodesics are straight
+lines: `exp_z(v)=z+v ⟹ W_z(x)=x−z`), with jets **grounded as actual Fréchet derivatives**:
+`flatFirstJet` from `fderiv (fun x => x−z) = id` (⇒ `δ_{ki}`), `flatSecondJet` from the second `fderiv`
+(= 0).
+
+- **`current_hpullVP_fails` (★).** The CURRENT `hpullVP` shape `∑ₖ (W z 0)ₖ·Pₖ = ∑ⱼ g_ij(z)·zʲ` is
+  REFUTED for the genuine affine jets at `n=1, z=(1), i=0`: LHS `= −1 ≠ +1 =` RHS. So the current bridge
+  is **mis-signed** — it holds only where `zᵢ=0` (e.g. the centre `z=0`), NOT merely "unproven". The
+  natural RHS is the radial vector `(W z 0)ᵢ = −zᵢ` (`flat_VP_lhs`), not `+zᵢ`.
+- **`flat_corrected_bridge` + `flat_center_identities` (★).** The r-corrected shape (metric contracted at
+  `r := W z 0`; VP conclusion reads `= (W z 0)ᵢ`) PASSES the flat-affine consistency test `∀ n z i` with
+  the actual grounded derivatives — **non-vacuous**; the corrected statement shape is not itself defective.
+
+**Firewall (in-file header + audit note).** Does NOT identify `Wf` with the opaque `.choose`-built
+`uniformInverseChart` (that identification is blocker J3), does NOT solve the Gauss lemma / Jacobi-field
+infrastructure, and does NOT validate the curved correction (flat `g` is constant, `g = gi`, `Q = 0`, so
+the `VQ` leg degenerates to `0 = 0`).
+
+**gpt-5.6-sol high audit (2026-08-22).** Q1: genuine, non-vacuous increment **as a statement-shape
+audit/regression test** (grounding `P,Q` as actual derivatives makes the counterexample geometric, not an
+arbitrary parameter choice); NOT progress on the main dependency graph. Wording correction adopted: the
+current shape is not "unsatisfiable" (it holds at `zᵢ=0`) — the witness proves it is **not uniformly valid**
+for the genuine flat jets. Q2: the flat indictment is SOUND — `x↦x−z` is exactly the flat geodesic inverse
+chart under the stated semantics; no convention rescues the sign. Q3: **bank the Lean file** (executable
+countermodel > documentation). Q4: `a₁=R/6` stays strictly conditional regardless of this file.
+
+**Verification.** `lake env lean QIQTH/FlatChartBridgeAudit.lean` 0 err; `lake build QIQTH.AxiomAudit`
+0 err (10286 jobs); all 7 theorems `#print axioms` std-3 (propext, Classical.choice, Quot.sound; NO
+sorryAx, NO custom); raw axiom budget 0; vacuum-grep clean; no banked file edited; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show d30b11c7 --stat` = 3 files (+232); pushed.
+
+**Honest status.** An audit/regression artifact, not closure of any blocker. It establishes the sign/vector
+DEFECT in the current `hpull` statement as a machine-checked fact and shows the r-corrected shape is
+self-consistent in the flat model. It discharges NONE of `{hDuhamel, hDConv, hCConv}` and does not solve
+J3 or the Gauss lemma. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED;
+the center-identity implication lemmas additionally retain their `hpull` hypothesis, which this audit shows
+must first be REPAIRED (`z → radial-vector`) before any geometry could discharge it. NOT `a₁=R/6`.
