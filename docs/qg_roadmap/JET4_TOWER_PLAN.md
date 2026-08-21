@@ -12326,3 +12326,61 @@ unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`.
 0 errors (10235 jobs); `#print axioms` std-3 ×5 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `5abe7c77`, pushed. NOT `a₁ = R/6`.
+
+## J4-929 — WIRE the banked differentiation-under-integral engine into J4-928's `hderiv`: the whole `hCross` (h,k>0) binder collapses onto a SINGLE scalar census inequality — commit `5e8b1d87` (`HCrossDerivEngineWired.lean`, new file)
+
+**Task.** J4-928 reduced the live `hCross` (h,k>0) binder to `hcross_split_bound_of_hderiv`, whose sole
+hard carry is the GENERATOR IDENTITY `hderiv : ∀ s∈Ioo(u−ε)u ∀ a∈Icc u(u+h), HasDerivAt (a'↦∫z A(a'−s)0z·F)
+(g s a) a` + `hgbound : |g s a|≤C_far·(u−s)^{−1/2}`, at the concrete gated van-Vleck witness. Determine
+whether the differentiation-under-∫ + closed-form + chart-CoV composition closes `hderiv` (⟹ removes
+`hCross` as a shared carry of hDuhamel/hDConv), and if not bank the honest partial.
+
+**gpt-5.6-sol (high) go/no-go — NO-GO for full closure (verbatim verdict).** `hderiv` packages TWO kinds of
+content: (1) differentiation under the `z`-integral (`∂_a∫z Φ = ∫z ∂_aΦ`), and (2) the SCALAR BOUND on the
+resulting census integral. Content (2) is the opaque chart wall and does NOT compose from the banked pieces:
+(i) the banked CoV `chart_gaussian_change_variables_concrete` (J4-270) is for the FIELD-slot chart
+`uniformInverseChart … 0 z`, but the census integrates the BASE slot (`uniformInverseChart … z 0`) — a
+GENUINE slot mismatch (reversed log-coords are related by geodesic reversal + parallel transport, NOT literal
+negation; no base-slot CoV or witness-symmetry banked); (ii) the CoV is over `ball 0 ρ`, the census over `ℝⁿ`
+(tail residue); (iii) the concrete transformed weights `(amp·F)∘V/|det|`, `(Cfield·F)∘V/|det|` are UNVERIFIED
+bounded + center-Lipschitz (J4-924's header disclaims exactly these; Sol: likely bottleneck = `1/|det|∘V`
+center-Lipschitz). So `hCross` is NOT closed.
+
+**The decisive (re-)audit — content (1) is ALREADY BANKED.** For the concrete witness, `hderiv` needs NO new
+differentiation content: `heatConvInner_hasDerivAt` (Mathlib `hasDerivAt_integral_of_dominated_loc_of_deriv_le`)
++ `witnessZTime_hasDerivAt` (J4-915, per-`z` `HasDerivAt`, unconditional) + `witnessHZslice_of_crudeEnv`
+(J4-916, EXPLICIT integrable Gaussian-pair dominator `Dz` from the J4-911-class crude-env carries, `hAcrude`
+DISCHARGED at J4-917) FORCE `g s a = ∫z deriv(fun r↦witness r 0 z)(a−s)·F s z 0`. So the ENTIRE remaining wall
+is content (2) = a PURE scalar integral inequality with NO `HasDerivAt` content left.
+
+**What lands (std-3 ×3, non-vacuous).**
+- `censusDeriv_hasDerivAt` — ★ per `(s,a)`: the engine-wired `HasDerivAt` of the census integral, derivative
+  FORCED to `∫z deriv(fun r↦witness r 0 z)(a−s)·F`. Direct instantiation of `heatConvInner_hasDerivAt` at the
+  concrete witness with `dAu := fun τ x z↦deriv(fun r↦witness r x z)τ`.
+- `hEnv_of_witnessCrudeEnv` — ★ the PROVIDER: `witnessHZslice_of_crudeEnv` (J4-916) supplies the exact
+  per-`(s,a)` engine-carry bundle `hEnv` (∃V∈𝓝a ∃Dz, …) that the capstone consumes — NON-VACUITY BY
+  CONSTRUCTION (the differentiation environment IS the banked J4-916 crude-env, cleanly separated from the
+  census wall). Sol-flagged quantifier-order (`∀ᵐz ∀a'∈V`, single `Dz`) and endpoint (`0<a−s` from `s<u≤a`)
+  both correct in the banked output.
+- `hcross_of_censusIntegral_bound` — ★★★ THE CAPSTONE: the full live `hCross` binder `|Δ²|≤(2C_far/√ε+2M/ε)
+  (|h||k|)` (h,k>0) for the concrete witness from `{hEnv, hCensusBound, H_near, H_zero}` + four interval-
+  integrabilities, where `hCensusBound : |∫z deriv(fun r↦witness r 0 z)(a−s)·F|≤C_far·(u−s)^{−1/2}` is the ONLY
+  remaining analytic carry — a PURE scalar inequality (all `hderiv` differentiation content wired away).
+
+**gpt-5.6-sol adversarial take (heeded).** The partial is a legitimate wall-LOCALIZATION / API lemma (not a
+substantive analytic advance): it tightens the campaign state from "HasDerivAt obligation + quantitative bound"
+to "quantitative scalar bound only"; not circular (Lean `deriv` is total; the engine separately proves the
+chosen value is the actual derivative). `g` kept syntactically stable (`fun s a↦∫z deriv…·F`) so `hgbound =
+hCensusBound` verbatim; derivative-value matches the engine's `∫z dAu(a−s)0z·F` by `dAu`-beta. Stated
+`hCensusBound` with `(u−s)^{−1/2}` (the weaker envelope, since `1/√(a−s)≤1/√(u−s)` for `a≥u`), matching
+`hgbound` exactly.
+
+**Honest status.** Does NOT close `hCross`. The residue is now exactly `hCensusBound` — the chart-CoV + J4-924
+wall (base-vs-field slot mismatch + ℝⁿ-vs-ball tail + concrete weight regularity), differentiation content
+eliminated. `hDuhamel`/`hDConv` remain carried on `{hCross(⟸{hCensusBound(chart wall), H_near, H_zero, four II}),
+hGpow,…}`; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/HCrossDerivEngineWired.lean` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10236 jobs); `#print axioms` std-3 ×3 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `5e8b1d87`, pushed. NOT `a₁ = R/6`.
