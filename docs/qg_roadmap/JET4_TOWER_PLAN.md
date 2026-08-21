@@ -14344,3 +14344,49 @@ genuinely ACTIVE (`(W·Fp)() = 1 ≠ 0`), not a `0=0` collapse.
 reduction) ⟹ sympy-rate gate N/A. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a
 top-level τ-carry. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}` plus the chart-CoV wall
 inside `hrate`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-974 — HFarFullyWired: the FULL end-to-end composition of the H_far decomposition chain (J4-970→973) as ONE `have…exact` term — `hFmeasG` AND `hRint` discharged internally at a single shared instantiation (commit 1e6ff744)
+
+**FILE (NEW).** `QIQTH/HFarFullyWired.lean` (ns `QIQTH.HFarFullyWired`, no banked file edited). std-3 ×1.
+Attempts — and ACHIEVES — the literal simultaneous composition of this session's ~55-dispatch `H_far`
+decomposition: instantiate J4-971's `hfar_concrete_from_amplitude` (the live concrete `H_far`
+far-envelope) with ALL of the carrier-reducers at ONE shared parameter set.
+
+**THE COMPOSED TERM (typechecks literally).**
+```
+have hFmeasG := hFmeasG_of_field_slice g gi hC hK S cutA cutB F hKm hSm0 hIn hFslice          -- J4-973
+have hEnv    := hEnv_window_of_amplitudeAndFdom hn g gi hC hK S cutA cutB F u ε h … hbase       -- J4-971
+have hRint   := hRint_of_hEnv g gi hC hK S cutA cutB F u ε h hh hFmeasG hEnv                    -- J4-972
+exact hfar_concrete_from_amplitude hn … hFmeasG hRint hrate                                     -- J4-971
+```
+Every junction matches LITERALLY (no coercion/restatement): `hFmeasG_of_field_slice`'s output type
+`∀ s u', AEStronglyMeasurable (fun z↦witness(u'−s)0z·F s z 0) volume` is exactly the `hFmeasG` input of
+both `hRint_of_hEnv` and `hfar_concrete_from_amplitude`; `hRint_of_hEnv`'s output
+`∀ s∈Ioo, IntervalIntegrable (fun c↦∫z ∂_τ witness(c−s)·F) volume u (u+h)` is exactly the `hRint` input.
+`hfar_concrete_fully_wired` (★★★) yields the live shape
+`∀ s∈Ioo(u−ε)u, |(∫z W(u+h−s)0z·F s z 0)−(∫z W(u−s)0z·F s z 0)| ≤ Cpair·h·(u−s)^{−1/2}`.
+
+**VERIFIED.** literal `lake build QIQTH.AxiomAudit` 0 errors (10283 jobs); `#print axioms
+hfar_concrete_fully_wired` = `[propext, Classical.choice, Quot.sound]` (std-3); `axiom_budget_check.sh`
+raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired `QIQTH.lean`+`AxiomAudit.lean`;
+commit `1e6ff744` (3 files, +179), pushed.
+
+**gpt-5.6-sol high adversarial FINAL audit 2026-08-22 — BANK as CONDITIONAL wiring, NO-GO on any
+non-vacuity/minimality overclaim.** (1) Composition GENUINE: the dependency graph is ACYCLIC; feeding
+`hFmeasG` both directly and through `hRint` is ordinary contraction, and `hfar_concrete_from_amplitude`
+rebuilding `hEnv` internally is proof-term duplication only — no circularity, no double-counting, no
+silently-dropped carrier (any dependent mismatch would have failed `exact`). `hFmeasG`/`hEnv`/`hRint`
+are genuinely eliminated as exposed carriers. (2) The displayed surface `{amplitude sups, F-side
+{hFdom,hmeas,hbase,hFslice}, witness-side {hKm,hSm0,hIn}, hrate}` is the TRANSITIVE surface induced by
+the lemma APIs — **NOT proven logically minimal** (no ablation; e.g. not shown that `hmeas` fails to
+subsume `hFslice`). (3) NON-VACUITY: this file adds NO joint-satisfiability teeth (no new abstract
+lemma; each consumed lemma carries its own teeth). Per Sol, individual teeth do NOT compose
+(Sat(A)∧Sat(B)⇏Sat(A∧B)); **JOINT realizability of the full bundle at a genuine (n≥2, non-flat) curved
+witness is NOT established here** — status "unknown compatibility", `hrate` (still importing the
+chart-CoV census assumptions) the dominant unknown. No cp466-style unsatisfiable-antecedent trap is
+INTRODUCED by the wiring (measurability + bound carriers do not conflict), but joint realizability is
+not claimed proven. (4) a₁=R/6 UNCHANGED: pure bookkeeping/API closure; proves none of `hrate`, the
+chart-CoV census inequality, `hDuhamel`, `hDConv`, `hCConv`, or the coefficient identification.
+Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains
+STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}` plus the chart-CoV wall inside `hrate`, UNCHANGED.
+NOT `a₁=R/6`.
