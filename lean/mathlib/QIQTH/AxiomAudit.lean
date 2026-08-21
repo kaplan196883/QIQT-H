@@ -13678,6 +13678,20 @@ namespace QIQTH.AxiomAudit
 -- Jacobi approach RELOCATES not removes — gpt-5.6-sol high 2026-08-22), no Jacobi equation, no Gauss lemma, NOT a₁=R/6.  [AF] std-3.
 #print axioms QIQTH.CovariantLeibniz.metricPair_covariant_leibniz_at
 #print axioms QIQTH.CovariantLeibniz.metricPair_velocity_field_leibniz_at
+-- (b3b-i'') CURVATURE SKEW-ADJOINTNESS + JACOBI CONSERVATION (a₁=R/6 endgame / Jacobi first-variation Gauss-lemma sub-campaign, J4) —
+-- JacobiConservation.lean: curvature_velocity_pairing_zero — curvature skew-adjointness ⟨v, R(w,v)v⟩_g = 0, i.e.
+-- ∑ₐᵦ g_{ab} v^a (∑_{σμν} R^b_{σμν} v^σ w^μ v^ν) = 0.  The lowered Riemann tensor ∑_b g_{ab} R^b_{σμν} is antisymmetric in the first
+-- pair (a,σ) (lowered_riemann_antisymm) and is contracted against the SYMMETRIC v^a v^σ ⟹ 0 (the T = −T swap).  Plus
+-- jacobi_radial_pairing_linear — the Jacobi conservation corollary: for a geodesic velocity γ' and Jacobi field J with A=∇_tJ obeying
+-- the CARRIED Jacobi equation ∇_tA = −R(J,γ')γ', the radial pairing is LINEAR IN τ: ⟨γ'(τ),J(τ)⟩_g = τ·⟨γ'(0),(∇_tJ)(0)⟩_g (using
+-- J(0)=0).  Two applications of metricPair_velocity_field_leibniz_at: d/dτ⟨γ',J⟩=⟨γ',A⟩ then d/dτ⟨γ',A⟩=⟨γ',∇_tA⟩=−⟨γ',R(J,γ')γ'⟩=0
+-- (skew-adjointness) ⟹ ⟨γ',A⟩ constant ⟹ integrate with is_const_of_deriv_eq_zero.  ⚠ HONEST FIREWALL: the Jacobi field J, its
+-- covariant derivative A, and the Jacobi equation are CARRIED as hypotheses (not constructed from d(exp) of a variation); NO
+-- identification J(1)=d(exp)_v(w) — that is the opaque-Skolemized-chart C¹-in-IC wall J3 the Jacobi approach RELOCATES not removes
+-- (gpt-5.6-sol high 2026-08-22).  Genuine chart-independent radial-orthogonality algebra, NOT a₁=R/6 (still conditional on the analytic
+-- trio {hDuhamel,hDConv,hCConv}).  [AF] std-3.
+#print axioms QIQTH.JacobiConservation.curvature_velocity_pairing_zero
+#print axioms QIQTH.JacobiConservation.jacobi_radial_pairing_linear
 -- (b3b-ii) INTERVAL ORTHONORMALITY (a₁=R/6 endgame / duality wall #1, step b) — ParallelInnerInterval.lean:
 -- parallelPair_metricInner_eq_on_Ioo — the g-inner product ⟨e,f⟩_g of two parallel-transported vectors is CONSTANT on the transport
 -- interval Ioo a b (parallel_metricInner_const_at gives deriv 0 at each point; IsOpen.is_const_of_deriv_eq_zero on the open

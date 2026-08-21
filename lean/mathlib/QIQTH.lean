@@ -110,6 +110,7 @@ import QIQTH.MatrixRaychaudhuri
 import QIQTH.ParallelTransport
 import QIQTH.ParallelMetricInnerAt
 import QIQTH.CovariantMetricLeibniz
+import QIQTH.JacobiConservation
 import QIQTH.ParallelInnerInterval
 import QIQTH.FrameRicci
 import QIQTH.CovariantJacobiOffCenter
