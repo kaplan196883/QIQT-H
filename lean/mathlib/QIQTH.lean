@@ -5293,6 +5293,16 @@ import QIQTH.HRintFromEngine
 -- {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFmeasGFromFieldSlice
 
+-- HFarFullyWired — J4-974: the FULL end-to-end composition of this session's H_far decomposition chain —
+-- ONE `have…exact` term instantiating hfar_concrete_from_amplitude (J4-971) with hFmeasG⟵hFmeasG_of_field_slice
+-- (J4-973) and hRint⟵hRint_of_hEnv (J4-972) at a SINGLE shared parameter set. hfar_concrete_fully_wired (★★★):
+-- the live concrete H_far far-envelope with hFmeasG AND hRint discharged internally; transitive carrier surface
+-- {amplitude sups, F-side {hFdom,hmeas,hbase,hFslice}, witness-side {hKm,hSm0,hIn}, hrate} (NOT proven minimal;
+-- joint realizability NOT claimed — component teeth do not compose, per gpt-5.6-sol audit). std-3 ×1. Pure
+-- wiring, no new abstract lemma. Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFarFullyWired
+
 -- BaseSlotChangeVariables — J4-930: the BASE-slot Gaussian change-of-variables, discharging obstruction
 -- (i) of J4-929's hCensusBound wall (the base-slot vs field-slot CoV mismatch). No clean literal symmetry
 -- exists (U z 0 = -T₀(U 0 z), geodesic reversal, NOT -U 0 z); the honest route is the base-varying IFT

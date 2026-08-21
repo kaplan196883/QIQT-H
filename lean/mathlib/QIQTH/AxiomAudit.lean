@@ -59,6 +59,7 @@ import QIQTH.HFarOffBallEnvFromCensus
 import QIQTH.HFarFTCBridgeFromEngine
 import QIQTH.HRintFromEngine
 import QIQTH.HFmeasGFromFieldSlice
+import QIQTH.HFarFullyWired
 
 namespace QIQTH.AxiomAudit
 
@@ -30262,5 +30263,17 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFmeasGFromFieldSlice.aesm_mul_of_slices
 #print axioms QIQTH.HFmeasGFromFieldSlice.hFmeasG_of_field_slice
 #print axioms QIQTH.HFmeasGFromFieldSlice.aesm_mul_of_slices_hyp_satisfiable
+
+-- HFarFullyWired — J4-974: FULL end-to-end composition of the H_far decomposition chain (J4-970→973). ONE
+-- `have…exact` term: hFmeasG⟵hFmeasG_of_field_slice (J4-973, from {hKm,hSm0,hIn,hFslice}), hEnv⟵hEnv_window_of_
+-- amplitudeAndFdom (J4-971), hRint⟵hRint_of_hEnv (J4-972, from {hFmeasG,hEnv}), composed via hfar_concrete_
+-- from_amplitude (J4-971). hfar_concrete_fully_wired (★★★): the live concrete H_far far-envelope with hFmeasG
+-- AND hRint discharged internally. Transitive carrier surface {amplitude sups, F-side {hFdom,hmeas,hbase,
+-- hFslice}, witness-side {hKm,hSm0,hIn}, hrate} — NOT proven logically minimal, joint realizability at a genuine
+-- curved witness NOT claimed (component teeth do not compose, per gpt-5.6-sol high audit 2026-08-22). Pure
+-- wiring, no new abstract lemma, no new teeth added (inherited from the four consumed lemmas). std-3 ×1.
+-- Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv} as a top-level τ-carry. NOT a₁=R/6 (CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HFarFullyWired.hfar_concrete_fully_wired
 
 end QIQTH.AxiomAudit
