@@ -5221,6 +5221,23 @@ import QIQTH.BaseSlotChangeVariables
 -- hCensusBound/hCross NOT closed. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.BaseSlotDetRegularity
 
+-- BaseSlotInverseChartLipschitz — J4-932: the INVERSE-CHART center/pairwise Lipschitz transport that
+-- CLOSES obstruction (iii) of J4-929's hCensusBound wall (modulo the SAME hbaseC2 residual as J4-930/931).
+-- J4-931 banked the det/ratio HALF (P/|det(fderiv Wbv)| bounded+Lipschitz on the BASE ball); the CoV
+-- integrand lives on the IMAGE variable w↦q(V w), so the transport genuinely needs the local inverse V
+-- center-Lipschitz. KEY: V = Φ.symm for Φ = hbaseC2.toOpenPartialHomeomorph (the Mathlib IFT), and
+-- Mathlib's ContDiffAt.to_localInverse gives ContDiffAt ℝ 2 V (Wbv 0)=0 for FREE (Φ.symm IS localInverse
+-- definitionally), fed to the SAME convex-MVT AmpQuantBundle.contDiffAt_one_lipschitzOn_ball ⟹ V pairwise
+-- Lipschitz on an image ball. inverseChart_lipschitz_package (★★, V 0=0 ∧ V Lipschitz); transported_ratio_
+-- regularity (★★ MAIN: ∀ globally bounded M_P + Lipschitz L_P weight P, w↦P(V w)/|det(fderiv Wbv (V w))|
+-- bounded 2M_P + pairwise-Lipschitz on an image ball — obstruction (iii) CLOSED modulo hbaseC2, composing
+-- J4-931 det/ratio half with V-transport half; V maps a small image ball into the base ball via ‖V w‖≤
+-- L_V‖w‖, V 0=0); transported_ratio_center_lipschitz (★, y:=0 center form); localInverse_nonvacuous
+-- (to_localInverse yields genuine C² non-identity inverse — the -id derivative shape). std-3 ×4. Remaining
+-- for hCensusBound/hCross: obstruction (ii) ℝⁿ-vs-ball tail + hbaseC2 itself. NOT a₁=R/6 (CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}).
+import QIQTH.BaseSlotInverseChartLipschitz
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

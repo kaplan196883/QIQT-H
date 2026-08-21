@@ -29563,4 +29563,30 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotDetRegularity.paired_ratio_center_lipschitz
 #print axioms QIQTH.BaseSlotDetRegularity.det_clm_contDiff_nonvacuous
 
+-- ## J4-932 (BaseSlotInverseChartLipschitz): the INVERSE-CHART center/pairwise Lipschitz transport that
+-- CLOSES obstruction (iii) of J4-929's hCensusBound wall (modulo the SAME hbaseC2 residual as J4-930/931).
+-- J4-931 banked the DET/RATIO half (P/|det(fderiv Wbv)| bounded+Lipschitz on the BASE ball); the CoV
+-- transformed integrand lives on the IMAGE variable w↦q(V w) (BaseSlotChangeVariables), so the ∘V transport
+-- genuinely needs the local inverse V center-Lipschitz — flagged by J4-931/gpt-5.6-sol as the TRUE remaining
+-- bottleneck. KEY OBSERVATION: in the base-varying IFT package (BaseVaryingIFTPackage, J4-272) the left
+-- inverse V is literally Φ.symm for Φ = hbaseC2.toOpenPartialHomeomorph Wbv hW'0 hn2 (the Mathlib IFT
+-- OpenPartialHomeomorph), and Mathlib's ContDiffAt.to_localInverse states this inverse is C² AT THE IMAGE
+-- CENTRE Wbv 0 = 0 — because Φ.symm is DEFINITIONALLY hbaseC2.localInverse hW'0 hn2. Feeding that to the
+-- SAME convex-MVT technique used all session (AmpQuantBundle.contDiffAt_one_lipschitzOn_ball) makes V
+-- pairwise Lipschitz on an image ball for FREE (no separate derivative-boundedness step). inverseChart_
+-- lipschitz_package (★★, V 0=0 ∧ V pairwise-Lipschitz L_V on ball 0 σ, from to_localInverse + convex-MVT);
+-- transported_ratio_regularity (★★ MAIN, obstruction (iii) CLOSED modulo hbaseC2: ∀ globally bounded M_P +
+-- Lipschitz L_P weight P, w↦P(V w)/|det(fderiv Wbv (V w))| bounded M_P/(1/2)=2M_P + pairwise-Lipschitz on
+-- an image ball — composing J4-931 paired_ratio_center_lipschitz (det/ratio half) with V-transport half;
+-- V maps a small image ball into the base ball via ‖V w‖≤L_V‖w‖ + V 0=0); transported_ratio_center_
+-- lipschitz (★, the literal q∘V center-Lipschitz, y:=0 specialization); localInverse_nonvacuous (to_local
+-- Inverse genuinely yields a C² non-identity inverse for the negation equiv — the exact fderiv Wbv 0 = -id
+-- shape — hbaseC2-free). std-3 ×4. HONEST: obstruction (iii) now FULLY closed (det/ratio half J4-931 + ∘V
+-- transport half HERE), modulo hbaseC2. REMAINING for hCensusBound/hCross: (ii) ball-0-ρ (CoV domain) vs ℝⁿ
+-- (census domain) tail, and hbaseC2 itself. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.BaseSlotInverseChartLipschitz.inverseChart_lipschitz_package
+#print axioms QIQTH.BaseSlotInverseChartLipschitz.transported_ratio_regularity
+#print axioms QIQTH.BaseSlotInverseChartLipschitz.transported_ratio_center_lipschitz
+#print axioms QIQTH.BaseSlotInverseChartLipschitz.localInverse_nonvacuous
+
 end QIQTH.AxiomAudit
