@@ -51,6 +51,7 @@ import QIQTH.CensusHballrateModuloG2
 import QIQTH.CensusIntegratedModuloG2
 import QIQTH.G2ConstGateGrounded
 import QIQTH.HsuppConstGateGrounded
+import QIQTH.HCrossNegativeQuadrants
 
 namespace QIQTH.AxiomAudit
 
@@ -30081,5 +30082,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HsuppConstGateGrounded.hsupp_for_constGate_satisfiable
 -- InterchangeBundlesJointFromRoots — J4-964: joint composition of the four interchange-bundle dischargers.
 #print axioms QIQTH.InterchangeBundlesJointFromRoots.interchange_bundles_joint
+
+-- ## J4-965 (HCrossNegativeQuadrants): the THREE negative-sign quadrants of the integrated hCross estimate,
+-- completing J4-927's h,k>0-only construction to all four sign quadrants (h=0/k=0 axes trivial subst;simp).
+-- gpt-5.6-sol high scope check 2026-08-21: both constructions SOUND (k<0 EASY = orientation + far-only;
+-- h<0 = EXACT antisymmetry relabel, NO new analysis). k<0: the sliver [u−ε+k,u−ε] sits entirely at
+-- s≤u−ε<u so (u−s)≥ε>0, NO diagonal singularity; reverse orientation (integral_symm) + constant majorant
+-- (u−s)^{−1/2}≤ε^{−1/2} (Real.rpow_le_rpow_of_nonpos) ⟹ far_only_sliver_bound, no near/zero pieces. h<0
+-- (−ε<h<0): |Δ²(u,ε,h,k)|=|Δ²(u+h,ε+h,−h,k)| — the h<0 sliver IS J4-927's h>0 core re-centred at ũ=u+h
+-- (ε̃=ε+h>0, far envelope re-anchored at u+h, degraded const √(ε+h)<√ε), collapsed by the sign-agnostic
+-- mixed_second_diff_frozen_reduction_integrated. far_only_sliver_bound (+TEETH: const D≡2^{−1/2}, envelope
+-- genuinely dominates NOT 0≤0), hcross_split_bound_hpos_kneg / hneg_kpos / hneg_kneg. Each quadrant is
+-- carrier-conditional on the SAME per-s far/near/zero data as h,k>0; residual uncovered regime = |h|≥ε
+-- (moved diagonal at/left of the lower anchor, a separate degenerate case). Does NOT change conditional
+-- status; discharges NONE of {hDuhamel,hDConv,hCConv}. std-3 ×5. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
+#print axioms QIQTH.HeatResidualBound.far_only_sliver_bound
+#print axioms QIQTH.HeatResidualBound.far_only_sliver_bound_hyp_satisfiable
+#print axioms QIQTH.HeatResidualBound.hcross_split_bound_hpos_kneg
+#print axioms QIQTH.HeatResidualBound.hcross_split_bound_hneg_kpos
+#print axioms QIQTH.HeatResidualBound.hcross_split_bound_hneg_kneg
 
 end QIQTH.AxiomAudit

@@ -5180,6 +5180,15 @@ import QIQTH.HCrossIntegratedSplit
 -- convolution Φ(a,s)=C·cos(a−s) with ∂_aΦ=−C·sin(a−s)). Localizes the hCross wall (h,k>0) to hderiv;
 -- does NOT close hCross. NOT a₁=R/6 (remains CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HCrossFarDerivBridge
+-- HCrossNegativeQuadrants — J4-965: the THREE negative-sign quadrants of the integrated hCross estimate,
+-- completing J4-927's h,k>0-only construction to all four sign quadrants (h=0/k=0 axes trivial). k<0 is
+-- far-only (no diagonal singularity: the sliver sits at s≤u−ε<u, so (u−s)^{−1/2}≤ε^{−1/2}, constant
+-- majorant via Real.rpow_le_rpow_of_nonpos + integral_symm); h<0 reduces to J4-927's core by the EXACT
+-- antisymmetry |Δ²(u,ε,h,k)|=|Δ²(u+h,ε+h,−h,k)| (re-centred at ũ=u+h, ε̃=ε+h, degraded const √(ε+h))
+-- for −ε<h<0. far_only_sliver_bound (+TEETH), hcross_split_bound_{hpos_kneg,hneg_kpos,hneg_kneg}. Each
+-- carrier-conditional on the SAME far/near/zero data as h,k>0; does NOT change conditional status.
+-- gpt-5.6-sol high scope check: both constructions SOUND. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.HCrossNegativeQuadrants
 -- HCrossDerivEngineWired — J4-929: WIRE the banked differentiation-under-integral engine into J4-928's
 -- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
 -- gpt-5.6-sol (high) go/no-go: NO-GO for full closure (the residual bound = the chart CoV + J4-924 wall,
