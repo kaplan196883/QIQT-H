@@ -13945,3 +13945,52 @@ SAME per-`s` far/near/zero data as the `h,k>0` branch (whose concrete `H_far` ca
 the OPEN chart wall) — this closes real gaps in the campaign's own hCross infrastructure without
 discharging any top-level τ-carry. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}`. `a₁=R/6`
 remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-966 — hCross `|h| ≥ ε` degenerate regime: FULL `h ∈ ℝ` coverage of the live binder (commit 88cb6163)
+
+**FILE (NEW).** `QIQTH/HCrossLargeShiftRegime.lean`. Closes the ONE regime J4-965's four sign quadrants
+left open: they all require `−ε < h` (the moved diagonal `u+h` must stay right of the lower anchor `u−ε`).
+The uncovered regime is `h ≤ −ε` (`u+h` at/left of `u−ε`), generalized here to ALL `ε ≤ |h|` (both signs).
+
+**gpt-5.6-sol high scope check (2026-08-21).** SOUND. The case split `{|h|≥ε} ∪ {h>0} ∪ {−ε<h<0} ∪ {h=0}`
+is EXHAUSTIVE ⟹ FULL `h ∈ ℝ` coverage of the live binder's `h`-quantifier (`h>0` any via
+`integrated_split_sliver_bound`, no upper h-bound; `−ε<h<0` via J4-965 relabel; `h=0` trivial). Caveat
+flagged (uniform `|Φ|≤M` must hold on negative-time sliver args) is a NON-issue: the lemma takes the
+uniform bound as an ABSTRACT hypothesis (cheaper than H_far/H_near/H_zero) and takes `IntervalIntegrable D`
+explicitly. The live binder is `∀ h k : ℝ` UNBOUNDED, so despite the downstream census/differentiation
+layer only instantiating `h,k → 0` (small, `|h|<ε` eventually), the `|h|≥ε` branch must still be proved to
+satisfy the stated interface.
+
+**THE CONSTRUCTION (uniform bound — NO diagonal analysis).** The sign/magnitude-agnostic collapse
+`mixed_second_diff_frozen_reduction_integrated` (J4-927, NO positivity on `h,k`) reduces `Δ²` to the single
+sliver integral of `D(s) := Φ(u+h,s) − Φ(u,s)`, `Φ(c,s) := ∫ z, A(c−s) x z·B s z y`. The diagonal
+singularity of J4-926 lived ONLY in the DIVIDED difference `D/h ~ 1/h`; `D` ITSELF is uniformly bounded
+(`|Φ| ≤ M` ⟹ `|D| ≤ 2M`) — no cancellation envelope. Hence `|∫ D| ≤ 2M·|k|`
+(`norm_integral_le_of_norm_le_const`, interval length `= |k|`), and `ε ≤ |h|` absorbs the `1/ε`:
+`2M·|k| ≤ (2M/ε)(|h|·|k|) ≤ (2·C_far/√ε + 2·M/ε)(|h|·|k|)` — the EXACT same constant `L` used in every
+other regime (`C_far ≥ 0` carried inert to keep `L` identical). No sign assumption on `h, k`.
+
+**WHAT LANDS (std-3 ×3).**
+- `uniform_sliver_bound` — ★★ the abstract-`D` `ε≤|h|` sliver bound (uniform constant, no envelope).
+- `uniform_sliver_bound_hyp_satisfiable` — non-vacuity with TEETH: nonzero constant witness `D ≡ 2^{−1/2}`
+  (`u=0, ε=1, h=−2, k=−2, C_far=1, M=1/2`), `ε=1 ≤ 2=|−2|`, and `|2^{−1/2}| ≈ 0.707 ≤ 1 = 2M`, a nonzero
+  value strictly below the bound, NOT `0 ≤ 0`.
+- `hcross_split_bound_habs_ge_eps` — ★★★ the live hCross binder for `ε ≤ |h|` (any `k`), RHS carries
+  `|h|·|k|` directly (no sign rewriting).
+
+**VERIFICATION.** `lake build QIQTH.HCrossLargeShiftRegime` 0 errors; `lake build QIQTH.AxiomAudit`
+0 errors; `#print axioms` std-3 ×3 (propext/Classical.choice/Quot.sound, NO sorryAx, NO custom);
+`axiom_budget_check.sh` raw axiom count 0 (budget 0) / OK; `git status --porcelain | grep -i vacuum`
+clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show 88cb6163 --stat` = 3 files
+(+183); pushed. One benign `unused variable hII` warning (norm bound needs no integrability; kept for
+interface parity with the sibling sliver bounds — satisfiable, non-vacuous).
+
+**HONEST STATUS.** hCross's live binder is now covered for EVERY `h ∈ ℝ` and EVERY `k ∈ ℝ` (four sign
+quadrants J4-965 + `|h|≥ε` regime + degenerate axes). Every regime is carrier-conditional on the SAME
+per-`s` data as the `h,k>0` branch — the far branches on the concrete `H_far` cancellation envelope (the
+OPEN chart wall), this `|h|≥ε` regime on the cheap sup-bound `|Φ|≤M`. So this closes the LAST shift-regime
+gap in the campaign's own hCross infrastructure without discharging any top-level τ-carry. Discharges NONE
+of `{hballrate, hDuhamel, hDConv, hCConv}`. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
