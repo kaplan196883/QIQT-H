@@ -5906,3 +5906,21 @@ import QIQTH.HbintFullyClosedCurved
 -- C≥0 on the capped window. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those
 -- three, UNCHANGED. std-3. NOT a₁=R/6.
 import QIQTH.HZMassFullyClosedCurved
+
+-- HFdRequant — the (a,b)-HOISTED replay of the hFd field-Hessian ⨆-envelope tower, exposing the jet
+-- reach δ₀ BEFORE the gate parameters (a,b). Mechanical requantification (∃∀-swap) closing the
+-- quantifier-order obstruction that blocked the FULL joint assembly of MixedDirectionsFieldHessianEnvelope:
+-- every radius feeding hFd_concrete_ciSup_fully_closed's δ₀ bottoms out in the (a,b)-free reaches
+-- {uniformInverseChart_huniformChart, uniformFlowRadius, reachableGate_concrete}. Same pattern as
+-- HbintRequant (J4-983)/ReachRequant (J4-599). std-3. NOT a₁=R/6.
+import QIQTH.HFdRequant
+
+-- MixedEnvelopeFullyInhabitedCurved — THE FULL JOINT INHABITATION of MixedDirectionsFieldHessianEnvelope
+-- (fourth named hCConv hypothesis) at the genuinely-curved witness (κ<0, 1≤n, K={0}): prescribe the
+-- (a,b)-free hFd reach δ⋆ (HFdRequant) into curvedRNC_heatOp_dom_pkg_prescribed to obtain gate params
+-- 0<a<b<c<δ⋆ carrying the genuine width-2 heat-kernel domination, at which ALL FIVE envelope fields hold
+-- (hFd via requant; hbint/hzmass/hkint-measurability via null-singleton support; hLevi tautological).
+-- Degenerate-K caveat (BF a.e. zero, cf J4-984/985). Closes ONE named hCConv input at ONE degenerate
+-- witness; does NOT close hCConv, does NOT bear on hDuhamel/hDConv. a₁=R/6 CONDITIONAL on the trio,
+-- UNCHANGED. std-3. NOT a₁=R/6.
+import QIQTH.MixedEnvelopeFullyInhabitedCurved

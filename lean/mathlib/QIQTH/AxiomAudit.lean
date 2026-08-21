@@ -28,6 +28,8 @@ import QIQTH.HbintInteriorTubeCoverRoute
 import QIQTH.HbintRequant
 import QIQTH.HbintFullyClosedCurved
 import QIQTH.HZMassFullyClosedCurved
+import QIQTH.HFdRequant
+import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
 import QIQTH.DerivDomLowerCapped
 import QIQTH.WitnessTimeDerivEnvelope
@@ -30375,5 +30377,11 @@ namespace QIQTH.AxiomAudit
 -- CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HZMassFullyClosedCurved.integral_eq_zero_of_support_subset_singleton
 #print axioms QIQTH.HZMassFullyClosedCurved.hzmass_fully_closed_curved
+
+-- HFdRequant: the (a,b)-free hFd reach hoist closing the quantifier-order obstruction. std-3.
+#print axioms QIQTH.HFdRequant.hFd_fully_closed_requant
+-- MixedEnvelopeFullyInhabitedCurved: the FULL joint inhabitation of the fourth hCConv hypothesis at
+-- the curved K={0} witness with the width-2 domination. std-3. NOT a₁=R/6.
+#print axioms QIQTH.MixedEnvelopeFullyInhabitedCurved.mixedEnvelope_fully_inhabited_curved
 
 end QIQTH.AxiomAudit
