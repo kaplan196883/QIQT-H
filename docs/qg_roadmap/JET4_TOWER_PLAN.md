@@ -14899,3 +14899,53 @@ does NOT close `hCConv` (needs the general-`K` case and the OTHER census members
 `fderivBulkInt_hasFDerivAt`) and does NOT bear on `hDuhamel`/`hDConv` (still bottlenecked at the J3
 opaque-chart Gauss-lemma wall). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
 UNCHANGED. NOT `a₁=R/6`.
+
+---
+
+## J4-987 — `HbulkderivFullyClosedCurved`: FULL discharge of the `hbulkderiv` census member at the curved `K={0}` witness — commit `3b8522f6`
+
+**What.** FULLY DISCHARGES the `hbulkderiv` census member `FderivBulkConcrete.fderivBulkInt_hasFDerivAt`
+(the concrete FIRST-order Fréchet derivative `HasFDerivAt (fbulkInt … t i m) (fderivBulkInt … t i m x₀) x₀`
+of the truncated bulk primitive) at the genuinely-curved witness `K = {0}` (`κ<0`, `1≤n`), supplying ALL
+TEN of its per-slice carries from the null-singleton support facts. New file, no banked file edited.
+
+**Key observation.** At `K={0}` the base-slot vanishing `witnessFieldDeriv_eqZero_of_base_notMem_K`
+(UNCONDITIONAL) makes BOTH the bulk integrand `z ↦ witnessFieldDeriv…x z · leviSeries…s z 0` AND its
+field-Fréchet kernel `z ↦ kPrime…x z` (via `‖kPrime‖ ≤ |leviSeries|·‖fderiv‖ = 0` off `K`) vanish for
+every base `z ∉ {0}`. With `1≤n` the singleton `{0}` is Lebesgue-null (`Nontrivial (Point n)` ⟹ NoAtoms),
+so every `z`-integral is a null-singleton integral (`= 0`) and the field-slot map `y ↦ witnessFieldDeriv…y z`
+is IDENTICALLY `0` (hence differentiable) for a.e. `z`. The ten carries collapse:
+`hKint`/`hKmeas` (integrand supported in `{0}`), `hK'meas` (`kPrime` supported in `{0}`),
+`hK'bound` (`‖kPrime‖ ≤ 0` a.e., `boundz:=0`), `hboundz_int` (`Integrable 0`),
+`hd` (field-slot map `≡ 0` a.e. `z`), `hGmeas`/`hGint` (`s ↦ ∫z integrand ≡ 0`),
+`hG'meas`/`hG'bound` (`s ↦ ∫z kPrime ≡ 0`, `‖0‖ ≤ 0·(t−s)⁻¹`, `C:=0`).
+
+**Lands (ns `QIQTH.HbulkderivFullyClosedCurved`).** `bulkIntegrand_support_subset`, `kPrime_support_subset`
+(support ⊆ `{0}`); `hbulkderiv_fully_closed_K0` (★★ the fully-discharged `hbulkderiv` census member, for
+any `g gi`, gate `S`, scalars `a b`, `0<t`, `i`, `m`, `x₀`).
+
+**gpt-5.6-sol high assessment (2026-08-22, hCConv distance audit).** (1) The C² reduction target
+`SpatialC2.hCConv_reduction` yields only `ContDiffAt ℝ 2 (…) 0`, whereas the LITERAL top-level `hCConv`
+is `ContDiff ℝ ⊤` — differ in BOTH order (2 vs ⊤) and locus (one point vs whole space); discharging the
+whole C² census does NOT close the literal `hCConv`. (2) The structural collapse
+`fderivBulkInt = gderivInt = 0` at `K={0}` (⟹ `hsliver`/`hbulk_tendsto`/`hGint` also null-driven, leaving
+only `{hlin, hcont}` for the C² slot) is SOUND as a reduction PLAN but must NOT be reported as formally
+discharged — only `hbulkderiv` is banked; `hlin` may secretly carry the derivative-bridge, `hcont`'s
+content depends on its subject. (3) `hCConv` is NOT closed and NOT "almost closed"; this increment closes
+exactly ONE more auxiliary C² member at ONE degenerate witness. The high-leverage NEXT move is to test
+whether `p ↦ heatConv(…)` is itself `p`-CONSTANT (or identically `0`) at `K={0}` — which would close the
+literal `ContDiff ℝ ⊤` `hCConv` at this degenerate witness — but this requires inspecting the ORIGINAL
+convolution integrand's gating (NOT extrapolating from the derivative-kernel support lemma: zero field
+derivative off `K` does NOT imply the integrand itself vanishes off `K`). NOT attempted this session.
+
+**Verify.** `lake build QIQTH.HbulkderivFullyClosedCurved` 0 err (8939 jobs); throwaway `ChkHbulkderiv`
+std-3 (no `sorryAx`, no custom axiom); `lake build QIQTH.AxiomAudit` 0 err (10296 jobs); std-3
+(`propext`/`Classical.choice`/`Quot.sound`) ×3; `axiom_budget_check.sh` raw 0 (budget 0);
+`git status --porcelain | grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean`+
+`AxiomAudit.lean`; `git show 3b8522f6 --stat` = 3 files (+264); pushed.
+
+**Honest status.** Closes ONE more `hCConv` C²-slot census member (`hbulkderiv`, first-order Fréchet
+derivative) at ONE degenerate witness `K={0}`; null-support driven (curved geometry does no substantive
+analytic work). Does NOT close `hCConv` (literal `ContDiff ℝ ⊤`; even the full C² census only gives
+`ContDiffAt ℝ 2`); does NOT bear on `hDuhamel`/`hDConv` (J3 opaque-chart Gauss-lemma wall). `a₁=R/6`
+remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
