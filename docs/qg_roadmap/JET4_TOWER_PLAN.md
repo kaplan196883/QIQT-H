@@ -12736,3 +12736,55 @@ remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
 errors (10244 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked file
 edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `5281e9ed`, pushed. NOT `a₁ = R/6`.
+
+## J4-938 — the CONCRETE AMPLITUDE half of junction piece (3) [concrete `amp·F`/`Cfield·F` bounded+Lipschitz inputs to J4-931/932] of J4-933's `hCensusBound` re-audit — commit `acfb34db` (`CensusAmpConcreteRegularity.lean`, new file)
+
+**Context.** J4-933's gpt-5.6-sol high re-audit flagged SIX junction pieces required for the literal
+`hCensusBound` assembly beyond {base-slot CoV, det/ratio, V-transport, tail}; J4-934/935/936/937 closed
+pieces (2)[left-inverse weight matching], (4)[IFT open-map superset], (5)[product→single Gaussian collapse],
+(1)[the J4-217 `hgate` carry]. This increment targets piece **(3)** — the concrete `amp·F`/`Cfield·F`
+global bounded+Lipschitz inputs that J4-931 (`paired_ratio_center_lipschitz`) / J4-932
+(`transported_ratio_regularity`) leave ABSTRACT (any bounded+Lipschitz weight `P`).
+
+**★ THE AMPLITUDE FACTOR IS MADE CONCRETE, UNCONDITIONALLY AT BASE `0`.** The census weights are `q₁ =
+amp·F` and `q₂ = Cfield·F` where `amp = chartFieldAmp … τ z 0`, `Cfield = censusAmpTauDeriv` (the affine
+`∂_τ`-slope, J4-937), `F = leviSeries`. This file pins the AMPLITUDE factors to their concrete definitions
+and discharges their base-ball bounded+pairwise-Lipschitz regularity via TWO free routes:
+  • **value bridge** `chartFieldAmp … τ z 0 = chartAmp … τ z 0` (pure `mul_assoc`; the two defs differ only
+    by `A·(B·C)` vs `(A·B)·C` grouping) — lets the banked `DataAmpAssembly.chartAmp_base_bounded_near_zero`
+    / `chartAmp_base_lipschitz_center` (both UNCONDITIONAL at base `0`, only standard g/gi carries
+    `hg`/`hg0`/`hu`) be reused verbatim for `chartFieldAmp`.
+  • **slope-as-difference** `censusAmpTauDeriv = chartFieldAmp(τ=1) − chartFieldAmp(τ=0)` (amplitude affine
+    in τ) — makes `Cfield` a difference of two bounded+Lipschitz amplitudes.
+Composing with an ABSTRACT ball-local `F0` (bounded+Lipschitz on a genuine ball `rF>0` — the honest Levi
+carry, e.g. `fun z↦leviSeries … s z 0`, downstream of Ebound/heatConv, NOT proved here) via
+`collar_product_lipschitz_increment` gives the concrete `amp·F`/`Cfield·F` weights (the abstract-`P` input
+of J4-931); and via `det_fderiv_regularity_bundle` (J4-931) + `ratio_abs_lipschitzOn` (J4-925) the concrete
+`q₁=(amp·F)/|det|` and `q₂=(Cfield·F)/|det|` bounded+pairwise-Lipschitz on a base ball (CONDITIONAL on the
+J4-930/931 residual `hbaseC2`).
+
+**What lands** (std-3 ×9, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `chartFieldAmp_apply_eq_chartAmp` — the value bridge (`mul_assoc`).
+- `chartFieldAmp_base_regularity_center` (★) — `z↦chartFieldAmp … τ z 0` bounded + pairwise-Lipschitz on a
+  base ball, UNCONDITIONAL at base `0`.
+- `censusAmpTauDeriv_eq_amp_diff` + `censusAmpTauDeriv_base_regularity_center` (★) — the concrete `∂_τ`-slope
+  bounded + pairwise-Lipschitz on a base ball, UNCONDITIONAL at base `0`.
+- `census_ampF_weight_regularity` / `census_CfieldF_weight_regularity` (★★) — the concrete `amp·F` / `Cfield·F`
+  weights (abstract-`P` input of J4-931), amplitude concrete, only `F0` carried.
+- `census_ampF_ratio_regularity` / `census_CfieldF_ratio_regularity` (★★) — THE CONCRETE `q₁` / `q₂` post-`/det`
+  on a base ball (CONDITIONAL on `hbaseC2`).
+- `census_abstractF_slot_satisfiable` — non-vacuity of the abstract-F carry slot (TEETH: `cos‖·‖`, bounded but
+  genuinely varying, Lipschitz `1`).
+
+**Honest status.** The AMPLITUDE half of piece (3) is CLOSED concretely (amp + Cfield, unconditional at base
+`0`); the F factor remains an EXPLICIT abstract carry (the `leviSeries` ball-local bounded+Lipschitz, i.e. the
+`{hDuhamel,hDConv,hCConv}`-family analytic input). Piece (3) is therefore NOT fully closed — the F-carry
+discharge and the ball-local `∘V` transport (J4-932 is stated with GLOBAL `P`; a ball-local variant is still
+needed to compose amp·F, which is only ball-locally bounded+Lipschitz) REMAIN, alongside piece (6)
+[`Bball+tail ≤ C_far·(u−s)^{−1/2}` rate absorption]. `hCensusBound`/`hCross`/`hDuhamel`/`hDConv` remain
+carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/CensusAmpConcreteRegularity.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
+errors (10245 jobs); `#print axioms` std-3 ×9 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked file
+edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `acfb34db`, pushed. NOT `a₁ = R/6`.
