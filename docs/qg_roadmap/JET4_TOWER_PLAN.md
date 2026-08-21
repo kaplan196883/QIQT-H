@@ -12621,3 +12621,70 @@ unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NO
 QIQTH.AxiomAudit` 0 errors (10241 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no
 sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no
 existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `56703698`, pushed. NOT `a₁ = R/6`.
+
+## J4-935 — the IFT OPEN-MAP SUPERSET `Wbv''(ball 0 ρ) ⊇ ball 0 r` (EXACTLY): junction piece (4) of J4-933's `hCensusBound` re-audit — commit `90b80e7c` (`BaseSlotIFTOpenSuperset.lean`, new file)
+
+**Context.** J4-933's gpt-5.6-sol high re-audit flagged SIX junction pieces required for the literal
+`hCensusBound` assembly beyond {base-slot CoV, det/ratio, V-transport, tail}; J4-934 closed piece (2)
+[left-inverse weight matching]. This increment targets piece **(4)** — the IFT open-map superset the
+transported census image must satisfy so the J4-922/923 flat trace-cancellation machinery
+(`gaussian_hessian_cancel_trace_on_superset`, which fires on ANY measurable `Ω ⊇ ball 0 r`) applies to the
+CoV image `Wbv''(ball 0 ρ)` (`Wbv z = uic z 0`).
+
+**★ IMMEDIATE FROM THE BANKED IMAGE-NEIGHBOURHOOD FACT.** The base-varying IFT/CoV bundle
+(`baseVaryingIFTPackage`, J4-272, re-exported by `baseVaryingIFT_weightMatch`, J4-934) already banks
+`himg : Wbv''(ball 0 ρ) ∈ 𝓝 0` (proved there from `OpenPartialHomeomorph.isOpen_image_of_subset_source`
++ `Wbv 0 = 0`). `Metric.mem_nhds_iff` (`s ∈ 𝓝 0 ↔ ∃ r>0, ball 0 r ⊆ s`) turns "neighbourhood of 0" into
+"contains a ball around 0": `obtain ⟨r,hr,hrsub⟩ := Metric.mem_nhds_iff.mp himg`. EXACT — NO new IFT, NO
+fresh open-map export, NO extra regularity input.
+
+**What lands** (std-3 ×2, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `baseVaryingIFT_openSuperset` (★★): re-exports the FULL M1–M4 bundle + weight-match identity of
+  `baseVaryingIFT_weightMatch` AND the superset `∃ r>0, ball 0 r ⊆ Wbv''(ball 0 ρ)`.
+- `baseVaryingIFT_imageBallSubset` (★): the lean superset alone (`∃ ρ>0, ∃ r>0, ball 0 r ⊆ image`).
+
+**Honest status.** Junction piece (4) of J4-933's re-audit is DISCHARGED (exact, banked, non-vacuous —
+`himg ∈ 𝓝 0` furnishes `r>0` with `0 ∈ ball 0 r` inhabited). CONDITIONAL only on `hbaseC2` (inherited
+J4-272/934, NO new assumption). REMAINING junction pieces: (1) J4-217 `hgate` carry; (3) concrete
+`amp·F`/`Cfield·F` global bounded+Lipschitz inputs; (6) `Bball + tail ≤ C_far·(u−s)^{−1/2}` rate absorption;
+plus per-summand integrabilities and uniformity in `s,a`. `hCensusBound`/`hCross`/`hDuhamel`/`hDConv` remain
+carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/BaseSlotIFTOpenSuperset.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
+errors (10242 jobs); `#print axioms` std-3 ×2; `axiom_budget_check.sh` raw 0 / OK; vacuum-grep clean; no
+existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `90b80e7c`, pushed. NOT `a₁ = R/6`.
+
+## J4-936 — the PRODUCT→SINGLE Gaussian envelope collapse `gaussDdim a·gaussDdim b = (heatKernel1D(a+b)0)ⁿ·gaussDdim(ab/(a+b))` (EXACTLY): junction piece (5) of J4-933's `hCensusBound` re-audit — commit `21c4b021` (`GaussianProductCollapse.lean`, new file)
+
+**Context.** J4-933's `census_full_of_ball_bound_and_gaussEnv` consumes a SINGLE-Gaussian off-ball envelope
+`henv : |Φ z| ≤ Cenv·gaussDdim λ z`, but the concrete census integrand (`hEnv_of_witnessCrudeEnv`, J4-929)
+is dominated by a PRODUCT of two SAME-VARIABLE Gaussians
+`(Ccr·τ⁻¹·gaussDdim (wL·τ) (0−z))·(CF·gaussDdim (wF·s) z)` (`τ = a−s`). Junction piece **(5)** is to collapse
+that product into a single Gaussian × constant.
+
+**★ IT COLLAPSES EXACTLY (a heat-kernel semigroup identity).** The two 1-D heat kernels
+`heatKernel1D a x = (√(4πa))⁻¹·e^{−x²/(4a)}` multiply to a single 1-D kernel of REDUCED width `ab/(a+b)`,
+leftover normalization `heatKernel1D (a+b) 0`:
+`heatKernel1D a x·heatKernel1D b x = heatKernel1D (a+b) 0·heatKernel1D (ab/(a+b)) x` (exp sum
+`−x²/4a−x²/4b = −x²/(4·ab/(a+b))`; norms `√(4πa)√(4πb)=√(4π(a+b))√(4π·ab/(a+b))`, both square to `16π²ab`).
+Over the `n` coords: `gaussDdim a x·gaussDdim b x = (heatKernel1D (a+b) 0)ⁿ·gaussDdim (ab/(a+b)) x` EXACTLY.
+Since `heatKernel1D (a+b) 0 > 0` and (with evenness `0−z=−z`) the product bound becomes the single-Gaussian
+envelope `Cenv·gaussDdim λ z`, `Cenv = A·B·(heatKernel1D (α+β) 0)ⁿ ≥ 0`, `λ = αβ/(α+β) > 0` — the exact `henv`
+shape with `α=wLτ`, `β=wFs`, `A=Ccr·τ⁻¹`, `B=CF`.
+
+**What lands** (std-3 ×4, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `heatKernel1D_mul_collapse` — the exact 1-D product identity.
+- `gaussDdim_mul_collapse` (★): the exact `d`-dimensional product identity.
+- `gaussProduct_single_gaussEnv` (★★): the census-shaped collapse — from `0<α,0<β,0≤A,0≤B` produces
+  `Cenv≥0`, `λ>0` s.t. `val ≤ A·gaussDdim α (0−z)·(B·gaussDdim β z) ⟹ val ≤ Cenv·gaussDdim λ z` (the `henv` shape).
+- `gaussProduct_single_gaussEnv_hyp_satisfiable` — non-vacuity at genuine positive widths.
+
+**Honest status.** Junction piece (5) of J4-933's re-audit is DISCHARGED (exact Gaussian-semigroup identities,
+NO new assumption — not even `hbaseC2`). REMAINING junction pieces: (1) J4-217 `hgate` carry; (3) concrete
+`amp·F`/`Cfield·F` global bounded+Lipschitz inputs; (6) `Bball + tail ≤ C_far·(u−s)^{−1/2}` rate absorption;
+plus per-summand integrabilities and uniformity in `s,a`. `hCensusBound`/`hCross`/`hDuhamel`/`hDConv` remain
+carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/GaussianProductCollapse.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
+errors (10243 jobs); `#print axioms` std-3 ×4; `axiom_budget_check.sh` raw 0 / OK; vacuum-grep clean; no
+existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `21c4b021`, pushed. NOT `a₁ = R/6`.
