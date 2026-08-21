@@ -13053,3 +13053,44 @@ for the domain bridge (`census_full_of_ball_bound_and_gaussEnv`), and the final 
 `axiom_budget_check.sh` raw 0/OK; vacuum-grep clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`.
 `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁ = R/6`.
+
+---
+
+## J4-945 (commit f8f99a0f + ledger, `CensusImageSubballBridge.lean`, NEW FILE, Opus/Fable): the IMAGE\BALL RESIDUE bridge (concern "a") for the CoV→two-term junction of the `hCensusBound` (`hCross`) assembly.
+
+Follows J4-944 (`CensusTwoTermBallLocal`), which resolved N1 (global-vs-ball boundedness) ball-locally and flagged
+the residual **image\ball localization** as concern (a). ★THE RESIDUE (concern a): after the CoV `commonWitness_cov`
+(J4-943) the census in `w`-space is integrated over the CoV IMAGE `Wbv''(ball 0 D.ρ)`, but the transported-weight
+regularity (`commonWitness_ampF_transport`/`_CfieldF_transport`, and the ball-local two-term core
+`two_term_census_bound_ballLocal`) is only known on an IMAGE BALL `ball 0 σ'`, where `σ'=min(D.σ)(rQ/(L_V+1))` is
+the transport-regularity radius. ★KEY DETERMINATION: the CoV domain radius `D.ρ` and the transport radius `σ'` are
+**INDEPENDENT** — `σ'=min(...)` governs ONLY `D.V`'s domain-ball→base-ball containment `V(ball 0 σ')⊆ball 0 rQ`
+(what makes `Q∘V` bounded on `ball 0 σ'`), NOT the image `Wbv''(ball 0 D.ρ)` fitting inside `ball 0 σ'`. So the
+image can genuinely extend beyond `ball 0 σ'`, and the residue `Wbv''(ball 0 D.ρ)\ball 0 σ'` is a **GENUINE**
+obstruction — it is NOT auto-resolved by the radius bookkeeping (verified live + gpt-5.6-sol high adversarially
+CONFIRMED genuine, and confirmed the IFT bookkeeping in fact tends to give the OPPOSITE inclusion `ball 0 σ'⊆image`).
+★THE FIX (domain restriction, NOT a hard `w`-space tail — gpt-5.6-sol endorsed as preferable): rather than estimate
+the un-controlled `w`-space image residue (which would need GLOBAL boundedness of the transported weight —
+unavailable), RESTRICT the CoV to a **sub-domain** `ball 0 δ⊆ball 0 D.ρ` chosen (by `ContinuousAt Wbv 0` via
+`wbv_contDiffAt_two` + `Wbv 0=0` via `uniformInverseChart_zero`) so that `Wbv''(ball 0 δ)⊆ball 0 σ'`. Then the
+`w`-space image sits INSIDE the regularity ball (weights controlled), and the leftover `z`-space residue
+`(ball 0 δ)ᶜ` is exactly the already-handled `CensusDomainBridge` (J4-933) far tail (exp-small Gaussian envelope).
+The inner ball `ball 0 r⊆Wbv''(ball 0 δ)` the two-term UNIFORM core still needs is recovered NOT from "the larger
+image is a neighbourhood" (which does NOT transfer to the sub-image — Sol's caveat) but from the LOCAL INVERSE:
+`D.V` is `D.L_V`-Lipschitz at `0` with `D.V 0=0` (`D.hVlip`/`D.hV0`) so `D.V` maps `ball 0 (min D.σ (δ/(L_V+1)))`
+into `ball 0 δ`; on the full image `Wbv(D.V w)=w` (`commonWitness_weightMatch`), and the open-map superset
+(`commonWitness_superset`) gives `ball 0 r₀⊆full image`, so `ball 0 (min ... r₀)` witnesses each `w=Wbv(D.V w)`
+with `D.V w∈ball 0 δ`. LANDS std-3 ×4: `commonWitness_image_subball` ★ (UPPER: `∃δ∈(0,D.ρ], Wbv''(ball 0 δ)⊆ball 0 σ'`);
+`commonWitness_innerBall_of_subdomain` ★ (LOWER: `∃r>0, ball 0 r⊆Wbv''(ball 0 δ)` for ANY δ>0);
+`commonWitness_image_sandwich` ★★ (HEADLINE: `ball 0 r⊆Wbv''(ball 0 δ)⊆ball 0 σ'`); `commonWitness_image_sandwich_of_geometry`
+★★ (UNCONDITIONAL non-vacuity: the sandwich holds from standing geometry `hC`/`hK`/`K∈𝓝 0` + any `σ'>0` ALONE via
+`baseVaryingIFTData_nonempty`, so the antecedent `D` is genuinely inhabitable). BUILT `lake build QIQTH.AxiomAudit`
+0 errors (10252 jobs); `axiom_budget_check.sh` raw 0/OK; vacuum-grep clean; no banked file edited; wired
+`QIQTH.lean`+`AxiomAudit.lean`; `git show f8f99a0f --stat` confirms 3 files (+256). ★HONEST STATUS (gpt-5.6-sol high
+adversarially audited): RESOLVES concern (a) — the image\ball residue — by domain restriction, confining the CoV
+image to the regularity ball while keeping an inner ball for the two-term core. Does NOT close `hCensusBound`/`hCross`.
+Residual CoV-junction obligations remain: (b) the gate-split integral restriction (`z∈K∧0∈S z`; G2 gives only
+`0∈S z`, need the `z∈K` half too), (c) the off-ball Gaussian envelope + integrability feeding `CensusDomainBridge`
+at radius `δ` (incl. the annulus `ball 0 D.ρ\ball 0 δ`), and (d) the final rate absorption; plus G2/G3. NONE in this
+file. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
