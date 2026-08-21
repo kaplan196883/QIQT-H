@@ -5311,6 +5311,17 @@ import QIQTH.CensusTauDerivGateSplit
 -- piece (3) is CLOSED concretely; the F factor remains an explicit abstract carry. std-3 ×9. NOT a₁=R/6.
 import QIQTH.CensusAmpConcreteRegularity
 
+-- BaseSlotTransportBallLocal — J4-939: the BALL-LOCAL ∘V transport closing the AMPLITUDE half of junction
+-- piece (3)'s transport for hCensusBound. J4-932's transported_ratio_regularity demanded a GLOBALLY
+-- bounded+Lipschitz weight P, but J4-938's concrete amp·F is only BALL-LOCALLY bounded+Lipschitz (on ball 0 ρ).
+-- This file supplies the ball-local variant (a mechanical adaptation of J4-932's proof, reusing the SAME
+-- radius-shrinking σ=min σ0 (rQ/(L_V+1)) that already keeps V's image inside the weight's ball of validity):
+-- transport_ballLocal_regularity (generic ball-local Q∘V), transported_ratio_regularity_ballLocal (the ball-local
+-- drop-in for J4-932), and composes with J4-938's concrete q₁/q₂ to close the amplitude-half of the ∘V transport
+-- (census_ampF/CfieldF_transported_ratio_regularity). std-3 ×5, non-vacuous (cos‖·‖ TEETH). CONDITIONAL on
+-- hbaseC2; F factor remains the explicit abstract carry. NOT a₁=R/6; a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+import QIQTH.BaseSlotTransportBallLocal
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver
