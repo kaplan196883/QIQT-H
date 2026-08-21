@@ -29971,4 +29971,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusTwoTermSuperset.two_term_census_bound_superset
 #print axioms QIQTH.CensusTwoTermSuperset.two_term_census_bound_superset_hyp_satisfiable
 
+-- ## CensusCovSubballMeasurable: the two ROUTINE glue items of the modulo-G2 hballrate (C1) closure attempt —
+-- (1) restricted CoV over ball 0 δ (δ≤D.ρ), generalizing the D.ρ-hardcoded commonWitness_cov; (2) measurability
+-- of the CoV image Wbv''(ball 0 δ) via Lusin–Souslin. Glue (1),(2) GENUINELY close (std-3 ×4). Sol-audited: the
+-- FULL modulo-G2 hballrate does NOT close modulo EXACTLY G2 — glue (3) needs missing uniform-in-s on-ball F
+-- regularity + τ↓0-uniform chartFieldAmp Lipschitz + uniform |det| lower bound. hballrate/C1 remains OPEN.
+#print axioms QIQTH.CensusCovSubballMeasurable.commonWitness_cov_subball
+#print axioms QIQTH.CensusCovSubballMeasurable.commonWitness_image_measurable
+#print axioms QIQTH.CensusCovSubballMeasurable.commonWitness_cov_subball_of_geometry
+#print axioms QIQTH.CensusCovSubballMeasurable.commonWitness_image_measurable_of_geometry
+
 end QIQTH.AxiomAudit

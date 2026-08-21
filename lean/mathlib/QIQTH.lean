@@ -5564,3 +5564,17 @@ import QIQTH.CensusExistRhoRethread
 -- required). Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,
 -- hCConv}, UNCHANGED.
 import QIQTH.CensusTwoTermSuperset
+-- CensusCovSubballMeasurable — the two ROUTINE glue items of the modulo-G2 hballrate (C1) closure attempt
+-- flagged by gpt-5.6-sol (high) in the J4-955 re-audit: (1) a RESTRICTED change of variables over a sub-ball
+-- ball 0 δ (δ≤D.ρ), generalizing the D.ρ-hardcoded commonWitness_cov (J4-943); (2) MEASURABILITY of the CoV
+-- image set Wbv''(ball 0 δ). Glue (1) = routine set-restriction of chart_gaussian_change_variables (arbitrary
+-- measurable domain) via HasFDerivWithinAt.mono/InjOn.mono; glue (2) = routine Lusin–Souslin
+-- (MeasurableSet.image_of_continuousOn_injOn; Point n=Fin n→ℝ Polish/Borel, Wbv continuous+injective on ball).
+-- LANDS std-3 ×4: commonWitness_cov_subball + commonWitness_image_measurable + two of_geometry non-vacuities.
+-- HONEST (gpt-5.6-sol high adversarially confirmed): closes glue (1),(2) ONLY; the FULL modulo-G2 hballrate does
+-- NOT close modulo EXACTLY G2 — glue (3) needs a substantive MISSING capstone input (uniform-in-s ON-ball
+-- bounded+Lipschitz F-regularity: the census hSupp/hF give only an OFF-ball F bound, and linearity in F forbids a
+-- geometry-only Cpair) PLUS a τ↓0-uniform spatial-Lipschitz control of chartFieldAmp and a uniform |det| lower
+-- bound (geometric). Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}. hballrate/C1 remains an OPEN carry.
+-- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusCovSubballMeasurable
