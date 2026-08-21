@@ -12384,3 +12384,44 @@ hGpow,…}`; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel
 QIQTH.AxiomAudit` 0 errors (10236 jobs); `#print axioms` std-3 ×3 (propext/Classical.choice/Quot.sound, no
 sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `5e8b1d87`, pushed. NOT `a₁ = R/6`.
+
+## J4-930 — the BASE-slot Gaussian change-of-variables: discharging obstruction (i) of J4-929's `hCensusBound` wall (base-slot vs field-slot CoV mismatch) — commit `5c9dcf57` (`BaseSlotChangeVariables.lean`, new file)
+
+**Context.** J4-929 localized the whole live `hCross` binder (h,k>0) to a single scalar census inequality
+`hCensusBound`, whose opaque residue is the chart change-of-variables. gpt-5.6-sol's NO-GO audit named THREE
+obstructions: **(i)** the census integrates the BASE slot `uniformInverseChart g gi hC hK z 0` (base = the
+integration variable `z`, field fixed at `0`), but the only banked CoV
+`ChartIFTPackage.chart_gaussian_change_variables_concrete` (J4-270) is for the FIELD slot
+`uniformInverseChart g gi hC hK 0 z`; **(ii)** the CoV is over `ball 0 ρ`, the census over `ℝⁿ` (tail residue);
+**(iii)** the concrete transformed weights are unverified bounded + center-Lipschitz. This increment targets
+obstruction **(i)** only.
+
+**Key finding (gpt-5.6-sol high, adversarial GO — verified, not asserted).** There is NO clean literal
+symmetry `U z 0 = -U 0 z`. The base↔field swap is geodesic reversal + parallel transport, already banked as
+`GeodesicReversalRoute.baseSlot_eventuallyEq_neg_terminalVel`: `U z 0 =ᶠ[𝓝 0] -T₀(U 0 z)` (terminal velocity,
+NOT literal negation). The HONEST route is the base-varying IFT the campaign already built:
+`BaseVaryingIFTPackage.baseVaryingIFTPackage` (J4-272) supplies the exact M1–M4 change-of-variables bundle for
+`Wbv = fun z => uniformInverseChart g gi hC hK z 0`, CONDITIONAL on the single honest regularity input
+`hbaseC2 : ContDiffAt ℝ 2 Wbv 0` — with centre-derivative invertibility (`fderiv Wbv 0 = -id`) supplied
+UNCONDITIONALLY by the banked quadratic displacement bound. That bundle is precisely the input the abstract
+`ChartGaussianChangeVar.chart_gaussian_change_variables` consumes.
+
+**What lands** (std-3 ×2, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `base_slot_gaussian_change_variables_of_hbaseC2` (★★): the BASE-slot CoV, conditional on `hbaseC2` —
+  `∫ z in ball 0 ρ, gaussDdim τ (U z 0)·B z = ∫ w in Wbv''(ball 0 ρ), gaussDdim τ w·(B(V w)/|det f'(V w)|)`.
+  A DIRECT MIRROR of J4-270's field-slot `chart_gaussian_change_variables_concrete`, feeding the base-varying
+  bundle instead of the field-slot bundle.
+- `base_slot_gaussian_change_variables_of_terminalVel` (★): the same CoV further reduced to the more
+  fundamental residual `hT0 : ContDiffAt ℝ 2 (terminalVel0 …) 0` via
+  `GeodesicReversalRoute.hbaseC2_of_terminalVel_contDiffAt`.
+
+**Honest status.** Discharges obstruction **(i)** ONLY — the base-slot CoV is now BANKED (a reusable API
+brick), modulo the honest, geometrically-true, separately-bankable residual `hbaseC2` (⟸ `hT0`). Obstructions
+**(ii)** (`ball 0 ρ` vs `ℝⁿ` tail) and **(iii)** (concrete transformed weights bounded + center-Lipschitz)
+REMAIN, so `hCensusBound` / `hCross` are NOT closed. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected.
+`a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/BaseSlotChangeVariables.lean` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10237 jobs); `#print axioms` std-3 ×2 (propext/Classical.choice/Quot.sound, no
+sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `5c9dcf57`, pushed. NOT `a₁ = R/6`.
