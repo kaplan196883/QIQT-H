@@ -5205,6 +5205,22 @@ import QIQTH.HCrossDerivEngineWired
 -- hCross NOT closed. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.BaseSlotChangeVariables
 
+-- BaseSlotDetRegularity — J4-931: the DETERMINANT-FACTOR regularity brick for obstruction (iii) of
+-- J4-929's hCensusBound wall, on the BASE ball. det_clm_contDiff (★, A↦A.det is C^∞ on Point n →L Point n,
+-- Mathlib ContinuousLinearMap.continuous_det upgraded to ContDiff via JacobiFormula.matrix_det_contDiff ∘
+-- the CLM→matrix continuous-linear bridge — the piece J4-925 flagged ABSENT, supplied by COMPOSITION not a
+-- manual |det A−det B| bound); det_fderiv_contDiffAt (★, z↦(fderiv Wbv z).det is ContDiffAt 1 given
+-- hbaseC2, via ContDiffAt.fderiv_right); det_fderiv_lipschitzOn_ball (★, convex-MVT contDiffAt_one_
+-- lipschitzOn_ball); absdet_fderiv_boundedBelow_ball (★, |det|≥1/2 near 0 from continuity + chartW0_absdet_
+-- fderiv_zero |det(0)|=1); det_fderiv_regularity_bundle (★★, ∃r,L_D: |det|≥1/2 ∧ det Lipschitz on ball);
+-- recip_absdet_center_lipschitz (★★, 1/|det| bounded 2 + center-Lipschitz, feeds reciprocal_abs_center_
+-- lipschitz); paired_ratio_center_lipschitz (★★, ∀ bounded+Lipschitz P, P/|det| bounded+Lipschitz — the
+-- FULL obstruction-(iii) shape on the base ball, feeds ratio_abs_lipschitzOn). Discharges the det/ratio
+-- HALF of obstruction (iii), conditional on hbaseC2. Remaining: the ∘V transport to the image side needs
+-- V (inverse) center-Lipschitz (the true remaining bottleneck), + obstruction (ii) ℝⁿ-vs-ball tail. So
+-- hCensusBound/hCross NOT closed. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.BaseSlotDetRegularity
+
 -- SliverAmplitudeFromHGpow — J4-921: the sqrt(eps) matched-sliver amplitude carry `hbnd` REDUCED to
 -- the moment-aware tau^{-1/2} pairing carry `hGpow` of `memLapFull_live_crude` (J4-914). Integrating
 -- the pointwise hGpow bound |int_z W''(u-s)z.F s z 0| <= Cpair.(u-s)^{-1/2} over the matched sliver

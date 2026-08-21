@@ -29533,4 +29533,34 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotChangeVariables.base_slot_gaussian_change_variables_of_hbaseC2
 #print axioms QIQTH.BaseSlotChangeVariables.base_slot_gaussian_change_variables_of_terminalVel
 
+-- ## J4-931 (BaseSlotDetRegularity): the DETERMINANT-FACTOR regularity brick for obstruction (iii) of
+-- J4-929's hCensusBound wall, on the BASE ball. J4-930 banked the base-slot CoV whose transformed weight
+-- is B(V w)/|det(f'(V w))| (f' z = fderiv Wbv z on ball). Obstruction (iii) = those weights bounded +
+-- center-Lipschitz (gpt-5.6-sol likely bottleneck: 1/|det|). KEY: det_clm_contDiff — A↦A.det is C^∞ on
+-- Point n →L[ℝ] Point n, the Mathlib ContinuousLinearMap.continuous_det pattern UPGRADED from Continuous to
+-- ContDiff (A.det = Matrix.det(Ψ A), Ψ = toContinuousLinearMap(toMatrix'∘coeLM) the CLM→matrix CLM bridge,
+-- JacobiFormula.matrix_det_contDiff supplies Matrix.det smoothness). This is EXACTLY the piece J4-925's
+-- header flagged ABSENT from Mathlib — supplied here via the COMPOSITION route (det∘fderiv is C¹), NOT a
+-- manual quantitative |det A−det B|≤C‖A−B‖ bound. Then det_fderiv_contDiffAt (z↦(fderiv Wbv z).det is
+-- ContDiffAt 1 given hbaseC2, ContDiffAt.fderiv_right ∘ det_clm_contDiff), det_fderiv_lipschitzOn_ball
+-- (convex-MVT AmpQuantBundle.contDiffAt_one_lipschitzOn_ball), absdet_fderiv_boundedBelow_ball (|det|≥1/2
+-- near 0 from det continuity + chartW0_absdet_fderiv_zero |det(fderiv Wbv 0)|=1). det_fderiv_regularity_
+-- bundle (★★ MAIN: ∃r,L_D: |det|≥1/2 ∧ det Lipschitz on ball 0 r — the D-side input J4-925 consumes).
+-- recip_absdet_center_lipschitz (★★, 1/|det(fderiv Wbv)| bounded 2 + center-Lipschitz, feeds two_term_
+-- census hcl). paired_ratio_center_lipschitz (★★, ∀ bounded M_P + Lipschitz L_P weight P: P/|det| bounded
+-- 2M_P + pairwise-Lipschitz — the FULL obstruction-(iii) shape on the base ball, feeds ratio_abs_lipschitzOn).
+-- det_clm_contDiff_nonvacuous (teeth: (2•id).det = 2^n ≠ 0). std-3 ×8. HONEST: discharges the DET/RATIO
+-- HALF of obstruction (iii) but on the BASE (pre-image) ball; the CoV weight is w↦q(V w), so CENTER-
+-- Lipschitz genuinely needs the inverse V locally (center-)Lipschitz — the ∘V transport, NOT built here
+-- (per gpt-5.6-sol the true remaining bottleneck). Obstruction (ii) ℝⁿ-vs-ball tail also REMAINS. So
+-- hCensusBound/hCross NOT closed. NOT a₁=R/6; a₁=R/6 remains CONDITIONAL on {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.BaseSlotDetRegularity.det_clm_contDiff
+#print axioms QIQTH.BaseSlotDetRegularity.det_fderiv_contDiffAt
+#print axioms QIQTH.BaseSlotDetRegularity.det_fderiv_lipschitzOn_ball
+#print axioms QIQTH.BaseSlotDetRegularity.absdet_fderiv_boundedBelow_ball
+#print axioms QIQTH.BaseSlotDetRegularity.det_fderiv_regularity_bundle
+#print axioms QIQTH.BaseSlotDetRegularity.recip_absdet_center_lipschitz
+#print axioms QIQTH.BaseSlotDetRegularity.paired_ratio_center_lipschitz
+#print axioms QIQTH.BaseSlotDetRegularity.det_clm_contDiff_nonvacuous
+
 end QIQTH.AxiomAudit
