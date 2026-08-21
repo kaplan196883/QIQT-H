@@ -13479,3 +13479,41 @@ glue {restricted-CoV-over-δ, image-measurability, G2-threading, s,τ-uniformity
 (10263 jobs); #print axioms std-3 ×2; axiom_budget_check exit 0; vacuum-grep clean; no banked file edited; wired
 QIQTH.lean + AxiomAudit.lean; git show 41d2fab0 --stat = 3 files (+302). `hDuhamel`/`hDConv` remain carried; `hCConv`
 unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-956 (commit 958480b2) — CensusCovSubballMeasurable: CLOSE the two ROUTINE glue items of the modulo-G2 hballrate (C1) closure (restricted CoV over ball 0 δ + CoV-image measurability); the FULL modulo-G2 hballrate does NOT close modulo EXACTLY G2 (gpt-5.6-sol high confirmed)
+J4-955 left the modulo-G2 hballrate closure needing exactly three residual glue items (Sol): (1) a
+restricted CoV over `ball 0 δ` (banked `commonWitness_cov` J4-943 hardcoded at `D.ρ`); (2) measurability of the
+CoV image `Wbv''(ball 0 δ)`; (3) G2-threading + uniform transported constants in `s,τ`. J4-956 CLOSES the two
+ROUTINE ones and RIGOROUSLY establishes that the full modulo-G2 hballrate does NOT close modulo exactly G2.
+NEW FILE `CensusCovSubballMeasurable.lean` (edits NO banked file). ★`commonWitness_cov_subball` (glue 1): the
+RESTRICTED base-slot Gaussian CoV `∫_{ball 0 δ} gauss τ (Wbv z)·B z = ∫_{Wbv''(ball 0 δ)} gauss τ w·(B(V w)/|det
+(fderiv Wbv (V w))|)` for any `δ≤D.ρ`, about the SAME `D.V`/`fderiv ℝ Wbv` — a routine set-restriction of
+`chart_gaussian_change_variables` (parameterized by an ARBITRARY measurable domain) via `HasFDerivWithinAt.mono`
+/`Set.InjOn.mono`/pointwise restriction along `Metric.ball_subset_ball hδ`. ★`commonWitness_image_measurable`
+(glue 2): `MeasurableSet (Wbv''(ball 0 δ))` via Lusin–Souslin (`MeasurableSet.image_of_continuousOn_injOn`) —
+`Point n = Fin n → ℝ` Polish/Borel, `Wbv` continuous (`D.hderiv`⟹`ContinuousWithinAt`) + injective (`D.hinj`)
+on the ball; the exact `hΩ` slot `two_term_census_bound_superset` needs. ★ Two `_of_geometry` UNCONDITIONAL
+non-vacuities (both hold for a `baseVaryingIFTData_nonempty`-produced `D` at `δ=D.ρ/2`). ★ gpt-5.6-sol high
+ADVERSARIAL AUDIT (catching over- AND under-claim): (A) glue (1),(2) GENUINELY close — CoV set-restriction and
+Lusin–Souslin both sound. (B) the FULL modulo-G2 hballrate does NOT close modulo EXACTLY G2 — the DECISIVE
+blocker is a SUBSTANTIVE MISSING capstone input: uniform-in-`s` ON-ball bounded+Lipschitz `F`-regularity. The
+census `hSupp`/`hF` supply only an OFF-ball `F` bound (`|F s z 0|≤MF` for `ρ≤‖z‖`), while the ball integral is
+over `‖z‖<ρ`; and since the integral is LINEAR in `F`, a `Cpair` depending only on geometry CANNOT be uniform
+over `F` (rescale `F` inside the chart ball — support/exterior bound preserved, integral scales) unless a local
+norm of `F` is part of the data. There is no compactness/choice trick to uniformize the per-`(s,τ)` existential
+transport constants (the `s`-interval is open, `τ→0`, pointwise existence gives no finite sup). (C) Sol SHARPENED
+my diagnosis (under-claim correction): `census_amplitude_supBounds` gives only τ-uniform VALUE bounds, NOT the
+τ↓0-uniform SPATIAL-Lipschitz control of `chartFieldAmp` that the superset bound's `L` term needs — `(0,τ₀]`
+is not compact at `0` — so this is a further genuine uniformity gap. (D) the `|det(fderiv Wbv (V·))|` positive
+LOWER bound is a genuine geometric proof obligation (shrink to a closed ball, continuity/compactness) — real
+work but NOT a new hypothesis beyond standing geometry. (E) residual radius-alignment caveat: the image-sandwich
+must be usable after shrinking `δ` to fit the G2/F-regularity radii. So glue (3) = {CoV two-term fold + global
+truncation/measurability of `q₁,q₂` (doable plumbing) + uniform-in-`s` on-ball F-regularity (MISSING INPUT) +
+τ↓0-uniform `chartFieldAmp` Lipschitz (MISSING theorem) + uniform `|det|` lower bound (geometric)}. LANDS std-3
+×4 (propext, Classical.choice, Quot.sound); build via QIQTH.AxiomAudit OK (10264 jobs); raw axiom count 0; no
+sorryAx; vacuum-grep clean; no banked file edited; wired QIQTH.lean + AxiomAudit.lean; `git show 958480b2 --stat`
+= 3 files (+207). HONEST FINAL STATUS of this session's hCross work: `hballrate`/C1 remains an OPEN carry (glue
+(1),(2) now CLOSED, glue (3) OPEN with the F-regularity input identified as the decisive missing piece). Proves
+NONE of `{hballrate, hDuhamel, hDConv, hCConv}`. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected.
+`a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}` with `hballrate`/C1 an explicitly-listed SEPARATE open
+census carry — UNCHANGED. NOT `a₁=R/6`.
