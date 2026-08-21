@@ -45,6 +45,7 @@ import QIQTH.CensusFarRateAbsorb
 import QIQTH.CensusHbaseC2Discharge
 import QIQTH.CensusLeviFactorDischarge
 import QIQTH.BaseVaryingIFTCommonWitness
+import QIQTH.CensusTransportedWeightsUniform
 
 namespace QIQTH.AxiomAudit
 
@@ -30006,5 +30007,26 @@ namespace QIQTH.AxiomAudit
 -- glue-3 sub-piece; |det| lower bound already banked at J4-931 absdet_fderiv_boundedBelow_ball). NOT a₁=R/6;
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED. std-3.
 #print axioms QIQTH.CensusAmplitudeLipDischarge.census_amplitude_lipBounds
+
+-- ## CensusTransportedWeightsUniform: the UNIFORM-WITNESS transported-weight regularity repairing the decisive
+-- existential/uniform-witness quantifier obstruction blocking the modulo-G2 hballrate (C1) closure (gpt-5.6-sol
+-- high adversarial audit 2026-08-21). OBSTRUCTION: a single Cpair needs the post-CoV transported-weight constants
+-- (image radius σ, transported Lipschitz Lq, bounds M₁/M₂) UNIFORM over the (s,τ) rectangle, but EVERY banked
+-- transport lemma (commonWitness_ampF_transport, census_ampF_transported_ratio_regularity,
+-- transported_ratio_regularity_ballLocal, commonWitness_transport) quantifies σ,Lq EXISTENTIALLY PER-WEIGHT —
+-- ∀(s,τ)∃σLq does NOT give ∃σLq∀(s,τ), and no Classical.choice trick repairs it (Sol). FIX: reprove the transport
+-- INLINE with EXPLICIT closed-form witnesses (σ:=min D.σ (rP/(L_V+1)), M₁:=(MA·M_F)/(1/2), M₂:=(Msl·M_F)/(1/2),
+-- Lq:=((MA·L_F+M_F·LA)/(1/2)+(MA·M_F)·L_D/(1/2)²)·L_V) — all (s,τ)-independent since amp/slope are τ-uniform
+-- (census_amplitude_supBounds/lipBounds), F is s-uniform (carried, Levi output), |det|≥1/2+L_D
+-- (det_fderiv_regularity_bundle), V=D.V is L_V-Lipschitz with V0=0. Per-slice regularity via ratio_abs_lipschitzOn
+-- (explicit constants) + inlined D.hVlip/D.hV0 transport, against the SAME fixed witnesses. Sol-validated: varying
+-- centre q₁(0) harmless (two-term consumes each weight separately, needs only the same CONSTANT Lq). HONEST: this
+-- is the DECISIVE quantifier repair NO banked transport exposed, but it does NOT close hballrate — remaining wiring
+-- (global truncation/AEStronglyMeasurable of q₁,q₂, integral_add split, CoV two-term fold, image-sandwich radius
+-- choreography, final two_term_census_bound_uniform application) still unwritten. Proves NONE of {hballrate,
+-- hDuhamel,hDConv,hCConv}. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv} (with hballrate/hCross an OPEN
+-- downstream carry), UNCHANGED. std-3 ×2.
+#print axioms QIQTH.CensusTransportedWeightsUniform.census_transported_weights_uniform
+#print axioms QIQTH.CensusTransportedWeightsUniform.census_transported_weights_uniform_Fcarry_satisfiable
 
 end QIQTH.AxiomAudit

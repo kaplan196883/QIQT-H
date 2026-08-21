@@ -5612,3 +5612,17 @@ import QIQTH.CensusLeviFactorSUniform
 -- census_amplitude_lipBounds ★★★. Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}; hballrate/C1 remains an
 -- OPEN carry (this is ONE of its glue-3 sub-pieces). NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusAmplitudeLipDischarge
+
+-- CensusTransportedWeightsUniform — the UNIFORM-WITNESS transported-weight regularity repairing the DECISIVE
+-- existential/uniform-witness quantifier obstruction blocking the modulo-G2 hballrate (C1) closure (gpt-5.6-sol
+-- high adversarial audit 2026-08-21). A single Cpair needs the post-CoV transported constants (image radius σ,
+-- transported Lipschitz Lq, bounds M₁/M₂) UNIFORM over the (s,τ) rectangle, but EVERY banked transport lemma
+-- (commonWitness_ampF_transport, transported_ratio_regularity_ballLocal, commonWitness_transport, …) quantifies
+-- σ,Lq EXISTENTIALLY PER-WEIGHT — ∀(s,τ)∃σLq ≠ ∃σLq∀(s,τ), no Classical.choice trick repairs it. FIX: reprove the
+-- transport INLINE with EXPLICIT closed-form witnesses (all (s,τ)-independent since amp/slope τ-uniform, F s-uniform
+-- (carried), |det|≥1/2, V=D.V L_V-Lipschitz with V0=0), via ratio_abs_lipschitzOn + inlined D.hVlip/D.hV0.
+-- HONEST: DECISIVE quantifier repair NO banked transport exposed, but does NOT close hballrate — remaining wiring
+-- (truncation/measurability, integral_add split, CoV two-term fold, image-sandwich radius choreography, final
+-- two_term_census_bound_uniform) unwritten. Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6;
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv} (hballrate/hCross an OPEN downstream carry), UNCHANGED. std-3 ×2.
+import QIQTH.CensusTransportedWeightsUniform
