@@ -14436,3 +14436,55 @@ NONE of `{hballrate (as a top-level τ-carry), hDuhamel, hDConv, hCConv}`. `a₁
 on `{hDuhamel,hDConv,hCConv}`, UNCHANGED — with the correction that those three do NOT gate the
 `H_far`/`hCross` rate branch (they, if load-bearing, live in post-`hCross` Duhamel/convolution content
 unaudited here). NOT `a₁=R/6`.
+
+## J4-977 — HDConvLiveHmassoneDischarged: compose the banked J4-896 `hmassone` discharge INTO the live `hDConv`, ELIMINATING the analytic approximate-identity limit from the `hDConv` antecedent surface (commit `3329a864`)
+
+**Context (post-J4-976 narrowing).** J4-976 (investigation-only) established that `{hDuhamel,hDConv,hCConv}`
+genuinely still gate `a₁=R/6`, but their content is SHARPLY CONFINED to coefficient-identification; the
+F-side domination/regularity/measurability surface and the `H_far`/`hCross` rate branch are TRIO-FREE.
+This session re-verified the exact live trio (`TrueKernelA1Reduced.trueKernel_diagonal_a1_eq_R6_residual`,
+lines 167–178): `hDuhamel` (the algebraic parametrix Duhamel identity `(∂_t−Δ)(H*L)=L+E*L` at the
+diagonal), `hDConv` (`DifferentiableAt` of the correction convolution in time at the diagonal), `hCConv`
+(`ContDiff ℝ ⊤` of the correction convolution in space). Confirmed (reading Lean source, gpt-5.6-sol high
+audited): the residual genuine content of all three converges on a SINGLE irreducible geometry wall — the
+`RadialNormalCoordinateGauge` centre-identity leg's geodesic-pullback bridge `hpull`
+(`RadialGaugeInterface.abstract_centerIdentities_of_gaussPullback` / `CurvedCenterIdentities.
+curved_centerIdentities_of_gaussPullback`), i.e. that the OPAQUE `.choose`-Skolemized flow chart
+`uniformInverseChart`/`uniformFlowExp` realizes the geodesic normal-chart contractions. `hpull` is carried
+(unproven) for FLAT **and** CURVED — the "opaque-chart wall." Sol verdict: no new core math is available at
+the wall; the one legitimate, non-vacuous, non-relabeling increment is to compose the ALREADY-banked
+`hmassone` discharge into the live `hDConv`, eliminating that analytic-limit binder.
+
+**`hDConv_live_gate_hmassone_discharged` (★★★).** Restates the LIVE order-1 `hDConv`
+(`HDConvLiveGateWired.hDConv_live_gate_wired`, raw `gatedKernel`/`globalCutoffParametrixWitnessN` form)
+with the OPAQUE analytic approximate-identity limit
+`hmassone : Tendsto (fun m => ∫ z, vanVleckGatedWitness … (epsSeq m) 0 z) atTop (𝓝 1)` REMOVED from its
+~130-binder census and DERIVED internally from the banked J4-896
+`HmassoneFromGateAnnulusSplit.hmassone_from_gate_annulus_split`, fed with the census's OWN `hWmeas`
+(= `hWslice`) and `hWDom` (= `hDom`) + only the independently satisfiable, capstone-geometry-supplied
+carriers `{hgCD,hgiCD,hgpos,h0Kmem,hgdet0,ha,hab,rS,hrS,hKball,hSact}`. Net: an opaque approximate-identity
+analytic LIMIT (mass-normalization / boundary trace as `ε→0`) is traded for elementary satisfiable geometry
++ gate-activation inputs — pure dependency normalization. This is the missing composition step between two
+previously-banked results (J4-896 `hmassone` discharge + J4-897 live `hDConv` census); no file imported
+`HmassoneFromGateAnnulusSplit` into the live `hDConv` before.
+
+**gpt-5.6-sol high audit (2026-08-22).** Q1: no further analytic increment at the wall; `hpull` should be
+carried as an explicit labelled geometry compatibility input (a flat-model proof would require ODE
+uniqueness through the `.choose`-Skolemized flow — not feasible as a clean brick). Q2: `hDConv` has the
+smallest residual once `hpull` is factored (its approximate-identity, domination, measurability, rate
+branches all discharged/trio-free; `hCConv` retains the extra `b<r₀` gate obstruction; `hDuhamel` is
+structurally broader). Q3: the composition is legitimate and useful IF it performs real specialization
+(it does — feeds concrete carriers, eliminates a binder), NOT an alias. Q4: `a₁=R/6` remains CONDITIONAL
+on `{hDuhamel,hDConv,hCConv}`; isolating `hpull` + deriving carriers from banked inputs is a sound stopping
+point; claiming the unconditional coefficient theorem would not be.
+
+**Verification.** `lake build QIQTH.HDConvLiveHmassoneDischarged` 0 err (built first try, 8885 jobs);
+`lake build QIQTH.AxiomAudit` 0 err (10285 jobs); `#print axioms` std-3 (propext, Classical.choice,
+Quot.sound; NO sorryAx, NO custom); `axiom_budget_check.sh` raw count 0 (budget 0), no sorryAx, no
+regressions; vacuum-grep clean; no banked file edited; wired `QIQTH.lean` + `AxiomAudit.lean`;
+`git show 3329a864 --stat` = 3 files (+258); pushed.
+
+**Honest status.** Pure dependency normalization of the `hDConv` surface — NOT progress past the wall.
+The remaining `hDConv` census content (the `RadialNormalCoordinateGauge` centre-identity leg + geodesic-
+pullback bridge `hpull` = the opaque-chart wall, Gaussian dominations, interchange bundles, sliver carries)
+is UNTOUCHED. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
