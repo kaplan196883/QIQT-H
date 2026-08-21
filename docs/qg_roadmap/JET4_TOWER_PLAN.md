@@ -13590,3 +13590,50 @@ edited; wired QIQTH.lean+AxiomAudit.lean; `git show 20626faa --stat` = 3 files (
 + `q₁/q₂` truncation-measurability + G2-threading} (the amplitude-Lipschitz AND |det|-lower-bound sub-pieces both now
 resolved). `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+### J4-959 (commit 40a4bb18) — CensusTransportedWeightsUniform: the UNIFORM-WITNESS transported-weight regularity — the DECISIVE quantifier-order repair for the modulo-G2 hballrate closure (gpt-5.6-sol high adversarial audit 2026-08-21)
+
+TARGET: attempt the FULL modulo-G2 `hballrate` (C1) assembly by composing the 8 "ingredient" files (J4-943
+BaseVaryingIFTCommonWitness, J4-956 CensusCovSubballMeasurable, J4-955 CensusTwoTermSuperset, J4-946
+CensusJointGateInnerBall, J4-957 CensusLeviFactorSUniform, J4-958 CensusAmplitudeLipDischarge, J4-931
+BaseSlotDetRegularity, J4-949 CensusAmplitudeSupDischarge) into the `hballrate` slot of J4-954's
+`censusBound_of_geometry_gate_supp_F_ballRate_anyS_existRho`.
+
+FINDING (the 8 files do NOT mechanically compose; a genuine gap, gpt-5.6-sol high CONFIRMED): filling
+`hballrate` needs a SINGLE `Cpair` for all `(s,a)` (`s∈Ioo(u-ε)u`, `τ=a-s∈(0,τ₀]`). Via the intended
+CoV→two-term route, `Cpair` is built from the post-CoV transported-weight constants (image radius `σ`, transported
+Lipschitz `Lq`, bounds `M₁/M₂`), which MUST be UNIFORM over the `(s,τ)` rectangle. But EVERY banked transport lemma
+(`commonWitness_ampF_transport`, `census_ampF_transported_ratio_regularity`, `transported_ratio_regularity_ballLocal`,
+primitive `commonWitness_transport`) quantifies `σ,Lq` EXISTENTIALLY PER-WEIGHT (`P=amp(τ,·)·F(s,·)` depends on
+`s,τ`), so a ∃-elim inside the `∀(s,a)` binder yields FRESH `σ,Lq` per slice. `∀(s,τ)∃σLq` does NOT give
+`∃σLq∀(s,τ)`, and NO `Classical.choice` trick repairs it (Sol: chosen witnesses have no uniform lower/upper bound;
+two are strictly worse, routing through `census_ampF_ratio_regularity`'s opaque `a,τ`-dependent `M,L`). So NO banked
+lemma exposes the transported q₁/q₂ regularity with `σ,Lq` OUTSIDE the `(s,τ)` rectangle — the decisive gap. The
+task's premise "all ingredients on the table" was OVER-OPTIMISTIC.
+
+FIX / WHAT LANDS (Sol-validated design): `census_transported_weights_uniform` (★★★) reproves the transport INLINE
+with EXPLICIT closed-form witnesses quantified OUTSIDE the `(s,τ)` binder — ONE `V,σ,M₁,M₂,Lq` (0<σ, all ≥0, V0=0)
+s.t. `∀s∈Ioo(u-ε)u ∀τ∈(0,τ₀]`, on `ball 0 σ` the transported amplitude weight
+`q₁=(amp(τ,V·)·F(s,V·))/|det(fderiv Wbv(V·))|` is bounded `M₁` + pairwise-Lipschitz `Lq`, and the slope weight
+`q₂=(slope(V·)·F(s,V·))/|det|` is bounded `M₂`. Witnesses: `σ:=min D.σ (rP/(L_V+1))`, `M₁:=(MA·M_F)/(1/2)`,
+`M₂:=(Msl·M_F)/(1/2)`, `Lq:=((MA·L_F+M_F·LA)/(1/2)+(MA·M_F)·L_D/(1/2)²)·L_V` — all `(s,τ)`-independent because amp/slope
+are τ-uniform (`census_amplitude_supBounds`/`_lipBounds`), `F` is s-uniform (carried, the Levi output), `|det|≥1/2`+`L_D`
+(`det_fderiv_regularity_bundle`), `V=D.V` is `L_V`-Lipschitz with `V0=0`. Per-slice regularity via `ratio_abs_lipschitzOn`
+(explicit constants) + inlined `D.hVlip`/`D.hV0` mapsTo transport, against those SAME fixed witnesses. Sol-validated:
+varying centre `q₁(0)=amp(τ,V0)·F(s,V0)/|det(V0)|` is HARMLESS (`two_term_census_bound_uniform` consumes each weight
+separately, needs only the same CONSTANT `Lq`, not agreeing centres). Companion `_Fcarry_satisfiable` (TEETH, F≡0).
+
+REMAINING modulo-G2 `hballrate` wiring (Sol; NONE in this file): (a) global truncation to Ω-indicator +
+`AEStronglyMeasurable` of `q₁,q₂` (from continuity of the V-composite); (b) `integral_add` split on the image (two
+integrability proofs); (c) the CoV two-term FOLD (`commonWitness_weightMatch` on the image, matching the two-term
+integrand shape); (d) radius choreography (`commonWitness_image_sandwich` to fit `Ω⊆ball 0 σ` while keeping inner ball
+`ball 0 r⊆Ω`, plus the G2 joint-gate ball); (e) final `two_term_census_bound_uniform` application.
+
+LANDS std-3 ×2 (propext, Classical.choice, Quot.sound; no sorryAx, no custom): `census_transported_weights_uniform`
+(★★★) + `_Fcarry_satisfiable` (TEETH). Build via QIQTH.AxiomAudit OK 10267 jobs; `axiom_budget_check` raw axiom count
+0 (budget 0); vacuum-grep clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean; git show 40a4bb18 --stat =
+3 files (+383). HONEST STATUS: the DECISIVE quantifier-order repair the banked transports never exposed is SUPPLIED;
+`hballrate`/C1 remains an OPEN carry (now needing only the {truncation-measurability + integral-split + CoV-fold +
+radius-choreography + two-term application} wiring on top of this uniform brick). Proves NONE of
+`{hballrate, hDuhamel, hDConv, hCConv}`. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains
+CONDITIONAL on `{hDuhamel,hDConv,hCConv}` (with `hballrate`/`hCross` an OPEN downstream carry), UNCHANGED. NOT `a₁=R/6`.
