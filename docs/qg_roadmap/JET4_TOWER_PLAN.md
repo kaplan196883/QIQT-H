@@ -13692,3 +13692,52 @@ sibling premises `hF(ρ)/hΦint(ρ)/hSupp` at the SAME ρ remain the caller's), 
 carriers (inhabited by any Riemannian metric). `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6`
 remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}` (with `hCross`/`hCensusBound` an OPEN downstream carry — this brick
 removes the `hballrate` sub-obstruction MODULO G2), UNCHANGED. NOT `a₁=R/6`.
+
+### J4-961 (commit 33361870) — CensusIntegratedModuloG2: FULL integration of the modulo-G2 hballrate (C1) with its three SIBLING census premises hF/hΦint/hSupp — hCensusBound + the live hCross binder CLOSED modulo G2 + standard carriers (gpt-5.6-sol high final adversarial audit: SOUND-WITH-CAVEATS)
+
+Picks up J4-960's report, which closed the `hballrate` (C1) ARGUMENT SLOT modulo G2 but flagged it did NOT
+give an "integrated capstone application" because the sibling premises `hF(ρ)`/`hΦint`/`hSupp` must be
+supplied AT THE SAME `ρ` that `hballrate_moduloG2` internally chooses (`ρ:=δ=min(image-subdomain radius)
+(joint-gate radius)`). J4-961 CLOSES that integration in a NEW file `CensusIntegratedModuloG2.lean` (edits
+NO banked file).
+
+**★ THE ρ-ALIGNMENT (all three siblings ρ-align at the internal ρ — NO quantifier-order obstruction).**
+Verified against the actual banked discharge lemmas:
+  • `hF(ρ)` via `hF_of_leviWidth2Dom` (J4-952): ρ-INDEPENDENT — its proof ignores the off-ball `ρ≤‖z‖`
+    hypothesis entirely and proves the STRONGER all-`z` bound `|F s z 0|≤MF`, so `MF` is ρ-free and holds at
+    ANY ρ including δ. Needs the width-2 Levi domination `hFdom` + benign window `ε<u, u≤T`.
+  • `hΦint` via `censusPhi_integrable_of_amplitudeCarries` (J4-953): ρ-FREE — proves `Integrable` over ALL
+    of `ℝⁿ` (no `Metric.ball`), needing the standard F2 measurability carriers `{hKSmeas, hcar (standing
+    chart-Borel wall), hFmeas}`, the amplitude sups (`census_amplitude_supBounds`), `hSupp`, `hFdom`.
+  • `hSupp` kept as a genuine per-`D` UPPER small-gate carry (NOT implied by G2's lower containment).
+gpt-5.6-sol (high) CONFIRMED the ρ-threading sound: `hF`/`hΦint`/`Cpair`/`MF` are all selected AFTER ρ
+inside the same `∀ D` binder, so even a ρ-dependent `MF` would pose no quantifier problem; and a proved
+`Integrable`-over-`ℝⁿ` cannot secretly need `IntegrableOn (ball 0 ρ)`. Two `rAmp` radii (capstone's vs
+`census_amplitude_supBounds`') intersected via `min` — sound/conservative (both constrain the same scalar
+`D.r`).
+
+**LANDS (std-3 ×3: propext, Classical.choice, Quot.sound; no sorryAx, no custom).**
+  • `censusBound_integrated_moduloG2` (★★★) — the ρ-FREE `hCensusBound` (∫ over `ℝⁿ`, `C_far := Cpair +
+    Cenv·√2ⁿ·√ε` existential) with `hballrate`/`hF`/`hΦint` ALL discharged, modulo G2 + carriers.
+  • `hcross_integrated_moduloG2` (★★★) — the FULL live `hCross` mixed-second-difference binder (`h,k>0`
+    quadrant) via `hcross_of_censusIntegral_bound` (J4-929), modulo the same carriers + the J4-929
+    differentiation carries `{hFmeasG, four interval-integrabilities, hEnv, H_near, H_zero}`.
+  • `censusBound_integrated_moduloG2_carries_satisfiable` (TEETH: non-univ gate `S z:=ball z 1`,
+    `0∉ball(2·)1`, `F≡0`) — a CONSISTENCY witness for the NEW `{hS, hFb, hFl, hFdom, hεu, numeric}` carries.
+
+**ONE NEW carry beyond J4-960:** `hεu : ε < u` (positive-time heat window), required by
+`hF_of_leviWidth2Dom` + `censusPhi_integrable_of_amplitudeCarries`, NOT by the capstone itself — benign.
+
+**HONEST STATUS (gpt-5.6-sol high SOUND-WITH-CAVEATS — its sharpest correction adopted).** The ρ-alignment
+is NOT the problem; the dependency ACCOUNTING is. G2 (`hS`) is a genuinely NEW ungrounded carry FOR THE
+CONCRETE GATE — the teeth theorem proves only CONSISTENCY at a test gate, NOT that `∃ rS>0, ball 0 rS ⊆
+{z|0∈S_actual z}` for the campaign's van-Vleck gate, and NOT a live geometric instance satisfying `hSupp`.
+So: the PRINCIPAL analytic obstruction `{hDuhamel,hDConv,hCConv}` is UNCHANGED, but the FULL unresolved
+assumption set now EXPLICITLY ALSO includes G2 (+ the measurability/support/timing carriers). The F-data
+carriers `{hFdom,hFb,hFl}` are the downstream Levi estimates EXPECTED from the `{hDuhamel,hDConv,hCConv}`
+package (there is NO formal `hDuhamel→hFdom` bridge in this file — do not claim they "ARE" identical).
+Discharges NONE of `{hballrate,hDuhamel,hDConv,hCConv}` as a top-level τ-carry. `hDuhamel`/`hDConv` remain
+carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}` (+ G2 as a NEW
+census-side gate carry). Build via QIQTH.AxiomAudit OK (10270 jobs); `axiom_budget_check` raw axiom count
+0 (budget 0); vacuum-grep clean; no banked file edited; wired QIQTH.lean+AxiomAudit.lean; `git show
+33361870 --stat` = 3 files (+343). NOT `a₁=R/6`.
