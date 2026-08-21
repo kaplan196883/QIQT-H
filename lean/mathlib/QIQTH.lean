@@ -5211,6 +5211,17 @@ import QIQTH.HCrossLargeShiftRegime
 -- BEYOND {hballrate + full-domain FTC/differentiation + off-ball}. Does NOT change conditional status.
 -- NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.HFarFromBallrate
+-- HFarOffBallDischarge — J4-968: the OFF-BALL spatial estimate for H_far, discharging the last open analytic
+-- step of J4-967's hfar_of_ballrate_ftc by TRANSFERRING J4-933's off-ball Gaussian-tail technique into the
+-- (c−s)-form rate slot. far_rate_of_ball_and_gaussEnv composes census_full_of_ball_bound_and_gaussEnv (J4-933,
+-- |∫_ℝⁿ Φ|≤Bball+Cenv·√2ⁿ·e^{−ρ²/(8λ)}) with tail_absorb (e^{…}≤1 and 1≤√M·τ^{−1/2}) to give the FULL-domain
+-- (c−s)-form rate |∫ z, g c s z|≤(Cpair+Cenv·√2ⁿ·√(h+ε))·(c−s)^{−1/2} — the exact hrate shape J4-967 consumes
+-- (distinct from J4-940's (u−s)-form census-collapse, which is the WRONG direction for this slot). Headline
+-- hfar_of_ballrate_offBallEnv_ftc then threads it through hfar_of_ballrate_ftc to yield H_far from {FTC bridge,
+-- on-ball hballrate rate, off-ball Gaussian envelope on g, integrability} — NO separate off-ball obligation
+-- left. Does NOT prove the concrete-kernel off-ball envelope (hAcrude/leviSeries carry) nor the FTC bridge
+-- (hDuhamel/hDConv). Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6 (CONDITIONAL, UNCHANGED).
+import QIQTH.HFarOffBallDischarge
 -- HCrossDerivEngineWired — J4-929: WIRE the banked differentiation-under-integral engine into J4-928's
 -- hderiv, collapsing the whole hCross (h,k>0) binder onto a SINGLE scalar census integral inequality.
 -- gpt-5.6-sol (high) go/no-go: NO-GO for full closure (the residual bound = the chart CoV + J4-924 wall,

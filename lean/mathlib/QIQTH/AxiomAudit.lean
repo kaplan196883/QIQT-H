@@ -54,6 +54,7 @@ import QIQTH.HsuppConstGateGrounded
 import QIQTH.HCrossNegativeQuadrants
 import QIQTH.HCrossLargeShiftRegime
 import QIQTH.HFarFromBallrate
+import QIQTH.HFarOffBallDischarge
 
 namespace QIQTH.AxiomAudit
 
@@ -30137,5 +30138,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HFarFromBallrate.hfar_of_ballrate_ftc
 #print axioms QIQTH.HFarFromBallrate.hfar_of_ballrate_ftc_conv
 #print axioms QIQTH.HFarFromBallrate.hfar_of_ballrate_ftc_hyp_satisfiable
+
+-- ## J4-968 (HFarOffBallDischarge): the OFF-BALL spatial estimate for H_far — discharges the last open
+-- analytic step of J4-967's hfar_of_ballrate_ftc reduction by TRANSFERRING J4-933's off-ball Gaussian-tail
+-- technique (census_full_of_ball_bound_and_gaussEnv) into the (c−s)-form rate slot. tail_absorb (pure
+-- algebraic core): Bball≤Cpair·τ^{−1/2}, L≤Bball+Cenv·(√2ⁿ·e), 0≤e≤1, 0<τ≤M ⟹ L≤(Cpair+Cenv·√2ⁿ·√M)·τ^{−1/2}
+-- (needs only e≤1 — NOT the exp decay — plus 1≤√M·τ^{−1/2}, one_le_sqrt_mul_rpow). far_rate_of_ball_and_gaussEnv
+-- (★★): composes census_full (J4-933) through tail_absorb ⟹ |∫ z, Φ z|≤(Cpair+Cenv·√2ⁿ·√M)·τ^{−1/2}, the
+-- FULL-domain (c−s)-form rate (distinct from J4-940's (u−s)-collapse: (u−s)^{−1/2}≥(c−s)^{−1/2}, WRONG direction
+-- for the hrate slot). hfar_of_ballrate_offBallEnv_ftc (★★★): threads it through hfar_of_ballrate_ftc (J4-967,
+-- τ=c−s, M=h+ε since c≤u+h, s>u−ε ⟹ 0<c−s≤h+ε) ⟹ H_far |Φ(u+h,s)−Φ(u,s)|≤(Cpair+Cenv·√2ⁿ·√(h+ε))·h·(u−s)^{−1/2}
+-- from {FTC bridge, on-ball hballrate rate, off-ball Gaussian envelope on g, integrability} — no separate
+-- off-ball obligation left. TEETH: g=gaussDdim 1, Φ c s:=c, u=0,ε=h=ρ=Cenv=1,Cpair=√2; ∫z g=1 (mass), FTC
+-- 1=∫_0^1 1; envelope EQUALITY (lam=Cenv=1 active); ball mass≤1≤√2·(c−s)^{−1/2}; finite diff=1≠0. std-3 ×5.
+-- gpt-5.6-sol high 2026-08-22: technique transfers cleanly. Does NOT prove concrete-kernel off-ball envelope
+-- (hAcrude/leviSeries) nor FTC bridge (hDuhamel/hDConv). Discharges NONE of {hballrate,hDuhamel,hDConv,hCConv}.
+-- NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HFarOffBallDischarge.one_le_sqrt_mul_rpow
+#print axioms QIQTH.HFarOffBallDischarge.tail_absorb
+#print axioms QIQTH.HFarOffBallDischarge.far_rate_of_ball_and_gaussEnv
+#print axioms QIQTH.HFarOffBallDischarge.hfar_of_ballrate_offBallEnv_ftc
+#print axioms QIQTH.HFarOffBallDischarge.hfar_of_ballrate_offBallEnv_ftc_hyp_satisfiable
 
 end QIQTH.AxiomAudit
