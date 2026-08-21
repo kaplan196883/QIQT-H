@@ -13136,3 +13136,47 @@ concern (b) by CLARIFICATION — the "`z∈K` half" is discharged by standing `K
 G2 (no separate `z∈K` input). Does NOT close `hCensusBound`/`hCross`. Remaining CoV-junction obligations: (c) off-ball
 Gaussian envelope + integrability (incl. `jointGate\ball 0 r`), (d) final rate absorption; plus G2/G3. `hDuhamel`/`hDConv`
 remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-947 (commit 46199a9a + ledger, `CensusOffBallEnvelope.lean`, NEW FILE, Opus/Fable): the OFF-BALL ENVELOPE REDUCTION + full far-rate threading for the concrete gated census integrand — discharges the STRUCTURAL half of concern **(c)** and THREADS J4-940's rate absorption into the FULL `hCensusBound` binder shape, modulo THREE carries.
+
+Follows J4-945/946, which listed concern (c) [off-ball Gaussian envelope + integrability, incl. the two flagged
+annuli] + (d) [final rate absorption] as the remaining CoV-junction obligations. ★THE CONCRETE INTEGRAND (verified
+vs `hcross_of_censusIntegral_bound`, J4-929): `Φ s a z = deriv(fun r↦vanVleckGatedWitness g gi hC hK S cutA cutB
+r 0 z)(a−s)·F s z 0`, over ALL of ℝⁿ, `F` the abstract Levi factor (G3 object), census gate JOINT `z∈K ∧ 0∈S z`.
+★TASK DETERMINATION (gpt-5.6-sol high adversarially audited): the two flagged annuli — `ball 0 D.ρ\ball 0 δ`
+(J4-945) and `jointGate\ball 0 r` (J4-946) — are NOT distinct regions at the TAIL-INTEGRATION step: both
+`⊆ (ball 0 ρ)ᶜ = {z|ρ≤‖z‖}` for `ρ≤δ, ρ≤r` (`offBall_annuli_subsumed`; the upper `z∈ball 0 D.ρ` / `z∈jointGate`
+restrictions are irrelevant to the containment), which is EXACTLY the single off-ball region
+`census_full_of_ball_bound_and_gaussEnv` (J4-933) handles in ONE shot given a GLOBAL off-ball envelope. (Sol
+qualifier: the containments do not by themselves eliminate case-analysis that PROVING the envelope C3 might need;
+they only show the tail theorem needs no separate annulus integration once the global envelope is in hand — which
+is precisely the claim.) ★RADIUS MATCHING (Sol-flagged, handled): J4-933/J4-940 require the SAME `ρ` in the
+ball-integral C1 `∫_{ball 0 ρ}` AND the envelope `ρ≤‖z‖`; the file threads a SINGLE `ρ` through both (choose
+`ρ≤min δ r` for the subsumption). ★GATE-OFF HALF FREE: off the census gate the `∂_τ` kernel VANISHES
+(`censusTauDeriv_eqZero_offGate`, J4-937) so `Φ=0≤Cenv·gauss` FOR FREE, reducing the off-ball envelope to the
+ON-GATE envelope alone (`censusIntegrand_offBall_envelope_of_onGate`, purely pointwise `by_cases` on the gate — no
+measure-theoretic subtlety, Sol-confirmed).
+
+LANDS std-3 ×6: `censusIntegrand_eqZero_offGate` ★ (off gate `deriv·F=0`, via J4-937 + `zero_mul`);
+`offBall_annuli_subsumed` ★ (both annuli `⊆ (ball 0 ρ)ᶜ`); `censusIntegrand_offBall_envelope_of_onGate` ★★ (full
+off-ball envelope ⟸ ON-GATE envelope alone, off-gate half FREE); `censusIntegrand_far_rate_of_onGate` ★★ (per-(s,a):
+threads §C ⟶ J4-940, giving `|∫_{ℝⁿ}Φ| ≤ (Cpair+Cenv√2ⁿ√ε)·(u−s)^{−1/2}` from {integrability, honGate, ball-rate});
+`censusBound_of_onGate_and_ballRate` ★★★ (FULL `hCensusBound` binder `∀s∈Ioo(u−ε)u ∀a∈Icc u(u+h)` with the single
+explicit `C_far=Cpair+Cenv·√2ⁿ·√ε` — EXACTLY the antecedent J4-929 consumes — from THREE uniform carries + explicit
+positivity side-conditions `hε,hlam,hCenv,hCpair,hρ`); `censusBound_of_onGate_and_ballRate_hyp_satisfiable`
+(non-vacuity TEETH: genuine gate `S z=ball z 1`, `K=closedBall 0 1`, `F≡0` so `Φ≡0`, BOTH gate branches exercised —
+gate inhabited at `z=0`, genuinely fails off `K` via the constant-`2` sup-norm witness, `hn:0<n`).
+
+BUILT `lake build QIQTH.AxiomAudit` 0 errors (10254 jobs); `#print axioms` std-3 ×6 (propext/Classical.choice/
+Quot.sound, no sorryAx/custom); `axiom_budget_check` raw 0/OK; vacuum-grep clean; no banked file edited; wired
+`QIQTH.lean`+`AxiomAudit.lean`; `git show 46199a9a --stat` = 3 files (+336). ★HONEST STATUS (gpt-5.6-sol high
+audited — sound, NO soundness bug, "modest but useful", must NOT claim closure modulo {G2,G3}): discharges the
+STRUCTURAL half of concern (c) + threads (d); does NOT close `hCensusBound`. The three carries: (C1) on-ball trace
+rate `|∫_{ball 0 ρ}Φ|≤Cpair·(a−s)^{−1/2}` (two-term/trace core J4-922/944, dep G2/G3); (C2) integrability of `Φ`
+(available from J4-929's `hEnv` bundle); (C3) the ON-GATE off-ball Gaussian domination — the GENUINE remaining
+analytic core: dominating the two-term closed form `((∑ᵢ(W z 0)ᵢ²/(4τ²)−1/(2τ))·gaussDdim τ(W z 0))·A +
+gaussDdim τ(W z 0)·∂τA` by a SINGLE Gaussian `Cenv·gaussDdim λ z` in the ORIGINAL coordinate `z`; needs chart
+COERCIVITY `‖W z 0‖≥c‖z‖−b` (bi-Lipschitz is SUFFICIENT not necessary — Sol) + poly×Gauss domination +
+amplitude/F-factor control, UNIFORM as `τ↓0`; NOT reducible to {G2,G3}. So `hCensusBound` is assembled modulo
+{C1,C2,C3}, NOT modulo {G2,G3} alone. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains
+CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
