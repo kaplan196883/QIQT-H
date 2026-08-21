@@ -12877,3 +12877,42 @@ residual).  With piece (6) closed, `hCensusBound`'s remaining obligations reduce
 errors (10247 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
 file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `e1019b88`, pushed. NOT `a₁ = R/6`.
+
+---
+
+## J4-941 — CensusHbaseC2Discharge: obligation (b) `hbaseC2` DISCHARGED UNCONDITIONALLY (commit `c5673ac6`)
+
+**Target.** Obligation (b) of the J4-930..940 `hCensusBound` re-audit — the base-slot regularity
+`hbaseC2 : ContDiffAt ℝ 2 (fun z => uniformInverseChart g gi hC hK z 0) 0` carried as an explicit
+HYPOTHESIS by the census-family transport regularity lemmas of `BaseSlotTransportBallLocal` (J4-939).
+
+**★ THE KEY FINDING: `hbaseC2` IS NOT A GENUINE OPEN OBLIGATION — IT WAS ALREADY DISCHARGED AT J4-274.**
+`hbaseC2` is EXACTLY the unconditional conclusion of `TerminalVelC2.terminalVel0_contDiffAt_two`
+(`hT0`, the base-`0` terminal-velocity `C²`, discharged UNCONDITIONALLY at J4-274 via the geodesic
+HOMOGENEITY route — velocity endpoint `= D exp_0(v)[v]` on the diagonal, extracted from the banked
+position `C⁴` `uniformFlowExp_contDiffAt_four`) fed through the geodesic-REVERSAL transfer
+`GeodesicReversalRoute.hbaseC2_of_terminalVel_contDiffAt` (J4-273, reversal identity
+`Wbv z = − T₀(U 0 z)`).  The recent census lemmas merely CARRIED `hbaseC2` as a hypothesis instead of
+instantiating the banked discharge (which was verified live: `terminalVel0_contDiffAt_two` builds std-3).
+
+**What lands** (std-3 ×4, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `wbv_contDiffAt_two` (★★): the STANDALONE UNCONDITIONAL `hbaseC2` object
+  `ContDiffAt ℝ 2 (fun z => uniformInverseChart g gi hC hK z 0) 0` given only the standing geometry
+  `(hC, hK, K ∈ 𝓝 0)` — a one-composition bridge of the two banked unconditional facts, NO new hypothesis.
+- `transported_ratio_regularity_ballLocal_unconditional`,
+  `census_ampF_transported_ratio_regularity_unconditional`,
+  `census_CfieldF_transported_ratio_regularity_unconditional`: J4-939's census-family transport
+  regularity lemmas with the `hbaseC2` hypothesis REMOVED (discharged by `wbv_contDiffAt_two`).
+
+**Honest status.** Obligation (b) `hbaseC2` is CLOSED UNCONDITIONALLY.  The census-family transport
+regularity lemmas now depend ONLY on the abstract F-factor `F0` (obligation (a): the F-factor's own
+ball-local bounded+Lipschitz regularity = the `leviSeries` carry, downstream of Ebound/heatConv — the
+`{hDuhamel, hDConv, hCConv}`-family analytic input, NOT touched here).  `hCensusBound`'s remaining
+obligations therefore reduce to obligation (a) ALONE.  `hCensusBound`/`hCross` remain carried through
+`{hDuhamel, hDConv, hCConv}`; `hCConv` unaffected.  `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`.  NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/CensusHbaseC2Discharge.lean` 0 errors; `lake build QIQTH.AxiomAudit`
+0 errors (10248 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
+file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `c5673ac6`, pushed. NOT `a₁ = R/6`.
