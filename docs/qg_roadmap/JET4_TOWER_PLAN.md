@@ -14100,3 +14100,54 @@ errors (10277 jobs); `#print axioms` std-3 ×5 (propext/Classical.choice/Quot.so
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
 file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) GO on banking; commit `74209bce`,
 pushed. NOT `a₁ = R/6`.
+
+## J4-969 — HFarOffBallEnvFromCensus: the concrete off-ball Gaussian envelope `henv` DISCHARGED from the banked census time-derivative envelope via a NEW off-ball `τ⁻¹`-absorption (commit `bc33b88c`)
+
+**FILE (NEW).** `QIQTH/HFarOffBallEnvFromCensus.lean` (ns `QIQTH.HFarOffBallEnvFromCensus`, no banked
+file edited). std-3 ×8. Picks up J4-968's standing state: `hfar_of_ballrate_offBallEnv_ftc` produces
+`H_far` from {FTC bridge, on-ball `hballrate`, integrability, an OFF-BALL Gaussian envelope `henv` on the
+concrete rate integrand}, but J4-968 CARRIED `henv` abstractly and its firewall was explicit the
+concrete-kernel off-ball envelope was a GENUINELY SEPARATE carry. This increment DISCHARGES that `henv`
+for the concrete census integrand `g c s z := deriv(fun r↦vanVleckGatedWitness … r 0 z)(c−s)·F s z 0`.
+
+**gpt-5.6-sol high object-match audit (2026-08-22) — verdict CONFIRMED, then BUILT.** Q: does the banked
+`witnessTimeDeriv_domination_global_anyS` (J4-950, `|deriv(Wit)τ| ≤ Ccen·τ⁻¹·gaussDdim(4Dλτ)z ∀z`)
+directly supply `henv`? NO — two genuine gaps: (1) the extra `τ⁻¹` prefactor + τ-dependent NARROW width
+`4Dλτ→0`: `henv` needs a FIXED `Cenv`, impossible at equal widths since `Cenv ≥ Ccen·M_F·(c−s)⁻¹` blows
+up as `c−s↓0` (domains allow `c=u`, `s↑u`); (2) the F-factor `F s z 0` is not in the census env at all.
+So it is NOT a defeq/wiring composition — it needs new analysis + a G3 F-bound. Sol: absorption route
+sound, `ρ>0` genuinely required, closes ONLY the envelope premise NOT `H_far` outright. Sol GO on building.
+
+**THE NEW OFF-BALL `τ⁻¹`-ABSORPTION (the genuine analytic content).** WIDEN the Gaussian `q↦q'` (`q'>q`);
+on the off-ball region `ρ≤‖z‖` the extra exponential slack absorbs the `τ⁻¹`:
+`τ⁻¹·gaussDdim(q·τ)z ≤ K·gaussDdim(q'·τ)z` with a FIXED `K=(√(q'/q))ⁿ·(d·ρ²·e)⁻¹`, `d=(1/q−1/q')/4>0`.
+Mechanism: the banked width-ratio `gaussDdim_width_ratio_le` (η=0, lam=q'/q, w=z) gives ratio
+`(√(q'/q))ⁿ·exp(−d·r²(z)/τ)`; off-ball `r²(z)≥ρ²` (via `sq_norm_le_rncRadialSq`, sup≤Euclidean) plus the
+scalar sup bound `τ⁻¹·exp(−b/τ) ≤ (b·e)⁻¹` (`b=d·ρ²>0`, from `x·e^{−x}≤e^{−1}`, i.e. `Real.add_one_le_exp`)
+absorb the `τ⁻¹` into a FIXED `K`. `ρ>0` REQUIRED (at `z=0` the `τ⁻¹` is unbounded).
+
+**WHAT LANDS (std-3 ×8, non-vacuous, no banked file edited, no `sorry`/new axioms).**
+- `norm_le_rncRadial`, `sq_norm_le_rncRadialSq` — the sup-norm→Euclidean-radius bridge (`‖z‖²≤r²(z)`).
+- `invTau_exp_neg_le` — the scalar sup bound `τ⁻¹·exp(−b/τ) ≤ (b·e)⁻¹`.
+- `invTau_gaussDdim_offBall_absorb` (★★) — THE off-ball `τ⁻¹`-absorption.
+- `offBall_env_of_derivEnv_Fbound` (★★) — abstract adapter: census-shaped deriv env × uniform F-bound ×
+  absorption ⟹ the `henv` shape for `g c s z := Dfun(c−s)z·Ffun s z`.
+- `hfar_offBall_concrete_of_data` (★★★) — HEADLINE: wires `witnessTimeDeriv_domination_global_anyS` →
+  adapter → `hfar_of_ballrate_offBallEnv_ftc` (J4-968) ⟹ `H_far` for the concrete convolution with the
+  OFF-BALL ENVELOPE SUPPLIED (not carried), modulo {hFTC, hballrate, hgint, G3 F-bound, amplitude data,
+  `h+ε≤τ₀`}.
+- `invTau_gaussDdim_offBall_absorb_teeth`, `offBall_env_of_derivEnv_Fbound_satisfiable` — non-vacuity with
+  TEETH (both sides `>0`; adapter satisfiable with genuine nonzero data `Dfun=τ⁻¹·gaussDdim`, `Ffun=1`).
+
+**VERIFICATION.** `lake build QIQTH.AxiomAudit` 0 errors (10278 jobs); `#print axioms` std-3 ×8
+(propext/Classical.choice/Quot.sound, NO sorryAx, NO custom); `axiom_budget_check.sh` raw 0 (budget 0) /
+OK; `git status --porcelain | grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean` +
+`AxiomAudit.lean`; commit `bc33b88c` (3 files, +414), pushed.
+
+**HONEST STATUS.** DISCHARGES the concrete off-ball ENVELOPE `henv` that J4-968 carried — reducing it to
+{the accepted census amplitude data, a G3 F-factor sup-bound}. So `H_far` for the concrete integrand is
+no longer open on the off-ball spatial estimate. Remaining `H_far` carries: the FTC-in-`c` bridge
+(`{hDuhamel, hDConv}`), the on-ball `hballrate` (mod-G2), integrability, and the G3 F-factor bound. Per
+Sol: closes ONLY the envelope premise, NOT `H_far`/`hCross` outright. Discharges NONE of
+`{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
