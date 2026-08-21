@@ -14852,3 +14852,50 @@ sharing `S`). Not forced. Touches ONLY the 4th sub-hypothesis of `hCConv` at ONE
 NOT close `hCConv` (other legs remain) and does NOT bear on `hDuhamel`/`hDConv` (still bottlenecked at the
 J3 opaque-chart Gauss-lemma wall). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
 UNCHANGED. NOT `a₁=R/6`.
+
+## J4-986 — `MixedEnvelopeFullyInhabitedCurved`: FULL joint inhabitation of the fourth `hCConv` hypothesis at `K={0}` — quantifier-order obstruction RESOLVED — commit `6fac7251`, ledger `<this>`
+
+**What.** Jointly INHABITS the complete `MixedDirectionsFieldHessianEnvelope` (the fourth named
+hypothesis of the `hCConv` reduction) at the genuinely-curved witness (κ<0, 1≤n, `K={0}`), RESOLVING the
+J4-985 common-gate QUANTIFIER-ORDER obstruction. Two new files, no banked file edited.
+
+**The obstruction (J4-985).** Five envelope fields each close individually at `K={0}`, but `hFd` needs
+`c < δ₀(a,b)` while the gate-param producer `gatedWitnessN1_hEboundW_le_lin_CONST_prescribed` returns
+`∃ a b C c` (choosing `a,b` itself, `c<ε`) — so prescribing `ε:=δ₀(a,b)` was circular.
+
+**The resolution (provenance audit → HFdRequant).** Code-verified this session (gpt-5.6-sol high: GO): every
+radius feeding `hFd_concrete_ciSup_fully_closed`'s `δ₀` bottoms out in the `(a,b)`-FREE reaches
+`{uniformInverseChart_huniformChart, uniformFlowRadius, reachableGate_concrete}`; `a,b` enter only
+per-point bodies. So the reach is HOISTABLE before `(a,b)`, exactly the HbintRequant (J4-983)/ReachRequant
+(J4-599) pattern. `HFdRequant.lean` performs the mechanical `∃∀`-swap through the tower
+(`witness_frontier_requant` → `gateFatExterior_concrete_requant` → `hfat_concrete_requant` →
+`hFd_reduces_to_gateBdd_requant`; `hgate_coreCont_requant`, `hFd_ciSup_of_coreCont_requant`,
+`hcore_discharged_requant` → `hFd_fully_closed_requant`), reusing the already-banked `(a,b)`-free
+`witness_offGate_requant` and `fieldHessian_zero_offCore_requant`.
+
+**The assembly.** `mixedEnvelope_fully_inhabited_curved`: prescribe the `(a,b)`-free reach `δ⋆` into
+`curvedRNC_heatOp_dom_pkg_prescribed`, obtaining gate params `0<a<b<c<δ⋆` that carry the GENUINE width-2
+heat-kernel domination, at which ALL FIVE fields hold at the COMMON flow-ball gate `S=φ_·''ball 0 c`
+(`BL:=|leviSeries|`, `BF:=⨆x‖fderiv‖`, envelope const 0): `hFd` via `hFd_fully_closed_requant` (c<δ⋆);
+`hzmass` via J4-985 (null support); `hbint` via new `integrable_of_support_subset_singleton`; `hkint` via
+J4-875 with `kPrime` null-support measurability (`kPrime_eqZero_of_base_notMem_K` +
+`aestronglyMeasurable_of_support_subset_singleton`); `hLevi` tautological. Returns the width-2 domination
+conjunct alongside the envelope so the gate is a genuine curved heat-parametrix gate. Sol-flagged
+constant trap avoided (envelope const 0 kept separate from producer `Cdom`).
+
+**Verify.** `lake build QIQTH.HFdRequant` + `QIQTH.MixedEnvelopeFullyInhabitedCurved` 0 err; throwaway
+`ChkMixedFull` std-3 (`propext`/`Classical.choice`/`Quot.sound`), no `sorryAx`, no custom axioms;
+`QIQTH.AxiomAudit` 0 err (10295 jobs); `axiom_budget_check.sh` raw 0 (budget 0); `git status --porcelain
+| grep -i vacuum` clean; no banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show 6fac7251
+--stat` = 4 files (+651); pushed.
+
+**Honest status (degenerate-K caveat, cf J4-984/985; gpt-5.6-sol high audited).** Closure is FORMALLY
+LEGITIMATE and NON-VACUOUS (genuine structure term, satisfiable hypotheses, real width-2 domination
+conjunct) but ANALYTICALLY DEGENERATE: at `K={0}` `BF` is a.e. zero off the null singleton, so `hbint`/
+`hzmass`/`hkint`-measurability are null-support driven; the curved geometry does no substantive analytic
+work in the estimates (only `hFd`, via the requant, carries real content, and it is used at a gate where
+the flow-ball collapses appropriately). This closes ONE named `hCConv` input at ONE degenerate witness; it
+does NOT close `hCConv` (needs the general-`K` case and the OTHER census members of
+`fderivBulkInt_hasFDerivAt`) and does NOT bear on `hDuhamel`/`hDConv` (still bottlenecked at the J3
+opaque-chart Gauss-lemma wall). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,hDConv,hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
