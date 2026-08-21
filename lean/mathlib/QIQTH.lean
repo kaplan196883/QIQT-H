@@ -5626,3 +5626,25 @@ import QIQTH.CensusAmplitudeLipDischarge
 -- two_term_census_bound_uniform) unwritten. Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6;
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv} (hballrate/hCross an OPEN downstream carry), UNCHANGED. std-3 ×2.
 import QIQTH.CensusTransportedWeightsUniform
+
+-- CensusTransportedWeightsForData — the D-PARAMETERIZED + MEASURABILITY-STRENGTHENED transported-weight regularity:
+-- the coherence+measurability bridge unblocking the modulo-G2 hballrate (C1) assembly (gpt-5.6-sol high 2026-08-21).
+-- (COH) J4-959 hides its internal common-witness D (obtain ⟨D⟩), so V=D.V can't be identified with commonWitness_cov_
+-- subball's D.V — FIX: parameterize by an EXTERNAL D. (MEAS) two-term core needs GLOBAL AEStronglyMeasurable q₁,q₂
+-- but J4-959 exposes only a BOUND on q₂ (proof computes q₂ Lipschitz via ratio_abs_lipschitzOn then discards it) —
+-- FIX: KEEP q₂ Lipschitz; LipschitzOnWith→ContinuousOn→AEStronglyMeasurable (aesm_indicator_of_ball_lipschitz) gives
+-- the truncated weights global measurability FREE. Removes BOTH sharp blockers. std-3 ×3. NOT a₁=R/6.
+import QIQTH.CensusTransportedWeightsForData
+
+-- CensusHballrateModuloG2 — the FULL modulo-G2 assembly of the C1 hballrate carry. hballrate_moduloG2: fix the ONE
+-- common-witness D; get D-parameterized uniform transported weights (bounds M₁/M₂ + BOTH Lipschitz Lq₁/Lq₂) on
+-- ball 0 σ; pick split radius ρ:=δ=min(image-subdomain radius)(joint-gate radius) so ball 0 δ ⊆ jointGate ∧
+-- Wbv''(ball 0 δ) ⊆ ball 0 σ with inner ball ball 0 r ⊆ Wbv''(ball 0 δ). Per (s,a) (τ=a-s∈(0,τ₀]): on-gate closed
+-- form (censusTauDeriv_eq_onGate_on_jointGate_ball) + base-slot CoV (commonWitness_cov_subball) + weightMatch fold
+-- (poly(Wbv(V w))=poly(w)) + integral_add split (integrableOn_gauss_mul_bddOn_ball ×2, finite-measure image ball)
+-- + two_term_census_bound_uniform_combined at Ω:=Wbv''(ball 0 δ) ⟹ |∫ ball 0 ρ, deriv(...)(a-s)·F| ≤ Cpair·(a-s)^{-1/2}.
+-- RIGOROUSLY CLOSES the hballrate slot of J4-954 MODULO the single G2 gate carry hS (literal type-match verified).
+-- Non-vacuity carries_satisfiable (TEETH: non-univ gate, F≡0). Does NOT close hCensusBound/hCross; discharges NONE
+-- of {hballrate,hDuhamel,hDConv,hCConv} as a τ-carry. a₁=R/6 CONDITIONAL on {hDuhamel,hDConv,hCConv} (hCross OPEN
+-- downstream), UNCHANGED. std-3 ×2. NOT a₁=R/6.
+import QIQTH.CensusHballrateModuloG2

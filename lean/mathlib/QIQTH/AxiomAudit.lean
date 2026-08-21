@@ -46,6 +46,8 @@ import QIQTH.CensusHbaseC2Discharge
 import QIQTH.CensusLeviFactorDischarge
 import QIQTH.BaseVaryingIFTCommonWitness
 import QIQTH.CensusTransportedWeightsUniform
+import QIQTH.CensusTransportedWeightsForData
+import QIQTH.CensusHballrateModuloG2
 
 namespace QIQTH.AxiomAudit
 
@@ -30028,5 +30030,30 @@ namespace QIQTH.AxiomAudit
 -- downstream carry), UNCHANGED. std-3 ×2.
 #print axioms QIQTH.CensusTransportedWeightsUniform.census_transported_weights_uniform
 #print axioms QIQTH.CensusTransportedWeightsUniform.census_transported_weights_uniform_Fcarry_satisfiable
+
+-- ## CensusTransportedWeightsForData + CensusHballrateModuloG2: the FULL modulo-G2 hballrate (C1) closure.
+-- STEP 0 (CensusTransportedWeightsForData): the D-PARAMETERIZED + MEASURABILITY-STRENGTHENED transported-weight
+-- regularity. Discharges the TWO sharpest blockers (gpt-5.6-sol high 2026-08-21): (COH) J4-959 hides its internal
+-- common-witness D (obtain ⟨D⟩), so its V=D.V cannot be identified with the D.V of commonWitness_cov_subball — FIX:
+-- parameterize by an EXTERNAL D; (MEAS) two-term core needs GLOBAL AEStronglyMeasurable q₁,q₂ but J4-959 exposes
+-- only a BOUND on the slope weight q₂ (its proof computes q₂ Lipschitz via ratio_abs_lipschitzOn then DISCARDS it,
+-- ⟨hq2b,_⟩) — FIX: KEEP q₂ Lipschitz; then LipschitzOnWith→ContinuousOn→AEStronglyMeasurable gives the truncated
+-- weights global measurability for FREE (aesm_indicator_of_ball_lipschitz). STEP 1-5 (CensusHballrateModuloG2):
+-- assemble hballrate_moduloG2 — pick ρ:=δ=min(image-subdomain radius)(joint-gate radius) so ball 0 δ ⊆ jointGate
+-- ∧ Wbv''(ball 0 δ) ⊆ ball 0 σ with inner ball ball 0 r ⊆ Wbv''(ball 0 δ); per (s,a) (τ=a-s∈(0,τ₀]) the on-gate
+-- closed form (censusTauDeriv_eq_onGate_on_jointGate_ball) + CoV (commonWitness_cov_subball) + weightMatch fold +
+-- integral_add split (integrableOn_gauss_mul_bddOn_ball ×2, finite-measure image ball) + two_term_census_bound_
+-- uniform_combined at Ω:=Wbv''(ball 0 δ) give |∫ ball 0 ρ, deriv(...)(a-s)·F| ≤ Cpair·(a-s)^{-1/2}. RIGOROUSLY
+-- CLOSES the hballrate slot of J4-954's censusBound_of_geometry_gate_supp_F_ballRate_anyS_existRho MODULO the
+-- single G2 gate carry hS (verified by literal type-match). Non-vacuity: carries_satisfiable (TEETH: non-univ gate
+-- S z:=ball z 1, F≡0). Does NOT close hCensusBound/hCross (needs hF/hΦint/J4-929 carries + hS discharged from the
+-- concrete gate), discharges NONE of {hballrate,hDuhamel,hDConv,hCConv} as a τ-carry. a₁=R/6 remains CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv} (hCross/hCensusBound an OPEN downstream carry — this removes the hballrate sub-
+-- obstruction MODULO G2), UNCHANGED. NOT a₁=R/6. std-3 ×5.
+#print axioms QIQTH.CensusTransportedWeightsForData.aesm_indicator_of_ball_lipschitz
+#print axioms QIQTH.CensusTransportedWeightsForData.census_transported_weights_forData
+#print axioms QIQTH.CensusTransportedWeightsForData.census_transported_weights_forData_Fcarry_satisfiable
+#print axioms QIQTH.CensusHballrateModuloG2.hballrate_moduloG2
+#print axioms QIQTH.CensusHballrateModuloG2.hballrate_moduloG2_carries_satisfiable
 
 end QIQTH.AxiomAudit
