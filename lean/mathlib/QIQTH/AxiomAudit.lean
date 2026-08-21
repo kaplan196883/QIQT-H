@@ -29843,4 +29843,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusOffBallEnvelope.censusBound_of_onGate_and_ballRate
 #print axioms QIQTH.CensusOffBallEnvelope.censusBound_of_onGate_and_ballRate_hyp_satisfiable
 
+-- ## CensusOnGateFixedGaussEnvelope (J4-948): the τ-CAP FIXED-WIDTH Gaussian collapse = genuine analytic core of C3.
+-- Banked crude time-derivative envelope gives |deriv(τ)|≤C·τ⁻¹·gaussDdim(4·D.lam·τ)z (τ-DEPENDENT width); C3 needs a
+-- FIXED-width gaussDdim lam z uniform as τ↓0. SUBTLETY (sympy+numeric + gpt-5.6-sol audited SOUND): sup_{τ>0}
+-- τ⁻¹·gaussDdim(wτ)z decays only POLYNOMIALLY (~‖z‖^{−(n+2)}); the τ-cap τ≤τ₀ rescues the fixed-Gaussian domination
+-- globally in z. std-3. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusOnGateFixedGaussEnvelope.pow_mul_exp_negSq_le
+#print axioms QIQTH.CensusOnGateFixedGaussEnvelope.tauInv_gaussWidth_le_fixedGauss
+#print axioms QIQTH.CensusOnGateFixedGaussEnvelope.onGate_gauss_of_crude_and_bound
+#print axioms QIQTH.CensusOnGateFixedGaussEnvelope.tauInv_gaussWidth_le_fixedGauss_teeth
+#print axioms QIQTH.CensusOnGateFixedGaussEnvelope.onGate_gauss_of_crude_and_bound_teeth
+
+-- ## CensusOnGateEnvelopeThreaded (J4-948): THREADS the τ-cap collapse into the literal honGate binder (J4-947) and
+-- on into the full hCensusBound far-rate; DISCHARGES the crude envelope to the banked amplitude carries. HONEST: C3's
+-- uniform-in-τ Gaussian domination DISCHARGED; hCensusBound now modulo {C1 ball-rate ⟸G2/G3, C2 integrability,
+-- crude-envelope amplitude carries (WideAmplitudeData class), uniform F-factor bound}, NOT {G2,G3} alone. std-3.
+-- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusOnGateEnvelopeThreaded.census_honGate_of_crude_and_Fbound
+#print axioms QIQTH.CensusOnGateEnvelopeThreaded.censusBound_of_crude_Fbound_ballRate
+#print axioms QIQTH.CensusOnGateEnvelopeThreaded.censusBound_of_amplitudeCarries_Fbound_ballRate
+#print axioms QIQTH.CensusOnGateEnvelopeThreaded.censusBound_of_amplitudeCarries_satisfiable
+
 end QIQTH.AxiomAudit

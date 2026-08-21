@@ -5448,3 +5448,24 @@ import QIQTH.CensusJointGateInnerBall
 -- — the residual analytic core is C3 (on-gate two-term Gaussian domination: chart bi-Lipschitz + poly×Gauss + F-bound),
 -- plus C1 (two-term/trace, dep G2/G3). NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusOffBallEnvelope
+-- CensusOnGateFixedGaussEnvelope — J4-948: the τ-CAP FIXED-WIDTH Gaussian collapse = the genuine analytic core of
+-- carry C3 of censusBound_of_onGate_and_ballRate (J4-947). The banked crude time-derivative envelope
+-- witnessTimeDeriv_domination_global gives |deriv(τ)|≤C·τ⁻¹·gaussDdim(4·D.lam·τ)z — a τ-DEPENDENT-width Gaussian; C3
+-- needs a τ-INDEPENDENT FIXED-width gaussDdim lam z, uniform as τ↓0. SUBTLETY (sympy+numeric verified, gpt-5.6-sol
+-- audited SOUND): sup_{τ>0} τ⁻¹·gaussDdim(wτ)z decays only POLYNOMIALLY (~‖z‖^{−(n+2)}), so a fixed Gaussian would
+-- FAIL globally in z WITHOUT a τ-cap; the τ-cap τ≤τ₀ rescues it (interior maximiser τ*=r²/(2w(n+2)) exceeds τ₀
+-- beyond a fixed radius ⟹ boundary Gaussian decay). LANDS std-3: pow_mul_exp_negSq_le (yᵏ·e^{−by²}≤1+k!/bᵏ),
+-- tauInv_gaussWidth_le_fixedGauss ★★★ (τ⁻¹·gaussDdim(wτ)z≤Cenv·gaussDdim(lam)z ∀lam≥2wτ₀, ρ≤‖z‖, via exp-split +
+-- pow_mul_exp_negSq_le), onGate_gauss_of_crude_and_bound ★★ (the honGate C3 SHAPE from crude envelope×F-bound), +2
+-- teeth. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusOnGateFixedGaussEnvelope
+-- CensusOnGateEnvelopeThreaded — J4-948: THREADS the τ-cap collapse into the LITERAL honGate binder of
+-- censusBound_of_onGate_and_ballRate (J4-947) and on into the FULL hCensusBound far-rate. LANDS std-3:
+-- census_honGate_of_crude_and_Fbound ★★★ (literal honGate binder from crude envelope + uniform F-bound),
+-- censusBound_of_crude_Fbound_ballRate ★★★ (full far-rate from 4 carries {crude env, F-bound, ball-rate C1, integ
+-- C2}), censusBound_of_amplitudeCarries_Fbound_ballRate ★★★ (DISCHARGES the crude envelope to the banked amplitude
+-- carries via witnessTimeDeriv_domination_global), censusBound_of_amplitudeCarries_satisfiable (TEETH: singleton
+-- gate K={0}, S=univ nonempty, F≡0). HONEST: C3's uniform-in-τ Gaussian domination DISCHARGED; hCensusBound now
+-- modulo {C1 ball-rate ⟸G2/G3, C2 integrability, crude-envelope amplitude carries (WideAmplitudeData class), uniform
+-- F-factor bound}, NOT {G2,G3} alone. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusOnGateEnvelopeThreaded
