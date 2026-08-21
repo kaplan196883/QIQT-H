@@ -5500,3 +5500,12 @@ import QIQTH.CensusTauDerivAnySEnvelope
 -- …_satisfiable (K={0}, F≡0) + census_anyS_smallRadius_gate_exists (∀D binder). std-3 ×7. NOT a₁=R/6;
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusAnySEnvelopeRethread
+
+-- CensusFFactorSupDischarge: DISCHARGE the off-ball F-factor sup carry hF of the most-discharged any-S
+-- census capstone censusBound_of_geometry_gate_supp_F_ballRate_anyS (J4-951) to the width-2 Levi Gaussian
+-- domination hFdom (the SAME {hDuhamel,hDConv,hCConv}-family object the rest of the F-factor chain carries),
+-- via the banked B_le_MB (peak-bound + width-antitone): on the window s∈Ioo(u-ε)u with 0<u-ε and u≤T, the
+-- s-uniform constant MF := C_L·gaussDdim(2(u-ε))0 dominates |F s z 0| for EVERY z (off-ball ρ≤‖z‖ is free
+-- slack). hF_of_leviWidth2Dom (★★★) + hF_of_leviWidth2Dom_satisfiable (TEETH: F≡0, C_L=0, ε<u≤T). std-3 ×2.
+-- ELIMINATES hF as a standalone carry. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusFFactorSupDischarge

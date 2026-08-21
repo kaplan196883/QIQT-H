@@ -29913,4 +29913,18 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusAnySEnvelopeRethread.witnessHpardiff_wired_anyS_hyp_satisfiable
 #print axioms QIQTH.CensusAnySEnvelopeRethread.census_anyS_smallRadius_gate_exists
 
+-- ## CensusFFactorSupDischarge: DISCHARGE the off-ball F-factor sup carry hF of the most-discharged any-S
+-- census capstone censusBound_of_geometry_gate_supp_F_ballRate_anyS (J4-951) to the width-2 Levi Gaussian
+-- domination hFdom. The capstone takes hF : ∀ s∈Ioo(u-ε)u, ∀z, ρ≤‖z‖ → |F s z 0| ≤ MF (s-uniform, MF≥0).
+-- For ANY F with the width-2 domination |F s z y| ≤ C_L·gaussDdim(2s)(z-y) on (0,T], and benign window side
+-- conditions ε<u (so 0<u-ε) and u≤T, the banked B_le_MB (peak + width-antitone) at time floor a:=2(u-ε)
+-- gives the s-uniform MF := C_L·gaussDdim(2(u-ε))0 for EVERY z (off-ball ρ≤‖z‖ is unused slack). hFdom is the
+-- SAME object the CensusLeviFactorDischarge chain reduces the F-factor to (intended {hDuhamel,hDConv,hCConv}-
+-- family). ELIMINATES hF as a standalone carry, leaving the capstone dependency list =
+-- {geometry {hg,hg0,hu,h0Kmem}, small-radius gate D (D.r≤rAmp), hSupp, C1 hballrate, C2 hΦint, width-2 Levi
+-- domination hFdom}. hF_of_leviWidth2Dom (★★★) + hF_of_leviWidth2Dom_satisfiable (TEETH: F≡0, C_L=0, ε<u≤T).
+-- std-3 ×2. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusFFactorSupDischarge.hF_of_leviWidth2Dom
+#print axioms QIQTH.CensusFFactorSupDischarge.hF_of_leviWidth2Dom_satisfiable
+
 end QIQTH.AxiomAudit
