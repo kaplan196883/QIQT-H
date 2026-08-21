@@ -5850,3 +5850,13 @@ import QIQTH.InterchangeBundlesJointFromRoots
 -- identify Wf with uniformInverseChart (=blocker J3), does NOT solve the Gauss lemma, does NOT validate
 -- the curved correction. std-3 ×7. NOT a₁=R/6 (CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.FlatChartBridgeAudit
+-- HDuhamelDataCensusDischarged — compose the banked J4-964 joint interchange-bundle producer
+-- (interchange_bundles_joint) INTO the live order-1 hDuhamel slot (J4-979
+-- hDuhamelSlot_hmassone_discharged), ELIMINATING the four opaque bundled interchange census binders
+-- hLapFull/hII_lo/hII_hi/hEcomb (MemLapFull/MemAdjLo/MemAdjHi/MemECombine) from the hDuhamel antecedent
+-- surface in favour of the elementary satisfiable analytic roots J4-964 derives them from. The hDuhamel
+-- analogue of J4-964's joint consolidation, now WIRED into the live slot identity. The joint's Levi-source
+-- domination is instantiated to the slot's OWN (2, C_L) Levi domination (hFdom/hFzero at fibre y=0), so no
+-- new constant; the √ε sliver is a single carry feeding both consumers. Discharges NONE of
+-- {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
+import QIQTH.HDuhamelDataCensusDischarged

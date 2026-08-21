@@ -30325,4 +30325,9 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.FlatChartBridgeAudit.flat_corrected_bridge
 #print axioms QIQTH.FlatChartBridgeAudit.flat_center_identities
 
+-- HDuhamelDataCensusDischarged — compose J4-964 joint interchange-bundle producer into the J4-979 live
+-- hDuhamel slot, eliminating the four opaque bundled interchange census binders hLapFull/hII_lo/hII_hi/
+-- hEcomb from the hDuhamel surface. Discharges NONE of {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HDuhamelDataCensusDischarged.hDuhamelSlot_datacensus_discharged
+
 end QIQTH.AxiomAudit
