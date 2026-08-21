@@ -30079,5 +30079,7 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HsuppConstGateGrounded.hsupp_for_constGate
 #print axioms QIQTH.HsuppConstGateGrounded.hsupp_constGate_coupling_satisfiable
 #print axioms QIQTH.HsuppConstGateGrounded.hsupp_for_constGate_satisfiable
+-- InterchangeBundlesJointFromRoots — J4-964: joint composition of the four interchange-bundle dischargers.
+#print axioms QIQTH.InterchangeBundlesJointFromRoots.interchange_bundles_joint
 
 end QIQTH.AxiomAudit

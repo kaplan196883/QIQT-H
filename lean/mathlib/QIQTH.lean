@@ -5687,3 +5687,13 @@ import QIQTH.G2ConstGateGrounded
 -- the flat metric (hsupp_for_constGate_satisfiable). Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on
 -- those three, UNCHANGED, but hSupp now GROUNDED for the concrete gate modulo the explicit c–D.r coupling. std-3 ×3. NOT a₁=R/6.
 import QIQTH.HsuppConstGateGrounded
+-- InterchangeBundlesJointFromRoots — J4-964: FULL JOINT COMPOSITION of the four interchange-bundle census
+-- dischargers (MemAdjHi/MemAdjLo/MemLapFull/MemECombine) at ONE shared base, with the genuine seam
+-- memAdjHi_live → memLapFull_live (produced MemAdjHi IS memLapFull's hII_hi input, so hII_hi is DERIVED not
+-- carried) and shared dominations hFdom/hFzero/hAdom2cap/hmeas DEDUPLICATED to one carry each. Positive
+-- sufficiency certificate for the four-interchange sub-census. Confirms (gpt-5.6-sol high 2026-08-21) the
+-- "15 dischargers collapse to 5 walls" hypothesis is FALSE: residual root set does NOT collapse — genuinely
+-- distinct primitives {gauge, hAdom2cap, hFdom/hFzero, hmeas, hInter, sliver, hPd2conv, hSecCont/hBcont,
+-- Cpair/hGpow, hDa..hES} that do not further coalesce. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6
+-- CONDITIONAL on those three, UNCHANGED. std-3. NOT a₁=R/6.
+import QIQTH.InterchangeBundlesJointFromRoots
