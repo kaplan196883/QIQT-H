@@ -12474,3 +12474,53 @@ brick). Obstruction (ii) (`ball 0 ρ` vs `ℝⁿ` tail) also REMAINS. So `hCensu
 QIQTH.AxiomAudit` 0 errors (10238 jobs); `#print axioms` std-3 ×8 (propext/Classical.choice/Quot.sound, no
 sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; wired
 `QIQTH.lean`+`AxiomAudit.lean`; commit `97ce141c`, pushed. NOT `a₁ = R/6`.
+
+## J4-932 — the INVERSE-CHART center/pairwise Lipschitz transport: `V = Φ.symm` is `C²` at the image centre via `ContDiffAt.to_localInverse`, closing the `∘V` transport half of obstruction (iii) — commit `a0febf74` (`BaseSlotInverseChartLipschitz.lean`, new file)
+
+**Task.** Break the TRUE remaining bottleneck flagged by J4-931/gpt-5.6-sol: the det/ratio half of
+obstruction (iii) was banked on the BASE ball, but the CoV transformed integrand lives on the IMAGE variable
+`w ↦ q(V w)`, so closing obstruction (iii) needs the local inverse `V` to be locally (center-)Lipschitz.
+
+**★ KEY OBSERVATION (essentially free from banked machinery).** In the base-varying IFT package
+(`BaseVaryingIFTPackage.baseVaryingIFTPackage`, J4-272) the left inverse `V` is literally `Φ.symm` for
+`Φ = hbaseC2.toOpenPartialHomeomorph Wbv hW'0 hn2` — the Mathlib IFT `OpenPartialHomeomorph`. Mathlib's
+`ContDiffAt.to_localInverse` states this inverse is `C²` AT THE IMAGE CENTRE:
+`ContDiffAt ℝ 2 (Φ.symm) (Wbv 0) = ContDiffAt ℝ 2 V 0` (`Wbv 0 = 0`), because `Φ.symm` is *definitionally*
+`hbaseC2.localInverse hW'0 hn2` (`HasStrictFDerivAt.localInverse f f' a := ⇑((...).toOpenPartialHomeomorph f).symm`,
+and `ContDiffAt.toOpenPartialHomeomorph`/`.localInverse` unfold through `hasStrictFDerivAt'`). So after
+`rw [Wbv 0 = 0]`, `exact hti` typechecks. Feeding `ContDiffAt ℝ 1 V 0` (via `of_le`) to the SAME convex-MVT
+technique used all session (`AmpQuantBundle.contDiffAt_one_lipschitzOn_ball`) makes `V` pairwise Lipschitz on
+an image ball for FREE — NO separate derivative-boundedness step.
+
+**What lands (all conditional on `hbaseC2`, the J4-930/931 residual; std-3 ×4).**
+- `inverseChart_lipschitz_package` (★★): `∃ σ>0 ∃ V L_V≥0`, `V 0 = 0` AND `V` pairwise-Lipschitz (`L_V`) on
+  `ball 0 σ` (`to_localInverse` + `contDiffAt_one_lipschitzOn_ball`; `V 0 = 0` from `Φ.left_inv` at the centre).
+- `transported_ratio_regularity` (★★ MAIN, obstruction (iii) CLOSED modulo `hbaseC2`): for ANY globally
+  bounded (`M_P`) + globally Lipschitz (`L_P`) weight `P`, the CoV transformed integrand
+  `w ↦ P(V w)/|det(fderiv Wbv (V w))|` is bounded by `M_P/(1/2) = 2M_P` AND pairwise-Lipschitz (`L_q·L_V`) on
+  an image ball `ball 0 σ`. Composes J4-931's `paired_ratio_center_lipschitz` (det/ratio half, on base ball
+  `ball 0 r`) with `V` local-Lipschitz (transport half); `V` maps a small image ball into the base ball via
+  `‖V w‖ ≤ L_V‖w‖ ≤ (L_V+1)‖w‖ < r` for `σ = min σ0 (r/(L_V+1))`, using `V 0 = 0`.
+- `transported_ratio_center_lipschitz` (★): the literal `q∘V` center-Lipschitz (`y := 0` specialization).
+- `localInverse_nonvacuous`: `to_localInverse` genuinely yields a `C²` non-identity inverse for the negation
+  equiv — the exact `fderiv Wbv 0 = -id` shape — `hbaseC2`-free.
+
+**gpt-5.6-sol (high) sanity check.** VERIFIED: (1) the defeq `Φ.symm = localInverse` and the `to_localInverse`
+regularity-of-inverse step are sound and NON-vacuous (kernel checks defeq; `#print axioms` excludes admits;
+no logical circularity since declaration deps are acyclic and `hbaseC2` is proved independently of the CoV
+conclusion); (2) the radius bookkeeping `V(ball 0 σ) ⊆ ball 0 r` is correct; (3) this closes the local
+boundedness + center-Lipschitz of the concrete transformed weight — pairwise-Lipschitz is STRONGER than
+center-Lipschitz (`y:=0` gives it). Residues it does NOT touch (consistent with honest status): measurability/
+integrability (easy: Lipschitz-on ⟹ continuous-on ⟹ measurable-on; bounded on a finite-dim ball ⟹ local
+integrability), and TAIL control outside the image ball = obstruction (ii).
+
+**Honest status.** Obstruction (iii) is now FULLY closed (det/ratio half J4-931 + `∘V` transport half HERE),
+modulo the honest residual `hbaseC2` (⟸ `hT0`). REMAINING for `hCensusBound`/`hCross`: (ii) `ball 0 ρ` (CoV
+domain) vs `ℝⁿ` (census domain) tail, and `hbaseC2` itself. `hDuhamel`/`hDConv` remain carried; `hCConv`
+unaffected. `a₁ = R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`. NOT `a₁ = R/6`.
+
+**Banking.** `lake build QIQTH.BaseSlotInverseChartLipschitz` 0 errors (first build); `lake build
+QIQTH.AxiomAudit` 0 errors (10239 jobs); throwaway chk-file `#print axioms` std-3 ×4 (propext/Classical.choice/
+Quot.sound, no sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum`
+clean; no existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `a0febf74`, pushed. NOT
+`a₁ = R/6`.
