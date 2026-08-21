@@ -14196,3 +14196,61 @@ F-bound), hRint (`c`-integrability of `R`), hFmeasG}`; the analytic content has 
 F-bound + amplitude data), `hRint` integrability, `hEnv` engine bundle. `hCConv` UNTOUCHED. Discharges
 NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a top-level τ-carry. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-971 — HFarEnvFromAmplitude: NET-DISCHARGE the crude time-derivative envelope `hAcrude` inside J4-970's window-level engine bundle `hEnv`, by wiring the banked any-`S` `∂_τ` domination envelope (J4-950) into the per-`(s,a)` provider `hEnv_of_witnessCrudeEnv` (J4-916) (commit `be10d454`)
+
+**File** `QIQTH/HFarEnvFromAmplitude.lean` (new; NO existing banked file edited).
+
+**Task.** J4-970 (`hfar_concrete_of_engine`) reduced the FTC-in-`c` bridge to three carriers
+`{hFmeasG, hEnv, hRint}`. Examine each precisely and discharge whatever is honest find-and-wire.
+The window-level `hEnv` at each `(s,a)` is EXACTLY the output of `hEnv_of_witnessCrudeEnv` (J4-916),
+whose carries are `{hAcrude, hFdom, hmeas, hbase}` + scalars + diagonal-avoidance `τ₀ < a−s < τ₁`.
+
+**★ THE PER-POINT WIRING (genuine net discharge of `hAcrude`).** In the far window one always has
+`a − s ≥ u − s > 0` (strictly positive PER POINT, since `s < u ≤ a`), so per-`(s,a)` interval selection
+`τ₀ := (a−s)/2`, `τ₁ := 2(a−s)` is legal — the `∃` in `hEnv` is per point, so a UNIFORM lower bound on
+`a−s` is NOT needed (the τ⁻¹ blow-up as `a−s → 0` is harmless: each point picks its own interval). With
+`a − s < h + ε`, one has `τ₁ = 2(a−s) < 2(h+ε) ≤ τ₀cap`, so the FIXED-cap any-`S` envelope
+`witnessTimeDeriv_domination_global_anyS` (J4-950) supplies a SINGLE uniform constant `C` and the crude
+bound `|deriv (fun r ↦ Wit r 0 z) τ| ≤ C·τ⁻¹·gaussDdim(4·D.lam·τ) z` for every `τ ∈ Icc τ₀ τ₁`; after
+the origin-evenness rewrite `gaussDdim t (0−z) = gaussDdim t z` (`gaussDdim_zero_sub`, banked) this is
+EXACTLY the `hAcrude` shape (`wL := 4·D.lam`, `Ccr := C`). So `hAcrude` is REPLACED by the mildest
+accepted class — the zeroth-amplitude sup-bounds `{hAmp0, hCfield, hSupp}` (J4-949/957/958 further reduce
+those) — with NO separate crude-envelope carry.
+
+**What lands.**
+- `hEnv_window_of_amplitudeAndFdom` (★★★): the exact window `hEnv` bundle that J4-970's
+  `censusFTC_bridge`/`hfar_concrete_of_engine` consume, from `{hAmp0, hCfield, hSupp}` (feeding J4-950) +
+  the s-uniform G3 F-bound `hFdom` + window-uniform `hmeas`/`hbase`. Needs `hn : 0 < n`, `0 ≤ u−ε` (⟹
+  `0 < s` on the window), `0 ≤ h`, `2(h+ε) ≤ τ₀cap`.
+- `hfar_concrete_from_amplitude` (★★★): composes with `hfar_concrete_of_engine` (J4-970) ⟹ the live
+  `H_far` far-envelope for the concrete convolution with `hEnv` NO LONGER carried — remaining carriers
+  `{hFmeasG, hRint, hrate}`.
+- `hEnv_window_of_amplitudeAndFdom_hyp_satisfiable` (TEETH): the FULL carrier bundle is jointly
+  satisfiable at a PROPER gate `S z ≠ univ` (reuses `census_anyS_env_satisfiable_properGate`, J4-950,
+  with `F ≡ 0` trivializing the F-carries and `u := ε := h := τ₀gate/8` giving `2(h+ε) ≤ τ₀gate`,
+  `0 ≤ u−ε`) — no unsatisfiable-antecedent / cp466-style vacuity trap.
+
+**gpt-5.6-sol (high) adversarial calibration (before build).** GO on the per-point adapter; sound and
+non-vacuous, removes `hAcrude` from the frontier — genuine closure gain, NOT mere bundle-moving, PROVIDED
+it actually consumes J4-950. Blunt verdicts confirmed: (1) for arbitrary free `F` the carriers
+`{hFmeasG, hFdom, hmeas, hbase, hRint}` are genuine F-side regularity carries — witness-side infra cannot
+discharge them because `F` is unconstrained; `hRint` (c-integrability of the integrated rate) is a
+GENUINELY SEPARATE obligation beyond a pointwise rate bound (a bounded NON-measurable function is the
+obstruction), though probably derivable from the full window `hEnv` via `measurable_deriv` + a
+compactness/away-from-zero uniform bound (an `hRint_of_hEnv` — identified as the next high-value target,
+NOT built here). (2) After J4-970/971 the three carriers are NOT new census estimates comparable to the
+chart-CoV scalar inequality — they are the analytic content formerly hidden inside the monolithic FTC
+bridge, now decomposed and (for `hAcrude`) reduced; but they are real formal obligations and cannot be
+omitted from a closure claim. (3) `H_far`/`hCross` are NOT fully closed; the safe conditional statement
+is "once a concrete-Levi-field package discharges `hFmeasG`/window `hEnv`, and `hRint` is proved or
+eliminated via `hRint_of_hEnv`, the remaining substantive frontier is the chart-CoV/census inequality
+together with `hDuhamel`/`hDConv`/`hCConv`". (4) `a₁=R/6` MUST remain conditional on
+`{hDuhamel, hDConv, hCConv}` — nothing in this chain changes that.
+
+**Banking.** `lake build QIQTH.AxiomAudit` 0 errors (10280 jobs); `#print axioms` std-3 ×3
+(propext/Classical.choice/Quot.sound; no sorryAx, no custom) — throwaway `lake env lean` confirmed;
+`axiom_budget_check.sh` raw 0/OK; `git status --porcelain | grep -i vacuum` clean; wired
+`QIQTH.lean`+`AxiomAudit.lean`; commit `be10d454` (3 files, +272), pushed. NO O(√ε) rate (carrier
+reduction) ⟹ sympy-rate gate N/A. Discharges NONE of `{hballrate, hDuhamel, hDConv, hCConv}` as a
+top-level τ-carry. `a₁=R/6` remains CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
