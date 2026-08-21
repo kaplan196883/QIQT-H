@@ -29995,4 +29995,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusLeviFactorSUniform.levi_Ffactor_ball_regularity_sUniform_ball
 #print axioms QIQTH.CensusLeviFactorSUniform.levi_Ffactor_ball_regularity_sUniform_satisfiable
 
+-- ## CensusAmplitudeLipDischarge: the τ↓0-UNIFORM SPATIAL LIPSCHITZ bound for z↦chartFieldAmp … cutA cutB τ z 0,
+-- UNIFORM over 0<τ≤τ₀ (companion to J4-949's τ-uniform VALUE bound census_amplitude_supBounds). Discharges the
+-- glue-item-3 sub-piece flagged as "MISSING theorem: τ↓0-uniform chartFieldAmp Lipschitz". MECHANISM (affine-in-τ,
+-- NO compactness at τ=0): chartFieldAmp_affine_slope gives chartFieldAmp τ = chartFieldAmp 0 + censusAmpTauDeriv·τ,
+-- so spatial increment = (base_z-base_w)+(slope_z-slope_w)·τ ⟹ |Δ| ≤ (L₀+τ₀·L')·dist, SINGLE τ-uniform constant.
+-- L₀ = τ=0 base Lipschitz (chartFieldAmp_base_regularity_center), L' = slope Lipschitz
+-- (censusAmpTauDeriv_base_regularity_center), both banked from geometry carries. Sol-confirmed valid+complete
+-- 2026-08-21. HONEST: proves NONE of {hballrate,hDuhamel,hDConv,hCConv}; hballrate/C1 remains OPEN (this is ONE
+-- glue-3 sub-piece; |det| lower bound already banked at J4-931 absdet_fderiv_boundedBelow_ball). NOT a₁=R/6;
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED. std-3.
+#print axioms QIQTH.CensusAmplitudeLipDischarge.census_amplitude_lipBounds
+
 end QIQTH.AxiomAudit

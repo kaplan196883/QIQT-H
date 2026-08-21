@@ -5597,3 +5597,18 @@ import QIQTH.CensusCovSubballMeasurable
 -- G2-threading) UNTOUCHED. hballrate/C1 remains an OPEN carry. NOT a₁=R/6; CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusLeviFactorSUniform
+
+-- CensusAmplitudeLipDischarge — the τ↓0-UNIFORM SPATIAL LIPSCHITZ bound for the concrete census field
+-- amplitude z↦chartFieldAmp … cutA cutB τ z 0, UNIFORM over 0<τ≤τ₀ (companion to J4-949's
+-- census_amplitude_supBounds, which gives the τ-uniform VALUE bound; this gives the τ-uniform Lipschitz
+-- INCREMENT). Discharges the glue-item-3 sub-piece flagged as "MISSING theorem: τ↓0-uniform chartFieldAmp
+-- Lipschitz". MECHANISM (affine-in-τ shortcut, NO compactness at τ=0): chartFieldAmp_affine_slope (J4-949)
+-- gives chartFieldAmp τ = chartFieldAmp 0 + censusAmpTauDeriv·τ, so the spatial increment splits as
+-- (base_z-base_w)+(slope_z-slope_w)·τ, giving |Δ| ≤ L₀·dist + τ·L'·dist ≤ (L₀+τ₀·L')·dist — a SINGLE
+-- τ-uniform constant L₀+τ₀·L' (τ·L'→0 as τ↓0, bounded by τ₀·L' throughout (0,τ₀]). L₀ = τ=0 base Lipschitz
+-- (chartFieldAmp_base_regularity_center), L' = slope Lipschitz (censusAmpTauDeriv_base_regularity_center),
+-- both banked UNCONDITIONALLY from geometry carries {hg,hg0,hu,h0Kmem}. Sol audit 2026-08-21 confirmed the
+-- affine argument valid+complete (earlier "not compact at 0" caution overly pessimistic). LANDS std-3:
+-- census_amplitude_lipBounds ★★★. Proves NONE of {hballrate,hDuhamel,hDConv,hCConv}; hballrate/C1 remains an
+-- OPEN carry (this is ONE of its glue-3 sub-pieces). NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusAmplitudeLipDischarge
