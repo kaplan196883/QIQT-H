@@ -12962,3 +12962,60 @@ obligation (a) is conditionally solved. `hDuhamel`/`hDConv` remain carried; `hCC
 `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
 file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) adversarially audited the
 honest-status framing; commit `8026026c`, pushed. NOT `a₁ = R/6`.
+
+## J4-943 — BaseVaryingIFTCommonWitness: the COMMON-WITNESS MONOLITH resolving structural gap G1 of the J4-930..942 `hCross` chain — commit `d2201c8c` (`BaseVaryingIFTCommonWitness.lean`, new file)
+
+**Context.** A rigorous full-assembly audit found the 12-piece `hCross` chain (J4-930..942) does NOT
+literally compose into one theorem, due to three genuine gaps: **G1** (common-witness incoherence,
+structural), **G2** (S-gate `ball 0 r ⊆ {z : 0 ∈ S z}` carry), **G3** (F-factor Levi carries =
+`{hDuhamel, hDConv, hCConv}`). This dispatch fixes **G1 ONLY**.
+
+**★ THE BUG (G1).** J4-930 (CoV), J4-934 (weight-match), J4-935 (superset), and J4-942 (regularity)
+each independently `obtain … := baseVaryingIFTPackage …` (or `… := inverseChart_lipschitz_package …`),
+yielding INDEPENDENT existential witnesses `V, f', ρ, σ, r` that Lean CANNOT identify as equal across
+separate `∃`-eliminations — even though internally they are the SAME term (`V = ⇑Φ.symm`,
+`f' = fderiv ℝ Wbv`, for the one Mathlib IFT `toOpenPartialHomeomorph Φ`). Definitional equality of the
+hidden witnesses is NOT a usable interface across two separate `∃`-eliminations. Also J4-930 exposed an
+existential `f'` while J4-942 used `fderiv Wbv` directly.
+
+**★ THE FIX (construct once, eliminate once — gpt-5.6-sol high endorsed, recommended a `structure`
+over a nested `∃`/`∧` bundle).** A `structure BaseVaryingIFTData (g gi hC hK)` bundles the SHARED
+`ρ, V, σ, L_V` + the primitive IFT facts (`measurable_ball`, `hderiv`=M1 stated with the CANONICAL
+`fderiv ℝ Wbv` — NO abstract `f'`, dissolving the `f'`/`fderiv` mismatch outright — `hinj`=M2,
+`hleftInv`=M3, `hdetPos`=M4, `himg`, `hV0`, `hVlip`). Constructed EXACTLY ONCE by
+`baseVaryingIFTData_nonempty_of_hbaseC2` (a `Nonempty` Prop-goal so the `∃`-obtains are legal; INLINES
+the `Φ` construction of `baseVaryingIFTPackage` AND the `V`-Lipschitz derivation of
+`inverseChart_lipschitz_package` into ONE proof so the witnesses coincide by construction), then
+`.some`-projected to `baseVaryingIFTData_of_hbaseC2`.
+
+**What lands** (std-3 ×10, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `BaseVaryingIFTData` — the common-witness structure.
+- `baseVaryingIFTData_nonempty_of_hbaseC2` / `baseVaryingIFTData_of_hbaseC2` (★★★) — the SINGLE
+  construction (conditional on `hbaseC2`).
+- `baseVaryingIFTData_nonempty` / `baseVaryingIFTData` (★★) — the UNCONDITIONAL inhabitance
+  (discharges `hbaseC2` via `wbv_contDiffAt_two`, J4-941) — the strongest non-vacuity witness.
+- `commonWitness_cov` (★★), `commonWitness_weightMatch` (★), `commonWitness_superset` (★),
+  `commonWitness_mapsTo` (★), `commonWitness_transport` (★★ generic `∘V` transport about `D.V`),
+  `commonWitness_ampF_transport` / `commonWitness_CfieldF_transport` (★★ the CONCRETE census
+  integrands `(chartFieldAmp·F0)/|det|` and `(censusAmpTauDeriv·F0)/|det|` transported along the SAME
+  `D.V`) — all PARAMETERIZED by the one `D`.
+- `commonWitness_transport_slot_satisfiable` — `Q`-slot non-vacuity (TEETH: `cos‖·‖`).
+
+**Genuine-composability verified.** A throwaway check confirmed that ONE `obtain ⟨D⟩ :=
+baseVaryingIFTData_nonempty …` feeds `commonWitness_cov D`, `commonWitness_ampF_transport D`,
+`commonWitness_superset D`, `commonWitness_mapsTo D`, `commonWitness_weightMatch D` coherently (std-3):
+the CoV identity and the transported concrete regularity are literally about EXACTLY `D.V` and the same
+`fderiv ℝ Wbv`. The `f'`/`fderiv` mismatch is dissolved: the structure carries no abstract `f'`, so the
+CoV denominator `|det (fderiv Wbv (D.V w))|` is LITERALLY the regularity denominator.
+
+**Honest status.** CLOSES structural gap **G1 ONLY** (common-witness incoherence). **G2** (S-gate carry,
+must be carried) and **G3** (F-factor Levi carries `{hDuhamel, hDConv, hCConv}`) are UNTOUCHED. NO
+literal `hCross`/`hCensusBound` theorem is assembled — `hCross` is NOT closed. `hCensusBound`/`hCross`/
+`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/BaseVaryingIFTCommonWitness.lean` 0 errors; `lake build
+QIQTH.AxiomAudit` 0 errors (10250 jobs); `#print axioms` std-3 ×10 (propext/Classical.choice/Quot.sound,
+no sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean;
+no existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) endorsed the
+monolith design; commit `d2201c8c`, pushed. NOT `a₁ = R/6`.
