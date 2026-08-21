@@ -12838,3 +12838,42 @@ QIQTH.AxiomAudit` 0 errors (10246 jobs); `#print axioms` std-3 ×5 (propext/Clas
 sorryAx/custom); `axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no
 existing banked file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; gpt-5.6-sol (high) sanity-checked the
 ball-local relaxation sound; commit `57145f4a`, pushed. NOT `a₁ = R/6`.
+
+## J4-940 — piece (6) of J4-929's `hCensusBound` re-audit CLOSED [the `Bball+tail ≤ C_far·(u−s)^{−1/2}` uniform rate absorption] — commit `e1019b88` (`CensusFarRateAbsorb.lean`, new file)
+
+**Context.** J4-929's `hcross_of_censusIntegral_bound` consumes `hCensusBound : ∀ s ∈ Ioo(u−ε)u, ∀ a ∈
+Icc u(u+h), |∫ z, deriv(fun r ↦ witness r 0 z)(a−s)·F s z 0| ≤ C_far·(u−s)^{−1/2}`.  J4-933's
+`census_full_of_ball_bound_and_gaussEnv` produces `|∫_ℝⁿ Φ| ≤ Bball + Cenv·√2ⁿ·e^{−ρ²/(8λ)}`, where (per
+the J4-922/923/924 trace-cancellation core) the on-ball `Bball` carries the `Cpair·(a−s)^{−1/2}` rate.
+This increment supplies piece **(6)** flagged since J4-933: absorbing that sum into the SINGLE
+`C_far·(u−s)^{−1/2}` rate, uniformly over the whole `Ioo/Icc` binder.
+
+**★ THE ABSORPTION IS FREE AND UNIFORM — THE TAIL'S EXPONENTIAL SMALLNESS IS NOT EVEN NEEDED.**  Write
+`σ := u−s ∈ (0,ε]` and `τ := a−s ≥ σ` (since `a ≥ u`).  Two monotonicities of `x ↦ x^{−1/2}` (decreasing,
+`Real.rpow_le_rpow_of_nonpos`) plus `e^{…} ≤ 1` and `√ε·ε^{−1/2} = 1` give
+`Bball + tail ≤ Cpair·τ^{−1/2} + Cenv·√2ⁿ ≤ (Cpair + Cenv·√2ⁿ·√ε)·σ^{−1/2}`.  Merely `e^{−ρ²/(8λ)} ≤ 1`
+(NOT the `e^{−ρ²/(8λ)}` super-polynomial decay) plus the `σ ≤ ε` upper bound suffice, yielding the single
+`s`-INDEPENDENT constant `C_far := Cpair + Cenv·√2ⁿ·√ε`.
+
+**What lands** (std-3 ×4, non-vacuous, no banked file edited, no `sorry`/new axioms):
+- `rate_absorb` (★★): the PURE ALGEBRAIC core — `0<σ≤τ`, `σ≤ε`, `Bball≤Cpair·τ^{−1/2}`,
+  `L≤Bball+Cenv·(√2ⁿ·e^{−ρ²/(8lam)})` ⟹ `L≤(Cpair+Cenv·√2ⁿ·√ε)·σ^{−1/2}`.  Reusable, integrand-free.
+- `census_far_rate_of_ball_and_gaussEnv` (★★): composes `census_full_of_ball_bound_and_gaussEnv` (J4-933)
+  through `rate_absorb` — for `Φ` with an off-ball Gaussian envelope, a ball bound
+  `Bball ≤ Cpair·(a−s)^{−1/2}`, and the `Ioo/Icc` positions (`u−ε<s`, `s<u`, `u≤a`),
+  `|∫ z, Φ z| ≤ (Cpair + Cenv·√2ⁿ·√ε)·(u−s)^{−1/2}` — EXACTLY `hCensusBound`'s RHS shape.
+- `rate_absorb_hyp_satisfiable` / `census_far_rate_hyp_satisfiable`: non-vacuity EXHIBITED at genuine
+  positive data (`L>0`; `Φ=gaussDdim 1` at `u=1,s=1/2,a=3/2`).
+
+**Honest status.** Piece (6) is CLOSED with the explicit `C_far = Cpair + Cenv·√2ⁿ·√ε`.  This does NOT
+close `hCensusBound`: the LITERAL assembly still requires (a) the F-factor's own ball-local
+bounded+Lipschitz regularity (the `leviSeries` carry, downstream of Ebound/heatConv — the
+`{hDuhamel,hDConv,hCConv}`-family analytic input, NOT attempted here) and (b) `hbaseC2` (the base-slot CoV
+residual).  With piece (6) closed, `hCensusBound`'s remaining obligations reduce to EXACTLY those two.
+`hDuhamel`/`hDConv` remain carried; `hCConv` unaffected.  `a₁ = R/6` remains CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`.  NOT `a₁ = R/6`.
+
+**Banking.** `lake env lean QIQTH/CensusFarRateAbsorb.lean` 0 errors; `lake build QIQTH.AxiomAudit` 0
+errors (10247 jobs); `#print axioms` std-3 ×4 (propext/Classical.choice/Quot.sound, no sorryAx/custom);
+`axiom_budget_check.sh` raw 0 / OK; `git status --porcelain | grep -i vacuum` clean; no existing banked
+file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; commit `e1019b88`, pushed. NOT `a₁ = R/6`.
