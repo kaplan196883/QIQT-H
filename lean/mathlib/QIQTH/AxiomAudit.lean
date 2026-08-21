@@ -29893,4 +29893,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusTauDerivAnySEnvelope.witnessTimeDeriv_domination_global_anyS
 #print axioms QIQTH.CensusTauDerivAnySEnvelope.census_anyS_env_satisfiable_properGate
 
+-- ## CensusAnySEnvelopeRethread (J4-951): RE-THREADS the live census consumers off the OLD crude-envelope supplier
+-- witnessTimeDeriv_domination_global (which carries the OVER-STRONG hgate whose FIRST conjunct universally
+-- quantifies the FIELD point, forcing S q=univ ∀q∈K) onto the STRICTLY-MORE-GENERAL any-S supplier
+-- witnessTimeDeriv_domination_global_anyS (J4-950), which proves the IDENTICAL conclusion carrying ONLY
+-- {hAmp0, hCfield-on-censusAmpTauDeriv, hSupp} — NO hgate, NO Cfield, ANY S. Each landed theorem is a strict
+-- weakening of an already-banked consumer (same conclusion, hgate/Cfield DROPPED): censusBound_of_amplitudeCarries_
+-- Fbound_ballRate_anyS (J4-948 far-rate), censusBound_of_geometry_gate_supp_F_ballRate_anyS (J4-949 capstone with the
+-- over-strong hgateS GATE HALF ENTIRELY REMOVED from the binder — the concrete elimination of the S=univ carry at the
+-- census-assembly boundary), witnessBoundD_wired_anyS / witnessHpardiff_wired_anyS (J4-918 boundD/hpardiff). Non-vacuity
+-- EXHIBITED (K={0}, S=univ, F≡0) for the re-threaded bundles + census_anyS_smallRadius_gate_exists for the ∀D binder.
+-- After this cleanup hCensusBound's far-rate is assembled with NO S-membership gate on the field point; residue is a pure
+-- re-plumbing. std-3 ×7. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#print axioms QIQTH.CensusAnySEnvelopeRethread.censusBound_of_amplitudeCarries_Fbound_ballRate_anyS
+#print axioms QIQTH.CensusAnySEnvelopeRethread.censusBound_of_geometry_gate_supp_F_ballRate_anyS
+#print axioms QIQTH.CensusAnySEnvelopeRethread.witnessBoundD_wired_anyS
+#print axioms QIQTH.CensusAnySEnvelopeRethread.witnessHpardiff_wired_anyS
+#print axioms QIQTH.CensusAnySEnvelopeRethread.censusBound_of_amplitudeCarries_Fbound_ballRate_anyS_satisfiable
+#print axioms QIQTH.CensusAnySEnvelopeRethread.witnessHpardiff_wired_anyS_hyp_satisfiable
+#print axioms QIQTH.CensusAnySEnvelopeRethread.census_anyS_smallRadius_gate_exists
+
 end QIQTH.AxiomAudit

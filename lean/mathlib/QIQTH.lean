@@ -5489,3 +5489,14 @@ import QIQTH.CensusAmplitudeSupDischarge
 -- (≠univ, yet 0∈S z) — refutes the cp466 analogy. std-3 ×3. gpt-5.6-sol high audit: NOT cp466-style collapse.
 -- NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusTauDerivAnySEnvelope
+
+-- CensusAnySEnvelopeRethread — J4-951: RE-THREADS the live census consumers off the OLD supplier
+-- witnessTimeDeriv_domination_global (over-strong hgate/S=univ gate half) onto the any-S supplier
+-- witnessTimeDeriv_domination_global_anyS (J4-950), ELIMINATING the S=univ carry from the FULL chain.
+-- Strict weakenings (same conclusions, hgate/Cfield DROPPED, hCfield rephrased onto censusAmpTauDeriv):
+-- censusBound_of_amplitudeCarries_Fbound_ballRate_anyS (J4-948 far-rate, no hgate),
+-- censusBound_of_geometry_gate_supp_F_ballRate_anyS (J4-949 capstone with hgateS GATE HALF REMOVED entirely),
+-- witnessBoundD_wired_anyS / witnessHpardiff_wired_anyS (J4-918 boundD/hpardiff, no hgate). Non-vacuity:
+-- …_satisfiable (K={0}, F≡0) + census_anyS_smallRadius_gate_exists (∀D binder). std-3 ×7. NOT a₁=R/6;
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusAnySEnvelopeRethread
