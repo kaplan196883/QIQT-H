@@ -13094,3 +13094,45 @@ Residual CoV-junction obligations remain: (b) the gate-split integral restrictio
 at radius `δ` (incl. the annulus `ball 0 D.ρ\ball 0 δ`), and (d) the final rate absorption; plus G2/G3. NONE in this
 file. `hDuhamel`/`hDConv` remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on
 `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-946 (commit 2c6ae44f + ledger, `CensusJointGateInnerBall.lean`, NEW FILE, Opus/Fable): the JOINT-GATE INNER-BALL bridge closing concern **(b)** of the `hCensusBound` (`hCross`) CoV-junction re-audit — the "`z∈K` half" of the gate-split integral restriction is FREE from standing geometry `K∈𝓝 0`, so concern (b) reduces to G2 ALONE.
+
+Follows J4-945/944, which listed concern (b) [gate-split integral restriction] as a residual CoV-junction
+obligation: "`z∈K∧0∈S z`; G2 gives only `0∈S z`, need the `z∈K` half too". ★THE STRUCTURE: the census integrand over
+base `z` (field point FIXED at `0`) is `deriv(fun u↦vanVleckGatedWitness … u 0 z)(a−s)·F s z 0`. The gate is the
+gated-kernel predicate at slice `(p,q)=(0,z)`, which is JOINT: `z∈K ∧ 0∈S z` (`gatedKernel K S H τ p q =
+if q∈K then (if p∈S q then H … else 0) else 0`). J4-937's `censusTauDeriv_gateSplit` proves the EVERYWHERE identity
+`deriv(…) τ = if (z∈K∧0∈S z) then [CoV two-term closed form] else 0`. To identify the census integrand ON the two-term
+inner ball `ball 0 r` with the CoV form one needs `ball 0 r ⊆ {z|z∈K∧0∈S z}`, splitting as the "`z∈K` half"
+`ball 0 r⊆K` AND G2 `ball 0 r⊆{z|0∈S z}`.
+
+★THE RESOLUTION (gpt-5.6-sol high adversarially confirmed): the `z∈K` half is NOT a genuine new independent carry
+parallel to G2 — it follows FOR FREE from the already-standing geometry `h0Kmem:K∈𝓝 0` (`K` is a neighbourhood of the
+census centre `0`, used throughout the assembly, e.g. `baseVaryingIFTData_nonempty`, `commonWitness_image_subball`) via
+`Metric.mem_nhds_iff.mp h0Kmem` (∃`rK>0`, `ball 0 rK⊆K`); take `r=min rK rS`. The ASYMMETRY is the whole point and is
+real: `K` is GIVEN as a neighbourhood of `0` (`h0Kmem`), whereas `S` is an ABSTRACT gate-set family with NO neighbourhood
+assumption (`S≡∅` makes `{z|0∈S z}=∅`, so `IsCompact K`+`0∈K` would NOT suffice for `S` — Sol), so G2 is genuinely carried
+while the `z∈K` half is discharged by standing geometry. Hence concern (b) reduces to **G2 ALONE**. Sol residual caveats
+(NOT in this file): the inclusion is `ball 0 r⊆jointGate` (integrand identity ON the ball), NOT `jointGate⊆ball 0 r`, so
+the off-ball residue `jointGate\ball 0 r` still needs the Gaussian-envelope tail = concern (c); abstract-`S` gated
+integrand measurability is separate; CoV chart validity of `uniformInverseChart` needs only the ORIGINAL base point
+`z∈K` (one-sided gate at `q=z`, this orientation `H τ 0 z`), exactly what `ball 0 r⊆K` supplies (no path/image-in-`K`
+condition arises).
+
+LANDS std-3 ×4: `jointGate_innerBall_of_nhds_and_gateBall` ★★ (SET BRIDGE / bundled joint-gate carry: `K∈𝓝 0` +
+G2 `∃rS>0, ball 0 rS⊆{z|0∈S z}` ⟹ `∃r>0, ball 0 r⊆{z|z∈K∧0∈S z}`; the `z∈K` conjunct supplied by `h0Kmem`, only G2 a
+genuine input); `censusTauDeriv_eq_onGate_on_jointGate_ball` ★★ (THE PAYOFF: on any ball ⊆ joint gate, the gate-split
+`if` collapses to the on-gate CoV two-term closed form, ∀`z`∈ball ∀`τ` — via `censusTauDeriv_gateSplit` + `if_pos`; the
+`z∈K` conjunct comes bundled inside the ball hypothesis, never a separate carry); `censusTauDeriv_onGate_innerBall_of_geometry`
+★★ (COMBINED: from standing `K∈𝓝 0` and G2 alone, ∃ inner ball on which the census `∂_τ` kernel equals the on-gate form);
+`jointGate_innerBall_satisfiable` (non-vacuity TEETH: `S z:=ball z 1` gives `{z|0∈S z}=ball 0 1≠univ`, exercising G2
+non-trivially; `K:=closedBall 0 1` compact nbhd of `0`; produces a nonempty inner ball, `hn:0<n` for the constant-`2`
+sup-norm witness).
+
+BUILT lake env lean 0 errors; `lake build QIQTH.AxiomAudit` 0 errors (10253 jobs); `#print axioms` std-3 ×4
+(propext/Classical.choice/Quot.sound, no sorryAx/custom); `axiom_budget_check` raw 0/OK; vacuum-grep clean; no banked
+file edited; wired `QIQTH.lean`+`AxiomAudit.lean`; `git show 2c6ae44f --stat` = 3 files (+246). HONEST STATUS: RESOLVES
+concern (b) by CLARIFICATION — the "`z∈K` half" is discharged by standing `K∈𝓝 0`, so concern (b) is a non-issue MODULO
+G2 (no separate `z∈K` input). Does NOT close `hCensusBound`/`hCross`. Remaining CoV-junction obligations: (c) off-ball
+Gaussian envelope + integrability (incl. `jointGate\ball 0 r`), (d) final rate absorption; plus G2/G3. `hDuhamel`/`hDConv`
+remain carried; `hCConv` unaffected. `a₁=R/6` remains CONDITIONAL on `{hDuhamel,hDConv,hCConv}`, UNCHANGED. NOT `a₁=R/6`.
