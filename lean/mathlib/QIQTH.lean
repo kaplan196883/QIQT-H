@@ -5527,3 +5527,21 @@ import QIQTH.CensusFFactorSupDischarge
 -- self-contained crude envelope, no chart wall) + _jointGate_measurable_satisfiable (proper gate S=ball 0 1).
 -- std-3 ×6. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
 import QIQTH.CensusPhiIntegrabilityDischarge
+
+-- CensusExistRhoRethread — J4-954: RESHAPE the any-S census far-rate capstone so the trace-integral SPLIT
+-- RADIUS ρ is chosen AFTER (per) the geometry witness D — resolving the "ρ-prescription mismatch" (O1) that
+-- blocked discharging the C1 on-ball trace-rate carry hballrate from the common-witness/CoV chain (which can
+-- only bound on a geometry-determined δ=min(gate radius, D.ρ, σ') chosen after D) — then THREAD the reshaped
+-- capstone through to the ACTUAL downstream hCross consumer hcross_of_censusIntegral_bound (J4-929) to certify
+-- the ultimate consumer ACCEPTS an existentially-chosen ρ. KEY FINDING: hcross_of_censusIntegral_bound's
+-- hCensusBound binder is ρ-FREE (∫ over ALL ℝⁿ, no Metric.ball; C_far a FREE scalar param), so ρ is purely an
+-- internal splitting radius — a binder-reorder (ρ,MF,Cpair,hF,hballrate moved inside ∀D) suffices, NO
+-- re-derivation of hcross needed. Sol-audited: internal assembler constrains ρ only by 0<ρ (no D.r≤ρ / ρ≤ρmax
+-- / τ₀≤c·ρ² coupling); Cenv depends on ρ but is existential; lam depends only on w=4·D.lam,τ₀; rAmp from the
+-- ρ-independent census_amplitude_supBounds — so the reorder is proved by the SAME body. LANDS std-3 ×4:
+-- censusBound_of_geometry_gate_supp_F_ballRate_anyS_existRho (reshaped capstone), hcross_of_geometry_gate_supp_
+-- existRho (CONSUMER ACCEPTANCE: full live hCross binder via hcross_of_censusIntegral_bound at C_far=Cpair+
+-- Cenv√2ⁿ√ε), existRho_innerBundle_satisfiable (moved-inside bundle jointly satisfiable, K={0},S=univ,F≡0,ρ=1/4),
+-- census_existRho_smallRadius_gate_exists (∀D non-vacuous). Resolves O1 STRUCTURALLY; proves NONE of
+-- {hballrate,hDuhamel,hDConv,hCConv}. NOT a₁=R/6; CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+import QIQTH.CensusExistRhoRethread

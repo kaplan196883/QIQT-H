@@ -29951,4 +29951,15 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_integrable_of_measAndDom_satisfiable
 #print axioms QIQTH.CensusPhiIntegrabilityDischarge.censusPhi_jointGate_measurable_satisfiable
 
+-- ## CensusExistRhoRethread (J4-954): RESHAPE the any-S census far-rate capstone so the trace-integral SPLIT
+-- RADIUS ρ is chosen AFTER (per) the geometry witness D — resolving the ρ-prescription mismatch (O1) that
+-- blocked discharging the C1 on-ball trace-rate carry hballrate from the common-witness/CoV chain — then
+-- thread it through to the ACTUAL downstream hCross consumer hcross_of_censusIntegral_bound (J4-929) to certify
+-- the ultimate consumer ACCEPTS an existentially-chosen ρ (hCensusBound is ρ-FREE over all ℝⁿ, C_far a free
+-- scalar param). std-3 ×4.
+#print axioms QIQTH.CensusExistRhoRethread.censusBound_of_geometry_gate_supp_F_ballRate_anyS_existRho
+#print axioms QIQTH.CensusExistRhoRethread.hcross_of_geometry_gate_supp_existRho
+#print axioms QIQTH.CensusExistRhoRethread.existRho_innerBundle_satisfiable
+#print axioms QIQTH.CensusExistRhoRethread.census_existRho_smallRadius_gate_exists
+
 end QIQTH.AxiomAudit
