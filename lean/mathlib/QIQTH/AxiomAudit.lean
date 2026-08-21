@@ -41,6 +41,7 @@ import QIQTH.HCrossFarDerivBridge
 import QIQTH.SliverAmplitudeFromHGpow
 import QIQTH.MixedEnvelopeAssembly
 import QIQTH.CensusFarRateAbsorb
+import QIQTH.CensusHbaseC2Discharge
 
 namespace QIQTH.AxiomAudit
 
@@ -29739,5 +29740,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CensusFarRateAbsorb.census_far_rate_of_ball_and_gaussEnv
 #print axioms QIQTH.CensusFarRateAbsorb.rate_absorb_hyp_satisfiable
 #print axioms QIQTH.CensusFarRateAbsorb.census_far_rate_hyp_satisfiable
+
+-- ## J4-941 (CensusHbaseC2Discharge): DISCHARGE the hbaseC2 carry of the census-family regularity lemmas,
+-- UNCONDITIONALLY. hbaseC2 : ContDiffAt ℝ 2 (fun z => uniformInverseChart g gi hC hK z 0) 0 (obligation (b)
+-- of the J4-930..940 hCensusBound re-audit) is NOT a genuine open obligation — it is EXACTLY the
+-- unconditional conclusion of TerminalVelC2.terminalVel0_contDiffAt_two (hT0, J4-274) fed through
+-- GeodesicReversalRoute.hbaseC2_of_terminalVel_contDiffAt (J4-273). wbv_contDiffAt_two (★★ standalone
+-- UNCONDITIONAL hbaseC2, given only hC/hK/K∈𝓝0); the three census-family transport regularity lemmas with
+-- hbaseC2 REMOVED. std-3 ×4. Obligation (b) CLOSED; census transport regularity now depends ONLY on the
+-- abstract F-factor F0 (obligation (a), {hDuhamel,hDConv,hCConv}-family). NOT a₁=R/6; a₁=R/6 CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}.
+#print axioms QIQTH.CensusHbaseC2Discharge.wbv_contDiffAt_two
+#print axioms QIQTH.CensusHbaseC2Discharge.transported_ratio_regularity_ballLocal_unconditional
+#print axioms QIQTH.CensusHbaseC2Discharge.census_ampF_transported_ratio_regularity_unconditional
+#print axioms QIQTH.CensusHbaseC2Discharge.census_CfieldF_transported_ratio_regularity_unconditional
 
 end QIQTH.AxiomAudit
