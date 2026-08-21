@@ -5869,3 +5869,12 @@ import QIQTH.HDuhamelDataCensusDischarged
 -- identity. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three, UNCHANGED.
 -- std-3. NOT a₁=R/6.
 import QIQTH.HDuhamelSliverDischarged
+-- HDuhamelHQ1Discharged — eliminate the frozen first-order interchange EQUALITY carry hQ1 from the
+-- live order-1 hDuhamel slot (J4-981 hDuhamelSlot_sliver_discharged), in favour of the SEVEN-leg
+-- frozen diff-under-∫ provider hFrozenData (raw measurability / interval-integrability / dominator /
+-- HasDerivAt inputs) that PROVES it. hQ1 (shared-V shape) is DERIVED internally from J4-378
+-- W2Finish.w2_hQ1, which delivers the slot's exact shared-V form directly (no per-(u,i,m) existential,
+-- no m-uniformity gap). The hDuhamel-slot analogue of the InnerDiffFamily opener, now WIRED into the
+-- live slot identity. Discharges NONE of {hDuhamel,hDConv,hCConv}; a₁=R/6 CONDITIONAL on those three,
+-- UNCHANGED. std-3. NOT a₁=R/6.
+import QIQTH.HDuhamelHQ1Discharged

@@ -30336,4 +30336,10 @@ namespace QIQTH.AxiomAudit
 -- {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
 #print axioms QIQTH.HDuhamelSliverDischarged.hDuhamelSlot_sliver_discharged
 
+-- HDuhamelHQ1Discharged — eliminate the frozen first-order interchange EQUALITY carry hQ1 from the
+-- live hDuhamel slot (J4-981), in favour of the seven-leg frozen diff-under-∫ provider hFrozenData
+-- that proves it; hQ1 derived internally from J4-378 W2Finish.w2_hQ1 in the slot's exact shared-V
+-- shape (no m-uniformity gap). Discharges NONE of {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
+#print axioms QIQTH.HDuhamelHQ1Discharged.hDuhamelSlot_hQ1_discharged
+
 end QIQTH.AxiomAudit
