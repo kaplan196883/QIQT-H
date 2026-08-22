@@ -6029,3 +6029,14 @@ import QIQTH.HeatHessTransportedCoeffClosure
 -- integrand (base-slot CoV + 2nd-order chain rule + truncation-tail control + coord summation remain,
 -- Sol residues iii). std-3 ×7. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.LocalRNCJetFactorGlobalization
+
+-- GaussCompMixedHessian — J4-1001: the MIXED-direction (i≠j) generalization of ChartJetHessian's diagonal
+-- gaussComp_pd_pd/gaussComp_amp_pd_pd, matching kPrime's LITERAL mixed second coordinate partial (Sol
+-- GO/NO-GO high, 2026-08-22: the standalone abstract chain-rule sub-piece of item (b), decoupled from
+-- uniformInverseChart/kPrime/hcomp). Lands gaussComp_pd_pd_mixed (the mixed on-Gaussian second coordinate
+-- partial); gaussComp_pd_pd_mixed_eq_heatHessMult_sub (★★★ IDENTIFIES it with J4-998's abstract
+-- heatHessMult bilinear multiplier, minus an explicit Qj-jet correction term); gaussComp_amp_pd_pd_mixed
+-- (the amplitude-weighted 4-term Leibniz generalization). ⚠ Does NOT instantiate uniformInverseChart, does
+-- NOT touch kPrime/hcomp literally, does NOT do base-slot CoV/truncation-tail/coord summation (items a/c/d
+-- remain open). std-3 ×4. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.GaussCompMixedHessian

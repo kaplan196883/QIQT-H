@@ -30595,4 +30595,27 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.LocalRNCJetFactor.integral_heatHessMult_transportedJet_bound_from_localRNC
 #print axioms QIQTH.LocalRNCJetFactor.integral_heatHessMult_transportedJet_bound_from_localRNC_hyp_satisfiable
 
+-- GaussCompMixedHessian — J4-1001: the MIXED-direction (i≠j) generalization of ChartJetHessian's diagonal
+-- gaussComp_pd_pd/gaussComp_amp_pd_pd, matching kPrime's LITERAL mixed second coordinate partial (Sol
+-- GO/NO-GO high, 2026-08-22: GO on the standalone abstract chain-rule sub-piece of item (b), decoupled
+-- from uniformInverseChart/kPrime/hcomp; NO-GO on the base-slot CoV / truncation-tail identification).
+-- gaussComp_pd_pd_mixed = the mixed second coordinate partial of a composed Gaussian G_τ∘V, inner direction
+-- i / outer direction j, from an inner i-line jet field P (∀x) plus outer j-line jets of V and of P itself
+-- at x₀ (Pj0, Qj — the genuine mixed second jet ∂ⱼ∂ᵢV). Specializes to ChartJetHessian.gaussComp_pd_pd at
+-- j=i. gaussComp_pd_pd_mixed_eq_heatHessMult_sub = ★★★ IDENTIFIES this literal chain-rule Hessian with
+-- J4-998's abstract heatHessMult τ Pj0 (P x₀) (V x₀) multiplier, minus an explicit Qj-jet correction term
+-- −G_τ(V x₀)·⟨V x₀,Qj⟩/(2τ) — the missing chain-rule link J4-1000's commit message named as residue (iii).
+-- gaussComp_amp_pd_pd_mixed = the amplitude-weighted 4-term Leibniz generalization (matches kPrime's actual
+-- amplitude×Gaussian shape, cf. SecondDerivEnvelope.witnessFieldDeriv2_gate_eq's 3-term diagonal form).
+-- ⚠ Fully abstract in V/A: does NOT instantiate uniformInverseChart, does NOT touch kPrime/hcomp literally,
+-- does NOT do the base-slot change of variables (item a), truncation-tail control (item c), or coordinate
+-- summation (item d) — all remain open, per Sol's NO-GO on the full identification in one dispatch.
+-- Non-vacuity: V:=id, P:=eᵢ (constant field), Pj0:=eⱼ, Qj:=0 (linear map ⟹ vanishing 2nd jets), a genuine
+-- non-degenerate instance. std-3 ×4. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#print axioms QIQTH.GaussCompMixedHessian.gaussComp_pd_pd_mixed
+#print axioms QIQTH.GaussCompMixedHessian.gaussComp_pd_pd_mixed_eq_heatHessMult_sub
+#print axioms QIQTH.GaussCompMixedHessian.gaussComp_amp_pd_pd_mixed
+#print axioms QIQTH.GaussCompMixedHessian.gaussComp_pd_pd_mixed_hyp_satisfiable
+
 end QIQTH.AxiomAudit
