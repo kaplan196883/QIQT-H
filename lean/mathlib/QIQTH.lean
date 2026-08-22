@@ -6351,3 +6351,16 @@ import QIQTH.AmpFieldGeneralPointBoundLipschitz
 -- separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.AmpFieldGlobalTruncation
+
+-- J4-1027: AmpFieldBaseSlotGlobalTruncation — FIXES the slot mismatch in J4-1024/1026's globalization
+-- of chartFieldAmp (which globalized the FIELD slot x', z fixed) by building the BASE-slot mirror
+-- (ampField_contDiffAt_baseSlot / chartFieldAmp_bound_lipschitz_generalPoint_baseSlot / AmpGlobalBase /
+-- ampGlobalBase_bound_lipschitz_agree), matching the CoV-recovered variable role §C/§D/§E's V(w) needs.
+-- Instantiates §E's capstone at q₀:=x with the CORRECTLY-slotted weight: AmpExt v = chartFieldAmp … (V v)
+-- x literally, inside the agreement ball. Sol (gpt-5.6-sol, high) GO-reviewed the argument-swap mirror
+-- plan before Lean. std-3, no sorryAx, no new axioms.
+-- Does NOT discharge the Levi(s,z) prefactor multiplying hsMixed·A in Bfac, nor hfac's literal carry
+-- over the IFT-selected domain S' (residuals r1/r2 of HCompNearCarryKPrimeBaseFieldCoV). Bfac's other 3
+-- summands untouched; fb stays separately open. Do NOT read as "nb's term1 closes" — it does not.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.AmpFieldBaseSlotGlobalTruncation

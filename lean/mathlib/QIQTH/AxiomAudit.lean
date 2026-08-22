@@ -31056,4 +31056,17 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.AmpFieldGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_global
 #print axioms QIQTH.AmpFieldGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_global
 
+-- J4-1027: AmpFieldBaseSlotGlobalTruncation — base-slot-correct mirror of J4-1024/1026's globalization,
+-- instantiating §E's capstone at q₀:=x with AmpExt v literally = chartFieldAmp … (V v) x on the
+-- agreement ball. Does NOT discharge Levi(s,z) or hfac/S' reconciliation; not nb's term1 closure.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.AmpFieldBaseSlotGlobalTruncation.ampField_contDiffAt_baseSlot
+#print axioms QIQTH.AmpFieldBaseSlotGlobalTruncation.ampField_contDiffAt_baseSlot
+#check @QIQTH.AmpFieldBaseSlotGlobalTruncation.chartFieldAmp_bound_lipschitz_generalPoint_baseSlot
+#print axioms QIQTH.AmpFieldBaseSlotGlobalTruncation.chartFieldAmp_bound_lipschitz_generalPoint_baseSlot
+#check @QIQTH.AmpFieldBaseSlotGlobalTruncation.ampGlobalBase_bound_lipschitz_agree
+#print axioms QIQTH.AmpFieldBaseSlotGlobalTruncation.ampGlobalBase_bound_lipschitz_agree
+#check @QIQTH.AmpFieldBaseSlotGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_baseSlot_global
+#print axioms QIQTH.AmpFieldBaseSlotGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_baseSlot_global
+
 end QIQTH.AxiomAudit
