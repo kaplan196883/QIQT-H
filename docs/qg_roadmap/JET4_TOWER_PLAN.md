@@ -15162,3 +15162,55 @@ Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
    requires C¹-in-initial-condition/parameter dependence of the opaque Skolemized flow, the campaign
    wall (Mathlib has no C¹-in-IC PL-flow theorem). This is where the Jacobi route re-hits J3. The
    entire linearized Gauss-lemma content is now banked EXCEPT this single sensitivity bridge.
+
+## J4-992 — `GaussInteriorMVTGeneral`: general-base-point exp-pullback Gauss germ (corrected-hpull item (1), no `g_p=I` gauge) — commit `1c8eb3d2`
+
+**Executes item (1) of the corrected-`hpull` program** — "generalized Gauss without `g_z=I`". Task was
+to generalize the banked `hGauss_pullback_concrete` (J4-347, `GaussInteriorMVT.lean`) — which proves the
+exp-pullback Gauss germ `∀ i, (∑_j g̃_ij(x)·x^j) =ᶠ[𝓝 0] (x^i)` AT base-normalized coordinates (`g_p=I`) —
+to an arbitrary positive-definite base metric `g_p`.
+
+**Finding (the crux).** `g_p=I` is a STATEMENT normalization ONLY; it is used in NO proof step of the
+interior-MVT / coordinate-contraction machinery. Concretely, already banked:
+- `gauss_interior_identity` (J4-347) already carries RHS `∑ g_p(a,b)·w^a·v^b = g_p(w,v)` — general.
+- `gauss_coordinate_contraction` (A3, `GaussLemmaAssembly`) already carries RHS `∑_b g_p(i,b)·v^b` — general.
+- `hgball_concrete` (J4-347) takes NO gauge argument — already general.
+The `g_p=I` gauge is post-composed only in `gauss_coordinate_contraction_gauge` (A3′) → `hGauss_pullback`
+→ `hGauss_pullback_concrete` to collapse the coordinate RHS to `x^i`. So the general germ is a thin
+algebraic un-normalization: feed the SAME ball family through the UN-gauged contraction and the SAME
+`Metric.eventually_nhds_iff` witness. gpt-5.6-sol (high, 2026-08-22) confirms: coordinate-free Gauss
+`(exp_p^*g)_v(v,w)=g_p(v,w)` needs no orthonormality; `g_p=I` is a frame choice for stating it as
+`g̃(x)·x=x`.
+
+**Built (NEW file `GaussInteriorMVTGeneral.lean`, no banked file edited).**
+- `hGauss_pullback_general` — germ `∀ i, (fun x => ∑_j g̃_ij(x)·x^j) =ᶠ[𝓝 0] (fun x => ∑_b g_p(i,b)·x^b)`
+  from an abstract ball family (NO `hgauge`), via `gauss_coordinate_contraction` + `Metric.eventually_nhds_iff`.
+- `hGauss_pullback_general_concrete` — the ball family DISCHARGED by `hgball_concrete`; surviving
+  hypotheses ONLY the metric geometry `hsymm/hinv/hg`, NO base gauge `g_p=I`. **This is item (1).**
+- `expPullbackMetric_zero_general` — un-gauged center value `g̃(0)=g_p` (general analog of
+  `expPullbackMetric_zero_gauge`; wrapper over `expPullbackMetric_at_zero`).
+- `hGauss_pullback_gauge_of_general` — regression: the banked gauged germ (RHS `x^i`) is recovered from
+  the general germ by the algebraic collapse `∑_b g_p(i,b)·x^b = x^i` under `g_p=I` ⟹ strict generalization.
+
+**Honest scope / non-vacuity.** Thin un-normalization of already-general, axiom-free machinery — no new
+analytic content. gpt-5.6-sol verdict: item (1) is a cleanliness/flexibility win, **probably NOT on the
+critical path** for the textbook `a₁=R/6` route (which re-imposes an orthonormal frame `g(0)=I` anyway).
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake env lean QIQTH/GaussInteriorMVTGeneral.lean` std-3 all 4 (propext/Classical.choice/
+Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err (10301 jobs); `axiom_budget_check.sh`
+raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`; `git show 1c8eb3d2 --stat`
+= 3 files (+181); pushed. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Updated scope estimate for the remaining corrected-`hpull` items (gpt-5.6-sol high, 2026-08-22).**
+- (2) exact inverse-metric identity `g̃(x)⁻¹·g_p·x = x` — **thin algebra** (pointwise linear algebra;
+  Lean friction = matrix-inverse API + index bookkeeping, not analysis).
+- (3) exact inverse second-jet `D²(g̃⁻¹)(0) = −g_p⁻¹·D²g̃(0)·g_p⁻¹` (uses `Dg̃(0)=0`) — **no new geometry
+  in principle, but the most likely Lean engineering sink** (needs usable C² matrix-inversion + germ-to-
+  derivative machinery; away from center the two quadratic `Dg̃` terms are mandatory).
+- (4) radial-endpoint `W_z(0)=−z` — **elementary** unfold/endpoint calc, with a hidden sign/orientation risk.
+- (5) corrected first leg `r·Ae_i=−z_i` — **thin after (4)** (Gauss-contraction application; watch the
+  ungauged form `−∑_b g_p(i,b)·z^b` vs gauged `−z^i`).
+- (6) flat+curved regression tests — not new math, high value for catching gauge/transpose/lowering/sign errors.
+Blunt prior: (2)/(5) thin, (4) small with sign risk, (3) the real engineering cost. NONE unblock the
+`{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`.
