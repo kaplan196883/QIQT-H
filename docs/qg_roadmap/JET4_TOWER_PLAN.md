@@ -15492,3 +15492,58 @@ parametrix residual carrying `a₁=R/6` is exactly what the singleton-base colla
 `hGpow` at K={0} does NOT reduce `hDuhamel` to "one opaque limit binder" — it confirms the trio is not
 jointly non-trivially satisfiable at this witness. `a₁=R/6` STRICTLY CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED.
+
+## J4-998 — `HeatHessianMomentCancellation`: the n-D heat-kernel HESSIAN moment-cancellation core (the odd-moment / vanishing-diagonal-jet ingredient for `hCConv`'s `hcomp`) — commit `45d0157f`
+
+**What.** The precise **odd-moment / mass-conservation cancellation** ingredient that `hCConv`'s
+`VanVleckGatedSpatialSymmetry.hcomp` obligation needs — the n-D directional/bilinear generalization of
+the 1-D `GaussTauDerivCancellation.integral_DtauG_mul_lipschitz` (J4-919) that discharged the analogous
+`hCross` `H_far` wall. cp872 had ruled the crude joint-Lipschitz **TRANSPOSITION** route NO-GO (one order
+too weak: integrated over the singular parametrix it gives time-sliver `∫₀^ε τ⁻¹ dτ` = log-divergent).
+gpt-5.6-sol named the missing ingredient: "van Vleck symmetry / vanishing first diagonal jet / **odd-moment
+cancellation** / IBP heat-kernel moment identity." This dispatch builds the odd-moment route.
+
+**The multiplier.** For `τ>0`, directions `p q : Point n`, the **heat-kernel Hessian multiplier**
+`heatHessMult τ p q v := (⟨v,p⟩·⟨v,q⟩/(4τ²) − ⟨p,q⟩/(2τ))·G_τ(v)` (`⟨v,p⟩ := Σ_k v_k p_k`) — EXACTLY the
+second directional field-derivative `∂_p∂_q G_τ(v)` of the n-D Gaussian (`gaussDdim`), the closed-form
+scalar carried by the banked on-gate Hessian formula `SecondDerivEnvelope.witnessFieldDeriv2_gate_eq`
+(with `P`,`Q` the chart jets), before chart transport. The diagonal `p=q=eᵢ` recovers the 1-D `DtauG`.
+
+**Sympy-verified (3 parts, all PASS; distinct from the FAILED transposition route).** (1) DIAGONAL `i=j`:
+`∫_V DtauG = 0` (mass conservation, matches J4-919); Lipschitz remainder `~ τ^{−1/2}`; sliver `2√ε`.
+(2) OFF-DIAGONAL `i≠j`: `∫ V_iV_j/(4τ²)G = 0` (odd moment); remainder `~ τ^{−1/2}`. (3) TRAP CHECK
+(curved chart `W_z(x)=−u+κ(c1(x)u²+c2(x)u³)`, nontrivial amplitude, constant Levi weight):
+`M(x,τ)=∫_z G_τ(W_z x)A_z(x)dz` is a REGULAR heat series `M0+M1τ+M2τ²` (ONLY nonneg integer τ-powers,
+no τ⁻¹), so `∂²_x M → O(1)` and the curved chart + amplitude do NOT break the cancellation ⟹
+`hcomp = O(1)[const] + O(τ^{−1/2})[Lipschitz remainder] = O(√ε)`.
+
+**gpt-5.6-sol (high, 2026-08-22) GO-audit.** Rate analysis SOUND (transposition NO-GO correctly
+superseded for the RATE). GO to build the standalone flat-`V` brick with a directional/bilinear API.
+CORRECTION carried honestly: the flat indices are `V`-coords not field indices; after transport the weight
+is not merely `leviSeries` but the whole transported coefficient (Jacobian·amplitude·`P_i^aP_j^b`·gate·
+composition), whose uniform Lipschitzness is the remaining `JointSecondOrderRNCRegularity`/opaque-chart
+wall. So this brick does **NOT** discharge `hcomp`.
+
+**Lands (ns `QIQTH.HeatHessMoment`; NEW file, no banked file edited).**
+- `coordProd_gauss_integral` — ★ the exact n-D SECOND CROSS-MOMENT `∫z z_a·z_c·G_τ = if a=c then 2τ else 0`
+  (diagonal = `gaussianSecondMoment_oneD`; off-diagonal = `gaussianFirstMoment_oneD` product-vanishing).
+- `integral_dotdot_gauss` — `∫v ⟨v,p⟩⟨v,q⟩G_τ = 2τ⟨p,q⟩`.
+- ★ `integral_heatHessMult_eq_zero` — `∫v heatHessMult τ p q v = 0` (mass conservation + odd moment); the
+  exact n-D analogue of `integral_DtauG_eq_zero`.
+- `abs_heatHessMult_le` — the pointwise majorant `≤ (n²‖p‖‖q‖)(‖v‖²/(4τ²)+1/(2τ))G_τ`.
+- ★★★ `integral_heatHessMult_mul_lipschitz` — `|∫v heatHessMult τ p q v · f v| ≤ L·n³·‖p‖‖q‖·(16√2+1)/√τ`
+  for `|f v − f 0| ≤ L‖v‖` (SAME constant `16√2+1` as J4-919): `f 0` mode cancels, remainder via the n-D
+  3rd/1st norm moments (`pow_norm_mul_gauss_integral` `k=3,1`), collapsing to `τ^{−1/2}`.
+- `integral_heatHessMult_mul_lipschitz_hyp_satisfiable` — NON-VACUITY (`f := ‖·‖`, `L=1`).
+
+**Honest scope / non-vacuity.** Genuine, axiom-free, non-vacuous standalone n-D Gaussian moment analysis;
+eliminates the exact `τ⁻¹` singularity that killed the transposition route (keeps localization + uses the
+exact `∫(DtauG-type)=0` cancellation, not a magnitude bound). Does **NOT** discharge `hcomp` — the
+opaque-chart transport `z↦W_z(x)` / uniformly-Lipschitz transported coefficient remains (per Sol).
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.HeatHessianMomentCancellation` 0 err (8687 jobs); throwaway `ChkHeatHess`
+std-3 all 6 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err
+(10307 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show 45d0157f --stat` = 3 files (+462); pushed. Stray sibling
+`docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
