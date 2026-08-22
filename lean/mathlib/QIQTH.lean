@@ -6178,3 +6178,13 @@ import QIQTH.ChartGeneralChangeVarEvalSlot
 -- banked chart∘exp=id germ alone), nor compose into any literal bound on nb. std-3. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ReversalLinkBallIntegral
+-- J4-1014: ChartEvalSlotDomainContainment — the domain-containment fact `W_x''(ball x ρ)⊆ball 0 R`
+-- Sol (J4-1013's plan-review) named as missing, derived from ALREADY-BANKED
+-- uniformInverseChart_slice_contDiffAt_diag_generalK (ContDiffAt ℝ 2 ⟹ ContinuousAt) +
+-- uniformInverseChart_slice_value_diag_generalK (W_x x = 0) via Metric.continuousAt_iff, plus a
+-- shrink-stability corollary for a future min(ρ_IFT,ρ_domain,r_reversal) master-radius composition.
+-- Does NOT compose with J4-1012's CoV or J4-1013's ball-integral, and does NOT touch
+-- terminalVelAt_chartReplace_sliver_bound's substantive hWint/hmom hypotheses (Sol, high, confirmed
+-- image-containment alone cannot discharge those). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartEvalSlotDomainContainment

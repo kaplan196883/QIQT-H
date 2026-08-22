@@ -30824,4 +30824,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ReversalLinkBallIntegral.reversal_link_ball_radius
 #print axioms QIQTH.ReversalLinkBallIntegral.reversal_link_ball_integral
 
+-- J4-1014 (ChartEvalSlotDomainContainment): the domain-containment fact Sol (J4-1013's plan-review)
+-- named as the missing piece — `W_x''(ball x ρ) ⊆ ball 0 R`, W_x := uniformInverseChart g gi hC hK x.
+-- Both ingredients Sol asked for were ALREADY banked in JointRNCRegularityInterfaceLocalGeneralK.lean:
+-- uniformInverseChart_slice_contDiffAt_diag_generalK (ContDiffAt ℝ 2 W_x x ⟹ ContinuousAt via
+-- ContDiffAt.continuousAt) and uniformInverseChart_slice_value_diag_generalK (W_x x = 0).
+-- uniformInverseChart_slice_ball_mapsTo_diag_generalK unwinds Metric.continuousAt_iff at ε:=R to
+-- produce, for ARBITRARY interior x, compact K, and ARBITRARY R>0, an explicit ρ>0 with
+-- Set.MapsTo W_x (ball x ρ) (ball 0 R); uniformInverseChart_slice_ball_image_subset_diag_generalK is
+-- the equivalent set-image form; uniformInverseChart_slice_ball_mapsTo_diag_generalK_min is the
+-- shrink-stability corollary (holds for every ρ'≤ρ, via Metric.ball_subset_ball + MapsTo.mono_left) a
+-- future master-radius min(ρ_IFT,ρ_domain,r_reversal) composition would invoke. gpt-5.6-sol (high,
+-- this dispatch) confirmed: genuinely mechanical, but MapsTo/image-containment supplies ONLY geometric
+-- domain compatibility — it does NOT discharge terminalVelAt_chartReplace_sliver_bound's substantive
+-- hWint (integrability) / hmom (moment bound) hypotheses, nor compose with J4-1012's
+-- evalSlot_terminalVel_weighted_CoV or J4-1013's reversal_link_ball_integral (those existentials'
+-- internal CoV witnesses are not reusable "for free" at a smaller sub-radius). std-3, no sorry, no new
+-- axioms, no existing file edited. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#print axioms QIQTH.ChartEvalSlotDomainContainment.uniformInverseChart_slice_ball_mapsTo_diag_generalK
+#print axioms QIQTH.ChartEvalSlotDomainContainment.uniformInverseChart_slice_ball_image_subset_diag_generalK
+#print axioms QIQTH.ChartEvalSlotDomainContainment.uniformInverseChart_slice_ball_mapsTo_diag_generalK_min
+
 end QIQTH.AxiomAudit
