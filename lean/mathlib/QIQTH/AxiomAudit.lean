@@ -33,6 +33,7 @@ import QIQTH.HDConvGatedK0FullyClosed
 import QIQTH.HGpowGatedK0Closed
 import QIQTH.HeatHessianMomentCancellation
 import QIQTH.HeatHessTransportedCoeffClosure
+import QIQTH.LocalRNCJetFactorGlobalization
 import QIQTH.HFdRequant
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
@@ -30572,5 +30573,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatHessCoeffClosure.lipAtZero_bdd_mul3
 #print axioms QIQTH.HeatHessCoeffClosure.integral_heatHessMult_mul_transportedCoeff
 #print axioms QIQTH.HeatHessCoeffClosure.integral_heatHessMult_mul_transportedCoeff_hyp_satisfiable
+
+-- LocalRNCJetFactorGlobalization — J4-1000: FIRST re-threading of hCConv's hcomp onto the PROVEN local RNC
+-- regularity variant (gpt-5.6-sol high GO, 2026-08-22). J4-999 named the missing ingredient of the odd-
+-- moment payoff integral_heatHessMult_mul_transportedCoeff: the transported chart-FIRST-JET factors
+-- a=(P_i∘V)ₐ, b=(P_j∘V)_b that the un-satisfiable global JointSecondOrderRNCRegularity was to supply. THIS
+-- file SUPPLIES them — globally bounded + globally Lipschitz-at-origin + AE-strongly-measurable — DIRECTLY
+-- from the machine-checked JointSecondOrderRNCRegularityLocal (jointRNCRegularityLocal_of_diag), via radial
+-- truncation (truncFactor: if ‖v‖<ρ then · else value-at-0; preserves value at 0 ⟹ odd-moment constant-
+-- mode cancellation survives). localJet_global_factor = the chart-jet factor from proven regularity (the
+-- piece J4-999 flagged as the wall); integral_heatHessMult_transportedJet_bound_from_localRNC = J4-999's
+-- payoff re-threaded onto proven jets (only the census scalar carried; satisfiable by cos‖·‖).
+-- ⚠ Does NOT close hcomp/hCConv: abstract moment integral not yet the literal kPrime sliver integrand
+-- (base-slot CoV + 2nd-order chain rule + truncation-tail control + coord summation remain, Sol residues
+-- iii). std-3 ×7. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.LocalRNCJetFactor.truncFactor_zero
+#print axioms QIQTH.LocalRNCJetFactor.truncFactor_bound
+#print axioms QIQTH.LocalRNCJetFactor.truncFactor_lip
+#print axioms QIQTH.LocalRNCJetFactor.truncFactor_aesm
+#print axioms QIQTH.LocalRNCJetFactor.localJet_global_factor
+#print axioms QIQTH.LocalRNCJetFactor.integral_heatHessMult_transportedJet_bound_from_localRNC
+#print axioms QIQTH.LocalRNCJetFactor.integral_heatHessMult_transportedJet_bound_from_localRNC_hyp_satisfiable
 
 end QIQTH.AxiomAudit
