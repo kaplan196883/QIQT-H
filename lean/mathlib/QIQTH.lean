@@ -6364,3 +6364,11 @@ import QIQTH.AmpFieldGlobalTruncation
 -- summands untouched; fb stays separately open. Do NOT read as "nb's term1 closes" — it does not.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.AmpFieldBaseSlotGlobalTruncation
+-- J4-1028: LeviAmpProductGlobalRegularity — the Levi(s,z) prefactor's own GLOBAL bounded+Lipschitz
+-- regularity (unrestricted re-export of banked abs_F_le_diagonal + resolvent_lipschitz_pointwise),
+-- composed via a generic product combinator with J4-1027's AmpGlobalBase into a SINGLE globally
+-- bounded+Lipschitz Levi(s,z)·A(z) weight, re-instantiating J4-1024's §E capstone at that product —
+-- the FIRST wiring of Levi(s,z) (not just A) into nb's term1 capstone shape. Does NOT discharge
+-- hfac/S' reconciliation, Bfac's other 3 summands, or fb. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.LeviAmpProductGlobalRegularity

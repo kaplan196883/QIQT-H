@@ -31069,4 +31069,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.AmpFieldBaseSlotGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_baseSlot_global
 #print axioms QIQTH.AmpFieldBaseSlotGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_baseSlot_global
 
+-- J4-1028: LeviAmpProductGlobalRegularity — Levi(s,z)'s own GLOBAL bounded+Lipschitz regularity,
+-- composed via a generic product combinator with J4-1027's AmpGlobalBase into a single globally
+-- bounded+Lipschitz Levi(s,z)·A(z) weight, re-instantiating J4-1024's §E capstone at that product —
+-- the FIRST wiring of Levi(s,z) into nb's term1 capstone shape. Does NOT discharge hfac/S'
+-- reconciliation, Bfac's other 3 summands, or fb. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.LeviAmpProductGlobalRegularity.leviBase_global_bounded_lipschitz
+#print axioms QIQTH.LeviAmpProductGlobalRegularity.leviBase_global_bounded_lipschitz
+#check @QIQTH.LeviAmpProductGlobalRegularity.bounded_lipschitz_mul_global
+#print axioms QIQTH.LeviAmpProductGlobalRegularity.bounded_lipschitz_mul_global
+#check @QIQTH.LeviAmpProductGlobalRegularity.leviAmp_product_agrees_on_ball
+#print axioms QIQTH.LeviAmpProductGlobalRegularity.leviAmp_product_agrees_on_ball
+#check @QIQTH.LeviAmpProductGlobalRegularity.leviAmp_product_domain_restricted_bound
+#print axioms QIQTH.LeviAmpProductGlobalRegularity.leviAmp_product_domain_restricted_bound
+
 end QIQTH.AxiomAudit
