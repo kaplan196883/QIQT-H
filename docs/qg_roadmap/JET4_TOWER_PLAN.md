@@ -15380,3 +15380,54 @@ J4-994 for `expTube`, giving both `exp_z(−z)=0` and `γ̇(1)=−z`); ★ `curv
   `hpullVQ` needs it).
 - (6) flat+curved regression tests.
 NONE unblock the `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`. NOT `a₁=R/6`.
+
+---
+
+## J4-996 (CurvedChartBridgeAudit) — curved companion regression fixture: the genuine second-jet radial contraction is a NONZERO Riemann term (banked `hVQ=0` is GEOMETRICALLY FALSE)
+
+Commit `1231452d` (+ this ledger). NEW file `QIQTH/CurvedChartBridgeAudit.lean`. Opus/Fable[1m]; gpt-5.6-sol
+high GO-audited 2026-08-22. The curved companion of `FlatChartBridgeAudit` (J4-978) and the honest
+deliverable of corrected-`hpull` items (3)+(6).
+
+**Corrected-`hpull` item (3) FINDING (sympy/ODE-verified, Sol high concur).** Differentiating `W∘φ=id`
+twice at `−z` gives `Q := D²W_z(0)[eᵢ,eᵢ] = −P·D²φ(−z)[Peᵢ,Peᵢ]` (`P=DW_z(0)=T⁻¹`, `T=Dφ(−z)`). Using the
+banked `Pᵀz=z` (J4-995), the genuine second-jet radial contraction is
+`∑ₖ W_z(0)ₖ·Qₖ = −⟨z,Q⟩ = (2κ/3)(zᵢ² − ‖z‖²) + O(‖z‖⁴) = −(2/3)·R_{ikil}zᵏzˡ + O(‖z‖⁴) ≠ 0`
+(convention `R_{ikjl}(0)=κ(δ_{ij}δ_{kl}−δ_{il}δ_{kj})`; numerics: ODE-integrated geodesics + finite
+differences, n=2,3, several κ<0, pure O(‖z‖²) ratio-0.25 scaling, leading formula matched to ~1%).
+So the banked center identity `hVQ = 0` (RadialGaugeInterface / CurvedCenterIdentities /
+AmpGeometryBundle.HjetsShape) is GEOMETRICALLY FALSE at general base `z` — not merely unproven. Stronger
+than J4-978's `hVP` mis-SIGN: `hVQ` is mis-VALUED, the true value being the very Riemann contraction
+`a₁=R/6` is built from. J4-978 (flat) could NOT expose this (flat ⟹ affine chart ⟹ `Q=0` ⟹ `VQ ≡ 0=0`).
+
+**Item (3) verdict: NO positive `hVQ=0` theorem possible (false).** Proving the genuine nonzero value in
+Lean requires `D²φ(−z)` = the second variation / Jacobi-field derivative through the OPAQUE Skolemized
+geodesic flow (Mathlib gap = the recurring J3 wall). Per Sol GO, the honest bankable output is item (6):
+the curved regression fixture, via the explicit polynomial surrogate
+`Ŵ_z(x) = (x−z) + (κ/3)(‖x−z‖²·z − ⟨z,x−z⟩·(x−z))`, whose first/second jets are GROUNDED as genuine
+`update`-slice `HasDerivAt` derivatives (exact `HjetsShape` shape) — realizing the leading behaviour
+EXACTLY and catching both defects, non-vacuously.
+
+**Lands (ns `QIQTH.CurvedChartBridgeAudit`; NEW file, no banked file edited).**
+`surrW_center` (`Ŵ(0)=−z`); `surrP_hasDerivAt`/`surrQ_hasDerivAt` (closed-form jets ARE the genuine
+update-slice derivatives = non-vacuity); `surr_firstLeg_corrected` (`∑ₖ zₖ·(DŴ(0)eᵢ)ₖ = zᵢ`, the J4-995
+leg realized); `surr_hVP_value` (`∑ₖ Ŵ(0)ₖ·(DŴ(0)eᵢ)ₖ = −zᵢ`); ★★ `surr_hVQ_value`
+(`∑ₖ Ŵ(0)ₖ·Qₖ = (2κ/3)(zᵢ²−‖z‖²)`); ★ `curved_hVP_fails` + ★★ `curved_hVQ_fails` (REFUTE banked
+`hVP=zᵢ` and `hVQ=0` at n=2, z=(1,1), i=0, κ=−3: LHS=−1≠1; LHS=2≠0).
+
+**Banking.** `lake build QIQTH.CurvedChartBridgeAudit` 0 err (8476 jobs); throwaway `ChkCurvedBridge`
+std-3 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; in-file `#print axioms` std-3
+all 8; `QIQTH.AxiomAudit` 0 err (10305 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean;
+wired `QIQTH.lean` + `AxiomAudit.lean`; `git show 1231452d --stat` = 3 files (+367); pushed. Stray sibling
+`docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Updated corrected-`hpull` program status.**
+- (1) DONE (J4-992); (2) DONE (J4-993); (4) DONE (J4-994); (5) DONE (J4-995).
+- (3) exact inverse second-jet — CHARACTERIZED + FOUND to have a wrong target: `hVQ=0` is geometrically
+  FALSE; the genuine value is a nonzero Riemann contraction requiring `D²φ` (opaque-flow second variation,
+  the J3 wall) to pin. No positive `hVQ=0` theorem is possible. This confirms Sol's "likely sink" AND
+  strengthens it: the banked `HjetsShape` center-identity triple is mis-STATED (both `hVP` mis-signed and
+  `hVQ` mis-valued) for the genuine geodesic inverse chart.
+- (6) DONE (J4-996, this) — curved regression fixture refuting both `hVP=zᵢ` and `hVQ=0` for a
+  genuinely-curved (κ≠0) grounded surrogate; the curvature defect no flat model can see.
+NONE unblock the `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`. NOT `a₁=R/6`.
