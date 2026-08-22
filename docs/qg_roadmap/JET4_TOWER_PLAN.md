@@ -15613,3 +15613,65 @@ std-3 all 4 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; 
 (10308 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
 `AxiomAudit.lean`; `git show c04eb4b9 --stat` = 3 files (+250); pushed. Stray sibling
 `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+---
+
+## J4-1000 — `LocalRNCJetFactorGlobalization`: re-thread hCConv's `hcomp` chart-jet factor onto the PROVEN local RNC regularity variant (via radial truncation) — commit `18485fd3`
+
+**Task.** Attempt the re-threading flagged by the local-variant firewall: build the sliver consumer path
+to accept the CORRECTLY-signed, neighbourhood-gated `JointSecondOrderRNCRegularityLocal` (PROVEN inhabited
+by `jointRNCRegularityLocal_of_diag`) instead of the un-satisfiable global `JointSecondOrderRNCRegularity`
+(global-`∀y` jets + reflected sign). NEW file, Opus/Fable[1m]; gpt-5.6-sol high GO-audited 2026-08-22.
+
+**Entry point (Sol high GO).** The genuinely load-bearing carry of the capstone is NOT
+`JointSecondOrderRNCRegularity` (that is carried only decoratively — `have _hRNC := hRNC`, consumed and
+discarded), but `VanVleckGatedSpatialSymmetry.hcomp`, whose correct RATE mechanism J4-998/999 established
+is the odd-moment/mass-conservation cancellation `integral_heatHessMult_mul_transportedCoeff`. J4-999
+named the SINGLE missing ingredient of that payoff: the transported chart-FIRST-JET factors
+`a=(P_i∘V)ₐ`, `b=(P_j∘V)_b`, which need `JointSecondOrderRNCRegularity` (the census never supplied). Sol's
+GO verdict: the PROVEN local variant's `hJet1` supplies EXACTLY those factors component-wise (value `(eᵢ)ₐ`
+at `q₀`, Lipschitz-at-`q₀` modulus `C_P`) — LOCALLY; the residual local-vs-global mismatch is the same one
+already present for census `q` and is cleanly closed by a radial truncation that PRESERVES the value at `0`
+(so the odd-moment constant-mode cancellation survives) and the Lipschitz-at-0 modulus.
+
+**Lands (ns `QIQTH.LocalRNCJetFactor`; NEW file, no banked file edited).**
+- `truncFactor` / `truncFactor_zero` / `truncFactor_bound` / `truncFactor_lip` / `truncFactor_aesm` — the
+  pure, reusable radial-truncation globalization calculus (`if ‖v‖<ρ then · else value-at-0`): from a
+  factor bounded + Lip-at-0 + `ContinuousOn (ball 0 ρ)`, produce a GLOBAL bounded + Lip-at-0 +
+  AE-strongly-measurable factor with the SAME value at `0` and the SAME Lip-at-0 modulus. Measurability via
+  `AEStronglyMeasurable.piecewise` + `ContinuousOn.aestronglyMeasurable`.
+- ★★ `localJet_global_factor` — the re-threading core: from `jointRNCRegularityLocal_of_diag` ALONE (no
+  un-satisfiable global interface), for any base `q₀`, direction `i`, component `ca`, there EXIST a global
+  factor `F` and finite moduli `M,L≥0` with `F 0 = (unitVec i)ₐ`, `AEStronglyMeasurable F`, `∀v |F v|≤M`,
+  `∀v |F v−F 0|≤L‖v‖`. The chart-jet base value `Dφ⁻¹(q₀)(eᵢ)=eᵢ` from `hJet1` at `q₀`; the Lip-at-`q₀`
+  modulus from `hJet1` (component estimate `|(X−eᵢ)ₐ|≤‖X−eᵢ‖`); continuity from `ContDiffAt ℝ 2 V q₀`
+  (`ContDiffAt.eventually` + `continuousAt_fderiv`); truncation at `ρ:=min(cont-radius, r)`.
+- ★★★ `integral_heatHessMult_transportedJet_bound_from_localRNC` — J4-999's odd-moment payoff re-threaded:
+  two PROVEN chart-jet factors (dirs `i,j`, comps `ca,cb`) + a census scalar `qfac` fed into
+  `integral_heatHessMult_mul_transportedCoeff` give `|∫v heatHessMult τ p q_dir v·(qfac v·a v·b v)| ≤
+  (Mq·Ma·Lb+Mq·Mb·La+Ma·Mb·Lq)·n³‖p‖‖q_dir‖(16√2+1)/√τ`, with the chart-jet moduli now from proven
+  regularity (only the census scalar carried).
+- `integral_heatHessMult_transportedJet_bound_from_localRNC_hyp_satisfiable` — NON-VACUITY of the sole
+  carried input (`qfac := cos‖·‖`, `Mq=Lq=1`).
+
+**Sol (gpt-5.6-sol high, 2026-08-22) GO-audit.** (A) Key observation SOUND: the local variant genuinely
+supplies the bounded + Lipschitz-at-origin chart-jet component (positive `+eᵢ` normalization, no sign trap;
+origin `v=0 ↔ z=q₀` via `V q₀=0`). Qualifications carried honestly: the factor is stated for `fderiv V`
+directly (NOT literal `P_i∘V` — a composition identity would be a separate theorem); measurability
+re-extracted from `ContDiffAt`, not assumed. (B) Best entry = b3 (centered extraction + generic cutoff-
+globalization + instantiation). (C) Cancellation survives truncation because the truncated factor has the
+SAME value at `0`; the remaining trap is that the truncated integral is NOT the original (tail control) —
+honest non-closing residue.
+
+**Honest scope / non-vacuity.** Re-threads the CHART-JET factor of `hcomp`'s rate onto proven regularity —
+the piece J4-999 flagged as the wall — closing it as an INPUT to the odd-moment payoff. Does NOT close
+`hcomp`/`hCConv`: the abstract moment integral is not yet identified with the literal `kPrime` sliver
+integrand (base-slot change-of-variables + second-order chain rule + truncation-tail control + coordinate
+summation remain — Sol residues iii). `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remains STRICTLY CONDITIONAL
+on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.LocalRNCJetFactorGlobalization` 0 err; in-file `#print axioms` std-3 all 7
+(propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err (10309 jobs);
+`axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`;
+`git show 18485fd3 --stat` = 3 files (+340); pushed. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left
+untracked, NOT added.
