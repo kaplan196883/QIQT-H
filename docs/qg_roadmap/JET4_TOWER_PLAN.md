@@ -16096,7 +16096,7 @@ grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`. Commit `7e34411a`, pushed. C
 
 ### J4-1008 — `BaseSlotM1M4Assembly`: ALL FOUR of `ChartGaussianChangeVar`'s missing-fact list
 (M1–M4) assembled on a single genuine open set, PLUS the Layer-B CoV corollary triggered for the
-first time on the concrete base slot (commit TBD)
+first time on the concrete base slot (commit `527b5d35`)
 
 **THE TASK.** J4-1007 discharged M2 (`InjOn`) and M3 (the left inverse `V`) of `ChartGaussianChangeVar`'s
 (J4-269) missing-fact list via Mathlib's IFT, but explicitly left M1 (`HasFDerivWithinAt` throughout `S`,
@@ -16144,4 +16144,4 @@ sympy pre-check was required for this dispatch (per the standing rule's own scop
 applies to rate/scaling claims, not to Mathlib API composition); `lake env lean` on the new file std-3
 before wiring; `lake build` (full) 0 err (10318 jobs); `axiom_budget_check.sh` raw axiom count 0 (budget
 0), no sorryAx, no deleted-axiom regressions; vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`
-(both public theorems pinned). Commit TBD, pushed.
+(both public theorems pinned). Commit `527b5d35`, pushed.
