@@ -31000,4 +31000,12 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.BaseSlotM1M4ImageOpen.uniformInverseChart_baseSlot_M1M4_image_open_generalK
 #print axioms QIQTH.BaseSlotM1M4ImageOpen.uniformInverseChart_baseSlot_M1M4_image_open_generalK
 
+-- J4-1023: HCompNearCarryTerm1DomainRestrictedBound — assembles J4-1017..1022 into a bound on nb's
+-- ACTUAL w-space domain W''S' for an ABSTRACT Amp Lipschitz-at-0. NEW caveat found: the literal
+-- post-CoV integrand is Bfac(V w)/|det|, not simply Amp w — a separate, still-open gap. std-3.
+-- Does NOT discharge nb/hCConv/hcomp; does NOT address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1DomainRestrictedBound.hsMixed_gaussDdim_mul_amp_domain_restricted_bound
+#print axioms QIQTH.HCompNearCarryTerm1DomainRestrictedBound.hsMixed_gaussDdim_mul_amp_domain_restricted_bound
+
 end QIQTH.AxiomAudit

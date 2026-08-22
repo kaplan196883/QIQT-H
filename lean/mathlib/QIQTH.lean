@@ -6283,3 +6283,17 @@ import QIQTH.HCompNearCarryTerm1AmpWeightedTail
 -- NOT address Bfac's OTHER 3 terms; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.BaseSlotM1M4ImageOpen
+
+-- J4-1023: HCompNearCarryTerm1DomainRestrictedBound — THE ASSEMBLY DISPATCH. Generalizes J4-1021's
+-- Amp-weighted tail bounds from the literal tail set to an arbitrary measurable subset of it; combined
+-- with J4-1022's IsOpen(W''S') + diagonal-zero fact + J4-1020's Brick B (applied to W''S' itself) +
+-- J4-1019's full-space G1 bound via integral_add_compl, produces a genuine bound on
+-- |∫_{W''S'} gaussDdim τ v·(hsMixed·Amp)| — nb's ACTUAL post-CoV w-space domain (per
+-- HCompNearCarryKPrimeBaseFieldCoV BRICK 2), for an ABSTRACT Amp Lipschitz-at-0. Sol (gpt-5.6-sol,
+-- high) GO-confirmed before Lean. std-3.
+-- CAVEAT (newly identified this dispatch): the LITERAL post-CoV integrand is Bfac(V w)/|det(...)|, NOT
+-- simply "Amp w" — showing that V/Jacobian-composed object is Lipschitz-at-0 is a SEPARATE, still-open
+-- gap, not attempted here. Does NOT wire into hcomp; does NOT discharge nb/hCConv/hcomp; does NOT
+-- address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1DomainRestrictedBound
