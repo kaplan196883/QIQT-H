@@ -15431,3 +15431,64 @@ wired `QIQTH.lean` + `AxiomAudit.lean`; `git show 1231452d --stat` = 3 files (+3
 - (6) DONE (J4-996, this) — curved regression fixture refuting both `hVP=zᵢ` and `hVQ=0` for a
   genuinely-curved (κ≠0) grounded surrogate; the curvature defect no flat model can see.
 NONE unblock the `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`. NOT `a₁=R/6`.
+
+---
+
+## J4-997 — `HGpowGatedK0Closed`: the `hGpow` moment-cancellation carry discharged at curved K={0} via null-singleton base gate (SECOND-x-derivative) — commit `3bce5f00`
+
+**What.** The `hGpow` carry of `MemAdjHiMomentBound.hGpow_of_amplitudeData` — the `τ^{-1/2}`
+signed-integral moment-cancellation bound `|∫z witnessSecondXDeriv i (u−s) z · leviSeries s z 0| ≤
+Cpair·(u−s)^{-1/2}`, `hDuhamel`'s other remaining named analytic content (J4-955 had funneled it via
+`RadialNormalCoordinateGauge → hjets → AmplitudeDerivativeDataOn` into the shared opaque-chart wall) —
+discharged UNCONDITIONALLY at the genuinely-curved `K={0}` witness by the SAME null-singleton base-gate
+mechanism that closed `hbint`/`hzmass`/the mixed field-Hessian envelope (J4-984/867/985/989), now
+TRANSFERRED to the NESTED-`pd` SECOND-`x`-derivative object.
+
+**The mechanism (Sol high GO-audited).** `witnessSecondXDeriv g gi hC hK S a b i τ z =
+pd (fun x => pd (fun x' => vanVleckGatedWitness … τ x' z) i x) i 0` is a NESTED field-slot partial of
+`x' ↦ vanVleckGatedWitness … τ x' z`. The witness is a `gatedKernel K S H` whose BASE-POINT slot is the
+THIRD argument `z` (= `q`), NOT the differentiation variable `x'`. So for `z ∉ K` the base gate fires
+(`gatedKernel_apply_of_notMem … (Or.inl hz)`) and the WHOLE field function is identically `0`, hence
+BOTH nested `pd`'s vanish (`pd_const` ×2) — EXACTLY the property already banked for the FIRST field
+derivative `witnessFieldDeriv_eqZero_of_base_notMem_K` (J4-867), transferred to the second-`x`-derivative.
+At `K={0}` (`1≤n ⟹ NoAtoms volume`) the z-pairing `witnessSecondXDeriv … i (u−s) z · leviSeries … s z 0`
+vanishes for `z ≠ 0`, is supported in the null singleton `{0}`, so `∫z = 0` for EVERY `s` (independent of
+the time slot `u−s`), giving `hGpow` with `Cpair := 0` (`|0| = 0 ≤ 0·(u−s)^{-1/2}`). This SIDESTEPS the
+`AmplitudeDerivativeData` bundle AND the `RadialNormalCoordinateGauge`/`hjets`/opaque-chart route entirely
+for this specific witness.
+
+**Lands (ns `QIQTH.HGpowGatedK0Closed`; NEW file, no banked file edited).**
+- `witnessSecondXDeriv_eqZero_of_base_notMem_K` — ★ the second-`x`-derivative object vanishes for `z∉K`
+  (unconditional, any `K`); nested-`pd` transfer.
+- `secondXDeriv_pairing_integral_gatedK0_eqZero` — the z-pairing integral is `0` at `K={0}` (any right
+  kernel, time `τ`, `s`, `y`), via `integral_eq_zero_of_support_subset_singleton`.
+- ★★★ `hGpow_gatedK0_closed` — the EXACT `hGpow` conclusion type of `hGpow_of_amplitudeData`
+  (`hK := isCompact_singleton`, `1≤n`), delivered with `Cpair = 0`.
+
+**Sol (gpt-5.6-sol high, 2026-08-22) GO-audit.** (1) nested-`pd` null-support SOUND — differentiation is
+only in the field variable; the outer eval point `0` is a field point, does not replace the base `z`; no
+derivative-through-`if` subtlety. (2) `Cpair := 0` legitimate (statement requires only `0 ≤ Cpair`);
+`Real.rpow` totality means `s=u` (`(u−s)^{-1/2}=0`) is a non-issue since the coefficient is `0`. (3) scope
+correct — closes ONLY the `hGpow` sub-piece; the same singleton-base collapse that trivialises `hGpow`
+CANNOT reproduce the nonzero diagonal residual `E t 0 0 ≠ 0`, so `hDuhamel` at `K={0}` stays NO-GO (J4-989).
+
+**Honest scope / non-vacuity.** Genuine, axiom-free, non-vacuous integral-bound fact about a concrete
+function; `1≤n` + smooth-Christoffel `hChr` are ordinary satisfiable data. Closes ONLY the `hGpow`
+SUB-PIECE of `hDuhamel`, and ONLY at the degenerate `K={0}` witness where the pairing vanishes (curved
+geometry does NO analytic work). `hDuhamel` itself does NOT hold at `K={0}` (J4-989). `a₁=R/6` remains
+STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.HGpowGatedK0Closed` 0 err (8947 jobs); in-file `#print axioms` std-3 all 3
+(propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err (10306 jobs);
+`axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`;
+`git show 3bce5f00 --stat` = 3 files (+193); pushed. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left
+untracked, NOT added.
+
+**Status update on `hDuhamel`'s gate-chain at K={0}.** With `hGpow` now the null-support-closeable
+sub-piece and `hzmass`/`hbint`/`hCConv`/`hDConv` all trivial at K={0}, the DEGENERATE witness collapses
+essentially every named analytic sub-carry to `0` — but this is precisely WHY `hDuhamel` as a WHOLE fails
+there (J4-989): the boundary/approximate-identity term `E t 0 0` = the generically-nonzero diagonal
+parametrix residual carrying `a₁=R/6` is exactly what the singleton-base collapse gates away. So closing
+`hGpow` at K={0} does NOT reduce `hDuhamel` to "one opaque limit binder" — it confirms the trio is not
+jointly non-trivially satisfiable at this witness. `a₁=R/6` STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED.
