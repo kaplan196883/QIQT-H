@@ -30900,4 +30900,14 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_hWint_on_shrunk_ball
 #print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_chartReplace_sliver_bound_unconditional
 
+-- J4-1017: G3 gate identification — hsMixed (Bfac's literal term1 scalar) vs heatHessMult (J4-998's
+-- abstract Hessian multiplier). Sympy-verified: hsMixed = heatHessMult_scalar − ⟨U,Q⟩/(2τ) (an exact,
+-- generally nonzero correction, NOT the naive equality). Pure `ring`. NOT composed with
+-- integral_heatHessMult_eq_zero (deferred to G2/G1). NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryHsMixedHeatHessMultBridge.hsMixed_eq_heatHessMult_sub_firstMomentCorrection
+#check @QIQTH.HCompNearCarryHsMixedHeatHessMultBridge.kPrime_term1_eq_heatHessMult_sub_firstMomentCorrection_mul_amp
+#print axioms QIQTH.HCompNearCarryHsMixedHeatHessMultBridge.hsMixed_eq_heatHessMult_sub_firstMomentCorrection
+#print axioms QIQTH.HCompNearCarryHsMixedHeatHessMultBridge.kPrime_term1_eq_heatHessMult_sub_firstMomentCorrection_mul_amp
+
 end QIQTH.AxiomAudit

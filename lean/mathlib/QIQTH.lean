@@ -6207,4 +6207,15 @@ import QIQTH.ChartEvalSlotRadiusMerge
 -- hypotheses discharged, UNCONDITIONALLY. std-3. NOT nb/hcomp/a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED) — this is one piece of nb's plumbing (the direct-integrand
 -- route), independent of J4-1015's still-open CoV Jacobian/weight-domination gap.
+import QIQTH.HCompNearCarryHsMixedHeatHessMultBridge
+-- J4-1017: G3 gate (of Sol's G1/G2/G3 staged plan) — the IDENTIFICATION linking
+-- HCompNearCarryKPrimeBaseFieldCoV's (J4-1010) literal Bfac term1 scalar `hsMixed` to
+-- HeatHessianMomentCancellation's (J4-998) abstract `heatHessMult` multiplier. Sympy-verified
+-- (docs/qg_roadmap/rnc_sympy/hcomp_g3_hsmixed_heathessmult_identity.py) FIRST: hsMixed is NOT
+-- literally heatHessMult's bare scalar — it differs by an EXACT, generally nonzero first-moment
+-- correction ⟨U,Q⟩/(2τ). Banked both the generic scalar identity and the literal kPrime/Bfac
+-- specialization (pure `ring`, no positivity/chart hypotheses needed). std-3. NOT composed with
+-- integral_heatHessMult_eq_zero (leftover correction term needs its own, separate first-moment
+-- treatment — G2/G1 territory, deferred). NOT nb/hcomp/a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HWintFullBallDischarge
