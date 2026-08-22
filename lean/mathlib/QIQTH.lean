@@ -6135,3 +6135,17 @@ import QIQTH.BaseSlotM1M4Assembly
 -- kPrime (a separate thread — see file docstring). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.BoundaryIntegralChartImageConcreteCoV
+
+-- J4-1010: HCompNearCarryKPrimeBaseFieldCoV — wires J4-1008's base-slot change of variables into the
+-- LITERAL kPrime shape of hcomp's NEAR carry nb, at the field point q₀ := x. BRICK 1
+-- (kPrime_apply_single_on_gate_eq_baseGaussian_mul_amp): pure ring factorization of J4-882's 4-term
+-- mixed normal form pulling out the common base-slot Gaussian G := gaussDdim (t−s) (U z x), exhibiting
+-- kPrime's per-direction component in the exact gaussDdim τ (U z x) · Bfac shape the CoV consumes.
+-- BRICK 2 (kPrime_baseField_CoV_of_factorization, CONDITIONAL adapter): instantiates J4-1008's CoV at
+-- q₀ := x (needs x ∈ interior K) and rewrites the LHS back to ∫ kPrime via a factorization hypothesis
+-- hfac — the FIRST wiring of the base-slot CoV into the literal kPrime shape. Honest PARTIAL progress
+-- on item (ii): lands at the SINGLE-Gaussian layer only; does NOT reach the near-isometry DIFFERENCE
+-- G_τ(T_x v) − G_τ(v) the J4-879 template consumes (antisymmetrization = separate open residual), nor
+-- reconcile S'/ball x ρ / W''S'/ball 0 R, nor discharge hfac over the IFT S'. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryKPrimeBaseFieldCoV

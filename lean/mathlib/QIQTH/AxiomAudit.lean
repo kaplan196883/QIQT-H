@@ -30757,4 +30757,16 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 #print axioms QIQTH.BoundaryIntegralChartImageConcreteCoV.boundary_integral_eq_chartImage_integral_concreteCoV
 
+-- J4-1010 (HCompNearCarryKPrimeBaseFieldCoV): wires J4-1008's base-slot CoV into the LITERAL kPrime
+-- shape of hcomp's NEAR carry nb, at q₀ := x. BRICK 1: pure ring factorization of J4-882's 4-term
+-- mixed normal form pulling out the common base-slot Gaussian, giving kPrime's component as
+-- gaussDdim (t−s) (U z x) · Bfac. BRICK 2 (CONDITIONAL adapter): instantiates J4-1008's CoV at q₀ := x
+-- and rewrites LHS back to ∫ kPrime via a factorization hypothesis — first wiring of the base-slot CoV
+-- into the literal kPrime shape. PARTIAL: single-Gaussian layer only, does NOT reach the near-isometry
+-- difference G_τ(T_x v) − G_τ(v). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+#check @QIQTH.HCompNearCarryKPrimeBaseFieldCoV.kPrime_apply_single_on_gate_eq_baseGaussian_mul_amp
+#check @QIQTH.HCompNearCarryKPrimeBaseFieldCoV.kPrime_baseField_CoV_of_factorization
+#print axioms QIQTH.HCompNearCarryKPrimeBaseFieldCoV.kPrime_apply_single_on_gate_eq_baseGaussian_mul_amp
+#print axioms QIQTH.HCompNearCarryKPrimeBaseFieldCoV.kPrime_baseField_CoV_of_factorization
+
 end QIQTH.AxiomAudit
