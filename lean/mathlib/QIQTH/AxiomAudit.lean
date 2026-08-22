@@ -30945,4 +30945,22 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryTerm1LipschitzCancellation.hsMixed_gaussDdim_mul_amp_eq_diff
 #print axioms QIQTH.HCompNearCarryTerm1LipschitzCancellation.hsMixed_gaussDdim_mul_amp_lipschitz_bound
 
+-- J4-1020: HCompNearCarryTerm1BallGeometry — Brick A: linMult_ball_tail_le, the linMult analogue of
+-- heatHessMult_ball_tail_le (J4-1018), via normPow_gaussDdim_tail_le at k=1 (oneD_absMoment1). Brick B:
+-- norm_sq_le_rncRadialSq bridges Point n's Pi/sup norm to the Euclidean rncRadialSq (‖v‖²≤rncRadialSq
+-- v); S'_ball_complement_subset_rncRadialSq_tail resolves r3/r4's "does S' contain a ball?" question
+-- UNCONDITIONALLY (any IsOpen S' with x∈S' contains some ball, for free via Metric.isOpen_iff). Sol
+-- (gpt-5.6-sol, high) GO-confirmed non-circular, flagged: does NOT yet reconcile x-centring here with
+-- the 0-centred tail-bound convention, nor compose with Amp-weighting (needs an Amp-weighted tail
+-- bound, not built). std-3. Does NOT discharge nb/hCConv/hcomp; does NOT address Bfac's other 3 terms;
+-- fb stays separately open. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1BallGeometry.linMult_ball_tail_le
+#check @QIQTH.HCompNearCarryTerm1BallGeometry.norm_sq_le_rncRadialSq
+#check @QIQTH.HCompNearCarryTerm1BallGeometry.isOpen_mem_ball_subset
+#check @QIQTH.HCompNearCarryTerm1BallGeometry.S'_ball_complement_subset_rncRadialSq_tail
+#print axioms QIQTH.HCompNearCarryTerm1BallGeometry.linMult_ball_tail_le
+#print axioms QIQTH.HCompNearCarryTerm1BallGeometry.norm_sq_le_rncRadialSq
+#print axioms QIQTH.HCompNearCarryTerm1BallGeometry.isOpen_mem_ball_subset
+#print axioms QIQTH.HCompNearCarryTerm1BallGeometry.S'_ball_complement_subset_rncRadialSq_tail
+
 end QIQTH.AxiomAudit

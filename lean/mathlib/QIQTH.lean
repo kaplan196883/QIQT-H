@@ -6249,3 +6249,12 @@ import QIQTH.HeatHessMultBallTailBound
 -- hCConv, or any part of hcomp; does NOT address Bfac's OTHER 3 terms; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1LipschitzCancellation
+-- J4-1020: HCompNearCarryTerm1BallGeometry — Brick A (linMult_ball_tail_le, the G2-analogue tail
+-- bound for J4-1019's linMult) + Brick B (norm_sq_le_rncRadialSq bridging Point n's Pi/sup norm to
+-- rncRadialSq; S'_ball_complement_subset_rncRadialSq_tail resolving r3/r4 "does S' contain a ball?"
+-- UNCONDITIONALLY, for free, via IsOpen+Metric.isOpen_iff). Does NOT compose with the Amp-weighted
+-- G1 payoff (needs an Amp-weighted tail bound, not built) or reconcile the x-centring here with the
+-- 0-centred tail-bound convention. Does NOT discharge nb, hCConv, or any part of hcomp; does NOT
+-- address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1BallGeometry
