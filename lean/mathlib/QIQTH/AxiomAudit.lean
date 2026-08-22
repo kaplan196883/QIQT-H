@@ -32,6 +32,7 @@ import QIQTH.HCConvGatedK0FullyClosed
 import QIQTH.HDConvGatedK0FullyClosed
 import QIQTH.HGpowGatedK0Closed
 import QIQTH.HeatHessianMomentCancellation
+import QIQTH.HeatHessTransportedCoeffClosure
 import QIQTH.HFdRequant
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
@@ -30551,5 +30552,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatHessMoment.abs_heatHessMult_le
 #print axioms QIQTH.HeatHessMoment.integral_heatHessMult_mul_lipschitz
 #print axioms QIQTH.HeatHessMoment.integral_heatHessMult_mul_lipschitz_hyp_satisfiable
+
+-- HeatHessTransportedCoeffClosure — J4-999: the transported bilinear Hessian-COEFFICIENT closure brick
+-- (gpt-5.6-sol high GO/NO-GO, 2026-08-22). VERDICT: the hCross transported-weight machinery
+-- (census_transported_weights_uniform, J4-959) does NOT mechanically transfer to close hcomp. hCross's
+-- hballrate is FIRST-order (weight = (amp·F)/|det|∘V, NO chart jets in the weight, V just a Lipschitz map
+-- from the concrete IFT common-witness); hcomp is SECOND-order (field Hessian), its transported coefficient
+-- = census-q₁ TIMES the transported chart-jet components (P_i∘V)ₐ·(P_j∘V)_b, whose uniform boundedness +
+-- Lipschitz-at-origin IS JointSecondOrderRNCRegularity — the opaque-chart wall census never needed. This
+-- file supplies the DECOMPOSITION calculus + the J4-998 payoff: lipAtZero_bdd_mul (2-factor) / …_mul3
+-- (3-factor f=q·a·b, explicit modulus Mq·Ma·Lb+Mq·Mb·La+Ma·Mb·Lq) and integral_heatHessMult_mul_transportedCoeff
+-- (|∫ heatHessMult τ p q_dir v·(q v·a v·b v)| ≤ Lf·n³‖p‖‖q_dir‖(16√2+1)/√τ via integral_heatHessMult_mul_lipschitz).
+-- PROVES the census scalar factor is NOT the analytic obstruction; isolates it from the chart-jet wall.
+-- ⚠ Does NOT discharge hcomp (a,b = the chart-jet factors need JointSecondOrderRNCRegularity; census q₁ is
+-- Lipschitz only LOCALLY on ball 0 σ vs the global integral; + second-order chain rule / base-slot CoV /
+-- integrability residue R2). Non-vacuity: cos‖·‖ genuine nonconstant witness (all M=L=1). std-3 ×4. NOT
+-- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HeatHessCoeffClosure.lipAtZero_bdd_mul
+#print axioms QIQTH.HeatHessCoeffClosure.lipAtZero_bdd_mul3
+#print axioms QIQTH.HeatHessCoeffClosure.integral_heatHessMult_mul_transportedCoeff
+#print axioms QIQTH.HeatHessCoeffClosure.integral_heatHessMult_mul_transportedCoeff_hyp_satisfiable
 
 end QIQTH.AxiomAudit

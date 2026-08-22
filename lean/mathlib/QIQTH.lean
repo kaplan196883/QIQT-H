@@ -5998,3 +5998,18 @@ import QIQTH.HGpowGatedK0Closed
 -- needs the opaque-chart transport z↦W_z(x) / JointSecondOrderRNCRegularity, per Sol). std-3 ×6. NOT
 -- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HeatHessianMomentCancellation
+
+-- HeatHessTransportedCoeffClosure — J4-999: the transported bilinear Hessian-COEFFICIENT closure brick
+-- (gpt-5.6-sol high GO/NO-GO, 2026-08-22). A GO/NO-GO consult established the hCross transported-weight
+-- machinery (census_transported_weights_uniform, J4-959) does NOT mechanically transfer to close hcomp:
+-- hCross's hballrate is FIRST-order (weight = (amp·F)/|det|∘V, NO chart jets); hcomp is SECOND-order, its
+-- transported coefficient = census-q₁ TIMES the transported chart-jet components (P_i∘V)ₐ·(P_j∘V)_b whose
+-- uniform Lipschitzness IS JointSecondOrderRNCRegularity (the opaque-chart wall census never needed). This
+-- file supplies the DECOMPOSITION calculus feeding J4-998: lipAtZero_bdd_mul/…_mul3 (bounded + Lipschitz-
+-- at-origin scalars multiply to bounded + Lipschitz-at-origin, explicit moduli) and
+-- integral_heatHessMult_mul_transportedCoeff (the τ^{−1/2} moment-cancellation payoff for f = q·a·b via
+-- integral_heatHessMult_mul_lipschitz). PROVES the census scalar factor is NOT the analytic wall.
+-- ⚠ Does NOT discharge hcomp (vector factors a,b need JointSecondOrderRNCRegularity; census q₁ only LOCAL;
+-- + CoV/integrability residue R2). std-3 ×4. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.HeatHessTransportedCoeffClosure
