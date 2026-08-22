@@ -6272,3 +6272,14 @@ import QIQTH.HCompNearCarryTerm1BallGeometry
 -- Bfac's OTHER 3 terms; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1AmpWeightedTail
+-- J4-1022: BaseSlotM1M4ImageOpen — closes the ONE gap J4-1021 named ("IsOpen(W''S')"): rebuilds the
+-- OpenPartialHomeomorph `e` (from BaseSlotIFTLocalHomeomorph's public strict-derivative fact) kept in
+-- hand alongside BaseSlotM1M4Assembly's opaque M1-M4 witness `T`; new witness S' := T ∩ e.source
+-- carries the FULL M1-M4 package (restricted from T for free) PLUS IsOpen(W''S') via Mathlib's
+-- OpenPartialHomeomorph.isOpen_image_of_subset_source. Sol (gpt-5.6-sol, high) GO-confirmed route
+-- before Lean (avoids duplicating BaseSlotM1M4Assembly's ~60-line tube/units construction). std-3.
+-- Does NOT attempt the full nb-domain-restricted Amp-weighted term1 payoff (separate, substantial);
+-- does NOT wire into HCompNearCarryChartSurfaceWired/hcomp; does NOT discharge nb/hCConv/hcomp; does
+-- NOT address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.BaseSlotM1M4ImageOpen

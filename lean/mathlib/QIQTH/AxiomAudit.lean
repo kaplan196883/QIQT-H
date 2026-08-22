@@ -30984,4 +30984,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryTerm1AmpWeightedTail.hsMixed_amp_tail_le
 #print axioms QIQTH.HCompNearCarryTerm1AmpWeightedTail.uniformInverseChart_diag_zero_of_mem
 
+-- J4-1022: BaseSlotM1M4ImageOpen — closes the ONE gap J4-1021 named ("IsOpen(W''S')"). Route (Sol
+-- gpt-5.6-sol, high, GO-confirmed before Lean): call BaseSlotM1M4Assembly's opaque M1-M4 witness `T`
+-- as a black box; SEPARATELY rebuild the OpenPartialHomeomorph `e` from BaseSlotIFTLocalHomeomorph's
+-- public strict-derivative fact (the SAME underlying construction, kept in hand this time); new
+-- witness S' := T ∩ e.source carries the FULL M1-M4 package (restricted from T for free, via
+-- Set.InjOn.mono / HasFDerivWithinAt.mono / pointwise restriction) PLUS IsOpen(W''S') via Mathlib's
+-- OpenPartialHomeomorph.isOpen_image_of_subset_source + the global toOpenPartialHomeomorph_coe
+-- identity (e '' S' = W '' S'). Avoids duplicating BaseSlotM1M4Assembly's ~60-line tube/units
+-- construction. std-3. Does NOT attempt the full nb-domain-restricted Amp-weighted term1 payoff
+-- (separate, substantial — matching this S' against HCompNearCarryChartSurfaceWired's literal
+-- kPrime/domain shape); does NOT wire into hcomp; does NOT discharge nb/hCConv/hcomp; does NOT
+-- address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.BaseSlotM1M4ImageOpen.uniformInverseChart_baseSlot_M1M4_image_open_generalK
+#print axioms QIQTH.BaseSlotM1M4ImageOpen.uniformInverseChart_baseSlot_M1M4_image_open_generalK
+
 end QIQTH.AxiomAudit
