@@ -31,6 +31,7 @@ import QIQTH.HZMassFullyClosedCurved
 import QIQTH.HCConvGatedK0FullyClosed
 import QIQTH.HDConvGatedK0FullyClosed
 import QIQTH.HGpowGatedK0Closed
+import QIQTH.HeatHessianMomentCancellation
 import QIQTH.HFdRequant
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
@@ -30530,5 +30531,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HGpowGatedK0Closed.witnessSecondXDeriv_eqZero_of_base_notMem_K
 #print axioms QIQTH.HGpowGatedK0Closed.secondXDeriv_pairing_integral_gatedK0_eqZero
 #print axioms QIQTH.HGpowGatedK0Closed.hGpow_gatedK0_closed
+
+-- HeatHessianMomentCancellation — J4-998: the n-D heat-kernel HESSIAN moment-cancellation core, the
+-- precise odd-moment / vanishing-diagonal-jet ingredient (gpt-5.6-sol high GO) that hCConv's
+-- VanVleckGatedSpatialSymmetry.hcomp needs; the n-D directional generalization of the 1-D J4-919
+-- integral_DtauG_mul_lipschitz (hCross H_far). heatHessMult τ p q v = (⟨v,p⟩⟨v,q⟩/(4τ²)−⟨p,q⟩/(2τ))·G_τ(v).
+-- coordProd_gauss_integral: the exact cross-moment ∫z z_a z_c G = if a=c then 2τ else 0 (diagonal =
+-- gaussianSecondMoment_oneD, off-diagonal = gaussianFirstMoment_oneD product-vanishing).
+-- integral_heatHessMult_eq_zero: ∫ heatHessMult = 0 (mass conservation + odd moment) — analogue of
+-- integral_DtauG_eq_zero. integral_heatHessMult_mul_lipschitz: |∫ heatHessMult·f| ≤ L·n³·‖p‖‖q‖·(16√2+1)/√τ
+-- (the τ^{−1/2} sliver rate), f 0 cancels + n-D 3rd/1st norm moments. ELIMINATES the exact singularity that
+-- made the crude joint-Lipschitz transposition route (cp872 NO-GO, τ⁻¹ log-divergent) fail. ⚠ standalone
+-- flat-V analysis leaf: does NOT discharge hcomp (wiring needs the opaque-chart transport z↦W_z(x) /
+-- JointSecondOrderRNCRegularity, per Sol). std-3 ×6. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HeatHessMoment.coordProd_gauss_integral
+#print axioms QIQTH.HeatHessMoment.integral_dotdot_gauss
+#print axioms QIQTH.HeatHessMoment.integral_heatHessMult_eq_zero
+#print axioms QIQTH.HeatHessMoment.abs_heatHessMult_le
+#print axioms QIQTH.HeatHessMoment.integral_heatHessMult_mul_lipschitz
+#print axioms QIQTH.HeatHessMoment.integral_heatHessMult_mul_lipschitz_hyp_satisfiable
 
 end QIQTH.AxiomAudit

@@ -5985,3 +5985,16 @@ import QIQTH.CurvedChartBridgeAudit
 -- hDuhamel itself does NOT hold at K={0} (J4-989, E t 0 0≠0). std-3 ×3. NOT a₁=R/6 (STRICTLY CONDITIONAL
 -- on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HGpowGatedK0Closed
+
+-- HeatHessianMomentCancellation — J4-998: the n-D heat-kernel HESSIAN moment-cancellation core, the
+-- precise "odd-moment / vanishing-diagonal-jet" ingredient (gpt-5.6-sol high GO) that hCConv's
+-- VanVleckGatedSpatialSymmetry.hcomp needs, and the n-D directional generalization of the 1-D J4-919
+-- integral_DtauG_mul_lipschitz (which discharged the analogous hCross H_far wall). For the heat-kernel
+-- Hessian multiplier heatHessMult τ p q v = (⟨v,p⟩⟨v,q⟩/(4τ²)−⟨p,q⟩/(2τ))·G_τ(v): ∫ = 0 (mass
+-- conservation a=c + odd-moment a≠c, via the exact cross-moment ∫z z_a z_c G = 2τδ_ac) and, against a
+-- Lipschitz weight, |∫ heatHessMult·f| ≤ L·n³·‖p‖‖q‖·(16√2+1)/√τ (the τ^{−1/2} sliver rate). ELIMINATES
+-- the exact singularity that made the crude joint-Lipschitz transposition route (cp872 NO-GO,
+-- τ⁻¹ log-divergent) fail. ⚠ standalone flat-V analysis leaf: does NOT discharge hcomp (wiring still
+-- needs the opaque-chart transport z↦W_z(x) / JointSecondOrderRNCRegularity, per Sol). std-3 ×6. NOT
+-- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HeatHessianMomentCancellation
