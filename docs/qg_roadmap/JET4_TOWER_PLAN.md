@@ -15968,3 +15968,75 @@ obligation) — this brick supplies the pointwise comparison input CoV would nee
 `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`.
 Commit `7cc29457`. Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py` left
 untracked, NOT added.
+
+### J4-1006 — `HerrHminGeneralQ0GeneralK`: `herr_gate`/`hmin_gate` at GENERAL interior `q₀`, for a SINGLE arbitrary fixed `K`
+
+**cp887, commit `965a30cc`, 2026-08-22.** Reconciles the compact-set-`K` GATE re-threading item
+J4-1004/1005's own dispatches named as remaining item (i): `HerrHminCoercivity`'s `herr_gate`/`hmin_gate`
+(J4-455) are stated for an ARBITRARY FIXED `K` (base point `z` ranges over `z ∈ K`, eval point fixed at
+`0`), whereas J4-1004/1005 fixed `K := closedBall q₀ 1` (VARYING with `q₀`) and generalized the EVAL
+point to `q₀` instead. These are genuinely different slot assignments of `uniformInverseChart g gi hC hK
+: (base) → (eval) → Point n` (base = first argument, must be `∈ K`; eval = second). This file reconciles
+both for a SINGLE arbitrary fixed `hK : IsCompact K`, general interior base point `q₀ ∈ interior K`.
+
+**DON'T-UNDERCREDIT FINDING.** Two of the three ingredients J4-1004's construction needed already had
+general-`K` versions banked from the EARLIER J4-884 generalization campaign — a fact NOT flagged in
+J4-1004/1005's own honest-distance notes:
+- F3 (joint `ContDiffAt 2` at diagonal): `UniformFlowCoherentChartReconciliationGeneralK.
+  uniformInverseChart_jointContDiffAt_diag_generalK g gi hC hK z₀ hz₀` (`hz₀ : z₀ ∈ interior K`).
+- F4 (slice `fderiv = id` + the `ContDiffAt` needed to upgrade to `HasFDerivAt`):
+  `JointRNCRegularityInterfaceLocalGeneralK.uniformInverseChart_slice_fderiv_id_diag_generalK` /
+  `..._slice_contDiffAt_diag_generalK`.
+Only F1 (diagonal vanishing, `HCompBaseSlotAntisymmetryConcrete.uniformInverseChart_diag_eventually`)
+lacked a general-`K` version; its proof uses ONLY `uniformInverseChart_huniformChart g gi hC hK` (already
+`∀ q ∈ K, …` for arbitrary `hK`) plus a neighbourhood of `q₀` inside `K` — for general `K` this
+neighbourhood is `interior K ∈ 𝓝 q₀` directly, a ROUTINE transplant (Sol-confirmed: "no global
+nonemptiness assumption on `interior K` is needed... compactness is irrelevant for this step").
+
+**THE CHAIN.** F1/F3/F4 (general `K`) → the already-abstract-in-`Φ` `BaseSlotDerivFromAntisymEvalSlot`
+brick (J4-1004) → base-slot derivative `-Id` / quadratic displacement at general `q₀ ∈ interior K`, FIXED
+arbitrary `K` (general-`K` analogue of J4-1004) → J4-1005's `rncRadialSq`-comparison algebra transplanted
+verbatim → two-sided `rncRadialSq` comparison error at general `q₀ ∈ interior K` (general-`K` analogue of
+J4-1005) → `herr_gate`/`hmin_gate`'s own derivation (shrink radius so `L‖·‖ ≤ 1/2`, upgrade via
+`rncRadialSq ≤ n‖·‖²`) transplanted verbatim → THE PAYOFF.
+
+**THE UNIFORMITY VERDICT (Sol `gpt-5.6-sol`, high, 2026-08-22, consulted BEFORE Lean).** The payoff is
+POINTWISE in `q₀`: `∀ q₀ ∈ interior K, ∃ r(q₀)>0, L'(q₀)≥0, ∀ p, ‖p−q₀‖<r(q₀) → …` — constants may depend
+on `q₀`. Sol confirmed this is the RIGHT target now (sufficient whenever `q₀` is fixed before
+dominating/integrating over the displacement variable) and that compactness of `K` does NOT by itself
+uniformize a pointwise `∀ q₀, ∃ r, L` statement into a common-radius/constant claim over `q₀` ranging in a
+compact set (would need a jointly-continuous-in-`q₀` bound, NOT extracted here). A uniform corollary over
+a compact `G ⊆ interior K` is flagged as a SEPARATE, explicitly NOT-attempted next step.
+
+**RELATION TO `herr_gate`/`hmin_gate` (Sol-confirmed, do not over-claim).** This does NOT supersede or
+literally generalize `HerrHminCoercivity.herr_gate`/`hmin_gate` — those hold for `z` ranging over ALL of
+`K` (boundary included, no `interior` hypothesis), eval point fixed at exactly `0`. This file's result
+specializes to that literal shape only at `q₀ = 0` AND only under the extra hypothesis `0 ∈ interior K`.
+It is a DIFFERENT, complementary general-interior-`q₀` brick for the near-carry `nb`'s per-base-point
+cells — it does NOT discharge `herr_gate`/`hmin_gate`'s own consumers (`SlotInstantiationVIII`, already
+WALLED per J4-455's own ledger, unrelated to this reconciliation).
+
+**THE DELIVERABLE.** `HerrHminGeneralQ0GeneralK.lean` (ns `QIQTH.HerrHminGeneralQ0GeneralK`), all for a
+SINGLE arbitrary fixed `hK`:
+- `uniformInverseChart_diag_eventually_generalK` (F1, general `K`).
+- `uniformInverseChart_evalSlot_hasFDerivAt_id_diag_generalK` (F4 upgraded).
+- `uniformInverseChart_baseSlot_fderiv_neg_id_generalK` / `..._quadratic_displacement_generalK` (Step A/B,
+  general-`K` analogue of J4-1004).
+- `uniformInverseChart_rncRadialSq_error_generalK` (general-`K` analogue of J4-1005).
+- ★★★ `herr_gate_general_q0_generalK` / `hmin_gate_general_q0_generalK` /
+  `herrHmin_gate_general_q0_generalK` — THE PAYOFF: `HerrHminCoercivity`-style gate-restricted cubic error
+  + coercivity, POINTWISE in `q₀ ∈ interior K`, for the SAME fixed `hK`.
+
+**Honest scope / distance (unchanged item (ii) from J4-1004/1005's own map).** Does NOT touch
+`kPrime`/`heatHessMult`/`hcomp` literally. The actual base-slot CHANGE OF VARIABLES wired into `hcomp`'s
+literal `∫z`/`∫s` integral shape (the `nb`/near-carry obligation) is NOT attempted here — this file
+supplies the pointwise-in-`q₀`, gate-restricted comparison + coercivity input CoV would need, not the CoV
+itself. Also NOT attempted: the uniform-in-`q₀` compact-cover corollary (flagged above, not claimed
+needed). `hCConv` NOT closed. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build` (full) 0 err (10316 jobs); throwaway `chk1006.lean` + `#print axioms` std-3
+(propext/Classical.choice/Quot.sound) on all 8 public theorems, no sorryAx, no custom axiom (deleted after
+confirming); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
+`AxiomAudit.lean`. Commit `965a30cc`. Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py`
+left untracked, NOT added.
