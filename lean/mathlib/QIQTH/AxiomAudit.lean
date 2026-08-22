@@ -30618,4 +30618,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussCompMixedHessian.gaussComp_amp_pd_pd_mixed
 #print axioms QIQTH.GaussCompMixedHessian.gaussComp_pd_pd_mixed_hyp_satisfiable
 
+-- HCompBaseSlotAntisymmetryQuadratic — J4-1002: GO-classified abstract "antisymmetry quadratic defect"
+-- brick. antisymmetryDefect_fderiv_zero proves Dg(q₀)=0 for g p:=Φ p q₀+Φ q₀ p, from diagonal-vanishing
+-- (Φ q q=0 eventually near q₀) + joint ContDiffAt R 2, via product-space linearity D(w,w)=D(w,0)+D(0,w)
+-- forced to 0. antisymmetryDefect_quadratic_bound = ★★★ THE PAYOFF: ‖Φ p q₀+Φ q₀ p‖ ≤ C‖p-q₀‖² near q₀,
+-- proved via the SAME mean-value/Taylor technique JointRNCRegularityLocal.jointRNCRegularityLocal_of_diag's
+-- hVdisp field uses. Confirms (sympy gate hcomp_baseslot_antisymmetry_order.py + Sol GO, 2026-08-22) that
+-- the base<->eval chart-recentering defect Sol flagged for hcomp's base-slot CoV item (a) is QUADRATIC, not
+-- the fatal LINEAR case (mirrors cp872's WitnessTranspositionGeneralBound NO-GO). Non-vacuity: Φ p q:=p−q.
+-- ⚠ Fully abstract in Φ: does NOT instantiate uniformInverseChart, does NOT touch kPrime/heatHessMult/hcomp
+-- literally, does NOT do the actual base-slot CoV/truncation-tail/coordinate summation. std-3 ×3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HCompBaseSlotAntisymmetry.antisymmetryDefect_fderiv_zero
+#print axioms QIQTH.HCompBaseSlotAntisymmetry.antisymmetryDefect_quadratic_bound
+#print axioms QIQTH.HCompBaseSlotAntisymmetry.antisymmetryDefect_quadratic_bound_hyp_satisfiable
+
 end QIQTH.AxiomAudit

@@ -6040,3 +6040,18 @@ import QIQTH.LocalRNCJetFactorGlobalization
 -- NOT touch kPrime/hcomp literally, does NOT do base-slot CoV/truncation-tail/coord summation (items a/c/d
 -- remain open). std-3 ×4. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.GaussCompMixedHessian
+
+-- HCompBaseSlotAntisymmetryQuadratic — J4-1002: GO-classified abstract "antisymmetry quadratic defect"
+-- brick for hcomp's base-slot CoV item (a). Sol-consulted (gpt-5.6-sol, high) GO/NO-GO: is the base<->eval
+-- chart-recentering defect Xi(q,p):=Phi(q,p)+Phi(p,q) linear (fatal) or quadratic (needed) in ||q-p||?
+-- Sympy gate (hcomp_baseslot_antisymmetry_order.py, scalar + n=2 matrix, exact ==0 checks) found the
+-- linear term FORCED to zero purely from (F1) diagonal-vanishing along a WHOLE neighbourhood + (F3) joint
+-- ContDiffAt R 2 — no normalization fact (∂ₚΦ=Id) needed. Sol confirmed GO, corrected framing (C² gives
+-- o(‖·‖²) not O(‖·‖³)), scoped to a narrow abstract brick (NOT a third full hcomp route).
+-- Lands: antisymmetryDefect_fderiv_zero (Dg(q₀)=0 from diagonal-vanishing + joint C², via product-space
+-- linearity D(w,w)=D(w,0)+D(0,w) forced to 0); antisymmetryDefect_quadratic_bound (★★★ the payoff:
+-- ‖Φ p q₀+Φ q₀ p‖ ≤ C‖p-q₀‖², proved via the SAME mean-value/Taylor technique
+-- JointRNCRegularityLocal.jointRNCRegularityLocal_of_diag's hVdisp uses); non-vacuity witness Φ p q:=p-q.
+-- Fully abstract in Φ: does NOT instantiate uniformInverseChart, does NOT touch kPrime/heatHessMult/hcomp
+-- literally. std-3 ×3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompBaseSlotAntisymmetryQuadratic
