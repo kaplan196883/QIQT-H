@@ -6076,3 +6076,14 @@ import QIQTH.HCompBaseSlotAntisymmetryConcrete
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.BaseSlotDerivFromAntisymEvalSlot
 import QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0
+-- J4-1005: UniformInverseChartRncRadialSqErrorGeneralQ0 — the TWO-SIDED rncRadialSq near-isometry
+-- comparison error at a GENERAL base point q₀, transplanted verbatim from InverseChartDisplacement's
+-- chartW0_rncRadialSq_error proof (z ↦ p-q₀), fed by J4-1004's ONE-SIDED quadratic base-slot
+-- displacement bound alone (no reverse-direction input needed — the base-0 theorem's two-sidedness
+-- comes from applying rncRadialSq_add_le twice, a purely algebraic basepoint-agnostic trick, not a
+-- second geometric input). Sympy-verified
+-- (docs/qg_roadmap/rnc_sympy/herrhmin_generalq0_transplant.py); Sol gpt-5.6-sol high GO 2026-08-22.
+-- std-3. Does NOT touch kPrime/heatHessMult/hcomp/herr_gate/hmin_gate literally (compact-K gate
+-- re-threading + base-slot CoV into hcomp's literal integral shape remain separate). NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.UniformInverseChartRncRadialSqErrorGeneralQ0
