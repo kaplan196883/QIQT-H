@@ -552,6 +552,7 @@ import QIQTH.GaussLemmaHomogeneity
 import QIQTH.GaussLemmaAssembly
 import QIQTH.GaussLemmaFlowData
 import QIQTH.GaussInteriorMVT
+import QIQTH.GaussInteriorMVTGeneral
 import QIQTH.PullbackGeometryLegs
 import QIQTH.Hpd2FromCyclic
 import QIQTH.D2HExpandRecon

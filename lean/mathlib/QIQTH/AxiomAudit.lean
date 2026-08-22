@@ -19994,6 +19994,20 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussInteriorMVT.hgball_concrete
 #print axioms QIQTH.GaussInteriorMVT.hGauss_pullback_concrete
 
+-- ## J4-NNN (GaussInteriorMVTGeneral): GENERAL-base Gauss germ (corrected-hpull item (1))
+-- The exp-pullback Gauss germ WITHOUT the base gauge g_p=I. The interior-MVT closure and the
+-- coordinate contraction were ALREADY g_p-general (gauss_interior_identity RHS = g_p(w,v);
+-- gauss_coordinate_contraction RHS = ∑_b g_p(i,b)·v^b); g_p=I was a STATEMENT normalization only,
+-- never used in any proof step. hGauss_pullback_general (from abstract ball family) +
+-- hGauss_pullback_general_concrete (ball family discharged by hgball_concrete; surviving hyps
+-- ONLY hsymm/hinv/hg, NO gauge) + expPullbackMetric_zero_general (g̃(0)=g_p, un-gauged center) +
+-- ★ hGauss_pullback_gauge_of_general (regression: banked gauged germ x^i recovered under g_p=I).
+-- std-3 all 4. NOT a₁ = R/6 (still conditional on {hDuhamel, hDConv, hCConv}).
+#print axioms QIQTH.GaussInteriorMVTGeneral.hGauss_pullback_general
+#print axioms QIQTH.GaussInteriorMVTGeneral.hGauss_pullback_general_concrete
+#print axioms QIQTH.GaussInteriorMVTGeneral.expPullbackMetric_zero_general
+#print axioms QIQTH.GaussInteriorMVTGeneral.hGauss_pullback_gauge_of_general
+
 -- ## J4-348 (PullbackGeometryLegs): THE DERIVABLE LEGS + THE DECISIVE L3 VERDICT
 -- THE BANKED-JET FINDING (per feedback_dont_undercredit_repo): the D²exp jet WAS
 -- banked (pd_jacobian_expMap_zero, the closed Christoffel form) and L1 ∂g̃(0)=0
