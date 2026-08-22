@@ -31036,4 +31036,24 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.AmpFieldGeneralPointBoundLipschitz.chartFieldAmp_bound_lipschitz_generalPoint
 #print axioms QIQTH.AmpFieldGeneralPointBoundLipschitz.chartFieldAmp_bound_lipschitz_generalPoint
 
+-- J4-1026: AmpFieldGlobalTruncation — globalizes J4-1025's LOCAL bound+Lipschitz fact into a GLOBAL
+-- bound + GLOBAL PAIRWISE Lipschitz fact for chartFieldAmp (∀x y, not Lipschitz-at-a-point), via
+-- composing with the already-banked BaseFlowGlobalContraction.coordClamp (sup-norm metric-projection
+-- clamp, LipschitzWith 1) instead of the earlier truncFactor radial-truncation trick (which does NOT
+-- preserve pairwise Lipschitz across the ball boundary). New coordClamp_eq_self_of_mem_closedBall gives
+-- exact agreement with the literal chartFieldAmp on closedBall p ρ. Instantiates J4-1024's §E capstone
+-- at P := AmpGlobal built from the literal chartFieldAmp. Sol (gpt-5.6-sol, high) GO-reviewed the plan
+-- before Lean. std-3.
+-- Does NOT identify with nb's actual Bfac-normalised sliver integrand (Bfac bundles chartFieldAmp with
+-- the V/Jacobian ratio itself, census scalar, chart-jet factors; base-slot CoV + hfac's carry over S'
+-- remain undischarged). Bfac's OTHER 3 summands + Levi(s,z) prefactor untouched; fb stays separately
+-- open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.AmpFieldGlobalTruncation.coordClamp_eq_self_of_mem_closedBall
+#print axioms QIQTH.AmpFieldGlobalTruncation.coordClamp_eq_self_of_mem_closedBall
+#check @QIQTH.AmpFieldGlobalTruncation.ampGlobal_bound_lipschitz_agree
+#print axioms QIQTH.AmpFieldGlobalTruncation.ampGlobal_bound_lipschitz_agree
+#check @QIQTH.AmpFieldGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_global
+#print axioms QIQTH.AmpFieldGlobalTruncation.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_chartFieldAmp_global
+
 end QIQTH.AxiomAudit

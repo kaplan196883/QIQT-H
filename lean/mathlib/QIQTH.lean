@@ -6330,3 +6330,24 @@ import QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge
 -- dispatch). Bfac's OTHER 3 summands + Levi(s,z) prefactor remain untouched; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.AmpFieldGeneralPointBoundLipschitz
+
+-- J4-1026: AmpFieldGlobalTruncation — globalizes J4-1025's LOCAL bound+Lipschitz fact for
+-- chartFieldAmp at a general field point p into a GLOBAL (all of Point n) bound + GLOBAL PAIRWISE
+-- Lipschitz fact (genuinely ∀x y, not just Lipschitz-at-a-point), matching EXACTLY J4-1024's
+-- transported_ratio_regularity_generalK / §E's abstract weight P interface. Mechanism: NOT the earlier
+-- truncFactor radial-truncation trick (constant outside a ball does NOT preserve PAIRWISE Lipschitz
+-- between an inside and an outside point); instead composes chartFieldAmp with the already-banked
+-- BaseFlowGlobalContraction.coordClamp (the sup-norm metric-projection clamp, proven LipschitzWith 1,
+-- lands exactly in the closed ball) via LipschitzOnWith.comp, giving genuinely GLOBAL LipschitzWith L.
+-- New lemma coordClamp_eq_self_of_mem_closedBall (not in the banked BaseFlowGlobalContraction file)
+-- gives exact agreement with the literal chartFieldAmp on closedBall p ρ. Instantiates J4-1024's §E
+-- capstone at P := AmpGlobal (built from the literal chartFieldAmp) -- the closest this campaign has
+-- come to a literal-amplitude instantiation of that capstone. Sol (gpt-5.6-sol, high) GO-reviewed the
+-- coordClamp-vs-truncFactor plan before any Lean was written. std-3.
+-- Does NOT identify this with nb's actual Bfac-normalised sliver integrand (Bfac is a richer 4-term
+-- quantity bundling chartFieldAmp with the V/Jacobian ratio itself, the census scalar, and the
+-- chart-jet factors; the base-slot CoV linking V w to the literal chart argument, and hfac's own carry
+-- over S', remain undischarged). Bfac's OTHER 3 summands + Levi(s,z) prefactor untouched; fb stays
+-- separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.AmpFieldGlobalTruncation
