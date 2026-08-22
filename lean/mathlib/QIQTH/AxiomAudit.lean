@@ -73,6 +73,7 @@ import QIQTH.HFmeasGFromFieldSlice
 import QIQTH.HFarFullyWired
 import QIQTH.CensusHrateFullConcrete
 import QIQTH.HCompBaseSlotAntisymmetryConcrete
+import QIQTH.BoundaryIntegralChartImageConcreteCoV
 
 namespace QIQTH.AxiomAudit
 
@@ -30742,5 +30743,18 @@ namespace QIQTH.AxiomAudit
 -- gaussDdim τ w * (B (V w) / J (V w)) on the open set S' from the M1-M4 assembly. Does NOT wire into
 -- hcomp/nb/hCConv. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 #print axioms QIQTH.BaseSlotM1M4Assembly.uniformInverseChart_baseSlot_gaussian_change_variables_generalK
+
+-- J4-1009 (BoundaryIntegralChartImageConcreteCoV): ORIENTATION CORRECTION — Layer A was ALREADY
+-- banked in J4-271 (ChartImageAIConcrete), contrary to J4-1008's own report. Composes J4-1008's
+-- concrete M1-M4 CoV bundle (at q₀ := 0, giving the base-varying chart Wbv) with J4-271's already-
+-- banked Layer A ∘ B(abstract) composition (boundary_integral_eq_chartImage_integral): extracts a
+-- ball ⊆ S' via Metric.isOpen_iff, restricts M1/M2/M4 to it, and produces THE FIRST literal
+-- (non-abstract-CoV-data) chart-image rewrite of the boundary witness integral against a test
+-- function f, at a CONCRETE radius ρ and CONCRETE left inverse V, conditional only on the honest
+-- gate-activation/off-ball-support facts (the genuine remaining non-analytic input). Does NOT touch
+-- hcomp/nb/hCConv/kPrime — a separate thread (VanVleckGatedSpatialSymmetry's hcomp is about the
+-- concrete field-Hessian kernel kPrime, not the boundary-witness-against-f object here). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.BoundaryIntegralChartImageConcreteCoV.boundary_integral_eq_chartImage_integral_concreteCoV
 
 end QIQTH.AxiomAudit

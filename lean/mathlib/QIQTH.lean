@@ -6120,3 +6120,18 @@ import QIQTH.BaseSlotIFTLocalHomeomorph
 -- Does NOT wire into hcomp/nb/hCConv. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.BaseSlotM1M4Assembly
+
+-- J4-1009: BoundaryIntegralChartImageConcreteCoV — ORIENTATION CORRECTION + Layer A ∘ B(concrete):
+-- Layer A was ALREADY banked in J4-271 (ChartImageAIConcrete.boundary_integral_eq_gate_integral /
+-- boundary_integral_eq_chartImage_integral), contrary to J4-1008's own report claiming it unstarted.
+-- What was actually missing was the concrete M1-M4 CoV bundle for the BASE-VARYING chart Wbv
+-- (z ↦ uniformInverseChart g gi hC hK z 0) — exactly what J4-1008's M1-M4 assembly supplies at
+-- q₀ := 0. This file composes them: extracts a ball ⊆ S' (Metric.isOpen_iff) from J4-1008's open
+-- set, restricts M1/M2/M4 via HasFDerivWithinAt.mono / Set.InjOn.mono, and feeds the result into
+-- J4-271's boundary_integral_eq_chartImage_integral, producing THE FIRST literal (non-abstract-CoV-
+-- data) chart-image rewrite of the boundary witness integral: for concrete ρ>0, V, given only the
+-- honest gate-activation/support facts at that ρ, ∫z Wit τ 0 z · f z = ∫w in Wbv''(ball 0 ρ),
+-- gaussDdim τ w · (chartFieldAmp … τ (V w) 0 · f (V w) / |det|). Does NOT touch hcomp/nb/hCConv/
+-- kPrime (a separate thread — see file docstring). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.BoundaryIntegralChartImageConcreteCoV
