@@ -20023,6 +20023,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpInverseMetricGauge.inverseMetric_gauss_general
 #print axioms QIQTH.ExpInverseMetricGauge.inverseMetric_gauss_gauge_of_general
 
+-- ## J4-NNN (CurvedRNCGeodesicRay): EXACT radial endpoint W_z(0)=−z for the CONCRETE curved witness
+-- (corrected-hpull item (4), concrete-metric version). cp867 flagged item (4)-exact as "NOT cleanly
+-- bankable in one dispatch"; done here for g^K = curvedRNCMetric κ (κ≤0). curvedRNC_bracket_ray_zero:
+-- the (gi-free) lowered Christoffel bracket ∑_jk (∂_j g^K_{αk}+∂_k g^K_{αj}−∂_α g^K_{jk})(s•z)z^j z^k = 0
+-- on the ray (from banked pd_curvedRNCMetric_fun; bracket = −(K/3)s(2δ_αk z^j+2δ_αj z^k−4δ_jk z_α),
+-- contracts to 0). curvedRNC_christoffel_ray_zero: raised ∑_jk Γ^i_jk(s•z)z^j z^k = 0 (any gi).
+-- curvedRNC_straightLine_hasDerivAt: γ(τ)=((1−τ)•z,−z) solves the geodesic ODE ∀τ (radial lines ARE
+-- geodesics of the concrete metric). ★ curvedRNC_uniformFlowExp_neg_eq_zero: φ_z(−z)=0 via ODE-
+-- uniqueness (geodesic_local_unique) matching the straight line vs the Skolemized tube on (−1,3/2)⊇[0,1].
+-- ★ curvedRNC_uniformInverseChart_zero_eq_neg: W_z(0)=−z EXACTLY (via banked left-inverse germ +
+-- EventuallyEq.eq_of_nhds at v=−z). curvedRNC_uniformInverseChart_zero_eq_neg_inhabited: NON-VACUITY
+-- (an actual nonzero z, S=closedBall 0 1, using uniformFlowRadius_pos). std-3 all 6. Does NOT discharge
+-- any hpull leg (needs inverse-chart 1st/2nd jets). NOT a₁ = R/6 (still conditional on {hDuhamel,hDConv,hCConv}).
+#print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_bracket_ray_zero
+#print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_christoffel_ray_zero
+#print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_straightLine_hasDerivAt
+#print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_uniformFlowExp_neg_eq_zero
+#print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_uniformInverseChart_zero_eq_neg
+#print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_uniformInverseChart_zero_eq_neg_inhabited
+
 -- ## J4-348 (PullbackGeometryLegs): THE DERIVABLE LEGS + THE DECISIVE L3 VERDICT
 -- THE BANKED-JET FINDING (per feedback_dont_undercredit_repo): the D²exp jet WAS
 -- banked (pd_jacobian_expMap_zero, the closed Christoffel form) and L1 ∂g̃(0)=0
