@@ -5974,3 +5974,14 @@ import QIQTH.HDConvGatedK0FullyClosed
 -- uniformInverseChart (=blocker J3), does NOT prove the corrected bridge in general. std-3 ×8. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.CurvedChartBridgeAudit
+
+-- HGpowGatedK0Closed — the hGpow moment-cancellation carry (of MemAdjHiMomentBound.hGpow_of_amplitudeData)
+-- discharged UNCONDITIONALLY at the curved K={0} witness by the SAME null-singleton base-gate mechanism as
+-- hbint/hzmass (J4-984/867), transferred to the NESTED-pd SECOND-x-derivative object: witnessSecondXDeriv
+-- (= pd(pd(vanVleckGatedWitness … x' z))) vanishes for z∉K because the base gate (3rd arg z) kills the whole
+-- field function ⟹ pd_const ×2. At K={0} the z-pairing with leviSeries is ≡0 for every s (null singleton),
+-- so hGpow holds with Cpair=0 — WITHOUT the AmplitudeDerivativeData bundle and WITHOUT the
+-- RadialNormalCoordinateGauge/hjets/opaque-chart route. ⚠ closes ONLY the hGpow SUB-piece of hDuhamel;
+-- hDuhamel itself does NOT hold at K={0} (J4-989, E t 0 0≠0). std-3 ×3. NOT a₁=R/6 (STRICTLY CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HGpowGatedK0Closed

@@ -30,6 +30,7 @@ import QIQTH.HbintFullyClosedCurved
 import QIQTH.HZMassFullyClosedCurved
 import QIQTH.HCConvGatedK0FullyClosed
 import QIQTH.HDConvGatedK0FullyClosed
+import QIQTH.HGpowGatedK0Closed
 import QIQTH.HFdRequant
 import QIQTH.MixedEnvelopeFullyInhabitedCurved
 import QIQTH.HDuhamelF2LiveWired
@@ -30515,5 +30516,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedChartBridgeAudit.surr_hVQ_value
 #print axioms QIQTH.CurvedChartBridgeAudit.curved_hVP_fails
 #print axioms QIQTH.CurvedChartBridgeAudit.curved_hVQ_fails
+
+-- HGpowGatedK0Closed — the hGpow moment-cancellation carry (of MemAdjHiMomentBound.hGpow_of_amplitudeData)
+-- discharged UNCONDITIONALLY at the curved K={0} witness by the SAME null-singleton base-gate mechanism as
+-- hbint/hzmass (J4-984/867), transferred to the NESTED-pd SECOND-x-derivative object.
+-- witnessSecondXDeriv_eqZero_of_base_notMem_K: witnessSecondXDeriv (=pd(pd(vanVleckGatedWitness … x' z)))
+-- vanishes for z∉K (base gate on 3rd arg z kills the whole field function ⟹ pd_const ×2).
+-- secondXDeriv_pairing_integral_gatedK0_eqZero: z-pairing with any B ≡0 at K={0} (null singleton).
+-- hGpow_gatedK0_closed: the EXACT hGpow type with Cpair=0 — WITHOUT the AmplitudeDerivativeData bundle and
+-- WITHOUT the RadialNormalCoordinateGauge/hjets/opaque-chart route. ⚠ closes ONLY the hGpow SUB-piece of
+-- hDuhamel; hDuhamel itself does NOT hold at K={0} (J4-989, E t 0 0≠0). std-3 ×3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HGpowGatedK0Closed.witnessSecondXDeriv_eqZero_of_base_notMem_K
+#print axioms QIQTH.HGpowGatedK0Closed.secondXDeriv_pairing_integral_gatedK0_eqZero
+#print axioms QIQTH.HGpowGatedK0Closed.hGpow_gatedK0_closed
 
 end QIQTH.AxiomAudit
