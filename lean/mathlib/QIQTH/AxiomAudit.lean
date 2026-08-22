@@ -20043,6 +20043,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_uniformInverseChart_zero_eq_neg
 #print axioms QIQTH.CurvedRNCGeodesicRay.curvedRNC_uniformInverseChart_zero_eq_neg_inhabited
 
+-- ## J4-995 (CurvedRNCFirstJetLeg): the CORRECTED hpull FIRST LEG ⟨z,A eᵢ⟩=z_i (Aᵀz=z) for the
+-- inverse-chart first jet A:=D W_z(0) of the CONCRETE curved witness g^K=curvedRNCMetric κ (κ≤0). The
+-- CURRENT hpullVP shape ∑_k (W_z 0)_k (A eᵢ)_k = ∑_j g_ij(z)z^j is PROVABLY MIS-SIGNED (J4-978, cp865:
+-- flat LHS=−z_i, RHS=+z_i); the CORRECTED leg is Aᵀz=z, NUMERICALLY VERIFIED to 1e-10 (n=2,3; κ<0;
+-- small z) by integrating the geodesic ODE + finite-differencing exp_z. curvedRNC_expTube_neg: the EXACT
+-- exp-tube radial endpoint expTube z (−z) 1 = (0,−z) (ODE-uniqueness vs straight line, mirror of J4-994
+-- for expTube) supplying BOTH exp_z(−z)=0 and γ̇(1)=−z. ★ curvedRNC_gauss_radial: ⟨z,T w⟩=⟨z,w⟩ ∀w
+-- (Tᵀz=z), T:=D(uniformFlowExp z)(−z), from banked gauss_interior_identity at (z,−z) + g(0)=δ + γ̇(1)=−z
+-- + RNC metric radial gauge + expMap↔uniformFlowExp overlap alignment. ★★ curvedRNC_firstJetLeg: ∃r>0,
+-- ∀z∈S ‖z‖<r → ‖z‖<expRho z → ∑_k z_k (D W_z(0)·eᵢ)_k = z_i, via germ chain rule P∘T=id + T unit
+-- (Units.oneSub, ‖T−1‖≤C_D‖z‖≤½) ⟹ T∘P=id, then ⟨z,P eᵢ⟩=⟨z,T(P eᵢ)⟩=⟨z,eᵢ⟩=z_i. The full jet A=T⁻¹
+-- is NOT pinned — only its single constraint Aᵀz=z, which is all this leg needs (gpt-5.6-sol high GO).
+-- std-3 all 3. Does NOT discharge {hDuhamel,hDConv,hCConv}. NOT a₁ = R/6 (still conditional).
+#print axioms QIQTH.CurvedRNCFirstJetLeg.curvedRNC_expTube_neg
+#print axioms QIQTH.CurvedRNCFirstJetLeg.curvedRNC_gauss_radial
+#print axioms QIQTH.CurvedRNCFirstJetLeg.curvedRNC_firstJetLeg
+
 -- ## J4-348 (PullbackGeometryLegs): THE DERIVABLE LEGS + THE DECISIVE L3 VERDICT
 -- THE BANKED-JET FINDING (per feedback_dont_undercredit_repo): the D²exp jet WAS
 -- banked (pd_jacobian_expMap_zero, the closed Christoffel form) and L1 ∂g̃(0)=0

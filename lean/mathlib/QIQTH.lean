@@ -555,6 +555,7 @@ import QIQTH.GaussInteriorMVT
 import QIQTH.GaussInteriorMVTGeneral
 import QIQTH.ExpInverseMetricGauge
 import QIQTH.CurvedRNCGeodesicRay
+import QIQTH.CurvedRNCFirstJetLeg
 import QIQTH.PullbackGeometryLegs
 import QIQTH.Hpd2FromCyclic
 import QIQTH.D2HExpandRecon
