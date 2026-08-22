@@ -30788,4 +30788,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartIFTPackageGeneralQ0.chartImage_mem_nhds_generalQ0
 #print axioms QIQTH.ChartIFTPackageGeneralQ0.chart_gaussian_change_variables_concrete_generalQ0
 
+-- J4-1012 (ChartGeneralChangeVarEvalSlot): the GENERIC (non-Gaussian-specialized) weighted change-of-
+-- variables, generalizing ChartGaussianChangeVar.chart_gaussian_change_variables from the hard-wired
+-- integrand gaussDdim τ to an arbitrary φ : Point n → ℝ (chart_general_change_variables), instantiated
+-- at the eval-slot chart (general interior q₀, via J4-1011's IFT package M1-M4 —
+-- chart_general_change_variables_concrete_generalQ0), and TARGETED at φ := gaussDdim τ ∘ terminalVelAt
+-- … x (evalSlot_terminalVel_weighted_CoV): transports the WEIGHTED integral of the T_x-COMPOSED
+-- Gaussian ∫ z in ball x ρ, gaussDdim τ (T_x (W_x z)) · B z onto the chart-image integral — this is
+-- item (a) of nb's STEP-4c residual (r6) that Sol gpt-5.6-sol high flagged as the remaining moving
+-- piece after J4-1011's bare-Gaussian CoV (which cannot absorb the T_x composition). Domain
+-- reconciliation (ball x ρ / W_x''(ball x ρ) vs terminalVelAt_chartReplace_sliver_bound's ball 0 R,
+-- item (b)) and composition with the evenness link (gaussDdim_reversal_link) / literal kPrime
+-- factorization (HCompNearCarryKPrimeBaseFieldCoV) / the sliver bound itself into a literal
+-- difference-form bound on nb remain SEPARATE, NOT-attempted next steps. std-3, no sorry, no new
+-- axioms, no existing file edited. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#print axioms QIQTH.ChartGeneralChangeVarEvalSlot.chart_general_change_variables
+#print axioms QIQTH.ChartGeneralChangeVarEvalSlot.chart_general_change_variables_concrete_generalQ0
+#print axioms QIQTH.ChartGeneralChangeVarEvalSlot.evalSlot_terminalVel_weighted_CoV
+
 end QIQTH.AxiomAudit
