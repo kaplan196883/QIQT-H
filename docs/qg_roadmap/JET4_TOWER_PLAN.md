@@ -15547,3 +15547,69 @@ std-3 all 6 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; 
 (10307 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
 `AxiomAudit.lean`; `git show 45d0157f --stat` = 3 files (+462); pushed. Stray sibling
 `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+---
+
+## J4-999 — `HeatHessTransportedCoeffClosure`: GO/NO-GO — hCross census does NOT transfer to `hcomp`; transported bilinear Hessian-coefficient closure isolates the census scalar from the chart-jet wall — commit `c04eb4b9`
+
+**Task.** Check whether the hCross transported-weight machinery (`census_transported_weights_uniform`,
+J4-959, which ultimately closed `hballrate` J4-960 for the analogous first-order `hCross` problem) can
+supply the SAME kind of transported-coefficient Lipschitz bound that J4-998's
+`integral_heatHessMult_mul_lipschitz` / `hcomp` / `JointSecondOrderRNCRegularity` needs.
+
+**VERDICT (gpt-5.6-sol high GO/NO-GO-audited 2026-08-22): the census machinery does NOT mechanically
+transfer.** Precise structural reason:
+- **hCross `hballrate` is FIRST-order** (∂_τ / trace). After the base-slot CoV its integrand collapses to
+  `poly(w)·G_τ(w)·q₁ w + G_τ(w)·q₂ w` with `q₁ = (amp·F)/|det(fderiv Wbv)|∘V`, `q₂ = (slope·F)/|det|∘V`,
+  and `poly(w)` a pure GAUSSIAN MOMENT polynomial. NO chart jets appear in the weight. Census proves
+  `q₁,q₂` bounded + pairwise-Lipschitz uniformly from CONCRETE inputs (amp/slope regularity, the Levi
+  `F`-carry, the determinant bundle `|det|≥½`+Lipschitz, and the IFT common-witness `V` Lipschitz+`V0=0`).
+  It uses NO full field-slot chart-jet regularity — only the chart MAP `V` as a Lipschitz map plus the
+  SCALAR Jacobian determinant.
+- **`hcomp` is SECOND-order** (a field Hessian). By the chain rule
+  `∂ᵢ∂ⱼ[G_τ(W_z(x))] = G''_τ[∂ᵢW,∂ⱼW] + G'_τ·∂ᵢ∂ⱼW`, so the FIRST jets `P = ∂W` (contracted into the
+  Gaussian-Hessian bilinear directions) and the SECOND jet `Q = ∂²W` enter as WEIGHT factors that vary
+  with the integrated base `z`. After transport the coefficient of `heatHessMult τ eₐ e_b` is therefore
+  `q₁(w)·(P_i(Vw))ₐ·(P_j(Vw))_b`, i.e. census's `q₁` TIMES the transported chart-jet components — whose
+  uniform boundedness + Lipschitz-at-origin is EXACTLY `JointSecondOrderRNCRegularity` (J4-792), the
+  recurring opaque-chart wall census never needed.
+
+So `integral_heatHessMult_mul_lipschitz`'s single `L`-hypothesis DECOMPOSES as a product: census-`q₁`
+part (available, concrete) × chart-jet part (the named wall). It is NOT a mechanical generalization of the
+first-order construction — the new obstacle is precisely joint-second-order chart-jet regularity, not the
+amp/det/`V` analysis census mechanized.
+
+**Sol refinements carried honestly.** (a) Census DOES use ONE first-jet-derived scalar (`det (fderiv Wbv)`),
+so the precise claim is "no FULL field-slot chart-jet regularity." (b) The `Q`-term needs only BOUNDEDNESS
+(not Lipschitzness), since `‖∇G_τ‖_{L¹} = O(τ^{−1/2})`; only the Hessian–`P·P` term needs the
+Lipschitz-at-origin cancellation. (c) `JointSecondOrderRNCRegularity`'s global `∀y` jet fields are STRONGER
+than the analytic estimate strictly needs. (d) J4-998 has FIXED directions `p,q`; one cannot plug
+`p = P_i(Vw)` directly — a finite coordinate expansion into `heatHessMult τ eₐ e_b · [q₁·P_iₐ·P_j_b]` is
+required (routine but real wiring). (e) Local-vs-global mismatch: census `q₁` is Lipschitz only on
+`ball 0 σ` whereas the moment-cancellation integral is over all of `Point n` (a truncation/global step,
+part of R2, still intervenes).
+
+**Banked (Sol's recommended minimal "earning" brick: the transported bilinear coefficient closure lemma +
+direct corollary feeding the payoff). ns `QIQTH.HeatHessCoeffClosure`; NEW file, no banked file edited.**
+- `lipAtZero_bdd_mul` — 2-factor closure: bounded (`Ma,Mb`) + Lipschitz-at-origin (`La,Lb`) scalars
+  multiply to bounded (`Ma·Mb`) + Lipschitz-at-origin (`Ma·Lb+Mb·La`), via `ab−a₀b₀ = a(b−b₀)+b₀(a−a₀)`.
+- `lipAtZero_bdd_mul3` — 3-factor `f = q·a·b`: bounded `Mq·Ma·Mb`, Lipschitz-at-origin
+  `Mq·Ma·Lb+Mq·Mb·La+Ma·Mb·Lq` (= the transported second-order coefficient modulus with `q` the census
+  scalar and `a,b` the transported chart-jet components).
+- ★★★ `integral_heatHessMult_mul_transportedCoeff` — the payoff: `|∫ v, heatHessMult τ p q_dir v·(q v·a v·b v)|
+  ≤ Lf·n³‖p‖‖q_dir‖(16√2+1)/√τ`, `Lf` the explicit 3-factor modulus, by feeding `lipAtZero_bdd_mul3` into
+  J4-998's `integral_heatHessMult_mul_lipschitz`. PROVES the census scalar factor is NOT the analytic wall.
+- `integral_heatHessMult_mul_transportedCoeff_hyp_satisfiable` — NON-VACUITY: `q=a=b := cos‖·‖` (genuine
+  nonconstant, bounded by 1 via `Real.abs_cos_le_one`, Lipschitz-at-origin `L=1` via `Real.lipschitzWith_cos`).
+
+**Honest scope / non-vacuity.** Does NOT discharge `hcomp`: (i) the vector factors `a=(P_i∘V)ₐ`,
+`b=(P_j∘V)_b` need `JointSecondOrderRNCRegularity` (opaque-chart wall), NOT supplied by census; (ii) census
+`q₁` is Lipschitz only LOCALLY; (iii) full `hcomp` also needs the second-order chain rule, base-slot CoV,
+integrability/measurability, and coordinate summation. `hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected.
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.HeatHessTransportedCoeffClosure` 0 err (8688 jobs); in-file `#print axioms`
+std-3 all 4 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err
+(10308 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show c04eb4b9 --stat` = 3 files (+250); pushed. Stray sibling
+`docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
