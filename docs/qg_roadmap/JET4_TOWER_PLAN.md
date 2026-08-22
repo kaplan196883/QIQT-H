@@ -15787,3 +15787,57 @@ summation. `hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remai
 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`. Commit `f71df642`. Stray sibling
 `docs/qg_roadmap/rnc_sympy/{hcomp_bypass,hcomp_near_carry_final,hcomp_transposition}_feasibility.py` (a
 concurrent/earlier dispatch's scratch files) left untracked, NOT added.
+
+## J4-1003 (Sol-consulted GO, `gpt-5.6-sol` high, 2026-08-22) — the CONCRETE base-slot antisymmetry quadratic bound: resolving J4-1002's "`hK` fixed-vs-per-base mismatch" [AF]
+
+**Context.** J4-1002 (`HCompBaseSlotAntisymmetryQuadratic.lean`, commit `f71df642`) landed an ABSTRACT
+brick `antisymmetryDefect_quadratic_bound Φ q₀ hdiag hjointC2` proving the base-slot antisymmetry defect
+`Ξ(p) := Φ p q₀ + Φ q₀ p` is QUADRATIC — `‖Φ p q₀ + Φ q₀ p‖ ≤ C‖p−q₀‖²` — from ONLY (F1) `∀ᶠ q in 𝓝 q₀,
+Φ q q = 0` and (F3) joint `ContDiffAt ℝ 2` at `(q₀,q₀)`. Its dispatch flagged the immediate next step —
+instantiating `Φ := uniformInverseChart g gi hC (isCompact_closedBall q₀ 1)` — as BLOCKED on an "`hK`
+fixed-vs-per-base mismatch". This dispatch diagnoses and RESOLVES that blocker.
+
+**THE `hK` MISMATCH (precise).** `uniformInverseChart g gi hC {K} (hK : IsCompact K)` is parametrized by a
+COMPACT SET `K` (via `Classical.choose` over `uniformChart_exists … hK`). Feeding the brick with
+`Φ := uniformInverseChart g gi hC (isCompact_closedBall q₀ 1)` needs:
+- (F3) `ContDiffAt ℝ 2 (fun ξ => uniformInverseChart g gi hC (isCompact_closedBall q₀ 1) ξ.1 ξ.2) (q₀,q₀)`
+  — EXACTLY `ExpMap.uniformInverseChart_jointContDiffAt_diag g gi hC q₀` (J4-856). No mismatch.
+- (F1) `∀ᶠ q in 𝓝 q₀, uniformInverseChart g gi hC (isCompact_closedBall q₀ 1) q q = 0` — the SAME FIXED
+  compact `K = closedBall q₀ 1`, base point `q` RANGING near `q₀`.
+The banked diagonal-vanishing fact `JointRNCRegularityLocal.uniformInverseChart_slice_value_diag g gi hC
+q'` proves only `uniformInverseChart g gi hC (isCompact_closedBall q' 1) q' q' = 0` — `K = closedBall q' 1`
+is CENTERED on the same `q'` being evaluated. It slaves the compact-set center to the base point, so it
+cannot supply (F1), which pins the center at `q₀` while the base point moves. That is the "mismatch".
+
+**THE RESOLUTION — NO globalization needed (Sol `gpt-5.6-sol` high, GO).** The mismatch is an artefact of
+over-specialization, NOT a genuine local-to-global gap, and does NOT require the J4-1000
+radial-truncation globalization technique. The UNDERLYING germ fact `uniformInverseChart_huniformChart
+g gi hC hK` is already `∃ δ₀ > 0, ∀ q ∈ K, …` for a FIXED `K` — the diagonal value vanishes for EVERY base
+point `q ∈ K`, not merely `K`'s center. Sol confirmed (1) SOUND — `K` is fixed throughout, no comparison
+with the varying `closedBall q 1` sets is ever made; the germ at `v = 0` + `uniformFlowExp_zero` gives
+`uniformInverseChart … q q = 0` for every `q ∈ K`; (2) strictly simpler than J4-1000, no truncation.
+
+**THE DELIVERABLE (`HCompBaseSlotAntisymmetryConcrete.lean`, ns `QIQTH.HCompBaseSlotAntisymmetryConcrete`,
+std-3, new-file-only).**
+- ★ `uniformInverseChart_diag_eventually` — (F1) DISCHARGED: `∀ᶠ q in 𝓝 q₀, uniformInverseChart g gi hC
+  (isCompact_closedBall q₀ 1) q q = 0`. Proof = `uniformInverseChart_slice_value_diag`'s proof with the
+  base point freed inside the fixed `K`: `filter_upwards [Metric.ball_mem_nhds q₀ 1]`; `q ∈ ball q₀ 1 ⊆
+  closedBall q₀ 1 = K`; germ at `v = 0` (`‖0‖ < δ₀`); `eq_of_nhds` + `uniformFlowExp_zero … q hqK`.
+- ★★★ `uniformInverseChart_antisymmetryDefect_quadratic` — THE CONCRETE PAYOFF J4-1002's docstring
+  PROMISED but left blocked: `∃ r>0, C≥0, ∀ p, ‖p−q₀‖<r → ‖uniformInverseChart … q₀ 1 p q₀ +
+  uniformInverseChart … q₀ 1 q₀ p‖ ≤ C‖p−q₀‖²`, by feeding the abstract brick (F1) `_diag_eventually`
+  + (F3) `uniformInverseChart_jointContDiffAt_diag`.
+
+**Honest scope / distance.** Supplies the concrete base-slot antisymmetry quadratic bound for the ACTUAL
+geodesic inverse chart (the object `kPrime`/`gatedKernel` are built from), shrinking the near-carry `nb`
+obligation to: relating the chart's FIELD-slot jets `P,Q` (what `heatHessMult`/`gaussComp_pd_pd_mixed`
+consume) to this defect bound, performing the literal base-slot CoV (`∫z → ∫v`), the `τ`-weighted Gaussian
++ `ds` integration, and the pointwise-to-integral interface with `VanVleckGatedSpatialSymmetry.hcomp`'s
+literal integral shape. Does NOT touch `kPrime`/`heatHessMult`/`hcomp` literally. `hCConv` NOT closed.
+`hDuhamel`/`hDConv` unaffected. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`,
+UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.HCompBaseSlotAntisymmetryConcrete` 0 err (8703 jobs); `AxiomAudit.lean`
+builds 0 err; `#print axioms` std-3 all (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom;
+`axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`.
+Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py` left untracked, NOT added.

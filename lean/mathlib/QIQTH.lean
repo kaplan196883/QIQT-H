@@ -6055,3 +6055,12 @@ import QIQTH.GaussCompMixedHessian
 -- Fully abstract in Φ: does NOT instantiate uniformInverseChart, does NOT touch kPrime/heatHessMult/hcomp
 -- literally. std-3 ×3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompBaseSlotAntisymmetryQuadratic
+-- HCompBaseSlotAntisymmetryConcrete — J4-1003: CONCRETE corollary of J4-1002's abstract brick at
+-- Φ := uniformInverseChart g gi hC (isCompact_closedBall q₀ 1), resolving the "hK fixed-vs-per-base
+-- mismatch". Discharges (F1) uniformInverseChart_diag_eventually (fixed-K, general-base diagonal
+-- vanishing near q₀, from the ∀q∈K uniform germ fact — NO globalization needed) and feeds it with
+-- (F3) uniformInverseChart_jointContDiffAt_diag to land uniformInverseChart_antisymmetryDefect_quadratic:
+-- ‖invChart p q₀ + invChart q₀ p‖ ≤ C‖p-q₀‖². Sol gpt-5.6-sol high GO 2026-08-22. std-3 ×2.
+-- Does NOT touch kPrime/heatHessMult/hcomp/the base-slot CoV. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompBaseSlotAntisymmetryConcrete

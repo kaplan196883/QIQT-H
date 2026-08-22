@@ -72,6 +72,7 @@ import QIQTH.HRintFromEngine
 import QIQTH.HFmeasGFromFieldSlice
 import QIQTH.HFarFullyWired
 import QIQTH.CensusHrateFullConcrete
+import QIQTH.HCompBaseSlotAntisymmetryConcrete
 
 namespace QIQTH.AxiomAudit
 
@@ -30632,5 +30633,11 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompBaseSlotAntisymmetry.antisymmetryDefect_fderiv_zero
 #print axioms QIQTH.HCompBaseSlotAntisymmetry.antisymmetryDefect_quadratic_bound
 #print axioms QIQTH.HCompBaseSlotAntisymmetry.antisymmetryDefect_quadratic_bound_hyp_satisfiable
+
+-- J4-1003 — HCompBaseSlotAntisymmetryConcrete: concrete uniformInverseChart instance of J4-1002's brick;
+-- resolves the hK fixed-vs-per-base mismatch (fixed K=closedBall q₀ 1, general base q, from ∀q∈K germ).
+-- std-3 ×2. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HCompBaseSlotAntisymmetryConcrete.uniformInverseChart_diag_eventually
+#print axioms QIQTH.HCompBaseSlotAntisymmetryConcrete.uniformInverseChart_antisymmetryDefect_quadratic
 
 end QIQTH.AxiomAudit
