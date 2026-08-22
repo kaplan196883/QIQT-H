@@ -31023,4 +31023,17 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_transported_ratio
 #print axioms QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_transported_ratio
 
+-- J4-1025: AmpFieldGeneralPointBoundLipschitz — the concrete on-gate amplitude chartFieldAmp is
+-- BOUNDED and (explicit constant) LIPSCHITZ on a ball around a GENERAL FIXED field point p, given the
+-- same two honest carries OnGateJets.ampField_contDiffAt already needs. Discharges cp911's item (1)
+-- (the previously-missing general-field-point local regularity theorem); item (2) (ball->global
+-- truncation) remains a separate, future gap. Pure mechanical composition of two pre-existing banked
+-- facts (ampField_contDiffAt + the J4-1024 general-basepoint convex-MVT Lipschitz helper); Sol
+-- (gpt-5.6-sol, high) GO-audited before commit. std-3.
+-- Does NOT supply the GLOBAL bound+Lipschitz fact nb's term1 literal closure needs; does NOT discharge
+-- nb/hCConv/hcomp; does NOT address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.AmpFieldGeneralPointBoundLipschitz.chartFieldAmp_bound_lipschitz_generalPoint
+#print axioms QIQTH.AmpFieldGeneralPointBoundLipschitz.chartFieldAmp_bound_lipschitz_generalPoint
+
 end QIQTH.AxiomAudit

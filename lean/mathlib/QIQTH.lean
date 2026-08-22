@@ -6312,3 +6312,21 @@ import QIQTH.HCompNearCarryTerm1DomainRestrictedBound
 -- terms; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge
+
+-- J4-1025: AmpFieldGeneralPointBoundLipschitz — the exact composable piece cp911 flagged as missing
+-- (item (1) of the two-item scope for closing nb's term1 hsMixed*A at the LITERAL chartFieldAmp): the
+-- concrete on-gate amplitude chartFieldAmp is BOUNDED and (genuinely, explicit constant) LIPSCHITZ on a
+-- ball around a GENERAL FIXED field point p (not just the field centre 0), given the same two honest
+-- carries OnGateJets.ampField_contDiffAt already needs (hWz : ContDiffAt R 2 (W z) p, hdetz : 0 < det
+-- g (W z p)). Pure mechanical composition of two pre-existing banked facts: OnGateJets.ampField_
+-- contDiffAt (C^2 at general p) .of_le -> ContDiffAt R 1, then HCompNearCarryTerm1GeneralQ0
+-- InverseChartLipschitzBridge.contDiffAt_one_lipschitzOn_ball_atPoint (the general-basepoint convex-MVT
+-- Lipschitz helper banked by J4-1024 for an unrelated V/Jacobian mechanism, but stated fully
+-- abstractly); boundedness is a 3-line triangle-inequality corollary (M := |A p| + L*r), no separate
+-- continuity re-derivation. Sol (gpt-5.6-sol, high) GO-audited before commit: genuine non-vacuous
+-- composition, no hidden gap. std-3.
+-- LOCAL only (ball p r, r depends on p) -- does NOT supply the GLOBAL bound+Lipschitz fact nb's term1
+-- literal closure needs (cp911 item (2), a SEPARATE ball->global truncation, left to a future
+-- dispatch). Bfac's OTHER 3 summands + Levi(s,z) prefactor remain untouched; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.AmpFieldGeneralPointBoundLipschitz
