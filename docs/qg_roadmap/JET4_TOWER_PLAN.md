@@ -15914,3 +15914,57 @@ literally. `hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remai
 `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`.
 Commit `ed88be61`. Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py` left
 untracked, NOT added.
+
+---
+
+### J4-1005 — `UniformInverseChartRncRadialSqErrorGeneralQ0`: the TWO-SIDED `rncRadialSq` comparison error at GENERAL `q₀`, resolved from J4-1004's ONE-SIDED bound alone
+
+**cp886, commit `7cc29457`, 2026-08-22.** Closes the precise scope item J4-1004's own dispatch named as
+next: "re-derive the two-sided `rncRadialSq` comparison error at general `q₀`" from the newly-banked
+one-sided quadratic base-slot displacement bound.
+
+**THE STANDING QUESTION AND ITS ANSWER.** Does J4-1004's ONE-SIDED bound
+`‖Φ p q₀ + (p-q₀)‖ ≤ C‖p-q₀‖²` suffice, or is the REVERSE direction of displacement separately needed?
+ANSWER: it SUFFICES BY ITSELF. `InverseChartDisplacement.chartW0_rncRadialSq_error` at `q₀ = 0` is
+ITSELF derived from ONLY the one-sided `chartW0_displacement` bound (`‖W₀ z + z‖ ≤ C_W‖z‖²`, the exact
+same shape). The TWO-SIDEDNESS of its conclusion (both `≤` directions comparing `rncRadialSq(W₀ z)`
+against `rncRadialSq z`) is produced by applying the coordinatewise expansion lemma `rncRadialSq_add_le`
+TWICE — once to `W = (-z)+b` (upper bound on `rncRadialSq W`), once to `-z = W+(-b)` (upper bound on
+`rncRadialSq z`, i.e. lower bound on `rncRadialSq W`) — a purely algebraic "run the same lemma from both
+sides" trick, not a second geometric input. `rncRadialSq`, `rncRadialSq_add_le`, `rncRadialSq_neg`,
+`norm_sq_le_rncRadialSq`, `rncRadialSq_le_nsq` are ALL basepoint-agnostic (`rncRadialSq v := ∑ i, (v i)²`,
+no basepoint argument), so `chartW0_rncRadialSq_error`'s ENTIRE Lean proof transplants VERBATIM with
+`z ↦ u := p - q₀`, `W ↦ Φ p q₀ := uniformInverseChart g gi hC (isCompact_closedBall q₀ 1) p q₀`.
+
+**THE SYMPY GATE.** `docs/qg_roadmap/rnc_sympy/herrhmin_generalq0_transplant.py` verifies symbolically
+that the coordinatewise expansion `rncRadialSq(W) - rncRadialSq(u) = -2⟨u,b⟩ + rncRadialSq(b)` is a pure
+function of `(u,b)` with `u` FREE — no property of `u` beyond its norm and the residual bound
+`‖b‖ ≤ C‖u‖²` is used, confirming the transplant introduces no hidden basepoint-specific dependency.
+Sol (`gpt-5.6-sol`, high, 2026-08-22) independently confirmed GO: "no conceptual gap; any friction should
+be elaboration, normalization, or rewriting only."
+
+**THE DELIVERABLE.** `UniformInverseChartRncRadialSqErrorGeneralQ0.lean` (ns
+`QIQTH.UniformInverseChartRncRadialSqErrorGeneralQ0`):
+- ★★★ `uniformInverseChart_rncRadialSq_error_general_q0` — a single `r>0`, `L≥0` such that for every `p`
+  with `‖p-q₀‖<r` (UNRESTRICTED — no compact-membership side condition, mirroring J4-1004's shape):
+  `rncRadialSq(p-q₀) - L·‖p-q₀‖·rncRadialSq(p-q₀) ≤ rncRadialSq(Φ p q₀) ≤ rncRadialSq(p-q₀) +
+  L·‖p-q₀‖·rncRadialSq(p-q₀)`. Literally generalizes `chartW0_rncRadialSq_error` (`q₀=0`-only) to a
+  GENERAL base point.
+
+**Honest scope / distance (unchanged items from J4-1004's own map).** Does NOT touch `kPrime`/
+`heatHessMult`/`hcomp` literally. Two SEPARATE, non-trivial items remain before this feeds
+`herr_gate`/`hmin_gate`/`hcomp`'s `nb` obligation at general `q₀`: (i) the compact-set-`K` GATE
+re-threading — `herr_gate`/`hmin_gate` (`HerrHminCoercivity.lean`) are stated for an ARBITRARY fixed `K`
+ranging over `z ∈ K`, whereas the theorem here bakes in `K := closedBall q₀ 1`, which VARIES with `q₀`
+itself (the base point IS `q₀`, not a free-ranging `z ∈ K`) — reconciling the two shapes into a
+genuinely general-`q₀` `herr_gate`/`hmin_gate` is separate wiring, not attempted here; (ii) the actual
+base-slot CHANGE OF VARIABLES wired into `hcomp`'s literal `∫z`/`∫s` integral shape (the `nb`/near-carry
+obligation) — this brick supplies the pointwise comparison input CoV would need, not the CoV itself.
+`hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build` (full) 0 err (10315 jobs); throwaway `chk1005.lean` + `#print axioms` std-3
+(propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom (deleted after confirming);
+`axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`.
+Commit `7cc29457`. Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py` left
+untracked, NOT added.
