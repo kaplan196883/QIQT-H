@@ -30769,4 +30769,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryKPrimeBaseFieldCoV.kPrime_apply_single_on_gate_eq_baseGaussian_mul_amp
 #print axioms QIQTH.HCompNearCarryKPrimeBaseFieldCoV.kPrime_baseField_CoV_of_factorization
 
+-- J4-1011 (ChartIFTPackageGeneralQ0): the EVAL-SLOT (field-varying, base FIXED at a general interior
+-- q₀ ∈ interior K) local IFT/change-of-variables package, generalizing ChartIFTPackage.chartIFTPackage
+-- / chart_gaussian_change_variables_concrete (J4-270, tied to q₀=0 only) to arbitrary q₀. VERBATIM
+-- transplant of the Mathlib-IFT proof (ContDiffAt.toOpenPartialHomeomorph) onto the ALREADY-BANKED
+-- general-q₀ center facts (JointRNCRegularityLocalGeneralK.uniformInverseChart_slice_contDiffAt_diag_
+-- generalK / ..._slice_fderiv_id_diag_generalK / ..._slice_value_diag_generalK). Sol gpt-5.6-sol high
+-- CONFIRMED: this is the CORRECT slot/orientation for nb's antisymmetrization residual (r6) — the eval-
+-- slot map v := uniformInverseChart g gi hC hK x z is exactly what HCompNearCarryFullyClosed.gaussDdim_
+-- reversal_link's RHS needs, feeding HCompNearCarryConcreteDischarge.terminalVelAt_chartReplace_sliver_
+-- bound's difference G_τ(T_x v) − G_τ(v). Sol: "necessary moving-center CoV infrastructure", NOT itself
+-- STEP-4c discharged — the exact bridge lemma composing this + the reversal link + J4-1010's kPrime
+-- factorization into a literal difference-form bound on nb (plus reconciling ball q₀ ρ/image set with
+-- ball 0 R and the transformed-weight/Jacobian match) is a SEPARATE, NOT-attempted next step. std-3, no
+-- sorry, no new axioms, no existing file edited. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.ChartIFTPackageGeneralQ0.chartIFTPackage_generalQ0
+#print axioms QIQTH.ChartIFTPackageGeneralQ0.chartImage_mem_nhds_generalQ0
+#print axioms QIQTH.ChartIFTPackageGeneralQ0.chart_gaussian_change_variables_concrete_generalQ0
+
 end QIQTH.AxiomAudit

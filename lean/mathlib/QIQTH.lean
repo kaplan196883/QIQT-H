@@ -6149,3 +6149,10 @@ import QIQTH.BoundaryIntegralChartImageConcreteCoV
 -- reconcile S'/ball x ρ / W''S'/ball 0 R, nor discharge hfac over the IFT S'. std-3. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryKPrimeBaseFieldCoV
+-- J4-1011 (ChartIFTPackageGeneralQ0): the EVAL-SLOT local IFT/CoV package generalized from base point
+-- q₀=0 (J4-270) to a GENERAL interior q₀ ∈ interior K, transplanting chartIFTPackage's proof onto the
+-- already-banked general-q₀ center facts. Slot orientation Sol-confirmed correct (matches
+-- gaussDdim_reversal_link's eval-slot v := uniformInverseChart x z). Necessary moving-center CoV
+-- infrastructure for nb's antisymmetrization residual (r6) — does NOT itself discharge STEP-4c. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartIFTPackageGeneralQ0
