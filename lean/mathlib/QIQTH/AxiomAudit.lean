@@ -30495,4 +30495,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HDConvGatedK0FullyClosed.hDConv_gatedKernel_K0_closed
 #print axioms QIQTH.HDConvGatedK0FullyClosed.hDConv_vanVleckGatedWitness_K0_closed
 
+-- CurvedChartBridgeAudit — the CURVED companion of FlatChartBridgeAudit (J4-978): the regression fixture
+-- catching BOTH center-identity defects of the geodesic-pullback bridge `hpull` (RadialGaugeInterface/
+-- CurvedCenterIdentities/AmpGeometryBundle.HjetsShape). J4-978 (flat) could refute only the mis-SIGNED
+-- hpullVP; it CANNOT test the VQ leg (flat ⟹ affine chart ⟹ Q=0 ⟹ VQ ≡ 0=0). Explicit polynomial surrogate
+-- Ŵ_z(x)=(x−z)+(K/3)(‖x−z‖²·z−⟨z,x−z⟩(x−z)), jets GROUNDED as genuine update-slice HasDerivAt derivatives
+-- (surrP_hasDerivAt/surrQ_hasDerivAt, exact HjetsShape shape). surr_hVQ_value: the genuine second-jet radial
+-- contraction ∑ₖŴ(0)ₖQₖ=(2K/3)(zᵢ²−‖z‖²) is a NONZERO Riemann-curvature term (=−(2/3)R_{ikil}zᵏzˡ, the a₁=R/6
+-- content). ★ curved_hVP_fails + ★★ curved_hVQ_fails REFUTE the banked hVP (=zᵢ) and hVQ (=0) center
+-- identities at n=2,z=(1,1),i=0,κ=−3 (LHS=−1≠1; LHS=2≠0) — hVQ=0 is GEOMETRICALLY FALSE at general base,
+-- not merely unproven; the curvature defect no flat model can see. Firewall: does NOT identify the surrogate
+-- with the opaque uniformInverseChart (=blocker J3). Discharges NONE of {hDuhamel,hDConv,hCConv}. std-3 ×8.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.CurvedChartBridgeAudit.surrW_center
+#print axioms QIQTH.CurvedChartBridgeAudit.surrP_hasDerivAt
+#print axioms QIQTH.CurvedChartBridgeAudit.surrQ_hasDerivAt
+#print axioms QIQTH.CurvedChartBridgeAudit.surr_firstLeg_corrected
+#print axioms QIQTH.CurvedChartBridgeAudit.surr_hVP_value
+#print axioms QIQTH.CurvedChartBridgeAudit.surr_hVQ_value
+#print axioms QIQTH.CurvedChartBridgeAudit.curved_hVP_fails
+#print axioms QIQTH.CurvedChartBridgeAudit.curved_hVQ_fails
+
 end QIQTH.AxiomAudit

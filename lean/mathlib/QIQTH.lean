@@ -5957,3 +5957,20 @@ import QIQTH.HCConvGatedK0FullyClosed
 -- to heatOp g gi H t 0 0 = 0 (the generically-NONZERO diagonal parametrix residual carrying a₁=R/6);
 -- the trio is NOT jointly closable at K={0} ⟹ NO complete a₁=R/6 instance here. std-3. NOT a₁=R/6.
 import QIQTH.HDConvGatedK0FullyClosed
+
+-- CurvedChartBridgeAudit — the CURVED companion of FlatChartBridgeAudit (J4-978), the regression fixture
+-- that catches BOTH center-identity defects of the geodesic-pullback bridge `hpull` (RadialGaugeInterface/
+-- CurvedCenterIdentities/AmpGeometryBundle.HjetsShape). J4-978 could refute only the mis-SIGNED hpullVP;
+-- it CANNOT test the VQ leg (flat ⟹ affine chart ⟹ Q=0 ⟹ VQ degenerates to 0=0). This file supplies the
+-- curved fixture via the explicit polynomial surrogate Ŵ_z(x)=(x−z)+(K/3)(‖x−z‖²·z−⟨z,x−z⟩(x−z)), whose
+-- first/second jets are GROUNDED as genuine update-slice HasDerivAt derivatives (surrP_hasDerivAt/
+-- surrQ_hasDerivAt, exact HjetsShape shape). Ŵ_z(0)=−z (surrW_center); ∑ₖzₖ(DŴ(0)eᵢ)ₖ=zᵢ (corrected first
+-- leg, surr_firstLeg_corrected); ∑ₖŴ(0)ₖ(DŴ(0)eᵢ)ₖ=−zᵢ (surr_hVP_value; banked hVP wants +zᵢ);
+-- ∑ₖŴ(0)ₖQₖ=(2K/3)(zᵢ²−‖z‖²) (surr_hVQ_value; banked hVQ wants 0). ★ curved_hVP_fails + ★★ curved_hVQ_fails
+-- REFUTE the banked hVP (=zᵢ) and hVQ (=0) center identities at n=2,z=(1,1),i=0,κ=−3 (LHS=−1≠1; LHS=2≠0).
+-- Finding: the genuine second-jet radial contraction is a NONZERO Riemann-curvature term (=−(2/3)R_{ikil}zᵏzˡ,
+-- the very a₁=R/6 content), so hVQ=0 is GEOMETRICALLY FALSE at general base, not merely unproven — the
+-- curvature defect no flat model can see. Firewall: does NOT identify the surrogate with the opaque
+-- uniformInverseChart (=blocker J3), does NOT prove the corrected bridge in general. std-3 ×8. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.CurvedChartBridgeAudit
