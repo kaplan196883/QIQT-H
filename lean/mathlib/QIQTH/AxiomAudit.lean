@@ -31008,4 +31008,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm1DomainRestrictedBound.hsMixed_gaussDdim_mul_amp_domain_restricted_bound
 #print axioms QIQTH.HCompNearCarryTerm1DomainRestrictedBound.hsMixed_gaussDdim_mul_amp_domain_restricted_bound
 
+-- J4-1024: HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge — generalizes the older
+-- hbaseC2-conditional, q0=0-fixed V/Jacobian-composition Lipschitz mechanism to GENERAL q0
+-- UNCONDITIONALLY, then TRUNCATES the resulting ball-only bound into a GLOBAL Lipschitz-at-0 AmpExt
+-- matching J4-1023's exact interface, and instantiates J4-1023's capstone at Amp:=AmpExt, for ANY
+-- globally bounded + globally Lipschitz abstract weight P (NOT yet the literal Bfac). std-3.
+-- Does NOT plug in literal Bfac; does NOT discharge nb/hCConv/hcomp; does NOT address Bfac's OTHER 3
+-- terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.transported_ratio_regularity_generalK
+#print axioms QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.transported_ratio_regularity_generalK
+#check @QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.amp_of_transported_ratio_global_lipschitz_at_zero
+#print axioms QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.amp_of_transported_ratio_global_lipschitz_at_zero
+#check @QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_transported_ratio
+#print axioms QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge.hsMixed_gaussDdim_mul_amp_domain_restricted_bound_of_transported_ratio
+
 end QIQTH.AxiomAudit

@@ -6297,3 +6297,18 @@ import QIQTH.BaseSlotM1M4ImageOpen
 -- address Bfac's OTHER 3 terms; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1DomainRestrictedBound
+
+-- J4-1024: HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge — generalizes the older
+-- hbaseC2-conditional, q0=0-fixed V/Jacobian-composition Lipschitz mechanism
+-- (BaseSlotInverseChartLipschitz/BaseSlotDetRegularity) to GENERAL q0, UNCONDITIONALLY (using the
+-- later unconditional uniformInverseChart_baseSlot_contDiffAt_generalK in place of hbaseC2), then
+-- TRUNCATES the resulting ball-only Lipschitz bound into a function AmpExt satisfying J4-1023's exact
+-- GLOBAL Lipschitz-at-0 interface (AEStronglyMeasurable + ∀ v, |AmpExt v - AmpExt 0| <= L*||v||),
+-- closing the "V/Jacobian composition" gap J4-1023 flagged as new/open -- for ANY globally bounded +
+-- globally Lipschitz abstract weight P (NOT yet the literal Bfac; Bfac's own global
+-- boundedness+Lipschitz regularity remains a SEPARATE, unestablished gap). Instantiates J4-1023's
+-- capstone at Amp:=AmpExt. Sol (gpt-5.6-sol, high) plan-reviewed before Lean. std-3.
+-- Does NOT plug in literal Bfac; does NOT discharge nb/hCConv/hcomp; does NOT address Bfac's OTHER 3
+-- terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1GeneralQ0InverseChartLipschitzBridge
