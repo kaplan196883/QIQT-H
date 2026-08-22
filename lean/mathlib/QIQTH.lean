@@ -6372,3 +6372,11 @@ import QIQTH.AmpFieldBaseSlotGlobalTruncation
 -- hfac/S' reconciliation, Bfac's other 3 summands, or fb. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.LeviAmpProductGlobalRegularity
+-- J4-1029: HCompNearCarryKPrimeGateRestrictedCoV — closes residual r1 of HCompNearCarryKPrimeBaseFieldCoV
+-- (J4-1010): given an ON-GATE (∀ z ∈ K) jet bundle, produces a genuinely gate-restricted CoV domain
+-- S'' := S' ∩ interior K ⊆ K and DISCHARGES (not assumes) BRICK 2's hfac hypothesis via pointwise BRICK 1
+-- application across S''. Sol (gpt-5.6-sol, high) plan-reviewed: endorsed exactly this scope, flagged
+-- residual r2 (deriving the jet bundle's derivative-existence facts themselves) as a genuinely large,
+-- separate multi-file effort — NOT attempted here. Bfac's other 3 summands, fb, and r3-r6 untouched.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryKPrimeGateRestrictedCoV

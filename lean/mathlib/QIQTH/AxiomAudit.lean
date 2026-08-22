@@ -31084,4 +31084,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.LeviAmpProductGlobalRegularity.leviAmp_product_domain_restricted_bound
 #print axioms QIQTH.LeviAmpProductGlobalRegularity.leviAmp_product_domain_restricted_bound
 
+-- J4-1029: HCompNearCarryKPrimeGateRestrictedCoV — given an ON-GATE (∀ z ∈ K) jet bundle, produces a
+-- genuinely gate-restricted CoV domain S'' := S' ∩ interior K ⊆ K and DISCHARGES (not assumes) BRICK
+-- 2's hfac hypothesis via pointwise BRICK 1 application across S'' — closes residual r1 of
+-- HCompNearCarryKPrimeBaseFieldCoV. Residual r2 (the jet bundle's own derivative-existence facts)
+-- remains OPEN, per Sol (gpt-5.6-sol, high) — a genuinely large, separate multi-file effort. Bfac's
+-- other 3 summands, fb, and r3-r6 untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoV.kPrime_baseField_CoV_of_jetBundle_gateRestricted
+#print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoV.kPrime_baseField_CoV_of_jetBundle_gateRestricted
+
 end QIQTH.AxiomAudit
