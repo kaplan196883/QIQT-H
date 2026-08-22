@@ -15214,3 +15214,58 @@ raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`; `gi
 - (6) flat+curved regression tests — not new math, high value for catching gauge/transpose/lowering/sign errors.
 Blunt prior: (2)/(5) thin, (4) small with sign risk, (3) the real engineering cost. NONE unblock the
 `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`.
+
+## J4-993 — `ExpInverseMetricGauge`: exact inverse-metric radial identity `g̃(x)⁻¹·g_p·x = x` (corrected-hpull item (2)) — commit `cbea3d51`
+
+**Executes item (2) of the corrected-`hpull` program** — the exact inverse-metric identity, the
+inverse companion of J4-992's forward Gauss germ (item (1)). gpt-5.6-sol prior (J4-992/cp866):
+item (2) = **thin algebra** (pointwise linear algebra; Lean friction = matrix-inverse API + index
+bookkeeping, not analysis). Confirmed thin: a one-step un-inversion of item (1).
+
+**The identity.** Item (1)'s forward Gauss germ (`hGauss_pullback_general_concrete`), in operator
+form, is `matToCLM (g̃ x) · x = matToCLM (g_p) · x` near `0` (where `g̃ = expPullbackMetric`,
+`g_p = g p` the base metric). Near `0` the operator `matToCLM (g̃ x)` is a UNIT: at `x=0` it equals
+`matToCLM (g_p)`, a unit (`metricCLMUnit0`, using base-metric nondegeneracy `hinv`); `x ↦ matToCLM (g̃ x)`
+is continuous (entries `C²`, `contDiffAt2_expPullbackMetric_zero`); and units of a Banach algebra are
+OPEN (`Units.isOpen`). Applying the operator inverse to both sides gives
+`Ring.inverse (matToCLM (g̃ x)) · (matToCLM (g_p) · x) = x`, i.e. `g̃(x)⁻¹·g_p·x = x`.
+
+**Built (NEW file `ExpInverseMetricGauge.lean`, no banked file edited).**
+- `clm_apply_eq_sum` (I0) — basis-expansion `T w μ = ∑ j, (T eⱼ)_μ · wⱼ` for a CLM `T` (entry↔action
+  bridge between operator and component forms).
+- `expPullbackMetric_isUnit_nhds_zero` (I1) — `∀ᶠ x in 𝓝 0, IsUnit (matToCLM (g̃ x))`, from continuity
+  at `0` (`DifferentiableAt.continuousAt` on the `matToCLM (g̃ ·)` field) + `metricCLMUnit0` at `0` +
+  `Units.isOpen.mem_nhds`.
+- `inverseMetric_gauss_operator` (I2) — operator form `∀ᶠ x in 𝓝 0,
+  Ring.inverse (matToCLM (g̃ x)) (matToCLM (g_p) x) = x`, via `eventually_all` (collect the per-`i`
+  Gauss germ), `matToCLM_apply`, and `Ring.inverse_mul_cancel`.
+- ★ `inverseMetric_gauss_general` (I3) = **item (2)** — component form
+  `∀ μ, (fun x => ∑ j, g̃⁻¹(x)_{μj}·(∑ b, g_p(j,b)·x^b)) =ᶠ[𝓝 0] (fun x => x^μ)` with
+  `g̃⁻¹ = expPullbackMetricInv`. Surviving hyps ONLY the metric geometry `hsymm/hinv/hg`, NO base gauge
+  `g_p = I`.
+- `inverseMetric_gauss_gauge_of_general` (I4) — regression: under `g_p = I` the identity collapses to the
+  clean inverse radial gauge `∑ j, g̃⁻¹(x)_{μj}·x^j =ᶠ[𝓝 0] x^μ` — the exp-pullback analog of
+  `CurvedCenterIdentities.curvedRNCInv_radialGauge` and `RadialGaugeInterface.RadialNormalCoordinateGauge.invGauge`.
+
+**Honest scope / non-vacuity.** Genuine, axiom-free, thin matrix-inverse algebra un-inverting
+already-banked machinery; no new analytic content. gpt-5.6-sol prior: item (2), like item (1), is
+**probably NOT on the critical path** for the textbook `a₁=R/6` route. `a₁=R/6` remains STRICTLY
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.ExpInverseMetricGauge` 0 err (8504 jobs); throwaway `ChkExpInvMetric`
+std-3 all 5 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err
+(10302 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show cbea3d51 --stat` = 3 files (+237); pushed. Stray sibling
+`docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Updated corrected-`hpull` program status (after items (1), (2) delivered).**
+- (1) DONE (J4-992) — general-base forward Gauss germ, no `g_p=I`.
+- (2) DONE (J4-993, this) — exact inverse-metric identity `g̃(x)⁻¹·g_p·x = x`.
+- (3) exact inverse second-jet `D²(g̃⁻¹)(0) = −g_p⁻¹·D²g̃(0)·g_p⁻¹` — the likely Lean engineering sink.
+- (4) radial-endpoint `W_z(0)=−z` — elementary with sign risk (DIFFERENT chart family:
+  `uniformInverseChart`, not `expPullbackMetric`).
+- (5) corrected first leg `r·Ae_i=−z_i` — thin after (4).
+- (6) flat+curved regression tests.
+Items (1)/(2) live in the `expPullbackMetric` world (self-consistent with each other); (4)/(5) concern
+the `uniformInverseChart` inverse-chart jets `P/Q` that `hpull` actually consumes. NONE unblock the
+`{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`.
