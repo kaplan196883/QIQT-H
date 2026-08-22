@@ -6166,3 +6166,15 @@ import QIQTH.ChartIFTPackageGeneralQ0
 -- kPrime factorization / terminalVelAt_chartReplace_sliver_bound remain SEPARATE, NOT supplied. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartGeneralChangeVarEvalSlot
+-- J4-1013 (ReversalLinkBallIntegral): lifts HCompNearCarryFullyClosed.gaussDdim_reversal_link's LOCAL
+-- (=ᶠ[𝓝 x]) evenness/reversal equality to a LITERAL, radius-explicit weighted ball-integral identity
+-- (reversal_link_ball_radius extracts an explicit r>0 via Metric.eventually_nhds_iff;
+-- reversal_link_ball_integral lifts it: ∫ z in ball x₀ ρ, gaussDdim τ (U z x₀)·B z = ∫ z in ball x₀ ρ,
+-- gaussDdim τ (T_x₀(U x₀ z))·B z for every 0<ρ≤r) — the smallest genuinely non-vacuous sub-lemma
+-- gpt-5.6-sol (high, plan-reviewed before Lean) flagged as the tractable next increment, connecting
+-- kPrime's J4-1010 base-slot factorization shape to J4-1012's eval-slot T_x-composed CoV shape on the
+-- SAME explicit ball. Does NOT reconcile this r with J4-1012's IFT-ρ or J4-879's R (Sol: no
+-- comparability established, and domain containment W_x''(ball x ρ)⊆ball 0 R is NOT derivable from the
+-- banked chart∘exp=id germ alone), nor compose into any literal bound on nb. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ReversalLinkBallIntegral

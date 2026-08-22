@@ -30807,4 +30807,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartGeneralChangeVarEvalSlot.chart_general_change_variables_concrete_generalQ0
 #print axioms QIQTH.ChartGeneralChangeVarEvalSlot.evalSlot_terminalVel_weighted_CoV
 
+-- J4-1013 (ReversalLinkBallIntegral): lifts HCompNearCarryFullyClosed.gaussDdim_reversal_link's LOCAL
+-- (=ᶠ[𝓝 x]) evenness/reversal equality (kPrime's base-slot Gaussian shape U z x₀ vs J4-1012's eval-slot
+-- T_x-composed shape T_x₀(U x₀ z)) to a LITERAL, radius-explicit weighted ball-integral identity.
+-- reversal_link_ball_radius extracts an explicit r>0 (Metric.eventually_nhds_iff) with the pointwise
+-- equality holding for dist z x₀ < r; reversal_link_ball_integral lifts it (setIntegral_congr_fun) to
+-- ∫ z in ball x₀ ρ, gaussDdim τ (U z x₀)·B z = ∫ z in ball x₀ ρ, gaussDdim τ (T_x₀(U x₀ z))·B z for
+-- every 0<ρ≤r and every amplitude B — the smallest genuinely non-vacuous sub-lemma gpt-5.6-sol (high,
+-- plan-reviewed before Lean) flagged as the tractable next increment on nb's STEP-4c bridge. Does NOT
+-- reconcile this r with J4-1012's IFT-package ρ or J4-879's near-isometry-data R (Sol: no comparability
+-- established among the three independently-existential radii), nor supply the domain-containment fact
+-- W_x''(ball x ρ)⊆ball 0 R (NOT derivable from the banked chart∘exp=id germ alone — would need
+-- ContinuousAt W_x x with W_x x=0, not yet banked in this form), nor compose into any literal
+-- difference-form bound on nb. std-3, no sorry, no new axioms, no existing file edited. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.ReversalLinkBallIntegral.reversal_link_ball_radius
+#print axioms QIQTH.ReversalLinkBallIntegral.reversal_link_ball_integral
+
 end QIQTH.AxiomAudit
