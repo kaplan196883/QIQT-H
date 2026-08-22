@@ -6064,3 +6064,15 @@ import QIQTH.HCompBaseSlotAntisymmetryQuadratic
 -- Does NOT touch kPrime/heatHessMult/hcomp/the base-slot CoV. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompBaseSlotAntisymmetryConcrete
+-- J4-1004: BaseSlotDerivFromAntisymEvalSlot (abstract) + UniformInverseChartBaseSlotDisplacementGeneralQ0
+-- (concrete) — combining the ALREADY-BANKED eval-slot derivative-is-identity fact at general q₀
+-- (JointRNCRegularityInterfaceLocal, J4-856/857) with the ALREADY-BANKED antisymmetry-sum fact
+-- (HCompBaseSlotAntisymmetryQuadratic/Concrete, J4-1002/1003) extracts the base-slot derivative
+-- D₁(uniformInverseChart)(q₀,q₀) = -Id INDIVIDUALLY at a GENERAL q₀ (via subtraction), plus the
+-- QUADRATIC base-slot displacement bound ‖invChart p q₀ + (p-q₀)‖ ≤ C‖p-q₀‖². Generalizes
+-- ChartW0Fderiv/BaseVaryingIFTPackage (q₀=0-only) to general q₀ — resolves the cp884-diagnosed gap.
+-- Sol gpt-5.6-sol high GO 2026-08-22. std-3 ×5 across both files. Does NOT touch kPrime/heatHessMult/
+-- hcomp/herr_gate/hmin_gate literally (rncRadialSq-comparison + K-gate re-threading remain separate).
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.BaseSlotDerivFromAntisymEvalSlot
+import QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0

@@ -30640,4 +30640,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompBaseSlotAntisymmetryConcrete.uniformInverseChart_diag_eventually
 #print axioms QIQTH.HCompBaseSlotAntisymmetryConcrete.uniformInverseChart_antisymmetryDefect_quadratic
 
+-- J4-1004 — BaseSlotDerivFromAntisymEvalSlot (abstract) + UniformInverseChartBaseSlotDisplacementGeneralQ0
+-- (concrete): combines the ALREADY-BANKED eval-slot derivative-is-identity fact at general q₀
+-- (JointRNCRegularityInterfaceLocal.uniformInverseChart_slice_fderiv_id_diag, J4-856/857) with the
+-- ALREADY-BANKED antisymmetry-sum fact (HCompBaseSlotAntisymmetry.antisymmetryDefect_fderiv_zero,
+-- J4-1002/1003) via HasFDerivAt.sub to extract the base-slot derivative D₁Φ(q₀,q₀) = -Id INDIVIDUALLY at
+-- a GENERAL q₀ (baseSlot_fderiv_neg_id_of_antisym_evalSlot), then the mean-value-twice technique to get
+-- the QUADRATIC base-slot displacement ‖Φ p q₀ + (p-q₀)‖ ≤ C‖p-q₀‖² (baseSlot_quadratic_displacement_
+-- of_antisym_evalSlot). Concretely instantiated at Φ:=uniformInverseChart g gi hC (isCompact_closedBall
+-- q₀ 1), generalizing ChartW0Fderiv/BaseVaryingIFTPackage's q₀=0-only base-slot derivative/displacement
+-- facts to a GENERAL q₀ — resolves the cp884-diagnosed gap. Sol gpt-5.6-sol high GO 2026-08-22, sympy
+-- gate baseslot_deriv_from_antisym_and_evalslot.py. std-3 ×5. Does NOT touch kPrime/heatHessMult/hcomp/
+-- herr_gate/hmin_gate literally (rncRadialSq-comparison + K-gate re-threading remain separate, non-trivial
+-- steps). NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.BaseSlotDerivFromAntisymEvalSlot.baseSlot_fderiv_neg_id_of_antisym_evalSlot
+#print axioms QIQTH.BaseSlotDerivFromAntisymEvalSlot.baseSlot_quadratic_displacement_of_antisym_evalSlot
+#print axioms QIQTH.BaseSlotDerivFromAntisymEvalSlot.baseSlot_hyp_satisfiable
+#print axioms QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0.uniformInverseChart_evalSlot_hasFDerivAt_id_diag
+#print axioms QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0.uniformInverseChart_baseSlot_fderiv_neg_id_general_q0
+#print axioms QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0.uniformInverseChart_baseSlot_quadratic_displacement_general_q0
+
 end QIQTH.AxiomAudit
