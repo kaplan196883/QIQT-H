@@ -30910,4 +30910,19 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryHsMixedHeatHessMultBridge.hsMixed_eq_heatHessMult_sub_firstMomentCorrection
 #print axioms QIQTH.HCompNearCarryHsMixedHeatHessMultBridge.kPrime_term1_eq_heatHessMult_sub_firstMomentCorrection_mul_amp
 
+-- J4-1018: G2 gate — a decoupled Gaussian-tail / domain-restriction bound for J4-998's exact
+-- full-space cancellation integral_heatHessMult_eq_zero: for a FIXED radial threshold R, the
+-- ball-restricted heatHessMult tail correction is exponentially small in R²/τ (sympy-verified o(√ε)
+-- against the sliver target rate). DECOUPLED infrastructure, NOT yet wired to the opaque IFT domain S'
+-- (r3/r4 reconciliation, still open). NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatHessMultBallTail.gaussDdim_tail_pointwise_le
+#check @QIQTH.HeatHessMultBallTail.gaussDdim_tail_mass_le
+#check @QIQTH.HeatHessMultBallTail.normPow_gaussDdim_tail_le
+#check @QIQTH.HeatHessMultBallTail.heatHessMult_ball_tail_le
+#print axioms QIQTH.HeatHessMultBallTail.gaussDdim_tail_pointwise_le
+#print axioms QIQTH.HeatHessMultBallTail.gaussDdim_tail_mass_le
+#print axioms QIQTH.HeatHessMultBallTail.normPow_gaussDdim_tail_le
+#print axioms QIQTH.HeatHessMultBallTail.heatHessMult_ball_tail_le
+
 end QIQTH.AxiomAudit

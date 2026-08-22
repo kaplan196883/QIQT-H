@@ -6219,3 +6219,16 @@ import QIQTH.HCompNearCarryHsMixedHeatHessMultBridge
 -- treatment — G2/G1 territory, deferred). NOT nb/hcomp/a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HWintFullBallDischarge
+-- J4-1018: G2 gate (of Sol's G1/G2/G3 staged plan) — a decoupled Gaussian-tail / domain-restriction
+-- bound for HeatHessianMomentCancellation's (J4-998) exact full-space cancellation
+-- integral_heatHessMult_eq_zero. Sympy-verified FIRST
+-- (docs/qg_roadmap/rnc_sympy/hcomp_g2_ball_tail_bound_check.py) that a FIXED radial threshold R gives
+-- an exponentially-small-in-R²/τ tail correction, genuinely o(√ε) when integrated over the sliver
+-- (NOT threatening the O(√ε) target rate), via the elementary exp(-r²/4τ)=exp(-r²/8τ)·exp(-r²/8τ)
+-- split (same route as gaussDdim_replace_bound/S5b). Sol (gpt-5.6-sol, high) GO-confirmed before Lean.
+-- Lands gaussDdim_tail_pointwise_le, gaussDdim_tail_mass_le (k=0), normPow_gaussDdim_tail_le (k≥1,
+-- generic), and the ★ payoff heatHessMult_ball_tail_le: |∫_{ball} heatHessMult| is bounded
+-- exponentially small via integral_add_compl + integral_heatHessMult_eq_zero + abs_heatHessMult_le.
+-- std-3. DECOUPLED infrastructure — NOT yet wired to the opaque IFT domain S' (r3/r4 reconciliation,
+-- still open). NOT nb/hcomp/a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HeatHessMultBallTailBound
