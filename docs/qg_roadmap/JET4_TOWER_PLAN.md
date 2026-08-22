@@ -16145,3 +16145,58 @@ applies to rate/scaling claims, not to Mathlib API composition); `lake env lean`
 before wiring; `lake build` (full) 0 err (10318 jobs); `axiom_budget_check.sh` raw axiom count 0 (budget
 0), no sorryAx, no deleted-axiom regressions; vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`
 (both public theorems pinned). Commit `527b5d35`, pushed.
+
+### J4-1009 — `BoundaryIntegralChartImageConcreteCoV`: ORIENTATION CORRECTION + Layer A ∘ B(concrete)
+— composing J4-1008's base-slot M1–M4 into J4-271's ALREADY-BANKED Layer A (commit `e919905d`)
+
+**THE TASK / ORIENTATION CORRECTION.** J4-1008's own report claimed "Layer A (the set-integral rewrite
+onto the gate, factoring `Wit τ 0 z` as `gaussDdim τ (W₀ z) · A τ z`) remains a SEPARATE, unstarted
+brick." Re-checking `ChartImageAIConcrete.lean` (J4-271, pre-existing, NOT built by J4-1008 or this
+dispatch) shows this is FALSE: Layer A (`boundary_integral_eq_gate_integral`, "★ LAYER A, CONCRETE &
+FULLY DISCHARGED") and Layer A ∘ B(abstract) (`boundary_integral_eq_chartImage_integral`) were already
+banked there, for the BASE-VARYING chart `Wbv : z ↦ uniformInverseChart g gi hC hK z 0`. What J4-271's
+own "ORIENTATION VERDICT" flagged as the actual missing piece was the CONCRETE M1–M4 change-of-variables
+bundle *for `Wbv` specifically* (J4-270's `ChartIFTPackage` was for the field-varying `Wfv`, the wrong
+orientation) — and J4-1008's `uniformInverseChart_baseSlot_M1M4_generalK`, at `q₀ := 0`, builds EXACTLY
+that missing bundle (its `W p := uniformInverseChart g gi hC hK p q₀` becomes `Wbv` on the nose at
+`q₀ = 0`). This dispatch performs the composition J4-1008 itself did not attempt.
+
+**THE ROUTE.** `BaseSlotM1M4Assembly.uniformInverseChart_baseSlot_M1M4_generalK` at `q₀ := 0` gives an
+open `S' ∋ 0` with M1–M4. `Metric.isOpen_iff` extracts a ball `Metric.ball 0 ρ ⊆ S'`. `HasFDerivWithinAt
+.mono` / `Set.InjOn.mono` (both confirmed against actual Mathlib source: `nonrec theorem
+HasFDerivWithinAt.mono (h : HasFDerivWithinAt f f' t x) (hst : s ⊆ t) : HasFDerivWithinAt f f' s x` /
+`theorem InjOn.mono (h : s₁ ⊆ s₂) (ht : InjOn f s₂) : InjOn f s₁`) restrict M1/M2 from `S'` to the ball;
+M3/M4 weaken trivially by the same subset. Feeding this CoV data into `ChartImageAIConcrete.boundary_
+integral_eq_chartImage_integral` (unedited) gives the result directly.
+
+**THE DELIVERABLE.** `BoundaryIntegralChartImageConcreteCoV.lean` (ns `QIQTH.BoundaryIntegralChartImage
+ConcreteCoV`):
+- ★★★★ `boundary_integral_eq_chartImage_integral_concreteCoV` — THE PAYOFF: for any compact `K` with
+  `0 ∈ interior K`, any gate family `S`, any `a b τ f`, there is a CONCRETE `ρ > 0` and CONCRETE left
+  inverse `V` (both extracted from J4-1008's IFT-built open set, not free parameters) such that — given
+  the honest gate-activation (`hGgate`) and off-ball-support (`hSupp`) facts at that `ρ` (the only
+  remaining hypotheses; genuine non-analytic "which points are gated" bookkeeping, NOT the CoV data
+  itself) — `∫ z, Wit τ 0 z · f z = ∫ w in Wbv''(ball 0 ρ), gaussDdim τ w · (chartFieldAmp … τ (V w) 0 ·
+  f (V w) / |det|)`. Unlike J4-271's `boundary_integral_eq_chartImage_integral`, the CoV data (`f'`,
+  `hfd`, `hinj`, `V`, `hV`, `hJpos`) is no longer carried as free hypotheses of the caller — it is
+  CONSTRUCTED from the IFT package. THE FIRST literal (non-abstract-CoV-data) chart-image rewrite of the
+  boundary witness integral in this campaign.
+
+**Honest scope / distance.** Does NOT touch `hcomp`/`nb`/`hCConv`/`kPrime` — `VanVleckGatedSpatial
+Symmetry.hcomp` concerns the concrete field-Hessian kernel `kPrime`'s per-direction sliver integral
+(`HCompNearFarSplit`'s `nb`/`fb` split), a DIFFERENT object from the boundary-witness-against-test-
+function integral `∫z Wit τ 0 z · f z` this file rewrites — the two threads (W1-wall boundary witness vs.
+R1/hcomp base↔eval symmetry) remain SEPARATE, as they were before this dispatch. The Layer-C moving-
+integrand inputs (`hmeas`/`hbound`/`hlocal` of `ChartImageAIConcrete.chartImage_approx_identity_
+conditional`) and the gate-activation/support facts (`hGgate`/`hSupp`, now at the CONCRETE `ρ` this file
+produces, still genuinely required) remain OPEN for the W1-wall thread. `a₁=R/6` remains STRICTLY
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** No new asymptotic/rate claim (pure topology/differentiability/openness bookkeeping composing
+two already-banked bricks — no `sorry`, no new axioms, no `:= True`, no vacuous/unsatisfiable hypothesis,
+none equal to the conclusion, no existing file edited); `lake build` (full) 0 err (10319 jobs); in-file +
+`AxiomAudit.lean` `#print axioms` std-3 (propext/Classical.choice/Quot.sound) on the public theorem, no
+sorryAx, no custom axiom; `axiom_budget_check.sh` raw axiom count 0 (budget 0), no sorryAx, no deleted-
+axiom regressions; vacuum-grep clean (only pre-existing informational hits); wired `QIQTH.lean` +
+`AxiomAudit.lean`. Commit `e919905d`, pushed. Pre-existing sibling-session scratch
+`docs/qg_roadmap/rnc_sympy/{baseslot_ift_neg_id_check,hcomp_*_feasibility}.py` left untracked, NOT added.
