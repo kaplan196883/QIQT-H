@@ -31094,4 +31094,22 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoV.kPrime_baseField_CoV_of_jetBundle_gateRestricted
 #print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoV.kPrime_baseField_CoV_of_jetBundle_gateRestricted
 
+-- J4-1030: GeneralBaseJetsMixed — the general-base MIXED (off-diagonal) second field line-jet
+-- existence brick at the field CENTRE 0, generalizing GeneralBaseJets.chartField_secondJet_of_contDiffAt
+-- to two directions i,j via the ContDiffAt.fderiv_right mechanical bridge (no new derivative-existence
+-- theory needed). Gives PI/PJ/Q in the exact hJetVi/hJetVj/hJetQ shapes, RESTRICTED to a near-0
+-- neighbourhood (hJetVi/hJetVj) and the field centre 0 (hJetQ). Does NOT close the literal
+-- ∀y-unrestricted, ∀z∈K uniform-in-fixed-x hypothesis (chart-coverage across K is separately open, per
+-- gpt-5.6-sol high) — cp983's r2 diagnosis for the FULL hypothesis stands — but confirms the LOCAL
+-- calculus piece is mechanical/free. Bfac's other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatResidualBound.chartField_secondJetMixed_of_contDiffAt
+#print axioms QIQTH.HeatResidualBound.chartField_secondJetMixed_of_contDiffAt
+#check @QIQTH.HeatResidualBound.chartField_secondJetMixed_general
+#print axioms QIQTH.HeatResidualBound.chartField_secondJetMixed_general
+#check @QIQTH.HeatResidualBound.chartField_secondJetMixed_center
+#print axioms QIQTH.HeatResidualBound.chartField_secondJetMixed_center
+#check @QIQTH.HeatResidualBound.chartField_secondJetMixed_domain
+#print axioms QIQTH.HeatResidualBound.chartField_secondJetMixed_domain
+
 end QIQTH.AxiomAudit
