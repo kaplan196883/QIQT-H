@@ -15269,3 +15269,72 @@ std-3 all 5 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; 
 Items (1)/(2) live in the `expPullbackMetric` world (self-consistent with each other); (4)/(5) concern
 the `uniformInverseChart` inverse-chart jets `P/Q` that `hpull` actually consumes. NONE unblock the
 `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`.
+
+## J4-994 — `CurvedRNCGeodesicRay`: EXACT radial endpoint `W_z(0)=−z` for the CONCRETE curved witness (corrected-hpull item (4)) — commit `d491fc0c`
+
+**Executes corrected-`hpull` item (4) — the EXACT radial endpoint — for the CONCRETE curved witness**
+`g^K = curvedRNCMetric κ` (`κ ≤ 0`, `Ric(0) = (n−1)κ·δ ≠ 0`), the ONE concrete witness the campaign
+uses for non-vacuity. cp867 (gpt-5.6-sol high) had CORRECTED the cp866 "elementary unfold" prior:
+exact `W_z(0)=−z` is FALSE for abstract/arbitrary-coordinate `g` (there `log_z(0)=−z+O(‖z‖²)`, only
+the approximate `chartW0_displacement` holds), but holds EXACTLY in RADIAL NORMAL COORDINATES because
+radial lines `t↦tz` are geodesics — and flagged the needed `uniformFlowExp z (−z)=0` (via ODE-
+uniqueness against `geodesicField`) as "a genuine substantial geodesic-ODE increment, NOT cleanly
+bankable in one dispatch". This increment DOES it for the concrete metric.
+
+**The concrete-metric geodesic fact.** For `g^K`, the exact metric radial gauge (`metricGaussGauge_curvedRNC`)
+forces `Γ^k_{ij}(x)·xⁱxʲ = 0` EXACTLY, so radial lines are exactly geodesic. Computed directly from the
+banked general first derivative `pd_curvedRNCMetric_fun`
+(`∂_p g^K_{ir}(x) = −(K/3)(2δ_{ir}x_p − δ_{ip}x_r − δ_{rp}x_i)`): the lowered contracted bracket on the
+ray is `−(K/3)·s·(2δ_{αk}zʲ + 2δ_{αj}zᵏ − 4δ_{jk}z_α)`, contracting against `zʲzᵏ` to
+`−(K/3)·s·(2z_α‖z‖² + 2z_α‖z‖² − 4z_α‖z‖²) = 0`. **Sympy-verified n=2,3** (pd formula; the gi-free ray
+contraction; and the FULL raised Christoffel with the actual Sherman–Morrison inverse vanishing on the
+ray for all τ).
+
+**Built (NEW file `CurvedRNCGeodesicRay.lean`, no banked file edited).**
+- `curvedRNC_bracket_ray_zero` — the gi-free lowered contracted Christoffel bracket vanishes on the ray
+  `s·z` (concrete δ-algebra via `pd_curvedRNCMetric_fun`).
+- `curvedRNC_christoffel_ray_zero` — the raised contraction `∑_{jk} Γ^i_{jk}(s·z)·zʲzᵏ = 0` for ANY
+  inverse `gi` (bracket = 0 ∀α ⟹ `½∑_α gi_{iα}·0 = 0`).
+- `curvedRNC_straightLine_hasDerivAt` — the phase curve `γ(τ)=((1−τ)·z,−z)` solves the geodesic ODE
+  `γ'(τ)=geodesicField(g^K,gi^K)(γ τ)` for ALL `τ` (velocity `−z` matches `p.2`; acceleration `0` by
+  the ray contraction at `s=1−τ`, using `(−z)ʲ(−z)ᵏ = zʲzᵏ`).
+- ★ `curvedRNC_uniformFlowExp_neg_eq_zero` — `uniformFlowExp (g^K)(gi^K) hC hS z (−z) = 0` (for `z∈S`,
+  `‖z‖≤ρ_S`), via ODE-uniqueness (`geodesic_local_unique`) matching the straight line against the
+  Skolemized geodesic tube on `Ioo(−1,3/2)⊇[0,1]` (both solve the ODE, agree at `τ=0`, stay in a common
+  closed ball where the C^∞ field is Lipschitz; at `τ=1` line=`(0,−z)` ⟹ tube endpoint position `0`).
+- ★ `curvedRNC_uniformInverseChart_zero_eq_neg` — `W_z(0)=−z` EXACTLY (`∃δ₀>0, ∀z∈S, ‖z‖<δ₀ →
+  ‖z‖≤ρ_S → uniformInverseChart … z 0 = −z`), from the banked left-inverse germ
+  `uniformInverseChart_huniformChart` (`W_q(φ_q z')=ᶠ[𝓝 v] z'`) evaluated at `v=−z` via
+  `Filter.EventuallyEq.eq_of_nhds`, combined with the forward endpoint `φ_z(−z)=0`.
+- `curvedRNC_uniformInverseChart_zero_eq_neg_inhabited` — NON-VACUITY: an ACTUAL nonzero `z` (on
+  `S=closedBall 0 1`, `n≥1`) with `W_z(0)=−z`, using `uniformFlowRadius_pos` + `δ₀>0`.
+
+**gpt-5.6-sol (high, 2026-08-22) audit — GO.** ODE-uniqueness sound (uses the tube's proved spec, not
+its Skolemized definition; opacity irrelevant); compact-slab bounding is correct; genuinely non-vacuous
+given `0<ρ_S`. Inverse-chart extension sound (`eq_of_nhds` legitimately gives equality at `−z`;
+`‖−z‖<δ₀` is the right condition). **Effect on `hpull`: settles ONLY the zeroth-order value `r:=W_z(0)=−z`;
+does NOT prove the corrected first leg `r·Ae_i=−z_i`** (after substitution `z·Ae_i=z_i`, still needs the
+inverse-chart FIRST jet `A`) — useful prerequisite, no `hpull` leg discharged. The other legs still need
+the 1st/2nd-jet identities (items (3)/(5)).
+
+**Honest scope / non-vacuity.** Genuine, axiom-free, non-vacuous concrete-metric differential geometry:
+radial lines are EXACTLY geodesic for `g^K` and `W_z(0)=−z` holds exactly at genuinely-curved witnesses.
+Does NOT discharge any `hpull` analytic leg. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.CurvedRNCGeodesicRay` 0 err (8664 jobs); throwaway `ChkCurvedRay` std-3
+all 6 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err
+(10303 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show d491fc0c --stat` = 3 files (+410); pushed. Stray sibling
+`docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Updated corrected-`hpull` program status (after items (1), (2), (4) delivered).**
+- (1) DONE (J4-992) — general-base forward Gauss germ, no `g_p=I`.
+- (2) DONE (J4-993) — exact inverse-metric identity `g̃(x)⁻¹·g_p·x = x`.
+- (4) DONE (J4-994, this) — EXACT `W_z(0)=−z` for the concrete `curvedRNCMetric κ` (radial lines exactly
+  geodesic + ODE-uniqueness + left-inverse germ). Does NOT discharge the corrected first leg (5).
+- (3) exact inverse second-jet `D²(g̃⁻¹)(0) = −g_p⁻¹·D²g̃(0)·g_p⁻¹` — the likely Lean engineering sink.
+- (5) corrected first leg `r·Ae_i=−z_i` — still needs the inverse-chart FIRST jet `A` (NOT unblocked by
+  the zeroth-order value alone, per Sol).
+- (6) flat+curved regression tests.
+NONE unblock the `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`.
