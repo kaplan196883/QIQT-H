@@ -15841,3 +15841,76 @@ UNCHANGED. NOT `a₁=R/6`.
 builds 0 err; `#print axioms` std-3 all (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom;
 `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`.
 Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py` left untracked, NOT added.
+
+## J4-1004 (Sol-consulted GO, `gpt-5.6-sol` high, 2026-08-22) — base-slot derivative/displacement at GENERAL `q₀`: resolving the cp884-diagnosed "eval-slot quadratic linearization" gap [AF]
+
+**Context.** cp884 (a diagnostic-only dispatch, no commit) diagnosed a precise gap: generalizing
+`ChartW0Fderiv`/`BaseVaryingIFTPackage`'s base-direction chart derivative `D₁Φ(0,0) = -Id` from `q₀ = 0`
+to a GENERAL base point `q₀`, needed by `herr_gate`/`hmin_gate` (`HerrHminCoercivity.lean`) to generalize
+beyond `q₀ = 0`. cp884 flagged a "genuinely missing ingredient" for a future dispatch: an eval-slot
+quadratic-linearization theorem at general `q₀`. This dispatch RE-VERIFIED that diagnosis against the
+actual source files (per campaign discipline — dispatch prose can go stale) rather than trusting it, and
+found it was STALE on one point but genuinely correct on the harder residual.
+
+**RE-VERIFICATION FINDING #1 (stale part).** The "eval-slot linearization at general q₀" cp884 called
+missing was ALREADY BANKED — `JointRNCRegularityInterfaceLocal.uniformInverseChart_slice_fderiv_id_diag`
+(J4-856/857) proves exactly `fderiv (uniformInverseChart g gi hC (isCompact_closedBall q₀ 1) q₀) q₀ = Id`
+for a GENERAL `q₀` — i.e. `D₂Φ(q₀,q₀) = Id`. cp884's diagnosis checked only `ChartW0Fderiv`/
+`BaseVaryingIFTPackage` (both `q₀ = 0`-only) and missed this general-`q₀` fact banked in a different file.
+
+**RE-VERIFICATION FINDING #2 (genuine residual, closed here).** What was genuinely NOT derivable from
+any single banked theorem was the BASE-slot (D₁) partial INDIVIDUALLY at general `q₀`. J4-1002's
+`antisymmetryDefect_fderiv_zero` only pins the SUM `D₁Φ(q₀,q₀) + D₂Φ(q₀,q₀) = 0`. COMBINING it with
+Finding #1's `D₂Φ(q₀,q₀) = Id` via elementary subtraction (`HasFDerivAt.sub`) extracts
+`D₁Φ(q₀,q₀) = -Id` INDIVIDUALLY — genuinely new content (no single existing theorem states it), but a
+short, low-risk derivation once the two ingredients are identified. Sol (`gpt-5.6-sol`, high) confirmed
+GO before any Lean was written: "the packaged general-q₀ base-slot derivative and displacement theorem
+appears genuinely missing and is exactly useful downstream."
+
+**THE SYMPY GATE.** `docs/qg_roadmap/rnc_sympy/baseslot_deriv_from_antisym_and_evalslot.py` verifies
+symbolically (a) the linear-algebra step `D₁Φ = 0 − D₂Φ = −Id` with a GENERIC 2×2 matrix standing in for
+`D₂Φ(q₀,q₀)` (not hard-coded to `Id`) before specializing — confirming the derivation is a pure linear
+identity, not an artefact of the specific value `Id`; (b) the quadratic Taylor-remainder rate via an
+extremal 1-D model `h(x) = -(x-q₀) + (M/2)(x-q₀)²`, confirming the remainder is exactly `O((p-q₀)²)`,
+strictly higher order than the linear term.
+
+**THE DELIVERABLES.**
+- `BaseSlotDerivFromAntisymEvalSlot.lean` (ns `QIQTH.BaseSlotDerivFromAntisymEvalSlot`), fully abstract
+  in `Φ` (mirrors J4-1002's abstraction discipline):
+  - ★★ `baseSlot_fderiv_neg_id_of_antisym_evalSlot` — Step A: (F1) diagonal vanishing + (F3) joint
+    `ContDiffAt ℝ 2` + (F4) eval-slot normalization `HasFDerivAt (fun v => Φ q₀ v) Id q₀` ⟹
+    `HasFDerivAt (fun p => Φ p q₀) (-Id) q₀`.
+  - ★★★ `baseSlot_quadratic_displacement_of_antisym_evalSlot` — Step B, THE PAYOFF: under the SAME
+    (F1)/(F3)/(F4), `∃ r>0, C≥0, ∀ p, ‖p-q₀‖<r → ‖Φ p q₀ + (p-q₀)‖ ≤ C‖p-q₀‖²`, via the mean-value-twice
+    technique already used twice in this codebase (`jointRNCRegularityLocal_of_diag`'s `hVdisp`,
+    `antisymmetryDefect_quadratic_bound`).
+  - `baseSlot_hyp_satisfiable` — non-vacuity, `Φ p q := q - p` (exactly antisymmetric, defect ≡ 0).
+- `UniformInverseChartBaseSlotDisplacementGeneralQ0.lean` (ns
+  `QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0`), the CONCRETE instance at
+  `Φ := uniformInverseChart g gi hC (isCompact_closedBall q₀ 1)`:
+  - `uniformInverseChart_evalSlot_hasFDerivAt_id_diag` — (F4) upgrade: the banked `fderiv`-equality form
+    upgraded to `HasFDerivAt`, via `uniformInverseChart_slice_contDiffAt_diag`'s differentiability.
+  - ★★ `uniformInverseChart_baseSlot_fderiv_neg_id_general_q0` — the base-slot derivative at GENERAL
+    `q₀`: `HasFDerivAt (fun p => uniformInverseChart … p q₀) (-Id) q₀`. Generalizes
+    `ChartW0Fderiv.chartW0_hasFDerivAt_zero` (`q₀=0`-only) to general `q₀`.
+  - ★★★ `uniformInverseChart_baseSlot_quadratic_displacement_general_q0` — THE CONCRETE PAYOFF:
+    `∃ r>0, C≥0, ∀ p, ‖p-q₀‖<r → ‖uniformInverseChart … p q₀ + (p-q₀)‖ ≤ C‖p-q₀‖²`. Generalizes
+    `BaseVaryingIFTPackage`'s `chartW0_displacement`-derived quadratic base displacement (`q₀=0`-only)
+    to general `q₀`.
+
+**Honest scope / distance.** This is the DERIVATIVE/DISPLACEMENT layer only. `herr_gate`/`hmin_gate`
+additionally need: (i) the two-sided `rncRadialSq`-comparison error (`chartW0_rncRadialSq_error`'s
+`L·‖z-q₀‖·rncRadialSq(z-q₀)` shape) re-derived at general `q₀` from this one-sided quadratic bound —
+NOT attempted here, a separate non-trivial step (the `q₀=0` route uses a stronger
+`ApproximatesLinearOn`/bootstrap chain, not the mean-value-twice technique used here); (ii) the
+compact-set `K = closedBall q₀ 1` gate re-threading, since `HerrHminCoercivity` is stated for an
+ARBITRARY fixed `hK`, not the `q₀`-centered `K` used here; (iii) the literal base-slot change of
+variables into `hcomp`'s `∫z`/`∫s` integral shape. Does NOT touch `kPrime`/`heatHessMult`/`hcomp`
+literally. `hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build` (full) 0 err (10314 jobs); throwaway `chk1004.lean` + `#print axioms` std-3 all
+5 theorems (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom (deleted after confirming);
+`axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`.
+Commit `ed88be61`. Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py` left
+untracked, NOT added.
