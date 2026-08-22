@@ -6445,3 +6445,18 @@ import QIQTH.UniformFlowKIndep
 -- hxmem is available, collapsing nb's term1 residue set from {hxmem,hd} to {hxmem}. Bfac's other 3
 -- summands, fb untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryHdFromHxmem
+
+-- J4-1035: LeviBaseGaussEnvelopeConst -- fb's hEmeas/hBLgauss slot re-routed through
+-- ConstRadiusGateExport's LITERAL constant-radius gate (no Classical.choose) instead of the opaque
+-- .choose gate leviBase_gaussDdim2s_envelope inherits from OrderOneGeometry. Replays the
+-- gate-polymorphic downstream chain (heatOp_gatedWitnessN1_eq_zero_of_nonpos,
+-- iterConvIntegrableW_of_locally_bound_baseMeas, leviSeries_dominatedW_le) sourced from
+-- constRadius_package_and_S1; then composes into HZMassCappedWindowClosed's EXACT hBLgauss a.e.-in-s
+-- shape (hBLgauss_capped_window_CONST). Measurable cf is GONE from the hypothesis list entirely,
+-- replaced by the satisfiable numeric antecedent c < δ₀ (two independently-constructed positive
+-- reaches -- not a foundational measurability gap). Consulted gpt-5.6-sol (high): confirmed the
+-- routing is sound (abstract BL/CB interface makes any witness-gate legitimate) with the caveat that
+-- the result stays conditional on c < δ₀. fb's other five hypotheses (hint, hBFpeak, hBLnn, hPpknn,
+-- hPCbound/hMnn) are UNTOUCHED and remain exactly as HZMassCappedWindowClosed.lean states them.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.LeviBaseGaussEnvelopeConst

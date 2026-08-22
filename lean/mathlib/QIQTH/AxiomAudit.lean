@@ -31164,4 +31164,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryHdFromHxmem.hd_of_hxmem_concreteGate
 #print axioms QIQTH.HCompNearCarryHdFromHxmem.hd_of_hxmem_concreteGate
 
+-- J4-1035: LeviBaseGaussEnvelopeConst -- fb's hEmeas/hBLgauss slot re-routed through the LITERAL
+-- constant-radius gate (ConstRadiusGateExport, no Classical.choose) instead of the opaque .choose
+-- gate leviBase_gaussDdim2s_envelope inherits. Measurable cf is GONE from the hypothesis list,
+-- replaced by the satisfiable numeric antecedent c < δ₀. hBLgauss_capped_window_CONST composes this
+-- into HZMassCappedWindowClosed's EXACT a.e.-in-s hBLgauss shape. fb's other five hypotheses (hint,
+-- hBFpeak, hBLnn, hPpknn, hPCbound/hMnn) UNTOUCHED. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.LeviBaseGaussEnvelopeConst.leviBase_gaussDdim2s_envelope_CONST
+#print axioms QIQTH.LeviBaseGaussEnvelopeConst.leviBase_gaussDdim2s_envelope_CONST
+#check @QIQTH.LeviBaseGaussEnvelopeConst.hBLgauss_capped_window_CONST
+#print axioms QIQTH.LeviBaseGaussEnvelopeConst.hBLgauss_capped_window_CONST
+
 end QIQTH.AxiomAudit
