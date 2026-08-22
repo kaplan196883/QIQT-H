@@ -30846,4 +30846,33 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartEvalSlotDomainContainment.uniformInverseChart_slice_ball_image_subset_diag_generalK
 #print axioms QIQTH.ChartEvalSlotDomainContainment.uniformInverseChart_slice_ball_mapsTo_diag_generalK_min
 
+-- J4-1015 (GaussianAbsMomentGeneral): oneD_absMoment_gen — the GENERAL-k 1-D absolute Gaussian moment
+-- ∫ heatKernel1D t y·|y|^k ≤ absMomentConst k·(√t)^k, combining the banked EVEN (hk_even_moment_le)
+-- and ODD (oneD_absMoment_odd) parity towers by a parity split. terminalVel_sliver_hmom instantiates
+-- it at t:=2τ, power:=k+3 to prove the EXACT _hmom (k+3)-moment hypothesis of
+-- terminalVelAt_chartReplace_sliver_bound (J4-879) for ALL k, with ck3:=absMomentConst(k+3);
+-- terminalVelAt_chartReplace_sliver_bound_of_integrable is the J4-879 sliver bound with _hmom AND its
+-- hck3:0≤ck3 side-condition DISCHARGED, leaving ONLY _hWint. Pure repackaging of banked exact moment
+-- lemmas; no new asymptotics. _hWint (integrability, needs measurability of the terminalVelAt-composed
+-- Gaussian on all of ball 0 R — an ODE dependence-on-initial-data API gap, terminalVelAt regularity
+-- banked only AT 0) remains OPEN. std-3, no sorry, no new axioms, no existing file edited. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.GaussianAbsMomentGeneral.oneD_absMoment_gen
+#print axioms QIQTH.GaussianAbsMomentGeneral.terminalVel_sliver_hmom
+#print axioms QIQTH.GaussianAbsMomentGeneral.terminalVelAt_chartReplace_sliver_bound_of_integrable
+
+-- J4-1015 (ChartEvalSlotRadiusMerge): the RADIUS-MERGE resolution. chart_general_change_variables_
+-- concrete_generalQ0_uniform lifts J4-1012's generic-φ eval-slot CoV to hold UNIFORMLY on every
+-- sub-ball ball q₀ ρ' (ρ'≤ρ) reusing the SAME chart data V,f' — mechanical, since the IFT package
+-- M1-M4 are all .mono-hereditary to sub-balls (Sol high confirmed). evalSlot_terminalVel_weighted_CoV_
+-- uniform is its gaussDdim τ∘terminalVelAt instantiation. nb_common_chart_radius synchronizes the
+-- three previously-independent ball-domain existentials (uniform CoV / J4-1013 reversal_link_ball_
+-- integral / J4-1014 domain containment) on a SINGLE radius ρ*:=min(min ρ_CoV r_rev) ρ_dom. Resolves
+-- ONLY the radius-merge bookkeeping; does NOT dominate the CoV Jacobian/weight vs J4-879's moment
+-- weight, does NOT discharge _hWint, does NOT compose into an nb bound. std-3, no sorry, no new axioms,
+-- no existing file edited. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.ChartEvalSlotRadiusMerge.chart_general_change_variables_concrete_generalQ0_uniform
+#print axioms QIQTH.ChartEvalSlotRadiusMerge.evalSlot_terminalVel_weighted_CoV_uniform
+#print axioms QIQTH.ChartEvalSlotRadiusMerge.nb_common_chart_radius
+
 end QIQTH.AxiomAudit

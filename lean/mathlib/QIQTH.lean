@@ -6188,3 +6188,13 @@ import QIQTH.ReversalLinkBallIntegral
 -- image-containment alone cannot discharge those). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartEvalSlotDomainContainment
+-- J4-1015: general-k 1-D absolute Gaussian moment (∫ G_t·|y|^k ≤ absMomentConst k·(√t)^k) combining
+-- the banked even/odd parity towers; discharges the _hmom (k+3)-moment hypothesis of
+-- terminalVelAt_chartReplace_sliver_bound UNCONDITIONALLY (only _hWint remains). std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.GaussianAbsMomentGeneral
+-- J4-1015: radius-merge — uniform-in-ρ' eval-slot weighted CoV (.mono-restriction of M1-M4 to
+-- sub-balls, same V/f') + nb_common_chart_radius synchronizing the three independent ball-domain
+-- existentials (CoV/reversal-link/domain-containment) on one radius. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartEvalSlotRadiusMerge
