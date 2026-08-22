@@ -31154,4 +31154,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.uniformFlowExp_K_indep
 #print axioms QIQTH.ExpMap.uniformFlowExp_K_indep
 
+-- J4-993: HCompNearCarryHdFromHxmem -- hd (differentiability of witnessFieldDeriv, ∀z∈K, at x)
+-- REDUCED to hxmem alone at the concrete flow-ball gate, given standing hg/hgpos/hu. Composes
+-- reachableGate_concrete + gatedWitness_contDiffAt_field + pd_contDiffAt_one_of_two (fixed-z,
+-- single-variable -- NOT the blocked joint-C2-off-diagonal wall). hxmem itself remains OPEN
+-- (architectural uniformFlowExp redesign, out of scope); this collapses nb's term1 residue set
+-- from {hxmem,hd} to {hxmem}. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#check @QIQTH.HCompNearCarryHdFromHxmem.hd_of_hxmem_concreteGate
+#print axioms QIQTH.HCompNearCarryHdFromHxmem.hd_of_hxmem_concreteGate
+
 end QIQTH.AxiomAudit

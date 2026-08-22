@@ -6432,3 +6432,16 @@ import QIQTH.HCompNearCarryJetBundleConcreteGateDischarge
 -- REMAINS OPEN. Bfac's other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.UniformFlowKIndep
+-- J4-993: HCompNearCarryHdFromHxmem -- J4-1032's SECOND residue hd (differentiability of
+-- witnessFieldDeriv, ∀z∈K, at x) REDUCED to hxmem alone at the concrete flow-ball gate, given the
+-- standing hg/hgpos/hu -- NO further chart-C2 carry survives. Composes THREE already-banked bricks
+-- at fixed z (single-variable, NOT the blocked joint-C2-off-diagonal story): reachableGate_concrete
+-- (chart C2 at every gate point x∈S z, z fixed) -> gatedWitness_contDiffAt_field (field-slot witness
+-- ContDiffAt 2 at x on-gate) -> pd_contDiffAt_one_of_two (a ContDiffAt2 scalar field's i-th
+-- coordinate partial is ContDiffAt1, hence DifferentiableAt -- the SAME engine already banked for
+-- hFd's core-continuity, J4-874). Consulted gpt-5.6-sol (high): confirmed clean, pointwise-in-z,
+-- non-circular, genuinely avoids the joint-C2 wall. hxmem itself is NOT discharged (per cp988-991,
+-- architectural uniformFlowExp redesign, out of scope) -- this file shows hd is REDUNDANT once
+-- hxmem is available, collapsing nb's term1 residue set from {hxmem,hd} to {hxmem}. Bfac's other 3
+-- summands, fb untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryHdFromHxmem
