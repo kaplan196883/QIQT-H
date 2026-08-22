@@ -30671,4 +30671,26 @@ namespace QIQTH.AxiomAudit
 -- on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 #print axioms QIQTH.UniformInverseChartRncRadialSqErrorGeneralQ0.uniformInverseChart_rncRadialSq_error_general_q0
 
+-- J4-1006 — HerrHminGeneralQ0GeneralK: herr_gate/hmin_gate-style gate-restricted cubic error +
+-- coercivity at a GENERAL interior base point q₀ ∈ interior K, for a SINGLE ARBITRARY FIXED
+-- hK : IsCompact K (not K := closedBall q₀ 1 varying with q₀, unlike J4-1004/1005). Two of the three
+-- ingredients (F3 joint ContDiffAt 2, F4 eval-slot normalization) already had general-K versions banked
+-- from the earlier J4-884 campaign; only F1 (diagonal vanishing) needed a routine transplant using
+-- interior K ∈ 𝓝 q₀. Feeds BaseSlotDerivFromAntisymEvalSlot's abstract brick + transplants J4-1005's
+-- rncRadialSq-comparison algebra. POINTWISE in q₀ (constants may depend on q₀) — Sol gpt-5.6-sol high
+-- confirmed compactness does NOT by itself uniformize a pointwise ∀q₀,∃r,L statement; a uniform
+-- corollary over a compact G ⊆ interior K is flagged, NOT attempted. Does NOT supersede herr_gate/
+-- hmin_gate themselves (those hold ∀z∈K including boundary, no interior hypothesis; specializes to that
+-- shape only at q₀=0 under the extra hypothesis 0 ∈ interior K). std-3. Base-slot CoV into hcomp's
+-- literal integral shape NOT attempted. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.uniformInverseChart_diag_eventually_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.uniformInverseChart_evalSlot_hasFDerivAt_id_diag_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.uniformInverseChart_baseSlot_fderiv_neg_id_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.uniformInverseChart_baseSlot_quadratic_displacement_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.uniformInverseChart_rncRadialSq_error_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.herr_gate_general_q0_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.hmin_gate_general_q0_generalK
+#print axioms QIQTH.HerrHminGeneralQ0GeneralK.herrHmin_gate_general_q0_generalK
+
 end QIQTH.AxiomAudit

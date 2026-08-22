@@ -6087,3 +6087,17 @@ import QIQTH.UniformInverseChartBaseSlotDisplacementGeneralQ0
 -- re-threading + base-slot CoV into hcomp's literal integral shape remain separate). NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.UniformInverseChartRncRadialSqErrorGeneralQ0
+-- J4-1006: HerrHminGeneralQ0GeneralK — the compact-set-K GATE re-threading item J4-1004/1005 named as
+-- remaining scope: herr_gate/hmin_gate-style gate-restricted cubic error + coercivity at a GENERAL
+-- interior base point q₀ ∈ interior K, for a SINGLE ARBITRARY FIXED hK : IsCompact K (not K :=
+-- closedBall q₀ 1 varying with q₀). Found that two of the three ingredients (F3 joint ContDiffAt 2,
+-- F4 eval-slot normalization) already had general-K versions banked from the earlier J4-884 campaign;
+-- only F1 (diagonal vanishing) needed a routine transplant. Feeds BaseSlotDerivFromAntisymEvalSlot's
+-- abstract brick + transplants J4-1005's rncRadialSq-comparison algebra. POINTWISE in q₀ (constants may
+-- depend on q₀) — Sol gpt-5.6-sol high confirmed compactness does NOT by itself uniformize a pointwise
+-- ∀q₀,∃r,L statement; a uniform corollary over a compact G ⊆ interior K is flagged, NOT attempted. Does
+-- NOT supersede herr_gate/hmin_gate themselves (those hold ∀z∈K including boundary, no interior
+-- hypothesis; this file's result only specializes to that shape at q₀=0 under the extra hypothesis
+-- 0 ∈ interior K). std-3. Base-slot CoV into hcomp's literal integral shape NOT attempted. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HerrHminGeneralQ0GeneralK
