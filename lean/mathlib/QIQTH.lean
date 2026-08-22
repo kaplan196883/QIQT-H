@@ -6109,3 +6109,14 @@ import QIQTH.HerrHminGeneralQ0GeneralK
 -- throughout S) and M4 (Jacobian lower bound throughout S) remain open. Does NOT wire into
 -- hcomp/nb/hCConv. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.BaseSlotIFTLocalHomeomorph
+
+-- J4-1008: BaseSlotM1M4Assembly — assembles ALL FOUR of ChartGaussianChangeVar's (J4-269)
+-- missing-fact list (M1-M4) on a SINGLE genuine open set S' := S ∩ Uslice ∩ Uinv, on top of
+-- J4-1007's IFT data (S/V, M2/M3), using the pre-existing diagonal-tube joint ContDiffOn
+-- (uniformInverseChart_jointContDiffOn_tube) for M1 and continuity-of-fderiv + Units.isOpen for
+-- M4. ALSO lands a corollary feeding M1-M4 directly into
+-- ChartGaussianChangeVar.chart_gaussian_change_variables — the full Layer-B CoV identity, for an
+-- ARBITRARY amplitude factor B (concrete Layer-A factor NOT supplied, remains separate/unstarted).
+-- Does NOT wire into hcomp/nb/hCConv. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.BaseSlotM1M4Assembly

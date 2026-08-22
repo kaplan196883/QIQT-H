@@ -16093,3 +16093,55 @@ Quot.sound) on all 5 public theorems, no sorryAx, no custom axiom (deleted after
 `axiom_budget_check.sh` raw axiom count 0 (budget 0), "no sorryAx, no deleted-axiom regressions"; vacuum-
 grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`. Commit `7e34411a`, pushed. Concurrent-session scratch
 `docs/qg_roadmap/rnc_sympy/hcomp_*_feasibility.py` left untracked, NOT added.
+
+### J4-1008 — `BaseSlotM1M4Assembly`: ALL FOUR of `ChartGaussianChangeVar`'s missing-fact list
+(M1–M4) assembled on a single genuine open set, PLUS the Layer-B CoV corollary triggered for the
+first time on the concrete base slot (commit TBD)
+
+**THE TASK.** J4-1007 discharged M2 (`InjOn`) and M3 (the left inverse `V`) of `ChartGaussianChangeVar`'s
+(J4-269) missing-fact list via Mathlib's IFT, but explicitly left M1 (`HasFDerivWithinAt` throughout `S`,
+only held POINTWISE at `q₀`) and M4 (a positive Jacobian bound throughout `S`) open. This dispatch closes
+both, on a (possibly shrunk) open set `S' ⊆ S`.
+
+**THE ROUTE (Sol `gpt-5.6-sol`, high, 2026-08-22, plan reviewed BEFORE Lean; confirmed sound, no API
+traps).** Re-checked the ACTUAL Lean statement of M4 in `ChartGaussianChangeVar.lean` first: `hJpos` is
+`∀ z ∈ S, 0 < J z` — POINTWISE positivity, NOT a uniform numeric bound (the dispatch brief's "uniform
+Jacobian lower bound" framing was imprecise; the real obligation is easier). Two ingredients, both derived
+from data ALREADY BANKED, neither hand-built:
+  - **M1** — the pre-existing diagonal-TUBE joint regularity `uniformInverseChart_jointContDiffOn_tube`
+    (`QIQTH.ExpMap`, banked prior to this dispatch, NOT previously wired to the base slot): an OPEN set `T`
+    containing the whole diagonal with `ContDiffOn ℝ 2` of the JOINT chart map on `T`. Sliced to the base
+    slot via `Uslice := {p | (p,q₀) ∈ T}` (open, `q₀ ∈ Uslice`) and composed with the smooth embedding
+    `p ↦ (p,q₀)` (`ContDiffAt.comp`), this gives `ContDiffAt ℝ 2 W z` for EVERY `z ∈ Uslice` — hence
+    `HasFDerivAt`/`HasFDerivWithinAt` throughout `Uslice`, not just at `q₀`.
+  - **M4** — continuity of `fderiv ℝ W` AT `q₀` (`ContDiffAt.fderiv_right`, order `1+1≤2`) combined with
+    `fderiv ℝ W q₀ = −Id` being a unit (`ContinuousLinearMap.isUnit_iff_bijective`, `−Id` self-inverse) and
+    `Units.isOpen` (the endomorphism ring `Point n →L[ℝ] Point n` is a complete normed ring, automatic
+    `HasSummableGeomSeries` instance) gives an open preimage `Uinv ∋ q₀` on which `fderiv ℝ W z` is a unit
+    for every `z ∈ Uinv`; converted to `0 < |det|` via `ContinuousLinearMap.isUnit_iff_isUnit_toLinearMap`
+    + `LinearMap.isUnit_iff_isUnit_det` + `abs_pos`.
+
+**THE DELIVERABLE.** `BaseSlotM1M4Assembly.lean` (ns `QIQTH.BaseSlotM1M4Assembly`):
+- ★★★ `uniformInverseChart_baseSlot_M1M4_generalK` — THE PAYOFF: `∃ S' V, IsOpen S' ∧ q₀ ∈ S' ∧`
+  `InjOn W S' ∧ (∀p∈S', V(Wp)=p) ∧ (∀z∈S', HasFDerivWithinAt W (fderiv ℝ W z) S' z) ∧`
+  `(∀z∈S', 0 < |(fderiv ℝ W z).det|)` on `S' := S ∩ Uslice ∩ Uinv` — ALL FOUR of M1–M4 SIMULTANEOUSLY,
+  for the FIRST time, for the concrete `uniformInverseChart` base-slot map.
+- ★★★★ `uniformInverseChart_baseSlot_gaussian_change_variables_generalK` — feeding M1–M4 directly into
+  `ChartGaussianChangeVar.chart_gaussian_change_variables` (J4-269): for an ARBITRARY amplitude factor
+  `B : Point n → ℝ` (the concrete Layer-A factor is NOT supplied — separate, unstarted brick), the genuine
+  identity `∫ z in S', gaussDdim τ (W z) * B z = ∫ w in W''S', gaussDdim τ w * (B (V w) / J (V w))` now
+  holds on `S'`. THE FIRST TIME the full Layer-B change-of-variables machinery has been triggered on the
+  CONCRETE base-slot chart map (previously only the abstract theorem existed, un-instantiated).
+
+**Honest scope / distance.** Does NOT instantiate the CoV with a concrete `B` (Layer A — the set-integral
+rewrite factoring `Wit τ 0 z` as `gaussDdim τ (W₀ z) · A τ z` onto the gate — remains a SEPARATE, unstarted
+brick). Does NOT wire into `HCompNearCarryChartSurfaceWired`'s literal `kPrime` shape or `VanVleckGated
+SpatialSymmetry.hcomp`. `nb`/`hcomp`/`hCConv` remain OPEN. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** No new asymptotic/rate claim (pure topology/differentiability/openness bookkeeping), so no
+sympy pre-check was required for this dispatch (per the standing rule's own scope: sympy verification
+applies to rate/scaling claims, not to Mathlib API composition); `lake env lean` on the new file std-3
+before wiring; `lake build` (full) 0 err (10318 jobs); `axiom_budget_check.sh` raw axiom count 0 (budget
+0), no sorryAx, no deleted-axiom regressions; vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`
+(both public theorems pinned). Commit TBD, pushed.

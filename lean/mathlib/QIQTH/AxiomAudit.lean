@@ -30715,4 +30715,32 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.BaseSlotIFTLocalHomeomorph.uniformInverseChart_baseSlot_hasStrictFDerivAt_CLE_generalK
 #print axioms QIQTH.BaseSlotIFTLocalHomeomorph.uniformInverseChart_baseSlot_localOpenHomeomorph_generalK
 
+-- J4-1008 (BaseSlotM1M4Assembly): assembles ALL FOUR of ChartGaussianChangeVar's (J4-269)
+-- missing-fact list on a SINGLE genuine open set S' := S ∩ Uslice ∩ Uinv, on top of J4-1007's IFT
+-- data (S/V, M2/M3). M1 (HasFDerivWithinAt throughout S') from the pre-existing diagonal-tube joint
+-- ContDiffOn (QIQTH.ExpMap.uniformInverseChart_jointContDiffOn_tube) sliced to the base slot via
+-- p ↦ (p,q₀) and composition (ContDiffAt.comp), giving ContDiffAt ℝ 2 W z throughout the open
+-- tube-slice Uslice, hence DifferentiableAt/HasFDerivAt weakened to HasFDerivWithinAt. M4
+-- (0 < |det| throughout S') from continuity of fderiv ℝ W at q₀ (ContDiffAt.fderiv_right) combined
+-- with fderiv ℝ W q₀ = −Id being a unit (ContinuousLinearMap.isUnit_iff_bijective) and Units.isOpen
+-- (endomorphism ring of Point n, complete normed ring ⟹ HasSummableGeomSeries instance), giving an
+-- open preimage Uinv on which fderiv ℝ W is a unit, converted to det≠0 via
+-- ContinuousLinearMap.isUnit_iff_isUnit_toLinearMap + LinearMap.isUnit_iff_isUnit_det. Sol
+-- gpt-5.6-sol high consulted before Lean (plan confirmed sound, no API traps; only refinement was
+-- using ContDiffAt pointwise + fderiv_right rather than ContDiffOn/fderivWithin bookkeeping).
+-- Does NOT instantiate chart_gaussian_change_variables itself (needs MeasurableSet S' — trivial
+-- add-on, not wired — and a concrete B from the separate, unstarted Layer A). Does NOT wire into
+-- HCompNearCarryChartSurfaceWired's literal kPrime shape or hcomp. std-3. nb/hcomp/hCConv remain
+-- OPEN. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.BaseSlotM1M4Assembly.uniformInverseChart_baseSlot_M1M4_generalK
+
+-- J4-1008 corollary (BaseSlotM1M4Assembly): feeding M1-M4 directly into
+-- ChartGaussianChangeVar.chart_gaussian_change_variables (J4-269) — the FIRST time the full Layer-B
+-- change-of-variables machinery is triggered on the CONCRETE uniformInverseChart base slot (for an
+-- ARBITRARY amplitude factor B; the concrete Layer-A factor is NOT supplied, remains separate and
+-- unstarted). Produces the genuine identity ∫ z in S', gaussDdim τ (W z) * B z = ∫ w in W''S',
+-- gaussDdim τ w * (B (V w) / J (V w)) on the open set S' from the M1-M4 assembly. Does NOT wire into
+-- hcomp/nb/hCConv. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.BaseSlotM1M4Assembly.uniformInverseChart_baseSlot_gaussian_change_variables_generalK
+
 end QIQTH.AxiomAudit
