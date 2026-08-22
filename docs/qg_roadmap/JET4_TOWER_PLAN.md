@@ -16040,3 +16040,56 @@ UNCHANGED. NOT `a₁=R/6`.
 confirming); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
 `AxiomAudit.lean`. Commit `965a30cc`. Concurrent-session scratch `docs/qg_roadmap/rnc_sympy/*_feasibility.py`
 left untracked, NOT added.
+
+### J4-1007 — `BaseSlotIFTLocalHomeomorph`: the FIRST genuine local-diffeomorphism package for
+`uniformInverseChart`'s base slot, via Mathlib's ACTUAL Inverse Function Theorem (commit `7e34411a`)
+
+**THE TASK.** The next-named item on the near-carry `nb` firewall chain (J4-858→1006): the "base↔field
+change of variables" (`HCompNearCarryChartSurfaceWired`'s item (ii)), equivalently `ChartGaussianChangeVar`
+(J4-269)'s own "missing-fact list" M1–M4 for the CONCRETE instantiation `W := uniformInverseChart`'s base
+slot (`p ↦ uniformInverseChart g gi hC hK p q₀`, eval point `q₀` fixed): M1 `HasFDerivWithinAt` over a
+genuine set `S`, M2 `InjOn W S`, M3 a left inverse `V`, M4 a uniform positive Jacobian lower bound on `S`.
+Two earlier diagnostics (cp882/883/884, NO COMMIT) ruled OUT building this CoV from the quadratic
+antisymmetry-defect bricks (J4-1002/1003) — those bound the RAW CHART MAP's antisymmetry, a DIFFERENT
+object from what a genuine CoV needs. Sol's redirect (cp882) named the correct route: "joint-C² CoV/
+Jacobian → quantitative T(v) vs v control → …".
+
+**THE ROUTE (Sol `gpt-5.6-sol`, high, 2026-08-22, qualified GO, consulted BEFORE Lean).** NOT via
+hand-assembling M1–M4 from J4-1006's coercivity bounds (`herr_gate`/`hmin_gate`) — Sol confirmed a
+coercive bound `‖Wp‖² ≳ ‖p−q₀‖²` says NOTHING about `Wp₁ − Wp₂` for `p₁ ≠ p₂`, so it cannot by itself
+give injectivity or a Jacobian bound. Instead: feed J4-1006's ALREADY-BANKED base-slot derivative fact
+`uniformInverseChart_baseSlot_fderiv_neg_id_generalK` (`HasFDerivAt … (−Id) q₀`) plus J4-884's
+ALREADY-BANKED joint `ContDiffAt ℝ 2` (`uniformInverseChart_jointContDiffAt_diag_generalK`, restricted to
+the base slot via composition with `p ↦ (p,q₀)`) into Mathlib's OWN Inverse Function Theorem
+(`HasStrictFDerivAt.toOpenPartialHomeomorph`, `Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv`) —
+confirmed to exist with this exact signature (verified against the actual Mathlib source, not assumed).
+
+**THE DELIVERABLE.** `BaseSlotIFTLocalHomeomorph.lean` (ns `QIQTH.BaseSlotIFTLocalHomeomorph`):
+- `negCLE` / `negCLE_coe` — `−Id` packaged as a genuine `ContinuousLinearEquiv`
+  (`(LinearEquiv.neg ℝ).toContinuousLinearEquiv`), required by Mathlib's IFT API.
+- `uniformInverseChart_baseSlot_contDiffAt_generalK` — the base-slot restriction is `ContDiffAt ℝ 2` at
+  `q₀`, via `ContDiffAt.comp` with the smooth embedding `p ↦ (p,q₀)`.
+- ★★ `uniformInverseChart_baseSlot_hasStrictFDerivAt_generalK` — upgrades J4-1006's `HasFDerivAt(−Id)` to
+  `HasStrictFDerivAt`, via `ContDiffAt.hasStrictFDerivAt` (order `≥1`) + `HasFDerivAt.fderiv` uniqueness.
+- ★★★ `uniformInverseChart_baseSlot_localOpenHomeomorph_generalK` — THE PAYOFF: `∃ S`, `IsOpen S`, `q₀ ∈ S`,
+  `InjOn W S`, `∃ V, ∀ p ∈ S, V (W p) = p` — DISCHARGING M2 (`InjOn`) and M3 (the left inverse) of
+  `ChartGaussianChangeVar`'s missing-fact list, for the base-slot map, for the FIRST time in this campaign,
+  directly from Mathlib's own IFT rather than any hand-built construction.
+
+**Honest scope / distance.** M1 (`HasFDerivWithinAt` throughout `S`, currently only AT `q₀`) and M4
+(Jacobian lower bound throughout `S`) are NOT discharged — M4 needs `Units.isOpen` (openness of invertible
+elements in the complete normed ring `Point n →L[ℝ] Point n`) composed with continuity of `fderiv` (from
+`ContDiffOn`) and the `IsUnit ↔ det ≠ 0` bridge (`ContinuousLinearMap.isUnit_iff_isUnit_toLinearMap` +
+`LinearMap.isUnit_iff_isUnit_det`) — all three pieces CONFIRMED TO EXIST in this Mathlib checkout (grepped)
+but NOT assembled. `ChartGaussianChangeVar.chart_gaussian_change_variables` is NOT instantiated (needs
+M1+M4 too). Does NOT wire into `HCompNearCarryChartSurfaceWired`'s literal `kPrime` shape or
+`VanVleckGatedSpatialSymmetry.hcomp`. `nb`/`hcomp`/`hCConv` remain OPEN. `a₁=R/6` remains STRICTLY
+CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** sympy pre-check `docs/qg_roadmap/rnc_sympy/baseslot_ift_neg_id_check.py` (qualitative sanity:
+`−Id` self-inverse, `det(−Id)=(−1)ⁿ≠0`, base/eval-slot derivative antisymmetry consistency); `lake build`
+(full) 0 err (10317 jobs); throwaway `chk1007.lean` + `#print axioms` std-3 (propext/Classical.choice/
+Quot.sound) on all 5 public theorems, no sorryAx, no custom axiom (deleted after confirming);
+`axiom_budget_check.sh` raw axiom count 0 (budget 0), "no sorryAx, no deleted-axiom regressions"; vacuum-
+grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`. Commit `7e34411a`, pushed. Concurrent-session scratch
+`docs/qg_roadmap/rnc_sympy/hcomp_*_feasibility.py` left untracked, NOT added.
