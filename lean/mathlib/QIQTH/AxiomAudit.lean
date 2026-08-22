@@ -20008,6 +20008,21 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.GaussInteriorMVTGeneral.expPullbackMetric_zero_general
 #print axioms QIQTH.GaussInteriorMVTGeneral.hGauss_pullback_gauge_of_general
 
+-- ## J4-NNN (ExpInverseMetricGauge): EXACT inverse-metric radial identity (corrected-hpull item (2))
+-- The inverse companion of item (1): from the forward Gauss germ g̃(x)·x = g_p·x (item (1)) plus
+-- IsUnit(matToCLM g̃(x)) near 0 (metricCLMUnit0 at 0 + continuity + Units.isOpen), apply the operator
+-- inverse to get g̃(x)⁻¹·g_p·x = x. clm_apply_eq_sum (basis expansion) +
+-- expPullbackMetric_isUnit_nhds_zero (I1) + inverseMetric_gauss_operator (I2, operator form) +
+-- ★ inverseMetric_gauss_general (I3, component form = item (2), NO base gauge) +
+-- inverseMetric_gauss_gauge_of_general (I4 regression: clean inverse radial gauge under g_p=I,
+-- exp-pullback analog of curvedRNCInv_radialGauge). Thin matrix-inverse algebra, no new analysis.
+-- std-3 all 5. NOT a₁ = R/6 (still conditional on {hDuhamel, hDConv, hCConv}).
+#print axioms QIQTH.ExpInverseMetricGauge.clm_apply_eq_sum
+#print axioms QIQTH.ExpInverseMetricGauge.expPullbackMetric_isUnit_nhds_zero
+#print axioms QIQTH.ExpInverseMetricGauge.inverseMetric_gauss_operator
+#print axioms QIQTH.ExpInverseMetricGauge.inverseMetric_gauss_general
+#print axioms QIQTH.ExpInverseMetricGauge.inverseMetric_gauss_gauge_of_general
+
 -- ## J4-348 (PullbackGeometryLegs): THE DERIVABLE LEGS + THE DECISIVE L3 VERDICT
 -- THE BANKED-JET FINDING (per feedback_dont_undercredit_repo): the D²exp jet WAS
 -- banked (pd_jacobian_expMap_zero, the closed Christoffel form) and L1 ∂g̃(0)=0
