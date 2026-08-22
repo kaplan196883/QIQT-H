@@ -6392,3 +6392,17 @@ import QIQTH.HCompNearCarryKPrimeGateRestrictedCoV
 -- piece. Bfac's other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.GeneralBaseJetsMixed
+-- J4-1031: HCompNearCarryKPrimeGateRestrictedCoVNbhd — the LOCALIZED (∀ y ∈ S z, not ∀ y : Point n)
+-- jet-bundle port of J4-1029, closing the cp985 interface-over-strength diagnosis: traced
+-- ChartJetHessianMixed.gaussComp_pd_pd_mixed's proof term and found only ONE of its two ∀x-typed jet
+-- hypotheses (the inner-differentiation direction) is ever applied at a point ≠ x₀; the other is already
+-- fully local despite its type. Reusing the ALREADY-BANKED J4-237 (Field2NbhdReshape) localized mixed
+-- normal-form port (witnessMixed_gate_eq_nbhd, via pd_congr_of_eventuallyEq — germ-locality of pd) in
+-- place of the global ChartJetHessianMixed.witnessMixed_gate_eq, re-derives the full J4-882/1010/1029
+-- three-step composition with hJetVj weakened to ∀ y ∈ S z (the real open gate) and hJetVi weakened to a
+-- single point x. Consulted gpt-5.6-sol (high) first: confirmed sound, no Mathlib pitfall, worth
+-- building, no structural blocker. Does NOT discharge r2 (the jet bundle is still an unproven
+-- antecedent) -- proves the antecedent CAN be weakened to the shape GeneralBaseJetsMixed (J4-1030)'s
+-- ∀ᶠ-local output plausibly composes with. Bfac's other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd

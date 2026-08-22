@@ -31112,4 +31112,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HeatResidualBound.chartField_secondJetMixed_domain
 #print axioms QIQTH.HeatResidualBound.chartField_secondJetMixed_domain
 
+-- J4-1031: HCompNearCarryKPrimeGateRestrictedCoVNbhd — LOCALIZED (∀ y ∈ S z) jet-bundle port of J4-1029,
+-- reusing J4-237's Field2NbhdReshape.witnessMixed_gate_eq_nbhd (pd_congr_of_eventuallyEq germ-locality)
+-- in place of ChartJetHessianMixed.witnessMixed_gate_eq. hJetVj weakened to ∀ y ∈ S z; hJetVi weakened to
+-- a single point x (never used elsewhere in the campaign's own proof term). Sol (gpt-5.6-sol, high)
+-- consulted first: confirmed sound, no pitfall, worth building. Does NOT discharge r2, but shrinks the
+-- antecedent to the shape J4-1030's ∀ᶠ-local jets plausibly compose with. Bfac's other 3 summands, fb
+-- untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_apply_single_on_gate_eq_mixedNormalForm_nbhd
+#print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_apply_single_on_gate_eq_mixedNormalForm_nbhd
+#check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_apply_single_on_gate_eq_baseGaussian_mul_amp_nbhd
+#print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_apply_single_on_gate_eq_baseGaussian_mul_amp_nbhd
+#check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_baseField_CoV_of_jetBundle_gateRestricted_nbhd
+#print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_baseField_CoV_of_jetBundle_gateRestricted_nbhd
+
 end QIQTH.AxiomAudit
