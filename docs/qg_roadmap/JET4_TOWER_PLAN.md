@@ -15725,3 +15725,65 @@ hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
 in-file `#print axioms` std-3 all 4 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom;
 `QIQTH.AxiomAudit` 0 err (10310 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired
 `QIQTH.lean` + `AxiomAudit.lean`. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+## J4-1002 (Sol-consulted GO/NO-GO, `gpt-5.6-sol` high, 2026-08-22) — the base-slot ANTISYMMETRY QUADRATIC-DEFECT brick: Sol's flagged "linear vs quadratic" recentering question resolved GO [AF]
+
+**CONTEXT.** J4-1001's dispatch found (via `gpt-5.6-sol` high) a NO-GO on doing the base-slot change of
+variables (item a) in one dispatch: relating `kPrime`'s literal integral over the varying chart BASE `z`
+(field point `x` fixed) to the abstract `heatHessMult` machinery (fixed base, displacement-variable
+integral) requires controlling how `Φ`'s field-slot jets move as the base is recentered near the diagonal,
+and warned that a merely-LINEAR chart antisymmetry error gives a fatal `τ⁻¹` rate — the same trap that
+killed `WitnessTranspositionGeneralBound` at cp872. This dispatch read `GeodesicReversalRoute.lean`,
+`UniformFlowCoherentChartReconciliation.lean`, and `JointRNCRegularityInterfaceLocal.lean` (the banked
+base↔eval tech) and discovered a large PRIOR thread (J4-858..888, ~30 increments:
+`GeodesicReversalRouteAtPoint`, `TerminalVelAtCubicRemainder`, `HCompNearCarryConcreteDischarge/
+FullyClosed/ChartSurfaceWired`) that attacked this exact recentering problem via a DIFFERENT mechanism (a
+CUBIC reversal near-identity `T_x₀(v)=v+O(v³)`, sympy-validated to reach `O(√ε)`) but was NEVER fully
+wired into a literal discharge of `VanVleckGatedSpatialSymmetry.hcomp` — it remains a NAMED hypothesis in
+the live capstone (`A1R6CapstoneConditionalOnRNC.lean`).
+
+**THE MANDATORY SYMPY GATE (BEFORE any Lean).** `docs/qg_roadmap/rnc_sympy/
+hcomp_baseslot_antisymmetry_order.py` models the base-slot recentering defect `Ξ(q,p):=Φ(q,p)+Φ(p,q)` via
+a joint 2nd-order Taylor expansion, using ONLY three banked facts about `Φ:=uniformInverseChart`: (F1)
+`uniformInverseChart_slice_value_diag` — diagonal vanishing for a GENERAL base point (not just one, i.e.
+`Φ(q,q)=0` holds along a whole neighbourhood, not merely `Φ(q₀,q₀)=0`); (F2)
+`uniformInverseChart_slice_fderiv_id_diag`; (F3) `uniformInverseChart_jointContDiffAt_diag` (joint `C²` at
+every diagonal point, J4-856/857). Both a scalar toy model and a general `n=2` matrix/vector model give an
+EXACT symbolic match (`sp.simplify(...) == 0`, not numerics): the LINEAR term is FORCED to zero purely
+from (F1) holding along the whole neighbourhood (NOT just F2's normalization value — a genuinely new
+finding, since it means the result does not depend on knowing `∂ₚΦ=Id` specifically), leaving
+`Ξ(a,b) = -B_sym(a-b,a-b) + O(3)` — QUADRATIC, NOT the feared linear case. Consulted `gpt-5.6-sol` (high)
+with this finding plus the J4-858 discovery: **GO** on a narrowly-scoped abstract brick (explicitly NOT a
+third full `hcomp` route — audit the existing J4-858..888 thread first for full closure); one correction
+to the sympy write-up's framing (plain `ContDiffAt ℝ 2` gives an `o(‖·‖²)` remainder, not literally
+`O(‖·‖³)` — the Lean statement is written against the honest `o(‖·‖²)`/mean-value level).
+
+**THE DELIVERABLE (`HCompBaseSlotAntisymmetryQuadratic.lean`, ns `QIQTH.HCompBaseSlotAntisymmetry`, std-3,
+new-file-only).** Fully abstract in a map `Φ : Point n → Point n → Point n` (mirrors how
+`GaussCompMixedHessian`/`HeatHessianMomentCancellation` stayed abstract before touching
+`uniformInverseChart`/`kPrime`):
+- `antisymmetryDefect_fderiv_zero` — for the antisymmetrized slice `g p := Φ p q₀ + Φ q₀ p`: `g q₀ = 0`
+  and `HasFDerivAt g 0 q₀`, from ONLY (F1) `Φ q q = 0` eventually near `q₀` + (F3) joint `ContDiffAt ℝ 2`
+  at `(q₀,q₀)` — via the diagonal embedding chain rule (`D(uncurried Φ)(q₀,q₀)(w,w)=0` from `φ q:=Φ q q`
+  being eventually `0`) plus product-space linearity `D(w,w)=D(w,0)+D(0,w)` forcing each partial to
+  vanish. Notably does NOT need the `∂ₚΦ(q₀,q₀)=Id` normalization fact at all.
+- ★★★ `antisymmetryDefect_quadratic_bound` — THE PAYOFF: `∃ r>0, C≥0, ∀ p, ‖p-q₀‖<r → ‖Φ p q₀ + Φ q₀ p‖ ≤
+  C‖p-q₀‖²`. Proved via the SAME mean-value/Taylor-remainder technique
+  `JointRNCRegularityLocal.jointRNCRegularityLocal_of_diag`'s `hVdisp` field uses (extract `g'`,`g''` via
+  `contDiffAt_succ_iff_hasFDerivAt` twice, bound `g''` locally, get `g'` Lipschitz-at-`q₀` via
+  `Convex.norm_image_sub_le_of_norm_hasFDerivWithin_le`, then a second mean-value pass on `g` itself since
+  `g q₀=0` and `g' q₀=0`).
+- `antisymmetryDefect_quadratic_bound_hyp_satisfiable` — non-vacuity, `Φ p q := p − q` (exactly
+  antisymmetric, defect ≡ 0).
+
+**Honest scope.** Fully abstract in `Φ`: does NOT instantiate `uniformInverseChart`, does NOT touch
+`kPrime`/`heatHessMult`/`hcomp` literally, does NOT do the actual base-slot CoV (turning the literal
+integral over `z` into the abstract displacement integral), truncation-tail control, or coordinate
+summation. `hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build` (full) 0 err (10311 jobs); throwaway `chk1002.lean` + `#print axioms` std-3 all 3
+(propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `axiom_budget_check.sh` raw 0 (budget
+0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`. Commit `f71df642`. Stray sibling
+`docs/qg_roadmap/rnc_sympy/{hcomp_bypass,hcomp_near_carry_final,hcomp_transposition}_feasibility.py` (a
+concurrent/earlier dispatch's scratch files) left untracked, NOT added.
