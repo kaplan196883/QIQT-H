@@ -6232,3 +6232,20 @@ import QIQTH.HWintFullBallDischarge
 -- std-3. DECOUPLED infrastructure — NOT yet wired to the opaque IFT domain S' (r3/r4 reconciliation,
 -- still open). NOT nb/hcomp/a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HeatHessMultBallTailBound
+
+-- J4-1019: the G1 gate — a SIGNED, pre-`|·|` combined Lipschitz-weighted bound on nb's Bfac term1.
+-- Introduces linMult τ Q v := (⟨v,Q⟩/(2τ))·G_τ(v) (literally J4-1017's residual first-moment term)
+-- with its OWN exact full-space zero integral (integral_linMult_eq_zero, via the M1 oddness moment
+-- gaussDdim_first_moment_zero) and its OWN Lipschitz-remainder payoff (integral_linMult_mul_lipschitz,
+-- a CONSTANT-in-τ bound n²·L·‖Q‖, sympy-verified — the τ's cancel exactly, genuinely negligible
+-- against the O(1/√τ) rate heatHessMult's own Lipschitz payoff delivers). Composes both via
+-- hsMixed_gaussDdim_mul_amp_eq_diff (the pre-|·| signed identity, derived via integral_sub — NO |·|
+-- anywhere) and hsMixed_gaussDdim_mul_amp_lipschitz_bound (★ the G1 payoff: the combined SIGNED-THEN-
+-- BOUNDED estimate |∫ G_τ·(hsMixed·Amp)| ≤ L·n³‖PI‖‖PJ‖(16√2+1)/√τ + n²·L·‖Q‖ for Amp Lipschitz-at-0).
+-- Sol (gpt-5.6-sol, high) GO-confirmed before Lean: applying the triangle inequality AFTER each piece's
+-- own cancellation-then-remainder rewrite does not destroy cancellation — this IS G1's intent. std-3.
+-- STILL FULL-SPACE ONLY — NOT yet wired to nb's bounded IFT domain S' (r3/r4 reconciliation, plus a
+-- linMult analogue of J4-1018's ball-tail bound, SEPARATE still-open work). Does NOT discharge nb,
+-- hCConv, or any part of hcomp; does NOT address Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1LipschitzCancellation

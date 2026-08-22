@@ -30925,4 +30925,24 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HeatHessMultBallTail.normPow_gaussDdim_tail_le
 #print axioms QIQTH.HeatHessMultBallTail.heatHessMult_ball_tail_le
 
+-- J4-1019: G1 gate — a SIGNED, pre-`|·|` combined Lipschitz-weighted bound on nb's Bfac term1.
+-- linMult τ Q v := (⟨v,Q⟩/(2τ))·G_τ(v) (J4-1017's residual term as a standalone object) gets its OWN
+-- exact full-space zero integral (M1 oddness) and its OWN Lipschitz-remainder payoff (a CONSTANT-in-τ
+-- bound n²·L·‖Q‖, sympy-verified negligible against heatHessMult's O(1/√τ) rate). The combined ★ payoff
+-- hsMixed_gaussDdim_mul_amp_lipschitz_bound derives the pre-|·| signed identity FIRST (via
+-- integral_sub, no |·| anywhere) then applies each piece's already-cancellation-derived Lipschitz bound
+-- and ONLY THEN the triangle inequality. Sol (gpt-5.6-sol, high) GO-confirmed this satisfies G1's
+-- intent. std-3. STILL FULL-SPACE ONLY, NOT wired to nb's bounded IFT domain S' (r3/r4, still open).
+-- Does NOT discharge nb/hCConv/hcomp; does NOT address Bfac's other 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1LipschitzCancellation.linMult
+#check @QIQTH.HCompNearCarryTerm1LipschitzCancellation.integral_linMult_eq_zero
+#check @QIQTH.HCompNearCarryTerm1LipschitzCancellation.integral_linMult_mul_lipschitz
+#check @QIQTH.HCompNearCarryTerm1LipschitzCancellation.hsMixed_gaussDdim_mul_amp_eq_diff
+#check @QIQTH.HCompNearCarryTerm1LipschitzCancellation.hsMixed_gaussDdim_mul_amp_lipschitz_bound
+#print axioms QIQTH.HCompNearCarryTerm1LipschitzCancellation.integral_linMult_eq_zero
+#print axioms QIQTH.HCompNearCarryTerm1LipschitzCancellation.integral_linMult_mul_lipschitz
+#print axioms QIQTH.HCompNearCarryTerm1LipschitzCancellation.hsMixed_gaussDdim_mul_amp_eq_diff
+#print axioms QIQTH.HCompNearCarryTerm1LipschitzCancellation.hsMixed_gaussDdim_mul_amp_lipschitz_bound
+
 end QIQTH.AxiomAudit
