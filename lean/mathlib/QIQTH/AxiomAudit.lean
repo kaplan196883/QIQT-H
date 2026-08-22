@@ -31126,4 +31126,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_baseField_CoV_of_jetBundle_gateRestricted_nbhd
 #print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd.kPrime_baseField_CoV_of_jetBundle_gateRestricted_nbhd
 
+-- J4-1032: HCompNearCarryJetBundleConcreteGateDischarge — J4-1031's jet-bundle antecedent
+-- (hJetVi/hJetVj/hJetQ/hAmpj1/hAmpi1/hAmp2) and hSopen FULLY DISCHARGED at the concrete flow-ball gate
+-- S z = uniformFlowExp z '' Metric.ball 0 c, by reusing the ALREADY-BANKED J4-237
+-- Field2NbhdReshape.hcarField2_hgate_concrete with the index pair SWAPPED to (j,i) (term-for-term
+-- 7-conjunct trace, verified before writing Lean). GeneralBaseJetsMixed (J4-1030) turns out REDUNDANT
+-- for this composition — J4-237 is strictly stronger (jets at EVERY point of the concrete gate via
+-- uniform reachability, not just the field-origin). Consulted gpt-5.6-sol (high) first. Remaining
+-- hypotheses: radius/metric-regularity bookkeeping, hxint, hτ, hd (untouched, pre-existing), and
+-- hxmem : ∀ z ∈ K, x ∈ S z (the genuine chart-coverage fact — STILL OPEN, the real r2 residue). Bfac's
+-- other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#check @QIQTH.HCompNearCarryJetBundleConcreteGateDischarge.kPrime_baseField_CoV_of_jetBundle_gateRestricted_concreteGate
+#print axioms QIQTH.HCompNearCarryJetBundleConcreteGateDischarge.kPrime_baseField_CoV_of_jetBundle_gateRestricted_concreteGate
+
 end QIQTH.AxiomAudit

@@ -6406,3 +6406,16 @@ import QIQTH.GeneralBaseJetsMixed
 -- ∀ᶠ-local output plausibly composes with. Bfac's other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd
+-- J4-1032: HCompNearCarryJetBundleConcreteGateDischarge — the JET-BUNDLE piece of J4-1031's shrunk
+-- interface (hJetVi/hJetVj/hJetQ/hAmpj1/hAmpi1/hAmp2) FULLY DISCHARGED at the concrete flow-ball gate
+-- S z = uniformFlowExp z '' Metric.ball 0 c, by directly reusing the ALREADY-BANKED J4-237 brick
+-- Field2NbhdReshape.hcarField2_hgate_concrete (index pair SWAPPED to (j,i)) -- turns out to be strictly
+-- STRONGER than GeneralBaseJetsMixed (J4-1030, redundant for this composition: J4-1030's ∀ᶠ-local
+-- jets are only at the non-constructive field-origin neighbourhood, while J4-237's are at EVERY point
+-- of the concrete gate via uniform reachability). Verified term-for-term (7-conjunct trace) and
+-- consulted gpt-5.6-sol (high) before writing Lean. kPrime_baseField_CoV_of_jetBundle_gateRestricted_
+-- concreteGate: remaining hypotheses are ONLY radius/metric-regularity bookkeeping, hxint, hτ, hd
+-- (untouched, pre-existing), and hxmem (the genuine chart-coverage fact -- reachability of x from
+-- every z∈K's gate -- STILL OPEN, the real residue). Bfac's other 3 summands, fb untouched. NOT
+-- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryJetBundleConcreteGateDischarge
