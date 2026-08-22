@@ -6258,3 +6258,17 @@ import QIQTH.HCompNearCarryTerm1LipschitzCancellation
 -- address Bfac's OTHER 3 terms; fb stays separately open.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1BallGeometry
+-- J4-1021: HCompNearCarryTerm1AmpWeightedTail — gap (I) RESOLVED mechanically: Amp-weighted tail
+-- bounds heatHessMult_amp_tail_le/linMult_amp_tail_le (composing Amp's Lipschitz-at-0 |Amp v| ≤
+-- |Amp0|+L‖v‖ with the already-banked k=0..3 moment tails, no new sympy check needed) +
+-- hsMixed_amp_tail_le (the combined triangle-inequality bound). Gap (II) PARTIALLY resolved:
+-- uniformInverseChart_diag_zero_of_mem proves W x = uniformInverseChart x x = 0 UNCONDITIONALLY
+-- (upgrading the existing ∀ᶠ-local fact), confirming the tail bounds' "v" IS the CoV's own output
+-- variable w (no shift needed at the value level) — BUT the ball-containment geometry needs
+-- retargeting from S' (z-space, J4-1020's Brick B) to W''S' (w-space, centred at 0), which needs
+-- IsOpen(W''S') — NOT established here (BaseSlotM1M4Assembly's public existential hides the needed
+-- OpenPartialHomeomorph structure; would need a fresh IFT-exposing lemma). Does NOT attempt the full
+-- nb-domain-restricted payoff. Does NOT discharge nb, hCConv, or any part of hcomp; does NOT address
+-- Bfac's OTHER 3 terms; fb stays separately open.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1AmpWeightedTail

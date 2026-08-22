@@ -30963,4 +30963,25 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HCompNearCarryTerm1BallGeometry.isOpen_mem_ball_subset
 #print axioms QIQTH.HCompNearCarryTerm1BallGeometry.S'_ball_complement_subset_rncRadialSq_tail
 
+-- J4-1021: HCompNearCarryTerm1AmpWeightedTail — gap (I) RESOLVED mechanically: heatHessMult_amp_tail_le
+-- / linMult_amp_tail_le, the Amp-weighted analogues of J4-1018/J4-1020's tail bounds (composing Amp's
+-- Lipschitz-at-0 |Amp v|≤|Amp0|+L‖v‖ with the already-banked k=0..3 moment tails; no new sympy check —
+-- same exp(-R²/8τ) rate, longer linear combination of already-verified terms) + hsMixed_amp_tail_le
+-- (the combined triangle bound). Gap (II) partial: uniformInverseChart_diag_zero_of_mem proves
+-- W x = uniformInverseChart x x = 0 UNCONDITIONALLY (strengthening the existing ∀ᶠ-local fact),
+-- confirming the tail bounds' "v" IS the CoV's own 0-centred output variable w — but retargeting the
+-- ball-containment geometry from S' (z-space) to W''S' (w-space) needs IsOpen(W''S'), NOT established
+-- here (BaseSlotM1M4Assembly's public existential hides the needed OpenPartialHomeomorph structure).
+-- Sol (gpt-5.6-sol, high) GO-confirmed before Lean. std-3. Does NOT attempt the full nb-domain-
+-- restricted payoff; does NOT discharge nb/hCConv/hcomp; does NOT address Bfac's other 3 terms; fb
+-- stays separately open. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1AmpWeightedTail.heatHessMult_amp_tail_le
+#check @QIQTH.HCompNearCarryTerm1AmpWeightedTail.linMult_amp_tail_le
+#check @QIQTH.HCompNearCarryTerm1AmpWeightedTail.hsMixed_amp_tail_le
+#check @QIQTH.HCompNearCarryTerm1AmpWeightedTail.uniformInverseChart_diag_zero_of_mem
+#print axioms QIQTH.HCompNearCarryTerm1AmpWeightedTail.heatHessMult_amp_tail_le
+#print axioms QIQTH.HCompNearCarryTerm1AmpWeightedTail.linMult_amp_tail_le
+#print axioms QIQTH.HCompNearCarryTerm1AmpWeightedTail.hsMixed_amp_tail_le
+#print axioms QIQTH.HCompNearCarryTerm1AmpWeightedTail.uniformInverseChart_diag_zero_of_mem
+
 end QIQTH.AxiomAudit
