@@ -6198,3 +6198,13 @@ import QIQTH.GaussianAbsMomentGeneral
 -- existentials (CoV/reversal-link/domain-containment) on one radius. std-3. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartEvalSlotRadiusMerge
+-- J4-1016: hWint DISCHARGED — generalized terminalVelAt_contDiffAt_two to every basepoint in the
+-- diagonal-identity ball (terminalVelAt_contDiffAt_two_at), packaged via IsOpen.contDiffOn_iff into
+-- ContDiffOn on the whole ball, shrunk the sliver-bound radius R to R':=min(R,ρ0) (herr/hmin restrict
+-- for free via .mono), then discharged hWint by a constant pointwise domination (gaussDdim_le_diagonal)
+-- + ContinuousOn.aestronglyMeasurable. Combined with J4-1015's terminalVel_sliver_hmom into
+-- terminalVelAt_chartReplace_sliver_bound_unconditional: J4-879's near-sliver rate with BOTH generic
+-- hypotheses discharged, UNCONDITIONALLY. std-3. NOT nb/hcomp/a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED) — this is one piece of nb's plumbing (the direct-integrand
+-- route), independent of J4-1015's still-open CoV Jacobian/weight-domination gap.
+import QIQTH.HWintFullBallDischarge

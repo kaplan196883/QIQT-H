@@ -30875,4 +30875,29 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartEvalSlotRadiusMerge.evalSlot_terminalVel_weighted_CoV_uniform
 #print axioms QIQTH.ChartEvalSlotRadiusMerge.nb_common_chart_radius
 
+-- J4-1016 (HWintFullBallDischarge): hWint DISCHARGED. terminalVelAt_contDiffAt_two_at generalizes
+-- terminalVelAt_contDiffAt_two (C² only AT 0) to EVERY basepoint v₀ in the diagonal-identity ball
+-- ball 0 (min expRho uniformFlowRadius) — the underlying facts (terminalVelAt_apply_eq_fderiv_diag,
+-- uniformFlowExp_contDiffAt_four) already held ∀v there, only the C²-at-0 PACKAGING was specialized.
+-- terminalVelAt_contDiffOn_two_ball packages via IsOpen.contDiffOn_iff into ContDiffOn on the whole
+-- ball. terminalVelAt_hWint_on_shrunk_ball shrinks the (uncontrolled) sliver-bound radius R to
+-- R':=min(R,ρ0) so ball 0 R' ⊆ the regularity ball BY CONSTRUCTION, then discharges hWint via
+-- ContinuousOn.aestronglyMeasurable + a CONSTANT pointwise domination R'^k·gaussDdim τ 0 (from the
+-- banked peak bound gaussDdim_le_diagonal, both G_τ(T_{x₀}z) and G_τ(z) are ≤ gaussDdim τ 0) +
+-- Integrable.mono' against integrableOn_const (finite-measure ball) — the same recipe as the banked
+-- BoundaryAssembly.integrableOn_gauss_mul_bddOn_ball. terminalVelAt_chartReplace_sliver_bound_
+-- unconditional composes this with J4-1015's terminalVel_sliver_hmom (herr/hmin restrict to ball 0 R'
+-- for free via .mono, unchanged constants) into J4-879's near-sliver rate with BOTH generic hypotheses
+-- (hWint, hmom) and the ck3 side-condition discharged — UNCONDITIONALLY, mod only standing geometry.
+-- Plan pre-reviewed by gpt-5.6-sol (high). std-3, no sorry, no new axioms, no existing file edited.
+-- This is ONE piece of nb's plumbing (the direct chart-replacement-integrand route via W:=terminalVelAt)
+-- — NOT nb/hcomp itself (the kPrime→envelope identification is separate un-built plumbing), and
+-- INDEPENDENT of J4-1015's still-open CoV Jacobian/weight-domination gap (a different sub-problem).
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_contDiffAt_two_at
+#print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_contDiffOn_two_ball
+#print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_continuousOn_ball
+#print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_hWint_on_shrunk_ball
+#print axioms QIQTH.HWintFullBallDischarge.terminalVelAt_chartReplace_sliver_bound_unconditional
+
 end QIQTH.AxiomAudit
