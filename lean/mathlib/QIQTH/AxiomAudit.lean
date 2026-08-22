@@ -31140,4 +31140,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryJetBundleConcreteGateDischarge.kPrime_baseField_CoV_of_jetBundle_gateRestricted_concreteGate
 #print axioms QIQTH.HCompNearCarryJetBundleConcreteGateDischarge.kPrime_baseField_CoV_of_jetBundle_gateRestricted_concreteGate
 
+-- J4-1033: UniformFlowKIndep -- generic two-curve ODE-uniqueness lemma
+-- (geodesicField_confined_curves_agree) plus the uniformFlowTube/uniformFlowExp K-independence
+-- congruence: for z ∈ K ∩ K' and w in the overlap radius ball, the flows built from independent
+-- Classical.choose data hK/hK' agree by genuine ODE uniqueness. Fixes the K-dependence mismatch
+-- cp988 diagnosed. Does NOT resolve hxmem's chart-coverage fixed-point circularity (needs a
+-- separate radius-monotonicity comparison, out of scope here); hxmem REMAINS OPEN. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.geodesicField_confined_curves_agree
+#print axioms QIQTH.ExpMap.geodesicField_confined_curves_agree
+#check @QIQTH.ExpMap.uniformFlowTube_K_indep
+#print axioms QIQTH.ExpMap.uniformFlowTube_K_indep
+#check @QIQTH.ExpMap.uniformFlowExp_K_indep
+#print axioms QIQTH.ExpMap.uniformFlowExp_K_indep
+
 end QIQTH.AxiomAudit

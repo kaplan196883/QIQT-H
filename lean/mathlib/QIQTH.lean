@@ -6419,3 +6419,16 @@ import QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhd
 -- every z∈K's gate -- STILL OPEN, the real residue). Bfac's other 3 summands, fb untouched. NOT
 -- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryJetBundleConcreteGateDischarge
+-- J4-1033: UniformFlowKIndep -- uniformFlowExp/uniformFlowTube K-INDEPENDENCE congruence: for a
+-- point z in TWO compact sets K, K' and w in the overlap radius ball (‖w‖ ≤ min ρ_K ρ_K'), the two
+-- flow tubes (hence position endpoints) built from hK/hK' agree, via genuine ODE uniqueness
+-- (geodesicField_confined_curves_agree, same proof shape as the already-banked
+-- expMap_eq_flow_endpoint, generalized to compare two arbitrary confined curves instead of
+-- expTube-vs-Y). Fixes the mismatch cp988 diagnosed: uniformFlowExp g gi hC hK z and
+-- uniformFlowExp g gi hC hK' z are Skolemized from independent Classical.choose data, NOT rfl-equal.
+-- Consulted gpt-5.6-sol (high) first: confirmed sound/mechanical, and confirmed NO-GO on using this
+-- alone to resolve hxmem's chart-coverage fixed-point circularity (that needs a SEPARATE
+-- radius-monotonicity/common-lower-bound comparison across K, not supplied here). hxmem itself
+-- REMAINS OPEN. Bfac's other 3 summands, fb untouched. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.UniformFlowKIndep
