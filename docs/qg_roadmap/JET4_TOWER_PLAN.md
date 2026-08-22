@@ -15675,3 +15675,53 @@ on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
 `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` + `AxiomAudit.lean`;
 `git show 18485fd3 --stat` = 3 files (+340); pushed. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left
 untracked, NOT added.
+
+## J4-1001 — `GaussCompMixedHessian`: MIXED-direction (i≠j) second coordinate partial of the composed
+Gaussian, matching `kPrime`'s literal chain-rule Hessian, IDENTIFIED with J4-998's abstract `heatHessMult`
+— commit TBD
+
+**Task.** Continue the `hcomp` identification chain (J4-998→999→1000). J4-1000's own commit message named
+four residues to identify the abstract moment-cancellation machinery with the literal `kPrime` sliver
+integrand: (a) base-slot change of variables, (b) the second-order chain rule for `kPrime`'s literal mixed
+directional derivative, (c) truncation-tail control, (d) coordinate summation. NEW file, Opus/Fable[1m];
+gpt-5.6-sol high GO/NO-GO-audited 2026-08-22.
+
+**Entry point (Sol high GO/NO-GO).** Read `kPrime`'s exact definition
+(`FderivBulkConcrete.kPrime g gi hC hK S a b i t s x z := leviSeries(s,z,0) • fderiv ℝ (fun y =>
+witnessFieldDeriv … i (t−s) y z) x`), so `kPrime … (Pi.single j 1) = leviSeries(s,z,0) · ∂ⱼ∂ᵢ[H_G(t−s,·,z)]
+(x)` — a genuinely MIXED (`i≠j` in general) second field-derivative, not the diagonal `witnessFieldDeriv2 =
+∂ᵢ∂ᵢ` that `SecondDerivEnvelope.witnessFieldDeriv2_gate_eq`/`ChartJetHessian.gaussComp_pd_pd` already cover.
+Consulted Sol on whether the FULL identification (a)+(b)+(c)+(d) composes in one dispatch: **NO-GO** — the
+base-slot CoV (a) is a genuinely new, comparably-hard instance of the R1 base↔eval chart-incoherence problem
+(`VanVleckGatedSpatialSymmetry`'s own open obligation), and any leading-order chart antisymmetry is
+insufficient at the required order (Sol: a linear chart-incoherence error gives a fatal `τ^{-1}` rate, not
+`τ^{-1/2}`; ≥ quadratic error is needed). **GO on (b) alone**, strictly as an abstract, standalone chain-rule
+lemma decoupled from `uniformInverseChart`/`kPrime`/`hcomp` — exactly `ChartJetHessian`'s own level of
+abstraction, generalized off the diagonal.
+
+**Lands (ns `QIQTH.GaussCompMixedHessian`; NEW file, no banked file edited).**
+- ★★ `gaussComp_pd_pd_mixed` — the mixed second coordinate partial of a composed Gaussian `G_τ∘V`: given an
+  inner `i`-line jet field `P` of `V` (`∀x`), an outer `j`-line jet `Pj0` of `V` itself at `x₀`, and an
+  outer `j`-line jet `Qj` of the FIELD `y↦P y` at `x₀` (the genuine mixed second jet `∂ⱼ(∂ᵢV)`),
+  `∂ⱼ∂ᵢ[G_τ∘V](x₀) = G_τ(V x₀)·[⟨V x₀,Pj0⟩⟨V x₀,P x₀⟩/(4τ²) − (⟨Pj0,P x₀⟩+⟨V x₀,Qj⟩)/(2τ)]`. Proved by the
+  SAME `pd`-on-lines (`Function.update`) technique `ChartJetHessian.gaussComp_pd_pd` uses, with the outer
+  differentiation taken along `j` instead of `i`; specializes to `gaussComp_pd_pd` at `j=i`.
+- ★★★ `gaussComp_pd_pd_mixed_eq_heatHessMult_sub` — THE IDENTIFICATION: the mixed second coordinate partial
+  equals `heatHessMult τ Pj0 (P x₀) (V x₀) − G_τ(V x₀)·⟨V x₀,Qj⟩/(2τ)`, a pure algebraic unfolding against
+  J4-998's abstract multiplier — the missing chain-rule LINK between `kPrime`'s literal mixed Hessian and
+  the abstract object whose `τ^{-1/2}` rate J4-998/999/1000 already control.
+- `gaussComp_amp_pd_pd_mixed` — the amplitude-weighted 4-term Leibniz generalization (mirrors
+  `gaussComp_amp_pd_pd`; matches `kPrime`'s actual amplitude-times-Gaussian shape off the diagonal).
+- `gaussComp_pd_pd_mixed_hyp_satisfiable` — NON-VACUITY: `V:=id`, `P:=`constant field `eᵢ`, `Pj0:=eⱼ`,
+  `Qj:=0` (a linear map has vanishing second jets) jointly satisfy every hypothesis, for any `i,j`.
+
+**Honest scope / non-vacuity.** Fully abstract in `V`/`A`: does NOT instantiate `uniformInverseChart`, does
+NOT touch `kPrime`/`hcomp` literally, does NOT do the base-slot change of variables (item a — Sol NO-GO'd
+this in one dispatch), the truncation-tail control (item c), or the coordinate summation (item d). `hcomp`/
+`hCConv` NOT closed. `hDuhamel`/`hDConv` unaffected. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel,
+hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Banking.** `lake build QIQTH.GaussCompMixedHessian` 0 err (10308 jobs); throwaway `chk1001.lean` +
+in-file `#print axioms` std-3 all 4 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom;
+`QIQTH.AxiomAudit` 0 err (10310 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired
+`QIQTH.lean` + `AxiomAudit.lean`. Stray sibling `docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
