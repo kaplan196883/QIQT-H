@@ -6101,3 +6101,11 @@ import QIQTH.UniformInverseChartRncRadialSqErrorGeneralQ0
 -- 0 ∈ interior K). std-3. Base-slot CoV into hcomp's literal integral shape NOT attempted. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HerrHminGeneralQ0GeneralK
+-- J4-1007: BaseSlotIFTLocalHomeomorph — the FIRST genuine local-diffeomorphism package for
+-- uniformInverseChart's base slot, via Mathlib's actual Inverse Function Theorem
+-- (HasStrictFDerivAt.toOpenPartialHomeomorph), fed by J4-1006's general-q₀/general-K base-slot
+-- HasFDerivAt(-Id) + joint ContDiffAt 2. Discharges M2 (InjOn) + M3 (left inverse V) of
+-- ChartGaussianChangeVar's (J4-269) missing-fact list for the base slot; M1 (HasFDerivWithinAt
+-- throughout S) and M4 (Jacobian lower bound throughout S) remain open. Does NOT wire into
+-- hcomp/nb/hCConv. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.BaseSlotIFTLocalHomeomorph

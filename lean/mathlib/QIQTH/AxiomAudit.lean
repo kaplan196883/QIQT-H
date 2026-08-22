@@ -30693,4 +30693,26 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.HerrHminGeneralQ0GeneralK.hmin_gate_general_q0_generalK
 #print axioms QIQTH.HerrHminGeneralQ0GeneralK.herrHmin_gate_general_q0_generalK
 
+-- J4-1007 (BaseSlotIFTLocalHomeomorph): the FIRST genuine local-diffeomorphism package for
+-- uniformInverseChart's base slot, via Mathlib's actual Inverse Function Theorem
+-- (HasStrictFDerivAt.toOpenPartialHomeomorph), fed by J4-1006's general-q₀/general-K base-slot
+-- HasFDerivAt(-Id) + joint ContDiffAt 2 (composed with p ↦ (p,q₀)). Route: upgrade HasFDerivAt(-Id) to
+-- HasStrictFDerivAt via ContDiffAt.hasStrictFDerivAt (order ≥1) + fderiv uniqueness; package -Id as a
+-- genuine ContinuousLinearEquiv (negCLE := (LinearEquiv.neg ℝ).toContinuousLinearEquiv); invoke
+-- Mathlib's IFT directly to get an open S ∋ q₀ on which the base slot is InjOn with an explicit left
+-- inverse V (V(Wp)=p on S) — discharging M2 (InjOn) + M3 (left inverse) of ChartGaussianChangeVar's
+-- (J4-269) missing-fact list for the FIRST time, from Mathlib's own IFT rather than a hand-built
+-- construction. Sol gpt-5.6-sol high qualified-GO consulted before Lean (confirmed the coercivity
+-- bounds herr_gate/hmin_gate do NOT by themselves give injectivity or a Jacobian bound; the IFT route
+-- is strictly more direct). Does NOT discharge M1 (HasFDerivWithinAt throughout S, only AT q₀) or M4
+-- (Jacobian lower bound throughout S — needs Units.isOpen + IsUnit↔det≠0 bridge, confirmed to exist in
+-- this Mathlib checkout but not assembled). Does NOT instantiate chart_gaussian_change_variables. Does
+-- NOT wire into HCompNearCarryChartSurfaceWired's literal kPrime shape or hcomp. std-3.
+-- nb/hcomp/hCConv remain OPEN. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#print axioms QIQTH.BaseSlotIFTLocalHomeomorph.negCLE_coe
+#print axioms QIQTH.BaseSlotIFTLocalHomeomorph.uniformInverseChart_baseSlot_contDiffAt_generalK
+#print axioms QIQTH.BaseSlotIFTLocalHomeomorph.uniformInverseChart_baseSlot_hasStrictFDerivAt_generalK
+#print axioms QIQTH.BaseSlotIFTLocalHomeomorph.uniformInverseChart_baseSlot_hasStrictFDerivAt_CLE_generalK
+#print axioms QIQTH.BaseSlotIFTLocalHomeomorph.uniformInverseChart_baseSlot_localOpenHomeomorph_generalK
+
 end QIQTH.AxiomAudit
