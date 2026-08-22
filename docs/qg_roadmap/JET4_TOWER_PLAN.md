@@ -15678,7 +15678,7 @@ untracked, NOT added.
 
 ## J4-1001 — `GaussCompMixedHessian`: MIXED-direction (i≠j) second coordinate partial of the composed
 Gaussian, matching `kPrime`'s literal chain-rule Hessian, IDENTIFIED with J4-998's abstract `heatHessMult`
-— commit TBD
+— commit `ba4d0027`
 
 **Task.** Continue the `hcomp` identification chain (J4-998→999→1000). J4-1000's own commit message named
 four residues to identify the abstract moment-cancellation machinery with the literal `kPrime` sliver
