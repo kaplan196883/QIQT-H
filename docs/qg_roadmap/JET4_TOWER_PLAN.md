@@ -15338,3 +15338,45 @@ all 6 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH
   the zeroth-order value alone, per Sol).
 - (6) flat+curved regression tests.
 NONE unblock the `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`.
+
+---
+
+## J4-995 — `CurvedRNCFirstJetLeg`: the CORRECTED hpull FIRST LEG `⟨z,A eᵢ⟩=z_i` (`Aᵀz=z`) for the concrete curved witness — commit `89e29529`
+
+**What.** Discharges the CORRECTED-`hpull` FIRST LEG (item (5)) for the inverse-chart first jet
+`A := D W_z(0)` of `g^K = curvedRNCMetric κ` (`κ ≤ 0`, `Ric(0)=(n−1)κ·δ≠0`). The CURRENT banked
+`hpullVP` shape `∑_k (W_z 0)_k·(A eᵢ)_k = ∑_j g_ij(z)·z^j` is PROVABLY MIS-SIGNED (J4-978 /
+`current_hpullVP_fails`, cp865: flat check LHS=−z_i, RHS=+z_i). The CORRECTED first leg is `Aᵀz=z`,
+i.e. `∑_k z_k·(A eᵢ)_k = z_i`. NUMERICALLY VERIFIED to 1e-10 (n=2,3; several κ<0; small z) by
+integrating the geodesic ODE and finite-differencing `exp_z` (radial straight-line geodesics + Gauss
+lemma + metric radial gauge all hold exactly for `curvedRNCMetric`).
+
+**Math (gpt-5.6-sol high GO-audited, signs verified).**
+- `T := D(uniformFlowExp z)(−z)`, `P := D W_z(0)`. Germ `W∘φ=id` near `−z` (with `φ(−z)=0`,
+  `W(0)=−z`, both banked J4-994) ⟹ `P∘T=id` (chain rule); forward Jacobian near-identity
+  `‖T−1‖≤C_D‖z‖≤½` ⟹ `T` a unit ⟹ `T∘P=id`.
+- Radial Gauss identity `⟨z,T w⟩=⟨z,w⟩ ∀w` (`Tᵀz=z`) from banked `gauss_interior_identity` at
+  `(z,−z)`: `g(0)=δ`, `γ̇(1)=−z`, metric radial gauge `∑_b g_ab(z)z^b=z_a`, `expMap↔uniformFlowExp`
+  overlap alignment.
+- Then `⟨z,P eᵢ⟩=⟨z,T(P eᵢ)⟩=⟨z,eᵢ⟩=z_i`. The full jet `A=T⁻¹` is NOT pinned — only its single
+  constraint `Aᵀz=z`, which is all this leg needs.
+
+**Lands (ns `QIQTH.CurvedRNCFirstJetLeg`; NEW file, no banked file edited).**
+`curvedRNC_expTube_neg` (exact exp-tube endpoint `expTube z (−z) 1 = (0,−z)`, ODE-uniqueness mirror of
+J4-994 for `expTube`, giving both `exp_z(−z)=0` and `γ̇(1)=−z`); ★ `curvedRNC_gauss_radial`
+(`⟨z,T w⟩=⟨z,w⟩`); ★★ `curvedRNC_firstJetLeg` (`∃r>0, ∀z∈S, ‖z‖<r → ‖z‖<expRho z → ∑_k z_k·(D W_z(0)·eᵢ)_k = z_i`).
+
+**Banking.** `lake build QIQTH.CurvedRNCFirstJetLeg` 0 err (8930 jobs); in-file `#print axioms` std-3 all
+3 (propext/Classical.choice/Quot.sound), no sorryAx, no custom axiom; `QIQTH.AxiomAudit` 0 err
+(10304 jobs); `axiom_budget_check.sh` raw 0 (budget 0); vacuum-grep clean; wired `QIQTH.lean` +
+`AxiomAudit.lean`; `git show 89e29529 --stat` = 3 files (+339); pushed. Stray sibling
+`docs/qg_roadmap/rnc_sympy/*.py` left untracked, NOT added.
+
+**Updated corrected-`hpull` program status.**
+- (1) DONE (J4-992); (2) DONE (J4-993); (4) DONE (J4-994).
+- (5) DONE (J4-995, this) — corrected first leg `Aᵀz=z` for the concrete `curvedRNCMetric κ`, per-point
+  on the injectivity/expRho ball. Route: germ chain rule + radial Gauss identity + metric radial gauge.
+- (3) exact inverse second-jet `D²(g̃⁻¹)(0)` — still the likely Lean engineering sink (the SECOND leg
+  `hpullVQ` needs it).
+- (6) flat+curved regression tests.
+NONE unblock the `{hDuhamel, hDConv, hCConv}` conditionality of `a₁=R/6`. NOT `a₁=R/6`.
