@@ -31738,4 +31738,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvBoundDHpardiffAnySConstGateFullDischarge.hDConv_boundD_hpardiff_anyS_constGate_full_wired
 #print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateFullDischarge.hDConv_boundD_hpardiff_anyS_constGate_full_wired
 
+-- J4-1115: HDConvBoundDHpardiffAnySConstGateHFzeroDischarge —
+-- hDConv_boundD_hpardiff_anyS_constGate_hfzero_wired. FURTHER closes J4-1114's {hAmp0,hCfield,hSupp}
+-- closure by ALSO discharging hFzero entirely, via the already-banked
+-- HDuhamelCensusVanishingDischarged.hFzero_live (confirmed genuinely S-independent, transferred directly
+-- from the hgate-carrying J4-1112 family into this hgate-free anyS/constGate family): F fixed to the
+-- concrete leviSeries formula via a new interface carry hFeq (subst), hFzero derived internally, zero new
+-- analytic carries. gpt-5.6-sol (high) consulted before construction (confirmed sound + non-circular; also
+-- confirmed hFdom's T-vs-(T+1) cap is trivially fixable but the deeper cR/a/b-free-vs-existential mismatch
+-- with the existing hFdom discharge is genuinely nontrivial, deferred). Remaining carries:
+-- {hFdom,hAmeas,hDmeas,hbase} + standard geometry {h0Kmem,hg,hg0,hu} + C_L,hC_L. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvBoundDHpardiffAnySConstGateHFzeroDischarge.hDConv_boundD_hpardiff_anyS_constGate_hfzero_wired
+#print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateHFzeroDischarge.hDConv_boundD_hpardiff_anyS_constGate_hfzero_wired
+
 end QIQTH.AxiomAudit
