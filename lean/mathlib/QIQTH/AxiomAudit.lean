@@ -31537,4 +31537,30 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HBFpeakReducedToChartC2Cover.chartC2_gate_cover_pointwise_nonvacuous
 #print axioms QIQTH.HBFpeakReducedToChartC2Cover.chartC2_gate_cover_pointwise_nonvacuous
 
+-- J4-1089: HBFpeakInteriorNullFrontierBypass -- hBFpeak's literal ∀z RELAXED to ∀ᵐz (a.e.-z), the SAME
+-- AEStronglyMeasurable/null-frontier bypass technique J4-904->907 used for hbint, applied here to the
+-- hBFpeak DOMINATION carry (confirmed: its only consumer needs integral_mono_ae not integral_mono).
+-- hzmass_via_interior_peak_null_frontier closes hzmass on the capped window with NO reference anywhere
+-- to the PROVEN-DEAD chart-C2+in-gate boundary cover W (J4-892/1088) -- only {hBFint: peak bound on
+-- interior K (NAMED, undischarged), hBFoff (banked off-K vanishing shape), null-frontier (banked)}.
+-- Does NOT discharge hBFint itself -- Sol-confirmed continuity/local-boundedness on interior K does NOT
+-- imply a uniform bound (standard 1/(R-‖z-c‖) counterexample), so hBFint is left as an honest open
+-- carry, structurally analogous to (but not identical with) hbint's own still-open hbnd. Does NOT touch
+-- nb/hCConv/hcomp/hxmem/hbnd. std-3, gpt-5.6-sol(high) consulted GO before construction.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.ae_le_of_le_on_interior_of_eq_zero_off_of_null_frontier
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.ae_le_of_le_on_interior_of_eq_zero_off_of_null_frontier
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.hBFpeak_ae_of_interior_and_offK
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hBFpeak_ae_of_interior_and_offK
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_of_peak_BF_gaussian2s_BL_ae
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_of_peak_BF_gaussian2s_BL_ae
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_capped_window_closed_ae
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_capped_window_closed_ae
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier_nonvacuous_empty
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier_nonvacuous_empty
+#check @QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier_nonvacuous_ball
+#print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier_nonvacuous_ball
+
 end QIQTH.AxiomAudit

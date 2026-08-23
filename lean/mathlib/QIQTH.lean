@@ -6826,3 +6826,15 @@ import QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound
 -- joint-C1 chart carry (fb's other two open pieces). Does NOT touch nb/hCConv/hcomp/hxmem. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HBFpeakReducedToChartC2Cover
+-- J4-1089: HBFpeakInteriorNullFrontierBypass -- hBFpeak's ∀z literal RELAXED to ∀ᵐz (a.e.-z), mirroring
+-- hbint's J4-904->907 AEStronglyMeasurable/null-frontier bypass of the PROVEN-DEAD chart-C2+in-gate
+-- boundary cover W (J4-892/1088): confirmed hBFpeak's ONLY consumer (hzmass_of_peak_BF_gaussian2s_BL)
+-- needs only integral_mono_ae not integral_mono, so ∀ᵐz suffices. hzmass_via_interior_peak_null_frontier
+-- closes hzmass on the capped window from {hBFint: ∀z∈interior K (NAMED, undischarged -- Sol-confirmed
+-- NOT derivable from continuity/local-boundedness alone, standard 1/(R-‖z-c‖)-style counterexample),
+-- hBFoff (banked off-K vanishing shape), null-frontier (banked for the live ball)} -- NO reference to
+-- the dead cover W anywhere. Does NOT discharge hBFint itself (the honest residue, structurally
+-- analogous to but not identical with hbint's own still-open hbnd). Does NOT touch nb/hCConv/hcomp/
+-- hxmem/hbnd. std-3, gpt-5.6-sol(high) consulted GO before construction.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HBFpeakInteriorNullFrontierBypass
