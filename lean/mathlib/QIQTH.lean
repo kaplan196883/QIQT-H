@@ -7063,3 +7063,15 @@ import QIQTH.ChartOverlapUniquenessTwoSeeds
 -- future derivative-transport step needs. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartOverlapGermCompatibilityTwoSeeds
+
+-- J4-1126: ChartOverlapConsumerTripleTwoSeeds — dispatch 4 of the greenlit overlap-uniqueness
+-- bridge sub-campaign. chartCoherent_consumer_triple_at_overlap_two_seeds upgrades J4-1125's germ
+-- fact to the target-facing consumer triple ChartJointBorel.lean actually needs: for EVERY
+-- ξ ∈ U1 ∩ U2, value agreement + SECOND-VARIABLE-ONLY fiber-derivative agreement (base point
+-- ξ.1 frozen, via hgerm.comp_tendsto on the fiber-inclusion p ↦ (ξ.1,p) + fderiv_eq — NOT a joint
+-- fderiv, matching ChartJointBorel's literal per-coordinate HasDerivAt-in-p-only hypotheses) +
+-- carrier membership. gpt-5.6-sol (high) confirmed the diagnosis and the fderiv-shaped statement
+-- as a sound intermediate; next dispatch (J4-1127) transfers to the literal per-coordinate
+-- HasDerivAt shape. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.ChartOverlapConsumerTripleTwoSeeds

@@ -31808,4 +31808,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_germ_agree_at_overlap_two_seeds
 #print axioms QIQTH.ExpMap.chartCoherent_germ_agree_at_overlap_two_seeds
 
+-- J4-1126: ChartOverlapConsumerTripleTwoSeeds — dispatch 4 of the greenlit overlap-uniqueness
+-- bridge sub-campaign. chartCoherent_consumer_triple_at_overlap_two_seeds upgrades J4-1125's germ
+-- fact to the target-facing consumer triple ChartJointBorel.lean actually needs: for EVERY
+-- ξ ∈ U1 ∩ U2, value agreement + SECOND-VARIABLE-ONLY fiber-derivative agreement (base point
+-- ξ.1 frozen — the exact shape ChartJointBorel's hcarField/hcarField2 consume, NOT a joint
+-- fderiv) + carrier membership. gpt-5.6-sol (high) confirmed the diagnosis and the fderiv-shaped
+-- statement as a sound intermediate; J4-1127 transfers to the literal per-coordinate HasDerivAt
+-- shape. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartCoherent_consumer_triple_at_overlap_two_seeds
+#print axioms QIQTH.ExpMap.chartCoherent_consumer_triple_at_overlap_two_seeds
+
 end QIQTH.AxiomAudit
