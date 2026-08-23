@@ -31669,4 +31669,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvAtGateConstGateHUfloor.hDConv_AT_GATE_constGate_hUfloor
 #print axioms QIQTH.HDConvAtGateConstGateHUfloor.hDConv_AT_GATE_constGate_hUfloor
 
+-- J4-1109: HDConvGateHQ1Discharged — hDConv_AT_GATE_hQ1_discharged. Eliminates the frozen
+-- first-order interchange EQUALITY carry `hQ1` from the live `hDConv_AT_GATE` census (abstract
+-- gate S), traded for its raw seven-leg diff-under-∫ inputs `hFrozenData`, via the banked
+-- `W2Finish.w2_hQ1` (J4-378) — the hDConv-side sibling of J4-982's identical hDuhamel-side
+-- reduction. hFmeas/hFint/hF'meas remain fully separate, untouched, still-open hypotheses; the
+-- ~20 remaining Section-G census members are NOT discharged. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvGateHQ1Discharged.hDConv_AT_GATE_hQ1_discharged
+#print axioms QIQTH.HDConvGateHQ1Discharged.hDConv_AT_GATE_hQ1_discharged
+
 end QIQTH.AxiomAudit
