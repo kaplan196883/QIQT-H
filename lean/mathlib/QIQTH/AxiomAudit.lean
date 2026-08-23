@@ -31658,4 +31658,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HFdomVanVleckHEmeasDischarged.hFdom_vanVleck_hEmeas_discharged
 #print axioms QIQTH.HFdomVanVleckHEmeasDischarged.hFdom_vanVleck_hEmeas_discharged
 
+-- J4-1108: HDConvAtGateConstGateHUfloor — hDConv_AT_GATE_constGate_hUfloor. Consolidates J4-1101's
+-- gate-agnostic hUfloor_of_windowFloor reduction onto J4-1103's hDConv_AT_GATE_constGate (the
+-- constGate-specialized hAdom/hWDom discharge), dropping hUfloor there too from the SAME aT/haT/hUlb
+-- data already carried. 14 binders (hAdom 5 + hWDom 7 + hUfloor 2) now discharged at ONE concrete
+-- S := constGate g gi hChr hK c gate. hFdom (J4-1107, same gate SHAPE) NOT yet merged in — blocked by
+-- two independently-constructed radius thresholds (flowBallRadiusThreshold vs δ₀(a,b)) with no known
+-- comparison lemma. Remaining ~24 census members unchecked at this gate. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvAtGateConstGateHUfloor.hDConv_AT_GATE_constGate_hUfloor
+#print axioms QIQTH.HDConvAtGateConstGateHUfloor.hDConv_AT_GATE_constGate_hUfloor
+
 end QIQTH.AxiomAudit

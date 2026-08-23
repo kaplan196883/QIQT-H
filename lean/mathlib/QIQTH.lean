@@ -6913,3 +6913,15 @@ import QIQTH.HFdomConcreteVanVleck
 -- members are untouched and not yet checked to transfer to this gate. std-3. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFdomVanVleckHEmeasDischarged
+
+-- J4-1108: HDConvAtGateConstGateHUfloor — hDConv_AT_GATE_constGate_hUfloor. `hDConv_AT_GATE_constGate`
+-- (J4-1103, hAdom/hWDom already discharged at S := constGate g gi hChr hK c) with hUfloor ALSO dropped,
+-- re-derived internally from the SAME aT/haT/hUlb data via J4-1101's gate-agnostic
+-- hUfloor_of_windowFloor. A genuine consolidation of two previously-separate census-reduction
+-- techniques onto ONE concrete constant-radius gate: hAdom (5 binders) + hWDom (7 binders) + hUfloor
+-- (2 binders) = 14 binders discharged at S := constGate ... c, alongside hFdom (separately, at the
+-- SAME gate SHAPE but not yet a shared (a,b,c)) from J4-1107. hFdom NOT merged in (blocked: two
+-- independently-constructed radius thresholds flowBallRadiusThreshold vs δ₀(a,b), no known comparison
+-- lemma — matches the J4-1104 "blocked without a reprove" pattern). std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvAtGateConstGateHUfloor
