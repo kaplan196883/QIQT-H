@@ -6477,3 +6477,22 @@ import QIQTH.LeviBaseGaussEnvelopeConst
 -- gap, hBFpeak's z-uniform-dominator gap}. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HLeviCappedWindowConst
+
+-- J4-1037: ConstRadiusPkgPrescribed + HBLgaussUnconditional -- fb's hBLgauss `c < δ₀` compatibility gap
+-- (cp995's genuine open item, Sol countermodel a=1,b=2,c=3,δ₀=1) CLOSED via construction-order
+-- inversion: obtain the S1 jet reach δ₀ FIRST (ReachRequant.tripleHEmeas_flowball_requant, (a,b)-free,
+-- J4-599), feed it as a PRESCRIBED ceiling into a new replay of the package producer
+-- (ConstRadiusPkgPrescribed.gatedWitnessN1_package_open_CONSTRADIUS_prescribed, mirroring
+-- CurvedA1ReachAlign's already-banked generic prescribed CONST producer for a DIFFERENT consumer), so
+-- the package's own gate radius c satisfies c < δ₀ BY CONSTRUCTION, then feed δ₀'s own hspec directly
+-- (not re-deriving an independent δ₀) to get tripleHEmeas UNCONDITIONALLY. leviBase_gaussDdim2s_envelope_
+-- UNCOND / hBLgauss_capped_window_UNCOND re-export LeviBaseGaussEnvelopeConst's J4-1035 theorems with the
+-- `c < δ₀ →` antecedent GONE entirely. Consulted gpt-5.6-sol (high) before construction with precise
+-- dependency chains traced (import-DAG checked: no cycle); verdict GO, no circularity (δ₀ from
+-- ReachRequant depends only on ambient g/gi/hC/hK, never on a,b,c produced afterward -- unlike hxmem,
+-- no `.choose` here is applied to a term built from the later witnesses). fb's other five
+-- hzmass_capped_window_closed hypotheses (hint, hBFpeak, hBLnn, hPpknn, hPCbound) UNTOUCHED;
+-- hBFpeak's z-uniform-dominator gap REMAINS OPEN. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ConstRadiusPkgPrescribed
+import QIQTH.HBLgaussUnconditional

@@ -31186,4 +31186,21 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HLeviCappedWindowConst.hLevi_capped_window_CONST
 #print axioms QIQTH.HLeviCappedWindowConst.hLevi_capped_window_CONST
 
+-- J4-1037: ConstRadiusPkgPrescribed + HBLgaussUnconditional -- fb's hBLgauss `c < δ₀` compatibility gap
+-- CLOSED via construction-order inversion: the S1 jet reach δ₀ obtained FIRST
+-- (ReachRequant.tripleHEmeas_flowball_requant, (a,b)-free, J4-599) fed as a PRESCRIBED ceiling into a
+-- new replay of the package producer, so the package's own gate radius c satisfies c < δ₀ BY
+-- CONSTRUCTION. leviBase_gaussDdim2s_envelope_UNCOND / hBLgauss_capped_window_UNCOND re-export
+-- LeviBaseGaussEnvelopeConst's J4-1035 theorems with the `c < δ₀ →` antecedent GONE entirely. Consulted
+-- gpt-5.6-sol (high) before construction; GO verdict, no circularity (δ₀ depends only on ambient
+-- g/gi/hC/hK, never on the later a,b,c witnesses -- unlike hxmem's trap). fb's other five hypotheses
+-- (hint, hBFpeak, hBLnn, hPpknn, hPCbound) UNTOUCHED; hBFpeak's z-uniform-dominator gap REMAINS OPEN.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ConstRadiusPkgPrescribed.gatedWitnessN1_package_open_CONSTRADIUS_prescribed
+#print axioms QIQTH.ConstRadiusPkgPrescribed.gatedWitnessN1_package_open_CONSTRADIUS_prescribed
+#check @QIQTH.HBLgaussUnconditional.leviBase_gaussDdim2s_envelope_UNCOND
+#print axioms QIQTH.HBLgaussUnconditional.leviBase_gaussDdim2s_envelope_UNCOND
+#check @QIQTH.HBLgaussUnconditional.hBLgauss_capped_window_UNCOND
+#print axioms QIQTH.HBLgaussUnconditional.hBLgauss_capped_window_UNCOND
+
 end QIQTH.AxiomAudit
