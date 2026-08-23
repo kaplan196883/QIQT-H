@@ -6889,3 +6889,9 @@ import QIQTH.HDConvGateCensusDerivWired
 -- flagged; gpt-5.6-sol (high) confirmed scope 2026-08-24. All other ~40 hDConv_AT_GATE census members
 -- remain open. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvAtGateConstGateHAdom
+
+-- J4-1105: HFdomOfLeviSeriesDominated — hFdom_of_leviSeries_dominatedW, reducing hDConv_AT_GATE's
+-- hFdom antecedent to a corollary of the ALREADY-BANKED GatedWitnessPackage.leviSeries_dominatedW_le
+-- (J4-114 (B)) via baseKernelW_zero_apply; corrects J4-1104's "no theorem bounds leviSeries" claim.
+-- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFdomOfLeviSeriesDominated

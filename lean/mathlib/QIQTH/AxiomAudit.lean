@@ -31623,4 +31623,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvAtGateConstGateHAdom.flowBallRadiusThreshold_spec
 #print axioms QIQTH.HDConvAtGateConstGateHAdom.flowBallRadiusThreshold_spec
 
+-- J4-1105: HFdomOfLeviSeriesDominated — hFdom_of_leviSeries_dominatedW, reducing hDConv_AT_GATE's
+-- hFdom census member (∀s,0<s→s≤T→∀z y,|F s z y|≤C_L·gaussDdim(2s)(z−y) for F=leviSeries E) to a
+-- corollary of the ALREADY-BANKED GatedWitnessPackage.leviSeries_dominatedW_le (J4-114 (B)) via
+-- ParametrixHEboundWiring.baseKernelW_zero_apply; corrects J4-1104's "no theorem anywhere bounds
+-- concrete leviSeries" claim (under-crediting). Reduces hFdom to exactly {hEbound : width-2/α=0
+-- one-step residual bound on (0,T], hInt : IterConvIntegrableW E 2 0 C} — NOT yet discharged for the
+-- concrete vanVleckGatedWitness (which additionally needs hEmeas, the M1 wall already tracked by
+-- leviSeries_gatedWitnessN1_dominated). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HFdomOfLeviSeriesDominated.hFdom_of_leviSeries_dominatedW
+#print axioms QIQTH.HFdomOfLeviSeriesDominated.hFdom_of_leviSeries_dominatedW
+
 end QIQTH.AxiomAudit
