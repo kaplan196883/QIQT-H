@@ -31575,4 +31575,11 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HFrozenAILocallyUniform.frozenAI_tLocallyUniform
 #print axioms QIQTH.HFrozenAILocallyUniform.frozenAI_tLocallyUniform
 
+-- J4-1098: HMovingCorrLocallyUniform — movingCorr_tLocallyUniform, the SAME open-set/compact-window
+-- promotion (mirrors J4-1097) of the already-landed L1 engine movingCorr_tUniform to the full
+-- TendstoLocallyUniformlyOn ... U shape hbdryLU_of_movingCorr_frozen's hmovLU input needs. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HMovingCorrLocallyUniform.movingCorr_tLocallyUniform
+#print axioms QIQTH.HMovingCorrLocallyUniform.movingCorr_tLocallyUniform
+
 end QIQTH.AxiomAudit

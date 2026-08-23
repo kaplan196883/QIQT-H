@@ -6854,3 +6854,15 @@ import QIQTH.HFrozenAIUniform
 -- remains open, plausibly hits the chart wall. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFrozenAILocallyUniform
+-- J4-1098: HMovingCorrLocallyUniform — movingCorr_tLocallyUniform, the SAME mechanical open-set/
+-- compact-window wrapper (mirrors J4-1097 exactly, gpt-5.6-sol(high)-confirmed) promoting the
+-- ALREADY-LANDED L1 engine LocUnifDerivConv.movingCorr_tUniform (Icc-level) to the FULL
+-- TendstoLocallyUniformlyOn ... U shape hbdryLU_of_movingCorr_frozen's OTHER input, hmovLU, actually
+-- needs. Discharges hmovLU at the ABSTRACT H,F level; both hmovLU and hfroLU are now abstract-level
+-- discharged, so hbdryLU_of_movingCorr_frozen itself is a mechanical apply away from hbdryLUTarget
+-- GIVEN concrete hypothesis supply. Concrete supply of hWmeas/hfmov_meas/hffro_meas/hfmov_bdd/
+-- hffro_bdd/hDom/hmass/hsupAll at the curved-tower witness remains open; hsupAll is a genuinely
+-- DIFFERENT (time-shift) hypothesis from hfroLU's hlocalAll (spatial-at-z=0), plausibly ALSO hits the
+-- chart wall (uniformInverseChart/EnrichedChartBundle) to control the shifted-time chart domain. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HMovingCorrLocallyUniform
