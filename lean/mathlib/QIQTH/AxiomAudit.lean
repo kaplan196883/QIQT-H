@@ -31831,4 +31831,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_hasDerivAt_transfer_at_overlap_two_seeds
 #print axioms QIQTH.ExpMap.chartCoherent_hasDerivAt_transfer_at_overlap_two_seeds
 
+-- J4-1128: ChartOverlapCoefficientAgreementTwoSeeds — dispatch 6 of the greenlit overlap-
+-- uniqueness bridge sub-campaign. chartCoherent_field_agree_at_overlap_two_seeds upgrades
+-- J4-1127's HasDerivAt-iff transfer, via HasDerivAt.unique, to a derivative-COEFFICIENT-FIELD
+-- agreement fact on the overlap U1 ∩ U2 for arbitrary candidate coefficient fields P1/P2
+-- witnessing chartCoherent1's/chartCoherent2's coordinate-line derivatives on U1/U2
+-- respectively. gpt-5.6-sol (high) confirmed pure logic, no sympy needed; Qfield (second
+-- derivative of Pjfield) agreement explicitly OUT of scope (targeted J4-1129). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartCoherent_field_agree_at_overlap_two_seeds
+#print axioms QIQTH.ExpMap.chartCoherent_field_agree_at_overlap_two_seeds
+
 end QIQTH.AxiomAudit

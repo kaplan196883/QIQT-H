@@ -7089,3 +7089,15 @@ import QIQTH.ChartOverlapConsumerTripleTwoSeeds
 -- measurability). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
 -- UNCHANGED).
 import QIQTH.ChartOverlapCoordinateLineHasDerivAtTransfer
+
+-- J4-1128: ChartOverlapCoefficientAgreementTwoSeeds — dispatch 6 of the greenlit overlap-
+-- uniqueness bridge sub-campaign. chartCoherent_field_agree_at_overlap_two_seeds upgrades
+-- J4-1127's HasDerivAt-iff transfer, via HasDerivAt.unique, to a derivative-COEFFICIENT-FIELD
+-- agreement fact: IF candidate fields P1/P2 witness chartCoherent1's, resp. chartCoherent2's,
+-- k-coordinate-line derivatives throughout U1, resp. U2, THEN P1 and P2 agree on the overlap
+-- U1 ∩ U2 (every jj) — the well-definedness fact a future glued Pfield/Pifield/Pjfield
+-- representative needs. gpt-5.6-sol (high) confirmed this is pure logic (no sympy needed) and
+-- that Qfield (second derivative of Pjfield) agreement is explicitly OUT of scope here (needs a
+-- germ/eventual-equality upgrade first — targeted for J4-1129). std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartOverlapCoefficientAgreementTwoSeeds
