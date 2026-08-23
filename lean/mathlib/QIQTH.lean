@@ -6815,3 +6815,14 @@ import QIQTH.LeviWindowUniformAmpLipschitz
 -- Does NOT touch nb/hCConv/hcomp/fb/hxmem/hfac. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,
 -- hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound
+-- J4-1087: HBFpeakReducedToChartC2Cover -- fb's hBFpeak/hpeak literal-shape carries reduced to the
+-- SAME chart-C2+in-gate open cover hypothesis hbint already carries (J4-889), via jointCorePeak (a
+-- z-uniform peak constant, no existential Poly needed): on jointCore the field-Hessian norm is bounded
+-- by IsCompact.bddAbove_image + le_csSup (CONDITIONAL on the chart-C2+in-gate cover); off jointCore it
+-- is IDENTICALLY 0 (already-proven collar J4-888), covering ALL of closure(S z)\jointCore without the
+-- FALSE naive inclusion closure(S z)⊆jointCore. Does NOT wire into hzmass_capped_window_closed/
+-- MixedEnvelopeAssembly as an assembled term; the chart-C2+in-gate cover W itself remains the
+-- JointSecondOrderRNCRegularity frontier (J4-889), NOT built here. Does NOT discharge hbnd or the
+-- joint-C1 chart carry (fb's other two open pieces). Does NOT touch nb/hCConv/hcomp/hxmem. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HBFpeakReducedToChartC2Cover

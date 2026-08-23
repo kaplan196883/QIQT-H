@@ -31516,4 +31516,25 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound.bfac_four_term_levi_domain_restricted_sliver_window_bound
 #print axioms QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound.bfac_four_term_levi_domain_restricted_sliver_window_bound
 
+-- J4-1087: HBFpeakReducedToChartC2Cover -- fb's hBFpeak literal-shape carry reduced to the SAME
+-- chart-C2+in-gate open cover hbint already carries (J4-889), via jointCorePeak (z-uniform peak
+-- constant, no existential Poly): on jointCore bounded via IsCompact.bddAbove_image+le_csSup
+-- (CONDITIONAL on the chart-C2+in-gate cover); off jointCore field-Hessian IDENTICALLY 0 (collar
+-- J4-888), covering closure(S z)\jointCore without the FALSE naive inclusion. Does NOT wire into
+-- hzmass_capped_window_closed/MixedEnvelopeAssembly as an assembled term; the cover W remains the
+-- JointSecondOrderRNCRegularity frontier (J4-889), NOT built here. Does NOT discharge hbnd or the
+-- joint-C1 chart carry. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HBFpeakReducedToChartC2Cover.jointCore_subset_prod_concreteKx
+#print axioms QIQTH.HBFpeakReducedToChartC2Cover.jointCore_subset_prod_concreteKx
+#check @QIQTH.HBFpeakReducedToChartC2Cover.jointCorePeak_nonneg
+#print axioms QIQTH.HBFpeakReducedToChartC2Cover.jointCorePeak_nonneg
+#check @QIQTH.HBFpeakReducedToChartC2Cover.fieldHessianNorm_le_jointCorePeak_of_cover_and_offgraph
+#print axioms QIQTH.HBFpeakReducedToChartC2Cover.fieldHessianNorm_le_jointCorePeak_of_cover_and_offgraph
+#check @QIQTH.HBFpeakReducedToChartC2Cover.hBFpeak_reduced_to_chartC2_gate_cover
+#print axioms QIQTH.HBFpeakReducedToChartC2Cover.hBFpeak_reduced_to_chartC2_gate_cover
+#check @QIQTH.HBFpeakReducedToChartC2Cover.fieldHessianNorm_le_jointCorePeak_nonvacuous
+#print axioms QIQTH.HBFpeakReducedToChartC2Cover.fieldHessianNorm_le_jointCorePeak_nonvacuous
+#check @QIQTH.HBFpeakReducedToChartC2Cover.chartC2_gate_cover_pointwise_nonvacuous
+#print axioms QIQTH.HBFpeakReducedToChartC2Cover.chartC2_gate_cover_pointwise_nonvacuous
+
 end QIQTH.AxiomAudit
