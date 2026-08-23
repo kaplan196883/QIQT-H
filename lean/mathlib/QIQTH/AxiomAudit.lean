@@ -16655,6 +16655,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ChartGeneralPContinuity.hVmapMeasK_of_geomOrMeas
 #print axioms QIQTH.ChartGeneralPContinuity.hKmeas_concrete_v4
 
+-- ★ J4-1100 (ChartGeneralPReach.lean, ns QIQTH.ChartGeneralPReach): the p-GENERAL analogue of
+-- CurvedRNCChartReach.hVmapMeasK_zero_of_reach (J4-529) — collapses chartP_continuousOn's three
+-- side-conditions {hball,hnorm,hRI} at an ARBITRARY p into a SINGLE reach hypothesis, via the
+-- (already p-general) left-inverse germ. Pure bookkeeping consolidation, NOT a wall-closing: the
+-- reach hypothesis itself remains exactly as carried/unbanked as the three originals were
+-- (ExpRhoReachability GENUINE-INPUT verdict UNCHANGED); no bearing on hbnd/hDConv's hbdry branch.
+-- std-3 both. NOT a₁ = R/6.
+#print axioms QIQTH.ChartGeneralPReach.chartP_continuousOn_of_reach
+#print axioms QIQTH.ChartGeneralPReach.hVmapMeasK_at_p_of_reach
+
 -- ★★★ J4-169 (GateSetMeasurability.lean, ns QIQTH.GateSetMeasurability): hSm round
 -- (indep build-verified): mem_flowBall_iff_chart (the equivalence lever, BOTH directions:
 -- p ∈ φ_z '' ball ⟺ W z p ∈ ball — → from the banked left-inverse germ on the ball,

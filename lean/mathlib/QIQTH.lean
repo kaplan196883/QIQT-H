@@ -368,6 +368,7 @@ import QIQTH.WitnessMeasDeriv
 import QIQTH.GateChartMeasurability
 import QIQTH.FoldedCoeffChartMeas
 import QIQTH.ChartGeneralPContinuity
+import QIQTH.ChartGeneralPReach
 import QIQTH.GateSetMeasurability
 import QIQTH.OnGateFieldRegularity
 import QIQTH.ChartFieldC2General
