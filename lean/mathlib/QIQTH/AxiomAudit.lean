@@ -31842,4 +31842,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_field_agree_at_overlap_two_seeds
 #print axioms QIQTH.ExpMap.chartCoherent_field_agree_at_overlap_two_seeds
 
+-- J4-1129: ChartOverlapQfieldAgreementTwoSeeds — dispatch 7 of the greenlit overlap-uniqueness
+-- bridge sub-campaign. chartCoherent_Qfield_agree_at_overlap_two_seeds upgrades J4-1128's
+-- pointwise-only Pjfield agreement to a filter-germ equality on the open overlap, then pushes it
+-- along the i-coordinate-line map (J4-1127's technique one derivative up) to conclude
+-- Qfield1 = Qfield2 via HasDerivAt.unique — the SECOND-derivative conjunct hcarField2 needs.
+-- gpt-5.6-sol (high) confirmed pre-Lean: NO genuine new second-order obstruction. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartCoherent_Qfield_agree_at_overlap_two_seeds
+#print axioms QIQTH.ExpMap.chartCoherent_Qfield_agree_at_overlap_two_seeds
+
 end QIQTH.AxiomAudit

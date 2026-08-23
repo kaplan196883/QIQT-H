@@ -7101,3 +7101,18 @@ import QIQTH.ChartOverlapCoordinateLineHasDerivAtTransfer
 -- germ/eventual-equality upgrade first — targeted for J4-1129). std-3. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartOverlapCoefficientAgreementTwoSeeds
+
+-- J4-1129: ChartOverlapQfieldAgreementTwoSeeds — dispatch 7 of the greenlit overlap-uniqueness
+-- bridge sub-campaign. chartCoherent_Qfield_agree_at_overlap_two_seeds upgrades J4-1128's
+-- pointwise-only first-order (Pjfield) agreement to a filter-germ equality on the open overlap
+-- (same open-set argument as J4-1125), then pushes that germ along the i-coordinate-line map
+-- (mirroring J4-1127's technique one derivative up) to transfer Qfield1/Qfield2's HasDerivAt
+-- witnesses and conclude Qfield1 = Qfield2 via HasDerivAt.unique — the SECOND-derivative
+-- conjunct hcarField2 needs. gpt-5.6-sol (high) confirmed pre-Lean: NO genuine new second-order
+-- obstruction (germ congruence only transports an already-hypothesis-supplied HasDerivAt
+-- witness; no independent differentiability of Pjfield1/Pjfield2 needs deriving). Sol's next-
+-- dispatch estimate: explicit fderiv-built concrete representative + measurability (J4-1130),
+-- piecewise/global gluing afterward; ~5-9 further dispatches remain (total ~12-16) in the
+-- original 10-20 budget. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.ChartOverlapQfieldAgreementTwoSeeds
