@@ -7043,3 +7043,13 @@ import QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged
 -- corollary is FALSE in general (already false in the flat model chart(q,p)=p-q) — NOT attempted here.
 -- std-3 ×2. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartOverlapUniquenessGeneralCenter
+
+-- J4-1124: ChartOverlapUniquenessTwoSeeds — dispatch 2 of the greenlit overlap-uniqueness bridge
+-- sub-campaign. chartCoherent_agree_at_overlap_two_seeds: two coherent charts seeded at DIFFERENT
+-- centers (z₀,v₀)≠(z₀',v₀'), each reconciled against the shared hub uniformInverseChart on an
+-- OPEN neighbourhood (Set.EqOn), agree with EACH OTHER on the (open) overlap of their two
+-- neighbourhoods — Sol's corrected transitivity-through-the-hub shape, not the false direct
+-- comparison. Pure set/filter logic packaging, no new analysis; gpt-5.6-sol (high) confirmed no
+-- sympy check triggered. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.ChartOverlapUniquenessTwoSeeds
