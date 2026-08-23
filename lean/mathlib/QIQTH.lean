@@ -7116,3 +7116,23 @@ import QIQTH.ChartOverlapCoefficientAgreementTwoSeeds
 -- original 10-20 budget. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
 -- UNCHANGED).
 import QIQTH.ChartOverlapQfieldAgreementTwoSeeds
+
+-- J4-1130: ChartCoherentDerivativeFieldRepresentative — dispatch 8 of the greenlit overlap-
+-- uniqueness bridge sub-campaign. pd_hasDerivAt is a new, generic, reusable bridge lemma
+-- (DifferentiableAt at x gives the literal coordinate-line HasDerivAt with value pd f i x, the
+-- converse chain-rule step of the existing pd_eq_fderiv, exposed as standalone API).
+-- chartCoherent_pfield_representative_single_seed builds the first CONCRETE, fderiv-built
+-- representative (not a universally-quantified candidate): for a single seed (z₀,v₀) and a
+-- fixed coordinate k, a genuine open neighbourhood U of the seed's image point on which the
+-- joint fderiv of chartCoherent's jj-component (evaluated at the fixed direction
+-- (0,Pi.single k 1)) literally witnesses uniformInverseChart's k-coordinate-line derivative
+-- throughout U, GLOBALLY Measurable via a zero-extension along the open measurable embedding
+-- U ↪ Point n × Point n (MeasurableEmbedding.subtype_coe + .measurable_extend) rather than a
+-- circular Set.piecewise on the raw junk-valued fderiv. gpt-5.6-sol (high) consulted pre-Lean:
+-- flagged that per-fixed-q slice ContinuousOn is insufficient (need JOINT continuity in (q,p)
+-- on an open set) and confirmed the measurable-embedding zero-extension as the honest route (no
+-- global Measurable of the raw representative is derivable without further control off the open
+-- set). Single-seed, single-open-piece only — does NOT yet cover all of K (piecewise/global
+-- gluing across many seeds = next dispatch) nor the Qfield/chartFieldAmp conjuncts. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartCoherentDerivativeFieldRepresentative

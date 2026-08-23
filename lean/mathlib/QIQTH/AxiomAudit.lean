@@ -31852,4 +31852,20 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_Qfield_agree_at_overlap_two_seeds
 #print axioms QIQTH.ExpMap.chartCoherent_Qfield_agree_at_overlap_two_seeds
 
+-- J4-1130: ChartCoherentDerivativeFieldRepresentative — dispatch 8 of the greenlit overlap-
+-- uniqueness bridge sub-campaign. pd_hasDerivAt: generic reusable bridge (DifferentiableAt at x
+-- gives coordinate-line HasDerivAt with value pd f i x). chartCoherent_pfield_representative_
+-- single_seed: the first CONCRETE, fderiv-built representative (single seed, single coordinate
+-- k) — genuine open U, GLOBALLY Measurable via zero-extension along the open measurable
+-- embedding U ↪ Point n × Point n (MeasurableEmbedding.subtype_coe/.measurable_extend), literally
+-- witnessing uniformInverseChart's k-coordinate-line derivative throughout U. gpt-5.6-sol (high)
+-- confirmed pre-Lean: per-fixed-q ContinuousOn is insufficient (need joint continuity), and the
+-- measurable-embedding zero-extension is the honest non-circular route. Single-seed/single-piece
+-- only (piecewise/global gluing across K = next dispatch). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.pd_hasDerivAt
+#print axioms QIQTH.ExpMap.pd_hasDerivAt
+#check @QIQTH.ExpMap.chartCoherent_pfield_representative_single_seed
+#print axioms QIQTH.ExpMap.chartCoherent_pfield_representative_single_seed
+
 end QIQTH.AxiomAudit
