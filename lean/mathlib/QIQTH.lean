@@ -6505,3 +6505,14 @@ import QIQTH.HBLgaussUnconditional
 -- MixedDirectionsFieldHessianEnvelope term. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HLeviBLGaussUnconditionalTriple
+-- J4-1039: HbintBLContinuityGeneralK -- cp1001's GENERAL-K discharge attempt on hbint's two elementary
+-- carries {hBLK, hbnd}: hBLK CLOSED unconditionally for the concrete downstream weight BL:=CB*gaussDdim
+-- (2s) and ANY compact K (gaussDdim_cont has zero K-dependence); R6 (hbint_interior_via_tube_cover_requant)
+-- specialized to this BL now needs only ONE remaining carry, hbnd. hbnd itself is NOT discharged for
+-- general K: confirmed via gpt-5.6-sol (high) consultation to be a genuine architectural gap (needs
+-- K-uniform, not a.e.-z/z-dependent, boundedness of the field-Hessian sup; interiorFieldHessianNorm_
+-- continuousOn is proved only on interior K, not all of K, structurally via generalCenter_chartC2_tube's
+-- ∀z₀∈interior K chart-openness input) -- strictly harder than the already-closed hFd carry. hbnd,
+-- hmeas, hBFpeak all remain OPEN. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.HbintBLContinuityGeneralK

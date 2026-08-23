@@ -31222,4 +31222,24 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HLeviBLGaussUnconditionalTriple.hBLnn_hBLgauss_hLevi_UNCOND_triple
 #print axioms QIQTH.HLeviBLGaussUnconditionalTriple.hBLnn_hBLgauss_hLevi_UNCOND_triple
 
+-- J4-1039: HbintBLContinuityGeneralK -- cp1001's GENERAL-K discharge attempt on hbint's two elementary
+-- carries {hBLK, hbnd} (R6 = HbintRequant.hbint_interior_via_tube_cover_requant). hBLK CLOSED
+-- unconditionally for the concrete downstream weight BL:=CB*gaussDdim(2s) and ANY compact K
+-- (gaussDdim_cont is K-free, s-uniform, no positivity side-condition); R6 specialized to this BL then
+-- needs only ONE remaining elementary carry, hbnd. hbnd is NOT discharged for general K here: Sol-
+-- consulted (gpt-5.6-sol, high) BEFORE construction, confirmed a genuine architectural gap distinct
+-- from and strictly harder than the already-closed hFd carry -- hbnd needs a K-UNIFORM bound (single
+-- C over ALL z∈K), whereas the existing HFdRequant machinery only gives an a.e.-z, z-DEPENDENT bound;
+-- upgrading needs joint continuity of z↦BF(z) on ALL of K (not just interior K), but
+-- interiorFieldHessianNorm_continuousOn is proved only on interior K ×ˢ concreteKx(b), structurally
+-- (generalCenter_chartC2_tube's chart-openness input is quantified ∀z₀∈interior K, not ∀z₀∈K). hbnd,
+-- hmeas, hBFpeak all remain OPEN for fb's genuine closure. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HbintBLContinuityGeneralK.concreteBL_continuous
+#print axioms QIQTH.HbintBLContinuityGeneralK.concreteBL_continuous
+#check @QIQTH.HbintBLContinuityGeneralK.hBLK_concreteBL_generalK
+#print axioms QIQTH.HbintBLContinuityGeneralK.hBLK_concreteBL_generalK
+#check @QIQTH.HbintBLContinuityGeneralK.hbint_interior_via_tube_cover_requant_concreteBL
+#print axioms QIQTH.HbintBLContinuityGeneralK.hbint_interior_via_tube_cover_requant_concreteBL
+
 end QIQTH.AxiomAudit
