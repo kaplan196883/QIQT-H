@@ -6605,3 +6605,15 @@ import QIQTH.HCompNearCarryFullLocalDischarge
 -- NOT bridge that mismatch, does NOT compose into nb/hCConv/hcomp. std-3. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1AmpSliverBound
+-- J4-1048: EvalBaseSlotCoordinateBridge -- located the RAW (non-Gaussian) identity underlying J4-1047's
+-- base/eval-slot mismatch: w_b(z) =ᶠ[𝓝 x] -T_x(w_e(z)) (GeodesicReversalRouteAtPoint's already-banked
+-- baseSlot_eventuallyEq_neg_terminalVel_at). gpt-5.6-sol (high) plan-reviewed and GO'd: extracted an
+-- explicit radius (mirrors J4-1013), the pure-set-algebra image identity w_b''D=(-T_x)''(w_e''D) (no
+-- T_x invertibility needed), a chain-rule HasFDerivAt factorization + |det| Jacobian relation (T_x's
+-- derivative taken as an explicit hypothesis, NOT proven invertible/a local diffeo -- Sol NO-GO'd a
+-- standalone IFT/PartialHomeomorph package for T_x today), and a setwise left-inverse relation
+-- Vb(-T_x w)=Ve(w) from the two charts' own left-inverse witnesses. Does NOT instantiate these at
+-- J4-1012's/J4-1046's actual V/f' bundles (different existential shapes) or reconcile the three
+-- independent radii (this file's r, J4-1012's ρ, J4-1046's R). Does NOT compose into nb/hCConv/hcomp.
+-- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.EvalBaseSlotCoordinateBridge

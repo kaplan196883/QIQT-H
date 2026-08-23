@@ -31303,4 +31303,21 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm1AmpSliverBound.terminalVelAt_chartReplace_sliver_amp_bound_unconditional
 #print axioms QIQTH.HCompNearCarryTerm1AmpSliverBound.terminalVelAt_chartReplace_sliver_amp_bound_unconditional
 
+-- J4-1048: EvalBaseSlotCoordinateBridge -- the raw (non-Gaussian) w_b(z)=-T_x(w_e(z)) coordinate bridge
+-- underlying J4-1047's diagnosed base/eval-slot mismatch: explicit-radius identity + image-set identity
+-- + chain-rule Jacobian factorization + setwise left-inverse relation. Does NOT instantiate at
+-- J4-1012's/J4-1046's actual CoV bundles; does NOT compose into nb/hCConv/hcomp.
+#check @QIQTH.EvalBaseSlotCoordinateBridge.bridge_image_eq
+#print axioms QIQTH.EvalBaseSlotCoordinateBridge.bridge_image_eq
+#check @QIQTH.EvalBaseSlotCoordinateBridge.bridge_hasFDerivAt
+#print axioms QIQTH.EvalBaseSlotCoordinateBridge.bridge_hasFDerivAt
+#check @QIQTH.EvalBaseSlotCoordinateBridge.bridge_det_abs
+#print axioms QIQTH.EvalBaseSlotCoordinateBridge.bridge_det_abs
+#check @QIQTH.EvalBaseSlotCoordinateBridge.bridge_left_inverse
+#print axioms QIQTH.EvalBaseSlotCoordinateBridge.bridge_left_inverse
+#check @QIQTH.EvalBaseSlotCoordinateBridge.evalBase_slot_coordinate_bridge_radius
+#print axioms QIQTH.EvalBaseSlotCoordinateBridge.evalBase_slot_coordinate_bridge_radius
+#check @QIQTH.EvalBaseSlotCoordinateBridge.evalBase_slot_coordinate_bridge_image_ball
+#print axioms QIQTH.EvalBaseSlotCoordinateBridge.evalBase_slot_coordinate_bridge_image_ball
+
 end QIQTH.AxiomAudit
