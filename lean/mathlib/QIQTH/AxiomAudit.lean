@@ -31496,4 +31496,24 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.LeviWindowUniformAmpLipschitz.leviAmp_product_window_uniform_lipschitz
 #print axioms QIQTH.LeviWindowUniformAmpLipschitz.leviAmp_product_window_uniform_lipschitz
 
+-- J4-1076: HCompNearCarryBfacLeviFoldedSliverWindowBound -- THE LEVI-FOLDED CAPSTONE. Part 1'
+-- (bfac_four_term_domain_restricted_bound_of_amp0_bound) is the nonneg-coefficient monotonicity-
+-- substitution corollary of J4-1073's Part 1 (RHS depends only on upper bounds MA0/MA0_2/MA0_3 on
+-- |Amp 0|/|Amp2 0|/|Amp3 0|, not the literal values). Part 2'
+-- (bfac_four_term_levi_domain_restricted_sliver_window_bound) threads J4-1075's window-uniform
+-- Levi(s,z) bound/Lipschitz data (single upfront leviBase_window_uniform_bounded_lipschitz call, reused
+-- per term via LeviAmpProductGlobalRegularity.bounded_lipschitz_mul_global) through the outer
+-- sliver-window s-integration, giving the FIRST O(√ε) bound on the LITERAL Bfac(z):=Levi(s,z)·
+-- (T1+T2+T3+T4) shape (HCompNearCarryKPrimeBaseFieldCoV BRICK 1). Sol gpt-5.6-sol high GO-confirmed
+-- 2026-08-23 (nonneg-coeff monotonicity substitution sound, ring-distribution correct, single upfront
+-- window-uniform call + per-term bounded_lipschitz_mul_global sound, AmpFlat needs no manufactured
+-- Lipschitz hypothesis). Amp/Amp2/Amp3 hypotheses STRENGTHENED to global bounded+Lipschitz (necessary
+-- to legally fold with Levi); AmpFlat unchanged (bound-only). Does NOT verify literal ∂ⱼA/∂ᵢA/∂ⱼ∂ᵢA
+-- globalization (J4-1069 item 1); does NOT discharge hxmem/hfac's literal S' carry/fb/nb/hCConv/hcomp.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound.bfac_four_term_domain_restricted_bound_of_amp0_bound
+#print axioms QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound.bfac_four_term_domain_restricted_bound_of_amp0_bound
+#check @QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound.bfac_four_term_levi_domain_restricted_sliver_window_bound
+#print axioms QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound.bfac_four_term_levi_domain_restricted_sliver_window_bound
+
 end QIQTH.AxiomAudit

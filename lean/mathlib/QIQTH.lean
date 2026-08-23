@@ -6808,3 +6808,10 @@ import QIQTH.HCompNearCarryBfacFourTermAssembly
 -- window s-integration (no new O(√ε) capstone here); does NOT touch nb/hCConv/hcomp/fb/hxmem/hfac.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.LeviWindowUniformAmpLipschitz
+-- Levi-folded Bfac sliver-window capstone: bfac_four_term_domain_restricted_bound_of_amp0_bound (Part
+-- 1', monotonicity-substitution corollary) + bfac_four_term_levi_domain_restricted_sliver_window_bound
+-- (Part 2', threads the window-uniform Levi(s,z) bound/Lipschitz data through the outer sliver-window
+-- s-integration, giving the FIRST O(√ε) bound on the literal Bfac(z):=Levi(s,z)·(T1+T2+T3+T4) shape).
+-- Does NOT touch nb/hCConv/hcomp/fb/hxmem/hfac. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,
+-- hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryBfacLeviFoldedSliverWindowBound
