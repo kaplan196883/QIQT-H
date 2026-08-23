@@ -6969,3 +6969,15 @@ import QIQTH.HDConvGateEdomEcombWired
 -- untouched by this file. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
 -- UNCHANGED).
 import QIQTH.HDConvGateAmpZeroFurtherReduced
+
+-- J4-1113: HDConvBoundDHpardiffAnySConstGateHsupp — hDConv_boundD_hpardiff_anyS_constGate_hsupp_wired.
+-- hSupp's OWN SEPARATE constGate discharge (deliberately deferred by J4-1112 to avoid mixing an
+-- abstract-S reduction with a constGate-specific one). Targets the hgate-FREE sibling family
+-- `CensusAnySEnvelopeRethread.witnessBoundD_wired_anyS`/`witnessHpardiff_wired_anyS` (J4-951) instead
+-- of J4-1112's own hgate-carrying theorem, SIDESTEPPING the hgate S=univ-forcing vacuity trap (J4-1104)
+-- that would make a direct constGate specialization of J4-1112's literal theorem jointly
+-- unsatisfiable for nonempty K. hSupp discharged via banked `HsuppConstGateGrounded.hsupp_for_constGate`
+-- modulo the explicit, satisfiable radius coupling `0 < cR ≤ ρ₀`, `cR·(1+C_D·cR) ≤ D.r`.
+-- hAmp0/hCfield/hFzero/hFdom/hAmeas/hDmeas/hbase remain ordinary caller-supplied hypotheses,
+-- UNCHANGED. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvBoundDHpardiffAnySConstGateHsupp
