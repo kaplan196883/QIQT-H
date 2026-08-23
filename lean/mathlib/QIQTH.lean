@@ -6550,3 +6550,24 @@ import QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge
 -- confirmed sound in principle (Sol) but not attempted here. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HxmemLocalSharpReachCoverage
+-- J4-1043: HCompNearCarryKPrimeGateRestrictedCoVNbhdU -- the K-cap-U-SHRUNK port of J4-1031's wrapper
+-- theorem: every jet/amp/coverage/differentiability hypothesis (hSopen, hxmem, hd, hJetVi, hJetVj, hJetQ,
+-- hAmpj1, hAmpi1, hAmp2) is now quantified over z in K cap U for an EXPLICIT caller-supplied open U ni x,
+-- instead of over all of K. Reuses J4-1031's Step-1/2 pointwise lemma UNCHANGED (imported, not re-proved)
+-- and BaseSlotM1M4Assembly's IFT data UNCHANGED (never depended on hxmem/U). Confirmed via gpt-5.6-sol
+-- high that this is NOT a mechanical drop-in against the existing J4-1031/1032 statements (their binders
+-- are fixed at forall z in K) but that a fresh U-parameterized wrapper mirroring Steps A-E with S''
+-- additionally intersected with U is the correct, mechanical shape. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhdU
+-- J4-1044: HCompNearCarryJetBundleLocalCoverageDischarge -- composes J4-1043's K-cap-U wrapper with
+-- J4-1042's local sharp-reach coverage fact (U := Metric.ball x R) and J4-1032's already-banked
+-- hcarField2_hgate_concrete brick: for the FIRST time in this chain, hxmem is NOT an external hypothesis
+-- at all -- it is DERIVED from already-banked analytic facts alone (uniformFlowExp_sharp_reach), for z
+-- ranging over K cap Metric.ball x R. Remaining hypotheses: radius/metric-regularity bookkeeping, hxint,
+-- hτ, and the untouched pre-existing hd (now only required on the smaller domain K cap ball(x,R), not all
+-- of K). Does NOT discharge hd or hxint; does NOT claim r6/nb/hcomp closed -- the CoV domain S'' delivered
+-- is strictly smaller (S'' subset K cap ball(x,R)) than J4-1031/1032's S'' subset K. Bfac's other 3
+-- summands and fb remain untouched. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge

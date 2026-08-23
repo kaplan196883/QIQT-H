@@ -31277,4 +31277,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage_ball_hyp_satisfiable
 #print axioms QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage_ball_hyp_satisfiable
 
+-- J4-1043: HCompNearCarryKPrimeGateRestrictedCoVNbhdU -- K cap U-shrunk port of J4-1031's wrapper
+#check @QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhdU.kPrime_baseField_CoV_of_jetBundle_gateRestricted_nbhdU
+#print axioms QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhdU.kPrime_baseField_CoV_of_jetBundle_gateRestricted_nbhdU
+
+-- J4-1044: HCompNearCarryJetBundleLocalCoverageDischarge -- hxmem DERIVED (not assumed) via J4-1042
+-- local sharp-reach coverage composed with J4-1043's K cap U wrapper
+#check @QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge.kPrime_baseField_CoV_of_jetBundle_localCoverage
+#print axioms QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge.kPrime_baseField_CoV_of_jetBundle_localCoverage
+
 end QIQTH.AxiomAudit
