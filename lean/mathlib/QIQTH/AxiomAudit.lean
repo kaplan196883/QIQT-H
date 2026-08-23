@@ -31679,4 +31679,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvGateHQ1Discharged.hDConv_AT_GATE_hQ1_discharged
 #print axioms QIQTH.HDConvGateHQ1Discharged.hDConv_AT_GATE_hQ1_discharged
 
+-- J4-1110: HDConvGateInterchangeWired — hDConv_AT_GATE_interchangeWired. Eliminates the two
+-- live `hDConv_AT_GATE` census binders `hLapFull : MemLapFull` and `hII_lo : MemAdjLo`, traded
+-- for the strictly more primitive `{wA2/hwA2, Ccrude/hCcrude, hcrude, hInter : MemInterchange,
+-- hmeas2Lo}` via J4-898/914's `InterchangeBundlesFromExisting.memAdjLo_live`/`.memLapFull_live`
+-- (the hDuhamel-side sibling reduction, documented as census-shared but never re-wired into
+-- hDConv_AT_GATE). `hUpos` free from `haT`/`hUlb`; `hFdom`/`hFzero`/`hUT`/`hn`/`hgi`/`hΓ`/`hII_hi`/
+-- `D0`/`D1`/`hbnd` reused verbatim. `hII_hi` (moment-aware matched-sliver Hi-leg) remains the
+-- honest, genuinely-open residual. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvGateInterchangeWired.hDConv_AT_GATE_interchangeWired
+#print axioms QIQTH.HDConvGateInterchangeWired.hDConv_AT_GATE_interchangeWired
+
 end QIQTH.AxiomAudit

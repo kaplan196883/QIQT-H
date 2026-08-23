@@ -6935,3 +6935,15 @@ import QIQTH.HDConvAtGateConstGateHUfloor
 -- Section-G census members are NOT discharged. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvGateHQ1Discharged
+
+-- J4-1110: HDConvGateInterchangeWired — hDConv_AT_GATE_interchangeWired. Eliminates the two
+-- live `hDConv_AT_GATE` census binders `hLapFull : MemLapFull` and `hII_lo : MemAdjLo`, traded
+-- for the strictly more primitive `{wA2/hwA2, Ccrude/hCcrude, hcrude (crude τ⁻¹ 2nd-deriv
+-- envelope), hInter : MemInterchange, hmeas2Lo}` — via J4-898/914's `InterchangeBundlesFromExisting`
+-- (the hDuhamel-side sibling reduction, built for the LIVE order-1 hDuhamel capstone, documented
+-- as "shared by hDuhamel AND hDConv" but never previously re-wired into hDConv_AT_GATE). `hUpos`
+-- derived free from `haT`/`hUlb`; `hFdom`/`hFzero`/`hUT`/`hn`/`hgi`/`hΓ`/`hII_hi`/`D0`/`D1`/`hbnd`
+-- reused verbatim (y=0 specialization of the census's own general-y hFdom/hFzero). `hII_hi` (the
+-- moment-aware matched-sliver Hi-leg) remains the honest, genuinely-open residual. std-3. NOT
+-- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvGateInterchangeWired
