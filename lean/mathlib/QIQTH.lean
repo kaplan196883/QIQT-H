@@ -6772,3 +6772,14 @@ import QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound
 -- flagged item 1); does NOT discharge hxmem/hfac/r1-r2; does NOT touch nb/hCConv/hcomp/fb. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted
+
+-- J4-1072: HCompNearCarryTerm1DomainRestrictedSliverWindowBound. Completes J4-1071's frontier item 3
+-- composition for T1 (hsMixed·A, Bfac's last remaining summand): heatHessMult_tail_le_of_sliver (NEW,
+-- quadratic-exp-domination for heatHessMult's tail, one power worse than grTerm_tail_le_of_sliver but
+-- still dominated) + hsMixed_domain_restricted_sliver_window_bound (composes T1's C1/√τ+C2 full-space
+-- shape with the folded heatHessMult+linMult tail via pointwise_bound_sliver_window_inv_sqrt, J4-1065).
+-- With this file, J4-1069's frontier item 3 is CLOSED for ALL FOUR Bfac summands (LEFTOVER/T2/T3 via
+-- J4-1071, T1 here). std-3. Does NOT close item 1 (literal Bfac(V w)/|det| composed regularity); does
+-- NOT discharge hxmem/hfac/r1-r2; does NOT sum the four bounds; does NOT touch nb/hCConv/hcomp/fb.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound

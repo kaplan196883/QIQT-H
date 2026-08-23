@@ -31453,4 +31453,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.grTerm_domain_restricted_sliver_window_bound
 #print axioms QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.grTerm_domain_restricted_sliver_window_bound
 
+-- J4-1072: HCompNearCarryTerm1DomainRestrictedSliverWindowBound -- completes J4-1071's frontier item 3
+-- composition for T1 (hsMixed·A), the last of Bfac's four summands: heatHessMult_tail_le_of_sliver
+-- (NEW quadratic-exp-domination for heatHessMult's tail, τ^{-1}/τ^{-1/2} branches) composed with the
+-- REUSED grTerm_tail_le_of_sliver (linMult tail branch) folded into pointwise_bound_sliver_window_
+-- inv_sqrt's (J4-1065) C2 slot alongside T1's C1/√τ+C2 full-space shape. J4-1069's frontier item 3 is
+-- now CLOSED for ALL FOUR Bfac summands. ABSTRACT Amp only; does NOT close item 1 (literal
+-- Bfac(V w)/|det| composed regularity); does NOT discharge hxmem/hfac/r1-r2; does NOT sum the four
+-- bounds; does NOT touch nb/hCConv/hcomp/fb. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound.heatHessMult_tail_le_of_sliver
+#print axioms QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound.heatHessMult_tail_le_of_sliver
+#check @QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound.hsMixed_domain_restricted_sliver_window_bound
+#print axioms QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound.hsMixed_domain_restricted_sliver_window_bound
+
 end QIQTH.AxiomAudit
