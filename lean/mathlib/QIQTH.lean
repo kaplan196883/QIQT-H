@@ -6675,3 +6675,18 @@ import QIQTH.HCompFiveWayCommonRadiusMerge
 -- hcomp; does NOT discharge hxmem's general case (cp988-991 unchanged). std-3. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompVbaseVevalLeftInverseBridge
+-- J4-1055: HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge -- clones J4-1024's base-slot
+-- §A/§B/§C/§D "V/Jacobian-composition Lipschitz-at-0" mechanism onto the EVAL-slot chart
+-- We(z):=uniformInverseChart g gi hC hK q₀ z (base q₀ fixed, field z varies -- the orientation
+-- ChartIFTPackageGeneralQ0.chartIFTPackage_generalQ0 needs). Sol (gpt-5.6-sol, high) plan-reviewed
+-- GO before Lean: purely mechanical, actually simpler than base-slot (diagonal derivative is the
+-- PLAIN identity, not -Id, so no negCLE wrapper needed). Reused already-exposed unconditional facts
+-- from JointRNCRegularityInterfaceLocalGeneralK (uniformInverseChart_slice_{contDiffAt,fderiv_id,
+-- value}_diag_generalK) rather than extracting chartIFTPackage_generalQ0's internal hevdet/hevC2.
+-- Lands: for ANY globally bounded+Lipschitz weight P, the transported ratio P(V w)/|det(fderiv We
+-- (V w))| is bounded+Lipschitz on an image ball, truncated to a GLOBAL Lipschitz-at-0 AmpExt. Does
+-- NOT instantiate HCompNearCarryTerm1DomainRestrictedBound's capstone (built against the base-slot
+-- chart's literal shape, not We) -- no §E analogue. Does NOT plug in literal Bfac (own regularity a
+-- separate unestablished gap); does NOT compose into nb/hCConv/hcomp; does NOT discharge hxmem's
+-- general case. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge

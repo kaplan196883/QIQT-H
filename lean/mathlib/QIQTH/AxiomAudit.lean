@@ -31357,4 +31357,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompVbaseVevalLeftInverseBridge.vbase_veval_left_inverse_bridge
 #print axioms QIQTH.HCompVbaseVevalLeftInverseBridge.vbase_veval_left_inverse_bridge
 
+-- J4-1055: HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge -- clones J4-1024's base-slot
+-- §A/§B/§C/§D "V/Jacobian-composition Lipschitz-at-0" mechanism onto the EVAL-slot chart
+-- We(z):=uniformInverseChart g gi hC hK q₀ z. Sol (gpt-5.6-sol, high) GO before Lean. For ANY
+-- globally bounded+Lipschitz weight P, the transported ratio is bounded+Lipschitz on an image ball,
+-- truncated to a GLOBAL Lipschitz-at-0 AmpExt. No §E analogue (would need the base-slot-shaped
+-- capstone). Does NOT compose into nb/hCConv/hcomp; does NOT discharge hxmem's general case.
+#check @QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.uniformInverseChart_evalSlot_inverse_lipschitz_package_generalK
+#print axioms QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.uniformInverseChart_evalSlot_inverse_lipschitz_package_generalK
+#check @QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.uniformInverseChart_evalSlot_det_fderiv_regularity_bundle_generalK
+#print axioms QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.uniformInverseChart_evalSlot_det_fderiv_regularity_bundle_generalK
+#check @QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.transported_ratio_regularity_evalSlot_generalK
+#print axioms QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.transported_ratio_regularity_evalSlot_generalK
+#check @QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.amp_of_transported_ratio_evalSlot_global_lipschitz_at_zero
+#print axioms QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.amp_of_transported_ratio_evalSlot_global_lipschitz_at_zero
+
 end QIQTH.AxiomAudit
