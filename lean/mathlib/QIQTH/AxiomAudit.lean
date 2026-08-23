@@ -31412,4 +31412,20 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm1SliverWindowBound.hsMixed_sliver_window_bound_of_lipschitz
 #print axioms QIQTH.HCompNearCarryTerm1SliverWindowBound.hsMixed_sliver_window_bound_of_lipschitz
 
+-- J4-1066: HCompNearCarrySliverWindowAssembly. (A) generic triangle-inequality combined-assembly
+-- for Bfac's 4 sliver-window summands + concrete T1+T2+T3 (shared R^n domain) combined payoff --
+-- LEFTOVER's ball-domain does NOT fold in (genuine ball-vs-R^n domain split found this session).
+-- (B) setIntegral_norm_transfer_bound: a full-space norm bound |integral f| <= C transfers for free
+-- to ANY subset S' (norm_integral_le_integral_norm + MeasureTheory.setIntegral_le_integral) --
+-- applies unconditionally to T1/T2/T3 (domain already R^n=univ), NOT to LEFTOVER (needs S' subset
+-- ball 0 r, unestablished). Does NOT literally wire the actual S'/Bfac from
+-- HCompNearCarryKPrimeBaseFieldCoV, does NOT touch r1-r6/hxmem/nb/hCConv/hcomp.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarrySliverWindowAssembly.sliver_window_four_term_combined_bound
+#print axioms QIQTH.HCompNearCarrySliverWindowAssembly.sliver_window_four_term_combined_bound
+#check @QIQTH.HCompNearCarrySliverWindowAssembly.t1t2t3_sliver_window_combined_bound
+#print axioms QIQTH.HCompNearCarrySliverWindowAssembly.t1t2t3_sliver_window_combined_bound
+#check @QIQTH.HCompNearCarrySliverWindowAssembly.setIntegral_norm_transfer_bound
+#print axioms QIQTH.HCompNearCarrySliverWindowAssembly.setIntegral_norm_transfer_bound
+
 end QIQTH.AxiomAudit

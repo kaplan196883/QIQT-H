@@ -6730,3 +6730,14 @@ import QIQTH.HCompNearCarryLinMultSliverWindowBound
 -- reconcile full-space R^n with nb's bounded IFT domain S', does NOT touch r1-r6/hxmem. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1SliverWindowBound
+-- J4-1066: HCompNearCarrySliverWindowAssembly. (A) generic triangle-inequality combined-assembly
+-- lemma for Bfac's 4 sliver-window summands, PLUS concrete T1+T2+T3 (shared R^n domain) combined
+-- payoff -- LEFTOVER's ball-domain does NOT fold in (genuine ball-vs-R^n domain split discovered
+-- this session, flagged not papered over). (B) the S'-reconciliation FREE-DIRECTION transfer lemma:
+-- setIntegral_norm_transfer_bound shows a full-space norm bound |integral f| <= C transfers for free
+-- to ANY subset S' via norm_integral_le_integral_norm + MeasureTheory.setIntegral_le_integral --
+-- applies unconditionally to T1/T2/T3 (domain already R^n=univ) but NOT to LEFTOVER (needs S' subset
+-- ball 0 r, unestablished). Does NOT literally wire the actual S'/Bfac from
+-- HCompNearCarryKPrimeBaseFieldCoV, does NOT touch r1-r6/hxmem/nb/hCConv/hcomp. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarrySliverWindowAssembly
