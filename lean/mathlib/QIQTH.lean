@@ -6460,3 +6460,20 @@ import QIQTH.HCompNearCarryHdFromHxmem
 -- hPCbound/hMnn) are UNTOUCHED and remain exactly as HZMassCappedWindowClosed.lean states them.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.LeviBaseGaussEnvelopeConst
+
+-- J4-1036: HLeviCappedWindowConst -- composes leviBase_gaussDdim2s_envelope_CONST (J4-1035) into the
+-- EXACT hLevi shape MixedEnvelopeAssembly.mixedEnvelope_of_named_carries consumes (an ABSOLUTE-VALUE
+-- bound |leviSeries(...)| ≤ CB·gaussDdim(2s), ∀ᵐs ∀ᵐz on the capped window), at the literal
+-- constant-radius gate, CB := fun _ => C_L. The underlying leviSeries_dominatedW_le already outputs
+-- an abs-value bound (never weakened at that stage); hBLgauss_capped_window_CONST merely drops that
+-- extra strength for its OWN one-sided consumer -- the abs-value form was never lost, only unexported
+-- in hLevi's exact shape until now. Consulted gpt-5.6-sol (high): confirmed the banked conclusion is
+-- exactly sufficient, ∀z→∀ᵐz is immediate via ae_of_all, and the composition is genuine (not
+-- vacuous/circular) -- hLevi is REMOVED from fb's open-hypothesis list, collapsing into the SAME
+-- already-identified c<δ₀ residue hBLgauss carries (NOT a new independent blocker). Does NOT touch
+-- hBLnn (genuine nonnegativity of the SIGNED leviSeries itself is a different, unestablished, likely
+-- false fact -- MixedEnvelopeAssembly sidesteps this by choosing BL:=CB·gaussDdim(2s), not leviSeries,
+-- for its own hBLnn/hzmass slots). fb's TRUE remaining obstacle set: {hBLgauss's c<δ₀ compatibility
+-- gap, hBFpeak's z-uniform-dominator gap}. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HLeviCappedWindowConst

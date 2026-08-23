@@ -31176,4 +31176,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.LeviBaseGaussEnvelopeConst.hBLgauss_capped_window_CONST
 #print axioms QIQTH.LeviBaseGaussEnvelopeConst.hBLgauss_capped_window_CONST
 
+-- J4-1036: HLeviCappedWindowConst -- composes leviBase_gaussDdim2s_envelope_CONST (J4-1035) into the
+-- EXACT hLevi shape MixedEnvelopeAssembly.mixedEnvelope_of_named_carries consumes (an ABSOLUTE-VALUE
+-- bound, ∀ᵐs ∀ᵐz on the capped window), at the literal constant-radius gate. hLevi is REMOVED from
+-- fb's open-hypothesis list, collapsing into the SAME c<δ₀ residue hBLgauss carries. Does NOT touch
+-- hBLnn (genuine nonnegativity of leviSeries itself is unestablished and likely false; sidestepped
+-- by MixedEnvelopeAssembly's own BL choice). NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HLeviCappedWindowConst.hLevi_capped_window_CONST
+#print axioms QIQTH.HLeviCappedWindowConst.hLevi_capped_window_CONST
+
 end QIQTH.AxiomAudit
