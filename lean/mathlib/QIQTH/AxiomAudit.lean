@@ -31438,4 +31438,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound.flat_gaussDdim_mul_amp_domain_restricted_bound
 #print axioms QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound.flat_gaussDdim_mul_amp_domain_restricted_bound
 
+-- J4-1071: HCompNearCarryBfacSliverWindowDomainRestricted -- bridges J4-1069's frontier item 3
+-- (outer-s-integration composed with the W''S'-domain restriction) for T4/LEFTOVER and T2/T3, via
+-- the new exp_neg_div_le_quadratic exponential-domination lemma folding J4-1023/1070's tail
+-- correction into the generic sliver-window lemmas' flat/C2 slot. T1's composition is IDENTIFIED as
+-- tractable via the SAME technique (Sol-confirmed) but NOT completed here. ABSTRACT Amp only.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.exp_neg_div_le_quadratic
+#print axioms QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.exp_neg_div_le_quadratic
+#check @QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.flat_domain_restricted_sliver_window_bound
+#print axioms QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.flat_domain_restricted_sliver_window_bound
+#check @QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.grTerm_tail_le_of_sliver
+#print axioms QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.grTerm_tail_le_of_sliver
+#check @QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.grTerm_domain_restricted_sliver_window_bound
+#print axioms QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted.grTerm_domain_restricted_sliver_window_bound
+
 end QIQTH.AxiomAudit

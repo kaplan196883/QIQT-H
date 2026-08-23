@@ -6754,3 +6754,21 @@ import QIQTH.HCompNearCarrySliverWindowAssembly
 -- nb/hCConv/hcomp/fb. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound
+-- J4-1071: HCompNearCarryBfacSliverWindowDomainRestricted. Bridges J4-1069's frontier item 3
+-- (outer-s-integration composed with the W''S'-domain-restriction) for T4/LEFTOVER and T2/T3 --
+-- the two of Bfac's four summands where the composition is tractable. New lemma
+-- exp_neg_div_le_quadratic (Mathlib's unconditional Real.mul_exp_neg_le_exp_neg_one, squared) turns
+-- J4-1023/1070's exp(-rho^2/8tau) complement-tail correction into a bounded, tau-independent
+-- quantity on any sliver (0,eps], foldable into the generic sliver-window lemmas' existing flat/C2
+-- slot (no new generic window lemma needed). flat_domain_restricted_sliver_window_bound (T4):
+-- fully mechanical (J4-1070's flat bound was ALREADY tau-independent). grTerm_domain_restricted_
+-- sliver_window_bound (T2/T3): genuinely closes the composition via the new exp-decay lemma; T2/T3's
+-- full-space bound is ALSO already flat (grTerm_gaussian_mul_amp_lipschitz_bound, J4-1041), so the
+-- WHOLE bound composes with the flat window lemma (pointwise_bound_sliver_window, J4-1064), O(eps).
+-- T1's composition is IDENTIFIED as tractable via the SAME technique (Sol gpt-5.6-sol high
+-- GO-confirmed) but its literal 4-branch algebraic reduction was NOT completed here -- honest
+-- partial finding, not a research gap. ABSTRACT Amp only for both landed capstones -- does NOT
+-- verify the literal Bfac(V w)/|det| composition's regularity (separate, still-open, J4-1023's own
+-- flagged item 1); does NOT discharge hxmem/hfac/r1-r2; does NOT touch nb/hCConv/hcomp/fb. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted
