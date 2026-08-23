@@ -6947,3 +6947,13 @@ import QIQTH.HDConvGateHQ1Discharged
 -- moment-aware matched-sliver Hi-leg) remains the honest, genuinely-open residual. std-3. NOT
 -- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvGateInterchangeWired
+
+-- J4-1111: HDConvGateEdomEcombWired — hDConv_AT_GATE_edomEcombWired. Eliminates the two live
+-- `hDConv_AT_GATE` census binders `hEdom` (at fixed E₀/E₁) and `hEcomb : MemECombine`, traded for
+-- {P/hP/hgate (on-gate width-4/3 quadratic parametrix)} via J4-897's
+-- `HEdomFromHrawPreCollapse.hEdom_from_hrawPreCollapse` and {hDa,hLap,hLapZ,hEZ,hLapS,hES
+-- (per-(m,u) Fubini/representation/integrability)} via J4-898's
+-- `InterchangeBundlesFromExisting.memECombine_live` — both hDuhamel-side siblings, documented as
+-- census-shared but never re-wired into hDConv_AT_GATE, mirroring J4-1109/1110. std-3. NOT
+-- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvGateEdomEcombWired

@@ -31691,4 +31691,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvGateInterchangeWired.hDConv_AT_GATE_interchangeWired
 #print axioms QIQTH.HDConvGateInterchangeWired.hDConv_AT_GATE_interchangeWired
 
+-- J4-1111: HDConvGateEdomEcombWired — hDConv_AT_GATE_edomEcombWired. Eliminates the live
+-- `hDConv_AT_GATE` census binders `hEdom` (fixed E₀/E₁, unused elsewhere in the signature) and
+-- `hEcomb : MemECombine`, traded for `{P/hP/hgate}` (J4-897 `hEdom_from_hrawPreCollapse`) and
+-- `{hDa,hLap,hLapZ,hEZ,hLapS,hES}` (J4-898 `memECombine_live`) — both hDuhamel-side sibling
+-- dischargers, documented as census-shared but never re-wired into hDConv_AT_GATE, mirroring
+-- J4-1109/1110. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvGateEdomEcombWired.hDConv_AT_GATE_edomEcombWired
+#print axioms QIQTH.HDConvGateEdomEcombWired.hDConv_AT_GATE_edomEcombWired
+
 end QIQTH.AxiomAudit
