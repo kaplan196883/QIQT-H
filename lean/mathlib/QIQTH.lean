@@ -6838,3 +6838,11 @@ import QIQTH.HBFpeakReducedToChartC2Cover
 -- hxmem/hbnd. std-3, gpt-5.6-sol(high) consulted GO before construction.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HBFpeakInteriorNullFrontierBypass
+-- J4-1096: HFrozenAIUniform — frozenAI_tUniform, the chart-FREE t-uniform frozen approximate-identity
+-- engine (Icc ta tb level) discharging the analytic content of hbdryLU_of_movingCorr_frozen's `hfroLU`
+-- input, given hDom/hmass1/hFbdd/hHmeas/hFmeas/hlocal. Does NOT touch uniformInverseChart/
+-- EnrichedChartBundle/any per-K Classical.choose chart object. Does NOT itself discharge hfroLU (the
+-- concrete curved-witness supply of hlocal/hmass1, and the Icc->TendstoLocallyUniformlyOn wrapper,
+-- remain open). std-3, gpt-5.6-sol(high) consulted GO before construction.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFrozenAIUniform

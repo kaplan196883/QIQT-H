@@ -31563,4 +31563,10 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier_nonvacuous_ball
 #print axioms QIQTH.HBFpeakInteriorNullFrontierBypass.hzmass_via_interior_peak_null_frontier_nonvacuous_ball
 
+-- J4-1096: HFrozenAIUniform — frozenAI_tUniform, the chart-FREE t-uniform frozen approximate-identity
+-- engine (Icc ta tb level) for hbdryLU_of_movingCorr_frozen's `hfroLU` input. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HFrozenAIUniform.frozenAI_tUniform
+#print axioms QIQTH.HFrozenAIUniform.frozenAI_tUniform
+
 end QIQTH.AxiomAudit
