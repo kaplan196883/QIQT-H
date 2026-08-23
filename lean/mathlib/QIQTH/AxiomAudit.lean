@@ -31339,4 +31339,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryFullLocalDischargeUniform.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge_uniform
 #print axioms QIQTH.HCompNearCarryFullLocalDischargeUniform.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge_uniform
 
+-- J4-1051: HCompFiveWayCommonRadiusMerge -- the five-way common-radius merge (J4-1050's R, J4-1015's
+-- already-3-way-merged ρstar, J4-1048/1049's bridge radius r) into ONE ρ**, at which all five ingredients
+-- hold simultaneously as a conjunction (black-box reuse of the three already-proven theorems). Sol GO on
+-- the pure min/le_trans bookkeeping (Q1); Sol NO-GO on relating the two independently-packaged CoV
+-- witness bundles or composing into any bound on nb (Q2, confirmed unchanged from J4-1048/1049). Does NOT
+-- compose into nb/hCConv/hcomp.
+#check @QIQTH.HCompFiveWayCommonRadiusMerge.fiveway_common_chart_radius
+#print axioms QIQTH.HCompFiveWayCommonRadiusMerge.fiveway_common_chart_radius
+
 end QIQTH.AxiomAudit

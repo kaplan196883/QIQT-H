@@ -6647,3 +6647,17 @@ import QIQTH.EvalBaseSlotThreeRadiusLocalization
 -- common-radius merge with J4-1012/1013/1014's radii; does NOT compose into nb/hCConv/hcomp. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryFullLocalDischargeUniform
+-- J4-1051: HCompFiveWayCommonRadiusMerge -- the FIVE-WAY common-radius merge J4-1050 flagged as its own
+-- next dispatch. gpt-5.6-sol (high) confirmed GO on Q1 (pure min/le_trans bookkeeping merging J4-1050's
+-- R, ChartEvalSlotRadiusMerge's already-3-way-merged ρstar, and EvalBaseSlotCoordinateBridge's bridge
+-- radius r into ONE ρ**, no hidden non-restriction) and NO-GO on Q2 (the merge does NOT relate the two
+-- independently-packaged CoV witness bundles -- J4-1050's V_base/PI/PJ/Q vs nb_common_chart_radius's
+-- V_eval/f' -- nor instantiate the bridge's abstract facts at those bundles' actual objects; that
+-- instantiation, per J4-1048/1049, remains a separate unattempted task). Built
+-- fiveway_common_chart_radius as a pure black-box composition of the three already-proven theorems: for
+-- every 0<ρ''≤ρ**, ALL FIVE ingredients (literal kPrime base-slot CoV on K∩ball x ρ''; uniform eval-slot
+-- weighted CoV; reversal-link ball integral; eval-slot domain-containment MapsTo; bridge image identity
+-- on ball x ρ'') hold SIMULTANEOUSLY as a conjunction, but NOT composed into any single formula/bound.
+-- Does NOT compose into nb/hCConv/hcomp; does NOT discharge hxmem's general case (cp988-991 unchanged).
+-- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompFiveWayCommonRadiusMerge
