@@ -31700,4 +31700,17 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvGateEdomEcombWired.hDConv_AT_GATE_edomEcombWired
 #print axioms QIQTH.HDConvGateEdomEcombWired.hDConv_AT_GATE_edomEcombWired
 
+-- J4-1112: HDConvGateAmpZeroFurtherReduced — hDConv_derivSide_census_ampzero_reduced. Further
+-- reduces J4-1102's derivative-side mild carries: `hAmp0`/`hCfield`/`M`/`M`'/`hM`/`hM`' traded for
+-- standard geometry carries {h0Kmem,hg,hg0,hu} + benign radius compat `D.r ≤ rAmp` + a field-point-0
+-- linking carry `hCfieldEq`, via banked `CensusAmplitudeSupDischarge.census_amplitude_supBounds`
+-- (S-independent, no constGate needed); `hFzero` CLOSED entirely (zero new carries beyond `hFeq`)
+-- via banked `HDuhamelCensusVanishingDischarged.hFzero_live` — an hDuhamel-side sibling never
+-- re-wired here, mirroring J4-1101/1102/1105/1109/1110/1111. `hgate`/`hSupp`/`hFdom`/`hAmeas`/
+-- `hDmeas`/`hbase` UNCHANGED, forwarded verbatim; `hgate` remains the genuine S=Set.univ-forcing
+-- blockage (J4-1104), untouched by this file. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvGateAmpZeroFurtherReduced.hDConv_derivSide_census_ampzero_reduced
+#print axioms QIQTH.HDConvGateAmpZeroFurtherReduced.hDConv_derivSide_census_ampzero_reduced
+
 end QIQTH.AxiomAudit

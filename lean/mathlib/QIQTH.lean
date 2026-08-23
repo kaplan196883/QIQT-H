@@ -6957,3 +6957,15 @@ import QIQTH.HDConvGateInterchangeWired
 -- census-shared but never re-wired into hDConv_AT_GATE, mirroring J4-1109/1110. std-3. NOT
 -- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvGateEdomEcombWired
+
+-- J4-1112: HDConvGateAmpZeroFurtherReduced — hDConv_derivSide_census_ampzero_reduced. FURTHER
+-- reduces J4-1102's derivative-side mild carries: `hAmp0`/`hCfield`/`M`/`M`'/`hM`/`hM`' traded for
+-- standard geometry carries {h0Kmem,hg,hg0,hu} + benign radius compat `D.r ≤ rAmp` + a field-point-0
+-- linking carry `hCfieldEq`, via banked `CensusAmplitudeSupDischarge.census_amplitude_supBounds`
+-- (S-independent); `hFzero` CLOSED entirely (zero new carries beyond `hFeq`) via banked
+-- `HDuhamelCensusVanishingDischarged.hFzero_live` — an hDuhamel-side sibling never re-wired here,
+-- mirroring J4-1101/1102/1105/1109/1110/1111. `hgate`/`hSupp`/`hFdom`/`hAmeas`/`hDmeas`/`hbase`
+-- UNCHANGED, forwarded verbatim; `hgate` remains the genuine S=Set.univ-forcing blockage (J4-1104),
+-- untouched by this file. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.HDConvGateAmpZeroFurtherReduced
