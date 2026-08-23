@@ -7024,3 +7024,10 @@ import QIQTH.HDmeasGFromFieldSliceTimeDeriv
 -- HDmeasGFromFieldSliceTimeDeriv.hDmeasG_of_field_slice. hFdom/hbase UNCHANGED. std-3. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced
+
+-- J4-1117: HDConvBoundDHpardiffAnySConstGateHKmDischarged — separate discharge of J4-1116's `hKm`
+-- carry (MeasurableSet K, from hK.isClosed.measurableSet alone); hSm0 attempted but reported as a
+-- genuine open carry (uniformFlowExp off K is an unconstrained Classical.choose selector, gpt-5.6-sol
+-- NO-GO confirmed). Carry set shrinks {hKm,hSm0,hIn,hInDeriv,hFslice} -> {hSm0,hIn,hInDeriv,hFslice}.
+-- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged

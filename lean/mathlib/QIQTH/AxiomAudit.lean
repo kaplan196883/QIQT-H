@@ -31765,4 +31765,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced.hDConv_boundD_hpardiff_anyS_constGate_ameas_dmeas_wired
 #print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced.hDConv_boundD_hpardiff_anyS_constGate_ameas_dmeas_wired
 
+-- J4-1117: HDConvBoundDHpardiffAnySConstGateHKmDischarged —
+-- hDConv_boundD_hpardiff_anyS_constGate_hkm_discharged. Separate discharge of J4-1116's `hKm`
+-- (MeasurableSet K, from hK.isClosed.measurableSet alone); hSm0 attempted, NO-GO (gpt-5.6-sol
+-- confirmed), reported as a genuine open carry. Carry set {hKm,hSm0,hIn,hInDeriv,hFslice} ->
+-- {hSm0,hIn,hInDeriv,hFslice}. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+#check @QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged.hDConv_boundD_hpardiff_anyS_constGate_hkm_discharged
+#print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged.hDConv_boundD_hpardiff_anyS_constGate_hkm_discharged
+
 end QIQTH.AxiomAudit
