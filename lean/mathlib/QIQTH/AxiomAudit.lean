@@ -19310,6 +19310,16 @@ namespace QIQTH.AxiomAudit
 -- capstone arrow: hCConv → ⟨a₁ 2-jet⟩. std-3 all 3. NOT a₁ = R/6.
 #print axioms QIQTH.HDConvGateThreading.hDConv_W1free
 #print axioms QIQTH.HDConvGateThreading.hDConv_AT_GATE
+
+-- J4-1101 (HDConvGateCensusReduce): the "Section-G analytic census" audit finds `hAzero` and
+-- `hUfloor` (2 of the census members J4-1095 flagged) are REDUNDANT against data hDConv_AT_GATE
+-- already carries: hAzero = vanVleckGatedWitness_eq_zero_of_nonpos (J4-544) fed hn; hUfloor =
+-- hUfloor_of_windowFloor fed the already-present haT/hUlb. hDConv_AT_GATE_censusReduced = the
+-- SAME theorem with both binders dropped and re-derived internally. Pure find-and-wire shrink,
+-- NOT new analysis. Remaining Section-G members (hFdom, hCross/L, hpardiff, nb/hnb,
+-- boundD/hbdd_d/hbound_d, plus reduced-not-closed hMeasFII/hFmeas_d/hFint_d/hF'meas_d) untouched.
+-- std-3. NOT a₁ = R/6.
+#print axioms QIQTH.HDConvGateCensusReduce.hDConv_AT_GATE_censusReduced
 #print axioms QIQTH.HDConvGateThreading.hDConvSlot_AT_GATE
 
 -- ## HDConvLiveGateWired: ★★ THE LIVE CAPSTONE hDConv SLOT IS NOW A NAMED-CENSUS THEOREM ★★
