@@ -31569,4 +31569,10 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HFrozenAIUniform.frozenAI_tUniform
 #print axioms QIQTH.HFrozenAIUniform.frozenAI_tUniform
 
+-- J4-1097: HFrozenAILocallyUniform — frozenAI_tLocallyUniform, the open-set/compact-window promotion
+-- of J4-1096 to the full TendstoLocallyUniformlyOn ... U shape hfroLU needs. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HFrozenAILocallyUniform.frozenAI_tLocallyUniform
+#print axioms QIQTH.HFrozenAILocallyUniform.frozenAI_tLocallyUniform
+
 end QIQTH.AxiomAudit

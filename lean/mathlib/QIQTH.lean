@@ -6846,3 +6846,11 @@ import QIQTH.HBFpeakInteriorNullFrontierBypass
 -- remain open). std-3, gpt-5.6-sol(high) consulted GO before construction.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFrozenAIUniform
+-- J4-1097: HFrozenAILocallyUniform — frozenAI_tLocallyUniform, the mechanical open-set/compact-window
+-- wrapper promoting J4-1096's Icc-level TendstoUniformlyOn to the FULL TendstoLocallyUniformlyOn ... U
+-- shape hfroLU actually needs (U open in ℝ), via Mathlib's tendstoLocallyUniformlyOn_of_forall_exists_nhds
+-- + Icc_mem_nhds. Discharges hfroLU at the ABSTRACT H,F level (gap (i) of J4-1096's honest gaps); gap
+-- (ii) — supplying hHmeas/hFmeas/hFbdd/hDom/hmass1/hlocalAll at the concrete curved-tower witness —
+-- remains open, plausibly hits the chart wall. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFrozenAILocallyUniform
