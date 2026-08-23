@@ -6690,3 +6690,14 @@ import QIQTH.HCompVbaseVevalLeftInverseBridge
 -- separate unestablished gap); does NOT compose into nb/hCConv/hcomp; does NOT discharge hxmem's
 -- general case. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge
+-- J4-1063: HcompLeftoverSliverWindowBound -- Sol's decisive window-shrinking test (option 2),
+-- verified first by closed-form sympy model. kPrime's bare "LEFTOVER" Hessian term (unpaired,
+-- no cancellation partner) has a z-integral density D(tau) that is BOUNDED near tau=0 (not
+-- vanishing -- "generically nonzero", confirming J4-1060/1061), but hcomp's ACTUAL carry integrates
+-- D over the SHRINKING s-window (t-eps_m,t); a bounded density times a vanishing-length window gives
+-- Theta(eps_m) = O(eps_m) = o(sqrt(eps_m)), STRICTLY FASTER than the O(sqrt(eps)) rate hcomp needs.
+-- leftover_sliver_bound_of_ball_domination lands this crudely via the ALREADY-BANKED Gaussian mass-
+-- <=-1 fact (ChartImageApproxIdentity.gaussDdim_setIntegral_le_one) + interval-integral norm-le-const.
+-- Resolves ONLY the LEFTOVER sub-question (not T1/T2/T3, not the base-eval chart-incoherence). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HcompLeftoverSliverWindowBound

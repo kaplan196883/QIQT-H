@@ -1,0 +1,23 @@
+D(tau) [z-integral of leftover density against tau-Gaussian] = exp(-2*tau)
+Cross-check D(tau) matches exp(-2 tau): 0 (should be 0)
+lim_{tau->0+} D(tau) = 1   (nonzero => matches campaign's 'generically nonzero L*c3' finding)
+sup_{tau in [0,eps]} D(tau) = D(0) = 1  (bounded density, no 1/tau or 1/sqrt(tau) blow-up)
+
+Total leftover sliver integral  integral_0^eps D(tau) dtau  = 1/2 - exp(-2*eps)/2
+Small-eps series of Total: 2*eps**3/3 - eps**2 + eps
+lim_{eps->0} Total/eps = 1  (finite nonzero => Total = Theta(eps), i.e. O(eps))
+lim_{eps->0} Total/sqrt(eps) = 0  (=0 => Total = o(sqrt(eps)), i.e. Total decays STRICTLY FASTER than the O(sqrt(eps)) target)
+
+=== VERDICT ===
+Leftover term's ACTUAL contribution to hcomp's near carry, integrated over the real shrinking
+s-window (t - eps_m, t) with eps_m = 1/(m+1) -> 0, is Theta(eps_m) = O(eps_m), which is
+asymptotically SMALLER (vanishes FASTER) than the O(sqrt(eps_m)) rate hcomp needs.
+The earlier 'generically nonzero' finding was about the DENSITY (a tau -> 0 pointwise limit),
+not the actual double integral hcomp bounds; a density that is merely BOUNDED (not necessarily
+vanishing) near tau=0, integrated over a window of vanishing LENGTH eps_m, trivially gives an
+O(eps_m) total by the crude bound |integral_0^eps D| <= eps * sup|D|. No cancellation needed.
+
+--- Robustness: repeat with a different bounded F (sanity that O(eps) is generic, not a fluke) ---
+D2(tau) = exp(-13*tau)
+Total2(eps) = 1/13 - exp(-13*eps)/13
+lim Total2/eps = 1 (nonzero finite => again Theta(eps))

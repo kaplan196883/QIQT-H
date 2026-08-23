@@ -31372,4 +31372,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.amp_of_transported_ratio_evalSlot_global_lipschitz_at_zero
 #print axioms QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge.amp_of_transported_ratio_evalSlot_global_lipschitz_at_zero
 
+-- J4-1063: HcompLeftoverSliverWindowBound -- Sol's decisive window-shrinking rate test. kPrime's
+-- bare unpaired "LEFTOVER" Hessian term has a Gaussian-weighted z-integral density D(tau) that is
+-- BOUNDED near tau=0 (not vanishing -- confirms J4-1060/1061's "generically nonzero" finding), but
+-- hcomp's actual carry integrates D over the SHRINKING s-window (t-eps_m,t); a bounded density on a
+-- vanishing-length window gives Theta(eps_m) = o(sqrt(eps_m)), strictly faster than hcomp's needed
+-- O(sqrt(eps)) rate. Resolves ONLY the LEFTOVER sub-question (not T1/T2/T3, not base-eval chart
+-- incoherence). NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HcompLeftoverSliverWindow.gaussDdim_ball_weighted_average_bounded
+#print axioms QIQTH.HcompLeftoverSliverWindow.gaussDdim_ball_weighted_average_bounded
+#check @QIQTH.HcompLeftoverSliverWindow.leftover_sliver_window_bound
+#print axioms QIQTH.HcompLeftoverSliverWindow.leftover_sliver_window_bound
+#check @QIQTH.HcompLeftoverSliverWindow.leftover_sliver_bound_of_ball_domination
+#print axioms QIQTH.HcompLeftoverSliverWindow.leftover_sliver_bound_of_ball_domination
+
 end QIQTH.AxiomAudit
