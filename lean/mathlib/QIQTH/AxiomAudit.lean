@@ -31251,4 +31251,22 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HmeasReducedToJointC1.hFderivFam_concrete_reduced_to_jointC1
 #print axioms QIQTH.HmeasReducedToJointC1.hFderivFam_concrete_reduced_to_jointC1
 
+-- J4-1041: HCompNearCarryBfacLinearTermsLinMultBridge — Bfac's OTHER THREE summands (grj.djA,
+-- gri.diA, djdiA): G.(grj.djA)=-linMult(t-s,PJ,U).djA and G.(gri.diA)=-linMult(t-s,PI,U).diA LITERALLY
+-- (direct reuse of linMult, cheaper than term1's heatHessMult route); djdiA is the flat gaussDdim*Amp
+-- shape, needing NO cancellation at all (cheapest). hxmem remains an equally-shared upstream gate for
+-- ALL FOUR summands. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.grTerm_gaussian_mul_amp_eq_neg_linMult_mul_amp
+#print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.grTerm_gaussian_mul_amp_eq_neg_linMult_mul_amp
+#check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term2_grj_eq_neg_linMult_mul_partialjAmp
+#print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term2_grj_eq_neg_linMult_mul_partialjAmp
+#check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term3_gri_eq_neg_linMult_mul_partialiAmp
+#print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term3_gri_eq_neg_linMult_mul_partialiAmp
+#check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.grTerm_gaussian_mul_amp_lipschitz_bound
+#print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.grTerm_gaussian_mul_amp_lipschitz_bound
+#check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.flat_gaussian_mul_amp_bound
+#print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.flat_gaussian_mul_amp_bound
+#check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term4_flat_bound
+#print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term4_flat_bound
+
 end QIQTH.AxiomAudit

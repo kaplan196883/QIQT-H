@@ -6522,3 +6522,15 @@ import QIQTH.HbintBLContinuityGeneralK
 -- obstacle of fb; it collapses onto hbint's existing wall. hbint's own hbnd sub-carry and hBFpeak remain
 -- OPEN and untouched. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HmeasReducedToJointC1
+-- J4-1041: HCompNearCarryBfacLinearTermsLinMultBridge -- investigates Bfac's OTHER THREE summands
+-- (grj.dj A, gri.di A, dj di A), untouched by the term1-only J4-1017-1034 chain. Finding: G.(grj.djA) =
+-- -linMult(t-s,PJ,U).djA and G.(gri.diA) = -linMult(t-s,PI,U).diA LITERALLY (bare unfolding, no new
+-- algebra) -- terms 2/3 are DIRECT instances of the already-banked linMult zero-integral +
+-- Lipschitz-remainder machinery, needing NO heatHessMult second-moment cancellation (cheaper than
+-- term1). dj di A carries no gr multiplier at all -- G.(dj di A) is the flat gaussDdim*Amp shape
+-- needing NO cancellation, just gaussDdim_mass_one (cheapest of all four). hxmem remains an EQUALLY
+-- shared upstream gate for ALL FOUR summands (needed merely to invoke BRICK1's factorization pointwise
+-- at all) -- none of the other 3 summands escapes it, but their downstream sub-problem is structurally
+-- cheaper. Sol (gpt-5.6-sol, high) GO-confirmed before Lean. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge
