@@ -6981,3 +6981,15 @@ import QIQTH.HDConvGateAmpZeroFurtherReduced
 -- hAmp0/hCfield/hFzero/hFdom/hAmeas/hDmeas/hbase remain ordinary caller-supplied hypotheses,
 -- UNCHANGED. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvBoundDHpardiffAnySConstGateHsupp
+
+-- J4-1114: HDConvBoundDHpardiffAnySConstGateFullDischarge —
+-- hDConv_boundD_hpardiff_anyS_constGate_full_wired. FULL COMBINED closure of the hgate-FREE
+-- witnessBoundD_wired_anyS/witnessHpardiff_wired_anyS (J4-951) at S:=constGate: discharges
+-- {hAmp0,hCfield} internally (J4-1112's mechanism, census_amplitude_supBounds, S-independent) TOGETHER
+-- WITH hSupp internally (J4-1113's mechanism, hsupp_for_constGate) in ONE theorem, modulo the explicit
+-- satisfiable couplings D.r≤rAmp, cR≤ρ₀, cR·(1+C_D·cR)≤D.r. Confirmed no shared-variable conflict, no
+-- hidden hgate-style vacuity (this family carries no hgate at all); gpt-5.6-sol (high) consulted before
+-- construction. Smallest remaining carries: {hFzero,hFdom,hAmeas,hDmeas,hbase} + standard geometry
+-- {h0Kmem,hg,hg0,hu} + C_L,hC_L. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.HDConvBoundDHpardiffAnySConstGateFullDischarge
