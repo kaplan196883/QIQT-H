@@ -6534,3 +6534,19 @@ import QIQTH.HmeasReducedToJointC1
 -- cheaper. Sol (gpt-5.6-sol, high) GO-confirmed before Lean. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge
+-- J4-1042: HxmemLocalSharpReachCoverage -- the LOCAL (radius-bounded) chart-coverage fact, distinguished
+-- from the GENERAL hxmem discharge (definitively closed off, cp988-991). For the FIXED, given compact K
+-- (never re-derived from its own output), uniformFlowExp_sharp_reach (J4-722, already banked) supplies
+-- K-uniform rho0>0, C_L>=0 s.t. for c with 0<c<=rho0, C_L*c<1, R:=(1-C_L*c)*(3c/4)>0: every z in K within
+-- distance R of a fixed x satisfies x in S z = uniformFlowExp z ''(ball 0 c). NO K-shrinking fixed-point
+-- circularity (K is never redefined). Answers cp1009's flagged question: r6's OWN consumption (traced in
+-- HCompNearCarryKPrimeGateRestrictedCoVNbhd's proof) only ever invokes hxmem at z ranging over an
+-- existentially-delivered, separately-IFT-constructed neighbourhood S'' of x (NOT literally all of K),
+-- so this LOCAL fact is the genuinely relevant, narrower coverage need -- confirmed by gpt-5.6-sol high
+-- BEFORE Lean, including that a "two-compact" K-swap shortcut is NO-GO (reproduces cp990's uniformFlowRadius
+-- circularity one level down). Does NOT itself discharge J4-1031/1032's literal hxmem hypothesis (that
+-- type is stated over the FULL external K) nor re-derive their hJetVi/hJetVj/hJetQ/hAmpj1/hAmpi1/hAmp2
+-- chain against the shrunk domain S'' cap ball(x,R) -- that full wiring is a separate, larger follow-on,
+-- confirmed sound in principle (Sol) but not attempted here. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HxmemLocalSharpReachCoverage

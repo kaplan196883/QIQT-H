@@ -31269,4 +31269,12 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term4_flat_bound
 #print axioms QIQTH.HCompNearCarryBfacLinearTermsLinMultBridge.kPrime_term4_flat_bound
 
+-- J4-1042: HxmemLocalSharpReachCoverage
+#check @QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage
+#print axioms QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage
+#check @QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage_ball
+#print axioms QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage_ball
+#check @QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage_ball_hyp_satisfiable
+#print axioms QIQTH.HxmemLocalSharpReachCoverage.uniformFlowExp_local_coverage_ball_hyp_satisfiable
+
 end QIQTH.AxiomAudit
