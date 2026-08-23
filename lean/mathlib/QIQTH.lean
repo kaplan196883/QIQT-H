@@ -6585,3 +6585,16 @@ import QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge
 -- GENERAL discharge on all of K remains definitively closed off per cp988-991). std-3. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryHdLocalCoverageDischarge
+-- J4-1046: HCompNearCarryFullLocalDischarge -- composes J4-1044's hxmem-free jet-bundle discharge with
+-- J4-1045's hd-derivation method, reusing ONE shared hxmem witness (from J4-1042) for BOTH consumers, then
+-- feeds hSopen/hxmem/hd/the six jet-amp hyps into J4-1043's K-cap-U wrapper (U := Metric.ball x R): for
+-- the FIRST time, the FULL literal kPrime CoV identity is produced with BOTH hxmem AND hd eliminated as
+-- free hypotheses, on K cap Metric.ball x R. Only hxint, hτ, and radius/metric-regularity bookkeeping
+-- remain. Confirmed GO by gpt-5.6-sol (high) before Lean (proof-irrelevance-safe shared-witness reuse,
+-- no quantifier-order circularity; c-bookkeeping sympy-checked satisfiable). Does NOT discharge hxint or
+-- hτ; does NOT attempt r6's own remaining 4-lemma composition (per cp1008/1009) linking this identity to
+-- J4-1012/1013/1014/1020/1022/1023/1016 -- that composition is NOT built here. hxmem's GENERAL discharge
+-- on all of K remains definitively closed off per cp988-991; the delivered domain is strictly smaller
+-- than all of K. Bfac's other 3 summands and fb remain untouched. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryFullLocalDischarge

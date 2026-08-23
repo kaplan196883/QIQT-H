@@ -31292,4 +31292,9 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryHdLocalCoverageDischarge.hd_of_local_coverage
 #print axioms QIQTH.HCompNearCarryHdLocalCoverageDischarge.hd_of_local_coverage
 
+-- J4-1046: HCompNearCarryFullLocalDischarge -- BOTH hxmem AND hd eliminated as free hypotheses of the
+-- full literal kPrime CoV identity, on K cap Metric.ball x R (shared hxmem witness fed to both consumers)
+#check @QIQTH.HCompNearCarryFullLocalDischarge.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge
+#print axioms QIQTH.HCompNearCarryFullLocalDischarge.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge
+
 end QIQTH.AxiomAudit
