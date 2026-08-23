@@ -6571,3 +6571,17 @@ import QIQTH.HCompNearCarryKPrimeGateRestrictedCoVNbhdU
 -- summands and fb remain untouched. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge
+-- J4-1045: HCompNearCarryHdLocalCoverageDischarge -- composes J4-1034's hd_of_hxmem_concreteGate
+-- (hd reduced to hxmem alone, pointwise-in-z) with J4-1042's uniformFlowExp_local_coverage_ball
+-- (hxmem DERIVED, not assumed, on K cap Metric.ball x R): for the FIRST time, hd itself is GENUINELY
+-- DERIVED (not assumed) on that same shrunk domain. The composition is mechanical -- J4-1034's proof
+-- only ever uses z in K (pointwise, not joint-in-(x,z)) and x in S z for the single z at hand, so
+-- restricting z in K to z in K cap Metric.ball x R and sourcing x in S z from the local coverage fact
+-- instead of an external hypothesis carries through unchanged; the two source lemmas' c-ranges
+-- (0<c<delta0 vs 0<c<=rho0 and C_L*c<1) are jointly existentially quantified as pure bookkeeping,
+-- confirmed by gpt-5.6-sol (high) before Lean. Result: BOTH of J4-1032's two residues (hxmem, hd) are
+-- now simultaneously genuinely derived on one common shrunk domain K cap Metric.ball x R -- a further
+-- consolidation, NOT a closure (hxint, hτ, Bfac's other 3 summands, and fb remain untouched; hxmem's
+-- GENERAL discharge on all of K remains definitively closed off per cp988-991). std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryHdLocalCoverageDischarge

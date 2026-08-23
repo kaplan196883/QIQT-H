@@ -31286,4 +31286,10 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge.kPrime_baseField_CoV_of_jetBundle_localCoverage
 #print axioms QIQTH.HCompNearCarryJetBundleLocalCoverageDischarge.kPrime_baseField_CoV_of_jetBundle_localCoverage
 
+-- J4-1045: HCompNearCarryHdLocalCoverageDischarge -- hd (differentiability of witnessFieldDeriv) now
+-- ALSO genuinely derived (not assumed) on K cap Metric.ball x R, composing J4-1034's hd_of_hxmem_concreteGate
+-- with J4-1042's local coverage fact
+#check @QIQTH.HCompNearCarryHdLocalCoverageDischarge.hd_of_local_coverage
+#print axioms QIQTH.HCompNearCarryHdLocalCoverageDischarge.hd_of_local_coverage
+
 end QIQTH.AxiomAudit
