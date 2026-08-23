@@ -7075,3 +7075,17 @@ import QIQTH.ChartOverlapGermCompatibilityTwoSeeds
 -- HasDerivAt shape. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
 -- UNCHANGED).
 import QIQTH.ChartOverlapConsumerTripleTwoSeeds
+
+-- J4-1127: ChartOverlapCoordinateLineHasDerivAtTransfer — dispatch 5 of the greenlit overlap-
+-- uniqueness bridge sub-campaign. chartCoherent_hasDerivAt_transfer_at_overlap_two_seeds
+-- transfers J4-1125's raw joint germ facts along the literal coordinate-line map
+-- s ↦ Function.update ξ.2 k s (base point ξ.1 frozen, output component jj), producing the exact
+-- HasDerivAt ↔ HasDerivAt shape ChartJointBorel.lean's hcarField/hcarField2 consume, for an
+-- ARBITRARY candidate derivative value d: (a) uniformInverseChart ↔ chartCoherent1 on U1,
+-- (b) uniformInverseChart ↔ chartCoherent2 on U2, (c) chartCoherent1 ↔ chartCoherent2 on
+-- U1 ∩ U2. gpt-5.6-sol (high) confirmed this closes the literal-shape gap J4-1126 left open;
+-- next dispatch (J4-1128) targets a concrete Pfield/Pifield/Pjfield/Qfield representative with
+-- explicit fderiv-based derivative coefficients (not classical-choice gluing, for tractable
+-- measurability). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
+-- UNCHANGED).
+import QIQTH.ChartOverlapCoordinateLineHasDerivAtTransfer
