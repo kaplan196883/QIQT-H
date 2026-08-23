@@ -6661,3 +6661,17 @@ import QIQTH.HCompNearCarryFullLocalDischargeUniform
 -- Does NOT compose into nb/hCConv/hcomp; does NOT discharge hxmem's general case (cp988-991 unchanged).
 -- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompFiveWayCommonRadiusMerge
+-- J4-1052: HCompVbaseVevalLeftInverseBridge -- attempted J4-1051's option (a): the witness-bundle
+-- IDENTIFICATION between J4-1050's base-slot left-inverse Vbase (of Wb(z):=uniformInverseChart z x,
+-- from BaseSlotM1M4Assembly) and ChartEvalSlotRadiusMerge's eval-slot left-inverse Veval (of
+-- We(z):=uniformInverseChart x z, from ChartIFTPackageGeneralQ0). gpt-5.6-sol (high) confirmed
+-- GO-BUT-LIMITED-USE: on the shared open domain D:=S'∩ball x (min r ρ), the two left-inverses ARE
+-- related through T:=terminalVelAt x alone (∀w∈We''D, Vbase(-T w)=Veval w) -- but this does NOT
+-- identify Vbase=Veval as the same function (only related via T), and does NOT enable an integral
+-- change-of-variables substitution (no Jacobian control for T off the single point z=x) -- useless
+-- for an integral bound on nb's term1. Sol's flagged higher-priority alternative (pointwise
+-- weight/Jacobian comparison pulled back to D, avoiding T entirely) NOT attempted. Built
+-- vbase_veval_left_inverse_bridge as the concrete instantiation. Does NOT compose into nb/hCConv/
+-- hcomp; does NOT discharge hxmem's general case (cp988-991 unchanged). std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompVbaseVevalLeftInverseBridge

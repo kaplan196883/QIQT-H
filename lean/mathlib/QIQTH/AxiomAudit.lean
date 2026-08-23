@@ -31348,4 +31348,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompFiveWayCommonRadiusMerge.fiveway_common_chart_radius
 #print axioms QIQTH.HCompFiveWayCommonRadiusMerge.fiveway_common_chart_radius
 
+-- J4-1052: HCompVbaseVevalLeftInverseBridge -- concrete instantiation of EvalBaseSlotCoordinateBridge's
+-- bridge_left_inverse at the ACTUAL Vbase (BaseSlotM1M4Assembly) / Veval (ChartIFTPackageGeneralQ0)
+-- bundles, on shared domain D:=S'∩ball x (min r ρ): ∀w∈We''D, Vbase(-T w)=Veval w (T:=terminalVelAt x).
+-- Sol GO-BUT-LIMITED-USE: an honest algebraic identification through T, NOT Vbase=Veval, NOT an
+-- integral-CoV substitution (no Jacobian control for T off z=x). Does NOT compose into nb/hCConv/hcomp;
+-- does NOT discharge hxmem's general case (cp988-991 unchanged).
+#check @QIQTH.HCompVbaseVevalLeftInverseBridge.vbase_veval_left_inverse_bridge
+#print axioms QIQTH.HCompVbaseVevalLeftInverseBridge.vbase_veval_left_inverse_bridge
+
 end QIQTH.AxiomAudit
