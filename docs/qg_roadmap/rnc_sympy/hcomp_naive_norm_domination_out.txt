@@ -1,0 +1,64 @@
+==============================================================================
+STEP 0. Sanity: SIGNED full-space integrals vanish exactly (matches Lean's
+        integral_heatHessMult_eq_zero / integral_linMult_eq_zero).
+==============================================================================
+  signed ∫ heatHessMult dv (tau=1/3, p=q=1) = 0
+  signed ∫ linMult dv      (tau=1/3, q=1)   = 0
+
+==============================================================================
+STEP 1. UNSIGNED (naive norm-domination) integral of heatHessMult, exact closed form.
+==============================================================================
+  I(tau) = ∫_R |heatHessMult(tau,1,1,v)| dv  = sqrt(2)*exp(-1/2)/(sqrt(pi)*tau)
+  simplified: sqrt(2)*exp(-1/2)/(sqrt(pi)*tau)
+    tau=0.1      I(tau)=4.839414   tau*I(tau)=0.483941
+    tau=0.01     I(tau)=48.394145   tau*I(tau)=0.483941
+    tau=0.001    I(tau)=483.941449   tau*I(tau)=0.483941
+
+==============================================================================
+STEP 2. Small-tau asymptotics of I(tau) -- is it O(1/tau)?
+==============================================================================
+  series I(tau) as tau->0: sqrt(2)*exp(-1/2)/(sqrt(pi)*tau)
+  tau * I(tau) simplified: sqrt(2)*exp(-1/2)/sqrt(pi)   (constant => I(tau) ~ C/tau exactly, all tau>0)
+
+==============================================================================
+STEP 3. UNSIGNED linMult integral, exact closed form + small-tau rate.
+==============================================================================
+  J(tau) = ∫_R |linMult(tau,1,v)| dv = 1/(sqrt(pi)*sqrt(tau))  (split-domain; naive sp.integrate w/ Abs wrongly gives 0)
+  J(tau) * sqrt(tau) simplified: 1/sqrt(pi)  => J(tau) ~ C/sqrt(tau) (MILDER than heatHessMult's 1/tau)
+
+==============================================================================
+STEP 4. Sliver integral over tau in (0, eps): does int_0^eps I(tau) dtau converge?
+==============================================================================
+  I(tau) = C_I / tau  with C_I = sqrt(2)*exp(-1/2)/sqrt(pi)
+  ∫_0^eps I(tau) dtau = oo   <-- DIVERGES if this blows up / sympy flags it
+  ∫_delta^eps I(tau) dtau = -sqrt(2)*exp(-1/2)*log(delta)/sqrt(pi) + sqrt(2)*exp(-1/2)*log(eps)/sqrt(pi)
+  limit as delta -> 0+ : oo   (+oo confirms LOG-DIVERGENCE at the tau->0 end)
+
+==============================================================================
+STEP 5. Contrast: linMult's sliver integral (J(tau) ~ C/sqrt(tau)) DOES converge.
+==============================================================================
+  J(tau) = C_J / sqrt(tau) with C_J = 1/sqrt(pi)
+  ∫_0^eps J(tau) dtau = 2*sqrt(eps)/sqrt(pi)  = O(sqrt(eps)), CONVERGES.
+
+==============================================================================
+VERDICT
+==============================================================================
+  Naive (unsigned/absolute-value-first) norm-domination of `linMult` alone WOULD deliver the
+  needed O(sqrt(eps)) rate on its own (J(tau) ~ C/sqrt(tau), sliver-integrable).  But
+  `heatHessMult`'s naive unsigned integral I(tau) is EXACTLY C_I/tau for ALL tau>0 (not just an
+  upper bound -- the true value, verified symbolically) -- i.e. it is off by a full extra power of
+  tau^{-1/2} relative to `linMult`, has NO extra cancellation once |.| is taken first, and its
+  sliver integral over (0,eps) is LOG-DIVERGENT (STEP 4: the delta->0 limit is +oo).  This is
+  QUANTITATIVELY THE SAME DIVERGENCE ORDER (1/tau pointwise, log-divergent sliver) as
+  hcomp_bypass_feasibility.py's Step 3 `order2_naive_dominator_not_intervalIntegrable` finding --
+  a DIFFERENT overall proof strategy (bounding kPrime's Levi x Hessian factors separately, vs here
+  bounding the T1/T2/T3 Amp-weighted hsMixed integrand directly) hits the IDENTICAL underlying
+  obstruction: the order-2 (Hessian-type, <v,p><v,q>/tau^2) singular scalar needs a FULL power of
+  tau^{1/2} of cancellation that ONLY a signed/difference argument (the f-f(0) Lipschitz split, or
+  the base<->eval Gaussian-difference bound) can supply -- an unsigned/norm-first bound cannot see
+  it, by construction (|A - B| <= |A|+|B| always loses exactly this cancellation for the order-2
+  term). linMult (order-1, <v,q>/tau) is one power of tau milder and DOES survive naively, but the
+  heatHessMult component is the binding constraint and it FAILS naively.
+  => Naive norm-domination is NOT a viable route for T1/T2/T3's actual S'-restricted-domain bound;
+     the campaign must find a way to make the SIGNED cancellation survive on S' (e.g. showing S' is
+     symmetric/near-symmetric enough around the relevant center), not bypass it.
