@@ -6496,3 +6496,12 @@ import QIQTH.HLeviCappedWindowConst
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ConstRadiusPkgPrescribed
 import QIQTH.HBLgaussUnconditional
+-- J4-1038: HLeviBLGaussUnconditionalTriple -- cp999's Track1-vs-Track2 BL choice point RESOLVED in
+-- favor of Track 2 (BL:=CB*gaussDdim, NOT leviSeries itself). hLevi_capped_window_UNCOND re-sources
+-- hLevi's exact abs-value shape from the UNCONDITIONAL HBLgaussUnconditional supplier (no c<δ₀
+-- residue); hBLnn_hBLgauss_hLevi_UNCOND_triple exhibits {hBLnn,hBLgauss,hLevi} ALL holding
+-- SIMULTANEOUSLY, unconditionally, for MixedEnvelopeAssembly.mixedEnvelope_of_named_carries's Track-2
+-- BL choice. Does NOT touch hBFpeak (z-uniform-dominator gap, still open) nor build a full
+-- MixedDirectionsFieldHessianEnvelope term. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HLeviBLGaussUnconditionalTriple

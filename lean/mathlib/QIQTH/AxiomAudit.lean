@@ -31203,4 +31203,23 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HBLgaussUnconditional.hBLgauss_capped_window_UNCOND
 #print axioms QIQTH.HBLgaussUnconditional.hBLgauss_capped_window_UNCOND
 
+-- J4-1038: HLeviBLGaussUnconditionalTriple -- cp999's Track1-vs-Track2 BL choice point RESOLVED in
+-- favor of Track 2 (BL:=CB*gaussDdim(2s), NOT leviSeries itself, matching MixedEnvelopeAssembly's
+-- J4-913 choice). hLevi_capped_window_UNCOND re-sources hLevi's exact abs-value shape (the
+-- MixedDirectionsFieldHessianEnvelope hLevi field, a DOMINATION bound on |leviSeries|, never requiring
+-- BL to literally equal leviSeries) from the UNCONDITIONAL HBLgaussUnconditional supplier -- no c<δ₀
+-- residue anywhere. hBLnn_hBLgauss_hLevi_UNCOND_triple exhibits {hBLnn,hBLgauss,hLevi} ALL holding
+-- SIMULTANEOUSLY, unconditionally, at CB:=fun _=>C_L: hBLnn/hBLgauss trivial (mul_nonneg/le_refl),
+-- hLevi from the unconditional supplier. Sol-consulted (high) before construction: confirmed sound,
+-- non-circular, flagged that this closes ONLY the {hBLnn,hBLgauss,hLevi} sub-package (existential
+-- witnesses a,b,c tied to this specific supplier), NOT hBFpeak (still open, z-uniform-dominator gap)
+-- nor hcpt/hpeak/hbint/hmeas, and does NOT build a full MixedDirectionsFieldHessianEnvelope term. fb's
+-- TRUE remaining obstacle set for this sub-package narrows to {hBFpeak} PROVIDED Track 2's BL is used
+-- throughout (not Track 1's leviSeries-literal BL, which cp999 confirmed leaves hBLnn genuinely
+-- blocked/plausibly-false). NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HLeviBLGaussUnconditionalTriple.hLevi_capped_window_UNCOND
+#print axioms QIQTH.HLeviBLGaussUnconditionalTriple.hLevi_capped_window_UNCOND
+#check @QIQTH.HLeviBLGaussUnconditionalTriple.hBLnn_hBLgauss_hLevi_UNCOND_triple
+#print axioms QIQTH.HLeviBLGaussUnconditionalTriple.hBLnn_hBLgauss_hLevi_UNCOND_triple
+
 end QIQTH.AxiomAudit
