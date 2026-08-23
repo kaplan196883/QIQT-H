@@ -6895,3 +6895,10 @@ import QIQTH.HDConvAtGateConstGateHAdom
 -- (J4-114 (B)) via baseKernelW_zero_apply; corrects J4-1104's "no theorem bounds leviSeries" claim.
 -- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFdomOfLeviSeriesDominated
+
+-- J4-1106: HFdomConcreteVanVleck — hFdom_concrete_vanVleck, the concrete wiring J4-1105 flagged as
+-- unattempted: matches vanVleckGatedWitness to leviSeries_gatedWitnessN1_dominated (J4-114 (B)) at
+-- the SAME concrete a,b,S, producing hDConv_AT_GATE's hFdom in its literal shape conditional ONLY on
+-- hEmeas (M1). hFdom no longer separately open; collapses into the tracked M1 wall. std-3. NOT
+-- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFdomConcreteVanVleck

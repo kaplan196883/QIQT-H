@@ -31635,4 +31635,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HFdomOfLeviSeriesDominated.hFdom_of_leviSeries_dominatedW
 #print axioms QIQTH.HFdomOfLeviSeriesDominated.hFdom_of_leviSeries_dominatedW
 
+-- J4-1106: HFdomConcreteVanVleck — hFdom_concrete_vanVleck, the concrete wiring J4-1105 flagged as
+-- "not attempted this round". leviSeries_gatedWitnessN1_dominated (J4-114 (B)) ALREADY bundles
+-- hEbound+hInt internally and returns the full Levi-series domination; its kernel expression IS
+-- (argument-for-argument) the unfolding of vanVleckGatedWitness. This lemma repackages that
+-- existential (unfold vanVleckGatedWitness + baseKernelW_zero_apply) into hDConv_AT_GATE's hFdom
+-- literal shape at the SAME concrete a,b,S, conditional ONLY on hEmeas (the M1 wall already tracked
+-- for leviSeries_gatedWitnessN1_dominated). hFdom is no longer a separately open census member; it
+-- collapses into the existing M1 entry. gpt-5.6-sol (high) confirmed 2026-08-24. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HFdomConcreteVanVleck.hFdom_concrete_vanVleck
+#print axioms QIQTH.HFdomConcreteVanVleck.hFdom_concrete_vanVleck
+
 end QIQTH.AxiomAudit
