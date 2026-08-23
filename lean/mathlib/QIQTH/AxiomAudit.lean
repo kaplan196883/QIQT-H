@@ -31647,4 +31647,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HFdomConcreteVanVleck.hFdom_concrete_vanVleck
 #print axioms QIQTH.HFdomConcreteVanVleck.hFdom_concrete_vanVleck
 
+-- J4-1107: HFdomVanVleckHEmeasDischarged — hFdom_vanVleck_hEmeas_discharged. Replays
+-- constRadius_package_and_S1 (J4-316) at the CONSTANT-RADIUS gate S z := uniformFlowExp ... '' ball 0 c
+-- (where tripleHEmeas/hEmeas is discharged from geometry alone, mod c<δ₀) through
+-- iterConvIntegrableW_of_locally_bound_baseMeas + leviSeries_dominatedW_le, landing hFdom's literal
+-- gaussDdim shape UNCONDITIONALLY on hEmeas — only c<δ₀ + standard geometric/gauge/measurability hyps
+-- remain. A DIFFERENT (narrower, constant-radius) gate than J4-1106's opaque-.choose gate; the other
+-- ~25 hDConv_AT_GATE census members untouched, not yet checked at this gate. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HFdomVanVleckHEmeasDischarged.hFdom_vanVleck_hEmeas_discharged
+#print axioms QIQTH.HFdomVanVleckHEmeasDischarged.hFdom_vanVleck_hEmeas_discharged
+
 end QIQTH.AxiomAudit

@@ -6902,3 +6902,14 @@ import QIQTH.HFdomOfLeviSeriesDominated
 -- hEmeas (M1). hFdom no longer separately open; collapses into the tracked M1 wall. std-3. NOT
 -- a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HFdomConcreteVanVleck
+
+-- J4-1107: HFdomVanVleckHEmeasDischarged — hFdom_vanVleck_hEmeas_discharged: replays
+-- constRadius_package_and_S1 (J4-316, ConstRadiusGateExport)'s CONSTANT-RADIUS flow-ball gate
+-- (where hEmeas/tripleHEmeas is discharged from geometry alone, mod c<δ₀) through
+-- iterConvIntegrableW_of_locally_bound_baseMeas + leviSeries_dominatedW_le to hFdom's literal
+-- gaussDdim shape, UNCONDITIONALLY on hEmeas (only c<δ₀ + standard geometric/gauge/measurability
+-- hyps remain). hFdom fully discharged (no hEmeas antecedent) AT THIS constant-radius gate — a
+-- DIFFERENT, narrower gate than J4-1106's opaque-.choose gate; the other ~25 hDConv_AT_GATE census
+-- members are untouched and not yet checked to transfer to this gate. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HFdomVanVleckHEmeasDischarged
