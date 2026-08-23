@@ -31242,4 +31242,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HbintBLContinuityGeneralK.hbint_interior_via_tube_cover_requant_concreteBL
 #print axioms QIQTH.HbintBLContinuityGeneralK.hbint_interior_via_tube_cover_requant_concreteBL
 
+-- J4-1040: HmeasReducedToJointC1 — hmeas REDUCED to {hLeviFam, the SAME joint-C¹ carry hbint already
+-- needs (hbint_concrete_reduced_to_jointC1, J4-878)}. hmeas is NOT an independent obstacle of fb; it
+-- collapses onto hbint's existing wall. hbint's own hbnd sub-carry and hBFpeak remain OPEN, untouched.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HmeasReducedToJointC1.hmeas_concrete_reduced_to_jointC1
+#print axioms QIQTH.HmeasReducedToJointC1.hmeas_concrete_reduced_to_jointC1
+#check @QIQTH.HmeasReducedToJointC1.hFderivFam_concrete_reduced_to_jointC1
+#print axioms QIQTH.HmeasReducedToJointC1.hFderivFam_concrete_reduced_to_jointC1
+
 end QIQTH.AxiomAudit

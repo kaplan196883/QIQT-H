@@ -6516,3 +6516,9 @@ import QIQTH.HLeviBLGaussUnconditionalTriple
 -- hmeas, hBFpeak all remain OPEN. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv},
 -- UNCHANGED).
 import QIQTH.HbintBLContinuityGeneralK
+-- J4-1040: HmeasReducedToJointC1 — hmeas (MixedEnvelopeAssembly's z-measurability field of kPrime)
+-- REDUCED, at the concrete flow-ball gate, to {hLeviFam (already-named, untouched), the SAME joint C¹
+-- carry that hbint_concrete_reduced_to_jointC1 (J4-878) already needs}. hmeas is NOT an independent
+-- obstacle of fb; it collapses onto hbint's existing wall. hbint's own hbnd sub-carry and hBFpeak remain
+-- OPEN and untouched. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HmeasReducedToJointC1
