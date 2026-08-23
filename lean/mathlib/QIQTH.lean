@@ -6801,3 +6801,10 @@ import QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound
 -- discharge hxmem/hfac/r1-r2; does NOT touch nb/hCConv/hcomp/fb.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryBfacFourTermAssembly
+-- J4-1075: LeviWindowUniformAmpLipschitz — window-uniform Levi(s,z) bounded+Lipschitz bundle (s-indep
+-- constants over [t-ε,t], from concrete LeviLipschitz facts + gaussDdimPeak_antitone_width) + the
+-- s-indexed Levi(s,·)·Amp(·) window-uniform Lipschitz-at-0 wrapper (feeds bfac_four_term_domain_
+-- restricted_bound's hAmp/L/hlip shape at each fixed s/τ). Does NOT thread through the outer sliver-
+-- window s-integration (no new O(√ε) capstone here); does NOT touch nb/hCConv/hcomp/fb/hxmem/hfac.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.LeviWindowUniformAmpLipschitz

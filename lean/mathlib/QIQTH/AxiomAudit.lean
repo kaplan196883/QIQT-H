@@ -31482,4 +31482,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryBfacFourTermAssembly.bfac_four_term_domain_restricted_sliver_window_bound
 #print axioms QIQTH.HCompNearCarryBfacFourTermAssembly.bfac_four_term_domain_restricted_sliver_window_bound
 
+-- J4-1075: LeviWindowUniformAmpLipschitz -- window-uniform Levi(s,z) bounded+Lipschitz bundle (s-indep
+-- M_F,L_F constants over the sliver window s∈[t-ε,t], 0<ε<t; built directly from LeviLipschitz.
+-- abs_F_le_diagonal/resolvent_lipschitz_pointwise + gaussDdimPeak_antitone_width, M_F peaks at the
+-- window's LOWER endpoint t-ε, L_F peaks at the UPPER endpoint t -- Sol gpt-5.6-sol high GO-confirmed
+-- before Lean) + the s-indexed leviAmp_product_window_uniform_lipschitz wrapper (window-uniform
+-- (M',L') for Levi(s,·)·Amp(·), Lipschitz-at-0 shape, matching bfac_four_term_domain_restricted_
+-- bound's hAmp/L/hlip hypothesis exactly). Does NOT thread through the outer sliver-window
+-- s-integration (no new O(√ε) capstone for the Levi-folded sum here); does NOT touch
+-- nb/hCConv/hcomp/fb/hxmem/hfac. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.LeviWindowUniformAmpLipschitz.leviBase_window_uniform_bounded_lipschitz
+#print axioms QIQTH.LeviWindowUniformAmpLipschitz.leviBase_window_uniform_bounded_lipschitz
+#check @QIQTH.LeviWindowUniformAmpLipschitz.leviAmp_product_window_uniform_lipschitz
+#print axioms QIQTH.LeviWindowUniformAmpLipschitz.leviAmp_product_window_uniform_lipschitz
+
 end QIQTH.AxiomAudit
