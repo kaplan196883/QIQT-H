@@ -1,0 +1,17 @@
+
+##### set B (t^0, t^1 only) #####
+  t^0: ZERO
+  t^1: I = -4  (nonzero=True)   (10.8s)
+  done (10.8s)
+
+##### set C (t^0, t^1 only) #####
+  t^0: ZERO
+  t^1: I = 1  (nonzero=True)   (10.9s)
+  done (10.9s)
+
+##### set D (t^0, t^1 only) #####
+  t^0: ZERO
+  t^1: I = 20  (nonzero=True)   (6.5s)
+  done (6.5s)
+
+ALL DONE

@@ -1,0 +1,5 @@
+
+########## RUN: set A: all-positive-ish Delta (order up to t^4) ##########
+  bracket built, degrees in t: [1, 2, 3, 4, 5, 6] (2.9s)
+    I_(t^1)(tau) = -8   (13.8s)
+    I_(t^2)(tau) = 288*tau - 208   (54.8s)
