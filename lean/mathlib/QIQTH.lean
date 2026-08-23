@@ -7006,3 +7006,21 @@ import QIQTH.HDConvBoundDHpardiffAnySConstGateFullDischarge
 -- {hFdom,hAmeas,hDmeas,hbase} + standard geometry {h0Kmem,hg,hg0,hu} + C_L,hC_L. std-3. NOT a₁=R/6
 -- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvBoundDHpardiffAnySConstGateHFzeroDischarge
+
+-- J4-1116: HDmeasGFromFieldSliceTimeDeriv — the TIME-DERIVATIVE analogue of J4-973's
+-- HFmeasGFromFieldSlice.hFmeasG_of_field_slice: a NEW structural lever (deriv commutes with a
+-- τ-independent gate, deriv_gatedKernel_time) + slice-measurability reduction, discharging hDmeas's
+-- product shape to {hKm,hSm0,hInDeriv,hFslice} (hInDeriv the τ-derivative analogue of hIn). gpt-5.6-sol
+-- (high) confirmed the structural identity trivial (funext+by_cases, no differentiability hypothesis) and
+-- hInDeriv an honest, non-vacuous, strictly lighter carry (not implied by hIn alone, not a logical
+-- weakening of hDmeas). std-3. NOT a₁=R/6.
+import QIQTH.HDmeasGFromFieldSliceTimeDeriv
+
+-- J4-1116: HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced —
+-- hDConv_boundD_hpardiff_anyS_constGate_ameas_dmeas_wired. FURTHER shrinks J4-1115's carry set by
+-- REPLACING the two entangled product-measurability carries {hAmeas,hDmeas} with the five lighter,
+-- non-entangled carries {hKm,hSm0,hIn,hInDeriv,hFslice} — hAmeas via the already-banked J4-973
+-- HFmeasGFromFieldSlice.hFmeasG_of_field_slice, hDmeas via this dispatch's new
+-- HDmeasGFromFieldSliceTimeDeriv.hDmeasG_of_field_slice. hFdom/hbase UNCHANGED. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced

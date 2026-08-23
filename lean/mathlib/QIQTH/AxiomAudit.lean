@@ -31752,4 +31752,17 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvBoundDHpardiffAnySConstGateHFzeroDischarge.hDConv_boundD_hpardiff_anyS_constGate_hfzero_wired
 #print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateHFzeroDischarge.hDConv_boundD_hpardiff_anyS_constGate_hfzero_wired
 
+-- J4-1116: HDmeasGFromFieldSliceTimeDeriv — the time-derivative analogue of J4-973's
+-- HFmeasGFromFieldSlice.hFmeasG_of_field_slice, discharging hDmeas's product shape to
+-- {hKm,hSm0,hInDeriv,hFslice}. std-3. NOT a₁=R/6.
+#check @QIQTH.HDmeasGFromFieldSliceTimeDeriv.hDmeasG_of_field_slice
+#print axioms QIQTH.HDmeasGFromFieldSliceTimeDeriv.hDmeasG_of_field_slice
+
+-- J4-1116: HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced —
+-- hDConv_boundD_hpardiff_anyS_constGate_ameas_dmeas_wired. Replaces {hAmeas,hDmeas} with
+-- {hKm,hSm0,hIn,hInDeriv,hFslice} inside J4-1115's own theorem. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL
+-- on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced.hDConv_boundD_hpardiff_anyS_constGate_ameas_dmeas_wired
+#print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced.hDConv_boundD_hpardiff_anyS_constGate_ameas_dmeas_wired
+
 end QIQTH.AxiomAudit
