@@ -1,0 +1,50 @@
+==========================================================================================
+### T1 -- quadratic 1/tau^2 term + linear 1/tau term, both times A0(z)
+==========================================================================================
+D_T1_quad(tau) [the <U,PI><U,PJ>/(4 tau^2) * A0 piece alone] = (-8*sqrt(pi)*p1*q1*tau**(5/2)*exp(-tau) + 4*sqrt(pi)*p1*q1*tau**(3/2)*exp(-tau) - 8*sqrt(pi)*p1*q2*tau**(5/2)*exp(-tau) - 8*sqrt(pi)*p2*q1*tau**(5/2)*exp(-tau) + 8*sqrt(pi)*p2*q2*tau**(3/2)*(1/2 - tau)*exp(-tau))*exp(-tau)/(8*sqrt(pi)*tau**(5/2))
+D_T1_lin(tau)  [the -(<PI,PJ>+<U,Q>)/(2 tau) * A0 piece alone] = -(2*sqrt(pi)*p1*q1*sqrt(tau)*exp(-tau) + 2*sqrt(pi)*p2*q2*sqrt(tau)*exp(-tau))*exp(-tau)/(4*sqrt(pi)*tau**(3/2))
+D_T1(tau) = D_T1_quad + D_T1_lin = (-p1*q1 - p1*q2 - p2*q1 - p2*q2)*exp(-2*tau)
+lim_{tau->0+} D_T1(tau) = -p1*q1 - p1*q2 - p2*q1 - p2*q2
+
+==========================================================================================
+### T2 -- linear 1/tau term times A1(z) = d_j A(z) stand-in
+==========================================================================================
+D_T2(tau) = 0
+lim_{tau->0+} D_T2(tau) = 0
+
+==========================================================================================
+### T3 -- linear 1/tau term times A2(z) = d_i A(z) stand-in
+==========================================================================================
+D_T3(tau) = 0
+lim_{tau->0+} D_T3(tau) = 0
+
+==========================================================================================
+### OUTER shrinking-window integrals int_0^eps D_k(tau) dtau, and rate vs O(sqrt(eps))
+==========================================================================================
+
+--- T1 ---
+D_T1(tau) = (-p1*q1 - p1*q2 - p2*q1 - p2*q2)*exp(-2*tau)
+Total_T1(eps) = int_0^eps D_T1 dtau = (p1*q1 + p1*q2 + p2*q1 + p2*q2 - (p1*q1 + p1*q2 + p2*q1 + p2*q2)*exp(2*eps))*exp(-2*eps)/2
+  lim_{eps->0} Total_T1/sqrt(eps) = 0
+  lim_{eps->0} Total_T1/eps = -p1*q1 - p1*q2 - p2*q1 - p2*q2
+
+--- T2 ---
+D_T2(tau) = 0
+Total_T2(eps) = int_0^eps D_T2 dtau = 0
+  lim_{eps->0} Total_T2/sqrt(eps) = 0
+  lim_{eps->0} Total_T2/eps = 0
+
+--- T3 ---
+D_T3(tau) = 0
+Total_T3(eps) = int_0^eps D_T3 dtau = 0
+  lim_{eps->0} Total_T3/sqrt(eps) = 0
+  lim_{eps->0} Total_T3/eps = 0
+
+==========================================================================================
+### Cross term check: does T1's quadratic piece alone blow up like 1/tau, and does the
+### LINEAR <PI,PJ>/(2 tau) piece EXACTLY cancel that blow-up (Wick/Ito-isometry structure)?
+==========================================================================================
+With A0 -> 1 (locally constant amplitude test):
+  D_T1_quad_c(tau) = (p1*q1 + p2*q2)/(2*tau)
+  D_T1_lin_c(tau)  = (-p1*q1 - p2*q2)/(2*tau)
+  sum = 0  (should be exactly the <PI,PI> moment structure)

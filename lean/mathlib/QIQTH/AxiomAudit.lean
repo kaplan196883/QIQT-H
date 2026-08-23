@@ -31386,4 +31386,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HcompLeftoverSliverWindow.leftover_sliver_bound_of_ball_domination
 #print axioms QIQTH.HcompLeftoverSliverWindow.leftover_sliver_bound_of_ball_domination
 
+-- J4-1064: HCompNearCarryLinMultSliverWindowBound -- the SAME window-shrinking mechanism (bounded
+-- density x window length) applied to Bfac's T2/T3 (linMult-type) summands, composing the
+-- ALREADY-BANKED tau-independent fixed-tau bound (grTerm_gaussian_mul_amp_lipschitz_bound,
+-- J4-1041/1019) with a generic window lemma. O(eps) = o(sqrt(eps)), same rate as LEFTOVER. Does
+-- NOT cover T1's own quadratic/heatHessMult piece (O(1/sqrt(tau)) fixed-tau, needs a separate
+-- sqrt(eps)-scaled window lemma) or the full-space-vs-S' domain reconciliation.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryLinMultSliverWindowBound.pointwise_bound_sliver_window
+#print axioms QIQTH.HCompNearCarryLinMultSliverWindowBound.pointwise_bound_sliver_window
+#check @QIQTH.HCompNearCarryLinMultSliverWindowBound.grTerm_sliver_window_bound_of_lipschitz
+#print axioms QIQTH.HCompNearCarryLinMultSliverWindowBound.grTerm_sliver_window_bound_of_lipschitz
+
 end QIQTH.AxiomAudit

@@ -6701,3 +6701,18 @@ import QIQTH.HCompNearCarryTerm1EvalSlotInverseChartLipschitzBridge
 -- Resolves ONLY the LEFTOVER sub-question (not T1/T2/T3, not the base-eval chart-incoherence). std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HcompLeftoverSliverWindowBound
+-- J4-1064: HCompNearCarryLinMultSliverWindowBound -- the SAME window-shrinking rate mechanism
+-- (bounded density x window length) applied to Bfac's T2/T3 (linMult-type) summands. A per-term
+-- sympy check (hcomp_T1T2T3_sliver_rate.py + hcomp_T1T2T3_general_identity.py) plus a gpt-5.6-sol
+-- consult found T1/T2/T3's explicit 1/tau,1/tau^2 prefactors cancel EXACTLY against the Gaussian's
+-- own moment-shift scaling (Stein identity), leaving bounded densities -- and a survey of the
+-- existing Term1/linMult family (16 files, J4-919..1047) found T2/T3 are ALREADY reduced to
+-- linMult instances with an ALREADY-BANKED tau-INDEPENDENT fixed-tau bound
+-- (grTerm_gaussian_mul_amp_lipschitz_bound, J4-1041/1019) but NONE of those files composed it with
+-- the outer shrinking-s-window integral. pointwise_bound_sliver_window (generic window lemma) +
+-- grTerm_sliver_window_bound_of_lipschitz compose that fixed-tau bound over s in (t-eps,t), giving
+-- O(eps) = o(sqrt(eps)) for T2/T3 -- same rate as LEFTOVER. Does NOT cover T1's own quadratic
+-- (heatHessMult) O(1/sqrt(tau)) piece (needs a different, sqrt(eps)-scaled window lemma, separate
+-- follow-on); does NOT reconcile full-space R^n with nb's bounded IFT domain S'. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryLinMultSliverWindowBound

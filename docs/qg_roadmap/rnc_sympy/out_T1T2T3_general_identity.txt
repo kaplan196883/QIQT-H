@@ -1,0 +1,14 @@
+grad A0 = -sin(z1 + z2) -sin(z1 + z2)
+Hess A0 = -cos(z1 + z2) -cos(z1 + z2) -cos(z1 + z2)
+
+E[A0] = exp(-2*tau)
+E[grad A0] = 0 0
+E[Hess A0] = -exp(-2*tau) -exp(-2*tau) -exp(-2*tau)
+
+D_T1 predicted (IBP-identity formula) = (-p1*q1 - p1*q2 - p2*q1 - p2*q2)*exp(-2*tau)
+  [note: this includes the Q-dependent term the earlier single-run sympy script (with Q=0
+   implicit / not included) did not show -- here Q is symbolic to confirm the full formula]
+D_T1 predicted with Q=0 = (-p1*q1 - p1*q2 - p2*q1 - p2*q2)*exp(-2*tau)
+Earlier DIRECT double-integral result (Q folded into T1_lin, see out_T1T2T3.txt):
+  D_T1(tau) = (-p1*q1 - p1*q2 - p2*q1 - p2*q2)*exp(-2*tau)
+Difference (should be 0): 0
