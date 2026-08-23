@@ -6877,3 +6877,15 @@ import QIQTH.HMovingCorrLocallyUniform
 -- capped at T+1). Sympy-verified rate (rnc_sympy/hdconv_witness_timederiv_rate_check.py). hAdom (∀ p q)
 -- and hFdom/L/hCross remain open. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL, UNCHANGED).
 import QIQTH.HDConvGateCensusDerivWired
+
+-- J4-1103: HDConvAtGateConstGateHAdom — hDConv_AT_GATE_constGate, specializing HDConvGateThreading's
+-- abstract-S gate to the concrete flow-ball constGate g gi hChr hK c and discharging the hAdom (∀ p q,
+-- 5 binders) + hWDom (7 binders) sub-bundles INTERNALLY from the already-banked
+-- GateSqControlFromFlowBall/HAdomHWDomFromConcreteDominations (J4-900, chart/near-isometry machinery:
+-- uniformInverseChart_leftInverse_of_lt + uniformFlowExp_hdisp_ball), for c below the explicit positive
+-- threshold flowBallRadiusThreshold. Confirms hAdom genuinely needs chart machinery (traced via
+-- vanVleckGatedWitness_gate_apply: general (p,q) routes through uniformInverseChart at a MOVING base
+-- point p) but that machinery is ALREADY discharged for constGate, not "not yet attempted" as J4-1102
+-- flagged; gpt-5.6-sol (high) confirmed scope 2026-08-24. All other ~40 hDConv_AT_GATE census members
+-- remain open. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HDConvAtGateConstGateHAdom

@@ -31611,4 +31611,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvGateCensusDerivWired.hDConv_derivSide_census_wired
 #print axioms QIQTH.HDConvGateCensusDerivWired.hDConv_derivSide_census_wired
 
+-- J4-1103: HDConvAtGateConstGateHAdom — hDConv_AT_GATE_constGate, specializing hDConv_AT_GATE's
+-- abstract-S gate to constGate g gi hChr hK c and discharging hAdom (5 binders) + hWDom (7 binders)
+-- from GateSqControlFromFlowBall/HAdomHWDomFromConcreteDominations (J4-900 chart/near-isometry
+-- machinery), for c below the explicit positive flowBallRadiusThreshold. All other ~40 census members
+-- remain open. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvAtGateConstGateHAdom.hDConv_AT_GATE_constGate
+#print axioms QIQTH.HDConvAtGateConstGateHAdom.hDConv_AT_GATE_constGate
+#check @QIQTH.HDConvAtGateConstGateHAdom.flowBallRadiusThreshold_pos
+#print axioms QIQTH.HDConvAtGateConstGateHAdom.flowBallRadiusThreshold_pos
+#check @QIQTH.HDConvAtGateConstGateHAdom.flowBallRadiusThreshold_spec
+#print axioms QIQTH.HDConvAtGateConstGateHAdom.flowBallRadiusThreshold_spec
+
 end QIQTH.AxiomAudit
