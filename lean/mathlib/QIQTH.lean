@@ -6617,3 +6617,19 @@ import QIQTH.HCompNearCarryTerm1AmpSliverBound
 -- independent radii (this file's r, J4-1012's ρ, J4-1046's R). Does NOT compose into nb/hCConv/hcomp.
 -- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.EvalBaseSlotCoordinateBridge
+-- J4-1049: EvalBaseSlotThreeRadiusLocalization -- gpt-5.6-sol (high) plan-review gave a BLUNT NO-GO on
+-- any real composition of J4-1048's bridge / J4-1012's eval-slot CoV / J4-1046's kPrime base-slot CoV
+-- INTEGRAL identities today (J4-1046's S''/V/PI/PJ/Q are a ONE-SHOT existential, NOT uniform-in-subradius
+-- like J4-1012's `_uniform` variant, so no `.mono` restriction transfers its literal integral identity;
+-- bridge_hasFDerivAt/bridge_left_inverse can't reach J4-1012's/J4-1046's unrelated V's -- missing joint
+-- left-inverse hyps + full-neighborhood differentiability of terminalVelAt). Banked Sol's suggested
+-- salvage instead: a geometric common-ball localization -- from IsOpen S''/x∈S'' extract ball x ρS⊆S'',
+-- combine with J4-1012's ρ and J4-1048's r into ONE ε>0 with ball x ε inside ALL of S'', ball x R,
+-- ball x ρ, ball x r simultaneously; concretely instantiated (calling evalSlot_terminalVel_weighted_CoV_
+-- uniform + evalBase_slot_coordinate_bridge_radius directly, taking J4-1046's S''/R as an explicit
+-- hypothesis since its own ∀c-side-condition existence is a separate satisfiability question) to get a
+-- SINGLE ε on which BOTH the eval-slot CoV identity (∀ B) AND the raw bridge hold simultaneously. Does
+-- NOT combine any INTEGRAL identities into one formula, does NOT derive J4-1046's S''/R from scratch,
+-- does NOT compose into nb/hCConv/hcomp. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.EvalBaseSlotThreeRadiusLocalization

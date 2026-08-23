@@ -31320,4 +31320,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.EvalBaseSlotCoordinateBridge.evalBase_slot_coordinate_bridge_image_ball
 #print axioms QIQTH.EvalBaseSlotCoordinateBridge.evalBase_slot_coordinate_bridge_image_ball
 
+-- J4-1049: EvalBaseSlotThreeRadiusLocalization -- Sol (high) NO-GO'd real composition of the three
+-- INTEGRAL identities (J4-1046's S''/V/PI/PJ/Q one-shot existential is not uniform-in-subradius);
+-- banked instead the geometric common-ball localization: from IsOpen S''/x∈S'' extract ball x ρS⊆S'',
+-- combine with J4-1012's ρ and J4-1048's r into ONE ε>0 inside S'', ball x R, ball x ρ, ball x r
+-- simultaneously, concretely instantiated with the eval-slot CoV identity (∀B) AND the raw bridge
+-- holding together on ball x ε. Does NOT combine any integral identities; does NOT compose into
+-- nb/hCConv/hcomp.
+#check @QIQTH.EvalBaseSlotThreeRadiusLocalization.common_ball_of_open_and_two_radii
+#print axioms QIQTH.EvalBaseSlotThreeRadiusLocalization.common_ball_of_open_and_two_radii
+#check @QIQTH.EvalBaseSlotThreeRadiusLocalization.evalBaseSlot_common_domain_ball
+#print axioms QIQTH.EvalBaseSlotThreeRadiusLocalization.evalBaseSlot_common_domain_ball
+
 end QIQTH.AxiomAudit
