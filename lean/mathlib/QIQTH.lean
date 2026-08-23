@@ -6633,3 +6633,17 @@ import QIQTH.EvalBaseSlotCoordinateBridge
 -- does NOT compose into nb/hCConv/hcomp. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.EvalBaseSlotThreeRadiusLocalization
+-- J4-1050: HCompNearCarryFullLocalDischargeUniform -- traced J4-1046's proof line-by-line (gpt-5.6-sol
+-- high confirmed GO before writing Lean): the "one-shot existential" nature cp1016/J4-1049 flagged is a
+-- PACKAGING artifact, NOT architectural. Every ingredient downstream of the coverage radius R (PI_c/
+-- PJ_c/Q_c/hbigA from hspecA, obtained BEFORE R is introduced; hSopen/hJetVi/hJetVj/hJetQ/hAmpj1/
+-- hAmpi1/hAmp2/hd, all derived using ONLY z∈K and x∈S z, never any other set-level fact about the ball)
+-- is pointwise-in-z and restricts for free to any smaller ball via Metric.ball_subset_ball composed with
+-- the SAME coverage fact hcov; J4-1043's K∩U wrapper takes U as a genuine caller-supplied free parameter
+-- and its Step A (BaseSlotM1M4Assembly) never depends on U. Built the UNIFORM-IN-RADIUS strengthening:
+-- for every 0<R'≤R (not just the one R the existential produced), the SAME full literal kPrime CoV
+-- identity (both hxmem and hd internally derived) holds on some S''⊆K∩ball x R'. Does NOT literally fix
+-- one S''/V/PI/PJ/Q tuple across all R' (each R' gets its own fresh wrapper call); does NOT build the
+-- common-radius merge with J4-1012/1013/1014's radii; does NOT compose into nb/hCConv/hcomp. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryFullLocalDischargeUniform

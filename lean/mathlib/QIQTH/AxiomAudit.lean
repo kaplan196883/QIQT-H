@@ -31332,4 +31332,11 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.EvalBaseSlotThreeRadiusLocalization.evalBaseSlot_common_domain_ball
 #print axioms QIQTH.EvalBaseSlotThreeRadiusLocalization.evalBaseSlot_common_domain_ball
 
+-- J4-1050: HCompNearCarryFullLocalDischargeUniform -- the uniform-in-radius strengthening of J4-1046:
+-- for every 0<R'≤R the same full literal kPrime CoV identity (hxmem, hd both internally derived) holds
+-- on some S''⊆K∩ball x R'. Packaging-artifact fix, not a new architectural result; does NOT compose
+-- into nb/hCConv/hcomp.
+#check @QIQTH.HCompNearCarryFullLocalDischargeUniform.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge_uniform
+#print axioms QIQTH.HCompNearCarryFullLocalDischargeUniform.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge_uniform
+
 end QIQTH.AxiomAudit
