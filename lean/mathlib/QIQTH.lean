@@ -6598,3 +6598,10 @@ import QIQTH.HCompNearCarryHdLocalCoverageDischarge
 -- than all of K. Bfac's other 3 summands and fb remain untouched. std-3. NOT a₁=R/6 (STRICTLY
 -- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryFullLocalDischarge
+-- J4-1047: HCompNearCarryTerm1AmpSliverBound -- amplitude-weighted generalization of J4-1016's sliver
+-- bound (bare ‖z‖^k weight -> arbitrary a(s,z) dominated by C·‖z‖^k), the ONE genuinely tractable piece
+-- Sol identified out of cp1008's "r6 4-lemma composition" after confirming J4-1012/1013 (eval-slot) and
+-- J4-1046/1023 (base-slot) sit in two DIFFERENT chart-image coordinates with no existing bridge. Does
+-- NOT bridge that mismatch, does NOT compose into nb/hCConv/hcomp. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1AmpSliverBound

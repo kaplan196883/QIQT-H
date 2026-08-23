@@ -31297,4 +31297,10 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryFullLocalDischarge.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge
 #print axioms QIQTH.HCompNearCarryFullLocalDischarge.kPrime_baseField_CoV_of_jetBundle_fullLocalDischarge
 
+-- J4-1047: HCompNearCarryTerm1AmpSliverBound -- amplitude-weighted generalization of J4-1016's sliver
+-- bound (arbitrary a(s,z) dominated by C·‖z‖^k in place of the bare ‖z‖^k weight); the ONE piece of
+-- cp1008's "r6 4-lemma composition" Sol confirmed buildable without a new base-slot/eval-slot bridge
+#check @QIQTH.HCompNearCarryTerm1AmpSliverBound.terminalVelAt_chartReplace_sliver_amp_bound_unconditional
+#print axioms QIQTH.HCompNearCarryTerm1AmpSliverBound.terminalVelAt_chartReplace_sliver_amp_bound_unconditional
+
 end QIQTH.AxiomAudit
