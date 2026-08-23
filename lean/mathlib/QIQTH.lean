@@ -6741,3 +6741,16 @@ import QIQTH.HCompNearCarryTerm1SliverWindowBound
 -- HCompNearCarryKPrimeBaseFieldCoV, does NOT touch r1-r6/hxmem/nb/hCConv/hcomp. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarrySliverWindowAssembly
+-- J4-1070: HCompNearCarryTerm2Term3DomainRestrictedBound. The W''S'-domain-restricted capstone for
+-- Bfac's T2/T3 (grj.djA, gri.diA -- via linMult reuse) AND T4/LEFTOVER (djdiA -- flat, no tail
+-- decomposition needed), mirroring T1's capstone (HCompNearCarryTerm1DomainRestrictedBound,
+-- J4-1023) exactly but simpler: T2/T3 need ONLY linMult's already-generalized subset-tail bound
+-- (linMult_amp_subset_tail_le), no heatHessMult; T4 needs no tail bound at all (nonneg-integrand
+-- monotonicity via setIntegral_le_integral transfers the full-space flat bound M to ANY measurable
+-- subdomain directly). Sol (gpt-5.6-sol, high) GO-confirmed before Lean. ABSTRACT Amp only -- does
+-- NOT verify djA/diA/djdiA's literal V/Jacobian-composed regularity (separate, still-open, per T1's
+-- own analogous gap); does NOT discharge hxmem/hfac/r1-r2; does NOT bridge the outer-s-integration
+-- axis (BRICK 2 vs the sliver-window family, J4-1069 frontier item 3, UNCHANGED); does NOT touch
+-- nb/hCConv/hcomp/fb. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound

@@ -31428,4 +31428,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarrySliverWindowAssembly.setIntegral_norm_transfer_bound
 #print axioms QIQTH.HCompNearCarrySliverWindowAssembly.setIntegral_norm_transfer_bound
 
+-- J4-1070: HCompNearCarryTerm2Term3DomainRestrictedBound -- W''S'-domain-restricted capstone for
+-- Bfac's T2/T3 (grTerm/linMult reuse) AND T4/LEFTOVER (flat, no tail decomposition). Mirrors T1's
+-- capstone (J4-1023) mechanically. ABSTRACT Amp only; does NOT verify literal V/Jacobian-composed
+-- djA/diA/djdiA regularity; does NOT discharge hxmem/hfac; does NOT bridge outer-s-integration.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound.grTerm_gaussDdim_mul_amp_domain_restricted_bound
+#print axioms QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound.grTerm_gaussDdim_mul_amp_domain_restricted_bound
+#check @QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound.flat_gaussDdim_mul_amp_domain_restricted_bound
+#print axioms QIQTH.HCompNearCarryTerm2Term3DomainRestrictedBound.flat_gaussDdim_mul_amp_domain_restricted_bound
+
 end QIQTH.AxiomAudit
