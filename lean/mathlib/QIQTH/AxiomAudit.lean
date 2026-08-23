@@ -31774,4 +31774,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged.hDConv_boundD_hpardiff_anyS_constGate_hkm_discharged
 #print axioms QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged.hDConv_boundD_hpardiff_anyS_constGate_hkm_discharged
 
+-- J4-1123: ChartOverlapUniquenessGeneralCenter — dispatch 1 of the greenlit (J4-1122) overlap-uniqueness
+-- bridge sub-campaign. Extracts GeneralCenterCoherentInverseChart's internal `hEq` step as standalone
+-- public API: uniformInverseChart_agree_chartCoherent (pointwise-radius form) and
+-- uniformInverseChart_agree_chartCoherent_uniform (single uniform-r₀ form). Pure re-exposure of already-
+-- banked IFT/ODE content; gpt-5.6-sol (high) confirmed dispatch-1 sizing and flagged the naive "two
+-- different base points agree at shared p" corollary as FALSE (deferred/not attempted). std-3 ×2.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.uniformInverseChart_agree_chartCoherent
+#print axioms QIQTH.ExpMap.uniformInverseChart_agree_chartCoherent
+#check @QIQTH.ExpMap.uniformInverseChart_agree_chartCoherent_uniform
+#print axioms QIQTH.ExpMap.uniformInverseChart_agree_chartCoherent_uniform
+
 end QIQTH.AxiomAudit

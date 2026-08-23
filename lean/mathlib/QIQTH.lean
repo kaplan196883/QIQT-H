@@ -7031,3 +7031,15 @@ import QIQTH.HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced
 -- NO-GO confirmed). Carry set shrinks {hKm,hSm0,hIn,hInDeriv,hFslice} -> {hSm0,hIn,hInDeriv,hFslice}.
 -- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HDConvBoundDHpardiffAnySConstGateHKmDischarged
+
+-- J4-1123: ChartOverlapUniquenessGeneralCenter — dispatch 1 of the "inverse-branch overlap-uniqueness
+-- bridge" sub-campaign (greenlit J4-1122). Extracts the internal `hEq` step of
+-- GeneralCenterCoherentInverseChart.uniformInverseChart_jointContDiffAt_generalCenter as standalone
+-- public API: uniformInverseChart_agree_chartCoherent — the opaque Classical.choose-selected
+-- uniformInverseChart AGREES (=ᶠ[nhds …], a whole neighbourhood, not just one point) with a coherently
+-- built chartCoherent (no per-point re-selection) at every general centre (z₀,v₀). Pure re-exposure of
+-- already-banked content (no new IFT/ODE analysis), per gpt-5.6-sol (high) 2026-08-24 dispatch-1 sizing
+-- consult. Sol also flagged that a naive "two DIFFERENT base points agree at a shared chart-argument p"
+-- corollary is FALSE in general (already false in the flat model chart(q,p)=p-q) — NOT attempted here.
+-- std-3 ×2. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartOverlapUniquenessGeneralCenter
