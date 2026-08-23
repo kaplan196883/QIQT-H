@@ -31602,4 +31602,13 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HMovingCorrLocallyUniform.movingCorr_tLocallyUniform
 #print axioms QIQTH.HMovingCorrLocallyUniform.movingCorr_tLocallyUniform
 
+-- J4-1102: HDConvGateCensusDerivWired — hDConv_derivSide_census_wired, wiring the ALREADY-BANKED
+-- WitnessTimeDerivEnvelope/WitnessBoundDHpardiffWired/DerivDomLowerCapped (J4-917/918/911) into
+-- hDConv_AT_GATE's remaining nb/hnb, boundD/hbdd_d/hbound_d, hpardiff census members: nb/hnb CLOSED;
+-- boundD/hbound_d/hpardiff REDUCED to mild carries {hgate,hAmp0,hCfield,hSupp,hFzero,hFdom,hAmeas,
+-- hDmeas,hbase} (hAmp0/hFdom capped at T+1). hAdom (∀ p q) and hFdom/L/hCross remain open. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HDConvGateCensusDerivWired.hDConv_derivSide_census_wired
+#print axioms QIQTH.HDConvGateCensusDerivWired.hDConv_derivSide_census_wired
+
 end QIQTH.AxiomAudit

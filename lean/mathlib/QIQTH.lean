@@ -6868,3 +6868,12 @@ import QIQTH.HFrozenAILocallyUniform
 -- chart wall (uniformInverseChart/EnrichedChartBundle) to control the shifted-time chart domain. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HMovingCorrLocallyUniform
+
+-- J4-1102: HDConvGateCensusDerivWired — hDConv_derivSide_census_wired, wiring the ALREADY-BANKED
+-- WitnessTimeDerivEnvelope/WitnessBoundDHpardiffWired/DerivDomLowerCapped (J4-917/918/911, an earlier
+-- stage of this same tower) into hDConv_AT_GATE's remaining `nb/hnb`, `boundD/hbdd_d/hbound_d`,
+-- `hpardiff` census members: nb/hnb CLOSED (derivDomNb + derivDomNb_mem_nhds); boundD/hbound_d/hpardiff
+-- REDUCED to the mild {hgate,hAmp0,hCfield,hSupp,hFzero,hFdom,hAmeas,hDmeas,hbase} carries (hAmp0/hFdom
+-- capped at T+1). Sympy-verified rate (rnc_sympy/hdconv_witness_timederiv_rate_check.py). hAdom (∀ p q)
+-- and hFdom/L/hCross remain open. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL, UNCHANGED).
+import QIQTH.HDConvGateCensusDerivWired
