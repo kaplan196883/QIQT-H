@@ -31467,4 +31467,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound.hsMixed_domain_restricted_sliver_window_bound
 #print axioms QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound.hsMixed_domain_restricted_sliver_window_bound
 
+-- J4-1073: HCompNearCarryBfacFourTermAssembly -- the COMBINED assembly of Bfac's four sliver-window
+-- summand bounds (T1 J4-1072, T2/T3/T4 J4-1071) into ONE bound on the FULL 4-term sum over a SINGLE
+-- SHARED W''S'-restricted domain and s-window. bfac_four_term_domain_restricted_bound (Part 1) is
+-- generic in an externally-supplied U/ρ, resolving the domain-sharing question that black-box-invoking
+-- the four separate ∃S'(ρ) theorems could not (Sol gpt-5.6-sol high GO-confirmed diagnosis: separately
+-- obtain-ed existentials give Lean no way to know their witnesses coincide). Part 2 constructs S'/ρ
+-- ONCE and composes with the ε-folding tail lemmas (J4-1071/1072, reused verbatim) + the outer s-window,
+-- giving O(√ε). Does NOT include Bfac's outer Levi(s,z) factor; does NOT close item 1 (literal
+-- Bfac(Vw)/|det| composed regularity); does NOT discharge hxmem/hfac/r1-r2; does NOT touch
+-- nb/hCConv/hcomp/fb. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryBfacFourTermAssembly.bfac_four_term_domain_restricted_bound
+#print axioms QIQTH.HCompNearCarryBfacFourTermAssembly.bfac_four_term_domain_restricted_bound
+#check @QIQTH.HCompNearCarryBfacFourTermAssembly.bfac_four_term_domain_restricted_sliver_window_bound
+#print axioms QIQTH.HCompNearCarryBfacFourTermAssembly.bfac_four_term_domain_restricted_sliver_window_bound
+
 end QIQTH.AxiomAudit

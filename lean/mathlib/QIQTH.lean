@@ -6783,3 +6783,21 @@ import QIQTH.HCompNearCarryBfacSliverWindowDomainRestricted
 -- NOT discharge hxmem/hfac/r1-r2; does NOT sum the four bounds; does NOT touch nb/hCConv/hcomp/fb.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryTerm1DomainRestrictedSliverWindowBound
+
+-- J4-1073: HCompNearCarryBfacFourTermAssembly. The COMBINED assembly of Bfac's four sliver-window
+-- summand bounds (T1 J4-1072, T2/T3/T4 J4-1071) into ONE bound on the FULL 4-term sum, over a SINGLE
+-- SHARED W''S'-restricted domain and s-window. Diagnosed (Sol gpt-5.6-sol high, GO-confirmed) that the
+-- four theorems' own separate ∃S'/∃S'ρ existentials, if invoked as black boxes and obtain-ed
+-- separately, give Lean NO way to know their witnesses coincide (obtain introduces fresh opaque vars;
+-- Lean does not unfold proof terms to discover the shared internal construction). FIX: a new theorem
+-- (bfac_four_term_domain_restricted_bound, Part 1) generic in an externally-supplied U/ρ, reusing the
+-- SAME public per-term building blocks (hsMixed/grTerm lipschitz+tail lemmas, J4-1017/1019/1023), so
+-- U/ρ are genuinely shared by construction; then (Part 2) constructs S'/ρ ONCE and composes with the
+-- ε-folding tail lemmas (heatHessMult_tail_le_of_sliver/grTerm_tail_le_of_sliver, J4-1071/1072, reused
+-- verbatim) and the outer s-window integration, giving O(√ε). Resolves the domain-sharing question for
+-- THIS (already domain-restricted) generation of bounds -- distinct from J4-1066's earlier full-space
+-- ball-vs-ℝⁿ domain split, which is untouched/separate. std-3. Does NOT include Bfac's outer Levi(s,z)
+-- factor (untouched); does NOT close item 1 (literal Bfac(Vw)/|det| composed regularity); does NOT
+-- discharge hxmem/hfac/r1-r2; does NOT touch nb/hCConv/hcomp/fb.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryBfacFourTermAssembly
