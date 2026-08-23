@@ -31797,4 +31797,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_agree_at_overlap_two_seeds
 #print axioms QIQTH.ExpMap.chartCoherent_agree_at_overlap_two_seeds
 
+-- J4-1125: ChartOverlapGermCompatibilityTwoSeeds — dispatch 3 of the greenlit overlap-uniqueness
+-- bridge sub-campaign. chartCoherent_germ_agree_at_overlap_two_seeds upgrades J4-1124's pointwise
+-- Set.EqOn overlap fact to a full filter-germ equality: for EVERY ξ ∈ U1 ∩ U2 (open),
+-- chartCoherent1 =ᶠ[nhds ξ] chartCoherent2. Mechanical (IsOpen.inter + IsOpen.mem_nhds +
+-- filter_upwards on the Set.EqOn fact); gpt-5.6-sol (high) confirmed no sympy check triggered and
+-- that this pointwise-germ form (not a stronger "simultaneous" packaging) is the shape the future
+-- derivative-transport step needs. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartCoherent_germ_agree_at_overlap_two_seeds
+#print axioms QIQTH.ExpMap.chartCoherent_germ_agree_at_overlap_two_seeds
+
 end QIQTH.AxiomAudit
