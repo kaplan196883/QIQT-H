@@ -31398,4 +31398,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HCompNearCarryLinMultSliverWindowBound.grTerm_sliver_window_bound_of_lipschitz
 #print axioms QIQTH.HCompNearCarryLinMultSliverWindowBound.grTerm_sliver_window_bound_of_lipschitz
 
+-- J4-1065: HCompNearCarryTerm1SliverWindowBound -- closes the LAST Bfac summand, T1 (hsMixed-type),
+-- at the fixed-tau-full-space sliver-window level. T1's already-banked fixed-tau bound
+-- (hsMixed_gaussDdim_mul_amp_lipschitz_bound, J4-1019) has shape C1/sqrt(tau)+C2 (not flat), so a
+-- new window lemma (pointwise_bound_sliver_window_inv_sqrt, via Real.sqrt_eq_rpow + integral_rpow +
+-- reflection + norm_integral_le_of_norm_le domination) composes it into 2*C1*sqrt(eps)+C2*eps =
+-- O(sqrt(eps)) -- MEETING (not beating) hcomp's required rate, the tightest of the four Bfac terms.
+-- With this file all four (LEFTOVER, T1, T2, T3) are closed at the fixed-tau-full-space level; does
+-- NOT sum them into one combined Bfac bound or reconcile full-space R^n with nb's bounded domain S'.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HCompNearCarryTerm1SliverWindowBound.pointwise_bound_sliver_window_inv_sqrt
+#print axioms QIQTH.HCompNearCarryTerm1SliverWindowBound.pointwise_bound_sliver_window_inv_sqrt
+#check @QIQTH.HCompNearCarryTerm1SliverWindowBound.hsMixed_sliver_window_bound_of_lipschitz
+#print axioms QIQTH.HCompNearCarryTerm1SliverWindowBound.hsMixed_sliver_window_bound_of_lipschitz
+
 end QIQTH.AxiomAudit

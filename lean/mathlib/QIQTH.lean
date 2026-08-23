@@ -6716,3 +6716,17 @@ import QIQTH.HcompLeftoverSliverWindowBound
 -- follow-on); does NOT reconcile full-space R^n with nb's bounded IFT domain S'. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.HCompNearCarryLinMultSliverWindowBound
+-- J4-1065: HCompNearCarryTerm1SliverWindowBound -- closes the LAST of Bfac's four summands, T1
+-- (hsMixed-type, the quadratic/mixed piece), at the fixed-tau-full-space sliver-window level. T1's
+-- already-banked fixed-tau bound (hsMixed_gaussDdim_mul_amp_lipschitz_bound, J4-1019) has shape
+-- C1/sqrt(tau) + C2, NOT the flat shape LEFTOVER/T2/T3 had, so it needed a genuinely different window
+-- lemma (pointwise_bound_sliver_window_inv_sqrt), built via Real.sqrt_eq_rpow + integral_rpow +
+-- IntervalIntegrable.comp_sub_left reflection + intervalIntegral.norm_integral_le_of_norm_le
+-- domination (sympy-verified integral identity + gpt-5.6-sol mathlib-route consult BEFORE Lean).
+-- hsMixed_sliver_window_bound_of_lipschitz composes it with the banked bound, giving
+-- 2*C1*sqrt(eps) + C2*eps = O(sqrt(eps)) for T1 -- MEETING (not beating) hcomp's required rate, the
+-- tightest of the four terms. With this file all four of Bfac's summands (LEFTOVER, T1, T2, T3) are
+-- closed at the fixed-tau-full-space level; does NOT sum them into one combined Bfac bound, does NOT
+-- reconcile full-space R^n with nb's bounded IFT domain S', does NOT touch r1-r6/hxmem. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.HCompNearCarryTerm1SliverWindowBound
