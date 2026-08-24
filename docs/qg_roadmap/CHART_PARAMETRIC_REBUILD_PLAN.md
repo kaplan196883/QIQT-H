@@ -182,5 +182,15 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   Task B's scope (matches J4-1157's own worked examples, all in `EngineInstantiation.lean`) and was not
   attempted. Next dispatch target: `heatConvFrozenWith` + generic `witness_secondOrder_interchange`
   sibling (closes Task B fully), or proceed to Canary C2 per the phase table.
+- **J4-1159 (Phase 3, opening dispatch)** -- `QIQTH/WitnessSecondOrderInterchangeWith.lean`
+  (`witness_secondOrder_interchangeWith`/`witness_secondOrder_interchange'`) closes the Phase 2 Task B
+  item J4-1158 deferred. CORRECTION of J4-1158's forward note: no `heatConvFrozenWith` was needed --
+  `heatConvFrozen`/`pd_pd_heatConvFrozen_interchange` were ALREADY fully chart-generic (arbitrary
+  `A/H,dH,dHH,F : ℝ → Point n → Point n → ℝ`, no chart call in their own bodies); the chart-hardwiring
+  lived entirely in the concrete arguments fed in, already genericized in J4-1156/1157/1158. Pure
+  mechanical substitution, mirroring the old proof exactly. Both theorems std-3, full build 0 err.
+  Commit `a492ca21`. Next dispatch target: Canary **C2 -- FirstHWMConsumerPrime** -- the earliest
+  `hWmeas`-consuming audit theorem (`HgateSatAudit`/`GatedRepSFix`/`HEmeasBorelAudit` import-order
+  lineage) instantiated with `uniformInverseChart'_joint_measurable`.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
