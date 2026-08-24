@@ -7381,3 +7381,11 @@ import QIQTH.LocalizedBankedData
 -- anything. `RightInverseGeneral.lean` itself is NOT edited. std-3, no sorryAx. NOT a₁=R/6. STRICTLY
 -- CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
 import QIQTH.CapstoneLocalAssembly
+-- J4-1173 (Phase 4 of the capstone-signature redesign plan, Canary D6 — SingleOpening): new file
+-- `QIQTH.GatedGlobalWitnessN1CapstonePointwise`. Factors the J4-774 discharge theorem into a POINTWISE
+-- version `trueKernel_diagonal_a1_eq_R6_residual_N1_pointwise` (takes `(a,b,C,S,hbound,hS0)` as direct
+-- external inputs, drops the package-only geometric inputs `hgnd/hgsymm/hinvF/hframeK/hw`) plus a thin
+-- corollary `..._via_pointwise` that opens `gatedWitnessN1_package_open` EXACTLY ONCE (Canary D6) and
+-- reproduces J4-774's original statement. Pure refactor, zero new analytic content. std-3, no sorryAx.
+-- NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.GatedGlobalWitnessN1CapstonePointwise

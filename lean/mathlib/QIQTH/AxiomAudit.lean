@@ -32278,4 +32278,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.CapstoneLocalAssembly.a1_R6_assembled_v2'_via_local
 #print axioms QIQTH.CapstoneLocalAssembly.a1_R6_assembled_v2'_via_local
 
+-- J4-1173: `GatedGlobalWitnessN1CapstonePointwise.lean` — Phase 4 of the capstone-signature redesign
+-- plan, Canary D6 (SingleOpening) green. `trueKernel_diagonal_a1_eq_R6_residual_N1_pointwise` factors
+-- the J4-774 discharge theorem to take `(a,b,C,S,hbound,hS0)` as direct external inputs (dropping the
+-- package-only geometric inputs `hgnd/hgsymm/hinvF/hframeK/hw`); `..._via_pointwise` is a thin
+-- corollary opening `gatedWitnessN1_package_open` EXACTLY ONCE. std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_pointwise
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_pointwise
+#check @QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged_via_pointwise
+#print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged_via_pointwise
+
 end QIQTH.AxiomAudit
