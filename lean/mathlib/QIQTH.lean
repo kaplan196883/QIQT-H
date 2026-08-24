@@ -7239,3 +7239,8 @@ import QIQTH.ConcreteGateResidualization
 -- (uniformInverseChart'_joint_measurable) is DERIVED — the hWmeas shape unclosable (J4-1145) for the
 -- opaque uniformInverseChart. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}).
 import QIQTH.ThetaMeasurableEmbedding
+-- J4-1148: ThetaChartContDiff — dispatch 2 of Sol's 4-dispatch plan to close hWmeas. Transports the
+-- OLD chart's ContDiffAt ℝ 2 germ fact (uniformInverseChart_huniformChart) onto the NEW chart
+-- uniformInverseChart' via pointwise agreement on the (open) tube image + ContDiffAt.congr_of_eventuallyEq.
+-- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ThetaChartContDiff

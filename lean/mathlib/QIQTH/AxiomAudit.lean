@@ -31996,4 +31996,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ThetaMeasurableEmbedding.uniformInverseChart'_joint_measurable
 #print axioms QIQTH.ThetaMeasurableEmbedding.uniformInverseChart'_joint_measurable
 
+-- J4-1148: ThetaChartContDiff — dispatch 2 of Sol's 4-dispatch plan to close hWmeas. Transports the
+-- OLD chart's C² germ fact (uniformInverseChart_huniformChart) onto the NEW canonical chart
+-- uniformInverseChart' (ThetaMeasurableEmbedding, J4-1147): both charts recover the same velocity on
+-- the (open) tube image (uniformInverseChart'_eqOn_uniformInverseChart), upgraded to a
+-- Filter.EventuallyEq via openness of that image (uniformInverseChart'_eventuallyEq_uniformInverseChart),
+-- then ContDiffAt.congr_of_eventuallyEq transports the C² germ (uniformInverseChart'_contDiffAt — the
+-- payoff). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ThetaChartContDiff.uniformInverseChart'_eqOn_uniformInverseChart
+#print axioms QIQTH.ThetaChartContDiff.uniformInverseChart'_eqOn_uniformInverseChart
+#check @QIQTH.ThetaChartContDiff.uniformInverseChart'_eventuallyEq_uniformInverseChart
+#print axioms QIQTH.ThetaChartContDiff.uniformInverseChart'_eventuallyEq_uniformInverseChart
+#check @QIQTH.ThetaChartContDiff.uniformInverseChart'_contDiffAt
+#print axioms QIQTH.ThetaChartContDiff.uniformInverseChart'_contDiffAt
+
 end QIQTH.AxiomAudit
