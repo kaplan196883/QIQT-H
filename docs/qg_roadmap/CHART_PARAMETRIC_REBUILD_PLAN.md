@@ -210,5 +210,29 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   `GatedRepSFix.lean`/`HEmeasBorelAudit.lean`. std-3, full build 0 err, axiom budget 0. Commit `9f926dfe`.
   Next dispatch target: Phase 4 Task B continuation (the `hcar`-bundled siblings above), then push into
   `GatedRepSFix.lean`'s field/field² carriers toward Canary C3.
+- **J4-1161 (this dispatch)** — Phase 4 Task B continuation. `QIQTH/WitnessTauDerivEqWith.lean`
+  genericizes `HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS` and
+  `.tauDeriv_prod_stronglyMeasurable_v4` (the `hcar`-bundled siblings flagged as the next target above).
+  **OBSTRUCTION FOUND AND ROUTED AROUND** (genuine, not routine): J4-1160's `gatedTauRepProdSWith` turned
+  out to be only PARTIALLY chart-generic — its amplitude term calls the hardwired `chartFieldAmp` (OLD
+  chart), not `chartFieldAmpWith … W` — harmless for J4-1160's pure-measurability goal but FATAL for a
+  genuine derivative-identity theorem at abstract `W` (the product-rule identity needs the amplitude
+  VALUE to match the same chart as the Gaussian argument; provably false for `W ≠` the old chart).
+  Resolution: built a NEW, fully chart-generic representative `gatedTauRepProdSGenWith` in the new file
+  (coincides with `gatedTauRepProdSWith`/`gatedTauRepProdS` on the old chart by `rfl`;
+  `GatedTauRepProdSWith.lean` left completely untouched, matching the "never edit existing files"
+  discipline). Lands the generic + primed τ-derivative identity
+  (`witnessTauDeriv_eq_gatedTauRepProdSWith`/`_recovers_old`/`_'`) and the generic + primed
+  strongly-measurable capstone (`tauDeriv_prod_stronglyMeasurable_v4With`/`_'`), the latter with chart
+  joint-measurability fully discharged via `uniformInverseChart'_joint_measurable` — no free
+  `hWmeas`/chart-measurability hypothesis remains (the genuinely amplitude-analytic `hAmpMeas`/`hgate`
+  hypotheses about `chartFieldAmp'` correctly remain as caller-supplied inputs). **CANARY C3 ASSESSMENT:
+  this is a STEP TOWARD C3, NOT C3 itself** — it is `HgateSatAudit`-level and τ-carrier-only, not
+  `HEmeasBorelAudit`-level, and the field/field² carriers (§3 of `HgateSatAudit.lean`, prose-only, never
+  even formalized for the old chart) remain untouched; `GatedRepSFix.lean`/`HEmeasBorelAudit.lean` not
+  touched. std-3, full build 0 err (built clean on first attempt), axiom budget 0. Commit `87ffbc47`.
+  Next dispatch target: (a) formalize the field/field² carrier honest fix (the §3 prose surgery, never
+  done even for the old chart, needed before it can be genericized) or (b) push directly into
+  `GatedRepSFix.lean`/`HEmeasBorelAudit.lean` if a τ-only entry point exists there.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
