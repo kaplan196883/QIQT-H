@@ -32192,4 +32192,28 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4'
 #print axioms QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4'
 
+-- J4-1162: `GatedFieldRepSGenWith.lean` — genericizes `GatedRepSFix`'s §A (first field-pd v4 carrier,
+-- ALREADY formalized for the old chart) over an abstract chart W, mirroring J4-1161's τ-carrier
+-- genericization. Extends Phase 4 Task B to the first field-pd leg. Step toward, NOT itself, Canary C3
+-- (mixed second field-pd carrier §B and triple assembly §C remain un-genericized). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.GatedRepSFix.gatedDerivRepProdSGenWith_uniformInverseChart
+#print axioms QIQTH.GatedRepSFix.gatedDerivRepProdSGenWith_uniformInverseChart
+#check @QIQTH.GatedRepSFix.gatedDerivRepProdSGenWith_measurable
+#print axioms QIQTH.GatedRepSFix.gatedDerivRepProdSGenWith_measurable
+#check @QIQTH.GatedRepSFix.gatedDerivRepProdSGen'_measurable
+#print axioms QIQTH.GatedRepSFix.gatedDerivRepProdSGen'_measurable
+#check @QIQTH.GatedRepSFix.witnessFieldDerivWith_eq_zero_of_nonpos
+#print axioms QIQTH.GatedRepSFix.witnessFieldDerivWith_eq_zero_of_nonpos
+#check @QIQTH.GatedRepSFix.witnessFieldDerivWith_eq_gatedDerivRepProdSWith
+#print axioms QIQTH.GatedRepSFix.witnessFieldDerivWith_eq_gatedDerivRepProdSWith
+#check @QIQTH.GatedRepSFix.witnessFieldDerivWith_eq_gatedDerivRepProdSWith_recovers_old
+#print axioms QIQTH.GatedRepSFix.witnessFieldDerivWith_eq_gatedDerivRepProdSWith_recovers_old
+#check @QIQTH.GatedRepSFix.witnessFieldDeriv_eq_gatedDerivRepProdS'
+#print axioms QIQTH.GatedRepSFix.witnessFieldDeriv_eq_gatedDerivRepProdS'
+#check @QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4With
+#print axioms QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4With
+#check @QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4'
+#print axioms QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4'
+
 end QIQTH.AxiomAudit

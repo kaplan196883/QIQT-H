@@ -7312,3 +7312,16 @@ import QIQTH.GatedTauRepProdSWith
 -- joint-measurability fully discharged via uniformInverseChart'_joint_measurable. Step toward, NOT
 -- itself, Canary C3 (τ-carrier only, HgateSatAudit-level, not HEmeasBorelAudit-level). std-3. NOT a₁=R/6.
 import QIQTH.WitnessTauDerivEqWith
+-- J4-1162: GatedFieldRepSGenWith — genericizes GatedRepSFix.lean's §A (the FIRST field-pd v4 carrier,
+-- ALREADY formalized for the old chart, not prose-only as J4-1161 assumed) over an abstract chart W:
+-- gatedDerivRepProdSGenWith / _uniformInverseChart / Gen' (fully chart-generic representative, amplitude
+-- via chartFieldAmpWith), measurability siblings (chart measurability discharged via
+-- uniformInverseChart'_joint_measurable for the primed one), witnessFieldDerivWith_eq_zero_of_nonpos
+-- (generic nonpos vanishing), witnessFieldDerivWith_eq_gatedDerivRepProdSWith / _recovers_old /
+-- witnessFieldDeriv_eq_gatedDerivRepProdS' (the generic + primed field-derivative everywhere identity),
+-- firstFieldPd_prod_stronglyMeasurable_v4With / _v4' (generic + primed strongly-measurable capstone,
+-- hWmeas fully discharged). Extends J4-1161's τ-carrier leg to the first field-pd leg (2 of 3
+-- HEmeasBorelAudit conjuncts now generic+primed). Step toward, NOT itself, Canary C3 (the mixed
+-- second field-pd carrier, GatedRepSFix §B, and the triple assembly, §C, remain un-genericized).
+-- std-3. NOT a₁=R/6.
+import QIQTH.GatedFieldRepSGenWith
