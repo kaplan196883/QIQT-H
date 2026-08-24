@@ -32300,4 +32300,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.CapstoneExistentialAssembly.a1_R6_assembled_v3
 #print axioms QIQTH.CapstoneExistentialAssembly.a1_R6_assembled_v3
 
+-- J4-1179: `CConvChartGateDataWith.lean` — witness-unification Phase 1, D2 (resumed campaign, per
+-- `docs/qg_roadmap/WITNESS_UNIFICATION_PLAN.md`). `CConvChartGateDataWith` (generic over abstract
+-- chart `W` + abstract witness-field-derivative `WD`), `chartGateDataWith_iff_old` (the `Iff`
+-- compatibility bridge at the old concrete values), `CConvChartGateData'` (primed instantiation at
+-- `uniformInverseChart'`/`witnessFieldDeriv'`). std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.CConvChartGateWith.CConvChartGateDataWith.mk
+#print axioms QIQTH.CConvChartGateWith.chartGateDataWith_iff_old
+#check @QIQTH.CConvChartGateWith.CConvChartGateData'
+
 end QIQTH.AxiomAudit

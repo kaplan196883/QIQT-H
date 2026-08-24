@@ -7412,3 +7412,12 @@ import QIQTH.CapstoneExistentialAssembly
 -- content. std-3, no sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv} plus the
 -- ~15 outer RNC/geometric-chart hypotheses, UNCHANGED.
 import QIQTH.A1R6PublicClaim
+-- J4-1179: new file `QIQTH.CConvChartGateDataWith` — witness-unification Phase 1, D2 — the
+-- chart-parametric AND witness-derivative-parametric fork of `CConvFacade.CConvChartGateData`
+-- (`CConvChartGateDataWith`, generic over abstract `W`/`WD`; `chartGateDataWith_iff_old`, the
+-- old-value `Iff` compatibility bridge; `CConvChartGateData'`, the primed instantiation at
+-- `uniformInverseChart'`/`witnessFieldDeriv'`). Corrects the plan's undercounted "2 hardwired fields"
+-- to the true 5 (hVmapMeas/hCover/hChartB/hSliceData's radialCutoff leg/hKmeas); `innerKernelField`
+-- kept fixed per `ChartParamFacadeVariant`'s (J4-321) own precedent. std-3, no sorryAx. NOT a₁=R/6.
+-- STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.CConvChartGateDataWith
