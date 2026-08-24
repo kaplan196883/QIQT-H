@@ -162,5 +162,25 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   diamond theorem to `chartFieldAmp'`, still ahead). Next dispatch target: Phase 2 Task B (generic
   siblings for the theorems whose conclusions name the old roots — `witnessFieldDeriv_gate_eq`,
   `witnessFieldDeriv_gate_abs_le`, etc.) and Task C (Canary C1 — `FirstDerivativeDiamond`).
+- **J4-1158 (this dispatch)** — Phase 2 Task B LANDED (6 of the 7 `EngineInstantiation.lean` consumer
+  theorems: `witnessFieldDeriv2_center`, `witnessFieldDeriv2_eq_pd_witnessFieldDeriv`,
+  `witnessFieldDeriv_gate_eq`, `witnessFieldDeriv_offGate_eq_zero`, `witnessFieldDeriv2_offGate_eq_zero`,
+  `witnessFieldDeriv_gate_abs_le` — genericized in `QIQTH/WitnessFieldDerivConsumersWith.lean`;
+  `witness_secondOrder_interchange` deliberately NOT attempted, needs a `heatConvFrozenWith`, Phase 3/4
+  territory). **CANARY C1 RESULT: PASS.** `witnessFieldDeriv'_gate_eq` — the first genuine relational
+  theorem connecting a PRIMED witness derivative (`witnessFieldDeriv'`) to `chartFieldAmp'` — closed
+  cleanly with NO extra machinery: no global chart reachability, no global old/new chart equality, no
+  bounded-tube agreement argument, no global `ContDiff` beyond the caller-supplied local `hJetV`/`hAmp1`.
+  Root cause of the clean pass: `gaussComp_hasDerivAt_line`/`gaussComp_pd` (`ChartJetHessian.lean`) and
+  `gatedKernel_apply_of_mem`/`gatedKernel_apply_of_notMem` (`GlobalHunifAssembly.lean`) — the two
+  ingredients the old `witnessFieldDeriv_gate_eq` proof leans on — were ALREADY stated over an abstract
+  chart map / already chart-independent, so the generic proof is a mechanical `W`-for-`uniformInverseChart`
+  substitution of the old proof, verbatim. Also landed the on-gate domination corollary
+  `witnessFieldDeriv'_gate_abs_le`. Note on Task B's true scope: a broad `grep witnessFieldDeriv` across
+  all of `QIQTH/` hits ~224 files, but nearly all are downstream consumers of the 7 root theorems, not
+  direct-signature consumers — genericizing that whole downstream tower was correctly read as OUT of
+  Task B's scope (matches J4-1157's own worked examples, all in `EngineInstantiation.lean`) and was not
+  attempted. Next dispatch target: `heatConvFrozenWith` + generic `witness_secondOrder_interchange`
+  sibling (closes Task B fully), or proceed to Canary C2 per the phase table.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
