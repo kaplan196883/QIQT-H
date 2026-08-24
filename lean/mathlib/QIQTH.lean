@@ -7389,3 +7389,19 @@ import QIQTH.CapstoneLocalAssembly
 -- reproduces J4-774's original statement. Pure refactor, zero new analytic content. std-3, no sorryAx.
 -- NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
 import QIQTH.GatedGlobalWitnessN1CapstonePointwise
+-- J4-1174 (Phase 5 of the capstone-signature redesign plan, Canaries D7/D8): new file
+-- `QIQTH.CapstoneExistentialAssembly`. `a1_R6_assembled_v3` (Layer C) destructs
+-- `GateOpennessExport.gatedWitnessN1_package_open`'s existential FIRST (single opening, D6 discipline
+-- re-verified transitively), then re-exposes ALL ~50 other independent hypotheses of
+-- `a1_R6_assembled_local`/`a1_R6_assembled_v2'` as caller-supplied inputs UNDER the resulting
+-- `∃ a b, 0 < a ∧ a < b ∧ ∃ S, (0:Point n) ∈ S 0 ∧ (…50 hyps… → conclusion)`. The package's own raw
+-- every-ceiling `hbound` family is fed directly into `CapstoneLocalAssembly.a1_R6_assembled_local`
+-- (Layer A) with `CT := C` (the package's constant), matching `hEbound_t`'s exact shape with no
+-- transport. Canary D7 (DependentTail): the reduced first-clusters elaborate with zero
+-- `Eq.ndrec`/`cast`/manual transports (confirmed by the clean full build). Canary D8
+-- (IndependentConstants): `C₀, C₁, A₀, A₁, C_L, D0, D1, E₀, E₁` are distinct `∀`-bound tail arguments,
+-- never unified with the package's `C`/`CT` — any call site must supply them explicitly. Both PASSED,
+-- no STOP. Zero new analytic content, pure signature/existential-destructuring plumbing. std-3, no
+-- sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED. Phase 6 (the
+-- ~50-hypothesis real-consumer migration) remains withheld pending a named concrete consumer.
+import QIQTH.CapstoneExistentialAssembly

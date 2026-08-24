@@ -32289,4 +32289,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged_via_pointwise
 #print axioms QIQTH.HeatResidualBound.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged_via_pointwise
 
+-- J4-1174: `CapstoneExistentialAssembly.lean` — Phase 5 of the capstone-signature redesign plan,
+-- Canaries D7 (DependentTail)/D8 (IndependentConstants) both green. `a1_R6_assembled_v3` (Layer C)
+-- destructs `gatedWitnessN1_package_open`'s existential FIRST (single opening), then re-exposes ALL
+-- ~50 other independent hypotheses of `a1_R6_assembled_local`/`a1_R6_assembled_v2'` as caller-supplied
+-- inputs UNDER the resulting `∃ a b, 0 < a ∧ a < b ∧ ∃ S, (0:Point n) ∈ S 0 ∧ (…hyps… → conclusion)`.
+-- Zero new analytic content, pure signature/existential-destructuring plumbing. std-3. NOT a₁=R/6
+-- (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED). Phase 6 (real-consumer migration)
+-- remains withheld pending a named concrete consumer.
+#check @QIQTH.CapstoneExistentialAssembly.a1_R6_assembled_v3
+#print axioms QIQTH.CapstoneExistentialAssembly.a1_R6_assembled_v3
+
 end QIQTH.AxiomAudit
