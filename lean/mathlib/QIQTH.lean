@@ -7405,3 +7405,10 @@ import QIQTH.GatedGlobalWitnessN1CapstonePointwise
 -- sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED. Phase 6 (the
 -- ~50-hypothesis real-consumer migration) remains withheld pending a named concrete consumer.
 import QIQTH.CapstoneExistentialAssembly
+-- J4-1178 (Sol's 41st consult recommendation): new file `QIQTH.A1R6PublicClaim` — the FIRST real
+-- consumer of the capstone-signature tower, a stable theorem APPLICATION of `a1_R6_assembled_v3`
+-- (`a1_R6_public_claim`, two outer binders renamed to avoid a `verify/config.json` claim-card
+-- annotation collision), wired into the verify capsule as a second capstone entry. Zero new analytic
+-- content. std-3, no sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv} plus the
+-- ~15 outer RNC/geometric-chart hypotheses, UNCHANGED.
+import QIQTH.A1R6PublicClaim
