@@ -7325,3 +7325,27 @@ import QIQTH.WitnessTauDerivEqWith
 -- second field-pd carrier, GatedRepSFix §B, and the triple assembly, §C, remain un-genericized).
 -- std-3. NOT a₁=R/6.
 import QIQTH.GatedFieldRepSGenWith
+-- J4-1163: GatedMixed2RepSGenWith — genericizes GatedRepSFix.lean's §B (the MIXED second field-pd v4
+-- carrier) over an abstract chart W, the third and last HEmeasBorelAudit conjunct. First builds the
+-- missing chart-generic derivative-identity prerequisite (witnessMixedWith_gate_eq /
+-- _offGate_eq_zero / _eq_zero_of_nonpos, mechanical substitution off ChartJetHessianMixed's ALREADY
+-- chart-generic gaussComp_pd_pd_mixed / gaussComp_amp_pd_pd_mixed), then gatedMixed2RepProdSGenWith /
+-- _uniformInverseChart / Gen' (fully chart-generic representative, amplitude via chartFieldAmpWith),
+-- measurability siblings (chart measurability discharged via uniformInverseChart'_joint_measurable
+-- for the primed one), witnessMixedWith_eq_gatedMixed2RepProdSGenWith / _recovers_old /
+-- witnessMixed2_eq_gatedMixed2RepProdS' (generic + primed mixed everywhere identity),
+-- secondFieldPd_prod_stronglyMeasurable_v4With / _v4' (generic + primed strongly-measurable capstone,
+-- hWmeas fully discharged). All THREE HEmeasBorelAudit conjuncts now chart-generic + primed. std-3,
+-- built clean first attempt. NOT a₁=R/6.
+import QIQTH.GatedMixed2RepSGenWith
+-- J4-1164: TripleHEmeasConcreteV4GenWith — ★★★ CANARY C3 ("PrimeHEmeasAudit") PASSES. Assembles the
+-- three now-primed HEmeasBorelAudit conjuncts (tauDeriv_prod_stronglyMeasurable_v4With,
+-- firstFieldPd_prod_stronglyMeasurable_v4With, secondFieldPd_prod_stronglyMeasurable_v4With) plus the
+-- chart-independent gi/christoffel measurabilities into tripleHEmeas_concrete_v4' — a complete primed
+-- HEmeasBorelAudit-level triple result for the NEW-chart concrete witness vanVleckGatedWitness', with
+-- NO raw hWmeas/chart-measurability hypothesis remaining. Key engineering step: obtains
+-- uniformInverseChart'_joint_measurable ONCE, shares one hWmeas across all three "…With" (not "…'")
+-- capstones at the same W := uniformInverseChart' g gi hC hK c, avoiding any cross-δ₀ reconciliation.
+-- std-3, built clean first attempt (after one namespace-open fix). NOT a₁=R/6. STRICTLY CONDITIONAL
+-- on {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.TripleHEmeasConcreteV4GenWith

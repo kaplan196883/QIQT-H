@@ -32216,4 +32216,38 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4'
 #print axioms QIQTH.GatedRepSFix.firstFieldPd_prod_stronglyMeasurable_v4'
 
+-- J4-1163: `GatedMixed2RepSGenWith.lean` — genericizes `GatedRepSFix`'s §B (mixed second field-pd v4
+-- carrier, the THIRD and last HEmeasBorelAudit conjunct) over an abstract chart W, including the
+-- missing chart-generic derivative-identity prerequisite (witnessMixedWith_gate_eq etc). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.GatedRepSFix.witnessMixedWith_gate_eq
+#print axioms QIQTH.GatedRepSFix.witnessMixedWith_gate_eq
+#check @QIQTH.GatedRepSFix.witnessMixedWith_offGate_eq_zero
+#print axioms QIQTH.GatedRepSFix.witnessMixedWith_offGate_eq_zero
+#check @QIQTH.GatedRepSFix.witnessMixedWith_eq_zero_of_nonpos
+#print axioms QIQTH.GatedRepSFix.witnessMixedWith_eq_zero_of_nonpos
+#check @QIQTH.GatedRepSFix.gatedMixed2RepProdSGenWith_uniformInverseChart
+#print axioms QIQTH.GatedRepSFix.gatedMixed2RepProdSGenWith_uniformInverseChart
+#check @QIQTH.GatedRepSFix.gatedMixed2RepProdSGenWith_measurable
+#print axioms QIQTH.GatedRepSFix.gatedMixed2RepProdSGenWith_measurable
+#check @QIQTH.GatedRepSFix.gatedMixed2RepProdSGen'_measurable
+#print axioms QIQTH.GatedRepSFix.gatedMixed2RepProdSGen'_measurable
+#check @QIQTH.GatedRepSFix.witnessMixedWith_eq_gatedMixed2RepProdSGenWith
+#print axioms QIQTH.GatedRepSFix.witnessMixedWith_eq_gatedMixed2RepProdSGenWith
+#check @QIQTH.GatedRepSFix.witnessMixedWith_eq_gatedMixed2RepProdSGenWith_recovers_old
+#print axioms QIQTH.GatedRepSFix.witnessMixedWith_eq_gatedMixed2RepProdSGenWith_recovers_old
+#check @QIQTH.GatedRepSFix.witnessMixed2_eq_gatedMixed2RepProdS'
+#print axioms QIQTH.GatedRepSFix.witnessMixed2_eq_gatedMixed2RepProdS'
+#check @QIQTH.GatedRepSFix.secondFieldPd_prod_stronglyMeasurable_v4With
+#print axioms QIQTH.GatedRepSFix.secondFieldPd_prod_stronglyMeasurable_v4With
+#check @QIQTH.GatedRepSFix.secondFieldPd_prod_stronglyMeasurable_v4'
+#print axioms QIQTH.GatedRepSFix.secondFieldPd_prod_stronglyMeasurable_v4'
+
+-- J4-1164: `TripleHEmeasConcreteV4GenWith.lean` — ★★★ CANARY C3 ("PrimeHEmeasAudit") PASSES.
+-- `tripleHEmeas_concrete_v4'`: a complete primed HEmeasBorelAudit-level triple result for
+-- `vanVleckGatedWitness'`, with NO raw hWmeas/chart-measurability hypothesis remaining. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.GatedRepSFix.tripleHEmeas_concrete_v4'
+#print axioms QIQTH.GatedRepSFix.tripleHEmeas_concrete_v4'
+
 end QIQTH.AxiomAudit
