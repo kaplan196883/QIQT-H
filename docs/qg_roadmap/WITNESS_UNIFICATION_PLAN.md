@@ -12,6 +12,16 @@ itself NOT authorized by this file and requires explicit follow-up. This file is
 record so future dispatches do not re-derive it from scratch — mirrors the format of
 `CHART_PARAMETRIC_REBUILD_PLAN.md` / `CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`.
 
+**UPDATE (J4-1182, superseding the header above for current status).** Phase 1 (Canary C1) and Phase 2
+(Canary C2) WERE subsequently authorized and completed (J4-1179-1182, commits `5d4118c4`/`76a85cf4`/
+this dispatch's commit) — see the dispatch log for full detail. **Phase 3 is now PAUSED AGAIN**, this
+time by its own STOP condition firing (J4-1182): the downstream consumers
+(`hjoint_instantiated`/`henv_assembled`/`hdomS_assembled`/`g2_bundle_assembled`) hardwire the old chart
+in their STATEMENTS, not just proofs — worse than this plan anticipated — and the 42nd Sol consult
+re-sizes the remaining campaign to 16-30+ dispatches (mode 21-25), recommending pause absent a named
+consumer for the PRIMED connection specifically (the OLD `a1_R6_assembled_v3` already has one,
+`A1R6PublicClaim.lean`, J4-1178).
+
 ## Why this exists
 
 This session landed two large, independently-successful, but ultimately DISCONNECTED sub-campaigns:
@@ -357,4 +367,36 @@ surprise early. Freeze after C0. **Resume Phase 1+ only when a named downstream 
   after Phase 2 (D5/D6, expected trivial per the J4-1176 pre-check) must re-audit this before launching
   D7, per Phase 3's own STOP condition ("if the proof needs a helper lemma D0 didn't already flag as
   generic, re-audit before proceeding"). `a₁=R/6` remains STRICTLY CONDITIONAL on
+  `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+- **J4-1182 (this dispatch) — Phase 2 CONFIRMED (D5/D6, Canary C2 CLOSED, real compiling artifact
+  `PrimedWitnessMidStackConfirmation.lean`) + Phase 3 risk precisely characterized: WORSE than logged,
+  STOP condition fired, 42nd Sol consult re-sizing.** Full details in `JET4_TOWER_PLAN.md`. Summary:
+  (1) D5/D6 confirmed by direct compilation, not just re-reading the pre-check table — all 8 symbols
+  (`TruncatedDuhamelCore`/`EndpointData`/`InterchangeData`/`BulkLimitData`/five `Mem*`) instantiate
+  cleanly at the primed witness, zero forking. (2) Direct full read of `hjoint_instantiated`/
+  `henv_assembled`/`hdomS_assembled`/`g2_bundle_assembled` finds the prior J4-1179/1180 log
+  UNDERSTATED the risk — it is not "proof-body-only" hardwiring, the STATEMENTS (hypothesis AND
+  conclusion TYPES) directly name `uniformInverseChart`/`vanVleckGatedWitness`/`witnessFieldDeriv`/
+  `chartFieldAmp` (unprimed) throughout. One layer down, `GcoefContinuity.gcoef_continuity_discharge`
+  (the bottom assembler `g2_bundle_assembled` calls) IS already fully generic — zero forking needed
+  there — but ~11 of ~12 audited slot-supplying helper theorems and sub-helpers one layer up
+  (`hzmeas_witness`/`hzbound_witness`/`hzint_witness`/`hzcont_witness`/`hsmeas_witness`/
+  `hsbound_witness`/`hBint_witness`/`hSliceCont_of_data`/`hWq_of_chartBorel`/`hWa_of_chartBorel`/
+  `gcpw_fieldpoint_measurable_of_chartBorel`/`gatedWitness_slice_continuous_of_support`/
+  `gatedWitness_slice_zero_of_notMemK`) are statement-hardwired too (only `gatedFieldpoint_measurable_
+  of_inner` is free). Phase 3's STOP condition ("if the proof needs a helper lemma D0 didn't already
+  flag as generic, re-audit before proceeding") is now TRIGGERED, at the statement level, worse than
+  the plan's own proof-body-only anticipation. (3) 42nd Sol consult (`gpt-5.6-sol`, high effort):
+  Phase 3 alone re-sized to **10-18 dispatches** (mode 13-15, adverse tail 20-24) for a literal primed
+  fork, or **12-22** (mode 16-18) for a more disciplined generic-middle-layer extraction; total
+  remaining campaign (Phase 1/2 sunk) now **16-30+ dispatches, mode 21-25** — not the original "9-18,
+  mode 11-13." Explicit recommendation: **pause, do NOT launch Phase 3/D7 now** — the old
+  `a1_R6_assembled_v3` already has a consumer (`A1R6PublicClaim.lean`, J4-1178); the primed connection
+  this campaign would build still has none, so 16-30 more dispatches would be the same speculative
+  duplication the 41st consult already flagged, now with a confirmed larger price tag. If resumed
+  later, do so as a separately-authorized mini-campaign with an explicit ~20-25 dispatch budget, a
+  full dependency-DAG audit, and generic `With`-style cores — not a continuation of this plan's
+  original Phase 3/4/5 numbering. **This dispatch's D5/D6 work stands independently** (Canary C2
+  genuinely closed) regardless of the Phase 3 pause. `a₁=R/6` remains STRICTLY CONDITIONAL on
   `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
