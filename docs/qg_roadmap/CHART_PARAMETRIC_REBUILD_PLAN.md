@@ -148,11 +148,19 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
 
 ## Dispatch log against this plan
 
-- **J4-1156 (this dispatch)** — Phase 1 LANDED. `QIQTH/ChartFieldAmpWith.lean`
+- **J4-1156** — Phase 1 LANDED. `QIQTH/ChartFieldAmpWith.lean`
   (`chartFieldAmpWith`, `chartFieldAmpWith_uniformInverseChart` [`rfl`], `chartFieldAmp'`) and
   `QIQTH/VanVleckGatedWitnessWith.lean` (`vanVleckGatedWitnessWith`,
   `vanVleckGatedWitnessWith_uniformInverseChart` [`rfl`], `vanVleckGatedWitness'`). Canary C0 PASSED.
   Next dispatch target: Phase 2 Task A — fork `witnessFieldDeriv`/`witnessFieldDeriv2` the same way,
   reading `EngineInstantiation.lean` in full first.
+- **J4-1157 (this dispatch)** — Phase 2 Task A LANDED. `QIQTH/WitnessFieldDerivWith.lean`
+  (`witnessFieldDerivWith`/`witnessFieldDeriv2With`, both `..._uniformInverseChart` bridges [`rfl`],
+  `witnessFieldDeriv'`/`witnessFieldDeriv2'` at `uniformInverseChart'`) — threads through Phase 1's
+  `vanVleckGatedWitnessWith`/`vanVleckGatedWitness'`. Both `rfl` bridges closed cleanly (layer-analogous
+  to Canary C0, one step up the derivative chain) — NOT itself Canary C1 (that needs the first genuine
+  diamond theorem to `chartFieldAmp'`, still ahead). Next dispatch target: Phase 2 Task B (generic
+  siblings for the theorems whose conclusions name the old roots — `witnessFieldDeriv_gate_eq`,
+  `witnessFieldDeriv_gate_abs_le`, etc.) and Task C (Canary C1 — `FirstDerivativeDiamond`).
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.

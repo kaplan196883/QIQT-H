@@ -32060,4 +32060,27 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HeatResidualBound.vanVleckGatedWitness'
 #print axioms QIQTH.HeatResidualBound.vanVleckGatedWitness'
 
+-- J4-1157: WitnessFieldDerivWith — Phase 2 Task A of the chart-parametric rebuild campaign. Genericizes
+-- `witnessFieldDeriv`/`witnessFieldDeriv2` (`EngineInstantiation.lean`) over an abstract chart `W`,
+-- threading through Phase 1's `vanVleckGatedWitnessWith` instead of the old concrete
+-- `vanVleckGatedWitness`. Both `..._With` versions instantiated at the OLD chart are proved `rfl`-equal
+-- to the EXISTING banked kernels (compatibility bridges, analogous to Canary C0 for this layer), and
+-- both are also instantiated at the NEW derived-measurable chart `uniformInverseChart'`
+-- (`witnessFieldDeriv'`/`witnessFieldDeriv2'`) — pure definitional threading, does NOT discharge hWmeas
+-- or narrow {hDuhamel,hDConv,hCConv}. Canary C1 (FirstDerivativeDiamond, the first genuine mathematical
+-- theorem connecting a primed witness derivative to `chartFieldAmp'`) remains ahead. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatResidualBound.witnessFieldDerivWith
+#print axioms QIQTH.HeatResidualBound.witnessFieldDerivWith
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv2With
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2With
+#check @QIQTH.HeatResidualBound.witnessFieldDerivWith_uniformInverseChart
+#print axioms QIQTH.HeatResidualBound.witnessFieldDerivWith_uniformInverseChart
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv2With_uniformInverseChart
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2With_uniformInverseChart
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv'
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv'
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv2'
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2'
+
 end QIQTH.AxiomAudit

@@ -7271,3 +7271,11 @@ import QIQTH.AssemblyV8Rethread
 -- {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
 import QIQTH.ChartFieldAmpWith
 import QIQTH.VanVleckGatedWitnessWith
+-- J4-1157: Phase 2 Task A of the chart-parametric rebuild campaign. WitnessFieldDerivWith genericizes
+-- `witnessFieldDeriv`/`witnessFieldDeriv2` (the first/second concrete field-derivative kernels of the
+-- gated witness, `EngineInstantiation.lean`) over an abstract chart `W`, threading through Phase 1's
+-- `vanVleckGatedWitnessWith` instead of the old concrete `vanVleckGatedWitness`, with `rfl`-level
+-- compatibility bridges to the old kernels and new instantiations at `uniformInverseChart'`. Pure
+-- definitional threading, mirroring Phase 1's shape exactly. Does NOT touch `hWmeas` or narrow
+-- {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
+import QIQTH.WitnessFieldDerivWith
