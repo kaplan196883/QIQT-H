@@ -31963,4 +31963,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartGate_concrete_S_uniform_tube
 #print axioms QIQTH.ExpMap.chartGate_concrete_S_uniform_tube
 
+-- J4-1143: ConcreteGateResidualization.tripleHEmeas_concrete_v4_residual_at_flowBallGate — the K-vs-K0
+-- mismatch (J4-1142) is an artifact of the S_∩ fiber-glued detour, NOT of the concrete flow-ball gate
+-- S_c: OffSVanishing.lean (J4-235) / OnGateJets.lean (J4-236), built earlier directly against S_c,
+-- already discharge hKSmeas/hOffS/hOffS2/hcarField's on-gate hgate/hcarTau's HasDerivAt for the FULL K
+-- (no K0 anywhere). This theorem instantiates tripleHEmeas_concrete_v4 at S:=S_c and reduces its open
+-- surface to exactly the S-independent raw-chart/derived-witness measurability residue (the hChartRep
+-- wall: hWmeas/hAmpMeas/hCfieldMeas/hDAmpMeas/hPfieldMeas) plus hcarField2 passed through verbatim
+-- (its own on-gate hgate block is a separate, S-independent global-in-y wall, untouched). Confirmed by
+-- twenty-first/twenty-second gpt-5.6-sol (high) consults 2026-08-24: the union-gate S⁺ fix is
+-- POINTLESS for hOffS/hOffS2/hcarField-hgate/hcarTau (S_c alone already covers full K); the S_∩
+-- detour is not currently load-bearing progress toward either genuinely open residue. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ConcreteGateResidualization.tripleHEmeas_concrete_v4_residual_at_flowBallGate
+#print axioms QIQTH.ConcreteGateResidualization.tripleHEmeas_concrete_v4_residual_at_flowBallGate
+
 end QIQTH.AxiomAudit

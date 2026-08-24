@@ -7221,3 +7221,12 @@ import QIQTH.ChartGateGluedFieldHasDerivAtAllCoords
 -- (the elementary adapter step is DEFERRED to the next dispatch). std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartGateUniformTube
+-- J4-1143: ConcreteGateResidualization — decisive audit (twenty-first/twenty-second gpt-5.6-sol
+-- consults) found the K-vs-K0 mismatch (J4-1142) is an artifact of the S_∩ fiber-glued detour, NOT
+-- of the concrete flow-ball gate S_c: OffSVanishing.lean (J4-235) / OnGateJets.lean (J4-236),
+-- built earlier directly against S_c, already discharge hKSmeas/hOffS/hOffS2/hcarField's on-gate
+-- hgate/hcarTau's HasDerivAt for the FULL K (no K0 anywhere). Bank one compile-checked
+-- residualization theorem: tripleHEmeas_concrete_v4 instantiated at S:=S_c reduces to exactly the
+-- S-independent measurability residue (hChartRep wall) + hcarField2 passed through verbatim. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ConcreteGateResidualization
