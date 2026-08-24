@@ -32329,4 +32329,16 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvEnvelopeWith.envelopeDataWith_iff_old
 #check @QIQTH.CConvEnvelopeWith.CConvEnvelopeData'
 
+-- J4-1182: `PrimedWitnessMidStackConfirmation.lean` — witness-unification Phase 2, D5/D6
+-- confirmation. `#check`-only skeleton (no theorems to axiom-check; all declarations are `#check`
+-- terms, not named theorems) confirming `TruncatedDuhamelCore`/`EndpointData`/`InterchangeData`/
+-- `BulkLimitData`/five `Mem*` abbrevs instantiate cleanly at `Wit := vanVleckGatedWitness' ...`.
+-- Canary C2 (Phase 2) CLOSED. NOT a₁=R/6. STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED.
+#check fun (n : ℕ) (g gi : QIQTH.Curvature.Point n → Fin n → Fin n → ℝ)
+    (hC : ∀ a b c, ContDiff ℝ (⊤ : WithTop ℕ∞) (fun y => QIQTH.Curvature.christoffel g gi a b c y))
+    {K : Set (QIQTH.Curvature.Point n)} (hK : IsCompact K)
+    (S : QIQTH.Curvature.Point n → Set (QIQTH.Curvature.Point n)) (a b c t : ℝ) =>
+  (QIQTH.TruncatedDuhamelData.TruncatedDuhamelCore g gi
+    (QIQTH.HeatResidualBound.vanVleckGatedWitness' g gi hC hK S a b c) t : Prop)
+
 end QIQTH.AxiomAudit

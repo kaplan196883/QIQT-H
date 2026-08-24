@@ -7438,3 +7438,10 @@ import QIQTH.CConvDerivativeDataWith
 -- hGateData, same class of undercount as D2's). std-3, no sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on
 -- {hDuhamel, hDConv, hCConv}, UNCHANGED. Canary C1 (Phase 1) now CLOSED — D2/D3/D4 all done.
 import QIQTH.CConvEnvelopeDataWith
+-- J4-1182: new file `QIQTH.PrimedWitnessMidStackConfirmation` — witness-unification Phase 2, D5/D6.
+-- CONFIRMATION-ONLY: compiling `#check`-skeleton instantiation of `TruncatedDuhamelCore`/`EndpointData`/
+-- `InterchangeData`/`BulkLimitData` and all five `Mem*` abbrevs at the primed witness
+-- `vanVleckGatedWitness' g gi hC hK S a b c`, confirming the J4-1176 pre-check's claim that these are
+-- fully generic (zero forking needed). Canary C2 (Phase 2) CLOSED. NOT a₁=R/6. STRICTLY CONDITIONAL on
+-- {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.PrimedWitnessMidStackConfirmation
