@@ -192,5 +192,23 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   Commit `a492ca21`. Next dispatch target: Canary **C2 -- FirstHWMConsumerPrime** -- the earliest
   `hWmeas`-consuming audit theorem (`HgateSatAudit`/`GatedRepSFix`/`HEmeasBorelAudit` import-order
   lineage) instantiated with `uniformInverseChart'_joint_measurable`.
+- **J4-1160 (Phase 4, opening dispatch)** -- `QIQTH/GatedTauRepProdSWith.lean`. **CANARY C2 RESULT:
+  PASS.** Identified the earliest `hWmeas`-shaped consumer as `HgateSatAudit.gatedTauRepProdS_measurable`
+  (`HgateSatAudit.lean:263`, upstream of `GatedRepSFix.lean`/`HEmeasBorelAudit.lean` per actual import
+  lines) -- its `hChartMeas : Measurable (fun w => uniformInverseChart g gi hC hK w.2.2 w.2.1)` hypothesis
+  matches `uniformInverseChart'_joint_measurable`'s conclusion shape EXACTLY (same `w.2.2`/`w.2.1` order,
+  same ambient type; the extra tube-radius `c` is just a fixed partial application, no currying/
+  sigma-algebra mismatch). Re-inspection of the proof confirmed `hChartMeas` is used ONLY for raw
+  measurability composition, never a hidden geometric fact, never old/new witness identification outside
+  the tube -- so the crux check (canary condition) is clean. Landed `gatedTauRepProdSWith`/
+  `gatedTauRepProdSWith_uniformInverseChart` (`rfl` bridge)/`gatedTauRepProdS'` (three-layer discipline
+  for the def), `gatedTauRepProdSWith_measurable` (Task A: generic over `W`+`hWmeas`), and
+  `gatedTauRepProdS'_measurable` (Task B: the canary deliverable, `hWmeas` fully discharged via
+  `uniformInverseChart'_joint_measurable`, existential-`δ₀` shape preserved). Deliberately did NOT
+  genericize `witnessTauDeriv_eq_gatedTauRepProdS`/`tauDeriv_prod_stronglyMeasurable_v4` (they consume
+  `hgate`/`HasDerivAt` data about `chartFieldAmp`, not raw chart measurability -- next dispatch) or touch
+  `GatedRepSFix.lean`/`HEmeasBorelAudit.lean`. std-3, full build 0 err, axiom budget 0. Commit `9f926dfe`.
+  Next dispatch target: Phase 4 Task B continuation (the `hcar`-bundled siblings above), then push into
+  `GatedRepSFix.lean`'s field/field² carriers toward Canary C3.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
