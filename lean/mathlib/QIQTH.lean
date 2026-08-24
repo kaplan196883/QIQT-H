@@ -7252,3 +7252,14 @@ import QIQTH.ThetaChartContDiff
 -- gatedWitness_hEboundW_unconditional' delivers the hEboundW primitive for the jointly-measurable-in-p
 -- chart. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ThetaChartGatedInstantiation
+-- J4-1152: TripleHEmeasV5 — mechanical rethread of `GatedRepSFix.tripleHEmeas_concrete_v4`'s S1
+-- assembly, swapping the `hcarField2` conjunct for `Field2NbhdReshape`'s (J4-237) already-improved
+-- WEAKENED (`∀ y ∈ S w.2.2`) shape (`secondFieldPd_prod_stronglyMeasurable_v5`). Pure interface
+-- bookkeeping, per J4-1151's flagged optional item — does NOT touch the `hWmeas` wall. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.TripleHEmeasV5
+-- J4-1153: AssemblyV8Rethread — `a1_R6_assembled_v8`, the capstone rethread sourcing `htriple` from
+-- `TripleHEmeasV5.tripleHEmeas_concrete_v5` instead of `AssemblyV7Rethread`'s v4 supplier, making the
+-- J4-237 hcarField2 fix visible at the capstone signature. Pure re-plumbing, same conclusion as v7.
+-- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.AssemblyV8Rethread
