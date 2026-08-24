@@ -32260,4 +32260,12 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.PackageHorizonBound.gatedWitnessN1_horizon_bound
 #print axioms QIQTH.PackageHorizonBound.gatedWitnessN1_horizon_bound
 
+-- J4-1171: `LocalizedBankedData.lean` — Phase 2 of the capstone-signature redesign plan, Canaries
+-- D3 (EndpointLocal) and D4 (InterchangeLocal, the plan's flagged PRINCIPAL RISK) both green. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.LocalizedBankedData.endpointData_of_banked_on_horizon
+#print axioms QIQTH.LocalizedBankedData.endpointData_of_banked_on_horizon
+#check @QIQTH.LocalizedBankedData.interchangeData_of_banked_on_horizon
+#print axioms QIQTH.LocalizedBankedData.interchangeData_of_banked_on_horizon
+
 end QIQTH.AxiomAudit

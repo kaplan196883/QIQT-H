@@ -7357,3 +7357,16 @@ import QIQTH.TripleHEmeasConcreteV4GenWith
 -- GateOpennessExport.gatedWitnessN1_package_open. D0/D1 both green. std-3. NOT a₁=R/6. STRICTLY
 -- CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
 import QIQTH.PackageHorizonBound
+-- J4-1171: LocalizedBankedData — Phase 2 of the capstone-signature redesign plan
+-- (CAPSTONE_SIGNATURE_REDESIGN_PLAN.md, J4-1168). Canaries D3 (EndpointLocal)/D4 (InterchangeLocal,
+-- the plan's flagged PRINCIPAL RISK) BOTH GREEN. `endpointData_of_banked_on_horizon`/
+-- `interchangeData_of_banked_on_horizon` are the local siblings of `TruncatedDuhamelData`'s
+-- `endpointData_of_banked`/`interchangeData_of_banked`, built from the package's raw every-ceiling
+-- `hbound` family (no externally-fixed τ-uniform constant). D4 resolved precisely: `InterchangeData`
+-- DOES structurally need an unbounded-τ (every-ceiling) family internally (IterConvIntegrableW's own
+-- definition quantifies over every outer time) — Sol's fear is real, not a false alarm — but the
+-- package's own `hbound` (already quantified `∀ t'`) already supplies it for free, so both theorems
+-- are pure reassembly of already-banked machinery (J4-109 `iterConvIntegrableW_of_locally_bound_baseMeas`,
+-- J4-206 `hInter_from_local_data`), zero new analytic content. std-3. NOT a₁=R/6. STRICTLY CONDITIONAL
+-- on {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.LocalizedBankedData
