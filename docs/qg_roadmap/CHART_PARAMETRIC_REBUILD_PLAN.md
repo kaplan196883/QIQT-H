@@ -234,5 +234,24 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   Next dispatch target: (a) formalize the field/field² carrier honest fix (the §3 prose surgery, never
   done even for the old chart, needed before it can be genericized) or (b) push directly into
   `GatedRepSFix.lean`/`HEmeasBorelAudit.lean` if a τ-only entry point exists there.
+- **J4-1162 (this dispatch)** — Phase 4 Task B continuation. `QIQTH/GatedFieldRepSGenWith.lean`.
+  **STALE-PREMISE CORRECTION of J4-1161's forward note (a):** direct full read of `GatedRepSFix.lean`
+  (J4-232, POSTDATES `HgateSatAudit.lean` J4-231) shows the field/field² v4 honest-fix carriers were
+  ALREADY FULLY FORMALIZED for the OLD chart (§A/§B/§C, culminating in an `HEmeasBorelAudit`-level
+  `tripleHEmeas_concrete_v4`) — `HgateSatAudit.lean` §3 is simply an out-of-date prose sketch relative
+  to the later file. So path (a) was MOOT and path (b) reduces to "genericize `GatedRepSFix.lean`'s
+  already-proven §A/§B/§C content the same way the τ carrier was genericized" — no new field/field²
+  math needed. This dispatch genericizes §A (the FIRST field-`pd` carrier) only, in a NEW file, building
+  its OWN fully chart-generic representative `gatedDerivRepProdSGenWith` (amplitude via
+  `chartFieldAmpWith … W`, following J4-1161's own precedent for why the hardwired `chartFieldAmp` won't
+  do). Lands the generic + primed field-derivative everywhere identity
+  (`witnessFieldDerivWith_eq_gatedDerivRepProdSWith`/`_recovers_old`/`witnessFieldDeriv_eq_gatedDerivRepProdS'`)
+  and the generic + primed strongly-measurable capstone
+  (`firstFieldPd_prod_stronglyMeasurable_v4With`/`_v4'`, `hWmeas` fully discharged for the primed one).
+  `GatedRepSFix.lean` left completely untouched. 2 of 3 `HEmeasBorelAudit` conjuncts (τ, first field-`pd`)
+  now chart-generic + primed. **Canary C3 NOT YET REACHED** — §B (mixed second field-`pd`) and §C (triple
+  assembly) remain un-genericized; assembling the primed triple once all three conjuncts are done IS
+  Canary C3. std-3, full build 10429 jobs 0 err, axiom budget 0. Commit `1ddf8934`. Next dispatch target:
+  genericize `GatedRepSFix.lean` §B the identical way, then assemble the primed triple (Canary C3).
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
