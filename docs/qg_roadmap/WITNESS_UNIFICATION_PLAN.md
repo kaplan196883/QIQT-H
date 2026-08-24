@@ -330,3 +330,31 @@ surprise early. Freeze after C0. **Resume Phase 1+ only when a named downstream 
   (`CConvDerivativeDataWith`/`'`) and D4 (`CConvEnvelopeDataWith`/`'`, itself re-auditing for the SAME
   undercount risk against its own literal field list) remain. `a₁=R/6` remains STRICTLY CONDITIONAL on
   `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+- **J4-1180/1181 (this dispatch) — LEAN: Phase 1, D3+D4 — `CConvDerivativeDataWith.lean` +
+  `CConvEnvelopeDataWith.lean`; Canary C1 CLOSED.** Forked `CConvFacade.CConvDerivativeData` (D3) and
+  `CConvFacade.CConvEnvelopeData` (D4) following D2's three-layer discipline. D3's direct field re-read
+  (3 fields: `hDmeas`/`hDrep` hardwired via `witnessFieldDeriv`, `hlin` witness-free) confirmed the
+  plan's literal "2 hardwired fields" count EXACTLY RIGHT — no undercount, unlike D2. D4's direct
+  field re-read (4 fields) found the SAME class of undercount D2 found: the plan states
+  "`hC2fam`/`hGateData`" (2 fields) but `hGateData'` (the `∀ᵐ s`/`∀ᶠ x` order-swapped twin of
+  `hGateData`, identical `uniformInverseChart`/`chartFieldAmp` tokens) is equally hardwired — 3 of 4
+  fields forked, not 2; judged NOT a STOP trigger (same known fork point, more completely counted,
+  matching D2's precedent exactly). Built `CConvDerivativeDataWith`/`derivativeDataWith_iff_old`/
+  `CConvDerivativeData'` (generic over abstract `WD`, primed at `witnessFieldDeriv'`) and
+  `CConvEnvelopeDataWith`/`envelopeDataWith_iff_old`/`CConvEnvelopeData'` (generic over abstract chart
+  `W`/amplitude `AMP`/gated witness `GW`, primed at `uniformInverseChart'`/`chartFieldAmp'`/
+  `vanVleckGatedWitness'`). Build/audit clean: both files standalone 0 err, full `lake build QIQTH
+  QIQTH.AxiomAudit` (10440 jobs) 0 err, throwaway `chk1180.lean` `#print axioms` std-3 on both new
+  theorems, `axiom_budget_check.sh` exit 0, no vacuum hits. Commit `76a85cf4`, pushed.
+  **Canary C1 (Phase 1) is now CLOSED** — all three data families (`CConvChartGateDataWith`/
+  `CConvDerivativeDataWith`/`CConvEnvelopeDataWith`) compile with primed-only tokens in their `'`
+  instantiations. **Phase 3's proof-body-hardwiring risk (J4-321/J4-1179) remains UNRESOLVED** —
+  `SliceInterfaceInstantiation.hjoint_instantiated`/`HenvUInstantiation.henv_assembled`/`hdomS_assembled`/
+  `WitnessDerivMeasurability.g2_bundle_assembled` all hardwire `uniformInverseChart` in their PROOF
+  BODIES (not just statements), so Phase 1's data-structure forks alone do not make Phase 3's `D7`
+  (`GrandAssemblyReconPrimed.a1_R6_assembled'`) a mechanical reuse of the old proof — the next dispatch
+  after Phase 2 (D5/D6, expected trivial per the J4-1176 pre-check) must re-audit this before launching
+  D7, per Phase 3's own STOP condition ("if the proof needs a helper lemma D0 didn't already flag as
+  generic, re-audit before proceeding"). `a₁=R/6` remains STRICTLY CONDITIONAL on
+  `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
