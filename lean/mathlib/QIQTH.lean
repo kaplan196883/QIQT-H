@@ -7263,3 +7263,11 @@ import QIQTH.TripleHEmeasV5
 -- J4-237 hcarField2 fix visible at the capstone signature. Pure re-plumbing, same conclusion as v7.
 -- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.AssemblyV8Rethread
+-- J4-1156: Phase 1 of the newly-authorized chart-parametric rebuild campaign (per gpt-5.6-sol's 33rd
+-- consult). ChartFieldAmpWith/VanVleckGatedWitnessWith genericize the exactly-two root definitions
+-- that call `uniformInverseChart` DIRECTLY (`chartFieldAmp`, `vanVleckGatedWitness`) over an abstract
+-- chart `W`, with `rfl`-level compatibility bridges to the old chart and new instantiations at
+-- `uniformInverseChart'`. Pure Phase-1 scaffolding — does NOT touch `hWmeas` or narrow
+-- {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
+import QIQTH.ChartFieldAmpWith
+import QIQTH.VanVleckGatedWitnessWith

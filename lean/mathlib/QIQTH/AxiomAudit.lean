@@ -32038,4 +32038,26 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.AssemblyV8Rethread.a1_R6_assembled_v8
 #print axioms QIQTH.AssemblyV8Rethread.a1_R6_assembled_v8
 
+-- J4-1156: ChartFieldAmpWith/VanVleckGatedWitnessWith — Phase 1 of the newly-authorized chart-parametric
+-- rebuild campaign (per gpt-5.6-sol's 33rd consult, 2026-08-24). Genericizes the exactly-two root
+-- definitions that call `uniformInverseChart` DIRECTLY (`chartFieldAmp` in NormalFormDischarge.lean,
+-- `vanVleckGatedWitness` in ConvApproximants.lean) over an abstract chart `W`. Both `..._With` versions
+-- instantiated at the OLD chart are proved `rfl`-equal to the EXISTING banked definitions (compatibility
+-- bridges, Canary C0 passed), and both are also instantiated at the NEW derived-measurable chart
+-- `uniformInverseChart'` (`ChartFieldAmp'`/`vanVleckGatedWitness'`) — pure Phase-1 scaffolding, does NOT
+-- discharge hWmeas or narrow {hDuhamel,hDConv,hCConv}. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatResidualBound.chartFieldAmpWith
+#print axioms QIQTH.HeatResidualBound.chartFieldAmpWith
+#check @QIQTH.HeatResidualBound.chartFieldAmpWith_uniformInverseChart
+#print axioms QIQTH.HeatResidualBound.chartFieldAmpWith_uniformInverseChart
+#check @QIQTH.HeatResidualBound.chartFieldAmp'
+#print axioms QIQTH.HeatResidualBound.chartFieldAmp'
+#check @QIQTH.HeatResidualBound.vanVleckGatedWitnessWith
+#print axioms QIQTH.HeatResidualBound.vanVleckGatedWitnessWith
+#check @QIQTH.HeatResidualBound.vanVleckGatedWitnessWith_uniformInverseChart
+#print axioms QIQTH.HeatResidualBound.vanVleckGatedWitnessWith_uniformInverseChart
+#check @QIQTH.HeatResidualBound.vanVleckGatedWitness'
+#print axioms QIQTH.HeatResidualBound.vanVleckGatedWitness'
+
 end QIQTH.AxiomAudit
