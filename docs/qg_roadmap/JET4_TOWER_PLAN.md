@@ -18832,3 +18832,57 @@ external `C` in `a1_R6_assembled_v2'`'s body (Canary D2); and the kernel-identit
 `vanVleckGatedWitness g gi hChr hK S a b = gatedKernel K S (globalCutoffParametrixWitnessN 1 ...) a b
 (uniformInverseChart ...)` (Canary D0) — all before committing to Layer A's construction. `a₁=R/6`
 remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-1169 — AUDIT (NO NEW BANKED LEAN FILE): dispatch 20, Phase 0 of the capstone-signature redesign plan (`CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`, J4-1168) — D0/D2 canaries both PASSED cleanly, `hK0`/`hS0` question resolved
+
+**Task.** Per the plan's own Phase 0 scope and J4-1168's recorded next-step: fresh binder-type read of
+`hK0`/`hS0` in `a1_R6_assembled_v2'` vs. `hmemS0`/`hopenS0` from `GateOpennessExport
+.gatedWitnessN1_package_open`; grep-audit every occurrence of external `C` in `a1_R6_assembled_v2'`'s
+body (Canary D2); kernel-identity check (Canary D0) — all BEFORE committing to Layer A's construction.
+
+**D0 (SameKernel) — PASSED, stronger than anticipated.** `vanVleckGatedWitness g gi hChr hK S a b` is
+DEFINITIONALLY `gatedKernel K S (globalCutoffParametrixWitnessN 1 (vanVleck g) (transportCoeff
+(transportOp (vanVleck g) g gi)) a b (uniformInverseChart g gi hChr hK))` — the `def` body itself,
+verbatim (`ConvApproximants.lean:161-166`) — and that expression is literally the `H` the J4-774
+package builds internally (`GateOpennessExport.gatedWitnessN1_package_open`,
+`GateOpennessExport.lean:387-393`, and the discharge theorem's own `let H := ...` at
+`GatedGlobalWitnessN1CapstoneEbdDischarged.lean:114-116`). Verified by a compiling `rfl` in a throwaway
+check file — no `simp`, no transport, no side conditions.
+
+**D2 (CDependency) — PASSED cleanly.** Bounded `a1_R6_assembled_v2'`'s exact theorem body
+(`RightInverseGeneral.lean:164` to the next top-level `theorem` at line 357) and grepped every `\bC\b`
+occurrence: only the binder declaration (`C : ℝ`/`hCnn : 0 ≤ C`), `hEboundFull`'s statement, the two
+`_of_banked` calls (`endpointData_of_banked`/`interchangeData_of_banked`, both the `EndpointData`
+type-ascription `have` and the call site), and one pass-through into the older unprimed
+`a1_R6_assembled_v2`. Zero occurrences inside any of the ~50 other independent hypotheses (`core`,
+`chart`, `env`, `hgD1`, `A₀/A₁/C_L/D0/D1/E₀/E₁`, etc.) — confirms Sol's classification exactly, no
+hidden downstream `C`-dependency.
+
+**Bonus finding — the `hK0`/`hS0` question (flagged "not yet confirmed" in J4-1168) is now resolved.**
+`gatedWitnessN1_package_open` exports `hmemS0 : (0:Point n) ∈ K → (0:Point n) ∈ S 0`
+(`GateOpennessExport.lean:394`); applying it to the external `hK0` produces `hS0 : (0:Point n) ∈ S 0` at
+EXACTLY the type `a1_R6_assembled_v2'` demands (its binder `(hS0 : (0 : Point n) ∈ S 0)`,
+`RightInverseGeneral.lean:168`) — verified by a compiling `have hS0 : (0:Point n) ∈ S 0 := hmemS0 hK0` in
+the same throwaway file. So for Layer C: `K`/`hK`/`hK0` are RETAINED as genuine external inputs (`K` is
+never produced by the package — it stays a free `{K}`/`hK` in `gatedWitnessN1_package_open`'s own
+signature too), while `hS0` is DISCHARGED via `hmemS0 hK0`. This refines Sol's "(i) hK0/hS0 MAY discharge
+IF types match" to a confirmed "(i) hS0 DOES discharge cleanly; hK0 stays as a retained free input."
+
+**No STOP triggered.** Both canaries came back exactly as the plan hoped — no hidden wall, no
+re-sizing, no fresh Sol consult needed (the canary-discipline escalation rule applies to *unanticipated*
+findings; both of these were anticipated-and-clean). Throwaway check file (`chk_d0.lean`, two `example`s
++ one `#print axioms` on the already-banked `gatedWitnessN1_package_open`) compiled with `lake env lean`,
+0 errors; deleted after confirming, per protocol. NO new `.lean` file kept, no `QIQTH.lean`/
+`AxiomAudit.lean` edit, no `axiom_budget_check.sh` run needed (nothing new banked in the library — the
+existing budget is untouched). `git status --porcelain | grep -i vacuum`: nothing. Checked TRUE highest
+`J4-NNN` (`1168`) and `cpNNN` (`1133`) freshly right before committing (`git fetch origin` confirmed
+local `HEAD` matched `origin/main`) — this entry correctly numbered `J4-1169`, memory checkpoint
+`cp1134`.
+
+**Readiness for Phase 1.** Per the plan's own phase table, Phase 0 (budgeted 2-3 dispatches) is complete
+in this ONE dispatch — D0/D2 both green, plus the bonus `hK0`/`hS0` resolution. Phase 1
+(`package_bound_on_horizon` + the kernel-identity bridge — now essentially free since D0 is literal
+`rfl`, not merely propositionally equal — + the now-decided `hK0`/`hS0` handling) is READY but is
+explicitly a SEPARATE phase-table line item; this dispatch does not start it, per the dispatcher's own
+"Phase 0 ONLY" brief and the plan's own phase boundaries. `a₁=R/6` remains STRICTLY CONDITIONAL on
+`{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.

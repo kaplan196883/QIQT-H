@@ -171,3 +171,20 @@ genuinely require unbounded-τ estimates, this entire plan pivots to a new analy
 than a plumbing one, and should be re-scoped before continuing.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## Dispatch log
+
+- **J4-1169 (Phase 0, this dispatch) — D0/D2 both PASSED, no STOP.** D0 (SameKernel): PASSED by literal
+  `rfl` (stronger than "`rfl` or one controlled `simp`" — `vanVleckGatedWitness` unfolds directly to the
+  package's `H`, `ConvApproximants.lean:161-166` vs `GateOpennessExport.lean:387-393`). D2
+  (CDependency): PASSED cleanly — grep-bounded audit of `a1_R6_assembled_v2'`'s exact body
+  (`RightInverseGeneral.lean:164-356`) found external `C` ONLY at the binder decl, `hEboundFull`, the
+  two `_of_banked` calls, and one pass-through to the older unprimed `a1_R6_assembled_v2` — zero hidden
+  occurrences in the ~50 other hypotheses, exactly as classified. **Bonus**: the `hK0`/`hS0` question
+  ((a)(i), "MAY discharge IF types match") is now CONFIRMED — `hmemS0 hK0 : (0:Point n) ∈ S 0` typechecks
+  at exactly `a1_R6_assembled_v2'`'s `hS0` binder type; `K`/`hK`/`hK0` are retained external inputs (`K`
+  is never package-produced), `hS0` is discharged via `hmemS0 hK0`. No new `.lean` file kept (throwaway
+  `chk_d0.lean` deleted after confirming both facts compile). Phase 0 complete in one dispatch (budgeted
+  2-3); Phase 1 is ready but NOT started here (separate phase-table line item, per this dispatch's
+  explicit "Phase 0 ONLY" scoping). Full detail: `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1169; memory
+  checkpoint `cp1134`.
