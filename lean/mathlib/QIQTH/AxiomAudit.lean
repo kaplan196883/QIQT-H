@@ -32010,4 +32010,17 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ThetaChartContDiff.uniformInverseChart'_contDiffAt
 #print axioms QIQTH.ThetaChartContDiff.uniformInverseChart'_contDiffAt
 
+-- J4-1149: ThetaChartGatedInstantiation — dispatch 3 of Sol's 4-dispatch plan to close hWmeas.
+-- Instantiates UniformChartRadius.gatedWitness_hEboundW_final_gen at the NEW canonical chart
+-- uniformInverseChart' (J4-1147/1148): uniformInverseChart'_huniformChart assembles the huniformChart
+-- shape at the fixed tube radius c₀ := min δg δθ δC / 2 (germ+ContDiffAt from J4-1147/1148, upgraded to
+-- eventual equality via openness of Metric.ball 0 c₀; the open/closure clause is W-independent and
+-- reused verbatim from uniformInverseChart_huniformChart), then
+-- gatedWitness_hEboundW_unconditional' delivers the hEboundW primitive for the chart with DERIVED joint
+-- measurability in p. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ThetaChartGatedInstantiation.uniformInverseChart'_huniformChart
+#print axioms QIQTH.ThetaChartGatedInstantiation.uniformInverseChart'_huniformChart
+#check @QIQTH.ThetaChartGatedInstantiation.gatedWitness_hEboundW_unconditional'
+#print axioms QIQTH.ThetaChartGatedInstantiation.gatedWitness_hEboundW_unconditional'
+
 end QIQTH.AxiomAudit

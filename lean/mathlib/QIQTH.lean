@@ -7244,3 +7244,11 @@ import QIQTH.ThetaMeasurableEmbedding
 -- uniformInverseChart' via pointwise agreement on the (open) tube image + ContDiffAt.congr_of_eventuallyEq.
 -- std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ThetaChartContDiff
+-- J4-1149: ThetaChartGatedInstantiation — dispatch 3 of Sol's 4-dispatch plan to close hWmeas.
+-- Instantiates the chart-generic summit UniformChartRadius.gatedWitness_hEboundW_final_gen at the NEW
+-- canonical chart uniformInverseChart' (J4-1147/1148): uniformInverseChart'_huniformChart assembles the
+-- huniformChart shape (germ+ContDiffAt from J4-1147/1148 upgraded to eventual equality; the open/closure
+-- clause is W-independent and reused verbatim from uniformInverseChart_huniformChart), then
+-- gatedWitness_hEboundW_unconditional' delivers the hEboundW primitive for the jointly-measurable-in-p
+-- chart. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ThetaChartGatedInstantiation
