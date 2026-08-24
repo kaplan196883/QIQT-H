@@ -31894,4 +31894,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.exists_chartCoherent_pfield_compatible_family
 #print axioms QIQTH.ExpMap.exists_chartCoherent_pfield_compatible_family
 
+-- J4-1133: ChartCoherentPFieldDiagonalFiniteCover — dispatch 11 (steps (3)+(4) of J4-1131's plan,
+-- restricted to the compact diagonal Δ K₀), per gpt-5.6-sol high eleventh consult.
+-- chartCoherent_pfield_diagonal_finite_cover: at the same uniform radius r₀ and family Pfield/U
+-- as J4-1132, extracts a FINITE t ⊆ K₀ such that the zero-velocity slice U · 0 k covers the whole
+-- compact diagonal Δ K₀ := {(q,q) : q ∈ K₀} — via uniformFlowExp_zero + openness (no uniform
+-- radius needed) + IsCompact.elim_finite_subcover_image. Sol also flagged (not built here):
+-- hcarField's literal quantifier forces S q = Set.univ for every q ∈ K, so literal hcarField is
+-- unreachable by any local seed-gluing construction. Does NOT cover any 2D tube, does NOT
+-- instantiate exists_measurable_glue_finset_field, does NOT identify with J4-1130's local
+-- correctness. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartCoherent_pfield_diagonal_finite_cover
+#print axioms QIQTH.ExpMap.chartCoherent_pfield_diagonal_finite_cover
+
 end QIQTH.AxiomAudit

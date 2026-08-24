@@ -7166,3 +7166,19 @@ import QIQTH.MeasurableGlueFinset
 -- compact K₀ ⊆ interior K by these U's (a new, not-yet-discharged geometric fact). std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartCoherentPFieldCompatibleFamily
+
+-- J4-1133: ChartCoherentPFieldDiagonalFiniteCover — dispatch 11 of the greenlit overlap-
+-- uniqueness bridge sub-campaign (steps (3)+(4) of J4-1131's six-step plan, restricted to the
+-- compact diagonal Δ K₀ per gpt-5.6-sol (high) eleventh consult). Sol's two decisive findings:
+-- (a) finite-subcover extraction needs NO uniform radius on the abstract U z₀ v₀ k = U0 ∩ V0 —
+-- Heine-Borel only consumes the cover, not any quantitative member size; (b) hcarField's literal
+-- quantifier (ChartJointBorel.lean) forces S q = Set.univ for every q ∈ K (instantiate
+-- w := (1,p,q) for arbitrary p), so literal hcarField is NOT achievable by any local seed-gluing
+-- construction — a structural finding about the TARGET, orthogonal to steps (3)/(4)'s
+-- buildability. chartCoherent_pfield_diagonal_finite_cover: the zero-velocity slice U · 0 k
+-- covers Δ K₀ := {(q,q) : q ∈ K₀} "for free" via uniformFlowExp_zero + openness;
+-- IsCompact.elim_finite_subcover_image extracts a genuine finite subfamily t ⊆ K₀. Does NOT
+-- cover any 2D tube/neighbourhood, does NOT instantiate exists_measurable_glue_finset_field
+-- (step 5), does NOT identify with J4-1130's local correctness (step 6). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartCoherentPFieldDiagonalFiniteCover
