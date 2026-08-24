@@ -32083,4 +32083,40 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HeatResidualBound.witnessFieldDeriv2'
 #print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2'
 
+-- J4-1158: WitnessFieldDerivConsumersWith — Phase 2 Task B + Canary C1 of the chart-parametric rebuild
+-- campaign. Genericizes the `EngineInstantiation.lean` consumer theorems whose statement names
+-- `witnessFieldDeriv`/`witnessFieldDeriv2` (center identity, stacking identity, off-gate vanishing ×2,
+-- on-gate first-derivative formula, on-gate factorized domination) over the abstract chart `W`,
+-- threading through `WitnessFieldDerivWith`/`ChartFieldAmpWith`. Supplies CANARY C1
+-- ("FirstDerivativeDiamond"): `witnessFieldDeriv'_gate_eq`, instantiating the generic on-gate formula
+-- at `uniformInverseChart'` — the FIRST genuine relational theorem connecting a PRIMED witness
+-- derivative to `chartFieldAmp'`. CANARY RESULT: PASS, closed cleanly with no extra machinery (no
+-- global chart reachability, no global old/new chart equality, no bounded-tube agreement argument, no
+-- global `ContDiff` beyond the caller-supplied local `hJetV`/`hAmp1`) — this worked because
+-- `gaussComp_hasDerivAt_line`/`gaussComp_pd` (`ChartJetHessian.lean`) and `gatedKernel_apply_of_mem`/
+-- `gatedKernel_apply_of_notMem` (`GlobalHunifAssembly.lean`) were ALREADY chart-generic. Does NOT
+-- genericize `witness_secondOrder_interchange` (needs a `heatConvFrozenWith`, Phase 3/4 territory, out
+-- of scope for this dispatch). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatResidualBound.vanVleckGatedWitnessWith_gate_apply
+#print axioms QIQTH.HeatResidualBound.vanVleckGatedWitnessWith_gate_apply
+#check @QIQTH.HeatResidualBound.witnessSecondXDerivWith
+#print axioms QIQTH.HeatResidualBound.witnessSecondXDerivWith
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv2With_center
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2With_center
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv2With_eq_pd_witnessFieldDerivWith
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2With_eq_pd_witnessFieldDerivWith
+#check @QIQTH.HeatResidualBound.witnessFieldDerivWith_offGate_eq_zero
+#print axioms QIQTH.HeatResidualBound.witnessFieldDerivWith_offGate_eq_zero
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv2With_offGate_eq_zero
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv2With_offGate_eq_zero
+#check @QIQTH.HeatResidualBound.witnessFieldDerivWith_gate_eq
+#print axioms QIQTH.HeatResidualBound.witnessFieldDerivWith_gate_eq
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv'_gate_eq
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv'_gate_eq
+#check @QIQTH.HeatResidualBound.witnessFieldDerivWith_gate_abs_le
+#print axioms QIQTH.HeatResidualBound.witnessFieldDerivWith_gate_abs_le
+#check @QIQTH.HeatResidualBound.witnessFieldDeriv'_gate_abs_le
+#print axioms QIQTH.HeatResidualBound.witnessFieldDeriv'_gate_abs_le
+
 end QIQTH.AxiomAudit

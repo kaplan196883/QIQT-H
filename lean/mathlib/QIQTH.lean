@@ -7279,3 +7279,11 @@ import QIQTH.VanVleckGatedWitnessWith
 -- definitional threading, mirroring Phase 1's shape exactly. Does NOT touch `hWmeas` or narrow
 -- {hDuhamel,hDConv,hCConv}. std-3. NOT a₁=R/6.
 import QIQTH.WitnessFieldDerivWith
+-- J4-1158: Phase 2 Task B + Canary C1 of the chart-parametric rebuild campaign.
+-- WitnessFieldDerivConsumersWith genericizes the EngineInstantiation.lean consumer theorems whose
+-- statement names witnessFieldDeriv/witnessFieldDeriv2 (Task B), AND supplies Canary C1
+-- ("FirstDerivativeDiamond"): witnessFieldDeriv'_gate_eq, the first genuine relational theorem
+-- connecting a PRIMED witness derivative to chartFieldAmp'. CANARY RESULT: PASS, closed cleanly with
+-- no extra machinery. Does NOT genericize witness_secondOrder_interchange (needs heatConvFrozenWith,
+-- out of scope). std-3. NOT a₁=R/6.
+import QIQTH.WitnessFieldDerivConsumersWith
