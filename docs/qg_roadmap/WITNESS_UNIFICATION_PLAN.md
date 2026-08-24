@@ -303,3 +303,30 @@ surprise early. Freeze after C0. **Resume Phase 1+ only when a named downstream 
   **This dispatch authorizes NEITHER witness-unification Phase 1+ NOR the consumer-creation dispatches
   Sol recommends** — both require explicit user/follow-up authorization. No Lean written.
   `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+- **J4-1178 — LEAN: `A1R6PublicClaim.lean` — the FIRST real consumer of the capstone tower, satisfying
+  Sol's 41st-consult precondition for reconsidering this file.** Full details in `JET4_TOWER_PLAN.md`.
+  With a named consumer now in place, Phase 1+ of THIS plan was explicitly re-authorized (by the
+  dispatcher, outside this file) for the next dispatch.
+
+- **J4-1179 (this dispatch) — LEAN: Phase 1, D2 — `CConvChartGateDataWith.lean`.** Built
+  `CConvChartGateDataWith` (generic over an abstract chart `W` AND an abstract witness-field-derivative
+  `WD`), `chartGateDataWith_iff_old` (the `Iff` compatibility bridge to the existing
+  `CConvChartGateData` at the old concrete values), and `CConvChartGateData'` (the primed instantiation
+  at `uniformInverseChart'`/`witnessFieldDeriv'`). **Scope correction:** D2 as literally worded above
+  ("2 hardwired fields") undercounts — direct re-read finds FIVE fields mention chart/witness machinery
+  (`hVmapMeas`/`hCover`/`hChartB`/`hSliceData`'s `radialCutoff` leg/`hKmeas`), matching an independent
+  EARLIER finding (J4-321, `ChartParamFacadeVariant.lean`/`CConvChartGateDataW`, a different chart `Wg`)
+  that neither this plan's pre-check nor the 40th/41st Sol consults cross-referenced. Judged NOT a STOP
+  trigger (same known fork point, more completely counted; the earlier file already proved the full
+  fork closes cleanly for a different chart). **Also surfaced, unresolved:** J4-321 independently found
+  the downstream consumer (`SliceInterfaceInstantiation.hjoint_instantiated`/`HenvUInstantiation`/
+  `WitnessDerivMeasurability`) hardwires `uniformInverseChart` in its PROOF BODY, not just its
+  statement — direct prior evidence against this plan's own Phase 3 (D7) assumption ("none of those
+  lemmas are chart/witness-hardwired below the structure layer"); raises Phase 3's risk above this
+  plan's stated expectation, to be re-audited when Phase 3 is reached, per Phase 3's own STOP condition.
+  Build/audit clean (std-3, no sorryAx); Canary C1's "no unprimed token" grep-scan confirmed on
+  `CConvChartGateData'` directly. Commit `5d4118c4`, pushed. **Canary C1 not yet fully closed** — D3
+  (`CConvDerivativeDataWith`/`'`) and D4 (`CConvEnvelopeDataWith`/`'`, itself re-auditing for the SAME
+  undercount risk against its own literal field list) remain. `a₁=R/6` remains STRICTLY CONDITIONAL on
+  `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
