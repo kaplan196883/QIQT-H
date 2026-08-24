@@ -18772,3 +18772,63 @@ Verdict for the next session. hWmeas stays the sole open wall for the concrete t
 **Verdict.** NO cheap (1-3 dispatch) path exists. The sub-agent's promising-looking "verdict C" wrapper was refuted by adversarial review before any Lean was written — correctly, per this campaign's no-force/extreme-skepticism discipline. This check adds no new tractable shortcut; it CONFIRMS J4-1166's sizing stands (capstone-signature redesign = genuine sub-campaign, not a quick win) and additionally identifies a second concrete defect (`C`-indexing mismatch) that any future redesign attempt must handle from the outset. No new `.lean` file, no build, no axiom-check (nothing to check — no new theorem, per protocol for a negative-finding-only outcome). `git status --porcelain | grep -i vacuum`: nothing. Checked TRUE highest `J4-NNN` (`1166`) and `cpNNN` (`1131`) freshly right before this entry (`git fetch origin` confirmed local `HEAD` matched `origin/main`) — this entry correctly numbered `J4-1167`, memory checkpoint `cp1132`.
 
 **Recommendation.** Treat the current state — `tripleHEmeas_concrete_v4'`'s genuine `hWmeas` discharge for the primed chart, standing in isolation, NOT wired to the live capstone `a1_R6_assembled_v2'` — as the honest frontier for this thread. The next real move, if authorized, is the capstone-signature redesign task J4-1166 already scoped (now with the `C`-indexing defect folded in as a known sub-issue), not a bridging shortcut. `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-1168 — PLAN (NO NEW LEAN FILE): dispatch 19, opens the "repaired path" repair work J4-1167 flagged — `docs/qg_roadmap/CAPSTONE_SIGNATURE_REDESIGN_PLAN.md` produced via 38th `gpt-5.6-sol` consult against the exact J4-774 discharge and `a1_R6_assembled_v2'` signatures
+
+**Task.** Per the dispatcher's brief: read J4-1156–1167 in full, pin the exact existential shape of
+`GatedGlobalWitnessN1CapstoneEbdDischarged.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged`
+(J4-774) and the FULL current signature of `RightInverseGeneral.a1_R6_assembled_v2'` (~65 hypotheses),
+then consult `gpt-5.6-sol` for a concrete, ordered, dispatch-sized plan for the "repaired path" (destruct
+the existential first, then instantiate a redesigned capstone at that specific tuple) J4-1167 sketched
+but did not size in detail.
+
+**Signatures pinned by direct read.** J4-774's discharge concludes `∃ a b, 0<a∧a<b ∧ ∃ S, (let H := ...;
+<5 hyps> → <a₁=R/6 pair for H>)`, with `a, b, C, S` sourced internally from `gatedWitnessN1_package_open`
+and a `(0,t']`-LOCAL affine-in-ceiling bound `hbound : ∀ t' τ p q, 0<τ→τ≤t'→|heatOp g gi H τ p q| ≤
+(C*(1+t'))*baseKernelW 2 0 τ p q`. `a1_R6_assembled_v2'` (`RightInverseGeneral.lean:164-`) has ~65
+hypotheses; `hEboundFull` (the global `∀τ>0` bound at externally-fixed `C`) is consumed ONLY by two
+calls, `endpointData_of_banked g gi W t C hEboundFull hEzeroE hEmeas` and `interchangeData_of_banked g gi
+W t C hCnn hEboundFull hEzeroE hEmeas ht` (`W := vanVleckGatedWitness g gi hChr hK S a b`) — confirmed by
+direct read of the proof body, matching J4-1166's Finding 3 exactly. The other ~50 hypotheses (`Bs/Ba/Bd/
+Cf/metric/chart/source/derivData/env/hgD1/T/U/r₀/τ₀/u₀/u₁/A₀/A₁/C_L/D0/D1/E₀/E₁/...`) are independent
+free real-number/analytic witnesses at the SAME externally-fixed `a b S`, almost none mentioning `C`.
+
+**38th Sol consult (`gpt-5.6-sol`, high effort), given both exact signatures verbatim.** Verdict: the
+naive "apply the existing existential to the existing fixed-tuple capstone" is confirmed impossible
+(matches J4-1167); the viable shape is a THREE-LAYER redesign — Layer A `a1_R6_assembled_local` (copy of
+`v2'` with ONLY `C/hCnn/hEboundFull` replaced by `CT/hCTnn/hEbound_t`, all ~50 other hyps UNCHANGED),
+Layer B (`v2'` rebuilt as a thin wrapper around Layer A, regression test), Layer C
+`a1_R6_assembled_v3` (destructs the package existential first, sets `CT := Cpkg*(1+t)`, re-exposes ALL
+~50 other hypotheses as caller inputs UNDER the existential — NOT discharged by the package). Sol was
+explicit and unsoftened on the `C` question: **no single global constant uniform over ALL `τ>0` follows
+from the package's bound by replumbing** (`Cpkg*(1+τ) ≤ C_ext ∀τ>0` forces `Cpkg=0`); the honest fix is
+the `(0,t]`-local `CT`, and NOT existentially quantifying `C` publicly since none of the retained ~50
+hyps reference it. Supplied 11 named canaries (D0-D10: SameKernel/HorizonBound/CDependency/
+EndpointLocal/InterchangeLocal/BackCompat/SingleOpening/DependentTail/IndependentConstants/
+NonHollowIntegration/AxiomCanary — D4 InterchangeLocal flagged as the PRINCIPAL early-warning risk) and
+7 phases sized 24-40 dispatches for the API redesign alone (Phases 0-5), +10-20 more for migrating one
+real downstream consumer through the ~50 independent hypotheses (Phase 6, NOT automatic transport — Sol
+explicit that building Layer C without a committed consumer "would be mostly signature ceremony, not
+capstone progress"). Total realistic range 34-60 dispatches, matching and refining J4-1166/1167's prior
+sizing rather than beating it.
+
+**Built.** `docs/qg_roadmap/CAPSTONE_SIGNATURE_REDESIGN_PLAN.md` — full phased plan, canary table, exact
+target signatures for all three layers, and Sol's unsoftened worth-doing assessment, in the
+`CHART_PARAMETRIC_REBUILD_PLAN.md` format. NO new `.lean` file this dispatch — per the dispatcher's own
+"plan-only is a fine and expected outcome" instruction, and because the plan itself (Phase 0/D0-D2) calls
+for a fresh binder-type read of `hK0`/`hS0`/`hEmeas` and a kernel-identity `rfl` check BEFORE any
+construction commit, which is Phase-0 audit work belonging to the NEXT dispatch, not a standalone
+provable lemma this dispatch could complete honestly in isolation. No build, no axiom-check (nothing to
+check — no new theorem). `git status --porcelain | grep -i vacuum`: nothing. Checked TRUE highest
+`J4-NNN` (`1167`) and `cpNNN` (`1132`) freshly right before committing (`git fetch origin` confirmed
+local `HEAD` matched `origin/main` at `e98b04f5`) — this entry correctly numbered `J4-1168`, memory
+checkpoint `cp1133`.
+
+**Next dispatch target.** Phase 0 of the new plan: fresh binder-type read of `hK0`/`hS0` in
+`a1_R6_assembled_v2'` vs. `hmemS0`/`hopenS0` in the J4-774 discharge (likely `hS0 = hmemS0 hK0`, matching
+the pattern already visible at `GatedGlobalWitnessN1CapstoneEbdDischarged.lean:167-168`'s
+`hmemS0 hK0` usage, but NOT yet confirmed as a standalone lemma); a grep-audit of every occurrence of
+external `C` in `a1_R6_assembled_v2'`'s body (Canary D2); and the kernel-identity check
+`vanVleckGatedWitness g gi hChr hK S a b = gatedKernel K S (globalCutoffParametrixWitnessN 1 ...) a b
+(uniformInverseChart ...)` (Canary D0) — all before committing to Layer A's construction. `a₁=R/6`
+remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
