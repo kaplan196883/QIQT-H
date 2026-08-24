@@ -31883,4 +31883,15 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.exists_measurable_glue_finset_field
 #print axioms QIQTH.ExpMap.exists_measurable_glue_finset_field
 
+-- J4-1132: ChartCoherentPFieldCompatibleFamily — dispatch 10 (geometric half, steps (1)+(2) of
+-- J4-1131's plan), per gpt-5.6-sol high tenth consult. exists_chartCoherent_pfield_compatible_
+-- family: total Pfield/U functions indexed by (z₀,v₀,k), open/measurable U, measurable Pfield,
+-- derivative-witnessing on the admissible domain, plus pairwise agreement on U-overlaps for
+-- shared k — proved directly via HasDerivAt.unique (J4-1130's Pfield already witnesses the same
+-- global uniformInverseChart, so no J4-1128 germ-bridging needed). Does NOT establish coverage of
+-- any compact K₀ ⊆ interior K. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.exists_chartCoherent_pfield_compatible_family
+#print axioms QIQTH.ExpMap.exists_chartCoherent_pfield_compatible_family
+
 end QIQTH.AxiomAudit

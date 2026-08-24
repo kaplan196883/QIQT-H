@@ -7151,3 +7151,18 @@ import QIQTH.ChartCoherentDerivativeFieldRepresentative
 -- compactness, no charts, no K, no seeds referenced. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
 -- {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.MeasurableGlueFinset
+
+-- J4-1132: ChartCoherentPFieldCompatibleFamily — dispatch 10 of the greenlit overlap-uniqueness
+-- bridge sub-campaign (the geometric half, steps (1)+(2) of J4-1131's six-step plan). Per
+-- gpt-5.6-sol (high) tenth consult: bundle "generalize J4-1130's single-seed U/Pfield to
+-- arbitrary seeds" + "pairwise compatibility on overlaps" into one self-contained family
+-- theorem, deferring compactness/coverage (steps (3)-(6)). A simplification found while
+-- implementing: since J4-1130's Pfield already witnesses the SAME global uniformInverseChart
+-- (not a per-seed chartCoherent), pairwise agreement follows directly via HasDerivAt.unique,
+-- with no need for J4-1128's germ-bridging machinery. exists_chartCoherent_pfield_compatible_
+-- family produces total Pfield/U functions indexed by (z₀,v₀,k) satisfying openness,
+-- measurability, seed-membership, and derivative-witnessing on the admissible domain, plus
+-- pairwise Pfield-agreement on U-overlaps for shared k. Does NOT establish coverage of any
+-- compact K₀ ⊆ interior K by these U's (a new, not-yet-discharged geometric fact). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartCoherentPFieldCompatibleFamily
