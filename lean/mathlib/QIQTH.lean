@@ -7294,3 +7294,11 @@ import QIQTH.WitnessFieldDerivConsumersWith
 -- vanVleckGatedWitnessWith/witnessFieldDerivWith/witnessFieldDeriv2With for the concrete roots. std-3.
 -- NOT a₁=R/6.
 import QIQTH.WitnessSecondOrderInterchangeWith
+-- J4-1160 (Phase 4 opening dispatch): GatedTauRepProdSWith — Canary C2 ("FirstHWMConsumerPrime").
+-- Genericizes the EARLIEST hWmeas-consuming audit theorem in the HgateSatAudit/GatedRepSFix/
+-- HEmeasBorelAudit import-order lineage, HgateSatAudit.gatedTauRepProdS_measurable, over an abstract
+-- chart W + hWmeas hypothesis (gatedTauRepProdSWith_measurable), then instantiates the primed copy at
+-- W := uniformInverseChart' g gi hC hK c, discharging hWmeas via uniformInverseChart'_joint_measurable
+-- (gatedTauRepProdS'_measurable). CANARY C2 RESULT: PASS — hWmeas used only for raw measurability
+-- composition, shapes matched cleanly, mechanical substitution of the old proof. std-3. NOT a₁=R/6.
+import QIQTH.GatedTauRepProdSWith

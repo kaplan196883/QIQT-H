@@ -32135,4 +32135,24 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HeatResidualBound.witness_secondOrder_interchange'
 #print axioms QIQTH.HeatResidualBound.witness_secondOrder_interchange'
 
+-- J4-1160 (Phase 4 opening dispatch of the chart-parametric rebuild campaign):
+-- GatedTauRepProdSWith — Canary C2 ("FirstHWMConsumerPrime") from
+-- `docs/qg_roadmap/CHART_PARAMETRIC_REBUILD_PLAN.md`. Genericizes the EARLIEST hWmeas-consuming audit
+-- theorem in the HgateSatAudit/GatedRepSFix/HEmeasBorelAudit import-order lineage
+-- (`HgateSatAudit.gatedTauRepProdS_measurable`) over an abstract chart `W` + `hWmeas : Measurable (fun
+-- w => W w.2.2 w.2.1)` (`gatedTauRepProdSWith_measurable`), then instantiates the primed copy at
+-- `W := uniformInverseChart' g gi hC hK c`, discharging `hWmeas` via
+-- `uniformInverseChart'_joint_measurable` (J4-1147) — no free chart-measurability hypothesis remains
+-- (`gatedTauRepProdS'_measurable`). CANARY C2 RESULT: **PASS** — the shapes matched exactly (same
+-- `w.2.2`/`w.2.1` variable order, same ambient type), and `hWmeas` was used ONLY for raw measurability
+-- composition, never for a hidden geometric/reachability fact — mechanical substitution of the old
+-- proof, mirroring J4-1158's Canary C1 pattern. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HgateSatAudit.gatedTauRepProdSWith_uniformInverseChart
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdSWith_uniformInverseChart
+#check @QIQTH.HgateSatAudit.gatedTauRepProdSWith_measurable
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdSWith_measurable
+#check @QIQTH.HgateSatAudit.gatedTauRepProdS'_measurable
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdS'_measurable
+
 end QIQTH.AxiomAudit
