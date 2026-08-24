@@ -138,7 +138,9 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
 - **C3 — PrimeHEmeasAudit** (target dispatch 16–20): a complete primed `HEmeasBorelAudit`-level result
   with no raw `hWmeas` hypothesis. STOP-and-resize (not necessarily abandon) if some bundled audit field
   is definitionally tied to the old concrete roots in a way that resists genericization without a
-  structural redesign of the audit type itself.
+  structural redesign of the audit type itself. **PASSED, dispatch 15 (J4-1163/1164), AHEAD of the
+  target window (16–20).** `TripleHEmeasConcreteV4GenWith.tripleHEmeas_concrete_v4'` — see the dispatch
+  log entry below.
 - **C4 — TripleHEPrime** (target dispatch 22–28): `tripleHEmeas_concrete_v4'`, concluding about the
   primed chain, built from `uniformInverseChart'_joint_measurable`. STOP if the proof can only close by
   invoking the OLD concrete theorem and then demanding global old/new witness equality.
@@ -253,5 +255,22 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   assembly) remain un-genericized; assembling the primed triple once all three conjuncts are done IS
   Canary C3. std-3, full build 10429 jobs 0 err, axiom budget 0. Commit `1ddf8934`. Next dispatch target:
   genericize `GatedRepSFix.lean` §B the identical way, then assemble the primed triple (Canary C3).
+
+- **J4-1163/1164 (dispatch 15)** — `QIQTH/GatedMixed2RepSGenWith.lean` genericizes `GatedRepSFix` §B
+  (the mixed second field-`pd` v4 carrier, conjunct (3)) over an abstract chart `W`, including a missing
+  prerequisite (`witnessMixedWith_gate_eq`/`_offGate_eq_zero`/`_eq_zero_of_nonpos`, a mechanical
+  substitution off `ChartJetHessianMixed`'s already-generic `gaussComp_pd_pd_mixed`/
+  `gaussComp_amp_pd_pd_mixed`) that had not existed before this dispatch (unlike the diagonal case,
+  whose analogous prerequisite J4-1158 had already built). Built clean first attempt — no obstruction.
+  Then `QIQTH/TripleHEmeasConcreteV4GenWith.lean` assembles all three now-primed conjuncts
+  (`tauDeriv_prod_stronglyMeasurable_v4With` J4-1161, `firstFieldPd_prod_stronglyMeasurable_v4With`
+  J4-1162, `secondFieldPd_prod_stronglyMeasurable_v4With` this dispatch) plus `hgi`/`hchr` into
+  `tripleHEmeas_concrete_v4'` via `HEmeasBorelAudit.tripleHEmeas_of_surface`, sharing a SINGLE
+  `uniformInverseChart'_joint_measurable`-derived `hWmeas` across all three (avoiding any cross-`δ₀`
+  reconciliation). **CANARY C3 RESULT: PASS** — a complete primed `HEmeasBorelAudit`-level triple with
+  no raw `hWmeas` hypothesis, reached at dispatch 15 (ahead of the target window 16–20). Both files
+  std-3, full build 10428/10431 jobs 0 err, axiom budget 0. Commit `470e19bf`. Next dispatch target:
+  Phase 5 — feed `tripleHEmeas_concrete_v4'` into `gatedWitness_hEboundW_final_gen` (or its analogue)
+  toward the primed unconditional summit (Canary C4/C5 territory).
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
