@@ -188,3 +188,18 @@ than a plumbing one, and should be re-scoped before continuing.
   2-3); Phase 1 is ready but NOT started here (separate phase-table line item, per this dispatch's
   explicit "Phase 0 ONLY" scoping). Full detail: `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1169; memory
   checkpoint `cp1134`.
+
+- **J4-1170 (Phase 1, this dispatch) — D0/D1 both PASSED, no STOP.** New file
+  `QIQTH/PackageHorizonBound.lean`: `package_bound_on_horizon` (Canary D1, the elementary `hPkgBound t`
+  instantiation — confirmed elementary by finding the J4-774 discharge theorem's own proof already
+  performs this exact step inline, unnamed); `vanVleckGatedWitness_eq_gatedKernel` (Canary D0, now a
+  NAMED reusable `rfl` lemma, not just a Phase-0 throwaway check); `gatedWitnessN1_horizon_bound` (a
+  non-vacuous single-opening demonstration composing both directly on `gatedWitnessN1_package_open`,
+  accepted by Lean via defeq with no explicit `rw`). `hK0`/`hS0` needed no new lemma — already resolved
+  in Phase 0. Full build (10431 jobs) 0 errors, std-3, budget 0. **Phase 2 readiness observation**
+  (not acted on): `InterchangeLocalRebase.lean` / `LeviInterchangeTrunc.lean` / `IterEMeasurable.lean`
+  already contain TRUNCATED/local siblings of the analytic machinery `endpointData_of_banked`/
+  `interchangeData_of_banked` (D3/D4 targets) build on — this may substantially de-risk Sol's flagged D4
+  "principal early-warning checkpoint," but is unverified against the exact `_of_banked` call shapes and
+  is explicitly left for Phase 2 to confirm. Full detail: `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1170;
+  memory checkpoint `cp1135`; commit `778b3114`.

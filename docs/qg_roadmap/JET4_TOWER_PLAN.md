@@ -18886,3 +18886,61 @@ in this ONE dispatch — D0/D2 both green, plus the bonus `hK0`/`hS0` resolution
 explicitly a SEPARATE phase-table line item; this dispatch does not start it, per the dispatcher's own
 "Phase 0 ONLY" brief and the plan's own phase boundaries. `a₁=R/6` remains STRICTLY CONDITIONAL on
 `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-1170 — LEAN: dispatch 21, Phase 1 of the capstone-signature redesign plan (`CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`, J4-1168) — Canaries D0/D1 both PASSED, new file `QIQTH/PackageHorizonBound.lean`
+
+**Task.** Per the plan's Phase 1 line ("`package_bound_on_horizon` + kernel-identity bridge +
+`hK0`/`hS0` discharge decision → D0/D1 green"): build the elementary horizon-instantiation bridge, bank
+a NAMED kernel-identity lemma (D0 was previously verified only inside a Phase-0 throwaway check file),
+and produce one non-vacuous demonstration composing both directly on top of
+`GateOpennessExport.gatedWitnessN1_package_open`.
+
+**Findings.** `gatedWitnessN1_package_open`'s `hbound` field is ALREADY stated as
+`∀ (t' : ℝ), ∀ τ p q, 0 < τ → τ ≤ t' → |heatOp g gi H τ p q| ≤ (C * (1 + t')) * baseKernelW 2 0 τ p q`
+— universally quantified over the horizon, exactly the shape the plan anticipated. Confirmed the
+`GatedGlobalWitnessN1CapstoneEbdDischarged.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged`
+proof itself already performs this exact `hbound t τ p q hτ hτt` instantiation inline (unnamed, not
+banked as a standalone reusable lemma) — independent confirmation the step is elementary, matching D1's
+budgeted difficulty.
+
+**What was built** (`QIQTH/PackageHorizonBound.lean`, new file):
+- `package_bound_on_horizon` — Canary D1: `fun τ p q hτ hτt => hPkgBound t τ p q hτ hτt`, generic over
+  the kernel `H` (not tied to the package's concrete `gatedKernel …` shape), so it is directly reusable
+  wherever an affine-in-ceiling `∀t'`-bound needs specializing.
+- `vanVleckGatedWitness_eq_gatedKernel` — Canary D0, now a NAMED lemma (`rfl`), reconfirming Phase 0's
+  (J4-1169) throwaway-only finding as banked, citable content.
+- `gatedWitnessN1_horizon_bound` — opens `gatedWitnessN1_package_open`'s existential EXACTLY ONCE and
+  re-exposes, at a caller-fixed horizon `t`, the local bound stated at `vanVleckGatedWitness` (accepted
+  by Lean via defeq against the package's raw `gatedKernel …` statement — no explicit `rw`/`simp`
+  needed, confirming D0's kernel identity is usable "for free" at the type-checking level, not just as
+  a standalone `rfl` fact) together with the unchanged `hmemS0`/`hopenS0` gate exports. This is the
+  exact shape a future Layer-C `a1_R6_assembled_v3` (Phase 5, NOT built here) will consume to derive its
+  local `hEbound_t` slot.
+
+**hK0/hS0.** Already resolved in Phase 0 (bonus finding) — `hS0` discharges via `hmemS0 hK0`;
+`K`/`hK`/`hK0` remain genuine external inputs. No new lemma required for this half of the Phase-1 line
+item; `gatedWitnessN1_horizon_bound`'s conclusion deliberately keeps `hmemS0`/`hopenS0` (not a
+pre-discharged `hS0`) so a caller applies `hK0` at the point they actually have it, mirroring
+`a1_R6_assembled_v2'`'s own binder shape.
+
+**Phase 2 readiness note (observed while reading, NOT acted on — Phase 2 is a separate dispatch).**
+While reading `TruncatedDuhamelData.lean`'s `endpointData_of_banked`/`interchangeData_of_banked` (the
+D3/D4 targets), a search for existing LOCAL/truncated siblings turned up `InterchangeLocalRebase.lean`
+(`heatConv_leviSeries_interchange_local`, taking a `LeviSeriesLocalData E C T` bundle with a
+`(0,T]`-restricted majorant) and `IterEMeasurable.lean` / `LeviInterchangeTrunc.lean`
+(`iterConvIntegrableWOn_of_bound_baseMeas_trunc`, `IterConvIntegrableWOn`) — i.e. TRUNCATED/local
+analogues of both `_of_banked` consumers' underlying analytic machinery ALREADY EXIST elsewhere in the
+tree. This substantially de-risks Sol's flagged D4 "principal early-warning checkpoint" concern (does
+`InterchangeData` genuinely need unbounded-τ estimates) — the local machinery looks to already be
+banked, so Phase 2 may be closer to a wiring exercise than a fresh analytic campaign. This is an
+observation for the next dispatch to verify, not a claim that D3/D4 are already satisfied.
+
+**Build/audit.** `lake build QIQTH.PackageHorizonBound` (8719 jobs) and full `lake build QIQTH` (10430
+jobs, then 10431 after the `AxiomAudit.lean` entries) both 0 errors. Throwaway `chk1170.lean`
+`#print axioms` on all three new theorems confirmed std-3 exactly (`propext, Classical.choice,
+Quot.sound`), no `sorryAx`, no custom axioms; deleted after confirming.
+`bash scripts/axiom_budget_check.sh`: exit 0, raw axiom count 0 (budget 0), OK. `git status --porcelain
+| grep -i vacuum`: nothing. Checked TRUE highest `J4-NNN` (`1169`) and `cpNNN` (`1134`) freshly right
+before committing (`git fetch origin` confirmed local `HEAD` matched `origin/main`) — this entry
+correctly numbered `J4-1170`, memory checkpoint `cp1135`. Commit `778b3114`, pushed to `origin/main`.
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
