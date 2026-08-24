@@ -32268,4 +32268,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.LocalizedBankedData.interchangeData_of_banked_on_horizon
 #print axioms QIQTH.LocalizedBankedData.interchangeData_of_banked_on_horizon
 
+-- J4-1172: `CapstoneLocalAssembly.lean` — Phase 3 of the capstone-signature redesign plan, Canary D5
+-- (BackCompat) green. `a1_R6_assembled_local` (Layer A) copies `a1_R6_assembled_v2'` with
+-- `(C,hCnn,hEboundFull)` replaced by `(CT,hCTnn,hEbound_t)`; `a1_R6_assembled_v2'_via_local` (Layer B)
+-- reproves `a1_R6_assembled_v2'`'s EXACT signature/conclusion as a thin wrapper around Layer A. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.CapstoneLocalAssembly.a1_R6_assembled_local
+#print axioms QIQTH.CapstoneLocalAssembly.a1_R6_assembled_local
+#check @QIQTH.CapstoneLocalAssembly.a1_R6_assembled_v2'_via_local
+#print axioms QIQTH.CapstoneLocalAssembly.a1_R6_assembled_v2'_via_local
+
 end QIQTH.AxiomAudit

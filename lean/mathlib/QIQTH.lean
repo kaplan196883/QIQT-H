@@ -7370,3 +7370,14 @@ import QIQTH.PackageHorizonBound
 -- J4-206 `hInter_from_local_data`), zero new analytic content. std-3. NOT a₁=R/6. STRICTLY CONDITIONAL
 -- on {hDuhamel, hDConv, hCConv}, UNCHANGED.
 import QIQTH.LocalizedBankedData
+-- J4-1172 (Phase 3 of the capstone-signature redesign plan, Canary D5 — BackCompat): new file
+-- `QIQTH.CapstoneLocalAssembly`. `a1_R6_assembled_local` (Layer A) is a copy of
+-- `RightInverseGeneral.a1_R6_assembled_v2'` with `(C, hCnn, hEboundFull)` replaced by `(CT, hCTnn,
+-- hEbound_t)` — the every-ceiling-affine-in-`t'` family `LocalizedBankedData`'s two `_on_horizon`
+-- producers consume — all ~50 other hypotheses copied verbatim. `a1_R6_assembled_v2'_via_local`
+-- (Layer B, the D5 canary) has the EXACT SAME signature/conclusion as `a1_R6_assembled_v2'` and is
+-- proved as a thin wrapper around Layer A (restricting the global `hEboundFull` to the local shape via
+-- `C ≤ C*(1+t')`, `baseKernelW ≥ 0`) — a regression test confirming Layer A did not silently weaken
+-- anything. `RightInverseGeneral.lean` itself is NOT edited. std-3, no sorryAx. NOT a₁=R/6. STRICTLY
+-- CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.CapstoneLocalAssembly
