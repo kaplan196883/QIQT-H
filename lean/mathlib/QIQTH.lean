@@ -7211,3 +7211,13 @@ import QIQTH.ChartGateGluedFieldHasDerivAt
 -- would NOT share S). Does NOT build hcarField2, discharge PdiffAt, or discharge hOffS/hOffS2. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartGateGluedFieldHasDerivAtAllCoords
+-- J4-1140: ChartGateUniformTube — the uniform-tube kill/compress test (per J4-1139's decisive
+-- audit): proves POSITIVELY that S_c0 q := uniformFlowExp ... q '' Metric.ball 0 c0 ⊆ S q (the
+-- shrunk-intersection gate ⋂k fiberGate(Gk)q) for a single shared c0>0, ∀ q ∈ K0, via a
+-- compactness "tube lemma" (Metric.thickening + IsCompact.exists_thickening_subset_open on the
+-- diagonal of K0, finite-min over Fin n) combined with the ALREADY-BANKED uniform quadratic
+-- displacement bound (uniformFlowExp_displacement_bound, J4-96). Sets up transport of
+-- OffSVanishing.lean's hOffS_concrete/hOffS2_concrete (J4-235) onto S_∩ via gate-monotonicity
+-- (the elementary adapter step is DEFERRED to the next dispatch). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartGateUniformTube

@@ -31951,4 +31951,16 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_all_coords
 #print axioms QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_all_coords
 
+-- J4-1140: ChartGateUniformTube — the uniform-tube kill/compress test (per J4-1139's decisive
+-- audit): proves POSITIVELY, for a single shared c0>0, ∀ q ∈ K0, that the concrete flow-ball gate
+-- uniformFlowExp ... q '' Metric.ball 0 c0 is contained in S q (the shrunk-intersection gate
+-- ⋂k fiberGate(Gk)q from chartGate_concrete_S_construction), via a compactness "tube lemma"
+-- (Metric.thickening on the diagonal of K0, finite min over Fin n) combined with the
+-- already-banked uniform quadratic displacement bound (uniformFlowExp_displacement_bound, J4-96).
+-- Sets up (but does not yet execute) transport of OffSVanishing.lean's hOffS_concrete/
+-- hOffS2_concrete (J4-235) onto S_∩ via gate-monotonicity. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartGate_concrete_S_uniform_tube
+#print axioms QIQTH.ExpMap.chartGate_concrete_S_uniform_tube
+
 end QIQTH.AxiomAudit
