@@ -7136,3 +7136,18 @@ import QIQTH.ChartOverlapQfieldAgreementTwoSeeds
 -- gluing across many seeds = next dispatch) nor the Qfield/chartFieldAmp conjuncts. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartCoherentDerivativeFieldRepresentative
+
+-- J4-1131: MeasurableGlueFinset — dispatch 9 of the greenlit overlap-uniqueness bridge
+-- sub-campaign. Per gpt-5.6-sol (high) ninth consult: the full chart-specific piecewise/global
+-- gluing needs a NEW, not-yet-discharged prerequisite (a compact K₀ ⊆ interior K plus a strict
+-- gate-radius inequality c < r₀, for a genuine finite-subcover argument — interior K alone is
+-- only open, no finite subcover follows) and nontrivial plumbing extracting the finite chart
+-- family; Sol's recommended smallest first brick, built here: a wholly chart-agnostic,
+-- topology-free abstract lemma — exists_measurable_glue_finset glues finitely many
+-- pairwise-overlap-agreeing Measurable functions (arbitrary Finset index, arbitrary measurable
+-- spaces) into one global Measurable function agreeing with each input throughout its own set,
+-- via Finset.induction_on + iterated Set.piecewise (NOT a Nat.find-style selector, per Sol).
+-- exists_measurable_glue_finset_field specializes to the Pfield coordinate-field shape. No
+-- compactness, no charts, no K, no seeds referenced. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.MeasurableGlueFinset

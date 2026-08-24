@@ -31868,4 +31868,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_pfield_representative_single_seed
 #print axioms QIQTH.ExpMap.chartCoherent_pfield_representative_single_seed
 
+-- J4-1131: MeasurableGlueFinset — dispatch 9 of the greenlit overlap-uniqueness bridge
+-- sub-campaign. exists_measurable_glue_finset: a wholly abstract, chart-agnostic,
+-- topology-free lemma gluing finitely many pairwise-overlap-agreeing Measurable functions
+-- (arbitrary Finset index, arbitrary measurable spaces) into a single global Measurable
+-- function, via Finset.induction_on + iterated Set.piecewise (per gpt-5.6-sol high, ninth
+-- consult, NOT a Nat.find-style selector). exists_measurable_glue_finset_field specializes to
+-- the Pfield coordinate-field shape. Per Sol: the full chart-specific gluing needs a NEW,
+-- not-yet-discharged prerequisite (compact K₀ ⊆ interior K + strict c < r₀ for a genuine
+-- finite-subcover) — deferred. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.exists_measurable_glue_finset
+#print axioms QIQTH.ExpMap.exists_measurable_glue_finset
+#check @QIQTH.ExpMap.exists_measurable_glue_finset_field
+#print axioms QIQTH.ExpMap.exists_measurable_glue_finset_field
+
 end QIQTH.AxiomAudit
