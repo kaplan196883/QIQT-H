@@ -203,3 +203,22 @@ than a plumbing one, and should be re-scoped before continuing.
   "principal early-warning checkpoint," but is unverified against the exact `_of_banked` call shapes and
   is explicitly left for Phase 2 to confirm. Full detail: `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1170;
   memory checkpoint `cp1135`; commit `778b3114`.
+
+- **J4-1171 (Phase 2, this dispatch) — Canaries D3/D4 both PASSED, D4 (the PRINCIPAL RISK) resolved
+  precisely, NO STOP.** New file `QIQTH/LocalizedBankedData.lean`: `endpointData_of_banked_on_horizon`
+  (D3) and `interchangeData_of_banked_on_horizon` (D4), the local siblings of
+  `TruncatedDuhamelData.endpointData_of_banked`/`interchangeData_of_banked`. **D4's literal answer is
+  YES**: structural read of `IterConvIntegrableW`'s own definition (`∀ t : ℝ, 0 < t → …`, quantified over
+  EVERY outer time) confirms `EndpointData`/`InterchangeData` genuinely need an every-ceiling (unbounded-τ)
+  family internally — Sol's fear is structurally real, not a false alarm; the existing
+  `endpointData_of_banked`'s producer (`iterConvIntegrableW_of_bound_baseMeas`) literally demands a
+  single τ-uniform constant. **But this is already discharged, not by new analysis.** The
+  `gatedWitnessN1_package_open` residual's `hbound` field is ALREADY quantified `∀ t' …` (an
+  every-ceiling family in exactly the `hlocal`/`hglobal` shape two already-banked producers consume:
+  `GatedWitnessMeas.iterConvIntegrableW_of_locally_bound_baseMeas`, J4-109, and
+  `InterchangeLocalRebase.hInter_from_local_data`, J4-206) — so both new theorems are pure reassembly,
+  zero new analytic content. J4-1170's "Phase 2 readiness observation" lead PANS OUT, with the honest
+  correction that it doesn't eliminate the unbounded-τ structural need, it shows that need is already met
+  for free. Full build (10432 jobs) 0 errors, std-3, budget 0. Full detail:
+  `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1171; memory checkpoint `cp1136`; commit `c5e96ae3`, pushed.
+  **Phase 3 is next** (extract `a1_R6_assembled_local` / rebuild `v2'` as a thin wrapper, Canary D5).

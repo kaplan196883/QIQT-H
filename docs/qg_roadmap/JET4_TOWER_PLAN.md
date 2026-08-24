@@ -18944,3 +18944,58 @@ Quot.sound`), no `sorryAx`, no custom axioms; deleted after confirming.
 before committing (`git fetch origin` confirmed local `HEAD` matched `origin/main`) — this entry
 correctly numbered `J4-1170`, memory checkpoint `cp1135`. Commit `778b3114`, pushed to `origin/main`.
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-1171 — LEAN: dispatch 22, Phase 2 of the capstone-signature redesign plan (`CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`, J4-1168) — Canaries D3/D4 BOTH GREEN, D4 (the plan's flagged PRINCIPAL RISK) resolved precisely
+
+**Task.** Per the plan's Phase 2 line and J4-1170's own recorded "Phase 2 readiness observation":
+localize `endpointData_of_banked`/`interchangeData_of_banked` (Canaries D3/D4), verifying PRECISELY
+(not assuming) whether the `InterchangeLocalRebase.lean`/`IterEMeasurable.lean`/`LeviInterchangeTrunc.lean`
+lead genuinely de-risks D4 — Sol's flagged "does `InterchangeData` genuinely need unbounded-τ estimates?"
+
+**D4 resolved precisely — the answer is nuanced, not a clean "no".** Structural audit (not assumed) of
+the actual definitions: `EndpointData.hIntegrable`/`InterchangeData.hSeries`
+(`TruncatedDuhamelData.lean`) both demand `IterConvIntegrableW E 2 0 C`, whose OWN definition
+(`ParametrixHEboundWiring.lean:155`) is itself `∀ (t : ℝ), 0 < t → …` — a claim about EVERY outer time.
+The concrete producer the EXISTING `endpointData_of_banked` uses,
+`iterConvIntegrableW_of_bound_baseMeas` (`IterEMeasurable.lean:200`), demands a single FIXED-C bound
+valid at every `τ > 0` with no cap at all. So taken literally: **YES, `InterchangeData` (via
+`EndpointData`) genuinely needs an unbounded-τ family internally — Sol's fear is structurally REAL, not
+a false alarm.**
+
+**But the risk is DISCHARGED, not by new analysis but by data already banked.** The `gatedWitnessN1_package_open`
+residual's `hbound` field is `∀ t' τ p q, 0 < τ → τ ≤ t' → |heatOp g gi H τ p q| ≤ (C·(1+t'))·baseKernelW
+2 0 τ p q` — quantified over EVERY `t'`, not one fixed horizon. This is EXACTLY the "every-ceiling bound
+family" shape (`hlocal`/`hglobal`) that TWO ALREADY-BANKED producers already consume without ever
+needing a τ-uniform constant: `GatedWitnessMeas.iterConvIntegrableW_of_locally_bound_baseMeas` (J4-109,
+"THE TIME-CAP PRODUCER", accepts an arbitrary `Cmodel`) and `InterchangeLocalRebase.hInter_from_local_data`
+(J4-206). So the localization is pure reassembly — reshape `hbound` into the `hlocal`/`hglobal` closure
+(one line, `fun T hT => ⟨C*(1+T), …, hbound T …⟩`) and feed it to both already-banked producers. No new
+proof search, no new analytic estimate. J4-1170's "Phase 2 readiness observation" lead PANS OUT, with
+this honest correction: it does not eliminate the structural unbounded-τ need (which is real), it shows
+that need is already met by the package's own data.
+
+**What landed.** New file `QIQTH/LocalizedBankedData.lean`: `endpointData_of_banked_on_horizon` (Canary
+D3, EndpointLocal) builds `EndpointData g gi Wit t (C*(1+t))` from the package-shaped `hbound`/`hEzero`/
+`hEmeas`, via `package_bound_on_horizon` (J4-1170, D1) for `hEbound` and
+`iterConvIntegrableW_of_locally_bound_baseMeas` (J4-109) for `hIntegrable`. `interchangeData_of_banked_on_horizon`
+(Canary D4, InterchangeLocal, the plan's flagged PRINCIPAL RISK) builds `InterchangeData g gi Wit t` the
+same way via `hInter_from_local_data` (J4-206) at window `T := t`. Both take EXACTLY the shape
+`gatedWitnessN1_package_open`/`gatedWitnessN1_horizon_bound` already produce (`hbound`, `hEzero`,
+`hEmeas`) — genuine local siblings at the SAME output types (`EndpointData`, `InterchangeData`) the live
+capstone's proof body consumes (`RightInverseGeneral.lean:325,328`).
+
+**Build/audit.** Full `lake build QIQTH` (10432 jobs) 0 errors. `#print axioms` on both new theorems
+(embedded in the file AND pinned in `AxiomAudit.lean`) confirms std-3 exactly (`propext,
+Classical.choice, Quot.sound`), no `sorryAx`, no custom axioms. `bash scripts/axiom_budget_check.sh`:
+raw axiom count 0 (budget 0), OK. `git status --porcelain | grep -i vacuum`: nothing. Checked TRUE
+highest `J4-NNN` (`1170`) and `cpNNN` (`1135`) freshly right before committing — this entry correctly
+numbered `J4-1171`, memory checkpoint `cp1136`. Commit `c5e96ae3`, pushed to `origin/main`.
+
+**Campaign health.** The plan's own flagged highest-risk early-warning checkpoint (D4) has now fired and
+resolved FAVOURABLY: the risk was real (not a phantom worry) but was already pre-discharged by the J4-108/
+J4-109/J4-205/206 machinery this campaign already banked before the redesign plan was even scoped. Phase
+2 is DONE, both dispatches on budget (Phase 0-1: 2 dispatches vs 2-5 budgeted; Phase 2: 1 dispatch vs
+6-10 budgeted). Phase 3 (extract `a1_R6_assembled_local`/rebuild `v2'` as a thin wrapper, Canary D5) is
+the natural next dispatch, per the plan's own phase table.
+
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
