@@ -7188,3 +7188,11 @@ import QIQTH.ChartCoherentPFieldDiagonalFiniteCover
 -- hcarField/hcarField2 non-vacuous. Purely abstract, chart-agnostic (arbitrary X,Y,Z). std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartGateFiberProductMeasurable
+-- J4-1136: ChartGateConcreteInstantiation — instantiates fiberGate at the actual diagonal-cover
+-- chart data (J4-1132 compatible family + J4-1133 diagonal cover), fixing the compatible family
+-- ONCE (per fourteenth Sol consult) then building the concrete gate S := ⋂ k, fiberGate (G k)
+-- (G k := ⋃_{z₀∈t k} U z₀ 0 k) together with its openness, hKSmeas-shaped joint measurability,
+-- and diagonal inclusion on K₀. Does NOT yet glue the finite Pfield families, transfer
+-- HasDerivAt, discharge PdiffAt, or discharge hOffS/hOffS2. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartGateConcreteInstantiation

@@ -31922,4 +31922,19 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.fiberGate_iInter_isOpen
 #print axioms QIQTH.ExpMap.fiberGate_iInter_isOpen
 
+-- J4-1136: ChartGateConcreteInstantiation — instantiates fiberGate at the actual diagonal-cover
+-- chart data: fixes the compatible family (J4-1132) EXACTLY ONCE, re-derives the Heine-Borel
+-- diagonal-cover argument generically off that fixed family (avoiding the "separately-extracted
+-- witnesses may not coincide" issue), builds S := ⋂ k, fiberGate (G k) with G k := ⋃_{z₀∈t k}
+-- U z₀ 0 k, proves openness of S q, hKSmeas-shaped joint measurability, and diagonal inclusion
+-- on K₀. Does NOT yet glue Pfield families, transfer HasDerivAt, discharge PdiffAt, or discharge
+-- hOffS/hOffS2. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.finite_diag_cover_of_open_family
+#print axioms QIQTH.ExpMap.finite_diag_cover_of_open_family
+#check @QIQTH.ExpMap.finite_diag_cover_of_family
+#print axioms QIQTH.ExpMap.finite_diag_cover_of_family
+#check @QIQTH.ExpMap.chartGate_concrete_S_construction
+#print axioms QIQTH.ExpMap.chartGate_concrete_S_construction
+
 end QIQTH.AxiomAudit
