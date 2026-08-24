@@ -32250,4 +32250,14 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.GatedRepSFix.tripleHEmeas_concrete_v4'
 #print axioms QIQTH.GatedRepSFix.tripleHEmeas_concrete_v4'
 
+-- J4-1170: `PackageHorizonBound.lean` — Phase 1 of the capstone-signature redesign plan, Canaries
+-- D0 (reconfirmed as a named lemma) and D1 both green. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on
+-- {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.PackageHorizonBound.package_bound_on_horizon
+#print axioms QIQTH.PackageHorizonBound.package_bound_on_horizon
+#check @QIQTH.PackageHorizonBound.vanVleckGatedWitness_eq_gatedKernel
+#print axioms QIQTH.PackageHorizonBound.vanVleckGatedWitness_eq_gatedKernel
+#check @QIQTH.PackageHorizonBound.gatedWitnessN1_horizon_bound
+#print axioms QIQTH.PackageHorizonBound.gatedWitnessN1_horizon_bound
+
 end QIQTH.AxiomAudit

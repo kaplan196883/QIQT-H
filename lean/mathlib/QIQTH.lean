@@ -7349,3 +7349,11 @@ import QIQTH.GatedMixed2RepSGenWith
 -- std-3, built clean first attempt (after one namespace-open fix). NOT a₁=R/6. STRICTLY CONDITIONAL
 -- on {hDuhamel, hDConv, hCConv}, UNCHANGED.
 import QIQTH.TripleHEmeasConcreteV4GenWith
+-- J4-1170: PackageHorizonBound — Phase 1 of the capstone-signature redesign plan
+-- (CAPSTONE_SIGNATURE_REDESIGN_PLAN.md, J4-1168). `package_bound_on_horizon` (elementary horizon
+-- instantiation of the affine-in-ceiling `(0,t']`-for-every-t' bound, Canary D1); a NAMED
+-- `vanVleckGatedWitness_eq_gatedKernel` kernel-identity bridge (Canary D0 reconfirmed, `rfl`); and
+-- `gatedWitnessN1_horizon_bound`, a non-vacuous single-opening demonstration composing both on top of
+-- GateOpennessExport.gatedWitnessN1_package_open. D0/D1 both green. std-3. NOT a₁=R/6. STRICTLY
+-- CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.PackageHorizonBound
