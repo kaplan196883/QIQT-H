@@ -1,10 +1,15 @@
 # Witness-unification plan — connecting `tripleHEmeas_concrete_v4'` (Campaign 1) to
 # `a1_R6_assembled_v3` (Campaign 2) by rebuilding the capstone against `vanVleckGatedWitness'`
 
-Status: SCOPED (this dispatch, J4-1176), Phase 0 (D0) substantially executed as a direct audit within
-this same dispatch, **NOT AUTHORIZED FOR FULL CONSTRUCTION (D2 onward)** pending a named downstream
-consumer, per `gpt-5.6-sol`'s (39th/40th consults) own explicit recommendation. This file is the
-discoverable record so future dispatches do not re-derive it from scratch — mirrors the format of
+Status: SCOPED (J4-1176), Phase 0 (D0) now FULLY CLOSED as of J4-1177 (grand-assembly proof-body audit
++ N=1-package chart-independence re-verification both complete, zero new fork points found).
+**NOT AUTHORIZED FOR FULL CONSTRUCTION (D2 onward)** — and per J4-1177's full-repo consumer search
+(NONE of the four capstone-tower theorems, root through `a1_R6_assembled_v3`, has any consumer
+anywhere outside the tower's own internal plumbing) plus the 41st Sol consult's unsoftened verdict,
+witness-unification is currently judged the WRONG next target entirely, not merely premature — see the
+dispatch log below for Sol's recommended reallocation (creating a real consumer first), which is
+itself NOT authorized by this file and requires explicit follow-up. This file is the discoverable
+record so future dispatches do not re-derive it from scratch — mirrors the format of
 `CHART_PARAMETRIC_REBUILD_PLAN.md` / `CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`.
 
 ## Why this exists
@@ -238,3 +243,63 @@ surprise early. Freeze after C0. **Resume Phase 1+ only when a named downstream 
   even that was left partially open (grand-assembly proof-body audit, N=1-package chart-independence
   re-verification) rather than force-completed this dispatch. No Lean written. `a₁=R/6` remains
   STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+- **J4-1177 (this dispatch) — Phase 0 CLOSED (D0 fully complete); full-repo consumer search;
+  41st Sol consult; NO NEW LEAN FILE, construction still NOT authorized.**
+
+  **Phase 0 remainder, completed by direct audit (no construction):**
+  1. `GrandAssemblyRecon.a1_R6_assembled`'s PROOF BODY (not just signature) inspected line-by-line:
+     it calls exactly 3 helpers — `ETailRateBound.hDaLimLU_from_data` (fully generic over abstract
+     `H F`, confirmed no witness hardwiring); `HD1CLMLift.hD1_concrete_from_scalar` (hardwired via
+     `witnessFieldDeriv`/`CConvDerivativeData` exactly as already flagged in the J4-1176 pre-check
+     table — no NEW hardwiring found; ingredient `witnessFieldDeriv'` already banked, J4-1157);
+     `CapstoneAssembly.a1_R6_of_geometry_and_frontier`, whose own proof body threads straight into
+     `a1_R6_of_residue_inf_v6` with the identical uniform `vanVleckGatedWitness g gi hChr hK S a b`
+     threading pattern throughout — no additional hardwired data-structure family beyond the 4 already
+     known (`CConvChartGateData`/`CConvDerivativeData`/`CConvEnvelopeData`/the `a1_R6_assembled` shell
+     itself). **Verdict: no surprise; confirms the J4-1176 pre-check table with zero new fork points.**
+  2. `GateOpennessExport.gatedWitnessN1_package_open` re-verified directly: its existential conclusion
+     `∃ a b C : ℝ, ... ∃ S : Point n → Set (Point n), ...` — the `(a,b,S,C)` tuple itself is plain
+     `ℝ`/`Set`-valued, witness/chart-independent IN TYPE. The accompanying `hbound`/`hmemS0`/`hopenS0`
+     proof terms DO internally mention the old unprimed `uniformInverseChart`/witness machinery
+     (via `globalCutoffParametrixWitnessN`), but the plan's D9 step only proposes reusing the raw
+     `(a,b,S,C)` existential via the witness-independent `gatedWitnessN1_horizon_bound`/
+     `package_bound_on_horizon` bridge (confirmed present, `PackageHorizonBound.lean`/
+     `LocalizedBankedData.lean`/`CapstoneExistentialAssembly.lean`), NOT `hbound` itself. **Verdict:
+     matches the plan's expectation exactly; no hidden old-chart indexing that breaks D9.**
+  **Phase 0 (D0) is now CLOSED with zero unresolved entries and zero new STOP-condition triggers.**
+
+  **Full-repo consumer search (background agent, thorough grep across every `.lean` file, `verify/`,
+  `docs/`, `paper_strategy/`), for the ENTIRE capstone family, not just the primed/unprimed connection
+  point:**
+  - `GrandAssemblyRecon.a1_R6_assembled` (root, J4-222)
+  - `RightInverseGeneral.a1_R6_assembled_v2'`
+  - `CapstoneLocalAssembly.a1_R6_assembled_local` (Layer A)
+  - `CapstoneExistentialAssembly.a1_R6_assembled_v3` (Layer C, most recent/general, the TRUE terminal
+    capstone)
+
+  **Finding: NONE of the four has a genuine consumer anywhere in the repo outside the capstone
+  tower's own internal plumbing.** Every citation found is exactly the expected chain
+  root → `v2'` → `local` → `v3` (each version invoked only to build the next), plus `#print axioms`/
+  `#check` bookkeeping in `AxiomAudit.lean`. Zero hits in `verify/` (`claim_card.md`, scripts), zero
+  hits in `paper_strategy/`. `docs/qg_roadmap/*.md` itself already documents this in prose but is
+  planning/audit narrative, not a load-bearing citation. **`a1_R6_assembled_v3`, the actual endpoint
+  of two full sub-campaigns, is consumed by NOTHING outside its own construction.**
+
+  **41st Sol consult (`gpt-5.6-sol`, high effort)**, given this finding: unsoftened verdict —
+  **witness-unification is not merely premature, it is currently the WRONG next target entirely.**
+  Extending an already-unconsumed tower compounds the priority inversion. Recommended reallocation
+  (next 1–3 dispatches, NOT authorized by this dispatch, for explicit follow-up decision only):
+  (1) create the FIRST real consumer — a dedicated, stable, publication-facing verification entry
+  point (e.g. `verify/A1R6Claim.lean`) that applies `a1_R6_assembled_v3` as an actual theorem
+  application (not a `#check`), with `{hDuhamel, hDConv, hCConv}` explicit and the conclusion no
+  stronger than what `v3` supports — if no coherent public claim can even be written around `v3`,
+  that itself is further evidence the tower is non-load-bearing; (2) wire that consumer into
+  `verify/claim_card.md` and the paper draft's claim map; (3) reassess witness-unification ONLY from
+  that consumer's actual blocked obligations — if `v3` already discharges the public claim, freeze the
+  capstone line entirely and do NOT unify witnesses; if blocked specifically on the primed witness,
+  authorize only the minimal bridge that theorem needs.
+
+  **This dispatch authorizes NEITHER witness-unification Phase 1+ NOR the consumer-creation dispatches
+  Sol recommends** — both require explicit user/follow-up authorization. No Lean written.
+  `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
