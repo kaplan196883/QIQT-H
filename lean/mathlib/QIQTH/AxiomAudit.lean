@@ -31943,5 +31943,12 @@ namespace QIQTH.AxiomAudit
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 #check @QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_single_coord
 #print axioms QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_single_coord
+-- J4-1138: ChartGateGluedFieldHasDerivAtAllCoords — invokes chartGate_concrete_S_construction
+-- EXACTLY ONCE (one shared gate S), then proves ∀k, ∃ Pglued, (measurability + on-gate HasDerivAt)
+-- against that SAME S, fixing the shared-S packaging defect flagged after J4-1137. Does NOT build
+-- hcarField2 / discharge PdiffAt / discharge hOffS. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_all_coords
+#print axioms QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_all_coords
 
 end QIQTH.AxiomAudit

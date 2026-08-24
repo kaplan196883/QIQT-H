@@ -7204,3 +7204,10 @@ import QIQTH.ChartGateConcreteInstantiation
 -- ∀k, build the hcarField2 second-order analogue, discharge PdiffAt, or discharge hOffS/hOffS2. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartGateGluedFieldHasDerivAt
+-- J4-1138: ChartGateGluedFieldHasDerivAtAllCoords — fixes the shared-S packaging defect flagged
+-- after J4-1137: invokes chartGate_concrete_S_construction EXACTLY ONCE (one shared gate S), then
+-- proves ∀k, ∃ Pglued, ... (measurability + on-gate HasDerivAt) against that SAME S, closing the
+-- gap J4-1137's own "dispatch 16" plan under-specified (n separate top-level calls to J4-1137
+-- would NOT share S). Does NOT build hcarField2, discharge PdiffAt, or discharge hOffS/hOffS2. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartGateGluedFieldHasDerivAtAllCoords
