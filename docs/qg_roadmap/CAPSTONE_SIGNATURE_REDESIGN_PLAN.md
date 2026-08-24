@@ -238,3 +238,20 @@ than a plumbing one, and should be re-scoped before continuing.
   memory checkpoint `cp1137`; commit `0ebc911b`, pushed. **Phase 4 is next** (factor the J4-774
   discharge theorem into a pointwise version, target Canary D6) — Phase 6 (the ~50-hypothesis real-
   consumer migration) remains withheld pending a named concrete consumer, per this plan's own scoping.
+
+- **J4-1173 (Phase 4, this dispatch) — Canary D6 (SingleOpening) PASSED cleanly, no STOP.** New file
+  `QIQTH/GatedGlobalWitnessN1CapstonePointwise.lean`: `trueKernel_diagonal_a1_eq_R6_residual_N1_pointwise`
+  is J4-774's proof body with `(a,b,C,S)` and the package's local affine bound `hbound`/origin membership
+  `hS0` supplied as DIRECT EXTERNAL INPUTS instead of obtained internally from
+  `gatedWitnessN1_package_open` — the five package-only geometric inputs (`hgnd, hgsymm, hinvF, hframeK,
+  hw`) are DROPPED from the signature entirely, since they played no role beyond producing
+  `(a,b,C,S,hbound,hS0)`. `..._hEboundW_discharged_via_pointwise` is a thin corollary reproducing J4-774's
+  original existential statement by opening `gatedWitnessN1_package_open` EXACTLY ONCE (the literal D6
+  canary) and feeding its output to the pointwise theorem — confirmed faithful, no unexpected
+  obstruction. Zero new analytic content, pure signature refactor. Full build (10434 jobs) 0 errors,
+  std-3, budget 0. Phase 4 complete in 1 dispatch (budgeted 4-7) — fifth consecutive on/under-budget
+  phase with zero new analytic content. Full detail: `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1173;
+  memory checkpoint `cp1138`; commit `164c11db`, pushed. **Phase 5 is next** (build the
+  `a1_R6_assembled_v3` existential Layer-C signature, destructing the package existential first and
+  re-exposing all ~50 other hypotheses as caller inputs under it, targeting Canaries D7/D8) — Phase 6
+  remains withheld pending a named concrete consumer, per this plan's own scoping.

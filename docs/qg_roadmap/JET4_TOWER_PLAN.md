@@ -19044,3 +19044,50 @@ migration), which the plan explicitly withholds authorization for until a concre
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁ = R/6`.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-1173 — LEAN: dispatch 24, Phase 4 of the capstone-signature redesign plan (`CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`, J4-1168) — Canary D6 (SingleOpening) GREEN, no STOP
+
+**Task.** Per the plan's Phase 4 line: "Factor the J4-774 discharge theorem into a pointwise version
+(concrete `a,b,Cpkg,S` + package certs, existential-opening moved to a thin corollary) → D6 green".
+Refactor `GatedGlobalWitnessN1CapstoneEbdDischarged.trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged`
+(J4-774) so its proof body no longer performs the `gatedWitnessN1_package_open` existential-elimination
+internally — instead the pointwise inputs `(a,b,C,S,hbound,hS0)` become direct external binders, and the
+original existential-quantified statement is reproved as a thin corollary around the pointwise theorem.
+
+**What landed.** New file `QIQTH/GatedGlobalWitnessN1CapstonePointwise.lean`:
+- `trueKernel_diagonal_a1_eq_R6_residual_N1_pointwise` — the SAME proof body as J4-774, but with
+  `(a, b, C, S)` and the package's local affine bound `hbound`/origin membership `hS0` supplied as
+  DIRECT EXTERNAL INPUTS rather than obtained via `gatedWitnessN1_package_open`. Consequently the five
+  geometric inputs J4-774 needed ONLY to invoke the package (`hgnd, hgsymm, hinvF, hframeK, hw`) are
+  DROPPED from this theorem's signature entirely — they play no further role once `(a,b,C,S,hbound,hS0)`
+  are given directly. Internally, `hHdiag`'s proof simplifies slightly: it consumes `hS0` directly
+  instead of applying `hmemS0 hK0`.
+- `trueKernel_diagonal_a1_eq_R6_residual_N1_hEboundW_discharged_via_pointwise` (Canary D6 —
+  SingleOpening) — a THIN COROLLARY, literally J4-774's original existential-quantified statement,
+  reproved by opening `gatedWitnessN1_package_open` EXACTLY ONCE and handing its output straight to the
+  pointwise theorem above. No second, unrelated existential selection anywhere in the proof.
+
+**Canary D6 — PASSED cleanly, no STOP.** Both theorems typecheck; the corollary's proof performs the
+package existential-elimination exactly once (a single `obtain ⟨a, b, C, ha, hab, hC0, S, hbound,
+hmemS0, hopenS0⟩ := gatedWitnessN1_package_open ...`), confirming the factoring is faithful — the
+pointwise theorem plus one opening reproduces J4-774's original conclusion exactly, no unexpected
+obstruction. Zero new analytic content — pure signature refactor of already-proven machinery.
+
+**Build/audit.** `lake build QIQTH.GatedGlobalWitnessN1CapstonePointwise` (8825 jobs) and full
+`lake build QIQTH` (10434 jobs) both 0 errors. `#print axioms` on both new theorems (in-file AND pinned
+in `AxiomAudit.lean`) confirms std-3 exactly (`propext, Classical.choice, Quot.sound`), no `sorryAx`, no
+custom axioms. `bash scripts/axiom_budget_check.sh`: raw axiom count 0 (budget 0), OK. `git status
+--porcelain | grep -i vacuum`: nothing. Checked TRUE highest `J4-NNN` (`1172`) and `cpNNN` (`1137`)
+freshly right before committing (`git fetch origin` confirmed local `HEAD` matched `origin/main`) — this
+entry correctly numbered `J4-1173`, memory checkpoint `cp1138`. Commit `164c11db`, pushed to
+`origin/main`.
+
+**Campaign health.** Phase 4 DONE in 1 dispatch (budgeted 4-7) — the FIFTH consecutive Phase in this
+sub-campaign to land at or under budget, and the fifth consecutive dispatch with zero new analytic
+content (pure re-plumbing/refactoring of already-banked machinery). Per the plan's own phase table,
+Phase 5 (build the `a1_R6_assembled_v3` existential signature — Layer C — destructing the package
+existential first and re-exposing all ~50 other hypotheses as caller inputs under the existential,
+targeting Canaries D7/D8) is the natural next dispatch. Phase 6 (the ~50-hypothesis real-consumer
+migration) remains withheld pending a named concrete consumer, per the plan's own explicit scoping.
+
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
