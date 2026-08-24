@@ -32310,4 +32310,23 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.CConvChartGateWith.chartGateDataWith_iff_old
 #check @QIQTH.CConvChartGateWith.CConvChartGateData'
 
+-- J4-1180: `CConvDerivativeDataWith.lean` — witness-unification Phase 1, D3 (resumed campaign, per
+-- `docs/qg_roadmap/WITNESS_UNIFICATION_PLAN.md`). `CConvDerivativeDataWith` (generic over abstract
+-- witness-field-derivative `WD`), `derivativeDataWith_iff_old` (the `Iff` compatibility bridge at the
+-- old concrete value), `CConvDerivativeData'` (primed instantiation at `witnessFieldDeriv'`). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.CConvDerivativeWith.CConvDerivativeDataWith.mk
+#print axioms QIQTH.CConvDerivativeWith.derivativeDataWith_iff_old
+#check @QIQTH.CConvDerivativeWith.CConvDerivativeData'
+
+-- J4-1181: `CConvEnvelopeDataWith.lean` — witness-unification Phase 1, D4 (resumed campaign, per
+-- `docs/qg_roadmap/WITNESS_UNIFICATION_PLAN.md`). `CConvEnvelopeDataWith` (generic over abstract
+-- chart `W` + abstract amplitude `AMP` + abstract gated witness `GW`), `envelopeDataWith_iff_old` (the
+-- `Iff` compatibility bridge at the old concrete values), `CConvEnvelopeData'` (primed instantiation
+-- at `uniformInverseChart'`/`chartFieldAmp'`/`vanVleckGatedWitness'`). std-3. NOT a₁=R/6 (STRICTLY
+-- CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED). Canary C1 (Phase 1) now CLOSED.
+#check @QIQTH.CConvEnvelopeWith.CConvEnvelopeDataWith.mk
+#print axioms QIQTH.CConvEnvelopeWith.envelopeDataWith_iff_old
+#check @QIQTH.CConvEnvelopeWith.CConvEnvelopeData'
+
 end QIQTH.AxiomAudit

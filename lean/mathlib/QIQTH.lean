@@ -7421,3 +7421,20 @@ import QIQTH.A1R6PublicClaim
 -- kept fixed per `ChartParamFacadeVariant`'s (J4-321) own precedent. std-3, no sorryAx. NOT a₁=R/6.
 -- STRICTLY CONDITIONAL on {hDuhamel, hDConv, hCConv}, UNCHANGED.
 import QIQTH.CConvChartGateDataWith
+-- J4-1180: new file `QIQTH.CConvDerivativeDataWith` — witness-unification Phase 1, D3 — the
+-- witness-derivative-parametric fork of `CConvFacade.CConvDerivativeData`
+-- (`CConvDerivativeDataWith`, generic over abstract `WD`; `derivativeDataWith_iff_old`, the old-value
+-- `Iff` compatibility bridge; `CConvDerivativeData'`, the primed instantiation at
+-- `witnessFieldDeriv'`). Confirms the plan's stated "2 hardwired fields" (hDmeas/hDrep) count exactly
+-- right (hlin kept fixed, witness-free). std-3, no sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on
+-- {hDuhamel, hDConv, hCConv}, UNCHANGED.
+import QIQTH.CConvDerivativeDataWith
+-- J4-1181: new file `QIQTH.CConvEnvelopeDataWith` — witness-unification Phase 1, D4 — the
+-- chart-and-amplitude-and-witness-parametric fork of `CConvFacade.CConvEnvelopeData`
+-- (`CConvEnvelopeDataWith`, generic over abstract `W`/`AMP`/`GW`; `envelopeDataWith_iff_old`, the
+-- old-value `Iff` compatibility bridge; `CConvEnvelopeData'`, the primed instantiation at
+-- `uniformInverseChart'`/`chartFieldAmp'`/`vanVleckGatedWitness'`). Corrects the plan's undercounted
+-- "2 hardwired fields" (hC2fam/hGateData) to the true 3 (adding hGateData', the order-swapped twin of
+-- hGateData, same class of undercount as D2's). std-3, no sorryAx. NOT a₁=R/6. STRICTLY CONDITIONAL on
+-- {hDuhamel, hDConv, hCConv}, UNCHANGED. Canary C1 (Phase 1) now CLOSED — D2/D3/D4 all done.
+import QIQTH.CConvEnvelopeDataWith
