@@ -144,9 +144,29 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
 - **C4 — TripleHEPrime** (target dispatch 22–28): `tripleHEmeas_concrete_v4'`, concluding about the
   primed chain, built from `uniformInverseChart'_joint_measurable`. STOP if the proof can only close by
   invoking the OLD concrete theorem and then demanding global old/new witness equality.
+  **PASSED, RETROACTIVELY, at dispatch 15 (J4-1163/1164)** — `tripleHEmeas_concrete_v4'` already meets
+  C4's literal criterion (built via `HEmeasBorelAudit.tripleHEmeas_of_surface` from the three
+  chart-generic capstones, never invokes the old concrete theorem, never demands global old/new witness
+  equality). Confirmed explicitly at dispatch 16 (J4-1165) — see that entry for the audit trail.
 - **C5 — SummitPrime** (target dispatch 30–40): successful application of `gatedWitness_hEboundW_final_gen`
   to the full primed package. STOP if the final theorem's type intrinsically forces the old witness
   rather than accepting an abstract witness satisfying the summit's hypotheses.
+  **⚠ CORRECTED, dispatch 16 (J4-1165): C5 AS LITERALLY WORDED IS ILL-POSED** — the described composition
+  ("feed `tripleHEmeas_concrete_v4'` into `gatedWitness_hEboundW_final_gen`") is not a valid Lean
+  application: `gatedWitness_hEboundW_final_gen`'s only chart hypothesis, `huniformChart`, is a pure
+  germ + `ContDiffAt ℝ 2` + open/closure REGULARITY condition — zero occurrences of `tripleHEmeas` /
+  `hWmeas` / `Measurable` anywhere in `UniformChartRadius.lean` (confirmed by grep). There is no argument
+  slot for a measurability fact. Its target theorem, `gatedWitness_hEboundW_unconditional'`, was ALREADY
+  built fully unconditionally in J4-1149 — BEFORE this 29-49-dispatch campaign started — and needs no
+  measurability input at all. Worse: even a non-sequential "pairing" of the two primed results would be
+  hollow, because they are about DIFFERENT witness functions even on the SAME (primed) chart —
+  `gatedWitness_hEboundW_unconditional'` concludes about `globalCutoffParametrixWitness …` (`N=0`
+  hardcoded, `GlobalResidualWitness.lean:88-90`, literally `heatParametrix 0 Θ u`), while
+  `tripleHEmeas_concrete_v4'` concludes about `vanVleckGatedWitness'` (built on
+  `globalCutoffParametrixWitnessN 1`, i.e. `N=1`, `VanVleckGatedWitnessWith.lean`). This N=0/N=1 mismatch
+  is a PRE-EXISTING, separately documented wall (`CapstoneWiring.lean`'s own "N=1 RE-PLUMB" census,
+  predating this campaign entirely) — not something introduced or fixable by this dispatch. See J4-1165
+  for the full corrective write-up and gpt-5.6-sol's concurrence (35th consult).
 
 ## Dispatch log against this plan
 
@@ -272,5 +292,47 @@ proofs may lean on old-chart-specific lemmas not yet expressed in the abstract `
   std-3, full build 10428/10431 jobs 0 err, axiom budget 0. Commit `470e19bf`. Next dispatch target:
   Phase 5 — feed `tripleHEmeas_concrete_v4'` into `gatedWitness_hEboundW_final_gen` (or its analogue)
   toward the primed unconditional summit (Canary C4/C5 territory).
+
+- **J4-1165 (dispatch 16) — CORRECTIVE FINDING, NO NEW LEAN LANDED.** Per J4-1164's own forward note,
+  investigated feeding `tripleHEmeas_concrete_v4'` into `UniformChartRadius.gatedWitness_hEboundW_final_gen`
+  toward Canary C4/C5. **Found a genuine premise error in this plan's own Phase 5 Task C wording, BEFORE
+  writing any Lean** (canary-STOP discipline): `gatedWitness_hEboundW_final_gen`'s ONLY chart hypothesis
+  (`huniformChart`) is a pure germ + `ContDiffAt ℝ 2` + open/closure regularity condition — direct grep of
+  `UniformChartRadius.lean` for `tripleHEmeas|hWmeas|Measurable` returns ZERO hits. There is NO argument
+  slot into which `tripleHEmeas_concrete_v4'` (or any measurability fact) could be fed — "feed the triple
+  into the summit" does not correspond to any valid Lean application. Confirmed the REAL consumer of
+  `tripleHEmeas`-shaped facts is a DIFFERENT, DISJOINT binder — `RightInverseGeneral.a1_R6_assembled_v2'`'s
+  `htriple : HEmeasBorelAudit.tripleHEmeas g gi (vanVleckGatedWitness g gi hChr hK S a b)` — separate from
+  and parallel to its `hEboundFull` binder (confirmed by direct grep: both are independent arguments; the
+  proof does `have hEmeas := htriple` on the Duhamel/measurability branch only). Plugging
+  `tripleHEmeas_concrete_v4'` (about `vanVleckGatedWitness'`, primed) into that `htriple` slot (which
+  demands the OLD `vanVleckGatedWitness`) is a type mismatch forbidden by this campaign's own
+  no-global-equality discipline (tube-only agreement, per `uniformInverseChart'_eqOn_uniformInverseChart`).
+  Also discovered `gatedWitness_hEboundW_unconditional'` (Phase 5's own named target) was ALREADY fully
+  unconditional back in J4-1149 — before this 29-49-dispatch campaign started — needing no measurability
+  input at all. Even a non-sequential "pairing" of the two primed results is hollow: they are about
+  DIFFERENT witness families even on the identical primed chart — `gatedWitness_hEboundW_unconditional'`
+  concludes about `globalCutoffParametrixWitness` (`N=0` hardcoded literally, `heatParametrix 0 Θ u`,
+  `GlobalResidualWitness.lean:88-90`), while `tripleHEmeas_concrete_v4'` concludes about
+  `vanVleckGatedWitness'` (`globalCutoffParametrixWitnessN 1`, i.e. `N=1`). This N=0/N=1 mismatch is a
+  PRE-EXISTING wall independently documented in `CapstoneWiring.lean`'s own "N=1 RE-PLUMB" census (predates
+  this whole campaign, holds for the OLD chart too) — not introduced or fixable by this dispatch.
+  **Consulted gpt-5.6-sol (35th consult, high effort) before banking**: concurred with the full analysis,
+  refined the C4/C5 classification (C4 PASSED per its literal criterion; the C4→C5 SEQUENCING is
+  ILL-TYPED/unreachable, not "C5 unreachable" per se, since C5's named target theorem already exists and
+  needs no measurability), confirmed a "parallel frontend certificate" pairing theorem would be hollow
+  ceremony here specifically because of the N=0/N=1 witness mismatch just found, and recommended NOT
+  building one. **Resolution**: banked as a NEGATIVE/CORRECTIVE dispatch — Canary C4 marked PASSED
+  retroactively (satisfied by J4-1163/1164's own construction); Canary C5 AS LITERALLY WORDED marked
+  ILL-POSED (see canary block above); plan file corrected to remove the false composition; NO new `.lean`
+  file this dispatch (nothing genuine to build without either (a) a full witness-indexed
+  `a1_R6_assembled_v9'` rebuild — out of scope, ~150 binders, its own large sub-campaign, separately
+  requiring the pre-existing N=0/N=1 wall to ALSO be closed — or (b) a hollow, non-load-bearing pairing
+  theorem, correctly declined per Sol's advice). Next dispatch target (needs fresh authorization before
+  launch, per the scope finding): EITHER (i) a `docs/qg_roadmap`-level scoping exercise for a genuine
+  witness-indexed capstone rebuild (the real remaining `hWmeas`-adjacent wall for `a1_R6_assembled`), OR
+  (ii) pivot this campaign's remaining effort to the ALREADY-KNOWN, SEPARATELY-CENSUSED N=0/N=1 re-plumb
+  (`CapstoneWiring.lean`'s own module note) which is the actual prerequisite for ANY chart (old or primed)
+  before `tripleHEmeas`/`hEboundW` can ever compose into one witness-consistent capstone.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
