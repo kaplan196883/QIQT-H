@@ -18998,4 +18998,49 @@ J4-109/J4-205/206 machinery this campaign already banked before the redesign pla
 6-10 budgeted). Phase 3 (extract `a1_R6_assembled_local`/rebuild `v2'` as a thin wrapper, Canary D5) is
 the natural next dispatch, per the plan's own phase table.
 
+## J4-1172 — LEAN: dispatch 23, Phase 3 of the capstone-signature redesign plan (`CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`, J4-1168) — Canary D5 (BackCompat) GREEN, no STOP
+
+**Task.** Per the plan's Phase 3 line: "Extract `a1_R6_assembled_local` (Layer A) + rebuild `v2'` as
+wrapper (Layer B) → D5 green". Build the local sibling of `RightInverseGeneral.a1_R6_assembled_v2'`
+using J4-1170/1171's `PackageHorizonBound`/`LocalizedBankedData` machinery, then prove a regression-test
+wrapper reproducing `a1_R6_assembled_v2'`'s exact signature via Layer A.
+
+**What landed.** New file `QIQTH/CapstoneLocalAssembly.lean`:
+- `a1_R6_assembled_local` (Layer A) — a literal copy of `a1_R6_assembled_v2'`'s ~65-hypothesis signature
+  with ONLY `(C, hCnn, hEboundFull)` replaced by `(CT, hCTnn, hEbound_t)`, where `hEbound_t` has the
+  every-ceiling-affine-in-`t'` shape `∀ t' τ p q, 0 < τ → τ ≤ t' → |heatOp …| ≤ (CT*(1+t'))*baseKernelW
+  2 0 τ p q` — EXACTLY the shape `LocalizedBankedData.endpointData_of_banked_on_horizon`/
+  `interchangeData_of_banked_on_horizon` (J4-1171) consume. The proof body swaps the two `_of_banked`
+  calls for their `_on_horizon` siblings and feeds `GrandAssemblyRecon.a1_R6_assembled` the resulting
+  `C := CT*(1+t)` (matching `EndpointData`'s output type). All ~50 other hypotheses copied verbatim, per
+  the plan's explicit "not generalized, not transported" instruction.
+- `a1_R6_assembled_v2'_via_local` (Layer B, the literal D5 canary) — the EXACT SAME signature and
+  conclusion as `a1_R6_assembled_v2'` (same `C`/`hCnn`/`hEboundFull`), proved as a thin wrapper around
+  Layer A: derives `hEbound_t` from `hEboundFull` via two elementary facts (`C ≤ C*(1+t')` since `C ≥ 0`
+  and `t' ≥ τ > 0`; `baseKernelW 2 0 τ p q ≥ 0` since `τ^(0:ℝ) = 1` via `Real.rpow_zero` and `gaussDdim ≥
+  0`), then invokes `a1_R6_assembled_local` with `CT := C`. `RightInverseGeneral.lean` itself is NOT
+  edited (new-files-only discipline) — this is a standalone regression check, not a replacement.
+
+**Canary D5 (BackCompat) — PASSED cleanly, no STOP.** Both theorems typecheck; Layer B's proof needed
+only the two elementary bridging facts above (`mul_le_mul_of_nonneg_right`, `Real.rpow_zero`,
+`gaussDdim_nonneg`) — no unexpected obstruction, no transport/cast issues, confirming Layer A's
+refactor did not silently weaken anything relative to `a1_R6_assembled_v2'`.
+
+**Build/audit.** Full `lake build QIQTH` (10433 jobs) 0 errors. `#print axioms` on both new theorems
+(embedded in the file AND pinned in `AxiomAudit.lean`) confirms std-3 exactly (`propext,
+Classical.choice, Quot.sound`), no `sorryAx`, no custom axioms (also confirmed via throwaway
+`chk1172.lean`, deleted after confirming). `bash scripts/axiom_budget_check.sh`: raw axiom count 0
+(budget 0), OK. `git status --porcelain | grep -i vacuum`: nothing. Checked TRUE highest `J4-NNN`
+(`1171`) and `cpNNN` (`1136`) freshly right before committing — this entry correctly numbered `J4-1172`,
+memory checkpoint `cp1137`. Commit `0ebc911b`, pushed to `origin/main`.
+
+**Campaign health.** Phase 3 DONE in 1 dispatch (vs 5-8 budgeted) — the fourth consecutive Phase in this
+sub-campaign to land at or under budget, and the fourth consecutive dispatch with zero new analytic
+content (pure re-plumbing of already-banked machinery, per the plan's own honest-worth-doing framing).
+Per this dispatch's own scoping, Phase 4 (factor the J4-774 discharge theorem into a pointwise version,
+target Canary D6) is the natural next dispatch — NOT Phase 6 (the ~50-hypothesis real-consumer
+migration), which the plan explicitly withholds authorization for until a concrete consumer is named.
+
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁ = R/6`.
+
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.

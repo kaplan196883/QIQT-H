@@ -221,4 +221,20 @@ than a plumbing one, and should be re-scoped before continuing.
   correction that it doesn't eliminate the unbounded-τ structural need, it shows that need is already met
   for free. Full build (10432 jobs) 0 errors, std-3, budget 0. Full detail:
   `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1171; memory checkpoint `cp1136`; commit `c5e96ae3`, pushed.
-  **Phase 3 is next** (extract `a1_R6_assembled_local` / rebuild `v2'` as a thin wrapper, Canary D5).
+
+- **J4-1172 (Phase 3, this dispatch) — Canary D5 (BackCompat) PASSED cleanly, NO STOP.** New file
+  `QIQTH/CapstoneLocalAssembly.lean`: `a1_R6_assembled_local` (Layer A) is a literal copy of
+  `a1_R6_assembled_v2'`'s ~65-hypothesis signature with ONLY `(C, hCnn, hEboundFull)` replaced by
+  `(CT, hCTnn, hEbound_t)` (the every-ceiling-affine-in-`t'` shape `LocalizedBankedData`'s two
+  `_on_horizon` producers consume), all other ~50 hypotheses copied verbatim; the proof swaps the two
+  `_of_banked` calls for their `_on_horizon` siblings and feeds `GrandAssemblyRecon.a1_R6_assembled`
+  `C := CT*(1+t)`. `a1_R6_assembled_v2'_via_local` (Layer B, the literal D5 canary) has the EXACT SAME
+  signature/conclusion as `a1_R6_assembled_v2'`, proved as a thin wrapper around Layer A via two
+  elementary facts (`C ≤ C*(1+t')` since `C≥0,t'>0`; `baseKernelW 2 0 τ p q ≥0` via `Real.rpow_zero` +
+  `gaussDdim_nonneg`) — no unexpected obstruction, confirming Layer A did not silently weaken anything.
+  `RightInverseGeneral.lean` itself is NOT edited (new-files-only). Full build (10433 jobs) 0 errors,
+  std-3, budget 0. Phase 3 complete in 1 dispatch (budgeted 5-8) — fourth consecutive on/under-budget
+  phase with zero new analytic content. Full detail: `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1172;
+  memory checkpoint `cp1137`; commit `0ebc911b`, pushed. **Phase 4 is next** (factor the J4-774
+  discharge theorem into a pointwise version, target Canary D6) — Phase 6 (the ~50-hypothesis real-
+  consumer migration) remains withheld pending a named concrete consumer, per this plan's own scoping.
