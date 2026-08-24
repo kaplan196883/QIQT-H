@@ -19091,3 +19091,69 @@ targeting Canaries D7/D8) is the natural next dispatch. Phase 6 (the ~50-hypothe
 migration) remains withheld pending a named concrete consumer, per the plan's own explicit scoping.
 
 `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+## J4-1174 (Phase 5 of the capstone-signature redesign plan, Layer C, Canaries D7/D8) — 2026-08-24
+
+Per `docs/qg_roadmap/CAPSTONE_SIGNATURE_REDESIGN_PLAN.md`'s phase table, Phase 5 line: "Build the
+`a1_R6_assembled_v3` existential signature (Layer C), instantiate `CT` internally → D7/D8 green".
+
+**New file `QIQTH/CapstoneExistentialAssembly.lean`.** `a1_R6_assembled_v3` (Layer C): destructs
+`GateOpennessExport.gatedWitnessN1_package_open`'s existential FIRST — a single `obtain ⟨a, b, C, ha,
+hab, hC0, S, hbound, hmemS0, hopenS0⟩ := gatedWitnessN1_package_open ...` — then re-exposes ALL ~50
+other independent hypotheses of `CapstoneLocalAssembly.a1_R6_assembled_local`/
+`RightInverseGeneral.a1_R6_assembled_v2'` (`htriple, core, hCH, uu, hu_open, hu0, Bs, Ba, Bd, Cf, Dmap,
+metric, chart, source, derivData, env, hgD1, T, hT, U, hUopen, htU, hUpos, hUT, r₀, τ₀, hr₀, hτ₀, u₀, u₁,
+hAnear, hu₀cont, hu₀one, C₀, C₁, hu₀bdd, hu₁bdd, A₀, A₁, C_L, hA₀, hA₁, hC_L, hAdom, hAzero, hBdom,
+hBcont, hAmeas, hBmeas, hu₀meas, hu₁meas, hMeasFII, hUfloor, hInnerCont, nb, hnb, hFmeas, hFint,
+hF'meas, boundD, hbdd, hbound, hpardiff, L, hLnn, hCross, pdpdH, hInterchange, hLapFull, hII_lo, hII_hi,
+D0, D1, hD0, hD1nn, hbnd, E₀, E₁, hE₀, hE₁, hEdom, hEzeroE, hFzero, hIlo, hIhi, hEcomb`) as
+caller-supplied inputs UNDER the existential — the public statement is
+`∃ a b : ℝ, 0 < a ∧ a < b ∧ ∃ S, (0 : Point n) ∈ S 0 ∧ (…50 hyps… → conclusion)`. `hK0`/`hS0` discharge
+exactly as Phase 0/1 established (`hS0` = `hmemS0 hK0`, not a free binder; `K`/`hK`/`hK0` remain genuine
+external inputs). The five geometric inputs needed ONLY to open the package (`hgnd, hgsymm, hinvF,
+hframeK, hw`) are retained as `a1_R6_assembled_v3`'s own binders (they are consumed internally by the
+single `obtain`, then dropped from everything downstream — mirroring J4-1173's pointwise theorem).
+
+**`CT`-instantiation finding (deviates slightly from the plan's literal phrasing, verified by
+typechecking, not assumed).** The plan's prose says "sets `CT := Cpkg*(1+t)`"; the actual Lean shape
+that typechecks is `CT := C` (the package's raw `Cpkg`, unscaled) fed directly into
+`a1_R6_assembled_local`'s `CT` slot, because `a1_R6_assembled_local` itself already multiplies
+internally (`CT*(1+t)`) when threading to `GrandAssemblyRecon.a1_R6_assembled` — i.e. the package's own
+`hbound` (an every-ceiling family `∀ t' τ p q, 0 < τ → τ ≤ t' → |...| ≤ (C*(1+t'))*...`) is EXACTLY
+`a1_R6_assembled_local`'s expected `hEbound_t` shape with `CT := C`, no rescaling needed at the call
+site. The EFFECTIVE constant ultimately passed to `GrandAssemblyRecon.a1_R6_assembled` is `C*(1+t)`,
+matching the plan's intent exactly; only the free-variable naming differs from the plan's literal prose.
+(An earlier attempt using `PackageHorizonBound.gatedWitnessN1_horizon_bound`'s horizon-SPECIALIZED bound,
+which drops the `∀ t'` quantifier down to a single `t`, does NOT typecheck against
+`a1_R6_assembled_local`'s every-ceiling-family `hEbound_t` slot — confirmed by a concrete arity-mismatch
+error — so the RAW `gatedWitnessN1_package_open` opening was used instead of the Phase-1 wrapper.)
+
+**Canary D7 — DependentTail — PASSED.** The full theorem (not a truncated reduction — the complete
+~50-hypothesis tail elaborated directly) compiles with zero `Eq.ndrec`/`cast`/manual transports anywhere
+in the proof body (`obtain` + `refine` + `intro` + one `exact` application of `a1_R6_assembled_local`) —
+confirmed by the clean full build with no defeq-forcing tactics needed.
+
+**Canary D8 — IndependentConstants — PASSED.** `C₀, C₁, A₀, A₁, C_L, D0, D1, E₀, E₁` are distinct
+`∀`-bound tail arguments in the existential's body, syntactically and semantically independent of the
+package's `C`/the internal `CT` — any real call site must supply all nine explicitly; none is silently
+unified with `Cpkg`.
+
+**Build/audit.** `lake build QIQTH.CapstoneExistentialAssembly` (8774 jobs) and full `lake build QIQTH`
+(10435 jobs) both 0 errors. `#print axioms` on `a1_R6_assembled_v3` (in-file AND pinned in
+`AxiomAudit.lean`) confirms std-3 exactly (`propext, Classical.choice, Quot.sound`), no `sorryAx`, no
+custom axioms (also re-verified via throwaway `chk1174.lean`, deleted after confirming). `bash
+scripts/axiom_budget_check.sh`: raw axiom count 0 (budget 0), OK — no sorryAx, no deleted-axiom
+regressions. `git status --porcelain | grep -i vacuum`: nothing. Checked TRUE highest `J4-NNN` (`1173`)
+and `cpNNN` (`1138`) freshly right before committing (`git fetch origin` confirmed local `HEAD` matched
+`origin/main`) — this entry correctly numbered `J4-1174`, memory checkpoint `cp1139`. Commit `f5a7087d`.
+
+**Campaign health.** Phase 5 DONE in 1 dispatch (budgeted 4-7) — the SIXTH consecutive Phase in this
+sub-campaign to land at or under budget with zero new analytic content. Per the plan's own explicit
+scoping (and Sol's J4-1168 caution, reiterated verbatim in the plan's "Honest worth-doing assessment"),
+**Phase 6 (migrating a REAL consumer through all ~50 tuple-dependent hypotheses at the package's chosen
+tuple) is NOT attempted here and remains withheld pending a named concrete consumer.** Phases 0-5
+(~24-40 dispatches budgeted) are now COMPLETE in 6 total dispatches (J4-1169 through J4-1174) — the
+sub-campaign's full "API redesign through v3, no real consumer" scope is done, substantially under the
+plan's own estimate.
+
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.

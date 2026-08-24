@@ -255,3 +255,28 @@ than a plumbing one, and should be re-scoped before continuing.
   `a1_R6_assembled_v3` existential Layer-C signature, destructing the package existential first and
   re-exposing all ~50 other hypotheses as caller inputs under it, targeting Canaries D7/D8) — Phase 6
   remains withheld pending a named concrete consumer, per this plan's own scoping.
+
+- **J4-1174 (Phase 5, this dispatch) — Canaries D7 (DependentTail)/D8 (IndependentConstants) both
+  PASSED, no STOP.** New file `QIQTH/CapstoneExistentialAssembly.lean`: `a1_R6_assembled_v3` (Layer C)
+  destructs `gatedWitnessN1_package_open`'s existential FIRST (single `obtain`), then re-exposes ALL ~50
+  other independent hypotheses of `a1_R6_assembled_local`/`a1_R6_assembled_v2'` as caller-supplied inputs
+  UNDER the existential: `∃ a b, 0 < a ∧ a < b ∧ ∃ S, (0:Point n) ∈ S 0 ∧ (…50 hyps… → conclusion)`.
+  **`CT`-instantiation correction to this plan's own prose**: the literal typechecking shape is
+  `CT := C` (the package's raw, UNSCALED constant) fed into `a1_R6_assembled_local`'s `CT` slot — that
+  theorem already multiplies internally (`CT*(1+t)`) when assembling the final capstone, so the
+  package's own every-ceiling `hbound` matches `hEbound_t`'s expected shape exactly with no rescaling at
+  the call site; the EFFECTIVE constant threaded to `GrandAssemblyRecon.a1_R6_assembled` is still
+  `C*(1+t)`, matching this plan's intent, only the free-variable naming differs from the literal prose
+  above. (Using `PackageHorizonBound.gatedWitnessN1_horizon_bound`'s horizon-SPECIALIZED bound instead
+  does NOT typecheck — confirmed by a concrete arity-mismatch error, since it drops the `∀ t'`
+  quantifier `a1_R6_assembled_local` needs — so the RAW `gatedWitnessN1_package_open` opening was used.)
+  D7 PASSED: the full (non-truncated) ~50-hypothesis tail elaborates with zero `Eq.ndrec`/`cast`/manual
+  transports. D8 PASSED: `C₀, C₁, A₀, A₁, C_L, D0, D1, E₀, E₁` remain distinct `∀`-bound tail arguments,
+  never unified with the package's `C`/`CT`. Full build (10435 jobs) 0 errors, std-3, budget 0. Phase 5
+  complete in 1 dispatch (budgeted 4-7) — SIXTH consecutive on/under-budget phase, zero new analytic
+  content. **Phases 0-5 (the full "API redesign through v3, no real consumer" scope, budgeted 24-40
+  dispatches) are now COMPLETE in 6 total dispatches (J4-1169–1174).** Full detail:
+  `docs/qg_roadmap/JET4_TOWER_PLAN.md` J4-1174; memory checkpoint `cp1139`; commit `f5a7087d`. **Phase 6
+  (the ~50-hypothesis real-consumer migration) remains explicitly withheld pending a named concrete
+  consumer**, per this plan's own scoping and Sol's original J4-1168 caution — NOT authorized by this
+  dispatch.
