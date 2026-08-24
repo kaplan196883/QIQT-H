@@ -7230,3 +7230,12 @@ import QIQTH.ChartGateUniformTube
 -- S-independent measurability residue (hChartRep wall) + hcarField2 passed through verbatim. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ConcreteGateResidualization
+-- J4-1147: ThetaMeasurableEmbedding — dispatch 1 of Sol's 4-dispatch plan to close hWmeas.
+-- Refactors ConcreteGateInstantiation.hKSmeas_concrete's (J4-234) Lusin–Souslin proof into the
+-- reusable theta_measurableEmbedding (Θ(q,v)=(q,φ_q v) is a MeasurableEmbedding on TubeDomain K c),
+-- adds the generic embeddingPullbackDflt (default-extended partial inverse of any MeasurableEmbedding
+-- is measurable + recovers g on the range), and defines the NEW canonical chart uniformInverseChart'
+-- (velocity coord of the default-extended inverse of Θ — NOT Exists.choose), whose joint measurability
+-- (uniformInverseChart'_joint_measurable) is DERIVED — the hWmeas shape unclosable (J4-1145) for the
+-- opaque uniformInverseChart. std-3. NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}).
+import QIQTH.ThetaMeasurableEmbedding

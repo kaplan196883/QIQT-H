@@ -31978,4 +31978,22 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ConcreteGateResidualization.tripleHEmeas_concrete_v4_residual_at_flowBallGate
 #print axioms QIQTH.ConcreteGateResidualization.tripleHEmeas_concrete_v4_residual_at_flowBallGate
 
+-- J4-1147: ThetaMeasurableEmbedding — dispatch 1 of Sol's 4-dispatch plan to close hWmeas. The generic
+-- embeddingPullbackDflt (default-extended partial inverse of any MeasurableEmbedding is measurable +
+-- recovers g on the range, thin wrapper over Mathlib's MeasurableEmbedding.measurable_extend), the
+-- reusable theta_measurableEmbedding (refactored from hKSmeas_concrete's Lusin–Souslin core: Θ(q,v)=
+-- (q,φ_q v) is a MeasurableEmbedding on TubeDomain K c ∀ 0<c<δ₀), the NEW canonical chart
+-- uniformInverseChart' (velocity coord of Θ's default-extended inverse — NO Exists.choose), its tube
+-- left-inverse eq (uniformInverseChart'_flow_eq), and the PAYOFF uniformInverseChart'_joint_measurable
+-- (the hWmeas shape — UNGATED in the field point — DERIVED, not assumed). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ThetaMeasurableEmbedding.embeddingPullbackDflt
+#print axioms QIQTH.ThetaMeasurableEmbedding.embeddingPullbackDflt
+#check @QIQTH.ThetaMeasurableEmbedding.theta_measurableEmbedding
+#print axioms QIQTH.ThetaMeasurableEmbedding.theta_measurableEmbedding
+#check @QIQTH.ThetaMeasurableEmbedding.uniformInverseChart'_flow_eq
+#print axioms QIQTH.ThetaMeasurableEmbedding.uniformInverseChart'_flow_eq
+#check @QIQTH.ThetaMeasurableEmbedding.uniformInverseChart'_joint_measurable
+#print axioms QIQTH.ThetaMeasurableEmbedding.uniformInverseChart'_joint_measurable
+
 end QIQTH.AxiomAudit
