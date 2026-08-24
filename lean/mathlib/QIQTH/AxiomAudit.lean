@@ -32155,4 +32155,41 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HgateSatAudit.gatedTauRepProdS'_measurable
 #print axioms QIQTH.HgateSatAudit.gatedTauRepProdS'_measurable
 
+-- J4-1161 (Phase 4 Task B continuation of the chart-parametric rebuild campaign): WitnessTauDerivEqWith
+-- — genericizes `HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS` and
+-- `.tauDeriv_prod_stronglyMeasurable_v4`. OBSTRUCTION FOUND AND ROUTED AROUND: J4-1160's
+-- `gatedTauRepProdSWith` is only PARTIALLY chart-generic — its amplitude term calls the hardwired
+-- `chartFieldAmp` (OLD chart) rather than `chartFieldAmpWith … W`, which is harmless for pure
+-- measurability (J4-1160's own goal) but FATAL for a genuine derivative-identity theorem at abstract
+-- `W` (the product-rule identity needs the amplitude VALUE to match the SAME chart as the Gaussian
+-- argument). Resolution: this file builds its OWN fully chart-generic representative
+-- `gatedTauRepProdSGenWith` (amplitude term = `chartFieldAmpWith … W`), coinciding with
+-- `gatedTauRepProdSWith`/`gatedTauRepProdS` on the OLD chart by `rfl`; `GatedTauRepProdSWith.lean` is
+-- left completely untouched. Lands the generic + primed τ-derivative identity
+-- (`witnessTauDeriv_eq_gatedTauRepProdSWith` / `_recovers_old` / `_'`) and the generic + primed
+-- strongly-measurable capstone (`tauDeriv_prod_stronglyMeasurable_v4With` / `_'`), the latter with chart
+-- joint-measurability fully discharged via `uniformInverseChart'_joint_measurable` (no free
+-- `hWmeas`/chart-measurability hypothesis remains; the genuinely amplitude-analytic `hAmpMeas`/`hgate`
+-- hypotheses about `chartFieldAmp'` remain, correctly, as caller-supplied inputs). This is a STEP
+-- TOWARD Canary C3 ("PrimeHEmeasAudit"), NOT C3 itself: it is HgateSatAudit-level and τ-carrier-only,
+-- not HEmeasBorelAudit-level, and does not touch the field/field² carriers (never even formalized for
+-- the old chart — §3 prose plan only) or `GatedRepSFix.lean`/`HEmeasBorelAudit.lean`. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HgateSatAudit.gatedTauRepProdSGenWith_uniformInverseChart
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdSGenWith_uniformInverseChart
+#check @QIQTH.HgateSatAudit.gatedTauRepProdSGenWith_measurable
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdSGenWith_measurable
+#check @QIQTH.HgateSatAudit.gatedTauRepProdSGen'_measurable
+#print axioms QIQTH.HgateSatAudit.gatedTauRepProdSGen'_measurable
+#check @QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdSWith
+#print axioms QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdSWith
+#check @QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdSWith_recovers_old
+#print axioms QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdSWith_recovers_old
+#check @QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS'
+#print axioms QIQTH.HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS'
+#check @QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4With
+#print axioms QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4With
+#check @QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4'
+#print axioms QIQTH.HgateSatAudit.tauDeriv_prod_stronglyMeasurable_v4'
+
 end QIQTH.AxiomAudit

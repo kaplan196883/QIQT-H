@@ -7302,3 +7302,13 @@ import QIQTH.WitnessSecondOrderInterchangeWith
 -- (gatedTauRepProdS'_measurable). CANARY C2 RESULT: PASS — hWmeas used only for raw measurability
 -- composition, shapes matched cleanly, mechanical substitution of the old proof. std-3. NOT a₁=R/6.
 import QIQTH.GatedTauRepProdSWith
+-- J4-1161 (Phase 4 Task B continuation): WitnessTauDerivEqWith — genericizes
+-- HgateSatAudit.witnessTauDeriv_eq_gatedTauRepProdS and .tauDeriv_prod_stronglyMeasurable_v4. Found that
+-- J4-1160's gatedTauRepProdSWith is only PARTIALLY chart-generic (amplitude term hardwired to the OLD
+-- chartFieldAmp, not chartFieldAmpWith) — routed around by building a FULLY chart-generic representative
+-- gatedTauRepProdSGenWith in this new file (GatedTauRepProdSWith.lean untouched). Lands the generic +
+-- primed τ-derivative identity (witnessTauDeriv_eq_gatedTauRepProdSWith / _' ) and the generic + primed
+-- strongly-measurable capstone (tauDeriv_prod_stronglyMeasurable_v4With / _'), the latter with chart
+-- joint-measurability fully discharged via uniformInverseChart'_joint_measurable. Step toward, NOT
+-- itself, Canary C3 (τ-carrier only, HgateSatAudit-level, not HEmeasBorelAudit-level). std-3. NOT a₁=R/6.
+import QIQTH.WitnessTauDerivEqWith
