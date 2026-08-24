@@ -7287,3 +7287,10 @@ import QIQTH.WitnessFieldDerivWith
 -- no extra machinery. Does NOT genericize witness_secondOrder_interchange (needs heatConvFrozenWith,
 -- out of scope). std-3. NOT a₁=R/6.
 import QIQTH.WitnessFieldDerivConsumersWith
+-- J4-1159 (Phase 3 dispatch): WitnessSecondOrderInterchangeWith — chart-generic + primed sibling of
+-- EngineInstantiation.witness_secondOrder_interchange (E3); closes the deferred Task B item 7. Turns
+-- out heatConvFrozen/pd_pd_heatConvFrozen_interchange were ALREADY chart-generic (arbitrary A/H,dH,dHH,
+-- F : ℝ → Point n → Point n → ℝ), so no heatConvFrozenWith was needed — pure mechanical substitution of
+-- vanVleckGatedWitnessWith/witnessFieldDerivWith/witnessFieldDeriv2With for the concrete roots. std-3.
+-- NOT a₁=R/6.
+import QIQTH.WitnessSecondOrderInterchangeWith

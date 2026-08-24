@@ -32119,4 +32119,20 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.HeatResidualBound.witnessFieldDeriv'_gate_abs_le
 #print axioms QIQTH.HeatResidualBound.witnessFieldDeriv'_gate_abs_le
 
+-- J4-1159 (Phase 3 opening dispatch of the chart-parametric rebuild campaign):
+-- WitnessSecondOrderInterchangeWith — chart-generic + primed sibling of
+-- `EngineInstantiation.witness_secondOrder_interchange` (E3, "THE ENGINE INSTANTIATION"), closing the
+-- Phase 2 Task B item J4-1158 deliberately deferred (`witness_secondOrder_interchange`). Correction of
+-- J4-1158's forward note: NO `heatConvFrozenWith` was needed — `heatConvFrozen` and
+-- `pd_pd_heatConvFrozen_interchange` were ALREADY fully chart-generic (arbitrary
+-- `A/H,dH,dHH,F : ℝ → Point n → Point n → ℝ`, no chart call in their own bodies); the chart-hardwiring
+-- lived entirely in the CONCRETE ARGUMENTS (`vanVleckGatedWitness`/`witnessFieldDeriv`/
+-- `witnessFieldDeriv2`), already genericized in J4-1156/1157/1158. Pure mechanical substitution,
+-- mirroring the old proof exactly. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.HeatResidualBound.witness_secondOrder_interchangeWith
+#print axioms QIQTH.HeatResidualBound.witness_secondOrder_interchangeWith
+#check @QIQTH.HeatResidualBound.witness_secondOrder_interchange'
+#print axioms QIQTH.HeatResidualBound.witness_secondOrder_interchange'
+
 end QIQTH.AxiomAudit
