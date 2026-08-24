@@ -7196,3 +7196,11 @@ import QIQTH.ChartGateFiberProductMeasurable
 -- HasDerivAt, discharge PdiffAt, or discharge hOffS/hOffS2. std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartGateConcreteInstantiation
+-- J4-1137: ChartGateGluedFieldHasDerivAt — for a FIXED coordinate k, glues the diagonal-cover
+-- finite family {Pfield z₀ 0 k}_{z₀∈t k} (J4-1132 compatible family @ J4-1136 index t k) via
+-- exists_measurable_glue_finset_field (J4-1131) into a single globally-Measurable Pglued_k, then
+-- (via J4-1136's mem_S_iff bridge) derives the literal on-gate HasDerivAt conjunct of
+-- GatedRepSFix.tripleHEmeas_concrete_v4's hcarField, for the SHARED gate S. Does NOT yet package
+-- ∀k, build the hcarField2 second-order analogue, discharge PdiffAt, or discharge hOffS/hOffS2. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartGateGluedFieldHasDerivAt

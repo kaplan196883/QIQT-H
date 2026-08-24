@@ -31936,5 +31936,12 @@ namespace QIQTH.AxiomAudit
 #print axioms QIQTH.ExpMap.finite_diag_cover_of_family
 #check @QIQTH.ExpMap.chartGate_concrete_S_construction
 #print axioms QIQTH.ExpMap.chartGate_concrete_S_construction
+-- J4-1137: ChartGateGluedFieldHasDerivAt — single-coordinate glued Pglued_k (via
+-- exists_measurable_glue_finset_field over the subtype ↥(t k), every seed admissible) + the literal
+-- on-gate HasDerivAt conjunct of tripleHEmeas_concrete_v4's hcarField at coordinate k, for the
+-- shared gate S. Does NOT package ∀k / hcarField2 / PdiffAt / hOffS. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_single_coord
+#print axioms QIQTH.ExpMap.chartGate_glued_pfield_onGate_hasDerivAt_single_coord
 
 end QIQTH.AxiomAudit
