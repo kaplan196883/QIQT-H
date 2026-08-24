@@ -7182,3 +7182,9 @@ import QIQTH.ChartCoherentPFieldCompatibleFamily
 -- (step 5), does NOT identify with J4-1130's local correctness (step 6). std-3.
 -- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
 import QIQTH.ChartCoherentPFieldDiagonalFiniteCover
+-- J4-1135: ChartGateFiberProductMeasurable — abstract fiber-gate lemmas (openness, diagonal
+-- membership, joint gate measurability, finite-intersection openness) underlying the eventual
+-- S := ⋂ k, S_k combination that will make GatedRepSFix.tripleHEmeas_concrete_v4's hKSmeas/
+-- hcarField/hcarField2 non-vacuous. Purely abstract, chart-agnostic (arbitrary X,Y,Z). std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+import QIQTH.ChartGateFiberProductMeasurable

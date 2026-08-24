@@ -31908,4 +31908,18 @@ namespace QIQTH.AxiomAudit
 #check @QIQTH.ExpMap.chartCoherent_pfield_diagonal_finite_cover
 #print axioms QIQTH.ExpMap.chartCoherent_pfield_diagonal_finite_cover
 
+-- J4-1135: ChartGateFiberProductMeasurable — abstract fiber-gate lemmas (openness, diagonal
+-- membership, joint gate measurability, finite-intersection openness), chart-agnostic. std-3.
+-- NOT a₁=R/6 (STRICTLY CONDITIONAL on {hDuhamel,hDConv,hCConv}, UNCHANGED).
+#check @QIQTH.ExpMap.fiberGate_isOpen
+#print axioms QIQTH.ExpMap.fiberGate_isOpen
+#check @QIQTH.ExpMap.fiberGate_diag_mem
+#print axioms QIQTH.ExpMap.fiberGate_diag_mem
+#check @QIQTH.ExpMap.fiberGate_gate_measurableSet
+#print axioms QIQTH.ExpMap.fiberGate_gate_measurableSet
+#check @QIQTH.ExpMap.fiberGate_iInter
+#print axioms QIQTH.ExpMap.fiberGate_iInter
+#check @QIQTH.ExpMap.fiberGate_iInter_isOpen
+#print axioms QIQTH.ExpMap.fiberGate_iInter_isOpen
+
 end QIQTH.AxiomAudit
