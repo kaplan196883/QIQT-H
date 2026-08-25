@@ -19394,3 +19394,87 @@ target now that THREE independent census routes (`hAmeas/hDmeas`, `hFdom`'s unde
 converge on `{hSm0, hIn, hcar}`. Do NOT re-attempt local analytic estimates on any of the three routes
 without first addressing the selector. `hmassone`/`hmod`/`hsup` (Section-F, still untouched since J4-1183)
 remains a lower-priority alternative if the selector rearchitecture proves too large for one dispatch.
+
+## J4-1187 — AUDIT (NO NEW LEAN FILE): is `hIn`/`hInDeriv`'s `Classical.choose` wall the SAME structural
+problem as this session's earlier `hWmeas` chart-selection wall (J4-1145-1155), meaning the
+`ThetaMeasurableEmbedding`/`uniformInverseChart'` technique transfers? YES for `hIn`/`hInDeriv` (real,
+~4-8-dispatch win available, NOT YET BUILT); `hSm0` is a DIFFERENT flavor (off-`K` vacuous-existential
+undeterminedness, not cross-point selector incoherence) and independently blocks the same theorem
+regardless — 46th Sol consult
+
+**Task.** Per dispatch brief: determine whether `hDConv`'s `{hSm0, hIn, hInDeriv, hcar}` wall (J4-1116-1120,
+re-confirmed convergent at J4-1183-1186) is the SAME structural `Classical.choose`-selection problem as the
+chart-selection wall this session already defeated via a constructive replacement (`uniformInverseChart'`,
+`ThetaMeasurableEmbedding.lean`, J4-1147) for the sibling `hWmeas` binder in `HDConvGateThreading.hDConv_AT_GATE`
+et al. — or a genuinely different flavor requiring different machinery.
+
+**Finding 1 — `hIn`/`hInDeriv` and `hWmeas` are the LITERAL SAME raw object.** `hWmeas` (J4-1145's literal
+shape, `GatedRepSFix.tripleHEmeas_concrete_v4`) is `Measurable (fun w : ℝ × Point n × Point n =>
+uniformInverseChart g gi hChr hK w.2.2 w.2.1)`. `hIn`/`hInDeriv` (J4-1118's literal shape,
+`HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced.lean`/`HDmeasGFromFieldSliceTimeDeriv.lean`) ask
+`AEStronglyMeasurable` of `globalCutoffParametrixWitnessN 1 (vanVleck g) (transportCoeff …) a b
+(uniformInverseChart g gi hC hK) τ (0:Point n) z` in `z` — i.e. joint-in-base-point measurability of the
+SAME opaque `uniformInverseChart` object, fed as the `Vmap` argument. J4-1150's earlier finding — `uniformInverseChart'`
+agrees with `uniformInverseChart` only POINTWISE on a bounded tube image, not globally, so `Measurable
+uniformInverseChart'` cannot literally discharge `Measurable uniformInverseChart` — applies to `hIn`/`hInDeriv`
+identically. So as LITERALLY STATED, `hIn`/`hInDeriv` are UNCLOSABLE by substitution, same as `hWmeas`.
+
+**Finding 2 — BUT the consuming call site differs structurally from `hWmeas`'s, in a way that matters.**
+`hWmeas`'s consumers (`vanVleckGatedWitness`, `chartFieldAmp`, `witnessFieldDeriv`) call `uniformInverseChart`
+literally INSIDE their `def` bodies — no abstract chart parameter — so even the CONCLUSION of consuming
+theorems is hardwired (J4-1150 finding 3); this is what forced the 45-80+ dispatch full chart-parametric
+rebuild (J4-1153, authorized/partially executed J4-1156-1182, confirmed by J4-1183 to be ORTHOGONAL to
+`hDConv`'s own census). `hIn`/`hInDeriv`'s consumer, `globalCutoffParametrixWitnessN N Θ u a b Vmap τ p q :=
+radialCutoff a b (Vmap q p) * heatParametrix N Θ u τ (Vmap q p)`, is ALREADY chart-generic at the type level
+(`Vmap` is an explicit function parameter, not hardwired) — no `def`-level rebuild needed to retarget it at
+`uniformInverseChart'`.
+
+**46th Sol consult (`gpt-5.6-sol`, high), given both findings precisely.** Verdict: (1) the `hIn`/`hInDeriv`
+substitution win via `Vmap := uniformInverseChart' g gi hC hK c` + `uniformInverseChart'_joint_measurable` IS
+real and does NOT require the 45-80+ dispatch rebuild — sized ~4-8 dispatches (argument-order adapters +
+`Measurable.aestronglyMeasurable`), landing a PRIMED theorem VARIANT (`Vmap := uniformInverseChart'`), not a
+discharge of the literal existing `hIn`/`hInDeriv` binders (which still name `uniformInverseChart`, exactly
+as `hWmeas` does). (2) It does NOT close `hDConv_AT_GATE`/the Section-G census regardless: `hSm0` is
+independent of `Vmap` (it constrains `constGate`'s own `MeasurableSet` shape, unrelated to which chart feeds
+`globalCutoffParametrixWitnessN`) and remains an untouched, separate blocker — so the win is real local
+progress but not net theorem closure. (3) `hSm0` is a GENUINELY DIFFERENT technique-class problem from
+`hWmeas`/`hIn`: `hWmeas`/`hIn` are "cross-parameter coherence" problems (per-point choices with no proof of
+joint-in-base-point regularity — exactly what the Lusin–Souslin embedding trick fixes by replacing the
+selector with a canonical one). `hSm0` is an "unconstrained off-domain branch" problem — off `K`, `constGate`'s
+underlying `uniformFlowTube` existential is VACUOUSLY satisfied, so the `.choose`-selected value carries
+literally NO constraint there (not merely "no joint-continuity", genuinely undetermined pointwise) — no
+embedding/selection-theorem argument of any kind can recover measurability of an unconstrained branch. The
+correct repair is definition-level: give `uniformFlowTube`/`constGate` an EXPLICIT off-`K` branch (e.g.
+`if q ∈ K then (existing choice) else (explicit canonical value, e.g. constant 0 or a smooth cutoff)`) — a
+different, `constGate`-specific redesign, not a reuse of `ThetaMeasurableEmbedding`'s machinery, and (per
+J4-1117's own finding) this redesign was flagged as "a genuine redefinition, not a next small step" even
+before this dispatch.
+
+**Attempted?** NOT attempted this dispatch (per standing discipline — a genuine ~4-8 dispatch construction is
+not a "smallest safely landable piece" to rush without first verifying the exact literal `Vmap`-generic shape
+`hIn`/`hInDeriv` need against the CURRENT `HDConvBoundDHpardiffAnySConstGateHAmeasHDmeasReduced.lean` binder
+list — and per Sol's own finding (2), it would not close the theorem regardless of `hSm0` remaining open).
+Reported precisely per the "if genuinely blocked/insufficient-alone, report rather than force" branch.
+
+**Verdict for the next session.** The chart-fix technique (`ThetaMeasurableEmbedding`/`uniformInverseChart'`)
+IS transferable to `hIn`/`hInDeriv` specifically (unlike `hWmeas`, no full rebuild needed — `Vmap` is already
+generic), a genuine ~4-8-dispatch opportunity if pursued, but insufficient alone: `hSm0` independently blocks
+the same theorem and needs a SEPARATE, `constGate`-specific off-`K`-branch redesign (not the embedding trick).
+`hcar` (`ChartJointBorel.chartJoint_measurable_of_rep`) was NOT separately re-examined this dispatch but, per
+its own literal shape (a chart-Borel-measurability wall on the SAME `uniformInverseChart` family per J4-1119),
+is presumptively in the SAME class as `hIn`/`hInDeriv` (transferable-in-principle, not yet attempted) rather
+than `hSm0`'s class — this presumption should be VERIFIED, not assumed, before any construction dispatch.
+Recommended next steps, in priority order: (i) verify `hcar`'s exact literal shape against this same
+"already-chart-generic vs. hardwired-`def`" test before committing to the `hIn`/`hInDeriv`-style substitution
+route for it too; (ii) if confirmed, a combined ~4-8(+)-dispatch primed-`Vmap`-substitution mini-campaign for
+`hIn`/`hInDeriv`/`hcar` together would still leave `hSm0` open and would NOT close `hDConv_AT_GATE` — only
+worth doing if `hSm0`'s off-`K`-branch redesign is ALSO committed to, or if a primed variant has standalone
+value (e.g. for a future capstone that only ever needs the tube-restricted `S := constGate`-gated slice,
+where `hSm0`'s off-`K` undeterminedness may not even matter — NOT verified this dispatch, a promising angle
+for a future audit). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT
+`a₁=R/6`.
+
+**Resolution.** No new Lean file, no build, no axiom-check (nothing new to check). `git status --porcelain |
+grep -i vacuum`: nothing (only pre-existing untracked sibling-session `docs/qg_roadmap/rnc_sympy/*` scratch,
+unrelated, untouched — confirmed left alone). Checked TRUE highest `J4-NNN` (`1186`) and `cpNNN` (`1150`)
+freshly right before committing — this entry correctly numbered `J4-1187`, memory checkpoint `cp1151`.
