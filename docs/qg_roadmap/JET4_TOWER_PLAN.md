@@ -19320,3 +19320,77 @@ with `CW lam τ₀` themselves universally-quantified parameters of the SAME the
 **Updated honest census of `hDConv`'s Section-G members (no change from J4-1184's reconstruction — this dispatch adds confidence, not new closures).** CLOSED: `hAzero`, `hUfloor` (abstract `S` J4-1101; `constGate` J4-1108), `nb/hnb` (J4-1102), `hAdom`/`hWDom` at concrete `S:=constGate` (J4-1103), `hFzero` (`_anyS` family, J4-1112), `hKm` (J4-1117). REDUCED-not-closed: `boundD/hbdd_d/hbound_d/hpardiff` (J4-1102), `hFdom` (J4-1105-1107 reduced to the `hEmeas`/M1 wall at ONE concrete gate, but the merge into `constGate`'s threshold is CONFIRMED architecturally blocked, not administratively — THIS dispatch), `hQ1` (J4-1109), `hLapFull/hII_lo` (J4-1110), `hEdom/hEcomb` (J4-1111), `{hAmp0,hCfield,hSupp}` (J4-1113/1114), `{hAmeas,hDmeas}→{hKm,hSm0,hIn,hInDeriv,hFslice}` (J4-1116). GENUINELY OPEN: the 3 `Classical.choose` walls `hSm0`/`hIn,hInDeriv`/`hcar` (J4-1117-1120), plus `hFslice`, plus the now-confirmed-architectural `hFdom`-threshold reconciliation, plus `hmassone/hmod/hsup` (Section-F, untouched since J4-1183). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
 
 **Recommendation for next dispatch.** Per Sol: attempt `L/hLnn/hCross` quadrant assembly starting with `hLnn`, first auditing whether `hCross`'s cross-term estimate is genuinely already banked (J4-919-966 arc) before assuming the final step is mechanical wiring. Alternative: `hmassone`/`hmod`/`hsup` (Section-F), flagged by Sol as plausibly substantive rather than wiring — verify supplier-lemma match before committing to either as "small."
+
+## J4-1186 — NEGATIVE FINDING, NO NEW LEAN FILE: `L/hLnn/hCross` quadrant assembly VERIFIED to bottom out on the SAME confirmed-open `hSm0`/`hIn` walls (not close `hDConv`); 45th Sol consult confirms and redirects toward a witness-selector rearchitecture
+
+**Task (per J4-1185's recommendation, Sol's 44th consult).** Verify precisely whether `hCross`'s cross-term
+estimate from the J4-919–966 arc is genuinely already banked (Sol's explicit caveat: do not assume), then
+attempt the `L/hLnn/hCross` quadrant assembly if so.
+
+**Read the exact literal binder.** `HDConvGateThreading.lean`'s `hDConv_AT_GATE`/`hDConvSlot_AT_GATE`
+(and, via `HDConvLiveGateWired.lean` which `import`s `HDConvGateThreading` — confirmed NOT a parallel/
+redundant construction, same shared machinery feeding BOTH `wide_a1_R6_interface_discharged_v2` and the
+live capstone `GatedGlobalWitnessN1CapstoneReachAligned.trueKernel_diagonal_a1_eq_R6_residual_N1_
+reachAligned`) carry `hR := hR_discharge H F U L hLnn hCross` where `L : ℕ→ℝ→ℝ`, `hLnn : ∀ m u∈U, 0≤L m u`,
+`hCross : ∀ m, ∀u∈U, ∀h k:ℝ, |4-term mixed second difference of heatConvFrozen H F| ≤ L m u·(|h|·|k|)`, at
+the CONCRETE gate witness `H := vanVleckGatedWitness g gi hChr hK S a b`, `F := leviSeries (heatOp g gi H)`,
+with `epsSeq m` (not a fixed `ε`) as the shrinking parameter.
+
+**Traced the J4-919–975 arc precisely (read the actual theorem statements, not summaries).** J4-965 (four
+sign quadrants, all needing `−ε<h`) + J4-966 `HCrossLargeShiftRegime.hcross_split_bound_habs_ge_eps`
+(`|h|≥ε` regime) give FULL `h∈ℝ` coverage of a FIXED-`ε` version of this exact 4-term shape — but EACH
+regime needs EXTERNAL per-regime data (a uniform sup-bound `M` on the sliver difference, or the `H_far`
+cancellation envelope) not internally derived. J4-967–975 built the `H_far` chain (`HFarFullyWired`,
+`CensusHrateFullConcrete`) discharging `H_far`'s `hrate` piece to a concrete term — but ITS OWN final
+assumption list (per J4-975's own "Honest status") still requires witness-side `{hKm, hSm0, hIn}` (plus
+F-side `{hFglob,hFdom,hmeas,hbase,hFslice,hgint,hAmp0,hCfield,hSupp}`). `hSm0` was ATTEMPTED and reported
+genuine NO-GO at J4-1117 (off-`K` undetermined-value `Classical.choose` selection); `hIn` reported
+genuinely open (no applicable Mathlib measurable-selection theorem) at J4-1118 — the SAME two walls
+already blocking the `hIn`/`hInDeriv` census route. J4-1119's own text already states `hcar` is reached
+"independently ... by the `L/hLnn/hCross` branch's J4-919-966 arc."
+
+**VERDICT: the prerequisite is banked ONLY as a REDUCTION, not a closure.** The cross-term Lipschitz
+machinery is real, std-3, non-vacuous — but it reduces the opaque `hCross`/`L`/`hLnn` triple onto
+`{hSm0, hIn}` (already-confirmed-open) plus a pile of NEW hypotheses (`M`, `C_far`, `hFglob`, sup-bounds)
+not currently in `hDConv_AT_GATE`'s signature, NOT an unconditional term. Additionally the assembly would
+require (i) generalizing the fixed-`ε` lemmas to general `epsSeq m` uniformly in `m`, and (ii) instantiating
+the currently-abstract `A B : ℝ→Point n→Point n→ℝ` / generic-`F` lemmas at the concrete
+`vanVleckGatedWitness`/`leviSeries(heatOp …)` objects — genuine nontrivial wiring, not mechanical citation.
+
+**45th Sol consult (gpt-5.6-sol high).** CONFIRMED: (a) the quadrant assembly, if attempted, would NOT
+close `hDConv` — it only re-derives the already-known `hSm0`/`hIn` destination via a longer route; (b) not
+worth the mainline engineering cost right now (would only be justifiable as an optional, explicitly-labelled
+reduction/audit brick, not a capstone-progress dispatch); (c) the actual next dispatch should be
+ARCHITECTURAL — a witness-selector rearchitecture (parameterize `vanVleckGatedWitness`'s off-`K`/off-support
+behavior as explicit structured selector data rather than opaque `Classical.choose`, so `hSm0`/`hIn`/`hcar`
+become honest inputs or provable from a stated selector API) — NOT another local analytic estimate on the
+`hCross` branch. Secondary/lower-value option: a wall-certificate/normal-form file packaging
+`{hSm0,hIn,hcar,hFdom}` as the explicit residual-wall structure, to prevent future rediscovery of the same
+blockage via yet another route (this is now the THIRD independent route — `hAmeas/hDmeas`, `hFdom`, and now
+`hCross` — that has been traced down to the identical `hSm0`/`hIn`/`hcar` selector wall).
+
+**STOPPED per standing discipline — did NOT force, did NOT build the full assembly (Sol-confirmed it would
+not close anything and would only re-confirm an already-known destination).** No new Lean file. No build,
+no axiom-check (nothing new to check). `git status --porcelain | grep -i vacuum`: nothing (only pre-existing
+untracked sibling-session `docs/qg_roadmap/rnc_sympy/*` scratch, unrelated, untouched). Checked TRUE highest
+`J4-NNN` (`1185`) and `cpNNN` (`1149`) freshly right before committing — this entry correctly numbered
+`J4-1186`, memory checkpoint `cp1150`.
+
+**Updated honest census of `hDConv`'s Section-G members (no change in closure status from J4-1185 — this
+dispatch adds the `hCross` branch's destination, confirming it converges on the SAME wall as the `hAmeas`/
+`hDmeas` route, not a new/distinct obstruction).** CLOSED: `hAzero`, `hUfloor`, `nb/hnb`, `hAdom`/`hWDom`,
+`hFzero`, `hKm`. REDUCED-not-closed: `boundD/hbdd_d/hbound_d/hpardiff`, `hFdom` (architecturally blocked
+threshold reconciliation), `hQ1`, `hLapFull/hII_lo`, `hEdom/hEcomb`, `{hAmp0,hCfield,hSupp}`,
+`{hAmeas,hDmeas}→{hKm,hSm0,hIn,hInDeriv,hFslice}`, and now `L/hLnn/hCross` (J4-919-975 arc reduces it to the
+SAME `{hSm0,hIn}` + F-side data — THIS dispatch). GENUINELY OPEN, all now confirmed to bottom out on the
+SAME architectural selector wall: `hSm0` (off-`K` value selection, NO-GO J4-1117), `hIn`/`hInDeriv` (on-`K`
+joint-in-base-point chart measurability, open, J4-1118), `hcar` (chart-Borel wall, reached independently by
+3 routes). Plus `hFslice`, the `hFdom`-threshold reconciliation, and `hmassone/hmod/hsup` (Section-F,
+untouched since J4-1183). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED.
+
+**Recommendation for next dispatch.** Per Sol's 45th consult: pivot to a witness-selector rearchitecture
+for `vanVleckGatedWitness`'s off-`K`/off-support `Classical.choose` behavior — the genuine architectural
+target now that THREE independent census routes (`hAmeas/hDmeas`, `hFdom`'s underlying data, `hCross`) all
+converge on `{hSm0, hIn, hcar}`. Do NOT re-attempt local analytic estimates on any of the three routes
+without first addressing the selector. `hmassone`/`hmod`/`hsup` (Section-F, still untouched since J4-1183)
+remains a lower-priority alternative if the selector rearchitecture proves too large for one dispatch.
