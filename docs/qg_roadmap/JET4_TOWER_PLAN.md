@@ -19478,3 +19478,88 @@ for a future audit). `a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDCo
 grep -i vacuum`: nothing (only pre-existing untracked sibling-session `docs/qg_roadmap/rnc_sympy/*` scratch,
 unrelated, untouched — confirmed left alone). Checked TRUE highest `J4-NNN` (`1186`) and `cpNNN` (`1150`)
 freshly right before committing — this entry correctly numbered `J4-1187`, memory checkpoint `cp1151`.
+
+## J4-1188 — AUDIT (NO NEW LEAN FILE): `hcar` classified INTO THE EXPENSIVE `hWmeas` CLASS (correcting J4-1187's presumption); `hSm0`'s `constGate'`-off-K-branch fix sized MEDIUM (5-25 dispatches) by `gpt-5.6-sol`, 47th consult — decisive recommendation to STOP pursuing `hDConv`, treat `{hDuhamel, hDConv, hCConv}` as the permanent citation boundary
+
+**Task.** Per the calling session's two-part brief: (1) classify `hcar`'s exact obligation against the
+`hWmeas`(expensive, def-hardwired)-vs-`hIn`(cheap, `Vmap`-generic) dichotomy J4-1187 drew but did not verify
+for `hcar`; (2) size a concrete fix for `hSm0` (the off-`K` vacuous-`Classical.choose` wall, NO-GO'd at
+J4-1117) and consult Sol for an honest go/no-go on continuing `hDConv`.
+
+**Finding 1 — `hcar` is in the EXPENSIVE `hWmeas` class, NOT the cheap `hIn` class (correcting J4-1187's
+presumption).** Read `ChartJointBorel.lean` in full. `hcar`'s underlying obligation (`chartJoint_measurable_of_rep`)
+is literally `Measurable (fun w : ℝ × Point n × Point n => uniformInverseChart g gi hC hK w.2.2 w.2.1)` —
+the IDENTICAL object as `hWmeas`. Its consuming context, `ChartJetHessianMixed.tripleHEmeas_concrete`'s
+`hcarTau`/`hcarField`/`hcarField2` existentials, calls `chartFieldAmp g gi hC hK a b …` and
+`uniformInverseChart g gi hC hK …` LITERALLY/HARDWIRED inside their statements (via `vanVleckGatedWitness`'s
+own hardwired body, `ConvApproximants.lean:161-166`: `gatedKernel K S (globalCutoffParametrixWitnessN 1 …
+(uniformInverseChart g gi hC hK))` — the chart is baked into the concrete witness, not passed as an abstract
+`Vmap`) — the SAME hardwiring pattern that forced `hWmeas`'s 45-80-dispatch chart-parametric rebuild scope,
+NOT `hIn`'s cheap `Vmap`-generic path (`globalCutoffParametrixWitnessN N Θ u a b Vmap τ p q` takes `Vmap` as
+an explicit parameter). `ChartJointBorel.lean`'s own `chartJoint_measurable_of_rep` PARTIALLY reduces the
+wall (via `Measurable.piecewise` over `{w|w.2.2∈K}`) to a single supplier obligation `hChartRep : ∃ F,
+Measurable F ∧ (∀w, w.2.2∈K → chart w = F w)` — but this `F`-existence is itself the SAME "joint-in-base-point
+measurability of an independently-per-point-chosen family" difficulty as `hIn`/`hInDeriv` (no Mathlib
+measurable-selection theorem applies, per J4-1118's NO-GO). **Verdict: `hcar` does NOT independently escape
+via a cheap substitution; it needs the SAME expensive rebuild as `hWmeas` (very plausibly served by ONE
+rebuild rather than two, since it is literally the same chart object) — J4-1187's "presumptively hIn-class"
+framing is corrected.**
+
+**Finding 2 — `hSm0`'s literal shape + a genuinely NEW candidate fix (not yet built).** `hSm0 : MeasurableSet
+{z | 0 ∈ constGate g gi hC hK cR z}`, `constGate … c := fun z => uniformFlowExp … z '' Metric.ball 0 c`,
+`uniformFlowExp … q := fun w => (uniformFlowTube … q w 1).1`, `uniformFlowTube … q w := (uniformFlow_tube_exists
+… q w).choose`, whose existential body `∃Y,(q∈K→‖w‖≤ρ_K→ IC∧ODE∧confinement)` is VACUOUSLY satisfied for
+`q∉K` (or `‖w‖>ρ_K`) — `.choose` is genuinely undetermined there (confirmed NO-GO at J4-1117, re-confirmed).
+KEY NEW STRUCTURAL FACT found this dispatch: the sole consumer, `gatedKernel K S H τ p q := if q∈K then (if
+p∈S q then H τ p q else 0) else 0` (`GlobalHunifAssembly.lean:113-115`, already banked), does NOT depend on
+`S q`'s value when `q∉K` — the outer `if q∈K` gate already zeroes it regardless. So the off-`K` value of the
+gate `S` is PROVABLY DEAD to every conclusion routed through `gatedKernel`/`vanVleckGatedWitness` (which
+takes `S` as an explicit GENERIC parameter, `ConvApproximants.lean:161-166` — unlike `uniformInverseChart`'s
+hardwiring). Candidate fix: a parallel `constGate' := fun z => if z∈K then constGate … z else ∅` (or a
+generic `gateOnK K S fallback` normalizer), confining `{z|0∈constGate' z} = {z∈K|0∈constGate z}⊆K` to the
+region where a BANKED joint-continuity lemma (`FlowJointContinuity.uniformFlowExp_joint_continuousWithinAt`,
+on `K×ˢball 0 ρ_K`) already exists — NOT yet built/verified this dispatch.
+
+**47th Sol consult (`gpt-5.6-sol`, high), given both findings precisely.** (1) The `constGate'` normalization
+IS viable in principle and should collapse cleanly to a `simpa` IF `ConcreteGateInstantiation.hKSmeas_concrete`
+is the exact pre-intersected section lemma needed — BUT flagged a genuine caveat: joint continuity on `K`
+alone does not trivially give measurability of `{q∈K|∃w∈ball(0,c), F(q,w)=0}` (a PROJECTION of a
+continuity-condition set; `Metric.ball` is open not compact, so this is a compact-exhaustion/`F_σ` argument
+in the adverse case, not a one-liner) — needs the exact `hKSmeas_concrete` statement checked first; also
+flagged the `∅` fallback may break globally-quantified package fields (diagonal/nonemptiness), recommending
+a generic `gateOnK` normalizer with fallback chosen after auditing those fields. (2) Confirmed the
+`constGate→constGate'` swap is genuinely narrow (NOT a 45-80-dispatch rebuild): since `S` is already a
+generic parameter and `gatedKernel` is provably insensitive to its off-`K` branch, the fix is "define +
+prove on-`K` equality + prove a `gatedKernel_gateOnK` compatibility lemma + transport", not a 23-file clone —
+the ~23 concrete-instantiation-site grep hits are "an interface/wiring census, not 23 independent
+mathematical rebuilds". (3) Sizing: `hSm0` alone = MEDIUM, best case 3-8 dispatches, realistic planning
+budget 5-15, adverse case (package needs localization, or the projection argument must be formalized) 15-25
+— genuinely NOT comparable to the 45-80-dispatch `hcar`/`hWmeas` rebuild. (4) Overall `hDConv`: LARGE — even
+a successful medium `hSm0` fix leaves `hIn`/`hInDeriv` (~4-8 dispatches, real but insufficient alone), `hcar`
+(the expensive 45-80-dispatch rebuild, now CONFIRMED not avoidable), and `hFslice`/`hFdom`-reconciliation
+(separately open) all still standing between here and `hDConv_AT_GATE`'s closure — and `hDuhamel`/`hCConv`
+would still keep the final theorem conditional regardless. **DECISIVE RECOMMENDATION (Sol, verbatim
+substance): do NOT reopen `hDConv` as an active construction campaign; treat `{hDuhamel, hDConv, hCConv}` as
+the campaign's honest, permanent citation boundary for the current Lean architecture** — the boundary is not
+a claim of falsity/impossibility, but that the current independently-chosen chart/flow-family architecture
+makes unconditional joint measurability unavailable without disproportionate redesign, exactly the kind of
+assumption that should be cited explicitly rather than chased further.
+
+**Attempted?** NOT attempted — an audit/sizing-only dispatch per the calling session's brief; no Lean file,
+no `constGate'`/`gateOnK` construction (a genuine, medium-sized, multi-dispatch undertaking per Sol, correctly
+deferred pending the go/no-go this dispatch was tasked with delivering).
+
+**Verdict for the campaign.** This dispatch supplies the load-bearing correction (`hcar` is expensive, not
+cheap) that flips the net assessment from "borderline worth trying" (J4-1187's framing) to "not worth
+pursuing further right now": even the cheapest available sub-wins (`hIn`'s ~4-8 dispatches, `hSm0`'s ~5-25
+dispatches) do not remove the dominant, now-confirmed 45-80-dispatch `hcar`/`hWmeas` chart-rebuild cost, on
+top of the still-separately-open `hFslice`/`hFdom` reconciliation and the unaffected `hDuhamel`/`hCConv`
+carries. **RECOMMENDATION: `{hDuhamel, hDConv, hCConv}` should now be treated as the campaign's honest,
+permanent citation boundary; further `hDConv`-directed construction dispatches are not recommended.**
+`a₁=R/6` remains STRICTLY CONDITIONAL on `{hDuhamel, hDConv, hCConv}`, UNCHANGED. NOT `a₁=R/6`.
+
+**Resolution.** No new Lean file, no build needed, no axiom-check (nothing new to check). `git status
+--porcelain | grep -i vacuum`: nothing (only pre-existing untracked sibling-session
+`docs/qg_roadmap/rnc_sympy/*` scratch, unrelated, untouched — confirmed left alone). Checked TRUE highest
+`J4-NNN` (`1187`) and `cpNNN` (`1151`) freshly right before committing — this entry correctly numbered
+`J4-1188`, memory checkpoint `cp1152`.
